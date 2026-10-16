@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-16 overnight: sweep residue, regularization 3b/3c, v
 kind: epic
 status: in_progress
 priority: 1
-version: 29
+version: 30
 delegate: user-eb
 labels:
   - result-import
@@ -19,7 +19,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-16T05:11:38.042Z
-updated_at: 2026-10-16T12:46:50.032Z
+updated_at: 2026-10-16T13:26:27.070Z
 started_at: 2026-10-16T05:13:39.869Z
 ---
 Owner asked on 2026-10-16 (~05:00Z, session "Overnight intake processing and validation", acting name user-eb) to run the full intake autonomously until 14:30Z (07:30 Pacific): as much intake (stages 0-3) as possible first, then validation (stage 4), with no very large compute. Branch claude/intake-2026-10-16 from origin/main e2e018f32.
@@ -84,3 +84,5 @@ think-la7h (176 and eight more) stays with the ecstatic-edison lane (selection d
 2026-10-16 ~12:45Z coordinator: lane J done: PR #657 (top of the regularization stack; includes #648): T-185..T-190 V0/C0 -> V3/C3 (six E-*-exact-feasibility entries, independent-implementation per the 14 Oct precedent); 15 houses adopted (T-186 x12, T-187 146, T-188 211, T-190 237; T-174 held); re-housed counts: 129 146 175 204 Daniel same-side, 154 grid 5 deg, 156 grid 0.5 deg; 176 and 211 SETTLED decided-no-better; 232 237 264 271 302 303 304 allowlisted under think-r3cl (runs done, selection pending). OWNER: at 176 the adoption replaces Daniel's 3a view (11/24/0, 6 classes/6 hues, 457/475 shared sides) with the axis view of T-186's witness (4/8/0, 24 classes/19 hues, 403/425). Lane I pushed #644's B1 by reproduction (5e5c2cd96; originals unrecoverable). Reviews started: #657 (senior+correctness) and #644 final head + #656.
 
 2026-10-16 ~12:50Z coordinator: lane D done (#656 green; 0 counts pending anywhere; worst remaining drawings 292 6/30/0 and 176 11/24/0 (after #644), owner question think-drze). #657 hosted CI red (translation_escape_screen retained results after adoption, + suite-b, sweeps, workbench): lane J resumed to fix. Backup branch claude/intake-2026-10-16-regularize-leftovers-wip cannot be deleted from this session (git push --delete hangs at the proxy; REST 403): delete it by hand.
+
+2026-10-16 ~13:25Z coordinator: lane K done: PR #658 (base #655), green at ccac86dd4: T-194 V0/C0 -> V0/C1 (the s(19) review mapped; seven V-sq19-review-* verifiers), T-193 V0/C0 -> V3/C3 at 16 counts (its review merged from claude/intake-2026-10-16-review-193 at 84bab51bb; replay evidence restored from the refreshed receipt). Contains a GATE CHANGE (select_houses.unread_pending skips entries a citation deferral names) for the owner to accept or replace with a house reader. Senior + correctness review of #658 started (due 14:05Z). #644 empty commit 923a6170c pushed to re-run its flaky frontend job.
