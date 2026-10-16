@@ -1148,43 +1148,67 @@ def test_an_adoption_names_what_each_re_housed_count_owes_the_regularized_layer(
     tmp_path: Path,
 ) -> None:
     """A new house is a new witness, and the count's regularized view lapses with it. The
-    adoptions of #598 and #614 refreshed only the axis tool's views and left twenty counts
-    without a strong generator's decision, n = 176 drawn raw (think-sfas). So a write
-    names every count it re-houses, which of them a lapsing view makes pending for
-    certain, the allowlist entry or settled decision the new witness bears on, and the
-    commands of the guide's "When a Witness Changes" with their cost (think-g3q7)."""
+    adoptions of #553, #598 and #614 refreshed only the axis tool's views and left twenty
+    counts without a strong generator's decision, n = 176 drawn raw (think-sfas). So a
+    write names every count it re-houses, one count a line for those a lapsing view or the
+    allowlist makes pending for certain (review B6 of #641), the settled decision the new
+    witness bears on, and the commands of the guide's "When a Witness Changes" with their
+    cost, which ranges from the certain counts to all of them (review A3 of #641), and
+    what a deferral owes the pull request (reviews A1 and A2 of #641; think-g3q7)."""
     index, strong, lapsed, plain = _rehoused(tmp_path)
-    counts = sorted([strong, lapsed, plain])
+    regular = next(
+        n
+        for n, entry in sorted(defaults.index_entries(index).items())
+        if n not in (strong, lapsed, plain)
+        and entry["generator"] not in defaults.STRONG_GENERATORS
+        and defaults.LAPSED not in entry
+    )
+    counts = sorted([strong, lapsed, plain, regular])
     spaced = " ".join(map(str, counts))
     why = {
         strong: f"its {defaults.index_entries(index)[strong]['generator']} view lapses",
         lapsed: "a regularize_grid_slack/1 view lapsed earlier",
+        plain: (
+            "PENDING_ALLOWED holds it for think-aaaa's runs, whatever the new house reads, "
+            "so they take the new witness"
+        ),
     }
     lines = adopt.regularization_owed(
-        counts, index=index, allowed={plain: "think-aaaa: a test"}, settled={lapsed: None}
+        counts,
+        index=index,
+        allowed={plain: "think-aaaa: a test"},
+        settled={lapsed: None},
+        day="2026-10-16",
     )
-    assert lines[:3] == [
-        f"regularization owed: 3 re-housed counts, {spaced} ({adopt.WITNESS_CHANGES})",
-        "  pending until the strong generators decide it: "
-        + ", ".join(f"{n} ({why[n]})" for n in counts if n in why),
+    certain = [f"    {n}: {why[n]}" for n in counts if n in why]
+    assert lines[: 2 + len(certain) + 2] == [
+        f"regularization owed: 4 re-housed counts, {spaced} ({adopt.WITNESS_CHANGES})",
+        "  pending until the strong generators decide the new witness:",
+        *certain,
         (
             "  pending unless the new house drawing has no uneven and no near-axis square: "
-            f"{plain}"
+            f"{regular}"
+        ),
+        (
+            f"  n={lapsed}: SETTLED was decided on the earlier witness; decide the new one and "
+            "settle it again, or take it off"
         ),
     ]
-    assert lines[3].startswith(f"  n={plain}: PENDING_ALLOWED already defers it (think-aaaa")
-    assert lines[4].startswith(f"  n={lapsed}: SETTLED was decided on the earlier witness")
     low, high = adopt.REGULARIZE_CPU_MINUTES
-    assert lines[5].startswith(
+    (cost,) = [line for line in lines if line.startswith("  cost: ")]
+    assert cost.startswith(
         f"  cost: {low} to {high} CPU-minutes a count for both strong generators and the "
-        f"selection, {3 * low} to {3 * high} for these"
+        f"selection, {3 * low} to {3 * high} for the 3 certain to be pending, up to "
+        f"{4 * low} to {4 * high} for all 4; one validation item under the pass's compute cap"
     )
+    assert "    RUNS=/tmp/regularize WORKERS=2" in lines
     commands = [
         line.strip().removeprefix("python -m devtools.")
         for line in lines
         if line.startswith("    python -m ")
     ]
-    grid = f"regularize_grid_slack --n {spaced} --run-dir $RUNS/grid"
+    label = "adopt-2026-10-16"
+    grid = f"regularize_grid_slack --n {spaced} --run-dir $RUNS/{label}-grid"
     assert commands[:7] == [
         "build_known_best_atlas --update",
         f"regularize_axis_components --update-atlas --n {spaced}",
@@ -1192,14 +1216,99 @@ def test_an_adoption_names_what_each_re_housed_count_owes_the_regularized_layer(
         f"{grid}-0.5",
         f"{grid}-1 --near-axis-degrees 1",
         f"{grid}-5 --near-axis-degrees 5",
-        f"regularize_evand run --run-dir $RUNS/evand --n {spaced} --workers K",
+        f"regularize_evand run --run-dir $RUNS/{label}-evand --n {spaced} --workers $WORKERS",
     ]
-    assert commands[7].startswith("regularize_select --evand-run $RUNS/evand --grid-run")
+    assert commands[7].startswith(
+        f"regularize_select --evand-run $RUNS/{label}-evand --grid-run"
+    )
     assert len(commands) == 8
-    assert "default_drawings.PENDING_ALLOWED with the open bead" in lines[-2]
+    # The deferral branch regenerates the record the allowlist entry is copied into, renders,
+    # and shows the drawings it gives up (reviews A1 and A2 of #641).
+    assert "then the guide's step 5 (render and record)" in lines[-3]
+    deferral = lines[-2]
+    assert "default_drawings.PENDING_ALLOWED with the open bead" in deferral
+    assert "run `default_drawings --update` again and the guide's step 5" in deferral
+    assert "`default_drawings --compare` with the base branch's record" in deferral
+    assert "the adoption waits for the owner's word" in deferral
     assert "default_drawings --check-state` fails until every pending count" in lines[-1]
     # Nothing re-housed, nothing owed: a second run of the idempotent write prints nothing.
     assert adopt.regularization_owed([], index=index) == []
+
+
+def _printed_runs(lines: list[str]) -> list[tuple[str, str]]:
+    """Each strong run the printout starts, as (generator prefix of its id, directory)."""
+    found = []
+    for line in lines:
+        words = line.split()
+        if "--run-dir" not in words:
+            continue
+        directory = Path(words[words.index("--run-dir") + 1]).name
+        prefix = (
+            "grid-slack" if "devtools.regularize_grid_slack" in words else "evand-regularize"
+        )
+        found.append((prefix, directory))
+    return found
+
+
+def test_the_printed_runs_take_ids_no_run_in_the_index_has(tmp_path: Path) -> None:
+    """Review B2 of #641: the layer records a run by its directory's name, and admitting a
+    run whose id the index holds replaces that run's block, so every adoption that ran in
+    `$RUNS/evand` would overwrite the last one's cost and decisions. The printed
+    directories are named for the adoption's day, and move on where a run took the name."""
+    lines = adopt.regularization_owed([176], day="2026-10-16")
+    taken = {
+        str(run["id"]) for run in json.loads(defaults.INDEX.read_text(encoding="utf-8"))["runs"]
+    }
+    ids = [f"{prefix}-{directory}" for prefix, directory in _printed_runs(lines)]
+    assert ids == list(adopt.run_ids("adopt-2026-10-16").values())
+    assert len(set(ids)) == 4
+    assert not taken & set(ids)
+
+    document = json.loads(defaults.INDEX.read_text(encoding="utf-8"))
+    document["runs"].append({"id": "grid-slack-adopt-2026-10-16-grid-1"})
+    index = tmp_path / "index.json"
+    index.write_text(json.dumps(document), encoding="utf-8")
+    assert adopt.run_label("2026-10-16", index) == "adopt-2026-10-16-b"
+    moved = adopt.regularization_owed([176], index=index, day="2026-10-16")
+    assert [directory for _prefix, directory in _printed_runs(moved)] == [
+        "adopt-2026-10-16-b-grid-0.5",
+        "adopt-2026-10-16-b-grid-1",
+        "adopt-2026-10-16-b-grid-5",
+        "adopt-2026-10-16-b-evand",
+    ]
+
+
+def test_every_printed_command_parses_with_its_tools_own_parser(tmp_path: Path) -> None:
+    """Review B5 of #641: each printed command, with the shell variables its first line
+    sets, is one its tool's own `parser()` accepts, so a renamed flag fails here rather
+    than in the next adoption's shell. As first printed, `--workers K` was refused (B3)."""
+    import importlib  # noqa: PLC0415
+    import shlex  # noqa: PLC0415
+
+    lines = adopt.regularization_owed([18, 176], day="2026-10-16")
+    (shell,) = [line.split() for line in lines if line.startswith("    RUNS=")]
+    values = dict(word.split("=", 1) for word in shell)
+    assert set(values) == {"RUNS", "WORKERS"}
+    values["RUNS"] = str(tmp_path)
+    commands = [line.strip() for line in lines if line.startswith("    python -m devtools.")]
+    assert len(commands) == 8
+    for printed in commands:
+        command = printed
+        for name, value in values.items():
+            command = command.replace(f"${name}", value)
+        assert "$" not in command, printed
+        _python, _m, module, *arguments = shlex.split(command)
+        parsed = importlib.import_module(module).parser().parse_args(arguments)
+        assert parsed is not None, printed
+
+
+@pytest.mark.parametrize("named", [adopt.WITNESS_CHANGES, adopt.INTAKE_STEP])
+def test_the_printout_names_headings_that_exist(named: str) -> None:
+    """Review A11 of #641: the two places the printout sends a reader are headings of the
+    files it names, so renaming one fails here."""
+    path, heading = named.split(", ", 1)
+    text = (houses.REPO / path).read_text(encoding="utf-8")
+    assert re.search(rf"^#+ {re.escape(heading.strip(chr(34)))}$", text, re.MULTILINE), named
 
 
 def test_a_write_and_a_dry_run_print_what_the_moves_owe(
@@ -1210,7 +1319,10 @@ def test_a_write_and_a_dry_run_print_what_the_moves_owe(
     monkeypatch.setattr(adopt, "adopted", lambda _move: False)
     monkeypatch.setattr(adopt, "write", lambda moves: [moved.n for moved in moves])
     owed = adopt.regularization_owed([176])
-    assert owed[0].startswith("regularization owed: 1 re-housed counts, 176 ")
+    # One count is a count, not "1 re-housed counts" (review A8 of #641).
+    assert owed[0].startswith("regularization owed: 1 re-housed count, 176 ")
+    # Its runs are named for the day 176's house was adopted, not the day this test runs.
+    assert f"adopt-{houses.adopted_on(176)}-evand" in "\n".join(owed)
     assert adopt.main([]) == 0
     assert capsys.readouterr().out.splitlines() == ["adopted 1 houses: 176", *owed]
     assert adopt.main(["--dry-run"]) == 0
