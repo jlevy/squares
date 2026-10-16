@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-16 overnight: sweep residue, regularization 3b/3c, v
 kind: epic
 status: in_progress
 priority: 1
-version: 31
+version: 32
 delegate: user-eb
 labels:
   - result-import
@@ -19,7 +19,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-16T05:11:38.042Z
-updated_at: 2026-10-16T13:41:36.424Z
+updated_at: 2026-10-16T13:42:23.294Z
 started_at: 2026-10-16T05:13:39.869Z
 ---
 Owner asked on 2026-10-16 (~05:00Z, session "Overnight intake processing and validation", acting name user-eb) to run the full intake autonomously until 14:30Z (07:30 Pacific): as much intake (stages 0-3) as possible first, then validation (stage 4), with no very large compute. Branch claude/intake-2026-10-16 from origin/main e2e018f32.
@@ -132,3 +132,5 @@ After each merge: retarget the next PR to `main`, re-cut the site edition (v0.7.
 - think-jh0n: wand125's Lean kernel proof of ValidTilt9 / s(k²−4) = k (#643): stages 2–3; full replay held (~7,400 CPU-h).
 - think-e533, think-j9r6, think-k6rj, think-bb70, think-e1u5, think-v860: follow-ups from tonight's reviews.
 - The backup branch claude/intake-2026-10-16-regularize-leftovers-wip: delete by hand (the proxy refused the delete).
+
+2026-10-16 ~13:50Z coordinator, update to the handoff: #657 at 7b91fb238 (lane J): review B's B1 (sweeps sparse checkout), B2 except the poster composites (bound citations, X049/contact-shade censuses, translation-escape screen, #574 claim record, 302 closed form, rigidity blocks), B3 (211 to PENDING_ALLOWED under think-r3cl, now 8 counts: 211 232 237 264 271 302 303 304) and B5 fixed. Not fixed: the poster composites, so suite-a's test_known_best_atlas poster/caption tests fail until the infographics successor (think-nv87) is cut at the top of the stack; B4 is think-cmj7. Hosted CI at 7b91fb238 was still running at handoff. #657 needs a follow-up review of these fixes and the owner's word at 176 before merge.
