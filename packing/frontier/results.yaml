@@ -24962,9 +24962,9 @@ results:
       The three retained jobs at 175, the certificate with its duplicate-square and
       outside-container controls, were decided again here on 16 October 2026 by both
       maintained exact routes and equal their retained rows, and the frozen comparison
-      rebuilt equal. The author's runs of this repository's sqpack verifier are his and
-      decide nothing here. No route here is the source's code, so the replay is
-      independently re-implemented. The 16 October review found no blocking defect.
+      rebuilt equal. One maintained route is the verifier the source reports running; the
+      independent rational corner checker is independently re-implemented, and the replay
+      rests on it. The 16 October review found no blocking defect.
 
       It is the release's certificate at 175, first committed on 11 October 2026, which
       issue 506's release holds and the issue does not name; the author asked for it to be
@@ -25017,10 +25017,10 @@ results:
       16 October review decided the three jobs again on both maintained routes, all equal
       (E-couzo-506-n175-exact-feasibility). The 12 October review
       (docs/project/reviews/review-2026-10-11-upper-bound-imports-506.md, RY-10) and the 16
-      October review each decided it on the third route in scratch, with six controls, and
-      neither decision is retained (RT-8). The receipt is
-      receipts/exact-certification.json.xz in couzo-certificates-2026-10-11, shared with
-      T-152.
+      October review each decided it on the third route, with six controls; the 12 October
+      decision is not retained, and the 16 October one is kept with that review but cited by
+      no entry (RT-8). The receipt is receipts/exact-certification.json.xz in
+      couzo-certificates-2026-10-11, shared with T-152.
 
       At n = 175 the certificate is above the case's ceiling (Daniil Ostashev, T-158) by
       2.94e-03, as dostashev-records-2026-10-12's claim record measures exactly; it is below
@@ -25673,9 +25673,9 @@ results:
       All three retained jobs, the certificate with its duplicate-square and
       outside-container controls, were decided again here on 16 October 2026 by both
       maintained exact routes and equal their retained rows, and the frozen comparison
-      rebuilt equal. The author's runs of this repository's sqpack verifier are his and
-      decide nothing here. No route here is the source's code, so the replay is
-      independently re-implemented. The 16 October review found no blocking defect.
+      rebuilt equal. One maintained route is the verifier the source reports running; the
+      independent rational corner checker is independently re-implemented, and the replay
+      rests on it. The 16 October review found no blocking defect.
 
       The author published it in
       [square-packing](https://github.com/franciscouzo/square-packing/tree/487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d/certificates)
@@ -25840,9 +25840,9 @@ results:
       The three retained jobs at 237, the certificate with its duplicate-square and
       outside-container controls, were decided again here on 16 October 2026 by both
       maintained exact routes and equal their retained rows, and the frozen comparison
-      rebuilt equal. The author's runs of this repository's sqpack verifier are his and
-      decide nothing here. No route here is the source's code, so the replay is
-      independently re-implemented. The 16 October review found no blocking defect.
+      rebuilt equal. One maintained route is the verifier the source reports running; the
+      independent rational corner checker is independently re-implemented, and the replay
+      rests on it. The 16 October review found no blocking defect.
 
       The same release states s(339) <=
       15760492451744053967692664819/833191141347000000000000000, s(342) <=
@@ -26119,9 +26119,9 @@ results:
       All three retained jobs, the certificate with its duplicate-square and
       outside-container controls, were decided again here on 16 October 2026 by both
       maintained exact routes and equal their retained rows, and the frozen comparison
-      rebuilt equal. The author's runs of this repository's sqpack verifier are his and
-      decide nothing here. No route here is the source's code, so the replay is
-      independently re-implemented. The 16 October review found no blocking defect.
+      rebuilt equal. One maintained route is the verifier the source reports running; the
+      independent rational corner checker is independently re-implemented, and the replay
+      rests on it. The 16 October review found no blocking defect.
 
       The author published it in
       [square-packing](https://github.com/franciscouzo/square-packing/tree/58a783368d4b7e70bb800f0009ea9ca03e578739/certificates)

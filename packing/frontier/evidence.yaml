@@ -36565,9 +36565,12 @@ evidence:
       through both maintained routes and held each to its retained row (all equal, 31 s,
       05:30:13Z to 05:30:45Z on 2026-10-16); check-claims rebuilt the frozen comparison
       (equal, 05:53Z). The review's third exact route, devtools.check_half_angle_area
-      decide-imports driven in scratch with this packet's roster, agreed with both routes at
-      every side, pose and wall clearance and reached its six controls' required outcomes;
-      that decision is not retained (RT-8), so this entry does not list the route.
+      decide-imports driven with this packet's roster, agreed with both routes at every
+      side, pose and wall clearance and reached its six controls' required outcomes; its
+      driver and report are kept with the review
+      (packing/resources/web/mishapolk-kkt-refinements-2026-10-14/review/review-2026-10-16/)
+      but the route's roster is not in the maintained tool, so this entry neither cites the
+      run nor lists the route (RT-8).
     replay_status: passed
     verifiers:
       - V-sqpack-verify
@@ -36600,7 +36603,10 @@ evidence:
         note: >-
           Issue 506 states that its search code and request were written with Claude (Claude
           Code), directed and reviewed by the author; the routes here were written by Claude
-          in separate prompts and share no code with the producer's search.
+          in separate prompts and share no code with the producer's search. One maintained
+          route, sqpack's exact verifier (V-sqpack-verify), is the checker the source
+          reports running, so the independence rests on the independent rational corner
+          checker (V-check-rational-witness-independent).
     independence_record: docs/project/reviews/review-2026-10-16-upper-bound-imports-506-607.md
     external_review:
       state: informally-verified
@@ -36611,7 +36617,7 @@ evidence:
       note: >-
         Accepted for finite feasibility only. The 3 retained jobs at 175 reproduced on both
         maintained routes, the frozen comparison rebuilt equal, the retained file matched
-        its upstream bytes fetched at the pin, and the third route, in scratch, agreed at
+        its upstream bytes fetched at the pin, and the third route agreed at
         every side, pose and clearance. Findings RT-1 to RT-13, none blocking.
     limitations: >-
       A replay of the retained certificates by two maintained exact routes that share
@@ -36623,10 +36629,12 @@ evidence:
       import lane decided them twice on 11 October 2026 (E-couzo-506-exact-feasibility). The
       author reports runs of this repository's sqpack verifier; those runs are his and
       decide nothing here, and every route here ran from this repository on the packet's own
-      bytes. The bound is superseded at 175 by T-158 and T-186. The kernel's two controls
-      are gross; the third route's six, run in scratch by the review, are sharp and not
-      retained (RT-8). Finite feasibility only: no lower bound, optimum, local minimum,
-      rigidity, novelty or human oversight.
+      bytes. Since one maintained route is the producer's checker, the independently
+      re-implemented relation rests on the independent rational corner checker. The bound is
+      superseded at 175 by T-158 and T-186. The kernel's two controls are gross; the third
+      route's six, run by the review, are sharp and cited by no entry (RT-8). Finite
+      feasibility only: no lower bound, optimum, local minimum, rigidity, novelty or human
+      oversight.
     source_reviewed: '2026-10-16'
   - id: E-mishapolk-70a033f-certificate-report
     claim: upper-bound
@@ -36689,11 +36697,13 @@ evidence:
       so the whole 72-job receipt is reproduced; check-claims rebuilt the frozen comparison
       (equal, 05:53Z). The review's third route read each of the twelve pinned .cert files
       with its own reader and held each derived fact to the packing, side and every pose it
-      states and each side to the pinned census, in scratch (RT-8). The review's third exact
-      route, devtools.check_half_angle_area decide-imports driven in scratch with this
-      packet's roster, agreed with both routes at every side, pose and wall clearance and
-      reached its six controls' required outcomes; that decision is not retained (RT-8), so
-      this entry does not list the route.
+      states and each side to the pinned census, (RT-8). The review's third exact route,
+      devtools.check_half_angle_area decide-imports driven with this packet's roster, agreed
+      with both routes at every side, pose and wall clearance and reached its six controls'
+      required outcomes; its driver and report are kept with the review
+      (packing/resources/web/mishapolk-kkt-refinements-2026-10-14/review/review-2026-10-16/)
+      but the route's roster is not in the maintained tool, so this entry neither cites the
+      run nor lists the route (RT-8).
     replay_status: passed
     verifiers:
       - V-sqpack-verify
@@ -36751,9 +36761,9 @@ evidence:
       and every pair by at least 9.99e-101. The certificates are derived facts read from the
       pinned .cert files, with no upstream byte retained; the review's fetch on 16 October
       2026 binds each fact to its pinned source as of that date. The source's own checkers
-      were not run here. The kernel's two controls are gross; the third route's six, run in
-      scratch by the review, are sharp and not retained (RT-8). Finite feasibility only: no
-      lower bound, optimum, local minimum, rigidity, novelty or human oversight.
+      were not run here. The kernel's two controls are gross; the third route's six, run by
+      the review, are sharp and cited by no entry (RT-8). Finite feasibility only: no lower
+      bound, optimum, local minimum, rigidity, novelty or human oversight.
     source_reviewed: '2026-10-16'
   - id: E-evand-606-n146-report
     claim: upper-bound
@@ -36811,10 +36821,13 @@ evidence:
       its duplicate-square and outside-container controls, again through both maintained
       routes and held each to its retained row (all equal, 20 s, 05:27:50Z to 05:28:10Z on
       2026-10-16); check-claims rebuilt the frozen comparison (equal, 05:53Z). The review's
-      third exact route, devtools.check_half_angle_area decide-imports driven in scratch
-      with this packet's roster, agreed with both routes at every side, pose and wall
-      clearance and reached its six controls' required outcomes; that decision is not
-      retained (RT-8), so this entry does not list the route.
+      third exact route, devtools.check_half_angle_area decide-imports driven with this
+      packet's roster, agreed with both routes at every side, pose and wall clearance and
+      reached its six controls' required outcomes; its driver and report are kept with the
+      review
+      (packing/resources/web/mishapolk-kkt-refinements-2026-10-14/review/review-2026-10-16/)
+      but the route's roster is not in the maintained tool, so this entry neither cites the
+      run nor lists the route (RT-8).
     replay_status: passed
     verifiers:
       - V-sqpack-verify
@@ -36861,7 +36874,7 @@ evidence:
       note: >-
         Accepted for finite feasibility only. All 3 retained jobs reproduced on both
         maintained routes, the frozen comparison rebuilt equal, the retained file matched
-        its upstream bytes fetched at the pin, and the third route, in scratch, agreed at
+        its upstream bytes fetched at the pin, and the third route agreed at
         every side, pose and clearance. Findings RT-1 to RT-13, none blocking.
     limitations: >-
       A replay of the retained certificates by two maintained exact routes that share
@@ -36871,9 +36884,8 @@ evidence:
       clears every wall by at least 5.00e-21 and every pair by at least 9.99e-21. The
       source's own checkers were not run here, and the source's numerical statements of a
       local minimum are not decided. The kernel's two controls are gross; the third route's
-      six, run in scratch by the review, are sharp and not retained (RT-8). Finite
-      feasibility only: no lower bound, optimum, local minimum, rigidity, novelty or human
-      oversight.
+      six, run by the review, are sharp and cited by no entry (RT-8). Finite feasibility
+      only: no lower bound, optimum, local minimum, rigidity, novelty or human oversight.
     source_reviewed: '2026-10-16'
   - id: E-couzo-487b058-certificate-report
     claim: upper-bound
@@ -36932,9 +36944,12 @@ evidence:
       both maintained routes and held each to its retained row (all equal, 45 s, 05:28:10Z
       to 05:28:55Z on 2026-10-16); check-claims rebuilt the frozen comparison (equal,
       05:53Z). The review's third exact route, devtools.check_half_angle_area decide-imports
-      driven in scratch with this packet's roster, agreed with both routes at every side,
-      pose and wall clearance and reached its six controls' required outcomes; that decision
-      is not retained (RT-8), so this entry does not list the route.
+      driven with this packet's roster, agreed with both routes at every side, pose and wall
+      clearance and reached its six controls' required outcomes; its driver and report are
+      kept with the review
+      (packing/resources/web/mishapolk-kkt-refinements-2026-10-14/review/review-2026-10-16/)
+      but the route's roster is not in the maintained tool, so this entry neither cites the
+      run nor lists the route (RT-8).
     replay_status: passed
     verifiers:
       - V-sqpack-verify
@@ -36968,7 +36983,10 @@ evidence:
           The author's issues say earlier search work used Claude Code and the search
           implementation, verification orchestration and requests OpenAI Codex; the routes
           here were written by Claude in separate prompts and share no code with the
-          producer's search.
+          producer's search. One maintained route, sqpack's exact verifier
+          (V-sqpack-verify), is the checker the source reports running, so the independence
+          rests on the independent rational corner checker
+          (V-check-rational-witness-independent).
     independence_record: docs/project/reviews/review-2026-10-16-upper-bound-imports-506-607.md
     external_review:
       state: informally-verified
@@ -36979,7 +36997,7 @@ evidence:
       note: >-
         Accepted for finite feasibility only. All 3 retained jobs reproduced on both
         maintained routes, the frozen comparison rebuilt equal, the retained file matched
-        its upstream bytes fetched at the pin, and the third route, in scratch, agreed at
+        its upstream bytes fetched at the pin, and the third route agreed at
         every side, pose and clearance. Findings RT-1 to RT-13, none blocking.
     limitations: >-
       A replay of the retained certificates by two maintained exact routes that share
@@ -36990,10 +37008,11 @@ evidence:
       commit's 296 certificates beyond the case corpus are pinned by digest, not retained,
       and not decided here. The author reports runs of this repository's sqpack verifier;
       those runs are his and decide nothing here, and every route here ran from this
-      repository on the packet's own bytes. The kernel's two controls are gross; the third
-      route's six, run in scratch by the review, are sharp and not retained (RT-8). Finite
-      feasibility only: no lower bound, optimum, local minimum, rigidity, novelty or human
-      oversight.
+      repository on the packet's own bytes. Since one maintained route is the producer's
+      checker, the independently re-implemented relation rests on the independent rational
+      corner checker. The kernel's two controls are gross; the third route's six, run by the
+      review, are sharp and cited by no entry (RT-8). Finite feasibility only: no lower
+      bound, optimum, local minimum, rigidity, novelty or human oversight.
     source_reviewed: '2026-10-16'
   - id: E-couzo-607-certificate-report
     claim: upper-bound
@@ -37069,9 +37088,12 @@ evidence:
       through both maintained routes and held each to its retained row (all equal, 36 s,
       05:29:37Z to 05:30:13Z on 2026-10-16); check-claims rebuilt the frozen comparison
       (equal, 05:53Z). The review's third exact route, devtools.check_half_angle_area
-      decide-imports driven in scratch with this packet's roster, agreed with both routes at
-      every side, pose and wall clearance and reached its six controls' required outcomes;
-      that decision is not retained (RT-8), so this entry does not list the route.
+      decide-imports driven with this packet's roster, agreed with both routes at every
+      side, pose and wall clearance and reached its six controls' required outcomes; its
+      driver and report are kept with the review
+      (packing/resources/web/mishapolk-kkt-refinements-2026-10-14/review/review-2026-10-16/)
+      but the route's roster is not in the maintained tool, so this entry neither cites the
+      run nor lists the route (RT-8).
     replay_status: passed
     verifiers:
       - V-sqpack-verify
@@ -37106,7 +37128,10 @@ evidence:
           The author's issues say earlier search work used Claude Code and the search
           implementation, verification orchestration and requests OpenAI Codex; the routes
           here were written by Claude in separate prompts and share no code with the
-          producer's search.
+          producer's search. One maintained route, sqpack's exact verifier
+          (V-sqpack-verify), is the checker the source reports running, so the independence
+          rests on the independent rational corner checker
+          (V-check-rational-witness-independent).
     independence_record: docs/project/reviews/review-2026-10-16-upper-bound-imports-506-607.md
     external_review:
       state: informally-verified
@@ -37117,7 +37142,7 @@ evidence:
       note: >-
         Accepted for finite feasibility only. The 3 retained jobs at 237 reproduced on both
         maintained routes, the frozen comparison rebuilt equal, the retained file matched
-        its upstream bytes fetched at the pin, and the third route, in scratch, agreed at
+        its upstream bytes fetched at the pin, and the third route agreed at
         every side, pose and clearance. Findings RT-1 to RT-13, none blocking.
     limitations: >-
       A replay of the retained certificates by two maintained exact routes that share
@@ -37130,9 +37155,11 @@ evidence:
       October 2026 and not again by the review, so this entry's scope is 237 alone. The
       author reports runs of this repository's sqpack verifier; those runs are his and
       decide nothing here, and every route here ran from this repository on the packet's own
-      bytes. The kernel's two controls are gross; the third route's six, run in scratch by
-      the review, are sharp and not retained (RT-8). Finite feasibility only: no lower
-      bound, optimum, local minimum, rigidity, novelty or human oversight.
+      bytes. Since one maintained route is the producer's checker, the independently
+      re-implemented relation rests on the independent rational corner checker. The kernel's
+      two controls are gross; the third route's six, run by the review, are sharp and cited
+      by no entry (RT-8). Finite feasibility only: no lower bound, optimum, local minimum,
+      rigidity, novelty or human oversight.
     source_reviewed: '2026-10-16'
   - id: E-couzo-4e4c8ce-n237-certificate-report
     claim: upper-bound
@@ -37190,10 +37217,13 @@ evidence:
       its duplicate-square and outside-container controls, again through both maintained
       routes and held each to its retained row (all equal, 43 s, 05:28:55Z to 05:29:37Z on
       2026-10-16); check-claims rebuilt the frozen comparison (equal, 05:53Z). The review's
-      third exact route, devtools.check_half_angle_area decide-imports driven in scratch
-      with this packet's roster, agreed with both routes at every side, pose and wall
-      clearance and reached its six controls' required outcomes; that decision is not
-      retained (RT-8), so this entry does not list the route.
+      third exact route, devtools.check_half_angle_area decide-imports driven with this
+      packet's roster, agreed with both routes at every side, pose and wall clearance and
+      reached its six controls' required outcomes; its driver and report are kept with the
+      review
+      (packing/resources/web/mishapolk-kkt-refinements-2026-10-14/review/review-2026-10-16/)
+      but the route's roster is not in the maintained tool, so this entry neither cites the
+      run nor lists the route (RT-8).
     replay_status: passed
     verifiers:
       - V-sqpack-verify
@@ -37227,7 +37257,10 @@ evidence:
           The author's issues say earlier search work used Claude Code and the search
           implementation, verification orchestration and requests OpenAI Codex; the routes
           here were written by Claude in separate prompts and share no code with the
-          producer's search.
+          producer's search. One maintained route, sqpack's exact verifier
+          (V-sqpack-verify), is the checker the source reports running, so the independence
+          rests on the independent rational corner checker
+          (V-check-rational-witness-independent).
     independence_record: docs/project/reviews/review-2026-10-16-upper-bound-imports-506-607.md
     external_review:
       state: informally-verified
@@ -37238,7 +37271,7 @@ evidence:
       note: >-
         Accepted for finite feasibility only. All 3 retained jobs reproduced on both
         maintained routes, the frozen comparison rebuilt equal, the retained file matched
-        its upstream bytes fetched at the pin, and the third route, in scratch, agreed at
+        its upstream bytes fetched at the pin, and the third route agreed at
         every side, pose and clearance. Findings RT-1 to RT-13, none blocking.
     limitations: >-
       A replay of the retained certificates by two maintained exact routes that share
@@ -37249,9 +37282,11 @@ evidence:
       commit's index rows beyond the case corpus are not decided here (think-yfoo). The
       author reports runs of this repository's sqpack verifier; those runs are his and
       decide nothing here, and every route here ran from this repository on the packet's own
-      bytes. The kernel's two controls are gross; the third route's six, run in scratch by
-      the review, are sharp and not retained (RT-8). Finite feasibility only: no lower
-      bound, optimum, local minimum, rigidity, novelty or human oversight.
+      bytes. Since one maintained route is the producer's checker, the independently
+      re-implemented relation rests on the independent rational corner checker. The kernel's
+      two controls are gross; the third route's six, run by the review, are sharp and cited
+      by no entry (RT-8). Finite feasibility only: no lower bound, optimum, local minimum,
+      rigidity, novelty or human oversight.
     source_reviewed: '2026-10-16'
   - id: E-bengreff-610-cover-report
     claim: lower-bound
