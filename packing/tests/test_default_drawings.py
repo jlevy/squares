@@ -847,10 +847,11 @@ def test_the_comparison_lists_what_each_changed_count_draws(
     tmp_path: Path, capsys: pytest.CaptureFixture[str]
 ) -> None:
     """Review A1 of #641: an adoption shows its pull request what each re-housed count drew
-    before and draws now, from the base branch's record, and names the goals at a count
+    before and draws now, from the base branch's record. It names the goals at a count
     whose strong view gives way to a drawing worse than it on a goal of the improvement
-    rule (review D1), marking one still pending with the obligation every re-housed count
-    carries: its runs are owed in this pull request (review E1 and the house rule)."""
+    rule (review D1), and marks one still pending with the obligation every re-housed
+    count carries, that its runs are owed in this pull request (reviews E1, E2, F1 and F2
+    of #641, and the house rule)."""
     earlier = _record()
     assert defaults.drawing_changes(earlier, earlier) == []
     strong = next(

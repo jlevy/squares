@@ -623,7 +623,8 @@ def test_a_count_re_housed_under_the_house_rule_is_never_deferred(
     so `default_drawings.PENDING_ALLOWED` may not defer it, an entry the list named before
     the adoption included; the twenty counts re-housed before the rule wait for the beads
     their entries name. Until the rule, the runbook and the guide deferred "each pending
-    count" while the comparison's mark said a lost view's runs were not deferred."""
+    count" while the comparison's mark said a lost view's runs were not deferred (review F1
+    of #641)."""
     assert adopt.deferred_adoptions() == []
     n = next(n for n in sorted(defaults.PENDING_ALLOWED) if n in houses.ADOPTED)
     day = select.RULE_PASSES_FROM
@@ -1396,10 +1397,10 @@ def test_the_runbook_guide_and_printout_owe_every_re_housed_counts_runs_alike() 
     documents name the pull request's base, which is not main for a stacked adoption, and
     the printout gives main as the example and says so. Review E1 and the house rule (16
     October 2026): the owner's rule is to adopt the smallest packing and then regularize
-    it, so no adoption waits for the owner's word, and the runbook and the guide deferred
-    each pending count while the mark said a lost view's runs were not deferred. All three
-    now owe every re-housed count's runs in the adoption's pull request, never deferred,
-    and the documents quote the mark that says so."""
+    it, so no adoption waits for the owner's word. Review F1: the runbook and the guide
+    still deferred each pending count while the mark said a lost view's runs were not
+    deferred. All three now owe every re-housed count's runs in the adoption's pull
+    request, never deferred, and the documents quote the mark that says so."""
     lines = adopt.regularization_owed([176], day="2026-10-16")
     (listing,) = [line for line in lines if "drawing before and after" in line]
     command = f"--compare <(git show origin/$BASE:{defaults.RECORD_PATH})"
