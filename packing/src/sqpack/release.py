@@ -1150,8 +1150,14 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "outcomes, and added regularize_evand's read-only `rungs --check`; the papers "
             "read none of them, and rendered again at link revision e2e018f3 from this "
             "branch at ebe50691 and from main e2e018f3's tree, the survey's and both "
-            "reviews' 42 files each are byte-identical. All four papers keep v0.4.7, "
-            "v0.1.7, v0.1.0 and v0.2.2; the site takes the patch."
+            "reviews' 42 files each are byte-identical. Review F's pass added "
+            "default_drawings.run_records and --retain-runs, which hold a settlement's "
+            "runs to the retained evidence, and regularize_evand.run_reports, which lets "
+            "`rungs --check` read retained reports; the papers read none of them, and "
+            "rendered at link revision e2e018f3 from this branch at 6079926b, the "
+            "survey's and both reviews' 42 files each are byte-identical to main "
+            "e2e018f3's. All four papers keep v0.4.7, v0.1.7, v0.1.0 and v0.2.2; the "
+            "site takes the patch."
         ),
     ),
     ReleaseNoPublicChange(
