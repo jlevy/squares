@@ -1601,6 +1601,47 @@ entries:
       - kind: paper
         label: Lower-bounds paper
         target: https://jlevy.github.io/squares/papers/n11-lower-bounds-explainer.html
+  - id: ahmed-eleven-square-optimality
+    date: '2026-09-30'
+    title: Ahmed Proves Trump’s Eleven-Square Packing Optimal
+    significance:
+      score: 5
+      rationale: >-
+        T-060 resolves global optimality for eleven unit squares, matching Trump’s
+        exact construction and closing the gap left by earlier lower bounds.
+    topics: [optimality, verification]
+    categories: [records]
+    pull_requests: [246]
+    result_ids: [T-060]
+    summary: |-
+      Ahmed’s Astra-assisted proof establishes $s(11) = T$, where
+      $T = 3.8770835900228141773078970601\ldots$ is the exact algebraic side attained by
+      Trump’s construction. It rules out every smaller square container, allowing each
+      unit square to rotate independently and permitting boundary contact.
+    details: |-
+      - The proof builds on work by Levy and Overbeck. A complete cover divides the
+        problem into 2,184 cases, excludes 2,180 and handles the four symmetry-related
+        survivors with an exact argument ruling out every side below $T$.
+      - The project completed all 2,180 exclusions and ten capture nodes, with an
+        adversarial AI review of their mathematical composition. The computations share
+        arithmetic and construction components with the source; they do not constitute
+        a second independent proof method.
+      - Status clarification, 1 October 2026: the revised review ladder rates T-060 at
+        V3/C3. A second adversarial AI review and documented human oversight are still
+        needed for V4/C4.
+    references:
+      - label: Current eleven-square result
+        target: https://jlevy.github.io/squares/result/t-060.html
+      - label: Current eleven-square optimality explainer
+        target: https://jlevy.github.io/squares/papers/n11-optimality-review.html
+      - label: Ahmed’s original proof
+        target: https://github.com/Queuingtheorydotcom/11SquaresOptimal/tree/f9e0de713a0949d1bc6a0fa6b59d96edf6c3d65c
+      - label: Retained verification and reproduction limits
+        target: packing/resources/web/n11-optimality-2026-09-29/README.md
+      - label: Mathematical audit and final acceptance
+        target: docs/project/reviews/review-2026-09-29-n11-optimality-census-contract.md
+      - label: Revised verification and confirmation ladder
+        target: https://github.com/jlevy/squares/pull/262
 deliveries:
 - number: 627
   title: 'research: the 15 October intake records, T-188 to T-192 in report order (supersedes #616)'
@@ -2202,6 +2243,11 @@ deliveries:
   merged_at: '2026-10-15T13:01:21Z'
   base_ref: main
   merge_commit: 31eaf6333c5d5b6b3d111241768cdd3d30982588
+- number: 246
+  title: Confirm n11 global optimality and integrate independent verification
+  merged_at: '2026-09-30T17:41:19Z'
+  base_ref: main
+  merge_commit: d44ec04086cffd5498fd69e54ee58415365910c7
 stacks:
 - id: 632
   pull_requests: [627, 628, 631]
@@ -2229,6 +2275,7 @@ stacks:
   evidence: https://github.com/jlevy/squares/pull/518
 coverage:
   pull_requests:
+  - 246
   - 627
   - 628
   - 631

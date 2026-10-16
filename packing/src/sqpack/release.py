@@ -88,7 +88,9 @@ PUBLICATION_HISTORY = (
         version="v0.7.13",
         first_published="October 16, 2026",
         result_scope=(
-            "Say on each case page whose house is drawn that it is drawn as published, and why."
+            "Use the same canonical articles and topic chips on the homepage and News, "
+            "backfill Ahmed's eleven-square optimum, and make navigation consistently "
+            "sans."
         ),
     ),
     PublicationHistoryEntry(
@@ -793,7 +795,9 @@ RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
         version="v0.7.13",
         impact="patch",
         reason=(
-            "Say on each case page whose house is drawn that it is drawn as published, and why."
+            "Use the same canonical articles and topic chips on the homepage and News, "
+            "backfill Ahmed's eleven-square optimum, and make navigation consistently "
+            "sans."
         ),
     ),
     ReleaseImpactDecision(
@@ -1077,39 +1081,62 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         ),
         reason=(
             "The regularization-state record (think-gvke) changes the default-drawings "
-            "generator and its gate step, the axis tool's update, check and verify of the "
-            "atlas index, the layer's admission and the selection's measuring it now "
-            "shares, the case-record regularization note and "
-            "the case page's note. The papers reach these modules through shared import "
-            "discovery and call none of the changed functions: no paper renders a case "
-            "page, a case record's regularization note, the default-drawings record or "
-            "the atlas index. The survey cites the six case records by link only, as its "
-            "results table's count links, and their only change is that note's text. "
-            "Manuscripts, figures, credits and print rules are unchanged by source review. "
-            "No render was taken (this host has no pinned Chromium), and all four papers "
-            "keep v0.4.7, v0.1.7, v0.1.0 and v0.2.2; the site takes the patch."
+            "generator, its decision split from its measuring, and its gate step, the axis "
+            "tool's update, check and verify of the atlas index, the layer's admission and "
+            "the selection's reference, both now the picture the atlas draws, the "
+            "case-record regularization note and the case page's note. The papers reach "
+            "these modules through shared import discovery and call none of the changed "
+            "functions: no paper renders a case page, a case record's regularization note, "
+            "the default-drawings record or the atlas index, or runs the selection. The "
+            "survey cites the six case records by link only, as its results table's count "
+            "links, and their only change is that note's text. Manuscripts, figures, "
+            "credits and print rules are unchanged by source review. No render was taken "
+            "(this host has no pinned Chromium), and all four papers keep v0.4.7, v0.1.7, "
+            "v0.1.0 and v0.2.2; the site takes the patch."
         ),
     ),
     ReleaseNoPublicChange(
-        components=("paper:n11-lower-bounds-explainer",),
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
         paths=(
             "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
             "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
             "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
             "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
             "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
+            "packing/devtools/news_highlights.py",
+            "packing/devtools/render_changelog.py",
+            "packing/devtools/render_overview.py",
         ),
         outputs=(
             "papers/n11-lower-bounds-explainer.html",
             "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-lower-bounds-explainer.pdf",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-optimality-review.pdf",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/n11-threshold-bound-review.pdf",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+            "papers/square-packing-methods-survey.pdf",
         ),
         reason=(
-            "The site cut v0.7.13 regenerated the five claim documents at "
-            "PUBLICATION_REVISION 80ceec3d; with that revision read back as 6ba43f14, each "
-            "is byte-identical to main's, so the 32 repository links it pins are the only "
-            "change, and no claim, certificate or command moves. A link revision follows "
-            "the site's edition and is not a revision of the explainer, so it keeps "
-            "v0.4.7. Source-reviewed; no render was taken."
+            "The homepage now selects existing canonical News entries and uses the "
+            "archive's card renderer. The footer action and linked heading styles belong "
+            "to the website. Standalone paper renderers do not call the changed News "
+            "composition or include site.css. Removing the unused inline text callback "
+            "retains the default Markdown, math, code and link rendering consumed by "
+            "papers. The five claim documents change only their source-link revision pins "
+            "for this site cut; mathematics, certificates and verifier code are "
+            "unchanged. Paper manuscripts, figures and editions remain current. This is a "
+            "source-reviewed disposition; no PDF redraw or byte-identity comparison is "
+            "claimed."
         ),
     ),
     ReleaseNoPublicChange(
@@ -2417,7 +2444,7 @@ def validate_release_impacts(
 #: fresh render, so a link naming the build commit would fail their drift check forever. It is
 #: in no version string. It moves when the claim documents are regenerated for an edition. It
 #: must be a commit on `main`; the site's own links name `main` itself (`devtools.repo_links`).
-PUBLICATION_REVISION = "80ceec3d"
+PUBLICATION_REVISION = "7627f47e"
 
 
 def data_pathspec() -> tuple[str, ...]:

@@ -22,8 +22,17 @@
   };
   // The homepage's real paper title supplies the shared article-heading role.
   const reference = document.querySelector(".site-card .site-article-header > h3");
+  const archiveAction = document.querySelector('.site-action[href$="/blob/main/CHANGELOG.md"]');
   return {
     reference_article_title: reference ? typography(reference) : null,
+    archive_action: archiveAction
+      ? {
+          family: getComputedStyle(archiveAction).fontFamily,
+          href: archiveAction.getAttribute("href"),
+          label: archiveAction.getAttribute("aria-label"),
+          arrow: archiveAction.querySelector("[data-arrow]")?.getAttribute("data-arrow"),
+        }
+      : null,
     text_color: getComputedStyle(news).color,
     family: getComputedStyle(news).fontFamily,
     heading: { family: headingStyle.fontFamily, transform: headingStyle.textTransform },
@@ -66,6 +75,7 @@
         date_transform: date ? getComputedStyle(date).textTransform : null,
         title_transform: title ? getComputedStyle(title).textTransform : null,
         title_style: title ? typography(title) : null,
+        headline_style: title ? typography(title.querySelector("a") ?? title) : null,
         topic_styles: [...(topics?.querySelectorAll(".site-chip") ?? [])].map(typography),
         title_before_date:
           !!date && !!titleBox && titleBox.bottom <= date.getBoundingClientRect().top,
