@@ -27032,8 +27032,10 @@ regularized_drawings:
     - n: 176
       of: T-186
       by: project
-      method: regularize_axis_components/2
+      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
+      changes: {straightened: 3, re_angled: 12}
       identity:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
@@ -27302,8 +27304,10 @@ regularized_drawings:
     - n: 232
       of: T-186
       by: project
-      method: regularize_axis_components/2
+      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
+      changes: {straightened: 17, re_angled: 41}
       identity:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
@@ -27454,7 +27458,8 @@ regularized_drawings:
     - n: 264
       of: T-186
       by: project
-      method: regularize_axis_components/2
+      method: "regularize_grid_slack/1: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      modifications: ["port of his coincidence placement (regularize_grid_slack/1) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
       identity:
         basis: measured
@@ -27650,7 +27655,7 @@ regularized_drawings:
       of: T-186
       by: project
       method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
-      modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
+      modifications: []
       side: same
       changes: {straightened: 32, re_angled: 7}
       identity:

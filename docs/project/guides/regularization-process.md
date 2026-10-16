@@ -186,11 +186,13 @@ the decision goes into `default_drawings.SETTLED` with the runs, the outcome, wh
 is recorded and the witness’s source key, path, revision and side it was made on, so a
 new house, a new certificate file or an upstream fix makes the count pending again.
 Where the decision still owes runs or a recorded outcome, its `owed` names the open bead
-that owns them, and the state’s `why` says so; the ten decided counts of 15 October 2026
-owe think-0ut1 grid-slack at 1 and 5 degrees or their per-count outcomes, and recording
-each run’s outcome on the index, so that a decision needs no entry, is think-4ov9. An
-entry where the layer’s own strong view already decides the count fails the gate.
-When a pull request regularizes a pending count, it takes the count off
+that owns them, and the state’s `why` says so.
+The ten decided counts of 15 October 2026 owed think-0ut1 grid-slack at 1 and 5 degrees
+or their per-count outcomes until its runs of 16 October 2026, whose outcomes the atlas
+README gives count by count; none owes anything now.
+Recording each run’s outcome on the index, so that a decision needs no entry, is
+think-4ov9. An entry where the layer’s own strong view already decides the count fails
+the gate. When a pull request regularizes a pending count, it takes the count off
 `default_drawings.PENDING_ALLOWED`.
 
 The note says who regularized the drawing and that a pure regularization, one whose side

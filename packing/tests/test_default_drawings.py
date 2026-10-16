@@ -256,11 +256,19 @@ def test_the_allowlist_equals_the_pending_set_and_each_entry_names_a_bead(
     # #636). The gate holds the list to the pending set, and `check_bead_tree` holds
     # each bead open (`test_the_record_defers_each_count_to_the_bead_that_owns_it`).
     record = _record()
-    pending = _first_state(record, defaults.PENDING)
-    regular = _first_state(record, defaults.REGULAR_AS_PUBLISHED)
+    regular = [row for row in record["states"] if row["state"] == defaults.REGULAR_AS_PUBLISHED]
+    if len(regular) < 2:
+        pytest.skip("the data holds fewer than two counts regular as published")
+    pending, joining = regular[0], regular[1]
+    # The data's own list is empty since 16 October 2026 (think-3zi3), so a count is
+    # allowed pending here as an adoption's deferral would allow it, with its bead.
+    pending["state"] = defaults.PENDING
+    allowed = {**defaults.PENDING_ALLOWED, pending["n"]: "think-0000: a deferral"}
+    found, _listed = defaults.state_problems(_write(tmp_path, record), allowed=allowed)
+    assert found == []
     # A count allowed pending that is no longer pending fails until it comes off the list.
     pending["state"] = defaults.REGULARIZED_STATE
-    found, _listed = defaults.state_problems(_write(tmp_path, record))
+    found, _listed = defaults.state_problems(_write(tmp_path, record), allowed=allowed)
     assert found == [
         (
             f"n={pending['n']}: PENDING_ALLOWED names it, but it is regularized; take it "
@@ -269,10 +277,10 @@ def test_the_allowlist_equals_the_pending_set_and_each_entry_names_a_bead(
     ]
     # And a count that joins it names its bead.
     pending["state"] = defaults.PENDING
-    regular["state"] = defaults.PENDING
-    allowed = {**defaults.PENDING_ALLOWED, regular["n"]: "later"}
+    joining["state"] = defaults.PENDING
+    allowed = {**allowed, joining["n"]: "later"}
     found, _listed = defaults.state_problems(_write(tmp_path, record), allowed=allowed)
-    assert found == [f"n={regular['n']}: PENDING_ALLOWED names no bead: 'later'"]
+    assert found == [f"n={joining['n']}: PENDING_ALLOWED names no bead: 'later'"]
 
 
 def test_a_row_out_of_place_fails_the_gate(tmp_path: Path) -> None:
@@ -337,20 +345,31 @@ def test_the_state_follows_the_witness_as_it_identifies_itself(key: str, value: 
 
 
 def test_a_decision_names_what_it_still_owes_and_the_bead_that_owns_it() -> None:
-    # The ten counts decided on 15 October 2026 rest on the #518 runs' prose; each says
-    # what think-0ut1 still owes, so the record shows it (review A6 of #636). A decision
-    # whose runs and per-count outcome are recorded owes nothing (`owed` is None, as the
-    # contract allows), as the three of 16 October 2026 (think-la7h) do, and its state
-    # says nothing is owed rather than inventing a debt.
-    rows = {row["n"]: row for row in _record()["states"]}
-    for n, held in defaults.SETTLED.items():
-        if held.state != defaults.DECIDED:
-            continue
+    # A decision that still owes runs or a recorded outcome says so, naming the open bead
+    # that owns them, so the record shows it (review A6 of #636); one whose runs and
+    # per-count outcome are recorded owes nothing (`owed` is None, as the contract allows)
+    # and its state says nothing is owed rather than inventing a debt. The ten counts
+    # decided on 15 October 2026 owed think-0ut1 until its runs of 16 October 2026
+    # recorded each count's outcome; the three think-la7h settled that day owed nothing.
+    # No committed decision owes anything now, so one that owes is made here.
+    record = _record()
+    rows = {row["n"]: row for row in record["states"]}
+    decided = [n for n, held in defaults.SETTLED.items() if held.state == defaults.DECIDED]
+    for n in decided:
+        held = defaults.SETTLED[n]
         if held.owed is None:
             assert "still owed" not in rows[n]["why"], n
-            continue
-        assert held.owed.startswith("think-0ut1: "), n
-        assert rows[n]["why"].endswith(f"; still owed: {held.owed}"), n
+        else:
+            assert defaults.BEAD.match(held.owed), n
+            assert rows[n]["why"].endswith(f"; still owed: {held.owed}"), n
+    n = min(decided)
+    owing = {**defaults.SETTLED, n: defaults.SETTLED[n]._replace(owed="think-aaaa: a run")}
+    entry = defaults.index_entries()[n]
+    state = defaults.count_state(
+        n, entry, _measured(record, n), rows[n]["witness"], settled=owing
+    )
+    assert state["state"] == defaults.DECIDED
+    assert state["why"].endswith("; still owed: think-aaaa: a run")
     n = min(defaults.SETTLED)
     unowned = {**defaults.SETTLED, n: defaults.SETTLED[n]._replace(owed="later")}
     found, _listed = defaults.state_problems(settled=unowned)
@@ -421,9 +440,21 @@ def test_the_record_defers_each_count_to_the_bead_that_owns_it() -> None:
 
 def test_a_lapsed_view_reads_pending_and_names_what_lapsed() -> None:
     record = _record()
-    row = _first_state(record, defaults.PENDING)
+    # No count is pending since 16 October 2026 (think-3zi3), so the lapse is laid on a
+    # count the axis tool's record draws, regular as published and settled by nothing.
+    entries = defaults.index_entries()
+    row = next(
+        (
+            found
+            for found in record["states"]
+            if found["state"] == defaults.REGULAR_AS_PUBLISHED
+            and entries[found["n"]]["generator"] == defaults.ALGORITHM
+            and found["n"] not in defaults.SETTLED
+        ),
+        None,
+    ) or _first_state(record, defaults.PENDING)
     n = row["n"]
-    entry = dict(defaults.index_entries()[n])
+    entry = dict(entries[n])
     lapse = {"generator": "evand-regularize", "run": "a-run", "witness_sha256": "2" * 64}
     entry[defaults.LAPSED] = lapse
     state = defaults.count_state(n, entry, _measured(record, n), row["witness"], allowed={})

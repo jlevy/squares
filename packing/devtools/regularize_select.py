@@ -519,7 +519,12 @@ def notes(row: Mapping[str, Any], now: Mapping[str, Any]) -> list[str]:
 def preference(row: Mapping[str, Any]) -> tuple[int, float, int, int]:
     """Evan Daniel's views first, then grid-slack by rising threshold, then run order."""
     if row["kind"] == "evand":
-        return (0, 0.0, int(row["rank"]), EVAND_OUTPUTS.index(row["output"]))
+        # A count the driver drew no view of keeps one row, with no output: it sorts after
+        # the run's views (n = 264 on 16 October 2026, where the regularizer's certificate
+        # overlapped and upstream's checker refused it).
+        output = row["output"]
+        place = EVAND_OUTPUTS.index(output) if output in EVAND_OUTPUTS else len(EVAND_OUTPUTS)
+        return (0, 0.0, int(row["rank"]), place)
     return (1, float(row["threshold"] or 0.0), int(row["rank"]), 0)
 
 

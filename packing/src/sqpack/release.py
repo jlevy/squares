@@ -385,7 +385,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "d1f49d8ff5019c65be13e1da19d631504f417d29"
+DATA_REVISION = "5a6f333be82a01daddea7cb564625a2518ba7e06"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -1082,6 +1082,97 @@ class ReleaseNoPublicChange(NamedTuple):
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
     ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+            "site",
+        ),
+        paths=(
+            "packing/atlas/known-best/default-drawings.json",
+            "packing/devtools/default_drawings.py",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-lower-bounds-explainer.pdf",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-optimality-review.pdf",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/n11-threshold-bound-review.pdf",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+            "papers/square-packing-methods-survey.pdf",
+            "atlas.html",
+            "index.html",
+            "results.html",
+        ),
+        reason=(
+            "The think-0ut1 run of 16 October 2026 admits no view: it rewrites ten "
+            "decided-no-better SETTLED entries (their runs, outcomes and evidence, no owed "
+            "work left), so default-drawings.json changes only those counts' `states` rows "
+            "(`decisions` and `why`) and the `why` of 204, 272 and 303, whose evidence string "
+            "now names its paragraph; its `entries` are byte-identical to the base's. The "
+            "site reads the record only through `regularized_defaults`, `credit_line` and "
+            "`held_reasons`, which read `entries` and the index, never `states`, SETTLED or "
+            "PENDING_ALLOWED, and no case record, view or index entry changes. The papers "
+            "reach default_drawings only through shared import discovery and read neither "
+            "constant. Source review, no render; the site keeps v0.7.15 and the papers "
+            "v0.4.7, v0.1.7, v0.1.0 and v0.2.2."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+        ),
+        paths=("packing/devtools/regularize_select.py",),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-lower-bounds-explainer.pdf",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-optimality-review.pdf",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/n11-threshold-bound-review.pdf",
+        ),
+        reason=(
+            "The think-3zi3 run's fix changes only how regularize_select orders a driver "
+            "count with no view among its candidates. The three papers reach the module "
+            "only through shared import discovery and never run the selection, so their "
+            "manuscripts, figures, credits and print rules are unchanged by source review. "
+            "No render was taken, and they keep v0.4.7, v0.1.7 and v0.1.0."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=(
+            "packing/devtools/regularize_select.py",
+            "packing/frontier/n-175.md",
+        ),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The regularization run of 16 October 2026 on the three counts #598 re-housed "
+            "(think-3zi3) changes n = 175's case record only in its generated "
+            "regularization note, which the survey cites by link only, and fixes how the "
+            "selection orders a driver count with no view, which the survey reaches only "
+            "through shared import discovery and never runs. Rendered from main at "
+            "e2e018f32 and from this branch at that one link revision, the survey's HTML "
+            "and Markdown are byte-identical, as are the other 40 files the renderer "
+            "writes. No PDF was printed (no pinned Chromium on this host), and the survey "
+            "keeps v0.2.2."
+        ),
+    ),
+    ReleaseNoPublicChange(
         components=("paper:square-packing-methods-survey",),
         paths=(
             "packing/frontier/n-153.md",
@@ -1099,8 +1190,41 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "regularization note, which the survey does not quote: it cites them by link, "
             "as its results table's count links. Rendered from main at e2e018f32 and from "
             "this branch at that one link revision, the survey's HTML and Markdown are "
-            "byte-identical, as are the other 48 files the renderer writes. No PDF was "
+            "byte-identical, as are the other 40 files the renderer writes. No PDF was "
             "printed (no pinned Chromium on this host), and the survey keeps v0.2.2."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=("packing/devtools/regularized_drawings.py",),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "#653's review A1 changes only which of this project's modifications a "
+            "regularization note names: the same-side re-solve is credited where the run's "
+            "output is the re-solve's, so the notes at 241 and 302, which no paper links, "
+            "and results.yaml's regularized_drawings item at 302 now say unmodified. The "
+            "papers read results.yaml's results, never regularized_drawings, and reach the "
+            "module only through shared import discovery. Rendered from this branch's tree "
+            "at 0082533ee, at the link revision e2e018f3, the survey's and both "
+            "reviews' HTML and Markdown and the other 40 files each render writes are "
+            "byte-identical to the renders from main e2e018f3's tree taken for #644 and "
+            "for the survey's record above (42 of 42 files each); the explainer, whose "
+            "render needs a browser this host lacks, is source-reviewed only, and no PDF "
+            "was printed. All four papers keep their versions."
         ),
     ),
     ReleaseNoPublicChange(
@@ -1164,9 +1288,14 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "never regularized_drawings, reach default_drawings only through shared "
             "import discovery and read neither constant, and the survey cites n = 105, 129 "
             "and 146 by link only, as its results table's count links. Manuscripts, "
-            "figures, credits and print rules are unchanged by source review. No render "
-            "was taken, and all four papers keep v0.4.7, v0.1.7, v0.1.0 and v0.2.2; the "
-            "site takes the patch."
+            "figures, credits and print rules are unchanged by source review. Rendered at "
+            "one link revision (e2e018f3), once from main e2e018f3's tree and once from "
+            "this branch's at 780d81b8, the survey's and both reviews' HTML, before the "
+            "browser's math pass, their Markdown and the other 40 files each render "
+            "writes are byte-identical (42 of 42 files each); the explainer, whose render "
+            "needs a browser this host lacks, is source-reviewed only, and no PDF was "
+            "rebuilt. All four papers keep v0.4.7, v0.1.7, v0.1.0 and v0.2.2; the site "
+            "takes the patch."
         ),
     ),
     ReleaseNoPublicChange(
