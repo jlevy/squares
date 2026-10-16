@@ -36724,6 +36724,33 @@ evidence:
     replay_status: not-attempted
     verifiers: []
     source_reviewed: '2026-10-16'
+    external_review:
+      state: informally-verified
+      date: '2026-10-16'
+      reviewed_by: >-
+        an AI agent (Claude, strong sub-agent tier, max reasoning), the stage 4 review lane
+        of the #639 import (bead think-7qxm, acting name user-eb-review-193), prompted
+        separately from the import, records and addressing lanes and sharing no context
+        with them beyond their committed packet, register entry and ledger
+      note: >-
+        docs/project/reviews/review-2026-10-16-evand-exact-sides-639.md read
+        verify_exact.py line by line and states the five hypotheses under which its VALID
+        proves that the file's squares are a packing of n unit squares in the square of side
+        S*, the one root of p in its interval; the replay ran under all five. It
+        re-checked custody (a blobless clone at 7d1407a, every manifest digest, the 30
+        retained files byte-identical), reproduced three replay runs equal to the receipt
+        (126, 266 and 267), and with a check of its own sharing no code with the checker
+        (mpmath interval arithmetic at 1,400 bits and SymPy identities in Q[t]/f) decided all
+        21 forms a packing, with as many contact identities as the checker at every count,
+        and refused its 63 controls; every p and f is irreducible and squarefree at all 23,
+        every claim cut is correct, and every S* lies below every standing side at its
+        count. Verdict accepted at all sixteen counts, for finite feasibility only: no
+        blocking finding; one major (RE-1, at nine counts the form is the case's house, not
+        the T-174 or T-186 certificate its regularization item names, a credit route that
+        leaves the bound unchanged), four minor (RE-2 the old driver's irreducibility test,
+        fixed in the refreshed receipt; RE-3 and RE-4 the claim's margin and credit
+        wording; RE-9 its own programs not registered) and four notes. No lower bound,
+        optimum, rigidity, novelty or priority follows.
     limitations: >-
       This atom records the source author's report, at evand/square-packing 7d1407a
       (issue 639), of exact configurations over number fields at 23 counts, of which the
@@ -36736,6 +36763,55 @@ evidence:
       interval. At 204, 263, 267 and 297 the data files are pinned by size and SHA-256 and
       not retained (OR-18). The source asserts each polynomial irreducible and no program of
       it checks that. No local or global optimality, rigidity or uniqueness is claimed.
+  - id: E-evand-639-verify-exact-replay
+    claim: upper-bound
+    scope: {n_values: [88, 102, 123, 126, 175, 199, 204, 232, 258, 259, 266, 267, 292, 295, 301, 302]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: same-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Daniel exact current records 2026-10-16]'
+    certificate: packing/resources/web/evand-exact-cur-2026-10-16/source/search/exact/cur/data/
+    replay: >-
+      From packing/, with the four pinned-only forms (204, 263, 267, 297) fetched from
+      evand/square-packing at 7d1407a into DIR: .venv/bin/python3
+      resources/web/evand-exact-cur-2026-10-16/review/replay_verify_exact.py --pinned DIR
+      --scratch SCRATCH --workers 2. It runs the retained verify_exact.py on each form in
+      its own python -I process, which must print VALID with the statement the source's
+      data/verify.txt prints, and on each control, which must print NOT VERIFIED; the
+      receipt is receipts/replay-verify-exact.json in the packet.
+    replay_status: passed
+    verifiers: [V-evand-verify-exact, V-evand-639-replay-driver]
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the source's exact forms, one exact configuration a count: all 23 files of
+          search/exact/cur/data at 7d1407a, the 16 in scope among them, each decided whole
+    source_reviewed: '2026-10-16'
+    limitations: >-
+      The source's own checker, read first and run unchanged here on 16 October 2026 from
+      its retained copy under CPython 3.14.7 (the source runs python3), on all 23 of the
+      directory's exact forms, the 16 in scope among them: 23 VALID, each with the
+      statement data/verify.txt prints, in 1,426.5 CPU seconds over 2 processes on a
+      shared 4-core host, 263, 297 and 204 the slowest (568, 351 and 241 s). At each of the
+      19 retained forms four mutated controls were refused, 76 in all, in 58 CPU seconds:
+      a square moved 1e-6 through the wall it touches, the side raised by 1e-6 in the
+      field, the side's interval moved below its root, and a duplicate square; no control
+      moves a contact pair (the review's RE-8), the four pinned-only forms carry none, and
+      tests/test_evand_exact_cur.py holds two at n = 51. The receipt, refreshed after PR
+      651's review A by the fixed driver (driver SHA-256 f949158c...), 1,484.5 CPU seconds
+      in all, finds each of the 23 polynomials squarefree and one factor of multiplicity 1
+      over the integers by SymPy 1.14.0, so irreducible, the four pinned-only forms
+      included. This is reproduction with the producer's code, one route; the stage 4
+      review's own check is a second, independent decision of the same forms, kept in the
+      packet and not registered (RE-9). The checker does not check that a file lists
+      exactly n squares; review/exact_sides.py of the ledger does, at every count. The
+      replay also covers 51, 70, 153, 207, 172, 263 and 297, which T-193 does not record;
+      at 70, 153 and 207 it is a second exact route to T-174's algebraic sides, for the
+      owner's RP-3.
   - id: E-n019-fitzharding-lean-report
     claim: exact-value
     scope: {n_values: [19]}

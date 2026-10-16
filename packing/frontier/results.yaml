@@ -26269,9 +26269,15 @@ results:
       each of the 19 forms the packet retains: a square moved 1e-6 through the wall it
       touches, the side raised by 1e-6 in the field, the side's interval moved below its
       root, and a duplicate square. That is a reproduction with the producer's code, on one
-      route, retained until the stage 4 review lane (think-7qxm) has read it. SymPy factored
-      each polynomial over the integers and found every one squarefree and a single factor
-      of multiplicity 1, so irreducible, and each side algebraic of the degree stated.
+      route. SymPy factored each polynomial over the integers and found every one
+      squarefree and a single factor of multiplicity 1, so irreducible, and each side
+      algebraic of the degree stated.
+
+      The stage 4 review of 16 October read verify_exact.py line by line, stated the five
+      hypotheses under which its VALID proves the packing, reproduced three of the replay's
+      runs, and with a check of its own sharing no code with the checker decided all
+      sixteen forms a packing at S* again; it found no blocking defect and accepted the
+      claim at all sixteen counts, for finite feasibility only.
 
       The 16 October report-order ledger records it at these sixteen counts, each below
       every earlier report, by 1.48e-99 (204) to 7.77e-35 (126): below PR 574's rational
@@ -26288,28 +26294,55 @@ results:
       T-127), 258 (as Mykhailo Polkovskyi improved it), 259 and 292; Ryan Xu's at 102, 123,
       126, 267 (as Francisco Couzo improved it, T-134) and 295; Daniil Ostashev's at 175, 204
       and 232; Francisco Couzo's at 301; PingYou Ltd's at 302, as Couzo improved it (T-181);
-      and his own at 266 (T-119); at every count by way of PingYou Ltd's refinement (T-174) or
-      Polkovskyi's (T-186), as the entry's regularizations list.
+      and his own at 266 (T-119). The regularizations items name PingYou Ltd's refinement
+      (T-174) or Polkovskyi's (T-186) as the packing each form solves; the stage 4 review
+      measured that route at 102, 123, 258, 259, 267, 295 and 302, and at the other nine
+      counts found each form to be the case's own packing, to within 4.5e-4 at every centre
+      (RE-1), so there the form refines the case's packing directly. The items are
+      corrected in a later change.
 
       The issue says the solver, checkers and batch were written and run with Claude
       (Anthropic) as a coding and research agent, directed and reviewed by the author.
     scope: {n_values: [88, 102, 123, 126, 175, 199, 204, 232, 258, 259, 266, 267, 292, 295, 301, 302]}
-    verification: V0
-    confirmation: C0
+    verification: V3
+    confirmation: C3
     significance:
       score: 2
       rationale: >-
         Exact algebraic forms of packings the record already credits, 1.5e-99 to 7.8e-35
         below the nearest earlier report at each of sixteen counts: a citable detail of each
         case that changes no theorem, S2 as T-120 to T-123's exact forms are; the rational
-        refinements they tighten (T-174, T-186) are S1. No lower bound or optimum.
+        refinements they name (T-174, T-186) are S1, and at nine counts, by the review's
+        RE-1, the forms tighten the case's own packing directly. No lower bound or optimum.
       scored: '2026-10-16'
-      by: think-phyb Evan Daniel import (draft)
+      by: think-phyb Evan Daniel import (draft), confirmed by the stage 4 review (think-7qxm)
     novelty: previously-published
     attribution:
       source_keys: ['[Daniel exact current records 2026-10-16]']
       published: '2026-10-16'
-    evidence: [E-evand-639-exact-sides-report]
+    evidence: [E-evand-639-exact-sides-report, E-evand-639-verify-exact-replay]
+    reviews:
+      - path: docs/project/reviews/review-2026-10-16-evand-exact-sides-639.md
+        kind: adversarial
+        reviewer: >-
+          Claude (AI review), strong sub-agent tier at max reasoning, the stage 4 review lane
+          of the #639 import (bead think-7qxm), prompted separately from the import, records
+          and addressing lanes, sharing no context with them beyond their committed packet,
+          register entry and ledger
+        reviewer_kind: ai
+        relation: project
+        date: '2026-10-16'
+        scope: >-
+          What verify_exact.py's VALID proves, read line by line, with the hypotheses it
+          assumes; three of the replay's runs reproduced (126, 266, 267); custody at 7d1407a;
+          an independent decision of the 21 forms (19 retained, 204 and 267) by interval
+          arithmetic at 1,400 bits and exact identities in Q[t]/f, with 63 controls;
+          irreducibility and squarefreeness of every p and f; the claim's cuts and margins;
+          and each form measured pose by pose against the packing its regularization names
+          and the case's house, at ef43dd02f. It decided no lower bound, optimum or
+          rigidity.
+        verdict: accepted
+        covers: [T-193]
     artifacts:
       - packing/resources/web/evand-exact-cur-2026-10-16/README.md
       - packing/resources/web/evand-exact-cur-2026-10-16/source/search/exact/cur/RESULTS.md
@@ -26320,45 +26353,43 @@ results:
       - packing/resources/web/evand-exact-cur-2026-10-16/receipts/replay-verify-exact.json
       - packing/resources/web/evand-exact-cur-2026-10-16/review/replay_verify_exact.py
     controls: [packing/tests/test_evand_exact_cur.py]
-    activity:
-      state: in-analysis
-      what: >-
-        The stage 4 review lane reads the retained replay of the source's verify_exact.py
-        and this entry, strong tier, on a branch stacked on PR 651, as the 14 October lanes
-        read T-161 to T-175 and T-181 to T-183.
-      since: '2026-10-16'
-      link: think-7qxm
     next_rung: >-
-      The stage 4 review lane, think-7qxm, reads the retained replay
-      (receipts/replay-verify-exact.json in the packet): what verify_exact.py's VALID implies,
-      each form measured against the packing its regularization names, and each print held to
-      its exact side. With no blocking defect open, the stage 4 exit then adds the replay's
-      evidence entry, cites it and rewrites the claim, notes and next_rung together.
-
-      V4 and C4 need two accepting adversarial AI reviews by distinct reviewers of the
-      checker's soundness and of this entry, and the owner's oversight record. A second route
-      over number fields here, sqpack.witness.exact_verify, needs a converter of the source's
-      format, a W7 slice with no bead; it would be an attribute beside the rung. Adoption of
-      the sixteen sides as the cases' houses is the owner's, with T-174's.
-    unfinished_confirmations:
-      - what: >-
-          the stage 4 review of the retained replay of the source's verify_exact.py
-          (receipts/replay-verify-exact.json in the packet), with no blocking defect open,
-          after which the exit adds the replay's evidence entry and cites it
-        rung: C3
-        link: think-7qxm
+      V4 and C4 need, on top of V3 and C3, a second accepting adversarial AI review by a
+      distinct reviewer of the checker's soundness and of this entry, and the owner's
+      oversight record naming trust-boundary, certificate-meaning and ai-findings, which
+      would disposition the stage 4 review's nine findings, none blocking. The review's own
+      check, an independent decision of the same forms kept in the packet, would be an
+      attribute beside the rung once registered (RE-9); a second route over number fields
+      here, sqpack.witness.exact_verify, needs a converter of the source's format, a W7
+      slice with no bead. Adoption of the sixteen sides as the cases' houses is the
+      owner's, with T-174's (RP-3), and no house reader rebuilds an algebraic side yet.
     notes: >-
-      The replay is retained in the packet, its receipt and driver with it, and the entry is
-      held at its reported rungs until the stage 4 review lane (think-7qxm) has read it, as
-      the 14 October imports were held until their reviews merged: result-import.md's stage 4
-      exit follows both lanes. The replay's evidence entry is added at the exit, as those
-      imports' confirming entries were.
+      Rungs on 16 October 2026, at the stage 4 exit after the review (think-7qxm): V0/C0 to
+      V3/C3 at all sixteen counts, by check_results, on the replay of the source's own
+      verify_exact.py (E-evand-639-verify-exact-replay, receipt refreshed after PR 651's
+      review A) and the accepted review recorded as the report entry's external_review.
+      The confirmation is reproduction with the producer's code, one route.
+
+      The review's findings, none blocking: RE-1 (major), the regularizations items' `of`
+      at 88, 126, 175, 199, 204, 232, 266, 292 and 301 is not the packing the form solves,
+      which is the case's house there (T-127, T-139, T-158, T-162, T-119, T-146, T-098);
+      the claim says so, and the items, with identity.basis measured and the review as
+      measured_in, are corrected in a later change, Q2 (whether a square turned at its
+      centre is the same packing) being the owner's; RE-2 (minor), the driver's
+      irreducibility test, fixed in the refreshed receipt; RE-3 and RE-4 (minor), the
+      margin and credit wording: the margins are fixed and the credit at 258 names
+      Polkovskyi, while the author's own improvements the cases list at 102, 123, 126, 292,
+      295 and 301 are not yet named; RE-5 to RE-8 (notes) on the checker's asserts, the root isolation and
+      count outside it, strict gaps far below any contact tolerance and controls that never
+      move a contact pair; RE-9 (minor), the review's programs kept and not registered. Q1
+      on T-174's own items at six counts is the owner's.
 
       The case records are unchanged: each side is below its case's reported and verified
       upper bounds, so the entry is pending adoption, as T-174 and T-186 are.
 
       The identity of each certificate with the packing it solves is the source's claim
-      (exactsolve.py from the record's own witness); no measurement here decides it. At 153
+      (exactsolve.py from the record's own witness); the stage 4 review measured it pose by
+      pose (RE-1, above). At 153
       and 207 the source's input was a copy of the packing that ties the register's witness,
       and its re-solve of the register's witness at 207 did not verify one pair; neither count
       is recorded. The ledger's owner questions are in its README.

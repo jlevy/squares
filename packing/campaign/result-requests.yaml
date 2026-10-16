@@ -9298,7 +9298,10 @@ issues:
       adoption is the owner's decision RP-3; and at 172, 263 and 297 #574's rational certificates are
       smaller, by about 1e-62. Retained on 16 October in the evand-exact-cur-2026-10-16 packet; the 16
       October report-order ledger (campaign/issue-intake/upper-bounds-20261016) agrees with the triage at
-      every count, and T-193 registers the 16 recorded counts. Claude assistance disclosed.
+      every count, and T-193 registers the 16 recorded counts. The source's verify_exact.py, replayed here
+      on all 23 forms with controls, and the stage 4 review of 16 October, which found no blocking defect
+      and one major credit-route finding (RE-1), take T-193 to V3/C3 at all sixteen counts. Claude
+      assistance disclosed.
     read_through: '2026-10-16T03:37:13Z'
     results:
     - key: exact-sides-below-record
@@ -9312,6 +9315,7 @@ issues:
       - T-193
       evidence:
       - E-evand-639-exact-sides-report
+      - E-evand-639-verify-exact-replay
     - key: exact-side-51
       claim: s(51) <= (16 + 5√2)/3, the root of 9x^2 - 96x + 206.
       source: body
