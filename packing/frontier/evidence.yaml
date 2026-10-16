@@ -36772,6 +36772,44 @@ evidence:
         - Lean 4.34.1's kernel and Mathlib v4.34.1 at d13f23b7 are sound, and so are Lean's compiler, the bundled C compiler and the compiled runtime routines the 4,320 native_decide facts are evaluated by
         - The build and the kernel replay passed as the source reports. Its receipts are the author's own; nothing here built or elaborated any module
         - The Sq17Lean modules of sq17-lean at 0a7167e, which the lakefile compiles in place as the half-plane checker, are sound; that tree differs from the e6ee548 the T-154 packet pins only by CITATION.cff
+      audit_record: docs/project/reviews/review-2026-10-16-fitzharding-n19-lean.md
+    external_review:
+      state: informally-verified
+      date: '2026-10-16'
+      reviewed_by: >-
+        an AI agent (Claude, strong sub-agent tier, max reasoning), the mathematical review
+        lane of the #640 import at stage 4 (bead think-o40t, acting name
+        user-eb-review-640), in a worktree of its own, reading the source as data, running
+        only code it wrote, and not reading the two reviews of the s(17) proof until its own
+        findings were written
+      note: >-
+        docs/project/reviews/review-2026-10-16-fitzharding-n19-lean.md read the source at
+        34fb2b7 (release v1.0.0). Statement and definitions: Feasible19 is the record's
+        problem at n = 19, closed unit squares with arbitrary rotations, touching allowed,
+        in an axis-aligned container, with no degenerate reading for L < 0; side19 is the
+        case's exact upper bound; and the bridge to sq17-lean's definitions is by
+        unfolding. Existence: the nineteen
+        squares of EndpointPacking.lean are decided a packing at that side in exact
+        Q(sqrt 2), and are this project's witness W-known-best-n019 in the same order. The
+        chain to the final theorem (a 25-cell cover with capacity one, the D4 orbit census,
+        the sub-pattern exclusions leaving seven survivors, four branch-tree exclusions,
+        three capture states confining the packing to the box H about Wainwright's
+        configuration, and the exact local endgame on H) was re-derived and leaves no case
+        uncovered and no hypothesis in the assembly. The trust boundary is the source's:
+        the kernel, and for 4,320 native_decide facts Lean's compiler and native evaluator,
+        the C toolchain and Lean core's compiled runtime. Programs written for the review
+        re-established the property each of the 2,328 native facts whose modules are in the
+        Git tree certifies (for the combinatorial facts the predicate itself), and scanned
+        the five release archives (digests equal to SHA256SUMS, no axiom, sorry or other
+        trust-widening construct); the 1,992 archived facts, the census pattern traces,
+        the capture runs and tables and the survivor trees, were not re-run, and for the
+        endgame and region facts a pass shows the certified property, not the native
+        evaluator's value. Verdict accepted: no blocking or
+        major defect, three minor findings (N19-1 the witness's ordering not credited, N19-2
+        generators and notes unpublished, N19-3 the kernel-replay receipt bound to an
+        unpublished build) and four notes. Nothing was built: that the modules compile, that
+        the kernel accepts them and that the native facts evaluate to true is the author's
+        report.
     limitations: >-
       The source reports the theorem, its axiom report (propext, Classical.choice,
       Quot.sound and 4,320 native_decide facts, no sorryAx) and a kernel replay of the
@@ -36784,6 +36822,239 @@ evidence:
       the pass's 40 CPU-hour cap and this host's 4 cores and 15 GB (think-nqnl, held). The
       triage of 16 October read the statement and its definitions without a build: the
       problem is the record's at n = 19 and the constant is the case's exact upper bound.
-      No mathematical review is on file yet (think-o40t), so the entry counts toward no
-      rung above C0.
+      The review of 16 October (external_review) read the proof without a build; it makes
+      the entry reviewed, which is C1, and nothing in it replaces the build that V3 and C3
+      need.
+    source_reviewed: '2026-10-16'
+
+  - id: E-n019-fitzharding-endpoint-review
+    claim: derived-structure
+    scope: {n_values: [19]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Fitzharding n19 Lean 2026]'
+    certificate: packing/resources/web/fitzharding-n19-lean-2026-10-16/review/README.md
+    replay: >-
+      From packing/, with P = resources/web/fitzharding-n19-lean-2026-10-16, run
+      .venv/bin/python3 -I $P/review/check_endpoint.py $P/sq19
+      witnesses/known-best/n-019.yaml. It must print what the review README's results
+      record: nineteen unit squares inside [0, 3 + 4√2/3]^2 with minimum clearance 0, all
+      171 pairs weakly separated by an edge normal with 31 touching on their best axis, the
+      witness's squares in the same order with largest difference 4.44e-16, PASS, and
+      exit 0.
+    replay_status: passed
+    verifiers: [V-sq19-review-endpoint]
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the existence half: the nineteen squares of EndpointPacking.lean, their unit
+          directions and containment, and the separation of all 171 pairs, in exact
+          Q(sqrt 2), and their order and values against W-known-best-n019
+    limitations: >-
+      Run here on 16 October 2026 by the stage 4 review of the Lean proof (think-o40t)
+      and again the same day by its records lane, with the same output, under Python
+      3.14.7 on the retained sources read as data. It decides that the squares the Lean
+      file names are a packing at side 3 + 4√2/3, which E-lifted-q2-upper already holds
+      for this case; it does not check the Lean proof of endpoint_packing or anything of
+      the impossibility half. It is case-record evidence and is not cited by T-194, since
+      it decides one part.
+    source_reviewed: '2026-10-16'
+
+  - id: E-n019-fitzharding-cover-census-review
+    claim: derived-structure
+    scope: {n_values: [19]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Fitzharding n19 Lean 2026]'
+    certificate: packing/resources/web/fitzharding-n19-lean-2026-10-16/review/README.md
+    replay: >-
+      From packing/, with P as in E-n019-fitzharding-endpoint-review, run
+      .venv/bin/python3 -I $P/review/check_cover_census.py $P/sq19. Every check must print
+      PASS: 177,100 sets with no miss, 22,475 orbits, the tree masks at census indices 1,
+      2, 5423 and 5453 and the capture masks at 3435, 3438 and 3442, 177,062 non-survivor
+      masks covered and no survivor image covered; and it must exit 0.
+    replay_status: passed
+    verifiers: [V-sq19-review-cover-census]
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the cover and the census: the 25 cells' tiling of the centre box, the symmetry
+          tables, the capacity data, the native facts Sq19.Cover.orbit_check,
+          Sq19.Assembly.CensusRoute.route_checked and captureIndex_checked as predicates,
+          the 38 survivor images, and the coverage of every non-survivor mask by the 269
+          certified patterns
+    limitations: >-
+      Run here on 16 October 2026 by the stage 4 review of the Lean proof and again the
+      same day by its records lane, with the same output, under Python 3.14.7, in exact
+      rational arithmetic on the retained sources read as data. For the three native facts
+      it decides the finite predicate the Boolean encodes. The coverage check reads each
+      pattern's roster from its name, P<hex> as the cells of mask 0x<hex>, which the review
+      asks the author to confirm (N19-6, question 4); the rosters themselves are in the
+      census archive, and the pattern traces that exclude them were not re-run. The Lean
+      proves the cell capacities and the census's completeness, which this does not
+      replace. Case-record evidence, not cited by T-194, since it decides parts.
+    source_reviewed: '2026-10-16'
+
+  - id: E-n019-fitzharding-region-review
+    claim: derived-structure
+    scope: {n_values: [19]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: shared-components
+    shared_components: [sqCheck, wallCheck]
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Fitzharding n19 Lean 2026]'
+    certificate: packing/resources/web/fitzharding-n19-lean-2026-10-16/review/README.md
+    replay: >-
+      From packing/, with P as in E-n019-fitzharding-endpoint-review, run
+      .venv/bin/python3 -I $P/review/check_region.py $P/sq19
+      witnesses/known-best/n-019.yaml. It must print PASS for all 76 target polygons
+      bounded and nonempty, for each of the nine Region facts, and for Wainwright's
+      configuration in H (minimum margin 6.98e-05), and exit 0.
+    replay_status: passed
+    verifiers: [V-sq19-review-region]
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the property the nine Sq19.Capture.Region native facts certify (sq_ok and wall_ok
+          of S3442, S3435 and S3438, and sq_ok, wall_ok and top_ok of S3435P0): each capture
+          target, moved by the frame shift, inside its box of Hull.prob; and Wainwright's
+          configuration in H
+    limitations: >-
+      Run here on 16 October 2026 by the stage 4 review of the Lean proof and again the
+      same day by its records lane, with the same output, under Python 3.14.7 in exact
+      rationals. It transcribes sqCheck and wallCheck and replaces only impliedOK by
+      vertex enumeration, so it is independent in evaluation, not in formulation. A pass
+      shows that the certified property holds, so a wrong native result among these nine
+      facts would not make the statement false; it shows nothing about whether the native
+      evaluator's true is the kernel's value. Case-record evidence, not cited by T-194.
+    source_reviewed: '2026-10-16'
+
+  - id: E-n019-fitzharding-capture-link-review
+    claim: derived-structure
+    scope: {n_values: [19]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Fitzharding n19 Lean 2026]'
+    certificate: packing/resources/web/fitzharding-n19-lean-2026-10-16/review/README.md
+    replay: >-
+      From packing/, with P as in E-n019-fitzharding-endpoint-review and W a scratch
+      directory outside the checkout, download sq19-generated-S3435, -S3438 and
+      -S3442.tar.xz from the v1.0.0 release, extract each state's Sq19Lean/Capture/S<k>/
+      directory and run .venv/bin/python3 -I $P/review/check_capture_link.py $P/sq19
+      $W/x-S<k> <k>, as the review README's Running Them gives. Each must print PASS for
+      cells_ok, mask_ok, width_checked and tile_checked with every file read matching its
+      listed digest, and exit 0.
+    replay_status: passed
+    verifiers: [V-sq19-review-capture-link]
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the twelve census-to-capture link facts, cells_ok, mask_ok, width_checked and
+          tile_checked of capture states S3435, S3438 and S3442, as predicates
+    limitations: >-
+      Run here on 16 October 2026 by the stage 4 review of the Lean proof under Python
+      3.14.7, on the states' data extracted from the release archives at their listed
+      digests; not re-run by the records lane, which kept no copy of the archives. The
+      facts are tree facts, 12 of the 21 capture facts in the Git tree; it decides the
+      predicates, not the capture propagation runs, tables or summaries, which are in the
+      archives and were not re-run. Case-record evidence, not cited by T-194.
+    source_reviewed: '2026-10-16'
+
+  - id: E-n019-fitzharding-endgame-review
+    claim: derived-structure
+    scope: {n_values: [19]}
+    assurance: verified
+    method: interval-certified
+    performed_by: repository
+    relationship_to_generator: shared-components
+    shared_components: [RowsH, RowsAH, PhiExpr, Combine, ReductionCases]
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Fitzharding n19 Lean 2026]'
+    certificate: packing/resources/web/fitzharding-n19-lean-2026-10-16/review/README.md
+    replay: >-
+      From packing/, with P as in E-n019-fitzharding-endpoint-review, run
+      .venv/bin/python3 -I $P/review/check_endgame.py $P/sq19 --cases all (about two and a
+      half minutes on one core). It must print 4,096 of 4,096 cases passing, with lower
+      bounds over H of 0.701147, 0.7009 and 0.999596 for the multipliers, 1.49126 for S1
+      and 0.0383454 for the slope, and exit 0.
+    replay_status: passed
+    verifiers: [V-sq19-review-endgame]
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the property the 2,304 Sq19.Endgame.Reduction.Shard*.case* native facts certify,
+          over all 4,096 sign and owner cases they and their reductions cover: on the whole
+          box H, the three Farkas multipliers nonnegative, S1 > 0, and the endpoint margin's
+          directional derivatives nonnegative
+    limitations: >-
+      Run here on 16 October 2026 by the stage 4 review of the Lean proof and again the
+      same day by its records lane, with the same output, under Python 3.14.7, with
+      fixed-point outward rounding at 2^-160, the quarter-turn values exact, bounds
+      |sin x - x| <= |x|^3/6 and 1 - x^2/2 <= cos x <= 1, and forward-mode slopes. It
+      transcribes the source's row definitions, so it is independent in evaluation, not in
+      formulation. A pass shows that the certified property holds, so a wrong native
+      result among these facts would not make the statement false; it shows nothing about
+      whether the native evaluator's true is the kernel's value of checkNat. The margin at
+      theta = 0 is zero to 1e-46, the packing's tightness; the axis-zero face, which the
+      source proves exactly, is not decided here by intervals. Its floating-point sample of
+      25,564 cone points decides nothing. Case-record evidence, not cited by T-194.
+    source_reviewed: '2026-10-16'
+
+  - id: E-n019-fitzharding-archives-review
+    claim: derived-structure
+    scope: {n_values: [19]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Fitzharding n19 Lean 2026]'
+    certificate: packing/resources/web/fitzharding-n19-lean-2026-10-16/review/README.md
+    replay: >-
+      From packing/, with P as in E-n019-fitzharding-endpoint-review and W a scratch
+      directory outside the checkout, download SHA256SUMS and the five v1.0.0 archives one
+      at a time and run $P/review/scan_archives.py on each, then $P/review/count_native.py
+      over the five scans, as the review README's Running Them gives. Every archive's
+      digest must equal SHA256SUMS and every member its listed digest, with none unlisted
+      and no forbidden construct, and the count must place 2,328 of the 4,320 logged
+      native facts in the Git tree, 1,992 in the archives and none nowhere.
+    replay_status: passed
+    verifiers: [V-sq19-review-archive-scan, V-sq19-review-native-count]
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the five release archives (S3438, S3442, S3435, census and survivors; 2,112
+          members, 10,155,114,248 bytes of source): digests, members and the keyword scan;
+          and the location of each of the 4,320 native facts of the axiom report
+    limitations: >-
+      Run here on 16 October 2026 by the stage 4 review of the Lean proof under Python
+      3.14.7, each archive downloaded to scratch, scanned and deleted; not re-run by the
+      records lane. A digest check and a keyword scan decide the archives' custody and the
+      absence of the listed trust-widening constructs, not any fact's truth; the count is
+      accounting. Six facts are in both places (the three State.lean files the archives
+      also carry, byte-identical), and 170 native theorems are built but not used by the
+      final theorem. Case-record evidence, not cited by T-194.
     source_reviewed: '2026-10-16'

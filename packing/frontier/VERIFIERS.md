@@ -25,8 +25,8 @@ second implementation agrees.
 
 ## The Short Version
 
-- **162** programs: **50** external and **112** first-party; **112** decide claims and **50** check premises.
-- **506** of **605** evidence entries name the programs that verified them: 253 reproduced with the producer’s code, 224 independently re-implemented, 18 re-implemented, sharing the producer’s components, 11 no relation: a proof, a derivation or a report.
+- **169** programs: **50** external and **119** first-party; **119** decide claims and **50** check premises.
+- **512** of **611** evidence entries name the programs that verified them: 253 reproduced with the producer’s code, 228 independently re-implemented, 20 re-implemented, sharing the producer’s components, 11 no relation: a proof, a derivation or a report.
 
 ## Programs
 
@@ -194,6 +194,13 @@ second implementation agrees.
 | [`V-wand125-sqverify-continuous`](#v-wand125-sqverify-continuous) | sqverify-fast --continuous | wand125, adapting this repository's sqverify_fast | external | decides | 1 | 1 |
 | [`V-wand125-contpose-check3`](#v-wand125-contpose-check3) | contpose_check3 v1.2 | wand125 (the driver, written to a specification for Codex), around Guzhou0806's kernels | external | decides | 1 | 1 |
 | [`V-continuous-pose-followup`](#v-continuous-pose-followup) | devtools.continuous_pose_followup | Squares Project (Levy) | first-party | premises | 0 | 0 |
+| [`V-sq19-review-endpoint`](#v-sq19-review-endpoint) | check_endpoint.py | Squares Project (Levy) | first-party | decides | 1 | 0 |
+| [`V-sq19-review-cover-census`](#v-sq19-review-cover-census) | check_cover_census.py | Squares Project (Levy) | first-party | decides | 1 | 0 |
+| [`V-sq19-review-region`](#v-sq19-review-region) | check_region.py | Squares Project (Levy) | first-party | decides | 1 | 0 |
+| [`V-sq19-review-capture-link`](#v-sq19-review-capture-link) | check_capture_link.py | Squares Project (Levy) | first-party | decides | 1 | 0 |
+| [`V-sq19-review-endgame`](#v-sq19-review-endgame) | check_endgame.py | Squares Project (Levy) | first-party | decides | 1 | 0 |
+| [`V-sq19-review-archive-scan`](#v-sq19-review-archive-scan) | scan_archives.py | Squares Project (Levy) | first-party | decides | 1 | 0 |
+| [`V-sq19-review-native-count`](#v-sq19-review-native-count) | count_native.py | Squares Project (Levy) | first-party | decides | 1 | 0 |
 
 ## By Program
 
@@ -3220,6 +3227,118 @@ Decides in exact rationals a continuous-pose certificate's premises and custody 
 - What its authors read and used: [`packing/devtools/continuous_pose_followup.py`](../../packing/devtools/continuous_pose_followup.py)
 
 No evidence entry names it yet.
+
+### `V-sq19-review-endpoint`
+
+**check_endpoint.py** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
+
+For Fitzharding's Lean proof of s(19) = 3 + 4√2/3: reads the nineteen squares of EndpointPacking.lean as data and decides in exact Q(sqrt 2) that each is a unit square inside [0, 3 + 4√2/3]^2 and that every one of the 171 pairs is weakly separated by an edge normal, so the interiors are disjoint; then compares the squares, in order, with this project's witness W-known-best-n019.
+
+- Source: [`packing/resources/web/fitzharding-n19-lean-2026-10-16/review/check_endpoint.py`](../../packing/resources/web/fitzharding-n19-lean-2026-10-16/review/check_endpoint.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-10-16-fitzharding-n19-lean.md`](../../docs/project/reviews/review-2026-10-16-fitzharding-n19-lean.md)
+- Independence: its authors read mathematics, proof-text, certificate-format; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review lane of the), with its own prompt and code; authorship in common with the producer’s: system-family, The source's README says it was developed with substantial assistance from Claude and Codex. Written by a Claude agent prompted separately from the source and from the packet and records lanes, in a file of its own that imports none of the source and uses the standard library only.
+- Note: Written and run on 16 October 2026 by the review of the Lean proof; kept in the packet's review/ with its README, which records what it printed.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n019-fitzharding-endpoint-review` | replayed here | independently re-implemented | full: the existence half: the nineteen squares of EndpointPacking.lean, their unit directions and containment, and the separation of all 171 pairs, in exact Q(sqrt 2), and their order and values against W-known-best-n019 | - |
+
+### `V-sq19-review-cover-census`
+
+**check_cover_census.py** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
+
+For Fitzharding's Lean proof of s(19) = 3 + 4√2/3, in exact rationals: the 25 cells tile the centre box; the symmetry tables are induced by the frame symmetries; the capacity data; every 19-cell set of the 177,100 reaches a census mask, one per D4 orbit (orbit_check); the routing (route_checked) and the capture index (captureIndex_checked); the 38 survivor images; and that every non-survivor mask contains an image of one of the 269 certified patterns, reading each roster from its name.
+
+- Source: [`packing/resources/web/fitzharding-n19-lean-2026-10-16/review/check_cover_census.py`](../../packing/resources/web/fitzharding-n19-lean-2026-10-16/review/check_cover_census.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-10-16-fitzharding-n19-lean.md`](../../docs/project/reviews/review-2026-10-16-fitzharding-n19-lean.md)
+- Independence: its authors read mathematics, proof-text, certificate-format, producer-code; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review lane of the), with its own prompt and code; authorship in common with the producer’s: system-family, The source's README says it was developed with Claude and Codex. Written by a Claude agent prompted separately, in a file of its own that imports none of the source.
+- Note: Written and run on 16 October 2026 by the review of the Lean proof; kept in the packet's review/ with its README, which records what it printed.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n019-fitzharding-cover-census-review` | replayed here | independently re-implemented after reading the producer’s code | full: the cover and the census: the 25 cells' tiling of the centre box, the symmetry tables, the capacity data, the native facts Sq19.Cover.orbit_check, Sq19.Assembly.CensusRoute.route_checked and captureIndex_checked as predicates, the 38 survivor images, and the coverage of every non-survivor mask by the 269 certified patterns | - |
+
+### `V-sq19-review-region`
+
+**check_region.py** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
+
+For Fitzharding's Lean proof of s(19) = 3 + 4√2/3: decides in exact rationals the property the nine Sq19.Capture.Region.* native facts certify, that each capture target, moved by the frame shift, lies in its box of Hull.prob, with the source's sqCheck and wallCheck transcribed and impliedOK replaced by vertex enumeration of the target polygon, each of the 76 checked bounded and nonempty; and that Wainwright's configuration lies in H.
+
+- Source: [`packing/resources/web/fitzharding-n19-lean-2026-10-16/review/check_region.py`](../../packing/resources/web/fitzharding-n19-lean-2026-10-16/review/check_region.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-10-16-fitzharding-n19-lean.md`](../../docs/project/reviews/review-2026-10-16-fitzharding-n19-lean.md)
+- Independence: its authors read mathematics, proof-text, certificate-format, producer-code; it shares sqCheck, wallCheck; written by Claude (Anthropic) (the stage 4 mathematical review lane of the), with its own prompt; authorship in common with the producer’s: system-family, The source's README says it was developed with Claude and Codex. Written by a Claude agent prompted separately, in a file of its own that imports none of the source, transcribing by hand the two definitions named above.
+- Note: Written and run on 16 October 2026 by the review of the Lean proof; the check that every target polygon is bounded and nonempty was added after the review's PR review A. Kept in the packet's review/ with its README, which records what it printed.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n019-fitzharding-region-review` | replayed here | re-implemented, sharing named components | full: the property the nine Sq19.Capture.Region native facts certify (sq_ok and wall_ok of S3442, S3435 and S3438, and sq_ok, wall_ok and top_ok of S3435P0): each capture target, moved by the frame shift, inside its box of Hull.prob; and Wainwright's configuration in H | - |
+
+### `V-sq19-review-capture-link`
+
+**check_capture_link.py** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
+
+For Fitzharding's Lean proof of s(19) = 3 + 4√2/3 and one capture state (3435, 3438 or 3442): decides that the state's cells are the census cells of its roster shifted by -sigma (cells_ok), that the reflected roster is its census mask (mask_ok), that the base windows are at least pi/2 wide (width_checked), and that the pieces tile owner 12's window (tile_checked), reading the state's files from its release archive at their listed digests.
+
+- Source: [`packing/resources/web/fitzharding-n19-lean-2026-10-16/review/check_capture_link.py`](../../packing/resources/web/fitzharding-n19-lean-2026-10-16/review/check_capture_link.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-10-16-fitzharding-n19-lean.md`](../../docs/project/reviews/review-2026-10-16-fitzharding-n19-lean.md)
+- Independence: its authors read mathematics, proof-text, certificate-format, producer-code; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review lane of the), with its own prompt and code; authorship in common with the producer’s: system-family, The source's README says it was developed with Claude and Codex. Written by a Claude agent prompted separately, in a file of its own that imports none of the source.
+- Note: Written and run on 16 October 2026 by the review of the Lean proof; kept in the packet's review/ with its README, which records what it printed.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n019-fitzharding-capture-link-review` | replayed here | independently re-implemented after reading the producer’s code | full: the twelve census-to-capture link facts, cells_ok, mask_ok, width_checked and tile_checked of capture states S3435, S3438 and S3442, as predicates | - |
+
+### `V-sq19-review-endgame`
+
+**check_endgame.py** · Squares Project (Levy) · first-party · decides · Python · interval-certified
+
+For Fitzharding's Lean proof of s(19) = 3 + 4√2/3: decides, for each of the 4,096 sign and owner cases of the local endgame on the whole box H, the property the 2,304 Sq19.Endgame.Reduction native facts certify: the three Farkas multipliers are nonnegative, S1 > 0, and the endpoint margin's derivative along each direction prefix is nonnegative, with its own first-order Taylor models, fixed-point outward rounding at 2^-160 and forward-mode slopes.
+
+- Source: [`packing/resources/web/fitzharding-n19-lean-2026-10-16/review/check_endgame.py`](../../packing/resources/web/fitzharding-n19-lean-2026-10-16/review/check_endgame.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-10-16-fitzharding-n19-lean.md`](../../docs/project/reviews/review-2026-10-16-fitzharding-n19-lean.md)
+- Independence: its authors read mathematics, proof-text, certificate-format, producer-code; it shares RowsH, RowsAH, PhiExpr, Combine, ReductionCases; written by Claude (Anthropic) (the stage 4 mathematical review lane of the), with its own prompt; authorship in common with the producer’s: system-family, The source's README says it was developed with Claude and Codex. Written by a Claude agent prompted separately, in a file of its own that imports none of the source, transcribing by hand the row definitions of the five modules named above.
+- Note: Written and run on 16 October 2026 by the review of the Lean proof; kept in the packet's review/ with its README, which records what it printed.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n019-fitzharding-endgame-review` | replayed here | re-implemented, sharing named components | full: the property the 2,304 Sq19.Endgame.Reduction.Shard*.case* native facts certify, over all 4,096 sign and owner cases they and their reductions cover: on the whole box H, the three Farkas multipliers nonnegative, S1 > 0, and the endpoint margin's directional derivatives nonnegative | - |
+
+### `V-sq19-review-archive-scan`
+
+**scan_archives.py** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
+
+For Fitzharding's Lean proof of s(19) = 3 + 4√2/3 and one release archive: decides its SHA-256 against SHA256SUMS and every member's path and SHA-256 against expected/generated-sources.sha256, finds no member unlisted, counts the declarations and commands that would widen the trust boundary (axiom, sorry, implemented_by, extern, unsafe, opaque, skipKernelTC, elab, macro, syntax, #eval and the like), and lists the theorems proved by native_decide.
+
+- Source: [`packing/resources/web/fitzharding-n19-lean-2026-10-16/review/scan_archives.py`](../../packing/resources/web/fitzharding-n19-lean-2026-10-16/review/scan_archives.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-10-16-fitzharding-n19-lean.md`](../../docs/project/reviews/review-2026-10-16-fitzharding-n19-lean.md)
+- Independence: its authors read proof-text, certificate-format, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review lane of the), with its own prompt and code; authorship in common with the producer’s: system-family, The source's README says it was developed with Claude and Codex. Written by a Claude agent prompted separately, in a file of its own that imports none of the source.
+- Note: Written and run on 16 October 2026 by the review of the Lean proof on each of the five archives, downloaded to scratch and deleted; kept in the packet's review/ with its README, which records what it printed.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n019-fitzharding-archives-review` | replayed here | independently re-implemented | full: the five release archives (S3438, S3442, S3435, census and survivors; 2,112 members, 10,155,114,248 bytes of source): digests, members and the keyword scan; and the location of each of the 4,320 native facts of the axiom report | - |
+
+### `V-sq19-review-native-count`
+
+**count_native.py** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
+
+For Fitzharding's Lean proof of s(19) = 3 + 4√2/3: accounts for each of the 4,320 native_decide facts of the theorem's axiom report by where it is proved, in the Git tree, in a release archive (from scan_archives.py's outputs) or nowhere, and lists the native theorems built but not in the final axiom set.
+
+- Source: [`packing/resources/web/fitzharding-n19-lean-2026-10-16/review/count_native.py`](../../packing/resources/web/fitzharding-n19-lean-2026-10-16/review/count_native.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-10-16-fitzharding-n19-lean.md`](../../docs/project/reviews/review-2026-10-16-fitzharding-n19-lean.md)
+- Independence: its authors read proof-text, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the stage 4 mathematical review lane of the), with its own prompt and code; authorship in common with the producer’s: system-family, The source's README says it was developed with Claude and Codex. Written by a Claude agent prompted separately, in a file of its own that imports none of the source.
+- Note: Written and run on 16 October 2026 by the review of the Lean proof over the five archive scans; kept in the packet's review/ with its README, which records what it printed.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n019-fitzharding-archives-review` | replayed here | independently re-implemented | full: the five release archives (S3438, S3442, S3435, census and survivors; 2,112 members, 10,155,114,248 bytes of source): digests, members and the keyword scan; and the location of each of the 4,320 native facts of the axiom report | - |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

@@ -8,7 +8,7 @@ ours, which rest on someone else's argument, and how far each has been checked.
 
 ## The short version
 
-- **605** evidence records. **351** are formal; **344** of those were established here. **9** are samples, counted separately.
+- **611** evidence records. **357** are formal; **350** of those were established here. **9** are samples, counted separately.
 - **237** rest on an argument made elsewhere, of which **7** have been read by nobody here.
 - **1** formal record proves a theorem only under a hypothesis nothing here has replayed, and is verified as that implication alone: `E-k2m4-evand-bentz4-lean-build` (ValidTilt9).
 - **43** claim to be first established here. **14** make no novelty statement at all - not assessed, which is not the same as not novel.
@@ -627,14 +627,20 @@ results, it is a statement about what this repository has itself examined.
 | `E-bengreff-610-cover-report` | 0 | lower-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | `V-evand-zmx2`, `V-evand-zm-mixed-py` |
 | `E-wand125-continuous-n28-5745-report` | 0 | lower-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | `V-wand125-sqverify-continuous`, `V-wand125-contpose-check3` |
 | `E-evand-639-exact-sides-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
-| `E-n019-fitzharding-lean-report` | 0 | exact-value | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
+| `E-n019-fitzharding-lean-report` | 0 | exact-value | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | *none held* |
+| `E-n019-fitzharding-endpoint-review` | 0 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | previously-published | independent | full: the existence half: the nineteen squares of EndpointPacking.lean, their unit directions and containment, and the separation of all 171 pairs, in exact Q(sqrt 2), and their order and values against W-known-best-n019 | `V-sq19-review-endpoint` |
+| `E-n019-fitzharding-cover-census-review` | 0 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | previously-published | independent | full: the cover and the census: the 25 cells' tiling of the centre box, the symmetry tables, the capacity data, the native facts Sq19.Cover.orbit_check, Sq19.Assembly.CensusRoute.route_checked and captureIndex_checked as predicates, the 38 survivor images, and the coverage of every non-survivor mask by the 269 certified patterns | `V-sq19-review-cover-census` |
+| `E-n019-fitzharding-region-review` | 0 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | previously-published | shared components | full: the property the nine Sq19.Capture.Region native facts certify (sq_ok and wall_ok of S3442, S3435 and S3438, and sq_ok, wall_ok and top_ok of S3435P0): each capture target, moved by the frame shift, inside its box of Hull.prob; and Wainwright's configuration in H | `V-sq19-review-region` |
+| `E-n019-fitzharding-capture-link-review` | 0 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | previously-published | independent | full: the twelve census-to-capture link facts, cells_ok, mask_ok, width_checked and tile_checked of capture states S3435, S3438 and S3442, as predicates | `V-sq19-review-capture-link` |
+| `E-n019-fitzharding-endgame-review` | 0 | derived-structure | verified | strict inequalities only | here | - | previously-published | shared components | full: the property the 2,304 Sq19.Endgame.Reduction.Shard*.case* native facts certify, over all 4,096 sign and owner cases they and their reductions cover: on the whole box H, the three Farkas multipliers nonnegative, S1 > 0, and the endpoint margin's directional derivatives nonnegative | `V-sq19-review-endgame` |
+| `E-n019-fitzharding-archives-review` | 0 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | previously-published | independent | full: the five release archives (S3438, S3442, S3435, census and survivors; 2,112 members, 10,155,114,248 bytes of source): digests, members and the keyword scan; and the location of each of the 4,320 native facts of the axiom report | `V-sq19-review-archive-scan`, `V-sq19-review-native-count` |
 
 ## What the register rests on
 
-- **assurance**: numerically-checked 5, reported 241, verified 359
-- **method**: exact-algebraic 177, interval-certified 166, numerical-multiprecision 5, proof-assistant-checked 5, proof-audited 4, published-proof 7, reported 241
-- **novelty**: apparently-novel 43, common-knowledge 4, not assessed 14, previously-published 544
-- **relationship to the producer's code**: generator 5, independent-implementation 224, not-applicable 23, same-implementation 329, shared-components 18, unknown-historical 6
+- **assurance**: numerically-checked 5, reported 241, verified 365
+- **method**: exact-algebraic 182, interval-certified 167, numerical-multiprecision 5, proof-assistant-checked 5, proof-audited 4, published-proof 7, reported 241
+- **novelty**: apparently-novel 43, common-knowledge 4, not assessed 14, previously-published 550
+- **relationship to the producer's code**: generator 5, independent-implementation 228, not-applicable 23, same-implementation 329, shared-components 20, unknown-historical 6
 
 The `cases` column is how many frontier records cite each piece of evidence, and it is the reason to read this table rather than count records. Ranked below are the *formal* records only: a `reported` record cited across the frontier may be a shared catalogue and is labelled as such, which is the register working rather than risk. The risk is a verified claim resting on an argument nobody has examined.
 
