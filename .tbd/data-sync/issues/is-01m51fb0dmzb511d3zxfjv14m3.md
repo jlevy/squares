@@ -5,7 +5,7 @@ title: "Review: mathematical correctness of Fitzharding's s(19) Lean proof (#640
 kind: task
 status: in_progress
 priority: 1
-version: 5
+version: 6
 delegate: user-eb-review-640
 labels: []
 dependencies: []
@@ -13,7 +13,7 @@ parent_id: is-01m51e5sp1t03c20hqp7d3wajm
 hold: null
 hold_until: null
 created_at: 2026-10-16T04:25:48.211Z
-updated_at: 2026-10-16T10:19:16.908Z
+updated_at: 2026-10-16T10:45:47.701Z
 started_at: 2026-10-16T09:57:24.915Z
 ---
 Stage 4's review lane for #640 (think-a4x3): a mathematical-correctness review of Oscar Fitzharding's Lean proof that s(19) = 3 + 4 sqrt 2 / 3 (ofitzharding/sq19 at 34fb2b7bc39465db368c45cb48d4db58829d3051, tag v1.0.0), as campaign/result-import.md stage 4 ("Who reviews, and when") requires for every proof an import registers, and as T-154's two reviews did for his s(17) proof.
@@ -30,3 +30,5 @@ Stage 4's review lane for #640 (think-a4x3): a mathematical-correctness review o
 2026-10-16 10:09Z user-eb-review-640: worktree .claude/worktrees/review-640 on claude/intake-2026-10-16-review-640 from PR #651 head ef43dd02f. Read statement, assembly, cover, census route, survivors dispatch, capture Final/Hcap, endgame reduction interface. Counted 4,320 native facts (log list = axioms.txt list; 2,316 in retained modules: 2,304 endgame shards, 9 Region, orbit_check, 2 route). Next: independent spot-check programs (endpoint packing exact, orbit check, route, region/endgame sample), then the review doc.
 
 10:19Z user-eb-review-640: review programs written (uncommitted) in packet review/: check_endpoint.py (exact Q(sqrt2): PASS, squares match project witness W-known-best-n019 in order), check_cover_census.py (cells tile, perms, capacity data, orbit_check 177,100 sets, route, captureIndex, survivor images, census coverage from 269 pattern names: all PASS), check_region.py (9 Region native facts re-evaluated: PASS; Wainwright in H). Next: endgame sample, then review doc.
+
+10:45Z user-eb-review-640: after container restart, checkpoint pushed fe1fb0a7e (5 programs; endgame re-evaluation of all 4,096 cases PASS before restart). Next: capture-link for 3 states, then review doc; final push by 13:15Z.

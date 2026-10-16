@@ -5,7 +5,7 @@ title: "Import evand: exact algebraic sides for 22 current best-known packings (
 kind: task
 status: in_progress
 priority: 1
-version: 15
+version: 17
 delegate: user-eb-intake-1016
 labels:
   - result-import
@@ -17,7 +17,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-16T04:05:28.050Z
-updated_at: 2026-10-16T10:32:01.969Z
+updated_at: 2026-10-16T10:58:37.310Z
 started_at: 2026-10-16T04:05:36.125Z
 ---
 Stage 1 triage of jlevy/squares#639 (evand, Evan Daniel, "Exact algebraic sides for 22 current best-known packings (minimal polynomial, isolating interval, exact configuration): registration request", opened 2026-10-16T03:37:13Z, labelled `intake`, no comments when read at about 04:20Z). Intake pass 2026-10-16 (epic think-mdnn), read-only: nothing was run but exact sign evaluations of the source's polynomials at the record's rationals (seconds), and nothing of the source is retained yet.
@@ -93,3 +93,7 @@ Two questions, if you have a moment:
 2. At 207, does the unverified pair (73, 74) on your re-solve of the register's witness point at anything in that witness, or only at the re-solve?
 
 2026-10-16 ~09:55Z user-eb-intake-1016: final head ef43dd02f on PR #651, hosted CI all green (08:29Z). 2ba1d9b0a replaced the hand-added case citations (which tests/test_house_adoption.py refused at n = 102) by a deferral in packing/devtools/certificate-citation-deferrals.yaml naming THIS bead (think-phyb) for E-evand-639-verify-exact-replay, blocked on RP-3 and T-174's held houses: this bead must stay open (or the deferral gets a new owner) until a house adopts a T-193 side or the owner rules, or check_bead_tree fails the next change to a deferral record.
+
+2026-10-16 ~11:00Z user-eb-addr-642-651: #642 review A addressed at ae64ab461 (A1 fixed, A2 declined/handled by #651, A3 fixed in description, A4 fixed in the chain by a2167a03a); reply https://github.com/jlevy/squares/pull/642#pullrequestreview-5546756684. #651 in progress: merged ae64ab461 (1f954b060), T-193 held at V0/C0 pending think-7qxm, replay re-running with the fixed driver (A5/A6).
+
+2026-10-16 ~11:05Z user-eb-addr-642-651 (PR #651 review A, A2): the DRAFT import reply for #639 above is SUPERSEDED in its first paragraph. T-193 is now held at V0/C0 (reported) until the stage 4 review lane think-7qxm returns, so the reply must not say confirmed or V3/C3; check_requests --report shows #639 at 3 of 4 settled, closeable no. Replace the first paragraph with: '@evand, thank you for the batch. It is imported and registered as T-193 at sixteen counts, as reported (V0/C0). We replayed your own verify_exact.py on all 23 files (re-run, not re-implemented), and our review of that replay is under way; until it is done the result is reported and replayed, not confirmed.' In 'What we did', take the CPU time and the irreducibility line from the refreshed receipt at PR #651's head (every polynomial squarefree and irreducible: one factor of multiplicity 1). Render from main with check_requests --draft 639 as before; it states V0/C0 until the review's exit raises the rung, and a follow-up reply then reports the raise.
