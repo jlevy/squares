@@ -5,7 +5,7 @@ title: "Import evand: exact algebraic sides for 22 current best-known packings (
 kind: task
 status: in_progress
 priority: 1
-version: 11
+version: 13
 delegate: user-eb-intake-1016
 labels:
   - result-import
@@ -16,7 +16,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-16T04:05:28.050Z
-updated_at: 2026-10-16T07:10:05.640Z
+updated_at: 2026-10-16T08:04:17.001Z
 started_at: 2026-10-16T04:05:36.125Z
 ---
 Stage 1 triage of jlevy/squares#639 (evand, Evan Daniel, "Exact algebraic sides for 22 current best-known packings (minimal polynomial, isolating interval, exact configuration): registration request", opened 2026-10-16T03:37:13Z, labelled `intake`, no comments when read at about 04:20Z). Intake pass 2026-10-16 (epic think-mdnn), read-only: nothing was run but exact sign evaluations of the source's polynomials at the record's rationals (seconds), and nothing of the source is retained yet.
@@ -76,3 +76,17 @@ blocked_on: none
 2026-10-16 ~06:45Z user-eb-intake-1016: stage 2 done and stage 3 ledger run on claude/intake-2026-10-16-records-639-640 (stacked on #642's 71f6a413e), head 24415a012, pushed. Packet packing/resources/web/evand-exact-cur-2026-10-16 (acquire_source --check PACKET_MATCHES_ITS_CONTRACT; 19 forms retained as upstream gzip, 204/263/267/297 pinned by size+SHA-256; verify_exact.py pinned identical_to the ad86d42 copy). Ledger packing/campaign/issue-intake/upper-bounds-20261016 (read_at_main e2e018f3): #639 recorded at the triage's 16 counts; ties at 51 (T-126) and 70/153/207 (T-174), decided exactly by review/exact_sides.py; not recorded at 172/263/297 (PR #574 rationals walked as a report there). Agrees with the triage. Next: register entry (T-NNN last), bibliography key, #640 entry, views, replay.
 
 2026-10-16 ~07:15Z user-eb-intake-1016: draft PR https://github.com/jlevy/squares/pull/651 (base claude/ecstatic-edison-8en33t-intake-1016, head f5c4105cc on claude/intake-2026-10-16-records-639-640). a2167a03a registers T-193 (#639, 16 counts, draft S2) and T-194 (#640); f5c4105cc adds the papers' no-change records and tests/test_evand_exact_cur.py. Replay (think-g59l) running in scratch with a resumable cache. Next: replay evidence, re-pin, site edition last, PR body, announcement, reply drafts.
+
+2026-10-16 ~08:12Z user-eb-intake-1016: stages 2-4 done on PR #651 (head 523d8c14f, base #642's 71f6a413e). T-193 = #639 at the 16 counts the 16 Oct ledger records, V3/C3 after the replay (think-g59l), draft S2; evidence E-evand-639-exact-sides-report and E-evand-639-verify-exact-replay, cited also in the 16 case records' evidence lists (no lane/status change; check_certificate_citations requires it); regularizations of T-174 (12 counts) or T-186 (175, 204, 232, 302), identity basis source-claim; bibliography [Daniel exact current records 2026-10-16] credit 'Daniel after Xu, Chaoweeraprasit, Ostashev, Couzo, PingYou Ltd, Gupta, Polkovskyi, Levy'. Ledger verdicts: recorded 88, 102, 123, 126, 175, 199, 204, 232, 258, 259, 266, 267, 292, 295, 301, 302; ties 51 (T-126), 70, 153, 207 (T-174, exact by resultant); not recorded 172, 263, 297 (PR #574 rationals smaller by ~1e-62). #639's request entry maps exact-sides-below-record to T-193. Verdict comment drafted by devtools.intake_comments from packing/campaign/issue-intake/upper-bounds-20261016/comments.yaml (records_pr #651), not posted; it names no T-NNN and may go out by stage 7's verdict-comment rule. Import reply drafted below, posts after #651 and #642 merge. Can close only after the reply is posted (answer bead).
+
+2026-10-16 user-eb-intake-1016: DRAFT import reply for #639 (not posted; stage 7 posts it after PR #651 and #642 merge, rendered from main with check_requests --draft 639, the id and rungs checked against main and the deployed site first; it replaces the triage acknowledgement above, which was never posted). The report-order verdict comment is drafted separately by devtools.intake_comments from packing/campaign/issue-intake/upper-bounds-20261016/comments.yaml; it names no id and may go out first, by stage 7's rule.
+
+@evand, thank you for the batch. It is imported and registered as T-193 at sixteen counts, confirmed: V3/C3, reproduced with your own checker (re-run, not re-implemented), not yet reviewed.
+
+What we did: retained search/exact/cur/ at 7d1407a in a source packet, with 19 of the 23 data files kept as published and the four largest (204, 263, 267, 297) pinned by size and SHA-256, and your verify_exact.py pinned against the identical copy we already hold. We then ran verify_exact.py, read first and unchanged, from that copy on all 23 files: 23 of 23 VALID with the statements your data/verify.txt prints (about 21 CPU-minutes over two processes), and 76 of 76 mutated controls refused, four at each of the 19 retained forms (a square moved 1e-6 through the wall it touches, the side raised by 1e-6 in K, the side's interval moved below its root, a duplicate square). SymPy factors every p as irreducible over Q, which settles the minimality your issue asserts.
+
+By the report-order rule (the owner's, of 14 October), T-193 records 88, 102, 123, 126, 175, 199, 204, 232, 258, 259, 266, 267, 292, 295, 301 and 302, each below every earlier report there, credited to you as an exact form of each packing after its finder. At 51 your side is the (16 + 5√2)/3 the record already holds from #432; at 70, 153 and 207 it is exactly #574's algebraic side (the resultant of #574's witness is your p), a tie with the earlier report, and your configurations and checker are now a second route for the owner's open decision on those three; at 172, 263 and 297 #574's rational certificates are below your sides by about 1e-62, so those three are not recorded. The case pages keep their houses until adoption, which is the owner's, with #574's.
+
+Two questions, if you have a moment:
+1. At 172, 263 and 297, S* is about 1e-62 above a valid packing of the same contact graph. The data files pin free coordinates (14 at 172); is S* there the solve with those pins rather than the least side of the packing?
+2. At 207, does the unverified pair (73, 74) on your re-solve of the register's witness point at anything in that witness, or only at the re-solve?
