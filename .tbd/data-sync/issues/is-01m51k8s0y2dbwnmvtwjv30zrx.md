@@ -5,7 +5,7 @@ title: Review and land the nine-count regularization batch 3a
 kind: task
 status: in_progress
 priority: 1
-version: 19
+version: 23
 delegate: user-eb-land-644
 labels: []
 dependencies: []
@@ -16,7 +16,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-16T05:34:29.405Z
-updated_at: 2026-10-16T18:14:03.140Z
+updated_at: 2026-10-16T19:57:21.743Z
 started_at: 2026-10-16T05:34:41.706Z
 ---
 
@@ -53,3 +53,11 @@ Release completion must include both infographic families and every advertised S
 2026-10-16T17:59Z user-eb-addr-644: pushed e576b8ebe (rungs --check), 625af9ec0 (E1 run check, E3 outcomes, default-drawings.json), 123fa2b64 (re-pin 625af9ec), 145848e0e (D1 evidence evand-addr644-1016 + selection-3a-d1, README D1/D5/E1/E3), ebe506910 (D6 policy clause), 6fee7bfc8 (papers' no-change record names regularize_evand.py; hosted validate at ebe506910 failed only on that; renders byte-identical, release impact passes locally). D1: all three views reproduced byte for byte; selection chooses Daniel at 156/176/271; no admitted view changed. main moved to 26d8bb335 (#651 merged 17:49Z with v0.7.15): #644 now conflicts (dirty) in release.py + 5 claim docs, so no pull_request CI or deep gate runs until the coordinator re-cuts; deep-gate label added 17:50:58Z; dispatch refused 403. Beads opened: think-fhz2 (D2), think-wh7r (E2), both under think-obbm. Running whole-layer --verify-atlas locally; then records tier, PR body, replies.
 
 2026-10-16T18:35Z user-eb-addr-644 DONE: reviews D and E addressed at head 6fee7bfc8 (replies pullrequestreview-5551912248 D, -5551912387 E); PR body updated. 9 fixed (D1, D3-D8, E1, E3), 2 deferred: D2 -> think-fhz2 (deep gate: label on, but #651's merge at 17:49Z made #644 conflict with main, so no pull_request run or deep gate can start; dispatch 403), E2 -> think-wh7r. D1: driver evand-addr644-1016 (916.52 CPU-s) reproduces 156/176/271 byte for byte; selection chooses Daniel at all three; no admitted view changed. Local at 6fee7bfc8: --records 51/52 (site_urls history vs moved origin/main only; passes vs e2e018f32), step-7 pytest 228 passed, --verify-atlas whole layer passed 1,490 s. Hosted at ebe506910: 29 ok, validate failed on release impact (fixed 6fee7bfc8). Not marked ready. Coordinator: re-cut over main (v0.7.15 is #651's) then watch the deep gate; #653 must keep this branch's _RUN3A.
+
+2026-10-16T19:xxZ user-eb-addr-644b (review F of #644): pushed 0706be335 (F1+F5: settlements held by retained evidence; --retain-runs wrote 7 blocks under packing/cases/regularized_drawings/settled-runs/; coverage check) and 517aad0bc (F2: rungs --check reads report.json.gz, fails closed). Next: README/guide (F2, F3), release record, trial merges of #653/#654/#656/#657, PR body (F4), dispositions.
+
+2026-10-16 user-eb-addr-644b: review F of #644 addressed, head 75cf441b9 (0706be335 F1/F5, 517aad0bc F2, 6079926b7 F2/F3 docs, 75cf441b9 release no-change reason; F4 in PR body). Dispositions posted: https://github.com/jlevy/squares/pull/644#pullrequestreview-5552474142. 5/0/0 fixed/deferred/declined. Trial merges of #653/#654/#656/#657 with 75cf441b9 pass the settlement-run rules (before: #657 failed at 272). Records tier 51/52 (site_urls vs origin/main only, known #651 conflict). Hosted: only Branch mergeability 38951569348 (dirty). think-fhz2 still blocking at the integrator's final head.
+
+2026-10-16 19:42Z user-eb-stack: handover. The owner handed the regularization stack (#644 -> #653 -> #654 -> #656 -> #657) to lane S as user-eb-stack; claim skipped (held by user-eb-land-644), carrying on per the brief. Phase 1: review G (G1, G3, G4, G5) on #644 at 75cf441b9, then cascade up the stack.
+
+19:57Z user-eb-stack: #644 at 57fd1c04c (G1/G3/G5 in 2f31507c3, papers' record 77b815e42, retain_runs test generalized 57fd1c04c). Cascade: #653 merged 644 at 882b2e049, re-pin 5260b0278, pushed; state 71/232/14/4/3, step-7 260 passed. Next #654.

@@ -5,12 +5,12 @@ title: Merge the 16 October PRs once reviewed (owner's word, 16 Oct afternoon)
 kind: task
 status: open
 priority: 2
-version: 9
+version: 17
 labels: []
 dependencies: []
 parent_id: is-01m51hyxstsa9ptekd2ss26ksn
 created_at: 2026-10-16T17:14:04.698Z
-updated_at: 2026-10-16T18:50:19.627Z
+updated_at: 2026-10-16T20:16:46.292Z
 ---
 Owner: 'If everything is reviewed, you can merge it.' and 'Follow up everything you can, and once things are reviewed, be sure you merge.' Merge order and gate per review-and-merge-prs; release re-cuts after each merge.
 
@@ -31,3 +31,19 @@ user-eb-integrator: PR #647 ready to merge at 68ce40481a327568c367bf0cbd6a8f48cb
 user-eb-integrator: PR #655: merged main 7b34cd5bb in 1efce164b (no conflicts; diff vs main stays the same 11 files, identical change lines), cut site v0.7.16 in 565dea9d3 (README, release.py, 5 claim docs, explainer no-change record); #645 also holds v0.7.16. Pushed; deep-gate label added. Next: records tier, CI, description.
 
 user-eb-integrator: PR #655 at 565dea9d3: records tier exit 0 (125 s), release_pin/check_release_impact ok, release tests 40 passed; description updated (Update from main for merge, v0.7.16 row, #645 collision). Waiting on Packing validation 38949883721, Certificate page 38949883964, Deferred checkpoint 38949927603.
+
+user-eb-integrator: PR #655: hosted at 565dea9d3 had two flakes (frontend setup-uv manifest timeout job 117138845290; Certificate page prepare render-twice style-attr instability job 117138870826); re-triggered once with empty commit b835bea63. Waiting on CI.
+
+user-eb-integrator: PR #655 ready to merge at b835bea632f004830e9e325d95fb6718ca758517 (site v0.7.16; #645 also holds v0.7.16 and must re-cut if it merges after). CI: Packing validation 38951274753, Certificate page 38951274861, Deferred checkpoint 38951274874, Branch mergeability 38951268935 all success; mergeable clean; still draft. Description updated.
+
+user-eb-integrator: PR #648: merged main 8069b12e2 in 815f3c67e (map rows kept both, SYNOPSIS regenerated, cut files from main), re-cut site v0.7.17 in 75d272651; pushed; deep-gate label added. Next: records tier, description (B1), dispositions review, CI.
+
+user-eb-integrator: PR #648 at 75d272651: records tier exit 0 (124 s), release checks ok, 40 release tests passed; description updated (B1 fixed, update section, v0.7.17); B dispositions posted as review 5552768422. Waiting on CI.
+
+user-eb-integrator: PR #648 ready to merge at 75d27265132419a57c45cb0fc009317b8fc3b9b2 (site v0.7.17). CI: Packing validation 38955634631, Certificate page 38955634059, Deferred checkpoint 38955742135, Branch mergeability 38955629316 success. #641 (68cdbc614) merged after: disjoint release.py hunk, PR still clean, trial merge passes release checks. Still draft.
+
+user-eb-integrator: PR #648 B1: session GitHub proxy wraps any URL into packing/resources/web/ in backticks (probed: blob, tree, reference-style all wrapped; docs/ path not), which is how B1's broken link arose; description now names the README path as code; dispositions review 5552768422 says so. #648 ready at 75d272651, clean.
+
+user-eb-integrator: #652: merged main 96510ae7a in 1cc0dbbe3, re-cut v0.7.18 in b868ba4e5, pushed, deep-gate label. Next: #649 merge #652's head, cut v0.7.19.
+
+user-eb-integrator: #649: merged #652 b868ba4e5 in 2d57609b3, re-pin 3d4ada4c7, cut v0.7.19 32634cfca, pushed. Records tier: 51/52, only synopsis step fails: check_release_impact vs origin/main (v0.7.17) needs one successor, finds v0.7.18+v0.7.19; passes vs #652's head. So #649's hosted packing-required will be red until #652 merges and #649 merges main.

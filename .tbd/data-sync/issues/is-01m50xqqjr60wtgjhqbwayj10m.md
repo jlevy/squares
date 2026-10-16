@@ -5,7 +5,7 @@ title: "Regularize 3c: 175, 232, 264 (re-housed by #598)"
 kind: task
 status: in_progress
 priority: 1
-version: 12
+version: 14
 delegate: user-eb-reg-3b3c
 labels:
   - regularization
@@ -14,7 +14,7 @@ parent_id: is-01m50wdrbfnwsq05w150az5z88
 hold: null
 hold_until: null
 created_at: 2026-10-15T23:18:10.776Z
-updated_at: 2026-10-16T12:18:23.644Z
+updated_at: 2026-10-16T20:00:11.155Z
 started_at: 2026-10-16T05:13:42.084Z
 ---
 
@@ -39,3 +39,7 @@ started_at: 2026-10-16T05:13:42.084Z
 2026-10-16T12:17Z user-eb-reg-3b3c: hosted CI at #654 head 9edc15a5c: 30 checks pass, 29 skipped. 3c worktree removed.
 
 2026-10-16 ~12:20Z coordinator: PR #654 MERGE-READY at 9edc15a5c (Review A 0/0/0/3 'mergeable as is'; A1, A2 fixed; A3 deferred to think-j9r6; CI green). Stacks on #653.
+
+2026-10-16 19:57Z user-eb-stack: handover. The owner handed the regularization stack (#644 -> #653 -> #654 -> #656 -> #657) to lane S (user-eb-stack); claim skipped (held by its earlier lane), carrying on per the brief.
+
+20:00Z user-eb-stack: #654 merged #653's head 5260b0278 at d2f2781ed, re-pin e2940d406, pushed; state 74/232/14/4/0, step-7 261 passed. Next #656.

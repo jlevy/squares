@@ -5,7 +5,7 @@ title: "Regularize 3a: 176 first, then 105, 129, 146, 156, 204, 271, 272, 303 (r
 kind: task
 status: in_progress
 priority: 1
-version: 12
+version: 14
 delegate: user-eb-land-644
 labels:
   - regularization
@@ -14,7 +14,7 @@ parent_id: is-01m50wdrbfnwsq05w150az5z88
 hold: null
 hold_until: null
 created_at: 2026-10-15T23:18:07.183Z
-updated_at: 2026-10-16T18:14:04.406Z
+updated_at: 2026-10-16T19:42:23.953Z
 started_at: 2026-10-16T02:53:15.554Z
 ---
 
@@ -59,3 +59,7 @@ then render_regularized_atlas --update, default_drawings --update, regularized_d
 2026-10-16T12:13Z user-eb-land-644: the producer's original run dirs were not recoverable; reproduction runs (grid-slack-3a-rerun-deg05/deg1/deg5/deg5b-1016, evand-regularize-3a-rerun-1016 partial, evand-regularize-3a-rerun-s-1016) retained on #644 at 5e5c2cd96 in packing/cases/regularized_drawings/think-la7h-2026-10-16/; they reproduce every covered decision; the driver did not re-run 156/176/271/303.
 
 2026-10-16T18:35Z user-eb-addr-644: review D1 closed C1 — the driver re-ran 156, 176 and 271 (evand-addr644-1016, retained in packing/cases/regularized_drawings/think-la7h-2026-10-16/) and reproduces each drawn view byte for byte; all nine counts are now reproduced on both generators. #644 head 6fee7bfc8.
+
+2026-10-16 user-eb-addr-644b: review F of #644 addressed at 75cf441b9; settlements now held by retained evidence (packing/cases/regularized_drawings/settled-runs/ holds 7 index blocks via default_drawings --retain-runs); rungs --check reads retained reports. See think-obbm.
+
+2026-10-16 19:42Z user-eb-stack: handover. The owner handed the regularization stack (#644 -> #653 -> #654 -> #656 -> #657) to lane S as user-eb-stack; claim skipped (held by user-eb-land-644), carrying on per the brief. Phase 1: review G (G1, G3, G4, G5) on #644 at 75cf441b9, then cascade up the stack.

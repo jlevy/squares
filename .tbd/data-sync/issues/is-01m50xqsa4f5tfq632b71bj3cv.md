@@ -5,7 +5,7 @@ title: "Regularization leftovers: grid-slack 1 and 5 deg on 102, 236, 258, 263, 
 kind: task
 status: in_progress
 priority: 1
-version: 14
+version: 16
 delegate: user-eb-reg-leftovers
 labels:
   - regularization
@@ -14,7 +14,7 @@ parent_id: is-01m50wdrbfnwsq05w150az5z88
 hold: null
 hold_until: null
 created_at: 2026-10-15T23:18:12.547Z
-updated_at: 2026-10-16T13:04:32.591Z
+updated_at: 2026-10-16T20:07:44.210Z
 started_at: 2026-10-16T05:22:35.967Z
 ---
 
@@ -70,3 +70,7 @@ started_at: 2026-10-16T05:22:35.967Z
 2026-10-16T13:04Z user-eb-reg-leftovers: review A of #656 addressed at 6ecb4c810 (merge of 3c 9edc15a5c + A1 la7h evidence dir in _README_3A + A3 README names the 307 probe and timing file; A2 body fixed; A4 deferred to think-e533; re-pin 4013ba06). COMMENT reply posted.
 
 2026-10-16 ~13:05Z coordinator: PR #656 MERGE-READY at 6ecb4c810 pending hosted CI on that head (Review A 0/0/0/5 'layer correct'; A1-A3, A5 fixed, A4 deferred to think-e533). Stacks on #654.
+
+2026-10-16 19:57Z user-eb-stack: handover. The owner handed the regularization stack (#644 -> #653 -> #654 -> #656 -> #657) to lane S (user-eb-stack); claim skipped (held by its earlier lane), carrying on per the brief.
+
+20:07Z user-eb-stack: #656 merged #654's head e2940d406 at 36b56127e; review G2 of #644 fixed at e0dcf511b (orphaned_copies check in --check-state, five settled-runs copies deleted); no-change record corrected b83170e20; re-pin c93ae8e8d; pushed. State 74/232/14/4/0, step-7 262 passed. Next #657 (think-r3cl).

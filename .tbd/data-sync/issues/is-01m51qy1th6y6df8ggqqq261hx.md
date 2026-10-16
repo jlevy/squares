@@ -5,7 +5,7 @@ title: "Records: T-185 to T-190 to V3/C3 after the 16 October review, adopt 15 h
 kind: task
 status: in_progress
 priority: 1
-version: 12
+version: 13
 delegate: user-eb-records-185-190
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m51hyxstsa9ptekd2ss26ksn
 hold: null
 hold_until: null
 created_at: 2026-10-16T06:56:00.849Z
-updated_at: 2026-10-16T13:56:36.338Z
+updated_at: 2026-10-16T19:57:47.052Z
 started_at: 2026-10-16T06:56:10.518Z
 ---
 Stage 4 exit (records lane) for T-185 to T-190, after the review of 16 October (think-tdna; PR #648; docs/project/reviews/review-2026-10-16-upper-bound-imports-506-607.md): all six accepted for finite feasibility, each supports V3/C3 with its confirming evidence entry (E-couzo-506-n175-exact-feasibility, E-mishapolk-70a033f-exact-feasibility, E-evand-606-n146-exact-feasibility, E-couzo-487b058-exact-feasibility, E-couzo-607-exact-feasibility, E-couzo-4e4c8ce-n237-exact-feasibility); findings RT-1 to RT-13, none blocking or major. Write the confirming evidence, map the review, derive the rungs, set the reviewed significance (T-185 S1->S2, T-188 S1->S2, T-189 S2->S3, T-190 S1->S2), fix RT-1 to RT-4, and adopt the houses the review's Adoption per Count names: T-186 at 129, 154, 156, 175, 176, 204, 232, 264, 271, 302, 303, 304; T-187 at 146; T-188 at 211; T-190 at 237 (15 counts). By the intake step of #641, every re-housed count is regularized in the same PR (both strong generators on the new witnesses, select, admit) or allowlisted with an open bead. Stacked on the top of the regularization stack (#644 -> 3b -> 3c -> leftovers).
@@ -40,3 +40,5 @@ Stage 4 exit (records lane) for T-185 to T-190, after the review of 16 October (
 2026-10-16 13:43Z user-eb-records-185-190: STOPPED at head 7b91fb238 (pushed, clean). Review B: B1 FIXED (sweeps sparse checkout + 4 house packets, 4dcac3d03); B2 FIXED for bound-citations (+211 test pin), X049 family census, contact-shade census (ee644ee38), translation-escape screen (+SCREEN_FINDINGS tripwires in validate.py, +176 in the test's unstable list), PR 574 algebraic claim record, closed form at 302, rigidity blocks at 10 records (7b91fb238); B2 NOT FIXED: poster composites (not redrawn; suite-a's test_known_best_atlas poster tests fail on them: 211 caption 14.99356 vs 14.99355, credits 26 vs 28; needs the infographics successor, a merge-time step); B3 FIXED (211 to PENDING_ALLOWED under think-r3cl); B5 FIXED (176 text); B4 the coordinator's. CI at ee644ee38: suite-d (rigidity tests, now fixed locally: 23 pass), suite-a (poster tests), validate (rigidity + release impact, both fixed in 7b91fb238) failed; at 7b91fb238 CI just started, not yet observed. Local: records tier 0 failures at 733794e33; 330 focused tests pass.
 
 2026-10-16 13:57Z user-eb-records-185-190: head 5d5eb2dec pushed (fast-forward over 7b91fb238). bda885404: build_composite_figure_data --update (10 rigidity scope sentences copied from the rewritten case blocks; no value, rung, house or drawing), for hosted sweeps' composite-figure check and suite D's test_current_prospective_figure_is_identical_to_the_retained_record; re-pin 5d5eb2dec. Local: 59 focused tests pass (test_rigidity_status, test_composite_figure_displays, test_frontier_rigidity_assessment); records tier 0 failures (124 s). Left red by instruction: suite-a's poster caption and credit tests (infographics cut, think-nv87). Hosted CI at 5d5eb2dec not yet observed.
+
+2026-10-16 19:57Z user-eb-stack: handover. The owner handed the regularization stack (#644 -> #653 -> #654 -> #656 -> #657) to lane S (user-eb-stack); claim skipped (held by its earlier lane), carrying on per the brief.

@@ -5,7 +5,7 @@ title: Review verification and confirmation levels for formal proof reports
 kind: task
 status: in_progress
 priority: 1
-version: 10
+version: 11
 spec_path: docs/project/specs/active/plan-2026-10-15-formal-proof-verification-rubric.md
 delegate: user-eb-addr-645
 labels: []
@@ -15,7 +15,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-16T05:11:10.447Z
-updated_at: 2026-10-16T18:49:20.741Z
+updated_at: 2026-10-16T20:17:20.098Z
 started_at: 2026-10-16T05:12:02.749Z
 ---
 User explicitly requests a separate Astra-led PR auditing V0 and higher verification levels for credible formal proof reports. Distinguish inspected complete formalizations and successful proof-assistant runs from independent open reproduction and confirmation. Compare current rubric, evidence validators and actual formal reports; propose evidence-based consistent criteria and update implementation/docs/records only where justified, with per-result evidence and no automatic rung inflation from credibility alone. Preserve independent confirmation requirements and existing held assurance experiments. Keep this separate from News UI fixes and coordinate release metadata.
@@ -31,3 +31,5 @@ Draft PR https://github.com/jlevy/squares/pull/645 contains source cd06fe728. Se
 2026-10-16 user-eb-addr-645: C3 3ab63b11f (n17 ceiling 550k), C5 29513905e, C6 papers 15ef1c27e, re-pin 6f379df6e, site cut v0.7.16 d5f16959c (main took v0.7.15 via #651). Next: C12 deferral bead, records tier, CI watch, PR body, dispositions.
 
 2026-10-16 user-eb-addr-645: reviews C and D addressed on #645, head 1264010472 (CI green: Packing validation 38948810041, Certificate page 38948810109, Branch mergeability 38948803441). Dispositions posted: C https://github.com/jlevy/squares/pull/645#pullrequestreview-5552298675 , D https://github.com/jlevy/squares/pull/645#pullrequestreview-5552298818 . 20 fixed / 1 deferred (C12 -> think-odys, waits on #645 and #658) / 1 declined (C14). Site edition cut as v0.7.16 (main holds v0.7.15); coordinator re-cuts at merge. Draft flag could not be cleared over REST. Follow-up correctness round due.
+
+2026-10-16 user-eb-addr-645: review E (round 2) addressed on #645 at 19e540d02: E1 68b6cb492, E2 51ffd8b27+176e5a27d, E3 17d61e1d8, E4 8ba12884d, E5 482b67c6b, E6 b33d78a86, E7 19e540d02; 7/0/0; C14 decline kept on a corrected premise. Reply https://github.com/jlevy/squares/pull/645#pullrequestreview-5553208961 . No main merge, re-cut or re-pin (integrator). PR dirty against main 8069b12e2, so Packing validation does not run; Branch mergeability 38959792477 failed on the conflict.
