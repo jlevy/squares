@@ -5,7 +5,7 @@ title: "Regularization leftovers: grid-slack 1 and 5 deg on 102, 236, 258, 263, 
 kind: task
 status: in_progress
 priority: 1
-version: 12
+version: 14
 delegate: user-eb-reg-leftovers
 labels:
   - regularization
@@ -14,7 +14,7 @@ parent_id: is-01m50wdrbfnwsq05w150az5z88
 hold: null
 hold_until: null
 created_at: 2026-10-15T23:18:12.547Z
-updated_at: 2026-10-16T12:46:48.942Z
+updated_at: 2026-10-16T13:04:32.591Z
 started_at: 2026-10-16T05:22:35.967Z
 ---
 
@@ -66,3 +66,7 @@ started_at: 2026-10-16T05:22:35.967Z
 2026-10-16T12:44Z user-eb-reg-leftovers: --verify-atlas n=211..324 passed (1,350 s); with n=1..210 (570 s) the whole atlas verifies at 7e44e4bdb. Lane D done; final report to the coordinator.
 
 2026-10-16 ~12:50Z coordinator user-eb: PR #656 green at 7e44e4bdb; the ten owed counts decided on fresh runs (nothing admitted; SETTLED names the four new runs); evidence in packing/cases/regularized_drawings/think-0ut1-2026-10-16/; --verify-atlas passed in two parts. Review of #656 (with #644's final head) running. Closes at #656's merge.
+
+2026-10-16T13:04Z user-eb-reg-leftovers: review A of #656 addressed at 6ecb4c810 (merge of 3c 9edc15a5c + A1 la7h evidence dir in _README_3A + A3 README names the 307 probe and timing file; A2 body fixed; A4 deferred to think-e533; re-pin 4013ba06). COMMENT reply posted.
+
+2026-10-16 ~13:05Z coordinator: PR #656 MERGE-READY at 6ecb4c810 pending hosted CI on that head (Review A 0/0/0/5 'layer correct'; A1-A3, A5 fixed, A4 deferred to think-e533). Stacks on #654.
