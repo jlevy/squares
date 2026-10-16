@@ -5,7 +5,7 @@ title: "Post the stage-7 replies held for stack #632"
 kind: task
 status: in_progress
 priority: 1
-version: 6
+version: 7
 delegate: ecstatic-edison-replies-stack
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m50gnwbxd5kxbynyx9nd162p
 hold: null
 hold_until: null
 created_at: 2026-10-16T01:20:02.999Z
-updated_at: 2026-10-16T02:46:43.167Z
+updated_at: 2026-10-16T03:53:50.150Z
 started_at: 2026-10-16T01:20:05.762Z
 ---
 Stack #632 (#627, #628, #631) merged into main at bbc12b617. Post the held stage-7 replies on #413 #476 #506 #533 #561 #573 #575 #583 #586 #593 #594 #606 #607 #610 #613 #622 (PR) #624 after the Pages deployment for bbc12b617 verifies; record them in result-requests.yaml on claude/ecstatic-edison-8en33t-replies-stack; one draft PR. Not on #574 #570 #557 #565 #542 #543.
@@ -55,3 +55,9 @@ Record branch claude/ecstatic-edison-8en33t-replies-stack from origin/main 22c0e
 2026-10-16 02:27Z-02:45Z ecstatic-edison-replies-stack, resumed after a container restart. The earlier lane had pushed 9570e2281 (merge of ee9cec6e + restatement) and left an unpushed merge of 3685616d (a532f0cc9, 3823efaff) in worktree agent-adfe00968d9eccae7; redone here independently: merge 3f8915651 has the identical tree 71374646 and restatement dd40d7de5 the identical release.py text. Read all 15 posted comments back from GitHub: each URL/kind/reported id, rung, status is recorded on the branch; #561 #575 #583 #586 closed completed 01:38:56Z-01:39:03Z. #476, #606: not posted, --report on main 3685616d reply due: no for both; T-134 still V3/C3 and the house at 267 (no case page at its six counts changed in the stack); T-187 unchanged V0/C0; --draft 476/606 repeat the earlier replies' state. Main since the stack (bbc12b617..3685616df) touches none of the 17 issues' entries and no frontier file. Survey rendered at link revision 3685616df with main's and the branch's record: 42 files byte-identical. At dd40d7de5: check_requests gate exit 0; --report reply due only on #557 #565 #570 #574 (deliberately not posted); --github 0 differences; check_release_impact --baseline-ref origin/main ok; release_pin --check ok (pin e35725f07262); pytest 110 passed; packing-validate --records exit 0, 51/109 steps, 69 s. Pushed dd40d7de5 to claude/ecstatic-edison-8en33t-replies-stack; #637 description updated (still draft). Hosted CI running.
 
 02:48Z: hosted CI at dd40d7de5 green on the first run: Packing validation 38841156272 success (02:34:50Z-02:45:59Z, packing-required pass), Certificate page 38841156219 success (pages-required pass), merges-into-base pass; 31 pass, 28 skipped, 0 failed, no re-run. #637 still draft, MERGEABLE/CLEAN; description updated with cost, per-issue rows and hosted results. Bead stays open until #637 merges.
+
+2026-10-16 03:10Z-04:10Z ecstatic-edison-replies-stack, addressing review A of #637 (https://github.com/jlevy/squares/pull/637#pullrequestreview-5542558537, at dd40d7de5) under think-xhft (children think-mh8g A1, think-5sh0 A2, think-38xt A3, think-bpik A4, think-5reb A5, think-7j59 A6, think-qgti A7). main moved to 4e8c8987f (#638, news/site; no record or frontier change). Drafts --draft 596/506/561/573/575/583 from main 3685616df and again from 4e8c8987f: byte-identical. check_published_site --commit 4e8c8987f97a2edfab0e02f4bf4e51fb11b92aa3 (Certificate page run 38844993807): exit 0, 4519 of 4519 (a first run against 3685616d overlapped that deployment and failed one shared-asset check for that reason).
+
+Posted: #596 final reply https://github.com/jlevy/squares/issues/596#issuecomment-6207611222 (03:45:51Z; the row at 370 superseded by Couzo 487b058, 2.52e-4 below; 365 and 460 current), #596 closed completed 03:45:54Z. Edited in place 03:46:05Z-03:46:09Z, each with a visible Edited line: #506 6206057024, #561 6206059300, #575 6206059896, #583 6206060386 (A2: supersession attribution and dates per main's source-coverage superseded_by chain), #573 6206056718 (A6: "at least").
+
+Commits on claude/ecstatic-edison-8en33t-replies-stack: 66e8be69e (record: #596 reply and closing, edit notes on #506 #561 #573 #575 #583, #583 not_registered, holds on #570 #574, #575 reopen held by think-qag2, outdated/corrects on #506 and #593), ba44d77a4 (merge of main 4e8c8987f), 5650d5c45 (release: survey no-change restated over 4e8c8987, render byte-identical in 42 files). Holds noted on think-rfce (#570) and think-9v2k (#574). New bead think-qag2 (blocked on the owner) holds #575's reopen at 176. At 5650d5c45: gate exit 0; --report due only #557 #565 #570 #574; --github 3 differences, all new since this pass (issues #639 and #640, BuddenPing's #622 comment 6207551818 at 03:40Z answering the AI-assistance question) and left for the next intake pass; check_release_impact ok; release_pin --check ok (e35725f07262); pytest 110 passed; packing-validate --records exit 0, 51/109 steps, 78 s. Pushed 5650d5c45; #637 description updated (still draft).
