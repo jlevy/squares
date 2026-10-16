@@ -5,11 +5,13 @@ title: "Import ofitzharding: complete Lean proof of s(19) optimality (#640)"
 kind: task
 status: in_progress
 priority: 1
-version: 7
+version: 8
 delegate: ecstatic-edison-intake-1016
 labels:
   - result-import
-dependencies: []
+dependencies:
+  - type: blocks
+    target: is-01m51h4p1g0t1pr0zdy42d0258
 parent_id: is-01m51e5r3sg4h1wcrh7c826v7b
 child_order_hints:
   - is-01m51fazgfznhff7cbtrpwp0s3
@@ -17,7 +19,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-16T04:05:28.896Z
-updated_at: 2026-10-16T04:56:51.528Z
+updated_at: 2026-10-16T04:57:19.822Z
 started_at: 2026-10-16T04:05:36.664Z
 ---
 Stage 1 triage of jlevy/squares#640 (ofitzharding, Oscar Fitzharding, "Complete Lean proof of s(19) optimality: registration request", opened 2026-10-16T03:41:08Z, labelled `intake`, no comments when read at about 04:20Z). Intake pass 2026-10-16 (epic think-mdnn), read-only: nothing was built or run, and nothing of the source is retained yet.
