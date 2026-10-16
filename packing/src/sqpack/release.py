@@ -2882,6 +2882,36 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "v0.4.7."
         ),
     ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=("packing/devtools/adopt_houses.py",),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The prepared adoption of T-195 at 29 (think-30n2) adds T-195's entry to the "
+            "house-adoption writer's `RESULTS` and the credit at 29 to its `CREDITS`. Both "
+            "are read only for a count the house selection moves, and the selection takes "
+            "no candidate without an accepted review, which T-195 does not yet have, so no "
+            "case record, coverage row or prose the writer produces changes: "
+            "`adopt_houses --dry-run` prints nothing. The papers reach the module through "
+            "`generate_frontier_case` and `source_supersession`, which read neither table "
+            "for an unmoved count. Source-reviewed; no render was taken, and every paper "
+            "keeps its edition."
+        ),
+    ),
 )
 
 
