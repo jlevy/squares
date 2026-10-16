@@ -12,7 +12,7 @@ At each count the standing side starts at the record on `main`, frozen by `gathe
 
 ## Counts
 
-2 claims at 1 counts. Recorded: 0 new packings (of which 0 continue another holder's or the reporter's own arrangement), 0 refinements of a standing packing, 0 that no source classifies; 0 recorded by exception; 0 not recorded; 2 undecided.
+2 claims at 1 counts. Recorded: 0 new packings (of which 0 continue another holder's or the reporter's own arrangement), 0 refinements of a standing packing, 0 that no source classifies; 1 recorded by exception; 0 not recorded; 1 undecided.
 
 A refinement is the same configuration with a tighter certificate (a padding reduction, an exact-contact refinement, an exact attainment), as a source says; a new packing is one its source says is new, including one a continued search found from another arrangement. The rule records both; the register credits a refinement as a regularization of the packing it tightens.
 
@@ -29,7 +29,7 @@ Exact sides marked as a lane's come from its `acquisition/claims.json` (and `alg
 | Report | Holder | Reported | Counts claimed | Recorded: new packing | Recorded: refinement (whose packing) | Recorded: unclassified | Not recorded (held by) | Undecided | Bead |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | [PR #574](https://github.com/jlevy/squares/pull/574) | PingYou Ltd (BuddenPing) | 2026-10-13 00:13:11Z | 29 | - | - | - | - | 29 | think-9v2k |
-| [PR #622](https://github.com/jlevy/squares/pull/622) | PingYou Ltd (BuddenPing) | 2026-10-15 18:43:54Z | 29 | - | - | - | - | 29 | think-30n2 |
+| [PR #622](https://github.com/jlevy/squares/pull/622) | PingYou Ltd (BuddenPing) | 2026-10-15 18:43:54Z | 29 | - | - | -; by exception 29 | - | - | think-30n2 |
 
 ## Per Count
 
@@ -37,7 +37,7 @@ Each report at the count in report order, with its side and verdict; a verdict n
 
 | n | Record on main | Reports in order | Best now |
 | ---: | --- | --- | --- |
-| 29 | 5.93383346267692 (record [Kingbird] (reported lane); Thomas Schadt, improved by David Ellsworth); 5.933833462677 (record T-155 (verified lane); T-155) | PR #574 5.933833462677: undecided (record [Kingbird] (reported lane)); PR #622 5.933833462677: undecided (record [Kingbird] (reported lane); key-reason candidate (owner decision)) | undecided: record [Kingbird] (reported lane) 5.93383346267692 or PR #622 5.933833462677 |
+| 29 | 5.93383346267692 (record [Kingbird] (reported lane); Thomas Schadt, improved by David Ellsworth); 5.933833462677 (record T-155 (verified lane); T-155) | PR #574 5.933833462677: undecided (record [Kingbird] (reported lane)); PR #622 5.933833462677: recorded by exception (record [Kingbird] (reported lane); exception: The owner's standing house rule, applied to T-195, the smallest validated packing at 29. The owner to the coordinator of this intake pass, in its Claude Code session, on the afternoon (UTC) of 16 October 2026: "We should always be adopting the smallest packing and then regularizing it. That should be the policy, obviously." and "This should be built into our policy. It shouldn't even be a question. If there's any ambiguity on that, we should fix that in our process docs for intake." PR #660 (think-sa5r) writes the rule into the runbook. PR #622's certificate is replayed and reviewed (16 October) 1.57e-36 below T-155, the verified lane; the reported lane it does not clear is the catalogue's print of the same packing, which no validated certificate attains.) | undecided: record [Kingbird] (reported lane) 5.93383346267692 or PR #622 5.933833462677 |
 
 ## Owner Decisions Needed
 
@@ -53,9 +53,7 @@ None.
 
 Claims an argument says have a key reason to be recorded. The rule does not apply it: the verdict is the rule's, and the owner decides.
 
-| n | Report | Rule's verdict | Argument | Proposed as |
-| ---: | --- | --- | --- | --- |
-| 29 | PR #622 | undecided ( record [Kingbird] (reported lane)) | The house rule: the owner, 16 October 2026, 'We should always be adopting the smallest packing and then regularizing it. That should be the policy, obviously.' PR #622's certificate is complete and rational, replayed here on both maintained exact routes, and 1.57e-36 below T-155, the smallest validated packing the record holds at 29; the reported lane it does not clear is a catalogue print of the same packing, which no certificate the record holds attains, and whose exact side (Evan Daniel's degree-7213 root, #545) the record does not hold. A house must be a register entry, so recording it is what adopting the smallest packing needs. Credit stays with Thomas Schadt and David Ellsworth, PingYou Ltd credited with the refinement, as a regularization. | T-195, an S1 entry pending adoption, in this pass's records pull request (branch claude/intake-2026-10-16-n29-622); not on main |
+None.
 
 ### Measured Identity Against the Source's Word
 
@@ -86,7 +84,6 @@ None.
 | n | Report | Against | What would decide it |
 | ---: | --- | --- | --- |
 | 29 | PR #574 | record [Kingbird] (reported lane) | the exact side behind the reported lane's print 5.93383346267692 (n = 29) |
-| 29 | PR #622 | record [Kingbird] (reported lane) | the exact side behind the reported lane's print 5.93383346267692 (n = 29) |
 
 ### Claims of Unknown Time
 

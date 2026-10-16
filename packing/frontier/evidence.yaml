@@ -37082,6 +37082,16 @@ evidence:
     certificate: packing/resources/web/pingyou-pr622-certificate-2026-10-15/facts/
     replay_status: not-attempted
     verifiers: []
+    external_review:
+      state: informally-verified
+      date: '2026-10-16'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane (W2) of the 2026-10-16 intake
+        (think-2jzy), prompted separately from the import and replay lane
+      note: >-
+        docs/project/reviews/review-2026-10-16-pingyou-n29.md accepted the certificate T-195
+        cites for finite feasibility only, with no blocking defect and eight findings for the
+        record (R1 to R8); the replay it reproduced is E-pingyou-622-exact-feasibility.
     source_reviewed: '2026-10-16'
     limitations: >-
       This atom records the source author's report of 1 exact rational certificate at
@@ -37090,7 +37100,8 @@ evidence:
       both routes, 2436 pair decisions; summed over the 3 jobs, the receipt records 93.53
       route CPU seconds and 96.21 job wall seconds, the longest job 32.77 seconds. In the
       positive a square touches the box and two squares touch, exactly. The repository
-      replay is E-pingyou-622-exact-feasibility; its review is pending. The source's own
+      replay is E-pingyou-622-exact-feasibility, which the 16 October review accepted. The
+      source's own
       checkers were not run here. The two maintained routes, the sqpack rational witness
       verifier and the independent rational corner checker, share certificate parsing,
       half-angle conversion, Fraction arithmetic and the separating-axis method. No two
@@ -37114,7 +37125,18 @@ evidence:
       to 20:40:32Z on 2026-10-16, 96 CPU seconds), and wrote
       receipts/exact-certification.json.xz in the packet; check --replay decided all 3
       retained jobs again, one at a time, and held each to its retained row (all equal, 107
-      s); check-claims rebuilt the frozen comparison (equal).
+      s); check-claims rebuilt the frozen comparison (equal). The 16 October review lane
+      (think-2jzy) then ran, one process at a time: its clean-room checker,
+      review/programs/n29_exact_review.py, on the release asset, deciding all 116 walls and
+      406 pairs over Q (review/outputs/certificate.json, 12 CPU seconds), refusing four
+      mutated copies each for exactly its expected violations, two of them the touching
+      pair pushed and the box shrunk by 1e-3000 (controls.json), and deciding the receipt's
+      3 jobs again (receipt.json); and, through review/programs/third_route.py, which only
+      hands over, devtools.check_half_angle_area unchanged on the certificate, the derived
+      fact and the source's corners witness, which its own readers held to one packing,
+      passed with its six controls at their required outcomes, the side 1e-40 and the
+      closest pair 1e-30 past exact contact among them (review/outputs/third-route.json,
+      29.5 CPU seconds). review/programs/run_review.sh reproduces every output.
     replay_status: passed
     verifiers:
       - V-sqpack-verify
@@ -37122,24 +37144,33 @@ evidence:
       - V-evand-arrangement-receipts
       - V-upper-bound-reports
       - V-evand-exact-certificates
+      - V-check-half-angle-area
+      - V-pingyou-622-exact-review
     independence:
       coverage:
         extent: full
         unit: >-
           the certificate at n = 29 that T-195 cites, every wall and every pair decided by
-          both maintained routes; the kernel's controls are retained in the packet's receipt
+          both maintained routes, again by the third route and again by the review's
+          clean-room checker; the kernel's controls are retained in the packet's receipt and
+          the other two checks' in review/outputs/
         checked: 1
         of: 1
-      read: [specification, certificate-format]
+      read: [specification, certificate-format, producer-output]
       clean_room: false
       shares: []
       written_by:
         - kind: ai
           system: Claude (Anthropic)
           setting: >-
-            the project's verification lanes that wrote sqpack's exact verifier and the
-            independent rational corner checker over September and October 2026; each
-            lane's tier and reasoning setting is not retained here
+            the project's verification lanes that wrote sqpack's exact verifier, the
+            independent rational corner checker and the half-angle area route over September
+            and October 2026; each lane's tier and reasoning setting is not retained here
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 review lane of 16 October 2026 (think-2jzy), strong sub-agent tier,
+            max reasoning, which wrote the clean-room checker and drove the third route
       overlaps_producer:
         extent: unknown
         separate_prompt: true
@@ -37148,17 +37179,31 @@ evidence:
           The author says its submissions are assisted by the PY agentic offering, PingYou
           Ltd's own, naming no underlying system; no route here imports or copies the
           source's code. The source reports running this repository's two maintained
-          routes, unchanged, on its corners witness; those runs are its own and decide
-          nothing here.
+          routes, unchanged, on its corners witness, so on those two the replay reproduces
+          the source's own runs; the third route and the review's checker share no code with
+          any check the source ran, and the independently re-implemented relation rests on
+          them.
+    independence_record: packing/resources/web/pingyou-pr622-certificate-2026-10-15/review/README.md
+    external_review:
+      state: informally-verified
+      date: '2026-10-16'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane (W2) of the 2026-10-16 intake
+        (think-2jzy), prompted separately from the import and replay lane
+      note: >-
+        docs/project/reviews/review-2026-10-16-pingyou-n29.md accepted the certificate T-195
+        cites for finite feasibility only, with no blocking defect and eight findings for the
+        record (R1 to R8); the replay it reproduced is E-pingyou-622-exact-feasibility.
     limitations: >-
       A replay of the retained certificate by two maintained exact routes that share
       certificate parsing, half-angle conversion, Fraction arithmetic and the
-      separating-axis method. The receipt's 3 jobs hold 2436 pair decisions, 93.53 route CPU
-      seconds and 96.21 job wall seconds, the longest job 32.77 seconds. The positive
-      touches the box and has two squares in contact, a least wall clearance and pair gap of
-      exactly 0 on both routes. The source reports runs of this repository's two maintained
-      routes; those runs are its own and decide nothing here, and every route here ran from
-      this repository on the packet's own fact. The kernel's two controls are gross; no
-      third route or review has read it yet. Finite feasibility only: no lower bound,
+      separating-axis method, by a third exact route that shares Fraction arithmetic and the
+      formats' meaning only, and by the review's clean-room checker, which shares nothing.
+      The receipt's 3 jobs hold 2436 pair decisions, 93.53 route CPU seconds and 96.21 job
+      wall seconds, the longest job 32.77 seconds. The positive touches the box and has two
+      squares in contact, a least wall clearance and pair gap of exactly 0 on every check.
+      The source reports runs of this repository's two maintained routes, which the replay
+      on them reproduces. The kernel's two controls are gross; the third route's six and
+      the review's two sharp ones are not. Finite feasibility only: no lower bound,
       optimum, local minimum, rigidity, novelty or human oversight.
     source_reviewed: '2026-10-16'

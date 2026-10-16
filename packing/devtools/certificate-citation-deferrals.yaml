@@ -78,12 +78,15 @@ deferrals:
   - evidence: E-pingyou-622-exact-feasibility
     results: [T-195]
     bead: think-30n2
-    blocked_on: the stage 4 review of T-195, which the coordinator of think-30n2 assigns
+    blocked_on: >-
+      the adoption of T-195 at 29 on claude/intake-2026-10-16-n29-622-adopt, whose writer
+      needs the house rule of PR #660 for the case's conjectured optimum (think-sa5r)
     recorded: '2026-10-16'
     reason: >-
-      PR 622's N29 certificate is replayed on both maintained exact routes and registered as
-      T-195, 1.57e-36 below the case's house, T-155. A house is adopted once stage 4 has
-      confirmed and reviewed its certificate (result-import.md, Adopt a House, Then
-      Regularize It), and no review has read it yet. The adoption, which makes n-029.md cite
-      this evidence and removes this entry, is prepared on a branch stacked on the records
-      pull request and lands after the review.
+      PR 622's N29 certificate is replayed, reviewed (16 October) and registered as T-195 at
+      V3/C3, 1.57e-36 below the case's house, T-155, so the house selection takes it at 29.
+      The adoption, which makes n-029.md cite this evidence and removes this entry, is
+      prepared on a branch stacked on the records pull request. On main the writer stops
+      at 29, since the new house is above the case's conjectured optimum, the catalogue
+      print 5.93383346267692, and leaves it to a person; #660's house rule keeps the
+      conjecture and adopts.

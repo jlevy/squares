@@ -630,8 +630,8 @@ results, it is a statement about what this repository has itself examined.
 | `E-wand125-continuous-n28-5745-report` | 0 | lower-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | `V-wand125-sqverify-continuous`, `V-wand125-contpose-check3` |
 | `E-evand-639-exact-sides-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
 | `E-n019-fitzharding-lean-report` | 0 | exact-value | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
-| `E-pingyou-622-certificate-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
-| `E-pingyou-622-exact-feasibility` | 0 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published | independent | full, 1 of 1: the certificate at n = 29 that T-195 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-evand-arrangement-receipts`, `V-upper-bound-reports`, `V-evand-exact-certificates` |
+| `E-pingyou-622-certificate-report` | 0 | upper-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | *none held* |
+| `E-pingyou-622-exact-feasibility` | 0 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | independent | full, 1 of 1: the certificate at n = 29 that T-195 cites, every wall and every pair decided by both maintained routes, again by the third route and again by the review's clean-room checker; the kernel's controls are retained in the packet's receipt and the other two checks' in review/outputs/ | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-evand-arrangement-receipts`, `V-upper-bound-reports`, `V-evand-exact-certificates`, `V-check-half-angle-area`, `V-pingyou-622-exact-review` |
 
 ## What the register rests on
 
