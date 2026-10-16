@@ -7,7 +7,8 @@ For state S (3435, 3438 or 3442) the retained modules assert by `native_decide`
   Sq19.Capture.S<k>.tile_checked  the pieces tile owner 12's window, in order.
 Their data (`rosterNat`, `cells`, `sigma`, `baseList`, `pieceLo`, `pieceHi`) is in
 the release archive `sq19-generated-S<k>.tar.xz`, not retained here. This program
-reads the extracted Common.lean and P<i>Tab.lean of one state, and the retained
+reads the extracted Common.lean and each piece's P<i>Tab.lean (captured piece) or
+P<i>Data.lean (excluded piece) of one state, and the retained
 census cells, symmetry table and census masks, and decides the four facts in
 exact rational arithmetic. It also checks the extracted files against
 expected/generated-sources.sha256.
@@ -66,7 +67,11 @@ def main():
     listed = {p.strip(): h for p, h in listed.items()}
     state_txt = open(S + f"Capture/S{k}/State.lean", encoding="utf-8").read()
     pieces = sorted(int(x) for x in re.findall(rf"import Sq19Lean\.Capture\.S{k}\.P(\d+)\n", state_txt))
-    files = ["Common.lean"] + [f"P{i}Tab.lean" for i in pieces]
+    def piece_file(i):
+        tab = f"P{i}Tab.lean"
+        return tab if f"Sq19Lean/Capture/S{k}/{tab}" in listed else f"P{i}Data.lean"
+
+    files = ["Common.lean"] + [piece_file(i) for i in pieces]
     digests_ok = True
     for f in files:
         h = hashlib.sha256(open(D + f, "rb").read()).hexdigest()
@@ -82,7 +87,7 @@ def main():
     split_owner = int(re.search(r"def splitOwner : Nat := (\d+)", common).group(1))
     windows = []
     for i in pieces:
-        tab = open(D + f"P{i}Tab.lean", encoding="utf-8").read()
+        tab = open(D + piece_file(i), encoding="utf-8").read()
         lo = F(re.search(rf"def pieceLo : Rat := \(({NUM}) : Rat\)", tab).group(1))
         hi = F(re.search(rf"def pieceHi : Rat := \(({NUM}) : Rat\)", tab).group(1))
         windows.append((lo, hi))
