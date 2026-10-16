@@ -5,7 +5,7 @@ title: "Post the stage-7 replies held for stack #632"
 kind: task
 status: in_progress
 priority: 1
-version: 3
+version: 4
 delegate: ecstatic-edison-replies-stack
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m50gnwbxd5kxbynyx9nd162p
 hold: null
 hold_until: null
 created_at: 2026-10-16T01:20:02.999Z
-updated_at: 2026-10-16T01:39:27.121Z
+updated_at: 2026-10-16T01:47:24.097Z
 started_at: 2026-10-16T01:20:05.762Z
 ---
 Stack #632 (#627, #628, #631) merged into main at bbc12b617. Post the held stage-7 replies on #413 #476 #506 #533 #561 #573 #575 #583 #586 #593 #594 #606 #607 #610 #613 #622 (PR) #624 after the Pages deployment for bbc12b617 verifies; record them in result-requests.yaml on claude/ecstatic-edison-8en33t-replies-stack; one draft PR. Not on #574 #570 #557 #565 #542 #543.
@@ -47,3 +47,7 @@ Posted (texts in scratch stack-replies/):
 Not posted: #476 (no reply due; T-134 unchanged and still the house at 267; the stack only recorded T-189/T-190 at 237, where T-134 was never the house), #606 (no reply due; the stack only recorded the 15 Oct reply already posted). Not touched per brief: #574, #570, #557, #565, #542, #543.
 
 Next: record the replies on claude/ecstatic-edison-8en33t-replies-stack from origin/main, with the release no-change entry; one draft PR.
+
+Correction to the header time: the replies were posted 01:38:17Z to 01:39:02Z.
+
+Record branch claude/ecstatic-edison-8en33t-replies-stack from origin/main 22c0ebf0d (#626 merged meanwhile), commit 548004c58: 15 replies under replies, #561 #575 #583 #586 state closed / closed 2026-10-16, #573 note (why open), #613 note reworded; release.py ReleaseNoPublicChange for the methods survey (rendered at link revision 22c0ebf0 with main's and the branch's record: byte-identical, 42 files). Validation at 548004c58: check_requests gate exit 0; --report: none of the 17 issues reply due; --github 27 differences, none on these issues (other lanes' #625/#630 replies); check_release_impact --baseline-ref origin/main: every candidate has a reviewed disposition; pytest tests/test_check_requests.py tests/test_release*.py 110 passed; packing-validate --records exit 0, 51/109 steps, 106 s. Draft PR https://github.com/jlevy/squares/pull/637 (labels intake, S1). Do not close this bead until #637 merges.
