@@ -2264,14 +2264,18 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "papers/square-packing-methods-survey.md",
         ),
         reason=(
-            "Rendered on this branch over main 3685616d at link revision 3685616d, as over "
-            "22c0ebf0 and ee9cec6e before it, once with main's requests record and once "
-            "with this branch's, the HTML and Markdown are byte-identical in all 42 files "
-            "the renderer writes; the PDF prints from that HTML. The record gains the 16 "
-            "October replies held for stack #632, on #413, #506, #533, #561, #573, #575, "
-            "#583, #586, #593, #594, #607, #610, #613, #622 and #624, the closing of #561, "
-            "#575, #583 and #586, a note on #573 and a reworded note on #613, none of which "
-            "the survey prints, so it keeps v0.2.2."
+            "Rendered on this branch over main 4e8c8987 at link revision 4e8c8987, as over "
+            "22c0ebf0, ee9cec6e and 3685616d before it, once with main's requests record "
+            "and once with this branch's, the HTML and Markdown are byte-identical in all "
+            "42 files the renderer writes; the PDF prints from that HTML. The record gains "
+            "the 16 October replies held for stack #632, on #413, #506, #533, #561, #573, "
+            "#575, #583, #586, #593, #594, #607, #610, #613, #622 and #624, and the final "
+            "reply on #596; the closing of #561, #575, #583, #586 and #596; notes on five "
+            "replies edited in place, on the held replies on #570 and #574 and on #575's "
+            "176, and on why #573 stays open; two statements marked outdated and "
+            "corrected, on #506 and #593; #583's reworded not_registered, #596's summary "
+            "and a reworded note on #613, none of which the survey prints, so it keeps "
+            "v0.2.2."
         ),
     ),
 )
