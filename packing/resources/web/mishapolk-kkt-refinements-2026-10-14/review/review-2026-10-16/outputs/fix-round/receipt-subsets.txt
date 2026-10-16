@@ -1,0 +1,6 @@
+10-11 175 {'jobs': 3, 'pair_decisions': 91350, 'route_cpu_seconds': 55.29, 'job_wall_seconds': 58.79, 'longest_job_seconds': 21.29}
+10-11 other14 {'jobs': 42, 'pair_decisions': 5142756, 'route_cpu_seconds': 2484.89, 'job_wall_seconds': 5509.46, 'longest_job_seconds': 287.72}
+mishapolk 12 {'jobs': 36, 'pair_decisions': 1912890, 'route_cpu_seconds': 1289.52, 'job_wall_seconds': 1304.44, 'longest_job_seconds': 78.28}
+mishapolk other12 {'jobs': 36, 'pair_decisions': 2273196, 'route_cpu_seconds': 878.37, 'job_wall_seconds': 889.67, 'longest_job_seconds': 37.66}
+607 237 {'jobs': 3, 'pair_decisions': 167796, 'route_cpu_seconds': 43.61, 'job_wall_seconds': 48.51, 'longest_job_seconds': 17.69}
+607 other22 {'jobs': 66, 'pair_decisions': 31218948, 'route_cpu_seconds': 12382.15, 'job_wall_seconds': 14747.07, 'longest_job_seconds': 632.89}

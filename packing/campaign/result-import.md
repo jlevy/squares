@@ -29,14 +29,18 @@ W1 phase on one branch:
 1. **Sweep.** From the repository root, run `make intake`. It captures the Kingbird
    catalogue into `attic/intake/`, then runs
    [`devtools.intake_sweep`](../devtools/intake_sweep.py), which reads every source in
-   [the table below](#intake-sources) and prints each item the record has not taken in.
+   [the table below](#intake-sources) and prints each item the record has not taken in,
+   and under **Regularization owed** each count whose drawing still waits for the strong
+   generators, with the bead that owns its runs.
    It exits nonzero while any item lacks an open bead to own it, or waits on something
    that has already happened.
    Read **Needs Action** first, then **Not Checked**: a source the sweep could not read
    is not a clean source.
 2. **Own each item** as [stage 0](#stage-0-sweep) says: a bead for each new result, a
    recorded read where there is nothing to import, a new owner for any deferral whose
-   bead has closed, and a restart for any wait whose blocker has resolved.
+   bead has closed, a restart for any wait whose blocker has resolved, and an open bead
+   for each count pending regularization that none owns, named in the count’s
+   `default_drawings.PENDING_ALLOWED` entry.
 3. **Import** each new result through stages 1 to 3 on the same branch, triaging every
    one before anything heavier runs ([stage 1](#stage-1-triage)). Where several open
    reports state upper bounds at one count, the
@@ -46,7 +50,12 @@ W1 phase on one branch:
    validation bead. Start each new proof’s mathematical review as soon as its source is
    retained, in parallel with stage 3, by [stage 4’s review lane](#stage-4-validate).
    It does not wait for a replay budget, and it lands in a pull request of its own when
-   it returns.
+   it returns. **Every new packing that becomes a house is regularized** in the pull
+   request that makes it one, or deferred there in `default_drawings.PENDING_ALLOWED`
+   with the open bead that owns its runs ([stage 5](#adopt-a-house-then-regularize-it)):
+   an adoption from any import, such as a register result like T-174 or T-186 to T-190
+   when its house is adopted, a Kingbird catalogue intake, or an exact re-solve of a
+   witness. The sweep then lists each count still owed.
 4. **Validate** from `packing/` with `packing-validate --records`, then `--push`, and
    leave `--fast` to CI ([stage 5](#stage-5-publish)).
 5. **Open one draft pull request** with `tbd shortcut create-or-update-pr-simple`,
@@ -75,8 +84,9 @@ W1 phase on one branch:
    `#N owes a reply` until a recorded reply covers the issue’s state.
    Each new item it finds is triaged read-only, with a proposed disposition, before any
    of it is worked ([stage 1](#stage-1-triage)). The pass is done when nothing needs
-   action and every reply it owes is posted and recorded, or when the pull request says
-   why each remaining item waits.
+   action, every count it re-housed is regularized or owned by an open bead under
+   **Regularization owed**, and every reply it owes is posted and recorded, or when the
+   pull request says why each remaining item waits.
 
 The pass needs network access to `github.com`, for Git and for the API through `gh`;
 `kingbird.myphotos.cc`, for the catalogue capture; `evand.github.io`, for imports from
@@ -110,7 +120,7 @@ claude/intake-YYYY-MM-DD, with today's date.
 1. Bootstrap the clone as AGENTS.md, "A fresh clone", says; run `tbd prime` and
    `tbd policy show`.
 2. From the repository root run `make intake`. Read the report: "Needs Action"
-   first, then "Not Checked".
+   first, then "Not Checked", then "Regularization owed".
 3. For each item that needs an owner, look for an open bead that already covers it
    (`tbd list --label result-import`). Otherwise open one bead per new result,
    labelled result-import and titled "Import <author>: <claim> (#<issue>)", or
@@ -122,7 +132,12 @@ claude/intake-YYYY-MM-DD, with today's date.
    (a result, a counterexample or a method) and lacks the `intake` label gets it under
    the github-workflows grant (`gh issue edit N --add-label intake`), and the case
    label too where one applies (development.md, "Issue and Pull-Request Labels");
-   without the grant, list those issues for the owner. Run `tbd sync`.
+   without the grant, list those issues for the owner. A count pending
+   regularization that no open bead owns gets its runs in this pass, or an open bead
+   labelled regularization (and validation, with stage 4's block and a backlog row,
+   where its runs are held above the cap), named in the count's PENDING_ALLOWED
+   entry in default_drawings.py by this pass's pull request: the sweep counts the
+   count owned only once the entry names the bead. Run `tbd sync`.
 4. Take each new result through stages 1 to 3 of the runbook on this branch: triage,
    retain the source in a packet at a pinned revision, register it as reported.
    Triage every result before any large token or CPU spend. Where several open
@@ -132,7 +147,16 @@ claude/intake-YYYY-MM-DD, with today's date.
    or with no cap, when the source prices it at minutes; otherwise give it a
    validation bead and a row in the backlog bead (stage 4, "The Compute Cap and the
    Validation Backlog"). Start each new proof's mathematical review (stage 4, "Who
-   reviews, and when") as soon as its source is retained, in parallel.
+   reviews, and when") as soon as its source is retained, in parallel. Every new
+   packing that becomes a house is regularized in the same pull request: an adoption
+   from any import (a register result such as T-174 or T-186 to T-190 once adopted,
+   with devtools.adopt_houses), a Kingbird catalogue intake, or an exact re-solve.
+   Regularize every count whose witness changes (stage 5, "Adopt a House, Then
+   Regularize It"), priced as one validation item at the total adopt_houses prints:
+   the strong generators on the new witness when that fits under the compute cap,
+   otherwise each pending count added to default_drawings.PENDING_ALLOWED with the
+   open bead that owns its runs, labelled regularization and validation, and its
+   drawing listed before and after.
 5. From packing/, run `uv run --frozen --all-extras --group dev packing-validate
    --records`, then `--push`, and fix what fails.
 6. Commit, push the branch, and open one draft pull request, labelled intake, with
@@ -154,9 +178,10 @@ claude/intake-YYYY-MM-DD, with today's date.
    decided the pass's counts, draft each result issue's verdict comment with
    devtools.intake_comments (stage 7, "Report-Order Verdict Comments").
 9. Run `make intake` again, and again after the merge: it and
-   `check_requests --report` list the replies still due. Triage each new item it
-   lists read-only and propose its disposition on the epic bead (stage 1). Report
-   every item that still needs action.
+   `check_requests --report` list the replies still due, and its "Regularization
+   owed" lists every count this pass re-housed that is still pending. Triage each new
+   item it lists read-only and propose its disposition on the epic bead (stage 1).
+   Report every item that still needs action.
 
 Never merge without the owner's word, never push to main, never post the announcement,
 and never start a replay above the owner's compute cap for the pass, or with no cap
@@ -185,6 +210,7 @@ Every input reaches the record through one of these sources, and the sweep reads
 | Other catalogues and releases | Read by hand: the register’s other `current-catalogue` and `first-party-release` sources, UnitSquare’s release today. The sweep prints when each was last reviewed | A later release: an import. Nothing new: the source’s `reviewed` date moves |
 | Watched repositories | Every repository the source register, a packet’s acquisition record, or the site’s list of other projects names. `git ls-remote` reads each head, and a fetch of commits and trees finds the commits past every pin and every read, and the commits a pin contains whose changed paths no packet at or after them retains | A new result: an import bead, then a packet at the head. New evidence for a registered entry: an evidence update. Nothing to import: a read in [`intake-watch.yaml`](intake-watch.yaml) |
 | The record’s own queues | Counts pending catalogue intake, deferred conflicts, results and asks queued on open issues, triage and replies owed, the validation backlog | Nothing new: each names an open bead, and one whose bead has closed gets a new owner |
+| The regularized layer | `atlas/known-best/default-drawings.json`’s `states` against `default_drawings.PENDING_ALLOWED` and `SETTLED`: each count pending regularization, each decision that still owes runs or an outcome, each exemption, and whatever the regularization-state gate fails on | Nothing new: each names an open bead. A pending count the list does not name, or whose bead has closed, gets its runs or an owner |
 | Blocked imports | A queued result’s or ask’s `blocked_on`, and what an open `result-import` bead says it waits on or depends on, read through `gh` and the bead store | A blocker that merged or closed: the wait resumes, or the bead says what it waits on now |
 
 The capture is the network half of the dated research survey that refreshes the retained
@@ -198,12 +224,12 @@ steps, and `--json` prints the whole sweep.
 
 | Stage | Workflow | Exit |
 | --- | --- | --- |
-| 0. Sweep | W1 | Every input the sweep lists has an open bead, or a read that records nothing to import |
+| 0. Sweep | W1 | Every input the sweep lists has an open bead, or a read that records nothing to import, and so does every count it lists as owed regularization |
 | 1. Triage | W1 | A claim map and a priced validation plan in the import’s bead; the author acknowledged |
 | 2. Retain | W1 | The source in a packet at a pinned revision, with its bibliography key |
 | 3. Record | W1 | The claim registered as reported, with its coverage entry, and merged: *imported* |
 | 4. Validate | W2 | Replay evidence, a mapped review and the rungs they derive: status `confirmed`, or `incomplete` |
-| 5. Publish | The change that moves the record | The reader documents state the result; once stage 4 has passed, *integrated* |
+| 5. Publish | The change that moves the record | The reader documents state the result, and each count it re-houses is regularized or deferred with its bead; once stage 4 has passed, *integrated* |
 | 6. Explain | W8, with a W2 review | A review paper, for the results that warrant one |
 | 7. Answer | After each merge, by the pass | A reply on the issue for each change of its state, to the final comment: *answered* |
 
@@ -294,6 +320,25 @@ happened:
   for #305, which merged” and another bead’s example of a wait as waits still open.
   Nothing resumes a wait when its blocker resolves, so the sweep reports it: wand125’s 4
   October certificates waited for #305, which merged that evening, and stayed queued.
+- **A drawing owed regularization names its bead.** Every new house is a new witness,
+  and its count reads `pending` in `default-drawings.json` until both strong generators
+  decide it, whichever import made the house: an adoption, a Kingbird catalogue intake
+  or an exact re-solve.
+  The sweep’s **Regularization owed** lists each pending count with the bead its
+  `default_drawings.PENDING_ALLOWED` entry names, each decision whose `owed` names a
+  bead, and each exemption.
+  A pending count that the list does not name, or whose bead is no longer open, needs
+  action: its runs in this pass, or an open bead that owns them, labelled
+  `regularization` (and `validation`, with stage 4’s block and a backlog row, where the
+  runs are held above the cap) and named in the count’s `PENDING_ALLOWED` entry
+  ([stage 5](#adopt-a-house-then-regularize-it)). The entry is made by the pull request
+  that re-houses the count; for a count re-housed earlier whose bead has since closed,
+  this pass’s pull request names the new bead.
+  The owner, 16 October 2026: “we should make sure all of the intake process covers the
+  regularization and we update that for any other new packings we have.
+  That should be part of our standard process to do the regularization.”
+  The adoptions of #553, #598 and #614 had left twenty counts without that decision, and
+  n = 176 drew its raw house on the site until the owner saw it (think-sfas).
 
 ## Stage 1: Triage
 
@@ -609,6 +654,104 @@ running a replay, where a tier’s wall measures the contention rather than the 
 ([What each tier costs](../../development.md#what-each-tier-costs-and-where-its-ceiling-lives)).
 It merges on the owner’s word, by
 [the merge policy](../../development.md#merging-a-pull-request).
+
+### Adopt a House, Then Regularize It
+
+Once stage 4 has confirmed and reviewed a certificate below a case’s house, the pass
+adopts it as the case’s new house wherever the house selection takes it.
+`devtools.select_houses` names the counts, `devtools.upper_bound_houses` rebuilds each
+witness from the retained certificate, and `devtools.adopt_houses` moves the case
+records; its docstring, under “A later pass”, lists what the pass adds first.
+
+A new house is a new witness, and the count’s regularized view lapses with it.
+So every count whose known-best witness changes is regularized in the pull request that
+changes it, or deferred there with the open bead that owns its runs, whichever import
+made the new packing a house:
+
+- a house adoption, the usual cause, of a result from any import, such as T-174 or T-186
+  to T-190 once its house is adopted;
+- a Kingbird catalogue intake that moves a count’s record;
+- an exact re-solve or a correction of a witness;
+- any other result that `build_known_best_atlas --update` takes into the atlas.
+
+The steps are the regularization guide’s
+[When a Witness Changes](../../docs/project/guides/regularization-process.md#when-a-witness-changes):
+`build_known_best_atlas --update` writes the new witness, the axis tool’s
+`--update-atlas` redraws its view, `default_drawings --update` records each count’s
+state, and `--check-state` names each count left `pending`. Then both strong generators
+run on each pending count, and the selection admits what improves on the drawing.
+Where neither draws better, the count is settled as the guide says.
+`adopt_houses` prints the re-housed counts and these commands when it writes, and with
+`--dry-run` before it does.
+It names the run directories for the adoption’s day and its lowest and highest re-housed
+count, since the layer records a run by its directory’s name and a repeated name would
+replace an earlier run’s record: the index holds only the runs merged into the branch,
+so two adoptions in flight on one day would otherwise print the same names.
+
+The strong runs cost 5 to 25 CPU-minutes a count, from the layer’s run receipts:
+
+- Evan Daniel’s driver takes 140 to 220 CPU-seconds a count
+  (`evand-regularize-adopt518-v2-rerun-2026-10-13`,
+  `evand-regularize-refreshed-adopt518-v2`);
+- grid-slack takes 37 to 110 CPU-seconds a count at each of its three thresholds
+  (`grid-slack-deg5-1013-b`, `grid-slack-all`);
+- the selection takes seconds to about four minutes for each of a count’s four candidate
+  views, a figure no receipt yet measures on a new witness.
+
+Ten re-housed counts take 50 to 250 CPU-minutes.
+The regularization an adoption owes is one validation item, priced at the total
+`adopt_houses` prints and held to the pass’s
+[compute cap](#the-compute-cap-and-the-validation-backlog) as a replay is.
+Within the cap, it runs in the pass.
+Above it, or with no cap set and a total above minutes, it is held, and its counts are
+deferred:
+
+1. The adoption’s pull request adds each pending count to
+   `default_drawings.PENDING_ALLOWED`, naming the open bead that owns its runs: labelled
+   `regularization`, as every such bead is, and `validation`, since its runs are held
+   above the cap, carrying stage 4’s `## Validation` block, with a row in the backlog
+   bead.
+2. It runs `default_drawings --update` again, since the record copies the entry into the
+   count’s reason, and then the guide’s render step.
+3. It lists each deferred count’s drawing before and after, with
+   `default_drawings --compare` on its base branch’s record, `BASE` being `main` unless
+   the pull request is stacked:
+   `python -m devtools.default_drawings --compare <(git show origin/$BASE:packing/atlas/known-best/default-drawings.json)`.
+   Where a strong view gives way to a drawing worse than it on a goal of the improvement
+   rule, whatever drew it, its runs are not deferred: they run in the adoption’s pull
+   request. The owner, 16 October 2026: “We should always be adopting the smallest
+   packing and then regularizing it.”
+   The table names those goals at each such count, and marks each one that still reads
+   pending; one its runs have regularized or decided is listed and not marked.
+   The axis tool’s view is the usual replacement, since the refresh draws it wherever it
+   improves on the new house: it replaced all seven strong views the adoption of 16
+   October 2026 (#657) lost, and at n = 302 a drawing with no uneven and no near-axis
+   square gave way to one with 26 and 11. A house drawing is the rarer one, as at n =
+   176 on 15 October (review D1 of #641).
+
+The records tier’s
+`every drawn picture is regularized, regular as published, decided or exempt`
+(`default_drawings --check-state`) fails on a pending count that the list does not name,
+so an adoption cannot pass without one or the other.
+It also fails on a listed count that is no longer pending and on a `SETTLED` entry
+decided on the earlier witness.
+So the adoption’s pull request takes each count its runs decided off the list, and
+settles each such entry again or removes it.
+A new house that reads regular does not take a listed count off: on the list, a count
+waits for the runs its bead owes.
+The gate cannot tell a hand-dropped entry from a decided one: dropping an entry whose
+count then reads regular as published passes it, and so does adding a count whose house
+reads regular, which the list then holds pending.
+Either is a reviewed decision, and its pull request shows the bead’s runs or the
+`--compare` table (review C2 of #641; think-k6rj). The adoptions of #553, #598 and #614
+refreshed only the axis tool’s views, and left twenty counts without a strong
+generator’s decision on their witness, with the raw house drawn at n = 176, until that
+gate was added (think-sfas).
+Fourteen of the twenty lost a strong view before the index recorded lapses, and their
+entries in the list are the record of it.
+The sweep’s **Regularization owed** lists every count still pending, with the bead that
+owns its runs, so each pass sees what its own houses and earlier ones still owe
+([stage 0](#stage-0-sweep)).
 
 ### Label the PR and Prepare News
 
