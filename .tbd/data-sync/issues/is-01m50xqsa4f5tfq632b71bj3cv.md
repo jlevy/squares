@@ -5,7 +5,7 @@ title: "Regularization leftovers: grid-slack 1 and 5 deg on 102, 236, 258, 263, 
 kind: task
 status: in_progress
 priority: 1
-version: 10
+version: 12
 delegate: user-eb-reg-leftovers
 labels:
   - regularization
@@ -14,7 +14,7 @@ parent_id: is-01m50wdrbfnwsq05w150az5z88
 hold: null
 hold_until: null
 created_at: 2026-10-15T23:18:12.547Z
-updated_at: 2026-10-16T12:22:28.264Z
+updated_at: 2026-10-16T12:46:48.942Z
 started_at: 2026-10-16T05:22:35.967Z
 ---
 
@@ -62,3 +62,7 @@ started_at: 2026-10-16T05:22:35.967Z
 2026-10-16T11:38Z user-eb-reg-leftovers: draft PR #656 (https://github.com/jlevy/squares/pull/656), base claude/intake-2026-10-16-regularize-3c, head 3f78058fe, labels project + S2. Local: records 51/52 at b787baf05, the one failure (check_documentation: unmapped retained selection.md) fixed in 3f78058fe and the step passes alone; --check-state, 244 focused tests, release_pin --check, check_release_impact vs 3c pass; --verify-atlas running. think-0ut1 can close once #656 merges (no record names it); think-co6o and think-zjmt can close now.
 
 2026-10-16T12:22Z user-eb-reg-leftovers: PR #656 head 7e44e4bdb = merge of 3c head 97d513032 (3b's A1 credit fix + A2 evidence layout) + re-pin to 5a6f333b. Evidence moved to packing/cases/regularized_drawings/think-0ut1-2026-10-16/ (receipt, gzip reports, run.json per grid run, selection-leftovers.json/.md, tree, timing). Local at 7e44e4bdb: records --jobs 2 52/52 (141 s), --check-state, 245 focused tests, release_pin --check, check_release_impact vs 3c, check_retained_json, check_documentation all pass; --verify-atlas n=1..210 passed (570 s), 211..324 running. Hosted at 7e44e4bdb: Packing validation + Certificate page green, mergeable clean. think-0ut1 closes after #656 merges; think-co6o/think-zjmt can close now; think-drze (owner question) stays open.
+
+2026-10-16T12:44Z user-eb-reg-leftovers: --verify-atlas n=211..324 passed (1,350 s); with n=1..210 (570 s) the whole atlas verifies at 7e44e4bdb. Lane D done; final report to the coordinator.
+
+2026-10-16 ~12:50Z coordinator user-eb: PR #656 green at 7e44e4bdb; the ten owed counts decided on fresh runs (nothing admitted; SETTLED names the four new runs); evidence in packing/cases/regularized_drawings/think-0ut1-2026-10-16/; --verify-atlas passed in two parts. Review of #656 (with #644's final head) running. Closes at #656's merge.

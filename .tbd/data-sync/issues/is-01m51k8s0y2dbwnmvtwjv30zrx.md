@@ -5,7 +5,7 @@ title: Review and land the nine-count regularization batch 3a
 kind: task
 status: in_progress
 priority: 1
-version: 11
+version: 12
 delegate: user-eb-land-644
 labels: []
 dependencies: []
@@ -13,7 +13,7 @@ parent_id: is-01m51hy396vnjkxe4726egs8x5
 hold: null
 hold_until: null
 created_at: 2026-10-16T05:34:29.405Z
-updated_at: 2026-10-16T12:13:47.987Z
+updated_at: 2026-10-16T12:44:51.234Z
 started_at: 2026-10-16T05:34:41.706Z
 ---
 
@@ -38,3 +38,5 @@ Release completion must include both infographic families and every advertised S
 2026-10-16T10:45Z user-eb-land-644: container restart ~10:40Z killed the re-run after 25 of 27 grid-slack invocations (all complete, rc 0; 105 and 176 at 5 deg missing; the driver had not started). Resumed 10:45Z: 105/176 at 5 deg into NEW dir 3a-rerun-deg5b-1016, then driver 3a-rerun-1016 (fresh), then regularize_select over the five grid dirs + driver. Branch head 60b097880 (render-backed papers record).
 
 2026-10-16T12:13Z user-eb-land-644: pushed 5e5c2cd96 (B1 by reproduction; originals unrecoverable): evidence in packing/cases/regularized_drawings/think-la7h-2026-10-16/ (selection-3a.json/.md, 32 gz reports, 4 grid run.json, driver receipt), laid out like #653's think-kpm3. Reproduces every covered outcome (105 grid, 129/146 Daniel chosen with drawn measures; Daniel 105/204 row 7, 204/272 row 4; grid ties 204/303, row 7 at 272 at all three thresholds). Not re-run by driver: 156, 176, 271, 303 (load). --records 52/52 at 5e5c2cd96. PR body updated. Trying driver at 303 alone until ~13:05Z.
+
+2026-10-16T12:44Z user-eb-land-644: pushed 7226182b0: driver at 303 reproduced (row 4 held; 3a-rerun-303-1016, 1,639 CPU-s), retained; all three settlements now reproduced on both generators; driver not re-run only at 156/176/271 (admitted, independently verified). CI green at 5e5c2cd96 (31 success/28 skipped); CI at 7226182b0 running. PR body updated.
