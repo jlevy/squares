@@ -3,9 +3,9 @@ type: is
 id: is-01m50gnwxs4zpecygwebjayq84
 title: "Intake 2026-10-15 lane A: carry PR #616 forward: merge main, regenerate conflicted generated files, fix the red validate"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 5
+version: 6
 delegate: ecstatic-edison-lane-a
 labels:
   - result-import
@@ -14,8 +14,12 @@ parent_id: is-01m50gnwbxd5kxbynyx9nd162p
 hold: null
 hold_until: null
 created_at: 2026-10-15T19:29:59.225Z
-updated_at: 2026-10-16T00:36:13.234Z
+updated_at: 2026-10-16T01:19:43.890Z
 started_at: 2026-10-15T19:30:07.725Z
+closed_at: 2026-10-16T01:19:43.889Z
+close_reason: "Merged in stack #632 (bbc12b617), 2026-10-16"
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes
