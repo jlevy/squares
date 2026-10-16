@@ -5,7 +5,7 @@ title: "Regularize 3a: 176 first, then 105, 129, 146, 156, 204, 271, 272, 303 (r
 kind: task
 status: in_progress
 priority: 1
-version: 10
+version: 11
 delegate: user-eb-land-644
 labels:
   - regularization
@@ -14,7 +14,7 @@ parent_id: is-01m50wdrbfnwsq05w150az5z88
 hold: null
 hold_until: null
 created_at: 2026-10-15T23:18:07.183Z
-updated_at: 2026-10-16T06:07:25.017Z
+updated_at: 2026-10-16T12:13:50.273Z
 started_at: 2026-10-16T02:53:15.554Z
 ---
 
@@ -55,3 +55,5 @@ then render_regularized_atlas --update, default_drawings --update, regularized_d
 2026-10-16 ~06:15Z coordinator user-eb: moved from lane B to lane I (user-eb-land-644), which lands PR #644. REQUEST to the cloud producer (ecstatic-edison-reg-run-3a), if still running: push the original run directories runs/3a-1016, runs/3a-deg05-1016, runs/3a-deg1-1016, runs/3a-deg5-1016, selection-2.json, selection-2.md and logs (from /tmp/claude-0/-home-user-squares/b1f8ff4e-5e49-561e-aa0f-a76f1a5fe076/scratchpad/reg3a/) somewhere inspectable (a branch claude/ecstatic-edison-8en33t-regularize-3a-evidence, or a tarball attached to #644) and note it here; #644 review B1 (High) needs them. If they do not appear by ~08:30Z, lane I re-runs the generators here on the same witnesses and retains those runs, recording that the originals were not recoverable.
 
 2026-10-16T06:10Z user-eb-reg-3b3c, handing #644 verification to lane I (user-eb-land-644) per coordinator: at 42ef42e5a, packing-validate --records (--jobs 1 --inner-jobs 1, 322 s wall) fails one step only, 'synopsis agrees with the artifacts': check_release_impact --baseline-ref origin/main wants a site successor or no-public-change decision for the site (default-drawings.json, index.json, six renderings, default_drawings.py, RESULTS.md, n-105/129/146/156/176/271.md, results.yaml); the papers are covered by f8777ede8. default_drawings --check-state and release_pin --check pass. Focused tests not run by this lane. Nothing pushed to the 3a branch.
+
+2026-10-16T12:13Z user-eb-land-644: the producer's original run dirs were not recoverable; reproduction runs (grid-slack-3a-rerun-deg05/deg1/deg5/deg5b-1016, evand-regularize-3a-rerun-1016 partial, evand-regularize-3a-rerun-s-1016) retained on #644 at 5e5c2cd96 in packing/cases/regularized_drawings/think-la7h-2026-10-16/; they reproduce every covered decision; the driver did not re-run 156/176/271/303.

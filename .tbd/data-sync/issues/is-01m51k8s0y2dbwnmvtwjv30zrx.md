@@ -5,7 +5,7 @@ title: Review and land the nine-count regularization batch 3a
 kind: task
 status: in_progress
 priority: 1
-version: 10
+version: 11
 delegate: user-eb-land-644
 labels: []
 dependencies: []
@@ -13,7 +13,7 @@ parent_id: is-01m51hy396vnjkxe4726egs8x5
 hold: null
 hold_until: null
 created_at: 2026-10-16T05:34:29.405Z
-updated_at: 2026-10-16T10:45:23.837Z
+updated_at: 2026-10-16T12:13:47.987Z
 started_at: 2026-10-16T05:34:41.706Z
 ---
 
@@ -36,3 +36,5 @@ Release completion must include both infographic families and every advertised S
 2026-10-16T09:53Z user-eb-land-644: no producer evidence by 08:30Z (no -evidence branch, no new #644 comment, no think-la7h note; checked again 09:53Z). Re-run started 09:54Z from detached base worktree at main e2e018f32 (laneI scratch base-e2e018f32): grid-slack 0.5/1/5 deg (run dirs 3a-rerun-deg05/deg1/deg5-1016, 2 lanes) then evand driver (3a-rerun-1016, --workers 2 --timeout 1800 --regularize-timeout 1800), then regularize_select --workers 2; nice 10. Branch head 780d81b82 (CI green).
 
 2026-10-16T10:45Z user-eb-land-644: container restart ~10:40Z killed the re-run after 25 of 27 grid-slack invocations (all complete, rc 0; 105 and 176 at 5 deg missing; the driver had not started). Resumed 10:45Z: 105/176 at 5 deg into NEW dir 3a-rerun-deg5b-1016, then driver 3a-rerun-1016 (fresh), then regularize_select over the five grid dirs + driver. Branch head 60b097880 (render-backed papers record).
+
+2026-10-16T12:13Z user-eb-land-644: pushed 5e5c2cd96 (B1 by reproduction; originals unrecoverable): evidence in packing/cases/regularized_drawings/think-la7h-2026-10-16/ (selection-3a.json/.md, 32 gz reports, 4 grid run.json, driver receipt), laid out like #653's think-kpm3. Reproduces every covered outcome (105 grid, 129/146 Daniel chosen with drawn measures; Daniel 105/204 row 7, 204/272 row 4; grid ties 204/303, row 7 at 272 at all three thresholds). Not re-run by driver: 156, 176, 271, 303 (load). --records 52/52 at 5e5c2cd96. PR body updated. Trying driver at 303 alone until ~13:05Z.
