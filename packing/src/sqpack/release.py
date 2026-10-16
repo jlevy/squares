@@ -1078,6 +1078,54 @@ class ReleaseNoPublicChange(NamedTuple):
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
     ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+        ),
+        paths=("packing/devtools/regularize_select.py",),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-lower-bounds-explainer.pdf",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-optimality-review.pdf",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/n11-threshold-bound-review.pdf",
+        ),
+        reason=(
+            "The think-3zi3 run's fix changes only how regularize_select orders a driver "
+            "count with no view among its candidates. The three papers reach the module "
+            "only through shared import discovery and never run the selection, so their "
+            "manuscripts, figures, credits and print rules are unchanged by source review. "
+            "No render was taken, and they keep v0.4.7, v0.1.7 and v0.1.0."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=(
+            "packing/devtools/regularize_select.py",
+            "packing/frontier/n-175.md",
+        ),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The regularization run of 16 October 2026 on the three counts #598 re-housed "
+            "(think-3zi3) changes n = 175's case record only in its generated "
+            "regularization note, which the survey cites by link only, and fixes how the "
+            "selection orders a driver count with no view, which the survey reaches only "
+            "through shared import discovery and never runs. Rendered from main at "
+            "e2e018f32 and from this branch at that one link revision, the survey's HTML "
+            "and Markdown are byte-identical, as are the other 40 files the renderer "
+            "writes. No PDF was printed (no pinned Chromium on this host), and the survey "
+            "keeps v0.2.2."
+        ),
+    ),
+    ReleaseNoPublicChange(
         components=("paper:square-packing-methods-survey",),
         paths=(
             "packing/frontier/n-153.md",
