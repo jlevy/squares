@@ -5,7 +5,7 @@ title: "Record-keeping: make the record state explicitly per count whether its d
 kind: task
 status: in_progress
 priority: 1
-version: 9
+version: 10
 delegate: ecstatic-edison-reg-record
 labels:
   - regularization
@@ -22,7 +22,7 @@ parent_id: is-01m50wdrbfnwsq05w150az5z88
 hold: null
 hold_until: null
 created_at: 2026-10-15T22:55:18.138Z
-updated_at: 2026-10-16T00:06:51.716Z
+updated_at: 2026-10-16T00:16:07.440Z
 started_at: 2026-10-15T23:18:47.484Z
 ---
 
@@ -39,3 +39,4 @@ Design from the audit (think-y1x3): extend default-drawings.json to all 324 coun
 - Guide/policy cost fixed to 13.7 CPU-h (49,302 CPU-s); closes think-0sx2.
 - Follow-ups: think-290l (register-sense "regularization" wording in notes), think-0ut1 (residue runs). Each regularization PR (la7h/kpm3/3zi3) must take its counts off PENDING_ALLOWED.
 - The first push (a94449d62) failed hosted validate and suite-c on 'integrity ceremony never grows' (OR-16 digest comparisons); fixed in afdf5cc65 by binding to source key and side. Hosted validate also fails 'bead tree' on think-eiu9 and think-nhut (PR #625 review A3/A4, open under closed think-i7i0), which this branch does not touch.
+- Hosted CI on 48c175623: all 31 run checks pass (packing-required run 38827509142, pages-required run 38827509343), 28 skipped by selection; the deferred regularized-views job is skipped on PRs. PR #636 stays draft; never merged by this lane.
