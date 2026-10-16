@@ -114,19 +114,29 @@ def verified_here(evidence: Mapping[str, object]) -> bool:
     )
 
 
+#: The hypothesis a malformed `proof.conditional_on` stands for: one nothing discharges.
+MALFORMED_PREMISE = "an unreadable proof.conditional_on"
+
+
 def conditions(evidence: Mapping[str, object]) -> list[tuple[str, list[str]]]:
     """The hypotheses a proved theorem takes and does not prove (`proof.conditional_on`),
-    each with the entries recorded as discharging it, in record order."""
+    each with the entries recorded as discharging it, in record order.
+
+    Fails closed: a present `conditional_on` that is not a list, and each item that is
+    not a mapping, is one hypothesis nothing discharges, so a malformed record never
+    reads as unconditional. The schema refuses those shapes as well.
+    """
     proof = evidence.get("proof")
-    if not isinstance(proof, Mapping):
+    if not isinstance(proof, Mapping) or "conditional_on" not in proof:
         return []
     items = proof.get("conditional_on")
     if not isinstance(items, list):
-        return []
+        return [(MALFORMED_PREMISE, [])]
     return [
         (str(item.get("hypothesis")), _string_list(item.get("discharged_by")))
-        for item in items
         if isinstance(item, Mapping)
+        else (MALFORMED_PREMISE, [])
+        for item in items
     ]
 
 
@@ -237,6 +247,10 @@ def conditional_problems(evidence_by_id: Mapping[str, Mapping[str, object]]) -> 
     errors: list[str] = []
     for evidence_id, evidence in evidence_by_id.items():
         for hypothesis, refs in conditions(evidence):
+            if hypothesis == MALFORMED_PREMISE:
+                errors.append(
+                    f"{evidence_id}: proof.conditional_on is not a list of hypotheses"
+                )
             for ref in refs:
                 other = evidence_by_id.get(ref)
                 if other is None:

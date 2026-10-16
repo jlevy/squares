@@ -17,6 +17,7 @@ from sqpack.assurance import (
     check_case_semantics,
     check_evidence_semantics,
     conditional_problems,
+    conditions,
     shared_receipt_problems,
 )
 from sqpack.yamlio import safe_load
@@ -475,3 +476,19 @@ def test_a_producers_unadmitted_exact_run_discharges_no_premise() -> None:
     premise.update(origin="replayed-here", performed_by="repository")
     assert conditional_problems({row["id"]: row for row in entries}) == []
     assert derive_verification(entries, record=ONE_CASE) == "V3"
+
+
+@pytest.mark.parametrize(
+    "malformed",
+    [["H"], {"hypothesis": "H", "discharged_by": []}, "H", [None], None],
+    ids=["strings", "mapping", "scalar", "null-item", "null"],
+)
+def test_a_malformed_conditional_on_fails_closed(malformed: object) -> None:
+    entry = source_build()
+    assert derive_verification([entry], record=ONE_CASE) == "V3"
+    entry["proof"]["conditional_on"] = malformed
+    assert conditions(entry)
+    assert all(not refs for _, refs in conditions(entry))
+    assert conditional_problems({entry["id"]: entry})
+    assert derive_verification([entry], record=ONE_CASE) == "V0"
+    assert derive_confirmation([entry], record=ONE_CASE) == "C1"
