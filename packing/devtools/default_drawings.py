@@ -235,8 +235,8 @@ _RUN3A = (
     ("regularize_grid_slack/1", "grid-slack-3a-deg05-1016"),
 )
 _README_3A = (
-    "packing/atlas/known-best/README.md, the paragraph of 16 October 2026; the reproduction "
-    "runs' evidence in packing/cases/regularized_drawings/think-la7h-2026-10-16/"
+    "packing/atlas/known-best/README.md, the think-la7h paragraph of 16 October 2026; the "
+    "reproduction runs' evidence in packing/cases/regularized_drawings/think-la7h-2026-10-16/"
 )
 #: The same generators again on the same witnesses, from main e2e018f32 on 16 October
 #: 2026, since the runs above stayed on the host that ran them (review B1 of #644); their
