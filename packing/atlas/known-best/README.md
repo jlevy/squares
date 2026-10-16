@@ -305,6 +305,12 @@ and upstream’s checker refused it).
 Over the three, light / uneven / near-axis squares go from 19 / 64 / 0 to 13 / 57 / 0,
 and house sides from 1,859 to 1,963. No count is pending any more:
 `devtools.default_drawings.PENDING_ALLOWED` is empty.
+The evidence is retained in
+[`cases/regularized_drawings/think-3zi3-2026-10-16/`](../../cases/regularized_drawings/think-3zi3-2026-10-16/),
+in the same layout as think-kpm3’s: `selection-3c.json` and `selection-3c.md`, the
+driver’s `receipt.json`, each run’s per-count `report.json`, gzip-compressed, and a
+`run.json` for each grid-slack run; the index records only the half-degree run, which
+supplied a view, and that block is the same as the index’s.
 
 Every drawn view carries its regularization in the register’s terms (`by: project`, the
 method, the side and the identity measured here), and `results.yaml`’s
