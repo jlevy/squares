@@ -5,7 +5,7 @@ title: "Post the stage-7 replies held for stack #632"
 kind: task
 status: in_progress
 priority: 1
-version: 5
+version: 6
 delegate: ecstatic-edison-replies-stack
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m50gnwbxd5kxbynyx9nd162p
 hold: null
 hold_until: null
 created_at: 2026-10-16T01:20:02.999Z
-updated_at: 2026-10-16T02:37:23.798Z
+updated_at: 2026-10-16T02:46:43.167Z
 started_at: 2026-10-16T01:20:05.762Z
 ---
 Stack #632 (#627, #628, #631) merged into main at bbc12b617. Post the held stage-7 replies on #413 #476 #506 #533 #561 #573 #575 #583 #586 #593 #594 #606 #607 #610 #613 #622 (PR) #624 after the Pages deployment for bbc12b617 verifies; record them in result-requests.yaml on claude/ecstatic-edison-8en33t-replies-stack; one draft PR. Not on #574 #570 #557 #565 #542 #543.
@@ -53,3 +53,5 @@ Correction to the header time: the replies were posted 01:38:17Z to 01:39:02Z.
 Record branch claude/ecstatic-edison-8en33t-replies-stack from origin/main 22c0ebf0d (#626 merged meanwhile), commit 548004c58: 15 replies under replies, #561 #575 #583 #586 state closed / closed 2026-10-16, #573 note (why open), #613 note reworded; release.py ReleaseNoPublicChange for the methods survey (rendered at link revision 22c0ebf0 with main's and the branch's record: byte-identical, 42 files). Validation at 548004c58: check_requests gate exit 0; --report: none of the 17 issues reply due; --github 27 differences, none on these issues (other lanes' #625/#630 replies); check_release_impact --baseline-ref origin/main: every candidate has a reviewed disposition; pytest tests/test_check_requests.py tests/test_release*.py 110 passed; packing-validate --records exit 0, 51/109 steps, 106 s. Draft PR https://github.com/jlevy/squares/pull/637 (labels intake, S1). Do not close this bead until #637 merges.
 
 2026-10-16 02:27Z-02:45Z ecstatic-edison-replies-stack, resumed after a container restart. The earlier lane had pushed 9570e2281 (merge of ee9cec6e + restatement) and left an unpushed merge of 3685616d (a532f0cc9, 3823efaff) in worktree agent-adfe00968d9eccae7; redone here independently: merge 3f8915651 has the identical tree 71374646 and restatement dd40d7de5 the identical release.py text. Read all 15 posted comments back from GitHub: each URL/kind/reported id, rung, status is recorded on the branch; #561 #575 #583 #586 closed completed 01:38:56Z-01:39:03Z. #476, #606: not posted, --report on main 3685616d reply due: no for both; T-134 still V3/C3 and the house at 267 (no case page at its six counts changed in the stack); T-187 unchanged V0/C0; --draft 476/606 repeat the earlier replies' state. Main since the stack (bbc12b617..3685616df) touches none of the 17 issues' entries and no frontier file. Survey rendered at link revision 3685616df with main's and the branch's record: 42 files byte-identical. At dd40d7de5: check_requests gate exit 0; --report reply due only on #557 #565 #570 #574 (deliberately not posted); --github 0 differences; check_release_impact --baseline-ref origin/main ok; release_pin --check ok (pin e35725f07262); pytest 110 passed; packing-validate --records exit 0, 51/109 steps, 69 s. Pushed dd40d7de5 to claude/ecstatic-edison-8en33t-replies-stack; #637 description updated (still draft). Hosted CI running.
+
+02:48Z: hosted CI at dd40d7de5 green on the first run: Packing validation 38841156272 success (02:34:50Z-02:45:59Z, packing-required pass), Certificate page 38841156219 success (pages-required pass), merges-into-base pass; 31 pass, 28 skipped, 0 failed, no re-run. #637 still draft, MERGEABLE/CLEAN; description updated with cost, per-issue rows and hosted results. Bead stays open until #637 merges.
