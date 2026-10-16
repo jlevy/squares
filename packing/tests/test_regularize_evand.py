@@ -757,6 +757,37 @@ def test_an_admitted_view_enters_the_layer_under_its_contract(
     assert axis.main(["--verify-atlas"], layout=layout) == 0
 
 
+def test_an_admitted_view_ends_the_lapse_the_axis_record_carried(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """A strong view admitted on the current witness ends the lapse `--update-atlas`
+    wrote on the axis tool's record: the record kept as the view's `reference` carries
+    none, so the count no longer explains a pending state by a view that has returned
+    (review A3 of #636). `--check-atlas` would otherwise catch it only at the first real
+    admission."""
+    monkeypatch.setenv("PACK_JOBS", "1")
+    root, layout = scratch_tree(tmp_path)
+    run_dir = a_run(root, layout, tmp_path / "full")
+    index = json.loads(layout.index.read_text(encoding="utf-8"))
+    (record,) = index["entries"]
+    record[axis.LAPSED] = {
+        "generator": axis.EVAND_GENERATOR,
+        "run": "an-earlier-run",
+        "witness_sha256": "2" * 64,
+    }
+    layout.index.write_text(json.dumps(index), encoding="utf-8")
+    assert axis.check_atlas(layout) == []
+
+    summary = drive.write_layer([run_dir], root, "admitted")
+    assert summary["written"] == [4]
+    (entry,) = json.loads(layout.index.read_text(encoding="utf-8"))["entries"]
+    assert entry["generator"] == axis.EVAND_GENERATOR
+    assert axis.LAPSED not in entry
+    assert axis.LAPSED not in entry["reference"]
+    assert entry["reference"] == axis.derived(record)
+    assert axis.check_atlas(layout) == []
+
+
 def _fresh_receipt(run_dir: Path, again: Path) -> None:
     """A fresh run's receipt: the run's own, with a cost of its own. A run block whose cost
     repeats an earlier run's is a reclassified copy, which the index records with no cost
