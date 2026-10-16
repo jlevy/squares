@@ -580,6 +580,7 @@ key remain bound to the bytes they originally named.
 | [Kleddamag/17-squares-certified-bound](https://github.com/Kleddamag/17-squares-certified-bound) | The `n = 17` mixed-charge certificate line through `466001/100000` | **[Kleddamag n17 4.66001]**; [27 September packet](web/n17-kleddamag-466001-2026-09-27/README.md) |
 | [Kleddamag/the-seventeenth-square-candidate](https://github.com/Kleddamag/the-seventeenth-square-candidate) | Marc Leonard Overbeck’s verification edition of a candidate proof that `s(17) = L`, Bidwell’s side | **[Overbeck n17 candidate 2026]**; [12 October packet](web/kleddamag-n17-candidate-2026-10-12/README.md) |
 | [ofitzharding/sq17-lean](https://github.com/ofitzharding/sq17-lean) | Oscar Fitzharding’s Lean 4 proof that `s(17) = L`, `Sq17.square17_optimality`, announced on 13 October 2026: the source reports a clean rebuild of the theorem’s 4,951-module import closure, trusting Lean’s compiler for 13,343 `native_decide` facts | **[Fitzharding n17 Lean 2026]**; [13 October packet](web/fitzharding-n17-lean-2026-10-13/README.md), pinned `e6ee548090dc1dbf938ecf8590481de837a6a454` |
+| [ofitzharding/sq19](https://github.com/ofitzharding/sq19) | Oscar Fitzharding’s Lean 4 proof that `s(19) = 3 + 4√2/3`, `Sq19.square19_optimality`, announced on 16 October 2026: the source reports a kernel replay of the theorem’s 13,143-module import closure, trusting Lean’s compiler for 4,320 `native_decide` facts | **[Fitzharding n19 Lean 2026]**; [16 October packet](web/fitzharding-n19-lean-2026-10-16/README.md), pinned `34fb2b7bc39465db368c45cb48d4db58829d3051` |
 | [bengreff/s76-certificate](https://github.com/bengreff/s76-certificate) | Benjamin Greff’s mixed cover for `s(76) = 9`, decided by Evan Daniel’s `zmx2` and `zm_mixed.py`; issue #594 | **[bengreff s76 certificate 2026-10-14]**; [14 October packet](web/bengreff-s76-certificate-2026-10-14/README.md), pinned `1cb924fa2fb7e8e30d8ddeb9b5e0dfcfae4f9f1f` |
 | [bengreff/s95-certificate](https://github.com/bengreff/s95-certificate) | Benjamin Greff’s mixed cover for `s(95) = 10`, decided by Evan Daniel’s `zmx2` and `zm_mixed.py`; issue #610 | **[bengreff s95 certificate 2026-10-15]**; [15 October packet](web/bengreff-s95-certificate-2026-10-15/README.md), pinned `dd7297d06adc664268c65005369b895e4ded7547` |
 | [Guzhou0806/n17-square-packing](https://github.com/Guzhou0806/n17-square-packing) | Parent-angle and mixed-charge certificates for `n = 17`, including R068 and R071 | **[Guzhou0806 n17 R068]**; [28 September packet](web/n17-guzhou-r068-2026-09-28/README.md); **[Guzhou0806 n17 R071]**; [30 September packet](web/n17-guzhou-r071-2026-09-30/README.md), pinned `8c11f6962506940c5de67a9fa73b3d1e2e151196` |
@@ -1324,6 +1325,30 @@ project “was developed with substantial assistance from Claude and Codex”.
 The author’s announcement of 13 October says it was “Built with @OpenAI Astra +
 @AnthropicAI Opus 5.5”. The author asked for its registration in issue #565 on 12
 October 2026, and the owner reported it on 13 October 2026.
+
+## Fitzharding’s Lean proof that s(19) = 3 + 4√2/3, 16 October 2026
+
+**[Fitzharding n19 Lean 2026]**: Oscar Fitzharding’s (GitHub and X ofitzharding) Lean 4
+proof `Sq19.square19_optimality (L : ℝ) : Feasible19 L ↔ 3 + 4 * Real.sqrt 2 / 3 ≤ L`:
+nineteen closed unit squares, freely translated and rotated with disjoint interiors, fit
+in an axis-aligned square of side $L$ exactly when $L$ is at least the side of Robert
+Wainwright’s 1979 packing, $3 + 4\sqrt{2}/3 \approx 4.885618$. It is pinned in
+[ofitzharding/sq19](https://github.com/ofitzharding/sq19) at
+`34fb2b7bc39465db368c45cb48d4db58829d3051`, the tag of its release `v1.0.0`, and
+retained whole. The release’s five archives of generated certificate modules
+(1,110,588,236 bytes) are pinned by size and SHA-256 and not retained;
+[packet](web/fitzharding-n19-lean-2026-10-16/README.md).
+MIT licence. Its axiom report lists 4,320 `native_decide` facts and the three standard
+axioms, and no `sorryAx`. The source reports a kernel replay of the import closure, and
+says a complete rebuild from source has not yet been run.
+Nothing here has built the proof.
+It builds on the author’s s(17) proof, **[Fitzharding n17 Lean 2026]**, whose checker
+modules it compiles from sq17-lean `v1.0.0`. It thanks this project and Manasseh Ahmed,
+and says it was “Developed with substantial assistance from Claude and Codex”.
+The author announced it on X at 2026-10-16T03:27:40Z
+(<https://x.com/ofitzharding/status/2110935681597874374>), retained in the packet, and
+asked for its registration in issue #640 at 03:41:08Z. The key’s entry in
+`bibliography.yaml` is added by the change that registers the result.
 
 ## Daniil Ostashev’s and Rio Calle’s certificates, 12 October 2026
 
