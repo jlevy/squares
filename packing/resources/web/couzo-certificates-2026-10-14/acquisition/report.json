@@ -8,7 +8,7 @@
   "witness_prefix": "W-couzo-607-n",
   "claim_limitations": "Complete 43ac7d2 rational centre/half-angle certificate converted exactly from the retained source. Finite construction feasibility only; no KKT, local minimum, rigidity, novelty, priority or global optimality claim.",
   "read_on": "2026-10-15",
-  "read_at_main": "c4c690a3e60e613ec6c063d4f27c5f627e734ea5",
+  "read_at_main": "22a67ce4aa933196c307e4b209c45b13d55454db",
   "certificates": [
     {
       "n": 237,
@@ -218,18 +218,26 @@
   "houses": [
     {
       "n": 237,
-      "reader": "[Couzo certificates 2026-10-10]",
-      "source_key": "[Couzo certificates 2026-10-10]",
-      "holders": "Nate Chaoweeraprasit (itsnaka), improved by Francisco Couzo",
-      "result": "T-140",
-      "reported_value": "15.9029496076778317",
-      "verified_value": "15.9029496076778317",
+      "reader": "[Mishapolk records 2026-10-14]",
+      "source_key": "[Mishapolk records 2026-10-14]",
+      "holders": "Nate Chaoweeraprasit (itsnaka), improved by Francisco Couzo, Mykhailo Polkovskyi",
+      "result": "T-183",
+      "reported_value": "15.9027050578663668",
+      "verified_value": "15.9027050578663668",
       "evidence": [
-        "E-couzo-488-exact-feasibility"
+        "E-mishapolk-593-exact-feasibility"
       ]
     }
   ],
   "pending": [
+    {
+      "n": 237,
+      "report": "#488",
+      "url": "https://github.com/jlevy/squares/issues/488",
+      "holders": "Francisco Couzo",
+      "result": "T-140",
+      "reader": "[Couzo certificates 2026-10-10]"
+    },
     {
       "n": 237,
       "report": "#561",
@@ -315,14 +323,6 @@
       "url": "https://github.com/jlevy/squares/issues/573",
       "holders": "Mykhailo Polkovskyi (Mishapolk)",
       "reader": "[Mishapolk exact certificates 2026-10-12]"
-    },
-    {
-      "n": 237,
-      "report": "#593",
-      "url": "https://github.com/jlevy/squares/issues/593",
-      "holders": "Mykhailo Polkovskyi (Mishapolk)",
-      "result": "T-183",
-      "reader": "[Mishapolk records 2026-10-14]"
     },
     {
       "n": 339,
@@ -691,7 +691,7 @@
     "significance": 2,
     "source_checks": "The author reports that all 23 certificates pass this repository's sqpack verify.py at 37e6757, run independently with exact rationals and spatial-bucket pair enumeration, and Evan Daniel's verify_cert.py at 622cd2e (SHA-256 3299ca0c...), each returning VALID with exit status 0, the replay of the 16 campaign and precision certificates taking 22.4 seconds of wall time on two processes; that the 16 also passed the browser campaign's Rust rational checker; and that the seven composite receipts were reused after their digests matched the replayed bytes. Two composites were copied from Kevin Fang's shipped certificates and five regenerated with his tools/glue.py, all seven with the SHA-256 his table lists. Those statements are the author's; no source program ran here.",
     "credit": "Credit Francisco Couzo (https://github.com/franciscouzo/square-packing) with the 16 campaign and precision certificates, with the packings each continues, as the author asks: at 237 Mykhailo Polkovskyi's issue-593 certificate (T-183), whose construction credit he asks to keep; at 339 the author's own L-border construction of issue 506, refined in issues 583 and 586; at 382 and 651 Kevin Fang's published arrangements; at 409 and 450 the campaign's L-border lineage, whose 409 start includes Evan Daniel's 298 packing, with 450 one L-border layer on the new 409; at 419, 461 and 804 campaign refinements and L-border or elimination constructions from starts that include the project's refinements of Fang's 380 and 381; at 552, 599 and 648 the campaign's 552 with zero, one and two L-border layers; at 649 elimination from 651; and at 757 elimination from 758. Credit Kevin Fang (TheSnakeFang) with the seven composites at 703, 812, 930, 931, 992, 993 and 994, which the author replayed and does not claim. Evan Daniel's optimizer and verifier, David Ellsworth's refinement ideas and this repository's exact verifier were used. The author states that OpenAI Codex assisted search and verification orchestration, source review, certificate packaging and the issue, that earlier search work used Claude Code, and that he directed the work.",
-    "next_rung": "Independently review the retained replay, then register by the per-count rule: at 237 the certificate is below T-183 (issue 593) by 1.01e-04, the smallest report; beyond the horizon the 14 campaign and precision certificates are each below every earlier report, Couzo's own 487b058 certificates included; at the seven composite counts the certificates are Fang's composites byte for byte, so they register as Fang's rows (think-rn2y) with this replay as evidence, not as Couzo's results. Final exact-head CI remains required.",
+    "next_rung": "Independently review the retained replay, then register by the per-count rule: at 237 the certificate is below T-183 (issue 593), the case's house and the smallest earlier report, by 1.01e-04; beyond the horizon the 14 campaign and precision certificates are each below every earlier report, Couzo's own 487b058 certificates included; at the seven composite counts the certificates are Fang's composites byte for byte, so they register as Fang's rows (think-rn2y) with this replay as evidence, not as Couzo's results. Final exact-head CI remains required.",
     "bead": "think-qik6",
     "bibliography": {
       "authors": [

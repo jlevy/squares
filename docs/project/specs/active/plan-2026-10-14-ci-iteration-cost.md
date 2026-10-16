@@ -818,6 +818,49 @@ Its controls require hosted validation while local disk-heavy work is paused.
 A measured reduction in iteration time remains to be established on the existing
 validation surface.
 
+### October 15 Native-Lane Timeout Follow-up
+
+[PR #623](https://github.com/jlevy/squares/pull/623) delivered the News reader
+corrections at merge `6e73ef1c`. Its required PR checks passed, and the production
+deployment audit passed all 4,480 checks.
+The separate
+[main Packing run](https://github.com/jlevy/squares/actions/runs/38797565375) failed two
+command deadlines:
+
+| Lane | Deadline | Retained evidence | Missing evidence |
+| --- | --- | --- | --- |
+| Slow tests | 1,800s | 240 passing markers; no completed JUnit | Unfinished test and phase |
+| Quick shard C | 900s | 5,403 passing markers and 11 skips; no completed JUnit or file-cost record | Unfinished test and phase |
+
+These are actual timeouts, not advisory timing reports or established assertion
+failures. The other eleven native owners passed.
+Preserve the failed run and keep the successful publication distinct from its incomplete
+deeper validation.
+
+The previous successful slow run completed 241 cases in 1,216.044s. Its largest case,
+`test_known_best_composite_contains_every_case_and_square`, took 732.593s and rebuilt
+all 324 witnesses and drawings through a two-worker pool.
+That unchanged atlas path does not execute the new News renderer or shared site CSS. It
+is a diagnostic candidate, not the identified unfinished case or proof that runner
+variance caused either timeout.
+
+Bead `think-yops` owns diagnosis.
+Reuse the existing flushed progress writer for native quick and slow pytest commands,
+recording test starts and completed setup, call and teardown phases.
+Keep artifact paths outside source, record the actual source and worker shape, and
+preserve the exact selections, assertions, worker caps and command deadlines.
+The default reachable-test event stream must remain compatible.
+Interrupted-child tests must demonstrate that the last completed phase survives
+cancellation.
+
+This adds diagnostics to existing commands, without another job or dependency.
+Its end-to-end writing and artifact cost remains unmeasured; focused probe times are not
+a performance result.
+After review, choose one instrumented observation deliberately, retain its
+unfinished-work evidence if it times out, and use that evidence to select the next
+repair. Do not raise a deadline, suppress a test, or call a clean later run an
+explanation of the original failures.
+
 ## References
 
 - [Operating rules](../../../../operating-rules.md), especially OR-13, OR-14, OR-16,

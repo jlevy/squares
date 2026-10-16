@@ -118,9 +118,9 @@ results:
           cpu_hours: 12.73
           cpu_hours_high: 30.43
           basis: >-
-            The 15 October sample: slabs 0 and 14 on the CI binary 69bc9e64, 567.6 CPU-s
-            here against the source's 1,613.8 s, ratio 0.42 by the kernel's own timing,
-            applied to the source's 109,538 s over the slabs
+            The 15 October sample: slabs 0 and 14 on the CI binary 69bc9e64, ratio 0.42 by
+            the kernel's own timing (0.35 by process CPU: 567.6 CPU-s here against the
+            source's 1,613.8 s), the larger applied to the source's 109,538 s over the slabs
             (packing/resources/web/wand125-continuous-n28-2026-10-15/receipts/sample-diagnostic-n28.json).
             The upper end is the source's own CPU.
           priced: '2026-10-15'

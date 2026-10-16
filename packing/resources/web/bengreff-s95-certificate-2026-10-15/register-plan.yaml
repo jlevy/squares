@@ -18,7 +18,7 @@
 # devtools.audit_evand_mixed_covers (the W7 slice think-ribz names, shared with #594), and
 # a stage 4 review with no blocking defect; then V3/C3, reproduced with the producer's
 # code. zmx2 --full is not part of it (think-eucc). No case record changes: the entry is
-# pending adoption at n = 95 while wand125's 1993/200 (T-091, the sqverify-fast replay)
+# pending adoption at n = 95 while wand125's 1993/200 (T-090, with its sqverify-fast replay)
 # holds both lower lanes of n-095.md.
 #
 # At n = 96 the cover gives s(96) >= 10 by monotonicity. T-081 already registers

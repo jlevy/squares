@@ -5812,8 +5812,12 @@ sources:
     rule records, each a beyond-horizon row; 812 and 930 are above Kevin Fang's earlier
     composites, and the 42 rows above Göbel's classical constructions (408 to 974) wait
     on the owner's answer on jlevy/squares#613 (think-8krd). Their replay is held
-    (think-2d7f). No selected override or superseded claim is created at this
-    source-only stage; current cases and earlier source ownership remain unchanged.
+    (think-2d7f), and their bytes are held only in the author's repository at the pin.
+    Couzo's 4e4c8ce index of 15 October, a report not yet recorded (think-yfoo), is
+    smaller at all 238 of the 252 rows still current, by 3.79e-12 to 2.38e-02 (the
+    index's exact sides are in review/goebel-beyond-horizon.json). No selected override
+    or superseded claim is created at this source-only stage; current cases and earlier
+    source ownership remain unchanged.
   claims_record: resources/web/couzo-verified-bounds-2026-10-14/review/beyond-horizon-claims.json
 - id: couzo-certificates-2026-10-14
   title: Francisco Couzo's registration witnesses at 43ac7d2, issue 607
@@ -5854,7 +5858,11 @@ sources:
     report at 237, and the claims record holds the 15 beyond-horizon sides the per-count
     rule records, each a row. The seven at 703, 812, 930, 931, 992, 993 and 994 are
     Kevin Fang's composites byte for byte, a tie his earlier rows keep, so they are
-    outside this source's scope and wait on his composites import (think-rn2y). No
+    outside this source's scope and wait on his composites import (think-rn2y). Couzo's
+    4e4c8ce index of 15 October, a report not yet recorded (think-yfoo), is smaller at 7
+    of the 15 rows, at 339, 382, 450, 552, 599, 648 and 757, by 2.88e-11 to 1.13e-03
+    (the index's exact sides are in
+    resources/web/couzo-verified-bounds-2026-10-14/review/goebel-beyond-horizon.json). No
     selected override or superseded claim is created at this source-only stage; current
     cases and earlier source ownership remain unchanged.
   claims_record: resources/web/couzo-certificates-2026-10-14/acquisition/beyond-horizon-claims.json

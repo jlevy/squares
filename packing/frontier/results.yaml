@@ -25524,18 +25524,21 @@ results:
       [square-packing](https://github.com/franciscouzo/square-packing/tree/487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d/certificates)
       on 14 October 2026, "Land verified bounds through n=1024", with no issue. Its
       metadata (certificates/n211.json at the pin) calls the certificate an exact
-      optimum, seeded from Daniil Ostashev's issue-501 certificate and found by the
-      author's hop search (job 97342), and its README lists it as best known, "seeded
-      from Daniil Ostashev". The author reports that this repository's sqpack verify.py
-      and Evan Daniel's verify_cert.py accept his certificates in exact rational
-      arithmetic. Those statements are the author's; no source program ran here.
+      optimum, found by the author's hop search (job 97342) from his own 211 and seeded
+      from Daniil Ostashev's certificate, which it links to issue 501 but whose side it
+      states, 14.99369418658324..., is that of Ostashev's issue-575 certificate (T-175).
+
+      Its README lists it as best known, "seeded from Daniil Ostashev". The author
+      reports that this repository's sqpack verify.py and Evan Daniel's verify_cert.py
+      accept his certificates in exact rational arithmetic. Those statements are the
+      author's; no source program ran here.
 
       Credit Francisco Couzo (https://github.com/franciscouzo/square-packing) with this
-      refinement at 211, continuing Daniil Ostashev's arrangement (issue 501, T-149),
-      whose construction credit the author's README and metadata keep, after his own
-      issue-583 and issue-586 certificates of the same arrangement. Evan Daniel's
-      optimizer, contact solver and verifier and this repository's exact verifier were
-      used. The pinned files state nothing about AI assistance; the author's issues 583
+      refinement at 211 of Daniil Ostashev's arrangement of issue 575 (T-175), as the
+      author's own issue-583 and issue-586 certificates continued it (T-181, T-182);
+      the author's README and metadata keep Ostashev's construction credit. Evan
+      Daniel's optimizer, contact solver and verifier and this repository's exact
+      verifier were used. The pinned files state nothing about AI assistance; the author's issues 583
       and 586 of 13 October and 607 of 14 October state that he used OpenAI Codex for
       the search and verification orchestration, that earlier search work used Claude
       Code, and that he directed the work.
@@ -25546,8 +25549,8 @@ results:
       score: 1
       rationale: >-
         Routine refinement of a packing the record already credits: 9.29e-06 below issue
-        586's certificate of Daniil Ostashev's arrangement (T-182), the smallest earlier
-        report, and 2.79e-03 below the case ceiling; no lower bound or optimum.
+        586's certificate of Daniil Ostashev's arrangement (T-182), the case ceiling and
+        the smallest earlier report; no lower bound or optimum.
       scored: '2026-10-15'
       by: think-nj7h Francisco Couzo import (draft)
     novelty: previously-published
@@ -25573,13 +25576,21 @@ results:
       couzo-verified-bounds-2026-10-14; it stays out of this entry's artifacts so that
       the workers' snapshot stays under its cap.
 
-      At n = 211 the certificate is below the case's ceiling (Daniil Ostashev, T-149) by
-      2.79e-03; below T-057 (no issue) (de Winter) by 4.41e-03; below T-098 (#375)
-      (Daniel after de Winter) by 4.41e-03; below T-163 (Fang theorem inventory) (Kevin
-      Fang) by 6.40e-03; below PR #574 (PingYou Ltd (BuddenPing)) by 2.79e-03; below
-      #575 (Daniil Ostashev) by 1.45e-04; below #583 (Francisco Couzo) by 9.29e-06;
-      below #586 (Francisco Couzo) by 9.29e-06; below #593 (Mykhailo Polkovskyi
-      (Mishapolk)) by 9.29e-06; smallest: this certificate.
+      At n = 211 the certificate is below the case's ceiling (Daniil Ostashev, improved
+      by Francisco Couzo, T-182) by 9.29e-06; below T-057 (no issue) (de Winter) by
+      4.41e-03; below T-098 (#375) (Daniel after de Winter) by 4.41e-03; below #501
+      (Daniil Ostashev) by 2.79e-03; below T-163 (Fang theorem inventory) (Kevin Fang)
+      by 6.40e-03; below PR #574 (PingYou Ltd (BuddenPing)) by 2.79e-03; below #575
+      (Daniil Ostashev) by 1.45e-04; below #583 (Francisco Couzo) by 9.29e-06; below
+      #593 (Mykhailo Polkovskyi (Mishapolk)) by 9.29e-06; smallest: this certificate.
+
+      Measured here by mishapolk-kkt-refinements-2026-10-14's review/compare_lineage.py
+      (greedy nearest-centre matching under the box's eight symmetries; output
+      review/compare_lineage-output.txt in this packet), the certificate lies nearest
+      issue 586's packing (T-182): under a reflection of the box, 139 of its 211 squares
+      are within 1e-3 of T-182's and all but 5 within 0.1, none further than 0.354.
+      Against issue 575's (T-175), 112 are within 1e-3, none further than 0.445; against
+      issue 501's (T-149), 1.
 
       The source's own checkers were not run here. The two maintained routes, the sqpack
       rational witness verifier and the independent rational corner checker, share
@@ -25594,12 +25605,19 @@ results:
       restates the same bytes at 211, a tie the earlier report keeps.
 
       The same commit holds 296 certificates beyond the case corpus, at 339, 370, 378 to
-      382 and 403 to 991. They are bulk data, pinned by digest and not retained (OR-18),
-      and the packet compares them in report order from their exact header sides
+      382 and 403 to 991. They are bulk data, pinned by digest and not retained (OR-18):
+      their bytes are held only in the author's repository at the pin, and the packet
+      compares them in report order from their exact header sides
       (review/beyond-horizon-comparison.json). 252 are recorded as beyond-horizon rows
       of the source register, 18 of them superseding the rows they beat, and issue 607's
       certificates (T-189) supersede 14 of the 252 in turn. 812 and 930 are not
       recorded: Kevin Fang's earlier composites are smaller there.
+
+      Couzo's index of 15 October, published in the commit that holds T-190's
+      certificate, is a report before T-191 that is not yet recorded (think-yfoo). It is
+      smaller at all 238 of these rows still current, by 3.79e-12 (381) to 2.38e-02
+      (749), each side exact (review/goebel-beyond-horizon.json holds the index's), so
+      none of the 238 is the best known side at its count.
 
       At 42 counts from 408 to 974 the certificate is above Göbel's classical
       constructions, which the record holds nowhere beyond 324
@@ -25608,8 +25626,21 @@ results:
       456,922,338 pair decisions, priced at 38 to 48 CPU-hours and held (think-2d7f).
     next_rung: >-
       Independently review the retained replay, then decide adoption at 211, where the
-      certificate is 9.29e-06 below issue 586's (T-182), the smallest earlier report,
-      and 2.79e-03 below the case's T-149. Final exact-head CI remains required.
+      certificate is 9.29e-06 below issue 586's (T-182), the case's house and the
+      smallest earlier report. Final exact-head CI remains required.
+    regularizations:
+      - n: 211
+        of: T-182
+        by: '[Couzo verified bounds 2026-10-14]'
+        method: >-
+          exact optimum from the author's hop search on his own 211, which his metadata
+          seeds from Daniil Ostashev's issue-575 certificate (T-175), labelled issue 501
+        side: solved
+        identity:
+          basis: measured
+          measured_in: packing/resources/web/couzo-verified-bounds-2026-10-14/review/compare_lineage-output.txt
+          moved: 72
+          max_move: 0.3535
   - id: T-189
     kind: upper-bound
     registered: '2026-10-15'
@@ -25680,9 +25711,11 @@ results:
     significance:
       score: 2
       rationale: >-
-        A citable detail that changes no theorem: a smaller finite construction side at
-        n = 237, 1.01e-04 below issue 593's certificate it refines and 3.46e-04 below
-        the case ceiling; no lower bound or optimum.
+        A citable detail that changes no theorem: fifteen finite construction bounds
+        beyond the case corpus, among them the campaign's L-border and elimination
+        constructions at 409 to 804, 0.233 below the grid at 409 and 450. At 237 alone it
+        is a routine refinement, as T-188 and T-190 are: 1.01e-04 below issue 593's
+        certificate it refines (T-183), the case ceiling; no lower bound or optimum.
       scored: '2026-10-15'
       by: think-qik6 Francisco Couzo import (draft)
     novelty: previously-published
@@ -25711,18 +25744,23 @@ results:
       69 jobs again, equal to the retained rows apart from timing.
 
       At n = 237 the certificate is below the case's ceiling (Nate Chaoweeraprasit
-      (itsnaka), improved by Francisco Couzo, T-140) by 3.46e-04; below #561 (Francisco
-      Couzo) by 3.44e-04; below PR #574 (PingYou Ltd (BuddenPing), numerical v2) by
-      3.44e-04; below T-056 (Francisco Couzo) by 8.59e-03; below T-098 (#375) (Daniel
-      after Couzo, de Winter, Ellsworth, Levy) by 8.59e-03; below T-115 (#401)
-      (Chaoweeraprasit after Couzo and Ellsworth) by 1.07e-03; below T-127 (#438) (Gupta
-      after Chaoweeraprasit, Daniel) by 1.07e-03; below T-134 (#476) (Couzo after
-      Mishapolk, Chaoweeraprasit, Gupta, Xu, Daniel, Ellsworth, Levy) by 1.07e-03; below
-      T-136 (#481) (Chaoweeraprasit after Couzo, Xu, Goebel, Schadt, Ellsworth, Hajba,
-      Levy) by 3.86e-04; below #505 (Robert Barnett) by 1.07e-03; below #470 (Mykhailo
-      Polkovskyi (Mishapolk)) by 1.07e-03; below #573 (Mykhailo Polkovskyi (Mishapolk))
-      by 3.46e-04; below #593 (Mykhailo Polkovskyi (Mishapolk)) by 1.01e-04; smallest:
-      this certificate.
+      (itsnaka), improved by Francisco Couzo, Mykhailo Polkovskyi, T-183) by 1.01e-04;
+      below #488 (Francisco Couzo) by 3.46e-04; below #561 (Francisco Couzo) by
+      3.44e-04; below PR #574 (PingYou Ltd (BuddenPing), numerical v2) by 3.44e-04;
+      below T-056 (Francisco Couzo) by 8.59e-03; below T-098 (#375) (Daniel after Couzo,
+      de Winter, Ellsworth, Levy) by 8.59e-03; below T-115 (#401) (Chaoweeraprasit after
+      Couzo and Ellsworth) by 1.07e-03; below T-127 (#438) (Gupta after Chaoweeraprasit,
+      Daniel) by 1.07e-03; below T-134 (#476) (Couzo after Mishapolk, Chaoweeraprasit,
+      Gupta, Xu, Daniel, Ellsworth, Levy) by 1.07e-03; below T-136 (#481)
+      (Chaoweeraprasit after Couzo, Xu, Goebel, Schadt, Ellsworth, Hajba, Levy) by
+      3.86e-04; below #505 (Robert Barnett) by 1.07e-03; below #470 (Mykhailo Polkovskyi
+      (Mishapolk)) by 1.07e-03; below #573 (Mykhailo Polkovskyi (Mishapolk)) by
+      3.46e-04; smallest: this certificate.
+
+      Measured here by mishapolk-kkt-refinements-2026-10-14's review/compare_lineage.py
+      (output review/compare_lineage-output.txt in this packet), the certificate at 237
+      is issue 593's packing (T-183) under a reflection of the box: 195 of its 237
+      squares are within 1e-3 of T-183's and all within 0.034.
 
       At n = 339 the certificate is beyond the horizon, with no case record, and
       8.42e-02 below the grid; below #476 (Francisco Couzo) by 1.43e-02; below #506
@@ -25815,18 +25853,40 @@ results:
       is claimed.
 
       The per-count rule of 14 October takes the reports in the order they reached this
-      repository: the certificates count from their first commit in the author's
-      repository, on 14 October 2026, hours before issue 607 was filed. At 237 the
-      certificate is decidably below every earlier report, issue 593's T-183 the
-      nearest, so it is recorded. Beyond the corpus each of the 15 rows is below every
-      earlier report, the author's own index of the same day (T-188's source) included,
-      and supersedes the row it beats. Couzo's later certificate at 237, of 15 October,
-      is T-190, 2.40e-11 below this one.
+      repository: issue 607 reports the certificates, filed on 14 October 2026 at
+      23:18:36Z. They were first committed in the author's repository at 19:15:09Z the
+      same day, and no report at any of the 16 counts falls between the two times (the
+      author's index of 14 October, T-188's source, precedes both, and his index of 15
+      October, in the commit that holds T-190's certificate, follows both), so the order
+      is the same either way. At 237 the certificate is decidably below every earlier
+      report, issue 593's T-183, the case's house, the nearest, so it is recorded.
+      Couzo's later certificate at 237, of 15 October, is T-190, 2.40e-11 below this one.
+
+      Beyond the corpus each of the 15 rows is below every earlier report, the author's
+      own index of 14 October included, and supersedes the row it beats. His index of 15
+      October, a report before T-191 that is not yet recorded (think-yfoo), is smaller in
+      turn at 7 of the 15, at 339, 382, 450, 552, 599, 648 and 757, by 2.88e-11 to
+      1.13e-03, each side exact (couzo-verified-bounds-2026-10-14's
+      review/goebel-beyond-horizon.json holds the index's), so those 7 rows are not the
+      best known sides at their counts.
     next_rung: >-
       Independently review the retained replay, then weigh adoption at 237, where
       Couzo's later certificate (T-190) is a further 2.40e-11 below this one, and where
-      this certificate is 1.01e-04 below T-183 (issue 593) and 3.46e-04 below the case's
-      T-140. Final exact-head CI remains required.
+      this certificate is 1.01e-04 below the case's T-183 (issue 593). Final exact-head
+      CI remains required.
+    regularizations:
+      - n: 237
+        of: T-183
+        by: '[Couzo certificates 2026-10-14]'
+        method: >-
+          the author's native fq search, which issue 607 says continues Mykhailo
+          Polkovskyi's issue-593 certificate
+        side: solved
+        identity:
+          basis: measured
+          measured_in: packing/resources/web/couzo-certificates-2026-10-14/review/compare_lineage-output.txt
+          moved: 42
+          max_move: 0.03314
   - id: T-190
     kind: upper-bound
     registered: '2026-10-15'
@@ -25854,23 +25914,24 @@ results:
       author's; no source program ran here.
 
       Credit Francisco Couzo (https://github.com/franciscouzo/square-packing) with this
-      refinement of his own issue-607 packing at 237 (T-189), which continues Mykhailo
-      Polkovskyi's issue-593 certificate (T-183), whose credit he asks to keep; the
-      index names Nate Chaoweeraprasit (itsnaka) as the construction's origin. Evan
-      Daniel's solver and verifier and this repository's exact verifier were used. The
-      pinned files state nothing about AI assistance; issue 607, filed the day before
-      for the certificate this one refines, states that he used OpenAI Codex for search
-      and verification orchestration, that earlier search work used Claude Code, and
-      that he directed the work.
+      refinement at 237 of Mykhailo Polkovskyi's issue-593 certificate (T-183), from
+      which the certificate's metadata says the author's fq search was seeded, and
+      whose credit he asks to keep; the index names Nate Chaoweeraprasit (itsnaka) as
+      the construction's origin. Evan Daniel's solver and verifier and this repository's
+      exact verifier were used. The pinned files state nothing about AI assistance;
+      issue 607, filed the day before for the author's earlier certificate at 237
+      (T-189), states that he used OpenAI Codex for search and verification
+      orchestration, that earlier search work used Claude Code, and that he directed the
+      work.
     scope: {n_values: [237]}
     verification: V0
     confirmation: C0
     significance:
       score: 1
       rationale: >-
-        Routine refinement of a packing the record already credits: 2.40e-11 below the
-        issue-607 certificate it re-solves (T-189) and 3.46e-04 below the case ceiling;
-        no lower bound or optimum.
+        Routine refinement of a packing the record already credits: 1.01e-04 below issue
+        593's certificate it refines (T-183), the case ceiling, and 2.40e-11 below issue
+        607's (T-189), the smallest earlier report; no lower bound or optimum.
       scored: '2026-10-15'
       by: think-7j8o Francisco Couzo import (draft)
     novelty: previously-published
@@ -25897,18 +25958,25 @@ results:
       snapshot stays under its cap.
 
       At n = 237 the certificate is below the case's ceiling (Nate Chaoweeraprasit
-      (itsnaka), improved by Francisco Couzo, T-140) by 3.46e-04; below #561 (Francisco
-      Couzo) by 3.44e-04; below PR #574 (PingYou Ltd (BuddenPing), numerical v2) by
-      3.44e-04; below T-056 (Francisco Couzo) by 8.59e-03; below T-098 (#375) (Daniel
-      after Couzo, de Winter, Ellsworth, Levy) by 8.59e-03; below T-115 (#401)
-      (Chaoweeraprasit after Couzo and Ellsworth) by 1.07e-03; below T-127 (#438) (Gupta
-      after Chaoweeraprasit, Daniel) by 1.07e-03; below T-134 (#476) (Couzo after
-      Mishapolk, Chaoweeraprasit, Gupta, Xu, Daniel, Ellsworth, Levy) by 1.07e-03; below
-      T-136 (#481) (Chaoweeraprasit after Couzo, Xu, Goebel, Schadt, Ellsworth, Hajba,
-      Levy) by 3.86e-04; below #505 (Robert Barnett) by 1.07e-03; below #470 (Mykhailo
-      Polkovskyi (Mishapolk)) by 1.07e-03; below #573 (Mykhailo Polkovskyi (Mishapolk))
-      by 3.46e-04; below #593 (Mykhailo Polkovskyi (Mishapolk)) by 1.01e-04; below #607
-      (Francisco Couzo) by 2.40e-11; smallest: this certificate.
+      (itsnaka), improved by Francisco Couzo, Mykhailo Polkovskyi, T-183) by 1.01e-04;
+      below #488 (Francisco Couzo) by 3.46e-04; below #561 (Francisco Couzo) by
+      3.44e-04; below PR #574 (PingYou Ltd (BuddenPing), numerical v2) by 3.44e-04;
+      below T-056 (Francisco Couzo) by 8.59e-03; below T-098 (#375) (Daniel after Couzo,
+      de Winter, Ellsworth, Levy) by 8.59e-03; below T-115 (#401) (Chaoweeraprasit after
+      Couzo and Ellsworth) by 1.07e-03; below T-127 (#438) (Gupta after Chaoweeraprasit,
+      Daniel) by 1.07e-03; below T-134 (#476) (Couzo after Mishapolk, Chaoweeraprasit,
+      Gupta, Xu, Daniel, Ellsworth, Levy) by 1.07e-03; below T-136 (#481)
+      (Chaoweeraprasit after Couzo, Xu, Goebel, Schadt, Ellsworth, Hajba, Levy) by
+      3.86e-04; below #505 (Robert Barnett) by 1.07e-03; below #470 (Mykhailo Polkovskyi
+      (Mishapolk)) by 1.07e-03; below #573 (Mykhailo Polkovskyi (Mishapolk)) by
+      3.46e-04; below #607 (Francisco Couzo) by 2.40e-11; smallest: this certificate.
+
+      Measured here by mishapolk-kkt-refinements-2026-10-14's review/compare_lineage.py
+      (output review/compare_lineage-output.txt in this packet), the certificate is
+      issue 593's packing (T-183), as its metadata says: 195 of its 237 squares are
+      within 1e-3 of T-183's and all within 0.066. Under a reflection of the box it also
+      lies near the author's issue-607 packing (T-189), 217 squares within 1e-6 and all
+      within 0.076; the measurement decides no credit.
 
       The source's own checkers were not run here. The two maintained routes, the sqpack
       rational witness verifier and the independent rational corner checker, share
@@ -25918,15 +25986,29 @@ results:
 
       The per-count rule of 14 October takes the reports at 237 in the order they
       reached this repository. No issue reports it, so the certificate is a report from
-      its first commit, on 15 October 2026, the day after issue 607's certificate, and
-      it is decidably below every earlier report, so both are recorded, this one second,
-      as Mykhailo Polkovskyi's certificates with no issue were (T-186). The same
-      commit's index rewrites 341 rows beyond the case corpus; they are an import of
-      their own (think-yfoo) and are not recorded here.
+      its first commit, on 15 October 2026, after issue 607, and it is decidably below
+      every earlier report, so both are recorded, this one second, as Mykhailo
+      Polkovskyi's certificates with no issue were (T-186). The same commit's index
+      holds 341 rows beyond the case corpus, smaller than the rows T-188 and T-189
+      record at 245 of those still current (238 of T-188's and 7 of T-189's); they are
+      an import of their own (think-yfoo) and are not recorded here.
     next_rung: >-
       Independently review the retained replay, then decide adoption at 237, where the
       certificate is 2.40e-11 below T-189 (issue 607), the smallest earlier report, and
-      3.46e-04 below the case's T-140. Final exact-head CI remains required.
+      1.01e-04 below the case's T-183 (issue 593). Final exact-head CI remains required.
+    regularizations:
+      - n: 237
+        of: T-183
+        by: '[Couzo n237 2026-10-15]'
+        method: >-
+          exact optimum from the author's fq search, which its metadata seeds from
+          Mykhailo Polkovskyi's issue-593 certificate
+        side: solved
+        identity:
+          basis: measured
+          measured_in: packing/resources/web/couzo-n237-2026-10-15/review/compare_lineage-output.txt
+          moved: 42
+          max_move: 0.06593
   - id: T-191
     kind: optimality
     registered: '2026-10-15'
@@ -26015,8 +26097,8 @@ results:
       The issue was filed on 15 October 2026, minutes after the cover's first commit and
       after Francisco Couzo's certificate at 237 of the same day (T-190), so the entry
       follows T-190 in report order. Every lower bound the register holds at 95 is below
-      10: T-091's 1993/200, which holds both lanes of the case, and T-090's equal bound,
-      T-082's 249/25, T-068's and T-074's 49259/5000, T-046's and T-070's 49209/5000,
+      10: T-090's 1993/200, which holds both lanes of the case, T-091's 199/20 by
+      monotonicity from 94, T-082's 249/25, T-068's and T-074's 49259/5000, T-046's and T-070's 49209/5000,
       and the closed forms of T-007, T-083 and T-180.
   - id: T-192
     kind: lower-bound
@@ -26120,9 +26202,9 @@ results:
           cpu_hours: 12.73
           cpu_hours_high: 30.43
           basis: >-
-            The 15 October sample: slabs 0 and 14 on the CI binary 69bc9e64, 567.6 CPU-s
-            here against the source's 1,613.8 s, ratio 0.42 by the kernel's own timing,
-            applied to the source's 109,538 s over the slabs
+            The 15 October sample: slabs 0 and 14 on the CI binary 69bc9e64, ratio 0.42 by
+            the kernel's own timing (0.35 by process CPU: 567.6 CPU-s here against the
+            source's 1,613.8 s), the larger applied to the source's 109,538 s over the slabs
             (packing/resources/web/wand125-continuous-n28-2026-10-15/receipts/sample-diagnostic-n28.json).
             The upper end is the source's own CPU.
           priced: '2026-10-15'
