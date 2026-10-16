@@ -10,6 +10,7 @@ Usage, from `packing/`, after
     --check [--workers K]
     --check-state
     --retain-runs
+    --compare EARLIER
 
 The owner decided on 13 October 2026 that the regularized drawing is the default picture,
 with the house drawing kept as "as published", and that a regularization should be a
@@ -54,36 +55,57 @@ its side), the runs that decided that witness, and one state:
 
 - `regularized`: a view of Evan Daniel's regularizer or the grid-slack generator is drawn
   (`STRONG_GENERATORS`);
-- `regular-as-published`: the house drawing has no uneven and no near-axis square, and
-  no strong view of the count has lapsed;
+- `regular-as-published`: the house drawing has no uneven and no near-axis square, no
+  strong view of the count has lapsed, and `PENDING_ALLOWED` does not hold it for the
+  runs its bead owes;
 - `decided-no-better`: the strong generators ran on this very witness and drew nothing
   the improvement rule takes: the layer holds a strong generator's view of it and does
   not draw it, or `SETTLED` says so, by the witness's source and side;
 - `exempt`: the count is set aside with a reason and the bead that owns it (`SETTLED`);
 - `pending`: none of these, as at a count whose strong view lapsed with its witness
-  (the index's `lapsed`, which `--update-atlas` writes), even where the new house reads
-  regular, or that only the axis tool's view, the reference and fallback, has drawn.
+  (the index's `lapsed`, which `--update-atlas` writes) or that `PENDING_ALLOWED` names,
+  even where the new house reads regular, or that only the axis tool's view, the
+  reference and fallback, has drawn.
 
 `--check-state` is the gate, reading the record and the index, measuring nothing. The
 pending counts must be exactly `PENDING_ALLOWED`: it fails on a pending count the list
 does not name and on a named count that is no longer pending, so a count leaves the list
-as soon as it is decided and joins it only by a reviewed change that names its bead. It
-fails, too, on a `SETTLED` entry made on another witness than the one the record names,
-and on one for a count that no longer needs it: one now regularized or regular as
-published, or one whose strong view the layer holds, which decides it unaided. Every run a
-`SETTLED` entry names must be held, under the generator it names, by a record the
-retained evidence keeps (`EVIDENCE`, `run_records`): a run's block (`run.json`) or a
-driver run's receipt. A block in the layer's index alone is not enough, since the index
-drops a run's block once no entry draws from it; `--retain-runs` copies the block into
-the evidence (`SETTLED_RUNS`) while the index still has it. Where the record lists the
-counts the run covered, a receipt's counts or the reports beside a block, the settled
-count must be one of them. Each
-bead the list, an exemption or a decided count's `owed` names must be open, which
-`devtools.check_bead_tree` holds through `deferrals`. A record older than a witness is
-`--check`'s to catch, by deciding every count again. A witness is identified by what it
-says of itself -- its source's key, path and revision, and its side -- never by a digest
-of its bytes (OR-16); its id is the count's (`W-known-best-nNNN`) and names no house, so
-the gate's comparison of it only holds each row to its count.
+as soon as it is decided and joins it only by a reviewed change that names its bead. A
+new house that reads regular does not take a count off: the list's first entries are the
+record of strong views that lapsed before the index kept a `lapsed` block, so a count
+leaves when the runs its bead owes decide it, or by a reviewed change that drops the
+entry (review B1 of #641). So the list is an input to the state as well as a measure of
+it, and the gate cannot judge two changes to it: dropping an entry whose count then reads
+regular as published, which drops the runs its bead owes, and adding a count whose house
+reads regular, which holds it pending. Both pass it, so both are the reviewer's, on the
+bead's runs or `--compare`'s table (review C2 of #641; think-k6rj would hold the lapses
+in code). It fails, too, on a `SETTLED` entry made on another witness than the one the
+record names, and on one for a count that no longer needs it: one now regularized or
+regular as published, or one whose strong view the layer holds, which decides it
+unaided. Every run a `SETTLED` entry names must be held, under the generator it names,
+by a record the retained evidence keeps (`EVIDENCE`, `run_records`): a run's block
+(`run.json`) or a driver run's receipt. A block in the layer's index alone is not
+enough, since the index drops a run's block once no entry draws from it; `--retain-runs`
+copies the block into the evidence (`SETTLED_RUNS`) while the index still has it. Where
+the record lists the counts the run covered, a receipt's counts or the reports beside a
+block, the settled count must be one of them. Each bead the list, an exemption or a
+decided count's `owed` names must be open, which `devtools.check_bead_tree` holds
+through `deferrals`. A record older than a witness
+is `--check`'s to catch, by deciding every count again. A witness is identified by what
+it says of itself -- its source's key, path and revision, and its side -- never by a
+digest of its bytes (OR-16); its id is the count's (`W-known-best-nNNN`) and names no
+house, so the gate's comparison of it only holds each row to its count.
+
+`--compare EARLIER` reads two records, measuring nothing, and lists each count whose
+state, drawn picture or witness differs, with both pictures' uneven and near-axis squares
+and full shared sides: the table an adoption that defers its runs gives its pull request,
+from its base branch's record (review A1 of #641). It names the goals at each count
+whose strong view gives way to a drawing worse than it on a goal of the improvement rule,
+whatever drew it: the axis tool's view, as at #657's seven, or a house drawing, as at
+n = 176 (review D1 of #641). Where such a count still reads pending, it marks that its
+runs are not deferred: they run in the adoption's pull request, since the owner's rule
+is to adopt the smallest packing and then regularize it (review E1). A count its runs
+have since regularized or decided is listed with the goals and not marked (review E2).
 
 
 The site's drawings (`render_frontier_page`), the atlas tiles (`overview_sections`) and
@@ -213,8 +235,8 @@ _RUN3A = (
     ("regularize_grid_slack/1", "grid-slack-3a-deg05-1016"),
 )
 _README_3A = (
-    "packing/atlas/known-best/README.md, the paragraph of 16 October 2026; the reproduction "
-    "runs' evidence in packing/cases/regularized_drawings/think-la7h-2026-10-16/"
+    "packing/atlas/known-best/README.md, the think-la7h paragraph of 16 October 2026; the "
+    "reproduction runs' evidence in packing/cases/regularized_drawings/think-la7h-2026-10-16/"
 )
 #: The same generators again on the same witnesses, from main e2e018f32 on 16 October
 #: 2026, since the runs above stayed on the host that ran them (review B1 of #644); their
@@ -480,9 +502,16 @@ SETTLED: dict[int, Settled] = {
 
 
 #: The counts allowed to stay `pending`, each naming the bead whose runs will decide it.
-#: Measured, not chosen, as `ABOVE_U` is: the list must equal the pending set, since
-#: `--check-state` fails on a pending count not named here and on a named count that is
-#: no longer pending. A count leaves it as soon as it is decided, and joins it only by a
+#: The list must equal the pending set, since `--check-state` fails on a pending count not
+#: named here and on a named count that is no longer pending, so a count leaves it as soon
+#: as a strong view is drawn or held or `SETTLED` decides its witness. It is also an input
+#: to the state, not only a measure of it: a listed count reads pending even where its
+#: house reads regular (`count_state`), since fourteen entries are the only record of a
+#: strong view that lapsed before the index kept a `lapsed` block (review B1 of #641). So
+#: two changes pass the gate and are the reviewer's to judge: dropping an entry whose count
+#: then reads regular as published, which drops the runs its bead owes, and adding a count
+#: whose house reads regular, which holds it pending; the pull request shows the bead's
+#: runs or `--compare`'s table (review C2 of #641; think-k6rj). A count joins only by a
 #: reviewed change naming its bead (the deferral an adoption makes when its runs must
 #: wait); nothing stops a change adding entries, so the gate prints how many there are,
 #: and `devtools.check_bead_tree` fails a change to this file whose list names a bead
@@ -745,13 +774,24 @@ def count_state(
     if generator in STRONG_GENERATORS:
         state = REGULARIZED_STATE
         why = f"the {generator} view of this witness is drawn (run {entry['run']['id']})"
-    elif lapse is None and house["uneven_axis"] == 0 and house["near_axis"] == 0:
+    elif (
+        lapse is None
+        and n not in allowed
+        and house["uneven_axis"] == 0
+        and house["near_axis"] == 0
+    ):
         # A lapse comes first: a strong view drew this count on an earlier witness and
         # nothing has decided this one, so a regular house does not settle it (review B2
         # of #636: 13 of the counts a strong view regularizes have a regular house, and
         # at 230 the drawing fell from 626 full shared sides to 562 with the gate green).
         # Only here does the state read the block; elsewhere it only explains a pending
         # count, so a hand merge that drops it falls back to this branch, never further.
+        # So does the allowlist (review B1 of #641): fourteen of its first entries record a
+        # strong view that lapsed before `--update-atlas` wrote the block (272's and 304's
+        # Evan Daniel views were never admitted to the index at all), so their records
+        # carry none. A regular new house would read regular, the gate would ask for the
+        # entry to come off, and the runs its bead owes would be dropped; on the list, a
+        # count waits for them.
         state = REGULAR_AS_PUBLISHED
         why = "the house drawing has no uneven and no near-axis square"
     elif entry.get("generator") in STRONG_GENERATORS:
@@ -1282,6 +1322,121 @@ def check(*, workers: int = 1) -> int:
     return 0
 
 
+#: What a row of `states` says a reader sees, which `drawing_changes` compares.
+SEEN = ("state", "drawn", "generator", "witness")
+
+
+def _picture(row: Mapping[str, Any]) -> str:
+    """A state row's drawn picture, as a line of `drawing_changes` gives it."""
+    what = f"the {row['generator']} view" if row["drawn"] == VIEW else "the house drawing"
+    measures = row["measures"]
+    return (
+        f"{row['state']}, {what} ({measures['uneven_axis']} uneven, "
+        f"{measures['near_axis']} near-axis, {measures['house_total']} full shared sides)"
+    )
+
+
+def _side(row: Mapping[str, Any]) -> Fraction | None:
+    """A state row's exact side, where its witness writes the side as a number; n = 51's
+    algebraic side is not compared."""
+    try:
+        return Fraction(str(row["witness"]["side"]))
+    except ValueError, ZeroDivisionError:
+        return None
+
+
+def strong_view_losses(
+    earlier: Mapping[str, Any], later: Mapping[str, Any], *, house_exact: bool = False
+) -> list[str]:
+    """Where a strong generator's view was drawn, the goals of the improvement rule on
+    which the picture drawn now is worse than it, in the policy's words, whatever drew
+    the picture; else none. A strong view the axis tool's view replaces is the usual
+    case after an adoption, since `--update-atlas` draws that view wherever it improves
+    on the new house, which says nothing of the view the count lost: at #657, all seven
+    lost strong views gave way to the axis tool's, and at n = 302 a drawing with no
+    uneven and no near-axis square gave way to one with 26 and 11 (review D1 of #641).
+    The measures and the side are judged as `improvement_rule` judges them. The lost view
+    is exactly verified, as every view the layer draws is, so a house drawing is worse on
+    exactness unless the record shows it exactly verified (`house_exact`); a side the
+    record does not write as a number is not compared."""
+    if earlier["drawn"] != VIEW or earlier.get("generator") not in STRONG_GENERATORS:
+        return []
+    _gains, worse = improvement_rule.compare(later["measures"], earlier["measures"])
+    old, new = _side(earlier), _side(later)
+    if old is not None and new is not None and new > old:
+        worse.append(improvement_rule.SIDE)
+    if later["drawn"] == HOUSE and not house_exact:
+        worse.append(improvement_rule.EXACTNESS)
+    return [improvement_rule.GOAL_NAMES[goal] for goal in worse]
+
+
+#: Where `drawing_changes` marks a count, in the words of the runbook, the guide and
+#: `adopt_houses`'s printout (review D1 of #641).
+STRONG_VIEW_LOST = (
+    "a strong view gives way to a drawing worse than it on a goal of the improvement "
+    "rule, whatever drew it"
+)
+#: How `drawing_changes` names the goals a lost strong view's replacement is worse on.
+LOST = "the strong view gives way to a drawing worse on"
+#: How a marked line ends, which `compare` counts: a count still pending whose strong
+#: view gave way to a worse drawing has its runs in the adoption's pull request, never
+#: deferred. The owner, 16 October 2026: "We should always be adopting the smallest
+#: packing and then regularizing it" (review E1 of #641).
+UNDEFERRED = "its runs are not deferred"
+
+
+def drawing_changes(earlier: Mapping[str, Any], later: Mapping[str, Any]) -> list[str]:
+    """Each count whose state, drawn picture or witness differs between two of these
+    records, the earlier first, as one line: what each draws, in which state, with its
+    uneven and near-axis squares and full shared sides, and where a strong view gives way
+    to a drawing worse than it on a goal of the improvement rule, whatever drew it, those
+    goals (`strong_view_losses`), and where the count still reads pending, that its runs
+    are not deferred (`UNDEFERRED`). A count its runs have since regularized or decided
+    reads its state and is not marked (review E2 of #641). An adoption whose runs must
+    wait lists these in its pull request, from its base branch's record, so the deferral
+    can be reviewed (reviews A1 and D1 of #641)."""
+    before = {int(row["n"]): row for row in earlier.get("states") or []}
+    after = {int(row["n"]): row for row in later.get("states") or []}
+    exact = {
+        int(entry["n"]): bool(entry["house_exact"]) for entry in later.get("entries") or []
+    }
+    lines: list[str] = []
+    for n in sorted(before.keys() | after.keys()):
+        old, new = before.get(n), after.get(n)
+        if old is None or new is None:
+            lines.append(f"n={n}: only in the {'later' if old is None else 'earlier'} record")
+            continue
+        if all(old.get(key) == new.get(key) for key in SEEN):
+            continue
+        rehoused = " (a new witness)" if old.get("witness") != new.get("witness") else ""
+        line = f"n={n}{rehoused}: {_picture(old)} -> {_picture(new)}"
+        lost = strong_view_losses(old, new, house_exact=exact.get(n, False))
+        if lost:
+            line += f"; {LOST} {', '.join(lost)}"
+            if new["state"] == PENDING:
+                line += f": {UNDEFERRED}"
+        lines.append(line)
+    return lines
+
+
+def compare(earlier: Path, record: Path = RECORD) -> int:
+    """Print `drawing_changes` from the record at `earlier` to the committed one."""
+    lines = drawing_changes(
+        json.loads(earlier.read_text(encoding="utf-8")),
+        json.loads(record.read_text(encoding="utf-8")),
+    )
+    for line in lines:
+        print(line)
+    marked = sum(1 for line in lines if line.endswith(UNDEFERRED))
+    settled = sum(1 for line in lines if f"; {LOST} " in line) - marked
+    changed = f"{len(lines)} counts changed state, drawing or witness"
+    print(
+        f"{changed}; where {STRONG_VIEW_LOST}: {marked} still pending, whose runs are not "
+        f"deferred, and {settled} in another state"
+    )
+    return 0
+
+
 def parser() -> argparse.ArgumentParser:
     command = argparse.ArgumentParser(
         description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
@@ -1299,6 +1454,16 @@ def parser() -> argparse.ArgumentParser:
         action="store_true",
         help="copy into the evidence the index's block of each run SETTLED names that it lacks",
     )
+    mode.add_argument(
+        "--compare",
+        type=Path,
+        metavar="EARLIER",
+        help=(
+            "list each count whose state, drawing or witness differs from an earlier record, "
+            "such as the pull request's base branch's, BASE being main unless the pull "
+            f"request is stacked: `--compare <(git show origin/$BASE:{RECORD_PATH})`"
+        ),
+    )
     command.add_argument(
         "--workers",
         type=int,
@@ -1314,6 +1479,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         return check_state()
     if args.retain_runs:
         return retain()
+    if args.compare is not None:
+        return compare(args.compare)
     workers = args.workers if args.workers is not None else worker_count(len(index_entries()))
     if args.update:
         return update(workers=workers)

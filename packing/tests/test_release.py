@@ -145,14 +145,17 @@ def test_each_edition_is_dated_by_when_it_was_first_published() -> None:
 
     Two of the three differ from the old label dates, in opposite directions: v0.3.0 went
     live on September 5 and was named on September 8; v0.4.0 was named on a branch on
-    September 10 and went live on September 13. The deployments behind each are in the
-    comment on `PUBLICATION_HISTORY`.
+    September 10 and went live on September 13. v0.7.11 was cut dated October 15 and its
+    first deployment went live on October 16 in UTC (think-tk0u). The deployments behind
+    each are in the comment on `PUBLICATION_HISTORY`.
     """
     dated = {entry.version: entry.first_published for entry in PUBLICATION_HISTORY}
     assert dated["v0.3.0"] == "September 5, 2026"
     assert dated["v0.4.0"] == "September 13, 2026"
     assert dated["v0.4.1"] == "September 22, 2026"
     assert dated["v0.4.2"] == "September 28, 2026"
+    assert dated["v0.5.0"] == "October 2, 2026"
+    assert dated["v0.7.11"] == "October 16, 2026"
     assert PUBLICATION_HISTORY[0].first_published == PUBLICATION_DATE
     assert PUBLICATION_HISTORY[-1].first_published == FIRST_PUBLISHED
 
