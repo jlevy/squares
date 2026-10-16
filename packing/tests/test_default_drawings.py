@@ -434,6 +434,11 @@ def test_the_record_defers_each_count_to_the_bead_that_owns_it() -> None:
             assert held.owed.startswith(by_where[f"default_drawings.py SETTLED n={n} owed"]), n
     assert len(named) == len(by_where)
     assert all(alias.startswith("think-") and len(alias) == 10 for _where, alias in named)
+    # The live list is empty since 16 October 2026, so one count is allowed here, as an
+    # adoption's deferral would allow it, and its location is the one the gate reports
+    # (review A2 of #654).
+    found = defaults.deferrals(allowed={7: "think-0000: re-housed by an adoption"})
+    assert ("default_drawings.py PENDING_ALLOWED n=7", "think-0000") in found
     # A bead an entry names elsewhere in its text is not the one that owns it.
     assert defaults.deferrals(settled={}, allowed={1: "later, maybe think-aaaa"}) == []
 

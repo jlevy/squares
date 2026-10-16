@@ -200,7 +200,11 @@ _RUN3A = (
     ("regularize_grid_slack/1", "grid-slack-3a-deg1-1016"),
     ("regularize_grid_slack/1", "grid-slack-3a-deg5-1016"),
 )
-_README_3A = "packing/atlas/known-best/README.md, the think-la7h paragraph of 16 October 2026"
+_README_3A = (
+    "packing/atlas/known-best/README.md, the think-la7h paragraph of 16 October 2026, and "
+    "the reproduction's run evidence in packing/cases/regularized_drawings/"
+    "think-la7h-2026-10-16/ (#644)"
+)
 #: The same day both generators ran on the eight witnesses #614 adopted in 3b9fab84a
 #: (think-kpm3), 154's also adopted by #598 in 34e62125f.
 _RUN3B = (
