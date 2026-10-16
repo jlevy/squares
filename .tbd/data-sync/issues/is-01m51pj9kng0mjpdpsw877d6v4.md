@@ -5,7 +5,7 @@ title: "Intake sweep: report regularization debt (pending counts and owed decisi
 kind: task
 status: in_progress
 priority: 1
-version: 4
+version: 5
 delegate: user-eb-reg-intake
 labels:
   - regularization
@@ -14,7 +14,7 @@ parent_id: is-01m50wdrbfnwsq05w150az5z88
 hold: null
 hold_until: null
 created_at: 2026-10-16T06:32:07.029Z
-updated_at: 2026-10-16T06:53:44.020Z
+updated_at: 2026-10-16T07:25:00.403Z
 started_at: 2026-10-16T06:32:14.332Z
 ---
 The owner, 2026-10-16 (overnight, to coordinator user-eb, epic think-hg5s): "The other agent had worked on regularization, but we should make sure all of the intake process covers the regularization and we update that for any other new packings we have. That should be part of our standard process to do the regularization."
@@ -31,3 +31,5 @@ Done when: draft PR open with base = #641's branch, labels project + S2, CI gree
 2026-10-16T06:40Z user-eb-reg-intake: branch claude/intake-2026-10-16-sweep-regularization pushed, head 5e432e0dc, stacked on #641's head 46562eab0: bdd215034 intake_sweep Regularization owed section + 5 tests; 5e432e0dc runbook (pass steps 1-3/8, Prompt 2-4/9, sources table, stage 0 bullet, stage 5). intake_sweep --offline: 20 pending owned by la7h/kpm3/3zi3, nothing needs action, exit 0. Next: draft PR (base #641 branch, labels project + S2), records tier, CI.
 
 2026-10-16T06:53Z user-eb-reg-intake: draft PR https://github.com/jlevy/squares/pull/650 opened (base claude/ecstatic-edison-8en33t-regularization-intake = #641, head 226e2b0ef, labels project + S2). Local: 113 focused tests passed; records tier 52/52 (247 s); intake_sweep --offline exit 0, 20 pending owned by la7h 9/kpm3 8/3zi3 3, none needs action. Next: CI to green. Closes at #650's merge.
+
+2026-10-16T07:24Z user-eb-reg-intake DONE for this lane: #650 (draft, base #641's branch, labels project + S2) head 89cc59e83, CI green (Packing validation run 38865724793; first run 38863767816 failed only on a frontend Chromium hang in overview_data.load, re-run by an empty commit). Closes at #650's merge, after #641.

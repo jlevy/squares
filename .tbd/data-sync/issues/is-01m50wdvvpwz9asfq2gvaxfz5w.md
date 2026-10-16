@@ -5,7 +5,7 @@ title: "Intake process: add a regularization step to result-import.md stages (on
 kind: task
 status: in_progress
 priority: 1
-version: 11
+version: 12
 delegate: user-eb-reg-intake
 labels:
   - regularization
@@ -14,7 +14,7 @@ parent_id: is-01m50wdrbfnwsq05w150az5z88
 hold: null
 hold_until: null
 created_at: 2026-10-15T22:55:18.902Z
-updated_at: 2026-10-16T06:53:40.996Z
+updated_at: 2026-10-16T07:24:56.647Z
 started_at: 2026-10-16T04:17:15.710Z
 ---
 
@@ -44,3 +44,5 @@ Left: confirm --push result; open DRAFT PR (labels project + S1; body drafted at
 2026-10-16T06:31Z user-eb-reg-intake: #641 addressing commits pushed (head 46562eab0, from 09ba0c143 after a fetch confirmed it unmoved): 955c8214e adopt_houses printout (B2 unique run dirs adopt-<day>-*, B3 RUNS/WORKERS, B5 parser test, B6, A3, A7 5-25 CPU-min, A8, A11, A1/A2 deferral lines); c720d982b default_drawings (B1: count_state keeps a PENDING_ALLOWED count pending whatever its house reads -- no data change, --check byte-identical; A1 --compare EARLIER; A9 release record); 46562eab0 docs (A1 A2 A4 A5 A6 A7 B1 B2 B4). Local: focused pytest 73 passed, packing-validate --records 52/52 steps, ruff/basedpyright 0, check_release_impact ok, release_pin --check ok. Chose not to backfill lapsed blocks (272/304 never in the index; all 14 being decided by #644 and lane B). Next: CI to green, disposition replies, then the stacked sweep PR.
 
 2026-10-16T06:53Z user-eb-reg-intake: #641 CI green at 46562eab0 (31 success, 28 skipped, 0 failed; Packing validation run 38861680046). Disposition replies posted: A https://github.com/jlevy/squares/pull/641#issuecomment-6209773869, B https://github.com/jlevy/squares/pull/641#issuecomment-6209774103 (all fixed except A12 declined; no deferrals). PR description updated (A10). Deferred checkpoint dispatch was refused (403), so labelled deep-gate: run 38862757844 in progress. Stacked PR #650. Closes at #641's merge (think-1644).
+
+2026-10-16T07:24Z user-eb-reg-intake DONE for this lane: #641 head 46562eab0, CI green (run 38861680046), Deferred checkpoint passed 12/12 jobs (run 38862757844, via deep-gate label), dispositions posted for A and B (A12 declined, all else fixed; no deferral beads). Close think-g3q7 only after #641 merges (merge bead think-1644). Owner/coordinator decisions: A12 sequencing vs #574/T-174; whether persisted lapsed blocks are still wanted for the 12 derivable historical lapses (not done: 272/304 not derivable, all 14 being decided by #644 and the kpm3/3zi3 batch).
