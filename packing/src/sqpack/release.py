@@ -1024,6 +1024,28 @@ class ReleaseNoPublicChange(NamedTuple):
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
     ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer", "site"),
+        paths=("packing/src/sqpack/cli/validate.py",),
+        outputs=(
+            "index.html",
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-lower-bounds-explainer.pdf",
+        ),
+        reason=(
+            "The native validator isolates existing forwarder tests in a fresh "
+            "serial process under the shared deadline and records browser progress "
+            "and failures before interruption. The manual diagnostic runs fixed "
+            "forwarder selections "
+            "with wire logs and existing process cleanup; its workflow remains "
+            "dispatch-only. Site and paper builders do not run these test commands "
+            "or consume their diagnostics. Public renderers, manuscripts, figures "
+            "and scientific inputs are unchanged, so both component editions remain "
+            "current. This is a source-reviewed disposition; no PDF redraw or "
+            "byte-identity comparison is claimed."
+        ),
+    ),
+    ReleaseNoPublicChange(
         components=(
             "paper:n11-lower-bounds-explainer",
             "paper:n11-optimality-review",
