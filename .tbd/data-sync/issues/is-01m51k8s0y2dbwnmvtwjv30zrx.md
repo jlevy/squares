@@ -5,15 +5,18 @@ title: Review and land the nine-count regularization batch 3a
 kind: task
 status: in_progress
 priority: 1
-version: 14
+version: 19
 delegate: user-eb-land-644
 labels: []
 dependencies: []
 parent_id: is-01m51hy396vnjkxe4726egs8x5
+child_order_hints:
+  - is-01m52x6jagsnzmg87d24yjzv0q
+  - is-01m52xgdntv76z2gjntcrg3t11
 hold: null
 hold_until: null
 created_at: 2026-10-16T05:34:29.405Z
-updated_at: 2026-10-16T13:19:08.237Z
+updated_at: 2026-10-16T18:14:03.140Z
 started_at: 2026-10-16T05:34:41.706Z
 ---
 
@@ -44,3 +47,9 @@ Release completion must include both infographic families and every advertised S
 2026-10-16T13:06Z user-eb-land-644: review C addressed at 546e2c675 (reply pullrequestreview-5548168125): C2 SETTLED 204/272/303 name re-runs + evidence dir (dff894b88, re-pinned); C4 ten-owe check restored; C3 PR body; C5 deferred to think-e533; C6 bead think-nv87 (infographics v0.6.2, child of think-sfas); C1 driver not re-run at 156/176/271 = owner's call (dominance recorded). CI at 7226182b0: frontend timed out (900 s Chromium table layout, unrelated); CI at 546e2c675 pending. Stopping at 13:30Z.
 
 2026-10-16 ~13:20Z coordinator user-eb: #644 at 546e2c675 had only the known animate-view timing flake red (546.8 ms > 400 ms); the session cannot re-run jobs (403), so the coordinator pushed an empty commit 923a6170c to re-trigger CI. Review C (final head, 7226182b0) 0/0/2/4: C2-C4 fixed (dff894b88, re-pin 546e2c675), C5 -> think-e533, C6 -> think-nv87 (infographics v0.6.2 at the top of the stack); C1 OPEN as the owner's call: the Daniel driver was not re-run at 156, 176, 271 (host load); the drawn views dominate every retained grid candidate there. B1 resolved by reproduction (originals unrecoverable): grid-slack all nine counts at 0.5/1/5 deg, driver at 105, 129, 146, 204, 272, 303; every covered outcome matches. Merge-ready once CI is green at 923a6170c and the owner accepts C1.
+
+2026-10-16T17:35Z user-eb-addr-644 (addressing D and E at 923a6170c, worktree .claude/worktrees/addr-644, local branch addr-644-local tracking the PR branch): D1 driver re-run done from main e2e018f32 (evand-addr644-1016, 156/176/271, 2 workers, nice 10: 691.79 s wall, 916.52 CPU-s; all row 10 admit, level 2, no rungs); new 'regularize_evand rungs --check' finds all three drawn views reproduced byte for byte (view, run.rungs, measured, regularization). Selection over it + grid reruns running. E1 (SETTLED runs must be recorded) and E3 (272/303 refusal text) edited, D6 policy clause; not yet committed. E2 to be deferred (regenerates 49 Daniel entries whose reports are not retained). Next: commit, README/PR text, deep-gate label at final head.
+
+2026-10-16T17:59Z user-eb-addr-644: pushed e576b8ebe (rungs --check), 625af9ec0 (E1 run check, E3 outcomes, default-drawings.json), 123fa2b64 (re-pin 625af9ec), 145848e0e (D1 evidence evand-addr644-1016 + selection-3a-d1, README D1/D5/E1/E3), ebe506910 (D6 policy clause), 6fee7bfc8 (papers' no-change record names regularize_evand.py; hosted validate at ebe506910 failed only on that; renders byte-identical, release impact passes locally). D1: all three views reproduced byte for byte; selection chooses Daniel at 156/176/271; no admitted view changed. main moved to 26d8bb335 (#651 merged 17:49Z with v0.7.15): #644 now conflicts (dirty) in release.py + 5 claim docs, so no pull_request CI or deep gate runs until the coordinator re-cuts; deep-gate label added 17:50:58Z; dispatch refused 403. Beads opened: think-fhz2 (D2), think-wh7r (E2), both under think-obbm. Running whole-layer --verify-atlas locally; then records tier, PR body, replies.
+
+2026-10-16T18:35Z user-eb-addr-644 DONE: reviews D and E addressed at head 6fee7bfc8 (replies pullrequestreview-5551912248 D, -5551912387 E); PR body updated. 9 fixed (D1, D3-D8, E1, E3), 2 deferred: D2 -> think-fhz2 (deep gate: label on, but #651's merge at 17:49Z made #644 conflict with main, so no pull_request run or deep gate can start; dispatch 403), E2 -> think-wh7r. D1: driver evand-addr644-1016 (916.52 CPU-s) reproduces 156/176/271 byte for byte; selection chooses Daniel at all three; no admitted view changed. Local at 6fee7bfc8: --records 51/52 (site_urls history vs moved origin/main only; passes vs e2e018f32), step-7 pytest 228 passed, --verify-atlas whole layer passed 1,490 s. Hosted at ebe506910: 29 ok, validate failed on release impact (fixed 6fee7bfc8). Not marked ready. Coordinator: re-cut over main (v0.7.15 is #651's) then watch the deep gate; #653 must keep this branch's _RUN3A.
