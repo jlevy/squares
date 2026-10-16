@@ -663,6 +663,7 @@ case or experiment separately.
 | [Review: the 2026-10-14 upper-bound intake ledger](docs/project/reviews/review-2026-10-14-intake-ledger.md) | dated review record | record | retained | — |
 | [Mathematical Review: wand125’s Fine-Net Lower Bounds at n = 37, 39 and 44 and the Linear Lower Bound at n = 145](docs/project/reviews/review-2026-10-14-wand125-fine-net-and-linear-lower-bounds.md) | dated review record | record | retained | — |
 | [Fang’s Excess Theorem and Direct Certificates: Mathematical Review](docs/project/reviews/review-2026-10-14-fang-excess-theorem-and-direct-certificates.md) | dated review record | record | retained | — |
+| [Proof Review: Benjamin Greff’s `s(76) = 9` and `s(95) = 10` by Mixed Covers](docs/project/reviews/review-2026-10-16-greff-k2m5-mixed-covers-76-95.md) | dated review record | record | retained | — |
 | [Project changelog](CHANGELOG.md) | generated status view | generated | generated | — |
 | [Site Changelog Backfill Review](docs/project/reviews/review-2026-10-13-site-changelog-backfill.md) | dated review record | record | retained | — |
 | [Feature: Project Changelog and Recent PR Backfill](docs/project/specs/active/plan-2026-10-13-site-changelog.md) | implementation plan | current | transient | — |
