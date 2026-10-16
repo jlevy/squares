@@ -2481,6 +2481,67 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "revision of the paper, so the explainer keeps v0.4.7."
         ),
     ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/devtools/check_results.py",
+            "packing/devtools/overview_data.py",
+            "packing/devtools/result_overview.py",
+            "packing/devtools/select_houses.py",
+            "packing/devtools/site_urls.py",
+            "packing/devtools/validate_schemas.py",
+            "packing/devtools/verifier_registry.py",
+            "packing/frontier/README.md",
+            "packing/frontier/results.yaml",
+        ),
+        outputs=(
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "Rendered for PR #645 at link revision 26d8bb33, once from this branch's tree "
+            "and once from main at 26d8bb33, the branch's base after its merge of main: the "
+            "three papers' HTML and Markdown are byte-identical in all 42 files each "
+            "renderer writes, and each PDF prints from that HTML. The branch separates "
+            "source verification from confirmation, moves T-154 from V0 to V3 and changes "
+            "the assurance predicates, record links and the n = 17 page ceiling; none of "
+            "the three papers prints T-154, its evidence or those predicates' results, so "
+            "each keeps its edition: v0.1.7, v0.1.0 and v0.2.2."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer",),
+        paths=(
+            "packing/devtools/check_results.py",
+            "packing/devtools/overview_data.py",
+            "packing/devtools/result_overview.py",
+            "packing/devtools/select_houses.py",
+            "packing/devtools/site_urls.py",
+            "packing/devtools/validate_schemas.py",
+            "packing/devtools/verifier_registry.py",
+            "packing/frontier/results.yaml",
+            "packing/src/sqpack/assurance.py",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+        ),
+        reason=(
+            "Rendered for PR #645 with the browser's math pass, once from this branch's "
+            "tree and once from main at 26d8bb33: the Markdown is byte-identical and the "
+            "HTML differs only in where an empty style attribute falls in two formulas' "
+            "spans, which moves between two renders of the same input. The register count "
+            "is 194 on both. The explainer prints no rung of T-154, so it keeps v0.4.7."
+        ),
+    ),
 )
 
 
