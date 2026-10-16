@@ -15479,11 +15479,16 @@ urls:
     - packing/resources/web/bengreff-s76-certificate-2026-10-14/receipts/n76_cover_audit.json
     - packing/resources/web/bengreff-s76-certificate-2026-10-14/receipts/n76_zmx2_d4.log
     - packing/resources/web/bengreff-s76-certificate-2026-10-14/receipts/n76_triage_checks.log
+    - packing/resources/web/bengreff-s76-certificate-2026-10-14/review/README.md
+    - packing/devtools/replay_evand_zmx2.py
+    - packing/devtools/audit_evand_mixed_covers.py
+    - packing/devtools/check_basic_bounds.py
+    - docs/project/reviews/review-2026-10-16-greff-k2m5-mixed-covers-76-95.md
   amendments:
   - date: '2026-10-16'
-    reason: Cite the intake's reproduction of the source's two checkers, zmx2 and zm_mixed.py, over
-      the D4 region (E-bengreff-594-cover-replay), with the rungs held until the stage 4 review; scope,
-      attribution and the stated value are unchanged.
+    reason: 'Raise to V3/C3: cite the intake''s reproduction of the source''s two checkers, zmx2 and
+      zm_mixed.py, over the D4 region (E-bengreff-594-cover-replay), and the 16 October stage 4 review
+      with its tools and controls; scope, attribution and the stated value are unchanged.'
     previous:
       kind: optimality
       scope:
@@ -15710,11 +15715,12 @@ urls:
     - packing/resources/web/bengreff-s95-certificate-2026-10-15/README.md
     - packing/resources/web/bengreff-s95-certificate-2026-10-15/s95-certificate/cover/s95_cover_v2.txt.gz
     - packing/resources/web/bengreff-s95-certificate-2026-10-15/s95-certificate/README.md
+    - docs/project/reviews/review-2026-10-16-greff-k2m5-mixed-covers-76-95.md
   amendments:
   - date: '2026-10-16'
-    reason: Cite the intake's reproduction of the source's two checkers, zmx2 and zm_mixed.py, over
-      the D4 region (E-bengreff-610-cover-replay), with the rungs held until the stage 4 review; scope,
-      attribution and the stated value are unchanged.
+    reason: 'Raise to V3/C3: cite the intake''s reproduction of the source''s two checkers, zmx2 and
+      zm_mixed.py, over the D4 region (E-bengreff-610-cover-replay), and the 16 October stage 4 review;
+      scope, attribution and the stated value are unchanged.'
     previous:
       kind: optimality
       scope:

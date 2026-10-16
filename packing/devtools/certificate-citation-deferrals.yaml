@@ -46,22 +46,30 @@ deferrals:
   - evidence: E-bengreff-594-cover-replay
     results: [T-184]
     bead: think-ccjt
-    blocked_on: think-l8wi
+    blocked_on: >-
+      the owner's answer to finding F8 of
+      docs/project/reviews/review-2026-10-16-greff-k2m5-mixed-covers-76-95.md
     recorded: '2026-10-16'
     reason: >-
-      The intake's reproduction of Greff's two checkers on the s(76) cover is recorded
-      before the stage 4 review of the cover and of the zmx2 and zm_mixed.py composite,
-      which a result by others needs before its rungs move and its case adopts it
-      (result-import.md, stage 4). The case record at 76 cites it when that review lands
-      with no blocking defect.
+      The register entry is at V3/C3 since the 16 October review found no blocking defect
+      in the s(76) cover or in the zmx2 and zm_mixed.py composite. Adopting the value puts
+      s(76) in the case's verified lane as proved, and stage 4's control rule is not yet
+      met for zm_mixed.py: one more refusal by zm_mixed.py of a mutated cover is owed, its
+      one so far being at a depth limit of 12 (F8), and whether such a refusal meets the
+      rule is the owner's question. The case record at 76 cites the evidence once that is
+      answered and the controls are held.
   - evidence: E-bengreff-610-cover-replay
     results: [T-191]
     bead: think-ccjt
-    blocked_on: think-l8wi
+    blocked_on: >-
+      the owner's answer to finding F8 of
+      docs/project/reviews/review-2026-10-16-greff-k2m5-mixed-covers-76-95.md
     recorded: '2026-10-16'
     reason: >-
-      The intake's reproduction of Greff's two checkers on the s(95) cover is recorded
-      before the stage 4 review of the cover and of the zmx2 and zm_mixed.py composite,
-      which a result by others needs before its rungs move and its case adopts it
-      (result-import.md, stage 4). The case record at 95 cites it when that review lands
-      with no blocking defect.
+      The register entry is at V3/C3 since the 16 October review found no blocking defect
+      in the s(95) cover or in the zmx2 and zm_mixed.py composite. Adopting the value puts
+      s(95) in the case's verified lane as proved, and stage 4's control rule is not yet
+      met for zm_mixed.py: two refusals by zm_mixed.py of mutated covers are owed, none
+      run (F8), and whether such a refusal meets the rule is the owner's question. The
+      case record at 95 cites the evidence once that is answered and the controls are
+      held.

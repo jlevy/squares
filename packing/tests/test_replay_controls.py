@@ -393,3 +393,56 @@ def test_zm_mixed_pose_refuses_each_mutation(n: int, kind: str) -> None:
     assert 0 <= cx <= side / 2
     assert 0 <= cy <= side / 2
     assert 0 <= u <= Fraction(1, 2)
+
+
+#: The 16 October review's zm_mixed.py control for s(76): job 054's cell, at a depth limit
+#: of 12, run on the published cover and on the cover with every mass scaled by 199/200.
+REVIEW_ZM_CONTROL = PACKETS[76] / "review/outputs/zm_control"
+
+
+def test_zm_mixed_refuses_the_reviews_scaled_cover_where_it_certifies_the_published_one() -> (
+    None
+):
+    """At equal settings on one cell, zm_mixed.py certifies the published s(76) cover and
+    leaves the 199/200 mutant uncertified: the depth-12 pair of the review's section 7.4.
+    Whether a refusal at that depth limit meets stage 4's control rule is the owner's
+    question (the review's finding F8)."""
+    from devtools.audit_evand_mixed_covers import (  # noqa: PLC0415
+        CHECKER_B91D70B6,
+        ZM_MIXED_SETTINGS,
+        read_zm_mixed,
+    )
+
+    pinned = {
+        path.name: hashlib.sha256(path.read_bytes()).hexdigest() for path in CHECKER_B91D70B6
+    }
+    cell = {
+        "cx_lo": "22/5",
+        "cx_hi": "89/20",
+        "cy_lo": "9/4",
+        "cy_hi": "23/10",
+        "u_lo": "5/16",
+        "u_hi": "11/32",
+    }
+    runs = {}
+    for name in ("s76_cover_v5_j054_depth12", "n76_scaled-199-200_j054_depth12"):
+        header, records = read_zm_mixed(REVIEW_ZM_CONTROL / f"{name}.jsonl")
+        assert {k: v for k, v in header["sha256"].items() if k != "input"} == pinned
+        settings = header["settings"]
+        assert settings["region"] == cell
+        assert settings["depth"] == 12
+        assert all(settings[k] == v for k, v in ZM_MIXED_SETTINGS.items() if k != "depth")
+        assert list(records) == [tuple(cell[k] for k in cell)]
+        runs[name] = (header, next(iter(records.values())))
+    (published, certified), (mutant, refused) = runs.values()
+    assert published["sha256"]["input"] == driver.CASES[76].sha256
+    assert certified["st"]["UNCERT"] == 0
+    assert not certified["unc"]
+    assert mutant["sha256"]["input"] != driver.CASES[76].sha256
+    assert Fraction(mutant["total"]) == Fraction(published["total"]) * Fraction(199, 200)
+    assert refused["st"]["UNCERT"] > 0
+    log = (REVIEW_ZM_CONTROL / "n76_scaled-199-200_j054_depth12.log").read_text(
+        encoding="utf-8"
+    )
+    assert "\nNOT VERIFIED (PARTIAL)\n" in log
+    assert f"{mutant['sha256']['input']}  input " in log

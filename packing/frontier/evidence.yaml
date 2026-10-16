@@ -36109,6 +36109,27 @@ evidence:
       equal to the source's records, with two mutations refused (packet receipts/); that
       reproduction with the producer's code is E-bengreff-594-cover-replay. The Lean wrapper
       is unbuilt and takes the covering statement as a hypothesis.
+    external_review:
+      state: informally-verified
+      date: '2026-10-16'
+      reviewed_by: >-
+        Claude (AI review), strong sub-agent tier at max reasoning, the stage 4 review lane of the 16 October intake pass, prompted separately from the records lane with no shared context
+        (docs/project/reviews/review-2026-10-16-greff-k2m5-mixed-covers-76-95.md)
+      note: >-
+        No mathematical defect and no blocking finding. The review re-derived the
+        reduction from the cover property to the bound with every hypothesis met, recomputed
+        the cover's exact total and its D4 invariance as a measure under all eight symmetries
+        with its own parser, read the two checkers' code the cover's shapes touch at the
+        pinned digests, and audited the composite cell by cell from the source's records and
+        the retention's replay: every cell of the D4 region carries one certified decision,
+        zmx2's on 8,096 roots or zm_mixed.py's on 64 cells, bound to the pinned checkers,
+        the cover and the certificate-mode settings. Exact capture at 26,645 sampled poses
+        was never below 1 (lowest 1.000418). The wall segments contribute nothing. Findings: F1
+        (minor), the source's check_coverage.py accepts five malformed record sets the
+        published records do not resemble; F2 to F7 notes; F8, zm_mixed.py's refusal of a
+        mutated cover is shown only at a depth limit of 12, for s(76). Not machine-checked:
+        both checkers' lemmas and programs, the hosts' IEEE-754 behaviour, the composite's
+        bookkeeping beyond the audits named, and the reduction, proved in Lean upstream.
     source_reviewed: '2026-10-14'
   - id: E-bengreff-594-cover-replay
     claim: lower-bound
@@ -36168,7 +36189,8 @@ evidence:
         s76-certificate/README.md and verify.sh; Daniel's certificates/s21/FORMAT.md (the
         mixed format and the reduction) and search/ZMX2.md sections 2 to 7, retained in
         the 2026-09-28 evand packet; the packet README's Checks Made Here and Limitations;
-        the replay receipts and controls in the packet's receipts/.
+        the 16 October review, sections 3, 4 to 6 and 7; the replay
+        receipts and controls in the packet's receipts/.
       assumptions:
         - The mixed cover is nonnegative, exactly D4-invariant as a measure and totals 3788361049/50000000 < 76, which zmx2 d4, this repository's audit (receipts/n76_cover_audit.json) and the source's check_total.py each re-check.
         - Every closed unit square in [0,9]^2 captures mass at least 1, a point on its boundary and a segment along one of its edges counting in full, at every centre in [0, 9/2]^2 and u = tan(theta/2) in [0, 1/2]; zmx2 --d4 certifies 8,096 of the 8,100 root cells of 1/10 x 1/10 x 1/8, and zm_mixed.py, in exact rationals, the 64 cells of 1/20 x 1/20 x 1/32 that tile the other 4, so each cell rests on one checker.
@@ -36176,6 +36198,7 @@ evidence:
         - The D4 reduction for measures carries the D4 region to every centre and angle (proved in Lean upstream for every side, not built here); no unreduced sweep was run, so both parts rest on it.
         - Scaling a packing at side s < 9 by 9/s makes 76 pairwise disjoint closed unit squares, so a total below 76 excludes it.
         - zmx2's acceptances are exact integer tests on binary64 enclosures widened outward (its Lemma R), which assumes correctly rounded IEEE-754 arithmetic without contraction or wider evaluation, as Rust guarantees for f64 on x86-64; zm_mixed.py's are exact rational. Neither program is formally verified.
+      audit_record: docs/project/reviews/review-2026-10-16-greff-k2m5-mixed-covers-76-95.md
     limitations: >-
       Reproduces the source's own verification: Evan Daniel's zmx2 and zm_mixed.py, the two
       checkers the source's verify.sh runs at the digests it pins, run here from the
@@ -36208,9 +36231,15 @@ evidence:
       zm_mixed.py pose finds each mutated cover capturing less than one, exactly (0.99736
       and 0.89682), at a pose where the published cover captures 1.00993 and 1.00726;
       tests/test_replay_controls.py holds both. zm_mixed.py's certificate mode was not
-      run to a verdict on a mutated cover: on the sub-root holding the point mutation's
-      pose, a run at depth 24 had not finished in 5 CPU-minutes, nor one at depth 12 in
-      10, so this checker's sweep is not shown refusing one. Trust boundary: both deciding
+      run to a verdict on these mutations here: on the sub-root holding the point
+      mutation's pose, a run at depth 24 had not finished in 5 CPU-minutes, nor one at
+      depth 12 in 10. The 16 October review has one refusal by it, of the cover with
+      every mass scaled by 199/200, on the cell of job 054 at a depth limit of 12, where
+      the published cover certifies that cell at the same limit (review section 7.4, its
+      receipts in the packet's review/outputs/zm_control/); at the source's depth limit
+      of 24 neither that mutant nor a local one finished. A second zm_mixed.py refusal is
+      owed (review finding F8), and whether one at depth 12 meets the stage 4 rule is the
+      owner's question. Trust boundary: both deciding
       programs are Daniel's, sharing an author and an architecture, and both are the
       checkers the producer verified the cover with, so this is a reproduction with the
       producer's code, not a second implementation, and each D4 cell rests on one of
@@ -36790,6 +36819,27 @@ evidence:
       receipts/); that reproduction with the producer's code is
       E-bengreff-610-cover-replay. The Lean wrapper is unbuilt and takes the covering
       statement as a hypothesis.
+    external_review:
+      state: informally-verified
+      date: '2026-10-16'
+      reviewed_by: >-
+        Claude (AI review), strong sub-agent tier at max reasoning, the stage 4 review lane of the 16 October intake pass, prompted separately from the records lane with no shared context
+        (docs/project/reviews/review-2026-10-16-greff-k2m5-mixed-covers-76-95.md)
+      note: >-
+        No mathematical defect and no blocking finding. The review re-derived the
+        reduction from the cover property to the bound with every hypothesis met, recomputed
+        the cover's exact total and its D4 invariance as a measure under all eight symmetries
+        with its own parser, read the two checkers' code the cover's shapes touch at the
+        pinned digests, and audited the composite cell by cell from the source's records and
+        the retention's replay: every cell of the D4 region carries one certified decision,
+        zmx2's on 9,981 roots or zm_mixed.py's on 304 cells, bound to the pinned checkers,
+        the cover and the certificate-mode settings. Exact capture at 26,645 sampled poses
+        was never below 1 (lowest 1.003389). The wall segments contribute nothing. Findings: F1
+        (minor), the source's check_coverage.py accepts five malformed record sets the
+        published records do not resemble; F2 to F7 notes; F8, zm_mixed.py's refusal of a
+        mutated cover is shown only at a depth limit of 12, for s(76). Not machine-checked:
+        both checkers' lemmas and programs, the hosts' IEEE-754 behaviour, the composite's
+        bookkeeping beyond the audits named, and the reduction, proved in Lean upstream.
     source_reviewed: '2026-10-15'
   - id: E-bengreff-610-cover-replay
     claim: lower-bound
@@ -36849,7 +36899,8 @@ evidence:
         s95-certificate/README.md and verify.sh; Daniel's certificates/s21/FORMAT.md (the
         mixed format and the reduction) and search/ZMX2.md sections 2 to 7, retained in
         the 2026-09-28 evand packet; the packet README's Checks Made Here and Limitations;
-        the replay receipts and controls in the packet's receipts/.
+        the 16 October review, sections 3, 4 to 6 and 8; the replay
+        receipts and controls in the packet's receipts/.
       assumptions:
         - The mixed cover is nonnegative, exactly D4-invariant as a measure and totals 3791753447/40000000 < 95, which zmx2 d4 (receipts/n95_zmx2_d4_invariance.log), this repository's audit (receipts/n95_cover_audit.json) and the source's check_total.py each re-check.
         - Every closed unit square in [0,10]^2 captures mass at least 1, a point on its boundary and a segment along one of its edges counting in full, at every centre in [0, 5]^2 and u = tan(theta/2) in [0, 1/2]; zmx2 --d4 certifies 9,981 of the 10,000 root cells of 1/10 x 1/10 x 1/8, and zm_mixed.py, in exact rationals, the 304 cells of 1/20 x 1/20 x 1/32 that tile the other 19, so each cell rests on one checker.
@@ -36857,6 +36908,7 @@ evidence:
         - The D4 reduction for measures carries the D4 region to every centre and angle (proved in Lean upstream for every side, not built here); no unreduced sweep was run, so both parts rest on it.
         - Scaling a packing at side s < 10 by 10/s makes 95 pairwise disjoint closed unit squares, so a total below 95 excludes it.
         - zmx2's acceptances are exact integer tests on binary64 enclosures widened outward (its Lemma R), which assumes correctly rounded IEEE-754 arithmetic without contraction or wider evaluation, as Rust guarantees for f64 on x86-64; zm_mixed.py's are exact rational. Neither program is formally verified.
+      audit_record: docs/project/reviews/review-2026-10-16-greff-k2m5-mixed-covers-76-95.md
     limitations: >-
       Reproduces the source's own verification: Evan Daniel's zmx2 and zm_mixed.py, the two
       checkers the source's verify.sh runs at the digests it pins, run here from the
@@ -36892,8 +36944,9 @@ evidence:
       finds each mutated cover capturing less than one, exactly (0.99736 and 0.84619), at a
       pose where the published cover captures 1.00993 and 1.01200;
       tests/test_replay_controls.py holds both. zm_mixed.py's certificate mode was not run
-      to a verdict on a mutated cover (E-bengreff-594-cover-replay says what pricing it
-      found), so this checker's sweep is not shown refusing one. Trust boundary: both
+      to a verdict on a mutated s(95) cover here or in the 16 October review, so two
+      refusals by it are owed (review finding F8; E-bengreff-594-cover-replay says what
+      pricing found for s(76)). Trust boundary: both
       deciding programs are Daniel's, sharing an author and an architecture, and both are
       the checkers the producer verified the cover with, so this is a reproduction with
       the producer's code, not a second implementation, and each D4 cell rests on one of
