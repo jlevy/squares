@@ -25,6 +25,14 @@ mark: '(?i)(?<![a-z])(?:sha\d*s?|(?:hex)?digests?|blake2[bs]?|md5|checksum|hashe
 # file holds no site is refused, so the list cannot outlive the code. The letters cite
 # the audit's inventory.
 allowlist:
+  - path: packing/campaign/issue-intake/upper-bounds-20261016/review/exact_sides.py
+    kind: download
+    boundary: >-
+      The four exact forms of issue 639 (n = 204, 263, 267 and 297) that the
+      evand-exact-cur-2026-10-16 packet pins by size and SHA-256 and keeps outside Git
+      (OR-18), fetched from evand/square-packing at 7d1407a into a scratch directory;
+      each is held to the packet manifest's digest before it is parsed. The 19 retained
+      forms are read from Git and compared with nothing.
   - path: packing/devtools/couzo_refinement_reports.py
     kind: download
     boundary: >-

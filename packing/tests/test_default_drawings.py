@@ -893,7 +893,7 @@ def test_the_comparison_lists_what_each_changed_count_draws(
             f"n={strong['n']} (a new witness): {before} -> pending, the house drawing "
             f"({uneven} uneven, {near} near-axis, {total} full shared sides); the strong view "
             "gives way to a drawing worse on uneven squares, near-axis squares, house total "
-            "of full shared sides: the owner's word"
+            "of full shared sides: its runs are not deferred"
         ),
         regular["n"]: f"n={regular['n']} (a new witness): {same} -> {same}",
     }
@@ -907,8 +907,9 @@ def test_the_comparison_lists_what_each_changed_count_draws(
     assert capsys.readouterr().out.splitlines() == [
         *(expected[n] for n in sorted(expected)),
         (
-            "2 counts changed state, drawing or witness; 1 where a strong view gives way to "
-            "a drawing worse than it on a goal of the improvement rule, whatever drew it"
+            "2 counts changed state, drawing or witness; where a strong view gives way to a "
+            "drawing worse than it on a goal of the improvement rule, whatever drew it: 1 "
+            "still pending, whose runs are not deferred, and 0 in another state"
         ),
     ]
 
@@ -934,20 +935,20 @@ def _row(
     }
 
 
-def _marks(earlier: dict, later: dict, *, house_exact: bool | None = None) -> list[str]:
-    """What `drawing_changes` marks for the owner at one count, as the goals it names."""
+def _losses(
+    earlier: dict, later: dict, *, house_exact: bool | None = None
+) -> tuple[list[str], bool]:
+    """What `drawing_changes` says at one count: the goals it names a lost strong view's
+    replacement worse on, and whether it marks the count's runs as not deferred."""
     record = {"states": [later]}
     if house_exact is not None:
         record["entries"] = [{"n": later["n"], "house_exact": house_exact}]
     (line,) = defaults.drawing_changes({"states": [earlier]}, record)
-    _picture, _semicolon, mark = line.partition("; the strong view gives way to ")
-    if not mark:
-        return []
-    assert mark.startswith("a drawing worse on ")
-    assert mark.endswith(f": {defaults.OWNER}")
-    return (
-        mark.removeprefix("a drawing worse on ").removesuffix(f": {defaults.OWNER}").split(", ")
-    )
+    _picture, _semicolon, goals = line.partition(f"; {defaults.LOST} ")
+    if not goals:
+        return [], False
+    undeferred = goals.endswith(f": {defaults.UNDEFERRED}")
+    return goals.removesuffix(f": {defaults.UNDEFERRED}").split(", "), undeferred
 
 
 EVAND, AXIS = "evand-regularize", "regularize_axis_components/2"
@@ -1008,7 +1009,8 @@ ALL_SEVEN = [rule.GOAL_NAMES[key] for key in rule.MEASURES]
             [],
             id="axis-view-better",
         ),
-        # A strong view worse than the one it replaces is marked too: whatever drew it.
+        # A strong view worse than the one it replaces is listed too: whatever drew it.
+        # Its runs have run, so it reads regularized and is not marked (review E2).
         pytest.param(
             _row(302, defaults.VIEW, EVAND, "17.5", LOST_302),
             _row(302, defaults.VIEW, "regularize_grid_slack/1", "17.4", AXIS_302),
@@ -1042,6 +1044,62 @@ def test_a_lost_strong_view_is_marked_with_every_goal_its_replacement_is_worse_o
 ) -> None:
     """Review D1 of #641: the mark asked for an irregular house drawing, but after an
     adoption the axis tool's view usually replaces a lost strong view, since the refresh
-    draws it wherever it improves on the new house. Whatever drew the replacement, it is
-    marked where the improvement rule finds it worse than the lost view on some goal."""
-    assert _marks(earlier, later, house_exact=house_exact) == goals
+    draws it wherever it improves on the new house. Whatever drew the replacement, the
+    goals the improvement rule finds it worse than the lost view on are named, and the
+    count is marked where it still reads pending (review E2)."""
+    named, undeferred = _losses(earlier, later, house_exact=house_exact)
+    assert named == goals
+    assert undeferred == (bool(goals) and later["state"] == defaults.PENDING)
+
+
+@pytest.mark.parametrize(
+    ("state", "undeferred"),
+    [
+        (defaults.PENDING, True),
+        (defaults.DECIDED, False),
+        (defaults.REGULARIZED_STATE, False),
+        (defaults.EXEMPT, False),
+    ],
+)
+def test_only_a_count_still_pending_is_marked_undeferred(
+    state: str,
+    undeferred: bool,  # noqa: FBT001
+) -> None:
+    """Review E2 of #641: at #657, 146 and 156 read `regularized` and 176 reads
+    `decided-no-better`, so their runs have run, yet each line asked for the owner's word.
+    The goals are named whatever the count's state now; only a count still pending is
+    marked, its runs not deferred."""
+    later = {**_row(302, defaults.VIEW, AXIS, "17.4", AXIS_302), "state": state}
+    named, marked = _losses(_row(302, defaults.VIEW, EVAND, "17.5", LOST_302), later)
+    assert named == ALL_SEVEN
+    assert marked is undeferred
+
+
+def test_the_summary_counts_pending_and_settled_losses_apart(
+    tmp_path: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """Review E2 of #641: the summary counted every listed loss as waiting. It counts the
+    counts still pending apart from those in another state: at #657, six of the nine are
+    pending, and three are regularized or decided."""
+    earlier = {
+        "states": [_row(n, defaults.VIEW, EVAND, "17.5", LOST_302) for n in (176, 211, 302)]
+    }
+    later = {
+        "states": [
+            {**_row(176, defaults.VIEW, AXIS, "17.4", AXIS_302), "state": defaults.DECIDED},
+            _row(211, defaults.VIEW, AXIS, "17.4", AXIS_302),
+            _row(302, defaults.VIEW, AXIS, "17.4", AXIS_302),
+        ]
+    }
+    paths = []
+    for name, record in (("earlier", earlier), ("later", later)):
+        path = tmp_path / f"{name}.json"
+        path.write_text(json.dumps(record), encoding="utf-8")
+        paths.append(path)
+    assert defaults.compare(paths[0], record=paths[1]) == 0
+    lines = capsys.readouterr().out.splitlines()
+    assert [line.endswith(defaults.UNDEFERRED) for line in lines[:3]] == [False, True, True]
+    assert lines[-1].endswith(
+        f"where {defaults.STRONG_VIEW_LOST}: 2 still pending, whose runs are not deferred, "
+        "and 1 in another state"
+    )

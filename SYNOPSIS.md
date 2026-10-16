@@ -177,6 +177,7 @@ action for each are in [`frontier/RESULTS.md`](packing/frontier/RESULTS.md); the
 | [T-060](packing/frontier/RESULTS.md) | 11 | `V3` | `C3` | `S5` | `previously-published` | `s(11) = T = (6u+4)/(1+2u−u²) = 3.8770835900228141773078970601…`, where `u` is the unique root in `(9/25, 37/100)` of `5u⁸−10u⁷−2u⁶+14u⁵+12u⁴−6u³+2u²+2u−1 = 0`. |
 | [T-153](packing/frontier/RESULTS.md) | 17 | `V0` | `C1` | `S5` | `previously-published` | Marc Leonard Overbeck (Kleddamag) claims, as a candidate proof, that `s(17) = L = 4.67553009360455095163…`, the side of John Bidwell’s 1998 packing of seventeen unit squares, with the squares closed, independently rotated and allowed to touch. |
 | [T-154](packing/frontier/RESULTS.md) | 17 | `V0` | `C1` | `S5` | `previously-published` | Oscar Fitzharding reports a Lean 4 proof that John Bidwell’s 1998 packing of seventeen unit squares is optimal: `s(17) = 4.67553009360455095163…`, T-153’s value L. |
+| [T-194](packing/frontier/RESULTS.md) | 19 | `V0` | `C0` | `S5` | `previously-published` | Oscar Fitzharding reports a Lean 4 proof that Robert Wainwright’s 1979 packing of nineteen unit squares is optimal: s(19) = 3 + (4/3)√2 = 4.885618083164126731735584965612…. |
 | [T-010](packing/frontier/RESULTS.md) | 11 | `V3` | `C3` | `S4` | `apparently-novel` | s(11) >= 2 + 4/sqrt(5), by a source-distinct repair of Stromquist 2003’s Figure 14 point set: the replacement G' = (79/100, 37/20) restores the complete Figure 13 localization, A-triple forcing, repaired unavoidability, and 3+9 capacity chain, certified exactly. |
 | [T-017](packing/frontier/RESULTS.md) | 12 | `V3` | `C3` | `S4` | `apparently-novel` | s(12) >= 99/25, by this project’s weighted fractional unavoidable-set certificate at container side 99/25 = 3.96. |
 | [T-019](packing/frontier/RESULTS.md) | 17, 18, 19 | `V3` | `C3` | `S4` | `apparently-novel` | s(17) >= 459/100, and s(18) >= 459/100 and s(19) >= 459/100, from this project’s weighted fractional unavoidable-set certificate at container side 459/100 = 4.59. |
@@ -349,6 +350,7 @@ action for each are in [`frontier/RESULTS.md`](packing/frontier/RESULTS.md); the
 | [T-124](packing/frontier/RESULTS.md) | 1, 2, 3, 4, 6, 7, 8, 9, 11, 12, 13, 14, 15, 16, 20, 21, 22, 23, 24, 25, 28, 30, 31, 32, 33, 34, 35, 36, 42, 43, 44, 45, 46, 47, 48, 49, 56, 57, 58, 59, 60, 61, 62, 63, 64, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222, 223, 224, 225, 242, 243, 244, 245, 246, 247, 248, 249, 250, 251, 252, 253, 254, 255, 256, 274, 275, 276, 277, 278, 279, 280, 281, 282, 283, 284, 285, 286, 287, 288, 289, 308, 309, 310, 311, 312, 313, 314, 315, 316, 317, 318, 319, 320, 321, 322, 323, 324 | `V0` | `C0` | `S2` | `previously-published` | Evan Daniel reports that 178 configurations are non-strict local minima under the source matched-index perturbation convention. |
 | [T-187](packing/frontier/RESULTS.md) | 146 | `V0` | `C0` | `S2` | `previously-published` | One complete rational source certificate reports a finite upper-bound improvement at the exact side it states: s(146) <= 12.583782190151860342292508597077. |
 | [T-189](packing/frontier/RESULTS.md) | 237 | `V0` | `C0` | `S2` | `previously-published` | One complete rational source certificate reports a finite upper-bound improvement at the exact side it states: s(237) <= 12163897896660350527924222391/764899771970500000000000000. |
+| [T-193](packing/frontier/RESULTS.md) | 88, 102, 123, 126, 175, 199, 204, 232, 258, 259, 266, 267, 292, 295, 301, 302 | `V0` | `C0` | `S2` | `previously-published` | Evan Daniel’s issue 639 reports exact algebraic sides for the record’s best-known packings at 23 counts. |
 | [T-155](packing/frontier/RESULTS.md) | 28, 29, 37, 39, 41, 50, 53, 54, 55, 69, 71, 83, 87, 101, 104, 107, 109, 122, 124, 125, 128, 145, 147, 148, 149, 151, 170, 171, 173, 174, 178, 197, 198, 200, 201, 202, 203, 204, 205, 226, 227, 229, 230, 231, 233, 234, 235, 257, 260, 262, 264, 265, 291, 293, 294, 296, 298, 299, 300 | `V3` | `C3` | `S1` | `apparently-novel` | For each of 59 counts n from 28 to 300, s(n) <= s_n, where s_n is the exact side of a rational packing that this project made from the register’s known-best witness at n with Evan Daniel’s exact solver and regularizer and decided here over Q; at 57 of the counts it is measured here as the witness’s packing, and at n = 204 and 299 that is not decided. |
 | [T-156](packing/frontier/RESULTS.md) | 290 | `V3` | `C3` | `S1` | `apparently-novel` | s(290) <= 17.53553390593273762200422181052425, which is 70142135623730950488016887242097/4000000000000000000000000000000 exactly, by monotonicity from T-155 (a packing of 291 unit squares contains a packing of 290): T-155 certifies n = 291 at exactly this side. |
 | [T-166](packing/frontier/RESULTS.md) | 153 | `V3` | `C3` | `S1` | `previously-published` | One complete rational source certificate reports a finite upper-bound improvement at the exact side it states: s(153) <= 12.870013850407034002770080892. |
@@ -394,7 +396,7 @@ hypothesis status and summarizes experiment verdicts, and the
 | Explorations | 50 | 30 linked to proposed hypotheses; 20 uncodified |
 | Hypotheses | 283 | 74 confirmed; 48 refuted; 75 blocked; 24 unresolved; 20 open; 37 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
 | Experiments | 246 | 94 accepted; 53 rejected; 63 unresolved; 12 baseline; 18 blocked; 5 abandoned; 0 in progress; 1 exhausted |
-| Frontier results | 192 | 192 registered, 160 by others |
+| Frontier results | 194 | 194 registered, 162 by others |
 
 <!-- END CURRENT-RESEARCH-STATUS -->
 
@@ -654,6 +656,7 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [Fitzharding’s Lean Proof That s(19) = 3 + 4√2/3: Mathematical Review](docs/project/reviews/review-2026-10-16-fitzharding-n19-lean.md) | dated review record | record | retained | — |
 | [Review: The Rational Upper-Bound Imports of 12 to 14 October (#561 to #593)](docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md) | dated review record | record | retained | — |
 | [Review: PingYou Ltd’s Certificate Refinements of PR #574 (T-174)](docs/project/reviews/review-2026-10-14-upper-bound-imports-574.md) | dated review record | record | retained | — |
 | [Review: the 2026-10-14 upper-bound intake ledger](docs/project/reviews/review-2026-10-14-intake-ledger.md) | dated review record | record | retained | — |
@@ -1282,6 +1285,9 @@ case or experiment separately.
 | [Upper-Bound Reports, Count by Count, in Report Order](packing/campaign/issue-intake/upper-bounds-20261014/README.md) | generated status view | generated | generated | — |
 | [Lane Claim Records Retained for the Ledger](packing/campaign/issue-intake/upper-bounds-20261014/lane-claims/README.md) | source retention and archive policy | record | retained | — |
 | [Intake Ledger Review Programs](packing/campaign/issue-intake/upper-bounds-20261014/review/README.md) | dated review record | record | retained | — |
+| [Upper-Bound Reports, Count by Count, in Report Order](packing/campaign/issue-intake/upper-bounds-20261016/README.md) | generated status view | generated | generated | — |
+| [Lane Claim Records Retained for the Ledger](packing/campaign/issue-intake/upper-bounds-20261016/lane-claims/README.md) | source retention and archive policy | record | retained | — |
+| [Exact Sides for the 16 October Ledger](packing/campaign/issue-intake/upper-bounds-20261016/review/README.md) | dated review record | record | retained | — |
 | [series-000 (S0) — smoke and calibration](packing/campaign/series/series-000-smoke-and-calibration/README.md) | series scope and comparability | definitive | maintained | — |
 | [Agenda 024 T+0 Dispatch Record](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-024/launch-t-plus-00.md) | research synthesis | record | retained | — |
 | [Agenda 024 Commissioning Gate: Active Minute 15](packing/campaign/series/series-000-smoke-and-calibration/results/agenda-024/commissioning-gate-minute-015.md) | research synthesis | record | retained | — |

@@ -360,10 +360,12 @@ To redraw the count:
    `python -m devtools.default_drawings --compare <(git show origin/$BASE:packing/atlas/known-best/default-drawings.json)`,
    which reads the record of its base branch, `BASE` being `main` unless the pull
    request is stacked. Where a strong view gives way to a drawing worse than it on a goal
-   of the improvement rule, whatever drew it, the adoption waits for the owner’s word or
-   for its runs: the axis tool’s view of the new witness is drawn wherever it improves
-   on the new house, which says nothing of the view the count lost (review D1 of #641).
-   Nothing but review limits how many counts join the list; the gate prints its size.
+   of the improvement rule, whatever drew it, its runs are not deferred: they run in the
+   adoption’s pull request, since the owner’s rule is to adopt the smallest packing and
+   then regularize it. The axis tool’s view of the new witness is drawn wherever it
+   improves on the new house, which says nothing of the view the count lost (review D1
+   of #641). Nothing but review limits how many counts join the list; the gate prints
+   its size.
 
 Until 15 October 2026 the lapse was only printed, and the adoptions of #553, #598 and
 #614 left twenty counts drawn without a strong generator’s decision on their witness: at

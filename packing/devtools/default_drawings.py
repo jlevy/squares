@@ -91,10 +91,13 @@ house, so the gate's comparison of it only holds each row to its count.
 `--compare EARLIER` reads two records, measuring nothing, and lists each count whose
 state, drawn picture or witness differs, with both pictures' uneven and near-axis squares
 and full shared sides: the table an adoption that defers its runs gives its pull request,
-from its base branch's record (review A1 of #641). It marks for the owner each count
+from its base branch's record (review A1 of #641). It names the goals at each count
 whose strong view gives way to a drawing worse than it on a goal of the improvement rule,
 whatever drew it: the axis tool's view, as at #657's seven, or a house drawing, as at
-n = 176 (review D1 of #641).
+n = 176 (review D1 of #641). Where such a count still reads pending, it marks that its
+runs are not deferred: they run in the adoption's pull request, since the owner's rule
+is to adopt the smallest packing and then regularize it (review E1). A count its runs
+have since regularized or decided is listed with the goals and not marked (review E2).
 
 
 The site's drawings (`render_frontier_page`), the atlas tiles (`overview_sections`) and
@@ -1133,14 +1136,19 @@ def strong_view_losses(
     return [improvement_rule.GOAL_NAMES[goal] for goal in worse]
 
 
-#: Where `drawing_changes` marks a count for the owner, in the words of the runbook, the
-#: guide and `adopt_houses`'s printout (review D1 of #641).
+#: Where `drawing_changes` marks a count, in the words of the runbook, the guide and
+#: `adopt_houses`'s printout (review D1 of #641).
 STRONG_VIEW_LOST = (
     "a strong view gives way to a drawing worse than it on a goal of the improvement "
     "rule, whatever drew it"
 )
-#: How a marked line ends, which `compare` counts.
-OWNER = "the owner's word"
+#: How `drawing_changes` names the goals a lost strong view's replacement is worse on.
+LOST = "the strong view gives way to a drawing worse on"
+#: How a marked line ends, which `compare` counts: a count still pending whose strong
+#: view gave way to a worse drawing has its runs in the adoption's pull request, never
+#: deferred. The owner, 16 October 2026: "We should always be adopting the smallest
+#: packing and then regularizing it" (review E1 of #641).
+UNDEFERRED = "its runs are not deferred"
 
 
 def drawing_changes(earlier: Mapping[str, Any], later: Mapping[str, Any]) -> list[str]:
@@ -1148,9 +1156,11 @@ def drawing_changes(earlier: Mapping[str, Any], later: Mapping[str, Any]) -> lis
     records, the earlier first, as one line: what each draws, in which state, with its
     uneven and near-axis squares and full shared sides, and where a strong view gives way
     to a drawing worse than it on a goal of the improvement rule, whatever drew it, those
-    goals and that the owner's word comes first (`strong_view_losses`). An adoption whose
-    runs must wait lists these in its pull request, from its base branch's record, so the
-    deferral can be reviewed (reviews A1 and D1 of #641)."""
+    goals (`strong_view_losses`), and where the count still reads pending, that its runs
+    are not deferred (`UNDEFERRED`). A count its runs have since regularized or decided
+    reads its state and is not marked (review E2 of #641). An adoption whose runs must
+    wait lists these in its pull request, from its base branch's record, so the deferral
+    can be reviewed (reviews A1 and D1 of #641)."""
     before = {int(row["n"]): row for row in earlier.get("states") or []}
     after = {int(row["n"]): row for row in later.get("states") or []}
     exact = {
@@ -1168,9 +1178,9 @@ def drawing_changes(earlier: Mapping[str, Any], later: Mapping[str, Any]) -> lis
         line = f"n={n}{rehoused}: {_picture(old)} -> {_picture(new)}"
         lost = strong_view_losses(old, new, house_exact=exact.get(n, False))
         if lost:
-            line += (
-                f"; the strong view gives way to a drawing worse on {', '.join(lost)}: {OWNER}"
-            )
+            line += f"; {LOST} {', '.join(lost)}"
+            if new["state"] == PENDING:
+                line += f": {UNDEFERRED}"
         lines.append(line)
     return lines
 
@@ -1183,9 +1193,13 @@ def compare(earlier: Path, record: Path = RECORD) -> int:
     )
     for line in lines:
         print(line)
-    marked = sum(1 for line in lines if line.endswith(OWNER))
+    marked = sum(1 for line in lines if line.endswith(UNDEFERRED))
+    settled = sum(1 for line in lines if f"; {LOST} " in line) - marked
     changed = f"{len(lines)} counts changed state, drawing or witness"
-    print(f"{changed}; {marked} where {STRONG_VIEW_LOST}")
+    print(
+        f"{changed}; where {STRONG_VIEW_LOST}: {marked} still pending, whose runs are not "
+        f"deferred, and {settled} in another state"
+    )
     return 0
 
 
