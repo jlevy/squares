@@ -1,0 +1,22 @@
+{
+  "B": "499/500",
+  "L": "573351/100000",
+  "axis_containment_margin": "1496999501/250000000000250000000",
+  "axis_coordinate_denominator": 1000000000,
+  "axis_density_denominator": 100000000,
+  "axis_evaluation_bound": "588218150086071659211808336991465984",
+  "axis_scale": "100000000000000000000000000",
+  "axis_side": "249499501/250000000",
+  "axis_terms": 7072,
+  "candidate_sha256": "a2e47a39e310c695fafeb8d1c744f930a561b3be7d71bbdb359e362eaebacb8d",
+  "epsilon": "1/1000000",
+  "files": {
+    "axis_input.txt": "cc075cb96ed626abb25296f2e728bd111094068c2352b222d6e09fae3d19fc52",
+    "certificate_input.txt": "214b273162bd8d364f68e553ccc12b5bec2a8eb75bc07ac9e9d01b35dad1c6ae"
+  },
+  "format": "mixed",
+  "mass": "2799999/100000",
+  "params_sha256": null,
+  "tau": "1",
+  "terms": 7072
+}

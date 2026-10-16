@@ -1,0 +1,37 @@
+{
+  "binaries": {"axis":"3d144a459b8a8f267ba3c3447023ee8db649ed5e7c6cd49ce97ac194a3422055","crate":"31936c4dcfac398b729990f51820fd5a5b70e23a2e809b71de1ca5864e6de618","pose":"69bc9e6485102d3636db5377884ba6304f749be94d6ca913d82d80108f1ed4ab"},
+  "candidate_sha256": "a2e47a39e310c695fafeb8d1c744f930a561b3be7d71bbdb359e362eaebacb8d",
+  "certificate": "continuous_n28_L5745",
+  "host": {"cpu_count":4,"machine":"x86_64"},
+  "kind": "continuous-pose-followup-sample/v1",
+  "price": {"check1_ratio_by_own_timing":1.173078669492691,"check1_ratio_by_process_cpu":1.2290610434276172,"check1_replay_cpu_hours":13.297316519494872,"check1_source_cpu_seconds":38948.707817376,"check2_ratio_by_own_timing":0.41840766340625735,"check2_ratio_by_process_cpu":0.35174369125486776,"check2_replay_cpu_hours":12.731008410081136,"check2_source_cpu_seconds":109538.219025858},
+  "ran_at": "2026-10-15T06:27:05Z",
+  "runs": {
+    "axis": {"control":{"agrees_with_source":true,"children_max_rss_kib":2099092,"direct_sum_matches":true,"minimizer_x_integer":4904477991,"minimizer_y_integer":4904477991,"minimum_numerator":"98599324478829283196727960","process_cpu_seconds":2.206833000000188,"returncode":2,"scale":"100000000000000000000000000","status":"AXIS_TEST_REFUSED","x_nodes":5789,"y_nodes":5789},"main":{"agrees_with_source":true,"children_max_rss_kib":2099092,"direct_sum_matches":true,"minimizer_x_integer":4904477991,"minimizer_y_integer":4904477991,"minimum_numerator":"100100837034268819262383728","process_cpu_seconds":2.2509249999998246,"returncode":0,"scale":"100000000000000000000000000","status":"AXIS_COVERAGE_PROVED","x_nodes":5789,"y_nodes":5789}},
+    "check1_control": {"agrees_with_source":true,"axis_verified":false,"nodes":5478,"process_cpu_seconds":4.840898999999993,"refused_roots":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85],"returncode":1,"status":"REFUSED"},
+    "check1_mutants": [
+      {"axis_patch_min_certified_lower_bound":"1.0009096467323055","axis_patch_verified":true,"candidate_sha256":"caa26ab262d6badb153d22e65fd0a96b8a8963de53edb0ccac433ad4877460bf","min_certified_lower_bound":"1.0000000001473461","nodes":20652427,"outcome":"VERIFIED_AT_ROOT","process_cpu_seconds":185.865695,"root":7,"scale":"9999/10000","verdict":"verified","witness":null},
+      {
+        "axis_patch_min_certified_lower_bound": "1.0000087379588027",
+        "axis_patch_verified": true,
+        "candidate_sha256": "5232047f56ade9b8603073e76d938f57400ab5be4077c66c78610c50b328ef4e",
+        "min_certified_lower_bound": "1.0000000000001017",
+        "nodes": 200000002,
+        "outcome": "REFUSED_AT_ROOT",
+        "process_cpu_seconds": 351.46791600000006,
+        "root": 7,
+        "scale": "999/1000",
+        "verdict": "refused",
+        "witness": {"base":"1.0000087420156727","centre_part":"0.0","dt":"3.0517578124972244e-7","du":"2.384185791015625e-7","dv":"7.62939453125e-6","exact_below_threshold":false,"exact_capture":"914263005451261625725632311273267603452100267533368010370258664556360145850184087688054816743102732316286682650932725581914309564922977451/914254869133054552119805690303284892758325723721903918388080146089551690883302490818521200002831398119463106657259155800253456711680000000","exact_pose":["4.215712288112443","5.190716114258572","0.022616882324218747"],"loss_x":"4.109301072822515e-6","loss_y":"5.95125759305926e-6","lower":"0.9999986814570062","reason":"node budget","t":"0.022616882324218747","u":"0.5750753879547119","v":"0.9907302856445312"}
+      }
+    ],
+    "check1_roots": [
+      {"agrees_with_source":true,"angle_splits":8164,"axis_patch":{"A":"4989999/5000000","argmin":["983750463620321/200000000000000","52345101/10000000"],"kind":"axis-patch","min_certified_lower_bound":"1.0010097477073805","non_finite":false,"seconds":"1.7831843950000001","verified":true,"vertices":33605209},"build":{"profile":"release","rustc":"rustc 1.98.0 (88d9e12ae 2026-08-18)","source_sha256":"619b3c00bd918b329b4141c24ee30b027af7f88b86bcf2886e3c18855a61c7f5","target":"x86_64-unknown-linux-gnu"},"index":0,"leaves":167896,"max_depth":41,"min_certified_lower_bound":"1.0000000462950338","nodes":335791,"process_cpu_seconds":13.184242999999999,"source_seconds":"7.37343694","summary_status":"REFUSED","t":["1/10000000","1/100000"],"thread_seconds":"11.469545723","verdict":"verified"},
+      {"agrees_with_source":true,"angle_splits":60537,"axis_patch":{"A":"4989999/5000000","argmin":["983750463620321/200000000000000","52345101/10000000"],"kind":"axis-patch","min_certified_lower_bound":"1.0010097477073805","non_finite":false,"seconds":"1.932257811","verified":true,"vertices":33605209},"build":{"profile":"release","rustc":"rustc 1.98.0 (88d9e12ae 2026-08-18)","source_sha256":"619b3c00bd918b329b4141c24ee30b027af7f88b86bcf2886e3c18855a61c7f5","target":"x86_64-unknown-linux-gnu"},"index":1,"leaves":312871,"max_depth":44,"min_certified_lower_bound":"1.0000000115774044","nodes":625741,"process_cpu_seconds":18.423783000000004,"source_seconds":"10.725564361","summary_status":"REFUSED","t":["1/100000","1/10000"],"thread_seconds":"16.425062162","verdict":"verified"},
+      {"agrees_with_source":true,"angle_splits":562208,"axis_patch":{"A":"4989999/5000000","argmin":["983750463620321/200000000000000","52345101/10000000"],"kind":"axis-patch","min_certified_lower_bound":"1.0010097477073805","non_finite":false,"seconds":"1.696314071","verified":true,"vertices":33605209},"build":{"profile":"release","rustc":"rustc 1.98.0 (88d9e12ae 2026-08-18)","source_sha256":"619b3c00bd918b329b4141c24ee30b027af7f88b86bcf2886e3c18855a61c7f5","target":"x86_64-unknown-linux-gnu"},"index":2,"leaves":1700629,"max_depth":43,"min_certified_lower_bound":"1.0000000006027794","nodes":3401257,"process_cpu_seconds":55.386349,"source_seconds":"52.682165725","summary_status":"REFUSED","t":["1/10000","1/1000"],"thread_seconds":"55.137269355","verdict":"verified"}
+    ],
+    "pose_slabs": [{"agrees_with_source":true,"angle_splits":1193703,"den":1000000,"index":0,"kernel_seconds":"197.74803639300001","leaves":3299979,"lower_bound":"1.0000000000972009","max_depth":46,"nodes":6599957,"ph":500,"pl":1,"process_cpu_seconds":159.94279499999993,"returncode":0,"source_seconds":"471.612560452","status":"verified"},{"agrees_with_source":true,"angle_splits":3030243,"den":1000000,"index":14,"kernel_seconds":"477.476270317","leaves":5181855,"lower_bound":"1.0000000000726104","max_depth":40,"nodes":10363709,"ph":140000,"pl":130000,"process_cpu_seconds":407.69950900000003,"returncode":0,"source_seconds":"1142.182706138","status":"verified"}]
+  },
+  "scope": "A diagnostic sample, one program at a time at one thread: it decides only the roots, slabs and axis patches it ran, and is not a replay.",
+  "status": "DIAGNOSTIC_SAMPLE"
+}
