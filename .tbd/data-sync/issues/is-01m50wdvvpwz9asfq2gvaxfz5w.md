@@ -5,7 +5,7 @@ title: "Intake process: add a regularization step to result-import.md stages (on
 kind: task
 status: in_progress
 priority: 1
-version: 8
+version: 9
 delegate: user-eb-reg-intake
 labels:
   - regularization
@@ -14,7 +14,7 @@ parent_id: is-01m50wdrbfnwsq05w150az5z88
 hold: null
 hold_until: null
 created_at: 2026-10-15T22:55:18.902Z
-updated_at: 2026-10-16T05:53:52.591Z
+updated_at: 2026-10-16T06:02:12.562Z
 started_at: 2026-10-16T04:17:15.710Z
 ---
 
@@ -38,3 +38,5 @@ Left: confirm --push result; open DRAFT PR (labels project + S1; body drafted at
 2026-10-16 ~05:55Z coordinator user-eb: Review B (independent senior, strong tier) is on #641 at 09ba0c143, https://github.com/jlevy/squares/pull/641#pullrequestreview-5543563103: 0 blocker/0 high/2 medium/2 low (B1: the 14 PENDING_ALLOWED counts that lost a strong view before #636 (105, 129, 146, 153, 156, 175, 176, 211, 237, 241, 271, 272, 302, 304) carry no lapsed block, so a regular new house would read regular-as-published and drop the owed runs; B2: fixed run-directory names reuse run ids across adoptions; B3 placeholders; B4 #553 credit). It was started before Review A appeared; it adds only what A missed. user-eb leaves the addressing pass of #641 to this lane/coordinator and will not push here.
 
 2026-10-16 ~05:58Z OWNERSHIP TRANSFER by the owner's word to the overnight coordinator user-eb (epic think-hg5s): "We have some changes with the regularization and a couple other things from another agent that you should take over and incorporate into your work." The ecstatic-edison lanes should stop work on this bead and its branch, and record any unpushed state in a note here. user-eb's lanes fetch before every push and stop if the branch moved.
+
+2026-10-16T06:02Z user-eb-reg-intake (lane G): picked up the addressing pass of #641 Reviews A and B. Checked: branch head still 09ba0c143 (pushed 04:33Z, quiet >80 min), no disposition replies or new commits on the PR. Worktree .claude/worktrees/reg-intake. Next: fixes for B1 (count_state: an allowlisted count stays pending whatever its new house reads), B2/B3/B4, A-series docs; then the stacked sweep PR.

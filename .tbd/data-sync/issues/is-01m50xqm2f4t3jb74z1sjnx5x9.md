@@ -5,7 +5,7 @@ title: "Regularize 3a: 176 first, then 105, 129, 146, 156, 204, 271, 272, 303 (r
 kind: task
 status: in_progress
 priority: 1
-version: 6
+version: 7
 delegate: user-eb-reg-3b3c
 labels:
   - regularization
@@ -14,7 +14,7 @@ parent_id: is-01m50wdrbfnwsq05w150az5z88
 hold: null
 hold_until: null
 created_at: 2026-10-15T23:18:07.183Z
-updated_at: 2026-10-16T05:53:51.431Z
+updated_at: 2026-10-16T06:01:50.193Z
 started_at: 2026-10-16T02:53:15.554Z
 ---
 
@@ -49,3 +49,5 @@ then render_regularized_atlas --update, default_drawings --update, regularized_d
 2026-10-16 ~05:40Z, coordinator user-eb (epic think-hg5s): the owner asked tonight that every remaining regularization be done, 176 first. This lane's 05:05Z note shows generators and selection done and admission next, so it keeps the bead. user-eb will take it over (and re-run on its own host) only if no branch claude/ecstatic-edison-8en33t-regularize-3a is pushed and no note is added here by about 07:30Z. Lanes of user-eb regularize think-kpm3/think-3zi3 (branch claude/intake-2026-10-16-regularize-3b, from main) and think-0ut1 (stacked on it); expect generated-file conflicts with this branch at merge.
 
 2026-10-16 ~05:58Z OWNERSHIP TRANSFER by the owner's word to the overnight coordinator user-eb (epic think-hg5s): "We have some changes with the regularization and a couple other things from another agent that you should take over and incorporate into your work." The ecstatic-edison lanes should stop work on this bead and its branch, and record any unpushed state in a note here. user-eb's lanes fetch before every push and stop if the branch moved.
+
+2026-10-16T06:08Z user-eb-reg-3b3c: took over by the owner's word (coordinator, ~05:55Z). PR #644 is the ecstatic-edison lane's (head 42ef42e5a); no second PR. Verifying read-only in detached worktree .claude/worktrees/reg-3a at 42ef42e5a: default_drawings --check-state passes (PENDING_ALLOWED 11; 64 regularized, 232 regular-as-published, 13 decided, 4 exempt, 11 pending), release_pin --check passes (pin 72666de89931). SETTLED 204/272/303 bind the witnesses' source/path/revision/side with the four 3a runs; README paragraph of 16 October present; index runs carry evand-regularize-3a-1016 and grid-slack-3a-deg05-1016. Running packing-validate --records and the focused tests next. think-kpm3/think-3zi3 will stack on this branch.
