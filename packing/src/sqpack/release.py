@@ -1078,6 +1078,28 @@ class ReleaseNoPublicChange(NamedTuple):
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
     ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=(
+            "packing/frontier/n-153.md",
+            "packing/frontier/n-154.md",
+            "packing/frontier/n-207.md",
+            "packing/frontier/n-237.md",
+        ),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The regularization run of 16 October 2026 on the eight counts #614 re-housed "
+            "(think-kpm3) changes these case records only in their generated "
+            "regularization note, which the survey does not quote: it cites them by link, "
+            "as its results table's count links. Rendered from main at e2e018f32 and from "
+            "this branch at that one link revision, the survey's HTML and Markdown are "
+            "byte-identical, as are the other 48 files the renderer writes. No PDF was "
+            "printed (no pinned Chromium on this host), and the survey keeps v0.2.2."
+        ),
+    ),
+    ReleaseNoPublicChange(
         components=("paper:n11-lower-bounds-explainer",),
         paths=(
             "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
