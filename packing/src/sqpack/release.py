@@ -85,6 +85,15 @@ class PublicationHistoryEntry(NamedTuple):
 #: for each deployment's commit, what the page it built stated.
 PUBLICATION_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.7.16",
+        first_published="October 16, 2026",
+        result_scope=(
+            "Separate the source verification of reported formal proofs from independent "
+            "confirmation, crediting T-154's retained Lean source build at V3 while C "
+            "stays at C1."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.7.15",
         first_published="October 16, 2026",
         result_scope=(
@@ -807,6 +816,17 @@ class ReleaseImpactDecision(NamedTuple):
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
     ReleaseImpactDecision(
         component="site",
+        previous_version="v0.7.15",
+        version="v0.7.16",
+        impact="patch",
+        reason=(
+            "Separate the source verification of reported formal proofs from independent "
+            "confirmation, crediting T-154's retained Lean source build at V3 while C "
+            "stays at C1."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="site",
         previous_version="v0.7.14",
         version="v0.7.15",
         impact="patch",
@@ -1079,6 +1099,30 @@ class ReleaseNoPublicChange(NamedTuple):
 
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
+    ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer",),
+        paths=(
+            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
+            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
+            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+        ),
+        reason=(
+            "The site cut v0.7.16 for PR #645 regenerated the five claim documents at "
+            "PUBLICATION_REVISION 6f379df6, this branch's head before the cut, kept "
+            "reachable from main by the merge commit the PR merges with; with that "
+            "revision read back as 46ae34f9, each is byte-identical to the base's, so the "
+            "32 repository links it pins are the only change, and no claim, certificate or "
+            "command moves. A link revision follows the site's edition and is not a "
+            "revision of the explainer, so it keeps v0.4.7. Source-compared; no render of "
+            "the claim documents was taken."
+        ),
+    ),
     ReleaseNoPublicChange(
         components=("paper:n11-lower-bounds-explainer",),
         paths=(
@@ -2678,7 +2722,7 @@ def validate_release_impacts(
 #: fresh render, so a link naming the build commit would fail their drift check forever. It is
 #: in no version string. It moves when the claim documents are regenerated for an edition. It
 #: must be a commit on `main`; the site's own links name `main` itself (`devtools.repo_links`).
-PUBLICATION_REVISION = "46ae34f9"
+PUBLICATION_REVISION = "6f379df6"
 
 
 def data_pathspec() -> tuple[str, ...]:
