@@ -5,7 +5,7 @@ title: Refine News chooser states, shared topic colors and article spacing
 kind: bug
 status: in_progress
 priority: 2
-version: 8
+version: 9
 spec_path: docs/project/specs/active/plan-2026-10-13-site-changelog.md
 delegate: codex@spud10
 labels: []
@@ -19,7 +19,11 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-16T05:04:46.887Z
-updated_at: 2026-10-16T05:07:47.529Z
+updated_at: 2026-10-16T06:07:01.093Z
 started_at: 2026-10-16T05:05:12.360Z
 ---
 Ship the requested News UI corrections: gray inactive topic filters, topic-colored active states and paler colored hover without text or inset underlines; borders follow wrapped button rows; remove both All controls and retain one unboxed Reset filters button. Give Optimality, Project and Engineering distinct shared colors, separate from lower/upper bounds and verification. Tighten title/date/tag/body spacing on shared homepage and News cards. Make significance meters horizontally tighter with borders matching label color, and shorten level tooltips while retaining detailed rationale in source records/docs. Reuse design tokens, preserve accessibility/filter semantics, verify desktop/mobile and light/dark behavior, document design changes, independently review, PR, merge and verify deployment.
+
+## Notes
+
+Draft PR https://github.com/jlevy/squares/pull/646 now contains the News controls, shared palette/card spacing, concise significance tooltips and site v0.7.15 edition. Source c4d56bb53 plus edition dfde01d7d; formatting-only follow-up is being pushed. Focused browser/contracts 82 passed; corrected spacing control 2 passed; component release tests111 passed; release-impact dispositions and document coverage pass. Independent preliminary senior review has no open source findings after A1 correction. S2/project; no separate News entry. Final hosted CI, matching checkpoint, final-head review, merge and deployment verification remain; do not report this draft merged or fully green.
