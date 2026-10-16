@@ -33960,6 +33960,38 @@ evidence:
       verifier and the independent rational corner checker, share certificate parsing,
       half-angle conversion, Fraction arithmetic and the separating-axis method. No two
       independent methods, human oversight or optimality is claimed.
+  - id: E-couzo-586-n302-report
+    claim: upper-bound
+    scope: {n_values: [302]}
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Couzo certificates 2026-10-13]'
+    certificate: packing/resources/web/couzo-certificates-2026-10-13/source/certificates/
+    replay_status: not-attempted
+    verifiers: []
+    external_review:
+      state: informally-verified
+      date: '2026-10-14'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane (W2) of the 2026-10-14 intake, prompted
+        separately from the import and records lanes
+      note: >-
+        docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md accepted the
+        certificate at 302 that T-181 cites for finite feasibility only; the replay it
+        reproduced is E-couzo-586-n302-exact-feasibility.
+    source_reviewed: '2026-10-16'
+    limitations: >-
+      The source author's report at 302 of b85dee2, issue 583's certificate as issue 586's
+      release retains it byte for byte, which T-181 cites; the release's other reports are
+      E-couzo-583-586-certificate-report, which T-182 and T-165 cite. It is an atom of its
+      own so that the cases T-182 holds at 211 and 241, whose reported lane cites the
+      release's atom, do not read as resting on T-181, as E-couzo-586-n302-exact-feasibility
+      is for the verified lane. The repository replay and its review are
+      E-couzo-586-n302-exact-feasibility. The source's own checkers were not run here.
   - id: E-couzo-586-exact-feasibility
     claim: upper-bound
     scope: {n_values: [154, 176, 211, 241]}
