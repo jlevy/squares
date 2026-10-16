@@ -640,3 +640,43 @@ def test_a_receipt_audit_cannot_pass_as_a_build_here() -> None:
     replayed = {**entry, "origin": "replayed-here"}
     assert check_evidence_semantics(replayed) == []
     assert derive_confirmation([replayed], record=ONE_CASE) == "C3"
+
+
+def test_verified_rigidity_cannot_borrow_its_certificate_from_a_producer_run() -> None:
+    """Review E3: a published proof satisfied the backing rule while a producer's own
+    exact run supplied the block's certificate and replay."""
+    producer = exact_replay("E-producer-structure", "derived-structure")
+    producer.update(origin="external", performed_by="source-author")
+    published = {
+        "id": "E-published-structure",
+        "claim": "derived-structure",
+        "scope": {"n_values": [17]},
+        "assurance": "verified",
+        "method": "published-proof",
+        "origin": "external",
+        "performed_by": "source-author",
+        "proof": {"source": "s", "theorem": "t", "scope": "s", "pinpoints": "p"},
+    }
+    case = {
+        "n": 17,
+        "rigidity": {
+            "property": "rigid",
+            "assurance": "verified",
+            "method": "exact-algebraic",
+            "certificate": None,
+            "replay": None,
+            "scope": "the optimum",
+            "evidence": [producer["id"], published["id"]],
+        },
+    }
+
+    def rigidity_problems(*rows: dict) -> list[str]:
+        problems = check_case_semantics(case, {row["id"]: row for row in rows})
+        return [problem for problem in problems if "rigidity" in problem]
+
+    assert any(
+        "requires certificate and replay" in problem
+        for problem in rigidity_problems(producer, published)
+    )
+    producer.update(origin="replayed-here", performed_by="repository")
+    assert rigidity_problems(producer, published) == []

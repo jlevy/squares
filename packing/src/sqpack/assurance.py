@@ -712,16 +712,19 @@ def _check_rigidity_claim(
             )
         if method in MACHINE_FORMAL_METHODS:
             backed = rigidity.get("certificate") and rigidity.get("replay")
+            # A delegated certificate and replay come from a run made here, as backing
+            # does: the producer's own run cannot supply the block's machine method.
             delegated = any(
                 record.get("assurance") == "verified"
                 and record.get("certificate")
                 and record.get("replay")
+                and verified_here(record)
                 for record in cited
             )
             if not backed and not delegated:
                 errors.append(
                     f"{method} requires certificate and replay, "
-                    "on the block or on a cited verified record"
+                    "on the block or on a cited verified record made here"
                 )
 
     return errors
