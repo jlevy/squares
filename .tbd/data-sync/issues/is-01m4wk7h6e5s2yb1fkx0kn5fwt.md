@@ -3,9 +3,9 @@ type: is
 id: is-01m4wk7h6e5s2yb1fkx0kn5fwt
 title: "Import dostashev: s(176) <= 13.795872318437, s(211) <= 14.993694186584, s(241) <= 15.987134249051, s(304) <= 17.929427758076 (#575)"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 7
+version: 8
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,8 +14,12 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-14T06:57:36.461Z
-updated_at: 2026-10-14T17:59:54.554Z
+updated_at: 2026-10-16T04:03:46.315Z
 started_at: 2026-10-14T06:57:49.305Z
+closed_at: 2026-10-16T04:03:46.312Z
+close_reason: "Done: #575 imported, registered as T-175 (V3/C3, adopted at 304), and answered through to the final reply of 16 October (https://github.com/jlevy/squares/issues/575#issuecomment-6206059896), which closed the issue. Recording that reply on main is think-py1e's (PR #637); the reopen promise at 176 is held by think-qag2. Closed per PR #637 review A7."
+resolution: null
+duplicate_of: null
 ---
 https://github.com/jlevy/squares/issues/575 (2026-10-13T00:42:43Z; body edited 2026-10-13T04:13:29Z to add 304, comment of 04:13:31Z). dostashev/square-packing at b909e1b74cda50906e12b4373e010ddee39e47e4, records/n0176, n0211, n0241, n0304 (.sqcert, .sqpk). Stages 1-2 and the stage 4 replay through devtools.upper_bound_reports, intake lane ostashev of 2026-10-14.
 
