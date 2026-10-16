@@ -5,7 +5,7 @@ title: "Intake 2026-10-15 lane A: carry PR #616 forward: merge main, regenerate 
 kind: task
 status: in_progress
 priority: 1
-version: 4
+version: 5
 delegate: ecstatic-edison-lane-a
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m50gnwbxd5kxbynyx9nd162p
 hold: null
 hold_until: null
 created_at: 2026-10-15T19:29:59.225Z
-updated_at: 2026-10-16T00:13:43.990Z
+updated_at: 2026-10-16T00:36:13.234Z
 started_at: 2026-10-15T19:30:07.725Z
 ---
 
@@ -28,3 +28,5 @@ started_at: 2026-10-15T19:30:07.725Z
 - Open: main is now 22a67ce4a (#629), which merges cleanly. The PR needs review and a merge commit; then close #616 as superseded and post the #607/#610 T-id replies. Do not close this bead until #627 merges.
 
 2026-10-16 00:15Z coordinator: #627 round-1 reviews addressed (review A A1-A6 fixed in d79f526f2; review B B1-B4 fixed, B5 -> think-mx6n, B6 -> think-5k1m; #616 review A dispositioned on #627). DATA_REVISION re-pinned to d79f526f. Stack lands with gh stack merge 631 --yes --merge; main and fixes move by merge commits only.
+
+2026-10-16 coordinator: #616 was closed as superseded at 2026-10-15 22:06:25Z (comment on #616); the earlier 'untouched' and 'close #616' lines are obsolete. #627 round 2 (review C) approve; C1/C3 deferred to think-yfoo/think-qik6, C2 fixed.
