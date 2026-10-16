@@ -2459,33 +2459,8 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "the requests record #639's and #640's mappings to them, and the site's Other "
             "Projects list a card for ofitzharding/sq19; none of the three papers prints "
             "any of them, so each keeps its edition: v0.1.7, v0.1.0 and v0.2.2. Rendered "
-            "again with the branch after #639's replay (T-193 at V3/C3, its evidence cited "
-            "by sixteen case records) and the card, the six files are byte-identical to "
-            "the base's."
-        ),
-    ),
-    ReleaseNoPublicChange(
-        components=("paper:square-packing-methods-survey",),
-        paths=(
-            "packing/frontier/n-088.md",
-            "packing/frontier/n-102.md",
-            "packing/frontier/n-123.md",
-            "packing/frontier/n-126.md",
-            "packing/frontier/n-175.md",
-            "packing/frontier/n-199.md",
-            "packing/frontier/n-267.md",
-            "packing/frontier/n-295.md",
-        ),
-        outputs=(
-            "papers/square-packing-methods-survey.html",
-            "papers/square-packing-methods-survey.md",
-        ),
-        reason=(
-            "Rendered on this branch at link revision e2e018f3 after sixteen case records, "
-            "these eight among them, cite #639's report and replay evidence in their "
-            "evidence lists, with no lane, status or prose changed, the survey's HTML and "
-            "Markdown are byte-identical to the render with the base's (71f6a413) records, "
-            "so it keeps v0.2.2."
+            "again with the branch after #639's replay (T-193 at V3/C3) and the card, the "
+            "six files are byte-identical to the base's."
         ),
     ),
     ReleaseNoPublicChange(
