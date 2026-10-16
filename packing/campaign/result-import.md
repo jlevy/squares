@@ -666,9 +666,10 @@ No adoption waits for the owner’s word, and each case that once did is decided
   validated certificates of one side, `select_houses` keeps the earlier finder, then the
   earlier entry.
 - **A less regular drawing is no reason to wait.** Where a strong view would give way to
-  a house drawing with an uneven or a near-axis square, its runs are not deferred: they
-  run in the adoption’s pull request, and the count is admitted or settled on what they
-  find. The owner on n = 176, 16 October 2026: “Adopt as settled.”
+  a drawing worse than it on a goal of the improvement rule, whatever drew it, its runs
+  are not deferred: they run in the adoption’s pull request, and the count is admitted
+  or settled on what they find.
+  The owner on n = 176, 16 October 2026: “Adopt as settled.”
 - **A conjectured optimum** the new house is below, wherever its print rounds, is
   withdrawn, and any other stays; the adoption goes ahead either way.
 
@@ -731,11 +732,17 @@ deferred:
 2. It runs `default_drawings --update` again, since the record copies the entry into the
    count’s reason, and then the guide’s render step.
 3. It lists each deferred count’s drawing before and after, with
-   `default_drawings --compare` on the base branch’s record:
-   `python -m devtools.default_drawings --compare <(git show origin/main:packing/atlas/known-best/default-drawings.json)`.
-   Where a strong view gives way to a house drawing with an uneven or a near-axis
-   square, as it did at n = 176, its runs are not deferred: they run in the adoption’s
-   pull request ([The House Rule](#the-house-rule)).
+   `default_drawings --compare` on its base branch’s record, `BASE` being `main` unless
+   the pull request is stacked:
+   `python -m devtools.default_drawings --compare <(git show origin/$BASE:packing/atlas/known-best/default-drawings.json)`.
+   Where a strong view gives way to a drawing worse than it on a goal of the improvement
+   rule, whatever drew it, its runs are not deferred: they run in the adoption’s pull
+   request ([The House Rule](#the-house-rule)). The table marks each such count with
+   those goals. The axis tool’s view is the usual replacement, since the refresh draws it
+   wherever it improves on the new house: it replaced all seven strong views the
+   adoption of 16 October 2026 (#657) lost, and at n = 302 a drawing with no uneven and
+   no near-axis square gave way to one with 26 and 11. A house drawing is the rarer one,
+   as at n = 176 on 15 October (review D1 of #641).
 
 The records tier’s
 `every drawn picture is regularized, regular as published, decided or exempt`

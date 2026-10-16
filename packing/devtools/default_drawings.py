@@ -91,9 +91,11 @@ house, so the gate's comparison of it only holds each row to its count.
 `--compare EARLIER` reads two records, measuring nothing, and lists each count whose
 state, drawn picture or witness differs, with both pictures' uneven and near-axis squares
 and full shared sides: the table an adoption that defers its runs gives its pull request,
-from the base branch's record (review A1 of #641). It marks each count whose strong view
-gives way to an irregular house drawing, whose runs the house rule never defers: they run
-in the adoption's pull request (result-import.md, "The House Rule").
+from its base branch's record (review A1 of #641). It marks each count whose strong view
+gives way to a drawing worse than it on a goal of the improvement rule, whatever drew it:
+the axis tool's view, as at #657's seven, or a house drawing, as at n = 176 (review D1 of
+#641). The house rule never defers such a count's runs: they run in the adoption's pull
+request (result-import.md, "The House Rule").
 
 
 The site's drawings (`render_frontier_page`), the atlas tiles (`overview_sections`) and
@@ -1098,36 +1100,65 @@ def _picture(row: Mapping[str, Any]) -> str:
     )
 
 
-#: How `drawing_changes` marks a count whose strong view gives way to an irregular house
-#: drawing: its runs are part of the adoption, never deferred (result-import.md, "The
-#: House Rule"; the owner on 176, 16 October 2026: "Adopt as settled").
-IRREGULAR_FALL = (
-    "a strong view gives way to an irregular house drawing: its runs are not deferred"
+def _side(row: Mapping[str, Any]) -> Fraction | None:
+    """A state row's exact side, where its witness writes the side as a number; n = 51's
+    algebraic side is not compared."""
+    try:
+        return Fraction(str(row["witness"]["side"]))
+    except ValueError, ZeroDivisionError:
+        return None
+
+
+def strong_view_losses(
+    earlier: Mapping[str, Any], later: Mapping[str, Any], *, house_exact: bool = False
+) -> list[str]:
+    """Where a strong generator's view was drawn, the goals of the improvement rule on
+    which the picture drawn now is worse than it, in the policy's words, whatever drew
+    the picture; else none. A strong view the axis tool's view replaces is the usual
+    case after an adoption, since `--update-atlas` draws that view wherever it improves
+    on the new house, which says nothing of the view the count lost: at #657, all seven
+    lost strong views gave way to the axis tool's, and at n = 302 a drawing with no
+    uneven and no near-axis square gave way to one with 26 and 11 (review D1 of #641).
+    The measures and the side are judged as `improvement_rule` judges them. The lost view
+    is exactly verified, as every view the layer draws is, so a house drawing is worse on
+    exactness unless the record shows it exactly verified (`house_exact`); a side the
+    record does not write as a number is not compared."""
+    if earlier["drawn"] != VIEW or earlier.get("generator") not in STRONG_GENERATORS:
+        return []
+    _gains, worse = improvement_rule.compare(later["measures"], earlier["measures"])
+    old, new = _side(earlier), _side(later)
+    if old is not None and new is not None and new > old:
+        worse.append(improvement_rule.SIDE)
+    if later["drawn"] == HOUSE and not house_exact:
+        worse.append(improvement_rule.EXACTNESS)
+    return [improvement_rule.GOAL_NAMES[goal] for goal in worse]
+
+
+#: Where `drawing_changes` marks a count, in the words of the runbook, the guide and
+#: `adopt_houses`'s printout (review D1 of #641).
+STRONG_VIEW_LOST = (
+    "a strong view gives way to a drawing worse than it on a goal of the improvement "
+    "rule, whatever drew it"
 )
-
-
-def falls_to_irregular_house(earlier: Mapping[str, Any], later: Mapping[str, Any]) -> bool:
-    """A strong view was drawn, and a house drawing with an uneven or a near-axis square
-    is drawn now: n = 176's regression, whose runs the adoption's pull request makes
-    rather than defers (result-import.md, "Adopt a House, Then Regularize It")."""
-    measures = later["measures"]
-    return (
-        earlier["drawn"] == VIEW
-        and earlier.get("generator") in STRONG_GENERATORS
-        and later["drawn"] == HOUSE
-        and bool(measures["uneven_axis"] or measures["near_axis"])
-    )
+#: How a marked line ends, which `compare` counts: under the house rule such a count's
+#: strong runs are part of the adoption, never deferred (result-import.md, "The House
+#: Rule"; the owner on 176, 16 October 2026: "Adopt as settled").
+UNDEFERRED = "its runs are not deferred"
 
 
 def drawing_changes(earlier: Mapping[str, Any], later: Mapping[str, Any]) -> list[str]:
     """Each count whose state, drawn picture or witness differs between two of these
     records, the earlier first, as one line: what each draws, in which state, with its
     uneven and near-axis squares and full shared sides, and where a strong view gives way
-    to an irregular house drawing, that its runs are not deferred (`IRREGULAR_FALL`). An
-    adoption whose runs must wait lists these in its pull request, from the base branch's
-    record, so the deferral can be reviewed (review A1 of #641)."""
+    to a drawing worse than it on a goal of the improvement rule, whatever drew it, those
+    goals and that its runs are not deferred (`strong_view_losses`, `UNDEFERRED`). An
+    adoption whose runs must wait lists these in its pull request, from its base branch's
+    record, so the deferral can be reviewed (reviews A1 and D1 of #641)."""
     before = {int(row["n"]): row for row in earlier.get("states") or []}
     after = {int(row["n"]): row for row in later.get("states") or []}
+    exact = {
+        int(entry["n"]): bool(entry["house_exact"]) for entry in later.get("entries") or []
+    }
     lines: list[str] = []
     for n in sorted(before.keys() | after.keys()):
         old, new = before.get(n), after.get(n)
@@ -1138,8 +1169,12 @@ def drawing_changes(earlier: Mapping[str, Any], later: Mapping[str, Any]) -> lis
             continue
         rehoused = " (a new witness)" if old.get("witness") != new.get("witness") else ""
         line = f"n={n}{rehoused}: {_picture(old)} -> {_picture(new)}"
-        if falls_to_irregular_house(old, new):
-            line += f"; {IRREGULAR_FALL}"
+        lost = strong_view_losses(old, new, house_exact=exact.get(n, False))
+        if lost:
+            line += (
+                f"; the strong view gives way to a drawing worse on {', '.join(lost)}: "
+                f"{UNDEFERRED}"
+            )
         lines.append(line)
     return lines
 
@@ -1152,11 +1187,9 @@ def compare(earlier: Path, record: Path = RECORD) -> int:
     )
     for line in lines:
         print(line)
-    marked = sum(1 for line in lines if line.endswith(IRREGULAR_FALL))
-    print(
-        f"{len(lines)} counts changed state, drawing or witness; {marked} where a strong view "
-        "gives way to an irregular house drawing"
-    )
+    marked = sum(1 for line in lines if line.endswith(UNDEFERRED))
+    changed = f"{len(lines)} counts changed state, drawing or witness"
+    print(f"{changed}; {marked} where {STRONG_VIEW_LOST}")
     return 0
 
 
@@ -1178,7 +1211,8 @@ def parser() -> argparse.ArgumentParser:
         metavar="EARLIER",
         help=(
             "list each count whose state, drawing or witness differs from an earlier record, "
-            f"such as the base branch's: `--compare <(git show origin/main:{RECORD_PATH})`"
+            "such as the pull request's base branch's, BASE being main unless the pull "
+            f"request is stacked: `--compare <(git show origin/$BASE:{RECORD_PATH})`"
         ),
     )
     command.add_argument(
