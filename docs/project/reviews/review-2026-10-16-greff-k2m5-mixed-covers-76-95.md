@@ -799,10 +799,10 @@ retention packet READMEs and the import beads `think-osvq` and `think-ribz` (bea
 - the depth-24 limit: “refusal at depth 24 is not affordable” for a `zm_mixed.py`
   control (line 163; $s(95)$, 209), which F8 takes up.
 
-Before the first draft of §1 to §13 here was written, I read four parts of that review:
-its title and front matter, its one-line summary, its §1 and §2 (lines 1–86), and its
-list of headings, which names its findings F1 to F7. Its §3 to §12 were read after this
-review’s findings F1 to F7 were drafted.
+Before the first draft of §1 to §13 here was written, I read four parts of the 2 October
+review: its title and front matter, its one-line summary, its §1 and §2 (lines 1–86),
+and its list of headings, which names its findings F1 to F7. Its §3 to §12 were read
+after this review’s findings F1 to F7 were drafted.
 Two things were added here after that reading: the “not machine-checked” list in §13,
 which follows its §12, and this section.
 The paragraph on the `zm_mixed.py` control in §7.4 and finding F8 were written after the
