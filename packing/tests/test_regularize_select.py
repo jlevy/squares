@@ -247,7 +247,6 @@ def test_preference_puts_evand_first_then_grid_slack_by_rising_threshold() -> No
     ]
 
 
-
 def test_preference_orders_a_driver_count_with_no_view_after_the_runs_views() -> None:
     """A count the driver drew no view of keeps one row with no output (n = 264 on 16
     October 2026, where upstream's checker refused the regularizer's certificate); the
@@ -256,6 +255,7 @@ def test_preference_orders_a_driver_count_with_no_view_after_the_runs_views() ->
     rows = [_row("grid:half"), empty, _row("evand:3c:same", output="same")]
     ordered = [row["source"] for row in sorted(rows, key=select.preference)]
     assert ordered == ["evand:3c:same", "evand:3c:none", "grid:half"]
+
 
 def test_register_candidates_are_exactly_verified_views_below_u() -> None:
     below = _judged(side="29/10", measures={"near_axis": 0})
