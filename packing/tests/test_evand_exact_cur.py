@@ -22,6 +22,8 @@ import sys
 from fractions import Fraction
 from pathlib import Path
 
+import pytest
+
 PACKING = Path(__file__).resolve().parents[1]
 WEB = PACKING / "resources/web"
 CHECKER = WEB / "evand-exact-and-local-reports-2026-10-12/source/search/exact/verify_exact.py"
@@ -139,3 +141,21 @@ def test_the_resume_cache_reuses_only_the_same_run(tmp_path: Path) -> None:
         {"ran": "control"},
     )
     assert calls == ["first", "changed", "control"]
+
+
+def test_the_resume_cache_misses_on_another_driver_or_interpreter(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    module = driver()
+    cached, run_key = module.cached, module.run_key  # type: ignore[attr-defined]
+    calls: list[str] = []
+
+    def job(label: str) -> object:
+        return lambda: calls.append(label) or {"ran": label}
+
+    cached(tmp_path, "n-51.duplicate", run_key("a" * 64, "duplicate"), job("first"))
+    monkeypatch.setattr(module, "driver_digest", lambda: "f" * 64)
+    cached(tmp_path, "n-51.duplicate", run_key("a" * 64, "duplicate"), job("driver"))
+    monkeypatch.setattr(module, "interpreter", lambda: "CPython 0.0.0")
+    cached(tmp_path, "n-51.duplicate", run_key("a" * 64, "duplicate"), job("python"))
+    assert calls == ["first", "driver", "python"]

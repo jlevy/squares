@@ -31,12 +31,16 @@ nothing about a packing itself.
 
 Each finished run is cached in the scratch directory, so an interrupted invocation
 resumes where it stopped. A cached record is keyed by the run it records (the input’s
-SHA-256, the checker’s SHA-256 and the control kind) and reused only when all three
-match. The first replay, of 16 October, was interrupted once by its session’s
+SHA-256, the checker’s SHA-256, the control kind, the driver’s SHA-256, since a control’s
+mutation and verdict are computed in it, and the interpreter’s version) and reused only
+when all five match. The first replay, of 16 October, was interrupted once by its session’s
 background-time limit and resumed under a cache keyed by count alone; PR #651’s review A
 (A5, A6) led to both fixes. The refreshed receipt is from the fixed driver; its first
 invocation was likewise stopped after four positives and resumed, this time from the
-keyed cache.
+keyed cache. It records driver `f949158c`, which keyed by input, checker and control
+only; review B (B1) added the driver and the interpreter to the key afterwards. No
+control ran before the first invocation stopped, and the positives depend only on the
+input, the checker and the interpreter, which did not change, so the receipt stands.
 
 ## Running It
 

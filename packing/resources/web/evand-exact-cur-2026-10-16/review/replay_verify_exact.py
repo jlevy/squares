@@ -30,9 +30,10 @@ only when it is squarefree and its factorization is one factor, of multiplicity 
 ``p``'s degree, so a perfect power ``q^k`` is refused.
 
 An interrupted invocation resumes from ``--scratch``'s cache. Each cached record is keyed
-by the run it records: the input's SHA-256, the checker's SHA-256 and the control kind
-(none for the positive). It is reused only when all three match; otherwise the run is
-repeated.
+by the run it records: the input's SHA-256, the checker's SHA-256, the control kind (none
+for the positive), this driver's SHA-256 (a control's mutation and verdict are computed
+here) and the interpreter's version. It is reused only when all five match; otherwise the
+run is repeated.
 
 The mutated files are written to ``--scratch`` and deleted after their run. The receipt
 records every run's command, exit status, last line, wall and CPU time, and the
@@ -148,9 +149,26 @@ def cached(cache: Path, name: str, key: dict[str, Any], job: Any) -> dict[str, A
     return record
 
 
+def driver_digest() -> str:
+    """This driver's SHA-256: a control's mutation and verdict are computed here."""
+    return sha256(Path(__file__))
+
+
+def interpreter() -> str:
+    """The interpreter every run's child uses, ``sys.executable``, by its version."""
+    return f"{platform.python_implementation()} {platform.python_version()}"
+
+
 def run_key(digest: str, kind: str | None) -> dict[str, Any]:
-    """What a cached run must match to be reused: input, checker and control kind."""
-    return {"input_sha256": digest, "checker_sha256": CHECKER_SHA256, "control": kind}
+    """What a cached run must match to be reused: input, checker, control kind, this
+    driver and the interpreter."""
+    return {
+        "input_sha256": digest,
+        "checker_sha256": CHECKER_SHA256,
+        "control": kind,
+        "driver_sha256": driver_digest(),
+        "python": interpreter(),
+    }
 
 
 def mutate(data: dict[str, Any], kind: str) -> tuple[dict[str, Any], str]:
