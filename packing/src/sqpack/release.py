@@ -89,7 +89,7 @@ PUBLICATION_HISTORY = (
         first_published="October 16, 2026",
         result_scope=(
             "List the October 16 review of Benjamin Greff's mixed covers for s(76) = 9 "
-            "and s(95) = 10 in the synopsis document map, and raise both results to V3/C3 "
+            "and s(95) = 10 in the synopsis document map, and raise both results to V3/C1 "
             "on the intake's recorded reproductions."
         ),
     ),
@@ -812,7 +812,7 @@ RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
         impact="patch",
         reason=(
             "List the October 16 review of Benjamin Greff's mixed covers for s(76) = 9 "
-            "and s(95) = 10 in the synopsis document map, and raise both results to V3/C3 "
+            "and s(95) = 10 in the synopsis document map, and raise both results to V3/C1 "
             "on the intake's recorded reproductions."
         ),
     ),
@@ -2439,8 +2439,9 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "four papers' HTML before the browser's math pass, which this host cannot run, "
             "and their Markdown are byte-identical; the PDFs print from that HTML. The "
             "register's T-184 and T-191 cite the s(76) and s(95) replays and the 16 October "
-            "review, rise to V3/C3 and change their claim, composition, next_rung, notes "
-            "and unfinished confirmations, with the register count unchanged, and the two "
+            "review, rise to V3/C1 and change their headline, claim, composition, "
+            "next_rung, notes, artifacts and unfinished confirmations, with the register "
+            "count unchanged, and the two "
             "source rows cite the replays; no paper prints any of it, so each keeps its "
             "edition."
         ),

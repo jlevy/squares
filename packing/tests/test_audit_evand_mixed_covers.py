@@ -877,6 +877,26 @@ def _open_root(lines: list[str]) -> list[str]:
     ]
 
 
+def _cap_root(lines: list[str]) -> list[str]:
+    """Root 0, with no uncertified box, marked capped: open, and tiled by no sub-root."""
+    return [
+        line.replace(" capped 0 ", " capped 1 ") if line.startswith("ROOT 0 ") else line
+        for line in lines
+    ]
+
+
+def _with_header(lines: list[str], old: str, new: str) -> list[str]:
+    return [
+        line.replace(old, new) if line.startswith("# zmx2 cert ") else line for line in lines
+    ]
+
+
+def _every_record(records: Path, edit: Callable[[list[dict[str, Any]]], None]) -> None:
+    """The same edit on every record file, so only the required settings can refuse it."""
+    for path in sorted(records.glob("j*.jsonl")):
+        _edit_record(records, path.name, edit)
+
+
 SPLIT_FAULTS: dict[str, Callable[[Path, Path], object]] = {
     "none": lambda _log, _records: None,
     "sub-root missing": lambda _log, records: (records / "j000.jsonl").unlink(),
@@ -887,8 +907,11 @@ SPLIT_FAULTS: dict[str, Callable[[Path, Path], object]] = {
     "other cover": lambda _log, records: _edit_record(
         records, "j000.jsonl", lambda lines: lines[0]["sha256"].update(input="0" * 64)
     ),
-    "other depth": lambda _log, records: _edit_record(
-        records, "j000.jsonl", lambda lines: lines[0]["settings"].update(depth=23)
+    "other depth": lambda _log, records: _every_record(
+        records, lambda lines: lines[0]["settings"].update(depth=23)
+    ),
+    "not certificate mode": lambda _log, records: _every_record(
+        records, lambda lines: lines[0]["settings"].update(cert_mode=False)
     ),
     "other settings": lambda _log, records: _edit_record(
         records, "j001.jsonl", lambda lines: lines[0]["settings"].update(theta_bias=3)
@@ -898,6 +921,16 @@ SPLIT_FAULTS: dict[str, Callable[[Path, Path], object]] = {
     ),
     "zmx2 root missing": lambda log, _records: _edit_log(log, _drop_root),
     "zmx2 root left open": lambda log, _records: _edit_log(log, _open_root),
+    "zmx2 root capped": lambda log, _records: _edit_log(log, _cap_root),
+    "zmx2 log of another cover": lambda log, _records: _edit_log(
+        log, lambda lines: _with_header(lines, "hash=96e61ce6a0aa2545", "hash=0000000000000000")
+    ),
+    "zmx2 at another depth": lambda log, _records: _edit_log(
+        log, lambda lines: _with_header(lines, " depth=40 ", " depth=7 ")
+    ),
+    "zmx2 at another kappa": lambda log, _records: _edit_log(
+        log, lambda lines: _with_header(lines, " kappa=1.5 ", " kappa=0.5 ")
+    ),
 }
 
 

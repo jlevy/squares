@@ -80,7 +80,9 @@ not need a sweep, and re-reads the sweeps' records without the source's summaris
 ``composite``
     A split cover's two checkers read as one decision over the D4 region (``76``,
     ``95``). The ``zmx2 cert --d4`` log must be what the ``zmx2`` command requires apart
-    from the roots it leaves open, those holding an uncertified or capped box. Each
+    from the roots it leaves open, those holding an uncertified or capped box, and every
+    header must name this cover by the FNV-1a 64 hash ``zmx2`` computes over its bytes
+    and carry the source's ``depth``, ``node_cap``, ``kappa`` and ``K``. Each
     ``zm_mixed.py`` record file must name the case's checker files and cover by SHA-256
     and state its total, carry the certificate-mode D4 settings at depth 24, all files
     the same apart from ``region``, record exactly the roots of the 1/20 by 1/32 grid its
@@ -227,6 +229,14 @@ class Split:
     replay_zmx2: Path
     replay_zm_mixed: Path
     wall_control: Path | None = None
+    #: The ``zmx2 cert`` header fields the source's run carries: ``zmx2.rs`` ``6b7f0f79``'s
+    #: defaults, since the sources' ``verify.sh`` sets none of them.
+    zmx2_settings: tuple[tuple[str, str], ...] = (
+        ("depth", "40"),
+        ("node_cap", "20000000"),
+        ("kappa", "1.5"),
+        ("K", "30"),
+    )
 
 
 @dataclass(frozen=True, slots=True)
@@ -1633,6 +1643,23 @@ def _failing(path: Path) -> set[tuple[Fraction, ...]]:
     return {root_bounds(line.strip()) for line in lines if line.strip()}
 
 
+FNV_OFFSET, FNV_PRIME = 0xCBF29CE484222325, 0x100000001B3
+
+
+def fnv1a64(data: bytes) -> str:
+    """FNV-1a 64 of ``data`` in hex, the cover hash ``zmx2 cert`` writes into its header."""
+    value = FNV_OFFSET
+    for byte in data:
+        value = ((value ^ byte) * FNV_PRIME) & 0xFFFFFFFFFFFFFFFF
+    return f"{value:016x}"
+
+
+@functools.lru_cache(maxsize=8)
+def _cover_fnv1a64(path: Path, stamp: tuple[int, int]) -> str:
+    del stamp
+    return fnv1a64(read_record_bytes(path))
+
+
 def audit_split_composite(
     case: Case,
     zmx2_logs: Path | Sequence[Path],
@@ -1642,11 +1669,16 @@ def audit_split_composite(
     """A ``zmx2 cert --d4`` log and ``zm_mixed.py`` sub-root records as one decision.
 
     Clean when the log is sound apart from its open roots (`zmx2_open_roots`), every
-    record file is clean (`audit_sub_root_file`), no sub-root is recorded twice, and every
-    sub-root of every open root is a certified one.
+    header names this cover by the FNV-1a 64 hash ``zmx2`` writes and carries the
+    source's settings (`Split.zmx2_settings`), every record file is clean
+    (`audit_sub_root_file`), no sub-root is recorded twice, and every sub-root of every
+    open root is a certified one.
     """
     zmx2 = require_atoms(audit_zmx2(case, zmx2_logs, "d4"), case.zmx2_atoms)
     log = read_zmx2(zmx2_logs)
+    cover_hash = _cover_fnv1a64(case.cover_path, _stamp(case.cover_path))
+    headers = [parse_zmx2_header(run.header)[0] for run in log.runs]
+    required = dict(case.split.zmx2_settings) if case.split is not None else {}
     region = zmx2_roots(case.side, "d4")
     open_roots = zmx2_open_roots(log, region)
     files = record_files(zm_mixed)
@@ -1685,6 +1717,13 @@ def audit_split_composite(
     result: dict[str, Any] = {
         "zmx2": zmx2,
         "zmx2_sound_apart_from_open_roots": _zmx2_sound_apart_from_open_roots(zmx2),
+        "cover_fnv1a64": cover_hash,
+        "zmx2_header_hashes": sorted({fields.get("hash", "") for fields in headers}),
+        "zmx2_headers_name_this_cover": bool(headers)
+        and all(fields.get("hash") == cover_hash for fields in headers),
+        "zmx2_settings_required": required,
+        "zmx2_settings_as_required": bool(headers)
+        and all(fields.get(k) == v for fields in headers for k, v in required.items()),
         "open_roots": [f"pass {p} root {r}" for p, r in open_roots],
         "open_root_count": len(open_roots),
         "roots_certified_by_zmx2": len(region) - len(open_roots),
@@ -1705,6 +1744,8 @@ def audit_split_composite(
     }
     result["composite_clean"] = (
         result["zmx2_sound_apart_from_open_roots"]
+        and result["zmx2_headers_name_this_cover"]
+        and result["zmx2_settings_as_required"]
         and not unclean
         and repeated == 0
         and not untiled

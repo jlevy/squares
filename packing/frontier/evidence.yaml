@@ -36123,7 +36123,7 @@ evidence:
         pinned digests, and audited the composite cell by cell from the source's records and
         the retention's replay: every cell of the D4 region carries one certified decision,
         zmx2's on 8,096 roots or zm_mixed.py's on 64 cells, bound to the pinned checkers,
-        the cover and the certificate-mode settings. Exact capture at 26,645 sampled poses
+        the cover and the certificate-mode settings. Exact capture at 9,326 sampled poses
         was never below 1 (lowest 1.000418). The wall segments contribute nothing. Findings: F1
         (minor), the source's check_coverage.py accepts five malformed record sets the
         published records do not resemble; F2 to F7 notes; F8, zm_mixed.py's refusal of a
@@ -36157,7 +36157,8 @@ evidence:
       the source's records/zm_mixed/jobs.txt. Then uv run --frozen --all-extras --group dev
       python -m devtools.audit_evand_mixed_covers composite --case 76
       OUT/n76_zmx2_d4_roots.log --zm-mixed OUT/n76_zm_mixed must exit 0: the zmx2 log
-      covers the region once per root under the source's header, and every root it leaves
+      covers the region once per root under headers naming this cover by its FNV-1a 64
+      hash at the source's settings, and every root it leaves
       open is tiled by sub-roots, each certified by a record file that names the pinned
       checker files and the cover by SHA-256 at the certificate-mode settings; and
       compare-zmx2 --case 76 --records OUT/n76_zmx2_d4_roots.log and compare-sub-roots
@@ -36216,7 +36217,9 @@ evidence:
       depth 15, none uncertified, 1,168 CPU-s by the receipts and 1,033 by the checker's
       own count; every record equals the source's but for the input path and CPU time.
       devtools.audit_evand_mixed_covers composite reads the two as one decision over the
-      D4 region: the log covers the 8,100 roots once each under the source's header, the
+      D4 region: the log covers the 8,100 roots once each under a header naming this
+      cover's FNV-1a 64 hash, 96e61ce6a0aa2545, at the source's depth 40, node cap, kappa
+      and K, the
       4 roots it leaves are the source's failing_roots.txt, and the 64 sub-roots, each
       certified by a record file naming the pinned checker files and the cover at the
       certificate-mode settings, are the source's jobs.txt and tile those 4 exactly; the
@@ -36833,7 +36836,7 @@ evidence:
         pinned digests, and audited the composite cell by cell from the source's records and
         the retention's replay: every cell of the D4 region carries one certified decision,
         zmx2's on 9,981 roots or zm_mixed.py's on 304 cells, bound to the pinned checkers,
-        the cover and the certificate-mode settings. Exact capture at 26,645 sampled poses
+        the cover and the certificate-mode settings. Exact capture at 17,319 sampled poses
         was never below 1 (lowest 1.003389). The wall segments contribute nothing. Findings: F1
         (minor), the source's check_coverage.py accepts five malformed record sets the
         published records do not resemble; F2 to F7 notes; F8, zm_mixed.py's refusal of a
@@ -36866,7 +36869,8 @@ evidence:
       the source's records/zm_mixed/jobs.txt, which --only splits across processes. Then
       uv run --frozen --all-extras --group dev python -m devtools.audit_evand_mixed_covers
       composite --case 95 OUT/n95_zmx2_d4_roots.log --zm-mixed OUT/n95_zm_mixed must exit
-      0: the zmx2 log covers the region once per root under the source's header, and
+      0: the zmx2 log covers the region once per root under headers naming this cover by
+      its FNV-1a 64 hash at the source's settings, and
       every root it leaves open is tiled by sub-roots, each certified by a record file
       that names the pinned checker files and the cover by SHA-256 at the
       certificate-mode settings; and compare-zmx2 --case 95 --records
@@ -36928,7 +36932,9 @@ evidence:
       depth 13, none uncertified, 3,278 CPU-s by the receipts and 2,327 by the checker's
       own count; every record equals the source's but for the input path and CPU time.
       devtools.audit_evand_mixed_covers composite reads the two as one decision over the
-      D4 region: the log covers the 10,000 roots once each under the source's header, the
+      D4 region: the log covers the 10,000 roots once each under a header naming this
+      cover's FNV-1a 64 hash, e6e0d4182d7f6e43, at the source's depth 40, node cap, kappa
+      and K, the
       19 roots it leaves are the source's failing_roots.txt, and the 304 sub-roots, each
       certified by a record file naming the pinned checker files and the cover at the
       certificate-mode settings, are the source's jobs.txt and tile those 19 exactly; the

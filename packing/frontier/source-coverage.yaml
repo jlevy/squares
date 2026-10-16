@@ -5105,8 +5105,8 @@ sources:
   notes: The whole tree is retained at the pin. The cover is reported to settle s(76) = 9 with the grid.
     The intake's replay of the source's two checkers, zmx2 over the D4 region's roots and zm_mixed.py
     over the sub-roots of the four it leaves, is recorded as E-bengreff-594-cover-replay, and since
-    the 16 October review T-184 holds it at V3/C3; the case's lower lanes wait on the review's finding
-    F8 (think-osvq).
+    the 16 October review T-184 holds it at V3/C1, its confirmation waiting on zm_mixed.py's
+    mutated-certificate controls (finding F8); the case's lower lanes wait on them too (think-osvq).
 - id: evand-compositions-2026-10-13
   title: Evan Daniel's two-piece composition certificates at 231d41d, issue584
   role: source-repository
@@ -5911,7 +5911,8 @@ sources:
     with the grid. The intake's replay of the source's two checkers, zmx2 over the D4
     region's roots and zm_mixed.py over the sub-roots of the 19 it leaves, is recorded
     as E-bengreff-610-cover-replay, and since the 16 October review T-191 holds it at
-    V3/C3; the case's lower lanes wait on the review's finding F8 (think-ribz).
+    V3/C1, its confirmation and the case's lower lanes waiting on two zm_mixed.py
+    mutated-certificate controls (finding F8; think-ribz).
 - id: wand125-continuous-n28-5745-2026-10-15
   title: Hiroaki Hosono's (wand125's) reported n28 continuous-pose lower bound, no issue
   role: source-repository
