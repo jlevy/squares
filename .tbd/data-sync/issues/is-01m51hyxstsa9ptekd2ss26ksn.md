@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-16 overnight: sweep residue, regularization 3b/3c, v
 kind: epic
 status: in_progress
 priority: 1
-version: 22
+version: 23
 delegate: user-eb
 labels:
   - result-import
@@ -19,7 +19,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-16T05:11:38.042Z
-updated_at: 2026-10-16T11:00:46.081Z
+updated_at: 2026-10-16T11:17:37.412Z
 started_at: 2026-10-16T05:13:39.869Z
 ---
 Owner asked on 2026-10-16 (~05:00Z, session "Overnight intake processing and validation", acting name user-eb) to run the full intake autonomously until 14:30Z (07:30 Pacific): as much intake (stages 0-3) as possible first, then validation (stage 4), with no very large compute. Branch claude/intake-2026-10-16 from origin/main e2e018f32.
@@ -70,3 +70,5 @@ think-la7h (176 and eight more) stays with the ecstatic-edison lane (selection d
 2026-10-16 10:45Z coordinator: the container restarted at ~10:40Z (second interruption after the 08:30-09:50Z usage pause). Disk state survived; every process and sub-agent was killed. Resumed from their transcripts: lanes B, I, J, E, addr-642-651, review-193, review-640 and the #653 reviewer, each told what was killed (I's 3a re-run, J's generator batches, B's 3c admission) and to restart killed steps under new run directory names. Lane D's local data commit 7fb79b461 pushed as backup branch claude/intake-2026-10-16-regularize-leftovers-wip (no PR).
 
 2026-10-16 ~10:55Z coordinator: Review A on #653 (3b): 0/1/1/2; all seven views pass both exact routes (verify-atlas re-run 657 s), sides = U, improvement rule holds, PENDING_ALLOWED 11->3. A2 High: run evidence (receipts, reports, selection) not retained in the repo (as #644 B1) - systemic, every regularization PR must retain its own; A1 Medium: credit bug regularized_drawings.py:466 (relation vs run.output) credits a refused re-solve at 241 and 302; A3 merge #644's tip. Addresser user-eb-addr-653 started on 3b; lanes B, J (and D when woken) told to retain evidence the same way and inherit the A1 fix.
+
+2026-10-16 ~11:20Z coordinator: 3c pushed (e757f04f4; 175 and 232 Evan Daniel's views, 264 grid-slack 0.5 deg; PENDING_ALLOWED empty with #644 + 3b + 3c). Lane D woken to stack on 3c. #649 addressed at d296e9f11: T-184 and T-191 V0/C0 -> V3/C1 (C3 derived by the replay but held until zm_mixed.py's mutated-certificate controls exist: one more refusal for s76, two for s95, owner question 16), A1 header-hash/settings checks added with fault controls; CI green. Follow-up review of the fix commit started. Lane E done; its worktree removed (disk 5.5 GB).
