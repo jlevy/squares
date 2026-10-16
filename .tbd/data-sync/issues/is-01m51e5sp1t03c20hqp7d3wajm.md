@@ -5,7 +5,7 @@ title: "Import ofitzharding: complete Lean proof of s(19) optimality (#640)"
 kind: task
 status: in_progress
 priority: 1
-version: 16
+version: 17
 delegate: user-eb-intake-1016
 labels:
   - result-import
@@ -19,7 +19,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-16T04:05:28.896Z
-updated_at: 2026-10-16T07:31:03.556Z
+updated_at: 2026-10-16T12:27:24.625Z
 started_at: 2026-10-16T04:05:36.664Z
 ---
 Stage 1 triage of jlevy/squares#640 (ofitzharding, Oscar Fitzharding, "Complete Lean proof of s(19) optimality: registration request", opened 2026-10-16T03:41:08Z, labelled `intake`, no comments when read at about 04:20Z). Intake pass 2026-10-16 (epic think-mdnn): nothing was built or run. Stage 2 is done on the pass's branch: the packet fitzharding-n19-lean-2026-10-16 (below).
@@ -88,3 +88,14 @@ Watching sq19: intake-watch.yaml cannot make a repository watched. Its schema sa
 What we did: retained ofitzharding/sq19 whole at 34fb2b7 (tag v1.0.0), with release v1.0.0's five certificate-source archives pinned by the SHA-256 in its SHA256SUMS, and your post on X as a source beside the repository. We read the statement and its definitions without building them: Feasible19 is the record's problem at n = 19 and 3 + 4 * Real.sqrt 2 / 3 is the case's exact upper bound. The axiom report lists the three standard axioms and 4,320 native_decide facts, and no sorryAx.
 
 What remains: a mathematical review of the proof, as your s(17) proof had (it will be written to be shared with you), and a complete build from source with the axiom check. The build is above this intake's compute budget and needs a larger machine than ours, so it waits for the owner's decision; a build retained by you or a third party, with its log and axiom report, would also count. We will follow up here when the review lands.
+
+2026-10-16 ~12:30Z user-eb-records-193-194 (records lane, think-9e3w): DRAFT, NOT POSTED, for the #640 reply at stage 7 on the owner's word, after the PR mapping the review merges and main + site agree. The five author questions of the mathematical review (docs/project/reviews/review-2026-10-16-fitzharding-n19-lean.md, section Questions for the Author), to go to Oscar Fitzharding with the review:
+
+Draft text: "Thank you for sq19. The project's mathematical review of v1.0.0 (34fb2b7) read the statement, the endpoint, the chain to the final theorem and the trust boundary without a build, found no blocking or major defect, and with programs of its own re-established the property each of the 2,328 native_decide facts whose modules are in the Git tree certifies; the 1,992 archived facts were scanned (digests, no trust-widening construct) but not re-run. The register now records T-194 as reported and read (V0/C1); a complete build is what would move it further. The review has five questions for you:
+1. Where does s19/data/packing_exact.json come from, and what is "T1"? If it is this project's witness W-known-best-n019 (or the Kingbird SVG it was taken from), would you credit it in the README and CITATION.cff?
+2. Will you publish s19/tools/ and s19/data/, with LOCAL_THEOREM.md and ENDGAME.md, or a short written account of the cover, census, capture and endgame?
+3. Would you publish the kernel replay's closure list (SHA-256 b301d93e...), its per-module log, and the build stamps of the build it ran on, and say whether the 16 October smoke test started from a clean build?
+4. Is each census pattern P<hex>'s roster exactly the cells of the mask 0x<hex>?
+5. Has the from-scratch scripts/verify.py run since the release? Its log would let the record cite a build that starts from the published bytes."
+
+Findings to mention with it: N19-1 (witness credit, question 1), N19-2 (unpublished generators/notes, question 2), N19-3 (replay receipt, question 3); notes N19-4..N19-7. Replace "T-194" by the published result page link once on main; the review names no T-NNN not on main.

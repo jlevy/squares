@@ -5,7 +5,7 @@ title: Regularize the counts the 16 October adoption left pending (selection and
 kind: task
 status: in_progress
 priority: 1
-version: 2
+version: 3
 delegate: user-eb-records-185-190
 labels:
   - validation
@@ -14,7 +14,7 @@ parent_id: is-01m50wdrbfnwsq05w150az5z88
 hold: null
 hold_until: null
 created_at: 2026-10-16T11:24:32.404Z
-updated_at: 2026-10-16T11:24:43.640Z
+updated_at: 2026-10-16T12:40:04.861Z
 started_at: 2026-10-16T11:24:43.640Z
 ---
 Select and admit the strong-generator views of the counts the 16 October adoption (think-z7wn, branch claude/intake-2026-10-16-records-185-190) re-housed and could not decide by its stop time: the runs are done, the selection and admission are owed. Each count is in default_drawings.PENDING_ALLOWED under this bead.
@@ -28,3 +28,7 @@ Select and admit the strong-generator views of the counts the 16 October adoptio
 - Depends on: the records PR of think-z7wn (the new witnesses) merging, or working on its branch.
 - Done when: each listed count is regularized or settled on its current witness and off PENDING_ALLOWED, in a merged PR.
 - Machine note: the selection decides every view on both exact routes; give it 2 workers, niced.
+
+## Notes
+
+2026-10-16 12:41Z user-eb-records-185-190: created by the think-z7wn records lane; PR #657 names 232, 237, 264, 271, 302, 303, 304 in PENDING_ALLOWED under this bead. Runs retained in packing/cases/regularized_drawings/think-z7wn-2026-10-16/ (z7wn-b-1016, z7wn-b-deg05/deg1/deg5-1016: receipts and per-count reports; the full run dirs with views are in /tmp/claude-0/-home-user/497b954f-f1d7-5565-9258-beec4cbe400c/scratchpad/laneJ/runs/ on this host, not retained). Next: regularize_select over the four b runs (--workers 2), the layer commands it prints, renders, SETTLED, take the counts off the list.
