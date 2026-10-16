@@ -1,0 +1,51 @@
+{
+  "S_sci": "5.93383346267692918968946061635201913843383418107788697463882e+00",
+  "read_from": [
+    "packing/frontier/n-029.md",
+    "packing/frontier/results.yaml",
+    "packing/campaign/issue-intake/upper-bounds-20261014/sources.yaml",
+    "pingyou-n29-certificate-2026-10-15.zip"
+  ],
+  "T-155 claim's s(29) decimal equals n-029.md's exact form": true,
+  "asset pr574-v2 baseline equals the ledger's PR #574 side": true,
+  "asset pr549 baseline equals T-155": true,
+  "n-029.md verified print minus its exact form": "5.433833462798086e-20",
+  "comparisons": {
+    "T-155 exact side (n-029.md verified_upper_bound.exact_form)": {
+      "value_sci": "5.933833462676929189689460616352019140000e+00",
+      "minus_S": "1.566165818922113e-36",
+      "S_is": "below"
+    },
+    "PR #574 N29 exact side (14 October ledger sources.yaml)": {
+      "value_sci": "5.933833462676929189689460616352019138433e+00",
+      "minus_S": "7.324826736065141e-90",
+      "S_is": "below"
+    },
+    "asset baseline pr574-v2-n029.cert.json s_exact": {
+      "value_sci": "5.933833462676929189689460616352019138433e+00",
+      "minus_S": "7.324826736065141e-90",
+      "S_is": "below"
+    },
+    "asset baseline pr549-n029.cert.json s_exact": {
+      "value_sci": "5.933833462676929189689460616352019140000e+00",
+      "minus_S": "1.566165818922113e-36",
+      "S_is": "below"
+    },
+    "asset baseline evan-n029.cert.json s_exact": {
+      "value_sci": "5.933833462676929189748798950979000000000e+00",
+      "minus_S": "5.933833462698086e-20",
+      "S_is": "below"
+    },
+    "Kingbird print (n-029.md reported_upper_bound.value)": {
+      "value_sci": "5.933833462676920000000000000000000000000e+00",
+      "minus_S": "-9.189689460616352e-15",
+      "S_is": "above"
+    }
+  },
+  "Kingbird print spans": {
+    "cut [p, p + ulp)": "S inside",
+    "nearest [p - ulp/2, p + ulp/2]": "S above",
+    "up (p - ulp, p]": "S above",
+    "S - p in units of the last place": "9.189689460616352e-01"
+  }
+}
