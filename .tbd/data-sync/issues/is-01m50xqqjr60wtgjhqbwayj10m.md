@@ -5,7 +5,7 @@ title: "Regularize 3c: 175, 232, 264 (re-housed by #598)"
 kind: task
 status: in_progress
 priority: 1
-version: 6
+version: 7
 delegate: user-eb-reg-3b3c
 labels:
   - regularization
@@ -14,7 +14,7 @@ parent_id: is-01m50wdrbfnwsq05w150az5z88
 hold: null
 hold_until: null
 created_at: 2026-10-15T23:18:10.776Z
-updated_at: 2026-10-16T11:13:56.305Z
+updated_at: 2026-10-16T11:30:01.491Z
 started_at: 2026-10-16T05:13:42.084Z
 ---
 
@@ -27,3 +27,5 @@ started_at: 2026-10-16T05:13:42.084Z
 2026-10-16T07:52Z user-eb-reg-3b3c: 3c runs done. Driver evand-regularize-3c-1016 (1 worker): 418.1 CPU-s, 1,167 s wall; 175 and 232 row 10 admit, 264 row 1 no view (the regularizer's certificate overlaps by 2.1e-14; upstream's checker refused it). Grid-slack 3c-deg05/deg1/deg5-1016: 535.3/551.5/545.4 CPU-s. Selection 3c running (1 worker) from the same select worktree since 07:41Z.
 
 2026-10-16T11:13Z user-eb-reg-3b3c: 3c pushed and draft PR #654 (https://github.com/jlevy/squares/pull/654), base claude/intake-2026-10-16-regularize-3b (#653 at 9b68211e1), head e757f04f4: regularize_select no-view preference fix a6b0057b1 (+test), test_default_drawings made independent of a pending count f558e0abd, data b7c3ee8c1 (175, 232 evand same; 264 grid 0.5 deg; PENDING_ALLOWED empty), re-pin c27b5758d, papers' no-change records e757f04f4 (survey HTML/MD byte-identical at link revision e2e018f32). Labels project, S2. Next: retain 3c run evidence in #653 addresser's layout; merge 3b's new head; --records and focused tests.
+
+2026-10-16T11:29Z user-eb-reg-3b3c: #654 head 97d513032: bead-tree test fix ed43d10ac (hosted suite-b failed on e757f04f4: test_bead_tree assumed a non-empty PENDING_ALLOWED); merged #653's heads 0082533ee (51ef4f180, A1/A2/A3) and 4da7ae92d (97d513032); 3c run evidence retained in packing/cases/regularized_drawings/think-3zi3-2026-10-16/ (eeea99188); re-pinned to 51ef4f18 (d1b009a26). Local at ed43d10ac's predecessor e757f04f4: --records passed (361 s), focused tests 227 passed; rerunning both at 97d513032.
