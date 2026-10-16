@@ -991,6 +991,21 @@ def test_a_missing_record_is_not_checked(tmp_path: Path) -> None:
     ]
 
 
+def test_a_record_of_another_contract_needs_action_and_does_not_stop_the_sweep(
+    tmp_path: Path,
+) -> None:
+    record = tmp_path / "default-drawings.json"
+    record.write_text(json.dumps({"contract": "something/v1", "states": []}), encoding="utf-8")
+    section = sweep.regularization_section(None, record=record)
+    assert [item.what for item in sweep.needing_action([section])] == [
+        (
+            "the regularization-state gate fails: packing/atlas/known-best/"
+            "default-drawings.json is not a packing.squares:DefaultDrawings/v2 record"
+        )
+    ]
+    assert section.notes[0].startswith("Regularization states of 0 counts. Owed: 0 pending")
+
+
 def test_the_sweep_reports_regularization_with_the_record_side_queues() -> None:
     """The section is part of every sweep, `--offline` and `--json` included, beside the
     queues it follows; with no bead store its items are owned but unconfirmed."""

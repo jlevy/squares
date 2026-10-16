@@ -1107,7 +1107,9 @@ def regularization_section(
                 step="python -m devtools.default_drawings --check-state",
             )
         )
-    states = listed[-1].removeprefix("regularization states: ")
+    states = (
+        listed[-1].removeprefix("regularization states: ") if listed else f"{len(rows)} counts"
+    )
     section.notes.append(
         f"Regularization states of {states}. Owed: {_count(len(pending), 'pending count')}, "
         f"{len(itemized & set(allowed))} of them in PENDING_ALLOWED; "
