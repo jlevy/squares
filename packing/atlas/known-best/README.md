@@ -291,18 +291,29 @@ and 272 (`evand-regularize-3a-rerun-s-1016`), 303 alone
 (`evand-regularize-3a-rerun-303-1016`), and 156, 176 and 271
 (`evand-regularize-evand-addr644-1016`, 916.52 CPU-seconds, review D1 of #644).
 `devtools.default_drawings.SETTLED` records the three settlements as decided on the two
-recorded originals and on the reproductions that cover them, and `--check-state` fails
-on a run it names that no record holds.
-Every outcome reproduces, and every drawn view byte for byte.
-At 129, 146, 156, 176 and 271 `regularize_evand rungs --check` finds his admitted view
+recorded originals and on the reproductions that cover them.
+`--check-state` fails on a run it names that the retained evidence does not hold, or
+whose record shows it did not run that count.
+The layer’s index drops a run’s block once no entry draws from it, so
+`default_drawings --retain-runs` copied the two originals’ blocks, and the five others
+the settlements of 15 October rest on, into
+[`cases/regularized_drawings/settled-runs/`](../../cases/regularized_drawings/settled-runs/)
+(review F1 of #644). Every outcome reproduces, and every drawn view byte for byte.
+At 129, 146, 156, 176 and 271 `regularize_evand rungs --check` found his admitted view
 the drawn view’s text exactly, with the same retry rungs (none), regularizer level (2)
 and groups, contact histograms and regularization record.
-At 105 grid-slack’s half-degree view is the drawn view, and so are its views at 1 and 5
-degrees (reviews D and E of #644 compared the bytes).
-His same-side views at 105 and 204 are refused at row 7, and his solved views at 204,
-272 and 303 are held at row 4, above $U$; at 204 and 303 grid-slack’s view ties the
-drawn picture on every goal at all three thresholds, and at 272 it is refused at row 7
-at all three (stage sides 732 to 730). `selection-3a.json` was made before the driver
+That comparison ran on the runs’ scratch directories, whose views are not retained.
+Each retained `report.json.gz` keeps the rungs, level, groups, contacts and
+regularization record the check compares, and the view’s Git blob only as provenance.
+Run on the retained evidence, `rungs --check` reads those reports and finds all five in
+agreement and none differing: 156, 176 and 271 in `evand-addr644-1016`, and 129 and 146
+in `3a-rerun-1016` (review F2 of #644). At 105 grid-slack’s half-degree view is the
+drawn view, and so are its views at 1 and 5 degrees (reviews D and E of #644 compared
+the bytes).
+His same-side views at 105 and 204 are refused at row 7, and his solved views
+at 204, 272 and 303 are held at row 4, above $U$; at 204 and 303 grid-slack’s view ties
+the drawn picture on every goal at all three thresholds, and at 272 it is refused at row
+7 at all three (stage sides 732 to 730). `selection-3a.json` was made before the driver
 ran 156, 176 and 271, and without his views there it chose grid-slack’s at 156 and 271,
 which the drawn views dominate, and none at 176, where grid-slack’s view goes to review
 (row 7); `selection-3a-d1.json`, over his new run and grid-slack’s runs at those three
