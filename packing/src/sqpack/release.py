@@ -1168,14 +1168,16 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "The think-0ut1 run of 16 October 2026 admits no view: it rewrites ten "
             "decided-no-better SETTLED entries (their runs, outcomes and evidence, no owed "
             "work left), so default-drawings.json changes only those counts' `states` rows "
-            "(`decisions` and `why`) and the `why` of 204, 272 and 303, whose evidence string "
-            "now names its paragraph; its `entries` are byte-identical to the base's. The "
+            "(`decisions` and `why`); its `entries` are byte-identical to the base's. The "
             "site reads the record only through `regularized_defaults`, `credit_line` and "
             "`held_reasons`, which read `entries` and the index, never `states`, SETTLED or "
             "PENDING_ALLOWED, and no case record, view or index entry changes. The papers "
             "reach default_drawings only through shared import discovery and read neither "
-            "constant. Source review, no render; the site keeps v0.7.15 and the papers "
-            "v0.4.7, v0.1.7, v0.1.0 and v0.2.2."
+            "constant. Review G2 of #644 then added default_drawings.orphaned_copies, "
+            "which fails the state gate on a settled-runs copy no settlement names, and "
+            "deleted the five such copies; the site and the papers read neither. Source "
+            "review, no render; the site keeps v0.7.15 and the papers v0.4.7, v0.1.7, "
+            "v0.1.0 and v0.2.2."
         ),
     ),
     ReleaseNoPublicChange(
@@ -1313,10 +1315,12 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         ),
         paths=(
             "packing/devtools/default_drawings.py",
+            "packing/devtools/regularize_evand.py",
             "packing/frontier/results.yaml",
             "packing/frontier/n-105.md",
             "packing/frontier/n-129.md",
             "packing/frontier/n-146.md",
+            "packing/src/sqpack/cli/validate.py",
         ),
         outputs=(
             "papers/n11-lower-bounds-explainer.html",
@@ -1348,8 +1352,25 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "browser's math pass, their Markdown and the other 40 files each render "
             "writes are byte-identical (42 of 42 files each); the explainer, whose render "
             "needs a browser this host lacks, is source-reviewed only, and no PDF was "
-            "rebuilt. All four papers keep v0.4.7, v0.1.7, v0.1.0 and v0.2.2; the site "
-            "takes the patch."
+            "rebuilt. Review D's pass (#644) then added default_drawings.recorded_runs, "
+            "which holds each SETTLED entry's runs to a record, reworded the 272 and 303 "
+            "outcomes, and added regularize_evand's read-only `rungs --check`; the papers "
+            "read none of them, and rendered again at link revision e2e018f3 from this "
+            "branch at ebe50691 and from main e2e018f3's tree, the survey's and both "
+            "reviews' 42 files each are byte-identical. Review F's pass added "
+            "default_drawings.run_records and --retain-runs, which hold a settlement's "
+            "runs to the retained evidence, and regularize_evand.run_reports, which lets "
+            "`rungs --check` read retained reports; the papers read none of them, and "
+            "rendered at link revision e2e018f3 from this branch at 6079926b, the "
+            "survey's and both reviews' 42 files each are byte-identical to main "
+            "e2e018f3's. Review G's pass added the retained run evidence to the "
+            "regularization-state step's touches in sqpack.cli.validate, which only the "
+            "explainer declares, as part of the whole sqpack package, and made `rungs "
+            "--check` account for each run directory; the papers read neither, the "
+            "explainer is source-reviewed only, and rendered at link revision e2e018f3 "
+            "from this branch at 2f31507c, the survey's and both reviews' 42 files each "
+            "are byte-identical to main e2e018f3's. All four papers keep v0.4.7, v0.1.7, "
+            "v0.1.0 and v0.2.2; the site takes the patch."
         ),
     ),
     ReleaseNoPublicChange(
