@@ -5,12 +5,12 @@ title: Owner decisions pending from the 2026-10-15/16 intake passes (each blocks
 kind: task
 status: open
 priority: 1
-version: 12
+version: 13
 labels: []
 dependencies: []
 parent_id: is-01m50gnwbxd5kxbynyx9nd162p
 created_at: 2026-10-16T04:57:59.468Z
-updated_at: 2026-10-16T18:54:58.522Z
+updated_at: 2026-10-16T21:27:50.003Z
 ---
 Collected by the coordinator 2026-10-16 so another agent can pick them up. Each item names the bead that owns it; act only on the owner's word.
 1. #574 (BuddenPing, 148 certificate refinements, a PR): merge it and adopt T-174? (think-9v2k). WARNING: adopting T-174 re-houses 35 counts (68, 84, 86, 88, 108, 126, 127, 130, 131, 132, 172, 181, 182, 199, 206, 208, 209, 210, 228, 238, 239, 240, 259, 266, 267, 268, 270, 273, 292, 297, 301, 305, 306, 307, 308); since #636 the gate will fail unless each is re-regularized or added to PENDING_ALLOWED with a bead (think-g3q7 documents the step). The #574 reply is held until the decision.
@@ -48,3 +48,5 @@ Collected by the coordinator 2026-10-16 so another agent can pick them up. Each 
 Owner answers, 16 Oct ~17:15Z, in the coordinator's session: (27) 176: 'Adopt as settled'. #657 adopts T-186's smaller packing at 176 and settles it on the axis view of the new witness. (rounds) Follow-up review rounds before merge: 'Follow-up rounds first'. (merge) 'If everything is reviewed, you can merge it.' / 'Follow up everything you can, and once things are reviewed, be sure you merge.' (policy) 'We should always be adopting the smallest packing and then regularizing it. That should be the policy, obviously.' / 'This should be built into our policy. It shouldn't even be a question. If there's any ambiguity on that, we should fix that in our process docs for intake.' The policy resolves items 21 (T-193 adoption beside T-174: adopt whichever is smallest), 24 and 28 (views below U are smaller packings: register and adopt), and the T-174 hold (select_houses.HELD). Policy lane: think-sa5r.
 
 A12 (from the ecstatic-edison session's last context, ~05:45Z: adopt T-174 (#574) before the 3b/3c regularization groups run?) is answered by the owner's policy of 16 Oct afternoon: always adopt the smallest packing, then regularize it. The 3b/3c groups had already run overnight (#653, #654) on the owner's overnight request to fill in every remaining regularization. T-174's adoption at every count where it is smallest follows the policy PR #660 (think-sa5r), and the counts it re-houses are regularized again in that PR.
+
+Owner, 16 Oct ~20:45Z: 211 row-7 view: admit (see think-r3cl). Owner, ~20:40Z: 'continue making as much progress to land things as possible. in particular latest records we can validate and regularization of them e.g. 176 is still unregularized on the website'. The regularization stack lands first (#644 next, v0.7.20).

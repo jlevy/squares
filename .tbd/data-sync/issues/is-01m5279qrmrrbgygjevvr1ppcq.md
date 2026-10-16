@@ -5,7 +5,7 @@ title: Regularize the counts the 16 October adoption left pending (selection and
 kind: task
 status: in_progress
 priority: 1
-version: 6
+version: 9
 delegate: user-eb-records-185-190
 labels:
   - validation
@@ -14,7 +14,7 @@ parent_id: is-01m50wdrbfnwsq05w150az5z88
 hold: null
 hold_until: null
 created_at: 2026-10-16T11:24:32.404Z
-updated_at: 2026-10-16T19:57:48.412Z
+updated_at: 2026-10-16T21:27:48.807Z
 started_at: 2026-10-16T11:24:43.640Z
 ---
 Select and admit the strong-generator views of the counts the 16 October adoption (think-z7wn, branch claude/intake-2026-10-16-records-185-190) re-housed and could not decide by its stop time: the runs are done, the selection and admission are owed. Each count is in default_drawings.PENDING_ALLOWED under this bead.
@@ -38,3 +38,9 @@ Select and admit the strong-generator views of the counts the 16 October adoptio
 Owner's policy, 16 Oct afternoon: always adopt the smallest packing and regularize it. The 8 counts #657 allowlisted (211, 232, 237, 264, 271, 302, 303, 304) are selected and admitted in #657 before it merges (coordinator's plan); 176 is adopted as settled on the owner's word.
 
 2026-10-16 19:57Z user-eb-stack: handover. The owner handed the regularization stack (#644 -> #653 -> #654 -> #656 -> #657) to lane S (user-eb-stack); claim skipped (held by its earlier lane), carrying on per the brief.
+
+20:56Z user-eb-stack: selection over z7wn-b runs (+ z7wn-a at 211), --workers 2, 28 min wall: grid-slack views admitted at 232, 264, 271 (0.5 deg) and 302 (5 deg); 237, 303, 304 settled decided-no-better (SETTLED, runs _RUNZ7WN_B, selection-r3cl.json/.md retained); 211 stays in PENDING_ALLOWED: every strong view (Daniel same-side/solved, grid-slack at 0.5/1/5 deg) is at row 7 (decision: review, worse: none), which the selection never admits and which only the owner's review can draw (policy section 5's review record does not exist yet). #657 head 1f343b743 (data 796a1d032, re-pin bce5db428). Records tier and verify-atlas running.
+
+2026-10-16 21:08Z user-eb-stack: phase 1 done. #657 head 1f343b743: 232/264/271/302 regularized (grid-slack), 237/303/304 settled, 211 left in PENDING_ALLOWED (all strong views at row 7, review; the owner decides). This bead must stay open until a PR takes 211 off. Records tier 50/52 (two origin/main comparisons, base moved), verify-atlas on the 8 counts passed, 333 focused tests passed; hosted shards all green, validate red only on the origin/main comparisons. Review B dispositions posted (review 5553667876).
+
+Owner, 16 Oct ~20:45Z, in the coordinator's session (AskUserQuestion): 211, Evan Daniel's same-side row-7 view of T-188's witness (2/10/3/17/17, 545/555, better on all seven measures): 'Admit it (Recommended)'. Lane S writes the section 5 review record and admits the view in #657 with the stack review's findings.

@@ -5,7 +5,7 @@ title: "Policy: the house is always the smallest validated packing, regularized 
 kind: task
 status: in_progress
 priority: 2
-version: 9
+version: 10
 delegate: user-eb-policy-houses
 labels: []
 dependencies: []
@@ -13,7 +13,7 @@ parent_id: is-01m51hyxstsa9ptekd2ss26ksn
 hold: null
 hold_until: null
 created_at: 2026-10-16T17:14:02.997Z
-updated_at: 2026-10-16T19:55:10.480Z
+updated_at: 2026-10-16T21:09:13.076Z
 started_at: 2026-10-16T17:17:09.781Z
 ---
 Owner, 2026-10-16 afternoon: 'We should always be adopting the smallest packing and then regularizing it. That should be the policy, obviously.' and 'This should be built into our policy. It shouldn't even be a question. If there's any ambiguity on that, we should fix that in our process docs for intake.' Write it into result-import.md stage 5, the regularization guide, the frontier README, and select_houses/adopt_houses (owner holds such as HELD T-174, RP-3 algebraic left-outs, undecided orderings, regularized views below U), then adopt every smaller validated packing it reaches and regularize each.
@@ -111,3 +111,15 @@ TABLE (n | house now on main | rule on main | house after #657/#658 | rule on th
 Carry into #660's next addressing pass: #641 review F's F1 and F2 (https://github.com/jlevy/squares/pull/641#pullrequestreview-5552932945). F1: step 1 of the runbook and the guide still defers each pending count while the mark says 'its runs are not deferred'; exclude adopted counts from the deferral and word the mark as an obligation. F2: the docstring of test_the_comparison_lists_what_each_changed_count_draws still says 'for the owner'.
 
 2026-10-16T19:55Z lane P: #641 moved to 453128d1c (merged main 7b34cd5bb; review E took #660's words: DEFERRAL_WAITS, UNDEFERRED, no owner hold in stage 5). Merged into #660 as 17b385bd1 (pushed); #660 mergeable again. At 17b385bd1: packing-validate --records --jobs 2 passes every step (130.5 s); 266 focused tests pass; select_houses --check exit 0 (63 staged); release impact clean. #658 guidance: whichever of #658 and #660 merges second drops deferred_results, registers T-193 in select_houses.ALGEBRAIC_READERS and stages its 16 counts in PENDING_ADOPTION (re-point 88,102,123,126,199,258,259,266,267,292,295,301 from T-174; add 175,204,232,302). Hosted run on 17b385bd1 in progress.
+
+2026-10-16 ~21:00Z lane P (user-eb-policy-houses): #660 https://github.com/jlevy/squares/pull/660 ready for review at 8e53e5c65 (draft, base main, labels intake/project/S2; description updated). Merged main into the branch with merge commits at 68cdbc614 (#641), 96510ae7a (#648), 321d492c7 (#650; one conflict, in result-import.md) and c9038049c (#652). None of #648, #650 or #652 changes a register entry, case record or selection code.
+
+F1 (review F of #641), done as the coordinator directed. No count an adoption re-houses is deferred to default_drawings.PENDING_ALLOWED. Above the pass's compute cap the adoption waits with its runs, staged in select_houses.PENDING_ADOPTION. adopt_houses --check fails while PENDING_ALLOWED names a count re-housed by a pass dated on or after RULE_PASSES_FROM, 17 Oct (adopt_houses.deferred_adoptions). The --compare mark is the obligation: default_drawings.RUNS_OWED = "its runs are owed in this pull request". UNDEFERRED is renamed, adopt_houses.DEFERRAL_WAITS is replaced by NEVER_DEFERRED, and the printout no longer offers a deferral. Reworded: the runbook (W1 step 3, prompt step 4, the stage table, the house rule's "Regularizing is part of adopting", stage 5), guide step 3 and policy section 8. Only a witness corrected or re-solved with its house's side unchanged may defer its runs, and never at a marked count. Review F's do-not-fix note (above the cap an adoption may defer its runs to a bead) is superseded. F2: the docstring now says the comparison names the goals and marks the obligation.
+
+#650 merge: kept #650's imports that make a house (a register adoption, a Kingbird catalogue intake, an exact re-solve) and its bead labels, and applied the rule to all of them. Stage 0's bullet: the allowlist entry is made by the pull request that corrects a witness, never by one that re-houses the count. intake_sweep's step for an unlisted pending count says the same. Code enforces register adoptions only; a catalogue intake has no such check.
+
+Validation (from packing/, uv run --frozen --all-extras --group dev): packing-validate --records --jobs 2, 52/52 steps at 5e2e13371 (151.0 s) and at a282ef726 (133.0 s). 314 focused tests pass, 1 skipped, across ten files including test_intake_sweep. select_houses --all --check exit 0 (63 staged). adopt_houses refresh(write=False), check() and deferred_adoptions() all empty. check_documentation (2060 documents), check_release_impact --baseline-ref origin/main and check_bead_tree pass. ruff, format and basedpyright: 0 findings on the 14 changed Python files. Hosted: every job passed at 17b385bd1 and at 37c1d827c. At 8e53e5c65 every hosted job passed (deferred checkpoint skipped); GitHub reports #660 mergeable (clean) against main c9038049c.
+
+PLAN ADDENDUM (F1). The adoption PR runs every count it re-houses itself, and splits only by leaving counts staged. 14 of the 63 staged counts are already on main's PENDING_ALLOWED: 105, 129, 146, 153, 156, 175, 176, 204, 207, 232, 264, 271, 272, 303 (think-la7h, think-kpm3, think-3zi3). The adoption's runs decide them and its PR takes them off. On the stack, 232 and 302 are on #657's list and move to T-193. #657's pass is dated 16 Oct, so the check passes it, but its list names 8 of the 15 counts it re-houses. Seven (232, 237, 264, 271, 302, 303, 304) have their runs done and their selection and admission owed to think-r3cl; under the rule that finishing belongs in #657. 211 waits on the owner's row-7 review, an owner question. The stack's register is unchanged since the plan (#657 5d5eb2dec to 6d3ea4a3e touches only the regularization layer), so the numbers stand: main 63 counts, 12.6 CPU-h; stack 57, 11.4 CPU-h. Merge note: the stack lacks 68cdbc614, and whichever merges second resolves UNDEFERRED to RUNS_OWED in default_drawings.py and its test.
+
+think-sa5r stays open until the adoption PR that empties PENDING_ADOPTION merges (bead tree holds it). The worktree is removed so an address-pr lane can check the branch out.

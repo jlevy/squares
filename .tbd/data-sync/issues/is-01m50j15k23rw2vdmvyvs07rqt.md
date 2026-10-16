@@ -5,7 +5,7 @@ title: "Import pingyou: s(29) exact rational certificate, 1.57e-36 below T-155 a
 kind: task
 status: in_progress
 priority: 2
-version: 10
+version: 12
 delegate: user-eb-intake-622
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m50gnwbxd5kxbynyx9nd162p
 hold: null
 hold_until: null
 created_at: 2026-10-15T19:53:37.121Z
-updated_at: 2026-10-16T20:34:25.963Z
+updated_at: 2026-10-16T21:04:03.758Z
 started_at: 2026-10-15T23:31:02.497Z
 ---
 Stage 1 triage of pull request jlevy/squares#622 (BuddenPing, PingYou Ltd, "data: submit a tighter exact N29 packing certificate", opened 2026-10-15T18:43:54Z, no comments or reviews when read at about 19:50Z). A result submitted as a pull request, treated as an intake report as #574 was (think-9v2k): never merged, approved, pushed to or commented on here. Lane D of the 2026-10-15 evening intake pass (think-wnsv, think-ykg6), read-only.
@@ -59,3 +59,7 @@ Waits for the record to hold sigma (think-6gti's import of #545), or for the own
 2026-10-16 intake pass (epic think-mdnn), ecstatic-edison-intake-1016: the acknowledgement was posted at 01:38:36Z (https://github.com/jlevy/squares/pull/622#issuecomment-6206055029, recorded in result-requests.yaml), and BuddenPing answered its AI question at 03:40:22Z (https://github.com/jlevy/squares/pull/622#issuecomment-6207551818): "All of our submissions are the same affiliation.  PingYou Ltd, assisted by the PY agentic offering". Read into #622's entry (read_through 2026-10-16T03:40:22Z; the entry's notes quote it). It answers the question for this certificate and, by its words, for every PingYou Ltd submission: the register entries crediting PingYou that say the source or pull request makes no statement about AI assistance (T-147, T-148, T-164, T-166, T-167 and T-174 among them) can now cite it, a records follow-up for the next change that touches them, not made here. The answer reports no result and changes no state, so it owes no reply of its own; the stage 7 reply on the verdict can thank the author. Released back to open: the comparison once think-6gti lands sigma, and the stage 7 reply, are unchanged.
 
 2026-10-16 ~20:40Z user-eb-intake-622 (lane N): claimed. Worktree .claude/worktrees/n29-622, branch claude/intake-2026-10-16-n29-622 from origin/main 96510ae7a. Release asset re-downloaded to scratch: 430,075 bytes, SHA-256 0dc9bcd1... matches; tag data/pingyou-n29-certificate-2026-10-15-v1 -> 318ab94e (git ls-remote). Next: packet pingyou-pr622-certificate-2026-10-15 (acquire_source + upper_bound_reports), replay, register. Note: by the report-order rule #622 is undecided at 29 against the reported lane (Kingbird print; sigma not held, think-6gti); the brief registers it on the owner's house rule, to be flagged as an owner decision in the PR.
+
+2026-10-16 20:50Z user-eb-intake-622: stage 2 + stage 4 replay committed and pushed, branch claude/intake-2026-10-16-n29-622 @ 8ad96974e (base main 321d492c7). Packet pingyou-pr622-certificate-2026-10-15 (derived fact facts/n-029.yaml.gz; receipt receipts/exact-certification.json.xz): positive passes sqpack exact_verify and the independent corner checker, duplicate-square and outside-container controls refused by both, 2,436 pair decisions, 93.5 route CPU s; check --replay equal. Exact margins: T-155 - S = 1.566165818922113e-36; #574 N29 - S = 7.324826736065142e-90; S - Kingbird print = 9.19e-15 (undecided by the print). Importer: House.verified_exact_form for n-029's kept print (think-gzrw). Next: per-count ledger upper-bounds-n29-20261016 (report-order rule; key-reason candidate = house rule), then register T-195.
+
+2026-10-16 21:10Z user-eb-intake-622: stage 3 committed and pushed @ 5024d0e2a: per-count ledger campaign/issue-intake/upper-bounds-n29-20261016 (PR #574 row and PR #622 both undecided vs the Kingbird print; key-reason candidate = house rule, proposed as T-195), T-195 registered V3/C3 (replay evidence E-pingyou-622-exact-feasibility; review record pending), deferral in certificate-citation-deferrals.yaml naming think-30n2 (keep this bead open until the adoption PR that removes it merges). Next: records tier, release impact (site edition + paper no-change records), draft PR; then stacked adoption/regularization branch.

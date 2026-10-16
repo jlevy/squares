@@ -5,12 +5,12 @@ title: Merge the 16 October PRs once reviewed (owner's word, 16 Oct afternoon)
 kind: task
 status: open
 priority: 2
-version: 19
+version: 23
 labels: []
 dependencies: []
 parent_id: is-01m51hyxstsa9ptekd2ss26ksn
 created_at: 2026-10-16T17:14:04.698Z
-updated_at: 2026-10-16T20:23:16.448Z
+updated_at: 2026-10-16T21:20:27.779Z
 ---
 Owner: 'If everything is reviewed, you can merge it.' and 'Follow up everything you can, and once things are reviewed, be sure you merge.' Merge order and gate per review-and-merge-prs; release re-cuts after each merge.
 
@@ -51,3 +51,11 @@ user-eb-integrator: #649: merged #652 b868ba4e5 in 2d57609b3, re-pin 3d4ada4c7, 
 20:10Z: merged so far today: #642 (abd65fba3), #651 (26d8bb335, v0.7.15), #647 (7b34cd5bb), #655 (8069b12e2, v0.7.16), #641 (68cdbc614), #648 (96510ae7a, v0.7.17). In progress: the integrator on #652+#649 (v0.7.18, v0.7.19), #650's update, the stack lane's phase 1. #645 was addressed through review E (7/0/0; no further round: small predicate tightenings with tests, no live rung change) and is ready for update. #646 is done through review E and ready for update. Queue after #649: #646, #645, then the stack (lane S phase 2), #660, #658.
 
 user-eb-integrator: #652 description (collision rewritten, update section) and B dispositions (review 5553251410) posted at b868ba4e5; #649 description updated at 32634cfca with the known release-impact red. Watching CI on both.
+
+user-eb-integrator: #652 ready at b868ba4e5e2e4360bfd2cbd1d6b25c1e2177a7c4 (v0.7.18): runs 38960055955, 38960056031, 38960049586, deep gate 38960076560 success; clean vs main 321d492c7 (#650, no overlap). #649 at 32634cfca: validate red only on check_release_impact vs main (by design, v0.7.18+v0.7.19 vs v0.7.17); needs main merge + one CI run after #652 lands.
+
+user-eb-integrator: #649 merged main c9038049c in f62671cc2 (no conflicts), pushed; records tier exit 0 (144 s), release_pin/check_release_impact pass vs main now; 40 release tests passed. CI running. Starting #646.
+
+user-eb-integrator: #646: merged main c9038049c locally in f79f22cd1 (cut files from main, papers NPC kept); not pushed yet to keep #649's CI runners free; release-impact asks for the site successor as expected. Cut waits for #649 to land (v0.7.20).
+
+user-eb-integrator: #649 ready at f62671cc2b2e32be5d14d5674e634902b7278b30 (v0.7.19): runs 38964806395, 38964806387, 38964803683, deep gate 38964806391 success; clean. #646 merge f79f22cd1 pushed for early CI signal (release-impact red expected until the v0.7.20 cut after #649 lands).

@@ -5,7 +5,7 @@ title: Review and land the nine-count regularization batch 3a
 kind: task
 status: in_progress
 priority: 1
-version: 23
+version: 24
 delegate: user-eb-land-644
 labels: []
 dependencies: []
@@ -16,7 +16,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-16T05:34:29.405Z
-updated_at: 2026-10-16T19:57:21.743Z
+updated_at: 2026-10-16T21:08:03.784Z
 started_at: 2026-10-16T05:34:41.706Z
 ---
 
@@ -61,3 +61,5 @@ Release completion must include both infographic families and every advertised S
 2026-10-16 19:42Z user-eb-stack: handover. The owner handed the regularization stack (#644 -> #653 -> #654 -> #656 -> #657) to lane S as user-eb-stack; claim skipped (held by user-eb-land-644), carrying on per the brief. Phase 1: review G (G1, G3, G4, G5) on #644 at 75cf441b9, then cascade up the stack.
 
 19:57Z user-eb-stack: #644 at 57fd1c04c (G1/G3/G5 in 2f31507c3, papers' record 77b815e42, retain_runs test generalized 57fd1c04c). Cascade: #653 merged 644 at 882b2e049, re-pin 5260b0278, pushed; state 71/232/14/4/3, step-7 260 passed. Next #654.
+
+2026-10-16 21:08Z user-eb-stack: phase 1 done; #644 at 57fd1c04c, review G dispositions posted (review 5553198206), description updated (G4). Phase 2 (merge main, re-cut, deep gate) waits on the coordinator.
