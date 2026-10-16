@@ -93,6 +93,8 @@ INTAKE_LABEL = "intake"
 #: validated, whatever its status word says.
 CONFIRMED_RANK = 3
 THIRD_PARTY = "independently-external"
+#: How an evidence entry whose premise is not confirmed here begins its `why`.
+IMPLICATION = "an implication"
 OPTIMALITY = "optimality"
 UPPER_BOUND = "upper-bound"
 
@@ -261,16 +263,31 @@ def confirms(entry: Mapped, evidence_by_id: Mapping[str, Mapped]) -> bool:
     )
 
 
-def confirmation_phrase(cited: Iterable[str], register: Register, kind: str = "") -> str:
+def confirmation_phrase(
+    cited: Iterable[str],
+    register: Register,
+    kind: str = "",
+    *,
+    scope: Mapping[str, Mapped] | None = None,
+) -> str:
     """How a confirmed result was re-verified, one phrase for each confirming entry.
 
     An exact value takes its confirmation from its lower half (epistemics.md, Scope and
     Composition), so the upper half's entry, most often the grid's, is not described: an
     author told that their lower bound was "re-verified by an independent implementation"
     because the grid was would be told something false.
+
+    `scope` is the evidence the caller judged confirmation in, so a conditional entry's
+    premises are read where its state was decided: a result's own cited entries by
+    default, as `devtools.check_results` derives C, or the whole register for an
+    evidence entry named on its own.
     """
     cited = list(cited)
-    by_id = {ref: register.evidence[ref] for ref in cited if ref in register.evidence}
+    by_id = (
+        scope
+        if scope is not None
+        else {ref: register.evidence[ref] for ref in cited if ref in register.evidence}
+    )
     phrases: list[str] = []
     missing: list[str] = []
     for ref in cited:
@@ -344,9 +361,14 @@ def _evidence_entry(ident: str, register: Register) -> Entry:
         if hypotheses := undischarged(entry, register.evidence, confirming=True):
             # An implication confirms its implication only: until each premise is
             # confirmed it does not confirm the claim (sqpack.assurance).
-            why = f"an implication; {' and '.join(hypotheses)} is not confirmed here"
+            premises = (
+                f"premise {hypotheses[0]} is"
+                if len(hypotheses) == 1
+                else f"premises {' and '.join(hypotheses)} are"
+            )
+            why = f"{IMPLICATION} whose {premises} not confirmed here"
             return Entry(ident, rungs, OPEN, status, why, "")
-        how = confirmation_phrase([ident], register)
+        how = confirmation_phrase([ident], register, scope=register.evidence)
         return Entry(ident, rungs, CONFIRMED, result_status.CONFIRMED, "", how)
     return Entry(ident, rungs, OPEN, status, "", "")
 
@@ -1027,6 +1049,21 @@ def _run_here(record: Mapped | None, register: Register) -> str:
     return " and ".join(parts)
 
 
+def _plain_evidence(entry: Entry) -> str:
+    """An open evidence entry's state: an implication, a sample, or neither."""
+    if entry.why.startswith(IMPLICATION):
+        return (
+            f"recorded as evidence ({entry.rungs}): {entry.why}, so it confirms the "
+            "implication and not its conclusion"
+        )
+    if entry.why:
+        return (
+            f"recorded as evidence ({entry.rungs}): {entry.why}, which decides those "
+            "and confirms nothing beyond them"
+        )
+    return f"recorded as evidence ({entry.rungs}); not yet confirmed here"
+
+
 def _plain(entry: Entry, record: Mapped | None, register: Register) -> str:
     """An entry's state in words an author can read without the ladder beside them."""
     if entry.state == CONFIRMED:
@@ -1037,12 +1074,7 @@ def _plain(entry: Entry, record: Mapped | None, register: Register) -> str:
     if entry.state == DEFECT:
         return f"a defect is recorded against it: {entry.why}"
     if not entry.id.startswith("T-"):
-        if entry.why:
-            return (
-                f"recorded as evidence ({entry.rungs}): {entry.why}, which decides those "
-                "and confirms nothing beyond them"
-            )
-        return f"recorded as evidence ({entry.rungs}); not yet confirmed here"
+        return _plain_evidence(entry)
     ran = _run_here(record, register) if entry.status == result_status.RECORDED else ""
     words = {
         result_status.RECORDED: "registered as reported"

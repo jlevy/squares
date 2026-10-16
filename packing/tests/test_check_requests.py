@@ -1203,8 +1203,14 @@ def test_an_open_implication_is_not_called_confirmed() -> None:
     register = check_requests.load_register()
     entry = check_requests.entry_state("E-k2m4-evand-bentz4-lean-build", register)
     assert entry.state == OPEN, entry
-    assert entry.why.startswith("an implication;"), entry
-    assert "ValidTilt9" in entry.why, entry
+    assert entry.why == "an implication whose premise ValidTilt9 is not confirmed here"
+    words = check_requests._plain(entry, None, register)  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+    assert words == (
+        "recorded as evidence (verified, replayed-here): an implication whose premise "
+        "ValidTilt9 is not confirmed here, so it confirms the implication and not its "
+        "conclusion"
+    )
+    assert "decides those" not in words
     assert (
         check_requests.confirmation_phrase(["E-k2m4-evand-bentz4-lean-build"], register)
         == "how it was re-verified is not yet recorded"
@@ -1234,3 +1240,14 @@ def test_a_producer_run_is_not_called_confirmed_whatever_its_origin_says() -> No
     ours = {**producer, "id": "E-ours", "performed_by": "repository"}
     register = _live_with(ours)
     assert check_requests.entry_state(ours["id"], register).state == CONFIRMED
+
+
+def test_a_confirmed_conditional_entry_says_how_it_was_re_verified() -> None:
+    """Review E5: T-064's Valid7 Lean build is confirmed with its premise discharged in
+    the register, and its phrase must be read in that same register, not only among the
+    one id named."""
+    register = check_requests.load_register()
+    entry = check_requests.entry_state("E-k2m3-evand-bentz-lean-build", register)
+    assert entry.state == CONFIRMED, entry
+    assert entry.how.startswith("reproduced here with the author's own checker"), entry
+    assert "not yet recorded" not in check_requests._plain(entry, None, register)  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
