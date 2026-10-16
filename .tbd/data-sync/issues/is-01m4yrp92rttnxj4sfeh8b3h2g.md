@@ -5,7 +5,7 @@ title: "Register cases 76 and 95 in the mixed-cover tools, then record the zmx2 
 kind: task
 status: in_progress
 priority: 2
-version: 6
+version: 7
 delegate: user-eb-records-76-95
 labels: []
 dependencies: []
@@ -13,7 +13,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-15T03:11:31.416Z
-updated_at: 2026-10-16T06:49:17.097Z
+updated_at: 2026-10-16T07:04:24.366Z
 started_at: 2026-10-16T05:25:32.902Z
 ---
 The C3 route for T-184 (#594, s(76)=9) and #610 (s(95)=10) needs the full reproductions (zmx2 D4 sweep over 10,000 roots plus all zm_mixed.py sub-roots, already run and retained in packets bengreff-s76-certificate-* and bengreff-s95-certificate-2026-10-15 on intake-610 @ 7c65c191b) recorded as evidence entries. That first needs cases 76 and 95 registered in the two mixed-cover tools (zmx2, zm_mixed). Then a stage 4 review with no blocking defect raises the rungs. Optional: zmx2 --full (think-eucc, ~6 CPU-h), as T-066's s(59) replay ran. Found by the #610 lane on 2026-10-15.
@@ -27,3 +27,5 @@ The C3 route for T-184 (#594, s(76)=9) and #610 (s(95)=10) needs the full reprod
 2026-10-16T06:58Z lane E checkpoint: evidence commit fcfcb0443 (E-bengreff-594-cover-replay, E-bengreff-610-cover-replay; verifiers rows; coverage rows; T-184/T-191 cite them with V0/C0 held by composition until lane F's review, activity + unfinished item link think-l8wi; case adoption deferred in certificate-citation-deferrals.yaml under think-ccjt, blocked on think-l8wi; papers no-public-change record, renders byte-identical), re-pin cf408163a, URL amendments 0f2c667c1. Head pushed. Next: draft PR; site edition cut (v0.7.15, collides with #644 and review-185-190 branch) as the last commit after lane F's verdict or at 12:00Z.
 
 2026-10-16T06:52Z lane E: draft PR #649 (https://github.com/jlevy/squares/pull/649) opened at 0f2c667c1, labels intake + S2. Waiting on lane F's verdict for the final commit; site cut last.
+
+2026-10-16T07:10Z lane E: hosted CI at 0f2c667c1 is green except 'synopsis agrees with the artifacts' (site release impact: the edition is not cut). The v0.7.15 site cut (devtools.cut_release, dry run clean) was refused by this session's permission classifier as a production deploy; it needs the owner's permission or the owner's cut. v0.7.15 is also taken by #644 and the review-185-190 branch. Holding for lane F's verdict.
