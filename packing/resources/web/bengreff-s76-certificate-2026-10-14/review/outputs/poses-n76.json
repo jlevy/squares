@@ -1,0 +1,464 @@
+{
+ "n": 76,
+ "seed": 20261016,
+ "denominator": 1048576,
+ "published_control_poses": [
+  {
+   "pose": [
+    "1500011/1000000",
+    "750001/500000",
+    "1/250000"
+   ],
+   "mu": "7890087444062733817589347613/7812499999875000000000000000",
+   "zm_mixed_pose": "7890087444062733817589347613/7812499999875000000000000000",
+   "agrees": true
+  },
+  {
+   "pose": [
+    "250003/500000",
+    "7/2",
+    "19/5000000"
+   ],
+   "mu": "8393827087780112907255184733/8333333333213000000000000000",
+   "zm_mixed_pose": "8393827087780112907255184733/8333333333213000000000000000",
+   "agrees": true
+  }
+ ],
+ "d4_region_uniform": {
+  "label": "D4 region",
+  "poses": 3000,
+  "below_one": 0,
+  "min_mu": "1.008403950",
+  "argmin": [
+   "696369/262144",
+   "2833031/1048576",
+   "163777/524288"
+  ]
+ },
+ "failing_roots": [
+  {
+   "label": "root 22,44,3",
+   "poses": 200,
+   "below_one": 0,
+   "min_mu": "1.006989345",
+   "argmin": [
+    "1174869/524288",
+    "4660061/1048576",
+    "501549/1048576"
+   ]
+  },
+  {
+   "label": "root 42,43,3",
+   "poses": 200,
+   "below_one": 0,
+   "min_mu": "1.009404298",
+   "argmin": [
+    "558667/131072",
+    "2299643/524288",
+    "515977/1048576"
+   ]
+  },
+  {
+   "label": "root 43,42,2",
+   "poses": 200,
+   "below_one": 0,
+   "min_mu": "1.009372639",
+   "argmin": [
+    "568179/131072",
+    "2250797/524288",
+    "161665/524288"
+   ]
+  },
+  {
+   "label": "root 44,22,2",
+   "poses": 200,
+   "below_one": 0,
+   "min_mu": "1.007271887",
+   "argmin": [
+    "4664435/1048576",
+    "1176615/524288",
+    "181353/524288"
+   ]
+  }
+ ],
+ "uncert_boxes": {
+  "boxes": 18,
+  "poses": 180,
+  "corner_poses": 144,
+  "below_one": 0,
+  "min_mu": "1.005911748",
+  "per_box": [
+   {
+    "label": "uncert box of root 4139",
+    "poses": 10,
+    "below_one": 0,
+    "min_mu": "1.009698090",
+    "argmin": [
+     "295961/131072",
+     "4659869/1048576",
+     "131069/262144"
+    ],
+    "corner_min_mu": "1.007134736",
+    "corners_below_one": 0
+   },
+   {
+    "label": "uncert box of root 4139",
+    "poses": 10,
+    "below_one": 0,
+    "min_mu": "1.007132082",
+    "argmin": [
+     "2367689/1048576",
+     "4659869/1048576",
+     "1/2"
+    ],
+    "corner_min_mu": "1.007134736",
+    "corners_below_one": 0
+   },
+   {
+    "label": "uncert box of root 7735",
+    "poses": 10,
+    "below_one": 0,
+    "min_mu": "1.008061297",
+    "argmin": [
+     "2236613/524288",
+     "4601145/1048576",
+     "131067/262144"
+    ],
+    "corner_min_mu": "1.007389807",
+    "corners_below_one": 0
+   },
+   {
+    "label": "uncert box of root 7735",
+    "poses": 10,
+    "below_one": 0,
+    "min_mu": "1.009022465",
+    "argmin": [
+     "34947/8192",
+     "4601149/1048576",
+     "524279/1048576"
+    ],
+    "corner_min_mu": "1.007392873",
+    "corners_below_one": 0
+   },
+   {
+    "label": "uncert box of root 7735",
+    "poses": 10,
+    "below_one": 0,
+    "min_mu": "1.009022412",
+    "argmin": [
+     "4473217/1048576",
+     "4601151/1048576",
+     "524281/1048576"
+    ],
+    "corner_min_mu": "1.009019283",
+    "corners_below_one": 0
+   },
+   {
+    "label": "uncert box of root 7735",
+    "poses": 10,
+    "below_one": 0,
+    "min_mu": "1.007382574",
+    "argmin": [
+     "4473219/1048576",
+     "4601153/1048576",
+     "65535/131072"
+    ],
+    "corner_min_mu": "1.009019283",
+    "corners_below_one": 0
+   },
+   {
+    "label": "uncert box of root 7910",
+    "poses": 10,
+    "below_one": 0,
+    "min_mu": "1.009022723",
+    "argmin": [
+     "2300579/524288",
+     "1118307/262144",
+     "87379/262144"
+    ],
+    "corner_min_mu": "1.009024650",
+    "corners_below_one": 0
+   },
+   {
+    "label": "uncert box of root 7910",
+    "poses": 10,
+    "below_one": 0,
+    "min_mu": "1.005911748",
+    "argmin": [
+     "2300573/524288",
+     "4473221/1048576",
+     "87381/262144"
+    ],
+    "corner_min_mu": "1.005913768",
+    "corners_below_one": 0
+   },
+   {
+    "label": "uncert box of root 7910",
+    "poses": 10,
+    "below_one": 0,
+    "min_mu": "1.008065921",
+    "argmin": [
+     "4601145/1048576",
+     "4473227/1048576",
+     "10923/32768"
+    ],
+    "corner_min_mu": "1.007377557",
+    "corners_below_one": 0
+   },
+   {
+    "label": "uncert box of root 7910",
+    "poses": 10,
+    "below_one": 0,
+    "min_mu": "1.007384102",
+    "argmin": [
+     "4601155/1048576",
+     "1118305/262144",
+     "349527/1048576"
+    ],
+    "corner_min_mu": "1.009021200",
+    "corners_below_one": 0
+   },
+   {
+    "label": "uncert box of root 7910",
+    "poses": 10,
+    "below_one": 0,
+    "min_mu": "1.007373665",
+    "argmin": [
+     "1150289/262144",
+     "34947/8192",
+     "174767/524288"
+    ],
+    "corner_min_mu": "1.007377557",
+    "corners_below_one": 0
+   },
+   {
+    "label": "uncert box of root 7910",
+    "poses": 10,
+    "below_one": 0,
+    "min_mu": "1.007392514",
+    "argmin": [
+     "71893/16384",
+     "4473217/1048576",
+     "43693/131072"
+    ],
+    "corner_min_mu": "1.007377557",
+    "corners_below_one": 0
+   },
+   {
+    "label": "uncert box of root 8010",
+    "poses": 10,
+    "below_one": 0,
+    "min_mu": "1.009605344",
+    "argmin": [
+     "2329927/524288",
+     "36995/16384",
+     "87381/262144"
+    ],
+    "corner_min_mu": "1.006984032",
+    "corners_below_one": 0
+   },
+   {
+    "label": "uncert box of root 8010",
+    "poses": 10,
+    "below_one": 0,
+    "min_mu": "1.006635623",
+    "argmin": [
+     "1164969/262144",
+     "591921/262144",
+     "174757/524288"
+    ],
+    "corner_min_mu": "1.004805656",
+    "corners_below_one": 0
+   },
+   {
+    "label": "uncert box of root 8010",
+    "poses": 10,
+    "below_one": 0,
+    "min_mu": "1.011067379",
+    "argmin": [
+     "2329939/524288",
+     "2367677/1048576",
+     "174763/524288"
+    ],
+    "corner_min_mu": "1.006984032",
+    "corners_below_one": 0
+   },
+   {
+    "label": "uncert box of root 8010",
+    "poses": 10,
+    "below_one": 0,
+    "min_mu": "1.006986744",
+    "argmin": [
+     "4659871/1048576",
+     "2367683/1048576",
+     "174761/524288"
+    ],
+    "corner_min_mu": "1.004805656",
+    "corners_below_one": 0
+   },
+   {
+    "label": "uncert box of root 8010",
+    "poses": 10,
+    "below_one": 0,
+    "min_mu": "1.007132777",
+    "argmin": [
+     "145621/32768",
+     "1183845/524288",
+     "349529/1048576"
+    ],
+    "corner_min_mu": "1.007134431",
+    "corners_below_one": 0
+   },
+   {
+    "label": "uncert box of root 8010",
+    "poses": 10,
+    "below_one": 0,
+    "min_mu": "1.009698090",
+    "argmin": [
+     "4659869/1048576",
+     "295961/131072",
+     "10923/32768"
+    ],
+    "corner_min_mu": "1.007134431",
+    "corners_below_one": 0
+   }
+  ]
+ },
+ "folded_whole_container": {
+  "poses": 1500,
+  "mu_equal": 1500,
+  "image_in_region": 1500,
+  "below_one": 0,
+  "steps": {
+   "y->s-y": 242,
+   "none": 165,
+   "x<->y": 204,
+   "x->s-x y->s-y": 155,
+   "x->s-x y->s-y x<->y": 216,
+   "y->s-y x<->y": 143,
+   "x->s-x x<->y": 152,
+   "x->s-x": 223
+  },
+  "landing": {
+   "zmx2 root": 1499,
+   "zm_mixed cell": 1
+  },
+  "min_mu": "1.007551117"
+ },
+ "coincidence_angles": [
+  {
+   "label": "u = 1/3 in root 43,42,2",
+   "poses": 200,
+   "below_one": 0,
+   "min_mu": "1.009584472",
+   "argmin": [
+    "4538119/1048576",
+    "35221/8192",
+    "1/3"
+   ]
+  },
+  {
+   "label": "u = 1/3 in root 44,22,2",
+   "poses": 200,
+   "below_one": 0,
+   "min_mu": "1.006410452",
+   "argmin": [
+    "584795/131072",
+    "1174609/524288",
+    "1/3"
+   ]
+  }
+ ],
+ "germs": {
+  "boxes": 30,
+  "poses": 1800,
+  "below_one": 0,
+  "lowest": [
+   {
+    "label": "tile germ at (3/2, 7/2)",
+    "poses": 60,
+    "below_one": 0,
+    "min_mu": "1.004497297",
+    "argmin": [
+     "786449/524288",
+     "917503/262144",
+     "3/131072"
+    ]
+   },
+   {
+    "label": "tile germ at (1/2, 7/2)",
+    "poses": 60,
+    "below_one": 0,
+    "min_mu": "1.004607040",
+    "argmin": [
+     "524391/1048576",
+     "3669991/1048576",
+     "35/1048576"
+    ]
+   },
+   {
+    "label": "tile germ at (5/2, 7/2)",
+    "poses": 60,
+    "below_one": 0,
+    "min_mu": "1.004688750",
+    "argmin": [
+     "2621511/1048576",
+     "229375/65536",
+     "7/131072"
+    ]
+   },
+   {
+    "label": "tile germ at (7/2, 3/2)",
+    "poses": 60,
+    "below_one": 0,
+    "min_mu": "1.004835390",
+    "argmin": [
+     "3670043/1048576",
+     "1572935/1048576",
+     "13/262144"
+    ]
+   },
+   {
+    "label": "tile germ at (7/2, 1/2)",
+    "poses": 60,
+    "below_one": 0,
+    "min_mu": "1.004851461",
+    "argmin": [
+     "3670057/1048576",
+     "524377/1048576",
+     "11/262144"
+    ]
+   },
+   {
+    "label": "tile germ at (9/2, 3/2)",
+    "poses": 60,
+    "below_one": 0,
+    "min_mu": "1.005001320",
+    "argmin": [
+     "589827/131072",
+     "1572885/1048576",
+     "7/1048576"
+    ]
+   }
+  ]
+ },
+ "descent_min": {
+  "mu": "1.000417532651",
+  "mu_exact_below_one": false,
+  "pose": [
+   "7168055663917/2048000000000",
+   "204836586297/409600000000",
+   "3663019/102400000000"
+  ],
+  "theta_deg": "0.004099"
+ },
+ "cpu_s": 106.1,
+ "poses_below_one": 0,
+ "ok": true,
+ "wall_s": 249.6,
+ "program": {
+  "name": "k2m5_review.py",
+  "sha256": "4fa7ed605b14893893dba03cde8054ab47360963e03514b0a554820813e1e848",
+  "python": "3.14.7"
+ }
+}
