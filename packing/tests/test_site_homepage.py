@@ -1529,11 +1529,12 @@ def test_significance_meter_spacing_rejects_oversized_boxes(
                 assert bar["height"] > 0.5 * item["font"]
                 assert bar["width"] > 0.4 * item["font"]
                 assert (bar["fill"] == "rgba(0, 0, 0, 0)") is (not bar["filled"])
-        oversized = page.evaluate(
-            NEWS_FILTERS, {"meters": specimens, "wideMeters": True}
-        )["samples"]
+        oversized = page.evaluate(NEWS_FILTERS, {"meters": specimens, "wideMeters": True})[
+            "samples"
+        ]
         assert all(item["side_space"] > 0.7 * item["font"] for item in oversized), (
-            "the spacing probe must reject excessive meter whitespace", oversized
+            "the spacing probe must reject excessive meter whitespace",
+            oversized,
         )
     finally:
         page.close()
