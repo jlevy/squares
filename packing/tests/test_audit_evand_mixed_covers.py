@@ -931,6 +931,12 @@ SPLIT_FAULTS: dict[str, Callable[[Path, Path], object]] = {
     "zmx2 at another kappa": lambda log, _records: _edit_log(
         log, lambda lines: _with_header(lines, " kappa=1.5 ", " kappa=0.5 ")
     ),
+    "zmx2 at another node cap": lambda log, _records: _edit_log(
+        log, lambda lines: _with_header(lines, " node_cap=20000000 ", " node_cap=1000 ")
+    ),
+    "zmx2 at another K": lambda log, _records: _edit_log(
+        log, lambda lines: _with_header(lines, " K=30 ", " K=7 ")
+    ),
 }
 
 
