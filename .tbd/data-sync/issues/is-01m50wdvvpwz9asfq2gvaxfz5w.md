@@ -5,7 +5,7 @@ title: "Intake process: add a regularization step to result-import.md stages (on
 kind: task
 status: in_progress
 priority: 1
-version: 13
+version: 14
 delegate: user-eb-reg-intake
 labels:
   - regularization
@@ -16,7 +16,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-15T22:55:18.902Z
-updated_at: 2026-10-16T08:13:07.193Z
+updated_at: 2026-10-16T08:21:30.123Z
 started_at: 2026-10-16T04:17:15.710Z
 ---
 
@@ -48,3 +48,5 @@ Left: confirm --push result; open DRAFT PR (labels project + S1; body drafted at
 2026-10-16T06:53Z user-eb-reg-intake: #641 CI green at 46562eab0 (31 success, 28 skipped, 0 failed; Packing validation run 38861680046). Disposition replies posted: A https://github.com/jlevy/squares/pull/641#issuecomment-6209773869, B https://github.com/jlevy/squares/pull/641#issuecomment-6209774103 (all fixed except A12 declined; no deferrals). PR description updated (A10). Deferred checkpoint dispatch was refused (403), so labelled deep-gate: run 38862757844 in progress. Stacked PR #650. Closes at #641's merge (think-1644).
 
 2026-10-16T07:24Z user-eb-reg-intake DONE for this lane: #641 head 46562eab0, CI green (run 38861680046), Deferred checkpoint passed 12/12 jobs (run 38862757844, via deep-gate label), dispositions posted for A and B (A12 declined, all else fixed; no deferral beads). Close think-g3q7 only after #641 merges (merge bead think-1644). Owner/coordinator decisions: A12 sequencing vs #574/T-174; whether persisted lapsed blocks are still wanted for the 12 derivable historical lapses (not done: 272/304 not derivable, all 14 being decided by #644 and the kpm3/3zi3 batch).
+
+2026-10-16T08:21Z user-eb-addr-641-650: addressing Review C on #641. Pushed a59a6024a (C1 test: a decision outranks the allowlist; mutations M2-M5 now fail) and e9d5c01d8 (C3 run label names the counts; C4 one deferral wording and the --compare <(git show ...) command; C2 docs). C2's gate hardening deferred to think-k6rj (child of think-g3q7). Next: records tier, CI and deferred checkpoint, PR body, disposition reply; then #650.

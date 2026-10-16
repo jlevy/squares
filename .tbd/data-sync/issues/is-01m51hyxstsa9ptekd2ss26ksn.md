@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-16 overnight: sweep residue, regularization 3b/3c, v
 kind: epic
 status: in_progress
 priority: 1
-version: 15
+version: 16
 delegate: user-eb
 labels:
   - result-import
@@ -19,7 +19,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-16T05:11:38.042Z
-updated_at: 2026-10-16T08:00:56.372Z
+updated_at: 2026-10-16T09:53:51.492Z
 started_at: 2026-10-16T05:13:39.869Z
 ---
 Owner asked on 2026-10-16 (~05:00Z, session "Overnight intake processing and validation", acting name user-eb) to run the full intake autonomously until 14:30Z (07:30 Pacific): as much intake (stages 0-3) as possible first, then validation (stage 4), with no very large compute. Branch claude/intake-2026-10-16 from origin/main e2e018f32.
@@ -56,3 +56,5 @@ think-la7h (176 and eight more) stays with the ecstatic-edison lane (selection d
 2026-10-16 ~07:55Z coordinator: lane F done: PR #652 (review of T-184 s(76)=9 and T-191 s(95)=10): no mathematical defect, no blocking finding (F1 minor: author's check_coverage.py accepts 5/8 malformed record sets; F2-F8 notes; F8 owes zm_mixed.py mutants: 1 for s76, 2 for s95). C1 now by this review; V3/C3 once think-ccjt (lane E, #649) records the retained replays. Verdict sent to lane E, which merges #652 into #649 and maps the review. Senior review of #652 started. Owner question added: F8 (is a refusal at depth limit 12 a valid mutated-certificate control?).
 
 2026-10-16 ~08:00Z coordinator: Review C (follow-up round 2 + correctness) on #641: 0/0/1/3 (C1 Medium: no test pins that a decision outranks the allowlist). Review A on #650: 0/1/1/3 (A1 High: informal chain, not a formal GitHub stack). Formal stacks cannot be made from this session: the pinned github/gh-stack release download is refused by the session proxy (ensure-gh-cli.sh --with-stack: 'GitHub access to this repository is not enabled for this session'; only anonymous git reads of github/gh-stack are served). Every chain of this pass (#641->#650, #642->#651, #644->3b->3c->leftovers->records-185-190, #648->records-185-190, #652->#649) is therefore informal: each PR declares its base and the merge order; the owner links the stacks or retargets each upper PR to main after the one below merges. Addressing agent user-eb-addr-641-650 started for both reviews.
+
+2026-10-16 09:55Z coordinator: the session hit its usage limit at ~08:30Z (every sub-agent stopped mid-step; state saved) and resumed at 09:52Z. Killed an orphaned system-python3 process (stdin script from a task that exited 07:06Z, ~3 h of one core). Resumed B, I, J, H, addr-641-650, addr-652; D and E wait without polling for their dependencies; the watcher agent is replaced by a coordinator Monitor script (no tokens). Merge-ready so far: #647, #648.

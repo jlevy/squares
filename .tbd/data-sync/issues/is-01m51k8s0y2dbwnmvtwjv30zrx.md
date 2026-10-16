@@ -5,7 +5,7 @@ title: Review and land the nine-count regularization batch 3a
 kind: task
 status: in_progress
 priority: 1
-version: 8
+version: 9
 delegate: user-eb-land-644
 labels: []
 dependencies: []
@@ -13,7 +13,7 @@ parent_id: is-01m51hy396vnjkxe4726egs8x5
 hold: null
 hold_until: null
 created_at: 2026-10-16T05:34:29.405Z
-updated_at: 2026-10-16T06:31:25.512Z
+updated_at: 2026-10-16T09:53:41.681Z
 started_at: 2026-10-16T05:34:41.706Z
 ---
 
@@ -32,3 +32,5 @@ Release completion must include both infographic families and every advertised S
 2026-10-16T06:23Z user-eb-land-644: pushed 780d81b82: site v0.7.15 cut (the only patch successor of main's v0.7.14 the gate accepts; #646 also carries v0.7.15, whichever merges second re-cuts); claim docs byte-identical modulo PUBLICATION_REVISION f6737d63 (32 links), explainer no-change record added; check_release_impact passes locally. Posters trail (v0.6.1) by COMPOSITES_MAY_TRAIL; infographic successor at top of stack. Next: B1 watch, re-run at 08:30Z if absent (base worktree at e2e018f32 in laneI scratch).
 
 2026-10-16T06:31Z user-eb-land-644: at 780d81b82, packing-validate --records --jobs 2 --inner-jobs 1: 52 of 52 records steps passed, 250 s wall (incl. synopsis/release impact, regularization state, default drawings, regularized atlas). Hosted CI for 780d81b82 running. B1 watch running (no evidence at 06:28Z).
+
+2026-10-16T09:53Z user-eb-land-644: no producer evidence by 08:30Z (no -evidence branch, no new #644 comment, no think-la7h note; checked again 09:53Z). Re-run started 09:54Z from detached base worktree at main e2e018f32 (laneI scratch base-e2e018f32): grid-slack 0.5/1/5 deg (run dirs 3a-rerun-deg05/deg1/deg5-1016, 2 lanes) then evand driver (3a-rerun-1016, --workers 2 --timeout 1800 --regularize-timeout 1800), then regularize_select --workers 2; nice 10. Branch head 780d81b82 (CI green).

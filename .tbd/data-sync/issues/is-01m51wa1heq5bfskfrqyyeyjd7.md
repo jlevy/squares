@@ -5,7 +5,7 @@ title: "Irregular drawings no bead owns: 292, 131, 273, 126, 259 and others stil
 kind: task
 status: in_progress
 priority: 2
-version: 2
+version: 3
 delegate: user-eb-reg-leftovers
 labels:
   - regularization
@@ -14,7 +14,7 @@ parent_id: is-01m50wdrbfnwsq05w150az5z88
 hold: null
 hold_until: null
 created_at: 2026-10-16T08:12:28.077Z
-updated_at: 2026-10-16T08:12:39.279Z
+updated_at: 2026-10-16T08:25:33.050Z
 started_at: 2026-10-16T08:12:39.279Z
 ---
 Found by the ugliness audit of lane D (user-eb-reg-leftovers, think-0ut1) on 16 October 2026: the 25 counts n = 1..324 whose drawn default picture is worst by light + uneven + near-axis squares, read from `packing/atlas/known-best/default-drawings.json` (`states`, measured by `regularize_select.today`, i.e. `census_drawing_regularity.regularity` on the drawn picture) and cross-checked with `python -m devtools.census_drawing_regularity --workers 2` over all 324 counts (agrees on 323; at 176 the census reads the held axis view, which #644 replaces).
@@ -39,3 +39,7 @@ Decided no better (SETTLED), drawn by the axis tool's view or the house:
 What the census says the residue is: no square tilted 0.5 to 2 degrees in any of them except 307 (2), so a wider grid-slack threshold has nothing to straighten. Their light faces are mostly `tilted-neighbour` (a real rotation at a grid region's edge, shaded lighter by the packing itself), with some `offset` and `misaligned` faces (slack inside a region) that grid-slack's MILP did not close within its trust region at the thresholds tried. Cheap probe run (within the policy, nothing admitted): grid-slack at 1 and 5 degrees on 307 (runs grid-slack-leftovers-audit-deg1-1016 / -deg5-1016, 209 CPU-s, scratch only) straightens nothing and draws exactly the drawn view's measures (7 / 14 / 0, 27 / 19).
 
 Open question for the owner, not a run: are these acceptable as drawn, or is a further generator wanted (a joint placement beyond grid-slack's trust region, or one that re-poses whole tilted groups)? Until then nothing here is pending under the policy.
+
+## Notes
+
+2026-10-16 ~08:26Z user-eb-reg-leftovers: on the tree with #644 (think-la7h) under it, 176 is regularized at 11 / 24 / 0, 6 / 6 classes / hues (from 70 / 71 / 52), still fifth by light + uneven + near-axis, and 308 (3 / 15 / 0, grid-slack-on518) enters the top 25; both belong on this list. 176's census faces: see the PR's table. Nothing run for either.
