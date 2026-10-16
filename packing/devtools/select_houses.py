@@ -155,8 +155,9 @@ class Pending:
 #: follows it: T-174's 60 rational houses, which the lifted hold kept out, and its
 #: algebraic ones at 70, 153 and 207, which RP-3 kept out. A pull request that validates
 #: a smaller packing adopts it or stages its counts here with the bead that adopts them,
-#: as `default_drawings.PENDING_ALLOWED` stages a count's regularization runs; the pull
-#: request that adopts a count takes it off.
+#: as an adoption whose regularization runs do not fit under the pass's compute cap does:
+#: the adoption waits with its runs, never apart from them
+#: (`adopt_houses.deferred_adoptions`). The pull request that adopts a count takes it off.
 PENDING_ADOPTION: dict[int, Pending] = {
     n: Pending(house="T-174", bead=ADOPTION_BEAD)
     for n in (

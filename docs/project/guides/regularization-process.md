@@ -360,20 +360,26 @@ To redraw the count:
    adoption that day, of other counts, does not print.
    Where neither draws better, settle the count in `default_drawings.SETTLED` with the
    runs and the new witness’s source key, path, revision and side.
-   Where the runs must wait, allow the count in `PENDING_ALLOWED` with the open bead
-   that owns them, in the same pull request as the adoption, so the deferral is
-   reviewed. Then run `default_drawings --update` again, since the record copies the
-   entry into the count’s reason, and step 5, since `--update-atlas` redrew the axis
-   views. List each deferred count’s drawing before and after in the pull request with
+   A count an adoption re-houses is never deferred to
+   `default_drawings.PENDING_ALLOWED`: its runs are owed in the adoption’s pull request,
+   by the import runbook’s
+   [house rule](../../../packing/campaign/result-import.md#the-house-rule), and an
+   adoption whose runs do not fit under the pass’s compute cap is staged with them in
+   `select_houses.PENDING_ADOPTION`. List each re-housed count’s drawing before and
+   after in the pull request with
    `python -m devtools.default_drawings --compare <(git show origin/$BASE:packing/atlas/known-best/default-drawings.json)`,
    which reads the record of its base branch, `BASE` being `main` unless the pull
    request is stacked. Where a strong view gives way to a drawing worse than it on a goal
-   of the improvement rule, whatever drew it, its runs are not deferred: they run in the
-   adoption’s pull request, by the import runbook’s
-   [house rule](../../../packing/campaign/result-import.md#the-house-rule).
+   of the improvement rule, whatever drew it, the table names those goals, and marks
+   each such count that still reads pending, “its runs are owed in this pull request”.
    The axis tool’s view of the new witness is drawn wherever it improves on the new
-   house, which says nothing of the view the count lost (review D1 of #641). Nothing but
-   review limits how many counts join the list; the gate prints its size.
+   house, which says nothing of the view the count lost (review D1 of #641). Where a
+   corrected witness’s runs must wait, allow each count the table does not mark in
+   `PENDING_ALLOWED` with the open bead that owns its runs, in the pull request that
+   corrects the witness, so the deferral is reviewed.
+   Then run `default_drawings --update` again, since the record copies the entry into
+   the count’s reason, and step 5, since `--update-atlas` redrew the axis views.
+   Nothing but review limits how many counts join the list; the gate prints its size.
 
 Until 15 October 2026 the lapse was only printed, and the adoptions of #553, #598 and
 #614 left twenty counts drawn without a strong generator’s decision on their witness: at

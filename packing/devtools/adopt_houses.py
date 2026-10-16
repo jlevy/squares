@@ -33,14 +33,17 @@ refuses a count that module does not house. A new house is a new witness, so wha
 a write is the regularization guide's "When a Witness Changes", not the axis tool's
 refresh alone: `build_known_best_atlas --update` for the witness, the axis tool's
 `--update-atlas`, `default_drawings --update`, then the strong generators on each count it
-reads `pending`, or the count in `default_drawings.PENDING_ALLOWED` with the open bead
-that owns its runs, in the same pull request, with `default_drawings --update` run again
-and each deferred count's drawing listed before and after. The adoptions of #553, #598
-and #614 ran only the axis tool's refresh and left twenty counts without a strong
-generator's decision, n = 176 drawn raw (think-sfas). So a write, and `--dry-run`, print
-what the moves owe the regularized layer (`regularization_owed`): the counts, the
+reads `pending`, in the same pull request, with each re-housed count's drawing listed
+before and after. The house rule defers no re-housed count's runs to
+`default_drawings.PENDING_ALLOWED`: an adoption whose runs do not fit under the pass's
+compute cap waits with them, staged in `select_houses.PENDING_ADOPTION`. The adoptions of
+#553, #598 and #614 ran only the axis tool's refresh and left twenty counts without a
+strong generator's decision, n = 176 drawn raw (think-sfas). So a write, and `--dry-run`,
+print what the moves owe the regularized layer (`regularization_owed`): the counts, the
 commands with run directories no earlier run has named, and what they cost;
-`default_drawings --check-state` fails until each pending count is decided or deferred.
+`default_drawings --check-state` fails until each pending count is decided, and `--check`
+while the allowlist names a count a pass under the house rule re-housed
+(`deferred_adoptions`).
 `adopt_case` is the generator's half: `generate_frontier_case` redrafts an adopted case
 through it (`source_supersession.adopt_selected_report`), which keeps the house and takes
 the ordinary lower lanes from the draft.
@@ -2151,7 +2154,9 @@ def write(moves: Sequence[Move]) -> list[int]:
 
 
 def check() -> list[str]:
-    """Every count `upper_bound_houses` draws is at its house in the case and coverage."""
+    """Every count `upper_bound_houses` draws is at its house in the case and coverage,
+    and none that a pass under the house rule re-housed waits in the allowlist
+    (`deferred_adoptions`)."""
     problems = []
     coverage_data = safe_load(COVERAGE.read_text(encoding="utf-8"))
     sources = {str(s["id"]): s for s in coverage_data["sources"]}
@@ -2175,7 +2180,27 @@ def check() -> list[str]:
         text = select_houses.case_path(n).read_text(encoding="utf-8")
         if _flat(held_note(n, text)) != _flat(text):
             problems.append(f"n={n}: the held note is not what the held results say")
+    problems.extend(deferred_adoptions())
     return problems
+
+
+def deferred_adoptions(allowed: Mapping[int, str] | None = None) -> list[str]:
+    """Each count that a pass under the house rule re-housed and that
+    `default_drawings.PENDING_ALLOWED` still names. Its runs are owed in the adoption's
+    pull request (`default_drawings.RUNS_OWED`), so the list may not defer them: they decide
+    the count, and the pull request takes the entry off, entries the list named before the
+    adoption included (packing/campaign/result-import.md, "Adopt a House, Then Regularize
+    It"). An adoption whose runs do not fit under the pass's compute cap waits with them,
+    staged in `select_houses.PENDING_ADOPTION`. A count re-housed before the rule, as each
+    of the list's first twenty was, waits for the bead its entry names."""
+    allowed = default_drawings.PENDING_ALLOWED if allowed is None else allowed
+    return [
+        f"n={n}: re-housed on {houses.adopted_on(n)} under the house rule, so its runs are "
+        "owed in the adoption's pull request; run them there and take the count off "
+        "default_drawings.PENDING_ALLOWED"
+        for n in sorted(allowed)
+        if n in houses.ADOPTED and houses.adopted_on(n) >= select_houses.RULE_PASSES_FROM
+    ]
 
 
 #: Where the steps that follow a new house are written (think-g3q7).
@@ -2197,12 +2222,12 @@ WORKERS = 2
 #: the runbook and the guide say (review D2).
 BASE_RECORD = f"`<(git show origin/main:{default_drawings.RECORD_PATH})`"
 STACKED_BASE = "with a stacked pull request's base branch for main"
-#: What becomes of a count where a strong view gives way to a drawing worse than it on a
-#: goal of the improvement rule, whatever drew it (`default_drawings.STRONG_VIEW_LOST`),
-#: in the runbook's and the guide's words (reviews C4 and D1 of #641): the owner's rule is
-#: to adopt the smallest packing and then regularize it, so the adoption waits for no one
-#: and such a count's runs are never deferred (review E1).
-DEFERRAL_WAITS = "its runs are not deferred: they run in the adoption's pull request"
+#: What the runbook, the guide and this printout say of every count an adoption re-houses,
+#: in one wording (reviews C4, D1 and E1 of #641): the owner's rule is to adopt the
+#: smallest packing and then regularize it, so the count's runs are owed in the adoption's
+#: pull request (`default_drawings.RUNS_OWED`), and an adoption whose runs do not fit under
+#: the pass's compute cap waits with them, staged in `select_houses.PENDING_ADOPTION`.
+NEVER_DEFERRED = "never deferred to default_drawings.PENDING_ALLOWED"
 #: What follows a write, as `python -m devtools.` commands from `packing/` with `{n}` the
 #: re-housed counts: the new witness, the axis tool's view of it, and each count's state.
 REFRESH_COMMANDS = (
@@ -2304,10 +2329,10 @@ def regularization_owed(
     atlas is refreshed, this names the counts certain to be pending, one count a line, and
     a `SETTLED` decision the new witness voids, then gives the commands, with run
     directories named for `day` (the adoption's, by default) and the counts, that no run
-    in the index has (`run_label`), what they cost, and what a deferral owes the pull
-    request. It measures and runs
-    nothing: the runs take minutes a count, and the pass prices them as one validation
-    item under its compute cap (`INTAKE_STEP`).
+    in the index has (`run_label`), what they cost, and what the adoption's pull request
+    owes: the drawings before and after, and every re-housed count's runs, none deferred.
+    It measures and runs nothing: the runs take minutes a count, and the pass prices them
+    as one validation item under its compute cap (`INTAKE_STEP`).
     """
     if not counts:
         return []
@@ -2334,7 +2359,7 @@ def regularization_owed(
             holder = bead[0] if bead else repr(allowed[n])
             why.append(
                 f"PENDING_ALLOWED holds it for {holder}'s runs, whatever the new house "
-                "reads, so they take the new witness"
+                "reads: they run here, on the new witness, and the entry comes off"
             )
         if why:
             certain.append(f"    {n}: {'; '.join(why)}")
@@ -2387,16 +2412,17 @@ def regularization_owed(
         "  and the `layer` commands it prints, then the guide's step 5 (render and record)."
     )
     lines.append(
-        "  Or, where the runs must wait, add each pending count to "
-        "default_drawings.PENDING_ALLOWED with the open bead that owns its runs, run "
-        "`default_drawings --update` again and the guide's step 5, and list each deferred "
-        "count's drawing before and after in this pull request (`default_drawings --compare` "
-        f"with the base branch's record, {BASE_RECORD}, {STACKED_BASE}); where "
-        f"{default_drawings.STRONG_VIEW_LOST}, {DEFERRAL_WAITS}."
+        "  List each re-housed count's drawing before and after in this pull request "
+        f"(`default_drawings --compare` with the base branch's record, {BASE_RECORD}, "
+        f"{STACKED_BASE}); where {default_drawings.STRONG_VIEW_LOST}, it names those goals "
+        f"and marks each such count still pending: {default_drawings.RUNS_OWED}."
     )
     lines.append(
-        "  `python -m devtools.default_drawings --check-state` fails until every pending count "
-        "is one or the other."
+        f"  A re-housed count is {NEVER_DEFERRED}: where the runs do not fit under the "
+        "pass's compute cap, stage the counts they do not cover in "
+        "select_houses.PENDING_ADOPTION with the open bead that adopts them, and adopt the "
+        "rest. `python -m devtools.default_drawings --check-state` fails until the runs "
+        "decide every re-housed count, and `adopt_houses --check` while the list names one."
     )
     return lines
 

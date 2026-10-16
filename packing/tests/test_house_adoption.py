@@ -616,6 +616,36 @@ def test_the_adopted_case_records_and_coverage_are_at_their_houses(
     assert adopt.plan(selections) == []
 
 
+def test_a_count_re_housed_under_the_house_rule_is_never_deferred(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """The house rule: every count an adoption re-houses is regularized in its pull request,
+    so `default_drawings.PENDING_ALLOWED` may not defer it, an entry the list named before
+    the adoption included; the twenty counts re-housed before the rule wait for the beads
+    their entries name. Until the rule, the runbook and the guide deferred "each pending
+    count" while the comparison's mark said a lost view's runs were not deferred."""
+    assert adopt.deferred_adoptions() == []
+    n = next(n for n in sorted(defaults.PENDING_ALLOWED) if n in houses.ADOPTED)
+    day = select.RULE_PASSES_FROM
+    monkeypatch.setitem(houses.LATER_PASSES, day, frozenset({n}))
+    assert adopt.deferred_adoptions() == [
+        (
+            f"n={n}: re-housed on {day} under the house rule, so its runs are owed in the "
+            "adoption's pull request; run them there and take the count off "
+            "default_drawings.PENDING_ALLOWED"
+        )
+    ]
+    assert adopt.deferred_adoptions() == [
+        problem for problem in adopt.check() if problem.startswith(f"n={n}: re-housed")
+    ]
+    # Taken off the list, it is the adoption's runs that decide it.
+    assert adopt.deferred_adoptions(allowed={}) == []
+    # Re-housed the day before the rule, its entry is the record of a deferral made then.
+    monkeypatch.setitem(houses.LATER_PASSES, day, frozenset())
+    monkeypatch.setitem(houses.LATER_PASSES, "2026-10-16", frozenset({n}))
+    assert adopt.deferred_adoptions() == []
+
+
 def test_the_receipt_of_the_custody_run_names_every_input_and_house() -> None:
 
     receipt = safe_load(houses.CUSTODY_RECEIPT.read_text(encoding="utf-8"))
@@ -1208,7 +1238,8 @@ def test_an_adoption_names_what_each_re_housed_count_owes_the_regularized_layer(
     allowlist makes pending for certain (review B6 of #641), the settled decision the new
     witness bears on, and the commands of the guide's "When a Witness Changes" with their
     cost, which ranges from the certain counts to all of them (review A3 of #641), and
-    what a deferral owes the pull request (reviews A1 and A2 of #641; think-g3q7)."""
+    what the adoption's pull request owes: each count's drawing before and after (reviews
+    A1 and A2 of #641; think-g3q7) and its runs, which the house rule never defers."""
     index, strong, lapsed, plain = _rehoused(tmp_path)
     regular = next(
         n
@@ -1223,8 +1254,8 @@ def test_an_adoption_names_what_each_re_housed_count_owes_the_regularized_layer(
         strong: f"its {defaults.index_entries(index)[strong]['generator']} view lapses",
         lapsed: "a regularize_grid_slack/1 view lapsed earlier",
         plain: (
-            "PENDING_ALLOWED holds it for think-aaaa's runs, whatever the new house reads, "
-            "so they take the new witness"
+            "PENDING_ALLOWED holds it for think-aaaa's runs, whatever the new house reads: "
+            "they run here, on the new witness, and the entry comes off"
         ),
     }
     lines = adopt.regularization_owed(
@@ -1276,16 +1307,20 @@ def test_an_adoption_names_what_each_re_housed_count_owes_the_regularized_layer(
         f"regularize_select --evand-run $RUNS/{label}-evand --grid-run"
     )
     assert len(commands) == 8
-    # The deferral branch regenerates the record the allowlist entry is copied into, renders,
-    # and shows the drawings it gives up (reviews A1 and A2 of #641).
+    # The pull request shows each count's drawings before and after (reviews A1 and A2 of
+    # #641), and owes every count's runs: none is deferred, and an adoption whose runs do
+    # not fit under the compute cap stages the counts they do not cover (the house rule).
     assert "then the guide's step 5 (render and record)" in lines[-3]
-    deferral = lines[-2]
-    assert "default_drawings.PENDING_ALLOWED with the open bead" in deferral
-    assert "run `default_drawings --update` again and the guide's step 5" in deferral
-    assert "`default_drawings --compare` with the base branch's record" in deferral
-    assert adopt.BASE_RECORD in deferral
-    assert f"{adopt.DEFERRAL_WAITS}." in deferral
-    assert "default_drawings --check-state` fails until every pending count" in lines[-1]
+    listing, owed = lines[-2:]
+    assert listing.startswith("  List each re-housed count's drawing before and after")
+    assert "`default_drawings --compare` with the base branch's record" in listing
+    assert adopt.BASE_RECORD in listing
+    assert listing.endswith(f": {defaults.RUNS_OWED}.")
+    assert owed.startswith(f"  A re-housed count is {adopt.NEVER_DEFERRED}: ")
+    assert "select_houses.PENDING_ADOPTION with the open bead that adopts them" in owed
+    assert "--check-state` fails until the runs decide every re-housed count" in owed
+    assert "`adopt_houses --check` while the list names one" in owed
+    assert not [line for line in lines if "add each pending count" in line]
     # Nothing re-housed, nothing owed: a second run of the idempotent write prints nothing.
     assert adopt.regularization_owed([], index=index) == []
 
@@ -1353,18 +1388,20 @@ def test_two_adoptions_of_one_day_print_different_runs() -> None:
         adopt.run_label("2026-10-16", [])
 
 
-def test_the_runbook_guide_and_printout_give_one_deferral_step() -> None:
+def test_the_runbook_guide_and_printout_owe_every_re_housed_counts_runs_alike() -> None:
     """Review C4 of #641: the runbook's deferral waited "for the owner's word or for its
     runs", the guide's and the printout's only for the owner's word, and neither document
     said how to give `--compare` the base branch's record. Review D1: all three, and the
-    comparison's own summary, say which lost strong views wait, in one wording. Review D2:
-    the documents name the pull request's base, which is not main for a stacked adoption,
-    and the printout gives main as the example and says so. Review E1 and the house rule
-    (16 October 2026): the owner's rule is to adopt the smallest packing and then
-    regularize it, so no adoption waits for the owner's word and such a count's runs are
-    not deferred."""
+    comparison's own summary, name a lost strong view in one wording. Review D2: the
+    documents name the pull request's base, which is not main for a stacked adoption, and
+    the printout gives main as the example and says so. Review E1 and the house rule (16
+    October 2026): the owner's rule is to adopt the smallest packing and then regularize
+    it, so no adoption waits for the owner's word, and the runbook and the guide deferred
+    each pending count while the mark said a lost view's runs were not deferred. All three
+    now owe every re-housed count's runs in the adoption's pull request, never deferred,
+    and the documents quote the mark that says so."""
     lines = adopt.regularization_owed([176], day="2026-10-16")
-    (deferral,) = [line for line in lines if "PENDING_ALLOWED with the open bead" in line]
+    (listing,) = [line for line in lines if "drawing before and after" in line]
     command = f"--compare <(git show origin/$BASE:{defaults.RECORD_PATH})"
     assert adopt.BASE_RECORD.strip("`") == command.removeprefix("--compare ").replace(
         "$BASE", "main"
@@ -1375,12 +1412,17 @@ def test_the_runbook_guide_and_printout_give_one_deferral_step() -> None:
         assert command in words, path
         assert "`BASE` being `main` unless the pull request is stacked" in words, path
         assert defaults.STRONG_VIEW_LOST in words.lower(), path
-        assert adopt.DEFERRAL_WAITS in words, path
+        assert f"\u201c{defaults.RUNS_OWED}\u201d" in words, path
+        assert adopt.NEVER_DEFERRED in words.replace("`", ""), path
         assert "the adoption waits for the owner's word or for its runs" not in words, path
         assert "unless the owner holds it" not in words, path
         assert "irregular house drawing" not in words, path
-    assert f"{adopt.BASE_RECORD}, {adopt.STACKED_BASE})" in deferral
-    assert f"where {defaults.STRONG_VIEW_LOST}, {adopt.DEFERRAL_WAITS}." in deferral
+        assert "its runs are not deferred" not in words, path
+        assert "adds each pending count to" not in words, path
+    assert f"{adopt.BASE_RECORD}, {adopt.STACKED_BASE})" in listing
+    assert f"where {defaults.STRONG_VIEW_LOST}, it names those goals" in listing
+    assert listing.endswith(f": {defaults.RUNS_OWED}.")
+    assert any(adopt.NEVER_DEFERRED in line for line in lines)
 
 
 def test_every_printed_command_parses_with_its_tools_own_parser(tmp_path: Path) -> None:

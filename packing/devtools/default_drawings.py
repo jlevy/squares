@@ -90,14 +90,16 @@ house, so the gate's comparison of it only holds each row to its count.
 
 `--compare EARLIER` reads two records, measuring nothing, and lists each count whose
 state, drawn picture or witness differs, with both pictures' uneven and near-axis squares
-and full shared sides: the table an adoption that defers its runs gives its pull request,
-from its base branch's record (review A1 of #641). It names the goals at each count
-whose strong view gives way to a drawing worse than it on a goal of the improvement rule,
-whatever drew it: the axis tool's view, as at #657's seven, or a house drawing, as at
-n = 176 (review D1 of #641). Where such a count still reads pending, it marks that its
-runs are not deferred: they run in the adoption's pull request, since the owner's rule
-is to adopt the smallest packing and then regularize it (review E1). A count its runs
-have since regularized or decided is listed with the goals and not marked (review E2).
+and full shared sides: the table an adoption gives its pull request for the counts it
+re-houses, from its base branch's record (review A1 of #641). It names the goals at each
+count whose strong view gives way to a drawing worse than it on a goal of the improvement
+rule, whatever drew it: the axis tool's view, as at #657's seven, or a house drawing, as
+at n = 176 (review D1 of #641). Where such a count still reads pending, it marks the
+obligation every re-housed count carries, that its runs are owed in this pull request:
+the owner's rule is to adopt the smallest packing and then regularize it, so a re-housed
+count's runs are never deferred (review E1 of #641, and the import runbook's "The House
+Rule"). A count its runs have since regularized or decided is listed with the goals and
+not marked (review E2).
 
 
 The site's drawings (`render_frontier_page`), the atlas tiles (`overview_sections`) and
@@ -396,8 +398,10 @@ _3ZI3 = "think-3zi3: re-housed by #598 (8a4d26fea)"
 #: then reads regular as published, which drops the runs its bead owes, and adding a count
 #: whose house reads regular, which holds it pending; the pull request shows the bead's
 #: runs or `--compare`'s table (review C2 of #641; think-k6rj). A count joins only by a
-#: reviewed change naming its bead (the deferral an adoption makes when its runs must
-#: wait); nothing stops a change adding entries, so the gate prints how many there are,
+#: reviewed change naming its bead, as for a corrected witness whose runs must wait; a
+#: count a pass re-houses under the house rule never joins, since its runs are owed in the
+#: adoption's pull request (`RUNS_OWED`), and `adopt_houses --check` fails while one is
+#: named here. Nothing stops a change adding entries, so the gate prints how many there are,
 #: and `devtools.check_bead_tree` fails a change to this file whose list names a bead
 #: that is not open (`deferrals`), so a bead named here is closed only once the change
 #: taking its last count off has merged (regularization-process.md, "When a Witness
@@ -1144,11 +1148,11 @@ STRONG_VIEW_LOST = (
 )
 #: How `drawing_changes` names the goals a lost strong view's replacement is worse on.
 LOST = "the strong view gives way to a drawing worse on"
-#: How a marked line ends, which `compare` counts: a count still pending whose strong
-#: view gave way to a worse drawing has its runs in the adoption's pull request, never
-#: deferred. The owner, 16 October 2026: "We should always be adopting the smallest
-#: packing and then regularizing it" (review E1 of #641).
-UNDEFERRED = "its runs are not deferred"
+#: How a marked line ends, which `compare` counts: a count still pending whose strong view
+#: gave way to a worse drawing owes its runs in this pull request, as every count an
+#: adoption re-houses does, since none is deferred. The owner, 16 October 2026: "We should
+#: always be adopting the smallest packing and then regularizing it" (review E1 of #641).
+RUNS_OWED = "its runs are owed in this pull request"
 
 
 def drawing_changes(earlier: Mapping[str, Any], later: Mapping[str, Any]) -> list[str]:
@@ -1157,10 +1161,10 @@ def drawing_changes(earlier: Mapping[str, Any], later: Mapping[str, Any]) -> lis
     uneven and near-axis squares and full shared sides, and where a strong view gives way
     to a drawing worse than it on a goal of the improvement rule, whatever drew it, those
     goals (`strong_view_losses`), and where the count still reads pending, that its runs
-    are not deferred (`UNDEFERRED`). A count its runs have since regularized or decided
-    reads its state and is not marked (review E2 of #641). An adoption whose runs must
-    wait lists these in its pull request, from its base branch's record, so the deferral
-    can be reviewed (reviews A1 and D1 of #641)."""
+    are owed in this pull request (`RUNS_OWED`). A count its runs have since regularized
+    or decided reads its state and is not marked (review E2 of #641). An adoption lists
+    these in its pull request, from its base branch's record, so that what each re-housed
+    count drew before and draws now is reviewed (reviews A1 and D1 of #641)."""
     before = {int(row["n"]): row for row in earlier.get("states") or []}
     after = {int(row["n"]): row for row in later.get("states") or []}
     exact = {
@@ -1180,7 +1184,7 @@ def drawing_changes(earlier: Mapping[str, Any], later: Mapping[str, Any]) -> lis
         if lost:
             line += f"; {LOST} {', '.join(lost)}"
             if new["state"] == PENDING:
-                line += f": {UNDEFERRED}"
+                line += f": {RUNS_OWED}"
         lines.append(line)
     return lines
 
@@ -1193,12 +1197,12 @@ def compare(earlier: Path, record: Path = RECORD) -> int:
     )
     for line in lines:
         print(line)
-    marked = sum(1 for line in lines if line.endswith(UNDEFERRED))
+    marked = sum(1 for line in lines if line.endswith(RUNS_OWED))
     settled = sum(1 for line in lines if f"; {LOST} " in line) - marked
     changed = f"{len(lines)} counts changed state, drawing or witness"
     print(
-        f"{changed}; where {STRONG_VIEW_LOST}: {marked} still pending, whose runs are not "
-        f"deferred, and {settled} in another state"
+        f"{changed}; where {STRONG_VIEW_LOST}: {marked} still pending, whose runs are owed "
+        f"in this pull request, and {settled} in another state"
     )
     return 0
 

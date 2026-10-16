@@ -454,9 +454,9 @@ def _sources() -> dict[str, Source]:
 #: 146, 153, 155 and 207, the third, for issues 500 and 506, at 270 and 305, the
 #: fourth, for issue 528, at 175 and 232, the fifth, for issue 552, at 154, and the
 #: pass of 15 October 2026, for issues 573, 575, 583, 586 and 593, at 153, 154, 207,
-#: 211, 237, 241, 302 and 304, and, for the next candidates where PR 574's (T-174) are
-#: held for the owner (`select_houses.HELD`), at 105, 129, 146, 156, 176, 204, 261, 271,
-#: 272 and 303. None of T-174's counts is T-174's here.
+#: 211, 237, 241, 302 and 304, and, for the next candidates where PR 574's (T-174) were
+#: held for the owner (the hold the house rule lifted, `select_houses.LIFTED`), at 105,
+#: 129, 146, 156, 176, 204, 261, 271, 272 and 303. None of T-174's counts is T-174's here.
 ADOPTED: dict[int, str] = {
     70: "T-146",
     84: "T-130",

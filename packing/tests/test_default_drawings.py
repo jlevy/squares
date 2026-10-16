@@ -846,10 +846,11 @@ def test_a_decision_outranks_the_allowlist(tmp_path: Path) -> None:
 def test_the_comparison_lists_what_each_changed_count_draws(
     tmp_path: Path, capsys: pytest.CaptureFixture[str]
 ) -> None:
-    """Review A1 of #641: an adoption whose runs must wait shows its pull request what each
-    deferred count drew before and draws now, from the base branch's record, and marks a
-    count whose strong view gives way to a drawing worse than it on a goal of the
-    improvement rule for the owner, with those goals (review D1)."""
+    """Review A1 of #641: an adoption shows its pull request what each re-housed count drew
+    before and draws now, from the base branch's record, and names the goals at a count
+    whose strong view gives way to a drawing worse than it on a goal of the improvement
+    rule (review D1), marking one still pending with the obligation every re-housed count
+    carries: its runs are owed in this pull request (review E1 and the house rule)."""
     earlier = _record()
     assert defaults.drawing_changes(earlier, earlier) == []
     strong = next(
@@ -893,7 +894,7 @@ def test_the_comparison_lists_what_each_changed_count_draws(
             f"n={strong['n']} (a new witness): {before} -> pending, the house drawing "
             f"({uneven} uneven, {near} near-axis, {total} full shared sides); the strong view "
             "gives way to a drawing worse on uneven squares, near-axis squares, house total "
-            "of full shared sides: its runs are not deferred"
+            "of full shared sides: its runs are owed in this pull request"
         ),
         regular["n"]: f"n={regular['n']} (a new witness): {same} -> {same}",
     }
@@ -909,7 +910,7 @@ def test_the_comparison_lists_what_each_changed_count_draws(
         (
             "2 counts changed state, drawing or witness; where a strong view gives way to a "
             "drawing worse than it on a goal of the improvement rule, whatever drew it: 1 "
-            "still pending, whose runs are not deferred, and 0 in another state"
+            "still pending, whose runs are owed in this pull request, and 0 in another state"
         ),
     ]
 
@@ -939,7 +940,8 @@ def _losses(
     earlier: dict, later: dict, *, house_exact: bool | None = None
 ) -> tuple[list[str], bool]:
     """What `drawing_changes` says at one count: the goals it names a lost strong view's
-    replacement worse on, and whether it marks the count's runs as not deferred."""
+    replacement worse on, and whether it marks the count's runs as owed in this pull
+    request."""
     record = {"states": [later]}
     if house_exact is not None:
         record["entries"] = [{"n": later["n"], "house_exact": house_exact}]
@@ -947,8 +949,8 @@ def _losses(
     _picture, _semicolon, goals = line.partition(f"; {defaults.LOST} ")
     if not goals:
         return [], False
-    undeferred = goals.endswith(f": {defaults.UNDEFERRED}")
-    return goals.removesuffix(f": {defaults.UNDEFERRED}").split(", "), undeferred
+    owed = goals.endswith(f": {defaults.RUNS_OWED}")
+    return goals.removesuffix(f": {defaults.RUNS_OWED}").split(", "), owed
 
 
 EVAND, AXIS = "evand-regularize", "regularize_axis_components/2"
@@ -1047,13 +1049,13 @@ def test_a_lost_strong_view_is_marked_with_every_goal_its_replacement_is_worse_o
     draws it wherever it improves on the new house. Whatever drew the replacement, the
     goals the improvement rule finds it worse than the lost view on are named, and the
     count is marked where it still reads pending (review E2)."""
-    named, undeferred = _losses(earlier, later, house_exact=house_exact)
+    named, owed = _losses(earlier, later, house_exact=house_exact)
     assert named == goals
-    assert undeferred == (bool(goals) and later["state"] == defaults.PENDING)
+    assert owed == (bool(goals) and later["state"] == defaults.PENDING)
 
 
 @pytest.mark.parametrize(
-    ("state", "undeferred"),
+    ("state", "owed"),
     [
         (defaults.PENDING, True),
         (defaults.DECIDED, False),
@@ -1061,18 +1063,18 @@ def test_a_lost_strong_view_is_marked_with_every_goal_its_replacement_is_worse_o
         (defaults.EXEMPT, False),
     ],
 )
-def test_only_a_count_still_pending_is_marked_undeferred(
+def test_only_a_count_still_pending_is_marked_with_its_runs_owed(
     state: str,
-    undeferred: bool,  # noqa: FBT001
+    owed: bool,  # noqa: FBT001
 ) -> None:
     """Review E2 of #641: at #657, 146 and 156 read `regularized` and 176 reads
     `decided-no-better`, so their runs have run, yet each line asked for the owner's word.
     The goals are named whatever the count's state now; only a count still pending is
-    marked, its runs not deferred."""
+    marked, its runs owed in this pull request."""
     later = {**_row(302, defaults.VIEW, AXIS, "17.4", AXIS_302), "state": state}
     named, marked = _losses(_row(302, defaults.VIEW, EVAND, "17.5", LOST_302), later)
     assert named == ALL_SEVEN
-    assert marked is undeferred
+    assert marked is owed
 
 
 def test_the_summary_counts_pending_and_settled_losses_apart(
@@ -1098,8 +1100,8 @@ def test_the_summary_counts_pending_and_settled_losses_apart(
         paths.append(path)
     assert defaults.compare(paths[0], record=paths[1]) == 0
     lines = capsys.readouterr().out.splitlines()
-    assert [line.endswith(defaults.UNDEFERRED) for line in lines[:3]] == [False, True, True]
+    assert [line.endswith(defaults.RUNS_OWED) for line in lines[:3]] == [False, True, True]
     assert lines[-1].endswith(
-        f"where {defaults.STRONG_VIEW_LOST}: 2 still pending, whose runs are not deferred, "
-        "and 1 in another state"
+        f"where {defaults.STRONG_VIEW_LOST}: 2 still pending, whose runs are owed in this "
+        "pull request, and 1 in another state"
     )

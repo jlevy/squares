@@ -48,8 +48,9 @@ W1 phase on one branch:
    It does not wait for a replay budget, and it lands in a pull request of its own when
    it returns. Where a validated result is smaller than a house, the pass adopts it
    ([the house rule](#the-house-rule)), and the pull request that adopts it also
-   regularizes each count it re-houses, or defers the count with the bead that owns its
-   runs ([stage 5](#adopt-a-house-then-regularize-it)).
+   regularizes each count it re-houses ([stage 5](#adopt-a-house-then-regularize-it)):
+   an adoption whose runs do not fit under the compute cap waits with them, never apart
+   from them.
 4. **Validate** from `packing/` with `packing-validate --records`, then `--push`, and
    leave `--fast` to CI ([stage 5](#stage-5-publish)).
 5. **Open one draft pull request** with `tbd shortcut create-or-update-pr-simple`,
@@ -140,10 +141,11 @@ claude/intake-YYYY-MM-DD, with today's date.
    found it and however large its witness: no adoption waits for the owner (stage 5, "The
    House Rule"). Adopt it with devtools.adopt_houses and regularize every count it
    re-houses in the same pull request (stage 5, "Adopt a House, Then
-   Regularize It"), priced as one validation item at the total adopt_houses prints:
-   the strong generators on the new witness when that fits under the compute cap,
-   otherwise each pending count added to default_drawings.PENDING_ALLOWED with the
-   open validation bead that owns its runs, and its drawing listed before and after.
+   Regularize It"), priced as one validation item at the total adopt_houses prints,
+   with each re-housed count's drawing listed before and after. A re-housed count is
+   never deferred to default_drawings.PENDING_ALLOWED: where its runs do not fit under
+   the compute cap, stage the count in select_houses.PENDING_ADOPTION with the open
+   validation bead that adopts it, and adopt the rest.
 5. From packing/, run `uv run --frozen --all-extras --group dev packing-validate
    --records`, then `--push`, and fix what fails.
 6. Commit, push the branch, and open one draft pull request, labelled intake, with
@@ -214,7 +216,7 @@ steps, and `--json` prints the whole sweep.
 | 2. Retain | W1 | The source in a packet at a pinned revision, with its bibliography key |
 | 3. Record | W1 | The claim registered as reported, with its coverage entry, and merged: *imported* |
 | 4. Validate | W2 | Replay evidence, a mapped review and the rungs they derive: status `confirmed`, or `incomplete` |
-| 5. Publish | The change that moves the record | The reader documents state the result, and each count it re-houses is regularized or deferred with its bead; once stage 4 has passed, *integrated* |
+| 5. Publish | The change that moves the record | The reader documents state the result, and each count it re-houses is regularized in the same change; once stage 4 has passed, *integrated* |
 | 6. Explain | W8, with a W2 review | A review paper, for the results that warrant one |
 | 7. Answer | After each merge, by the pass | A reply on the issue for each change of its state, to the final comment: *answered* |
 
@@ -665,10 +667,11 @@ No adoption waits for the owner’s word, and each case that once did is decided
   [report-order rule](#several-reports-at-one-count) the ledger applies; between
   validated certificates of one side, `select_houses` keeps the earlier finder, then the
   earlier entry.
-- **A less regular drawing is no reason to wait.** Where a strong view would give way to
-  a drawing worse than it on a goal of the improvement rule, whatever drew it, its runs
-  are not deferred: they run in the adoption’s pull request, and the count is admitted
-  or settled on what they find.
+- **Regularizing is part of adopting.** Both strong generators run on each count the
+  adoption re-houses, in the adoption’s pull request, and the count is admitted or
+  settled on what they find: its runs are owed there, so a re-housed count is never
+  deferred to `default_drawings.PENDING_ALLOWED`. A drawing less regular than the strong
+  view it replaces is no reason to wait.
   The owner on n = 176, 16 October 2026: “Adopt as settled.”
 - **A conjectured optimum** the new house is below, wherever its print rounds, is
   withdrawn, and any other stays; the adoption goes ahead either way.
@@ -676,10 +679,12 @@ No adoption waits for the owner’s word, and each case that once did is decided
 `devtools.select_houses --check` is the gate, and `tests/test_house_adoption.py` runs it
 on every pull request: it fails wherever a validated smaller packing is not the house.
 A pass may validate in one pull request and adopt in the next only by staging each count
-it moves in `select_houses.PENDING_ADOPTION` with the open bead that adopts it, as
-`default_drawings.PENDING_ALLOWED` stages a count’s runs.
-`bead tree` holds that bead open, the adopting pull request takes the count off, and
-`--check` fails on a staged count the selection no longer moves.
+it moves in `select_houses.PENDING_ADOPTION` with the open bead that adopts it, and an
+adoption whose runs do not fit under the pass’s compute cap waits that way, with its
+runs. `bead tree` holds that bead open, the adopting pull request takes the count off,
+and `--check` fails on a staged count the selection no longer moves.
+`adopt_houses --check` fails while `default_drawings.PENDING_ALLOWED` names a count that
+a pass under this rule re-housed.
 
 ### Adopt a House, Then Regularize It
 
@@ -721,42 +726,49 @@ The strong runs cost 5 to 25 CPU-minutes a count, from the layer’s run receipt
 Ten re-housed counts take 50 to 250 CPU-minutes.
 The regularization an adoption owes is one validation item, priced at the total
 `adopt_houses` prints and held to the pass’s
-[compute cap](#the-compute-cap-and-the-validation-backlog) as a replay is.
-Within the cap, it runs in the pass.
-Above it, or with no cap set and a total above minutes, it is held, and its counts are
-deferred:
+[compute cap](#the-compute-cap-and-the-validation-backlog) as a replay is, and its runs
+are part of the adoption ([The House Rule](#the-house-rule)). Within the cap, they run
+in the adoption’s pull request.
+Above it, or with no cap set and a total above minutes, the adoption waits with them:
+the pass stages each count the cap does not cover in `select_houses.PENDING_ADOPTION`
+with the open bead that adopts it, labelled `validation` and carrying stage 4’s
+`## Validation` block, with a row in the backlog bead, and adopts the rest.
+A re-housed count is never deferred to `default_drawings.PENDING_ALLOWED`, and
+`adopt_houses --check` fails while the list names a count re-housed under the house
+rule. A count the list already names, such as one of the twenty below, is run in the
+adoption’s pull request and taken off it.
 
-1. The adoption’s pull request adds each pending count to
-   `default_drawings.PENDING_ALLOWED` with the open bead that owns its runs, labelled
-   `validation` and carrying stage 4’s `## Validation` block, with a row in the backlog
-   bead.
-2. It runs `default_drawings --update` again, since the record copies the entry into the
-   count’s reason, and then the guide’s render step.
-3. It lists each deferred count’s drawing before and after, with
-   `default_drawings --compare` on its base branch’s record, `BASE` being `main` unless
-   the pull request is stacked:
-   `python -m devtools.default_drawings --compare <(git show origin/$BASE:packing/atlas/known-best/default-drawings.json)`.
-   Where a strong view gives way to a drawing worse than it on a goal of the improvement
-   rule, whatever drew it, its runs are not deferred: they run in the adoption’s pull
-   request ([The House Rule](#the-house-rule)). The table names those goals at each such
-   count, and marks each one that still reads pending; one its runs have regularized or
-   decided is listed and not marked.
-   The axis tool’s view is the usual replacement, since the refresh draws it wherever it
-   improves on the new house: it replaced all seven strong views the adoption of 16
-   October 2026 (#657) lost, and at n = 302 a drawing with no uneven and no near-axis
-   square gave way to one with 26 and 11. A house drawing is the rarer one, as at n =
-   176 on 15 October (review D1 of #641).
+The adoption’s pull request lists each re-housed count’s drawing before and after, with
+`default_drawings --compare` on its base branch’s record, `BASE` being `main` unless the
+pull request is stacked:
+`python -m devtools.default_drawings --compare <(git show origin/$BASE:packing/atlas/known-best/default-drawings.json)`.
+Where a strong view gives way to a drawing worse than it on a goal of the improvement
+rule, whatever drew it, the table names those goals at each such count, and marks each
+one that still reads pending, “its runs are owed in this pull request”, as every
+re-housed count’s are; one its runs have regularized or decided is listed and not
+marked. The axis tool’s view is the usual replacement, since the refresh draws it
+wherever it improves on the new house: it replaced all seven strong views the adoption
+of 16 October 2026 (#657) lost, and at n = 302 a drawing with no uneven and no near-axis
+square gave way to one with 26 and 11. A house drawing is the rarer one, as at n = 176
+on 15 October (review D1 of #641).
+
+A witness that changes without an adoption, as a corrected one does, may defer its runs
+where they do not fit under the cap, except at a count the table marks.
+Its pull request adds each deferred count to `default_drawings.PENDING_ALLOWED` with the
+open bead that owns its runs, labelled `validation`, with a row in the backlog bead;
+runs `default_drawings --update` again, since the record copies the entry into the
+count’s reason, and then the guide’s render step; and lists the drawings as above.
 
 The records tier’s
 `every drawn picture is regularized, regular as published, decided or exempt`
 (`default_drawings --check-state`) fails on a pending count that the list does not name,
-so an adoption cannot pass without one or the other.
+so an adoption cannot pass until its runs have decided every count it re-houses.
 It also fails on a listed count that is no longer pending and on a `SETTLED` entry
 decided on the earlier witness.
 So the adoption’s pull request takes each count its runs decided off the list, and
 settles each such entry again or removes it.
 A new house that reads regular does not take a listed count off: on the list, a count
-waits for the runs its bead owes.
+waits for runs that decide it.
 The gate cannot tell a hand-dropped entry from a decided one: dropping an entry whose
 count then reads regular as published passes it, and so does adding a count whose house
 reads regular, which the list then holds pending.
