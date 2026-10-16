@@ -5,7 +5,7 @@ title: "Sweep residue 2026-10-16: wand125 319a779, redundant reads, six resolved
 kind: task
 status: in_progress
 priority: 1
-version: 7
+version: 8
 delegate: user-eb-intake-residue
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m51hyxstsa9ptekd2ss26ksn
 hold: null
 hold_until: null
 created_at: 2026-10-16T05:12:57.169Z
-updated_at: 2026-10-16T06:17:23.539Z
+updated_at: 2026-10-16T07:45:37.564Z
 started_at: 2026-10-16T05:13:40.345Z
 ---
 Lane A of the overnight pass (epic think-hg5s), acting name user-eb-intake-residue, branch claude/intake-2026-10-16-residue from origin/main. The sweep residue of 2026-10-16 05:08Z that no 16 October lane owns:
@@ -48,3 +48,5 @@ blocked_on: jlevy/squares#647
 
 2026-10-16 06:17Z user-eb-intake-residue: hosted CI on PR #647 at 1f3f54c44 is green. Packing validation (run 38859099495) and Certificate page (run 38859099474) succeeded; 31 checks succeeded, 51 skipped, and 1 was cancelled (deep-gate-required, a superseded Deferred checkpoint run). Mergeable and clean. Lane A is done; handing back to the coordinator. Remaining owners as in the note above.
 blocked_on: jlevy/squares#647
+
+2026-10-16 ~07:50Z coordinator user-eb: PR #647 MERGE-READY at 948a840df (senior Review A: 2 Low + 3 suggestions; addressed by user-eb-addr-647: A1-A4 fixed, A5 declined, disposition review https://github.com/jlevy/squares/pull/647#pullrequestreview-5544493199; the one unreviewed change, the DATA_REVISION re-pin 4987d1c03 + record wording 948a840df, checked inline by the coordinator: rule-1 bookkeeping, accurate). Hosted CI green (31 ok, 28 skipped). Waits only for the owner's word to merge. Merge note: any branch that also re-pins DATA_REVISION re-runs release_pin --update after merging main; the site edition likewise.
