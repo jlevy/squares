@@ -68,7 +68,10 @@ def test_the_packet_pins_its_release_and_retains_no_upstream_byte() -> None:
     (source,) = _json(_packet() / "acquisition/sources.json")["sources"]
     assert (source["retained_file_count"], source["retained_total_bytes"]) == (0, 0)
     assert source["source_commit"] == "31155575ce1e6b461f77bfc9f3e201adf101115b"
-    (row,) = reports.load_declaration(_packet())["certificates"]
+    (declared,) = reports.load_declaration(_packet())["certificates"]
+    # Read as a plain mapping: the row's `fact`, `archive` and `same_packing` are optional
+    # in its contract, and this packet states all three.
+    row: dict[str, Any] = dict(declared)
     assert row["fact"] == "facts/n-029.yaml"
     assert row["archive"]["sha256"] == CERTIFICATE_SHA256
     assert row["archive"]["tag"] == "data/pingyou-n29-certificate-2026-10-15-v1"
@@ -79,7 +82,7 @@ def test_the_packet_pins_its_release_and_retains_no_upstream_byte() -> None:
     manifest = pinned["packing/hosted/pingyou-n29-certificate-2026-10-15.yaml"]
     assert manifest["sha256"]
     declaration = reports.load_declaration(_packet())
-    fact = reports.read_fact(_packet(), declaration, row)
+    fact = reports.read_fact(_packet(), declaration, declared)
     assert fact.side == Fraction(row["offered"])
 
 
@@ -133,7 +136,8 @@ def test_the_case_keeps_a_verified_print_above_its_exact_form(
     exactly; a print below it, or another exact form, is refused.
     """
     packet = private(PACKET)
-    (house,) = reports.load_declaration(packet)["houses"]
+    (declared,) = reports.load_declaration(packet)["houses"]
+    house: dict[str, Any] = dict(declared)
     assert Fraction(house["verified_value"]) - T155 > Fraction(5, 10**20)
     assert Fraction(house["verified_exact_form"]) == T155
     reports.compare(packet)
@@ -175,6 +179,7 @@ def test_the_ledger_leaves_both_reports_undecided_and_names_the_key_reason() -> 
         ("PR #574", ledger.UNDECIDED),
         ("PR #622", ledger.UNDECIDED),
     ]
-    (candidate,) = ledger.load_ledger(directory)["key_reason_candidates"]
+    (found,) = ledger.load_ledger(directory).get("key_reason_candidates") or []
+    candidate: dict[str, Any] = dict(found)
     assert (candidate["n"], candidate["report"]) == (N, "PR #622")
     assert candidate["proposed_as"].startswith("T-195")
