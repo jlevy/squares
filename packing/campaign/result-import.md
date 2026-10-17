@@ -59,8 +59,9 @@ W1 phase on one branch:
    None defers its runs: they run in the pull request that makes the house, under the
    item cap (the owner’s 40 CPU-hours where the pass sets none), and an adoption too
    large for one is split, its other counts waiting with their runs, never apart from
-   them. Only a witness corrected or re-solved with its house’s side unchanged may defer
-   its runs, in `default_drawings.PENDING_ALLOWED` with the open bead that owns them.
+   them. Only a witness corrected or re-solved with its house’s source and exact side
+   unchanged may defer its runs, in `default_drawings.PENDING_ALLOWED` with the open
+   bead that owns them, naming the witness it replaced in `default_drawings.CORRECTED`.
    The sweep then lists each count still owed.
 4. **Validate** from `packing/` with `packing-validate --records`, then `--push`, and
    leave `--fast` to CI ([stage 5](#stage-5-publish)).
@@ -166,9 +167,10 @@ claude/intake-YYYY-MM-DD, with today's date.
    re-housed count is never deferred to default_drawings.PENDING_ALLOWED: where the runs
    of a large adoption would pass the cap, split it, staging the counts it leaves in
    select_houses.PENDING_ADOPTION with the open validation bead that adopts them, and
-   adopt the rest. Only a witness corrected or re-solved with its
-   house's side unchanged may defer its runs there, naming an open bead labelled
-   regularization and validation.
+   adopt the rest. Only a witness corrected or re-solved with its house's source and
+   exact side unchanged may defer its runs there, naming an open bead labelled
+   regularization and validation, and naming the witness it replaced in
+   default_drawings.CORRECTED.
 5. From packing/, run `uv run --frozen --all-extras --group dev packing-validate
    --records`, then `--push`, and fix what fails.
 6. Commit, push the branch, and open one draft pull request, labelled intake, with
@@ -633,7 +635,10 @@ the work above it is tracked in beads (the owner, 2026-10-14, setting the first 
 and details are in beads”). A validation item priced within it runs in the pass, and one
 priced above it is *held* until the owner raises the cap or approves a subset.
 The cap applies to each item; whether the runnable items together may pass it is the
-owner’s call. With no cap set, only a replay the source prices at minutes runs.
+owner’s call. With no cap set, only a replay the source prices at minutes runs; an
+adoption’s regularization runs are the one exception, held to the owner’s standing 40
+CPU-hours an item
+([Adopt a House, Then Regularize It](#adopt-a-house-then-regularize-it)).
 
 Every validation item the pass leaves pending is a bead labelled `validation` under the
 import bead it serves, and its description carries one block:
@@ -704,9 +709,10 @@ No adoption waits for the owner’s word, and each case that once did is decided
   ([Publishing Hosted Data](../../development.md#publishing-hosted-data)). No house
   reader takes a hosted witness yet, so the adoption that first needs one writes that
   reader in its own pull request (think-ot5c names it for T-193’s forms).
-  Measured on 16 October 2026, T-174’s 63 houses add 2.49 MB as Git stores them, 3.51 MB
-  in place of 1.02 MB, the largest 0.31 MB, from 17.16 MB more in a checkout: they go
-  into Git.
+  `python -m devtools.upper_bound_houses sizes` measures the witnesses a staged adoption
+  would write. On 17 October 2026 T-174’s 50 staged rational houses add 1.97 MB as Git
+  stores them, 2.84 MB in place of 0.87 MB, the largest 0.22 MB, from 14.55 MB more in a
+  checkout: they go into Git.
 - **A regularized view below the house’s side is a smaller packing.** It is registered
   as a result and taken through stages 3 and 4 like any report, with the packing
   credited to its finder and the regularization to the regularizer
@@ -760,10 +766,16 @@ think-ot5c, owns its counts.
 `--check` fails on a staged count the selection no longer moves or names another house
 for, and on one staged for the writer whose house the writer writes, or the reverse.
 `default_drawings --check-state` fails while `PENDING_ALLOWED` defers the runs of a
-witness whose house has moved since, whichever import moved it: each entry names the
-witness it defers, the one the list held when the owner set the rule
-(`DEFERRED_AT_RULE`) or a corrected witness at its house’s own source and side
-(`CORRECTED`).
+witness whose house has moved, whichever import moved it.
+Each entry is a corrected witness’s, and `default_drawings.CORRECTED` names the witness
+it replaced, by its source, path, revision and exact side.
+The records tier holds that to the record of the commit the change is built on
+(`--check-state --base-ref origin/main`, which reads its merge base): the base’s witness
+at the count must be the one named, the record’s must have its source and exact side,
+and it must be another witness only, by another path or revision, or, at a source that
+pins neither, by another witness file.
+So a house moved by an adoption, a Kingbird catalogue intake, whose source key never
+changes, or an exact re-solve fails, whatever its entry declares (review C3 of #660).
 
 ### Adopt a House, Then Regularize It
 
@@ -812,13 +824,14 @@ The strong runs cost 5 to 25 CPU-minutes a count, from the layer’s run receipt
 
 Ten re-housed counts take 50 to 250 CPU-minutes.
 The regularization an adoption owes is one validation item, priced at the total
-`adopt_houses` prints and held to the pass’s
-[compute cap](#the-compute-cap-and-the-validation-backlog) as a replay is: the cap the
-owner set for the pass, or where it set none, the owner’s standing cap of 40 CPU-hours
-an item (14 October 2026, think-lh7d). Its runs are part of the adoption
-([The House Rule](#the-house-rule)), and they are within the cap and run in the
-adoption’s pull request: at the receipts’ dearest, 25 CPU-minutes a count, about a
-hundred re-housed counts fit.
+`adopt_houses` prints and held to the cap the owner set for the pass
+([The Compute Cap and the Validation Backlog](#the-compute-cap-and-the-validation-backlog)).
+Unlike a replay, it has a default where the pass sets no cap: the owner’s standing cap
+of 40 CPU-hours an item (14 October 2026, think-lh7d), since its runs are part of the
+adoption ([The House Rule](#the-house-rule)) and a pass with no cap would otherwise
+stage every adoption larger than minutes (review C8 of #660). They are within the cap
+and run in the adoption’s pull request: at the receipts’ dearest, 25 CPU-minutes a
+count, about a hundred re-housed counts fit.
 An adoption whose runs would pass the cap is split into pull requests that each fit, and
 the counts a pull request does not adopt are staged in `select_houses.PENDING_ADOPTION`
 as over the item cap, with the open bead that adopts them, labelled `regularization` and
@@ -843,17 +856,18 @@ of 16 October 2026 (#657) lost, and at n = 302 a drawing with no uneven and no n
 square gave way to one with 26 and 11. A house drawing is the rarer one, as at n = 176
 on 15 October (review D1 of #641).
 
-A witness corrected or re-solved with its house’s side unchanged may defer its runs
-where they do not fit under the cap, except at a count the table marks.
+A witness corrected or re-solved with its house’s source and exact side unchanged may
+defer its runs where they do not fit under the cap, except at a count the table marks.
 Its pull request adds each deferred count to `default_drawings.PENDING_ALLOWED`, naming
 the open bead that owns its runs: labelled `regularization`, as every such bead is, and
 `validation`, since its runs are held above the cap, carrying stage 4’s `## Validation`
 block, with a row in the backlog bead.
-It names the witness in `default_drawings.CORRECTED` too, by its source, its side and
-the revision it replaced, since `--check-state` reads any other new entry as deferring a
-moved house’s runs and fails it.
-It runs `default_drawings --update` again, since the record copies the entry into the
-count’s reason, then the guide’s render step, and lists the drawings as above.
+It names the witness the correction replaced in `default_drawings.CORRECTED` too, by its
+source, path, revision and exact side as the base branch’s record names them, since
+`--check-state` reads any other entry as deferring a moved house’s runs and fails it,
+and holds this one to the base record ([The House Rule](#the-house-rule)). It runs
+`default_drawings --update` again, since the record copies the entry into the count’s
+reason, then the guide’s render step, and lists the drawings as above.
 
 The records tier’s
 `every drawn picture is regularized, regular as published, decided or exempt`

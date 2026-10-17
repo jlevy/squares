@@ -405,10 +405,12 @@ To redraw the count:
    The axis tool’s view of the new witness is drawn wherever it improves on the new
    house, which says nothing of the view the count lost (review D1 of #641). Where a
    corrected witness’s runs must wait, allow each count the table does not mark in
-   `PENDING_ALLOWED` with the open bead that owns its runs, and name the witness in
-   `default_drawings.CORRECTED` (its source, side and the revision it replaced), in the
-   pull request that corrects the witness, so the deferral is reviewed; `--check-state`
-   fails an entry whose house has moved since.
+   `PENDING_ALLOWED` with the open bead that owns its runs, and name the witness the
+   correction replaced in `default_drawings.CORRECTED` (its source, path, revision and
+   exact side, as the base branch’s record names them), in the pull request that
+   corrects the witness, so the deferral is reviewed.
+   `--check-state --base-ref origin/main` holds the entry to the base record and fails
+   it wherever the house moved, whatever import moved it.
    Then run `default_drawings --update` again, since the record copies the entry into
    the count’s reason, and step 5, since `--update-atlas` redrew the axis views.
    Nothing but review limits how many counts join the list; the gate prints its size.
