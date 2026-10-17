@@ -1288,7 +1288,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "#639 and #640 request entries and their review fixes (A6 to A9); and "
             "select_houses gains deferred_results, which only its own --check and tests "
             "call. Rendered at link revision 6a3a7d8f (main), once from main's tree and "
-            "once from this branch's at 3d622735 after its merge of main, "
+            "once from this branch's at d343744f after its merge of main, "
             "render_packing_methods, render_n11_optimality_review and "
             "render_n11_threshold_bound_review write 50 files, byte-identical between the "
             "two trees. The explainer's render needs a browser this host lacks, so it is "
