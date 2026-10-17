@@ -1,0 +1,3 @@
+regularize_select ran from 2026-10-16T07:03:02Z to 07:53:09Z (3,007 s wall, --workers 2)
+at main e2e018f32b2627a7d4b38ed95790bee145b1524a, a tree whose only change was in
+packing/tests/test_default_drawings.py, which the selection does not read.

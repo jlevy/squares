@@ -8155,10 +8155,12 @@ issues:
       Comments); the comment as recorded is the edited one.
 
       The reply `--report` lists as due (T-174 at V3/C3 and its two evidence entries reviewed, where
-      the follow-up of 14 October stated V0/C0 and recorded) is held for the owner, who decides the
-      pull request and T-174's adoption and, by `close_when`, posts the resulting state. It goes out
-      on that decision or on the owner's instruction, from think-9v2k, and a pass that finds it due
-      does not post it before then (PR #637's review, A4).
+      the follow-up of 14 October stated V0/C0 and recorded) waits for the owner, who decides the
+      pull request and, by `close_when`, posts the resulting state; T-174's adoption is no longer
+      the owner's: the house rule of 16 October 2026 makes it the house at 53 counts, staged under
+      think-3mry and, at 70, 153 and 207, under think-ot5c. It goes out on the owner's instruction,
+      from think-9v2k, and a pass that finds it due does not post it before then (PR #637's review,
+      A4).
   - number: 575
     title: 's(176) ≤ 13.795872318437, s(211) ≤ 14.993694186584, s(241) ≤ 15.987134249051, s(304) ≤ 17.929427758076:
       registration request'
@@ -9331,7 +9333,8 @@ issues:
       of each polynomial at every rational side the record holds or has pending at its count: at 16
       counts the side is below all of them, by 1.5e-99 to 7.8e-35; at 51 it is the (16 + 5√2)/3 the
       record holds; at 70, 153 and 207 it agrees to 40 places with #574's algebraic sides (T-174), whose
-      adoption is the owner's decision RP-3; and at 172, 263 and 297 #574's rational certificates are
+      adoption the house rule of 16 October 2026 stages under think-ot5c; and at 172, 263 and 297
+      #574's rational certificates are
       smaller, by about 1e-62. Retained on 16 October in the evand-exact-cur-2026-10-16 packet; the 16
       October report-order ledger (campaign/issue-intake/upper-bounds-20261016) agrees with the triage at
       every count, and T-193 registers the 16 recorded counts. Claude assistance disclosed.
@@ -9360,9 +9363,10 @@ issues:
       source: body
       not_registered: >-
         Equal to 40 places, at the same degree, to the algebraic sides #574 reported on 13 October
-        (T-174), and a tie stays with the earlier report. Their adoption is the owner's decision RP-3,
-        which notes they rest on one route; the source's configurations and checker are a second, and
-        the replay of think-g59l, which ran the source's checker on all 23 files, carries them to it.
+        (T-174), and a tie stays with the earlier report. The house rule of 16 October 2026 adopts
+        them, staged under think-ot5c, which ended RP-3's wait on their one route; the source's
+        configurations and checker are a second, and the replay of think-g59l, which ran the source's
+        checker on all 23 files, carries them to it.
         The 16 October ledger decides the three ties exactly (review/exact_sides.py there).
       queued: false
     - key: exact-sides-above-574

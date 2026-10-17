@@ -1,0 +1,65 @@
+# The regularized layer's review records (docs/project/policies/regularization-policy.md,
+# section 5): one per decision a person made on a view the decision table sent to review.
+# Hand-written. `python -m devtools.regularize_evand layer` draws a view the table did not
+# admit at row 10 only as a record here admits it, and the entry it writes names the
+# record; `python -m devtools.regularize_axis_components --check-atlas` holds each
+# admitting record and its entry to each other. A record names its source witness as the
+# witness identifies itself (its id, its source's key, path and revision, and its side),
+# never by a digest of its bytes (OR-16). It lapses when the witness or the generator's
+# version changes, and then admits nothing.
+reviews:
+  - n: 211
+    date: "2026-10-16"
+    reviewer: the owner
+    decision: admit
+    answer: "Admit it (Recommended)"
+    recorded_as: >-
+      Answered by the owner on 16 October 2026, as recommended: the coordinating agent of
+      the session named here asked, recommended admission, and the owner chose that
+      option (the policy's section 9 convention).
+    session: https://claude.ai/code/session_01EJu6xskztSenJxCRTr4feM
+    question: >-
+      As asked (AskUserQuestion, about 20:45Z): "At 211, Evan Daniel's same-side view of
+      T-188's packing (2/10/3 light/uneven/near-axis, 17 classes, 17 hues) beats the
+      current drawing on all seven measures, but the regularization policy puts it in the
+      'review' row, which needs your recorded say-so before it can be admitted. Admit it?"
+    options:
+      - option: "Admit it (Recommended)"
+        description: >-
+          Record your review under the policy's section 5 and admit Daniel's view at 211
+          in #657; PENDING_ALLOWED becomes empty.
+      - option: "Keep 211 pending"
+        description: >-
+          Leave 211 allowlisted under think-r3cl for a later look; #657 merges with 211
+          still pending.
+    reason: >-
+      The owner's choice of the recommended option. The facts the question rested on:
+      the view passes both exact routes at the witness's own side, pairs one to one and
+      loses no contact total, so only the per-square counts row 7 reads (12 fall) held it
+      from the layer, and it is better than the drawn axis view on every goal of the
+      improvement rule: light / uneven / near-axis squares, angle classes and hues
+      2 / 10 / 3 / 17 / 17 against 8 / 22 / 6 / 32 / 19, house and stage full shared
+      sides 545 / 555 against 474 / 549.
+    shown: >-
+      Only the question's text, with the measures it states; no image or gallery was
+      shown to the owner for 211. The gallery below was rendered after the decision, for
+      the record (review H7 of PR 657): the source witness, this view and the axis
+      tool's view the layer drew then, side by side, and grid-slack's view, which is the
+      same at 0.5, 1 and 5 degrees.
+    gallery:
+      - packing/cases/regularized_drawings/think-z7wn-2026-10-16/review-211/gallery.html
+      - packing/cases/regularized_drawings/think-z7wn-2026-10-16/review-211/grid-slack-z7wn-a-deg05-1016.svg
+    generator: evand-regularize
+    generator_version:
+      pin: 675a5ea
+      source_commit: 675a5eaa8712542daac8b4515b0f69ad7044df44
+      patches: []
+    run: evand-regularize-z7wn-a-1016
+    output: same
+    row: 7
+    source:
+      id: W-known-best-n211
+      source: "[Couzo verified bounds 2026-10-14]"
+      path: resources/web/couzo-verified-bounds-2026-10-14/source/certificates/n211.cert
+      revision: 487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d
+      side: "7496774813149710519467765230441/500000000000000000000000000000"

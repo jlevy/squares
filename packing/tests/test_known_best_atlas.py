@@ -1630,7 +1630,7 @@ def test_triangle_fast_label_check_requires_the_compact_caption() -> None:
     assert check(canvas, root) == [
         (
             "atlas/known-best/known-best-1-324.svg n=211 side-bound is "
-            "('s(211) ≤ 14.997961',); expected ('s(211) ≤ 14.99356',)"
+            "('s(211) ≤ 14.997961',); expected ('s(211) ≤ 14.99355',)"
         )
     ]
 
@@ -2141,9 +2141,14 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
     # ten more, Mishapolk's of 12 and 14 October, Ostashev's of 12 and 13 October, Couzo's
     # of 12 and 13 October and PingYou Ltd's four refinements, and no longer from PingYou's
     # n = 153 and 207 certificates, Evan Daniel's n = 154 packet or Robert Barnett's
-    # refinements: six sources more, and no new name.
+    # refinements: six sources more, and no new name. The adoption of 16 October
+    # (think-z7wn) draws from Mishapolk's KKT refinements and Couzo's verified bounds of 14
+    # October, Evan Daniel's n = 146 packet and Couzo's n = 237 packet, and no longer from
+    # Couzo's 12 October certificates, Mishapolk's 14 October records, Ostashev's 12
+    # October compositions and records and 13 October merged bands, or PingYou Ltd's
+    # n = 146 refinement: two sources fewer, and no new name.
     assert len(expected_names) == 26
-    assert len(expected_sources) == 28
+    assert len(expected_sources) == 26
     assert set(json.loads(credit_block.attrib["data-credited-names"])) == expected_names
     assert set(json.loads(credit_block.attrib["data-source-keys"])) == expected_sources
     assert credit_block.find("svg:text[@data-feature='packing-credits-heading']", SVG) is None
@@ -2328,7 +2333,7 @@ def test_poster_accents_recent_contributions_independently_in_svg_and_pdf() -> N
         line = cards[211].find(f"svg:text[@data-feature='{feature}']", SVG)
         assert line is not None
         assert "".join(line.itertext()) == (
-            "s(211) ≤ 14.99356" if feature == "side-bound" else "s(211) ≥ 14.54457"
+            "s(211) ≤ 14.99355" if feature == "side-bound" else "s(211) ≥ 14.54457"
         )
         colored = [span for span in line if span.attrib.get("fill") == FIRST_PARTY_ACCENT_COLOR]
         assert len(colored) == 1

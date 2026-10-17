@@ -1257,9 +1257,12 @@ def test_every_import_reader_is_the_packet_whose_source_key_names_it() -> None:
         if isinstance(reader, functools.partial) and reader.func is reports.import_side
     }
     assert len(readers) >= 35
+    #: T-185's 175 is the 11 October release's certificate under a key of its own, read
+    #: from that release's packet.
+    shared = {"[Couzo n175 2026-10-11]": "[Couzo certificates 2026-10-11]"}
     for key, reader in readers.items():
         packet = reports.packet_path(reader.args[0])
-        assert reports.load_declaration(packet)["source_key"] == key
+        assert reports.load_declaration(packet)["source_key"] == shared.get(key, key)
 
 
 # Full run 38756833833 measured these two complete plan/independent-claim reads at

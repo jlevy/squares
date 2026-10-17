@@ -23,9 +23,12 @@ intake directory such as ``campaign/issue-intake/upper-bounds-20261014/``:
 - **exceptions** come only from the input's ``exceptions`` list, each with a count, a
   report and the owner's reason; such a claim is shown as recorded by exception and
   moves nothing;
-- **owner decisions** the render lists without deciding: exact ties between different
-  holders, a not-recorded claim whose certificate was first committed before the report
-  that holds the count, every undecided comparison with what would decide it, claims
+- **owner decisions** the render lists without deciding, none of them a house: the
+  earlier report holds a count, an exception moves nothing, and the house is the
+  smallest validated side by the house rule (result-import.md, "The House Rule"). They
+  are exact ties between different holders, a not-recorded claim whose certificate was
+  first committed before the report that holds the count, every undecided comparison
+  with what would decide it, claims
   whose time is unknown (kept out of the walk), and every count where a verdict changes
   when publications in watched repositories are not counted as reports.
 
