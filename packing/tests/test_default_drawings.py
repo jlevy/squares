@@ -263,14 +263,21 @@ def test_the_allowlist_equals_the_pending_set_and_each_entry_names_a_bead(
         pytest.skip("the data holds fewer than two counts regular as published")
     pending, joining = regular[0], regular[1]
     # The data's own list is empty since 16 October 2026 (think-3zi3), so a count is
-    # allowed pending here as an adoption's deferral would allow it, with its bead.
+    # allowed pending here as a deferral would allow it, with its bead. Only a corrected
+    # witness's runs may wait since the house rule (`CORRECTED`, reviews A5 and B2 of
+    # #660), so each count here is one, at its house's own source and side.
+    corrected = {pending["n"]: _correction(pending)}
     pending["state"] = defaults.PENDING
     allowed = {**defaults.PENDING_ALLOWED, pending["n"]: "think-0000: a deferral"}
-    found, _listed = defaults.state_problems(_write(tmp_path, record), allowed=allowed)
+    found, _listed = defaults.state_problems(
+        _write(tmp_path, record), allowed=allowed, corrected=corrected
+    )
     assert found == []
     # A count allowed pending that is no longer pending fails until it comes off the list.
     pending["state"] = defaults.REGULARIZED_STATE
-    found, _listed = defaults.state_problems(_write(tmp_path, record), allowed=allowed)
+    found, _listed = defaults.state_problems(
+        _write(tmp_path, record), allowed=allowed, corrected=corrected
+    )
     assert found == [
         (
             f"n={pending['n']}: PENDING_ALLOWED names it, but it is regularized; take it "
@@ -281,8 +288,33 @@ def test_the_allowlist_equals_the_pending_set_and_each_entry_names_a_bead(
     pending["state"] = defaults.PENDING
     joining["state"] = defaults.PENDING
     allowed = {**allowed, joining["n"]: "later"}
-    found, _listed = defaults.state_problems(_write(tmp_path, record), allowed=allowed)
+    corrected = {**corrected, joining["n"]: _correction(joining)}
+    found, _listed = defaults.state_problems(
+        _write(tmp_path, record), allowed=allowed, corrected=corrected
+    )
     assert found == [f"n={joining['n']}: PENDING_ALLOWED names no bead: 'later'"]
+
+
+def _correction(row: dict) -> defaults.Correction:
+    """A correction of the row's witness: the one it replaced had the row's source, path and
+    exact side at an earlier revision. Checked as declared, with no base record."""
+    witness = row["witness"]
+    return defaults.Correction(
+        witness["source"], witness.get("path"), "an-earlier-revision", witness["side"]
+    )
+
+
+def _replaced(witness: dict) -> defaults.Correction:
+    """The correction that names `witness` as the one it replaced."""
+    return defaults.Correction(
+        witness["source"], witness.get("path"), witness.get("revision"), witness["side"]
+    )
+
+
+def _base(rows: dict, changed: frozenset[int] = frozenset()) -> defaults.Base:
+    """A base record of these rows, as `base_record` reads one from a commit, with the
+    counts whose witness file the change alters."""
+    return defaults.Base("origin/main", rows, changed)
 
 
 def test_a_row_out_of_place_fails_the_gate(tmp_path: Path) -> None:
@@ -718,18 +750,29 @@ def test_an_adoption_that_rebuilds_only_the_axis_view_reads_pending(tmp_path: Pa
         )
     ]
 
-    # Or until the adoption's pull request defers it with the bead that owns its runs
-    # (result-import.md, "Adopt a House, Then Regularize It"; think-g3q7): then the gate
-    # lists it as allowed, and an entry naming no bead fails it again.
+    # The adoption's pull request may not defer it: its runs are owed there, whatever
+    # the cap (result-import.md, "The House Rule"; reviews A5 and B1 of #660). Only a
+    # witness corrected at its house's own source and side may wait, with its bead, and
+    # an entry naming no bead fails it again.
     def about(lines: list[str]) -> list[str]:
         return [line for line in lines if re.match(rf"n={n}\b", line)]
 
     deferred = {**defaults.PENDING_ALLOWED, n: "think-g3q7: re-housed by an adoption"}
     found, listed = defaults.state_problems(regenerated, adopted, allowed=deferred)
+    (refused,) = about(found)
+    assert refused.startswith(
+        f"n={n}: PENDING_ALLOWED defers its runs, but CORRECTED names no corrected witness"
+    )
+    corrected = {n: _correction(state)}
+    found, listed = defaults.state_problems(
+        regenerated, adopted, allowed=deferred, corrected=corrected
+    )
     assert about(found) == []
     assert about(listed) == [f"n={n} is pending, allowed: {deferred[n]}"]
     unowned = {**defaults.PENDING_ALLOWED, n: "until the runs fit the cap"}
-    found, _listed = defaults.state_problems(regenerated, adopted, allowed=unowned)
+    found, _listed = defaults.state_problems(
+        regenerated, adopted, allowed=unowned, corrected=corrected
+    )
     assert about(found) == [f"n={n}: PENDING_ALLOWED names no bead: {unowned[n]!r}"]
 
 
@@ -969,9 +1012,13 @@ def test_an_allowed_count_owes_its_runs_whatever_its_new_house_reads(tmp_path: P
 
     # The gate lists each as allowed and asks for none to come off; on the record the
     # earlier rule gave, it asked for every one to come off.
+    corrected = {extra: _correction(rows[extra])}
+
     def gate(states: dict[int, dict]) -> tuple[list[str], list[str]]:
         changed = {**record, "states": [states.get(row["n"], row) for row in record["states"]]}
-        return defaults.state_problems(_write(tmp_path, changed), allowed=allowed)
+        return defaults.state_problems(
+            _write(tmp_path, changed), allowed=allowed, corrected=corrected
+        )
 
     found, listed = gate({state["n"]: state for state, _bare in regenerated})
     assert found == []
@@ -1007,15 +1054,18 @@ def test_a_decision_outranks_the_allowlist(tmp_path: Path) -> None:
     document = json.loads(defaults.INDEX.read_text(encoding="utf-8"))
     every = {int(entry["n"]): entry for entry in document["entries"]}
     allowed = dict(defaults.PENDING_ALLOWED)
+    corrected = dict(defaults.CORRECTED)
     if not allowed:
         # The live list is empty once the stack's last allowed counts are decided, so a
-        # count the layer draws is allowed here, as an adoption's deferral would allow it.
+        # count the layer draws is allowed here, as a corrected witness's deferral would
+        # allow it: since the house rule no adoption defers (reviews A5 and B2 of #660).
         drawn = next(
             n
             for n in sorted(views)
             if n not in defaults.SETTLED and every[n].get("generator") == defaults.ALGORITHM
         )
-        allowed = {drawn: "think-0000: re-housed by an adoption"}
+        allowed = {drawn: "think-0000: a corrected witness"}
+        corrected = {drawn: _correction(rows[drawn])}
     n = next(n for n in sorted(allowed) if n in views and n not in defaults.SETTLED)
     witness = rows[n]["witness"]
     house = _regular_house(views[n])
@@ -1069,7 +1119,7 @@ def test_a_decision_outranks_the_allowlist(tmp_path: Path) -> None:
             "states": [state if row["n"] == n else row for row in record["states"]],
         }
         found, _listed = defaults.state_problems(
-            _write(tmp_path, changed), index, settled=held, allowed=allowed
+            _write(tmp_path, changed), index, settled=held, allowed=allowed, corrected=corrected
         )
         assert found == [
             f"n={n}: PENDING_ALLOWED names it, but it is {expected}; take it off the list"
@@ -1079,10 +1129,12 @@ def test_a_decision_outranks_the_allowlist(tmp_path: Path) -> None:
 def test_the_comparison_lists_what_each_changed_count_draws(
     tmp_path: Path, capsys: pytest.CaptureFixture[str]
 ) -> None:
-    """Review A1 of #641: an adoption whose runs must wait shows its pull request what each
-    deferred count drew before and draws now, from the base branch's record, and marks a
-    count whose strong view gives way to a drawing worse than it on a goal of the
-    improvement rule for the owner, with those goals (review D1)."""
+    """Review A1 of #641: an adoption shows its pull request what each re-housed count drew
+    before and draws now, from the base branch's record. It names the goals at a count
+    whose strong view gives way to a drawing worse than it on a goal of the improvement
+    rule (review D1), and marks one still pending with the obligation every re-housed
+    count carries, that its runs are owed in this pull request (reviews E1, E2, F1 and F2
+    of #641, and the house rule)."""
     earlier = _record()
     assert defaults.drawing_changes(earlier, earlier) == []
     strong = next(
@@ -1126,7 +1178,7 @@ def test_the_comparison_lists_what_each_changed_count_draws(
             f"n={strong['n']} (a new witness): {before} -> pending, the house drawing "
             f"({uneven} uneven, {near} near-axis, {total} full shared sides); the strong view "
             "gives way to a drawing worse on uneven squares, near-axis squares, house total "
-            "of full shared sides: its runs are not deferred"
+            "of full shared sides: its runs are owed in this pull request"
         ),
         regular["n"]: f"n={regular['n']} (a new witness): {same} -> {same}",
     }
@@ -1142,7 +1194,7 @@ def test_the_comparison_lists_what_each_changed_count_draws(
         (
             "2 counts changed state, drawing or witness; where a strong view gives way to a "
             "drawing worse than it on a goal of the improvement rule, whatever drew it: 1 "
-            "still pending, whose runs are not deferred, and 0 in another state"
+            "still pending, whose runs are owed in this pull request, and 0 in another state"
         ),
     ]
 
@@ -1172,7 +1224,8 @@ def _losses(
     earlier: dict, later: dict, *, house_exact: bool | None = None
 ) -> tuple[list[str], bool]:
     """What `drawing_changes` says at one count: the goals it names a lost strong view's
-    replacement worse on, and whether it marks the count's runs as not deferred."""
+    replacement worse on, and whether it marks the count's runs as owed in this pull
+    request."""
     record = {"states": [later]}
     if house_exact is not None:
         record["entries"] = [{"n": later["n"], "house_exact": house_exact}]
@@ -1180,8 +1233,8 @@ def _losses(
     _picture, _semicolon, goals = line.partition(f"; {defaults.LOST} ")
     if not goals:
         return [], False
-    undeferred = goals.endswith(f": {defaults.UNDEFERRED}")
-    return goals.removesuffix(f": {defaults.UNDEFERRED}").split(", "), undeferred
+    owed = goals.endswith(f": {defaults.RUNS_OWED}")
+    return goals.removesuffix(f": {defaults.RUNS_OWED}").split(", "), owed
 
 
 EVAND, AXIS = "evand-regularize", "regularize_axis_components/2"
@@ -1280,13 +1333,13 @@ def test_a_lost_strong_view_is_marked_with_every_goal_its_replacement_is_worse_o
     draws it wherever it improves on the new house. Whatever drew the replacement, the
     goals the improvement rule finds it worse than the lost view on are named, and the
     count is marked where it still reads pending (review E2)."""
-    named, undeferred = _losses(earlier, later, house_exact=house_exact)
+    named, owed = _losses(earlier, later, house_exact=house_exact)
     assert named == goals
-    assert undeferred == (bool(goals) and later["state"] == defaults.PENDING)
+    assert owed == (bool(goals) and later["state"] == defaults.PENDING)
 
 
 @pytest.mark.parametrize(
-    ("state", "undeferred"),
+    ("state", "owed"),
     [
         (defaults.PENDING, True),
         (defaults.DECIDED, False),
@@ -1294,18 +1347,18 @@ def test_a_lost_strong_view_is_marked_with_every_goal_its_replacement_is_worse_o
         (defaults.EXEMPT, False),
     ],
 )
-def test_only_a_count_still_pending_is_marked_undeferred(
+def test_only_a_count_still_pending_is_marked_with_its_runs_owed(
     state: str,
-    undeferred: bool,  # noqa: FBT001
+    owed: bool,  # noqa: FBT001
 ) -> None:
     """Review E2 of #641: at #657, 146 and 156 read `regularized` and 176 reads
     `decided-no-better`, so their runs have run, yet each line asked for the owner's word.
     The goals are named whatever the count's state now; only a count still pending is
-    marked, its runs not deferred."""
+    marked, its runs owed in this pull request."""
     later = {**_row(302, defaults.VIEW, AXIS, "17.4", AXIS_302), "state": state}
     named, marked = _losses(_row(302, defaults.VIEW, EVAND, "17.5", LOST_302), later)
     assert named == ALL_SEVEN
-    assert marked is undeferred
+    assert marked is owed
 
 
 def test_the_summary_counts_pending_and_settled_losses_apart(
@@ -1331,8 +1384,298 @@ def test_the_summary_counts_pending_and_settled_losses_apart(
         paths.append(path)
     assert defaults.compare(paths[0], record=paths[1]) == 0
     lines = capsys.readouterr().out.splitlines()
-    assert [line.endswith(defaults.UNDEFERRED) for line in lines[:3]] == [False, True, True]
+    assert [line.endswith(defaults.RUNS_OWED) for line in lines[:3]] == [False, True, True]
     assert lines[-1].endswith(
-        f"where {defaults.STRONG_VIEW_LOST}: 2 still pending, whose runs are not deferred, "
-        "and 1 in another state"
+        f"where {defaults.STRONG_VIEW_LOST}: 2 still pending, whose runs are owed in this "
+        "pull request, and 1 in another state"
     )
+
+
+def test_a_deferral_is_a_correction_held_to_the_base_record() -> None:
+    """Reviews A5, B1, B2 and C3 of #660. The check that a re-housed count is never deferred
+    read the day a pass gave itself and covered register adoptions only (A5, B1); it then
+    failed the deferral the runbook allows a corrected witness (B2), and passed a house
+    move declared as one (C3). Each entry is a correction now, held to the base branch's
+    record: the witness it names as replaced is the base's, and the record's keeps that
+    source and exact side and is another witness only."""
+    record = _record()
+    rows = {row["n"]: row for row in record["states"]}
+    assert defaults.deferral_problems(rows, defaults.PENDING_ALLOWED) == []
+    n = 68
+    before = rows[n]["witness"]
+    allowed = {n: "think-aaaa: a deferral"}
+    base = _base(rows)
+
+    # B1: a deferral that names no correction fails, whatever day its pass gives.
+    (problem,) = defaults.deferral_problems(rows, allowed, base=base)
+    assert problem.startswith(f"n={n}: PENDING_ALLOWED defers its runs, but CORRECTED names no")
+
+    # B2: a witness corrected at its house's source and exact side, at a new revision,
+    # may wait once its entry names the witness it replaced.
+    newer = {**rows, n: {**rows[n], "witness": {**before, "revision": "a-newer-revision"}}}
+    fix = {n: _replaced(before)}
+    assert defaults.deferral_problems(newer, allowed, corrected=fix, base=base) == []
+    assert defaults.deferral_problems(rows, {}, corrected=fix) == [
+        f"n={n}: CORRECTED names it, but PENDING_ALLOWED does not; take it off"
+    ]
+
+    # C3: the reviewer's three house moves, each declared as a correction, fail, whether
+    # the entry names the witness the base holds or the one the change brought.
+    def moved(m: int, **change: str) -> dict:
+        return {**rows, m: {**rows[m], "witness": {**rows[m]["witness"], **change}}}
+
+    kingbird = next(
+        m
+        for m, row in sorted(rows.items())
+        if row["witness"]["source"] == "Kingbird derived numerical facts"
+        and row["witness"]["revision"] is None
+    )
+    moves = {
+        "re-housed to a smaller side from a new source": (
+            n,
+            moved(
+                n,
+                source="[PingYou PR 574 certificates 2026-10-13]",
+                side="87987952372182838/10000000000000000",
+                revision="4c319c2",
+            ),
+        ),
+        "re-solved from the same source to another side": (
+            n,
+            moved(n, side="1/2", revision="new-revision"),
+        ),
+        "a Kingbird catalogue intake at a smaller side": (
+            kingbird,
+            moved(kingbird, side="1/3"),
+        ),
+    }
+    for case, (m, after) in moves.items():
+        changed = _base(rows, frozenset({m}))
+        for declared in (_replaced(rows[m]["witness"]), _replaced(after[m]["witness"])):
+            found = defaults.deferral_problems(
+                after, {m: "think-aaaa: a deferral"}, corrected={m: declared}, base=changed
+            )
+            assert len(found) == 1, (case, declared)
+            assert found[0].startswith(f"n={m}: CORRECTED says the correction replaced"), case
+
+    # A genuine fix at a source that pins no revision, as Kingbird's catalogue: the
+    # witness names itself as before, and its file changed.
+    witness = rows[kingbird]["witness"]
+    declared = {kingbird: _replaced(witness)}
+    entry = {kingbird: "think-aaaa: the catalogue's corrected witness"}
+    altered = _base(rows, frozenset({kingbird}))
+    assert defaults.deferral_problems(rows, entry, corrected=declared, base=altered) == []
+    (problem,) = defaults.deferral_problems(rows, entry, corrected=declared, base=base)
+    assert "the record's is that witness: there is no corrected witness to defer" in problem
+
+    # Once the correction has merged, the base itself defers the count at its witness.
+    deferred_row = {
+        **rows[kingbird],
+        "state": defaults.PENDING,
+        "why": (
+            f"no strong generator has decided this witness; allowed pending: {entry[kingbird]}"
+        ),
+    }
+    merged = _base({**rows, kingbird: deferred_row})
+    pending = {**rows, kingbird: deferred_row}
+    assert defaults.deferral_problems(pending, entry, corrected=declared, base=merged) == []
+
+    # D1: a pinned correction merged at 68, its runs deferred; a later change that only
+    # rewrites the corrected witness's file, or its path, leaves the entry standing, and
+    # a move after it does not.
+    corrected = {**before, "revision": "a-newer-revision"}
+    deferred = {
+        **rows[n],
+        "witness": corrected,
+        "state": defaults.PENDING,
+        "why": f"no strong generator has decided this witness; allowed pending: {allowed[n]}",
+    }
+    after_fix = {**rows, n: deferred}
+    standing = {n: _replaced(before)}
+    for changed in (frozenset(), frozenset({n})):
+        base_after = _base(after_fix, changed)
+        assert (
+            defaults.deferral_problems(after_fix, allowed, corrected=standing, base=base_after)
+            == []
+        ), changed
+        repathed = {
+            **after_fix,
+            n: {**deferred, "witness": {**corrected, "path": "x/n-068.json"}},
+        }
+        assert (
+            defaults.deferral_problems(repathed, allowed, corrected=standing, base=base_after)
+            == []
+        ), changed
+    moved_since = {**after_fix, n: {**deferred, "witness": {**corrected, "side": "1/2"}}}
+    (problem,) = defaults.deferral_problems(
+        moved_since,
+        allowed,
+        corrected={n: _replaced(moved_since[n]["witness"])},
+        base=_base(after_fix),
+    )
+    assert problem.startswith(f"n={n}: origin/main's record defers it at the witness from")
+    assert "the house has moved since" in problem
+
+    # D1: at a source that pins a revision, a changed file alone is no correction: the
+    # entry names the record's own witness, as it would with no base.
+    (problem,) = defaults.deferral_problems(
+        rows, allowed, corrected={n: _replaced(before)}, base=_base(rows, frozenset({n}))
+    )
+    assert "there is no corrected witness to defer" in problem
+
+    # With no base the entry is checked as declared: it may not name the record's own
+    # witness where the source pins a revision.
+    (problem,) = defaults.deferral_problems(rows, allowed, corrected=fix)
+    assert "there is no corrected witness to defer" in problem
+
+
+def test_the_state_gate_holds_each_correction_to_its_base(tmp_path: Path) -> None:
+    """The records tier's state gate runs the base-held check (`--check-state --base-ref`),
+    so a refactor that unwires it fails here, as review B7 of #660 found the bead tree's
+    gate untested: a house move declared as a correction fails `--check-state`."""
+    record = _record()
+    rows = {row["n"]: dict(row) for row in record["states"]}
+    n = 68
+    before = rows[n]["witness"]
+    for row in record["states"]:
+        if row["n"] == n:
+            row["witness"] = {**before, "source": "[new]", "side": "1/2"}
+    allowed = {**defaults.PENDING_ALLOWED, n: "think-aaaa: a correction"}
+    corrected = {n: _replaced(before)}
+    problems, _listed = defaults.state_problems(
+        _write(tmp_path, record),
+        allowed=allowed,
+        corrected=corrected,
+        base=_base(rows, frozenset({n})),
+    )
+    assert any(problem.startswith(f"n={n}: CORRECTED says") for problem in problems)
+    assert defaults.main(["--check-state", "--base-ref", "HEAD"]) == 0
+    with pytest.raises(SystemExit):
+        defaults.main(["--check", "--base-ref", "HEAD"])
+
+
+def test_the_records_tier_passes_the_base_and_requires_it_held(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Review D4 of #660: without `--base-ref` the gate passes, checking each entry only as
+    declared, and the step required the pass line alone, so a step that stopped passing
+    the base stayed green. It passes `origin/main`, or `HEAD^1` on main itself, and
+    requires the line that says the base was held to."""
+    import os  # noqa: PLC0415
+
+    from sqpack.cli import validate  # noqa: PLC0415
+
+    observed: list[tuple[str, ...]] = []
+    held = f"{defaults.HELD_TO_BASE} origin/main\nregularization state check passed: ..."
+
+    def capture(_context: validate.Context, module: str, *given: str) -> str:
+        observed.append((module, *given))
+        return output
+
+    heads = {"HEAD": "aaaa\n", "origin/main": "bbbb\n"}
+    monkeypatch.setattr(validate, "_module", capture)
+    monkeypatch.setattr(validate, "_git", lambda *args: heads[args[-1]])
+    context = validate.Context(
+        deep=False, strict=False, jobs=1, inner_jobs=1, environment=os.environ.copy()
+    )
+    step = validate._regularization_state  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+    output = held
+    assert step(context) == held
+    assert observed == [
+        ("devtools.default_drawings", "--check-state", "--base-ref", "origin/main")
+    ]
+    heads["origin/main"] = heads["HEAD"]
+    step(context)
+    assert observed[-1][-1] == "HEAD^1"
+    output = "regularization state check passed: ...\nCORRECTED is checked as declared"
+    with pytest.raises(validate.StepFailureError, match="CORRECTED is held to the record"):
+        step(context)
+
+
+def test_the_base_is_read_only_where_a_count_is_deferred(
+    monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """Review D5 of #660: the gate read the base before anything else, so a clone without
+    the merge base failed with nothing deferred. Now it reads the base only where the list
+    names a count, and says so either way."""
+
+    def unread(ref: str) -> defaults.Base:
+        raise AssertionError(f"read {ref}")
+
+    monkeypatch.setattr(defaults, "base_record", unread)
+    monkeypatch.setattr(defaults, "PENDING_ALLOWED", {})
+    monkeypatch.setattr(defaults, "CORRECTED", {})
+    assert defaults.check_state("origin/main") == 0
+    assert (
+        f"{defaults.HELD_TO_BASE} origin/main; nothing is deferred" in capsys.readouterr().out
+    )
+    monkeypatch.setattr(defaults, "PENDING_ALLOWED", {68: "think-aaaa: a correction"})
+    with pytest.raises(AssertionError, match="read origin/main"):
+        defaults.check_state("origin/main")
+
+
+def _repository(root: Path) -> None:
+    """A repository with main, a branch off its first commit that alters one witness, and
+    main's second commit, which the branch has not merged."""
+    import subprocess  # noqa: PLC0415
+
+    def git(*args: str) -> None:
+        subprocess.run(["git", "-C", str(root), *args], check=True, capture_output=True)
+
+    def write(path: str, text: str) -> None:
+        (root / path).parent.mkdir(parents=True, exist_ok=True)
+        (root / path).write_text(text, encoding="utf-8")
+
+    def record(side: str) -> str:
+        return json.dumps({"states": [{"n": 1, "witness": {"side": side}}, {"n": 2}]})
+
+    git("init", "-q", "-b", "main")
+    git("config", "user.email", "test@example.com")
+    git("config", "user.name", "test")
+    write(defaults.RECORD_PATH, record("1"))
+    write(f"{defaults.WITNESSES_PATH}/n-001.yaml", "side: 1\n")
+    write(f"{defaults.WITNESSES_PATH}/n-002.yaml", "side: 2\n")
+    git("add", "-A")
+    git("commit", "-qm", "base")
+    git("checkout", "-qb", "work")
+    write(f"{defaults.WITNESSES_PATH}/n-002.yaml", "side: 2\nnote: a corrected file\n")
+    git("commit", "-qam", "work")
+    git("checkout", "-q", "main")
+    write(defaults.RECORD_PATH, record("1/2"))
+    git("commit", "-qam", "main moves on")
+    git("checkout", "-q", "work")
+
+
+def test_the_base_record_is_read_from_the_merge_base(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Review D4 of #660: `base_record`'s Git reads were untested. It reads the record at
+    the merge base, not the base's tip, finds the witness file the change altered, names
+    a missing ref, and tells a shallow clone how to get its merge base (D5)."""
+    import subprocess  # noqa: PLC0415
+
+    root = tmp_path / "repository"
+    root.mkdir()
+    _repository(root)
+    monkeypatch.setattr(defaults, "REPO", root)
+    base = defaults.base_record("main")
+    assert base.ref == "main"
+    assert base.rows[1]["witness"] == {"side": "1"}
+    assert base.changed == frozenset({2})
+    with pytest.raises(SystemExit, match="--base-ref no-such-ref names no commit"):
+        defaults.base_record("no-such-ref")
+
+    shallow = tmp_path / "shallow"
+    subprocess.run(
+        ["git", "clone", "-q", "--depth", "1", "--branch", "work", root.as_uri(), str(shallow)],
+        check=True,
+        capture_output=True,
+    )
+    subprocess.run(
+        ["git", "-C", str(shallow), "fetch", "-q", "--depth", "1", "origin", "main:main"],
+        check=True,
+        capture_output=True,
+    )
+    monkeypatch.setattr(defaults, "REPO", shallow)
+    with pytest.raises(SystemExit, match="git fetch --unshallow"):
+        defaults.base_record("main")

@@ -49,6 +49,9 @@ better on none, is skipped.
 `devtools.regularize_select` applies exactly these rules.
 A view at row 7 or 8 goes to the owner, and a view below $U$ is registered before it is
 drawn; both are described below.
+A view below $U$ is a smaller packing, so once validated it is the count’s house, by the
+import runbook’s
+[house rule](../../../packing/campaign/result-import.md#the-house-rule).
 
 ## The Steps
 
@@ -315,7 +318,12 @@ owner admitted on 16 October 2026; `--check-atlas` names which lapsed.
 
 ## Register Candidates
 
-A view whose side is below $U$ is registered as a result (row 3), however it was made.
+A view whose side is below $U$ is a smaller packing than the house, and it is registered
+as a result (row 3), however it was made.
+It is taken through the import runbook’s stages like any report, crediting the packing’s
+finder and the regularizer, and once validated it is adopted as the house in the pass
+that validates it, by the
+[house rule](../../../packing/campaign/result-import.md#the-house-rule).
 Its bound is new only where no earlier certificate already stated that side exactly, as
 one had at the 33 counts where the record carried Evan Daniel’s side rounded up, and no
 larger count’s verified upper bound is at or below it; otherwise the result says which
@@ -382,21 +390,30 @@ To redraw the count:
    Retain each run’s evidence in the same pull request, as for any settlement (above):
    its reports with its `run.json` or `receipt.json` under
    `packing/cases/regularized_drawings/<bead>-<date>/<run directory>/`, or, for a run
-   only the index records, its block, copied by `default_drawings --retain-runs`. Where
-   the runs must wait, allow the count in `PENDING_ALLOWED` with the open bead that owns
-   them, in the same pull request as the adoption, so the deferral is reviewed.
-   Then run `default_drawings --update` again, since the record copies the entry into
-   the count’s reason, and step 5, since `--update-atlas` redrew the axis views.
-   List each deferred count’s drawing before and after in the pull request with
+   only the index records, its block, copied by `default_drawings --retain-runs`. A
+   count an adoption re-houses is never deferred to `default_drawings.PENDING_ALLOWED`:
+   its runs are owed in the adoption’s pull request, by the import runbook’s
+   [house rule](../../../packing/campaign/result-import.md#the-house-rule), and an
+   adoption whose runs do not fit under the pass’s compute cap is staged with them in
+   `select_houses.PENDING_ADOPTION`. List each re-housed count’s drawing before and
+   after in the pull request with
    `python -m devtools.default_drawings --compare <(git show origin/$BASE:packing/atlas/known-best/default-drawings.json)`,
    which reads the record of its base branch, `BASE` being `main` unless the pull
    request is stacked. Where a strong view gives way to a drawing worse than it on a goal
-   of the improvement rule, whatever drew it, its runs are not deferred: they run in the
-   adoption’s pull request, since the owner’s rule is to adopt the smallest packing and
-   then regularize it. The axis tool’s view of the new witness is drawn wherever it
-   improves on the new house, which says nothing of the view the count lost (review D1
-   of #641). Nothing but review limits how many counts join the list; the gate prints
-   its size.
+   of the improvement rule, whatever drew it, the table names those goals, and marks
+   each such count that still reads pending, “its runs are owed in this pull request”.
+   The axis tool’s view of the new witness is drawn wherever it improves on the new
+   house, which says nothing of the view the count lost (review D1 of #641). Where a
+   corrected witness’s runs must wait, allow each count the table does not mark in
+   `PENDING_ALLOWED` with the open bead that owns its runs, and name the witness the
+   correction replaced in `default_drawings.CORRECTED` (its source, path, revision and
+   exact side, as the base branch’s record names them), in the pull request that
+   corrects the witness, so the deferral is reviewed.
+   `--check-state --base-ref origin/main` holds the entry to the base record and fails
+   it wherever the house moved, whatever import moved it.
+   Then run `default_drawings --update` again, since the record copies the entry into
+   the count’s reason, and step 5, since `--update-atlas` redrew the axis views.
+   Nothing but review limits how many counts join the list; the gate prints its size.
 
 Until 15 October 2026 the lapse was only printed, and the adoptions of #553, #598 and
 #614 left twenty counts drawn without a strong generator’s decision on their witness: at

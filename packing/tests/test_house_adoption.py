@@ -11,7 +11,7 @@ import re
 from decimal import Decimal
 from fractions import Fraction
 from pathlib import Path
-from typing import Any
+from typing import Any, cast
 
 import pytest
 import yaml
@@ -21,6 +21,7 @@ from devtools import apply_closed_form as closed_form
 from devtools import default_drawings as defaults
 from devtools import select_houses as select
 from devtools import upper_bound_houses as houses
+from sqpack.field import FieldPreconditionError
 from sqpack.yamlio import safe_load
 
 
@@ -42,42 +43,46 @@ def latest() -> dict[int, str]:
 
 
 @pytest.fixture(scope="module")
-def replayed(
-    selections: dict[int, select.Selection], latest: dict[int, str]
-) -> list[adopt.Move]:
-    """Each count's last pass planned again from the record as that pass read it; a held
-    result is no candidate, so the pass plans the house it adopted."""
-    cases = {
-        n: select.parse_case(n, latest[n]) if n in latest else selection.case
-        for n, selection in selections.items()
-    }
-    return adopt.plan(select.select(cases=cases), texts=latest)
+def recorded() -> dict[int, select.Selection]:
+    """The selection each record was written under (`adopt_houses.recorded_days`)."""
+    return select.select(recorded=adopt.recorded_days())
 
 
-def test_no_confirmed_reviewed_side_is_left_below_its_case(
+@pytest.fixture(scope="module")
+def replayed() -> list[adopt.Move]:
+    """Each count's last pass planned again from the record as that pass read it, under the
+    rule that pass ran under, so it plans the house it adopted."""
+    return adopt.replay_plan()
+
+
+def test_every_smaller_validated_packing_is_the_house_or_staged(
     selections: dict[int, select.Selection],
 ) -> None:
-    """After the adoption the derivation moves nothing: every case is at its house, and
-    what is below it is held for the owner."""
-    assert [n for n, selection in selections.items() if selection.moves] == []
+    """The house rule: wherever a validated packing is below its case, the count is staged
+    for the bead that adopts it, and nowhere else does the derivation move anything; a
+    staged count the selection no longer moves fails (`select_houses.check`)."""
+    moving = {n: s.house.result for n, s in selections.items() if s.house is not None}
+    assert moving == {n: pending.house for n, pending in select.PENDING_ADOPTION.items()}
+    assert select.check(selections) == []
     assert all(
-        candidate.result in select.HELD
-        for selection in selections.values()
-        for candidate in selection.held
+        not selection.held and not selection.algebraic for selection in selections.values()
     )
 
 
-def test_every_adopted_case_holds_the_derived_smallest_side(
-    selections: dict[int, select.Selection],
+def test_every_adopted_case_holds_the_house_its_record_was_written_for(
+    selections: dict[int, select.Selection], recorded: dict[int, select.Selection]
 ) -> None:
-    """Every adopted count holds its derived house, the smallest candidate no hold leaves
-    out; a held certificate below it is named in the selection."""
+    """Every adopted count holds the house its last pass derived; where the house rule
+    moves it since, the move is staged, and the record keeps that pass's house, the
+    smallest candidate the rule of 15 October left in, until its adoption."""
     for n, result in houses.ADOPTED.items():
-        selection = selections[n]
-        best = next(c for c in selection.candidates if c.result not in select.HELD)
+        selection = recorded[n]
+        best = next(c for c in selection.candidates if c.result not in select.LIFTED)
         assert best.result == result
         assert selection.case.verified == best.side == houses.side(n)
         assert all(c.side < best.side for c in selection.held)
+        if n not in select.PENDING_ADOPTION:
+            assert selections[n].candidates[0].result == result
 
 
 #: The counts where a held certificate (T-174's) was the smallest and the next candidate
@@ -105,22 +110,29 @@ MOVED_AGAIN = {
 }
 
 
-def test_a_hold_skips_only_the_held_entry(
-    selections: dict[int, select.Selection], latest: dict[int, str]
+def test_the_records_of_the_lifted_hold_keep_their_next_candidates_until_adopted(
+    selections: dict[int, select.Selection],
+    recorded: dict[int, select.Selection],
+    latest: dict[int, str],
 ) -> None:
-    """Where T-174 is smallest, the house is the next confirmed, reviewed candidate, adopted
-    on 15 October 2026; every count it would take is named as held."""
+    """Where T-174 is smallest, the 15 October pass adopted the next confirmed, reviewed
+    candidate while the owner held T-174, and the records still say so; under the house
+    rule each of those counts moves to T-174, staged for its adoption."""
     for n, (result, before) in NEXT_CANDIDATES.items():
         assert houses.ADOPTED[n] == result
         assert houses.adopted_on(n) == "2026-10-15"
-        assert [c.result for c in selections[n].held] == ["T-174"]
+        assert [c.result for c in recorded[n].held] == ["T-174"]
+        house = selections[n].house
+        assert house is not None
+        assert house.result == select.PENDING_ADOPTION[n].house == "T-174"
         packing = _front(latest[n])
         assert Fraction(packing["verified_upper_bound"]["exact_form"]) > houses.side(n)
         if before is not None:
             assert adopt._holder(packing).endswith(f"({before})")  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
-    held_counts = {n for n, s in selections.items() if s.held}
+    held_counts = {n for n, s in recorded.items() if s.held}
     assert set(NEXT_CANDIDATES) < held_counts
     assert len(held_counts) == 50
+    assert held_counts | {70, 153, 207} == set(select.PENDING_ADOPTION)
 
 
 def test_a_house_below_the_held_entry_leaves_the_hold_deciding_nothing(
@@ -227,30 +239,39 @@ def test_a_case_keeps_its_own_house_where_nothing_is_below(
     assert select.select([unreviewed], evidence, cases={7: lower}) == {}
 
 
-def test_a_candidate_below_an_algebraic_ceilings_display_is_left_to_a_human(
+def test_a_candidate_is_ordered_against_a_closed_form_ceiling_exactly(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    """A display rounded up at sixteen places cannot order a side just below it."""
-    assert not select.load_case(51).exact  # (16 + 5 sqrt(2)) / 3
-    assert select.load_case(70).exact
+    """A closed-form ceiling is held as the root of its minimal polynomial, so a side just
+    either side of it is ordered exactly, never left to a person; only a form no reader
+    holds is unordered, which `--check` fails on as a defect of the code."""
+    ceiling = select.load_case(51).verified  # (16 + 5 sqrt(2)) / 3
+    assert isinstance(ceiling, select.exact_sides.Algebraic)
+    assert select.load_case(51).exact
+    assert select.ceiling(ceiling) == "7.6903559372884918"
     entry, evidence = _confirmed_entry()
+    case = select.Case(n=7, verified=ceiling, reported=Fraction(7), source_key="", evidence=())
     display = Fraction(Decimal("7.6903559372884918"))
-    algebraic = select.Case(
-        n=7, verified=display, reported=display, source_key="", evidence=(), exact=False
-    )
-    within = display - Fraction(1, 10**17)
-    monkeypatch.setitem(select.reports.HOUSES, "[test]", lambda _n: within)
-    monkeypatch.setattr(select, "_side", lambda _key, _n: within)
-    held = select.select([entry], evidence, cases={7: algebraic})[7]
-    assert held.undecided
-    assert held.house is None
-    rational = dataclasses.replace(algebraic, exact=True)
-    assert select.select([entry], evidence, cases={7: rational})[7].moves
-    monkeypatch.setattr(select, "_side", lambda _key, _n: display)
-    above = select.select([entry], evidence, cases={7: algebraic})[7]
-    assert not above.undecided
-    assert not above.moves
-    assert "undecided" in select.table({7: held}, everything=False)
+    # The form is 7.69035593728849174800..., which its print rounds up at sixteen places.
+    below, above = display - Fraction(6, 10**17), display - Fraction(4, 10**17)
+    sides = {"just below": below, "just above": above}
+    assert sides["just below"] < ceiling < sides["just above"]
+    side = sides["just below"]
+    monkeypatch.setitem(select.reports.HOUSES, "[test]", lambda _n: side)
+    monkeypatch.setattr(select, "_side", lambda _key, _n: side)
+    moved = select.select([entry], evidence, cases={7: case})[7]
+    assert moved.house is not None
+    assert Fraction(0) < moved.margin < Fraction(5, 10**17)
+    side = sides["just above"]
+    assert not select.select([entry], evidence, cases={7: case})[7].moves
+    unread = dataclasses.replace(case, verified=display + Fraction(1, 10**16), unread="why")
+    side = sides["just below"]
+    unordered = select.select([entry], evidence, cases={7: unread})[7]
+    assert unordered.unordered == "why"
+    assert not unordered.moves
+    assert "unordered: why" in select.table({7: unordered}, everything=False)
+    monkeypatch.setattr(select, "PENDING_ADOPTION", {})
+    assert select.check({7: unordered})[0].startswith("FAIL: a candidate is below the print")
 
 
 def test_an_entry_over_two_sources_reads_each_count_where_its_replay_decided_it(
@@ -355,40 +376,36 @@ def test_the_two_couzo_entries_from_one_packet_each_keep_their_house_source() ->
     )
 
 
-def test_an_algebraic_count_is_left_out_of_the_selection_and_named(
-    monkeypatch: pytest.MonkeyPatch,
+def test_an_algebraic_certificate_is_a_candidate_ordered_exactly(
+    recorded: dict[int, select.Selection],
 ) -> None:
-    """PR #574's sides at 70, 153, 207 and 302 are roots of integer polynomials, decided
-    on one route; no house reader rebuilds them, and the selection leaves them out
-    rather than failing to read them."""
+    """PR #574's sides at 70, 153, 207 and 302 are roots of integer polynomials, decided on
+    one exact route, which is what stage 4 asks. Each is a candidate, held by its minimal
+    polynomial and ordered exactly: below its case at 70, 153 and 207, where it is the
+    house, staged, and above it at 302. The records of 15 October left them out (RP-3)."""
     key = "[PingYou PR 574 certificates 2026-10-13]"
     counts = select.algebraic_counts(key)
     assert {70, 153, 207, 302} <= counts
     assert not {68, 105, 211, 304} & counts
     assert select.algebraic_counts("[Couzo certificates 2026-10-13]") == frozenset()
-    entry, evidence = _confirmed_entry()
-    entry = {
-        **entry,
-        "scope": {"n_values": [68, 70]},
-        "attribution": {"source_keys": [key], "published": "2026-10-13"},
-    }
-
-    def side(_key: str, n: int) -> Fraction:
-        assert n == 68, "an algebraic count was read"
-        return Fraction(9)
-
-    monkeypatch.setattr(select, "_side", side)
-    algebraic: list[tuple[str, int]] = []
-    found = select.candidates([entry], evidence, algebraic=algebraic)
-    assert sorted(found) == [68]
-    assert algebraic == [("T-900", 70)]
+    found = select.candidates(select.load_results(), select.load_evidence())
+    for n, degree in ((70, 5), (153, 7), (207, 5), (302, 3)):
+        (t174,) = [c for c in found[n] if c.result == "T-174"]
+        assert t174.algebraic
+        assert isinstance(t174.side, select.exact_sides.Algebraic)
+        assert t174.side.degree == degree
+        below = t174.side < select.load_case(n).verified
+        assert below == (n != 302), n
+        assert recorded[n].algebraic == (("T-174", key),)
+        assert all(not c.algebraic for c in recorded[n].candidates)
 
 
-def test_a_held_result_keeps_its_counts_at_their_case_and_says_so(
+def test_a_staged_count_passes_the_check_and_a_stale_or_unstaged_one_fails(
     monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
 ) -> None:
-    """Where a held result is best, the case stays though another candidate is below it,
-    and `--check` reports the count as held rather than failing on it."""
+    """A validated smaller packing is the house, or staged for the bead that adopts it:
+    `--check` passes a staged count, fails an unstaged one, one staged for another house,
+    and a staged count where nothing moves."""
     entry, evidence = _confirmed_entry()
     other = {
         **entry,
@@ -403,49 +420,77 @@ def test_a_held_result_keeps_its_counts_at_their_case_and_says_so(
     case = select.Case(
         n=7, verified=Fraction(4), reported=Fraction(4), source_key="", evidence=()
     )
-    why = select.Hold(whose="T-900's", why="why", since="2026-10-15")
-    held = select.select([entry, other], evidence, cases={7: case}, held={"T-900": why})[7]
-    # The hold skips T-900 only: T-901, the next candidate, is below the case and takes it.
-    assert [c.result for c in held.held] == ["T-900"]
-    assert held.house is not None
-    assert held.house.result == "T-901"
-    assert [c.result for c in held.candidates] == ["T-900", "T-901"]
-    assert select.row(held)["held"] == ["T-900"]
-    assert select.row(held)["undecided"] is False
-    # Where nothing else is below the case, the case stays and the count is held.
-    above = dataclasses.replace(case, verified=Fraction(7, 2), reported=Fraction(7, 2))
-    waiting = select.select([entry, other], evidence, cases={7: above}, held={"T-900": why})[7]
-    assert waiting.house is None
-    assert not waiting.moves
-    assert [c.result for c in waiting.held] == ["T-900"]
-    assert "(held)" in select.table({7: waiting}, everything=False)
-    free = select.select([entry, other], evidence, cases={7: case}, held={})[7]
-    assert free.house is not None
-    assert free.house.result == "T-900"
-    assert not free.held
-    monkeypatch.setattr(select, "select", lambda **_arguments: {7: waiting})
+    selected = select.select([entry, other], evidence, cases={7: case})
+    house = selected[7].house
+    assert house is not None
+    assert house.result == "T-900"
+    assert [c.result for c in selected[7].candidates] == ["T-900", "T-901"]
+    staged = {7: select.Pending(house="T-900", bead="think-test", why=select.NEXT_PULL_REQUEST)}
+    monkeypatch.setattr(select, "PENDING_ADOPTION", staged)
+    assert select.check(selected) == []
+    assert select.row(selected[7])["staged"] == "think-test"
+    assert "staged (next pull request): think-test" in select.table(selected, everything=False)
+    assert select.deferrals() == [("select_houses.PENDING_ADOPTION n=7 (T-900)", "think-test")]
+    real = select.select
+    monkeypatch.setattr(select, "select", lambda **_arguments: selected)
     monkeypatch.setattr(select, "unread_pending", lambda _unread: {})
     assert select.main(["--check"]) == 0
-    assert "held for the owner (T-900): n = [7]" in capsys.readouterr().out
+    shown = capsys.readouterr().out
+    assert "staged adoption, T-900 under think-test (next pull request): n = [7]" in shown
+    monkeypatch.setattr(
+        select, "PENDING_ADOPTION", {7: dataclasses.replace(staged[7], house="T-901")}
+    )
+    assert "the house is T-900; stage that, or adopt it" in select.check(selected)[0]
+    monkeypatch.setattr(select, "PENDING_ADOPTION", {})
+    assert select.check(selected)[0].startswith("FAIL: a validated smaller packing")
+    assert select.main(["--check"]) == 1
+    above = dataclasses.replace(case, verified=Fraction(3), reported=Fraction(3))
+    still = real([entry, other], evidence, cases={7: above})
+    monkeypatch.setattr(select, "PENDING_ADOPTION", staged)
+    assert "take it off PENDING_ADOPTION" in select.check(still)[0]
+    # The records as written: before the house rule a lifted hold kept T-900 out, and the
+    # next candidate below the case took the house; the staged house is left out after.
+    monkeypatch.setitem(
+        select.LIFTED, "T-900", select.Hold(whose="T-900's", why="w", since="d")
+    )
+    old = real([entry, other], evidence, cases={7: case}, recorded={7: "2026-10-15"})
+    assert old[7].house is not None
+    assert old[7].house.result == "T-901"
+    assert [c.result for c in old[7].held] == ["T-900"]
+    new = real([entry, other], evidence, cases={7: case}, recorded={7: "2026-10-17"})
+    assert new[7].house is not None
+    assert new[7].house.result == "T-901"
+    assert new[7].held == ()
 
 
-def test_the_held_results_are_named_with_why() -> None:
-    assert set(select.HELD) == {"T-174"}
-    for hold in select.HELD.values():
+def test_no_result_is_held_and_the_lifted_hold_keeps_its_words() -> None:
+    """The house rule holds no result: `HELD` is gone, the hold it lifted keeps only the
+    words of the records written under it, and each staged count names an open bead's id."""
+    assert not hasattr(select, "HELD")
+    assert set(select.LIFTED) == {"T-174"}
+    for hold in select.LIFTED.values():
         assert hold.why.strip()
-        assert hold.reason.startswith(f"{hold.whose} houses are held for the owner: ")
+        assert hold.reason.startswith(f"{hold.whose} houses were held for the owner, since ")
         assert adopt.words(hold.since)
+        assert hold.until == select.RULE_SET_ON
+    assert all(
+        re.fullmatch(r"think-[a-z0-9]+", pending.bead)
+        for pending in select.PENDING_ADOPTION.values()
+    )
 
 
 def test_every_record_names_a_smaller_held_or_algebraic_certificate(
-    selections: dict[int, select.Selection],
+    recorded: dict[int, select.Selection],
 ) -> None:
-    """A held certificate below a case is named in its record with why it waits: in the
-    certificate section where a pass houses the count, in a dated note under the title
-    elsewhere; an algebraic one below the house, which the owner decides, in the section
-    (reviews A and B of PR 614, A1, B2 and B7)."""
-    reason = select.HELD["T-174"].reason.replace("'", "’")
-    for n, selection in selections.items():
+    """Under the rule of 15 October, a held certificate below a case was named in its
+    record with why it waited: in the certificate section where a pass houses the count,
+    in a dated note under the title elsewhere; an algebraic one below the house, which
+    that rule left to the owner, in the section (reviews A and B of PR 614, A1, B2 and
+    B7). The records say so until their counts are adopted, and since the house rule they
+    say the waits ended, naming the bead each staged adoption waits under, and never that
+    the owner decides (review A2 of #660)."""
+    reason = select.LIFTED["T-174"].reason.replace("'", "’")
+    for n, selection in recorded.items():
         if not selection.held:
             continue
         text = _flat(select.case_path(n).read_text(encoding="utf-8"))
@@ -454,19 +499,149 @@ def test_every_record_names_a_smaller_held_or_algebraic_certificate(
             "E-pingyou-574-exact-feasibility"
             in _front(select.case_path(n).read_text())["evidence"]
         ), n
+        assert "until the owner decides" not in text, n
+        assert "if the owner adopts" not in text, n
+        assert f"staged under {select.PENDING_ADOPTION[n].bead}," in text, n
         if n in houses.ADOPTED:
             assert adopt.HELD_OPENING not in text, n
         else:
-            assert f"{adopt.HELD_OPENING}15 October 2026.**" in text, n
+            assert f"{adopt.HELD_OPENING}15 October 2026; lifted 16 October 2026.**" in text, n
     assert adopt.held_counts() == sorted(
-        n for n, s in selections.items() if s.held and n not in houses.ADOPTED
+        n for n, s in recorded.items() if s.held and n not in houses.ADOPTED
     )
     for n in (70, 153, 207):
         text = _flat(select.case_path(n).read_text(encoding="utf-8"))
         assert "T-174’s algebraic certificate at this count" in text, n
         assert "RP-3 of the [review of 14 October 2026]" in text, n
+        assert "owner’s decision" not in text.split("algebraic certificate at this count")[1]
+        assert f"staged under {select.WRITER_BEAD}," in text, n
     # At 302 T-174's algebraic side is above the house, and nothing is said of it.
     assert "algebraic certificate at this count" not in select.case_path(302).read_text()
+
+
+def test_sizes_measure_a_staged_witness_as_git_stores_it(
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    """Review C9 of #660: OR-18's stored-size unit and its measured case rested on scratch
+    code, so no adoption could measure its witnesses by command before committing them.
+    `upper_bound_houses sizes` builds each staged count's witness as the module builds a
+    house and counts its blob, the object Git names, as zlib packs it."""
+    import subprocess  # noqa: PLC0415
+    import zlib  # noqa: PLC0415
+
+    data = (houses.WITNESSES / "n-068.yaml").read_bytes()
+    blob = b"blob %d\x00" % len(data) + data
+    named = subprocess.run(
+        ["git", "hash-object", "--stdin"],
+        input=data,
+        capture_output=True,
+        check=True,
+    ).stdout.decode()
+    assert hashlib.sha1(blob).hexdigest() == named.strip()
+    assert houses.stored_size(data) == len(zlib.compress(blob))
+    (row,), skipped = houses.staged_sizes([68])
+    assert skipped == []
+    assert (row.n, row.house) == (68, "T-174")
+    assert 0 < row.stored < row.checkout
+    assert row.now_checkout == len(data)
+    assert row.now_stored == houses.stored_size(data)
+    assert houses.staged_sizes([70]) == (
+        [],
+        ["n=70: T-174's side is algebraic; no writer takes it yet"],
+    )
+    with pytest.raises(houses.HouseError, match="only counts staged"):
+        houses.staged_sizes([5])
+    # Review D3 of #660: history keeps the new blobs whole, the replaced ones staying in it,
+    # so the stored figure is their sum, and the difference is only the tree's.
+    assert houses.print_sizes([68]) == 0
+    (total,) = [line for line in capsys.readouterr().out.splitlines() if "1 witness:" in line]
+    stored = houses.stored_size(data)
+    assert f"{row.stored / 1e6:.2f} MB as Git stores them, which history keeps" in total
+    assert f"the tree's blobs by {(row.stored - stored) / 1e6:.2f} MB" in total
+
+
+#: Words the records wrote while an adoption waited for the owner, and the 15 October
+#: hold's size, which counted a checkout's bytes as Git's (reviews A2, C4 and C7 of #660).
+OWNER_WAITS = (
+    "until the owner decides, and moves",
+    "if the owner adopts",
+    "the owner decides their adoption",
+    "adoption is the owner's decision",
+    "adoption is the owner's (rp-3)",
+    "18.5 mb to git",
+)
+
+
+def test_no_record_leaves_an_adoption_to_the_owner() -> None:
+    """Review C4 of #660: the register's evidence still said the owner decides T-174's
+    algebraic adoption after every case record had stopped saying it, since the A2 tests
+    read case records only. Every record that can carry such words is read here, the case
+    records, the register, its evidence, the coverage and requests records and the
+    citation deferrals; and none counts the hold's 18.5 MB "to Git" (C7)."""
+    paths = [
+        *sorted(select.FRONTIER.glob("n-*.md")),
+        select.RESULTS,
+        select.EVIDENCE,
+        select.FRONTIER / "source-coverage.yaml",
+        select.ROOT / "campaign/result-requests.yaml",
+        select.ROOT / "devtools/certificate-citation-deferrals.yaml",
+    ]
+    for path in paths:
+        words = _flat(path.read_text(encoding="utf-8")).replace("\u2019", "'").lower()
+        for phrase in OWNER_WAITS:
+            assert phrase not in words, (path.name, phrase)
+
+
+def test_a_moved_house_keeps_its_lifted_hold_as_history() -> None:
+    """Review C7 of #660, and the merge of #657, which moved ten counts below T-174 on the
+    day the house rule lifted the hold: a section whose house a later pass moved keeps
+    when the hold held and why, and drops the clause that the case keeps the house, as
+    each writer wrote it. The held sentence of a staged count puts the dates first."""
+    lead = (
+        "T-174 at $1$, `1e-19` below this house, is confirmed here and accepted by the "
+        "[review of 14 October 2026](../../r.md)"
+    )
+    history = f"{lead}. {adopt.lifted_sentence('T-174')}"
+    assert adopt.lifted_sentence("T-174") == (
+        "From 15 October 2026 until the owner’s house rule of 16 October 2026 lifted the "
+        "hold, PR #574’s houses were held for the owner, since their witnesses would add "
+        "about 18.5 MB to a checkout and their custody inputs about 5.8 MB to every "
+        "worker’s snapshot."
+    )
+    written = (
+        (
+            f"{lead}, but PR #574’s houses are held for the owner: their witnesses would add "
+            "about 18.5 MB to Git (OR-18) and their custody inputs about 5.8 MB to every "
+            "worker’s snapshot; the case keeps this house until the owner decides, and moves "
+            "to T-174’s side if the owner adopts them."
+        ),
+        (
+            f"{lead}. PR #574’s houses were held for the owner, since their witnesses would "
+            "add about 18.5 MB to Git (OR-18) and their custody inputs about 5.8 MB to every "
+            "worker’s snapshot, from 15 October 2026 until the owner’s house rule of 16 "
+            "October 2026 lifted the hold: the case keeps this house until T-174’s adoption, "
+            "staged under think-3mry, moves it to T-174’s side."
+        ),
+        (
+            f"{history} The case keeps this house until T-174’s adoption, staged under "
+            "think-3mry, moves it to T-174’s side."
+        ),
+    )
+    for text in written:
+        # The records are wrapped, so a sentence may break at any space.
+        wrapped = text.replace(" until ", "\nuntil ").replace(" the hold", "\nthe hold")
+        assert _flat(adopt.held_history(wrapped)) == history, text[:60]
+    # The ten counts #657 moved below T-174 keep it so, and a staged count waits.
+    for n in (129, 146, 156, 175, 176, 204, 232, 264, 271, 303):
+        text = _flat(select.case_path(n).read_text(encoding="utf-8"))
+        assert _flat(adopt.lifted_sentence("T-174")) in text, n
+        assert "until T-174’s adoption" not in text, n
+        assert n not in select.PENDING_ADOPTION, n
+    text = _flat(select.case_path(68).read_text(encoding="utf-8"))
+    assert (
+        f"{adopt.lifted_sentence('T-174')} The case keeps its house until T-174’s adoption, "
+        "staged under think-3mry, moves it to T-174’s side."
+    ) in text
 
 
 #: The sentence a certificate section ends with, listing what its house was chosen over.
@@ -487,7 +662,7 @@ def _not_selected(text: str) -> set[str]:
 
 
 def test_no_section_lists_its_current_house_or_a_held_certificate_as_not_selected(
-    selections: dict[int, select.Selection],
+    recorded: dict[int, select.Selection],
 ) -> None:
     """A section's not-selected list names what its house was chosen over, so no record
     lists the count's current house there, and none lists a held certificate, which is
@@ -496,7 +671,7 @@ def test_no_section_lists_its_current_house_or_a_held_certificate_as_not_selecte
     it (reviews A10 and B8 of PR 614: the 15 October archive took round 1's branch text
     at nine counts, and their earlier sections named the new house and T-174)."""
     found = []
-    for n, selection in selections.items():
+    for n, selection in recorded.items():
         listed = _not_selected(select.case_path(n).read_text(encoding="utf-8"))
         named = listed & {houses.ADOPTED.get(n), *(c.result for c in selection.held)}
         if named:
@@ -532,13 +707,108 @@ def test_a_held_note_is_written_kept_and_dropped_by_the_held_results() -> None:
     assert adopt.held_note(adopted, text) == text
 
 
+def _register_check() -> tuple[list[str], dict[str, list[int]], dict[str, list[int]]]:
+    """What `--check` fails on beside the selection, on the real register: the sides no
+    reader holds, the unread entries below their cases, and the unread prints that only
+    overlap their ceilings."""
+    unread: list[str] = []
+    unheld: list[str] = []
+    select.candidates(
+        select.load_results(), select.load_evidence(), unread=unread, unheld=unheld
+    )
+    return unheld, select.unread_pending(unread), select.unread_unordered(unread)
+
+
 def test_no_unread_eligible_entry_is_pending_adoption() -> None:
     """An eligible entry with no exact reader is never a candidate, so `--check` reads its
     standing instead: one that states a side below its case would be an adoption the
-    selector cannot see."""
+    selector cannot see. Review C1 of #660: the two other failures `--check` added, a side
+    no reader holds (B3) and an unread print that only overlaps its ceiling (A10), ran on
+    no real register in CI; they are held empty here too."""
+    assert _register_check() == ([], {}, {})
+
+
+def test_every_unread_entry_reaches_the_check() -> None:
+    """Review D6 of #660: the C10 guard holds `unread_pending` to every entry it is given,
+    but an exemption that keeps an entry out of `unread`, in `eligible` or in `candidates`
+    before the entry is listed, never reaches it. The confirmed, reviewed upper bounds
+    whose one source no reader takes are found here without either, and every one is in
+    `unread`, so a skip there fails this."""
+    from devtools import upper_bound_reports as reports  # noqa: PLC0415
+
+    def rank(rung: object) -> int:
+        text = str(rung or "")
+        return int(text[1:]) if len(text) == 2 and text[1:].isdigit() else -1
+
+    expected = set()
+    for entry in select.load_results():
+        reviewed = any(
+            review.get("verdict") == "accepted" and entry["id"] in (review.get("covers") or ())
+            for review in entry.get("reviews") or ()
+        )
+        keys = list((entry.get("attribution") or {}).get("source_keys") or ())
+        if (
+            entry.get("kind") == "upper-bound"
+            and rank(entry.get("verification")) >= 3
+            and rank(entry.get("confirmation")) >= 3
+            and reviewed
+            and len(keys) == 1
+            and keys[0] not in reports.HOUSES
+            and keys[0] not in select.ALGEBRAIC_READERS
+        ):
+            expected.add(str(entry["id"]))
     unread: list[str] = []
     select.candidates(select.load_results(), select.load_evidence(), unread=unread)
-    assert select.unread_pending(unread) == {}
+    assert expected
+    assert expected <= set(unread)
+
+
+def test_a_side_the_register_cannot_hold_turns_the_register_check_red(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Review C1 of #660: forcing T-174's algebraic side at 302 to fail its reader left
+    every test green while `select_houses --check` exited 1. The register check sees it."""
+    real = select.exact_side
+
+    def failing(key: str, n: int) -> select.exact_sides.Side:
+        if n == 302 and n in select.algebraic_counts(key):
+            raise select.exact_sides.ExactSideError("a test: the reader cannot isolate it")
+        return real(key, n)
+
+    monkeypatch.setattr(select, "exact_side", failing)
+    unheld, _pending, _unordered = _register_check()
+    assert unheld == ["T-174 at n = 302: a test: the reader cannot isolate it"]
+
+
+def test_unread_pending_reports_every_improvement_whatever_would_defer_it(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Review C10 of #660: the A6 guard caught #658's exemption because it patched the
+    deferral reader that exemption used, so one built on another reading would pass it.
+    Here every eligible entry states a side below its case, and `unread_pending` reports
+    each one: an exemption of any kind, on any record, drops one and fails this."""
+    from devtools import check_standing as standing  # noqa: PLC0415
+
+    def improving(_record: Any, _records: Any) -> list[standing.Finding]:
+        stated = standing.Stated(Fraction(1), Fraction(0))
+        return [standing.Finding(69, standing.UPPER, stated, standing.EXCEEDS, None)]
+
+    from devtools import check_certificate_citations as citations  # noqa: PLC0415
+
+    monkeypatch.setattr(standing, "improvements", improving)
+    identifiers = [
+        str(entry["id"]) for entry in select.load_results() if select.eligible(entry)
+    ]
+    deferred = {
+        str(result)
+        for deferral in citations.load_deferrals()
+        for result in cast("list[object]", deferral["results"])
+    }
+    # Entries the real deferral file names are among them, as T-193 would be on #658.
+    assert "T-174" in deferred & set(identifiers)
+    assert select.unread_pending(identifiers) == {
+        identifier: [69] for identifier in identifiers
+    }
 
 
 def test_an_unread_entry_a_citation_deferral_names_is_not_pending_adoption() -> None:
@@ -554,15 +824,17 @@ def test_check_lists_the_unread_and_fails_on_one_pending_adoption(
     monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
 ) -> None:
     def selecting(
-        *, since: str | None, unread: list[str], algebraic: list[tuple[str, int]]
+        *, since: str | None, unread: list[str], unheld: list[str]
     ) -> dict[int, select.Selection]:
-        assert algebraic == []
         assert since is None
+        assert unheld == []
         unread.append("T-901")
         return {}
 
     monkeypatch.setattr(select, "select", selecting)
+    monkeypatch.setattr(select, "PENDING_ADOPTION", {})
     monkeypatch.setattr(select, "unread_pending", lambda _unread: {})
+    monkeypatch.setattr(select, "unread_unordered", lambda _unread: {})
     assert select.main(["--check"]) == 0
     assert "unread, eligible but with no exact reader: T-901" in capsys.readouterr().out
     monkeypatch.setattr(select, "unread_pending", lambda unread: {unread[0]: [7]})
@@ -570,6 +842,192 @@ def test_check_lists_the_unread_and_fails_on_one_pending_adoption(
     assert "T-901 has no exact reader and states a side below its case at n = [7]" in (
         capsys.readouterr().out
     )
+
+
+def test_a_citation_deferral_never_hides_a_validated_smaller_side(
+    monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """Review A6 of #660: an exemption keyed on `certificate-citation-deferrals.yaml`, as
+    #658 first wrote one for T-193, turned the gate green while sixteen validated smaller
+    packings waited on the owner's RP-3, a wait the house rule ended. An eligible entry
+    with no exact reader that states a side below its case fails `--check` whatever a
+    deferral says of it, and a merged exemption turns this test red."""
+    from devtools import check_certificate_citations as citations  # noqa: PLC0415
+    from devtools import check_standing as standing  # noqa: PLC0415
+
+    real = standing.improvements
+
+    def improving(record: Any, records: Any) -> list[standing.Finding]:
+        if str(record["id"]) == "T-088":
+            stated = standing.Stated(Fraction(1), Fraction(0))
+            return [standing.Finding(69, standing.UPPER, stated, standing.EXCEEDS, None)]
+        return real(record, records)
+
+    monkeypatch.setattr(standing, "improvements", improving)
+    deferral = {
+        "evidence": "E-test",
+        "results": ["T-088"],
+        "bead": "think-test",
+        "blocked_on": "the owner's decision RP-3",
+        "reason": "a test of a wait the house rule ended",
+    }
+    monkeypatch.setattr(citations, "load_deferrals", lambda *_path: [deferral])
+    monkeypatch.setattr(select, "ALGEBRAIC_READERS", {})
+    assert select.unread_pending(["T-088"]) == {"T-088": [69]}
+    assert select.main(["--check"]) == 1
+    assert "FAIL: T-088 has no exact reader and states a side below its case at n = [69]" in (
+        capsys.readouterr().out
+    )
+
+
+def _below(ceiling: select.exact_sides.Side) -> select.exact_sides.Side:
+    """An algebraic side a little below `ceiling`: r + sqrt(2) / 10**9 at r = ceiling less
+    10**-6, the root of x^2 - 2 r x + r^2 - 2 / 10**18."""
+    low, _high = select.exact_sides.enclosure(ceiling, Fraction(1, 10**12))
+    r = low - Fraction(1, 10**6)
+    return select.exact_sides.algebraic(
+        [1, -2 * r, r * r - Fraction(2, 10**18)], (r, r + Fraction(2, 10**9))
+    )
+
+
+def test_a_reader_makes_an_unread_source_a_candidate_and_the_writer_waits_for_it(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Review A8 of #660: the route this branch gives #658, a reader in
+    `ALGEBRAIC_READERS`, and the writer's refusal of an algebraic house, were untested.
+    A registered reader makes the unread entry a candidate; its algebraic side below the
+    case moves the house, which `--check` requires to be staged as the writer's, and
+    `plan` refuses it unstaged, skips it staged, and never writes it as a fraction."""
+    key = "[Ellsworth n69 2026-09-24]"
+    results = [entry for entry in select.load_results() if entry["id"] == "T-088"]
+    case = select.load_case(69)
+    side = _below(case.verified)
+    monkeypatch.setitem(select.ALGEBRAIC_READERS, key, lambda _n: side)
+    unread: list[str] = []
+    selected = select.select(results, select.load_evidence(), cases={69: case}, unread=unread)
+    assert unread == []
+    house = selected[69].house
+    assert house is not None
+    assert (house.result, house.algebraic, house.side) == ("T-088", True, side)
+    monkeypatch.setattr(select, "PENDING_ADOPTION", {})
+    assert select.check(selected)[0].startswith("FAIL: a validated smaller packing")
+    with pytest.raises(adopt.AdoptionError, match="algebraic side"):
+        adopt.plan(selected)
+    staged = select.Pending(house="T-088", bead="think-test", why=select.NEXT_PULL_REQUEST)
+    monkeypatch.setattr(select, "PENDING_ADOPTION", {69: staged})
+    assert "stage it as 'no writer'" in select.check(selected)[0]
+    staged = dataclasses.replace(staged, why=select.NO_WRITER)
+    monkeypatch.setattr(select, "PENDING_ADOPTION", {69: staged})
+    assert select.check(selected) == []
+    assert adopt.plan(selected) == []
+    with pytest.raises(adopt.AdoptionError, match="states rational sides"):
+        adopt.rational(side)
+    assert adopt.rational(Fraction(5, 2)) == Fraction(5, 2)
+    shown = adopt.display(side)
+    assert shown == select.ceiling(side)
+    assert Fraction(shown) > side
+    with pytest.raises(ValueError, match="staged for one of"):
+        select.Pending(house="T-088", bead="think-test", why="until the owner decides")
+
+
+def test_a_rational_house_staged_for_the_writer_fails_the_check(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """The writer's gap stages an algebraic house and nothing else (review A1 of #660)."""
+    entry, evidence = _confirmed_entry()
+    monkeypatch.setitem(select.reports.HOUSES, "[test]", lambda _n: Fraction(3))
+    monkeypatch.setattr(select, "_side", lambda _key, _n: Fraction(3))
+    case = select.Case(
+        n=7, verified=Fraction(4), reported=Fraction(4), source_key="", evidence=()
+    )
+    selected = select.select([entry], evidence, cases={7: case})
+    staged = select.Pending(house="T-900", bead="think-test", why=select.NO_WRITER)
+    monkeypatch.setattr(select, "PENDING_ADOPTION", {7: staged})
+    (problem,) = select.check(selected)
+    assert "the writer writes it, so stage it for the next pull request" in problem
+
+
+def test_the_staged_adoptions_name_their_beads_and_reasons() -> None:
+    """Review A1 of #660: the staged adoption sat under the policy lane's own bead, with no
+    reason. T-174's rational houses wait for the adoption's bead and the next pull request,
+    and its algebraic ones for the writer's bead and the writer."""
+    for n, pending in select.PENDING_ADOPTION.items():
+        assert pending.why in select.STAGING_REASONS, n
+        algebraic = n in (70, 153, 207)
+        assert (pending.bead, pending.why) == (
+            (select.WRITER_BEAD, select.NO_WRITER)
+            if algebraic
+            else (select.ADOPTION_BEAD, select.NEXT_PULL_REQUEST)
+        ), n
+    assert "think-sa5r" not in {pending.bead for pending in select.PENDING_ADOPTION.values()}
+
+
+def test_check_judges_the_whole_register_and_refuses_since() -> None:
+    """Review A9 of #660: narrowed to entries registered since a day, `--check` judged the
+    staged counts without the entries they were staged for and advised unstaging all 63."""
+    with pytest.raises(SystemExit) as refused:
+        select.main(["--since", "2026-10-16", "--check"])
+    assert refused.value.code == 2
+
+
+def test_an_unread_print_that_only_overlaps_its_ceiling_is_unordered(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Review A10 of #660: an unread entry was compared by its print, and two spans that
+    overlap read as equal, which orders nothing. `--check` fails on such an entry until a
+    reader holds its side; a print that is the ceiling exactly is a tie and passes."""
+    from devtools import check_standing as standing  # noqa: PLC0415
+    from devtools import render_recent_results as view  # noqa: PLC0415
+
+    assert select.unread_unordered(["T-088", "T-089", "T-114"]) == {}
+    ceiling = view.load_records().cases[69]["verified_upper_bound"]
+    floor, _top = view.span(ceiling)
+
+    def meeting(slack: Fraction, value: Fraction) -> Any:
+        def found(record: Any, _records: Any) -> list[standing.Finding]:
+            if str(record["id"]) != "T-088":
+                return []
+            stated = standing.Stated(value, slack)
+            return [standing.Finding(69, standing.UPPER, stated, standing.EQUAL, None)]
+
+        return found
+
+    monkeypatch.setattr(standing, "findings", meeting(Fraction(1, 10**4), floor))
+    assert select.unread_unordered(["T-088"]) == {"T-088": [69]}
+    monkeypatch.setattr(standing, "findings", meeting(Fraction(0), floor))
+    exact = floor == _top
+    assert select.unread_unordered(["T-088"]) == ({} if exact else {"T-088": [69]})
+
+
+def test_a_side_no_route_here_holds_is_unordered_never_a_traceback(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Review B3 of #660: a closed form whose minimal polynomial `sqpack.field` cannot
+    decide irreducible, and a reader that cannot hold a side, crashed the selection. The
+    form makes its count unordered, and the side is named for `--check` to fail on."""
+    value, form = select.closed_form("5.3823323", "sqrt(2) + sqrt(3) + sqrt(5)")
+    assert value is None
+    assert form is not None
+    assert form.startswith("the form's polynomial is not held exactly")
+    entry, evidence = _confirmed_entry()
+
+    case = select.Case(
+        n=7, verified=Fraction(4), reported=Fraction(4), source_key="", evidence=()
+    )
+    # Review C2 of #660: a reader that builds its field from a packet, as T-193's will,
+    # raises `FieldPreconditionError` where `sqpack.field` cannot certify the field.
+    for error in (
+        select.exact_sides.ExactSideError("a reader's side it cannot isolate"),
+        FieldPreconditionError("a field sqpack.field cannot certify"),
+    ):
+
+        def unheld_side(_n: int, error: Exception = error) -> select.exact_sides.Side:
+            raise error
+
+        monkeypatch.setitem(select.ALGEBRAIC_READERS, "[test]", unheld_side)
+        unheld: list[str] = []
+        assert select.select([entry], evidence, cases={7: case}, unheld=unheld) == {}
+        assert unheld == [f"T-900 at n = 7: {error}"]
 
 
 def test_the_ceiling_rounds_up_and_the_display_ends_where_the_side_does() -> None:
@@ -777,7 +1235,7 @@ def _readopted(
     house = select.Candidate(
         result="T-900",
         n=84,
-        side=first.house.side - Fraction(1, 10**6),
+        side=first.side - Fraction(1, 10**6),
         source_key="[new]",
         published=PUBLISHED,
         report_evidence=("E-new",),
@@ -889,26 +1347,44 @@ def test_the_coverage_of_a_count_adopted_again_names_the_new_house_throughout(
     assert check_source_coverage.house_reason_errors(data, results) == []
 
 
-def test_a_conjecture_the_house_does_not_beat_stops_the_adoption(
+def test_a_conjecture_stands_unless_the_house_is_below_every_number_its_print_may_be(
     selections: dict[int, select.Selection],
 ) -> None:
+    """A house below the catalogue's conjectured optimum, wherever its print rounds,
+    withdraws it; any other house leaves it standing, and the adoption goes ahead either
+    way: nothing here is decided by hand (result-import.md, "The House Rule")."""
     # The first pass withdrew the catalogue's conjecture at 232, so the record its later
     # pass read (12 October, T-158) has none; the move is planned from the record the
-    # first pass read.
+    # first pass read, under the rule that pass ran under.
     first = adopt.read_pass(houses.ADOPTED_ON)[232]
     cases = {n: selection.case for n, selection in selections.items()}
     cases[232] = select.parse_case(232, first)
-    selected = select.select(cases=cases)
+    selected = select.select(cases=cases, recorded={232: houses.ADOPTED_ON})
     planned = adopt.plan(selected, texts={232: first})
     move = next(move for move in planned if move.n == 232)
     conjecture = adopt.conjectured(move.packing)
-    assert conjecture == Fraction(Decimal("15.77817459305202")) > move.house.side
+    assert conjecture is not None
+    assert conjecture == Fraction(Decimal("15.77817459305202")) > move.side
     assert "  conjectured_optimum: null\n" in adopt.rewrite(move)
-    above = dataclasses.replace(move, house=dataclasses.replace(move.house, side=conjecture))
-    with pytest.raises(adopt.AdoptionError, match="does not beat the conjectured optimum"):
-        adopt.rewrite(above)
+    unit = Fraction(1, 10**14)
+    for side, stands in (
+        (conjecture, True),
+        (conjecture + unit, True),
+        (conjecture - unit / 2, True),
+        # At the print less a unit, the house is below every number the print may be
+        # (review B6 of #660).
+        (conjecture - unit, False),
+        (conjecture - 2 * unit, False),
+    ):
+        assert adopt.conjecture_stands(move.packing, side) is stands, side
+        moved = dataclasses.replace(move, house=dataclasses.replace(move.house, side=side))
+        withdrawn = "  conjectured_optimum: null\n" in adopt.rewrite(moved)
+        assert withdrawn is not stands
+    assert adopt.conjecture_stands({"conjectured_optimum": None}, Fraction(1))
     grid = {"conjectured_optimum": "integer", "reported_upper_bound": {"value": "18"}}
     assert adopt.conjectured(grid) == 18
+    assert adopt.conjecture_stands(grid, Fraction(18))
+    assert not adopt.conjecture_stands(grid, Fraction(18) - Fraction(1, 10**30))
     assert adopt.conjectured({"conjectured_optimum": None}) is None
 
 
@@ -1073,10 +1549,10 @@ def test_an_interrupted_write_is_finished_by_running_it_again(
 ) -> None:
     """A write stopped before its last record leaves what a rerun finishes, to the byte.
 
-    The two counts are ones no held result holds: 70, adopted on 11 October 2026, and
-    241, first adopted on 15 October.
+    The two counts are ones no staged adoption moves: 154, first adopted on 12 October
+    2026, and 241, first adopted on 15 October.
     """
-    moved = {70, 241}
+    moved = {154, 241}
     frontier = tmp_path / "frontier"
     frontier.mkdir()
     staged = {
@@ -1116,7 +1592,7 @@ def test_an_interrupted_write_is_finished_by_running_it_again(
 
     def interrupted(path: Path, text: str) -> bool:
         calls.append(path)
-        if len(calls) == 4:  # the coverage register, the deferrals, n = 70, then n = 241
+        if len(calls) == 4:  # the coverage register, the deferrals, n = 154, then n = 241
             raise OSError("interrupted")
         return real(path, text)
 
@@ -1189,7 +1665,8 @@ def test_an_adoption_names_what_each_re_housed_count_owes_the_regularized_layer(
     allowlist makes pending for certain (review B6 of #641), the settled decision the new
     witness bears on, and the commands of the guide's "When a Witness Changes" with their
     cost, which ranges from the certain counts to all of them (review A3 of #641), and
-    what a deferral owes the pull request (reviews A1 and A2 of #641; think-g3q7)."""
+    what the adoption's pull request owes: each count's drawing before and after (reviews
+    A1 and A2 of #641; think-g3q7) and its runs, which the house rule never defers."""
     index, strong, lapsed, plain = _rehoused(tmp_path)
     regular = next(
         n
@@ -1204,8 +1681,8 @@ def test_an_adoption_names_what_each_re_housed_count_owes_the_regularized_layer(
         strong: f"its {defaults.index_entries(index)[strong]['generator']} view lapses",
         lapsed: "a regularize_grid_slack/1 view lapsed earlier",
         plain: (
-            "PENDING_ALLOWED holds it for think-aaaa's runs, whatever the new house reads, "
-            "so they take the new witness"
+            "PENDING_ALLOWED holds it for think-aaaa's runs, whatever the new house reads: "
+            "they run here, on the new witness, and the entry comes off"
         ),
     }
     lines = adopt.regularization_owed(
@@ -1257,16 +1734,20 @@ def test_an_adoption_names_what_each_re_housed_count_owes_the_regularized_layer(
         f"regularize_select --evand-run $RUNS/{label}-evand --grid-run"
     )
     assert len(commands) == 8
-    # The deferral branch regenerates the record the allowlist entry is copied into, renders,
-    # and shows the drawings it gives up (reviews A1 and A2 of #641).
+    # The pull request shows each count's drawings before and after (reviews A1 and A2 of
+    # #641), and owes every count's runs: none is deferred, and an adoption whose runs do
+    # not fit under the compute cap stages the counts they do not cover (the house rule).
     assert "then the guide's step 5 (render and record)" in lines[-3]
-    deferral = lines[-2]
-    assert "default_drawings.PENDING_ALLOWED with the open bead" in deferral
-    assert "run `default_drawings --update` again and the guide's step 5" in deferral
-    assert "`default_drawings --compare` with the base branch's record" in deferral
-    assert adopt.BASE_RECORD in deferral
-    assert f"{adopt.DEFERRAL_WAITS}." in deferral
-    assert "default_drawings --check-state` fails until every pending count" in lines[-1]
+    listing, owed = lines[-2:]
+    assert listing.startswith("  List each re-housed count's drawing before and after")
+    assert "`default_drawings --compare` with the base branch's record" in listing
+    assert adopt.BASE_RECORD in listing
+    assert listing.endswith(f": {defaults.RUNS_OWED}.")
+    assert owed.startswith(f"  A re-housed count is {adopt.NEVER_DEFERRED}: ")
+    assert "select_houses.PENDING_ADOPTION with the open bead that adopts them" in owed
+    assert "--check-state` fails until the runs decide every re-housed count" in owed
+    assert "while the list defers the runs of a witness whose house has moved since" in owed
+    assert not [line for line in lines if "add each pending count" in line]
     # Nothing re-housed, nothing owed: a second run of the idempotent write prints nothing.
     assert adopt.regularization_owed([], index=index) == []
 
@@ -1334,17 +1815,20 @@ def test_two_adoptions_of_one_day_print_different_runs() -> None:
         adopt.run_label("2026-10-16", [])
 
 
-def test_the_runbook_guide_and_printout_give_one_deferral_step() -> None:
+def test_the_runbook_guide_and_printout_owe_every_re_housed_counts_runs_alike() -> None:
     """Review C4 of #641: the runbook's deferral waited "for the owner's word or for its
     runs", the guide's and the printout's only for the owner's word, and neither document
     said how to give `--compare` the base branch's record. Review D1: all three, and the
-    comparison's own summary, say which lost strong views wait, in one wording. Review D2:
-    the documents name the pull request's base, which is not main for a stacked adoption,
-    and the printout gives main as the example and says so. Review E1: the owner's rule is
-    to adopt the smallest packing and then regularize it, so no adoption waits for the
-    owner's word and such a count's runs are not deferred."""
+    comparison's own summary, name a lost strong view in one wording. Review D2: the
+    documents name the pull request's base, which is not main for a stacked adoption, and
+    the printout gives main as the example and says so. Review E1 and the house rule (16
+    October 2026): the owner's rule is to adopt the smallest packing and then regularize
+    it, so no adoption waits for the owner's word. Review F1: the runbook and the guide
+    still deferred each pending count while the mark said a lost view's runs were not
+    deferred. All three now owe every re-housed count's runs in the adoption's pull
+    request, never deferred, and the documents quote the mark that says so."""
     lines = adopt.regularization_owed([176], day="2026-10-16")
-    (deferral,) = [line for line in lines if "PENDING_ALLOWED with the open bead" in line]
+    (listing,) = [line for line in lines if "drawing before and after" in line]
     command = f"--compare <(git show origin/$BASE:{defaults.RECORD_PATH})"
     assert adopt.BASE_RECORD.strip("`") == command.removeprefix("--compare ").replace(
         "$BASE", "main"
@@ -1355,12 +1839,32 @@ def test_the_runbook_guide_and_printout_give_one_deferral_step() -> None:
         assert command in words, path
         assert "`BASE` being `main` unless the pull request is stacked" in words, path
         assert defaults.STRONG_VIEW_LOST in words.lower(), path
-        assert adopt.DEFERRAL_WAITS in words, path
+        assert f"\u201c{defaults.RUNS_OWED}\u201d" in words, path
+        assert adopt.NEVER_DEFERRED in words.replace("`", ""), path
         assert "the adoption waits for the owner's word or for its runs" not in words, path
         assert "unless the owner holds it" not in words, path
         assert "irregular house drawing" not in words, path
-    assert f"{adopt.BASE_RECORD}, {adopt.STACKED_BASE})" in deferral
-    assert f"where {defaults.STRONG_VIEW_LOST}, {adopt.DEFERRAL_WAITS}." in deferral
+        assert "its runs are not deferred" not in words, path
+        assert "adds each pending count to" not in words, path
+    assert f"{adopt.BASE_RECORD}, {adopt.STACKED_BASE})" in listing
+    assert f"where {defaults.STRONG_VIEW_LOST}, it names those goals" in listing
+    assert listing.endswith(f": {defaults.RUNS_OWED}.")
+    assert any(adopt.NEVER_DEFERRED in line for line in lines)
+    # Review A14 of #660: the policy's gates section and the sweep's step point to the
+    # house rule rather than restate it, so they cannot drift from it.
+    policy = (houses.REPO / "docs/project/policies/regularization-policy.md").read_text(
+        encoding="utf-8"
+    )
+    gates = " ".join(policy.partition("## 8. Gates")[2].partition("\n## ")[0].split())
+    assert "result-import.md#the-house-rule" in gates
+    assert "defers the count with its bead" not in gates
+    # Review C6 of #660: each instruction for deferring a corrected witness names
+    # `CORRECTED`, which `--check-state` holds every entry to.
+    runbook = _flat((houses.REPO / "packing/campaign/result-import.md").read_text("utf-8"))
+    step, prompt = runbook.split("3. **Import**", 1)[1], runbook.split("```text", 1)[1]
+    for text in (step.split("4. **Validate**")[0], prompt.split("5. From packing/")[0]):
+        assert "CORRECTED" in text
+    # The sweep's step is held in test_intake_sweep.
 
 
 def test_every_printed_command_parses_with_its_tools_own_parser(tmp_path: Path) -> None:
