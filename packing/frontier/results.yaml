@@ -21223,10 +21223,9 @@ results:
       Measured pose by pose by that review, it is Robert Barnett's packing (T-150) re-solved, no
       square moved beyond 2e-06; squares touch the box and the closest pair touches, which the
       closed box allows. At 261 PR 574's certificate (T-174) is smaller, by 1.99e-21, and the
-      house rule of 16 October 2026, which lifted the hold of 15 October, makes T-174 the house
-      there, its adoption staged under think-3mry (devtools.select_houses.PENDING_ADOPTION).
-      Until that adoption lands this entry holds the case, the smallest certificate there that
-      the hold left in; it moves to T-174 when it lands.
+      house rule of 16 October 2026, which lifted the hold of 15 October, made T-174 the house there, and the adoption of 17 October 2026 (think-3mry) moved the
+      case to it. This entry held the case until then, the smallest certificate there that the
+      hold left in.
     scope: {n_values: [261]}
     verification: V3
     confirmation: C3
@@ -21369,10 +21368,9 @@ results:
       Measured pose by pose by that review, it is Francisco Couzo's packing (T-130) at less
       padding, no square moved beyond 2e-19. At 105 PR 574's certificate (T-174) is smaller, by
       1.08e-79, and the house rule of 16 October 2026, which lifted the hold of 15 October,
-      makes T-174 the house there, its adoption staged under think-3mry
-      (devtools.select_houses.PENDING_ADOPTION). Until that adoption lands this entry holds the
-      case, the smallest certificate there that the hold left in; it moves to T-174 when it
-      lands.
+      made T-174 the house there, and the adoption of 17 October 2026 (think-3mry) moved the
+      case to it. This entry held the case until then, the smallest certificate there that the
+      hold left in.
     scope: {n_values: [105]}
     verification: V3
     confirmation: C3
@@ -21512,10 +21510,9 @@ results:
       Measured pose by pose by that review, it is Nate Chaoweeraprasit's SQUISH packing (T-151)
       re-solved, no square moved beyond 2e-07. At 272 PR 574's certificate (T-174) is smaller,
       by 1.70e-99, and the house rule of 16 October 2026, which lifted the hold of 15 October,
-      makes T-174 the house there, its adoption staged under think-3mry
-      (devtools.select_houses.PENDING_ADOPTION). Until that adoption lands this entry holds the
-      case, the smallest certificate there that the hold left in; it moves to T-174 when it
-      lands.
+      made T-174 the house there, and the adoption of 17 October 2026 (think-3mry) moved the
+      case to it. This entry held the case until then, the smallest certificate there that the
+      hold left in.
     scope: {n_values: [272]}
     verification: V3
     confirmation: C3
@@ -21978,7 +21975,7 @@ results:
       intake held those houses for the owner (devtools.select_houses.LIFTED keeps the hold's
       words): their witnesses would add about 18.5 MB to a checkout and their custody inputs
       about 5.8 MB to every worker's snapshot. The owner's house rule of 16 October 2026 lifted
-      the hold: size is met by OR-18's means, never by holding a house, and the houses are
+      the hold: size is met by OR-18's means, never by holding a house, and the houses were
       staged for adoption (devtools.select_houses.PENDING_ADOPTION).
 
       The hold skipped this entry only: at 105, 129, 146, 156, 176, 204, 261, 271, 272 and 303
@@ -21986,8 +21983,10 @@ results:
       it from that day (T-170, T-162, T-168, T-161, T-165, T-162, T-169, T-161, T-171, T-162),
       this entry being smaller by 1.7e-99 to 1.18e-02, and at the other 50 counts the cases kept
       their houses. The adoption of 16 October 2026 (PR #657) then took ten of the 60 below this
-      entry, 146 to T-187 and 129, 156, 175, 176, 204, 232, 264, 271 and 303 to T-186. The other
-      50 move to this entry when the staged adoption lands, under think-3mry.
+      entry, 146 to T-187 and 129, 156, 175, 176, 204, 232, 264, 271 and 303 to T-186. The
+      adoption of 17 October 2026 (think-3mry), the first under the house rule, moved the other
+      50 to this entry, whose witnesses add 2.84 MB to history as Git stores them (OR-18), and
+      regularized each in the same pull request.
 
       At 70, 153 and 207 the algebraic certificates are the smallest sides known but rest on one
       route; the rule of 15 October left them out for the owner (RP-3), and the house rule of 16
@@ -22468,12 +22467,11 @@ results:
     next_rung: >-
       V4 and C4 need a second accepted adversarial review by a distinct reviewer and a retained
       human oversight record; one AI review, of 14 October, is retained. The house rule of 16
-      October 2026 makes it the house at its 53 smallest counts, staged for adoption
-      (devtools.select_houses.PENDING_ADOPTION): the 50 rational ones under think-3mry, the next
-      candidate holding the case meanwhile at three of them (105, 261 and 272), and the
-      algebraic ones at 70, 153 and 207 under think-ot5c. It was the smallest at 63 counts
-      until the adoption of 16 October 2026 (PR #657) took ten of them below it, with T-186 and
-      T-187.
+      October 2026 makes it the house at its 53 smallest counts: the adoption of 17 October
+      2026 (think-3mry) moved the 50 rational ones to it, and the algebraic ones at 70, 153 and
+      207 wait under think-ot5c, staged for adoption (devtools.select_houses.PENDING_ADOPTION)
+      until the writer takes an algebraic side. It was the smallest at 63 counts until the
+      adoption of 16 October 2026 (PR #657) took ten of them below it, with T-186 and T-187.
     reviews:
       - path: docs/project/reviews/review-2026-10-14-upper-bound-imports-574.md
         kind: adversarial
