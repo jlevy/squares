@@ -5122,7 +5122,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-12'
+  lastmod: '2026-10-17'
   status: live
 - path: cases/290.html
   canonical: cases/290.html
@@ -6299,7 +6299,7 @@ urls:
   generator: devtools.render_packing_methods:main
   producer: paper:square-packing-methods-survey
   first_published: '2026-10-08'
-  lastmod: '2026-10-12'
+  lastmod: '2026-10-17'
   status: live
 - path: papers/square-packing-methods-survey.md
   canonical: papers/square-packing-methods-survey.md
@@ -6307,7 +6307,7 @@ urls:
   generator: devtools.render_packing_methods:main
   producer: paper:square-packing-methods-survey
   first_published: '2026-10-08'
-  lastmod: '2026-10-12'
+  lastmod: '2026-10-17'
   status: live
 - path: papers/square-packing-methods-survey.pdf
   canonical: papers/square-packing-methods-survey.pdf
@@ -6315,7 +6315,7 @@ urls:
   generator: devtools.render_packing_methods:main
   producer: paper:square-packing-methods-survey
   first_published: '2026-10-08'
-  lastmod: '2026-10-12'
+  lastmod: '2026-10-17'
   status: live
 - path: readme.html
   canonical: readme.html
@@ -16058,6 +16058,38 @@ urls:
     - packing/resources/web/fitzharding-n19-lean-2026-10-16/sq19/Sq19Lean/EndpointPacking.lean
     - packing/resources/web/fitzharding-n19-lean-2026-10-16/sq19/verification/Square19Optimality.log.gz
     - packing/resources/web/fitzharding-n19-lean-2026-10-16/sq19/verification/kernel-replay.json
+- path: result/t-195.html
+  canonical: result/t-195.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-16'
+  lastmod: '2026-10-16'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 29
+    established: null
+    attribution:
+      source_keys:
+      - '[PingYou PR 622 certificate 2026-10-15]'
+      published: '2026-10-15'
+    builds_on: null
+    evidence:
+    - E-pingyou-622-certificate-report
+    - E-pingyou-622-exact-feasibility
+    artifacts:
+    - packing/resources/web/pingyou-pr622-certificate-2026-10-15/README.md
+    - packing/resources/web/pingyou-pr622-certificate-2026-10-15/acquisition/claims.json
+    - packing/resources/web/pingyou-pr622-certificate-2026-10-15/facts/n-029.yaml.gz
+    - packing/resources/web/pingyou-pr622-certificate-2026-10-15/receipts/exact-certification.json.xz
+    - packing/devtools/upper_bound_reports.py
+    - packing/devtools/check_half_angle_area.py
+    - packing/resources/web/pingyou-pr622-certificate-2026-10-15/review/README.md
+    - packing/campaign/issue-intake/upper-bounds-n29-20261016/README.md
+    - docs/project/reviews/review-2026-10-16-pingyou-n29.md
 - path: results.html
   canonical: results.html
   kind: page

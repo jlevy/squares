@@ -447,6 +447,7 @@ def _sources() -> dict[str, Source]:
         packet_source("T-187", "evand-n146-2026-10-14"),
         packet_source("T-188", "couzo-verified-bounds-2026-10-14"),
         packet_source("T-190", "couzo-n237-2026-10-15"),
+        packet_source("T-195", "pingyou-pr622-certificate-2026-10-15"),
     ]
     found = {source.result: source for source in sources}
     # Two results may read one packet (T-181 and T-182 both read issue 586's), so the
@@ -467,7 +468,10 @@ def _sources() -> dict[str, Source]:
 #: 129, 146, 156, 176, 204, 261, 271, 272 and 303, and the pass of 16 October 2026, for
 #: the 16 October review of issues 506 to 607, at 129, 146, 154, 156, 175, 176, 204, 211,
 #: 232, 237, 264, 271, 302, 303 and 304. None of T-174's counts is T-174's here.
+#: The pass of 17 October 2026, the first under the house rule, adopted PR 622's (T-195)
+#: at 29.
 ADOPTED: dict[int, str] = {
+    29: "T-195",
     70: "T-146",
     84: "T-130",
     86: "T-130",
@@ -544,7 +548,9 @@ NUMBERS = tuple(sorted(ADOPTED))
 #: issue 606 (T-187) at 146 from T-168; Francisco Couzo's 211 (T-188) from T-182; and his
 #: 237 of 15 October (T-190) from T-183. A count a pass names keeps its place in the
 #: earlier passes' sets, which their archives hold; it was adopted on the latest day that
-#: names it.
+#: names it. The pass of 17 October 2026, the first under the house rule, adopted PR 622's
+#: certificate (T-195) at 29 from T-155, the case's replay of the Kingbird catalogue's
+#: packing, which no pass had adopted before.
 LATER_PASSES: dict[str, frozenset[int]] = {
     "2026-10-12": frozenset({154, 175, 176, 181, 232, 238, 239, 264, 270, 271, 272, 304, 305}),
     "2026-10-15": frozenset(
@@ -572,6 +578,7 @@ LATER_PASSES: dict[str, frozenset[int]] = {
     "2026-10-16": frozenset(
         {129, 146, 154, 156, 175, 176, 204, 211, 232, 237, 264, 271, 302, 303, 304}
     ),
+    "2026-10-17": frozenset({29}),
 }
 
 

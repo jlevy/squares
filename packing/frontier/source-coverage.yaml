@@ -6042,7 +6042,37 @@ sources:
     trusts Lean's compiler for 4,320 native_decide facts and reports a kernel replay of the
     import closure; nothing here has built it. T-194 records the claim; the case's lanes and
     status are unchanged.
+- id: pingyou-pr622-certificate-2026-10-15
+  title: PingYou Ltd's N29 certificate refinement at 3115557, PR 622
+  role: source-repository
+  url: https://github.com/BuddenPing/squares/tree/31155575ce1e6b461f77bfc9f3e201adf101115b
+  local: resources/web/pingyou-pr622-certificate-2026-10-15/
+  source_key: '[PingYou PR 622 certificate 2026-10-15]'
+  scope: {n_values: [29]}
+  reviewed: '2026-10-16'
+  source_date: '2026-10-15'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/pingyou-pr622-certificate-2026-10-15/acquisition/claims.json
+  evidence: [E-pingyou-622-certificate-report, E-pingyou-622-exact-feasibility]
+  notes: >-
+    The 1 complete certificate is kept as a derived exact fact, no upstream byte retained,
+    read from the release asset data/pingyou-n29-certificate-2026-10-15-v1 through the
+    manifest the pinned commit adds, and admitted at the exact side its claim record prints.
+    T-195 records the in-horizon report, 1.57e-36 below T-155, by exception in the
+    per-count ledger of 16 October (campaign/issue-intake/upper-bounds-n29-20261016), on
+    the owner's standing house rule (PR #660, think-sa5r); the 16 October review accepted it.
+    All 3 native jobs have full outcomes. No selected override or superseded claim is
+    created at this stage; the case is unchanged until adoption.
 selected_overrides:
+- n: 29
+  source_id: pingyou-pr622-certificate-2026-10-15
+  value: '5.9338334626769292'
+  evidence: E-pingyou-622-certificate-report
+  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
+    here and an accepted review, adopted on 2026-10-17 (T-195).
 - n: 51
   source_id: ry-xu-undilated-n51-2026
   value: '7.6903559372884918'

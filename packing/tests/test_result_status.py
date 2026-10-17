@@ -422,12 +422,13 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
         "T-020", "T-021", "T-030", "T-043", "T-044", "T-047", "T-049", "T-057", "T-072",
         "T-056", "T-078", "T-079", "T-087", "T-088", "T-089", "T-092",
     } <= set(derived)  # fmt: skip
-    # A mark names the results the case's bound rests on now. At n = 29 that has been
-    # T-155's regularized certificate since 12 October. At n = 69 its side is exactly the
-    # side of Evan Daniel's certificate, below T-088's, so the case cites both T-101's
-    # replays and T-155's decision for it.
+    # A mark names the results the case's bound rests on now. At n = 29 that was T-155's
+    # regularized certificate from 12 October, and since the house adoption of 17 October
+    # it is T-195, PR #622's tighter certificate of the same packing. At n = 69 its side is
+    # exactly the side of Evan Daniel's certificate, below T-088's, so the case cites both
+    # T-101's replays and T-155's decision for it.
     assert view.position_marks(records.results["T-009"], view.SUPERSEDED, records) == [
-        "superseded by T-155"
+        "superseded by T-195"
     ]
     assert view.position_marks(records.results["T-088"], view.SUPERSEDED, records) == [
         "superseded by T-101 and T-155"
