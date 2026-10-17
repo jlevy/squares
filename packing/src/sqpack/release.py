@@ -809,6 +809,14 @@ THRESHOLD_PROOF_PUBLISHED = "September 22, 2026"
 #: dates belong to the paper, independently of the site and n = 11 series.
 PACKING_METHODS_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.2.3",
+        first_published="October 17, 2026",
+        result_scope=(
+            "Figure 3 draws PingYou Ltd's exact rational certificate of the 29-square "
+            "packing, the case's house since 17 October 2026."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.2.2",
         first_published="October 14, 2026",
         result_scope=(
@@ -850,7 +858,7 @@ PACKING_METHODS_HISTORY = (
 PACKING_METHODS_VERSION = PACKING_METHODS_HISTORY[0].version
 PACKING_METHODS_EDITION = PACKING_METHODS_VERSION
 PACKING_METHODS_FIRST_PUBLISHED = PACKING_METHODS_HISTORY[-1].first_published
-PACKING_METHODS_REVISED = "October 12, 2026"
+PACKING_METHODS_REVISED = "October 17, 2026"
 
 
 # Public component identifiers are shared with changelog release references and cuts.
@@ -895,6 +903,16 @@ class ReleaseImpactDecision(NamedTuple):
 # New component cuts append decisions here, newest first, alongside their own histories.
 # No impact is invented retrospectively for the published baseline editions.
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
+    ReleaseImpactDecision(
+        component="paper:square-packing-methods-survey",
+        previous_version="v0.2.2",
+        version="v0.2.3",
+        impact="patch",
+        reason=(
+            "Figure 3 draws PingYou Ltd's exact rational certificate of the 29-square "
+            "packing, the case's house since 17 October 2026."
+        ),
+    ),
     ReleaseImpactDecision(
         component="site",
         previous_version="v0.7.24",
