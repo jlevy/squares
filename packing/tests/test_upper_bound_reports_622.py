@@ -22,6 +22,7 @@ from typing import Any
 import pytest
 from test_upper_bound_reports_574 import private
 
+from devtools import adopt_houses as adopt
 from devtools import upper_bound_reports as reports
 from sqpack.yamlio import safe_load
 
@@ -175,11 +176,32 @@ def test_a_verified_exact_form_that_is_no_fraction_is_refused(
         reports.load_declaration(packet)
 
 
+@pytest.fixture(scope="module")
+def recorded() -> str:
+    """n-029.md as the house adoption of 17 October 2026 read it, before it moved 29 to
+    T-195 itself (`adopt_houses.read_history`); module-scoped, so it is read before
+    `private` points the importer at a private root."""
+    return adopt.read_history()[N]
+
+
 def test_the_claims_are_written_only_while_the_case_states_the_declared_exact_form(
+    recorded: str,
     private: Callable[[str], Path],
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    """`live_problems` holds the declared form to n-029.md's own, string for string."""
+    """`live_problems` holds the declared form to n-029.md's own, string for string, as the
+    record stood when the claims were written."""
+    before = tmp_path / "n-029.md"
+    before.write_text(recorded, encoding="utf-8")
     packet = private(PACKET)
+    assert reports.live_problems(packet), "the adoption moved n-029.md off the declared house"
+    parse = reports.coverage_check.parse_case
+
+    def parse_before(path: Path) -> dict[str, Any]:
+        return parse(before if path.name == before.name else path)
+
+    monkeypatch.setattr(reports.coverage_check, "parse_case", parse_before)
     assert reports.live_problems(packet) == []
     path = packet / reports.DECLARATION
     value = _json(path)
