@@ -5,14 +5,14 @@ title: Merge the 16 October PRs once reviewed (owner's word, 16 Oct afternoon)
 kind: task
 status: open
 priority: 2
-version: 27
+version: 28
 labels: []
 dependencies: []
 parent_id: is-01m51hyxstsa9ptekd2ss26ksn
 child_order_hints:
   - is-01m53c3469tq34ee6pbcn8xygw
 created_at: 2026-10-16T17:14:04.698Z
-updated_at: 2026-10-17T00:24:03.968Z
+updated_at: 2026-10-17T06:38:24.080Z
 ---
 Owner: 'If everything is reviewed, you can merge it.' and 'Follow up everything you can, and once things are reviewed, be sure you merge.' Merge order and gate per review-and-merge-prs; release re-cuts after each merge.
 
@@ -67,3 +67,5 @@ user-eb-integrator: #645 merged up: 5b041b88a (merge main 80b116ede; cut files f
 Merge condition for #661 (T-195, #622's s(29)): it keeps T-195 at V3/C3 on the replay alone. The T-193-style hold makes T-195 derive 'superseded' against the Kingbird print at 29, with no superseding result (lane N, 58de4dedc). So #661 merges only together with its stage 4 review PR, stacked on it: both reviewed, then merged back to back, the review PR right after #661 with no other merge between. Main never shows T-195 at V3/C3 without the review mapped.
 
 00:05Z, 17 Oct: #654 merged (5012a97d6, v0.7.22). #662 was merged into #661's branch by lane N's fast-forward push and closed as merged at 23:42Z; its commits reach main through #661. New order: #656, #657 (stack); then #660 after its follow-up review; then #661 (drop HELD['T-195'], fold the adopt branch, adopt and settle 29 under the house rule, re-cut, follow-up review); then #646, #645; then #658.
+
+04:10Z 17 Oct: merged since the afternoon, 16 PRs: #642, #651, #647, #655, #641, #648, #650, #652, #649, #644, #653, #654, #656, #657, #663 and #660 (main 804eff369, site v0.7.25; infographics v0.6.2 live). In flight: #661 (T-195 adoption pass, v0.7.26), #658 (T-193: drop the exemption and stage the counts), the T-174 adoption (think-3mry, new lane). Then #646 and #645.

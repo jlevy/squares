@@ -5,7 +5,7 @@ title: "PR #658: land T-193's house-gate change after #660 merges (review A2 to 
 kind: task
 status: in_progress
 priority: 1
-version: 3
+version: 5
 delegate: user-eb-addr-658
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m51e5r3sg4h1wcrh7c826v7b
 hold: null
 hold_until: null
 created_at: 2026-10-17T03:52:26.702Z
-updated_at: 2026-10-17T04:36:57.191Z
+updated_at: 2026-10-17T07:10:29.899Z
 started_at: 2026-10-17T03:52:33.493Z
 ---
 PR #658's review A (findings A2 to A5) asks that T-193's exemption from the house gate be bounded, per count and owned by `select_houses`. Under the owner's house rule of 16 October 2026, implemented by PR #660, no exemption is allowed at all, and #660's guard tests fail if #658's `deferred_results` merges. The fix needs #660's mechanism (`ALGEBRAIC_READERS`, `PENDING_ADOPTION` with `STAGING_REASONS`, `devtools.exact_sides`), so it lands on #658 after #660 merges to main.
@@ -34,3 +34,8 @@ What lands, as rehearsed on a local merge of #658 with #660's head f76706d17 (no
 ## Notes
 
 2026-10-17 user-eb-addr-658: prepared commit 7a51693af on local branch scratch/addr-658-post660 (in /home/user/squares/.git; parent 5d0b8455e = local merge of #658 head 764cf17ed with #660 head a776a24c6, not pushed). Patch: /tmp/claude-0/-home-user-squares/497b954f-f1d7-5565-9258-beec4cbe400c/scratchpad/post660-v2/0001-fix-houses-read-T-193-s-exact-sides-and-stage-its-si.patch. On that tree: select_houses --all --check exit 0 (57 of 70 move, all staged), packing-validate --records passes, 23 test files 941 passed / 28 skipped, ruff and basedpyright clean. To land: merge origin/main (with #660) into #658, cherry-pick 7a51693af, re-run adopt_houses --refresh and select_houses --all --check, re-render the papers from main and the branch and update the release record's SHAs, re-pin, push.
+
+2026-10-17 ~05:55Z user-eb-sweep-1017 (intake pass think-e2sz, stage 0): the sweep lists this wait as resolved: jlevy/squares#660 merged into main at 804eff369 on 2026-10-17. The wait is over; PR #658's house-gate change (review A2 to A5) can resume on main.
+blocked_on: none
+
+2026-10-17 user-eb-addr-658: #660 merged (804eff369); merged into #658 (1af453321), prepared fix landed as 8f46741ad (tree identical to the rehearsed 7a51693af), papers' record re-rendered (a0f762262), re-pinned (a0c9087d5), pushed. select_houses --all --check exit 0; 23 test files 941 passed; records tier passes except the site edition. Dispositions update: pullrequestreview-5556772214. think-3q9x can close at merge.

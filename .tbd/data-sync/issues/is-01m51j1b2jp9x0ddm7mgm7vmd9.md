@@ -5,7 +5,7 @@ title: "Sweep residue 2026-10-16: wand125 319a779, redundant reads, six resolved
 kind: task
 status: in_progress
 priority: 1
-version: 8
+version: 9
 delegate: user-eb-intake-residue
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m51hyxstsa9ptekd2ss26ksn
 hold: null
 hold_until: null
 created_at: 2026-10-16T05:12:57.169Z
-updated_at: 2026-10-16T07:45:37.564Z
+updated_at: 2026-10-17T07:03:38.404Z
 started_at: 2026-10-16T05:13:40.345Z
 ---
 Lane A of the overnight pass (epic think-hg5s), acting name user-eb-intake-residue, branch claude/intake-2026-10-16-residue from origin/main. The sweep residue of 2026-10-16 05:08Z that no 16 October lane owns:
@@ -50,3 +50,6 @@ blocked_on: jlevy/squares#647
 blocked_on: jlevy/squares#647
 
 2026-10-16 ~07:50Z coordinator user-eb: PR #647 MERGE-READY at 948a840df (senior Review A: 2 Low + 3 suggestions; addressed by user-eb-addr-647: A1-A4 fixed, A5 declined, disposition review https://github.com/jlevy/squares/pull/647#pullrequestreview-5544493199; the one unreviewed change, the DATA_REVISION re-pin 4987d1c03 + record wording 948a840df, checked inline by the coordinator: rule-1 bookkeeping, accurate). Hosted CI green (31 ok, 28 skipped). Waits only for the owner's word to merge. Merge note: any branch that also re-pins DATA_REVISION re-runs release_pin --update after merging main; the site edition likewise.
+
+2026-10-17 ~05:55Z user-eb-sweep-1017 (intake pass think-e2sz, stage 0): the sweep lists this wait as resolved: jlevy/squares#647 merged on 2026-10-16. What this bead's last note left: (1) the four drafted final comments: #432 was closed by the owner on GitHub at 2026-10-16T18:41:59Z without a comment, and the 17 October pass records the closure (result-requests.yaml, PR of think-e2sz), so whether its draft in think-klm7 is still posted is the owner's call; #470, #529 and #584 are still open on GitHub and here, and their drafts (think-jpre, think-s2i8, think-x333) wait to be re-rendered from main and posted; (2) think-jh0n stages 2-3; (3) think-tk0u can close (its correction merged with #647).
+blocked_on: none

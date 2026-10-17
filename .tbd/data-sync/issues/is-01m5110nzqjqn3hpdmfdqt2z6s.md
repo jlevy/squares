@@ -5,7 +5,7 @@ title: "After stack #632 deploys: run check_published_site and, if the deploy la
 kind: task
 status: in_progress
 priority: 1
-version: 4
+version: 5
 delegate: user-eb-intake-residue
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m50gnwbxd5kxbynyx9nd162p
 hold: null
 hold_until: null
 created_at: 2026-10-16T00:15:29.783Z
-updated_at: 2026-10-16T06:04:28.694Z
+updated_at: 2026-10-17T07:03:39.832Z
 started_at: 2026-10-16T05:13:40.781Z
 ---
 
@@ -27,3 +27,6 @@ Correction: the deploy landed after 15 October (UTC, the history's rule), so v0.
 
 2026-10-16 06:08Z user-eb-intake-residue: the correction is in draft PR https://github.com/jlevy/squares/pull/647 (head 1f3f54c44). This bead waits on that PR's merge, then closes; the title's #632 is a stack number, not an issue, and #627 merged.
 blocked_on: jlevy/squares#647
+
+2026-10-17 ~05:55Z user-eb-sweep-1017 (intake pass think-e2sz, stage 0): jlevy/squares#647 merged on 2026-10-16, so v0.7.11's corrected first_published is on main; this bead's work is done and it can close (no record names it as a deferral; release.py names it only in prose).
+blocked_on: none
