@@ -1,0 +1,13 @@
+softschema:
+  contract: packing.squares:HostedData/v1
+  schema: hosted-data.schema.yaml
+  status: enforced
+
+repository: BuddenPing/square-packing-certificates
+tag: data/pingyou-n29-certificate-2026-10-15-v1
+description: Complete N29 rational certificate refinement submitted by PingYou Ltd, with exact replay and comparison evidence.
+objects:
+- path: attic/pingyou-n29-certificate-2026-10-15/pingyou-n29-certificate-2026-10-15.zip
+  asset: pingyou-n29-certificate-2026-10-15.zip
+  size: 430075
+  sha256: 0dc9bcd1cf5f2806a4d2e0c4c1c07e4903d91bbea611b8b938bda770b9782537
