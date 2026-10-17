@@ -1769,7 +1769,7 @@
         "n": 68,
         "optimality": {"provenance":"frontier","status":"open"},
         "rigidity": {
-          "assessed_geometry": {"reported_side":"8.7987952372182839025766809670213940835211","source_url":"https://github.com/BuddenPing/squares/blob/4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde/numerical-refinements/certificates/n068.cert.json","witness_id":"W-known-best-n068","witness_path":"packing/witnesses/known-best/n-068.yaml"},
+          "assessed_geometry": {"reported_side":"8.7987952372182839025766809670213940835210190302278792632403696","source_url":"https://github.com/BuddenPing/squares/blob/4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde/numerical-refinements/certificates/n068.cert.json","witness_id":"W-known-best-n068","witness_path":"packing/witnesses/known-best/n-068.yaml"},
           "assessments": [
             {
               "assurance": "numerically-checked",
@@ -1786,7 +1786,7 @@
           "provenance": "absent",
           "state": "not-established"
         },
-        "side": {"display":"s(68) ≤ 8.798796","provenance":"frontier","relation":"upper-bound","value":"8.7987952372182839025766809670213940835211"}
+        "side": {"display":"s(68) ≤ 8.798796","provenance":"frontier","relation":"upper-bound","value":"8.7987952372182839025766809670213940835210190302278792632403696"}
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
