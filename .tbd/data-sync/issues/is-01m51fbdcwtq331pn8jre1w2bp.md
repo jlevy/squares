@@ -5,14 +5,14 @@ title: "Validation backlog, intake pass 2026-10-16 (#639, #640; owner cap 40 CPU
 kind: task
 status: open
 priority: 2
-version: 1
+version: 2
 labels:
   - validation
   - result-import
 dependencies: []
 parent_id: is-01m51e5r3sg4h1wcrh7c826v7b
 created_at: 2026-10-16T04:26:01.500Z
-updated_at: 2026-10-16T04:26:01.500Z
+updated_at: 2026-10-17T02:51:48.713Z
 ---
 The validation backlog of the 2026-10-16 intake pass (epic think-mdnn), under the owner's cap of 40 CPU-h per item (2026-10-14; think-lh7d holds the earlier passes' rows). Each row's bead carries a `## Validation` block.
 
@@ -39,3 +39,9 @@ Not validation, tracked here for completeness: think-o40t, the mathematical revi
 4 CPUs, 15 GB and 16 GB of free disk, shared with gates: think-g59l fits; think-nqnl's full run does not.
 
 blocked_on: none
+
+## Notes
+
+Rows added 17 Oct (coordinator), from #660's addressing passes:
+| think-3mry | Adopt T-174 at its 50 staged rational counts (house rule, #660); regularize each in the adoption's PR | ~10 (about 0.2 CPU-h per count: Daniel driver plus grid-slack at 0.5/1/5 degrees; witnesses 2.84 MB stored, 19.25 MB in a checkout) | open, waits on #660 | #660 |
+| think-ot5c | Algebraic house writer, then adopt T-174 at 70, 153 and 207, and T-193 at its 16 counts (#658) | writer: code; runs ~4 | open, waits on #660 and #658 | #660, #658 |
