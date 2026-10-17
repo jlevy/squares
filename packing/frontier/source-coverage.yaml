@@ -6067,6 +6067,12 @@ sources:
     All 3 native jobs have full outcomes. No selected override or superseded claim is
     created at this stage; the case is unchanged until adoption.
 selected_overrides:
+- n: 29
+  source_id: pingyou-pr622-certificate-2026-10-15
+  value: '5.9338334626769292'
+  evidence: E-pingyou-622-certificate-report
+  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
+    here and an accepted review, adopted on 2026-10-17 (T-195).
 - n: 51
   source_id: ry-xu-undilated-n51-2026
   value: '7.6903559372884918'

@@ -1,14 +1,13 @@
 # Regularization Runs for n = 29 on PR #622’s Witness (think-30n2)
 
 These are the strong generators’ runs on the witness that adopting T-195, PingYou Ltd’s
-N29 certificate (PR #622), writes at n = 29. They were run before the adoption.
-T-195’s stage 4 review has since accepted it
-([review of 16 October 2026](../../../../docs/project/reviews/review-2026-10-16-pingyou-n29.md)),
-and the house selection holds it at 29 (`select_houses.HELD`) until the adoption lands
-with the house rule of #660, under which a house need not beat the case’s conjectured
-optimum
-([result-import.md](../../../campaign/result-import.md#adopt-a-house-then-regularize-it)
-adopts a house once stage 4 has confirmed and reviewed its certificate).
+N29 certificate (PR #622), writes at n = 29. They were run the day before the adoption,
+which waited for T-195’s stage 4 review
+([review of 16 October 2026](../../../../docs/project/reviews/review-2026-10-16-pingyou-n29.md)).
+The adoption ran on 17 October 2026 under
+[the house rule](../../../campaign/result-import.md#the-house-rule), which adopts a
+validated smaller packing in the pass that validates it and regularizes it in the same
+pull request.
 
 ## How They Were Run
 
@@ -51,8 +50,9 @@ The lapsed view of the earlier witness measured the same.
   re-solve is refused, because the certificate’s 2,399-digit literal is too large for
   it.
 
-The selection chooses nothing at 29. The adoption therefore settles the count as decided
-no better, in `default_drawings.SETTLED`. The settlement names these four runs:
+The selection chooses nothing at 29. The adoption of 17 October 2026, the first under
+the house rule, wrote the witness byte for byte as above and settles the count as
+decided no better, in `default_drawings.SETTLED`. The settlement names these four runs:
 `evand-regularize-adopt-2026-10-16-n29-evand` and
 `grid-slack-adopt-2026-10-16-n29-grid-{0.5,1,5}`. It also names the new witness’s
 source, `[PingYou PR 622 certificate 2026-10-15]`, its path
@@ -62,7 +62,10 @@ source, `[PingYou PR 622 certificate 2026-10-15]`, its path
 ## Files
 
 Per run, the retained evidence is the driver’s `receipt.json` and each count’s
-`report.json.gz`. The selection’s JSON report and its table are `selection-n29.json` and
+`report.json.gz`, and for each grid-slack run a `run.json`, the block
+`regularize_grid_slack.run_block` computes from the run’s reports, which is what lets
+the settlement name it.
+The selection’s JSON report and its table are `selection-n29.json` and
 `selection-n29.md`. The run paths in them are the scratch directories the runs were made
 in. The runs count for the adoption only where it writes the witness byte for byte as
 above. Otherwise the adoption runs them again: about four CPU-minutes.

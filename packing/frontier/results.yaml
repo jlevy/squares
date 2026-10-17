@@ -18244,6 +18244,7 @@ results:
         by: project
         method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
         modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
+        modifications_unrecorded: ["retry rungs"]
         side: same
         identity:
           basis: measured
@@ -27130,8 +27131,8 @@ results:
       It records PR 622 there by exception, on the owner's standing house rule, which the
       owner gave the coordinator of this pass on 16 October 2026 ('We should always be
       adopting the smallest packing and then regularizing it. That should be the policy,
-      obviously.') and which PR #660 writes into the runbook (think-sa5r): this certificate
-      is the smallest validated packing at 29, and a house is a register entry.
+      obviously.') and which the runbook's house rule states (PR #660, think-sa5r): this
+      certificate is the smallest validated packing at 29, and a house is a register entry.
 
       V3 and C3 rest on the repository replay (E-pingyou-622-exact-feasibility) and the 16
       October review (docs/project/reviews/review-2026-10-16-pingyou-n29.md), which
@@ -27157,12 +27158,12 @@ results:
           max_move: 7.685e-20
           max_turn_deg: 3.255e-38
     next_rung: >-
-      The pass adopts the side as the n = 29 house under the house rule and regularizes the
-      new witness (the stacked branch claude/intake-2026-10-16-n29-622-adopt); until then
-      the house selection holds it (select_houses.HELD), since on main the writer leaves a
-      house that does not beat the case's conjectured optimum to a person and PR #660's rule
-      adopts it. V4 and C4 need a second accepting adversarial AI review by a distinct
-      reviewer and the owner's oversight record.
+      Adopted as the n = 29 house on 17 October 2026, the first adoption under the house
+      rule (packing/campaign/result-import.md, "The House Rule"); the strong generators
+      decided the new witness no better, and 29 draws its house
+      (packing/cases/regularized_drawings/think-30n2-2026-10-16/README.md). V4 and C4 need a
+      second accepting adversarial AI review by a distinct reviewer and the owner's
+      oversight record.
     reviews:
       - path: docs/project/reviews/review-2026-10-16-pingyou-n29.md
         kind: adversarial
@@ -27201,17 +27202,16 @@ regularized_drawings:
       reason: "several results attribute the witness's source: ['T-181', 'T-182']"
   items:
     - n: 29
-      of: T-155
+      of: T-195
       by: project
-      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
-      modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
+      method: regularize_axis_components/2
       side: same
       identity:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 3
-        max_move: 0.01240888
+        moved: 0
+        max_move: 0.0
         max_turn_deg: 0.0
       view: packing/atlas/known-best/regularized/n-029-regularized.yaml.gz
     - n: 37
