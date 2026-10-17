@@ -831,9 +831,10 @@ def test_t155_names_daniels_earlier_certificate_where_its_side_is_his() -> None:
     are drawn and 25 are not. Their case notes say the side is registered in T-155 and
     was first certified by Evan Daniel's certificate (T-101), so it proves no new bound;
     the other 26 say it is the upper bound it proves. The layer draws T-155's own solve
-    at fourteen counts, whose items read their rungs from the drawn entries; at 87 it
+    at thirteen counts, whose items read their rungs from the drawn entries; at 87 it
     draws a later run's view, so T-155's item there keeps the rungs unrecorded (PR #585,
-    review B1, B2)."""
+    review B1, B2), and at 29, whose house moved to T-195 on 17 October 2026, it draws
+    the house, so T-155's item there keeps them unrecorded too."""
     register = drawings.load_register()
     (t155,) = (result for result in register.results if result["id"] == "T-155")
     items = {int(item["n"]): item for item in t155["regularizations"]}
@@ -870,7 +871,7 @@ def test_t155_names_daniels_earlier_certificate_where_its_side_is_his() -> None:
             assert "first certified" not in note, n
     solves = drawings.recorded_solves(drawn, register.results, index.get("runs") or [])
     assert sorted(n for _rid, n in solves) == [
-        29, 37, 41, 50, 54, 71, 83, 107, 171, 178, 198, 230, 234, 293,
+        37, 41, 50, 54, 71, 83, 107, 171, 178, 198, 230, 234, 293,
     ]  # fmt: skip
     for n, item in items.items():
         assert ("modifications_unrecorded" in item) == (("T-155", n) not in solves), n
