@@ -3005,7 +3005,7 @@ def reviewed_output(
     """
     n = int(report["n"])
     decision = report.get("decision") or {}
-    if decision.get("decision") != "review":
+    if decision.get("decision") != "review" or decision.get("row") not in axis.REVIEW_ROWS:
         return None, None
     path = (report.get("source") or {}).get("path")
     for record in reviews:

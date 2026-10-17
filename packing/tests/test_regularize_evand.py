@@ -812,6 +812,25 @@ def test_a_view_sent_to_review_is_drawn_only_as_a_review_record_admits_it(
     assert drive.write_layer([run_dir], root, "admitted")["written"] == []
     write({**record, "decision": "reject"})
     assert drive.write_layer([run_dir], root, "admitted")["written"] == []
+    # Nor does one bound to another witness than the tree's, as it identifies itself, or
+    # one naming no row the review rows hold, nor a report sent to review at no such row
+    # (review J4 of #657).
+    write({**record, "source": {**record["source"], "revision": "an upstream fix"}})
+    assert drive.write_layer([run_dir], root, "admitted")["written"] == []
+    write({key: value for key, value in record.items() if key != "row"})
+    assert drive.write_layer([run_dir], root, "admitted")["written"] == []
+    unrowed = {**report, "decision": {**report["decision"], "row": None}}
+    rowless = {key: value for key, value in record.items() if key != "row"}
+    for held in (record, rowless):
+        assert drive.reviewed_output(unrowed, "evand-regularize-full", [held], root) == (
+            None,
+            None,
+        )
+    assert drive.reviewed_output(report, "evand-regularize-full", [record], root) == (
+        "same",
+        record,
+    )
+    write({**record, "decision": "reject"})
     assert axis.check_atlas(layout) == []
 
     write(record)
@@ -861,7 +880,11 @@ def test_a_view_sent_to_review_is_drawn_only_as_a_review_record_admits_it(
     index["entries"][0]["review"] = entry["review"]
     layout.index.write_text(json.dumps(index), encoding="utf-8")
     found = axis.check_atlas(layout)
-    assert any("not of the drawn view" in problem for problem in found), found
+    assert any(
+        "not of the drawn view: its witness now identifies itself otherwise (revision)"
+        in problem
+        for problem in found
+    ), found
     generators = index["generators"]
     assert axis.review_problems(layout, {4: entry["reference"]}, generators) == []
     write(record)
@@ -870,7 +893,9 @@ def test_a_view_sent_to_review_is_drawn_only_as_a_review_record_admits_it(
             f"n=4: {drive.LAYER_REVIEWS_PATH} admits a view the layer does not draw (its "
             "generator is 'evand-regularize', the entry's 'regularize_axis_components/2'; "
             "its run is 'evand-regularize-full', the entry's None; its output is 'same', "
-            "the entry's None; its row is 7, the entry's None)"
+            "the entry's None; its row is 7, the entry's None); run `layer` over the "
+            "record's run, or, where the witness was re-derived with the same identity, "
+            "withdraw the record or confirm it in a new one"
         )
     ]
 

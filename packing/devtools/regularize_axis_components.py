@@ -2290,15 +2290,24 @@ def _review_lapsed(
     record: Mapping[str, Any],
     entry: Mapping[str, Any],
     generators: Mapping[str, Mapping[str, Any]],
-) -> bool:
-    """Whether a review record has lapsed against an entry: the source witness the entry
-    names no longer identifies itself as the record says (`witness_self`), or the index
-    describes the record's generator at another version."""
+) -> str | None:
+    """Why a review record has lapsed against an entry, or None: the source witness the
+    entry names no longer identifies itself as the record says (`witness_self`), or the
+    index describes the record's generator at another version (review J3 of #657)."""
     path = (entry.get("source") or {}).get("witness")
-    if not path or record.get("source") != witness_self(layout.repo, str(path)):
-        return True
+    if not path:
+        return "the entry names no source witness"
+    found = witness_self(layout.repo, str(path))
+    held = record.get("source") or {}
+    if held != found:
+        changed = ", ".join(
+            key for key in sorted(set(held) | set(found)) if held.get(key) != found.get(key)
+        )
+        return f"its witness now identifies itself otherwise ({changed})"
     block = generators.get(str(record.get("generator")))
-    return block is None or record.get("generator_version") != review_version(block)
+    if block is None or record.get("generator_version") != review_version(block):
+        return "its generator's version is not the index's"
+    return None
 
 
 def review_problems(
@@ -2348,7 +2357,9 @@ def review_problems(
         if why or entry.get("review") is None:
             problems.append(
                 f"n={n}: {relative} admits a view the layer does not draw"
-                + (f" ({'; '.join(why)})" if why else "; run the `layer` command again")
+                + (f" ({'; '.join(why)})" if why else "")
+                + "; run `layer` over the record's run, or, where the witness was re-derived "
+                "with the same identity, withdraw the record or confirm it in a new one"
             )
     for n, entry in sorted(by_n.items()):
         link = entry.get("review")
@@ -2359,8 +2370,9 @@ def review_problems(
             problems.append(f"n={n}: the entry names a review record {relative} does not hold")
             continue
         why = review_admits(record, entry)
-        if _review_lapsed(layout, record, entry, generators) and not why:
-            why = ["its generator's version is not the index's"]
+        lapse = _review_lapsed(layout, record, entry, generators)
+        if lapse is not None:
+            why.append(lapse)
         if why:
             problems.append(
                 f"n={n}: its review record is not of the drawn view: {'; '.join(why)}"

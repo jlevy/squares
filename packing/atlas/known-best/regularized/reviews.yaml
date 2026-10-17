@@ -12,28 +12,40 @@ reviews:
     date: "2026-10-16"
     reviewer: the owner
     decision: admit
-    answer: "Admit it."
+    answer: "Admit it (Recommended)"
+    recorded_as: >-
+      Answered by the owner on 16 October 2026, as recommended: the coordinating agent of
+      the session named here asked, recommended admission, and the owner chose that
+      option (the policy's section 9 convention).
     session: https://claude.ai/code/session_01EJu6xskztSenJxCRTr4feM
     question: >-
-      Whether to admit Evan Daniel's same-side view of T-188's witness at n = 211, which
-      row 7 sent to review (12 per-square contact counts fall while no total does), and
-      which is better than the drawn axis view on all seven measures of the improvement
-      rule: light / uneven / near-axis squares, angle classes and hues 2 / 10 / 3 / 17 / 17
-      against 8 / 22 / 6 / 32 / 19, house and stage full shared sides 545 / 555 against
-      474 / 549.
+      As asked (AskUserQuestion, about 20:45Z): "At 211, Evan Daniel's same-side view of
+      T-188's packing (2/10/3 light/uneven/near-axis, 17 classes, 17 hues) beats the
+      current drawing on all seven measures, but the regularization policy puts it in the
+      'review' row, which needs your recorded say-so before it can be admitted. Admit it?"
+    options:
+      - option: "Admit it (Recommended)"
+        description: >-
+          Record your review under the policy's section 5 and admit Daniel's view at 211
+          in #657; PENDING_ALLOWED becomes empty.
+      - option: "Keep 211 pending"
+        description: >-
+          Leave 211 allowlisted under think-r3cl for a later look; #657 merges with 211
+          still pending.
     reason: >-
-      "Admit it." is the owner's whole answer, relayed to the regularization lane by its
-      coordinator in the session named here. The facts it answered: the view passes both
-      exact routes at the witness's own side, pairs one to one and loses no contact
-      total, so only the per-square counts row 7 reads held it from the layer, and it is
-      better than the drawn picture on every goal of the improvement rule.
+      The owner's choice of the recommended option. The facts the question rested on:
+      the view passes both exact routes at the witness's own side, pairs one to one and
+      loses no contact total, so only the per-square counts row 7 reads (12 fall) held it
+      from the layer, and it is better than the drawn axis view on every goal of the
+      improvement rule: light / uneven / near-axis squares, angle classes and hues
+      2 / 10 / 3 / 17 / 17 against 8 / 22 / 6 / 32 / 19, house and stage full shared
+      sides 545 / 555 against 474 / 549.
     shown: >-
-      The measures above, from the selection reports selection-z7wn-a.json and
-      selection-r3cl.json in packing/cases/regularized_drawings/think-z7wn-2026-10-16/,
-      and the tables of PR 657's description. The gallery was rendered after the
-      decision, for the record (review H7 of PR 657): the source witness, this view and
-      the axis tool's view the layer drew then, side by side, and grid-slack's view,
-      which is the same at 0.5, 1 and 5 degrees.
+      Only the question's text, with the measures it states; no image or gallery was
+      shown to the owner for 211. The gallery below was rendered after the decision, for
+      the record (review H7 of PR 657): the source witness, this view and the axis
+      tool's view the layer drew then, side by side, and grid-slack's view, which is the
+      same at 0.5, 1 and 5 degrees.
     gallery:
       - packing/cases/regularized_drawings/think-z7wn-2026-10-16/review-211/gallery.html
       - packing/cases/regularized_drawings/think-z7wn-2026-10-16/review-211/grid-slack-z7wn-a-deg05-1016.svg

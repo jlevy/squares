@@ -467,8 +467,9 @@ grid-slack’s views draw more uneven squares than the axis tool’s and his is 
 4, so 176 is decided no better, as the owner settled it on 16 October (“Adopt as
 settled”). At 211 every view of both generators goes to review at row 7 (a square’s
 contact count falls while no total does), though his same-side view betters the drawn
-axis view on every measure; the owner admitted it the same day (“Admit it.”), by the
-layer’s first review record, in [`regularized/reviews.yaml`](regularized/reviews.yaml).
+axis view on every measure; the owner admitted it the same day, as recommended (“Admit
+it (Recommended)”), by the layer’s first review record, in
+[`regularized/reviews.yaml`](regularized/reviews.yaml).
 The selection of 232, 237, 264, 271, 302, 303 and 304, which did not finish by that
 pass’s stop time, ran the same day on the same runs (think-r3cl, 28 minutes of wall at
 two workers): it draws grid-slack’s half-degree views at 232, 264 and 271 and its

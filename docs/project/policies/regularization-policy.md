@@ -202,6 +202,7 @@ where there is one.
 
 | Decision | How it is made reproducible |
 | --- | --- |
+| Admit a view row 7 sent to review (a square’s count falls while no total does) | A review record naming that very view: its count, generator and version, run, output and row, and the source witness as it identifies itself; `layer` then draws it, and the entry names the record |
 | Admit a row 8 alternate | Only once question 2 is answered yes, and then labelled an alternate, never the credited packing |
 | Choose symmetry or contact, attached or separate sub-blocks, or a placement style | A per-count generator parameter in the review record, which the driver reads on every later run |
 | Choose an orientation | A recorded isometry of the witness’s frame, as `devtools/atlas_orientation.py` records them |
@@ -214,7 +215,8 @@ where there is one.
 - Edit a view’s coordinates or angles by hand.
   Every pose comes from a generator run and, for `same`, from the exact re-solve.
 - Admit a view that fails any obligation of [section 3](#3-admission-obligations), or
-  override rows 1 to 7.
+  override a refusal or a hold of rows 1 to 7; row 7’s review, where no total falls, is
+  the reviewer’s to decide.
 - Change a side, a tier or a credit.
 - Draw an alternate as the credited packing.
 
@@ -227,7 +229,8 @@ against, as the witness identifies itself; and the gallery it was made from.
 The index entry names its record, and the records tier’s check of the layer
 (`regularize_axis_components --check-atlas`) holds the two to each other.
 The first review created both: on 16 October 2026 the owner admitted Evan Daniel’s
-same-side view at n = 211, which row 7 had sent to review.
+same-side view at n = 211, which row 7 had sent to review, as recommended by the
+coordinating agent that asked.
 `regularize_evand layer` draws a view the table sent to review only as a record admits
 that very view: its count, generator and version, run, output and row, and its source
 witness as the witness identifies itself (its id, its source’s key, path and revision,

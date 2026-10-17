@@ -311,7 +311,7 @@ Then the same `layer` call that admits a run’s row-10 views draws the reviewed
 entry keeps the table’s row-7 decision and names the record, and `--check-atlas` holds
 the two to each other.
 A record lapses with its witness or its generator’s version, as at n = 211, which the
-owner admitted on 16 October 2026.
+owner admitted on 16 October 2026; `--check-atlas` names which lapsed.
 
 ## Register Candidates
 
@@ -350,6 +350,10 @@ A drawn view lapses when its source witness changes, by a new record at the coun
 corrected witness (policy section 5). In `packing-validate --records`, `--check-atlas`
 reports the stale view until `--update-atlas` redraws it, and `--check-state` reports
 the pending count after that.
+A review record of the count lapses only when the witness identifies itself otherwise; a
+witness re-derived with the same id, source key, path, revision and side leaves it
+standing, and then `--check-atlas` asks for the record to be withdrawn or confirmed in a
+new one, since `layer` would draw the old view again.
 A house adoption is the usual cause, and these steps belong to the pull request that
 adopts it: the import runbook’s
 [Adopt a House, Then Regularize It](../../../packing/campaign/result-import.md#adopt-a-house-then-regularize-it)
