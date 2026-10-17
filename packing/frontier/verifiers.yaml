@@ -4007,7 +4007,10 @@ verifiers:
       note: >-
         Its authors had read the census, cover and routing modules and their Lean
         checkers before writing it; it decides the same finite predicates from the data,
-        and enumerates the orbits and the coverage itself.
+        and enumerates the orbits and the coverage itself. Its coverage check assumes the
+        producer's naming convention, that each census pattern's roster is the cell mask
+        its name encodes, and does not decide that from the pattern files (the review's
+        N19-6, its question 4 to the author).
     note: >-
       Written and run on 16 October 2026 by the review of the Lean proof; kept in the
       packet's review/ with its README, which records what it printed.
