@@ -5,7 +5,7 @@ title: "Policy: the house is always the smallest validated packing, regularized 
 kind: task
 status: in_progress
 priority: 2
-version: 12
+version: 13
 delegate: user-eb-policy-houses
 labels: []
 dependencies: []
@@ -13,7 +13,7 @@ parent_id: is-01m51hyxstsa9ptekd2ss26ksn
 hold: null
 hold_until: null
 created_at: 2026-10-16T17:14:02.997Z
-updated_at: 2026-10-16T23:42:28.528Z
+updated_at: 2026-10-17T00:28:43.330Z
 started_at: 2026-10-16T17:17:09.781Z
 ---
 Owner, 2026-10-16 afternoon: 'We should always be adopting the smallest packing and then regularizing it. That should be the policy, obviously.' and 'This should be built into our policy. It shouldn't even be a question. If there's any ambiguity on that, we should fix that in our process docs for intake.' Write it into result-import.md stage 5, the regularization guide, the frontier README, and select_houses/adopt_houses (owner holds such as HELD T-174, RP-3 algebraic left-outs, undecided orderings, regularized views below U), then adopt every smaller validated packing it reaches and regularize each.
@@ -127,3 +127,5 @@ think-sa5r stays open until the adoption PR that empties PENDING_ADOPTION merges
 2026-10-16 ~23:00Z addressing pass on #660 (reviews A and B at 8e53e5c65), as user-eb-policy-houses: merged main 80b116ede (eef7e5741); code slice 9417d8a9c pushed (A1 staging beads think-3mry/think-ot5c with reasons, A3 cap text, A5/B1/B2 witness-keyed deferral check in default_drawings, A6 guard, A8-A10, B3-B7). Next: docs (A4, A7, A12-A14), A2 record changes, description, dispositions.
 
 2026-10-16 ~23:50Z #660 addressing pass, after the container restart: pushed 1e0b8ac8a. Commits since 8e53e5c65: eef7e5741 (merge main 80b116ede), 9417d8a9c (code: A1 beads think-3mry/think-ot5c with STAGING_REASONS, A3, A5/B1/B2 witness-keyed default_drawings.deferral_problems, A6, A8-A10, B3-B7), 070420789 (docs: A4, A7 in OR-18, A12-A14), 3875e7eef (A2 records: 63 case records refreshed, results.yaml, source-coverage, requests, citation deferral to think-ot5c), 75915fe18 (pin), 72b8b50ac (merge main 3301a1cf6: #644, #653), c76e0dc5a (pin), 1e0b8ac8a (papers' no-change record by render). Deferral beads: think-mbdw (number-field second route), think-z6aj (n = 17 view). The site needs an edition for A2, cut in merge order. Next: validation, description, dispositions, CI.
+
+2026-10-17 ~00:30Z user-eb-policy-houses: addressing pass on reviews A and B of PR #660 done at 53785a88d (main 5012a97d6 merged, #654). 21 fixed, 1 deferred (A11 to think-z6aj), 0 declined; A1's optional bead-label check left out. Replies: https://github.com/jlevy/squares/pull/660#pullrequestreview-5555015627 (A) and https://github.com/jlevy/squares/pull/660#pullrequestreview-5555016150 (B). Hosted CI at 53785a88d: every job passed except validate and its packing-required roll-up, on check_release_impact for the site alone (run 38985460814). The site's edition is cut in merge order, so the PR stays a draft. Beads: think-3mry and think-ot5c (the adoptions, open, unclaimed), think-mbdw and think-z6aj (claimed). #657 must take 211 off PENDING_ALLOWED: the witness-keyed check flags only 211 at 1f343b743 and passes with it off. #658 must drop deferred_results; the guard test fails if it merges. This bead closes when #660 merges.

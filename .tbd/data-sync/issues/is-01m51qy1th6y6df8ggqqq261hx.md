@@ -3,9 +3,9 @@ type: is
 id: is-01m51qy1th6y6df8ggqqq261hx
 title: "Records: T-185 to T-190 to V3/C3 after the 16 October review, adopt 15 houses and regularize them on the new witnesses"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 14
+version: 16
 delegate: user-eb-records-185-190
 labels:
   - result-import
@@ -14,8 +14,12 @@ parent_id: is-01m51hyxstsa9ptekd2ss26ksn
 hold: null
 hold_until: null
 created_at: 2026-10-16T06:56:00.849Z
-updated_at: 2026-10-16T21:08:02.618Z
+updated_at: 2026-10-17T01:42:47.758Z
 started_at: 2026-10-16T06:56:10.518Z
+closed_at: 2026-10-17T01:42:47.758Z
+close_reason: "Landed in the regularization stack, merged into main on 16-17 Oct (#644 b35a6289f, #653 3301a1cf6, #654 5012a97d6, #656 76cb5cbdb, #657 c593e2bfd); PENDING_ALLOWED is empty on main."
+resolution: null
+duplicate_of: null
 ---
 Stage 4 exit (records lane) for T-185 to T-190, after the review of 16 October (think-tdna; PR #648; docs/project/reviews/review-2026-10-16-upper-bound-imports-506-607.md): all six accepted for finite feasibility, each supports V3/C3 with its confirming evidence entry (E-couzo-506-n175-exact-feasibility, E-mishapolk-70a033f-exact-feasibility, E-evand-606-n146-exact-feasibility, E-couzo-487b058-exact-feasibility, E-couzo-607-exact-feasibility, E-couzo-4e4c8ce-n237-exact-feasibility); findings RT-1 to RT-13, none blocking or major. Write the confirming evidence, map the review, derive the rungs, set the reviewed significance (T-185 S1->S2, T-188 S1->S2, T-189 S2->S3, T-190 S1->S2), fix RT-1 to RT-4, and adopt the houses the review's Adoption per Count names: T-186 at 129, 154, 156, 175, 176, 204, 232, 264, 271, 302, 303, 304; T-187 at 146; T-188 at 211; T-190 at 237 (15 counts). By the intake step of #641, every re-housed count is regularized in the same PR (both strong generators on the new witnesses, select, admit) or allowlisted with an open bead. Stacked on the top of the regularization stack (#644 -> 3b -> 3c -> leftovers).
 
@@ -44,3 +48,5 @@ Stage 4 exit (records lane) for T-185 to T-190, after the review of 16 October (
 2026-10-16 19:57Z user-eb-stack: handover. The owner handed the regularization stack (#644 -> #653 -> #654 -> #656 -> #657) to lane S (user-eb-stack); claim skipped (held by its earlier lane), carrying on per the brief.
 
 2026-10-16 21:08Z user-eb-stack: #657 at 1f343b743 (stack merged in 26c6817a5; think-r3cl's selection admitted; B2 poster pins 6d3ea4a3e; B dispositions review 5553667876). think-z7wn can close at #657's merge.
+
+2026-10-17 01:42Z user-eb-stack: #657 at f8071ce60 ready to merge (packing-required, pages-required, deep-gate-required green). Close at #657's merge.

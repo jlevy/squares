@@ -3,9 +3,9 @@ type: is
 id: is-01m50xqm2f4t3jb74z1sjnx5x9
 title: "Regularize 3a: 176 first, then 105, 129, 146, 156, 204, 271, 272, 303 (re-housed by #614 60aa1d39e)"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 14
+version: 15
 delegate: user-eb-land-644
 labels:
   - regularization
@@ -14,8 +14,12 @@ parent_id: is-01m50wdrbfnwsq05w150az5z88
 hold: null
 hold_until: null
 created_at: 2026-10-15T23:18:07.183Z
-updated_at: 2026-10-16T19:42:23.953Z
+updated_at: 2026-10-17T01:42:45.590Z
 started_at: 2026-10-16T02:53:15.554Z
+closed_at: 2026-10-17T01:42:45.590Z
+close_reason: "Landed in the regularization stack, merged into main on 16-17 Oct (#644 b35a6289f, #653 3301a1cf6, #654 5012a97d6, #656 76cb5cbdb, #657 c593e2bfd); PENDING_ALLOWED is empty on main."
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes

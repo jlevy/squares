@@ -3,9 +3,9 @@ type: is
 id: is-01m50xqnsqj449s8rz91s61rdn
 title: "Regularize 3b: 153, 154, 207, 211, 237, 241, 302, 304 (re-housed by #614 3b9fab84a and #553)"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 14
+version: 15
 delegate: user-eb-reg-3b3c
 labels:
   - regularization
@@ -16,8 +16,12 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-15T23:18:08.951Z
-updated_at: 2026-10-16T19:57:42.255Z
+updated_at: 2026-10-17T01:42:46.125Z
 started_at: 2026-10-16T05:13:41.663Z
+closed_at: 2026-10-17T01:42:46.125Z
+close_reason: "Landed in the regularization stack, merged into main on 16-17 Oct (#644 b35a6289f, #653 3301a1cf6, #654 5012a97d6, #656 76cb5cbdb, #657 c593e2bfd); PENDING_ALLOWED is empty on main."
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes

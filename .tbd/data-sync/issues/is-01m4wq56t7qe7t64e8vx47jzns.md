@@ -5,7 +5,7 @@ title: "Import BuddenPing: 148 certificate refinements, 60 of them exact algebra
 kind: task
 status: in_progress
 priority: 1
-version: 10
+version: 12
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-14T08:06:14.598Z
-updated_at: 2026-10-16T03:23:49.869Z
+updated_at: 2026-10-17T00:30:11.869Z
 started_at: 2026-10-14T08:06:19.172Z
 ---
 Pull request jlevy/squares#574 (BuddenPing, PingYou Ltd), head 4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde of BuddenPing/squares (2026-10-13T01:58:38Z), treated as an intake report: never merged, approved or commented on here. Lane pr574 of the 2026-10-14 intake pass (think-mq0k), branch claude/wizardly-meitner-wqn4x3-intake-1014-pr574. Packet packing/resources/web/pingyou-pr574-certificates-2026-10-13/. Claim map, comparison, replay plan and draft acknowledgement in the notes.
@@ -129,3 +129,33 @@ Replay with the owner budget (2026-10-14): all 64 recorded rational counts and t
 Budgeted replay done (2026-10-14, head e9eb6935a): 64 recorded rational counts, 192 jobs on both routes, 64 pass / 128 controls refused; 4 recorded algebraic counts, 12 jobs on route 1, 4 pass / 8 refused; check --replay of every recorded count equal. Unreplayed: 21 declared rational counts the ledger does not record, 56 algebraic counts.
 
 2026-10-16 ~03:40Z ecstatic-edison-replies-stack, PR #637 review A4 (https://github.com/jlevy/squares/pull/637#pullrequestreview-5542558537). Held reply on #574: `check_requests --report` lists #574 as reply due (T-174 is V3/C3, confirmed, and E-pingyou-574-certificate-report and E-pingyou-574-algebraic-report reviewed, where the follow-up of 14 October stated V0/C0 and recorded). The coordinator held it out of the 16 October replies (think-py1e's brief: "Not on #574 ..."): deciding the pull request and adopting T-174 are the owner's, and the entry's close_when has the owner post the resulting state with T-174's id. What releases it: the owner's decision on PR #574, or the owner's instruction to post. Until then a pass that finds #574 due does not post it; #574's entry in packing/campaign/result-requests.yaml notes the same hold (PR #637).
+
+Replacement stage 7 reply draft from #660's addressing pass (house rule; RP-3 and the T-174 hold end): see the #574 section of the file attached below. Not posted: stage 7 replies post only after the change merges and deploys.
+
+# Stage 7 reply text after PR #660 (review A2), for the answer beads' holders
+
+These are replacement lines for drafts that are already on the answer beads. Nothing here has been posted. Each reply still goes out on the trigger its bead names.
+
+## think-9v2k (#574): the held note of 2026-10-16 ~03:40Z
+
+Replace "deciding the pull request and adopting T-174 are the owner's" with:
+
+> deciding the pull request is the owner's; adopting T-174 is not, since the owner's house rule of 16 October 2026 makes T-174 the house at 63 counts, staged in `select_houses.PENDING_ADOPTION` under think-3mry (60 rational counts, the next pull request) and think-ot5c (70, 153 and 207, once `adopt_houses` writes an algebraic side)
+
+The release is unchanged: the owner's decision on PR #574, or the owner's instruction to post.
+
+Add this sentence to the reply itself, after the V3/C3 state:
+
+> Under the house rule the owner set on 16 October 2026, a validated packing smaller than a case's house becomes the house, whoever found it, and is regularized in the pull request that adopts it. T-174's packings are therefore the houses at 63 counts. The 60 rational ones are adopted in the next adoption pull request, and the algebraic ones at 70, 153 and 207 once the record's writer takes algebraic sides.
+
+## think-phyb (#639): the DRAFT import reply
+
+In its third paragraph, replace "and your configurations and checker are now a second route for the owner's open decision on those three" with:
+
+> so #574 keeps the record there, and your configurations and checker are a second exact route to those three sides, which the owner's house rule of 16 October 2026 adopts as the houses once the record's writer takes algebraic sides
+
+Replace "The case pages keep their houses until adoption, which is the owner's, with #574's." with:
+
+> Under that rule each validated smaller side becomes the house in the pass that validates it. T-193's sixteen are adopted that way once T-193's stage 4 review is merged (#658), and the case pages keep their current houses until then.
+
+The supersession note of ~11:05Z still applies: if T-193 is not yet at V3/C3 on main when this reply is posted, the reply must not say it is confirmed.

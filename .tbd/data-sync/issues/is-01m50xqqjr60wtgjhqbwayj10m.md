@@ -3,9 +3,9 @@ type: is
 id: is-01m50xqqjr60wtgjhqbwayj10m
 title: "Regularize 3c: 175, 232, 264 (re-housed by #598)"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 14
+version: 15
 delegate: user-eb-reg-3b3c
 labels:
   - regularization
@@ -14,8 +14,12 @@ parent_id: is-01m50wdrbfnwsq05w150az5z88
 hold: null
 hold_until: null
 created_at: 2026-10-15T23:18:10.776Z
-updated_at: 2026-10-16T20:00:11.155Z
+updated_at: 2026-10-17T01:42:46.661Z
 started_at: 2026-10-16T05:13:42.084Z
+closed_at: 2026-10-17T01:42:46.661Z
+close_reason: "Landed in the regularization stack, merged into main on 16-17 Oct (#644 b35a6289f, #653 3301a1cf6, #654 5012a97d6, #656 76cb5cbdb, #657 c593e2bfd); PENDING_ALLOWED is empty on main."
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes

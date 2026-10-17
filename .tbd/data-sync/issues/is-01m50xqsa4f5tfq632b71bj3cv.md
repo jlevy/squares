@@ -3,9 +3,9 @@ type: is
 id: is-01m50xqsa4f5tfq632b71bj3cv
 title: "Regularization leftovers: grid-slack 1 and 5 deg on 102, 236, 258, 263, 269; record outcomes for 110, 123, 155, 179, 180; 39, 55, 290, 291 under think-yk2h"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 16
+version: 17
 delegate: user-eb-reg-leftovers
 labels:
   - regularization
@@ -14,8 +14,12 @@ parent_id: is-01m50wdrbfnwsq05w150az5z88
 hold: null
 hold_until: null
 created_at: 2026-10-15T23:18:12.547Z
-updated_at: 2026-10-16T20:07:44.210Z
+updated_at: 2026-10-17T01:42:47.225Z
 started_at: 2026-10-16T05:22:35.967Z
+closed_at: 2026-10-17T01:42:47.225Z
+close_reason: "Landed in the regularization stack, merged into main on 16-17 Oct (#644 b35a6289f, #653 3301a1cf6, #654 5012a97d6, #656 76cb5cbdb, #657 c593e2bfd); PENDING_ALLOWED is empty on main."
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes

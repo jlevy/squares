@@ -5,7 +5,7 @@ title: "Import evand: exact algebraic sides for 22 current best-known packings (
 kind: task
 status: in_progress
 priority: 1
-version: 20
+version: 22
 delegate: user-eb-intake-1016
 labels:
   - result-import
@@ -17,7 +17,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-16T04:05:28.050Z
-updated_at: 2026-10-16T12:23:24.071Z
+updated_at: 2026-10-17T00:30:14.077Z
 started_at: 2026-10-16T04:05:36.125Z
 ---
 Stage 1 triage of jlevy/squares#639 (evand, Evan Daniel, "Exact algebraic sides for 22 current best-known packings (minimal polynomial, isolating interval, exact configuration): registration request", opened 2026-10-16T03:37:13Z, labelled `intake`, no comments when read at about 04:20Z). Intake pass 2026-10-16 (epic think-mdnn), read-only: nothing was run but exact sign evaluations of the source's polynomials at the record's rationals (seconds), and nothing of the source is retained yet.
@@ -103,3 +103,33 @@ Two questions, if you have a moment:
 2026-10-16 ~11:55Z user-eb-addr-642-651: #651 review A addressed at 3a230d30f (CI green, runs 38895014466 / 38895014273); reply https://github.com/jlevy/squares/pull/651#pullrequestreview-5547382157. T-193 held at V0/C0 pending think-7qxm; the stage 4 exit must restore E-evand-639-verify-exact-replay (draft at ef43dd02f, numbers from the refreshed receipt: 1,427 CPU s positives, 58 s controls, 23/23 squarefree+irreducible) and cite it, and re-add a case-citation deferral if houses still cannot adopt. Deferrals opened: think-e1u5 (formal stack, A1), think-v860 (ledger start, A7).
 
 2026-10-16 ~12:25Z coordinator user-eb: PR #651 MERGE-READY at b33ce8ffd (senior+correctness Review A 0/2/1/5 and follow-up Review B 0/0/0/2 addressed: T-193 held at V0/C0 until think-7qxm; T-194 registered V0/C0, S5 draft; A1 informal chain deferred think-e1u5; A7 think-v860; B1 cache key fixed; B2 noted on think-7qxm). CI green. Merge after #642, retargeted to main. The T-193 exit and the T-194 C1 mapping are lane K's PR (think-9e3w), stacked on #655.
+
+Replacement stage 7 reply draft from #660's addressing pass: see the #639 section of the file attached below. Not posted.
+
+# Stage 7 reply text after PR #660 (review A2), for the answer beads' holders
+
+These are replacement lines for drafts that are already on the answer beads. Nothing here has been posted. Each reply still goes out on the trigger its bead names.
+
+## think-9v2k (#574): the held note of 2026-10-16 ~03:40Z
+
+Replace "deciding the pull request and adopting T-174 are the owner's" with:
+
+> deciding the pull request is the owner's; adopting T-174 is not, since the owner's house rule of 16 October 2026 makes T-174 the house at 63 counts, staged in `select_houses.PENDING_ADOPTION` under think-3mry (60 rational counts, the next pull request) and think-ot5c (70, 153 and 207, once `adopt_houses` writes an algebraic side)
+
+The release is unchanged: the owner's decision on PR #574, or the owner's instruction to post.
+
+Add this sentence to the reply itself, after the V3/C3 state:
+
+> Under the house rule the owner set on 16 October 2026, a validated packing smaller than a case's house becomes the house, whoever found it, and is regularized in the pull request that adopts it. T-174's packings are therefore the houses at 63 counts. The 60 rational ones are adopted in the next adoption pull request, and the algebraic ones at 70, 153 and 207 once the record's writer takes algebraic sides.
+
+## think-phyb (#639): the DRAFT import reply
+
+In its third paragraph, replace "and your configurations and checker are now a second route for the owner's open decision on those three" with:
+
+> so #574 keeps the record there, and your configurations and checker are a second exact route to those three sides, which the owner's house rule of 16 October 2026 adopts as the houses once the record's writer takes algebraic sides
+
+Replace "The case pages keep their houses until adoption, which is the owner's, with #574's." with:
+
+> Under that rule each validated smaller side becomes the house in the pass that validates it. T-193's sixteen are adopted that way once T-193's stage 4 review is merged (#658), and the case pages keep their current houses until then.
+
+The supersession note of ~11:05Z still applies: if T-193 is not yet at V3/C3 on main when this reply is posted, the reply must not say it is confirmed.

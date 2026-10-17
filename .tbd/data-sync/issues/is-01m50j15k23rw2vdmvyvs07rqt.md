@@ -5,7 +5,7 @@ title: "Import pingyou: s(29) exact rational certificate, 1.57e-36 below T-155 a
 kind: task
 status: in_progress
 priority: 2
-version: 22
+version: 24
 delegate: user-eb-intake-622
 labels:
   - result-import
@@ -18,7 +18,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-15T19:53:37.121Z
-updated_at: 2026-10-17T00:23:11.161Z
+updated_at: 2026-10-17T01:37:12.721Z
 started_at: 2026-10-15T23:31:02.497Z
 ---
 Stage 1 triage of pull request jlevy/squares#622 (BuddenPing, PingYou Ltd, "data: submit a tighter exact N29 packing certificate", opened 2026-10-15T18:43:54Z, no comments or reviews when read at about 19:50Z). A result submitted as a pull request, treated as an intake report as #574 was (think-9v2k): never merged, approved, pushed to or commented on here. Lane D of the 2026-10-15 evening intake pass (think-wnsv, think-ykg6), read-only.
@@ -86,3 +86,7 @@ Coordinator, 16 Oct ~23:10Z: lane N's owner question 1, the key reason for recor
 "@BuddenPing, thank you for the N29 certificate, and for confirming the affiliation and the PY assistance. We imported it from your release data/pingyou-n29-certificate-2026-10-15-v1 through the manifest at 3115557: read exactly, the certificate equals your corners Witness/v2 pose for pose. Both of this repository's maintained exact routes, sqpack's exact witness verifier and the rational corner checker, accept it over Q, every wall and all 406 pairs, reproducing your own runs of them. Two checks that share no code with those routes accept it too: the half-angle containment and exact intersection-area route, and a clean-room checker written for the 16 October review, and each refuses controls pushed just past contact. Two squares touch, and a square touches the box, exactly. Its side is 1.57 × 10⁻³⁶ below T-155, our exact side for the Schadt–Ellsworth packing, and 7.32 × 10⁻⁹⁰ below your PR #574 certificate at 29, both compared exactly; measured against our witness of that packing (T-009), no square moves by more than 8 × 10⁻²⁰. Against the catalogue's 5.93383346267692 the comparison stays open, since the record does not yet hold that packing's exact side (Evan Daniel's degree-7213 root, #545). The review accepted the certificate for finite feasibility, and it is registered as T-195: Thomas Schadt's packing of 2025, as David Ellsworth improved it, in PingYou Ltd's certificate. It is recorded under the owner's standing rule that the record adopts the smallest validated packing and then regularizes it, and it becomes the house at 29 with its own drawing, since the regularization pass found no tidier one. Merging this pull request remains the owner's call; the import went through the record's own packet, as #574's did."
 
 2026-10-17 ~00:50Z user-eb-intake-622 (addressing pass on #661): records branch head ad28cc784 (pushed, fast-forward): T-195 held at 29 by select_houses.HELD (e2b88aec9), pin e2b88aec (d37cce317), hold tests generalized (ad28cc784). Records tier 52/52 at d37cce317 (142.5 s); focused 760+3 failed -> fixed, house tests 42 passed, 441 in the other house-writer modules. Adopt branch head 5e351d756 (pushed): A7 found_year fix d2d705000 (Credit.found_year=2025 at 29, test added), records head merged in; records tier 52/52 (116.4 s), focused 349 passed. #661 body updated (S2, cost, exception, hold); #662 body notes GitHub closed it as merged when 6cc68d3fe reached its base (head branch auto-deleted, commits all in #661). Dispositions posted: A pullrequestreview-5555042306, B pullrequestreview-5555042351. Pending: A1 (main merge, re-pin, re-cut, paper records against new main; main now 5012a97d6) and B5 deep-gate after it, on the coordinator's word; then CI watch and ready-for-review.
+
+2026-10-17 user-eb-intake-622: parked per coordinator (#660 first). Rehearsal of #661's post-#660 pass on LOCAL branch prep-661-after-660 (never pushed), from #661 ad28cc784: merge #660 53785a88d (main 5012a97d6) d450eb94c; fold adopt 5e351d756 021d8dc07; adopt T-195 at 29 (pass day 2026-10-17), witness byte-identical (b7bd5398), SETTLED[29] decided-no-better from the retained runs 52ea8b37b; coverage print-unit fix 8f990ae3f (coordinator: in #661, cite think-adgd/think-nhsd); custody/citations/tests 052b95403. Remaining: re-pin, re-cut, paper records, records tier.
+
+2026-10-17 user-eb-intake-622: rehearsal complete on LOCAL prep-661-after-660 at 9961a4280 (never pushed; #661 stays ad28cc784, adopt 5e351d756). Records tier 52/52 (135 s); 1089 focused tests pass. Findings for the pass: coverage print-unit fix 8f990ae3f (coordinator: lands in #661, cite think-adgd/think-nhsd); survey Figure 3 embeds n-029's drawing and its caption named the interval certificate, so the survey takes a patch edition (v0.2.3 rehearsed, caption revised); explainer only its register count; n = 11 reviews byte-identical. Runbook /tmp/claude-0/-home-user-squares/497b954f-f1d7-5565-9258-beec4cbe400c/scratchpad/pass-661-runbook.sh, patches pass-661-hand-edits.patch and pass-661-results-yaml.patch beside it.
