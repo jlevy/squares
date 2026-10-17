@@ -440,7 +440,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "aea5f4226121e8b400fe215fd6c9b77a269c66f0"
+DATA_REVISION = "88d9f9a103d86639e0908cc07a5e54d94ed705d6"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -1255,6 +1255,51 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "the renders from main e2e018f3's tree; the explainer, whose render needs a "
             "browser this host lacks, is source-reviewed only, and no PDF was printed. "
             "All four papers keep their versions."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+            "site",
+        ),
+        paths=(
+            "packing/atlas/known-best/default-drawings.json",
+            "packing/devtools/default_drawings.py",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-lower-bounds-explainer.pdf",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-optimality-review.pdf",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/n11-threshold-bound-review.pdf",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+            "papers/square-packing-methods-survey.pdf",
+            "atlas.html",
+            "index.html",
+            "results.html",
+        ),
+        reason=(
+            "The think-0ut1 run of 16 October 2026 admits no view: it rewrites ten "
+            "decided-no-better SETTLED entries (their runs, outcomes and evidence, no owed "
+            "work left), so default-drawings.json changes only those counts' `states` rows "
+            "(`decisions` and `why`); its `entries` are byte-identical to the base's. The "
+            "site reads the record only through `regularized_defaults`, `credit_line` and "
+            "`held_reasons`, which read `entries` and the index, never `states`, SETTLED or "
+            "PENDING_ALLOWED, and no case record, view or index entry changes. The papers "
+            "reach default_drawings only through shared import discovery and read neither "
+            "constant. Review G2 of #644 then added default_drawings.orphaned_copies, "
+            "which fails the state gate on a settled-runs copy no settlement names, and "
+            "deleted the five such copies; the site and the papers read neither. Source "
+            "review, no render; the site keeps v0.7.22 and the papers v0.4.7, v0.1.7, "
+            "v0.1.0 and v0.2.2."
         ),
     ),
     ReleaseNoPublicChange(

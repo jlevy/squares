@@ -88,10 +88,11 @@ by a record the retained evidence keeps (`EVIDENCE`, `run_records`): a run's blo
 enough, since the index drops a run's block once no entry draws from it; `--retain-runs`
 copies the block into the evidence (`SETTLED_RUNS`) while the index still has it. Where
 the record lists the counts the run covered, a receipt's counts or the reports beside a
-block, the settled count must be one of them. Each bead the list, an exemption or a
-decided count's `owed` names must be open, which `devtools.check_bead_tree` holds
-through `deferrals`. A record older than a witness
-is `--check`'s to catch, by deciding every count again. A witness is identified by what
+block, the settled count must be one of them. A copy there that no `SETTLED` entry
+names fails too, since the directory holds the blocks settlements rest on (review G2 of
+#644). Each bead the list, an exemption or a decided count's `owed` names must be open,
+which `devtools.check_bead_tree` holds through `deferrals`. A record older than a
+witness is `--check`'s to catch, by deciding every count again. A witness is identified by what
 it says of itself -- its source's key, path and revision, and its side -- never by a
 digest of its bytes (OR-16); its id is the count's (`W-known-best-nNNN`) and names no
 house, so the gate's comparison of it only holds each row to its count.
@@ -149,7 +150,10 @@ EVIDENCE_PATH = "packing/cases/regularized_drawings/"
 #: for each run a settlement names that no other retained evidence holds, copied from the
 #: index by `--retain-runs` while the index still holds it. The index keeps a run's block
 #: only while an entry draws from it (`regularize_axis_components.carried_index`), and a
-#: settlement rests on its runs for as long as it stands (review F1 of #644).
+#: settlement rests on its runs for as long as it stands (review F1 of #644). A copy is
+#: deleted with the last settlement that names its run, and `--check-state` fails on one
+#: that outlives it (`orphaned_copies`, review G2 of #644), as the layer's check fails on
+#: an index block that draws no entry.
 SETTLED_RUNS = "settled-runs"
 RECORD = ROOT / "atlas/known-best/default-drawings.json"
 RECORD_PATH = "packing/atlas/known-best/default-drawings.json"
@@ -200,15 +204,29 @@ class Settled(NamedTuple):
     owed: str | None = None
 
 
-#: Both generators ran on the 42 witnesses jlevy/squares#518 adopted, on 12 October 2026.
-_ADOPT518 = (
-    ("evand-regularize", "evand-regularize-refreshed-adopt518-v2"),
-    ("regularize_grid_slack/1", "grid-slack-on518"),
+#: Both generators ran again on 16 October 2026 at the ten counts decided on 15 October
+#: whose decision still owed runs or a per-count outcome (think-0ut1), each on the witness
+#: the record names: Evan Daniel's regularizer, and grid-slack at 0.5, 1 and 5 degrees. The
+#: #518 runs (`evand-regularize-refreshed-adopt518-v2`, `grid-slack-on518`) and the runs of
+#: 12 and 13 October had decided them first, but their receipts keep only aggregates; the
+#: atlas README's think-0ut1 paragraph of 16 October gives each count's outcome on these,
+#: and `cases/regularized_drawings/think-0ut1-2026-10-16/` keeps their receipts, per-count
+#: reports and the selection's report (review A2 of #653).
+_LEFTOVERS = (
+    ("evand-regularize", "evand-regularize-leftovers-1016"),
+    ("regularize_grid_slack/1", "grid-slack-leftovers-deg05-1016"),
+    ("regularize_grid_slack/1", "grid-slack-leftovers-deg1-1016"),
+    ("regularize_grid_slack/1", "grid-slack-leftovers-deg5-1016"),
 )
-_README = "packing/atlas/known-best/README.md, the #518 paragraph"
+_README_LEFTOVERS = (
+    "packing/atlas/known-best/README.md, the think-0ut1 paragraph of 16 October 2026, and "
+    "the runs' receipts, reports and selection in "
+    "packing/cases/regularized_drawings/think-0ut1-2026-10-16/"
+)
 _T146 = (
-    "the house is Evan Daniel's own regularized list (T-146); neither generator drew "
-    "better on it, and the axis tool's view does not improve on it"
+    "the house is Evan Daniel's own regularized list (T-146): his regularizer and "
+    "grid-slack at 0.5, 1 and 5 degrees each draw no change, and the axis tool's view does "
+    "not improve on it"
 )
 _REFUSED_DECIMAL = (
     "a decimal Kingbird witness: the axis tool refuses it (its 36-digit rational pose "
@@ -218,10 +236,6 @@ _KINGBIRD = "Kingbird derived numerical facts"
 _KINGBIRD_PATH = "resources/web/known-best-packings/sources.json"
 _DANIEL = "[Daniel regularized lists 2026-10-10]"
 _DANIEL_REVISION = "ea1a2f23678a13bd1d252f9f4c95ca5dd2ffd2b7"
-#: What the #518 runs left undone on the counts they decided (think-0ut1): grid-slack ran
-#: at 0.5 degrees only, and the receipts keep the outcomes only in aggregate.
-_OWED_WIDER = "think-0ut1: grid-slack at 1 and 5 degrees, which the #518 run did not try"
-_OWED_OUTCOME = "think-0ut1: the runs' per-count outcome, which their receipts do not keep"
 #: Both generators ran on the nine witnesses jlevy/squares#614 adopted in 60aa1d39e, on
 #: 16 October 2026 (think-la7h): Evan Daniel's regularizer, and grid-slack at 0.5, 1 and
 #: 5 degrees. The atlas README's paragraph of that day gives each count's outcome. Two of
@@ -278,10 +292,11 @@ def _daniel(n: int) -> str:
 #: purpose: each named with the witness it was settled on, so a new witness makes the
 #: count `pending` again. Written from the evidence the audit of 15 October 2026 found
 #: (think-y1x3); the run receipts keep only aggregates, so `evidence` says where each
-#: outcome is written down, and `owed` names what is still to run or record. Recording
-#: each run's per-count outcome on the index, so that a decision needs no entry here, is
-#: think-4ov9. The gate fails on an entry whose witness has changed or whose count no
-#: longer needs it.
+#: outcome is written down, and `owed` names what is still to run or record. The ten
+#: decided counts owed think-0ut1 runs or per-count outcomes until its runs of 16 October
+#: 2026 (`_LEFTOVERS`). Recording each run's per-count outcome on the index, so that a
+#: decision needs no entry here, is think-4ov9. The gate fails on an entry whose witness
+#: has changed or whose count no longer needs it.
 SETTLED: dict[int, Settled] = {
     39: Settled(
         EXEMPT,
@@ -309,10 +324,9 @@ SETTLED: dict[int, Settled] = {
         _daniel(102),
         _DANIEL_REVISION,
         "10605828696431578360490734944053/1000000000000000000000000000000",
-        _ADOPT518,
+        _LEFTOVERS,
         _T146,
-        _README,
-        _OWED_WIDER,
+        _README_LEFTOVERS,
     ),
     110: Settled(
         DECIDED,
@@ -320,11 +334,12 @@ SETTLED: dict[int, Settled] = {
         "resources/web/franciscouzo-square-packing-2026-09-27/facts/n-110.yaml",
         "f3c5a529c255b546db18605702b8da298132309f",
         "10.996783396634358",
-        (("evand-regularize", "evand-regularize-bound-1013"),),
-        "Evan Daniel's exact view at U draws fewer shared sides (house 243 to 239), and "
-        "the owner keeps the axis tool's view at the witness's side",
-        "ABOVE_U; think-jnso",
-        _OWED_OUTCOME,
+        _LEFTOVERS,
+        "the axis tool's view at the witness's side is drawn (ABOVE_U): Evan Daniel's "
+        "exact view at U is refused at row 7, drawing fewer shared sides (house 243 to 239, "
+        "stage 257 to 251) and more light and uneven squares, and grid-slack's views at 0.5, "
+        "1 and 5 degrees, 2.8e-12 above U, are refused at row 7 too",
+        f"{_README_LEFTOVERS}; ABOVE_U; think-jnso",
     ),
     123: Settled(
         DECIDED,
@@ -332,10 +347,11 @@ SETTLED: dict[int, Settled] = {
         _daniel(123),
         _DANIEL_REVISION,
         "2897844536374424539887715795867/250000000000000000000000000000",
-        _ADOPT518,
-        "neither generator drew better than the axis tool's view",
-        _README,
-        _OWED_OUTCOME,
+        _LEFTOVERS,
+        "Evan Daniel's view is refused at row 7 (house sides fall from 329 to 314, uneven "
+        "squares rise from 16 to 30), and grid-slack's view ties the axis tool's on every "
+        "goal at 0.5, 1 and 5 degrees",
+        _README_LEFTOVERS,
     ),
     155: Settled(
         DECIDED,
@@ -345,10 +361,12 @@ SETTLED: dict[int, Settled] = {
         "64762127034792280678268012662770039849775757530809316735783064762127034792280"
         "678268012662770039849775757530809316735783/500000000000000000000000000000000000"
         "0000000000000000000000000000000000000000000000000000000000000000000000000000000000",
-        _ADOPT518,
-        "neither generator drew better than the axis tool's view",
-        _README,
-        _OWED_OUTCOME,
+        _LEFTOVERS,
+        "Evan Daniel's view is held at row 4 (solved 9.9e-31 above U), and grid-slack's "
+        "view at 0.5, 1 and 5 degrees draws one more light and one more uneven square than "
+        "the axis tool's (5 / 6 against 4 / 5), though fewer near-axis squares, classes and "
+        "hues",
+        _README_LEFTOVERS,
     ),
     179: Settled(
         DECIDED,
@@ -357,10 +375,11 @@ SETTLED: dict[int, Settled] = {
         "complete-certificates-and-comparators.json.xz",
         "9643cb5a78c1d4dcfc867c80a6920c3a6219d05a",
         "13883795490510898440309946897577/1000000000000000000000000000000",
-        (("evand-regularize", "evand-regularize-full"),),
-        "refused at row 7: a house or stage total of shared sides falls",
-        "docs/project/research/research-2026-10-11-regularization-state-and-approach.md",
-        _OWED_OUTCOME,
+        _LEFTOVERS,
+        "both generators' views are refused at row 7, a stage total of shared sides "
+        "falling (535 to 533 for Evan Daniel's, to 531 for grid-slack's at 0.5, 1 and 5 "
+        "degrees), though each draws fewer uneven squares",
+        _README_LEFTOVERS,
     ),
     180: Settled(
         DECIDED,
@@ -369,11 +388,11 @@ SETTLED: dict[int, Settled] = {
         "complete-certificates-and-decimal-poses.json.xz",
         "ffd900dfff6d2674ad995359208c2f0714915c82",
         "13916993522477832483558124720393/1000000000000000000000000000000",
-        (*_ADOPT518, ("evand-regularize", "evand-regularize-adopt518-v2-rerun-2026-10-13")),
-        "Evan Daniel's view tied the axis tool's on all seven measures at the same side "
-        "and was withdrawn (1d8f982ff)",
-        _README,
-        _OWED_OUTCOME,
+        _LEFTOVERS,
+        "Evan Daniel's view and grid-slack's at 0.5, 1 and 5 degrees each tie the axis "
+        "tool's view on every goal at the same side, which the rule does not draw (as the "
+        "view withdrawn in 1d8f982ff did)",
+        _README_LEFTOVERS,
     ),
     204: Settled(
         DECIDED,
@@ -394,11 +413,12 @@ SETTLED: dict[int, Settled] = {
         _daniel(236),
         _DANIEL_REVISION,
         "3172791149431853484523540541259/200000000000000000000000000000",
-        _ADOPT518,
-        "Evan Daniel's view drew one more angle class and was withdrawn (bd82e3a54); the "
-        "axis tool's view does not improve on the house",
-        _README,
-        _OWED_WIDER,
+        _LEFTOVERS,
+        "the house is Evan Daniel's own regularized list (T-146): his regularizer's view "
+        "draws one more angle class and hue (7 against the house's 6), as the view withdrawn "
+        "in bd82e3a54 did, grid-slack at 0.5, 1 and 5 degrees draws no change, and the axis "
+        "tool's view does not improve on the house",
+        _README_LEFTOVERS,
     ),
     258: Settled(
         DECIDED,
@@ -406,10 +426,9 @@ SETTLED: dict[int, Settled] = {
         _daniel(258),
         _DANIEL_REVISION,
         "16563448002133789379765816191273/1000000000000000000000000000000",
-        _ADOPT518,
+        _LEFTOVERS,
         _T146,
-        _README,
-        _OWED_WIDER,
+        _README_LEFTOVERS,
     ),
     263: Settled(
         DECIDED,
@@ -417,10 +436,9 @@ SETTLED: dict[int, Settled] = {
         _daniel(263),
         _DANIEL_REVISION,
         "16733166007899378970679613144039/1000000000000000000000000000000",
-        _ADOPT518,
+        _LEFTOVERS,
         _T146,
-        _README,
-        _OWED_WIDER,
+        _README_LEFTOVERS,
     ),
     269: Settled(
         DECIDED,
@@ -428,10 +446,9 @@ SETTLED: dict[int, Settled] = {
         _daniel(269),
         _DANIEL_REVISION,
         "16901513582189132198548012552701/1000000000000000000000000000000",
-        _ADOPT518,
+        _LEFTOVERS,
         _T146,
-        _README,
-        _OWED_WIDER,
+        _README_LEFTOVERS,
     ),
     272: Settled(
         DECIDED,
@@ -1055,6 +1072,11 @@ def state_problems(
         held = settled.get(n)
         if held is not None:
             problems.extend(_settled_problems(n, held, row, entry, recorded))
+    problems.extend(
+        f"{EVIDENCE_PATH}{SETTLED_RUNS}/{run}/run.json is not the copy of a run a "
+        "SETTLED entry names; delete it with the settlement it was retained for"
+        for run in orphaned_copies(evidence, settled=settled)
+    )
     problems.extend(_list_problems(rows, allowed))
     pending = {n for n, row in rows.items() if row["state"] == PENDING}
     listed = [
@@ -1120,6 +1142,22 @@ def run_records(index: Path = INDEX, evidence: Path = EVIDENCE) -> dict[str, Run
 def recorded_runs(index: Path = INDEX, evidence: Path = EVIDENCE) -> dict[str, str]:
     """Every run a record holds, as {run id: generator} (`run_records`)."""
     return {run: record.generator for run, record in run_records(index, evidence).items()}
+
+
+def orphaned_copies(
+    evidence: Path = EVIDENCE, *, settled: Mapping[int, Settled] | None = None
+) -> list[str]:
+    """The runs whose index block `--retain-runs` copied into `SETTLED_RUNS` that no
+    `SETTLED` entry names any longer, by the copy's directory and the block's own id, so
+    a copy whose directory and id disagree is listed too (review G2 of #644)."""
+    settled = SETTLED if settled is None else settled
+    named = {run for held in settled.values() for _generator, run in held.runs}
+    orphans: list[str] = []
+    for path in sorted((evidence / SETTLED_RUNS).glob("*/run.json")):
+        block = json.loads(path.read_text(encoding="utf-8"))
+        if path.parent.name not in named or str(block.get("id")) != path.parent.name:
+            orphans.append(path.parent.name)
+    return orphans
 
 
 def retain_runs(
