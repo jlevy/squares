@@ -5,7 +5,7 @@ title: "Adopt T-174 at its 38 staged rational counts under the house rule, regul
 kind: task
 status: in_progress
 priority: 2
-version: 9
+version: 10
 delegate: user-eb-adopt-174
 labels:
   - regularization
@@ -16,7 +16,7 @@ parent_id: is-01m51hyxstsa9ptekd2ss26ksn
 hold: null
 hold_until: null
 created_at: 2026-10-16T22:51:13.774Z
-updated_at: 2026-10-17T07:15:32.199Z
+updated_at: 2026-10-17T07:16:44.080Z
 started_at: 2026-10-17T06:39:00.754Z
 ---
 The house rule (packing/campaign/result-import.md, "The House Rule"; the owner, 16 October 2026) makes T-174 (PR #574's PingYou certificates) the house at 63 counts on main. PR #660 stages them in `select_houses.PENDING_ADOPTION`: the 60 rational ones under this bead, staged as `next pull request`, and the three algebraic ones (70, 153, 207) under think-ot5c (the writer), staged as `no writer`. This bead's pull request adopts the 60, regularizes every count it re-houses in that same pull request, and takes each count off `PENDING_ADOPTION`. Opened by #660's addressing pass for its review A1 (the staged adoption had sat under the policy lane's own bead, think-sa5r).
@@ -48,3 +48,5 @@ user-eb-adopt-174 (lane T, 2026-10-17): claimed; worktree /home/user/squares/.cl
 user-eb-adopt-174: adopt_houses wrote the 50 records (d86dbb35b, pushed); draft PR #665 (intake, S2). Running build_known_best_atlas --update --n <50> --jobs 2; next: custody, axis views, default drawings, strong generators.
 
 Scope corrected to 38 counts (coordinator, 17 Oct). #658 (8f46741ad) re-points 88, 102, 123, 126, 199, 258, 259, 266, 267, 292, 295 and 301 to T-193, which is smaller there; they are staged under think-ot5c until the algebraic writer exists. #658 lands first.
+
+user-eb-adopt-174: coordinator scope change received: adopt T-174 at 38 counts only; 88, 102, 123, 126, 199, 258, 259, 266, 267, 292, 295, 301 go to T-193 via #658 (staged under think-ot5c there). No strong runs had started on any count. Reworking the branch (d86dbb35b adopted 50) to 38.
