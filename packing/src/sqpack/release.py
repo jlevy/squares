@@ -88,6 +88,14 @@ class PublicationHistoryEntry(NamedTuple):
 #: for each deployment's commit, what the page it built stated.
 PUBLICATION_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.7.25",
+        first_published="October 17, 2026",
+        result_scope=(
+            "Say on the case and result pages that the house rule ended the hold on "
+            "T-174's houses and RP-3's wait, naming each staged adoption's bead."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.7.24",
         first_published="October 17, 2026",
         result_scope=(
@@ -889,6 +897,16 @@ class ReleaseImpactDecision(NamedTuple):
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
     ReleaseImpactDecision(
         component="site",
+        previous_version="v0.7.24",
+        version="v0.7.25",
+        impact="patch",
+        reason=(
+            "Say on the case and result pages that the house rule ended the hold on "
+            "T-174's houses and RP-3's wait, naming each staged adoption's bead."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="site",
         previous_version="v0.7.23",
         version="v0.7.24",
         impact="patch",
@@ -1260,6 +1278,32 @@ class ReleaseNoPublicChange(NamedTuple):
 
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
+    ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer",),
+        paths=(
+            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
+            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
+            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+        ),
+        reason=(
+            "The site cut v0.7.25 for the house rule (PR 660, think-sa5r) regenerated the "
+            "five claim documents at PUBLICATION_REVISION 83b4720e, this branch's merge of "
+            "main 6a3a7d8f, kept reachable from main by the merge commit the PR merges "
+            "with. With that revision read back as v0.7.24's d421bac7, each is "
+            "byte-identical to main's 6a3a7d8f, and between the two revisions those case "
+            "directories change only in the five documents themselves, so the 32 "
+            "repository links they pin are the only change, and no claim, certificate or "
+            "command moves. A link revision follows the site's edition and is not a "
+            "revision of the explainer, so it keeps v0.4.7. Source-compared; no render of "
+            "the claim documents was taken."
+        ),
+    ),
     ReleaseNoPublicChange(
         components=("paper:n11-lower-bounds-explainer",),
         paths=(
@@ -1977,8 +2021,8 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "#660) reword the notes of the 63 case records the hold and RP-3 named, ten "
             "of them moved below T-174 by #657, nine register entries, five source-register "
             "passages, two requests entries and one evidence limitation to say the hold of "
-            "15 October and RP-3's wait ended. Rendered at link revision c593e2bf from main "
-            "c593e2bf and from this branch, as at 3301a1cf and 5012a97d before, the "
+            "15 October and RP-3's wait ended. Rendered at link revision 6a3a7d8f from main "
+            "6a3a7d8f and from this branch, as at 3301a1cf, 5012a97d and c593e2bf before, the "
             "optimality review's, the threshold-bound review's and the survey's HTML and "
             "Markdown are byte-identical, as are all 50 files the three renderers write; "
             "their PDFs print from that HTML and were not rebuilt. The explainer, which "
@@ -3575,7 +3619,7 @@ def validate_release_impacts(
 #: fresh render, so a link naming the build commit would fail their drift check forever. It is
 #: in no version string. It moves when the claim documents are regenerated for an edition. It
 #: must be a commit on `main`; the site's own links name `main` itself (`devtools.repo_links`).
-PUBLICATION_REVISION = "d421bac7"
+PUBLICATION_REVISION = "83b4720e"
 
 
 def data_pathspec() -> tuple[str, ...]:
