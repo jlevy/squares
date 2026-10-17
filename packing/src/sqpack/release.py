@@ -88,6 +88,15 @@ class PublicationHistoryEntry(NamedTuple):
 #: for each deployment's commit, what the page it built stated.
 PUBLICATION_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.7.26",
+        first_published="October 17, 2026",
+        result_scope=(
+            "Adopt PingYou Ltd's tighter certificate of Thomas Schadt and David "
+            "Ellsworth's 29-square packing as the house at 29, and settle its drawing as "
+            "decided with no better view."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.7.25",
         first_published="October 17, 2026",
         result_scope=(
@@ -904,6 +913,17 @@ class ReleaseImpactDecision(NamedTuple):
 # No impact is invented retrospectively for the published baseline editions.
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
     ReleaseImpactDecision(
+        component="site",
+        previous_version="v0.7.25",
+        version="v0.7.26",
+        impact="patch",
+        reason=(
+            "Adopt PingYou Ltd's tighter certificate of Thomas Schadt and David "
+            "Ellsworth's 29-square packing as the house at 29, and settle its drawing as "
+            "decided with no better view."
+        ),
+    ),
+    ReleaseImpactDecision(
         component="paper:square-packing-methods-survey",
         previous_version="v0.2.2",
         version="v0.2.3",
@@ -1296,6 +1316,30 @@ class ReleaseNoPublicChange(NamedTuple):
 
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
+    ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer",),
+        paths=(
+            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
+            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
+            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+        ),
+        reason=(
+            "The site cut v0.7.26 for the adoption of T-195 at 29 regenerated the five "
+            "claim documents at PUBLICATION_REVISION 337b84df, a commit of this branch "
+            "kept reachable from main by the merge commit the PR merges with; with that "
+            "revision read back as main's 83b4720e, each is byte-identical to main's, so "
+            "the 32 repository links it pins are the only change, and no claim, "
+            "certificate or command moves. A link revision follows the site's edition and "
+            "is not a revision of the explainer, so it keeps v0.4.7. Source-compared; no "
+            "render of the claim documents was taken."
+        ),
+    ),
     ReleaseNoPublicChange(
         components=("paper:n11-lower-bounds-explainer",),
         paths=(
@@ -3686,7 +3730,7 @@ def validate_release_impacts(
 #: fresh render, so a link naming the build commit would fail their drift check forever. It is
 #: in no version string. It moves when the claim documents are regenerated for an edition. It
 #: must be a commit on `main`; the site's own links name `main` itself (`devtools.repo_links`).
-PUBLICATION_REVISION = "83b4720e"
+PUBLICATION_REVISION = "337b84df"
 
 
 def data_pathspec() -> tuple[str, ...]:

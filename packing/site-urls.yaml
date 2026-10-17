@@ -5122,7 +5122,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-16'
+  lastmod: '2026-10-17'
   status: live
 - path: cases/290.html
   canonical: cases/290.html
@@ -6299,7 +6299,7 @@ urls:
   generator: devtools.render_packing_methods:main
   producer: paper:square-packing-methods-survey
   first_published: '2026-10-08'
-  lastmod: '2026-10-12'
+  lastmod: '2026-10-17'
   status: live
 - path: papers/square-packing-methods-survey.md
   canonical: papers/square-packing-methods-survey.md
@@ -6307,7 +6307,7 @@ urls:
   generator: devtools.render_packing_methods:main
   producer: paper:square-packing-methods-survey
   first_published: '2026-10-08'
-  lastmod: '2026-10-12'
+  lastmod: '2026-10-17'
   status: live
 - path: papers/square-packing-methods-survey.pdf
   canonical: papers/square-packing-methods-survey.pdf
@@ -6315,7 +6315,7 @@ urls:
   generator: devtools.render_packing_methods:main
   producer: paper:square-packing-methods-survey
   first_published: '2026-10-08'
-  lastmod: '2026-10-12'
+  lastmod: '2026-10-17'
   status: live
 - path: readme.html
   canonical: readme.html
