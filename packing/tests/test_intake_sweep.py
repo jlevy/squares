@@ -945,8 +945,10 @@ def test_every_pending_count_is_owned_by_the_bead_its_allowlist_entry_names(
     assert len(decided) <= len(owing)
     assert all(item.bead == "think-0ut1" for item in decided if "#518" in item.what)
     assert section.notes[0].startswith("Regularization states of 324 counts: ")
+    # One count is pending once the live list is empty, as it is from #654 up.
+    counts = "pending count" if len(allowed) == 1 else "pending counts"
     assert (
-        f"Owed: {len(allowed)} pending counts, {len(allowed)} of them in PENDING_ALLOWED"
+        f"Owed: {len(allowed)} {counts}, {len(allowed)} of them in PENDING_ALLOWED"
         in (section.notes[0])
     )
 
@@ -1022,19 +1024,29 @@ def test_each_decision_and_exemption_is_owned_by_the_bead_it_names() -> None:
     assert {item.bead_state for item in orphaned} == {"closed"}
 
 
-def test_an_allowlist_entry_naming_a_bead_the_store_lacks_needs_an_owner() -> None:
-    """Review A2 of #650: an entry whose bead the store does not have owns nothing."""
+def test_an_allowlist_entry_naming_a_bead_the_store_lacks_needs_an_owner(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Review A2 of #650: an entry whose bead the store does not have owns nothing. Where
+    the live list is empty, as from #654 up, a regular count is made pending for it, as a
+    corrected witness's: since the house rule, the only deferral the list may add."""
     from devtools import default_drawings as defaults  # noqa: PLC0415
 
-    n = min(defaults.PENDING_ALLOWED)
-    allowed = {**defaults.PENDING_ALLOWED, n: "think-zzzz: re-housed by a test adoption"}
+    record = defaults.RECORD
+    if defaults.PENDING_ALLOWED:
+        n = min(defaults.PENDING_ALLOWED)
+    else:
+        n = _first(defaults.REGULAR_AS_PUBLISHED)
+        record = _drawings(tmp_path, n, defaults.PENDING)
+        _corrected(monkeypatch, n)
+    allowed = {**defaults.PENDING_ALLOWED, n: "think-zzzz: a corrected witness in a test"}
     states = _deferral_beads()
     assert "think-zzzz" not in states
-    section = sweep.regularization_section(_beads(**states), allowed=allowed)
+    section = sweep.regularization_section(_beads(**states), record=record, allowed=allowed)
     action = sweep.needing_action([section])
     assert [(item.what, item.state, item.bead, item.bead_state) for item in action] == [
         (
-            f"n = {n} pending: re-housed by a test adoption",
+            f"n = {n} pending: a corrected witness in a test",
             sweep.NEEDS_OWNER,
             "think-zzzz",
             "no such bead",

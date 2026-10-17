@@ -258,28 +258,47 @@ def test_the_allowlist_equals_the_pending_set_and_each_entry_names_a_bead(
     # #636). The gate holds the list to the pending set, and `check_bead_tree` holds
     # each bead open (`test_the_record_defers_each_count_to_the_bead_that_owns_it`).
     record = _record()
-    pending = _first_state(record, defaults.PENDING)
-    regular = _first_state(record, defaults.REGULAR_AS_PUBLISHED)
+    regular = [row for row in record["states"] if row["state"] == defaults.REGULAR_AS_PUBLISHED]
+    if len(regular) < 2:
+        pytest.skip("the data holds fewer than two counts regular as published")
+    pending, joining = regular[0], regular[1]
+    # The data's own list is empty since 16 October 2026 (think-3zi3), so a count is
+    # allowed pending here as a deferral would allow it, with its bead. Only a corrected
+    # witness's runs may wait since the house rule (`CORRECTED`, reviews A5 and B2 of
+    # #660), so each count here is one, at its house's own source and side.
+    corrected = {pending["n"]: _correction(pending)}
+    pending["state"] = defaults.PENDING
+    allowed = {**defaults.PENDING_ALLOWED, pending["n"]: "think-0000: a deferral"}
+    found, _listed = defaults.state_problems(
+        _write(tmp_path, record), allowed=allowed, corrected=corrected
+    )
+    assert found == []
     # A count allowed pending that is no longer pending fails until it comes off the list.
     pending["state"] = defaults.REGULARIZED_STATE
-    found, _listed = defaults.state_problems(_write(tmp_path, record))
+    found, _listed = defaults.state_problems(
+        _write(tmp_path, record), allowed=allowed, corrected=corrected
+    )
     assert found == [
         (
             f"n={pending['n']}: PENDING_ALLOWED names it, but it is regularized; take it "
             "off the list"
         )
     ]
-    # And a count that joins it names its bead; since the house rule, only a corrected
-    # witness's runs may join (`CORRECTED`, reviews A5 and B2 of #660).
+    # And a count that joins it names its bead.
     pending["state"] = defaults.PENDING
-    regular["state"] = defaults.PENDING
-    allowed = {**defaults.PENDING_ALLOWED, regular["n"]: "later"}
-    witness = regular["witness"]
-    corrected = {regular["n"]: defaults.Correction(witness["source"], witness["side"], "old")}
+    joining["state"] = defaults.PENDING
+    allowed = {**allowed, joining["n"]: "later"}
+    corrected = {**corrected, joining["n"]: _correction(joining)}
     found, _listed = defaults.state_problems(
         _write(tmp_path, record), allowed=allowed, corrected=corrected
     )
-    assert found == [f"n={regular['n']}: PENDING_ALLOWED names no bead: 'later'"]
+    assert found == [f"n={joining['n']}: PENDING_ALLOWED names no bead: 'later'"]
+
+
+def _correction(row: dict) -> defaults.Correction:
+    """A corrected witness at the row's own source and side, replacing an older file."""
+    witness = row["witness"]
+    return defaults.Correction(witness["source"], witness["side"], replaces="old")
 
 
 def test_a_row_out_of_place_fails_the_gate(tmp_path: Path) -> None:
@@ -547,15 +566,32 @@ def test_the_record_defers_each_count_to_the_bead_that_owns_it() -> None:
             assert held.owed.startswith(by_where[f"default_drawings.py SETTLED n={n} owed"]), n
     assert len(named) == len(by_where)
     assert all(alias.startswith("think-") and len(alias) == 10 for _where, alias in named)
+    # The live list is empty since 16 October 2026, so one count is allowed here, as an
+    # adoption's deferral would allow it, and its location is the one the gate reports
+    # (review A2 of #654).
+    found = defaults.deferrals(allowed={7: "think-0000: re-housed by an adoption"})
+    assert ("default_drawings.py PENDING_ALLOWED n=7", "think-0000") in found
     # A bead an entry names elsewhere in its text is not the one that owns it.
     assert defaults.deferrals(settled={}, allowed={1: "later, maybe think-aaaa"}) == []
 
 
 def test_a_lapsed_view_reads_pending_and_names_what_lapsed() -> None:
     record = _record()
-    row = _first_state(record, defaults.PENDING)
+    # No count is pending since 16 October 2026 (think-3zi3), so the lapse is laid on a
+    # count the axis tool's record draws, regular as published and settled by nothing.
+    entries = defaults.index_entries()
+    row = next(
+        (
+            found
+            for found in record["states"]
+            if found["state"] == defaults.REGULAR_AS_PUBLISHED
+            and entries[found["n"]]["generator"] == defaults.ALGORITHM
+            and found["n"] not in defaults.SETTLED
+        ),
+        None,
+    ) or _first_state(record, defaults.PENDING)
     n = row["n"]
-    entry = dict(defaults.index_entries()[n])
+    entry = dict(entries[n])
     lapse = {"generator": "evand-regularize", "run": "a-run", "witness_sha256": "2" * 64}
     entry[defaults.LAPSED] = lapse
     state = defaults.count_state(n, entry, _measured(record, n), row["witness"], allowed={})
@@ -949,7 +985,19 @@ def test_a_decision_outranks_the_allowlist(tmp_path: Path) -> None:
     views = {row["n"]: row for row in record["entries"]}
     document = json.loads(defaults.INDEX.read_text(encoding="utf-8"))
     every = {int(entry["n"]): entry for entry in document["entries"]}
-    allowed = defaults.PENDING_ALLOWED
+    allowed = dict(defaults.PENDING_ALLOWED)
+    corrected = dict(defaults.CORRECTED)
+    if not allowed:
+        # The live list is empty once the stack's last allowed counts are decided, so a
+        # count the layer draws is allowed here, as a corrected witness's deferral would
+        # allow it: since the house rule no adoption defers (reviews A5 and B2 of #660).
+        drawn = next(
+            n
+            for n in sorted(views)
+            if n not in defaults.SETTLED and every[n].get("generator") == defaults.ALGORITHM
+        )
+        allowed = {drawn: "think-0000: a corrected witness"}
+        corrected = {drawn: _correction(rows[drawn])}
     n = next(n for n in sorted(allowed) if n in views and n not in defaults.SETTLED)
     witness = rows[n]["witness"]
     house = _regular_house(views[n])
@@ -1003,7 +1051,7 @@ def test_a_decision_outranks_the_allowlist(tmp_path: Path) -> None:
             "states": [state if row["n"] == n else row for row in record["states"]],
         }
         found, _listed = defaults.state_problems(
-            _write(tmp_path, changed), index, settled=held, allowed=allowed
+            _write(tmp_path, changed), index, settled=held, allowed=allowed, corrected=corrected
         )
         assert found == [
             f"n={n}: PENDING_ALLOWED names it, but it is {expected}; take it off the list"

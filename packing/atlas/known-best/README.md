@@ -351,6 +351,24 @@ only the five-degree run, which supplied a view, and that block is the same as t
 index’s. Its cost is the per-count seconds the reports record, which are wall seconds
 under load. The views themselves are not retained beyond the seven the layer draws.
 
+Last that day both generators ran on the three witnesses jlevy/squares#598 adopted in
+`8a4d26fea` at 175, 232 and 264 (think-3zi3): Evan Daniel’s regularizer
+(`evand-regularize-3c-1016`) and grid-slack at 0.5, 1 and 5 degrees
+(`grid-slack-3c-deg05-1016`, `grid-slack-3c-deg1-1016` and `grid-slack-3c-deg5-1016`),
+2,050 CPU-seconds in all.
+His same-side views are drawn at 175 and 232, and grid-slack’s half-degree view at 264,
+where his regularizer gave no view (its certificate overlapped by $2.1 \times 10^{-14}$
+and upstream’s checker refused it).
+Over the three, light / uneven / near-axis squares go from 19 / 64 / 0 to 13 / 57 / 0,
+and house sides from 1,859 to 1,963. No count is pending any more:
+`devtools.default_drawings.PENDING_ALLOWED` is empty.
+The evidence is retained in
+[`cases/regularized_drawings/think-3zi3-2026-10-16/`](../../cases/regularized_drawings/think-3zi3-2026-10-16/),
+in the same layout as think-kpm3’s: `selection-3c.json` and `selection-3c.md`, the
+driver’s `receipt.json`, each run’s per-count `report.json`, gzip-compressed, and a
+`run.json` for each grid-slack run; the index records only the half-degree run, which
+supplied a view, and that block is the same as the index’s.
+
 Every drawn view carries its regularization in the register’s terms (`by: project`, the
 method, the side and the identity measured here), and `results.yaml`’s
 `regularized_drawings` records each one whose packing a registered result holds,
