@@ -5,7 +5,7 @@ title: "Import Evan Daniel: degree-7213 minimal polynomial of the s(29) record s
 kind: task
 status: in_progress
 priority: 3
-version: 4
+version: 5
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-12T08:55:58.146Z
-updated_at: 2026-10-12T15:10:37.781Z
+updated_at: 2026-10-17T00:24:02.954Z
 started_at: 2026-10-12T14:33:40.570Z
 ---
 Found in lane W's read of evand/square-packing for the 2026-10-12 intake (think-mq0k); nothing on GitHub asked, so the record says: a watched-repository read, not an issue.
@@ -48,3 +48,5 @@ GitHub issue: https://github.com/jlevy/squares/issues/545 (opened 2026-10-12 by 
 **Record shape.** Unchanged recommendation (evidence entry + algebraic_degree: 7213, minimal_polynomial pointing at the pinned asset, paragraph in n-029.md); the polynomial now has a retained pin.
 
 **Draft reply (not posted).** "Thank you for publishing exact-data-2026-10-12. Both archives match their digests; we keep the s(29) archive pinned by digest (it is too large for the repository) with its README and Krawczyk box, and read from the polynomial its degree 7,213 and the coefficient sizes you state. The replay you price at about 2.5 CPU-hours waits for a budget; we will report it, and the non-overlap check at the exact point, when it runs."
+
+From #661's stage 4 review (A8, think-2jzy): T-009's 1e-44 Krawczyk box may be a cheaper route to deciding #622/T-195 and #574's N29 against the Kingbird print at 29. The review found S inside T-009's box, which shows the print 5.93383346267692 is a truncation (S is 0.919 of a unit above it).

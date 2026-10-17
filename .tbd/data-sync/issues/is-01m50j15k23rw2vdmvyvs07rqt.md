@@ -5,7 +5,7 @@ title: "Import pingyou: s(29) exact rational certificate, 1.57e-36 below T-155 a
 kind: task
 status: in_progress
 priority: 2
-version: 19
+version: 22
 delegate: user-eb-intake-622
 labels:
   - result-import
@@ -14,10 +14,11 @@ parent_id: is-01m50gnwbxd5kxbynyx9nd162p
 child_order_hints:
   - is-01m53b204zznqg15rajytfq813
   - is-01m53h0rqh401n0wc2kyky8m5b
+  - is-01m53hjsd71tqn0p43d5bkxfpw
 hold: null
 hold_until: null
 created_at: 2026-10-15T19:53:37.121Z
-updated_at: 2026-10-16T23:33:38.673Z
+updated_at: 2026-10-17T00:23:11.161Z
 started_at: 2026-10-15T23:31:02.497Z
 ---
 Stage 1 triage of pull request jlevy/squares#622 (BuddenPing, PingYou Ltd, "data: submit a tighter exact N29 packing certificate", opened 2026-10-15T18:43:54Z, no comments or reviews when read at about 19:50Z). A result submitted as a pull request, treated as an intake report as #574 was (think-9v2k): never merged, approved, pushed to or commented on here. Lane D of the 2026-10-15 evening intake pass (think-wnsv, think-ykg6), read-only.
@@ -79,3 +80,9 @@ Remaining once the stage 4 review maps onto T-195 (reviews: accepted, covers T-1
 2026-10-16 ~22:55Z user-eb-intake-622 handoff: #661 head 893a7a0b9 (CI fixes for typecheck/suite-a at 4b3d413e5). #644 has since merged as v0.7.20, so #661 conflicts with main (claim docs, results.yaml, release.py) and CI does not run until main is merged in and the site is re-cut (v0.7.21+); held for merge time per the coordinator. Adopt branch claude/intake-2026-10-16-n29-622-adopt @ 90cce6258 (stacked on #661): inert adopt_houses entries + trial runs evidence (packing/cases/regularized_drawings/think-30n2-2026-10-16/). Local-only branch sim-n29-622-local holds the trial adoption (stand-in review; never push). Lane CPU ~1.7 CPU-h. This bead stays open.
 
 Coordinator, 16 Oct ~23:10Z: lane N's owner question 1, the key reason for recording T-195, is settled by the owner's house rule of this afternoon ('We should always be adopting the smallest packing and then regularizing it'; 'It shouldn't even be a question'). T-195 is exactly the smallest validated packing at 29: 1.566e-36 below T-155, and 7.32e-90 below #574's N29. Question 2 (adopt_houses refuses it against the conjectured Kingbird print, which no register result holds) is the case #660 settles: the adoption follows #660's merge. Questions 3 (found_year, Schadt 2025) and 4 (third exact route) were sent to the stage 4 reviewer. Order: #661 merges immediately before its review PR, then the adoption PR (claude/intake-2026-10-16-n29-622-adopt) after #660.
+
+2026-10-16 ~23:59Z user-eb-intake-622: REVISED DRAFT stage 7 reply to #622, replacing the ~21:45Z draft (not posted; post only after #661 and its stacked adoption merge and main and the deployed site agree). Checkpoint: #661 head d37cce317 (the #662 review merged in as 6cc68d3fe; T-195 at V3/C3 with its accepted review; held at 29 by select_houses.HELD until the stacked adoption lands); next A7 on the -adopt branch, then dispositions.
+
+"@BuddenPing, thank you for the N29 certificate, and for confirming the affiliation and the PY assistance. We imported it from your release data/pingyou-n29-certificate-2026-10-15-v1 through the manifest at 3115557: read exactly, the certificate equals your corners Witness/v2 pose for pose. Both of this repository's maintained exact routes, sqpack's exact witness verifier and the rational corner checker, accept it over Q, every wall and all 406 pairs, reproducing your own runs of them. Two checks that share no code with those routes accept it too: the half-angle containment and exact intersection-area route, and a clean-room checker written for the 16 October review, and each refuses controls pushed just past contact. Two squares touch, and a square touches the box, exactly. Its side is 1.57 × 10⁻³⁶ below T-155, our exact side for the Schadt–Ellsworth packing, and 7.32 × 10⁻⁹⁰ below your PR #574 certificate at 29, both compared exactly; measured against our witness of that packing (T-009), no square moves by more than 8 × 10⁻²⁰. Against the catalogue's 5.93383346267692 the comparison stays open, since the record does not yet hold that packing's exact side (Evan Daniel's degree-7213 root, #545). The review accepted the certificate for finite feasibility, and it is registered as T-195: Thomas Schadt's packing of 2025, as David Ellsworth improved it, in PingYou Ltd's certificate. It is recorded under the owner's standing rule that the record adopts the smallest validated packing and then regularizes it, and it becomes the house at 29 with its own drawing, since the regularization pass found no tidier one. Merging this pull request remains the owner's call; the import went through the record's own packet, as #574's did."
+
+2026-10-17 ~00:50Z user-eb-intake-622 (addressing pass on #661): records branch head ad28cc784 (pushed, fast-forward): T-195 held at 29 by select_houses.HELD (e2b88aec9), pin e2b88aec (d37cce317), hold tests generalized (ad28cc784). Records tier 52/52 at d37cce317 (142.5 s); focused 760+3 failed -> fixed, house tests 42 passed, 441 in the other house-writer modules. Adopt branch head 5e351d756 (pushed): A7 found_year fix d2d705000 (Credit.found_year=2025 at 29, test added), records head merged in; records tier 52/52 (116.4 s), focused 349 passed. #661 body updated (S2, cost, exception, hold); #662 body notes GitHub closed it as merged when 6cc68d3fe reached its base (head branch auto-deleted, commits all in #661). Dispositions posted: A pullrequestreview-5555042306, B pullrequestreview-5555042351. Pending: A1 (main merge, re-pin, re-cut, paper records against new main; main now 5012a97d6) and B5 deep-gate after it, on the coordinator's word; then CI watch and ready-for-review.

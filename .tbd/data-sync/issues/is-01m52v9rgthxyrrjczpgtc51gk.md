@@ -5,14 +5,14 @@ title: Merge the 16 October PRs once reviewed (owner's word, 16 Oct afternoon)
 kind: task
 status: open
 priority: 2
-version: 26
+version: 27
 labels: []
 dependencies: []
 parent_id: is-01m51hyxstsa9ptekd2ss26ksn
 child_order_hints:
   - is-01m53c3469tq34ee6pbcn8xygw
 created_at: 2026-10-16T17:14:04.698Z
-updated_at: 2026-10-16T22:07:33.065Z
+updated_at: 2026-10-17T00:24:03.968Z
 ---
 Owner: 'If everything is reviewed, you can merge it.' and 'Follow up everything you can, and once things are reviewed, be sure you merge.' Merge order and gate per review-and-merge-prs; release re-cuts after each merge.
 
@@ -65,3 +65,5 @@ user-eb-integrator: #649 ready at f62671cc2b2e32be5d14d5674e634902b7278b30 (v0.7
 user-eb-integrator: #645 merged up: 5b041b88a (merge main 80b116ede; cut files from main, two paper NPC records kept at tuple end, INVENTORY/VERIFIERS regenerated), dafff1238 (re-pin to 5b041b88), pushed. Records tier: only release-impact step red (site successor pending cut); 409 focused tests passed. Waiting for #644 -> #646 (v0.7.21) -> #645 cut.
 
 Merge condition for #661 (T-195, #622's s(29)): it keeps T-195 at V3/C3 on the replay alone. The T-193-style hold makes T-195 derive 'superseded' against the Kingbird print at 29, with no superseding result (lane N, 58de4dedc). So #661 merges only together with its stage 4 review PR, stacked on it: both reviewed, then merged back to back, the review PR right after #661 with no other merge between. Main never shows T-195 at V3/C3 without the review mapped.
+
+00:05Z, 17 Oct: #654 merged (5012a97d6, v0.7.22). #662 was merged into #661's branch by lane N's fast-forward push and closed as merged at 23:42Z; its commits reach main through #661. New order: #656, #657 (stack); then #660 after its follow-up review; then #661 (drop HELD['T-195'], fold the adopt branch, adopt and settle 29 under the house rule, re-cut, follow-up review); then #646, #645; then #658.
