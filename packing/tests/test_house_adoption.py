@@ -519,7 +519,9 @@ def test_every_record_names_a_smaller_held_or_algebraic_certificate(
     assert "algebraic certificate at this count" not in select.case_path(302).read_text()
 
 
-def test_sizes_measure_a_staged_witness_as_git_stores_it() -> None:
+def test_sizes_measure_a_staged_witness_as_git_stores_it(
+    capsys: pytest.CaptureFixture[str],
+) -> None:
     """Review C9 of #660: OR-18's stored-size unit and its measured case rested on scratch
     code, so no adoption could measure its witnesses by command before committing them.
     `upper_bound_houses sizes` builds each staged count's witness as the module builds a
@@ -549,6 +551,13 @@ def test_sizes_measure_a_staged_witness_as_git_stores_it() -> None:
     )
     with pytest.raises(houses.HouseError, match="only counts staged"):
         houses.staged_sizes([5])
+    # Review D3 of #660: history keeps the new blobs whole, the replaced ones staying in it,
+    # so the stored figure is their sum, and the difference is only the tree's.
+    assert houses.print_sizes([68]) == 0
+    (total,) = [line for line in capsys.readouterr().out.splitlines() if "1 witness:" in line]
+    stored = houses.stored_size(data)
+    assert f"{row.stored / 1e6:.2f} MB as Git stores them, which history keeps" in total
+    assert f"the tree's blobs by {(row.stored - stored) / 1e6:.2f} MB" in total
 
 
 #: Words the records wrote while an adoption waited for the owner, and the 15 October
@@ -717,6 +726,41 @@ def test_no_unread_eligible_entry_is_pending_adoption() -> None:
     no reader holds (B3) and an unread print that only overlaps its ceiling (A10), ran on
     no real register in CI; they are held empty here too."""
     assert _register_check() == ([], {}, {})
+
+
+def test_every_unread_entry_reaches_the_check() -> None:
+    """Review D6 of #660: the C10 guard holds `unread_pending` to every entry it is given,
+    but an exemption that keeps an entry out of `unread`, in `eligible` or in `candidates`
+    before the entry is listed, never reaches it. The confirmed, reviewed upper bounds
+    whose one source no reader takes are found here without either, and every one is in
+    `unread`, so a skip there fails this."""
+    from devtools import upper_bound_reports as reports  # noqa: PLC0415
+
+    def rank(rung: object) -> int:
+        text = str(rung or "")
+        return int(text[1:]) if len(text) == 2 and text[1:].isdigit() else -1
+
+    expected = set()
+    for entry in select.load_results():
+        reviewed = any(
+            review.get("verdict") == "accepted" and entry["id"] in (review.get("covers") or ())
+            for review in entry.get("reviews") or ()
+        )
+        keys = list((entry.get("attribution") or {}).get("source_keys") or ())
+        if (
+            entry.get("kind") == "upper-bound"
+            and rank(entry.get("verification")) >= 3
+            and rank(entry.get("confirmation")) >= 3
+            and reviewed
+            and len(keys) == 1
+            and keys[0] not in reports.HOUSES
+            and keys[0] not in select.ALGEBRAIC_READERS
+        ):
+            expected.add(str(entry["id"]))
+    unread: list[str] = []
+    select.candidates(select.load_results(), select.load_evidence(), unread=unread)
+    assert expected
+    assert expected <= set(unread)
 
 
 def test_a_side_the_register_cannot_hold_turns_the_register_check_red(

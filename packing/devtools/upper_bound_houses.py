@@ -753,11 +753,17 @@ def print_sizes(numbers: Sequence[int] | None = None) -> int:
     now_checkout = sum(row.now_checkout for row in measured)
     now_stored = sum(row.now_stored for row in measured)
     largest = max(measured, key=lambda row: row.checkout)
+    # History keeps every blob: the witnesses replaced stay in it, so an adoption adds its
+    # new blobs' whole size to what a clone downloads, and the tree's difference is only
+    # what a checkout grows by (review D3 of #660).
     print(
-        f"{len(measured)} witnesses: {_megabytes(checkout)} in a checkout and "
-        f"{_megabytes(stored)} as Git stores them, in place of {_megabytes(now_checkout)} "
-        f"and {_megabytes(now_stored)}: {_megabytes(checkout - now_checkout)} more in a "
-        f"checkout and {_megabytes(stored - now_stored)} more stored; the largest, n = "
+        f"{len(measured)} witness{'' if len(measured) == 1 else 'es'}: "
+        f"{_megabytes(checkout)} in a checkout and "
+        f"{_megabytes(stored)} as Git stores them, which history keeps, the replaced "
+        f"witnesses staying in it; in the tree they replace {_megabytes(now_checkout)} and "
+        f"{_megabytes(now_stored)}, so a checkout grows by "
+        f"{_megabytes(checkout - now_checkout)} and the tree's blobs by "
+        f"{_megabytes(stored - now_stored)}; the largest, n = "
         f"{largest.n}, {_megabytes(largest.checkout)} and {_megabytes(largest.stored)}"
     )
     return 0

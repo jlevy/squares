@@ -1353,8 +1353,7 @@ class Correction(NamedTuple):
 class Base(NamedTuple):
     """The record a change is held to (`base_record`): the base branch's rows by count, and
     the counts whose witness file the change alters, which is how a correction shows at a
-    source that pins neither a path of its own nor a revision, as Kingbird's catalogue and
-    the grid do not."""
+    source that pins no revision, as Kingbird's catalogue and the grid do not."""
 
     ref: str
     rows: Mapping[int, Mapping[str, Any]]
@@ -1388,11 +1387,32 @@ def _git(*arguments: str) -> str:
     return done.stdout
 
 
+#: What a clone without its merge base is told: AGENTS.md's fresh-clone steps fetch the
+#: history a shallow session clone lacks.
+UNSHALLOW = (
+    "the clone is shallow, so the merge base of {ref} and HEAD is not in it; run "
+    '`git fetch --unshallow` (AGENTS.md, "A fresh clone") and check again'
+)
+
+
 def base_record(ref: str) -> Base:
     """The record of the commit this change is built on, from `ref`: its merge base with
     `HEAD`, so a branch that has not merged `ref`'s latest commits is held to the record
-    it started from, and the counts whose witness file differs here from that commit's."""
-    commit = _git("merge-base", ref, "HEAD").strip()
+    it started from, and the counts whose witness file differs here from that commit's.
+
+    It reads the base branch's copy of the record as the release-impact and changelog
+    gates read theirs (OR-18): the base is no recorded revision, and without it the gate
+    fails closed, naming the remedy where the clone is shallow (review D5 of #660)."""
+    try:
+        _git("rev-parse", "--verify", "--quiet", f"{ref}^{{commit}}")
+    except SystemExit as error:
+        raise SystemExit(f"--base-ref {ref} names no commit in this clone; fetch it") from error
+    try:
+        commit = _git("merge-base", ref, "HEAD").strip()
+    except SystemExit as error:
+        if _git("rev-parse", "--is-shallow-repository").strip() == "true":
+            raise SystemExit(UNSHALLOW.format(ref=ref)) from error
+        raise
     document = json.loads(_git("show", f"{commit}:{RECORD_PATH}"))
     rows = {int(row["n"]): row for row in document.get("states") or []}
     names = _git("diff", "--name-only", commit, "--", WITNESSES_PATH).split()
@@ -1422,13 +1442,6 @@ def _same_side(first: object, second: object) -> bool:
 def _identity(witness: Mapping[str, Any]) -> tuple[str | None, ...]:
     """A witness as it identifies itself (`IDENTITY`), each field as the record writes it."""
     return tuple(None if witness.get(key) is None else str(witness[key]) for key in IDENTITY)
-
-
-def _replaced_here(n: int, witness: Mapping[str, Any], base: Base) -> bool:
-    """Whether the change replaces the count's witness: it names another, or alters the
-    file of one that names itself the same way."""
-    before = (base.rows.get(n) or {}).get("witness") or {}
-    return _identity(before) != _identity(witness) or n in base.changed
 
 
 def _deferred_in(row: Mapping[str, Any] | None) -> bool:
@@ -1472,20 +1485,26 @@ def _correction_problems(
 def _base_problems(
     n: int, fix: Correction, witness: Mapping[str, Any], base: Base
 ) -> list[str]:
-    """What fails a `CORRECTED` entry against the base record: a correction is made in the
-    change that replaces the witness, and names the witness the base holds."""
+    """What fails a `CORRECTED` entry against the base record (reviews C3 and D1 of #660).
+
+    Where the base already defers the count, the correction was held to its own base when
+    it was made, and it stands while the record's witness keeps the base's source and
+    exact side, whatever a later change does to its file or path. Otherwise this change
+    makes the correction: the entry names the base's witness, and the record's is another
+    witness, by its path or revision, or, at a source that pins no revision, by its file.
+    """
     row = base.rows.get(n)
     before = (row or {}).get("witness") or {}
-    if not _replaced_here(n, witness, base):
-        # The change that made the correction was held to its own base, and the base
-        # here already defers the count at this witness.
-        if _deferred_in(row):
+    if _deferred_in(row):
+        if str(before.get("source")) == str(witness.get("source")) and _same_side(
+            before.get("side"), witness.get("side")
+        ):
             return []
         return [
             (
-                f"n={n}: CORRECTED names a correction, but {base.ref}'s record holds this "
-                "witness already and does not defer it: a correction is declared in the pull "
-                "request that corrects the witness"
+                f"n={n}: {base.ref}'s record defers it at the witness from "
+                f"{before.get('source')} at {_short(before.get('side'))}, and the house "
+                "has moved since: its runs are owed in the pull request that moved it"
             )
         ]
     if _identity(before) != (fix.source, fix.path, fix.revision, fix.side):
@@ -1496,6 +1515,15 @@ def _base_problems(
                 f"{base.ref}'s record names {before.get('source')} at "
                 f"{_short(before.get('side'))} ({before.get('path')}, revision "
                 f"{before.get('revision')}): it names the witness the base holds"
+            )
+        ]
+    revisionless = witness.get("revision") is None
+    if _identity(before) == _identity(witness) and not (revisionless and n in base.changed):
+        return [
+            (
+                f"n={n}: CORRECTED names {base.ref}'s witness as the one it replaced, and the "
+                "record's is that witness: there is no corrected witness to defer (a "
+                "changed file shows a correction only where the source pins no revision)"
             )
         ]
     return []
@@ -1512,14 +1540,15 @@ def deferral_problems(
 
     Since the house rule a count's runs wait only for a witness corrected or re-solved
     with its house's source and exact side unchanged, and never because its house moved,
-    whichever import moved it (reviews A5, B1, B2 and C3 of #660). Each entry is a
+    whichever import moved it (reviews A5, B1, B2, C3 and D1 of #660). Each entry is a
     `CORRECTED` one, which names the witness it replaced. Against the base record
     (`base_record`), that witness is the base's at the same count, the record's has its
     source and exact side, and it is another witness only: another path or revision, or,
-    at a source that pins neither, another file. A house moved by an adoption, a catalogue
-    intake or a re-solve fails, whatever the entry says. An entry the base already defers
-    at the record's witness was held to its own base when it was made. Without a base the
-    entry is checked as declared.
+    at a source that pins no revision, another file. A house moved by an adoption, a
+    catalogue intake or a re-solve fails, whatever the entry says. An entry the base
+    already defers was held to its own base when it was made, and stands while the
+    record's witness keeps the base's source and exact side. Without a base the entry is
+    checked as declared.
     """
     from devtools.select_houses import RULE_SET_ON  # noqa: PLC0415
 
@@ -1566,13 +1595,23 @@ def deferrals(
     return named
 
 
+#: The words `--check-state --base-ref` prints, which the records tier's step requires,
+#: so a step that stops passing the base fails (review D4 of #660).
+HELD_TO_BASE = "CORRECTED is held to the record at the merge base of"
+
+
 def check_state(base_ref: str | None = None) -> int:
-    base = None if base_ref is None else base_record(base_ref)
+    # The base is read only where a count is deferred, so a clone without the merge base
+    # passes while nothing is (review D5 of #660).
+    deferring = bool(PENDING_ALLOWED or CORRECTED)
+    base = base_record(base_ref) if base_ref is not None and deferring else None
     found, listed = state_problems(base=base)
-    if base is None:
+    if base_ref is None:
         listed.append("CORRECTED is checked as declared: no --base-ref to hold it to")
+    elif base is None:
+        listed.append(f"{HELD_TO_BASE} {base_ref}; nothing is deferred, so none was read")
     else:
-        listed.append(f"CORRECTED is held to the record at the merge base of {base_ref}")
+        listed.append(f"{HELD_TO_BASE} {base_ref}")
     for line in listed:
         print(line)
     if found:

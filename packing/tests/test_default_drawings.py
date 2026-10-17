@@ -1458,15 +1458,15 @@ def test_a_deferral_is_a_correction_held_to_the_base_record() -> None:
             assert len(found) == 1, (case, declared)
             assert found[0].startswith(f"n={m}: CORRECTED says the correction replaced"), case
 
-    # A genuine fix at a source that pins neither its own path nor a revision, as Kingbird's
-    # catalogue: the witness names itself as before, and its file changed.
+    # A genuine fix at a source that pins no revision, as Kingbird's catalogue: the
+    # witness names itself as before, and its file changed.
     witness = rows[kingbird]["witness"]
     declared = {kingbird: _replaced(witness)}
     entry = {kingbird: "think-aaaa: the catalogue's corrected witness"}
     altered = _base(rows, frozenset({kingbird}))
     assert defaults.deferral_problems(rows, entry, corrected=declared, base=altered) == []
     (problem,) = defaults.deferral_problems(rows, entry, corrected=declared, base=base)
-    assert "a correction is declared in the pull request that corrects the witness" in problem
+    assert "the record's is that witness: there is no corrected witness to defer" in problem
 
     # Once the correction has merged, the base itself defers the count at its witness.
     deferred_row = {
@@ -1479,6 +1479,49 @@ def test_a_deferral_is_a_correction_held_to_the_base_record() -> None:
     merged = _base({**rows, kingbird: deferred_row})
     pending = {**rows, kingbird: deferred_row}
     assert defaults.deferral_problems(pending, entry, corrected=declared, base=merged) == []
+
+    # D1: a pinned correction merged at 68, its runs deferred; a later change that only
+    # rewrites the corrected witness's file, or its path, leaves the entry standing, and
+    # a move after it does not.
+    corrected = {**before, "revision": "a-newer-revision"}
+    deferred = {
+        **rows[n],
+        "witness": corrected,
+        "state": defaults.PENDING,
+        "why": f"no strong generator has decided this witness; allowed pending: {allowed[n]}",
+    }
+    after_fix = {**rows, n: deferred}
+    standing = {n: _replaced(before)}
+    for changed in (frozenset(), frozenset({n})):
+        base_after = _base(after_fix, changed)
+        assert (
+            defaults.deferral_problems(after_fix, allowed, corrected=standing, base=base_after)
+            == []
+        ), changed
+        repathed = {
+            **after_fix,
+            n: {**deferred, "witness": {**corrected, "path": "x/n-068.json"}},
+        }
+        assert (
+            defaults.deferral_problems(repathed, allowed, corrected=standing, base=base_after)
+            == []
+        ), changed
+    moved_since = {**after_fix, n: {**deferred, "witness": {**corrected, "side": "1/2"}}}
+    (problem,) = defaults.deferral_problems(
+        moved_since,
+        allowed,
+        corrected={n: _replaced(moved_since[n]["witness"])},
+        base=_base(after_fix),
+    )
+    assert problem.startswith(f"n={n}: origin/main's record defers it at the witness from")
+    assert "the house has moved since" in problem
+
+    # D1: at a source that pins a revision, a changed file alone is no correction: the
+    # entry names the record's own witness, as it would with no base.
+    (problem,) = defaults.deferral_problems(
+        rows, allowed, corrected={n: _replaced(before)}, base=_base(rows, frozenset({n}))
+    )
+    assert "there is no corrected witness to defer" in problem
 
     # With no base the entry is checked as declared: it may not name the record's own
     # witness where the source pins a revision.
@@ -1509,3 +1552,130 @@ def test_the_state_gate_holds_each_correction_to_its_base(tmp_path: Path) -> Non
     assert defaults.main(["--check-state", "--base-ref", "HEAD"]) == 0
     with pytest.raises(SystemExit):
         defaults.main(["--check", "--base-ref", "HEAD"])
+
+
+def test_the_records_tier_passes_the_base_and_requires_it_held(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Review D4 of #660: without `--base-ref` the gate passes, checking each entry only as
+    declared, and the step required the pass line alone, so a step that stopped passing
+    the base stayed green. It passes `origin/main`, or `HEAD^1` on main itself, and
+    requires the line that says the base was held to."""
+    import os  # noqa: PLC0415
+
+    from sqpack.cli import validate  # noqa: PLC0415
+
+    observed: list[tuple[str, ...]] = []
+    held = f"{defaults.HELD_TO_BASE} origin/main\nregularization state check passed: ..."
+
+    def capture(_context: validate.Context, module: str, *given: str) -> str:
+        observed.append((module, *given))
+        return output
+
+    heads = {"HEAD": "aaaa\n", "origin/main": "bbbb\n"}
+    monkeypatch.setattr(validate, "_module", capture)
+    monkeypatch.setattr(validate, "_git", lambda *args: heads[args[-1]])
+    context = validate.Context(
+        deep=False, strict=False, jobs=1, inner_jobs=1, environment=os.environ.copy()
+    )
+    step = validate._regularization_state  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+    output = held
+    assert step(context) == held
+    assert observed == [
+        ("devtools.default_drawings", "--check-state", "--base-ref", "origin/main")
+    ]
+    heads["origin/main"] = heads["HEAD"]
+    step(context)
+    assert observed[-1][-1] == "HEAD^1"
+    output = "regularization state check passed: ...\nCORRECTED is checked as declared"
+    with pytest.raises(validate.StepFailureError, match="CORRECTED is held to the record"):
+        step(context)
+
+
+def test_the_base_is_read_only_where_a_count_is_deferred(
+    monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """Review D5 of #660: the gate read the base before anything else, so a clone without
+    the merge base failed with nothing deferred. Now it reads the base only where the list
+    names a count, and says so either way."""
+
+    def unread(ref: str) -> defaults.Base:
+        raise AssertionError(f"read {ref}")
+
+    monkeypatch.setattr(defaults, "base_record", unread)
+    monkeypatch.setattr(defaults, "PENDING_ALLOWED", {})
+    monkeypatch.setattr(defaults, "CORRECTED", {})
+    assert defaults.check_state("origin/main") == 0
+    assert (
+        f"{defaults.HELD_TO_BASE} origin/main; nothing is deferred" in capsys.readouterr().out
+    )
+    monkeypatch.setattr(defaults, "PENDING_ALLOWED", {68: "think-aaaa: a correction"})
+    with pytest.raises(AssertionError, match="read origin/main"):
+        defaults.check_state("origin/main")
+
+
+def _repository(root: Path) -> None:
+    """A repository with main, a branch off its first commit that alters one witness, and
+    main's second commit, which the branch has not merged."""
+    import subprocess  # noqa: PLC0415
+
+    def git(*args: str) -> None:
+        subprocess.run(["git", "-C", str(root), *args], check=True, capture_output=True)
+
+    def write(path: str, text: str) -> None:
+        (root / path).parent.mkdir(parents=True, exist_ok=True)
+        (root / path).write_text(text, encoding="utf-8")
+
+    def record(side: str) -> str:
+        return json.dumps({"states": [{"n": 1, "witness": {"side": side}}, {"n": 2}]})
+
+    git("init", "-q", "-b", "main")
+    git("config", "user.email", "test@example.com")
+    git("config", "user.name", "test")
+    write(defaults.RECORD_PATH, record("1"))
+    write(f"{defaults.WITNESSES_PATH}/n-001.yaml", "side: 1\n")
+    write(f"{defaults.WITNESSES_PATH}/n-002.yaml", "side: 2\n")
+    git("add", "-A")
+    git("commit", "-qm", "base")
+    git("checkout", "-qb", "work")
+    write(f"{defaults.WITNESSES_PATH}/n-002.yaml", "side: 2\nnote: a corrected file\n")
+    git("commit", "-qam", "work")
+    git("checkout", "-q", "main")
+    write(defaults.RECORD_PATH, record("1/2"))
+    git("commit", "-qam", "main moves on")
+    git("checkout", "-q", "work")
+
+
+def test_the_base_record_is_read_from_the_merge_base(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Review D4 of #660: `base_record`'s Git reads were untested. It reads the record at
+    the merge base, not the base's tip, finds the witness file the change altered, names
+    a missing ref, and tells a shallow clone how to get its merge base (D5)."""
+    import subprocess  # noqa: PLC0415
+
+    root = tmp_path / "repository"
+    root.mkdir()
+    _repository(root)
+    monkeypatch.setattr(defaults, "REPO", root)
+    base = defaults.base_record("main")
+    assert base.ref == "main"
+    assert base.rows[1]["witness"] == {"side": "1"}
+    assert base.changed == frozenset({2})
+    with pytest.raises(SystemExit, match="--base-ref no-such-ref names no commit"):
+        defaults.base_record("no-such-ref")
+
+    shallow = tmp_path / "shallow"
+    subprocess.run(
+        ["git", "clone", "-q", "--depth", "1", "--branch", "work", root.as_uri(), str(shallow)],
+        check=True,
+        capture_output=True,
+    )
+    subprocess.run(
+        ["git", "-C", str(shallow), "fetch", "-q", "--depth", "1", "origin", "main:main"],
+        check=True,
+        capture_output=True,
+    )
+    monkeypatch.setattr(defaults, "REPO", shallow)
+    with pytest.raises(SystemExit, match="git fetch --unshallow"):
+        defaults.base_record("main")

@@ -3852,7 +3852,12 @@ def _regularization_state(context: Context) -> str:
         else "origin/main"
     )
     output = _module(context, "devtools.default_drawings", "--check-state", "--base-ref", base)
-    _require_text(output, "regularization state check passed")
+    # Both: a step that stops passing the base would pass on the first alone (review D4).
+    _require_text(
+        output,
+        "regularization state check passed",
+        "CORRECTED is held to the record at the merge base of",
+    )
     return output
 
 
