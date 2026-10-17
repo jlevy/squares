@@ -1173,3 +1173,13 @@ def test_a_control_serves_format_m_and_format_t_rows_only() -> None:
     bare = {key: value for key, value in rectangle.items() if key != "threshold"}
     with pytest.raises(SystemExit, match="records no threshold"):
         census.control(Path("/nonexistent"), rectangle_cases()[RECOMPUTED_T], bare)
+
+
+def test_the_16_october_fine_net_packet_is_read_from_its_retained_release_members() -> None:
+    packet = "wand125-fine-net-lower-bounds-2026-10-16"
+    found = {name: case for name, case in cases().items() if case.packet == packet}
+    assert len(found) == 18
+    root = census.WEB / packet / "release/certificates"
+    for name, case in found.items():
+        assert case.candidate == root / name / "candidate.json.gz"
+        assert census.net_directions(case) == (2073 if case.n <= 51 else 201)

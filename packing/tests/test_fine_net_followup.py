@@ -511,3 +511,88 @@ def test_the_linear_price_takes_the_larger_estimate_and_the_costliest_angle() ->
     assert price["costliest_angle"] == 0
     assert price["total_wall_seconds_at_workers"] == 25.0
     assert price["full_replay_within_limit"] is True
+
+
+def retained_asset(tmp_path: Path) -> tuple[Path, bytes]:
+    """An asset with one member of each kind `retain` distinguishes."""
+    lines = b"".join(b'{"row": %d}\n' % index for index in range(1200))
+    members = {
+        "candidate.json": lines,
+        "check2/receipt.json": dumps({"status": "VERIFIED"}),
+        "check2/run.jsonl.gz": gzip.compress(b'{"r":0}\n', mtime=0),
+        "check2/src/sqverify-proof-net-fe12e036c.tar.gz": tarball({"src/lib.rs": b"//\n"}),
+        f"{BUNDLE}.tar.gz": tarball({f"{BUNDLE}/README.md": b"# sealed\n"}),
+    }
+    data = tarball({f"certificates/{NAME}/{k}": v for k, v in members.items()})
+    path = tmp_path / f"certificates__{NAME}.tar.gz"
+    path.write_bytes(data)
+    return path, data
+
+
+def retain_argv(tmp_path: Path, asset: Path, data: bytes, packet: Path) -> list[str]:
+    return [
+        "retain",
+        *("--asset", str(asset), "--sha256", digest(data), "--bytes", str(len(data))),
+        *("--name", NAME, "--packet", str(packet), "--work", str(tmp_path / "work")),
+        *("--release", "lower-bounds-v1", "--repository", "someone/square-packing"),
+    ]
+
+
+def test_retain_keeps_the_data_members_and_pins_the_verifier_and_the_bundle(
+    tmp_path: Path,
+) -> None:
+    asset, data = retained_asset(tmp_path)
+    packet = tmp_path / "packet"
+    assert followup.main(retain_argv(tmp_path, asset, data, packet)) == 0
+    stored = packet / "release/certificates" / NAME
+    assert sorted(
+        p.relative_to(stored).as_posix() for p in stored.rglob("*") if p.is_file()
+    ) == [
+        "candidate.json.gz",
+        "check2/receipt.json",
+        "check2/run.jsonl.gz",
+    ]
+    record = json.loads((packet / followup.RETAINED_RECORD).read_text())
+    (entry,) = record["assets"]
+    forms = {row["path"].split(f"{NAME}/")[1]: row.get("form") for row in entry["members"]}
+    assert forms == {
+        "candidate.json": "gzip",
+        "check2/receipt.json": "plain",
+        "check2/run.jsonl.gz": "original-gzip",
+        "check2/src/sqverify-proof-net-fe12e036c.tar.gz": None,
+        f"{BUNDLE}.tar.gz": None,
+    }
+    assert all("pinned_only" in row for row in entry["members"] if row.get("form") is None)
+    assert gzip.decompress((stored / "candidate.json.gz").read_bytes()).count(b"\n") == 1200
+    assert followup.check_retained(packet) == []
+    # Retaining the same asset again changes nothing.
+    before = (packet / followup.RETAINED_RECORD).read_bytes()
+    assert followup.main(retain_argv(tmp_path, asset, data, packet)) == 0
+    assert (packet / followup.RETAINED_RECORD).read_bytes() == before
+
+
+def test_check_retained_reports_changed_stray_and_misnamed_members(tmp_path: Path) -> None:
+    asset, data = retained_asset(tmp_path)
+    packet = tmp_path / "packet"
+    assert followup.main(retain_argv(tmp_path, asset, data, packet)) == 0
+    stored = packet / "release/certificates" / NAME
+    (stored / "check2/receipt.json").write_bytes(b"{}\n")
+    (stored / "stray.json").write_bytes(b"{}\n")
+    document = packet / "upstream/certificates" / NAME / "ASSET.json"
+    document.parent.mkdir(parents=True)
+    named = {"asset": asset.name, "size": len(data), "sha256": "0" * 64}
+    document.write_text(json.dumps({"assets": [named]}))
+    problems = followup.check_retained(packet)
+    assert any("check2/receipt.json differs" in problem for problem in problems)
+    assert any("stray.json is not in" in problem for problem in problems)
+    assert any("is not the asset" in problem for problem in problems)
+    assert followup.main(["check-retained", str(packet)]) == 1
+
+
+def test_retain_refuses_an_asset_that_is_not_the_pinned_one(tmp_path: Path) -> None:
+    asset, data = retained_asset(tmp_path)
+    packet = tmp_path / "packet"
+    argv = retain_argv(tmp_path, asset, data, packet)
+    argv[argv.index("--sha256") + 1] = "f" * 64
+    assert followup.main(argv) == 1
+    assert not (packet / followup.RETAINED_RECORD).exists()
