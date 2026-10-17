@@ -1860,6 +1860,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "packing/devtools/default_drawings.py",
             "packing/devtools/exact_sides.py",
             "packing/devtools/select_houses.py",
+            "packing/devtools/upper_bound_houses.py",
             "packing/frontier/README.md",
             "packing/frontier/n-070.md",
             "packing/frontier/n-084.md",
@@ -1906,12 +1907,14 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         ),
         reason=(
             "The house rule (think-sa5r) changes what `select_houses.select` derives, adds "
-            "`exact_sides`, stages T-174's 63 counts in `PENDING_ADOPTION` and keys "
-            "`default_drawings`' deferrals on their witnesses; its records pass (review A2 "
-            "of #660) rewords the notes of the 63 staged case records, nine register "
-            "entries, five source-register passages and two requests entries to say the "
-            "hold of 15 October and RP-3's wait ended. Rendered at link revision 5012a97d "
-            "from main 5012a97d and from this branch, as at 3301a1cf before, the "
+            "`exact_sides`, stages T-174's 53 counts in `PENDING_ADOPTION`, holds "
+            "`default_drawings`' deferrals to the base record and measures staged witnesses "
+            "(`upper_bound_houses sizes`); its records passes (reviews A2, C4 and C7 of "
+            "#660) reword the notes of the 63 case records the hold and RP-3 named, ten "
+            "of them moved below T-174 by #657, nine register entries, five source-register "
+            "passages, two requests entries and one evidence limitation to say the hold of "
+            "15 October and RP-3's wait ended. Rendered at link revision c593e2bf from main "
+            "c593e2bf and from this branch, as at 3301a1cf and 5012a97d before, the "
             "optimality review's, the threshold-bound review's and the survey's HTML and "
             "Markdown are byte-identical, as are all 50 files the three renderers write; "
             "their PDFs print from that HTML and were not rebuilt. The explainer, which "

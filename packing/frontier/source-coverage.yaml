@@ -4044,11 +4044,11 @@ sources:
     replay and decided them again by the third route. They are a source entry of their own
     because the release's claims record, which the beyond-horizon rows of
     couzo-certificates-2026-10-12 are read against, holds the claims beyond the corpus only.
-    On 15 October 2026 the cases at 156 and 271 adopted these certificates, the selected
-    overrides below, while PR 574's smaller ones (T-174) were held for the owner; the house
-    rule of 16 October 2026 lifted that hold and stages T-174's adoption there (think-3mry).
-    At 176 T-165, the author's re-solve of this 176, is smaller and holds the case, and at
-    237 issue 593 (T-183).
+    On 15 October 2026 the cases at 156 and 271 adopted these certificates while PR 574's
+    smaller ones (T-174) were held for the owner, until the house rule of 16 October 2026
+    lifted that hold; at 176 T-165, the author's re-solve of this 176, is smaller and held
+    the case, and at 237 issue 593 (T-183). The adoption of 16 October 2026 (PR #657) moved
+    156, 176 and 271 to T-186 and 237 to T-190.
 - id: couzo-certificates-2026-10-12
   title: Francisco Couzo's exact rational certificates at 0fa0e0d, issue561
   role: source-repository
@@ -4109,8 +4109,9 @@ sources:
     (docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md) reproduced the
     replay and decided the cited certificates again by the third route. All 9 native jobs
     have full outcomes. On 15 October 2026 the cases at 129, 204 and 303 adopted these
-    certificates, the selected overrides below; PR 574's (T-174) are smaller there, and the
-    house rule of 16 October 2026 stages their adoption (think-3mry), which ended the hold.
+    certificates while PR 574's smaller ones (T-174) were held for the owner, until the house
+    rule of 16 October 2026 lifted that hold. The adoption of 16 October 2026 (PR #657) moved
+    all three to T-186.
 - id: pingyou-n302-certificate-2026-10-12
   title: PingYou Ltd's n302 certificate at 5a86ac3, issue564
   role: source-repository
@@ -4170,9 +4171,10 @@ sources:
     replay and decided them again by the third route. They are a source entry of their own
     because the release's claims record, which the beyond-horizon rows of
     couzo-certificates-2026-10-13 are read against, holds the claims beyond the corpus only.
-    On 15 October 2026 the cases at 154, 176, 211, 241 and 302 adopted these certificates,
-    the selected overrides below; at 176 PR 574's (T-174) is smaller, and the house rule of
-    16 October 2026 stages its adoption (think-3mry), which ended the hold.
+    On 15 October 2026 the cases at 154, 176, 211, 241 and 302 adopted these certificates;
+    at 176 PR 574's (T-174) is smaller and was held for the owner, until the house rule of
+    16 October 2026 lifted that hold. The adoption of 16 October 2026 (PR #657) moved 154,
+    176 and 302 to T-186 and 211 to T-188; the case at 241 keeps its selected override below.
 - id: couzo-certificates-2026-10-13
   title: Francisco Couzo's exact rational certificates at b85dee2, issues 583 and 586
   role: source-repository
@@ -4555,11 +4557,12 @@ sources:
     (docs/project/reviews/review-2026-10-14-upper-bound-imports-574.md) reproduced the
     replay and decided the cited certificates again by the third route. All 117 native jobs
     have full outcomes. No selected override is created yet: the house rule of 16 October
-    2026 makes T-174 the house at the 63 counts where it is smallest, which ended the hold
+    2026 makes T-174 the house at the 53 counts where it is smallest, which ended the hold
     of 15 October and RP-3's wait, and stages their adoption in
-    devtools.select_houses.PENDING_ADOPTION, the 60 rational counts under think-3mry, the
-    next candidate holding the case at 10 of them meanwhile, and the algebraic certificates
-    at 70, 153 and 207 under think-ot5c.
+    devtools.select_houses.PENDING_ADOPTION, the 50 rational counts under think-3mry, the
+    next candidate holding the case at three of them meanwhile, and the algebraic
+    certificates at 70, 153 and 207 under think-ot5c. It was the smallest at 63 counts until
+    the adoption of 16 October 2026 (PR #657) took ten of them below it.
 - id: dostashev-merged-bands-2026-10-13
   title: Daniil Ostashev's merged-band and relaxed-composition packings at b909e1b, issue575
   role: source-repository
