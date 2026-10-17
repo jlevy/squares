@@ -5,7 +5,7 @@ title: "Adopt T-174 at its 38 staged rational counts under the house rule, regul
 kind: task
 status: in_progress
 priority: 2
-version: 10
+version: 14
 delegate: user-eb-adopt-174
 labels:
   - regularization
@@ -16,7 +16,7 @@ parent_id: is-01m51hyxstsa9ptekd2ss26ksn
 hold: null
 hold_until: null
 created_at: 2026-10-16T22:51:13.774Z
-updated_at: 2026-10-17T07:16:44.080Z
+updated_at: 2026-10-17T11:03:28.449Z
 started_at: 2026-10-17T06:39:00.754Z
 ---
 The house rule (packing/campaign/result-import.md, "The House Rule"; the owner, 16 October 2026) makes T-174 (PR #574's PingYou certificates) the house at 63 counts on main. PR #660 stages them in `select_houses.PENDING_ADOPTION`: the 60 rational ones under this bead, staged as `next pull request`, and the three algebraic ones (70, 153, 207) under think-ot5c (the writer), staged as `no writer`. This bead's pull request adopts the 60, regularizes every count it re-houses in that same pull request, and takes each count off `PENDING_ADOPTION`. Opened by #660's addressing pass for its review A1 (the staged adoption had sat under the policy lane's own bead, think-sa5r).
@@ -50,3 +50,11 @@ user-eb-adopt-174: adopt_houses wrote the 50 records (d86dbb35b, pushed); draft 
 Scope corrected to 38 counts (coordinator, 17 Oct). #658 (8f46741ad) re-points 88, 102, 123, 126, 199, 258, 259, 266, 267, 292, 295 and 301 to T-193, which is smaller there; they are staged under think-ot5c until the algebraic writer exists. #658 lands first.
 
 user-eb-adopt-174: coordinator scope change received: adopt T-174 at 38 counts only; 88, 102, 123, 126, 199, 258, 259, 266, 267, 292, 295, 301 go to T-193 via #658 (staged under think-ot5c there). No strong runs had started on any count. Reworking the branch (d86dbb35b adopted 50) to 38.
+
+user-eb-adopt-174: 38 adopted and pushed (a867e9353 houses, e4de583c4 custody, 1b3cda963 axis views+states). 36 pending; strong runs started 07:45Z in scratch runs/adopt174-{deg05,deg1,deg5}-1017 and adopt174-1017 (2 processes). Next: regularize_select --workers 2, layer, settle, evidence.
+
+user-eb-adopt-174: coordinator took 236 out too (issue 659). Branch now adopts T-174 at 37 (head 9f17533aa); 236 and the T-193 twelve stay staged under think-3mry until #658/#659 land. Strong runs restarted 07:50Z on the 35 pending (aborted 236-inclusive runs kept uncommitted in scratch aborted/).
+
+user-eb-adopt-174 08:2xZ: head 1e55a4ba0 pushed (records views, bound citations, family census, check_standing staged-count fix, ABOVE_U -110/297, MAX_PLACES 72 for 68). Strong runs in progress (evand ~17/35, grid0.5 ~20/35). Papers render byte-identical to main at 804eff36 (provisional). Site edition not cut (coordinator cuts at merge).
+
+user-eb-adopt-174 11:03Z: strong runs done on the 35 pending (evand 6,947+2,183 CPU-s incl. 206 rerun at 1800 s timeout, still no view; grid 0.5/1/5 4,388/4,469/4,456 CPU-s). regularize_select --workers 2 running.

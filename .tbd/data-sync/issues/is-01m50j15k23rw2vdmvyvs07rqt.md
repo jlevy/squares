@@ -5,7 +5,7 @@ title: "Import pingyou: s(29) exact rational certificate, 1.57e-36 below T-155 a
 kind: task
 status: in_progress
 priority: 2
-version: 24
+version: 26
 delegate: user-eb-intake-622
 labels:
   - result-import
@@ -18,7 +18,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-15T19:53:37.121Z
-updated_at: 2026-10-17T01:37:12.721Z
+updated_at: 2026-10-17T09:15:13.148Z
 started_at: 2026-10-15T23:31:02.497Z
 ---
 Stage 1 triage of pull request jlevy/squares#622 (BuddenPing, PingYou Ltd, "data: submit a tighter exact N29 packing certificate", opened 2026-10-15T18:43:54Z, no comments or reviews when read at about 19:50Z). A result submitted as a pull request, treated as an intake report as #574 was (think-9v2k): never merged, approved, pushed to or commented on here. Lane D of the 2026-10-15 evening intake pass (think-wnsv, think-ykg6), read-only.
@@ -90,3 +90,7 @@ Coordinator, 16 Oct ~23:10Z: lane N's owner question 1, the key reason for recor
 2026-10-17 user-eb-intake-622: parked per coordinator (#660 first). Rehearsal of #661's post-#660 pass on LOCAL branch prep-661-after-660 (never pushed), from #661 ad28cc784: merge #660 53785a88d (main 5012a97d6) d450eb94c; fold adopt 5e351d756 021d8dc07; adopt T-195 at 29 (pass day 2026-10-17), witness byte-identical (b7bd5398), SETTLED[29] decided-no-better from the retained runs 52ea8b37b; coverage print-unit fix 8f990ae3f (coordinator: in #661, cite think-adgd/think-nhsd); custody/citations/tests 052b95403. Remaining: re-pin, re-cut, paper records, records tier.
 
 2026-10-17 user-eb-intake-622: rehearsal complete on LOCAL prep-661-after-660 at 9961a4280 (never pushed; #661 stays ad28cc784, adopt 5e351d756). Records tier 52/52 (135 s); 1089 focused tests pass. Findings for the pass: coverage print-unit fix 8f990ae3f (coordinator: lands in #661, cite think-adgd/think-nhsd); survey Figure 3 embeds n-029's drawing and its caption named the interval certificate, so the survey takes a patch edition (v0.2.3 rehearsed, caption revised); explainer only its register count; n = 11 reviews byte-identical. Runbook /tmp/claude-0/-home-user-squares/497b954f-f1d7-5565-9258-beec4cbe400c/scratchpad/pass-661-runbook.sh, patches pass-661-hand-edits.patch and pass-661-results-yaml.patch beside it.
+
+2026-10-17 user-eb-intake-622: #661's post-#660 pass pushed. Head 9182a86f2 (merge main 804eff369, drop HELD, fold adopt, coverage fix ce6c42ea6, adopt T-195 at 29 3a4586897 with SETTLED[29], survey v0.2.3, site v0.7.26), then CI fixes to 6494e79be (sweeps checkout, regenerated house-fed records, stromquist digit limit, test counts, infographics v0.6.3). deep-gate labelled. Records tier 52/52 at 6494e79be. Watching hosted CI.
+
+2026-10-17 ~09:15Z user-eb-intake-622: #661 at f920f8be2 is green: 59 check runs, 43 passed and 16 skipped, packing-required and deep-gate-required passed (runs 39018480921, 39018480780). Still draft, waiting for the follow-up review.
