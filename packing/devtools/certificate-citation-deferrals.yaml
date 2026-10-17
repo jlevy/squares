@@ -44,21 +44,19 @@ deferrals:
       cites the evidence once a house adopts one.
   - evidence: E-evand-639-verify-exact-replay
     results: [T-193]
-    bead: think-phyb
-    blocked_on: >-
-      the owner's decision RP-3 of
-      docs/project/reviews/review-2026-10-14-upper-bound-imports-574.md, and T-174's held
-      houses (devtools.select_houses.HELD)
+    bead: think-ot5c
+    blocked_on: think-ot5c
     recorded: '2026-10-16'
     reason: >-
       Issue 639's exact algebraic sides at sixteen counts are replayed on one route, the
-      source's own verify_exact.py over each number field, and reviewed at stage 4 with no
-      blocking defect (docs/project/reviews/review-2026-10-16-evand-exact-sides-639.md).
-      No house reader rebuilds an algebraic side, so the house selection leaves them out,
-      as it leaves out PR 574's algebraic certificates; and an adopted house's record is
-      rebuilt by its writer (tests/test_house_adoption.py), so its evidence list takes no
-      hand edit. A case record cites the evidence once a house adopts one of these sides,
-      or the owner's answer says where it belongs.
+      source's own verify_exact.py over each number field, which is what stage 4 asks, and
+      reviewed at stage 4 with no blocking defect
+      (docs/project/reviews/review-2026-10-16-evand-exact-sides-639.md). They are the
+      smallest sides known at all sixteen, and the house rule of 16 October 2026 makes them
+      the houses there. Their adoption is staged in select_houses.PENDING_ADOPTION under
+      think-ot5c, until adopt_houses can write an algebraic side, and an adopted house's
+      record is rebuilt by its writer (tests/test_house_adoption.py), so its evidence list
+      takes no hand edit. A case record cites the evidence once a house adopts one.
   - evidence: E-bengreff-594-cover-replay
     results: [T-184]
     bead: think-ccjt

@@ -37726,8 +37726,8 @@ evidence:
       packet and not registered (RE-9). The checker does not check that a file lists
       exactly n squares; review/exact_sides.py of the ledger does, at every count. The
       replay also covers 51, 70, 153, 207, 172, 263 and 297, which T-193 does not record;
-      at 70, 153 and 207 it is a second exact route to T-174's algebraic sides, for the
-      owner's RP-3. The retained driver (SHA-256 1c1d6553...), which the replay command
+      at 70, 153 and 207 it is a second exact route to T-174's algebraic sides, whose
+      adoption the house rule of 16 October 2026 stages under think-ot5c. The retained driver (SHA-256 1c1d6553...), which the replay command
       runs, differs from the receipt's f949158c... only in its resume cache's key, which
       PR 651's review B1 extended to the driver's digest and the interpreter's version
       (b33ce8ffd); no run's input, control, verdict or factorization changed, and no

@@ -1287,8 +1287,18 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         ),
         paths=(
             "packing/campaign/result-requests.yaml",
+            "packing/devtools/adopt_houses.py",
             "packing/devtools/select_houses.py",
+            "packing/frontier/n-088.md",
+            "packing/frontier/n-102.md",
+            "packing/frontier/n-123.md",
+            "packing/frontier/n-126.md",
+            "packing/frontier/n-175.md",
+            "packing/frontier/n-199.md",
+            "packing/frontier/n-267.md",
+            "packing/frontier/n-295.md",
             "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
         ),
         outputs=(
             "papers/n11-lower-bounds-explainer.html",
@@ -1303,17 +1313,21 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         reason=(
             "The records lane of 16 October 2026 for #639 and #640 (#658) maps the s(19) "
             "review onto T-194 (C1) and raises T-193 to V3/C3 in results.yaml, with the "
-            "#639 and #640 request entries and their review fixes (A6 to A9); and "
-            "select_houses gains deferred_results, which only its own --check and tests "
-            "call. Rendered at link revision 6a3a7d8f (main), once from main's tree and "
-            "once from this branch's at d343744f after its merge of main, "
-            "render_packing_methods, render_n11_optimality_review and "
+            "#639 and #640 request entries and their review fixes (A6 to A9). Under the "
+            "house rule (#660) select_houses reads T-193's exact sides (evand_exact_side, "
+            "in ALGEBRAIC_READERS) and stages its sixteen counts under think-ot5c, twelve "
+            "of them re-pointed from T-174, so T-174's register text, its coverage source "
+            "and the #574 request count 41 staged houses, not 53; adopt_houses names a "
+            "re-staged house in the held sentence and a smaller staged one in its "
+            "section, and its refresh rewrites those sixteen case records. Rendered at link "
+            "revision 6a3a7d8f, once from #660's tree (a776a24c) and once from this "
+            "branch's with it merged, render_packing_methods, render_n11_optimality_review and "
             "render_n11_threshold_bound_review write 50 files, byte-identical between the "
             "two trees. The explainer's render needs a browser this host lacks, so it is "
             "source-reviewed only: it reads results.yaml only to count the register's "
             "entries and its apparently new ones, 194 and 32 on both trees, and never "
-            "calls select_houses. No PDF was printed. All four papers keep v0.4.7, v0.1.7, "
-            "v0.1.0 and v0.2.2."
+            "calls select_houses or adopt_houses. No PDF was printed. All four papers keep "
+            "v0.4.7, v0.1.7, v0.1.0 and v0.2.2."
         ),
     ),
     ReleaseNoPublicChange(

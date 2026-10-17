@@ -21986,8 +21986,12 @@ results:
       it from that day (T-170, T-162, T-168, T-161, T-165, T-162, T-169, T-161, T-171, T-162),
       this entry being smaller by 1.7e-99 to 1.18e-02, and at the other 50 counts the cases kept
       their houses. The adoption of 16 October 2026 (PR #657) then took ten of the 60 below this
-      entry, 146 to T-187 and 129, 156, 175, 176, 204, 232, 264, 271 and 303 to T-186. The other
-      50 move to this entry when the staged adoption lands, under think-3mry.
+      entry, 146 to T-187 and 129, 156, 175, 176, 204, 232, 264, 271 and 303 to T-186.
+
+      T-193's exact algebraic sides, at V3/C3 since its stage 4 review of 16 October (PR #658),
+      are below this entry at twelve of the other 50, 88, 102, 123, 126, 199, 258, 259, 266,
+      267, 292, 295 and 301, and are staged there under think-ot5c. The other 38 move to this
+      entry when the staged adoption lands, under think-3mry.
 
       At 70, 153 and 207 the algebraic certificates are the smallest sides known but rest on one
       route; the rule of 15 October left them out for the owner (RP-3), and the house rule of 16
@@ -22468,12 +22472,12 @@ results:
     next_rung: >-
       V4 and C4 need a second accepted adversarial review by a distinct reviewer and a retained
       human oversight record; one AI review, of 14 October, is retained. The house rule of 16
-      October 2026 makes it the house at its 53 smallest counts, staged for adoption
-      (devtools.select_houses.PENDING_ADOPTION): the 50 rational ones under think-3mry, the next
+      October 2026 makes it the house at its 41 smallest counts, staged for adoption
+      (devtools.select_houses.PENDING_ADOPTION): the 38 rational ones under think-3mry, the next
       candidate holding the case meanwhile at three of them (105, 261 and 272), and the
       algebraic ones at 70, 153 and 207 under think-ot5c. It was the smallest at 63 counts
       until the adoption of 16 October 2026 (PR #657) took ten of them below it, with T-186 and
-      T-187.
+      T-187, and T-193's stage 4 exit (PR #658) twelve more.
     reviews:
       - path: docs/project/reviews/review-2026-10-14-upper-bound-imports-574.md
         kind: adversarial
@@ -26751,9 +26755,10 @@ results:
       slice with no bead.
 
       The regularizations items at nine counts wait for the correction
-      RE-1 asks, after the owner's Q2 (think-8ido). Adoption of the sixteen sides as the
-      cases' houses is the owner's, with T-174's (RP-3), and no house reader rebuilds an
-      algebraic side yet.
+      RE-1 asks, after the owner's Q2 (think-8ido). The house rule of 16 October 2026 makes
+      the sixteen sides the houses at their counts, the smallest validated at each, and stages
+      their adoption under think-ot5c (devtools.select_houses.PENDING_ADOPTION), until
+      adopt_houses can write an algebraic side.
     notes: >-
       Rungs on 16 October 2026, at the stage 4 exit after the review (think-7qxm): V0/C0 to
       V3/C3 at all sixteen counts, by check_results, on the replay of the source's own
@@ -26777,8 +26782,14 @@ results:
       move a contact pair; RE-9 (minor), the review's programs kept and not registered. Q1
       on T-174's own items at six counts is the owner's.
 
-      The case records are unchanged: each side is below its case's reported and verified
-      upper bounds, so the entry is pending adoption, as T-174 and T-186 are.
+      Each side is below its case's reported and verified upper bounds and every other
+      validated side at its count, so under the house rule of 16 October 2026 it is the house
+      at all sixteen counts, read exactly by devtools.select_houses (evand_exact_side) and
+      staged for adoption under think-ot5c with T-174's algebraic houses: at twelve counts it
+      is below T-174's staged rational side, which held them for think-3mry before, and at
+      175, 204, 232 and 302 below T-186's houses of PR #657. The case records keep their
+      houses until the writer takes an algebraic side; the twelve that named T-174's adoption
+      name T-193's.
 
       The identity of each certificate with the packing it solves is the source's claim
       (exactsolve.py from the record's own witness); the stage 4 review measured it pose by

@@ -8157,8 +8157,9 @@ issues:
       The reply `--report` lists as due (T-174 at V3/C3 and its two evidence entries reviewed, where
       the follow-up of 14 October stated V0/C0 and recorded) waits for the owner, who decides the
       pull request and, by `close_when`, posts the resulting state; T-174's adoption is no longer
-      the owner's: the house rule of 16 October 2026 makes it the house at 53 counts, staged under
-      think-3mry and, at 70, 153 and 207, under think-ot5c. It goes out on the owner's instruction,
+      the owner's: the house rule of 16 October 2026 makes it the house at 41 counts, staged under
+      think-3mry and, at 70, 153 and 207, under think-ot5c, since T-193 (PR #658) is below it at
+      twelve of the 53 it held before. It goes out on the owner's instruction,
       from think-9v2k, and a pass that finds it due does not post it before then (PR #637's review,
       A4).
   - number: 575
@@ -9336,8 +9337,9 @@ issues:
       October report-order ledger (campaign/issue-intake/upper-bounds-20261016) agrees with the triage at
       every count, and T-193 registers the 16 recorded counts. The source's verify_exact.py, replayed here
       on all 23 forms with controls, and the stage 4 review of 16 October, which found no blocking defect
-      and one major credit-route finding (RE-1), take T-193 to V3/C3 at all sixteen counts. Claude
-      assistance disclosed.
+      and one major credit-route finding (RE-1), take T-193 to V3/C3 at all sixteen counts, where the
+      house rule of 16 October 2026 makes its sides the houses, staged under think-ot5c until the
+      writer takes an algebraic side. Claude assistance disclosed.
     read_through: '2026-10-16T03:37:13Z'
     results:
     - key: exact-sides-below-record

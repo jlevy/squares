@@ -109,6 +109,12 @@ MOVED_AGAIN = {
     303: ("T-186", "T-162"),
 }
 
+#: Issue 639's exact algebraic sides (T-193), the smallest at all sixteen of its counts
+#: since its stage 4 exit (#658), each staged for the writer: below T-174's held sides at
+#: twelve, which think-3mry held before, and below the T-186 houses #657 adopted at four.
+T193_COUNTS = (88, 102, 123, 126, 175, 199, 204, 232, 258, 259, 266, 267, 292, 295, 301, 302)
+T193_BELOW_T186 = (175, 204, 232, 302)
+
 
 def test_the_records_of_the_lifted_hold_keep_their_next_candidates_until_adopted(
     selections: dict[int, select.Selection],
@@ -132,7 +138,7 @@ def test_the_records_of_the_lifted_hold_keep_their_next_candidates_until_adopted
     held_counts = {n for n, s in recorded.items() if s.held}
     assert set(NEXT_CANDIDATES) < held_counts
     assert len(held_counts) == 50
-    assert held_counts | {70, 153, 207} == set(select.PENDING_ADOPTION)
+    assert held_counts | {70, 153, 207} | set(T193_BELOW_T186) == set(select.PENDING_ADOPTION)
 
 
 def test_a_house_below_the_held_entry_leaves_the_hold_deciding_nothing(
@@ -631,12 +637,15 @@ def test_a_moved_house_keeps_its_lifted_hold_as_history() -> None:
         # The records are wrapped, so a sentence may break at any space.
         wrapped = text.replace(" until ", "\nuntil ").replace(" the hold", "\nthe hold")
         assert _flat(adopt.held_history(wrapped)) == history, text[:60]
-    # The ten counts #657 moved below T-174 keep it so, and a staged count waits.
+    # The ten counts #657 moved below T-174 keep it so, and a staged count waits; four of
+    # them wait for T-193, below #657's houses there (#658).
     for n in (129, 146, 156, 175, 176, 204, 232, 264, 271, 303):
         text = _flat(select.case_path(n).read_text(encoding="utf-8"))
         assert _flat(adopt.lifted_sentence("T-174")) in text, n
         assert "until T-174’s adoption" not in text, n
-        assert n not in select.PENDING_ADOPTION, n
+        staged = select.PENDING_ADOPTION.get(n)
+        assert (staged is None) == (n not in T193_BELOW_T186), n
+        assert staged is None or staged.house == "T-193", n
     text = _flat(select.case_path(68).read_text(encoding="utf-8"))
     assert (
         f"{adopt.lifted_sentence('T-174')} The case keeps its house until T-174’s adoption, "
@@ -811,15 +820,6 @@ def test_unread_pending_reports_every_improvement_whatever_would_defer_it(
     }
 
 
-def test_an_unread_entry_a_citation_deferral_names_is_not_pending_adoption() -> None:
-    """T-193's exact algebraic sides have no house reader and wait on the owner's RP-3 by
-    a recorded citation deferral, which `check_certificate_citations` holds to its evidence
-    and age; an unread entry no deferral names stays pending."""
-    assert "T-193" in select.deferred_results()
-    assert select.unread_pending(["T-193"]) == {}
-    assert "T-088" not in select.deferred_results()
-
-
 def test_check_lists_the_unread_and_fails_on_one_pending_adoption(
     monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
 ) -> None:
@@ -890,6 +890,92 @@ def _below(ceiling: select.exact_sides.Side) -> select.exact_sides.Side:
     )
 
 
+def test_t193_is_read_exactly_and_staged_as_the_house_at_all_sixteen_counts(
+    selections: dict[int, select.Selection],
+) -> None:
+    """Review A of #658 (A2 to A5): T-193 was kept off the gate by a citation deferral,
+    which the house rule allows no more. Its source now has a reader, so T-193 is a
+    candidate, read exactly at each count to the 40 places its claim prints, the smallest
+    at all sixteen, and staged for the writer, which cannot write an algebraic side yet."""
+    key = "[Daniel exact current records 2026-10-16]"
+    assert select.ALGEBRAIC_READERS[key] is select.evand_exact_side
+    entry = next(entry for entry in select.load_results() if entry["id"] == "T-193")
+    assert tuple(sorted(entry["scope"]["n_values"])) == T193_COUNTS
+    printed = dict(
+        re.findall(r"s\((\d+)\) <= (?:[^,]*? = )?(\d+\.\d{40})…", _flat(entry["claim"]))
+    )
+    assert sorted(int(n) for n in printed) == list(T193_COUNTS)
+    unread: list[str] = []
+    select.select(unread=unread)
+    assert "T-193" not in unread
+    for n in T193_COUNTS:
+        side = select.evand_exact_side(n)
+        assert isinstance(side, select.exact_sides.Algebraic), n
+        cut = Fraction(printed[str(n)])
+        assert cut < side < cut + Fraction(1, 10**40), n
+        house = selections[n].house
+        assert house is not None, n
+        assert house.result == "T-193", n
+        assert house.side == side, n
+        assert select.PENDING_ADOPTION[n] == select.Pending(
+            house="T-193", bead=select.WRITER_BEAD, why=select.NO_WRITER
+        ), n
+
+
+def test_the_t193_reader_refuses_a_count_it_does_not_state_or_an_interval_off_the_source(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """The reader holds each tabulated interval inside the source's own and refuses a count
+    the table does not state, as a reader defect `--check` names, never a side."""
+    with pytest.raises(select.exact_sides.ExactSideError, match="no exact side"):
+        select.evand_exact_side(5)
+    row = dict(select._evand_exact_rows()[126])  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+    low, high = (Fraction(end) for end in row["source_interval"])
+    row["interval"] = [str(low - 1), str(high)]
+    monkeypatch.setattr(select, "_evand_exact_rows", lambda: {9126: row})
+    with pytest.raises(select.exact_sides.ExactSideError, match="not within the source's"):
+        select.evand_exact_side(9126)
+
+
+def test_a_held_count_restaged_for_a_smaller_house_names_it_and_becomes_history() -> None:
+    """At the twelve counts where T-193 is below T-174's held side, the held sentence names
+    the staged house, its bead and the side it passes, and a later pass's move turns it into
+    history like every other held sentence (`adopt_houses.held_history`)."""
+    sentence = (
+        "The case keeps its house until T-193’s adoption, staged under think-ot5c, moves it "
+        "to T-193’s side, below T-174’s."
+    )
+    assert adopt._keeps_until(88, "T-174", "its house") == sentence  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+    assert adopt._keeps_until(68, "T-174", "its house") == (  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+        "The case keeps its house until T-174’s adoption, staged under think-3mry, moves it "
+        "to T-174’s side."
+    )
+    tail = sentence.split(" until ", 1)[1]
+    for n in sorted(set(T193_COUNTS) - set(T193_BELOW_T186)):
+        assert tail in _flat(select.case_path(n).read_text(encoding="utf-8")), n
+    lead = "T-174 at $1$, `1e-19` below this house, is confirmed here"
+    history = f"{lead}. {adopt.lifted_sentence('T-174')}"
+    wrapped = f"{history} {sentence.replace('its house', 'this house')}".replace(
+        " until ", "\nuntil "
+    )
+    assert _flat(adopt.held_history(wrapped)) == history
+
+
+def test_every_staged_count_names_its_house_and_bead_in_its_record() -> None:
+    """Every count staged for adoption says so in its record, with the house and the bead
+    it waits under: the held and algebraic sentences of #660, and, at 175, 204, 232 and
+    302, the sentence for a smaller house validated after the pass that wrote the record
+    (`adopt_houses.staged_sentences`, #658)."""
+    for n, pending in select.PENDING_ADOPTION.items():
+        text = _flat(select.case_path(n).read_text(encoding="utf-8"))
+        assert f"staged under {pending.bead}," in text, n
+        assert f"moves it to {pending.house}’s side" in text, n
+    for n in T193_BELOW_T186:
+        text = _flat(select.case_path(n).read_text(encoding="utf-8"))
+        assert "T-193’s exact algebraic side at this count" in text, n
+        assert "once the writer takes an algebraic side." in text, n
+
+
 def test_a_reader_makes_an_unread_source_a_candidate_and_the_writer_waits_for_it(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
@@ -950,10 +1036,10 @@ def test_a_rational_house_staged_for_the_writer_fails_the_check(
 def test_the_staged_adoptions_name_their_beads_and_reasons() -> None:
     """Review A1 of #660: the staged adoption sat under the policy lane's own bead, with no
     reason. T-174's rational houses wait for the adoption's bead and the next pull request,
-    and its algebraic ones for the writer's bead and the writer."""
+    and its algebraic ones, and T-193's (#658), for the writer's bead and the writer."""
     for n, pending in select.PENDING_ADOPTION.items():
         assert pending.why in select.STAGING_REASONS, n
-        algebraic = n in (70, 153, 207)
+        algebraic = n in (70, 153, 207) or pending.house == "T-193"
         assert (pending.bead, pending.why) == (
             (select.WRITER_BEAD, select.NO_WRITER)
             if algebraic

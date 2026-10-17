@@ -191,20 +191,30 @@ class Pending:
 #: adopts it or stages its counts here with the bead that adopts them and why
 #: (`STAGING_REASONS`); an adoption waits with its regularization runs, never apart from
 #: them (`default_drawings.deferral_problems`). The pull request that adopts a count takes
-#: it off.
+#: it off. Issue 639's exact algebraic sides (T-193), validated at stage 4 on 16 October
+#: 2026 (#658), are the smallest at all sixteen of their counts: below T-174's rational
+#: sides at the twelve staged for it before, which leaves it 38 for the next pull
+#: request, and below T-186's houses at 175, 204, 232 and 302. All sixteen are algebraic,
+#: so they wait for the writer.
 PENDING_ADOPTION: dict[int, Pending] = {
     **{
         n: Pending(house="T-174", bead=ADOPTION_BEAD, why=NEXT_PULL_REQUEST)
         for n in (
-            68, 84, 86, 88, 102, 103, 105, 108, 110, 123, 126, 127, 130, 131, 132, 155,
-            172, 179, 180, 181, 182, 199, 206, 208, 209, 210, 228, 236, 238, 239, 240,
-            258, 259, 261, 263, 266, 267, 268, 269, 270, 272, 273, 292, 295, 297, 301,
-            305, 306, 307, 308,
+            68, 84, 86, 103, 105, 108, 110, 127, 130, 131, 132, 155, 172, 179, 180, 181,
+            182, 206, 208, 209, 210, 228, 236, 238, 239, 240, 261, 263, 268, 269, 270,
+            272, 273, 297, 305, 306, 307, 308,
         )
     },
     **{
         n: Pending(house="T-174", bead=WRITER_BEAD, why=NO_WRITER)
         for n in (70, 153, 207)
+    },
+    **{
+        n: Pending(house="T-193", bead=WRITER_BEAD, why=NO_WRITER)
+        for n in (
+            88, 102, 123, 126, 175, 199, 204, 232, 258, 259, 266, 267, 292, 295, 301,
+            302,
+        )
     },
 }  # fmt: skip
 
@@ -499,11 +509,45 @@ def algebraic_house_side(key: str, n: int) -> Side:
     return exact_sides.of_field_element(value)
 
 
+#: Issue 639's exact sides (T-193), as the 16 October intake tabulated them from Evan
+#: Daniel's `search/exact/cur/data/n-N.minpoly.json.gz`, each file held to its digest
+#: (`review/exact_sides.py`): the side's integer polynomial and an interval about its one
+#: root there, inside the source's own interval. The table is complete where the packet is
+#: not, since the packet pins four of its files by digest only.
+EVAND_EXACT_SIDES = ROOT / "campaign/issue-intake/upper-bounds-20261016/exact-sides.json"
+
+
+@cache
+def _evand_exact_rows() -> dict[int, Mapping[str, Any]]:
+    table = json.loads(EVAND_EXACT_SIDES.read_text(encoding="utf-8"))
+    return {int(row["n"]): row for row in table["rows"]}
+
+
+@cache
+def evand_exact_side(n: int) -> Side:
+    """The exact side issue 639 states at `n`: the one root of its polynomial in the
+    tabulated interval, which must lie within the source's, held by `exact_sides.algebraic`
+    to an irreducible polynomial with exactly one root there."""
+    row = _evand_exact_rows().get(n)
+    if row is None:
+        raise exact_sides.ExactSideError(f"issue 639 states no exact side at n = {n}")
+    low, high = (Fraction(str(end)) for end in row["interval"])
+    source_low, source_high = (Fraction(str(end)) for end in row["source_interval"])
+    if not source_low <= low < high <= source_high:
+        raise exact_sides.ExactSideError(
+            f"n={n}: the tabulated interval is not within the source's"
+        )
+    coefficients = [Fraction(str(value)) for value in reversed(row["polynomial_low_to_high"])]
+    return exact_sides.algebraic(coefficients, (low, high))
+
+
 #: Sources whose packets state only algebraic sides, in a form `upper_bound_reports` has
 #: no reader for, each with the reader of its exact side at a count. An eligible entry
 #: whose source has no reader here or there is unread, and `--check` fails where it states
 #: a side below its case (`unread_pending`): the cure is a reader, never a hold.
-ALGEBRAIC_READERS: dict[str, Callable[[int], Side]] = {}
+ALGEBRAIC_READERS: dict[str, Callable[[int], Side]] = {
+    "[Daniel exact current records 2026-10-16]": evand_exact_side,
+}
 
 
 def _readable(key: str) -> bool:
@@ -685,38 +729,15 @@ def algebraic_margin(key: str, n: int, side: Fraction) -> Fraction:
     return side - high
 
 
-def deferred_results() -> frozenset[str]:
-    """The register entries a recorded citation deferral names.
-
-    Their case adoption waits on the decision `certificate-citation-deferrals.yaml`
-    records, with its owning bead and what it waits on, and
-    `devtools.check_certificate_citations` holds each deferral to its evidence and its age,
-    so the exemption ends when the deferral does.
-    """
-    from devtools import check_certificate_citations as citations  # noqa: PLC0415
-
-    named: set[str] = set()
-    for deferral in citations.load_deferrals():
-        results = deferral.get("results")
-        if isinstance(results, list):
-            named.update(str(result) for result in cast("list[object]", results))
-    return frozenset(named)
-
-
 def unread_pending(unread: Sequence[str]) -> dict[str, list[int]]:
     """The unread entries that state a bound below their case: adoptions nothing here sees.
 
     An eligible entry without an exact reader is never a candidate, so a confirmed and
-    reviewed side it states below a case would stay pending without this. An entry a
-    recorded citation deferral names is waiting on that decision and is not pending here
-    (`deferred_results`): T-193's exact algebraic sides, which no house reader rebuilds,
-    wait on the owner's RP-3 with T-174's held houses.
+    reviewed side it states below a case would stay pending without this.
     """
     from devtools import check_standing  # noqa: PLC0415
     from devtools import render_recent_results as view  # noqa: PLC0415
 
-    deferred = deferred_results()
-    unread = [identifier for identifier in unread if identifier not in deferred]
     if not unread:
         return {}
     records = view.load_records()
