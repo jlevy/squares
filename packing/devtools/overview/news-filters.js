@@ -85,12 +85,6 @@
         tally.textContent = ` (${scored.filter((card) => subjects(card).includes(topic)).length})`;
       }
     }
-    const all = controls.querySelector('[data-news-all="topics"]');
-    const allTally = all?.querySelector("[data-news-tally]");
-    if (allTally) {
-      allTally.textContent = ` (${scored.length})`;
-    }
-    all?.setAttribute("aria-label", `All topics (${scored.length})`);
     let shown = 0;
     for (const card of cards) {
       card.hidden = !matches(card);
@@ -147,10 +141,6 @@
     }
     if (button.hasAttribute("data-news-reset")) {
       scores = new Set(["4", "5"]);
-      topics = new Set(allTopics);
-    } else if (button.getAttribute("data-news-all") === "scores") {
-      scores = new Set(allScores);
-    } else if (button.getAttribute("data-news-all") === "topics") {
       topics = new Set(allTopics);
     } else {
       return;

@@ -1279,6 +1279,47 @@ class ReleaseNoPublicChange(NamedTuple):
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
     ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/devtools/overview/rating-tooltips.js",
+            "packing/devtools/render_changelog.py",
+            "packing/devtools/render_overview.py",
+            "packing/devtools/templates/site-nav.css",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-lower-bounds-explainer.pdf",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-optimality-review.pdf",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/n11-threshold-bound-review.pdf",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+            "papers/square-packing-methods-survey.pdf",
+        ),
+        reason=(
+            "The News chooser correction reads News significance meanings from the "
+            "label rubric in result-import.md, declared as a site input in "
+            "render_overview, uses them in News cards and controls, and extends "
+            "tooltip enhancement to News score buttons, whose press dismisses the "
+            "tooltip, while retaining existing badge interactions. Compact in-place "
+            "choices gain per-button borders and a visible focus outline. The four "
+            "papers contain neither News controls nor compact in-place choosers; "
+            "their existing navigation links and rating badges retain their behavior. "
+            "Source review finds no manuscript, figure, credit, content date or "
+            "print-style change in these paper exports. This is not a rendered "
+            "byte-equality claim; the site alone takes a patch edition."
+        ),
+    ),
+    ReleaseNoPublicChange(
         components=("paper:n11-lower-bounds-explainer",),
         paths=(
             "packing/cases/n11_fractional_certificate/t-018-proof-card.md",

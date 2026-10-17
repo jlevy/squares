@@ -9,6 +9,7 @@ it (`templates/paper-design.md`, Color, The Rung Scale).
 
 from __future__ import annotations
 
+import dataclasses
 import re
 from itertools import pairwise
 
@@ -239,4 +240,54 @@ def test_the_design_document_carries_the_inks() -> None:
     """The ink table in `paper-design.md` is this tool's output."""
     design = (render_overview.TEMPLATES / "paper-design.md").read_text(encoding="utf-8")
     for line in rung_scale.ink_table(rung_scale.inks()).splitlines():
+        assert line in design, line
+
+
+def test_the_topic_chips_take_fills_from_the_scale_or_their_bound() -> None:
+    """The topics Results and News share (`think-z9za`): Verification is a result's
+    `reviewed` blue, Optimality, Project and Engineering are hues of the scale, and the
+    bound topics are their bound's ink diluted into the page. Each is in gamut with the
+    page's text at WCAG AA or better on it in both themes."""
+    topics = rung_scale.topic_fills()
+    assert {fill.rung for fill in topics} == {
+        "lower-bound",
+        "upper-bound",
+        "optimality",
+        "project",
+        "engineering",
+        "verification",
+    }
+    assert {fill.theme for fill in topics} == set(rung_scale.THEMES)
+    for fill in topics:
+        assert fill.in_gamut, fill
+        assert fill.contrast >= rung_scale.MINIMUM_CONTRAST, fill
+    reviewed = {
+        fill.theme: fill for fill in rung_scale.status_fills() if fill.rung == "reviewed"
+    }
+    for fill in topics:
+        if fill.rung == "verification":
+            assert fill.oklch == reviewed[fill.theme].oklch, fill
+
+
+def test_every_topic_fill_keeps_one_meaning() -> None:
+    """A topic's fill stands a just noticeable difference or more from every status's
+    and every other topic's in its theme, unless the two mean one thing, as Verification
+    and `reviewed` do. Project's amber at the yellow statuses' hue, 0.011 from `recorded`
+    in OkLab, is the case this rejects."""
+    report = rung_scale.status_fills() + rung_scale.topic_fills()
+    assert rung_scale.crowded(report) == []
+    recorded = next(
+        fill for fill in report if fill.rung == "recorded" and fill.theme == "light"
+    )
+    near = dataclasses.replace(recorded, rung="project", hue=85.0)
+    others = [fill for fill in report if fill.rung != "project"]
+    assert [
+        (first.rung, second.rung) for first, second, _ in rung_scale.crowded([*others, near])
+    ] == [("project", "recorded")]
+
+
+def test_the_design_document_carries_the_topic_fills() -> None:
+    """The topic table in `paper-design.md` is this tool's output."""
+    design = (render_overview.TEMPLATES / "paper-design.md").read_text(encoding="utf-8")
+    for line in rung_scale.markdown_table(rung_scale.topic_fills(), "Topic").splitlines():
         assert line in design, line
