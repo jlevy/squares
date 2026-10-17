@@ -26,7 +26,7 @@ second implementation agrees.
 ## The Short Version
 
 - **169** programs: **50** external and **119** first-party; **119** decide claims and **50** check premises.
-- **513** of **612** evidence entries name the programs that verified them: 254 reproduced with the producer’s code, 228 independently re-implemented, 20 re-implemented, sharing the producer’s components, 11 no relation: a proof, a derivation or a report.
+- **521** of **621** evidence entries name the programs that verified them: 256 reproduced with the producer’s code, 234 independently re-implemented, 20 re-implemented, sharing the producer’s components, 11 no relation: a proof, a derivation or a report.
 
 ## Programs
 
@@ -42,8 +42,8 @@ second implementation agrees.
 | [`V-wand125-verify-portable-py`](#v-wand125-verify-portable-py) | verify_portable.py | wand125 | external | decides | 2 | 1 |
 | [`V-wand125-check-with-sqpack`](#v-wand125-check-with-sqpack) | check_with_sqpack.py | wand125 | external | decides | 5 | 1 |
 | [`V-wand125-valid7-checker`](#v-wand125-valid7-checker) | valid7-independent-check (Tier A, Tier B and the record checker) | wand125 | external | decides | 2 | 2 |
-| [`V-evand-zmx2`](#v-evand-zmx2) | zmx2 | Evan Daniel | external | decides | 21 | 11 |
-| [`V-evand-zm-mixed-py`](#v-evand-zm-mixed-py) | zm_mixed.py | Evan Daniel | external | decides | 8 | 8 |
+| [`V-evand-zmx2`](#v-evand-zmx2) | zmx2 | Evan Daniel | external | decides | 23 | 11 |
+| [`V-evand-zm-mixed-py`](#v-evand-zm-mixed-py) | zm_mixed.py | Evan Daniel | external | decides | 10 | 8 |
 | [`V-evand-zeromargin-py`](#v-evand-zeromargin-py) | zeromargin.py | Evan Daniel | external | decides | 4 | 2 |
 | [`V-evand-angle-net-verify`](#v-evand-angle-net-verify) | verify (the angle-net arrangement sweep) | Evan Daniel | external | decides | 10 | 5 |
 | [`V-evand-xcheck-py`](#v-evand-xcheck-py) | xcheck.py | Evan Daniel | external | decides | 4 | 2 |
@@ -78,8 +78,8 @@ second implementation agrees.
 | [`V-fitzharding-n17-lean`](#v-fitzharding-n17-lean) | The sq17-lean Lean 4 development (Sq17Lean) | Fitzharding | external | decides | 1 | 1 |
 | [`V-check-basic-bounds`](#v-check-basic-bounds) | devtools.check_basic_bounds | Squares Project (Levy) | first-party | decides | 3 | 16 |
 | [`V-optimal-moduli`](#v-optimal-moduli) | cases.small_n.optimal_moduli | Squares Project (Levy) | first-party | decides | 1 | 0 |
-| [`V-sqpack-verify`](#v-sqpack-verify) | sqpack.verify | Squares Project (Levy) | first-party | decides | 65 | 54 |
-| [`V-check-rational-witness-independent`](#v-check-rational-witness-independent) | devtools.check_rational_witness_independent | Squares Project (Levy) | first-party | decides | 59 | 57 |
+| [`V-sqpack-verify`](#v-sqpack-verify) | sqpack.verify | Squares Project (Levy) | first-party | decides | 71 | 60 |
+| [`V-check-rational-witness-independent`](#v-check-rational-witness-independent) | devtools.check_rational_witness_independent | Squares Project (Levy) | first-party | decides | 65 | 63 |
 | [`V-check-nagamochi-lemma1-counterexample`](#v-check-nagamochi-lemma1-counterexample) | devtools.check_nagamochi_lemma1_counterexample | Squares Project (Levy) | first-party | decides | 1 | 1 |
 | [`V-check-karakus-strip-measure`](#v-check-karakus-strip-measure) | devtools.check_karakus_strip_measure | Squares Project (Levy) | first-party | decides | 1 | 2 |
 | [`V-upper-bound-promotion`](#v-upper-bound-promotion) | devtools.upper_bound_packets | Squares Project (Levy) | first-party | decides | 6 | 5 |
@@ -136,7 +136,7 @@ second implementation agrees.
 | [`V-overbeck-review3-seed-packing`](#v-overbeck-review3-seed-packing) | seed_packing_check.py | Squares Project (Levy) | first-party | premises | 1 | 0 |
 | [`V-overbeck-review3-spec-lemmas`](#v-overbeck-review3-spec-lemmas) | spec_lemmas_numeric.py | Squares Project (Levy) | first-party | premises | 1 | 0 |
 | [`V-overbeck-review3-parallel-rows`](#v-overbeck-review3-parallel-rows) | parallel_row_check.py | Squares Project (Levy) | first-party | premises | 0 | 0 |
-| [`V-evand-exact-certificates`](#v-evand-exact-certificates) | devtools.evand_exact_certificates | Squares Project (Levy) | first-party | premises | 43 | 41 |
+| [`V-evand-exact-certificates`](#v-evand-exact-certificates) | devtools.evand_exact_certificates | Squares Project (Levy) | first-party | premises | 49 | 47 |
 | [`V-check-n11-final-composition`](#v-check-n11-final-composition) | devtools.check_n11_final_composition | Squares Project (Levy) | first-party | premises | 2 | 2 |
 | [`V-audit-n11-lean`](#v-audit-n11-lean) | devtools.audit_n11_lean | Squares Project (Levy) | first-party | premises | 2 | 1 |
 | [`V-fitzharding-n17-source-manifest`](#v-fitzharding-n17-source-manifest) | check_source_manifest.py | Squares Project (Levy) | first-party | premises | 1 | 1 |
@@ -149,8 +149,8 @@ second implementation agrees.
 | [`V-audit-wand125-linear`](#v-audit-wand125-linear) | devtools.audit_wand125_linear | Squares Project (Levy) | first-party | premises | 3 | 3 |
 | [`V-sqverify-fast`](#v-sqverify-fast) | sqverify-fast | Squares Project (Levy) | first-party | decides | 111 | 23 |
 | [`V-replay-chelokot-lean`](#v-replay-chelokot-lean) | devtools.replay_chelokot_lean | Squares Project (Levy) | first-party | premises | 1 | 1 |
-| [`V-replay-evand-zmx2`](#v-replay-evand-zmx2) | devtools.replay_evand_zmx2 | Squares Project (Levy) | first-party | premises | 5 | 5 |
-| [`V-audit-evand-mixed-covers`](#v-audit-evand-mixed-covers) | devtools.audit_evand_mixed_covers | Squares Project (Levy) | first-party | premises | 9 | 8 |
+| [`V-replay-evand-zmx2`](#v-replay-evand-zmx2) | devtools.replay_evand_zmx2 | Squares Project (Levy) | first-party | premises | 7 | 7 |
+| [`V-audit-evand-mixed-covers`](#v-audit-evand-mixed-covers) | devtools.audit_evand_mixed_covers | Squares Project (Levy) | first-party | premises | 11 | 10 |
 | [`V-audit-s12-reweighted`](#v-audit-s12-reweighted) | devtools.audit_s12_reweighted | Squares Project (Levy) | first-party | premises | 1 | 1 |
 | [`V-audit-s12-v11`](#v-audit-s12-v11) | devtools.audit_s12_v11_certificate | Squares Project (Levy) | first-party | premises | 1 | 1 |
 | [`V-compare-evand-s32-sweep`](#v-compare-evand-s32-sweep) | devtools.compare_evand_s32_sweep | Squares Project (Levy) | first-party | premises | 1 | 1 |
@@ -163,9 +163,9 @@ second implementation agrees.
 | [`V-squish-upper-bound-packets`](#v-squish-upper-bound-packets) | devtools.squish_upper_bound_packets | Squares Project (Levy) | first-party | premises | 2 | 2 |
 | [`V-squish-followup-packets`](#v-squish-followup-packets) | devtools.squish_followup_packets | Squares Project (Levy) | first-party | premises | 1 | 1 |
 | [`V-squish-second-update-confirmation`](#v-squish-second-update-confirmation) | devtools.squish_second_update_confirmation | Squares Project (Levy) | first-party | premises | 1 | 1 |
-| [`V-evand-arrangement-receipts`](#v-evand-arrangement-receipts) | devtools.evand_arrangement_reports | Squares Project (Levy) | first-party | premises | 40 | 40 |
+| [`V-evand-arrangement-receipts`](#v-evand-arrangement-receipts) | devtools.evand_arrangement_reports | Squares Project (Levy) | first-party | premises | 46 | 46 |
 | [`V-algebraic-witness-reports`](#v-algebraic-witness-reports) | devtools.algebraic_witness_reports | Squares Project (Levy) | first-party | premises | 1 | 1 |
-| [`V-upper-bound-reports`](#v-upper-bound-reports) | devtools.upper_bound_reports | Squares Project (Levy) | first-party | premises | 36 | 36 |
+| [`V-upper-bound-reports`](#v-upper-bound-reports) | devtools.upper_bound_reports | Squares Project (Levy) | first-party | premises | 42 | 42 |
 | [`V-rehwaldt-n68-verify`](#v-rehwaldt-n68-verify) | verify.py | Seth Rehwaldt | external | decides | 1 | 1 |
 | [`V-rehwaldt-n68-independent-support-check`](#v-rehwaldt-n68-independent-support-check) | independent_support_check.py | Seth Rehwaldt | external | decides | 1 | 1 |
 | [`V-refinement-custody`](#v-refinement-custody) | devtools.refinement_custody | Squares Project (Levy) | first-party | premises | 2 | 2 |
@@ -568,7 +568,9 @@ Decides a zero-margin point-and-segment cover by branch and bound over centre an
 | `E-n045-evand-mixed-cover-zmx2-replay` | replayed here | reproduced with the producer’s code | not recorded | T-053 |
 | `E-n020-evand-point-cover-4886-report` | the source’s own run | reproduced with the producer’s code | not recorded | - |
 | `E-bengreff-594-cover-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-184 |
+| `E-bengreff-594-cover-replay` | replayed here | reproduced with the producer’s code | full, 8,100 of 8,100: root cells of the D4 region, centres in [0, 9/2]^2 and u in [0, 1/2]: 8,096 decided by zmx2 and the other 4 by zm_mixed.py over the 64 sub-roots that tile them | T-184 |
 | `E-bengreff-610-cover-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-191 |
+| `E-bengreff-610-cover-replay` | replayed here | reproduced with the producer’s code | full, 10,000 of 10,000: root cells of the D4 region, centres in [0, 5]^2 and u in [0, 1/2]: 9,981 decided by zmx2 and the other 19 by zm_mixed.py over the 304 sub-roots that tile them | T-191 |
 
 ### `V-evand-zm-mixed-py`
 
@@ -576,9 +578,9 @@ Decides a zero-margin point-and-segment cover by branch and bound over centre an
 
 The source's exact mixed point-and-segment cover checker, the predecessor zmx2 was checked against.
 
-- Source: [`packing/resources/web/evand-square-packing-2026-09-28/square-packing/s12/search/zm_mixed.py`](../../packing/resources/web/evand-square-packing-2026-09-28/square-packing/s12/search/zm_mixed.py)
-- Versions run: SHA-256 `ee3e2915349b…`
-- Note: Retained; its shipped run records are re-summarised by the source's verify.sh, but no confirming entry runs the checker itself yet.
+- Source: [`packing/resources/web/evand-square-packing-2026-09-28/square-packing/s12/search/zm_mixed.py`](../../packing/resources/web/evand-square-packing-2026-09-28/square-packing/s12/search/zm_mixed.py), [`packing/resources/web/evand-square-packing-2026-09-28/square-packing/s12/search/mixed_cover.py`](../../packing/resources/web/evand-square-packing-2026-09-28/square-packing/s12/search/mixed_cover.py)
+- Versions run: SHA-256 `ee3e2915349b…`; SHA-256 `bb89de15ecf5…` (mixed_cover.py, which zm_mixed.py imports; of `mixed_cover.py`); SHA-256 `640fe453c1a3…` (zeromargin.py, which zm_mixed.py imports (V-evand-zeromargin-py's program); of `zeromargin.py`)
+- Note: Benjamin Greff verified his s(76) and s(95) covers with it, on the sub-roots of the D4 roots zmx2 leaves, at the three digests his verify.sh pins, so its runs there (devtools.replay_evand_zmx2 zm-mixed) replay the producer's code. No other confirming entry runs it.
 
 | evidence | run | code | coverage | results |
 | --- | --- | --- | --- | --- |
@@ -589,7 +591,9 @@ The source's exact mixed point-and-segment cover checker, the predecessor zmx2 w
 | `E-n045-evand-mixed-cover-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-053 |
 | `E-n020-evand-point-cover-4886-report` | the source’s own run | reproduced with the producer’s code | not recorded | - |
 | `E-bengreff-594-cover-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-184 |
+| `E-bengreff-594-cover-replay` | replayed here | reproduced with the producer’s code | full, 8,100 of 8,100: root cells of the D4 region, centres in [0, 9/2]^2 and u in [0, 1/2]: 8,096 decided by zmx2 and the other 4 by zm_mixed.py over the 64 sub-roots that tile them | T-184 |
 | `E-bengreff-610-cover-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-191 |
+| `E-bengreff-610-cover-replay` | replayed here | reproduced with the producer’s code | full, 10,000 of 10,000: root cells of the D4 region, centres in [0, 5]^2 and u in [0, 1/2]: 9,981 decided by zmx2 and the other 19 by zm_mixed.py over the 304 sub-roots that tile them | T-191 |
 
 ### `V-evand-zeromargin-py`
 
@@ -1191,6 +1195,12 @@ Decides a packing pair by pair and wall by wall: by exact sign in a number field
 | `E-fang-excess-theorem-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 6 of 6: the six retained inventory certificates at 211, 241, 273, 307, 308 and 932, every wall and every pair decided by both maintained routes; the twelve kernel controls are retained separately | T-163 |
 | `E-mishapolk-593-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 237 that T-183 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-183 |
 | `E-fang-direct-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 14 of 14: the complete certificates at 380, 381, 382, 421, 422, 463, 464, 507, 508, 553, 601, 651, 758 and 814, every wall and every pair decided by both maintained routes; the 28 kernel controls are retained separately | - |
+| `E-couzo-506-n175-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 175 that T-185 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-185 |
+| `E-mishapolk-70a033f-exact-feasibility` | replayed here | independently re-implemented | full, 12 of 12: the twelve derived certificates at n = 129, 154, 156, 175, 176, 204, 232, 264, 271, 302, 303 and 304 that T-186 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipts | T-186 |
+| `E-evand-606-n146-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 146 that T-187 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-187 |
+| `E-couzo-487b058-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 211 that T-188 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-188 |
+| `E-couzo-607-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 237 that T-189 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipts | T-189 |
+| `E-couzo-4e4c8ce-n237-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 237 that T-190 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-190 |
 
 ### `V-check-rational-witness-independent`
 
@@ -1264,6 +1274,12 @@ Decides a rational-corner witness pair by pair and wall by wall in Fraction arit
 | `E-fang-excess-theorem-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 6 of 6: the six retained inventory certificates at 211, 241, 273, 307, 308 and 932, every wall and every pair decided by both maintained routes; the twelve kernel controls are retained separately | T-163 |
 | `E-mishapolk-593-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 237 that T-183 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-183 |
 | `E-fang-direct-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 14 of 14: the complete certificates at 380, 381, 382, 421, 422, 463, 464, 507, 508, 553, 601, 651, 758 and 814, every wall and every pair decided by both maintained routes; the 28 kernel controls are retained separately | - |
+| `E-couzo-506-n175-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 175 that T-185 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-185 |
+| `E-mishapolk-70a033f-exact-feasibility` | replayed here | independently re-implemented | full, 12 of 12: the twelve derived certificates at n = 129, 154, 156, 175, 176, 204, 232, 264, 271, 302, 303 and 304 that T-186 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipts | T-186 |
+| `E-evand-606-n146-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 146 that T-187 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-187 |
+| `E-couzo-487b058-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 211 that T-188 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-188 |
+| `E-couzo-607-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 237 that T-189 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipts | T-189 |
+| `E-couzo-4e4c8ce-n237-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 237 that T-190 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-190 |
 
 ### `V-check-nagamochi-lemma1-counterexample`
 
@@ -2228,6 +2244,12 @@ Reads Evan Daniel's rational certificates, refusing anything the format does not
 | `E-fang-excess-theorem-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 6 of 6: the six retained inventory certificates at 211, 241, 273, 307, 308 and 932, every wall and every pair decided by both maintained routes; the twelve kernel controls are retained separately | T-163 |
 | `E-mishapolk-593-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 237 that T-183 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-183 |
 | `E-fang-direct-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 14 of 14: the complete certificates at 380, 381, 382, 421, 422, 463, 464, 507, 508, 553, 601, 651, 758 and 814, every wall and every pair decided by both maintained routes; the 28 kernel controls are retained separately | - |
+| `E-couzo-506-n175-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 175 that T-185 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-185 |
+| `E-mishapolk-70a033f-exact-feasibility` | replayed here | independently re-implemented | full, 12 of 12: the twelve derived certificates at n = 129, 154, 156, 175, 176, 204, 232, 264, 271, 302, 303 and 304 that T-186 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipts | T-186 |
+| `E-evand-606-n146-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 146 that T-187 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-187 |
+| `E-couzo-487b058-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 211 that T-188 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-188 |
+| `E-couzo-607-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 237 that T-189 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipts | T-189 |
+| `E-couzo-4e4c8ce-n237-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 237 that T-190 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-190 |
 
 ### `V-check-n11-final-composition`
 
@@ -2526,7 +2548,7 @@ Clones chelokot's archive at the pinned commit, checks the toolchain, manifest, 
 
 **devtools.replay_evand_zmx2** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
 
-Builds zmx2 from the retained bytes, refuses any input whose SHA-256 is not the record's, and runs it and its controls.
+Builds zmx2 from the retained bytes, refuses any input whose SHA-256 is not the record's, and runs it and its controls; for a split cover it also stages zm_mixed.py and the files it imports, digests checked, and runs it on the source's sub-roots.
 
 - Source: [`packing/devtools/replay_evand_zmx2.py`](../../packing/devtools/replay_evand_zmx2.py)
 - Versions run: this repository's commits, which Git holds
@@ -2538,12 +2560,14 @@ Builds zmx2 from the retained bytes, refuses any input whose SHA-256 is not the 
 | `E-n059-wand125-mixed-cover-zmx2-replay` | replayed here | reproduced with the producer’s code | not recorded | T-066 |
 | `E-n077-wand125-mixed-cover-zmx2-replay` | replayed here | reproduced with the producer’s code | not recorded | T-067 |
 | `E-n032-evand-zmx2-full-sym-replay` | replayed here | reproduced with the producer’s code | not recorded | T-051 |
+| `E-bengreff-594-cover-replay` | replayed here | reproduced with the producer’s code | full, 8,100 of 8,100: root cells of the D4 region, centres in [0, 9/2]^2 and u in [0, 1/2]: 8,096 decided by zmx2 and the other 4 by zm_mixed.py over the 64 sub-roots that tile them | T-184 |
+| `E-bengreff-610-cover-replay` | replayed here | reproduced with the producer’s code | full, 10,000 of 10,000: root cells of the D4 region, centres in [0, 5]^2 and u in [0, 1/2]: 9,981 decided by zmx2 and the other 19 by zm_mixed.py over the 304 sub-roots that tile them | T-191 |
 
 ### `V-audit-evand-mixed-covers`
 
 **devtools.audit_evand_mixed_covers** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
 
-Parses zmx2 root logs with its own code, requires every root once with none uncertified, compares them with the source's records and re-derives the cover's exact total and D4 invariance.
+Parses zmx2 root logs with its own code, requires every root once with none uncertified, compares them with the source's records and re-derives the cover's exact total and D4 invariance; for a split cover it reads the zmx2 log and zm_mixed.py's sub-root records as one decision, every root zmx2 leaves tiled by certified sub-roots at the pinned digests and settings.
 
 - Source: [`packing/devtools/audit_evand_mixed_covers.py`](../../packing/devtools/audit_evand_mixed_covers.py)
 - Versions run: this repository's commits, which Git holds
@@ -2559,6 +2583,8 @@ Parses zmx2 root logs with its own code, requires every root once with none unce
 | `E-n013-evand-casefree-cover-zmx2-replay` | replayed here | reproduced with the producer’s code | not recorded | T-006 |
 | `E-n021-evand-mixed-cover-zmx2-replay` | replayed here | reproduced with the producer’s code | not recorded | T-052 |
 | `E-n045-evand-mixed-cover-zmx2-replay` | replayed here | reproduced with the producer’s code | not recorded | T-053 |
+| `E-bengreff-594-cover-replay` | replayed here | reproduced with the producer’s code | full, 8,100 of 8,100: root cells of the D4 region, centres in [0, 9/2]^2 and u in [0, 1/2]: 8,096 decided by zmx2 and the other 4 by zm_mixed.py over the 64 sub-roots that tile them | T-184 |
+| `E-bengreff-610-cover-replay` | replayed here | reproduced with the producer’s code | full, 10,000 of 10,000: root cells of the D4 region, centres in [0, 5]^2 and u in [0, 1/2]: 9,981 decided by zmx2 and the other 19 by zm_mixed.py over the 304 sub-roots that tile them | T-191 |
 
 ### `V-audit-s12-reweighted`
 
@@ -2778,6 +2804,12 @@ Binds all three complete source certificates and all nine full deciding inputs/n
 | `E-fang-excess-theorem-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 6 of 6: the six retained inventory certificates at 211, 241, 273, 307, 308 and 932, every wall and every pair decided by both maintained routes; the twelve kernel controls are retained separately | T-163 |
 | `E-mishapolk-593-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 237 that T-183 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-183 |
 | `E-fang-direct-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 14 of 14: the complete certificates at 380, 381, 382, 421, 422, 463, 464, 507, 508, 553, 601, 651, 758 and 814, every wall and every pair decided by both maintained routes; the 28 kernel controls are retained separately | - |
+| `E-couzo-506-n175-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 175 that T-185 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-185 |
+| `E-mishapolk-70a033f-exact-feasibility` | replayed here | independently re-implemented | full, 12 of 12: the twelve derived certificates at n = 129, 154, 156, 175, 176, 204, 232, 264, 271, 302, 303 and 304 that T-186 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipts | T-186 |
+| `E-evand-606-n146-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 146 that T-187 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-187 |
+| `E-couzo-487b058-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 211 that T-188 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-188 |
+| `E-couzo-607-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 237 that T-189 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipts | T-189 |
+| `E-couzo-4e4c8ce-n237-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 237 that T-190 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-190 |
 
 ### `V-algebraic-witness-reports`
 
@@ -2841,6 +2873,12 @@ Imports a report of rational upper-bound certificates by another author from its
 | `E-fang-excess-theorem-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 6 of 6: the six retained inventory certificates at 211, 241, 273, 307, 308 and 932, every wall and every pair decided by both maintained routes; the twelve kernel controls are retained separately | T-163 |
 | `E-mishapolk-593-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 237 that T-183 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-183 |
 | `E-fang-direct-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 14 of 14: the complete certificates at 380, 381, 382, 421, 422, 463, 464, 507, 508, 553, 601, 651, 758 and 814, every wall and every pair decided by both maintained routes; the 28 kernel controls are retained separately | - |
+| `E-couzo-506-n175-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 175 that T-185 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-185 |
+| `E-mishapolk-70a033f-exact-feasibility` | replayed here | independently re-implemented | full, 12 of 12: the twelve derived certificates at n = 129, 154, 156, 175, 176, 204, 232, 264, 271, 302, 303 and 304 that T-186 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipts | T-186 |
+| `E-evand-606-n146-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 146 that T-187 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-187 |
+| `E-couzo-487b058-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 211 that T-188 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-188 |
+| `E-couzo-607-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 237 that T-189 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipts | T-189 |
+| `E-couzo-4e4c8ce-n237-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 237 that T-190 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-190 |
 
 ### `V-rehwaldt-n68-verify`
 

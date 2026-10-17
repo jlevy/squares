@@ -29,7 +29,18 @@ owner lifted that wait on 11 October 2026. For every count whose house moves, th
   from its own retained packet.
 
 The drawing, `witnesses/known-best/n-NNN.yaml`, is `devtools.upper_bound_houses`'s; this
-refuses a count that module does not house, and the atlas is refreshed after it runs.
+refuses a count that module does not house. A new house is a new witness, so what follows
+a write is the regularization guide's "When a Witness Changes", not the axis tool's
+refresh alone: `build_known_best_atlas --update` for the witness, the axis tool's
+`--update-atlas`, `default_drawings --update`, then the strong generators on each count it
+reads `pending`, or the count in `default_drawings.PENDING_ALLOWED` with the open bead
+that owns its runs, in the same pull request, with `default_drawings --update` run again
+and each deferred count's drawing listed before and after. The adoptions of #553, #598
+and #614 ran only the axis tool's refresh and left twenty counts without a strong
+generator's decision, n = 176 drawn raw (think-sfas). So a write, and `--dry-run`, print
+what the moves owe the regularized layer (`regularization_owed`): the counts, the
+commands with run directories no earlier run has named, and what they cost;
+`default_drawings --check-state` fails until each pending count is decided or deferred.
 `adopt_case` is the generator's half: `generate_frontier_case` redrafts an adopted case
 through it (`source_supersession.adopt_selected_report`), which keeps the house and takes
 the ordinary lower lanes from the draft.
@@ -85,11 +96,12 @@ find each count as it stood before its first (`read_history`).
 from __future__ import annotations
 
 import argparse
+import json
 import re
 import sys
 from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
-from datetime import date
+from datetime import UTC, date, datetime
 from decimal import Decimal
 from fractions import Fraction
 from functools import cache
@@ -100,7 +112,7 @@ import yaml
 from strif import atomic_output_file
 
 from devtools import apply_closed_form as closed_form
-from devtools import select_houses
+from devtools import default_drawings, select_houses
 from devtools import upper_bound_houses as houses
 from sqpack.yamlio import safe_load
 
@@ -441,6 +453,70 @@ RESULTS: dict[str, Prose] = {
             "and formatting."
         ),
     ),
+    "T-186": Prose(
+        author="Mykhailo Polkovskyi",
+        reported=(
+            "in [his repository](https://github.com/Mishapolk/square-packing-records) on 14 "
+            "October 2026, with no issue"
+        ),
+        producer_route=False,
+        ai=(
+            "The commit makes no statement about AI assistance; the author’s issue 593 "
+            "discloses Gemini assistance with solver scripting, precision checks and "
+            "formatting."
+        ),
+    ),
+    "T-187": Prose(
+        author="Evan Daniel",
+        reported="on [jlevy/squares#606](https://github.com/jlevy/squares/issues/606)",
+        producer_route=False,
+        ai=(
+            "The issue says the search, the checks and the request were done with Claude "
+            "(Claude Code), directed and reviewed by Evan Daniel."
+        ),
+        lineage=(
+            "The author started his chain search from Ryan Xu’s packing and names Robert "
+            "Barnett’s refinement of it as the record it improves, calling the result a "
+            "different local minimum. Measured here pose by pose, it pairs one to one with "
+            "Xu’s packing and with Barnett’s under the identity, nine squares moving beyond a "
+            "tenth: another arrangement of Xu’s design, a refinement of neither (T-187)."
+        ),
+    ),
+    "T-188": Prose(
+        author="Francisco Couzo",
+        reported=(
+            "in [his repository](https://github.com/franciscouzo/square-packing) on 14 "
+            "October 2026, with no issue"
+        ),
+        producer_route=True,
+        ai=(
+            "The commit makes no statement about AI assistance; the author’s issues of 13 and "
+            "14 October say OpenAI Codex assisted the search and verification "
+            "orchestration, that earlier search work used Claude Code, and that he directed "
+            "the work."
+        ),
+        lineage=(
+            "The certificate’s metadata seeds the author’s search from Daniil Ostashev’s "
+            "certificate, whose digest is that of issue 575’s, though it labels it issue 501. "
+            "Measured here pose by pose, it continues Ostashev’s issue-575 arrangement as the "
+            "author’s issue-583 and issue-586 certificates did, five squares moving beyond a "
+            "tenth against each: another arrangement of that design (T-188)."
+        ),
+    ),
+    "T-190": Prose(
+        author="Francisco Couzo",
+        reported=(
+            "in [his repository](https://github.com/franciscouzo/square-packing) on 15 "
+            "October 2026, with no issue"
+        ),
+        producer_route=True,
+        ai=(
+            "The commit makes no statement about AI assistance; the author’s issue 607, of "
+            "the day before, says OpenAI Codex assisted the search and verification "
+            "orchestration, that earlier search work used Claude Code, and that he directed "
+            "the work."
+        ),
+    ),
 }
 
 XU = "Ryan Xu"
@@ -450,6 +526,8 @@ DANIEL = "Evan Daniel"
 PINGYOU = "PingYou Ltd"
 OSTASHEV = "Daniil Ostashev"
 BARNETT = "Robert Barnett"
+#: Mykhailo Polkovskyi, by the handle his earlier credits use (T-173, T-183).
+POLKOVSKYI = "Mishapolk"
 
 
 @dataclass(frozen=True)
@@ -515,18 +593,20 @@ CREDITS: dict[int, Credit] = {
         "Evan Daniel’s reconstruction and exact certificate of Ryan Xu’s arrangement",
     ),
     127: _couzo("Xu"),
-    # Issue 562's cut-out; the piece lineage stays in the author's voice (RQ-11), in
-    # T-162's `lineage`.
-    129: Credit((OSTASHEV,), (), "Daniil Ostashev’s packing"),
+    # Mykhailo Polkovskyi's KKT refinement of PR 574's re-solve of issue 562's packing
+    # (T-186's regularization of T-174), no square moved beyond 1e-3.
+    129: Credit(
+        (OSTASHEV,),
+        (PINGYOU, POLKOVSKYI),
+        "Mykhailo Polkovskyi’s refinement of Daniil Ostashev’s n = 129 packing, as PingYou "
+        "Ltd refined it",
+    ),
     131: Credit((SQUISH,), (), "Nate Chaoweeraprasit’s SQUISH packing"),
     132: Credit((DANIEL,), (), "Evan Daniel’s record-hunt packing"),
-    # Barnett's packing re-solved, no square moved beyond 2e-06 (T-168's regularization
-    # of T-150).
-    146: Credit(
-        (XU,),
-        (BARNETT, PINGYOU),
-        "PingYou Ltd’s exact re-solve of Robert Barnett’s refinement of Ryan Xu’s packing",
-    ),
+    # Evan Daniel's chain search from Ryan Xu's packing: another arrangement of Xu's design,
+    # nine squares beyond a tenth against Xu's and Barnett's (RT-5 of the 16 October
+    # review; T-187 records no regularization).
+    146: Credit((XU,), (DANIEL,), "Evan Daniel’s arrangement of Ryan Xu’s n = 146 design"),
     # PingYou Ltd's design rearranged by Mykhailo Polkovskyi, as the 14 October review
     # measured it (RQ-5); whether it is a new arrangement is the owner's decision 1 on
     # pull request 602 (T-173).
@@ -536,31 +616,39 @@ CREDITS: dict[int, Credit] = {
         "Mykhailo Polkovskyi’s arrangement of PingYou Ltd’s n = 153 design, after Ryan "
         "Xu’s n = 70 packing and Evan Daniel’s exact certificate of it",
     ),
-    # Francisco Couzo's issue-586 packing, from Evan Daniel's arrangement through his own
-    # issue-583 refinement of it, moved well beyond a refinement (T-182).
+    # T-182's packing re-solved (T-186's regularization of T-182), after Evan Daniel's
+    # issue-552 arrangement (RT-4 of the 16 October review).
     154: Credit(
         (DANIEL,),
-        (COUZO,),
-        "Francisco Couzo’s further arrangement of Evan Daniel’s n = 154 packing",
+        (COUZO, POLKOVSKYI),
+        "Mykhailo Polkovskyi’s refinement of Francisco Couzo’s further arrangement of Evan "
+        "Daniel’s n = 154 packing",
     ),
     155: Credit((OSTASHEV,), (), "Daniil Ostashev’s packing"),
-    # Issue 561's continuation of Ostashev's packing (T-149), paired square for square.
+    # PR 574's padding of issue 561's continuation of Ostashev's packing, padded again
+    # (T-186's regularization of T-174; RT-4).
     156: Credit(
         (OSTASHEV,),
-        (COUZO,),
-        "Francisco Couzo’s continuation of Daniil Ostashev’s n = 156 packing",
+        (COUZO, PINGYOU, POLKOVSKYI),
+        "Mykhailo Polkovskyi’s tighter certificate of Francisco Couzo’s continuation of "
+        "Daniil Ostashev’s n = 156 packing, after PingYou Ltd’s",
     ),
-    175: _composed(
-        "two of his 38-square rectangles with David Ellsworth’s n = 171 template, in place "
-        "of its pieces of Thomas Schadt’s n = 50 packing"
+    # PR 574's padding of issue 528's composition, padded again (T-186's regularization of
+    # T-174).
+    175: Credit(
+        (OSTASHEV,),
+        (PINGYOU, POLKOVSKYI),
+        "Mykhailo Polkovskyi’s tighter certificate, after PingYou Ltd’s, of Daniil "
+        "Ostashev’s composition of two of his 38-square rectangles with David Ellsworth’s "
+        "n = 171 template, in place of its pieces of Thomas Schadt’s n = 50 packing",
     ),
-    # Couzo's re-solve of his issue-561 packing (T-165's regularization of T-161), which
-    # moves Daniil Ostashev's issue-562 arrangement, as issue 561 states.
+    # Ostashev's issue-575 packing re-solved, through PR 574's (T-186's regularization of
+    # T-174; RP-4 of the PR 574 review).
     176: Credit(
         (OSTASHEV,),
-        (COUZO,),
-        "Francisco Couzo’s exact re-solve of his issue-561 packing, which moves Daniil "
-        "Ostashev’s n = 176 arrangement",
+        (PINGYOU, POLKOVSKYI),
+        "Mykhailo Polkovskyi’s exact re-solve of Daniil Ostashev’s issue-575 n = 176 "
+        "packing, after PingYou Ltd’s",
     ),
     180: Credit(
         (SQUISH,),
@@ -576,27 +664,41 @@ CREDITS: dict[int, Credit] = {
         "Mykhailo Polkovskyi’s exact re-solve of PingYou Ltd’s assembly of two placed "
         "patches of Ryan Xu’s n = 70 packing, from Evan Daniel’s exact certificate of it",
     ),
-    # A new arrangement, as issue 562 states (T-162).
-    204: Credit((OSTASHEV,), (), "Daniil Ostashev’s packing"),
+    # PR 574's re-solve of issue 562's packing, re-solved again (T-186's regularization of
+    # T-174), two squares moved beyond 1e-3.
+    204: Credit(
+        (OSTASHEV,),
+        (PINGYOU, POLKOVSKYI),
+        "Mykhailo Polkovskyi’s refinement of Daniil Ostashev’s n = 204 packing, as PingYou "
+        "Ltd refined it",
+    ),
     209: _couzo("SQUISH"),
-    # Issue 583's continuation of Daniil Ostashev's issue-575 packings, tightened by issue
-    # 586 (T-182's regularizations of T-181); issue 593's joint request is the owner's.
+    # Couzo's further arrangement of Ostashev's issue-575 design, five squares beyond a
+    # tenth against T-182 and T-175 (RT-1 of the 16 October review; T-188 records no
+    # regularization).
     211: Credit(
         (OSTASHEV,),
         (COUZO,),
-        "Francisco Couzo’s continuation of Daniil Ostashev’s n = 211 packing",
+        "Francisco Couzo’s further arrangement of Daniil Ostashev’s n = 211 design",
     ),
     228: Credit((COUZO,), (), "Francisco Couzo’s refinement of his own packing"),
-    232: _composed(
-        "his 38-square rectangle with a 76-square piece of Erich Friedman’s n = 85 packing"
+    # PR 574's re-solve of issue 528's composition, re-solved again (T-186's
+    # regularization of T-174).
+    232: Credit(
+        (OSTASHEV,),
+        (PINGYOU, POLKOVSKYI),
+        "Mykhailo Polkovskyi’s refinement, after PingYou Ltd’s, of Daniil Ostashev’s "
+        "composition of his 38-square rectangle with a 76-square piece of Erich Friedman’s "
+        "n = 85 packing",
     ),
     236: _regularized(SQUISH, "Nate Chaoweeraprasit’s SQUISH"),
-    # Francisco Couzo's issue-561 design, after SQUISH's packing, rearranged (T-183).
+    # Couzo's refinement of issue 593's arrangement of his issue-561 design (T-190's
+    # regularization of T-183).
     237: Credit(
         (SQUISH,),
-        (COUZO, "Mishapolk"),
-        "Mykhailo Polkovskyi’s arrangement of Francisco Couzo’s design, after Nate "
-        "Chaoweeraprasit’s SQUISH packing",
+        (COUZO, POLKOVSKYI),
+        "Francisco Couzo’s refinement of Mykhailo Polkovskyi’s arrangement of Couzo’s "
+        "design, after Nate Chaoweeraprasit’s SQUISH packing",
     ),
     238: _mondrian("SQUISH’s own n = 305 and n = 154 packings"),
     239: _mondrian(
@@ -617,9 +719,14 @@ CREDITS: dict[int, Credit] = {
         "PingYou Ltd’s exact re-solve of Robert Barnett’s refinement of Ryan Xu’s packing",
     ),
     263: _regularized(SQUISH, "Nate Chaoweeraprasit’s SQUISH"),
-    264: _composed(
-        "his 38-square rectangle with a 93-square piece of Evan Daniel’s exact optimum of "
-        "Joost de Winter’s n = 126 packing"
+    # PR 574's padding of issue 528's composition, padded again (T-186's regularization of
+    # T-174).
+    264: Credit(
+        (OSTASHEV,),
+        (PINGYOU, POLKOVSKYI),
+        "Mykhailo Polkovskyi’s tighter certificate, after PingYou Ltd’s, of Daniil "
+        "Ostashev’s composition of his 38-square rectangle with a 93-square piece of Evan "
+        "Daniel’s exact optimum of Joost de Winter’s n = 126 packing",
     ),
     267: _couzo("Xu"),
     269: _regularized(SQUISH, "Nate Chaoweeraprasit’s SQUISH"),
@@ -627,11 +734,13 @@ CREDITS: dict[int, Credit] = {
         "SQUISH’s issue 481 n = 209 packing, whole, and the Kingbird catalogue’s former "
         "n = 19 packing"
     ),
-    # Issue 561's refinement of SQUISH's packing (T-151), paired square for square.
+    # PR 574's padding of issue 561's refinement of SQUISH's packing, padded again
+    # (T-186's regularization of T-174; RT-4: whether T-161 lists T-151 is the owner's).
     271: Credit(
         (SQUISH,),
-        (COUZO,),
-        "Francisco Couzo’s refinement of Nate Chaoweeraprasit’s SQUISH packing",
+        (COUZO, PINGYOU, POLKOVSKYI),
+        "Mykhailo Polkovskyi’s tighter certificate, after PingYou Ltd’s, of Francisco "
+        "Couzo’s refinement of Nate Chaoweeraprasit’s SQUISH packing",
     ),
     # SQUISH's packing re-solved, no square moved beyond 2e-07 (T-171's regularization of
     # T-151).
@@ -642,15 +751,28 @@ CREDITS: dict[int, Credit] = {
     ),
     292: _regularized(SQUISH, "Nate Chaoweeraprasit’s SQUISH"),
     295: _regularized(XU, "Ryan Xu’s"),
-    # Issue 583's continuation of PingYou Ltd's n302 arrangement (T-181, T-164).
+    # Issue 583's continuation of PingYou Ltd's arrangement, padded (T-186's
+    # regularization of T-181; RT-4).
     302: Credit(
         (PINGYOU,),
-        (COUZO,),
-        "Francisco Couzo’s continuation of PingYou Ltd’s n = 302 arrangement",
+        (COUZO, POLKOVSKYI),
+        "Mykhailo Polkovskyi’s tighter certificate of Francisco Couzo’s continuation of "
+        "PingYou Ltd’s n = 302 arrangement",
     ),
-    # A new arrangement, as issue 562 states (T-162).
-    303: Credit((OSTASHEV,), (), "Daniil Ostashev’s packing"),
-    304: Credit((OSTASHEV,), (), "Daniil Ostashev’s packing"),
+    # PR 574's padding of issue 562's packing, padded again (T-186's regularization of
+    # T-174).
+    303: Credit(
+        (OSTASHEV,),
+        (PINGYOU, POLKOVSKYI),
+        "Mykhailo Polkovskyi’s tighter certificate, after PingYou Ltd’s, of Daniil "
+        "Ostashev’s n = 303 packing",
+    ),
+    # Issue 575's packing padded (T-186's regularization of T-175).
+    304: Credit(
+        (OSTASHEV,),
+        (POLKOVSKYI,),
+        "Mykhailo Polkovskyi’s tighter certificate of Daniil Ostashev’s n = 304 packing",
+    ),
     305: Credit(
         (SQUISH,),
         (COUZO,),
@@ -2100,6 +2222,229 @@ def check() -> list[str]:
     return problems
 
 
+#: Where the steps that follow a new house are written (think-g3q7).
+WITNESS_CHANGES = 'docs/project/guides/regularization-process.md, "When a Witness Changes"'
+#: Where the intake runbook schedules those steps and their compute.
+INTAKE_STEP = 'packing/campaign/result-import.md, "Adopt a House, Then Regularize It"'
+#: Both strong generators and the selection on one re-housed count, in CPU-minutes, as the
+#: regularization audit of 15 October 2026 read the layer's run receipts (think-sfas):
+#: Evan Daniel's driver 140 to 220 CPU-seconds a count, grid-slack 37 to 110 at each of
+#: its three thresholds, and the selection seconds to about four minutes for each of the
+#: count's four candidate views (review A7 of #641). No receipt yet measures the selection
+#: on a new witness, so the upper end is the guide's largest view taken four times.
+REGULARIZE_CPU_MINUTES = (5, 25)
+#: The workers the printed commands give the driver and the selection, as the guide's
+#: examples do: what a shared host can spare, which the reader sets (review B3 of #641).
+WORKERS = 2
+#: The base branch's record as the file `default_drawings --compare` reads, in a shell
+#: (review C4 of #641), for a pull request on main; a stacked one names its own base, as
+#: the runbook and the guide say (review D2).
+BASE_RECORD = f"`<(git show origin/main:{default_drawings.RECORD_PATH})`"
+STACKED_BASE = "with a stacked pull request's base branch for main"
+#: What becomes of a count where a strong view gives way to a drawing worse than it on a
+#: goal of the improvement rule, whatever drew it (`default_drawings.STRONG_VIEW_LOST`),
+#: in the runbook's and the guide's words (reviews C4 and D1 of #641): the owner's rule is
+#: to adopt the smallest packing and then regularize it, so the adoption waits for no one
+#: and such a count's runs are never deferred (review E1).
+DEFERRAL_WAITS = "its runs are not deferred: they run in the adoption's pull request"
+#: What follows a write, as `python -m devtools.` commands from `packing/` with `{n}` the
+#: re-housed counts: the new witness, the axis tool's view of it, and each count's state.
+REFRESH_COMMANDS = (
+    "build_known_best_atlas --update",
+    "regularize_axis_components --update-atlas --n {n}",
+    "default_drawings --update",
+)
+#: The strong runs' directories under `$RUNS`, each with the prefix the layer gives its
+#: run id: a run is recorded as its directory's name after `grid-slack-`
+#: (`regularize_grid_slack.admitted_views`) or `evand-regularize-`
+#: (`regularize_evand.evand_candidates`), and admitting a run whose id the index already
+#: holds replaces that run's block, its cost and decisions, under the views that name it
+#: (review B2 of #641). So each name starts with a label no run in the index has, and
+#: that names the re-housed counts, so that two adoptions in flight on one day print
+#: different names (`run_label`, review C3 of #641).
+RUN_DIRECTORIES = {
+    "grid05": ("grid-slack", "{label}-grid-0.5"),
+    "grid1": ("grid-slack", "{label}-grid-1"),
+    "grid5": ("grid-slack", "{label}-grid-5"),
+    "evand": ("evand-regularize", "{label}-evand"),
+}
+#: Then the strong generators on each pending count, grid-slack at its three thresholds
+#: and Evan Daniel's driver, and the selection, which prints the `layer` commands.
+STRONG_COMMANDS = (
+    "regularize_grid_slack --n {n} --run-dir $RUNS/{grid05}",
+    "regularize_grid_slack --n {n} --run-dir $RUNS/{grid1} --near-axis-degrees 1",
+    "regularize_grid_slack --n {n} --run-dir $RUNS/{grid5} --near-axis-degrees 5",
+    "regularize_evand run --run-dir $RUNS/{evand} --n {n} --workers $WORKERS",
+    (
+        "regularize_select --evand-run $RUNS/{evand} --grid-run $RUNS/{grid05} "
+        "$RUNS/{grid1} $RUNS/{grid5} --workers $WORKERS "
+        "--output $RUNS/{label}-selection.json --markdown $RUNS/{label}-selection.md"
+    ),
+)
+
+
+def run_ids(label: str) -> dict[str, str]:
+    """The run id each strong run under `label` gives the layer, by its directory's key."""
+    return {
+        key: f"{prefix}-{directory.format(label=label)}"
+        for key, (prefix, directory) in RUN_DIRECTORIES.items()
+    }
+
+
+def run_label(day: str, counts: Sequence[int], index: Path = default_drawings.INDEX) -> str:
+    """A label for an adoption's strong runs that gives no run an id the layer's index
+    already has (review B2 of #641), and that names the re-housed counts by the lowest and
+    the highest: `adopt-<day>-n176`, `adopt-<day>-n105-304`, or the same with `-b`, `-c`
+    and on where an earlier run took it. The index holds only the runs merged into the
+    branch, so two adoptions opened on one day would otherwise print the same ids and the
+    second to admit would replace the first's block; two adoptions that re-house the same
+    count already conflict on its case record (review C3 of #641)."""
+    if not counts:
+        raise ValueError("an adoption's run label names the counts it re-houses")
+    low, high = min(counts), max(counts)
+    named = f"adopt-{day}-n{low}" if low == high else f"adopt-{day}-n{low}-{high}"
+    document = json.loads(index.read_text(encoding="utf-8"))
+    taken = {str(run.get("id")) for run in document.get("runs") or []}
+    for suffix in ("", *(f"-{letter}" for letter in "bcdefghijklmnopqrstuvwxyz")):
+        label = f"{named}{suffix}"
+        if not taken & set(run_ids(label).values()):
+            return label
+    raise SystemExit(f"every {named} run label is taken in {index}")
+
+
+def _plural(count: int, noun: str) -> str:
+    return f"{count} {noun}" if count == 1 else f"{count} {noun}s"
+
+
+def _cost(certain: int, every: int) -> str:
+    """The strong runs' cost, from the counts certain to be pending to all re-housed."""
+    low, high = REGULARIZE_CPU_MINUTES
+    each = f"{low} to {high} CPU-minutes a count for both strong generators and the selection"
+    if certain == every:
+        return f"{each}, {low * every} to {high * every} for these"
+    if not certain:
+        return f"{each}, up to {low * every} to {high * every} for all {every}"
+    return (
+        f"{each}, {low * certain} to {high * certain} for the {certain} certain to be "
+        f"pending, up to {low * every} to {high * every} for all {every}"
+    )
+
+
+def regularization_owed(
+    counts: Sequence[int],
+    *,
+    index: Path = default_drawings.INDEX,
+    allowed: Mapping[int, str] | None = None,
+    settled: Mapping[int, object] | None = None,
+    day: str | None = None,
+) -> list[str]:
+    """What re-housing `counts` owes the regularized layer, as the lines `main` prints.
+
+    A new house is a new witness: the layer's view of the count lapses with it, and the
+    count reads `pending` in `default-drawings.json` until the strong generators decide the
+    new witness, unless the new house drawing has no uneven and no near-axis square, no
+    strong view of the count has lapsed, and `PENDING_ALLOWED` does not hold it for its
+    bead's runs (`default_drawings.count_state`). Read from the committed index before the
+    atlas is refreshed, this names the counts certain to be pending, one count a line, and
+    a `SETTLED` decision the new witness voids, then gives the commands, with run
+    directories named for `day` (the adoption's, by default) and the counts, that no run
+    in the index has (`run_label`), what they cost, and what a deferral owes the pull
+    request. It measures and runs
+    nothing: the runs take minutes a count, and the pass prices them as one validation
+    item under its compute cap (`INTAKE_STEP`).
+    """
+    if not counts:
+        return []
+    allowed = default_drawings.PENDING_ALLOWED if allowed is None else allowed
+    settled = default_drawings.SETTLED if settled is None else settled
+    if day is None:
+        days = [houses.adopted_on(n) for n in counts if n in houses.ADOPTED]
+        day = max(days, default=datetime.now(UTC).date().isoformat())
+    label = run_label(day, counts, index)
+    entries = default_drawings.index_entries(index)
+    spaced = " ".join(map(str, counts))
+    certain: list[str] = []
+    unless: list[str] = []
+    for n in counts:
+        entry = entries.get(n, {})
+        lapse = entry.get(default_drawings.LAPSED)
+        why: list[str] = []
+        if entry.get("generator") in default_drawings.STRONG_GENERATORS:
+            why.append(f"its {entry['generator']} view lapses")
+        elif lapse:
+            why.append(f"a {lapse['generator']} view lapsed earlier")
+        if n in allowed:
+            bead = default_drawings.BEAD.match(allowed[n])
+            holder = bead[0] if bead else repr(allowed[n])
+            why.append(
+                f"PENDING_ALLOWED holds it for {holder}'s runs, whatever the new house "
+                "reads, so they take the new witness"
+            )
+        if why:
+            certain.append(f"    {n}: {'; '.join(why)}")
+        else:
+            unless.append(str(n))
+    lines = [
+        (
+            f"regularization owed: {_plural(len(counts), 're-housed count')}, {spaced} "
+            f"({WITNESS_CHANGES})"
+        )
+    ]
+    if certain:
+        lines.append("  pending until the strong generators decide the new witness:")
+        lines.extend(certain)
+    if unless:
+        lines.append(
+            "  pending unless the new house drawing has no uneven and no near-axis square: "
+            + " ".join(unless)
+        )
+    lines.extend(
+        f"  n={n}: SETTLED was decided on the earlier witness; decide the new one and settle "
+        "it again, or take it off"
+        for n in counts
+        if n in settled
+    )
+    lines.append(
+        f"  cost: {_cost(len(certain), len(counts))}; one validation item under the pass's "
+        f"compute cap ({INTAKE_STEP})"
+    )
+    lines.append(
+        "  from packing/, in one shell, each python command after `uv run --frozen "
+        "--all-extras --group dev`; RUNS is outside the checkout, WORKERS what the host can "
+        "spare:"
+    )
+    lines.append(f"    RUNS=/tmp/regularize WORKERS={WORKERS}")
+    lines.extend(f"    python -m devtools.{line.format(n=spaced)}" for line in REFRESH_COMMANDS)
+    lines.append(
+        "  then on each count `default_drawings --check-state` names pending (these, less any "
+        "it reads regular), in run directories no run in the index has named:"
+    )
+    directories = {
+        key: directory.format(label=label)
+        for key, (_prefix, directory) in RUN_DIRECTORIES.items()
+    }
+    lines.extend(
+        f"    python -m devtools.{line.format(n=spaced, label=label, **directories)}"
+        for line in STRONG_COMMANDS
+    )
+    lines.append(
+        "  and the `layer` commands it prints, then the guide's step 5 (render and record)."
+    )
+    lines.append(
+        "  Or, where the runs must wait, add each pending count to "
+        "default_drawings.PENDING_ALLOWED with the open bead that owns its runs, run "
+        "`default_drawings --update` again and the guide's step 5, and list each deferred "
+        "count's drawing before and after in this pull request (`default_drawings --compare` "
+        f"with the base branch's record, {BASE_RECORD}, {STACKED_BASE}); where "
+        f"{default_drawings.STRONG_VIEW_LOST}, {DEFERRAL_WAITS}."
+    )
+    lines.append(
+        "  `python -m devtools.default_drawings --check-state` fails until every pending count "
+        "is one or the other."
+    )
+    return lines
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=(__doc__ or "").split("\n\n", 1)[0])
     mode = parser.add_mutually_exclusive_group()
@@ -2125,9 +2470,13 @@ def main(argv: Sequence[str] | None = None) -> int:
     if arguments.dry_run:
         for move in moves:
             print(f"n={move.n}: {move.house.result} {select_houses.ceiling(move.house.side)}")
+        for line in regularization_owed([move.n for move in moves if not adopted(move)]):
+            print(line)
         return 0
     written = write(moves)
     print(f"adopted {len(written)} houses: {', '.join(map(str, written)) or 'none'}")
+    for line in regularization_owed(written):
+        print(line)
     return 0
 
 

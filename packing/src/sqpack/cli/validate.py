@@ -152,11 +152,13 @@ SCREEN_EXCLUDED: dict[str, tuple[str, ...]] = {
 #: other 282 rows unchanged, its pass of 12 October the nine counts it moved, and the pass
 #: for issue 528 (T-158) the three counts it moved, 175, 232 and 264, and the pass of 15
 #: October 2026 the eighteen counts it moved, 105, 129, 146, 153, 154, 156, 176, 204, 207,
-#: 211, 237, 241, 261, 271, 272, 302, 303 and 304.
+#: 211, 237, 241, 261, 271, 272, 302, 303 and 304, and the pass of 16 October 2026 the
+#: fifteen it moved, 129, 146, 154, 156, 175, 176, 204, 211, 232, 237, 264, 271, 302, 303
+#: and 304.
 SCREEN_FINDINGS: dict[str, tuple[int, int, int, int]] = {
     "n=1..100": (28, 146, 86, 659),
-    "n=1..200": (65, 583, 182, 2349),
-    "n=1..324": (122, 1509, 302, 5373),
+    "n=1..200": (65, 534, 182, 2293),
+    "n=1..324": (122, 1545, 302, 5445),
 }
 UNDETERMINED_BY_MISS = (28,)
 #: The cases the two sampled sweeps re-derive on every pull request, computed here from
@@ -5690,12 +5692,14 @@ STEPS: tuple[Step, ...] = (
         fast=True,
         records=True,
         # It imports what the step above does, through the axis tool's constants, so it
-        # claims the same closure; it reads only the record and the index, and no witness.
+        # claims the same closure; it reads the record, the index and the retained run
+        # evidence every settlement rests on (review G1 of #644), and no witness.
         touches=(
             *_CORE,
             "packing/atlas/known-best/default-drawings.json",
             "packing/atlas/known-best/default-drawings.schema.yaml",
             "packing/atlas/known-best/regularized/*",
+            "packing/cases/regularized_drawings/*",
             "packing/witnesses/known-best/*",
             *_RENDERER_HUB,
         ),

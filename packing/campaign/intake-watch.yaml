@@ -924,3 +924,19 @@ repositories:
       (BM1 to BM3, JT1, L2b to L2e, MH3, RB62, GX1, NH3), the EV1 and EV2 program-evolution pilots,
       whose best rows tie the hidden 234 and 235 records, fillfast, task notes and site data. None
       states a bound or certificate the record lacks. Nothing else to import.
+  # The overnight intake pass of 2026-10-16 (think-hg5s), lane A (think-mu5v): the sweep
+  # residue of 05:08Z.
+  - url: https://github.com/wand125/square-packing
+    read_through: 319a779efcc78db2f92bffc87844446f8723b01d
+    read_on: '2026-10-16'
+    bead: think-jh0n
+    note: >-
+      The six commits of 16 October (03:25Z to 04:47Z) past the 0eb3fe5 read. 2c75edc and e99f5e3
+      add problems/square-lower-bounds/certificates/k2m4_n77_L9/lean/, a Lean kernel proof of
+      Evan Daniel's ValidTilt9 and, with his reduction, of s(k^2 - 4) = k for every k >= 8
+      (validTilt9, valid9 and bentz4, axioms propext, Classical.choice and Quot.sound), whose
+      per-root certificates and list of 1,275,911 generated files are in the release
+      validtilt9-lean-v1: a formalization of T-081 that think-jh0n owns until a packet pins it
+      (#643). 0aa00f7 lists it in the source's index and site. 4c926da proves s(46) = 10 +
+      2/sqrt(3) for unit squares in an equilateral triangle, another container, outside this
+      record; 574d27c and 319a779 add it to the source's triangle paper. Nothing else to import.

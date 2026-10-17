@@ -413,10 +413,10 @@ facts evaluates to `true`, including the 1,992 not re-evaluated here; and that t
 axiom set is the one logged.
 The independent checks of the 2,328 tree-resident facts show that the property each
 certifies holds, so a wrong native result among them would not make the statement false.
-For the combinatorial facts they also show what the Boolean’s value is; for the 2,304
-endgame facts and the nine region facts they say nothing about the native evaluator’s
-output, and a formal proof resting on a false axiom there would still pass them
-(Independent Checks).
+For the combinatorial facts they decide the same finite predicate the Boolean encodes,
+which is close to a re-evaluation; for the 2,304 endgame facts and the nine region facts
+they say nothing about the native evaluator’s output, and a formal proof resting on a
+false axiom there would still pass them (Independent Checks).
 They do not replace the build.
 
 ## Comparison with the Two s(17) Reviews
@@ -435,7 +435,7 @@ This review read the first s(17) review
 trust-boundary, lineage and findings sections, and the second
 ([mathematical correctness](review-2026-10-13-fitzharding-n17-mathematical-correctness.md))
 at its summary, checker-soundness step, trust-boundary and defects sections, and only
-after the findings and the re-evaluation above were committed.
+after the findings and the independent checks above were committed.
 
 **The reused checkers.** The s(19) proof’s census patterns, survivor trees and capture
 states are checked by the s(17) half-plane checker, compiled in place from sq17-lean

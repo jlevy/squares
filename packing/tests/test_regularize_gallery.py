@@ -17,6 +17,7 @@ from __future__ import annotations
 import gzip
 import json
 import re
+from fractions import Fraction
 from pathlib import Path
 from typing import Any
 
@@ -242,6 +243,31 @@ def test_run_page_draws_three_panels_and_its_measurements(tmp_path: Path) -> Non
     assert "evand-regularize at 675a5ea" in section
     assert "agrees" in section
     assert 'class="flag"' not in section
+
+
+def test_the_view_is_held_to_the_exact_bound_not_its_rounded_print(tmp_path: Path) -> None:
+    """Review J1 of #657: the record prints `U` rounded up, so a view exactly at `U` read
+    against the print looked below it, "a register-result candidate", as the retained 211
+    gallery said. The page compares the view with the bound's exact form, as the decision
+    table does, and says "at U" on equality."""
+    side = gallery.exact_side(_witness(LAYER_VIEW))
+    assert side is not None
+    printed = "5.6213203435596425732025330863300000001"
+    assert Fraction(printed) > side
+    exact = f"{side.numerator}/{side.denominator}"
+    report = _report(verified_upper_bound=printed, verified_upper_bound_exact_form=exact)
+    run = _run(tmp_path, report)
+    output = tmp_path / "gallery.html"
+    gallery.main(["--run-dir", str(run), "--output", str(output)])
+    section = _section(output.read_text(encoding="utf-8"), 26)
+    assert f"U = {printed}; s_V {gallery.MINUS} U = 0, at U" in section
+    assert "register-result candidate" not in section
+    # Without an exact form, the print is all there is to compare with.
+    run = _run(tmp_path / "printed", _report(verified_upper_bound=printed))
+    gallery.main(["--run-dir", str(run), "--output", str(output)])
+    assert "below U: a register-result candidate" in _section(
+        output.read_text(encoding="utf-8"), 26
+    )
 
 
 def test_a_report_that_disagrees_with_the_drawings_is_flagged(tmp_path: Path) -> None:

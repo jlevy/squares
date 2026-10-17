@@ -60,3 +60,35 @@ deferrals:
       rebuilt by its writer (tests/test_house_adoption.py), so its evidence list takes no
       hand edit. A case record cites the evidence once a house adopts one of these sides,
       or the owner's answer says where it belongs.
+  - evidence: E-bengreff-594-cover-replay
+    results: [T-184]
+    bead: think-ccjt
+    blocked_on: >-
+      zm_mixed.py's refusals of two mutated s(76) covers, held by a test, at a depth limit
+      the owner accepts (owner question 16 of think-l3oo, finding F8 of
+      docs/project/reviews/review-2026-10-16-greff-k2m5-mixed-covers-76-95.md)
+    recorded: '2026-10-16'
+    reason: >-
+      The register entry is at V3/C1: the 16 October review found no blocking defect in
+      the s(76) cover or in the zmx2 and zm_mixed.py composite, and the confirmation waits
+      on stage 4's control rule for zm_mixed.py. Adopting the value puts s(76) in the
+      case's verified lane as proved. zm_mixed.py has refused one mutated cover, the
+      review's 199/200 mutant at a depth limit of 12, which counts only if the owner
+      accepts that limit; a second refusal is owed either way. The case record at 76 cites
+      the evidence once both are held.
+  - evidence: E-bengreff-610-cover-replay
+    results: [T-191]
+    bead: think-ccjt
+    blocked_on: >-
+      zm_mixed.py's refusals of two mutated s(95) covers, run and held by a test, at a
+      depth limit the owner accepts (finding F8 of
+      docs/project/reviews/review-2026-10-16-greff-k2m5-mixed-covers-76-95.md); none has
+      run, so both are owed whatever owner question 16 of think-l3oo answers
+    recorded: '2026-10-16'
+    reason: >-
+      The register entry is at V3/C1: the 16 October review found no blocking defect in
+      the s(95) cover or in the zmx2 and zm_mixed.py composite, and the confirmation waits
+      on stage 4's control rule for zm_mixed.py. Adopting the value puts s(95) in the
+      case's verified lane as proved. No zm_mixed.py refusal of a mutated s(95) cover has
+      run, so two are owed whatever the owner rules on the depth limit. The case record at
+      95 cites the evidence once both are held.

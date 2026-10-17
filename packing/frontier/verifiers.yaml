@@ -288,11 +288,20 @@ verifiers:
     summary: The source's exact mixed point-and-segment cover checker, the predecessor zmx2 was checked against.
     source:
       - packing/resources/web/evand-square-packing-2026-09-28/square-packing/s12/search/zm_mixed.py
+      - packing/resources/web/evand-square-packing-2026-09-28/square-packing/s12/search/mixed_cover.py
     versions:
       - {sha256: ee3e2915349b8795128417bca6414b205d526db9f01f88cd4cd32c32e8d760ac}
+      - sha256: bb89de15ecf5821dd7e1a36ebab8a50d792a406b7fb0f5cb38059f99ef74aae5
+        path: packing/resources/web/evand-square-packing-2026-09-28/square-packing/s12/search/mixed_cover.py
+        note: mixed_cover.py, which zm_mixed.py imports
+      - sha256: 640fe453c1a32f4aa580ca2b1261c6406923a4d7c131f65604a432c7fc2086ab
+        path: packing/resources/web/evand-square-packing-2026-09-26/square-packing/s12/search/zeromargin.py
+        note: zeromargin.py, which zm_mixed.py imports (V-evand-zeromargin-py's program)
     note: >-
-      Retained; its shipped run records are re-summarised by the source's verify.sh, but
-      no confirming entry runs the checker itself yet.
+      Benjamin Greff verified his s(76) and s(95) covers with it, on the sub-roots of the
+      D4 roots zmx2 leaves, at the three digests his verify.sh pins, so its runs there
+      (devtools.replay_evand_zmx2 zm-mixed) replay the producer's code. No other
+      confirming entry runs it.
 
   - id: V-evand-zeromargin-py
     program: zeromargin.py, run by zm_d4_sweep.py
@@ -2582,7 +2591,10 @@ verifiers:
     language: [Python]
     methods: [exact-algebraic]
     role: premises
-    summary: Builds zmx2 from the retained bytes, refuses any input whose SHA-256 is not the record's, and runs it and its controls.
+    summary: >-
+      Builds zmx2 from the retained bytes, refuses any input whose SHA-256 is not the
+      record's, and runs it and its controls; for a split cover it also stages zm_mixed.py
+      and the files it imports, digests checked, and runs it on the source's sub-roots.
     source: [packing/devtools/replay_evand_zmx2.py]
 
   - id: V-audit-evand-mixed-covers
@@ -2595,7 +2607,9 @@ verifiers:
     summary: >-
       Parses zmx2 root logs with its own code, requires every root once with none
       uncertified, compares them with the source's records and re-derives the cover's
-      exact total and D4 invariance.
+      exact total and D4 invariance; for a split cover it reads the zmx2 log and
+      zm_mixed.py's sub-root records as one decision, every root zmx2 leaves tiled by
+      certified sub-roots at the pinned digests and settings.
     source: [packing/devtools/audit_evand_mixed_covers.py]
 
   - id: V-audit-s12-reweighted

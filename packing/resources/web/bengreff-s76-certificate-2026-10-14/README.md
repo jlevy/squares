@@ -178,6 +178,10 @@ it calls, and the scripts that made the checker receipts, are in
 [`receipts/programs/`](receipts/programs/). The run scripts name the scratch paths they
 ran in, which the receipts repeat.
 
+The stage 4 review of this result and of $s(95) = 10$
+([review-2026-10-16-greff-k2m5-mixed-covers-76-95.md](../../../../docs/project/reviews/review-2026-10-16-greff-k2m5-mixed-covers-76-95.md))
+keeps its programs, run scripts and outputs in [`review/`](review/README.md).
+
 ## Limitations
 
 - **One implementation per cell.** Each cell of the D4 region is decided by one of
