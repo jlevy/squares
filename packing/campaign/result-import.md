@@ -446,7 +446,7 @@ asks the owner nothing more: “This should be built into our policy.
 It shouldn’t even be a question.
 If there’s any ambiguity on that, we should fix that in our process docs for intake.”
 (the owner, 16 October 2026). PR #622 at 29 was the first (T-195): 1.57e-36 below
-T-155’s exact side, and 9.19e-15 above the catalogue’s print `5.93383346267692`, within
+T-155’s exact side, and 9.19e-15 above the catalogue’s print $5.93383346267692$, within
 one unit of its last place.
 
 A comparison the prints leave undecided, and an exact decision later settles, is
