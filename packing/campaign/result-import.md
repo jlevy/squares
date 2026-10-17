@@ -849,6 +849,9 @@ Its pull request adds each deferred count to `default_drawings.PENDING_ALLOWED`,
 the open bead that owns its runs: labelled `regularization`, as every such bead is, and
 `validation`, since its runs are held above the cap, carrying stage 4’s `## Validation`
 block, with a row in the backlog bead.
+It names the witness in `default_drawings.CORRECTED` too, by its source, its side and
+the revision it replaced, since `--check-state` reads any other new entry as deferring a
+moved house’s runs and fails it.
 It runs `default_drawings --update` again, since the record copies the entry into the
 count’s reason, then the guide’s render step, and lists the drawings as above.
 
