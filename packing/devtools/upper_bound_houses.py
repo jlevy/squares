@@ -328,9 +328,9 @@ def _sources() -> dict[str, Source]:
 #: 129, 146, 156, 176, 204, 261, 271, 272 and 303, and the pass of 16 October 2026, for
 #: the 16 October review of issues 506 to 607, at 129, 146, 154, 156, 175, 176, 204, 211,
 #: 232, 237, 264, 271, 302, 303 and 304, and the pass of 17 October 2026, the house rule's
-#: adoption of PingYou Ltd's PR 574 (T-174), at 38 of its rational counts, 68, 84, 86, 103,
-#: 105, 108, 110, 127, 130 to 132, 155, 172, 179 to 182, 206, 208 to 210, 228, 236, 238 to
-#: 240, 261, 263, 268 to 270, 272, 273, 297 and 305 to 308.
+#: adoption of PingYou Ltd's PR 574 (T-174), at 37 of its rational counts, 68, 84, 86, 103,
+#: 105, 108, 110, 127, 130 to 132, 155, 172, 179 to 182, 206, 208 to 210, 228, 238 to 240,
+#: 261, 263, 268 to 270, 272, 273, 297 and 305 to 308.
 ADOPTED: dict[int, str] = {
     68: "T-174",
     70: "T-146",
@@ -369,7 +369,7 @@ ADOPTED: dict[int, str] = {
     211: "T-188",
     228: "T-174",
     232: "T-186",
-    236: "T-174",
+    236: "T-146",
     237: "T-190",
     238: "T-174",
     239: "T-174",
@@ -420,12 +420,12 @@ NUMBERS = tuple(sorted(ADOPTED))
 #: 232 and 264 from T-158, at 176 from T-165, at 302 from T-181 and at 304 from T-175;
 #: issue 606 (T-187) at 146 from T-168; Francisco Couzo's 211 (T-188) from T-182; and his
 #: 237 of 15 October (T-190) from T-183. The pass of 17 October 2026, the first under the
-#: owner's house rule, adopted PR 574 (T-174) at 38 of its rational counts, from the
+#: owner's house rule, adopted PR 574 (T-174) at 37 of its rational counts, from the
 #: houses of T-128, T-130, T-136, T-140, T-141, T-146, T-149, T-151, T-152, T-169, T-170
 #: and T-171 and, at the 13 counts it first adopts (68, 110, 130, 172, 179, 182, 206, 208,
-#: 210, 240, 268, 273 and 297), from the case records' own. Its other twelve rational
-#: counts are below it by issue 639's algebraic sides (T-193, #658), and wait for the
-#: writer.
+#: 210, 240, 268, 273 and 297), from the case records' own. Twelve of its other rational
+#: counts are below it by issue 639's algebraic sides (T-193, #658), which wait for the
+#: writer, and 236 by Evan Daniel's issue 659, whose import adopts it.
 #: A count a pass names keeps its place in the earlier passes' sets, which their archives
 #: hold; it was adopted on the latest day that names it.
 LATER_PASSES: dict[str, frozenset[int]] = {
@@ -479,7 +479,6 @@ LATER_PASSES: dict[str, frozenset[int]] = {
             209,
             210,
             228,
-            236,
             238,
             239,
             240,

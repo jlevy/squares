@@ -6,7 +6,7 @@
   "rule": "docs/project/policies/regularization-policy.md#11-the-improvement-rule",
   "measured_by": "devtools.regularize_select.today on the view and on the house witness, judged by devtools.improvement_rule.judge",
   "measures": ["light_axis","uneven_axis","near_axis","classes","hues","house_total","stage_total"],
-  "totals": {"views":92,"regularized":65,"house":27,"states":{"regularized":45,"regular-as-published":232,"decided-no-better":7,"exempt":4,"pending":36}},
+  "totals": {"views":92,"regularized":65,"house":27,"states":{"regularized":45,"regular-as-published":232,"decided-no-better":8,"exempt":4,"pending":35}},
   "entries": [
     {"n":18,"default":"regularized","reason":"better on exactness","generator":"evand-regularize","view":"packing/atlas/known-best/regularized/n-018-regularized.yaml.gz","exact_routes":true,"side":{"view_minus_U":"3.698e-31","named_above_U":true,"against_house":null},"house_exact":false,"better":["exactness"],"worse":[],"measures":{"light_axis":{"view":0,"house":0},"uneven_axis":{"view":0,"house":0},"near_axis":{"view":0,"house":0},"classes":{"view":2,"house":2},"hues":{"view":2,"house":2},"house_total":{"view":34,"house":34},"stage_total":{"view":34,"house":34}}},
     {"n":26,"default":"regularized","reason":"better on light_axis, uneven_axis, house_total, stage_total, exactness","generator":"evand-regularize","view":"packing/atlas/known-best/regularized/n-026-regularized.yaml.gz","exact_routes":true,"side":{"view_minus_U":"5.453e-30","named_above_U":true,"against_house":null},"house_exact":false,"better":["light_axis","uneven_axis","house_total","stage_total","exactness"],"worse":[],"measures":{"light_axis":{"view":0,"house":1},"uneven_axis":{"view":0,"house":3},"near_axis":{"view":0,"house":0},"classes":{"view":2,"house":2},"hues":{"view":2,"house":2},"house_total":{"view":73,"house":71},"stage_total":{"view":73,"house":71}}},
@@ -703,14 +703,20 @@
     {"n":235,"state":"regular-as-published","drawn":"house","generator":null,"witness":{"id":"W-known-best-n235","source":"Kingbird derived numerical facts","path":"resources/web/known-best-packings/sources.json","revision":null,"side":"15.826605633428568069567396207560997168"},"measures":{"light_axis":0,"uneven_axis":0,"near_axis":0,"classes":4,"hues":4,"house_total":777,"stage_total":777},"decisions":[{"generator":"regularize_axis_components/2","run":null,"outcome":"refused: promotion-overlap"}],"lapsed":null,"why":"the house drawing has no uneven and no near-axis square"},
     {
       "n": 236,
-      "state": "pending",
+      "state": "decided-no-better",
       "drawn": "house",
       "generator": null,
-      "witness": {"id":"W-known-best-n236","source":"[PingYou PR 574 certificates 2026-10-13]","path":"resources/web/pingyou-pr574-certificates-2026-10-13/facts/n-236.yaml.gz","revision":"4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde","side":"143554818088530739529516143947609196807030001545206115290665734713062484691207728822452295268365532933631411481777871329928554726737445018454089640665198325197518071200425954320396760372364932642813940868200105831891920108058650083632499710382395077910753948726497128499153729217333966/9049118667280502577403728157397483827675161214457803981225613119889431451715623704983802789066158639520842407949525538073264062898220058069223906568471676774732391727065140891230881398799365321779201530237321906415397194933873949016346741845583502784847922614168824509638989239206121"},
+      "witness": {"id":"W-known-best-n236","source":"[Daniel regularized lists 2026-10-10]","path":"resources/web/evand-regularized-2026-10-10/source/search/regularize/lists/certs/n-236.cert.gz","revision":"ea1a2f23678a13bd1d252f9f4c95ca5dd2ffd2b7","side":"3172791149431853484523540541259/200000000000000000000000000000"},
       "measures": {"light_axis":1,"uneven_axis":2,"near_axis":0,"classes":6,"hues":6,"house_total":744,"stage_total":744},
-      "decisions": [{"generator":"regularize_axis_components/2","run":null,"outcome":"view"}],
+      "decisions": [
+        {"generator":"regularize_axis_components/2","run":null,"outcome":"view"},
+        {"generator":"evand-regularize","run":"evand-regularize-leftovers-1016","outcome":"the house is Evan Daniel's own regularized list (T-146): his regularizer's view draws one more angle class and hue (7 against the house's 6), as the view withdrawn in bd82e3a54 did, grid-slack at 0.5, 1 and 5 degrees draws no change, and the axis tool's view does not improve on the house"},
+        {"generator":"regularize_grid_slack/1","run":"grid-slack-leftovers-deg05-1016","outcome":"the house is Evan Daniel's own regularized list (T-146): his regularizer's view draws one more angle class and hue (7 against the house's 6), as the view withdrawn in bd82e3a54 did, grid-slack at 0.5, 1 and 5 degrees draws no change, and the axis tool's view does not improve on the house"},
+        {"generator":"regularize_grid_slack/1","run":"grid-slack-leftovers-deg1-1016","outcome":"the house is Evan Daniel's own regularized list (T-146): his regularizer's view draws one more angle class and hue (7 against the house's 6), as the view withdrawn in bd82e3a54 did, grid-slack at 0.5, 1 and 5 degrees draws no change, and the axis tool's view does not improve on the house"},
+        {"generator":"regularize_grid_slack/1","run":"grid-slack-leftovers-deg5-1016","outcome":"the house is Evan Daniel's own regularized list (T-146): his regularizer's view draws one more angle class and hue (7 against the house's 6), as the view withdrawn in bd82e3a54 did, grid-slack at 0.5, 1 and 5 degrees draws no change, and the axis tool's view does not improve on the house"}
+      ],
       "lapsed": null,
-      "why": "no strong generator has decided this witness; the house drawing is drawn"
+      "why": "the house is Evan Daniel's own regularized list (T-146): his regularizer's view draws one more angle class and hue (7 against the house's 6), as the view withdrawn in bd82e3a54 did, grid-slack at 0.5, 1 and 5 degrees draws no change, and the axis tool's view does not improve on the house (packing/atlas/known-best/README.md, the think-0ut1 paragraph of 16 October 2026, and the runs' receipts, reports and selection in packing/cases/regularized_drawings/think-0ut1-2026-10-16/)"
     },
     {
       "n": 237,

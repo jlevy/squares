@@ -1550,19 +1550,19 @@
       "url": "https://kingbird.myphotos.cc/packing/square-235.svg"
     },
     {
-      "attribution": "PingYou Ltd, https://github.com/BuddenPing/squares/blob/4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde/numerical-refinements/certificates/n236.cert.json at 4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde",
+      "attribution": "Evan Daniel, https://github.com/evand/square-packing/blob/ea1a2f23678a13bd1d252f9f4c95ca5dd2ffd2b7/search/regularize/lists/certs/n-236.cert.gz at ea1a2f23678a13bd1d252f9f4c95ca5dd2ffd2b7",
       "kind": "packet-derived-facts",
-      "license_status": "no-licence-published",
+      "license_status": "MIT",
       "listed_n": [
         236
       ],
       "n": 236,
-      "path": "resources/web/pingyou-pr574-certificates-2026-10-13/facts/n-236.yaml.gz",
-      "raw_asset_retained": false,
-      "retention_policy": "Exact certificate retained as a derived fact, bound to the SHA-256 its packet pins upstream; no upstream byte is copied.",
-      "retrieved": "2026-10-14",
+      "path": "resources/web/evand-regularized-2026-10-10/source/search/regularize/lists/certs/n-236.cert.gz",
+      "raw_asset_retained": true,
+      "retention_policy": "Complete source certificate retained losslessly and bound to the SHA-256 its packet pins upstream; no upstream program or prose is copied.",
+      "retrieved": "2026-10-10",
       "source_n": 236,
-      "url": "https://github.com/BuddenPing/squares/blob/4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde/numerical-refinements/certificates/n236.cert.json"
+      "url": "https://github.com/evand/square-packing/blob/ea1a2f23678a13bd1d252f9f4c95ca5dd2ffd2b7/search/regularize/lists/certs/n-236.cert.gz"
     },
     {
       "attribution": "Francisco Couzo, https://github.com/franciscouzo/square-packing/blob/58a783368d4b7e70bb800f0009ea9ca03e578739/certificates/n237.cert at 58a783368d4b7e70bb800f0009ea9ca03e578739",

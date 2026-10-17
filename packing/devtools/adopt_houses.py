@@ -839,14 +839,7 @@ CREDITS: dict[int, Credit] = {
         "composition of his 38-square rectangle with a 76-square piece of Erich Friedman’s "
         "n = 85 packing",
     ),
-    # T-174's regularization of T-146's view, measured one to one, no square moved beyond
-    # 1e-12 (the 14 October review of PR 574).
-    236: Credit(
-        (SQUISH,),
-        (DANIEL, PINGYOU),
-        "PingYou Ltd’s tighter certificate of Evan Daniel’s display regularization of Nate "
-        "Chaoweeraprasit’s SQUISH packing",
-    ),
+    236: _regularized(SQUISH, "Nate Chaoweeraprasit’s SQUISH"),
     # Couzo's refinement of issue 593's arrangement of his issue-561 design (T-190's
     # regularization of T-183).
     237: Credit(

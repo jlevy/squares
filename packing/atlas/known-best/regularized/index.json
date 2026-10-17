@@ -1559,17 +1559,17 @@
       "n": 236,
       "status": "regularized",
       "generator": "regularize_axis_components/2",
-      "source": {"witness":"packing/witnesses/known-best/n-236.yaml","id":"W-known-best-n236","scalar_kind":"rational","sha256":"2d6184deaac3802d70e22456a3435367f1336357f499e889b3f893eb1bca6603"},
+      "source": {"witness":"packing/witnesses/known-best/n-236.yaml","id":"W-known-best-n236","scalar_kind":"rational","sha256":"77ef40d122d18d2de38b090e45f8e07cd4b8c8f8c825b7171bbe5c6a5532fe8c"},
       "exact_frame": {"derivation":"the witness's exact rational pose expansion","retained_certificate":"packing/witnesses/franciscouzo-2026/n-236-rational.yaml.gz","matches_retained_certificate":false},
-      "moves": {"accepted":439,"snaps":439,"compactions":0,"rejected":0,"largest_move_decimal":"1.046e-94"},
+      "moves": {"accepted":487,"snaps":487,"compactions":0,"rejected":0,"largest_move_decimal":"9.500e-20"},
       "statuses": {"exact-axis":196,"tilted":40},
       "non_regression": {"rounds":1,"held_slides":0,"held_pose":0,"residual_regressions":{"house":0,"stage":0}},
-      "side": {"reported":"143554818088530739529516143947609196807030001545206115290665734713062484691207728822452295268365532933631411481777871329928554726737445018454089640665198325197518071200425954320396760372364932642813940868200105831891920108058650083632499710382395077910753948726497128499153729217333966/9049118667280502577403728157397483827675161214457803981225613119889431451715623704983802789066158639520842407949525538073264062898220058069223906568471676774732391727065140891230881398799365321779201530237321906415397194933873949016346741845583502784847922614168824509638989239206121","view_minus_reported":"0.000e+00","fits_reported_side":true},
-      "changed_squares": 192,
-      "view": {"path":"packing/atlas/known-best/regularized/n-236-regularized.yaml.gz","sha256":"1d6a770efffb638b4460df7eb8f607f75ef0d84604147c29ab2e2519f93a651f"},
+      "side": {"reported":"3172791149431853484523540541259/200000000000000000000000000000","view_minus_reported":"0.000e+00","fits_reported_side":true},
+      "changed_squares": 196,
+      "view": {"path":"packing/atlas/known-best/regularized/n-236-regularized.yaml.gz","sha256":"1f560e0e34affbba7b33fa33e579d2d956e18aa1fd275f023a5a8ee024b8acd8"},
       "shades": {"house":{"green_before":196,"light_before":33,"green_after":196,"light_after":33},"stage":{"green_before":196,"light_before":33,"green_after":196,"light_after":33}},
       "exact_verification": {"repository_verifier":true,"independent_checker":true,"pairs_tested_independently":27730,"passed":true},
-      "regularization": {"n":236,"of_witness":"W-known-best-n236","by":"project","method":"regularize_axis_components/2","side":"same","identity":{"basis":"measured","measured_in":"packing/atlas/known-best/regularized/index.json","one_to_one":true,"moved":0,"max_move":1.510666e-94,"max_turn_deg":0.0}}
+      "regularization": {"n":236,"of_witness":"W-known-best-n236","by":"project","method":"regularize_axis_components/2","side":"same","identity":{"basis":"measured","measured_in":"packing/atlas/known-best/regularized/index.json","one_to_one":true,"moved":0,"max_move":1.350926e-19,"max_turn_deg":0.0}}
     },
     {
       "n": 237,

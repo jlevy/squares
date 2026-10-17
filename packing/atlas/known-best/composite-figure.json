@@ -6279,12 +6279,12 @@
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
-        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"143554818088530739529516143947609196807030001545206115290665734713062484691207728822452295268365532933631411481777871329928554726737445018454089640665198325197518071200425954320396760372364932642813940868200105831891920108058650083632499710382395077910753948726497128499153729217333966/9049118667280502577403728157397483827675161214457803981225613119889431451715623704983802789066158639520842407949525538073264062898220058069223906568471676774732391727065140891230881398799365321779201530237321906415397194933873949016346741845583502784847922614168824509638989239206121","minimal_polynomial":null,"state":"minimal-polynomial"},
+        "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"3172791149431853484523540541259/200000000000000000000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
         "lower": {"correction":true,"display":"s(236) ≥ 15.374474","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"15.3744747806"},
         "n": 236,
         "optimality": {"provenance":"frontier","status":"open"},
         "rigidity": {
-          "assessed_geometry": {"reported_side":"15.86395574715926743","source_url":"https://github.com/BuddenPing/squares/blob/4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde/numerical-refinements/certificates/n236.cert.json","witness_id":"W-known-best-n236","witness_path":"packing/witnesses/known-best/n-236.yaml"},
+          "assessed_geometry": {"reported_side":"15.8639557471592675","source_url":"https://github.com/evand/square-packing/blob/ea1a2f23678a13bd1d252f9f4c95ca5dd2ffd2b7/search/regularize/lists/certs/n-236.cert.gz","witness_id":"W-known-best-n236","witness_path":"packing/witnesses/known-best/n-236.yaml"},
           "assessments": [
             {
               "assurance": "numerically-checked",
@@ -6301,7 +6301,7 @@
           "provenance": "absent",
           "state": "not-established"
         },
-        "side": {"display":"s(236) ≤ 15.863956","provenance":"frontier","relation":"upper-bound","value":"15.86395574715926743"}
+        "side": {"display":"s(236) ≤ 15.863956","provenance":"frontier","relation":"upper-bound","value":"15.8639557471592675"}
       },
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],

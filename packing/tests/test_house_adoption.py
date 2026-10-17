@@ -950,8 +950,8 @@ def test_the_staged_adoptions_name_their_beads_and_reasons() -> None:
     """Review A1 of #660: the staged adoption sat under the policy lane's own bead, with no
     reason. T-174's rational houses wait for the adoption's bead and the next pull request,
     and its algebraic ones for the writer's bead and the writer. The adoption of 17 October
-    2026 (think-3mry) took 38 rational counts off; the twelve it leaves are T-193's once
-    #658 lands."""
+    2026 (think-3mry) took 37 rational counts off; twelve it leaves are T-193's once #658
+    lands, and 236 is issue 659's once its import lands."""
     for n, pending in select.PENDING_ADOPTION.items():
         assert pending.why in select.STAGING_REASONS, n
         algebraic = n in (70, 153, 207)
@@ -963,7 +963,7 @@ def test_the_staged_adoptions_name_their_beads_and_reasons() -> None:
     assert "think-sa5r" not in {pending.bead for pending in select.PENDING_ADOPTION.values()}
     adopted = set(houses.numbers_of("T-174"))
     assert adopted == set(houses.LATER_PASSES["2026-10-17"])
-    assert len(adopted) == 38
+    assert len(adopted) == 37
     assert not adopted & set(select.PENDING_ADOPTION)
 
 
