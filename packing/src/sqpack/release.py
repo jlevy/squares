@@ -404,6 +404,14 @@ PUBLICATION_STATUS = ""
 #: Both retained 1-100 and 1-324 graphics, their PDFs and PNGs share this history.
 INFOGRAPHIC_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.6.3",
+        first_published="October 17, 2026",
+        result_scope=(
+            "Badge 29's exact side and draw PR #622's certificate, the house at 29 since "
+            "17 October 2026."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.6.2",
         first_published="October 17, 2026",
         result_scope=(
@@ -912,6 +920,16 @@ class ReleaseImpactDecision(NamedTuple):
 # New component cuts append decisions here, newest first, alongside their own histories.
 # No impact is invented retrospectively for the published baseline editions.
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
+    ReleaseImpactDecision(
+        component="infographics",
+        previous_version="v0.6.2",
+        version="v0.6.3",
+        impact="patch",
+        reason=(
+            "Badge 29's exact side and draw PR #622's certificate, the house at 29 since "
+            "17 October 2026."
+        ),
+    ),
     ReleaseImpactDecision(
         component="site",
         previous_version="v0.7.25",
