@@ -5,7 +5,7 @@ title: "Policy: the house is always the smallest validated packing, regularized 
 kind: task
 status: in_progress
 priority: 2
-version: 14
+version: 15
 delegate: user-eb-policy-houses
 labels: []
 dependencies: []
@@ -13,7 +13,7 @@ parent_id: is-01m51hyxstsa9ptekd2ss26ksn
 hold: null
 hold_until: null
 created_at: 2026-10-16T17:14:02.997Z
-updated_at: 2026-10-17T02:50:27.208Z
+updated_at: 2026-10-17T04:17:20.742Z
 started_at: 2026-10-16T17:17:09.781Z
 ---
 Owner, 2026-10-16 afternoon: 'We should always be adopting the smallest packing and then regularizing it. That should be the policy, obviously.' and 'This should be built into our policy. It shouldn't even be a question. If there's any ambiguity on that, we should fix that in our process docs for intake.' Write it into result-import.md stage 5, the regularization guide, the frontier README, and select_houses/adopt_houses (owner holds such as HELD T-174, RP-3 algebraic left-outs, undecided orderings, regularized views below U), then adopt every smaller validated packing it reaches and regularize each.
@@ -131,3 +131,5 @@ think-sa5r stays open until the adoption PR that empties PENDING_ADOPTION merges
 2026-10-17 ~00:30Z user-eb-policy-houses: addressing pass on reviews A and B of PR #660 done at 53785a88d (main 5012a97d6 merged, #654). 21 fixed, 1 deferred (A11 to think-z6aj), 0 declined; A1's optional bead-label check left out. Replies: https://github.com/jlevy/squares/pull/660#pullrequestreview-5555015627 (A) and https://github.com/jlevy/squares/pull/660#pullrequestreview-5555016150 (B). Hosted CI at 53785a88d: every job passed except validate and its packing-required roll-up, on check_release_impact for the site alone (run 38985460814). The site's edition is cut in merge order, so the PR stays a draft. Beads: think-3mry and think-ot5c (the adoptions, open, unclaimed), think-mbdw and think-z6aj (claimed). #657 must take 211 off PENDING_ALLOWED: the witness-keyed check flags only 211 at 1f343b743 and passes with it off. #658 must drop deferred_results; the guard test fails if it merges. This bead closes when #660 merges.
 
 2026-10-17 ~02:50Z user-eb-policy-houses: review C of PR #660 addressed at f76706d17, after merging main c593e2bfd (#656, #657). 12 fixed, C13 deferred to think-qu30 (claimed), 0 declined. Reply: https://github.com/jlevy/squares/pull/660#pullrequestreview-5555627574. CORRECTED entries are now held to the base record (--check-state --base-ref origin/main), and DEFERRED_AT_RULE is gone. T-174 is staged at 53 counts (50 rational under think-3mry, 70/153/207 under think-ot5c); #657 took ten below it. upper_bound_houses sizes measures the staged witnesses (50: 2.84 MB stored, 19.25 MB in a checkout). Hosted CI at f76706d17: green except validate and packing-required, which fail on the site's release impact alone (run 38995847476). The site edition is v0.7.25, cut after #663 on the coordinator's word. think-3mry's title and block still say 60 counts; the true number is now 50.
+
+2026-10-17 ~04:20Z user-eb-policy-houses: review D of PR #660 addressed at a776a24c6. All 6 fixed (D1 a standing correction survives a rewrite of its witness's file or path; D2 OR-18 records base-branch reads as practice; D3 2.84 MB to history; D4/D5 the gate requires and tests its base, reads it only where a count is deferred, and tells a shallow clone to unshallow; D6 broadened guard). Reply: https://github.com/jlevy/squares/pull/660#pullrequestreview-5555898335. Merged main 6a3a7d8fe (#663); site v0.7.25 cut (PUBLICATION_REVISION 83b4720e). Labelled deep-gate. Hosted CI all green (run 38999827119), certificate page green (38999827111), deep gate 12/12 + deep-gate-required green (39000018232). mergeable_state clean. PATCH draft=false did not take (REST), so the PR is still a draft and needs marking ready.

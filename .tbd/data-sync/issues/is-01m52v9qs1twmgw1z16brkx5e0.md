@@ -5,12 +5,12 @@ title: Follow-up review rounds before merge (owner approved, 16 Oct afternoon)
 kind: task
 status: open
 priority: 2
-version: 18
+version: 19
 labels: []
 dependencies: []
 parent_id: is-01m51hyxstsa9ptekd2ss26ksn
 created_at: 2026-10-16T17:14:03.937Z
-updated_at: 2026-10-17T01:30:44.725Z
+updated_at: 2026-10-17T03:23:30.804Z
 ---
 Owner approved follow-up rounds on PRs whose fixes after review touch persisted data or are large: #641, #647, #648, #650, #652, #655, #657 (after its regularization completes).
 
@@ -49,3 +49,5 @@ Owner approved follow-up rounds on PRs whose fixes after review touch persisted 
 #657: review J (follow-up) at e1eb5ebc9: 0/0/1/5
 
 #660: review C (follow-up) at 53785a88d: 0/0/3/6
+
+#660: review D (follow-up) at f76706d17: 0/0/1/5

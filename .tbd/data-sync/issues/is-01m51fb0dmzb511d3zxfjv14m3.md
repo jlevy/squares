@@ -5,7 +5,7 @@ title: "Review: mathematical correctness of Fitzharding's s(19) Lean proof (#640
 kind: task
 status: in_progress
 priority: 1
-version: 10
+version: 12
 delegate: user-eb-review-640
 labels: []
 dependencies: []
@@ -13,7 +13,7 @@ parent_id: is-01m51e5sp1t03c20hqp7d3wajm
 hold: null
 hold_until: null
 created_at: 2026-10-16T04:25:48.211Z
-updated_at: 2026-10-16T12:11:35.420Z
+updated_at: 2026-10-17T04:36:59.367Z
 started_at: 2026-10-16T09:57:24.915Z
 ---
 Stage 4's review lane for #640 (think-a4x3): a mathematical-correctness review of Oscar Fitzharding's Lean proof that s(19) = 3 + 4 sqrt 2 / 3 (ofitzharding/sq19 at 34fb2b7bc39465db368c45cb48d4db58829d3051, tag v1.0.0), as campaign/result-import.md stage 4 ("Who reviews, and when") requires for every proof an import registers, and as T-154's two reviews did for his s(17) proof.
@@ -40,3 +40,7 @@ user-eb-addr-655 12:02Z: review A on #655 addressed in 27b11df51, b47efdca4 (pus
 user-eb-addr-655 12:12Z: done. Head b47efdca4; CI green (runs 38897329248, 38897329113, 38897321579; 15 success, 42 skipped). Reply https://github.com/jlevy/squares/pull/655#pullrequestreview-5547499427. PR description updated. No deferral beads.
 
 2026-10-16 ~12:25Z coordinator user-eb: PR #655 (the s(19) Lean proof review) MERGE-READY at b47efdca4: senior Review A (0/0/1/5) all fixed by user-eb-addr-655 (A1 wording: the programs re-establish the property each fact certifies; A2 boundedness check added; A3-A6), reply https://github.com/jlevy/squares/pull/655#pullrequestreview-5547499427, CI green. Stacks on #651. Left for the records lane: map the review as external_review on T-194's report evidence (C1), register the programs in verifiers.yaml with independence records, draft the five author questions in think-a4x3. Keep this bead open until that mapping lands.
+
+2026-10-17 user-eb-addr-658 (addressing #658 review A): merged origin/main (f5ddfca58), amended the T-193/T-194 URL rows, fixed A6-A9 (f8b329cd1, 3d6227356), papers' release record render-backed (e10c5b714), re-pinned (ae50ef8cf; local, not yet pushed). A2-A5 need #660's mechanism: rehearsed on a local merge with #660 f76706d17 (T-193 reader in ALGEBRAIC_READERS, 16 counts staged under think-ot5c), tracked as think-3q9x; RE-1 owned by think-8ido. Next: records tier + tests, push, dispositions.
+
+2026-10-17 user-eb-addr-658: pushed 764cf17ed (main merge + A1/A6-A9 fixes + render-backed papers record); review A dispositions posted (pullrequestreview-5556221912). CI at 764cf17ed: all green except validate/packing-required on the site release impact (coordinator's edition). A2-A5 wait on #660 under think-3q9x.
