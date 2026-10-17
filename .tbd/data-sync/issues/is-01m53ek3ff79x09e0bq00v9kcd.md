@@ -5,7 +5,7 @@ title: "Adopt T-174 at its 38 staged rational counts under the house rule, regul
 kind: task
 status: in_progress
 priority: 2
-version: 14
+version: 15
 delegate: user-eb-adopt-174
 labels:
   - regularization
@@ -16,7 +16,7 @@ parent_id: is-01m51hyxstsa9ptekd2ss26ksn
 hold: null
 hold_until: null
 created_at: 2026-10-16T22:51:13.774Z
-updated_at: 2026-10-17T11:03:28.449Z
+updated_at: 2026-10-17T17:39:54.237Z
 started_at: 2026-10-17T06:39:00.754Z
 ---
 The house rule (packing/campaign/result-import.md, "The House Rule"; the owner, 16 October 2026) makes T-174 (PR #574's PingYou certificates) the house at 63 counts on main. PR #660 stages them in `select_houses.PENDING_ADOPTION`: the 60 rational ones under this bead, staged as `next pull request`, and the three algebraic ones (70, 153, 207) under think-ot5c (the writer), staged as `no writer`. This bead's pull request adopts the 60, regularizes every count it re-houses in that same pull request, and takes each count off `PENDING_ADOPTION`. Opened by #660's addressing pass for its review A1 (the staged adoption had sat under the policy lane's own bead, think-sa5r).
@@ -58,3 +58,5 @@ user-eb-adopt-174: coordinator took 236 out too (issue 659). Branch now adopts T
 user-eb-adopt-174 08:2xZ: head 1e55a4ba0 pushed (records views, bound citations, family census, check_standing staged-count fix, ABOVE_U -110/297, MAX_PLACES 72 for 68). Strong runs in progress (evand ~17/35, grid0.5 ~20/35). Papers render byte-identical to main at 804eff36 (provisional). Site edition not cut (coordinator cuts at merge).
 
 user-eb-adopt-174 11:03Z: strong runs done on the 35 pending (evand 6,947+2,183 CPU-s incl. 206 rerun at 1800 s timeout, still no view; grid 0.5/1/5 4,388/4,469/4,456 CPU-s). regularize_select --workers 2 running.
+
+user-eb-adopt-174 17:40Z after container restart: scratch runs intact and complete (evand 35+1, grid 3x35, selection 12:23Z); admission 738ee1b96; renderings+default drawings 8a5f8fdfd. Next: strong runs on 103 and 261 (regular as published) so all 37 are selected; settle the 25 no-better counts; retain evidence; validate.
