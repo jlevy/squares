@@ -4557,12 +4557,13 @@ sources:
     (docs/project/reviews/review-2026-10-14-upper-bound-imports-574.md) reproduced the
     replay and decided the cited certificates again by the third route. All 117 native jobs
     have full outcomes. No selected override is created yet: the house rule of 16 October
-    2026 makes T-174 the house at the 53 counts where it is smallest, which ended the hold
+    2026 makes T-174 the house at the 41 counts where it is smallest, which ended the hold
     of 15 October and RP-3's wait, and stages their adoption in
-    devtools.select_houses.PENDING_ADOPTION, the 50 rational counts under think-3mry, the
+    devtools.select_houses.PENDING_ADOPTION, the 38 rational counts under think-3mry, the
     next candidate holding the case at three of them meanwhile, and the algebraic
     certificates at 70, 153 and 207 under think-ot5c. It was the smallest at 63 counts until
-    the adoption of 16 October 2026 (PR #657) took ten of them below it.
+    the adoption of 16 October 2026 (PR #657) took ten of them below it and T-193's exact
+    sides (PR #658) twelve more.
 - id: dostashev-merged-bands-2026-10-13
   title: Daniil Ostashev's merged-band and relaxed-composition packings at b909e1b, issue575
   role: source-repository

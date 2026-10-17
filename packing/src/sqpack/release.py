@@ -474,7 +474,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "638f775adbda007cfe1e5a6e17046687b3281852"
+DATA_REVISION = "dee1c93541f0dc15f589359ddc5e71f67e7b2e2b"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -1278,6 +1278,62 @@ class ReleaseNoPublicChange(NamedTuple):
 
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/devtools/adopt_houses.py",
+            "packing/devtools/select_houses.py",
+            "packing/frontier/n-088.md",
+            "packing/frontier/n-102.md",
+            "packing/frontier/n-123.md",
+            "packing/frontier/n-126.md",
+            "packing/frontier/n-175.md",
+            "packing/frontier/n-199.md",
+            "packing/frontier/n-267.md",
+            "packing/frontier/n-295.md",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The records lane of 16 October 2026 for #639 and #640 (#658) maps the s(19) "
+            "review onto T-194 (C1) and raises T-193 to V3/C3 in results.yaml, with the "
+            "#639 and #640 request entries and their review fixes (A6 to A9). Under the "
+            "house rule (#660) select_houses reads T-193's exact sides (evand_exact_side, "
+            "in ALGEBRAIC_READERS) and stages its sixteen counts under think-ot5c, twelve "
+            "of them re-pointed from T-174, so T-174's register text, its coverage source "
+            "and the #574 request count 41 staged houses, not 53; adopt_houses names a "
+            "re-staged house in the held sentence and a smaller staged one in its "
+            "section, and its refresh rewrites those sixteen case records; its plan refuses "
+            "T-193 at the nine counts where RE-1 owes its regularization a correction "
+            "(CORRECTIONS_OWED), and a held sentence names what a re-staged house is "
+            "(review B of #658). Rendered at link "
+            "revision 804eff36 (main, with #660), once from main's tree and once from this "
+            "branch's at dee1c935 after its merge of it, render_packing_methods, "
+            "render_n11_optimality_review and render_n11_threshold_bound_review write 50 "
+            "files, byte-identical between the two trees. The explainer's render needs a "
+            "browser this host lacks, so it is "
+            "source-reviewed only: it reads results.yaml only to count the register's "
+            "entries and its apparently new ones, 194 and 32 on both trees, and never "
+            "calls select_houses or adopt_houses. No PDF was printed. All four papers keep "
+            "v0.4.7, v0.1.7, v0.1.0 and v0.2.2."
+        ),
+    ),
     ReleaseNoPublicChange(
         components=("paper:n11-lower-bounds-explainer",),
         paths=(

@@ -16019,6 +16019,7 @@ urls:
     builds_on: null
     evidence:
     - E-evand-639-exact-sides-report
+    - E-evand-639-verify-exact-replay
     artifacts:
     - packing/resources/web/evand-exact-cur-2026-10-16/README.md
     - packing/resources/web/evand-exact-cur-2026-10-16/source/search/exact/cur/RESULTS.md
@@ -16028,6 +16029,48 @@ urls:
     - packing/campaign/issue-intake/upper-bounds-20261016/review/exact_sides.py
     - packing/resources/web/evand-exact-cur-2026-10-16/receipts/replay-verify-exact.json
     - packing/resources/web/evand-exact-cur-2026-10-16/review/replay_verify_exact.py
+  amendments:
+  - date: '2026-10-16'
+    reason: 'The 16 October review of issue 639 (review-2026-10-16-evand-exact-sides-639.md) accepts
+      the retained replay: the result rises to V3/C3 and cites its confirming evidence (E-evand-639-verify-exact-replay);
+      the bound, scope and attribution are unchanged.'
+    previous:
+      kind: upper-bound
+      scope:
+        n_values:
+        - 88
+        - 102
+        - 123
+        - 126
+        - 175
+        - 199
+        - 204
+        - 232
+        - 258
+        - 259
+        - 266
+        - 267
+        - 292
+        - 295
+        - 301
+        - 302
+      established: null
+      attribution:
+        source_keys:
+        - '[Daniel exact current records 2026-10-16]'
+        published: '2026-10-16'
+      builds_on: null
+      evidence:
+      - E-evand-639-exact-sides-report
+      artifacts:
+      - packing/resources/web/evand-exact-cur-2026-10-16/README.md
+      - packing/resources/web/evand-exact-cur-2026-10-16/source/search/exact/cur/RESULTS.md
+      - packing/resources/web/evand-exact-cur-2026-10-16/source/search/exact/cur/data/verify.txt
+      - packing/campaign/issue-intake/upper-bounds-20261016/README.md
+      - packing/campaign/issue-intake/upper-bounds-20261016/exact-sides.json
+      - packing/campaign/issue-intake/upper-bounds-20261016/review/exact_sides.py
+      - packing/resources/web/evand-exact-cur-2026-10-16/receipts/replay-verify-exact.json
+      - packing/resources/web/evand-exact-cur-2026-10-16/review/replay_verify_exact.py
 - path: result/t-194.html
   canonical: result/t-194.html
   kind: result
@@ -16058,6 +16101,35 @@ urls:
     - packing/resources/web/fitzharding-n19-lean-2026-10-16/sq19/Sq19Lean/EndpointPacking.lean
     - packing/resources/web/fitzharding-n19-lean-2026-10-16/sq19/verification/Square19Optimality.log.gz
     - packing/resources/web/fitzharding-n19-lean-2026-10-16/sq19/verification/kernel-replay.json
+    - packing/resources/web/fitzharding-n19-lean-2026-10-16/review/README.md
+    - docs/project/reviews/review-2026-10-16-fitzharding-n19-lean.md
+  amendments:
+  - date: '2026-10-16'
+    reason: 'The 16 October mathematical review of the s(19) proof is accepted as an adversarial read:
+      the result rises to C1 and lists the review and its programs'' README among its artifacts; the
+      claim, scope and attribution are unchanged.'
+    previous:
+      kind: optimality
+      scope:
+        n_values:
+        - 19
+      established: null
+      attribution:
+        source_keys:
+        - '[Fitzharding n19 Lean 2026]'
+        published: '2026-10-16'
+      builds_on: null
+      evidence:
+      - E-n019-fitzharding-lean-report
+      artifacts:
+      - packing/resources/web/fitzharding-n19-lean-2026-10-16/README.md
+      - packing/resources/web/fitzharding-n19-lean-2026-10-16/sq19/Sq19Lean/Assembly/Optimality.lean
+      - packing/resources/web/fitzharding-n19-lean-2026-10-16/sq19/Sq19Lean/Assembly/PlainPacking.lean
+      - packing/resources/web/fitzharding-n19-lean-2026-10-16/sq19/Sq19Lean/SquareBase.lean
+      - packing/resources/web/fitzharding-n19-lean-2026-10-16/sq19/Sq19Lean/Basic.lean
+      - packing/resources/web/fitzharding-n19-lean-2026-10-16/sq19/Sq19Lean/EndpointPacking.lean
+      - packing/resources/web/fitzharding-n19-lean-2026-10-16/sq19/verification/Square19Optimality.log.gz
+      - packing/resources/web/fitzharding-n19-lean-2026-10-16/sq19/verification/kernel-replay.json
 - path: results.html
   canonical: results.html
   kind: page
