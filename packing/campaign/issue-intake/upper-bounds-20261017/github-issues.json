@@ -1,0 +1,4 @@
+{
+  "format": "intake-ledger-github-v1",
+  "items": [{"report":"#659","kind":"issue","number":659,"url":"https://github.com/jlevy/squares/issues/659","author":"evand","created_at":"2026-10-16T14:05:14Z","state":"open","closed_at":null,"title":"s(236) ≤ 15.861934390608: registration request"},{"report":"#664","kind":"issue","number":664,"url":"https://github.com/jlevy/squares/issues/664","author":"evand","created_at":"2026-10-17T04:30:51Z","state":"open","closed_at":null,"title":"s(271) ≤ 16.948947733714: registration request"}]
+}

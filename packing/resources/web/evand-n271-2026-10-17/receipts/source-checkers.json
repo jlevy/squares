@@ -1,0 +1,288 @@
+{
+ "format": "evand-source-checkers-receipt-v1",
+ "tool": "python -m devtools.evand_source_checkers evand-n271-2026-10-17 run --workers 1",
+ "packet": "evand-n271-2026-10-17",
+ "interpreter": "CPython 3.14.7",
+ "isolation": "python -I, one child per run, checkers and inputs copied to a scratch directory",
+ "checkers": {
+  "verify_cert.py": {
+   "path": "search/exact/verify_cert.py",
+   "sha256": "3299ca0c0f02f7c221deeea69a9a85b5a90db6bc410b20727fdff211c92bed52"
+  },
+  "verify_cert2.py": {
+   "path": "search/exact/verify_cert2.py",
+   "sha256": "55140a35d95d9eaa64a14c3b044641efbcda94ebfc3b12b7dec9fa52692e31d3"
+  }
+ },
+ "started_utc": "2026-10-17T18:02:48Z",
+ "workers": 1,
+ "wall_seconds": 21.5,
+ "cpu_seconds": 6.4,
+ "all_as_expected": true,
+ "rows": [
+  {
+   "n": 271,
+   "kind": "positive",
+   "path": "search/packer/candidates/s271_ex1.cert",
+   "control": null,
+   "expect": "accepted",
+   "sha256": "48abf7ca68909c42e0aaa5215d4d578f4cdba29d6188775012ae24636e02d680",
+   "checker": "verify_cert.py",
+   "exit_status": 0,
+   "last_line": "VALID: s(n) <= S",
+   "wall_seconds": 1.792,
+   "cpu_seconds": 0.416,
+   "verdict": "accepted",
+   "as_expected": true
+  },
+  {
+   "n": 271,
+   "kind": "positive",
+   "path": "search/packer/candidates/s271_ex1.cert",
+   "control": null,
+   "expect": "accepted",
+   "sha256": "48abf7ca68909c42e0aaa5215d4d578f4cdba29d6188775012ae24636e02d680",
+   "checker": "verify_cert2.py",
+   "exit_status": 0,
+   "last_line": "VALID: 271 closed unit squares pairwise disjoint inside the open box of side 16.948947733713659147 (591 close pairs checked)",
+   "wall_seconds": 3.292,
+   "cpu_seconds": 0.894,
+   "verdict": "accepted",
+   "as_expected": true
+  },
+  {
+   "n": 271,
+   "kind": "control",
+   "path": "search/packer/candidates/s271_ex1.cert",
+   "control": "duplicate-square-overlap",
+   "expect": "refused",
+   "made": {
+    "how": "square 1 replaced by square 0"
+   },
+   "sha256": "354e456958393fa4ddf6dc6818c6407944fe5e6d49cac170d4170db82d1ba5b0",
+   "checker": "verify_cert.py",
+   "exit_status": 1,
+   "last_line": "INVALID",
+   "wall_seconds": 1.444,
+   "cpu_seconds": 0.386,
+   "verdict": "refused",
+   "as_expected": true
+  },
+  {
+   "n": 271,
+   "kind": "control",
+   "path": "search/packer/candidates/s271_ex1.cert",
+   "control": "duplicate-square-overlap",
+   "expect": "refused",
+   "made": {
+    "how": "square 1 replaced by square 0"
+   },
+   "sha256": "354e456958393fa4ddf6dc6818c6407944fe5e6d49cac170d4170db82d1ba5b0",
+   "checker": "verify_cert2.py",
+   "exit_status": 1,
+   "last_line": "INVALID: vertex containment between #0 and #1",
+   "wall_seconds": 0.168,
+   "cpu_seconds": 0.045,
+   "verdict": "refused",
+   "as_expected": true
+  },
+  {
+   "n": 271,
+   "kind": "control",
+   "path": "search/packer/candidates/s271_ex1.cert",
+   "control": "square-translated-outside-container",
+   "expect": "refused",
+   "made": {
+    "how": "square 0 translated by the side plus 2 in x"
+   },
+   "sha256": "1d60eefee78f7d1f9635a16ffea922b62c80c9dc2d09b9e7fb32ff34c0f28106",
+   "checker": "verify_cert.py",
+   "exit_status": 1,
+   "last_line": "INVALID",
+   "wall_seconds": 1.752,
+   "cpu_seconds": 0.457,
+   "verdict": "refused",
+   "as_expected": true
+  },
+  {
+   "n": 271,
+   "kind": "control",
+   "path": "search/packer/candidates/s271_ex1.cert",
+   "control": "square-translated-outside-container",
+   "expect": "refused",
+   "made": {
+    "how": "square 0 translated by the side plus 2 in x"
+   },
+   "sha256": "1d60eefee78f7d1f9635a16ffea922b62c80c9dc2d09b9e7fb32ff34c0f28106",
+   "checker": "verify_cert2.py",
+   "exit_status": 1,
+   "last_line": "INVALID: corner outside the open box",
+   "wall_seconds": 0.198,
+   "cpu_seconds": 0.052,
+   "verdict": "refused",
+   "as_expected": true
+  },
+  {
+   "n": 271,
+   "kind": "control",
+   "path": "search/packer/candidates/s271_ex1.cert",
+   "control": "tightest-pair-overlapped",
+   "expect": "refused",
+   "made": {
+    "control": "tightest-pair-overlapped",
+    "squares": [
+     231,
+     237
+    ],
+    "exact_gap": 9.999999999999992e-21,
+    "moved_by_gap_plus": 1e-30,
+    "unit": 1e-30,
+    "moved_square_wall_clearance": 0.9217269365244297
+   },
+   "sha256": "0f257df79ad2a765d452924262f056a11506ad265db9374f731943d8f23e53c5",
+   "checker": "verify_cert.py",
+   "exit_status": 1,
+   "last_line": "INVALID",
+   "wall_seconds": 1.424,
+   "cpu_seconds": 0.412,
+   "verdict": "refused",
+   "as_expected": true
+  },
+  {
+   "n": 271,
+   "kind": "control",
+   "path": "search/packer/candidates/s271_ex1.cert",
+   "control": "tightest-pair-overlapped",
+   "expect": "refused",
+   "made": {
+    "control": "tightest-pair-overlapped",
+    "squares": [
+     231,
+     237
+    ],
+    "exact_gap": 9.999999999999992e-21,
+    "moved_by_gap_plus": 1e-30,
+    "unit": 1e-30,
+    "moved_square_wall_clearance": 0.9217269365244297
+   },
+   "sha256": "0f257df79ad2a765d452924262f056a11506ad265db9374f731943d8f23e53c5",
+   "checker": "verify_cert2.py",
+   "exit_status": 1,
+   "last_line": "INVALID: vertex containment between #231 and #237",
+   "wall_seconds": 2.57,
+   "cpu_seconds": 0.829,
+   "verdict": "refused",
+   "as_expected": true
+  },
+  {
+   "n": 271,
+   "kind": "control",
+   "path": "search/packer/candidates/s271_ex1.cert",
+   "control": "side-shrunk-past-clearance",
+   "expect": "refused",
+   "made": {
+    "control": "side-shrunk-past-clearance",
+    "clearance": 5.00000000011599e-21,
+    "unit": 1e-30
+   },
+   "sha256": "bb40416e952321f326765d5ab914c49f395af7dc792f969ddba298d2591d54d3",
+   "checker": "verify_cert.py",
+   "exit_status": 1,
+   "last_line": "INVALID",
+   "wall_seconds": 1.337,
+   "cpu_seconds": 0.426,
+   "verdict": "refused",
+   "as_expected": true
+  },
+  {
+   "n": 271,
+   "kind": "control",
+   "path": "search/packer/candidates/s271_ex1.cert",
+   "control": "side-shrunk-past-clearance",
+   "expect": "refused",
+   "made": {
+    "control": "side-shrunk-past-clearance",
+    "clearance": 5.00000000011599e-21,
+    "unit": 1e-30
+   },
+   "sha256": "bb40416e952321f326765d5ab914c49f395af7dc792f969ddba298d2591d54d3",
+   "checker": "verify_cert2.py",
+   "exit_status": 1,
+   "last_line": "INVALID: corner outside the open box",
+   "wall_seconds": 0.079,
+   "cpu_seconds": 0.039,
+   "verdict": "refused",
+   "as_expected": true
+  },
+  {
+   "n": 271,
+   "kind": "control",
+   "path": "search/packer/candidates/s271_ex1.cert",
+   "control": "side-shrunk-one-unit",
+   "expect": "accepted",
+   "made": {
+    "control": "side-shrunk-one-unit",
+    "clearance": 5.00000000011599e-21,
+    "unit": 1e-30
+   },
+   "sha256": "ac56d33e4aae90d3b6bbebc3a316b2b90f8d226220a7226caa39e3f193775cb3",
+   "checker": "verify_cert.py",
+   "exit_status": 0,
+   "last_line": "VALID: s(n) <= S",
+   "wall_seconds": 1.164,
+   "cpu_seconds": 0.367,
+   "verdict": "accepted",
+   "as_expected": true
+  },
+  {
+   "n": 271,
+   "kind": "control",
+   "path": "search/packer/candidates/s271_ex1.cert",
+   "control": "side-shrunk-one-unit",
+   "expect": "accepted",
+   "made": {
+    "control": "side-shrunk-one-unit",
+    "clearance": 5.00000000011599e-21,
+    "unit": 1e-30
+   },
+   "sha256": "ac56d33e4aae90d3b6bbebc3a316b2b90f8d226220a7226caa39e3f193775cb3",
+   "checker": "verify_cert2.py",
+   "exit_status": 0,
+   "last_line": "VALID: 271 closed unit squares pairwise disjoint inside the open box of side 16.948947733713659147 (591 close pairs checked)",
+   "wall_seconds": 2.588,
+   "cpu_seconds": 0.847,
+   "verdict": "accepted",
+   "as_expected": true
+  },
+  {
+   "n": 271,
+   "kind": "regularized-view",
+   "path": "search/packer/candidates/s271_ex1_regularized.cert",
+   "control": null,
+   "expect": "accepted",
+   "sha256": "4d4d4e25604b2c492047b44144249e3d69be53db061ab51e26dab39e8fb12160",
+   "checker": "verify_cert.py",
+   "exit_status": 0,
+   "last_line": "VALID: s(n) <= S",
+   "wall_seconds": 0.708,
+   "cpu_seconds": 0.382,
+   "verdict": "accepted",
+   "as_expected": true
+  },
+  {
+   "n": 271,
+   "kind": "regularized-view",
+   "path": "search/packer/candidates/s271_ex1_regularized.cert",
+   "control": null,
+   "expect": "accepted",
+   "sha256": "4d4d4e25604b2c492047b44144249e3d69be53db061ab51e26dab39e8fb12160",
+   "checker": "verify_cert2.py",
+   "exit_status": 0,
+   "last_line": "VALID: 271 closed unit squares pairwise disjoint inside the open box of side 16.948947733713659147 (575 close pairs checked)",
+   "wall_seconds": 1.307,
+   "cpu_seconds": 0.859,
+   "verdict": "accepted",
+   "as_expected": true
+  }
+ ]
+}

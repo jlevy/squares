@@ -1,0 +1,58 @@
+# What `python -m devtools.intake_ledger gather` reads for the 17 October 2026 intake
+# (epic think-e2sz): Evan Daniel's two result issues of the pass, #659 at 236 and #664 at
+# 271, each read from the claim record its packet froze at main 804eff369. No other open
+# report states a bound at either count (the triage on each bead, 17 October).
+format: intake-ledger-sources-v1
+read_at_main: 804eff369193b698d497a9c06847059eb9de0470
+read_on: '2026-10-17'
+rule: If they are reported in order, then each one should be recorded as a result, as long
+  as each one is stronger than the last. If a stronger result is reported first, then the
+  other one should not be recorded since it's weaker after that, unless there's some key reason
+  it should be recorded.
+display_names:
+  ry-xu: Ryan Xu
+lanes:
+- name: evand
+  branch: claude/intake-2026-10-17-evand-236-271
+  commit: 2338a06a9b90f2c7a58c94d42d4cccdfe2511afc
+  note: the two packets retained by stage 2 of this import, each claims.json frozen at main
+    804eff369
+reports:
+- report: '#659'
+  issue: 659
+  holders: Evan Daniel (evand)
+  bead: think-6wtz
+  lanes:
+  - lane: evand
+    packet: evand-n236-2026-10-16
+    record: claims.json
+    counts:
+    - 236
+  claims:
+  - n: 236
+    first_committed: '2026-10-16T14:03:49Z'
+    new_packing:
+      source: '#659: ''A different local minimum from #481''; ''Please credit itsnaka''s SQUISH
+        "Mondrian composition" (#481) for the construction'''
+      continues: "Nate Chaoweeraprasit (itsnaka)'s #481 Mondrian composition (T-136)"
+- report: '#664'
+  issue: 664
+  holders: Evan Daniel (evand)
+  bead: think-8o5j
+  lanes:
+  - lane: evand
+    packet: evand-n271-2026-10-17
+    record: claims.json
+    counts:
+    - 271
+  claims:
+  - n: 271
+    first_committed: '2026-10-17T04:29:03Z'
+    new_packing:
+      source: '#664: ''a refinement of the #561 packing, not a new construction'' and, in its
+        commit 757b40b, ''distinct local minimum''; the owner, 17 October 2026, on its credit:
+        ''Daniel''s, crediting #561'' (think-8o5j)'
+      continues: "Francisco Couzo's #561 packing (T-161), refining Nate Chaoweeraprasit
+        (itsnaka)'s SQUISH packing of #500 (T-151)"
+exceptions: []
+other_items: []
