@@ -824,6 +824,25 @@ def test_a_count_adopted_again_on_a_later_day_has_one_current_house(
     assert not adopt.adopted(dataclasses.replace(first, packing=packing))
 
 
+def test_a_house_of_an_earlier_finders_packing_keeps_the_finders_year(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, replayed: list[adopt.Move]
+) -> None:
+    """The reported lane's year is the packing's: the house's own year unless its credit
+    names an earlier one, as at 29, where PingYou Ltd's certificate of 2026 is of Thomas
+    Schadt's packing of 2025 (review A's A7 of #661)."""
+    assert all(c.found_year is None for n, c in adopt.CREDITS.items() if n != 29)
+    _, _, again = _readopted(tmp_path, monkeypatch, replayed)
+    assert adopt.reported_bound(again)["found_year"] == 2025
+    earlier = dataclasses.replace(adopt.CREDITS[84], found_year=2019)
+    monkeypatch.setitem(adopt.CREDITS, 84, earlier)
+    assert adopt.reported_bound(again)["found_year"] == 2019
+    credit = adopt.CREDITS[29]
+    assert credit.found_year == 2025
+    lane = _front(select.case_path(29).read_text(encoding="utf-8"))["reported_upper_bound"]
+    assert lane["found_by"] == list(credit.found_by)
+    assert lane["found_year"] == credit.found_year
+
+
 def test_the_coverage_of_a_count_adopted_again_names_the_new_house_throughout(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, replayed: list[adopt.Move]
 ) -> None:
