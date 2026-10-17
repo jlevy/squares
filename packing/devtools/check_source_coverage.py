@@ -536,21 +536,41 @@ def load_claims(path: pathlib.Path) -> dict[int, str]:
     raise ValueError(f"{path.name} is not a claims record this check can reparse")
 
 
+def _not_above_print(value: str, printed: str) -> bool:
+    """Whether a side is not ordered above the catalogue's print of a count.
+
+    A print is a truncation or a rounding at its last place, never an exact side, so it
+    orders a side only beyond one unit of that place: below the print, a side beats it;
+    from one unit above, the print beats the side; between, nothing is decided, as at
+    n = 29, where the catalogue prints 5.93383346267692 for a packing whose exact side
+    T-009's Krawczyk box puts at 5.9338334626769291896..., and the house, PR #622's
+    tighter certificate of that packing (T-195), lies inside the box. The house rule
+    adopts the smallest validated side against the case's verified ceiling, exactly
+    (`devtools.select_houses`); this holds only that no override is a side the
+    catalogue's own print shows to be larger. The per-count ledgers read a print the same
+    way (`devtools.intake_ledger`).
+    """
+    bound = Decimal(printed)
+    unit = Decimal(1).scaleb(int(bound.as_tuple().exponent))
+    return Decimal(value) < bound + unit
+
+
 def selection_errors(
     coverage: Mapping, kingbird: Mapping[int, str], claims: Mapping[str, Mapping[int, str]]
 ) -> list[str]:
     """Reconcile the selected overrides and superseded reports with their sources.
 
     An override may come from any retained source. It must lie in that source's scope,
-    use evidence the source declares, report a side strictly below the catalogue
-    baseline it replaces, and, where the source's claims are reparsed here, equal the
-    side the source itself prints. A superseded report is a retained claim that a
-    selected override at the same `n` beats: it must equal its own source's printed side
-    and exceed the override's. Where no override is selected the report may instead name
-    the catalogue baseline, which must then print a side below it -- what a later capture
-    of the catalogue does when it overtakes a release (`n = 69`, 2026-10-05, T-088). Every
-    reparsed claim is then accounted for exactly once, as a selected override, a
-    superseded report, or a claim tracked beyond the corpus.
+    use evidence the source declares, report a side that the catalogue baseline it
+    replaces does not show to be larger (`_not_above_print`), and, where the source's
+    claims are reparsed here, equal the side the source itself prints. A superseded
+    report is a retained claim that a selected override at the same `n` beats: it must
+    equal its own source's printed side and exceed the override's. Where no override is
+    selected the report may instead name the catalogue baseline, which must then print a
+    side below it -- what a later capture of the catalogue does when it overtakes a
+    release (`n = 69`, 2026-10-05, T-088). Every reparsed claim is then accounted for
+    exactly once, as a selected override, a superseded report, or a claim tracked beyond
+    the corpus.
     """
     errors: list[str] = []
     n_min = coverage["case_corpus"]["n_min"]
@@ -580,8 +600,11 @@ def selection_errors(
             errors.append(
                 f"{where} uses evidence {entry['evidence']} not declared by {source_id}"
             )
-        if n in kingbird and Decimal(entry["value"]) >= Decimal(kingbird[n]):
-            errors.append(f"{where} does not beat the catalogue baseline {kingbird[n]}")
+        if n in kingbird and not _not_above_print(entry["value"], kingbird[n]):
+            errors.append(
+                f"{where} does not beat the catalogue baseline {kingbird[n]}: it is at least "
+                "one unit of the print's last place above it"
+            )
         errors.extend(_claim_errors(where, source_id, n, entry["value"], claims))
         accounted.setdefault(source_id, set()).add(n)
     for entry in coverage["superseded_reports"]:

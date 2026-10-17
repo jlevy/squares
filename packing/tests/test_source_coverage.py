@@ -74,12 +74,43 @@ def test_an_override_must_print_what_its_source_prints() -> None:
     assert any("repository prints 2.8" in error for error in _errors(coverage))
 
 
-def test_an_override_must_beat_the_catalogue_baseline() -> None:
+def _against_print(value: str, printed: str) -> list[str]:
+    """The errors of n = 6's override at `value` against a catalogue print of `printed`."""
     coverage = _coverage()
     claims = copy.deepcopy(CLAIMS)
-    claims["release"][6] = "3"
-    coverage["selected_overrides"][0]["value"] = "3"
-    assert any("does not beat the catalogue" in error for error in _errors(coverage, claims))
+    claims["release"][6] = value
+    coverage["selected_overrides"][0]["value"] = value
+    return coverage_check.selection_errors(coverage, {**KINGBIRD, 6: printed}, claims)
+
+
+def test_an_override_the_catalogue_print_shows_larger_is_refused() -> None:
+    (error,) = _against_print("4", "3")
+    assert error.startswith("selected override n=6 does not beat the catalogue baseline 3")
+    assert "one unit of the print's last place" in error
+
+
+@pytest.mark.parametrize(
+    ("value", "outcome"),
+    [
+        # Below the print, the override beats it.
+        ("2.9299999999", "beats"),
+        # Inside the print's last-place unit, nothing is decided: a print is a truncation
+        # or a rounding, never an exact side, as at n = 29, where T-195 lies 9.19e-15
+        # above the catalogue's 5.93383346267692 and inside T-009's box for the
+        # catalogue's own packing (think-adgd).
+        ("2.93", "undecided"),
+        ("2.9399999999", "undecided"),
+        # From the next unit on, the print shows the override to be larger.
+        ("2.94", "larger"),
+        ("2.9400000001", "larger"),
+    ],
+)
+def test_a_print_orders_an_override_only_beyond_one_unit_of_its_last_place(
+    value: str, outcome: str
+) -> None:
+    errors = _against_print(value, "2.93")
+    assert bool(errors) == (outcome == "larger"), errors
+    assert all("does not beat the catalogue baseline 2.93" in error for error in errors)
 
 
 def test_a_superseded_report_must_lose_to_the_selected_source() -> None:
