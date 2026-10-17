@@ -112,7 +112,14 @@ def test_a_hold_skips_only_the_held_entry(
             assert adopt._holder(packing).endswith(f"({before})")  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
     held_counts = {n for n, s in selections.items() if s.held}
     assert set(NEXT_CANDIDATES) < held_counts
-    assert len(held_counts) == 60
+    held_by = {
+        result: {n for n, s in selections.items() if result in {c.result for c in s.held}}
+        for result in select.HELD
+    }
+    assert len(held_by["T-174"]) == 60
+    # T-195 waits at 29 for its stacked adoption, with PR #660's house rule (think-30n2).
+    assert held_by["T-195"] == {29}
+    assert held_counts == held_by["T-174"] | held_by["T-195"]
 
 
 def test_regularizations_leave_the_packing_with_its_finder(
@@ -404,7 +411,7 @@ def test_a_held_result_keeps_its_counts_at_their_case_and_says_so(
 
 
 def test_the_held_results_are_named_with_why() -> None:
-    assert set(select.HELD) == {"T-174"}
+    assert set(select.HELD) == {"T-174", "T-195"}
     for hold in select.HELD.values():
         assert hold.why.strip()
         assert hold.reason.startswith(f"{hold.whose} houses are held for the owner: ")
@@ -418,20 +425,24 @@ def test_every_record_names_a_smaller_held_or_algebraic_certificate(
     certificate section where a pass houses the count, in a dated note under the title
     elsewhere; an algebraic one below the house, which the owner decides, in the section
     (reviews A and B of PR 614, A1, B2 and B7)."""
-    reason = select.HELD["T-174"].reason.replace("'", "’")
     for n, selection in selections.items():
         if not selection.held:
             continue
         text = _flat(select.case_path(n).read_text(encoding="utf-8"))
-        assert _flat(reason) in text, n
-        assert (
-            "E-pingyou-574-exact-feasibility"
-            in _front(select.case_path(n).read_text())["evidence"]
-        ), n
+        evidence = _front(select.case_path(n).read_text())["evidence"]
+        for candidate in selection.held:
+            reason = select.HELD[candidate.result].reason.replace("'", "’")
+            assert _flat(reason) in text, n
+            assert set(candidate.confirming_evidence) <= set(evidence), n
+        since = min(select.HELD[c.result].since for c in selection.held)
         if n in houses.ADOPTED:
             assert adopt.HELD_OPENING not in text, n
         else:
-            assert f"{adopt.HELD_OPENING}15 October 2026.**" in text, n
+            assert f"{adopt.HELD_OPENING}{adopt.words(since)}.**" in text, n
+    assert (
+        "E-pingyou-574-exact-feasibility"
+        in _front(select.case_path(105).read_text())["evidence"]
+    )
     assert adopt.held_counts() == sorted(
         n for n, s in selections.items() if s.held and n not in houses.ADOPTED
     )

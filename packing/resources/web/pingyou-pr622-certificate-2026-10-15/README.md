@@ -149,8 +149,12 @@ least pair gap of exactly 0, on both routes.
   the certificate from its own poses. The construction’s derivation from Evan Daniel’s
   decoder and the submission’s comparison receipts were not checked.
 - The two routes share certificate parsing, half-angle conversion, Fraction arithmetic
-  and the separating-axis method. A third route and the stage 4 review are the review
-  lane’s.
+  and the separating-axis method, and the source reports running both itself.
+  The stage 4 review of 16 October
+  ([review-2026-10-16-pingyou-n29.md](../../../../docs/project/reviews/review-2026-10-16-pingyou-n29.md))
+  decided the certificate again with a clean-room checker and ran the third exact route,
+  each with sharp controls; its programs and outputs are in [review/](review/README.md).
+  It accepted the certificate for finite feasibility, with no blocking defect.
 - The comparison with the reported lane’s exact side is not made here.
   A finite certificate establishes an upper bound only.
 

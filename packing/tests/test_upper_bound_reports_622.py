@@ -32,6 +32,7 @@ N = 29
 #: The digests the pull request's claims.json and HostedData manifest state.
 CERTIFICATE_SHA256 = "a01428c51875679fbe78c11a803742b8d99f44b916a660ab6801bb0fcf76951b"
 NATIVE_SHA256 = "0eff5b4d2a9701e30fe8912fd634c5a7124384366197533c18a5bcc26dfe4a39"
+MANIFEST_SHA256 = "78dbc541f2dea49d7e54c2c1015e7ebc77e42db3dcba6835611acacb74745129"
 ASSET_SHA256 = "0dc9bcd1cf5f2806a4d2e0c4c1c07e4903d91bbea611b8b938bda770b9782537"
 #: T-155's exact side at 29, the exact form of n-029.md's verified lane.
 T155 = Fraction("296691673133846459484473030817600957/50000000000000000000000000000000000")
@@ -80,7 +81,8 @@ def test_the_packet_pins_its_release_and_retains_no_upstream_byte() -> None:
     assert native["archive"]["sha256"] == NATIVE_SHA256
     pinned = {item["path"]: item for item in source["pinned_only"]}
     manifest = pinned["packing/hosted/pingyou-n29-certificate-2026-10-15.yaml"]
-    assert manifest["sha256"]
+    # The digest the packet README, sources.json and upstream-subtree.sha256 record.
+    assert manifest["sha256"] == MANIFEST_SHA256
     declaration = reports.load_declaration(_packet())
     fact = reports.read_fact(_packet(), declaration, declared)
     assert fact.side == Fraction(row["offered"])
@@ -160,13 +162,47 @@ def test_the_case_keeps_a_verified_print_above_its_exact_form(
         reports.compare(packet)
 
 
+@pytest.mark.parametrize("form", ["abc", "296691673133846459484473030817600957/0", "6"])
+def test_a_verified_exact_form_that_is_no_fraction_is_refused(
+    private: Callable[[str], Path], form: str
+) -> None:
+    packet = private(PACKET)
+    path = packet / reports.DECLARATION
+    value = _json(path)
+    value["houses"][0]["verified_exact_form"] = form
+    path.write_text(json.dumps(value, indent=2) + "\n", encoding="utf-8")
+    with pytest.raises(reports.ReportError, match="a verified exact form is a fraction"):
+        reports.load_declaration(packet)
+
+
+def test_the_claims_are_written_only_while_the_case_states_the_declared_exact_form(
+    private: Callable[[str], Path],
+) -> None:
+    """`live_problems` holds the declared form to n-029.md's own, string for string."""
+    packet = private(PACKET)
+    assert reports.live_problems(packet) == []
+    path = packet / reports.DECLARATION
+    value = _json(path)
+    # The same number, not reduced: the case states the reduced form.
+    value["houses"][0]["verified_exact_form"] = f"{2 * T155.numerator}/{2 * T155.denominator}"
+    path.write_text(json.dumps(value, indent=2) + "\n", encoding="utf-8")
+    (problem,) = reports.live_problems(packet)
+    assert problem.startswith("n=29: the case record reads")
+    value["houses"][0]["verified_exact_form"] = f"{T155.numerator}/{T155.denominator}"
+    value["houses"][0]["verified_value"] = "6.5"
+    path.write_text(json.dumps(value, indent=2) + "\n", encoding="utf-8")
+    (problem,) = reports.live_problems(packet)
+    assert problem.startswith("n=29: the case record reads")
+
+
 def test_the_packet_is_a_house_reader_of_its_own_side() -> None:
     declaration = reports.load_declaration(_packet())
     assert reports.house_side(declaration["source_key"], N) == _side()
 
 
-def test_the_ledger_leaves_both_reports_undecided_and_names_the_key_reason() -> None:
-    """The per-count ledger of this pass: PR #574's row and PR #622 in report order."""
+def test_the_ledger_records_pr622_by_the_owners_exception() -> None:
+    """The per-count ledger of this pass: PR #574's row and PR #622 in report order, both
+    undecided by the rule, and PR #622 recorded by the owner's exception, the house rule."""
     from devtools import intake_ledger as ledger  # noqa: PLC0415
 
     directory = ledger.ROOT / "campaign/issue-intake/upper-bounds-n29-20261016"
@@ -177,9 +213,18 @@ def test_the_ledger_leaves_both_reports_undecided_and_names_the_key_reason() -> 
     assert count["n"] == N
     assert [(step["report"], step["verdict"]) for step in count["steps"]] == [
         ("PR #574", ledger.UNDECIDED),
-        ("PR #622", ledger.UNDECIDED),
+        ("PR #622", ledger.BY_EXCEPTION),
     ]
-    (found,) = ledger.load_ledger(directory).get("key_reason_candidates") or []
-    candidate: dict[str, Any] = dict(found)
-    assert (candidate["n"], candidate["report"]) == (N, "PR #622")
-    assert candidate["proposed_as"].startswith("T-195")
+    loaded = ledger.load_ledger(directory)
+    assert not loaded.get("key_reason_candidates")
+    (exception,) = loaded["exceptions"]
+    assert (exception["n"], exception["report"]) == (N, "PR #622")
+    # The owner's words, quoted exactly.
+    for words in (
+        (
+            "We should always be adopting the smallest packing and then regularizing it. "
+            "That should be the policy, obviously."
+        ),
+        "It shouldn't even be a question.",
+    ):
+        assert words in exception["reason"]

@@ -57,20 +57,18 @@ reports:
       source: 'the pull request''s claims.json at 3115557: classification certificate_refinement_of_known_nominal_construction,
         original construction Thomas Schadt, improved by David Ellsworth ([Kingbird]); nominal_construction_value_changed
         false'
-exceptions: []
-key_reason_candidates:
+exceptions:
 - n: 29
   report: 'PR #622'
-  argument: 'The house rule: the owner, 16 October 2026, ''We should always be adopting the
-    smallest packing and then regularizing it. That should be the policy, obviously.'' PR
-    #622''s certificate is complete and rational, replayed here on both maintained exact routes,
-    and 1.57e-36 below T-155, the smallest validated packing the record holds at 29; the reported
-    lane it does not clear is a catalogue print of the same packing, which no certificate
-    the record holds attains, and whose exact side (Evan Daniel''s degree-7213 root, #545)
-    the record does not hold. A house must be a register entry, so recording it is what adopting
-    the smallest packing needs. Credit stays with Thomas Schadt and David Ellsworth, PingYou
-    Ltd credited with the refinement, as a regularization.'
-  proposed_as: T-195, an S1 entry pending adoption, in this pass's records pull request (branch
-    claude/intake-2026-10-16-n29-622); not on main
+  reason: 'The owner''s standing house rule, applied to T-195, the smallest validated packing
+    at 29. The owner to the coordinator of this intake pass, in its Claude Code session, on
+    the afternoon (UTC) of 16 October 2026: "We should always be adopting the smallest packing
+    and then regularizing it. That should be the policy, obviously." and "This should be built
+    into our policy. It shouldn''t even be a question. If there''s any ambiguity on that,
+    we should fix that in our process docs for intake." PR #660 (think-sa5r) writes the rule
+    into the runbook. PR #622''s certificate is replayed and reviewed (16 October) 1.57e-36
+    below T-155, the verified lane; the reported lane it does not clear is the catalogue''s
+    print of the same packing, which no validated certificate attains.'
+key_reason_candidates: []
 other_items: []
 cross_check: []

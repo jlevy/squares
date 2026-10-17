@@ -26758,11 +26758,17 @@ results:
       All three retained jobs, the positive with its duplicate-square and outside-container
       controls, were decided here on 16 October 2026 by both maintained exact routes, and
       decided again equal to their retained rows: the positive passes both, and both refuse
-      both controls. No route here is the source's code; the source's runs of this
-      repository's two maintained routes on its corners witness are its own and decide
-      nothing here, so the replay is independently re-implemented. The side is 1.57e-36
-      below T-155's, the case's verified upper bound, and 7.32e-90 below PR 574's N29
-      certificate, which T-174 does not register. No stage 4 review of it is on file yet.
+      both controls. The source reports running those two routes itself on its corners
+      witness, so on them the replay reproduces the source's own runs.
+
+      Two checks that share no code with any check the source ran decided the certificate
+      again: the third exact
+      route, half-extent containment and exact intersection area, with six controls, two of
+      them 1e-40 and 1e-30 past exact contact; and the 16 October review's clean-room exact
+      checker, from the release asset, with four controls, two of them 1e-3000 past contact.
+      On those two the confirmation is independently re-implemented. The review found no
+      blocking defect. The side is 1.57e-36 below T-155's, the case's verified upper bound,
+      and 7.32e-90 below PR 574's N29 certificate, which T-174 does not register.
 
       The author reports that standard-library exact routines of its own, by separating
       axes and by rational polygon clipping, accept all 29 squares and 406 pairs of the
@@ -26777,9 +26783,10 @@ results:
       packing's contact system from Evan Daniel's source tools and data, scaled about a
       common centre and cropped exactly. The packing is Thomas Schadt's, improved by David
       Ellsworth, as the Kingbird catalogue credits it, and the submission says it is no new
-      construction; the count is a regularization of that packing. On 16 October 2026 the
-      author stated on the pull request that all of its submissions are 'PingYou Ltd,
-      assisted by the PY agentic offering'.
+      construction; the count is a regularization of that packing. Measured by the review
+      against T-009's witness, it pairs with that packing one to one, no square moved beyond
+      1e-9. On 16 October 2026 the author stated on the pull request that all of its
+      submissions are 'PingYou Ltd, assisted by the PY agentic offering'.
     scope: {n_values: [29]}
     verification: V3
     confirmation: C3
@@ -26789,7 +26796,9 @@ results:
         A padding refinement 1.57e-36 below the case ceiling, of a packing the record
         already holds, as T-155's and T-174's are; no lower bound or optimum.
       scored: '2026-10-16'
-      by: think-30n2 PingYou Ltd import (draft)
+      by: >-
+        the 16 October review (docs/project/reviews/review-2026-10-16-pingyou-n29.md),
+        confirming the draft of think-30n2 PingYou Ltd import
     novelty: previously-published
     attribution:
       source_keys: ['[PingYou PR 622 certificate 2026-10-15]']
@@ -26803,7 +26812,10 @@ results:
       - packing/resources/web/pingyou-pr622-certificate-2026-10-15/facts/n-029.yaml.gz
       - packing/resources/web/pingyou-pr622-certificate-2026-10-15/receipts/exact-certification.json.xz
       - packing/devtools/upper_bound_reports.py
+      - packing/devtools/check_half_angle_area.py
+      - packing/resources/web/pingyou-pr622-certificate-2026-10-15/review/README.md
       - packing/campaign/issue-intake/upper-bounds-n29-20261016/README.md
+      - docs/project/reviews/review-2026-10-16-pingyou-n29.md
     controls:
       - packing/tests/test_upper_bound_reports.py
       - packing/tests/test_upper_bound_reports_622.py
@@ -26813,7 +26825,10 @@ results:
       routes, 2436 pair decisions; summed over the 3 jobs, the receipt records 93.53 route
       CPU seconds and 96.21 job wall seconds, the longest job 32.77 seconds. In the positive
       a square touches the box, a least wall clearance of exactly 0, and two squares touch,
-      a least pair gap of exactly 0, on both routes.
+      a least pair gap of exactly 0, on both routes. The third route's run is
+      review/outputs/third-route.json in the packet, driven by review/programs/third_route.py,
+      and the review checker's are review/outputs/certificate.json, controls.json and
+      receipt.json, by review/programs/n29_exact_review.py (V-pingyou-622-exact-review).
 
       At n = 29 the certificate is below the case's verified ceiling, T-155's exact side, by
       1.57e-36, and below PR 574's N29 certificate by 7.32e-90, at that pull request's own
@@ -26822,24 +26837,31 @@ results:
       Ellsworth, is 9.19e-15 below the side, within one unit of its last place, so it does
       not order them; the lane's exact side, the root of Evan Daniel's degree-7213
       polynomial (#545), is not in the record (think-6gti), and the certificate, a
-      realization of the same packing, is expected just above it. The case record prints its
+      realization of the same packing, is expected just above it.
+
+      T-009's Krawczyk box for
+      the catalogue's own contact solution holds the side, 1.08e-45 above its lower end,
+      and shows the print to be a truncation. The case record prints its
       verified value 5.43e-20 above its own exact form (think-gzrw); these comparisons use
       the exact form.
 
       The per-count ledger of this pass
       (packing/campaign/issue-intake/upper-bounds-n29-20261016/README.md) takes PR 574's row
       and this report in order and leaves both undecided at 29 against the reported lane.
-      This entry registers PR 622 on the key reason that ledger lists for the owner: the
-      house rule of 16 October 2026, 'We should always be adopting the smallest packing and
-      then regularizing it', under which this certificate is the house once its review
-      passes, and a house is a register entry. The owner confirms or withdraws that reason.
+      It records PR 622 there by exception, on the owner's standing house rule, which the
+      owner gave the coordinator of this pass on 16 October 2026 ('We should always be
+      adopting the smallest packing and then regularizing it. That should be the policy,
+      obviously.') and which PR #660 writes into the runbook (think-sa5r): this certificate
+      is the smallest validated packing at 29, and a house is a register entry.
 
-      V3 and C3 rest on the repository replay (E-pingyou-622-exact-feasibility) alone; no
-      review record is retained yet. The source's own checkers were not run here. The two
-      maintained routes, the sqpack rational witness verifier and the independent rational
-      corner checker, share certificate parsing, half-angle conversion, Fraction arithmetic
-      and the separating-axis method. No two independent methods, human oversight or
-      optimality is claimed.
+      V3 and C3 rest on the repository replay (E-pingyou-622-exact-feasibility) and the 16
+      October review (docs/project/reviews/review-2026-10-16-pingyou-n29.md), which
+      accepted it for finite feasibility with no blocking defect. The source's own checkers
+      were not run here. The two maintained routes, the sqpack rational witness verifier
+      and the independent rational corner checker, share certificate parsing, half-angle
+      conversion, Fraction arithmetic and the separating-axis method; the third route
+      shares Fraction arithmetic and the formats' meaning with them, and the review's
+      checker shares nothing. No human oversight or optimality is claimed.
     regularizations:
       - n: 29
         of: T-009
@@ -26849,23 +26871,39 @@ results:
           from Evan Daniel's decoder, an exact common-centre scaling and a bounding-square crop
         side: solved
         identity:
-          basis: source-claim
-    activity:
-      state: in-analysis
-      what: >-
-        The stage 4 review lane reads the retained replay and this entry, strong tier, in a
-        worktree of its own, as the 16 October lanes read T-185 to T-190; the owner decides
-        the key reason the per-count ledger lists. The adoption and regularization at 29 wait
-        for the review, on a branch stacked on this entry's pull request.
-      since: '2026-10-16'
-      link: think-30n2
+          basis: measured
+          measured_in: packing/resources/web/pingyou-pr622-certificate-2026-10-15/review/outputs/identity.json
+          one_to_one: true
+          moved: 0
+          max_move: 7.685e-20
+          max_turn_deg: 3.255e-38
     next_rung: >-
-      The stage 4 review lane reads the retained replay and this entry. With no blocking
-      defect open, the stage 4 exit maps the review, and the pass adopts the side as the n =
-      29 house and regularizes the new witness.
-
-      V4 and C4 need two accepting adversarial AI reviews by distinct reviewers and the
-      owner's oversight record.
+      The pass adopts the side as the n = 29 house under the house rule and regularizes the
+      new witness (the stacked branch claude/intake-2026-10-16-n29-622-adopt); until then
+      the house selection holds it (select_houses.HELD), since on main the writer leaves a
+      house that does not beat the case's conjectured optimum to a person and PR #660's rule
+      adopts it. V4 and C4 need a second accepting adversarial AI review by a distinct
+      reviewer and the owner's oversight record.
+    reviews:
+      - path: docs/project/reviews/review-2026-10-16-pingyou-n29.md
+        kind: adversarial
+        reviewer: >-
+          AI agent (Claude, strong sub-agent tier, max reasoning), the stage 4 review lane
+          (W2) of the 2026-10-16 intake (think-2jzy), prompted separately from the import
+          and replay lane, with no shared context beyond its committed packet, register entry
+          and pull request
+        reviewer_kind: ai
+        relation: project
+        date: '2026-10-16'
+        scope: >-
+          Finite feasibility at n = 29 of PR 622's certificate: decided again from the
+          release asset by a clean-room exact checker with four controls, the replay's three
+          retained jobs decided again, the third exact route run with its six controls, the
+          derived fact held to the certificate by two readers that share no code, the margins
+          against T-155, PR 574's row and Evan Daniel's certificate recomputed, the identity
+          measured against T-009's witness, and the report order and credit read.
+        verdict: accepted
+        covers: [T-195]
 # Generated by python -m devtools.regularized_drawings from the regularized layer's
 # index (packing/atlas/known-best/regularized/index.json); do not edit by hand.
 regularized_drawings:

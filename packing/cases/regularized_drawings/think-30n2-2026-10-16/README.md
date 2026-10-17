@@ -1,8 +1,12 @@
 # Regularization Runs for n = 29 on PR #622’s Witness (think-30n2)
 
 These are the strong generators’ runs on the witness that adopting T-195, PingYou Ltd’s
-N29 certificate (PR #622), writes at n = 29. They were run before the adoption, which
-waits for T-195’s stage 4 review
+N29 certificate (PR #622), writes at n = 29. They were run before the adoption.
+T-195’s stage 4 review has since accepted it
+([review of 16 October 2026](../../../../docs/project/reviews/review-2026-10-16-pingyou-n29.md)),
+and the house selection holds it at 29 (`select_houses.HELD`) until the adoption lands
+with the house rule of #660, under which a house need not beat the case’s conjectured
+optimum
 ([result-import.md](../../../campaign/result-import.md#adopt-a-house-then-regularize-it)
 adopts a house once stage 4 has confirmed and reviewed its certificate).
 

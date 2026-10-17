@@ -15876,7 +15876,10 @@ urls:
     - packing/resources/web/pingyou-pr622-certificate-2026-10-15/facts/n-029.yaml.gz
     - packing/resources/web/pingyou-pr622-certificate-2026-10-15/receipts/exact-certification.json.xz
     - packing/devtools/upper_bound_reports.py
+    - packing/devtools/check_half_angle_area.py
+    - packing/resources/web/pingyou-pr622-certificate-2026-10-15/review/README.md
     - packing/campaign/issue-intake/upper-bounds-n29-20261016/README.md
+    - docs/project/reviews/review-2026-10-16-pingyou-n29.md
 - path: results.html
   canonical: results.html
   kind: page

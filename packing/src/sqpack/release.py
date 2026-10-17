@@ -428,7 +428,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "58de4dedcce1d64fac38769fd789c6ad5c453ead"
+DATA_REVISION = "e2b88aec9bbfcd80e6768467495305457f4ffce4"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -2889,6 +2889,34 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "paper:n11-threshold-bound-review",
             "paper:square-packing-methods-survey",
         ),
+        paths=("packing/devtools/select_houses.py", "packing/frontier/n-029.md"),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "T-195's stage 4 exit (review A's A2 and A3 of #661) makes it a house candidate "
+            "at 29, and `select_houses.HELD` holds it there until its stacked adoption "
+            "lands; `adopt_houses --refresh` writes the held note into n-029.md's body and "
+            "adds T-195's two evidence atoms to its roster. No paper renders a case "
+            "record's body or roster, or calls the selection: the survey cites case "
+            "records by link only. Source-reviewed; no render was taken, and every paper "
+            "keeps its edition. The renders are taken again against main at the re-cut."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
         paths=("packing/devtools/adopt_houses.py",),
         outputs=(
             "papers/n11-lower-bounds-explainer.html",
@@ -2902,10 +2930,11 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         ),
         reason=(
             "The prepared adoption of T-195 at 29 (think-30n2) adds T-195's entry to the "
-            "house-adoption writer's `RESULTS` and the credit at 29 to its `CREDITS`. Both "
-            "are read only for a count the house selection moves, and the selection takes "
-            "no candidate without an accepted review, which T-195 does not yet have, so no "
-            "case record, coverage row or prose the writer produces changes: "
+            "house-adoption writer's `RESULTS` and the credit at 29 to its `CREDITS`, with "
+            "the packing's own year (review A's A7 of #661). Both are read only for a count "
+            "the house selection moves, and the selection holds T-195 at 29 "
+            "(`select_houses.HELD`) until this adoption lands with PR #660's house rule, so "
+            "no case record, coverage row or prose the writer produces changes: "
             "`adopt_houses --dry-run` prints nothing. The papers reach the module through "
             "`generate_frontier_case` and `source_supersession`, which read neither table "
             "for an unmoved count. Source-reviewed; no render was taken, and every paper "

@@ -1681,10 +1681,11 @@ for n = 29, a refinement of Thomas Schadt’s packing, improved by David Ellswor
 at `31155575ce1e6b461f77bfc9f3e201adf101115b` with its release asset pinned by size and
 SHA-256, kept as a derived exact fact, no upstream byte retained;
 [packet](web/pingyou-pr622-certificate-2026-10-15/README.md).
-Both project exact routes accept it and refuse both controls.
-T-195 records it at V3/C3, 1.57e-36 below T-155, on the key reason the
-[per-count ledger](../campaign/issue-intake/upper-bounds-n29-20261016/README.md) lists
-for the owner, pending review and adoption.
+Both project exact routes accept it and refuse both controls, and the 16 October review
+accepted it for finite feasibility.
+T-195 records it at V3/C3, 1.57e-36 below T-155, by exception in the
+[per-count ledger](../campaign/issue-intake/upper-bounds-n29-20261016/README.md), on the
+owner’s standing house rule (PR #660), pending adoption.
 The author says its submissions are assisted by PingYou Ltd’s PY agentic offering.
 
 <!-- This document follows common-doc-guidelines.md.
