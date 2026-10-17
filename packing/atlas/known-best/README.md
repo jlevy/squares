@@ -296,9 +296,10 @@ recorded originals and on the reproductions that cover them.
 whose record shows it did not run that count.
 The layer’s index drops a run’s block once no entry draws from it, so
 `default_drawings --retain-runs` copied the two originals’ blocks, and the five others
-the settlements of 15 October rest on, into
-[`cases/regularized_drawings/settled-runs/`](../../cases/regularized_drawings/settled-runs/)
-(review F1 of #644). Every outcome reproduces, and every drawn view byte for byte.
+the settlements of 15 October rest on, into `cases/regularized_drawings/settled-runs/`
+(review F1 of #644; the last two copies went on 17 October 2026, when 272 was settled
+again on its new witness and no settlement named them).
+Every outcome reproduces, and every drawn view byte for byte.
 At 129, 146, 156, 176 and 271 `regularize_evand rungs --check` found his admitted view
 the drawn view’s text exactly, with the same retry rungs (none), regularizer level (2)
 and groups, contact histograms and regularization record.
