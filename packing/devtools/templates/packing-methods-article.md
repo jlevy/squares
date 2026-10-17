@@ -366,7 +366,7 @@ Schadt’s simulated annealing in December 2025 and subsequently improved analyt
 by David Ellsworth. The mixture of tilted and axis-aligned pieces illustrates an
 arrangement reached through stochastic search. This drawing is
 <a href="../../atlas/known-best/rendering/n-029.svg">PingYou Ltd’s exact rational certificate</a> of the packing, rather than the original floating-point
-search output, and that certificate, which the <a href="../../frontier/n-029.md">case record</a> holds,
+search output, and that certificate, which the <a href="../../frontier/n-029.md">case record</a> cites,
 supplies the safe side ceiling $5.9338334626769292$.</figcaption>
 </figure>
 
