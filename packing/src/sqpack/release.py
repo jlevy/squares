@@ -379,6 +379,15 @@ PUBLICATION_STATUS = ""
 #: Both retained 1-100 and 1-324 graphics, their PDFs and PNGs share this history.
 INFOGRAPHIC_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.6.2",
+        first_published="October 17, 2026",
+        result_scope=(
+            "Redraw both atlas posters and every export at the 17 October data, with the "
+            "fifteen houses adopted from T-185 to T-190 and the regularized drawings of "
+            "16 and 17 October, including 176's."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.6.1",
         first_published="October 15, 2026",
         result_scope=(
@@ -870,6 +879,17 @@ class ReleaseImpactDecision(NamedTuple):
 # New component cuts append decisions here, newest first, alongside their own histories.
 # No impact is invented retrospectively for the published baseline editions.
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
+    ReleaseImpactDecision(
+        component="infographics",
+        previous_version="v0.6.1",
+        version="v0.6.2",
+        impact="patch",
+        reason=(
+            "Redraw both atlas posters and every export at the 17 October data, with the "
+            "fifteen houses adopted from T-185 to T-190 and the regularized drawings of "
+            "16 and 17 October, including 176's."
+        ),
+    ),
     ReleaseImpactDecision(
         component="site",
         previous_version="v0.7.22",
