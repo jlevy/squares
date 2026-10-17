@@ -21984,9 +21984,10 @@ results:
       this entry being smaller by 1.7e-99 to 1.18e-02, and at the other 50 counts the cases kept
       their houses. The adoption of 16 October 2026 (PR #657) then took ten of the 60 below this
       entry, 146 to T-187 and 129, 156, 175, 176, 204, 232, 264, 271 and 303 to T-186. The
-      adoption of 17 October 2026 (think-3mry), the first under the house rule, moved the other
-      50 to this entry, whose witnesses add 2.84 MB to history as Git stores them (OR-18), and
-      regularized each in the same pull request.
+      adoption of 17 October 2026 (think-3mry), the first under the house rule, moved 38 of the
+      other 50 to this entry and regularized each in the same pull request. At the twelve left,
+      88, 102, 123, 126, 199, 258, 259, 266, 267, 292, 295 and 301, issue 639's algebraic sides
+      (T-193) are smaller, staged for the writer.
 
       At 70, 153 and 207 the algebraic certificates are the smallest sides known but rest on one
       route; the rule of 15 October left them out for the owner (RP-3), and the house rule of 16
@@ -22467,11 +22468,12 @@ results:
     next_rung: >-
       V4 and C4 need a second accepted adversarial review by a distinct reviewer and a retained
       human oversight record; one AI review, of 14 October, is retained. The house rule of 16
-      October 2026 makes it the house at its 53 smallest counts: the adoption of 17 October
-      2026 (think-3mry) moved the 50 rational ones to it, and the algebraic ones at 70, 153 and
-      207 wait under think-ot5c, staged for adoption (devtools.select_houses.PENDING_ADOPTION)
-      until the writer takes an algebraic side. It was the smallest at 63 counts until the
-      adoption of 16 October 2026 (PR #657) took ten of them below it, with T-186 and T-187.
+      October 2026 made it the house at its 53 smallest counts: the adoption of 17 October
+      2026 (think-3mry) moved 38 rational ones to it, issue 639's algebraic sides (T-193) are
+      smaller at twelve others, and the algebraic ones at 70, 153 and 207 wait under
+      think-ot5c, staged for adoption (devtools.select_houses.PENDING_ADOPTION) until the
+      writer takes an algebraic side. It was the smallest at 63 counts until the adoption of
+      16 October 2026 (PR #657) took ten of them below it, with T-186 and T-187.
     reviews:
       - path: docs/project/reviews/review-2026-10-14-upper-bound-imports-574.md
         kind: adversarial

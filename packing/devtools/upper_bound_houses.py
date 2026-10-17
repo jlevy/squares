@@ -297,6 +297,9 @@ def packet_source(result: str, name: str) -> Source:
 
 def _sources() -> dict[str, Source]:
     sources = [
+        packet_source("T-134", "couzo-exact-certificates-2026-10-09"),
+        packet_source("T-136", "squish-481-third-request-2026-10-09"),
+        packet_source("T-139", "evand-trio126-2026-10-09"),
         packet_source("T-146", "evand-regularized-2026-10-10"),
         packet_source("T-173", "mishapolk-exact-certificates-2026-10-12"),
         packet_source("T-174", "pingyou-pr574-certificates-2026-10-13"),
@@ -325,23 +328,21 @@ def _sources() -> dict[str, Source]:
 #: 129, 146, 156, 176, 204, 261, 271, 272 and 303, and the pass of 16 October 2026, for
 #: the 16 October review of issues 506 to 607, at 129, 146, 154, 156, 175, 176, 204, 211,
 #: 232, 237, 264, 271, 302, 303 and 304, and the pass of 17 October 2026, the house rule's
-#: adoption of PingYou Ltd's PR 574 (T-174), at its 50 rational counts, 68, 84, 86, 88,
-#: 102, 103, 105, 108, 110, 123, 126, 127, 130 to 132, 155, 172, 179 to 182, 199, 206,
-#: 208 to 210, 228, 236, 238 to 240, 258, 259, 261, 263, 266 to 270, 272, 273, 292, 295,
-#: 297, 301 and 305 to 308.
+#: adoption of PingYou Ltd's PR 574 (T-174), at 38 of its rational counts, 68, 84, 86, 103,
+#: 105, 108, 110, 127, 130 to 132, 155, 172, 179 to 182, 206, 208 to 210, 228, 236, 238 to
+#: 240, 261, 263, 268 to 270, 272, 273, 297 and 305 to 308.
 ADOPTED: dict[int, str] = {
     68: "T-174",
     70: "T-146",
     84: "T-174",
     86: "T-174",
-    88: "T-174",
-    102: "T-174",
+    102: "T-146",
     103: "T-174",
     105: "T-174",
     108: "T-174",
     110: "T-174",
-    123: "T-174",
-    126: "T-174",
+    123: "T-146",
+    126: "T-139",
     127: "T-174",
     129: "T-186",
     130: "T-174",
@@ -359,7 +360,6 @@ ADOPTED: dict[int, str] = {
     180: "T-174",
     181: "T-174",
     182: "T-174",
-    199: "T-174",
     204: "T-186",
     206: "T-174",
     207: "T-173",
@@ -375,23 +375,21 @@ ADOPTED: dict[int, str] = {
     239: "T-174",
     240: "T-174",
     241: "T-182",
-    258: "T-174",
-    259: "T-174",
+    258: "T-146",
+    259: "T-136",
     261: "T-174",
     263: "T-174",
     264: "T-186",
-    266: "T-174",
-    267: "T-174",
+    267: "T-134",
     268: "T-174",
     269: "T-174",
     270: "T-174",
     271: "T-186",
     272: "T-174",
     273: "T-174",
-    292: "T-174",
-    295: "T-174",
+    292: "T-146",
+    295: "T-146",
     297: "T-174",
-    301: "T-174",
     302: "T-186",
     303: "T-186",
     304: "T-186",
@@ -422,10 +420,12 @@ NUMBERS = tuple(sorted(ADOPTED))
 #: 232 and 264 from T-158, at 176 from T-165, at 302 from T-181 and at 304 from T-175;
 #: issue 606 (T-187) at 146 from T-168; Francisco Couzo's 211 (T-188) from T-182; and his
 #: 237 of 15 October (T-190) from T-183. The pass of 17 October 2026, the first under the
-#: owner's house rule, adopted PR 574 (T-174) at its 50 rational counts, from the houses
-#: of T-128, T-130, T-134, T-136, T-139, T-140, T-141, T-146, T-149, T-151, T-152, T-169,
-#: T-170 and T-171 and, at the 17 counts it first adopts (68, 88, 110, 130, 172, 179,
-#: 182, 199, 206, 208, 210, 240, 266, 268, 273, 297 and 301), from the case records' own.
+#: owner's house rule, adopted PR 574 (T-174) at 38 of its rational counts, from the
+#: houses of T-128, T-130, T-136, T-140, T-141, T-146, T-149, T-151, T-152, T-169, T-170
+#: and T-171 and, at the 13 counts it first adopts (68, 110, 130, 172, 179, 182, 206, 208,
+#: 210, 240, 268, 273 and 297), from the case records' own. Its other twelve rational
+#: counts are below it by issue 639's algebraic sides (T-193, #658), and wait for the
+#: writer.
 #: A count a pass names keeps its place in the earlier passes' sets, which their archives
 #: hold; it was adopted on the latest day that names it.
 LATER_PASSES: dict[str, frozenset[int]] = {
@@ -460,14 +460,10 @@ LATER_PASSES: dict[str, frozenset[int]] = {
             68,
             84,
             86,
-            88,
-            102,
             103,
             105,
             108,
             110,
-            123,
-            126,
             127,
             130,
             131,
@@ -478,7 +474,6 @@ LATER_PASSES: dict[str, frozenset[int]] = {
             180,
             181,
             182,
-            199,
             206,
             208,
             209,
@@ -488,21 +483,14 @@ LATER_PASSES: dict[str, frozenset[int]] = {
             238,
             239,
             240,
-            258,
-            259,
             261,
             263,
-            266,
-            267,
             268,
             269,
             270,
             272,
             273,
-            292,
-            295,
             297,
-            301,
             305,
             306,
             307,

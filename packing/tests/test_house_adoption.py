@@ -520,15 +520,22 @@ def test_every_record_names_a_smaller_held_or_algebraic_certificate(
 
 
 def test_sizes_measure_a_staged_witness_as_git_stores_it(
-    capsys: pytest.CaptureFixture[str],
+    monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
 ) -> None:
     """Review C9 of #660: OR-18's stored-size unit and its measured case rested on scratch
     code, so no adoption could measure its witnesses by command before committing them.
     `upper_bound_houses sizes` builds each staged count's witness as the module builds a
-    house and counts its blob, the object Git names, as zlib packs it."""
+    house and counts its blob, the object Git names, as zlib packs it. The adoption of 17
+    October 2026 took 68 off the list, so it is staged here again: the witness it builds is
+    the committed one, byte for byte."""
     import subprocess  # noqa: PLC0415
     import zlib  # noqa: PLC0415
 
+    monkeypatch.setitem(
+        select.PENDING_ADOPTION,
+        68,
+        select.Pending(house="T-174", bead="think-test", why=select.NEXT_PULL_REQUEST),
+    )
     data = (houses.WITNESSES / "n-068.yaml").read_bytes()
     blob = b"blob %d\x00" % len(data) + data
     named = subprocess.run(
@@ -543,7 +550,7 @@ def test_sizes_measure_a_staged_witness_as_git_stores_it(
     assert skipped == []
     assert (row.n, row.house) == (68, "T-174")
     assert 0 < row.stored < row.checkout
-    assert row.now_checkout == len(data)
+    assert row.now_checkout == len(data) == row.checkout
     assert row.now_stored == houses.stored_size(data)
     assert houses.staged_sizes([70]) == (
         [],
@@ -637,11 +644,12 @@ def test_a_moved_house_keeps_its_lifted_hold_as_history() -> None:
         assert _flat(adopt.lifted_sentence("T-174")) in text, n
         assert "until T-174’s adoption" not in text, n
         assert n not in select.PENDING_ADOPTION, n
+    # The 50 counts adopted on 17 October 2026 keep the hold's note as history, without
+    # the clause that the case keeps its house.
     text = _flat(select.case_path(68).read_text(encoding="utf-8"))
-    assert (
-        f"{adopt.lifted_sentence('T-174')} The case keeps its house until T-174’s adoption, "
-        "staged under think-3mry, moves it to T-174’s side."
-    ) in text
+    assert _flat(adopt.lifted_sentence("T-174")) in text
+    assert "until T-174’s adoption" not in text
+    assert "**House adoption, 17 October 2026.**" in text
 
 
 #: The sentence a certificate section ends with, listing what its house was chosen over.
@@ -941,7 +949,9 @@ def test_a_rational_house_staged_for_the_writer_fails_the_check(
 def test_the_staged_adoptions_name_their_beads_and_reasons() -> None:
     """Review A1 of #660: the staged adoption sat under the policy lane's own bead, with no
     reason. T-174's rational houses wait for the adoption's bead and the next pull request,
-    and its algebraic ones for the writer's bead and the writer."""
+    and its algebraic ones for the writer's bead and the writer. The adoption of 17 October
+    2026 (think-3mry) took 38 rational counts off; the twelve it leaves are T-193's once
+    #658 lands."""
     for n, pending in select.PENDING_ADOPTION.items():
         assert pending.why in select.STAGING_REASONS, n
         algebraic = n in (70, 153, 207)
@@ -951,6 +961,10 @@ def test_the_staged_adoptions_name_their_beads_and_reasons() -> None:
             else (select.ADOPTION_BEAD, select.NEXT_PULL_REQUEST)
         ), n
     assert "think-sa5r" not in {pending.bead for pending in select.PENDING_ADOPTION.values()}
+    adopted = set(houses.numbers_of("T-174"))
+    assert adopted == set(houses.LATER_PASSES["2026-10-17"])
+    assert len(adopted) == 38
+    assert not adopted & set(select.PENDING_ADOPTION)
 
 
 def test_check_judges_the_whole_register_and_refuses_since() -> None:

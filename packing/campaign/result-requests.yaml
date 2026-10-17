@@ -8157,9 +8157,10 @@ issues:
       The reply `--report` lists as due (T-174 at V3/C3 and its two evidence entries reviewed, where
       the follow-up of 14 October stated V0/C0 and recorded) waits for the owner, who decides the
       pull request and, by `close_when`, posts the resulting state; T-174's adoption is no longer
-      the owner's: the house rule of 16 October 2026 makes it the house at 53 counts, the adoption of
-      17 October 2026 (think-3mry) moved the 50 rational ones to it, and 70, 153 and 207 wait, staged
-      under think-ot5c. It goes out on the owner's instruction,
+      the owner's: the house rule of 16 October 2026 made it the house at 53 counts, the adoption of
+      17 October 2026 (think-3mry) moved 38 rational ones to it, and the algebraic 70, 153 and 207
+      wait for the writer, as do twelve where issue 639's sides (T-193) are smaller. It goes out on
+      the owner's instruction,
       from think-9v2k, and a pass that finds it due does not post it before then (PR #637's review,
       A4).
   - number: 575

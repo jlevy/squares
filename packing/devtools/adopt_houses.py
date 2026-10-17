@@ -562,6 +562,12 @@ class Credit:
     phrase: str
 
 
+def _couzo(start: str) -> Credit:
+    finder = XU if start == "Xu" else SQUISH
+    whose = "Ryan Xu’s" if start == "Xu" else "Nate Chaoweeraprasit’s SQUISH"
+    return Credit((finder,), (COUZO,), f"Francisco Couzo’s refinement of {whose} packing")
+
+
 def _regularized(finder: str, whose: str, *, via: str | None = None) -> Credit:
     improved = (via, DANIEL) if via else (DANIEL,)
     refined = f", as {via} refined it," if via else ""
@@ -598,22 +604,7 @@ CREDITS: dict[int, Credit] = {
         (COUZO, PINGYOU),
         "PingYou Ltd’s refinement of Francisco Couzo’s refinement of Ryan Xu’s packing",
     ),
-    # T-174's regularization of T-127's packing, 35 squares moved beyond 1e-3, one to one;
-    # that it is that packing is the source's statement (the 14 October review of PR 574).
-    88: Credit(
-        (SQUISH,),
-        ("Siddharth Gupta", PINGYOU),
-        "PingYou Ltd’s refinement of Siddharth Gupta’s refinement of Nate Chaoweeraprasit’s "
-        "SQUISH packing",
-    ),
-    # T-174's regularization of T-146's view, measured one to one, no square moved beyond
-    # 1e-12 (the 14 October review of PR 574).
-    102: Credit(
-        (XU,),
-        (DANIEL, PINGYOU),
-        "PingYou Ltd’s tighter certificate of Evan Daniel’s display regularization of Ryan "
-        "Xu’s packing",
-    ),
+    102: _regularized(XU, "Ryan Xu’s"),
     # T-174's regularization of T-146's view, measured one to one, no square moved beyond
     # 1e-12 (the 14 October review of PR 574).
     103: Credit(
@@ -644,20 +635,11 @@ CREDITS: dict[int, Credit] = {
         (DANIEL, PINGYOU),
         "PingYou Ltd’s refinement of Evan Daniel’s exact optimum of Francisco Couzo’s packing",
     ),
-    # T-174's regularization of T-146's view, measured one to one, no square moved beyond
-    # 1e-12 (the 14 October review of PR 574).
-    123: Credit(
-        (XU,),
-        (DANIEL, PINGYOU),
-        "PingYou Ltd’s tighter certificate of Evan Daniel’s display regularization of Ryan "
-        "Xu’s packing",
-    ),
-    # T-174's regularization of T-139's packing, 59 squares moved beyond 1e-3, one to one;
-    # that it is that packing is the source's statement (the 14 October review of PR 574).
+    123: _regularized(XU, "Ryan Xu’s"),
     126: Credit(
         (XU,),
-        (DANIEL, PINGYOU),
-        "PingYou Ltd’s refinement of Evan Daniel’s reconstruction of Ryan Xu’s arrangement",
+        (DANIEL,),
+        "Evan Daniel’s reconstruction and exact certificate of Ryan Xu’s arrangement",
     ),
     # T-174's regularization of T-128's packing, 53 squares moved beyond 1e-3, one to one;
     # that it is that packing is the source's statement (the 14 October review of PR 574).
@@ -787,15 +769,6 @@ CREDITS: dict[int, Credit] = {
         (DANIEL, PINGYOU),
         "PingYou Ltd’s refinement of Evan Daniel’s exact optimum of Francisco Couzo’s packing",
     ),
-    # T-174's regularization of the source names T-127's packing; no registered packing
-    # pairs with it one to one, and #593 states its poses later (RP-1) (the 14 October
-    # review of PR 574).
-    199: Credit(
-        (SQUISH,),
-        ("Siddharth Gupta", PINGYOU),
-        "PingYou Ltd’s certificate that its source states refines Siddharth Gupta’s "
-        "refinement of Nate Chaoweeraprasit’s SQUISH packing",
-    ),
     # PR 574's re-solve of issue 562's packing, re-solved again (T-186's regularization of
     # T-174), two squares moved beyond 1e-3.
     204: Credit(
@@ -911,21 +884,8 @@ CREDITS: dict[int, Credit] = {
         (COUZO,),
         "Francisco Couzo’s continuation of Daniil Ostashev’s n = 241 packing",
     ),
-    # T-174's regularization of T-146's view, measured one to one, no square moved beyond
-    # 1e-12 (the 14 October review of PR 574).
-    258: Credit(
-        (SQUISH,),
-        (POLKOVSKYI, DANIEL, PINGYOU),
-        "PingYou Ltd’s tighter certificate of Evan Daniel’s display regularization of Nate "
-        "Chaoweeraprasit’s SQUISH packing as Mykhailo Polkovskyi refined it",
-    ),
-    # T-174's regularization of T-136's packing, measured one to one, no square moved
-    # beyond 1e-12 (the 14 October review of PR 574).
-    259: Credit(
-        (SQUISH,),
-        (PINGYOU,),
-        "PingYou Ltd’s tighter certificate of Nate Chaoweeraprasit’s SQUISH packing",
-    ),
+    258: _regularized(SQUISH, "Nate Chaoweeraprasit’s SQUISH", via="Mishapolk"),
+    259: Credit((SQUISH,), (), "Nate Chaoweeraprasit’s SQUISH packing"),
     # T-174's regularization of T-169's re-solve, measured one to one, no square moved
     # beyond 1e-12 (the 14 October review of PR 574).
     261: Credit(
@@ -950,21 +910,7 @@ CREDITS: dict[int, Credit] = {
         "Ostashev’s composition of his 38-square rectangle with a 93-square piece of Evan "
         "Daniel’s exact optimum of Joost de Winter’s n = 126 packing",
     ),
-    # T-174's regularization of T-119's packing, 27 squares moved beyond 1e-3, one to one;
-    # that it is that packing is the source's statement (the 14 October review of PR 574).
-    266: Credit(
-        (DANIEL,),
-        (PINGYOU,),
-        "PingYou Ltd’s refinement of Evan Daniel’s n = 266 arrangement",
-    ),
-    # T-174's regularization of T-134's packing, measured one to one, no square moved
-    # beyond 1e-12 (the 14 October review of PR 574).
-    267: Credit(
-        (XU,),
-        (COUZO, PINGYOU),
-        "PingYou Ltd’s tighter certificate of Francisco Couzo’s refinement of Ryan Xu’s "
-        "packing",
-    ),
+    267: _couzo("Xu"),
     # T-174's regularization of T-098's packing, 117 squares moved beyond 1e-3, one to
     # one; that it is that packing is the source's statement (the 14 October review of PR
     # 574).
@@ -1012,34 +958,12 @@ CREDITS: dict[int, Credit] = {
         (DANIEL, PINGYOU),
         "PingYou Ltd’s refinement of Evan Daniel’s exact optimum of Francisco Couzo’s packing",
     ),
-    # T-174's regularization of the source names T-146's view; no registered packing pairs
-    # with it one to one (RP-1) (the 14 October review of PR 574).
-    292: Credit(
-        (SQUISH,),
-        (DANIEL, PINGYOU),
-        "PingYou Ltd’s certificate that its source states tightens Evan Daniel’s display "
-        "regularization of Nate Chaoweeraprasit’s SQUISH packing",
-    ),
-    # T-174's regularization of T-146's view, measured one to one, no square moved beyond
-    # 1e-12 (the 14 October review of PR 574).
-    295: Credit(
-        (XU,),
-        (DANIEL, PINGYOU),
-        "PingYou Ltd’s tighter certificate of Evan Daniel’s display regularization of Ryan "
-        "Xu’s packing",
-    ),
+    292: _regularized(SQUISH, "Nate Chaoweeraprasit’s SQUISH"),
+    295: _regularized(XU, "Ryan Xu’s"),
     # T-174's regularization of T-098's packing, 119 squares moved beyond 1e-3, one to
     # one; that it is that packing is the source's statement (the 14 October review of PR
     # 574).
     297: Credit(
-        (COUZO,),
-        (DANIEL, PINGYOU),
-        "PingYou Ltd’s refinement of Evan Daniel’s exact optimum of Francisco Couzo’s packing",
-    ),
-    # T-174's regularization of T-098's packing, 189 squares moved beyond 1e-3, one to
-    # one; that it is that packing is the source's statement (the 14 October review of PR
-    # 574).
-    301: Credit(
         (COUZO,),
         (DANIEL, PINGYOU),
         "PingYou Ltd’s refinement of Evan Daniel’s exact optimum of Francisco Couzo’s packing",
