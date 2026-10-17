@@ -106,11 +106,10 @@ RULE_SET_ON = "2026-10-16"
 #: state is archived under that day, so the first pass that adopts under the house rule
 #: is dated no earlier than this. It switches the replay of the records as written only.
 RULE_PASSES_FROM = "2026-10-17"
-#: The beads that own the adoptions the house rule stages here, each labelled
-#: `regularization` and `validation` with stage 4's block and a row in the pass's backlog
-#: (review A1 of #660): T-174's rational houses, and the algebraic ones, which wait for
-#: the writer to take an algebraic side.
-ADOPTION_BEAD = "think-3mry"
+#: The bead that owns the adoptions the house rule stages here, labelled `regularization`
+#: and `validation` with stage 4's block and a row in the pass's backlog (review A1 of
+#: #660): T-174's algebraic houses, which wait for the writer to take an algebraic side.
+#: Its 50 rational houses, staged under think-3mry, were adopted on 17 October 2026.
 WRITER_BEAD = "think-ot5c"
 #: Why a count's adoption waits for a later pull request, from a closed set: nothing
 #: else stages one (packing/campaign/result-import.md, "The House Rule"). The pass
@@ -187,26 +186,15 @@ class Pending:
 #: request, and its algebraic ones at 70, 153 and 207, which RP-3 kept out, for the
 #: writer. There were 60 rational counts on 16 October 2026; the same day's adoption of
 #: T-186 to T-190 (#657) took ten of them below T-174 (129, 146, 156, 175, 176, 204, 232,
-#: 264, 271 and 303), which left 50. A pull request that validates a smaller packing
+#: 264, 271 and 303), and the adoption of 17 October 2026 (think-3mry) took the other 50
+#: off, which leaves the writer's three. A pull request that validates a smaller packing
 #: adopts it or stages its counts here with the bead that adopts them and why
 #: (`STAGING_REASONS`); an adoption waits with its regularization runs, never apart from
 #: them (`default_drawings.deferral_problems`). The pull request that adopts a count takes
 #: it off.
 PENDING_ADOPTION: dict[int, Pending] = {
-    **{
-        n: Pending(house="T-174", bead=ADOPTION_BEAD, why=NEXT_PULL_REQUEST)
-        for n in (
-            68, 84, 86, 88, 102, 103, 105, 108, 110, 123, 126, 127, 130, 131, 132, 155,
-            172, 179, 180, 181, 182, 199, 206, 208, 209, 210, 228, 236, 238, 239, 240,
-            258, 259, 261, 263, 266, 267, 268, 269, 270, 272, 273, 292, 295, 297, 301,
-            305, 306, 307, 308,
-        )
-    },
-    **{
-        n: Pending(house="T-174", bead=WRITER_BEAD, why=NO_WRITER)
-        for n in (70, 153, 207)
-    },
-}  # fmt: skip
+    n: Pending(house="T-174", bead=WRITER_BEAD, why=NO_WRITER) for n in (70, 153, 207)
+}
 
 
 class SelectionError(ValueError):
