@@ -1,0 +1,54 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-10-17T17:47Z",
+  "git_scope": "Sparse blobless checkout of the named files at 757b40b, the commit issue #664 names, which adds the eight n = 271 files under search/packer/candidates/ and changes search/packer/harden_explore.py. All eight candidate files are retained: the certificate the claim rests on (s271_ex1.cert), its 80-digit KKT point, the binary64 input it was solved from, the solver's report, the record the source compared against (s271_ex1_prior.json), the regularized display view of the same packing with its report, and the source's comparison with that record; with the licence, credits, the certificate-format README and the source's two exact checkers, verify_cert.py and verify_cert2.py, which the stage 4 replay runs from this copy. The packer log is pinned by digest only. At retrieval the branch head was 59326b8; its one commit after the pin adds an s(155) certificate and changes no file retained here. The rest of the tree is pinned by the commit and was not retained or executed.",
+  "sources": [
+    {
+      "id": "evand-n271-2026-10-17",
+      "source_url": "https://github.com/evand/square-packing",
+      "source_ref": "main",
+      "source_commit": "757b40bc6c5f681033ff1572177d408afbf26dfe",
+      "committed_utc": "2026-10-17T04:29:03Z",
+      "git_tree": "205fdb1d8838747d2f2fc455436e7f6461e70139",
+      "archived_path": "packing/resources/web/evand-n271-2026-10-17/source",
+      "subtree_manifest": "packing/resources/web/evand-n271-2026-10-17/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "LICENSE",
+        "CREDITS.md",
+        "search/exact/README.md",
+        "search/exact/verify_cert.py",
+        "search/exact/verify_cert2.py",
+        "search/packer/PACKER.md",
+        "search/packer/candidates/s271_ex1.cert",
+        "search/packer/candidates/s271_ex1.exact.txt",
+        "search/packer/candidates/s271_ex1.input.txt",
+        "search/packer/candidates/s271_ex1.json",
+        "search/packer/candidates/s271_ex1_prior.json",
+        "search/packer/candidates/s271_ex1_regularized.cert",
+        "search/packer/candidates/s271_ex1_regularized.json",
+        "search/packer/candidates/s271_ex1_vs_prior.json"
+      ],
+      "subtree_file_count": 14,
+      "subtree_total_bytes": 636577,
+      "retained_file_count": 13,
+      "retained_total_bytes": 248296,
+      "compressed": [],
+      "pinned_only": [
+        {
+          "path": "search/packer/PACKER.md",
+          "bytes": 388281,
+          "sha256": "0146c27fea347561af1c3c12e27adae4459e87fcce982fb5a1d644e271489514",
+          "reason": "The packer's working log (388 KB), pinned for provenance; the issue's account of the run is the claim."
+        }
+      ],
+      "license": "MIT, copyright 2026 Evan Daniel (LICENSE); attribution retained in CREDITS.md. The pinned commit names Claude Opus 5.5 as co-author with a Claude-Session trailer, and says it was approved by Evan Daniel; issue #664 speaks for the author and Claude together.",
+      "claims": [
+        "Issue #664 reports s(271) <= 16.948947733714, the exact rational side of search/packer/candidates/s271_ex1.cert rounded up at 12 places, 4.46e-5 below 16.948992356451 (Francisco Couzo #561, refining Nate Chaoweeraprasit's SQUISH packing #500; also #586, #593); it prints the certificate side 16.948947733713657510723401112423 with the SHA-256 of s271_ex1.cert and of s271_ex1_regularized.cert, the same packing regularized for display at the same side with 21 angle groups.",
+        "Both of the source's exact rational checkers, search/exact/verify_cert.py (separating axes) and verify_cert2.py (polygon intersection), standard library only, accept both files; the issue says they share an author and the certificate format.",
+        "The issue calls it a refinement of the #561 packing, not a new construction, and a different local minimum, by numerical evidence at 80 digits, not interval proofs: its load-bearing tilt angles match #561's group for group within 0.12 degrees, except that #561's four squares near 31.7 to 32.0 degrees are three here (67 load-bearing tilted squares against 68); KKT, strict modulo 54 exact flat motions against #561's 56, no corner-corner MILP descent, 116 + 1488 contact equations, 259 corner-corner contacts, 4 rattlers and 69 tilted squares; matched by optimal assignment over the eight box symmetries, 59 load-bearing squares move by more than 1e-4 and 2 by more than 1e-2 (at most 0.391).",
+        "The issue says the packing came from the author's basin explorer (search/packer/explore.py, fixed-side perturbation moves and re-polish) started from the register's witness at 271 as one of 52 counts in a test run: one move swapped the tilt angles of two neighbouring squares 90 seconds in, and exactsolve.py certified the point; it asks that Francisco Couzo's #561 packing and Nate Chaoweeraprasit's SQUISH packing it refines be credited.",
+        "No closed form, no interval proof of local optimality and no optimality claim."
+      ]
+    }
+  ]
+}

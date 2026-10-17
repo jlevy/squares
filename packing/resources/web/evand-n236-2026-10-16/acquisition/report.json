@@ -1,0 +1,48 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "https://github.com/jlevy/squares/issues/659",
+  "author": "Evan Daniel",
+  "source_key": "[Daniel n236 2026-10-16]",
+  "report_evidence": "E-evand-659-n236-report",
+  "receipt_format": "evand-659-exact-replay-v1",
+  "witness_prefix": "W-evand-659-n",
+  "claim_limitations": "Complete 5ad0069 rational centre/half-angle certificate converted exactly from the retained source. Finite construction feasibility only; no KKT, local minimum, rigidity, novelty, priority or global optimality claim.",
+  "read_on": "2026-10-17",
+  "read_at_main": "804eff369193b698d497a9c06847059eb9de0470",
+  "certificates": [
+    {"n": 236, "path": "search/packer/candidates/s236_bm3c.cert", "format": "evand-cert", "offered": "15.861934390608", "first_committed": "2026-10-16T14:03:49Z", "same_packing": []}
+  ],
+  "requested": [236],
+  "replayed": [236],
+  "houses": [
+    {"n": 236, "reader": "[Daniel regularized lists 2026-10-10]", "source_key": "[Daniel regularized lists 2026-10-10]", "holders": "Nate Chaoweeraprasit (itsnaka), improved by Evan Daniel", "result": "T-146", "reported_value": "15.8639557471592675", "verified_value": "15.8639557471592675", "evidence": ["E-evand-regularized-exact-feasibility"]}
+  ],
+  "pending": [
+    {"n": 236, "report": "T-174 (PR #574)", "url": "https://github.com/jlevy/squares/pull/574", "holders": "PingYou Ltd (BuddenPing), numerical v2", "result": "T-174", "reader": "[PingYou PR 574 certificates 2026-10-13]"},
+    {"n": 236, "report": "T-136 (#481)", "url": "https://github.com/itsnaka/squish-certs/tree/d45669b48cc97ad3aa17a6c847a8d06630f66eac", "holders": "Chaoweeraprasit after Couzo, Xu, Goebel, Schadt, Ellsworth, Hajba, Levy", "result": "T-136", "reader": "[SQUISH third request 2026-10-09]"},
+    {"n": 236, "report": "T-127 (#438)", "url": "https://github.com/SidG2k1/square-packing-refinements/tree/9643cb5a78c1d4dcfc867c80a6920c3a6219d05a", "holders": "Gupta after Chaoweeraprasit, Daniel", "result": "T-127", "reader": "[Gupta rational refinements 2026-10-08]"},
+    {"n": 236, "report": "T-125 (#432)", "url": "https://github.com/ry-xu/square_packing/blob/8dc415296f697f5140caea27c7a0193d52deb4e6/square_packing_records.json", "holders": "Ryan Xu", "result": "T-125", "reader": "[ry-xu square packing 2026]"},
+    {"n": 236, "report": "T-116 (#422)", "url": "https://github.com/itsnaka/squish-certs/tree/e63e4e52b1728b6671b2f263c5e02a4aa79a39d3/squish-submission-2026-10-07b", "holders": "Chaoweeraprasit after Ellsworth, Couzo and SQUISH", "result": "T-116", "reader": "[SQUISH second update 2026-10-07]"},
+    {"n": 236, "report": "T-098 (#375)", "url": "https://github.com/evand/square-packing/tree/13ee36e5807727d12a5da36b9b90a96bdba272bf/s12/search/exact", "holders": "Daniel after Couzo, de Winter, Ellsworth, Levy", "result": "T-098", "reader": "[evand exact optima 2026-10-05]"},
+    {"n": 236, "report": "T-056", "url": "https://github.com/franciscouzo/square-packing", "holders": "Francisco Couzo", "result": "T-056", "printed": "15.872219025616041", "rounding": "up"},
+    {"n": 236, "report": "#470", "url": "https://github.com/jlevy/squares/issues/470", "holders": "Mykhailo Polkovskyi (Mishapolk)", "reader": "[Mishapolk decimal poses 2026-10-09]"},
+    {"n": 236, "report": "#573", "url": "https://github.com/jlevy/squares/issues/573", "holders": "Mykhailo Polkovskyi (Mishapolk)", "reader": "[Mishapolk exact certificates 2026-10-12]"},
+    {"n": 236, "report": "#593", "url": "https://github.com/jlevy/squares/issues/593", "holders": "Mykhailo Polkovskyi (Mishapolk)", "reader": "[Mishapolk records 2026-10-14]"}
+  ],
+  "register": {
+    "title": "Evan Daniel's n236 certificate at 5ad0069, issue659",
+    "headline": "A smaller packing of 236 squares from Evan Daniel's basin explorer, from a rebuild of Chaoweeraprasit's composition",
+    "significance": 2,
+    "source_checks": "The author reports that his two exact rational checkers, verify_cert.py (separating axes) and verify_cert2.py (polygon intersection), accept the certificate and its regularized display view. The side is the 80-digit KKT point of s236_bm3c.exact.txt made rigorous by the source's exactsolve.py; the source reports a local minimum strict modulo 92 exact flat motions, no corner-corner MILP descent, 114 corner-corner contacts and 18 rattlers, and measures it against #481's packing as a different local minimum with no tilt angle shared and 20 load-bearing squares moved by more than 1e-2. Those are numerical evidence, as the source says, not proofs.",
+    "credit": "Credit Evan Daniel (https://github.com/evand/square-packing), whose basin explorer found the packing, and credit Nate Chaoweeraprasit's (itsnaka, SQUISH) Mondrian composition of issue 481 (T-136) for the construction, as the author asks: a replication test rebuilt #481's composition at 236 from the two pieces #481 names, Kingbird's s(152)_r2 corner piece and Chaoweeraprasit's s(88) of issue 422, and fixed-side perturbation and re-polish descended below #481's side. The issue and the pinned commit state that the work was done with Claude (Claude Code) and approved by Evan Daniel.",
+    "next_rung": "Independently review the retained replay, then adopt at 236: the certificate is below the case's ceiling (T-146) and below PR 574's T-174, staged for adoption there, by 2.02e-3, and below every report at 236. Final exact-head CI remains required.",
+    "bead": "think-6wtz",
+    "bibliography": {
+      "authors": ["Daniel"],
+      "lineage": "builds-on-project",
+      "credit": "Daniel after Chaoweeraprasit",
+      "short_credit": "Daniel after Chaoweeraprasit",
+      "note": "One complete exact certificate at 5ad00693899ef50ccf6502f0346187cc422cc914, s(236) <= 7930967195303679308621899285697/(5*10^29), from the author's basin explorer started from his rebuild of Nate Chaoweeraprasit's #481 Mondrian composition (Kingbird's s(152)_r2 corner piece and Chaoweeraprasit's #422 s(88)); the author credits the construction to #481 and calls the packing a different local minimum from it. A regularized display view of the same packing at the same side, and the source's comparison with #481's packing, are retained beside it, with the source's two exact checkers. MIT-licensed certificates and solver reports retained; Claude assistance disclosed. KKT and jamming statements are the author's numerical evidence; no local or global optimality claim."
+    }
+  }
+}
