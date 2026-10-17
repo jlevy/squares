@@ -26,7 +26,7 @@ second implementation agrees.
 ## The Short Version
 
 - **162** programs: **50** external and **112** first-party; **112** decide claims and **50** check premises.
-- **514** of **614** evidence entries name the programs that verified them: 255 reproduced with the producer’s code, 230 independently re-implemented, 18 re-implemented, sharing the producer’s components, 11 no relation: a proof, a derivation or a report.
+- **532** of **632** evidence entries name the programs that verified them: 273 reproduced with the producer’s code, 230 independently re-implemented, 18 re-implemented, sharing the producer’s components, 11 no relation: a proof, a derivation or a report.
 
 ## Programs
 
@@ -37,7 +37,7 @@ second implementation agrees.
 | [`V-tokoharu-verify-cpp`](#v-tokoharu-verify-cpp) | verify.cpp | Tokoharu | external | decides | 13 | 7 |
 | [`V-wand125-mixed-rotated-verify-cpp`](#v-wand125-mixed-rotated-verify-cpp) | mixed_rotated_verify.cpp | wand125 | external | decides | 89 | 14 |
 | [`V-wand125-verify-mixed-full-proof-py`](#v-wand125-verify-mixed-full-proof-py) | verify_mixed_full_proof.py | wand125 | external | decides | 66 | 11 |
-| [`V-wand125-sqverify-proof-net`](#v-wand125-sqverify-proof-net) | sqverify-proof-net | wand125, adapting this repository's sqverify_fast | external | decides | 15 | 15 |
+| [`V-wand125-sqverify-proof-net`](#v-wand125-sqverify-proof-net) | sqverify-proof-net | wand125, adapting this repository's sqverify_fast | external | decides | 33 | 33 |
 | [`V-wand125-unified-linear-verify-cpp`](#v-wand125-unified-linear-verify-cpp) | unified_linear_verify.cpp | wand125 | external | decides | 8 | 5 |
 | [`V-wand125-verify-portable-py`](#v-wand125-verify-portable-py) | verify_portable.py | wand125 | external | decides | 2 | 1 |
 | [`V-wand125-check-with-sqpack`](#v-wand125-check-with-sqpack) | check_with_sqpack.py | wand125 | external | decides | 5 | 1 |
@@ -454,6 +454,24 @@ The source's copy of this repository's sqverify_fast with one change, reading a 
 | `E-wand125-fine-net-n39-66625-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-176 |
 | `E-wand125-fine-net-n44-69975-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-177 |
 | `E-wand125-fine-net-n37-64975-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-178 |
+| `E-wand125-fine-net-n38-65775-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-195 |
+| `E-wand125-fine-net-n40-6735-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-196 |
+| `E-wand125-fine-net-n41-68025-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-197 |
+| `E-wand125-fine-net-n43-69425-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-198 |
+| `E-wand125-fine-net-n51-75275-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-199 |
+| `E-wand125-fine-net-n68-853-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-200 |
+| `E-wand125-fine-net-n84-94225-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-201 |
+| `E-wand125-fine-net-n85-9475-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-202 |
+| `E-wand125-fine-net-n86-95275-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-203 |
+| `E-wand125-fine-net-n88-96325-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-204 |
+| `E-wand125-fine-net-n89-9685-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-205 |
+| `E-wand125-fine-net-n91-97875-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-206 |
+| `E-wand125-fine-net-n90-978-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-207 |
+| `E-wand125-fine-net-n92-986-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-208 |
+| `E-wand125-fine-net-n106-10503-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-209 |
+| `E-wand125-fine-net-n107-1058-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-210 |
+| `E-wand125-fine-net-n108-1062-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-211 |
+| `E-wand125-fine-net-n110-1073-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-212 |
 
 ### `V-wand125-unified-linear-verify-cpp`
 

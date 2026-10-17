@@ -3450,8 +3450,11 @@ issues:
     summary: All seven fine-net lower-bound statements are recorded as attributed reports with complete
       original-source custody and accepted conditional maintained input-premise review. Fresh complete
       native capture and whole-net controls remain pending; standing bounds and ratings do not change.
-      On 10 October the author reports a stronger n29 certificate, which awaits its own import.
-    read_through: '2026-10-10T02:47:54Z'
+      On 10 October the author reports a stronger n29 certificate, which awaits its own import. On 16
+      October the author reports 21 more fine-net certificates, three of which (n = 37, 39 and 44) the
+      record already holds from the source's repository as T-178, T-176 and T-177; the 18 new ones, at n
+      = 38 to 110, are each above both lower lanes at their count, and think-f40c imports them.
+    read_through: '2026-10-16T09:00:31Z'
     results:
     - key: fine-net-n19
       claim: Author reports lower bound 1931/400 for n=19 using all 2073 declared net directions.
@@ -3506,6 +3509,65 @@ issues:
       - T-132
       evidence:
       - E-wand125-fine-net-n29-582-followup-report
+    - key: fine-net-n37-n39-n44-1016
+      claim: >-
+        s(37) >= 2599/400, s(39) >= 533/80 and s(44) >= 2799/400 by the fine-net certificates
+        mixed_n37_L64975, mixed_n39_L66625 and mixed_n44_L69975 over all 2,073 declared net
+        directions, published on 13 October and reported here for the first time.
+      source: https://github.com/jlevy/squares/issues/446#issuecomment-6210736972
+      register:
+      - T-176
+      - T-177
+      - T-178
+    - key: fine-net-18-1016
+      claim: >-
+        s(38) >= 2631/400, s(40) >= 1347/200, s(41) >= 2721/400, s(43) >= 2777/400 and s(51) >=
+        3011/400 over all 2,073 declared net directions, and s(68) >= 853/100, s(84) >= 3769/400,
+        s(85) >= 379/40, s(86) >= 3811/400, s(88) >= 3853/400, s(89) >= 1937/200, s(90) >= 489/50,
+        s(91) >= 783/80, s(92) >= 493/50, s(106) >= 10503/1000, s(107) >= 529/50, s(108) >= 531/50
+        and s(110) >= 1073/100 over all 201, the last six lifted from smaller certificates, each
+        published in wand125/square-packing on 16 October (02c5595 to 718887c) with its data in the
+        release square-lower-bounds-v1. The author ran sqverify-fast at every direction and refused
+        the 197/200 mass control in 32 sampled directions.
+      source: https://github.com/jlevy/squares/issues/446#issuecomment-6210736972
+      register:
+      - T-195
+      - T-196
+      - T-197
+      - T-198
+      - T-199
+      - T-200
+      - T-201
+      - T-202
+      - T-203
+      - T-204
+      - T-205
+      - T-206
+      - T-207
+      - T-208
+      - T-209
+      - T-210
+      - T-211
+      - T-212
+      evidence:
+      - E-wand125-fine-net-n38-65775-report
+      - E-wand125-fine-net-n40-6735-report
+      - E-wand125-fine-net-n41-68025-report
+      - E-wand125-fine-net-n43-69425-report
+      - E-wand125-fine-net-n51-75275-report
+      - E-wand125-fine-net-n68-853-report
+      - E-wand125-fine-net-n84-94225-report
+      - E-wand125-fine-net-n85-9475-report
+      - E-wand125-fine-net-n86-95275-report
+      - E-wand125-fine-net-n88-96325-report
+      - E-wand125-fine-net-n89-9685-report
+      - E-wand125-fine-net-n91-97875-report
+      - E-wand125-fine-net-n90-978-report
+      - E-wand125-fine-net-n92-986-report
+      - E-wand125-fine-net-n106-10503-report
+      - E-wand125-fine-net-n107-1058-report
+      - E-wand125-fine-net-n108-1062-report
+      - E-wand125-fine-net-n110-1073-report
     asks:
     - what: Replay and review the n29 candidate at 291/50 over all 2073 directions with whole-net
         controls and restored positives, from a candidate retained where the census reads it.
@@ -3531,6 +3593,7 @@ issues:
     beads:
     - think-ndvg
     - think-r333
+    - think-f40c
     answer_bead: think-ndvg
     replies:
     - url: https://github.com/jlevy/squares/issues/446#issuecomment-6116243055
