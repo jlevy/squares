@@ -11,7 +11,7 @@ import re
 from decimal import Decimal
 from fractions import Fraction
 from pathlib import Path
-from typing import Any
+from typing import Any, cast
 
 import pytest
 import yaml
@@ -21,6 +21,7 @@ from devtools import apply_closed_form as closed_form
 from devtools import default_drawings as defaults
 from devtools import select_houses as select
 from devtools import upper_bound_houses as houses
+from sqpack.field import FieldPreconditionError
 from sqpack.yamlio import safe_load
 
 
@@ -518,6 +519,122 @@ def test_every_record_names_a_smaller_held_or_algebraic_certificate(
     assert "algebraic certificate at this count" not in select.case_path(302).read_text()
 
 
+def test_sizes_measure_a_staged_witness_as_git_stores_it() -> None:
+    """Review C9 of #660: OR-18's stored-size unit and its measured case rested on scratch
+    code, so no adoption could measure its witnesses by command before committing them.
+    `upper_bound_houses sizes` builds each staged count's witness as the module builds a
+    house and counts its blob, the object Git names, as zlib packs it."""
+    import subprocess  # noqa: PLC0415
+    import zlib  # noqa: PLC0415
+
+    data = (houses.WITNESSES / "n-068.yaml").read_bytes()
+    blob = b"blob %d\x00" % len(data) + data
+    named = subprocess.run(
+        ["git", "hash-object", "--stdin"],
+        input=data,
+        capture_output=True,
+        check=True,
+    ).stdout.decode()
+    assert hashlib.sha1(blob).hexdigest() == named.strip()
+    assert houses.stored_size(data) == len(zlib.compress(blob))
+    (row,), skipped = houses.staged_sizes([68])
+    assert skipped == []
+    assert (row.n, row.house) == (68, "T-174")
+    assert 0 < row.stored < row.checkout
+    assert row.now_checkout == len(data)
+    assert row.now_stored == houses.stored_size(data)
+    assert houses.staged_sizes([70]) == (
+        [],
+        ["n=70: T-174's side is algebraic; no writer takes it yet"],
+    )
+    with pytest.raises(houses.HouseError, match="only counts staged"):
+        houses.staged_sizes([5])
+
+
+#: Words the records wrote while an adoption waited for the owner, and the 15 October
+#: hold's size, which counted a checkout's bytes as Git's (reviews A2, C4 and C7 of #660).
+OWNER_WAITS = (
+    "until the owner decides, and moves",
+    "if the owner adopts",
+    "the owner decides their adoption",
+    "adoption is the owner's decision",
+    "adoption is the owner's (rp-3)",
+    "18.5 mb to git",
+)
+
+
+def test_no_record_leaves_an_adoption_to_the_owner() -> None:
+    """Review C4 of #660: the register's evidence still said the owner decides T-174's
+    algebraic adoption after every case record had stopped saying it, since the A2 tests
+    read case records only. Every record that can carry such words is read here, the case
+    records, the register, its evidence, the coverage and requests records and the
+    citation deferrals; and none counts the hold's 18.5 MB "to Git" (C7)."""
+    paths = [
+        *sorted(select.FRONTIER.glob("n-*.md")),
+        select.RESULTS,
+        select.EVIDENCE,
+        select.FRONTIER / "source-coverage.yaml",
+        select.ROOT / "campaign/result-requests.yaml",
+        select.ROOT / "devtools/certificate-citation-deferrals.yaml",
+    ]
+    for path in paths:
+        words = _flat(path.read_text(encoding="utf-8")).replace("\u2019", "'").lower()
+        for phrase in OWNER_WAITS:
+            assert phrase not in words, (path.name, phrase)
+
+
+def test_a_moved_house_keeps_its_lifted_hold_as_history() -> None:
+    """Review C7 of #660, and the merge of #657, which moved ten counts below T-174 on the
+    day the house rule lifted the hold: a section whose house a later pass moved keeps
+    when the hold held and why, and drops the clause that the case keeps the house, as
+    each writer wrote it. The held sentence of a staged count puts the dates first."""
+    lead = (
+        "T-174 at $1$, `1e-19` below this house, is confirmed here and accepted by the "
+        "[review of 14 October 2026](../../r.md)"
+    )
+    history = f"{lead}. {adopt.lifted_sentence('T-174')}"
+    assert adopt.lifted_sentence("T-174") == (
+        "From 15 October 2026 until the owner’s house rule of 16 October 2026 lifted the "
+        "hold, PR #574’s houses were held for the owner, since their witnesses would add "
+        "about 18.5 MB to a checkout and their custody inputs about 5.8 MB to every "
+        "worker’s snapshot."
+    )
+    written = (
+        (
+            f"{lead}, but PR #574’s houses are held for the owner: their witnesses would add "
+            "about 18.5 MB to Git (OR-18) and their custody inputs about 5.8 MB to every "
+            "worker’s snapshot; the case keeps this house until the owner decides, and moves "
+            "to T-174’s side if the owner adopts them."
+        ),
+        (
+            f"{lead}. PR #574’s houses were held for the owner, since their witnesses would "
+            "add about 18.5 MB to Git (OR-18) and their custody inputs about 5.8 MB to every "
+            "worker’s snapshot, from 15 October 2026 until the owner’s house rule of 16 "
+            "October 2026 lifted the hold: the case keeps this house until T-174’s adoption, "
+            "staged under think-3mry, moves it to T-174’s side."
+        ),
+        (
+            f"{history} The case keeps this house until T-174’s adoption, staged under "
+            "think-3mry, moves it to T-174’s side."
+        ),
+    )
+    for text in written:
+        # The records are wrapped, so a sentence may break at any space.
+        wrapped = text.replace(" until ", "\nuntil ").replace(" the hold", "\nthe hold")
+        assert _flat(adopt.held_history(wrapped)) == history, text[:60]
+    # The ten counts #657 moved below T-174 keep it so, and a staged count waits.
+    for n in (129, 146, 156, 175, 176, 204, 232, 264, 271, 303):
+        text = _flat(select.case_path(n).read_text(encoding="utf-8"))
+        assert _flat(adopt.lifted_sentence("T-174")) in text, n
+        assert "until T-174’s adoption" not in text, n
+        assert n not in select.PENDING_ADOPTION, n
+    text = _flat(select.case_path(68).read_text(encoding="utf-8"))
+    assert (
+        f"{adopt.lifted_sentence('T-174')} The case keeps its house until T-174’s adoption, "
+        "staged under think-3mry, moves it to T-174’s side."
+    ) in text
+
+
 #: The sentence a certificate section ends with, listing what its house was chosen over.
 NOT_SELECTED = re.compile(
     r"The\s+other\s+certificates\s+confirmed\s+here\s+at\s+this\s+count,\s+(.*?),\s+stay"
@@ -581,13 +698,73 @@ def test_a_held_note_is_written_kept_and_dropped_by_the_held_results() -> None:
     assert adopt.held_note(adopted, text) == text
 
 
+def _register_check() -> tuple[list[str], dict[str, list[int]], dict[str, list[int]]]:
+    """What `--check` fails on beside the selection, on the real register: the sides no
+    reader holds, the unread entries below their cases, and the unread prints that only
+    overlap their ceilings."""
+    unread: list[str] = []
+    unheld: list[str] = []
+    select.candidates(
+        select.load_results(), select.load_evidence(), unread=unread, unheld=unheld
+    )
+    return unheld, select.unread_pending(unread), select.unread_unordered(unread)
+
+
 def test_no_unread_eligible_entry_is_pending_adoption() -> None:
     """An eligible entry with no exact reader is never a candidate, so `--check` reads its
     standing instead: one that states a side below its case would be an adoption the
-    selector cannot see."""
-    unread: list[str] = []
-    select.candidates(select.load_results(), select.load_evidence(), unread=unread)
-    assert select.unread_pending(unread) == {}
+    selector cannot see. Review C1 of #660: the two other failures `--check` added, a side
+    no reader holds (B3) and an unread print that only overlaps its ceiling (A10), ran on
+    no real register in CI; they are held empty here too."""
+    assert _register_check() == ([], {}, {})
+
+
+def test_a_side_the_register_cannot_hold_turns_the_register_check_red(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Review C1 of #660: forcing T-174's algebraic side at 302 to fail its reader left
+    every test green while `select_houses --check` exited 1. The register check sees it."""
+    real = select.exact_side
+
+    def failing(key: str, n: int) -> select.exact_sides.Side:
+        if n == 302 and n in select.algebraic_counts(key):
+            raise select.exact_sides.ExactSideError("a test: the reader cannot isolate it")
+        return real(key, n)
+
+    monkeypatch.setattr(select, "exact_side", failing)
+    unheld, _pending, _unordered = _register_check()
+    assert unheld == ["T-174 at n = 302: a test: the reader cannot isolate it"]
+
+
+def test_unread_pending_reports_every_improvement_whatever_would_defer_it(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Review C10 of #660: the A6 guard caught #658's exemption because it patched the
+    deferral reader that exemption used, so one built on another reading would pass it.
+    Here every eligible entry states a side below its case, and `unread_pending` reports
+    each one: an exemption of any kind, on any record, drops one and fails this."""
+    from devtools import check_standing as standing  # noqa: PLC0415
+
+    def improving(_record: Any, _records: Any) -> list[standing.Finding]:
+        stated = standing.Stated(Fraction(1), Fraction(0))
+        return [standing.Finding(69, standing.UPPER, stated, standing.EXCEEDS, None)]
+
+    from devtools import check_certificate_citations as citations  # noqa: PLC0415
+
+    monkeypatch.setattr(standing, "improvements", improving)
+    identifiers = [
+        str(entry["id"]) for entry in select.load_results() if select.eligible(entry)
+    ]
+    deferred = {
+        str(result)
+        for deferral in citations.load_deferrals()
+        for result in cast("list[object]", deferral["results"])
+    }
+    # Entries the real deferral file names are among them, as T-193 would be on #658.
+    assert "T-174" in deferred & set(identifiers)
+    assert select.unread_pending(identifiers) == {
+        identifier: [69] for identifier in identifiers
+    }
 
 
 def test_check_lists_the_unread_and_fails_on_one_pending_adoption(
@@ -781,16 +958,23 @@ def test_a_side_no_route_here_holds_is_unordered_never_a_traceback(
     assert form.startswith("the form's polynomial is not held exactly")
     entry, evidence = _confirmed_entry()
 
-    def unheld_side(_n: int) -> select.exact_sides.Side:
-        raise select.exact_sides.ExactSideError("a reader's side it cannot isolate")
-
-    monkeypatch.setitem(select.ALGEBRAIC_READERS, "[test]", unheld_side)
     case = select.Case(
         n=7, verified=Fraction(4), reported=Fraction(4), source_key="", evidence=()
     )
-    unheld: list[str] = []
-    assert select.select([entry], evidence, cases={7: case}, unheld=unheld) == {}
-    assert unheld == ["T-900 at n = 7: a reader's side it cannot isolate"]
+    # Review C2 of #660: a reader that builds its field from a packet, as T-193's will,
+    # raises `FieldPreconditionError` where `sqpack.field` cannot certify the field.
+    for error in (
+        select.exact_sides.ExactSideError("a reader's side it cannot isolate"),
+        FieldPreconditionError("a field sqpack.field cannot certify"),
+    ):
+
+        def unheld_side(_n: int, error: Exception = error) -> select.exact_sides.Side:
+            raise error
+
+        monkeypatch.setitem(select.ALGEBRAIC_READERS, "[test]", unheld_side)
+        unheld: list[str] = []
+        assert select.select([entry], evidence, cases={7: case}, unheld=unheld) == {}
+        assert unheld == [f"T-900 at n = 7: {error}"]
 
 
 def test_the_ceiling_rounds_up_and_the_display_ends_where_the_side_does() -> None:
@@ -1621,6 +1805,13 @@ def test_the_runbook_guide_and_printout_owe_every_re_housed_counts_runs_alike() 
     gates = " ".join(policy.partition("## 8. Gates")[2].partition("\n## ")[0].split())
     assert "result-import.md#the-house-rule" in gates
     assert "defers the count with its bead" not in gates
+    # Review C6 of #660: each instruction for deferring a corrected witness names
+    # `CORRECTED`, which `--check-state` holds every entry to.
+    runbook = _flat((houses.REPO / "packing/campaign/result-import.md").read_text("utf-8"))
+    step, prompt = runbook.split("3. **Import**", 1)[1], runbook.split("```text", 1)[1]
+    for text in (step.split("4. **Validate**")[0], prompt.split("5. From packing/")[0]):
+        assert "CORRECTED" in text
+    # The sweep's step is held in test_intake_sweep.
 
 
 def test_every_printed_command_parses_with_its_tools_own_parser(tmp_path: Path) -> None:

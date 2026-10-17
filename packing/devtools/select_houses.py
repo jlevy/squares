@@ -84,6 +84,7 @@ from devtools import exact_sides
 from devtools import upper_bound_reports as reports
 from devtools.check_results import scope_values
 from devtools.exact_sides import Side
+from sqpack.field import FieldPreconditionError
 from sqpack.yamlio import safe_load
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -97,8 +98,9 @@ CONFIRMED_RANK = 3
 CONFIRMING_ORIGINS = frozenset({"replayed-here", "audited-here"})
 DISPLAY_PLACES = 16
 #: The owner set the house rule on 16 October 2026: "We should always be adopting the
-#: smallest packing and then regularizing it." The deferrals it allows are keyed on that
-#: day (`default_drawings.RULE_SET_ON`), and the records say it ended each wait.
+#: smallest packing and then regularizing it." The records say it ended each wait, and
+#: `default_drawings` dates it from here; a deferral of a count's runs since then is keyed
+#: on the witness it defers, never on a day (`default_drawings.deferral_problems`).
 RULE_SET_ON = "2026-10-16"
 #: The adoption pass of 16 October (#657) ran under the rule of 15 October, and its prior
 #: state is archived under that day, so the first pass that adopts under the house rule
@@ -153,7 +155,7 @@ LIFTED: dict[str, Hold] = {
     "T-174": Hold(
         whose="PR #574's",
         why=(
-            "their witnesses would add about 18.5 MB to Git (OR-18) and their custody "
+            "their witnesses would add about 18.5 MB to a checkout and their custody "
             "inputs about 5.8 MB to every worker's snapshot"
         ),
         since="2026-10-15",
@@ -531,9 +533,10 @@ def candidates(
     the entries a later intake added. An entry whose source has no exact reader is left
     to the case records and named in `unread`: those are entries adopted before the
     readers existed, whose sides the case records hold where they are the house. A side a
-    reader cannot hold exactly (`exact_sides.ExactSideError`) is no candidate and is named
-    in `unheld`, which `--check` fails on: a defect of the reader, never a traceback
-    (review B3 of #660).
+    reader cannot hold exactly (`exact_sides.ExactSideError`), or one in a field
+    `sqpack.field` cannot certify (`FieldPreconditionError`), is no candidate and is
+    named in `unheld`, which `--check` fails on: a defect of the reader, never a traceback
+    (reviews B3 and C2 of #660).
     """
     found: dict[int, list[Candidate]] = {}
     for entry in results:
@@ -557,7 +560,7 @@ def candidates(
                 continue
             try:
                 side = exact_side(key, n)
-            except exact_sides.ExactSideError as error:
+            except (exact_sides.ExactSideError, FieldPreconditionError) as error:
                 if unheld is not None:
                     unheld.append(f"{entry['id']} at n = {n}: {error}")
                 continue

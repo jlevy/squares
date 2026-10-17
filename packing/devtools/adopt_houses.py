@@ -1457,23 +1457,90 @@ def held_sentences(
     held: Sequence[select_houses.Candidate], side: exact_sides.Side, *, below: str, keeps: str
 ) -> list[str]:
     """What a record says of each held certificate below `side`: smaller, confirmed and
-    reviewed, why it waited, and that the house rule lifted the hold, so the case moves to
-    it when its staged adoption lands. No wait is the owner's (review A2 of #660)."""
+    reviewed, when it was held and why, and that the house rule lifted the hold, so the
+    case moves to it when its staged adoption lands. No wait is the owner's (reviews A2
+    and C7 of #660)."""
     sentences = []
     for candidate in held:
         review, reviewed = _review(candidate.result)
-        hold = select_houses.LIFTED[candidate.result]
         sentences.append(
             f"{candidate.result} at ${display(candidate.side)}$, "
             f"`{_sci(exact_sides.lower_gap(side, candidate.side))}` below {below}, is "
             "confirmed here and accepted by "
-            f"the [review of {reviewed}](../../{review}). {_reason(candidate.result)}, "
-            f"from {words(hold.since)} until the owner’s house rule of {words(hold.until)} "
-            f"lifted the hold: the case keeps {keeps} until {candidate.result}’s adoption"
+            f"the [review of {reviewed}](../../{review}). {lifted_sentence(candidate.result)} "
+            f"The case keeps {keeps} until {candidate.result}’s adoption"
             f"{_staged(candidate.n, candidate.result)} moves it to {candidate.result}’s "
             "side."
         )
     return sentences
+
+
+def lifted_sentence(result: str) -> str:
+    """The sentence a record gives a lifted hold: from when to when, and why it held."""
+    hold = select_houses.LIFTED[result]
+    return (
+        f"From {words(hold.since)} until the owner’s house rule of {words(hold.until)} "
+        f"lifted the hold, {_reason(result)}."
+    )
+
+
+def _spaced(words_: str) -> str:
+    """A phrase as a pattern that matches it wrapped at any space."""
+    return r"\s+".join(re.escape(word) for word in words_.split())
+
+
+def held_history(text: str) -> str:
+    """A section's held sentences once a later pass moves the house, as history.
+
+    The section says why a lifted hold's certificate below its house waited and that the
+    case would keep that house until the certificate's adoption. A later pass has moved
+    the house, to that certificate or below it, so the section keeps when the hold held
+    and why, and the clause that the case keeps the house goes: #657's adoption moved ten
+    such counts below T-174 on 16 October 2026. The sentence is matched as each writer
+    wrote it: the rule of 15 October's, which left the wait to the owner, and the house
+    rule's, before and since its dates came first (review C7 of #660).
+    """
+    for result, hold in select_houses.LIFTED.items():
+        whose = _spaced(hold.whose.replace("'", "’"))
+        name = re.escape(result)
+        since, until = _spaced(words(hold.since)), _spaced(words(hold.until))
+        lifted = rf"until\s+the\s+owner’s\s+house\s+rule\s+of\s+{until}\s+lifted\s+the\s+hold"
+        keeps = (
+            rf"case\s+keeps\s+(?:this|its)\s+house\s+until\s+{name}’s\s+adoption"
+            rf"(?:,\s+staged\s+under\s+think-[a-z0-9]+,)?\s+moves\s+it\s+to\s+{name}’s\s+side\."
+        )
+        history = f". {lifted_sentence(result)}"
+        # The rule of 15 October's: "..., but PR #574's houses are held for the owner:
+        # <why>; the case keeps this house until the owner decides, and moves to T-174's
+        # side if the owner adopts them."
+        text = re.sub(
+            rf",\s+but\s+{whose}\s+houses\s+are\s+held\s+for\s+the\s+owner:\s+(?:(?!\n\n).)*?;"
+            rf"\s+the\s+case\s+keeps\s+(?:this|its)\s+house\s+until\s+the\s+owner\s+decides,"
+            rf"\s+and\s+moves\s+to\s+{name}’s\s+side\s+if\s+the\s+owner\s+adopts\s+them\.",
+            lambda _match, history=history: history,
+            text,
+            flags=re.DOTALL,
+        )
+        # The house rule's first: ". PR #574's houses were held for the owner, since <why>,
+        # from <since> until the owner's house rule of <until> lifted the hold: the case
+        # keeps this house until T-174's adoption[, staged under <bead>,] moves it ..."
+        text = re.sub(
+            rf"\.\s+{whose}\s+houses\s+were\s+held\s+for\s+the\s+owner,\s+since\s+"
+            rf"(?:(?!\n\n).)*?,\s+from\s+{since}\s+{lifted}:\s+the\s+{keeps}",
+            lambda _match, history=history: history,
+            text,
+            flags=re.DOTALL,
+        )
+        # The house rule's since: "From <since> until ... lifted the hold, PR #574's houses
+        # were held for the owner, since <why>. The case keeps this house until ..."
+        text = re.sub(
+            rf"(From\s+{since}\s+{lifted},\s+{whose}\s+houses\s+were\s+held\s+for\s+the\s+"
+            rf"owner,\s+since\s+(?:(?!\n\n).)*?\.)\s+The\s+{keeps}",
+            r"\1",
+            text,
+            flags=re.DOTALL,
+        )
+    return text
 
 
 def algebraic_sentences(selection: select_houses.Selection, side: Fraction) -> list[str]:
@@ -1658,6 +1725,7 @@ def historical(move: Move, text: str) -> str:
     )
     text = _earlier_ceiling(move, text)
     text = _regularized_certificate(move, text)
+    text = held_history(text)
     # The records are wrapped, so a sentence may break at any space; whitespace is
     # matched as such and the reflow is the formatter's.
     text = re.sub(
