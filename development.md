@@ -2341,6 +2341,10 @@ is the rule; this is how to follow it.
   Record a commit or blob id as provenance if it helps a reader.
   Where a verdict must be tied to the input it was computed from, give the input a
   semantic identity (a design name and version) and compare that, or recompute.
+  Comparing a change with its base branch at their merge base, as the release-impact,
+  changelog, requests, bead-tree and regularization-state gates do, reads no recorded
+  revision
+  ([OR-18](operating-rules.md#or-18-keep-bulk-data-out-of-git-and-never-bind-code-or-verdicts-to-a-git-commit-or-blob)).
 - **No self-pins.** Do not pin the SHA-256 of a file this repository writes and commits.
   Git already holds it, and the pin makes regenerating the file identically, or moving
   it, a failure.

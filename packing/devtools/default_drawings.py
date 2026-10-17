@@ -8,7 +8,7 @@ Usage, from `packing/`, after
 
     --update [--workers K]
     --check [--workers K]
-    --check-state
+    --check-state [--base-ref REF]
     --retain-runs
     --compare EARLIER
 
@@ -91,7 +91,13 @@ the record lists the counts the run covered, a receipt's counts or the reports b
 block, the settled count must be one of them. A copy there that no `SETTLED` entry
 names fails too, since the directory holds the blocks settlements rest on (review G2 of
 #644). Each bead the list, an exemption or a decided count's `owed` names must be open,
-which `devtools.check_bead_tree` holds through `deferrals`. A record older than a
+which `devtools.check_bead_tree` holds through `deferrals`. Since the house rule, each entry is
+a corrected witness's (`CORRECTED`), which names the witness it replaced; with
+`--base-ref REF` the gate reads the record of the commit the change is built on, the merge
+base of `REF` and `HEAD`, and holds each entry to it (`deferral_problems`), so a house moved
+by any import, a Kingbird catalogue intake or a re-solve as much as an adoption, cannot be
+deferred as a correction (review C3 of #660). The records tier passes `origin/main`, or the
+first parent on `main` itself. A record older than a
 witness is `--check`'s to catch, by deciding every count again. A witness is identified by what
 it says of itself -- its source's key, path and revision, and its side -- never by a
 digest of its bytes (OR-16); its id is the count's (`W-known-best-nNNN`) and names no
@@ -99,14 +105,16 @@ house, so the gate's comparison of it only holds each row to its count.
 
 `--compare EARLIER` reads two records, measuring nothing, and lists each count whose
 state, drawn picture or witness differs, with both pictures' uneven and near-axis squares
-and full shared sides: the table an adoption that defers its runs gives its pull request,
-from its base branch's record (review A1 of #641). It names the goals at each count
-whose strong view gives way to a drawing worse than it on a goal of the improvement rule,
-whatever drew it: the axis tool's view, as at #657's seven, or a house drawing, as at
-n = 176 (review D1 of #641). Where such a count still reads pending, it marks that its
-runs are not deferred: they run in the adoption's pull request, since the owner's rule
-is to adopt the smallest packing and then regularize it (review E1). A count its runs
-have since regularized or decided is listed with the goals and not marked (review E2).
+and full shared sides: the table an adoption gives its pull request for the counts it
+re-houses, from its base branch's record (review A1 of #641). It names the goals at each
+count whose strong view gives way to a drawing worse than it on a goal of the improvement
+rule, whatever drew it: the axis tool's view, as at #657's seven, or a house drawing, as
+at n = 176 (review D1 of #641). Where such a count still reads pending, it marks the
+obligation every re-housed count carries, that its runs are owed in this pull request:
+the owner's rule is to adopt the smallest packing and then regularize it, so a re-housed
+count's runs are never deferred (review E1 of #641, and the import runbook's "The House
+Rule"). A count its runs have since regularized or decided is listed with the goals and
+not marked (review E2).
 
 
 The site's drawings (`render_frontier_page`), the atlas tiles (`overview_sections`) and
@@ -564,8 +572,12 @@ SETTLED: dict[int, Settled] = {
 #: then reads regular as published, which drops the runs its bead owes, and adding a count
 #: whose house reads regular, which holds it pending; the pull request shows the bead's
 #: runs or `--compare`'s table (review C2 of #641; think-k6rj). A count joins only by a
-#: reviewed change naming its bead (the deferral an adoption makes when its runs must
-#: wait); nothing stops a change adding entries, so the gate prints how many there are,
+#: reviewed change naming its bead, and only for a witness corrected with its house's
+#: source and exact side unchanged (`CORRECTED`): a count whose house moves never joins,
+#: since its runs are owed in the pull request that moves it (`RUNS_OWED`), and
+#: `deferral_problems` holds each entry to the base branch's record (`--base-ref`), so a
+#: moved house fails whatever its entry declares (review C3 of #660).
+#: Nothing stops a change adding entries, so the gate prints how many there are,
 #: and `devtools.check_bead_tree` fails a change to this file whose list names a bead
 #: that is not open (`deferrals`), so a bead named here is closed only once the change
 #: taking its last count off has merged (regularization-process.md, "When a Witness
@@ -1073,10 +1085,14 @@ def state_problems(
     settled: Mapping[int, Settled] | None = None,
     allowed: Mapping[int, str] | None = None,
     evidence: Path = EVIDENCE,
+    corrected: Mapping[int, Correction] | None = None,
+    base: Base | None = None,
 ) -> tuple[list[str], list[str]]:
     """What fails the regularization-state gate, and the pending counts it lists: the
-    retained record against the index, `SETTLED` and `PENDING_ALLOWED`, nothing measured
-    and no witness read (`--check` holds the record to the data by deciding it again)."""
+    retained record against the index, `SETTLED` and `PENDING_ALLOWED`, and each deferral
+    against the witness it defers, held to `base` where one is given
+    (`deferral_problems`), nothing measured and no witness read (`--check` holds the
+    record to the data by deciding it again)."""
     settled = SETTLED if settled is None else settled
     allowed = PENDING_ALLOWED if allowed is None else allowed
     found = json.loads(record.read_text(encoding="utf-8"))
@@ -1117,6 +1133,7 @@ def state_problems(
         for run in orphaned_copies(evidence, settled=settled)
     )
     problems.extend(_list_problems(rows, allowed))
+    problems.extend(deferral_problems(rows, allowed, corrected=corrected, base=base))
     pending = {n for n, row in rows.items() if row["state"] == PENDING}
     listed = [
         f"n={n} is pending, allowed: {allowed[n]}" for n in sorted(pending & set(allowed))
@@ -1321,6 +1338,240 @@ def _list_problems(
     return problems
 
 
+class Correction(NamedTuple):
+    """A deferral made since the house rule (`select_houses.RULE_SET_ON`): the witness the
+    correction replaced, as the base branch's record names it, by its source's key, path
+    and revision and its exact side. The corrected witness, the record's, keeps that
+    source and that exact side and is another witness only (review C3 of #660)."""
+
+    source: str
+    path: str | None
+    revision: str | None
+    side: str
+
+
+class Base(NamedTuple):
+    """The record a change is held to (`base_record`): the base branch's rows by count, and
+    the counts whose witness file the change alters, which is how a correction shows at a
+    source that pins no revision, as Kingbird's catalogue and the grid do not."""
+
+    ref: str
+    rows: Mapping[int, Mapping[str, Any]]
+    changed: frozenset[int]
+
+
+#: The deferrals made since the rule: a witness corrected or re-solved with its house's
+#: source and exact side unchanged, whose runs wait for the bead its `PENDING_ALLOWED`
+#: entry names (packing/campaign/result-import.md, "Adopt a House, Then Regularize It").
+#: The twenty deferrals the list held when the owner set the rule were each run or decided
+#: by 16 October 2026 (#644, #653, #654 and #657), so every entry since is one of these.
+CORRECTED: dict[int, Correction] = {}
+
+#: Where the house witnesses are, one file a count, as the index names them.
+WITNESSES_PATH = "packing/witnesses/known-best"
+_WITNESS_FILE = re.compile(r"(?:.*/)?n-(\d+)\.yaml")
+
+
+def _git(*arguments: str) -> str:
+    import subprocess  # noqa: PLC0415
+
+    done = subprocess.run(
+        ["git", "-C", str(REPO), *arguments],
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    if done.returncode != 0:
+        detail = done.stderr.strip() or f"exit {done.returncode}"
+        raise SystemExit(f"git {' '.join(arguments)}: {detail}")
+    return done.stdout
+
+
+#: What a clone without its merge base is told: AGENTS.md's fresh-clone steps fetch the
+#: history a shallow session clone lacks.
+UNSHALLOW = (
+    "the clone is shallow, so the merge base of {ref} and HEAD is not in it; run "
+    '`git fetch --unshallow` (AGENTS.md, "A fresh clone") and check again'
+)
+
+
+def base_record(ref: str) -> Base:
+    """The record of the commit this change is built on, from `ref`: its merge base with
+    `HEAD`, so a branch that has not merged `ref`'s latest commits is held to the record
+    it started from, and the counts whose witness file differs here from that commit's.
+
+    It reads the base branch's copy of the record as the release-impact and changelog
+    gates read theirs (OR-18): the base is no recorded revision, and without it the gate
+    fails closed, naming the remedy where the clone is shallow (review D5 of #660)."""
+    try:
+        _git("rev-parse", "--verify", "--quiet", f"{ref}^{{commit}}")
+    except SystemExit as error:
+        raise SystemExit(f"--base-ref {ref} names no commit in this clone; fetch it") from error
+    try:
+        commit = _git("merge-base", ref, "HEAD").strip()
+    except SystemExit as error:
+        if _git("rev-parse", "--is-shallow-repository").strip() == "true":
+            raise SystemExit(UNSHALLOW.format(ref=ref)) from error
+        raise
+    document = json.loads(_git("show", f"{commit}:{RECORD_PATH}"))
+    rows = {int(row["n"]): row for row in document.get("states") or []}
+    names = _git("diff", "--name-only", commit, "--", WITNESSES_PATH).split()
+    changed = frozenset(
+        int(match.group(1)) for name in names if (match := _WITNESS_FILE.fullmatch(name))
+    )
+    return Base(ref, rows, changed)
+
+
+def _short(side: object) -> str:
+    """A side as a message names it: its first sixteen decimals."""
+    try:
+        value = Fraction(str(side))
+    except ValueError, ZeroDivisionError:
+        return repr(side)
+    return f"{float(value):.16g}"
+
+
+def _same_side(first: object, second: object) -> bool:
+    """Whether two sides as the record writes them are one number exactly."""
+    try:
+        return Fraction(str(first)) == Fraction(str(second))
+    except ValueError, ZeroDivisionError:
+        return str(first) == str(second)
+
+
+def _identity(witness: Mapping[str, Any]) -> tuple[str | None, ...]:
+    """A witness as it identifies itself (`IDENTITY`), each field as the record writes it."""
+    return tuple(None if witness.get(key) is None else str(witness[key]) for key in IDENTITY)
+
+
+def _deferred_in(row: Mapping[str, Any] | None) -> bool:
+    """Whether a record's row is a pending count `PENDING_ALLOWED` allowed, which the record
+    copies into its reason (`count_state`)."""
+    return (
+        row is not None
+        and row.get("state") == PENDING
+        and "; allowed pending: " in str(row.get("why"))
+    )
+
+
+def _correction_problems(
+    n: int, fix: Correction, witness: Mapping[str, Any], base: Base | None
+) -> list[str]:
+    """What fails a `CORRECTED` entry, held to the base record where there is one."""
+    source, side = str(witness.get("source")), str(witness.get("side"))
+    if fix.source != source or not _same_side(fix.side, side):
+        return [
+            (
+                f"n={n}: CORRECTED says the correction replaced the witness from {fix.source} "
+                f"at {_short(fix.side)}, and the record's is from {source} at {_short(side)}: "
+                "a correction keeps its house's source and exact side, and where the house "
+                "moved, by any import, its runs are owed in the pull request that moved it"
+            )
+        ]
+    if base is None:
+        # Declared only: `--check-state --base-ref` holds it to the base record.
+        own = (fix.source, fix.path, fix.revision, fix.side) == _identity(witness)
+        if own and fix.revision is not None:
+            return [
+                (
+                    f"n={n}: CORRECTED names the record's own witness as the one it replaced: "
+                    "there is no corrected witness to defer"
+                )
+            ]
+        return []
+    return _base_problems(n, fix, witness, base)
+
+
+def _base_problems(
+    n: int, fix: Correction, witness: Mapping[str, Any], base: Base
+) -> list[str]:
+    """What fails a `CORRECTED` entry against the base record (reviews C3 and D1 of #660).
+
+    Where the base already defers the count, the correction was held to its own base when
+    it was made, and it stands while the record's witness keeps the base's source and
+    exact side, whatever a later change does to its file or path. Otherwise this change
+    makes the correction: the entry names the base's witness, and the record's is another
+    witness, by its path or revision, or, at a source that pins no revision, by its file.
+    """
+    row = base.rows.get(n)
+    before = (row or {}).get("witness") or {}
+    if _deferred_in(row):
+        if str(before.get("source")) == str(witness.get("source")) and _same_side(
+            before.get("side"), witness.get("side")
+        ):
+            return []
+        return [
+            (
+                f"n={n}: {base.ref}'s record defers it at the witness from "
+                f"{before.get('source')} at {_short(before.get('side'))}, and the house "
+                "has moved since: its runs are owed in the pull request that moved it"
+            )
+        ]
+    if _identity(before) != (fix.source, fix.path, fix.revision, fix.side):
+        return [
+            (
+                f"n={n}: CORRECTED says the correction replaced the witness from {fix.source} "
+                f"at {_short(fix.side)} ({fix.path}, revision {fix.revision}), but "
+                f"{base.ref}'s record names {before.get('source')} at "
+                f"{_short(before.get('side'))} ({before.get('path')}, revision "
+                f"{before.get('revision')}): it names the witness the base holds"
+            )
+        ]
+    revisionless = witness.get("revision") is None
+    if _identity(before) == _identity(witness) and not (revisionless and n in base.changed):
+        return [
+            (
+                f"n={n}: CORRECTED names {base.ref}'s witness as the one it replaced, and the "
+                "record's is that witness: there is no corrected witness to defer (a "
+                "changed file shows a correction only where the source pins no revision)"
+            )
+        ]
+    return []
+
+
+def deferral_problems(
+    rows: Mapping[int, Mapping[str, Any]],
+    allowed: Mapping[int, str],
+    *,
+    corrected: Mapping[int, Correction] | None = None,
+    base: Base | None = None,
+) -> list[str]:
+    """Where `PENDING_ALLOWED` defers the runs of a witness it may not.
+
+    Since the house rule a count's runs wait only for a witness corrected or re-solved
+    with its house's source and exact side unchanged, and never because its house moved,
+    whichever import moved it (reviews A5, B1, B2, C3 and D1 of #660). Each entry is a
+    `CORRECTED` one, which names the witness it replaced. Against the base record
+    (`base_record`), that witness is the base's at the same count, the record's has its
+    source and exact side, and it is another witness only: another path or revision, or,
+    at a source that pins no revision, another file. A house moved by an adoption, a
+    catalogue intake or a re-solve fails, whatever the entry says. An entry the base
+    already defers was held to its own base when it was made, and stands while the
+    record's witness keeps the base's source and exact side. Without a base the entry is
+    checked as declared.
+    """
+    from devtools.select_houses import RULE_SET_ON  # noqa: PLC0415
+
+    corrected = CORRECTED if corrected is None else corrected
+    problems: list[str] = []
+    for n in sorted(allowed):
+        witness = (rows.get(n) or {}).get("witness") or {}
+        fix = corrected.get(n)
+        if fix is None:
+            problems.append(
+                f"n={n}: PENDING_ALLOWED defers its runs, but CORRECTED names no corrected "
+                f"witness there: since the owner set the house rule ({RULE_SET_ON}), a "
+                "count whose house moves is regularized in the pull request that moves it"
+            )
+            continue
+        problems.extend(_correction_problems(n, fix, witness, base))
+    problems.extend(
+        f"n={n}: CORRECTED names it, but PENDING_ALLOWED does not; take it off"
+        for n in sorted(set(corrected) - set(allowed))
+    )
+    return problems
+
+
 def deferrals(
     settled: Mapping[int, Settled] | None = None, allowed: Mapping[int, str] | None = None
 ) -> list[tuple[str, str]]:
@@ -1344,8 +1595,23 @@ def deferrals(
     return named
 
 
-def check_state() -> int:
-    found, listed = state_problems()
+#: The words `--check-state --base-ref` prints, which the records tier's step requires,
+#: so a step that stops passing the base fails (review D4 of #660).
+HELD_TO_BASE = "CORRECTED is held to the record at the merge base of"
+
+
+def check_state(base_ref: str | None = None) -> int:
+    # The base is read only where a count is deferred, so a clone without the merge base
+    # passes while nothing is (review D5 of #660).
+    deferring = bool(PENDING_ALLOWED or CORRECTED)
+    base = base_record(base_ref) if base_ref is not None and deferring else None
+    found, listed = state_problems(base=base)
+    if base_ref is None:
+        listed.append("CORRECTED is checked as declared: no --base-ref to hold it to")
+    elif base is None:
+        listed.append(f"{HELD_TO_BASE} {base_ref}; nothing is deferred, so none was read")
+    else:
+        listed.append(f"{HELD_TO_BASE} {base_ref}")
     for line in listed:
         print(line)
     if found:
@@ -1455,11 +1721,11 @@ STRONG_VIEW_LOST = (
 )
 #: How `drawing_changes` names the goals a lost strong view's replacement is worse on.
 LOST = "the strong view gives way to a drawing worse on"
-#: How a marked line ends, which `compare` counts: a count still pending whose strong
-#: view gave way to a worse drawing has its runs in the adoption's pull request, never
-#: deferred. The owner, 16 October 2026: "We should always be adopting the smallest
-#: packing and then regularizing it" (review E1 of #641).
-UNDEFERRED = "its runs are not deferred"
+#: How a marked line ends, which `compare` counts: a count still pending whose strong view
+#: gave way to a worse drawing owes its runs in this pull request, as every count an
+#: adoption re-houses does, since none is deferred. The owner, 16 October 2026: "We should
+#: always be adopting the smallest packing and then regularizing it" (review E1 of #641).
+RUNS_OWED = "its runs are owed in this pull request"
 
 
 def drawing_changes(earlier: Mapping[str, Any], later: Mapping[str, Any]) -> list[str]:
@@ -1468,10 +1734,10 @@ def drawing_changes(earlier: Mapping[str, Any], later: Mapping[str, Any]) -> lis
     uneven and near-axis squares and full shared sides, and where a strong view gives way
     to a drawing worse than it on a goal of the improvement rule, whatever drew it, those
     goals (`strong_view_losses`), and where the count still reads pending, that its runs
-    are not deferred (`UNDEFERRED`). A count its runs have since regularized or decided
-    reads its state and is not marked (review E2 of #641). An adoption whose runs must
-    wait lists these in its pull request, from its base branch's record, so the deferral
-    can be reviewed (reviews A1 and D1 of #641)."""
+    are owed in this pull request (`RUNS_OWED`). A count its runs have since regularized
+    or decided reads its state and is not marked (review E2 of #641). An adoption lists
+    these in its pull request, from its base branch's record, so that what each re-housed
+    count drew before and draws now is reviewed (reviews A1 and D1 of #641)."""
     before = {int(row["n"]): row for row in earlier.get("states") or []}
     after = {int(row["n"]): row for row in later.get("states") or []}
     exact = {
@@ -1491,7 +1757,7 @@ def drawing_changes(earlier: Mapping[str, Any], later: Mapping[str, Any]) -> lis
         if lost:
             line += f"; {LOST} {', '.join(lost)}"
             if new["state"] == PENDING:
-                line += f": {UNDEFERRED}"
+                line += f": {RUNS_OWED}"
         lines.append(line)
     return lines
 
@@ -1504,12 +1770,12 @@ def compare(earlier: Path, record: Path = RECORD) -> int:
     )
     for line in lines:
         print(line)
-    marked = sum(1 for line in lines if line.endswith(UNDEFERRED))
+    marked = sum(1 for line in lines if line.endswith(RUNS_OWED))
     settled = sum(1 for line in lines if f"; {LOST} " in line) - marked
     changed = f"{len(lines)} counts changed state, drawing or witness"
     print(
-        f"{changed}; where {STRONG_VIEW_LOST}: {marked} still pending, whose runs are not "
-        f"deferred, and {settled} in another state"
+        f"{changed}; where {STRONG_VIEW_LOST}: {marked} still pending, whose runs are owed "
+        f"in this pull request, and {settled} in another state"
     )
     return 0
 
@@ -1525,6 +1791,14 @@ def parser() -> argparse.ArgumentParser:
         "--check-state",
         action="store_true",
         help="the regularization-state gate: the record and the index, nothing measured",
+    )
+    command.add_argument(
+        "--base-ref",
+        metavar="REF",
+        help=(
+            "with --check-state: hold each CORRECTED entry to the record at the merge base "
+            "of REF and HEAD, which the records tier passes as origin/main"
+        ),
     )
     mode.add_argument(
         "--retain-runs",
@@ -1551,9 +1825,12 @@ def parser() -> argparse.ArgumentParser:
 
 
 def main(argv: Sequence[str] | None = None) -> int:
-    args = parser().parse_args(argv)
+    command = parser()
+    args = command.parse_args(argv)
+    if args.base_ref is not None and not args.check_state:
+        command.error("--base-ref goes with --check-state")
     if args.check_state:
-        return check_state()
+        return check_state(args.base_ref)
     if args.retain_runs:
         return retain()
     if args.compare is not None:

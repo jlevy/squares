@@ -10,9 +10,9 @@ owner lifted that wait on 11 October 2026. For every count whose house moves, th
   the verified lane its confirming replay; the earlier house becomes a priority note,
   kept as history; every confirmed certificate at the count, selected or not, joins the
   case's evidence roster, which is what lets `check_certificate_citations` drop its
-  deferrals; the source joins the resources; a conjectured optimum the house beats is
-  withdrawn, and one it does not beat stops the adoption for a human to decide; a blocker
-  that only said the verified lane trailed the report goes;
+  deferrals; the source joins the resources; a conjectured optimum the house is below,
+  wherever its print may round, is withdrawn, and any other stays (`conjecture_stands`);
+  a blocker that only said the verified lane trailed the report goes;
 - **the case record's body**: a dated paragraph under the title that states the move,
   and a section after the verification code that says whose certificate the house is,
   how it was confirmed here and which certificates it replaces;
@@ -33,14 +33,17 @@ refuses a count that module does not house. A new house is a new witness, so wha
 a write is the regularization guide's "When a Witness Changes", not the axis tool's
 refresh alone: `build_known_best_atlas --update` for the witness, the axis tool's
 `--update-atlas`, `default_drawings --update`, then the strong generators on each count it
-reads `pending`, or the count in `default_drawings.PENDING_ALLOWED` with the open bead
-that owns its runs, in the same pull request, with `default_drawings --update` run again
-and each deferred count's drawing listed before and after. The adoptions of #553, #598
-and #614 ran only the axis tool's refresh and left twenty counts without a strong
-generator's decision, n = 176 drawn raw (think-sfas). So a write, and `--dry-run`, print
-what the moves owe the regularized layer (`regularization_owed`): the counts, the
+reads `pending`, in the same pull request, with each re-housed count's drawing listed
+before and after. The house rule defers no re-housed count's runs to
+`default_drawings.PENDING_ALLOWED`: an adoption whose runs do not fit under the pass's
+compute cap waits with them, staged in `select_houses.PENDING_ADOPTION`. The adoptions of
+#553, #598 and #614 ran only the axis tool's refresh and left twenty counts without a
+strong generator's decision, n = 176 drawn raw (think-sfas). So a write, and `--dry-run`,
+print what the moves owe the regularized layer (`regularization_owed`): the counts, the
 commands with run directories no earlier run has named, and what they cost;
-`default_drawings --check-state` fails until each pending count is decided or deferred.
+`default_drawings --check-state` fails until each pending count is decided, and while the
+allowlist defers the runs of a witness whose house has moved since
+(`default_drawings.deferral_problems`, keyed on the witness, not on a pass's day).
 `adopt_case` is the generator's half: `generate_frontier_case` redrafts an adopted case
 through it (`source_supersession.adopt_selected_report`), which keeps the house and takes
 the ordinary lower lanes from the draft.
@@ -48,12 +51,19 @@ the ordinary lower lanes from the draft.
 It is idempotent: a count already at its house is left alone, so a second run writes
 nothing, and ``--check`` reports any adopted count whose record differs from its house.
 
-**A held result** (`select_houses.HELD`) is no candidate, but the records say where it
-waits: an adopted record's certificate section names each held certificate below its
-house, with why it waits, and so does a dated paragraph under the title of a record no
-pass houses (`held_note`), which also cites the held certificate's evidence. An algebraic
-certificate below the house, which the selection leaves out for the owner (RP-3), is
-named in the section the same way.
+**The house rule** (packing/campaign/result-import.md, "The House Rule") leaves nothing
+here to a person: the house is the smallest validated side, and a count whose adoption
+waits does so only staged in `select_houses.PENDING_ADOPTION` with the bead that adopts
+it, which `plan` leaves to that bead's pull request. Until the counts are adopted, their
+records keep the houses the rule of 15 October chose, and say why, with no wait left to
+the owner (review A2 of #660): an adopted record's certificate section names each
+certificate the lifted hold kept out (`select_houses.LIFTED`) below its house, why it
+waited, that the house rule lifted the hold, and the bead its staged adoption waits
+under, and so does a dated paragraph under the title of a record no pass houses
+(`held_note`), which also cites the held certificate's evidence; an algebraic certificate
+below the house, which that rule left out (RP-3), is named in the section the same way,
+its adoption staged for the writer. Every replay and check here reads the records as
+written (`recorded_days`, `select_houses.select(recorded=...)`).
 
 Usage, from ``packing/`` with the project interpreter::
 
@@ -64,9 +74,8 @@ Usage, from ``packing/`` with the project interpreter::
 
 ``--refresh`` brings every adopted record's evidence roster, dated paragraph and
 certificate section to what its last pass's writer writes now, from the record that pass
-read, and every held count's note to the held results; nothing another tool writes moves.
-A record changes this way when the register gains a confirmed certificate at its count, or
-the owner's holds change.
+read, and every held count's note to the lifted holds; nothing another tool writes moves.
+A record changes this way when the register gains a confirmed certificate at its count.
 
 **A later pass.** A later import adopted the same way needs:
 
@@ -112,7 +121,7 @@ import yaml
 from strif import atomic_output_file
 
 from devtools import apply_closed_form as closed_form
-from devtools import default_drawings, select_houses
+from devtools import default_drawings, exact_sides, select_houses
 from devtools import upper_bound_houses as houses
 from sqpack.yamlio import safe_load
 
@@ -847,8 +856,11 @@ def _register() -> tuple[Mapping[str, Any], ...]:
     return tuple(select_houses.load_results())
 
 
-def display(side: Fraction) -> str:
-    """A side as prose shows it: exact where it ends within sixteen places, else rounded up."""
+def display(side: exact_sides.Side) -> str:
+    """A side as prose shows it: exact where it ends within sixteen places, else rounded up;
+    an algebraic side never ends, and is rounded up."""
+    if isinstance(side, exact_sides.Algebraic):
+        return select_houses.ceiling(side)
     for places in range(PLACES + 1):
         if (side * 10**places).denominator == 1:
             return select_houses.ceiling(side, places) if places else str(side.numerator)
@@ -919,6 +931,22 @@ class Move:
     def n(self) -> int:
         return self.selection.n
 
+    @property
+    def side(self) -> Fraction:
+        """The house's exact side, which this writer states: a fraction (`rational`)."""
+        return rational(self.house.side)
+
+
+def rational(side: exact_sides.Side) -> Fraction:
+    """A side this writer states. It writes rational houses only, and `plan` refuses an
+    algebraic one; a certificate the prose quotes beside a house is rational wherever the
+    rule of 15 October wrote it, which left every algebraic certificate out."""
+    if isinstance(side, exact_sides.Algebraic):
+        raise AdoptionError(
+            f"the writer states rational sides, not {exact_sides.literal(side)}"
+        )
+    return side
+
 
 @cache
 def _claims(path: Path) -> Mapping[int, str]:
@@ -979,7 +1007,7 @@ def _value(candidate: select_houses.Candidate, above: object = None) -> str:
                 f"n={candidate.n}: {source['id']}'s claims record does not print the exact side"
             )
         return printed
-    return shown(candidate.side, above)
+    return shown(rational(candidate.side), above)
 
 
 def words(iso: str) -> str:
@@ -1082,7 +1110,9 @@ def plan(
     """Every count whose derived house is below its case and is one this adoption houses.
 
     Each move carries its case record's text, read from the frontier unless `texts` holds
-    the count, as a replay of the retained prior state passes it.
+    the count, as a replay of the retained prior state passes it. A count staged in
+    `select_houses.PENDING_ADOPTION` for the house the selection names is no move here
+    until its bead's pull request takes it off the list.
     """
     selections = select_houses.select() if selections is None else selections
     moves = []
@@ -1090,6 +1120,17 @@ def plan(
         if selection.house is None:
             continue
         house = selection.house
+        staged = select_houses.PENDING_ADOPTION.get(n)
+        if staged is not None and staged.house == house.result:
+            # Owed to the staged bead's pull request, which takes the count off the list
+            # and then adopts it here.
+            continue
+        if house.algebraic:
+            raise AdoptionError(
+                f"n={n}: the house is {house.result}'s algebraic side, and this writes a "
+                "rational exact form and witness only; stage the count with the bead that "
+                "adds the algebraic writer (select_houses.PENDING_ADOPTION)"
+            )
         if houses.ADOPTED.get(n) != house.result:
             raise AdoptionError(
                 f"n={n}: the house is {house.result}, which upper_bound_houses does not draw "
@@ -1115,7 +1156,7 @@ def reported_bound(move: Move) -> dict[str, Any]:
     origin = houses.source_for(move.n).origin(move.n)
     return {
         "value": _value(house, _above(move)),
-        "exact_form": houses.legacy.literal(house.side),
+        "exact_form": houses.legacy.literal(move.side),
         "evidence": list(house.report_evidence),
         "algebraic_degree": 1,
         "minimal_polynomial": None,
@@ -1136,8 +1177,8 @@ def reported_bound(move: Move) -> dict[str, Any]:
 
 def verified_bound(move: Move) -> dict[str, Any]:
     return {
-        "value": shown(move.house.side, _above(move)),
-        "exact_form": houses.legacy.literal(move.house.side),
+        "value": shown(move.side, _above(move)),
+        "exact_form": houses.legacy.literal(move.side),
         "evidence": list(move.house.confirming_evidence),
     }
 
@@ -1198,19 +1239,13 @@ def _resource(move: Move) -> dict[str, Any]:
 
 def front_matter(move: Move, front: str) -> str:
     packing = move.packing
-    conjecture = conjectured(packing)
-    if conjecture is not None and move.house.side >= conjecture:
-        raise AdoptionError(
-            f"n={move.n}: the house {select_houses.ceiling(move.house.side)} does not "
-            f"beat the conjectured optimum {packing['conjectured_optimum']}; whether the "
-            "conjecture stands is decided by hand"
-        )
+    withdrawn = not conjecture_stands(packing, move.house.side)
     front = _named_fields(front)
     reviewed = f"  source_reviewed: '{houses.adopted_on(move.n)}'"
     front = re.sub(r"^  source_reviewed: .*$", reviewed, front, count=1, flags=re.MULTILINE)
     front = _replace(front, "reported_upper_bound", reported_bound(move))
     front = _replace(front, "verified_upper_bound", verified_bound(move))
-    if conjecture is not None:
+    if withdrawn:
         front = re.sub(
             r"^  conjectured_optimum: .*$",
             "  conjectured_optimum: null",
@@ -1229,6 +1264,28 @@ def front_matter(move: Move, front: str) -> str:
     if kept != blockers:
         front = _replace(front, "blockers", kept)
     return front
+
+
+def conjecture_stands(packing: Mapping[str, Any], side: exact_sides.Side) -> bool:
+    """Whether a record's conjectured optimum stands beside a house at `side`.
+
+    A conjecture the house is below is refuted and withdrawn. A conjecture is the
+    catalogue's printed side, whose rounding the record does not state: however it was
+    rounded, the number it stands for lies strictly within one unit of its last place of
+    the print, so the house is below it wherever it is at or below the print less that
+    unit (review B6 of #660). An integer conjecture is exact, and a house below it refutes
+    it. Any other conjecture stands: a house at it, or above, or within its print's
+    rounding, is no evidence against it, and the adoption goes ahead either way
+    (result-import.md, "The House Rule").
+    """
+    conjecture = conjectured(packing)
+    if conjecture is None:
+        return True
+    text = str(packing.get("conjectured_optimum"))
+    places = 0 if text == "integer" else len(text.strip().partition(".")[2])
+    if not places:
+        return not side < conjecture
+    return not side <= conjecture - Fraction(1, 10**places)
 
 
 def conjectured(packing: Mapping[str, Any]) -> Fraction | None:
@@ -1282,7 +1339,7 @@ def opening(move: Move) -> str:
     return (
         f"**House adoption, {day_words(n)}.** {credit.phrase[0].upper()}{credit.phrase[1:]} "
         f"({house.result}) is now this case’s house: its exact certificate proves "
-        f"$s({n}) \\le {shown(house.side, _above(move))}$, the reported and the verified "
+        f"$s({n}) \\le {shown(move.side, _above(move))}$, the reported and the verified "
         f"upper bound, `{_sci(move.selection.margin)}` below the ceiling the case held until "
         f"then, ${upper['value']}$ from {_holder(move.packing)}, which stays retained as "
         f"history ([the certificate](#{_anchor(move)}))."
@@ -1303,8 +1360,8 @@ def section(move: Move) -> str:
     prose = RESULTS[house.result]
     packet = houses.source_for(n).packet.name
     review, reviewed = _review(house.result)
-    fraction = _math_fraction(house.side)
-    ceiling = shown(house.side, _above(move))
+    fraction = _math_fraction(move.side)
+    ceiling = shown(move.side, _above(move))
     side = (
         f"at exact side {fraction}, displayed upward as ${ceiling}$"
         if fraction
@@ -1374,10 +1431,8 @@ def section(move: Move) -> str:
             "and are not selected."
         )
     waiting = [
-        *held_sentences(
-            move.selection.held, house.side, below="this house", keeps="this house"
-        ),
-        *algebraic_sentences(move.selection, house.side),
+        *held_sentences(move.selection.held, move.side, below="this house", keeps="this house"),
+        *algebraic_sentences(move.selection, move.side),
     ]
     if waiting:
         history += " " + " ".join(waiting)
@@ -1386,31 +1441,113 @@ def section(move: Move) -> str:
 
 
 def _reason(result: str) -> str:
-    """Why a held result waits, as case prose writes it."""
-    return select_houses.HELD[result].reason.replace("'", "’")
+    """Why a held result waited, as case prose writes it, in the past since the house rule."""
+    return select_houses.LIFTED[result].reason.replace("'", "’")
+
+
+def _staged(n: int, result: str) -> str:
+    """Where a record says the count's adoption of `result` waits: its staged bead."""
+    staged = select_houses.PENDING_ADOPTION.get(n)
+    if staged is None or staged.house != result:
+        return ""
+    return f", staged under {staged.bead},"
 
 
 def held_sentences(
-    held: Sequence[select_houses.Candidate], side: Fraction, *, below: str, keeps: str
+    held: Sequence[select_houses.Candidate], side: exact_sides.Side, *, below: str, keeps: str
 ) -> list[str]:
     """What a record says of each held certificate below `side`: smaller, confirmed and
-    reviewed, why it waits, and that the case moves to it if the owner adopts it."""
+    reviewed, when it was held and why, and that the house rule lifted the hold, so the
+    case moves to it when its staged adoption lands. No wait is the owner's (reviews A2
+    and C7 of #660)."""
     sentences = []
     for candidate in held:
         review, reviewed = _review(candidate.result)
         sentences.append(
             f"{candidate.result} at ${display(candidate.side)}$, "
-            f"`{_sci(side - candidate.side)}` below {below}, is confirmed here and accepted by "
-            f"the [review of {reviewed}](../../{review}), but {_reason(candidate.result)}; "
-            f"the case keeps {keeps} until the owner decides, and moves to "
-            f"{candidate.result}’s side if the owner adopts them."
+            f"`{_sci(exact_sides.lower_gap(side, candidate.side))}` below {below}, is "
+            "confirmed here and accepted by "
+            f"the [review of {reviewed}](../../{review}). {lifted_sentence(candidate.result)} "
+            f"The case keeps {keeps} until {candidate.result}’s adoption"
+            f"{_staged(candidate.n, candidate.result)} moves it to {candidate.result}’s "
+            "side."
         )
     return sentences
 
 
+def lifted_sentence(result: str) -> str:
+    """The sentence a record gives a lifted hold: from when to when, and why it held."""
+    hold = select_houses.LIFTED[result]
+    return (
+        f"From {words(hold.since)} until the owner’s house rule of {words(hold.until)} "
+        f"lifted the hold, {_reason(result)}."
+    )
+
+
+def _spaced(words_: str) -> str:
+    """A phrase as a pattern that matches it wrapped at any space."""
+    return r"\s+".join(re.escape(word) for word in words_.split())
+
+
+def held_history(text: str) -> str:
+    """A section's held sentences once a later pass moves the house, as history.
+
+    The section says why a lifted hold's certificate below its house waited and that the
+    case would keep that house until the certificate's adoption. A later pass has moved
+    the house, to that certificate or below it, so the section keeps when the hold held
+    and why, and the clause that the case keeps the house goes: #657's adoption moved ten
+    such counts below T-174 on 16 October 2026. The sentence is matched as each writer
+    wrote it: the rule of 15 October's, which left the wait to the owner, and the house
+    rule's, before and since its dates came first (review C7 of #660).
+    """
+    for result, hold in select_houses.LIFTED.items():
+        whose = _spaced(hold.whose.replace("'", "’"))
+        name = re.escape(result)
+        since, until = _spaced(words(hold.since)), _spaced(words(hold.until))
+        lifted = rf"until\s+the\s+owner’s\s+house\s+rule\s+of\s+{until}\s+lifted\s+the\s+hold"
+        keeps = (
+            rf"case\s+keeps\s+(?:this|its)\s+house\s+until\s+{name}’s\s+adoption"
+            rf"(?:,\s+staged\s+under\s+think-[a-z0-9]+,)?\s+moves\s+it\s+to\s+{name}’s\s+side\."
+        )
+        history = f". {lifted_sentence(result)}"
+        # The rule of 15 October's: "..., but PR #574's houses are held for the owner:
+        # <why>; the case keeps this house until the owner decides, and moves to T-174's
+        # side if the owner adopts them."
+        text = re.sub(
+            rf",\s+but\s+{whose}\s+houses\s+are\s+held\s+for\s+the\s+owner:\s+(?:(?!\n\n).)*?;"
+            rf"\s+the\s+case\s+keeps\s+(?:this|its)\s+house\s+until\s+the\s+owner\s+decides,"
+            rf"\s+and\s+moves\s+to\s+{name}’s\s+side\s+if\s+the\s+owner\s+adopts\s+them\.",
+            lambda _match, history=history: history,
+            text,
+            flags=re.DOTALL,
+        )
+        # The house rule's first: ". PR #574's houses were held for the owner, since <why>,
+        # from <since> until the owner's house rule of <until> lifted the hold: the case
+        # keeps this house until T-174's adoption[, staged under <bead>,] moves it ..."
+        text = re.sub(
+            rf"\.\s+{whose}\s+houses\s+were\s+held\s+for\s+the\s+owner,\s+since\s+"
+            rf"(?:(?!\n\n).)*?,\s+from\s+{since}\s+{lifted}:\s+the\s+{keeps}",
+            lambda _match, history=history: history,
+            text,
+            flags=re.DOTALL,
+        )
+        # The house rule's since: "From <since> until ... lifted the hold, PR #574's houses
+        # were held for the owner, since <why>. The case keeps this house until ..."
+        text = re.sub(
+            rf"(From\s+{since}\s+{lifted},\s+{whose}\s+houses\s+were\s+held\s+for\s+the\s+"
+            rf"owner,\s+since\s+(?:(?!\n\n).)*?\.)\s+The\s+{keeps}",
+            r"\1",
+            text,
+            flags=re.DOTALL,
+        )
+    return text
+
+
 def algebraic_sentences(selection: select_houses.Selection, side: Fraction) -> list[str]:
-    """What a record says of an algebraic certificate below its house: left out of the
-    selection on one route, for the owner's decision (RP-3 of PR 574's review)."""
+    """What a record says of an algebraic certificate below its house: decided on one exact
+    route, which the rule of 15 October left out for the owner (RP-3 of PR 574's review),
+    and which the house rule adopts, staged until the writer takes an algebraic side
+    (review A2 of #660)."""
     sentences = []
     for result, key in selection.algebraic:
         if not select_houses.algebraic_below(key, selection.n, side):
@@ -1421,9 +1558,11 @@ def algebraic_sentences(selection: select_houses.Selection, side: Fraction) -> l
         sentences.append(
             f"{result}’s algebraic certificate at this count, a root of a degree-{degree} "
             f"integer polynomial `{_sci(margin)}` below this house, is decided here on one "
-            "exact route only, so it is left out of the selection: adopting it is the "
-            f"owner’s decision (RP-3 of the [review of {reviewed}](../../{review})), pending "
-            "a second route."
+            "exact route. The rule of 15 October left it out for the owner (RP-3 of the "
+            f"[review of {reviewed}](../../{review})), and the owner’s house rule of "
+            f"{words(select_houses.RULE_SET_ON)} adopts it: the case keeps this house until "
+            f"its adoption{_staged(selection.n, result)} moves it to {result}’s side, once "
+            "the writer takes an algebraic side."
         )
     return sentences
 
@@ -1586,6 +1725,7 @@ def historical(move: Move, text: str) -> str:
     )
     text = _earlier_ceiling(move, text)
     text = _regularized_certificate(move, text)
+    text = held_history(text)
     # The records are wrapped, so a sentence may break at any space; whitespace is
     # matched as such and the reflow is the formatter's.
     text = re.sub(
@@ -1957,11 +2097,15 @@ HELD_OPENING = "**Held for the owner, "
 
 
 def held_at(n: int, case: select_houses.Case) -> tuple[select_houses.Candidate, ...]:
-    """The certificates of held results (`select_houses.HELD`) below the case at `n`."""
-    entries = [e for e in select_houses.load_results() if str(e["id"]) in select_houses.HELD]
+    """The rational certificates of lifted holds (`select_houses.LIFTED`) below the case at
+    `n`: what the record's held note says, as the rule of 15 October wrote it."""
+    entries = [e for e in select_houses.load_results() if str(e["id"]) in select_houses.LIFTED]
     found = select_houses.candidates(entries, select_houses.load_evidence()).get(n, [])
     return tuple(
-        sorted((c for c in found if c.side < case.verified), key=select_houses.precedence)
+        sorted(
+            (c for c in found if not c.algebraic and c.side < case.verified),
+            key=select_houses.precedence,
+        )
     )
 
 
@@ -1991,14 +2135,17 @@ def held_note(n: int, text: str) -> str:
         raise AdoptionError(f"n={n} holds {len(mine)} held notes")
     kept = [part for i, part in enumerate(parts) if i not in mine]
     if held:
-        since = min(select_houses.HELD[c.result].since for c in held)
+        since = min(select_houses.LIFTED[c.result].since for c in held)
+        until = max(select_houses.LIFTED[c.result].until for c in held)
         sentences = held_sentences(
             held,
             select_houses.parse_case(n, text).verified,
             below="this case’s verified ceiling",
             keeps="its house",
         )
-        written = f"{HELD_OPENING}{words(since)}.** " + " ".join(sentences)
+        written = f"{HELD_OPENING}{words(since)}; lifted {words(until)}.** " + " ".join(
+            sentences
+        )
         if mine and " ".join(parts[mine[0]].split()) == written:
             written = parts[mine[0]]
         else:
@@ -2021,8 +2168,9 @@ def carries_held_note(text: str) -> bool:
 
 
 def held_counts() -> list[int]:
-    """The counts no pass houses where a held result is below the case, or a note stands."""
-    entries = [e for e in select_houses.load_results() if str(e["id"]) in select_houses.HELD]
+    """The counts no pass houses where a lifted hold's result is below the case, or a note
+    stands."""
+    entries = [e for e in select_houses.load_results() if str(e["id"]) in select_houses.LIFTED]
     reached = {n for entry in entries for n in select_houses.scope_values(dict(entry["scope"]))}
     noted = {
         int(path.stem.removeprefix("n-"))
@@ -2039,15 +2187,28 @@ def held_counts() -> list[int]:
 # ------------------------------------------------------------------------- refreshing
 
 
+def recorded_days() -> dict[int, str]:
+    """The day each record this adoption owns was last written: its last pass's, or, for a
+    record no pass houses that carries a held note, the day of the hold it names. The
+    replays and checks here select as each record was written
+    (`select_houses.select(recorded=...)`)."""
+    days = {n: houses.adopted_on(n) for n in houses.ADOPTED}
+    first = min((hold.since for hold in select_houses.LIFTED.values()), default=None)
+    if first is not None:
+        days.update({n: first for n in held_counts() if n not in days})
+    return days
+
+
 def replay_plan() -> list[Move]:
     """Each adopted count's last pass planned again from the record as that pass read it."""
     latest = before_last_pass()
-    current = select_houses.select()
+    days = recorded_days()
+    current = select_houses.select(recorded=days)
     cases = {
         n: select_houses.parse_case(n, latest[n]) if n in latest else selection.case
         for n, selection in current.items()
     }
-    return plan(select_houses.select(cases=cases), texts=latest)
+    return plan(select_houses.select(cases=cases, recorded=days), texts=latest)
 
 
 def replayed_text(move: Move) -> str:
@@ -2241,12 +2402,12 @@ WORKERS = 2
 #: the runbook and the guide say (review D2).
 BASE_RECORD = f"`<(git show origin/main:{default_drawings.RECORD_PATH})`"
 STACKED_BASE = "with a stacked pull request's base branch for main"
-#: What becomes of a count where a strong view gives way to a drawing worse than it on a
-#: goal of the improvement rule, whatever drew it (`default_drawings.STRONG_VIEW_LOST`),
-#: in the runbook's and the guide's words (reviews C4 and D1 of #641): the owner's rule is
-#: to adopt the smallest packing and then regularize it, so the adoption waits for no one
-#: and such a count's runs are never deferred (review E1).
-DEFERRAL_WAITS = "its runs are not deferred: they run in the adoption's pull request"
+#: What the runbook, the guide and this printout say of every count an adoption re-houses,
+#: in one wording (reviews C4, D1 and E1 of #641): the owner's rule is to adopt the
+#: smallest packing and then regularize it, so the count's runs are owed in the adoption's
+#: pull request (`default_drawings.RUNS_OWED`), and an adoption whose runs do not fit under
+#: the pass's compute cap waits with them, staged in `select_houses.PENDING_ADOPTION`.
+NEVER_DEFERRED = "never deferred to default_drawings.PENDING_ALLOWED"
 #: What follows a write, as `python -m devtools.` commands from `packing/` with `{n}` the
 #: re-housed counts: the new witness, the axis tool's view of it, and each count's state.
 REFRESH_COMMANDS = (
@@ -2348,10 +2509,10 @@ def regularization_owed(
     atlas is refreshed, this names the counts certain to be pending, one count a line, and
     a `SETTLED` decision the new witness voids, then gives the commands, with run
     directories named for `day` (the adoption's, by default) and the counts, that no run
-    in the index has (`run_label`), what they cost, and what a deferral owes the pull
-    request. It measures and runs
-    nothing: the runs take minutes a count, and the pass prices them as one validation
-    item under its compute cap (`INTAKE_STEP`).
+    in the index has (`run_label`), what they cost, and what the adoption's pull request
+    owes: the drawings before and after, and every re-housed count's runs, none deferred.
+    It measures and runs nothing: the runs take minutes a count, and the pass prices them
+    as one validation item under its compute cap (`INTAKE_STEP`).
     """
     if not counts:
         return []
@@ -2378,7 +2539,7 @@ def regularization_owed(
             holder = bead[0] if bead else repr(allowed[n])
             why.append(
                 f"PENDING_ALLOWED holds it for {holder}'s runs, whatever the new house "
-                "reads, so they take the new witness"
+                "reads: they run here, on the new witness, and the entry comes off"
             )
         if why:
             certain.append(f"    {n}: {'; '.join(why)}")
@@ -2431,16 +2592,18 @@ def regularization_owed(
         "  and the `layer` commands it prints, then the guide's step 5 (render and record)."
     )
     lines.append(
-        "  Or, where the runs must wait, add each pending count to "
-        "default_drawings.PENDING_ALLOWED with the open bead that owns its runs, run "
-        "`default_drawings --update` again and the guide's step 5, and list each deferred "
-        "count's drawing before and after in this pull request (`default_drawings --compare` "
-        f"with the base branch's record, {BASE_RECORD}, {STACKED_BASE}); where "
-        f"{default_drawings.STRONG_VIEW_LOST}, {DEFERRAL_WAITS}."
+        "  List each re-housed count's drawing before and after in this pull request "
+        f"(`default_drawings --compare` with the base branch's record, {BASE_RECORD}, "
+        f"{STACKED_BASE}); where {default_drawings.STRONG_VIEW_LOST}, it names those goals "
+        f"and marks each such count still pending: {default_drawings.RUNS_OWED}."
     )
     lines.append(
-        "  `python -m devtools.default_drawings --check-state` fails until every pending count "
-        "is one or the other."
+        f"  A re-housed count is {NEVER_DEFERRED}: where the runs do not fit under the "
+        "pass's compute cap, stage the counts they do not cover in "
+        "select_houses.PENDING_ADOPTION with the open bead that adopts them, and adopt the "
+        "rest. `python -m devtools.default_drawings --check-state` fails until the runs "
+        "decide every re-housed count, and while the list defers the runs of a witness "
+        "whose house has moved since."
     )
     return lines
 

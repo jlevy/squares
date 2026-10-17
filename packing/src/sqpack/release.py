@@ -88,6 +88,14 @@ class PublicationHistoryEntry(NamedTuple):
 #: for each deployment's commit, what the page it built stated.
 PUBLICATION_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.7.25",
+        first_published="October 17, 2026",
+        result_scope=(
+            "Say on the case and result pages that the house rule ended the hold on "
+            "T-174's houses and RP-3's wait, naming each staged adoption's bead."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.7.24",
         first_published="October 17, 2026",
         result_scope=(
@@ -466,7 +474,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "011823ca6ec80049503299403bb1709020d43e1d"
+DATA_REVISION = "638f775adbda007cfe1e5a6e17046687b3281852"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -889,6 +897,16 @@ class ReleaseImpactDecision(NamedTuple):
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
     ReleaseImpactDecision(
         component="site",
+        previous_version="v0.7.24",
+        version="v0.7.25",
+        impact="patch",
+        reason=(
+            "Say on the case and result pages that the house rule ended the hold on "
+            "T-174's houses and RP-3's wait, naming each staged adoption's bead."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="site",
         previous_version="v0.7.23",
         version="v0.7.24",
         impact="patch",
@@ -1260,6 +1278,32 @@ class ReleaseNoPublicChange(NamedTuple):
 
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
+    ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer",),
+        paths=(
+            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
+            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
+            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+        ),
+        reason=(
+            "The site cut v0.7.25 for the house rule (PR 660, think-sa5r) regenerated the "
+            "five claim documents at PUBLICATION_REVISION 83b4720e, this branch's merge of "
+            "main 6a3a7d8f, kept reachable from main by the merge commit the PR merges "
+            "with. With that revision read back as v0.7.24's d421bac7, each is "
+            "byte-identical to main's 6a3a7d8f, and between the two revisions those case "
+            "directories change only in the five documents themselves, so the 32 "
+            "repository links they pin are the only change, and no claim, certificate or "
+            "command moves. A link revision follows the site's edition and is not a "
+            "revision of the explainer, so it keeps v0.4.7. Source-compared; no render of "
+            "the claim documents was taken."
+        ),
+    ),
     ReleaseNoPublicChange(
         components=("paper:n11-lower-bounds-explainer",),
         paths=(
@@ -1909,6 +1953,84 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "from this branch at 2f31507c, the survey's and both reviews' 42 files each "
             "are byte-identical to main e2e018f3's. All four papers keep v0.4.7, v0.1.7, "
             "v0.1.0 and v0.2.2; the site takes the patch."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/devtools/adopt_houses.py",
+            "packing/devtools/default_drawings.py",
+            "packing/devtools/exact_sides.py",
+            "packing/devtools/select_houses.py",
+            "packing/devtools/upper_bound_houses.py",
+            "packing/frontier/README.md",
+            "packing/frontier/n-070.md",
+            "packing/frontier/n-084.md",
+            "packing/frontier/n-086.md",
+            "packing/frontier/n-088.md",
+            "packing/frontier/n-102.md",
+            "packing/frontier/n-103.md",
+            "packing/frontier/n-105.md",
+            "packing/frontier/n-108.md",
+            "packing/frontier/n-123.md",
+            "packing/frontier/n-126.md",
+            "packing/frontier/n-127.md",
+            "packing/frontier/n-129.md",
+            "packing/frontier/n-130.md",
+            "packing/frontier/n-131.md",
+            "packing/frontier/n-146.md",
+            "packing/frontier/n-153.md",
+            "packing/frontier/n-175.md",
+            "packing/frontier/n-179.md",
+            "packing/frontier/n-180.md",
+            "packing/frontier/n-199.md",
+            "packing/frontier/n-207.md",
+            "packing/frontier/n-208.md",
+            "packing/frontier/n-209.md",
+            "packing/frontier/n-236.md",
+            "packing/frontier/n-238.md",
+            "packing/frontier/n-239.md",
+            "packing/frontier/n-261.md",
+            "packing/frontier/n-267.md",
+            "packing/frontier/n-295.md",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+            "packing/src/sqpack/cli/validate.py",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The house rule (think-sa5r) changes what `select_houses.select` derives, adds "
+            "`exact_sides`, stages T-174's 53 counts in `PENDING_ADOPTION`, holds "
+            "`default_drawings`' deferrals to the base record and measures staged witnesses "
+            "(`upper_bound_houses sizes`); its records passes (reviews A2, C4 and C7 of "
+            "#660) reword the notes of the 63 case records the hold and RP-3 named, ten "
+            "of them moved below T-174 by #657, nine register entries, five source-register "
+            "passages, two requests entries and one evidence limitation to say the hold of "
+            "15 October and RP-3's wait ended. Rendered at link revision 6a3a7d8f from main "
+            "6a3a7d8f and from this branch, as at 3301a1cf, 5012a97d and c593e2bf before, the "
+            "optimality review's, the threshold-bound review's and the survey's HTML and "
+            "Markdown are byte-identical, as are all 50 files the three renderers write; "
+            "their PDFs print from that HTML and were not rebuilt. The explainer, which "
+            "renders through a browser this host lacks, reads the register only to count "
+            "its results and the new ones among them, which no edit here changes, and none "
+            "of the other inputs: source-compared. All four papers keep v0.4.7, v0.1.7, "
+            "v0.1.0 and v0.2.2. The site's case and result pages print the reworded notes, "
+            "so the site needs an edition, cut in merge order."
         ),
     ),
     ReleaseNoPublicChange(
@@ -3497,7 +3619,7 @@ def validate_release_impacts(
 #: fresh render, so a link naming the build commit would fail their drift check forever. It is
 #: in no version string. It moves when the claim documents are regenerated for an edition. It
 #: must be a commit on `main`; the site's own links name `main` itself (`devtools.repo_links`).
-PUBLICATION_REVISION = "d421bac7"
+PUBLICATION_REVISION = "83b4720e"
 
 
 def data_pathspec() -> tuple[str, ...]:

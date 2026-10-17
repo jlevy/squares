@@ -35476,9 +35476,10 @@ evidence:
       none of these. The receipts' 12 jobs hold 242445 pair decisions and 1094.42 job wall
       seconds. A second route over a number field would need its own field arithmetic, a
       code slice rather than compute. The other 56 algebraic counts were not replayed. The
-      record's house selection leaves these four counts out, since no house reader rebuilds
-      an algebraic side, and the owner decides their adoption (RP-3). Finite feasibility
-      only.
+      house rule of 16 October 2026 makes these certificates the houses at 70, 153 and 207,
+      where they are below their cases, staged under think-ot5c until adopt_houses writes an
+      algebraic side, which ended RP-3's wait for the owner; at 302 the certificate is above
+      its case. Finite feasibility only.
     source_reviewed: '2026-10-14'
   - id: E-ostashev-575-certificate-report
     claim: upper-bound
