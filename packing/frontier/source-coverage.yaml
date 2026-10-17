@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:SourceCoverage/v1
   schema: source-coverage.schema.yaml
   status: enforced
-last_reviewed: '2026-10-16'
+last_reviewed: '2026-10-17'
 coverage_scope: 'Current public upper-bound catalogues and first-party result releases known to this
   project, the Schadt n=29 witness-contract regression source, and the September 2026 external executable
   lower-bound certificate releases. Their proof obligations and assurance are tracked by evidence.yaml;
@@ -6042,6 +6042,402 @@ sources:
     trusts Lean's compiler for 4,320 native_decide facts and reports a kernel replay of the
     import closure; nothing here has built it. T-194 records the claim; the case's lanes and
     status are unchanged.
+- id: wand125-fine-net-n38-65775-2026-10-16
+  title: Wand125 reported n38 fine-net lower bound (#446)
+  role: source-repository
+  url: https://github.com/wand125/square-packing/tree/02c5595f26e8cf1f6be89080fdd66a9a5d6d364f/problems/square-lower-bounds/certificates/mixed_n38_L65775
+  local: resources/web/wand125-fine-net-lower-bounds-2026-10-16/
+  source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+  scope:
+    n_values:
+    - 38
+  reviewed: '2026-10-17'
+  source_date: '2026-10-16'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/wand125-fine-net-lower-bounds-2026-10-16/README.md
+  evidence:
+  - E-wand125-fine-net-n38-65775-report
+  notes: The reported 2631/400 at n38 is above both lower lanes, which are unchanged. Complete
+    release-asset and document custody and the exact mass, declared-net and check2 premises are
+    accepted, and the asset's data members are retained for the census. The author's full positives
+    and 32-direction controls do not supply a maintained capture or whole-net controls. T-195
+    registers it; replay and adoption remain under think-f40c.
+- id: wand125-fine-net-n40-6735-2026-10-16
+  title: Wand125 reported n40 fine-net lower bound (#446)
+  role: source-repository
+  url: https://github.com/wand125/square-packing/tree/4762e420765d663f601f007c60c9c47351c959ea/problems/square-lower-bounds/certificates/mixed_n40_L6735
+  local: resources/web/wand125-fine-net-lower-bounds-2026-10-16/
+  source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+  scope:
+    n_values:
+    - 40
+  reviewed: '2026-10-17'
+  source_date: '2026-10-16'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/wand125-fine-net-lower-bounds-2026-10-16/README.md
+  evidence:
+  - E-wand125-fine-net-n40-6735-report
+  notes: The reported 1347/200 at n40 is above both lower lanes, which are unchanged. Complete
+    release-asset and document custody and the exact mass, declared-net and check2 premises are
+    accepted, and the asset's data members are retained for the census. The author's full positives
+    and 32-direction controls do not supply a maintained capture or whole-net controls. T-196
+    registers it; replay and adoption remain under think-f40c.
+- id: wand125-fine-net-n41-68025-2026-10-16
+  title: Wand125 reported n41 fine-net lower bound (#446)
+  role: source-repository
+  url: https://github.com/wand125/square-packing/tree/209369b6a186e2304548d52584425125d4c97736/problems/square-lower-bounds/certificates/mixed_n41_L68025
+  local: resources/web/wand125-fine-net-lower-bounds-2026-10-16/
+  source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+  scope:
+    n_values:
+    - 41
+  reviewed: '2026-10-17'
+  source_date: '2026-10-16'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/wand125-fine-net-lower-bounds-2026-10-16/README.md
+  evidence:
+  - E-wand125-fine-net-n41-68025-report
+  notes: The reported 2721/400 at n41 is above both lower lanes, which are unchanged. Complete
+    release-asset and document custody and the exact mass, declared-net and check2 premises are
+    accepted, and the asset's data members are retained for the census. The author's full positives
+    and 32-direction controls do not supply a maintained capture or whole-net controls. T-197
+    registers it; replay and adoption remain under think-f40c.
+- id: wand125-fine-net-n43-69425-2026-10-16
+  title: Wand125 reported n43 fine-net lower bound (#446)
+  role: source-repository
+  url: https://github.com/wand125/square-packing/tree/d3c115c5b7a12c7c057ef567cc426df909846e92/problems/square-lower-bounds/certificates/mixed_n43_L69425
+  local: resources/web/wand125-fine-net-lower-bounds-2026-10-16/
+  source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+  scope:
+    n_values:
+    - 43
+  reviewed: '2026-10-17'
+  source_date: '2026-10-16'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/wand125-fine-net-lower-bounds-2026-10-16/README.md
+  evidence:
+  - E-wand125-fine-net-n43-69425-report
+  notes: The reported 2777/400 at n43 is above both lower lanes, which are unchanged. Complete
+    release-asset and document custody and the exact mass, declared-net and check2 premises are
+    accepted, and the asset's data members are retained for the census. The author's full positives
+    and 32-direction controls do not supply a maintained capture or whole-net controls. T-198
+    registers it; replay and adoption remain under think-f40c.
+- id: wand125-fine-net-n51-75275-2026-10-16
+  title: Wand125 reported n51 fine-net lower bound (#446)
+  role: source-repository
+  url: https://github.com/wand125/square-packing/tree/9cd2b2d43dfe57e12da066a1e85a51f457c0fc9f/problems/square-lower-bounds/certificates/mixed_n51_L75275
+  local: resources/web/wand125-fine-net-lower-bounds-2026-10-16/
+  source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+  scope:
+    n_values:
+    - 51
+  reviewed: '2026-10-17'
+  source_date: '2026-10-16'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/wand125-fine-net-lower-bounds-2026-10-16/README.md
+  evidence:
+  - E-wand125-fine-net-n51-75275-report
+  notes: The reported 3011/400 at n51 is above both lower lanes, which are unchanged. Complete
+    release-asset and document custody and the exact mass, declared-net and check2 premises are
+    accepted, and the asset's data members are retained for the census. The author's full positives
+    and 32-direction controls do not supply a maintained capture or whole-net controls. T-199
+    registers it; replay and adoption remain under think-f40c.
+- id: wand125-fine-net-n68-853-2026-10-16
+  title: Wand125 reported n68 fine-net lower bound (#446)
+  role: source-repository
+  url: https://github.com/wand125/square-packing/tree/14b4b0badd79cd95f9456143b304d5d158cf2ac7/problems/square-lower-bounds/certificates/mixed_n68_L853
+  local: resources/web/wand125-fine-net-lower-bounds-2026-10-16/
+  source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+  scope:
+    n_values:
+    - 68
+  reviewed: '2026-10-17'
+  source_date: '2026-10-16'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/wand125-fine-net-lower-bounds-2026-10-16/README.md
+  evidence:
+  - E-wand125-fine-net-n68-853-report
+  notes: The reported 853/100 at n68 is above both lower lanes, which are unchanged. Complete
+    release-asset and document custody and the exact mass, declared-net and check2 premises are
+    accepted, and the asset's data members are retained for the census. The author's full positives
+    and 32-direction controls do not supply a maintained capture or whole-net controls. T-200
+    registers it; replay and adoption remain under think-f40c.
+- id: wand125-fine-net-n84-94225-2026-10-16
+  title: Wand125 reported n84 fine-net lower bound (#446)
+  role: source-repository
+  url: https://github.com/wand125/square-packing/tree/f28b5f3d0ebc500a761a02514c1ce5b9b9e203f1/problems/square-lower-bounds/certificates/mixed_n84_L94225
+  local: resources/web/wand125-fine-net-lower-bounds-2026-10-16/
+  source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+  scope:
+    n_values:
+    - 84
+  reviewed: '2026-10-17'
+  source_date: '2026-10-16'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/wand125-fine-net-lower-bounds-2026-10-16/README.md
+  evidence:
+  - E-wand125-fine-net-n84-94225-report
+  notes: The reported 3769/400 at n84 is above both lower lanes, which are unchanged. Complete
+    release-asset and document custody and the exact mass, declared-net and check2 premises are
+    accepted, and the asset's data members are retained for the census. The author's full positives
+    and 32-direction controls do not supply a maintained capture or whole-net controls. T-201
+    registers it; replay and adoption remain under think-f40c.
+- id: wand125-fine-net-n85-9475-2026-10-16
+  title: Wand125 reported n85 fine-net lower bound (#446)
+  role: source-repository
+  url: https://github.com/wand125/square-packing/tree/fc2e96f0a253e00fbc4263625f4fc34774d157a6/problems/square-lower-bounds/certificates/mixed_n85_L9475
+  local: resources/web/wand125-fine-net-lower-bounds-2026-10-16/
+  source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+  scope:
+    n_values:
+    - 85
+  reviewed: '2026-10-17'
+  source_date: '2026-10-16'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/wand125-fine-net-lower-bounds-2026-10-16/README.md
+  evidence:
+  - E-wand125-fine-net-n85-9475-report
+  notes: The reported 379/40 at n85 is above both lower lanes, which are unchanged. Complete
+    release-asset and document custody and the exact mass, declared-net and check2 premises are
+    accepted, and the asset's data members are retained for the census. The author's full positives
+    and 32-direction controls do not supply a maintained capture or whole-net controls. T-202
+    registers it; replay and adoption remain under think-f40c.
+- id: wand125-fine-net-n86-95275-2026-10-16
+  title: Wand125 reported n86 fine-net lower bound (#446)
+  role: source-repository
+  url: https://github.com/wand125/square-packing/tree/2ad6bda87c58fa9a67debc3d3ef303810525fd34/problems/square-lower-bounds/certificates/mixed_n86_L95275
+  local: resources/web/wand125-fine-net-lower-bounds-2026-10-16/
+  source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+  scope:
+    n_values:
+    - 86
+  reviewed: '2026-10-17'
+  source_date: '2026-10-16'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/wand125-fine-net-lower-bounds-2026-10-16/README.md
+  evidence:
+  - E-wand125-fine-net-n86-95275-report
+  notes: The reported 3811/400 at n86 is above both lower lanes, which are unchanged. Complete
+    release-asset and document custody and the exact mass, declared-net and check2 premises are
+    accepted, and the asset's data members are retained for the census. The author's full positives
+    and 32-direction controls do not supply a maintained capture or whole-net controls. T-203
+    registers it; replay and adoption remain under think-f40c.
+- id: wand125-fine-net-n88-96325-2026-10-16
+  title: Wand125 reported n88 fine-net lower bound (#446)
+  role: source-repository
+  url: https://github.com/wand125/square-packing/tree/f8f99e3d82c682f9600539c15b2a6f76b9e4e4c3/problems/square-lower-bounds/certificates/mixed_n88_L96325
+  local: resources/web/wand125-fine-net-lower-bounds-2026-10-16/
+  source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+  scope:
+    n_values:
+    - 88
+  reviewed: '2026-10-17'
+  source_date: '2026-10-16'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/wand125-fine-net-lower-bounds-2026-10-16/README.md
+  evidence:
+  - E-wand125-fine-net-n88-96325-report
+  notes: The reported 3853/400 at n88 is above both lower lanes, which are unchanged. Complete
+    release-asset and document custody and the exact mass, declared-net and check2 premises are
+    accepted, and the asset's data members are retained for the census. The author's full positives
+    and 32-direction controls do not supply a maintained capture or whole-net controls. T-204
+    registers it; replay and adoption remain under think-f40c.
+- id: wand125-fine-net-n89-9685-2026-10-16
+  title: Wand125 reported n89 fine-net lower bound (#446)
+  role: source-repository
+  url: https://github.com/wand125/square-packing/tree/a361ba247b3dac28ee3ab8ff8e62e827bcdf8120/problems/square-lower-bounds/certificates/mixed_n89_L9685
+  local: resources/web/wand125-fine-net-lower-bounds-2026-10-16/
+  source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+  scope:
+    n_values:
+    - 89
+  reviewed: '2026-10-17'
+  source_date: '2026-10-16'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/wand125-fine-net-lower-bounds-2026-10-16/README.md
+  evidence:
+  - E-wand125-fine-net-n89-9685-report
+  notes: The reported 1937/200 at n89 is above both lower lanes, which are unchanged. Complete
+    release-asset and document custody and the exact mass, declared-net and check2 premises are
+    accepted, and the asset's data members are retained for the census. The author's full positives
+    and 32-direction controls do not supply a maintained capture or whole-net controls. T-205
+    registers it; replay and adoption remain under think-f40c.
+- id: wand125-fine-net-n91-97875-2026-10-16
+  title: Wand125 reported n91 fine-net lower bound (#446)
+  role: source-repository
+  url: https://github.com/wand125/square-packing/tree/e060e98b540e46f88e84ac6fd18462dcb209ee42/problems/square-lower-bounds/certificates/mixed_n91_L97875
+  local: resources/web/wand125-fine-net-lower-bounds-2026-10-16/
+  source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+  scope:
+    n_values:
+    - 91
+  reviewed: '2026-10-17'
+  source_date: '2026-10-16'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/wand125-fine-net-lower-bounds-2026-10-16/README.md
+  evidence:
+  - E-wand125-fine-net-n91-97875-report
+  notes: The reported 783/80 at n91 is above both lower lanes, which are unchanged. Complete
+    release-asset and document custody and the exact mass, declared-net and check2 premises are
+    accepted, and the asset's data members are retained for the census. The author's full positives
+    and 32-direction controls do not supply a maintained capture or whole-net controls. T-206
+    registers it; replay and adoption remain under think-f40c.
+- id: wand125-fine-net-n90-978-2026-10-16
+  title: Wand125 reported n90 fine-net lower bound (#446)
+  role: source-repository
+  url: https://github.com/wand125/square-packing/tree/8155028aea6ed235b0c2766b38657dd21704aff4/problems/square-lower-bounds/certificates/mixed_n90_L978
+  local: resources/web/wand125-fine-net-lower-bounds-2026-10-16/
+  source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+  scope:
+    n_values:
+    - 90
+  reviewed: '2026-10-17'
+  source_date: '2026-10-16'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/wand125-fine-net-lower-bounds-2026-10-16/README.md
+  evidence:
+  - E-wand125-fine-net-n90-978-report
+  notes: The reported 489/50 at n90 is above both lower lanes, which are unchanged. Complete
+    release-asset and document custody and the exact mass, declared-net and check2 premises are
+    accepted, and the asset's data members are retained for the census. The author's full positives
+    and 32-direction controls do not supply a maintained capture or whole-net controls. T-207
+    registers it; replay and adoption remain under think-f40c.
+- id: wand125-fine-net-n92-986-2026-10-16
+  title: Wand125 reported n92 fine-net lower bound (#446)
+  role: source-repository
+  url: https://github.com/wand125/square-packing/tree/599a67c371b09a4c05d3709be63c3d6be4a9cd14/problems/square-lower-bounds/certificates/mixed_n92_L986
+  local: resources/web/wand125-fine-net-lower-bounds-2026-10-16/
+  source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+  scope:
+    n_values:
+    - 92
+  reviewed: '2026-10-17'
+  source_date: '2026-10-16'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/wand125-fine-net-lower-bounds-2026-10-16/README.md
+  evidence:
+  - E-wand125-fine-net-n92-986-report
+  notes: The reported 493/50 at n92 is above both lower lanes, which are unchanged. Complete
+    release-asset and document custody and the exact mass, declared-net and check2 premises are
+    accepted, and the asset's data members are retained for the census. The author's full positives
+    and 32-direction controls do not supply a maintained capture or whole-net controls. T-208
+    registers it; replay and adoption remain under think-f40c.
+- id: wand125-fine-net-n106-10503-2026-10-16
+  title: Wand125 reported n106 fine-net lower bound (#446)
+  role: source-repository
+  url: https://github.com/wand125/square-packing/tree/3b2538704f36b699795a50b5ef19686c843150ab/problems/square-lower-bounds/certificates/mixed_n106_L10503
+  local: resources/web/wand125-fine-net-lower-bounds-2026-10-16/
+  source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+  scope:
+    n_values:
+    - 106
+  reviewed: '2026-10-17'
+  source_date: '2026-10-16'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/wand125-fine-net-lower-bounds-2026-10-16/README.md
+  evidence:
+  - E-wand125-fine-net-n106-10503-report
+  notes: The reported 10503/1000 at n106 is above both lower lanes, which are unchanged. Complete
+    release-asset and document custody and the exact mass, declared-net and check2 premises are
+    accepted, and the asset's data members are retained for the census. The author's full positives
+    and 32-direction controls do not supply a maintained capture or whole-net controls. T-209
+    registers it; replay and adoption remain under think-f40c.
+- id: wand125-fine-net-n107-1058-2026-10-16
+  title: Wand125 reported n107 fine-net lower bound (#446)
+  role: source-repository
+  url: https://github.com/wand125/square-packing/tree/021702fa6b3d345ffc51e053ef6b05f03df55cd5/problems/square-lower-bounds/certificates/mixed_n107_L1058
+  local: resources/web/wand125-fine-net-lower-bounds-2026-10-16/
+  source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+  scope:
+    n_values:
+    - 107
+  reviewed: '2026-10-17'
+  source_date: '2026-10-16'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/wand125-fine-net-lower-bounds-2026-10-16/README.md
+  evidence:
+  - E-wand125-fine-net-n107-1058-report
+  notes: The reported 529/50 at n107 is above both lower lanes, which are unchanged. Complete
+    release-asset and document custody and the exact mass, declared-net and check2 premises are
+    accepted, and the asset's data members are retained for the census. The author's full positives
+    and 32-direction controls do not supply a maintained capture or whole-net controls. T-210
+    registers it; replay and adoption remain under think-f40c.
+- id: wand125-fine-net-n108-1062-2026-10-16
+  title: Wand125 reported n108 fine-net lower bound (#446)
+  role: source-repository
+  url: https://github.com/wand125/square-packing/tree/6af3c00991c937d40ac0fe867fe049b8e9f3bf2d/problems/square-lower-bounds/certificates/mixed_n108_L1062
+  local: resources/web/wand125-fine-net-lower-bounds-2026-10-16/
+  source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+  scope:
+    n_values:
+    - 108
+  reviewed: '2026-10-17'
+  source_date: '2026-10-16'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/wand125-fine-net-lower-bounds-2026-10-16/README.md
+  evidence:
+  - E-wand125-fine-net-n108-1062-report
+  notes: The reported 531/50 at n108 is above both lower lanes, which are unchanged. Complete
+    release-asset and document custody and the exact mass, declared-net and check2 premises are
+    accepted, and the asset's data members are retained for the census. The author's full positives
+    and 32-direction controls do not supply a maintained capture or whole-net controls. T-211
+    registers it; replay and adoption remain under think-f40c.
+- id: wand125-fine-net-n110-1073-2026-10-16
+  title: Wand125 reported n110 fine-net lower bound (#446)
+  role: source-repository
+  url: https://github.com/wand125/square-packing/tree/718887cfaa8727cc75108c5924fa1330df4fa098/problems/square-lower-bounds/certificates/mixed_n110_L1073
+  local: resources/web/wand125-fine-net-lower-bounds-2026-10-16/
+  source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+  scope:
+    n_values:
+    - 110
+  reviewed: '2026-10-17'
+  source_date: '2026-10-16'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/wand125-fine-net-lower-bounds-2026-10-16/README.md
+  evidence:
+  - E-wand125-fine-net-n110-1073-report
+  notes: The reported 1073/100 at n110 is above both lower lanes, which are unchanged. Complete
+    release-asset and document custody and the exact mass, declared-net and check2 premises are
+    accepted, and the asset's data members are retained for the census. The author's full positives
+    and 32-direction controls do not supply a maintained capture or whole-net controls. T-212
+    registers it; replay and adoption remain under think-f40c.
 selected_overrides:
 - n: 51
   source_id: ry-xu-undilated-n51-2026

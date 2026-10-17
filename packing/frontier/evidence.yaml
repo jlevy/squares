@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:FrontierEvidenceSet/v1
   schema: frontier-evidence.schema.yaml
   status: enforced
-last_reviewed: '2026-10-16'
+last_reviewed: '2026-10-17'
 evidence:
   - id: E-n017-kleddamag-rational-upper
     claim: upper-bound
@@ -37703,3 +37703,471 @@ evidence:
       No mathematical review is on file yet (think-o40t), so the entry counts toward no
       rung above C0.
     source_reviewed: '2026-10-16'
+  - id: E-wand125-fine-net-n38-65775-report
+    claim: lower-bound
+    scope: {n_values: [38]}
+    assurance: reported
+    reported_method: interval-certified
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+    certificate: >-
+      packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n38_L65775/candidate.json.gz
+    replay_status: not-attempted
+    verifiers: [V-wand125-sqverify-proof-net]
+    limitations: >-
+      The author reports 2631/400 at all 2,073 directions of the net its candidate
+      declares (step 1/5002, core 4999/5000) by sqverify-proof-net, its copy of this
+      repository's sqverify_fast, at 02c5595, in jlevy/squares#446, in a check2 run
+      (1,000.3 s at 16 threads) and a pre-publication run on a fresh machine (656 s).
+      Complete source-byte custody and the maintained mass, net and check2 premises
+      are accepted (receipts/premises-n38.json). The 32-direction 197/200 control
+      remains sampled. A complete capture, whole-net controls and a review that reads
+      this certificate remain pending under think-f40c, priced at about 7.46 to 8.57
+      CPU-hours. The shared crate establishes no independent implementation. No
+      standing bound or rating changes.
+    source_reviewed: '2026-10-17'
+  - id: E-wand125-fine-net-n40-6735-report
+    claim: lower-bound
+    scope: {n_values: [40]}
+    assurance: reported
+    reported_method: interval-certified
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+    certificate: >-
+      packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n40_L6735/candidate.json.gz
+    replay_status: not-attempted
+    verifiers: [V-wand125-sqverify-proof-net]
+    limitations: >-
+      The author reports 1347/200 at all 2,073 directions of the net its candidate
+      declares (step 1/5002, core 4999/5000) by sqverify-proof-net, its copy of this
+      repository's sqverify_fast, at 4762e42, in jlevy/squares#446, in a check2 run
+      (2,740.4 s at 12 threads) and a pre-publication run on a fresh machine (1042 s).
+      Complete source-byte custody and the maintained mass, net and check2 premises
+      are accepted (receipts/premises-n40.json). The 32-direction 197/200 control
+      remains sampled. A complete capture, whole-net controls and a review that reads
+      this certificate remain pending under think-f40c, priced at about 11.37 to 13.06
+      CPU-hours. The shared crate establishes no independent implementation. No
+      standing bound or rating changes.
+    source_reviewed: '2026-10-17'
+  - id: E-wand125-fine-net-n41-68025-report
+    claim: lower-bound
+    scope: {n_values: [41]}
+    assurance: reported
+    reported_method: interval-certified
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+    certificate: >-
+      packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n41_L68025/candidate.json.gz
+    replay_status: not-attempted
+    verifiers: [V-wand125-sqverify-proof-net]
+    limitations: >-
+      The author reports 2721/400 at all 2,073 directions of the net its candidate
+      declares (step 1/5002, core 4999/5000) by sqverify-proof-net, its copy of this
+      repository's sqverify_fast, at 209369b, in jlevy/squares#446, in a check2 run
+      (1,951.5 s at 16 threads) and a pre-publication run on a fresh machine (1051 s).
+      Complete source-byte custody and the maintained mass, net and check2 premises
+      are accepted (receipts/premises-n41.json). The 32-direction 197/200 control
+      remains sampled. A complete capture, whole-net controls and a review that reads
+      this certificate remain pending under think-f40c, priced at about 10.98 to 12.61
+      CPU-hours. The shared crate establishes no independent implementation. No
+      standing bound or rating changes.
+    source_reviewed: '2026-10-17'
+  - id: E-wand125-fine-net-n43-69425-report
+    claim: lower-bound
+    scope: {n_values: [43]}
+    assurance: reported
+    reported_method: interval-certified
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+    certificate: >-
+      packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n43_L69425/candidate.json.gz
+    replay_status: not-attempted
+    verifiers: [V-wand125-sqverify-proof-net]
+    limitations: >-
+      The author reports 2777/400 at all 2,073 directions of the net its candidate
+      declares (step 1/5002, core 4999/5000) by sqverify-proof-net, its copy of this
+      repository's sqverify_fast, at d3c115c, in jlevy/squares#446, in a check2 run
+      (4,451.4 s at 16 threads) and a pre-publication run on a fresh machine (2143 s).
+      Complete source-byte custody and the maintained mass, net and check2 premises
+      are accepted (receipts/premises-n43.json). The 32-direction 197/200 control
+      remains sampled. A complete capture, whole-net controls and a review that reads
+      this certificate remain pending under think-f40c, priced at about 21.73 to 24.95
+      CPU-hours. The shared crate establishes no independent implementation. No
+      standing bound or rating changes.
+    source_reviewed: '2026-10-17'
+  - id: E-wand125-fine-net-n51-75275-report
+    claim: lower-bound
+    scope: {n_values: [51]}
+    assurance: reported
+    reported_method: interval-certified
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+    certificate: >-
+      packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n51_L75275/candidate.json.gz
+    replay_status: not-attempted
+    verifiers: [V-wand125-sqverify-proof-net]
+    limitations: >-
+      The author reports 3011/400 at all 2,073 directions of the net its candidate
+      declares (step 1/5002, core 4999/5000) by sqverify-proof-net, its copy of this
+      repository's sqverify_fast, at 9cd2b2d, in jlevy/squares#446, in a check2 run
+      (2,395.2 s at 16 threads) and a pre-publication run on a fresh machine (1354 s).
+      Complete source-byte custody and the maintained mass, net and check2 premises
+      are accepted (receipts/premises-n51.json). The 32-direction 197/200 control
+      remains sampled. A complete capture, whole-net controls and a review that reads
+      this certificate remain pending under think-f40c, priced at about 13.84 to 15.89
+      CPU-hours. The shared crate establishes no independent implementation. No
+      standing bound or rating changes.
+    source_reviewed: '2026-10-17'
+  - id: E-wand125-fine-net-n68-853-report
+    claim: lower-bound
+    scope: {n_values: [68]}
+    assurance: reported
+    reported_method: interval-certified
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+    certificate: >-
+      packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n68_L853/candidate.json.gz
+    replay_status: not-attempted
+    verifiers: [V-wand125-sqverify-proof-net]
+    limitations: >-
+      The author reports 853/100 at all 201 directions of the net its candidate
+      declares (step 83/40000, core 9977/10000) by sqverify-proof-net, its copy of
+      this repository's sqverify_fast, at 14b4b0b, in jlevy/squares#446, in a check2
+      run (255.6 s at 12 threads) and a pre-publication run on a fresh machine (75 s).
+      Complete source-byte custody and the maintained mass, net and check2 premises
+      are accepted (receipts/premises-n68.json). The 32-direction 197/200 control
+      remains sampled. A complete capture, whole-net controls and a review that reads
+      this certificate remain pending under think-f40c, priced at about 0.84 to 0.96
+      CPU-hours. The shared crate establishes no independent implementation. No
+      standing bound or rating changes.
+    source_reviewed: '2026-10-17'
+  - id: E-wand125-fine-net-n84-94225-report
+    claim: lower-bound
+    scope: {n_values: [84]}
+    assurance: reported
+    reported_method: interval-certified
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+    certificate: >-
+      packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n84_L94225/candidate.json.gz
+    replay_status: not-attempted
+    verifiers: [V-wand125-sqverify-proof-net]
+    limitations: >-
+      The author reports 3769/400 at all 201 directions of the net its candidate
+      declares (step 83/40000, core 9977/10000) by sqverify-proof-net, its copy of
+      this repository's sqverify_fast, at f28b5f3, in jlevy/squares#446, in a check2
+      run (328.4 s at 12 threads) and a pre-publication run on a fresh machine (121
+      s). Complete source-byte custody and the maintained mass, net and check2
+      premises are accepted (receipts/premises-n84.json). The 32-direction 197/200
+      control remains sampled. A complete capture, whole-net controls and a review
+      that reads this certificate remain pending under think-f40c, priced at about 1.5
+      to 1.72 CPU-hours. The shared crate establishes no independent implementation.
+      No standing bound or rating changes.
+    source_reviewed: '2026-10-17'
+  - id: E-wand125-fine-net-n85-9475-report
+    claim: lower-bound
+    scope: {n_values: [85]}
+    assurance: reported
+    reported_method: interval-certified
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+    certificate: >-
+      packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n85_L9475/candidate.json.gz
+    replay_status: not-attempted
+    verifiers: [V-wand125-sqverify-proof-net]
+    limitations: >-
+      The author reports 379/40 at all 201 directions of the net its candidate
+      declares (step 83/40000, core 9977/10000) by sqverify-proof-net, its copy of
+      this repository's sqverify_fast, at fc2e96f, in jlevy/squares#446, in a check2
+      run (255.1 s at 12 threads) and a pre-publication run on a fresh machine (124
+      s). Complete source-byte custody and the maintained mass, net and check2
+      premises are accepted (receipts/premises-n85.json). The 32-direction 197/200
+      control remains sampled. A complete capture, whole-net controls and a review
+      that reads this certificate remain pending under think-f40c, priced at about
+      1.32 to 1.52 CPU-hours. The shared crate establishes no independent
+      implementation. No standing bound or rating changes.
+    source_reviewed: '2026-10-17'
+  - id: E-wand125-fine-net-n86-95275-report
+    claim: lower-bound
+    scope: {n_values: [86]}
+    assurance: reported
+    reported_method: interval-certified
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+    certificate: >-
+      packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n86_L95275/candidate.json.gz
+    replay_status: not-attempted
+    verifiers: [V-wand125-sqverify-proof-net]
+    limitations: >-
+      The author reports 3811/400 at all 201 directions of the net its candidate
+      declares (step 83/40000, core 9977/10000) by sqverify-proof-net, its copy of
+      this repository's sqverify_fast, at 2ad6bda, in jlevy/squares#446, in a check2
+      run (173.6 s at 8 threads) and a pre-publication run on a fresh machine (131 s).
+      Complete source-byte custody and the maintained mass, net and check2 premises
+      are accepted (receipts/premises-n86.json). The 32-direction 197/200 control
+      remains sampled. A complete capture, whole-net controls and a review that reads
+      this certificate remain pending under think-f40c, priced at about 0.65 to 0.75
+      CPU-hours. The shared crate establishes no independent implementation. No
+      standing bound or rating changes.
+    source_reviewed: '2026-10-17'
+  - id: E-wand125-fine-net-n88-96325-report
+    claim: lower-bound
+    scope: {n_values: [88]}
+    assurance: reported
+    reported_method: interval-certified
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+    certificate: >-
+      packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n88_L96325/candidate.json.gz
+    replay_status: not-attempted
+    verifiers: [V-wand125-sqverify-proof-net]
+    limitations: >-
+      The author reports 3853/400 at all 201 directions of the net its candidate
+      declares (step 83/40000, core 9977/10000) by sqverify-proof-net, its copy of
+      this repository's sqverify_fast, at f8f99e3, in jlevy/squares#446, in a check2
+      run (453.2 s at 12 threads) and a pre-publication run on a fresh machine (156
+      s). Complete source-byte custody and the maintained mass, net and check2
+      premises are accepted (receipts/premises-n88.json). The 32-direction 197/200
+      control remains sampled. A complete capture, whole-net controls and a review
+      that reads this certificate remain pending under think-f40c, priced at about
+      1.88 to 2.16 CPU-hours. The shared crate establishes no independent
+      implementation. No standing bound or rating changes.
+    source_reviewed: '2026-10-17'
+  - id: E-wand125-fine-net-n89-9685-report
+    claim: lower-bound
+    scope: {n_values: [89]}
+    assurance: reported
+    reported_method: interval-certified
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+    certificate: >-
+      packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n89_L9685/candidate.json.gz
+    replay_status: not-attempted
+    verifiers: [V-wand125-sqverify-proof-net]
+    limitations: >-
+      The author reports 1937/200 at all 201 directions of the net its candidate
+      declares (step 83/40000, core 9977/10000) by sqverify-proof-net, its copy of
+      this repository's sqverify_fast, at a361ba2, in jlevy/squares#446, in a check2
+      run (164.2 s at 8 threads) and a pre-publication run on a fresh machine (123 s).
+      Complete source-byte custody and the maintained mass, net and check2 premises
+      are accepted (receipts/premises-n89.json). The 32-direction 197/200 control
+      remains sampled. A complete capture, whole-net controls and a review that reads
+      this certificate remain pending under think-f40c, priced at about 0.62 to 0.71
+      CPU-hours. The shared crate establishes no independent implementation. No
+      standing bound or rating changes.
+    source_reviewed: '2026-10-17'
+  - id: E-wand125-fine-net-n91-97875-report
+    claim: lower-bound
+    scope: {n_values: [91]}
+    assurance: reported
+    reported_method: interval-certified
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+    certificate: >-
+      packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n91_L97875/candidate.json.gz
+    replay_status: not-attempted
+    verifiers: [V-wand125-sqverify-proof-net]
+    limitations: >-
+      The author reports 783/80 at all 201 directions of the net its candidate
+      declares (step 83/40000, core 9977/10000) by sqverify-proof-net, its copy of
+      this repository's sqverify_fast, at e060e98, in jlevy/squares#446, in a check2
+      run (225.4 s at 8 threads) and a pre-publication run on a fresh machine (167 s).
+      Complete source-byte custody and the maintained mass, net and check2 premises
+      are accepted (receipts/premises-n91.json). The 32-direction 197/200 control
+      remains sampled. A complete capture, whole-net controls and a review that reads
+      this certificate remain pending under think-f40c, priced at about 0.83 to 0.96
+      CPU-hours. The shared crate establishes no independent implementation. No
+      standing bound or rating changes.
+    source_reviewed: '2026-10-17'
+  - id: E-wand125-fine-net-n90-978-report
+    claim: lower-bound
+    scope: {n_values: [90]}
+    assurance: reported
+    reported_method: interval-certified
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+    certificate: >-
+      packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n90_L978/candidate.json.gz
+    replay_status: not-attempted
+    verifiers: [V-wand125-sqverify-proof-net]
+    limitations: >-
+      The author reports 489/50 at all 201 directions of the net its candidate
+      declares (step 83/40000, core 9977/10000) by sqverify-proof-net, its copy of
+      this repository's sqverify_fast, at 8155028, in jlevy/squares#446, in a check2
+      run (688.8 s at 7 threads) and a pre-publication run on a fresh machine (489 s).
+      Complete source-byte custody and the maintained mass, net and check2 premises
+      are accepted (receipts/premises-n90.json). The 32-direction 197/200 control
+      remains sampled. A complete capture, whole-net controls and a review that reads
+      this certificate remain pending under think-f40c, priced at about 2.26 to 2.6
+      CPU-hours. The shared crate establishes no independent implementation. No
+      standing bound or rating changes.
+    source_reviewed: '2026-10-17'
+  - id: E-wand125-fine-net-n92-986-report
+    claim: lower-bound
+    scope: {n_values: [92]}
+    assurance: reported
+    reported_method: interval-certified
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+    certificate: >-
+      packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n92_L986/candidate.json.gz
+    replay_status: not-attempted
+    verifiers: [V-wand125-sqverify-proof-net]
+    limitations: >-
+      The author reports 493/50 at all 201 directions of the net its candidate
+      declares (step 83/40000, core 9977/10000) by sqverify-proof-net, its copy of
+      this repository's sqverify_fast, at 599a67c, in jlevy/squares#446, in a check2
+      run (404.2 s at 7 threads) and a pre-publication run on a fresh machine (255 s).
+      Complete source-byte custody and the maintained mass, net and check2 premises
+      are accepted (receipts/premises-n92.json). The 32-direction 197/200 control
+      remains sampled. A complete capture, whole-net controls and a review that reads
+      this certificate remain pending under think-f40c, priced at about 1.16 to 1.33
+      CPU-hours. The shared crate establishes no independent implementation. No
+      standing bound or rating changes.
+    source_reviewed: '2026-10-17'
+  - id: E-wand125-fine-net-n106-10503-report
+    claim: lower-bound
+    scope: {n_values: [106]}
+    assurance: reported
+    reported_method: interval-certified
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+    certificate: >-
+      packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n106_L10503/candidate.json.gz
+    replay_status: not-attempted
+    verifiers: [V-wand125-sqverify-proof-net]
+    limitations: >-
+      The author reports 10503/1000 at all 201 directions of the net its candidate
+      declares (step 83/40000, core 9977/10000) by sqverify-proof-net, its copy of
+      this repository's sqverify_fast, at 3b25387, in jlevy/squares#446, in a check2
+      run (179.2 s at 8 threads) and a pre-publication run on a fresh machine (150 s).
+      Complete source-byte custody and the maintained mass, net and check2 premises
+      are accepted (receipts/premises-n106.json). The 32-direction 197/200 control
+      remains sampled. A complete capture, whole-net controls and a review that reads
+      this certificate remain pending under think-f40c, priced at about 0.67 to 0.77
+      CPU-hours. The shared crate establishes no independent implementation. No
+      standing bound or rating changes.
+    source_reviewed: '2026-10-17'
+  - id: E-wand125-fine-net-n107-1058-report
+    claim: lower-bound
+    scope: {n_values: [107]}
+    assurance: reported
+    reported_method: interval-certified
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+    certificate: >-
+      packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n107_L1058/candidate.json.gz
+    replay_status: not-attempted
+    verifiers: [V-wand125-sqverify-proof-net]
+    limitations: >-
+      The author reports 529/50 at all 201 directions of the net its candidate
+      declares (step 83/40000, core 9977/10000) by sqverify-proof-net, its copy of
+      this repository's sqverify_fast, at 021702f, in jlevy/squares#446, in a check2
+      run (1,733.1 s at 16 threads) and a pre-publication run on a fresh machine (244
+      s). Complete source-byte custody and the maintained mass, net and check2
+      premises are accepted (receipts/premises-n107.json). The 32-direction 197/200
+      control remains sampled. A complete capture, whole-net controls and a review
+      that reads this certificate remain pending under think-f40c, priced at about
+      2.45 to 2.82 CPU-hours. The shared crate establishes no independent
+      implementation. No standing bound or rating changes.
+    source_reviewed: '2026-10-17'
+  - id: E-wand125-fine-net-n108-1062-report
+    claim: lower-bound
+    scope: {n_values: [108]}
+    assurance: reported
+    reported_method: interval-certified
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+    certificate: >-
+      packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n108_L1062/candidate.json.gz
+    replay_status: not-attempted
+    verifiers: [V-wand125-sqverify-proof-net]
+    limitations: >-
+      The author reports 531/50 at all 201 directions of the net its candidate
+      declares (step 83/40000, core 9977/10000) by sqverify-proof-net, its copy of
+      this repository's sqverify_fast, at 6af3c00, in jlevy/squares#446, in a check2
+      run (154.5 s at 8 threads) and a pre-publication run on a fresh machine (141 s).
+      Complete source-byte custody and the maintained mass, net and check2 premises
+      are accepted (receipts/premises-n108.json). The 32-direction 197/200 control
+      remains sampled. A complete capture, whole-net controls and a review that reads
+      this certificate remain pending under think-f40c, priced at about 0.59 to 0.67
+      CPU-hours. The shared crate establishes no independent implementation. No
+      standing bound or rating changes.
+    source_reviewed: '2026-10-17'
+  - id: E-wand125-fine-net-n110-1073-report
+    claim: lower-bound
+    scope: {n_values: [110]}
+    assurance: reported
+    reported_method: interval-certified
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+    certificate: >-
+      packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n110_L1073/candidate.json.gz
+    replay_status: not-attempted
+    verifiers: [V-wand125-sqverify-proof-net]
+    limitations: >-
+      The author reports 1073/100 at all 201 directions of the net its candidate
+      declares (step 83/40000, core 9977/10000) by sqverify-proof-net, its copy of
+      this repository's sqverify_fast, at 718887c, in jlevy/squares#446, in a check2
+      run (976.3 s at 16 threads) and a pre-publication run on a fresh machine (249
+      s). Complete source-byte custody and the maintained mass, net and check2
+      premises are accepted (receipts/premises-n110.json). The 32-direction 197/200
+      control remains sampled. A complete capture, whole-net controls and a review
+      that reads this certificate remain pending under think-f40c, priced at about
+      2.47 to 2.83 CPU-hours. The shared crate establishes no independent
+      implementation. No standing bound or rating changes.
+    source_reviewed: '2026-10-17'
