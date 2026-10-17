@@ -26759,6 +26759,11 @@ results:
       the sixteen sides the houses at their counts, the smallest validated at each, and stages
       their adoption under think-ot5c (devtools.select_houses.PENDING_ADOPTION), until
       adopt_houses can write an algebraic side.
+
+      At 88, 126, 175, 199, 204, 232, 266, 292 and 301 the adoption also waits for RE-1's
+      correction: the writer credits the packing a regularizations item names, so
+      adopt_houses refuses T-193 there while the item names T-174 or T-186
+      (devtools.select_houses.CORRECTIONS_OWED, think-8ido).
     notes: >-
       Rungs on 16 October 2026, at the stage 4 exit after the review (think-7qxm): V0/C0 to
       V3/C3 at all sixteen counts, by check_results, on the replay of the source's own

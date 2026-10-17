@@ -1727,6 +1727,8 @@ The next evidence-improving action or terminal rationale for each result, and un
 
   The regularizations items at nine counts wait for the correction RE-1 asks, after the owner's Q2 (think-8ido). The house rule of 16 October 2026 makes the sixteen sides the houses at their counts, the smallest validated at each, and stages their adoption under think-ot5c (devtools.select_houses.PENDING_ADOPTION), until adopt_houses can write an algebraic side.
 
+  At 88, 126, 175, 199, 204, 232, 266, 292 and 301 the adoption also waits for RE-1's correction: the writer credits the packing a regularizations item names, so adopt_houses refuses T-193 there while the item names T-174 or T-186 (devtools.select_houses.CORRECTIONS_OWED, think-8ido).
+
 - **T-120** — Acquire and bind the exact source geometry, check root identity and full feasibility independently, and review any minimality claim separately. PR403 owns canonical exact-value integration.
   - Unfinished, C3: the exact source geometry acquired and bound, and its root identity and full feasibility checked independently. Not priced.
 - **T-121** — Acquire and bind the exact source geometry, check root identity and full feasibility independently, and review any minimality claim separately. PR403 owns canonical exact-value integration.

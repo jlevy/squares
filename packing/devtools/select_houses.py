@@ -219,6 +219,59 @@ PENDING_ADOPTION: dict[int, Pending] = {
 }  # fmt: skip
 
 
+@dataclass(frozen=True)
+class Correction:
+    """A regularization item the register states wrongly at a count, which the house's
+    adoption waits on: the `of` the item names, the packing a stage 4 review measured the
+    house to solve, and the open bead that corrects the item."""
+
+    #: The result whose `regularizations` item is wrong at the count: the house.
+    result: str
+    #: The `of` the item names, which the measurement refutes.
+    named: str
+    #: The packing the review measured the house to solve, as its finding states it.
+    measured: str
+    #: The open bead that corrects the item.
+    bead: str
+    #: The review that measured it, repository-relative.
+    measured_in: str
+
+
+#: The bead that corrects T-193's regularization items, after the owner's Q2.
+RE1_BEAD = "think-8ido"
+#: The stage 4 review of issue 639, whose RE-1 measured T-193's forms pose by pose.
+REVIEW_639 = "docs/project/reviews/review-2026-10-16-evand-exact-sides-639.md"
+
+#: Regularization items owed a correction before their house is adopted (review B1 of
+#: #658). At nine of T-193's counts the item names PingYou Ltd's (T-174) or Polkovskyi's
+#: (T-186) refinement as the packing the form solves, and the 16 October review measured
+#: it, centre by centre, to be the case's own house there (RE-1). The writer takes a
+#: house's credit from that item (`regularized`, then `adopt_houses._regularization`), so
+#: `adopt_houses.plan` refuses a house whose item still names `named`, and the adoption
+#: waits on `bead`. `--check` fails once the item names anything else, so the entry goes
+#: with the correction, and `deferrals` holds the bead open while it stands. Unlike
+#: `PENDING_ADOPTION`, an entry here outlives the staging: the pull request that takes a
+#: count off that list cannot write the uncorrected credit.
+CORRECTIONS_OWED: dict[int, Correction] = {
+    n: Correction(result="T-193", named=named, measured=measured, bead=RE1_BEAD,
+                  measured_in=REVIEW_639)
+    for n, named, measured in (
+        (88, "T-174", "T-127"), (126, "T-174", "T-139"), (175, "T-186", "T-158"),
+        (199, "T-174", "T-127"), (204, "T-186", "T-162"), (232, "T-186", "T-158"),
+        (266, "T-174", "T-119"), (292, "T-174", "T-146"), (301, "T-174", "T-098"),
+    )
+}  # fmt: skip
+
+
+def owed_correction(n: int, house: Candidate) -> Correction | None:
+    """The correction `house`'s regularization item at `n` still waits for, if any: the
+    entry in `CORRECTIONS_OWED` for its result whose wrong `of` the item still names."""
+    owed = CORRECTIONS_OWED.get(n)
+    if owed is None or owed.result != house.result or house.regularizes != owed.named:
+        return None
+    return owed
+
+
 class SelectionError(ValueError):
     """The record does not support a selection: a reader or a case record is missing."""
 
@@ -796,12 +849,41 @@ def unread_unordered(unread: Sequence[str]) -> dict[str, list[int]]:
     return {identifier: sorted(counts) for identifier, counts in found.items()}
 
 
+def correction_problems(selections: Mapping[int, Selection]) -> list[str]:
+    """Why `CORRECTIONS_OWED` no longer matches the register: an entry whose count's house
+    is another result's, or whose item no longer names the refuted `of`, which means the
+    correction has landed and the entry goes. Read against the whole register's selection,
+    which reaches every count a candidate does."""
+    problems = []
+    for n, owed in sorted(CORRECTIONS_OWED.items()):
+        house = selections[n].house if n in selections else None
+        if house is None or house.result != owed.result:
+            problems.append(
+                f"FAIL: n={n} owes {owed.result}'s regularization a correction ({owed.bead}), "
+                f"but the house is {house.result if house else 'the case'}'s; take it off "
+                "CORRECTIONS_OWED"
+            )
+        elif house.regularizes != owed.named:
+            problems.append(
+                f"FAIL: n={n}: {owed.result}'s regularization item names "
+                f"{house.regularizes or 'no packing'}, not {owed.named}, so the correction "
+                f"{owed.bead} owed has landed; take it off CORRECTIONS_OWED"
+            )
+    return problems
+
+
 def deferrals() -> list[tuple[str, str]]:
     """Each staged adoption as (where, the bead alias), for `devtools.check_bead_tree`,
     which holds the bead open while the count is staged."""
     return [
-        (f"select_houses.PENDING_ADOPTION n={n} ({pending.house})", pending.bead)
-        for n, pending in sorted(PENDING_ADOPTION.items())
+        *(
+            (f"select_houses.PENDING_ADOPTION n={n} ({pending.house})", pending.bead)
+            for n, pending in sorted(PENDING_ADOPTION.items())
+        ),
+        *(
+            (f"select_houses.CORRECTIONS_OWED n={n} ({owed.result} of {owed.named})", owed.bead)
+            for n, owed in sorted(CORRECTIONS_OWED.items())
+        ),
     ]
 
 
@@ -862,6 +944,8 @@ def table(selections: Mapping[int, Selection], *, everything: bool) -> str:
             notes.append("algebraic")
         if (staged := PENDING_ADOPTION.get(n)) is not None and staged.house == house.result:
             notes.append(f"staged ({staged.why}): {staged.bead}")
+        if (owed := owed_correction(n, house)) is not None:
+            notes.append(f"after {owed.bead}, which corrects the packing to {owed.measured}")
         lines.append(
             f"{n:>4}  {old:<44} {house.result:<9} {ceiling(house.side):<20} "
             f"{_sci(selection.margin):<8} {'; '.join(notes)}"
@@ -936,7 +1020,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         print(table(selections, everything=arguments.all))
     if not arguments.check:
         return 0
-    problems = check(selections)
+    problems = [*check(selections), *correction_problems(selections)]
     for line in problems:
         print(line)
     staged: dict[str, list[int]] = {}
@@ -944,6 +1028,13 @@ def main(argv: Sequence[str] | None = None) -> int:
         staged.setdefault(f"{pending.house} under {pending.bead} ({pending.why})", []).append(n)
     for owner, counts in staged.items():
         print(f"staged adoption, {owner}: n = {counts}")
+    owing: dict[str, list[int]] = {}
+    for n, owed in sorted(CORRECTIONS_OWED.items()):
+        owing.setdefault(f"{owed.result}'s regularization items under {owed.bead}", []).append(
+            n
+        )
+    for owner, counts in owing.items():
+        print(f"adoption waits for a correction of {owner}: n = {counts}")
     print(
         f"unread, eligible but with no exact reader: {', '.join(unread) if unread else 'none'}"
     )

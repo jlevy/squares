@@ -5,6 +5,7 @@ the case records, the coverage register and each pass's prior state."""
 from __future__ import annotations
 
 import dataclasses
+import gzip
 import hashlib
 import json
 import re
@@ -433,6 +434,8 @@ def test_a_staged_count_passes_the_check_and_a_stale_or_unstaged_one_fails(
     assert [c.result for c in selected[7].candidates] == ["T-900", "T-901"]
     staged = {7: select.Pending(house="T-900", bead="think-test", why=select.NEXT_PULL_REQUEST)}
     monkeypatch.setattr(select, "PENDING_ADOPTION", staged)
+    # A synthetic register owes no correction (`CORRECTIONS_OWED`, review B1 of #658).
+    monkeypatch.setattr(select, "CORRECTIONS_OWED", {})
     assert select.check(selected) == []
     assert select.row(selected[7])["staged"] == "think-test"
     assert "staged (next pull request): think-test" in select.table(selected, everything=False)
@@ -833,6 +836,7 @@ def test_check_lists_the_unread_and_fails_on_one_pending_adoption(
 
     monkeypatch.setattr(select, "select", selecting)
     monkeypatch.setattr(select, "PENDING_ADOPTION", {})
+    monkeypatch.setattr(select, "CORRECTIONS_OWED", {})
     monkeypatch.setattr(select, "unread_pending", lambda _unread: {})
     monkeypatch.setattr(select, "unread_unordered", lambda _unread: {})
     assert select.main(["--check"]) == 0
@@ -943,7 +947,7 @@ def test_a_held_count_restaged_for_a_smaller_house_names_it_and_becomes_history(
     history like every other held sentence (`adopt_houses.held_history`)."""
     sentence = (
         "The case keeps its house until T-193’s adoption, staged under think-ot5c, moves it "
-        "to T-193’s side, below T-174’s."
+        "to T-193’s side, below T-174’s, once the writer takes an algebraic side."
     )
     assert adopt._keeps_until(88, "T-174", "its house") == sentence  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
     assert adopt._keeps_until(68, "T-174", "its house") == (  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
@@ -963,17 +967,140 @@ def test_a_held_count_restaged_for_a_smaller_house_names_it_and_becomes_history(
 
 def test_every_staged_count_names_its_house_and_bead_in_its_record() -> None:
     """Every count staged for adoption says so in its record, with the house and the bead
-    it waits under: the held and algebraic sentences of #660, and, at 175, 204, 232 and
-    302, the sentence for a smaller house validated after the pass that wrote the record
-    (`adopt_houses.staged_sentences`, #658)."""
+    it waits under, and, where it waits for the writer, that it moves the case once the
+    writer takes an algebraic side: the held and algebraic sentences of #660, and the
+    sentences for a smaller house validated after the pass that wrote the record
+    (`adopt_houses.staged_sentences`, #658). At all sixteen of T-193's counts the record
+    also says what T-193 is and which review accepted it (review B3 of #658)."""
     for n, pending in select.PENDING_ADOPTION.items():
         text = _flat(select.case_path(n).read_text(encoding="utf-8"))
         assert f"staged under {pending.bead}," in text, n
         assert f"moves it to {pending.house}’s side" in text, n
-    for n in T193_BELOW_T186:
+        if pending.why == select.NO_WRITER:
+            assert "once the writer takes an algebraic side." in text, n
+    review = "../../docs/project/reviews/review-2026-10-16-evand-exact-sides-639.md"
+    for n in T193_COUNTS:
         text = _flat(select.case_path(n).read_text(encoding="utf-8"))
-        assert "T-193’s exact algebraic side at this count" in text, n
-        assert "once the writer takes an algebraic side." in text, n
+        assert "T-193’s exact algebraic side at this count, a root of a degree-" in text, n
+        assert f"accepted by the [review of 16 October 2026]({review})" in text, n
+
+
+def test_an_algebraic_sentence_at_a_count_restaged_for_a_smaller_house_names_it(
+    recorded: dict[int, select.Selection], monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Review B3 of #658: `algebraic_sentences` closed with its own result's adoption even
+    where a smaller house is staged in its place. No count reaches that today; with 70
+    staged for another house, the sentence names that house's adoption and its bead."""
+    staged = select.Pending(house="T-900", bead="think-test", why=select.NO_WRITER)
+    monkeypatch.setitem(select.PENDING_ADOPTION, 70, staged)
+    (sentence,) = adopt.algebraic_sentences(recorded[70], houses.side(70))
+    assert sentence.startswith("T-174’s algebraic certificate at this count")
+    assert "house rule of 16 October 2026 ended that wait." in sentence
+    assert sentence.endswith(
+        "The case keeps this house until T-900’s adoption, staged under think-test, moves "
+        "it to T-900’s side, below T-174’s, once the writer takes an algebraic side."
+    )
+
+
+def test_t193s_adoption_waits_for_re1s_correction_at_nine_counts(
+    selections: dict[int, select.Selection],
+) -> None:
+    """Review B1 of #658: at nine counts T-193's regularization item names T-174 or T-186
+    as the packing the form solves, which RE-1 of its stage 4 review measured to be the
+    case's own house. Each is recorded as a correction owed, under think-8ido, which
+    `bead tree` holds open while it stands, and it holds the register as it is: the item
+    still names the refuted `of` and the house is still T-193."""
+    measured = {
+        88: "T-127", 126: "T-139", 175: "T-158", 199: "T-127", 204: "T-162", 232: "T-158",
+        266: "T-119", 292: "T-146", 301: "T-098",
+    }  # fmt: skip
+    assert {n: owed.measured for n, owed in select.CORRECTIONS_OWED.items()} == measured
+    for n, owed in select.CORRECTIONS_OWED.items():
+        house = selections[n].house
+        assert house is not None, n
+        assert (house.result, house.regularizes) == ("T-193", owed.named), n
+        assert owed.named in {"T-174", "T-186"}, n
+        assert (owed.bead, owed.measured_in) == ("think-8ido", select.REVIEW_639), n
+        assert select.owed_correction(n, house) == owed, n
+        assert (f"select_houses.CORRECTIONS_OWED n={n} (T-193 of {owed.named})", owed.bead) in (
+            select.deferrals()
+        ), n
+    assert select.correction_problems(selections) == []
+
+
+def test_the_writer_never_writes_the_uncorrected_of(
+    selections: dict[int, select.Selection], monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Review B1 of #658: the writer takes a house's credit from its regularization item,
+    so it must refuse T-193 where the item names the refuted `of`, even once the pull
+    request that adopts T-193 has taken its counts off `PENDING_ADOPTION`. This fails if
+    the writer would write the uncorrected `of` at any of the nine counts; where the item
+    stands (102) the writer's only refusal is its algebraic one, and once the item is
+    corrected the correction no longer refuses and `--check` asks for its removal."""
+    monkeypatch.setattr(
+        select,
+        "PENDING_ADOPTION",
+        {n: p for n, p in select.PENDING_ADOPTION.items() if p.house != "T-193"},
+    )
+    for n, owed in select.CORRECTIONS_OWED.items():
+        with pytest.raises(adopt.AdoptionError, match=f"names {owed.named} .*think-8ido"):
+            adopt.plan({n: selections[n]})
+    with pytest.raises(adopt.AdoptionError, match="algebraic side"):
+        adopt.plan({102: selections[102]})
+    house = selections[88].house
+    assert house is not None
+    corrected = dataclasses.replace(
+        selections[88], house=dataclasses.replace(house, regularizes="T-127")
+    )
+    assert select.owed_correction(88, corrected.house) is None  # pyright: ignore[reportArgumentType]
+    with pytest.raises(adopt.AdoptionError, match="algebraic side"):
+        adopt.plan({88: corrected})
+    problems = select.correction_problems({**selections, 88: corrected})
+    assert problems == [
+        (
+            "FAIL: n=88: T-193's regularization item names T-127, not T-174, so the "
+            "correction think-8ido owed has landed; take it off CORRECTIONS_OWED"
+        )
+    ]
+
+
+def test_t193s_exact_sides_table_is_the_retained_packets() -> None:
+    """Review B2 of #658: T-193's reader takes its sides from the intake's table, which no
+    gate held to the packet. Every T-193 row is the packet's own: at the fourteen counts
+    the packet retains, the file's digest, polynomial and isolating interval; at the two it
+    pins by digest only (204 and 267), the manifest's digest."""
+    packet = select.ROOT / "resources/web/evand-exact-cur-2026-10-16"
+    manifest = {
+        path.removeprefix("./"): digest
+        for digest, path in (
+            line.split(maxsplit=1)
+            for line in (packet / "acquisition/upstream-subtree.sha256")
+            .read_text(encoding="utf-8")
+            .splitlines()
+            if line.strip()
+        )
+    }
+    rows = json.loads(select.EVAND_EXACT_SIDES.read_text(encoding="utf-8"))["rows"]
+    retained = []
+    for row in (row for row in rows if row["n"] in T193_COUNTS):
+        name = f"search/exact/cur/data/n-{row['n']}.minpoly.json.gz"
+        assert row["sha256"] == manifest[name], row["n"]
+        path = packet / "source" / name
+        if not path.is_file():
+            assert row["n"] in (204, 267), row["n"]
+            continue
+        retained.append(row["n"])
+        data = path.read_bytes()
+        assert hashlib.sha256(data).hexdigest() == row["sha256"], row["n"]
+        side = json.loads(gzip.decompress(data))["S"]
+        assert [int(c) for c in side["poly"]] == [
+            int(c) for c in row["polynomial_low_to_high"]
+        ], row["n"]
+        assert [Fraction(end) for end in side["interval"]] == [
+            Fraction(end) for end in row["source_interval"]
+        ], row["n"]
+        assert row["degree"] == len(side["poly"]) - 1, row["n"]
+    assert len(retained) == 14
 
 
 def test_a_reader_makes_an_unread_source_a_candidate_and_the_writer_waits_for_it(
