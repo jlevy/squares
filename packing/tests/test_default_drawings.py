@@ -296,9 +296,25 @@ def test_the_allowlist_equals_the_pending_set_and_each_entry_names_a_bead(
 
 
 def _correction(row: dict) -> defaults.Correction:
-    """A corrected witness at the row's own source and side, replacing an older file."""
+    """A correction of the row's witness: the one it replaced had the row's source, path and
+    exact side at an earlier revision. Checked as declared, with no base record."""
     witness = row["witness"]
-    return defaults.Correction(witness["source"], witness["side"], replaces="old")
+    return defaults.Correction(
+        witness["source"], witness.get("path"), "an-earlier-revision", witness["side"]
+    )
+
+
+def _replaced(witness: dict) -> defaults.Correction:
+    """The correction that names `witness` as the one it replaced."""
+    return defaults.Correction(
+        witness["source"], witness.get("path"), witness.get("revision"), witness["side"]
+    )
+
+
+def _base(rows: dict, changed: frozenset[int] = frozenset()) -> defaults.Base:
+    """A base record of these rows, as `base_record` reads one from a commit, with the
+    counts whose witness file the change alters."""
+    return defaults.Base("origin/main", rows, changed)
 
 
 def test_a_row_out_of_place_fails_the_gate(tmp_path: Path) -> None:
@@ -744,9 +760,10 @@ def test_an_adoption_that_rebuilds_only_the_axis_view_reads_pending(tmp_path: Pa
     deferred = {**defaults.PENDING_ALLOWED, n: "think-g3q7: re-housed by an adoption"}
     found, listed = defaults.state_problems(regenerated, adopted, allowed=deferred)
     (refused,) = about(found)
-    assert refused.startswith(f"n={n}: PENDING_ALLOWED defers its runs, but it is neither")
-    witness = state["witness"]
-    corrected = {n: defaults.Correction(witness["source"], witness["side"], "an-older-one")}
+    assert refused.startswith(
+        f"n={n}: PENDING_ALLOWED defers its runs, but CORRECTED names no corrected witness"
+    )
+    corrected = {n: _correction(state)}
     found, listed = defaults.state_problems(
         regenerated, adopted, allowed=deferred, corrected=corrected
     )
@@ -995,8 +1012,7 @@ def test_an_allowed_count_owes_its_runs_whatever_its_new_house_reads(tmp_path: P
 
     # The gate lists each as allowed and asks for none to come off; on the record the
     # earlier rule gave, it asked for every one to come off.
-    witness = rows[extra]["witness"]
-    corrected = {extra: defaults.Correction(witness["source"], witness["side"], "older")}
+    corrected = {extra: _correction(rows[extra])}
 
     def gate(states: dict[int, dict]) -> tuple[list[str], list[str]]:
         changed = {**record, "states": [states.get(row["n"], row) for row in record["states"]]}
@@ -1375,85 +1391,121 @@ def test_the_summary_counts_pending_and_settled_losses_apart(
     )
 
 
-#: The counts `PENDING_ALLOWED` deferred when the owner set the house rule (16 October
-#: 2026): the twenty the audit of 15 October found (think-gvke). Nothing joins them.
-AT_RULE = (
-    105, 129, 146, 153, 154, 156, 175, 176, 204, 207,
-    211, 232, 237, 241, 264, 271, 272, 302, 303, 304,
-)  # fmt: skip
-
-
-def test_a_deferral_names_the_witness_it_defers_and_lapses_when_the_house_moves() -> None:
-    """Reviews A5, B1 and B2 of #660: the check that a re-housed count is never deferred
-    read the day a pass gave itself, covered register adoptions only, and failed the
-    deferral the runbook allows a corrected witness. Keyed on the witness the record names
-    instead, it holds every import: an entry the list held at the rule stays only while
-    its witness does, and every later one is a corrected witness's, at its house's own
-    source and side."""
-    assert tuple(sorted(defaults.DEFERRED_AT_RULE)) == AT_RULE
+def test_a_deferral_is_a_correction_held_to_the_base_record() -> None:
+    """Reviews A5, B1, B2 and C3 of #660. The check that a re-housed count is never deferred
+    read the day a pass gave itself and covered register adoptions only (A5, B1); it then
+    failed the deferral the runbook allows a corrected witness (B2), and passed a house
+    move declared as one (C3). Each entry is a correction now, held to the base branch's
+    record: the witness it names as replaced is the base's, and the record's keeps that
+    source and exact side and is another witness only."""
     record = _record()
     rows = {row["n"]: row for row in record["states"]}
-    allowed = defaults.PENDING_ALLOWED
-    assert defaults.deferral_problems(rows, allowed) == []
-    for n in sorted(set(allowed) & set(defaults.DEFERRED_AT_RULE)):
-        witness = rows[n]["witness"]
-        assert defaults.DEFERRED_AT_RULE[n] == (witness["source"], witness["side"]), n
+    assert defaults.deferral_problems(rows, defaults.PENDING_ALLOWED) == []
+    n = 68
+    before = rows[n]["witness"]
+    allowed = {n: "think-aaaa: a deferral"}
+    base = _base(rows)
 
-    # An adoption, a catalogue intake or a re-solve moves the house: the entry lapses, and
-    # the pull request that moved it owes its runs. Held on a count whose rule-day witness
-    # stands, listed as it was then, whatever the live list holds by now.
-    n = _standing_at_rule(rows)
-    allowed = {n: "think-aaaa: a deferral the list held when the rule was set"}
-    assert defaults.deferral_problems(rows, allowed) == []
-    moved = {**rows, n: {**rows[n], "witness": {**rows[n]["witness"], "source": "[new]"}}}
-    (problem,) = defaults.deferral_problems(moved, allowed)
-    assert problem.startswith(f"n={n}: PENDING_ALLOWED deferred the runs of the witness")
-    assert "those runs are owed in the pull request that re-housed it" in problem
-    resolved = {**moved, n: {**moved[n], "witness": {**moved[n]["witness"], "side": "13/2"}}}
-    assert defaults.deferral_problems(resolved, allowed) != []
+    # B1: a deferral that names no correction fails, whatever day its pass gives.
+    (problem,) = defaults.deferral_problems(rows, allowed, base=base)
+    assert problem.startswith(f"n={n}: PENDING_ALLOWED defers its runs, but CORRECTED names no")
 
-    # B1: a deferral of a count first deferred after the rule, whatever day its pass gives,
-    # as at 68, which T-174's adoption re-houses.
-    later = 68
-    assert later not in defaults.DEFERRED_AT_RULE
-    added = {**allowed, later: "think-aaaa: re-housed by an adoption of 16 October"}
-    (problem,) = defaults.deferral_problems(rows, added)
-    assert problem.startswith(f"n={later}: PENDING_ALLOWED defers its runs, but it is")
+    # B2: a witness corrected at its house's source and exact side, at a new revision,
+    # may wait once its entry names the witness it replaced.
+    newer = {**rows, n: {**rows[n], "witness": {**before, "revision": "a-newer-revision"}}}
+    fix = {n: _replaced(before)}
+    assert defaults.deferral_problems(newer, allowed, corrected=fix, base=base) == []
+    assert defaults.deferral_problems(rows, {}, corrected=fix) == [
+        f"n={n}: CORRECTED names it, but PENDING_ALLOWED does not; take it off"
+    ]
 
-    # B2: a corrected witness at its house's own source and side may wait, once named.
-    witness = rows[later]["witness"]
-    fix = defaults.Correction(witness["source"], witness["side"], replaces="an-older-one")
-    assert defaults.deferral_problems(rows, added, corrected={later: fix}) == []
-    same = fix._replace(replaces=str(witness["revision"]))
-    (problem,) = defaults.deferral_problems(rows, added, corrected={later: same})
-    assert "there is no corrected witness to defer" in problem
-    elsewhere = fix._replace(side="13/2")
-    (problem,) = defaults.deferral_problems(rows, added, corrected={later: elsewhere})
-    assert "a correction keeps its house's source and side" in problem
-    (problem,) = defaults.deferral_problems(rows, allowed, corrected={later: fix})
-    assert problem == (
-        f"n={later}: CORRECTED names it, but PENDING_ALLOWED does not; take it off"
+    # C3: the reviewer's three house moves, each declared as a correction, fail, whether
+    # the entry names the witness the base holds or the one the change brought.
+    def moved(m: int, **change: str) -> dict:
+        return {**rows, m: {**rows[m], "witness": {**rows[m]["witness"], **change}}}
+
+    kingbird = next(
+        m
+        for m, row in sorted(rows.items())
+        if row["witness"]["source"] == "Kingbird derived numerical facts"
+        and row["witness"]["revision"] is None
     )
+    moves = {
+        "re-housed to a smaller side from a new source": (
+            n,
+            moved(
+                n,
+                source="[PingYou PR 574 certificates 2026-10-13]",
+                side="87987952372182838/10000000000000000",
+                revision="4c319c2",
+            ),
+        ),
+        "re-solved from the same source to another side": (
+            n,
+            moved(n, side="1/2", revision="new-revision"),
+        ),
+        "a Kingbird catalogue intake at a smaller side": (
+            kingbird,
+            moved(kingbird, side="1/3"),
+        ),
+    }
+    for case, (m, after) in moves.items():
+        changed = _base(rows, frozenset({m}))
+        for declared in (_replaced(rows[m]["witness"]), _replaced(after[m]["witness"])):
+            found = defaults.deferral_problems(
+                after, {m: "think-aaaa: a deferral"}, corrected={m: declared}, base=changed
+            )
+            assert len(found) == 1, (case, declared)
+            assert found[0].startswith(f"n={m}: CORRECTED says the correction replaced"), case
+
+    # A genuine fix at a source that pins neither its own path nor a revision, as Kingbird's
+    # catalogue: the witness names itself as before, and its file changed.
+    witness = rows[kingbird]["witness"]
+    declared = {kingbird: _replaced(witness)}
+    entry = {kingbird: "think-aaaa: the catalogue's corrected witness"}
+    altered = _base(rows, frozenset({kingbird}))
+    assert defaults.deferral_problems(rows, entry, corrected=declared, base=altered) == []
+    (problem,) = defaults.deferral_problems(rows, entry, corrected=declared, base=base)
+    assert "a correction is declared in the pull request that corrects the witness" in problem
+
+    # Once the correction has merged, the base itself defers the count at its witness.
+    deferred_row = {
+        **rows[kingbird],
+        "state": defaults.PENDING,
+        "why": (
+            f"no strong generator has decided this witness; allowed pending: {entry[kingbird]}"
+        ),
+    }
+    merged = _base({**rows, kingbird: deferred_row})
+    pending = {**rows, kingbird: deferred_row}
+    assert defaults.deferral_problems(pending, entry, corrected=declared, base=merged) == []
+
+    # With no base the entry is checked as declared: it may not name the record's own
+    # witness where the source pins a revision.
+    (problem,) = defaults.deferral_problems(rows, allowed, corrected=fix)
+    assert "there is no corrected witness to defer" in problem
 
 
-def _standing_at_rule(rows: dict) -> int:
-    """A count whose witness is still the one `DEFERRED_AT_RULE` names for it."""
-    for n in AT_RULE:
-        witness = rows[n]["witness"]
-        if defaults.DEFERRED_AT_RULE[n] == (witness["source"], witness["side"]):
-            return n
-    pytest.skip("every count deferred at the rule has been re-housed since")
-
-
-def test_the_state_gate_reads_each_deferral_against_its_witness(tmp_path: Path) -> None:
-    """The records tier's state gate runs the witness-keyed check, so a refactor that
-    unwires it fails here (review B7 of #660 found the bead tree's gate untested): a
-    re-housed count left on the list fails `--check-state`."""
+def test_the_state_gate_holds_each_correction_to_its_base(tmp_path: Path) -> None:
+    """The records tier's state gate runs the base-held check (`--check-state --base-ref`),
+    so a refactor that unwires it fails here, as review B7 of #660 found the bead tree's
+    gate untested: a house move declared as a correction fails `--check-state`."""
     record = _record()
-    n = _standing_at_rule({row["n"]: row for row in record["states"]})
+    rows = {row["n"]: dict(row) for row in record["states"]}
+    n = 68
+    before = rows[n]["witness"]
     for row in record["states"]:
         if row["n"] == n:
-            row["witness"] = {**row["witness"], "source": "[new]"}
-    allowed = {**defaults.PENDING_ALLOWED, n: "think-aaaa: a deferral held at the rule"}
-    problems, _listed = defaults.state_problems(_write(tmp_path, record), allowed=allowed)
-    assert any(problem.startswith(f"n={n}: PENDING_ALLOWED deferred") for problem in problems)
+            row["witness"] = {**before, "source": "[new]", "side": "1/2"}
+    allowed = {**defaults.PENDING_ALLOWED, n: "think-aaaa: a correction"}
+    corrected = {n: _replaced(before)}
+    problems, _listed = defaults.state_problems(
+        _write(tmp_path, record),
+        allowed=allowed,
+        corrected=corrected,
+        base=_base(rows, frozenset({n})),
+    )
+    assert any(problem.startswith(f"n={n}: CORRECTED says") for problem in problems)
+    assert defaults.main(["--check-state", "--base-ref", "HEAD"]) == 0
+    with pytest.raises(SystemExit):
+        defaults.main(["--check", "--base-ref", "HEAD"])

@@ -3842,8 +3842,16 @@ def _regularization_state(context: Context) -> str:
     # one fails on what that check lists without failing. n = 176 drew its raw house for
     # a day after an adoption lapsed its grid-slack view, with every gate green. A new
     # pending count fails here until the strong generators decide its witness or a
-    # reviewed change allows it with its bead; the output gives the list's size.
-    output = _module(context, "devtools.default_drawings", "--check-state")
+    # reviewed change allows it with its bead; the output gives the list's size. Each
+    # allowed count is a corrected witness's, held to the record of the commit the change
+    # is built on: `origin/main`'s merge base, or the first parent on `main` itself, as the
+    # release-impact step reads it (review C3 of #660).
+    base = (
+        "HEAD^1"
+        if _git("rev-parse", "HEAD").strip() == _git("rev-parse", "origin/main").strip()
+        else "origin/main"
+    )
+    output = _module(context, "devtools.default_drawings", "--check-state", "--base-ref", base)
     _require_text(output, "regularization state check passed")
     return output
 
@@ -5695,7 +5703,9 @@ STEPS: tuple[Step, ...] = (
         records=True,
         # It imports what the step above does, through the axis tool's constants, so it
         # claims the same closure; it reads the record, the index and the retained run
-        # evidence every settlement rests on (review G1 of #644), and no witness.
+        # evidence every settlement rests on (review G1 of #644), and of the witnesses
+        # only which ones the change alters against its base, with the base's record
+        # (review C3 of #660). Its message dates the rule from `select_houses`.
         touches=(
             *_CORE,
             "packing/atlas/known-best/default-drawings.json",
@@ -5703,6 +5713,7 @@ STEPS: tuple[Step, ...] = (
             "packing/atlas/known-best/regularized/*",
             "packing/cases/regularized_drawings/*",
             "packing/witnesses/known-best/*",
+            "packing/devtools/select_houses.py",
             *_RENDERER_HUB,
         ),
     ),

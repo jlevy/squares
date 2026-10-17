@@ -896,7 +896,9 @@ def _corrected(monkeypatch: pytest.MonkeyPatch, n: int) -> None:
 
     record = json.loads(defaults.RECORD.read_text(encoding="utf-8"))
     witness = next(row["witness"] for row in record["states"] if row["n"] == n)
-    fix = defaults.Correction(witness["source"], witness["side"], "an-earlier-revision")
+    fix = defaults.Correction(
+        witness["source"], witness.get("path"), "an-earlier-revision", witness["side"]
+    )
     monkeypatch.setitem(defaults.CORRECTED, n, fix)
 
 
@@ -1117,6 +1119,8 @@ def test_a_pending_count_no_list_names_needs_action_once(tmp_path: Path) -> None
         f"n = {n} is pending and PENDING_ALLOWED does not name it"
     ]
     assert "allow it with the open bead that owns the runs" in action[0].step
+    # It names `CORRECTED`, which the state gate holds every entry to (review C6 of #660).
+    assert "name the witness it replaced in default_drawings.CORRECTED" in action[0].step
     # It points to the house rule rather than restate it (review A14 of #660).
     assert action[0].step.endswith('(result-import.md, "The House Rule")')
 
