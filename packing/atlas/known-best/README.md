@@ -296,9 +296,10 @@ recorded originals and on the reproductions that cover them.
 whose record shows it did not run that count.
 The layer’s index drops a run’s block once no entry draws from it, so
 `default_drawings --retain-runs` copied the two originals’ blocks, and the five others
-the settlements of 15 October rest on, into
-[`cases/regularized_drawings/settled-runs/`](../../cases/regularized_drawings/settled-runs/)
-(review F1 of #644). Every outcome reproduces, and every drawn view byte for byte.
+the settlements of 15 October rest on, into `cases/regularized_drawings/settled-runs/`
+(review F1 of #644; the last two copies went on 17 October 2026, when 272 was settled
+again on its new witness and no settlement named them).
+Every outcome reproduces, and every drawn view byte for byte.
 At 129, 146, 156, 176 and 271 `regularize_evand rungs --check` found his admitted view
 the drawn view’s text exactly, with the same retry rungs (none), regularizer level (2)
 and groups, contact histograms and regularization record.
@@ -486,6 +487,38 @@ counts 129 to 211 and `selection-r3cl.json` and `selection-r3cl.md` for the rest
 After it, with 211, the index draws 92 views: 19 by the axis tool, 52 by Evan Daniel’s
 regularizer and 21 by the grid-slack generator (1 by its version 0 and 20 by its version
 1).
+
+On 17 October 2026 the first adoption under the owner’s house rule (think-3mry) moved 37
+houses to PingYou Ltd’s certificates of PR #574 (T-174), 1.7e-99 to 4.6e-61 below the
+earlier ones: 68, 84, 86, 103, 105, 108, 110, 127, 130 to 132, 155, 172, 179 to 182,
+206, 208 to 210, 228, 238 to 240, 261, 263, 268 to 270, 272, 273, 297 and 305 to 308.
+Every earlier view there was drawn at the earlier house’s side, now above $U$, so 28
+strong views lapsed to the axis tool’s view of each new witness.
+Both generators ran on the 35 counts that read pending, Evan Daniel’s regularizer
+(`evand-regularize-adopt174-1017`, 6,947 CPU-seconds, and at 206, where it timed out,
+`evand-regularize-adopt174-b-1017` with a 1,800-second limit, which timed out too) and
+grid-slack at 0.5, 1 and 5 degrees (`grid-slack-adopt174-deg05-1017`, `-deg1-1017` and
+`-deg5-1017`, 13,313 CPU-seconds), and in runs of their own (`adopt174-c-*`) on 103 and
+261, which read regular as published.
+His solved views lie about $10^{-19}$ above $U$ at nearly every count and are held at
+row 4. The selections draw his same-side view at 172, grid-slack’s half-degree views at
+105, 131, 181, 206, 239, 261, 270 and 307 and its five-degree views at 238 and 305; 103
+stays regular as published, and the other 25 are decided no better
+(`devtools.default_drawings.SETTLED`, each with what the runs found).
+No view went to the review queue: the row-7 views, at 110, 272 and 273, are refusals, a
+total of shared sides falling.
+At 206, 239 and 306 the drawing now drawn is worse than the strong view it replaces on
+shared sides (and at 206 on angle classes and hues, at 239 on light squares), since no
+view of the new witness draws as well; by the house rule that is no reason to keep the
+larger house.
+110 and 297, drawn at Francisco Couzo’s decimal sides above $U$ until then,
+leave the exceptions question 13 names.
+The evidence is retained in
+[`cases/regularized_drawings/think-3mry-2026-10-17/`](../../cases/regularized_drawings/think-3mry-2026-10-17/)
+in think-kpm3’s layout, with `selection-adopt174.json.gz` and `selection-adopt174.md`
+for the 35 and `selection-adopt174-c.json.gz` and `selection-adopt174-c.md` for 103 and
+261\. After it the index draws 92 views: 36 by the axis tool, 36 by Evan Daniel’s
+regularizer and 20 by the grid-slack generator’s version 1.
 
 ### The default picture
 

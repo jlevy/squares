@@ -432,15 +432,15 @@ policy applies until there is one.
     reached it (obligation 2), and the grid-slack generator tries a rational $U$ first
     wherever the witness’s side is above it.
     A view at a side below $U$ is a new result and is registered, as question 3
-    answered. Seven drawn views sit above $U$ and stay, by name, until a view at $U$
-    draws as well. At 18, 26, 66 and 85 Evan Daniel’s views are rationals about
-    $10^{-30}$ above a closed-form optimum, the status quo of question 4. At 110, 241
-    and 297 the drawing is at Francisco Couzo’s decimal side, $3 \times 10^{-12}$ to
-    $1.3 \times 10^{-11}$ above Evan Daniel’s exact optimum: the view at $U$ draws fewer
-    shared sides at 110 and 241 (bead think-jnso) and goes to the owner at row 7 at 297.
-    `packing/tests/test_regularize_select.py` reads every drawn view’s side against $U$
-    and fails on a view above it at any other count, and on a listed count once it is
-    drawn at $U$.
+    answered. Four drawn views sit above $U$ and stay, by name, until a view at $U$ draws
+    as well: at 18, 26, 66 and 85 Evan Daniel’s views are rationals about $10^{-30}$
+    above a closed-form optimum, the status quo of question 4. Three more did until
+    their houses moved: at 110, 241 and 297 the drawing was at Francisco Couzo’s decimal
+    side, $3 \times 10^{-12}$ to $1.3 \times 10^{-11}$ above Evan Daniel’s exact
+    optimum, until 241 moved to T-182 on 15 October 2026 and 110 and 297 to T-174 on 17
+    October 2026. `packing/tests/test_regularize_select.py` reads every drawn view’s
+    side against $U$ and fails on a view above it at any other count, and on a listed
+    count once it is drawn at $U$.
 
 14. **A changed pose:** *answered by the owner on 13 October 2026:* “once things have
     been verified correct, that they are equal or better, we can commit and use them.
