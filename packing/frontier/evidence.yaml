@@ -37726,7 +37726,11 @@ evidence:
       exactly n squares; review/exact_sides.py of the ledger does, at every count. The
       replay also covers 51, 70, 153, 207, 172, 263 and 297, which T-193 does not record;
       at 70, 153 and 207 it is a second exact route to T-174's algebraic sides, for the
-      owner's RP-3.
+      owner's RP-3. The retained driver (SHA-256 1c1d6553...), which the replay command
+      runs, differs from the receipt's f949158c... only in its resume cache's key, which
+      PR 651's review B1 extended to the driver's digest and the interpreter's version
+      (b33ce8ffd); no run's input, control, verdict or factorization changed, and no
+      control was cached across the receipt's two invocations, so the receipt stands.
   - id: E-n019-fitzharding-lean-report
     claim: exact-value
     scope: {n_values: [19]}
@@ -37809,7 +37813,9 @@ evidence:
       the proofs and takes the native facts as axioms; and says that a complete rebuild
       from source "takes several hours on 64 cores and has not yet been run". Nothing here
       observed or repeated a build: the full from-source build with the axiom check is
-      priced at about 190 to 380 CPU-hours and needs a machine of hundreds of GB, above
+      priced at about 190 to 420 CPU-hours, central about 290 (3 to 6 wall hours on 64
+      cores, about 190 to 380, and up to about 40 more for the optional kernel replay;
+      T-194's unfinished_confirmations), and needs a machine of hundreds of GB, above
       the pass's 40 CPU-hour cap and this host's 4 cores and 15 GB (think-nqnl, held). The
       triage of 16 October read the statement and its definitions without a build: the
       problem is the record's at n = 19 and the constant is the case's exact upper bound.

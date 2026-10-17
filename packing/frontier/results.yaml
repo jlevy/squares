@@ -26666,7 +26666,7 @@ results:
       measured that route at 102, 123, 258, 259, 267, 295 and 302, and at the other nine
       counts found each form to be the case's own packing, to within 4.5e-4 at every centre
       (RE-1), so there the form refines the case's packing directly. The items are
-      corrected in a later change.
+      corrected in a later change (think-8ido).
 
       The issue says the solver, checkers and batch were written and run with Claude
       (Anthropic) as a coding and research agent, directed and reviewed by the author.
@@ -26728,8 +26728,10 @@ results:
       check, an independent decision of the same forms kept in the packet, would be an
       attribute beside the rung once registered (RE-9); a second route over number fields
       here, sqpack.witness.exact_verify, needs a converter of the source's format, a W7
-      slice with no bead. Adoption of the sixteen sides as the cases' houses is the
-      owner's, with T-174's (RP-3), and no house reader rebuilds an algebraic side yet.
+      slice with no bead. The regularizations items at nine counts wait for the correction
+      RE-1 asks, after the owner's Q2 (think-8ido). Adoption of the sixteen sides as the
+      cases' houses is the owner's, with T-174's (RP-3), and no house reader rebuilds an
+      algebraic side yet.
     notes: >-
       Rungs on 16 October 2026, at the stage 4 exit after the review (think-7qxm): V0/C0 to
       V3/C3 at all sixteen counts, by check_results, on the replay of the source's own
@@ -26741,8 +26743,8 @@ results:
       at 88, 126, 175, 199, 204, 232, 266, 292 and 301 is not the packing the form solves,
       which is the case's house there (T-127, T-139, T-158, T-162, T-119, T-146, T-098);
       the claim says so, and the items, with identity.basis measured and the review as
-      measured_in, are corrected in a later change, Q2 (whether a square turned at its
-      centre is the same packing) being the owner's.
+      measured_in, are corrected in a later change (think-8ido), Q2 (whether a square
+      turned at its centre is the same packing) being the owner's.
 
       The other findings: RE-2 (minor), the driver's
       irreducibility test, fixed in the refreshed receipt; RE-3 and RE-4 (minor), the
@@ -27054,13 +27056,16 @@ results:
         rung: C3
         link: think-nqnl
         estimated_cost:
-          cpu_hours: 285
+          cpu_hours: 290
           cpu_hours_high: 420
           basis: >-
             The source's "several hours on a 64-core, 512 GB machine", read as 3 to 6 wall
-            hours with 64 cores busy, plus at most about 40 CPU-hours for the optional kernel
-            replay (37 wall-minutes on 64 cores by verification/kernel-replay.json); an
-            estimate from the source's words, not a receipt
+            hours with 64 cores busy, about 190 to 380 CPU-hours, plus at most about 40
+            CPU-hours for the optional kernel replay (37 wall-minutes on 64 cores by
+            verification/kernel-replay.json): about 190 to 420 CPU-hours in all, central
+            about 290, the upper end including the kernel replay, as the report entry
+            E-n019-fitzharding-lean-report states it; an estimate from the source's words,
+            not a receipt
           priced: '2026-10-16'
     notes: >-
       Registered on 16 October 2026 from issue 640, which Fitzharding opened that day asking
