@@ -3698,7 +3698,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-15'
+  lastmod: '2026-10-16'
   status: live
 - path: cases/13.html
   canonical: cases/13.html
@@ -3850,7 +3850,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-15'
+  lastmod: '2026-10-16'
   status: live
 - path: cases/147.html
   canonical: cases/147.html
@@ -3922,7 +3922,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-15'
+  lastmod: '2026-10-16'
   status: live
 - path: cases/155.html
   canonical: cases/155.html
@@ -3938,7 +3938,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-15'
+  lastmod: '2026-10-16'
   status: live
 - path: cases/157.html
   canonical: cases/157.html
@@ -4114,7 +4114,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-15'
+  lastmod: '2026-10-16'
   status: live
 - path: cases/177.html
   canonical: cases/177.html
@@ -4434,7 +4434,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-15'
+  lastmod: '2026-10-16'
   status: live
 - path: cases/212.html
   canonical: cases/212.html
@@ -4658,7 +4658,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-15'
+  lastmod: '2026-10-16'
   status: live
 - path: cases/238.html
   canonical: cases/238.html
@@ -4898,7 +4898,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-15'
+  lastmod: '2026-10-16'
   status: live
 - path: cases/265.html
   canonical: cases/265.html
@@ -4962,7 +4962,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-15'
+  lastmod: '2026-10-16'
   status: live
 - path: cases/272.html
   canonical: cases/272.html
@@ -5250,7 +5250,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-15'
+  lastmod: '2026-10-16'
   status: live
 - path: cases/304.html
   canonical: cases/304.html
@@ -5258,7 +5258,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-15'
+  lastmod: '2026-10-16'
   status: live
 - path: cases/305.html
   canonical: cases/305.html
@@ -15275,7 +15275,7 @@ urls:
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-14'
-  lastmod: '2026-10-15'
+  lastmod: '2026-10-16'
   status: live
   identity:
     kind: upper-bound
@@ -15293,7 +15293,7 @@ urls:
     builds_on: null
     evidence:
     - E-couzo-583-certificate-report
-    - E-couzo-583-586-certificate-report
+    - E-couzo-586-n302-report
     - E-couzo-583-exact-feasibility
     - E-couzo-586-n302-exact-feasibility
     artifacts:
@@ -15335,6 +15335,39 @@ urls:
       - packing/resources/web/couzo-issue583-2026-10-13/source/certificates/n241.cert
       - packing/resources/web/couzo-certificates-2026-10-13/source/certificates/n302.cert
       - packing/devtools/upper_bound_reports.py
+  - date: '2026-10-16'
+    reason: The adoption of 16 October 2026 moves the house at 302 to T-186, and T-181's 302 cites
+      its own report atom (E-couzo-586-n302-report) in place of issue 586's release atom, so the cases
+      T-182 holds at 211 and 241 do not read as resting on it; the bound, scope and attribution are
+      unchanged.
+    previous:
+      kind: upper-bound
+      scope:
+        n_values:
+        - 211
+        - 241
+        - 302
+      established: null
+      attribution:
+        source_keys:
+        - '[Couzo issue-583 certificates 2026-10-13]'
+        - '[Couzo certificates 2026-10-13]'
+        published: '2026-10-13'
+      builds_on: null
+      evidence:
+      - E-couzo-583-certificate-report
+      - E-couzo-583-586-certificate-report
+      - E-couzo-583-exact-feasibility
+      - E-couzo-586-n302-exact-feasibility
+      artifacts:
+      - packing/resources/web/couzo-issue583-2026-10-13/README.md
+      - packing/resources/web/couzo-issue583-2026-10-13/acquisition/claims.json
+      - packing/resources/web/couzo-issue583-2026-10-13/source/certificates/n211.cert
+      - packing/resources/web/couzo-issue583-2026-10-13/source/certificates/n241.cert
+      - packing/resources/web/couzo-certificates-2026-10-13/source/certificates/n302.cert
+      - packing/devtools/upper_bound_reports.py
+      - packing/devtools/check_half_angle_area.py
+      - docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md
 - path: result/t-182.html
   canonical: result/t-182.html
   kind: result
@@ -15517,7 +15550,7 @@ urls:
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-15'
-  lastmod: '2026-10-15'
+  lastmod: '2026-10-16'
   status: live
   identity:
     kind: upper-bound
@@ -15532,18 +15565,44 @@ urls:
     builds_on: null
     evidence:
     - E-couzo-506-n175-report
+    - E-couzo-506-n175-exact-feasibility
     artifacts:
     - packing/resources/web/couzo-certificates-2026-10-11/README.md
     - packing/resources/web/couzo-certificates-2026-10-11/acquisition/claims.json
     - packing/resources/web/couzo-certificates-2026-10-11/source/certificates/n175.cert
     - packing/devtools/upper_bound_reports.py
+    - docs/project/reviews/review-2026-10-16-upper-bound-imports-506-607.md
+  amendments:
+  - date: '2026-10-16'
+    reason: 'The 16 October review accepts the retained replay: the result rises to V3/C3 and cites
+      its confirming evidence (E-couzo-506-n175-exact-feasibility), with the review among its artifacts;
+      its claim says T-140 started from Ryan Xu''s packing rather than refining it. The bound, scope
+      and attribution are unchanged.'
+    previous:
+      kind: upper-bound
+      scope:
+        n_values:
+        - 175
+      established: null
+      attribution:
+        source_keys:
+        - '[Couzo n175 2026-10-11]'
+        published: '2026-10-11'
+      builds_on: null
+      evidence:
+      - E-couzo-506-n175-report
+      artifacts:
+      - packing/resources/web/couzo-certificates-2026-10-11/README.md
+      - packing/resources/web/couzo-certificates-2026-10-11/acquisition/claims.json
+      - packing/resources/web/couzo-certificates-2026-10-11/source/certificates/n175.cert
+      - packing/devtools/upper_bound_reports.py
 - path: result/t-186.html
   canonical: result/t-186.html
   kind: result
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-15'
-  lastmod: '2026-10-15'
+  lastmod: '2026-10-16'
   status: live
   identity:
     kind: upper-bound
@@ -15569,6 +15628,7 @@ urls:
     builds_on: null
     evidence:
     - E-mishapolk-70a033f-certificate-report
+    - E-mishapolk-70a033f-exact-feasibility
     artifacts:
     - packing/resources/web/mishapolk-kkt-refinements-2026-10-14/README.md
     - packing/resources/web/mishapolk-kkt-refinements-2026-10-14/acquisition/claims.json
@@ -15585,13 +15645,60 @@ urls:
     - packing/resources/web/mishapolk-kkt-refinements-2026-10-14/facts/n-303.yaml.gz
     - packing/resources/web/mishapolk-kkt-refinements-2026-10-14/facts/n-304.yaml.gz
     - packing/devtools/upper_bound_reports.py
+    - docs/project/reviews/review-2026-10-16-upper-bound-imports-506-607.md
+  amendments:
+  - date: '2026-10-16'
+    reason: 'The 16 October review accepts the retained replay: the result rises to V3/C3 and cites
+      its confirming evidence (E-mishapolk-70a033f-exact-feasibility), with the review among its artifacts,
+      its credit follows each packing''s chain, and on 16 October 2026 the cases at its twelve counts
+      adopted it as their house; the bound, scope and attribution are unchanged.'
+    previous:
+      kind: upper-bound
+      scope:
+        n_values:
+        - 129
+        - 154
+        - 156
+        - 175
+        - 176
+        - 204
+        - 232
+        - 264
+        - 271
+        - 302
+        - 303
+        - 304
+      established: null
+      attribution:
+        source_keys:
+        - '[Mishapolk KKT refinements 2026-10-14]'
+        published: '2026-10-14'
+      builds_on: null
+      evidence:
+      - E-mishapolk-70a033f-certificate-report
+      artifacts:
+      - packing/resources/web/mishapolk-kkt-refinements-2026-10-14/README.md
+      - packing/resources/web/mishapolk-kkt-refinements-2026-10-14/acquisition/claims.json
+      - packing/resources/web/mishapolk-kkt-refinements-2026-10-14/facts/n-129.yaml.gz
+      - packing/resources/web/mishapolk-kkt-refinements-2026-10-14/facts/n-154.yaml.gz
+      - packing/resources/web/mishapolk-kkt-refinements-2026-10-14/facts/n-156.yaml.gz
+      - packing/resources/web/mishapolk-kkt-refinements-2026-10-14/facts/n-175.yaml.gz
+      - packing/resources/web/mishapolk-kkt-refinements-2026-10-14/facts/n-176.yaml.gz
+      - packing/resources/web/mishapolk-kkt-refinements-2026-10-14/facts/n-204.yaml.gz
+      - packing/resources/web/mishapolk-kkt-refinements-2026-10-14/facts/n-232.yaml.gz
+      - packing/resources/web/mishapolk-kkt-refinements-2026-10-14/facts/n-264.yaml.gz
+      - packing/resources/web/mishapolk-kkt-refinements-2026-10-14/facts/n-271.yaml.gz
+      - packing/resources/web/mishapolk-kkt-refinements-2026-10-14/facts/n-302.yaml.gz
+      - packing/resources/web/mishapolk-kkt-refinements-2026-10-14/facts/n-303.yaml.gz
+      - packing/resources/web/mishapolk-kkt-refinements-2026-10-14/facts/n-304.yaml.gz
+      - packing/devtools/upper_bound_reports.py
 - path: result/t-187.html
   canonical: result/t-187.html
   kind: result
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-15'
-  lastmod: '2026-10-15'
+  lastmod: '2026-10-16'
   status: live
   identity:
     kind: upper-bound
@@ -15606,18 +15713,44 @@ urls:
     builds_on: null
     evidence:
     - E-evand-606-n146-report
+    - E-evand-606-n146-exact-feasibility
     artifacts:
     - packing/resources/web/evand-n146-2026-10-14/README.md
     - packing/resources/web/evand-n146-2026-10-14/acquisition/claims.json
     - packing/resources/web/evand-n146-2026-10-14/source/search/packer/candidates/tt2_n146.cert
     - packing/devtools/upper_bound_reports.py
+    - docs/project/reviews/review-2026-10-16-upper-bound-imports-506-607.md
+  amendments:
+  - date: '2026-10-16'
+    reason: 'The 16 October review accepts the retained replay: the result rises to V3/C3 and cites
+      its confirming evidence (E-evand-606-n146-exact-feasibility), with the review among its artifacts,
+      its lineage is stated as measured, and on 16 October 2026 the case at 146 adopted it as its
+      house; the bound, scope and attribution are unchanged.'
+    previous:
+      kind: upper-bound
+      scope:
+        n_values:
+        - 146
+      established: null
+      attribution:
+        source_keys:
+        - '[Daniel n146 2026-10-14]'
+        published: '2026-10-14'
+      builds_on: null
+      evidence:
+      - E-evand-606-n146-report
+      artifacts:
+      - packing/resources/web/evand-n146-2026-10-14/README.md
+      - packing/resources/web/evand-n146-2026-10-14/acquisition/claims.json
+      - packing/resources/web/evand-n146-2026-10-14/source/search/packer/candidates/tt2_n146.cert
+      - packing/devtools/upper_bound_reports.py
 - path: result/t-188.html
   canonical: result/t-188.html
   kind: result
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-15'
-  lastmod: '2026-10-15'
+  lastmod: '2026-10-16'
   status: live
   identity:
     kind: upper-bound
@@ -15632,18 +15765,44 @@ urls:
     builds_on: null
     evidence:
     - E-couzo-487b058-certificate-report
+    - E-couzo-487b058-exact-feasibility
     artifacts:
     - packing/resources/web/couzo-verified-bounds-2026-10-14/README.md
     - packing/resources/web/couzo-verified-bounds-2026-10-14/acquisition/claims.json
     - packing/resources/web/couzo-verified-bounds-2026-10-14/source/certificates/n211.cert
     - packing/devtools/upper_bound_reports.py
+    - docs/project/reviews/review-2026-10-16-upper-bound-imports-506-607.md
+  amendments:
+  - date: '2026-10-16'
+    reason: 'The 16 October review accepts the retained replay: the result rises to V3/C3 and cites
+      its confirming evidence (E-couzo-487b058-exact-feasibility), with the review among its artifacts,
+      its regularization of T-182 is withdrawn as no refinement, and on 16 October 2026 the case at
+      211 adopted it as its house; the bound, scope and attribution are unchanged.'
+    previous:
+      kind: upper-bound
+      scope:
+        n_values:
+        - 211
+      established: null
+      attribution:
+        source_keys:
+        - '[Couzo verified bounds 2026-10-14]'
+        published: '2026-10-14'
+      builds_on: null
+      evidence:
+      - E-couzo-487b058-certificate-report
+      artifacts:
+      - packing/resources/web/couzo-verified-bounds-2026-10-14/README.md
+      - packing/resources/web/couzo-verified-bounds-2026-10-14/acquisition/claims.json
+      - packing/resources/web/couzo-verified-bounds-2026-10-14/source/certificates/n211.cert
+      - packing/devtools/upper_bound_reports.py
 - path: result/t-189.html
   canonical: result/t-189.html
   kind: result
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-15'
-  lastmod: '2026-10-15'
+  lastmod: '2026-10-16'
   status: live
   identity:
     kind: upper-bound
@@ -15658,18 +15817,43 @@ urls:
     builds_on: null
     evidence:
     - E-couzo-607-certificate-report
+    - E-couzo-607-exact-feasibility
     artifacts:
     - packing/resources/web/couzo-certificates-2026-10-14/README.md
     - packing/resources/web/couzo-certificates-2026-10-14/acquisition/claims.json
     - packing/resources/web/couzo-certificates-2026-10-14/source/submissions/2026-10-14/certificates/n237.cert
     - packing/devtools/upper_bound_reports.py
+    - docs/project/reviews/review-2026-10-16-upper-bound-imports-506-607.md
+  amendments:
+  - date: '2026-10-16'
+    reason: 'The 16 October review accepts the retained replay at 237: the result rises to V3/C3 and
+      cites its confirming evidence (E-couzo-607-exact-feasibility), with the review among its artifacts;
+      the bound, scope and attribution are unchanged.'
+    previous:
+      kind: upper-bound
+      scope:
+        n_values:
+        - 237
+      established: null
+      attribution:
+        source_keys:
+        - '[Couzo certificates 2026-10-14]'
+        published: '2026-10-14'
+      builds_on: null
+      evidence:
+      - E-couzo-607-certificate-report
+      artifacts:
+      - packing/resources/web/couzo-certificates-2026-10-14/README.md
+      - packing/resources/web/couzo-certificates-2026-10-14/acquisition/claims.json
+      - packing/resources/web/couzo-certificates-2026-10-14/source/submissions/2026-10-14/certificates/n237.cert
+      - packing/devtools/upper_bound_reports.py
 - path: result/t-190.html
   canonical: result/t-190.html
   kind: result
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-15'
-  lastmod: '2026-10-15'
+  lastmod: '2026-10-16'
   status: live
   identity:
     kind: upper-bound
@@ -15684,11 +15868,37 @@ urls:
     builds_on: null
     evidence:
     - E-couzo-4e4c8ce-n237-certificate-report
+    - E-couzo-4e4c8ce-n237-exact-feasibility
     artifacts:
     - packing/resources/web/couzo-n237-2026-10-15/README.md
     - packing/resources/web/couzo-n237-2026-10-15/acquisition/claims.json
     - packing/resources/web/couzo-n237-2026-10-15/source/certificates/n237.cert
     - packing/devtools/upper_bound_reports.py
+    - docs/project/reviews/review-2026-10-16-upper-bound-imports-506-607.md
+  amendments:
+  - date: '2026-10-16'
+    reason: 'The 16 October review accepts the retained replay: the result rises to V3/C3 and cites
+      its confirming evidence (E-couzo-4e4c8ce-n237-exact-feasibility), with the review among its
+      artifacts, and on 16 October 2026 the case at 237 adopted it as its house; the bound, scope
+      and attribution are unchanged.'
+    previous:
+      kind: upper-bound
+      scope:
+        n_values:
+        - 237
+      established: null
+      attribution:
+        source_keys:
+        - '[Couzo n237 2026-10-15]'
+        published: '2026-10-15'
+      builds_on: null
+      evidence:
+      - E-couzo-4e4c8ce-n237-certificate-report
+      artifacts:
+      - packing/resources/web/couzo-n237-2026-10-15/README.md
+      - packing/resources/web/couzo-n237-2026-10-15/acquisition/claims.json
+      - packing/resources/web/couzo-n237-2026-10-15/source/certificates/n237.cert
+      - packing/devtools/upper_bound_reports.py
 - path: result/t-191.html
   canonical: result/t-191.html
   kind: result

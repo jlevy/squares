@@ -454,6 +454,39 @@ Exploration
 [X-049](../../campaign/explorations/X-049-families-shading-and-the-large-n-limit.md#exact-regularization)
 explains why the layer exists and what the axis tool changes.
 
+Later that day the adoption of the 16 October review (think-z7wn) moved the houses at
+129, 146, 154, 156, 175, 176, 204, 211, 232, 237, 264, 271, 302, 303 and 304, so the
+views the stack had drawn there lapsed to the axis tool’s view of each new witness.
+Both generators ran on the fifteen new witnesses: Evan Daniel’s regularizer
+(`evand-regularize-z7wn-a-1016` and `evand-regularize-z7wn-b-1016`, 4,817 CPU-seconds)
+and grid-slack at 0.5, 1 and 5 degrees (`grid-slack-z7wn-{a,b}-deg05-1016`, `-deg1-1016`
+and `-deg5-1016`, 3,487 CPU-seconds).
+The selection of the counts 129 to 211 draws his same-side views at 129, 146, 175 and
+204, grid-slack’s half-degree view at 156 and its five-degree view at 154; at 176
+grid-slack’s views draw more uneven squares than the axis tool’s and his is held at row
+4, so 176 is decided no better, as the owner settled it on 16 October (“Adopt as
+settled”). At 211 every view of both generators goes to review at row 7 (a square’s
+contact count falls while no total does), though his same-side view betters the drawn
+axis view on every measure; the owner admitted it the same day, as recommended (“Admit
+it (Recommended)”), by the layer’s first review record, in
+[`regularized/reviews.yaml`](regularized/reviews.yaml).
+The selection of 232, 237, 264, 271, 302, 303 and 304, which did not finish by that
+pass’s stop time, ran the same day on the same runs (think-r3cl, 28 minutes of wall at
+two workers): it draws grid-slack’s half-degree views at 232, 264 and 271 and its
+five-degree view at 302, which draws no light, uneven or near-axis square.
+At 237 every view, admitted at row 10, draws one more light and one more uneven square
+than the axis tool’s view of the new witness (6 / 10 against 5 / 9); at 303 grid-slack’s
+views tie it on every goal and his solved view is held at row 4; at 304 every view draws
+light squares where it draws none, and his solved view is held at row 4. So those three
+are decided no better, and his same-side re-solve at 303 and 304 was refused, its
+literal too large. The evidence is retained in
+[`cases/regularized_drawings/think-z7wn-2026-10-16/`](../../cases/regularized_drawings/think-z7wn-2026-10-16/)
+in think-kpm3’s layout, with `selection-z7wn-a.json` and `selection-z7wn-a.md` for the
+counts 129 to 211 and `selection-r3cl.json` and `selection-r3cl.md` for the rest.
+After it, with 211, the index draws 92 views: 19 by the axis tool, 52 by Evan Daniel’s
+regularizer and 21 by the grid-slack generator (1 by its version 0 and 20 by its version
+1).
+
 ### The default picture
 
 On 13 October 2026 the owner made the regularized view the default picture, with the

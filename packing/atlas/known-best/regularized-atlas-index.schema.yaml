@@ -334,10 +334,25 @@ $defs:
         type: object
         additionalProperties: false
         required: [row, decision, reason]
+        description: >-
+          The decision table's: row 10's admission, or row 7's review, which a review
+          record then admitted (`review`).
         properties:
-          row: {const: 10}
-          decision: {const: admit}
+          row: {enum: [7, 10]}
+          decision: {enum: [admit, review]}
           reason: {type: string, minLength: 1}
+      review:
+        type: object
+        additionalProperties: false
+        required: [record, date, reviewer]
+        description: >-
+          The review record that admitted a view row 7 sent to review (policy section 5):
+          its file, beside the index, and its date and reviewer. The layer's check holds
+          the entry and the record to each other.
+        properties:
+          record: {const: packing/atlas/known-best/regularized/reviews.yaml}
+          date: {type: string, pattern: '^[0-9]{4}-[0-9]{2}-[0-9]{2}$'}
+          reviewer: {type: string, minLength: 1}
       measured:
         type: object
         additionalProperties: false
@@ -365,6 +380,15 @@ $defs:
             minLength: 1
       regularization: {$ref: '#/$defs/regularization'}
       reference: {$ref: '#/$defs/axis_record'}
+    allOf:
+      - if: {properties: {decision: {properties: {decision: {const: review}}}}}
+        then:
+          required: [review]
+          properties: {decision: {properties: {row: {const: 7}}}}
+        else:
+          properties:
+            decision: {properties: {row: {const: 10}, decision: {const: admit}}}
+            review: false
   histograms:
     type: object
     additionalProperties: false

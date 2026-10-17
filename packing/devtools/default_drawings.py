@@ -261,16 +261,6 @@ _RERUN3A_GRID = (
     ("regularize_grid_slack/1", "grid-slack-3a-rerun-deg5-1016"),
 )
 _RERUN3A_204_272 = (("evand-regularize", "evand-regularize-3a-rerun-s-1016"), *_RERUN3A_GRID)
-_RERUN3A_303 = (("evand-regularize", "evand-regularize-3a-rerun-303-1016"), *_RERUN3A_GRID)
-#: The same day both generators ran on the eight witnesses #614 adopted in 3b9fab84a
-#: (think-kpm3), 154's also adopted by #598 in 34e62125f.
-_RUN3B = (
-    ("evand-regularize", "evand-regularize-3b-1016"),
-    ("regularize_grid_slack/1", "grid-slack-3b-deg05-1016"),
-    ("regularize_grid_slack/1", "grid-slack-3b-deg1-1016"),
-    ("regularize_grid_slack/1", "grid-slack-3b-deg5-1016"),
-)
-_README_3B = "packing/atlas/known-best/README.md, the think-kpm3 paragraph of 16 October 2026"
 _OSTASHEV = "[Ostashev compositions 2026-10-12]"
 _OSTASHEV_REVISION = "fe43a64ecf2581cdbd11830e8a5be0989746c5d3"
 
@@ -287,6 +277,35 @@ def _daniel(n: int) -> str:
         f"n-{n:03d}.cert.gz"
     )
 
+
+#: Both generators ran on the fifteen witnesses the adoption of 16 October 2026 moved
+#: (think-z7wn): Evan Daniel's regularizer and grid-slack at 0.5, 1 and 5 degrees, the
+#: counts 129 to 211 selected that day; their receipts and reports are in
+#: packing/cases/regularized_drawings/think-z7wn-2026-10-16/.
+_RUNZ7WN = (
+    ("evand-regularize", "evand-regularize-z7wn-a-1016"),
+    ("regularize_grid_slack/1", "grid-slack-z7wn-a-deg05-1016"),
+    ("regularize_grid_slack/1", "grid-slack-z7wn-a-deg1-1016"),
+    ("regularize_grid_slack/1", "grid-slack-z7wn-a-deg5-1016"),
+)
+_README_Z7WN = (
+    "packing/cases/regularized_drawings/think-z7wn-2026-10-16/selection-z7wn-a.md, the "
+    "selection of 16 October 2026"
+)
+#: The same generators on the re-housed counts 232 to 304, whose selection did not finish
+#: by that pass's stop time; selected the same day (think-r3cl), they draw grid-slack's
+#: views at 232, 264, 271 and 302, and decide 237, 303 and 304 no better. The selection's
+#: report is beside the runs' receipts and reports.
+_RUNZ7WN_B = (
+    ("evand-regularize", "evand-regularize-z7wn-b-1016"),
+    ("regularize_grid_slack/1", "grid-slack-z7wn-b-deg05-1016"),
+    ("regularize_grid_slack/1", "grid-slack-z7wn-b-deg1-1016"),
+    ("regularize_grid_slack/1", "grid-slack-z7wn-b-deg5-1016"),
+)
+_README_R3CL = (
+    "packing/cases/regularized_drawings/think-z7wn-2026-10-16/selection-r3cl.md, the "
+    "selection of 16 October 2026 (think-r3cl)"
+)
 
 #: The counts whose drawing is not regularized and not regular as published, settled on
 #: purpose: each named with the witness it was settled on, so a new witness makes the
@@ -368,6 +387,21 @@ SETTLED: dict[int, Settled] = {
         "hues",
         _README_LEFTOVERS,
     ),
+    176: Settled(
+        DECIDED,
+        "[Mishapolk KKT refinements 2026-10-14]",
+        "resources/web/mishapolk-kkt-refinements-2026-10-14/facts/n-176.yaml.gz",
+        "70a033f0ecfa9e643cd5fb5dbac190cb7f4ffb94",
+        "13795872318436407263173895330727713371233106699551510374450211701529164297205177"
+        "6912348029686675350647263/100000000000000000000000000000000000000000000000000000"
+        "00000000000000000000000000000000000000000000000000",
+        _RUNZ7WN,
+        "grid-slack's views, admitted at row 10 at all three thresholds, draw more uneven "
+        "squares than the axis tool's view of this witness (worse on uneven, better on both "
+        "totals); Evan Daniel's same-side view is refused (its literal is too large) and his "
+        "solved view is held at row 4 (solved above U)",
+        _README_Z7WN,
+    ),
     179: Settled(
         DECIDED,
         "[Gupta rational refinements 2026-10-08]",
@@ -394,19 +428,6 @@ SETTLED: dict[int, Settled] = {
         "view withdrawn in 1d8f982ff did)",
         _README_LEFTOVERS,
     ),
-    204: Settled(
-        DECIDED,
-        _OSTASHEV,
-        _ostashev(204),
-        _OSTASHEV_REVISION,
-        "74043316171934782832354950404729823976428779059647971914573074043316171934782832"
-        "354950404729823976428779059647971914573/5000000000000000000000000000000000000000"
-        "000000000000000000000000000000000000000000000000000000000000000000000000000000",
-        (*_RUN3A, *_RERUN3A_204_272),
-        "grid-slack's view ties the axis tool's on every goal at all three thresholds, and "
-        "Evan Daniel's same-side view is refused at row 7 (a total of shared sides falls)",
-        _README_3A,
-    ),
     236: Settled(
         DECIDED,
         _DANIEL,
@@ -419,6 +440,20 @@ SETTLED: dict[int, Settled] = {
         "in bd82e3a54 did, grid-slack at 0.5, 1 and 5 degrees draws no change, and the axis "
         "tool's view does not improve on the house",
         _README_LEFTOVERS,
+    ),
+    237: Settled(
+        DECIDED,
+        "[Couzo n237 2026-10-15]",
+        "resources/web/couzo-n237-2026-10-15/source/certificates/n237.cert",
+        "58a783368d4b7e70bb800f0009ea9ca03e578739",
+        "7951301819129798440089572127137/500000000000000000000000000000",
+        _RUNZ7WN_B,
+        "every view, admitted at row 10, draws one more light and one more uneven "
+        "square than the axis tool's view of this witness (6 / 10 against 5 / 9), "
+        "though no near-axis square, no more angle classes and more shared sides: "
+        "Evan Daniel's same-side and solved views, and grid-slack's at all three "
+        "thresholds",
+        _README_R3CL,
     ),
     258: Settled(
         DECIDED,
@@ -488,32 +523,32 @@ SETTLED: dict[int, Settled] = {
     ),
     303: Settled(
         DECIDED,
-        _OSTASHEV,
-        _ostashev(303),
-        _OSTASHEV_REVISION,
-        "17909958291069907981595741081398736080048627080527013735224117909958291069907981"
-        "5957410813987360800486270805270137352241/100000000000000000000000000000000000000"
-        "00000000000000000000000000000000000000000000000000000000000000000000000000000000",
-        (*_RUN3A, *_RERUN3A_303),
-        "grid-slack's view ties the axis tool's on every goal at all three thresholds, and "
-        "Evan Daniel's view is held at row 4 (solved above U); his same-side re-solve was "
-        "refused (literal-too-large), so there is no same-side view, and the solved view "
-        "draws fewer shared sides than the witness (house 758 to 708, stage 798 to 724)",
-        _README_3A,
+        "[Mishapolk KKT refinements 2026-10-14]",
+        "resources/web/mishapolk-kkt-refinements-2026-10-14/facts/n-303.yaml.gz",
+        "70a033f0ecfa9e643cd5fb5dbac190cb7f4ffb94",
+        "22387447863837384976770801873110046250293075831927666706527135430718996858433164"
+        "1646777792095999047220400719209/125000000000000000000000000000000000000000000000"
+        "00000000000000000000000000000000000000000000000000000000000000",
+        _RUNZ7WN_B,
+        "grid-slack's view ties the axis tool's on every goal at all three "
+        "thresholds, and Evan Daniel's solved view, four angle classes fewer and tied "
+        "on the rest, is held at row 4 (solved above U); his same-side re-solve was "
+        "refused (literal-too-large)",
+        _README_R3CL,
     ),
     304: Settled(
         DECIDED,
-        "[Ostashev merged bands 2026-10-13]",
-        "resources/web/dostashev-merged-bands-2026-10-13/source/records/n0304.sqcert",
-        "b909e1b74cda50906e12b4373e010ddee39e47e4",
-        "35858855516150349931332652277978229724878240089919278343230358588555161503499313"
-        "3265227797822972487824008991927834323/200000000000000000000000000000000000000000"
-        "00000000000000000000000000000000000000000000000000000000000000000000000000",
-        _RUN3B,
-        "every view draws more light squares than the axis tool's (2 or 4 to none): "
-        "grid-slack's, admitted at row 10 at all three thresholds, and Evan Daniel's, held "
-        "at row 4 (solved 8.9e-31 above U)",
-        _README_3B,
+        "[Mishapolk KKT refinements 2026-10-14]",
+        "resources/web/mishapolk-kkt-refinements-2026-10-14/facts/n-304.yaml.gz",
+        "70a033f0ecfa9e643cd5fb5dbac190cb7f4ffb94",
+        "1792942775807517496548703186140836311278604266912137/100000000000000000000000000"
+        "000000000000000000000000",
+        _RUNZ7WN_B,
+        "every view draws more light squares than the axis tool's view of this "
+        "witness (2 or 4 to none): grid-slack's, admitted at row 10 at all three "
+        "thresholds, and Evan Daniel's solved view, held at row 4 (solved above U); "
+        "his same-side re-solve was refused (literal-too-large)",
+        _README_R3CL,
     ),
 }
 
@@ -540,7 +575,11 @@ SETTLED: dict[int, Settled] = {
 #: 272 and 303) left it on 16 October 2026, six regularized and three decided, and so did
 #: the eight of think-kpm3 (153, 154, 207, 211, 237, 241, 302 and 304), seven
 #: regularized and one decided, and the three of think-3zi3 (175, 232 and 264), all
-#: regularized, which left it empty.
+#: regularized, which left it empty. The adoption of 16 October 2026 (think-z7wn) allowed
+#: eight re-housed counts under think-r3cl; its selection drew grid-slack's views at 232,
+#: 264, 271 and 302 and decided 237, 303 and 304 the same day, and the owner's review
+#: admitted Evan Daniel's view at 211, which row 7 had sent to review (review B3 of PR
+#: 657; `regularized/reviews.yaml`), which left it empty again.
 PENDING_ALLOWED: dict[int, str] = {}
 
 

@@ -26,7 +26,7 @@ second implementation agrees.
 ## The Short Version
 
 - **162** programs: **50** external and **112** first-party; **112** decide claims and **50** check premises.
-- **508** of **607** evidence entries name the programs that verified them: 255 reproduced with the producer’s code, 224 independently re-implemented, 18 re-implemented, sharing the producer’s components, 11 no relation: a proof, a derivation or a report.
+- **514** of **614** evidence entries name the programs that verified them: 255 reproduced with the producer’s code, 230 independently re-implemented, 18 re-implemented, sharing the producer’s components, 11 no relation: a proof, a derivation or a report.
 
 ## Programs
 
@@ -78,8 +78,8 @@ second implementation agrees.
 | [`V-fitzharding-n17-lean`](#v-fitzharding-n17-lean) | The sq17-lean Lean 4 development (Sq17Lean) | Fitzharding | external | decides | 1 | 1 |
 | [`V-check-basic-bounds`](#v-check-basic-bounds) | devtools.check_basic_bounds | Squares Project (Levy) | first-party | decides | 3 | 16 |
 | [`V-optimal-moduli`](#v-optimal-moduli) | cases.small_n.optimal_moduli | Squares Project (Levy) | first-party | decides | 1 | 0 |
-| [`V-sqpack-verify`](#v-sqpack-verify) | sqpack.verify | Squares Project (Levy) | first-party | decides | 65 | 54 |
-| [`V-check-rational-witness-independent`](#v-check-rational-witness-independent) | devtools.check_rational_witness_independent | Squares Project (Levy) | first-party | decides | 59 | 57 |
+| [`V-sqpack-verify`](#v-sqpack-verify) | sqpack.verify | Squares Project (Levy) | first-party | decides | 71 | 60 |
+| [`V-check-rational-witness-independent`](#v-check-rational-witness-independent) | devtools.check_rational_witness_independent | Squares Project (Levy) | first-party | decides | 65 | 63 |
 | [`V-check-nagamochi-lemma1-counterexample`](#v-check-nagamochi-lemma1-counterexample) | devtools.check_nagamochi_lemma1_counterexample | Squares Project (Levy) | first-party | decides | 1 | 1 |
 | [`V-check-karakus-strip-measure`](#v-check-karakus-strip-measure) | devtools.check_karakus_strip_measure | Squares Project (Levy) | first-party | decides | 1 | 2 |
 | [`V-upper-bound-promotion`](#v-upper-bound-promotion) | devtools.upper_bound_packets | Squares Project (Levy) | first-party | decides | 6 | 5 |
@@ -136,7 +136,7 @@ second implementation agrees.
 | [`V-overbeck-review3-seed-packing`](#v-overbeck-review3-seed-packing) | seed_packing_check.py | Squares Project (Levy) | first-party | premises | 1 | 0 |
 | [`V-overbeck-review3-spec-lemmas`](#v-overbeck-review3-spec-lemmas) | spec_lemmas_numeric.py | Squares Project (Levy) | first-party | premises | 1 | 0 |
 | [`V-overbeck-review3-parallel-rows`](#v-overbeck-review3-parallel-rows) | parallel_row_check.py | Squares Project (Levy) | first-party | premises | 0 | 0 |
-| [`V-evand-exact-certificates`](#v-evand-exact-certificates) | devtools.evand_exact_certificates | Squares Project (Levy) | first-party | premises | 43 | 41 |
+| [`V-evand-exact-certificates`](#v-evand-exact-certificates) | devtools.evand_exact_certificates | Squares Project (Levy) | first-party | premises | 49 | 47 |
 | [`V-check-n11-final-composition`](#v-check-n11-final-composition) | devtools.check_n11_final_composition | Squares Project (Levy) | first-party | premises | 2 | 2 |
 | [`V-audit-n11-lean`](#v-audit-n11-lean) | devtools.audit_n11_lean | Squares Project (Levy) | first-party | premises | 2 | 1 |
 | [`V-fitzharding-n17-source-manifest`](#v-fitzharding-n17-source-manifest) | check_source_manifest.py | Squares Project (Levy) | first-party | premises | 1 | 1 |
@@ -163,9 +163,9 @@ second implementation agrees.
 | [`V-squish-upper-bound-packets`](#v-squish-upper-bound-packets) | devtools.squish_upper_bound_packets | Squares Project (Levy) | first-party | premises | 2 | 2 |
 | [`V-squish-followup-packets`](#v-squish-followup-packets) | devtools.squish_followup_packets | Squares Project (Levy) | first-party | premises | 1 | 1 |
 | [`V-squish-second-update-confirmation`](#v-squish-second-update-confirmation) | devtools.squish_second_update_confirmation | Squares Project (Levy) | first-party | premises | 1 | 1 |
-| [`V-evand-arrangement-receipts`](#v-evand-arrangement-receipts) | devtools.evand_arrangement_reports | Squares Project (Levy) | first-party | premises | 40 | 40 |
+| [`V-evand-arrangement-receipts`](#v-evand-arrangement-receipts) | devtools.evand_arrangement_reports | Squares Project (Levy) | first-party | premises | 46 | 46 |
 | [`V-algebraic-witness-reports`](#v-algebraic-witness-reports) | devtools.algebraic_witness_reports | Squares Project (Levy) | first-party | premises | 1 | 1 |
-| [`V-upper-bound-reports`](#v-upper-bound-reports) | devtools.upper_bound_reports | Squares Project (Levy) | first-party | premises | 36 | 36 |
+| [`V-upper-bound-reports`](#v-upper-bound-reports) | devtools.upper_bound_reports | Squares Project (Levy) | first-party | premises | 42 | 42 |
 | [`V-rehwaldt-n68-verify`](#v-rehwaldt-n68-verify) | verify.py | Seth Rehwaldt | external | decides | 1 | 1 |
 | [`V-rehwaldt-n68-independent-support-check`](#v-rehwaldt-n68-independent-support-check) | independent_support_check.py | Seth Rehwaldt | external | decides | 1 | 1 |
 | [`V-refinement-custody`](#v-refinement-custody) | devtools.refinement_custody | Squares Project (Levy) | first-party | premises | 2 | 2 |
@@ -1184,6 +1184,12 @@ Decides a packing pair by pair and wall by wall: by exact sign in a number field
 | `E-fang-excess-theorem-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 6 of 6: the six retained inventory certificates at 211, 241, 273, 307, 308 and 932, every wall and every pair decided by both maintained routes; the twelve kernel controls are retained separately | T-163 |
 | `E-mishapolk-593-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 237 that T-183 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-183 |
 | `E-fang-direct-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 14 of 14: the complete certificates at 380, 381, 382, 421, 422, 463, 464, 507, 508, 553, 601, 651, 758 and 814, every wall and every pair decided by both maintained routes; the 28 kernel controls are retained separately | - |
+| `E-couzo-506-n175-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 175 that T-185 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-185 |
+| `E-mishapolk-70a033f-exact-feasibility` | replayed here | independently re-implemented | full, 12 of 12: the twelve derived certificates at n = 129, 154, 156, 175, 176, 204, 232, 264, 271, 302, 303 and 304 that T-186 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipts | T-186 |
+| `E-evand-606-n146-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 146 that T-187 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-187 |
+| `E-couzo-487b058-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 211 that T-188 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-188 |
+| `E-couzo-607-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 237 that T-189 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipts | T-189 |
+| `E-couzo-4e4c8ce-n237-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 237 that T-190 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-190 |
 
 ### `V-check-rational-witness-independent`
 
@@ -1257,6 +1263,12 @@ Decides a rational-corner witness pair by pair and wall by wall in Fraction arit
 | `E-fang-excess-theorem-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 6 of 6: the six retained inventory certificates at 211, 241, 273, 307, 308 and 932, every wall and every pair decided by both maintained routes; the twelve kernel controls are retained separately | T-163 |
 | `E-mishapolk-593-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 237 that T-183 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-183 |
 | `E-fang-direct-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 14 of 14: the complete certificates at 380, 381, 382, 421, 422, 463, 464, 507, 508, 553, 601, 651, 758 and 814, every wall and every pair decided by both maintained routes; the 28 kernel controls are retained separately | - |
+| `E-couzo-506-n175-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 175 that T-185 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-185 |
+| `E-mishapolk-70a033f-exact-feasibility` | replayed here | independently re-implemented | full, 12 of 12: the twelve derived certificates at n = 129, 154, 156, 175, 176, 204, 232, 264, 271, 302, 303 and 304 that T-186 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipts | T-186 |
+| `E-evand-606-n146-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 146 that T-187 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-187 |
+| `E-couzo-487b058-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 211 that T-188 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-188 |
+| `E-couzo-607-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 237 that T-189 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipts | T-189 |
+| `E-couzo-4e4c8ce-n237-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 237 that T-190 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-190 |
 
 ### `V-check-nagamochi-lemma1-counterexample`
 
@@ -2221,6 +2233,12 @@ Reads Evan Daniel's rational certificates, refusing anything the format does not
 | `E-fang-excess-theorem-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 6 of 6: the six retained inventory certificates at 211, 241, 273, 307, 308 and 932, every wall and every pair decided by both maintained routes; the twelve kernel controls are retained separately | T-163 |
 | `E-mishapolk-593-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 237 that T-183 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-183 |
 | `E-fang-direct-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 14 of 14: the complete certificates at 380, 381, 382, 421, 422, 463, 464, 507, 508, 553, 601, 651, 758 and 814, every wall and every pair decided by both maintained routes; the 28 kernel controls are retained separately | - |
+| `E-couzo-506-n175-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 175 that T-185 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-185 |
+| `E-mishapolk-70a033f-exact-feasibility` | replayed here | independently re-implemented | full, 12 of 12: the twelve derived certificates at n = 129, 154, 156, 175, 176, 204, 232, 264, 271, 302, 303 and 304 that T-186 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipts | T-186 |
+| `E-evand-606-n146-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 146 that T-187 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-187 |
+| `E-couzo-487b058-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 211 that T-188 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-188 |
+| `E-couzo-607-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 237 that T-189 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipts | T-189 |
+| `E-couzo-4e4c8ce-n237-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 237 that T-190 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-190 |
 
 ### `V-check-n11-final-composition`
 
@@ -2775,6 +2793,12 @@ Binds all three complete source certificates and all nine full deciding inputs/n
 | `E-fang-excess-theorem-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 6 of 6: the six retained inventory certificates at 211, 241, 273, 307, 308 and 932, every wall and every pair decided by both maintained routes; the twelve kernel controls are retained separately | T-163 |
 | `E-mishapolk-593-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 237 that T-183 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-183 |
 | `E-fang-direct-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 14 of 14: the complete certificates at 380, 381, 382, 421, 422, 463, 464, 507, 508, 553, 601, 651, 758 and 814, every wall and every pair decided by both maintained routes; the 28 kernel controls are retained separately | - |
+| `E-couzo-506-n175-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 175 that T-185 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-185 |
+| `E-mishapolk-70a033f-exact-feasibility` | replayed here | independently re-implemented | full, 12 of 12: the twelve derived certificates at n = 129, 154, 156, 175, 176, 204, 232, 264, 271, 302, 303 and 304 that T-186 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipts | T-186 |
+| `E-evand-606-n146-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 146 that T-187 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-187 |
+| `E-couzo-487b058-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 211 that T-188 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-188 |
+| `E-couzo-607-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 237 that T-189 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipts | T-189 |
+| `E-couzo-4e4c8ce-n237-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 237 that T-190 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-190 |
 
 ### `V-algebraic-witness-reports`
 
@@ -2838,6 +2862,12 @@ Imports a report of rational upper-bound certificates by another author from its
 | `E-fang-excess-theorem-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 6 of 6: the six retained inventory certificates at 211, 241, 273, 307, 308 and 932, every wall and every pair decided by both maintained routes; the twelve kernel controls are retained separately | T-163 |
 | `E-mishapolk-593-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 237 that T-183 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-183 |
 | `E-fang-direct-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 14 of 14: the complete certificates at 380, 381, 382, 421, 422, 463, 464, 507, 508, 553, 601, 651, 758 and 814, every wall and every pair decided by both maintained routes; the 28 kernel controls are retained separately | - |
+| `E-couzo-506-n175-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 175 that T-185 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-185 |
+| `E-mishapolk-70a033f-exact-feasibility` | replayed here | independently re-implemented | full, 12 of 12: the twelve derived certificates at n = 129, 154, 156, 175, 176, 204, 232, 264, 271, 302, 303 and 304 that T-186 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipts | T-186 |
+| `E-evand-606-n146-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 146 that T-187 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-187 |
+| `E-couzo-487b058-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 211 that T-188 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-188 |
+| `E-couzo-607-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 237 that T-189 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipts | T-189 |
+| `E-couzo-4e4c8ce-n237-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 237 that T-190 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-190 |
 
 ### `V-rehwaldt-n68-verify`
 

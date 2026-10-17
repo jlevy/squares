@@ -763,19 +763,19 @@
       "url": "https://kingbird.myphotos.cc/packing/square-128.svg"
     },
     {
-      "attribution": "Daniil Ostashev, https://github.com/dostashev/square-packing/blob/fe43a64ecf2581cdbd11830e8a5be0989746c5d3/records/n0129.sqcert at fe43a64ecf2581cdbd11830e8a5be0989746c5d3",
+      "attribution": "Mykhailo Polkovskyi, https://github.com/Mishapolk/square-packing-records/blob/70a033f0ecfa9e643cd5fb5dbac190cb7f4ffb94/certificates/n129.cert at 70a033f0ecfa9e643cd5fb5dbac190cb7f4ffb94",
       "kind": "packet-derived-facts",
-      "license_status": "MIT",
+      "license_status": "no-licence-published",
       "listed_n": [
         129
       ],
       "n": 129,
-      "path": "resources/web/dostashev-compositions-2026-10-12/source/records/n0129.sqcert",
-      "raw_asset_retained": true,
-      "retention_policy": "Complete source certificate retained losslessly and bound to the SHA-256 its packet pins upstream; no upstream program or prose is copied.",
+      "path": "resources/web/mishapolk-kkt-refinements-2026-10-14/facts/n-129.yaml.gz",
+      "raw_asset_retained": false,
+      "retention_policy": "Exact certificate retained as a derived fact, bound to the SHA-256 its packet pins upstream; no upstream byte is copied.",
       "retrieved": "2026-10-14",
       "source_n": 129,
-      "url": "https://github.com/dostashev/square-packing/blob/fe43a64ecf2581cdbd11830e8a5be0989746c5d3/records/n0129.sqcert"
+      "url": "https://github.com/Mishapolk/square-packing-records/blob/70a033f0ecfa9e643cd5fb5dbac190cb7f4ffb94/certificates/n129.cert"
     },
     {
       "attribution": "Siddharth Gupta after Nate Chaoweeraprasit and Evan Daniel, https://github.com/SidG2k1/square-packing-refinements/blob/9643cb5a78c1d4dcfc867c80a6920c3a6219d05a/witnesses/packing-130.cert at 9643cb5a78c1d4dcfc867c80a6920c3a6219d05a",
@@ -837,19 +837,19 @@
       "url": "https://kingbird.myphotos.cc/packing/square-145.svg"
     },
     {
-      "attribution": "PingYou Ltd, https://github.com/BuddenPing/square-packing-certificates/blob/820b9ffb11dd602d735f7a03cd472db98a2d3bb6/n146.cert.json at 820b9ffb11dd602d735f7a03cd472db98a2d3bb6",
+      "attribution": "Evan Daniel, https://github.com/evand/square-packing/blob/e006ce6230f2240457b083199755a3a5d287692c/search/packer/candidates/tt2_n146.cert at e006ce6230f2240457b083199755a3a5d287692c",
       "kind": "packet-derived-facts",
-      "license_status": "no-licence-published",
+      "license_status": "MIT",
       "listed_n": [
         146
       ],
       "n": 146,
-      "path": "resources/web/pingyou-n146-refinement-2026-10-12/facts/n-146.yaml.gz",
-      "raw_asset_retained": false,
-      "retention_policy": "Exact certificate retained as a derived fact, bound to the SHA-256 its packet pins upstream; no upstream byte is copied.",
+      "path": "resources/web/evand-n146-2026-10-14/source/search/packer/candidates/tt2_n146.cert",
+      "raw_asset_retained": true,
+      "retention_policy": "Complete source certificate retained losslessly and bound to the SHA-256 its packet pins upstream; no upstream program or prose is copied.",
       "retrieved": "2026-10-14",
       "source_n": 146,
-      "url": "https://github.com/BuddenPing/square-packing-certificates/blob/820b9ffb11dd602d735f7a03cd472db98a2d3bb6/n146.cert.json"
+      "url": "https://github.com/evand/square-packing/blob/e006ce6230f2240457b083199755a3a5d287692c/search/packer/candidates/tt2_n146.cert"
     },
     {
       "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
@@ -954,19 +954,19 @@
       "url": "https://github.com/Mishapolk/square-packing-records/blob/336bdf5efab4784e54e0ac32edf3ed12f9c8af7e/certificates/square-153.cert"
     },
     {
-      "attribution": "Francisco Couzo, https://github.com/franciscouzo/square-packing/blob/b85dee2b964e7f7fb9f765227e60c44cdcd3aa4d/certificates/n154.cert at b85dee2b964e7f7fb9f765227e60c44cdcd3aa4d",
+      "attribution": "Mykhailo Polkovskyi, https://github.com/Mishapolk/square-packing-records/blob/70a033f0ecfa9e643cd5fb5dbac190cb7f4ffb94/certificates/n154.cert at 70a033f0ecfa9e643cd5fb5dbac190cb7f4ffb94",
       "kind": "packet-derived-facts",
       "license_status": "no-licence-published",
       "listed_n": [
         154
       ],
       "n": 154,
-      "path": "resources/web/couzo-certificates-2026-10-13/source/certificates/n154.cert",
-      "raw_asset_retained": true,
-      "retention_policy": "Complete source certificate retained losslessly and bound to the SHA-256 its packet pins upstream; no upstream program or prose is copied.",
+      "path": "resources/web/mishapolk-kkt-refinements-2026-10-14/facts/n-154.yaml.gz",
+      "raw_asset_retained": false,
+      "retention_policy": "Exact certificate retained as a derived fact, bound to the SHA-256 its packet pins upstream; no upstream byte is copied.",
       "retrieved": "2026-10-14",
       "source_n": 154,
-      "url": "https://github.com/franciscouzo/square-packing/blob/b85dee2b964e7f7fb9f765227e60c44cdcd3aa4d/certificates/n154.cert"
+      "url": "https://github.com/Mishapolk/square-packing-records/blob/70a033f0ecfa9e643cd5fb5dbac190cb7f4ffb94/certificates/n154.cert"
     },
     {
       "attribution": "Daniil Ostashev, https://github.com/dostashev/square-packing/blob/c3d17ab08bd5db65dc5ffe69e41f7b2ff0c2fc49/records/n0155.sqcert at c3d17ab08bd5db65dc5ffe69e41f7b2ff0c2fc49",
@@ -984,19 +984,19 @@
       "url": "https://github.com/dostashev/square-packing/blob/c3d17ab08bd5db65dc5ffe69e41f7b2ff0c2fc49/records/n0155.sqcert"
     },
     {
-      "attribution": "Francisco Couzo, https://github.com/franciscouzo/square-packing/blob/0fa0e0de2ef0b414655e871b1baffcfe0d33c815/certificates/n156.cert at 0fa0e0de2ef0b414655e871b1baffcfe0d33c815",
+      "attribution": "Mykhailo Polkovskyi, https://github.com/Mishapolk/square-packing-records/blob/70a033f0ecfa9e643cd5fb5dbac190cb7f4ffb94/certificates/n156.cert at 70a033f0ecfa9e643cd5fb5dbac190cb7f4ffb94",
       "kind": "packet-derived-facts",
       "license_status": "no-licence-published",
       "listed_n": [
         156
       ],
       "n": 156,
-      "path": "resources/web/couzo-certificates-2026-10-12/source/certificates/n156.cert",
-      "raw_asset_retained": true,
-      "retention_policy": "Complete source certificate retained losslessly and bound to the SHA-256 its packet pins upstream; no upstream program or prose is copied.",
+      "path": "resources/web/mishapolk-kkt-refinements-2026-10-14/facts/n-156.yaml.gz",
+      "raw_asset_retained": false,
+      "retention_policy": "Exact certificate retained as a derived fact, bound to the SHA-256 its packet pins upstream; no upstream byte is copied.",
       "retrieved": "2026-10-14",
       "source_n": 156,
-      "url": "https://github.com/franciscouzo/square-packing/blob/0fa0e0de2ef0b414655e871b1baffcfe0d33c815/certificates/n156.cert"
+      "url": "https://github.com/Mishapolk/square-packing-records/blob/70a033f0ecfa9e643cd5fb5dbac190cb7f4ffb94/certificates/n156.cert"
     },
     {
       "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
@@ -1070,34 +1070,34 @@
       "url": "https://kingbird.myphotos.cc/packing/square-174.svg"
     },
     {
-      "attribution": "Daniil Ostashev, https://github.com/dostashev/square-packing/blob/a8db6ff941fc93d1d68d4d7aed90bb2a18a3a41f/records/n0175.sqcert at a8db6ff941fc93d1d68d4d7aed90bb2a18a3a41f",
+      "attribution": "Mykhailo Polkovskyi, https://github.com/Mishapolk/square-packing-records/blob/70a033f0ecfa9e643cd5fb5dbac190cb7f4ffb94/certificates/n175.cert at 70a033f0ecfa9e643cd5fb5dbac190cb7f4ffb94",
       "kind": "packet-derived-facts",
-      "license_status": "MIT",
+      "license_status": "no-licence-published",
       "listed_n": [
         175
       ],
       "n": 175,
-      "path": "resources/web/dostashev-records-2026-10-12/source/records/n0175.sqcert",
-      "raw_asset_retained": true,
-      "retention_policy": "Complete source certificate retained losslessly and bound to the SHA-256 its packet pins upstream; no upstream program or prose is copied.",
-      "retrieved": "2026-10-12",
+      "path": "resources/web/mishapolk-kkt-refinements-2026-10-14/facts/n-175.yaml.gz",
+      "raw_asset_retained": false,
+      "retention_policy": "Exact certificate retained as a derived fact, bound to the SHA-256 its packet pins upstream; no upstream byte is copied.",
+      "retrieved": "2026-10-14",
       "source_n": 175,
-      "url": "https://github.com/dostashev/square-packing/blob/a8db6ff941fc93d1d68d4d7aed90bb2a18a3a41f/records/n0175.sqcert"
+      "url": "https://github.com/Mishapolk/square-packing-records/blob/70a033f0ecfa9e643cd5fb5dbac190cb7f4ffb94/certificates/n175.cert"
     },
     {
-      "attribution": "Francisco Couzo, https://github.com/franciscouzo/square-packing/blob/b85dee2b964e7f7fb9f765227e60c44cdcd3aa4d/certificates/n176.cert at b85dee2b964e7f7fb9f765227e60c44cdcd3aa4d",
+      "attribution": "Mykhailo Polkovskyi, https://github.com/Mishapolk/square-packing-records/blob/70a033f0ecfa9e643cd5fb5dbac190cb7f4ffb94/certificates/n176.cert at 70a033f0ecfa9e643cd5fb5dbac190cb7f4ffb94",
       "kind": "packet-derived-facts",
       "license_status": "no-licence-published",
       "listed_n": [
         176
       ],
       "n": 176,
-      "path": "resources/web/couzo-certificates-2026-10-13/source/certificates/n176.cert",
-      "raw_asset_retained": true,
-      "retention_policy": "Complete source certificate retained losslessly and bound to the SHA-256 its packet pins upstream; no upstream program or prose is copied.",
+      "path": "resources/web/mishapolk-kkt-refinements-2026-10-14/facts/n-176.yaml.gz",
+      "raw_asset_retained": false,
+      "retention_policy": "Exact certificate retained as a derived fact, bound to the SHA-256 its packet pins upstream; no upstream byte is copied.",
       "retrieved": "2026-10-14",
       "source_n": 176,
-      "url": "https://github.com/franciscouzo/square-packing/blob/b85dee2b964e7f7fb9f765227e60c44cdcd3aa4d/certificates/n176.cert"
+      "url": "https://github.com/Mishapolk/square-packing-records/blob/70a033f0ecfa9e643cd5fb5dbac190cb7f4ffb94/certificates/n176.cert"
     },
     {
       "attribution": "Francisco Couzo, https://github.com/franciscouzo/square-packing at f3c5a529c255b546db18605702b8da298132309f",
@@ -1288,19 +1288,19 @@
       "url": "https://kingbird.myphotos.cc/packing/square-203a.svg"
     },
     {
-      "attribution": "Daniil Ostashev, https://github.com/dostashev/square-packing/blob/fe43a64ecf2581cdbd11830e8a5be0989746c5d3/records/n0204.sqcert at fe43a64ecf2581cdbd11830e8a5be0989746c5d3",
+      "attribution": "Mykhailo Polkovskyi, https://github.com/Mishapolk/square-packing-records/blob/70a033f0ecfa9e643cd5fb5dbac190cb7f4ffb94/certificates/n204.cert at 70a033f0ecfa9e643cd5fb5dbac190cb7f4ffb94",
       "kind": "packet-derived-facts",
-      "license_status": "MIT",
+      "license_status": "no-licence-published",
       "listed_n": [
         204
       ],
       "n": 204,
-      "path": "resources/web/dostashev-compositions-2026-10-12/source/records/n0204.sqcert",
-      "raw_asset_retained": true,
-      "retention_policy": "Complete source certificate retained losslessly and bound to the SHA-256 its packet pins upstream; no upstream program or prose is copied.",
+      "path": "resources/web/mishapolk-kkt-refinements-2026-10-14/facts/n-204.yaml.gz",
+      "raw_asset_retained": false,
+      "retention_policy": "Exact certificate retained as a derived fact, bound to the SHA-256 its packet pins upstream; no upstream byte is copied.",
       "retrieved": "2026-10-14",
       "source_n": 204,
-      "url": "https://github.com/dostashev/square-packing/blob/fe43a64ecf2581cdbd11830e8a5be0989746c5d3/records/n0204.sqcert"
+      "url": "https://github.com/Mishapolk/square-packing-records/blob/70a033f0ecfa9e643cd5fb5dbac190cb7f4ffb94/certificates/n204.cert"
     },
     {
       "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
@@ -1392,19 +1392,19 @@
       "url": "https://github.com/franciscouzo/square-packing/blob/f3c5a529c255b546db18605702b8da298132309f/n210.txt"
     },
     {
-      "attribution": "Francisco Couzo, https://github.com/franciscouzo/square-packing/blob/b85dee2b964e7f7fb9f765227e60c44cdcd3aa4d/certificates/n211.cert at b85dee2b964e7f7fb9f765227e60c44cdcd3aa4d",
+      "attribution": "Francisco Couzo, https://github.com/franciscouzo/square-packing/blob/487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d/certificates/n211.cert at 487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d",
       "kind": "packet-derived-facts",
       "license_status": "no-licence-published",
       "listed_n": [
         211
       ],
       "n": 211,
-      "path": "resources/web/couzo-certificates-2026-10-13/source/certificates/n211.cert",
+      "path": "resources/web/couzo-verified-bounds-2026-10-14/source/certificates/n211.cert",
       "raw_asset_retained": true,
       "retention_policy": "Complete source certificate retained losslessly and bound to the SHA-256 its packet pins upstream; no upstream program or prose is copied.",
-      "retrieved": "2026-10-14",
+      "retrieved": "2026-10-15",
       "source_n": 211,
-      "url": "https://github.com/franciscouzo/square-packing/blob/b85dee2b964e7f7fb9f765227e60c44cdcd3aa4d/certificates/n211.cert"
+      "url": "https://github.com/franciscouzo/square-packing/blob/487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d/certificates/n211.cert"
     },
     {
       "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
@@ -1492,19 +1492,19 @@
       "url": "https://kingbird.myphotos.cc/packing/square-231.svg"
     },
     {
-      "attribution": "Daniil Ostashev, https://github.com/dostashev/square-packing/blob/a8db6ff941fc93d1d68d4d7aed90bb2a18a3a41f/records/n0232.sqcert at a8db6ff941fc93d1d68d4d7aed90bb2a18a3a41f",
+      "attribution": "Mykhailo Polkovskyi, https://github.com/Mishapolk/square-packing-records/blob/70a033f0ecfa9e643cd5fb5dbac190cb7f4ffb94/certificates/n232.cert at 70a033f0ecfa9e643cd5fb5dbac190cb7f4ffb94",
       "kind": "packet-derived-facts",
-      "license_status": "MIT",
+      "license_status": "no-licence-published",
       "listed_n": [
         232
       ],
       "n": 232,
-      "path": "resources/web/dostashev-records-2026-10-12/source/records/n0232.sqcert",
-      "raw_asset_retained": true,
-      "retention_policy": "Complete source certificate retained losslessly and bound to the SHA-256 its packet pins upstream; no upstream program or prose is copied.",
-      "retrieved": "2026-10-12",
+      "path": "resources/web/mishapolk-kkt-refinements-2026-10-14/facts/n-232.yaml.gz",
+      "raw_asset_retained": false,
+      "retention_policy": "Exact certificate retained as a derived fact, bound to the SHA-256 its packet pins upstream; no upstream byte is copied.",
+      "retrieved": "2026-10-14",
       "source_n": 232,
-      "url": "https://github.com/dostashev/square-packing/blob/a8db6ff941fc93d1d68d4d7aed90bb2a18a3a41f/records/n0232.sqcert"
+      "url": "https://github.com/Mishapolk/square-packing-records/blob/70a033f0ecfa9e643cd5fb5dbac190cb7f4ffb94/certificates/n232.cert"
     },
     {
       "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
@@ -1565,19 +1565,19 @@
       "url": "https://github.com/evand/square-packing/blob/ea1a2f23678a13bd1d252f9f4c95ca5dd2ffd2b7/search/regularize/lists/certs/n-236.cert.gz"
     },
     {
-      "attribution": "Mishapolk, https://github.com/Mishapolk/square-packing-records/blob/46f638ce0537beeb1bad24242c6a3d357eecd9ee/certificates/n237.cert at 46f638ce0537beeb1bad24242c6a3d357eecd9ee",
+      "attribution": "Francisco Couzo, https://github.com/franciscouzo/square-packing/blob/58a783368d4b7e70bb800f0009ea9ca03e578739/certificates/n237.cert at 58a783368d4b7e70bb800f0009ea9ca03e578739",
       "kind": "packet-derived-facts",
       "license_status": "no-licence-published",
       "listed_n": [
         237
       ],
       "n": 237,
-      "path": "resources/web/mishapolk-records-2026-10-14/facts/n-237.yaml.gz",
-      "raw_asset_retained": false,
-      "retention_policy": "Exact certificate retained as a derived fact, bound to the SHA-256 its packet pins upstream; no upstream byte is copied.",
-      "retrieved": "2026-10-14",
+      "path": "resources/web/couzo-n237-2026-10-15/source/certificates/n237.cert",
+      "raw_asset_retained": true,
+      "retention_policy": "Complete source certificate retained losslessly and bound to the SHA-256 its packet pins upstream; no upstream program or prose is copied.",
+      "retrieved": "2026-10-15",
       "source_n": 237,
-      "url": "https://github.com/Mishapolk/square-packing-records/blob/46f638ce0537beeb1bad24242c6a3d357eecd9ee/certificates/n237.cert"
+      "url": "https://github.com/franciscouzo/square-packing/blob/58a783368d4b7e70bb800f0009ea9ca03e578739/certificates/n237.cert"
     },
     {
       "attribution": "Nate Chaoweeraprasit, https://github.com/itsnaka/squish-certs/blob/aeacc6c124df339074f7370e1e010bb6e8c1b5ca/squish-submission-2026-10-11/n238/n238.cert.json at aeacc6c124df339074f7370e1e010bb6e8c1b5ca",
@@ -1742,19 +1742,19 @@
       "url": "https://github.com/evand/square-packing/blob/ea1a2f23678a13bd1d252f9f4c95ca5dd2ffd2b7/search/regularize/lists/certs/n-263.cert.gz"
     },
     {
-      "attribution": "Daniil Ostashev, https://github.com/dostashev/square-packing/blob/a8db6ff941fc93d1d68d4d7aed90bb2a18a3a41f/records/n0264.sqcert at a8db6ff941fc93d1d68d4d7aed90bb2a18a3a41f",
+      "attribution": "Mykhailo Polkovskyi, https://github.com/Mishapolk/square-packing-records/blob/70a033f0ecfa9e643cd5fb5dbac190cb7f4ffb94/certificates/n264.cert at 70a033f0ecfa9e643cd5fb5dbac190cb7f4ffb94",
       "kind": "packet-derived-facts",
-      "license_status": "MIT",
+      "license_status": "no-licence-published",
       "listed_n": [
         264
       ],
       "n": 264,
-      "path": "resources/web/dostashev-records-2026-10-12/source/records/n0264.sqcert",
-      "raw_asset_retained": true,
-      "retention_policy": "Complete source certificate retained losslessly and bound to the SHA-256 its packet pins upstream; no upstream program or prose is copied.",
-      "retrieved": "2026-10-12",
+      "path": "resources/web/mishapolk-kkt-refinements-2026-10-14/facts/n-264.yaml.gz",
+      "raw_asset_retained": false,
+      "retention_policy": "Exact certificate retained as a derived fact, bound to the SHA-256 its packet pins upstream; no upstream byte is copied.",
+      "retrieved": "2026-10-14",
       "source_n": 264,
-      "url": "https://github.com/dostashev/square-packing/blob/a8db6ff941fc93d1d68d4d7aed90bb2a18a3a41f/records/n0264.sqcert"
+      "url": "https://github.com/Mishapolk/square-packing-records/blob/70a033f0ecfa9e643cd5fb5dbac190cb7f4ffb94/certificates/n264.cert"
     },
     {
       "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
@@ -1847,19 +1847,19 @@
       "url": "https://github.com/itsnaka/squish-certs/blob/aeacc6c124df339074f7370e1e010bb6e8c1b5ca/squish-submission-2026-10-11/n270/n270.cert.json"
     },
     {
-      "attribution": "Francisco Couzo, https://github.com/franciscouzo/square-packing/blob/0fa0e0de2ef0b414655e871b1baffcfe0d33c815/certificates/n271.cert at 0fa0e0de2ef0b414655e871b1baffcfe0d33c815",
+      "attribution": "Mykhailo Polkovskyi, https://github.com/Mishapolk/square-packing-records/blob/70a033f0ecfa9e643cd5fb5dbac190cb7f4ffb94/certificates/n271.cert at 70a033f0ecfa9e643cd5fb5dbac190cb7f4ffb94",
       "kind": "packet-derived-facts",
       "license_status": "no-licence-published",
       "listed_n": [
         271
       ],
       "n": 271,
-      "path": "resources/web/couzo-certificates-2026-10-12/source/certificates/n271.cert",
-      "raw_asset_retained": true,
-      "retention_policy": "Complete source certificate retained losslessly and bound to the SHA-256 its packet pins upstream; no upstream program or prose is copied.",
+      "path": "resources/web/mishapolk-kkt-refinements-2026-10-14/facts/n-271.yaml.gz",
+      "raw_asset_retained": false,
+      "retention_policy": "Exact certificate retained as a derived fact, bound to the SHA-256 its packet pins upstream; no upstream byte is copied.",
       "retrieved": "2026-10-14",
       "source_n": 271,
-      "url": "https://github.com/franciscouzo/square-packing/blob/0fa0e0de2ef0b414655e871b1baffcfe0d33c815/certificates/n271.cert"
+      "url": "https://github.com/Mishapolk/square-packing-records/blob/70a033f0ecfa9e643cd5fb5dbac190cb7f4ffb94/certificates/n271.cert"
     },
     {
       "attribution": "PingYou Ltd, https://github.com/BuddenPing/square-packing-certificates/blob/260aaf50230483654802790589c2dfce73237604/n272.cert.json at 260aaf50230483654802790589c2dfce73237604",
@@ -2067,49 +2067,49 @@
       "url": "https://github.com/franciscouzo/square-packing/blob/f3c5a529c255b546db18605702b8da298132309f/n301.txt"
     },
     {
-      "attribution": "Francisco Couzo, https://github.com/franciscouzo/square-packing/blob/b85dee2b964e7f7fb9f765227e60c44cdcd3aa4d/certificates/n302.cert at b85dee2b964e7f7fb9f765227e60c44cdcd3aa4d",
+      "attribution": "Mykhailo Polkovskyi, https://github.com/Mishapolk/square-packing-records/blob/70a033f0ecfa9e643cd5fb5dbac190cb7f4ffb94/certificates/n302.cert at 70a033f0ecfa9e643cd5fb5dbac190cb7f4ffb94",
       "kind": "packet-derived-facts",
       "license_status": "no-licence-published",
       "listed_n": [
         302
       ],
       "n": 302,
-      "path": "resources/web/couzo-certificates-2026-10-13/source/certificates/n302.cert",
-      "raw_asset_retained": true,
-      "retention_policy": "Complete source certificate retained losslessly and bound to the SHA-256 its packet pins upstream; no upstream program or prose is copied.",
+      "path": "resources/web/mishapolk-kkt-refinements-2026-10-14/facts/n-302.yaml.gz",
+      "raw_asset_retained": false,
+      "retention_policy": "Exact certificate retained as a derived fact, bound to the SHA-256 its packet pins upstream; no upstream byte is copied.",
       "retrieved": "2026-10-14",
       "source_n": 302,
-      "url": "https://github.com/franciscouzo/square-packing/blob/b85dee2b964e7f7fb9f765227e60c44cdcd3aa4d/certificates/n302.cert"
+      "url": "https://github.com/Mishapolk/square-packing-records/blob/70a033f0ecfa9e643cd5fb5dbac190cb7f4ffb94/certificates/n302.cert"
     },
     {
-      "attribution": "Daniil Ostashev, https://github.com/dostashev/square-packing/blob/fe43a64ecf2581cdbd11830e8a5be0989746c5d3/records/n0303.sqcert at fe43a64ecf2581cdbd11830e8a5be0989746c5d3",
+      "attribution": "Mykhailo Polkovskyi, https://github.com/Mishapolk/square-packing-records/blob/70a033f0ecfa9e643cd5fb5dbac190cb7f4ffb94/certificates/n303.cert at 70a033f0ecfa9e643cd5fb5dbac190cb7f4ffb94",
       "kind": "packet-derived-facts",
-      "license_status": "MIT",
+      "license_status": "no-licence-published",
       "listed_n": [
         303
       ],
       "n": 303,
-      "path": "resources/web/dostashev-compositions-2026-10-12/source/records/n0303.sqcert",
-      "raw_asset_retained": true,
-      "retention_policy": "Complete source certificate retained losslessly and bound to the SHA-256 its packet pins upstream; no upstream program or prose is copied.",
+      "path": "resources/web/mishapolk-kkt-refinements-2026-10-14/facts/n-303.yaml.gz",
+      "raw_asset_retained": false,
+      "retention_policy": "Exact certificate retained as a derived fact, bound to the SHA-256 its packet pins upstream; no upstream byte is copied.",
       "retrieved": "2026-10-14",
       "source_n": 303,
-      "url": "https://github.com/dostashev/square-packing/blob/fe43a64ecf2581cdbd11830e8a5be0989746c5d3/records/n0303.sqcert"
+      "url": "https://github.com/Mishapolk/square-packing-records/blob/70a033f0ecfa9e643cd5fb5dbac190cb7f4ffb94/certificates/n303.cert"
     },
     {
-      "attribution": "Daniil Ostashev, https://github.com/dostashev/square-packing/blob/b909e1b74cda50906e12b4373e010ddee39e47e4/records/n0304.sqcert at b909e1b74cda50906e12b4373e010ddee39e47e4",
+      "attribution": "Mykhailo Polkovskyi, https://github.com/Mishapolk/square-packing-records/blob/70a033f0ecfa9e643cd5fb5dbac190cb7f4ffb94/certificates/n304.cert at 70a033f0ecfa9e643cd5fb5dbac190cb7f4ffb94",
       "kind": "packet-derived-facts",
-      "license_status": "MIT",
+      "license_status": "no-licence-published",
       "listed_n": [
         304
       ],
       "n": 304,
-      "path": "resources/web/dostashev-merged-bands-2026-10-13/source/records/n0304.sqcert",
-      "raw_asset_retained": true,
-      "retention_policy": "Complete source certificate retained losslessly and bound to the SHA-256 its packet pins upstream; no upstream program or prose is copied.",
+      "path": "resources/web/mishapolk-kkt-refinements-2026-10-14/facts/n-304.yaml.gz",
+      "raw_asset_retained": false,
+      "retention_policy": "Exact certificate retained as a derived fact, bound to the SHA-256 its packet pins upstream; no upstream byte is copied.",
       "retrieved": "2026-10-14",
       "source_n": 304,
-      "url": "https://github.com/dostashev/square-packing/blob/b909e1b74cda50906e12b4373e010ddee39e47e4/records/n0304.sqcert"
+      "url": "https://github.com/Mishapolk/square-packing-records/blob/70a033f0ecfa9e643cd5fb5dbac190cb7f4ffb94/certificates/n304.cert"
     },
     {
       "attribution": "Francisco Couzo, https://github.com/franciscouzo/square-packing/blob/337078ca3e05153aceb099237b175cf64af5748a/certificates/n305.cert at 337078ca3e05153aceb099237b175cf64af5748a",
