@@ -710,9 +710,9 @@ No adoption waits for the owner’s word, and each case that once did is decided
   reader takes a hosted witness yet, so the adoption that first needs one writes that
   reader in its own pull request (think-ot5c names it for T-193’s forms).
   `python -m devtools.upper_bound_houses sizes` measures the witnesses a staged adoption
-  would write. On 17 October 2026 T-174’s 50 staged rational houses add 1.97 MB as Git
-  stores them, 2.84 MB in place of 0.87 MB, the largest 0.22 MB, from 14.55 MB more in a
-  checkout: they go into Git.
+  would write. On 17 October 2026 T-174’s 50 staged rational houses add 2.84 MB to
+  history as Git stores them, since the witnesses they replace stay in it, and 14.55 MB
+  to a checkout, the largest 0.22 MB stored: they go into Git.
 - **A regularized view below the house’s side is a smaller packing.** It is registered
   as a result and taken through stages 3 and 4 like any report, with the packing
   credited to its finder and the regularization to the regularizer
@@ -773,9 +773,12 @@ The records tier holds that to the record of the commit the change is built on
 (`--check-state --base-ref origin/main`, which reads its merge base): the base’s witness
 at the count must be the one named, the record’s must have its source and exact side,
 and it must be another witness only, by another path or revision, or, at a source that
-pins neither, by another witness file.
+pins no revision, by another witness file.
 So a house moved by an adoption, a Kingbird catalogue intake, whose source key never
 changes, or an exact re-solve fails, whatever its entry declares (review C3 of #660).
+Once the base defers the count, the entry stands while the record’s witness keeps the
+base’s source and exact side, whatever a later change does to the witness’s file or path
+(review D1).
 
 ### Adopt a House, Then Regularize It
 
