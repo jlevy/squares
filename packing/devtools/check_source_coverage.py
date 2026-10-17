@@ -536,34 +536,59 @@ def load_claims(path: pathlib.Path) -> dict[int, str]:
     raise ValueError(f"{path.name} is not a claims record this check can reparse")
 
 
-def _not_above_print(value: str, printed: str) -> bool:
-    """Whether a side is not ordered above the catalogue's print of a count.
+#: How a catalogue print orders an override's side (`print_order`).
+BEATS = "beats"
+UNDECIDED = "undecided"
+LOSES = "loses"
 
-    A print is a truncation or a rounding at its last place, never an exact side, so it
-    orders a side only beyond one unit of that place: below the print, a side beats it;
-    from one unit above, the print beats the side; between, nothing is decided, as at
-    n = 29, where the catalogue prints 5.93383346267692 for a packing whose exact side
-    T-009's Krawczyk box puts at 5.9338334626769291896..., and the house, PR #622's
-    tighter certificate of that packing (T-195), lies inside the box. The house rule
-    adopts the smallest validated side against the case's verified ceiling, exactly
-    (`devtools.select_houses`); this holds only that no override is a side the
-    catalogue's own print shows to be larger. The per-count ledgers read a print the same
-    way (`devtools.intake_ledger`).
+
+def print_order(value: str, printed: str) -> str:
+    """How the catalogue's print of a count orders an override's side.
+
+    Below the print, the override beats it. An integral print is an exact side, the
+    catalogue's `s = k` boxes and the `ceil(sqrt(n))` fallback, 177 of the corpus's
+    baselines, so anything at or above it loses. A decimal print is a truncation or a
+    rounding at its last place, so it orders a side only beyond one unit of that place:
+    from there on the override loses, and between, nothing is decided, as at n = 29,
+    where the catalogue prints 5.93383346267692 for a packing whose exact side T-009's
+    Krawczyk box puts at 5.9338334626769291896..., and PR #622's tighter certificate of
+    that packing (T-195) lies inside the box, 9.19e-15 above the print.
     """
-    bound = Decimal(printed)
+    bound, side = Decimal(printed), Decimal(value)
+    if side < bound:
+        return BEATS
+    if bound == bound.to_integral_value():
+        return LOSES
     unit = Decimal(1).scaleb(int(bound.as_tuple().exponent))
-    return Decimal(value) < bound + unit
+    return UNDECIDED if side < bound + unit else LOSES
+
+
+def adopted_house_sources() -> dict[int, str]:
+    """Each adopted count's house, by the source key of the packet it rebuilds from.
+
+    `select_houses --check` holds every one of them to the smallest validated side,
+    compared exactly with the case's verified ceiling, so an override that is the house
+    is ordered there even where the catalogue's print orders nothing."""
+    from devtools import upper_bound_houses as houses  # noqa: PLC0415
+
+    return {n: houses.source_for(n).key for n in houses.ADOPTED}
 
 
 def selection_errors(
-    coverage: Mapping, kingbird: Mapping[int, str], claims: Mapping[str, Mapping[int, str]]
+    coverage: Mapping,
+    kingbird: Mapping[int, str],
+    claims: Mapping[str, Mapping[int, str]],
+    houses: Mapping[int, str] | None = None,
 ) -> list[str]:
     """Reconcile the selected overrides and superseded reports with their sources.
 
     An override may come from any retained source. It must lie in that source's scope,
-    use evidence the source declares, report a side that the catalogue baseline it
-    replaces does not show to be larger (`_not_above_print`), and, where the source's
-    claims are reparsed here, equal the side the source itself prints. A superseded
+    use evidence the source declares, report a side below the catalogue baseline it
+    replaces, and, where the source's claims are reparsed here, equal the side the source
+    itself prints. Where the baseline is a decimal print that orders nothing, within one
+    unit of its last place (`print_order`), the override stands only as the count's
+    adopted house from that source (`houses`, by default none), which the exact house
+    selection orders instead; an integral baseline is exact and orders everything. A superseded
     report is a retained claim that a selected override at the same `n` beats: it must
     equal its own source's printed side and exceed the override's. Where no override is
     selected the report may instead name the catalogue baseline, which must then print a
@@ -600,10 +625,14 @@ def selection_errors(
             errors.append(
                 f"{where} uses evidence {entry['evidence']} not declared by {source_id}"
             )
-        if n in kingbird and not _not_above_print(entry["value"], kingbird[n]):
+        order = print_order(entry["value"], kingbird[n]) if n in kingbird else BEATS
+        if order == LOSES:
+            errors.append(f"{where} does not beat the catalogue baseline {kingbird[n]}")
+        elif order == UNDECIDED and (houses or {}).get(n) != source.get("source_key"):
             errors.append(
-                f"{where} does not beat the catalogue baseline {kingbird[n]}: it is at least "
-                "one unit of the print's last place above it"
+                f"{where} does not beat the catalogue baseline {kingbird[n]}: it lies within "
+                "one unit of the print's last place, which orders nothing, and it is not the "
+                "count's adopted house, which the exact selection orders"
             )
         errors.extend(_claim_errors(where, source_id, n, entry["value"], claims))
         accounted.setdefault(source_id, set()).add(n)
@@ -938,7 +967,7 @@ def main() -> int:
         for source in coverage["sources"]
         if source.get("claims_record")
     }
-    errors.extend(selection_errors(coverage, baseline, claims))
+    errors.extend(selection_errors(coverage, baseline, claims, adopted_house_sources()))
     results = safe_load(RESULTS.read_text(encoding="utf-8"))["results"]
     errors.extend(house_reason_errors(coverage, results))
 

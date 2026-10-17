@@ -74,19 +74,25 @@ def test_an_override_must_print_what_its_source_prints() -> None:
     assert any("repository prints 2.8" in error for error in _errors(coverage))
 
 
-def _against_print(value: str, printed: str) -> list[str]:
-    """The errors of n = 6's override at `value` against a catalogue print of `printed`."""
+def _against_print(value: str, printed: str, houses: dict[int, str] | None = None) -> list[str]:
+    """The errors of n = 6's override at `value` against a catalogue print of `printed`,
+    the override's source keyed `[release]`, with `houses` the adopted houses' sources."""
     coverage = _coverage()
+    coverage["sources"][0]["source_key"] = "[release]"
     claims = copy.deepcopy(CLAIMS)
     claims["release"][6] = value
     coverage["selected_overrides"][0]["value"] = value
-    return coverage_check.selection_errors(coverage, {**KINGBIRD, 6: printed}, claims)
+    return coverage_check.selection_errors(coverage, {**KINGBIRD, 6: printed}, claims, houses)
 
 
-def test_an_override_the_catalogue_print_shows_larger_is_refused() -> None:
-    (error,) = _against_print("4", "3")
-    assert error.startswith("selected override n=6 does not beat the catalogue baseline 3")
-    assert "one unit of the print's last place" in error
+@pytest.mark.parametrize("value", ["3", "3.5", "3.9999999999", "4"])
+def test_an_integral_baseline_is_exact_and_refuses_anything_at_or_above_it(value: str) -> None:
+    """An integral print is the catalogue's `s = k` or the `ceil(sqrt(n))` fallback, an
+    exact side, so it orders every override, a house or not (review C4 of #661)."""
+    for houses in (None, {6: "[release]"}):
+        (error,) = _against_print(value, "3", houses)
+        assert error == "selected override n=6 does not beat the catalogue baseline 3"
+    assert _against_print("2.9999999999", "3") == []
 
 
 @pytest.mark.parametrize(
@@ -94,23 +100,57 @@ def test_an_override_the_catalogue_print_shows_larger_is_refused() -> None:
     [
         # Below the print, the override beats it.
         ("2.9299999999", "beats"),
-        # Inside the print's last-place unit, nothing is decided: a print is a truncation
-        # or a rounding, never an exact side, as at n = 29, where T-195 lies 9.19e-15
-        # above the catalogue's 5.93383346267692 and inside T-009's box for the
-        # catalogue's own packing (think-adgd).
+        # Inside the print's last-place unit nothing is decided: a decimal print is a
+        # truncation or a rounding, as at n = 29, where T-195 lies 9.19e-15 above the
+        # catalogue's 5.93383346267692 and inside T-009's box for the catalogue's own
+        # packing (think-adgd).
         ("2.93", "undecided"),
         ("2.9399999999", "undecided"),
         # From the next unit on, the print shows the override to be larger.
-        ("2.94", "larger"),
-        ("2.9400000001", "larger"),
+        ("2.94", "loses"),
+        ("2.9400000001", "loses"),
     ],
 )
-def test_a_print_orders_an_override_only_beyond_one_unit_of_its_last_place(
+def test_a_decimal_print_leaves_its_last_unit_to_the_exact_house_selection(
     value: str, outcome: str
 ) -> None:
-    errors = _against_print(value, "2.93")
-    assert bool(errors) == (outcome == "larger"), errors
-    assert all("does not beat the catalogue baseline 2.93" in error for error in errors)
+    """Inside the print's last-place unit an override stands only as the count's adopted
+    house from its own source, which `select_houses` orders exactly against the verified
+    ceiling; anywhere else the window lets nothing through (review C4 of #661)."""
+    assert coverage_check.print_order(value, "2.93") == outcome
+    alone = _against_print(value, "2.93")
+    house = _against_print(value, "2.93", {6: "[release]"})
+    other = _against_print(value, "2.93", {6: "[repository]"})
+    if outcome == "beats":
+        assert alone == house == other == []
+    elif outcome == "undecided":
+        assert house == []
+        for errors in (alone, other):
+            (error,) = errors
+            assert "within one unit of the print's last place" in error
+            assert "not the count's adopted house" in error
+    else:
+        for errors in (alone, house, other):
+            assert errors == ["selected override n=6 does not beat the catalogue baseline 2.93"]
+
+
+def test_the_catalogues_integral_baselines_are_read_as_exact() -> None:
+    """The 177 integral baselines of the current capture refuse half a unit above them,
+    where one unit of their written place would have admitted it: 18.7 at n = 308
+    against 18 (review C4 of #661)."""
+    coverage = safe_load(coverage_check.COVERAGE.read_text(encoding="utf-8"))
+    corpus = coverage["case_corpus"]
+    source = coverage_check.source_by_id(coverage, "kingbird-current")
+    kingbird = coverage_check.parse_kingbird(
+        coverage_check.ROOT / source["local"], corpus["n_min"], corpus["n_max"]
+    )
+    integral = {n: printed for n, printed in kingbird.items() if "." not in printed}
+    assert len(integral) == 177
+    assert kingbird[308] == "18"
+    for n, printed in integral.items():
+        assert coverage_check.print_order(f"{printed}.5", printed) == coverage_check.LOSES, n
+        assert coverage_check.print_order(printed, printed) == coverage_check.LOSES, n
+    assert coverage_check.print_order("18.7", kingbird[308]) == coverage_check.LOSES
 
 
 def test_a_superseded_report_must_lose_to_the_selected_source() -> None:
