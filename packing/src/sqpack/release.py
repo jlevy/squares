@@ -1279,6 +1279,91 @@ class ReleaseNoPublicChange(NamedTuple):
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
     ReleaseNoPublicChange(
+        components=(
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/devtools/adopt_houses.py",
+            "packing/devtools/check_case_prose.py",
+            "packing/devtools/check_rung_figures.py",
+            "packing/devtools/check_standing.py",
+            "packing/devtools/default_drawings.py",
+            "packing/devtools/regularize_axis_components.py",
+            "packing/devtools/select_houses.py",
+            "packing/devtools/upper_bound_houses.py",
+            "packing/frontier/n-084.md",
+            "packing/frontier/n-086.md",
+            "packing/frontier/n-103.md",
+            "packing/frontier/n-105.md",
+            "packing/frontier/n-108.md",
+            "packing/frontier/n-127.md",
+            "packing/frontier/n-130.md",
+            "packing/frontier/n-131.md",
+            "packing/frontier/n-179.md",
+            "packing/frontier/n-180.md",
+            "packing/frontier/n-208.md",
+            "packing/frontier/n-209.md",
+            "packing/frontier/n-238.md",
+            "packing/frontier/n-239.md",
+            "packing/frontier/n-261.md",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The adoption of 17 October 2026 (think-3mry) moves 37 houses to T-174, PR "
+            "574's certificates, with their case records, coverage overrides, register "
+            "prose and adoption code, and regularizes each re-housed count. Rendered at "
+            "link revision 804eff36, once from main 804eff36 and once from this branch at "
+            "2e81e0c7, render_packing_methods, render_n11_optimality_review and "
+            "render_n11_threshold_bound_review write 50 files, byte-identical between the "
+            "two trees; each PDF prints from that HTML, and none was printed. The survey "
+            "reads none of the moved houses' sides or drawings, and neither review prints "
+            "any of it, so each keeps its edition: v0.2.2, v0.1.7 and v0.1.0."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer",),
+        paths=(
+            "packing/atlas/known-best/bound-citations.json",
+            "packing/atlas/known-best/composite-figure.json",
+            "packing/devtools/adopt_houses.py",
+            "packing/devtools/check_case_prose.py",
+            "packing/devtools/check_rung_figures.py",
+            "packing/devtools/check_standing.py",
+            "packing/devtools/default_drawings.py",
+            "packing/devtools/regularize_axis_components.py",
+            "packing/devtools/select_houses.py",
+            "packing/devtools/upper_bound_houses.py",
+            "packing/frontier/results.yaml",
+            "packing/src/sqpack/cli/validate.py",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+        ),
+        reason=(
+            "The adoption of 17 October 2026 (think-3mry) moves 37 houses to T-174 and "
+            "regularizes them. The explainer reads bound-citations.json's lower line at "
+            "n = 11 and the 1..100 composite's totals in composite-figure.json; the "
+            "adoption changes 37 upper lines and the 101..324 composite's totals, and no "
+            "lower line or 1..100 total; the code it changes, the house writers and "
+            "selection, the drawings record and three checks, prints nothing the "
+            "explainer shows. Its render needs a browser this host lacks, so it is "
+            "source-reviewed only; it keeps v0.4.7."
+        ),
+    ),
+    ReleaseNoPublicChange(
         components=("paper:n11-lower-bounds-explainer",),
         paths=(
             "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
