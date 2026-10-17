@@ -364,9 +364,9 @@ schematic acceptance rule above should not be read as a reconstruction of that p
 <figcaption><strong>Figure 3.</strong> The 29-square arrangement found by Thomas
 Schadt’s simulated annealing in December 2025 and subsequently improved analytically
 by David Ellsworth. The mixture of tilted and axis-aligned pieces illustrates an
-arrangement reached through stochastic search. This drawing uses the
-<a href="../../atlas/known-best/rendering/n-029.svg">retained numerical reconstruction</a>, rather than the original floating-point
-search output. The separate <a href="../../frontier/n-029.md">interval certificate</a>
+arrangement reached through stochastic search. This drawing is
+<a href="../../atlas/known-best/rendering/n-029.svg">PingYou Ltd’s exact rational certificate</a> of the packing, rather than the original floating-point
+search output, and that certificate, which the <a href="../../frontier/n-029.md">case record</a> holds,
 supplies the safe side ceiling $5.9338334626769292$.</figcaption>
 </figure>
 

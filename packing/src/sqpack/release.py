@@ -3484,110 +3484,52 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         ),
     ),
     ReleaseNoPublicChange(
-        components=(
-            "paper:n11-optimality-review",
-            "paper:n11-threshold-bound-review",
-            "paper:square-packing-methods-survey",
-        ),
+        components=("paper:n11-optimality-review", "paper:n11-threshold-bound-review"),
         paths=(
-            "packing/campaign/result-requests.yaml",
+            "packing/devtools/adopt_houses.py",
+            "packing/devtools/check_source_coverage.py",
+            "packing/devtools/default_drawings.py",
+            "packing/devtools/upper_bound_houses.py",
             "packing/devtools/upper_bound_reports.py",
             "packing/frontier/results.yaml",
-            "packing/frontier/source-coverage.yaml",
         ),
         outputs=(
             "papers/n11-optimality-review.html",
             "papers/n11-optimality-review.md",
             "papers/n11-threshold-bound-review.html",
             "papers/n11-threshold-bound-review.md",
-            "papers/square-packing-methods-survey.html",
-            "papers/square-packing-methods-survey.md",
         ),
         reason=(
-            "Rendered from this branch at fa80ffe3 and from main 80b116ed at link revision "
-            "80b116ed, the three papers' HTML and Markdown are byte-identical in all 126 "
-            "files the renderers write; each PDF prints from that HTML. The register gains "
-            "T-195, PR #622's N29 certificate, the source register its source, the "
-            "requests record #622's mapping to it, and the importer a house reader and a "
-            "verified exact form for a case that keeps an earlier print (think-gzrw); none "
-            "of the three papers prints any of them, so each keeps its edition: v0.1.7, "
-            "v0.1.0 and v0.2.2."
+            "Rendered from this branch at 05ef0f60 and from main 804eff36 at link revision "
+            "804eff36, the two reviews' HTML and Markdown are byte-identical; each PDF "
+            "prints from that HTML. The register gains T-195, PR #622's N29 certificate, "
+            "the house writer adopts it at 29, the coverage check reads a catalogue print "
+            "to its last place, and the drawings record settles 29; neither review prints "
+            "any of it, so each keeps its edition: v0.1.7 and v0.1.0."
         ),
     ),
     ReleaseNoPublicChange(
         components=("paper:n11-lower-bounds-explainer",),
-        paths=("packing/devtools/upper_bound_reports.py", "packing/frontier/results.yaml"),
+        paths=(
+            "packing/atlas/known-best/bound-citations.json",
+            "packing/atlas/known-best/composite-figure.json",
+            "packing/devtools/adopt_houses.py",
+            "packing/devtools/check_source_coverage.py",
+            "packing/devtools/default_drawings.py",
+            "packing/devtools/upper_bound_houses.py",
+            "packing/devtools/upper_bound_reports.py",
+            "packing/frontier/results.yaml",
+        ),
         outputs=(
             "papers/n11-lower-bounds-explainer.html",
             "papers/n11-lower-bounds-explainer.md",
         ),
         reason=(
-            "Rendered from this branch at fa80ffe3 and from main 80b116ed with the "
+            "Rendered from this branch at 05ef0f60 and from main 804eff36 with the "
             "browser's math pass, the Markdown and HTML differ only in the live register "
-            "count beside T-018, 194 results registered so far and now 195, and the HTML "
-            "also in where an empty style attribute falls in two formulas' spans, which "
-            "moves between two renders of the same input. A register count follows the "
-            "site's data and is not a revision of the paper, so the explainer keeps "
-            "v0.4.7."
-        ),
-    ),
-    ReleaseNoPublicChange(
-        components=(
-            "paper:n11-lower-bounds-explainer",
-            "paper:n11-optimality-review",
-            "paper:n11-threshold-bound-review",
-            "paper:square-packing-methods-survey",
-        ),
-        paths=("packing/devtools/select_houses.py", "packing/frontier/n-029.md"),
-        outputs=(
-            "papers/n11-lower-bounds-explainer.html",
-            "papers/n11-lower-bounds-explainer.md",
-            "papers/n11-optimality-review.html",
-            "papers/n11-optimality-review.md",
-            "papers/n11-threshold-bound-review.html",
-            "papers/n11-threshold-bound-review.md",
-            "papers/square-packing-methods-survey.html",
-            "papers/square-packing-methods-survey.md",
-        ),
-        reason=(
-            "T-195's stage 4 exit (review A's A2 and A3 of #661) makes it a house candidate "
-            "at 29, and `select_houses.HELD` holds it there until its stacked adoption "
-            "lands; `adopt_houses --refresh` writes the held note into n-029.md's body and "
-            "adds T-195's two evidence atoms to its roster. No paper renders a case "
-            "record's body or roster, or calls the selection: the survey cites case "
-            "records by link only. Source-reviewed; no render was taken, and every paper "
-            "keeps its edition. The renders are taken again against main at the re-cut."
-        ),
-    ),
-    ReleaseNoPublicChange(
-        components=(
-            "paper:n11-lower-bounds-explainer",
-            "paper:n11-optimality-review",
-            "paper:n11-threshold-bound-review",
-            "paper:square-packing-methods-survey",
-        ),
-        paths=("packing/devtools/adopt_houses.py",),
-        outputs=(
-            "papers/n11-lower-bounds-explainer.html",
-            "papers/n11-lower-bounds-explainer.md",
-            "papers/n11-optimality-review.html",
-            "papers/n11-optimality-review.md",
-            "papers/n11-threshold-bound-review.html",
-            "papers/n11-threshold-bound-review.md",
-            "papers/square-packing-methods-survey.html",
-            "papers/square-packing-methods-survey.md",
-        ),
-        reason=(
-            "The prepared adoption of T-195 at 29 (think-30n2) adds T-195's entry to the "
-            "house-adoption writer's `RESULTS` and the credit at 29 to its `CREDITS`, with "
-            "the packing's own year (review A's A7 of #661). Both are read only for a count "
-            "the house selection moves, and the selection holds T-195 at 29 "
-            "(`select_houses.HELD`) until this adoption lands with PR #660's house rule, so "
-            "no case record, coverage row or prose the writer produces changes: "
-            "`adopt_houses --dry-run` prints nothing. The papers reach the module through "
-            "`generate_frontier_case` and `source_supersession`, which read neither table "
-            "for an unmoved count. Source-reviewed; no render was taken, and every paper "
-            "keeps its edition."
+            "count beside T-018, 194 results registered so far and now 195. A register "
+            "count follows the site's data and is not a revision of the paper, so the "
+            "explainer keeps v0.4.7."
         ),
     ),
 )
