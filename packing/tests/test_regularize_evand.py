@@ -796,7 +796,7 @@ def test_a_view_sent_to_review_is_drawn_only_as_a_review_record_admits_it(
         "run": "evand-regularize-full",
         "output": "same",
         "row": 7,
-        "source": {"id": "W-row", "sha256": report["source"]["sha256"]},
+        "source": axis.witness_self(root, report["source"]["path"]),
         "generator_version": axis.review_version(drive.evand_generator_block()),
         "gallery": ["packing/atlas/known-best/manifest.json"],
     }
@@ -856,7 +856,7 @@ def test_a_view_sent_to_review_is_drawn_only_as_a_review_record_admits_it(
     # A record of another witness than the count's has lapsed with it (the policy's
     # re-review): a view drawn on it is drawn without a record, and where the layer draws
     # another view, the lapsed record asks for nothing.
-    lapsed = {**record, "source": {"id": "W-row", "sha256": "0" * 64}}
+    lapsed = {**record, "source": {**record["source"], "revision": "an upstream fix"}}
     write(lapsed)
     index["entries"][0]["review"] = entry["review"]
     layout.index.write_text(json.dumps(index), encoding="utf-8")

@@ -2988,14 +2988,18 @@ class Admitted:
 
 
 def reviewed_output(
-    report: Mapping[str, Any], run_id: str, reviews: Sequence[Mapping[str, Any]]
+    report: Mapping[str, Any],
+    run_id: str,
+    reviews: Sequence[Mapping[str, Any]],
+    root: Path = REPO,
 ) -> tuple[Output | None, Mapping[str, Any] | None]:
     """The view a review record admits of a report the decision table sent to review, and
     the record; else None twice (policy section 5).
 
     The record must decide `admit` on this count, generator at its vendored version, run
-    and output, at the row the report decided, against the report's own source witness by
-    id and digest; and the
+    and output, at the row the report decided, against the source witness the report
+    names, as the witness in the tree under `root` identifies itself
+    (`regularize_axis_components.witness_self`; OR-16); and the
     output must be one `preview` takes: both exact routes accept it, it pairs one to one
     and no contact total falls. A record of another witness has lapsed and admits nothing.
     """
@@ -3003,9 +3007,9 @@ def reviewed_output(
     decision = report.get("decision") or {}
     if decision.get("decision") != "review":
         return None, None
-    source = report.get("source") or {}
+    path = (report.get("source") or {}).get("path")
     for record in reviews:
-        if record.get("n") != n or record.get("decision") != "admit":
+        if record.get("n") != n or record.get("decision") != "admit" or not path:
             continue
         held = record.get("source") or {}
         if (
@@ -3014,7 +3018,7 @@ def reviewed_output(
             and record.get("run") == run_id
             and record.get("row") == decision.get("row")
             and held.get("id") == source_id(report)
-            and held.get("sha256") == source.get("sha256")
+            and held == axis.witness_self(root, str(path))
         ):
             chosen = layer_candidate(report, "preview")
             if chosen is not None and chosen == record.get("output"):
@@ -3539,7 +3543,7 @@ def dated_runs(
 
 
 def evand_candidates(
-    run_dirs: Sequence[Path], reviews: Sequence[Mapping[str, Any]] = ()
+    run_dirs: Sequence[Path], reviews: Sequence[Mapping[str, Any]] = (), root: Path = REPO
 ) -> tuple[list[Admitted], list[dict[str, Any]], dict[str, str]]:
     """Every count finished runs admitted (row 10), a later run winning at a count two
     decided, with the runs they came from, and, with the reason, each admitted view
@@ -3558,7 +3562,7 @@ def evand_candidates(
         for path in sorted(Path(run_dir).glob("n-*/report.json")):
             report = read_json(path)
             found[int(report["n"])] = (path.parent, run_id, report)
-    admitted, refused = decided_candidates(found, reviews)
+    admitted, refused = decided_candidates(found, reviews, root)
     used = {item.run["id"] for item in admitted}
     runs = [
         run_block(Path(run_dir), run_id)
@@ -3571,6 +3575,7 @@ def evand_candidates(
 def decided_candidates(
     found: Mapping[int, tuple[Path, str, dict[str, Any]]],
     reviews: Sequence[Mapping[str, Any]] = (),
+    root: Path = REPO,
 ) -> tuple[list[Admitted], dict[str, str]]:
     """Each found report's admitted view, or the view a review record admits where the
     table sent it to review (`reviewed_output`), decided again as it is now
@@ -3581,7 +3586,7 @@ def decided_candidates(
         chosen = layer_candidate(report, "admitted")
         review = None
         if chosen is None:
-            chosen, review = reviewed_output(report, run_id, reviews)
+            chosen, review = reviewed_output(report, run_id, reviews, root)
         if chosen is None:
             continue
         text, refusal = layer_refusal(directory, report, chosen)
@@ -3693,7 +3698,7 @@ def write_layer_with_grid(
     the whole write when one is not the view its report decided (#548 review C, C1)."""
     grid = importlib.import_module("devtools.regularize_grid_slack")
     admitted, runs, refused = evand_candidates(
-        run_dirs, axis.review_records(layer_layout(root))
+        run_dirs, axis.review_records(layer_layout(root)), root.resolve()
     )
     chosen = set(grid_counts)
     views, grid_run_block, grid_generator = grid.admitted_views(grid_run, sorted(chosen))
@@ -3726,7 +3731,7 @@ def write_layer(
     if select != "admitted":
         return write_preview(run_dirs, root, select)
     admitted, runs, refused = evand_candidates(
-        run_dirs, axis.review_records(layer_layout(root))
+        run_dirs, axis.review_records(layer_layout(root)), root.resolve()
     )
     summary = admit_views(
         admitted,

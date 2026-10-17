@@ -3,8 +3,10 @@
 # Hand-written. `python -m devtools.regularize_evand layer` draws a view the table did not
 # admit at row 10 only as a record here admits it, and the entry it writes names the
 # record; `python -m devtools.regularize_axis_components --check-atlas` holds each
-# admitting record and its entry to each other. A record lapses when its source witness
-# or its generator's version changes, and then admits nothing.
+# admitting record and its entry to each other. A record names its source witness as the
+# witness identifies itself (its id, its source's key, path and revision, and its side),
+# never by a digest of its bytes (OR-16). It lapses when the witness or the generator's
+# version changes, and then admits nothing.
 reviews:
   - n: 211
     date: "2026-10-16"
@@ -45,4 +47,7 @@ reviews:
     row: 7
     source:
       id: W-known-best-n211
-      sha256: 8a076bd3d02e64a57e6acf914ade9b8b615a4d78053a19efb020b2fb7861688d
+      source: "[Couzo verified bounds 2026-10-14]"
+      path: resources/web/couzo-verified-bounds-2026-10-14/source/certificates/n211.cert
+      revision: 487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d
+      side: "7496774813149710519467765230441/500000000000000000000000000000"

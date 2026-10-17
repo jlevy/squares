@@ -305,7 +305,8 @@ A view the owner admits is drawn only through a review record, which the policy�
 section 5 describes: one entry in `packing/atlas/known-best/regularized/reviews.yaml`
 naming the count, the date, the reviewer, the decision and its reason, the generator and
 its version (the index’s `pin`, `source_commit` and `patches`), the run, output and row,
-and the source witness’s id and digest.
+the source witness as it identifies itself (id, source key, path, revision and side),
+and the gallery the reviewer decided from.
 Then the same `layer` call that admits a run’s row-10 views draws the reviewed one, its
 entry keeps the table’s row-7 decision and names the record, and `--check-atlas` holds
 the two to each other.

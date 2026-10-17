@@ -222,17 +222,17 @@ where there is one.
 `packing/atlas/known-best/regularized/reviews.yaml`, a hand-written input beside the
 index.
 A record holds the count, the date, the reviewer, the decision and its reason; any
-parameters or generator choice; the generator version and source-witness digest it was
-made against; and the gallery it was made from.
+parameters or generator choice; the generator version and the source witness it was made
+against, as the witness identifies itself; and the gallery it was made from.
 The index entry names its record, and the records tier’s check of the layer
 (`regularize_axis_components --check-atlas`) holds the two to each other.
 The first review created both: on 16 October 2026 the owner admitted Evan Daniel’s
 same-side view at n = 211, which row 7 had sent to review.
 `regularize_evand layer` draws a view the table sent to review only as a record admits
 that very view: its count, generator and version, run, output and row, and its source
-witness’s id and digest.
-A review of a whole pass may also be written up under `docs/project/reviews/` and mapped
-in the document map.
+witness as the witness identifies itself (its id, its source’s key, path and revision,
+and its side), never a digest of its bytes (OR-16). A review of a whole pass may also be
+written up under `docs/project/reviews/` and mapped in the document map.
 
 **Re-review:** a record lapses, and its count goes back through the automated pass, when
 

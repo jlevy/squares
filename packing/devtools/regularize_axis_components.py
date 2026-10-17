@@ -212,9 +212,9 @@ REVIEW_FIELDS = (
 )
 """What a review record holds (policy section 5): the count, the date, the reviewer, the
 decision and its reason, the generator, run and output it decided on, the row that sent
-the view to review, the source witness's id and digest and the generator's version
-(`review_version`) it was made against, and the gallery, the files that draw it for the
-reviewer, each in the repository."""
+the view to review, the source witness as it identifies itself (`witness_self`) and the
+generator's version (`review_version`) it was made against, and the gallery, the files
+that draw it for the reviewer, each in the repository."""
 REVIEW_VERSION = ("pin", "source_commit", "patches")
 """The fields of a generator's block in the index that are its version for a review: a
 re-pin or a patch makes a record lapse (policy section 5, re-review)."""
@@ -2224,6 +2224,26 @@ def review_records(layout: AtlasLayout) -> list[dict[str, Any]]:
     return [dict(record) for record in document.get("reviews") or []]
 
 
+def witness_self(repo: Path, path: str) -> dict[str, str | None]:
+    """A witness as it identifies itself: its id, its source's key, path and revision, and
+    its side, as written. A review record is bound to these, as a `SETTLED` decision is,
+    never to a digest of the file's bytes (OR-16): a new house changes the source, a new
+    certificate file the path, an upstream fix the revision."""
+    witness = load_yaml((repo / path).read_text(encoding="utf-8"))["witness"]
+    source = witness.get("source") or {}
+
+    def text(value: object) -> str | None:
+        return None if value is None else str(value)
+
+    return {
+        "id": str(witness["id"]),
+        "source": text(source.get("key")),
+        "path": text(source.get("path")),
+        "revision": text(source.get("revision")),
+        "side": str(witness["side"]),
+    }
+
+
 def review_version(block: Mapping[str, Any]) -> dict[str, Any]:
     """A generator's version as a review record states it (`REVIEW_VERSION`)."""
     return {key: block.get(key) for key in REVIEW_VERSION}
@@ -2240,8 +2260,8 @@ def review_link(layout: AtlasLayout, record: Mapping[str, Any]) -> dict[str, Any
 
 def review_admits(record: Mapping[str, Any], entry: Mapping[str, Any]) -> list[str]:
     """Why an admitting review record is not of the view an entry draws: the generator,
-    run and output, the row that sent it to review, and the source witness's id and
-    digest must be the entry's. Empty where the record admits that view."""
+    run and output, the row that sent it to review, and the source witness's id must be
+    the entry's. Empty where the record admits that view."""
     source = record.get("source") or {}
     run = entry.get("run") or {}
     found = {
@@ -2250,7 +2270,6 @@ def review_admits(record: Mapping[str, Any], entry: Mapping[str, Any]) -> list[s
         "output": run.get("output"),
         "row": (entry.get("decision") or {}).get("row"),
         "source id": (entry.get("source") or {}).get("id"),
-        "source sha256": (entry.get("source") or {}).get("sha256"),
     }
     held = {
         "generator": record.get("generator"),
@@ -2258,7 +2277,6 @@ def review_admits(record: Mapping[str, Any], entry: Mapping[str, Any]) -> list[s
         "output": record.get("output"),
         "row": record.get("row"),
         "source id": source.get("id"),
-        "source sha256": source.get("sha256"),
     }
     return [
         f"its {key} is {held[key]!r}, the entry's {found[key]!r}"
@@ -2268,14 +2286,16 @@ def review_admits(record: Mapping[str, Any], entry: Mapping[str, Any]) -> list[s
 
 
 def _review_lapsed(
+    layout: AtlasLayout,
     record: Mapping[str, Any],
     entry: Mapping[str, Any],
     generators: Mapping[str, Mapping[str, Any]],
 ) -> bool:
-    """Whether a review record has lapsed against an entry: its source witness's digest
-    is not the entry's, or its generator's version is not the index's."""
-    source = record.get("source") or {}
-    if source.get("sha256") != (entry.get("source") or {}).get("sha256"):
+    """Whether a review record has lapsed against an entry: the source witness the entry
+    names no longer identifies itself as the record says (`witness_self`), or the index
+    describes the record's generator at another version."""
+    path = (entry.get("source") or {}).get("witness")
+    if not path or record.get("source") != witness_self(layout.repo, str(path)):
         return True
     block = generators.get(str(record.get("generator")))
     return block is None or record.get("generator_version") != review_version(block)
@@ -2322,7 +2342,7 @@ def review_problems(
         if entry is None:
             problems.append(f"{relative}: n={n} is not a count the index records")
             continue
-        if record["decision"] != "admit" or _review_lapsed(record, entry, generators):
+        if record["decision"] != "admit" or _review_lapsed(layout, record, entry, generators):
             continue
         why = review_admits(record, entry)
         if why or entry.get("review") is None:
@@ -2339,7 +2359,7 @@ def review_problems(
             problems.append(f"n={n}: the entry names a review record {relative} does not hold")
             continue
         why = review_admits(record, entry)
-        if _review_lapsed(record, entry, generators) and not why:
+        if _review_lapsed(layout, record, entry, generators) and not why:
             why = ["its generator's version is not the index's"]
         if why:
             problems.append(
