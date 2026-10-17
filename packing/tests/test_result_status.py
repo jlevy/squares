@@ -386,6 +386,17 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
         "T-183",
         "T-185",
         "T-189",
+        "T-118",
+        "T-128",
+        "T-130",
+        "T-140",
+        "T-141",
+        "T-149",
+        "T-151",
+        "T-152",
+        "T-169",
+        "T-170",
+        "T-171",
     }
     # The house adoption of 11 October 2026 moved 42 case records to the smallest
     # confirmed and reviewed side the register held (think-fvz4): SQUISH's earlier packets
@@ -413,9 +424,16 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
     # Polkovskyi's KKT refinements (T-186) those of T-158, T-161, T-162, T-165, T-175 and
     # T-181, Evan Daniel's 146 (T-187) T-168's, Couzo's 237 (T-190) T-183's, and T-190 is
     # below Couzo's issue-607 certificate (T-189) at the one count it states in the corpus.
+    # The adoption of 17 October 2026, the first under the house rule, took the last houses
+    # of eleven more for PR 574's certificates (T-174): Seth Rehwaldt's 68 (T-118),
+    # Francisco Couzo's eight-case report (T-128), follow-up (T-130) and 10 October
+    # certificates (T-140), Evan Daniel's record hunt (T-141), Daniil Ostashev's records
+    # (T-149), SQUISH's fourth request (T-151), Couzo's 11 October certificates (T-152) and
+    # PingYou Ltd's own re-solves at 261, 105 and 272 (T-169 to T-171).
     for entry in ("T-128", "T-130"):
-        assert entry not in marked
-        assert view.standing(records.results[entry], records) == view.HOLDS
+        assert view.position_marks(
+            records.results[entry], view.standing(records.results[entry], records), records
+        )[0].startswith("superseded by T-174")
     assert set(derived) == expected
     assert len(derived) == len(expected)
     assert {
