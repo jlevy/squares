@@ -88,6 +88,14 @@ class PublicationHistoryEntry(NamedTuple):
 #: for each deployment's commit, what the page it built stated.
 PUBLICATION_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.7.24",
+        first_published="October 17, 2026",
+        result_scope=(
+            "Serve the atlas posters' v0.6.2 edition, drawn at the 17 October data, and "
+            "name it on the readme page."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.7.23",
         first_published="October 16, 2026",
         result_scope=(
@@ -880,6 +888,16 @@ class ReleaseImpactDecision(NamedTuple):
 # No impact is invented retrospectively for the published baseline editions.
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
     ReleaseImpactDecision(
+        component="site",
+        previous_version="v0.7.23",
+        version="v0.7.24",
+        impact="patch",
+        reason=(
+            "Serve the atlas posters' v0.6.2 edition, drawn at the 17 October data, and "
+            "name it on the readme page."
+        ),
+    ),
+    ReleaseImpactDecision(
         component="infographics",
         previous_version="v0.6.1",
         version="v0.6.2",
@@ -1242,6 +1260,32 @@ class ReleaseNoPublicChange(NamedTuple):
 
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
+    ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer",),
+        paths=(
+            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
+            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
+            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+        ),
+        reason=(
+            "The site cut v0.7.24, which pairs README's edition sentence with the atlas "
+            "posters' v0.6.2 (PR 663, think-nv87), regenerated the five claim documents at "
+            "PUBLICATION_REVISION d421bac7, kept reachable from main by the merge commit the "
+            "PR merges with. With that revision read back as v0.7.23's 18ed93f5, each is "
+            "byte-identical to main's c593e2bf, and between the two revisions those case "
+            "directories change only in the five documents themselves, so the 32 "
+            "repository links they pin are the only change, and no claim, certificate or "
+            "command moves. A link revision follows the site's edition and is not a "
+            "revision of the explainer, so it keeps v0.4.7. Source-compared; no render of "
+            "the claim documents was taken."
+        ),
+    ),
     ReleaseNoPublicChange(
         components=("paper:n11-lower-bounds-explainer",),
         paths=(
@@ -3453,7 +3497,7 @@ def validate_release_impacts(
 #: fresh render, so a link naming the build commit would fail their drift check forever. It is
 #: in no version string. It moves when the claim documents are regenerated for an edition. It
 #: must be a commit on `main`; the site's own links name `main` itself (`devtools.repo_links`).
-PUBLICATION_REVISION = "18ed93f5"
+PUBLICATION_REVISION = "d421bac7"
 
 
 def data_pathspec() -> tuple[str, ...]:
