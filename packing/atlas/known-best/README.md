@@ -369,6 +369,46 @@ driver’s `receipt.json`, each run’s per-count `report.json`, gzip-compressed
 `run.json` for each grid-slack run; the index records only the half-degree run, which
 supplied a view, and that block is the same as the index’s.
 
+The same day both generators ran again at the ten counts recorded as decided on 15
+October whose decision still owed runs or a per-count outcome (think-0ut1), and at 270
+and 305, whose witnesses jlevy/squares#553 adopted after Evan Daniel’s regularizer last
+ran there (think-zjmt): his regularizer (`evand-regularize-leftovers-1016`, 2,917
+CPU-seconds) and grid-slack at 0.5, 1 and 5 degrees (`grid-slack-leftovers-deg05-1016`,
+`grid-slack-leftovers-deg1-1016` and `grid-slack-leftovers-deg5-1016`, 1,613
+CPU-seconds), which also ran at 301 (think-co6o). None draws better than the picture
+drawn today, so nothing was admitted.
+At 102, 258, 263 and 269, Evan Daniel’s own regularized lists (`T-146`), both generators
+draw no change at every threshold; at 236 his view draws one more angle class and hue
+than the house, and grid-slack draws no change.
+Of the five counts drawn by the axis tool’s view, at 180 every view of both generators
+ties it on every goal; at 123 grid-slack’s view ties it and his is refused at row 7
+(house sides fall from 329 to 314); at 155 grid-slack’s view draws one more light and
+one more uneven square at every threshold, and his is held at row 4, solved about
+$10^{-30}$ above $U$; at 179 both are refused at row 7, a stage total falling from 535
+to 533 and 531; and at 110, drawn at Francisco Couzo’s decimal side above $U$, his exact
+view at the bound and grid-slack’s views are refused at row 7, drawing fewer shared
+sides. At 270 his view is held at row 4, solved $1.7 \times 10^{-19}$ above $U$, and at
+305 it is refused at row 7, a total of shared sides falling; grid-slack’s views there
+tie the drawn ones or draw worse.
+At 301 grid-slack’s 1- and 5-degree views, which draw no light, uneven or near-axis
+square, sit at the decimal witness’s side, $4.6 \times 10^{-12}$ above $U$, and draw 14
+angle classes, where Evan Daniel’s view at the bound, drawn since 13 October, draws 8.
+`devtools.default_drawings.SETTLED` records the ten as decided on these four runs, each
+with its outcome, and none owes a run any longer.
+No settlement names any longer the five earlier runs whose blocks `settled-runs/` kept
+for those decisions (`evand-regularize-full`, `evand-regularize-refreshed-adopt518-v2`,
+`evand-regularize-adopt518-v2-rerun-2026-10-13`, `evand-regularize-bound-1013` and
+`grid-slack-on518`), so the five copies are deleted, and `--check-state` fails on a copy
+no settlement names (review G2 of #644). The runs’ receipts and per-count reports, and
+the selection’s report, are kept in
+[`cases/regularized_drawings/think-0ut1-2026-10-16/`](../../cases/regularized_drawings/think-0ut1-2026-10-16/),
+without the views.
+The same directory keeps the audit probe at 307, grid-slack at 1 and 5
+degrees (`leftovers-audit-deg1-1016` and `leftovers-audit-deg5-1016`), which
+straightened nothing and drew the drawn view’s measures, so nothing was admitted, and
+`grid-slack-timing.tsv`, each grid-slack invocation’s measured wall, user and system
+seconds.
+
 Every drawn view carries its regularization in the register’s terms (`by: project`, the
 method, the side and the identity measured here), and `results.yaml`’s
 `regularized_drawings` records each one whose packing a registered result holds,
@@ -413,6 +453,39 @@ vendored views drawn with a retry, and none used a replica patch.
 Exploration
 [X-049](../../campaign/explorations/X-049-families-shading-and-the-large-n-limit.md#exact-regularization)
 explains why the layer exists and what the axis tool changes.
+
+Later that day the adoption of the 16 October review (think-z7wn) moved the houses at
+129, 146, 154, 156, 175, 176, 204, 211, 232, 237, 264, 271, 302, 303 and 304, so the
+views the stack had drawn there lapsed to the axis tool’s view of each new witness.
+Both generators ran on the fifteen new witnesses: Evan Daniel’s regularizer
+(`evand-regularize-z7wn-a-1016` and `evand-regularize-z7wn-b-1016`, 4,817 CPU-seconds)
+and grid-slack at 0.5, 1 and 5 degrees (`grid-slack-z7wn-{a,b}-deg05-1016`, `-deg1-1016`
+and `-deg5-1016`, 3,487 CPU-seconds).
+The selection of the counts 129 to 211 draws his same-side views at 129, 146, 175 and
+204, grid-slack’s half-degree view at 156 and its five-degree view at 154; at 176
+grid-slack’s views draw more uneven squares than the axis tool’s and his is held at row
+4, so 176 is decided no better, as the owner settled it on 16 October (“Adopt as
+settled”). At 211 every view of both generators goes to review at row 7 (a square’s
+contact count falls while no total does), though his same-side view betters the drawn
+axis view on every measure; the owner admitted it the same day, as recommended (“Admit
+it (Recommended)”), by the layer’s first review record, in
+[`regularized/reviews.yaml`](regularized/reviews.yaml).
+The selection of 232, 237, 264, 271, 302, 303 and 304, which did not finish by that
+pass’s stop time, ran the same day on the same runs (think-r3cl, 28 minutes of wall at
+two workers): it draws grid-slack’s half-degree views at 232, 264 and 271 and its
+five-degree view at 302, which draws no light, uneven or near-axis square.
+At 237 every view, admitted at row 10, draws one more light and one more uneven square
+than the axis tool’s view of the new witness (6 / 10 against 5 / 9); at 303 grid-slack’s
+views tie it on every goal and his solved view is held at row 4; at 304 every view draws
+light squares where it draws none, and his solved view is held at row 4. So those three
+are decided no better, and his same-side re-solve at 303 and 304 was refused, its
+literal too large. The evidence is retained in
+[`cases/regularized_drawings/think-z7wn-2026-10-16/`](../../cases/regularized_drawings/think-z7wn-2026-10-16/)
+in think-kpm3’s layout, with `selection-z7wn-a.json` and `selection-z7wn-a.md` for the
+counts 129 to 211 and `selection-r3cl.json` and `selection-r3cl.md` for the rest.
+After it, with 211, the index draws 92 views: 19 by the axis tool, 52 by Evan Daniel’s
+regularizer and 21 by the grid-slack generator (1 by its version 0 and 20 by its version
+1).
 
 ### The default picture
 

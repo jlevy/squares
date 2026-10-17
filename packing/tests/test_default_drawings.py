@@ -363,23 +363,31 @@ def test_the_state_follows_the_witness_as_it_identifies_itself(key: str, value: 
 
 
 def test_a_decision_names_what_it_still_owes_and_the_bead_that_owns_it() -> None:
-    # The ten counts decided on 15 October 2026 rest on the #518 runs' prose; each says
-    # what think-0ut1 still owes, so the record shows it (review A6 of #636). A decision
-    # whose runs and per-count outcome are recorded owes nothing (`owed` is None, as the
-    # contract allows), as the three of 16 October 2026 (think-la7h) do, and its state
-    # says nothing is owed rather than inventing a debt.
-    rows = {row["n"]: row for row in _record()["states"]}
-    # The ten of 15 October still owe their work until think-0ut1 records it.
-    for n in (102, 110, 123, 155, 179, 180, 236, 258, 263, 269):
-        assert defaults.SETTLED[n].owed is not None, n
-    for n, held in defaults.SETTLED.items():
-        if held.state != defaults.DECIDED:
-            continue
+    # A decision that still owes runs or a recorded outcome says so, naming the open bead
+    # that owns them, so the record shows it (review A6 of #636); one whose runs and
+    # per-count outcome are recorded owes nothing (`owed` is None, as the contract allows)
+    # and its state says nothing is owed rather than inventing a debt. The ten counts
+    # decided on 15 October 2026 owed think-0ut1 until its runs of 16 October 2026
+    # recorded each count's outcome; the three think-la7h settled that day owed nothing.
+    # No committed decision owes anything now, so one that owes is made here.
+    record = _record()
+    rows = {row["n"]: row for row in record["states"]}
+    decided = [n for n, held in defaults.SETTLED.items() if held.state == defaults.DECIDED]
+    for n in decided:
+        held = defaults.SETTLED[n]
         if held.owed is None:
             assert "still owed" not in rows[n]["why"], n
-            continue
-        assert held.owed.startswith("think-0ut1: "), n
-        assert rows[n]["why"].endswith(f"; still owed: {held.owed}"), n
+        else:
+            assert defaults.BEAD.match(held.owed), n
+            assert rows[n]["why"].endswith(f"; still owed: {held.owed}"), n
+    n = min(decided)
+    owing = {**defaults.SETTLED, n: defaults.SETTLED[n]._replace(owed="think-aaaa: a run")}
+    entry = defaults.index_entries()[n]
+    state = defaults.count_state(
+        n, entry, _measured(record, n), rows[n]["witness"], settled=owing
+    )
+    assert state["state"] == defaults.DECIDED
+    assert state["why"].endswith("; still owed: think-aaaa: a run")
     n = min(defaults.SETTLED)
     unowned = {**defaults.SETTLED, n: defaults.SETTLED[n]._replace(owed="later")}
     found, _listed = defaults.state_problems(settled=unowned)
@@ -441,7 +449,8 @@ def test_every_run_a_settlement_names_is_one_a_record_holds(tmp_path: Path) -> N
     assert recorded["grid-slack-3a-rerun-deg1-1016"] == "regularize_grid_slack/1"
     assert recorded["evand-regularize-3a-rerun-303-1016"] == "evand-regularize"
     assert "grid-slack-3a-deg1-1016" not in recorded
-    n = 204
+    # 272 rests on the same runs 204 did before this layer regularized it.
+    n = 272
     held = defaults.SETTLED[n]
     named = (
         *held.runs,
@@ -469,7 +478,11 @@ def test_every_run_a_settlement_names_is_one_a_record_holds(tmp_path: Path) -> N
         f"n={n}: SETTLED names run evand-regularize-3a-rerun-s-1016, which no record holds"
     ) in "\n".join(found)
     assert (
-        f"n={n}: SETTLED names run evand-regularize-3a-1016, which only the layer's index holds"
+        f"n={n}: SETTLED names run grid-slack-3a-deg05-1016, which only the layer's index holds"
+    ) in "\n".join(found)
+    # The index has dropped evand-regularize-3a-1016's block here, so its copy alone held it.
+    assert (
+        f"n={n}: SETTLED names run evand-regularize-3a-1016, which no record holds"
     ) in "\n".join(found)
 
 
@@ -487,29 +500,41 @@ def test_a_settlement_keeps_its_record_when_the_index_drops_a_run(tmp_path: Path
             assert records[run].retained, (n, run)
     index = json.loads(defaults.INDEX.read_text(encoding="utf-8"))
     indexed = {block["id"] for block in index["runs"]}
-    dropped = {"evand-regularize-3a-1016", "grid-slack-on518"}
+    # Both are runs the 16 October settlement of 272 names (`_RUN3A`); this layer's index
+    # has already dropped the first, whose views it redrew, so only its copy holds it.
+    dropped = {"evand-regularize-3a-1016", "grid-slack-3a-deg05-1016"}
     index["runs"] = [block for block in index["runs"] if block["id"] not in dropped]
     without = tmp_path / "index.json"
     without.write_text(json.dumps(index), encoding="utf-8")
     found, _listed = defaults.state_problems(index=without)
     assert found == []
 
-    # Into evidence without the copies, `retain_runs` copies the blocks again as they
-    # are committed, and a second pass writes nothing.
+    # Into evidence without the copies, `retain_runs` copies again, as they are
+    # committed, the blocks the index still holds, and a second pass writes nothing. A
+    # copy of a block the index has dropped is that run's only record: without it the
+    # run is held by none, `retain_runs` cannot restore it, and only the copy does.
     committed = defaults.EVIDENCE / defaults.SETTLED_RUNS
     copies = sorted(path.name for path in committed.iterdir())
+    still = sorted(set(copies) & indexed)
+    gone = sorted(set(copies) - indexed)
     evidence = tmp_path / "evidence"
     shutil.copytree(
         defaults.EVIDENCE, evidence, ignore=shutil.ignore_patterns(defaults.SETTLED_RUNS)
     )
     found, _listed = defaults.state_problems(evidence=evidence)
     assert found
-    assert all("which only the layer's index holds" in problem for problem in found)
+    for problem in found:
+        run = problem.split()[4].rstrip(",")
+        assert run in copies, problem
+        held_by = "only the layer's index holds" if run in still else "no record holds"
+        assert f"which {held_by}" in problem, problem
     assert {problem.split()[4].rstrip(",") for problem in found} == set(copies)
-    assert defaults.retain_runs(evidence=evidence) == (copies, [])
-    for run in copies:
+    assert defaults.retain_runs(evidence=evidence) == (still, gone)
+    for run in still:
         copied = evidence / defaults.SETTLED_RUNS / run / "run.json"
         assert copied.read_bytes() == (committed / run / "run.json").read_bytes()
+    for run in gone:
+        shutil.copytree(committed / run, evidence / defaults.SETTLED_RUNS / run)
     assert defaults.retain_runs(evidence=evidence) == ([], [])
     assert defaults.state_problems(evidence=evidence)[0] == []
 
@@ -524,6 +549,33 @@ def test_a_settlement_keeps_its_record_when_the_index_drops_a_run(tmp_path: Path
     assert set(missing) == dropped | (named - indexed)
 
 
+def test_a_copy_no_settlement_names_fails_the_gate(tmp_path: Path) -> None:
+    # `SETTLED_RUNS` holds the blocks the settlements rest on, so a copy outlives the
+    # last settlement that names its run only by mistake: once this layer re-recorded
+    # the 15 October settlements, five of the seven copies were named by none (review G2
+    # of #644). The gate names each such copy, and one whose id is not its directory's.
+    assert defaults.orphaned_copies() == []
+    evidence = tmp_path / "evidence"
+    shutil.copytree(defaults.EVIDENCE, evidence)
+    copies = evidence / defaults.SETTLED_RUNS
+    (copies / "grid-slack-orphan").mkdir()
+    (copies / "grid-slack-orphan" / "run.json").write_text(
+        json.dumps({"id": "grid-slack-orphan", "generator": "regularize_grid_slack/1"}),
+        encoding="utf-8",
+    )
+    misnamed = copies / "grid-slack-3a-deg05-1016" / "run.json"
+    block = json.loads(misnamed.read_text(encoding="utf-8"))
+    misnamed.write_text(json.dumps({**block, "id": "grid-slack-elsewhere"}), encoding="utf-8")
+    assert defaults.orphaned_copies(evidence) == [
+        "grid-slack-3a-deg05-1016",
+        "grid-slack-orphan",
+    ]
+    found, _listed = defaults.state_problems(evidence=evidence)
+    orphans = [problem for problem in found if "is not the copy of a run" in problem]
+    assert len(orphans) == 2
+    assert any("settled-runs/grid-slack-orphan/run.json" in problem for problem in orphans)
+
+
 def test_a_settled_run_covered_the_count_where_its_record_says_which() -> None:
     # A receipt lists the counts its run covered, and a grid-slack block's retained
     # reports are the counts it covered; the settled count must be one of them. An index
@@ -535,7 +587,7 @@ def test_a_settled_run_covered_the_count_where_its_record_says_which() -> None:
         {129, 146, 156, 204, 271, 272, 303}
     )
     assert records["evand-regularize-3a-1016"].counts is None
-    n = 204
+    n = 272
     held = defaults.SETTLED[n]
     named = (*held.runs, ("evand-regularize", "evand-regularize-3a-rerun-303-1016"))
     found, _listed = defaults.state_problems(
@@ -544,7 +596,7 @@ def test_a_settled_run_covered_the_count_where_its_record_says_which() -> None:
     assert found == [
         (
             f"n={n}: SETTLED names run evand-regularize-3a-rerun-303-1016, whose record "
-            "shows it ran 303, not 204"
+            f"shows it ran 303, not {n}"
         )
     ]
 

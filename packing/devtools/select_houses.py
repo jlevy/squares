@@ -181,20 +181,23 @@ class Pending:
 
 
 #: The counts the house rule moved when it was set, each staged to the adoption that
-#: follows it: T-174's 60 rational houses, which the lifted hold kept out, for the next
-#: pull request, and its algebraic ones at 70, 153 and 207, which RP-3 kept out, for the
-#: writer. A pull request that validates a smaller packing adopts it or stages its counts
-#: here with the bead that adopts them and why (`STAGING_REASONS`); an adoption waits with
-#: its regularization runs, never apart from them (`default_drawings.deferral_problems`).
-#: The pull request that adopts a count takes it off.
+#: follows it: T-174's rational houses, which the lifted hold kept out, for the next pull
+#: request, and its algebraic ones at 70, 153 and 207, which RP-3 kept out, for the
+#: writer. There were 60 rational counts on 16 October 2026; the same day's adoption of
+#: T-186 to T-190 (#657) took ten of them below T-174 (129, 146, 156, 175, 176, 204, 232,
+#: 264, 271 and 303), which left 50. A pull request that validates a smaller packing
+#: adopts it or stages its counts here with the bead that adopts them and why
+#: (`STAGING_REASONS`); an adoption waits with its regularization runs, never apart from
+#: them (`default_drawings.deferral_problems`). The pull request that adopts a count takes
+#: it off.
 PENDING_ADOPTION: dict[int, Pending] = {
     **{
         n: Pending(house="T-174", bead=ADOPTION_BEAD, why=NEXT_PULL_REQUEST)
         for n in (
-            68, 84, 86, 88, 102, 103, 105, 108, 110, 123, 126, 127, 129, 130, 131, 132,
-            146, 155, 156, 172, 175, 176, 179, 180, 181, 182, 199, 204, 206, 208, 209,
-            210, 228, 232, 236, 238, 239, 240, 258, 259, 261, 263, 264, 266, 267, 268,
-            269, 270, 271, 272, 273, 292, 295, 297, 301, 303, 305, 306, 307, 308,
+            68, 84, 86, 88, 102, 103, 105, 108, 110, 123, 126, 127, 130, 131, 132, 155,
+            172, 179, 180, 181, 182, 199, 206, 208, 209, 210, 228, 236, 238, 239, 240,
+            258, 259, 261, 263, 266, 267, 268, 269, 270, 272, 273, 292, 295, 297, 301,
+            305, 306, 307, 308,
         )
     },
     **{
