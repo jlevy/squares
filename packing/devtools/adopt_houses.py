@@ -1175,8 +1175,10 @@ def _claims(path: Path) -> Mapping[int, str]:
     return load_claims(path)
 
 
-#: The most places a house's side is printed at to stay below the house it replaces.
-MAX_PLACES = 40
+#: The most places a house's side is printed at to stay below the house it replaces: 40
+#: until 17 October 2026, when T-174's 68 came in 4.58e-61 below Seth Rehwaldt's exact
+#: 59-place print (T-118), which 40 places tie.
+MAX_PLACES = 72
 
 
 def shown(side: Fraction, above: object = None) -> str:
@@ -2011,6 +2013,12 @@ def _section_span(text: str, key: str) -> tuple[int, int]:
 
 #: The clause of a displaced house's row that names the certificate below it.
 DISPLACED_BY = re.compile(r"and T-\d+'s exact side is smaller\.$")
+#: A superseded row's words for the house above which its report lies, as `_unaccounted`
+#: writes them or a pass wrote them by hand: a later house is smaller still, so the report
+#: lies above it too, and the row names it (n = 305's issue-489 row, 17 October 2026).
+ABOVE_HOUSE = re.compile(
+    r"\babove the house adopted (here )?on \d{4}-\d{2}-\d{2}(?: \(T-\d+\))?"
+)
 #: The day a selected override's reason says its house was adopted.
 ADOPTED_ON_DAY = re.compile(r"\badopted on (\d{4}-\d{2}-\d{2}) \(T-\d+\)")
 
@@ -2040,6 +2048,13 @@ def coverage(moves: Sequence[Move], text: str) -> str:
                 if "reason" in report:
                     report["reason"] = DISPLACED_BY.sub(
                         f"and {house.result}'s exact side is smaller.", str(report["reason"])
+                    )
+                    report["reason"] = ABOVE_HOUSE.sub(
+                        lambda match, n=n, result=house.result: (
+                            f"above the house adopted {match.group(1) or ''}on "
+                            f"{houses.adopted_on(n)} ({result})"
+                        ),
+                        str(report["reason"]),
                     )
         # The displaced house is recorded whether or not its source has a claims record:
         # its selected value is the source's print where it has one and the ceiling of

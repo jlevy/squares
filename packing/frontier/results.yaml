@@ -21983,8 +21983,9 @@ results:
       it from that day (T-170, T-162, T-168, T-161, T-165, T-162, T-169, T-161, T-171, T-162),
       this entry being smaller by 1.7e-99 to 1.18e-02, and at the other 50 counts the cases kept
       their houses. The adoption of 16 October 2026 (PR #657) then took ten of the 60 below this
-      entry, 146 to T-187 and 129, 156, 175, 176, 204, 232, 264, 271 and 303 to T-186. The
-      adoption of 17 October 2026 (think-3mry), the first under the house rule, moved 37 of the
+      entry, 146 to T-187 and 129, 156, 175, 176, 204, 232, 264, 271 and 303 to T-186.
+
+      The adoption of 17 October 2026 (think-3mry), the first under the house rule, moved 37 of the
       other 50 to this entry and regularized each in the same pull request. At twelve of the
       thirteen left, 88, 102, 123, 126, 199, 258, 259, 266, 267, 292, 295 and 301, issue 639's
       algebraic sides (T-193) are smaller, staged for the writer, and at 236 Evan Daniel's

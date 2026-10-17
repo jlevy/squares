@@ -6050,7 +6050,7 @@ selected_overrides:
   reason: Smaller exact finite construction confirmed after scoped replay/custody review.
 - n: 68
   source_id: pingyou-pr574-certificates-2026-10-13
-  value: '8.7987952372182839025766809670213940835211'
+  value: '8.7987952372182839025766809670213940835210190302278792632403696'
   evidence: E-pingyou-574-certificate-report
   reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
     here and an accepted review, adopted on 2026-10-17 (T-174).
@@ -8209,7 +8209,7 @@ superseded_reports:
   source_id: evand-record-hunt3-2026-10-10
   value: '17.951139772207'
   reason: A certificate of the same release that no register entry cites; its exact side equals T-140's,
-    the house from 11 to 12 October 2026; above the house adopted on 2026-10-12 (T-152).
+    the house from 11 to 12 October 2026; above the house adopted on 2026-10-17 (T-174).
   superseded_by: pingyou-pr574-certificates-2026-10-13
 - n: 156
   source_id: evand-square-packing-2026-10-05
