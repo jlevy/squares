@@ -474,7 +474,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "638f775adbda007cfe1e5a6e17046687b3281852"
+DATA_REVISION = "eb51cf5a76d86e2b8e273a996f06d1e3b0e2ecfe"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -1278,6 +1278,56 @@ class ReleaseNoPublicChange(NamedTuple):
 
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
+    ReleaseNoPublicChange(
+        components=("site",),
+        paths=("packing/frontier/source-coverage.yaml",),
+        outputs=(
+            "about.html",
+            "atlas.html",
+            "conventions.html",
+            "development.html",
+            "epistemics.html",
+            "index.html",
+            "news.html",
+            "papers.html",
+            "readme.html",
+            "results.html",
+            "synopsis.html",
+            "tutorial-advanced.html",
+            "tutorial.html",
+            "visualize.html",
+        ),
+        reason=(
+            "Rendered on this branch over main 804eff36, once with main's source register "
+            "and once with the branch's, the site's pages, result overviews, case records, "
+            "forwarders and assets are byte-identical in all 1472 files render_overview "
+            "writes. The register moves the reviewed dates of UnitSquare Release 1 and "
+            "SQUISH n153 to 17 October and adds a note on each read (the 17 October intake "
+            "pass, think-e2sz)."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "Rendered on this branch over main 804eff36 at link revision 804eff36, once "
+            "with main's requests record and source register and once with the branch's, "
+            "the HTML and Markdown are byte-identical in all 42 files the renderer writes; "
+            "the PDF prints from that HTML and was not rebuilt. The requests record gains "
+            "the entries of #659 and #664 at triage, maps #446's comment of 16 October and "
+            "records #432's closure, and the source register moves the reviewed dates of "
+            "UnitSquare Release 1 and SQUISH n153 to 17 October with a note on each read "
+            "(the 17 October intake pass, think-e2sz); the survey prints none of them, so "
+            "it keeps v0.2.2."
+        ),
+    ),
     ReleaseNoPublicChange(
         components=("paper:n11-lower-bounds-explainer",),
         paths=(
