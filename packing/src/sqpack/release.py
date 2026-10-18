@@ -1408,33 +1408,6 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         ),
     ),
     ReleaseNoPublicChange(
-        components=("site",),
-        paths=("packing/frontier/source-coverage.yaml",),
-        outputs=(
-            "about.html",
-            "atlas.html",
-            "conventions.html",
-            "development.html",
-            "epistemics.html",
-            "index.html",
-            "news.html",
-            "papers.html",
-            "readme.html",
-            "results.html",
-            "synopsis.html",
-            "tutorial-advanced.html",
-            "tutorial.html",
-            "visualize.html",
-        ),
-        reason=(
-            "Reviewed the source-register change against render_overview: only reviewed "
-            "dates and intake-read notes change, from the 16 October base to the completed "
-            "18 October hand reads. None supplies a rendered site value. The paired "
-            "1472-file render comparison in PR 667 established the same metadata-only "
-            "boundary; the current change adds no result, bound, credit or drawing."
-        ),
-    ),
-    ReleaseNoPublicChange(
         components=("paper:square-packing-methods-survey",),
         paths=(
             "packing/campaign/result-requests.yaml",

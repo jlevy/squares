@@ -9814,7 +9814,7 @@ issues:
       changes only LICENSE and root README from the original c95c4938 pin; all three witness directories
       are unchanged. The printed-side ledger records this report before the tighter 672 and 674 reports;
       no packing is verified. A bounded source-level mathematical read in think-qdcc found no blocking geometry
-      finding; exact witness/records binding and controls remain pending. Stage 3 joins every chronological
+      finding; at that earlier read, exact witness/records binding and controls were pending. Stage 3 joins every chronological
       claim to the register on the #661-dependent intake branch, at V0/C0. IDs remain provisional until
       actual main merge order; no reply is posted. Separate mathematical review and source-replay owners
       retain Stage 4 integration and any adoption. The separately returned full exact review and completed
