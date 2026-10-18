@@ -571,6 +571,14 @@ FIRST_PUBLISHED = PUBLICATION_HISTORY[-1].first_published
 #:                                            day is the one recorded
 EXPLAINER_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.4.8",
+        first_published="October 18, 2026",
+        result_scope=(
+            "Update the registered result count and current bound citations after the "
+            "fine-net imports and reviewed n108 adoption."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.4.7",
         first_published="October 15, 2026",
         result_scope=(
@@ -895,6 +903,16 @@ class ReleaseImpactDecision(NamedTuple):
 # New component cuts append decisions here, newest first, alongside their own histories.
 # No impact is invented retrospectively for the published baseline editions.
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
+    ReleaseImpactDecision(
+        component="paper:n11-lower-bounds-explainer",
+        previous_version="v0.4.7",
+        version="v0.4.8",
+        impact="patch",
+        reason=(
+            "Update the registered result count and current bound citations after the "
+            "fine-net imports and reviewed n108 adoption."
+        ),
+    ),
     ReleaseImpactDecision(
         component="site",
         previous_version="v0.7.24",
