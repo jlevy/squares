@@ -5,7 +5,7 @@ title: "Address PR #665 review A: reconcile 37-count adoption"
 kind: task
 status: in_progress
 priority: 1
-version: 15
+version: 16
 delegate: claude-code@spud10.local
 labels: []
 dependencies: []
@@ -18,10 +18,11 @@ child_order_hints:
   - is-01m57ja9d68k25fjn6t8047jp5
   - is-01m57pjpenj2sq63cvqhtv2v8w
   - is-01m57syyvkw6dmkteecqk9nn5n
+  - is-01m58cc1tw3wrwz0f8n8y96wvx
 hold: null
 hold_until: null
 created_at: 2026-10-18T13:13:05.070Z
-updated_at: 2026-10-18T16:45:28.639Z
+updated_at: 2026-10-18T20:48:37.722Z
 started_at: 2026-10-18T13:13:25.509Z
 ---
 Review A at https://github.com/jlevy/squares/pull/665#pullrequestreview-5562201404, pinned head bb85cbb590cbd009ebe5399dd379ee4a2faeeda5. Repair custody, derived records, adoption-dependent fixtures and result-page payload. Original owner remains claimed by user-eb-adopt-174; this linked lane owns the 18-Oct repair. Do not push until root coordinator validation and diff review.
