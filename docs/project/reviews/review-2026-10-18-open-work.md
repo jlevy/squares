@@ -255,6 +255,19 @@ They quote no provisional result number or verification rung.
 Each requires a fresh check against main, later issue comments and the deployed site
 before posting; no issue comment was posted.
 
+## Census Draft Follow-up — 18 October 2026
+
+The opening
+[#671 snapshot at `32d47d321`](https://github.com/jlevy/squares/blob/32d47d3214ec28f2a82b89689cd8bb8f63f98e02/packing/frontier/results.yaml)
+records all 18 census entries at V0/C0. The later
+[draft at `89166716`](https://github.com/jlevy/squares/blob/89166716d492ae7e4e76f61550e80849dec7edc3/packing/frontier/results.yaml)
+records n108, provisionally T-211, at V3/C3 using its retained 201-direction census and
+two accepted mathematical reviews; the other 17 entries remain V0/C0. These are
+draft-branch records: #671 remains unmerged, with no promotion to main.
+This follow-up claims no fresh native replay or independent full implementation.
+The opening audit statements describe their pinned snapshot; the current draft’s IDs
+remain provisional under the merge-order rule above.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->
