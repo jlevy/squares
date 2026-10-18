@@ -508,11 +508,35 @@ def test_github_handles_reach_the_lines_and_their_sources_reach_stderr(
 
 
 def test_margins_are_opt_in_and_say_how_far_past_the_previous_best(
-    capsys: pytest.CaptureFixture[str],
+    capsys: pytest.CaptureFixture[str], records: Records, monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    lines, _ = run(capsys, ["--ids", "T-157", "--date", "2026-10-12"])
+    # Freeze T-157's earlier rivals and the case binding that makes it current best.
+    bound = {
+        "value": "6.718",
+        "exact_form": "3359/500",
+        "evidence": ["E-n040-guzhou-new-supports-kernel-replay"],
+    }
+    fixture = replace(
+        records,
+        register=replace(
+            records.register,
+            results=[r for r in records.register.results if int(str(r["id"])[2:]) <= 157],
+        ),
+        cases={
+            40: {
+                "status": "open",
+                "verified_lower_bound": bound,
+                "reported_lower_bound": bound,
+            },
+        },
+    )
+    monkeypatch.setattr(ra, "load_records", lambda: fixture)
+    argv = ["--ids", "T-157", "--date", "2026-10-12"]
+    lines, _ = run(capsys, argv)
+    assert len(lines) == 2
     assert "previous best" not in lines[1]
-    lines, _ = run(capsys, ["--ids", "T-157", "--date", "2026-10-12", "--margins"])
+    lines, _ = run(capsys, [*argv, "--margins"])
+    assert len(lines) == 2
     assert "above the previous best)" in lines[1]
 
 

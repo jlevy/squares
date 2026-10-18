@@ -28706,8 +28706,11 @@ results:
       T-084), by 0.2079; the bundle's own README compares it with the latter.
 
       Here the maintained readers accepted its exact mass, declared-net and check2
-      premises from the retained release asset. No complete replay has run here, so
-      the value stands as reported.
+      premises from the retained release asset. The retained sqverify-fast census
+      records VERIFIED at all 201 directions, with return code 0; its whole-net
+      control receipt records CONTROLS_REFUSED. Certificate-specific mathematical
+      review and adoption into the case record remain pending, so the entry remains
+      reported.
 
       wand125 after Tokoharu and Levy,
       [square-packing](https://github.com/wand125/square-packing/tree/6af3c00991c937d40ac0fe867fe049b8e9f3bf2d/problems/square-lower-bounds/certificates/mixed_n108_L1062).
@@ -28719,8 +28722,8 @@ results:
     significance:
       score: 3
       rationale: >-
-        Scored as a claim: if a complete replay passes, it is the strongest lower
-        bound on record at n = 108, 0.1359 above the reported lane, by the
+        Scored as a claim: the reported bound is the strongest lower bound on record
+        at n = 108, 0.1359 above the reported lane, by the
         certificate kind and standard net of T-082, T-090 and T-091, with no new
         technique, at S3 as T-176 to T-178 are.
       scored: '2026-10-17'
@@ -28733,9 +28736,9 @@ results:
       published: '2026-10-16'
     composition: >-
       One reported certificate on its reported entry. The source's check is a copy of
-      this repository's sqverify_fast crate with one change, so a sqverify-fast replay
-      here would be re-implemented sharing the producer's components, as T-104's is,
-      and no second implementation stands beside it.
+      this repository's sqverify_fast crate with one change. The retained census
+      shares the producer's components, as T-104's replay does; no second
+      implementation stands beside it.
     evidence: [E-wand125-fine-net-n108-1062-report]
     artifacts:
       - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/README.md
@@ -28748,35 +28751,24 @@ results:
       - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/receipts/premises-n108.json
       - packing/devtools/fine_net_followup.py
     next_rung: >-
-      C3 needs a complete sqverify-fast census at all 201 directions of the retained
-      candidate, with its whole-net control receipt (the 99/100 mutant at every
-      direction, FC-1) and a review that reads this certificate, by the checklist of
-      the 6 October declared-net soundness review. The census runs in think-f40c,
-      priced at about 0.59 to 0.67 CPU-hours from the source's receipt.
+      C3 needs a certificate-specific mathematical review by the checklist of the
+      6 October declared-net soundness review, followed by adoption into the case
+      record. The retained complete census and whole-net controls have finished;
+      review and adoption remain in think-f40c.
     unfinished_confirmations:
       - what: >-
-          a complete sqverify-fast census at all 201 directions of the retained
-          candidate, with its whole-net control receipt (the 99/100 mutant at
-          every direction, FC-1) and a review that reads this certificate, by the
-          checklist of the 6 October declared-net soundness review
+          certificate-specific mathematical review using the completed 201-direction
+          sqverify-fast census and whole-net control receipt, followed by adoption
+          into the case record
         rung: C3
         link: think-f40c
-        estimated_cost:
-          cpu_hours: 0.59
-          cpu_hours_high: 0.67
-          basis: >-
-            Twice the source's direction CPU over the net (1,210 CPU-s,
-            check2/receipt.json in
-            packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n108_L1062),
-            once for the capture and once for the whole-net controls, at this
-            host's ratio of 0.871 to the source (think-w76a's eight-direction
-            sample of 14 October); the upper end is the source's own CPU, twice
-            over the net.
-          priced: '2026-10-17'
     notes: >-
-      V0 because the cited entry is the source's public claim: assurance reported,
-      replay not attempted. C0 because no review has read this certificate yet. The
-      case records' lanes are unchanged, so the entry is pending adoption at n = 108.
+      V0 because the cited entry is the source's public claim and remains pending
+      adoption. C0 because no certificate-specific mathematical review is recorded.
+      The case records' lanes are unchanged. The maintained replay is recorded in
+      `packing/benchmarks/measure-verifier/census-mixed/census.json`, row
+      `mixed_n108_L1062`, and its whole-net control in
+      `packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-2026-10-16/mixed_n108_L1062.control.json`.
       The pre-publication receipt is a second complete run of the same source on a
       fresh machine (141 s), not the run the check2 receipt embeds, so two complete
       author runs are reported. The release asset's data members are retained in Git
