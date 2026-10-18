@@ -264,6 +264,33 @@ owners and pricing obligations recorded above.
 The next entry is stage 3 for retained packets after updating from main, alongside their
 dedicated mathematical reviews and bounded replays.
 
+## Bulk Source Inventory Follow-up — 18 October 2026
+
+The later bounded source inspection maps three Couzo releases at stage 1:
+
+| Request and source pin | Inventory finding | Candidate custody scope |
+| --- | --- | --- |
+| #670, `23aff0c6f992271e1ad13a148d44f392c4b386c0` | 73 issue-table local improvements; four issue-linked root certificates differ from same-count `best/` files | About 9.7 MB before compression; `think-f28n` owns the import |
+| #672, `af8cb7959aead318c0cf5e9f873de3caa763f77a` | 46 issue-table local improvements; nine root certificates differ from same-count `best/` files; preserve the de Winter lineage at 227 and 229 | About 8.0 MB before compression; `think-2vjc` owns the import |
+| #675, `c6da0fc7524d667bf3d224559724ba9b60762e60` | 79 issue-table local improvements, plus the broader index’s credited adoption of Daniel’s 229 and two deletion-derived witnesses | About 10.4 MB before compression; `think-pvav` owns the import |
+
+These are candidate scopes for custody planning, not retained-byte totals or measured
+replay prices. Source receipts stay attached to their actual inputs; the same count in
+the root and `best/` directories does not establish byte or claim identity.
+The imports need a bounded data-carrier decision under OR-18 before acquisition, plus
+the exact report-order and classical-construction comparisons and complete replay
+prices.
+No source packet, checker execution, geometric verdict or stage 3 entry was added
+by this inspection.
+
+Runbook reply drafting is also complete for the eight new requests: #666, #668, #669,
+#670, #672, #673, #674 and #675. Their existing answer beads hold concise drafts with
+the claim dates and pending stage 2/3 work, without provisional result numbers or
+verification rungs. The drafts are synced and remain unposted.
+After the relevant records merge, each draft must be refreshed from main against later
+comments and the deployed site; an intervening registration or replay changes what it
+may say.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

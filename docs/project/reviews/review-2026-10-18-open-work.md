@@ -233,6 +233,28 @@ No ordering between #671 and #676 is assumed, and no ID is reserved or stated to
 author. Full push qualification, remote push and the PR update remain held for the
 coordinator’s integration window and review of this interim addendum.
 
+## Bulk Source Inventory Follow-up — 18 October 2026
+
+A bounded read-only inventory of Couzo’s source pins `23aff0c6`, `af8cb795` and
+`c6da0fc7` maps #670, #672 and #675’s 73, 46 and 79 issue-table improvements.
+The issue-linked root certificates differ from same-count `best/` files at four counts
+in #670 and nine in #672; a receipt for one set cannot establish the other.
+#675’s broader index also credits Daniel’s 229 packing and contains two deletion-derived
+witnesses; those relationships remain distinct from new discoveries.
+
+The candidate custody scopes are approximately 9.7, 8.0 and 10.4 MB, respectively,
+before compression. The import owners still need a bounded data-carrier decision under
+OR-18. This remains stage 1 inventory: no bulk packet, checker run, geometric verdict or
+stage 3 registration was added.
+`think-f28n`, `think-2vjc` and `think-pvav` retain the imports and their exact
+comparison, custody and replay-pricing obligations.
+
+Concise post-merge reply drafts now exist in the eight answer beads for #666, #668–#670
+and #672–#675 and are synced.
+They quote no provisional result number or verification rung.
+Each requires a fresh check against main, later issue comments and the deployed site
+before posting; no issue comment was posted.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->
