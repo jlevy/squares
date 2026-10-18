@@ -506,6 +506,11 @@ def retain(
     """
     directory = unpack_asset(asset, sha256, size, name, work)
     record_path = packet / RETAINED_RECORD
+    require(
+        not (record_path.exists() or record_path.is_symlink())
+        or (record_path.is_file() and not record_path.is_symlink()),
+        f"{RETAINED_RECORD} is not a regular file; move it aside before retaining",
+    )
     record: dict[str, Any] = (
         load_json(record_path.read_bytes())
         if record_path.is_file()
@@ -572,6 +577,11 @@ def retain(
             shutil.copyfile(source, temporary)
             if form == "gzip":
                 temporary = compress(temporary)
+                plain = target.with_name(target.name.removesuffix(GZIP_SUFFIX))
+                require(
+                    not (plain.exists() or plain.is_symlink()),
+                    f"{plain.relative_to(packet)} appeared while retaining; move it aside",
+                )
             try:
                 os.link(temporary, target)
             except FileExistsError as error:

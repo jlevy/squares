@@ -689,12 +689,16 @@ def test_interrupted_compression_leaves_no_candidate_or_staging_file(
     assert "members retained" not in capsys.readouterr().out
 
 
+@pytest.mark.parametrize("suffix", [".json", ".json.gz"])
 def test_a_candidate_appearing_during_compression_is_never_replaced(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+    suffix: str,
 ) -> None:
     asset, data = retained_asset(tmp_path)
     packet = tmp_path / "packet"
-    target = packet / "release/certificates" / NAME / "candidate.json.gz"
+    target = packet / "release/certificates" / NAME / f"candidate{suffix}"
     compress = followup.compress
 
     def competing_write(path: Path) -> Path:
@@ -708,4 +712,29 @@ def test_a_candidate_appearing_during_compression_is_never_replaced(
     assert not (packet / followup.RETAINED_RECORD).exists()
     output = capsys.readouterr()
     assert "appeared while retaining" in output.err
+    assert "members retained" not in output.out
+
+
+@pytest.mark.parametrize("kind", ["directory", "symlink", "broken-symlink"])
+def test_retain_refuses_a_nonregular_manifest_before_publishing_members(
+    tmp_path: Path, capsys: pytest.CaptureFixture[str], kind: str
+) -> None:
+    asset, data = retained_asset(tmp_path)
+    packet = tmp_path / "packet"
+    record = packet / followup.RETAINED_RECORD
+    record.parent.mkdir(parents=True)
+    other = tmp_path / "other.json"
+    if kind == "directory":
+        record.mkdir()
+    else:
+        if kind == "symlink":
+            other.write_bytes(b"another record")
+        record.symlink_to(other)
+    assert followup.main(retain_argv(tmp_path, asset, data, packet)) == 1
+    assert not (packet / "release").exists()
+    assert record.is_dir() if kind == "directory" else record.is_symlink()
+    if kind == "symlink":
+        assert other.read_bytes() == b"another record"
+    output = capsys.readouterr()
+    assert "not a regular file; move it aside" in output.err
     assert "members retained" not in output.out
