@@ -5,14 +5,16 @@ title: Recover local WSL type checking and complete the unchanged edit gate
 kind: bug
 status: in_progress
 priority: 2
-version: 2
+version: 3
 delegate: codex-typecheck-recovery-01a14e4c
 labels: []
 dependencies: []
+child_order_hints:
+  - is-01m57n6zg05qvtyfjsb5r4pq00
 hold: null
 hold_until: null
 created_at: 2026-10-18T13:41:44.019Z
-updated_at: 2026-10-18T13:41:57.631Z
+updated_at: 2026-10-18T14:03:54.234Z
 started_at: 2026-10-18T13:41:57.630Z
 ---
 Local WSL startup continuation: diagnose and repair type-check timeouts, then complete the full edit tier under the existing 4 GiB hard memory, 3686 MiB memory-high, no swap, two visible CPUs and one owned workload. Source baseline 804eff369193b698d497a9c06847059eb9de0470. No formal autonomous work window is started.
