@@ -5,7 +5,7 @@ title: "PR #676: retain dated open-work validation follow-up"
 kind: task
 status: in_progress
 priority: 2
-version: 23
+version: 24
 delegate: codex@spud10.local
 labels: []
 dependencies: []
@@ -18,7 +18,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-18T10:26:55.147Z
-updated_at: 2026-10-18T22:46:39.046Z
+updated_at: 2026-10-18T22:52:10.257Z
 started_at: 2026-10-18T10:27:05.278Z
 ---
 
@@ -81,3 +81,5 @@ Records atc4b5b6609 exposed one publication-scope gap: the added OTHER_PROJECTS 
 Fresh clean exactdae7467e1 records PASS52/52,103.9766s validatorwall/104.79s real against300s outercap; full JSON and per-step artifacts retained. Fresh CPU10/6 collections select identical19,038IDs includingduplicates. Required local push now runs serially at the samehead with1800s outercap, CPU6/n5+pool1/jobs2/inner1 and explicit#676sourcepaths, existing internal executable environment, all scratch/caches external. Installed-fallback/synthetic-worker caveat is explicit and parent accepted; hosted exact-headCI remains definitive. At240s,5/69steps and4,146testevents had completed without failures. No finalpushpass claimed yet. Evidence prefixes records-dae7467e1-internal-venv-01 and push-dae7467e1-internal-venv-01.
 
 Offline externalStage3body candidate is based on root's newer significance/Announcement draft, preserves generated announcement and its registered-onlyCouzocaveat, correctvalidatorpaths and all V0/C0/house limits; added actualqualification history, scopedpaper review and environment caveat. RustFlowmark/OR9check pass; terminalpush/hostedoutcomes remain explicitpendingfields. Root will consolidate onecanonicalbody after gate. Branch remains clean and no GitHubmutation or source edit occurs during qualification.
+
+2026-10-18T22:53Z exact dae7467e1 qualification checkpoint: records52/52 green,103.9766s unchanged. Full --push01 stopped known-red via SIGINT to owned validator8913; exit130/real473.45s, no owned survivors. Final worker census7594finished=7591pass/1skip/2fail, not full19038 union. One staging-signal synthetic child TimeoutExpired5.0s at [other-thread-15-1]; retained partial receipt already records signal15/reapedtrue, but no observation JSON. Single quiet exact-node reproduction unchanged deadline PASS1/1 in0.70s(real0.93,user0.68/sys0.12), no proof of host causation. Second deterministic failure arrived just before stop: house-adoption historical reconstruction n155 packing.evidence lacks new E-evand-669-n155-report (resource likely next); source design under independent read-only review, no edits. Earlier3card/redraft failures pass in full run. Durable terminal-diagnosis/quiet-staging JSON receipts and small copied failed-child artifacts at external agent-source evidence. Two terminal step -15 failures are cancellation artifacts; run is not a pass. No remote mutation, clean head preserved; do not rerun full gate before deterministic source mismatch resolved.
