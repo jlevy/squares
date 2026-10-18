@@ -161,6 +161,32 @@ They do not grant merge approval.
 Remaining integration, scientific and publication gates stay with their named owners
 rather than being closed by this inventory.
 
+## Follow-up — 18 October 2026, 10:27 UTC
+
+The original snapshot above retains its reviewed heads and findings.
+Fresh GitHub reads establish these later changes:
+
+- **#661**, still at `a87de0cf7`, has terminal green hosted validation, including
+  [deferred checkpoint 39114501690](https://github.com/jlevy/squares/actions/runs/39114501690).
+  Its deferred slow lane completed successfully at 09:44 UTC. Merge and deployed-side
+  agreement remain separate gates.
+- **#435** is now at `7c1fe653c`. The
+  [F disposition](https://github.com/jlevy/squares/pull/435#issuecomment-6248506970)
+  reports the stable n83 link repair and 32 passing catalogue/browser/case controls,
+  including the generated-link regression that failed before the repair.
+  Only mergeability has a hosted check at this new head; Packing and Pages evidence is
+  missing. F2’s timing and final stack qualification remain with `think-6vrv`,
+  `think-ht59` and `think-w0if`.
+- **#676**, at `5fb743b3e`, has 31 successful hosted checks and 28 expected skips:
+  [Packing](https://github.com/jlevy/squares/actions/runs/39114961111) and
+  [Pages](https://github.com/jlevy/squares/actions/runs/39114961094). The earlier local
+  push attempt remains a failed qualification: its JSON-layout defect was repaired at
+  this head, but the reachable suite timed out at 900 seconds after an unidentified
+  failure marker. `think-2jee` records a later isolated precision-test failure caused by
+  importing workbench tools from the wrong checkout; the corrected import path passes
+  that node. This does not identify the old failure marker or establish a local push
+  pass. No current source defect was established by this bounded follow-up.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->
