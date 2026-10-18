@@ -5,7 +5,7 @@ title: "PR #665 A2: refresh geometry-dependent derived records"
 kind: bug
 status: in_progress
 priority: 1
-version: 3
+version: 4
 delegate: claude-code@spud10.local
 labels: []
 dependencies: []
@@ -13,11 +13,11 @@ parent_id: is-01m57j9xsga57szgfah5ex2bcd
 hold: null
 hold_until: null
 created_at: 2026-10-18T13:13:15.631Z
-updated_at: 2026-10-18T13:38:35.802Z
+updated_at: 2026-10-18T14:48:15.245Z
 started_at: 2026-10-18T13:13:25.536Z
 ---
 High; review A https://github.com/jlevy/squares/pull/665#pullrequestreview-5562201404. packing/frontier/n-068.md:64 and 27 other rigidity blocks, plus chunk-components census, are stale after adoption. Refresh owning tools and downstream views; verify check modes.
 
 ## Notes
 
-Implemented in 391fdc594046d6090379de55ff552243f42ca6d5: owning writers refresh 28 rigidity blocks, component/partition census and dependent profile/taxonomy/overlays. Cheap check modes pass. Fresh census --check remains queued behind the coordinator-controlled local gate slot; no push.
+Fixed by owning writers in391fdc594, plus bf93722b1 downstream composite refresh. Rigidity, components/partitions, profiles/taxonomy/overlays are current. Fresh census --check passes100 records. Composite diff is exactly28 rigidity assessment scope strings, with no total changes, and owner --check passes. Four concrete gate regressions pass on clean2890be7fa. Broader rerun/CI/disposition still pending.

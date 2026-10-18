@@ -5,7 +5,7 @@ title: "Address PR #665 review A: reconcile 37-count adoption"
 kind: task
 status: in_progress
 priority: 1
-version: 9
+version: 10
 delegate: claude-code@spud10.local
 labels: []
 dependencies: []
@@ -20,11 +20,11 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-18T13:13:05.070Z
-updated_at: 2026-10-18T14:27:46.772Z
+updated_at: 2026-10-18T14:48:13.950Z
 started_at: 2026-10-18T13:13:25.509Z
 ---
 Review A at https://github.com/jlevy/squares/pull/665#pullrequestreview-5562201404, pinned head bb85cbb590cbd009ebe5399dd379ee4a2faeeda5. Repair custody, derived records, adoption-dependent fixtures and result-page payload. Original owner remains claimed by user-eb-adopt-174; this linked lane owns the 18-Oct repair. Do not push until root coordinator validation and diff review.
 
 ## Notes
 
-Repair committed locally as 391fdc594046d6090379de55ff552243f42ca6d5; 57 files, 2037 insertions/1624 deletions; clean status. Final focused batches 131 passed in 76.76s and 21 passed in 18.40s, no skips. Changed-file Ruff, Flowmark and normal commit hooks pass (1.79s). A1 custody rerun names n236 T-146; A2 actual derived writers refreshed; A3 historical/current fixtures and exact decimals repaired; A4 T-174 page 335153 to 249465 bytes without raising budget; A5 validated body drafted. Durable evidence and staged inventory: /Volumes/spud-ext1/agent-source/squares-665-review-20261018/. T-195 untouched. Parent coordinator reviewed core diff and requested hold on broad gates/remote mutations until #676 releases its local slot. Fresh census --check, broad validation, dedicated correctness review, push/CI and marked dispositions remain pending. Original owner think-3mry remains separately claimed. No issue comments or PR replies published.
+Current clean repair head 2890be7fa3de7f736d59c84c298f8d4346763479. Commits: 391fdc594 substantive adoption repair; b88568f9a nested-probe lifetime/pool repair (closed child think-lrrt); bf93722b1 composite scope refresh, census fixture, declared ceiling consumer and four-paper review; aabaa006d separate data pin; 2890be7fa provisional site v0.7.26 patch and five regenerated claim links. Coordinator reviewed all diffs with no blocker. Fresh census check passes 100 records; initial focused batches 131+21 pass; harness 69 pass; site-cut checks 111 pass/15 deselected; release contracts 41 pass; four concrete record/pin tests pass on current head (4 in5.86s). All eight generated paper HTML/Markdown files and linked assets equal original PR-head output, before and after site cut; no PDFs rebuilt. Five claim docs change only32 source links. Final release-impact check has no errors, pin current, Ruff/normal hooks/diff checks pass. First completed push gate at391fdc594 failed67/69 steps passed in1013.08s:18931 tests passed,9 failed,55 skipped,1xfailed; pool not reached. The four record/fixture failures have focused corrections; five nested probe timeouts have lifetime/pool repair, exact stall cause unproved. Durable evidence /Volumes/spud-ext1/agent-source/squares-665-review-20261018/. Revised cost-first PR body passes checker, remains offline. Broad rerun queued behind #676 isolated gate; no push or PR reply yet. T-195 untouched and site version/date provisional for actual merge order. Original think-3mry remains separately claimed; A1-A5 left open until CI/dispositions and correctness review.
