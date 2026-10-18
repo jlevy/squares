@@ -1361,6 +1361,36 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "paper:n11-threshold-bound-review",
             "paper:square-packing-methods-survey",
         ),
+        paths=("packing/devtools/overview_sections.py",),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "Reviewed against PR #661 a87de0cf7: the only semantic change in this module "
+            "adds the JoostdeWinter/square-packing entry to OTHER_PROJECTS. Its consumers "
+            "are the site's project cards, filter choices and result-row project "
+            "attribution, and intake discovery. None of the four paper renderers or "
+            "their shared paper-front, navigation and colophon paths consumes these "
+            "values; all other module definitions are unchanged. This addition changes "
+            "no paper source, figure, fact substitution or citation link. This is a "
+            "source-path review, not an HTML/PDF byte comparison: the four paper editions "
+            "stay unchanged, and site v0.7.27 owns the card."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
         paths=(
             "packing/frontier/results.yaml",
             "packing/campaign/result-requests.yaml",
