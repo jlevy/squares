@@ -5,7 +5,7 @@ title: "PR #676: retain dated open-work validation follow-up"
 kind: task
 status: in_progress
 priority: 2
-version: 14
+version: 15
 delegate: codex@spud10.local
 labels: []
 dependencies: []
@@ -16,7 +16,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-18T10:26:55.147Z
-updated_at: 2026-10-18T15:05:06.827Z
+updated_at: 2026-10-18T15:58:47.176Z
 started_at: 2026-10-18T10:27:05.278Z
 ---
 
@@ -47,3 +47,5 @@ Frozen all-extras/dev isolated environment installed 55 packages in43.14s at /Vo
 Scoped two-report disclosure committed with normal isolated hooks at600539c43bad6686daf33e221ab801963720d2aa (+38 lines, worktree clean); docs2065 pass, hooks7.40s. Offline PR body discloses invalid run, isolation and separate safeguard, OR9 passes. Fresh exact-head isolated records now running sequentially before full push; canonical300s/1800s ceilings unchanged. No remote push, issue reply, replay or merge. Keep qualification/publication bead open.
 
 Census fixture repair is local commit37bec42bd3c48bbf389a57820efd7638a8200058, reviewed by root: only success helper max_seconds2→30 plus reason comment; independent sleeping timeout stays2.0s. Full module13passed3.88s, Ruff/format/BasedPyright/docs clean, normal isolated hooks2.31s. The isolated predecessor600539c43 records passed52/52 in111.27s; its push failed only the two-second success fixture (66/67,741.09s) with retained TIMEOUT/two-row journal, and pool phase was not reached. Source wrapper correctly refused complete admission. At clean 37bec42bd, the first isolated records rerun overlapped #665’s broad gate and stopped at 18/52 selected steps. The active release-impact and work-accounting children accumulated over two minutes elapsed with only about 2.0s and0.26s CPU; one-second stack samples show kernel read waits during imports/file reads (792/792 and755/756 samples). Per-command limits are900s; the records tier’s300s wall ceiling is judged after completion rather than an outer hard kill. Parent directed a clean stop to release external-disk contention. Terminal exit130, real313.93s; all controller/child processes ended. This is contention-interrupted evidence, not a source failure or pass. Original log/provenance and both process samples are retained as records-37bec42bd*. No branch mutation followed. Records and full push must rerun sequentially alone after #665 releases the slot; use fresh records-alone-tmp/artifacts and records-37bec42bd-alone log prefix to preserve the interrupted receipt. No remote update before terminal green.
+
+2026-10-18 resource-shape retry checkpoint: clean local37bec42bd records-alone passed52/52 in86.89s/300. Its following n9 normal push was stopped known-red at811.67s (exit130),66 prerequisites passed, six failed nodes retained in push-37bec42bd-alone-live-failures.json. All six pass unchanged in quiet focused runs (2tests2.33s and4tests9.94s); this does not prove original causation. Own full serial CPU10-vs6 collection selects19,006/19,308 nodes with302deselected, exact sorted identities including duplicates equal (18.17s/18.10s). Receipt resource-shape-37bec42bd-cpu10-vs6.json; lower CPU6 with jobs2 means normal n5 and pool1, no deselection or deadline increase. Initial direct collection bootstrap errors without effective Cairo path are separately retained and excluded from comparison. Root authorized canonical1800s resource-shape retry before further source edits. Reports-only commit3729020465ccfb82d7921570861fe868643551ff fixes current661/665/671 status, human-decided666digest-only custody and limited673author-credit disposition; normal isolated hooks pass1.55s. Fresh records372902046-n5 is now active alone; push follows only a terminal records pass. Isolated environment/import origins and CPU shape are captured in per-run provenance. No remote push, issue reply or merge. Offline PR Census row repaired; structural check15Resultsrows all5cells. W1 continues beyond Stage2 checkpoint toward feasible Stage3; #673 narrow successor must preserve665PingYou refinement and Xu/Fang starts, with no numeric/path-proof blocker.
