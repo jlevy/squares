@@ -12,6 +12,79 @@ below identify the reviewed snapshots, not scientific input identities.
 No PR was merged, no contribution was declared mathematically accepted by this audit,
 and no long certificate replay was started.
 
+## Current Stage 3 Checkpoint, 18 October 2026
+
+This supplement is recorded at `2026-10-18T17:25:44+00:00` after the historical opening
+inventory. There are now **17 open PRs**, including replacement draft #676. Its remote
+remains `5fb743b3e`; the local intake branch is based on #661 `a87de0cf7`, whose hosted
+checks are green. #665’s local repair head `1d20b28d` is awaiting its full gate; the
+older remote `bb85cbb59` remains the source of its recorded hosted failures.
+
+The four retained packets now have a local Stage 3 candidate: six claim/count rows,
+grouped into four reported results.
+IDs below are provisional branch positions after #661’s T-195; every later PR updates
+from main and takes IDs in actual merge order.
+No ordering of #671 and this branch is assumed.
+
+| Report | Local register group | Reported claim/count rows | Case disposition |
+| --- | --- | --- | --- |
+| #668, 17 October | T-196 | 227, 229, 260 | All three pending adoption |
+| #669, 17 October | T-197 | 155, one bound with original and same-side display certificates | Pending adoption |
+| #674 opening, 17 October | T-198 | 229 | Earlier registered improvement; house unchanged |
+| #674 update, 18 October | T-199 | 229 | Latest registered n229 report; pending adoption |
+
+All four entries remain V0/C0. Both case upper lanes, house witnesses and drawings
+remain unchanged until adoption.
+The atlas producer binds its retained geometry to the case side; updating only the
+reported lane refused n155 because its old house has a larger side.
+The bounded refresh wrote no outputs.
+Stage 3 therefore uses the runbook’s pending-adoption route (T-128 precedent), retaining
+exact claims in the register and source coverage while separate Stage 4 descendants own
+adoption and regularization.
+At n229 the chain is de Winter, Couzo #672, Daniel opening and Daniel update; Couzo
+remains a separate Stage 1 import under `think-2vjc`, with no certificate or rung
+adopted here. No `regularizations.of` is assigned because Couzo’s antecedent is not
+registered. The contract permits `identity.basis: source-claim` until a measurement here
+decides it. At n155 the explicit issue/prior attribution credits Daniel’s new local
+minimum from Ostashev’s packing; the conflicting regularized JSON credit is retained but
+is not used as finder evidence.
+
+Separate Stage 4 lanes have returned results, pending their own descendant PRs:
+
+- #668’s exact mathematics review accepted all 716 squares and 85,427 pairs, refused 15
+  mutants and sharp contact controls, and found no blocking defect.
+  Its source replay accepted all three certificates and refused 18 geometric mutants in
+  64.464 seconds.
+- Astra’s independent #669/#674 mathematics review accepted four certificates and all
+  76,082 pairs; 40 control outcomes agree in ordinary and optimized Python.
+  It found no blocking mathematical defect and records a Low source-checker limitation:
+  completeness guards based on `assert` disappear under optimized Python.
+  The review’s checker uses explicit failures.
+  Numerical local-minimum, search, dilation and path-identity claims are outside that
+  accepted scope.
+- A separate normal source-checker replay of those four certificates returned eight
+  accepted decisions and 16 geometric mutant refusals in 41.386 seconds.
+  The sealed receipt is owned by `think-8kx2` and `think-0lu6` (SHA-256
+  `cab73c96110bd0866a295bd8fbb406d682ded95f8845522f65fca529c19f3c39`).
+
+These are AI reviews and machine decisions, with their shared interpreter/Fraction and
+source-reading boundaries recorded in the separate reviews; they are not human
+oversight. This Stage 3 registration incorporates none of those confirmation receipts.
+#671’s current draft records n108 at V3/C3 from its retained census and accepted
+mathematical reviews B/C; its other 17 entries remain V0/C0. No fresh native replay of
+#671 occurred in this session.
+The all-V0/C0 statements below describe the pinned opening snapshot only.
+
+The clean pre-registry head `5458a50d5` passed 52/52 records steps in 138.07 seconds,
+with the concurrent read-only disk scanner disclosed.
+Local Stage 3 publication checks, independent review, exact final-head records/push,
+hosted CI and the final online intake sweep remain required.
+The remaining #666/#670/#672/#675 source work keeps its named owners; #666 uses the
+settled digest-only unlicensed-verifier boundary, and the bulk sources still need
+Git-packed size measurements and bounded custody carriers.
+The eight answer-bead drafts remain unpublished.
+#673’s two-count credit successor waits for #665 integration.
+
 ## Immediate Findings
 
 - **#661:** the adoption writer reports the exact T-155-to-T-195 improvement beside

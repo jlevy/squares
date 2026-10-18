@@ -9775,94 +9775,87 @@ issues:
     opened: '2026-10-17'
     state: open
     kind: result-report
-    triage: pending
+    triage: done
     summary: Joost de Winter reports exact rational witnesses at 227, 229 and 260 from square-packing c95c4938;
       three source stdlib Fraction checkers are priced at 0.6 to 1.2 seconds per count. Later Couzo and
       Daniel reports overlap 227 and 229.
     read_through: '2026-10-17T14:06:25Z'
     results:
-    - key: n227
-      claim: s(227) <= 15.563796703670, rounded upward; exact certificate side is authoritative.
-      source: body
-      not_registered: Stage 2 checker-input custody is complete. Stage 3 final IDs and publication
-        await an update from main and ID allocation in actual merge order; no claim is registered yet.
-        Complete review, replay with controls and any adoption remain on the import bead.
-      queued: true
-      bead: think-qdcc
-    - key: n229
-      claim: s(229) <= 15.650174756949, rounded upward; exact certificate side is authoritative.
-      source: body
-      not_registered: Stage 2 checker-input custody is complete. Stage 3 final IDs and publication
-        await an update from main and ID allocation in actual merge order; no claim is registered yet.
-        Complete review, replay with controls and any adoption remain on the import bead.
-      queued: true
-      bead: think-qdcc
-    - key: n260
-      claim: s(260) <= 16.645778804182, rounded upward; exact certificate side is authoritative.
-      source: body
-      not_registered: Stage 2 checker-input custody is complete. Stage 3 final IDs and publication
-        await an update from main and ID allocation in actual merge order; no claim is registered yet.
-        Complete review, replay with controls and any adoption remain on the import bead.
-      queued: true
-      bead: think-qdcc
+      - key: n227
+        claim: s(227) <= 15.563796703670, rounded upward; exact certificate side is authoritative.
+        source: body
+        bead: think-qdcc
+        register:
+          - T-196
+      - key: n229
+        claim: s(229) <= 15.650174756949, rounded upward; exact certificate side is authoritative.
+        source: body
+        bead: think-qdcc
+        register:
+          - T-196
+      - key: n260
+        claim: s(260) <= 16.645778804182, rounded upward; exact certificate side is authoritative.
+        source: body
+        bead: think-qdcc
+        register:
+          - T-196
     beads:
-    - think-qdcc
+      - think-qdcc
     answer_bead: think-qdcc
     replies: []
     close_when: Every claim or correction has a reviewed disposition on main, pending validation has a priced
       owner, any changed house is regularized in its adoption, and the author has received a reply verified
       against main and the deployed site.
-    notes: >-
-      Stage 2 packet: packing/resources/web/de-winter-upper-bounds-227-229-260-2026-10-17/README.md,
-      retained at MIT-licensed 9bf5d9be4d0ca13a1dbef7d7953032fe87d4e81d; the claim date remains
-      2026-10-17. No source checker or mathematical review ran during acquisition.
-      PR661 keeps T-195. Each later PR takes the next available IDs only after updating
-      from main, in actual merge order; PR671's entries are provisional, and no ordering
-      between PR671 and this intake branch is assumed.
-      The retained successor changes only LICENSE and root README from the original
-      c95c4938 pin; all three witness directories are unchanged. The printed-side ledger
-      records this report before the tighter 672 and 674 reports; no packing is verified.
-      A bounded source-level mathematical read in think-qdcc found no blocking geometry
-      finding; exact witness/records binding and controls remain pending.
+    notes: 'Stage 2 packet: packing/resources/web/de-winter-upper-bounds-227-229-260-2026-10-17/README.md,
+      retained at MIT-licensed 9bf5d9be4d0ca13a1dbef7d7953032fe87d4e81d; the claim date remains 2026-10-17.
+      No source checker or mathematical review ran during acquisition. PR661 keeps T-195. Each later PR
+      takes the next available IDs only after updating from main, in actual merge order; PR671''s entries
+      are provisional, and no ordering between PR671 and this intake branch is assumed. The retained successor
+      changes only LICENSE and root README from the original c95c4938 pin; all three witness directories
+      are unchanged. The printed-side ledger records this report before the tighter 672 and 674 reports;
+      no packing is verified. A bounded source-level mathematical read in think-qdcc found no blocking geometry
+      finding; exact witness/records binding and controls remain pending. Stage 3 joins every chronological
+      claim to the register on the #661-dependent intake branch, at V0/C0. IDs remain provisional until
+      actual main merge order; no reply is posted. Separate mathematical review and source-replay owners
+      retain Stage 4 integration and any adoption. The separately returned full exact review and completed
+      source replay/controls are pending separate descendant PRs; this registration adopts neither receipt
+      nor rung. Both case upper lanes and house choices stay unchanged pending Stage 4 adoption. The separately completed source replays and mathematical reviews await descendant integration; no confirmation receipt or rung is adopted here.'
   - number: 669
     title: 's(155) ≤ 12.952260944651: registration request'
     author: evand
     opened: '2026-10-17'
     state: open
     kind: result-report
-    triage: pending
+    triage: done
     summary: Evan Daniel reports an exact rational certificate at 155 from 59326b8, with a regularized view
       at the same side. The source claims a different local minimum from Ostashev T-149, credits that packing
       as its start, and discloses same-author exact checkers and numerical local-minimum diagnostics.
     read_through: '2026-10-17T14:49:46Z'
     results:
-    - key: n155
-      claim: s(155) <= 12.952260944651, rounded upward; exact certificate side is authoritative.
-      source: body
-      not_registered: Stage 2 checker-input custody is complete. Stage 3 final IDs and publication
-        await an update from main and ID allocation in actual merge order; no claim is registered yet.
-        Complete review, replay with controls and any adoption remain on the import bead.
-      queued: true
-      bead: think-n1ga
+      - key: n155
+        claim: s(155) <= 12.952260944651, rounded upward; exact certificate side is authoritative.
+        source: body
+        bead: think-n1ga
+        register:
+          - T-197
     beads:
-    - think-n1ga
+      - think-n1ga
     answer_bead: think-n1ga
     replies: []
     close_when: Every claim or correction has a reviewed disposition on main, pending validation has a priced
       owner, any changed house is regularized in its adoption, and the author has received a reply verified
       against main and the deployed site.
-    notes: >-
-      Stage 2 packet: packing/resources/web/evand-n155-explorer-2026-10-17/README.md,
-      retained at MIT-licensed 59326b86291b76c39d843f3f156e8f25fa0f6e3f; the claim date remains
-      2026-10-17. No source checker or mathematical review ran during acquisition.
-      PR661 keeps T-195. Each later PR takes the next available IDs only after updating
-      from main, in actual merge order; PR671's entries are provisional, and no ordering
-      between PR671 and this intake branch is assumed.
-      The issue and s155_ex2_prior.json credit Daniil Ostashev's T-149 as the search
-      start, while s155_ex2_regularized.json says by: [Francisco Couzo]. Both statements
-      are preserved; resolve the discrepancy before using that field as attribution
-      evidence. The same-side display certificate is not a second bound; numerical
-      local-minimum diagnostics remain source assertions.
+    notes: 'Stage 2 packet: packing/resources/web/evand-n155-explorer-2026-10-17/README.md, retained at
+      MIT-licensed 59326b86291b76c39d843f3f156e8f25fa0f6e3f; the claim date remains 2026-10-17. No source
+      checker or mathematical review ran during acquisition. PR661 keeps T-195. Each later PR takes the
+      next available IDs only after updating from main, in actual merge order; PR671''s entries are provisional,
+      and no ordering between PR671 and this intake branch is assumed. The issue and s155_ex2_prior.json
+      credit Daniil Ostashev''s T-149 as the search start, while s155_ex2_regularized.json says by: [Francisco
+      Couzo]. Both statements are preserved; resolve the discrepancy before using that field as attribution
+      evidence. The same-side display certificate is not a second bound; numerical local-minimum diagnostics
+      remain source assertions. Stage 3 joins every chronological claim to the register on the #661-dependent
+      intake branch, at V0/C0. IDs remain provisional until actual main merge order; no reply is posted.
+      Separate mathematical review and source-replay owners retain Stage 4 integration and any adoption. Both case upper lanes and house choices stay unchanged pending Stage 4 adoption. The separately completed source replays and mathematical reviews await descendant integration; no confirmation receipt or rung is adopted here.'
   - number: 670
     title: '204-993: registration request'
     author: franciscouzo
@@ -10768,47 +10761,43 @@ issues:
     opened: '2026-10-17'
     state: open
     kind: result-report
-    triage: pending
+    triage: done
     summary: 'Evan Daniel reports a dilation certificate at 229 (e0338c7), then a smaller certificate at
       00e68df and asks to use the latter instead. Both reports are retained in order; the update certifies
       only an upper bound and credits Couzo #672 after de Winter #668.'
     read_through: '2026-10-18T01:36:21Z'
     results:
-    - key: n229
-      claim: s(229) <= 15.650163254859, rounded upward; exact certificate side is authoritative.
-      source: body
-      not_registered: Stage 2 checker-input custody is complete. Stage 3 final IDs and publication
-        await an update from main and ID allocation in actual merge order; no claim is registered yet.
-        Complete review, replay with controls and any adoption remain on the import bead.
-      queued: true
-      bead: think-5ij2
-    - key: n229-update
-      claim: s(229) <= 7825080756947776580756939951343/500000000000000000000000000000, rounded upward as
-        15.650161513896; the author requests this in place of the opening value.
-      source: https://github.com/jlevy/squares/issues/674#issuecomment-6244298663
-      not_registered: Stage 2 checker-input custody is complete. Stage 3 final IDs and publication
-        await an update from main and ID allocation in actual merge order; no claim is registered yet.
-        Complete review, replay with controls and any adoption remain on the import bead.
-      queued: true
-      bead: think-5ij2
+      - key: n229
+        claim: s(229) <= 15.650163254859, rounded upward; exact certificate side is authoritative.
+        source: body
+        bead: think-5ij2
+        register:
+          - T-198
+      - key: n229-update
+        claim: s(229) <= 7825080756947776580756939951343/500000000000000000000000000000, rounded upward
+          as 15.650161513896; the author requests this in place of the opening value.
+        source: https://github.com/jlevy/squares/issues/674#issuecomment-6244298663
+        bead: think-5ij2
+        register:
+          - T-199
     beads:
-    - think-5ij2
+      - think-5ij2
     answer_bead: think-5ij2
     replies: []
     close_when: Every claim or correction has a reviewed disposition on main, pending validation has a priced
       owner, any changed house is regularized in its adoption, and the author has received a reply verified
       against main and the deployed site.
-    notes: >-
-      Stage 2 packets: packing/resources/web/evand-n229-dilation-2026-10-17/README.md at
-      MIT-licensed e0338c7becf95dbc7584b48d8868c0a1cd21079c (published 2026-10-17), and
-      packing/resources/web/evand-n229-dilation-update-2026-10-18/README.md at MIT-licensed
-      00e68dfbe1d29ab5dbab1cddfb8f6ca19d5470db (published 2026-10-18). The opening and
-      update remain separate chronological claims; 15.650161513896 is the current
-      requested upper bound. Credit Daniel after Couzo's 672 after de Winter's 668.
-      No source checker, geometric replay or mathematical review ran during acquisition.
-      PR661 keeps T-195. Each later PR takes the next available IDs only after updating
-      from main, in actual merge order; PR671's entries are provisional, and no ordering
-      between PR671 and this intake branch is assumed.
+    notes: 'Stage 2 packets: packing/resources/web/evand-n229-dilation-2026-10-17/README.md at MIT-licensed
+      e0338c7becf95dbc7584b48d8868c0a1cd21079c (published 2026-10-17), and packing/resources/web/evand-n229-dilation-update-2026-10-18/README.md
+      at MIT-licensed 00e68dfbe1d29ab5dbab1cddfb8f6ca19d5470db (published 2026-10-18). The opening and update
+      remain separate chronological claims; 15.650161513896 is the current requested upper bound. Credit
+      Daniel after Couzo''s 672 after de Winter''s 668. No source checker, geometric replay or mathematical
+      review ran during acquisition. PR661 keeps T-195. Each later PR takes the next available IDs only
+      after updating from main, in actual merge order; PR671''s entries are provisional, and no ordering
+      between PR671 and this intake branch is assumed. Stage 3 joins every chronological claim to the register
+      on the #661-dependent intake branch, at V0/C0. IDs remain provisional until actual main merge order;
+      no reply is posted. Separate mathematical review and source-replay owners retain Stage 4 integration
+      and any adoption. Both case upper lanes and house choices stay unchanged pending Stage 4 adoption. The separately completed source replays and mathematical reviews await descendant integration; no confirmation receipt or rung is adopted here.'
   - number: 675
     title: '204-998: registration request'
     author: franciscouzo

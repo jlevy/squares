@@ -91,7 +91,9 @@ PUBLICATION_HISTORY = (
         version="v0.7.27",
         first_published="October 18, 2026",
         result_scope=(
-            "Link the October 18 intake audit and open-work review from the project synopsis."
+            "Register six upper-bound claim rows pending adoption at 155, 227, 229 and "
+            "260, retain their chronological source credit, and link the October 18 intake and "
+            "open-work reviews."
         ),
     ),
     PublicationHistoryEntry(
@@ -933,7 +935,9 @@ RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
         version="v0.7.27",
         impact="patch",
         reason=(
-            "Link the October 18 intake audit and open-work review from the project synopsis."
+            "Register six upper-bound claim rows pending adoption at 155, 227, 229 and "
+            "260, retain their chronological source credit, and link the October 18 intake and "
+            "open-work reviews."
         ),
     ),
     ReleaseImpactDecision(
@@ -1350,6 +1354,42 @@ class ReleaseNoPublicChange(NamedTuple):
 
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/frontier/results.yaml",
+            "packing/campaign/result-requests.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "Reviewed these exact shared inputs against PR #661 a87de0cf7: all 195 "
+            "existing result objects, the n11 ladder entries and the novel-result count "
+            "are unchanged; four reported entries add only counts 155, 227, 229 and 260. "
+            "The explainer's live register total moves from 195 to 199, site data rather "
+            "than a revision of its mathematics, as in the preceding release decision. "
+            "The other n11 reviews use the unchanged ladder, and the methods manuscript "
+            "only links these YAML records, with no data fact substitutions. All five "
+            "freshly generated claim/card documents equal the parent and worktree "
+            "bytes. No case upper lane, house, paper template or figure input changes. "
+            "This is a source-scope review, not an HTML/PDF byte comparison; the paper "
+            "editions stay unchanged."
+        ),
+    ),
     ReleaseNoPublicChange(
         components=("paper:n11-lower-bounds-explainer",),
         paths=("packing/src/sqpack/cli/validate.py",),

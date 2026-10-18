@@ -101,15 +101,23 @@ reports:
   - n: 227
     printed: '15.563796703670'
     rounding: up
+    exact: 194547458795865848854407472552117653131825098066089500568310019841668910818842825068644658133972443495777187230686109286929082683273291187074040913251499/12500000000000000000000000000001272204783003459957077568639425038233180795950995922365041743732086145591922059343477256613382050000000000000000000000000
+    exact_from: packing/resources/web/de-winter-upper-bounds-227-229-260-2026-10-17/source/n227/n227_exact.json.gz
   - n: 229
     printed: '15.650174756949'
     rounding: up
+    exact: 156501747569482131747919637148801852719869637315233948984618327625011520667543259632677498716011131748832131668750692746335433269145213277034738380207139541/10000000000000000000000000000001737366297119815888250696550926607660931327350731575578989919015034082413286101971092035771621296900000000000000000000000000
+    exact_from: packing/resources/web/de-winter-upper-bounds-227-229-260-2026-10-17/source/n229/n229_exact.json.gz
   - n: 260
     printed: '16.645778804182'
     rounding: up
+    exact: 16645778804181379786535601/1000000000000000000000000
+    exact_from: packing/resources/web/de-winter-upper-bounds-227-229-260-2026-10-17/source/n260/n260_exact.json.gz
   note: Triage comparison of issue-table upper bounds against frozen current records. The source inventory,
     exact-header decisions, classical envelope and other unimported publications remain on the owner bead;
-    a ledger verdict alone is not registration or feasibility verification.
+    a ledger verdict alone is not registration or feasibility verification. Stage 3 retains the exact
+    certificate side and its source path; chronological registration is separate from geometric replay
+    and confirmation.
 - report: '#669'
   issue: 669
   holders: Evan Daniel
@@ -118,9 +126,13 @@ reports:
   - n: 155
     printed: '12.952260944651'
     rounding: up
+    exact: 2590452188930112807053435932173/200000000000000000000000000000
+    exact_from: packing/resources/web/evand-n155-explorer-2026-10-17/source/search/packer/candidates/s155_ex2.cert
   note: Triage comparison of issue-table upper bounds against frozen current records. The source inventory,
     exact-header decisions, classical envelope and other unimported publications remain on the owner bead;
-    a ledger verdict alone is not registration or feasibility verification.
+    a ledger verdict alone is not registration or feasibility verification. Stage 3 retains the exact
+    certificate side and its source path; chronological registration is separate from geometric replay
+    and confirmation.
 - report: '#670'
   issue: 670
   holders: Francisco Couzo
@@ -502,9 +514,13 @@ reports:
   - n: 229
     printed: '15.650163254859'
     rounding: up
+    exact: 7825081627429265081627421439843/500000000000000000000000000000
+    exact_from: packing/resources/web/evand-n229-dilation-2026-10-17/source/search/packer/candidates/s229.cert
   note: Triage comparison of issue-table upper bounds against frozen current records. The source inventory,
     exact-header decisions, classical envelope and other unimported publications remain on the owner bead;
-    a ledger verdict alone is not registration or feasibility verification.
+    a ledger verdict alone is not registration or feasibility verification. Stage 3 retains the exact
+    certificate side and its source path; chronological registration is separate from geometric replay
+    and confirmation.
 - report: '#674 update'
   issue: 674
   comment: 6244298663
@@ -514,8 +530,11 @@ reports:
   - n: 229
     printed: '15.650161513896'
     rounding: up
+    exact: 7825080756947776580756939951343/500000000000000000000000000000
+    exact_from: packing/resources/web/evand-n229-dilation-update-2026-10-18/source/search/packer/candidates/s229_v2.cert
   note: Author asks this smaller certificate to replace the opening value. Both reports remain in chronological
-    comparison; final request state follows the update.
+    comparison; final request state follows the update. Stage 3 retains the exact certificate side and
+    its source path; chronological registration is separate from geometric replay and confirmation.
 - report: '#675'
   issue: 675
   holders: Francisco Couzo
