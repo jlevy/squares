@@ -5,7 +5,7 @@ title: "PR #676: retain dated open-work validation follow-up"
 kind: task
 status: in_progress
 priority: 2
-version: 5
+version: 6
 delegate: codex@spud10.local
 labels: []
 dependencies: []
@@ -13,7 +13,7 @@ parent_id: is-01m572ssbx1x412zpvsw1sb6je
 hold: null
 hold_until: null
 created_at: 2026-10-18T10:26:55.147Z
-updated_at: 2026-10-18T12:57:42.602Z
+updated_at: 2026-10-18T13:08:43.897Z
 started_at: 2026-10-18T10:27:05.278Z
 ---
 
@@ -24,3 +24,7 @@ Dated addendum committed locally at 72d7db84c067b32405a4755adcfc74e589f8c37d; cl
 2026-10-18 delegated gate diagnosis at unchanged local HEAD 72d7db84c067b32405a4755adcfc74e589f8c37d: corrected task PYTHONPATH explicitly resolves sqpack, kpress and workbench_tools from the PR worktree, using the project CPython3.14.7 interpreter. Focused catalogue precision, campaign trust-boundary and intake-ledger group passed126 tests with1slow deselected in25.56s; nested failure-summary plus release group passed20 tests in76.86s. Saved incremental676b progress names a separate nested-pytest summary failure caused by diagnostic PYTEST_ADDOPTS=-x propagation (expected3 failures, received1); this is not a source defect and passes in the corrected environment. Original900s gate F still cannot be identified retrospectively from its missing node output. No source edits, staging, commits or pushes. Root directed holding a fresh full push gate until #671 releases CPU; preserve addendum72d7db8. Durable focused logs: /Volumes/spud-ext1/agent-source/squares-intake-20261018-evidence/focused-676-env-campaign-intake.log and focused-676-validation-release.log.
 
 2026-10-18 interim Stage2 addendum committed locally at 21efaf30e with normal hooks (4.72s): exactly102 paths, the five owned docs/record files plus completed packets for668,669,674opening and674update. Exact path manifest: /Volumes/spud-ext1/agent-source/squares-intake-20261018-evidence/stage2-commit-files.txt. Four bibliography keys use original17/18Oct dates and licensed pins;669 builds-on-project and preserves issue/prior Ostashev lineage versus regularized JSON byCouzo.668 bounded source-level mathematical read in think-qdcc has no blocking geometry finding but exact witness/records binding and controls pending. IDs/publication follow actual merge order after update from main;661 keepsT195, no order between671/676 assumed. All4acquire_source custody checks pass; schemas324frontmatter+972datasets;requests127/70;docs2065;66existing bibliography/request tests pass10.70s; parsed comparison preserves claim/source/triage/queue fields and other issues; Flowmark/footer/whitespace and normal hooks pass. Pre-edit records52/52passed88.98s; post-edit records/fullpush remain HELD by root for671CPU window. No source verifier/geometric replay, remote push, PR edit, issue reply or merge. Local PR title/body draft passesOR9 at agent-source/squares-intake-20261018-evidence/pr676-stage2-addendum-body.md. Remote676 remains5fb743b3e; earlier local72d7db8 and this commit remain unpushed. Keep bead open until qualified publication.
+
+2026-10-18 low-CPU W1 follow-up: eight concise unpublished reply drafts appended to existing answer beads for666/668/669/670/672/673/674/675 and synced, preserving prior notes. Drafts72-101words carry report dates, exact claims or bounded claim scope, Stage2/3 limits, and no result number or verification rung. Each requires refresh from main after the relevant records merge and a deployed-site/later-comments check before posting. Copy: /Volumes/spud-ext1/agent-source/squares-intake-20261018-evidence/intake-reply-drafts-20261018.json. No GitHub comment posted.
+
+Conservative Stage1 bulk-inventory appendix committed locally3711c46fb70bdadd6e9c0202519443ede2a3064c, normal Flowmark/paper-title hooks pass10.27s. Exactly two files: docs/project/reviews/review-2026-10-18-open-work.md and review-2026-10-18-intake-audit.md;49append-only lines, no requests/source/registry changes. Pins23aff0c6/af8cb795/c6da0fc7 map73/46/79local claims;670four and672nine root-vs-best traps;675creditedDaniel229 andtwo deletion-derived witnesses; candidate custody scopes9.7/8.0/10.4MB beforecompression needOR18 carrier decisions. These remain Stage1: no packet/checker/geometry/Stage3promotion. Based on pinned Sol inventory report; root is reconciling missing670/675inventory notes into think-2vjc via Astra, preserving the reply draft. Light checks: documentation2065 andrequests127/70 pass; parsed append-only/footer proof passes. Worktreeclean. Post-editrecords/fullpush/remotePRupdate remain held for671CPUwindow.
