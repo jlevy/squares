@@ -1359,15 +1359,27 @@ def test_where_the_replaced_lanes_differ_the_margin_is_read_from_the_verified_ce
     replayed: list[adopt.Move],
 ) -> None:
     """At 29 the replaced record's reported bound was the catalogue's print and its
-    verified bound T-155's exact side. The margin is T-155's, so the opening, the section
-    and the history note print T-155's side, and the print is said apart as ordering
-    nothing, 9.19e-15 below the new side and inside its last unit (review C3 of #661)."""
+    verified bound T-155's exact side. Its retained display differs from that side, so
+    the opening, section and history note must use the exact form for the margin's
+    baseline (reviews C3 and D1 of #661). The catalogue print orders nothing."""
     at29 = next(move for move in replayed if move.n == 29)
-    verified = str(at29.packing["verified_upper_bound"]["value"])
+    bound = at29.packing["verified_upper_bound"]
+    verified = Fraction(str(bound["exact_form"]))
     printed = str(at29.packing["reported_upper_bound"]["value"])
-    assert (verified, printed) == ("5.93383346267692918974379895098", "5.93383346267692")
+    assert Fraction(str(bound["value"])) != verified
+    margin = verified - at29.side
+    assert margin == at29.selection.margin > 0
     opening = _flat(adopt.opening(at29))
-    assert f"below the ceiling the case held until then, ${verified}$ from" in opening
+    baseline = re.search(
+        r"below the ceiling the case held until then, \$([^$]+)\$ from", opening
+    )
+    assert baseline is not None
+    assert Fraction(baseline.group(1)) == verified
+    stated_margin = re.search(r"`([^`]+)` below the ceiling", opening)
+    assert stated_margin is not None
+    rounded_margin = Decimal(stated_margin.group(1))
+    last_place = Decimal(1).scaleb(int(rounded_margin.as_tuple().exponent))
+    assert abs(Fraction(rounded_margin) - margin) <= Fraction(last_place) / 2
     assert f"below the ceiling the case held until then, ${printed}$" not in opening
     assert (
         f"the reported upper bound it replaces, ${printed}$ from [Kingbird], is a print "
@@ -1377,6 +1389,9 @@ def test_where_the_replaced_lanes_differ_the_margin_is_read_from_the_verified_ce
     assert f"The house it replaces, ${verified}$ from" in _flat(adopt.section(at29))
     note = adopt.history_note(at29)["claim"]
     assert note.startswith(f"Earlier house {verified} from T-155 (reported as {printed} from")
+    written = adopt.replayed_text(at29)
+    stale = written.replace(str(verified), str(bound["value"]))
+    assert adopt.refreshed(at29, stale) == written
     # Lanes that agree as numbers keep the reported print, as at 308, '18.0' beside '18'.
     for move in replayed:
         if move.n != 29:

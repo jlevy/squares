@@ -1404,9 +1404,10 @@ def _lanes_differ(packing: Mapping[str, Any]) -> bool:
 
 
 def _ceiling(packing: Mapping[str, Any]) -> str:
-    """The ceiling the case held, as its record printed the bound the margin is from."""
-    lane = "verified_upper_bound" if _lanes_differ(packing) else "reported_upper_bound"
-    return str(packing[lane]["value"])
+    """The margin's verified baseline where the lanes differ, not its retained display."""
+    if _lanes_differ(packing):
+        return str(packing["verified_upper_bound"]["exact_form"])
+    return str(packing["reported_upper_bound"]["value"])
 
 
 def _reported_apart(move: Move) -> str:
@@ -2324,15 +2325,16 @@ def _span(text: str, start: str, end: str) -> tuple[int, int]:
 
 def refreshed(move: Move, committed: str) -> str:
     """The committed record with what its last pass's writer writes now in the parts the
-    writer alone owns: the evidence roster, the dated paragraph and the certificate
-    section, and, outside `HAND_MARKED`, the rest of the body, which it marks as history.
+    writer alone owns: the evidence roster, priority notes, the dated paragraph and the
+    certificate section, and, outside `HAND_MARKED`, the rest of the body, marked as history.
     The rest, the verifier table and the front matter other tools refresh, stays as it
     is."""
     written = replayed_text(move)
     fence, front, rest = _split(committed)
-    evidence = _packing(_split(written)[1])["evidence"]
-    if _packing(front).get("evidence") != evidence:
-        front = _replace(front, "evidence", evidence)
+    packing = _packing(_split(written)[1])
+    for key in ("evidence", "priority_notes"):
+        if _packing(front).get(key) != packing.get(key):
+            front = _replace(front, key, packing[key])
     if move.n not in HAND_MARKED:
         rest = _with_history(rest, _split(written)[2])
     text = fence + front + rest
