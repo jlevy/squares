@@ -3,15 +3,19 @@ type: is
 id: is-01m58ne5xzkwtbp2bjcsk30a8y
 title: "PR #403 J1: diagnose hosted call-wall refusals"
 kind: bug
-status: open
+status: in_progress
 priority: 1
-version: 1
+version: 2
 spec_path: docs/project/specs/active/plan-2026-10-10-website-development-loop.md
+delegate: claude-code@spud10.local
 labels: []
 dependencies: []
 parent_id: is-01m4ke1dkg5m43rszjm49ar77r
+hold: null
+hold_until: null
 created_at: 2026-10-18T23:27:04.638Z
-updated_at: 2026-10-18T23:27:04.638Z
+updated_at: 2026-10-18T23:27:33.097Z
+started_at: 2026-10-18T23:27:33.094Z
 ---
 PR #403 Review J, J1, at head `3ee60c3e5157a82c0e9b5a48e54fc6c1f57539f5` remains a merge
 blocker.
