@@ -5,7 +5,7 @@ title: "PR #676: retain dated open-work validation follow-up"
 kind: task
 status: in_progress
 priority: 2
-version: 6
+version: 7
 delegate: codex@spud10.local
 labels: []
 dependencies: []
@@ -13,7 +13,7 @@ parent_id: is-01m572ssbx1x412zpvsw1sb6je
 hold: null
 hold_until: null
 created_at: 2026-10-18T10:26:55.147Z
-updated_at: 2026-10-18T13:08:43.897Z
+updated_at: 2026-10-18T13:28:52.228Z
 started_at: 2026-10-18T10:27:05.278Z
 ---
 
@@ -28,3 +28,5 @@ Dated addendum committed locally at 72d7db84c067b32405a4755adcfc74e589f8c37d; cl
 2026-10-18 low-CPU W1 follow-up: eight concise unpublished reply drafts appended to existing answer beads for666/668/669/670/672/673/674/675 and synced, preserving prior notes. Drafts72-101words carry report dates, exact claims or bounded claim scope, Stage2/3 limits, and no result number or verification rung. Each requires refresh from main after the relevant records merge and a deployed-site/later-comments check before posting. Copy: /Volumes/spud-ext1/agent-source/squares-intake-20261018-evidence/intake-reply-drafts-20261018.json. No GitHub comment posted.
 
 Conservative Stage1 bulk-inventory appendix committed locally3711c46fb70bdadd6e9c0202519443ede2a3064c, normal Flowmark/paper-title hooks pass10.27s. Exactly two files: docs/project/reviews/review-2026-10-18-open-work.md and review-2026-10-18-intake-audit.md;49append-only lines, no requests/source/registry changes. Pins23aff0c6/af8cb795/c6da0fc7 map73/46/79local claims;670four and672nine root-vs-best traps;675creditedDaniel229 andtwo deletion-derived witnesses; candidate custody scopes9.7/8.0/10.4MB beforecompression needOR18 carrier decisions. These remain Stage1: no packet/checker/geometry/Stage3promotion. Based on pinned Sol inventory report; root is reconciling missing670/675inventory notes into think-2vjc via Astra, preserving the reply draft. Light checks: documentation2065 andrequests127/70 pass; parsed append-only/footer proof passes. Worktreeclean. Post-editrecords/fullpush/remotePRupdate remain held for671CPUwindow.
+
+2026-10-18 exact-head qualification attempt at clean3711c46fb: records PASS52/52 selected steps90.62s against300s ceiling. Full push selected all804 quick-suite files because archived source Python is outside mapped roots; canonical reachable and tier ceilings1800s, no deadline override. Six distinct pytest failures were identified: source-credit/lineage agreement for the new668key (the four new builds-on-project credits omit required Levy attribution), and five browser-floor contracts because this checkout linked main node_modules without typescript-eslint. Root explicitly directed clean interruption after sufficient diagnosis; validator received SIGINT, stopped its registered subprocesses and exited130 at369.74s. This is an interrupted failed run, not a timeout or pass; cancellation of default_drawings is not a source finding. Durable logs/provenance and longrepr: agent-source/squares-intake-20261018-evidence/{records-3711c46fb.log,push-3711c46fb.log,push-3711c46fb-failure-evidence.json}. Correcting only four bibliography credits from retained project-catalogue/T149/source-lineage evidence;123focused lineage and bound-citation tests pass21.37s. No scientific replay, push or PR update. Isolated external npm-ci bootstrap awaits root665I/O slot, then focused browser regressions/normal commit/new-head sequential records+push remain.
