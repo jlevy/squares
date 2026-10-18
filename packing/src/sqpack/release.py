@@ -88,6 +88,13 @@ class PublicationHistoryEntry(NamedTuple):
 #: for each deployment's commit, what the page it built stated.
 PUBLICATION_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.7.27",
+        first_published="October 18, 2026",
+        result_scope=(
+            "Link the October 18 intake audit and open-work review from the project synopsis."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.7.26",
         first_published="October 17, 2026",
         result_scope=(
@@ -921,6 +928,15 @@ class ReleaseImpactDecision(NamedTuple):
 # No impact is invented retrospectively for the published baseline editions.
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
     ReleaseImpactDecision(
+        component="site",
+        previous_version="v0.7.26",
+        version="v0.7.27",
+        impact="patch",
+        reason=(
+            "Link the October 18 intake audit and open-work review from the project synopsis."
+        ),
+    ),
+    ReleaseImpactDecision(
         component="infographics",
         previous_version="v0.6.2",
         version="v0.6.3",
@@ -1334,6 +1350,28 @@ class ReleaseNoPublicChange(NamedTuple):
 
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
+    ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer",),
+        paths=(
+            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
+            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
+            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+        ),
+        reason=(
+            "The site v0.7.27 intake layer preserves the five generated claim documents "
+            "byte for byte from its PR #661 base at a87de0cf7, with publication revision "
+            "337b84df. Every rebase conflict is identical after normalizing only the "
+            "repository-link revision; the resolved files equal the base bytes. No "
+            "certificate, embedded verifier, theorem text or claim value changes. "
+            "No byte-identical HTML or PDF comparison is claimed."
+        ),
+    ),
     ReleaseNoPublicChange(
         components=("site",),
         paths=("packing/frontier/source-coverage.yaml",),

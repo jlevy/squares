@@ -9557,7 +9557,7 @@ issues:
       not_registered: >-
         Triage only (think-6wtz). Stage 2 retains the certificate, its regularized view and both source
         checkers at 5ad0069; stage 3 records it in report order, below every standing or staged side at
-        236 by 2.0213565519e-3 exactly. It is a new packing continuing itsnaka's #481 arrangement
+        236 by approximately 2.0213565519e-3. It is a new packing continuing itsnaka's #481 arrangement
         (T-136), credited after it as the issue asks.
       queued: true
       bead: think-6wtz
@@ -9601,7 +9601,7 @@ issues:
       not_registered: >-
         Triage only (think-8o5j). Stage 2 retains the certificate, its regularized view and both source
         checkers at 757b40b; stage 3 records it in report order, below both case lanes at 271 by
-        4.4622737548e-5 exactly, credited after Couzo's #561 and Chaoweeraprasit's #500 packings as the
+        approximately 4.4622737548e-5, credited after Couzo's #561 and Chaoweeraprasit's #500 packings as the
         issue asks.
       queued: true
       bead: think-8o5j

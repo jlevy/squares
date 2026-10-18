@@ -83,10 +83,17 @@ and `n-18` exist. Draft acknowledgements are in the import/answer beads.
 
 ## Watched Source Dispositions
 
-The retained commit inventory reads the complete changes after PR #667’s reads: 17
-commits in Evan Daniel’s repository, eight in Hosono’s and three in Couzo’s. Its path
-list identifies accompanying search, status and site work as well as new evidence.
-The source’s claim that a checker passed is kept as a source claim.
+The retained inventory covers 17 commits in Evan Daniel’s repository, eight in Hosono’s
+and three in Couzo’s after PR #667’s reads.
+Independent review found that the original compare responses stopped at 300 files for
+Daniel and Couzo. The completed per-commit pagination retains 353, 40 and 1,067 unique
+paths respectively, including 53 Daniel paths and 767 Couzo paths absent from those
+compare responses. No per-commit response reached the 3,000-file endpoint ceiling.
+The additional paths include Daniel’s n232 formalization and site/history files, and
+Couzo’s certificates and parent witnesses; they remain with the named n232 and bulk
+import owners below.
+This completes the changed-path inventory, not the stage 2 review of every source file
+or certificate. The source’s claim that a checker passed is kept as a source claim.
 
 | Source result | Pin | Owner and disposition |
 | --- | --- | --- |
@@ -100,8 +107,8 @@ The source’s claim that a checker passed is kept as a source claim.
 | Source clean rebuild of the 19-square Lean proof | Fitzharding `c86a991ea1379d1598739182f5f26619c9b7126a` | think-a4x3/think-nqnl; PR #667’s read retained. Owners notified: source reports VERIFIED, 13,143 modules, 64 vCPU for 5 h 18 min, about 340 CPU-hours. Update the old question asking whether it ran and reprice the held build |
 
 Higher-dimensional cube results in Hosono’s site changes concern another dimension.
-The remaining search and site commits in the retained inventory claim no further new
-packing bound beyond the items above.
+The remaining search and site commit messages claim no further new packing bound beyond
+the items above; complete source-content classification remains with the import owners.
 No source program, Lean build, census or regularization ran in this audit.
 The coordinator’s current instructions authorize no CPU-hour replays.
 Newly discovered proofs require the runbook’s separate mathematical review once source
@@ -152,19 +159,24 @@ named by owner.
 
 ## Validation and Next Entry
 
-Validation receipts are retained in the intake directory.
 `check_requests` passes (127 records, 70 open); the ledger gather/render/check passes
-(225 claims, 136 starts, zero cross-check warnings), and documentation links and footers
-were checked; naming fixes and the coordinator report remain part of draft completion.
-The second records run completed 52 steps with two failures observed before the
-generated-README exclusion and document-map rows were added.
+(225 claims, 136 starts, zero cross-check warnings).
+The request and ledger tests pass 125 tests, including schema and rendered-drift checks
+for every retained upper-bound ledger.
+Independent review added that discovery check so the October 18 ledger joins the fast CI
+surface, and corrected two rounded margins previously called exact.
+The coordinator’s records tier passes all 52 selected steps in 93.81 seconds; this is
+not the full checkpoint.
 
-The generated synopsis now links five new internal documents.
-That changes a site input, so the release-impact gate is explicitly pending a truthful
-site successor; PR #667’s metadata-only no-change disposition cannot cover it.
-The coordinator owns that successor and final records/push/hosted gates.
-This draft is not merge-ready.
-The full push tier and full checkpoint have not run here.
+The generated synopsis links five new internal documents, so the branch records site
+v0.7.26 as a patch successor.
+The release component checks pass 111 tests and the release-impact check accounts for
+every changed input.
+The five generated n11 claim documents change only their immutable source-link revision;
+their explicit no-public-change disposition claims no byte-identical PDF/HTML test.
+Final push and hosted gates remain the readiness checks for this draft.
+Raw command receipts retain their original whitespace; an unrestricted whitespace check
+over those receipts is not claimed to pass.
 The first records-tier attempt exposed missing worktree prerequisites: the kpress
 submodule, the pinned browser tool path, and the existing environment’s executables on
 `PATH`. The worktree now has the pinned submodule, reuses the existing pinned browser

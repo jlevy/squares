@@ -21,7 +21,13 @@ and no long certificate replay was started.
   [Review D](https://github.com/jlevy/squares/pull/661#pullrequestreview-5562181788)
   identifies the writer and regression test.
   Fix owners are `think-9143` and `think-0f8z`. The fix is pushed at `9783a53a2` and all
-  59 adoption tests pass; independent follow-up and hosted checks determine readiness.
+  59 adoption tests pass.
+  [Independent follow-up E](https://github.com/jlevy/squares/pull/661#pullrequestreview-5562229750)
+  confirms both fixes with no new findings.
+  A stale data pin found by CI is repaired at `a87de0cf7`; all six targeted pin checks
+  pass. The failed frontend atlas check passes locally, with browser source unchanged; a
+  transient resize failure is suspected but not established.
+  Fresh hosted checks determine final readiness.
   The broader display-consistency issue remains `think-gzrw`.
 - **#671:** retention can overwrite and then delete an existing plain candidate while
   returning success. The manifest replacement is non-atomic.
@@ -51,13 +57,13 @@ scientific review.
 | [#671](https://github.com/jlevy/squares/pull/671) | `32d47d321` | Fresh senior review A: 3 High, 2 Medium, 1 Low. Required CI red. Repair retention/publication before integration; census and stage 4 remain open. |
 | [#667](https://github.com/jlevy/squares/pull/667) | `a5b5f0ec2` | Existing same-head review A has 14 findings. Its four-file intake update and corrections are incorporated into this pass’s replacement intake branch. Keep the original open until replacement disposition is explicit. |
 | [#665](https://github.com/jlevy/squares/pull/665) | `bb85cbb59` | Fresh bounded senior source review; adoption and derived-output defects, required CI red. Retain the per-count adoption owners. |
-| [#661](https://github.com/jlevy/squares/pull/661) | `99232649d` | Fresh follow-up D: High numerical reporting defect and Low stale request status despite green CI. Fix and independently recheck; preserve T-195. |
+| [#661](https://github.com/jlevy/squares/pull/661) | `a87de0cf7` | D’s numerical reporting and stale-status defects fixed; independent E confirms both. All 59 adoption tests and six pin controls pass. Later stale data pin repaired; fresh hosted checks pending. T-195 preserved. |
 | [#658](https://github.com/jlevy/squares/pull/658) | `3022eb984` | Fresh follow-up C: prior source fixes hold, Low missing B disposition. Release-impact gate red. Ten focused tests pass; `think-8ido` retains correction work. |
 | [#646](https://github.com/jlevy/squares/pull/646) | `f79f22cd1` | Fresh follow-up F: E fixes hold, Low stale PR description. Mergeable; release-impact gate red while frontend/Pages pass. `think-s9g3` tracks metadata follow-up. |
 | [#645](https://github.com/jlevy/squares/pull/645) | `dafff1238` | Fresh follow-up F: E1–E7 fixes hold, 121 tests pass. Conflicts with main and release-impact gate red. Preserve the evidence distinctions during integration. |
 | [#622](https://github.com/jlevy/squares/pull/622) | `31155575c` | Read-only contributor intake review A. Substance imported by #661. Keep `think-30n2` open through merge, deployed-side agreement and final reply. |
 | [#599](https://github.com/jlevy/squares/pull/599) | `e5a046b3d` | Existing senior O and correctness P cover this exact head; new Q records the actual gate failures. Eight per-test and all four aggregate walls fail; conflicts with main. Continue `think-toaf`/`think-h96x`/`think-4syd`. |
-| [#578](https://github.com/jlevy/squares/pull/578) | `e1f921bf0` | Contributor profiles. Historical independent review and browser evidence exist in the originating chat, but the PR description is stale and main now conflicts. Keep profile population distinct from integration readiness. |
+| [#578](https://github.com/jlevy/squares/pull/578) | `e1f921bf0` | Fresh integration review A recovers the historical independent review and browser evidence. Standard CI has 31 successes; earlier full checkpoint passed. High current-main conflict and Low stale PR description remain. Keep profile population distinct from integration readiness. |
 | [#574](https://github.com/jlevy/squares/pull/574) | `4c319c24a` | Read-only contributor intake review A. Current cumulative scope is 148 counts; 68 selected counts registered through #602/T-174. #665 and separate algebraic owners retain unfinished adoption. |
 | [#514](https://github.com/jlevy/squares/pull/514) | `eb94b3dfd` | Fresh follow-up C confirms B1–B7 source fixes: six stamp tests and 25 Node tests pass. Current main conflicts and release gate is red. Reconcile newer result entries and generator writes when integrating. |
 | [#435](https://github.com/jlevy/squares/pull/435) | `273abfa59` | Upper layer of formal stack 447 above #403. Green checks against its lower branch do not qualify the stack against main. Preserve source/publication separation and review post-disposition changes. |
@@ -133,7 +139,10 @@ decisions.
   Browser and current rendered-page budgets were not freshly rerun in that follow-up.
 - Intake: online sweep, request schema, manual-source receipts and report-order ledger
   are recorded in the linked audit.
-  Owned work is not equivalent to completed review.
+  The records tier passes 52 selected steps in 93.81 seconds; 125 request and ledger
+  tests pass. The new ledger now participates in CI schema/render checks.
+  Per-commit pagination completes the originally capped source-path inventory.
+  Owned work is not equivalent to completed source-content or mathematical review.
 
 Fresh reviews are published as formal comments through the repository’s
 [tbd review workflow](../../../.agents/skills/tbd/SKILL.md).

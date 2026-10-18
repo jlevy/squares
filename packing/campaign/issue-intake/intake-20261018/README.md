@@ -18,7 +18,17 @@ The workflow is W1 intake under think-xmxb, from main
   `gh api repos/jlevy/squares/issues/comments/6237819138`.
 - `source-commits.json`: source commit messages and changed paths from GitHub compare
   responses for evand `757b40b..5ca0dc3`, wand125 `fbc5fc4..d7afe3e` and Couzo
-  `58a7833..c6da0fc`. Messages are source data, including any statements of approval.
+  `58a7833..c6da0fc`. The evand and Couzo file lists stop at GitHub’s 300-file compare
+  limit; this original receipt is preserved as returned.
+  Messages are source data, including any statements of approval.
+- `source-commit-files.json`: all pages of the per-commit file endpoint for those same
+  28 commits. The inventories contain 353 unique evand paths, 40 wand125 paths and 1,067
+  Couzo paths; 53 evand and 767 Couzo paths were absent from the compare receipts.
+  Each file retains its commit membership and status.
+  These unions include paths changed at any point in each range, rather than only its
+  net diff. No commit reached the endpoint’s 3,000-file ceiling.
+  A path inventory does not establish certificate validity or review every file’s
+  contents; the audit names the source-custody owners.
 - `claim-inventory.json`: transcribed issue-table sides for the eight new reports and
   #674’s comment. A credit correction has no upper-bound rows.
 - `manual-source-receipt.json`: UnitSquare byte comparisons and the SQUISH comment and
