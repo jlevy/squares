@@ -5,7 +5,7 @@ title: "Import franciscouzo: 227, 229, 330-996: registration request (#672)"
 kind: task
 status: in_progress
 priority: 2
-version: 4
+version: 5
 delegate: claude-code@spud10.local
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m572ssbx1x412zpvsw1sb6je
 hold: null
 hold_until: null
 created_at: 2026-10-18T08:47:36.866Z
-updated_at: 2026-10-18T13:04:36.349Z
+updated_at: 2026-10-18T13:09:28.562Z
 started_at: 2026-10-18T12:53:37.251Z
 ---
 W1 intake 2026-10-18, parent think-xmxb. https://github.com/jlevy/squares/issues/672
@@ -104,3 +104,53 @@ Draft comment:
 Your report of 17 October 2026 lists 46 improved upper bounds from [af8cb7959aead318c0cf5e9f873de3caa763f77a](https://github.com/franciscouzo/square-packing/tree/af8cb7959aead318c0cf5e9f873de3caa763f77a), including s(227) <= 15.563625652343 and s(229) <= 15.650174740273, rounded upward. Your comment of 17 October identifying de Winter's packings as the start at those two counts is retained.
 
 The source-level inventory distinguishes the issue-linked root certificates from nine differing best-directory files. Stage 2 selected-input custody and its data-carrier decision remain pending; source receipts must stay attached to the bytes they checked. Stage 3 registration and exact report-order comparisons remain pending. This inventory has run no certificate checker.
+
+### Astra mathematical/source review of #670, #672 and #675 — 18 October 2026
+
+Read-only review using `tbd shortcut review-code-correctness` and `review-code`. Reviewed immutable source and metadata; no certificate body was downloaded, no source code imported or executed, no replay or test suite run, no repository source edited, and no GitHub comment/review posted. This does not establish a V/C rung. The original v4 notes and unposted #672 reply draft above are preserved.
+
+Scope and additional source inventory:
+
+- [#670](https://github.com/jlevy/squares/issues/670): `franciscouzo/square-packing@23aff0c6f992271e1ad13a148d44f392c4b386c0`, 73 issue rows and 73 distinct issue-linked root certificates, 7,360,242 logical bytes.
+- [#672](https://github.com/jlevy/squares/issues/672): `af8cb7959aead318c0cf5e9f873de3caa763f77a`, 46 issue rows and 46 distinct issue-linked root certificates, 5,551,215 bytes.
+- [#675](https://github.com/jlevy/squares/issues/675): `c6da0fc7524d667bf3d224559724ba9b60762e60`, 79 local improvement rows represented by 77 distinct linked `certificates/best/` witnesses, 7,851,640 bytes. The 992 row links n993 and the 995 row links n996. The additional catalogue adoption at n229 credits Evan Daniel, starting from Couzo after de Winter; it is not an 80th local Couzo improvement.
+- Git tree metadata was read at all three pins with `recursive=1`; each returned `truncated=false`. These byte totals were recomputed from the selected linked paths and exclude catalogue metadata and the separate credited n229 adoption.
+- Earlier source inventory's licence boundary remains: no blanket repository licence established for either #670 or #675; only `BOUND_VERIFIER_LICENSE.txt` and the corresponding checker have explicit MIT terms. Do not generalize that licence to other code or prose.
+
+Invariants checked and mathematical result:
+
+1. A certificate must contain exactly n finite rational triples (x,y,t), n >= 1, and S > 0. The centre checker enforces this at `verify_bound_certificate.py:23-34`, with a second count check at line 48. Since 1+t*t > 0, c=(1-t*t)/(1+t*t), s=2*t/(1+t*t) satisfy c*c+s*s=1 exactly. Thus each pose describes a genuine unit square, with orthogonal edges (c,s) and (-s,c), without transcendental evaluation.
+2. Closed containment is precisely the nonnegative minimum of x-e, S-x-e, y-e, S-y-e, e=(abs(c)+abs(s))/2, at lines 50-54. Contact is allowed. Strict-open failure does not refute this upper-bound contract.
+3. For each pair the four edge-normal directions suffice by SAT. The centre-projection support radius is (abs(a dot u)+abs(a dot v))/2; lines 61-66 compute maximum signed separation across axes, then the minimum across pairs. Nonnegative separation means disjoint interiors, not disjoint closed squares. The signs at lines 67-68 implement the two contracts correctly.
+4. Pair omission is conservative: each square lies in its radius sqrt(2)/2 disc. Centre squared distance > 2 implies strict separation. Exact floor buckets have side 2; cells differing by at least 2 on an axis have coordinate distance > 2, hence cannot overlap. `Fraction` floor division also handles negative coordinates correctly. The singleton/no-near-pair case is valid subject to containment. No geometric soundness error found in this checker.
+5. Deletion is unconditional: if M genuine unit squares fit in a closed S-square with pairwise disjoint interiors, any n-element subset, n <= M, fits in the same S-square. No new geometry, strict gap, or optimality premise is needed. Thus #675's s(992) <= s(993)'s witnessed side and s(995) <= s(996)'s witnessed side are valid consequences once the linked parent bytes pass verification.
+6. The cited L-border construction is also sound: place the old S-square beside a strip of floor(S)+1 unit squares and an adjacent strip of floor(S) squares in the (S+1)-square, giving (m+2 floor(S)+1,S+1). This verifies the elementary implication; it does not audit completeness of the source's entire classical/public comparison envelope.
+
+All three pins have identical checker Git blob `0c305135d70650338ef0cb46f557e1457780f401` (3,567 bytes), declared SHA-256 `1c8b89eb0de71bc751db57061a015b8ed8ffb354d38ce13bcf8201ce8c90e98b`. Their `import_external.py`, `exact_finish.py` and checker-control files are likewise identical across the pins. Source: [centre checker](https://github.com/franciscouzo/square-packing/blob/c6da0fc7524d667bf3d224559724ba9b60762e60/verify_bound_certificate.py).
+
+Findings and evidence limits:
+
+- **CM1 — High, receipt-to-claim binding.** #670 root certificates differ from same-count best-directory certificates at n=753,811,927,992. #672 differs at n=652,811,816,864,873,933,934,994,995. Both Git blob identities and declared exact sides differ; in all 13 issue-pinned pairs the root side is strictly smaller. The linked best manifest's same-count receipt is therefore not evidence for the tighter issue-linked file. This corroborates the earlier inventory, not a finding that the tighter witnesses are invalid. Fix at intake: retain the exact issue-linked root file and matching per-count metadata, then record its own replay, or name an explicit parent/deletion derivation at the same exact side. Never substitute `best/nN.cert` by filename. At #675, all 77 actually linked best witnesses have the same Git blobs as their root counterparts; the two deletion rows intentionally reference the larger-count parent instead of best/n992 or best/n995.
+- **CM2 — Medium, first-route cardinality premise.** [`import_external.py:234-240`](https://github.com/franciscouzo/square-packing/blob/c6da0fc7524d667bf3d224559724ba9b60762e60/import_external.py#L234) reads header n but slices `rows[1:n+1]` without checking that n rows exist. [`exact_finish.py:65-71`](https://github.com/franciscouzo/square-packing/blob/c6da0fc7524d667bf3d224559724ba9b60762e60/exact_finish.py#L65) verifies the returned list but reports header n, not `report.n`. Static trace: header `2 1` plus the single row `1/2 1/2 0` describes one square; the corner verifier can accept that one square while this wrapper reports valid n=2. This was established by source inspection, not an executed reproduction. No submitted file is alleged malformed. The centre checker's strict parser rejects this case, so a correctly byte-bound second-route pass closes the gap. Fix before treating the historical first route as a standalone n-square oracle: require the full row count and shape, and assert `report.n == n`; include a truncated-file negative control in the retained replay harness.
+- **Independence limitation, not a new theorem defect.** The first checker is the historical [jlevy corner verifier at 37e6757ed4c51a1d93f2f999814c2a5efbe2a223](https://github.com/jlevy/squares/blob/37e6757ed4c51a1d93f2f999814c2a5efbe2a223/packing/src/sqpack/verify.py). The second explicitly follows Evan Daniel's checker at `622cd2e21407700fe8d5ac5943af820725107921`, modified by Couzo with Codex. They offer distinct corner-versus-support-function implementations but share rational half-angle poses, SAT and spatial filtering. Source receipts from the producer are not an independent local replay or mathematical review. The corner wrapper uses `bucket=True`, and the referenced historical bucket implementation converts corners to float; it is not literally an all-rational execution path. No false exclusion was identified for the bounded S<32 inputs: the sqrt(2)<2 geometric gap is ample, but the route's actual wrapper and numeric prefilter remain part of its trusted assumptions. Use the maintained independent route with exact/certified pair coverage, or document this bounded-coordinate filter argument.
+- **Documentation limitation.** Older `certificates/README.md` generation calls some results “exact optimum” and describes an open box. A rational feasible certificate alone proves an upper bound; KKT/Newton proximity and local checks do not prove global optimality or exact algebraic attainment. The three issue statements correctly use the closed contract and claim no optimality/uniqueness. Keep that narrower statement when registering.
+
+Exact-versus-rounded checks performed on metadata only:
+
+Read every issue table, its pinned `upper_bounds.json`, selected `best/manifest.json` entries, and the preceding pinned catalogue (#670 compared with 58a783368d4b7e70bb800f0009ea9ca03e578739; #672 with 23aff0c6f992271e1ad13a148d44f392c4b386c0; #675 with af8cb7959aead318c0cf5e9f873de3caa763f77a). Exact BigInt rational arithmetic found:
+
+- All 198 submitted rows (121 distinct counts across the three chronological requests) have `table_new == catalogue.rounded_up == ceil(10^12*S)/10^12`. No rounding discrepancy.
+- All 194 rational prior comparisons have new S < the preceding catalogue's exact S. The other four #675 priors are exact a+b*sqrt(2): n545=14+7*sqrt(2), n592=15+7*sqrt(2), n641=16+7*sqrt(2), n919=16+(21/2)*sqrt(2). Comparing the positive rational difference S-a by squaring against 2*b*b confirms each improvement, without substituting an outward rational enclosure for the algebraic prior.
+- The reviewed-prior column is tighter than that preceding catalogue at #672 n227 and #675 n458,547,548,809,814,869,872,924. This is consistent with the stated wider comparison envelope; it is not a side mismatch. The full provenance and completeness of that wider envelope were not audited here.
+- At #675 the 79 table sides all agree exactly with the linked witness's manifest side, including the two shared parents. There are 77 linked manifest receipts with closed_valid=true; these are source assertions, not executed results in this review.
+- The exact parent bounds are S993=401824400137812261436356993/12562963780430000000000000 (outward 31.984841090107) and S996=48316274805450161450921103/1510129712871800000000000 (outward 31.994784549711). Source witness SHA-256 bindings are respectively 0efd49d1d81440ccd1fa26b82df655a1555a3df91e32e50bbe493f6c18c8cac2 and 8cb4c818a9e32bd5255b6ed4611a9780d303062b8e94480df4bb131f2fa02c3d.
+- The separately credited n229 adoption at the #675 pin is 7825080756947776580756939951343/500000000000000000000000000000, outward 15.650161513896. Its manifest points to Daniel's s229_v2.cert at 00e68dfbe1d29ab5dbab1cddfb8f6ca19d5470db and [#674's comment](https://github.com/jlevy/squares/issues/674#issuecomment-6244298663), with de Winter -> Couzo -> Daniel credit.
+
+Bounded follow-up, owned by this bead and the existing intake lanes:
+
+1. Stage 2 custody must bind each issue/pin/path/exact side to the selected bytes, prioritizing CM1's 13 differing root files and #675's two deletion parents. Preserve source-order credit, including Daniel n229 separately. Keep bulk data in the approved immutable carrier; the byte totals above are acquisition scope, not a replay price.
+2. Before replay promotion, use a strict cardinality-preserving parser and retained controls for a missing row, duplicate-overlap, wall violation and allowed contact; check the actual input count and side. Source tests include pair coverage and closed-versus-strict controls, but their optional upstream comparison skips when its external checkout is absent. No test pass is claimed here.
+3. Schedule and price replay separately after the active #671 gate. Replay selected immutable witnesses once per byte identity, reuse only actual byte-bound results, and register deletion consequences explicitly. Do not infer that 198 chronological rows are 198 distinct new current records.
+4. Preserve the exact rational side as the bound; outward decimals are display values. Complete report-order/public-envelope comparison and normal registration review before any V/C promotion, final author answer or current-record claim.
+
+Evidence commands: `gh issue view 670|672|675 --repo jlevy/squares --json body,comments`; read-only `gh api repos/franciscouzo/square-packing/contents/<source-or-metadata>?ref=<pin>` for the files above; `gh api repos/franciscouzo/square-packing/git/trees/<pin>?recursive=1` for selected Git blob/size metadata; historical jlevy verifier contents at its fixed commit. All successful metadata reads and arithmetic checks above completed without source execution. Tests run: none, by the read-only/no-replay brief. No source-level geometric blocker was found in the centre checker; CM1 blocks transferring existing receipts to 13 tighter root claims, and CM2 limits the first route's standalone evidence.
