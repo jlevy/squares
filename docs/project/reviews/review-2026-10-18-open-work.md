@@ -367,6 +367,29 @@ All 13 focused module tests pass in 3.88 seconds; Ruff and BasedPyright are clea
 Fresh exact-head records and push tiers remain required before publication; this failed
 gate is retained as a fixture timing failure.
 
+## Supervisor Signal Fixture Follow-up — 18 October 2026
+
+At clean `372902046`, isolated records passed all 52 selected steps in 223.82 seconds
+against the 300-second ceiling.
+The subsequent normal-worker n5 push was stopped after one concrete signal-control
+failure, at 579.26 seconds (exit 130), with the last progress report showing 49 of 67
+selected steps complete.
+Two command-termination markers are cancellation artifacts, not additional source
+failures.
+
+The test’s captured PID was 1992; its retained supervisor receipt identifies worker
+1989, with exit status -15 and `process_group_reaped: true`. The test replaced the
+shared `subprocess.Popen` and published every launched PID, including RSS sampling’s
+`ps` observer, so its final process-absence assertion could inspect the observer rather
+than the worker. This does not establish a production worker-reaping defect.
+
+`think-469b` restricts PID publication and injected launch signals to the exact worker
+command with `start_new_session=True`. It adds a binding assertion against the receipt’s
+coordinator PID and retains the existing `ProcessLookupError` assertion.
+Production supervision and deadlines are unchanged.
+The failed receipt is preserved outside disposable scratch; timed controls and
+exact-head records/push qualification wait for the other branch’s heavy gate to finish.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->
