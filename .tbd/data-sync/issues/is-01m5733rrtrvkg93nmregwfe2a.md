@@ -3,15 +3,19 @@ type: is
 id: is-01m5733rrtrvkg93nmregwfe2a
 title: "Import JoostdeWinter: s(n) < ⌈√n⌉ at 18 counts from n = 509 to 1568, and s(464) ≤ 21.98881: registration request (#666)"
 kind: task
-status: open
+status: in_progress
 priority: 2
-version: 1
+version: 2
+delegate: claude-code@spud10.local
 labels:
   - result-import
 dependencies: []
 parent_id: is-01m572ssbx1x412zpvsw1sb6je
+hold: null
+hold_until: null
 created_at: 2026-10-18T08:47:34.680Z
-updated_at: 2026-10-18T08:47:34.680Z
+updated_at: 2026-10-18T13:04:20.647Z
+started_at: 2026-10-18T13:04:20.646Z
 ---
 W1 intake 2026-10-18, parent think-xmxb. https://github.com/jlevy/squares/issues/666
 Source pins in author report: b3152f526f23bc3ae450e51b6e906841233086d1
