@@ -390,6 +390,33 @@ Production supervision and deadlines are unchanged.
 The failed receipt is preserved outside disposable scratch; timed controls and
 exact-head records/push qualification wait for the other branch’s heavy gate to finish.
 
+## Dependent-Branch Qualification Follow-up, 18 October 2026
+
+The intake branch was rebased locally onto #661 at `a87de0cf7`, preserving its T-195.
+The pre-rebase checkpoint remains recoverable from
+`codex/intake-stage2-checkpoint-2a7a11ea6`. Regenerating the five n11 claim documents
+from the combined tree leaves them byte-identical to #661, and the data pin already
+names the last combined data commit.
+No mathematical result has been registered by this intake layer yet.
+
+Fresh pre-registry records at `2627322e1` passed 51 of 52 steps in 110.18 seconds.
+The sole failure was release-impact baseline selection: the validator compared main’s
+site v0.7.25 with the combined v0.7.27, despite the retained adjacent cuts through
+#661’s v0.7.26. A focused comparison against #661 accepted the site’s own successor but
+rejected the intake layer’s now-redundant n11 no-change exemption, since those files
+equal the parent. The failure log and focused contrast are retained outside disposable
+scratch. `think-e05x` owns the narrow repair: release impact uses the GitHub PR base in
+hosted CI, an explicit `PACKING_RELEASE_BASE_REF` locally, or main otherwise; the main
+delivery’s `HEAD^1` path and changelog’s main baseline stay unchanged.
+The five selector controls first failed in the three dependent-base cases, then the
+focused release-impact module passed all 24 cases, including an uncovered-input negative
+control. Ruff and BasedPyright pass.
+The redundant claim-document exemption is replaced by a source-reviewed exemption over
+the validator file alone, selected by the explainer’s broad package input; no HTML/PDF
+byte comparison is claimed.
+Fresh records must pass before Stage 3 registry edits, and the final head still requires
+its full push gate. The remote draft has not been updated.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

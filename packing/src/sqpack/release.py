@@ -1352,24 +1352,19 @@ class ReleaseNoPublicChange(NamedTuple):
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
     ReleaseNoPublicChange(
         components=("paper:n11-lower-bounds-explainer",),
-        paths=(
-            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
-            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
-            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
-            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
-            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
-        ),
+        paths=("packing/src/sqpack/cli/validate.py",),
         outputs=(
             "papers/n11-lower-bounds-explainer.html",
             "papers/n11-lower-bounds-explainer.md",
         ),
         reason=(
-            "The site v0.7.27 intake layer preserves the five generated claim documents "
-            "byte for byte from its PR #661 base at a87de0cf7, with publication revision "
-            "337b84df. Every rebase conflict is identical after normalizing only the "
-            "repository-link revision; the resolved files equal the base bytes. No "
-            "certificate, embedded verifier, theorem text or claim value changes. "
-            "No byte-identical HTML or PDF comparison is claimed."
+            "Reviewed the explainer's RENDER_INPUTS, which broadly includes the sqpack "
+            "tree: this file's only change selects the validation step's release-impact "
+            "baseline. The paper renderers do not call _synopsis; its caller is the "
+            "validation step registry. No theorem, geometry, paper content or source-link "
+            "revision changes, and the five generated claim documents remain byte-identical "
+            "to the PR #661 parent. This is a source-path review, not an HTML/PDF byte "
+            "comparison."
         ),
     ),
     ReleaseNoPublicChange(
