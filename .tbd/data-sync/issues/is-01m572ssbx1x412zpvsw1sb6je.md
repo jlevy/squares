@@ -3,9 +3,9 @@ type: is
 id: is-01m572ssbx1x412zpvsw1sb6je
 title: "W1/W2: review all open PRs and reconcile interrupted October intake"
 kind: task
-status: closed
+status: in_progress
 priority: 1
-version: 23
+version: 25
 delegate: claude-code@spud10.local
 labels: []
 dependencies: []
@@ -31,10 +31,10 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-18T08:42:07.601Z
-updated_at: 2026-10-18T09:40:56.076Z
+updated_at: 2026-10-18T10:15:42.722Z
 started_at: 2026-10-18T08:43:11.587Z
-closed_at: 2026-10-18T09:40:56.075Z
-close_reason: Completed the requested issue/PR review and intake ownership audit; replacement PR676, published reviews, exact validation limits and named continuation owners are retained. Unfinished fixes, scientific imports and local qualification remain explicit open follow-ups.
+closed_at: null
+close_reason: null
 resolution: null
 duplicate_of: null
 ---
@@ -46,3 +46,5 @@ duplicate_of: null
 Audit disposition complete on 18 October 2026. All 68 opening issues have source-backed dispositions; all 16 opening PRs have published reviews or follow-ups. Replacement draft #676 at 5fb743b3e has an independent senior review and 31 successful hosted checks, with 28 expected skips and none pending or failed. Its local pre-push attempt did not pass: the JSON-layout issue is repaired, but the 304-file quick suite timed out at 900 seconds after an unidentified failure marker. Two suspected controls pass in isolation; think-2jee owns identification and local qualification, with the complete log retained outside disposable scratch. The draft remains open.
 
 #661's numerical/status repairs and data pin are pushed at a87de0cf7; main validation and Pages pass. The deferred slow lane remains running, so no terminal full-checkpoint pass is claimed. #658's B/C dispositions and #646's stale description/F1 disposition are now repaired; their release gates remain open under the existing integration owners and think-s9g3. All scientific, retention, adoption, integration and publication findings retain their explicit owners. The next scientific W1 entry is think-qdcc (227/229/260 custody and exact comparison). No PR was merged, no issue reply/closure was posted, and no newly reported proof was replayed. Closing this inventory/review bead does not close its implementation or scientific follow-ups.
+
+Reopened: The issue/PR census is complete, but 14 tracked implementation and validation children remain open under this parent. Keep the parent in progress until those follow-ups are disposed; the hosted bead-tree gate rejects a closed parent with open children.
