@@ -5,16 +5,18 @@ title: "Import JoostdeWinter: Improved upper bounds for n = 227, 229, 260: regis
 kind: task
 status: in_progress
 priority: 2
-version: 5
+version: 6
 delegate: claude-code@spud10.local
 labels:
   - result-import
 dependencies: []
 parent_id: is-01m572ssbx1x412zpvsw1sb6je
+child_order_hints:
+  - is-01m57xnbtbzmgefz6bdm37xje9
 hold: null
 hold_until: null
 created_at: 2026-10-18T08:47:35.192Z
-updated_at: 2026-10-18T13:04:34.546Z
+updated_at: 2026-10-18T16:31:34.218Z
 started_at: 2026-10-18T12:36:48.824Z
 ---
 W1 intake 2026-10-18, parent think-xmxb. https://github.com/jlevy/squares/issues/668
