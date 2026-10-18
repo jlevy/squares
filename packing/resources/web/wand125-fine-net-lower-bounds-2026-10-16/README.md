@@ -7,9 +7,10 @@ The author reports them in a comment on
 (created 2026-10-16T07:49:56Z, edited 09:00:31Z), with three of 13 October that the
 record already holds (n = 37, 39 and 44: T-178, T-176 and T-177, from the
 [13 October packet](../wand125-fine-net-n37-n39-n44-2026-10-13/README.md)).
-Each bound is above both lower lanes of its case record, and each stands here as
-reported until the census of [stage 4](../../../campaign/result-import.md#stage-4-validate)
-replays it.
+Each bound was above both lower lanes of its case record at registration. The n108
+certificate now has an accepted retained native replay and certificate-specific reviews;
+its case adopts $531/50$. The other 17 remain reported at V0/C0 under
+[stage 4](../../../campaign/result-import.md#stage-4-validate).
 
 The five at n = 38 to 51 are on the 2,073-direction net of T-132, T-142 and T-143 (core
 $4999/5000$, half-angle step $1/5002$); the 13 at n = 68 to 110 are on the 201-direction
@@ -281,6 +282,20 @@ uv run --frozen --group dev python -m devtools.audit_fine_net_receipt \
 
 This premise audit supports the stage-4 records lane alongside the native replay and
 accepted reviews. It cannot promote a result's rung on its own.
+
+The separate [maximum-reasoning review](../../../../docs/project/reviews/review-2026-10-18-n108-fine-net-mathematics-max.md)
+accepts the implication and exact premises after its own five-pose audit: four of the
+201 saved native control poses and the axis pose among the source's 32 sampled controls.
+These five points cover neither five entire direction domains nor the continuum of
+centres. The full coverage decision remains the native replay, sharing the producer's
+verifier components.
+
+**Control-log filename (Review C1).** The archived n108 source README lists
+`check2/control.jsonl.gz`; its manifest and retained release instead name
+[`check2/control-197_200.jsonl.gz`](release/certificates/mixed_n108_L1062/check2/control-197_200.jsonl.gz).
+This affects discovery only. The archived README and its digest remain unchanged.
+The author question is whether the living bundle inventory can use the manifest's
+`check2/control-197_200.jsonl.gz` filename; no author message has been sent.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

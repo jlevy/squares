@@ -3969,3 +3969,42 @@ verifiers:
       packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review/n108-exact-audit.json.
       Its PASS is a premise-and-point result beside the
       native replay, not a full coverage decision or an independent full verifier.
+
+  - id: V-n108-review-max-exact
+    program: n108_audit.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: premises
+    summary: >-
+      Independently recomputes the n108 certificate's exact mass, multiplicity-preserving
+      D4 expansion and declared-net premises, checks retained source/native direction
+      inventories, and computes four saved native control poses and the source's axis
+      control pose. It checks premises and five points, not universal capture.
+    source:
+      - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-max/n108_audit.py
+    independence_record: packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-max/README.md
+    independence:
+      read: [mathematics, proof-text, specification, certificate-format, producer-code, producer-output, earlier-review]
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Codex (OpenAI)
+          setting: A separately prompted source-distinct mathematical review, strongest tier at maximum reasoning.
+      overlaps_producer:
+        extent: unknown
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The producer discloses AI assistance without identifying every system family.
+          This standard-library audit was written separately, before reading maintained
+          admission/domain code; its input adapters were corrected after those reads.
+          Findings and code were completed before the later comparison with Review B.
+          No producer code is copied, imported or executed; the review claims no clean room.
+    note: >-
+      The retained packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-max/audit.json records
+      EXACT_PREMISES_AND_FIVE_POSES_PASS. The five poses are four of 201 recorded
+      native control poses and one of 32 source control poses, not five entire
+      direction domains. The accepted bounded review is docs/project/reviews/review-2026-10-18-n108-fine-net-mathematics-max.md.

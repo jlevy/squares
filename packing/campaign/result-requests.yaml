@@ -3568,7 +3568,17 @@ issues:
       - E-wand125-fine-net-n107-1058-report
       - E-wand125-fine-net-n108-1062-report
       - E-wand125-fine-net-n110-1073-report
+      - E-wand125-fine-net-n108-1062-sqverify-fast-replay
     asks:
+    - what: Complete the maintained census, whole-net controls and certificate-specific mathematical
+        review for the other 17 fine-net lower bounds of 16 October before adopting their case lanes.
+      state: queued
+      bead: think-f40c
+      note: >-
+        n108 is adopted at 531/50 after its retained complete native replay and two accepted
+        mathematical reviews; confirmation shares the producer's verifier components. The other
+        17 remain V0/C0. The former batch-1 plan is a continuation queue, not evidence that its
+        remaining native runs are active or complete.
     - what: Replay and review the n29 candidate at 291/50 over all 2073 directions with whole-net
         controls and restored positives, from a candidate retained where the census reads it.
       state: queued

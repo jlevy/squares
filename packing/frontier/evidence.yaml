@@ -38133,18 +38133,192 @@ evidence:
       packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n108_L1062/candidate.json.gz
     replay_status: not-attempted
     verifiers: [V-wand125-sqverify-proof-net]
+    external_review:
+      state: informally-verified
+      date: '2026-10-18'
+      reviewed_by: Codex (OpenAI), separately prompted strong xhigh and strongest maximum-reasoning mathematical lanes
+      note: >-
+        docs/project/reviews/review-2026-10-18-wand125-n108-certificate-mathematics.md
+        and docs/project/reviews/review-2026-10-18-n108-fine-net-mathematics-max.md accept the
+        n108 implication and checked exact premises, with retained complete replay
+        coverage and the shared-components limitation. Neither review reran the
+        native engine or decided the other 17 certificates.
     limitations: >-
-      The author reports 531/50 at all 201 directions of the net its candidate
-      declares (step 83/40000, core 9977/10000) by sqverify-proof-net, its copy of
-      this repository's sqverify_fast, at 6af3c00, in jlevy/squares#446, in a check2
-      run (154.5 s at 8 threads) and a pre-publication run on a fresh machine (141 s).
-      Complete source-byte custody and the maintained mass, net and check2 premises
-      are accepted (receipts/premises-n108.json). The 32-direction 197/200 control
-      remains sampled. A complete capture, whole-net controls and a review that reads
-      this certificate remain pending under think-f40c, priced at about 0.59 to 0.67
-      CPU-hours. The shared crate establishes no independent implementation. No
-      standing bound or rating changes.
-    source_reviewed: '2026-10-17'
+      The author reports 531/50 at all 201 directions of the candidate's declared
+      net, by its adapted sqverify-proof-net, in a check2 run and a separate
+      pre-publication run. This source-author entry remains reported and its
+      checker was not run here. The maintained native replay is separately
+      registered as E-wand125-fine-net-n108-1062-sqverify-fast-replay. The accepted
+      certificate reviews read the retained candidate, exact premises, complete
+      replay and controls; the standard-library audit independently recomputed all
+      201 saved refusal points. The author's 32-direction 197/200 control remains
+      a sampled report. The shared crate establishes no independent full implementation.
+      The source README's control.jsonl.gz filename is a documentation error:
+      the retained manifest and release name check2/control-197_200.jsonl.gz;
+      the archived README remains unchanged and our packet records the correction.
+    source_reviewed: '2026-10-18'
+  - id: E-wand125-fine-net-n108-1062-sqverify-fast-replay
+    claim: lower-bound
+    scope: {n_values: [108]}
+    assurance: verified
+    method: interval-certified
+    performed_by: repository
+    relationship_to_generator: shared-components
+    shared_components:
+      - The sqverify_fast crate, apart from the producer's declared-net reader; sqverify-proof-net adapts this repository's crate.
+    independence:
+      coverage:
+        extent: full
+        unit: complete legal core-centre domains at every declared-net direction
+        checked: 201
+        of: 201
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+    certificate: packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n108_L1062/candidate.json.gz
+    replay: >-
+      The retained native invocation is the mixed-family sqverify_fast_census run
+      for mixed_n108_L1062, at threshold one and all 201 declared-net directions,
+      with two workers; its census row is in packing/benchmarks/measure-verifier/census-mixed/census.json,
+      and the complete direction log and whole-net control receipt are in
+      packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-2026-10-16/mixed_n108_L1062.jsonl.gz
+      and packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-2026-10-16/mixed_n108_L1062.control.json.
+      The row is VERIFIED, every direction is verified, exit 0, and the control
+      receipt is CONTROLS_REFUSED. Its reviewed source SHA-256 is
+      d97758bbc9639edc70b8bd7dc83106d4e8d1be034bacb3e88f8c539b88091c88;
+      the retained native binary SHA-256 is
+      567a0fd58f7ae4e981580f2a90bed5c92ac44fa8f3ebb442b166e93043c15ed4.
+      For the independently recomputed saved-point receipt, from the repository
+      root run PYTHONPATH=packing:packing/src packing/.venv/bin/python3 -m
+      devtools.audit_fine_net_receipt --root . --packet
+      wand125-fine-net-lower-bounds-2026-10-16 --certificate mixed_n108_L1062
+      --n 108 --side 531/50 --reviewed-source-sha256
+      d97758bbc9639edc70b8bd7dc83106d4e8d1be034bacb3e88f8c539b88091c88.
+      Its retained PASS is packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review/n108-exact-audit.json.
+      The accepted mathematical review notes retain the separate exact audit
+      invocations and limitations. This records an existing native replay;
+      the 18 October integration did not rerun it.
+    replay_status: passed
+    verifiers: [V-sqverify-fast, V-audit-fine-net-receipt]
+    proof:
+      source: packing/sqverify_fast/SOUNDNESS.md
+      theorem: >-
+        The net-and-shrink measure-capture obstruction (The Claim, Format M,
+        lemma D for the centre domain and lemma N0 for the declared net), applied
+        to mixed_n108_L1062: no 108 unit squares with disjoint interiors pack
+        in a square of side 531/50, hence s(108) >= 531/50.
+      scope: Unrestricted unit-square packing with disjoint interiors and arbitrary rotations.
+      pinpoints: >-
+        The native soundness and census-route reviews at
+        docs/project/reviews/review-2026-10-03-sqverify-fast-soundness.md,
+        docs/project/reviews/review-2026-10-05-wand125-october-5-and-independent-replays.md,
+        docs/project/reviews/review-2026-10-06-sqverify-fast-declared-net-soundness.md
+        and docs/project/reviews/review-2026-10-06-sqverify-fast-declared-net-fix-check.md;
+        the n108 certificate reviews at docs/project/reviews/review-2026-10-18-wand125-n108-certificate-mathematics.md
+        and docs/project/reviews/review-2026-10-18-n108-fine-net-mathematics-max.md; the census row and receipts named in replay.
+      assumptions:
+        - The nonnegative exact rectangle density has total mass 10799999/100000 < 108, recomputed from all 823 rows and their multiplicity-preserving D4 expansion into 6524 distinct rectangles.
+        - Every unit square contains a closed core strictly in its interior at one of 201 declared-net directions, core 9977/10000 and step 83/40000, with B(1+D) = 399908091/400000000 < 1 and final half-angle tangent 83/200 past tan(pi/8).
+        - Every legal centre is covered by format M's per-bin domain and the complete native axis sweep or interval branch-and-bound search at threshold one.
+        - The native binary, compiler and dependencies implement the directed-rounding IEEE binary64 operations used by the reviewed source.
+        - The native receipt binds retained gzip SHA-256 acaf27593b53c3472ab249805f672030e3cbd3323033641b1df1d8460ae8835b, whose decompressed bytes are the source candidate; the retained receipt faithfully records the process that wrote it.
+      audit_record: docs/project/reviews/review-2026-10-18-n108-fine-net-mathematics-max.md
+    limitations: >-
+      The retained native run decided all 201 directions, with 136113602 boxes,
+      30140100 axis vertices, least certified lower bound 1.0000000001765084,
+      and exact capture about 1.0475325246573444 at the least-bound leaf centre,
+      index 157. It used 2086.786416 CPU seconds and 1859.046492 wall seconds.
+      Its whole-net 99/100 mass control was refused at every direction; the
+      near-threshold mutant at index 157 was refused with exact capture below
+      one, and the original positive was restored and verified. The retained
+      standard-library audit recomputed all 201 saved refusal captures and
+      originals, and the source-distinct maximum-reasoning review independently
+      checked exact premises and five poses. These audits decide premises and
+      points, not universal coverage between points. That coverage rests on the
+      reviewed native census and its receipt bindings. The source's checker
+      and this replay share the sqverify_fast crate, apart from their declared-net
+      readers, so their agreement is not an independent full implementation or
+      a second method. No native replay was rerun during the 18 October review
+      or integration, and the other 17 imports receive no verdict from it.
+    source_reviewed: '2026-10-18'
+  - id: E-n108-review-max-premises
+    claim: derived-structure
+    scope: {n_values: [108]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: not-applicable
+    origin: audited-here
+    novelty: previously-published
+    source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+    certificate: packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n108_L1062/candidate.json.gz
+    replay: >-
+      From the repository root, packing/.venv/bin/python3 -I
+      packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-max/n108_audit.py --repo .
+      recomputes the exact candidate premises and prints
+      EXACT_PREMISES_AND_FIVE_POSES_PASS. The invocation and read log are retained
+      in packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-max/README.md and its stdout in packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-max/audit.json.
+      This entry covers the exact input premises and receipt inventories only.
+    replay_status: passed
+    verifiers: [V-n108-review-max-exact]
+    independence_record: packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-max/README.md
+    independence:
+      coverage:
+        extent: full
+        unit: exact mass, D4 expansion, core/net/domain premises and retained receipt inventories of this one candidate
+    limitations: >-
+      This premise-only audit records no relation to the producer's full coverage
+      decision. The program's separate authorship and read log are recorded in its
+      verifier registry entry. The maximum-reasoning review's standard-library
+      Fraction program independently
+      checks all 823 positive representatives, 6524 expanded rectangles with stabilizer
+      multiplicity, total mass 10799999/100000, the declared 201-direction net and
+      core-fit/last-bin/domain premises, and the retained logs' complete inventories.
+      Reading a complete receipt inventory is not rerunning its coverage search.
+      This is derived premise evidence; it does not prove the lower bound without
+      the separate native universal-capture decision and accepted implication.
+      The reviewer later read maintained admission/domain code and earlier reviews,
+      so the read log makes no clean-room claim; no producer code was reused.
+    source_reviewed: '2026-10-18'
+  - id: E-n108-review-max-captures
+    claim: derived-structure
+    scope: {n_values: [108]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: not-applicable
+    origin: audited-here
+    novelty: previously-published
+    source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+    certificate: packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-max/audit.json
+    replay: >-
+      The same packing/.venv/bin/python3 -I packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-max/n108_audit.py
+      --repo . invocation retained in packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-max/README.md
+      computes exact captures at native 99/100 control indices 1, 100, 157 and
+      200, and at the source's 197/200 axis control pose. All five pass, as do
+      four analytic geometry controls. It compares full rational values, with
+      adjacent decimal enclosures used only to display large fractions.
+    replay_status: passed
+    verifiers: [V-n108-review-max-exact]
+    independence_record: packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-max/README.md
+    independence:
+      coverage:
+        extent: sample
+        unit: recorded control witness poses, no whole direction domain
+        checked: 5
+        of: 233
+    limitations: >-
+      This point-only audit records no relation to the producer's full coverage
+      decision; its verifier registry entry retains the separate code/read log.
+      Four of the 201 saved native mutant witness poses and one of the 32 sampled
+      source mutant poses were independently calculated. This is five of 233
+      recorded poses, not five direction domains or a complete coverage proof.
+      The original and scaled capture calculations settle those points only.
+      The audit uses no producer code, but its author later read maintained
+      admission/domain code; the read log makes no clean-room claim. The retained
+      native replay remains shared-components confirmation and receives no
+      independent full confirmation or new rung from this sample.
+    source_reviewed: '2026-10-18'
   - id: E-wand125-fine-net-n110-1073-report
     claim: lower-bound
     scope: {n_values: [110]}

@@ -6395,7 +6395,7 @@ sources:
     and 32-direction controls do not supply a maintained capture or whole-net controls. T-210
     registers it; replay and adoption remain under think-f40c.
 - id: wand125-fine-net-n108-1062-2026-10-16
-  title: Wand125 reported n108 fine-net lower bound (#446)
+  title: Wand125 n108 fine-net lower bound (#446)
   role: source-repository
   url: https://github.com/wand125/square-packing/tree/6af3c00991c937d40ac0fe867fe049b8e9f3bf2d/problems/square-lower-bounds/certificates/mixed_n108_L1062
   local: resources/web/wand125-fine-net-lower-bounds-2026-10-16/
@@ -6403,7 +6403,7 @@ sources:
   scope:
     n_values:
     - 108
-  reviewed: '2026-10-17'
+  reviewed: '2026-10-18'
   source_date: '2026-10-16'
   disposition: current-report
   replay_disposition: case-specific
@@ -6411,11 +6411,17 @@ sources:
   - resources/web/wand125-fine-net-lower-bounds-2026-10-16/README.md
   evidence:
   - E-wand125-fine-net-n108-1062-report
-  notes: The reported 531/50 at n108 is above both lower lanes, which are unchanged. Complete
-    release-asset and document custody and the exact mass, declared-net and check2 premises are
-    accepted, and the asset's data members are retained for the census. The author's full positives
-    and 32-direction controls do not supply a maintained capture or whole-net controls. T-211
-    registers it; replay and adoption remain under think-f40c.
+  - E-wand125-fine-net-n108-1062-sqverify-fast-replay
+  notes: >-
+    The n108 case adopts 531/50 in both lower lanes after its retained complete
+    maintained sqverify-fast census and whole-net controls, with the two mapped
+    certificate-specific mathematical reviews of 18 October. The native replay
+    shares the producer's verifier components. Separate exact audits check the
+    premises and saved poses; neither establishes independent full coverage.
+    No fresh native run was made during this review/integration. The archived
+    source README's control-log filename is preserved; the first-party packet
+    identifies check2/control-197_200.jsonl.gz from the retained manifest.
+    The other 17 fine-net imports remain reported at V0/C0 under think-f40c.
 - id: wand125-fine-net-n110-1073-2026-10-16
   title: Wand125 reported n110 fine-net lower bound (#446)
   role: source-repository
