@@ -28727,9 +28727,9 @@ results:
         no new technique, at S3 as T-176 to T-178 are.
       scored: '2026-10-18'
       by: >-
-        docs/project/reviews/review-2026-10-18-wand125-n108-certificate-mathematics.md
-        and docs/project/reviews/review-2026-10-18-n108-fine-net-mathematics-max.md;
-        the separately prompted certificate reviews confirm the registering lane's S3
+        docs/project/reviews/review-2026-10-18-wand125-n108-certificate-mathematics.md;
+        Review B confirms the registering lane's S3. Review C accepts the bounded
+        mathematics and does not assess significance.
     novelty: previously-published
     attribution:
       source_keys: ['[wand125 fine-net lower bounds 2026-10-16]']

@@ -196,7 +196,7 @@ results, it is a statement about what this repository has itself examined.
 | `E-n029-interval-certified-upper` | 0 | upper-bound | verified | strict inequalities only | here | - | apparently-novel | independent | not recorded | `V-sqpack-verify` |
 | `E-n029-schadt-rational-upper` | 0 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel | independent | not recorded | `V-check-rational-witness-independent` |
 | `E-translation-escape-not-rigid` | 303 | derived-structure | numerically-checked | nothing formally; a measurement at a tolerance | here | - | apparently-novel | producer’s code | not recorded | `V-screen-translation-escape` |
-| `E-perfect-square-tiling-rigid` | 18 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | common-knowledge | no code | not recorded | `V-assess-frontier-rigidity` |
+| `E-perfect-square-tiling-rigid` | 18 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | common-knowledge | not applicable | not recorded | `V-assess-frontier-rigidity` |
 | `E-bentz46-theorem8-audit` | 1 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published | independent | not recorded | `V-sqpack-cover` |
 | `E-bentz13-figure2-audit` | 0 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | previously-published | independent | not recorded | `V-sqpack-cover` |
 | `E-green17-sixteen-point-lower` | 0 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel | producer’s code | not recorded | `V-sqpack-cover` |
@@ -226,11 +226,11 @@ results, it is a statement about what this repository has itself examined.
 | `E-n012-levy-15680000-3949423-generator` | 0 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel | producer’s code | not recorded | `V-evand-angle-net-verify` |
 | `E-n012-levy-15680000-3949423-source-replay` | 0 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel | producer’s code | not recorded | `V-evand-angle-net-verify` |
 | `E-n012-levy-15680000-3949423-native-parent-core` | 0 | lower-bound | verified | strict inequalities only | here | - | apparently-novel | independent | not recorded | `V-sqpack-parent-core-native` |
-| `E-n012-levy-15680000-3949423-audit` | 0 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | apparently-novel | no code | not recorded | `V-audit-s12-reweighted` |
+| `E-n012-levy-15680000-3949423-audit` | 0 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | apparently-novel | not applicable | not recorded | `V-audit-s12-reweighted` |
 | `E-n012-squarepacker-7943-2000-report` | 1 | lower-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | `V-evand-angle-net-verify`, `V-squarepacker-indep-check-cpp` |
 | `E-n012-squarepacker-7943-2000-source-replay` | 1 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published | producer’s code | not recorded | `V-evand-angle-net-verify`, `V-squarepacker-indep-check-cpp` |
 | `E-n012-squarepacker-7943-2000-native-parent-core` | 1 | lower-bound | verified | strict inequalities only | here | - | previously-published | independent | not recorded | `V-sqpack-parent-core-native` |
-| `E-n012-squarepacker-7943-2000-audit` | 0 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | previously-published | no code | not recorded | `V-audit-s12-v11` |
+| `E-n012-squarepacker-7943-2000-audit` | 0 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | previously-published | not applicable | not recorded | `V-audit-s12-v11` |
 | `E-n021-evand-5000-1001-report` | 0 | lower-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | `V-evand-angle-net-verify`, `V-evand-xcheck-py` |
 | `E-n021-evand-5000-1001-source-replay` | 0 | lower-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | producer’s code | not recorded | `V-evand-angle-net-verify`, `V-evand-xcheck-py` |
 | `E-n013-evand-casefree-cover-report` | 0 | lower-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | `V-evand-zeromargin-py`, `V-evand-zmcheck` |
@@ -655,8 +655,8 @@ results, it is a statement about what this repository has itself examined.
 | `E-wand125-fine-net-n107-1058-report` | 0 | lower-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | `V-wand125-sqverify-proof-net` |
 | `E-wand125-fine-net-n108-1062-report` | 1 | lower-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | `V-wand125-sqverify-proof-net` |
 | `E-wand125-fine-net-n108-1062-sqverify-fast-replay` | 1 | lower-bound | verified | strict inequalities only | here | - | previously-published | shared components | full, 201 of 201: complete legal core-centre domains at every declared-net direction | `V-sqverify-fast`, `V-audit-fine-net-receipt` |
-| `E-n108-review-max-premises` | 0 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | previously-published | no code | full: exact mass, D4 expansion, core/net/domain premises and retained receipt inventories of this one candidate | `V-n108-review-max-exact` |
-| `E-n108-review-max-captures` | 0 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | previously-published | no code | sample, 5 of 233: recorded control witness poses, no whole direction domain | `V-n108-review-max-exact` |
+| `E-n108-review-max-premises` | 0 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | previously-published | not applicable | full: exact mass, D4 expansion, core/net/domain premises and retained receipt inventories of this one candidate | `V-n108-review-max-exact` |
+| `E-n108-review-max-captures` | 0 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | previously-published | not applicable | sample, 5 of 233: recorded control witness poses, no whole direction domain | `V-n108-review-max-exact` |
 | `E-wand125-fine-net-n110-1073-report` | 0 | lower-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | `V-wand125-sqverify-proof-net` |
 
 ## What the register rests on

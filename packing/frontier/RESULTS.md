@@ -1399,9 +1399,9 @@ The programs behind each result, by its cited evidence: who ran each check, how 
   - `E-wand125-fine-net-n107-1058-report`, the source’s own run: `V-wand125-sqverify-proof-net` (external)
 - **T-211** — confirmed, re-implemented, sharing the producer’s components
   - `E-wand125-fine-net-n108-1062-report`, the source’s own run: `V-wand125-sqverify-proof-net` (external)
-  - `E-wand125-fine-net-n108-1062-sqverify-fast-replay`, replayed here, re-implemented, sharing named components: `V-sqverify-fast` (first-party); `V-audit-fine-net-receipt` (first-party, premises)
-  - `E-n108-review-max-premises`, audited here, independently re-implemented; full: exact mass, D4 expansion, core/net/domain premises and retained receipt inventories of this one candidate: `V-n108-review-max-exact` (first-party, premises)
-  - `E-n108-review-max-captures`, audited here, independently re-implemented; sample, 5 of 233: recorded control witness poses, no whole direction domain: `V-n108-review-max-exact` (first-party, premises)
+  - `E-wand125-fine-net-n108-1062-sqverify-fast-replay`, replayed here, re-implemented, sharing named components; full, 201 of 201: complete legal core-centre domains at every declared-net direction: `V-sqverify-fast` (first-party); `V-audit-fine-net-receipt` (first-party, premises)
+  - `E-n108-review-max-premises`, audited here; full: exact mass, D4 expansion, core/net/domain premises and retained receipt inventories of this one candidate: `V-n108-review-max-exact` (first-party, premises)
+  - `E-n108-review-max-captures`, audited here; sample, 5 of 233: recorded control witness poses, no whole direction domain: `V-n108-review-max-exact` (first-party, premises)
 - **T-212** — recorded
   - `E-wand125-fine-net-n110-1073-report`, the source’s own run: `V-wand125-sqverify-proof-net` (external)
 

@@ -1478,7 +1478,7 @@ Decides rigidity for the perfect square tilings among the frontier cases.
 
 | evidence | run | code | coverage | results |
 | --- | --- | --- | --- | --- |
-| `E-perfect-square-tiling-rigid` | replayed here | no code | not recorded | - |
+| `E-perfect-square-tiling-rigid` | replayed here | not applicable | not recorded | - |
 
 ### `V-trump11-tangent-cones`
 
@@ -2609,7 +2609,7 @@ Decides everything the re-weighted s(12) certificate rests on but coverage, in i
 
 | evidence | run | code | coverage | results |
 | --- | --- | --- | --- | --- |
-| `E-n012-levy-15680000-3949423-audit` | audited here | no code | not recorded | T-079 |
+| `E-n012-levy-15680000-3949423-audit` | audited here | not applicable | not recorded | T-079 |
 
 ### `V-audit-s12-v11`
 
@@ -2623,7 +2623,7 @@ Decides everything squarepacker's v1.1 s(12) certificate rests on but coverage, 
 
 | evidence | run | code | coverage | results |
 | --- | --- | --- | --- | --- |
-| `E-n012-squarepacker-7943-2000-audit` | audited here | no code | not recorded | T-095 |
+| `E-n012-squarepacker-7943-2000-audit` | audited here | not applicable | not recorded | T-095 |
 
 ### `V-compare-evand-s32-sweep`
 
@@ -3310,8 +3310,8 @@ Independently recomputes the n108 certificate's exact mass, multiplicity-preserv
 
 | evidence | run | code | coverage | results |
 | --- | --- | --- | --- | --- |
-| `E-n108-review-max-premises` | audited here | no code | full: exact mass, D4 expansion, core/net/domain premises and retained receipt inventories of this one candidate | T-211 |
-| `E-n108-review-max-captures` | audited here | no code | sample, 5 of 233: recorded control witness poses, no whole direction domain | T-211 |
+| `E-n108-review-max-premises` | audited here | not applicable | full: exact mass, D4 expansion, core/net/domain premises and retained receipt inventories of this one candidate | T-211 |
+| `E-n108-review-max-captures` | audited here | not applicable | sample, 5 of 233: recorded control witness poses, no whole direction domain | T-211 |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
