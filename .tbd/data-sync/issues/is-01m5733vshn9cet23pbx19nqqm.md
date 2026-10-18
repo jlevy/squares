@@ -3,15 +3,19 @@ type: is
 id: is-01m5733vshn9cet23pbx19nqqm
 title: "Import evand: s(229) ≤ 15.650163254859: registration request (#674)"
 kind: task
-status: open
+status: in_progress
 priority: 2
-version: 1
+version: 2
+delegate: claude-code@spud10.local
 labels:
   - result-import
 dependencies: []
 parent_id: is-01m572ssbx1x412zpvsw1sb6je
+hold: null
+hold_until: null
 created_at: 2026-10-18T08:47:37.776Z
-updated_at: 2026-10-18T08:47:37.776Z
+updated_at: 2026-10-18T12:48:51.615Z
+started_at: 2026-10-18T12:48:51.614Z
 ---
 W1 intake 2026-10-18, parent think-xmxb. https://github.com/jlevy/squares/issues/674
 Source pins in author report: 
