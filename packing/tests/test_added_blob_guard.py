@@ -2,8 +2,13 @@
 
 from __future__ import annotations
 
+import signal
 import subprocess
+import sys
+import time
+from collections.abc import Sequence
 from pathlib import Path
+from typing import Any, cast
 
 import pytest
 
@@ -316,6 +321,52 @@ def test_a_range_too_long_says_so_rather_than_asking_for_a_fetch(
         tool.inventory(path, base)
     assert "not a commit" not in str(refusal.value)
     assert f"more than {100 / 1024**2:g} MiB" in str(refusal.value)
+
+
+@pytest.mark.pool_heavy
+@pytest.mark.parametrize(("descriptor", "output_size"), [(1, 65), (2, 65), (1, 0)])
+def test_metadata_capture_kills_and_reaps_on_excess_or_timeout(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, descriptor: int, output_size: int
+) -> None:
+    """C1: a tiny byte cap or deadline stops a child before its final output."""
+    real_popen = subprocess.Popen
+    children: list[subprocess.Popen[bytes]] = []
+    code = (
+        "import os, signal, sys\n"
+        "descriptor = int(sys.argv[1])\n"
+        "os.write(3 - descriptor, b'ok')\n"
+        "os.write(descriptor, b'x' * int(sys.argv[2]))\n"
+        "signal.pause()\n"
+        "os.write(descriptor, b'finished')\n"
+    )
+
+    def start_git(_arguments: Sequence[str], **kwargs: Any) -> subprocess.Popen[bytes]:
+        child = cast(
+            "subprocess.Popen[bytes]",
+            real_popen(
+                [sys.executable, "-c", code, str(descriptor), str(output_size)],
+                text=False,
+                **kwargs,
+            ),
+        )
+        children.append(child)
+        return child
+
+    monkeypatch.setattr(tool.subprocess, "Popen", start_git)
+    monkeypatch.setattr(tool, "MAX_METADATA_BYTES", 64)
+    monkeypatch.setattr(tool, "MAX_QUERY_SECONDS", 5 if output_size else 0.1)
+    message = "too long for this gate" if output_size else "query exceeded"
+    with pytest.raises(tool.MetadataError, match=message):
+        # A child that does not read its input must not block output enforcement.
+        tool._git(  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+            tmp_path, "fixture", deadline=time.monotonic() + 10, data=bytes(256 * 1024)
+        )
+    assert len(children) == 1
+    assert children[0].returncode == -signal.SIGKILL
+    assert all(
+        pipe is not None and pipe.closed
+        for pipe in (children[0].stdin, children[0].stdout, children[0].stderr)
+    )
 
 
 def test_exact_byte_boundaries_and_one_byte_excess() -> None:

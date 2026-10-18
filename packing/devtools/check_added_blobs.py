@@ -39,6 +39,8 @@ from __future__ import annotations
 import argparse
 import os
 import re
+import select
+import selectors
 import subprocess
 import sys
 import time
@@ -52,6 +54,7 @@ from sqpack.yamlio import load_yaml
 
 POLICY = Path(__file__).with_name("added-blobs.yaml")
 MAX_METADATA_BYTES = 64 * 1024**2
+METADATA_READ_BYTES = 64 * 1024
 MAX_SECONDS = 30
 MAX_QUERY_SECONDS = 10
 # The LFS specification keeps pointers small; git-lfs never reads a larger blob as one.
@@ -132,16 +135,78 @@ def load_ceilings(path: Path | None = None) -> Ceilings:
     return Ceilings(per_blob, total)
 
 
+def _capture_git(
+    child: subprocess.Popen[bytes], *, deadline: float, data: bytes | None
+) -> tuple[bytes, bytes]:
+    """Drain both output pipes while feeding stdin, retaining at most each byte cap."""
+    assert child.stdout is not None
+    assert child.stderr is not None
+    stdout, stderr = child.stdout.fileno(), child.stderr.fileno()
+    output = {stdout: bytearray(), stderr: bytearray()}
+    pending = memoryview(data or b"")
+    with selectors.DefaultSelector() as selector:
+        for descriptor in output:
+            os.set_blocking(descriptor, False)
+            selector.register(descriptor, selectors.EVENT_READ)
+        if child.stdin is not None:
+            if pending:
+                descriptor = child.stdin.fileno()
+                os.set_blocking(descriptor, False)
+                selector.register(descriptor, selectors.EVENT_WRITE)
+            else:
+                child.stdin.close()
+        while selector.get_map():
+            remaining = deadline - time.monotonic()
+            if remaining <= 0:
+                raise subprocess.TimeoutExpired(child.args, MAX_QUERY_SECONDS)
+            ready = selector.select(remaining)
+            if time.monotonic() >= deadline:
+                raise subprocess.TimeoutExpired(child.args, MAX_QUERY_SECONDS)
+            for key, _events in ready:
+                if key.fd in output:
+                    buffer = output[key.fd]
+                    # The extra byte detects excess without ever retaining excess output.
+                    chunk = os.read(
+                        key.fd, min(METADATA_READ_BYTES, MAX_METADATA_BYTES + 1 - len(buffer))
+                    )
+                    if not chunk:
+                        selector.unregister(key.fd)
+                        continue
+                    if len(buffer) + len(chunk) > MAX_METADATA_BYTES:
+                        raise MetadataError(
+                            "one Git query returned more than "
+                            f"{MAX_METADATA_BYTES / 1024**2:g} "
+                            "MiB: the range is too long for this gate and nothing is missing "
+                            "to fetch, so check a shorter range "
+                            "(the inventory was not truncated)"
+                        )
+                    buffer.extend(chunk)
+                else:
+                    assert child.stdin is not None
+                    try:
+                        written = os.write(key.fd, pending[: select.PIPE_BUF])
+                    except BrokenPipeError:
+                        pending = memoryview(b"")
+                    else:
+                        pending = pending[written:]
+                    if not pending:
+                        selector.unregister(key.fd)
+                        child.stdin.close()
+        child.wait(timeout=max(0, deadline - time.monotonic()))
+    return bytes(output[stdout]), bytes(output[stderr])
+
+
 def _git(repo: Path, *arguments: str, deadline: float, data: bytes | None = None) -> bytes:
     remaining = deadline - time.monotonic()
     if remaining <= 0:
         raise MetadataError(f"Git metadata protocol exceeded {MAX_SECONDS} seconds")
+    query_deadline = min(deadline, time.monotonic() + MAX_QUERY_SECONDS)
     environment = dict(os.environ)
     environment.update(
         GIT_NO_LAZY_FETCH="1", GIT_NO_REPLACE_OBJECTS="1", GIT_TERMINAL_PROMPT="0"
     )
     try:
-        result = subprocess.run(
+        with subprocess.Popen(
             [
                 "git",
                 "--no-pager",
@@ -155,28 +220,28 @@ def _git(repo: Path, *arguments: str, deadline: float, data: bytes | None = None
             ],
             cwd=repo,
             env=environment,
-            input=data,
-            capture_output=True,
-            timeout=min(remaining, MAX_QUERY_SECONDS),
-            check=False,
-        )
+            stdin=subprocess.PIPE if data is not None else None,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            bufsize=0,
+        ) as child:
+            try:
+                stdout, stderr = _capture_git(child, deadline=query_deadline, data=data)
+            finally:
+                if child.poll() is None:
+                    child.kill()
+                child.wait()
     except subprocess.TimeoutExpired as error:
         raise MetadataError(
             f"Git metadata query exceeded {MAX_QUERY_SECONDS} seconds"
         ) from error
     except OSError as error:
         raise MetadataError(f"Git metadata unavailable: {error}") from error
-    if result.returncode:
-        raise GitExitError(result.stderr[:300].decode("utf-8", errors="replace").strip())
-    if len(result.stdout) > MAX_METADATA_BYTES or len(result.stderr) > MAX_METADATA_BYTES:
-        raise MetadataError(
-            f"one Git query returned more than {MAX_METADATA_BYTES / 1024**2:g} MiB: the "
-            "range is too long for this gate and nothing is missing to fetch, so check a "
-            "shorter range (the inventory was not truncated)"
-        )
+    if child.returncode:
+        raise GitExitError(stderr[:300].decode("utf-8", errors="replace").strip())
     if time.monotonic() >= deadline:
         raise MetadataError(f"Git metadata protocol exceeded {MAX_SECONDS} seconds")
-    return result.stdout
+    return stdout
 
 
 def _commit(repo: Path, revision: str, deadline: float) -> str:
