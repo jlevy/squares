@@ -213,7 +213,10 @@ reported lower lane is approximately 10.484093855851, below 10.62, and this is a
 improvement using an existing certificate kind and net, without an optimality or new
 method claim. This assessment applies only to n108.
 
-## Reproducing the Exact Audit
+## Original Review B Invocation
+
+The invocation below preserves the review’s original run.
+For the current tool, use the command in the dated engineering correction below.
 
 The retained tool accepts an evidence-tree path, packet, certificate, claimed count and
 side, and the source identity accepted by the existing native soundness review.
@@ -250,6 +253,39 @@ uv run --frozen --group dev pytest -q tests/test_audit_fine_net_receipt.py \
   -o cache_dir="$TMPDIR/pytest-cache" \
   -o tmp_path_retention_policy=failed -o tmp_path_retention_count=1
 ```
+
+## Engineering Correction, 18 October 2026
+
+The original invocation and source-digest comparison above record what Review B ran.
+The integration push gate later identified that acceptance condition as an OR-16
+violation: a saved-point audit must not refuse because this repository’s current
+verifier source changed.
+The current tool removes the source reader and `--reviewed-source-sha256` argument,
+without substituting a Git-revision gate.
+The formal Review B verdict remains pinned to its original reviewed head; this
+engineering correction does not widen it.
+
+The audit still binds the downloaded candidate bytes to the census, complete direction
+log and control inputs, joins the generated binary identity across census and controls,
+and requires their complete historical build objects to agree.
+The output field `recorded_native_source_sha256` reports the build receipt’s historical
+metadata; it does not check the current crate.
+The reviewed implementation and revision remain identified in the retained mathematical
+and soundness reviews.
+No native replay was rerun and the mathematical result’s assurance is unchanged.
+
+Current reproduction, from `packing/`:
+
+```bash
+uv run --frozen --group dev python -m devtools.audit_fine_net_receipt \
+  --root .. --packet wand125-fine-net-lower-bounds-2026-10-16 \
+  --certificate mixed_n108_L1062 --n 108 --side 531/50
+```
+
+The refreshed `review/n108-exact-audit.json` reports this engineering run.
+Its historical pre-correction version remains in Git.
+Focused controls also exercise an absent current crate, an unrelated edited crate, and
+mismatched historical build objects.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

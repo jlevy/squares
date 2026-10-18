@@ -1176,6 +1176,86 @@ def _body(text: str) -> str:
     return adopt.history_words(text.split("---\n", 2)[2])
 
 
+N108_LOWER_INTRO = r"""**Fine-net lower bound, 18 October 2026.** The certificate
+`mixed_n108_L1062`, published by wand125 on 16 October, raises both lower lanes to
+$s(108) \ge 531/50 = 10.62$. Its exact nonnegative rectangle measure has total mass
+$10799999/100000 < 108$. The retained maintained `sqverify-fast` census verifies capture
+at every centre in all 201 declared-net directions, and its whole-net control receipt
+refuses the scaled mutants. The two accepted mathematical reviews check the
+certificate’s implication and premises; the separate exact audits check saved points.
+No native verifier was rerun during those reviews or this adoption. The producer’s
+checker and the maintained replay share `sqverify_fast` components, so this is shared
+component confirmation. It establishes neither independent full confirmation nor
+optimality. The upper lanes remain unchanged."""
+
+N108_CURRENT_LOWER = r"""The current verified lower bound is $s(108) \ge 531/50 = 10.62$,
+from Hiroaki Hosono’s fine-net measure and the maintained replay described above. That
+confirmation shares the producer’s verifier components."""
+
+
+def _n108_later_lower_projection(held: dict[str, Any], wrote: dict[str, Any], body: str) -> str:
+    """Check the exact later n108 lower adoption, then compare the earlier house layer."""
+    assert held["source_reviewed"] == "2026-10-18"
+    assert held["reported_lower_bound"]["exact_form"] == "531/50"
+    assert held["verified_lower_bound"] == {
+        "value": "10.62",
+        "exact_form": "531/50",
+        "evidence": ["E-wand125-fine-net-n108-1062-sqverify-fast-replay"],
+    }
+    assert held["evidence"] == [
+        *wrote["evidence"],
+        "E-wand125-fine-net-n108-1062-report",
+        "E-wand125-fine-net-n108-1062-sqverify-fast-replay",
+        "E-n108-review-max-premises",
+        "E-n108-review-max-captures",
+    ]
+    assert held["resources"] == [
+        *wrote["resources"],
+        {
+            "key": "[wand125 fine-net lower bounds 2026-10-16]",
+            "role": "lower-bound-proof",
+            "local": "packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16",
+            "url": (
+                "https://github.com/wand125/square-packing/tree/"
+                "6af3c00991c937d40ac0fe867fe049b8e9f3bf2d/problems/"
+                "square-lower-bounds/certificates/mixed_n108_L1062"
+            ),
+            "retrieved": True,
+        },
+    ]
+    for key in ("source_reviewed", "evidence", "resources"):
+        held[key] = wrote[key]
+    for addition in (N108_LOWER_INTRO, N108_CURRENT_LOWER):
+        words = _flat(addition)
+        assert body.count(words) == 1
+        body = body.replace(words, "", 1)
+    # Only these explicit historical adjustments accompany the lower adoption.
+    for current, prior in (
+        ("so the reported lower bound here was", "so the reported lower bound here is now"),
+        (
+            "no record of it has been replayed here; it remains a historical reported bound.",
+            "no record of it has been replayed here, so the verified lower bound is unchanged.",
+        ),
+        (
+            "Karakuş’s general bound supplied the earlier verified lower bound. It applies",
+            (
+                "The strongest lower bound independently verified in this record is "
+                "Karakuş’s general bound, which applies"
+            ),
+        ),
+        (
+            (
+                "which stood above that earlier Karakuş bound and was recorded "
+                "as a reported bound."
+            ),
+            "which is stronger at this $n$ and is now recorded as a reported bound.",
+        ),
+    ):
+        assert body.count(current) == 1
+        body = body.replace(current, prior, 1)
+    return _flat(body)
+
+
 def test_the_writer_rebuilds_every_adopted_record_from_its_prior_state(
     replayed: list[adopt.Move],
 ) -> None:
@@ -1188,24 +1268,28 @@ def test_the_writer_rebuilds_every_adopted_record_from_its_prior_state(
     record the earlier pass left (`adopt_houses.before_last_pass`). A writer that ran
     after the adoption is replayed after it: `apply_closed_form`, of 14 October 2026,
     raises the reported lower lane, adds its evidence, resource and paragraph, and moves
-    `source_reviewed` no earlier.
+    `source_reviewed` no earlier. The later n108 fine-net lower adoption is checked
+    explicitly and projected out before this historical upper-layer comparison.
     """
     assert [move.n for move in replayed] == sorted(houses.ADOPTED)
     for move in replayed:
         assert move.house.result == houses.ADOPTED[move.n]
         committed = select.case_path(move.n).read_text(encoding="utf-8")
-        # The closed form's paragraph stays directly under the title, ahead of any later
-        # pass's (`apply_closed_form --check` holds that), so its replay follows every
-        # pass, the 15 October one too, which read records it had already raised.
+        # The closed-form paragraph precedes the house-adoption paragraphs; n108's
+        # later fine-net introduction precedes it. Its historical replay follows each
+        # pass, including 15 October, which read records it had already raised.
         written = closed_form.replay(move.n, adopt.rewrite(move))
         held, wrote = _front(committed), _front(written)
+        historical_body = _body(committed)
+        if move.n == 108:
+            historical_body = _n108_later_lower_projection(held, wrote, historical_body)
         for key in OWNED:
             assert held.get(key) == wrote.get(key), f"n={move.n}: packing.{key}"
         body = _flat(committed.split("---\n", 2)[2])
         assert _flat(adopt.opening(move)) in body, f"n={move.n}: opening paragraph"
         assert _flat(adopt.section(move)) in body, f"n={move.n}: certificate section"
         if move.n not in adopt.HAND_MARKED:
-            assert _body(committed) == _body(written), f"n={move.n}: the body as history"
+            assert historical_body == _body(written), f"n={move.n}: the body as history"
 
 
 #: A synthetic later pass, its review and its source: n = 84 adopted again after T-130.

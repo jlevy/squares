@@ -6,7 +6,7 @@ and a v2 control receipt whose 99/100 mutant refuses at every direction. Exact p
 clipping recomputes every saved control capture. It neither runs the native verifier nor
 proves coverage between points; PASS is not a universal coverage or registry verdict.
 
-Run with --help for the required case and reviewed-source identity parameters. Rational
+Run with --help for the required case parameters. Rational
 strings have their literal values; numeric receipt coordinates denote binary64 values,
 as in the maintained control writer. No commit or result number enters the verdict.
 """
@@ -237,21 +237,6 @@ def check_direction_log(rows: list[dict[str, Any]], count: int) -> dict[str, Any
     return summary
 
 
-def source_digest(crate: Path) -> str:
-    """Reproduce the source identity protocol in the maintained crate's build.rs."""
-    require((crate / "src").is_dir(), "maintained crate source directory missing")
-    names = [
-        "Cargo.toml",
-        "Cargo.lock",
-        "build.rs",
-        *sorted(str(path.relative_to(crate)) for path in (crate / "src").glob("*.rs")),
-    ]
-    digest = hashlib.sha256()
-    for name in names:
-        digest.update(name.encode() + b"\0" + (crate / name).read_bytes() + b"\0")
-    return digest.hexdigest()
-
-
 def check_bindings(
     measure: Measure,
     summary: dict[str, Any],
@@ -259,8 +244,8 @@ def check_bindings(
     control: dict[str, Any],
     *,
     candidate_sha: str,
-    native_sha: str,
 ) -> None:
+    # Bind downloaded candidate bytes to the retained runtime inputs, not Git source.
     require(
         candidate_sha
         == entry["candidate_sha256"]
@@ -278,6 +263,7 @@ def check_bindings(
         rational(entry["threshold"]) == rational(summary["threshold"]) == 1,
         "summary threshold differs",
     )
+    # The build product has no Git identity; coverage and controls must name one binary.
     require(
         entry["binary_sha256"] == control["binary_sha256"], "control binary identity differs"
     )
@@ -307,7 +293,6 @@ def check_bindings(
     for key, value in fields.items():
         require(premises[key] == value, f"premise differs: {key}")
     require(summary["build"] == entry["build"] == control["build"], "build identities differ")
-    require(summary["build"]["source_sha256"] == native_sha, "native source identity differs")
     require(summary["build"]["profile"] == "release", "receipt is not from a release build")
     require(
         control["n"] == measure.n and rational(control["L"]) == measure.side,
@@ -451,7 +436,6 @@ def audit(
     n: int,
     side: Fraction,
     *,
-    reviewed_source: str,
     seconds: float,
 ) -> dict[str, Any]:
     started = time.monotonic()
@@ -491,17 +475,8 @@ def audit(
         control["packet"] == packet and control["certificate"] == certificate,
         "control case differs",
     )
-    candidate_sha, native_sha = (
-        hashlib.sha256(raw).hexdigest(),
-        source_digest(root / "packing/sqverify_fast"),
-    )
-    require(
-        native_sha == reviewed_source,
-        "source does not match the independently reviewed identity",
-    )
-    check_bindings(
-        measure, summary, entry, control, candidate_sha=candidate_sha, native_sha=native_sha
-    )
+    candidate_sha = hashlib.sha256(raw).hexdigest()
+    check_bindings(measure, summary, entry, control, candidate_sha=candidate_sha)
     results = check_controls(measure, entry, control, started + seconds)
     check_deadline(started + seconds)
     return {
@@ -523,7 +498,8 @@ def audit(
             measure.core * (1 + measure.step / (1 - measure.step**2 / 4))
         ),
         "candidate_gzip_sha256": candidate_sha,
-        "native_source_sha256": native_sha,
+        "recorded_native_source_sha256": summary["build"]["source_sha256"],
+        "source_identity_scope": "historical receipt metadata; current crate source not read",
         **results,
         "coverage_replay": "not run; retained complete native receipt inspected",
         "seconds": round(time.monotonic() - started, 3),
@@ -540,11 +516,6 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--n", type=int, required=True)
     parser.add_argument("--side", type=Fraction, required=True)
     parser.add_argument(
-        "--reviewed-source-sha256",
-        required=True,
-        help="identity from the independent native soundness review",
-    )
-    parser.add_argument(
         "--seconds",
         type=float,
         default=300,
@@ -558,7 +529,6 @@ def main(argv: Sequence[str] | None = None) -> int:
             args.certificate,
             args.n,
             args.side,
-            reviewed_source=args.reviewed_source_sha256,
             seconds=args.seconds,
         )
     except (

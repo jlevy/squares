@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import gzip
+import hashlib
 import json
 import subprocess
 import sys
@@ -220,8 +222,6 @@ def test_optimized_cli_still_rejects_invalid_case_name(tmp_path: Path) -> None:
             "4",
             "--side",
             "2",
-            "--reviewed-source-sha256",
-            "unused",
         ],
         capture_output=True,
         text=True,
@@ -233,8 +233,7 @@ def test_optimized_cli_still_rejects_invalid_case_name(tmp_path: Path) -> None:
     assert "single path components" in completed.stderr
 
 
-@pytest.mark.parametrize("defect", ["candidate", "source", "binary", "threshold", "mass"])
-def test_receipt_bindings_reject_forged_identity_or_premises(defect: str) -> None:
+def binding_receipts() -> tuple[audit.Measure, dict[str, Any], dict[str, Any], dict[str, Any]]:
     measure = audit.candidate_measure(candidate(), 4, Fraction(2))
     premises: dict[str, Any] = {
         "input_sha256": "candidate",
@@ -275,23 +274,80 @@ def test_receipt_bindings_reject_forged_identity_or_premises(defect: str) -> Non
         "L": "2",
         "binary_sha256": "binary",
     }
-    audit.check_bindings(
-        measure, summary, entry, control, candidate_sha="candidate", native_sha="source"
-    )
+    return measure, summary, entry, control
+
+
+@pytest.mark.parametrize("defect", ["candidate", "build", "binary", "threshold", "mass"])
+def test_receipt_bindings_reject_forged_identity_or_premises(defect: str) -> None:
+    measure, summary, entry, control = binding_receipts()
+    audit.check_bindings(measure, summary, entry, control, candidate_sha="candidate")
     if defect == "candidate":
         control["candidate_sha256"] = "other"
-    elif defect == "source":
-        build["source_sha256"] = "other"
+    elif defect == "build":
+        control["build"] = {**control["build"], "source_sha256": "other"}
     elif defect == "binary":
         control["binary_sha256"] = "other"
     elif defect == "threshold":
         summary["threshold"] = "99/100"
     else:
-        premises["mass_exact"] = "2"
+        summary["premises"]["mass_exact"] = "2"
     with pytest.raises(audit.AuditError):
-        audit.check_bindings(
-            measure, summary, entry, control, candidate_sha="candidate", native_sha="source"
-        )
+        audit.check_bindings(measure, summary, entry, control, candidate_sha="candidate")
+
+
+@pytest.mark.parametrize("crate_present", [False, True])
+def test_point_audit_reads_historical_receipts_without_gating_current_crate(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, *, crate_present: bool
+) -> None:
+    """Current source is neither needed nor admitted by the saved-point audit."""
+    _, summary, entry, control = binding_receipts()
+    packet, certificate = "packet", "certificate"
+    raw = gzip.compress(json.dumps(candidate()).encode(), mtime=0)
+    candidate_path = (
+        tmp_path
+        / "packing/resources/web"
+        / packet
+        / "release/certificates"
+        / certificate
+        / "candidate.json.gz"
+    )
+    candidate_path.parent.mkdir(parents=True)
+    candidate_path.write_bytes(raw)
+    candidate_identity = hashlib.sha256(raw).hexdigest()
+    entry.update(packet=packet, certificate=certificate, candidate_sha256=candidate_identity)
+    control.update(packet=packet, certificate=certificate, candidate_sha256=candidate_identity)
+    summary["premises"]["input_sha256"] = candidate_identity
+    base = tmp_path / "packing/benchmarks/measure-verifier/census-mixed"
+    (base / packet).mkdir(parents=True)
+    (base / "census.json").write_text(json.dumps({"cases": {certificate: entry}}))
+    rows = direction_log()
+    rows[-1].update(summary)
+    (base / packet / f"{certificate}.jsonl.gz").write_bytes(
+        gzip.compress(b"\n".join(json.dumps(row).encode() for row in rows), mtime=0)
+    )
+    (base / packet / f"{certificate}.control.json").write_text(json.dumps(control))
+    if crate_present:
+        current_source = tmp_path / "packing/sqverify_fast/src/certificate.rs"
+        current_source.parent.mkdir(parents=True)
+        current_source.write_text("current unreviewed checkout edits are not audit inputs")
+
+    # Geometry and refusal arithmetic have analytic tests above; isolate source custody.
+    def skip_point_evaluation(
+        _measure: audit.Measure,
+        _entry: dict[str, Any],
+        _control: dict[str, Any],
+        _deadline: float,
+    ) -> dict[str, Any]:
+        return {}
+
+    monkeypatch.setattr(audit, "check_controls", skip_point_evaluation)
+    result = audit.audit(tmp_path, packet, certificate, 4, Fraction(2), seconds=10)
+    assert result["status"] == "PASS"
+    assert result["recorded_native_source_sha256"] == "source"
+    assert (
+        result["source_identity_scope"]
+        == "historical receipt metadata; current crate source not read"
+    )
 
 
 @pytest.mark.parametrize("index", [0, 157])

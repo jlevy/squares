@@ -159,9 +159,12 @@ def test_only_the_named_lemma_entries_rest_on_no_census_row() -> None:
 def cited() -> dict[str, str]:
     """Each evidence entry that `V-sqverify-fast` decides a bound for, by the census
     certificate it names; the lemma entries (`LEMMA_ENTRIES`) rest on no census row."""
+    # The current record uses repository-relative paths; older evidence entries
+    # retain their packing-relative spelling. Both must identify the same census case.
     by_path = {
-        str(case.candidate.relative_to(census.PROJECT)): name
+        str(case.candidate.relative_to(root)): name
         for name, case in {**cases(), **rectangle_cases()}.items()
+        for root in (census.PROJECT.parent, census.PROJECT)
     }
     found: dict[str, str] = {}
     for ident, entry in decided().items():

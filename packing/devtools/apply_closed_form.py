@@ -21,10 +21,11 @@ bound the case records held when it ran. This tool writes the comparison's conse
 
 Each written case also takes the closed form's resource, `source_reviewed` no earlier
 than the intake, and one paragraph under its title, found again by its opening words, so
-a second run rewrites nothing. A case whose reported lower bound is no longer the one
-the evaluation compared with, and is not the closed form's, is refused rather than
-overwritten, as is one whose verified upper bound is not above `a(n)`. The verified lane
-is untouched until a replay.
+a second run rewrites nothing. Planning leaves a later reported lower bound at least
+as strong as `a(n)` unchanged. A divergent weaker lane is refused rather than
+overwritten, as is one whose verified upper bound is not above `a(n)`. Historical
+replays still reconstruct the earlier closed-form layer. The verified lane is untouched
+until a replay.
 
 Usage, from `packing/`:
 
@@ -148,8 +149,8 @@ def _ours(field: Mapping[str, Any] | None) -> bool:
     return bool(field) and REPORT in (field.get("evidence") or [])
 
 
-def plans(frontier: Path = FRONTIER) -> list[Plan]:
-    """Every count whose reported lane the closed form raises.
+def _evaluated_plans(frontier: Path = FRONTIER) -> list[Plan]:
+    """The reported lanes the frozen evaluation raised before any later adoption.
 
     The evaluation gives `a(n)` and the bound each case held when it ran; whether `a(n)` is
     above that bound is decided here, exactly, not read from the evaluation's relation.
@@ -166,6 +167,30 @@ def plans(frontier: Path = FRONTIER) -> list[Plan]:
             continue
         found.append(Plan(n, int(row["k"]), int(row["interval"]), a30, held))
     return found
+
+
+def _current_at_least(text: str, a30: Decimal) -> bool:
+    """A later reported lane already reaches the proposed closed-form floor."""
+    payload: Mapping[str, Any] = safe_load(text.split("---\n", 2)[1])["packing"]
+    current: Mapping[str, Any] = payload.get("reported_lower_bound") or {}
+    if not current or _ours(current):
+        return False
+    try:
+        bound = Fraction(str(current.get("exact_form") or current["value"]).replace(" ", ""))
+    except ValueError:
+        bound = Fraction(Decimal(str(current["value"])))
+    return bound >= Fraction(a30)
+
+
+def plans(frontier: Path = FRONTIER) -> list[Plan]:
+    """The evaluation's lanes still eligible after later stronger reported bounds."""
+    return [
+        plan
+        for plan in _evaluated_plans(frontier)
+        if not _current_at_least(
+            (frontier / f"n-{plan.n:03d}.md").read_text(encoding="utf-8"), plan.a30
+        )
+    ]
 
 
 def reported_field(plan: Plan) -> dict[str, Any]:
@@ -243,8 +268,8 @@ def apply_case(plan: Plan, frontier: Path = FRONTIER) -> str:
 def replay(n: int, text: str) -> str:
     """A record as this tool leaves it, for a writer's replay that runs before it: the
     record unchanged where the closed form has no plan at `n`."""
-    plan = next((plan for plan in plans() if plan.n == n), None)
-    return text if plan is None else apply_text(plan, text)
+    plan = next((plan for plan in _evaluated_plans() if plan.n == n), None)
+    return text if plan is None or _current_at_least(text, plan.a30) else apply_text(plan, text)
 
 
 def carried(text: str) -> bool:

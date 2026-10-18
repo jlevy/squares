@@ -257,44 +257,56 @@ assistance under human direction, and each commit names Claude Opus 5.5 as co-au
 
 ## n108 Mathematical Review and Exact Receipt Audit
 
-The [18 October mathematical review](../../../../docs/project/reviews/review-2026-10-18-wand125-n108-certificate-mathematics.md)
-accepts the n108 certificate on the retained, reviewed sqverify-fast route. It covers
-one certificate; the other 17 have no verdict from that review. The full coverage
-implementation shares the producer's components. No native verifier was rerun by this
-review or this integration.
+The
+[18 October mathematical review](../../../../docs/project/reviews/review-2026-10-18-wand125-n108-certificate-mathematics.md)
+accepts the n108 certificate on the retained, reviewed sqverify-fast route.
+It covers one certificate; the other 17 have no verdict from that review.
+The full coverage implementation shares the producer’s components.
+No native verifier was rerun by this review or this integration.
 
 The retained [audit tool](../../../devtools/audit_fine_net_receipt.py) imports only the
-Python standard library. It reads this packet's candidate, the maintained census and
-control receipts, and the reviewed crate source. It recomputes exact mass and net
-premises and all 201 saved refusal-point captures with its own polygon clipping. It
-decides no coverage between those points. The [receipt](review/n108-exact-audit.json)
-records PASS for the integrated tree; the mathematical note records the review's
-separate invocation and its provenance. The adapted source archive remains unopened.
+Python standard library.
+It reads this packet’s candidate, the maintained census and control receipts.
+It recomputes exact mass and net premises and all 201 saved refusal-point captures with
+its own polygon clipping.
+It decides no coverage between those points.
+The [receipt](review/n108-exact-audit.json) records PASS for the integrated tree; the
+mathematical note records the review’s separate invocation and its provenance.
+The adapted source archive remains unopened.
 
 From `packing/`, run:
 
 ```bash
 uv run --frozen --group dev python -m devtools.audit_fine_net_receipt \
   --root .. --packet wand125-fine-net-lower-bounds-2026-10-16 \
-  --certificate mixed_n108_L1062 --n 108 --side 531/50 \
-  --reviewed-source-sha256 d97758bbc9639edc70b8bd7dc83106d4e8d1be034bacb3e88f8c539b88091c88
+  --certificate mixed_n108_L1062 --n 108 --side 531/50
 ```
 
 This premise audit supports the stage-4 records lane alongside the native replay and
-accepted reviews. It cannot promote a result's rung on its own.
+accepted reviews. It cannot promote a result’s rung on its own.
 
-The separate [maximum-reasoning review](../../../../docs/project/reviews/review-2026-10-18-n108-fine-net-mathematics-max.md)
+The current tool binds the candidate and generated binary identities across the saved
+runtime receipts and requires their complete historical build objects to agree.
+It does not read or gate the current verifier source, and accepts no source-digest or
+Git-revision pin. Its `recorded_native_source_sha256` is reported historical build
+metadata, not a check of this checkout.
+Review B’s original source-pinned invocation is preserved in the mathematical note,
+followed by the dated engineering correction and current command.
+
+The separate
+[maximum-reasoning review](../../../../docs/project/reviews/review-2026-10-18-n108-fine-net-mathematics-max.md)
 accepts the implication and exact premises after its own five-pose audit: four of the
-201 saved native control poses and the axis pose among the source's 32 sampled controls.
+201 saved native control poses and the axis pose among the source’s 32 sampled controls.
 These five points cover neither five entire direction domains nor the continuum of
-centres. The full coverage decision remains the native replay, sharing the producer's
+centres. The full coverage decision remains the native replay, sharing the producer’s
 verifier components.
 
 **Control-log filename (Review C1).** The archived n108 source README lists
 `check2/control.jsonl.gz`; its manifest and retained release instead name
 [`check2/control-197_200.jsonl.gz`](release/certificates/mixed_n108_L1062/check2/control-197_200.jsonl.gz).
-This affects discovery only. The archived README and its digest remain unchanged.
-The author question is whether the living bundle inventory can use the manifest's
+This affects discovery only.
+The archived README and its digest remain unchanged.
+The author question is whether the living bundle inventory can use the manifest’s
 `check2/control-197_200.jsonl.gz` filename; no author message has been sent.
 
 <!-- This document follows common-doc-guidelines.md.

@@ -38184,7 +38184,7 @@ evidence:
       packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-2026-10-16/mixed_n108_L1062.jsonl.gz
       and packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-2026-10-16/mixed_n108_L1062.control.json.
       The row is VERIFIED, every direction is verified, exit 0, and the control
-      receipt is CONTROLS_REFUSED. Its reviewed source SHA-256 is
+      receipt is CONTROLS_REFUSED. Its historical build reports source SHA-256
       d97758bbc9639edc70b8bd7dc83106d4e8d1be034bacb3e88f8c539b88091c88;
       the retained native binary SHA-256 is
       567a0fd58f7ae4e981580f2a90bed5c92ac44fa8f3ebb442b166e93043c15ed4.
@@ -38192,8 +38192,10 @@ evidence:
       root run PYTHONPATH=packing:packing/src packing/.venv/bin/python3 -m
       devtools.audit_fine_net_receipt --root . --packet
       wand125-fine-net-lower-bounds-2026-10-16 --certificate mixed_n108_L1062
-      --n 108 --side 531/50 --reviewed-source-sha256
-      d97758bbc9639edc70b8bd7dc83106d4e8d1be034bacb3e88f8c539b88091c88.
+      --n 108 --side 531/50.
+      The point audit checks input/binary custody and complete historical build
+      agreement across the receipts; its recorded source digest is informational.
+      It does not read or gate current crate source or Git revisions.
       Its retained PASS is packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review/n108-exact-audit.json.
       The accepted mathematical review notes retain the separate exact audit
       invocations and limitations. This records an existing native replay;

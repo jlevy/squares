@@ -2,7 +2,7 @@
   "figure": {
     "composites": [
       {"columns":10,"layout":"10 by 10, row-major n=1..100","range":{"count":100,"first_n":1,"last_n":100},"rows":10,"square_count":5050,"stem":"known-best-1-100","totals":{"degree_derived_here":82,"degree_known":97,"degree_recorded_upstream":15,"exact_value_known":97,"lower_bound_correction":16,"lower_bound_first_proved_here":0,"lower_bound_recent_result":81,"only_known_numerically":3,"proved_optimal":45,"rigidity_catalogue_annotated":2,"rigidity_established":12,"rigidity_known":14}},
-      {"columns":35,"layout":"35 by 18, right-aligned square-bound triangle n=1..324","range":{"count":324,"first_n":1,"last_n":324},"rows":18,"square_count":52650,"stem":"known-best-1-324","totals":{"degree_derived_here":235,"degree_known":308,"degree_recorded_upstream":73,"exact_value_known":308,"lower_bound_correction":219,"lower_bound_first_proved_here":0,"lower_bound_recent_result":297,"only_known_numerically":16,"proved_optimal":77,"rigidity_catalogue_annotated":2,"rigidity_established":20,"rigidity_known":22}}
+      {"columns":35,"layout":"35 by 18, right-aligned square-bound triangle n=1..324","range":{"count":324,"first_n":1,"last_n":324},"rows":18,"square_count":52650,"stem":"known-best-1-324","totals":{"degree_derived_here":235,"degree_known":308,"degree_recorded_upstream":73,"exact_value_known":308,"lower_bound_correction":218,"lower_bound_first_proved_here":0,"lower_bound_recent_result":297,"only_known_numerically":16,"proved_optimal":77,"rigidity_catalogue_annotated":2,"rigidity_established":20,"rigidity_known":22}}
     ],
     "entries": [
       {
@@ -2819,7 +2819,7 @@
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
         "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"5452410506160178214527814352111/500000000000000000000000000000","minimal_polynomial":null,"state":"minimal-polynomial"},
-        "lower": {"correction":true,"display":"s(108) ≥ 10.412113","evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"10.4121138007"},
+        "lower": {"correction":false,"display":"s(108) ≥ 10.620000","evidence":["E-wand125-fine-net-n108-1062-sqverify-fast-replay"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"10.62"},
         "n": 108,
         "optimality": {"provenance":"frontier","status":"open"},
         "rigidity": {
@@ -8497,7 +8497,7 @@
     "generated_by": "python -m devtools.build_composite_figure_data",
     "provenance_vocabulary": {"absent":"No source on hand supplies it. Not a claim that the fact is unknown to mathematics.","catalogue":"Transcribed here from the retained catalogue, not carried by the frontier record.","derived":"Computed by this repository from a fact it already holds.","frontier":"Read from the case's frontier record, which transcribes a retained source."},
     "range": {"count":324,"first_n":1,"last_n":324},
-    "totals": {"degree_derived_here":235,"degree_known":308,"degree_recorded_upstream":73,"exact_value_known":308,"lower_bound_correction":219,"lower_bound_first_proved_here":0,"lower_bound_recent_result":297,"only_known_numerically":16,"proved_optimal":77,"rigidity_catalogue_annotated":2,"rigidity_established":20,"rigidity_known":22}
+    "totals": {"degree_derived_here":235,"degree_known":308,"degree_recorded_upstream":73,"exact_value_known":308,"lower_bound_correction":218,"lower_bound_first_proved_here":0,"lower_bound_recent_result":297,"only_known_numerically":16,"proved_optimal":77,"rigidity_catalogue_annotated":2,"rigidity_established":20,"rigidity_known":22}
   },
   "softschema": {"contract":"packing.squares:CompositeFigure/v1","envelope":"figure","schema":"composite-figure.schema.yaml","status":"enforced"}
 }
