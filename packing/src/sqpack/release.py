@@ -1301,6 +1301,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         paths=(
             "packing/devtools/acquire_source.py",
             "packing/devtools/site_urls.py",
+            "packing/devtools/verifier_registry.py",
             "packing/frontier/results.yaml",
         ),
         outputs=(
@@ -1309,7 +1310,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         ),
         reason=(
             "For PR 671, rendered both outputs at main 804eff36 and the integrated "
-            "branch ef3db22f, using source-link revision 83b4720e in both. The HTML "
+            "branch 472621cd, using source-link revision 83b4720e in both. The HTML "
             "and Markdown are byte-identical. The paper still explains the retained "
             "T-060 proof; the new reported lower bounds and publication-budget "
             "declarations change none of its article, certificate or figure facts, "
@@ -1321,6 +1322,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         paths=(
             "packing/devtools/acquire_source.py",
             "packing/devtools/site_urls.py",
+            "packing/devtools/verifier_registry.py",
             "packing/frontier/results.yaml",
         ),
         outputs=(
@@ -1329,7 +1331,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         ),
         reason=(
             "For PR 671, rendered both outputs at main 804eff36 and the integrated "
-            "branch ef3db22f, using source-link revision 83b4720e in both. The HTML "
+            "branch 472621cd, using source-link revision 83b4720e in both. The HTML "
             "and Markdown are byte-identical. The paper's T-026, T-037, T-059 and "
             "T-060 facts, retained certificates and figures are unchanged, so its "
             "edition remains v0.1.0. The comparison covers HTML and Markdown."
@@ -1341,6 +1343,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "packing/campaign/result-requests.yaml",
             "packing/devtools/acquire_source.py",
             "packing/devtools/site_urls.py",
+            "packing/devtools/verifier_registry.py",
             "packing/frontier/n-108.md",
             "packing/frontier/results.yaml",
             "packing/frontier/source-coverage.yaml",
@@ -1351,7 +1354,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         ),
         reason=(
             "For PR 671, rendered both outputs at main 804eff36 and the integrated "
-            "branch ef3db22f, using source-link revision 83b4720e in both. The HTML "
+            "branch 472621cd, using source-link revision 83b4720e in both. The HTML "
             "and Markdown are byte-identical. The survey's selected examples, "
             "source discussion and figures do not consume the 18 new reports or "
             "the publication-budget declarations, so its edition remains v0.2.2. "
