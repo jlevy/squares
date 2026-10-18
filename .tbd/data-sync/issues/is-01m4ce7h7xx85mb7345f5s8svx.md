@@ -3,15 +3,19 @@ type: is
 id: is-01m4ce7h7xx85mb7345f5s8svx
 title: "Answer Sungjoon Ryu: two asymptotic deficiency preprints (#414)"
 kind: task
-status: open
+status: in_progress
 priority: 2
-version: 2
+version: 3
+delegate: codex@spud10.local
 labels:
   - result-import
 dependencies: []
 parent_id: is-01m4bxdtbvasjn91jwhz448s7b
+hold: null
+hold_until: null
 created_at: 2026-10-08T00:22:22.715Z
-updated_at: 2026-10-11T05:05:22.067Z
+updated_at: 2026-10-18T08:47:56.034Z
+started_at: 2026-10-18T08:47:56.034Z
 ---
 
 ## Notes

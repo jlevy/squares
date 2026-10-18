@@ -3,15 +3,19 @@ type: is
 id: is-01m54ahp501b4as4q1gfw9yqxr
 title: "Import Evan Daniel: s(271) <= 16.948947733714, refining Couzo's #561 packing 4.46e-5 below T-186 (#664)"
 kind: task
-status: open
+status: in_progress
 priority: 1
-version: 2
+version: 3
+delegate: codex@spud10.local
 labels:
   - result-import
 dependencies: []
 parent_id: is-01m549eweq3c13b32tjzbf0ats
+hold: null
+hold_until: null
 created_at: 2026-10-17T06:59:47.488Z
-updated_at: 2026-10-17T07:05:41.660Z
+updated_at: 2026-10-18T08:47:56.026Z
+started_at: 2026-10-18T08:47:56.026Z
 ---
 Evan Daniel (@evand) reports s(271) <= 16.948947733714 on jlevy/squares#664 (filed 2026-10-17T04:30:51Z): the exact rational side 16948947733713657510723401112423/10^30 of evand/square-packing 757b40bc6c5f681033ff1572177d408afbf26dfe (committed 2026-10-17T04:29:03Z), search/packer/candidates/s271_ex1.cert, rounded up at 12 places. Found by the 17 October intake pass (think-e2sz), lane W (user-eb-sweep-1017). Stage 1 triage below; stages 2 to 4 are this bead's, in an import lane the coordinator assigns.
 

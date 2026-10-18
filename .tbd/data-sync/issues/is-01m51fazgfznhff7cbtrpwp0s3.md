@@ -3,16 +3,20 @@ type: is
 id: is-01m51fazgfznhff7cbtrpwp0s3
 title: "Validate: Fitzharding s(19) Lean proof (#640), full from-source build, axiom check and kernel replay (~190-420 CPU-h estimate; HELD)"
 kind: task
-status: open
+status: in_progress
 priority: 2
-version: 3
+version: 4
+delegate: codex@spud10.local
 labels:
   - validation
   - result-import
 dependencies: []
 parent_id: is-01m51e5sp1t03c20hqp7d3wajm
+hold: null
+hold_until: null
 created_at: 2026-10-16T04:25:47.279Z
-updated_at: 2026-10-16T05:53:49.756Z
+updated_at: 2026-10-18T08:47:56.005Z
+started_at: 2026-10-18T08:47:56.005Z
 ---
 Validation part of think-a4x3 (#640, Oscar Fitzharding's Lean proof that s(19) = 3 + 4 sqrt 2 / 3). Record-changing at 19 (a new optimality entry; rungs).
 
