@@ -335,6 +335,8 @@ def test_not_found_alias_script_keeps_unknown_addresses_and_fragments() -> None:
         ("index.html", 1_172_462),
         ("papers/n11-lower-bounds-explainer.html", 1_417_498),
         ("papers/n11-threshold-bound-review.html", 823_322),
+        ("results.html", 1_141_207),  # 212 rows, each linking its complete result record.
+        ("result/t-174.html", 305_917),  # Complete 68-case result with 89 history steps.
     ],
 )
 def test_measured_budget_exception_preserves_the_hard_limit(

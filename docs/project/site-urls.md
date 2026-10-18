@@ -1070,8 +1070,9 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | result/t-085.html | 800,000 | Complete broad scope history and prepared exact bounds measure 694,374 bytes. |
 | result/t-124.html | 400,000 | Complete broad scope history and prepared exact bounds measure 304,237 bytes. |
 | result/t-155.html | 400,000 | Fifty-nine counts' exact regularized sides, their regularizations and prepared math measure 303,829 bytes. |
+| result/t-174.html | 350,000 | The complete 68-case result and its 89-step history with prepared math measure 305,917 bytes. Three-run desktop/mobile, light/dark and no-JS checks pass: CLS <=0.001, LCP <=576 ms, longest task <=153 ms and blocking <=123 ms. |
 | result/t-180.html | 400,000 | The closed form's result, its scope of 264 counts and prepared math measure 341,524 bytes. |
-| results.html | 1,100,000 | The complete registered-result table with prepared math measures 976,783 bytes at 184 results, about 3.5 kB a row; it measured 843,037 at 146. |
+| results.html | 1,250,000 | The complete 212-result table with prepared math measures 1,141,207 bytes. Each row links its full record; no record body is repeated in the table. Three-run desktop/mobile, light/dark and no-JS checks pass: CLS <=0.001, LCP <=576 ms, longest task <=153 ms and blocking <=123 ms. The ceiling retains about 100 kB of headroom for registered results. |
 | tutorial-advanced.html | 800,000 | The advanced tutorial retains the original technical derivations and reference tables; the complete authored text and prepared formulas measure 771,603 bytes. |
 
 <!-- This document follows common-doc-guidelines.md.

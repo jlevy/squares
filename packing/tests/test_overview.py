@@ -5901,8 +5901,11 @@ def test_result_preview_keeps_claim_scope_and_links_with_full_context_in_fragmen
 #: Merged with that layout on 11 October, the results page measured 843,037 bytes at
 #: 146 results, and its ceiling keeps about a hundred kilobytes above that. The intake of
 #: 14 October took the register to 184 results and the page to 976,783 bytes, about 3.5 kB
-#: a row; the ceiling moves to 1,100,000 to keep that margin.
-PAGE_CEILINGS = {"index.html": 1_300_000, render_overview.RESULTS_PAGE: 1_100_000}
+#: a row; the ceiling moves to 1,100,000 to keep that margin. The 18 October measurement
+#: at 212 results is 1,141,207 bytes, without repeating record bodies.
+#: Three-run desktop/mobile, light/dark and no-JS checks pass (CLS <=0.001, LCP <=576 ms,
+#: longest task <=153 ms, blocking <=123 ms); 1,250,000 keeps about 100 kB of headroom.
+PAGE_CEILINGS = {"index.html": 1_300_000, render_overview.RESULTS_PAGE: 1_250_000}
 
 
 def test_no_page_carries_a_result_overview(
