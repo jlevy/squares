@@ -5,7 +5,7 @@ title: "Import wand125: 18 fine-net mixed-measure lower bounds at n = 38 to 110,
 kind: task
 status: in_progress
 priority: 1
-version: 8
+version: 9
 delegate: codex@spud10.local
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m549eweq3c13b32tjzbf0ats
 hold: null
 hold_until: null
 created_at: 2026-10-17T06:59:48.686Z
-updated_at: 2026-10-18T11:15:37.755Z
+updated_at: 2026-10-18T11:53:50.236Z
 started_at: 2026-10-18T08:47:56.014Z
 ---
 Hiroaki Hosono (wand125) reports 21 fine-net mixed-measure lower-bound certificates in jlevy/squares#446#issuecomment-6210736972 (created 2026-10-16T07:49:56Z, edited 09:00:31Z to cover all of them). Three are already registered: n = 37 (T-178), 39 (T-176) and 44 (T-177), published 2026-10-13 and registered on 14 October with no issue. This bead imports the **18 new ones**, at n = 38, 40, 41, 43, 51, 68, 84, 85, 86, 88, 89, 90, 91, 92, 106, 107, 108 and 110. Found by the 17 October intake pass (think-e2sz), lane W (user-eb-sweep-1017). Stage 1 triage below; stages 2 to 4 are this bead's.
@@ -91,3 +91,5 @@ blocked_on: none
 2026-10-18 n108 Stage 4 integration: local PR #671 head 9145a1608d2c042a238eda889d082b7042968ed7 adopts only mixed_n108_L1062 at V3/C3 and 531/50 in both lower lanes. Formal Review B remains strong/xhigh (https://github.com/jlevy/squares/pull/671#pullrequestreview-5562495021); the separately prompted/source-distinct strongest/max Review C is https://github.com/jlevy/squares/pull/671#pullrequestreview-5562556726, with no blocking/major mathematical finding and C1 a minor archived README filename error. C1 is corrected in the first-party packet; source archive/README bytes remain untouched. The retained native census is separate verified/shared-components evidence; B recomputes201 saved native refusal poses, while C checks exact premises and5/233 recorded control poses (4/201 native +1/32 source), never five entire domains. The native engine was not rerun here. Its case's auxiliary premise/sample citations and certificate-reach view are now complete; the other17 remainV0/C0 and no new census is claimed active. Current DATA_REVISION80c153ba66ec9deb91e1977df2f322f393c942e5 and PUBLICATION_REVISION6a1e2e84 support provisional sitev0.7.26/explainerv0.4.8; versions/T-numbers must reconcile after earlier merges (#661 keepsT-195; #676 separately proposes sitev0.7.26). Final records, final rendered-producer and push-floor checks are active/pending before coordinator source review and a held remote push. The original codex@spud10.local delegate is preserved.
 
 2026-10-18 Review C1 disposition handoff: the coordinator assigned the upstream author README correction/question to this open bead, preserving codex@spud10.local ownership and the stage-7 reply flow. Review C is https://github.com/jlevy/squares/pull/671#pullrequestreview-5562556726. The archived certificate README names check2/control.jsonl.gz; the manifest and actual retained release name check2/control-197_200.jsonl.gz. First-party packet/review records at local PR #671 head 9145a1608d2c042a238eda889d082b7042968ed7 identify the correct path. The archived README and its digest remain unchanged. The author’s living README correction remains pending; no author message has been sent and this note does not authorize one. Record C1 as deferred to think-f40c, waiting for the owning stage-7 author follow-up, rather than claiming the source typo fixed.
+
+2026-10-18 reviewed integration checkpoint: local PR #671 head ccb2e5e912e73bc041a7ddf3683aea70d87dc010 preserves n108 alone at V3/C3, exact531/50 in both lower lanes; the other17 remain V0/C0. The subsequent engineering repair removes the point audit’s current-crate source digest refusal without adding a Git-revision gate. Historical build/source metadata remain reported receipt facts, with cross-receipt build consistency and candidate/binary runtime custody checks. Review B’s original invocation/source read remain preserved in its note, followed by a dated correction and current command; its formal verdict is not widened. The refreshed point receipt independently checks all201 saved native refusal poses in7.571s, and no native coverage run is claimed. Review C remains the separate strongest/max premise-and-five-pose review; C1 remains deferred here for the owning stage-7 upstream author README correction/question, with archived bytes unchanged and no author message sent. The maintained census remains the separate shared-components full-coverage evidence. Records/release/page/push gates are finishing locally before any fresh remote publication; versions and provisional T-numbers still reconcile in merge order. The codex@spud10.local delegate is unchanged.
