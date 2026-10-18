@@ -5,17 +5,18 @@ title: "PR #676: retain dated open-work validation follow-up"
 kind: task
 status: in_progress
 priority: 2
-version: 12
+version: 13
 delegate: codex@spud10.local
 labels: []
 dependencies: []
 parent_id: is-01m572ssbx1x412zpvsw1sb6je
 child_order_hints:
   - is-01m57n3dh9sqgnsp5z8emp7smt
+  - is-01m57r63h8wb408fbj6a374s77
 hold: null
 hold_until: null
 created_at: 2026-10-18T10:26:55.147Z
-updated_at: 2026-10-18T14:39:54.673Z
+updated_at: 2026-10-18T14:55:51.334Z
 started_at: 2026-10-18T10:27:05.278Z
 ---
 
