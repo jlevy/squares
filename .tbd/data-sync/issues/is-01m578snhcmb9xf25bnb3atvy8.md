@@ -5,7 +5,7 @@ title: "PR #676: retain dated open-work validation follow-up"
 kind: task
 status: in_progress
 priority: 2
-version: 22
+version: 23
 delegate: codex@spud10.local
 labels: []
 dependencies: []
@@ -18,7 +18,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-18T10:26:55.147Z
-updated_at: 2026-10-18T22:29:53.568Z
+updated_at: 2026-10-18T22:46:39.046Z
 started_at: 2026-10-18T10:27:05.278Z
 ---
 
@@ -73,3 +73,11 @@ Exact clean46fcec4c0 records passed52/52 in103.937s validator wall,104.75s real 
 The required n5/jobs2/inner1 push at46fcec4c0 was stopped known-red exit130,182.45s real (3954 finished test events), against unchanged1800s ceiling. Exactlythree source failures: two overview project-card contracts omit JoostdeWinter/square-packing; generate_frontier_case.check_records([126,155,179]) differs at155. Complete unique failure events are in push-46fcec4c0-internal-venv-01-live-failures.json, with original command/step/worker artifacts. Independent senior preflight found no additional source problem; a focused correctness reviewer confirms126/179 unchanged and155 differs only because apply_closed_form restores Hosono's paragraph before the new pending-report note.
 
 Exactlytwo uncommitted narrow fixes now exist: overview_sections.py adds the source repository card as reported/pending adoption; n-155.md moves the intact Hosono paragraph before the intact two-paragraph pending-report note. Frontmatter and paragraph multiset are unchanged; no generator code, numerical field, result rung, case upper lane, house or witness was edited. Both fixes are independently reviewed at source level. The first focused red reproduction had two expected Fs, then U-state wait and90+10 timeout137; a bounded in-memory probe confirmed126 byte equality and the exact155 paragraph move before stopping at179. The post-fix focused verification stalled with near-zero CPU after one dot. After SIGINT and original timeout escalation, owned pytest91263 and time91184 remain macOSU/PID1 despite explicit KILL; wrapper91183 is gone and session10779 is terminal137. These are kernel-wait cleanup survivors, not a source verdict or qualified pass. Root's one further direct-capture focused retry is held until they actually disappear; avoid initial external log opening, retain external TMPDIR/caches and canonical bounds. No commit, fresh gate, shared-env mutation or GitHub action follows this host stall. Remote676 remains5fb743b3e; formal stack retarget/push and hosted checks remain parent-coordinated.
+
+2026-10-18 qualification repair continuation: The U-state survivors cleared. Root-authorized direct-capture focused verification (no initial external logfile open) passed all three source regressions in8.22s/real8.61s, including check_records126/155/179 with0disagreements. Independent correctness review confirms155only needed an intact Hosono paragraph relocation;126/179unchanged and no generator contract change. Fix45bf5a14929198a3544b5c34edaa2123e624110c changes exactly the deWinter project card and n155paragraph order; normal Rust0.4hooks2.00s. Pin-onlyc4b5b660907b08edc3c9328da190b038a5c9cd82 hooks1.51s, pin45bfcorrect.
+
+Records atc4b5b6609 exposed one publication-scope gap: the added OTHER_PROJECTS value sits in a module conservatively imported by four papers. Known-red stopped cleanly exit130/91.56s; cancellation markers are not added source findings, all owned processes ended. Own AST audit againstpinned#661 plus independent release-impact review prove all other module definitions unchanged and the new tuple reaches site project cards/filter/result attribution and intake discovery, not paper front/navigation/colophon/content. Fresh exact-path ReleaseNoPublicChange decision names only overview_sections.py and all eight paper HTML/Markdown outputs; no rendered-byte claim and no paper recut. Sitev0.7.27 owns the card. Pinned-parentrelease impact and5ownership/negative controls pass (4.33stests/8.45stotal), Ruffcheck/format clean. Scope-onlycommitdae7467e1e6fa637258487d902aa70b3812c787c, normalhooks1.56s, data pin45bfunchanged/correct.
+
+Fresh clean exactdae7467e1 records PASS52/52,103.9766s validatorwall/104.79s real against300s outercap; full JSON and per-step artifacts retained. Fresh CPU10/6 collections select identical19,038IDs includingduplicates. Required local push now runs serially at the samehead with1800s outercap, CPU6/n5+pool1/jobs2/inner1 and explicit#676sourcepaths, existing internal executable environment, all scratch/caches external. Installed-fallback/synthetic-worker caveat is explicit and parent accepted; hosted exact-headCI remains definitive. At240s,5/69steps and4,146testevents had completed without failures. No finalpushpass claimed yet. Evidence prefixes records-dae7467e1-internal-venv-01 and push-dae7467e1-internal-venv-01.
+
+Offline externalStage3body candidate is based on root's newer significance/Announcement draft, preserves generated announcement and its registered-onlyCouzocaveat, correctvalidatorpaths and all V0/C0/house limits; added actualqualification history, scopedpaper review and environment caveat. RustFlowmark/OR9check pass; terminalpush/hostedoutcomes remain explicitpendingfields. Root will consolidate onecanonicalbody after gate. Branch remains clean and no GitHubmutation or source edit occurs during qualification.
