@@ -2821,6 +2821,7 @@ sources:
     venue: GitHub
     dated: '2026-10-17'
     lineage: builds-on-project
+    credit: de Winter after Levy
     note: >-
       Joost de Winter's issue 668 reports three rational upper-bound certificates at
       227, 229 and 260, first published at c95c4938f068ed44a1819ef973e770ec241aa567 on
@@ -2840,7 +2841,7 @@ sources:
     venue: GitHub
     dated: '2026-10-17'
     lineage: builds-on-project
-    credit: Daniel after Ostashev
+    credit: Daniel after Ostashev, Levy
     note: >-
       Evan Daniel's issue 669 reports s(155) <= 12.952260944651, rounded upward from
       the exact rational certificate side, first published at the retained MIT-licensed
@@ -2858,7 +2859,7 @@ sources:
     venue: GitHub
     dated: '2026-10-17'
     lineage: builds-on-project
-    credit: Daniel after Couzo, de Winter
+    credit: Daniel after Couzo, de Winter, Levy
     note: >-
       Evan Daniel's opening report in issue 674 gives s(229) <= 15.650163254859,
       rounded upward from the retained exact rational certificate at MIT-licensed
@@ -2875,7 +2876,7 @@ sources:
     venue: GitHub
     dated: '2026-10-18'
     lineage: builds-on-project
-    credit: Daniel after Couzo, de Winter
+    credit: Daniel after Couzo, de Winter, Levy
     note: >-
       Evan Daniel's update to issue 674 gives s(229) <= 15.650161513896, rounded upward
       from the retained exact rational certificate at MIT-licensed
