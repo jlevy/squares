@@ -3,13 +3,17 @@ type: is
 id: is-01m57wksr0dz5nbtf8cdz2ve6x
 title: Fix supervisor signal test worker PID capture
 kind: bug
-status: open
+status: in_progress
 priority: 2
-version: 1
+version: 2
+delegate: codex@spud10.local
 labels: []
 dependencies: []
 parent_id: is-01m578snhcmb9xf25bnb3atvy8
+hold: null
+hold_until: null
 created_at: 2026-10-18T16:13:14.354Z
-updated_at: 2026-10-18T16:13:14.354Z
+updated_at: 2026-10-18T16:13:56.626Z
+started_at: 2026-10-18T16:13:56.625Z
 ---
 At clean #676 head372902046, the CPU6/n5 push signal control failed ProcessLookupError because its global subprocess.Popen monkeypatch overwrote worker-SIGTERM.pid with RSS observer PID1992; the retained receipt identifies actual worker/coordinator1989 with exit-15 and process_group_reaped true. Restrict the test-only publication and injected-signal path to the exact start_new_session worker command, assert captured PID equals receipt coordinator_pid, and retain the existing process-absence assertion. Production supervision and deadlines remain unchanged. Retained failure and diagnosis: /Volumes/spud-ext1/agent-source/squares-intake-20261018-evidence/signal-fixture-372902046-n5/. Timed subprocess controls and full qualification wait for the coordinator-released heavy slot.
