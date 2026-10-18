@@ -3,15 +3,19 @@ type: is
 id: is-01m5733tx3xzr77nx4gda0qqxp
 title: "Import franciscouzo: 227, 229, 330-996: registration request (#672)"
 kind: task
-status: open
+status: in_progress
 priority: 2
-version: 1
+version: 2
+delegate: claude-code@spud10.local
 labels:
   - result-import
 dependencies: []
 parent_id: is-01m572ssbx1x412zpvsw1sb6je
+hold: null
+hold_until: null
 created_at: 2026-10-18T08:47:36.866Z
-updated_at: 2026-10-18T08:47:36.866Z
+updated_at: 2026-10-18T12:53:37.253Z
+started_at: 2026-10-18T12:53:37.251Z
 ---
 W1 intake 2026-10-18, parent think-xmxb. https://github.com/jlevy/squares/issues/672
 Source pins in author report: 23aff0c6f992271e1ad13a148d44f392c4b386c0, af8cb7959aead318c0cf5e9f873de3caa763f77a
