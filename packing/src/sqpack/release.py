@@ -88,6 +88,14 @@ class PublicationHistoryEntry(NamedTuple):
 #: for each deployment's commit, what the page it built stated.
 PUBLICATION_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.7.26",
+        first_published="October 18, 2026",
+        result_scope=(
+            "Adopt T-174's exact houses at 37 rational counts, settle their "
+            "regularization and refresh their case and result pages."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.7.25",
         first_published="October 17, 2026",
         result_scope=(
@@ -897,6 +905,16 @@ class ReleaseImpactDecision(NamedTuple):
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
     ReleaseImpactDecision(
         component="site",
+        previous_version="v0.7.25",
+        version="v0.7.26",
+        impact="patch",
+        reason=(
+            "Adopt T-174's exact houses at 37 rational counts, settle their "
+            "regularization and refresh their case and result pages."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="site",
         previous_version="v0.7.24",
         version="v0.7.25",
         impact="patch",
@@ -1278,6 +1296,29 @@ class ReleaseNoPublicChange(NamedTuple):
 
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
+    ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer",),
+        paths=(
+            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
+            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
+            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+        ),
+        reason=(
+            "The site successor for the 37-house T-174 adoption regenerates these "
+            "five claim documents. Exactly 32 source-link revisions change; replacing "
+            "the new revision with the preceding one makes every document byte-identical "
+            "to its pre-cut version. The explainer's generated HTML, Markdown and "
+            "linked assets still match the pre-repair artifacts byte for byte under "
+            "its owning check mode after the cut. It keeps v0.4.7. No PDF was rebuilt "
+            "or compared."
+        ),
+    ),
     ReleaseNoPublicChange(
         components=(
             "paper:n11-lower-bounds-explainer",
@@ -3732,7 +3773,7 @@ def validate_release_impacts(
 #: fresh render, so a link naming the build commit would fail their drift check forever. It is
 #: in no version string. It moves when the claim documents are regenerated for an edition. It
 #: must be a commit on `main`; the site's own links name `main` itself (`devtools.repo_links`).
-PUBLICATION_REVISION = "83b4720e"
+PUBLICATION_REVISION = "aabaa006"
 
 
 def data_pathspec() -> tuple[str, ...]:
