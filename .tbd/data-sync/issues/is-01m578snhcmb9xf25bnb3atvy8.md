@@ -5,7 +5,7 @@ title: "PR #676: retain dated open-work validation follow-up"
 kind: task
 status: in_progress
 priority: 2
-version: 25
+version: 26
 delegate: codex@spud10.local
 labels: []
 dependencies: []
@@ -18,7 +18,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-18T10:26:55.147Z
-updated_at: 2026-10-18T22:56:01.623Z
+updated_at: 2026-10-18T23:25:02.902Z
 started_at: 2026-10-18T10:27:05.278Z
 ---
 
@@ -85,3 +85,5 @@ Offline externalStage3body candidate is based on root's newer significance/Annou
 2026-10-18T22:53Z exact dae7467e1 qualification checkpoint: records52/52 green,103.9766s unchanged. Full --push01 stopped known-red via SIGINT to owned validator8913; exit130/real473.45s, no owned survivors. Final worker census7594finished=7591pass/1skip/2fail, not full19038 union. One staging-signal synthetic child TimeoutExpired5.0s at [other-thread-15-1]; retained partial receipt already records signal15/reapedtrue, but no observation JSON. Single quiet exact-node reproduction unchanged deadline PASS1/1 in0.70s(real0.93,user0.68/sys0.12), no proof of host causation. Second deterministic failure arrived just before stop: house-adoption historical reconstruction n155 packing.evidence lacks new E-evand-669-n155-report (resource likely next); source design under independent read-only review, no edits. Earlier3card/redraft failures pass in full run. Durable terminal-diagnosis/quiet-staging JSON receipts and small copied failed-child artifacts at external agent-source evidence. Two terminal step -15 failures are cancellation artifacts; run is not a pass. No remote mutation, clean head preserved; do not rerun full gate before deterministic source mismatch resolved.
 
 2026-10-18T22:55Z bounded repair committed:7e51e269a035 removes only n155's newly appended generic E-evand-669 report roster item/resource (6lines), retaining both linked pending-report chronology paragraphs exactly. Independent source/design review confirmed reported/not-attempted evidence does not require verified-case citation, and n155 HAND_MARKED prose survives existing refresh. No writer/test/timeout modification. Targeted historical writer+case/citation controls49/49pass29.08s; caseprose324/cert citations/reader-prose allpass; command31.21s<90cap. All4case upper/regularization/rigidity objects equal pinned#661base. NormalRust0.4hooks1.75s; pin-onlyc143416dfbad0c31149d9acf863ffa4f02c4c0f6 normalhooks1.76s, pincheckgreen, clean. Fresh records-c143416df-internal-venv-01 running300s cap, currently36/52passed. Required fullpush will follow ifgreen, no remote action.
+
+2026-10-18T23:24Z c143 complete terminal checkpoint: local --push exit1,68/69steps pass, validator1217.7188s(real1226.54)<1800cap. Normal19028nodes complete:18971pass/55skip/1xfail/1fail; pool10notrun by runner after normalfailure. Sole failure announcement fixture expected historicalT147–152 output to require a thread; newlyregisteredT197 legitimately supersedesT149 atn155,360→273chars. Renderer correct per independent Sol review. Both prior dae failure nodes passed. Approved test-only repairb7666d037ad3c21f24df8ebc11bcf3e468403e77 replaces live-length assumption with literal280fit/281thread/281oversized-line cases and stubbed announcement for CLI stderr wiring; no renderer/registry/upper/house change. Fullannouncement41pass46.16s; final3params1.62s; selectedpool10pass46.03s(real53.62)<180cap; Ruff, releaseimpact/pincheckgreen. NormalRust0.4hooks1.94s; clean.52/52records c143receipt stillcovers identical production/registry tree; no redundantrecordsrun because onlyone test changed. FreshCPU10/6 collection underway(expected19040,+2normalcases), then fullpush exactnewhead1800cap. No remote action; root owns formalstack#677,#661→#676, title/body/label/News. Cleanup: only completed dae pytest-0(469061632allocatedbytes) safelystagedin externalTrash after fducomplete +dryrun +lsofrecheck; copied failedchild and allgate receipts kept, manifest/private/tmp/disk-cleanup-676-dae-pytest-staged-20261018.tsv +externalcopy. Trashnotemptied/no physicalreclamationclaim, free~7.5GiB.
