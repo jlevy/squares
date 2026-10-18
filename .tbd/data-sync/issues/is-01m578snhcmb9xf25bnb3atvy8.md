@@ -5,7 +5,7 @@ title: "PR #676: retain dated open-work validation follow-up"
 kind: task
 status: in_progress
 priority: 2
-version: 11
+version: 12
 delegate: codex@spud10.local
 labels: []
 dependencies: []
@@ -15,7 +15,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-18T10:26:55.147Z
-updated_at: 2026-10-18T14:28:18.386Z
+updated_at: 2026-10-18T14:39:54.673Z
 started_at: 2026-10-18T10:27:05.278Z
 ---
 
@@ -38,3 +38,9 @@ Conservative Stage1 bulk-inventory appendix committed locally3711c46fb70bdadd6e9
 Final611b45437 push terminated with one genuine failed test, not a timeout:66/67 selected steps pass in1219.13s against1800s ceiling. Normal phase18940passed/55skipped/1xfailed; isolated pool phase9passed/1failed at shutdown-timeout control. A separate unchanged isolated invocation passes0.59s. New claimed/synced bug think-26gw owns the narrow deterministic test repair in3fc464c0e; docs-only ddebf0052 calibrates the inferred timeout phase. Root reviewed both scope and report calibration. Seven focused controls pass2.63s; Ruff/format/BasedPyright/docs and normal hooks pass. Current clean head ddebf00520532d1cd5f9fe45cbeb328732ba5fd1 has no new-head broad pass: records/push held while665 owns local slot. Offline #676 body is synchronized, Flowmark/OR9/table/footer checks pass at agent-source/squares-intake-20261018-evidence/pr676-stage2-addendum-body.md. It discloses the added test fix and all failed/interrupted attempts, openW1/Stage3, fourStage2 packets,669metadata conflict, provisional merge-order IDs and absence of fresh native replay. Read-only online source/issue census uses existing catalogue capture and blob-free metadata fetches, without branch mutation; terminal final make intake remains after qualified remote/hosted gates. No cleanup, remote push, issue reply or merge. Keep open.
 
 2026-10-18 source freshness follow-up committed locally at clean8f4f8a5ce8a684fcf1879479e51398112fac5188 with normal Flowmark/title/Biome hooks11.11s. Exactlyfourfiles: watch, bothdatedreports, and bounded-four-head-refresh-20261018.json. The interim online census took288.54s/exit1 with45watched repositories (45thJoostdeWinter/square-packing fromStage2), GitHubissue/comment recordmatches, one unownednewwandhead andfour60sfullhistory/treefetchcaps. Full diffs08d77305/6d93afc1 onlyrenameEnglish/Japanesetitles/links tohypercubes; math/scope/prooftext/certs/checkersunchanged. New no-resultwatchreadthrough6d93afc1 retainsolderValid7/n42owners. SeparateboundedGitHubAPIHEADreads all exit0 andequalexistingreadpins forBuddenPing73d25427/Esumminseb3ae154/evand5ca0dc3a/franciscouzoc6da0fc7. Onlyheadfreshnesschecked; originalhistorytimeouts/fullsource-contentclassificationlimits andimportownerspreserved. Parsedwatchcomparisonpreservesallpriorfields/originalnotetext, extendsfournotes andaddsone no-resultread. Firstfocusedrun46pass/1skip3.36s,schema324/972,docs2065,JSONlayoutclean; redundantdurablecapture rerun cleanlySIGINTed after98s filesystemwait/9completedcontrols, notterminalpass. Parentreviewed no blocker. Fresh externalTMPDIR exacthead records nowrunning jobs2/inner1, canonical300sceiling; sequentialfullpushfollows onlyrecordspass, no remoteupdatebeforefullgreen. Offlinebody synchronized, OR9pass. Noresult/verificationpromotion,replay,issuecommentormerge.
+
+2026-10-18 isolated qualification follow-up: records at clean 8f4f8a5ce passed all 52 selected steps in 91.75s/300s ceiling. Its later push was invalidated by cross-worktree mutation: #665 hook rebuilt shared editable sqpack/kpress at 14:31:06–08 UTC during our run started 14:29:35. Explicit #676 PYTHONPATH imports stayed local, but fresh imports without it resolved #665; nested controls can replace/clear PYTHONPATH, and release/validator sources differ. Parent directed clean stop: exit130, real309.30s, last37/67 progress; cancellation markers are not source defects, and no qualification pass is claimed. Receipt push-8f4f8a5ce-environment-contamination.json, original log/provenance retained. Separate standalone bug think-rl4i tracks reusable per-worktree environment safeguards (related prior closed think-wyc9); no harness production fix in #676.
+
+Frozen all-extras/dev isolated environment installed 55 packages in43.14s at /Volumes/spud-ext1/agent-scratch/squares-676-isolated-env-20261018/venv, explicit UV_PROJECT_ENVIRONMENT and task scratch/cache/Cargo paths. Size623MB, taskcache663MB, volume7.3GiB free at preflight. Fresh env-u-PYTHONPATH origins sqpack/kpress/workbench_tools all #676, checkout-import-preflight PASS, isolated Ruff0.16.3/BasedPyright1.39.10/packing-validate paths, external browser deps/typedESLint correctly resolved from declaring workspace. One initial root-cwd Node resolution probe was corrected to workspace resolution; no package mutation was needed. Shared .venv paths remain #665 and were not modified. New durable env-676-isolated.sh, isolated-676-env-bootstrap.log, isolated-676-env-preflight.log and isolated-676-checkout-imports.json.
+
+Scoped two-report disclosure committed with normal isolated hooks at600539c43bad6686daf33e221ab801963720d2aa (+38 lines, worktree clean); docs2065 pass, hooks7.40s. Offline PR body discloses invalid run, isolation and separate safeguard, OR9 passes. Fresh exact-head isolated records now running sequentially before full push; canonical300s/1800s ceilings unchanged. No remote push, issue reply, replay or merge. Keep qualification/publication bead open.
