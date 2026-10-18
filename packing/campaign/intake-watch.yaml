@@ -1029,7 +1029,8 @@ repositories:
       f4883b4 is think-57ei (coordinate think-0esw); Ryu formalization 8475bdf is think-ahr2; improved filled
       L-shape bound a645fe3 is think-f8py. The exact 3-angle n232 witness/Lean proof at 5ca0dc3 is evidence
       for T-193, held by think-phyb. Other commits change search tooling, status, site/provenance and displays;
-      full commit/path classification is retained in campaign/issue-intake/intake-20261018/source-commits.json.
+      the complete changed-path inventory is retained in campaign/issue-intake/intake-20261018/source-commit-files.json.
+      Full source-content classification remains with the named import owners.
       Nothing is silently treated as imported or replayed.'
   - url: https://github.com/franciscouzo/square-packing
     read_through: c6da0fc7524d667bf3d224559724ba9b60762e60

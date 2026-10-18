@@ -45,6 +45,11 @@ and no long certificate replay was started.
   The proposed Mach implementation passes native tests, but its useful SDK assurance
   should be reconciled with the implementation on main.
   This is `think-behe`.
+- **#435:** the n83 coefficient link opens n87 because it uses a legacy polynomial-order
+  anchor.
+  [Review F](https://github.com/jlevy/squares/pull/435#pullrequestreview-5562286722)
+  requires the stable n83 anchor and a producer-to-browser regression test.
+  `think-5hv7` owns the correction under the existing formal-stack lane.
 
 ## All Open Pull Requests
 
@@ -55,7 +60,7 @@ scientific review.
 | PR | Recorded head | Review and disposition |
 | --- | --- | --- |
 | [#671](https://github.com/jlevy/squares/pull/671) | `32d47d321` | Fresh senior review A: 3 High, 2 Medium, 1 Low. Required CI red. Repair retention/publication before integration; census and stage 4 remain open. |
-| [#667](https://github.com/jlevy/squares/pull/667) | `a5b5f0ec2` | Existing same-head review A has 14 findings. Its four-file intake update and corrections are incorporated into this pass’s replacement intake branch. Keep the original open until replacement disposition is explicit. |
+| [#667](https://github.com/jlevy/squares/pull/667) | `a5b5f0ec2` | Fresh disposition B maps all 14 A findings to fixes or retained owners in replacement #676. Its four-file intake update is incorporated. Keep the original open until the replacement is accepted. |
 | [#665](https://github.com/jlevy/squares/pull/665) | `bb85cbb59` | Fresh bounded senior source review; adoption and derived-output defects, required CI red. Retain the per-count adoption owners. |
 | [#661](https://github.com/jlevy/squares/pull/661) | `a87de0cf7` | D’s numerical reporting and stale-status defects fixed; independent E confirms both. All 59 adoption tests and six pin controls pass. Later stale data pin repaired; fresh hosted checks pending. T-195 preserved. |
 | [#658](https://github.com/jlevy/squares/pull/658) | `3022eb984` | Fresh follow-up C: prior source fixes hold, Low missing B disposition. Release-impact gate red. Ten focused tests pass; `think-8ido` retains correction work. |
@@ -66,10 +71,10 @@ scientific review.
 | [#578](https://github.com/jlevy/squares/pull/578) | `e1f921bf0` | Fresh integration review A recovers the historical independent review and browser evidence. Standard CI has 31 successes; earlier full checkpoint passed. High current-main conflict and Low stale PR description remain. Keep profile population distinct from integration readiness. |
 | [#574](https://github.com/jlevy/squares/pull/574) | `4c319c24a` | Read-only contributor intake review A. Current cumulative scope is 148 counts; 68 selected counts registered through #602/T-174. #665 and separate algebraic owners retain unfinished adoption. |
 | [#514](https://github.com/jlevy/squares/pull/514) | `eb94b3dfd` | Fresh follow-up C confirms B1–B7 source fixes: six stamp tests and 25 Node tests pass. Current main conflicts and release gate is red. Reconcile newer result entries and generator writes when integrating. |
-| [#435](https://github.com/jlevy/squares/pull/435) | `273abfa59` | Upper layer of formal stack 447 above #403. Green checks against its lower branch do not qualify the stack against main. Preserve source/publication separation and review post-disposition changes. |
+| [#435](https://github.com/jlevy/squares/pull/435) | `273abfa59` | Fresh F: Medium n83 link selects n87; Medium full checkpoint fails two call-wall guards. 32 ordinary checks and eleven separate full-run prerequisites pass. Clean against #403; that does not qualify the stack against main. |
 | [#407](https://github.com/jlevy/squares/pull/407) | `78b8bbbd0` | Fresh senior A: native controls pass, Medium integration finding. Conflicts with main’s existing libproc implementation. |
 | [#406](https://github.com/jlevy/squares/pull/406) | `8811bd763` | Fresh follow-up B confirms review A’s source fixes; 48 controls pass. Conflicts with main. Keep `think-lt52`/`think-h8d8` for integration and `think-xeav` for oversized historical files. |
-| [#403](https://github.com/jlevy/squares/pull/403) | `3ee60c3e5` | Lower layer of formal stack 447. Conflicts with main; substantial source/adoption changes followed earlier reviews. Keep `think-6vrv`, `think-jygq` and exact-source owners open. |
+| [#403](https://github.com/jlevy/squares/pull/403) | `3ee60c3e5` | Fresh J reviews the post-disposition delta and formal stack 447. Medium full-checkpoint blocker: 15 call-wall failures, despite 31 ordinary successes. Conflicts with main. Keep `think-6vrv`, `think-jygq` and exact-source owners open. |
 
 The external forks #574 and #622 await workflow authorization.
 That state is not a failed certificate test.
@@ -137,6 +142,12 @@ decisions.
   worktree dependencies, not a clean suite.
 - #514: six stamping regressions and 25 Node table tests pass.
   Browser and current rendered-page budgets were not freshly rerun in that follow-up.
+- #403/#435: 11 parent extractor/storage controls, 17 child catalogue tests and eight
+  child overflow/refusal controls pass.
+  The maintained exporter reproduces the wrong n83 destination despite the catalogue
+  tests passing. Both records retain 49 adopted V3/C3 and 89 historical native
+  occurrences, with all 324 side/status/lower projections equal.
+  No mathematical, native or Lean replay ran.
 - Intake: online sweep, request schema, manual-source receipts and report-order ledger
   are recorded in the linked audit.
   The records tier passes 52 selected steps in 93.81 seconds; 125 request and ledger
