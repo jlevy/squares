@@ -5,7 +5,7 @@ title: "Import ofitzharding: complete Lean proof of s(19) optimality (#640)"
 kind: task
 status: in_progress
 priority: 1
-version: 17
+version: 18
 delegate: user-eb-intake-1016
 labels:
   - result-import
@@ -19,7 +19,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-16T04:05:28.896Z
-updated_at: 2026-10-16T12:27:24.625Z
+updated_at: 2026-10-18T08:51:42.470Z
 started_at: 2026-10-16T04:05:36.664Z
 ---
 Stage 1 triage of jlevy/squares#640 (ofitzharding, Oscar Fitzharding, "Complete Lean proof of s(19) optimality: registration request", opened 2026-10-16T03:41:08Z, labelled `intake`, no comments when read at about 04:20Z). Intake pass 2026-10-16 (epic think-mdnn): nothing was built or run. Stage 2 is done on the pass's branch: the packet fitzharding-n19-lean-2026-10-16 (below).
@@ -99,3 +99,5 @@ Draft text: "Thank you for sq19. The project's mathematical review of v1.0.0 (34
 5. Has the from-scratch scripts/verify.py run since the release? Its log would let the record cite a build that starts from the published bytes."
 
 Findings to mention with it: N19-1 (witness credit, question 1), N19-2 (unpublished generators/notes, question 2), N19-3 (replay receipt, question 3); notes N19-4..N19-7. Replace "T-194" by the published result page link once on main; the review names no T-NNN not on main.
+
+2026-10-18 W1 intake (think-xmxb): PR667 A9 notification: sq19 c86a991ea1379d1598739182f5f26619c9b7126a holds author clean rebuild receipt/log: VERIFIED,13143 modules replayed without failure,64vCPU x5h18m (about340 CPU-h). This answers draft question5 about whether source rebuild ran. Reword it to ask only for any unresolved receipt details; do not ask whether it ran. Source evidence, not our reproduction. Intake-watch read now retains this open ownership.

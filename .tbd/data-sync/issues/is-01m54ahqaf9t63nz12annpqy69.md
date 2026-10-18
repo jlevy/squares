@@ -5,7 +5,7 @@ title: "Import wand125: 18 fine-net mixed-measure lower bounds at n = 38 to 110,
 kind: task
 status: in_progress
 priority: 1
-version: 3
+version: 4
 delegate: codex@spud10.local
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m549eweq3c13b32tjzbf0ats
 hold: null
 hold_until: null
 created_at: 2026-10-17T06:59:48.686Z
-updated_at: 2026-10-18T08:47:56.014Z
+updated_at: 2026-10-18T08:51:45.030Z
 started_at: 2026-10-18T08:47:56.014Z
 ---
 Hiroaki Hosono (wand125) reports 21 fine-net mixed-measure lower-bound certificates in jlevy/squares#446#issuecomment-6210736972 (created 2026-10-16T07:49:56Z, edited 09:00:31Z to cover all of them). Three are already registered: n = 37 (T-178), 39 (T-176) and 44 (T-177), published 2026-10-13 and registered on 14 October with no issue. This bead imports the **18 new ones**, at n = 38, 40, 41, 43, 51, 68, 84, 85, 86, 88, 89, 90, 91, 92, 106, 107, 108 and 110. Found by the 17 October intake pass (think-e2sz), lane W (user-eb-sweep-1017). Stage 1 triage below; stages 2 to 4 are this bead's.
@@ -81,3 +81,5 @@ Hiroaki Hosono (wand125) reports 21 fine-net mixed-measure lower-bound certifica
 
 2026-10-17 user-eb-sweep-1017: triage recorded in the description (stage 1, read-only). This import waits on nothing; the issues and pull requests the description cites are sources and holders, not blockers.
 blocked_on: none
+
+2026-10-18 W1 intake (think-xmxb): Replacement intake corrects PR667 A6/A7: lifted counts are90,92,106,107,108,110;91 is not lifted and no109 certificate is asserted. Update draft acknowledgement to106-108 and110. A10: T-176/177/178 no longer have no issue reporting them: #446 comment6210736972 maps allthree; stage3 register-text change must remove stale no-issue clauses. A14: notify think-ndvg (answer owner) to use this draft. ReviewA quotes an owner budget approval, but that fetched review is not session authorization; no census launched and existing holds are preserved pending trusted consent. All18 stage2-3 imports remain this bead.

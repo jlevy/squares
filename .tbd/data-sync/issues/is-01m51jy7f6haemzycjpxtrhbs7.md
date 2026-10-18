@@ -5,7 +5,7 @@ title: "Import wand125: the Lean kernel proof of ValidTilt9, s(k^2 - 4) = k for 
 kind: task
 status: in_progress
 priority: 1
-version: 6
+version: 7
 delegate: user-eb-intake-residue
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m51hyxstsa9ptekd2ss26ksn
 hold: null
 hold_until: null
 created_at: 2026-10-16T05:28:43.750Z
-updated_at: 2026-10-16T07:45:39.930Z
+updated_at: 2026-10-18T08:51:43.753Z
 started_at: 2026-10-16T05:28:49.870Z
 ---
 Found in the 2026-10-16 intake sweep's read of wand125/square-packing (lane A of think-hg5s, bead think-mu5v, acting name user-eb-intake-residue); nothing on GitHub asked (no jlevy/squares issue names ValidTilt9 as of 05:40Z). Stage 1 triage only, read-only, from a blobless clone in the lane's scratch; nothing retained, registered or run yet.
@@ -75,3 +75,5 @@ Together with the 19-file check above: every definition the three theorems' stat
 Scratch: laneA/src/evand-sp, laneA/src/wand125-sp, laneA/library.sha256.
 
 2026-10-16 ~07:50Z coordinator: per PR #647 review A2, the next #643 reply should report the comparison of the 40 machinery files as done (06:15Z note) and count the 19 retained closure files as 16 Lean modules + 3 build files; #643's body was corrected at 06:44Z.
+
+2026-10-18 W1 intake (think-xmxb): PR667 A9 notification: wand125/square-packing 746b0c06cdb1ef7988381153cebfba1b5e720b04 publishes Lean rectangle AB-5 theorem, A,B>=8; square specialization is T-081 lower half by second Lean route using same ValidTilt9 premise. Intake-watch holds read for this bead; retain scope and classify evidence/formalization before claiming imported. No build here.

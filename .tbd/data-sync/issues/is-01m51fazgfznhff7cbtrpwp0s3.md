@@ -5,7 +5,7 @@ title: "Validate: Fitzharding s(19) Lean proof (#640), full from-source build, a
 kind: task
 status: in_progress
 priority: 2
-version: 4
+version: 5
 delegate: codex@spud10.local
 labels:
   - validation
@@ -15,7 +15,7 @@ parent_id: is-01m51e5sp1t03c20hqp7d3wajm
 hold: null
 hold_until: null
 created_at: 2026-10-16T04:25:47.279Z
-updated_at: 2026-10-18T08:47:56.005Z
+updated_at: 2026-10-18T08:51:43.103Z
 started_at: 2026-10-18T08:47:56.005Z
 ---
 Validation part of think-a4x3 (#640, Oscar Fitzharding's Lean proof that s(19) = 3 + 4 sqrt 2 / 3). Record-changing at 19 (a new optimality entry; rungs).
@@ -35,3 +35,5 @@ blocked_on: none
 ## Notes
 
 2026-10-16 ~05:58Z OWNERSHIP TRANSFER by the owner's word to the overnight coordinator user-eb (epic think-hg5s): "We have some changes with the regularization and a couple other things from another agent that you should take over and incorporate into your work." The ecstatic-edison lanes should stop work on this bead and its branch, and record any unpushed state in a note here. user-eb's lanes fetch before every push and stop if the branch moved.
+
+2026-10-18 W1 intake (think-xmxb): PR667 A9 pricing update: source clean rebuild at ofitzharding/sq19 c86a991ea1379d1598739182f5f26619c9b7126a reports VERIFIED,13143 modules,64vCPU x5h18m (about340 CPU-h). Replace old unmeasured190-420 range with this measured source basis when repricing; preserve machine scaling uncertainty. Full build remains held; no build here.
