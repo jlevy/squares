@@ -273,8 +273,8 @@ remain provisional under the merge-order rule above.
 At clean `611b45437`, the records tier passed all 52 selected steps in 95.57 seconds.
 The push tier passed 66 of 67 selected steps in 1,219.13 seconds, failing only the
 [resident-Rust shutdown control](../../../packing/tests/test_rust_rectangle_geometry.py).
-Its half-second fixture deadline expired before an angle completed; the unchanged
-control passed in isolation in 0.59 seconds.
+Its half-second fixture deadline yielded zero completed angles, consistent with expiry
+before the first angle; the unchanged control passed in isolation in 0.59 seconds.
 
 `think-26gw` tracks the test repair: hold the clock through startup and the completed
 angle, then allow a real 0.05-second shutdown wait through the actual protocol code.
