@@ -339,6 +339,25 @@ The shared environment was not changed by this mitigation.
 harness code for it.
 The resulting head requires fresh records and push tiers in the isolated environment.
 
+## Census Admission Fixture Follow-up — 18 October 2026
+
+At clean `600539c43`, the isolated records tier passed all 52 selected steps in 111.27
+seconds.
+Its push tier passed 66 of 67 selected steps in 741.09 seconds, failing only the
+complete-row census fixture.
+The retained journal records a 2-second timeout after exact rows 0 and 1 of the
+requested 0, 1 and 2; the wrapper correctly returned PARTIAL_ROW_EQUALITY. The unchanged
+case and adjacent subset and malformed-value controls pass in isolation (three tests in
+1.95 seconds).
+
+`think-urgl` gives only the success/admission helper a bounded 30-second budget for
+startup and journal writes on loaded hosts.
+The separate sleeping-checker timeout control remains at 2.0 seconds, with the
+complete-row and exactness assertions and production admission rules unchanged.
+All 13 focused module tests pass in 3.88 seconds; Ruff and BasedPyright are clean.
+Fresh exact-head records and push tiers remain required before publication; this failed
+gate is retained as a fixture timing failure.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->
