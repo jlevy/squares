@@ -549,7 +549,7 @@ def polynomial_block(upper: dict[str, Any], *, n: int) -> str:
             paper_path,
         )
 
-        target = f"{paper_path(EXACT_SIDE_VALUES)}#current-polynomial-for--{n}"
+        target = f"{paper_path(EXACT_SIDE_VALUES)}#current-n{n}"
         coefficients = f"All {degree + 1} coefficients" if degree else "The full coefficients"
         return (
             f"<dt>{_esc(label)}</dt><dd>{coefficients} are listed in "

@@ -501,7 +501,7 @@ def test_case_83_keeps_its_exact_degree_and_links_every_coefficient_from_a_small
     record = _record(records, 83)
     assert "Minimal polynomial, degree 672" in record
     assert "673 coefficients" in record
-    assert '<a href="../papers/exact-side-values.html#current-polynomial-for--83">' in record
+    assert '<a href="../papers/exact-side-values.html#current-n83">' in record
     assert "Exact Side Values for Packing Unit Squares" in record
     assert "s^{672}" not in record
     assert len(records["cases/83.html"].encode()) < RECORD_CEILING_BYTES

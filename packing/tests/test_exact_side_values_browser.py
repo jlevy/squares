@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import re
 from collections.abc import Iterator
 from copy import deepcopy
 from pathlib import Path
@@ -15,7 +16,7 @@ from playwright.sync_api import Page, Route, expect, sync_playwright
 from devtools import exact_catalogue
 from devtools import render_exact_side_values as paper
 from sqpack.probes import probe
-from tests import site_browser
+from tests import site_browser, site_renders
 from tests.exact_side_values_fixture import adopted_current
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -141,6 +142,11 @@ class Catalogue:
     def open(self, hash_value: str = "") -> None:
         self.page.goto("https://catalogue.test/" + hash_value)
         expect(self.page.locator("#index-message")).to_contain_text("entries")
+
+
+@pytest.fixture(scope="module")
+def case83_record() -> str:
+    return site_renders.case_records((83,))["cases/83.html"]
 
 
 @pytest.fixture
@@ -292,7 +298,7 @@ def test_mobile_keyboard_and_disabled_javascript_fallback(catalogue: Catalogue) 
 
 
 def test_emitted_v2_index_preserves_search_numeric_lazy_and_occurrence_selection(
-    catalogue: Catalogue, tmp_path: Path
+    catalogue: Catalogue, tmp_path: Path, case83_record: str
 ) -> None:
     papers = tmp_path / "papers"
     files = exact_catalogue.output_files(paper.load_register(), papers=papers)
@@ -311,14 +317,19 @@ def test_emitted_v2_index_preserves_search_numeric_lazy_and_occurrence_selection
     assert "/exact-side-values-data/metadata/current-n29.json" in catalogue.requests
     assert not any("/coefficients/" in path for path in catalogue.requests)
 
-    page.get_by_label("Search entries").fill("n:83")
-    page.locator("a.entry-link").click()
+    case_link = re.search(r'href="([^"]*papers/exact-side-values.html#[^"]+)"', case83_record)
+    assert case_link is not None
+    catalogue.open("#" + urlparse(case_link[1]).fragment)
     expect(page.locator("#detail-title")).to_contain_text("n = 83")
+    assert "/exact-side-values-data/metadata/current-n83.json" in catalogue.requests
+    assert "/exact-side-values-data/metadata/current-n87.json" not in catalogue.requests
     page.get_by_role("button", name="Open coefficients").click()
     expect(page.locator("#coefficient-body tr")).to_have_count(12)
     expected = json.loads(
         files[papers / "exact-side-values-data/coefficients/current-n83.json"]
     )
+    assert len(expected["coefficients"]) == 673
+    expect(page.locator("#coefficient-message")).to_contain_text("of 673")
     assert (
         page.locator("#coefficient-body code").all_text_contents()
         == expected["coefficients"][:12]
