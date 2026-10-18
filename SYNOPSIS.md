@@ -658,6 +658,11 @@ case or experiment separately.
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
 | [Review: PingYou Ltd’s Exact Rational Certificate for s(29) (PR #622)](docs/project/reviews/review-2026-10-16-pingyou-n29.md) | dated review record | record | retained | — |
+| [Intake Audit, 18 October 2026](docs/project/reports/report-2026-10-18-intake-audit.md) | research synthesis | record | retained | — |
+| [Open Work Review — 18 October 2026](docs/project/reviews/2026-10-18-open-work-review.md) | dated review record | record | retained | — |
+| [Intake Evidence, 18 October 2026](packing/campaign/issue-intake/intake-20261018/README.md) | source retention and archive policy | record | retained | — |
+| [Upper-Bound Reports, Count by Count, in Report Order](packing/campaign/issue-intake/upper-bounds-20261018/README.md) | generated status view | generated | generated | — |
+| [Lane Records for the 18 October Ledger](packing/campaign/issue-intake/upper-bounds-20261018/lane-claims/README.md) | source retention and archive policy | record | retained | — |
 | [Review: The Rational Upper-Bound Imports of 11 to 15 October (#506 to #607)](docs/project/reviews/review-2026-10-16-upper-bound-imports-506-607.md) | dated review record | record | retained | — |
 | [Fitzharding’s Lean Proof That s(19) = 3 + 4√2/3: Mathematical Review](docs/project/reviews/review-2026-10-16-fitzharding-n19-lean.md) | dated review record | record | retained | — |
 | [Review: The Rational Upper-Bound Imports of 12 to 14 October (#561 to #593)](docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md) | dated review record | record | retained | — |

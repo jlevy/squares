@@ -1,0 +1,787 @@
+format: intake-ledger-v1
+read_at_main: 804eff369193b698d497a9c06847059eb9de0470
+read_on: '2026-10-18'
+rule: If they are reported in order, then each one should be recorded as a result, as long
+  as each one is stronger than the last. If a stronger result is reported first, then the
+  other one should not be recorded since it is weaker after that, unless there is some key
+  reason it should be recorded.
+lanes: []
+reports:
+- report: '#659'
+  url: https://github.com/jlevy/squares/issues/659
+  kind: issue
+  holders: Evan Daniel
+  reported_at: '2026-10-16T14:05:14Z'
+  bead: think-6wtz
+  claims:
+  - n: 236
+    printed: '15.861934390608'
+    rounding: up
+  note: Triage comparison of issue-table upper bounds against frozen current records. The
+    source inventory, exact-header decisions, classical envelope and other unimported publications
+    remain on the owner bead; a ledger verdict alone is not registration or feasibility verification.
+- report: '#664'
+  url: https://github.com/jlevy/squares/issues/664
+  kind: issue
+  holders: Evan Daniel
+  reported_at: '2026-10-17T04:30:51Z'
+  bead: think-8o5j
+  claims:
+  - n: 271
+    printed: '16.948947733714'
+    rounding: up
+  note: Triage comparison of issue-table upper bounds against frozen current records. The
+    source inventory, exact-header decisions, classical envelope and other unimported publications
+    remain on the owner bead; a ledger verdict alone is not registration or feasibility verification.
+- report: '#666'
+  url: https://github.com/jlevy/squares/issues/666
+  kind: issue
+  holders: Joost de Winter
+  reported_at: '2026-10-17T07:06:07Z'
+  bead: think-3m10
+  claims:
+  - n: 464
+    printed: '21.988813022694'
+    rounding: up
+  - n: 509
+    printed: '22.994328036438'
+    rounding: up
+  - n: 555
+    printed: '23.993653790591'
+    rounding: up
+  - n: 603
+    printed: '24.995268064197'
+    rounding: up
+  - n: 654
+    printed: '25.996103908965'
+    rounding: up
+  - n: 706
+    printed: '26.998712100405'
+    rounding: up
+  - n: 760
+    printed: '27.995949340329'
+    rounding: up
+  - n: 817
+    printed: '28.998488480775'
+    rounding: up
+  - n: 875
+    printed: '29.998783733108'
+    rounding: up
+  - n: 935
+    printed: '30.995955854834'
+    rounding: up
+  - n: 998
+    printed: '31.998349747355'
+    rounding: up
+  - n: 1061
+    printed: '32.996048342114'
+    rounding: up
+  - n: 1128
+    printed: '33.998294117981'
+    rounding: up
+  - n: 1196
+    printed: '34.998294118334'
+    rounding: up
+  - n: 1266
+    printed: '35.996046404219'
+    rounding: up
+  - n: 1339
+    printed: '36.997865207179'
+    rounding: up
+  - n: 1413
+    printed: '37.999463832123'
+    rounding: up
+  - n: 1489
+    printed: '38.997600184483'
+    rounding: up
+  - n: 1568
+    printed: '39.999336626159'
+    rounding: up
+  note: Triage comparison of issue-table upper bounds against frozen current records. The
+    source inventory, exact-header decisions, classical envelope and other unimported publications
+    remain on the owner bead; a ledger verdict alone is not registration or feasibility verification.
+- report: '#668'
+  url: https://github.com/jlevy/squares/issues/668
+  kind: issue
+  holders: Joost de Winter
+  reported_at: '2026-10-17T14:06:25Z'
+  bead: think-qdcc
+  claims:
+  - n: 227
+    printed: '15.563796703670'
+    rounding: up
+  - n: 229
+    printed: '15.650174756949'
+    rounding: up
+  - n: 260
+    printed: '16.645778804182'
+    rounding: up
+  note: Triage comparison of issue-table upper bounds against frozen current records. The
+    source inventory, exact-header decisions, classical envelope and other unimported publications
+    remain on the owner bead; a ledger verdict alone is not registration or feasibility verification.
+- report: '#669'
+  url: https://github.com/jlevy/squares/issues/669
+  kind: issue
+  holders: Evan Daniel
+  reported_at: '2026-10-17T14:49:46Z'
+  bead: think-n1ga
+  claims:
+  - n: 155
+    printed: '12.952260944651'
+    rounding: up
+  note: Triage comparison of issue-table upper bounds against frozen current records. The
+    source inventory, exact-header decisions, classical envelope and other unimported publications
+    remain on the owner bead; a ledger verdict alone is not registration or feasibility verification.
+- report: '#670'
+  url: https://github.com/jlevy/squares/issues/670
+  kind: issue
+  holders: Francisco Couzo
+  reported_at: '2026-10-17T18:05:06Z'
+  bead: think-f28n
+  claims:
+  - n: 204
+    printed: '14.808644417690'
+    rounding: up
+  - n: 330
+    printed: '18.701641583454'
+    rounding: up
+  - n: 339
+    printed: '18.911307592083'
+    rounding: up
+  - n: 364
+    printed: '19.583782190152'
+    rounding: up
+  - n: 370
+    printed: '19.767428349965'
+    rounding: up
+  - n: 378
+    printed: '19.942505611659'
+    rounding: up
+  - n: 379
+    printed: '19.953014213942'
+    rounding: up
+  - n: 382
+    printed: '19.987621153966'
+    rounding: up
+  - n: 403
+    printed: '20.583782190152'
+    rounding: up
+  - n: 417
+    printed: '20.942505611684'
+    rounding: up
+  - n: 418
+    printed: '20.945240141353'
+    rounding: up
+  - n: 419
+    printed: '20.959713620588'
+    rounding: up
+  - n: 421
+    printed: '20.982817421775'
+    rounding: up
+  - n: 422
+    printed: '20.984021832955'
+    rounding: up
+  - n: 444
+    printed: '21.583782190152'
+    rounding: up
+  - n: 452
+    printed: '21.778174593086'
+    rounding: up
+  - n: 458
+    printed: '21.942505611689'
+    rounding: up
+  - n: 459
+    printed: '21.943735551416'
+    rounding: up
+  - n: 460
+    printed: '21.957651945776'
+    rounding: up
+  - n: 461
+    printed: '21.972483922352'
+    rounding: up
+  - n: 462
+    printed: '21.980759715480'
+    rounding: up
+  - n: 463
+    printed: '21.984021832955'
+    rounding: up
+  - n: 501
+    printed: '22.933763683699'
+    rounding: up
+  - n: 503
+    printed: '22.957558542542'
+    rounding: up
+  - n: 505
+    printed: '22.972317735354'
+    rounding: up
+  - n: 536
+    printed: '23.677669529701'
+    rounding: up
+  - n: 546
+    printed: '23.933763683699'
+    rounding: up
+  - n: 548
+    printed: '23.957558542543'
+    rounding: up
+  - n: 551
+    printed: '23.966898919633'
+    rounding: up
+  - n: 553
+    printed: '23.981588093282'
+    rounding: up
+  - n: 598
+    printed: '24.962916747309'
+    rounding: up
+  - n: 600
+    printed: '24.981585347399'
+    rounding: up
+  - n: 647
+    printed: '25.953248543199'
+    rounding: up
+  - n: 650
+    printed: '25.982429027496'
+    rounding: up
+  - n: 651
+    printed: '25.983790120159'
+    rounding: up
+  - n: 700
+    printed: '26.972996848621'
+    rounding: up
+  - n: 701
+    printed: '26.975561031531'
+    rounding: up
+  - n: 702
+    printed: '26.977494114977'
+    rounding: up
+  - n: 703
+    printed: '26.987493360751'
+    rounding: up
+  - n: 749
+    printed: '27.925883089331'
+    rounding: up
+  - n: 753
+    printed: '27.937423518013'
+    rounding: up
+  - n: 754
+    printed: '27.937423518013'
+    rounding: up
+  - n: 756
+    printed: '27.984237490911'
+    rounding: up
+  - n: 757
+    printed: '27.989936988207'
+    rounding: up
+  - n: 758
+    printed: '27.994980212536'
+    rounding: up
+  - n: 804
+    printed: '28.917335789888'
+    rounding: up
+  - n: 805
+    printed: '28.921843659464'
+    rounding: up
+  - n: 806
+    printed: '28.921843662228'
+    rounding: up
+  - n: 809
+    printed: '28.937423518015'
+    rounding: up
+  - n: 811
+    printed: '28.982472918533'
+    rounding: up
+  - n: 812
+    printed: '28.982472918533'
+    rounding: up
+  - n: 813
+    printed: '28.990394020145'
+    rounding: up
+  - n: 863
+    printed: '29.921843659464'
+    rounding: up
+  - n: 866
+    printed: '29.935764472087'
+    rounding: up
+  - n: 867
+    printed: '29.950265025802'
+    rounding: up
+  - n: 868
+    printed: '29.982204111182'
+    rounding: up
+  - n: 869
+    printed: '29.982472918533'
+    rounding: up
+  - n: 870
+    printed: '29.985969207342'
+    rounding: up
+  - n: 871
+    printed: '29.989329079687'
+    rounding: up
+  - n: 922
+    printed: '30.899494936660'
+    rounding: up
+  - n: 925
+    printed: '30.935764472087'
+    rounding: up
+  - n: 926
+    printed: '30.949634321517'
+    rounding: up
+  - n: 927
+    printed: '30.976993727283'
+    rounding: up
+  - n: 928
+    printed: '30.976993727283'
+    rounding: up
+  - n: 929
+    printed: '30.978848462737'
+    rounding: up
+  - n: 930
+    printed: '30.982052182975'
+    rounding: up
+  - n: 931
+    printed: '30.989936243547'
+    rounding: up
+  - n: 987
+    printed: '31.949634321517'
+    rounding: up
+  - n: 989
+    printed: '31.976993727283'
+    rounding: up
+  - n: 990
+    printed: '31.978848462737'
+    rounding: up
+  - n: 991
+    printed: '31.982052182975'
+    rounding: up
+  - n: 992
+    printed: '31.985130163599'
+    rounding: up
+  - n: 993
+    printed: '31.985130163599'
+    rounding: up
+  note: Triage comparison of issue-table upper bounds against frozen current records. The
+    source inventory, exact-header decisions, classical envelope and other unimported publications
+    remain on the owner bead; a ledger verdict alone is not registration or feasibility verification.
+- report: '#672'
+  url: https://github.com/jlevy/squares/issues/672
+  kind: issue
+  holders: Francisco Couzo
+  reported_at: '2026-10-17T20:48:34Z'
+  bead: think-2vjc
+  claims:
+  - n: 227
+    printed: '15.563625652343'
+    rounding: up
+  - n: 229
+    printed: '15.650174740273'
+    rounding: up
+  - n: 330
+    printed: '18.692698795114'
+    rounding: up
+  - n: 461
+    printed: '21.971645445094'
+    rounding: up
+  - n: 507
+    printed: '22.973703609857'
+    rounding: up
+  - n: 652
+    printed: '25.994469543497'
+    rounding: up
+  - n: 653
+    printed: '25.994469543497'
+    rounding: up
+  - n: 704
+    printed: '26.994469543497'
+    rounding: up
+  - n: 749
+    printed: '27.924010906540'
+    rounding: up
+  - n: 750
+    printed: '27.927909095101'
+    rounding: up
+  - n: 753
+    printed: '27.936842811648'
+    rounding: up
+  - n: 755
+    printed: '27.951635349895'
+    rounding: up
+  - n: 756
+    printed: '27.983489205831'
+    rounding: up
+  - n: 757
+    printed: '27.989936967966'
+    rounding: up
+  - n: 758
+    printed: '27.994973756311'
+    rounding: up
+  - n: 759
+    printed: '27.995946347749'
+    rounding: up
+  - n: 804
+    printed: '28.915928305844'
+    rounding: up
+  - n: 805
+    printed: '28.916476090926'
+    rounding: up
+  - n: 811
+    printed: '28.982462261975'
+    rounding: up
+  - n: 812
+    printed: '28.982462261975'
+    rounding: up
+  - n: 813
+    printed: '28.989935237439'
+    rounding: up
+  - n: 814
+    printed: '28.995946347758'
+    rounding: up
+  - n: 815
+    printed: '28.995946384109'
+    rounding: up
+  - n: 816
+    printed: '28.998352177961'
+    rounding: up
+  - n: 817
+    printed: '28.998352177961'
+    rounding: up
+  - n: 864
+    printed: '29.932742598598'
+    rounding: up
+  - n: 865
+    printed: '29.932742598598'
+    rounding: up
+  - n: 868
+    printed: '29.982119729132'
+    rounding: up
+  - n: 869
+    printed: '29.982462261984'
+    rounding: up
+  - n: 871
+    printed: '29.986798495028'
+    rounding: up
+  - n: 872
+    printed: '29.995946384118'
+    rounding: up
+  - n: 873
+    printed: '29.998242686046'
+    rounding: up
+  - n: 874
+    printed: '29.998242686046'
+    rounding: up
+  - n: 923
+    printed: '30.932644308698'
+    rounding: up
+  - n: 924
+    printed: '30.932742598607'
+    rounding: up
+  - n: 929
+    printed: '30.978235012084'
+    rounding: up
+  - n: 930
+    printed: '30.982010362324'
+    rounding: up
+  - n: 932
+    printed: '30.993904118222'
+    rounding: up
+  - n: 933
+    printed: '30.995336946282'
+    rounding: up
+  - n: 934
+    printed: '30.995336946282'
+    rounding: up
+  - n: 935
+    printed: '30.995336946282'
+    rounding: up
+  - n: 990
+    printed: '31.978235012084'
+    rounding: up
+  - n: 991
+    printed: '31.982010362324'
+    rounding: up
+  - n: 994
+    printed: '31.995336946282'
+    rounding: up
+  - n: 995
+    printed: '31.995336946282'
+    rounding: up
+  - n: 996
+    printed: '31.995336946282'
+    rounding: up
+  note: Triage comparison of issue-table upper bounds against frozen current records. The
+    source inventory, exact-header decisions, classical envelope and other unimported publications
+    remain on the owner bead; a ledger verdict alone is not registration or feasibility verification.
+- report: '#674'
+  url: https://github.com/jlevy/squares/issues/674
+  kind: issue
+  holders: Evan Daniel
+  reported_at: '2026-10-17T23:10:59Z'
+  bead: think-5ij2
+  claims:
+  - n: 229
+    printed: '15.650163254859'
+    rounding: up
+  note: Triage comparison of issue-table upper bounds against frozen current records. The
+    source inventory, exact-header decisions, classical envelope and other unimported publications
+    remain on the owner bead; a ledger verdict alone is not registration or feasibility verification.
+- report: '#674 update'
+  url: https://github.com/jlevy/squares/issues/674#issuecomment-6244298663
+  kind: comment
+  holders: Evan Daniel
+  reported_at: '2026-10-18T01:36:21Z'
+  bead: think-5ij2
+  claims:
+  - n: 229
+    printed: '15.650161513896'
+    rounding: up
+  note: Author asks this smaller certificate to replace the opening value. Both reports remain
+    in chronological comparison; final request state follows the update.
+- report: '#675'
+  url: https://github.com/jlevy/squares/issues/675
+  kind: issue
+  holders: Francisco Couzo
+  reported_at: '2026-10-18T06:02:11Z'
+  bead: think-pvav
+  claims:
+  - n: 204
+    printed: '14.808644367227'
+    rounding: up
+  - n: 419
+    printed: '20.959713421191'
+    rounding: up
+  - n: 421
+    printed: '20.982817268367'
+    rounding: up
+  - n: 422
+    printed: '20.983607310148'
+    rounding: up
+  - n: 458
+    printed: '21.942423483273'
+    rounding: up
+  - n: 459
+    printed: '21.942423483273'
+    rounding: up
+  - n: 460
+    printed: '21.957558542548'
+    rounding: up
+  - n: 461
+    printed: '21.971616092121'
+    rounding: up
+  - n: 462
+    printed: '21.980489088007'
+    rounding: up
+  - n: 463
+    printed: '21.983605908182'
+    rounding: up
+  - n: 464
+    printed: '21.988035588879'
+    rounding: up
+  - n: 502
+    printed: '22.942402035201'
+    rounding: up
+  - n: 545
+    printed: '23.889722420681'
+    rounding: up
+  - n: 546
+    printed: '23.889722420681'
+    rounding: up
+  - n: 547
+    printed: '23.906371163646'
+    rounding: up
+  - n: 548
+    printed: '23.957455469976'
+    rounding: up
+  - n: 549
+    printed: '23.957455469976'
+    rounding: up
+  - n: 554
+    printed: '23.993580713561'
+    rounding: up
+  - n: 592
+    printed: '24.889722420681'
+    rounding: up
+  - n: 593
+    printed: '24.889722420681'
+    rounding: up
+  - n: 598
+    printed: '24.962908839930'
+    rounding: up
+  - n: 602
+    printed: '24.993580715986'
+    rounding: up
+  - n: 603
+    printed: '24.994263342387'
+    rounding: up
+  - n: 641
+    printed: '25.889564291814'
+    rounding: up
+  - n: 642
+    printed: '25.889722420681'
+    rounding: up
+  - n: 650
+    printed: '25.982428402604'
+    rounding: up
+  - n: 652
+    printed: '25.994256215430'
+    rounding: up
+  - n: 654
+    printed: '25.995905846673'
+    rounding: up
+  - n: 693
+    printed: '26.889722420681'
+    rounding: up
+  - n: 700
+    printed: '26.972954520906'
+    rounding: up
+  - n: 701
+    printed: '26.975560060840'
+    rounding: up
+  - n: 705
+    printed: '26.995905846673'
+    rounding: up
+  - n: 706
+    printed: '26.998639495676'
+    rounding: up
+  - n: 753
+    printed: '27.935538484638'
+    rounding: up
+  - n: 755
+    printed: '27.951593396552'
+    rounding: up
+  - n: 756
+    printed: '27.982602664098'
+    rounding: up
+  - n: 758
+    printed: '27.993798579000'
+    rounding: up
+  - n: 759
+    printed: '27.993798579000'
+    rounding: up
+  - n: 760
+    printed: '27.995946706541'
+    rounding: up
+  - n: 804
+    printed: '28.911312576594'
+    rounding: up
+  - n: 805
+    printed: '28.911312576594'
+    rounding: up
+  - n: 806
+    printed: '28.921462680479'
+    rounding: up
+  - n: 807
+    printed: '28.924702911083'
+    rounding: up
+  - n: 809
+    printed: '28.937423314202'
+    rounding: up
+  - n: 811
+    printed: '28.981360068210'
+    rounding: up
+  - n: 812
+    printed: '28.981360068210'
+    rounding: up
+  - n: 813
+    printed: '28.989934397793'
+    rounding: up
+  - n: 814
+    printed: '28.993798579000'
+    rounding: up
+  - n: 816
+    printed: '28.998219025338'
+    rounding: up
+  - n: 817
+    printed: '28.998234675372'
+    rounding: up
+  - n: 863
+    printed: '29.921462677966'
+    rounding: up
+  - n: 864
+    printed: '29.924702911083'
+    rounding: up
+  - n: 865
+    printed: '29.932623425046'
+    rounding: up
+  - n: 867
+    printed: '29.950105216770'
+    rounding: up
+  - n: 868
+    printed: '29.981359990606'
+    rounding: up
+  - n: 869
+    printed: '29.981360065447'
+    rounding: up
+  - n: 870
+    printed: '29.985524292952'
+    rounding: up
+  - n: 872
+    printed: '29.995946381399'
+    rounding: up
+  - n: 873
+    printed: '29.998171180951'
+    rounding: up
+  - n: 874
+    printed: '29.998171180951'
+    rounding: up
+  - n: 919
+    printed: '30.849232404954'
+    rounding: up
+  - n: 923
+    printed: '30.924702911083'
+    rounding: up
+  - n: 924
+    printed: '30.932577553094'
+    rounding: up
+  - n: 927
+    printed: '30.976949083864'
+    rounding: up
+  - n: 928
+    printed: '30.976949083864'
+    rounding: up
+  - n: 930
+    printed: '30.981543197185'
+    rounding: up
+  - n: 931
+    printed: '30.989934734721'
+    rounding: up
+  - n: 932
+    printed: '30.993891653207'
+    rounding: up
+  - n: 933
+    printed: '30.995293256848'
+    rounding: up
+  - n: 989
+    printed: '31.976125363479'
+    rounding: up
+  - n: 990
+    printed: '31.978044872634'
+    rounding: up
+  - n: 991
+    printed: '31.981535631408'
+    rounding: up
+  - n: 992
+    printed: '31.984841090107'
+    rounding: up
+  - n: 993
+    printed: '31.984841090107'
+    rounding: up
+  - n: 994
+    printed: '31.993865896560'
+    rounding: up
+  - n: 995
+    printed: '31.994784549711'
+    rounding: up
+  - n: 996
+    printed: '31.994784549711'
+    rounding: up
+  - n: 997
+    printed: '31.998300669675'
+    rounding: up
+  - n: 998
+    printed: '31.998301912120'
+    rounding: up
+  note: Triage comparison of issue-table upper bounds against frozen current records. The
+    source inventory, exact-header decisions, classical envelope and other unimported publications
+    remain on the owner bead; a ledger verdict alone is not registration or feasibility verification.
+exceptions: []
+key_reason_candidates: []
+other_items: []
+cross_check: []

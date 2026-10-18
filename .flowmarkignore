@@ -135,6 +135,7 @@ packing/frontier/CERTIFICATE-REACH.md
 packing/campaign/issue-intake/upper-bounds-20261014/README.md
 packing/campaign/issue-intake/upper-bounds-20261016/README.md
 packing/campaign/issue-intake/upper-bounds-n29-20261016/README.md
+packing/campaign/issue-intake/upper-bounds-20261018/README.md
 
 # stats-summary.md was written by the v2-transitions spike's `build_candidate.py` beside the
 # record it summarises, and is frozen at 0281a508 since the generator moved into

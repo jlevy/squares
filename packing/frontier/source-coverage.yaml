@@ -2486,7 +2486,7 @@ sources:
     - 105
     - 110
     - 131
-  reviewed: '2026-10-16'
+  reviewed: '2026-10-18'
   source_date: '2026-07-29'
   disposition: superseded-covered
   replay_disposition: public-certificate-missing
@@ -2510,7 +2510,10 @@ sources:
     intake pass, think-wnsv): the page, still "Release 1 · 29 July 2026" with datePublished 2026-07-29,
     and data/results.json are byte-identical to results.html and results.json here (SHA-256 4cc4d80d...
     and dd7c1c62...), so nothing changed. Read again on 2026-10-16 (the morning intake pass,
-    think-mu5v): both are still byte-identical to the retained copies, so nothing changed.
+    think-mu5v): both are still byte-identical to the retained copies, so nothing changed. Read again on
+    2026-10-17 (the intake pass, think-e2sz): the page and data/results.json are still byte-identical to
+    the retained copies, so nothing changed. Read again on 2026-10-18 (think-xmxb): both files remain byte-identical;
+    campaign/issue-intake/intake-20261018/manual-source-receipt.json retains the measured source digests.
 
     '
 - id: schadt-n29-2025
@@ -2593,7 +2596,7 @@ sources:
   scope:
     n_values:
     - 153
-  reviewed: '2026-10-16'
+  reviewed: '2026-10-18'
   source_date: '2026-10-07'
   disposition: current-report
   replay_disposition: case-specific
@@ -2624,7 +2627,11 @@ sources:
     2026-10-07T18:33:04Z edit, and issue 401 has no comment after 2026-10-07T22:54:51Z, only the intake
     label added on 2026-10-12, so nothing changed. Read again on 2026-10-16 (the morning intake
     pass, think-mu5v): the comment still carries its 2026-10-07T18:33:04Z edit, and the last comment
-    on issue 401 is still that of 2026-10-07T22:54:51Z, so nothing changed.'
+    on issue 401 is still that of 2026-10-07T22:54:51Z, so nothing changed. Read again on 2026-10-17
+    (the intake pass, think-e2sz): the same edit, the same last comment, and the issue still closed
+    with only its intake label, so nothing changed. Read again on 2026-10-18 (think-xmxb): same
+    edit and final comment, still closed; the read receipt is in
+    campaign/issue-intake/intake-20261018/manual-source-receipt.json.'
 - id: squish-update-2026-10-07
   title: 'SQUISH update: seven additional and five tighter rational packings'
   role: source-repository

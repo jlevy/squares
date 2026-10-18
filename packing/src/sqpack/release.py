@@ -1335,6 +1335,52 @@ class ReleaseNoPublicChange(NamedTuple):
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
     ReleaseNoPublicChange(
+        components=("site",),
+        paths=("packing/frontier/source-coverage.yaml",),
+        outputs=(
+            "about.html",
+            "atlas.html",
+            "conventions.html",
+            "development.html",
+            "epistemics.html",
+            "index.html",
+            "news.html",
+            "papers.html",
+            "readme.html",
+            "results.html",
+            "synopsis.html",
+            "tutorial-advanced.html",
+            "tutorial.html",
+            "visualize.html",
+        ),
+        reason=(
+            "Reviewed the source-register change against render_overview: only reviewed "
+            "dates and intake-read notes change, from the 16 October base to the completed "
+            "18 October hand reads. None supplies a rendered site value. The paired "
+            "1472-file render comparison in PR 667 established the same metadata-only "
+            "boundary; the current change adds no result, bound, credit or drawing."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "Reviewed render_packing_methods: render_all_facts returns no substitutions, "
+            "and these request/source records are citation inputs without rendered "
+            "content. The 18 October change adds queued issue claims and reads, records "
+            "the already posted 432 reply and corrects the 446 transcription; none enters "
+            "the manuscript. PR 667's paired 42-file comparison established the same "
+            "boundary. The current review preserves the survey's v0.2.2 edition."
+        ),
+    ),
+    ReleaseNoPublicChange(
         components=("paper:n11-lower-bounds-explainer",),
         paths=(
             "packing/cases/n11_fractional_certificate/t-018-proof-card.md",

@@ -21,7 +21,7 @@ softschema:
   status: enforced
 repository: jlevy/squares
 owner: jlevy
-last_reviewed: '2026-10-16'
+last_reviewed: '2026-10-18'
 issues:
   - number: 420
     title: 'Lean proofs that 178 best-known packings are local minima (n ≤ 324): registration request'
@@ -243,21 +243,20 @@ issues:
     title: '18 (originally 25) new packings below record for n = 51–295: registration request'
     author: ry-xu
     opened: '2026-10-08'
-    state: open
+    state: closed
+    closed: '2026-10-16'
     kind: result-report
     triage: done
-    summary: >-
-      All 25 complete rational source certificates and the separate undilated n51 construction
-      at (16+5sqrt(2))/3 have independently reviewed full native feasibility replay at V3/C3.
-      Seventeen rational houses and radical n51 are selected; eight rational certificates remain
-      confirmed without selection. No global/local optimality, rigidity or novelty is established.
-      Native and independent exact geometry count 119 touching pairs at radical n51; the source's
-      191-contact assertion remains unconfirmed.
+    summary: All 25 complete rational source certificates and the separate undilated n51 construction at
+      (16+5sqrt(2))/3 have independently reviewed full native feasibility replay at V3/C3. Seventeen rational
+      houses and radical n51 are selected; eight rational certificates remain confirmed without selection.
+      No global/local optimality, rigidity or novelty is established. Native and independent exact geometry
+      count 119 touching pairs at radical n51; the source's 191-contact assertion remains unconfirmed.
     read_through: '2026-10-08T00:16:31Z'
     results:
     - key: rational-certificates
-      claim: Exact finite feasibility and construction upper bounds for all 25 complete rational
-        certificates, including eight not selected by the current atlas.
+      claim: Exact finite feasibility and construction upper bounds for all 25 complete rational certificates,
+        including eight not selected by the current atlas.
       source: body
       register:
       - T-125
@@ -269,12 +268,12 @@ issues:
     - key: source-contact-count
       claim: The author reports 191 touching pairs for the undilated n51 construction.
       source: body
-      not_registered: Native and independent exact checks count 119 touching pairs and 1156 strictly
-        separated pairs. The source count remains unconfirmed and supplies no additional admission.
+      not_registered: Native and independent exact checks count 119 touching pairs and 1156 strictly separated
+        pairs. The source count remains unconfirmed and supplies no additional admission.
       queued: false
     beads:
-      - think-klm7
-      - think-1cvf
+    - think-klm7
+    - think-1cvf
     answer_bead: think-klm7
     replies:
     - url: https://github.com/jlevy/squares/issues/432#issuecomment-6116242710
@@ -293,11 +292,29 @@ issues:
         confirmation: C3
         status: confirmed
       - result: source-contact-count
-    close_when: >-
-      The existing intake owner acquires immutable source custody, compares each claim with the
+    - url: https://github.com/jlevy/squares/issues/432#issuecomment-6237819138
+      date: '2026-10-17'
+      by: jlevy
+      kind: final
+      reported:
+      - result: rational-certificates
+        id: T-125
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: undilated-n51
+        id: T-126
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: source-contact-count
+    close_when: The existing intake owner acquires immutable source custody, compares each claim with the
       current records, records native import and supported verdicts, and posts the resulting disposition
       from main.
-
+    notes: The owner closed the issue on 16 October 2026 at 18:41:59Z. The final reply followed on 17 October
+      at 17:38:50Z (issuecomment-6237819138), and is recorded here; it reports T-125 and T-126 confirmed
+      at V3/C3 and explains the unconfirmed source contact count. No final reply remains queued for this
+      state.
   - number: 400
     title: 'n17 branch-and-bound certificates: two faster ways to run the standing verifier''s checks,
       with a same-host benchmark'
@@ -3450,8 +3467,11 @@ issues:
     summary: All seven fine-net lower-bound statements are recorded as attributed reports with complete
       original-source custody and accepted conditional maintained input-premise review. Fresh complete
       native capture and whole-net controls remain pending; standing bounds and ratings do not change.
-      On 10 October the author reports a stronger n29 certificate, which awaits its own import.
-    read_through: '2026-10-10T02:47:54Z'
+      On 10 October the author reports a stronger n29 certificate, which awaits its own import. On 16
+      October the author reports 21 more fine-net certificates, three of which (n = 37, 39 and 44) the
+      record already holds from the source's repository as T-178, T-176 and T-177; the 18 new ones, at n
+      = 38 to 110, are each above both lower lanes at their count, and think-f40c imports them.
+    read_through: '2026-10-16T09:00:31Z'
     results:
     - key: fine-net-n19
       claim: Author reports lower bound 1931/400 for n=19 using all 2073 declared net directions.
@@ -3506,6 +3526,36 @@ issues:
       - T-132
       evidence:
       - E-wand125-fine-net-n29-582-followup-report
+    - key: fine-net-n37-n39-n44-1016
+      claim: >-
+        s(37) >= 2599/400, s(39) >= 533/80 and s(44) >= 2799/400 by the fine-net certificates
+        mixed_n37_L64975, mixed_n39_L66625 and mixed_n44_L69975 over all 2,073 declared net
+        directions, published on 13 October and reported here for the first time.
+      source: https://github.com/jlevy/squares/issues/446#issuecomment-6210736972
+      register:
+      - T-176
+      - T-177
+      - T-178
+    - key: fine-net-18-1016
+      claim: >-
+        s(38) >= 2631/400, s(40) >= 1347/200, s(41) >= 2721/400, s(43) >= 2777/400 and s(51) >=
+        3011/400 over all 2,073 declared net directions, and s(68) >= 853/100, s(84) >= 3769/400,
+        s(85) >= 379/40, s(86) >= 3811/400, s(88) >= 3853/400, s(89) >= 1937/200, s(90) >= 489/50,
+        s(91) >= 783/80, s(92) >= 493/50, s(106) >= 10503/1000, s(107) >= 529/50, s(108) >= 531/50
+        and s(110) >= 1073/100 over all 201, those at 90, 92, 106, 107, 108 and 110 lifted from smaller certificates, each
+        published in wand125/square-packing on 16 October (02c5595 to 718887c) with its data in the
+        release square-lower-bounds-v1. The author ran sqverify-fast at every direction and refused
+        the 197/200 mass control in 32 sampled directions.
+      source: https://github.com/jlevy/squares/issues/446#issuecomment-6210736972
+      not_registered: >-
+        Triage only (17 October 2026, think-f40c). Each is above both lower lanes at its count, by
+        0.0115 (84) to 0.09 (92) against wand125's and Guzhou0806's earlier certificates and by
+        0.099 to 0.143 at 106 to 108 and 110 against the closed form (T-180). Stage 2 retains the 18 bundles at
+        their commits; stage 3 registers them as reported. A complete sqverify-fast census with
+        whole-net controls is priced from the bundles' own receipts at 0.6 to 25 CPU-hours each, about
+        83 to 95 in all.
+      queued: true
+      bead: think-f40c
     asks:
     - what: Replay and review the n29 candidate at 291/50 over all 2073 directions with whole-net
         controls and restored positives, from a candidate retained where the census reads it.
@@ -3531,6 +3581,7 @@ issues:
     beads:
     - think-ndvg
     - think-r333
+    - think-f40c
     answer_bead: think-ndvg
     replies:
     - url: https://github.com/jlevy/squares/issues/446#issuecomment-6116243055
@@ -6932,20 +6983,25 @@ issues:
     kind: other
     intake: true
     triage: done
-    summary: >-
-      The 2026-10-11 intake pass's tracking issue for evand/square-packing 060c1a1, which merges
-      wand125's ValidTilt7 and Valid7 decided in the Lean kernel with a bridge to box7Cover, and
-      would make T-064 kernel-checked throughout: retain the merged lean/ tree with its release,
-      read the statement binding and audit the root names, and add an evidence entry. A full
-      kernel rebuild is priced by the source at about 6,650 CPU-hours and a sample at about 70
-      process-hours; either needs an owner decision.
-    read_through: '2026-10-12T07:50:23Z'
+    summary: 'The 2026-10-11 intake pass''s tracking issue for evand/square-packing 060c1a1, which merges
+      wand125''s ValidTilt7 and Valid7 decided in the Lean kernel with a bridge to box7Cover, and would
+      make T-064 kernel-checked throughout: retain the merged lean/ tree with its release, read the statement
+      binding and audit the root names, and add an evidence entry. A full kernel rebuild is priced by the
+      source at about 6,650 CPU-hours and a sample at about 70 process-hours; either needs an owner decision.
+      On 18 October the author reports Valid7 version 2 at wand125/square-packing 649a92042b4b79dda1eca1749c34029aee60990e
+      (valid7-lean-v2), the same theorem and standard axiom set, with 62,626 generated files and an author-reported
+      798 CPU-hour run rather than 6,650. The new source uses evand library c5c7f00 and RowMinN; no rebuild
+      ran here.'
+    read_through: '2026-10-18T07:25:01Z'
     results: []
     asks:
-    - what: Retain the merged lean/ tree and its release, audit the root names, add an evidence entry
-        for T-064, and an owner decision on a sample or a full rebuild.
+    - what: Retain the merged lean/ tree and its release, audit the root names, add an evidence entry for
+        T-064, and an owner decision on a sample or a full rebuild.
       state: queued
       bead: think-0ayk
+      note: ' Version 2 supersedes the old price as the latest source option; retain and audit both releases,
+        update the validation estimate from its receipt, and record the owner/machine disposition before
+        a full build.'
     beads:
     - think-0ayk
     answer_bead: think-0ayk
@@ -6955,8 +7011,14 @@ issues:
       by: jlevy
       kind: follow-up
       reported: []
-    close_when: The packet and the evidence entry are on main, and the owner has decided on a sample
-      or a full rebuild.
+    close_when: The packet and the evidence entry are on main, and the owner has decided on a sample or
+      a full rebuild.
+    notes: ' The author comment of 18 October (issuecomment-6247112302) is new evidence for T-064, held
+      by think-0ayk. It reports 9,800 unchanged root certificates with re-certified leaves, peak 37 GB for
+      one module and 51 GB for Main.lean, 29.4 wall-hours on 48 vCPU. The quoted component CPU figures do
+      not sum to the quoted total; the source receipt must resolve that before a new price is accepted.
+      The full build remains outside this pass: no CPU-hour replay or large-memory build is launched. The
+      draft reply must acknowledge version 2 and avoid the stale version-1 price as the only option.'
   - number: 538
     title: Workbench trajectory cost check flakes over 400 ms under CI load
     author: jlevy
@@ -9466,3 +9528,1815 @@ issues:
       the repository and an image. It is retained in the packet as X's syndication endpoint returned it at
       04:58:12Z. The packet's acquisition record is what makes the intake sweep watch
       ofitzharding/sq19, with its head pinned; intake-watch.yaml records only reads past a pin.
+  - number: 659
+    title: 's(236) ≤ 15.861934390608: registration request'
+    author: evand
+    opened: '2026-10-16'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Evan Daniel reports s(236) <= 15.861934390608, the exact rational side
+      7930967195303679308621899285697/(5 x 10^29) of evand/square-packing 5ad0069,
+      search/packer/candidates/s236_bm3c.cert, rounded up at 12 places, accepted by his two
+      standard-library exact checkers; a different local minimum from itsnaka's #481 composition, found
+      by his basin explorer from a rebuild of it, with a 6-group regularized view at the same side.
+      Triaged on 17 October 2026: 2.02e-3 below both case lanes (T-146's regularized list of #481's
+      packing) and below T-174, pending adoption there, and the latest report at 236, so the
+      report-order rule records it. Not yet retained; its replay on this repository's two exact routes
+      prices at about a CPU-minute. Once validated it moves the house at 236, whose drawing is then
+      regularized. Claude assistance disclosed.
+    read_through: '2026-10-16T14:05:14Z'
+    results:
+    - key: n236
+      claim: >-
+        s(236) <= 7930967195303679308621899285697/500000000000000000000000000000 =
+        15.861934390607358617243798571394, the side of s236_bm3c.cert (SHA-256 21dbf679...), by a packing
+        the source calls a different local minimum from #481's.
+      source: body
+      not_registered: >-
+        Triage only (think-6wtz). Stage 2 retains the certificate, its regularized view and both source
+        checkers at 5ad0069; stage 3 records it in report order, below every standing or staged side at
+        236 by 2.0213565519e-3 exactly. It is a new packing continuing itsnaka's #481 arrangement
+        (T-136), credited after it as the issue asks.
+      queued: true
+      bead: think-6wtz
+    beads:
+    - think-6wtz
+    answer_bead: think-6wtz
+    replies: []
+    close_when: >-
+      The certificate is registered on main and replayed here, the case at 236 has adopted it and
+      regularized its drawing, and the author has been told the id, rungs and adoption.
+    notes: >-
+      236 is one of T-174's 50 counts staged for adoption under think-3mry. If this certificate is
+      validated before that adoption lands, the house selection takes 236 to it, and the T-174 adoption
+      leaves 236 out rather than adopt and regularize a house that would lapse.
+  - number: 664
+    title: 's(271) ≤ 16.948947733714: registration request'
+    author: evand
+    opened: '2026-10-17'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Evan Daniel reports s(271) <= 16.948947733714, the exact rational side
+      16948947733713657510723401112423/10^30 of evand/square-packing 757b40b,
+      search/packer/candidates/s271_ex1.cert, rounded up at 12 places, accepted by his two
+      standard-library exact checkers; a refinement of Francisco Couzo's #561 packing found by one
+      tilt-swap move of his basin explorer from the register's witness, with a 21-group regularized view
+      at the same side. Triaged on 17 October 2026: 4.46e-5 below both case lanes (T-186, Mishapolk's
+      refinement of #561) and the latest report at 271, so the report-order rule records it. Not yet
+      retained; its replay on this repository's two exact routes prices at about a CPU-minute. Once
+      validated it moves the house at 271, whose drawing is then regularized. Claude assistance
+      disclosed.
+    read_through: '2026-10-17T04:30:51Z'
+    results:
+    - key: n271
+      claim: >-
+        s(271) <= 16948947733713657510723401112423/1000000000000000000000000000000 =
+        16.948947733713657510723401112423, the side of s271_ex1.cert (SHA-256 48abf7ca...), which the
+        source calls a refinement of #561's packing.
+      source: body
+      not_registered: >-
+        Triage only (think-8o5j). Stage 2 retains the certificate, its regularized view and both source
+        checkers at 757b40b; stage 3 records it in report order, below both case lanes at 271 by
+        4.4622737548e-5 exactly, credited after Couzo's #561 and Chaoweeraprasit's #500 packings as the
+        issue asks.
+      queued: true
+      bead: think-8o5j
+    beads:
+    - think-8o5j
+    answer_bead: think-8o5j
+    replies: []
+    close_when: >-
+      The certificate is registered on main and replayed here, the case at 271 has adopted it and
+      regularized its drawing, and the author has been told the id, rungs and adoption.
+    notes: >-
+      The source calls it a refinement of #561's packing, which the register would credit as a
+      regularization of Couzo's packing, and also a distinct local minimum, with one fewer
+      load-bearing tilted square than #561 and 59 squares moved by more than 1e-4. Which it is for
+      credit is put to the owner and the author with the triage (think-8o5j).
+  - number: 666
+    title: 's(n) < ⌈√n⌉ at 18 counts from n = 509 to 1568, and s(464) ≤ 21.98881: registration request'
+    author: JoostdeWinter
+    opened: '2026-10-17'
+    state: open
+    kind: result-report
+    triage: pending
+    summary: Joost de Winter reports nineteen exact rational packing certificates beyond 324, eighteen below
+      the integer grid at 509 to 1568 and one improving 464. Source check.py is priced by the author at
+      about 1.5 one-core minutes for all nineteen.
+    read_through: '2026-10-17T07:06:07Z'
+    results:
+    - key: n464
+      claim: s(464) <= 21.988813022694, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-3m10
+    - key: n509
+      claim: s(509) <= 22.994328036438, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-3m10
+    - key: n555
+      claim: s(555) <= 23.993653790591, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-3m10
+    - key: n603
+      claim: s(603) <= 24.995268064197, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-3m10
+    - key: n654
+      claim: s(654) <= 25.996103908965, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-3m10
+    - key: n706
+      claim: s(706) <= 26.998712100405, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-3m10
+    - key: n760
+      claim: s(760) <= 27.995949340329, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-3m10
+    - key: n817
+      claim: s(817) <= 28.998488480775, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-3m10
+    - key: n875
+      claim: s(875) <= 29.998783733108, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-3m10
+    - key: n935
+      claim: s(935) <= 30.995955854834, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-3m10
+    - key: n998
+      claim: s(998) <= 31.998349747355, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-3m10
+    - key: n1061
+      claim: s(1061) <= 32.996048342114, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-3m10
+    - key: n1128
+      claim: s(1128) <= 33.998294117981, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-3m10
+    - key: n1196
+      claim: s(1196) <= 34.998294118334, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-3m10
+    - key: n1266
+      claim: s(1266) <= 35.996046404219, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-3m10
+    - key: n1339
+      claim: s(1339) <= 36.997865207179, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-3m10
+    - key: n1413
+      claim: s(1413) <= 37.999463832123, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-3m10
+    - key: n1489
+      claim: s(1489) <= 38.997600184483, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-3m10
+    - key: n1568
+      claim: s(1568) <= 39.999336626159, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-3m10
+    beads:
+    - think-3m10
+    answer_bead: think-3m10
+    replies: []
+    close_when: Every claim or correction has a reviewed disposition on main, pending validation has a priced
+      owner, any changed house is regularized in its adoption, and the author has received a reply verified
+      against main and the deployed site.
+  - number: 668
+    title: 'Improved upper bounds for n = 227, 229, 260: registration request'
+    author: JoostdeWinter
+    opened: '2026-10-17'
+    state: open
+    kind: result-report
+    triage: pending
+    summary: Joost de Winter reports exact rational witnesses at 227, 229 and 260 from square-packing c95c4938;
+      three source stdlib Fraction checkers are priced at 0.6 to 1.2 seconds per count. Later Couzo and
+      Daniel reports overlap 227 and 229.
+    read_through: '2026-10-17T14:06:25Z'
+    results:
+    - key: n227
+      claim: s(227) <= 15.563796703670, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-qdcc
+    - key: n229
+      claim: s(229) <= 15.650174756949, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-qdcc
+    - key: n260
+      claim: s(260) <= 16.645778804182, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-qdcc
+    beads:
+    - think-qdcc
+    answer_bead: think-qdcc
+    replies: []
+    close_when: Every claim or correction has a reviewed disposition on main, pending validation has a priced
+      owner, any changed house is regularized in its adoption, and the author has received a reply verified
+      against main and the deployed site.
+  - number: 669
+    title: 's(155) ≤ 12.952260944651: registration request'
+    author: evand
+    opened: '2026-10-17'
+    state: open
+    kind: result-report
+    triage: pending
+    summary: Evan Daniel reports an exact rational certificate at 155 from 59326b8, with a regularized view
+      at the same side. The source claims a different local minimum from Ostashev T-149, credits that packing
+      as its start, and discloses same-author exact checkers and numerical local-minimum diagnostics.
+    read_through: '2026-10-17T14:49:46Z'
+    results:
+    - key: n155
+      claim: s(155) <= 12.952260944651, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-n1ga
+    beads:
+    - think-n1ga
+    answer_bead: think-n1ga
+    replies: []
+    close_when: Every claim or correction has a reviewed disposition on main, pending validation has a priced
+      owner, any changed house is regularized in its adoption, and the author has received a reply verified
+      against main and the deployed site.
+  - number: 670
+    title: '204-993: registration request'
+    author: franciscouzo
+    opened: '2026-10-17'
+    state: open
+    kind: result-report
+    triage: pending
+    summary: Francisco Couzo reports 73 improved upper bounds at 204 to 993 from 23aff0c6, using exact rational
+      certificates, deletion where needed, and retained source/seed credits. Complete per-count report-order
+      and classical-envelope comparison remains queued.
+    read_through: '2026-10-17T18:05:06Z'
+    results:
+    - key: n204
+      claim: s(204) <= 14.808644417690, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-f28n
+    - key: n330
+      claim: s(330) <= 18.701641583454, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-f28n
+    - key: n339
+      claim: s(339) <= 18.911307592083, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-f28n
+    - key: n364
+      claim: s(364) <= 19.583782190152, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-f28n
+    - key: n370
+      claim: s(370) <= 19.767428349965, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-f28n
+    - key: n378
+      claim: s(378) <= 19.942505611659, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-f28n
+    - key: n379
+      claim: s(379) <= 19.953014213942, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-f28n
+    - key: n382
+      claim: s(382) <= 19.987621153966, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-f28n
+    - key: n403
+      claim: s(403) <= 20.583782190152, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-f28n
+    - key: n417
+      claim: s(417) <= 20.942505611684, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-f28n
+    - key: n418
+      claim: s(418) <= 20.945240141353, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-f28n
+    - key: n419
+      claim: s(419) <= 20.959713620588, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-f28n
+    - key: n421
+      claim: s(421) <= 20.982817421775, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-f28n
+    - key: n422
+      claim: s(422) <= 20.984021832955, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-f28n
+    - key: n444
+      claim: s(444) <= 21.583782190152, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-f28n
+    - key: n452
+      claim: s(452) <= 21.778174593086, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-f28n
+    - key: n458
+      claim: s(458) <= 21.942505611689, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-f28n
+    - key: n459
+      claim: s(459) <= 21.943735551416, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-f28n
+    - key: n460
+      claim: s(460) <= 21.957651945776, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-f28n
+    - key: n461
+      claim: s(461) <= 21.972483922352, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-f28n
+    - key: n462
+      claim: s(462) <= 21.980759715480, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-f28n
+    - key: n463
+      claim: s(463) <= 21.984021832955, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-f28n
+    - key: n501
+      claim: s(501) <= 22.933763683699, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-f28n
+    - key: n503
+      claim: s(503) <= 22.957558542542, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-f28n
+    - key: n505
+      claim: s(505) <= 22.972317735354, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-f28n
+    - key: n536
+      claim: s(536) <= 23.677669529701, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-f28n
+    - key: n546
+      claim: s(546) <= 23.933763683699, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-f28n
+    - key: n548
+      claim: s(548) <= 23.957558542543, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-f28n
+    - key: n551
+      claim: s(551) <= 23.966898919633, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-f28n
+    - key: n553
+      claim: s(553) <= 23.981588093282, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-f28n
+    - key: n598
+      claim: s(598) <= 24.962916747309, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-f28n
+    - key: n600
+      claim: s(600) <= 24.981585347399, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-f28n
+    - key: n647
+      claim: s(647) <= 25.953248543199, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-f28n
+    - key: n650
+      claim: s(650) <= 25.982429027496, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-f28n
+    - key: n651
+      claim: s(651) <= 25.983790120159, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-f28n
+    - key: n700
+      claim: s(700) <= 26.972996848621, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-f28n
+    - key: n701
+      claim: s(701) <= 26.975561031531, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-f28n
+    - key: n702
+      claim: s(702) <= 26.977494114977, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-f28n
+    - key: n703
+      claim: s(703) <= 26.987493360751, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-f28n
+    - key: n749
+      claim: s(749) <= 27.925883089331, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-f28n
+    - key: n753
+      claim: s(753) <= 27.937423518013, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-f28n
+    - key: n754
+      claim: s(754) <= 27.937423518013, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-f28n
+    - key: n756
+      claim: s(756) <= 27.984237490911, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-f28n
+    - key: n757
+      claim: s(757) <= 27.989936988207, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-f28n
+    - key: n758
+      claim: s(758) <= 27.994980212536, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-f28n
+    - key: n804
+      claim: s(804) <= 28.917335789888, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-f28n
+    - key: n805
+      claim: s(805) <= 28.921843659464, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-f28n
+    - key: n806
+      claim: s(806) <= 28.921843662228, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-f28n
+    - key: n809
+      claim: s(809) <= 28.937423518015, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-f28n
+    - key: n811
+      claim: s(811) <= 28.982472918533, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-f28n
+    - key: n812
+      claim: s(812) <= 28.982472918533, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-f28n
+    - key: n813
+      claim: s(813) <= 28.990394020145, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-f28n
+    - key: n863
+      claim: s(863) <= 29.921843659464, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-f28n
+    - key: n866
+      claim: s(866) <= 29.935764472087, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-f28n
+    - key: n867
+      claim: s(867) <= 29.950265025802, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-f28n
+    - key: n868
+      claim: s(868) <= 29.982204111182, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-f28n
+    - key: n869
+      claim: s(869) <= 29.982472918533, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-f28n
+    - key: n870
+      claim: s(870) <= 29.985969207342, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-f28n
+    - key: n871
+      claim: s(871) <= 29.989329079687, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-f28n
+    - key: n922
+      claim: s(922) <= 30.899494936660, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-f28n
+    - key: n925
+      claim: s(925) <= 30.935764472087, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-f28n
+    - key: n926
+      claim: s(926) <= 30.949634321517, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-f28n
+    - key: n927
+      claim: s(927) <= 30.976993727283, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-f28n
+    - key: n928
+      claim: s(928) <= 30.976993727283, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-f28n
+    - key: n929
+      claim: s(929) <= 30.978848462737, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-f28n
+    - key: n930
+      claim: s(930) <= 30.982052182975, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-f28n
+    - key: n931
+      claim: s(931) <= 30.989936243547, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-f28n
+    - key: n987
+      claim: s(987) <= 31.949634321517, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-f28n
+    - key: n989
+      claim: s(989) <= 31.976993727283, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-f28n
+    - key: n990
+      claim: s(990) <= 31.978848462737, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-f28n
+    - key: n991
+      claim: s(991) <= 31.982052182975, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-f28n
+    - key: n992
+      claim: s(992) <= 31.985130163599, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-f28n
+    - key: n993
+      claim: s(993) <= 31.985130163599, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-f28n
+    beads:
+    - think-f28n
+    answer_bead: think-f28n
+    replies: []
+    close_when: Every claim or correction has a reviewed disposition on main, pending validation has a priced
+      owner, any changed house is regularized in its adoption, and the author has received a reply verified
+      against main and the deployed site.
+  - number: 672
+    title: '227, 229, 330-996: registration request'
+    author: franciscouzo
+    opened: '2026-10-17'
+    state: open
+    kind: result-report
+    triage: pending
+    summary: 'Francisco Couzo reports 46 improved upper bounds at 227, 229 and 330 to 996 from af8cb795.
+      His comment states 227 and 229 are based on de Winter findings; that lineage is retained for the comparison
+      with #668 and #674.'
+    read_through: '2026-10-17T22:16:17Z'
+    results:
+    - key: n227
+      claim: s(227) <= 15.563625652343, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-2vjc
+    - key: n229
+      claim: s(229) <= 15.650174740273, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-2vjc
+    - key: n330
+      claim: s(330) <= 18.692698795114, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-2vjc
+    - key: n461
+      claim: s(461) <= 21.971645445094, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-2vjc
+    - key: n507
+      claim: s(507) <= 22.973703609857, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-2vjc
+    - key: n652
+      claim: s(652) <= 25.994469543497, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-2vjc
+    - key: n653
+      claim: s(653) <= 25.994469543497, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-2vjc
+    - key: n704
+      claim: s(704) <= 26.994469543497, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-2vjc
+    - key: n749
+      claim: s(749) <= 27.924010906540, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-2vjc
+    - key: n750
+      claim: s(750) <= 27.927909095101, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-2vjc
+    - key: n753
+      claim: s(753) <= 27.936842811648, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-2vjc
+    - key: n755
+      claim: s(755) <= 27.951635349895, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-2vjc
+    - key: n756
+      claim: s(756) <= 27.983489205831, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-2vjc
+    - key: n757
+      claim: s(757) <= 27.989936967966, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-2vjc
+    - key: n758
+      claim: s(758) <= 27.994973756311, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-2vjc
+    - key: n759
+      claim: s(759) <= 27.995946347749, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-2vjc
+    - key: n804
+      claim: s(804) <= 28.915928305844, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-2vjc
+    - key: n805
+      claim: s(805) <= 28.916476090926, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-2vjc
+    - key: n811
+      claim: s(811) <= 28.982462261975, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-2vjc
+    - key: n812
+      claim: s(812) <= 28.982462261975, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-2vjc
+    - key: n813
+      claim: s(813) <= 28.989935237439, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-2vjc
+    - key: n814
+      claim: s(814) <= 28.995946347758, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-2vjc
+    - key: n815
+      claim: s(815) <= 28.995946384109, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-2vjc
+    - key: n816
+      claim: s(816) <= 28.998352177961, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-2vjc
+    - key: n817
+      claim: s(817) <= 28.998352177961, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-2vjc
+    - key: n864
+      claim: s(864) <= 29.932742598598, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-2vjc
+    - key: n865
+      claim: s(865) <= 29.932742598598, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-2vjc
+    - key: n868
+      claim: s(868) <= 29.982119729132, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-2vjc
+    - key: n869
+      claim: s(869) <= 29.982462261984, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-2vjc
+    - key: n871
+      claim: s(871) <= 29.986798495028, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-2vjc
+    - key: n872
+      claim: s(872) <= 29.995946384118, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-2vjc
+    - key: n873
+      claim: s(873) <= 29.998242686046, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-2vjc
+    - key: n874
+      claim: s(874) <= 29.998242686046, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-2vjc
+    - key: n923
+      claim: s(923) <= 30.932644308698, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-2vjc
+    - key: n924
+      claim: s(924) <= 30.932742598607, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-2vjc
+    - key: n929
+      claim: s(929) <= 30.978235012084, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-2vjc
+    - key: n930
+      claim: s(930) <= 30.982010362324, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-2vjc
+    - key: n932
+      claim: s(932) <= 30.993904118222, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-2vjc
+    - key: n933
+      claim: s(933) <= 30.995336946282, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-2vjc
+    - key: n934
+      claim: s(934) <= 30.995336946282, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-2vjc
+    - key: n935
+      claim: s(935) <= 30.995336946282, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-2vjc
+    - key: n990
+      claim: s(990) <= 31.978235012084, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-2vjc
+    - key: n991
+      claim: s(991) <= 31.982010362324, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-2vjc
+    - key: n994
+      claim: s(994) <= 31.995336946282, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-2vjc
+    - key: n995
+      claim: s(995) <= 31.995336946282, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-2vjc
+    - key: n996
+      claim: s(996) <= 31.995336946282, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-2vjc
+    beads:
+    - think-2vjc
+    answer_bead: think-2vjc
+    replies: []
+    close_when: Every claim or correction has a reviewed disposition on main, pending validation has a priced
+      owner, any changed house is regularized in its adoption, and the author has received a reply verified
+      against main and the deployed site.
+    notes: 'Read through comment https://github.com/jlevy/squares/issues/672#issuecomment-6242081759: 227
+      and 229 are based on Joost de Winter findings.'
+  - number: 673
+    title: 'Credit correction request: s(146) and s(308) found_by'
+    author: evand
+    opened: '2026-10-17'
+    state: open
+    kind: correction
+    triage: pending
+    summary: 'Evan Daniel asks to change found_by at 146 and 308 to his name, retaining Xu #432 and Fang
+      #484 as the starts. He distinguishes new local minima from refinements and cites a Lean path-soundness
+      theorem and numerical path tests. This audit records the request without deciding project credit policy.'
+    read_through: '2026-10-17T22:31:41Z'
+    results: []
+    beads:
+    - think-gzvu
+    answer_bead: think-gzvu
+    replies: []
+    close_when: Every claim or correction has a reviewed disposition on main, pending validation has a priced
+      owner, any changed house is regularized in its adoption, and the author has received a reply verified
+      against main and the deployed site.
+    asks:
+    - what: Review requested found_by corrections at 146 and 308 and determine how existing credit policy
+        applies to the author clarification.
+      state: queued
+      bead: think-gzvu
+      note: Other counts in the issue are examples, not requested changes. The author proposed a rule; it
+        is not an adopted project rule.
+  - number: 674
+    title: 's(229) ≤ 15.650163254859: registration request'
+    author: evand
+    opened: '2026-10-17'
+    state: open
+    kind: result-report
+    triage: pending
+    summary: 'Evan Daniel reports a dilation certificate at 229 (e0338c7), then a smaller certificate at
+      00e68df and asks to use the latter instead. Both reports are retained in order; the update certifies
+      only an upper bound and credits Couzo #672 after de Winter #668.'
+    read_through: '2026-10-18T01:36:21Z'
+    results:
+    - key: n229
+      claim: s(229) <= 15.650163254859, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-5ij2
+    - key: n229-update
+      claim: s(229) <= 7825080756947776580756939951343/500000000000000000000000000000, rounded upward as
+        15.650161513896; the author requests this in place of the opening value.
+      source: https://github.com/jlevy/squares/issues/674#issuecomment-6244298663
+      not_registered: The later certificate and opening certificate both remain in the report-order inventory.
+        The final state follows the update; neither is verified here.
+      queued: true
+      bead: think-5ij2
+    beads:
+    - think-5ij2
+    answer_bead: think-5ij2
+    replies: []
+    close_when: Every claim or correction has a reviewed disposition on main, pending validation has a priced
+      owner, any changed house is regularized in its adoption, and the author has received a reply verified
+      against main and the deployed site.
+  - number: 675
+    title: '204-998: registration request'
+    author: franciscouzo
+    opened: '2026-10-18'
+    state: open
+    kind: result-report
+    triage: pending
+    summary: Francisco Couzo reports 79 improved upper bounds at 204 to 998 from c6da0fc. The complete source
+      index also adopts Daniel at 229 and retains 542 finite witnesses across 1024 indexed counts; the import
+      must distinguish these from Couzo discoveries.
+    read_through: '2026-10-18T06:02:11Z'
+    results:
+    - key: n204
+      claim: s(204) <= 14.808644367227, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-pvav
+    - key: n419
+      claim: s(419) <= 20.959713421191, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-pvav
+    - key: n421
+      claim: s(421) <= 20.982817268367, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-pvav
+    - key: n422
+      claim: s(422) <= 20.983607310148, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-pvav
+    - key: n458
+      claim: s(458) <= 21.942423483273, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-pvav
+    - key: n459
+      claim: s(459) <= 21.942423483273, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-pvav
+    - key: n460
+      claim: s(460) <= 21.957558542548, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-pvav
+    - key: n461
+      claim: s(461) <= 21.971616092121, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-pvav
+    - key: n462
+      claim: s(462) <= 21.980489088007, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-pvav
+    - key: n463
+      claim: s(463) <= 21.983605908182, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-pvav
+    - key: n464
+      claim: s(464) <= 21.988035588879, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-pvav
+    - key: n502
+      claim: s(502) <= 22.942402035201, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-pvav
+    - key: n545
+      claim: s(545) <= 23.889722420681, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-pvav
+    - key: n546
+      claim: s(546) <= 23.889722420681, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-pvav
+    - key: n547
+      claim: s(547) <= 23.906371163646, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-pvav
+    - key: n548
+      claim: s(548) <= 23.957455469976, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-pvav
+    - key: n549
+      claim: s(549) <= 23.957455469976, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-pvav
+    - key: n554
+      claim: s(554) <= 23.993580713561, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-pvav
+    - key: n592
+      claim: s(592) <= 24.889722420681, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-pvav
+    - key: n593
+      claim: s(593) <= 24.889722420681, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-pvav
+    - key: n598
+      claim: s(598) <= 24.962908839930, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-pvav
+    - key: n602
+      claim: s(602) <= 24.993580715986, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-pvav
+    - key: n603
+      claim: s(603) <= 24.994263342387, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-pvav
+    - key: n641
+      claim: s(641) <= 25.889564291814, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-pvav
+    - key: n642
+      claim: s(642) <= 25.889722420681, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-pvav
+    - key: n650
+      claim: s(650) <= 25.982428402604, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-pvav
+    - key: n652
+      claim: s(652) <= 25.994256215430, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-pvav
+    - key: n654
+      claim: s(654) <= 25.995905846673, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-pvav
+    - key: n693
+      claim: s(693) <= 26.889722420681, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-pvav
+    - key: n700
+      claim: s(700) <= 26.972954520906, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-pvav
+    - key: n701
+      claim: s(701) <= 26.975560060840, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-pvav
+    - key: n705
+      claim: s(705) <= 26.995905846673, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-pvav
+    - key: n706
+      claim: s(706) <= 26.998639495676, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-pvav
+    - key: n753
+      claim: s(753) <= 27.935538484638, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-pvav
+    - key: n755
+      claim: s(755) <= 27.951593396552, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-pvav
+    - key: n756
+      claim: s(756) <= 27.982602664098, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-pvav
+    - key: n758
+      claim: s(758) <= 27.993798579000, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-pvav
+    - key: n759
+      claim: s(759) <= 27.993798579000, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-pvav
+    - key: n760
+      claim: s(760) <= 27.995946706541, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-pvav
+    - key: n804
+      claim: s(804) <= 28.911312576594, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-pvav
+    - key: n805
+      claim: s(805) <= 28.911312576594, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-pvav
+    - key: n806
+      claim: s(806) <= 28.921462680479, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-pvav
+    - key: n807
+      claim: s(807) <= 28.924702911083, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-pvav
+    - key: n809
+      claim: s(809) <= 28.937423314202, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-pvav
+    - key: n811
+      claim: s(811) <= 28.981360068210, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-pvav
+    - key: n812
+      claim: s(812) <= 28.981360068210, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-pvav
+    - key: n813
+      claim: s(813) <= 28.989934397793, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-pvav
+    - key: n814
+      claim: s(814) <= 28.993798579000, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-pvav
+    - key: n816
+      claim: s(816) <= 28.998219025338, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-pvav
+    - key: n817
+      claim: s(817) <= 28.998234675372, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-pvav
+    - key: n863
+      claim: s(863) <= 29.921462677966, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-pvav
+    - key: n864
+      claim: s(864) <= 29.924702911083, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-pvav
+    - key: n865
+      claim: s(865) <= 29.932623425046, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-pvav
+    - key: n867
+      claim: s(867) <= 29.950105216770, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-pvav
+    - key: n868
+      claim: s(868) <= 29.981359990606, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-pvav
+    - key: n869
+      claim: s(869) <= 29.981360065447, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-pvav
+    - key: n870
+      claim: s(870) <= 29.985524292952, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-pvav
+    - key: n872
+      claim: s(872) <= 29.995946381399, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-pvav
+    - key: n873
+      claim: s(873) <= 29.998171180951, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-pvav
+    - key: n874
+      claim: s(874) <= 29.998171180951, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-pvav
+    - key: n919
+      claim: s(919) <= 30.849232404954, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-pvav
+    - key: n923
+      claim: s(923) <= 30.924702911083, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-pvav
+    - key: n924
+      claim: s(924) <= 30.932577553094, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-pvav
+    - key: n927
+      claim: s(927) <= 30.976949083864, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-pvav
+    - key: n928
+      claim: s(928) <= 30.976949083864, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-pvav
+    - key: n930
+      claim: s(930) <= 30.981543197185, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-pvav
+    - key: n931
+      claim: s(931) <= 30.989934734721, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-pvav
+    - key: n932
+      claim: s(932) <= 30.993891653207, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-pvav
+    - key: n933
+      claim: s(933) <= 30.995293256848, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-pvav
+    - key: n989
+      claim: s(989) <= 31.976125363479, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-pvav
+    - key: n990
+      claim: s(990) <= 31.978044872634, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-pvav
+    - key: n991
+      claim: s(991) <= 31.981535631408, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-pvav
+    - key: n992
+      claim: s(992) <= 31.984841090107, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-pvav
+    - key: n993
+      claim: s(993) <= 31.984841090107, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-pvav
+    - key: n994
+      claim: s(994) <= 31.993865896560, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-pvav
+    - key: n995
+      claim: s(995) <= 31.994784549711, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-pvav
+    - key: n996
+      claim: s(996) <= 31.994784549711, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-pvav
+    - key: n997
+      claim: s(997) <= 31.998300669675, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-pvav
+    - key: n998
+      claim: s(998) <= 31.998301912120, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
+        priced validation remain on the import bead; no claim is registered by this audit.
+      queued: true
+      bead: think-pvav
+    beads:
+    - think-pvav
+    answer_bead: think-pvav
+    replies: []
+    close_when: Every claim or correction has a reviewed disposition on main, pending validation has a priced
+      owner, any changed house is regularized in its adoption, and the author has received a reply verified
+      against main and the deployed site.
