@@ -1319,6 +1319,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         paths=(
             "packing/devtools/acquire_source.py",
             "packing/devtools/apply_closed_form.py",
+            "packing/devtools/render_n11_lower_bounds_explainer_pdf.py",
             "packing/devtools/site_urls.py",
             "packing/devtools/verifier_registry.py",
             "packing/frontier/results.yaml",
@@ -1329,12 +1330,14 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         ),
         reason=(
             "For PR 671, rendered both outputs at main 804eff36 and the integrated "
-            "branch 08c7c157, using source-link revision 83b4720e in both. The HTML "
+            "branch 34fd8b33, using source-link revision 83b4720e in both. The HTML "
             "and Markdown are byte-identical. The paper still explains the retained "
             "T-060 proof; the fine-net records, monotone case planning and "
             "publication-budget declarations change none of its article, certificate "
             "or figure facts, "
             "so its edition remains v0.1.7. The comparison covers HTML and Markdown."
+            " The PDF helper change only updates the explainer pagination guard; "
+            "shared formatting functions are unchanged."
         ),
     ),
     ReleaseNoPublicChange(
@@ -1342,6 +1345,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         paths=(
             "packing/devtools/acquire_source.py",
             "packing/devtools/apply_closed_form.py",
+            "packing/devtools/render_n11_lower_bounds_explainer_pdf.py",
             "packing/devtools/site_urls.py",
             "packing/devtools/verifier_registry.py",
             "packing/frontier/results.yaml",
@@ -1352,11 +1356,13 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         ),
         reason=(
             "For PR 671, rendered both outputs at main 804eff36 and the integrated "
-            "branch 08c7c157, using source-link revision 83b4720e in both. The HTML "
+            "branch 34fd8b33, using source-link revision 83b4720e in both. The HTML "
             "and Markdown are byte-identical. The paper's T-026, T-037, T-059 and "
             "T-060 facts, retained certificates and figures are unchanged; the case "
             "planner does not change those inputs. Therefore its "
             "edition remains v0.1.0. The comparison covers HTML and Markdown."
+            " The PDF helper change only updates the explainer pagination guard; "
+            "shared formatting functions are unchanged."
         ),
     ),
     ReleaseNoPublicChange(
@@ -1365,6 +1371,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "packing/campaign/result-requests.yaml",
             "packing/devtools/acquire_source.py",
             "packing/devtools/apply_closed_form.py",
+            "packing/devtools/render_n11_lower_bounds_explainer_pdf.py",
             "packing/devtools/site_urls.py",
             "packing/devtools/verifier_registry.py",
             "packing/frontier/n-108.md",
@@ -1377,12 +1384,14 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         ),
         reason=(
             "For PR 671, rendered both outputs at main 804eff36 and the integrated "
-            "branch 08c7c157, using source-link revision 83b4720e in both. The HTML "
+            "branch 34fd8b33, using source-link revision 83b4720e in both. The HTML "
             "and Markdown are byte-identical. The survey's selected examples, "
             "source discussion and figures do not consume the new fine-net records, "
             "case-planning behavior or publication-budget declarations, so its "
             "edition remains v0.2.2. "
             "The comparison covers HTML and Markdown."
+            " The PDF helper change only updates the explainer pagination guard; "
+            "shared formatting functions are unchanged."
         ),
     ),
     ReleaseNoPublicChange(
