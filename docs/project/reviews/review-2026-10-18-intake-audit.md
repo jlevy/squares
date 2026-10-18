@@ -60,7 +60,7 @@ report remains the source for its certificate, credit, checker and qualification
 | [#669](https://github.com/jlevy/squares/issues/669) | Daniel: 155 at `59326b86291b76c39d843f3f156e8f25fa0f6e3f`, with a same-side regularized view | think-n1ga | Retain and review the source, replay the certificate with controls, then adopt and regularize when validated. Numerical local-minimum diagnostics remain qualified |
 | [#670](https://github.com/jlevy/squares/issues/670) | Couzo: 73 upper-bound rows, `23aff0c6f992271e1ad13a148d44f392c4b386c0` | think-f28n | Inventory the complete release, compare report order and classical consequences, preserve deletion and source/seed relationships, price bulk replay |
 | [#672](https://github.com/jlevy/squares/issues/672) | Couzo: 46 rows, `af8cb7959aead318c0cf5e9f873de3caa763f77a`; comment credits De Winter at 227 and 229 | think-2vjc | Same comparison and custody obligations; retain that explicit lineage |
-| [#673](https://github.com/jlevy/squares/issues/673) | Daniel’s requested finder corrections at 146 and 308 | think-gzvu | Apply the project’s credit policy to the author clarification and determine any owner decision. Other counts mentioned are examples, not requested changes |
+| [#673](https://github.com/jlevy/squares/issues/673) | Daniel’s requested finder corrections at 146 and 308 | think-gzvu | Correct only these case front-matter finder fields to Evan Daniel, keeping Xu/Fang as “based on,” consistently with the original reports and existing “Daniel after” result credits. Coordinate with #665’s generated n146/n308 assets; the eleven other counts are illustrative, not requested changes. No path-continuity proof is inferred |
 | [#674](https://github.com/jlevy/squares/issues/674) | Daniel: opening certificate at `e0338c7becf95dbc7584b48d8868c0a1cd21079c`, then `00e68dfbe1d29ab5dbab1cddfb8f6ca19d5470db` | think-5ij2 | Use the update’s side, 15.650161513896 rounded up, as the current request. Preserve both reports in chronological comparison; credit Couzo after De Winter |
 | [#675](https://github.com/jlevy/squares/issues/675) | Couzo: 79 rows, `c6da0fc7524d667bf3d224559724ba9b60762e60` | think-pvav | Inventory all 542 finite witnesses and the 1024-count index; distinguish Daniel’s adopted 229 from Couzo discoveries and price complete replay |
 
@@ -256,9 +256,14 @@ The pre-edit records tier passed all 52 selected steps in 88.98 seconds.
 Post-edit records and full push qualification remain held for the coordinator’s CPU
 window; no current-head gate pass is claimed.
 
-#666 still needs a bounded derived-facts and digest-only custody decision: the
-coordinator’s inspection of `b3152f` found no published repository licence at the
-current head, and no raw source packet was added.
+#666 follows the owner’s explicit digest-only custody decision for the unlicensed
+verifier/source archive: retain its source pin and digest with derived claim facts,
+without copying the verifier code into the tree or exposing it to the independent
+checker. The coordinator’s inspection of `b3152f` found no published repository licence
+at the current head.
+No raw source packet was added; acquiring the bounded facts and digests and establishing
+exactly which certificate inputs are available remain intake work, rather than another
+custody-approval question.
 This does not block #668, #669 or #674. The larger Couzo and Lean imports retain the
 owners and pricing obligations recorded above.
 The next entry is stage 3 for retained packets after updating from main, alongside their

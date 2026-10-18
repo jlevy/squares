@@ -27,20 +27,28 @@ and no long certificate replay was started.
   A stale data pin found by CI is repaired at `a87de0cf7`; all six targeted pin checks
   pass. The failed frontend atlas check passes locally, with browser source unchanged; a
   transient resize failure is suspected but not established.
-  Fresh hosted checks determine final readiness.
+  Hosted checks at `a87de0cf7` are green: 43 successes and 16 expected skips, including
+  the deferred run. This is the hosted state of that exact head.
   The broader display-consistency issue remains `think-gzrw`.
-- **#671:** retention can overwrite and then delete an existing plain candidate while
-  returning success. The manifest replacement is non-atomic.
-  Release metadata, announcement expectations and page-size gates also need repair.
+- **#671:** the opening review found that retention could overwrite and then delete an
+  existing plain candidate while returning success.
+  The manifest replacement was non-atomic.
+  Release metadata, announcement expectations and page-size gates also needed repair.
   [Review A](https://github.com/jlevy/squares/pull/671#pullrequestreview-5562187918)
-  records six findings, owned by `think-8iky` and `think-5nvt`.
-- **#665:** the adoption pass still carries a stale n236 custody attribution after its
+  records six findings, owned by `think-8iky` and `think-5nvt`. The current draft
+  `89166716d` has green hosted checks and records n108 at V3/C3 from the retained census
+  and accepted mathematical reviews; the other 17 remain V0/C0. It remains unmerged; the
+  dated follow-up below distinguishes these snapshots.
+- **#665:** the opening adoption review found a stale n236 custody attribution after its
   selected scope narrowed from 38 to 37 counts.
-  Derived records, page size and live-data expectations also need reconciliation.
+  Derived records, page size and live-data expectations also needed reconciliation.
   Source registration of #574 is not evidence that this adoption branch is ready.
   [Review A](https://github.com/jlevy/squares/pull/665#pullrequestreview-5562201404)
   records 2 High, 2 Medium and 1 Low findings; `think-heuf` routes them to the existing
   `think-3mry` adoption lane.
+  The remote head remains `bb85cbb59` with nine failed, 21 successful and 29 skipped
+  hosted checks. Local repair head `cd5cc5cff` is unpushed and awaits qualification; it
+  is not the source of those hosted results.
 - **#407:** main already has Darwin current RSS through libproc.
   The proposed Mach implementation passes native tests, but its useful SDK assurance
   should be reconciled with the implementation on main.
@@ -59,10 +67,10 @@ scientific review.
 
 | PR | Recorded head | Review and disposition |
 | --- | --- | --- |
-| [#671](https://github.com/jlevy/squares/pull/671) | `32d47d321` | Fresh senior review A: 3 High, 2 Medium, 1 Low. Required CI red. Repair retention/publication before integration; census and stage 4 remain open. |
+| [#671](https://github.com/jlevy/squares/pull/671) | `89166716d` | Current draft hosted checks: 31 successes, 28 skips. The opening review A at `32d47d321` found 3 High, 2 Medium and 1 Low. Current n108 is V3/C3 from retained census and accepted mathematical reviews; other 17 remain V0/C0. No merge or main promotion. |
 | [#667](https://github.com/jlevy/squares/pull/667) | `a5b5f0ec2` | Fresh disposition B maps all 14 A findings to fixes or retained owners in replacement #676. Its four-file intake update is incorporated. Keep the original open until the replacement is accepted. |
-| [#665](https://github.com/jlevy/squares/pull/665) | `bb85cbb59` | Fresh bounded senior source review; adoption and derived-output defects, required CI red. Retain the per-count adoption owners. |
-| [#661](https://github.com/jlevy/squares/pull/661) | `a87de0cf7` | D’s numerical reporting and stale-status defects fixed; independent E confirms both. All 59 adoption tests and six pin controls pass. Later stale data pin repaired; fresh hosted checks pending. T-195 preserved. |
+| [#665](https://github.com/jlevy/squares/pull/665) | `bb85cbb59` remote; `cd5cc5cff` local | Remote hosted checks: nine failures, 21 successes, 29 skips. Local repairs are unpushed and await qualification. Retain the bounded senior review and per-count adoption owners. |
+| [#661](https://github.com/jlevy/squares/pull/661) | `a87de0cf7` | D’s numerical reporting and stale-status defects fixed; independent E confirms both. All 59 adoption tests and six pin controls pass. Hosted checks are green: 43 successes, 16 expected skips, including the deferred run. T-195 preserved. |
 | [#658](https://github.com/jlevy/squares/pull/658) | `3022eb984` | Fresh follow-up C: prior source fixes hold, Low missing B disposition. Release-impact gate red. Ten focused tests pass; `think-8ido` retains correction work. |
 | [#646](https://github.com/jlevy/squares/pull/646) | `f79f22cd1` | Fresh follow-up F: E fixes hold, Low stale PR description. Mergeable; release-impact gate red while frontend/Pages pass. `think-s9g3` tracks metadata follow-up. |
 | [#645](https://github.com/jlevy/squares/pull/645) | `dafff1238` | Fresh follow-up F: E1–E7 fixes hold, 121 tests pass. Conflicts with main and release-impact gate red. Preserve the evidence distinctions during integration. |
@@ -82,11 +90,12 @@ This review did not run contributor-supplied code or approve those workflow runs
 
 ## Interrupted Census Handoff
 
-The retained #671 snapshot contains all **18 registrations**, but native census and
-control receipts for **n108 only**: **1 of 14** first-batch cases, **1 of 18** overall.
-That receipt covers 201 verified directions and refused controls.
-All 18 registrations remain **V0/C0**; the branch adds no certificate-specific stage 4
-mathematics review.
+The opening #671 snapshot at `32d47d321` contains all **18 registrations**, but native
+census and control receipts for **n108 only**: **1 of 14** first-batch cases, **1 of
+18** overall. That receipt covers 201 verified directions and refused controls.
+At that opening head, all 18 registrations remained **V0/C0** and the branch added no
+certificate-specific stage 4 mathematics review.
+The later draft state is recorded in the dated follow-up below.
 
 The local process inspection found no census or verifier process on this Mac.
 It cannot establish the state of a process on the previous remote host.
