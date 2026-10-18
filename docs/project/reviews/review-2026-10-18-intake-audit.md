@@ -356,6 +356,25 @@ owners retain their work.
 UnitSquare and SQUISH remain the separately hand-checked sources recorded for 18
 October.
 
+## Isolated Qualification Environment — 18 October 2026
+
+The later push attempt at `8f4f8a5ce` was cleanly stopped after 309.30 seconds (exit
+130), when another worktree’s hook rebuilt editable packages in the shared Python
+environment. Direct imports with this branch’s `PYTHONPATH` remained local, but a fresh
+process without it resolved `sqpack` and `kpress` to #665; nested subprocesses can
+replace or clear that variable.
+This invalidates the qualification attempt without establishing a source failure.
+Its original log and import-origin receipt are retained under `think-1ayi`.
+
+A frozen install now gives #676 an isolated environment on external scratch through
+`UV_PROJECT_ENVIRONMENT`. Fresh imports without `PYTHONPATH` resolve `sqpack`, `kpress`
+and the workbench tools to this checkout; the checkout-import preflight passes, and
+Ruff, BasedPyright and browser dependency paths resolve correctly.
+The shared environment was not changed by this mitigation.
+`think-rl4i` tracks a reusable safeguard separately; this branch changes no validation
+harness code for it.
+The resulting head requires fresh records and push tiers in the isolated environment.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->
