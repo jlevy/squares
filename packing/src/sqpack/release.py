@@ -3726,7 +3726,7 @@ def validate_release_impacts(
 #: fresh render, so a link naming the build commit would fail their drift check forever. It is
 #: in no version string. It moves when the claim documents are regenerated for an edition. It
 #: must be a commit on `main`; the site's own links name `main` itself (`devtools.repo_links`).
-PUBLICATION_REVISION = "6a1e2e84"
+PUBLICATION_REVISION = "f7a2be76"
 
 
 def data_pathspec() -> tuple[str, ...]:
