@@ -682,15 +682,18 @@ repositories:
     read_through: eb3ae15418ce99ab72c448551f998628d2d5d76a
     read_on: '2026-10-12'
     note: >-
-      New to the record on 2026-10-12: E. Summins' n = 11 lab, whose outreach series is issues
-      #521 to #527. The esummins-packing-2026-10-12 packet pins 651a9a5 (2026-10-12T04:11:54Z),
-      the commit the issues name, and retains the paths its index writeup/outreach/00-README.md
-      section 4 cites; the tree is 71,035 files and about 20.75 GB, almost all under attempts/,
-      pinned by the commit. One commit follows the pin at the read, eb3ae15 (04:13:07Z,
-      "outreach: posted as jlevy/squares issues 521-527"), which adds only
-      writeup/outreach/POSTED.md (13 lines); nothing to import from it. Later commits of the
-      running campaigns (A243's descent, the k0 chains) are expected and hold nothing to import
-      unless a note of the series changes.
+      New to the record on 2026-10-12: E. Summins' n = 11 lab, whose outreach series is issues #521
+      to #527. The esummins-packing-2026-10-12 packet pins 651a9a5 (2026-10-12T04:11:54Z), the
+      commit the issues name, and retains the paths its index writeup/outreach/00-README.md section
+      4 cites; the tree is 71,035 files and about 20.75 GB, almost all under attempts/, pinned by
+      the commit. One commit follows the pin at the read, eb3ae15 (04:13:07Z, "outreach: posted as
+      jlevy/squares issues 521-527"), which adds only writeup/outreach/POSTED.md (13 lines); nothing
+      to import from it. Later commits of the running campaigns (A243's descent, the k0 chains) are
+      expected and hold nothing to import unless a note of the series changes. On 18 October, a
+      bounded GitHub API HEAD read confirmed this unchanged head; the original full history/tree
+      fetch hit its 60-second cap. This checks head freshness only, not a fresh full source-content
+      audit. The receipt is
+      packing/campaign/issue-intake/intake-20261018/bounded-four-head-refresh-20261018.json.
   - url: https://github.com/evand/square-packing
     read_through: 31523f87316bdfda00f5459dd9077928e264f133
     read_on: '2026-10-12'
@@ -890,11 +893,15 @@ repositories:
     read_on: '2026-10-15'
     note: >-
       A fork of this repository. Its default branch is 73d2542, the merge of jlevy/squares#621, an
-      ancestor of main, so the 1,039 commits past the e96e9ea read are this repository's own
-      history and the fork publishes nothing of its own there. Its other branches are PR #574's
-      head 4c319c2, which the pingyou-pr574-certificates-2026-10-13 packet pins (T-174), and
+      ancestor of main, so the 1,039 commits past the e96e9ea read are this repository's own history
+      and the fork publishes nothing of its own there. Its other branches are PR #574's head
+      4c319c2, which the pingyou-pr574-certificates-2026-10-13 packet pins (T-174), and
       pingyou/n29-certificate-20261015 at 3115557, PR #622's head, an N29 certificate refinement
-      that think-30n2 triages as an intake report. Nothing to import from the default branch.
+      that think-30n2 triages as an intake report. Nothing to import from the default branch. On 18
+      October, a bounded GitHub API HEAD read confirmed this unchanged head; the original full
+      history/tree fetch hit its 60-second cap. This checks head freshness only, not a fresh full
+      source-content audit. The receipt is
+      packing/campaign/issue-intake/intake-20261018/bounded-four-head-refresh-20261018.json.
   # The intake pass of 2026-10-16 (think-mdnn): evand's head, the pin #639 names.
   - url: https://github.com/evand/square-packing
     read_through: 44a105ef95ac1925d83aab087d7ddab7f672b747
@@ -1024,23 +1031,33 @@ repositories:
     read_through: 5ca0dc3ae7a4eebce16838bf41bedc2ce7e98241
     read_on: '2026-10-18'
     bead: think-xmxb
-    note: 'Read all 17 commits past 757b40b, through 5ca0dc3. #669 s155 is think-n1ga; #674 both s229 certificates
-      are think-5ij2; #673 credit clarification and PathCert theorem are think-gzvu. Fang gluing formalization
-      f4883b4 is think-57ei (coordinate think-0esw); Ryu formalization 8475bdf is think-ahr2; improved filled
-      L-shape bound a645fe3 is think-f8py. The exact 3-angle n232 witness/Lean proof at 5ca0dc3 is evidence
-      for T-193, held by think-phyb. Other commits change search tooling, status, site/provenance and displays;
-      the complete changed-path inventory is retained in campaign/issue-intake/intake-20261018/source-commit-files.json.
-      Full source-content classification remains with the named import owners.
-      Nothing is silently treated as imported or replayed.'
+    note: >-
+      Read all 17 commits past 757b40b, through 5ca0dc3. #669 s155 is think-n1ga; #674 both s229
+      certificates are think-5ij2; #673 credit clarification and PathCert theorem are think-gzvu.
+      Fang gluing formalization f4883b4 is think-57ei (coordinate think-0esw); Ryu formalization
+      8475bdf is think-ahr2; improved filled L-shape bound a645fe3 is think-f8py. The exact 3-angle
+      n232 witness/Lean proof at 5ca0dc3 is evidence for T-193, held by think-phyb. Other commits
+      change search tooling, status, site/provenance and displays; the complete changed-path
+      inventory is retained in campaign/issue-intake/intake-20261018/source-commit-files.json. Full
+      source-content classification remains with the named import owners. Nothing is silently
+      treated as imported or replayed. On 18 October, a bounded GitHub API HEAD read confirmed this
+      unchanged head; the original full history/tree fetch hit its 60-second cap. This checks head
+      freshness only, not a fresh full source-content audit. The receipt is
+      packing/campaign/issue-intake/intake-20261018/bounded-four-head-refresh-20261018.json.
   - url: https://github.com/franciscouzo/square-packing
     read_through: c6da0fc7524d667bf3d224559724ba9b60762e60
     read_on: '2026-10-18'
     bead: think-pvav
-    note: 'All three new commits are #670 (23aff0c6, think-f28n), #672 (af8cb795, think-2vjc) and #675 (c6da0fc7,
-      think-pvav). Their 73, 46 and 79 reported rows and whole-source index/manifest inventory are owned
-      separately; read is not an import. Preserve author source/seed credits and distinguish index adoption
-      of Daniel s229 from a Couzo discovery. Chronological/classical-envelope comparison and bulk replay
-      remain queued.'
+    note: >-
+      All three new commits are #670 (23aff0c6, think-f28n), #672 (af8cb795, think-2vjc) and #675
+      (c6da0fc7, think-pvav). Their 73, 46 and 79 reported rows and whole-source index/manifest
+      inventory are owned separately; read is not an import. Preserve author source/seed credits and
+      distinguish index adoption of Daniel s229 from a Couzo discovery.
+      Chronological/classical-envelope comparison and bulk replay remain queued. On 18 October, a
+      bounded GitHub API HEAD read confirmed this unchanged head; the original full history/tree
+      fetch hit its 60-second cap. This checks head freshness only, not a fresh full source-content
+      audit. The receipt is
+      packing/campaign/issue-intake/intake-20261018/bounded-four-head-refresh-20261018.json.
   - url: https://github.com/wand125/square-packing
     read_through: d7afe3e525299d70de298af72cf17c581a86c0b1
     read_on: '2026-10-18'
@@ -1050,3 +1067,14 @@ repositories:
       theorem and standard axioms, peak51GB; no build here. d7afe3e adds s42 >=2749/400 over2073 directions,
       held by think-kjd7. Other commits are site/index wording, paper links and higher-dimensional cube
       results outside this record. New claim/replay cost and proof review remain owned, not completed.'
+  - url: https://github.com/wand125/square-packing
+    read_through: 6d93afc1e5336aa498c0a7657c0869dc648a7b92
+    read_on: '2026-10-18'
+    note: >-
+      Read both complete commit diffs past d7afe3e: 08d77305 changes four site files
+      (paper metadata, sitemap, cube-page link and paper title), and 6d93afc1 changes
+      the theme-21 index title. Their only edits rename "two unit cubes in a cube" to
+      "two unit hypercubes in a hypercube" in English and Japanese. The mathematical
+      expressions, n = 3 to 6 scope, proof text, certificates and checkers are unchanged.
+      No new result or evidence to import. This read covers only those two naming
+      commits; the earlier Valid7 and n42 imports remain with think-0ayk and think-kjd7.

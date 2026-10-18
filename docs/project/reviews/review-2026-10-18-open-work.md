@@ -286,6 +286,40 @@ certificate was replayed.
 The resulting head requires a green push tier before publication, with terminal gate and
 hosted-check evidence retained in #676 and `think-1ayi`.
 
+## Watched-Source Freshness Follow-up — 18 October 2026
+
+The interim online refresh read 45 watched repositories, including the newly watched
+[Joost de Winter repository](https://github.com/JoostdeWinter/square-packing) retained
+by the stage 2 addendum.
+GitHub issue bodies, replies and comments still match the intake record.
+This refresh is separate from the earlier closing sweep above and is not the final
+post-publication sweep.
+
+It found two new wand125 commits.
+Both complete diffs were read:
+[`08d77305`](https://github.com/wand125/square-packing/commit/08d77305c0838d521e5a5339ea5f41fd60b625b8)
+changes four site metadata, sitemap and page files, and
+[`6d93afc1`](https://github.com/wand125/square-packing/commit/6d93afc1e5336aa498c0a7657c0869dc648a7b92)
+changes the theme index.
+Their edits only rename “two unit cubes in a cube” to “two unit hypercubes in a
+hypercube” in English and Japanese titles and links.
+The mathematical expressions, n = 3 to 6 scope, proof text, certificates and checkers
+are unchanged. A no-result watch read now records the new head; the earlier Valid7 and
+n42 imports remain with `think-0ayk` and `think-kjd7`.
+
+The original full history/tree fetches for BuddenPing, Esummins, Daniel and Couzo each
+hit the 60-second cap.
+The retained
+[bounded HEAD refresh](../../../packing/campaign/issue-intake/intake-20261018/bounded-four-head-refresh-20261018.json)
+records four successful GitHub API reads whose default-branch SHAs exactly equal the
+existing `read_through` pins: `73d25427`, `eb3ae154`, `5ca0dc3a` and `c6da0fc7`. This
+covers current head freshness without claiming fresh full-history or source-content
+audits, imports or replays.
+The original fetch timeouts remain limits of the interim sweep, and the existing import
+owners retain their work.
+UnitSquare and SQUISH remain the separately hand-checked sources recorded for 18
+October.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->
