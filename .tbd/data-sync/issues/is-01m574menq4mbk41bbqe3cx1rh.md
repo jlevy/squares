@@ -3,15 +3,22 @@ type: is
 id: is-01m574menq4mbk41bbqe3cx1rh
 title: Fix PR435 n83 coefficient link selecting the n87 catalogue entry
 kind: bug
-status: open
+status: closed
 priority: 2
-version: 1
+version: 3
 delegate: claude-code@spud10.local
 labels: []
 dependencies: []
 parent_id: is-01m4mv11d6aw0ekqzdjfg07w0e
+hold: null
+hold_until: null
 created_at: 2026-10-18T09:14:09.966Z
-updated_at: 2026-10-18T09:14:09.966Z
+updated_at: 2026-10-18T09:59:34.689Z
+started_at: 2026-10-18T09:43:54.119Z
+closed_at: 2026-10-18T09:59:34.688Z
+close_reason: F1 source fix published on PR435 at 7c1fe653c5dc30717f1e0546100b1de4ab0a30d7; actual generated case83 URL now resolves to n83 and all673 coefficients. Regression reproduced n87 before fix;32 scoped controls pass in60.82s; Ruff/types/hooks pass. Disposition https://github.com/jlevy/squares/pull/435#issuecomment-6248506970 . Full/parent integration qualification stays open under think-6vrv,think-ht59,think-w0if; current Packing/Pages coverage is not claimed.
+resolution: null
+duplicate_of: null
 ---
 PR #435 review F1, pinned head 273abfa593d64a01256f8da0059aeae2e4d64186.
 
