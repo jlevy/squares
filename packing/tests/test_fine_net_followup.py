@@ -596,3 +596,116 @@ def test_retain_refuses_an_asset_that_is_not_the_pinned_one(tmp_path: Path) -> N
     argv[argv.index("--sha256") + 1] = "f" * 64
     assert followup.main(argv) == 1
     assert not (packet / followup.RETAINED_RECORD).exists()
+
+
+@pytest.mark.parametrize("collision", ["plain", "matching-plain", "gzip", "both", "receipt"])
+def test_retain_refuses_collisions_before_writing_any_packet_member(
+    tmp_path: Path, capsys: pytest.CaptureFixture[str], collision: str
+) -> None:
+    asset, data = retained_asset(tmp_path)
+    packet = tmp_path / "packet"
+    stored = packet / "release/certificates" / NAME
+    stored.mkdir(parents=True)
+    plain = stored / "candidate.json"
+    packed = stored / "candidate.json.gz"
+    with tarfile.open(asset) as archive:
+        stream = archive.extractfile(f"certificates/{NAME}/candidate.json")
+        assert stream is not None
+        candidate = stream.read()
+    if collision in {"plain", "both"}:
+        plain.write_bytes(b"previous candidate")
+    elif collision == "matching-plain":
+        plain.write_bytes(candidate)
+    if collision in {"gzip", "both"}:
+        packed.write_bytes(
+            gzip.compress(candidate if collision == "both" else b"previous candidate", mtime=0)
+        )
+    if collision == "receipt":
+        receipt = stored / "check2/receipt.json"
+        receipt.parent.mkdir()
+        receipt.write_bytes(b"previous receipt")
+    before = {p.relative_to(packet): p.read_bytes() for p in packet.rglob("*") if p.is_file()}
+
+    assert followup.main(retain_argv(tmp_path, asset, data, packet)) == 1
+    assert {
+        p.relative_to(packet): p.read_bytes() for p in packet.rglob("*") if p.is_file()
+    } == before
+    assert not (packet / followup.RETAINED_RECORD).exists()
+    output = capsys.readouterr()
+    assert "members retained" not in output.out
+    assert (
+        "move it aside" if "plain" in collision or collision == "both" else "other bytes"
+    ) in output.err
+
+
+def test_interrupted_manifest_publication_preserves_the_previous_complete_record(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    asset, data = retained_asset(tmp_path)
+    packet = tmp_path / "packet"
+    assert followup.main(retain_argv(tmp_path, asset, data, packet)) == 0
+    record = packet / followup.RETAINED_RECORD
+    before = record.read_bytes()
+    capsys.readouterr()
+    renamed = asset.with_name("another-asset.tar.gz")
+    asset.rename(renamed)
+    write_text = Path.write_text
+
+    def interrupted(path: Path, text: str, *args: Any, **kwargs: Any) -> int:
+        if path.name.startswith(record.name):
+            write_text(path, '{"assets":', *args, **kwargs)
+            raise OSError("injected interrupted manifest publication")
+        return write_text(path, text, *args, **kwargs)
+
+    with monkeypatch.context() as patch:
+        patch.setattr(Path, "write_text", interrupted)
+        with pytest.raises(OSError, match="injected interrupted manifest"):
+            followup.main(retain_argv(tmp_path, renamed, data, packet))
+    assert record.read_bytes() == before
+    assert len(json.loads(record.read_bytes())["assets"]) == 1
+    assert followup.check_retained(packet) == []
+    assert "members retained" not in capsys.readouterr().out
+    # The failed publication remains retryable without losing the older asset's row.
+    assert followup.main(retain_argv(tmp_path, renamed, data, packet)) == 0
+    assert len(json.loads(record.read_bytes())["assets"]) == 2
+
+
+def test_interrupted_compression_leaves_no_candidate_or_staging_file(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    asset, data = retained_asset(tmp_path)
+    packet = tmp_path / "packet"
+
+    def interrupted(path: Path) -> Path:
+        path.with_name(path.name + ".gz").write_bytes(b"incomplete gzip")
+        raise OSError("injected interrupted compression")
+
+    monkeypatch.setattr(followup, "compress", interrupted)
+    with pytest.raises(OSError, match="injected interrupted compression"):
+        followup.main(retain_argv(tmp_path, asset, data, packet))
+    assert not list((packet / "release").rglob("*.json*"))
+    assert not list((packet / "release").rglob(".retain-*"))
+    assert not (packet / followup.RETAINED_RECORD).exists()
+    assert "members retained" not in capsys.readouterr().out
+
+
+def test_a_candidate_appearing_during_compression_is_never_replaced(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    asset, data = retained_asset(tmp_path)
+    packet = tmp_path / "packet"
+    target = packet / "release/certificates" / NAME / "candidate.json.gz"
+    compress = followup.compress
+
+    def competing_write(path: Path) -> Path:
+        target.write_bytes(b"another writer's candidate")
+        return compress(path)
+
+    monkeypatch.setattr(followup, "compress", competing_write)
+    assert followup.main(retain_argv(tmp_path, asset, data, packet)) == 1
+    assert target.read_bytes() == b"another writer's candidate"
+    assert not list(target.parent.glob(".retain-*"))
+    assert not (packet / followup.RETAINED_RECORD).exists()
+    output = capsys.readouterr()
+    assert "appeared while retaining" in output.err
+    assert "members retained" not in output.out

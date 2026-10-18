@@ -103,6 +103,8 @@ from fractions import Fraction
 from pathlib import Path, PurePosixPath
 from typing import Any
 
+from strif import atomic_write_text
+
 from devtools import audit_wand125_linear as linear
 from devtools import audit_wand125_point_and_mixed as mixed
 from devtools.audit_wand125_declared_net import (
@@ -495,36 +497,14 @@ def retain(
     pinned by digest with the reason `PINNED_MEMBERS` gives; the record
     `RETAINED_RECORD` lists both, and ``check-retained`` re-derives it from the packet.
     A member already stored with other bytes is refused: a packet's bytes are its
-    record's.
+    record's. An existing plain counterpart of a gzip member is always refused, even
+    when its bytes match; move it aside explicitly rather than letting compression
+    consume it. All destinations are checked before any packet member is written.
+    Completed members are linked into place without replacing existing files; the
+    manifest is atomically replaced. This promises atomic visibility, not power-loss
+    durability. A packet must have only one retention writer at a time.
     """
     directory = unpack_asset(asset, sha256, size, name, work)
-    members: list[dict[str, Any]] = []
-    for path in sorted(p for p in directory.rglob("*") if p.is_file()):
-        member = f"certificates/{name}/{path.relative_to(directory).as_posix()}"
-        data = path.read_bytes()
-        row: dict[str, Any] = {
-            "path": member,
-            "bytes": len(data),
-            "sha256": hashlib.sha256(data).hexdigest(),
-        }
-        reason = pinned_reason(member)
-        if reason is not None:
-            members.append(row | {"pinned_only": reason})
-            continue
-        stored, form = stored_name(member, data)
-        target = packet / stored
-        target.parent.mkdir(parents=True, exist_ok=True)
-        if target.exists():
-            held = read_retained_bytes(target) if form == "gzip" else target.read_bytes()
-            require(held == data, f"{stored} is already stored with other bytes")
-        elif form == "gzip":
-            # The archive's rule: `gzip -9n`, so the stored bytes carry no name or time.
-            plain = target.with_name(target.name.removesuffix(GZIP_SUFFIX))
-            plain.write_bytes(data)
-            compress(plain)
-        else:
-            target.write_bytes(data)
-        members.append(row | {"stored": stored, "form": form})
     record_path = packet / RETAINED_RECORD
     record: dict[str, Any] = (
         load_json(record_path.read_bytes())
@@ -541,6 +521,36 @@ def retain(
         (record["repository"], record["release"]) == (repository, release_tag),
         f"{RETAINED_RECORD} records another release",
     )
+    members: list[dict[str, Any]] = []
+    copies: list[tuple[Path, Path, str]] = []
+    for path in sorted(p for p in directory.rglob("*") if p.is_file()):
+        member = f"certificates/{name}/{path.relative_to(directory).as_posix()}"
+        data = path.read_bytes()
+        row: dict[str, Any] = {
+            "path": member,
+            "bytes": len(data),
+            "sha256": hashlib.sha256(data).hexdigest(),
+        }
+        reason = pinned_reason(member)
+        if reason is not None:
+            members.append(row | {"pinned_only": reason})
+            continue
+        stored, form = stored_name(member, data)
+        target = packet / stored
+        if form == "gzip":
+            plain = target.with_name(target.name.removesuffix(GZIP_SUFFIX))
+            require(
+                not (plain.exists() or plain.is_symlink()),
+                f"{plain.relative_to(packet)} already exists; "
+                "move it aside before retaining gzip",
+            )
+        require(not target.is_symlink(), f"{stored} is a symlink; move it aside")
+        if target.exists():
+            held = read_retained_bytes(target) if form == "gzip" else target.read_bytes()
+            require(held == data, f"{stored} is already stored with other bytes")
+        else:
+            copies.append((target, path, form))
+        members.append(row | {"stored": stored, "form": form})
     entry = {
         "asset": asset.name,
         "certificate": name,
@@ -552,8 +562,23 @@ def retain(
         [item for item in record["assets"] if item["asset"] != asset.name] + [entry],
         key=lambda item: item["asset"],
     )
-    record_path.parent.mkdir(parents=True, exist_ok=True)
-    record_path.write_text(retained_json.dumps(record), encoding="utf-8")
+    for target, source, form in copies:
+        target.parent.mkdir(parents=True, exist_ok=True)
+        with tempfile.TemporaryDirectory(prefix=".retain-", dir=target.parent) as staging:
+            temporary = Path(staging) / target.name
+            if form == "gzip":
+                # Keep `gzip -9n` bytes, but never let gzip consume a packet's plain file.
+                temporary = temporary.with_name(temporary.name.removesuffix(GZIP_SUFFIX))
+            shutil.copyfile(source, temporary)
+            if form == "gzip":
+                temporary = compress(temporary)
+            try:
+                os.link(temporary, target)
+            except FileExistsError as error:
+                raise AuditError(
+                    f"{target.relative_to(packet)} appeared while retaining; move it aside"
+                ) from error
+    atomic_write_text(record_path, retained_json.dumps(record), make_parents=True)
     return entry
 
 
