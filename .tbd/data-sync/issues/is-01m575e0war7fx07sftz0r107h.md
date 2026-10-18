@@ -5,29 +5,31 @@ title: Prepare isolated contributor workspace and audit autonomous-work readines
 kind: chore
 status: in_progress
 priority: 2
-version: 7
+version: 8
 delegate: codex-startup-coordinator-01a14e4c
 labels: []
 dependencies: []
 child_order_hints:
   - is-01m575j9sxtgjnr2ba9d22e87r
   - is-01m579gp3p86z5ta3kge1f290p
-hold: null
+hold: blocked
 hold_until: null
 created_at: 2026-10-18T09:28:07.817Z
-updated_at: 2026-10-18T10:39:29.397Z
+updated_at: 2026-10-18T11:09:28.784Z
 started_at: 2026-10-18T09:28:43.823Z
 ---
 Local startup only: verify current upstream main and tracker ownership, prepare an isolated Linux/WSL toolchain using Python 3.14.7 and frozen project dependencies, exercise bounded startup checks, and report prospective non-overlapping work with explicit limitations. No research implementation, public source change, merge, or unattended schedule is included. Future work blocks require operator-supplied start and deadline. Read-only lookups remain unclaimed under OR-19; the coordinator owns this setup deliverable. Acceptance: tool identities, bootstrap results, current GitHub/tracker snapshot, independent startup review, and an actionable handoff with every missing capability stated.
 
 ## Notes
 
-Startup assessment at upstream 804eff369193b698d497a9c06847059eb9de0470.
+Native startup continuation at upstream 804eff369193b698d497a9c06847059eb9de0470, 2026-10-18.
 
-Prepared a locally scoped WSL toolchain: CPython 3.14.7, uv 0.12.8 matching CI, Rust 1.98.0, Node 24.18.0 and TBD 0.10.0. Frozen Python dependencies, locked npm dependencies and the pinned submodule are present. Five bootstrap facts passed. Actual checks passed: 17 Python field/minimal-verifier tests, 3 sqverify_exact Rust library tests, Cairo output and a synthetic Chromium 151 page startup/assertion probe. These are scoped startup checks, not a full research checkpoint.
+The operator authorized an isolated native Linux execution directory. Full-history source and the pinned submodule were copied without alternates/shared pack hardlinks; a separate frozen Python 3.14.7 venv and fresh crate target were created. uv 0.12.8, Rust 1.98.0 and Node 24.18.0 remain pinned. The Windows coordinator remains the only tracker writer. No source or lockfile change, research implementation, PR or merge was made.
 
-Independent subagent review under think-rm5j checked the original receipts and local scripts. Initial tool-version, failure-handling, browser-library and checkout-binding findings were fixed. Existing development-dependency advisory remains tracked by think-2ikb; no lockfile change was made. A fresh-submodule CRLF/index-stat inconsistency was repaired without a content or staged diff.
+Native receipts passed: identity/clean-source checks; actual Python/numeric/Cairo/Chromium runtime and temporary-file operations; 17 Python tests; 3 sqverify_exact library tests; and four explicitly selected validation steps out of 110. The four-step process wall was 45.85s, compared with earlier interrupted DrvFS attempts. This is not a paired speedup claim or a strict tier-budget pass: the subset has no declared tier ceiling. Git status before and after returned clean in about 0.10s.
 
-Full validation readiness remains unestablished: the optional-artifact four-surface probe timed out at 300.11s and the direct probe at 240.17s, with no final summary. Git scans on the Windows-mounted filesystem were observed to be costly; this is not a proof of the only bottleneck. Do not interpret these interrupted runs as passed checks or mathematical failures.
+The broader edit-tier attempt used the original enforce-budget flag, two outer workers and one inner worker, with 270s inner and 390s outer caps. During that attempt, severe host memory pressure and WSL/Service/WSAETIMEDOUT were observed. No final edit receipt was recovered. Only task-owned launchers were interrupted; guest descendants could not be confirmed stopped. The result is interrupted/inconclusive, not a pass or an established source defect. The precise cause is unresolved.
 
-The coordinator is awaiting an operator decision on an isolated native Linux execution location before extending persistent setup outside the originally authorized workspace. No formal autonomous work window, research implementation, source PR or merge is active. Candidates remain unclaimed; refresh ownership, holds and overlap before choosing any subsequent work. Setup is not being advertised as full validation readiness.
+Independent subagent review under think-6czc verified the native receipts and corrected scope claims. Script findings about repeated pin/cleanliness assertions, copied interpreter alias and bounded final status were fixed. Full unattended readiness remains unestablished. Awaiting operator authorization to restart the affected Linux distro because that recovery can interrupt unrelated Linux processes; no restart or global resource setting change has been made. After recovery, inspect retained logs and owned processes before a single resource-bounded retry with an explicit per-task memory ceiling.
+
+Setup remains in progress on a blocked hold. The audit remains open for recovery and final handoff. No formal 4-8 hour work window exists; candidates remain unclaimed. Required contribution-specific/full checks, current-head CI and independent review still apply. Existing development dependency issue think-2ikb remains unchanged.
