@@ -5,7 +5,7 @@ title: "PR #676: retain dated open-work validation follow-up"
 kind: task
 status: in_progress
 priority: 2
-version: 13
+version: 14
 delegate: codex@spud10.local
 labels: []
 dependencies: []
@@ -16,7 +16,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-18T10:26:55.147Z
-updated_at: 2026-10-18T14:55:51.334Z
+updated_at: 2026-10-18T15:05:06.827Z
 started_at: 2026-10-18T10:27:05.278Z
 ---
 
@@ -45,3 +45,5 @@ Final611b45437 push terminated with one genuine failed test, not a timeout:66/67
 Frozen all-extras/dev isolated environment installed 55 packages in43.14s at /Volumes/spud-ext1/agent-scratch/squares-676-isolated-env-20261018/venv, explicit UV_PROJECT_ENVIRONMENT and task scratch/cache/Cargo paths. Size623MB, taskcache663MB, volume7.3GiB free at preflight. Fresh env-u-PYTHONPATH origins sqpack/kpress/workbench_tools all #676, checkout-import-preflight PASS, isolated Ruff0.16.3/BasedPyright1.39.10/packing-validate paths, external browser deps/typedESLint correctly resolved from declaring workspace. One initial root-cwd Node resolution probe was corrected to workspace resolution; no package mutation was needed. Shared .venv paths remain #665 and were not modified. New durable env-676-isolated.sh, isolated-676-env-bootstrap.log, isolated-676-env-preflight.log and isolated-676-checkout-imports.json.
 
 Scoped two-report disclosure committed with normal isolated hooks at600539c43bad6686daf33e221ab801963720d2aa (+38 lines, worktree clean); docs2065 pass, hooks7.40s. Offline PR body discloses invalid run, isolation and separate safeguard, OR9 passes. Fresh exact-head isolated records now running sequentially before full push; canonical300s/1800s ceilings unchanged. No remote push, issue reply, replay or merge. Keep qualification/publication bead open.
+
+Census fixture repair is local commit37bec42bd3c48bbf389a57820efd7638a8200058, reviewed by root: only success helper max_seconds2→30 plus reason comment; independent sleeping timeout stays2.0s. Full module13passed3.88s, Ruff/format/BasedPyright/docs clean, normal isolated hooks2.31s. The isolated predecessor600539c43 records passed52/52 in111.27s; its push failed only the two-second success fixture (66/67,741.09s) with retained TIMEOUT/two-row journal, and pool phase was not reached. Source wrapper correctly refused complete admission. At clean 37bec42bd, the first isolated records rerun overlapped #665’s broad gate and stopped at 18/52 selected steps. The active release-impact and work-accounting children accumulated over two minutes elapsed with only about 2.0s and0.26s CPU; one-second stack samples show kernel read waits during imports/file reads (792/792 and755/756 samples). Per-command limits are900s; the records tier’s300s wall ceiling is judged after completion rather than an outer hard kill. Parent directed a clean stop to release external-disk contention. Terminal exit130, real313.93s; all controller/child processes ended. This is contention-interrupted evidence, not a source failure or pass. Original log/provenance and both process samples are retained as records-37bec42bd*. No branch mutation followed. Records and full push must rerun sequentially alone after #665 releases the slot; use fresh records-alone-tmp/artifacts and records-37bec42bd-alone log prefix to preserve the interrupted receipt. No remote update before terminal green.
