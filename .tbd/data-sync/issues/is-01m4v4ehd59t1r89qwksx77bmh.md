@@ -5,7 +5,7 @@ title: "Merge the n = 17 stack (#560, #571, #577) and later landings of main int
 kind: task
 status: in_progress
 priority: 2
-version: 21
+version: 22
 spec_path: docs/project/specs/active/plan-2026-10-10-contributor-profiles.md
 delegate: profiles-final-merge
 labels: []
@@ -16,12 +16,16 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-13T17:20:02.981Z
-updated_at: 2026-10-18T12:34:08.046Z
+updated_at: 2026-10-18T12:35:47.506Z
 started_at: 2026-10-13T17:20:09.838Z
 ---
 Watch origin/main and merge it into the profiles branch, keeping both the Overbeck and Hosono renames, reconciling the census and regenerating views. Stack merged in 37b1c8bf7.
 
 ## Notes
+
+2026-10-18 current metadata handoff at e1f921bf09d6387fc27302b367cb4b1114b89082 (think-o3e9): PR #578 description now records 31 successful standard checks and 28 skipped at this head; Packing run38858773054 and Pages run38858773048. Complete checkpoint38857828303 at implementation77fe330dd5b26b132ad9794334262f9e872b4275 passed14 jobs with10 skipped, completed2026-10-16 06:20:15 UTC. Review A2 metadata correction is complete. Review A1 remains open: current main conflicts; preserve existing integration owner and perform reconciliation, gates and independent review of resolutions. Local broad attempts remain incomplete under think-j13b. No source, head, merge or deployment change. PR: https://github.com/jlevy/squares/pull/578 .
+
+Historical notes (retained):
 
 Latest 15 October integration completed at fb3f3e351 on draft PR #578. Merge c474bef45 incorporates 94 additional upstream commits through 3685616df, resolving 12 conflicted files; combined recent integrations incorporate 405 commits. Numeric records, verification levels and archived sources are preserved. Release declarations retain upstream site v0.7.12 and proposed v0.8.0, with exact no-public-change scopes checked. All 31 active hosted checks pass on final head; gh pr checks --watch exited 0 with no failed or pending jobs, including overview, all behavioral suites, frontend, PDF and cross-browser checks.
 
