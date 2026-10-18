@@ -700,17 +700,42 @@ def test_the_frontmatter_reader_reads_only_the_opening_block() -> None:
     assert ra.frontmatter("no front matter\n") == ""
 
 
+@pytest.mark.parametrize(
+    ("lines", "expected"),
+    [
+        (["a" * 140, "b" * 139], "the announcement fits one X post: 280 of 280 characters"),
+        (
+            ["a" * 140, "b" * 140],
+            (
+                "the announcement is 281 characters on X, over one post's 280; "
+                "as a thread of one line a post, every line fits"
+            ),
+        ),
+        (
+            ["a" * 281],
+            (
+                "the announcement is 281 characters on X, over one post's 280; "
+                "as a thread of one line a post, 1 lines do not fit"
+            ),
+        ),
+    ],
+)
 def test_stderr_says_whether_the_announcement_fits_one_post_or_a_thread(
     capsys: pytest.CaptureFixture[str],
+    monkeypatch: pytest.MonkeyPatch,
+    lines: list[str],
+    expected: str,
 ) -> None:
-    """Review A, A9: the line limit implies one post a line, so the block is checked too."""
-    _, err = run(capsys, ["--ids", "T-147", "--date", "2026-10-12"])
-    assert "the announcement fits one X post" in err
-    _, err = run(
-        capsys, ["--ids", *[f"T-{n}" for n in range(147, 153)], "--date", "2026-10-12"]
-    )
-    assert "over one post's 280; as a thread of one line a post, every line fits" in err
-    assert ra.block_fit(["a", "b"]) == "the announcement fits one X post: 3 of 280 characters"
+    """Review A, A9: check both the block boundary and the CLI's stderr wiring.
+
+    Fixed lines keep these boundaries independent of later results superseding the
+    historical entries selected by the CLI.
+    """
+    assert ra.block_fit(lines) == expected
+    monkeypatch.setattr(ra, "announcement", lambda *_args, **_kwargs: (lines, []))
+    printed, err = run(capsys, ["--ids", "T-147", "--date", "2026-10-12"])
+    assert printed == lines
+    assert expected in err
 
 
 def test_the_header_names_the_day_and_the_count() -> None:
