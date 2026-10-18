@@ -3,15 +3,18 @@ type: is
 id: is-01m574menq4mbk41bbqe3cx1rh
 title: Fix PR435 n83 coefficient link selecting the n87 catalogue entry
 kind: bug
-status: open
+status: in_progress
 priority: 2
-version: 1
+version: 2
 delegate: claude-code@spud10.local
 labels: []
 dependencies: []
 parent_id: is-01m4mv11d6aw0ekqzdjfg07w0e
+hold: null
+hold_until: null
 created_at: 2026-10-18T09:14:09.966Z
-updated_at: 2026-10-18T09:14:09.966Z
+updated_at: 2026-10-18T09:43:54.120Z
+started_at: 2026-10-18T09:43:54.119Z
 ---
 PR #435 review F1, pinned head 273abfa593d64a01256f8da0059aeae2e4d64186.
 
