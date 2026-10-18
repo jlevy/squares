@@ -5,7 +5,7 @@ title: "PR #676: retain dated open-work validation follow-up"
 kind: task
 status: in_progress
 priority: 2
-version: 9
+version: 10
 delegate: codex@spud10.local
 labels: []
 dependencies: []
@@ -15,7 +15,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-18T10:26:55.147Z
-updated_at: 2026-10-18T14:01:57.544Z
+updated_at: 2026-10-18T14:13:43.710Z
 started_at: 2026-10-18T10:27:05.278Z
 ---
 
@@ -34,3 +34,5 @@ Conservative Stage1 bulk-inventory appendix committed locally3711c46fb70bdadd6e9
 2026-10-18 exact-head qualification attempt at clean3711c46fb: records PASS52/52 selected steps90.62s against300s ceiling. Full push selected all804 quick-suite files because archived source Python is outside mapped roots; canonical reachable and tier ceilings1800s, no deadline override. Six distinct pytest failures were identified: source-credit/lineage agreement for the new668key (the four new builds-on-project credits omit required Levy attribution), and five browser-floor contracts because this checkout linked main node_modules without typescript-eslint. Root explicitly directed clean interruption after sufficient diagnosis; validator received SIGINT, stopped its registered subprocesses and exited130 at369.74s. This is an interrupted failed run, not a timeout or pass; cancellation of default_drawings is not a source finding. Durable logs/provenance and longrepr: agent-source/squares-intake-20261018-evidence/{records-3711c46fb.log,push-3711c46fb.log,push-3711c46fb-failure-evidence.json}. Correcting only four bibliography credits from retained project-catalogue/T149/source-lineage evidence;123focused lineage and bound-citation tests pass21.37s. No scientific replay, push or PR update. Isolated external npm-ci bootstrap awaits root665I/O slot, then focused browser regressions/normal commit/new-head sequential records+push remain.
 
 2026-10-18 final-head qualification continuation: credit-only fix committed 525bcc72108172335e3f0548ad3d950cbe3fb17c with normal hooks; parsed comparison changes only four source-backed credit fields. All 123 lineage/citation tests pass in 21.37s. Isolated external npm ci (96 packages, 13s; Node 24.19) replaces only this checkout's ignored root/workspace node_modules links; main node_modules and shared venv remain untouched. Five browser regressions pass in 4.87s. Records at525bcc721 pass52/52 in88.83s; its push was cleanly stopped at31.21s/exit130 following root's request for a final census-status addendum, with no source failure inferred. Reports-only commit611b454370d58ee6a8f5c9c9120fd6e859b9a634 appends26lines across the two dated reviews: opening671snapshot32d47d321 has18V0/C0; later draft89166716 has provisionalT211/n108V3/C3 using retained201-direction census and two accepted mathematical reviews, other17V0/C0, no merge/main promotion or fresh native replay/independent full implementation claimed. Root reviewed both commits without blockers. Light docs2065/requests127/70 and normal Flowmark/title hooks pass. At clean611b45437 records PASS52/52 in95.57s against300s ceiling; full push is now running sequentially with fresh external TMPDIR/artifacts, standard ceilings, and no remote mutation yet. Durable logs/provenance use records-611b45437 and push-611b45437 prefixes in the same evidence directory. Keep bead open for qualified publication and hosted checks.
+
+Final611b45437 push terminated with one genuine failed test, not a timeout:66/67 selected steps pass in1219.13s against1800s ceiling. Normal phase18940passed/55skipped/1xfailed; isolated pool phase9passed/1failed at shutdown-timeout control. A separate unchanged isolated invocation passes0.59s. New claimed/synced bug think-26gw owns the narrow deterministic test repair in3fc464c0e; docs-only ddebf0052 calibrates the inferred timeout phase. Root reviewed both scope and report calibration. Seven focused controls pass2.63s; Ruff/format/BasedPyright/docs and normal hooks pass. Current clean head ddebf00520532d1cd5f9fe45cbeb328732ba5fd1 has no new-head broad pass: records/push held while665 owns local slot. Offline #676 body is synchronized, Flowmark/OR9/table/footer checks pass at agent-source/squares-intake-20261018-evidence/pr676-stage2-addendum-body.md. It discloses the added test fix and all failed/interrupted attempts, openW1/Stage3, fourStage2 packets,669metadata conflict, provisional merge-order IDs and absence of fresh native replay. Read-only online source/issue census uses existing catalogue capture and blob-free metadata fetches, without branch mutation; terminal final make intake remains after qualified remote/hosted gates. No cleanup, remote push, issue reply or merge. Keep open.
