@@ -5,7 +5,7 @@ title: "Import evand: s(229) ≤ 15.650163254859: registration request (#674)"
 kind: task
 status: in_progress
 priority: 2
-version: 3
+version: 4
 delegate: claude-code@spud10.local
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m572ssbx1x412zpvsw1sb6je
 hold: null
 hold_until: null
 created_at: 2026-10-18T08:47:37.776Z
-updated_at: 2026-10-18T12:52:57.488Z
+updated_at: 2026-10-18T13:04:37.563Z
 started_at: 2026-10-18T12:48:51.614Z
 ---
 W1 intake 2026-10-18, parent think-xmxb. https://github.com/jlevy/squares/issues/674
@@ -36,3 +36,13 @@ blocked_on: none
 Each packet retains9source files:MIT licence(Copyright2026EvanDaniel),credits/rootREADME/exact-formatREADME,two standalone exactcheckers,dilationproducer,versioncertificate+binary64input. Opening85722source bytes/100216packet bytes; update84052source bytes/101132packet bytes. Update additionally pins opening2files46546bytes digest-only and checks byte identity against opening packet. Common source dependencies and originalclaim inputs unchanged acrosspins (gitdiffexit0). Other candidate families,search/numerical dependency closures,site/assets/bulk omitted commit-only. No data exceeds1000line compression threshold. Checkers import onlysys/fractions; producerargparse/math/sys/fractions. Sourceverifier/producer never imported/executed. Both acquire_source --check outcomes PACKET_MATCHES_ITS_CONTRACT; receipts include exact side,229coordinate rows,digests matchingreport,source/publicationdates,importinspection andexit0. OwnREADMEs formattedFlowmark; gitdiffcheckpass.
 
 Credit explicitly EvanDaniel after FranciscoCouzo672 after JoostdeWinter668. SourceCREDITS disclosesClaude under human direction/nopeerreview; commitscoauthorClaudeOpus5.5. Source reports sourcecheckeracceptance and approximate pair/wall margins1.0e-12/5.0e-13 opening,1.2e-12/6.0e-13 update; no perclaim negativecontrolreceipt retained or new controls claimed. Upperboundonly:nooptimality/localminimumproof/outsideindependentauthorship inferred. No custody blockers. Remaining root-owned work: exact comparison/chronological registration,pricedreplay/dedicatedreview,houseadoption/strongregularizersifapplicable,publication and main-basedauthorreply. No registries/cases/reports/existingpackets/#671 edits,broadgates,commits,pushes,mergeorGitHubcomments. Bead remains in_progress.
+
+### Post-merge reply draft for issue #674 — prepared 18 October 2026 (UNPOSTED)
+
+Posting conditions: this is a snapshot of pending intake work, not a ready-to-send main-based verdict. After the PR carrying the relevant records merges, refresh the issue/comments, run `check_requests --draft 674` from main, reconcile any later registration, review or replay, and check the deployed site and links. Replace pending-stage statements if those stages have landed. No GitHub comment was posted by this drafting pass. No provisional result number or verification rung is quoted below.
+
+Draft comment:
+
+Your opening report of 17 October 2026 states s(229) <= 15.650163254859. Your update of 18 October states s(229) <= 15.650161513896 and asks to use that smaller side instead. The update is the current request; both chronological reports are preserved in separate Stage 2 packets at [e0338c7becf95dbc7584b48d8868c0a1cd21079c](https://github.com/evand/square-packing/tree/e0338c7becf95dbc7584b48d8868c0a1cd21079c) and [00e68dfbe1d29ab5dbab1cddfb8f6ca19d5470db](https://github.com/evand/square-packing/tree/00e68dfbe1d29ab5dbab1cddfb8f6ca19d5470db).
+
+The retained lineage is Daniel after Couzo's packing, after de Winter's. Stage 3 registration, exact comparison, dedicated review and replay with controls remain pending. No geometric acceptance is claimed from source custody, and the update is an upper-bound claim.

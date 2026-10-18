@@ -5,7 +5,7 @@ title: "Import JoostdeWinter: Improved upper bounds for n = 227, 229, 260: regis
 kind: task
 status: in_progress
 priority: 2
-version: 4
+version: 5
 delegate: claude-code@spud10.local
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m572ssbx1x412zpvsw1sb6je
 hold: null
 hold_until: null
 created_at: 2026-10-18T08:47:35.192Z
-updated_at: 2026-10-18T12:47:50.639Z
+updated_at: 2026-10-18T13:04:34.546Z
 started_at: 2026-10-18T12:36:48.824Z
 ---
 W1 intake 2026-10-18, parent think-xmxb. https://github.com/jlevy/squares/issues/668
@@ -52,3 +52,13 @@ Two integration conditions, not demonstrated geometric defects: (a) verify_all.p
 Independence and claim limits: all three implementations share the rational witnesses, Python Fraction and one AI-assisted campaign; the first two share SAT. Clipping gives useful algorithmic diversity but no outside authorship is established. Exact feasibility proves only these upper bounds, not optimality, rigidity, world-record priority or three unrelated construction families. The source states that 229 descends from 260. Later #672/#674 report ordering remains with the import owner; illustrative floating coordinates and approximate adjacency figures are not proof inputs.
 
 Commands/evidence: tbd shortcut review-code; numbered static reads of all four replay scripts; eight diff -q comparisons (all exit 0); gzip -cd | jq read-only witness-header inspection; reads of manifests, READMEs and historical source receipts. No source checker, self-test, negative control, one-off validation program, broad replay or gate ran. No repository file, register, claim status, GitHub item or PR was changed. This note preserves the earlier custody findings; full project replay and publication remain open.
+
+### Post-merge reply draft for issue #668 — prepared 18 October 2026 (UNPOSTED)
+
+Posting conditions: this is a snapshot of pending intake work, not a ready-to-send main-based verdict. After the PR carrying the relevant records merges, refresh the issue/comments, run `check_requests --draft 668` from main, reconcile any later registration, review or replay, and check the deployed site and links. Replace pending-stage statements if those stages have landed. No GitHub comment was posted by this drafting pass. No provisional result number or verification rung is quoted below.
+
+Draft comment:
+
+Your report of 17 October 2026 states s(227) <= 15.563796703670, s(229) <= 15.650174756949 and s(260) <= 16.645778804182, rounded upward from the exact witnesses. Stage 2 retains those witnesses and their complete documented checker inputs at licensed successor [9bf5d9be4d0ca13a1dbef7d7953032fe87d4e81d](https://github.com/JoostdeWinter/square-packing/tree/9bf5d9be4d0ca13a1dbef7d7953032fe87d4e81d); the claim inputs are unchanged from the original publication.
+
+A bounded source-level mathematical read found no blocking geometry finding. Exact witness-to-record binding, controls and complete replay remain pending. Stage 3 registration will preserve this report before the later Couzo and Daniel reports, with your lineage retained; it has not yet been registered.

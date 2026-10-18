@@ -5,7 +5,7 @@ title: "Import franciscouzo: 227, 229, 330-996: registration request (#672)"
 kind: task
 status: in_progress
 priority: 2
-version: 3
+version: 4
 delegate: claude-code@spud10.local
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m572ssbx1x412zpvsw1sb6je
 hold: null
 hold_until: null
 created_at: 2026-10-18T08:47:36.866Z
-updated_at: 2026-10-18T12:59:41.515Z
+updated_at: 2026-10-18T13:04:36.349Z
 started_at: 2026-10-18T12:53:37.251Z
 ---
 W1 intake 2026-10-18, parent think-xmxb. https://github.com/jlevy/squares/issues/672
@@ -94,3 +94,13 @@ Exact replay input closure: each selected cert is self-contained n S then ration
 Claims beyond issue: commit/source audit lists47 changed bounds versus46issue rows; extra260 is adoption of an external de Winter668 value4161444696515435316429350771309/250000000000000000000000000000 rounded16.645778786062, explicitly credited, not a new Couzo discovery. Broader source claims542finite witnesses and all1024 upperbounds plus202 exact-construction improvements, with classical/deletion/L-border consequences. Those are not automatically46new results. RootREADME retains numerical tables and additional comparison-only931/998 rows; do not mistake them for this issue's exact certificate claims.
 
 Bounded Stage2 proposal: sparse fetch this pin only; select46issue rootcerts+46rootJSON, plus upper_bounds.json945800B, best/manifest1071252B, best/SHA256SUMS41311B, bound_sources26667B,3README241774B digest-only, MIT checker3567B/licence1068B andcontrols1934B. Total102scoped files7965357logical bytes,7723583retained bytes before factual JSON compression. Omit full known_best2.2MB, certified_bounds1.2MB, all82MBbestcerts/all126MBcert subtree, previews,searchrun assets. Pin optional parent manifests/digests separately; retain only parent facts needed for lineage. Respect OR18: selected certs are5.55MB total, below1024 squares/each often under1000lines, so default line-threshold gzip may not compress them. Use a hosted immutable data carrier or an explicitly approved small factual packet policy; do not pull the whole subtree intoGit. Full manifest/catalogue may use deterministic data compression. Estimated acquisition-only price5-15minwall and<1CPUminute, not measured certificate replay; set a15minwall ceiling and account for external-disk contention. No replay price asserted. Remaining work: stage2 actual custody, exact comparisons, registration/review and eventual adoption/publication remain owned by this bead.
+
+### Post-merge reply draft for issue #672 — prepared 18 October 2026 (UNPOSTED)
+
+Posting conditions: this is a snapshot of pending intake work, not a ready-to-send main-based verdict. After the PR carrying the relevant records merges, refresh the issue/comments, run `check_requests --draft 672` from main, reconcile any later registration, review or replay, and check the deployed site and links. Replace pending-stage statements if those stages have landed. No GitHub comment was posted by this drafting pass. No provisional result number or verification rung is quoted below.
+
+Draft comment:
+
+Your report of 17 October 2026 lists 46 improved upper bounds from [af8cb7959aead318c0cf5e9f873de3caa763f77a](https://github.com/franciscouzo/square-packing/tree/af8cb7959aead318c0cf5e9f873de3caa763f77a), including s(227) <= 15.563625652343 and s(229) <= 15.650174740273, rounded upward. Your comment of 17 October identifying de Winter's packings as the start at those two counts is retained.
+
+The source-level inventory distinguishes the issue-linked root certificates from nine differing best-directory files. Stage 2 selected-input custody and its data-carrier decision remain pending; source receipts must stay attached to the bytes they checked. Stage 3 registration and exact report-order comparisons remain pending. This inventory has run no certificate checker.
