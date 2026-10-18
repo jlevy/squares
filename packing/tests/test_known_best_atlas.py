@@ -2147,8 +2147,10 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
     # Couzo's 12 October certificates, Mishapolk's 14 October records, Ostashev's 12
     # October compositions and records and 13 October merged bands, or PingYou Ltd's
     # n = 146 refinement: two sources fewer, and no new name.
+    # T-174's 37-count adoption consolidates ten source keys while retaining every
+    # construction credit.
     assert len(expected_names) == 26
-    assert len(expected_sources) == 26
+    assert len(expected_sources) == 16
     assert set(json.loads(credit_block.attrib["data-credited-names"])) == expected_names
     assert set(json.loads(credit_block.attrib["data-source-keys"])) == expected_sources
     assert credit_block.find("svg:text[@data-feature='packing-credits-heading']", SVG) is None
@@ -2177,16 +2179,16 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
         "Couzo",
         "Daniel",
         "Fang",
+        "Gupta",
         "Ostashev",
         "PingYou Ltd",
-        "Rehwaldt",
-        "Gupta",
         "Xu",
         "Barnett",
         "Chang",
         "DeVincentis",
         "hmbelvedere",
         "Mishapolk",
+        "Rehwaldt",
     ]
     assert all(body.count(name) == 1 for name in expected_names)
     assert "et al." not in body
@@ -3119,8 +3121,15 @@ def test_the_poster_badges_every_perfect_square_and_counts_them_in_its_legend() 
     assert solid_rigid == sorted([k * k for k in range(1, 19)] + [5, 11, 28, 40])
     assert set(solid_rigid) >= {121, 144, 169, 196, 225, 256, 289, 324}
 
-    # Read exactness from the frontier, independently of the figure's computed totals.
+    # The retained poster predates the 17 October adoption. Read the cases as that
+    # pass found them, independently of the poster's computed totals.
+    from devtools import adopt_houses  # noqa: PLC0415
+
+    previous = adopt_houses.read_pass("2026-10-17")
     cases = {n: build_bound_citations.load_case(n) for n in cards}
+    cases.update(
+        {n: safe_load(text.split("---\n", 2)[1])["packing"] for n, text in previous.items()}
+    )
     numeric_cases = {
         n
         for n, case in cases.items()

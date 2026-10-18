@@ -613,23 +613,18 @@ def test_a_bound_better_than_its_cases_hold_is_pending_adoption_not_superseded()
     )
     assert cell == f"{CONFIRMED}, independently re-implemented"
     assert [finding.n for finding in check_standing.improvements(entry, records)] == [152]
-    adopted = records.results["T-128"]
+    adopted = records.results["T-186"]
     assert view.standing(adopted, records) == view.HOLDS
     assert status_line(adopted, evidence) == CONFIRMED
-    # A dated report above the ceilings its cases hold is superseded, by their holders:
-    # the earlier n = 105 source ceiling, and n = 108's one unit of the last place up. Since
-    # 15 October 2026 the house at 105 is PingYou Ltd's re-solve of T-130's packing (T-170),
-    # 1.08e-19 below it.
+    # A dated report above both ceilings is superseded by their current holder, T-174.
     worse = stating(
         records,
         {105: "10.80607786551970463257490535044771520398745274", 108: "10.9048210123203566"},
     )
     assert view.standing(worse, records) == view.SUPERSEDED
-    assert view.position_marks(worse, view.SUPERSEDED, records) == [
-        "superseded by T-128 and T-170"
-    ]
-    # A tie is no improvement: the case holds that value under T-170's citation.
-    tie = stating(records, {105: "10.78930378374815884"})
+    assert view.position_marks(worse, view.SUPERSEDED, records) == ["superseded by T-174"]
+    # A tie is no improvement: use the case's complete current exact side.
+    tie = stating(records, {105: records.cases[105]["verified_upper_bound"]["exact_form"]})
     assert view.standing(tie, records) == view.SUPERSEDED
     # Better at one count and beaten at another: pending adoption as a whole, as a result
     # that holds one case of several stands; superseded on the beaten case alone.
@@ -638,12 +633,12 @@ def test_a_bound_better_than_its_cases_hold_is_pending_adoption_not_superseded()
     assert view.position_marks(mixed, view.PENDING_ADOPTION, records) == []
     alone = {**mixed, "scope": {"n_values": [108]}}
     assert view.standing(alone, records) == view.SUPERSEDED
-    assert view.position_marks(alone, view.SUPERSEDED, records) == ["superseded by T-128"]
+    assert view.position_marks(alone, view.SUPERSEDED, records) == ["superseded by T-174"]
     assert view.standing({**mixed, "scope": {"n_values": [105]}}, records) == (
         view.PENDING_ADOPTION
     )
     # A result a case bound rests on holds it, whatever its words state.
-    held = records.results["T-170"]
+    held = records.results["T-174"]
     assert view.standing(held, records) == view.HOLDS
     assert view.standing({**held, "claim": "Reported s(105) <= 10.79."}, records) == view.HOLDS
     # Two lanes are never mixed: a report can hold only the reported lane, so a reported
@@ -753,9 +748,9 @@ def test_a_superseded_bound_names_only_the_lanes_that_replaced_it() -> None:
     assert view.standing(report, split) == view.SUPERSEDED
     assert view.lane_holders(105, split, "upper", ["verified", "reported"]) == {
         "T-117",
-        "T-170",
+        "T-174",
     }
     assert view.superseding(report, split) == ("T-117",)
     # A bound whose words state nothing at the case is named by both lanes' holders.
     silent = {**report, "claim": "Reported an improvement at n = 105."}
-    assert view.superseding(silent, split) == ("T-117", "T-170")
+    assert view.superseding(silent, split) == ("T-117", "T-174")

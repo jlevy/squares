@@ -172,10 +172,13 @@ def test_n68_near_wall_rotations_are_not_full_side_contacts() -> None:
     with source-ordered square IDs: `square-020` and `square-063` turn about 0.00096
     and 0.00097 rad. Earlier Couzo and UnitSquare witnesses use different square IDs.
     """
-    witness = load_witness(
-        ROOT / "witnesses/known-best/n-068.yaml",
-        fallback_schema=ROOT / "witness.schema.yaml",
+    from devtools import refinement_house_links as houses  # noqa: PLC0415
+
+    rows = houses.house.shared.roster(
+        houses.house.shared.read_xz_receipt(houses.METADATA), houses.NUMBERS
     )
+    witness = houses.packets.to_witness(houses.source(68), 68)
+    witness.update(rows[68]["metadata"])
     spec = RenderSpec()
     colors = assign_square_colors(frame_from_witness(witness), spec)
 
