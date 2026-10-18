@@ -254,6 +254,34 @@ assistance under human direction, and each commit names Claude Opus 5.5 as co-au
 | `release/certificates/mixed_n92_L986/check2/control-197_200.jsonl.gz` | upstream | `7456fc5efd22835d8b8da8398541c2f8fd9d7d90` | `15070de3684337a81996dc4b64090445d2ef3cf3083c12899e8b989dc8076613` |
 | `release/certificates/mixed_n92_L986/check2/run.jsonl.gz` | upstream | `f415aca2d8f1e54556ad3c8b3f8728857aee8e2a` | `04c0e038ea3d570d7898aa16508664ede63b604476163986b420449a273720e4` |
 
+## n108 Mathematical Review and Exact Receipt Audit
+
+The [18 October mathematical review](../../../../docs/project/reviews/review-2026-10-18-wand125-n108-certificate-mathematics.md)
+accepts the n108 certificate on the retained, reviewed sqverify-fast route. It covers
+one certificate; the other 17 have no verdict from that review. The full coverage
+implementation shares the producer's components. No native verifier was rerun by this
+review or this integration.
+
+The retained [audit tool](../../../devtools/audit_fine_net_receipt.py) imports only the
+Python standard library. It reads this packet's candidate, the maintained census and
+control receipts, and the reviewed crate source. It recomputes exact mass and net
+premises and all 201 saved refusal-point captures with its own polygon clipping. It
+decides no coverage between those points. The [receipt](review/n108-exact-audit.json)
+records PASS for the integrated tree; the mathematical note records the review's
+separate invocation and its provenance. The adapted source archive remains unopened.
+
+From `packing/`, run:
+
+```bash
+uv run --frozen --group dev python -m devtools.audit_fine_net_receipt \
+  --root .. --packet wand125-fine-net-lower-bounds-2026-10-16 \
+  --certificate mixed_n108_L1062 --n 108 --side 531/50 \
+  --reviewed-source-sha256 d97758bbc9639edc70b8bd7dc83106d4e8d1be034bacb3e88f8c539b88091c88
+```
+
+This premise audit supports the stage-4 records lane alongside the native replay and
+accepted reviews. It cannot promote a result's rung on its own.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

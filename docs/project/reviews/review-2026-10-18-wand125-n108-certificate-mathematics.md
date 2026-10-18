@@ -9,14 +9,17 @@ independent full-verifier confirmation.
 
 This is the certificate-specific mathematical lane of
 [stage 4](../../../packing/campaign/result-import.md#stage-4-validate), reviewed on
-2026-10-18 by a separately delegated Codex agent, Astra family, strong tier at `xhigh`
-reasoning. The reviewed [PR #671](https://github.com/jlevy/squares/pull/671) head is
+2026-10-18 by a separately delegated Codex agent, strong tier.
+The reviewed [PR #671](https://github.com/jlevy/squares/pull/671) head is
 `32d47d3214ec28f2a82b89689cd8bb8f63f98e02`, based on
-`804eff369193b698d497a9c06847059eb9de0470`. The claim is **T-211 at that head**, with
-the stable evidence ID `E-wand125-fine-net-n108-1062-report` in the
+`804eff369193b698d497a9c06847059eb9de0470`. The claim has the stable evidence ID
+`E-wand125-fine-net-n108-1062-report` in the
 [result register](../../../packing/frontier/results.yaml) and
 [evidence register](../../../packing/frontier/evidence.yaml).
-T-numbers may change during integration.
+The original review used the Astra system family at `xhigh` reasoning.
+This is the provenance of Review B; it was not a maximum-reasoning review.
+Integration identifies the claim by its stable evidence ID, because result numbers are
+assigned in merge order.
 
 ## Scope and Evidence
 

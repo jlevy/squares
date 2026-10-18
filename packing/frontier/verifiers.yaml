@@ -3928,3 +3928,44 @@ verifiers:
       - packing/devtools/continuous_pose_followup.py
       - packing/tests/test_continuous_pose_followup.py
     independence_record: packing/devtools/continuous_pose_followup.py
+
+  - id: V-audit-fine-net-receipt
+    program: devtools.audit_fine_net_receipt
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: premises
+    summary: >-
+      Checks a rectangle-only declared-net candidate's exact mass, geometry and net
+      premises, binds its saved native census and complete direction log, and recomputes
+      every saved control-witness capture using exact polygon clipping. It decides
+      premises and particular points, never universal coverage between them.
+    source:
+      - packing/devtools/audit_fine_net_receipt.py
+      - packing/tests/test_audit_fine_net_receipt.py
+    independence_record: docs/project/reviews/review-2026-10-18-wand125-n108-certificate-mathematics.md
+    independence:
+      read: [mathematics, specification, certificate-format, producer-code, producer-output]
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Codex (OpenAI)
+          setting: >-
+            A separately prompted mathematical review lane, strong tier at xhigh
+            reasoning; the retained review records the system family and exact scope.
+      overlaps_producer:
+        extent: unknown
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The source discloses AI assistance without identifying every system family.
+          This audit was separately prompted and imports only the Python standard
+          library. Its author read the maintained admission and control code that the
+          producer's adapted checker shares, so it does not claim a clean room.
+    note: >-
+      The 18 October review's complete n108 point audit is retained at
+      packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review/n108-exact-audit.json.
+      Its PASS is a premise-and-point result beside the
+      native replay, not a full coverage decision or an independent full verifier.

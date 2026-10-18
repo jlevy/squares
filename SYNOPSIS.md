@@ -674,6 +674,7 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [Mathematical Review of wand125’s n108 Measure Certificate](docs/project/reviews/review-2026-10-18-wand125-n108-certificate-mathematics.md) | dated review record | record | retained | — |
 | [Review: The Rational Upper-Bound Imports of 11 to 15 October (#506 to #607)](docs/project/reviews/review-2026-10-16-upper-bound-imports-506-607.md) | dated review record | record | retained | — |
 | [Fitzharding’s Lean Proof That s(19) = 3 + 4√2/3: Mathematical Review](docs/project/reviews/review-2026-10-16-fitzharding-n19-lean.md) | dated review record | record | retained | — |
 | [Review: The Rational Upper-Bound Imports of 12 to 14 October (#561 to #593)](docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md) | dated review record | record | retained | — |

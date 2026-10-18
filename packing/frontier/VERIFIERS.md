@@ -25,7 +25,7 @@ second implementation agrees.
 
 ## The Short Version
 
-- **162** programs: **50** external and **112** first-party; **112** decide claims and **50** check premises.
+- **163** programs: **50** external and **113** first-party; **112** decide claims and **51** check premises.
 - **532** of **632** evidence entries name the programs that verified them: 273 reproduced with the producer’s code, 230 independently re-implemented, 18 re-implemented, sharing the producer’s components, 11 no relation: a proof, a derivation or a report.
 
 ## Programs
@@ -194,6 +194,7 @@ second implementation agrees.
 | [`V-wand125-sqverify-continuous`](#v-wand125-sqverify-continuous) | sqverify-fast --continuous | wand125, adapting this repository's sqverify_fast | external | decides | 1 | 1 |
 | [`V-wand125-contpose-check3`](#v-wand125-contpose-check3) | contpose_check3 v1.2 | wand125 (the driver, written to a specification for Codex), around Guzhou0806's kernels | external | decides | 1 | 1 |
 | [`V-continuous-pose-followup`](#v-continuous-pose-followup) | devtools.continuous_pose_followup | Squares Project (Levy) | first-party | premises | 0 | 0 |
+| [`V-audit-fine-net-receipt`](#v-audit-fine-net-receipt) | devtools.audit_fine_net_receipt | Squares Project (Levy) | first-party | premises | 0 | 0 |
 
 ## By Program
 
@@ -3274,6 +3275,20 @@ Decides in exact rationals a continuous-pose certificate's premises and custody 
 - Source: [`packing/devtools/continuous_pose_followup.py`](../../packing/devtools/continuous_pose_followup.py), [`packing/tests/test_continuous_pose_followup.py`](../../packing/tests/test_continuous_pose_followup.py)
 - Versions run: this repository's commits, which Git holds
 - What its authors read and used: [`packing/devtools/continuous_pose_followup.py`](../../packing/devtools/continuous_pose_followup.py)
+
+No evidence entry names it yet.
+
+### `V-audit-fine-net-receipt`
+
+**devtools.audit_fine_net_receipt** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
+
+Checks a rectangle-only declared-net candidate's exact mass, geometry and net premises, binds its saved native census and complete direction log, and recomputes every saved control-witness capture using exact polygon clipping. It decides premises and particular points, never universal coverage between them.
+
+- Source: [`packing/devtools/audit_fine_net_receipt.py`](../../packing/devtools/audit_fine_net_receipt.py), [`packing/tests/test_audit_fine_net_receipt.py`](../../packing/tests/test_audit_fine_net_receipt.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-10-18-wand125-n108-certificate-mathematics.md`](../../docs/project/reviews/review-2026-10-18-wand125-n108-certificate-mathematics.md)
+- Independence: its authors read mathematics, specification, certificate-format, producer-code, producer-output; it shares none of the producer’s code; written by Codex (OpenAI) (A separately prompted mathematical review lane, strong tier at xhigh reasoning; the retained review records the system family and exact scope.), with its own prompt and code; authorship in common with the producer’s: unknown, The source discloses AI assistance without identifying every system family. This audit was separately prompted and imports only the Python standard library. Its author read the maintained admission and control code that the producer's adapted checker shares, so it does not claim a clean room.
+- Note: The 18 October review's complete n108 point audit is retained at packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review/n108-exact-audit.json. Its PASS is a premise-and-point result beside the native replay, not a full coverage decision or an independent full verifier.
 
 No evidence entry names it yet.
 
