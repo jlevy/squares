@@ -5,7 +5,7 @@ title: "PR #676: retain dated open-work validation follow-up"
 kind: task
 status: in_progress
 priority: 2
-version: 21
+version: 22
 delegate: codex@spud10.local
 labels: []
 dependencies: []
@@ -18,7 +18,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-18T10:26:55.147Z
-updated_at: 2026-10-18T21:59:18.442Z
+updated_at: 2026-10-18T22:29:53.568Z
 started_at: 2026-10-18T10:27:05.278Z
 ---
 
@@ -65,3 +65,11 @@ Clean55bbddf45 records completed51/52 steps in94.62s (real95.60s), sole source f
 Fresh exact46fcec4c0 records uses isolated installed #676 origins, pinned #661 release base, CPU6/n5/jobs2/inner1, fresh external TMPDIR and unchanged300s ceiling. It stalled at2/52 by90s: Ruff90s/0.02sCPU, schema58s/0.34sCPU, controller0.52sCPU. Warm external/internal small reads both0.00s; one-second Ruff sample provides no conclusive syscall attribution. Root confirmed clean stop rather than retry/ceiling extension. SIGINT terminal exit130,real116.42s/user7.97/sys2.55; child-15 markers are cancellation, not source findings. All owned controller/wrapper/child IDs and descendants are gone. No pass-head exists. This is incomplete storage-stalled evidence, not a source failure or pass. Prior ce95 records also timed out300s without a source finding; source tree unchanged after the current stop.
 
 Durable evidence root /Volumes/spud-ext1/agent-source/squares-intake-20261018-evidence/: records-55bbddf45-stage3-n5.*, reader-prose-55bbddf45-repair-scope.json, records-46fcec4c0-stage3-n5.*, records-46fcec4c0-ruff-sample.txt; repeat script qualify-676-46fcec4c0-stage3-n5.sh. HOLD retries until root establishes host cause/quiet window. Next: fresh distinct records run on clean46fcec4c0 with same300s ceiling; pause after terminalgreen for root coordination, then three focused supervisor-signal controls and refreshed full CPU10/6 exact node-identity comparison before canonical1800s n5 push. No remote push before root formal-links661→676; source/math review descendants remain separate. Remote676 is still5fb743b3e. No new issue reply, merge, shared-env mutation, internal scratch fallback or gate pass claimed.
+
+2026-10-18 internal-executable qualification checkpoint: Existing main project venv Python3.14.7/Ruff0.16.3 passed the one actual serial canary (Ruff0.34s, schema11.67s; total12.63s). All54 versioned installed distributions match this branch's uv.lock; unversioned editable kpress is checked by forced #676 import origin. Two preceding metadata-only diagnostic mistakes around the unversioned kpress entry ran neither tested command and remain separately logged. No environment was created internally, shared editable links were not mutated, and all task caches/TMPDIR stayed external.
+
+Exact clean46fcec4c0 records passed52/52 in103.937s validator wall,104.75s real against300s outer cap. Raw format-json stdout contains an extra no-gate-marker banner; the post-run pretty-printer failed on that banner only, while the validator exit and pass-head are0/valid. Complete pure JSON extraction and per-step artifacts confirm every selected step passed. Evidence records-46fcec4c0-internal-venv-01.*. Root authorized required local push with an explicit environment caveat: ordinary workers inherit #676 PYTHONPATH, while installed fallback without it is #665/main and synthetic snapshot workers intentionally replace paths; hosted exact-head CI is definitive. Three pending supervisor-signal controls passed0.99s. CPU10/6 full quick collection has exactly19,038 identities including duplicates on each shape, with no deselection.
+
+The required n5/jobs2/inner1 push at46fcec4c0 was stopped known-red exit130,182.45s real (3954 finished test events), against unchanged1800s ceiling. Exactlythree source failures: two overview project-card contracts omit JoostdeWinter/square-packing; generate_frontier_case.check_records([126,155,179]) differs at155. Complete unique failure events are in push-46fcec4c0-internal-venv-01-live-failures.json, with original command/step/worker artifacts. Independent senior preflight found no additional source problem; a focused correctness reviewer confirms126/179 unchanged and155 differs only because apply_closed_form restores Hosono's paragraph before the new pending-report note.
+
+Exactlytwo uncommitted narrow fixes now exist: overview_sections.py adds the source repository card as reported/pending adoption; n-155.md moves the intact Hosono paragraph before the intact two-paragraph pending-report note. Frontmatter and paragraph multiset are unchanged; no generator code, numerical field, result rung, case upper lane, house or witness was edited. Both fixes are independently reviewed at source level. The first focused red reproduction had two expected Fs, then U-state wait and90+10 timeout137; a bounded in-memory probe confirmed126 byte equality and the exact155 paragraph move before stopping at179. The post-fix focused verification stalled with near-zero CPU after one dot. After SIGINT and original timeout escalation, owned pytest91263 and time91184 remain macOSU/PID1 despite explicit KILL; wrapper91183 is gone and session10779 is terminal137. These are kernel-wait cleanup survivors, not a source verdict or qualified pass. Root's one further direct-capture focused retry is held until they actually disappear; avoid initial external log opening, retain external TMPDIR/caches and canonical bounds. No commit, fresh gate, shared-env mutation or GitHub action follows this host stall. Remote676 remains5fb743b3e; formal stack retarget/push and hosted checks remain parent-coordinated.
