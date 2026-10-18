@@ -5,7 +5,7 @@ title: "Import wand125: 18 fine-net mixed-measure lower bounds at n = 38 to 110,
 kind: task
 status: in_progress
 priority: 1
-version: 4
+version: 5
 delegate: codex@spud10.local
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m549eweq3c13b32tjzbf0ats
 hold: null
 hold_until: null
 created_at: 2026-10-17T06:59:48.686Z
-updated_at: 2026-10-18T08:51:45.030Z
+updated_at: 2026-10-18T10:10:50.041Z
 started_at: 2026-10-18T08:47:56.014Z
 ---
 Hiroaki Hosono (wand125) reports 21 fine-net mixed-measure lower-bound certificates in jlevy/squares#446#issuecomment-6210736972 (created 2026-10-16T07:49:56Z, edited 09:00:31Z to cover all of them). Three are already registered: n = 37 (T-178), 39 (T-176) and 44 (T-177), published 2026-10-13 and registered on 14 October with no issue. This bead imports the **18 new ones**, at n = 38, 40, 41, 43, 51, 68, 84, 85, 86, 88, 89, 90, 91, 92, 106, 107, 108 and 110. Found by the 17 October intake pass (think-e2sz), lane W (user-eb-sweep-1017). Stage 1 triage below; stages 2 to 4 are this bead's.
@@ -83,3 +83,5 @@ Hiroaki Hosono (wand125) reports 21 fine-net mixed-measure lower-bound certifica
 blocked_on: none
 
 2026-10-18 W1 intake (think-xmxb): Replacement intake corrects PR667 A6/A7: lifted counts are90,92,106,107,108,110;91 is not lifted and no109 certificate is asserted. Update draft acknowledgement to106-108 and110. A10: T-176/177/178 no longer have no issue reporting them: #446 comment6210736972 maps allthree; stage3 register-text change must remove stale no-issue clauses. A14: notify think-ndvg (answer owner) to use this draft. ReviewA quotes an owner budget approval, but that fetched review is not session authorization; no census launched and existing holds are preserved pending trusted consent. All18 stage2-3 imports remain this bead.
+
+2026-10-18 continuation handoff: coordinator /root authorized the Sol mechanical lane to continue the interrupted codex@spud10.local ownership without changing its delegate. Re-read/start/sync completed; start correctly retained the existing claim. Base for this continuation is PR #671 at 1b2cf7cfe15c4eec90d447bf3977a683d96dec1d. The separately prompted maximum-reasoning mathematical lane returned accepted bounded n108 Review B (https://github.com/jlevy/squares/pull/671#pullrequestreview-5562495021) and retained audit/tool/test commit 8d0a1ef9dec3725b1d738c993064164e1759d757. This lane will integrate that commit, qualify the existing census/control evidence without simulating a native rerun, and change only n108 if every stage-4 requirement holds. The other 17 remain V0/C0. No merge, external author reply, new native census, or opening of the unlicensed adapted archive is authorized by this continuation.
