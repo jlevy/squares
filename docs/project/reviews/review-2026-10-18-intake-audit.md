@@ -197,6 +197,73 @@ deployed site. No announcement is generated because this change allocates no T i
 Significance is S1, bookkeeping: retain a changelog coverage omission and publish no
 News entry. Merge and issue posting remain the coordinator’s later steps.
 
+## Stage 2 Follow-up — 18 October 2026
+
+This interim addendum preserves the original audit above and advances three imports to
+source custody through four packets.
+It does not complete W1: the runbook still requires stages 1–3 for every new result on
+this branch.
+
+| Issue and owner | Completed custody | Remaining work |
+| --- | --- | --- |
+| #668, `think-qdcc` | [Three-count packet](../../../packing/resources/web/de-winter-upper-bounds-227-229-260-2026-10-17/README.md): 44 retained upstream files, including the three exact witnesses and standalone checker dependencies. Licensed pin `9bf5d9be` changes only LICENSE and root README from original claim pin `c95c4938` | Stage 3 registration, exact source-side comparisons, complete review and replay with controls; no checker ran here |
+| #669, `think-n1ga` | [Single-count packet](../../../packing/resources/web/evand-n155-explorer-2026-10-17/README.md): 15 retained upstream files at MIT-licensed `59326b86`, including both exact certificates, both standalone checkers and numerical reports. The display certificate has the original certificate’s side and is not another bound | Resolve the attribution discrepancy, register, review and replay with controls; adopt and regularize only after validation |
+| #674 opening, `think-5ij2` | [Opening packet](../../../packing/resources/web/evand-n229-dilation-2026-10-17/README.md): nine retained upstream files at MIT-licensed `e0338c7`, including the exact certificate, binary64 input, two standalone checkers and dilation producer | Preserve its chronological claim, `15.650163254859`, while the current request follows the smaller update; no geometric verdict or registration |
+| #674 update, `think-5ij2` | [Update packet](../../../packing/resources/web/evand-n229-dilation-update-2026-10-18/README.md): nine retained upstream files at MIT-licensed `00e68df`; the opening inputs remain unchanged and are bound to their retained copies | Register, review and replay with controls; the current requested bound is `15.650161513896`, not a lower-bound claim |
+
+The original claim dates are 17 October 2026 for #668, #669 and #674’s opening, and 18
+October for #674’s update.
+Retrieval does not change those dates.
+The source index and bibliography name all four packets.
+Their custody checks establish retained bytes and checker-input completeness, without a
+geometric verdict or evidential upgrade.
+Separately, `think-qdcc` records a bounded source-level mathematical read of #668 with
+no blocking geometry finding; binding the exact witnesses to `records.json` and
+exercising controls remain pending.
+
+For #669, the issue explicitly credits Daniil Ostashev’s T-149 as the start, as does
+`s155_ex2_prior.json`; `s155_ex2_regularized.json` instead contains
+`by: ["Francisco Couzo"]`. The packet preserves that disagreement.
+The bibliography reports the issue’s requested lineage and names the conflicting field;
+acquisition does not decide whether it is stale metadata.
+Numerical KKT, local-minimum and matching diagnostics remain the source’s assertions.
+
+The printed-side ledger records #668 before #672 at 227, and before #672, #674 and
+#674’s update at 229; each later report is stronger.
+All three #668 claims remain eligible for historical registration, while 260 has no
+later competing report in this ledger.
+#674 preserves Daniel after Couzo’s #672 after de Winter’s #668; its opening and update
+are separate chronological reports, and the update is the final requested side.
+This comparison verifies no packing.
+
+Stage 3’s final IDs and publication require an update from main and allocation in actual
+merge order: #661 retains T-195; each later PR takes the next available IDs only after
+updating from main, then regenerates its views and data pin.
+#671’s entries are provisional; no ordering between it and #676 is assumed.
+No number is reserved or communicated to an author.
+The requests remain queued and `triage: pending`; no register entry, case lane, house or
+drawing changes in this addendum.
+Full push qualification, remote push and PR editing remain held for the coordinator’s
+integration window and diff review.
+
+Focused validation of this addendum passes all four packet custody checks, the schema
+check (324 frontmatter artifacts and 972 YAML datasets), the request check (127 records,
+70 open), the documentation check (2,065 documents), and 66 bibliography and request
+contract tests in 10.70 seconds.
+A parsed comparison preserves all existing claim values, source locations, triage and
+queue flags; only the three issues’ custody notes and non-registration reasons change.
+The pre-edit records tier passed all 52 selected steps in 88.98 seconds.
+Post-edit records and full push qualification remain held for the coordinator’s CPU
+window; no current-head gate pass is claimed.
+
+#666 still needs a bounded derived-facts and digest-only custody decision: the
+coordinator’s inspection of `b3152f` found no published repository licence at the
+current head, and no raw source packet was added.
+This does not block #668, #669 or #674. The larger Couzo and Lean imports retain the
+owners and pricing obligations recorded above.
+The next entry is stage 3 for retained packets after updating from main, alongside their
+dedicated mathematical reviews and bounded replays.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

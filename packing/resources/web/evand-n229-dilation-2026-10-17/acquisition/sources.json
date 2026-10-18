@@ -1,0 +1,40 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-10-18T12:50:38Z",
+  "git_scope": "Shallow sparse blobless fetch of the opening issue #674 pin. Retained only MIT licence, credits, root and exact-format READMEs, both standalone exact checkers, the dilation producer, s229.cert and its binary64 input. Other certificates, numerical/search tools, site and run/bulk assets are omitted and pinned by commit only. No upstream code executed.",
+  "sources": [
+    {
+      "id": "evand-n229-dilation-2026-10-17",
+      "source_url": "https://github.com/evand/square-packing",
+      "source_ref": "e0338c7becf95dbc7584b48d8868c0a1cd21079c",
+      "source_commit": "e0338c7becf95dbc7584b48d8868c0a1cd21079c",
+      "committed_utc": "2026-10-17T23:09:24Z",
+      "git_tree": "786e8d23be7e3ca010a969e8c64a7eed557e54f5",
+      "archived_path": "packing/resources/web/evand-n229-dilation-2026-10-17/source",
+      "subtree_manifest": "packing/resources/web/evand-n229-dilation-2026-10-17/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "LICENSE",
+        "CREDITS.md",
+        "README.md",
+        "search/exact/README.md",
+        "search/exact/verify_cert.py",
+        "search/exact/verify_cert2.py",
+        "search/packer/dilate_cert.py",
+        "search/packer/candidates/s229.cert",
+        "search/packer/candidates/s229.input.txt"
+      ],
+      "subtree_file_count": 9,
+      "subtree_total_bytes": 85722,
+      "retained_file_count": 9,
+      "retained_total_bytes": 85722,
+      "compressed": [],
+      "pinned_only": [],
+      "license": "MIT, copyright (c) 2026 Evan Daniel (LICENSE retained). CREDITS.md discloses Claude (Anthropic) under human direction, with no peer review; the source commit names Claude Opus 5.5 as co-author. Issue #674 credits Francisco Couzo #672 after Joost de Winter #668 as the start.",
+      "claims": [
+        "Opening issue #674 reports s(229) <= 7825081627429265081627421439843/500000000000000000000000000000 = 15.650163254858530163254842879686, rounded upward at 12 places to 15.650163254859; certificate SHA-256 0366e8178e37d7c5b4baf002d35f4c1088b4e20ab8f90283d418f634c8af204d and input SHA-256 7df8cd6fe3252fb8b015fea731229ef065130498014f1660aa0ccf435ee990fe.",
+        "The author reports both source exact stdlib checkers accept the dilation certificate, with least pair separation about 1.0e-12 and wall clearance about 5.0e-13. This certifies an upper bound only, not optimality; shared authorship/format does not establish outside independent checking. No source checker or control was executed in acquisition.",
+        "Credit Evan Daniel after Francisco Couzo #672, which refines Joost de Winter #668. The source reports the same tilted structure as #672 with rearranged upright squares. Author update at 00e68dfbe1d29ab5dbab1cddfb8f6ca19d5470db later supersedes this opening side; retain this opening report chronologically."
+      ]
+    }
+  ]
+}

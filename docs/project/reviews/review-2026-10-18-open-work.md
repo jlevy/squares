@@ -187,6 +187,52 @@ Fresh GitHub reads establish these later changes:
   that node. This does not identify the old failure marker or establish a local push
   pass. No current source defect was established by this bounded follow-up.
 
+## Source-Custody Follow-up — 18 October 2026
+
+Three new reports now have four complete stage 2 packets for their documented checker
+entry points:
+
+- **#668:**
+  [de Winter’s three upper bounds](../../../packing/resources/web/de-winter-upper-bounds-227-229-260-2026-10-17/README.md),
+  at 227, 229 and 260. The retained MIT-licensed successor `9bf5d9be` changes only
+  LICENSE and root README from the original claim pin `c95c4938`; the witnesses and
+  checkers are unchanged.
+  `think-qdcc` owns registration and validation.
+- **#669:**
+  [Daniel’s n155 packet](../../../packing/resources/web/evand-n155-explorer-2026-10-17/README.md),
+  at MIT-licensed `59326b86`, retains the original and same-side display certificates
+  with both standalone checkers.
+  The issue and prior-packing report name Ostashev’s T-149 as the start; the regularized
+  JSON instead says `by: ["Francisco Couzo"]`. Both statements remain in the packet.
+  `think-n1ga` owns resolution before that field can supply attribution evidence.
+- **#674:** Daniel’s
+  [opening n229 packet](../../../packing/resources/web/evand-n229-dilation-2026-10-17/README.md),
+  at MIT-licensed `e0338c7`, and
+  [author update](../../../packing/resources/web/evand-n229-dilation-update-2026-10-18/README.md),
+  at MIT-licensed `00e68df`, preserve both chronological claims and their standalone
+  checker dependencies.
+  The update’s `15.650161513896` is the current request; the opening `15.650163254859`
+  remains in the report-order history.
+  Both credit Daniel after Couzo’s #672, after de Winter’s #668. `think-5ij2` owns the
+  import.
+
+The source index and bibliography name the packets, dated by the original claims: 17
+October for #668, #669 and #674’s opening, 18 October for #674’s update.
+Custody checks establish retained inputs; no source checker or stage 4 replay ran in
+this addendum. Separately, `think-qdcc` records a bounded source-level mathematical read
+of #668 with no blocking geometry finding; exact witness/records binding and controls
+remain pending. No result, bound, rung, house or drawing changed.
+
+W1 remains open. The import runbook requires stages 1–3 for each new result on this
+intake branch; these items have reached stage 2 only.
+Stage 3’s final IDs and publication require an update from main and allocation in actual
+merge order: #661 keeps T-195; each later PR, including #671 with its provisional
+entries and this branch, takes the next available IDs only after updating from main,
+then regenerates its views and data pin.
+No ordering between #671 and #676 is assumed, and no ID is reserved or stated to an
+author. Full push qualification, remote push and the PR update remain held for the
+coordinator’s integration window and review of this interim addendum.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->
