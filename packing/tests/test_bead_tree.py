@@ -172,6 +172,10 @@ def test_the_live_records_deferrals_are_all_well_formed_aliases() -> None:
     regularization = check_bead_tree.regularization_deferrals()
     allowed = [where for where, _alias in regularization if "PENDING_ALLOWED" in where]
     assert len(allowed) == len(default_drawings.PENDING_ALLOWED)
+    # The live list is empty since 16 October 2026; a made-up entry is still reported at
+    # its own location and alias (review A2 of #654).
+    made_up = default_drawings.deferrals(allowed={7: "think-0000: re-housed by an adoption"})
+    assert ("default_drawings.py PENDING_ALLOWED n=7", "think-0000") in made_up
     for where, alias in [*deferrals(), *regularization]:
         assert alias.startswith("think-"), where
         assert len(alias) == len("think-aaaa"), where
@@ -186,7 +190,12 @@ def test_a_run_that_takes_its_counts_off_the_allowlist_no_longer_defers_to_its_b
     request has merged (regularization-process.md, "When a Witness Changes")."""
     from devtools import default_drawings  # noqa: PLC0415
 
-    allowed = default_drawings.PENDING_ALLOWED
+    # The live list is empty since 16 October 2026 (think-3zi3), so two lanes are made up
+    # where it names none, as two adoptions' deferrals would name them.
+    allowed = default_drawings.PENDING_ALLOWED or {
+        1: "think-aaaa: re-housed by one adoption",
+        2: "think-bbbb: re-housed by another",
+    }
     lanes = sorted(
         {found[0] for why in allowed.values() if (found := default_drawings.BEAD.match(why))}
     )
@@ -204,8 +213,27 @@ def test_a_run_that_takes_its_counts_off_the_allowlist_no_longer_defers_to_its_b
         assert deferral_problems(beads, aliases, named) == []
         # Its counts still listed, the closed bead fails the change: hence closing it
         # only once the pull request taking them off has merged.
-        dead = deferral_problems(beads, aliases, default_drawings.deferrals())
+        dead = deferral_problems(beads, aliases, default_drawings.deferrals(allowed=allowed))
         assert {problem["bead"] for problem in dead} == {lane}
+
+
+def test_a_staged_house_adoption_keeps_its_bead_open() -> None:
+    """Each count `select_houses.PENDING_ADOPTION` stages names the bead that adopts it,
+    and the gate reads them: closing the bead while a count is staged is a dead deferral
+    (result-import.md, "The House Rule")."""
+    from devtools import select_houses  # noqa: PLC0415
+
+    named = check_bead_tree.adoption_deferrals()
+    assert named == select_houses.deferrals()
+    assert len(named) == len(select_houses.PENDING_ADOPTION)
+    lanes = sorted({alias for _where, alias in named})
+    assert lanes
+    beads = [_bead(f"is-01{alias[6:]}", "open", alias) for alias in lanes]
+    aliases = {alias[6:]: f"01{alias[6:]}" for alias in lanes}
+    assert deferral_problems(beads, aliases, named) == []
+    closed = [_bead(f"is-01{alias[6:]}", "closed", alias) for alias in lanes]
+    dead = deferral_problems(closed, aliases, named)
+    assert {problem["bead"] for problem in dead} == set(lanes)
 
 
 def _dead_deferral_store(monkeypatch: pytest.MonkeyPatch) -> None:
@@ -214,6 +242,7 @@ def _dead_deferral_store(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setattr(check_bead_tree, "load", lambda: (beads, "fixture", {"aaaa": "01aaaa"}))
     monkeypatch.setattr(check_bead_tree, "deferrals", lambda: [("pending n=69", "think-aaaa")])
     monkeypatch.setattr(check_bead_tree, "regularization_deferrals", list)
+    monkeypatch.setattr(check_bead_tree, "adoption_deferrals", list)
     monkeypatch.setattr(check_bead_tree, "AGENDAS", Path("/nonexistent/agendas"))
 
 
@@ -249,6 +278,8 @@ WARN = ("--warn-dead-deferrals",)
         (["packing/frontier/source-coverage.yaml", "README.md"], ()),
         # The regularization record's allowlist, exemptions and owed runs (#636 A2).
         (["packing/devtools/default_drawings.py"], ()),
+        # The house adoptions staged to a later pull request (the house rule).
+        (["packing/devtools/select_houses.py"], ()),
         (None, ()),
     ],
 )
@@ -278,3 +309,26 @@ def test_the_gate_fails_a_dead_deferral_only_on_a_change_to_a_record_declaring_o
     assert step(context) == "  ok"
     assert observed == [("devtools.check_bead_tree", *arguments)]
     assert (check_bead_tree.WARN_DEAD_DEFERRALS,) == WARN
+
+
+def test_the_gate_reads_the_staged_house_adoptions(
+    monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """Review B7 of #660: removing `adoption_deferrals()` from `main` left every test
+    green, so a refactor could unwire the gate and let a bead close while its counts were
+    staged. A closed bead under a staged count fails the gate itself."""
+    from devtools import select_houses  # noqa: PLC0415
+
+    beads = [_bead("is-01bbbb", "closed", "an adoption closed while its count is staged")]
+    monkeypatch.setattr(check_bead_tree, "load", lambda: (beads, "fixture", {"bbbb": "01bbbb"}))
+    monkeypatch.setattr(check_bead_tree, "deferrals", list)
+    monkeypatch.setattr(check_bead_tree, "regularization_deferrals", list)
+    monkeypatch.setattr(check_bead_tree, "AGENDAS", Path("/nonexistent/agendas"))
+    staged = select_houses.Pending(
+        house="T-174", bead="think-bbbb", why=select_houses.NEXT_PULL_REQUEST
+    )
+    monkeypatch.setattr(select_houses, "PENDING_ADOPTION", {68: staged})
+    assert check_bead_tree.main([]) == 1
+    assert "FAIL select_houses.PENDING_ADOPTION n=68 (T-174) names think-bbbb (closed)" in (
+        capsys.readouterr().out
+    )

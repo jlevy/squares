@@ -816,6 +816,27 @@ Decide this before the data is committed: once a blob is in a branch’s history
 it means rewriting that history or rebuilding the branch, and every commit cited by hash
 in the records goes stale.
 
+**Sizes are counted as Git stores them.** A file’s size is its blob’s, compressed as Git
+packs it, and a set’s is the sum of its blobs: that is what a clone downloads and what
+history keeps for good.
+The unit is the project’s, written on 16 October 2026 with the house rule the owner set
+that day, under which a house’s witnesses go into Git or a hosted data release by this
+rule ([The House Rule](packing/campaign/result-import.md#the-house-rule)); the owner set
+that rule, not the unit.
+A dump that is already compressed costs about its own size; a text format that
+compresses well costs a fraction of its checkout bytes.
+`python -m devtools.upper_bound_houses sizes`, from `packing/`, measures the witnesses a
+staged adoption would write, as Git stores them and in a checkout.
+On 17 October 2026 T-174’s 50 staged rational houses come to 19.25 MB in a checkout and
+2.84 MB as Git stores them, all of which history keeps, since the witnesses they replace
+stay in it; the tree’s blobs grow by only 1.97 MB. The largest is 0.99 MB and 0.22 MB,
+so they go into Git; counted in checkout bytes, the set would be near the tens of
+megabytes this rule sends to a hosted release.
+A hosted object is read through its manifest: a tool calls `sqpack.hosted_data.require`,
+which returns the object’s local path or raises `HostedDataMissingError` naming the
+command that fetches it, and nothing reads a hosted object by a path the repository
+commits.
+
 **No program depends on Git history to produce its answer.** Code finds its inputs by
 repository-relative path or through a manifest, so data can move, be re-laid out, or
 leave the repository without the code changing.
@@ -829,6 +850,13 @@ Do not:
 
 Recording a commit or blob id beside a result is fine as provenance.
 Refusing to run because one changed is the defect.
+A gate may compare a change with its base branch: it reads the base’s copy of a record
+at the merge base of `origin/main` and `HEAD`, and asks Git which files the change
+alters. The release-impact check, the changelog, the requests record, the bead tree and
+the regularization state gate do so.
+That is the project’s practice, not an exception to the first rule: the base is no
+recorded revision, nothing is pinned, the same path is read on both sides, and a gate
+that cannot find its base fails closed and names the remedy.
 When a check needs to know that an input is the one a verdict was computed from, it
 compares a semantic identity the input carries, such as a design name and version, or it
 recomputes the verdict.

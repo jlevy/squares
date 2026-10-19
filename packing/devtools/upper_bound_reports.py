@@ -269,6 +269,11 @@ class House(TypedDict):
     - ``reported_rounding`` (optional): where the reported lane is another source's print
       and not the house's side, how it was rounded (`ROUNDINGS`); it is compared as a
       printed side. A catalogue print below a rational ceiling is such a lane.
+    - ``verified_exact_form`` (optional): where the case prints its verified lane at the
+      decimal it printed before, above the exact form it now states, the exact form as
+      the case states it. `register_regularized_bounds.printed_value` keeps such a print,
+      as T-155 left n = 29 (think-gzrw): the reader's side must then equal this fraction,
+      and the printed value need only be at or above it.
     """
 
     n: int
@@ -280,6 +285,7 @@ class House(TypedDict):
     verified_value: str
     evidence: list[str]
     reported_rounding: NotRequired[str]
+    verified_exact_form: NotRequired[str]
 
 
 class Pending(TypedDict):
@@ -460,6 +466,10 @@ def load_declaration(packet: Path) -> Declaration:
         _require(
             house.get("reported_rounding", "up") in ROUNDINGS,
             f"n={house['n']}: unknown reported rounding",
+        )
+        _require(
+            _FRACTION.fullmatch(house.get("verified_exact_form", "1/1")),
+            f"n={house['n']}: a verified exact form is a fraction",
         )
     labels = [(pending["n"], pending["report"]) for pending in declaration["pending"]]
     _require(len(labels) == len(set(labels)), "a pending report is named twice at one count")
@@ -1289,6 +1299,8 @@ HOUSES: dict[str, Callable[[int], Fraction]] = {
     "[Barnett refinements 2026-10-11]": _import("barnett-refinements-2026-10-11"),
     "[SQUISH fourth request 2026-10-11]": _import("squish-500-fourth-request-2026-10-11"),
     "[Couzo certificates 2026-10-11]": _import("couzo-certificates-2026-10-11"),
+    # T-185: the same release's 175, which issue 506 does not name, under its own key.
+    "[Couzo n175 2026-10-11]": _import("couzo-certificates-2026-10-11"),
     "[PingYou n302 certificate 2026-10-12]": _import("pingyou-n302-certificate-2026-10-12"),
     "[PingYou n153 refinement 2026-10-12]": _import("pingyou-n153-refinement-2026-10-12"),
     "[PingYou n207 refinement 2026-10-12]": _import("pingyou-n207-refinement-2026-10-12"),
@@ -1318,6 +1330,7 @@ HOUSES: dict[str, Callable[[int], Fraction]] = {
     "[Couzo verified bounds 2026-10-14]": _import("couzo-verified-bounds-2026-10-14"),
     "[Couzo certificates 2026-10-14]": _import("couzo-certificates-2026-10-14"),
     "[Couzo n237 2026-10-15]": _import("couzo-n237-2026-10-15"),
+    "[PingYou PR 622 certificate 2026-10-15]": _import("pingyou-pr622-certificate-2026-10-15"),
     # T-155: the side of the retained view of Evan Daniel's regularizer at each count.
     "[Daniel regularizer 2026-10-11]": regularized.view_side,
 }
@@ -1552,6 +1565,15 @@ def _row(
         for lane in lanes:
             shown = Fraction(Decimal(house[lane]))
             unit = Fraction(1, 10 ** len(house[lane].partition(".")[2]))
+            if lane == "verified_value" and "verified_exact_form" in house:
+                # The case keeps an earlier print above its exact form, which must be the
+                # house's side exactly.
+                _require(
+                    Fraction(house["verified_exact_form"]) == prior and shown >= prior,
+                    f"n={n}: the case's verified exact form is not its house's side, "
+                    "or its print is below it",
+                )
+                continue
             _require(
                 shown == prior or prior < shown <= prior + unit,
                 f"n={n}: the case's {lane} is not its house's side, exact or rounded up",
@@ -1670,6 +1692,9 @@ def live_problems(packet: Path) -> list[str]:
             house["verified_value"],
             house["evidence"],
         ]
+        if "verified_exact_form" in house:
+            found.append(str(verified.get("exact_form")))
+            expected.append(house["verified_exact_form"])
         if found != expected:
             problems.append(f"n={n}: the case record reads {found}, not {expected}")
     register = safe_load((ROOT / "frontier/results.yaml").read_text(encoding="utf-8"))

@@ -49,6 +49,9 @@ better on none, is skipped.
 `devtools.regularize_select` applies exactly these rules.
 A view at row 7 or 8 goes to the owner, and a view below $U$ is registered before it is
 drawn; both are described below.
+A view below $U$ is a smaller packing, so once validated it is the count’s house, by the
+import runbook’s
+[house rule](../../../packing/campaign/result-import.md#the-house-rule).
 
 ## The Steps
 
@@ -186,12 +189,23 @@ strong generator’s view of the current witness that the rule does not draw; ot
 the decision goes into `default_drawings.SETTLED` with the runs, the outcome, where it
 is recorded and the witness’s source key, path, revision and side it was made on, so a
 new house, a new certificate file or an upstream fix makes the count pending again.
-Where the decision still owes runs or a recorded outcome, its `owed` names the open bead
-that owns them, and the state’s `why` says so; the ten decided counts of 15 October 2026
-owe think-0ut1 grid-slack at 1 and 5 degrees or their per-count outcomes, and recording
-each run’s outcome on the index, so that a decision needs no entry, is think-4ov9. An
-entry where the layer’s own strong view already decides the count fails the gate.
-When a pull request regularizes a pending count, it takes the count off
+Every run the entry names must be held by the retained evidence under
+`packing/cases/regularized_drawings/` (`default_drawings.run_records`): a grid-slack
+run’s block at `<bead>-<date>/<run directory>/run.json`, or a driver run’s
+`receipt.json` there, each beside the run’s reports (`n-<count>/report.json.gz`), which
+say which counts the run covered.
+A run that only the layer’s index records is not enough, since the index drops a run’s
+block once no entry draws from it: `python -m devtools.default_drawings --retain-runs`
+copies the block to `settled-runs/<run id>/run.json` while the index still has it.
+A copy is deleted with the last entry that names its run, and the gate fails on one no
+entry names. Where the decision still owes runs or a recorded outcome, its `owed` names
+the open bead that owns them, and the state’s `why` says so.
+The ten decided counts of 15 October 2026 owed think-0ut1 grid-slack at 1 and 5 degrees
+or their per-count outcomes until its runs of 16 October 2026, whose outcomes the atlas
+README gives count by count; none owes anything now.
+Recording each run’s outcome on the index, so that a decision needs no entry, is
+think-4ov9. An entry where the layer’s own strong view already decides the count fails
+the gate. When a pull request regularizes a pending count, it takes the count off
 `default_drawings.PENDING_ALLOWED`.
 
 The note says who regularized the drawing and that a pure regularization, one whose side
@@ -256,9 +270,12 @@ the house picture and why.
 `every drawn picture is regularized, regular as published, decided or exempt` reads each
 count’s state back without measuring, holds it to the index, and fails on a pending
 count that `PENDING_ALLOWED` does not name, on a named count that is no longer pending,
-and on a `SETTLED` entry made on another witness or no longer needed; it prints the
-list’s size. `bead tree` fails a change to `default_drawings.py` whose list, exemptions
-or owed runs name a bead that is not open.
+on a `SETTLED` entry made on another witness or no longer needed, and on one naming a
+run the retained evidence does not hold, under another generator, or whose record shows
+it did not run that count, and on a copy in `settled-runs/` that no entry names; it
+prints the list’s size.
+`bead tree` fails a change to `default_drawings.py` whose list, exemptions or owed runs
+name a bead that is not open.
 Run it alone with `python -m devtools.default_drawings --check-state`. `--verify-atlas`
 decides every drawn view again on both exact routes and takes several minutes at four
 workers; CI runs it in the deferred `regularized-views` job.
@@ -288,11 +305,25 @@ python -m devtools.regularize_gallery --run-dir $RUNS/evand --output gallery.htm
 
 and a grid-slack run leaves each view’s `drawing.svg` beside its report.
 A view the owner admits is drawn only through a review record, which the policy’s
-section 5 describes and which does not exist yet.
+section 5 describes: one entry in `packing/atlas/known-best/regularized/reviews.yaml`
+naming the count, the date, the reviewer, the decision and its reason, the generator and
+its version (the index’s `pin`, `source_commit` and `patches`), the run, output and row,
+the source witness as it identifies itself (id, source key, path, revision and side),
+and the gallery the reviewer decided from.
+Then the same `layer` call that admits a run’s row-10 views draws the reviewed one, its
+entry keeps the table’s row-7 decision and names the record, and `--check-atlas` holds
+the two to each other.
+A record lapses with its witness or its generator’s version, as at n = 211, which the
+owner admitted on 16 October 2026; `--check-atlas` names which lapsed.
 
 ## Register Candidates
 
-A view whose side is below $U$ is registered as a result (row 3), however it was made.
+A view whose side is below $U$ is a smaller packing than the house, and it is registered
+as a result (row 3), however it was made.
+It is taken through the import runbook’s stages like any report, crediting the packing’s
+finder and the regularizer, and once validated it is adopted as the house in the pass
+that validates it, by the
+[house rule](../../../packing/campaign/result-import.md#the-house-rule).
 Its bound is new only where no earlier certificate already stated that side exactly, as
 one had at the 33 counts where the record carried Evan Daniel’s side rounded up, and no
 larger count’s verified upper bound is at or below it; otherwise the result says which
@@ -327,6 +358,10 @@ A drawn view lapses when its source witness changes, by a new record at the coun
 corrected witness (policy section 5). In `packing-validate --records`, `--check-atlas`
 reports the stale view until `--update-atlas` redraws it, and `--check-state` reports
 the pending count after that.
+A review record of the count lapses only when the witness identifies itself otherwise; a
+witness re-derived with the same id, source key, path, revision and side leaves it
+standing, and then `--check-atlas` asks for the record to be withdrawn or confirmed in a
+new one, since `layer` would draw the old view again.
 A house adoption is the usual cause, and these steps belong to the pull request that
 adopts it: the import runbook’s
 [Adopt a House, Then Regularize It](../../../packing/campaign/result-import.md#adopt-a-house-then-regularize-it)
@@ -352,20 +387,33 @@ To redraw the count:
    adoption that day, of other counts, does not print.
    Where neither draws better, settle the count in `default_drawings.SETTLED` with the
    runs and the new witness’s source key, path, revision and side.
-   Where the runs must wait, allow the count in `PENDING_ALLOWED` with the open bead
-   that owns them, in the same pull request as the adoption, so the deferral is
-   reviewed. Then run `default_drawings --update` again, since the record copies the
-   entry into the count’s reason, and step 5, since `--update-atlas` redrew the axis
-   views. List each deferred count’s drawing before and after in the pull request with
+   Retain each run’s evidence in the same pull request, as for any settlement (above):
+   its reports with its `run.json` or `receipt.json` under
+   `packing/cases/regularized_drawings/<bead>-<date>/<run directory>/`, or, for a run
+   only the index records, its block, copied by `default_drawings --retain-runs`. A
+   count an adoption re-houses is never deferred to `default_drawings.PENDING_ALLOWED`:
+   its runs are owed in the adoption’s pull request, by the import runbook’s
+   [house rule](../../../packing/campaign/result-import.md#the-house-rule), and an
+   adoption whose runs do not fit under the pass’s compute cap is staged with them in
+   `select_houses.PENDING_ADOPTION`. List each re-housed count’s drawing before and
+   after in the pull request with
    `python -m devtools.default_drawings --compare <(git show origin/$BASE:packing/atlas/known-best/default-drawings.json)`,
    which reads the record of its base branch, `BASE` being `main` unless the pull
    request is stacked. Where a strong view gives way to a drawing worse than it on a goal
-   of the improvement rule, whatever drew it, its runs are not deferred: they run in the
-   adoption’s pull request, since the owner’s rule is to adopt the smallest packing and
-   then regularize it. The axis tool’s view of the new witness is drawn wherever it
-   improves on the new house, which says nothing of the view the count lost (review D1
-   of #641). Nothing but review limits how many counts join the list; the gate prints
-   its size.
+   of the improvement rule, whatever drew it, the table names those goals, and marks
+   each such count that still reads pending, “its runs are owed in this pull request”.
+   The axis tool’s view of the new witness is drawn wherever it improves on the new
+   house, which says nothing of the view the count lost (review D1 of #641). Where a
+   corrected witness’s runs must wait, allow each count the table does not mark in
+   `PENDING_ALLOWED` with the open bead that owns its runs, and name the witness the
+   correction replaced in `default_drawings.CORRECTED` (its source, path, revision and
+   exact side, as the base branch’s record names them), in the pull request that
+   corrects the witness, so the deferral is reviewed.
+   `--check-state --base-ref origin/main` holds the entry to the base record and fails
+   it wherever the house moved, whatever import moved it.
+   Then run `default_drawings --update` again, since the record copies the entry into
+   the count’s reason, and step 5, since `--update-atlas` redrew the axis views.
+   Nothing but review limits how many counts join the list; the gate prints its size.
 
 Until 15 October 2026 the lapse was only printed, and the adoptions of #553, #598 and
 #614 left twenty counts drawn without a strong generator’s decision on their witness: at

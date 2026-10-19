@@ -6,6 +6,14 @@ checker that accepted the original, with a test holding them. For each cover tha
 region where ``zmx2`` refuses each, and the receipts are retained in
 ``receipts/controls/`` of the packet holding that case's replay. These tests read the
 retained receipts and the retained covers only; nothing here runs ``cargo`` or ``zmx2``.
+
+The s(76) and s(95) controls were run at intake by their packets' own scripts
+(``receipts/programs/run_control.sh``), with ``mutate`` and the binary the driver built,
+so their receipts name the scratch paths they ran in; the mutated cover's digest binds
+each to ``mutate``. Those covers are also decided in part by ``zm_mixed.py``, so their
+packets keep, beside the ``zmx2`` controls, ``zm_mixed.py pose``'s exact evaluation of
+each mutated cover at a pose where it captures less than one, and of the published
+cover at the same pose, where it captures more.
 """
 
 from __future__ import annotations
@@ -32,22 +40,57 @@ PACKETS = {
     59: WEB / "wand125-point-and-mixed-2026-10-01",
     60: WEB / "evand-square-packing-2026-10-01",
     61: WEB / "wand125-point-n61-2026-09-30",
+    76: WEB / "bengreff-s76-certificate-2026-10-14",
     77: WEB / "wand125-point-and-mixed-2026-10-01",
+    95: WEB / "bengreff-s95-certificate-2026-10-15",
 }
 
-#: The checker build receipt each packet's controls ran with.
+#: The checker build receipt each packet's controls ran with, and where the packet keeps it.
 BUILDS = {
-    WEB / "evand-zmx2-sym-atoms-2026-09-30": "92a4cfe8",
-    WEB / "wand125-point-and-mixed-2026-10-01": "6b7f0f79",
-    WEB / "evand-square-packing-2026-10-01": "6b7f0f79",
-    WEB / "wand125-point-n61-2026-09-30": "6b7f0f79",
+    WEB / "evand-zmx2-sym-atoms-2026-09-30": ("92a4cfe8", "controls/zmx2_92a4cfe8_build.log"),
+    WEB / "wand125-point-and-mixed-2026-10-01": (
+        "6b7f0f79",
+        "controls/zmx2_6b7f0f79_build.log",
+    ),
+    WEB / "evand-square-packing-2026-10-01": ("6b7f0f79", "controls/zmx2_6b7f0f79_build.log"),
+    WEB / "wand125-point-n61-2026-09-30": ("6b7f0f79", "controls/zmx2_6b7f0f79_build.log"),
+    WEB / "bengreff-s76-certificate-2026-10-14": ("6b7f0f79", "n76_zmx2_build.log"),
+    WEB / "bengreff-s95-certificate-2026-10-15": ("6b7f0f79", "n95_zmx2_build.log"),
 }
 
+#: The s(76) and s(95) packets' other controls: zmx2 on the cover without its wall
+#: segments, which ``devtools.audit_evand_mixed_covers check`` compares with the replay,
+#: and the ``zm_mixed.py pose`` receipts that `test_zm_mixed_pose_refuses_each_mutation`
+#: holds, by the name each packet gave the original's.
+POSES = {
+    76: ("n76_pose_{kind}_violation.log", "n76_pose_original_at_{at}_control_violation.log"),
+    95: ("n95_pose_{kind}_violation.log", "n95_pose_original_at_{at}_control.log"),
+}
+POSE_AT = {"drop-heaviest-point": "point", "drop-heaviest-segment": "segment"}
+
+
+def other_controls(n: int) -> set[str]:
+    kept = {f"n{n}_control_nowall_zmx2_d4.log", f"n{n}_control_nowall_zmx2_d4_roots.log.gz"}
+    mutated, original = POSES[n]
+    for kind, at in POSE_AT.items():
+        kept |= {mutated.format(kind=kind), original.format(at=at)}
+    return kept
+
+
+#: A control receipt as this module's driver writes it.
 CWD = re.compile(
     r"^# cwd: .* zmx2\.rs (?P<checker>[0-9a-f]{64}) built from retained bytes; "
     r"cover (?P<mutated>[0-9a-f]{64}), the (?P<kind>\S+) mutation of "
     r"(?P<original>[0-9a-f]{64}) decompressed from (?P<path>\S+): .*, removing mass "
     r"(?P<removed>\S+)$",
+    re.MULTILINE,
+)
+#: As the s(76) and s(95) packets' run_control.sh wrote it, naming the binary it ran.
+CWD_PACKET_SCRIPT = re.compile(
+    r"^# cwd: scratch: zmx2\.rs (?P<checker>[0-9a-f]{64}) built from retained bytes "
+    r"\(binary sha256 (?P<binary>[0-9a-f]{64})\); cover (?P<mutated>[0-9a-f]{64}), the "
+    r"(?P<kind>\S+) mutation \(devtools\.replay_evand_zmx2\.mutate\) of "
+    r"(?P<original>[0-9a-f]{64})$",
     re.MULTILINE,
 )
 HEADER = re.compile(
@@ -206,8 +249,10 @@ def test_every_case_has_two_retained_controls() -> None:
 
 def test_the_controls_directories_hold_only_the_controls() -> None:
     expected: dict[Path, set[str]] = {}
-    for packet, checker in BUILDS.items():
-        expected[packet] = {f"zmx2_{checker}_build.log"}
+    for packet, (_, build) in BUILDS.items():
+        expected[packet] = {Path(build).name} if build.startswith("controls/") else set()
+    for n in POSES:
+        expected[PACKETS[n]] |= other_controls(n)
     for n, kind in driver.CONTROLS:
         receipt = control_receipt(n, kind)
         expected[PACKETS[n]] |= {receipt.name, receipt.name.removesuffix(".log") + "_roots.log"}
@@ -234,18 +279,29 @@ def test_the_retained_control_is_refused_where_recorded(key: tuple[int, str]) ->
     text = receipt.read_text(encoding="utf-8")
 
     cwd = CWD.search(text)
-    assert cwd is not None
+    by_script = CWD_PACKET_SCRIPT.search(text) if cwd is None else None
+    assert cwd is not None or by_script is not None
+    mutation = driver.mutate(cover_text(n), kind)
+    if cwd is not None:
+        assert cwd["path"] == str(case.cover.relative_to(driver.REPO))
+        assert Fraction(cwd["removed"]) == mutation.removed
+    else:
+        assert by_script is not None
+        cwd = by_script
+        assert cwd["binary"] == build_binary(PACKETS[n])
     assert cwd["kind"] == kind
     assert cwd["checker"] == driver.CHECKERS[case.checker][1]
     assert cwd["original"] == case.sha256
-    assert cwd["path"] == str(case.cover.relative_to(driver.REPO))
-    mutation = driver.mutate(cover_text(n), kind)
     assert cwd["mutated"] == hashlib.sha256(mutation.text.encode()).hexdigest()
     assert cwd["mutated"] != cwd["original"]
-    assert Fraction(cwd["removed"]) == mutation.removed
 
     command = shlex.split(text.splitlines()[0].removeprefix("# command: "))
-    assert command[:2] == ["verify2/target/release/zmx2", "cert"]
+    assert command[0].endswith("verify2/target/release/zmx2")
+    assert command[1] == "cert"
+    if by_script is None:
+        assert command[0] == "verify2/target/release/zmx2"
+    else:
+        assert Path(command[2]).name == f"s{n}_{kind}.txt"
     assert f"--{control.mode}" in command
     assert all(flag in command for flag in case.flags)
     region = {
@@ -275,10 +331,118 @@ def test_the_retained_control_is_refused_where_recorded(key: tuple[int, str]) ->
     assert sum(int(f[f.index("uncert") + 1]) for f in root_lines) == int(verdict["unc"])
 
 
+def build_binary(packet: Path) -> str:
+    """The binary digest the packet's build receipt names."""
+    text = (packet / "receipts" / BUILDS[packet][1]).read_text(encoding="utf-8")
+    found = re.search(r"^# binary sha256: ([0-9a-f]{64})$", text, re.MULTILINE)
+    assert found is not None
+    return found[1]
+
+
 @pytest.mark.parametrize("packet", sorted(BUILDS))
 def test_the_build_receipt_names_the_checker_it_built(packet: Path) -> None:
-    checker = BUILDS[packet]
-    text = (packet / f"receipts/controls/zmx2_{checker}_build.log").read_text(encoding="utf-8")
+    checker, build = BUILDS[packet]
+    text = (packet / "receipts" / build).read_text(encoding="utf-8")
     assert f"zmx2.rs {driver.CHECKERS[checker][1]} " in text
     assert re.search(r"^# finished \S+; exit 0; ", text, re.MULTILINE)
     assert re.search(r"^# binary sha256: [0-9a-f]{64}$", text, re.MULTILINE)
+
+
+#: ``zm_mixed.py pose``'s verdict: the exact capture of the closed unit square at a pose.
+POSE = re.compile(
+    r"^pose cx=(?P<cx>\S+) cy=(?P<cy>\S+) u=(?P<u>\S+) \(theta \S+ deg\), admissible True: "
+    r"EXACT mu\(Q\) = (?P<mu>\d+/\d+) = \S+ \((?P<verdict>\*\*\* < 1 \*\*\*|OK)\)$",
+    re.MULTILINE,
+)
+POSE_CWD = re.compile(
+    r"^# cwd: scratch checker dir: zm_mixed\.py ee3e2915, mixed_cover\.py bb89de15, "
+    r"zeromargin\.py 640fe453 \(retained evand packets\); cover (?P<cover>[0-9a-f]{64}), ",
+    re.MULTILINE,
+)
+
+
+def pose_receipt(path: Path) -> tuple[str, tuple[Fraction, ...], Fraction]:
+    """The cover digest, the pose and the exact capture a pose receipt records."""
+    text = path.read_text(encoding="utf-8")
+    cwd, pose = POSE_CWD.search(text), POSE.search(text)
+    assert cwd is not None
+    assert pose is not None, path
+    assert re.search(r"^# finished \S+; exit 0; ", text, re.MULTILINE)
+    mu = Fraction(pose["mu"])
+    assert (mu < 1) == (pose["verdict"] != "OK")
+    return cwd["cover"], tuple(Fraction(pose[k]) for k in ("cx", "cy", "u")), mu
+
+
+@pytest.mark.parametrize("kind", sorted(POSE_AT))
+@pytest.mark.parametrize("n", sorted(POSES))
+def test_zm_mixed_pose_refuses_each_mutation(n: int, kind: str) -> None:
+    """zm_mixed.py, in exact rationals, finds each mutated cover short of one at a pose
+    in the D4 region where the published cover captures at least one."""
+    controls = PACKETS[n] / "receipts/controls"
+    mutated, original = POSES[n]
+    digest, pose, mu = pose_receipt(controls / mutated.format(kind=kind))
+    mutation = driver.mutate(cover_text(n), kind)
+    assert digest == hashlib.sha256(mutation.text.encode()).hexdigest()
+    assert mu < 1
+    published, same_pose, before = pose_receipt(controls / original.format(at=POSE_AT[kind]))
+    assert published == driver.CASES[n].sha256
+    assert same_pose == pose
+    assert before >= 1
+    cx, cy, u = pose
+    side = as_mixed(cover_text(n)).side
+    assert 0 <= cx <= side / 2
+    assert 0 <= cy <= side / 2
+    assert 0 <= u <= Fraction(1, 2)
+
+
+#: The 16 October review's zm_mixed.py control for s(76): job 054's cell, at a depth limit
+#: of 12, run on the published cover and on the cover with every mass scaled by 199/200.
+REVIEW_ZM_CONTROL = PACKETS[76] / "review/outputs/zm_control"
+
+
+def test_zm_mixed_refuses_the_reviews_scaled_cover_where_it_certifies_the_published_one() -> (
+    None
+):
+    """At equal settings on one cell, zm_mixed.py certifies the published s(76) cover and
+    leaves the 199/200 mutant uncertified: the depth-12 pair of the review's section 7.4.
+    Whether a refusal at that depth limit meets stage 4's control rule is the owner's
+    question (the review's finding F8)."""
+    from devtools.audit_evand_mixed_covers import (  # noqa: PLC0415
+        CHECKER_B91D70B6,
+        ZM_MIXED_SETTINGS,
+        read_zm_mixed,
+    )
+
+    pinned = {
+        path.name: hashlib.sha256(path.read_bytes()).hexdigest() for path in CHECKER_B91D70B6
+    }
+    cell = {
+        "cx_lo": "22/5",
+        "cx_hi": "89/20",
+        "cy_lo": "9/4",
+        "cy_hi": "23/10",
+        "u_lo": "5/16",
+        "u_hi": "11/32",
+    }
+    runs = {}
+    for name in ("s76_cover_v5_j054_depth12", "n76_scaled-199-200_j054_depth12"):
+        header, records = read_zm_mixed(REVIEW_ZM_CONTROL / f"{name}.jsonl")
+        assert {k: v for k, v in header["sha256"].items() if k != "input"} == pinned
+        settings = header["settings"]
+        assert settings["region"] == cell
+        assert settings["depth"] == 12
+        assert all(settings[k] == v for k, v in ZM_MIXED_SETTINGS.items() if k != "depth")
+        assert list(records) == [tuple(cell[k] for k in cell)]
+        runs[name] = (header, next(iter(records.values())))
+    (published, certified), (mutant, refused) = runs.values()
+    assert published["sha256"]["input"] == driver.CASES[76].sha256
+    assert certified["st"]["UNCERT"] == 0
+    assert not certified["unc"]
+    assert mutant["sha256"]["input"] != driver.CASES[76].sha256
+    assert Fraction(mutant["total"]) == Fraction(published["total"]) * Fraction(199, 200)
+    assert refused["st"]["UNCERT"] > 0
+    log = (REVIEW_ZM_CONTROL / "n76_scaled-199-200_j054_depth12.log").read_text(
+        encoding="utf-8"
+    )
+    assert "\nNOT VERIFIED (PARTIAL)\n" in log
+    assert f"{mutant['sha256']['input']}  input " in log

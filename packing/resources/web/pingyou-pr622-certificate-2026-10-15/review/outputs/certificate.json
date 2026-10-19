@@ -1,0 +1,58 @@
+{
+  "asset_sha256": "0dc9bcd1cf5f2806a4d2e0c4c1c07e4903d91bbea611b8b938bda770b9782537",
+  "member": "n29-certificate/certificates/n029.cert.json",
+  "member_sha256": "a01428c51875679fbe78c11a803742b8d99f44b916a660ab6801bb0fcf76951b",
+  "n": 29,
+  "side_digits": [
+    2399,
+    2398
+  ],
+  "side_sci": "5.933833462676929189689460616352019138433e+00",
+  "axis_aligned": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14
+  ],
+  "accepted": true,
+  "walls_decided": 116,
+  "pairs_decided": 406,
+  "violations": [],
+  "touching_walls": [
+    "0 left",
+    "0 top",
+    "1 top",
+    "2 left",
+    "3 right",
+    "3 top",
+    "4 top",
+    "5 top",
+    "6 right",
+    "7 right",
+    "8 left",
+    "8 bottom",
+    "9 bottom",
+    "10 bottom",
+    "10 right",
+    "11 bottom",
+    "12 bottom",
+    "13 right"
+  ],
+  "touching_pairs": [
+    "23 24 along i.u"
+  ],
+  "least_positive_wall_clearance": "1.670581818602880e-800",
+  "least_positive_pair_gap": "1.036676630835296e-800",
+  "cpu_s": 11.97
+}

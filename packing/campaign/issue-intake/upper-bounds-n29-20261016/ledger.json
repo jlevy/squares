@@ -1,0 +1,36 @@
+{
+  "format": "intake-ledger-verdicts-v1",
+  "read_at_main": "321d492c77c37e9adddcecec4e58336bc8270466",
+  "read_on": "2026-10-16",
+  "counts": [
+    {
+      "n": 29,
+      "start": [{"label":"record [Kingbird] (reported lane)","holders":"Thomas Schadt, improved by David Ellsworth","side":"5.93383346267692","exact":false},{"label":"record T-155 (verified lane)","holders":"T-155","side":"5.933833462677","exact":true}],
+      "steps": [
+        {"report":"PR #574","kind":"pull-request","reported_at":"2026-10-13T00:24:05Z","side":"5.933833462677","exact":true,"verdict":"undecided","reason":"undecided","decided_against":["record [Kingbird] (reported lane)"],"difference":"","first_committed":"2026-10-13T00:24:05Z","decide_by":"the exact side behind the reported lane's print 5.93383346267692 (n = 29)","packing":{"kind":"refinement","packing_of":"Thomas Schadt","entry":"[Kingbird]"}},
+        {
+          "report": "PR #622",
+          "kind": "pull-request",
+          "reported_at": "2026-10-15T18:43:54Z",
+          "side": "5.933833462677",
+          "exact": true,
+          "verdict": "recorded by exception",
+          "reason": "undecided",
+          "decided_against": ["record [Kingbird] (reported lane)"],
+          "difference": "",
+          "first_committed": "2026-10-15T18:43:33Z",
+          "decide_by": "the exact side behind the reported lane's print 5.93383346267692 (n = 29)",
+          "exception": "The owner's standing house rule, applied to T-195, the smallest validated packing at 29. The owner to the coordinator of this intake pass, in its Claude Code session, on the afternoon (UTC) of 16 October 2026: \"We should always be adopting the smallest packing and then regularizing it. That should be the policy, obviously.\" and \"This should be built into our policy. It shouldn't even be a question. If there's any ambiguity on that, we should fix that in our process docs for intake.\" PR #660 (think-sa5r) writes the rule into the runbook. PR #622's certificate is replayed and reviewed (16 October) 1.57e-36 below T-155, the verified lane; the reported lane it does not clear is the catalogue's print of the same packing, which no validated certificate attains.",
+          "packing": {"kind":"refinement","packing_of":"Thomas Schadt","entry":"[Kingbird]"}
+        }
+      ],
+      "best_now": [{"label":"record [Kingbird] (reported lane)","holders":"Thomas Schadt, improved by David Ellsworth","side":"5.93383346267692","exact":false},{"label":"PR #622","holders":"PingYou Ltd (BuddenPing)","side":"5.933833462677","exact":true}],
+      "publication_dependent": []
+    }
+  ],
+  "summary": {"counts":1,"claims":2,"recorded_new":0,"recorded_new_continuing":0,"recorded_refinement":0,"recorded_unclassified":0,"recorded_by_exception":1,"not_recorded":0,"undecided":1},
+  "cross_check": [],
+  "reports": [{"report":"PR #574","url":"https://github.com/jlevy/squares/pull/574","kind":"pull-request","holders":"PingYou Ltd (BuddenPing)","reported_at":"2026-10-13T00:13:11Z","bead":"think-9v2k","counts":[29],"recorded":[],"recorded_new":[],"recorded_refinement":[],"recorded_unclassified":[],"recorded_by_exception":[],"not_recorded":[],"undecided":[{"n":29,"against":"record [Kingbird] (reported lane)"}]},{"report":"PR #622","url":"https://github.com/jlevy/squares/pull/622","kind":"pull-request","holders":"PingYou Ltd (BuddenPing)","reported_at":"2026-10-15T18:43:54Z","bead":"think-30n2","counts":[29],"recorded":[],"recorded_new":[],"recorded_refinement":[],"recorded_unclassified":[],"recorded_by_exception":[29],"not_recorded":[],"undecided":[]}],
+  "owner_decisions": {"exact_ties":[],"first_commit_before_report":[],"undecided":[{"n":29,"report":"PR #574","against":"record [Kingbird] (reported lane)","decide_by":"the exact side behind the reported lane's print 5.93383346267692 (n = 29)"}],"publication_dependent":[],"unknown_times":[],"refinement_chains":[],"key_reason_candidates":[],"measured_identity":[]},
+  "other_items": []
+}

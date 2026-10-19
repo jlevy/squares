@@ -14,6 +14,7 @@ import subprocess
 import sys
 from collections.abc import Mapping, Sequence
 from dataclasses import asdict, dataclass
+from itertools import pairwise
 from pathlib import Path, PurePosixPath
 from typing import override
 
@@ -522,7 +523,20 @@ def inspect(
     }
     for component in sorted(set(candidates) - exempt):
         key = (component, versions[component], release.component_version(component))
-        if key not in fresh_decisions:
+        required = {key}
+        if base:
+            # One atomic delivery can retain several independently reviewed PR cuts.
+            # PR comparisons still require their own immediate parent-to-child cut.
+            history = [entry.version for entry in release.component_history(component)]
+            if versions[component] not in history:
+                errors.append(f"{component}: delivery baseline has no retained edition")
+                continue
+            end = history.index(versions[component])
+            required = {
+                (component, previous, version)
+                for version, previous in pairwise(history[: end + 1])
+            }
+        if not required or not required <= fresh_decisions:
             errors.append(
                 f"{component}: candidate public inputs need a fresh owning successor "
                 "or reviewed no-public-change decision"
@@ -530,7 +544,7 @@ def inspect(
             continue
         try:
             release.validate_release_impacts(
-                externally_changed=(component,), previous_versions=versions
+                externally_changed=(component,), previous_versions=None if base else versions
             )
         except ValueError as error:
             errors.append(str(error))

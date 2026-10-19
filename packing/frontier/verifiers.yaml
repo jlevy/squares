@@ -288,11 +288,20 @@ verifiers:
     summary: The source's exact mixed point-and-segment cover checker, the predecessor zmx2 was checked against.
     source:
       - packing/resources/web/evand-square-packing-2026-09-28/square-packing/s12/search/zm_mixed.py
+      - packing/resources/web/evand-square-packing-2026-09-28/square-packing/s12/search/mixed_cover.py
     versions:
       - {sha256: ee3e2915349b8795128417bca6414b205d526db9f01f88cd4cd32c32e8d760ac}
+      - sha256: bb89de15ecf5821dd7e1a36ebab8a50d792a406b7fb0f5cb38059f99ef74aae5
+        path: packing/resources/web/evand-square-packing-2026-09-28/square-packing/s12/search/mixed_cover.py
+        note: mixed_cover.py, which zm_mixed.py imports
+      - sha256: 640fe453c1a32f4aa580ca2b1261c6406923a4d7c131f65604a432c7fc2086ab
+        path: packing/resources/web/evand-square-packing-2026-09-26/square-packing/s12/search/zeromargin.py
+        note: zeromargin.py, which zm_mixed.py imports (V-evand-zeromargin-py's program)
     note: >-
-      Retained; its shipped run records are re-summarised by the source's verify.sh, but
-      no confirming entry runs the checker itself yet.
+      Benjamin Greff verified his s(76) and s(95) covers with it, on the sub-roots of the
+      D4 roots zmx2 leaves, at the three digests his verify.sh pins, so its runs there
+      (devtools.replay_evand_zmx2 zm-mixed) replay the producer's code. No other
+      confirming entry runs it.
 
   - id: V-evand-zeromargin-py
     program: zeromargin.py, run by zm_d4_sweep.py
@@ -2582,7 +2591,10 @@ verifiers:
     language: [Python]
     methods: [exact-algebraic]
     role: premises
-    summary: Builds zmx2 from the retained bytes, refuses any input whose SHA-256 is not the record's, and runs it and its controls.
+    summary: >-
+      Builds zmx2 from the retained bytes, refuses any input whose SHA-256 is not the
+      record's, and runs it and its controls; for a split cover it also stages zm_mixed.py
+      and the files it imports, digests checked, and runs it on the source's sub-roots.
     source: [packing/devtools/replay_evand_zmx2.py]
 
   - id: V-audit-evand-mixed-covers
@@ -2595,7 +2607,9 @@ verifiers:
     summary: >-
       Parses zmx2 root logs with its own code, requires every root once with none
       uncertified, compares them with the source's records and re-derives the cover's
-      exact total and D4 invariance.
+      exact total and D4 invariance; for a split cover it reads the zmx2 log and
+      zm_mixed.py's sub-root records as one decision, every root zmx2 leaves tiled by
+      certified sub-roots at the pinned digests and settings.
     source: [packing/devtools/audit_evand_mixed_covers.py]
 
   - id: V-audit-s12-reweighted
@@ -3914,3 +3928,132 @@ verifiers:
       - packing/devtools/continuous_pose_followup.py
       - packing/tests/test_continuous_pose_followup.py
     independence_record: packing/devtools/continuous_pose_followup.py
+  - id: V-pingyou-622-exact-review
+    program: review/programs/n29_exact_review.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      Decides PingYou Ltd's n = 29 certificate of PR 622 from its release asset, read by
+      member and held to its pinned size and digest: every wall and every pair over Q by
+      separating axes on the squares' own axes, with a strict reader of the certificate's
+      fractions; refuses four mutated copies, each for exactly its expected violations, two
+      of them 1e-3000 past exact contact; decides the replay's retained jobs again from
+      their checker inputs; and measures the certificate against the record's witnesses,
+      which decides nothing. Standard library only.
+    source:
+      - packing/resources/web/pingyou-pr622-certificate-2026-10-15/review/programs/n29_exact_review.py
+      - packing/resources/web/pingyou-pr622-certificate-2026-10-15/review/programs/run_review.sh
+    versions:
+      - sha256: 57bcd639d84df6782baa4347a10d94e98d356cda061c9624735aa11d6d154ea7
+    independence_record: >-
+      packing/resources/web/pingyou-pr622-certificate-2026-10-15/review/README.md
+    independence:
+      read:
+        - specification
+        - certificate-format
+        - producer-output
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 review lane of PR 622's import (think-2jzy), strong sub-agent tier,
+            max reasoning
+      overlaps_producer:
+        extent: unknown
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The source names no system behind the PY agentic offering. The decision was written
+          from the asset's README.txt geometry statement and the certificate's layout, and
+          decided the certificate before any of the replay's code was read; the source's
+          COMPARISON.json and corners witness were read afterwards, to compare. None of the
+          source's programs was opened. The replay's routes are also Claude lanes' work, a
+          system-family overlap with the replay and not, as far as the record knows, with the
+          producer.
+    note: >-
+      Written on 16 October 2026 for docs/project/reviews/review-2026-10-16-pingyou-n29.md
+      and kept, with everything it printed, in the packet's review/ directory.
+
+  - id: V-audit-fine-net-receipt
+    program: devtools.audit_fine_net_receipt
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: premises
+    summary: >-
+      Checks a rectangle-only declared-net candidate's exact mass, geometry and net
+      premises, binds its saved native census and complete direction log, and recomputes
+      every saved control-witness capture using exact polygon clipping. It decides
+      premises and particular points, never universal coverage between them.
+    source:
+      - packing/devtools/audit_fine_net_receipt.py
+      - packing/tests/test_audit_fine_net_receipt.py
+    independence_record: docs/project/reviews/review-2026-10-18-wand125-n108-certificate-mathematics.md
+    independence:
+      read: [mathematics, specification, certificate-format, producer-code, producer-output]
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Codex (OpenAI)
+          setting: >-
+            A separately prompted mathematical review lane, strong tier at xhigh
+            reasoning; the retained review records the system family and exact scope.
+      overlaps_producer:
+        extent: unknown
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The source discloses AI assistance without identifying every system family.
+          This audit was separately prompted and imports only the Python standard
+          library. Its author read the maintained admission and control code that the
+          producer's adapted checker shares, so it does not claim a clean room.
+    note: >-
+      The 18 October review's complete n108 point audit is retained at
+      packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review/n108-exact-audit.json.
+      Its PASS is a premise-and-point result beside the
+      native replay, not a full coverage decision or an independent full verifier.
+  - id: V-n108-review-max-exact
+    program: n108_audit.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: premises
+    summary: >-
+      Independently recomputes the n108 certificate's exact mass, multiplicity-preserving
+      D4 expansion and declared-net premises, checks retained source/native direction
+      inventories, and computes four saved native control poses and the source's axis
+      control pose. It checks premises and five points, not universal capture.
+    source:
+      - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-max/n108_audit.py
+    independence_record: packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-max/README.md
+    independence:
+      read: [mathematics, proof-text, specification, certificate-format, producer-code, producer-output, earlier-review]
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Codex (OpenAI)
+          setting: A separately prompted source-distinct mathematical review, strongest tier at maximum reasoning.
+      overlaps_producer:
+        extent: unknown
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The producer discloses AI assistance without identifying every system family.
+          This standard-library audit was written separately, before reading maintained
+          admission/domain code; its input adapters were corrected after those reads.
+          Findings and code were completed before the later comparison with Review B.
+          No producer code is copied, imported or executed; the review claims no clean room.
+    note: >-
+      The retained packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-max/audit.json records
+      EXACT_PREMISES_AND_FIVE_POSES_PASS. The five poses are four of 201 recorded
+      native control poses and one of 32 source control poses, not five entire
+      direction domains. The accepted bounded review is docs/project/reviews/review-2026-10-18-n108-fine-net-mathematics-max.md.

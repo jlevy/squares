@@ -102,25 +102,28 @@ GOLDEN_UNITSQUARE: dict[str, set[int]] = {
 }
 #: How the corpus splits by source kind at each corpus; a case switching kind fails here.
 GOLDEN_SOURCE_KINDS: dict[str, dict[str, int]] = {
+    # 29 moved from Kingbird to PR #622's packet (T-195) on 17 October 2026, the first
+    # adoption under the house rule (think-30n2).
     "n=1..100": {
         "exact-grid": 64,
-        "kingbird-derived-facts": 30,
-        "packet-derived-facts": 6,
+        "kingbird-derived-facts": 29,
+        "packet-derived-facts": 7,
     },
     # 176 moved from Kingbird to SQUISH's issue 500 packet on 12 October 2026 (think-fvz4).
     "n=1..200": {
         "exact-grid": 114,
-        "kingbird-derived-facts": 52,
-        "packet-derived-facts": 34,
+        "kingbird-derived-facts": 51,
+        "packet-derived-facts": 35,
     },
     # 232 (from Kingbird) and 308 (from the grid) moved to packet houses in the house
     # adoption of 11 October 2026, and 176 (from Kingbird) on 12 October (think-fvz4), as
     # did 264 (from Kingbird) in the pass for issue 528 (think-cq95), and 204 (from
-    # Kingbird) on 15 October, to Daniil Ostashev's issue 562 packet (T-162).
+    # Kingbird) on 15 October, to Daniil Ostashev's issue 562 packet (T-162), and 29 (from
+    # Kingbird) on 17 October, to PR #622's packet (T-195).
     "n=1..324": {
         "exact-grid": 175,
-        "kingbird-derived-facts": 76,
-        "packet-derived-facts": 73,
+        "kingbird-derived-facts": 75,
+        "packet-derived-facts": 74,
     },
 }
 
@@ -241,7 +244,6 @@ def test_kingbird_sources_are_metadata_only_derived_facts() -> None:
         26,
         27,
         28,
-        29,
         37,
         38,
         39,
@@ -601,8 +603,11 @@ def test_known_best_atlas_covers_every_frontier_case() -> None:
         if n in sampled:
             _assert_witness_agrees_with_entry(entry, release_by_n)
 
+    # Until the adoption of 17 October 2026 n = 29's reported lane named the catalogue's
+    # witness, W-n029-kingbird, beside the atlas's; it now names the house's alone (T-195).
     n29_frontier = (ROOT / "frontier/n-029.md").read_text(encoding="utf-8")
-    assert "    - W-n029-kingbird\n" in n29_frontier
+    n29_case = safe_load(n29_frontier.split("---\n", 2)[1])["packing"]
+    assert n29_case["reported_upper_bound"]["witnesses"] == ["W-known-best-n029"]
 
 
 def _assert_witness_agrees_with_entry(entry: dict, release_by_n: dict) -> None:
@@ -1630,7 +1635,7 @@ def test_triangle_fast_label_check_requires_the_compact_caption() -> None:
     assert check(canvas, root) == [
         (
             "atlas/known-best/known-best-1-324.svg n=211 side-bound is "
-            "('s(211) ≤ 14.997961',); expected ('s(211) ≤ 14.99356',)"
+            "('s(211) ≤ 14.997961',); expected ('s(211) ≤ 14.99355',)"
         )
     ]
 
@@ -2141,9 +2146,16 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
     # ten more, Mishapolk's of 12 and 14 October, Ostashev's of 12 and 13 October, Couzo's
     # of 12 and 13 October and PingYou Ltd's four refinements, and no longer from PingYou's
     # n = 153 and 207 certificates, Evan Daniel's n = 154 packet or Robert Barnett's
-    # refinements: six sources more, and no new name.
+    # refinements: six sources more, and no new name. The adoption of 16 October
+    # (think-z7wn) draws from Mishapolk's KKT refinements and Couzo's verified bounds of 14
+    # October, Evan Daniel's n = 146 packet and Couzo's n = 237 packet, and no longer from
+    # Couzo's 12 October certificates, Mishapolk's 14 October records, Ostashev's 12
+    # October compositions and records and 13 October merged bands, or PingYou Ltd's
+    # n = 146 refinement: two sources fewer, and no new name. The adoption of 17 October
+    # (think-30n2) draws 29 from PR #622's certificate, where Schadt, Ellsworth and
+    # PingYou Ltd are named already: one source more, and no new name.
     assert len(expected_names) == 26
-    assert len(expected_sources) == 28
+    assert len(expected_sources) == 27
     assert set(json.loads(credit_block.attrib["data-credited-names"])) == expected_names
     assert set(json.loads(credit_block.attrib["data-source-keys"])) == expected_sources
     assert credit_block.find("svg:text[@data-feature='packing-credits-heading']", SVG) is None
@@ -2328,7 +2340,7 @@ def test_poster_accents_recent_contributions_independently_in_svg_and_pdf() -> N
         line = cards[211].find(f"svg:text[@data-feature='{feature}']", SVG)
         assert line is not None
         assert "".join(line.itertext()) == (
-            "s(211) ≤ 14.99356" if feature == "side-bound" else "s(211) ≥ 14.54457"
+            "s(211) ≤ 14.99355" if feature == "side-bound" else "s(211) ≥ 14.54457"
         )
         colored = [span for span in line if span.attrib.get("fill") == FIRST_PARTY_ACCENT_COLOR]
         assert len(colored) == 1
@@ -2401,7 +2413,7 @@ def test_primary_composite_routes_contributions_to_cards_and_legend(
     entries = {entry["n"]: entry for entry in record["entries"]}
     assert [
         n for n in canvas.spec.numbers if entries[n]["exactness"]["state"] == "numeric-only"
-    ] == [29, 55, 71]
+    ] == [55, 71]
     degrees = {
         n: entries[n]["exactness"]["degree"]
         for n in canvas.spec.numbers
@@ -3125,7 +3137,8 @@ def test_the_poster_badges_every_perfect_square_and_counts_them_in_its_legend() 
         )
     }
     exact_cases = set(cards) - numeric_cases
-    assert (len(exact_cases), len(numeric_cases)) == (308, 16)
+    # 29 is exact since its house moved to PR #622's rational certificate on 17 October.
+    assert (len(exact_cases), len(numeric_cases)) == (309, 15)
     for evidence, expected in (
         ("exact value known", exact_cases),
         ("only known numerically", numeric_cases),
@@ -3148,11 +3161,12 @@ def test_the_poster_badges_every_perfect_square_and_counts_them_in_its_legend() 
     ]
     # The house adoption of 11 October 2026 gave nine cases known only numerically an
     # exact certificate, and its pass of 12 October three more, 181, 271 and 304, whose
-    # reported lanes stated no exact form (think-fvz4).
+    # reported lanes stated no exact form (think-fvz4); the adoption of 17 October gave
+    # 29 one, PR #622's rational certificate (T-195).
     assert labels == [
         "proved optimal (77 of 324)",
-        "exact value known (308 of 324)",
-        "only known numerically (16 of 324)",
+        "exact value known (309 of 324)",
+        "only known numerically (15 of 324)",
         "rigid (22 of 324)",
         "colors indicate distinct tilt angles",
         "shade indicates number of full-side contacts",
@@ -3169,8 +3183,8 @@ def test_the_poster_badges_every_perfect_square_and_counts_them_in_its_legend() 
         for node in figure_legend.findall(".//svg:text[@data-feature='legend-label']", SVG)
     ][:5] == [
         "proved optimal (45 of 100)",
-        "exact value known (97 of 100)",
-        "only known numerically (3 of 100)",
+        "exact value known (98 of 100)",
+        "only known numerically (2 of 100)",
         "rigid (14 of 100)",
         "colors indicate distinct tilt angles",
     ]

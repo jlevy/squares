@@ -10,7 +10,7 @@ Usage, from `packing/`, each after
     reclassify --run-dir DIR [--n N ...] [--refresh-bounds]
     layer --run-dir DIR [DIR ...] --repo-root TREE [--select admitted|preview]
         [--exclude N ...] [--grid-run DIR --grid-counts N ...]
-    rungs --run-dir DIR [DIR ...] --repo-root TREE
+    rungs --run-dir DIR [DIR ...] --repo-root TREE [--check]
     rename-run --from ID --to ID --note TEXT --repo-root TREE
     provenance --repo-root TREE [--check]
     report --run-dir DIR [--json]
@@ -2914,6 +2914,8 @@ VIEW_KIND = "regularized-view"
 DRAWING_LABEL = "regularized"
 LAYER_DIR = "packing/atlas/known-best/regularized"
 LAYER_INDEX_PATH = f"{LAYER_DIR}/index.json"
+#: The layer's review records (policy section 5, `regularize_axis_components.REVIEWS`).
+LAYER_REVIEWS_PATH = f"{LAYER_DIR}/{axis.REVIEWS}"
 LAYER_GENERATED_BY = "python -m devtools.regularize_evand layer --select admitted"
 IDENTITY_BY = (
     "devtools.check_half_angle_area.arrangement_gap, nearest centres under the box's "
@@ -2980,6 +2982,48 @@ class Admitted:
     measured: dict[str, Any]
     regularization: dict[str, Any]
     house_after: list[int]
+    review: dict[str, Any] | None = None
+    """How the entry names the review record that admitted a view the decision table sent
+    to review (`regularize_axis_components.review_link`), or None at row 10."""
+
+
+def reviewed_output(
+    report: Mapping[str, Any],
+    run_id: str,
+    reviews: Sequence[Mapping[str, Any]],
+    root: Path = REPO,
+) -> tuple[Output | None, Mapping[str, Any] | None]:
+    """The view a review record admits of a report the decision table sent to review, and
+    the record; else None twice (policy section 5).
+
+    The record must decide `admit` on this count, generator at its vendored version, run
+    and output, at the row the report decided, against the source witness the report
+    names, as the witness in the tree under `root` identifies itself
+    (`regularize_axis_components.witness_self`; OR-16); and the
+    output must be one `preview` takes: both exact routes accept it, it pairs one to one
+    and no contact total falls. A record of another witness has lapsed and admits nothing.
+    """
+    n = int(report["n"])
+    decision = report.get("decision") or {}
+    if decision.get("decision") != "review" or decision.get("row") not in axis.REVIEW_ROWS:
+        return None, None
+    path = (report.get("source") or {}).get("path")
+    for record in reviews:
+        if record.get("n") != n or record.get("decision") != "admit" or not path:
+            continue
+        held = record.get("source") or {}
+        if (
+            record.get("generator") == axis.EVAND_GENERATOR
+            and record.get("generator_version") == axis.review_version(evand_generator_block())
+            and record.get("run") == run_id
+            and record.get("row") == decision.get("row")
+            and held.get("id") == source_id(report)
+            and held == axis.witness_self(root, str(path))
+        ):
+            chosen = layer_candidate(report, "preview")
+            if chosen is not None and chosen == record.get("output"):
+                return chosen, record
+    return None, None
 
 
 def layer_regularization(record: Mapping[str, Any]) -> dict[str, Any]:
@@ -2991,11 +3035,24 @@ def layer_regularization(record: Mapping[str, Any]) -> dict[str, Any]:
 
 
 def evand_admitted(
-    report: Mapping[str, Any], directory: Path, run_id: str, *, text: str | None = None
+    report: Mapping[str, Any],
+    directory: Path,
+    run_id: str,
+    *,
+    text: str | None = None,
+    view: bool = True,
+    review: Mapping[str, Any] | None = None,
 ) -> Admitted:
     """A driver report's admitted view (row 10), in the layer's terms: `text`, the view as
-    `layer_refusal` decided it, or else the file as it is."""
-    chosen = layer_candidate(report, "admitted")
+    `layer_refusal` decided it, or else the file as it is. With `view=False` no view is
+    read and the result carries none, only what the report records: for a retained
+    report whose run kept no view beside it (`reproduced_views`). With `review`, the
+    view is the one that review record admits (`reviewed_output`), the decision stays the
+    table's, and the entry names the record."""
+    if review is not None:
+        chosen = str(review["output"])
+    else:
+        chosen = layer_candidate(report, "admitted")
     if chosen is None:
         raise EvandRunError(f"n={report['n']}: not admitted")
     n = int(report["n"])
@@ -3005,9 +3062,9 @@ def evand_admitted(
     ident = report.get("identity") or {}
     shaded = report.get("shades") or {}
     regularized = report.get("regularize") or {}
-    if text is None:
+    if text is None and view:
         text = (directory / f"view-{chosen}.yaml").read_text(encoding="utf-8")
-    document = load_yaml(text)
+    document = load_yaml(text) if text is not None else {"witness": {}}
     run: dict[str, Any] = {"id": run_id, "output": chosen}
     solved = report.get("solve") or {}
     # Before the retry ladder a report kept the retry's arguments; since, its rungs.
@@ -3071,6 +3128,13 @@ def evand_admitted(
         },
         regularization=layer_regularization(record),
         house_after=list((shaded.get("house") or {}).get("after") or []),
+        review=None
+        if review is None
+        else {
+            "record": LAYER_REVIEWS_PATH,
+            "date": str(review["date"]),
+            "reviewer": str(review["reviewer"]),
+        },
     )
 
 
@@ -3184,6 +3248,7 @@ def layer_entry(
             ),
         },
         "decision": admitted.decision,
+        **({"review": admitted.review} if admitted.review is not None else {}),
         "measured": admitted.measured,
         "regularization": admitted.regularization,
         "reference": dict(reference),
@@ -3478,7 +3543,7 @@ def dated_runs(
 
 
 def evand_candidates(
-    run_dirs: Sequence[Path],
+    run_dirs: Sequence[Path], reviews: Sequence[Mapping[str, Any]] = (), root: Path = REPO
 ) -> tuple[list[Admitted], list[dict[str, Any]], dict[str, str]]:
     """Every count finished runs admitted (row 10), a later run winning at a count two
     decided, with the runs they came from, and, with the reason, each admitted view
@@ -3489,14 +3554,15 @@ def evand_candidates(
     are its stored regularization's (review C of #511, C1). A report's blob ids for its
     views (`outputs.<name>.git_blob`) are its provenance and are compared with nothing
     (OR-16, OR-18); `--verify-atlas` decides every drawn view again, its identity and
-    shades measured again."""
+    shades measured again. A view the table sent to review is taken only as one of
+    `reviews` admits it (`reviewed_output`)."""
     found: dict[int, tuple[Path, str, dict[str, Any]]] = {}
     for run_dir in run_dirs:
         run_id = f"{axis.EVAND_GENERATOR}-{Path(run_dir).name}"
         for path in sorted(Path(run_dir).glob("n-*/report.json")):
             report = read_json(path)
             found[int(report["n"])] = (path.parent, run_id, report)
-    admitted, refused = decided_candidates(found)
+    admitted, refused = decided_candidates(found, reviews, root)
     used = {item.run["id"] for item in admitted}
     runs = [
         run_block(Path(run_dir), run_id)
@@ -3508,20 +3574,26 @@ def evand_candidates(
 
 def decided_candidates(
     found: Mapping[int, tuple[Path, str, dict[str, Any]]],
+    reviews: Sequence[Mapping[str, Any]] = (),
+    root: Path = REPO,
 ) -> tuple[list[Admitted], dict[str, str]]:
-    """Each found report's admitted view, decided again as it is now (`layer_refusal`),
-    and, with the reason, each one refused, which is never admitted."""
+    """Each found report's admitted view, or the view a review record admits where the
+    table sent it to review (`reviewed_output`), decided again as it is now
+    (`layer_refusal`), and, with the reason, each one refused, which is never admitted."""
     admitted: list[Admitted] = []
     refused: dict[str, str] = {}
     for n, (directory, run_id, report) in sorted(found.items()):
         chosen = layer_candidate(report, "admitted")
+        review = None
+        if chosen is None:
+            chosen, review = reviewed_output(report, run_id, reviews, root)
         if chosen is None:
             continue
         text, refusal = layer_refusal(directory, report, chosen)
         if text is None:
             refused[str(n)] = refusal or "refused"
             continue
-        admitted.append(evand_admitted(report, directory, run_id, text=text))
+        admitted.append(evand_admitted(report, directory, run_id, text=text, review=review))
     return admitted, refused
 
 
@@ -3625,7 +3697,9 @@ def write_layer_with_grid(
     `layer_refusal`, the grid run's by `regularize_grid_slack.admitted`, which refuses
     the whole write when one is not the view its report decided (#548 review C, C1)."""
     grid = importlib.import_module("devtools.regularize_grid_slack")
-    admitted, runs, refused = evand_candidates(run_dirs)
+    admitted, runs, refused = evand_candidates(
+        run_dirs, axis.review_records(layer_layout(root)), root.resolve()
+    )
     chosen = set(grid_counts)
     views, grid_run_block, grid_generator = grid.admitted_views(grid_run, sorted(chosen))
     candidates = [item for item in admitted if item.n not in chosen] + list(views)
@@ -3648,14 +3722,17 @@ def write_layer(
     run_dirs: Sequence[Path], root: Path, select: str, exclude: Collection[int] = ()
 ) -> dict[str, Any]:
     """Write finished runs' admitted views into the layer under `root` (`admit_views`),
-    or with `preview`, every drawable view into a scratch tree (`write_preview`). Each
-    view is decided again as it is now first (`layer_refusal`); a refused one is never
-    written, and the summary's `refused` names it with the reason."""
+    with each view the table sent to review that one of the layer's review records admits
+    (`reviewed_output`), or with `preview`, every drawable view into a scratch tree
+    (`write_preview`). Each view is decided again as it is now first (`layer_refusal`); a
+    refused one is never written, and the summary's `refused` names it with the reason."""
     if select not in SELECTIONS:
         raise EvandRunError(f"unknown selection {select!r}")
     if select != "admitted":
         return write_preview(run_dirs, root, select)
-    admitted, runs, refused = evand_candidates(run_dirs)
+    admitted, runs, refused = evand_candidates(
+        run_dirs, axis.review_records(layer_layout(root)), root.resolve()
+    )
     summary = admit_views(
         admitted,
         root,
@@ -3739,6 +3816,95 @@ def record_rungs(run_dirs: Sequence[Path], root: Path) -> dict[str, Any]:
     with atomic_output_file(index_path) as temporary:
         temporary.write_text(axis.index_text(index), encoding="utf-8")
     return {key: sorted(set(counts)) for key, counts in summary.items()}
+
+
+def run_reports(run_dir: Path) -> list[tuple[Path, dict[str, Any]]]:
+    """A finished run's reports with their count directories: each `n-*/report.json`, or
+    where the run is retained evidence, its gzip-compressed `report.json.gz`. A missing
+    directory, or one holding no report, is an error, so a check over it cannot pass by
+    checking nothing (review F2 of #644)."""
+    run_dir = Path(run_dir)
+    if not run_dir.is_dir():
+        raise EvandRunError(f"{run_dir}: no such run directory")
+    found: dict[Path, dict[str, Any]] = {}
+    for path in sorted(run_dir.glob("n-*/report.json.gz")):
+        found[path.parent] = json.loads(gzip.decompress(path.read_bytes()).decode("utf-8"))
+    for path in sorted(run_dir.glob("n-*/report.json")):
+        found[path.parent] = read_json(path)
+    if not found:
+        raise EvandRunError(f"{run_dir}: no n-*/report.json or report.json.gz to check")
+    return sorted(found.items())
+
+
+def reproduced_views(run_dirs: Sequence[Path], root: Path) -> dict[str, Any]:
+    """Which of the layer's drawn Evan Daniel views finished runs reproduce, writing
+    nothing (`rungs --check`; review D1 of #644).
+
+    A report reproduces a drawn view when its admitted view, recorded under the entry's
+    own run, renders to the drawn view byte for byte -- the comparison `record_rungs`
+    makes, of the text and not a digest -- and the entry's values the view's text does
+    not carry are the report's too: the solve's retry rungs, where the entry records
+    them (`run.rungs`), what was measured (the regularizer's level and groups, the
+    contact histograms) and the regularization record. Each count is listed under
+    `reproduced`, under `differs` with what differs, or under `not_drawn`, where the
+    layer draws no view of the driver's there or the report admits none. A run retained
+    as evidence keeps its reports and not its views (`run_reports`), so there the view's
+    text cannot be compared: a count whose report agrees on everything else is listed
+    under `agrees`, never `reproduced`, and the view's Git blob the report keeps
+    (`outputs.<name>.git_blob`) is provenance, compared with nothing (OR-16). A run
+    directory none of whose reports was compared is listed under `uncompared`, so a
+    check over several runs accounts for each of them (review G5 of #644)."""
+    root = root.resolve()
+    index = read_json(root / LAYER_INDEX_PATH)
+    entries = {int(entry["n"]): entry for entry in index["entries"]}
+    layout = layer_layout(root)
+    reproduced: list[int] = []
+    agrees: list[int] = []
+    differs: dict[str, list[str]] = {}
+    not_drawn: list[int] = []
+    uncompared: list[str] = []
+    for run_dir in run_dirs:
+        compared = False
+        for directory, report in run_reports(run_dir):
+            n = int(report["n"])
+            entry = entries.get(n) or {}
+            chosen = layer_candidate(report, "admitted")
+            if (
+                entry.get("status") != "regularized"
+                or entry.get("generator") != axis.EVAND_GENERATOR
+                or chosen is None
+            ):
+                not_drawn.append(n)
+                continue
+            compared = True
+            viewed = (directory / f"view-{chosen}.yaml").is_file()
+            admitted = evand_admitted(report, directory, str(entry["run"]["id"]), view=viewed)
+            found = []
+            if viewed:
+                text = witness_document(layer_view(admitted), schema=layout.schema_reference())
+                stored = gzip.decompress((root / entry["view"]["path"]).read_bytes())
+                found = [] if stored.decode("utf-8") == text else ["view"]
+            if "rungs" in entry["run"] and entry["run"]["rungs"] != admitted.run.get("rungs"):
+                found.append("run.rungs")
+            found.extend(
+                key
+                for key in ("measured", "regularization")
+                if json.loads(json.dumps(entry.get(key)))
+                != json.loads(json.dumps(getattr(admitted, key)))
+            )
+            if found:
+                differs[str(n)] = found
+            else:
+                (reproduced if viewed else agrees).append(n)
+        if not compared:
+            uncompared.append(str(run_dir))
+    return {
+        "reproduced": sorted(set(reproduced)),
+        "agrees": sorted(set(agrees)),
+        "differs": dict(sorted(differs.items(), key=lambda item: int(item[0]))),
+        "not_drawn": sorted(set(not_drawn)),
+        "uncompared": uncompared,
+    }
 
 
 def rename_run(root: Path, old: str, new: str, note: str) -> dict[str, Any]:
@@ -4018,6 +4184,11 @@ def parser() -> argparse.ArgumentParser:
     )
     rungs_command.add_argument("--run-dir", type=Path, nargs="+", required=True)
     rungs_command.add_argument("--repo-root", type=Path, required=True)
+    rungs_command.add_argument(
+        "--check",
+        action="store_true",
+        help="write nothing: list the drawn views the runs reproduce or agree with",
+    )
     rename_command = sub.add_parser(
         "rename-run", help="give a run that only supplied rungs another id, saying why"
     )
@@ -4055,6 +4226,40 @@ def layer_command(arguments: argparse.Namespace) -> dict[str, Any]:
     )
 
 
+def layer_main(arguments: argparse.Namespace) -> int:
+    """Run `layer`, `rungs` or `rename-run` and then the layer's check, or `rungs --check`,
+    which writes nothing and fails when a drawn view the runs cover differs, when a run
+    directory is missing or holds no report, and when any run directory compared no
+    drawn view (reviews G3 and G5 of #644)."""
+    if arguments.command == "rungs" and arguments.check:
+        try:
+            found = reproduced_views(arguments.run_dir, arguments.repo_root)
+        except EvandRunError as error:
+            print(f"rungs --check: {error}")
+            return 1
+        print(json.dumps(found))
+        if not (found["reproduced"] or found["agrees"] or found["differs"]):
+            print(
+                "rungs --check: no report of these runs is of a view the layer draws "
+                "from the driver, so nothing was compared"
+            )
+            return 1
+        if found["uncompared"]:
+            print(
+                "rungs --check: no report under "
+                + ", ".join(found["uncompared"])
+                + " is of a view the layer draws from the driver, so that run compared "
+                "nothing"
+            )
+            return 1
+        return 1 if found["differs"] else 0
+    print(json.dumps(layer_command(arguments)))
+    problems = axis.check_atlas(layer_layout(arguments.repo_root))
+    for problem in problems:
+        print(problem)
+    return 1 if problems else 0
+
+
 def main(argv: list[str] | None = None) -> int:
     arguments = parser().parse_args(argv)
     if arguments.command == "input":
@@ -4081,11 +4286,7 @@ def main(argv: list[str] | None = None) -> int:
             )
         return 0
     if arguments.command in {"layer", "rungs", "rename-run"}:
-        print(json.dumps(layer_command(arguments)))
-        problems = axis.check_atlas(layer_layout(arguments.repo_root))
-        for problem in problems:
-            print(problem)
-        return 1 if problems else 0
+        return layer_main(arguments)
     if arguments.command == "provenance":
         changed = restate_provenance(arguments.repo_root, write=not arguments.check)
         verb = "would restate" if arguments.check else "restated"

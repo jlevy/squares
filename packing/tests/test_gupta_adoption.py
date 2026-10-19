@@ -433,8 +433,12 @@ def test_register_outputs_schema_valid_complete_selected_and_withdrawn_inventory
             SOURCE / "packing" / coverage_check.INTAKE_CATALOGUE_HTML, n_min, n_max
         )
         baseline.update({row["n"]: earlier[row["n"]] for row in pending})
+    adopted = coverage_check.adopted_house_sources()
     assert (
-        coverage_check.selection_errors(coverage, baseline, {register.SOURCE_ID: offered}) == []
+        coverage_check.selection_errors(
+            coverage, baseline, {register.SOURCE_ID: offered}, adopted
+        )
+        == []
     )
     selected = {
         row["n"]: row

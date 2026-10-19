@@ -23,6 +23,7 @@ from sqpack.rust_rectangle_geometry import RustRectangleGeometry
 
 if TYPE_CHECKING:
     import subprocess
+    from types import TracebackType
 
 PACKING = Path(__file__).resolve().parents[1]
 ANALYTIC = PACKING / "resources/web/wand125-tools-2026-09-29/native-analytic-control.json"
@@ -168,11 +169,35 @@ def test_partial_line_timeout_retains_unresolved_event_census(
 
 
 @pytest.mark.pool_heavy
-def test_shutdown_timeout_cannot_promote_completed_angles(tmp_path: Path) -> None:
+def test_shutdown_timeout_cannot_promote_completed_angles(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    # Startup and the completed angle must not consume the shutdown control's budget.
+    # Keep real select waits bounded, then give shutdown a short real wait of its own.
+    clock = 0.0
+    shutdown_processes: list[subprocess.Popen[bytes]] = []
+
+    class ShutdownTimeoutGeometry(RustRectangleGeometry):
+        def __exit__(
+            self,
+            error_type: type[BaseException] | None,
+            error: BaseException | None,
+            traceback: TracebackType | None,
+        ) -> None:
+            nonlocal clock
+            assert error_type is None
+            process = self._process
+            assert process is not None
+            shutdown_processes.append(process)
+            clock = self.deadline - 0.05
+            super().__exit__(error_type, error, traceback)
+
+    monkeypatch.setattr(time, "monotonic", lambda: clock)
+    monkeypatch.setattr(rectangle_density, "RustRectangleGeometry", ShutdownTimeoutGeometry)
     report = verify_candidate(
         _candidate(),
         angle_indices=(0,),
-        max_seconds=0.5,
+        max_seconds=2,
         backend="rust",
         rust_binary=_fake_server(tmp_path, "shutdown_hang"),
     )
@@ -181,6 +206,8 @@ def test_shutdown_timeout_cannot_promote_completed_angles(tmp_path: Path) -> Non
     assert len(report.angles) == 1
     assert report.angles[0].status == "VERIFIED"
     assert report.angles[0].nodes > 0
+    assert len(shutdown_processes) == 1
+    assert shutdown_processes[0].poll() is not None
 
 
 @pytest.mark.pool_heavy

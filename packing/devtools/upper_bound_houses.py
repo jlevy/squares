@@ -28,6 +28,15 @@ Usage, from ``packing/`` with the project interpreter::
 
     python -m devtools.upper_bound_houses check [--n N ...]
     python -m devtools.upper_bound_houses inputs
+    python -m devtools.upper_bound_houses sizes [--n N ...]
+
+**Sizes.** `sizes` measures the witnesses an adoption would write, before it writes them:
+each staged count's (`select_houses.PENDING_ADOPTION`) house rebuilt as this module
+builds one, in bytes in a checkout and as Git stores the blob, beside the witness it
+replaces, with the set's totals and its largest. That is OR-18's unit, the sum of the
+blobs a clone downloads (`stored_size`), by which the house rule decides whether a house's
+witnesses go into Git or a hosted data release (packing/campaign/result-import.md, "The
+House Rule"; review C9 of #660).
 """
 
 from __future__ import annotations
@@ -37,12 +46,13 @@ import copy
 import hashlib
 import json
 import sys
+import zlib
 from collections.abc import Callable, Mapping, Sequence
 from dataclasses import dataclass
 from fractions import Fraction
 from functools import cache
 from pathlib import Path, PurePosixPath
-from typing import Any, cast
+from typing import Any, NamedTuple, cast
 
 from devtools import couzo_followup_reports as couzo_460
 from devtools import couzo_refinement_reports as couzo_451
@@ -51,7 +61,12 @@ from devtools import retained_data
 from devtools import squish_second_update_house_links as house
 from devtools import upper_bound_reports as reports
 from devtools.retained_data import read_retained_bytes
-from sqpack.witness import WitnessError, validate_witness_document, witness_envelope
+from sqpack.witness import (
+    WitnessError,
+    validate_witness_document,
+    witness_document,
+    witness_envelope,
+)
 from sqpack.yamlio import load_yaml, safe_load
 
 legacy = reports.legacy
@@ -423,22 +438,16 @@ def _sources() -> dict[str, Source]:
         packet_source("T-149", "dostashev-records-2026-10-11"),
         packet_source("T-151", "squish-500-fourth-request-2026-10-11"),
         packet_source("T-152", "couzo-certificates-2026-10-11"),
-        packet_source("T-158", "dostashev-records-2026-10-12"),
-        packet_source("T-161", "couzo-certificates-2026-10-12"),
-        packet_source("T-162", "dostashev-compositions-2026-10-12"),
-        # T-165's 176 is in issue 586's packet too, unchanged there since 12 October.
-        packet_source("T-165", "couzo-certificates-2026-10-13"),
-        packet_source("T-168", "pingyou-n146-refinement-2026-10-12"),
         packet_source("T-169", "pingyou-n261-refinement-2026-10-12"),
         packet_source("T-170", "pingyou-n105-refinement-2026-10-12"),
         packet_source("T-171", "pingyou-n272-refinement-2026-10-12"),
         packet_source("T-173", "mishapolk-exact-certificates-2026-10-12"),
-        packet_source("T-175", "dostashev-merged-bands-2026-10-13"),
-        # T-181's 302 is issue 583's certificate as issue 586's packet retains it, byte
-        # for byte; its 211 and 241, in the issue-583 packet, house no count.
-        packet_source("T-181", "couzo-certificates-2026-10-13"),
         packet_source("T-182", "couzo-certificates-2026-10-13"),
-        packet_source("T-183", "mishapolk-records-2026-10-14"),
+        packet_source("T-186", "mishapolk-kkt-refinements-2026-10-14"),
+        packet_source("T-187", "evand-n146-2026-10-14"),
+        packet_source("T-188", "couzo-verified-bounds-2026-10-14"),
+        packet_source("T-190", "couzo-n237-2026-10-15"),
+        packet_source("T-195", "pingyou-pr622-certificate-2026-10-15"),
     ]
     found = {source.result: source for source in sources}
     # Two results may read one packet (T-181 and T-182 both read issue 586's), so the
@@ -454,10 +463,15 @@ def _sources() -> dict[str, Source]:
 #: 146, 153, 155 and 207, the third, for issues 500 and 506, at 270 and 305, the
 #: fourth, for issue 528, at 175 and 232, the fifth, for issue 552, at 154, and the
 #: pass of 15 October 2026, for issues 573, 575, 583, 586 and 593, at 153, 154, 207,
-#: 211, 237, 241, 302 and 304, and, for the next candidates where PR 574's (T-174) are
-#: held for the owner (`select_houses.HELD`), at 105, 129, 146, 156, 176, 204, 261, 271,
-#: 272 and 303. None of T-174's counts is T-174's here.
+#: 211, 237, 241, 302 and 304, and, for the next candidates where PR 574's (T-174) were
+#: held for the owner (the hold the house rule lifted, `select_houses.LIFTED`), at 105,
+#: 129, 146, 156, 176, 204, 261, 271, 272 and 303, and the pass of 16 October 2026, for
+#: the 16 October review of issues 506 to 607, at 129, 146, 154, 156, 175, 176, 204, 211,
+#: 232, 237, 264, 271, 302, 303 and 304. None of T-174's counts is T-174's here.
+#: The pass of 17 October 2026, the first under the house rule, adopted PR 622's (T-195)
+#: at 29.
 ADOPTED: dict[int, str] = {
+    29: "T-195",
     70: "T-146",
     84: "T-130",
     86: "T-130",
@@ -468,26 +482,26 @@ ADOPTED: dict[int, str] = {
     123: "T-146",
     126: "T-139",
     127: "T-128",
-    129: "T-162",
+    129: "T-186",
     131: "T-136",
     132: "T-141",
-    146: "T-168",
+    146: "T-187",
     153: "T-173",
-    154: "T-182",
+    154: "T-186",
     155: "T-149",
-    156: "T-161",
-    175: "T-158",
-    176: "T-165",
+    156: "T-186",
+    175: "T-186",
+    176: "T-186",
     180: "T-128",
     181: "T-151",
-    204: "T-162",
+    204: "T-186",
     207: "T-173",
     209: "T-140",
-    211: "T-182",
+    211: "T-188",
     228: "T-128",
-    232: "T-158",
+    232: "T-186",
     236: "T-146",
-    237: "T-183",
+    237: "T-190",
     238: "T-151",
     239: "T-151",
     241: "T-182",
@@ -495,17 +509,17 @@ ADOPTED: dict[int, str] = {
     259: "T-136",
     261: "T-169",
     263: "T-146",
-    264: "T-158",
+    264: "T-186",
     267: "T-134",
     269: "T-146",
     270: "T-151",
-    271: "T-161",
+    271: "T-186",
     272: "T-171",
     292: "T-146",
     295: "T-146",
-    302: "T-181",
-    303: "T-162",
-    304: "T-175",
+    302: "T-186",
+    303: "T-186",
+    304: "T-186",
     305: "T-152",
     306: "T-128",
     307: "T-136",
@@ -527,9 +541,16 @@ NUMBERS = tuple(sorted(ADOPTED))
 #: issue 562 (T-162) at 129 and 303 from T-146 and at 204, first adopted here, from the
 #: Kingbird catalogue; issue 561 (T-161) at 156 from T-149 and at 271 from T-151; T-165
 #: at 176 from T-151; and PingYou Ltd's re-solves (T-168 to T-171) at 146 and 261 from
-#: T-150, at 105 from T-130 and at 272 from T-151. A count a pass names keeps its place in
-#: the earlier passes' sets, which their archives hold; it was adopted on the latest day
-#: that names it.
+#: T-150, at 105 from T-130 and at 272 from T-151. The pass of 16 October 2026 adopted the
+#: 16 October review of issues 506 to 607: Mykhailo Polkovskyi's KKT refinements (T-186)
+#: at 129, 204 and 303 from T-162, at 154 from T-182, at 156 and 271 from T-161, at 175,
+#: 232 and 264 from T-158, at 176 from T-165, at 302 from T-181 and at 304 from T-175;
+#: issue 606 (T-187) at 146 from T-168; Francisco Couzo's 211 (T-188) from T-182; and his
+#: 237 of 15 October (T-190) from T-183. A count a pass names keeps its place in the
+#: earlier passes' sets, which their archives hold; it was adopted on the latest day that
+#: names it. The pass of 17 October 2026, the first under the house rule, adopted PR 622's
+#: certificate (T-195) at 29 from T-155, the case's replay of the Kingbird catalogue's
+#: packing, which no pass had adopted before.
 LATER_PASSES: dict[str, frozenset[int]] = {
     "2026-10-12": frozenset({154, 175, 176, 181, 232, 238, 239, 264, 270, 271, 272, 304, 305}),
     "2026-10-15": frozenset(
@@ -554,6 +575,10 @@ LATER_PASSES: dict[str, frozenset[int]] = {
             304,
         }
     ),
+    "2026-10-16": frozenset(
+        {129, 146, 154, 156, 175, 176, 204, 211, 232, 237, 264, 271, 302, 303, 304}
+    ),
+    "2026-10-17": frozenset({29}),
 }
 
 
@@ -600,7 +625,11 @@ def certificate(n: int) -> legacy.Certificate:
 
 def expected_house(n: int) -> dict[str, Any]:
     """The count's house: its certificate as a witness, with its full native result."""
-    source = source_for(n)
+    return _house_witness(n, source_for(n))
+
+
+def _house_witness(n: int, source: Source) -> dict[str, Any]:
+    """The witness `source` makes the house at `n`: its certificate, with its native result."""
     exact = source.certificate(n)
     positive = source.jobs(n, exact)["positive"]
     witness = kernel.to_witness(
@@ -642,6 +671,109 @@ def build_witness(n: int) -> dict[str, Any]:
 
 def side(n: int) -> Fraction:
     return certificate(n).side
+
+
+#: The schema reference a house witness carries, as the atlas writes the file.
+WITNESS_SCHEMA_REFERENCE = "../witness.schema.yaml"
+
+
+def stored_size(data: bytes) -> int:
+    """The bytes Git keeps for a file: its blob object, the header ``blob <size>`` and a NUL
+    then the content, compressed by zlib at its default level, as Git compresses an object
+    in a pack (`core.compression`) before any delta. A loose object, as `git hash-object -w`
+    first writes it, is compressed at Git's default loose level, a little larger."""
+    return len(zlib.compress(b"blob %d\x00" % len(data) + data, zlib.Z_DEFAULT_COMPRESSION))
+
+
+class Sizes(NamedTuple):
+    """One staged count's witness, as the adoption would write it and as it is now."""
+
+    n: int
+    house: str
+    checkout: int
+    stored: int
+    now_checkout: int
+    now_stored: int
+
+
+def staged_sizes(numbers: Sequence[int] | None = None) -> tuple[list[Sizes], list[str]]:
+    """The witness each staged count's adoption would write, measured, and the counts it
+    cannot build: an algebraic house, which no writer here takes yet (think-ot5c)."""
+    from devtools import select_houses  # noqa: PLC0415
+
+    staged = select_houses.PENDING_ADOPTION
+    selected = sorted(staged) if numbers is None else list(numbers)
+    _require(
+        all(n in staged for n in selected),
+        "only counts staged in select_houses.PENDING_ADOPTION are measured",
+    )
+    # Only the staged results are read: `select_houses --check` holds each staging to the
+    # selection, and this measures what the staged house's adoption would write.
+    names = {staged[n].house for n in selected}
+    results = [entry for entry in select_houses.load_results() if str(entry["id"]) in names]
+    found = select_houses.candidates(results, select_houses.load_evidence())
+    measured: list[Sizes] = []
+    skipped: list[str] = []
+    for n in selected:
+        house = next((c for c in found.get(n, ()) if c.result == staged[n].house), None)
+        _require(house is not None, f"n={n}: {staged[n].house} is no candidate there")
+        assert house is not None
+        packet = reports.import_packet(house.source_key)
+        if house.algebraic or packet is None:
+            skipped.append(f"n={n}: {house.result}'s side is algebraic; no writer takes it yet")
+            continue
+        witness = _house_witness(n, packet_source(house.result, packet.name))
+        data = witness_document(witness, schema=WITNESS_SCHEMA_REFERENCE).encode("utf-8")
+        current = (WITNESSES / f"n-{n:03d}.yaml").read_bytes()
+        measured.append(
+            Sizes(
+                n,
+                house.result,
+                len(data),
+                stored_size(data),
+                len(current),
+                stored_size(current),
+            )
+        )
+    return measured, skipped
+
+
+def _megabytes(size: int) -> str:
+    return f"{size / 1e6:.2f} MB"
+
+
+def print_sizes(numbers: Sequence[int] | None = None) -> int:
+    measured, skipped = staged_sizes(numbers)
+    heading = ("n", "house", "checkout", "stored", "now", "now stored")
+    print("{:>4}  {:6}  {:>10}  {:>9}  {:>9}  {:>10}".format(*heading))
+    for row in measured:
+        print(
+            f"{row.n:>4}  {row.house:6}  {row.checkout:>10}  {row.stored:>9}  "
+            f"{row.now_checkout:>9}  {row.now_stored:>10}"
+        )
+    for line in skipped:
+        print(f"skipped {line}")
+    if not measured:
+        return 0
+    checkout = sum(row.checkout for row in measured)
+    stored = sum(row.stored for row in measured)
+    now_checkout = sum(row.now_checkout for row in measured)
+    now_stored = sum(row.now_stored for row in measured)
+    largest = max(measured, key=lambda row: row.checkout)
+    # History keeps every blob: the witnesses replaced stay in it, so an adoption adds its
+    # new blobs' whole size to what a clone downloads, and the tree's difference is only
+    # what a checkout grows by (review D3 of #660).
+    print(
+        f"{len(measured)} witness{'' if len(measured) == 1 else 'es'}: "
+        f"{_megabytes(checkout)} in a checkout and "
+        f"{_megabytes(stored)} as Git stores them, which history keeps, the replaced "
+        f"witnesses staying in it; in the tree they replace {_megabytes(now_checkout)} and "
+        f"{_megabytes(now_stored)}, so a checkout grows by "
+        f"{_megabytes(checkout - now_checkout)} and the tree's blobs by "
+        f"{_megabytes(stored - now_stored)}; the largest, n = "
+        f"{largest.n}, {_megabytes(largest.checkout)} and {_megabytes(largest.stored)}"
+    )
+    return 0
 
 
 def check_houses(numbers: Sequence[int] | None = None) -> None:
@@ -710,8 +842,9 @@ def linked_house_problem(path: str, *, repository: Path) -> str | None:
 #: Where the custody run's receipt is kept: one record for every adopted packet.
 CUSTODY_RECEIPT = ROOT / "devtools/house-custody-2026-10-11.json"
 CUSTODY_FORMAT = "AdoptedHouseCustody/v1"
-#: The worker's deadline: it admits all 52 houses and refuses 48 mutations, two for each
-#: of the twenty-four results (31.07 s in the worker on 15 October 2026).
+#: The worker's deadline: it admits all 52 houses and refuses 40 mutations, two for each
+#: of the twenty results (48.95 s in the worker on 16 October 2026, on a shared host at a
+#: load average of about ten).
 CUSTODY_TIMEOUT = 120
 
 
@@ -892,6 +1025,11 @@ def main(argv: Sequence[str] | None = None) -> int:
     check = sub.add_parser("check", help="hold each retained house to its inputs")
     check.add_argument("--n", type=int, nargs="+", help="only these counts")
     sub.add_parser("inputs", help="print every private input and its size")
+    sizes = sub.add_parser(
+        "sizes",
+        help="measure the witnesses the staged adoptions would write, as Git stores them",
+    )
+    sizes.add_argument("--n", type=int, nargs="+", help="only these staged counts")
     sub.add_parser(
         "custody", help="run the custody check in a private worker; keep its receipt"
     )
@@ -909,6 +1047,8 @@ def main(argv: Sequence[str] | None = None) -> int:
     if arguments.command == "worker-custody":
         print(json.dumps(worker_custody()))
         return 0
+    if arguments.command == "sizes":
+        return print_sizes(arguments.n)
     if arguments.command == "inputs":
         paths = private_input_paths()
         for path in paths:
