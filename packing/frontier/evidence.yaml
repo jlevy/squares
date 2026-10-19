@@ -38101,7 +38101,7 @@ evidence:
     - V-wand125-sqverify-proof-net
     limitations: The source reports 853/100 at all 201 declared-net directions by sqverify-proof-net,
       its adapted copy of this repository's crate, in its check2 and pre-publication runs. Original
-      source receipts, exact premises and candidate identities remain retained unchanged. Its32-direction 197/200
+      source receipts, exact premises and candidate identities remain retained unchanged. Its 32-direction 197/200
       control remains sampled. The accepted maintained native replay is separately registered as
       E-wand125-fine-net-n68-853-sqverify-fast-replay; docs/project/reviews/review-2026-10-19-n68-fine-net-mathematics.md
       accepts its mathematical implication, premises, complete control partition and exact saved-point
@@ -38136,7 +38136,7 @@ evidence:
     - V-wand125-sqverify-proof-net
     limitations: The source reports 3769/400 at all 201 declared-net directions by sqverify-proof-net,
       its adapted copy of this repository's crate, in its check2 and pre-publication runs. Original
-      source receipts, exact premises and candidate identities remain retained unchanged. Its32-direction 197/200
+      source receipts, exact premises and candidate identities remain retained unchanged. Its 32-direction 197/200
       control remains sampled. The accepted maintained native replay is separately registered as
       E-wand125-fine-net-n84-94225-sqverify-fast-replay; docs/project/reviews/review-2026-10-19-n84-n85-fine-net-mathematics.md
       accepts its mathematical implication, premises, complete control partition and exact saved-point
@@ -38171,7 +38171,7 @@ evidence:
     - V-wand125-sqverify-proof-net
     limitations: The source reports 379/40 at all 201 declared-net directions by sqverify-proof-net,
       its adapted copy of this repository's crate, in its check2 and pre-publication runs. Original
-      source receipts, exact premises and candidate identities remain retained unchanged. Its32-direction 197/200
+      source receipts, exact premises and candidate identities remain retained unchanged. Its 32-direction 197/200
       control remains sampled. The accepted maintained native replay is separately registered as
       E-wand125-fine-net-n85-9475-sqverify-fast-replay; docs/project/reviews/review-2026-10-19-n84-n85-fine-net-mathematics.md
       accepts its mathematical implication, premises, complete control partition and exact saved-point
