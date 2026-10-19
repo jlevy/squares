@@ -914,7 +914,8 @@ def test_the_atlas_marks_each_perfect_square_and_nothing_else_on_a_tile(
         111,
         133,
         157,
-        183,
+        # 183 left the grid for T-218's packet house on 19 October 2026 (think-jh4w).
+        184,
         212,
         242,
         274,
