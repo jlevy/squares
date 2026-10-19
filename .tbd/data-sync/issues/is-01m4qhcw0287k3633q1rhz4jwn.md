@@ -3,9 +3,9 @@ type: is
 id: is-01m4qhcw0287k3633q1rhz4jwn
 title: "Workbench trajectory cost check: compare the best of three timings with the 400 ms ceiling (flaked on #512)"
 kind: bug
-status: closed
+status: open
 priority: 3
-version: 6
+version: 7
 delegate: claude-workbench-cost-fix-20261019
 labels:
   - testing
@@ -14,10 +14,10 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-12T07:49:22.050Z
-updated_at: 2026-10-19T20:31:42.856Z
+updated_at: 2026-10-19T20:49:19.453Z
 started_at: 2026-10-19T17:01:19.072Z
-closed_at: 2026-10-19T20:31:42.856Z
-close_reason: "Fixed in 02b644c6f + af12aca78 (measurePhysics cache bypass; best of three fresh builds, equal-bytes check; ceilings unchanged), merged in #685 (14fd9e27f). Hosted check_frontend: dearest trajectory 160 ms at its fastest of three."
+closed_at: null
+close_reason: null
 resolution: null
 duplicate_of: null
 ---
