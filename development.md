@@ -278,7 +278,8 @@ installs pinned Chromium.
 Browser navigation and functional pixel/layout checks, including the atlas’s readable
 drawing sizes and interactions, run in parallel with file-based distribution, except for
 the forwarder module.
-After those workers exit, all 51 forwarder cases run serially in a fresh pytest process.
+After those workers exit, all 101 forwarder cases run serially in a fresh pytest
+process: the original 51, with three arrival tests split into one case per old address.
 The four native-frontier HTTP load-budget cases then run in another serial process,
 without xdist workers; each checks JavaScript and no-JavaScript contexts under the same
 assertions and budgets.

@@ -4820,7 +4820,9 @@ def test_site_layout_commands_partition_the_original_collection(
     forwarders = {
         node for node in original if node.startswith("tests/test_site_forwarders.py::")
     }
-    assert len(forwarders) == 51
+    # The 51 forwarder cases #634 isolated, with three arrival tests split into one
+    # case per old address (#599): 101 cases, all in the one serial process.
+    assert len(forwarders) == 101
     assert isolated == forwarders
 
 
