@@ -1491,6 +1491,7 @@ case or experiment separately.
 | [Claim-Chain Review: Evan Daniel’s `s(k² − 4) = k` for Every `k ≥ 5`](docs/project/reviews/review-2026-10-03-evand-k2m4-claim-chain.md) | dated review record | record | retained | — |
 | [Evan Daniel’s Square Packing Atlas: Site Review and Import](docs/project/reviews/review-2026-10-05-evand-square-packing-atlas.md) | dated review record | record | retained | — |
 | [Mathematics Review: The Catalogue’s September 2026 Packings at `n = 69, 83, 87` (T-088, T-089)](docs/project/reviews/review-2026-10-05-kingbird-intake-n69-n83-n87.md) | dated review record | record | retained | — |
+| [Independent Mathematical Review of Issue #680](docs/project/reviews/review-2026-10-19-evand-n183-subgrid.md) | dated review record | record | retained | — |
 | [Density Solvers Compared: Tokoharu’s and wand125’s Rectangle-Density Tools Against This Repository’s Certificate Stack](docs/project/reviews/review-2026-09-28-density-solver-comparison.md) | dated review record | record | retained | — |
 | [Proof Review: Guzhou0806’s R067 and R068, `s(17) > 233009/50000` and `s(17) > 116511/25000`](docs/project/reviews/review-2026-09-28-n17-guzhou-r067-r068.md) | dated review record | record | retained | — |
 | [Proof Review: wand125’s Point-Only Certificates for `s(45) = 7` and `s(21) = 5`](docs/project/reviews/review-2026-09-28-wand125-point-only-s21-s45.md) | dated review record | record | retained | — |

@@ -67,8 +67,9 @@ Couzo’s n182 donor credit and the unlogged crossover mate remain explicit sour
 
 | Validation | Bead | Price and status |
 | --- | --- | --- |
-| Both certificate views, complete exact routes and sensitive pair/wall controls | **think-1hmn** | Estimated 0.01–0.10 CPU-hours, first batch capped at 360 seconds; runnable in the separate replay slice after source-execution review. No benchmark or replay ran during W1 custody. |
-| Independent finite-geometry and trust-boundary review | **think-glg8** | About 1–3 agent-hours; any own finite-geometry code is estimated at minutes. The independent reviewer is assigned; mapped integration remains separate. |
+| Primary certificate, complete exact routes and sensitive pair/wall controls | **think-1hmn** | Complete: 34.87 process wall seconds, 30.55 route CPU seconds, within the 360-second ceiling. Regularized/source-checker runs remain separate open scope from the broader original estimate. |
+| Independent finite-geometry and trust-boundary review | **think-glg8** | Complete and mapped locally: primary finite upper bound accepted on retained replay plus read-only admission; no geometry rerun or new deciding program by the reviewer. |
+| Local review/replay evidence handoff | **think-arhu** | Maps the review, historical execution provenance and prospective program/evidence metadata; actual result and registry binding remain with the coordinator. |
 
 No house is adopted here.
 Any later adoption owes the project’s strong-generator regularization in that change;
@@ -88,9 +89,24 @@ The
 [source packet’s replay section](../../../resources/web/evand-n183-subgrid-2026-10-19/README.md#bounded-primary-certificate-replay)
 links the native receipt and records the shared parser and conversion boundary.
 No upstream checker ran; the regularized view and source-execution obligations remain
-open. The receipt is unintegrated validation evidence.
-The actual result ID, mapped review, deciding-program metadata, assurance decision,
-adoption and release disposition remain separate obligations.
+open. The receipt awaits its actual confirming evidence entry.
+
+The
+[mapped mathematical review](../../../../docs/project/reviews/review-2026-10-19-evand-n183-subgrid.md)
+accepts the original finite upper bound; its addendum admits the retained receipt
+without rerunning geometry.
+The [evidence handoff](n183-evidence-integration.yaml) preserves the review’s identity,
+source hashes, historical certify working directory and full `PYTHONPATH`, the five
+existing deciding/premise verifier IDs, the custody helper awaiting registry
+representation, and M1–M4 dispositions.
+The original batch JSON and native receipt remain unchanged from the reviewer’s audit.
+The [prospective row](registration-plan.yaml) keeps V0/C0 as an unapplied proposal while
+the coordinator settles registration order.
+V3/C3 is proposed for the primary finite upper bound only after actual cited evidence,
+review and program bindings land.
+No further primary geometry run is required.
+Actual result allocation, registry integration, adoption and release disposition remain
+separate obligations.
 
 ## Manual Reads and Gate Evidence
 

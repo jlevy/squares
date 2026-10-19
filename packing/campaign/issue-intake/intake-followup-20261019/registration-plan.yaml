@@ -2,6 +2,9 @@
 # The coordinator takes the actual ID after the preceding records merge, inserts
 # this row into frontier/results.yaml, updates #680's request mapping, and removes
 # this plan after the actual registration is on the branch.
+# The separate evidence-integration handoff records completed primary replay and
+# review. V0/C0 below stays a proposal until actual cited registry bindings land.
+evidence_integration: packing/campaign/issue-intake/intake-followup-20261019/n183-evidence-integration.yaml
 result:
   id: T-NNN
   kind: upper-bound
@@ -23,10 +26,11 @@ result:
     score: 3
     rationale: >-
       A reported sub-grid packing at a count whose frozen reported and verified
-      ceilings are both 14, about 4.20e-4 smaller. Finite feasibility remains to
-      be confirmed; this draft score asserts no global optimality or public priority.
+      ceilings are both 14, about 4.20e-4 smaller. The independent mathematical
+      review endorses S3 after accepting the retained primary replay. This draft
+      score asserts no global optimality or public priority.
     scored: '2026-10-19'
-    by: think-xp0o intake triage; independent mathematical review confirms or changes the draft
+    by: think-xp0o intake triage; endorsed by think-glg8 independent mathematical review
   novelty: previously-published
   attribution:
     source_keys: ['[Daniel n183 subgrid 2026-10-19]']
@@ -37,40 +41,64 @@ result:
   - packing/resources/web/evand-n183-subgrid-2026-10-19/source/search/packer/candidates/s183_h183b.cert
   - packing/resources/web/evand-n183-subgrid-2026-10-19/source/search/packer/candidates/s183_h183b_regularized.cert
   - packing/campaign/issue-intake/intake-followup-20261019/n183-ledger/README.md
+  - docs/project/reviews/review-2026-10-19-evand-n183-subgrid.md
+  - packing/campaign/issue-intake/intake-followup-20261019/n183-evidence-integration.yaml
+  - packing/resources/web/evand-n183-subgrid-2026-10-19/receipts/exact-certification.json.xz
+  - packing/resources/web/evand-n183-subgrid-2026-10-19/receipts/certify-execution-provenance.json
+  reviews:
+  - path: docs/project/reviews/review-2026-10-19-evand-n183-subgrid.md
+    kind: adversarial
+    reviewer: OpenAI Codex system family, strong tier, maximum reasoning; separately prompted mathematical reviewer
+    reviewer_kind: ai
+    relation: project
+    date: '2026-10-19'
+    scope: >-
+      Finite feasibility of the original 183-square rational certificate, soundness
+      and trust boundaries of the source and maintained routes, and read-only
+      admission of the completed primary replay. No geometry rerun by the reviewer.
+    verdict: accepted
+    # Add covers with the actual result ID only in the registering commit.
   notes: >-
-    Source report only. Custody binds the retained files to the immutable source
-    pin, and the maintained intake ledger records this side below the grid before
-    the issue repeats it. Neither operation decides geometry. The independent
-    mathematical review and full replay have separate owners; no returned review
-    or replay receipt is integrated by this registration. Both case upper lanes
-    and the retained house remain unchanged pending reviewed Stage 4 adoption.
+    This is a prospective row, not a registered result or an applied V/C rating.
+    Custody binds the retained source pin and the ledger compares reported sides.
+    The separate primary replay accepted all 183 squares through both maintained
+    exact routes, with 16,653 pairs per route/job and both sensitive controls
+    rejected. The mapped independent mathematical review accepts that finite
+    upper bound. The evidence-integration handoff records the complete scope,
+    historical execution provenance, program versions, independence limits and
+    remaining registry bindings. V3/C3 is proposed only after the actual result
+    cites the registered confirming evidence. Both case upper lanes and the
+    retained house await separately reviewed adoption.
 
     Source numerical KKT diagnostics concern S* = 13.999580178736252501941...,
     distinct from the slack rational certificate side S'. Their 27 candidate flat
-    modes concern the 182-square force-bearing subsystem, with a free rattler
-    excluded; no full-configuration local-optimality theorem is claimed. The
-    source's same-side regularization and distinct-minimum classifications remain
+    modes concern the 182-square force-bearing subsystem, with the free rattler
+    at source index 11 excluded; no full-configuration local-optimality theorem
+    is claimed. The source's same-side regularization and distinct-minimum classifications remain
     source assertions. Endpoint feasibility would not prove a no-expansion path.
     Any later house adoption owes the project's strong-generator regularization.
   next_rung: >-
-    C1 needs the independently prompted mathematical review under think-glg8 mapped
-    to the actual claim and ID. C3 needs the complete retained exact replay and
-    sensitive pair/wall controls under think-1hmn, accepted mathematical review and
-    deciding-program metadata integrated in their own reviewed change. Source
-    checker outcomes, numerical local optimality, arrangement identity and public
-    priority are not confirmations performed here.
+    Bind the completed primary replay and mapped accepted mathematical review to
+    the actual result, register the confirming-origin evidence and every deciding
+    and premise-checking program with true independence metadata, then re-derive
+    V/C. The proposed primary finite-feasibility rungs are V3/C3, independently
+    re-verified by this repository's maintained implementations relative to the
+    producer, with their shared parser/conversion/runtime/SAT limits disclosed.
+    No new geometry run is needed for that binding. Regularized endpoint and
+    source-checker runs remain separate; numerical local optimality, arrangement
+    identity, no-expansion path, missing lineage and priority are not confirmed.
   unfinished_confirmations:
-  - what: Integrate the independently prompted finite-geometry and trust-boundary review, mapped to the actual result ID; no review is adopted here.
+  - what: Bind the completed mapped finite-geometry review to the actual result ID and reported evidence atom; the read itself is complete.
     rung: C1
     link: think-glg8
-  - what: Run and integrate complete exact replay and sensitive geometric controls for both certificate views, independently enforcing expected n183, exact side and all coordinate rows; bind the accepted review and actual deciding-program relationship.
+  - what: Register and cite the already-completed primary exact replay and controls, accepted review and actual deciding/premise program relationship. Original certificate only; optional regularized/source-checker work remains distinct.
     rung: C3
     link: think-1hmn
     estimated_cost:
-      cpu_hours: 0.01
-      cpu_hours_high: 0.10
+      cpu_hours: 0.0
       basis: >-
-        Conservative engineering estimate for two 183-pose rational certificates
-        and controls, not a measured checker timing. The source's 12 seconds is
-        numerical producer runtime. First complete batch has a 360-second ceiling
-        and must be measured and repriced if exceeded.
+        No geometry rerun required: primary batch completed in 34.87 wall seconds
+        and 30.55 route CPU seconds, one certificate, three jobs and two routes.
+        Remaining work is registry binding and focused admission, not an unrun
+        two-view confirmation. The original broader 0.01–0.10 CPU-hour estimate
+        remains in think-1hmn for its separate regularized/source-checker scope.

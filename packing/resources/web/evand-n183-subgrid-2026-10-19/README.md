@@ -56,9 +56,9 @@ The source also asserts:
   rational certificate side.
   The source calls it a local minimum strict modulo 27 flat motions.
   More precisely, these are numerical KKT diagnostics with 27 candidate flat modes in
-  the force-bearing subsystem and one free rattler: `exactsolve.py` lines 1032–1033
-  build the variable set from only the 182 load-bearing squares and the side.
-  The source also reports 86 wall and 897 square-square contact equations, 106
+  the force-bearing subsystem and one free rattler at source index 11: `exactsolve.py`
+  lines 1032–1033 build the variable set from only the 182 load-bearing squares and the
+  side. The source also reports 86 wall and 897 square-square contact equations, 106
   corner-corner contacts, no corner-corner MILP descent, and 73 tilted squares, 72
   load-bearing. These are numerical diagnostics, without interval proofs or a
   local-optimality theorem for the full 183-square configuration.
@@ -98,10 +98,12 @@ Both import only `sys` and `fractions` and skip pairs only where exact squared c
 distance exceeds 2. Their source text was read, without executing it.
 
 Full replay and sensitive duplicate-square and outside-wall controls are owned by
-**think-1hmn**. The engineering estimate is 0.01–0.10 CPU-hours for the two views and
-all planned routes, with a 360-second first-batch ceiling; it is not a measured checker
-timing. The source report’s 12 seconds describes numerical production and does not price
-an exact checker. No new environment or compiled tool is needed.
+**think-1hmn**. Its original engineering estimate is 0.01–0.10 CPU-hours for the two
+views and all planned routes, with a 360-second first-batch ceiling.
+The primary batch below now has measured timings; regularized-view and source-checker
+runs remain outside it.
+The source report’s 12 seconds describes numerical production and does not price an
+exact checker. No new environment or compiled tool is needed.
 
 ## Bounded Primary-Certificate Replay
 
@@ -114,8 +116,10 @@ The declaration does not name the regularized view as `same_packing`.
 Both repository geometry routes accepted the positive and rejected the duplicate-square
 and outside-container controls.
 Each route tested all 16,653 pairs in each of the three jobs: 99,918 pair decisions.
-Both positives have wall clearance exactly `5e-21` and positive pair gap about `1e-20`;
-the native receipt retains the exact fractions.
+Both positives have wall clearance exactly `1/200000000000000000000 = 5e-21` and the
+same strictly positive exact separating-axis projection gap, whose fraction is retained
+in the native receipt and review.
+That gap is not an exact shortest Euclidean distance.
 
 The one-worker batch took 34.87 seconds wall time, within its 360-second ceiling; each
 child had a 100-second deadline.
@@ -125,6 +129,7 @@ The subsequent `check --n 183` admitted all three jobs without deciding geometry
 
 - [Complete native receipt](receipts/exact-certification.json.xz)
 - [Batch declaration, commands, timings and outcomes](../../../campaign/issue-intake/intake-followup-20261019/n183-primary-replay.json)
+- [Recovered certify invocation and historical environment-script output](receipts/certify-execution-provenance.json)
 
 The two routes use `sqpack.witness.exact_verify` and
 `devtools.check_rational_witness_independent`. Their geometry implementations differ;
@@ -132,20 +137,44 @@ they share the importer’s rational parser, half-angle conversion and Python ru
 No upstream checker ran.
 The original source generator was not rerun.
 
-This is unintegrated validation evidence under **think-1hmn**. Regularized-certificate
-replay and source-checker execution remain open.
-Mapping the independent mathematical review and deciding-program metadata to the actual
-registered claim requires a separate reviewed change; no assurance rating, case bound,
-house or result ID changes here.
-Endpoint feasibility would not establish same-packing identity or a no-expansion path.
+## Independent Mathematical Review and Pending Registration
 
-Independent mathematical review is **think-glg8**, separate from replay.
-It reviews the finite feasibility implication and both certificate views, preserves the
-numerical and lineage limits above, and runs only its own retained code.
-Result ID allocation, reviewed Stage 4 integration, house adoption and the project’s
-strong regularization runs remain subsequent steps.
-A source display certificate alone does not discharge the house-regularization
-obligation.
+The
+[completed review](../../../../docs/project/reviews/review-2026-10-19-evand-n183-subgrid.md)
+under **think-glg8** accepts the primary finite upper bound
+`s(183) <= 13.999580178736252502081470897571 < 14` on the retained native replay.
+Its reviewer is OpenAI Codex system family, strong tier, maximum reasoning.
+The mapped file preserves the reviewer’s bytes and addendum, SHA-256
+`6043c154990c386c28cb2fea0ae5e6e8743dce980efafbe4ff08c3efed5557da`. The reviewer ran
+maintained receipt admission without `--replay` and reran no geometry.
+
+The
+[local evidence handoff](../../../campaign/issue-intake/intake-followup-20261019/n183-evidence-integration.yaml)
+records M1–M4, program identities and source versions, exact scope and remaining
+registration bindings.
+M1 is corrected in the intake wording: the 27 numerical candidate modes concern the
+182-square force-bearing subsystem, excluding free rattler index 11. M2 is discharged
+for the primary replay by custody, strict parsing and admission of every complete
+deciding input; the source parsers’ weaker behavior remains relevant if their separate
+checkers run later. M3 and M4 retain the regularization, identity, priority and
+missing-lineage limits.
+
+The maintained implementations are independent of the producer’s programs in the sense
+recorded by the conversion module’s read log; its author read both source checkers and
+copied or imported none of their code.
+The two routes share parsing, half-angle conversion, `Fraction`, runtime and the
+separating-axis theorem.
+This establishes neither a clean room nor distinct mathematical methods, humans or model
+families.
+
+The review proposes V3/C3 for the primary finite upper bound once the actual result
+cites registered confirming evidence and the complete deciding/premise metadata.
+This checkpoint maps the review locally; it allocates no result ID and applies no
+rating, case bound, house or release change.
+Regularized-certificate replay and source-checker execution remain separate open scope
+under **think-1hmn**; neither is needed to confirm this one original certificate.
+Endpoint feasibility would not establish same-packing identity or a no-expansion path.
+House adoption and strong-generator regularization remain subsequent obligations.
 
 To check custody from `packing/`, with the project interpreter and external scratch:
 
