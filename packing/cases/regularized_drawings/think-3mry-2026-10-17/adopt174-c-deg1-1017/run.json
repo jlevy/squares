@@ -1,0 +1,9 @@
+{
+  "id": "grid-slack-adopt174-c-deg1-1017",
+  "generator": "regularize_grid_slack/1",
+  "finished": "2026-10-17",
+  "parameters": {"near_axis_degrees":1.0,"trust":0.45,"time_limit":120.0,"stage_margin":0.0099},
+  "counts": 2,
+  "decisions": {"admit":1,"no-view":1},
+  "cost": {"cpu_seconds":64.42,"wall_seconds":64.42,"workers":1,"note":"per-count seconds the reports record, summed; no receipt of the run's own"}
+}

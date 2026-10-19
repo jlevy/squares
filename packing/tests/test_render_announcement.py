@@ -20,7 +20,7 @@ import pytest
 
 from devtools import render_announcement as ra
 from devtools.check_standing import LOWER, UPPER, Stated
-from devtools.render_recent_results import Records, load_records
+from devtools.render_recent_results import HOLDS, Records, load_records
 
 SAMPLE = [f"T-{n}" for n in range(128, 147)]
 
@@ -65,6 +65,14 @@ def test_a_bound_is_printed_to_as_many_places_as_keep_it_better_than_the_previou
     low, earlier = exact("6.7158157460820"), exact("6.71581574608")
     printed = Fraction(ra.shown(low, LOWER, earlier))
     assert earlier.high < printed <= low.low
+
+    for places in (60, 100):
+        previous = exact("10")
+        delta = Fraction(1, 10**places)
+        for direction, value in ((UPPER, 10 - delta), (LOWER, 10 + delta)):
+            printed = Fraction(ra.shown(exact(value), direction, previous))
+            assert printed == value
+            assert ra.better(exact(printed), previous, direction)
 
 
 def test_a_tied_or_trailing_bound_is_printed_at_the_usual_places() -> None:
@@ -428,7 +436,10 @@ def test_every_printed_bound_is_true_and_beats_the_previous_best_where_it_is_new
             else:
                 assert printed <= count.bound.low, (record["id"], count.n)
             if count.best and count.previous is not None:
-                assert ra.better(exact(printed), count.previous, count.direction)
+                assert ra.better(exact(printed), count.previous, count.direction), (
+                    record["id"],
+                    count.n,
+                )
             checked += 1
     assert checked > 100
 
@@ -454,7 +465,7 @@ def run(
 def test_the_announcement_of_the_sample_is_brief_and_states_no_more_than_its_rungs(
     records: Records, capsys: pytest.CaptureFixture[str]
 ) -> None:
-    lines, err = run(capsys, ["--ids", *SAMPLE, "--date", "2026-10-11"])
+    lines, err = run(capsys, ["--ids", *SAMPLE, "--date", "2026-10-11", "--all"])
     head, body = lines[0], lines[1:]
     assert head == f"11 October 2026: {len(body)} new results"
     assert body
@@ -496,7 +507,7 @@ def test_github_handles_reach_the_lines_and_their_sources_reach_stderr(
     }
     lines, err = run(
         capsys,
-        ["--ids", "T-128", "--date", "2026-10-11", "--github", "--lineage"],
+        ["--ids", "T-128", "--date", "2026-10-11", "--github", "--lineage", "--all"],
         fetch=users.get,
     )
     assert len(lines) == 2
@@ -599,16 +610,26 @@ def test_all_keeps_a_long_since_clause_postable(capsys: pytest.CaptureFixture[st
 
 def test_a_line_about_a_few_counts_prints_each_bound_where_the_line_stays_brief(
     capsys: pytest.CaptureFixture[str],
+    records: Records,
+    monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    """T-141's two bounds fit; T-151's five counts do not and stay elided (review A,
-    A8). T-149's three were the example until the intake of 14 October left it the best
-    known at 155 alone, and T-162's three until T-186 bettered it at all three on 15
-    October."""
-    lines, _ = run(capsys, ["--ids", "T-141", "T-151", "--date", "2026-10-14"])
-    assert lines[1].startswith(
+    """Two bounds fit in a current line. Supersession prose can push the same two
+    beyond the brief limit, and T-151's nine counts stay elided (review A, A8)."""
+    lines, _ = run(capsys, ["--ids", "T-141", "T-151", "--date", "2026-10-14", "--all"])
+    assert lines[1].startswith("s(n) ≤ … at n = 132, 308 (verified), since superseded ")
+    assert lines[2].startswith("s(n) ≤ … at 9 counts, n = 176\u2013305 (verified), since ")
+    entry = records.results["T-141"]
+    current = [
+        replace(count, bettered_by=(), tied_with=(), previous=None, regularized_by=())
+        for count in ra.counts(entry, records, ra.rival_bounds(records))
+    ]
+    with monkeypatch.context() as context:
+        context.setattr(ra, "counts", lambda *_args: current)
+        context.setattr(ra, "standing", lambda *_args: HOLDS)
+        line = ra.render_line(entry, records, {}, ra.Names())
+    assert line.text.startswith(
         "s(132) ≤ 11.98569, s(308) ≤ 17.99827, new best known (verified): "
     )
-    assert lines[2].startswith("s(n) ≤ … at n = 181, 238, 239, 270, 272, new best known ")
     record = {"id": "T-900", "headline": "s(n) ≤ 10", "claim": ""}
     group = [ra.Count(n, UPPER, exact(f"{n}.5")) for n in (10, 11)]
     assert ra.statement(record, group) == "s(10) ≤ 10.5, s(11) ≤ 11.5"
@@ -682,8 +703,8 @@ def test_a_refinement_of_a_requests_packings_credits_the_entry_its_claim_names(
     Chaoweeraprasit's; the line credits him, since T-151's own line no longer names 304 or
     305 (review B, B1). Since the intake of 14 October T-152 is the best known at 305
     alone, so the packing is singular."""
-    lines, err = run(capsys, ["--ids", "T-152", "--date", "2026-10-12"])
-    assert ": Francisco Couzo, refining Nate Chaoweeraprasit's packing " in lines[1]
+    lines, err = run(capsys, ["--ids", "T-152", "--date", "2026-10-12", "--all"])
+    assert ": Francisco Couzo, refining Nate Chaoweeraprasit's packings " in lines[1]
     assert "Chaoweeraprasit" in err.split("printed by name: ", 1)[1]
     refinement = ra.refined(records.results["T-152"], records)
     assert refinement is not None

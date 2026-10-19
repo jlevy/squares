@@ -598,6 +598,97 @@ def test_retain_refuses_an_asset_that_is_not_the_pinned_one(tmp_path: Path) -> N
     assert not (packet / followup.RETAINED_RECORD).exists()
 
 
+@pytest.mark.parametrize(
+    "linked", ["release", "acquisition", f"release/certificates/{NAME}/check2"]
+)
+def test_retain_refuses_linked_parents_before_any_member_publication(
+    tmp_path: Path, capsys: pytest.CaptureFixture[str], linked: str
+) -> None:
+    asset, data = retained_asset(tmp_path)
+    packet, outside = tmp_path / "packet", tmp_path / "outside"
+    packet.mkdir()
+    outside.mkdir()
+    (outside / "sentinel").write_bytes(b"outside bytes must survive")
+    if linked == "acquisition":
+        (outside / "release-assets.json").write_text(
+            json.dumps(
+                {
+                    "format": followup.RETAINED_FORMAT,
+                    "repository": "someone/square-packing",
+                    "release": "lower-bounds-v1",
+                    "retained_dir": "release",
+                    "assets": [],
+                }
+            )
+        )
+    parent = packet / linked
+    parent.parent.mkdir(parents=True, exist_ok=True)
+    parent.symlink_to(outside, target_is_directory=True)
+    before = {p.relative_to(outside): p.read_bytes() for p in outside.rglob("*")}
+
+    assert followup.main(retain_argv(tmp_path, asset, data, packet)) == 1
+    assert {p.relative_to(outside): p.read_bytes() for p in outside.rglob("*")} == before
+    assert not [p for p in packet.rglob("*") if p.is_file()]
+    assert parent.is_symlink()
+    output = capsys.readouterr()
+    assert "symlink" in output.err
+    assert "members retained" not in output.out
+
+
+@pytest.mark.parametrize(
+    "linked", ["release", "acquisition", f"release/certificates/{NAME}/check2"]
+)
+def test_check_retained_refuses_linked_parents(tmp_path: Path, linked: str) -> None:
+    asset, data = retained_asset(tmp_path)
+    packet, outside = tmp_path / "packet", tmp_path / "outside"
+    assert followup.main(retain_argv(tmp_path, asset, data, packet)) == 0
+    parent = packet / linked
+    parent.rename(outside)
+    parent.symlink_to(outside, target_is_directory=True)
+    before = {p.relative_to(outside): p.read_bytes() for p in outside.rglob("*") if p.is_file()}
+
+    problems = followup.check_retained(packet)
+    assert any("symlink" in problem for problem in problems), problems
+    assert {
+        p.relative_to(outside): p.read_bytes() for p in outside.rglob("*") if p.is_file()
+    } == before
+
+
+def test_retain_refuses_a_linked_packet_root_before_extraction(tmp_path: Path) -> None:
+    asset, data = retained_asset(tmp_path)
+    packet, outside = tmp_path / "packet", tmp_path / "outside"
+    outside.mkdir()
+    (outside / "sentinel").write_bytes(b"untouched")
+    packet.symlink_to(outside, target_is_directory=True)
+
+    assert followup.main(retain_argv(tmp_path, asset, data, packet)) == 1
+    assert sorted(p.name for p in outside.iterdir()) == ["sentinel"]
+    assert (outside / "sentinel").read_bytes() == b"untouched"
+    assert not (tmp_path / "work").exists()
+
+
+def test_member_publication_rechecks_the_manifest_parent(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    asset, data = retained_asset(tmp_path)
+    packet, outside = tmp_path / "packet", tmp_path / "outside"
+    outside.mkdir()
+    (outside / "sentinel").write_bytes(b"untouched")
+    compress = followup.compress
+
+    def link_manifest_parent(path: Path) -> Path:
+        result = compress(path)
+        (packet / "acquisition").symlink_to(outside, target_is_directory=True)
+        return result
+
+    monkeypatch.setattr(followup, "compress", link_manifest_parent)
+    assert followup.main(retain_argv(tmp_path, asset, data, packet)) == 1
+    assert sorted(p.name for p in outside.iterdir()) == ["sentinel"]
+    assert (outside / "sentinel").read_bytes() == b"untouched"
+    assert not list((packet / "release").rglob("*.json*"))
+    assert not list((packet / "release").rglob(".retain-*"))
+
+
 @pytest.mark.parametrize("collision", ["plain", "matching-plain", "gzip", "both", "receipt"])
 def test_retain_refuses_collisions_before_writing_any_packet_member(
     tmp_path: Path, capsys: pytest.CaptureFixture[str], collision: str

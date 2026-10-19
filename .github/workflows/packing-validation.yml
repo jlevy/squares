@@ -1479,6 +1479,7 @@ jobs:
             /packing/resources/web/pingyou-n272-refinement-2026-10-12/
             /packing/resources/web/dostashev-merged-bands-2026-10-13/
             /packing/resources/web/couzo-certificates-2026-10-13/
+            /packing/resources/web/pingyou-pr574-certificates-2026-10-13/
             /packing/resources/web/mishapolk-records-2026-10-14/
             /packing/resources/web/mishapolk-kkt-refinements-2026-10-14/
             /packing/resources/web/evand-n146-2026-10-14/
@@ -2057,6 +2058,7 @@ jobs:
     # name it, and the wall check treats it as `not_gating`, so a skip changes no verdict.
     if: "github.event_name != 'pull_request' || github.base_ref == 'main'"
     runs-on: macos-latest
+    timeout-minutes: 5
     defaults:
       run:
         working-directory: packing
@@ -2086,6 +2088,19 @@ jobs:
           uv run --frozen --all-extras --group dev python -c "import sqpack, sqpack.field, sqpack.verify,
           sqpack.witness, sqpack.promote.refine, sqpack.promote.contacts;
           print('sqpack imports on', __import__('platform').machine())"
+
+      - name: Native Darwin current memory and system SDK layout
+        timeout-minutes: 1
+        run: |
+          mkdir -p "$PACKING_VALIDATION_ARTIFACT_DIR"
+          uv run --frozen --all-extras --group dev python -m pytest -q -s \
+            tests/test_process_memory.py::test_live_memory_sample_is_positive \
+            tests/test_process_memory.py::test_released_allocation_does_not_leave_current_memory_above_guard \
+            tests/test_process_memory.py::test_darwin_current_memory_agrees_with_external_ps \
+            tests/test_process_memory.py::test_darwin_sdk_layout_and_signature \
+            --junitxml="$PACKING_VALIDATION_ARTIFACT_DIR/darwin-current-memory.xml"
+          uv run --frozen --all-extras --group dev python -m devtools.check_darwin_memory_results \
+            "$PACKING_VALIDATION_ARTIFACT_DIR/darwin-current-memory.xml"
 
       - name: Results a second architecture could disagree about
         # Exact predicates, the small-n exact models, and the golden basin maps
