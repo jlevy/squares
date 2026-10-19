@@ -5,8 +5,8 @@ title: "Import franciscouzo: 227, 229, 330-996: registration request (#672)"
 kind: task
 status: in_progress
 priority: 2
-version: 5
-delegate: claude-code@spud10.local
+version: 7
+delegate: lane-new
 labels:
   - result-import
 dependencies: []
@@ -14,7 +14,7 @@ parent_id: is-01m572ssbx1x412zpvsw1sb6je
 hold: null
 hold_until: null
 created_at: 2026-10-18T08:47:36.866Z
-updated_at: 2026-10-18T13:09:28.562Z
+updated_at: 2026-10-19T20:54:27.120Z
 started_at: 2026-10-18T12:53:37.251Z
 ---
 W1 intake 2026-10-18, parent think-xmxb. https://github.com/jlevy/squares/issues/672
@@ -154,3 +154,5 @@ Bounded follow-up, owned by this bead and the existing intake lanes:
 4. Preserve the exact rational side as the bound; outward decimals are display values. Complete report-order/public-envelope comparison and normal registration review before any V/C promotion, final author answer or current-record claim.
 
 Evidence commands: `gh issue view 670|672|675 --repo jlevy/squares --json body,comments`; read-only `gh api repos/franciscouzo/square-packing/contents/<source-or-metadata>?ref=<pin>` for the files above; `gh api repos/franciscouzo/square-packing/git/trees/<pin>?recursive=1` for selected Git blob/size metadata; historical jlevy verifier contents at its fixed commit. All successful metadata reads and arithmetic checks above completed without source execution. Tests run: none, by the read-only/no-replay brief. No source-level geometric blocker was found in the centre checker; CM1 blocks transferring existing receipts to 13 tighter root claims, and CM2 limits the first route's standalone evidence.
+
+2026-10-19 20:54Z lane-new: taken over from the 19 October handoff (issue #684) by the coordinator's lane brief; delegate changed from the spud10.local agent. Working in worktree scratchpad lnew/wt, branch claude/intake-2026-10-19-evand-singles (first PR: #659, #664, #669, #673).

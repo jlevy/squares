@@ -5,8 +5,8 @@ title: "Import JoostdeWinter: Improved upper bounds for n = 227, 229, 260: regis
 kind: task
 status: in_progress
 priority: 2
-version: 7
-delegate: claude-code@spud10.local
+version: 9
+delegate: lane-new
 labels:
   - result-import
 dependencies: []
@@ -17,7 +17,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-18T08:47:35.192Z
-updated_at: 2026-10-18T16:35:33.026Z
+updated_at: 2026-10-19T20:54:13.665Z
 started_at: 2026-10-18T12:36:48.824Z
 ---
 W1 intake 2026-10-18, parent think-xmxb. https://github.com/jlevy/squares/issues/668
@@ -65,3 +65,5 @@ Draft comment:
 Your report of 17 October 2026 states s(227) <= 15.563796703670, s(229) <= 15.650174756949 and s(260) <= 16.645778804182, rounded upward from the exact witnesses. Stage 2 retains those witnesses and their complete documented checker inputs at licensed successor [9bf5d9be4d0ca13a1dbef7d7953032fe87d4e81d](https://github.com/JoostdeWinter/square-packing/tree/9bf5d9be4d0ca13a1dbef7d7953032fe87d4e81d); the claim inputs are unchanged from the original publication.
 
 A bounded source-level mathematical read found no blocking geometry finding. Exact witness-to-record binding, controls and complete replay remain pending. Stage 3 registration will preserve this report before the later Couzo and Daniel reports, with your lineage retained; it has not yet been registered.
+
+2026-10-19 20:54Z lane-new: taken over from the 19 October handoff (issue #684) by the coordinator's lane brief; delegate changed from the spud10.local agent. Working in worktree scratchpad lnew/wt, branch claude/intake-2026-10-19-evand-singles (first PR: #659, #664, #669, #673).
