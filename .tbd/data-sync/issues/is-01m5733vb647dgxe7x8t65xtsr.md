@@ -5,7 +5,7 @@ title: "Resolve credit correction: evand: Credit correction request: s(146) and 
 kind: task
 status: in_progress
 priority: 2
-version: 6
+version: 7
 delegate: lane-new
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m572ssbx1x412zpvsw1sb6je
 hold: null
 hold_until: null
 created_at: 2026-10-18T08:47:37.317Z
-updated_at: 2026-10-19T21:41:23.728Z
+updated_at: 2026-10-19T22:24:04.197Z
 started_at: 2026-10-18T13:04:20.677Z
 ---
 W1 intake 2026-10-18, parent think-xmxb. https://github.com/jlevy/squares/issues/673
@@ -44,3 +44,5 @@ Stage 2 still needs the relevant lineage records and the scope of the path argum
 2026-10-19 20:54Z lane-new: taken over from the 19 October handoff (issue #684) by the coordinator's lane brief; delegate changed from the spud10.local agent. Working in worktree scratchpad lnew/wt, branch claude/intake-2026-10-19-evand-singles (first PR: #659, #664, #669, #673).
 
 2026-10-19 21:40Z lane-new: credit correction applied locally under epistemics.md 'the source says who did what': adopt_houses CREDITS at 146 and 308 name Evan Daniel as finder (146: improved_by none; 308: improved_by PingYou Ltd); n-146.md and n-308.md refreshed through the writer; T-187 and T-141 notes say so; credit lines unchanged; the author's general rule not adopted. Lands in the evand PR.
+
+2026-10-19 22:23Z lane-new: committed in be6aa80aa (CREDITS 146/308, records refreshed through the writer, T-187/T-141 notes); result-requests #673 ask done.

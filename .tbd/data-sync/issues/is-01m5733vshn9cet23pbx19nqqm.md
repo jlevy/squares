@@ -5,7 +5,7 @@ title: "Import evand: s(229) ≤ 15.650163254859: registration request (#674)"
 kind: task
 status: in_progress
 priority: 2
-version: 9
+version: 10
 delegate: lane-new
 labels:
   - result-import
@@ -17,7 +17,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-18T08:47:37.776Z
-updated_at: 2026-10-19T21:40:58.171Z
+updated_at: 2026-10-19T22:23:53.485Z
 started_at: 2026-10-18T12:48:51.614Z
 ---
 W1 intake 2026-10-18, parent think-xmxb. https://github.com/jlevy/squares/issues/674
@@ -53,3 +53,5 @@ The retained lineage is Daniel after Couzo's packing, after de Winter's. Stage 3
 2026-10-19 20:54Z lane-new: taken over from the 19 October handoff (issue #684) by the coordinator's lane brief; delegate changed from the spud10.local agent. Working in worktree scratchpad lnew/wt, branch claude/intake-2026-10-19-evand-singles (first PR: #659, #664, #669, #673).
 
 2026-10-19 21:40Z lane-new: import declaration and certify receipt for the packet(s), check --replay passed on both maintained routes (d7413ccdb, claude/intake-2026-10-19-evand-singles). Stage 4 review requested (covers T-197, T-198, T-199, T-218, T-219). Adoption at the count written locally after the review; strong runs under think-ip1p.
+
+2026-10-19 22:23Z lane-new: V3/C3 after the 19 October review (0466eb5aa); house adopted at the count (be6aa80aa, claude/intake-2026-10-19-evand-singles); regularization runs under think-ip1p finishing.
