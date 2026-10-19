@@ -9,6 +9,7 @@ scope: >
   excluded because its role and lifecycle come from resources/README.md rather than
   current project documentation rules.
 documents:
+  - {path: docs/project/reviews/review-2026-10-16-evand-exact-sides-639.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-19-pr665-integration-diagnostic.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-19-pr671-integration-diagnostic.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-16-pingyou-n29.md, role: review, authority: record, lifecycle: retained}
@@ -38,6 +39,7 @@ documents:
   - {path: docs/project/reviews/review-2026-10-13-fitzharding-n17-mathematical-correctness.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-13-overbeck-n17-mathematical-correctness.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-13-fitzharding-n17-lean.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-15-fitzharding-n17-source-build-admission.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-13-verification-gaps.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-13-overbeck-n17-candidate-second.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-12-kleddamag-n17-candidate.md, role: review, authority: record, lifecycle: retained}
@@ -627,6 +629,7 @@ documents:
   - {path: TUTORIAL-ADVANCED.md, role: tutorial, authority: supporting, lifecycle: maintained}
   - {path: docs/project/specs/active/plan-2026-10-14-basic-and-advanced-tutorials.md, role: plan, authority: current, lifecycle: transient}
   - {path: docs/project/specs/active/plan-2026-10-14-ci-iteration-cost.md, role: plan, authority: current, lifecycle: transient}
+  - {path: docs/project/specs/active/plan-2026-10-15-formal-proof-verification-rubric.md, role: plan, authority: current, lifecycle: transient}
   - {path: docs/project/reviews/review-2026-10-14-tutorial-split-editorial.md, role: review, authority: record, lifecycle: retained}
   - {path: packing/atlas/README.md, role: component-guide, authority: supporting, lifecycle: maintained}
   - {path: packing/atlas/enumerated/README.md, role: component-guide, authority: supporting, lifecycle: maintained}

@@ -74,6 +74,66 @@ asserted but unavailable proof; both require an explanatory `notes` field.
 The evidence schema separately enforces its own provenance, limitations, and
 method-specific fields.
 
+### Reported Formal Proofs and Source Builds
+
+A readable formalization and a credible announcement are not a successful proof run.
+Inspect the theorem’s definitions, scope and mathematical premises, the complete build
+record and its source/toolchain pins, and the theorem’s axiom receipt separately.
+A build of the statement or construction proves only that component; samples of finite
+certificate checks do not establish the complete theorem.
+
+An inspected, retained record of a complete producer build can earn V3 without a replay
+here.
+Keep the original report as `assurance: reported` and add a source-build entry with
+`assurance: verified`, `method: proof-assistant-checked`, `origin: external` and
+`performed_by: source-author`. Its `replay_status: passed` describes that producer
+execution. It requires a retained `build_receipt`, `axioms_receipt`, explicit full
+coverage, a scoped `proof` with an `audit_record`, and a qualifying dated
+`external_review` explaining what was inspected.
+The audit must assess the public proof’s recoverability, build pins, execution
+completeness, statement fidelity and trust boundary.
+Conflicting or incomplete source execution records stay reported.
+A third party’s build retained here is held to the same record, with its own receipts: a
+confirming claim never needs less retained evidence than the producer’s. A build or
+axiom receipt records one execution, so entries naming different actors never cite the
+same receipt.
+The execution actor and origin must agree, for every method: the producer’s
+run is external, a retained third-party run is independently-external, and a run here
+names the repository.
+A proof-assistant build here is `replayed-here`; reading someone else’s build receipt is
+a read on their entry, never `audited-here`. An origin label alone cannot supply
+confirmation.
+
+A conditional proof verifies its implication even while a premise remains open.
+Its unconditional conclusion takes the weakest support along every cited premise chain,
+separately for V and C. Each premise needs a complete, scope-covering machine execution,
+exact, interval-certified or proof-assistant; samples, missing references and circular
+discharge supply no whole-claim rung.
+A published or audited proof of a premise is read, not run, and discharges nothing, even
+with a passing status: until a premise is executed, its theorem stands as the
+implication.
+A producer’s formal build, once admitted under the rule above, can discharge
+a premise for V without discharging C; a producer’s exact or interval run has no such
+admission and discharges nothing.
+Reading the conditional claim can still support C1.
+
+This credits the source’s verification and does not independently authenticate its
+execution. C remains C0 or C1 until a complete confirming run exists.
+The source-build entry can support V4 or V5 when the corresponding retained human and
+adversarial review records qualify; neither high V nor the word *formal* raises C. The
+same project’s internal team may provide those records subject to the rubric’s
+independence-from-author requirements.
+An AI team’s inspection alone supplies neither human oversight nor human expert review.
+
+State the actual trust boundary.
+Lean’s standard axioms with `native_decide` can support formal verification, but it
+trusts the compiler and native execution as well as the kernel.
+An axiom receipt is evidence to examine, not a guarantee that the formal statement
+matches the intended mathematical claim or that all premises were discharged.
+
+The rule was first applied in the
+[admission audit of 15 October 2026](docs/project/reviews/review-2026-10-15-fitzharding-n17-source-build-admission.md).
+
 ## Confirmation
 
 Confirmation counts only work performed beyond the producing run: evidence recorded as
