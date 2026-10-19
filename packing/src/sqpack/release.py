@@ -1458,8 +1458,6 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "packing/devtools/overview_sections.py",
             "packing/devtools/register_gupta_reports.py",
             "packing/devtools/regularized_drawings.py",
-            "packing/devtools/render_n11_lower_bounds_explainer.py",
-            "packing/devtools/render_overview.py",
             "packing/devtools/run_negative_controls.py",
             "packing/devtools/source_supersession.py",
             "packing/devtools/validate_schemas.py",
@@ -1492,10 +1490,9 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "producers do not run registration. Schema validation retains its "
             "refusals while reusing already-read metadata. These shared import paths "
             "are conservative paper inputs. The retained claim documents and source "
-            "pin match main; no new byte-identical PDF build is claimed. The changed "
-            "public development guide and opt-in site code-symbol font are owned "
-            "separately by the site patch cut. The paper renderer keeps its default "
-            "font CSS; only site page assets opt into the Unicode code-symbol font. "
+            "pin match main; no new byte-identical PDF build is claimed. The development "
+            "guide and the opt-in site code-symbol font this decision once named reached "
+            "main separately (#618, site v0.7.4) and are no longer inputs here."
         ),
     ),
     ReleaseNoPublicChange(
