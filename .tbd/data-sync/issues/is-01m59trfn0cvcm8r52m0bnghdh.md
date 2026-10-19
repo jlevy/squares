@@ -5,15 +5,17 @@ title: "PR #578 F1: detach cached articles from response shells locally"
 kind: task
 status: closed
 priority: 3
-version: 4
+version: 5
 delegate: codex-578-f1-fix-20261019
 labels: []
 dependencies: []
 parent_id: is-01m59tb83e779xjn19g896fa78
+child_order_hints:
+  - is-01m59v8t4axh5110qn5f89364m
 hold: null
 hold_until: null
 created_at: 2026-10-19T10:19:19.582Z
-updated_at: 2026-10-19T10:24:41.959Z
+updated_at: 2026-10-19T10:28:14.601Z
 started_at: 2026-10-19T10:19:51.499Z
 closed_at: 2026-10-19T10:24:41.957Z
 close_reason: F1 fixed locally in9812f19afba96325547ec02644cab03d138c4b67 with red-green ownership regression and29passing Node tests; coordinator owns integration/CI/disposition publication.
