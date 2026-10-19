@@ -1,0 +1,14 @@
+START 2026-10-19T21:47:53Z load=15.82 18.80 20.02 cmd: uv run --frozen --all-extras --group dev python -I /tmp/claude-0/-home-user-squares/b1f8ff4e-5e49-561e-aa0f-a76f1a5fe076/scratchpad/rv-evand/packing/resources/web/evand-n155-explorer-2026-10-17/review/review-2026-10-19/programs/dilation_1019.py --json resources/web/evand-n155-explorer-2026-10-17/review/review-2026-10-19/outputs/dilation-2026-10-19.json
+warning: The `UV_NATIVE_TLS` environment variable is deprecated and will be removed in a future release. Use `UV_SYSTEM_CERTS` instead.
+Traceback (most recent call last):
+  File "/tmp/claude-0/-home-user-squares/b1f8ff4e-5e49-561e-aa0f-a76f1a5fe076/scratchpad/rv-evand/packing/resources/web/evand-n155-explorer-2026-10-17/review/review-2026-10-19/programs/dilation_1019.py", line 281, in <module>
+    raise SystemExit(main(sys.argv[1:]))
+                     ~~~~^^^^^^^^^^^^^^
+  File "/tmp/claude-0/-home-user-squares/b1f8ff4e-5e49-561e-aa0f-a76f1a5fe076/scratchpad/rv-evand/packing/resources/web/evand-n155-explorer-2026-10-17/review/review-2026-10-19/programs/dilation_1019.py", line 266, in main
+    report: dict[str, object] = {key: analyse(key, packet, i, c) for key, packet, i, c in CASES}
+                                      ~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/tmp/claude-0/-home-user-squares/b1f8ff4e-5e49-561e-aa0f-a76f1a5fe076/scratchpad/rv-evand/packing/resources/web/evand-n155-explorer-2026-10-17/review/review-2026-10-19/programs/dilation_1019.py", line 190, in analyse
+    min(cc for (ci, _i, _w), (cc, _j, _v) in zip(walls_in, walls_cert, strict=True) if ci < Fraction(1, 10**14))
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: min() iterable argument is empty
+END 2026-10-19T21:47:58Z exit=1 wall=4.977737758s load=15.76 18.73 19.99

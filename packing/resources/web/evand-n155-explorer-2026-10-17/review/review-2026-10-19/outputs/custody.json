@@ -1,0 +1,177 @@
+[
+ {
+  "packet": "evand-n155-explorer-2026-10-17",
+  "source": "https://github.com/evand/square-packing",
+  "pin": "59326b86291b76c39d843f3f156e8f25fa0f6e3f",
+  "pin_is_ancestor_of_default_branch": true,
+  "default_branch_head": "3a9948c781be668b1547cc2bf64a0d1e614f9bca",
+  "tree": "b8d24c45c5d5981f41111a8bee19aa54ce2c908d",
+  "committed": "2026-10-17T08:48:34-06:00",
+  "authored": "2026-10-17T08:48:34-06:00",
+  "recorded_committed_utc": "2026-10-17T14:48:34Z",
+  "manifest_lines": 18,
+  "manifest_bytes": 684677,
+  "pinned_only": 3,
+  "retained": 15,
+  "retained_bytes_decompressed": 186330,
+  "issue_digests": {
+   "search/packer/candidates/s155_ex2.cert": {
+    "printed": "a1a3b6e7c2ce4d7de79efc2e07fc0bf53616dc44b732a2849b4dc4d8f7e2c4cc",
+    "equal": true,
+    "commits_touching_path": [
+     "59326b86291b76c39d843f3f156e8f25fa0f6e3f 2026-10-17T08:48:34-06:00"
+    ],
+    "same_blob_at_default_branch_head": true
+   },
+   "search/packer/candidates/s155_ex2_regularized.cert": {
+    "printed": "ab3c0b93aa205a907da5387cc119df11164c0a6d63b49b81332d7ce77910a897",
+    "equal": true,
+    "commits_touching_path": [
+     "59326b86291b76c39d843f3f156e8f25fa0f6e3f 2026-10-17T08:48:34-06:00"
+    ],
+    "same_blob_at_default_branch_head": true
+   }
+  },
+  "problems": []
+ },
+ {
+  "packet": "evand-n229-dilation-2026-10-17",
+  "source": "https://github.com/evand/square-packing",
+  "pin": "e0338c7becf95dbc7584b48d8868c0a1cd21079c",
+  "pin_is_ancestor_of_default_branch": true,
+  "default_branch_head": "3a9948c781be668b1547cc2bf64a0d1e614f9bca",
+  "tree": "786e8d23be7e3ca010a969e8c64a7eed557e54f5",
+  "committed": "2026-10-17T17:09:24-06:00",
+  "authored": "2026-10-17T17:09:24-06:00",
+  "recorded_committed_utc": "2026-10-17T23:09:24Z",
+  "manifest_lines": 9,
+  "manifest_bytes": 85722,
+  "pinned_only": 0,
+  "retained": 9,
+  "retained_bytes_decompressed": 85722,
+  "issue_digests": {
+   "search/packer/candidates/s229.cert": {
+    "printed": "0366e8178e37d7c5b4baf002d35f4c1088b4e20ab8f90283d418f634c8af204d",
+    "equal": true,
+    "commits_touching_path": [
+     "e0338c7becf95dbc7584b48d8868c0a1cd21079c 2026-10-17T17:09:24-06:00"
+    ],
+    "same_blob_at_default_branch_head": true
+   },
+   "search/packer/candidates/s229.input.txt": {
+    "printed": "7df8cd6fe3252fb8b015fea731229ef065130498014f1660aa0ccf435ee990fe",
+    "equal": true,
+    "commits_touching_path": [
+     "e0338c7becf95dbc7584b48d8868c0a1cd21079c 2026-10-17T17:09:24-06:00"
+    ],
+    "same_blob_at_default_branch_head": true
+   }
+  },
+  "problems": []
+ },
+ {
+  "packet": "evand-n229-dilation-update-2026-10-18",
+  "source": "https://github.com/evand/square-packing",
+  "pin": "00e68dfbe1d29ab5dbab1cddfb8f6ca19d5470db",
+  "pin_is_ancestor_of_default_branch": true,
+  "default_branch_head": "3a9948c781be668b1547cc2bf64a0d1e614f9bca",
+  "tree": "f474b16e60f8d9f08dd629c71ca64990deed7e3f",
+  "committed": "2026-10-17T19:35:40-06:00",
+  "authored": "2026-10-17T19:35:40-06:00",
+  "recorded_committed_utc": "2026-10-18T01:35:40Z",
+  "manifest_lines": 11,
+  "manifest_bytes": 130598,
+  "pinned_only": 2,
+  "retained": 9,
+  "retained_bytes_decompressed": 84052,
+  "issue_digests": {
+   "search/packer/candidates/s229_v2.cert": {
+    "printed": "1a35a7806b6cc01b232d5c634efdbe789c7df979cec6ab28d6ab283ac2b47e23",
+    "equal": true,
+    "commits_touching_path": [
+     "00e68dfbe1d29ab5dbab1cddfb8f6ca19d5470db 2026-10-17T19:35:40-06:00"
+    ],
+    "same_blob_at_default_branch_head": true
+   },
+   "search/packer/candidates/s229_v2.input.txt": {
+    "printed": "7b2bf80771e8d96f11931e5080f18c0d623b3d4373b9693e4d338acbf4ffcf53",
+    "equal": true,
+    "commits_touching_path": [
+     "00e68dfbe1d29ab5dbab1cddfb8f6ca19d5470db 2026-10-17T19:35:40-06:00"
+    ],
+    "same_blob_at_default_branch_head": true
+   }
+  },
+  "problems": []
+ },
+ {
+  "packet": "evand-n236-2026-10-16",
+  "source": "https://github.com/evand/square-packing",
+  "pin": "5ad00693899ef50ccf6502f0346187cc422cc914",
+  "pin_is_ancestor_of_default_branch": true,
+  "default_branch_head": "3a9948c781be668b1547cc2bf64a0d1e614f9bca",
+  "tree": "52a60db559f7510d9d419418372ea4a26c2c3440",
+  "committed": "2026-10-16T08:03:49-06:00",
+  "authored": "2026-10-16T08:03:49-06:00",
+  "recorded_committed_utc": "2026-10-16T14:03:49Z",
+  "manifest_lines": 18,
+  "manifest_bytes": 715732,
+  "pinned_only": 5,
+  "retained": 13,
+  "retained_bytes_decompressed": 225971,
+  "issue_digests": {
+   "search/packer/candidates/s236_bm3c.cert": {
+    "printed": "21dbf6792bec64b06ab5fc1d6ac56a17432f971431100fdbe63e92d23bc091c9",
+    "equal": true,
+    "commits_touching_path": [
+     "5ad00693899ef50ccf6502f0346187cc422cc914 2026-10-16T08:03:49-06:00"
+    ],
+    "same_blob_at_default_branch_head": true
+   },
+   "search/packer/candidates/s236_bm3c_regularized.cert": {
+    "printed": "abae0c5240f986373a4c49f860004ba3b187495579b4f88d41bfec0d9015a546",
+    "equal": true,
+    "commits_touching_path": [
+     "5ad00693899ef50ccf6502f0346187cc422cc914 2026-10-16T08:03:49-06:00"
+    ],
+    "same_blob_at_default_branch_head": true
+   }
+  },
+  "problems": []
+ },
+ {
+  "packet": "evand-n271-2026-10-17",
+  "source": "https://github.com/evand/square-packing",
+  "pin": "757b40bc6c5f681033ff1572177d408afbf26dfe",
+  "pin_is_ancestor_of_default_branch": true,
+  "default_branch_head": "3a9948c781be668b1547cc2bf64a0d1e614f9bca",
+  "tree": "205fdb1d8838747d2f2fc455436e7f6461e70139",
+  "committed": "2026-10-16T22:29:03-06:00",
+  "authored": "2026-10-16T22:29:03-06:00",
+  "recorded_committed_utc": "2026-10-17T04:29:03Z",
+  "manifest_lines": 18,
+  "manifest_bytes": 765595,
+  "pinned_only": 5,
+  "retained": 13,
+  "retained_bytes_decompressed": 260746,
+  "issue_digests": {
+   "search/packer/candidates/s271_ex1.cert": {
+    "printed": "48abf7ca68909c42e0aaa5215d4d578f4cdba29d6188775012ae24636e02d680",
+    "equal": true,
+    "commits_touching_path": [
+     "757b40bc6c5f681033ff1572177d408afbf26dfe 2026-10-16T22:29:03-06:00"
+    ],
+    "same_blob_at_default_branch_head": true
+   },
+   "search/packer/candidates/s271_ex1_regularized.cert": {
+    "printed": "4d4d4e25604b2c492047b44144249e3d69be53db061ab51e26dab39e8fb12160",
+    "equal": true,
+    "commits_touching_path": [
+     "757b40bc6c5f681033ff1572177d408afbf26dfe 2026-10-16T22:29:03-06:00"
+    ],
+    "same_blob_at_default_branch_head": true
+   }
+  },
+  "problems": []
+ }
+]
