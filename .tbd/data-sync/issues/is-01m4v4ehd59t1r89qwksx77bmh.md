@@ -5,7 +5,7 @@ title: "Merge the n = 17 stack (#560, #571, #577) and later landings of main int
 kind: task
 status: open
 priority: 2
-version: 33
+version: 34
 spec_path: docs/project/specs/active/plan-2026-10-10-contributor-profiles.md
 delegate: null
 labels: []
@@ -20,10 +20,11 @@ child_order_hints:
   - is-01m59jfeg786bcnxfbrm0mmjq3
   - is-01m59kfzac51p79k9q2myr0t18
   - is-01m5a4zc4pv94653zmjwbj73wc
+  - is-01m5a5x0yke5qr3pas87kt8wvd
 hold: null
 hold_until: null
 created_at: 2026-10-13T17:20:02.981Z
-updated_at: 2026-10-19T13:17:51.125Z
+updated_at: 2026-10-19T13:34:02.706Z
 started_at: 2026-10-13T17:20:09.838Z
 ---
 Watch origin/main and merge it into the profiles branch, keeping both the Overbeck and Hosono renames, reconciling the census and regenerating views. Stack merged in 37b1c8bf7.
