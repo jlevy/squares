@@ -34,6 +34,8 @@ from sqpack.assurance import (
     check_case_semantics,
     check_evidence_semantics,
     conditional_problems,
+    formal_run_elsewhere,
+    shared_receipt_problems,
 )
 from sqpack.known_best import KNOWN_BEST_CORPUS
 from sqpack.yamlio import load_yaml, safe_load
@@ -178,6 +180,35 @@ def check(path: pathlib.Path) -> list[str]:
     return errs
 
 
+def source_build_file_problems(record: dict, repo: pathlib.Path = REPO) -> list[str]:
+    """A credited formal build run elsewhere must expose the receipts and statement audit
+    it cites."""
+    paths = {"build_receipt": record.get("build_receipt")}
+    if not paths["build_receipt"]:
+        return []
+    if formal_run_elsewhere(record):
+        proof = record.get("proof") or {}
+        paths.update(
+            {
+                "axioms_receipt": record.get("axioms_receipt"),
+                "proof.source": proof.get("source"),
+                "proof.audit_record": proof.get("audit_record"),
+            }
+        )
+    problems: list[str] = []
+    for field, value in paths.items():
+        path = pathlib.PurePosixPath(str(value or ""))
+        resolved = (repo / path).resolve()
+        if (
+            path.is_absolute()
+            or ".." in path.parts
+            or not resolved.is_relative_to(repo.resolve())
+            or not resolved.is_file()
+        ):
+            problems.append(f"{record['id']}: {field} must name a retained repository file")
+    return problems
+
+
 def cross_checks() -> list[str]:
     """Invariants a JSON Schema cannot express."""
     errs = []
@@ -221,9 +252,11 @@ def cross_checks() -> list[str]:
     evidence_by_id = {record["id"]: record for record in evidence_records}
     for record in evidence_records:
         errs.extend(check_evidence_semantics(record))
+        errs.extend(source_build_file_problems(record))
     # A conditional theorem's hypotheses name the runs that discharge them, and each of
     # those is a passing replay that covers the theorem's cases.
     errs.extend(f"evidence: {error}" for error in conditional_problems(evidence_by_id))
+    errs.extend(f"evidence: {error}" for error in shared_receipt_problems(evidence_by_id))
     # Which programs verified each entry, and whose: every id resolves in the verifier
     # registry, and the registry's own paths and records resolve (epistemics.md,
     # Confirmation).

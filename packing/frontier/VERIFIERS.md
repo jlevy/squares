@@ -26,7 +26,7 @@ second implementation agrees.
 ## The Short Version
 
 - **172** programs: **50** external and **122** first-party; **120** decide claims and **52** check premises.
-- **543** of **648** evidence entries name the programs that verified them: 274 reproduced with the producer’s code, 235 independently re-implemented, 21 re-implemented, sharing the producer’s components, 13 no relation: a proof, a derivation or a report.
+- **544** of **649** evidence entries name the programs that verified them: 275 reproduced with the producer’s code, 235 independently re-implemented, 21 re-implemented, sharing the producer’s components, 13 no relation: a proof, a derivation or a report.
 
 ## Programs
 
@@ -75,7 +75,7 @@ second implementation agrees.
 | [`V-overbeck-n17-check-py`](#v-overbeck-n17-check-py) | check.py | Overbeck | external | decides | 2 | 1 |
 | [`V-overbeck-n17-capture-checkers`](#v-overbeck-n17-capture-checkers) | recompute_slice.py | Overbeck | external | decides | 2 | 1 |
 | [`V-overbeck-n17-tree-checkers`](#v-overbeck-n17-tree-checkers) | wxcheck_v30.py and wxcheck2_v30.js | Overbeck | external | decides | 2 | 1 |
-| [`V-fitzharding-n17-lean`](#v-fitzharding-n17-lean) | The sq17-lean Lean 4 development (Sq17Lean) | Fitzharding | external | decides | 1 | 1 |
+| [`V-fitzharding-n17-lean`](#v-fitzharding-n17-lean) | The sq17-lean Lean 4 development (Sq17Lean) | Fitzharding | external | decides | 2 | 1 |
 | [`V-check-basic-bounds`](#v-check-basic-bounds) | devtools.check_basic_bounds | Squares Project (Levy) | first-party | decides | 3 | 16 |
 | [`V-optimal-moduli`](#v-optimal-moduli) | cases.small_n.optimal_moduli | Squares Project (Levy) | first-party | decides | 1 | 0 |
 | [`V-sqpack-verify`](#v-sqpack-verify) | sqpack.verify | Squares Project (Levy) | first-party | decides | 72 | 61 |
@@ -1109,6 +1109,7 @@ Proves Sq17.square17_optimality, s(17) = L, in Lean 4.34.1 with Mathlib v4.34.1 
 
 | evidence | run | code | coverage | results |
 | --- | --- | --- | --- | --- |
+| `E-n017-fitzharding-lean-source-build` | the source’s own run | reproduced with the producer’s code | full: the source's 4,951-module import closure of Sq17.square17_optimality | T-154 |
 | `E-n017-fitzharding-lean-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-154 |
 
 ### `V-check-basic-bounds`
