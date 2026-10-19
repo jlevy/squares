@@ -31,7 +31,9 @@ def test_known_best_chunk_evidence_profile_replays_byte_for_byte() -> None:
     # Re-derived by `--update` after the house adoption of 11 October 2026 (think-fvz4),
     # which moved n = 70 to T-146 and n = 84 and 86 to T-130: 24 fewer structured squares
     # (n = 86 structures 50 where Xu's packing structured 84), and the sensitivity sweep
-    # now moves 86 rather than 70 and 84, with no within-budget flip left.
+    # now moves 86 rather than 70 and 84, with no within-budget flip left. The adoption of
+    # 17 October 2026 (think-30n2) moved n = 29 from the catalogue's stratum to the
+    # packets' (T-195), the same packing, so only the strata move.
     assert profile["aggregate"] == {
         "case_count": 36,
         "contact_component_count": 164,
@@ -57,24 +59,24 @@ def test_known_best_chunk_evidence_profile_replays_byte_for_byte() -> None:
         },
         "source_strata": [
             {
-                "case_count": 30,
+                "case_count": 29,
                 "fully_structured_cases": 8,
                 "sensitivity_changed_ns": [71],
                 "source_kind": "kingbird-derived-facts",
-                "square_count": 1413,
-                "structured_fraction": "0.96178343949",
-                "structured_square_count": 1359,
-                "within_six_components_and_three_free_cases": 23,
+                "square_count": 1384,
+                "structured_fraction": "0.963150289017",
+                "structured_square_count": 1333,
+                "within_six_components_and_three_free_cases": 22,
             },
             {
-                "case_count": 6,
+                "case_count": 7,
                 "fully_structured_cases": 1,
                 "sensitivity_changed_ns": [68, 86, 88],
                 "source_kind": "packet-derived-facts",
-                "square_count": 447,
-                "structured_fraction": "0.832214765101",
-                "structured_square_count": 372,
-                "within_six_components_and_three_free_cases": 2,
+                "square_count": 476,
+                "structured_fraction": "0.836134453782",
+                "structured_square_count": 398,
+                "within_six_components_and_three_free_cases": 3,
             },
         ],
         "square_count": 1860,

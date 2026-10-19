@@ -408,6 +408,21 @@ degrees (`leftovers-audit-deg1-1016` and `leftovers-audit-deg5-1016`), which
 straightened nothing and drew the drawn view’s measures, so nothing was admitted, and
 `grid-slack-timing.tsv`, each grid-slack invocation’s measured wall, user and system
 seconds.
+On 17 October 2026 the first adoption under the house rule moved 29 to PR #622’s
+certificate (T-195), PingYou Ltd’s tighter certificate of Thomas Schadt’s packing as
+David Ellsworth improved it (think-30n2). Both generators had run on that witness the
+day before, on a trial branch that wrote it byte for byte as the adoption does: Evan
+Daniel’s regularizer (`evand-regularize-adopt-2026-10-16-n29-evand`) and grid-slack at
+0.5, 1 and 5 degrees (`grid-slack-adopt-2026-10-16-n29-grid-0.5`, `-grid-1` and
+`-grid-5`), about 2.5 CPU-minutes in all.
+Grid-slack changes no square and ties the house drawing on every goal, and his view,
+$5.93 \times 10^{-20}$ above the certificate’s side, is held at row 4, so 29 is decided
+with no better view (`devtools.default_drawings.SETTLED`) and draws its house.
+The evidence is retained in
+[`cases/regularized_drawings/think-30n2-2026-10-16/`](../../cases/regularized_drawings/think-30n2-2026-10-16/),
+in the same layout: `selection-n29.json` and `selection-n29.md`, the driver’s
+`receipt.json`, each run’s `report.json`, gzip-compressed, and a `run.json` for each
+grid-slack run, the block `regularize_grid_slack.run_block` computes.
 
 Every drawn view carries its regularization in the register’s terms (`by: project`, the
 method, the side and the identity measured here), and `results.yaml`’s

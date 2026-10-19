@@ -120,7 +120,10 @@ def test_retained_certificates_replay_and_match_the_receipt() -> None:
     assert summary["proves_B_times_ub"] == summary["net_aligned_routes"] == 64
 
 
-@pytest.mark.parametrize("n", [5, 29, 64])
+# The receipt keeps the witnesses of 2 October 2026, so it samples counts whose house has
+# not moved since: 29 left the sample on 17 October, when its witness became PR #622's
+# certificate (T-195), as 51, 68 to 70, 83 to 84 and 86 to 88 had moved before.
+@pytest.mark.parametrize("n", [5, 37, 64])
 def test_receipt_rows_reproduce_from_the_witnesses_and_source_table(n: int) -> None:
     receipt = json.loads((RECEIPTS / "ceiling-certificates-2026-10-02.json").read_text())
     row, _ = tool.certify(n, tool.source_table()[n])

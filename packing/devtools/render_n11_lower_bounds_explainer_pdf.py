@@ -107,8 +107,10 @@ OUTPUT = PAGE.with_suffix(".pdf")
 #: pinned Linux and macOS Chromium builds. A one-line metric change once moved Figure 1
 #: and expanded the paper from 17 pages to 18 while every other check stayed green.
 #: The theorem-first introduction, complete T-025/T-026 derivation, and final assurance
-#: links deliberately bring the reviewed v0.4.0 edition to 22.
-EXPECTED_PAGE_COUNT = 22
+#: links deliberately brought the reviewed v0.4.0 edition to 22. The v0.4.8 publication
+#: draws 23 pages on the pinned Linux and macOS Chromium builds, including its final
+#: reference and colophon page.
+EXPECTED_PAGE_COUNT = 23
 
 #: The two fields Chromium stamps from the clock, and the only two that move between
 #: renders of one page. Normalised rather than removed: the length has to stay put or

@@ -56,6 +56,33 @@ Direct renderer commands do not pass through the validator; export
 `DYLD_FALLBACK_LIBRARY_PATH=/opt/homebrew/lib` before running them when Homebrew’s
 library is otherwise outside the loader’s path.
 
+### Current memory in bounded diagnostics
+
+`devtools.process_memory.current_memory_bytes()` reads the current process’s resident
+bytes on Linux, Windows and macOS. Lifetime peak reporting is separate: releasing a
+mapping must lower a current-memory guard even when its historical peak stays high.
+On Darwin it queries the calling PID through cached `/usr/lib/libproc.dylib`, reading
+`proc_taskinfo.pti_resident_size` as declared in
+[Apple’s proc_info.h](https://github.com/apple-oss-distributions/xnu/blob/main/bsd/sys/proc_info.h).
+Each query owns a fresh buffer and uses the current PID; the cache holds only the
+library binding. Missing libraries or symbols, failed or partial queries, and zero
+resident bytes raise `OSError`. Current RSS is distinct from physical footprint and
+lifetime peak. The API measures only the calling process, not its children or available
+system memory.
+
+The `macos-portability` job requires four successful native memory cases with zero skips
+under a one-minute step and a five-minute job ceiling: a positive sample, a
+touched/released 96 MiB mapping, an independent `ps` RSS reading, and an installed-SDK
+oracle for the structure’s size, alignment, field offsets and widths, flavor, buffer
+size and C function signature.
+Guzhou0806 contributed the SDK oracle and bounded CI controls in
+[PR407](https://github.com/jlevy/squares/pull/407).
+`devtools.check_darwin_memory_results` checks the JUnit case identities and results; the
+XML remains in the job’s validation artifact.
+Native results qualify the tested architecture and SDK only.
+Windows tests and mocked failures do not certify Darwin.
+The job retains its existing non-gating policy and stacked-PR selection.
+
 ### Windows worker supervision
 
 Windows is not a supported development host, and `packing-validate` refuses to run on
@@ -1994,7 +2021,7 @@ Paper content and typesetting revisions advance the affected paper’s edition; 
 navigation or footer update keeps the paper’s content edition.
 
 The ordinary documentation gate runs `devtools.check_release_impact`. It compares
-producer-owned inputs against the local main merge base and requires a disposition for
+producer-owned inputs against the comparison merge base and requires a disposition for
 each candidate component: a valid owning successor, or a fresh `ReleaseNoPublicChange`
 review in `release.py` naming the exact changed paths, outputs examined and reason.
 A prior no-change review cannot excuse another batch.
@@ -2009,8 +2036,15 @@ appropriate; an input diff does not prove visual equality.
 The existing page and PDF checks still verify the actual artifacts.
 `--baseline-ref origin/main` uses the branch’s merge base; `--base` selects a delivery
 baseline explicitly.
-The validator uses `HEAD^1` on a main checkout whose head already equals `origin/main`,
-so it checks the preceding delivery rather than comparing a commit with itself.
+For a dependent PR, hosted CI sets `PACKING_RELEASE_BASE_REF` to the PR event’s pinned
+parent commit.
+The validator uses that explicit ref first, then `origin/$GITHUB_BASE_REF`
+if the explicit ref is absent.
+Locally, set `PACKING_RELEASE_BASE_REF` to the actual parent branch or pinned parent
+commit; ordinary branches default to `origin/main`. Changelog delivery coverage
+continues to compare against `origin/main`. The validator uses `HEAD^1` on a main
+checkout whose head already equals `origin/main`, so it checks the preceding delivery
+rather than comparing a commit with itself.
 
 Validate with the change-reachable push tier, review both reader views, and verify the
 published News page with the normal deployment audit after merging.
@@ -2058,6 +2092,31 @@ That gate uses the crate’s pinned toolchain, runs rustfmt, Clippy, tests, rust
 locked release build, then compares exact results with the Python reference.
 It leaves the binary at `$CARGO_TARGET_DIR/release/sqverify-exact` when the target
 directory is absolute.
+The Rust crate enables canonical cross-cancelled multiplication by default.
+Build with `--no-default-features` to select the original `num-rational` multiplication
+expressions. For the constructor ablation, combine `--no-default-features` with
+`--features experimental-normalized-mul` or `--features experimental-coprime-mul`; the
+historical feature names remain supported.
+Cargo features are additive, so a normalized-only control must disable defaults.
+The gate checks these modes, production defaults and the combined feature mode before
+building the production release binary.
+
+The
+[adoption measurement](docs/project/research/research-2026-09-30-exact-arithmetic-verifier-performance.md#2026-10-19-default-adoption)
+records the fixed-work benefit and its limits.
+To repeat the three-pair diagnostic with fresh reference and default builds, provide
+writable absolute scratch outside the checkout through `TMPDIR`, `UV_CACHE_DIR` and
+`CARGO_TARGET_DIR`, then run:
+
+```bash
+uv run --frozen --all-extras --group dev python -m benchmarks.bench_rectangle_rust_verifier_ab \
+  --target-root "$CARGO_TARGET_DIR/verifier-arms" --output "$TMPDIR/verifier-ab.json"
+```
+
+Linux admits those resolved external directories; macOS retains the configured mounted
+agent-scratch volume requirement.
+Output files cannot overwrite prior receipts.
+
 Pass that path to `devtools.verify_rectangle_density` with
 `--backend rust --rust-binary PATH`; Python remains the default.
 The [tooling overview](docs/project/guides/verification-tooling.md) records the

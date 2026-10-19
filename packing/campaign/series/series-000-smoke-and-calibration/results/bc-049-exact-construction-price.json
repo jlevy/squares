@@ -11,8 +11,8 @@
     },
     "29": {
       "decimal_route_reports": {
-        "pair_contacts": 17,
-        "wall_contacts": 36
+        "pair_contacts": 27,
+        "wall_contacts": 37
       },
       "reproduced": false,
       "retained": {
@@ -63,22 +63,22 @@
     },
     "29": {
       "stage_1_digits": {
-        "available_digits": 99.0,
+        "available_digits": 0.0,
         "margin_digits": 200,
         "max_coefficient": "10000000000000000000000",
         "meaning": "the largest degree at which a refusal would be a statement about the number rather than about the precision; zero means an integer-relation search on these digits can say nothing either way",
         "reach_degree": 0,
-        "retained_digits": 99
+        "retained_digits": 0
       },
       "stage_2_contact_structure": {
         "counts_stable_across_window": true,
         "decided_at_any_swept_floor": true,
-        "headroom_orders": -21,
+        "headroom_orders": -120,
         "meaning": "the floors at which every incidence decides. It is a window rather than a threshold because the ambiguity ceiling is the floor times 1e10: too coarse a floor puts genuine separations inside the band, too fine a one puts contact residuals below it. A window that is wide, and over which the contact counts do not move, is a pose whose structure is not an artefact of the tolerance.",
-        "pair_contacts": 17,
-        "wall_contacts": 36,
-        "window": "1e-112 to 1e-120",
-        "window_orders": 8
+        "pair_contacts": 27,
+        "wall_contacts": 37,
+        "window": "1e-52 to 1e-120",
+        "window_orders": 68
       },
       "stage_3_closed_system": "retained"
     },

@@ -1,0 +1,37 @@
+{
+  "asset_sha256": "0dc9bcd1cf5f2806a4d2e0c4c1c07e4903d91bbea611b8b938bda770b9782537",
+  "member": "n29-certificate/baselines/evan-n029.cert.json",
+  "member_sha256": "398e29160111c38dc5b9ad7405e26ccc47696e8cf2427c88718704d7f9d98723",
+  "n": 29,
+  "side_digits": [
+    31,
+    31
+  ],
+  "side_sci": "5.933833462676929189748798950979000000000e+00",
+  "axis_aligned": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14
+  ],
+  "accepted": true,
+  "walls_decided": 116,
+  "pairs_decided": 406,
+  "violations": [],
+  "touching_walls": [],
+  "touching_pairs": [],
+  "least_positive_wall_clearance": "5.000000000000000e-21",
+  "least_positive_pair_gap": "9.999999999999995e-21",
+  "cpu_s": 0.1
+}
