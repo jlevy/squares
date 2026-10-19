@@ -30130,17 +30130,18 @@ regularized_drawings:
         max_turn_deg: 3.49196
       view: packing/atlas/known-best/regularized/n-154-regularized.yaml.gz
     - n: 155
-      of: T-174
+      of: T-197
       by: project
-      method: regularize_axis_components/2
+      method: "regularize_grid_slack/1: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      modifications: ["port of his coincidence placement (regularize_grid_slack/1) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
       identity:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 1
-        max_move: 0.02890019
-        max_turn_deg: 0.0
+        moved: 14
+        max_move: 0.1258994
+        max_turn_deg: 0.00904477
       view: packing/atlas/known-best/regularized/n-155-regularized.yaml.gz
     - n: 156
       of: T-186
@@ -30449,6 +30450,19 @@ regularized_drawings:
         max_move: 1.63314e-94
         max_turn_deg: 0.0
       view: packing/atlas/known-best/regularized/n-228-regularized.yaml.gz
+    - n: 229
+      of: T-199
+      by: project
+      method: regularize_axis_components/2
+      side: same
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 29
+        max_move: 0.2630848
+        max_turn_deg: 0.00533477
+      view: packing/atlas/known-best/regularized/n-229-regularized.yaml.gz
     - n: 230
       of: T-155
       by: project
@@ -30492,17 +30506,19 @@ regularized_drawings:
         max_turn_deg: 5.47587e-34
       view: packing/atlas/known-best/regularized/n-234-regularized.yaml.gz
     - n: 236
-      of: T-146
+      of: T-218
       by: project
-      method: regularize_axis_components/2
+      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
+      changes: {straightened: 7, re_angled: 8}
       identity:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 0
-        max_move: 1.350926e-19
-        max_turn_deg: 0.0
+        moved: 81
+        max_move: 0.04013216
+        max_turn_deg: 2.13886
       view: packing/atlas/known-best/regularized/n-236-regularized.yaml.gz
     - n: 237
       of: T-190
@@ -30697,18 +30713,19 @@ regularized_drawings:
         max_turn_deg: 0.0
       view: packing/atlas/known-best/regularized/n-270-regularized.yaml.gz
     - n: 271
-      of: T-186
+      of: T-219
       by: project
-      method: "regularize_grid_slack/1: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
-      modifications: ["port of his coincidence placement (regularize_grid_slack/1) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
+      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
+      changes: {straightened: 2, re_angled: 2}
       identity:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 15
-        max_move: 0.1055648
-        max_turn_deg: 0.0132529
+        moved: 19
+        max_move: 0.03393265
+        max_turn_deg: 0.143387
       view: packing/atlas/known-best/regularized/n-271-regularized.yaml.gz
     - n: 272
       of: T-174

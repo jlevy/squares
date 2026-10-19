@@ -111,7 +111,7 @@ construction, and asks that #561 and Nate Chaoweeraprasit’s SQUISH packing it 
 angles match #561’s group for group within 0.12°, except that four squares near 31.7° to
 32.0° in #561 are three here, and under its matching 59 load-bearing squares move by more
 than $10^{-4}$ and 2 by more than $10^{-2}$.
-That is the source’s statement; the identity is not measured here.
+That is the source’s statement. The [review of 19 October 2026](../../../../docs/project/reviews/review-2026-10-19-upper-bound-imports-659-664-669-674.md) measured it pose by pose: it pairs one to one with #561’s packing under the identity, three squares moving beyond a tenth (at most 0.197), so in this record’s terms it continues Couzo’s arrangement rather than refining it.
 
 ## What Is Not Established
 

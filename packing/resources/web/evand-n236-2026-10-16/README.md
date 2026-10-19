@@ -107,7 +107,7 @@ explorer (fixed-side perturbation and re-polish, 45 minutes on one core) descend
 It asks that itsnaka’s SQUISH composition (#481) be credited for the construction, and
 calls the result a different local minimum from #481’s: 209 load-bearing squares move by
 more than $10^{-4}$ and 20 by more than $10^{-2}$ under its matching, and no tilt angle is
-shared. That is the source’s statement; the identity is not measured here.
+shared. That is the source’s statement. The [review of 19 October 2026](../../../../docs/project/reviews/review-2026-10-19-upper-bound-imports-659-664-669-674.md) measured it pose by pose: against the view of #481’s packing the case held, the best one-to-one assignment moves ten squares beyond a tenth and keeps 226 within one, another arrangement of #481’s design.
 
 ## What Is Not Established
 

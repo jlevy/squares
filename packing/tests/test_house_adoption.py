@@ -111,9 +111,11 @@ MOVED_AGAIN = {
     156: ("T-186", "T-161"),
     176: ("T-186", "T-165"),
     204: ("T-186", "T-162"),
-    271: ("T-186", "T-161"),
     303: ("T-186", "T-162"),
 }
+#: The count of `MOVED_AGAIN` that a later pass moved once more: the adoption of 19 October
+#: 2026 took 271 from T-186 to Evan Daniel's issue-664 certificate (T-219).
+MOVED_LATER = {271: ("T-219", "2026-10-19")}
 
 
 def test_the_records_of_the_lifted_hold_keep_their_next_candidates_until_adopted(
@@ -142,10 +144,15 @@ def test_the_records_of_the_lifted_hold_keep_their_next_candidates_until_adopted
             assert adopt._holder(earlier).endswith(f"({before})")  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
     held_counts = {n for n, s in recorded.items() if s.held}
     assert set(NEXT_CANDIDATES) < held_counts
-    assert len(held_counts) == 50
+    # 50 until the adoption of 19 October 2026 moved 155 and 236 to Evan Daniel's
+    # certificates (T-197, T-218), below T-174's, so the hold decides neither.
+    assert len(held_counts) == 48
     previous_t174 = {n for n in previous if houses.ADOPTED[n] == "T-174"}
     assert held_counts | {70, 153, 207} == (set(select.PENDING_ADOPTION) | previous_t174)
-    assert {n: houses.ADOPTED[n] for n in previous if n not in previous_t174} == {29: "T-195"}
+    assert {n: houses.ADOPTED[n] for n in previous if n not in previous_t174} == {
+        29: "T-195",
+        155: "T-197",
+    }
 
 
 def test_a_house_below_the_held_entry_leaves_the_hold_deciding_nothing(
@@ -161,6 +168,10 @@ def test_a_house_below_the_held_entry_leaves_the_hold_deciding_nothing(
         held = [c for c in selections[n].candidates if c.result == "T-174"]
         assert all(c.side > houses.side(n) for c in held)
         assert adopt._holder(_front(latest[n])).endswith(f"({before})")  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+    for n, (result, day) in MOVED_LATER.items():
+        assert houses.ADOPTED[n] == result
+        assert houses.adopted_on(n) == day
+        assert not selections[n].held
 
 
 def test_regularizations_leave_the_packing_with_its_finder(
@@ -168,7 +179,7 @@ def test_regularizations_leave_the_packing_with_its_finder(
 ) -> None:
     houses_at = {
         n: next(c for c in selections[n].candidates if c.result == houses.ADOPTED[n])
-        for n in (70, 103, 211, 236, 241)
+        for n in (70, 103, 211, 241, 292)
     }
     # T-188's 211 is another arrangement of Ostashev's design, no refinement (RT-1 of the
     # 16 October review), so it regularizes nothing.
@@ -176,10 +187,10 @@ def test_regularizations_leave_the_packing_with_its_finder(
         70: "T-125",
         103: "T-146",
         211: None,
-        236: "T-136",
         241: "T-181",
+        292: "T-136",
     }
-    assert adopt.CREDITS[236].found_by == (adopt.SQUISH,)
+    assert adopt.CREDITS[292].found_by == (adopt.SQUISH,)
     assert adopt.CREDITS[70].found_by == (adopt.XU,)
     assert adopt.CREDITS[103].improved_by == ("Mishapolk", adopt.DANIEL, "PingYou Ltd")
 
@@ -964,7 +975,8 @@ def test_the_staged_adoptions_name_their_beads_and_reasons() -> None:
     reason. T-174's rational houses wait for the adoption's bead and the next pull request,
     and its algebraic ones for the writer's bead and the writer. The adoption of 17 October
     2026 (think-3mry) took 37 rational counts off; twelve it leaves are T-193's once #658
-    lands, and 236 is issue 659's once its import lands."""
+    lands, and 236 was issue 659's, which the adoption of 19 October 2026 took, with 155
+    to issue 669's."""
     for n, pending in select.PENDING_ADOPTION.items():
         assert pending.why in select.STAGING_REASONS, n
         algebraic = n in (70, 153, 207)
@@ -978,7 +990,7 @@ def test_the_staged_adoptions_name_their_beads_and_reasons() -> None:
     assert adopted == {
         n for n in houses.LATER_PASSES["2026-10-17"] if houses.ADOPTED[n] == "T-174"
     }
-    assert len(adopted) == 37
+    assert len(adopted) == 36
     assert not adopted & set(select.PENDING_ADOPTION)
 
 
@@ -1027,11 +1039,16 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
     assert historical["outcome"] == "PASS"
     assert len(historical["houses"]) == 65
     assert "29" not in historical["houses"]
-    assert historical["houses"] == {
-        str(n): result for n, result in houses.ADOPTED.items() if n != 29
-    }
+    # The houses as the 17 October passes left them: the adoption of 19 October 2026 moved
+    # 155, 236 and 271 to Evan Daniel's certificates and first adopted 229, after this
+    # receipt was retained.
+    nineteenth = {155: "T-197", 229: "T-199", 236: "T-218", 271: "T-219"}
+    before = {**houses.ADOPTED, 155: "T-174", 236: "T-146", 271: "T-186"}
+    del before[229]
+    assert {n: houses.ADOPTED[n] for n in nineteenth} == nineteenth
+    assert historical["houses"] == {str(n): result for n, result in before.items() if n != 29}
     assert {int(n) for n, result in historical["houses"].items() if result == "T-174"} == (
-        set(houses.numbers_of("T-174"))
+        set(houses.numbers_of("T-174")) | {155}
     )
 
 
@@ -1657,7 +1674,7 @@ def test_an_opening_refresh_keeps_the_following_old_bound_explicitly_historical(
 def test_where_the_replaced_lanes_differ_the_margin_is_read_from_the_verified_ceiling(
     replayed: list[adopt.Move],
 ) -> None:
-    """The replaced displays differ at 29, 132 and 308. Their opening, section and history
+    """The replaced displays differ at 29, 132, 229 and 308. Their opening, section and history
     note use the exact verified baseline (reviews C3 and D1 of #661; M2/M3 of #665).
     At 29 the catalogue print orders nothing; at 132 and 308 the reported exact side
     agrees with the verified side, but its display differs from the verified display."""
@@ -1690,6 +1707,16 @@ def test_where_the_replaced_lanes_differ_the_margin_is_read_from_the_verified_ce
             "T-141",
             "[Daniel record hunt 3 2026-10-10]",
             "lies `1.80e-19` above the new side",
+        ),
+        # The first adoption at 229 (19 October 2026): the catalogue's print of
+        # 10 + 4 sqrt(2) above T-155's exact ceiling, both well above the new side.
+        229: (
+            Fraction("391421356237309504880168872421/25000000000000000000000000000"),
+            "15.65685424949238",
+            "15.65685424949239",
+            "T-155",
+            "[Kingbird]",
+            "lies `6.69e-03` above the new side",
         ),
     }
     for n, (expected, printed, verified_display, result, source, relation) in differing.items():
