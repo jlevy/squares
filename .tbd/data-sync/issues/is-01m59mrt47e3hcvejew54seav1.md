@@ -5,16 +5,18 @@ title: "Codex: prepare PR #658 integration against frozen #665 checkpoint"
 kind: task
 status: closed
 priority: 1
-version: 4
+version: 5
 assignee: codex-658-prospective-integration
 delegate: codex-658-prospective-integration
 labels: []
 dependencies: []
 parent_id: is-01m52a0tjnpnzjr0v0a1g53whe
+child_order_hints:
+  - is-01m59pc4dve0t4wt71sjy1zesa
 hold: null
 hold_until: null
 created_at: 2026-10-19T08:34:38.853Z
-updated_at: 2026-10-19T08:48:59.468Z
+updated_at: 2026-10-19T09:02:40.570Z
 started_at: 2026-10-19T08:34:54.662Z
 closed_at: 2026-10-19T08:48:59.467Z
 close_reason: Bounded local prospective integration preparation completed; clean checkpoint and detailed handoff retained. PR publication and remaining qualification stay with root and original owners.
