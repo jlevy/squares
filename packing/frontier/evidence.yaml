@@ -37952,3 +37952,28 @@ evidence:
       This atom records the source report only; it incorporates no separate review, source-replay receipt
       or confirmation rung. Both case upper lanes and the retained house remain unchanged
       until Stage 4 adoption; the exact claim is registered as pending adoption where better.
+  - id: E-evand-680-n183-report
+    claim: upper-bound
+    scope:
+      n_values: [183]
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Daniel n183 subgrid 2026-10-19]'
+    certificate: packing/resources/web/evand-n183-subgrid-2026-10-19/source/
+    replay_status: not-attempted
+    verifiers: []
+    source_reviewed: '2026-10-19'
+    limitations: >-
+      Source report in issue 680: one n183 upper bound, exact side
+      13999580178736252502081470897571/1000000000000000000000000000000.
+      The original and regularized display certificates have the same side. Source
+      checker outcomes, numerical KKT/local-minimum claims, regularization identity
+      and first-public comparison remain author assertions. Credit Daniel after
+      Couzo's n182 donor, preserving the unlogged crossover mate. Custody ran no source
+      code or geometry. Full replay and controls are think-1hmn; independent mathematical
+      review is think-glg8. Registration takes its ID only in actual merge order;
+      no case bound, house, verification or confirmation rung is promoted here.

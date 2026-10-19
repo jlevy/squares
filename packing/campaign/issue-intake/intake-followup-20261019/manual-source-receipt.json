@@ -1,0 +1,5 @@
+{
+  "read_on": "2026-10-19",
+  "unitsquare": {"page":"https://hmbelvedere.com/","page_command":"curl -L --fail --max-time 30 --silent --show-error URL | cmp - packing/resources/web/unitsquare-release1-2026/results.html","page_comparison_exit":0,"data":"https://hmbelvedere.com/data/results.json","data_command":"curl -L --fail --max-time 30 --silent --show-error URL | cmp - packing/resources/web/unitsquare-release1-2026/results.json","data_comparison_exit":0,"release":1,"published":"2026-07-29","counts":[68,69,103,105,110,131]},
+  "squish": {"url":"https://github.com/jlevy/squares/issues/401#issuecomment-6043191866","command":"gh api repos/jlevy/squares/issues/comments/6043191866 --jq {html_url,created_at,updated_at,body}","comment_updated_at":"2026-10-07T18:33:04Z","source_commit":"5e32bbd7028b6e3b869979278079cd37ed6770aa","supplement_count":13,"n153_printed":"12.879679373332963","availability":"API read succeeded; source-coverage statement corrected","ratings_changed":false}
+}

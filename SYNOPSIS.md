@@ -666,6 +666,9 @@ case or experiment separately.
 | [Open Work Review — 18 October 2026](docs/project/reviews/review-2026-10-18-open-work.md) | dated review record | record | retained | — |
 | [Intake Evidence, 18 October 2026](packing/campaign/issue-intake/intake-20261018/README.md) | source retention and archive policy | record | retained | — |
 | [Incremental Intake Evidence, 19 October 2026](packing/campaign/issue-intake/intake-20261019/README.md) | source retention and archive policy | record | retained | — |
+| [Intake Continuation, 19 October 2026](packing/campaign/issue-intake/intake-followup-20261019/README.md) | source retention and archive policy | record | retained | — |
+| [Upper-Bound Reports, Count by Count, in Report Order](packing/campaign/issue-intake/intake-followup-20261019/n183-ledger/README.md) | generated status view | generated | generated | — |
+| [n183 Claim Inputs](packing/campaign/issue-intake/intake-followup-20261019/n183-ledger/lane-claims/README.md) | source retention and archive policy | record | retained | — |
 | [Upper-Bound Reports, Count by Count, in Report Order](packing/campaign/issue-intake/upper-bounds-20261018/README.md) | generated status view | generated | generated | — |
 | [Lane Records for the 18 October Ledger](packing/campaign/issue-intake/upper-bounds-20261018/lane-claims/README.md) | source retention and archive policy | record | retained | — |
 | [Review: The Rational Upper-Bound Imports of 11 to 15 October (#506 to #607)](docs/project/reviews/review-2026-10-16-upper-bound-imports-506-607.md) | dated review record | record | retained | — |

@@ -1115,3 +1115,39 @@ repositories:
       statements require separate binding checks; no new certificate in this commit
       and no build, replay or assurance promotion here. Receipt:
       packing/campaign/issue-intake/intake-20261019/fang-source-inventory.json.
+  # Continuation after #676 merged: source reads do not replay any certificate.
+  - url: https://github.com/evand/square-packing
+    read_through: 3a9948c781be668b1547cc2bf64a0d1e614f9bca
+    read_on: '2026-10-19'
+    bead: think-xp0o
+    note: >-
+      Six commits past ddf09e3. Five add numerical rational-angle, symmetry and core/slack
+      experiments, reporting no new upper-bound record; their method notes were read as source
+      reports, without reproducing the measurements. The sixth reports the n183 certificate
+      in #680, owned by think-xp0o. Its two same-side certificates, numerical KKT claims and
+      Couzo n182 donor lineage remain distinct obligations; the second crossover parent is
+      unlogged. Inventory: packing/campaign/issue-intake/intake-followup-20261019/evand-source-inventory.json.
+      Earlier deficiency and staircase imports remain with think-f8py and think-pf37.
+  - url: https://github.com/TheSnakeFang/squarepack-certs
+    read_through: 9ffba0f3a84b38f0c92790c1d3089f979ef53f0b
+    read_on: '2026-10-19'
+    bead: think-494l
+    note: >-
+      Two commits past 0e9be796 update README and the note to v0.9, DOI
+      10.5281/zenodo.23463481, and scope the unchanged Lean pin 947bdae to Theorem 1
+      and the unmixed bounds of Theorem 2. The note also clarifies gluing, rounding,
+      credit and unresolved excess-two cases. No certificate or Lean proof file changes.
+      Statement and source-custody review stay with think-494l; the author's DOI
+      announcement is #603 comment 6259031488. T-163 remains V2/C1. Full two-file
+      diff: packing/campaign/issue-intake/intake-followup-20261019/fang-source-inventory.json.
+  - url: https://github.com/wand125/square-packing
+    read_through: 5a81ce1c5192de58cedd1abfea3d6fb4bcd84164
+    read_on: '2026-10-19'
+    note: >-
+      Both commits past 6d93afc1 concern right-isosceles-triangle containers: the new
+      claimed s(21) = 7 certificate, two checker routes, refreshed earlier triangle
+      receipts, packing_check's triangle staircase, and the bilingual paper/site update.
+      The numerical symbol s here refers to that triangle problem, outside this record's
+      square container. No square-container result or certificate changes are listed.
+      Inventory: packing/campaign/issue-intake/intake-followup-20261019/wand-source-inventory.json.
+      This is a source-scope read, not a replay or mathematical review of the triangle claim.

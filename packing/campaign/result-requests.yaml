@@ -21,7 +21,7 @@ softschema:
   status: enforced
 repository: jlevy/squares
 owner: jlevy
-last_reviewed: '2026-10-18'
+last_reviewed: '2026-10-19'
 issues:
   - number: 420
     title: 'Lean proofs that 178 best-known packings are local minima (n ≤ 324): registration request'
@@ -3621,6 +3621,27 @@ issues:
       - result: fine-net-n29-582-followup
         id: E-wand125-fine-net-n29-582-followup-report
         status: recorded
+    - url: https://github.com/jlevy/squares/issues/446#issuecomment-6261561709
+      date: '2026-10-19'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: fine-net-n37-n39-n44-1016
+        id: T-176
+        verification: V0
+        confirmation: C1
+        status: reviewed
+      - result: fine-net-n37-n39-n44-1016
+        id: T-177
+        verification: V0
+        confirmation: C1
+        status: reviewed
+      - result: fine-net-n37-n39-n44-1016
+        id: T-178
+        verification: V0
+        confirmation: C1
+        status: reviewed
+      - result: fine-net-18-1016
     close_when: Accurate source-only disposition reaches main and the remaining independent native/review
       obligations have explicit dispositions. Source-byte custody alone does not close this request.
   - number: 451
@@ -7011,6 +7032,11 @@ issues:
       by: jlevy
       kind: follow-up
       reported: []
+    - url: https://github.com/jlevy/squares/issues/537#issuecomment-6261556635
+      date: '2026-10-19'
+      by: jlevy
+      kind: follow-up
+      reported: []
     close_when: The packet and the evidence entry are on main, and the owner has decided on a sample or
       a full rebuild.
     notes: ' The author comment of 18 October (issuecomment-6247112302) is new evidence for T-064, held
@@ -9026,7 +9052,7 @@ issues:
       squarepack-certs 0e9be7961773aa78b879c4ee6ba584a67e2e5513 and public squarepack-lean at
       947bdae. These source assertions await statement, axiom and replay review under think-494l;
       T-163 remains V2/C1, and Stage 4 adoption is separate.
-    read_through: '2026-10-18T21:02:13Z'
+    read_through: '2026-10-19T03:30:28Z'
     results:
     - key: excess-theorem
       claim: 's(n^2 - n + 1) < n for every n >= 15, and s(n^2 - n + F(n)) < n with F(n) = 1 + max{p + 2q
@@ -9051,6 +9077,17 @@ issues:
         T-163 retains V2/C1 and the existing finite-witness disposition.
       queued: true
       bead: think-494l
+    - key: note-v09-doi-2026-10-19
+      claim: Fang announces note v0.9, dated 18 October, archived as DOI 10.5281/zenodo.23463481 with PDF
+        and LaTeX under CC BY; he states it is the same text as note/fang-2026-n2-n-1.md at 6e265256061b7c8b4be7e690008fa59c12ca5ae7.
+        The source README scopes the unchanged Lean pin 947bdae to Theorem 1 and the unmixed bounds of Theorem
+        2.
+      source: https://github.com/jlevy/squares/issues/603#issuecomment-6259031488
+      not_registered: Publication and statement update to the existing theorem, queued with the existing
+        note and Lean review owner. DOI assets and statement binding remain to be retained and reviewed;
+        no new theorem entry, replay, or rung promotion. T-163 remains V2/C1.
+      queued: true
+      bead: think-494l
     beads:
     - think-494l
     - think-0esw
@@ -9072,6 +9109,15 @@ issues:
       - result: excess-theorem
         id: E-fang-excess-theorem-exact-feasibility
         status: confirmed
+    - url: https://github.com/jlevy/squares/issues/603#issuecomment-6257671390
+      date: '2026-10-19'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: excess-theorem
+        id: T-163
+        verification: V2
+        confirmation: C1
     close_when: The import and its disposition are on main, the owner has posted the resulting state with
       the entry's id, and the review and replay that would raise its rungs are owned by its bead; optimality
       is outside this request.
@@ -9312,7 +9358,8 @@ issues:
     title: 'data: submit a tighter exact N29 packing certificate'
     author: BuddenPing
     opened: '2026-10-15'
-    state: open
+    state: closed
+    closed: '2026-10-19'
     kind: result-report
     triage: done
     summary: >-
@@ -9327,10 +9374,10 @@ issues:
       controls, reviewed the same day (accepted, finite feasibility, no blocking defect) and registered
       as T-195 at V3/C3, a regularization of the packing it tightens. The per-count ledger records it
       by exception on the owner's standing house rule (PR #660, think-sa5r). Its adoption at 29 and
-      regularization decision are complete on the import branch, dated 17 October 2026. Stage 7
-      waits for the import to merge, the published site to agree and the final reply to be posted
-      under think-30n2; #622 stays open pending those steps and the owner's pull-request disposition.
-    read_through: '2026-10-16T03:40:22Z'
+      regularization decision landed through #661 in the merged #661/#676 stack at d167d4b86
+      on 19 October. Deployment and live verification passed; the final reply reported adoption
+      and V3/C3, and the source pull request closed as incorporated at 06:50:12Z that day.
+    read_through: '2026-10-19T07:19:34Z'
     results:
     - key: n29-certificate
       claim: s(29) <= the exact side of n29-certificate/certificates/n029.cert.json (SHA-256 a01428c5...),
@@ -9351,6 +9398,29 @@ issues:
       kind: acknowledgement
       reported:
       - result: n29-certificate
+    - url: https://github.com/jlevy/squares/issues/622#issuecomment-6261406058
+      date: '2026-10-19'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n29-certificate
+        id: T-195
+        verification: V3
+        confirmation: C3
+    - url: https://github.com/jlevy/squares/issues/622#issuecomment-6261882344
+      date: '2026-10-19'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n29-certificate
+        id: T-195
+        verification: V3
+        confirmation: C3
+      - result: n29-certificate
+        id: E-pingyou-622-certificate-report
+      - result: n29-certificate
+        id: E-pingyou-622-exact-feasibility
+        status: confirmed
     close_when: The import and its disposition are on main, the owner has decided the pull request and
       posted the resulting state, and any replay that would confirm a recorded entry is owned by its bead;
       optimality is outside this request.
@@ -9582,7 +9652,13 @@ issues:
     beads:
     - think-6wtz
     answer_bead: think-6wtz
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/659#issuecomment-6261557007
+      date: '2026-10-19'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n236
     close_when: >-
       The certificate is registered on main and replayed here, the case at 236 has adopted it and
       regularized its drawing, and the author has been told the id, rungs and adoption.
@@ -9626,7 +9702,13 @@ issues:
     beads:
     - think-8o5j
     answer_bead: think-8o5j
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/664#issuecomment-6261557347
+      date: '2026-10-19'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n271
     close_when: >-
       The certificate is registered on main and replayed here, the case at 271 has adopted it and
       regularized its drawing, and the author has been told the id, rungs and adoption.
@@ -9783,7 +9865,31 @@ issues:
     beads:
     - think-3m10
     answer_bead: think-3m10
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/666#issuecomment-6261557725
+      date: '2026-10-19'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n464
+      - result: n509
+      - result: n555
+      - result: n603
+      - result: n654
+      - result: n706
+      - result: n760
+      - result: n817
+      - result: n875
+      - result: n935
+      - result: n998
+      - result: n1061
+      - result: n1128
+      - result: n1196
+      - result: n1266
+      - result: n1339
+      - result: n1413
+      - result: n1489
+      - result: n1568
     close_when: Every claim or correction has a reviewed disposition on main, pending validation has a priced
       owner, any changed house is regularized in its adoption, and the author has received a reply verified
       against main and the deployed site.
@@ -9820,7 +9926,27 @@ issues:
     beads:
       - think-qdcc
     answer_bead: think-qdcc
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/668#issuecomment-6261558114
+      date: '2026-10-19'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n227
+        id: T-196
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: n229
+        id: T-196
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: n260
+        id: T-196
+        verification: V0
+        confirmation: C0
+        status: recorded
     close_when: Every claim or correction has a reviewed disposition on main, pending validation has a priced
       owner, any changed house is regularized in its adoption, and the author has received a reply verified
       against main and the deployed site.
@@ -9859,7 +9985,17 @@ issues:
     beads:
       - think-n1ga
     answer_bead: think-n1ga
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/669#issuecomment-6261558471
+      date: '2026-10-19'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n155
+        id: T-197
+        verification: V0
+        confirmation: C0
+        status: recorded
     close_when: Every claim or correction has a reviewed disposition on main, pending validation has a priced
       owner, any changed house is regularized in its adoption, and the author has received a reply verified
       against main and the deployed site.
@@ -10400,7 +10536,85 @@ issues:
     beads:
     - think-f28n
     answer_bead: think-f28n
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/670#issuecomment-6261558818
+      date: '2026-10-19'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n204
+      - result: n330
+      - result: n339
+      - result: n364
+      - result: n370
+      - result: n378
+      - result: n379
+      - result: n382
+      - result: n403
+      - result: n417
+      - result: n418
+      - result: n419
+      - result: n421
+      - result: n422
+      - result: n444
+      - result: n452
+      - result: n458
+      - result: n459
+      - result: n460
+      - result: n461
+      - result: n462
+      - result: n463
+      - result: n501
+      - result: n503
+      - result: n505
+      - result: n536
+      - result: n546
+      - result: n548
+      - result: n551
+      - result: n553
+      - result: n598
+      - result: n600
+      - result: n647
+      - result: n650
+      - result: n651
+      - result: n700
+      - result: n701
+      - result: n702
+      - result: n703
+      - result: n749
+      - result: n753
+      - result: n754
+      - result: n756
+      - result: n757
+      - result: n758
+      - result: n804
+      - result: n805
+      - result: n806
+      - result: n809
+      - result: n811
+      - result: n812
+      - result: n813
+      - result: n863
+      - result: n866
+      - result: n867
+      - result: n868
+      - result: n869
+      - result: n870
+      - result: n871
+      - result: n922
+      - result: n925
+      - result: n926
+      - result: n927
+      - result: n928
+      - result: n929
+      - result: n930
+      - result: n931
+      - result: n987
+      - result: n989
+      - result: n990
+      - result: n991
+      - result: n992
+      - result: n993
     close_when: Every claim or correction has a reviewed disposition on main, pending validation has a priced
       owner, any changed house is regularized in its adoption, and the author has received a reply verified
       against main and the deployed site.
@@ -10741,7 +10955,58 @@ issues:
     beads:
     - think-2vjc
     answer_bead: think-2vjc
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/672#issuecomment-6261559222
+      date: '2026-10-19'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n227
+      - result: n229
+      - result: n330
+      - result: n461
+      - result: n507
+      - result: n652
+      - result: n653
+      - result: n704
+      - result: n749
+      - result: n750
+      - result: n753
+      - result: n755
+      - result: n756
+      - result: n757
+      - result: n758
+      - result: n759
+      - result: n804
+      - result: n805
+      - result: n811
+      - result: n812
+      - result: n813
+      - result: n814
+      - result: n815
+      - result: n816
+      - result: n817
+      - result: n864
+      - result: n865
+      - result: n868
+      - result: n869
+      - result: n871
+      - result: n872
+      - result: n873
+      - result: n874
+      - result: n923
+      - result: n924
+      - result: n929
+      - result: n930
+      - result: n932
+      - result: n933
+      - result: n934
+      - result: n935
+      - result: n990
+      - result: n991
+      - result: n994
+      - result: n995
+      - result: n996
     close_when: Every claim or correction has a reviewed disposition on main, pending validation has a priced
       owner, any changed house is regularized in its adoption, and the author has received a reply verified
       against main and the deployed site.
@@ -10762,7 +11027,12 @@ issues:
     beads:
     - think-gzvu
     answer_bead: think-gzvu
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/673#issuecomment-6261559625
+      date: '2026-10-19'
+      by: jlevy
+      kind: follow-up
+      reported: []
     close_when: Every claim or correction has a reviewed disposition on main, pending validation has a priced
       owner, any changed house is regularized in its adoption, and the author has received a reply verified
       against main and the deployed site.
@@ -10801,7 +11071,22 @@ issues:
     beads:
       - think-5ij2
     answer_bead: think-5ij2
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/674#issuecomment-6261560037
+      date: '2026-10-19'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n229
+        id: T-198
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: n229-update
+        id: T-199
+        verification: V0
+        confirmation: C0
+        status: recorded
     close_when: Every claim or correction has a reviewed disposition on main, pending validation has a priced
       owner, any changed house is regularized in its adoption, and the author has received a reply verified
       against main and the deployed site.
@@ -11384,7 +11669,91 @@ issues:
     beads:
     - think-pvav
     answer_bead: think-pvav
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/675#issuecomment-6261560418
+      date: '2026-10-19'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n204
+      - result: n419
+      - result: n421
+      - result: n422
+      - result: n458
+      - result: n459
+      - result: n460
+      - result: n461
+      - result: n462
+      - result: n463
+      - result: n464
+      - result: n502
+      - result: n545
+      - result: n546
+      - result: n547
+      - result: n548
+      - result: n549
+      - result: n554
+      - result: n592
+      - result: n593
+      - result: n598
+      - result: n602
+      - result: n603
+      - result: n641
+      - result: n642
+      - result: n650
+      - result: n652
+      - result: n654
+      - result: n693
+      - result: n700
+      - result: n701
+      - result: n705
+      - result: n706
+      - result: n753
+      - result: n755
+      - result: n756
+      - result: n758
+      - result: n759
+      - result: n760
+      - result: n804
+      - result: n805
+      - result: n806
+      - result: n807
+      - result: n809
+      - result: n811
+      - result: n812
+      - result: n813
+      - result: n814
+      - result: n816
+      - result: n817
+      - result: n863
+      - result: n864
+      - result: n865
+      - result: n867
+      - result: n868
+      - result: n869
+      - result: n870
+      - result: n872
+      - result: n873
+      - result: n874
+      - result: n919
+      - result: n923
+      - result: n924
+      - result: n927
+      - result: n928
+      - result: n930
+      - result: n931
+      - result: n932
+      - result: n933
+      - result: n989
+      - result: n990
+      - result: n991
+      - result: n992
+      - result: n993
+      - result: n994
+      - result: n995
+      - result: n996
+      - result: n997
+      - result: n998
     close_when: Every claim or correction has a reviewed disposition on main, pending validation has a priced
       owner, any changed house is regularized in its adoption, and the author has received a reply verified
       against main and the deployed site.
@@ -12001,7 +12370,13 @@ issues:
     beads:
     - think-xu4d
     answer_bead: think-xu4d
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/678#issuecomment-6257122870
+      date: '2026-10-19'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: n260
     close_when: Every claim or correction has a reviewed disposition on main, pending validation has a priced
       owner, any changed house is regularized in its adoption, and the author has received a reply verified
       against main and the deployed site.
@@ -12013,3 +12388,37 @@ issues:
       receipts are not local replays. The n545 and n641 witnesses require deletion of one surplus
       square from n546 and n642 respectively. No register entry, adopted upper bound, house
       choice or confirmation rung changes in this Stage 1 inventory; Stage 4 adoption is separate.
+  - number: 680
+    title: 's(183) ≤ 13.999580178737: registration request (first 183 below the grid)'
+    author: evand
+    opened: '2026-10-19'
+    state: open
+    kind: result-report
+    triage: done
+    summary: Evan Daniel reports one sub-grid n183 upper bound at evand/square-packing 3a9948c781be668b1547cc2bf64a0d1e614f9bca.
+      Original and regularized certificates have the same exact rational side. Stage 1 inventory preserves
+      numerical local-optimality and priority assertions as source claims, and Francisco Couzo n182 donor
+      credit with an unlogged crossover parent. Registration awaits actual merge-order ID allocation;
+      no feasibility confirmation or case adoption is claimed.
+    read_through: '2026-10-19T05:24:01Z'
+    results:
+    - key: n183
+      claim: s(183) <= 13999580178736252502081470897571/1000000000000000000000000000000 = 13.999580178736252502081470897571,
+        rounded upward at 12 places to 13.999580178737.
+      source: body
+      not_registered: Pinned source intake is in progress under think-xp0o; result ID is taken only after
+        the preceding records merge. Both certificate views report one bound. Numerical KKT/local-minimum
+        assertions are not an exact local-optimality proof.
+      queued: true
+      bead: think-xp0o
+    beads:
+    - think-xp0o
+    answer_bead: think-xp0o
+    replies: []
+    close_when: The reported claim has a reviewed disposition on main, replay and mathematical review
+      have explicit owners, any adopted house is regularized in the adoption change, and a reply checked
+      against main and the deployed site reports the resulting state.
+    notes: Issue body retained in packing/campaign/issue-intake/intake-followup-20261019/issue-680.json.
+      Source commit date is 2026-10-19T05:20:24Z, despite the author-local 18 October date. The second
+      crossover parent was not logged; exact geometry can be checked without reconstructing that lineage.
+      No independent source-priority conclusion is drawn.

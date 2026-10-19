@@ -1,0 +1,76 @@
+# Prospective Stage 3 row. This is not a register entry or a reserved result ID.
+# The coordinator takes the actual ID after the preceding records merge, inserts
+# this row into frontier/results.yaml, updates #680's request mapping, and removes
+# this plan after the actual registration is on the branch.
+result:
+  id: T-NNN
+  kind: upper-bound
+  registered: '2026-10-19'
+  headline: Daniel reports a sub-grid packing of 183 squares, descended from Couzo's n182 packing
+  claim: >-
+    The source reports s(183) <=
+    13999580178736252502081470897571/1000000000000000000000000000000 =
+    13.999580178736252502081470897571, printed upward as 13.999580178737.
+    Original and regularized display certificates have the same exact side and
+    report one bound. The source credits Evan Daniel after Francisco Couzo's n182
+    donor packing, through a non-record explorer descendant, insertion, crossovers
+    and refinement; a crossover mate was not logged.
+  scope:
+    n_values: [183]
+  verification: V0
+  confirmation: C0
+  significance:
+    score: 3
+    rationale: >-
+      A reported sub-grid packing at a count whose frozen reported and verified
+      ceilings are both 14, about 4.20e-4 smaller. Finite feasibility remains to
+      be confirmed; this draft score asserts no global optimality or public priority.
+    scored: '2026-10-19'
+    by: think-xp0o intake triage; independent mathematical review confirms or changes the draft
+  novelty: previously-published
+  attribution:
+    source_keys: ['[Daniel n183 subgrid 2026-10-19]']
+    published: '2026-10-19'
+  evidence: [E-evand-680-n183-report]
+  artifacts:
+  - packing/resources/web/evand-n183-subgrid-2026-10-19/README.md
+  - packing/resources/web/evand-n183-subgrid-2026-10-19/source/search/packer/candidates/s183_h183b.cert
+  - packing/resources/web/evand-n183-subgrid-2026-10-19/source/search/packer/candidates/s183_h183b_regularized.cert
+  - packing/campaign/issue-intake/intake-followup-20261019/n183-ledger/README.md
+  notes: >-
+    Source report only. Custody binds the retained files to the immutable source
+    pin, and the maintained intake ledger records this side below the grid before
+    the issue repeats it. Neither operation decides geometry. The independent
+    mathematical review and full replay have separate owners; no returned review
+    or replay receipt is integrated by this registration. Both case upper lanes
+    and the retained house remain unchanged pending reviewed Stage 4 adoption.
+
+    Source numerical KKT diagnostics concern S* = 13.999580178736252501941...,
+    distinct from the slack rational certificate side S'. Their 27 candidate flat
+    modes concern the 182-square force-bearing subsystem, with a free rattler
+    excluded; no full-configuration local-optimality theorem is claimed. The
+    source's same-side regularization and distinct-minimum classifications remain
+    source assertions. Endpoint feasibility would not prove a no-expansion path.
+    Any later house adoption owes the project's strong-generator regularization.
+  next_rung: >-
+    C1 needs the independently prompted mathematical review under think-glg8 mapped
+    to the actual claim and ID. C3 needs the complete retained exact replay and
+    sensitive pair/wall controls under think-1hmn, accepted mathematical review and
+    deciding-program metadata integrated in their own reviewed change. Source
+    checker outcomes, numerical local optimality, arrangement identity and public
+    priority are not confirmations performed here.
+  unfinished_confirmations:
+  - what: Integrate the independently prompted finite-geometry and trust-boundary review, mapped to the actual result ID; no review is adopted here.
+    rung: C1
+    link: think-glg8
+  - what: Run and integrate complete exact replay and sensitive geometric controls for both certificate views, independently enforcing expected n183, exact side and all coordinate rows; bind the accepted review and actual deciding-program relationship.
+    rung: C3
+    link: think-1hmn
+    estimated_cost:
+      cpu_hours: 0.01
+      cpu_hours_high: 0.10
+      basis: >-
+        Conservative engineering estimate for two 183-pose rational certificates
+        and controls, not a measured checker timing. The source's 12 seconds is
+        numerical producer runtime. First complete batch has a 360-second ceiling
+        and must be measured and repriced if exceeded.

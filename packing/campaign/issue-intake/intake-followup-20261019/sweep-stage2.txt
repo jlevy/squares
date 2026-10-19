@@ -1,0 +1,727 @@
+# Intake Sweep, 2026-10-19
+
+0 items without an open bead to own it, 1 item whose blocker has resolved, 398 items owned by an open bead, and 2 sources not checked.
+
+## Needs Action
+
+| source | item | state | since | next |
+| --- | --- | --- | --- | --- |
+| Blocked imports | think-xu4d (Import franciscouzo: 85 upper bounds at 204–998 (#678)) waits on jlevy/squares#676, merged 2026-10-19 | blocker resolved |  | resume it, or rewrite what the bead says it waits on |
+
+## Not Checked
+
+- UnitSquare Results Release 1 (https://hmbelvedere.com/): read by hand; last reviewed 2026-10-19 (0 days ago), source dated 2026-07-29
+- SQUISH exact-rational n153 upper-bound packing (https://github.com/jlevy/squares/issues/401#issuecomment-6043191866): read by hand; last reviewed 2026-10-19 (0 days ago), source dated 2026-10-07
+
+## GitHub issues on jlevy/squares
+
+The record holds every issue, reply and comment.
+
+## Watched repositories (45)
+
+17 of 45 heads are a commit a packet pins.
+https://github.com/evand/square-packing: a packet now pins 3a9948c781be, so intake-watch.yaml's read of it can be removed.
+
+| item | state | bead | since |
+| --- | --- | --- | --- |
+| https://gist.github.com/9e5f27e25607c0966c4f91bc1253ce8b: read through 904178e3bc84 on 2026-10-05, nothing to import | listed |  | 2026-10-05 |
+| https://github.com/ahyangyi/17squares: read through 1a320e7f54a4 on 2026-10-05, nothing to import | listed |  | 2026-10-05 |
+| https://github.com/anabologyco-maker/square17-lower-bound: read through 396da6f7c112 on 2026-10-05, nothing to import | listed |  | 2026-10-05 |
+| https://github.com/BalthasarStrauss/Squares-packing_S-29-_New-Record: read through 71ea2ee9166f on 2026-10-05, nothing to import | listed |  | 2026-10-05 |
+| https://github.com/bengreff/s76-certificate at 06993982e83d: One commit of 14 October (08:16Z) past the bengreff-s76-certificate-2026-10-14 packet's 1cb924f: the second route #594's comment of that day describes, zm_mixed.py alone over all 129,600 D4 roots at depth 24 (129,599 certified, six boxes left in one root, which certifies alone at depth 34), with records/zm_full/, tools/check_full.py and verify.sh's --full-zm; 181 CPU-hours at the source. The cover, the composite's records and the Lean are unchanged. New evidence for T-184, owned by think-osvq until a packet pins this commit. | owned | think-osvq (in_progress) | 2026-10-15 |
+| https://github.com/BuddenPing/square-packing-certificates: read through 318ab94e821b on 2026-10-15, nothing to import | listed |  | 2026-10-15 |
+| https://github.com/BuddenPing/squares: read through 73d254272da7 on 2026-10-15, nothing to import | listed |  | 2026-10-15 |
+| https://github.com/DRMacIver/square-packing-research: read through 9e2cd597047e on 2026-10-05, nothing to import | listed |  | 2026-10-05 |
+| https://github.com/Esummins/packing: read through eb3ae15418ce on 2026-10-12, nothing to import | listed |  | 2026-10-12 |
+| https://github.com/franciscouzo/square-packing at 7b6c87e129cf: One commit past c6da0fc, reporting the 85 upper bounds in #678, owned by think-xu4d. All commit-file pages retain 543 changed paths in packing/campaign/issue-intake/intake-20261019/couzo-source-inventory.json. This inventory is not whole-source custody or certificate replay. Exact-side, report-order and classical-envelope comparison and seed/construction provenance remain open. Earlier #672 stays with think-2vjc. No discovery-credit decision or assurance change here. | owned | think-xu4d (in_progress) | 2026-10-19 |
+| https://github.com/itsnaka/squish-certs: read through 56fa71f94923 on 2026-10-14, nothing to import | listed |  | 2026-10-14 |
+| https://github.com/Kleddamag/17-squares-certified-bound: read through 17d18245114c on 2026-10-05, nothing to import | listed |  | 2026-10-05 |
+| https://github.com/lollipoll/couzo-five-exact-certificates: read through 29bc1ea2e433 on 2026-10-09, nothing to import | listed |  | 2026-10-09 |
+| https://github.com/ofitzharding/sq17-lean: read through d9653fd3c0a8 on 2026-10-14, nothing to import | listed |  | 2026-10-14 |
+| https://github.com/ofitzharding/sq19 at c86a991ea137: One commit of 16 October (14:28Z) past the fitzharding-n19-lean-2026-10-16 packet's pin 34fb2b7 (v1.0.0). It adds verification/clean-build-receipt.json, verification/clean-build.log and a README paragraph: a fresh clone of v1.0.0 with the release's certificates, rebuilt from source by scripts/verify.py --kernel-replay on a 64-vCPU machine in 5 h 18 min (about 340 CPU-hours), VERIFIED, 13,143 modules replayed with no failure, statement and axioms as T-194 records them, and every generated certificate module byte-identical to the research build. The author's own rebuild of the proof T-194 registers, not a replay here: new evidence for T-194, which think-a4x3 holds until a packet pins this commit, and the measure think-nqnl's held rebuild can be priced against. The Lean proof itself is unchanged. | owned | think-a4x3 (in_progress) | 2026-10-17 |
+| https://github.com/Queuingtheorydotcom/11SquaresOptimal at 4262f07c7723: Three commits of 8 October past the f9e0de7 read add paper/: a revised geometric manuscript of the n = 11 proof (marker-based reduction, support chains, angle penalties and a 103-node dependency graph), a geometric-foundations companion and a self-contained verification supplement; 4262f07 simplifies the ownership-case 0, 3 and 5 exclusions. The author reports component replays passing and the portable full replay not yet run end to end. This is new evidence for the claim T-060 cites, owned by think-3i74's independent validation; no rating changes. | owned | think-3i74 (in_progress) | 2026-10-09 |
+| https://github.com/RobertBarnettProjects/square-packing-research: read through 52cf1cc7ba00 on 2026-10-12, nothing to import | listed |  | 2026-10-12 |
+| https://github.com/ry-xu/square_packing: read through 9535d65d84cc on 2026-10-11, nothing to import | listed |  | 2026-10-11 |
+| https://github.com/squarepacker/k2-minus-c: read through 0ff7d6a1a28e on 2026-10-08, nothing to import | listed |  | 2026-10-08 |
+| https://github.com/squarepacker/k2-minus-c-cube-root: read through e7334a675ebf on 2026-10-08, nothing to import | listed |  | 2026-10-08 |
+| https://github.com/squarepacker/k2-minus-c-quarter: read through c3a65d5ca1f1 on 2026-10-08, nothing to import | listed |  | 2026-10-08 |
+| https://github.com/squarepacker/k2-minus-c-upper: read through c6df2f4a0715 on 2026-10-10, nothing to import | listed |  | 2026-10-10 |
+| https://github.com/TheSnakeFang/squarepack-certs at 9ffba0f3a84b: Two commits past 0e9be796 update README and the note to v0.9, DOI 10.5281/zenodo.23463481, and scope the unchanged Lean pin 947bdae to Theorem 1 and the unmixed bounds of Theorem 2. The note also clarifies gluing, rounding, credit and unresolved excess-two cases. No certificate or Lean proof file changes. Statement and source-custody review stay with think-494l; the author's DOI announcement is #603 comment 6259031488. T-163 remains V2/C1. Full two-file diff: packing/campaign/issue-intake/intake-followup-20261019/fang-source-inventory.json. | owned | think-494l (in_progress) | 2026-10-19 |
+| https://github.com/tokoharu/square-packing-density-bounds: read through 84bebef51856 on 2026-10-05, nothing to import | listed |  | 2026-10-05 |
+| https://github.com/wand125/square-packing: read through 5a81ce1c5192 on 2026-10-19, nothing to import | listed |  | 2026-10-19 |
+| https://github.com/wand125/square-packing-bounds: read through 069f3276f3a3 on 2026-10-09, nothing to import | listed |  | 2026-10-09 |
+| https://github.com/wand125/square-packing-density-bounds: read through 144387bdc5a3 on 2026-10-09, nothing to import | listed |  | 2026-10-09 |
+| https://github.com/wand125/valid7-independent-check: read through d7007942713a on 2026-10-09, nothing to import | listed |  | 2026-10-09 |
+
+## The Kingbird catalogue
+
+Compared the capture of 2026-10-19 with the record's of 2026-10-05: 0 counts read differently, 0 below the record.
+
+## Other catalogues and releases
+
+Not checked: see above.
+
+## Record-side queues
+
+| item | state | bead | since |
+| --- | --- | --- | --- |
+| #419 queued result lean-packs-binding-2026-10-11 | owned | think-63vx (open) | 2026-10-07 |
+| #419 queued ask: Record the exact quadratic side a + b sqrt d, which minSide_le_closed at 6bbae37 states, as the verified upper bound at 41 counts whose verified bound is today the rational rounding up of the 2026-10-05 exact ceilings (E-evand-exact-ceilings-2026-10-05-*, 2e-15 to 1e-14 above the exact side): sqrt 2 at 101, 104, 109, 122, 124, 125, 145, 147 to 150, 170, 173, 174, 197, 200 to 203, 226, 227, 229, 231 to 233, 257, 260, 262, 264, 265, 290, 291, 294, 296 and 298, and (k + sqrt 7)/2 at 53, 151, 176, 204, 234 and 299. | owned | think-63vx (open) | 2026-10-07 |
+| #400 queued ask: Evaluate offered checker implementations and independent receipt parity before adoption. | owned | think-x4v4 (open) | 2026-10-07 |
+| #405 queued ask: Complete the global cover, exclusion, capture and composition proof with portable certificate custody and an explainer. | owned | think-tmz6 (in_progress) | 2026-10-07 |
+| #413 queued result subpatterns-27 | owned | think-x4v4 (open) | 2026-10-07 |
+| #413 queued result subpatterns-31-status-2026-10-08 | owned | think-bmwd (in_progress) | 2026-10-07 |
+| #413 queued result subpatterns-32-status-2026-10-08 | owned | think-bmwd (in_progress) | 2026-10-07 |
+| #413 queued result subpatterns-33-status-2026-10-08 | owned | think-bmwd (in_progress) | 2026-10-07 |
+| #413 queued result subpatterns-33-row14-correction-2026-10-08 | owned | think-bmwd (in_progress) | 2026-10-07 |
+| #413 queued result subpatterns-33-standing-scope-correction-2026-10-08 | owned | think-bmwd (in_progress) | 2026-10-07 |
+| #413 queued result subpatterns-33-reconciliation-2026-10-08 | owned | think-bmwd (in_progress) | 2026-10-07 |
+| #413 queued result subpatterns-38-status-2026-10-09 | owned | think-bmwd (in_progress) | 2026-10-07 |
+| #413 queued result kernel-rows-2026-10-11 | owned | think-nmfl (open) | 2026-10-07 |
+| #413 queued result row4-full-receipt-2026-10-13 | owned | think-p2cy (open) | 2026-10-07 |
+| #413 queued ask: Acquire complete packages for rows 1–4 first and join exact named-cell, frame, cap, closed-domain and receipt custody before admission. | owned | think-x4v4 (open) | 2026-10-07 |
+| #413 queued ask: Acquire complete immutable new source/certificate packages and exact domain/receipt bindings before any assurance change from the dated 31/20/11 status. | owned | think-bmwd (in_progress) | 2026-10-07 |
+| #414 queued ask: Review the full preprint chain, statement conventions and numerical constants. | owned | think-6ptr (in_progress) | 2026-10-07 |
+| #375 queued result n17-exact-form-2026-10-10 | owned | think-x4v4 (open) | 2026-10-05 |
+| #367 queued ask: Take the B2 rule (an optional module wrapping devtools.n17_bb_native) into the repository with the native recording path, so the class certificates regenerate here | owned | think-x4v4 (open) | 2026-10-05 |
+| #358 queued ask: Admit the two classes' certificates when they are posted, by think-j6qy's admission path: the certificate, the standing verifier in full mode, and a ledger entry with its verification receipt | owned | think-j6qy (in_progress) | 2026-10-05 |
+| #428 queued ask: Independently review and replay the v1.2 root-feasibility and same-root restricted-family obligations before any assurance promotion. | owned | think-nv5o (in_progress) | 2026-10-07 |
+| #446 queued result fine-net-18-1016 | owned | think-f40c (in_progress) | 2026-10-08 |
+| #446 queued ask: Replay and review the n29 candidate at 291/50 over all 2073 directions with whole-net controls and restored positives, from a candidate retained where the census reads it. | owned | think-r333 (open) | 2026-10-08 |
+| #446 queued ask: Run a reviewed maintained-only complete seven-case native capture and whole-net v2 control protocol, with full input/result custody, before any lower-bound or rating promotion. | owned | think-ndvg (in_progress) | 2026-10-08 |
+| #446 queued ask: Replay and review the separate later n27 candidate at 1131/200 over all 2073 directions, with whole-net controls, restored positives and actual private-worker input/result custody. | owned | think-ndvg (in_progress) | 2026-10-08 |
+| #485 queued result s40-continuous-angle-mode | owned | think-xzob (open) | 2026-10-10 |
+| #494 queued result wallchain-width1-negative | owned | think-lkbe (open) | 2026-10-11 |
+| #495 queued result kernel-certificates-15 | owned | think-nmfl (open) | 2026-10-11 |
+| #495 queued result kernel-certificate-m4003392 | owned | think-nmfl (open) | 2026-10-11 |
+| #557 queued ask: The owner's priority of 12 October: validate fully, tabulate in the record as soon as possible, and confirm as far as possible. Still to run: the ten trees not yet replayed (about 7.1 CPU-hours by the author's records, about 21 here; think-fgmr), the complete capture recomputation (about 1,273 CPU-hours with the Python checker, 2,347 with both; think-0at1) and a mutated-input control of each kind. On 13 October the owner held the ten-tree replay and the capture recomputation; every remaining option, with its price, is a bead under think-lqtu, and the owner's oversight record for rung 4 is think-ofoc. | owned | think-lqtu (open) | 2026-10-12 |
+| #557 owes a reply | owned | think-00y8 (in_progress) | 2026-10-12 |
+| #565 queued ask: Link the proof from | owned | think-mxhc (in_progress) | 2026-10-12 |
+| #565 owes a reply | owned | think-mxhc (in_progress) | 2026-10-12 |
+| #521 queued ask: Whether a confirmation of this shape earns a replayed annotation on T-037 or belongs only in the packet. | owned | think-6t6q (in_progress) | 2026-10-12 |
+| #522 queued result stratification-strategy | owned | think-3m7d (in_progress) | 2026-10-12 |
+| #522 queued ask: Register the strategy and name the record's vocabulary for pins, stratum kills and pads. | owned | think-3m7d (in_progress) | 2026-10-12 |
+| #523 queued ask: Run the four-corner descent at n = 17 from k = 13 to the record's k = 8 and the root, then n = 19, with the climb read-off and the canary check. | owned | think-j891 (in_progress) | 2026-10-12 |
+| #524 queued ask: A threshold-type certificate conditioned on four doubly-met corners (n = 11 first, then a family indexed by n), and any angle from the charge machinery on LOCKED-CROWD-FREE(n). | owned | think-s1ru (in_progress) | 2026-10-12 |
+| #525 queued ask: A k-of-m charge that prices two distinct non-pin meeters of one box, and the row cascade on a bigger machine. | owned | think-3nc2 (in_progress) | 2026-10-12 |
+| #526 queued ask: A field certificate conditioned on four doubly-met corners on [31/8, s0], and the chains pair3 and STRIP2. | owned | think-tnfo (in_progress) | 2026-10-12 |
+| #527 queued ask: A review of one leaf rule end to end (no-room with the pocket-rooted cover) and whether a sqverify-fast style exact sweep can replace the lane cover. | owned | think-kok7 (in_progress) | 2026-10-12 |
+| #532 queued ask: Complete first-party replays of T-142 and T-143, with the whole-net control and a review. | owned | think-i85v (open) | 2026-10-12 |
+| #532 queued ask: The complete linear replay and control of T-144, carried to n = 122 to 126, with a review. | owned | think-nd7g (open) | 2026-10-12 |
+| #532 queued ask: The complete replay of T-132 in the same lane, and a reply on issue 446. | owned | think-r333 (open) | 2026-10-12 |
+| #533 queued ask: Retain sqverify_continuous at f30cc2c, review its soundness, build it and replay both n = 40 examples with their controls and this repository's own mass controls. | owned | think-xzob (open) | 2026-10-12 |
+| #534 queued result s31-mixed-fine-net | owned | think-wop1 (open) | 2026-10-12 |
+| #535 queued ask: An evidence entry for the Lean proof and a corrected T-049 next rung, then a kernel build with an axiom receipt and a read of the statement binding. | owned | think-oyd4 (open) | 2026-10-12 |
+| #536 queued ask: Retain the Lean proof at f9a77b7, read its statement binding, add an evidence entry for T-066 and price a kernel rebuild. | owned | think-xk3f (open) | 2026-10-12 |
+| #537 queued ask: Retain the merged lean/ tree and its release, audit the root names, add an evidence entry for T-064, and an owner decision on a sample or a full rebuild. | owned | think-0ayk (in_progress) | 2026-10-12 |
+| #538 queued ask: Compare the best of three timings with 400 ms, keep both ceilings, and attribute the play message to load or to a regression. | owned | think-1bm2 (open) | 2026-10-12 |
+| #539 queued ask: Wait for the reload's own navigation, as the test of pull request 520 does. | owned | think-tfil (open) | 2026-10-12 |
+| #540 queued ask: replies_due reports adoption, supersession and newly read comments, with tests, and a reply's reported items can state the position. | owned | think-qh9a (open) | 2026-10-12 |
+| #541 queued ask: --github fails a recorded reply whose ids are missing from the posted text, with a test. | owned | think-7yqp (open) | 2026-10-12 |
+| #542 queued ask: Each record and tool change the two reviews propose, on main or recorded as declined. | owned | think-npvi (open) | 2026-10-12 |
+| #543 queued ask: The owner's decisions listed on the issue, each recorded with its bead. | owned | think-mq0k (in_progress) | 2026-10-12 |
+| #544 queued ask: Every item the tracker lists landed, declined or handed to its own issue. | owned | think-mq0k (in_progress) | 2026-10-12 |
+| #545 queued result s29-minimal-polynomial | owned | think-6gti (in_progress) | 2026-10-12 |
+| #545 queued result grade-c-local-minima | owned | think-7scz (in_progress) | 2026-10-12 |
+| #550 queued ask: The fixture waits on the theme menu's own state, without a longer timeout or a skip, and the module passes repeatedly under load. | owned | think-mvsm (open) | 2026-10-12 |
+| #554 queued ask: The colourer derives slots from shared atlas-wide class centres, the animate-view contract's core check holds exact slots again, and the workbench browser behaviour step passes. | owned | think-9xhw (open) | 2026-10-12 |
+| #570 owes a reply | owned | think-rfce (in_progress) | 2026-10-12 |
+| #574 owes a reply | owned | think-9v2k (in_progress) | 2026-10-13 |
+| #593 owes a reply | owned | think-2ep3 (in_progress) | 2026-10-14 |
+| #594 owes a reply | owned | think-osvq (in_progress) | 2026-10-14 |
+| #603 queued result note-v08-lean-2026-10-18 | owned | think-494l (in_progress) | 2026-10-14 |
+| #603 queued result note-v09-doi-2026-10-19 | owned | think-494l (in_progress) | 2026-10-14 |
+| #603 owes a reply | owned | think-0esw (in_progress) | 2026-10-14 |
+| #643 queued result validtilt9-lean | owned | think-jh0n (in_progress) | 2026-10-16 |
+| #643 owes a reply | owned | think-jh0n (in_progress) | 2026-10-16 |
+| #606 owes a reply | owned | think-rvv7 (in_progress) | 2026-10-14 |
+| #607 queued result fang-composites | owned | think-rn2y (open) | 2026-10-14 |
+| #607 owes a reply | owned | think-qik6 (in_progress) | 2026-10-14 |
+| #610 owes a reply | owned | think-ribz (in_progress) | 2026-10-15 |
+| #613 queued ask: The owner decides whether Göbel's constructions are earlier reports and the baseline beyond 324; if so, a records PR adds them as the baseline, corrects 369 and 376 and records a defect. Until then the 42 rows of 487b058 above them are not recorded, and 369 and 376 stay. | owned | think-8krd (open) | 2026-10-15 |
+| #639 owes a reply | owned | think-phyb (in_progress) | 2026-10-16 |
+| #640 owes a reply | owned | think-a4x3 (in_progress) | 2026-10-16 |
+| #659 queued result n236 | owned | think-6wtz (in_progress) | 2026-10-16 |
+| #664 queued result n271 | owned | think-8o5j (in_progress) | 2026-10-17 |
+| #666 queued result n464 | owned | think-3m10 (in_progress) | 2026-10-17 |
+| #666 queued result n509 | owned | think-3m10 (in_progress) | 2026-10-17 |
+| #666 queued result n555 | owned | think-3m10 (in_progress) | 2026-10-17 |
+| #666 queued result n603 | owned | think-3m10 (in_progress) | 2026-10-17 |
+| #666 queued result n654 | owned | think-3m10 (in_progress) | 2026-10-17 |
+| #666 queued result n706 | owned | think-3m10 (in_progress) | 2026-10-17 |
+| #666 queued result n760 | owned | think-3m10 (in_progress) | 2026-10-17 |
+| #666 queued result n817 | owned | think-3m10 (in_progress) | 2026-10-17 |
+| #666 queued result n875 | owned | think-3m10 (in_progress) | 2026-10-17 |
+| #666 queued result n935 | owned | think-3m10 (in_progress) | 2026-10-17 |
+| #666 queued result n998 | owned | think-3m10 (in_progress) | 2026-10-17 |
+| #666 queued result n1061 | owned | think-3m10 (in_progress) | 2026-10-17 |
+| #666 queued result n1128 | owned | think-3m10 (in_progress) | 2026-10-17 |
+| #666 queued result n1196 | owned | think-3m10 (in_progress) | 2026-10-17 |
+| #666 queued result n1266 | owned | think-3m10 (in_progress) | 2026-10-17 |
+| #666 queued result n1339 | owned | think-3m10 (in_progress) | 2026-10-17 |
+| #666 queued result n1413 | owned | think-3m10 (in_progress) | 2026-10-17 |
+| #666 queued result n1489 | owned | think-3m10 (in_progress) | 2026-10-17 |
+| #666 queued result n1568 | owned | think-3m10 (in_progress) | 2026-10-17 |
+| #666 owes triage | owned | think-3m10 (in_progress) | 2026-10-17 |
+| #670 queued result n204 | owned | think-f28n (in_progress) | 2026-10-17 |
+| #670 queued result n330 | owned | think-f28n (in_progress) | 2026-10-17 |
+| #670 queued result n339 | owned | think-f28n (in_progress) | 2026-10-17 |
+| #670 queued result n364 | owned | think-f28n (in_progress) | 2026-10-17 |
+| #670 queued result n370 | owned | think-f28n (in_progress) | 2026-10-17 |
+| #670 queued result n378 | owned | think-f28n (in_progress) | 2026-10-17 |
+| #670 queued result n379 | owned | think-f28n (in_progress) | 2026-10-17 |
+| #670 queued result n382 | owned | think-f28n (in_progress) | 2026-10-17 |
+| #670 queued result n403 | owned | think-f28n (in_progress) | 2026-10-17 |
+| #670 queued result n417 | owned | think-f28n (in_progress) | 2026-10-17 |
+| #670 queued result n418 | owned | think-f28n (in_progress) | 2026-10-17 |
+| #670 queued result n419 | owned | think-f28n (in_progress) | 2026-10-17 |
+| #670 queued result n421 | owned | think-f28n (in_progress) | 2026-10-17 |
+| #670 queued result n422 | owned | think-f28n (in_progress) | 2026-10-17 |
+| #670 queued result n444 | owned | think-f28n (in_progress) | 2026-10-17 |
+| #670 queued result n452 | owned | think-f28n (in_progress) | 2026-10-17 |
+| #670 queued result n458 | owned | think-f28n (in_progress) | 2026-10-17 |
+| #670 queued result n459 | owned | think-f28n (in_progress) | 2026-10-17 |
+| #670 queued result n460 | owned | think-f28n (in_progress) | 2026-10-17 |
+| #670 queued result n461 | owned | think-f28n (in_progress) | 2026-10-17 |
+| #670 queued result n462 | owned | think-f28n (in_progress) | 2026-10-17 |
+| #670 queued result n463 | owned | think-f28n (in_progress) | 2026-10-17 |
+| #670 queued result n501 | owned | think-f28n (in_progress) | 2026-10-17 |
+| #670 queued result n503 | owned | think-f28n (in_progress) | 2026-10-17 |
+| #670 queued result n505 | owned | think-f28n (in_progress) | 2026-10-17 |
+| #670 queued result n536 | owned | think-f28n (in_progress) | 2026-10-17 |
+| #670 queued result n546 | owned | think-f28n (in_progress) | 2026-10-17 |
+| #670 queued result n548 | owned | think-f28n (in_progress) | 2026-10-17 |
+| #670 queued result n551 | owned | think-f28n (in_progress) | 2026-10-17 |
+| #670 queued result n553 | owned | think-f28n (in_progress) | 2026-10-17 |
+| #670 queued result n598 | owned | think-f28n (in_progress) | 2026-10-17 |
+| #670 queued result n600 | owned | think-f28n (in_progress) | 2026-10-17 |
+| #670 queued result n647 | owned | think-f28n (in_progress) | 2026-10-17 |
+| #670 queued result n650 | owned | think-f28n (in_progress) | 2026-10-17 |
+| #670 queued result n651 | owned | think-f28n (in_progress) | 2026-10-17 |
+| #670 queued result n700 | owned | think-f28n (in_progress) | 2026-10-17 |
+| #670 queued result n701 | owned | think-f28n (in_progress) | 2026-10-17 |
+| #670 queued result n702 | owned | think-f28n (in_progress) | 2026-10-17 |
+| #670 queued result n703 | owned | think-f28n (in_progress) | 2026-10-17 |
+| #670 queued result n749 | owned | think-f28n (in_progress) | 2026-10-17 |
+| #670 queued result n753 | owned | think-f28n (in_progress) | 2026-10-17 |
+| #670 queued result n754 | owned | think-f28n (in_progress) | 2026-10-17 |
+| #670 queued result n756 | owned | think-f28n (in_progress) | 2026-10-17 |
+| #670 queued result n757 | owned | think-f28n (in_progress) | 2026-10-17 |
+| #670 queued result n758 | owned | think-f28n (in_progress) | 2026-10-17 |
+| #670 queued result n804 | owned | think-f28n (in_progress) | 2026-10-17 |
+| #670 queued result n805 | owned | think-f28n (in_progress) | 2026-10-17 |
+| #670 queued result n806 | owned | think-f28n (in_progress) | 2026-10-17 |
+| #670 queued result n809 | owned | think-f28n (in_progress) | 2026-10-17 |
+| #670 queued result n811 | owned | think-f28n (in_progress) | 2026-10-17 |
+| #670 queued result n812 | owned | think-f28n (in_progress) | 2026-10-17 |
+| #670 queued result n813 | owned | think-f28n (in_progress) | 2026-10-17 |
+| #670 queued result n863 | owned | think-f28n (in_progress) | 2026-10-17 |
+| #670 queued result n866 | owned | think-f28n (in_progress) | 2026-10-17 |
+| #670 queued result n867 | owned | think-f28n (in_progress) | 2026-10-17 |
+| #670 queued result n868 | owned | think-f28n (in_progress) | 2026-10-17 |
+| #670 queued result n869 | owned | think-f28n (in_progress) | 2026-10-17 |
+| #670 queued result n870 | owned | think-f28n (in_progress) | 2026-10-17 |
+| #670 queued result n871 | owned | think-f28n (in_progress) | 2026-10-17 |
+| #670 queued result n922 | owned | think-f28n (in_progress) | 2026-10-17 |
+| #670 queued result n925 | owned | think-f28n (in_progress) | 2026-10-17 |
+| #670 queued result n926 | owned | think-f28n (in_progress) | 2026-10-17 |
+| #670 queued result n927 | owned | think-f28n (in_progress) | 2026-10-17 |
+| #670 queued result n928 | owned | think-f28n (in_progress) | 2026-10-17 |
+| #670 queued result n929 | owned | think-f28n (in_progress) | 2026-10-17 |
+| #670 queued result n930 | owned | think-f28n (in_progress) | 2026-10-17 |
+| #670 queued result n931 | owned | think-f28n (in_progress) | 2026-10-17 |
+| #670 queued result n987 | owned | think-f28n (in_progress) | 2026-10-17 |
+| #670 queued result n989 | owned | think-f28n (in_progress) | 2026-10-17 |
+| #670 queued result n990 | owned | think-f28n (in_progress) | 2026-10-17 |
+| #670 queued result n991 | owned | think-f28n (in_progress) | 2026-10-17 |
+| #670 queued result n992 | owned | think-f28n (in_progress) | 2026-10-17 |
+| #670 queued result n993 | owned | think-f28n (in_progress) | 2026-10-17 |
+| #670 owes triage | owned | think-f28n (in_progress) | 2026-10-17 |
+| #672 queued result n227 | owned | think-2vjc (in_progress) | 2026-10-17 |
+| #672 queued result n229 | owned | think-2vjc (in_progress) | 2026-10-17 |
+| #672 queued result n330 | owned | think-2vjc (in_progress) | 2026-10-17 |
+| #672 queued result n461 | owned | think-2vjc (in_progress) | 2026-10-17 |
+| #672 queued result n507 | owned | think-2vjc (in_progress) | 2026-10-17 |
+| #672 queued result n652 | owned | think-2vjc (in_progress) | 2026-10-17 |
+| #672 queued result n653 | owned | think-2vjc (in_progress) | 2026-10-17 |
+| #672 queued result n704 | owned | think-2vjc (in_progress) | 2026-10-17 |
+| #672 queued result n749 | owned | think-2vjc (in_progress) | 2026-10-17 |
+| #672 queued result n750 | owned | think-2vjc (in_progress) | 2026-10-17 |
+| #672 queued result n753 | owned | think-2vjc (in_progress) | 2026-10-17 |
+| #672 queued result n755 | owned | think-2vjc (in_progress) | 2026-10-17 |
+| #672 queued result n756 | owned | think-2vjc (in_progress) | 2026-10-17 |
+| #672 queued result n757 | owned | think-2vjc (in_progress) | 2026-10-17 |
+| #672 queued result n758 | owned | think-2vjc (in_progress) | 2026-10-17 |
+| #672 queued result n759 | owned | think-2vjc (in_progress) | 2026-10-17 |
+| #672 queued result n804 | owned | think-2vjc (in_progress) | 2026-10-17 |
+| #672 queued result n805 | owned | think-2vjc (in_progress) | 2026-10-17 |
+| #672 queued result n811 | owned | think-2vjc (in_progress) | 2026-10-17 |
+| #672 queued result n812 | owned | think-2vjc (in_progress) | 2026-10-17 |
+| #672 queued result n813 | owned | think-2vjc (in_progress) | 2026-10-17 |
+| #672 queued result n814 | owned | think-2vjc (in_progress) | 2026-10-17 |
+| #672 queued result n815 | owned | think-2vjc (in_progress) | 2026-10-17 |
+| #672 queued result n816 | owned | think-2vjc (in_progress) | 2026-10-17 |
+| #672 queued result n817 | owned | think-2vjc (in_progress) | 2026-10-17 |
+| #672 queued result n864 | owned | think-2vjc (in_progress) | 2026-10-17 |
+| #672 queued result n865 | owned | think-2vjc (in_progress) | 2026-10-17 |
+| #672 queued result n868 | owned | think-2vjc (in_progress) | 2026-10-17 |
+| #672 queued result n869 | owned | think-2vjc (in_progress) | 2026-10-17 |
+| #672 queued result n871 | owned | think-2vjc (in_progress) | 2026-10-17 |
+| #672 queued result n872 | owned | think-2vjc (in_progress) | 2026-10-17 |
+| #672 queued result n873 | owned | think-2vjc (in_progress) | 2026-10-17 |
+| #672 queued result n874 | owned | think-2vjc (in_progress) | 2026-10-17 |
+| #672 queued result n923 | owned | think-2vjc (in_progress) | 2026-10-17 |
+| #672 queued result n924 | owned | think-2vjc (in_progress) | 2026-10-17 |
+| #672 queued result n929 | owned | think-2vjc (in_progress) | 2026-10-17 |
+| #672 queued result n930 | owned | think-2vjc (in_progress) | 2026-10-17 |
+| #672 queued result n932 | owned | think-2vjc (in_progress) | 2026-10-17 |
+| #672 queued result n933 | owned | think-2vjc (in_progress) | 2026-10-17 |
+| #672 queued result n934 | owned | think-2vjc (in_progress) | 2026-10-17 |
+| #672 queued result n935 | owned | think-2vjc (in_progress) | 2026-10-17 |
+| #672 queued result n990 | owned | think-2vjc (in_progress) | 2026-10-17 |
+| #672 queued result n991 | owned | think-2vjc (in_progress) | 2026-10-17 |
+| #672 queued result n994 | owned | think-2vjc (in_progress) | 2026-10-17 |
+| #672 queued result n995 | owned | think-2vjc (in_progress) | 2026-10-17 |
+| #672 queued result n996 | owned | think-2vjc (in_progress) | 2026-10-17 |
+| #672 owes triage | owned | think-2vjc (in_progress) | 2026-10-17 |
+| #673 queued ask: Review requested found_by corrections at 146 and 308 and determine how existing credit policy applies to the author clarification. | owned | think-gzvu (in_progress) | 2026-10-17 |
+| #673 owes triage | owned | think-gzvu (in_progress) | 2026-10-17 |
+| #675 queued result n204 | owned | think-pvav (in_progress) | 2026-10-18 |
+| #675 queued result n419 | owned | think-pvav (in_progress) | 2026-10-18 |
+| #675 queued result n421 | owned | think-pvav (in_progress) | 2026-10-18 |
+| #675 queued result n422 | owned | think-pvav (in_progress) | 2026-10-18 |
+| #675 queued result n458 | owned | think-pvav (in_progress) | 2026-10-18 |
+| #675 queued result n459 | owned | think-pvav (in_progress) | 2026-10-18 |
+| #675 queued result n460 | owned | think-pvav (in_progress) | 2026-10-18 |
+| #675 queued result n461 | owned | think-pvav (in_progress) | 2026-10-18 |
+| #675 queued result n462 | owned | think-pvav (in_progress) | 2026-10-18 |
+| #675 queued result n463 | owned | think-pvav (in_progress) | 2026-10-18 |
+| #675 queued result n464 | owned | think-pvav (in_progress) | 2026-10-18 |
+| #675 queued result n502 | owned | think-pvav (in_progress) | 2026-10-18 |
+| #675 queued result n545 | owned | think-pvav (in_progress) | 2026-10-18 |
+| #675 queued result n546 | owned | think-pvav (in_progress) | 2026-10-18 |
+| #675 queued result n547 | owned | think-pvav (in_progress) | 2026-10-18 |
+| #675 queued result n548 | owned | think-pvav (in_progress) | 2026-10-18 |
+| #675 queued result n549 | owned | think-pvav (in_progress) | 2026-10-18 |
+| #675 queued result n554 | owned | think-pvav (in_progress) | 2026-10-18 |
+| #675 queued result n592 | owned | think-pvav (in_progress) | 2026-10-18 |
+| #675 queued result n593 | owned | think-pvav (in_progress) | 2026-10-18 |
+| #675 queued result n598 | owned | think-pvav (in_progress) | 2026-10-18 |
+| #675 queued result n602 | owned | think-pvav (in_progress) | 2026-10-18 |
+| #675 queued result n603 | owned | think-pvav (in_progress) | 2026-10-18 |
+| #675 queued result n641 | owned | think-pvav (in_progress) | 2026-10-18 |
+| #675 queued result n642 | owned | think-pvav (in_progress) | 2026-10-18 |
+| #675 queued result n650 | owned | think-pvav (in_progress) | 2026-10-18 |
+| #675 queued result n652 | owned | think-pvav (in_progress) | 2026-10-18 |
+| #675 queued result n654 | owned | think-pvav (in_progress) | 2026-10-18 |
+| #675 queued result n693 | owned | think-pvav (in_progress) | 2026-10-18 |
+| #675 queued result n700 | owned | think-pvav (in_progress) | 2026-10-18 |
+| #675 queued result n701 | owned | think-pvav (in_progress) | 2026-10-18 |
+| #675 queued result n705 | owned | think-pvav (in_progress) | 2026-10-18 |
+| #675 queued result n706 | owned | think-pvav (in_progress) | 2026-10-18 |
+| #675 queued result n753 | owned | think-pvav (in_progress) | 2026-10-18 |
+| #675 queued result n755 | owned | think-pvav (in_progress) | 2026-10-18 |
+| #675 queued result n756 | owned | think-pvav (in_progress) | 2026-10-18 |
+| #675 queued result n758 | owned | think-pvav (in_progress) | 2026-10-18 |
+| #675 queued result n759 | owned | think-pvav (in_progress) | 2026-10-18 |
+| #675 queued result n760 | owned | think-pvav (in_progress) | 2026-10-18 |
+| #675 queued result n804 | owned | think-pvav (in_progress) | 2026-10-18 |
+| #675 queued result n805 | owned | think-pvav (in_progress) | 2026-10-18 |
+| #675 queued result n806 | owned | think-pvav (in_progress) | 2026-10-18 |
+| #675 queued result n807 | owned | think-pvav (in_progress) | 2026-10-18 |
+| #675 queued result n809 | owned | think-pvav (in_progress) | 2026-10-18 |
+| #675 queued result n811 | owned | think-pvav (in_progress) | 2026-10-18 |
+| #675 queued result n812 | owned | think-pvav (in_progress) | 2026-10-18 |
+| #675 queued result n813 | owned | think-pvav (in_progress) | 2026-10-18 |
+| #675 queued result n814 | owned | think-pvav (in_progress) | 2026-10-18 |
+| #675 queued result n816 | owned | think-pvav (in_progress) | 2026-10-18 |
+| #675 queued result n817 | owned | think-pvav (in_progress) | 2026-10-18 |
+| #675 queued result n863 | owned | think-pvav (in_progress) | 2026-10-18 |
+| #675 queued result n864 | owned | think-pvav (in_progress) | 2026-10-18 |
+| #675 queued result n865 | owned | think-pvav (in_progress) | 2026-10-18 |
+| #675 queued result n867 | owned | think-pvav (in_progress) | 2026-10-18 |
+| #675 queued result n868 | owned | think-pvav (in_progress) | 2026-10-18 |
+| #675 queued result n869 | owned | think-pvav (in_progress) | 2026-10-18 |
+| #675 queued result n870 | owned | think-pvav (in_progress) | 2026-10-18 |
+| #675 queued result n872 | owned | think-pvav (in_progress) | 2026-10-18 |
+| #675 queued result n873 | owned | think-pvav (in_progress) | 2026-10-18 |
+| #675 queued result n874 | owned | think-pvav (in_progress) | 2026-10-18 |
+| #675 queued result n919 | owned | think-pvav (in_progress) | 2026-10-18 |
+| #675 queued result n923 | owned | think-pvav (in_progress) | 2026-10-18 |
+| #675 queued result n924 | owned | think-pvav (in_progress) | 2026-10-18 |
+| #675 queued result n927 | owned | think-pvav (in_progress) | 2026-10-18 |
+| #675 queued result n928 | owned | think-pvav (in_progress) | 2026-10-18 |
+| #675 queued result n930 | owned | think-pvav (in_progress) | 2026-10-18 |
+| #675 queued result n931 | owned | think-pvav (in_progress) | 2026-10-18 |
+| #675 queued result n932 | owned | think-pvav (in_progress) | 2026-10-18 |
+| #675 queued result n933 | owned | think-pvav (in_progress) | 2026-10-18 |
+| #675 queued result n989 | owned | think-pvav (in_progress) | 2026-10-18 |
+| #675 queued result n990 | owned | think-pvav (in_progress) | 2026-10-18 |
+| #675 queued result n991 | owned | think-pvav (in_progress) | 2026-10-18 |
+| #675 queued result n992 | owned | think-pvav (in_progress) | 2026-10-18 |
+| #675 queued result n993 | owned | think-pvav (in_progress) | 2026-10-18 |
+| #675 queued result n994 | owned | think-pvav (in_progress) | 2026-10-18 |
+| #675 queued result n995 | owned | think-pvav (in_progress) | 2026-10-18 |
+| #675 queued result n996 | owned | think-pvav (in_progress) | 2026-10-18 |
+| #675 queued result n997 | owned | think-pvav (in_progress) | 2026-10-18 |
+| #675 queued result n998 | owned | think-pvav (in_progress) | 2026-10-18 |
+| #675 owes triage | owned | think-pvav (in_progress) | 2026-10-18 |
+| #678 queued result n204 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n260 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n330 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n343 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n418 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n420 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n421 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n422 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n455 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n456 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n458 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n459 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n461 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n462 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n463 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n464 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n497 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n499 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n501 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n502 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n505 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n507 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n545 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n546 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n548 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n549 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n553 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n554 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n555 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n592 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n593 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n597 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n598 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n600 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n601 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n602 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n641 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n642 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n650 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n652 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n653 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n654 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n693 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n700 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n701 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n703 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n704 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n705 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n706 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n749 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n751 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n752 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n753 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n754 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n755 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n760 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n804 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n805 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n806 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n808 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n815 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n863 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n865 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n867 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n868 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n870 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n872 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n873 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n874 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n919 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n924 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n926 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n927 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n928 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n930 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n933 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n934 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n984 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n987 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n989 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n990 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n991 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n992 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n994 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 queued result n998 | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #678 owes triage | owned | think-xu4d (in_progress) | 2026-10-18 |
+| #680 queued result n183 | owned | think-xp0o (in_progress) | 2026-10-19 |
+| #680 owes a reply | owned | think-xp0o (in_progress) | 2026-10-19 |
+
+## Regularization owed
+
+Regularization states of 324 counts: 72 regularized, 232 regular as published, 16 decided no better, 4 exempt, 0 pending. Owed: 0 pending counts, 0 of them in PENDING_ALLOWED; 0 decisions still owing runs or an outcome; 4 exemptions.
+
+| item | state | bead | since |
+| --- | --- | --- | --- |
+| n = 39 exempt: a decimal Kingbird witness: the axis tool refuses it (its 36-digit rational pose overlaps at dilation 1), and no strong generator's outcome on it is recorded | owned | think-yk2h (open) |  |
+| n = 55 exempt: a decimal Kingbird witness: the axis tool refuses it (its 36-digit rational pose overlaps at dilation 1), and no strong generator's outcome on it is recorded | owned | think-yk2h (open) |  |
+| n = 290 exempt: a decimal Kingbird witness: the axis tool refuses it (its 36-digit rational pose overlaps at dilation 1), and no strong generator's outcome on it is recorded | owned | think-yk2h (open) |  |
+| n = 291 exempt: a decimal Kingbird witness: the axis tool refuses it (its 36-digit rational pose overlaps at dilation 1), and no strong generator's outcome on it is recorded | owned | think-yk2h (open) |  |
+
+## Blocked imports
+
+38 open `result-import` beads name a blocker; 1 of them name one that has resolved.
+
+1 item above need action.
+
+## Validation backlog: register entries below V3 or C3
+
+| item | state | bead | since |
+| --- | --- | --- | --- |
+| T-007 at V0/C1, incomplete; issues #295 | listed | none named |  |
+| T-036 at V3/C2, confirmed | listed | none named |  |
+| T-046 at V0/C0, recorded | listed | none named |  |
+| T-081 at V0/C1, reviewed; issues #316 | listed | think-4uir (closed), think-hwpr (open) |  |
+| T-087 at V3/C1, reviewed | listed | none named |  |
+| T-112 at V3/C2, confirmed | listed | none named |  |
+| T-120 at V0/C0, recorded; issues #419 | listed | none named |  |
+| T-121 at V0/C0, recorded; issues #419 | listed | none named |  |
+| T-122 at V0/C0, recorded; issues #419 | listed | none named |  |
+| T-123 at V0/C0, recorded; issues #419 | listed | none named |  |
+| T-124 at V0/C0, recorded; issues #420 | listed | none named |  |
+| T-129 at V0/C0, recorded; issues #375 | listed | none named |  |
+| T-132 at V0/C0, recorded; issues #446 | listed | think-r333 (open), think-ux1v (in_progress) |  |
+| T-142 at V0/C0, recorded | listed | think-i85v (open), think-ux1v (in_progress) |  |
+| T-143 at V0/C0, recorded | listed | think-i85v (open), think-ux1v (in_progress) |  |
+| T-144 at V0/C0, recorded | listed | think-nd7g (open), think-ux1v (in_progress) |  |
+| T-153 at V0/C1, reviewed; issues #557 | listed | think-lqtu (open), think-0at1 (open), think-fgmr (open) |  |
+| T-154 at V0/C1, reviewed; issues #565 | listed | think-r109 (open), think-s7s4 (open), think-c1kz (open) |  |
+| T-163 at V2/C1, reviewed; issues #603 | listed | none named |  |
+| T-176 at V0/C1, reviewed; issues #446 | listed | think-u0av (in_progress) |  |
+| T-177 at V0/C1, reviewed; issues #446 | listed | think-u0av (in_progress) |  |
+| T-178 at V0/C1, reviewed; issues #446 | listed | think-u0av (in_progress) |  |
+| T-179 at V0/C1, reviewed | listed | think-u0av (in_progress) |  |
+| T-180 at V0/C1, reviewed; issues #600 | listed | think-wu73 (open), think-tsox (in_progress), think-3n1x (in_progress) |  |
+| T-184 at V3/C1, reviewed; issues #594 | listed | think-l3oo (open), think-eucc (open) |  |
+| T-191 at V3/C1, reviewed; issues #610 | listed | think-l3oo (open), think-eucc (open) |  |
+| T-192 at V0/C0, recorded | listed | think-xzob (open), think-8eo1 (open), think-0arj (open), think-zb5w (in_progress) |  |
+| T-193 at V0/C0, recorded, in analysis since 2026-10-16; issues #639 | listed | think-7qxm (in_progress) |  |
+| T-194 at V0/C0, recorded; issues #640 | listed | think-o40t (in_progress), think-nqnl (in_progress) |  |
+| T-196 at V0/C0, recorded; issues #668 | listed | think-8xr0 (in_progress), think-455r (in_progress) |  |
+| T-197 at V0/C0, recorded; issues #669 | listed | think-8kx2 (in_progress), think-s5u5 (in_progress) |  |
+| T-198 at V0/C0, recorded; issues #674 | listed | think-0lu6 (in_progress), think-s5u5 (in_progress) |  |
+| T-199 at V0/C0, recorded; issues #674 | listed | think-0lu6 (in_progress), think-s5u5 (in_progress) |  |
+
+## Open `result-import` beads, manual reports included
+
+| item | state | bead | since |
+| --- | --- | --- | --- |
+| Intake #557: Kleddamag's candidate proof of s(17) = L | listed | think-00y8 (in_progress) |  |
+| Read evand/square-packing 2b89650..ad86d42 (26 commits, 11-12 Oct): no new bound; s(29) minimal polynomial and grade-C local minima retained (#545) | listed | think-01y3 (open) |  |
+| Follow-up 2026-10-05: unimported issue content, the pending Kingbird intake (n = 69, 83, 87), and evand's site | listed | think-05m9 (open) |  |
+| Records lane #557: register Overbeck's candidate s(17) = L as T-153 (fast-path PR) | listed | think-07jt (in_progress) |  |
+| Validate s(28) > 1149/200: replay of the source's sqverify_continuous v4 over 86 roots (route A) | listed | think-0arj (open) |  |
+| Recompute all 98 capture statements of T-153 and compare row for row (C3 part; ~1,273-2,347 CPU-h; held) | listed | think-0at1 (open) |  |
+| Import wand125 via evand: Valid7 in the Lean kernel (evand PR #6, merged 060c1a1), a kernel route to T-064's finite premise (no issue) | listed | think-0ayk (in_progress) |  |
+| Import Kevin Fang: s(n^2 - n + 1) < n for every n >= 15 and the F(n) excess (Theorems 1-2), with the theorem/ certificates at TheSnakeFang/squarepack-certs 078789a (no issue) | listed | think-0esw (in_progress) |  |
+| Stage 4 of T-097: the complete replay of wand125's mixed_n66_L843 (#282), about 15.5 CPU-hours | listed | think-0fkt (open) |  |
+| W2 #674: replay opening and updated n229 dilation certificates with source controls | listed | think-0lu6 (in_progress) |  |
+| Import BuddenPing: s(272) <= 16.9655864748376706357560070334220455696299, refining T-151 (#569) | listed | think-0qvc (in_progress) |  |
+| Triage Couzo extended-range construction updates beyond the eight-case intake (no issue) | listed | think-1545 (in_progress) |  |
+| Review the verification and confirmation rungs of the recent register entries (T-120 to T-146) against their retained evidence | listed | think-18b8 (in_progress) |  |
+| Integrate issue432 exact inputs into the frontier and private atlas workers | listed | think-1cvf (in_progress) |  |
+| Validate #680 n183: both source certificates, exact replay and sensitive controls | listed | think-1hmn (open) |  |
+| Import Guzhou0806: s(17) R070 and R071 (4.6604427, 18641771/4000000), above the verified 116511/25000 | listed | think-1qms (in_progress) |  |
+| Import, confirm and answer every reported result (2 October 2026 effort) | listed | think-20pp (open) |  |
+| Validate: Couzo 487b058's 296 beyond-horizon certificates, exact replay on both routes (38-48 CPU-h; HELD) | listed | think-2d7f (open) |  |
+| Import Mishapolk: 73 upper bounds across n = 51 to 308 (#593) | listed | think-2ep3 (in_progress) |  |
+| Stage 4 review of #622's s(29) certificate (T-195) | listed | think-2jzy (in_progress) |  |
+| Import franciscouzo: 227, 229, 330-996: registration request (#672) | listed | think-2vjc (in_progress) |  |
+| Import Mishapolk: exact certificates at n = 103, 153, 207, 209, 258, 270 (#573) | listed | think-2zz8 (in_progress) |  |
+| Import pingyou: s(29) exact rational certificate, 1.57e-36 below T-155 and 7.32e-90 below #574's N29 (#622) | listed | think-30n2 (in_progress) |  |
+| One packet contract: a schema for the acquisition record and one acquirer, replacing nine packet shapes | listed | think-3jsj (open) |  |
+| Import JoostdeWinter: s(n) < ⌈√n⌉ at 18 counts from n = 509 to 1568, and s(464) ≤ 21.98881: registration request (#666) | listed | think-3m10 (in_progress) |  |
+| Import E. Summins: simple-square stratification of s(n), n = 11 scoreboard and Lean layer, a strategy registration (#522) | listed | think-3m7d (in_progress) |  |
+| Adopt T-174 at its 38 staged rational counts under the house rule, regularizing each in the adoption's PR (#660 A1; 12 more go to T-193 via #658/think-ot5c) | listed | think-3mry (in_progress) |  |
+| Import wand125: the independent checker cfcheck for the closed form (problems/closed-form/indep-checker at 746e2c5), intervals 1 and 34 (#600) | listed | think-3n1x (in_progress) |  |
+| Import E. Summins: forced double meeters (Theorem FC, SLOT-CROWD) and the forced-cell traction finding (#525) | listed | think-3nc2 (in_progress) |  |
+| Import Guzhou0806: s(40) > 335427/50000 from wand125's rect_n40_L67 density with a clipped-corner estimate (#485) | listed | think-3oi5 (in_progress) |  |
+| Read wand125/square-packing d4a1981 (sqverify_continuous v4, --resume), stream-verify and evand PR 7: nothing to import (no issue) | listed | think-3ppi (open) |  |
+| PR #658: land T-193's house-gate change after #660 merges (review A2 to A5) | listed | think-3q9x (in_progress) |  |
+| W2 #668: integrate independent mathematical review of three upper bounds | listed | think-455r (in_progress) |  |
+| Triage the runbook review gap and style findings left open on the result import process | listed | think-4kng (open) |  |
+| Review the sqverify-fast census route for format L, then add independent replay entries to T-076 n82, T-073 n83 and T-080 n101 | listed | think-4qga (open) |  |
+| Judge the census control's axis refusal against the sweep's enclosure, not AXIS_ROUNDING (F-1 of the 14 October wand125 review; T-142, T-175 to T-177) | listed | think-4uun (open) |  |
+| Hold a register entry scope to the scopes of its cited evidence, and extend the register coverage gate to upper bounds by others | listed | think-506q (open) |  |
+| Validate: wand125 s(39) >= 533/80 (mixed_n39_L66625), census of all 2,073 directions with whole-net controls (~7.1 CPU-h; control needs think-4uun) | listed | think-567s (open) |  |
+| Import Daniel: unconditional Lean formalization of Fang Theorems 1-2 (no issue) | listed | think-57ei (open) |  |
+| Codify replies on every intake issue, posted after merge, and read two watched repositories (2026-10-12) | listed | think-58lu (in_progress) |  |
+| T-084: register chelokot's Lean squareMinusOne_isMinimumSide as a second machine route (axiom receipt, statement reading) | listed | think-5i1z (open) |  |
+| Import evand: s(229) ≤ 15.650163254859: registration request (#674) | listed | think-5ij2 (in_progress) |  |
+| Validate: Fang's six rectangles (R, R' and four more) in both dimensions on a maintained rectangle-container route (<1 CPU-min once written; needs W7 code) | listed | think-5klg (open) |  |
+| Decide the reported-lane witness at T-098's 48 counts: the known-best pose does not attain S' (EX-9) | listed | think-5n3o (open) |  |
+| Watch reads 2026-10-14: ofitzharding/sq17-lean d9653fd, RobertBarnett 52cf1cc, itsnaka 56fa71f (drop think-ga3m), TheSnakeFang 078789a (think-7bw3), wand125 aba0e59, in intake-watch.yaml | listed | think-5pn5 (in_progress) |  |
+| Take Evan Daniel's Lean closed forms for 62 quadratic register sides (7d047a9) as evidence for T-120..T-124 | listed | think-63vx (open) |  |
+| Lean-backed claims: what V4/V5 and C4/C5 would need for T-060 (n = 11, Ahmed's 11SquaresOptimal and 11SquaresFormalized), T-084, T-055 and T-120..T-124 (#419) | listed | think-66e5 (in_progress) |  |
+| Decide whether T-088 and T-089 attribution.published moves to the dates the catalogue SVGs give (n = 69: 7 Sep; n = 83: 10 Sep; n = 87: 16 Sep 2026) | listed | think-691c (open) |  |
+| Import Evan Daniel: degree-7213 minimal polynomial of the s(29) record side, polynomial unpublished (#545) | listed | think-6gti (in_progress) |  |
+| #557 follow-through: land #560 calibrated, then credit Kleddamag as Marc Leonard Overbeck (stacked PRs) | listed | think-6iv7 (open) |  |
+| Import Evan Daniel: s(154) <= 12922566401934059503377267965457/10^30, 5.04e-4 below T-136 (#552) | listed | think-6no5 (in_progress) |  |
+| Import E. Summins: independent replay of T-037 (Kleddamag s(11) > 31/8 v1.0.2), a confirmation record (#521) | listed | think-6t6q (in_progress) |  |
+| Import Evan Daniel: s(236) <= 15.861934390608, a new local minimum 2.02e-3 below T-146 (#659) | listed | think-6wtz (in_progress) |  |
+| Import Kevin Fang: s(380), s(381), s(382) and any other new certificates at TheSnakeFang/squarepack-certs 078789a (no issue) | listed | think-7bw3 (in_progress) |  |
+| n = 17 integration: retain the R070/R071 CI artifacts and job logs before they expire (December 2026) | listed | think-7hq0 (open) |  |
+| Review the draft significance scores of T-154, T-155 and T-156 | listed | think-7j5d (open) |  |
+| Import Evan Daniel: grade-C local minima at 233 configurations of field degree <= 4, 53 current-record counts beyond T-124 (#545) | listed | think-7scz (in_progress) |  |
+| check_requests --github: hold each recorded reply's ids to the posted comment's text | listed | think-7yqp (open) |  |
+| Validate s(28) > 1149/200: replay of the 43 slabs on the reviewed T-145 kernel (route B) | listed | think-8eo1 (open) |  |
+| T-193 RE-1: name the packing each of nine exact forms solves, with measured identities (#658 A8) | listed | think-8ido (in_progress) |  |
+| Beyond-horizon rows above Göbel's classical constructions | listed | think-8krd (open) |  |
+| W2 #669: replay original and regularized n155 certificates with source controls | listed | think-8kx2 (in_progress) |  |
+| Import Evan Daniel: s(271) <= 16.948947733714, refining Couzo's #561 packing 4.46e-5 below T-186 (#664) | listed | think-8o5j (in_progress) |  |
+| PR448 diagnostic transport control must pass zero-warning typecheck | listed | think-8wie (in_progress) |  |
+| W2 #668: replay all retained de Winter certificates and source checker controls | listed | think-8xr0 (in_progress) |  |
+| Records: map the s(19) review onto T-194 (C1) and do T-193's stage 4 exit after its review (#639, #640) | listed | think-9e3w (in_progress) |  |
+| Import BuddenPing: s(261) <= 16.6787798753429098149372205115301919485639, refining T-150 (#567) | listed | think-9rm5 (in_progress) |  |
+| Import BuddenPing: 148 certificate refinements, 60 of them exact algebraic or tightened rational (#574) | listed | think-9v2k (in_progress) |  |
+| Couzo 02f9690 beyond-horizon certificates: 15 below the tracked rows (n375 by 4.29e-5, n378 by 4.00e-4), 5 above | listed | think-a4wq (open) |  |
+| Import ofitzharding: complete Lean proof of s(19) optimality (#640) | listed | think-a4x3 (in_progress) |  |
+| Intake 2026-10-14: evaluate every open upper-bound report per count, in report order, and record only the strongest | listed | think-abi1 (in_progress) |  |
+| Import Daniel: Lean Ryu bound c*(k) <= 8 ceil(sqrt(k-4))-1 (no issue) | listed | think-ahr2 (open) |  |
+| Recover and audit the full Pingyou Fibonacci-torus manuscript | listed | think-aj43 (open) |  |
+| Replies after #553 merged | listed | think-ckjc (in_progress) |  |
+| Layer 6: records for the 2026-10-12 intake | listed | think-cq95 (in_progress) |  |
+| Review the result import runbook against the measures of its first application | listed | think-daa8 (open) |  |
+| Follow-ups from #608's review: never call a sample confirmed (check_requests), #600 follow-up, remaining ry-xu credits, sample citation rule | listed | think-dquu (open) |  |
+| Require bead on every queued result and ask in result-requests.yaml once the 2026-10-05 lanes merge | listed | think-du1e (open) |  |
+| Validate: regenerate and replay Fang's 53 table-only composites (replay ~59-119 CPU-h, regeneration unmeasured; HELD) | listed | think-dyyu (open) |  |
+| PR #651 A1: link #642 and #651 as a formal GitHub stack | listed | think-e1u5 (in_progress) |  |
+| Intake pass 2026-10-17 | listed | think-e2sz (in_progress) |  |
+| Validate: wand125 s(44) >= 2799/400 (mixed_n44_L69975), census of all 2,073 directions with whole-net controls (~17 CPU-h) | listed | think-ec27 (open) |  |
+| Import Francisco Couzo: eight exact rational refinements (#451) | listed | think-edo8 (in_progress) |  |
+| Import dostashev: s(175) <= 13.764174317487, s(232) <= 15.764174317487, s(264) <= 16.774735132388 (#528) | listed | think-em0b (in_progress) |  |
+| Import wand125: register #446's s(19) >= 1931/400, s(20) >= 393/80, s(26) >= 1111/200, s(27) >= 1131/200 as reported (#446) | listed | think-eth9 (open) |  |
+| Validation (#610, think-ribz): zmx2 --full and zm_mixed.py on its failing roots for s(95), about 6 CPU-h, priced, gated on decision | listed | think-eucc (open) |  |
+| Import franciscouzo: 204-993: registration request (#670) | listed | think-f28n (in_progress) |  |
+| Import wand125: the Lean proof of its point-only s(21) = 5 (bears on T-055) | listed | think-f2bm (open) |  |
+| Import wand125: 18 fine-net mixed-measure lower bounds at n = 38 to 110, square-lower-bounds-v1 (#446 comment of 16 October) | listed | think-f40c (in_progress) |  |
+| Import Daniel: deficiency c*(k) <= 4 ceil(sqrt(2k-7))-1 (no issue) | listed | think-f8py (in_progress) |  |
+| Intake pass 2026-10-10: eight new issues, unread replies and comments, five watched repositories | listed | think-ff6c (in_progress) |  |
+| intake_sweep: say a pinned read can be removed only when removing it leaves nothing unretained | listed | think-ffh8 (open) |  |
+| Replay T-153's ten remaining trees with the producer's checkers (C3 part; ~7.1-21 CPU-h; held) | listed | think-fgmr (open) |  |
+| Stage 4-5: independently review and adopt the pending upper-bound reports (T-128, T-130, T-131 and the 2026-10-10 imports), choosing one house per count | listed | think-fvz4 (in_progress) |  |
+| Validate: evand #639 exact sides, verify_exact.py replay of 23 data files at 7d1407a with mutated controls (~0.6 CPU-h; after stage 2) | listed | think-g59l (open) |  |
+| check_source_coverage: fail when a source key cited by a register entry or its evidence has no coverage entry; backfill the two missing | listed | think-g6d5 (open) |  |
+| Intake announcement: generate a one-line-per-result summary with X handles where self-declared, names otherwise | listed | think-ghbx (in_progress) |  |
+| Review #680 n183 mathematics independently from retained source | listed | think-glg8 (in_progress) |  |
+| Layer 5: rungs, significance, announcement, reply rule | listed | think-gn16 (in_progress) |  |
+| Resolve credit correction: evand: Credit correction request: s(146) and s(308) found_by (#673) | listed | think-gzvu (in_progress) |  |
+| Import Fitzharding: s(17) = L by a complete Lean 4 proof (#565) | listed | think-hcqr (in_progress) |  |
+| Import mstrmg: n = 366 registration request (#624) | listed | think-hd6a (in_progress) |  |
+| Follow up on every result-report issue: acknowledge now, final reply from main after the stack lands, close the settled ones | listed | think-hen3 (in_progress) |  |
+| Intake pass 2026-10-16 overnight: sweep residue, regularization 3b/3c, validation review of T-185..T-190 | listed | think-hg5s (in_progress) |  |
+| Replay wand125's ValidTilt9 run (records-tilt9-v1, c561dbb) in full: the independent route to T-081's finite premise | listed | think-hwpr (open) |  |
+| Import wand125: s(28) >= 2297/400 and s(30) >= 2357/400 by fine-net check2 certificates (no issue) | listed | think-i85v (open) |  |
+| Record fixes from the 2026-10-10 stage-5 audit: E-ryxu-432 limitations, the ry-xu credit name, stale next_rung clauses | listed | think-ijv2 (open) |  |
+| Optional: source-checker replays of T-068's four unreplayed rectangle certificates (n = 66, 86, 87, 90) | listed | think-j0dd (open) |  |
+| Read the AI-assistance statement from the bibliography and run the check in packing-validate | listed | think-j5so (open) |  |
+| Import E. Summins: the simple-square climb at n = 17 and n = 19, a 2,500-class census and a compute request (#523) | listed | think-j891 (in_progress) |  |
+| Import wand125: the Lean kernel proof of ValidTilt9, s(k^2 - 4) = k for every k >= 8 (2c75edc), a formalization of T-081 (#643) | listed | think-jh0n (in_progress) |  |
+| Answer every result report | listed | think-jl4z (open) |  |
+| Import Mishapolk: 28 packings below the register at n = 84-306 (#470) | listed | think-jpre (in_progress) |  |
+| Import evand beyond-corpus tilings: s(964), s(1092), s(1228) at evand/square-packing 49907ec | listed | think-jtlq (open) |  |
+| Import mstrmg (Miles Gray): s(381) <= 19.985624661051481, beyond the case corpus (#582) | listed | think-k8z2 (in_progress) |  |
+| Carry the sqverify-fast format T route to T-046's 27 and 28 September rectangle certificates | listed | think-kf3o (open) |  |
+| Import Hosono: s(42) >= 2749/400, fine-net mixed certificate (no issue) | listed | think-kjd7 (in_progress) |  |
+| Import and verify issue432 newly reported ry-xu packings | listed | think-klm7 (in_progress) |  |
+| Import E. Summins: geometry-before-LP toolkit for stratum trees, exact-rational leaf rules, 7.2x on closed nodes (#527) | listed | think-kok7 (in_progress) |  |
+| Re-derive the n = 69, 83, 87 witnesses from the catalogue SVGs and certify their 50-100 digit poses with a finer dilation (T-088, T-089 next_rung) | listed | think-krbs (open) |  |
+| Resume intake after merged stack #677 and record author replies | listed | think-kwol (in_progress) |  |
+| Import issue #438: fourteen exact rational ceiling refinements | listed | think-l360 (in_progress) |  |
+| Validation backlog (owner cap 2026-10-14: hold anything > 40 CPU-h) | listed | think-lh7d (open) |  |
+| Import evand: n17 hard tail, wall-chain elimination of width 1 misses m851903's obstruction, a float negative (#494) | listed | think-lkbe (open) |  |
+| T-153 (n = 17 candidate): every remaining validation and confirmation option, held by the owner on 13 October | listed | think-lqtu (open) |  |
+| Attribute only: independent re-implementations of T-153's tree and capture checkers | listed | think-m4ve (open) |  |
+| Intake pass 2026-10-16: #639 (evand exact sides for 22 packings), #640 (ofitzharding Lean proof of s(19) optimality), #622 author reply | listed | think-mdnn (open) |  |
+| Intake pass 2026-10-11: six new upper-bound reports, two n17 issues, four unread comments, six watched repositories | listed | think-mq0k (in_progress) |  |
+| Gate the verified lane for a result by others on a replay here and a mapped review | listed | think-mt6e (open) |  |
+| Draft the stage-7 replies owed after the 9 October intake stack merged (#425, #428, #432, #438, #446, #451, #375, #414, #411, #413), for the owner to post | listed | think-mtwe (in_progress) |  |
+| Sweep residue 2026-10-16: wand125 319a779, redundant reads, six resolved blockers, closeable issues, think-tk0u | listed | think-mu5v (in_progress) |  |
+| Import evand: s(155) ≤ 12.952260944651: registration request (#669) | listed | think-n1ga (in_progress) |  |
+| Import wand125: s(122) >= 563/50 by the mixed_n122_L1126 linear certificate, raising n = 122 to 126 (no issue) | listed | think-nd7g (open) |  |
+| Import Francisco Couzo: franciscouzo/square-packing 487b058 (no issue): s(211) 9.29e-6 below #586, and 296 certificates beyond 324 | listed | think-nj7h (in_progress) |  |
+| Import wand125: 15 more n17 sub-pattern kernel certificates, standing verifier full PASS, for admission to certified-sub-patterns.yaml (#495) | listed | think-nmfl (open) |  |
+| Apply the record and tool changes proposed by the 2026-10-11 rung reviews (R1 RR-1..RR-9, R2 section 8) | listed | think-npvi (open) |  |
+| Validate: Fitzharding s(19) Lean proof (#640), full from-source build, axiom check and kernel replay (~190-420 CPU-h estimate; HELD) | listed | think-nqnl (in_progress) |  |
+| Repair register fields the import review found wrong: three truncated significance.by values, and three entries whose claim and activity disagree | listed | think-nr59 (open) |  |
+| Import dostashev: s(129) <= 11.870013850405, s(204) <= 14.808663234387, s(303) <= 17.909958291070 (#562) | listed | think-nrqu (in_progress) |  |
+| Qualify inherited intake coverage notes after maintained confirmations | listed | think-o061 (in_progress) |  |
+| Validate: cfcheck complete replay of the closed form's intervals 1 and 34, 8 records (~320-650 CPU-h; HELD) | listed | think-o4kf (open) |  |
+| Import Mishapolk 70a033f (no issue): 12 KKT refinements below best now at n = 129, 154, 156, 175, 176, 204, 232, 264, 271, 302, 303, 304; 207 undecided | listed | think-o644 (in_progress) |  |
+| Owner's oversight record for T-153, for V4/C4 | listed | think-ofoc (open) |  |
+| Validation (#610, think-ribz): build lean/S95Lower.lean on Sqpack 1718a58, held on memory (25 GB peak, host has 15 GB) | listed | think-ojr9 (open) |  |
+| Import Francisco Couzo: 304, 305 and nine beyond-horizon counts 338-381 (#506) | listed | think-om5l (in_progress) |  |
+| Validate or refute every reported result | listed | think-or93 (open) |  |
+| Import Benjamin Greff (bengreff): s(76) = 9 by a mixed cover (#594) | listed | think-osvq (in_progress) |  |
+| Algebraic house writer: adopt T-174 at 70, 153 and 207 (and T-193's 16 on the stack) once adopt_houses writes an algebraic side (#660 A1) | listed | think-ot5c (open) |  |
+| Import Evan Daniel: the Lean kernel proof s12_ge_15680_3951 (S12HLower, 513bb66), a proof-assistant route for T-049 (no issue) | listed | think-oyd4 (open) |  |
+| Import wand125 release data/n17-m2048064-v1 (2026-10-13): one n = 17 sub-pattern certificate for #413 | listed | think-p2cy (open) |  |
+| Import Daniel: staircase deficiency and Ryu threshold improvements (no issue) | listed | think-pf37 (in_progress) |  |
+| Import evand: exact algebraic sides for 22 current best-known packings (#639) | listed | think-phyb (in_progress) |  |
+| Import franciscouzo: 204-998: registration request (#675) | listed | think-pvav (in_progress) |  |
+| Validate: Fang's 70 unreplayed theorem/ inventory certificates, both exact routes (~99 CPU-h all-pairs, 44 beyond the job ceiling; HELD) | listed | think-pvov (open) |  |
+| Reopen #575 with a reply if the owner rules for Ostashev's certificate at 176 | listed | think-qag2 (in_progress) |  |
+| Import JoostdeWinter: Improved upper bounds for n = 227, 229, 260: registration request (#668) | listed | think-qdcc (in_progress) |  |
+| One rescoring pass over the 23 draft significance scores of imported results, by an independent review lane | listed | think-qh3s (in_progress) |  |
+| check_requests: mark a reply due when a result is adopted on its case, superseded, or its issue gains a comment the record read | listed | think-qh9a (open) |  |
+| Import Francisco Couzo: 14 campaign upper bounds (237, and 13 beyond 324), 7 replayed Kevin Fang composites, 2 precision refinements (#607) | listed | think-qik6 (in_progress) |  |
+| Import wand125: s(29) >= 291/50 by the mixed_n29_L582 fine-net certificate (#446) | listed | think-r333 (open) |  |
+| Independent checks of #557's computations | listed | think-r7m8 (in_progress) |  |
+| Import BuddenPing: s(146) <= 12.5837822039508342919134679370511513667729, refining T-150 (#566) | listed | think-r8ti (in_progress) |  |
+| Research report tables: split open and solved on the verified status, or label reported-only closures (n = 17, n = 96) | listed | think-r9zt (open) |  |
+| Import BuddenPing: s(153) <= 12.870013850408, refining T-148 (#504 comment) | listed | think-rb3n (in_progress) |  |
+| Import Francisco Couzo: 154, 156, 176, 211, 237, 241, 271, 302 and beyond-horizon 338-382 (#561, #570, #583, #586) | listed | think-rfce (in_progress) |  |
+| check_requests --draft: fix the seven defects the 2026-10-10 reply drafts had to rewrite | listed | think-ri84 (open) |  |
+| Import Benjamin Greff (bengreff): s(95) = 10 by a mixed cover (#610) | listed | think-ribz (in_progress) |  |
+| Import Kevin Fang's Section 5 composites (bef5c42): 81 beyond-horizon rows (smallest at 28 shipped and 53 table-only counts); exact replay of the 38 shipped ~122 CPU-h | listed | think-rn2y (open) |  |
+| Decide and write down the red-star rule for new results, once, in epistemics.md | listed | think-rt8s (open) |  |
+| Import Evan Daniel: s(146) <= 12583782190151860342292508597077/10^30, 1.38e-8 below T-150 (#606) | listed | think-rvv7 (in_progress) |  |
+| Import E. Summins: Conjecture ONE-FLUSH(n), its equivalences, reduction and evidence (#524) | listed | think-s1ru (in_progress) |  |
+| Import Rio Calle: s(102) <= 10.605828696455852 (#529) | listed | think-s2i8 (in_progress) |  |
+| Register T-153 at V3/C3 once every load-bearing part has passed a complete replay | listed | think-sayk (open) |  |
+| Put the T-153 reviews' questions to the author and post the #557 acknowledgement (owner's call) | listed | think-sdsl (in_progress) |  |
+| Owner decision: publish hosted data release data/squarepacker-k2-minus-c-upper-certificates-v1 (two Theorem 1.6 certificates, 2.6 and 4.5 MB) | listed | think-sk6b (open) |  |
+| Owner decision: result-import triage row 'second certificate -> simplification' vs epistemics kind table 'second and simpler proof' | listed | think-stc2 (open) |  |
+| Import Guzhou0806: s(40) > 3359/500 = 6.718 with 163 new rectangle supports (#485 follow-up) | listed | think-tln9 (in_progress) |  |
+| Import E. Summins: k = 0 at n = 11, theorems, ten refuted routes with witnesses, measured facts (#526) | listed | think-tnfo (in_progress) |  |
+| Record #589 (Miles Gray, s(381) <= 19.985624661051481), closed by its author: a duplicate of #582 | listed | think-ts16 (open) |  |
+| Import wand125: the closed-form lower bound s(N) >= a(N) for every non-square N >= 49 (closed-form-v1, eb0fd19), with its Rust replay checker (no issue) | listed | think-tsox (in_progress) |  |
+| Import wand125: s(37) >= 2599/400, s(39) >= 533/80, s(44) >= 2799/400 (check2 fine-net) and s(145) >= 306/25 (linear measure) at wand125/square-packing aba0e59 (no issue) | listed | think-u0av (in_progress) |  |
+| Answer Sungjoon Ryu: two asymptotic deficiency preprints (#414) | listed | think-u1kq (in_progress) |  |
+| Resolve Gupta-layer native house-reader wall failure within 12 seconds | listed | think-utky (in_progress) |  |
+| Validate: wand125 s(145) >= 306/25 (mixed_n145_L1224), linear replay of all 201 angles and linear-control (~37 CPU-h, range 24-64; stop at 40) | listed | think-v511 (open) |  |
+| intake_ledger start omits pending entries whose claim does not print their bounds (T-174's rationals) | listed | think-v860 (in_progress) |  |
+| Validation backlog, intake pass 2026-10-16 (#639, #640; owner cap 40 CPU-h per item) | listed | think-ve84 (open) |  |
+| Validate: wand125 s(37) >= 2599/400 (mixed_n37_L64975), census of all 2,073 directions with whole-net controls (~6.5 CPU-h) | listed | think-w76a (open) |  |
+| Intake pass 2026-10-15 evening: carry #616 forward, stage-7 replies, residual reads, resolved blockers | listed | think-wnsv (in_progress) |  |
+| Import wand125: s(31) >= 2391/400 = 5.9775 by the mixed_n31_L59775 fine-net certificate (no issue) | listed | think-wop1 (open) |  |
+| Validate: wand125 closed form, complete replay4d replay of all 136 records (4,294 CPU-h by the source; HELD) | listed | think-wu73 (open) |  |
+| Rung 5 for T-153: the Lean formalization the source plans (waiting on the source) | listed | think-x1v9 (open) |  |
+| Import evand: s(339) <= 18.926898900357, s(364) <= 19.583782203951, s(375) <= 19.882451030482, beyond the case corpus (#584) | listed | think-x333 (in_progress) |  |
+| Hold: n = 17 intake (#358 comment 5997259692, the B2 class certificates; #367 the B2 branching rule) for integration with the n17 branches | listed | think-x4v4 (open) |  |
+| Intake: Oscar Fitzharding's public announcement (X) of the Lean proof of s(19) optimality, ofitzharding/sq19 v1.0.0 (#640) | listed | think-xik9 (in_progress) |  |
+| Import wand125: the Lean kernel proof of s(59) = 8 (f9a77b7), a proof-assistant route for T-066 (no issue) | listed | think-xk3f (open) |  |
+| Import Evan Daniel: s(183) below side 14 (#680) | listed | think-xp0o (in_progress) |  |
+| Import franciscouzo: 85 upper bounds at 204–998 (#678) | listed | think-xu4d (in_progress) |  |
+| Evaluate wand125's sqverify_continuous (f30cc2c) as an independent route for T-145 and s(40) > 3359/500 (#533) | listed | think-xzob (open) |  |
+| Answer #375 (evand exact optima of 48 records): acknowledgement, verdict reply from the lane, then the reply from main and the close | listed | think-ybmt (open) |  |
+| Validate: Fang's 38 shipped Section 5 composites, both exact routes (~122 CPU-h with check --replay, 61 certify only; HELD) | listed | think-yeq9 (open) |  |
+| Import Francisco Couzo: 4e4c8ce beyond-horizon index, 341 counts 325-1023 below 487b058 and #607 (no issue) | listed | think-yfoo (open) |  |
+| Import evand: s(365) <= 19.621320343560, s(370) <= 19.767730746255, s(460) <= 21.959969683021, beyond the case corpus (#596) | listed | think-yxkt (in_progress) |  |
+| Import BuddenPing: s(302) <= 17.870275382734 (#564) | listed | think-z5gq (in_progress) |  |
+| Measure n = 17's row-3 view against today's ceiling, and ask whether think-x4v4's suspension covers upper-bound certificates at 17 (#660 A11) | listed | think-z6aj (in_progress) |  |
+| Import BuddenPing: s(207) <= 14.880960371559, refining T-147 (#503 comment) | listed | think-z8aj (in_progress) |  |
+| Import wand125: s(28) > 1149/200 by a continuous-pose certificate (no issue) | listed | think-zb5w (in_progress) |  |
+| Intake round 2026-10-06: #366's s(18) >= 588/125 and s(19) >= 48229/10000 (wand125 65e408c), the declared-net re-review, and the stage-7 records of #369's replies | listed | think-zcnr (open) |  |
+| Validation (#610, think-ribz): full zm_mixed.py pass over all 160,000 D4 roots of the s(95) cover, about 190 CPU-h, held over the 40 CPU-h cap | listed | think-zn7s (open) |  |
+| T-036: a replay mode for the Trump isolation radius, and its replayed entry (C2 to C3) | listed | think-znpk (open) |  |
+| Import BuddenPing: s(105) <= 10.7893037837481588309268366600396176597363 (#568) | listed | think-ztup (in_progress) |  |
+make: *** [intake] Error 1

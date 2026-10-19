@@ -2486,7 +2486,7 @@ sources:
     - 105
     - 110
     - 131
-  reviewed: '2026-10-18'
+  reviewed: '2026-10-19'
   source_date: '2026-07-29'
   disposition: superseded-covered
   replay_disposition: public-certificate-missing
@@ -2514,6 +2514,9 @@ sources:
     2026-10-17 (the intake pass, think-e2sz): the page and data/results.json are still byte-identical to
     the retained copies, so nothing changed. Read again on 2026-10-18 (think-xmxb): both files remain byte-identical;
     campaign/issue-intake/intake-20261018/manual-source-receipt.json retains the measured source digests.
+    On 2026-10-19 (think-kwol), direct comparisons of the live page and data/results.json with
+    the retained copies both exited zero. The release remains Release 1, dated 29 July 2026,
+    with the same six counts; no new result is reported.
 
     '
 - id: schadt-n29-2025
@@ -2596,7 +2599,7 @@ sources:
   scope:
     n_values:
     - 153
-  reviewed: '2026-10-18'
+  reviewed: '2026-10-19'
   source_date: '2026-10-07'
   disposition: current-report
   replay_disposition: case-specific
@@ -2615,7 +2618,10 @@ sources:
     credits David Ellsworth’s records and tools and states human-directed Claude Opus 5.5 assistance.
     No producer checker replay, optimality or rigidity claim is made.
 
-    The original supplement comment is no longer available. The identical n153 certificate remains
+    The original supplement comment is accessible through the GitHub API on 2026-10-19,
+    with its unchanged 2026-10-07T18:33:04Z edit. It reports the same thirteen-count supplement,
+    including n153 at 12.879679373332963, pinned to 5e32bbd7028b6e3b869979278079cd37ed6770aa.
+    The identical n153 certificate remains
     accessible at https://github.com/itsnaka/squish-certs/blob/5e32bbd7028b6e3b869979278079cd37ed6770aa/squish-submission-2026-10-07/n153/n153.cert.json;
     resources/web/squish-401-update-2026-10-07/acquisition/n153-comparison.json binds its exact side
     and rational triples to the retained original. This is provenance only, not a new result. A fresh
@@ -6191,6 +6197,31 @@ sources:
     No selected override or superseded-report row changes: the case's two upper lanes
     and retained house stay unchanged until Stage 4 adoption. The exact bounds are
     registered as pending adoption where they improve the case, as Stage 3 permits.
+- id: evand-n183-subgrid-2026-10-19
+  title: Daniel's n183 sub-grid certificate, issue 680
+  role: source-repository
+  url: https://github.com/evand/square-packing/tree/3a9948c781be668b1547cc2bf64a0d1e614f9bca/search/packer/candidates
+  local: resources/web/evand-n183-subgrid-2026-10-19/
+  source_key: '[Daniel n183 subgrid 2026-10-19]'
+  scope:
+    n_values: [183]
+  reviewed: '2026-10-19'
+  source_date: '2026-10-19'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/evand-n183-subgrid-2026-10-19/README.md
+  - campaign/issue-intake/intake-followup-20261019/README.md
+  evidence:
+  - E-evand-680-n183-report
+  notes: >-
+    Original and regularized certificate views report one exact finite upper bound
+    at n183, 13.999580178736252502081470897571, printed upward as 13.999580178737.
+    Complete scoped custody is retained; no checker or numerical source program ran.
+    Registration is think-xp0o, replay and controls think-1hmn, independent mathematical
+    review think-glg8. Couzo n182 donor credit and the unlogged crossover mate remain
+    explicit; numerical local-optimality, identity and priority claims are not proved.
+    The case's two upper lanes and retained house await reviewed Stage 4 adoption.
 selected_overrides:
 - n: 29
   source_id: pingyou-pr622-certificate-2026-10-15
