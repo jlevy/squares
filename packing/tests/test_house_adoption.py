@@ -71,28 +71,50 @@ def test_every_smaller_validated_packing_is_the_house_or_staged(
     )
 
 
-def test_n183_primary_certificate_is_read_exactly_and_staged_with_its_runs() -> None:
+def test_n183_original_certificate_is_read_exactly_and_adopted_with_its_runs(
+    latest: dict[int, str],
+) -> None:
+    """The adoption of 19 October 2026 (think-jh4w) moved 183 from the trivial grid to
+    Evan Daniel's original certificate (T-218), took it off the staging list, and ran
+    both strong generators on its witness in the same pull request, deferring nothing."""
     entry = next(row for row in select.load_results() if row["id"] == "T-218")
     unread: list[str] = []
     selected = select.select([entry], select.load_evidence(), unread=unread)
     assert unread == []
     assert set(selected) == {183}
     selection = selected[183]
-    house = selection.house
+    side = Fraction(13999580178736252502081470897571, 10**30)
+    assert selection.house is None
+    assert selection.case.verified == side < 14
+    assert [c.result for c in selection.candidates] == ["T-218"]
+    assert houses.ADOPTED[183] == "T-218"
+    assert houses.adopted_on(183) == "2026-10-19"
+    assert houses.side(183) == side
+    assert 183 not in select.PENDING_ADOPTION
+    assert 183 not in defaults.PENDING_ALLOWED
+    assert adopt.plan(selected) == []
+    # The record the adoption read is the grid's, and replaying the writer from it
+    # plans exactly this house.
+    before = _front(latest[183])
+    assert before["reported_upper_bound"]["exact_form"] == "14"
+    assert before["verified_upper_bound"]["exact_form"] == "14"
+    replayed = select.select(
+        [entry],
+        select.load_evidence(),
+        cases={183: select.parse_case(183, latest[183])},
+        recorded={183: "2026-10-19"},
+    )
+    house = replayed[183].house
     assert house is not None
-    assert house.side == Fraction(13999580178736252502081470897571, 10**30)
-    assert house.side < selection.case.verified == 14
     assert house.result == "T-218"
+    assert house.side == side
     assert house.report_evidence == ("E-evand-680-n183-report",)
     assert house.confirming_evidence == ("E-evand-680-n183-primary-exact-feasibility",)
-    assert select.PENDING_ADOPTION[183] == select.Pending(
-        house="T-218", bead="think-jh4w", why=select.NEXT_PULL_REQUEST
-    )
-    assert 183 not in defaults.PENDING_ALLOWED
-    # Registration leaves the old case and its recorded adoption replay intact.
-    assert adopt.plan(selected) == []
-    recorded = select.select([entry], select.load_evidence(), recorded={183: "2026-10-19"})
-    assert recorded[183].house is None
+    # The credit stays Evan Daniel's, after Francisco Couzo's n = 182 packing.
+    packing = _front(select.case_path(183).read_text(encoding="utf-8"))
+    assert packing["reported_upper_bound"]["found_by"] == ["Evan Daniel"]
+    assert packing["reported_upper_bound"]["improved_by"] == []
+    assert packing["conjectured_optimum"] is None
 
 
 def test_every_adopted_case_holds_the_house_its_record_was_written_for(
@@ -1056,8 +1078,10 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
     assert historical["outcome"] == "PASS"
     assert len(historical["houses"]) == 65
     assert "29" not in historical["houses"]
+    # The historical receipt predates the adoption of 19 October 2026 at 183 (T-218).
+    assert "183" not in historical["houses"]
     assert historical["houses"] == {
-        str(n): result for n, result in houses.ADOPTED.items() if n != 29
+        str(n): result for n, result in houses.ADOPTED.items() if n not in (29, 183)
     }
     assert {int(n) for n, result in historical["houses"].items() if result == "T-174"} == (
         set(houses.numbers_of("T-174"))

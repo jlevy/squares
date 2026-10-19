@@ -38649,7 +38649,8 @@ evidence:
       27 numerical candidate flat modes concern the 182-square force-bearing subsystem, excluding
       rattler index 11. Credit Evan Daniel after Francisco Couzo''s n182 donor, preserving unlogged
       crossover mates. T-218 is registered locally after #671, merged at 6833d05 and integrated
-      here; final qualification and publication remain pending, with no case/house adoption.'
+      here; final qualification and publication remain pending. The case house was adopted at
+      n183 on 2026-10-19.'
     external_review:
       state: informally-verified
       date: '2026-10-19'
@@ -38745,9 +38746,10 @@ evidence:
       the native receipt retains the identical strictly positive rational SAT projection gap
       for both routes, not an exact shortest Euclidean distance. Duplicate gap -1 and translated-square
       wall margin negative in both routes. Historical acquire_source bytes are retained as nonexecuted
-      text because the inherited #671 version differs. Case lanes/grid house remain unchanged
-      pending separate adoption and strong regularization. T-218 follows the integrated #671
-      merge at 6833d05; its final qualification and publication remain pending.'
+      text because the inherited #671 version differs. The case lanes and house moved to this
+      certificate in the adoption of 2026-10-19, which ran both strong generators on its
+      witness. T-218 follows the integrated #671 merge at 6833d05; its final qualification and
+      publication remain pending.'
   - id: E-wand125-fine-net-n68-853-sqverify-fast-replay
     claim: lower-bound
     scope:
