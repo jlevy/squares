@@ -1428,6 +1428,26 @@ class ReleaseNoPublicChange(NamedTuple):
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
     ReleaseNoPublicChange(
         components=("paper:n11-lower-bounds-explainer",),
+        paths=("packing/src/sqpack/cli/validate.py",),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-lower-bounds-explainer.pdf",
+        ),
+        reason=(
+            "PR406 adds the Git-storage guard to the validation CLI push schedule "
+            "and its status banner. The explainer declares the whole sqpack package, "
+            "but its HTML, Markdown and PDF entrypoints' source import closure does "
+            "not include cli/validate.py. The manuscript, certificate inputs, figures, "
+            "rendering helpers and paper release metadata are unchanged against main "
+            "0ee05f4f3, so the paper retains v0.4.8. This is a source-based producer "
+            "review; no paper export was rebuilt or compared for byte identity. The "
+            "changed development.md is published as development.html and needs its "
+            "own site successor decision; this paper-only scope does not cover it."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer",),
         paths=(
             "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
             "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
