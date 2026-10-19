@@ -5,7 +5,7 @@ title: "Codex PR #665 engineering reconciliation of reviewed repairs and T-174 h
 kind: task
 status: in_progress
 priority: 2
-version: 10
+version: 11
 delegate: codex-665-adoption-reconcile
 labels: []
 dependencies: []
@@ -18,7 +18,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-19T07:52:24.446Z
-updated_at: 2026-10-19T10:09:58.026Z
+updated_at: 2026-10-19T10:25:23.686Z
 started_at: 2026-10-19T07:52:32.599Z
 ---
 Engineering-only child; preserve original think-3mry owner user-eb-adopt-174. Exclusive checkout .worktrees/fix-665-adoption-20261018. Recover and commit reviewed README/test repairs; compare all 37 rational T-174 adopted sides against landed main T-195 n29 using exact fractions; prepare bounded local source reconciliation. Final records/release integration waits for both #679 and #671 on actual main; no publication, push, PR mutation, merge, rating/credit changes, or new result IDs in this slice.
@@ -74,3 +74,5 @@ Full valid-input checks: initial full house/bead/history/T007/map run112passed4f
 Independent exact invariants pass:37T174upper lanes match349and each strictly improves671case; ALL324reported/verified lower lanes match394; full n29packing/credits/witness matches394;108lower531/50belowT174upper;18T200-T217rows exactly394; result IDs217same order/no new IDs; T174S1/V3/C3 unchanged; release.py exactly394; four original reviewer archived files exactly349; witness/regularization/proof input trees unchanged since349. Unique13evidence files moved byte-identically to root .codex/intake-resume-20261019/665-custody-qualification-20261019 (2.2MiB before final README), hashmanifest+commitlog retained. No temporary private worker retained; no internal cache fallback. Full checkout reused without clone/copy, sparse bulk exclusions/Trash untouched.
 
 M2fixed(think-6om1) and M3fixed(think-plcr), now closed with source/test evidence. M1think-2921 and parentthink-fz6p remain open pending shared snapshot reduction, corrected671actualmain ancestry, actual66housecustody undercap, final665release/URL/pin qualification, freshAstra and hosted gates. No push/PRbase/public review/publication/newID/merge; original think-3mry delegate user-eb-adopt-174 unchanged.
+
+Capacity diagnosis think-33q7 complete/closed. Memo .codex/intake-resume-20261019/665-capacity-20261019/CAPACITY.md. Read-only same-selector additive665+671f319+578b76 projection235094940bytes exceeds proposed224MiB by213916; exact mergedsize unresolved across75overlappingpaths/regenerators, so224fitNOTestablished and M1remainsopen. Onlyprovedduplicateroute9013bytes witnessschema, insufficientalone. No source/cap/prune/checkout/push changes. Originalworktree407andfullintake671untouched.
