@@ -5,15 +5,17 @@ title: "PR #671: integrate landed T195–199 stack, preserve census evidence, an
 kind: task
 status: in_progress
 priority: 1
-version: 6
+version: 7
 delegate: codex-671-integration-20261018
 labels: []
 dependencies: []
 parent_id: is-01m54ahqaf9t63nz12annpqy69
+child_order_hints:
+  - is-01m59p0xxqme014n9dyzqwcw4w
 hold: null
 hold_until: null
 created_at: 2026-10-19T06:26:07.230Z
-updated_at: 2026-10-19T08:41:12.018Z
+updated_at: 2026-10-19T08:56:33.462Z
 started_at: 2026-10-19T06:26:17.042Z
 ---
 
