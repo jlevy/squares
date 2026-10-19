@@ -95,41 +95,49 @@ The
 [source packet’s replay section](../../../resources/web/evand-n183-subgrid-2026-10-19/README.md#bounded-primary-certificate-replay)
 links the native receipt and records the shared parser and conversion boundary.
 No upstream checker ran; the regularized view and source-execution obligations remain
-open. The receipt awaits its actual confirming evidence entry.
+open. The local T-218 row cites the receipt through its confirming evidence entry below.
 
 The
 [mapped mathematical review](../../../../docs/project/reviews/review-2026-10-19-evand-n183-subgrid.md)
 accepts the original finite upper bound; its addendum admits the retained receipt
 without rerunning geometry.
-The [evidence handoff](n183-evidence-integration.yaml) preserves the review’s identity,
-source hashes, historical certify working directory and full `PYTHONPATH`, the five
-existing deciding/premise verifier IDs, the custody helper awaiting registry
-representation, and M1–M4 dispositions.
+The historical [evidence handoff](n183-evidence-integration.yaml) preserves the review’s
+identity, source hashes, historical certify working directory and full `PYTHONPATH`, the
+five then-existing deciding/premise verifier IDs, the custody helper then awaiting
+registry representation, and M1–M4 dispositions.
 The original batch JSON and native receipt remain unchanged from the reviewer’s audit.
 The historical [prospective row](registration-plan.yaml) kept V0/C0 as an unapplied
 proposal before the subsequent local registration checkpoint below.
-V3/C3 is proposed for the primary finite upper bound only after actual cited evidence,
-review and program bindings land.
-No further primary geometry run is required.
-Actual result allocation, registry integration, adoption and release disposition remain
-separate obligations.
+That proposal required actual cited evidence, review and program bindings before
+assigning V3/C3 to the primary finite upper bound; the local registration below supplies
+those bindings. No further primary geometry run is required.
+House adoption and final release disposition remain separate obligations.
 
-## Local Provisional Registration Checkpoint
+## Local Registration and Publication Status
 
 The [registration checkpoint](n183-registration-checkpoint.yaml) locally binds the
-original primary certificate to **T-218**, provisionally after frozen, unmerged #671 at
-`f319bdfd9771def53383dd6674923e5c29f4bd01` and its 217 result objects.
-The earlier proposal and evidence handoff above remain historical preparation inputs.
+original primary certificate to **T-218**. That historical checkpoint was prepared
+against #671 at `f319bdfd9771def53383dd6674923e5c29f4bd01` and its 217 result objects.
+#671 has since merged at `6833d05aa44f48140170e631b7766cb295876c31` and is integrated
+here through main `e0319ffd1c96986e0260083db7d3f3411f3bb4ef`. The earlier proposal and
+evidence handoff above remain historical preparation inputs.
 The actual result row cites `E-evand-680-n183-report` with its accepted mapped review
 and `E-evand-680-n183-primary-exact-feasibility` with complete native coverage and
-controls. The maintained APIs derive V3/C3; the review endorses S3. Actual main order,
-final senior review, CI and publication remain pending.
+controls. The maintained APIs derive V3/C3; the review endorses S3. T-218’s final
+qualification, CI and publication remain pending.
 
 `V-acquire-source` now represents custody admission with explicit versions.
 The historical source that ran is retained as nonexecuted `.py.txt` because #671 changes
 the current helper; the registry distinguishes that old version from current
 admission-only code.
-All other six recorded source files remain the replay versions.
+The seven hashes in the evidence handoff describe the historical replay versions.
+Five source files still match: `sqpack/witness.py`, `sqpack/verify.py`,
+`check_rational_witness_independent.py`, `evand_arrangement_reports.py` and
+`evand_exact_certificates.py`. The historical `upper_bound_reports.py` hash remains
+`bc47273499dccbd59997bbdd4028176eb09621865b25854f511f9cf872ce1156`; today’s driver adds
+the original n183 certificate to `HOUSES` for exact house selection and receipt
+admission. That reader addition and the current custody helper do not rewrite the
+historical sources, batch or receipt.
 No geometry or source checker reran.
 The two case upper lanes and retained grid house remain 14, and the regularized endpoint
 remains unexecuted and unadopted.

@@ -12534,8 +12534,8 @@ issues:
     kind: result-report
     triage: done
     summary: 'Evan Daniel''s original n183 finite upper bound is locally bound to retained complete
-      replay and accepted mathematical review, provisionally T-218 after frozen unmerged #671.
-      Actual main order and publication remain pending; neither house nor regularized endpoint
+      replay and accepted mathematical review as T-218 after #671, merged at 6833d05 and integrated here.
+      T-218 final qualification and publication remain pending; neither house nor regularized endpoint
       is adopted.'
     read_through: '2026-10-19T05:24:01Z'
     results:
@@ -12559,8 +12559,8 @@ issues:
     notes: 'Issue body retained in packing/campaign/issue-intake/intake-followup-20261019/issue-680.json.
       Source commit date is 2026-10-19T05:20:24Z, despite the author-local 18 October date.
       The second crossover parent was not logged; exact geometry can be checked without reconstructing
-      that lineage. No independent source-priority conclusion is drawn. Local provisional registration
-      T-218 follows the frozen #671 result sequence; actual main ID and post-merge/deployment
-      reply are owned by the coordinator. Retained original primary receipt and mathematical
+      that lineage. No independent source-priority conclusion is drawn. Local registration
+      T-218 follows #671, merged at 6833d05 and integrated here; final qualification, publication
+      and the post-merge/deployment reply are owned by the coordinator. Retained original primary receipt and mathematical
       review support finite feasibility only. Case/house adoption, regularized endpoint and
       stronger numerical/lineage/priority claims remain separate.'

@@ -137,7 +137,7 @@ they share the importer’s rational parser, half-angle conversion and Python ru
 No upstream checker ran.
 The original source generator was not rerun.
 
-## Independent Mathematical Review and Pending Registration
+## Independent Mathematical Review and Local Registration
 
 The
 [completed review](../../../../docs/project/reviews/review-2026-10-19-evand-n183-subgrid.md)
@@ -167,8 +167,8 @@ separating-axis theorem.
 This establishes neither a clean room nor distinct mathematical methods, humans or model
 families.
 
-The review proposes V3/C3 for the primary finite upper bound once the actual result
-cites registered confirming evidence and the complete deciding/premise metadata.
+The review proposed V3/C3 for the primary finite upper bound once the actual result
+cited registered confirming evidence and the complete deciding/premise metadata.
 The earlier evidence-mapping checkpoint applied no result ID, rating, case bound, house
 or release change. The subsequent provisional registration below binds the completed
 evidence locally. Regularized-certificate replay and source-checker execution remain
@@ -179,11 +179,14 @@ obligations.
 
 The
 [local registration checkpoint](../../../campaign/issue-intake/intake-followup-20261019/n183-registration-checkpoint.yaml)
-now binds the original finite upper bound to provisional T-218 at locally derived V3/C3,
-with S3 endorsed by the review, after frozen, unmerged #671. It is not on main and
+binds the original finite upper bound to T-218 at locally derived V3/C3, with S3
+endorsed by the review.
+The checkpoint was prepared against #671 before its merge.
+#671 has since merged at `6833d05aa44f48140170e631b7766cb295876c31` and is integrated
+here through main `e0319ffd1c96986e0260083db7d3f3411f3bb4ef`. The reported and
+confirming evidence are separate.
+T-218’s final qualification, CI and publication remain pending; this local checkpoint
 supplies no publication evidence.
-The reported and confirming evidence are separate, and the actual ID/order and final
-review/CI/release disposition remain pending.
 The earlier proposal and handoff remain historical preparation inputs.
 
 The custody premise is `V-acquire-source`. Its
@@ -192,7 +195,15 @@ retained verbatim as text, SHA-256
 `f2badc973c8aa3c1bc90e4ebf89836ba7c0fa74fa7527e7be7dc205d48d701e4`. The inherited #671
 helper has different bytes and is recorded separately for current admission checks.
 The archived text has not been executed.
-The other six importer/geometry source versions are unchanged.
+The seven hashes in the evidence handoff retain the historical replay versions.
+Five source files still match: `sqpack/witness.py`, `sqpack/verify.py`,
+`check_rational_witness_independent.py`, `evand_arrangement_reports.py` and
+`evand_exact_certificates.py`. The historical `upper_bound_reports.py` hash remains
+`bc47273499dccbd59997bbdd4028176eb09621865b25854f511f9cf872ce1156`; today’s driver adds
+the original n183 certificate to `HOUSES` for exact house selection and receipt
+admission.
+Current receipt admission uses that changed driver and custody helper; neither
+changes the historical replay’s seven source hashes, batch or native receipt.
 
 To check custody from `packing/`, with the project interpreter and external scratch:
 
