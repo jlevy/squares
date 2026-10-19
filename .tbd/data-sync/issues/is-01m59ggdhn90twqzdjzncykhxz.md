@@ -3,16 +3,20 @@ type: is
 id: is-01m59ggdhn90twqzdjzncykhxz
 title: "Validate #680 n183: both source certificates, exact replay and sensitive controls"
 kind: task
-status: open
+status: in_progress
 priority: 2
-version: 1
+version: 2
+delegate: codex-680-replay-20261019
 labels:
   - validation
   - result-import
 dependencies: []
 parent_id: is-01m59few7wa6j6yrnw49hjap7r
+hold: null
+hold_until: null
 created_at: 2026-10-19T07:20:09.521Z
-updated_at: 2026-10-19T07:20:09.521Z
+updated_at: 2026-10-19T07:45:06.038Z
+started_at: 2026-10-19T07:45:06.037Z
 ---
 Stage 4 replay for #680, separate from Stage 1–3 source registration.
 
