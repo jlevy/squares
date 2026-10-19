@@ -7196,21 +7196,35 @@ issues:
     read_through: '2026-10-12T07:51:08Z'
     results: []
     asks:
-    - what: Compare the best of three timings with 400 ms, keep both ceilings, and attribute the play
-        message to load or to a regression.
+    - what: Compare the best of three timings with 400 ms and keep both ceilings.
+      state: done
+      note: >-
+        Landed in #685 (02b644c6f, merged at 14fd9e27f): the Animate view contract builds each
+        of the six trajectories three times through measurePhysics, past the trajectory cache,
+        compares the fastest with 400 ms and one build's bytes with 4 MB, both ceilings
+        unchanged, and af12aca78 requires the three builds to agree in bytes. #685's hosted
+        check_frontend passed at af12aca78 (Packing run 39312783060, frontend job
+        118266427235: the dearest trajectory 223 ms at its fastest of three builds)
+        (think-1bm2).
+    - what: Attribute the Animate view play message to load or to a regression.
       state: queued
-      bead: think-1bm2
+      note: >-
+        Neither #685 nor earlier work attributed `play did not carry on from step to step: the
+        stage showed n = [5, 6]`, and no third occurrence is recorded. Narrowed onto its own
+        bead.
+      bead: think-8vsk
     beads:
     - think-1bm2
-    answer_bead: think-1bm2
+    - think-8vsk
+    answer_bead: think-8vsk
     replies:
     - url: https://github.com/jlevy/squares/issues/538#issuecomment-6200838139
       date: '2026-10-15'
       by: jlevy
       kind: follow-up
       reported: []
-    close_when: The check compares the best of three timings with 400 ms, both ceilings are
-      unchanged, the play message is attributed, and check_frontend passes.
+    close_when: The play message is attributed to load or to a regression; the timing check landed
+      in #685.
   - number: 539
     title: 'check_scroll_restoration: wait for the reload''s own navigation'
     author: jlevy
