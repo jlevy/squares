@@ -662,8 +662,8 @@ def test_a_moved_house_keeps_its_lifted_hold_as_history() -> None:
         # The records are wrapped, so a sentence may break at any space.
         wrapped = text.replace(" until ", "\nuntil ").replace(" the hold", "\nthe hold")
         assert _flat(adopt.held_history(wrapped)) == history, text[:60]
-    # The ten counts #657 moved below T-174 keep it so, and a staged count waits; four of
-    # them wait for T-193, below #657's houses there (#658).
+    # The ten counts #657 moved below T-174 keep it so, and a staged count waits; three of
+    # them (175, 204 and 232) wait for T-193, below #657's houses there (#658).
     for n in (129, 146, 156, 175, 176, 204, 232, 264, 271, 303):
         text = _flat(select.case_path(n).read_text(encoding="utf-8"))
         assert _flat(adopt.lifted_sentence("T-174")) in text, n

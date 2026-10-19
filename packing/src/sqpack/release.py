@@ -1501,7 +1501,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "house rule (#660) select_houses reads T-193's exact sides (evand_exact_side, "
             "in ALGEBRAIC_READERS) and stages its sixteen counts under think-ot5c, twelve "
             "of them re-pointed from T-174, so T-174's register text, its coverage source "
-            "and the #574 request count 41 staged houses, not 53; adopt_houses names a "
+            "and the #574 request count 41 houses, not 53; adopt_houses names a "
             "re-staged house in the held sentence and a smaller staged one in its "
             "section, and its refresh rewrites those sixteen case records; its plan refuses "
             "T-193 at the nine counts where RE-1 owes its regularization a correction "

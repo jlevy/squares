@@ -10,7 +10,7 @@ softschema:
 # the rendered view. `devtools.backfill_verifier_relation` fills `verifiers` from replay
 # commands, packets and digests, audits the relation, and prints what it cannot decide.
 
-last_reviewed: '2026-10-14'
+last_reviewed: '2026-10-18'
 verifiers:
   - id: V-evand-verify-exact
     program: verify_exact.py
