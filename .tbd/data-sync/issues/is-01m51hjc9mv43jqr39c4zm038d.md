@@ -5,9 +5,9 @@ title: Refine News chooser states, shared topic colors and article spacing
 kind: bug
 status: in_progress
 priority: 2
-version: 16
+version: 17
 spec_path: docs/project/specs/active/plan-2026-10-13-site-changelog.md
-delegate: codex@spud10
+delegate: lane-645
 labels: []
 dependencies: []
 child_order_hints:
@@ -20,7 +20,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-16T05:04:46.887Z
-updated_at: 2026-10-16T19:47:29.199Z
+updated_at: 2026-10-19T21:51:52.635Z
 started_at: 2026-10-16T05:05:12.360Z
 ---
 Ship the requested News UI corrections: gray inactive topic filters, topic-colored active states and paler colored hover without text or inset underlines; borders follow wrapped button rows; remove both All controls and retain one unboxed Reset filters button. Give Optimality, Project and Engineering distinct shared colors, separate from lower/upper bounds and verification. Tighten title/date/tag/body spacing on shared homepage and News cards. Make significance meters horizontally tighter with borders matching label color, and shorten level tooltips while retaining detailed rationale in source records/docs. Reuse design tokens, preserve accessibility/filter semantics, verify desktop/mobile and light/dark behavior, document design changes, independently review, PR, merge and verify deployment.
