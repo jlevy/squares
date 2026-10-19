@@ -56,6 +56,33 @@ Direct renderer commands do not pass through the validator; export
 `DYLD_FALLBACK_LIBRARY_PATH=/opt/homebrew/lib` before running them when Homebrew’s
 library is otherwise outside the loader’s path.
 
+### Current memory in bounded diagnostics
+
+`devtools.process_memory.current_memory_bytes()` reads the current process’s resident
+bytes on Linux, Windows and macOS. Lifetime peak reporting is separate: releasing a
+mapping must lower a current-memory guard even when its historical peak stays high.
+On Darwin it queries the calling PID through cached `/usr/lib/libproc.dylib`, reading
+`proc_taskinfo.pti_resident_size` as declared in
+[Apple’s proc_info.h](https://github.com/apple-oss-distributions/xnu/blob/main/bsd/sys/proc_info.h).
+Each query owns a fresh buffer and uses the current PID; the cache holds only the
+library binding. Missing libraries or symbols, failed or partial queries, and zero
+resident bytes raise `OSError`. Current RSS is distinct from physical footprint and
+lifetime peak. The API measures only the calling process, not its children or available
+system memory.
+
+The `macos-portability` job requires four successful native memory cases with zero skips
+under a one-minute step and a five-minute job ceiling: a positive sample, a
+touched/released 96 MiB mapping, an independent `ps` RSS reading, and an installed-SDK
+oracle for the structure’s size, alignment, field offsets and widths, flavor, buffer
+size and C function signature.
+Guzhou0806 contributed the SDK oracle and bounded CI controls in
+[PR407](https://github.com/jlevy/squares/pull/407).
+`devtools.check_darwin_memory_results` checks the JUnit case identities and results; the
+XML remains in the job’s validation artifact.
+Native results qualify the tested architecture and SDK only.
+Windows tests and mocked failures do not certify Darwin.
+The job retains its existing non-gating policy and stacked-PR selection.
+
 ### Windows worker supervision
 
 Windows is not a supported development host, and `packing-validate` refuses to run on
