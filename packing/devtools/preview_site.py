@@ -63,7 +63,7 @@ from collections.abc import Sequence
 from html.parser import HTMLParser
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
-from typing import TYPE_CHECKING, Any, Literal
+from typing import TYPE_CHECKING, Any, Literal, override
 
 from devtools import check_published_site, render_overview, site_urls, social_card
 
@@ -251,7 +251,8 @@ class _LinkedAddresses(HTMLParser):
         self.feed(source)
         self.close()
 
-    def handle_starttag(self, _tag: str, attrs: list[tuple[str, str | None]]) -> None:
+    @override
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
         self.addresses.update(
             value for name, value in attrs if name in {"href", "src"} and value is not None
         )
