@@ -35,8 +35,10 @@ directory’s README, `manifest.json` and `SHA256SUMS`), 171 directly under
 `certificates/`, 106 under `certificates/parents/` (105 added), the two drawings of each
 of the 85 counts, and seven indexes and provenance files at the root.
 `n995.cert`, which the issue does not list, is re-certified at side
-31.99478454971099…, the 12-place print #675 already claims at 995 by another route; it is
-not in this packet’s scope.
+31.99478454971099…, as the source’s `manifest.json` at the pin states (read from the
+pinned checkout, not retained here); that rounds up to the 12-place print #675 already
+claims at 995 by another route.
+It is not in this packet’s scope.
 Every one of the 544 lines of the source’s `certificates/best/SHA256SUMS` matches the
 bytes at the pin.
 
@@ -272,6 +274,9 @@ adoption.
 **At 260** the claim, `146417594016514621500994169/8796093022208000000000000`, is below
 T-196’s exact side by $2.56 \times 10^{-5}$. It reached this repository after T-196, so it
 is recorded after it and does not rewrite it.
+The issue’s own prior column at 260, 16.645778786062, is the intermediate evand seed
+recorded on #678’s custody thread, 1.8e-08 below T-196; this record does not use that
+column.
 The ledger orders reports and verifies no certificate; registration is Stage 3’s.
 
 ### Per Row
@@ -378,9 +383,12 @@ The issue says every new or changed witness passed the jlevy/squares corner veri
 the source’s checker; those runs are the author’s.
 The filtered route is a first-party program written for this replay. Its two routes
 share the certificate parser, the half-angle conversion, the pair filter and Python’s
-rational arithmetic, so it is two implementations of the pair and wall predicates, not
-two independent replays; it has had no adversarial review, and the maintained all-pairs
-kernel has run only on the sample above.
+rational arithmetic, so it is two implementations of the unit-shape, pair and wall
+predicates, not two independent replays.
+Its one adversarial review to date is the 19 October mathematical review on the import
+bead: independent all-pairs checks at 204, 260, 330, 545, 641 and 998 and an independent
+separating-axis test on all 140,866 candidate pairs agreed with the receipts.
+The maintained all-pairs kernel has run only on the sample above.
 
 ## Credit and Licence
 
