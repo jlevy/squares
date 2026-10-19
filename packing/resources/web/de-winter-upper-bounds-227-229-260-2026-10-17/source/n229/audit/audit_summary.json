@@ -1,0 +1,64 @@
+{
+  "date": "2026-10-17",
+  "verdict": "passed with documentation and packaging repairs",
+  "search_status": "stopped at user request",
+  "stop_requested_utc": "2026-10-17T12:49:15+00:00",
+  "all_optimization_stopped_by_utc": "2026-10-17T12:51:59.058775+00:00",
+  "planned_duration_hours": 4,
+  "actual_extension_elapsed_minutes": 211.78431291666666,
+  "distinct_worker_agents": 25,
+  "maximum_concurrent_worker_agents": 6,
+  "frozen_registry_sha256": "6a24f1341441ad97444c93199891144aa61f84b6c2200e14a5a995c2fef5d0f4",
+  "improved_website_counts": [
+    227,
+    229,
+    260
+  ],
+  "construction_families": 1,
+  "exact_algorithms": 3,
+  "pair_checks_per_algorithm": 85427,
+  "third_checker_negative_controls_passed": 12,
+  "third_checker_analytic_tests_passed": 7,
+  "visual_metadata_audit_passed": true,
+  "geometry_changed_by_audit": false,
+  "external_publication_or_submission": false,
+  "records": [
+    {
+      "n": 227,
+      "website_listed_side": 15.57106781186547,
+      "certified_decimal_ceiling": "15.563796703670",
+      "exact_witness": "verification/n227_side15.563796687108_7d7646bb4d_rational.json",
+      "exact_witness_sha256": "5aa22dd00127aab5acef37ad993027e1e577d890f3dd5abdf7513d97775b981a",
+      "pairs": 25651
+    },
+    {
+      "n": 229,
+      "website_listed_side": 15.65685424949238,
+      "certified_decimal_ceiling": "15.650174756949",
+      "exact_witness": "verification/n229_side15.650174740301_bfc6c8559a_rational.json",
+      "exact_witness_sha256": "edb3ef2eed16e561c379350ac28882078e17717882ddc8284b67b794fef8111b",
+      "pairs": 26106
+    },
+    {
+      "n": 260,
+      "website_listed_side": 16.65685424949238,
+      "certified_decimal_ceiling": "16.645778804182",
+      "exact_witness": "verification/n260_side16.645778786566_7f67e5bc11_rational.json",
+      "exact_witness_sha256": "56ddfa73d992f52baee9ebc16a2c1bffed221e740f46dd7cd4ba456db93e2b9c",
+      "pairs": 33670
+    }
+  ],
+  "repairs": [
+    "Corrected status and actual duration after early cancellation.",
+    "Excluded mutable Python bytecode from checksums and archives.",
+    "Repaired three derived-composite source references to matching immutable exact witnesses.",
+    "Narrowed upstream source modification statement to tracked files."
+  ],
+  "excluded_from_record_count": [
+    "Retired provisional 507/553 claims",
+    "Derived composites 965/969/1097",
+    "Equal-bound or near-bound alternatives",
+    "Refinements of an already counted n"
+  ],
+  "claim_scope": "Three validated feasible upper-bound improvements over the website-listed bounds; no optimality, exhaustive worldwide novelty, or outside independent authorship claimed."
+}

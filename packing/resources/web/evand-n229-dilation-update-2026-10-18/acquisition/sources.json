@@ -1,0 +1,57 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-10-18T12:51:03Z",
+  "git_scope": "Shallow sparse blobless fetch of the author update to issue #674. Retained the MIT licence, credits, root and exact-format READMEs, two standalone checkers, dilation producer, s229_v2.cert and input. Opening s229.cert/input are digest-only, checked byte-identical against their 17 October packet. Unrelated numerical/search tools, site and run/bulk assets are omitted and commit-pinned only. No source code executed.",
+  "sources": [
+    {
+      "id": "evand-n229-dilation-update-2026-10-18",
+      "source_url": "https://github.com/evand/square-packing",
+      "source_ref": "00e68dfbe1d29ab5dbab1cddfb8f6ca19d5470db",
+      "source_commit": "00e68dfbe1d29ab5dbab1cddfb8f6ca19d5470db",
+      "committed_utc": "2026-10-18T01:35:40Z",
+      "git_tree": "f474b16e60f8d9f08dd629c71ca64990deed7e3f",
+      "archived_path": "packing/resources/web/evand-n229-dilation-update-2026-10-18/source",
+      "subtree_manifest": "packing/resources/web/evand-n229-dilation-update-2026-10-18/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "LICENSE",
+        "CREDITS.md",
+        "README.md",
+        "search/exact/README.md",
+        "search/exact/verify_cert.py",
+        "search/exact/verify_cert2.py",
+        "search/packer/dilate_cert.py",
+        "search/packer/candidates/s229_v2.cert",
+        "search/packer/candidates/s229_v2.input.txt",
+        "search/packer/candidates/s229.cert",
+        "search/packer/candidates/s229.input.txt"
+      ],
+      "subtree_file_count": 11,
+      "subtree_total_bytes": 130598,
+      "retained_file_count": 9,
+      "retained_total_bytes": 84052,
+      "compressed": [],
+      "pinned_only": [
+        {
+          "path": "search/packer/candidates/s229.cert",
+          "bytes": 34053,
+          "sha256": "0366e8178e37d7c5b4baf002d35f4c1088b4e20ab8f90283d418f634c8af204d",
+          "reason": "Opening claim certificate retained in the chronological 17 October packet; unchanged at this update pin.",
+          "identical_to": "packing/resources/web/evand-n229-dilation-2026-10-17/source/search/packer/candidates/s229.cert"
+        },
+        {
+          "path": "search/packer/candidates/s229.input.txt",
+          "bytes": 12493,
+          "sha256": "7df8cd6fe3252fb8b015fea731229ef065130498014f1660aa0ccf435ee990fe",
+          "reason": "Opening claim binary64 input retained in the chronological 17 October packet; unchanged at this update pin.",
+          "identical_to": "packing/resources/web/evand-n229-dilation-2026-10-17/source/search/packer/candidates/s229.input.txt"
+        }
+      ],
+      "license": "MIT, copyright (c) 2026 Evan Daniel (LICENSE retained). CREDITS.md discloses Claude (Anthropic) under human direction, with no peer review; the source commit names Claude Opus 5.5 as co-author. Issue #674 credits Francisco Couzo #672 after Joost de Winter #668 as the start.",
+      "claims": [
+        "The author update in issue #674 reports s(229) <= 7825080756947776580756939951343/500000000000000000000000000000 = 15.650161513895553161513879902686, rounded upward at 12 places to 15.650161513896. Certificate SHA-256 1a35a7806b6cc01b232d5c634efdbe789c7df979cec6ab28d6ab283ac2b47e23 and input SHA-256 7b2bf80771e8d96f11931e5080f18c0d623b3d4373b9693e4d338acbf4ffcf53.",
+        "This supersedes the opening e0338c7 bound of 15.650163254859 while preserving the earlier files. Source calls it a nearby configuration with the same tilted structure, using dilation by about 1+1e-12. It reports both source exact stdlib checkers accept it, least pair separation about1.2e-12 and wall clearance about6.0e-13; these are author assertions, not acquisition results.",
+        "Credit Evan Daniel after Francisco Couzo #672 after Joost de Winter #668, as in the opening issue. The certificate establishes an upper bound only; no optimality, independent outside checking, or local-minimum theorem is claimed. Update source committed2026-10-18T01:35:40Z; update comment published01:36:21Z."
+      ]
+    }
+  ]
+}

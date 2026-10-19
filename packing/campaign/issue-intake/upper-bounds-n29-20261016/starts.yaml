@@ -1,0 +1,35 @@
+format: intake-ledger-starts-v2
+read_at_main: 321d492c77c37e9adddcecec4e58336bc8270466
+counts:
+- n: 29
+  members:
+  - label: record [Kingbird] (reported lane)
+    kind: record
+    holders: Thomas Schadt, improved by David Ellsworth
+    model: print
+    low: 593383346267691/100000000000000
+    high: 593383346267693/100000000000000
+    open_low: false
+    open_high: false
+    shown: '5.93383346267692'
+    decide: the exact side behind the reported lane's print 5.93383346267692 (n = 29)
+    lanes:
+    - - reported
+      - '5.93383346267692'
+      - ''
+      - ''
+  - label: record T-155 (verified lane)
+    kind: record
+    holders: T-155
+    model: exact
+    low: 296691673133846459484473030817600957/50000000000000000000000000000000000
+    high: 296691673133846459484473030817600957/50000000000000000000000000000000000
+    open_low: false
+    open_high: false
+    shown: '5.933833462677'
+    decide: ''
+    lanes:
+    - - verified
+      - '5.93383346267692918974379895098'
+      - 296691673133846459484473030817600957/50000000000000000000000000000000000
+      - ''

@@ -846,12 +846,12 @@
       "r": 4,
       "same_tilt_signature_as_next": false,
       "shared_with_next": {"anchor":"lower-right","embeds":false,"fraction_of_n":0.172414,"matched":5,"matched_tilted":0,"max_tilted_matched":0,"tilted_in_n":14,"transform":"identity"},
-      "side": "5.93383346267692",
+      "side": "5.9338334626769292",
       "side_equals_next": false,
       "side_equals_previous": false,
       "side_minus_m": 0.933833462677,
       "side_minus_sqrt_n": 0.548668655542,
-      "source": {"coordinate_provenance":"numerically-checked","kind":"kingbird-derived-facts","method":"numerical-multiprecision"},
+      "source": {"coordinate_provenance":"verified","kind":"packet-derived-facts","method":"exact-algebraic"},
       "symmetry": {"near":{"elements":["identity"],"group":"trivial"},"tight":{"elements":["identity"],"group":"trivial"}},
       "tilted": 14,
       "tilted_layout": {"count":14,"elongation":1.306,"principal_direction_degrees":21.65},
@@ -10370,8 +10370,8 @@
       {"closed_form_any_tier_count":20,"closed_form_any_tier_non_integer_count":4,"closed_form_count":19,"closed_form_non_integer_count":3,"count":33,"first_n":257,"grid_held_contiguous_to_k_squared":true,"grid_held_smallest_n":274,"grid_held_width":16,"k":17,"last_n":289,"mid_row_excess":0.965586474838,"mid_row_n":272,"row_max_excess":0.532338752895,"row_max_excess_n":260,"tilted_loose_n_count":17,"tilted_n_count":17},
       {"closed_form_any_tier_count":22,"closed_form_any_tier_non_integer_count":6,"closed_form_count":20,"closed_form_non_integer_count":4,"count":35,"first_n":290,"grid_held_contiguous_to_k_squared":true,"grid_held_smallest_n":309,"grid_held_width":16,"k":18,"last_n":324,"mid_row_excess":0.963433717491,"mid_row_n":306,"row_max_excess":0.531259189742,"row_max_excess_n":299,"tilted_loose_n_count":19,"tilted_n_count":19}
     ],
-    "source_kinds": {"exact-grid":175,"kingbird-derived-facts":76,"packet-derived-facts":73},
-    "symmetry": {"near":{"all":{"C2":5,"C4":1,"D1-axis":12,"D1-diagonal":37,"D2-diagonal":18,"D4":31,"trivial":220},"non_grid":{"C2":5,"C4":1,"D1-axis":3,"D1-diagonal":20,"D2-diagonal":18,"D4":13,"trivial":89}},"tight":{"all":{"C2":5,"C4":1,"D1-axis":12,"D1-diagonal":35,"D2-diagonal":18,"D4":31,"trivial":222},"non_grid":{"C2":5,"C4":1,"D1-axis":3,"D1-diagonal":18,"D2-diagonal":18,"D4":13,"trivial":91}},"tight_non_grid_by_closed_form":{"closed_form":{"C2":1,"D1-axis":3,"D1-diagonal":16,"D2-diagonal":18,"D4":13,"trivial":2},"no_closed_form":{"C2":4,"C4":1,"D1-diagonal":2,"trivial":89}},"tight_non_trivial_by_source_kind":{"exact-grid":{"count":175,"non_trivial":44},"kingbird-derived-facts":{"count":76,"non_trivial":57},"packet-derived-facts":{"count":73,"non_trivial":1}}},
+    "source_kinds": {"exact-grid":175,"kingbird-derived-facts":75,"packet-derived-facts":74},
+    "symmetry": {"near":{"all":{"C2":5,"C4":1,"D1-axis":12,"D1-diagonal":37,"D2-diagonal":18,"D4":31,"trivial":220},"non_grid":{"C2":5,"C4":1,"D1-axis":3,"D1-diagonal":20,"D2-diagonal":18,"D4":13,"trivial":89}},"tight":{"all":{"C2":5,"C4":1,"D1-axis":12,"D1-diagonal":35,"D2-diagonal":18,"D4":31,"trivial":222},"non_grid":{"C2":5,"C4":1,"D1-axis":3,"D1-diagonal":18,"D2-diagonal":18,"D4":13,"trivial":91}},"tight_non_grid_by_closed_form":{"closed_form":{"C2":1,"D1-axis":3,"D1-diagonal":16,"D2-diagonal":18,"D4":13,"trivial":2},"no_closed_form":{"C2":4,"C4":1,"D1-diagonal":2,"trivial":89}},"tight_non_trivial_by_source_kind":{"exact-grid":{"count":175,"non_trivial":44},"kingbird-derived-facts":{"count":75,"non_trivial":57},"packet-derived-facts":{"count":74,"non_trivial":1}}},
     "tilted": {"all_tilted_at_forty_five":[5,10,19,26,27,38,40,51,52,65,66,67,82,85,89,101,104,109,122,124,125,145,147,148,149,150,170,173,174,197,200,201,202,203,226,227,229,231,233,257,260,262,265,290,291,294,295,296,298],"tight_loose_axis_disagreements":[68,84,86,88,105,126,127,132,146,152,153,154,155,156,172,175,176,177,179,180,199,206,207,208,209,210,211,228,232,237,240,259,266,267,268,271,273,297,301,302,304,305,308],"with_forty_five":52,"with_tilted":149,"with_tilted_loose":149}
   }
 }

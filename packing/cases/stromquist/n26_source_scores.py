@@ -13,6 +13,9 @@ from __future__ import annotations
 
 import argparse
 import json
+import sys
+from collections.abc import Iterator
+from contextlib import contextmanager
 from decimal import Decimal, localcontext
 from fractions import Fraction
 from math import isqrt
@@ -59,8 +62,30 @@ def _require_n26(n: object) -> None:
         raise ValueError("this comparison requires exactly 26 squares")
 
 
+@contextmanager
+def _long_integers() -> Iterator[None]:
+    """Lift Python's 4300-digit limit on integers as text for this module's own numbers.
+
+    The limit guards parsing untrusted text, and every witness is read under it. A side
+    squared here can pass it where the side itself is well within it, as n = 29's house
+    does since 17 October 2026 (T-195, a 2,399-digit numerator); it is written with the
+    limit lifted, as `devtools.check_half_angle_area` writes its margins.
+    """
+    previous = sys.get_int_max_str_digits()
+    sys.set_int_max_str_digits(0)
+    try:
+        yield
+    finally:
+        sys.set_int_max_str_digits(previous)
+
+
 def compare_score(score: object, *, n: int, metric: str, objective: str) -> dict[str, object]:
     """Compare a supplied positive scalar after converting to container side squared."""
+    with _long_integers():
+        return _compare_score(score, n=n, metric=metric, objective=objective)
+
+
+def _compare_score(score: object, *, n: int, metric: str, objective: str) -> dict[str, object]:
     _require_n26(n)
     if not isinstance(score, Fraction):
         raise TypeError("a score must be a Fraction")

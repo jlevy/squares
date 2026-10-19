@@ -1,0 +1,80 @@
+{
+  "kind": "intake-bounded-head-refresh/v1",
+  "retrieved_at": "2026-10-18T14:17:56.363416+00:00",
+  "original_census": "interim-online-census-ddebf0052.json",
+  "coverage": "Default-branch HEAD identity only. Every returned SHA equals a recorded read_through; no commits past those reads. Original history/tree fetch timeout evidence is preserved; no fresh full history, source-content classification, certificate import, or replay claimed. Existing named owners remain responsible for imports and full source-content classification.",
+  "rows": [
+    {
+      "repo": "BuddenPing/squares",
+      "command": [
+        "gh",
+        "api",
+        "repos/BuddenPing/squares/commits/HEAD",
+        "--jq",
+        "{sha: .sha, date:.commit.committer.date, message:.commit.message}"
+      ],
+      "returncode": 0,
+      "stdout": {
+        "date": "2026-10-15T18:30:49Z",
+        "message": "Merge pull request #621 from jlevy/codex/plain-news-significance\n\nfeat(news): backfill weekly highlights and define PR significance",
+        "sha": "73d254272da7168f6d4c2e341c009849b5e63b46"
+      },
+      "stderr": "",
+      "recorded_read_through": "73d254272da7168f6d4c2e341c009849b5e63b46"
+    },
+    {
+      "repo": "Esummins/packing",
+      "command": [
+        "gh",
+        "api",
+        "repos/Esummins/packing/commits/HEAD",
+        "--jq",
+        "{sha: .sha, date:.commit.committer.date, message:.commit.message}"
+      ],
+      "returncode": 0,
+      "stdout": {
+        "date": "2026-10-12T04:13:07Z",
+        "message": "outreach: posted as jlevy/squares issues 521-527 (pinned commit 651a9a5)\n\nCo-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>",
+        "sha": "eb3ae15418ce99ab72c448551f998628d2d5d76a"
+      },
+      "stderr": "",
+      "recorded_read_through": "eb3ae15418ce99ab72c448551f998628d2d5d76a"
+    },
+    {
+      "repo": "evand/square-packing",
+      "command": [
+        "gh",
+        "api",
+        "repos/evand/square-packing/commits/HEAD",
+        "--jq",
+        "{sha: .sha, date:.commit.committer.date, message:.commit.message}"
+      ],
+      "returncode": 0,
+      "stdout": {
+        "date": "2026-10-18T05:10:23Z",
+        "message": "s(232) record: exact certificate with exactly 3 angle groups, over K(sqrt 2)\n\nThe regularized drawing of the n = 232 record (0 deg x172, 45 deg x36, theta1 x24) solved exactly over\nL = K(sqrt 2) (degree 14, w = t + sqrt 2) from its 2049 contacts; same S* as the degree-7 exact form.\nverify_exact.py (unchanged): VALID.  Lean: Sqpack.Exact.Packs.N232R3.packs, standard axioms only; also the\nfirst Lean proof of the current record side.  tasks/reg-cert-232/README.md.\n\nTODO: site should show minimal polynomials (later).\n\nCommit + push approved by Evan in chat 2026-10-17.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>",
+        "sha": "5ca0dc3ae7a4eebce16838bf41bedc2ce7e98241"
+      },
+      "stderr": "",
+      "recorded_read_through": "5ca0dc3ae7a4eebce16838bf41bedc2ce7e98241"
+    },
+    {
+      "repo": "franciscouzo/square-packing",
+      "command": [
+        "gh",
+        "api",
+        "repos/franciscouzo/square-packing/commits/HEAD",
+        "--jq",
+        "{sha: .sha, date:.commit.committer.date, message:.commit.message}"
+      ],
+      "returncode": 0,
+      "stdout": {
+        "date": "2026-10-18T05:46:00Z",
+        "message": "Land 80 verified packing bounds and source provenance\n\nUpdate 79 locally improved counts below 1024 and adopt Evan Daniel's\ncredited n=229 certificate. Retain all 542 finite source witnesses,\ncanonical packing previews, exact L-border/deletion consequences,\nparent certificates, and complete bound coverage through n=1024.\n\nPreserve construction and seed credits, publication-order findings,\nand exact checker receipts. All 79 registration rows beat the reviewed\npublic and classical comparison envelope.\n\nValidation: frozen public tree audited for 1024 non-regressing bounds,\noutward rounding, monotonicity, 438 preview bindings, and 542 witness\nbindings. Focused tests: 25 passed, one optional upstream-checkout test\nskipped; 26 passed in the working tree with that checkout available.",
+        "sha": "c6da0fc7524d667bf3d224559724ba9b60762e60"
+      },
+      "stderr": "",
+      "recorded_read_through": "c6da0fc7524d667bf3d224559724ba9b60762e60"
+    }
+  ]
+}
