@@ -4178,7 +4178,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-19'
   status: live
 - path: cases/184.html
   canonical: cases/184.html
@@ -16756,6 +16756,37 @@ urls:
     - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n110_L1073/check2/receipt.json
     - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/receipts/premises-n110.json
     - packing/devtools/fine_net_followup.py
+- path: result/t-218.html
+  canonical: result/t-218.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-19'
+  lastmod: '2026-10-19'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 183
+    established: null
+    attribution:
+      source_keys:
+      - '[Daniel n183 subgrid 2026-10-19]'
+      published: '2026-10-19'
+    builds_on: null
+    evidence:
+    - E-evand-680-n183-report
+    - E-evand-680-n183-primary-exact-feasibility
+    artifacts:
+    - packing/resources/web/evand-n183-subgrid-2026-10-19/README.md
+    - packing/resources/web/evand-n183-subgrid-2026-10-19/source/search/packer/candidates/s183_h183b.cert
+    - packing/resources/web/evand-n183-subgrid-2026-10-19/source/search/packer/candidates/s183_h183b_regularized.cert
+    - packing/campaign/issue-intake/intake-followup-20261019/n183-ledger/README.md
+    - docs/project/reviews/review-2026-10-19-evand-n183-subgrid.md
+    - packing/campaign/issue-intake/intake-followup-20261019/n183-evidence-integration.yaml
+    - packing/resources/web/evand-n183-subgrid-2026-10-19/receipts/exact-certification.json.xz
+    - packing/resources/web/evand-n183-subgrid-2026-10-19/receipts/certify-execution-provenance.json
 - path: results.html
   canonical: results.html
   kind: page

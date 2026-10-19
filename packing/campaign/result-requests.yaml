@@ -21,7 +21,7 @@ softschema:
   status: enforced
 repository: jlevy/squares
 owner: jlevy
-last_reviewed: '2026-10-18'
+last_reviewed: '2026-10-19'
 issues:
   - number: 420
     title: 'Lean proofs that 178 best-known packings are local minima (n ≤ 324): registration request'
@@ -12054,3 +12054,50 @@ issues:
       receipts are not local replays. The n545 and n641 witnesses require deletion of one surplus
       square from n546 and n642 respectively. No register entry, adopted upper bound, house
       choice or confirmation rung changes in this Stage 1 inventory; Stage 4 adoption is separate.
+  - number: 680
+    title: 's(183) ≤ 13.999580178737: registration request (first 183 below the grid)'
+    author: evand
+    opened: '2026-10-19'
+    state: open
+    kind: result-report
+    triage: done
+    summary: 'Evan Daniel''s original n183 finite upper bound is locally bound to retained complete
+      replay and accepted mathematical review as T-218 after #671, merged at 6833d05 and integrated
+      here. T-218 final qualification and publication remain pending; neither house nor regularized
+      endpoint is adopted.'
+    read_through: '2026-10-19T13:54:01Z'
+    results:
+    - key: n183
+      claim: s(183) <= 13999580178736252502081470897571/1000000000000000000000000000000 = 13.999580178736252502081470897571,
+        rounded upward at 12 places to 13.999580178737.
+      source: body
+      bead: think-xp0o
+      register:
+      - T-218
+      evidence:
+      - E-evand-680-n183-report
+      - E-evand-680-n183-primary-exact-feasibility
+    beads:
+    - think-xp0o
+    answer_bead: think-xp0o
+    replies:
+    - url: https://github.com/jlevy/squares/issues/680#issuecomment-6268897692
+      date: '2026-10-19'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n183
+    close_when: The reported claim has a reviewed disposition on main, replay and mathematical review
+      have explicit owners, any adopted house is regularized in the adoption change, and a reply checked
+      against main and the deployed site reports the resulting state.
+    notes: 'Issue body retained in packing/campaign/issue-intake/intake-followup-20261019/issue-680.json.
+      Source commit date is 2026-10-19T05:20:24Z, despite the author-local 18 October date. The second
+      crossover parent was not logged; exact geometry can be checked without reconstructing that lineage.
+      No independent source-priority conclusion is drawn. Local registration T-218 follows #671, merged
+      at 6833d05 and integrated here; final qualification, publication and the post-merge/deployment
+      reply are owned by the coordinator. Retained original primary receipt and mathematical review
+      support finite feasibility only. Case/house adoption, regularized endpoint and stronger numerical/lineage/priority
+      claims remain separate. The 19 October posted interim reply reports completed local original-certificate
+      replay and mathematical review, while registration is unlanded, undeployed and its result number
+      provisional. It names no T-218 and makes no published-registration claim; house adoption and
+      regularized endpoint remain separate. Exact posted bodies are retained in packing/campaign/issue-intake/intake-followup-20261019/issue-680-replies.json.'

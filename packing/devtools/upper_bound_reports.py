@@ -1331,6 +1331,7 @@ HOUSES: dict[str, Callable[[int], Fraction]] = {
     "[Couzo certificates 2026-10-14]": _import("couzo-certificates-2026-10-14"),
     "[Couzo n237 2026-10-15]": _import("couzo-n237-2026-10-15"),
     "[PingYou PR 622 certificate 2026-10-15]": _import("pingyou-pr622-certificate-2026-10-15"),
+    "[Daniel n183 subgrid 2026-10-19]": _import("evand-n183-subgrid-2026-10-19"),
     # T-155: the side of the retained view of Evan Daniel's regularizer at each count.
     "[Daniel regularizer 2026-10-11]": regularized.view_side,
 }

@@ -8,8 +8,8 @@ ours, which rest on someone else's argument, and how far each has been checked.
 
 ## The short version
 
-- **641** evidence records. **362** are formal; **355** of those were established here. **10** are samples, counted separately.
-- **261** rest on an argument made elsewhere, of which **7** have been read by nobody here.
+- **643** evidence records. **363** are formal; **356** of those were established here. **10** are samples, counted separately.
+- **262** rest on an argument made elsewhere, of which **7** have been read by nobody here.
 - **1** formal record proves a theorem only under a hypothesis nothing here has replayed, and is verified as that implication alone: `E-k2m4-evand-bentz4-lean-build` (ValidTilt9).
 - **43** claim to be first established here. **14** make no novelty statement at all - not assessed, which is not the same as not novel.
 
@@ -664,13 +664,15 @@ results, it is a statement about what this repository has itself examined.
 | `E-n108-review-max-premises` | 0 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | previously-published | not applicable | full: exact mass, D4 expansion, core/net/domain premises and retained receipt inventories of this one candidate | `V-n108-review-max-exact` |
 | `E-n108-review-max-captures` | 0 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | previously-published | not applicable | sample, 5 of 233: recorded control witness poses, no whole direction domain | `V-n108-review-max-exact` |
 | `E-wand125-fine-net-n110-1073-report` | 0 | lower-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | `V-wand125-sqverify-proof-net` |
+| `E-evand-680-n183-report` | 0 | upper-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | `V-evand-verify-cert-py`, `V-evand-verify-cert2-py` |
+| `E-evand-680-n183-primary-exact-feasibility` | 0 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | independent | full, 1 of 1: the original n183 rational certificate, all 183 squares, every wall and all 16653 unordered pairs in each of three jobs through both maintained routes; positive plus two sensitive invalid controls | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-upper-bound-reports`, `V-evand-arrangement-receipts`, `V-evand-exact-certificates`, `V-acquire-source` |
 
 ## What the register rests on
 
-- **assurance**: numerically-checked 5, reported 265, verified 371
-- **method**: exact-algebraic 186, interval-certified 169, numerical-multiprecision 5, proof-assistant-checked 5, proof-audited 4, published-proof 7, reported 265
-- **novelty**: apparently-novel 43, common-knowledge 4, not assessed 14, previously-published 580
-- **relationship to the producer's code**: generator 5, independent-implementation 231, not-applicable 25, same-implementation 355, shared-components 19, unknown-historical 6
+- **assurance**: numerically-checked 5, reported 266, verified 372
+- **method**: exact-algebraic 187, interval-certified 169, numerical-multiprecision 5, proof-assistant-checked 5, proof-audited 4, published-proof 7, reported 266
+- **novelty**: apparently-novel 43, common-knowledge 4, not assessed 14, previously-published 582
+- **relationship to the producer's code**: generator 5, independent-implementation 232, not-applicable 25, same-implementation 356, shared-components 19, unknown-historical 6
 
 The `cases` column is how many frontier records cite each piece of evidence, and it is the reason to read this table rather than count records. Ranked below are the *formal* records only: a `reported` record cited across the frontier may be a shared catalogue and is labelled as such, which is the register working rather than risk. The risk is a verified claim resting on an argument nobody has examined.
 

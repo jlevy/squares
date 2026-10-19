@@ -1,0 +1,45 @@
+{
+  "format": "external-source-declaration-v1",
+  "id": "evand-n183-subgrid-2026-10-19",
+  "source_url": "https://github.com/evand/square-packing",
+  "source_ref": "3a9948c781be668b1547cc2bf64a0d1e614f9bca",
+  "source_commit": "3a9948c781be668b1547cc2bf64a0d1e614f9bca",
+  "retrieved_at_utc": "2026-10-19T07:19:00Z",
+  "git_scope": "One depth-one blobless fetch into the existing external evand object store, then a separate sparse worktree sharing that store. The manifest covers only the named n183 claim, attribution, exact checker and producer files. PACKER.md is digest-only because its general history is outside this packet's scope; its H183 section was read. No numerical producer, source verifier, dependency installation or search was executed.",
+  "archived_dir": "source",
+  "license": "MIT, copyright (c) 2026 Evan Daniel (LICENSE retained). CREDITS.md discloses Claude (Anthropic) under human direction and states no peer review. This commit names Claude Opus 5.5 as co-author. Issue #680 asks to credit Francisco Couzo's n182 packing as ultimate donor; a crossover mate was not logged.",
+  "claims": [
+    "Issue #680 reports s(183) <= 13999580178736252502081470897571/1000000000000000000000000000000 = 13.999580178736252502081470897571, rounded upward at twelve decimal places to 13.999580178737. Original certificate SHA-256 279e70d1c7fb0bc181e3e9d313e7350b672d85e223296f252b92f2916d6e5df5; regularized certificate SHA-256 67b2b26205f53915bb1a10a703a2700994a9ad16ea9ddd427bda232716f40d58. The regularized view is reported as the same packing at the same side, with 18 angle groups, not a new bound.",
+    "The author reports both standalone exact stdlib geometry checkers accept both certificates. They share author and format; one uses separating axes, the other polygon intersection, and both use exact circumscribed-disc separation. These are source assertions, not local replay or independent implementation evidence.",
+    "The author calls this the first public n183 packing below side 14, compared on 18 October against squares main 804eff36, issues through #678, the Kingbird catalogue and their monotone envelope. This packet retains that comparison assertion without establishing public priority. The source's earlier 13.9998051157950716 candidate and other sub-14 minima are discovery history, not separate certificate submissions in #680.",
+    "The source reports an 80-digit KKT point with S* = 13.999580178736252501941..., a local minimum strict modulo 27 flat motions, 86 wall and 897 square-square contact equations, 106 corner-corner contacts, no corner-corner MILP descent, one rattler, and 73 tilted squares (72 load-bearing) in two bands. The 27 are numerical candidate flat modes of the force-bearing subsystem: exactsolve.py lines 1032-1033 construct its variable set from the 182 load-bearing squares plus S, excluding the free rattler. This is not a theorem of local optimality for the full 183-square configuration, an interval proof, rigidity, or global optimality.",
+    "The source credits Francisco Couzo's n182 witness as ultimate donor, followed by a non-record n182 explorer descendant at 13.990326 after 17 moves, one-square insertion, an angle swap and two crossovers to an intermediate n183 candidate, and symmetric-kick refinement. A crossover parent was not logged; all six start packings are reported as descended from public n182 packings. Exact feasibility does not reconstruct that lineage.",
+    "The source regularization metadata reports conservative level 2, traversable without expansion, 19 to 18 angle groups. The prior grid comparison calls the new configuration a distinct minimum. Neither arrangement identity nor those path/optimality classifications are measured by this acquisition. Numerical producer dependencies are not a standalone replay closure."
+  ],
+  "scope": [
+    "LICENSE",
+    "CREDITS.md",
+    "README.md",
+    "search/exact/README.md",
+    "search/exact/verify_cert.py",
+    "search/exact/verify_cert2.py",
+    "search/exact/exactsolve.py",
+    "search/packer/explore.py",
+    "search/packer/h183.py",
+    "search/packer/PACKER.md",
+    "search/packer/candidates/s183_h183b.cert",
+    "search/packer/candidates/s183_h183b.exact.txt",
+    "search/packer/candidates/s183_h183b.input.txt",
+    "search/packer/candidates/s183_h183b.json",
+    "search/packer/candidates/s183_h183b_prior.json",
+    "search/packer/candidates/s183_h183b_regularized.cert",
+    "search/packer/candidates/s183_h183b_regularized.json",
+    "search/packer/candidates/s183_h183b_vs_prior.json"
+  ],
+  "pinned_only": [
+    {
+      "match": "search/packer/PACKER.md",
+      "reason": "General 4,175-line search history, 447,273 bytes. H183 source claims and lineage were read at this pin and inventoried in the packet README and declaration; unrelated campaigns remain commit-pinned, without copying this bulk history."
+    }
+  ]
+}
