@@ -1486,6 +1486,7 @@ jobs:
             /packing/resources/web/couzo-verified-bounds-2026-10-14/
             /packing/resources/web/couzo-n237-2026-10-15/
             /packing/resources/web/pingyou-pr622-certificate-2026-10-15/
+            /packing/resources/web/evand-n183-subgrid-2026-10-19/
             /packing/resources/papers/
             !/packing/resources/papers/*
             /packing/resources/papers/kingbird-square-29-provenance.svg

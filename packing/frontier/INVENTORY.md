@@ -155,9 +155,9 @@ results, it is a statement about what this repository has itself examined.
 | `E-n017-maciver-reported-lower` | 0 | lower-bound | reported | - | elsewhere | not-reviewed | previously-published | unknown | not recorded | *none held* |
 | `E-green26-reported-lower` | 0 | lower-bound | reported | - | - | defect-found | previously-published | unknown | not recorded | - |
 | `E-kingbird-upper-register` | 155 | upper-bound | reported | - | - | - | previously-published | producer’s code | not recorded | - |
-| `E-kingbird-grid-completeness` | 95 | upper-bound | reported | - | - | - | previously-published | producer’s code | not recorded | - |
+| `E-kingbird-grid-completeness` | 94 | upper-bound | reported | - | - | - | previously-published | producer’s code | not recorded | - |
 | `E-unitsquare-release1-report` | 0 | upper-bound | reported | - | - | - | previously-published | producer’s code | not recorded | *none held* |
-| `E-basic-grid-upper` | 175 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | common-knowledge | independent | not recorded | `V-check-basic-bounds` |
+| `E-basic-grid-upper` | 174 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | common-knowledge | independent | not recorded | `V-check-basic-bounds` |
 | `E-basic-area-lower` | 18 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | common-knowledge | independent | not recorded | `V-check-basic-bounds` |
 | `E-nagamochi-lower` | 26 | lower-bound | reported | - | elsewhere | defect-found | previously-published | no code | not recorded | - |
 | `E-karakus-strip-lower` | 202 | lower-bound | verified | whatever its theorem states | elsewhere | informally-verified | previously-published | no code | not recorded | - |
@@ -664,8 +664,8 @@ results, it is a statement about what this repository has itself examined.
 | `E-n108-review-max-premises` | 0 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | previously-published | not applicable | full: exact mass, D4 expansion, core/net/domain premises and retained receipt inventories of this one candidate | `V-n108-review-max-exact` |
 | `E-n108-review-max-captures` | 0 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | previously-published | not applicable | sample, 5 of 233: recorded control witness poses, no whole direction domain | `V-n108-review-max-exact` |
 | `E-wand125-fine-net-n110-1073-report` | 0 | lower-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | `V-wand125-sqverify-proof-net` |
-| `E-evand-680-n183-report` | 0 | upper-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | `V-evand-verify-cert-py`, `V-evand-verify-cert2-py` |
-| `E-evand-680-n183-primary-exact-feasibility` | 0 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | independent | full, 1 of 1: the original n183 rational certificate, all 183 squares, every wall and all 16653 unordered pairs in each of three jobs through both maintained routes; positive plus two sensitive invalid controls | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-upper-bound-reports`, `V-evand-arrangement-receipts`, `V-evand-exact-certificates`, `V-acquire-source` |
+| `E-evand-680-n183-report` | 1 | upper-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | `V-evand-verify-cert-py`, `V-evand-verify-cert2-py` |
+| `E-evand-680-n183-primary-exact-feasibility` | 1 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | independent | full, 1 of 1: the original n183 rational certificate, all 183 squares, every wall and all 16653 unordered pairs in each of three jobs through both maintained routes; positive plus two sensitive invalid controls | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-upper-bound-reports`, `V-evand-arrangement-receipts`, `V-evand-exact-certificates`, `V-acquire-source` |
 | `E-wand125-fine-net-n68-853-sqverify-fast-replay` | 1 | lower-bound | verified | strict inequalities only | here | - | previously-published | shared components | full, 201 of 201: complete legal core-centre domains at every declared-net direction | `V-sqverify-fast` |
 | `E-n68-review-max-premises` | 0 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | previously-published | not applicable | full: exact mass, D4 expansion, core/net/domain premises and retained receipt inventories of this candidate | `V-fine-net-mac-review-exact` |
 | `E-n68-review-max-captures` | 0 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | previously-published | not applicable | full, 199 of 199: saved native 99/100 refusal poses plus selected positive centre and near-threshold witness; no whole direction domain | `V-fine-net-mac-review-exact` |
@@ -741,7 +741,7 @@ The `n` column is what each covers and `cases` is how many frontier records cite
 | --- | ---: | --- | --- |
 | `E-karakus-strip-lower` | 202 | elsewhere | informally-verified |
 | `E-karakus-strip-measure-interval` | 202 | here | - |
-| `E-basic-grid-upper` | 175 | here | - |
+| `E-basic-grid-upper` | 174 | here | - |
 | `E-regularized-bounds-2026-10-12-exact-decision` | 56 | here | - |
 | `E-pingyou-574-exact-feasibility` | 37 | here | informally-verified |
 
