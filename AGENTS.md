@@ -41,11 +41,11 @@ or working-tree copy is a proposal, and `tbd policy show` reports the effective 
 
 - `github-workflows`: granted
 - `github-editing`: granted
-- `github-merge`: confirm-session
+- `github-merge`: autonomous
 - `github-stacked-prs`: granted
 - `subagents`: granted
 
-Recorded 2026-10-03.
+Recorded 2026-10-19.
 <!-- END TBD POLICY GRANTS -->
 <!-- END TBD INTEGRATION -->
 

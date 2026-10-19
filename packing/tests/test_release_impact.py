@@ -441,6 +441,93 @@ def test_dependent_base_requires_own_successor_and_keeps_uncovered_input_red(
     assert any(PAPER in error for error in uncovered.errors)
 
 
+def test_atomic_delivery_accepts_complete_fresh_adjacent_cuts(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    repo = Repository(tmp_path, monkeypatch)
+    repo.git("checkout", "-qb", "fixture-stack")
+    for layer in ("first", "second"):
+        repo.write("about.md", f"The {layer} layer's public correction.\n")
+        repo.bump("site")
+        repo.commit(f"{layer} layer")
+    repo.git("checkout", "-qb", "fixture-main", repo.base)
+    repo.git(
+        "-c",
+        "user.name=Gate fixture",
+        "-c",
+        "user.email=fixture@example.invalid",
+        "merge",
+        "--no-ff",
+        "-qm",
+        "atomic stack delivery",
+        "fixture-stack",
+    )
+
+    report = gate.inspect(repo=repo.root, base="HEAD^1")
+    assert report.baseline == repo.base
+    assert report.baseline_versions["site"] == "v1.0.0"
+    assert report.errors == ()
+
+
+@pytest.mark.parametrize(
+    ("damage", "expected"),
+    [
+        ("missing-first", "site: candidate public inputs"),
+        ("missing-last", "site: candidate public inputs"),
+        ("arithmetic", "requires its minor successor v1.1.0"),
+        ("backward", "requires its patch successor v1.0.2"),
+        ("lost-baseline", "site: delivery baseline has no retained edition"),
+        ("unchanged-edition", "site: candidate public inputs"),
+    ],
+)
+def test_delivery_rejects_incomplete_or_invalid_retained_chains(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, damage: str, expected: str
+) -> None:
+    repo = Repository(tmp_path, monkeypatch)
+    repo.write("about.md", "Two public corrections in one delivery.\n")
+    repo.bump("site")
+    repo.bump("site")
+    if damage == "missing-first":
+        repo.decisions.pop(0)
+    elif damage == "missing-last":
+        repo.decisions.pop()
+    elif damage == "arithmetic":
+        repo.decisions[-1] = repo.decisions[-1]._replace(impact="minor")
+    elif damage == "backward":
+        repo.histories["site"] = (
+            repo.histories["site"][0]._replace(version="v0.9.0"),
+            *repo.histories["site"][1:],
+        )
+        repo.decisions[-1] = repo.decisions[-1]._replace(version="v0.9.0")
+    elif damage == "lost-baseline":
+        repo.histories["site"] = repo.histories["site"][:-1]
+    else:
+        repo.histories["site"] = repo.histories["site"][-1:]
+        repo.decisions.clear()
+    repo.write_release()
+
+    report = gate.inspect(repo=repo.root, base=repo.base)
+    assert any(expected in error for error in report.errors)
+
+
+def test_delivery_cannot_reuse_a_decision_already_present_at_its_baseline(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    repo = Repository(tmp_path, monkeypatch)
+    repo.bump("site")
+    repo.bump("site")
+    repo.histories["site"] = repo.histories["site"][-1:]
+    repo.write_release()
+    baseline = repo.commit("predeclared decisions without their editions or changes")
+    repo.decisions.clear()
+    repo.write("about.md", "The later public corrections need fresh decisions.\n")
+    repo.bump("site")
+    repo.bump("site")
+
+    report = gate.inspect(repo=repo.root, base=baseline)
+    assert any("site: candidate public inputs" in error for error in report.errors)
+
+
 def test_retained_composite_export_has_only_its_infographic_owner(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
