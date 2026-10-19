@@ -1150,7 +1150,7 @@ Replays the exact optimal moduli for n = 2 to 4 and the side-2 lower bound.
 Decides a packing pair by pair and wall by wall: by exact sign in a number field, by outward-rounded enclosures, or at a declared precision and tolerance.
 
 - Source: [`packing/src/sqpack/verify.py`](../../packing/src/sqpack/verify.py), [`packing/src/sqpack/witness.py`](../../packing/src/sqpack/witness.py), [`packing/src/sqpack/cli/witness.py`](../../packing/src/sqpack/cli/witness.py)
-- Versions run: SHA-256 `6642aca5a6da…` (Actual n183 primary batch source, unchanged at this local registration; retained seven-file provenance identifies the historical run.; of `witness.py`); SHA-256 `56bc5b9f690b…` (Actual n183 primary batch source, unchanged at this local registration; retained seven-file provenance identifies the historical run.; of `verify.py`)
+- Versions run: SHA-256 `6642aca5a6da…` (The source the n183 primary batch ran, unchanged since; the retained seven-file provenance identifies the historical run; of `witness.py`); SHA-256 `56bc5b9f690b…` (The source the n183 primary batch ran, unchanged since; the retained seven-file provenance identifies the historical run; of `verify.py`)
 - Note: The constructions it decides for others were published as figures and coordinates without verification code, so it was written from the geometry.
 
 | evidence | run | code | coverage | results |
@@ -1236,7 +1236,7 @@ Decides a packing pair by pair and wall by wall: by exact sign in a number field
 Decides a rational-corner witness pair by pair and wall by wall in Fraction arithmetic.
 
 - Source: [`packing/devtools/check_rational_witness_independent.py`](../../packing/devtools/check_rational_witness_independent.py)
-- Versions run: SHA-256 `89f8d8e2e071…` (Actual n183 primary batch source, unchanged at this local registration; retained seven-file provenance identifies the historical run.; of `check_rational_witness_independent.py`)
+- Versions run: SHA-256 `89f8d8e2e071…` (The source the n183 primary batch ran, unchanged since; the retained seven-file provenance identifies the historical run; of `check_rational_witness_independent.py`)
 - What its authors read and used: [`packing/devtools/check_rational_witness_independent.py`](../../packing/devtools/check_rational_witness_independent.py)
 - Note: Its module statement says it shares no geometry or verification code with sqpack.witness or sqpack.verify.
 
@@ -2225,7 +2225,7 @@ No evidence entry names it yet.
 Reads Evan Daniel's rational certificates, refusing anything the format does not state, converts each without rounding to a rational center-basis witness for sqpack.witness.exact_verify and to rational corners for devtools.check_rational_witness_independent, which decide it; runs the source's two checkers as retained; compares each side and pose with the register; and makes the negative controls.
 
 - Source: [`packing/devtools/evand_exact_certificates.py`](../../packing/devtools/evand_exact_certificates.py)
-- Versions run: SHA-256 `52073811e61d…` (Actual n183 primary batch source, unchanged at this local registration; retained seven-file provenance identifies the historical run.; of `evand_exact_certificates.py`)
+- Versions run: SHA-256 `52073811e61d…` (The source the n183 primary batch ran, unchanged since; the retained seven-file provenance identifies the historical run; of `evand_exact_certificates.py`)
 - What its authors read and used: [`packing/devtools/evand_exact_certificates.py`](../../packing/devtools/evand_exact_certificates.py)
 - Note: Written from the certificate format the source's README states and from the geometry. Its author read the source's verify_cert.py and verify_cert2.py before writing it, to check that the conversion means what they mean, and imports or copies none of their code; it runs them only as separate processes.
 
@@ -2793,7 +2793,7 @@ Admits the complete immutable second-update roster, all historical full replay i
 Binds all three complete source certificates and all nine full deciding inputs/native results; explicit replay repeats both project geometric deciders.
 
 - Source: [`packing/devtools/evand_arrangement_reports.py`](../../packing/devtools/evand_arrangement_reports.py)
-- Versions run: SHA-256 `8e2141bfa0b2…` (Actual n183 primary batch source, unchanged at this local registration; retained seven-file provenance identifies the historical run.; of `evand_arrangement_reports.py`)
+- Versions run: SHA-256 `8e2141bfa0b2…` (The source the n183 primary batch ran, unchanged since; the retained seven-file provenance identifies the historical run; of `evand_arrangement_reports.py`)
 
 | evidence | run | code | coverage | results |
 | --- | --- | --- | --- | --- |
@@ -2867,7 +2867,7 @@ Imports a packet's algebraic-number-field witnesses from its declaration: derive
 Imports a report of rational upper-bound certificates by another author from its packet's declaration: admits custody through acquire_source, reads each retained file or derived fact by its declared adapter (Evan Daniel's text format, SQUISH's JSON, centred JSON, PingYou Ltd's JSON, Daniil Ostashev's sqcert files, Rio Calle's decimal layouts, rational corners witnesses, decimal poses by a declared dilation), holds a derived fact to any file its row names as the same packing, admits each side only where it equals or rounds up to its print, rebuilds the frozen claim comparison and the register plan, and drives the arrangement kernel's two exact routes and two controls per count. It decides no geometry itself.
 
 - Source: [`packing/devtools/upper_bound_reports.py`](../../packing/devtools/upper_bound_reports.py), [`packing/devtools/evand_arrangement_reports.py`](../../packing/devtools/evand_arrangement_reports.py), [`packing/tests/test_upper_bound_reports.py`](../../packing/tests/test_upper_bound_reports.py)
-- Versions run: SHA-256 `bc47273499dc…` (Actual n183 primary batch source, unchanged at this local registration; retained seven-file provenance identifies the historical run.; of `upper_bound_reports.py`)
+- Versions run: SHA-256 `bc47273499dc…` (The source the n183 primary batch ran, as the retained seven-file provenance records it; of `upper_bound_reports.py`); SHA-256 `e8bb87fa8acb…` (The current driver, which adds only the n183 packet to HOUSES, the reader that receipt admission and house selection use; it decided no n183 geometry; of `upper_bound_reports.py`)
 - Note: Written for the 2026-10-10 intake pass's upper-bound imports from the formats the sources state. sqpack.verify and the independent rational corner checker decide; the 10 October reviews of issues 476, 481, 483 and 484, of issue 470 and of issues 488 and 489, and the 11 October review of Evan Daniel's regularized record lists (docs/project/reviews/review-2026-10-10-evand-regularized-certificates.md), read it in full; for issues 488 and 489, its HOUSES readers of the issue-481, issue-484, issue-488 and issue-489 packets are the exact readers that review proposed (RL-2). For issue 470 its decimal_dilation adapter generates the exact witnesses from the source's decimal poses, so there this repository is the witness's generator. The import lane of issues 503 and 504 added the pingyou-json and witness-corners adapters and the same-packing comparison in derive, and the 11 October review of those issues (docs/project/reviews/review-2026-10-11-upper-bound-imports-503-504.md) read them in full. The import lane of issues 505 and 501 added the sqcert adapter, which the 11 October review of those issues (docs/project/reviews/review-2026-10-11-upper-bound-imports-505-501.md) read in full. The import lanes of issues 500 and 506 added HOUSES readers of their packets, which the reviews of issue 500 (docs/project/reviews/review-2026-10-11-upper-bound-imports-500.md) and of issue 506 (docs/project/reviews/review-2026-10-11-upper-bound-imports-506.md) read in full; the second refroze issue 506's claim record against the first's exact sides. The import lane of issues 528 and 529 added the calle-txt adapter, which floors each half-angle tangent of a radian layout by an outward-rounded interval enclosure, and HOUSES readers of both packets; the 12 October review of those issues (docs/project/reviews/review-2026-10-12-upper-bound-imports-528-529.md) read them in full. The import lane of issue 552 added a HOUSES reader of its packet, which the 12 October review of that issue (docs/project/reviews/review-2026-10-12-upper-bound-import-552.md) read.
 
 | evidence | run | code | coverage | results |

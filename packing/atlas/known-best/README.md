@@ -543,8 +543,9 @@ read pending.
 Both generators then ran on it, on a shared host at a load average of about
 fifteen: Evan Daniel’s regularizer (`evand-regularize-adopt-2026-10-19-n183-evand`, 345
 CPU-seconds, 892 seconds of wall at two workers) and grid-slack at 0.5, 1 and 5 degrees
-(`grid-slack-adopt-2026-10-19-n183-grid-0.5`, `-grid-1` and `-grid-5`, about 152
-CPU-seconds each). Every view is admitted at row 10 at the witness’s own side.
+(`grid-slack-adopt-2026-10-19-n183-grid-0.5`, `-grid-1` and `-grid-5`, 388, 375 and 352
+seconds, the per-count seconds their reports record).
+Every view is admitted at row 10 at the witness’s own side.
 The three grid-slack runs drew one view, which ties his same-side view on light, uneven
 and near-axis squares and on house sides, and draws one more angle class, one more hue
 and two fewer stage sides.
