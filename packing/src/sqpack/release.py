@@ -1519,14 +1519,14 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "papers/n11-lower-bounds-explainer.pdf",
         ),
         reason=(
-            "Reviewed October 19, 2026 against main 14fd9e27 for the #446 landing of "
+            "Reviewed October 19, 2026 against main 9fb8e147 for the #446 landing of "
             "T-205, T-206 and T-207: results.yaml changes only those three n68, n84 and "
             "n85 lower-bound entries and last_reviewed. The explainer reads the register "
             "for its count of 217 results and of apparently or confirmed novel ones, "
             "both unchanged since the three stay previously-published. The composite "
             "figure record and bound citations change only the n68, n84 and n85 lower "
             "displays and citations; Figure 2's totals and the n11 citation the paper "
-            "reads are unchanged. The site v0.7.33 cut regenerated the five claim and "
+            "reads are unchanged. The site v0.7.34 cut regenerated the five claim and "
             "card documents, which change only their source-link commit and are linked "
             "from the paper, not inlined. run_negative_controls.py changes only the "
             "snapshot cap and its comment and is not a paper producer. Its HTML and "
@@ -1547,7 +1547,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "papers/n11-optimality-review.pdf",
         ),
         reason=(
-            "Reviewed October 19, 2026 against main 14fd9e27 for the #446 landing of "
+            "Reviewed October 19, 2026 against main 9fb8e147 for the #446 landing of "
             "T-205, T-206 and T-207: the changed results are the n68, n84 and n85 lower "
             "bounds, outside the n11 ladder rows this paper consumes, and "
             "run_negative_controls.py changes only the snapshot cap and its comment. Its "
@@ -1568,7 +1568,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "papers/n11-threshold-bound-review.pdf",
         ),
         reason=(
-            "Reviewed October 19, 2026 against main 14fd9e27 for the #446 landing of "
+            "Reviewed October 19, 2026 against main 9fb8e147 for the #446 landing of "
             "T-205, T-206 and T-207: the changed results are the n68, n84 and n85 lower "
             "bounds, outside the n11 ladder rows, T-060 included, that this paper "
             "consumes, and run_negative_controls.py changes only the snapshot cap and "
@@ -1591,7 +1591,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "papers/square-packing-methods-survey.pdf",
         ),
         reason=(
-            "Reviewed October 19, 2026 against main 14fd9e27 for the #446 landing of "
+            "Reviewed October 19, 2026 against main 9fb8e147 for the #446 landing of "
             "T-205, T-206 and T-207: the #446 request entry, the n84 case record and the "
             "three register entries are citation targets whose existence the producer "
             "checks, not inlined text, and every cited path exists at both revisions; "
