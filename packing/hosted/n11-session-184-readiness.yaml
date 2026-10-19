@@ -1,0 +1,21 @@
+softschema:
+  contract: packing.squares:HostedData/v1
+  schema: hosted-data.schema.yaml
+  status: enforced
+repository: jlevy/squares
+tag: data/n11-session-184-readiness-v1
+objects:
+- path: packing/campaign/retained/session-184-n11-readiness/checkpoint-round-001.json.gz
+  asset: checkpoint-round-001.json.gz
+  size: 25275233
+  sha256: 48a574be6fdb483d40f6adaa9dab5133dc298233e909baa8e46f24953c1dbd42
+- path: packing/campaign/retained/session-184-n11-readiness/node-7034ab8f816f7c851878a06d9b8bfd3996ecf1b31b7f06df0bde59eaedb39a09.json.gz
+  asset: node-7034ab8f816f7c851878a06d9b8bfd3996ecf1b31b7f06df0bde59eaedb39a09.json.gz
+  size: 23254765
+  sha256: 682f9a33f9ae6ee07ad5c0f31edf1a46f7c99b7ec70d6e9b99145ccfa8db4a05
+- path: packing/campaign/retained/session-184-n11-readiness/seed-b07e4f328e87ff5a00b1125cb29b70b7d18742e575abcc00c3120672b06ac56c.json.gz
+  asset: seed-b07e4f328e87ff5a00b1125cb29b70b7d18742e575abcc00c3120672b06ac56c.json.gz
+  size: 41563
+  sha256: 60668edbdf975dcc48501f03db8c8e50a1f3fec5cf7df7a583ab2d59354c1f13
+description: Unique first-round n11 readiness checkpoint, seed and node from exp268; eleven updates and
+  fresh zero-production full replay. Original compressed bytes retained. No15-round or n17 capture claim.

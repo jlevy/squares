@@ -36,9 +36,11 @@ states is how `D-385` happened, and the same four questions recur for each bound
 4. *What has this project recorded about it?* Every result for this `n` that carries one
    of the bound's own evidence entries is listed in `results`. Those that carry one this
    project performed -- a replay, an audit, an interval certificate -- confirm the
-   external bound and are listed in `confirmed_by`. A result that only cites the source's
-   own proof is relevant and listed, and confirms nothing. The shared checker behind
-   several first-party certificates is not the bound's own evidence, so a project line
+   external bound and are listed in `confirmed_by`. An upper certificate confirms the
+   displayed report only when the verified lane agrees at its declared precision;
+   certificates of earlier ceilings remain relevant results. A result that only cites
+   the source's own proof is relevant and listed, and confirms nothing. The shared checker
+   behind several first-party certificates is not the bound's own evidence, so a project line
    lists only the results that carry its novel entries, not every earlier rung that used
    the same checker.
 
@@ -58,7 +60,7 @@ reason, so a gap is reported rather than filled.
 2026-09-27): "we ultimately want these graphics and charts to be a full representation of
 the current state of understanding ... and they should show recent changes to be new."
 The star says when, not whose. A line credits case by case: another's work under its
-authors, joint work that builds on this project as `credit` in the bibliography (`Kleddamag
+authors, joint work that builds on this project as `credit` in the bibliography (`Overbeck
 after Levy, Mira, Guzhou0806`), and this project's sole work as `Squares Project (Levy)`.
 Recent is a typed date, never a year or a source key read as text: this project's own new
 bounds are recent by construction, and an external bound is recent where its source's
@@ -181,7 +183,7 @@ class Source:
     #: The venue a line falls back to when its confirmation would not otherwise fit.
     short_venue: str | None = None
     #: What a line prints in place of the joined authors, where the credit is joint with
-    #: the lineage the source builds on: Kleddamag's n = 17 releases continue this
+    #: the lineage the source builds on: Overbeck's n = 17 releases continue this
     #: project's, Mira's and Guzhou0806's methods, which the authors field has no place for
     #: (the owner, 2026-09-27). Last names, or handles where no name is published; human
     #: authors and projects only, since an AI agent is never a credited author.
@@ -384,8 +386,8 @@ def note(assurance: str, confirmed_by: Sequence[str]) -> str | None:
 
     They do not contradict. `reported` is the register's: it carries this construction's
     value from the catalogue and has not certified it at the printed precision. The
-    confirmation is ours: a result of this project's that checks the same bound. At
-    `n = 29` both are true, and the line now says so once: "(reported; confirmed T-009)".
+    confirmation is ours: a result of this project's that checks the same bound.
+    A certificate of a different ceiling does not confirm the displayed report.
     The semicolon separates the two statements, so the comma is left to separate results.
     """
     said = []
@@ -621,16 +623,20 @@ def _external(
     register: Register,
     short_credit: str | None = None,
     recent: bool | None = None,
+    confirming: Sequence[str] | None = None,
 ) -> dict[str, Any]:
     """An external source's line, and what this project has recorded about the bound.
 
     `short_credit` is the shortening of `credited`'s names the line may fall back to, which
     only a line that credits the source's own `credit` has. `recent` is given for a lower
     line alone, which then also carries what it corrects, and the reference gives way to
-    that tag as it does to the note.
+    that tag as it does to the note. `confirming` limits confirmation to evidence about
+    the displayed value while `own` preserves all relevant result links.
     """
     performed = [
-        item for item in own if register.evidence[item].get("performed_by") == FIRST_PARTY
+        item
+        for item in (own if confirming is None else confirming)
+        if register.evidence[item].get("performed_by") == FIRST_PARTY
     ]
     confirmed_by = results_carrying(n, performed, register.results)
     results = results_carrying(n, own, register.results)
@@ -796,6 +802,7 @@ def upper_citation(
         register=register,
         # The register's finders are not the source's credit, so they have no shortening.
         short_credit=None if names else source.short_credit,
+        confirming=own_evidence([*construction, *(certificate if certified else [])], register),
     )
 
 

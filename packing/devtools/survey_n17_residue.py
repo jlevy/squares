@@ -86,6 +86,7 @@ import math
 import time
 from collections import Counter
 from concurrent.futures import FIRST_COMPLETED, Future, ProcessPoolExecutor, wait
+from copy import deepcopy
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
@@ -1068,14 +1069,43 @@ def population(
     size: int,
     endpoint_state: int | None,
 ) -> Population:
-    group = geometry.group
-    alive, representatives = surviving_orbits(len(geometry.names), group, flags, size)
+    """Reuse the complete combinatorial census while returning detached mutable values."""
+    snapshot = _population_cached(
+        tuple(geometry.names),
+        tuple(tuple(permutation) for permutation in geometry.group),
+        tuple(sorted(set(flags))),
+        size,
+        endpoint_state,
+    )
+    return Population(
+        list(flags),
+        snapshot.alive.copy(),
+        snapshot.representatives.copy(),
+        deepcopy(snapshot.features),
+        deepcopy(snapshot.strata),
+    )
+
+
+def clear_population_cache() -> None:
+    """Discard retained censuses so a caller can measure a complete cold calculation."""
+    _population_cached.cache_clear()
+
+
+@functools.lru_cache(maxsize=4)
+def _population_cached(
+    names: tuple[str, ...],
+    group: tuple[tuple[int, ...], ...],
+    flags: tuple[int, ...],
+    size: int,
+    endpoint_state: int | None,
+) -> Population:
+    alive, representatives = surviving_orbits(len(names), group, list(flags), size)
     images = [] if endpoint_state is None else sorted(selector.orbit(endpoint_state, group))
     endpoint_rep = None if endpoint_state is None else selector.canonical(endpoint_state, group)
     features: dict[int, dict[str, Any]] = {}
     strata: dict[str, list[int]] = {}
     for mask in representatives:
-        counts = composition(geometry.names, mask)
+        counts = composition(names, mask)
         apart = distance(mask, images)
         key = ENDPOINT_STRATUM if mask == endpoint_rep else stratum_of(counts, apart)
         features[mask] = {
@@ -1086,7 +1116,7 @@ def population(
             "stratum": key,
         }
         strata.setdefault(key, []).append(mask)
-    return Population(flags, alive, representatives, features, strata)
+    return Population(list(flags), alive, representatives, features, strata)
 
 
 def frame_of(pop: Population, apart: int | None) -> Population:

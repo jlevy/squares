@@ -3,14 +3,33 @@
 from __future__ import annotations
 
 import hashlib
+import http.client
 import re
 import struct
-from collections.abc import Callable, Sequence
+import threading
+import time
+import urllib.error
+import urllib.request
+from collections.abc import Callable, Iterator, Sequence
+from contextlib import contextmanager
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
+from types import SimpleNamespace
+from typing import NoReturn, Self, cast
 
 import pytest
+from playwright.sync_api import Browser
+from playwright.sync_api import Error as PlaywrightError
 
-from devtools import check_published_site, render_case_pages, render_overview
+from devtools import (
+    check_published_site,
+    overview_data,
+    overview_sections,
+    render_case_pages,
+    render_changelog,
+    render_overview,
+    site_urls,
+)
 from devtools import render_n11_lower_bounds_explainer_pdf as pdf
 from devtools.check_published_site import (
     LINK_CHECKED_PAGES,
@@ -49,11 +68,14 @@ from devtools.render_n11_lower_bounds_explainer import (
     MARKDOWN_OUTPUT,
     PAGE_URL,
 )
-from devtools.render_n11_lower_bounds_explainer_pdf import EXPECTED_PAGE_COUNT
+from devtools.render_n11_lower_bounds_explainer_pdf import BROWSER_OVERRIDE, EXPECTED_PAGE_COUNT
 from devtools.render_n11_lower_bounds_explainer_pdf import OUTPUT as PDF_OUTPUT
 from devtools.repo_links import DEFAULT_BRANCH, REPO_URL, RepositoryTree, branch_paths
 from sqpack.release import EXPLAINER_VERSION, OPTIMALITY_REVIEW_EDITION, PUBLICATION_EDITION
 from tests import site_renders
+from tests.site_renders import prepared_forwarders
+
+pytestmark = pytest.mark.usefixtures(prepared_forwarders.__name__)
 
 #: A page's text linking into the repository four ways: from markup, from Markdown, from plain
 #: text, and from inside a script, which the check must not read. `{{REPO_URL}}` and `{{SHA}}`
@@ -67,10 +89,26 @@ REPOSITORY_LINKS = (
 
 COMMIT = "0123456789abcdef0123456789abcdef01234567"
 
+#: News carries the current retained history, including the merged launch groups.
+#: Parse only this small section; the fixture does not rebuild the site or prepare math.
+CHANGELOG_BODY = '<h1 id="changelog">News</h1>' + render_changelog.render_news(
+    render_changelog.load()
+)
+
 #: The tree `main` holds at the deploy: every path a fixture page links on `main`.
+CHANGELOG_LINKS = branch_paths(CHANGELOG_BODY)
 TREE = RepositoryTree(
-    files=frozenset({"README.md", *(f"packing/{name}.md" for name in SITE_PAGES)}),
-    directories=frozenset({"", "packing"}),
+    files=frozenset(
+        {
+            "README.md",
+            "LICENSE",
+            *(f"packing/{name}.md" for name in SITE_PAGES),
+            *(path for kind, path in CHANGELOG_LINKS if kind == "blob"),
+        }
+    ),
+    directories=frozenset(
+        {"", "packing", *(path for kind, path in CHANGELOG_LINKS if kind == "tree")}
+    ),
 )
 
 Fetch = Callable[..., tuple[int, bytes]]
@@ -99,7 +137,7 @@ def head(path: str, *, description: str | None = None) -> str:
     )
     if description is not None:
         meta = meta._replace(description=description)
-    tags = f"{render_overview.head_tags(meta)}{render_overview.favicon_html()}"
+    tags = f"{render_overview.head_tags(meta)}{render_overview.favicon_html(root='/squares/')}"
     return f'<!doctype html><html lang="en"><head>{tags}</head>'
 
 
@@ -121,7 +159,7 @@ def source_receipt(page: bytes) -> bytes:
     return f"\n%sqpack-source-html-sha256: {hashlib.sha256(page).hexdigest()}\n".encode()
 
 
-#: How many cases the fake deploy's record page indexes.
+#: How many canonical case records the fake deploy's Atlas indexes.
 CASE_COUNT = 324
 
 
@@ -135,16 +173,21 @@ def page(
 ) -> bytes:
     """A served page as the check reads one: the head of the page served at `canonical`,
     with its canonical link, then for a paper its bar's current entry (`bar`), the stamp
-    and a repository link; the record page also indexes every case's record file."""
+    and a repository link; Atlas also indexes every canonical case record."""
     path = canonical.removeprefix(render_overview.SITE_URL) or "index.html"
     index = (
-        "".join(f'<a href="{n}.html" data-case="{n}">{n}</a>' for n in range(1, CASE_COUNT + 1))
-        if path == render_case_pages.CASES_HOME
+        "".join(
+            f'<tr id="n-{n}" data-case-href="cases/{n}.html">'
+            f'<td><a href="cases/{n}.html" data-case="{n}">{n}</a></td></tr>'
+            for n in range(1, CASE_COUNT + 1)
+        )
+        if path == "atlas.html"
         else ""
     )
     return (
         f"{head(path)}{bar}"
         f'<p>({stamp})</p><a href="{REPO_URL}/blob/{ref}/{link}">Repository</a>{index}'
+        + (CHANGELOG_BODY if path == "news.html" else "")
     ).encode()
 
 
@@ -172,8 +215,8 @@ def result_overview(
 ) -> bytes:
     """A result's overview as it is served: the one block, with a repository link."""
     return (
-        f'<div class="site-result" data-result-overview="{result_id}">'
-        f'<a href="{REPO_URL}/blob/{ref}/{link}">Register</a></div>\n'
+        f'<article class="site-result" data-result-overview="{result_id}">'
+        f'<a href="{REPO_URL}/blob/{ref}/{link}">Register</a></article>\n'
     ).encode()
 
 
@@ -200,6 +243,43 @@ def result_row(row: str, *, here: bool, records: bool = True) -> str:
         f'<dl class="site-detail"><dt>Records</dt><dd><div class="site-records">{link}</div>'
         "</dd></dl></div>"
     )
+
+
+def lazy_result_row(row: str, *, here: bool) -> str:
+    """The deployed row: its bound popover fetches the complete result page, with
+    static links to that same page in the row and the popover's fallback."""
+    address = result_fragment(row)
+    target = f"pop-result-{row}"
+    return (
+        f'<tr {"id" if here else "data-result"}="{row}" data-s="3" '
+        f'data-row-popover="{target}"><td><a class="site-row-open" href="{address}">'
+        f"{row}</a></td><td>A result</td></tr>"
+        f'<div class="site-popover site-row-pop" id="{target}" popover role="dialog" '
+        f'aria-labelledby="{target}-title"><div class="site-row-pop-body" '
+        f'data-row-pop-src="{address}"><p><a href="{address}">'
+        "Read the complete result record</a></p></div>"
+        f'<p class="site-popover-actions"><a class="site-popover-action" '
+        f'href="{address}">Open Result Record</a></p></div>'
+    )
+
+
+def lazy_site_pages() -> dict[str, bytes]:
+    """The deployed lazy shape on both tables, with each complete result page served."""
+    pages = site_pages()
+    for name in RECORD_LINK_PAGES:
+        here = name == render_overview.RESULTS_PAGE
+        for row in EXPECTED_RECORDS.rows:
+            pages[name] = pages[name].replace(
+                result_row(row, here=here).encode(), lazy_result_row(row, here=here).encode()
+            )
+        for address in OVERVIEWS:
+            pages[name] = pages[name].replace(
+                f'<div class="site-row-pop-body" data-row-pop-src="{address}"></div>'.encode(),
+                b"",
+            )
+    for address in OVERVIEWS:
+        pages[address] = head(address).encode() + pages[address]
+    return pages
 
 
 def results_table(*, here: bool) -> bytes:
@@ -271,6 +351,24 @@ def site_naming(named: Sequence[str], /, **overrides: bytes) -> dict[str, bytes]
     return pages
 
 
+def test_fake_deploy_variants_keep_the_prepared_forwarders_immutable(
+    prepared_forwarders: tuple[render_overview.Page, ...],
+) -> None:
+    first = render_overview.forwarder_pages()
+    second = render_overview.forwarder_pages()
+    assert first is not second
+    assert tuple(first) == tuple(second) == prepared_forwarders
+    first.pop()
+    assert tuple(render_overview.forwarder_pages()) == prepared_forwarders
+    changed = site_pages(**{"cases.html": b"a deliberately broken forwarder"})
+    original = site_pages()
+    assert changed is not original
+    assert original["cases.html"] == next(
+        page.html.encode() for page in prepared_forwarders if page.name == "cases.html"
+    )
+    assert changed["cases.html"] != original["cases.html"]
+
+
 def fake_site(
     pages: dict[str, bytes],
     *,
@@ -281,9 +379,16 @@ def fake_site(
     lost: Sequence[str] = (),
 ) -> Fetch:
     """A deployed site at any root: its pages, the workbench, the PDF, and every link.
-    An address ending in one of `lost` is a 404."""
+    An address ending in one of `lost` is a 404. It answers at once or not at all, so
+    the retry callback the check always offers (#496 E2) is accepted and never called."""
 
-    def fetch(url: str, *, head: bool = False, timeout: float = 30.0) -> tuple[int, bytes]:
+    def fetch(
+        url: str,
+        *,
+        head: bool = False,
+        timeout: float = 30.0,
+        on_retry: Callable[[int, float], object] | None = None,  # noqa: ARG001 - the seam's signature
+    ) -> tuple[int, bytes]:
         assert timeout == 1
         if requested is not None:
             requested.append(url)
@@ -311,6 +416,9 @@ def fixture_records(monkeypatch: pytest.MonkeyPatch) -> None:
     """Hold the fixture site to the fixture's record links, as rendered at its commit.
     A test that asks about the renderer itself, or about another checkout, sets its own
     first, and that is kept."""
+    monkeypatch.setattr(
+        check_published_site, "deployed_registry_checks", lambda *_args, **_kwargs: []
+    )
     if check_published_site.rendered_record_links is rendered_record_links:
         monkeypatch.setattr(
             check_published_site, "rendered_record_links", lambda: EXPECTED_RECORDS
@@ -331,6 +439,10 @@ def failures(
     it says of itself, so a page a test breaks in one way fails them in others; they are
     left out unless `heads` asks for them, and the tests of the heads ask."""
     monkeypatch.setattr(check_published_site, "fetch", fetch)
+    # These fixtures test specialized assurance; the complete walk has its own fixtures.
+    monkeypatch.setattr(
+        check_published_site, "deployed_registry_checks", lambda *_args, **_kwargs: []
+    )
     monkeypatch.setattr(
         check_published_site, "head_checks", HEAD_CHECKS if heads else lambda *_: []
     )
@@ -389,7 +501,13 @@ def test_the_checked_pages_are_every_page_the_site_serves_but_the_workbench() ->
     assert PAGE_URL.endswith(f"/squares/{EXPLAINER}")
     assert EXPLAINER == "papers/n11-lower-bounds-explainer.html"
     assert {*SITE_PAGES, EXPLAINER, "workbench/index.html"} <= set(render_overview.SITE_PAGES)
-    assert {"index.html", "frontier.html", "all-results.html"} == LINK_CHECKED_PAGES
+    assert {
+        "index.html",
+        "news.html",
+        "atlas.html",
+        "about.html",
+        "results.html",
+    } == LINK_CHECKED_PAGES
     assert render_overview.canonical_url("index.html") == check_published_site.SITE_URL
     assert render_overview.canonical_url("tutorial.html").endswith("/squares/tutorial.html")
     # The papers page was added to the renderer alone, and is checked here for it.
@@ -464,12 +582,26 @@ def test_check_requires_each_page_to_name_its_own_canonical_url(
         wrong = site_pages(**{name: page(PAGE_URL)})
         found = failures(monkeypatch, fake_site(wrong))
         assert any(f"{name} names canonical URL" in line for line in found), name
-        # The record page served as another page has lost its index of record files too.
-        assert len(found) == (2 if name == render_case_pages.CASES_PAGE else 1), found
+        # Serving another page as Atlas also loses its canonical-record index.
+        assert len(found) == (2 if name == "atlas.html" else 1), found
 
     missing = site_pages(**{"index.html": b"<p>(" + PUBLICATION_EDITION.encode() + b")</p>"})
     found = failures(monkeypatch, fake_site(missing))
     assert any("index.html names canonical URL None" in line for line in found), found
+
+
+def test_check_requires_the_atlas_to_link_every_registered_case_record(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    complete = page(render_overview.canonical_url("atlas.html"))
+    for n in (17, CASE_COUNT):
+        lost = re.sub(
+            rf'<tr id="n-{n}"[^>]*>.*?</tr>', "", complete.decode(), flags=re.DOTALL
+        ).encode()
+        found = failures(monkeypatch, fake_site(site_pages(**{"atlas.html": lost})))
+        assert any(
+            "atlas.html indexes 323 registered case records in order" in line for line in found
+        )
 
 
 def test_check_refuses_a_repository_link_pinned_to_a_commit(
@@ -534,7 +666,7 @@ def test_check_requires_every_result_overview_the_results_table_names(
     assert failure.endswith("but it is 'result/t-001.html'")
 
     assert failures(monkeypatch, fake_site(site_naming(()))) == [
-        "all-results.html names 0 result overviews",
+        "results.html names 0 result overviews",
         f"result overview {OVERVIEWS[0]}: sampled for its record links and not served",
     ]
 
@@ -586,6 +718,859 @@ def test_absent_links_names_what_a_deploy_dropped_and_rows_are_read_one_by_one()
     assert row_records(result_row("t-007", here=False)) == {
         "t-007": f'<a href="{RECORD}">register</a>'
     }
+    # Even a malformed outer popover cannot borrow a nested neighbor's records.
+    nested = (
+        '<div class="site-popover site-row-pop" id="pop-result-t-001">'
+        + result_row("t-002", here=True)
+        + "</div>"
+    )
+    assert row_records(nested) == {"t-002": f'<a href="{RECORD}">register</a>'}
+
+
+def test_check_accepts_the_deployed_lazy_record_links_without_refetching(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    requested: list[str] = []
+    assert failures(monkeypatch, fake_site(lazy_site_pages(), requested=requested)) == []
+    for address in OVERVIEWS:
+        assert requested.count(f"https://example.org/{address}") == 1
+    requested.clear()
+
+    def registry_prefetch(
+        site: str,
+        read: Fetch,
+        *,
+        timeout: float,
+        rows: Sequence[site_urls.SiteURL],
+        results: list[tuple[bool, str]],
+    ) -> list[tuple[bool, str]]:
+        """The seam's shape: a walk appends its verdicts to `results`. This one has none."""
+        assert rows
+        for address in OVERVIEWS:
+            read(f"{site.rstrip('/')}/{address}", timeout=timeout)
+        return results
+
+    monkeypatch.setattr(check_published_site, "deployed_registry_checks", registry_prefetch)
+    assert all(
+        passed
+        for passed, _ in check_published_site.check(
+            "https://example.org", COMMIT, timeout=1, browser=False
+        )
+    )
+    for address in OVERVIEWS:
+        assert requested.count(f"https://example.org/{address}") == 1
+
+
+def test_check_shares_fragment_requests_but_keeps_queries_methods_and_failures(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    website = fake_site(site_pages())
+    assert failures(monkeypatch, website) == []
+    requested: list[tuple[str, bool]] = []
+    resource = f"{REPO_URL}/blob/main/README.md"
+
+    def fetch(
+        url: str,
+        *,
+        head: bool = False,
+        timeout: float = 30.0,
+        on_retry: Callable[[int, float], object] | None = None,
+    ) -> tuple[int, bytes]:
+        requested.append((url, head))
+        if "?missing" in url:
+            return 503, b""
+        return website(url, head=head, timeout=timeout, on_retry=on_retry)
+
+    def registry_prefetch(
+        _site: str, read: Fetch, *, results: list[tuple[bool, str]], **_kwargs: object
+    ) -> list[tuple[bool, str]]:
+        read(resource + "#L1", timeout=1)
+        read(resource + "#L2", head=True, timeout=1)
+        read(resource + "?raw=1#L1", head=True, timeout=1)
+        read(resource + "?raw=1#L2", timeout=1)
+        read(resource + "?raw=2#L1", timeout=1)
+        for url in (resource + "?missing#L1", resource + "?missing#L2"):
+            assert read(url, head=True, timeout=1) == (503, b"")
+        return results  # A walk's verdicts go into `results`; this one contributes none.
+
+    monkeypatch.setattr(check_published_site, "fetch", fetch)
+    monkeypatch.setattr(check_published_site, "deployed_registry_checks", registry_prefetch)
+    checked = check_published_site.check(
+        "https://example.org", COMMIT, timeout=1, browser=False
+    )
+    assert all(passed for passed, _ in checked)
+    assert [(url, head) for url, head in requested if url.startswith(resource)] == [
+        (resource, False),
+        (resource + "?raw=1", True),
+        (resource + "?raw=1", False),
+        (resource + "?raw=2", False),
+        (resource + "?missing", True),
+    ]
+    pages = site_pages()
+    pages[EXPLAINER] += (
+        f'<a href="{resource}#L1">one</a><a href="{resource}#L2">two</a>'.encode()
+    )
+    urls: list[str] = []
+    assert failures(
+        monkeypatch,
+        fake_site(pages, requested=urls, lost=(f"blob/{DEFAULT_BRANCH}/README.md",)),
+    ) == [
+        f"link HTTP 404: {resource}",
+        f"link HTTP 404: {resource}#L1",
+        f"link HTTP 404: {resource}#L2",
+    ]
+    assert urls.count(resource) == 1
+
+
+def test_live_progress_reports_phases_requests_and_retries_without_changing_verdicts(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    real_fetch = check_published_site.fetch
+    website = fake_site(site_pages())
+    assert failures(monkeypatch, website) == []
+    monkeypatch.setattr(check_published_site, "forwarders_followed", lambda *_args, **_kw: [])
+    monkeypatch.setattr(
+        check_published_site,
+        "workbench_startup",
+        lambda *_args, **_kw: (True, "browser started"),
+    )
+    expected = check_published_site.check("https://example.org", COMMIT, timeout=1)
+    events: list[str] = []
+    requests: list[tuple[str, bool]] = []
+    clock = [0.0]
+    resource = f"{REPO_URL}/blob/main/README.md"
+
+    def fetch_once(url: str, *, head: bool = False, timeout: float = 30.0) -> tuple[int, bytes]:
+        assert events, "progress must precede network work"
+        assert "start" in events[0]
+        requests.append((url, head))
+        clock[0] += 0.25
+        if url == resource and requests.count((url, head)) == 1:
+            clock[0] += 5
+            return 503, b""
+        return website(url, head=head, timeout=timeout)
+
+    def advance(delay: float) -> None:
+        clock[0] += delay
+
+    def fetch(
+        url: str,
+        *,
+        head: bool = False,
+        timeout: float = 30.0,
+        on_retry: Callable[[int, float], object] | None = None,
+    ) -> tuple[int, bytes]:
+        return real_fetch(url, head=head, timeout=timeout, sleep=advance, on_retry=on_retry)
+
+    monkeypatch.setattr(check_published_site, "fetch", fetch)
+    monkeypatch.setattr(check_published_site, "fetch_once", fetch_once)
+    monkeypatch.setattr(check_published_site.time, "monotonic", lambda: clock[0])
+    actual = check_published_site.check(
+        "https://example.org", COMMIT, timeout=1, progress=events.append
+    )
+    assert actual == expected
+    assert any("repository links: retry HEAD" in line and "HTTP 503" in line for line in events)
+    assert any("registry: start" in line for line in events)
+    assert any("content: complete" in line for line in events)
+    assert any("publication files: start" in line for line in events)
+    assert any("browser forwarders: start" in line for line in events)
+    assert any("browser workbench: complete" in line for line in events)
+    assert any(f"HEAD {resource}: HTTP 200 in 7.50s" in line for line in events)
+    assert "complete" in events[-1]
+    assert f"unique_requests={len(set(requests))}" in events[-1]
+    assert "retries=1" in events[-1]
+    assert f"audit +{clock[0]:.2f}s" in events[-1]
+
+
+def test_live_cli_keeps_progress_separate_and_preserves_failure_exit_status(
+    monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    def check(
+        _site: str,
+        _commit: str,
+        *,
+        progress: Callable[[str], object],
+        results: list[tuple[bool, str]],
+        **_kwargs: object,
+    ) -> list[tuple[bool, str]]:
+        progress("audit registry: start")
+        assert capsys.readouterr().err == "audit registry: start\n"
+        results.append((False, "link HTTP 503: https://example.org/missing"))
+        return results
+
+    monkeypatch.setattr(check_published_site, "check", check)
+    assert check_published_site.main(["--commit", COMMIT, "--no-browser"]) == 1
+    assert capsys.readouterr().out == (
+        "FAIL link HTTP 503: https://example.org/missing\n0 of 1 checks passed\n"
+    )
+
+
+def test_check_always_offers_fetch_its_retry_callback(monkeypatch: pytest.MonkeyPatch) -> None:
+    """A retry is counted whether or not progress is reported (#496 E2): the callback is
+    the check's, not a feature of progress, so no test double shapes the production
+    call. With progress, the retry the transport reports is the one line it prints."""
+    website = fake_site(site_pages())
+    assert failures(monkeypatch, website) == []
+    offered: list[object] = []
+
+    def fetch(
+        url: str,
+        *,
+        head: bool = False,
+        timeout: float = 30.0,
+        on_retry: Callable[[int, float], object] | None = None,
+    ) -> tuple[int, bytes]:
+        offered.append(on_retry)
+        assert on_retry is not None
+        if url == "https://example.org/":
+            on_retry(503, 2.0)
+        return website(url, head=head, timeout=timeout)
+
+    monkeypatch.setattr(check_published_site, "fetch", fetch)
+    silent = check_published_site.check("https://example.org", COMMIT, timeout=1, browser=False)
+    assert offered
+    assert all(callable(callback) for callback in offered)
+    events: list[str] = []
+    reported = check_published_site.check(
+        "https://example.org", COMMIT, timeout=1, browser=False, progress=events.append
+    )
+    assert reported == silent
+    retry = "retry GET https://example.org/: HTTP 503, waiting 2s"
+    assert any(retry in line for line in events)
+    assert events[-1].endswith("total_retries=1")
+
+
+def verdict_lines(results: Sequence[tuple[bool, str]]) -> list[str]:
+    """The verdicts as `main` prints them, then its summary."""
+    failed = sum(not passed for passed, _ in results)
+    return [f"{'ok  ' if passed else 'FAIL'} {line}" for passed, line in results] + [
+        f"{len(results) - failed} of {len(results)} checks passed"
+    ]
+
+
+def live_main(
+    monkeypatch: pytest.MonkeyPatch, *, browser: bool = False
+) -> tuple[list[str], list[str]]:
+    """A live `main` against the fixture site on a clock that moves a minute a request
+    and a minute for the forwarders' visit: the requests it makes, by URL, and the names
+    of the browser phases it opens, each as a list the test clears between runs."""
+    requested: list[str] = []
+    opened: list[str] = []
+    clock = [0.0]
+
+    def forwarders_followed(*_args: object, **_kwargs: object) -> list[tuple[bool, str]]:
+        opened.append("forwarders")
+        clock[0] += 60.0
+        return []
+
+    def workbench_startup(*_args: object, **_kwargs: object) -> tuple[bool, str]:
+        opened.append("workbench")
+        return True, "browser started"
+
+    monkeypatch.setattr(check_published_site, "forwarders_followed", forwarders_followed)
+    monkeypatch.setattr(check_published_site, "workbench_startup", workbench_startup)
+    monkeypatch.setattr(check_published_site.time, "monotonic", lambda: clock[0])
+    website = fake_site(site_pages())
+    assert failures(monkeypatch, website, browser=browser) == []
+    opened.clear()
+
+    def fetch(
+        url: str,
+        *,
+        head: bool = False,
+        timeout: float = 30.0,
+        on_retry: Callable[[int, float], object] | None = None,
+    ) -> tuple[int, bytes]:
+        requested.append(url)
+        clock[0] += 60.0
+        return website(url, head=head, timeout=timeout, on_retry=on_retry)
+
+    monkeypatch.setattr(check_published_site, "fetch", fetch)
+    return requested, opened
+
+
+LIVE_ARGS = ("--site", "https://example.org", "--commit", COMMIT, "--timeout", "1")
+
+
+def test_the_live_cli_prints_the_same_verdicts_with_no_deadline(
+    monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """Without a deadline the output is what `check` returns, line for line, and the
+    exit status is the verdicts': the deadline is an option, not a change (#496 F1)."""
+    requested, opened = live_main(monkeypatch)
+    expected = check_published_site.check(
+        "https://example.org", COMMIT, timeout=1, browser=False
+    )
+    requested.clear()
+    capsys.readouterr()
+    assert check_published_site.main([*LIVE_ARGS, "--no-browser"]) == 0
+    assert capsys.readouterr().out == "".join(f"{line}\n" for line in verdict_lines(expected))
+    assert len(requested) > 1
+    assert opened == []
+
+
+def test_a_deadline_prints_the_verdicts_reached_and_fails_the_audit(
+    monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """A run the job's ceiling would kill prints nothing, so the audit stops itself first
+    (#496 F1, E5): every verdict reached, in order, then one failure naming the phase
+    the deadline passed in and how many checks were made, then the summary. No request
+    is made past the deadline; the minute a request takes here is the clock's."""
+    requested, _ = live_main(monkeypatch)
+    expected = verdict_lines(
+        check_published_site.check("https://example.org", COMMIT, timeout=1, browser=False)
+    )[:-1]
+    requested.clear()
+    capsys.readouterr()
+    arguments = [*LIVE_ARGS, "--no-browser", "--deadline-minutes", "3"]
+    assert check_published_site.main(arguments) == 1
+    printed = capsys.readouterr().out.splitlines()
+    verdicts, deadline, summary = printed[:-2], printed[-2], printed[-1]
+    assert 0 < len(verdicts) < len(expected)
+    assert verdicts == expected[: len(verdicts)]
+    assert deadline == (
+        f'FAIL audit deadline of 3 min exceeded during phase "content" after '
+        f"{len(verdicts)} checks; remaining checks not run"
+    )
+    assert summary == f"{len(verdicts)} of {len(verdicts) + 1} checks passed"
+    assert len(requested) == 3
+
+
+def test_a_deadline_in_the_registry_walk_keeps_the_verdicts_it_reached() -> None:
+    """The registry walk is the audit's first phase and fetches every registered page,
+    so it appends to the caller's list as it goes: a deadline that passes during it
+    leaves the registry checks and every page verdict already reached for `main` to
+    print (#496 F1)."""
+    walked: list[str] = []
+
+    def read(url: str, **_kwargs: object) -> tuple[int, bytes]:
+        if len(walked) == 2:
+            raise check_published_site._DeadlineError("registry", 60.0)  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+        walked.append(url)
+        return 200, b"<!doctype html><title>page</title>"
+
+    rows = site_urls.load_registry()
+    registry = site_urls.validate_registry(rows)
+    results: list[tuple[bool, str]] = []
+    with pytest.raises(check_published_site._DeadlineError):  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+        check_published_site.deployed_registry_checks(
+            "https://example.org", read, timeout=1, rows=rows, results=results
+        )
+    assert results[: len(registry)] == registry
+    first = walked[0].removeprefix("https://example.org/")
+    assert any(line.startswith(f"registered {first}: HTTP 200") for _, line in results)
+
+
+def test_a_deadline_is_read_at_each_phase_boundary_before_a_browser_opens(
+    monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """The browser phases keep their own timeouts, so the boundary before each is what
+    bounds them: a deadline that passes during the last request before the forwarders
+    are visited stops the audit there, and no browser is opened; one that passes while
+    they are visited stops it before the workbench is started."""
+    requested, opened = live_main(monkeypatch, browser=True)
+    events: list[str] = []
+    expected = verdict_lines(
+        check_published_site.check(
+            "https://example.org", COMMIT, timeout=1, browser=True, progress=events.append
+        )
+    )[:-1]
+    assert opened == ["forwarders", "workbench"]
+    # Each phase starts at a whole minute of the clock, one a request: the deadline that
+    # lands there, in minutes, and the requests made by then.
+    started = re.compile(r"audit \+(\d+)\.00s (.+): start; total_unique_requests=(\d+) .*")
+    starts = {
+        found[2]: (int(found[1]) // 60, int(found[3]))
+        for line in events
+        if (found := started.fullmatch(line))
+    }
+    before_forwarders, requests_before = starts["browser forwarders"]
+    before_workbench, _ = starts["workbench"]
+    assert before_forwarders == requests_before
+    assert before_workbench == before_forwarders + 1
+    assert requests_before < len(requested)
+
+    for minutes, phase, visited in (
+        (before_forwarders, "publication files", []),
+        (before_workbench, "browser forwarders", ["forwarders"]),
+    ):
+        requested.clear()
+        opened.clear()
+        capsys.readouterr()
+        assert check_published_site.main([*LIVE_ARGS, "--deadline-minutes", str(minutes)]) == 1
+        printed = capsys.readouterr().out.splitlines()
+        verdicts, deadline = printed[:-2], printed[-2]
+        assert verdicts == expected[: len(verdicts)]
+        assert deadline == (
+            f'FAIL audit deadline of {minutes} min exceeded during phase "{phase}" after '
+            f"{len(verdicts)} checks; remaining checks not run"
+        )
+        assert len(requested) == before_forwarders
+        assert opened == visited
+
+
+class FakePage:
+    """A page of `FakeBrowser`: `goto` takes a minute of the clock and commits the start
+    address, `wait_for_url` commits the arrival, so every visit arrives."""
+
+    def __init__(self, clock: list[float]) -> None:
+        self.clock = clock
+        self.url = ""
+        self.closed = False
+
+    def goto(self, url: str, *, wait_until: str, timeout: float) -> None:
+        assert wait_until == "commit"
+        assert timeout > 0
+        self.clock[0] += 60.0
+        self.url = url
+
+    def wait_for_url(self, url: str, *, wait_until: str, timeout: float) -> None:
+        assert wait_until == "commit"
+        assert timeout > 0
+        self.url = url
+
+    def close(self) -> None:
+        self.closed = True
+
+
+class FakeBrowser:
+    """The pages it opened, each on the shared clock, and whether it was closed."""
+
+    def __init__(self, clock: list[float]) -> None:
+        self.clock = clock
+        self.pages: list[FakePage] = []
+        self.closed = False
+
+    def new_page(self) -> FakePage:
+        assert not self.closed
+        page = FakePage(self.clock)
+        self.pages.append(page)
+        return page
+
+    def close(self) -> None:
+        self.closed = True
+
+
+def test_a_deadline_between_forwarder_visits_stops_before_the_next_and_keeps_the_arrivals() -> (
+    None
+):
+    """Each visit waits up to twice the timeout, so the boundary before the phase alone
+    does not bound it (#507 A1): `before_visit` is read before every visit, what it
+    raises leaves the arrivals already reached in the caller's list, and no page is
+    opened past it. With nothing to read, every moved page is visited and arrives."""
+    site = "https://example.org/"
+    clock = [0.0]
+    browser = FakeBrowser(clock)
+    arrivals = check_published_site.forwarder_arrivals(cast(Browser, browser), site, timeout=1)
+    assert [passed for passed, _ in arrivals] == [True] * len(render_overview.MOVED_PAGES)
+    assert len(browser.pages) == len(render_overview.MOVED_PAGES) > 3
+    assert all(page.closed for page in browser.pages)
+
+    stopped = FakeBrowser(clock)
+    results: list[tuple[bool, str]] = []
+
+    def before_visit() -> None:
+        if len(stopped.pages) == 3:
+            raise check_published_site._DeadlineError("browser forwarders", 180.0)  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+
+    with pytest.raises(check_published_site._DeadlineError):  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+        check_published_site.forwarder_arrivals(
+            cast(Browser, stopped), site, timeout=1, before_visit=before_visit, results=results
+        )
+    assert results == arrivals[:3]
+    assert len(stopped.pages) == 3
+    assert all(page.closed for page in stopped.pages)
+
+
+def test_a_deadline_during_the_forwarder_visits_prints_the_arrivals_and_closes_the_browser(
+    monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """Through `main`, on a clock that moves a minute a request and a minute a visit: a
+    deadline that passes while the forwarders are visited stops the audit before the
+    next visit, prints every arrival reached and then the line naming the phase, closes
+    the browser, and starts no workbench. `_DeadlineError` is not a browser error, so
+    `forwarders_followed` lets it through rather than reporting a failed visit."""
+    clock = [0.0]
+    launched: list[FakeBrowser] = []
+    opened: list[str] = []
+
+    class Chromium:
+        def launch(self, **_options: object) -> FakeBrowser:
+            launched.append(FakeBrowser(clock))
+            return launched[-1]
+
+    @contextmanager
+    def driver() -> Iterator[SimpleNamespace]:
+        yield SimpleNamespace(chromium=Chromium())
+
+    def workbench_startup(*_args: object, **_kwargs: object) -> tuple[bool, str]:
+        opened.append("workbench")
+        return True, "browser started"
+
+    monkeypatch.setattr(check_published_site, "sync_playwright", driver)
+    monkeypatch.setattr(check_published_site, "workbench_startup", workbench_startup)
+    monkeypatch.setattr(check_published_site.time, "monotonic", lambda: clock[0])
+    website = fake_site(site_pages())
+    assert failures(monkeypatch, website, browser=True) == []
+
+    def fetch(
+        url: str,
+        *,
+        head: bool = False,
+        timeout: float = 30.0,
+        on_retry: Callable[[int, float], object] | None = None,
+    ) -> tuple[int, bytes]:
+        clock[0] += 60.0
+        return website(url, head=head, timeout=timeout, on_retry=on_retry)
+
+    monkeypatch.setattr(check_published_site, "fetch", fetch)
+    launched.clear()
+    opened.clear()
+    events: list[str] = []
+    expected = verdict_lines(
+        check_published_site.check(
+            "https://example.org", COMMIT, timeout=1, browser=True, progress=events.append
+        )
+    )[:-1]
+    # With no deadline every moved page is visited, in a browser that is then closed.
+    (whole,) = launched
+    assert len(whole.pages) == len(render_overview.MOVED_PAGES) > 3
+    assert all(page.closed for page in whole.pages)
+    assert whole.closed
+    assert opened == ["workbench"]
+    started = re.compile(r"audit \+(\d+)\.00s browser forwarders: start; .*")
+    (before_forwarders,) = [
+        int(found[1]) // 60 for line in events if (found := started.fullmatch(line))
+    ]
+
+    launched.clear()
+    opened.clear()
+    capsys.readouterr()
+    minutes = before_forwarders + 3
+    assert check_published_site.main([*LIVE_ARGS, "--deadline-minutes", str(minutes)]) == 1
+    printed = capsys.readouterr().out.splitlines()
+    verdicts, deadline = printed[:-2], printed[-2]
+    assert verdicts == expected[: len(verdicts)]
+    arrived = "ok   visiting https://example.org/"
+    assert [line.startswith(arrived) for line in verdicts[-4:]] == [False, True, True, True]
+    assert deadline == (
+        f'FAIL audit deadline of {minutes} min exceeded during phase "browser forwarders" '
+        f"after {len(verdicts)} checks; remaining checks not run"
+    )
+    (stopped,) = launched
+    assert len(stopped.pages) == 3
+    assert all(page.closed for page in stopped.pages)
+    assert stopped.closed
+    assert opened == []
+
+
+def test_an_interrupted_audit_prints_the_verdicts_reached(
+    monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """A reader who stops the audit still sees what it had checked, and the run fails."""
+
+    def check(
+        _site: str, _commit: str, *, results: list[tuple[bool, str]], **_kwargs: object
+    ) -> list[tuple[bool, str]]:
+        results.append((True, "page https://example.org/: HTTP 200, 5 bytes"))
+        results.append((False, "link HTTP 503: https://example.org/missing"))
+        raise KeyboardInterrupt
+
+    monkeypatch.setattr(check_published_site, "check", check)
+    assert check_published_site.main(["--commit", COMMIT, "--no-browser"]) == 1
+    assert capsys.readouterr().out == (
+        "ok   page https://example.org/: HTTP 200, 5 bytes\n"
+        "FAIL link HTTP 503: https://example.org/missing\n"
+        "FAIL audit interrupted after 2 checks; remaining checks not run\n"
+        "1 of 3 checks passed\n"
+    )
+
+
+def test_a_deadline_bounds_the_live_audit_only(
+    monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str], tmp_path: Path
+) -> None:
+    monkeypatch.setattr(check_published_site, "check", lambda *_args, **_kwargs: [])
+    for arguments in (
+        ["--local", str(tmp_path), "--deadline-minutes", "5"],
+        ["--commit", COMMIT, "--deadline-minutes", "0"],
+        ["--commit", COMMIT, "--deadline-minutes", "-1"],
+    ):
+        with pytest.raises(SystemExit, match="2"):
+            check_published_site.main(arguments)
+        assert "--deadline-minutes" in capsys.readouterr().err
+
+
+@pytest.mark.parametrize(
+    "separator",
+    ["\n", "\r", "\v", "\u2028", "\u2029"],
+    ids=["LF", "CR", "vertical-tab", "line-separator", "paragraph-separator"],
+)
+def test_record_markup_counts_only_literal_lf_as_a_source_line(
+    monkeypatch: pytest.MonkeyPatch, separator: str
+) -> None:
+    content = f'<a href="{RECORD}">Register</a>'
+    article = (
+        '<article class="site-result" data-result-overview="t-001">' + content + "</article>"
+    )
+    served = "<p>Before" + separator + "ordinary text " * 20 + "</p>\n" + article
+    compared: list[str] = []
+
+    def compare_exact_article(rendered: str, published: str) -> list[str]:
+        compared.append(published)
+        return absent_links(rendered, published)
+
+    monkeypatch.setattr(check_published_site, "absent_links", compare_exact_article)
+    expected = RecordLinks(rows={"t-001": RECORD}, overviews={})
+    checks = record_link_checks(
+        expected,
+        {"index.html": lazy_result_row("t-001", here=False)},
+        {OVERVIEWS[0]: served},
+    )
+    assert compared == [content]
+    assert all(passed for passed, _ in checks), checks
+
+
+@pytest.fixture
+def filtered_record_tables() -> tuple[
+    RecordLinks, dict[str, str], dict[str, str], tuple[str, ...]
+]:
+    """Register-backed lightweight tables: the renderer's recent homepage selection
+    and its complete results page, with every result article's actual record links."""
+    overview = overview_data.load()
+    reference = overview_sections.reference_date(overview)
+    home_rows = tuple(
+        result.id.lower()
+        for result in overview_sections.recent_results(overview)
+        if overview_sections.shown_by_default(
+            result, overview_sections.RECENT_DEFAULTS, reference
+        )
+    )
+    expected = rendered_record_links()
+    assert 0 < len(home_rows) < len(expected.rows)
+    pages = {
+        name: "<table><tbody>"
+        + "".join(
+            lazy_result_row(row, here=name == render_overview.RESULTS_PAGE)
+            for row in (home_rows if name == "index.html" else expected.rows)
+        )
+        + "</tbody></table>"
+        for name in RECORD_LINK_PAGES
+    }
+    overviews = {
+        result_fragment(row): (
+            f'<article class="site-result" data-result-overview="{row}">'
+            + "".join(f'<a href="{record}">Record</a>' for record in records.splitlines())
+            + "</article>"
+        )
+        for row, records in expected.rows.items()
+    }
+    overviews.update(expected.overviews)
+    return expected, pages, overviews, home_rows
+
+
+def test_record_links_accept_the_filtered_homepage_and_complete_results_table(
+    filtered_record_tables: tuple[RecordLinks, dict[str, str], dict[str, str], tuple[str, ...]],
+) -> None:
+    expected, pages, overviews, home_rows = filtered_record_tables
+    checks = record_link_checks(expected, pages, overviews)
+    assert all(passed for passed, _ in checks), checks
+    assert checks[0][1].startswith(f"index.html: each of {len(home_rows)} result rows")
+    assert checks[1][1].startswith(
+        f"{render_overview.RESULTS_PAGE}: each of {len(expected.rows)} result rows"
+    )
+
+
+@pytest.mark.parametrize("name", RECORD_LINK_PAGES)
+def test_record_links_reject_a_deleted_required_row_on_each_table(
+    filtered_record_tables: tuple[RecordLinks, dict[str, str], dict[str, str], tuple[str, ...]],
+    name: str,
+) -> None:
+    expected, pages, overviews, home_rows = filtered_record_tables
+    # Complete-table coverage includes a result the homepage intentionally omits.
+    row = (
+        home_rows[0]
+        if name == "index.html"
+        else next(row for row in expected.rows if row not in home_rows)
+    )
+    required = len(home_rows) if name == "index.html" else len(expected.rows)
+    full = lazy_result_row(row, here=name == render_overview.RESULTS_PAGE)
+    assert pages[name].count(full) == 1
+    pages[name] = pages[name].replace(full, "")
+    failed = [
+        line for passed, line in record_link_checks(expected, pages, overviews) if not passed
+    ]
+    assert len(failed) == 1, failed
+    assert failed[0].startswith(f"{name}: 1 of {required} result rows"), failed
+    assert f"{row}: requires one row and its own popover" in failed[0]
+
+
+@pytest.mark.parametrize("name", RECORD_LINK_PAGES)
+@pytest.mark.parametrize(
+    "shadow",
+    [
+        '<div id="pop-result-t-001">Unrelated element</div>',
+        '<div id="pop-result-t-001">Unclosed unrelated element',
+        '<input id="pop-result-t-001">',
+    ],
+    ids=["completed", "unclosed", "void"],
+)
+def test_check_rejects_global_popover_id_shadows(
+    monkeypatch: pytest.MonkeyPatch, name: str, shadow: str
+) -> None:
+    pages = lazy_site_pages()
+    pages[name] = shadow.encode() + pages[name]
+    failed = failures(monkeypatch, fake_site(pages))
+    assert len(failed) == 1
+    assert failed[0].startswith(f"{name}: 1 of 2 result rows lack record links")
+    assert "t-001" in failed[0]
+    assert "invalid bindings" in failed[0]
+
+
+@pytest.mark.parametrize("name", RECORD_LINK_PAGES)
+@pytest.mark.parametrize(
+    "mutation",
+    [
+        "missing row",
+        "missing popover",
+        "wrong binding",
+        "missing binding",
+        "wrong source",
+        "missing source",
+        "external source",
+        "traversal source",
+        "root source",
+        "duplicate source",
+        "wrong row link",
+        "missing row link",
+        "wrong fallback",
+        "missing fallback",
+        "wrong action",
+        "missing action",
+        "duplicate row",
+        "duplicate source attribute",
+    ],
+)
+def test_check_rejects_lazy_row_binding_mutants(
+    monkeypatch: pytest.MonkeyPatch, name: str, mutation: str
+) -> None:
+    pages = lazy_site_pages()
+    full = lazy_result_row("t-002", here=name == render_overview.RESULTS_PAGE)
+    row, popover = full.split("</tr>", 1)
+    row += "</tr>"
+    source = 'data-row-pop-src="result/t-002.html"'
+    row_link = '<a class="site-row-open" href="result/t-002.html">t-002</a>'
+    fallback = '<p><a href="result/t-002.html">Read the complete result record</a></p>'
+    action = (
+        '<p class="site-popover-actions"><a class="site-popover-action" '
+        'href="result/t-002.html">Open Result Record</a></p>'
+    )
+    mutations = {
+        "missing row": popover,
+        "missing popover": row,
+        "wrong binding": full.replace(
+            'data-row-popover="pop-result-t-002"', 'data-row-popover="pop-result-t-001"'
+        ),
+        "missing binding": full.replace('data-row-popover="pop-result-t-002"', ""),
+        "wrong source": full.replace(source, 'data-row-pop-src="result/t-001.html"'),
+        "missing source": full.replace(source, ""),
+        "external source": full.replace(
+            source, 'data-row-pop-src="https://other.example/result/t-002.html"'
+        ),
+        "traversal source": full.replace(
+            source, 'data-row-pop-src="result/../result/t-002.html"'
+        ),
+        "root source": full.replace(source, 'data-row-pop-src="/result/t-002.html"'),
+        "duplicate source": full.replace(
+            source, source + '></div><div class="site-row-pop-body" ' + source
+        ),
+        "wrong row link": full.replace(row_link, row_link.replace("t-002.html", "t-001.html")),
+        "missing row link": full.replace(row_link, "t-002"),
+        "wrong fallback": full.replace(fallback, fallback.replace("t-002.html", "t-001.html")),
+        "missing fallback": full.replace(fallback, ""),
+        "wrong action": full.replace(action, action.replace("t-002.html", "t-001.html")),
+        "missing action": full.replace(action, ""),
+        "duplicate row": full + full,
+        "duplicate source attribute": full.replace(
+            source, 'data-row-pop-src="result/t-001.html" ' + source
+        ),
+    }
+    pages[name] = pages[name].replace(full.encode(), mutations[mutation].encode())
+    requested: list[str] = []
+    failed = failures(monkeypatch, fake_site(pages, requested=requested))
+    row_failures = [line for line in failed if line.startswith(f"{name}: 1 of 2 result rows")]
+    assert len(row_failures) == 1, (mutation, failed)
+    assert "t-002" in row_failures[0]
+    assert "invalid bindings" in row_failures[0]
+    assert all(url.startswith(("https://example.org/", REPO_URL)) for url in requested)
+    assert not any("../" in url for url in requested)
+
+
+@pytest.mark.parametrize("mutation", ["missing", "non-200", "wrong result", "dropped record"])
+def test_check_requires_each_lazy_rows_served_record_page(
+    monkeypatch: pytest.MonkeyPatch, mutation: str
+) -> None:
+    pages = lazy_site_pages()
+    # Outside the separately sampled overview, with the same link as its neighbor.
+    address = OVERVIEWS[1]
+    if mutation == "wrong result":
+        pages[address] = pages[address].replace(
+            b'data-result-overview="t-002"', b'data-result-overview="t-001"'
+        )
+    elif mutation == "dropped record":
+        # A matching link outside this result's article cannot replace a dropped record.
+        pages[address] = pages[address].replace(
+            RECORD.encode(), f"{REPO_URL}/blob/main/packing/index.html.md".encode()
+        )
+        pages[address] += f'<nav><a href="{RECORD}">Another link</a></nav>'.encode()
+    base = fake_site(pages, lost=(address,) if mutation == "missing" else ())
+
+    def served(
+        url: str,
+        *,
+        head: bool = False,
+        timeout: float = 30.0,
+        on_retry: Callable[[int, float], object] | None = None,
+    ) -> tuple[int, bytes]:
+        status, body = base(url, head=head, timeout=timeout, on_retry=on_retry)
+        return (
+            (503, body) if mutation == "non-200" and url.endswith(address) else (status, body)
+        )
+
+    failed = failures(monkeypatch, served)
+    for name in RECORD_LINK_PAGES:
+        assert any(
+            line.startswith(f"{name}: 1 of 2 result rows lack record links") and "t-002" in line
+            for line in failed
+        ), failed
+
+
+def test_check_requires_every_record_of_each_lazy_row(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    additional = f"{REPO_URL}/blob/main/packing/index.html.md"
+    expected = RecordLinks(
+        rows={**EXPECTED_RECORDS.rows, "t-002": f"{RECORD}\n{additional}"},
+        overviews=EXPECTED_RECORDS.overviews,
+    )
+    monkeypatch.setattr(check_published_site, "rendered_record_links", lambda: expected)
+    pages = lazy_site_pages()
+    pages[OVERVIEWS[1]] = pages[OVERVIEWS[1]].replace(
+        b"</article>", f'<a href="{additional}">Evidence</a></article>'.encode()
+    )
+    assert failures(monkeypatch, fake_site(pages)) == []
+    pages[OVERVIEWS[1]] = pages[OVERVIEWS[1]].replace(
+        additional.encode(), f"{REPO_URL}/blob/main/README.md".encode()
+    )
+    failed = failures(monkeypatch, fake_site(pages))
+    assert len(failed) == 2
+    assert all("t-002 lacks ['blob/packing/index.html.md']" in line for line in failed)
+
+
+def test_a_record_free_expected_row_still_requires_its_binding() -> None:
+    expected = RecordLinks(rows={"t-002": ""}, overviews={})
+    ((passed, line),) = record_link_checks(expected, {"index.html": ""}, {})
+    assert not passed
+    assert "t-002: requires one row and its own popover" in line
 
 
 def test_check_requires_every_record_link_the_renderer_writes(
@@ -684,6 +1669,7 @@ def test_the_sample_cites_the_archive_and_the_campaign_whatever_the_checkout(
     [
         ("papers/n11-threshold-bound-review.html", "Part II"),
         ("papers/n11-optimality-review.html", "Part III"),
+        ("papers/square-packing-methods-survey.html", "Methods tutorial"),
     ],
 )
 def test_check_requires_each_review_where_its_papers_card_points(
@@ -747,7 +1733,7 @@ def test_every_link_between_papers_names_a_paper_and_a_heading_it_has() -> None:
     serves and, with an anchor, a heading of that paper, on the page and in the Markdown
     edition alike. A link to a paper not in the build is reported and not failed; one to
     a paper the site does not serve, or to a heading the paper does not have, fails."""
-    explainer, threshold, optimality = (
+    explainer, threshold, optimality, methods = (
         render_overview.paper_path(paper.slug) for paper in render_overview.PAPERS
     )
     site = render_overview.SITE_URL + "papers/"
@@ -765,6 +1751,10 @@ def test_every_link_between_papers_names_a_paper_and_a_heading_it_has() -> None:
             ),
         ),
     }
+    pages[methods] = _paper_page(
+        "from-a-seed-to-a-certified-bound",
+        links='<a href="n11-lower-bounds-explainer.html">Lower bounds</a>',
+    )
     markdowns = {
         paper_files(optimality)[0]: (
             f"[I]({site}n11-lower-bounds-explainer.html#the-result-and-proof-roadmap) "
@@ -773,12 +1763,12 @@ def test_every_link_between_papers_names_a_paper_and_a_heading_it_has() -> None:
     }
     assert heading_ids(pages[threshold]) == {"the-result", "what-is-new"}
     found = cross_paper_link_checks(pages, markdowns)
-    assert [passed for passed, _ in found] == [True, True, True]
+    assert [passed for passed, _ in found] == [True] * 4
     assert found[0][1] == (
         f"{explainer}: 2 links to other papers, "
         "each to a paper served here and a heading it has"
     )
-    assert paper_files(optimality)[0] in found[2][1]
+    assert paper_files(optimality)[0] in found[-1][1]
 
     broken = {
         **pages,
@@ -915,6 +1905,41 @@ def test_check_requires_the_workbench_browser_api_to_start(
     ]
 
 
+def test_both_browser_checks_launch_the_chromium_the_environment_names(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """The workbench startup and the forwarder visits launch the Chromium
+    `SQPACK_CHROMIUM` names, and Playwright's own build where it names none. CI leaves the
+    variable unset, so this is the only place the two launches are seen to agree."""
+    launched: list[dict[str, object]] = []
+
+    class Chromium:
+        def launch(self, **options: object) -> NoReturn:
+            launched.append(options)
+            raise PlaywrightError("launched; stop here")
+
+    @contextmanager
+    def driver() -> Iterator[SimpleNamespace]:
+        yield SimpleNamespace(chromium=Chromium())
+
+    def both() -> list[tuple[bool, str]]:
+        site = "https://example.org/"
+        started = check_published_site.workbench_startup(site + "workbench/", site, timeout=1)
+        return [started, *check_published_site.forwarders_followed(site, timeout=1)]
+
+    monkeypatch.setattr(check_published_site, "sync_playwright", driver)
+    monkeypatch.setenv(BROWSER_OVERRIDE, "/opt/chromium")
+    assert both() == [
+        (False, "workbench startup failed: launched; stop here"),
+        (False, "the forwarders could not be visited: launched; stop here"),
+    ]
+    monkeypatch.delenv(BROWSER_OVERRIDE)
+    both()
+    assert (
+        launched == [{"executable_path": "/opt/chromium"}] * 2 + [{"executable_path": None}] * 2
+    )
+
+
 @pytest.mark.parametrize(
     "receipt_kind",
     ["missing", "malformed", "wrong-source", "duplicate", "uppercase", "trailing-data"],
@@ -982,6 +2007,95 @@ def test_fetch_retries_a_transient_answer_before_reporting_it(
     assert pauses == [], "a refusal is an answer, not a deploy still settling"
 
 
+#: Every way the transport fails short of an answer: `urlopen` wraps a refused
+#: connection in `URLError`, and raises the rest bare, from the connection or the read.
+TRANSPORT_FAILURES = [
+    pytest.param(urllib.error.URLError("connection refused"), id="refused"),
+    pytest.param(TimeoutError("timed out"), id="stalled"),
+    pytest.param(ConnectionResetError("reset by peer"), id="reset"),
+    pytest.param(http.client.IncompleteRead(b"<!doctype"), id="cut-short"),
+    pytest.param(http.client.RemoteDisconnected("closed without response"), id="dropped"),
+]
+
+
+@pytest.mark.parametrize("failure", TRANSPORT_FAILURES)
+@pytest.mark.parametrize("where", ["open", "read"])
+def test_fetch_retries_a_transport_failure_as_an_unreachable_answer(
+    monkeypatch: pytest.MonkeyPatch, failure: Exception, where: str
+) -> None:
+    """A response that stalls or breaks is unreachable (0), which is transient, so it is
+    asked again and reported through the retry callback; it used to escape `fetch_once`
+    as the one exception the audit did not catch, and end it unretried (#496 F2)."""
+
+    class Broken:
+        status = 200
+
+        def __enter__(self) -> Self:
+            return self
+
+        def __exit__(self, *_exc: object) -> None:
+            return None
+
+        def read(self) -> bytes:
+            raise failure
+
+    attempts: list[tuple[str, float]] = []
+
+    def urlopen(request: urllib.request.Request, *, timeout: float) -> Broken:
+        attempts.append((request.get_method(), timeout))
+        if where == "open":
+            raise failure
+        return Broken()
+
+    monkeypatch.setattr(check_published_site.urllib.request, "urlopen", urlopen)
+    assert check_published_site.fetch_once("https://example.org/", timeout=1) == (0, b"")
+    assert attempts == [("GET", 1)]
+    pauses: list[float] = []
+    retried: list[tuple[int, float]] = []
+    answer = check_published_site.fetch(
+        "https://example.org/",
+        timeout=1,
+        delays=(1.0, 2.0),
+        sleep=pauses.append,
+        on_retry=lambda status, delay: retried.append((status, delay)),
+    )
+    assert answer == (0, b"")
+    assert pauses == [1.0, 2.0]
+    assert retried == [(0, 1.0), (0, 2.0)]
+    assert len(attempts) == 4
+
+
+def test_fetch_once_reports_a_server_that_stalls_its_answer_as_unreachable() -> None:
+    """The real transport, against a server on this machine that accepts the connection
+    and sends nothing until the test lets it: the request ends at its timeout with the
+    unreachable answer, not an exception, and well inside a second."""
+    released = threading.Event()
+
+    class Stalling(BaseHTTPRequestHandler):
+        def do_GET(self) -> None:
+            # Answer nothing: by the time this returns the client has gone.
+            released.wait(5)
+
+        def log_message(self, format: str, *args: object) -> None:  # noqa: A002
+            pass
+
+    server = ThreadingHTTPServer(("127.0.0.1", 0), Stalling)
+    server.daemon_threads = True
+    threading.Thread(target=server.serve_forever, daemon=True).start()
+    try:
+        started = time.monotonic()
+        answer = check_published_site.fetch_once(
+            f"http://127.0.0.1:{server.server_port}/", timeout=0.1
+        )
+        elapsed = time.monotonic() - started
+    finally:
+        released.set()
+        server.shutdown()
+        server.server_close()
+    assert answer == (0, b"")
+    assert elapsed < 1.0
+
+
 def test_check_requires_a_forwarder_at_every_address_a_page_used_to_have(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
@@ -991,64 +2105,79 @@ def test_check_requires_a_forwarder_at_every_address_a_page_used_to_have(
     and the one page of every case record, whose records moved under `cases/`. A deploy
     without one 404s every link written before the change. It fails when an old address
     is gone, when the page there still is the old page, and when a forwarder leads
-    anywhere but where a visit should go, in any one of the four places it says where
+    anywhere but where a visit should go, in any one of the five places it says where
     that is."""
     moved = dict(render_overview.MOVED_PAGES)
     assert set(moved) == {
-        "results.html",
+        "all-results.html",
         "status.html",
+        "frontier.html",
         "defects.html",
         "explainer.html",
         "n11-optimality/t-060-explainer.html",
         "n11-optimality/index.html",
         "cases.html",
+        "cases/index.html",
     }
     assert not set(moved) & set(render_overview.SITE_PAGES)
+    pages = site_pages()
     requested: list[str] = []
-    assert failures(monkeypatch, fake_site(site_pages(), requested=requested)) == []
+    assert failures(monkeypatch, fake_site(pages, requested=requested)) == []
     for old in moved:
         assert f"https://example.org/{old}" in requested, old
 
-    for old, new in moved.items():
-        # The slash keeps `results.html` from also losing `all-results.html`.
-        (failure,) = failures(monkeypatch, fake_site(site_pages(), lost=(f"/{old}",)))
+    # Each address has its own verdict. Exercise all nine in each corruption batch,
+    # keeping the complete production check without rebuilding and checking every
+    # unrelated page once per address. Strict pairing rejects missing or extra failures.
+    missing = failures(monkeypatch, fake_site(pages, lost=tuple(f"/{old}" for old in moved)))
+    for old, failure in zip(moved, missing, strict=True):
         assert failure.startswith(f"forwarder {old}: HTTP 404, says "), failure
 
-        # The page that was there before, still served in place of its forwarder.
-        stale = site_pages(**{old: explainer_page()})
-        (failure,) = failures(monkeypatch, fake_site(stale))
+    # The page that was there before, still served in place of each forwarder.
+    stale_page = explainer_page()
+    stale = failures(monkeypatch, fake_site(pages | dict.fromkeys(moved, stale_page)))
+    for old, failure in zip(moved, stale, strict=True):
         assert failure.startswith(f"forwarder {old}: HTTP 200, says "), failure
         assert "'script': None" in failure, "an old page is not a forwarder"
 
-        good = site_pages()[old]
+    wrong_pages: dict[str, dict[str, bytes]] = {}
+    for old, new in moved.items():
+        good = pages[old]
         expected = check_published_site.forwarder_expected(old, new)
         target, canonical = expected["script"], expected["canonical"]
+        file_target = expected["file"]
         assert target is not None
         assert canonical is not None
-        elsewhere = (target + "-elsewhere").encode()
+        assert file_target is not None
+        elsewhere = (file_target + "-elsewhere").encode()
         wrong = {
             "canonical": good.replace(
                 b'rel="canonical" href="' + canonical.encode(),
                 b'rel="canonical" href="https://example.org/',
             ),
             "script": good.replace(b'data-moved-to="' + target.encode(), b'data-moved="'),
-            "refresh": good.replace(b"0; url=" + target.encode(), b"0; url=" + elsewhere),
-            "link": good.replace(b'<a href="' + target.encode(), b'<a href="' + elsewhere),
+            "file": good.replace(
+                b'data-file-moved-to="' + file_target.encode(), b'data-file-moved="'
+            ),
+            "refresh": good.replace(b"0; url=" + file_target.encode(), b"0; url=" + elsewhere),
+            "link": good.replace(b'<a href="' + file_target.encode(), b'<a href="' + elsewhere),
         }
         for place, body in wrong.items():
             assert body != good, place
-            (failure,) = failures(monkeypatch, fake_site(site_pages(**{old: body})))
-            assert failure.startswith(f"forwarder {old}: HTTP 200, says "), (place, failure)
             says = check_published_site.forwarder_says(body.decode())
             assert {name for name in says if says[name] != expected[name]} == {place}
+            wrong_pages.setdefault(place, {})[old] = body
+
+    for place, overrides in wrong_pages.items():
+        wrong_failures = failures(monkeypatch, fake_site(pages | overrides))
+        for old, failure in zip(moved, wrong_failures, strict=True):
+            assert failure.startswith(f"forwarder {old}: HTTP 200, says "), (place, failure)
 
     # A page of the site is named relative to the old address, climbing out of its
     # directory; a page that left the site is named whole.
-    says = check_published_site.forwarder_says(
-        site_pages()["n11-optimality/index.html"].decode()
-    )
+    says = check_published_site.forwarder_says(pages["n11-optimality/index.html"].decode())
     assert says["script"] == "../papers/n11-optimality-review.html"
-    says = check_published_site.forwarder_says(site_pages()["defects.html"].decode())
+    says = check_published_site.forwarder_says(pages["defects.html"].decode())
     assert says["script"] == says["canonical"] == f"{REPO_URL}/blob/{DEFAULT_BRANCH}/defects.md"
 
 
@@ -1064,6 +2193,8 @@ def test_check_requires_each_moved_file_at_its_old_address_with_the_same_bytes(
         "t-018-explainer.pdf",
         "n11-optimality/t-060-explainer.md",
         "n11-optimality/t-060-explainer.pdf",
+        "known-best-1-100.pdf",
+        "known-best-1-324.pdf",
     }
     requested: list[str] = []
     assert failures(monkeypatch, fake_site(site_pages(), requested=requested)) == []
@@ -1093,9 +2224,12 @@ def test_check_visits_the_forwarders_only_with_a_browser(
     )
     visited: list[str] = []
 
-    def followed(site: str, *, timeout: float) -> list[tuple[bool, str]]:
+    def followed(
+        site: str, *, timeout: float, results: list[tuple[bool, str]], **_kwargs: object
+    ) -> list[tuple[bool, str]]:
         visited.append(site)
-        return [(False, f"visiting {site}explainer.html arrives nowhere in {timeout}s")]
+        results.append((False, f"visiting {site}explainer.html arrives nowhere in {timeout}s"))
+        return results
 
     monkeypatch.setattr(check_published_site, "forwarders_followed", followed)
     assert failures(monkeypatch, fake_site(site_pages())) == []
@@ -1153,6 +2287,10 @@ def test_check_holds_every_page_to_its_head_and_the_site_to_its_card(
         assert requested.count(f"https://example.org/{name}") == 1, name
 
     monkeypatch.setattr(check_published_site, "fetch", fetch)
+    # These fixtures test specialized assurance; the complete walk has its own fixtures.
+    monkeypatch.setattr(
+        check_published_site, "deployed_registry_checks", lambda *_args, **_kwargs: []
+    )
     monkeypatch.setattr(check_published_site, "head_checks", HEAD_CHECKS)
     lines = [
         line
@@ -1166,6 +2304,7 @@ def test_check_holds_every_page_to_its_head_and_the_site_to_its_card(
     assert REVIEW_PAPERS == (
         "papers/n11-threshold-bound-review.html",
         "papers/n11-optimality-review.html",
+        "papers/square-packing-methods-survey.html",
     )
     # The record files the check samples are pages a reader shares too.
     records = [
@@ -1253,15 +2392,23 @@ def test_check_fails_a_forwarder_that_previews_its_page_by_another_name_or_kind(
     forwarders = {moved.name: moved.html for moved in render_overview.forwarder_pages()}
 
     def found(name: str, text: str) -> list[str]:
-        assert check_published_site.head_problems(text, FORWARDED_URLS[name]) == []
+        assert (
+            check_published_site.head_problems(
+                text, FORWARDED_URLS[name], page_url=render_overview.SITE_URL + name
+            )
+            == []
+        )
         site = fake_site(site_pages(**{name: text.encode()}))
         return failures(monkeypatch, site, heads=True)
 
-    renamed = forwarders["status.html"].replace("The Frontier Survey", "The Frontier Atlas")
+    renamed = forwarders["status.html"].replace(
+        render_overview.ATLAS_META.name, "The Frontier Atlas"
+    )
+    assert renamed != forwarders["status.html"]
     (failure,) = found("status.html", renamed)
     assert failure == (
         "forwarder status.html: head: its og:title is ['The Frontier Atlas'], and the page's "
-        "own is ['The Frontier Survey']"
+        f"own is {[render_overview.ATLAS_META.name]!r}"
     )
     dated = re.compile(r'<meta property="article:\w+" content="[^"]*">\n')
     website = dated.sub("", forwarders["explainer.html"]).replace(

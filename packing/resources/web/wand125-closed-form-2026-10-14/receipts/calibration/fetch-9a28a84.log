@@ -1,0 +1,8 @@
+# command: cargo +1.86.0 fetch --locked
+# cwd: problems/closed-form/checker/ of a scratch restore of the fetch-9a28a84 packet tree
+# python3: not used by this command
+# host: 4 cores; load 2.45 2.34 3.58; started 2026-10-14T17:33:19Z
+ Downloading crates ...
+  Downloaded windows-link v0.2.1
+  Downloaded windows-sys v0.61.2
+# finished 2026-10-14T17:33:20Z; exit 0; wall 0.745 s; CPU 0.2 s (user 0.085 + sys 0.088); load 2.45 2.34 3.58

@@ -1,0 +1,11 @@
+{
+  "schema": "n17-coordinator-preflight-disposition/v1",
+  "prior_failed_assertion": "len(rounds)==1",
+  "actual_round_metadata": [
+    0,
+    1
+  ],
+  "reason": "Seed snapshot round0 plus one complete actual round1; frozen criterion remains exactly16round1updates/17posechecks. Fresh process had not launched.",
+  "scientific_production_rerun": false,
+  "criterion_changed": false
+}

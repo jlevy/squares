@@ -62,7 +62,7 @@ constant; this does not qualify the proved lower bound.
 **Planning status.** The launch assignments, six-gate schedule, and next-entry language
 below are historical design provenance.
 The current authority is the
-[T+2-to-T+10 continuation addendum](../../../docs/project/handoff-2026-09-06-post-381-t2-t10-continuation.md),
+[T+2-to-T+10 continuation addendum](../../../docs/project/handoffs/handoff-2026-09-06-post-381-t2-t10-continuation.md),
 the single current cold-review entry point for the partially completed portfolio.
 In particular, the older BC-215 and BC-219 preflight routes are not live scheduling
 authority.

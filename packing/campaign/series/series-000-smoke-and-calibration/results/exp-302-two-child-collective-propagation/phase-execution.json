@@ -1,0 +1,17 @@
+{
+  "combined_resource_guard": "external supervisor; no internal wall/RSS guard",
+  "ended_at": "2026-10-08T02:07:46.121585Z",
+  "manifest": "campaign/series/series-000-smoke-and-calibration/results/exp-302-two-child-collective-propagation/execution-manifest.json",
+  "manifest_sha256": "263904b4799651fc594532cc3b22c54875bae9a8ed09091cf9793d8e078fd5da",
+  "phases": [
+    {"argv":["/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python","-m","devtools.check_n17_two_child_collective_propagation","--descriptor","campaign/series/series-000-smoke-and-calibration/results/exp-302-two-child-collective-propagation/descriptor.json","--max-seconds","180","--output","campaign/series/series-000-smoke-and-calibration/results/exp-302-two-child-collective-propagation/certificate.json"],"ended_at":"2026-10-08T02:07:06.813503Z","name":"construction","returncode":0,"started_at":"2026-10-08T02:06:24.393959Z","status":"completed","wall_seconds":42.41870258405106},
+    {"argv":["/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python","-m","devtools.check_n17_two_child_collective_propagation","--descriptor","campaign/series/series-000-smoke-and-calibration/results/exp-302-two-child-collective-propagation/descriptor.json","--max-seconds","180","--certificate","campaign/series/series-000-smoke-and-calibration/results/exp-302-two-child-collective-propagation/certificate.json","--output","campaign/series/series-000-smoke-and-calibration/results/exp-302-two-child-collective-propagation/replay.json"],"ended_at":"2026-10-08T02:07:46.121015Z","name":"fresh_verification","returncode":0,"started_at":"2026-10-08T02:07:06.814130Z","status":"completed","wall_seconds":39.30618954100646}
+  ],
+  "schema": "registered-phase-execution/v1",
+  "scientific_result_interpreted": false,
+  "started_at": "2026-10-08T02:06:24.393266Z",
+  "status": "completed",
+  "unstarted_phase_names": [],
+  "wall_seconds": 81.7267513339757
+}
+

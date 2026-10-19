@@ -1,0 +1,8 @@
+c51886c0f7e6724a7d89fc22cb237a1688ba1bbff04cb21a13b8e1a01fb15578  ./LICENSE
+d4d1fb6f6ea50f46bfaaa45e76fdf7ec7e6657b9bf718645348fb53598a0f184  ./README.md
+7317817e1e84a667114e5dae5728f72927abed2b133c04cd321833cc78b73a48  ./s12/search/exact/README.md
+2bd58816bd3efc18a07c7bb9e26a00d2b667c96ff626fd749efecab0527af929  ./s12/search/exact/batch/README.md
+bb546c3b11f779b6c6708a0c4de5b6f427562d811aaad42c92190cae1467ccf5  ./s12/search/exact/batch/certs/n-105.cert
+a484e9335cfd7ab277d15a6925d90a99fc4cc98380e04706edf1a3be9b409805  ./s12/search/exact/batch/certs/n-130.cert
+8f7f74abf767526e9b870ca3d1c7056dfc11579538627e72d6d9f63f37af8f9f  ./s12/search/exact/batch/inputs/n-105.txt
+0c2cfda9a853ed0799f56fb8951c5a9077d250d9dbd95b498e4fcc8bfa3ae0df  ./s12/search/exact/batch/inputs/n-130.txt

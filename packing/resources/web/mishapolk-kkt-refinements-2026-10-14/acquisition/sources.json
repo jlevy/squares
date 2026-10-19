@@ -1,0 +1,312 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-10-14T22:31Z",
+  "git_scope": "Blobless clone checked out at 70a033f, the branch head when retrieved and seven commits past issue #593's pin 46f638c; the six commits between change only ISSUE_REGISTRATION.md. 70a033f changes certificates/census.json, the 24 certificates certificates/n<n>.cert at n = 129, 153, 154, 155, 156, 175, 176, 181, 204, 207, 209, 232, 264, 267, 270, 271, 272, 302, 303, 304, 305, 306, 307, 308, and the 14 copies certificates/square-<n>.cert at n = 129, 153, 154, 156, 175, 176, 204, 207, 232, 264, 271, 302, 303, 304, each byte-identical to n<n>.cert at the pin. The scope is those 39 files and the README, unchanged since 46f638c; under derived-only custody none is copied. No source program was executed.",
+  "sources": [
+    {
+      "id": "mishapolk-kkt-refinements-2026-10-14",
+      "source_url": "https://github.com/Mishapolk/square-packing-records",
+      "source_ref": "main",
+      "source_commit": "70a033f0ecfa9e643cd5fb5dbac190cb7f4ffb94",
+      "committed_utc": "2026-10-14T16:11:31Z",
+      "git_tree": "c816b6f977f91a64068353ce7d39770a73e1e2f5",
+      "archived_path": "packing/resources/web/mishapolk-kkt-refinements-2026-10-14/source",
+      "subtree_manifest": "packing/resources/web/mishapolk-kkt-refinements-2026-10-14/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "README.md",
+        "certificates/census.json",
+        "certificates/n129.cert",
+        "certificates/n153.cert",
+        "certificates/n154.cert",
+        "certificates/n155.cert",
+        "certificates/n156.cert",
+        "certificates/n175.cert",
+        "certificates/n176.cert",
+        "certificates/n181.cert",
+        "certificates/n204.cert",
+        "certificates/n207.cert",
+        "certificates/n209.cert",
+        "certificates/n232.cert",
+        "certificates/n264.cert",
+        "certificates/n267.cert",
+        "certificates/n270.cert",
+        "certificates/n271.cert",
+        "certificates/n272.cert",
+        "certificates/n302.cert",
+        "certificates/n303.cert",
+        "certificates/n304.cert",
+        "certificates/n305.cert",
+        "certificates/n306.cert",
+        "certificates/n307.cert",
+        "certificates/n308.cert",
+        "certificates/square-129.cert",
+        "certificates/square-153.cert",
+        "certificates/square-154.cert",
+        "certificates/square-156.cert",
+        "certificates/square-175.cert",
+        "certificates/square-176.cert",
+        "certificates/square-204.cert",
+        "certificates/square-207.cert",
+        "certificates/square-232.cert",
+        "certificates/square-264.cert",
+        "certificates/square-271.cert",
+        "certificates/square-302.cert",
+        "certificates/square-303.cert",
+        "certificates/square-304.cert"
+      ],
+      "subtree_file_count": 40,
+      "subtree_total_bytes": 2979882,
+      "retained_file_count": 0,
+      "retained_total_bytes": 0,
+      "compressed": [],
+      "pinned_only": [
+        {
+          "path": "README.md",
+          "bytes": 15182,
+          "sha256": "d1b8a7da7c0e61e38ce558bedc54ca0429bdce7ef9bf1778890852b8e13c6378",
+          "reason": "The repository README, unchanged since 46f638c: the release's record table and its verification claims. Author prose; no licence; pinned by digest only."
+        },
+        {
+          "path": "certificates/census.json",
+          "bytes": 29751,
+          "sha256": "edbac6f14ce58d9e52352ef4bba8b80cb34c35c6d891d79b830ae18ebbca2578",
+          "reason": "The source's census: each count's exact side_fraction, binary64 side_float, baseline, the certificate's SHA-256 and its credited source. The importer admits each certificate at its side_fraction. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/n129.cert",
+          "bytes": 29886,
+          "sha256": "38cc69fc07a7b6a129a86babe1a0fd99d3778779413adfa4aeeb201bda1a1b19",
+          "reason": "An exact rational certificate in Evan Daniel's format: comment lines, the header n S, then x y t per square with centres in [0, S]^2 and rational half-angle tangents t. No licence in the tree, so derived-only custody: an importer reads it from a checkout at this pin and must match this digest."
+        },
+        {
+          "path": "certificates/n153.cert",
+          "bytes": 35166,
+          "sha256": "c1bea0fcaab23aaa8fd21c81f2cf568344026dbcf3ad1996f5480363d975c71f",
+          "reason": "An exact rational certificate in Evan Daniel's format: comment lines, the header n S, then x y t per square with centres in [0, S]^2 and rational half-angle tangents t. No licence in the tree, so derived-only custody: an importer reads it from a checkout at this pin and must match this digest."
+        },
+        {
+          "path": "certificates/n154.cert",
+          "bytes": 37277,
+          "sha256": "d2d76f2ff0b5cc3c4869e585ac12b1acf26e67aa1e2973cce6290a001f5fffab",
+          "reason": "An exact rational certificate in Evan Daniel's format: comment lines, the header n S, then x y t per square with centres in [0, S]^2 and rational half-angle tangents t. No licence in the tree, so derived-only custody: an importer reads it from a checkout at this pin and must match this digest."
+        },
+        {
+          "path": "certificates/n155.cert",
+          "bytes": 27322,
+          "sha256": "c17f68a88d3edeba4e734f7a9b5a1f5a586af06c320504722cf4e3d63c4b06af",
+          "reason": "An exact rational certificate in Evan Daniel's format: comment lines, the header n S, then x y t per square with centres in [0, S]^2 and rational half-angle tangents t. No licence in the tree, so derived-only custody: an importer reads it from a checkout at this pin and must match this digest."
+        },
+        {
+          "path": "certificates/n156.cert",
+          "bytes": 42554,
+          "sha256": "4b39ed76d3265fe62ebb5707ff373872c9d6a86726aec205d6054001c165d32a",
+          "reason": "An exact rational certificate in Evan Daniel's format: comment lines, the header n S, then x y t per square with centres in [0, S]^2 and rational half-angle tangents t. No licence in the tree, so derived-only custody: an importer reads it from a checkout at this pin and must match this digest."
+        },
+        {
+          "path": "certificates/n175.cert",
+          "bytes": 74092,
+          "sha256": "c5adb19f2c95bb4f63bae0bd0184521a7cc86d6c5a5affdc24422d1bf11b6383",
+          "reason": "An exact rational certificate in Evan Daniel's format: comment lines, the header n S, then x y t per square with centres in [0, S]^2 and rational half-angle tangents t. No licence in the tree, so derived-only custody: an importer reads it from a checkout at this pin and must match this digest."
+        },
+        {
+          "path": "certificates/n176.cert",
+          "bytes": 93694,
+          "sha256": "9964cc318d0cd3d019432232a3ec362cacd0b4f62a40f5e3881f778dde0b8290",
+          "reason": "An exact rational certificate in Evan Daniel's format: comment lines, the header n S, then x y t per square with centres in [0, S]^2 and rational half-angle tangents t. No licence in the tree, so derived-only custody: an importer reads it from a checkout at this pin and must match this digest."
+        },
+        {
+          "path": "certificates/n181.cert",
+          "bytes": 30766,
+          "sha256": "92e16c3091985a315e9a8ee6bf67cfa292521194cd2036e75e8f66caa21368f5",
+          "reason": "An exact rational certificate in Evan Daniel's format: comment lines, the header n S, then x y t per square with centres in [0, S]^2 and rational half-angle tangents t. No licence in the tree, so derived-only custody: an importer reads it from a checkout at this pin and must match this digest."
+        },
+        {
+          "path": "certificates/n204.cert",
+          "bytes": 107115,
+          "sha256": "f0885fa8498cc2575aefcbb6fb7771006386b87e45a00c2f515e34065d215b40",
+          "reason": "An exact rational certificate in Evan Daniel's format: comment lines, the header n S, then x y t per square with centres in [0, S]^2 and rational half-angle tangents t. No licence in the tree, so derived-only custody: an importer reads it from a checkout at this pin and must match this digest."
+        },
+        {
+          "path": "certificates/n207.cert",
+          "bytes": 101134,
+          "sha256": "4c408b5ba7c383a0ac10399d328ff6c6597d2c4d036bc057889faaf2331feff5",
+          "reason": "An exact rational certificate in Evan Daniel's format: comment lines, the header n S, then x y t per square with centres in [0, S]^2 and rational half-angle tangents t. No licence in the tree, so derived-only custody: an importer reads it from a checkout at this pin and must match this digest."
+        },
+        {
+          "path": "certificates/n209.cert",
+          "bytes": 37332,
+          "sha256": "5efee0793f8dff48c7a1a83a9874d36bdf95195008b33ad9860e9cbf50c78c24",
+          "reason": "An exact rational certificate in Evan Daniel's format: comment lines, the header n S, then x y t per square with centres in [0, S]^2 and rational half-angle tangents t. No licence in the tree, so derived-only custody: an importer reads it from a checkout at this pin and must match this digest."
+        },
+        {
+          "path": "certificates/n232.cert",
+          "bytes": 124436,
+          "sha256": "01961203e9c1a62899569ea4ba1f6c88fb39c20570623f9c91f1727ce07f277a",
+          "reason": "An exact rational certificate in Evan Daniel's format: comment lines, the header n S, then x y t per square with centres in [0, S]^2 and rational half-angle tangents t. No licence in the tree, so derived-only custody: an importer reads it from a checkout at this pin and must match this digest."
+        },
+        {
+          "path": "certificates/n264.cert",
+          "bytes": 138200,
+          "sha256": "a5ca8e43b8ca2393573cb6dbfbfe2933a53e6d44606cbbc110aba4a6ac25bd0f",
+          "reason": "An exact rational certificate in Evan Daniel's format: comment lines, the header n S, then x y t per square with centres in [0, S]^2 and rational half-angle tangents t. No licence in the tree, so derived-only custody: an importer reads it from a checkout at this pin and must match this digest."
+        },
+        {
+          "path": "certificates/n267.cert",
+          "bytes": 51242,
+          "sha256": "0b500fb4fbaf19a584f7f0190990ef7d46d9ce2897e23971f7b1d104f485819b",
+          "reason": "An exact rational certificate in Evan Daniel's format: comment lines, the header n S, then x y t per square with centres in [0, S]^2 and rational half-angle tangents t. No licence in the tree, so derived-only custody: an importer reads it from a checkout at this pin and must match this digest."
+        },
+        {
+          "path": "certificates/n270.cert",
+          "bytes": 44343,
+          "sha256": "d909e966c344a3f9788dc910dd0f9581a99939aeaac4e22a821b9944098d2775",
+          "reason": "An exact rational certificate in Evan Daniel's format: comment lines, the header n S, then x y t per square with centres in [0, S]^2 and rational half-angle tangents t. No licence in the tree, so derived-only custody: an importer reads it from a checkout at this pin and must match this digest."
+        },
+        {
+          "path": "certificates/n271.cert",
+          "bytes": 141709,
+          "sha256": "5cd8ec18912f0f1b1a8be571f5201d92b50dcd475d773e417b288f8e7c38ec7c",
+          "reason": "An exact rational certificate in Evan Daniel's format: comment lines, the header n S, then x y t per square with centres in [0, S]^2 and rational half-angle tangents t. No licence in the tree, so derived-only custody: an importer reads it from a checkout at this pin and must match this digest."
+        },
+        {
+          "path": "certificates/n272.cert",
+          "bytes": 45751,
+          "sha256": "c4d92fc77e32e68d5a3f3a3b4e76cd30c7a1312c9080d3f6bcd5118ba7d23b4e",
+          "reason": "An exact rational certificate in Evan Daniel's format: comment lines, the header n S, then x y t per square with centres in [0, S]^2 and rational half-angle tangents t. No licence in the tree, so derived-only custody: an importer reads it from a checkout at this pin and must match this digest."
+        },
+        {
+          "path": "certificates/n302.cert",
+          "bytes": 74364,
+          "sha256": "2c8e85dc388b9debc1f5b58784dfd06ba1cb22ef1d09c3314885eecdaef2e7c4",
+          "reason": "An exact rational certificate in Evan Daniel's format: comment lines, the header n S, then x y t per square with centres in [0, S]^2 and rational half-angle tangents t. No licence in the tree, so derived-only custody: an importer reads it from a checkout at this pin and must match this digest."
+        },
+        {
+          "path": "certificates/n303.cert",
+          "bytes": 160444,
+          "sha256": "13d7b62f8e938c26fe40034ca1a96794b852ad26ad7d144010e2e78b639c1fc5",
+          "reason": "An exact rational certificate in Evan Daniel's format: comment lines, the header n S, then x y t per square with centres in [0, S]^2 and rational half-angle tangents t. No licence in the tree, so derived-only custody: an importer reads it from a checkout at this pin and must match this digest."
+        },
+        {
+          "path": "certificates/n304.cert",
+          "bytes": 77808,
+          "sha256": "72fa0c89b01fe546d4258a8ad6c108530503dc66d5b50388af57f2baca1217f4",
+          "reason": "An exact rational certificate in Evan Daniel's format: comment lines, the header n S, then x y t per square with centres in [0, S]^2 and rational half-angle tangents t. No licence in the tree, so derived-only custody: an importer reads it from a checkout at this pin and must match this digest."
+        },
+        {
+          "path": "certificates/n305.cert",
+          "bytes": 54007,
+          "sha256": "af83d9cc1ace071d0b55d9aac8c1822cb44bdfc6a90b78d0136b89d726c4a794",
+          "reason": "An exact rational certificate in Evan Daniel's format: comment lines, the header n S, then x y t per square with centres in [0, S]^2 and rational half-angle tangents t. No licence in the tree, so derived-only custody: an importer reads it from a checkout at this pin and must match this digest."
+        },
+        {
+          "path": "certificates/n306.cert",
+          "bytes": 55834,
+          "sha256": "684be19af13cfa0828fd6e841b996893235b9e0e7226aeeacd6f86c73f28b248",
+          "reason": "An exact rational certificate in Evan Daniel's format: comment lines, the header n S, then x y t per square with centres in [0, S]^2 and rational half-angle tangents t. No licence in the tree, so derived-only custody: an importer reads it from a checkout at this pin and must match this digest."
+        },
+        {
+          "path": "certificates/n307.cert",
+          "bytes": 55474,
+          "sha256": "a97350d02e4e084ca229425d24cc62290e00e477ea82666cc207b30278420186",
+          "reason": "An exact rational certificate in Evan Daniel's format: comment lines, the header n S, then x y t per square with centres in [0, S]^2 and rational half-angle tangents t. No licence in the tree, so derived-only custody: an importer reads it from a checkout at this pin and must match this digest."
+        },
+        {
+          "path": "certificates/n308.cert",
+          "bytes": 57120,
+          "sha256": "e81019140451d11e9a1d77b9c2c9ee246e261155ef1d03334bfdb81003232a6b",
+          "reason": "An exact rational certificate in Evan Daniel's format: comment lines, the header n S, then x y t per square with centres in [0, S]^2 and rational half-angle tangents t. No licence in the tree, so derived-only custody: an importer reads it from a checkout at this pin and must match this digest."
+        },
+        {
+          "path": "certificates/square-129.cert",
+          "bytes": 29886,
+          "sha256": "38cc69fc07a7b6a129a86babe1a0fd99d3778779413adfa4aeeb201bda1a1b19",
+          "reason": "A copy of certificates/n<n>.cert at the same pin, byte for byte, under the name issue #573 used. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-153.cert",
+          "bytes": 35166,
+          "sha256": "c1bea0fcaab23aaa8fd21c81f2cf568344026dbcf3ad1996f5480363d975c71f",
+          "reason": "A copy of certificates/n<n>.cert at the same pin, byte for byte, under the name issue #573 used. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-154.cert",
+          "bytes": 37277,
+          "sha256": "d2d76f2ff0b5cc3c4869e585ac12b1acf26e67aa1e2973cce6290a001f5fffab",
+          "reason": "A copy of certificates/n<n>.cert at the same pin, byte for byte, under the name issue #573 used. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-156.cert",
+          "bytes": 42554,
+          "sha256": "4b39ed76d3265fe62ebb5707ff373872c9d6a86726aec205d6054001c165d32a",
+          "reason": "A copy of certificates/n<n>.cert at the same pin, byte for byte, under the name issue #573 used. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-175.cert",
+          "bytes": 74092,
+          "sha256": "c5adb19f2c95bb4f63bae0bd0184521a7cc86d6c5a5affdc24422d1bf11b6383",
+          "reason": "A copy of certificates/n<n>.cert at the same pin, byte for byte, under the name issue #573 used. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-176.cert",
+          "bytes": 93694,
+          "sha256": "9964cc318d0cd3d019432232a3ec362cacd0b4f62a40f5e3881f778dde0b8290",
+          "reason": "A copy of certificates/n<n>.cert at the same pin, byte for byte, under the name issue #573 used. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-204.cert",
+          "bytes": 107115,
+          "sha256": "f0885fa8498cc2575aefcbb6fb7771006386b87e45a00c2f515e34065d215b40",
+          "reason": "A copy of certificates/n<n>.cert at the same pin, byte for byte, under the name issue #573 used. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-207.cert",
+          "bytes": 101134,
+          "sha256": "4c408b5ba7c383a0ac10399d328ff6c6597d2c4d036bc057889faaf2331feff5",
+          "reason": "A copy of certificates/n<n>.cert at the same pin, byte for byte, under the name issue #573 used. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-232.cert",
+          "bytes": 124436,
+          "sha256": "01961203e9c1a62899569ea4ba1f6c88fb39c20570623f9c91f1727ce07f277a",
+          "reason": "A copy of certificates/n<n>.cert at the same pin, byte for byte, under the name issue #573 used. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-264.cert",
+          "bytes": 138200,
+          "sha256": "a5ca8e43b8ca2393573cb6dbfbfe2933a53e6d44606cbbc110aba4a6ac25bd0f",
+          "reason": "A copy of certificates/n<n>.cert at the same pin, byte for byte, under the name issue #573 used. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-271.cert",
+          "bytes": 141709,
+          "sha256": "5cd8ec18912f0f1b1a8be571f5201d92b50dcd475d773e417b288f8e7c38ec7c",
+          "reason": "A copy of certificates/n<n>.cert at the same pin, byte for byte, under the name issue #573 used. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-302.cert",
+          "bytes": 74364,
+          "sha256": "2c8e85dc388b9debc1f5b58784dfd06ba1cb22ef1d09c3314885eecdaef2e7c4",
+          "reason": "A copy of certificates/n<n>.cert at the same pin, byte for byte, under the name issue #573 used. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-303.cert",
+          "bytes": 160444,
+          "sha256": "13d7b62f8e938c26fe40034ca1a96794b852ad26ad7d144010e2e78b639c1fc5",
+          "reason": "A copy of certificates/n<n>.cert at the same pin, byte for byte, under the name issue #573 used. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/square-304.cert",
+          "bytes": 77808,
+          "sha256": "72fa0c89b01fe546d4258a8ad6c108530503dc66d5b50388af57f2baca1217f4",
+          "reason": "A copy of certificates/n<n>.cert at the same pin, byte for byte, under the name issue #573 used. No licence: pinned by digest only."
+        }
+      ],
+      "license": "No licence file in the pinned tree, and its README states no reuse terms. Derived-only custody under the known-best retention policy: no upstream byte is retained, every file is bound here by SHA-256 and at the pin by its Git blob, and no redistribution permission or licence determination is asserted. The commit names no credit or AI assistance; census.json credits 14 of the 24 counts to Mykhailo Polkovskyi and 10 to 'Antigravity'. On issue #593 (comment of 2026-10-14T15:38Z) the author asks that all entries be credited to Mykhailo Polkovskyi (GitHub: @Mishapolk); the issue discloses Gemini assistance.",
+      "claims": [
+        "Commit 70a033f (2026-10-14T16:11:31Z), 'Refine 14 contested certificates to ultra-precision KKT endpoints: strictly defeat PingYou PR #574, Couzo #583, #586, and Ostashev #575', replaces 24 of #593's 73 certificates. census.json states each exact side_fraction, its binary64 side_float, the baseline #593 compared with and the certificate's SHA-256, and names the source of each.",
+        "census.json credits n = 129, 153, 154, 156, 175, 176, 204, 207, 232, 264, 271, 302, 303, 304 to 'Mykhailo Polkovskyi (ultra-precision KKT dual-verified optimum)' and n = 155, 181, 209, 267, 270, 272, 305, 306, 307, 308 to 'Antigravity (high-precision dual-verified contact optimum)'.",
+        "No issue reports the commit; the record reads it as a publication in a watched repository, reported at its first commit (the owner, 2026-10-14). The README, unchanged since 46f638c, claims dual exact rational verification with Evan Daniel's verify_cert.py and verify_cert2.py and no global optimality."
+      ]
+    }
+  ]
+}

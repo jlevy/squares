@@ -33,8 +33,10 @@ import pathlib
 import re
 import shlex
 import sys
-from collections.abc import Mapping, Sequence
+from collections.abc import Callable, Mapping, Sequence
+from datetime import date
 from decimal import Decimal
+from fractions import Fraction
 
 from devtools.retained_data import read_retained_text, retained_exists
 from sqpack.kingbird_catalogue import (
@@ -59,6 +61,7 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 FRONTIER = ROOT / "frontier"
 COVERAGE = FRONTIER / "source-coverage.yaml"
 EVIDENCE = FRONTIER / "evidence.yaml"
+RESULTS = FRONTIER / "results.yaml"
 #: The acquisition record `devtools.upper_bound_packets` writes into a packet.
 ACQUISITION_FORMAT = "external-source-acquisition-v1"
 #: The disposition of the source whose values every case reports unless overridden.
@@ -514,6 +517,16 @@ def load_claims(path: pathlib.Path) -> dict[int, str]:
                 raise ValueError(f"n={n}: the certificate's side does not terminate in decimal")
             claims[n] = written
         return claims
+    from devtools import ryxu_house_links as ryxu  # noqa: PLC0415
+
+    if path == ryxu.reports.fact_path():
+        return {
+            n: ryxu.reports.legacy.ceiling_decimal(fact.side, 16)
+            for n, fact in ryxu.reports.read_facts().items()
+        }
+    if path == ryxu.radical.fact_path():
+        ryxu.radical.read_fact()
+        return {51: ryxu.radical_display()}
     record = json.loads(read_retained_text(path))
     if isinstance(record.get("results"), list):
         return {int(entry["n"]): str(entry["offered_side"]) for entry in record["results"]}
@@ -523,21 +536,66 @@ def load_claims(path: pathlib.Path) -> dict[int, str]:
     raise ValueError(f"{path.name} is not a claims record this check can reparse")
 
 
+#: How a catalogue print orders an override's side (`print_order`).
+BEATS = "beats"
+UNDECIDED = "undecided"
+LOSES = "loses"
+
+
+def print_order(value: str, printed: str) -> str:
+    """How the catalogue's print of a count orders an override's side.
+
+    Below the print, the override beats it. An integral print is an exact side, the
+    catalogue's `s = k` boxes and the `ceil(sqrt(n))` fallback, 177 of the corpus's
+    baselines, so anything at or above it loses. A decimal print is a truncation or a
+    rounding at its last place, so it orders a side only beyond one unit of that place:
+    from there on the override loses, and between, nothing is decided, as at n = 29,
+    where the catalogue prints 5.93383346267692 for a packing whose exact side T-009's
+    Krawczyk box puts at 5.9338334626769291896..., and PR #622's tighter certificate of
+    that packing (T-195) lies inside the box, 9.19e-15 above the print.
+    """
+    bound, side = Decimal(printed), Decimal(value)
+    if side < bound:
+        return BEATS
+    if bound == bound.to_integral_value():
+        return LOSES
+    unit = Decimal(1).scaleb(int(bound.as_tuple().exponent))
+    return UNDECIDED if side < bound + unit else LOSES
+
+
+def adopted_house_sources() -> dict[int, str]:
+    """Each adopted count's house, by the source key of the packet it rebuilds from.
+
+    `select_houses --check` holds every one of them to the smallest validated side,
+    compared exactly with the case's verified ceiling, so an override that is the house
+    is ordered there even where the catalogue's print orders nothing."""
+    from devtools import upper_bound_houses as houses  # noqa: PLC0415
+
+    return {n: houses.source_for(n).key for n in houses.ADOPTED}
+
+
 def selection_errors(
-    coverage: Mapping, kingbird: Mapping[int, str], claims: Mapping[str, Mapping[int, str]]
+    coverage: Mapping,
+    kingbird: Mapping[int, str],
+    claims: Mapping[str, Mapping[int, str]],
+    houses: Mapping[int, str] | None = None,
 ) -> list[str]:
     """Reconcile the selected overrides and superseded reports with their sources.
 
     An override may come from any retained source. It must lie in that source's scope,
-    use evidence the source declares, report a side strictly below the catalogue
-    baseline it replaces, and, where the source's claims are reparsed here, equal the
-    side the source itself prints. A superseded report is a retained claim that a
-    selected override at the same `n` beats: it must equal its own source's printed side
-    and exceed the override's. Where no override is selected the report may instead name
-    the catalogue baseline, which must then print a side below it -- what a later capture
-    of the catalogue does when it overtakes a release (`n = 69`, 2026-10-05, T-088). Every
-    reparsed claim is then accounted for exactly once, as a selected override, a
-    superseded report, or a claim tracked beyond the corpus.
+    use evidence the source declares, report a side below the catalogue baseline it
+    replaces, and, where the source's claims are reparsed here, equal the side the source
+    itself prints. Where the baseline is a decimal print that orders nothing, within one
+    unit of its last place (`print_order`), the override stands only as the count's
+    adopted house from that source (`houses`, by default none), which the exact house
+    selection orders instead; an integral baseline is exact and orders everything. A superseded
+    report is a retained claim that a selected override at the same `n` beats: it must
+    equal its own source's printed side and exceed the override's. Where no override is
+    selected the report may instead name the catalogue baseline, which must then print a
+    side below it -- what a later capture of the catalogue does when it overtakes a
+    release (`n = 69`, 2026-10-05, T-088). Every reparsed claim is then accounted for
+    exactly once, as a selected override, a superseded report, or a claim tracked beyond
+    the corpus.
     """
     errors: list[str] = []
     n_min = coverage["case_corpus"]["n_min"]
@@ -567,8 +625,15 @@ def selection_errors(
             errors.append(
                 f"{where} uses evidence {entry['evidence']} not declared by {source_id}"
             )
-        if n in kingbird and Decimal(entry["value"]) >= Decimal(kingbird[n]):
+        order = print_order(entry["value"], kingbird[n]) if n in kingbird else BEATS
+        if order == LOSES:
             errors.append(f"{where} does not beat the catalogue baseline {kingbird[n]}")
+        elif order == UNDECIDED and (houses or {}).get(n) != source.get("source_key"):
+            errors.append(
+                f"{where} does not beat the catalogue baseline {kingbird[n]}: it lies within "
+                "one unit of the print's last place, which orders nothing, and it is not the "
+                "count's adopted house, which the exact selection orders"
+            )
         errors.extend(_claim_errors(where, source_id, n, entry["value"], claims))
         accounted.setdefault(source_id, set()).add(n)
     for entry in coverage["superseded_reports"]:
@@ -595,23 +660,8 @@ def selection_errors(
             errors.append(f"{where} names {entry['superseded_by']}, not the selected source")
         elif Decimal(selected["value"]) >= Decimal(entry["value"]):
             errors.append(f"{where} is not beaten by the selected {selected['value']}")
-    inventory: dict[str, set[int]] = {}
-    beyond = [entry["n"] for entry in coverage["beyond_horizon_claims"]]
-    if len(beyond) != len(set(beyond)):
-        errors.append("beyond-horizon n values are not unique")
-    for entry in coverage["beyond_horizon_claims"]:
-        n, source_id = entry["n"], entry["source_id"]
-        if n_min <= n <= n_max:
-            errors.append(f"beyond-horizon claim n={n} lies inside the case corpus")
-        if source_id not in sources:
-            errors.append(f"beyond-horizon n={n} names unknown source {source_id}")
-            continue
-        if not scope_contains(sources[source_id]["scope"], n):
-            errors.append(f"beyond-horizon n={n} is outside {source_id}'s scope")
-        errors.extend(
-            _claim_errors(f"beyond-horizon n={n}", source_id, n, entry["value"], claims)
-        )
-        inventory.setdefault(source_id, set()).add(n)
+    beyond, inventory = beyond_horizon_errors(coverage, claims)
+    errors.extend(beyond)
     for source_id, claimed in sorted(claims.items()):
         held = accounted.get(source_id, set()) | inventory.get(source_id, set())
         if set(claimed) != held:
@@ -635,6 +685,225 @@ def _claim_errors(
     if Decimal(printed) != Decimal(value):
         return [f"{where}: {source_id} prints {printed}, the inventory says {value}"]
     return []
+
+
+#: The disposition of a beyond-horizon row a later report of the same claim beats.
+SUPERSEDED = "superseded"
+
+#: How a later report of each claim beats an earlier one, compared exactly. An exact
+#: value has no direction: two that differ conflict, and neither improves the other.
+_BEATS: dict[str, Callable[[Fraction, Fraction], bool]] = {
+    "upper-bound": lambda later, earlier: later < earlier,
+    "lower-bound": lambda later, earlier: later > earlier,
+}
+
+
+def beyond_horizon_errors(
+    coverage: Mapping, claims: Mapping[str, Mapping[int, str]]
+) -> tuple[list[str], dict[str, set[int]]]:
+    """Hold every dated row beyond the case corpus, and say which claims they account for.
+
+    Rows are keyed on `(n, source_id)`, so a count may carry several: at most one current
+    row, and every earlier report a later one beats, kept as its source printed it, with
+    `disposition: superseded` and `superseded_by` naming the successor's source. Couzo's
+    2d32a6e reports at `n = 375` and `378` beat his ffd900d reports at the same counts,
+    and a register with one row per count could hold only one of the two.
+
+    Each row must lie outside the corpus and inside the scope of a source that declares
+    a claims record, and read that record's reparsed claim byte for byte: a dated row
+    keeps the facts it was recorded with. Each successor must be a row at the same
+    count, of the same claim, from a source dated no earlier, and strictly better by
+    exact rational comparison of the printed decimals. Strict improvement along every
+    link makes a cycle impossible, since a cycle would make some value strictly better
+    than itself, so every chain of successors ends at the count's current row and no
+    separate cycle check is needed.
+    Returns the errors and, by source, the counts whose claims the rows account for.
+    """
+    errors: list[str] = []
+    n_min = coverage["case_corpus"]["n_min"]
+    n_max = coverage["case_corpus"]["n_max"]
+    sources = {source["id"]: source for source in coverage["sources"]}
+    rows: dict[tuple[int, str], Mapping] = {}
+    current: dict[int, list[str]] = {}
+    inventory: dict[str, set[int]] = {}
+    for entry in coverage["beyond_horizon_claims"]:
+        n, source_id = entry["n"], entry["source_id"]
+        where = f"beyond-horizon n={n} from {source_id}"
+        if (n, source_id) in rows:
+            errors.append(f"{where} is listed twice; a count has one row per source")
+            continue
+        rows[n, source_id] = entry
+        if n_min <= n <= n_max:
+            errors.append(f"beyond-horizon claim n={n} lies inside the case corpus")
+        if entry.get("disposition") == SUPERSEDED:
+            if not entry.get("superseded_by"):
+                errors.append(f"{where} is superseded but names no successor")
+        else:
+            current.setdefault(n, []).append(source_id)
+            if "superseded_by" in entry:
+                errors.append(
+                    f"{where} names successor {entry['superseded_by']} but is not superseded"
+                )
+        if source_id not in sources:
+            errors.append(f"beyond-horizon n={n} names unknown source {source_id}")
+            continue
+        if not scope_contains(sources[source_id]["scope"], n):
+            errors.append(f"beyond-horizon n={n} is outside {source_id}'s scope")
+        if not sources[source_id].get("claims_record"):
+            errors.append(
+                f"{where}: {source_id} declares no claims record, so the row is compared "
+                "with nothing its source prints"
+            )
+        errors.extend(_claim_errors(where, source_id, n, entry["value"], claims))
+        printed = claims.get(source_id, {}).get(n)
+        if (
+            printed is not None
+            and printed != entry["value"]
+            and Decimal(printed) == Decimal(entry["value"])
+        ):
+            errors.append(
+                f"{where} reads {entry['value']!r}, not {printed!r} as its source prints "
+                "it; a dated row keeps its source's facts byte for byte"
+            )
+        inventory.setdefault(source_id, set()).add(n)
+    errors.extend(
+        f"beyond-horizon n={n} has {len(held)} current rows ({', '.join(held)}); a count "
+        "has at most one, and each earlier report names the row that supersedes it"
+        for n, held in sorted(current.items())
+        if len(held) > 1
+    )
+    for entry in rows.values():
+        if entry.get("disposition") == SUPERSEDED and entry.get("superseded_by"):
+            errors.extend(_succession_errors(entry, rows, sources))
+    return errors, inventory
+
+
+def _succession_errors(
+    entry: Mapping,
+    rows: Mapping[tuple[int, str], Mapping],
+    sources: Mapping[str, Mapping],
+) -> list[str]:
+    """What a superseded row's named successor fails to be."""
+    n, source_id, successor_id = entry["n"], entry["source_id"], entry["superseded_by"]
+    where = f"beyond-horizon n={n} from {source_id}"
+    if successor_id == source_id:
+        return [f"{where} names itself as its successor"]
+    successor = rows.get((n, successor_id))
+    if successor is None:
+        elsewhere = sorted(count for count, owner in rows if owner == successor_id)
+        held = f"; its rows are at n={elsewhere}" if elsewhere else ""
+        return [f"{where} names successor {successor_id}, which has no row at n={n}{held}"]
+    errors: list[str] = []
+    if successor["claim"] != entry["claim"]:
+        errors.append(
+            f"{where} claims {entry['claim']}, and its successor from {successor_id} "
+            f"claims {successor['claim']}"
+        )
+    elif entry["claim"] not in _BEATS:
+        errors.append(
+            f"{where}: an {entry['claim']} claim is never superseded; a later report that "
+            "differs from it conflicts with it, and one that agrees adds nothing"
+        )
+    elif not _BEATS[entry["claim"]](Fraction(successor["value"]), Fraction(entry["value"])):
+        errors.append(
+            f"{where}: {entry['value']} is not strictly beaten by {successor['value']} "
+            f"from {successor_id}, compared exactly"
+        )
+    owners = (source_id, successor_id)
+    dates = [sources.get(owner, {}).get("source_date") for owner in owners]
+    if None in dates:
+        undated = [owner for owner, day in zip(owners, dates, strict=True) if day is None]
+        errors.append(
+            f"{where}: {', '.join(undated)} has no source_date, and a supersession orders "
+            "dated reports"
+        )
+    elif date.fromisoformat(str(dates[1])) < date.fromisoformat(str(dates[0])):
+        errors.append(
+            f"{where} is dated {dates[0]}, after its successor from {successor_id}, dated "
+            f"{dates[1]}"
+        )
+    return errors
+
+
+#: A superseded row's reason naming the register entry whose side beats it.
+_SMALLER = re.compile(r"\b(T-\d+)'s exact side is smaller\b")
+#: A superseded row's reason naming the house adopted at its count on a day, and the
+#: entry whose certificate that house is, where the reason says.
+_ADOPTED_HOUSE = re.compile(
+    r"\bthe house adopted (?:here )?on (\d{4}-\d{2}-\d{2})"
+    r"(?:,? which (T-\d+)'s registered certificate holds| \((T-\d+)\))?"
+)
+#: The day a selected override's reason says its house was adopted (`adopt_houses`).
+_ADOPTED_ON = re.compile(r"\badopted on (\d{4}-\d{2}-\d{2}) \(T-\d+\)")
+
+
+def house_reason_errors(coverage: Mapping, results: Sequence[Mapping]) -> list[str]:
+    """Hold each superseded row's reason, where it names the house, to its `superseded_by`.
+
+    A row says what beats it in prose: "T-NNN's exact side is smaller", or "the house
+    adopted here on <day>", with the entry in parentheses or "which T-NNN's registered
+    certificate holds". `selection_errors` already holds `superseded_by` to the count's
+    selected source; when an adoption moves the count again the writer re-points the row,
+    and a reason left naming the earlier house is stale, which is what #518's review (A1)
+    and #553's (B3) found by reading. Here the entry a reason names must be one whose
+    attribution names the source key of the source the row is superseded by, and the
+    day must be the one the count's selected override says its house was adopted.
+    """
+    sources = {str(source["id"]): source for source in coverage["sources"]}
+    keys = {
+        str(entry["id"]): set((entry.get("attribution") or {}).get("source_keys") or ())
+        for entry in results
+    }
+    overrides = {int(entry["n"]): entry for entry in coverage["selected_overrides"]}
+    errors: list[str] = []
+    for row in coverage["superseded_reports"]:
+        n, by = int(row["n"]), str(row["superseded_by"])
+        reason = " ".join(str(row.get("reason") or "").split())
+        where = f"superseded report n={n} from {row['source_id']}"
+        named = [match.group(1) for match in _SMALLER.finditer(reason)]
+        for match in _ADOPTED_HOUSE.finditer(reason):
+            day = match.group(1)
+            named.extend(result for result in match.group(2, 3) if result)
+            selected = overrides.get(n)
+            adopted = (
+                _ADOPTED_ON.search(str(selected.get("reason") or "")) if selected else None
+            )
+            if adopted is None or adopted.group(1) != day:
+                held = (
+                    "adopted on no day" if adopted is None else f"adopted on {adopted.group(1)}"
+                )
+                errors.append(
+                    f"{where} names the house adopted on {day}, but {by}, which supersedes "
+                    f"it, was {held}"
+                )
+        source_key = str((sources.get(by) or {}).get("source_key") or "")
+        errors.extend(
+            f"{where} names {result} as the house that beats it, but is superseded by "
+            f"{by}, which is not {result}'s source"
+            for result in named
+            if source_key not in keys.get(result, set())
+        )
+    return errors
+
+
+def current_beyond_horizon(coverage: Mapping) -> dict[int, Mapping]:
+    """Each count's current beyond-horizon row: the one no later report supersedes.
+
+    Refuses a count with more than one current row rather than choosing between them;
+    `beyond_horizon_errors` reports the same register as a failure.
+    """
+    current: dict[int, Mapping] = {}
+    for entry in coverage["beyond_horizon_claims"]:
+        if entry.get("disposition") == SUPERSEDED:
+            continue
+        n = entry["n"]
+        if n in current:
+            raise ValueError(
+                f"beyond-horizon n={n} has more than one current row "
+                f"({current[n]['source_id']}, {entry['source_id']})"
+            )
+        current[n] = entry
+    return current
 
 
 def main() -> int:
@@ -698,7 +967,9 @@ def main() -> int:
         for source in coverage["sources"]
         if source.get("claims_record")
     }
-    errors.extend(selection_errors(coverage, baseline, claims))
+    errors.extend(selection_errors(coverage, baseline, claims, adopted_house_sources()))
+    results = safe_load(RESULTS.read_text(encoding="utf-8"))["results"]
+    errors.extend(house_reason_errors(coverage, results))
 
     cases = {
         case["n"]: case
@@ -750,16 +1021,19 @@ def main() -> int:
     except CatalogueParseError as error:
         errors.append(f"retained catalogue: {error}")
 
-    inventory = {entry["n"]: entry["value"] for entry in coverage["beyond_horizon_claims"]}
     if errors:
         for error in errors:
             print(f"FAIL {error}", file=sys.stderr)
         return 1
+    # Only after the reconciliation passed, which refuses a second current row.
+    beyond = current_beyond_horizon(coverage)
+    dated = len(coverage["beyond_horizon_claims"]) - len(beyond)
     print(
         f"  source coverage reconciled: {n_max - n_min + 1} cases, "
         f"{len(overrides)} newer in-horizon reports from {len(claims)} reparsed claim "
         f"records, {len(coverage['superseded_reports'])} superseded reports, "
-        f"{len(inventory)} tracked beyond horizon, "
+        f"{len(beyond)} tracked beyond horizon with {dated} earlier dated "
+        f"report{'' if dated == 1 else 's'} superseded there, "
         f"{len(pending)} catalogue count{'' if len(pending) == 1 else 's'} pending intake"
     )
     print(

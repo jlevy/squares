@@ -1,0 +1,19 @@
+Squares Atlas Print font provenance
+
+Source: official Liberation Fonts 2.1.5 (2021-09-30)
+Release: https://github.com/liberationfonts/liberation-fonts/releases/tag/2.1.5
+Archive: https://github.com/liberationfonts/liberation-fonts/files/7261482/liberation-fonts-ttf-2.1.5.tar.gz
+Archive SHA256: 7191c669bf38899f73a2094ed00f7b800553364f90e2637010a69c0e268f25d0
+License: SIL Open Font License 1.1; full upstream notice in LICENSE.txt
+
+Derived assets change only name/license metadata. Outlines, hinting, glyph
+order, character maps, advances, and design-unit bounds remain unchanged.
+The unique family avoids host substitution and the OFL reserved names.
+The complete license is also retained in each font's name-table metadata.
+Native registration lasts for the rendering process only.
+
+Reproduce from the extracted official release, with the project interpreter:
+python -m devtools.atlas_print_font --prepare-fonts SOURCE_DIRECTORY
+
+LiberationSans-Bold.ttf SHA256: 788abee4c806d660e8aee46689dd8540cd4bb98da03dcc9d171ce3efd99a9173
+LiberationSans-BoldItalic.ttf SHA256: 698da70fc191cc5f33ad4d6d3fe830fe4624b898ea2e3169955928b7c491f1ee

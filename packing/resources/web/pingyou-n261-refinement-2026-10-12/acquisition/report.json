@@ -1,0 +1,44 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "https://github.com/jlevy/squares/issues/567",
+  "author": "PingYou Ltd",
+  "source_key": "[PingYou n261 refinement 2026-10-12]",
+  "report_evidence": "E-pingyou-567-certificate-report",
+  "receipt_format": "pingyou-567-exact-replay-v1",
+  "witness_prefix": "W-pingyou-567-n",
+  "claim_limitations": "Complete e70342d rational centre/half-angle certificate converted exactly from a checkout at the pin whose bytes have the digests the packet records, and equal there to the source's own corners Witness/v2; no upstream byte is retained. Finite construction feasibility only; no local minimum, rigidity, novelty, priority or global optimality claim.",
+  "read_on": "2026-10-14",
+  "read_at_main": "aeef99ef0ef27ace054434094118a6ac355da384",
+  "certificates": [
+    {"n": 261, "path": "n261.cert.json", "format": "pingyou-json", "offered": "16.6787798753429098149372205115301919485639", "first_committed": "2026-10-12T23:44:55Z", "same_packing": [{"path": "pingyou-n261-rational.yaml", "format": "witness-corners"}], "fact": "facts/n-261.yaml"}
+  ],
+  "requested": [261],
+  "replayed": [261],
+  "houses": [
+    {"n": 261, "reader": "[Barnett refinements 2026-10-11]", "source_key": "[Barnett refinements 2026-10-11]", "holders": "Ryan Xu, improved by Robert Barnett", "result": "T-150", "reported_value": "16.6787798753432078", "verified_value": "16.6787798753432078", "evidence": ["E-barnett-505-exact-feasibility"]}
+  ],
+  "pending": [
+    {"n": 261, "report": "T-101 (#375)", "url": "https://github.com/jlevy/squares/issues/375", "holders": "the Kingbird catalogue, verified by Evan Daniel's exact ceiling", "result": "T-101", "reader": "[evand exact optima 2026-10-05]"},
+    {"n": 261, "report": "T-125 (#432)", "url": "https://github.com/jlevy/squares/issues/432", "holders": "Ryan Xu", "result": "T-125", "reader": "[ry-xu square packing 2026]"},
+    {"n": 261, "report": "#593", "url": "https://github.com/jlevy/squares/issues/593", "holders": "Mykhailo Polkovskyi (Mishapolk)", "reader": "[Mishapolk records 2026-10-14]"},
+    {"n": 261, "report": "PR #574", "url": "https://github.com/jlevy/squares/pull/574", "holders": "PingYou Ltd", "reader": "[PingYou PR 574 certificates 2026-10-13]"}
+  ],
+  "register": {
+    "title": "PingYou Ltd's n261 refinement at e70342d, issue567",
+    "headline": "A further exact refinement of Ryan Xu's packing of 261 squares, after Robert Barnett's",
+    "significance": 2,
+    "source_checks": "The author reports that its exact separating-axis checker and a separate rational polygon-intersection checker accept all 261 squares, every wall and all 33,930 pairs, that every one of the 34,974 declared support inequalities holds, with duplicate and outside controls refused and the conversion to its corners Witness/v2 lossless; and that this repository's sqpack exact_verify and check_rational_witness_independent, unchanged at 074ac28, accept that witness. Those statements are the author's; no source program ran here.",
+    "credit": "Credit PingYou Ltd (https://github.com/BuddenPing/square-packing-certificates) with this further refinement, as the source asks, of Robert Barnett's refinement (T-150, issue 505) of Ryan Xu's packing of 261 (ry-xu, issue 432); the source credits Evan Daniel with the contact-solver source. The pinned source makes no statement about AI assistance.",
+    "next_rung": "Independently review the retained replay, then decide adoption at 261: the side is 2.98e-13 below the ceiling T-150 holds and below every other report at 261 but the author's own PR #574, which states one 1.99e-21 smaller. Final exact-head CI remains required.",
+    "bead": "think-9rm5",
+    "bibliography": {
+      "authors": [
+        "PingYou Ltd"
+      ],
+      "lineage": "builds-on-project",
+      "credit": "PingYou Ltd after Xu, Barnett, Daniel, Levy",
+      "short_credit": "PingYou Ltd after Xu et al.",
+      "note": "One complete exact certificate at e70342d149f9363b32ef6043ecfa8d0e0c4b51aa, a repaired contact realization refining Barnett's refinement of Xu's n261 with Daniel's contact-solver source. The source checks with Squares Project (Levy) verification code and supplies a corners Witness/v2. Derived exact facts only; no upstream byte is retained. No local or global optimality claim."
+    }
+  }
+}

@@ -101,6 +101,7 @@ from devtools.render_n11_lower_bounds_explainer_pdf import (
     PAGE,
     READY,
 )
+from devtools.site_assets import read_inline_page
 from sqpack.probes import probe
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -1144,7 +1145,7 @@ def build_variants(
     """
     if not page.is_file():
         raise SystemExit(f"no rendered page at {page}; render the explainer first")
-    html = stock_katex_baseline(page.read_text(encoding="utf-8"))
+    html = stock_katex_baseline(read_inline_page(page))
     figures = {
         asset.name: asset
         for pattern in SIBLING_ASSETS
@@ -1515,7 +1516,7 @@ def check_routes(page: Path) -> list[str]:
     """Reconcile every built-in route against its own metric plan, from a rendered page."""
     if not page.is_file():
         raise SystemExit(f"no rendered page at {page}; render the explainer first")
-    html = stock_katex_baseline(page.read_text(encoding="utf-8"))
+    html = stock_katex_baseline(read_inline_page(page))
     faces = page_faces(html)
     return [line for variant in built_in_variants(faces) for line in reconcile(variant, faces)]
 

@@ -1,0 +1,736 @@
+{
+  "format": "sq17-lean-cover-comparison-v1",
+  "inputs": {
+    "lean": [
+      "sq17-lean/Sq17Lean/ExactCellCoverData.lean",
+      "sq17-lean/Sq17Lean/RepresentativeCaseData.lean"
+    ],
+    "record": [
+      "packing/devtools/check_n17_capacity_one_cover.py",
+      "packing/campaign/explorations/X048-session-168-pilots/certified-sub-patterns.yaml"
+    ]
+  },
+  "lean_cell_names": [
+    "corner-SW",
+    "corner-SE",
+    "corner-NW",
+    "corner-NE",
+    "side-S0",
+    "side-N0",
+    "side-W0",
+    "side-E0",
+    "side-S1",
+    "side-N1",
+    "side-W1",
+    "side-E1",
+    "side-S2",
+    "side-N2",
+    "side-W2",
+    "side-E2",
+    "interior-SW",
+    "interior-NW",
+    "interior-W",
+    "interior-S",
+    "interior-N",
+    "interior-E",
+    "interior-SE",
+    "interior-NE"
+  ],
+  "cells": {
+    "ring-3-voronoi-8": {
+      "cells": 24,
+      "lean_cells_equal_vertex_for_vertex": 0,
+      "same_order": false,
+      "same_names": false
+    },
+    "ring-3-voronoi-8-tabbed": {
+      "cells": 24,
+      "lean_cells_equal_vertex_for_vertex": 0,
+      "same_order": false,
+      "same_names": false
+    },
+    "ring-3-voronoi-8-tabbed-unique": {
+      "cells": 24,
+      "lean_cells_equal_vertex_for_vertex": 24,
+      "same_order": true,
+      "same_names": true
+    },
+    "ring-3-grid-9-tabbed": {
+      "cells": 25,
+      "lean_cells_equal_vertex_for_vertex": 0,
+      "same_order": false,
+      "same_names": false
+    }
+  },
+  "patterns": {
+    "lean_patterns": 35,
+    "admitted_entries": 72,
+    "equal_to_an_admitted_entry": 32,
+    "strictly_inside_an_admitted_entry_only": 3,
+    "neither": [],
+    "equal_ones_by_admitting_record": {
+      "docs/project/reviews/review-2026-10-02-n17-branch-and-bound-certifier.md": 1,
+      "docs/project/reviews/review-2026-10-02-n17-w7-closure.md": 1,
+      "packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-250-h267-n17-standing-verifier-admissions.md": 1,
+      "packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-251-h267-n17-overnight-flag-certification.md": 8,
+      "packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-254-h267-n17-second-tranche-flags.md": 8,
+      "packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-256-h267-n17-third-tranche-flags.md": 2,
+      "packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-317-h341-n17-issue-472-kernel-admission.md": 11
+    },
+    "rows": [
+      {
+        "pattern": 0,
+        "occupied": 6,
+        "cells": [
+          "interior-SW",
+          "interior-NW",
+          "interior-W",
+          "interior-S",
+          "interior-N",
+          "interior-SE"
+        ],
+        "equal_to_admitted": [
+          "A"
+        ],
+        "strictly_inside_admitted": []
+      },
+      {
+        "pattern": 1,
+        "occupied": 7,
+        "cells": [
+          "corner-SW",
+          "side-N0",
+          "side-W0",
+          "side-W1",
+          "side-W2",
+          "interior-SW",
+          "interior-W"
+        ],
+        "equal_to_admitted": [
+          "W7"
+        ],
+        "strictly_inside_admitted": []
+      },
+      {
+        "pattern": 2,
+        "occupied": 6,
+        "cells": [
+          "side-S1",
+          "side-W1",
+          "interior-NW",
+          "interior-W",
+          "interior-S",
+          "interior-SE"
+        ],
+        "equal_to_admitted": [
+          "s182-bc427-t6"
+        ],
+        "strictly_inside_admitted": []
+      },
+      {
+        "pattern": 3,
+        "occupied": 7,
+        "cells": [
+          "corner-NW",
+          "side-N0",
+          "side-W2",
+          "interior-SW",
+          "interior-NW",
+          "interior-W",
+          "interior-S"
+        ],
+        "equal_to_admitted": [
+          "s182-k3"
+        ],
+        "strictly_inside_admitted": []
+      },
+      {
+        "pattern": 4,
+        "occupied": 8,
+        "cells": [
+          "corner-NW",
+          "side-S0",
+          "side-W0",
+          "side-W1",
+          "side-W2",
+          "interior-SW",
+          "interior-NW",
+          "interior-S"
+        ],
+        "equal_to_admitted": [
+          "s182-bc425-t7"
+        ],
+        "strictly_inside_admitted": []
+      },
+      {
+        "pattern": 5,
+        "occupied": 8,
+        "cells": [
+          "corner-SW",
+          "side-N0",
+          "side-W0",
+          "side-W1",
+          "side-W2",
+          "interior-NW",
+          "interior-W",
+          "interior-S"
+        ],
+        "equal_to_admitted": [
+          "s182-bc425-t1"
+        ],
+        "strictly_inside_admitted": []
+      },
+      {
+        "pattern": 6,
+        "occupied": 7,
+        "cells": [
+          "side-S0",
+          "side-W0",
+          "side-S1",
+          "interior-SW",
+          "interior-NW",
+          "interior-W",
+          "interior-S"
+        ],
+        "equal_to_admitted": [
+          "s182-k6"
+        ],
+        "strictly_inside_admitted": []
+      },
+      {
+        "pattern": 7,
+        "occupied": 8,
+        "cells": [
+          "corner-SW",
+          "corner-NW",
+          "side-S0",
+          "side-W0",
+          "side-W1",
+          "side-W2",
+          "interior-SW",
+          "interior-NW"
+        ],
+        "equal_to_admitted": [
+          "w125-k-m214101"
+        ],
+        "strictly_inside_admitted": []
+      },
+      {
+        "pattern": 8,
+        "occupied": 7,
+        "cells": [
+          "corner-SW",
+          "side-W0",
+          "side-W1",
+          "side-W2",
+          "interior-SW",
+          "interior-NW",
+          "interior-W"
+        ],
+        "equal_to_admitted": [
+          "s182-k8"
+        ],
+        "strictly_inside_admitted": []
+      },
+      {
+        "pattern": 9,
+        "occupied": 7,
+        "cells": [
+          "side-E1",
+          "interior-SW",
+          "interior-NW",
+          "interior-W",
+          "interior-S",
+          "interior-N",
+          "interior-E"
+        ],
+        "equal_to_admitted": [
+          "s182-bc427-t4"
+        ],
+        "strictly_inside_admitted": []
+      },
+      {
+        "pattern": 10,
+        "occupied": 8,
+        "cells": [
+          "corner-SW",
+          "side-W0",
+          "side-W1",
+          "side-W2",
+          "interior-SW",
+          "interior-NW",
+          "interior-S",
+          "interior-N"
+        ],
+        "equal_to_admitted": [
+          "s182-bc425-t9"
+        ],
+        "strictly_inside_admitted": []
+      },
+      {
+        "pattern": 11,
+        "occupied": 8,
+        "cells": [
+          "side-N0",
+          "side-S1",
+          "side-W2",
+          "interior-NW",
+          "interior-W",
+          "interior-S",
+          "interior-N",
+          "interior-SE"
+        ],
+        "equal_to_admitted": [
+          "w125-k-m6177056"
+        ],
+        "strictly_inside_admitted": []
+      },
+      {
+        "pattern": 12,
+        "occupied": 7,
+        "cells": [
+          "side-S0",
+          "side-S1",
+          "side-W2",
+          "interior-SW",
+          "interior-NW",
+          "interior-W",
+          "interior-S"
+        ],
+        "equal_to_admitted": [
+          "s182-k4"
+        ],
+        "strictly_inside_admitted": []
+      },
+      {
+        "pattern": 13,
+        "occupied": 14,
+        "cells": [
+          "corner-NW",
+          "corner-NE",
+          "side-S0",
+          "side-N0",
+          "side-W0",
+          "side-E0",
+          "side-S1",
+          "side-N1",
+          "side-W1",
+          "side-S2",
+          "side-N2",
+          "side-W2",
+          "side-E2",
+          "interior-SW"
+        ],
+        "equal_to_admitted": [],
+        "strictly_inside_admitted": [
+          "s182-bc428-u14"
+        ]
+      },
+      {
+        "pattern": 14,
+        "occupied": 10,
+        "cells": [
+          "corner-NW",
+          "corner-NE",
+          "side-S0",
+          "side-N0",
+          "side-W0",
+          "side-N1",
+          "side-W1",
+          "side-N2",
+          "side-E2",
+          "interior-NW"
+        ],
+        "equal_to_admitted": [],
+        "strictly_inside_admitted": [
+          "s182-bc428-u14",
+          "s182-bc428-u16",
+          "s182-bc428-u20",
+          "s182-bc428-u29",
+          "s182-bc428-u3",
+          "s182-bc428-u7",
+          "s182-m3063677-sw9",
+          "s182-m5500414"
+        ]
+      },
+      {
+        "pattern": 15,
+        "occupied": 8,
+        "cells": [
+          "corner-NW",
+          "corner-NE",
+          "side-N0",
+          "side-N1",
+          "side-N2",
+          "side-W2",
+          "side-E2",
+          "interior-NW"
+        ],
+        "equal_to_admitted": [],
+        "strictly_inside_admitted": [
+          "s182-bc428-u14",
+          "s182-bc428-u19",
+          "s182-bc428-u20",
+          "s182-bc428-u21",
+          "s182-bc428-u23",
+          "s182-bc428-u3",
+          "s182-bc428-u30",
+          "s182-bc428-u8",
+          "s182-m2601983",
+          "s182-m2784767-sw9",
+          "s182-m2817021-sw9",
+          "s182-m2878207-sw9",
+          "s182-m5683195"
+        ]
+      },
+      {
+        "pattern": 16,
+        "occupied": 9,
+        "cells": [
+          "corner-SW",
+          "side-W0",
+          "side-W1",
+          "interior-SW",
+          "interior-NW",
+          "interior-S",
+          "interior-N",
+          "interior-SE",
+          "interior-NE"
+        ],
+        "equal_to_admitted": [
+          "w125-k-m14353473"
+        ],
+        "strictly_inside_admitted": []
+      },
+      {
+        "pattern": 17,
+        "occupied": 8,
+        "cells": [
+          "corner-NW",
+          "side-N0",
+          "side-W0",
+          "side-S1",
+          "interior-SW",
+          "interior-NW",
+          "interior-W",
+          "interior-S"
+        ],
+        "equal_to_admitted": [
+          "w125-k-m983396"
+        ],
+        "strictly_inside_admitted": []
+      },
+      {
+        "pattern": 18,
+        "occupied": 9,
+        "cells": [
+          "corner-SW",
+          "side-S0",
+          "side-N0",
+          "side-W0",
+          "side-W1",
+          "side-W2",
+          "interior-SW",
+          "interior-NW",
+          "interior-S"
+        ],
+        "equal_to_admitted": [
+          "SW9"
+        ],
+        "strictly_inside_admitted": [
+          "s182-bc428-u28",
+          "s182-m5500414"
+        ]
+      },
+      {
+        "pattern": 19,
+        "occupied": 8,
+        "cells": [
+          "side-S1",
+          "side-N1",
+          "side-E1",
+          "interior-SW",
+          "interior-NW",
+          "interior-S",
+          "interior-N",
+          "interior-E"
+        ],
+        "equal_to_admitted": [
+          "w125-k-m3869440"
+        ],
+        "strictly_inside_admitted": []
+      },
+      {
+        "pattern": 20,
+        "occupied": 7,
+        "cells": [
+          "side-S0",
+          "side-W0",
+          "side-W1",
+          "side-W2",
+          "interior-SW",
+          "interior-NW",
+          "interior-W"
+        ],
+        "equal_to_admitted": [
+          "s182-k9"
+        ],
+        "strictly_inside_admitted": []
+      },
+      {
+        "pattern": 21,
+        "occupied": 7,
+        "cells": [
+          "side-S0",
+          "side-N0",
+          "side-S1",
+          "interior-SW",
+          "interior-NW",
+          "interior-W",
+          "interior-S"
+        ],
+        "equal_to_admitted": [
+          "s182-k1"
+        ],
+        "strictly_inside_admitted": []
+      },
+      {
+        "pattern": 22,
+        "occupied": 9,
+        "cells": [
+          "side-W0",
+          "side-S1",
+          "side-W1",
+          "side-S2",
+          "interior-SW",
+          "interior-NW",
+          "interior-W",
+          "interior-N",
+          "interior-SE"
+        ],
+        "equal_to_admitted": [
+          "w125-k-m5707072"
+        ],
+        "strictly_inside_admitted": []
+      },
+      {
+        "pattern": 23,
+        "occupied": 8,
+        "cells": [
+          "corner-SE",
+          "side-E0",
+          "side-S1",
+          "side-S2",
+          "interior-NW",
+          "interior-W",
+          "interior-S",
+          "interior-SE"
+        ],
+        "equal_to_admitted": [
+          "s182-bc425-t4"
+        ],
+        "strictly_inside_admitted": []
+      },
+      {
+        "pattern": 24,
+        "occupied": 8,
+        "cells": [
+          "corner-NW",
+          "side-W0",
+          "side-W1",
+          "side-W2",
+          "interior-SW",
+          "interior-NW",
+          "interior-S",
+          "interior-E"
+        ],
+        "equal_to_admitted": [
+          "s182-bc425-t8"
+        ],
+        "strictly_inside_admitted": []
+      },
+      {
+        "pattern": 25,
+        "occupied": 7,
+        "cells": [
+          "side-S0",
+          "side-N0",
+          "side-W2",
+          "interior-SW",
+          "interior-NW",
+          "interior-W",
+          "interior-S"
+        ],
+        "equal_to_admitted": [
+          "s182-k5"
+        ],
+        "strictly_inside_admitted": []
+      },
+      {
+        "pattern": 26,
+        "occupied": 8,
+        "cells": [
+          "side-N0",
+          "side-W2",
+          "interior-SW",
+          "interior-NW",
+          "interior-W",
+          "interior-N",
+          "interior-E",
+          "interior-SE"
+        ],
+        "equal_to_admitted": [
+          "w125-k-m7815200"
+        ],
+        "strictly_inside_admitted": []
+      },
+      {
+        "pattern": 27,
+        "occupied": 8,
+        "cells": [
+          "corner-SW",
+          "side-S0",
+          "side-S1",
+          "side-S2",
+          "interior-NW",
+          "interior-W",
+          "interior-S",
+          "interior-SE"
+        ],
+        "equal_to_admitted": [
+          "s182-bc425-t2"
+        ],
+        "strictly_inside_admitted": []
+      },
+      {
+        "pattern": 28,
+        "occupied": 8,
+        "cells": [
+          "corner-NW",
+          "side-S1",
+          "side-W1",
+          "side-W2",
+          "interior-SW",
+          "interior-NW",
+          "interior-W",
+          "interior-S"
+        ],
+        "equal_to_admitted": [
+          "w125-k-m1000708"
+        ],
+        "strictly_inside_admitted": []
+      },
+      {
+        "pattern": 29,
+        "occupied": 8,
+        "cells": [
+          "corner-NW",
+          "side-N0",
+          "side-W0",
+          "side-W1",
+          "side-W2",
+          "interior-NW",
+          "interior-W",
+          "interior-S"
+        ],
+        "equal_to_admitted": [
+          "w125-k-m935012"
+        ],
+        "strictly_inside_admitted": []
+      },
+      {
+        "pattern": 30,
+        "occupied": 7,
+        "cells": [
+          "side-N0",
+          "side-W1",
+          "side-W2",
+          "interior-SW",
+          "interior-NW",
+          "interior-W",
+          "interior-S"
+        ],
+        "equal_to_admitted": [
+          "s182-k7"
+        ],
+        "strictly_inside_admitted": []
+      },
+      {
+        "pattern": 31,
+        "occupied": 8,
+        "cells": [
+          "side-N0",
+          "side-W1",
+          "side-W2",
+          "interior-NW",
+          "interior-W",
+          "interior-S",
+          "interior-N",
+          "interior-SE"
+        ],
+        "equal_to_admitted": [
+          "s182-bc425-t10"
+        ],
+        "strictly_inside_admitted": []
+      },
+      {
+        "pattern": 32,
+        "occupied": 9,
+        "cells": [
+          "side-W0",
+          "side-S1",
+          "side-N1",
+          "interior-SW",
+          "interior-NW",
+          "interior-W",
+          "interior-N",
+          "interior-E",
+          "interior-SE"
+        ],
+        "equal_to_admitted": [
+          "w125-k-m7799616"
+        ],
+        "strictly_inside_admitted": [
+          "s182-m7844815"
+        ]
+      },
+      {
+        "pattern": 33,
+        "occupied": 9,
+        "cells": [
+          "corner-SW",
+          "side-S0",
+          "side-W0",
+          "side-S1",
+          "side-S2",
+          "interior-SW",
+          "interior-NW",
+          "interior-W",
+          "interior-SE"
+        ],
+        "equal_to_admitted": [
+          "w125-k-m4657489"
+        ],
+        "strictly_inside_admitted": []
+      },
+      {
+        "pattern": 34,
+        "occupied": 8,
+        "cells": [
+          "side-N0",
+          "side-S1",
+          "side-N1",
+          "interior-NW",
+          "interior-W",
+          "interior-S",
+          "interior-N",
+          "interior-SE"
+        ],
+        "equal_to_admitted": [
+          "s182-bc425-t5"
+        ],
+        "strictly_inside_admitted": []
+      }
+    ]
+  }
+}

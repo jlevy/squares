@@ -2,15 +2,15 @@
 
 # Defect log
 
-519 defects recorded across the packing toolchain.
+521 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](packing/defects.yaml).
 
 ## The short version
 
-- **108 soundness defects** — the system asserting something false about the mathematics. 84 of them pointed in the *flattering* direction, which is the dangerous one: the error looks like success.
+- **109 soundness defects** — the system asserting something false about the mathematics. 85 of them pointed in the *flattering* direction, which is the dangerous one: the error looks like success.
 - **121 fixes left no regression check behind.** That list is the best predictor of what comes back; recorded recurrences are D-017 repeats D-010, D-029 repeats D-023, D-062 repeats D-042, D-065 repeats D-028, D-066 repeats D-042, D-072 repeats D-035, D-075 repeats D-059, D-076 repeats D-034, D-077 repeats D-028, D-078 repeats D-041, D-079 repeats D-063, D-082 repeats D-057, D-085 repeats D-058, D-094 repeats D-084, D-098 repeats D-083, D-104 repeats D-052, D-113 repeats D-100, D-115 repeats D-097, D-117 repeats D-104, D-138 repeats D-006, D-140 repeats D-093, D-148 repeats D-091, D-150 repeats D-086, D-155 repeats D-059, D-160 repeats D-145, D-162 repeats D-030, D-163 repeats D-004, D-164 repeats D-014, D-165 repeats D-132, D-166 repeats D-044, D-168 repeats D-132, D-169 repeats D-014, D-170 repeats D-039, D-171 repeats D-164, D-172 repeats D-029, D-180 repeats D-086, D-181 repeats D-034, D-187 repeats D-185, D-188 repeats D-018, D-189 repeats D-181, D-196 repeats D-160, D-198 repeats D-187, D-201 repeats D-198, D-204 repeats D-201, D-217 repeats D-202, D-229 repeats D-028, D-242 repeats D-232, D-247 repeats D-242, D-255 repeats D-198, D-259 repeats D-027, D-263 repeats D-258, D-267 repeats D-255, D-274 repeats D-268, D-279 repeats D-271, D-281 repeats D-267, D-282 repeats D-264, D-312 repeats D-309, D-313 repeats D-259, D-315 repeats D-295, D-318 repeats D-308, D-321 repeats D-317, D-323 repeats D-022, D-324 repeats D-320, D-325 repeats D-319, D-326 repeats D-305, D-327 repeats D-301, D-334 repeats D-028, D-337 repeats D-107, D-339 repeats D-155, D-340 repeats D-163, D-386 repeats D-358, D-395 repeats D-358, D-397 repeats D-358, D-400 repeats D-398, D-422 repeats D-371, D-424 repeats D-144, D-427 repeats D-413, D-451 repeats D-442, D-452 repeats D-442, D-454 repeats D-442, D-458 repeats D-443, D-470 repeats D-458, D-471 repeats D-459, D-488 repeats D-432, D-502 repeats D-488, D-509 repeats D-490, D-517 repeats D-453.
-- **72 are still open** (outstanding or contained), every one carrying a bead.
+- **73 are still open** (outstanding or contained), every one carrying a bead.
 
 ## What caught them
 
@@ -18,14 +18,14 @@ Source of truth is [`defects.yaml`](packing/defects.yaml).
 | --- | ---: | --- |
 | `pre_registered_rule` | 3 | a rule written down before the measurement, e.g. “beating the record means you have a bug” |
 | `control_cell` | 29 | a cell of the sweep whose answer is known in advance |
-| `review` | 305 | a human or agent reading the work against a checklist |
+| `review` | 306 | a human or agent reading the work against a checklist |
 | `anomaly` | 16 | a result that made no sense, chased down |
-| `inspection` | 66 | reading the code or the design with intent |
+| `inspection` | 67 | reading the code or the design with intent |
 | `drift_check` | 17 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
 | `gate` | 82 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 82 of 519, and none of the 108 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
+The line worth reading twice: **the automated gate caught 82 of 521, and none of the 109 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
 
 ## Where they arise
 
@@ -33,18 +33,18 @@ The line worth reading twice: **the automated gate caught 82 of 519, and none of
 | --- | ---: |
 | engine | 11 |
 | quench | 23 |
-| verifier | 14 |
+| verifier | 15 |
 | record | 161 |
-| tooling | 194 |
+| tooling | 195 |
 | docs | 116 |
 
 ## By kind
 
 | Class | Count |
 | --- | ---: |
-| soundness | 108 |
+| soundness | 109 |
 | validity | 128 |
-| bookkeeping | 194 |
+| bookkeeping | 195 |
 | robustness | 70 |
 | performance | 19 |
 
@@ -253,6 +253,7 @@ This is the actionable list.
 | D-490 | contained | medium | Two renders of the explainer disagreed by two bytes and the check could not say where | `think-ptit` |
 | D-502 | outstanding | high | Costly partial pre-push selections kept pytest serial until the command timed out | `think-1i1x` |
 | D-509 | contained | medium | One math glyph's baseline is decided per page load, so drawing each load twice does not contain it | `think-6dle` |
+| D-521 | outstanding | medium | Numerical witness receipts record tolerance-blurred values as the minimum clearance and pair gap | `think-jtot` |
 
 ## Every defect
 
@@ -277,13 +278,13 @@ This is the actionable list.
 | [D-017](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-006-lp-quench-n5-n10-n11.md) | 2026-08-23 | record | bookkeeping |  | `review` | medium | fixed | A three-cell sweep recorded as a one-cell round, again |
 | [D-018](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-010-angle-kink-n11.md) | 2026-08-23 | record | bookkeeping |  | `drift_check` | high | fixed | One round, two hypotheses, one verdict |
 | [D-019](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-009-quench-bracket-n11.md) | 2026-08-23 | quench | robustness | conservative | `anomaly` | medium | fixed | The bracketing quench does not always terminate |
-| [D-020](docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md) | 2026-08-23 | quench | soundness | flattering | `inspection` | high | fixed | The quench's answer depends on a tuning parameter, and basin identity would inherit it |
+| [D-020](docs/project/specs/paused/plan-2026-08-22-minimal-packing-toolkit.md) | 2026-08-23 | quench | soundness | flattering | `inspection` | high | fixed | The quench's answer depends on a tuning parameter, and basin identity would inherit it |
 | [D-021](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-007-quench-bracket-n5.md) | 2026-08-23 | quench | soundness | flattering | `inspection` | medium | contained | Floating LP refinement has a noise floor, and eight rounds sit on it |
 | [D-022](packing/devtools/controls.yaml) | 2026-08-23 | record | bookkeeping |  | `control_cell` | low | fixed | A numeric field and its display duplicate could disagree in silence |
 | [D-023](packing/devtools/run_negative_controls.py) | 2026-08-23 | tooling | bookkeeping |  | `review` | medium | fixed | Verification was done in throwaway snippets and left nothing behind |
 | [D-024](packing/frontier/strategy-catalogue.schema.yaml) | 2026-08-23 | record | bookkeeping |  | `gate` | low | fixed | A strategy's enum and its prose said opposite things |
-| [D-025](docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md) | 2026-08-23 | record | bookkeeping |  | `review` | medium | fixed | Two bead trees claimed the same spec phase after the plan was rebuilt |
-| [D-026](docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md) | 2026-08-23 | record | bookkeeping |  | `review` | medium | fixed | The plan spec's checklist contradicted the state the spec was cited as authority for |
+| [D-025](docs/project/specs/paused/plan-2026-08-22-minimal-packing-toolkit.md) | 2026-08-23 | record | bookkeeping |  | `review` | medium | fixed | Two bead trees claimed the same spec phase after the plan was rebuilt |
+| [D-026](docs/project/specs/paused/plan-2026-08-22-minimal-packing-toolkit.md) | 2026-08-23 | record | bookkeeping |  | `review` | medium | fixed | The plan spec's checklist contradicted the state the spec was cited as authority for |
 | [D-027](packing/devtools/check_generated_markdown.py) | 2026-08-23 | tooling | bookkeeping |  | `review` | medium | fixed | A generated view was left reflowable by the Markdown auto-formatter |
 | [D-028](packing/devtools/render_defects.py) | 2026-08-23 | record | bookkeeping |  | `drift_check` | low | fixed | A defect-log headline stayed asserted after it stopped being true |
 | [D-029](docs/project/research/research-2026-08-23-search-philosophy-and-landscape-cartography.md) | 2026-08-23 | quench | validity | conservative | `review` | medium | fixed | A single fixed-angle LP solve was called "the quench", and retracted a correct finding |
@@ -333,10 +334,10 @@ This is the actionable list.
 | [D-073](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md) | 2026-08-23 | record | bookkeeping |  | `review` | medium | fixed | Agent-session filename and id agreement was not checked |
 | [D-074](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md) | 2026-08-23 | tooling | bookkeeping |  | `review` | medium | fixed | The provenance regression tested receipt parsing but not artifact-field mapping |
 | [D-075](docs/project/reviews/review-2026-08-23-response-to-pr15-review.md) | 2026-08-23 | docs | soundness | flattering | `review` | high | fixed | The PR 16 response claimed a portable oracle from an aggregate byte mismatch |
-| [D-076](docs/project/handoff-2026-08-23-basin-identity-and-two-reviews.md) | 2026-08-23 | docs | soundness | neutral | `review` | high | fixed | Six distinct n=5 endpoint rows were treated as proof that identity was too fine |
-| [D-077](docs/project/handoff-2026-08-23-basin-identity-and-two-reviews.md) | 2026-08-23 | record | bookkeeping |  | `review` | high | fixed | The PR 16 handoff presented stale state and priorities as a current dependency queue |
+| [D-076](docs/project/handoffs/handoff-2026-08-23-basin-identity-and-two-reviews.md) | 2026-08-23 | docs | soundness | neutral | `review` | high | fixed | Six distinct n=5 endpoint rows were treated as proof that identity was too fine |
+| [D-077](docs/project/handoffs/handoff-2026-08-23-basin-identity-and-two-reviews.md) | 2026-08-23 | record | bookkeeping |  | `review` | high | fixed | The PR 16 handoff presented stale state and priorities as a current dependency queue |
 | [D-078](docs/project/reviews/review-2026-08-23-response-to-pr15-review.md) | 2026-08-23 | docs | soundness | flattering | `review` | medium | fixed | The n=5 rank correction still named equality independence as the sufficient condition |
-| [D-079](docs/project/handoff-2026-08-23-basin-identity-and-two-reviews.md) | 2026-08-23 | docs | soundness | flattering | `review` | medium | fixed | The handoff retained an invalid implication from record rigidity to non-record behavior |
+| [D-079](docs/project/handoffs/handoff-2026-08-23-basin-identity-and-two-reviews.md) | 2026-08-23 | docs | soundness | flattering | `review` | medium | fixed | The handoff retained an invalid implication from record rigidity to non-record behavior |
 | [D-080](packing/campaign/hypotheses/H-004-neighbor-transfer-seeding.md) | 2026-08-24 | docs | validity | flattering | `review` | high | fixed | The original neighbor-transfer criterion was satisfied by the cold-start grid |
 | [D-081](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md) | 2026-08-24 | tooling | validity | flattering | `review` | high | outstanding | Runner preflight treats any nonempty queue as enough unattended work |
 | [D-082](SYNOPSIS.md) | 2026-08-24 | docs | validity | conservative | `review` | high | fixed | The synopsis again generalized one n=17 regime to oblique-search blindness |
@@ -777,6 +778,8 @@ This is the actionable list.
 | [D-517](packing/devtools/check_nagamochi_bounds.py) | 2026-10-04 | tooling | soundness | flattering | `review` | low | fixed | Borrowed lower bounds were rounded to nearest, and the checker's two-sided tolerance passed a floor rounded up |
 | [D-518](docs/project/reviews/review-2026-10-02-nagamochi-lemma1-karakus.md) | 2026-10-04 | tooling | validity | flattering | `review` | medium | fixed | The Lemma 1 checker's Karakuş ordering tested only k^2 <= N, and the evidence register called it an exact check |
 | [D-519](docs/project/postmortems/postmortem-2026-10-05-orphaned-catalogue-intake.md) | 2026-10-05 | record | bookkeeping | conservative | `inspection` | medium | fixed | Three Kingbird counts held as pending catalogue intake named no owning bead, and the record trailed the catalogue for five days |
+| [D-520](packing/tests/test_gap_ranking.py) | 2026-10-12 | tooling | bookkeeping | conservative | `inspection` | medium | fixed | The open-gap ranking filtered on the reported status, so a case reported closed but open in the verified lane left the table |
+| [D-521](docs/project/reviews/review-2026-10-13-verification-gaps.md) | 2026-10-13 | verifier | soundness | flattering | `review` | medium | outstanding | Numerical witness receipts record tolerance-blurred values as the minimum clearance and pair gap |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

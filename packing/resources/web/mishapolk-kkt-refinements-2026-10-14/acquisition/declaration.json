@@ -1,0 +1,76 @@
+{
+  "format": "external-source-declaration-v1",
+  "id": "mishapolk-kkt-refinements-2026-10-14",
+  "source_url": "https://github.com/Mishapolk/square-packing-records",
+  "source_ref": "main",
+  "source_commit": "70a033f0ecfa9e643cd5fb5dbac190cb7f4ffb94",
+  "retrieved_at_utc": "2026-10-14T22:31Z",
+  "git_scope": "Blobless clone checked out at 70a033f, the branch head when retrieved and seven commits past issue #593's pin 46f638c; the six commits between change only ISSUE_REGISTRATION.md. 70a033f changes certificates/census.json, the 24 certificates certificates/n<n>.cert at n = 129, 153, 154, 155, 156, 175, 176, 181, 204, 207, 209, 232, 264, 267, 270, 271, 272, 302, 303, 304, 305, 306, 307, 308, and the 14 copies certificates/square-<n>.cert at n = 129, 153, 154, 156, 175, 176, 204, 207, 232, 264, 271, 302, 303, 304, each byte-identical to n<n>.cert at the pin. The scope is those 39 files and the README, unchanged since 46f638c; under derived-only custody none is copied. No source program was executed.",
+  "archived_dir": "source",
+  "license": "No licence file in the pinned tree, and its README states no reuse terms. Derived-only custody under the known-best retention policy: no upstream byte is retained, every file is bound here by SHA-256 and at the pin by its Git blob, and no redistribution permission or licence determination is asserted. The commit names no credit or AI assistance; census.json credits 14 of the 24 counts to Mykhailo Polkovskyi and 10 to 'Antigravity'. On issue #593 (comment of 2026-10-14T15:38Z) the author asks that all entries be credited to Mykhailo Polkovskyi (GitHub: @Mishapolk); the issue discloses Gemini assistance.",
+  "claims": [
+    "Commit 70a033f (2026-10-14T16:11:31Z), 'Refine 14 contested certificates to ultra-precision KKT endpoints: strictly defeat PingYou PR #574, Couzo #583, #586, and Ostashev #575', replaces 24 of #593's 73 certificates. census.json states each exact side_fraction, its binary64 side_float, the baseline #593 compared with and the certificate's SHA-256, and names the source of each.",
+    "census.json credits n = 129, 153, 154, 156, 175, 176, 204, 207, 232, 264, 271, 302, 303, 304 to 'Mykhailo Polkovskyi (ultra-precision KKT dual-verified optimum)' and n = 155, 181, 209, 267, 270, 272, 305, 306, 307, 308 to 'Antigravity (high-precision dual-verified contact optimum)'.",
+    "No issue reports the commit; the record reads it as a publication in a watched repository, reported at its first commit (the owner, 2026-10-14). The README, unchanged since 46f638c, claims dual exact rational verification with Evan Daniel's verify_cert.py and verify_cert2.py and no global optimality."
+  ],
+  "scope": [
+    "README.md",
+    "certificates/census.json",
+    "certificates/n129.cert",
+    "certificates/n153.cert",
+    "certificates/n154.cert",
+    "certificates/n155.cert",
+    "certificates/n156.cert",
+    "certificates/n175.cert",
+    "certificates/n176.cert",
+    "certificates/n181.cert",
+    "certificates/n204.cert",
+    "certificates/n207.cert",
+    "certificates/n209.cert",
+    "certificates/n232.cert",
+    "certificates/n264.cert",
+    "certificates/n267.cert",
+    "certificates/n270.cert",
+    "certificates/n271.cert",
+    "certificates/n272.cert",
+    "certificates/n302.cert",
+    "certificates/n303.cert",
+    "certificates/n304.cert",
+    "certificates/n305.cert",
+    "certificates/n306.cert",
+    "certificates/n307.cert",
+    "certificates/n308.cert",
+    "certificates/square-129.cert",
+    "certificates/square-153.cert",
+    "certificates/square-154.cert",
+    "certificates/square-156.cert",
+    "certificates/square-175.cert",
+    "certificates/square-176.cert",
+    "certificates/square-204.cert",
+    "certificates/square-207.cert",
+    "certificates/square-232.cert",
+    "certificates/square-264.cert",
+    "certificates/square-271.cert",
+    "certificates/square-302.cert",
+    "certificates/square-303.cert",
+    "certificates/square-304.cert"
+  ],
+  "pinned_only": [
+    {
+      "match": "certificates/n*.cert",
+      "reason": "An exact rational certificate in Evan Daniel's format: comment lines, the header n S, then x y t per square with centres in [0, S]^2 and rational half-angle tangents t. No licence in the tree, so derived-only custody: an importer reads it from a checkout at this pin and must match this digest."
+    },
+    {
+      "match": "certificates/square-*.cert",
+      "reason": "A copy of certificates/n<n>.cert at the same pin, byte for byte, under the name issue #573 used. No licence: pinned by digest only."
+    },
+    {
+      "match": "certificates/census.json",
+      "reason": "The source's census: each count's exact side_fraction, binary64 side_float, baseline, the certificate's SHA-256 and its credited source. The importer admits each certificate at its side_fraction. No licence: pinned by digest only."
+    },
+    {
+      "match": "README.md",
+      "reason": "The repository README, unchanged since 46f638c: the release's record table and its verification claims. Author prose; no licence; pinned by digest only."
+    }
+  ]
+}

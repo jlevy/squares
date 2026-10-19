@@ -1,0 +1,6 @@
+20acd7d6befa9a3c8f65b88c5d4087f8b996dde940f35b0e982087dac8ec73ef  ./s12/search/exact/README.md
+8f84653c0c74612433c264cb028801d27dd5fbb2ab80ad914d53723d687b553c  ./s12/search/exact/batch/README.md
+78a51ab3322e55a90b1b79a60028bef66715d828b5b01b34da2b0385b4ec0ced  ./s12/search/exact/batch/summarize.py
+5d166f13304ecf57ba83efe5e2eb5fee7299cc6471ea374c923f27274bfe1387  ./s12/search/exact/batch/verify_all.sh
+3299ca0c0f02f7c221deeea69a9a85b5a90db6bc410b20727fdff211c92bed52  ./s12/search/exact/verify_cert.py
+55140a35d95d9eaa64a14c3b044641efbcda94ebfc3b12b7dec9fa52692e31d3  ./s12/search/exact/verify_cert2.py

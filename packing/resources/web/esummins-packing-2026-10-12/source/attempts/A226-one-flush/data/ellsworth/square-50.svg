@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Found     by Thomas Schadt   on December 13, 2025 (s = 7.57143688) using a computer program he wrote, starting from randomness.
+        Source: Private communication from Thomas Schadt to David Ellsworth, December 13, 2025.
+    Optimized by David Ellsworth on December 14, 2025.
+        Found to resemble the s(104) found by David Ellsworth on December 29, 2024 which did not set a record, but like this, has a rational side length due to the Pythagorean triple {3,4,5}.
+
+    Solve[{RotationTransform[a][{s - 2, s - 2} - {2, 2}][[2]] == 5,
+           RotationTransform[a][{s - 3, 2} - {2, s - 4}][[1]] == 3}, {s, a}]
+(*
+    s = 53/7
+    a = ArcTan[3/4]
+*)
+-->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" [
+    <!ENTITY s   "7.571428571428571428571428571428571428571">
+    <!ENTITY a   "36.86989764584402129685561255909341065759">
+    <!ENTITY r1  ".5428571428571428571428571428571428571429"> <!-- 19/35 -->  <!-- 1-(s-7)*Cos[a] -->
+    <!ENTITY tr  "translate(0.2  1)">
+    <!ENTITY trh "translate(0.3  1)">
+    <!ENTITY tr1 "translate(-1    )">
+    <!ENTITY tr2 "translate(-1 0.2)">
+]>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 &s; &s;" style="fill:#B2B2B2; stroke:black; stroke-width:0.003" id="svg">
+    <script xlink:href="svgDisp.js"/>
+    <defs>
+        <rect width="&s;" height="&s;" id="outer"/>
+        <rect width="1"   height="1"   id="one"/>
+        <g id="strip">
+            <use xlink:href="#one"/>
+            <use xlink:href="#one" transform="&tr2;"/>
+            <use xlink:href="#one" transform="&tr2;&tr1;"/>
+        </g>
+    </defs>
+    <use xlink:href="#outer" style="fill:white; stroke:none"/>
+    <g id="side1">
+        <path style="stroke:none" d="M3,0 V1 H2 V2 H1 V3 H0 V0"/>
+        <path style=  "fill:none" d="M0,1 H3 V0
+                                     M0,2 H2 V0
+                                     M0,3 H1 V0"/>
+        <g transform="translate(0 &s;) scale(1 -1)">
+            <path style="stroke:none" d="M4,0 V1 H3 V2 H2 V4 H0 V0"/>
+            <path style=  "fill:none" d="M1,0 V4
+                                         M2,0 V4 H0
+                                         M0,3    H2
+                                         M3,0 V2 H0
+                                         M4,0 V1 H0"/>
+        </g>
+        <g transform="translate(3 1) rotate(-&a;) translate(-&r1;)">
+            <use xlink:href="#strip"/>
+            <use xlink:href="#strip" transform="&tr;"/>
+        </g>
+    </g>
+    <g transform="translate(3 1) rotate(-&a;) translate(-&r1;) &tr;&trh;">
+        <use xlink:href="#one"/>
+        <use xlink:href="#one" transform="&tr2;"/>
+        <use xlink:href="#one" transform="&tr2;&tr1;"/>
+        <use xlink:href="#one" transform="&tr2;&tr1;&tr2;"/>
+    </g>
+    <use xlink:href="#side1" transform="translate(&s; &s;) scale(-1)"/>
+    <use xlink:href="#outer" style="fill:none"/>
+</svg>

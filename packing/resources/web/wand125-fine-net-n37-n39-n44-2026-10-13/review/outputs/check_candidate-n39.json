@@ -1,0 +1,58 @@
+{
+ "candidate_sha256": "03eef5c3eee9255e54aaaf5247487b356d7667b6c40eec116862b60ed7819a85",
+ "n": 39,
+ "L": "533/80",
+ "B": "4999/5000",
+ "keys": [
+  "B",
+  "L",
+  "n",
+  "points",
+  "proof_net",
+  "rectangles",
+  "total_mass"
+ ],
+ "proof_net": {
+  "step": "1/5002",
+  "last": 2072
+ },
+ "points_empty": true,
+ "scaling_factor": null,
+ "scaling_source_digest_is_own": "absent",
+ "rows": 687,
+ "positive_rows": 687,
+ "expanded_images": 5496,
+ "mass": "3899999/100000",
+ "mass_equals_total_mass": true,
+ "mass_equals_n_minus_gap": true,
+ "semantic_digest": "3b464f3f124b529c28f32a14b8087564f2163a956264373381ade988c0849cfc",
+ "net": {
+  "step": "1/5002",
+  "count": "2073",
+  "endpoint": "1036/2501",
+  "endpoint_check": "367/6255001",
+  "rotated_side_upper": "25009997/25010000",
+  "side_margin": "3/25010000",
+  "per_edge_margin": "3/50020000",
+  "tangent_form": "500400014977/500400075000"
+ },
+ "premises": {
+  "a_positive_step_and_count": true,
+  "b_core_fits": true,
+  "c_reaches_past_pi_over_4": true,
+  "d_last_tangent_at_most_half": true,
+  "e_tangent_form": true,
+  "f_last_bin_holds_an_orientation": true
+ },
+ "all_premises_hold": true,
+ "side_squared_at_least_twice_core_squared": true,
+ "densest_row_density": 122947.26568453736,
+ "densest_image_density": 15368.40821056717,
+ "eight_times_densest_image_at_most_2_32": true,
+ "densest_image_at_most_2_96": true,
+ "least_rectangle_side": 0.001000101070758,
+ "least_distance_to_a_wall": 0.27284555296622165,
+ "per_bin_domain_least_width": 5.248286450558668,
+ "per_bin_domain_least_width_at": 2072,
+ "per_bin_domain_nonempty_everywhere": true
+}

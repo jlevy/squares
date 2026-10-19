@@ -314,13 +314,6 @@ DECLARED_SUPPRESSIONS = Counter(
             ),
         ): 1,
         (
-            "packing/devtools/templates/paper-publication.css",
-            (
-                "/* biome-ignore lint/style/noDescendingSpecificity: credit emphasis "
-                "inherits the shared bold role after the broader support-text rules. */"
-            ),
-        ): 1,
-        (
             "packing/src/sqpack/motion_lab/assets/motion-lab.css",
             (
                 "/* biome-ignore lint/complexity/noImportantStyles: `*` has the lowest "
@@ -356,6 +349,20 @@ DECLARED_SUPPRESSIONS = Counter(
                 "// biome-ignore lint/nursery/useDomNodeTextContent: this probe compares "
                 "rendered text with raw DOM text, so their different visibility semantics "
                 "are the subject of the test."
+            ),
+        ): 1,
+        (
+            "packing/devtools/probes/check_site_rendering/report.js",
+            (
+                "// biome-ignore lint/nursery/useDomNodeTextContent: the gate measures "
+                "rendered readable text, excluding hidden content."
+            ),
+        ): 1,
+        (
+            "packing/devtools/probes/check_site_rendering/report.js",
+            (
+                "// biome-ignore lint/nursery/useDomNodeTextContent: a hidden heading "
+                "must not pass the reading contract."
             ),
         ): 1,
     }

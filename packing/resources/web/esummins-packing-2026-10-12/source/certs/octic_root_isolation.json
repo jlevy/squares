@@ -1,0 +1,48 @@
+{
+  "format": "sturm-root-isolation-v1",
+  "description": "Root-isolation certificate for the Trump octic (A03; Ellsworth 2023): p(x) = x^8 - 20x^7 + 178x^6 - 842x^5 + 1923x^4 - 496x^3 - 6754x^2 + 12420x - 6865. Discharges checklist S3 / A62 finding F7: s-hat is THE unique root of p in [3877083/1000000, 3877084/1000000], and it is the SECOND (largest) of exactly two real roots of p.",
+  "polynomial": {
+    "variable": "x",
+    "coefficients_low_to_high": ["-6865", "12420", "-6754", "-496", "1923", "-842", "178", "-20", "1"]
+  },
+  "interval": {
+    "a": "3877083/1000000",
+    "b": "3877084/1000000"
+  },
+  "claims": {
+    "p_at_a": "-89907663116138493411101284007125861208828959/1000000000000000000000000000000000000000000000000",
+    "sign_p_at_a": -1,
+    "p_at_b": "953256008086642294103936146505293023361/15258789062500000000000000000000000000000000",
+    "sign_p_at_b": 1,
+    "total_real_roots": 2,
+    "real_roots_below_a": 1,
+    "real_roots_in_ab": 1,
+    "root_index_in_ab": 2,
+    "all_real_root_isolating_intervals": [["-2", "-1"], ["3877083/1000000", "3877084/1000000"]],
+    "taylor_shift_at_a_positive_from_degree_1": true
+  },
+  "taylor_shift_at_a": {
+    "description": "Coefficients d_k of p(a + t) = sum d_k t^k, a = 3877083/1000000. d_0 = p(a) < 0; d_1..d_8 are ALL POSITIVE, so p is strictly increasing on [a, +inf) by pure algebra (for 0 <= u < v: p(a+v) - p(a+u) = sum_{k>=1} d_k (v^k - u^k) > 0). This is the fact the Lean discharge of shat_spec uses (no calculus, no Sturm chain needed inside Lean).",
+    "coefficients_low_to_high": [
+      "-89907663116138493411101284007125861208828959/1000000000000000000000000000000000000000000000000",
+      "19047448354002451638684536547366689841780627/125000000000000000000000000000000000000000",
+      "165507240204079365683276620593074875583/250000000000000000000000000000000000",
+      "140531576756507493150247963879501/125000000000000000000000000000",
+      "75650550884558810753780247/100000000000000000000000",
+      "31128529333060215509/125000000000000000",
+      "14024503122223/250000000000",
+      "1377083/125000",
+      "1"
+    ]
+  },
+  "verification": {
+    "checker": "certs/verify_sturm.py (exact rational arithmetic, Python stdlib fractions only; recomputes the Sturm chain, all sign-variation counts, the Taylor shift, and every claim above from the polynomial alone)",
+    "lean": "lean/PackingCertMathlib/PackingCertMathlib/TopLevel.lean: shat is a definition (Classical choice on the unique root) and shat_spec a THEOREM as of A63; the Lean proof uses IVT for existence and the all-positive Taylor shift for uniqueness",
+    "method": "Sturm's theorem: number of distinct real roots of p in (x1, x2] = V(x1) - V(x2) where V(x) = sign variations of the Sturm chain p_0 = p, p_1 = p', p_{i+1} = -rem(p_{i-1}, p_i); counts at -inf/+inf from leading coefficients. p is squarefree iff the chain terminates at a nonzero constant (it does: gcd(p, p') is constant)."
+  },
+  "provenance": {
+    "attempt": "A63-hole-closure",
+    "date": "2026-09-01",
+    "discharges": ["checklist S3", "A62 finding F7", "TopLevel.lean axiom shat_spec", "depgraph node A.S3"]
+  }
+}

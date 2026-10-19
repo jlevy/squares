@@ -1,0 +1,58 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-10-16T20:28Z",
+  "git_scope": "The head of jlevy/squares#622, fetched by commit id from this repository's pull/622/head ref into a sparse checkout; the four files the pull request adds over its base 73d254272da7168f6d4c2e341c009849b5e63b46 were checked out from the pinned commit and each is bound to its Git blob here. The scope is exactly those four files: one HostedData manifest and one submission packet of README.md and two JSON records. The geometry and the replay material are not in Git: the manifest pins one release asset of BuddenPing/square-packing-certificates by size and SHA-256, which the packet README records as fetched. Under derived-only custody no upstream byte is copied. No source program was executed.",
+  "sources": [
+    {
+      "id": "buddenping-squares-pr622",
+      "source_url": "https://github.com/BuddenPing/squares",
+      "source_ref": "pingyou/n29-certificate-20261015",
+      "source_commit": "31155575ce1e6b461f77bfc9f3e201adf101115b",
+      "committed_utc": "2026-10-15T18:43:33Z",
+      "git_tree": "0828044cbd2830dde5d8d717de3a890cf027b103",
+      "archived_path": "packing/resources/web/pingyou-pr622-certificate-2026-10-15/source",
+      "subtree_manifest": "packing/resources/web/pingyou-pr622-certificate-2026-10-15/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "packing/hosted/pingyou-n29-certificate-2026-10-15.yaml",
+        "packing/resources/web/pingyou-n29-certificate-2026-10-15"
+      ],
+      "subtree_file_count": 4,
+      "subtree_total_bytes": 35719,
+      "retained_file_count": 0,
+      "retained_total_bytes": 0,
+      "compressed": [],
+      "pinned_only": [
+        {
+          "path": "packing/hosted/pingyou-n29-certificate-2026-10-15.yaml",
+          "bytes": 569,
+          "sha256": "78dbc541f2dea49d7e54c2c1015e7ebc77e42db3dcba6835611acacb74745129",
+          "reason": "A HostedData manifest binding one release of BuddenPing/square-packing-certificates: its tag and the asset's name, size and SHA-256, the only binding of the geometry outside Git. No licence for the submission: pinned by digest only; derive reads it from a checkout at this pin and admits the asset only where it has the manifest's size and digest."
+        },
+        {
+          "path": "packing/resources/web/pingyou-n29-certificate-2026-10-15/README.md",
+          "bytes": 3196,
+          "sha256": "fe69d96c1ee535e1fd5bec722a5ab0bcf1cb4c90447a352c6a95255ad5945ee5",
+          "reason": "Author prose for the submission: its claim, custody, replay and credit, quoted in this packet's README. No licence for the submission: pinned by digest only."
+        },
+        {
+          "path": "packing/resources/web/pingyou-n29-certificate-2026-10-15/claims.json",
+          "bytes": 6856,
+          "sha256": "e36ab2b5af9bb24760222848cd880256e0cafebe58967e338ddfa1de51a05b19",
+          "reason": "The submission's claim record: the exact side, the certificate and native-witness digests, the superseded PR #574 certificate's digest and the credits. Read here for the claim map and not believed; the side that enters a decision is read from the certificate. No licence: pinned by digest only."
+        },
+        {
+          "path": "packing/resources/web/pingyou-n29-certificate-2026-10-15/comparison.json",
+          "bytes": 25098,
+          "sha256": "ea92f1f4dd488ddf67b5a3e7fe6df34d34e92f2958da531a7eca379328c0cd3d",
+          "reason": "The submission's exact comparison of the certificate with three named baselines. Read and not believed. No licence: pinned by digest only."
+        }
+      ],
+      "license": "The pull request adds its files under packing/resources/, which the repository's LICENSE names as third-party material not covered by any of its grants, and the files state no licence of their own. The release asset carries licenses/PingYou-MIT.txt, which its NOTICE.txt says covers only PingYou Ltd's new code and documentation and does not relicense the original construction, imported data or notices; the release repository BuddenPing/square-packing-certificates has no licence file. Derived-only custody under the known-best retention policy, as for the author's PR #574: no upstream byte is retained, every scoped file is bound here by SHA-256 and at the pin by its Git blob, the release asset by size and SHA-256, and no redistribution permission or licence determination is asserted. The submission asks that PingYou Ltd be credited with the certificate refinement and that Thomas Schadt and David Ellsworth keep the construction, with Evan Daniel credited for source tools and data.",
+      "claims": [
+        "Pull request #622 (BuddenPing, PingYou Ltd), title 'data: submit a tighter exact N29 packing certificate', opened 2026-10-15T18:43:54Z, head 3115557 at 2026-10-15T18:43:33Z, three commits over the base 73d2542. It submits one complete rational certificate at n = 29 in the release data/pingyou-n29-certificate-2026-10-15-v1 (asset pingyou-n29-certificate-2026-10-15.zip, 430,075 bytes): n29-certificate/certificates/n029.cert.json, SHA-256 a01428c51875679fbe78c11a803742b8d99f44b916a660ab6801bb0fcf76951b, with 29 squares at rational centres and half-angle tangents and an exact rational side.",
+        "The submission states that the certificate is a refinement of the known N29 construction of Thomas Schadt, improved by David Ellsworth: an 800-digit realization of Evan Daniel's contact decoder followed by an exact common-centre scaling and a bounding-square crop, with no new nominal construction and no optimality claim, and that it is 7.32e-90 below its own PR #574 certificate at 29, 1.57e-36 below this project's exact N29 bound and 5.93e-20 below Evan Daniel's batch certificate.",
+        "The submission states that its own exact separating-axis and polygon-clipping routines accept all 29 squares and 406 pairs and refuse duplicate-square and outside-container controls, and that this repository's two exact verifiers accept its native corners Witness/v2. These are author reports."
+      ]
+    }
+  ]
+}

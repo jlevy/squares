@@ -1,0 +1,64 @@
+{
+  "schema": "n17-mechanical-result-peer/v1",
+  "checked_utc": "2026-10-08T01:01:51.567585+00:00",
+  "experiment": 299,
+  "audit_scope": "retained JSON equality, artifact byte identities, counts, flags and orchestration only; no geometry recomputation",
+  "payload_equal": true,
+  "fresh_verification_passed": true,
+  "descriptor_exact": true,
+  "input_role_sha256": {
+    "collective_descriptor": "ed4da271ee30acec47dbe6f25a9d3b59e9fa274e45c18acfb6bf4f44a02b227c",
+    "collective_certificate": "4c7a1050ce09f22bf735a76d17d47aaca433576d06a390c448c5fc4b57a9d250",
+    "collective_replay": "3242d00f9f2c88e8c6fd6ee8d6a9455b918389f3e93a8773449fcf39421d70d6"
+  },
+  "compressed_inputs_verified": {
+    "packing/campaign/retained/session-184-n17-numeric-cap-readiness/node-687cfe6d24f0e01bc0e39af0978b554787b7ffef24eb378b1e29c246e463df82.json.gz": "f2a11e787dc62ae2652734d01c4fbe90fcfc3e85d66aa52b74fd8ff52a02e2f2",
+    "packing/campaign/retained/session-184-n17-numeric-cap-readiness/seed-375e78a4dead8856b6d2e88b6118a2e0aeadb9671d4c4b79c46c2d790fcaa48d.json.gz": "d10a38b312375a21e7aec2ef77726eaa9ae3ea9d8381de9d3e979921877005f4"
+  },
+  "source_at_launch": "06168fc33778c270b08f289ef9fb65cf1460bdf8",
+  "certificate_sha256": "9916910a713ba7fad4bfdfab7af315c2ada1f21a292d27083d432da9b7d19ca6",
+  "replay_sha256": "abc88d281b79b8f18ae23f36e101f6380f7e44eca2feb2e7d12c40f73ae882f1",
+  "status": "same25_regional_rows_restricted",
+  "criterion_met": true,
+  "parent_steps": 16,
+  "original_rows": 1056,
+  "foreign_rows": 992,
+  "phase_wall_seconds": [
+    21.149027790990658,
+    15.545606999949086
+  ],
+  "supervision": {
+    "status": "COMPLETED",
+    "reason": "normal_exit",
+    "returncode": 0,
+    "wall_seconds": 36.98480550001841,
+    "cleanup_complete": true,
+    "maximum_sampled_current_rss_bytes_by_pid": {
+      "27774": 28524544,
+      "27778": 373784576,
+      "32865": 386039808
+    },
+    "max_memory_mib_per_process": 4096.0,
+    "max_seconds": 120.0
+  },
+  "all_global_parent_admission_flags_false": true,
+  "requested_row_count": 25,
+  "uniform_quad_count": 64,
+  "uniform_core_vertices": 4,
+  "half_width": "1/8388608",
+  "regional_domains_reconstructed": false,
+  "collective_work": {
+    "generated_clipped_vertices": 0,
+    "minkowski_vertex_products": 139776,
+    "point_in_union_facet_products": 306400,
+    "region_cache_hits": 5888,
+    "region_cache_misses": 672,
+    "sweep_prospective_edge_pairs": 1082023,
+    "sweep_rows": 38,
+    "vertex_negative_rows": 954
+  },
+  "artifact_paths": {
+    "certificate": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-299-strict-core-regional-transfer/certificate.json",
+    "replay": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-299-strict-core-regional-transfer/replay.json"
+  }
+}

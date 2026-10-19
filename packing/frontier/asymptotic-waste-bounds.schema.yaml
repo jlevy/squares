@@ -3,9 +3,15 @@ $id: https://github.com/jlevy/squares/packing/frontier/asymptotic-waste-bounds.s
 title: AsymptoticWasteBounds
 description: >
   Bounds on W(x), the wasted area when a square of side x is packed with unit
-  squares. Upper bounds are a chain of successive improvements; the lower-bound
-  side holds Roth and Vaughan's bound, which vanishes as the side approaches an
-  integer, and Ryu's 2026 preprint bound for exactly that limit.
+  squares. Upper bounds are a chain of successive improvements valid for every
+  large x; the lower-bound side holds Roth and Vaughan's bound, which vanishes as
+  the side approaches an integer, and Ryu's 2026 preprint bounds for exactly that
+  limit. A third list, deficiency_upper_bounds, holds upper bounds for that limit
+  alone: on c*(k) = max{c : s(k^2 - c) = k}, which is lim_{x -> k^-} W(x) - 1 at an
+  integer side k. Roth and Vaughan's obstruction keeps every bound on W(x) for all
+  large x at exponent 1/2 or more, because of the half-integers, but it vanishes as
+  x -> k^-, so a bound there may have a smaller exponent and is not a bound on W(x)
+  at a generic x.
 type: object
 additionalProperties: false
 required: [quantity, definition, open_problem, upper_bounds, lower_bounds, relevance_to_small_n]
@@ -29,7 +35,9 @@ properties:
           maximum: 1
           description: >
             Decimal value of the exponent. Bounded below by 0.5 because
-            Roth-Vaughan rule out any exponent under 1/2.
+            Roth-Vaughan rule out any exponent under 1/2 for a bound valid at
+            every large x. A bound for integer sides approached from below only
+            belongs in deficiency_upper_bounds, which has no such floor.
         authors: {type: array, minItems: 1, items: {type: string}}
         year: {type: [integer, "null"]}
         source_key: {type: string}
@@ -67,6 +75,45 @@ properties:
             The explicit constant, or an explicit statement that the source gives
             none. Never omitted, because a phantom constant is exactly the error
             this dataset exists to prevent.
+        corollary: {type: string}
+        complementary_case: {type: string}
+        note: {type: string}
+  deficiency_upper_bounds:
+    type: array
+    description: >
+      Upper bounds on c*(k) = max{c : s(k^2 - c) = k} = lim_{x -> k^-} W(x) - 1 at
+      integer sides k, each shown by an explicit packing of k^2 - c unit squares in
+      a square of side less than k. The fields are those of lower_bounds, with
+      side_condition required, because every entry holds only just below an
+      integer and only in its stated range of k.
+    items:
+      type: object
+      additionalProperties: false
+      required: [bound, side_condition, authors, year, source_key, confidence, constant]
+      properties:
+        bound: {type: string, minLength: 1}
+        exponent:
+          type: number
+          exclusiveMinimum: 0
+          maximum: 1
+          description: >
+            Decimal value of the exponent of k, when the bound has one. No floor
+            at 1/2: Roth and Vaughan's obstruction does not reach x -> k^-.
+        side_condition: {type: string, minLength: 1}
+        authors: {type: array, minItems: 1, items: {type: string}}
+        year: {type: [integer, "null"]}
+        source_key: {type: string}
+        local: {type: [string, "null"]}
+        retrieved: {type: [boolean, "null"]}
+        confidence:
+          enum: [verified_against_primary, reconstructed, secondary]
+          description: As for lower_bounds; `reconstructed` must carry a note.
+        kernel: {type: string}
+        constant:
+          type: string
+          description: >
+            The explicit constant and threshold, or an explicit statement that
+            the source gives none.
         corollary: {type: string}
         complementary_case: {type: string}
         note: {type: string}

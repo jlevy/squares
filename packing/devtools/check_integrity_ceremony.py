@@ -44,8 +44,11 @@ must not cost bookkeeping; the check prints how many files sit below their basel
 and otherwise refuses to raise one.
 
 Files are the repository's tracked and untracked-but-unignored `*.py`, as git lists them,
-less the literature archive (other authors' bytes, as the lint floor excludes it), the
-vendored submodules, the skill mirror and test files. A test that asserts a receipt names
+less the literature archive (other authors' bytes, as the lint floor excludes it),
+`vendor/` (other authors' code too: the submodules, and the copy of Evan Daniel's
+regularizer that `devtools.check_vendored_evand` holds to its manifest and, with
+`--upstream`, to its upstream pin), the skill
+mirror and test files. A test that asserts a receipt names
 the digest of what ran checks a record; it refuses nothing at run time, so it can charge
 no recomputation, and a scan of source text cannot tell it from a tool's refusal. A byte
 prescan skips a file that mentions no

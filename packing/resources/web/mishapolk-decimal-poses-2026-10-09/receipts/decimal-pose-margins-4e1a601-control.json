@@ -1,0 +1,76 @@
+{
+  "format": "decimal-pose-margins-v1",
+  "source": "https://github.com/Mishapolk/square-packing-records at 4e1a6019fe6de6c9ff5b90b93826dcb34899b7de, the superseded square-199 and square-263 (control)",
+  "working_digits": 60,
+  "target": {"rule":"ceiling","places":12},
+  "files": [
+    {
+      "path": "certificates/square-199.txt",
+      "sha256": "5fbcf14b4d86dcaf10a28e8cb45d6c317031dac31b4df1c60fed8619edb24cdb",
+      "bytes": 16006,
+      "n": 199,
+      "printed_side": "14.6175721735928068",
+      "target_side": "14.617572173593",
+      "dilation": "36543930433982500/36543930433982017",
+      "dilation_minus_one": "1.3216970E-14",
+      "near_pairs": 829,
+      "at_printed_side": {
+        "side": "36543930433982017/2500000000000000",
+        "verdict": "not-a-packing",
+        "least_wall_clearance": ["0","0"],
+        "least_wall_square": 38,
+        "walls_outside": 0,
+        "walls_undecided": 0,
+        "worst_walls": [],
+        "pairs_overlapping": 49,
+        "pairs_undecided": 0,
+        "pairs_touching": 352,
+        "deepest_overlaps": [{"squares":[15,35],"separation":["-5.0127245E-10","-5.0127244E-10"]},{"squares":[24,35],"separation":["-2.3122402E-12","-2.3122401E-12"]},{"squares":[151,179],"separation":["-7.9439627E-16","-7.9439626E-16"]},{"squares":[137,179],"separation":["-5.1149360E-16","-5.1149359E-16"]},{"squares":[54,99],"separation":["-4.3644852E-16","-4.3644851E-16"]},{"squares":[151,175],"separation":["-3.9949551E-16","-3.9949550E-16"]},{"squares":[115,145],"separation":["-3.5900075E-16","-3.5900074E-16"]},{"squares":[174,199],"separation":["-3.5465663E-16","-3.5465662E-16"]},{"squares":[7,199],"separation":["-2.9952467E-16","-2.9952466E-16"]},{"squares":[16,194],"separation":["-2.9443973E-16","-2.9443972E-16"]}],
+        "least_pair_separation": ["-5.0127245E-10","-5.0127244E-10"],
+        "least_pair": [15,35]
+      },
+      "at_target_side": {"side":"14617572173593/1000000000000","verdict":"not-a-packing","least_wall_clearance":["6.6084845E-15","6.6084846E-15"],"least_wall_square":38,"walls_outside":0,"walls_undecided":0,"worst_walls":[],"pairs_overlapping":2,"pairs_undecided":0,"pairs_touching":0,"deepest_overlaps":[{"squares":[15,35],"separation":["-5.0125916E-10","-5.0125915E-10"]},{"squares":[24,35],"separation":["-2.2989953E-12","-2.2989952E-12"]}],"least_pair_separation":["-5.0125916E-10","-5.0125915E-10"],"least_pair":[15,35]}
+    },
+    {
+      "path": "certificates/square-263.txt",
+      "sha256": "7ad9b9f96280a4433e016dc675d1dfe3379ebff5e48301ed2ac7002381f803b5",
+      "bytes": 21155,
+      "n": 263,
+      "printed_side": "16.7404192957438376",
+      "target_side": "16.740419295744",
+      "dilation": "20925524119680000/20925524119679797",
+      "dilation_minus_one": "9.7010713E-15",
+      "near_pairs": 1058,
+      "at_printed_side": {
+        "side": "20925524119679797/1250000000000000",
+        "verdict": "not-a-packing",
+        "least_wall_clearance": ["0","0"],
+        "least_wall_square": 1,
+        "walls_outside": 0,
+        "walls_undecided": 0,
+        "worst_walls": [],
+        "pairs_overlapping": 130,
+        "pairs_undecided": 0,
+        "pairs_touching": 279,
+        "deepest_overlaps": [{"squares":[173,246],"separation":["-0.0000013611608","-0.0000013611607"]},{"squares":[192,246],"separation":["-0.0000013611608","-0.0000013611607"]},{"squares":[172,191],"separation":["-0.0000013256086","-0.0000013256085"]},{"squares":[170,188],"separation":["-0.0000011633460","-0.0000011633459"]},{"squares":[188,189],"separation":["-0.0000011530804","-0.0000011530803"]},{"squares":[245,262],"separation":["-9.4998531E-7","-9.4998530E-7"]},{"squares":[227,245],"separation":["-9.4998531E-7","-9.4998530E-7"]},{"squares":[226,245],"separation":["-9.4998509E-7","-9.4998508E-7"]},{"squares":[243,244],"separation":["-9.1787524E-7","-9.1787523E-7"]},{"squares":[243,260],"separation":["-9.1787519E-7","-9.1787518E-7"]}],
+        "least_pair_separation": ["-0.0000013611608","-0.0000013611607"],
+        "least_pair": [173,246]
+      },
+      "at_target_side": {
+        "side": "32696131437/1953125000",
+        "verdict": "not-a-packing",
+        "least_wall_clearance": ["4.8505356E-15","4.8505357E-15"],
+        "least_wall_square": 1,
+        "walls_outside": 0,
+        "walls_undecided": 0,
+        "worst_walls": [],
+        "pairs_overlapping": 23,
+        "pairs_undecided": 0,
+        "pairs_touching": 0,
+        "deepest_overlaps": [{"squares":[173,246],"separation":["-0.0000013611608","-0.0000013611607"]},{"squares":[192,246],"separation":["-0.0000013611608","-0.0000013611607"]},{"squares":[172,191],"separation":["-0.0000013256086","-0.0000013256085"]},{"squares":[170,188],"separation":["-0.0000011633460","-0.0000011633459"]},{"squares":[188,189],"separation":["-0.0000011530804","-0.0000011530803"]},{"squares":[245,262],"separation":["-9.4998530E-7","-9.4998529E-7"]},{"squares":[227,245],"separation":["-9.4998530E-7","-9.4998529E-7"]},{"squares":[226,245],"separation":["-9.4998508E-7","-9.4998507E-7"]},{"squares":[243,244],"separation":["-9.1787523E-7","-9.1787522E-7"]},{"squares":[243,260],"separation":["-9.1787518E-7","-9.1787517E-7"]}],
+        "least_pair_separation": ["-0.0000013611608","-0.0000013611607"],
+        "least_pair": [173,246]
+      }
+    }
+  ]
+}

@@ -828,7 +828,7 @@ const SQUARES_WORKBENCH_CORE = workbenchBundle.core;
 
   // ---------------------------------------------------------------- badges (the poster's own marks)
   // A badge is the atlas's 19-unit rounded box (rx 4.5, stroke 1.2) with its glyph, scaled by the
-  // panel. The star is the atlas's polygon; the approximately-equal sign is KaTeX_Main's U+2248
+  // panel. The approximately-equal sign is KaTeX_Main's U+2248
   // outline (the latin subset of Source Sans 3 has none), extracted at build time and drawn as a
   // path centred on its own ink, as the slideshow candidate draws it.
   const { buildFacts } = workbenchBundle.factsView.createFactsView(document, DATA);
@@ -1179,6 +1179,7 @@ const SQUARES_WORKBENCH_CORE = workbenchBundle.core;
     // number lands exactly where the still one would have been.
     numeralStatic.textContent = "";
     numeralStatic.appendChild(numeralA.cloneNode(true));
+    numeralStatic.querySelector(".numeral")?.removeAttribute("title");
     // Which slots read the same for both n. Compared as markup: the two layers are built by the
     // same function into the same absolute slots, so equal markup is an equal picture.
     const slotsA = factsA.children;

@@ -1,0 +1,11 @@
+{
+  "format": "upper-bound-beyond-horizon-claims-v1",
+  "issue": "https://github.com/jlevy/squares/issues/484",
+  "source": "https://github.com/TheSnakeFang/squarepack-certs",
+  "revision": "c75bebd87933416d3e1c7aba35ec733ea8ac7da0",
+  "horizon": 324,
+  "results": [
+    {"n": 343, "offered_side": "18.994903529220497", "exact_side": "789017423383549575129979982295456201/41538374868278621028243970633760768", "ceiling": "18.9949035292204970"},
+    {"n": 344, "offered_side": "18.995489275430816", "exact_side": "262204097424407923560664994905454377606094204426897481135606818230728643/13803492693581127593573619627880932674597656005283617050019749892718592", "ceiling": "18.9954892754308151"}
+  ]
+}

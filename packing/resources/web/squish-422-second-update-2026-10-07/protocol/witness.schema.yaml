@@ -1,0 +1,230 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: packing.squares:Witness/v2
+title: Square-packing witness
+description: >-
+  Interchange for complete square geometry. Decimal depth is recorded but never
+  treated as formal assurance; exact verification is a separate operation.
+type: object
+additionalProperties: false
+required:
+  - id
+  - n
+  - side
+  - square_size
+  - representation
+  - scalar
+  - coordinates
+  - squares
+  - claim
+properties:
+  id: {type: string, pattern: '^W-[a-z0-9][a-z0-9-]*$'}
+  n: {type: integer, minimum: 1}
+  side: {$ref: '#/$defs/scalar'}
+  square_size:
+    const: '1'
+    description: This repository's frontier is for congruent unit squares.
+  representation:
+    enum: [corners, center-angle, center-basis]
+  scalar:
+    type: object
+    additionalProperties: false
+    required: [kind]
+    properties:
+      kind:
+        enum: [decimal, rational, algebraic-number-field, interval-enclosure]
+        description: >-
+          How the coordinates in this file are written down, which decides what can be
+          done with them.
+
+          `decimal` is numerical data at a recorded depth and never upgrades to formal
+          assurance on its own. `rational` and `algebraic-number-field` are exact: a
+          verifier evaluates them with exact predicates and decides every sign, including
+          the zero separations a tight packing has.
+
+          `interval-enclosure` is different in kind from all three and the difference is
+          the point. Each coordinate is an outward-rounded `[lo, hi]` pair enclosing a
+          value nobody has written exactly, so a verifier can prove a strict inequality
+          and can never prove an equality. That is enough for an upper bound and is not
+          enough for an exact one, which is why such a witness records the relaxation
+          that made every constraint strict. Added as a fourth kind rather than a new
+          contract version: no existing file changes meaning, and readers that switch on
+          `kind` already fail closed on one they do not know.
+      minimal_polynomial:
+        type: array
+        minItems: 2
+        items: {type: string, minLength: 1}
+      isolating_interval:
+        type: array
+        minItems: 2
+        maxItems: 2
+        items: {type: string, minLength: 1}
+      enclosure:
+        type: object
+        additionalProperties: false
+        required: [operator, exists, unique, radius, working_precision, relaxation, pose_box]
+        description: >-
+          What produced the enclosures, and how much of the claim rests on each part.
+        properties:
+          operator:
+            enum: [krawczyk, interval-newton]
+            description: The existence-and-uniqueness operator applied to the pose box.
+          exists:
+            type: boolean
+            description: The operator's image lies inside the box, so a root is in it.
+          unique:
+            type: boolean
+            description: >-
+              The image lies in the box's *interior*, so the root is unique. This is the
+              load-bearing verdict: a box holding two roots identifies no pose, and
+              nothing may be promoted from `exists` alone.
+          radius: {type: string, minLength: 1}
+          working_precision: {type: integer, minimum: 1}
+          relaxation:
+            type: string
+            minLength: 1
+            description: >-
+              How far the certified configuration was opened from the one the contact
+              system describes, so that every constraint is a strict inequality. A bound
+              from an unstated relaxation is indistinguishable from a claim about the
+              optimum, and they are different claims.
+          contact_system: {type: string, minLength: 1}
+          pose_box:
+            type: object
+            additionalProperties: false
+            required: [names, lo, hi]
+            properties:
+              names: {type: array, minItems: 1, items: {type: string, minLength: 1}}
+              lo: {type: array, minItems: 1, items: {type: string, minLength: 1}}
+              hi: {type: array, minItems: 1, items: {type: string, minLength: 1}}
+    allOf:
+      - if:
+          properties: {kind: {const: algebraic-number-field}}
+        then:
+          required: [minimal_polynomial, isolating_interval]
+        else:
+          properties:
+            minimal_polynomial: false
+            isolating_interval: false
+      - if:
+          properties: {kind: {const: interval-enclosure}}
+        then:
+          required: [enclosure]
+        else:
+          properties:
+            enclosure: false
+  coordinates:
+    type: object
+    additionalProperties: false
+    required: [origin, axes, angle_unit]
+    properties:
+      origin: {enum: [lower-left, container-center]}
+      axes: {const: x-right-y-up}
+      angle_unit: {enum: [degrees, radians, not-applicable]}
+  squares:
+    type: array
+    minItems: 1
+    items:
+      type: object
+      additionalProperties: false
+      required: [id]
+      properties:
+        id:
+          anyOf:
+            - {type: integer, minimum: 1}
+            - {type: string, minLength: 1}
+        corners:
+          type: array
+          minItems: 4
+          maxItems: 4
+          items: {$ref: '#/$defs/point'}
+        center: {$ref: '#/$defs/point'}
+        angle: {$ref: '#/$defs/scalar'}
+        basis:
+          description: Exact or numerical [cos(theta), sin(theta)].
+          $ref: '#/$defs/point'
+  claim:
+    type: object
+    additionalProperties: false
+    required: [coordinate_provenance, method, limitations]
+    properties:
+      coordinate_provenance:
+        enum: [reported, numerically-checked, verified]
+        description: >-
+          How THE COORDINATES IN THIS RECORD were established, and nothing else.
+          "verified" means they are exact algebraic values this repository can
+          re-derive, "numerically-checked" means they are multiprecision decimals
+          that pass the recorded feasibility check at the stated tolerance, and
+          "reported" means they are carried from a source without an independent
+          check. Each value describes this file's encoding of one construction.
+
+          It is NOT a statement about what is known mathematically for this n.
+          Optimality and the exactness of s(n) live in frontier/n-NNN.md as
+          packing.status and packing.reported_upper_bound.exact_form or
+          .minimal_polynomial. A case can be proved optimal with a closed-form
+          side and still carry "numerically-checked" here, because the
+          construction was retained as decimals: n=5 and n=10 are exactly that,
+          and 20 of the 100 known-best records pair a closed-form frontier side
+          with numerically-checked coordinates. Read this field for provenance of
+          the coordinates, never for the standing of the mathematics.
+
+          Formerly named claim.assurance, which invited exactly that misreading:
+          a renderer once badged n=5, proved optimal with side 2 + sqrt(2)/2, as
+          "numerically verified" because this witness stores decimals.
+      method:
+        enum:
+          - numerical-f64
+          - numerical-multiprecision
+          - interval-certified
+          - exact-algebraic
+      precision:
+        type: object
+        additionalProperties: false
+        required: [rounding]
+        properties:
+          decimal_digits: {type: integer, minimum: 1}
+          binary_bits: {type: integer, minimum: 1}
+          rounding: {type: string, minLength: 1}
+        anyOf:
+          - required: [decimal_digits]
+          - required: [binary_bits]
+      tolerance: {type: string, minLength: 1}
+      limitations: {type: string, minLength: 1}
+  source:
+    type: object
+    additionalProperties: false
+    required: [path]
+    properties:
+      key: {type: string, minLength: 1}
+      path: {type: string, minLength: 1}
+      url: {type: string, minLength: 1}
+      retrieved: {type: string, pattern: '^\d{4}-\d{2}-\d{2}$'}
+      revision:
+        type: string
+        minLength: 1
+        description: >-
+          Optional named or versioned upstream release. Omit it when the retained
+          Git-tracked source already supplies the only required identity; do not add a
+          duplicate content hash.
+      revision_sha256:
+        type: string
+        pattern: '^[0-9a-f]{64}$'
+        description: >-
+          The SHA-256 of the bytes of the file `revision` names, where that file is not
+          retained in this repository: a Kingbird witness read from a third party's
+          parse of the catalogue SVG records the parse's digest, since a revision says
+          where the file was and not which bytes were read.
+  certificate:
+    type: object
+    additionalProperties: true
+$defs:
+  scalar:
+    anyOf:
+      - {type: string, minLength: 1}
+      - type: array
+        minItems: 1
+        items: {type: string, minLength: 1}
+  point:
+    type: array
+    minItems: 2
+    maxItems: 2
+    items: {$ref: '#/$defs/scalar'}

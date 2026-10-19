@@ -1,0 +1,23 @@
+{
+ "certificate": {
+  "seed_sha256": "44087ccf034ad7fb3ffaba40821106165ec720d4394ce8800ce1a7c127d69f31",
+  "node_sha256": "cbbcc8d79f401e78c260a8d328f8b51d9fc519ef938a576b0980193ab44de151"
+ },
+ "mask": [
+  0,
+  1
+ ],
+ "cells": [
+  "a",
+  "b"
+ ],
+ "bins": 3,
+ "closure": null,
+ "closed": false,
+ "counts": {
+  "partner_rows": 3,
+  "seed_points": 0,
+  "seed_rows": 6,
+  "steps": 1
+ }
+}

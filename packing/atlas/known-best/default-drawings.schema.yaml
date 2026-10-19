@@ -1,0 +1,203 @@
+# Each count's default picture and regularization state, `default-drawings.json`.
+#
+# One entry per count the regularized layer draws a view of
+# (`regularized/index.json`): whether the atlas, the site and the posters draw that view
+# by default or the house drawing, and why, under the regularization policy's sections 11
+# and 12 (docs/project/policies/regularization-policy.md). Then one state per count,
+# n = 1..324: what is drawn, its measures, the witness as it identifies itself (its id,
+# its source's key, path and revision, and its side; never a digest of its bytes, OR-16),
+# the runs that decided that witness, and whether the drawing is regularized, regular as
+# published, decided no better, exempt or pending (think-gvke). `devtools.default_drawings
+# --update` writes it; what a JSON Schema cannot say -- that each verdict and state is
+# what the measures give, and that the record covers exactly the index's views and counts
+# -- `devtools.default_drawings --check` holds, by measuring every view and house drawing
+# again, and `--check-state` gates the states, reading only the record and the index.
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: packing.squares:DefaultDrawings/v2
+title: Default pictures of the known-best atlas
+type: object
+additionalProperties: false
+required:
+  - contract
+  - generated_by
+  - policy_document
+  - rule
+  - measured_by
+  - measures
+  - totals
+  - entries
+  - states
+properties:
+  softschema: {type: object}
+  contract: {const: packing.squares:DefaultDrawings/v2}
+  generated_by: {const: python -m devtools.default_drawings --update}
+  policy_document: {const: docs/project/policies/regularization-policy.md}
+  rule:
+    description: Where the policy states the improvement rule the entries are judged by.
+    type: string
+    minLength: 1
+  measured_by: {type: string, minLength: 1}
+  measures:
+    type: array
+    items: {type: string}
+    minItems: 1
+  totals:
+    type: object
+    additionalProperties: false
+    required: [views, regularized, house, states]
+    properties:
+      views: {type: integer, minimum: 0}
+      regularized: {type: integer, minimum: 0}
+      house: {type: integer, minimum: 0}
+      states:
+        type: object
+        additionalProperties: false
+        required: [regularized, regular-as-published, decided-no-better, exempt, pending]
+        properties:
+          regularized: {type: integer, minimum: 0}
+          regular-as-published: {type: integer, minimum: 0}
+          decided-no-better: {type: integer, minimum: 0}
+          exempt: {type: integer, minimum: 0}
+          pending: {type: integer, minimum: 0}
+  entries:
+    type: array
+    items: {$ref: "#/$defs/entry"}
+  states:
+    description: Every count's regularization state, n = 1..324 in order.
+    type: array
+    items: {$ref: "#/$defs/state"}
+$defs:
+  state:
+    type: object
+    additionalProperties: false
+    required: [n, state, drawn, generator, witness, measures, decisions, lapsed, why]
+    properties:
+      n: {type: integer, minimum: 1}
+      state:
+        description: >-
+          regularized: a strong generator's view (Evan Daniel's regularizer, grid-slack)
+          is drawn. regular-as-published: the house drawing has no uneven and no
+          near-axis square. decided-no-better: the strong generators ran on this witness
+          and drew nothing the improvement rule takes. exempt: set aside with a reason
+          and the bead that owns it. pending: none of these; the records tier fails on it
+          unless `default_drawings.PENDING_ALLOWED` names it with its bead.
+        enum: [regularized, regular-as-published, decided-no-better, exempt, pending]
+      drawn:
+        description: The picture drawn by default.
+        enum: [view, house]
+      generator:
+        description: The drawn view's generator; null where the house is drawn.
+        type: [string, "null"]
+      witness:
+        description: >-
+          The witness the state was decided on, as it identifies itself: its id (the
+          count's, the same for every house), its source's key, path and revision (null
+          where the source pins none) and its side, as written.
+          `default_drawings.SETTLED` binds a decision to the source's key, path and
+          revision and to the side, never to a digest of the file (OR-16).
+        type: object
+        additionalProperties: false
+        required: [id, source, path, revision, side]
+        properties:
+          id: {type: string, minLength: 1}
+          source: {type: [string, "null"]}
+          path: {type: [string, "null"]}
+          revision: {type: [string, "null"]}
+          side: {type: string, minLength: 1}
+      measures:
+        description: The drawn picture's measures, as `entries` measure a view's.
+        type: object
+        additionalProperties: {type: [integer, "null"]}
+      decisions:
+        description: >-
+          The tool runs that decided this witness, and what each found: the axis tool's
+          record (run null), a strong generator's view the layer holds, and a SETTLED
+          entry's runs where it was made on this witness.
+        type: array
+        items:
+          type: object
+          additionalProperties: false
+          required: [generator, run, outcome]
+          properties:
+            generator: {type: string, minLength: 1}
+            run: {type: [string, "null"]}
+            outcome: {type: string, minLength: 1}
+      lapsed:
+        description: >-
+          The last strong generator's view of this count that lapsed when its witness
+          changed, as the index's axis record carries it: carried through later houses
+          until a strong view is admitted again, so it may name a view more than one
+          witness back, and kept as history whatever the state. Its witness digest is
+          provenance only. Null where none did.
+        oneOf:
+          - type: "null"
+          - type: object
+            additionalProperties: false
+            required: [generator, run, witness_sha256]
+            properties:
+              generator: {type: string, minLength: 1}
+              run: {type: string, minLength: 1}
+              witness_sha256: {type: string, pattern: '^[0-9a-f]{64}$'}
+      why:
+        description: Why the count is in its state, with the evidence or the bead.
+        type: string
+        minLength: 1
+  entry:
+    type: object
+    additionalProperties: false
+    required:
+      - n
+      - default
+      - reason
+      - generator
+      - view
+      - exact_routes
+      - side
+      - house_exact
+      - better
+      - worse
+      - measures
+    properties:
+      n: {type: integer, minimum: 1}
+      default:
+        description: The picture drawn by default.
+        enum: [regularized, house]
+      reason:
+        description: >-
+          The goals the view is better on, where it is the default; else why the house
+          picture stays ("no gain", "above U, not in the exceptions", a goal it is worse
+          on, or an exact route's refusal).
+        type: string
+        minLength: 1
+      generator: {type: [string, "null"]}
+      view:
+        description: The view's repository path, as the index names it.
+        type: string
+        pattern: ^packing/atlas/known-best/regularized/n-[0-9]{3}-regularized\.yaml\.gz$
+      exact_routes:
+        description: Whether both maintained exact routes accepted the view, as the index records.
+        type: boolean
+      side:
+        type: object
+        additionalProperties: false
+        required: [view_minus_U, named_above_U, against_house]
+        properties:
+          view_minus_U: {type: [string, "null"]}
+          named_above_U: {type: boolean}
+          against_house:
+            description: The view's exact side against the house's, where that is exact.
+            enum: [smaller, same, larger, null]
+      house_exact:
+        description: Whether the house witness is exactly verified.
+        type: boolean
+      better: {type: array, items: {type: string}}
+      worse: {type: array, items: {type: string}}
+      measures:
+        type: object
+        additionalProperties:
+          type: object
+          additionalProperties: false
+          required: [view, house]
+          properties:
+            view: {type: [integer, "null"]}
+            house: {type: [integer, "null"]}

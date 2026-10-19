@@ -1,0 +1,21 @@
+# A241 traction check: k3_02's 20 A100 head-to-head level-1 cover cells, A238's blind run scored 0 DEAD / 20 ALIVE
+k3_02_c0_Y0083
+k3_02_c0_Y0179
+k3_02_c0_Y0721
+k3_02_c0_Y0729
+k3_02_c0_Y0730
+k3_02_c0_Y0731
+k3_02_c0_Y0732
+k3_02_c0_Y0733
+k3_02_c0_Y0778
+k3_02_c0_Y0779
+k3_02_c0_Y1042
+k3_02_c0_Y1050
+k3_02_c0_Y1051
+k3_02_c0_Y1111
+k3_02_c0_Y1119
+k3_02_c0_Y1127
+k3_02_c0_Y1135
+k3_02_c0_Y1139
+k3_02_c0_Y1143
+k3_02_c0_Y1151

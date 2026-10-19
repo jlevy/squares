@@ -1,0 +1,5 @@
+n = 443, W = 7482999937411109045418722358992245596461/340282366920938463463374607431768211456 (= 21.990560384075724201...), H = 7142717570490170581955347751560477385005/340282366920938463463374607431768211456 (= 20.990560384075724201...)
+  min wall clearance  = 2.711e-20  (square #251)
+    left/right walls  = 2.711e-20, bottom/top walls = 2.711e-20
+  min pair separation = 4.314e-20  (squares #402, #423; 1172 close pairs by separating axes, the rest by disc separation)
+  VALID (strict): n unit squares fit in W x H

@@ -1,0 +1,9 @@
+{
+  "schema": "n17-shared-centre-endpoint-context/v1",
+  "corner_descriptor": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-308-n11-corner-cardinality/descriptor.json",
+  "corner_descriptor_sha256": "4920424763803737d3d260ec48d1108718d9e375d3603c1ff26df3b190454c77",
+  "corner_certificate": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-308-n11-corner-cardinality/certificate.json",
+  "corner_certificate_sha256": "0a3b0c258d366a9bc5cd2de7185911466bdcf7842fe64ae5d41dac45ef56f7f0",
+  "corner_replay": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-308-n11-corner-cardinality/replay.json",
+  "corner_replay_sha256": "b2dbaf35ca0314e0293eef3c12707237529474b83a3b986c7a861430dc1e8722"
+}

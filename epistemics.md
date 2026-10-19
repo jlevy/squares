@@ -134,9 +134,12 @@ with the preflight listed among its programs.
 A new `independent-implementation` entry names the record of what its authors read and
 used, its own `independence_record` or a deciding program’s in the registry; a
 clean-room record, one that says the authors never read the producer’s code, is the
-strongest. The 32 such entries recorded before 2 October 2026 without one are exempt by
+strongest. The 30 such entries recorded before 2 October 2026 without one are exempt by
 name in [`devtools/verifier_registry.py`](packing/devtools/verifier_registry.py), a list
-that only shrinks.
+that only shrinks. Since 14 October 2026 the record is also structured
+([The Independence Record](#the-independence-record)), and
+[the ladder](#the-independence-ladder) says what each degree of independence can and
+cannot rule out.
 
 How a result was confirmed is the third attribute beside its rung, and the register
 prints it as the mark after the status: *confirmed, reproduced with the producer’s
@@ -157,6 +160,110 @@ re-implemented. The checker refuses a sentence of a register `claim`, `compositi
 replies are held to it in review
 ([the result-import process, stage 4](packing/campaign/result-import.md#stage-4-validate)),
 because their prose also uses the word for things that are not results.
+
+### The Independence Record
+
+The owner, on 14 October 2026: “I’d like to make sure the validation we do that’s
+independent is documented, and the degree to which it’s independent is also documented.
+Was this the same code, or is this all independently validated with our own code?
+Level of confidence in the confirmation should be a matter of process that we document.”
+So how independent a confirmation is, and how much of the claim it covered, are fields,
+not a sentence in a review.
+
+Every program written here that decides, registered from that date, carries an
+`independence` record in [`verifiers.yaml`](packing/frontier/verifiers.yaml):
+
+| Field | What it records |
+| --- | --- |
+| `read` | What its authors read that bears on what this program decides: `mathematics` (the argument as mathematics, in a paper or this record’s own derivation), `proof-text` (the producer’s written proof), `specification` (of the checker, or of what a certificate means), `certificate-format`, `producer-code` (the producer’s own verification code, its checker or its proof-assistant definitions), `producer-output` (stored outputs or receipts, read to compare) and `earlier-review` (another review of the same result) |
+| `clean_room` | `true` only when the authors never read the producer’s code for what this program decides, and it shares none of that code; a lane that wrote several programs can hold a clean room for one and not another |
+| `shares` | The producer’s components the program reuses, by name; empty when none, and a non-empty list makes the relation `shared-components` |
+| `written_by` | Each person by name, and each AI system by its family (Claude, Codex) with the role, tier and reasoning setting it ran at; the record names the system family, not a model identifier |
+| `overlaps_producer` | Whether that authorship overlaps the producer’s (`none`, `system-family`, `people` or `unknown`), whether the authors worked from a prompt of their own (`separate_prompt`) and in files of their own that copy none of the producer’s code (`separate_code`), and a note naming what is shared |
+
+Every new evidence entry with a `replay` carries an `independence` record with its
+`coverage`: `full`, or a `sample` that `checked` so many `of` so many of a named `unit`,
+as in 6 of 273 chunk runs.
+An independent implementation carries the authorship fields itself where its deciding
+programs do not. `separate_prompt: null` means prompt separation was not recorded.
+The `independence_record` path stays beside it, pointing at the prose: a read log, a
+module statement, or the review that wrote the program.
+
+[`devtools/verifier_registry.py`](packing/devtools/verifier_registry.py) refuses a
+first-party program that decides without the record; a new `independent-implementation`
+entry without the authorship fields on itself or on every deciding program; any new
+replay without coverage; `clean_room` beside `producer-code` read, a shared component,
+or code not kept separate; an independent entry whose deciding program shares
+components; and a sample whose count is zero or is not below its total.
+An entry claiming a clean room must agree with every deciding program that carries a
+record; a shared-components entry must name a shared component.
+Legacy programs, independent entries and replays without coverage are exempt by name in
+fixed lists that only shrink; tests pin their original membership: an exempt one that
+gains the record, or stops being what the rule covers, has to leave its list.
+
+### The Independence Ladder
+
+The relation to the producer’s code is the level.
+The level is derived for each evidence run, since one program can reproduce its producer
+in one run and act independently in another.
+A transcription of the producer’s definitions shares those definitions.
+Each level rules out a kind of error the one below it cannot, and none rules out an
+error in the mathematics or the specification that every implementation follows.
+
+| Level | Relation | What it can rule out | What it cannot rule out |
+| --- | --- | --- | --- |
+| Reproduced with the producer’s code | `same-implementation`, `generator` | That the stored result was never produced, was produced from other inputs than those recorded, or does not reproduce: a lost, corrupted or altered output, or a dependence on the producer’s machine | Any error in the producer’s code: the same code makes the same mistake again |
+| Re-implemented, sharing named components | `shared-components` | Errors in the parts written again | Errors in the shared components (a parser that misreads the certificate, an arithmetic kernel) |
+| Independently re-implemented after reading the producer’s code | `independent-implementation`, `clean_room: false` | Errors of the producer’s implementation that a second one does not copy: an index slip, a dropped case, a rounding error, a check left out | A misreading the authors took from the producer’s code: the same convention, the same decoding, the same omitted case |
+| Independently re-implemented, clean-room | `independent-implementation`, `clean_room: true` | The producer’s reading of the specification as well, since the second reading is made without the first | An error in the mathematics or the specification itself, or in a format both read the same way |
+
+Two attributes stand beside the level, and neither is a level:
+
+- **Coverage.** A run is `full`, or a sample of so many of a named unit.
+  A sample decides the instances it ran and nothing about the others: it can find an
+  error, and it cannot show that the rest has none.
+- **Authoring diversity.** Who wrote the confirming code, and whether that overlaps the
+  producer’s. Two programs written by sessions of one AI system family can share a
+  misreading that neither the level nor the coverage reveals, even with separate prompts
+  and separate code.
+
+A result’s stated confidence follows from the rung, the level, the coverage and the
+diversity, in that order:
+
+1. **The rung** comes from the evidence alone, as the ladders above say.
+   `C3` needs one complete replay of every load-bearing part, at any level; a sample, at
+   any level, sets no rung, and `devtools.check_results` counts no entry whose coverage
+   is a sample. Bound results need evidence of that bound; values need both the lower and
+   upper sides at every count in their scope, taking the weakest derived rung.
+   Full component evidence establishes its component, not the complete bound or value.
+2. **The level** of each part is the furthest from the producer’s code among the
+   complete confirming runs that decide it, and the result takes the part closest to it
+   ([Which Code Confirmed It](#which-code-confirmed-it)). A sample at a higher level is
+   stated beside the part, never as its level.
+3. **Coverage** is stated for every part that only samples have reached: *sampled, 6 of
+   273 chunk runs, independently re-implemented*. A sample is never called confirmed.
+4. **Diversity** is stated after the level wherever the authorship overlaps the
+   producer’s: *independently re-implemented after reading the producer’s code, by a
+   Claude agent, a system family the producer also used*.
+
+So two results at the same rung can carry different confidence, and the record says
+which: `C3` reproduced with the producer’s code, beside an independent sample of one
+step, is not `C3` independently re-implemented in full.
+
+### Every Run’s Code Is Kept
+
+Any review or lane that runs code on a result keeps that code in the repository and
+registers it, or states, in the review or in the README that keeps the code, that the
+run decides nothing.
+Kept means in the result’s packet, or in `devtools` when it is a tool, with a README
+that says what each program does, what it read, how to run it and what it printed.
+Registered means a program in [`verifiers.yaml`](packing/frontier/verifiers.yaml) with
+its `independence` record, and, for each thing a run decides or samples, an evidence
+entry with its coverage, cited where it derives no rung it does not support: a sample,
+or a run that decides one part, is cited by the case record and not by the result.
+A program kept but cited by no evidence entry says so in its README.
+[The result-import process, stage 4](packing/campaign/result-import.md#stage-4-validate)
+applies this to the mathematical review at intake.
 
 ## Review Records
 
@@ -261,11 +368,18 @@ certificate is replayed from the repository before it enters the register.
 Two marks sit beside a status and are no part of it.
 
 - **Superseded** is the result’s place on the frontier: it is a bound, a result whose
-  [kind](#result-kinds) is lower bound, upper bound or optimality, and no case bound
-  rests on it now. It is derived from the case records by
-  `render_recent_results.standing`, and
-  [`devtools/check_standing.py`](packing/devtools/check_standing.py) holds it to the
-  bounds each entry states.
+  [kind](#result-kinds) is lower bound, upper bound or optimality, no case bound rests
+  on it now, and its cases hold a bound at least as good as each one it states.
+  Superseded means replaced.
+  A bound strictly better than its case’s, in a lane it can hold, that the case records
+  have not taken in yet is *pending adoption* and carries no mark: nothing has replaced
+  it, and its status says how far it has been checked.
+  `T-128`’s eight rational sides, each below the ceiling its case holds, are pending
+  adoption. Superseded is derived from the case records and the bounds each entry states
+  by `render_recent_results.standing`, and
+  [`devtools/check_standing.py`](packing/devtools/check_standing.py) holds it to those
+  bounds. An entry whose words state no bound the check reads is held to the case records
+  alone, so a report the case records do not cite states its sides.
   The mark names the results that supersede it, the ones its cases’ bounds rest on now
   (`render_recent_results.superseding`), so `T-037` reads *superseded by T-060*. A
   confirmed result may be superseded, and a recorded one may hold a case’s reported
@@ -293,16 +407,51 @@ Two marks sit beside a status and are no part of it.
   It is the one hand-recorded fact in this section, so it expires: the checker refuses
   one dated more than 30 days before the register’s `last_reviewed`, and it is then
   re-dated with what happened since, or removed.
-  Work that is queued and not begun stays in `next_rung`.
+  Work that is queued and not begun stays in `next_rung`, and the confirmations among it
+  are also listed in `unfinished_confirmations`.
+
+**Unfinished confirmations** are the confirmations a result’s record names and has not
+run, or has not finished, listed in its optional `unfinished_confirmations` where the
+record knows the work concretely: `what` the confirmation is, the confirmation `rung` it
+would reach, and the bead, issue or file that owns it in `link`. Wherever a price is
+known, `estimated_cost` gives it in CPU-hours: `cpu_hours`, the central estimate,
+`cpu_hours_high` where the source gives an upper end, the `basis` it was priced on (the
+sample, the ratio, the host or the source’s own run), and the day it was `priced`. A
+price recorded only in wall-hours is converted where the number of workers is stated,
+and the basis says so.
+`next_rung` stays the prose of the next evidence-improving action; this list is the
+structured, priced part of it.
+It is no mark beside the status: `activity` says what is under way, and an item under
+way is in both. A run that would only add an attribute beside the rung, a second machine
+method or a reproduction with the producer’s code, reaches no rung and is not listed.
+[`devtools/check_results.py`](packing/devtools/check_results.py) refuses an item at or
+below the result’s `confirmation`, so an item is removed when its confirmation lands,
+and refuses an upper end below the estimate, a price dated after `last_reviewed`, and an
+item listed twice. The validation backlog (`devtools.check_requests --backlog`) and
+[`RESULTS.md`](packing/frontier/RESULTS.md#next-actions) show each item’s rung and cost,
+and the backlog sums the known CPU-hours.
 
 Until 2026-10-01 the site and `RESULTS.md` showed a *standing* in this place, which
 mixed three things: the frontier position (`current best`, `superseded`), whether the
 bound had been replayed (`current best, reported`), and what kind of result the entry
 was (`second certificate`, `not a bound`). The first is now the superseded mark, the
 second is the status, and the third is the result’s kind: a second certificate is a
-*simplification*. The vocabulary is provisional until the owner confirms it; the
-proposal and the status of every result are in
-[the result-status plan](docs/project/specs/active/plan-2026-10-01-result-status.md).
+second proof, a *simplification* or, since 2026-10-13, a *formalization*. The vocabulary
+is provisional until the owner confirms it; the proposal and the status of every result
+are in
+[the result-status plan](docs/project/specs/done/plan-2026-10-01-result-status.md).
+On 2026-10-13 the owner added the kind *formalization*, a proof-assistant proof of a
+result the record already holds, apart from a simplification.
+The recorded decision quotes “simplification is one thing but formalization is another”,
+then “let’s go with formalization then”.
+[Review A](https://github.com/jlevy/squares/pull/592#issuecomment-6159185393) relays the
+owner’s third remark as “simplification should be allowed too but that is different”;
+the original human message was not recovered.
+Where a second proof fits both kinds, the owner chooses at registration.
+The decision was made on `T-154`, Fitzharding’s Lean 4 proof of $s(17) = L$, which was
+registered as a simplification that day and moved to the new kind, decided 13 October,
+recorded 14 October ([Result Kinds](#result-kinds)). `T-054` and `T-055`, which no proof
+assistant checked, stay simplifications.
 
 ## What Changed on 2026-09-30
 
@@ -325,7 +474,7 @@ A significance rationale is dated by its `scored`, but it scores the claim and n
 rungs, so since 2026-10-06 the checker holds it to the same rule: it may say what a rung
 would need, and not which rung the result stands at.
 The proposal behind the change is
-[the ladder review of 2026-09-30](docs/project/specs/active/plan-2026-09-30-epistemics-ladder-review.md).
+[the ladder review of 2026-09-30](docs/project/specs/done/plan-2026-09-30-epistemics-ladder-review.md).
 
 ## Significance and Novelty
 
@@ -381,7 +530,8 @@ matters; the kind says what sort of claim it is.
 | upper bound | Proves $s(n) \le v$ by a packing of $n$ unit squares in a square of side $v$ |
 | optimality | Settles an exact value $s(n) = v$: a lower bound that meets an upper bound |
 | uniqueness | Classifies every packing that attains $s(n)$: each is one of finitely many named packings, up to the container’s symmetries and the relabelling of the squares, and moves no bound |
-| simplification | Proves again a result the record already holds, by a shorter, cleaner or more elementary route, and moves no bound |
+| simplification | Proves again a result the record already holds, by a shorter, cleaner or more elementary route, and moves no bound by itself |
+| formalization | Proves in a proof assistant a result the record already holds, by formalizing an existing argument or by a route of its own, and moves no bound by itself |
 | rigidity | Says whether one named packing can move at fixed side: its flexes, its rigidity at first or second order, the isolation of its pose |
 | case exclusion | Shows that one named class of configurations, such as a branch, a corner class or a region of pose space, holds no packing at a stated side, and moves no bound by itself |
 | restricted optimality | Finds the best packing within a declared family, such as fixed orientation classes near one pose, and says nothing about $s(n)$ outside it |
@@ -390,7 +540,7 @@ matters; the kind says what sort of claim it is.
 | audit | Checks an existing proof or certificate independently and finds it correct as published |
 
 The register stores a kind in lowercase with hyphens, `lower-bound` or `case-exclusion`.
-A result has exactly one, chosen by four rules.
+A result has exactly one, chosen by five rules.
 
 - The kind is what the claim concludes.
   Where a claim ends in a bound or a value of $s(n)$, the kind is that bound, however it
@@ -403,15 +553,33 @@ A result has exactly one, chosen by four rules.
   is.
 - A second proof of a result the record already holds is a simplification, and its claim
   names the result it proves again.
+- A proof in a proof assistant of a result the record already holds is a formalization,
+  whether it formalizes an existing argument or takes a route of its own, and its claim
+  names the result it formalizes or proves again.
+  Where a second proof is both checked by a proof assistant and by a shorter, cleaner or
+  more elementary route, either kind fits, and the owner chooses at registration.
+  A proof-assistant proof of a value the record does not yet hold is no formalization:
+  by the first rule it takes that value’s kind, optimality or a bound.
 
 The kind is declared, and the checker holds it to what the record already says.
 A headline that opens with a relation on $s(n)$ states its kind: `≥` or `>` is a lower
-bound, `≤` or `<` an upper bound and `=` optimality, and only a simplification may
-restate one.
-A bound cites evidence that claims that bound, and optimality cites an exact
-value or both halves.
-Uniqueness, rigidity, case exclusion and restricted optimality cite `derived-structure`
-evidence and state no relation on $s(n)$ in their headline.
+bound, `≤` or `<` an upper bound and `=` optimality, and only a simplification or a
+formalization may restate one.
+A bound cites evidence that claims that bound, and optimality cites an exact value or
+both halves. A second proof records `proves_kind`, the conclusion it proves again: its
+target’s kind, or that target’s own `proves_kind` for a chain of second proofs.
+It agrees with the relations this proof states and a named target on every claimed case.
+A single bound requires that side, an exact value both sides, and a structural result
+its structural evidence; each requirement holds at every count.
+A formalization cites evidence of its own whose method, performed or reported, is
+`proof-assistant-checked` and whose scope and claim substantiate that conclusion on
+every claimed case. A sample or a component check cannot substantiate a whole bound or
+value. Evidence that the result it proves again cites is not its own, though a second
+proof may cite it for a half the two share: a proof assistant’s check of that result is
+no check of the second proof.
+A simplification may cite such evidence too, where the owner chose that kind for a proof
+that fits both. Uniqueness, rigidity, case exclusion and restricted optimality cite
+`derived-structure` evidence and state no relation on $s(n)$ in their headline.
 Method limit, correction and audit are told apart by review alone.
 
 A result’s standing, whether a case bound rests on it now, is about bounds.
@@ -419,6 +587,22 @@ A result whose evidence claims no bound has no standing, and no later bound supe
 it; a later result that implies it is declared instead ([Status](#status)). Of a
 standing, the register’s views show one thing, the *superseded* mark, which a standing
 gives only a bound; another kind carries the mark only where its entry declares it.
+
+The standing of a simplification or a formalization reads the relation its claim
+restates as a bound’s. While every bound it states equals its case record’s in the lane
+it can hold, it is a second certificate.
+Its own build can land before that of the result it proves again, as when a reported
+proof of a value the record holds only as reported is replayed first.
+It then states a bound better than the case’s verified one, and its standing is pending
+adoption. A bound better than the case’s reported one is another matter: no lane holds
+that value, so the entry is no second proof and takes the value’s kind by the first
+rule, and `devtools.check_standing` refuses a simplification or a formalization that
+states one. Neither kind moves a bound by itself, so when the case record adopts that
+bound the kind is revisited: the owner decides what kind the result then is, and the
+result page’s registered identity is amended with a dated reason
+(`packing/site-urls.yaml`). Until the register records that decision,
+`devtools.check_standing` refuses a simplification or a formalization that a case bound
+rests on, in either lane.
 
 ## Results by Others
 
@@ -468,7 +652,7 @@ to credit it as carefully as this project’s own.
   authors, then `after` and the work the source says it builds on
   (`Daniel after Burns, Massaccesi`). The atlas citation line and the register renderers
   print it, and hand-written prose may add to it but never drops a link.
-  A chain through an intermediate author names every link the source names: Kleddamag’s
+  A chain through an intermediate author names every link the source names: Overbeck’s
   $4.66001$ builds on Squares Project (Joshua Levy), Mira and Guzhou0806. The atlas
   stage sets each line in 66 characters, so where the whole line does not fit it prints
   the source’s `short_credit`: the same authors and the first of the same links, ending
@@ -480,6 +664,20 @@ to credit it as carefully as this project’s own.
   method, solver or checker credits them in the same line
   (`wand125 after Tokoharu, Levy, Stromquist, Nagamochi, Burns, Massaccesi`). This
   project is credited as `after Levy` only where the source itself says so.
+- **A regularization leaves the packing with its finder.** A certificate that rearranges
+  a packing the record already credits, for display or after solving it to an exact
+  side, does not take the packing’s credit.
+  The finder keeps the packing through the register result that holds it, which the
+  regularized result names as `of` in its `regularizations`, one item a count.
+  The regularizer is credited with the regularization, and with the certificate where it
+  is theirs, and is typed there as `by`, with the method, the side and what the
+  regularization changed: `T-146` regularizes Ryan Xu’s, Mishapolk’s and SQUISH’s
+  packings and is credited `Daniel after Xu, Chaoweeraprasit, Mishapolk, Levy`. The
+  record never says in its own voice that a regularization is the same packing as the
+  one it was made from unless the item’s `identity.basis` is `measured`, a decision made
+  here. Otherwise it says whose claim the identity is, as `T-146` says that each view’s
+  identity rests on Evan Daniel’s sampled path test; measurements made here are recorded
+  beside the claim and decide nothing.
 - **This project’s results are credited the same way.** A result of this project is
   `Levy` in the register and on the site, by name as every other author is, and
   `Levy after …` where it rests directly on another’s proof, method or tool
@@ -494,14 +692,18 @@ to credit it as carefully as this project’s own.
   finder: the packing is the result’s subject, and its argument owes it nothing.
   The credit carries the lineage in both directions, so a table of results needs no
   grouping to say whose work rests on whose.
-- **People and projects, never tools.** Credit names people, or the handles they publish
-  under. A bound this project holds is cited on the atlas as `Squares Project (Levy)`;
-  its results and its place in another source’s credit line are `Levy`. An AI agent is
-  never a credited author.
-  Where a source states that AI assisted its work, its case record or register entry
-  says so in the source’s own terms, and so does any README prose about the result;
-  `devtools.state_ai_assistance` names a case record that cites such a source without
-  saying so.
+- **People and projects, never tools.** Credit names people by name, and a credit line
+  by surname: `Xu`, not the handle `ry-xu` (the owner, 2026-10-14: “use Ryan Xu real
+  name or surname Xu not the handle for regular credits”). A handle stands in a credit
+  only for an author whose sources give no other name.
+  Everywhere else a handle is an identifier and stays as it is: in a source key, a path,
+  a URL or a repository name.
+  A bound this project holds is cited on the atlas as `Squares Project (Levy)`; its
+  results and its place in another source’s credit line are `Levy`. An AI agent is never
+  a credited author. Where a source states that AI assisted its work, its case record or
+  register entry says so in the source’s own terms, and so does any README prose about
+  the result; `devtools.state_ai_assistance` names a case record that cites such a
+  source without saying so.
 - **A citation, not a disclaimer.** A register claim names the result’s authors, its
   date and its source, with a link.
   That a result is another’s is what its credit line and `attribution` state, and where
@@ -539,7 +741,14 @@ Its three end points are fixed here.
 3. **Answered.** An author who asked for the registration, on an issue here or
    otherwise, has been told what was registered, at which rung, what was replayed, and
    what remains. The answer goes on their issue, which stays open while work they asked
-   for is still queued; the owner posts it, or an agent does at the owner’s request.
+   for is still queued.
+   Every issue an intake pass touches is answered, and every later change of its state
+   gets a follow-up until the issue closes with a final comment (stage 7 of
+   [result-import.md](packing/campaign/result-import.md#stage-7-answer) says what
+   touching is). An agent posts each as part of the pass, under the `github-workflows`
+   grant, once the pull request that carries the change has merged, and without the
+   grant drafts it for the owner; the owner’s standing instruction of 2026-10-11 is why
+   the rule exists, and the owner may post instead.
    An answer is kept true: when an id or a rung it states changes, a follow-up says so.
 
 ### Where the Frontier Is Recorded
@@ -553,10 +762,10 @@ gate checks it.
 
 | Record | Holds | Reader view |
 | --- | --- | --- |
-| [`n-NNN.md`](packing/frontier/README.md) case records | Both lanes’ bounds for each case, with their evidence | [`STATUS.md`](packing/frontier/STATUS.md); the site’s [recent results](https://jlevy.github.io/squares/#recent-results) and [frontier survey](https://jlevy.github.io/squares/frontier.html); the superseded mark in `RESULTS.md` and in the site’s [results table](https://jlevy.github.io/squares/all-results.html) |
+| [`n-NNN.md`](packing/frontier/README.md) case records | Both lanes’ bounds for each case, with their evidence | [`STATUS.md`](packing/frontier/STATUS.md); the site’s [recent results](https://jlevy.github.io/squares/#recent-results) and [frontier survey](https://jlevy.github.io/squares/atlas.html#the-frontier-survey); the superseded mark in `RESULTS.md` and in the site’s [results table](https://jlevy.github.io/squares/results.html) |
 | [`evidence.yaml`](packing/frontier/evidence.yaml) | Who performed each check, by which method, within which limits, with which programs | [`INVENTORY.md`](packing/frontier/INVENTORY.md); each case record’s Verification Code section |
 | [`verifiers.yaml`](packing/frontier/verifiers.yaml) | Each verification program, external or first-party, with the versions that ran and where its source is retained | [`VERIFIERS.md`](packing/frontier/VERIFIERS.md); the Verification Code section of `RESULTS.md` |
-| [`results.yaml`](packing/frontier/results.yaml) | Each result’s kind, headline, claim, date, `V`/`C`/`S`, novelty, attribution and `activity` | [`RESULTS.md`](packing/frontier/RESULTS.md), grouped by lineage; the site’s [results table](https://jlevy.github.io/squares/all-results.html), each with the derived status |
+| [`results.yaml`](packing/frontier/results.yaml) | Each result’s kind, headline, claim, date, `V`/`C`/`S`, novelty, attribution, `activity` and `regularizations` | [`RESULTS.md`](packing/frontier/RESULTS.md), grouped by lineage; the site’s [results table](https://jlevy.github.io/squares/results.html), each with the derived status |
 | [`bibliography.yaml`](packing/resources/bibliography.yaml) | Each source’s date, credit and lineage | The atlas citation line; the holders, credit and relation in `RESULTS.md` and on the site’s [overview](https://jlevy.github.io/squares/#recent-results) |
 | [`source-coverage.yaml`](packing/frontier/source-coverage.yaml) | Which sources were read, and when | None |
 
@@ -572,7 +781,8 @@ The checker:
 
 - resolves evidence references and artifact, control, and review-document paths;
 - derives the structural `V` and `C` rungs described above, from the cited evidence and
-  the retained `reviews`;
+  the retained `reviews`, counting no entry whose
+  [independence record](#the-independence-record) states a sample;
 - refuses unsupported promotion, unexplained understatement, and a `C` above `V`;
 - requires every review in `reviews` to be a non-superseded review in
   [`document-map.yaml`](docs/project/document-map.yaml) with the fields of
@@ -584,7 +794,8 @@ The checker:
   the sources of a result by others published since 22 August 2026;
 - requires a `kind` on every result, one of the [Result Kinds](#result-kinds), and
   cross-checks it against the relations the headline and the claim state, the claims of
-  the cited evidence, and, for a simplification, the result its claim names;
+  the cited evidence, and, for a simplification or a formalization, the result its claim
+  names and whether a proof assistant checked the evidence it cites;
 - refuses `builds_on` on a result by others, and on a result of this project holds it to
   the record: each source key resolves in the bibliography and is the `source_key` of an
   evidence entry the result cites, and each credited name is an author of one of them;

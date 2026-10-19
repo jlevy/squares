@@ -8,6 +8,7 @@ import re
 import shlex
 import shutil
 import subprocess
+import sys
 from collections.abc import Mapping
 from fnmatch import fnmatchcase
 from pathlib import Path
@@ -17,8 +18,10 @@ import pytest
 
 from devtools import render_n11_optimality_review as optimality_paper
 from devtools import render_overview
+from devtools import render_packing_methods as methods_paper
 from devtools.pages_scope import BUILDER_INPUTS, declared_inputs, pull_request_jobs
 from devtools.render_n11_lower_bounds_explainer import SITE_PATH as EXPLAINER_PATH
+from sqpack.known_best import KNOWN_BEST_COMPOSITES
 from sqpack.yamlio import safe_load
 
 #: The lower-bounds explainer as the jobs read it: where `prepare` renders it under
@@ -31,10 +34,11 @@ REGISTER = REPO / "packing/devtools/gate-budgets.yaml"
 #: The jobs a pull request never runs: the deploy path, which only a push to `main`
 #: starts, and the dispatch-only timing experiment.
 DEPLOY_PATH = {"deploy", "verify-deployment"}
+OPTIONAL_DISPATCH_JOBS = {"candidate-infographics"}
 
-# These jobs can provision Python and their browser without the rendered page. They
-# start beside `prepare`, then join its exact artifact before the first page consumer.
-OVERLAPPED_PREPARED_PAGE_JOBS = {
+# Native dependencies keep these consumers off runners until prepare succeeds.
+# Their bounded artifact join still validates the exact run, attempt and artifact id.
+PREPARED_PAGE_CONSUMERS = {
     "pdf",
     "print-layout",
     "typography",
@@ -49,25 +53,40 @@ OVERLAPPED_PREPARED_PAGE_JOBS = {
 #: ceiling and null measurements; the first pull-request run that includes them is the
 #: measurement, and whoever records it removes the name here, so the exception cannot
 #: quietly outlive the reason for it.
-AWAITING_FIRST_RUN = frozenset({"overview", "publish", "n11-threshold-bound-review"})
-#: The jobs that build a paper other than the first, one per review, each named by the
-#: paper's slug (`render_overview.PAPERS`).
-REVIEW_JOBS = frozenset(
+AWAITING_FIRST_RUN = frozenset(
+    {"overview", "publish", "n11-threshold-bound-review", "square-packing-methods-survey"}
+)
+#: Independently built papers, each named by its registry slug.
+PAPER_JOBS = frozenset(
     paper.slug
     for paper in render_overview.PAPERS
     if paper.slug != render_overview.N11_LOWER_BOUNDS_EXPLAINER
 )
 
-#: The `publish` steps that put each review beside the papers already in the tree.
+#: The `publish` steps that put each independent paper beside the existing papers.
 PUT_THRESHOLD_REVIEW = (
     "Put the threshold-bound review beside the other paper, refusing any name already there"
 )
 PUT_OPTIMALITY_REVIEW = (
     "Put the optimality review beside the other papers, refusing any name already there"
 )
-#: The archived copy of Kleddamag's proof, which both reviews cite.
+PUT_METHODS_PAPER = (
+    "Put the methods survey beside the other papers, refusing any name already there"
+)
+#: The archived copy of Overbeck's proof, which both reviews cite.
 KLEDDAMAG = "packing/resources/web/external-square-certificates-2026-09-22/kleddamag-11"
 KLEDDAMAG_README_PATTERN = f"/{KLEDDAMAG}/README.md"
+#: Every methods render input inside the two omitted source trees, including geometry.
+METHODS_ARCHIVED_RENDER_PATTERNS = tuple(
+    sorted(
+        {
+            "/" + path.relative_to(REPO).as_posix()
+            for path in methods_paper.RENDER_INPUTS
+            if path.is_relative_to(REPO / "packing/resources")
+            or path.is_relative_to(REPO / "packing/campaign")
+        }
+    )
+)
 
 #: The step right before every download by artifact id, reading the same id expression.
 #: With `merge-multiple`, an empty `artifact-ids` downloads every artifact in the run.
@@ -87,6 +106,7 @@ SKIP_NOTICE_PAGES = {
     "overview": "overview and the site's own pages",
     "n11_threshold_bound_review": "threshold-bound review",
     "n11_optimality_review": "optimality review",
+    "square_packing_methods_survey": "square packing methods survey",
 }
 
 
@@ -116,7 +136,7 @@ def browser_check_jobs(jobs: Mapping[str, Mapping[str, Any]]) -> list[str]:
     return [
         name
         for name, job in jobs.items()
-        if name not in {"prepare", *REVIEW_JOBS, *DEPLOY_PATH}
+        if name not in {"prepare", "overview", *PAPER_JOBS, *DEPLOY_PATH}
         and any("playwright install" in step.get("run", "") for step in job.get("steps", []))
     ]
 
@@ -185,6 +205,26 @@ def test_the_push_filter_covers_the_developer_tools_its_jobs_run() -> None:
     assert workflow["on"]["pull_request"] is None, "pull requests are scoped by the scope job"
 
 
+def test_every_paper_render_input_is_a_push_trigger() -> None:
+    """Paper-owned declarations protect deployment as well as pull-request scope."""
+    patterns = load()["on"]["push"]["paths"]
+    for paper in render_overview.PAPERS:
+        inputs = BUILDER_INPUTS[paper.slug.replace("-", "_")]()
+        assert inputs, paper.slug
+        missing = []
+        for path in inputs:
+            relative = path.relative_to(REPO).as_posix()
+            changed = f"{relative}/__changed__" if path.is_dir() else relative
+            if not any(
+                fnmatchcase(relative, pattern) or fnmatchcase(changed, pattern)
+                for pattern in patterns
+            ):
+                missing.append(relative)
+        assert not missing, (
+            f"{paper.slug}: render inputs outside the Pages push filter: {missing}"
+        )
+
+
 def test_every_pull_request_job_is_scoped_to_its_page_or_says_why() -> None:
     """No browser work runs on a pull request that changed neither page, and none silently.
 
@@ -199,13 +239,8 @@ def test_every_pull_request_job_is_scoped_to_its_page_or_says_why() -> None:
     jobs = workflow["jobs"]
     scope = jobs["scope"]
     halves = tuple(BUILDER_INPUTS)
-    assert set(halves) == {
-        "n11_lower_bounds_explainer",
-        "n11_threshold_bound_review",
-        "n11_optimality_review",
-        "workbench",
-        "overview",
-    }
+    paper_halves = {paper.slug.replace("-", "_") for paper in render_overview.PAPERS}
+    assert set(halves) == {*paper_halves, "workbench", "overview"}
     assert set(scope["outputs"]) == {
         name for half in halves for name in (half, f"{half}_reason")
     }
@@ -228,14 +263,15 @@ def test_every_pull_request_job_is_scoped_to_its_page_or_says_why() -> None:
         for half in halves
     }
     assert gated == {
-        "n11_lower_bounds_explainer": {"prepare", *OVERLAPPED_PREPARED_PAGE_JOBS},
+        "n11_lower_bounds_explainer": {"prepare", *PREPARED_PAGE_CONSUMERS},
         "workbench": {"workbench"},
         "overview": {"overview"},
-        "n11_threshold_bound_review": {"n11-threshold-bound-review"},
-        "n11_optimality_review": {"n11-optimality-review"},
+        **{slug.replace("-", "_"): {slug} for slug in PAPER_JOBS},
     }
     for roots in gated.values():
-        assert all(needs_of(jobs[root]) == ["scope"] for root in roots)
+        for root in roots:
+            expected = ["scope", "prepare"] if root in PREPARED_PAGE_CONSUMERS else ["scope"]
+            assert needs_of(jobs[root]) == expected
     # A skip is said in the scope job, not by a runner allocated to print one line: until
     # 2026-10-05 each page had an `*-unchanged` job that ran only when it was skipped.
     assert not [name for name, job in jobs.items() if "!= 'true'" in str(job.get("if", ""))]
@@ -243,11 +279,12 @@ def test_every_pull_request_job_is_scoped_to_its_page_or_says_why() -> None:
     steps = [step.get("id") or step.get("name") for step in scope["steps"]]
     assert steps.index(SKIP_NOTICE_STEP) == steps.index("scope") + 1
 
-    builders = (
-        r"python -m (devtools\.render_(?:n11_lower_bounds_explainer|overview"
-        r"|n11_threshold_bound_review|n11_optimality_review)"
-        r"|workbench_tools\.build_site)\b"
+    builder_modules = (
+        *(paper.module for paper in render_overview.PAPERS),
+        "devtools.render_overview",
+        "workbench_tools.build_site",
     )
+    builders = r"python -m (?:" + "|".join(map(re.escape, builder_modules)) + r")\b"
     for name, job in jobs.items():
         commands = "\n".join(step.get("run", "") for step in job.get("steps", []))
         works = "playwright install" in commands or re.search(builders, commands)
@@ -256,7 +293,7 @@ def test_every_pull_request_job_is_scoped_to_its_page_or_says_why() -> None:
                 f"needs.scope.outputs.{half} == 'true'" for half in halves
             }
             assert (
-                upstream(jobs, name) & {"prepare", "workbench", "overview", *REVIEW_JOBS}
+                upstream(jobs, name) & {"prepare", "workbench", "overview", *PAPER_JOBS}
                 or directly_scoped
             ), f"{name} does page work on a pull request without waiting for the scope"
 
@@ -327,7 +364,11 @@ def test_the_required_aggregate_passes_a_justified_skip_and_nothing_else() -> No
     # `!cancelled()`, not `always()`: a superseded run reports nothing here, as D-380 made
     # `packing-required` do; a failed or cancelled job in a run that goes on still fails it.
     assert aggregate["if"] == "!cancelled()"
-    assert set(needs_of(aggregate)) == set(jobs) - {"pages-required", *DEPLOY_PATH}
+    assert set(needs_of(aggregate)) == set(jobs) - {
+        "pages-required",
+        *DEPLOY_PATH,
+        *OPTIONAL_DISPATCH_JOBS,
+    }
     step = next(
         item
         for item in aggregate["steps"]
@@ -336,13 +377,16 @@ def test_the_required_aggregate_passes_a_justified_skip_and_nothing_else() -> No
     assert step["env"]["NEEDS"] == "${{ toJSON(needs) }}"
     program = step["run"]
     assert '.scope.result == "success"' in program
-    decisions = (
-        "[.scope.outputs.n11_lower_bounds_explainer, .scope.outputs.workbench, "
-        ".scope.outputs.overview, .scope.outputs.n11_threshold_bound_review, "
-        ".scope.outputs.n11_optimality_review]"
+    decisions = re.search(
+        r"\[(\.scope\.outputs\.\w+(?:, \.scope\.outputs\.\w+)*)\] "
+        r'\| all\(\. == "true" or \. == "false"\)',
+        program,
     )
-    assert f'{decisions} | all(. == "true" or . == "false")' in program
-    for review in sorted(REVIEW_JOBS):
+    assert decisions is not None
+    assert set(re.findall(r"\.scope\.outputs\.(\w+)", decisions.group(1))) == set(
+        BUILDER_INPUTS
+    )
+    for review in sorted(PAPER_JOBS):
         half = review.replace("-", "_")
         assert (f'(.scope.outputs.{half} != "true" or .["{review}"].result == "success")') in (
             program
@@ -350,6 +394,47 @@ def test_the_required_aggregate_passes_a_justified_skip_and_nothing_else() -> No
     assert '[.[].result] | all(. == "success" or . == "skipped")' in program
     assert "jq -e" in program
     assert set(needs_of(jobs["deploy"])) == {"publish", "pages-required"}
+    bash = shutil.which("bash")
+    if bash is None or shutil.which("jq") is None:
+        pytest.skip("the aggregate needs bash and jq, which every hosted runner has")
+    baseline: dict[str, dict[str, Any]] = {
+        name: {"result": "success"} for name in needs_of(aggregate)
+    }
+    outputs = dict.fromkeys(BUILDER_INPUTS, "true")
+    baseline["scope"]["outputs"] = outputs
+
+    def verdict(needs: dict[str, dict[str, Any]]) -> int:
+        return subprocess.run(
+            (bash, "--noprofile", "--norc", "-eo", "pipefail", "-c", program),
+            env={"PATH": os.environ.get("PATH", ""), "NEEDS": json.dumps(needs)},
+            capture_output=True,
+            text=True,
+            check=False,
+        ).returncode
+
+    assert verdict(baseline) == 0
+    for half in BUILDER_INPUTS:
+        for invalid in ("", "unexpected", None):
+            broken = {key: value for key, value in outputs.items() if key != half}
+            if invalid is not None:
+                broken[half] = invalid
+            assert verdict({**baseline, "scope": {"result": "success", "outputs": broken}}) != 0
+    for paper in PAPER_JOBS:
+        half = paper.replace("-", "_")
+        skipped = {**baseline, paper: {"result": "skipped"}}
+        assert verdict(skipped) != 0, paper
+        assert (
+            verdict(
+                {
+                    **skipped,
+                    "scope": {"result": "success", "outputs": {**outputs, half: "false"}},
+                }
+            )
+            == 0
+        ), paper
+    for need in needs_of(aggregate):
+        for failure in ("failure", "cancelled"):
+            assert verdict({**baseline, need: {"result": failure}}) != 0, (need, failure)
 
 
 def conjuncts(condition: str) -> list[str] | None:
@@ -406,6 +491,7 @@ def test_the_deploy_path_does_not_inherit_skips_from_its_ancestors() -> None:
     assert jobs["deploy"]["if"] == (
         "${{ !cancelled() && github.ref == 'refs/heads/main' "
         "&& github.event_name != 'pull_request' "
+        "&& !inputs.redraw_infographics "
         "&& needs.publish.result == 'success' && needs.pages-required.result == 'success' }}"
     )
     assert jobs["verify-deployment"]["if"] == (
@@ -609,12 +695,12 @@ def test_deployment_waits_for_the_cross_browser_loading_checks() -> None:
     )
 
 
-def test_page_check_setup_overlaps_prepare_then_joins_its_exact_artifact() -> None:
-    """Independent provisioning starts early; no page consumer can outrun prepare."""
+def test_page_consumers_wait_for_prepare_then_validate_its_exact_artifact() -> None:
+    """Queued producers cannot exhaust consumer runners or their artifact deadline."""
     jobs = load()["jobs"]
-    for name in OVERLAPPED_PREPARED_PAGE_JOBS:
+    for name in PREPARED_PAGE_CONSUMERS:
         job = jobs[name]
-        assert needs_of(job) == ["scope"]
+        assert needs_of(job) == ["scope", "prepare"]
         assert job["if"] == "needs.scope.outputs.n11_lower_bounds_explainer == 'true'"
         assert job["permissions"] == {"contents": "read", "actions": "read"}
         steps = job["steps"]
@@ -738,6 +824,18 @@ def test_live_verification_waits_for_the_exact_deployed_revision() -> None:
     assert deploy["outputs"]["page-url"] == "${{ steps.deployment.outputs.page_url }}"
     assert verify["needs"] == "deploy"
     commands = "\n".join(step.get("run", "") for step in verify["steps"])
+    # The job's ceiling and the checker's own deadline are a pair (think-6y2j): a job
+    # killed at the ceiling prints no verdict, so the checker stops itself first and
+    # prints what it checked. Over the 40 verify jobs measured on 2026-10-10 (PR #496,
+    # review F) the steps before the audit took 41 to 72 s and those after it 2 to 6 s, so
+    # the five minutes kept between the two, the margin the workflow comment and
+    # development.md derive, are nearly four times what they need; the slowest healthy
+    # audit was 388 s, and 25 minutes is about 3.9 times that. All three values are pinned
+    # exactly: changing the ceiling, the deadline or the margin is a deliberate edit here.
+    ceiling_minutes, deadline_minutes = 30, 25
+    assert verify["timeout-minutes"] == ceiling_minutes
+    assert f"--deadline-minutes {deadline_minutes}" in commands
+    assert ceiling_minutes - deadline_minutes == 5
     assert "python -m devtools.check_published_site" in commands
     assert '--site "${{ needs.deploy.outputs.page-url }}"' in commands
     assert '--commit "${{ github.sha }}"' in commands
@@ -745,9 +843,9 @@ def test_live_verification_waits_for_the_exact_deployed_revision() -> None:
 
 
 def test_publication_assembles_the_checked_products_and_only_main_uploads_it() -> None:
-    """What `build` uploaded from one directory is now six artifacts put back together.
+    """The checked producer artifacts are assembled into one publication tree.
 
-    The three papers under `/papers/`, each by its slug with its Markdown and PDF beside
+    The papers under `/papers/`, each by its slug with its Markdown and PDF beside
     it, the atlas's files and the site's own pages at the root, and the workbench under
     `/workbench/` share one published tree; the only upload to Pages is a push to `main`.
     Each paper is rendered where it is served, so nothing is renamed here.
@@ -759,8 +857,7 @@ def test_publication_assembles_the_checked_products_and_only_main_uploads_it() -
         "pdf",
         "overview",
         "workbench",
-        "n11-threshold-bound-review",
-        "n11-optimality-review",
+        *PAPER_JOBS,
     }
     steps = publish["steps"]
     # The checkout and its Python come first (`test_publication_holds_the_assembled_site_
@@ -788,14 +885,11 @@ def test_publication_assembles_the_checked_products_and_only_main_uploads_it() -
         {"name": "n11-lower-bounds-explainer-pdf", "path": "packing/site/papers"},
         {"name": "overview-pages", "path": "${{ runner.temp }}/overview-pages"},
         {"name": "workbench-page", "path": "packing/site/workbench"},
-        {
-            "name": "n11-threshold-bound-review-page",
-            "path": "${{ runner.temp }}/n11-threshold-bound-review-page",
-        },
-        {
-            "name": "n11-optimality-review-page",
-            "path": "${{ runner.temp }}/n11-optimality-review-page",
-        },
+        *(
+            {"name": f"{paper.slug}-page", "path": "${{ runner.temp }}/" + paper.slug + "-page"}
+            for paper in render_overview.PAPERS
+            if paper.slug in PAPER_JOBS
+        ),
     ]
     assert not [step["name"] for step in steps if "mv " in step.get("run", "")]
     prepare = jobs["prepare"]
@@ -819,8 +913,8 @@ def test_publication_assembles_the_checked_products_and_only_main_uploads_it() -
     )
     assert produced["workbench-page"] == ("workbench", "packing/site/workbench")
     assert produced["overview-pages"] == ("overview", "packing/site")
-    for review in REVIEW_JOBS:
-        assert produced[f"{review}-page"] == (review, "packing/site/papers")
+    for review in PAPER_JOBS:
+        assert produced[f"{review}-page"] == (review, "packing/site")
     (upload,) = [
         step
         for step in steps
@@ -847,6 +941,41 @@ def test_publication_assembles_the_checked_products_and_only_main_uploads_it() -
     )
     assert build < share
     assert "--check" in shlex.split(workbench[build]["run"])
+
+
+def test_methods_paper_audits_its_pdf_before_sharing_the_producer() -> None:
+    """The served producer keeps the checked PDF, without an optional artifact audit."""
+    job = load()["jobs"]["square-packing-methods-survey"]
+    steps = job["steps"]
+    audit = next(
+        index
+        for index, step in enumerate(steps)
+        if "devtools.artifact_dates --pdf site/papers/square-packing-methods-survey.pdf"
+        in step.get("run", "")
+    )
+    commands = steps[audit]["run"].splitlines()
+    draw = next(index for index, line in enumerate(commands) if "--site site --pdf" in line)
+    dates = next(
+        index for index, line in enumerate(commands) if "devtools.artifact_dates" in line
+    )
+    assert draw < dates
+    assert shlex.split(commands[dates])[-4:] == [
+        "--pdf",
+        "site/papers/square-packing-methods-survey.pdf",
+        "--revised",
+        "packing-methods",
+    ]
+    assert not steps[audit].get("if")
+    assert not steps[audit].get("continue-on-error")
+    share = next(
+        index
+        for index, step in enumerate(steps)
+        if step.get("with", {}).get("name") == "square-packing-methods-survey-page"
+    )
+    assert audit < share
+    assert steps[share]["with"]["if-no-files-found"] == "error"
+    assert not steps[share].get("if")
+    assert not steps[share].get("continue-on-error")
 
 
 def test_the_site_pages_render_twice_beside_prepare_and_agree() -> None:
@@ -941,6 +1070,7 @@ def test_publication_holds_the_assembled_site_to_the_head_contract() -> None:
     writes = (
         PUT_THRESHOLD_REVIEW,
         PUT_OPTIMALITY_REVIEW,
+        PUT_METHODS_PAPER,
         "Serve each moved file at its old address too",
     )
     assert max(_publish_step(steps, name) for name in writes) < check
@@ -952,7 +1082,11 @@ def test_publication_holds_the_assembled_site_to_the_head_contract() -> None:
     )
     assert check < upload
     # The overview's own build is checked the same way, in its own job.
-    assert any(LOCAL_HEAD_CHECK in step.get("run", "").splitlines() for step in overview)
+    assert any(
+        (LOCAL_HEAD_CHECK + " --partial --producer overview")
+        in step.get("run", "").splitlines()
+        for step in overview
+    )
 
 
 def _assembled(
@@ -962,11 +1096,12 @@ def _assembled(
     overview: tuple[str, ...] = (),
     threshold: tuple[str, ...] = (),
     review: tuple[str, ...] = (),
+    methods: tuple[str, ...] = (),
 ) -> tuple[Path, list[subprocess.CompletedProcess[str]]]:
-    """Run the `publish` job's four shell steps, in order, on a tree shaped like the one
+    """Run the `publish` job's assembly steps, in order, on a tree shaped like the one
     its downloads leave: the lower-bounds explainer and its PDF under `papers/` with an
-    atlas file at the root, and the site's pages and the two reviews staged apart.
-    `overview`, `threshold` and `review` add files to the three staged trees. Returns the
+    atlas file at the root, and the site's pages and independent papers staged apart.
+    The keyword arguments add files to each staged tree. Returns the
     site and each step's result; a step that fails stops the rest, as it does on a
     runner."""
     steps = load()["jobs"]["publish"]["steps"]
@@ -979,6 +1114,8 @@ def _assembled(
     (site / "papers" / "n11-lower-bounds-explainer.md").write_text("explainer markdown")
     (site / "papers" / "n11-lower-bounds-explainer.pdf").write_text("explainer pdf")
     (site / "known-best-1-100.svg").write_text("atlas")
+    for n in (100, 324):
+        (site / f"square-packings-{n}-20261008.pdf").write_text(f"atlas PDF {n}")
     pages = root / "overview-pages"
     forwarders = [old for old, _ in render_overview.MOVED_PAGES]
     assert {"explainer.html", "n11-optimality/index.html"} < set(forwarders)
@@ -986,19 +1123,27 @@ def _assembled(
         (pages / page).parent.mkdir(parents=True, exist_ok=True)
         (pages / page).write_text(f"overview build's {page}")
     staged_threshold = root / "n11-threshold-bound-review-page"
-    staged_threshold.mkdir()
+    (staged_threshold / "papers").mkdir(parents=True)
     for suffix in ("html", "md", "pdf"):
-        (staged_threshold / f"n11-threshold-bound-review.{suffix}").write_text(
+        (staged_threshold / "papers" / f"n11-threshold-bound-review.{suffix}").write_text(
             f"threshold review {suffix}"
         )
     for extra in threshold:
-        (staged_threshold / extra).write_text("threshold review's")
+        (staged_threshold / "papers" / extra).write_text("threshold review's")
     staged = root / "n11-optimality-review-page"
-    staged.mkdir()
+    (staged / "papers").mkdir(parents=True)
     for suffix in ("html", "md", "pdf"):
-        (staged / f"n11-optimality-review.{suffix}").write_text(f"review {suffix}")
+        (staged / "papers" / f"n11-optimality-review.{suffix}").write_text(f"review {suffix}")
     for extra in review:
-        (staged / extra).write_text("review's")
+        (staged / "papers" / extra).write_text("review's")
+    staged_methods = root / "square-packing-methods-survey-page"
+    (staged_methods / "papers").mkdir(parents=True)
+    for suffix in ("html", "md", "pdf"):
+        (staged_methods / "papers" / f"square-packing-methods-survey.{suffix}").write_text(
+            f"methods explainer {suffix}"
+        )
+    for extra in methods:
+        (staged_methods / "papers" / extra).write_text("methods explainer's")
     results = []
     for step_name, cwd, environment in (
         ("Put the site's pages at the root, refusing any name already there", root, pages),
@@ -1012,6 +1157,11 @@ def _assembled(
             root,
             staged,
         ),
+        (
+            PUT_METHODS_PAPER,
+            root,
+            staged_methods,
+        ),
         ("Serve each moved file at its old address too", site, None),
     ):
         step = steps[_publish_step(steps, step_name)]
@@ -1021,10 +1171,28 @@ def _assembled(
         if environment is not None:
             assert step["env"] == {"STAGED": "${{ runner.temp }}/" + environment.name}
             env["STAGED"] = str(environment)
+        command_cwd = cwd
+        if environment is not None:
+            assert step["working-directory"] == "packing"
+            assert step["run"].splitlines()[-1] == (
+                "uv run --frozen --group dev python -m devtools.assemble_site "
+                '--destination site "$STAGED"'
+            )
+            command = (
+                sys.executable,
+                "-m",
+                "devtools.assemble_site",
+                "--destination",
+                str(site),
+                str(environment),
+            )
+            command_cwd = REPO / "packing"
+        else:
+            command = (bash, "-e", "-c", step["run"])
         results.append(
             subprocess.run(
-                (bash, "-e", "-c", step["run"]),
-                cwd=cwd,
+                command,
+                cwd=command_cwd,
                 env=env,
                 capture_output=True,
                 text=True,
@@ -1044,7 +1212,7 @@ def test_publication_puts_every_paper_under_papers_and_keeps_every_old_address(
 
     Each paper is rendered and checked where it is served, so the assembly renames
     nothing: it puts the site's pages at the root, where the forwarders at the papers'
-    old addresses come with them, puts the second and third papers beside the first, and
+    old addresses come with them, puts the independent papers beside the first, and
     copies
     each Markdown file and PDF to the address it had before the move. The steps are run
     here on a tree shaped like the real one. The copies are exactly
@@ -1063,6 +1231,8 @@ def test_publication_puts_every_paper_under_papers_and_keeps_every_old_address(
             PUT_THRESHOLD_REVIEW,
             "Use the checked optimality review",
             PUT_OPTIMALITY_REVIEW,
+            "Use the checked methods survey",
+            PUT_METHODS_PAPER,
             "Serve each moved file at its old address too",
             "List what the publication holds",
         )
@@ -1075,7 +1245,7 @@ def test_publication_puts_every_paper_under_papers_and_keeps_every_old_address(
     )
 
     site, results = _assembled(tmp_path, "whole")
-    assert [result.returncode for result in results] == [0, 0, 0, 0], results
+    assert [result.returncode for result in results] == [0, 0, 0, 0, 0], results
     served = sorted(
         path.relative_to(site).as_posix() for path in site.rglob("*") if path.is_file()
     )
@@ -1083,6 +1253,10 @@ def test_publication_puts_every_paper_under_papers_and_keeps_every_old_address(
         "explainer.html",
         "index.html",
         "known-best-1-100.svg",
+        "known-best-1-100.pdf",
+        "known-best-1-324.pdf",
+        "square-packings-100-20261008.pdf",
+        "square-packings-324-20261008.pdf",
         "n11-optimality/index.html",
         "n11-optimality/t-060-explainer.html",
         "n11-optimality/t-060-explainer.md",
@@ -1097,6 +1271,9 @@ def test_publication_puts_every_paper_under_papers_and_keeps_every_old_address(
         "papers/n11-threshold-bound-review.html",
         "papers/n11-threshold-bound-review.md",
         "papers/n11-threshold-bound-review.pdf",
+        "papers/square-packing-methods-survey.html",
+        "papers/square-packing-methods-survey.md",
+        "papers/square-packing-methods-survey.pdf",
         "t-018-explainer.md",
         "t-018-explainer.pdf",
     ]
@@ -1119,7 +1296,7 @@ def test_publication_refuses_a_name_two_builds_publish(tmp_path: Path) -> None:
     already published there."""
     site, results = _assembled(tmp_path, "root", overview=("known-best-1-100.svg",))
     assert [result.returncode for result in results] == [1]
-    assert "both publish known-best-1-100.svg" in results[0].stdout
+    assert "publication collision: known-best-1-100.svg" in results[0].stderr
     assert (site / "known-best-1-100.svg").read_text() == "atlas"
     assert not (site / "index.html").exists()
 
@@ -1127,7 +1304,7 @@ def test_publication_refuses_a_name_two_builds_publish(tmp_path: Path) -> None:
         tmp_path, "threshold", threshold=("n11-lower-bounds-explainer.md",)
     )
     assert [result.returncode for result in results] == [0, 1]
-    assert "two papers publish papers/n11-lower-bounds-explainer.md" in results[1].stdout
+    assert "publication collision: papers/n11-lower-bounds-explainer.md" in results[1].stderr
     assert (site / "papers" / "n11-lower-bounds-explainer.md").read_text() == (
         "explainer markdown"
     )
@@ -1135,15 +1312,21 @@ def test_publication_refuses_a_name_two_builds_publish(tmp_path: Path) -> None:
 
     site, results = _assembled(tmp_path, "papers", review=("n11-threshold-bound-review.md",))
     assert [result.returncode for result in results] == [0, 0, 1]
-    assert "two papers publish papers/n11-threshold-bound-review.md" in results[2].stdout
+    assert "publication collision: papers/n11-threshold-bound-review.md" in results[2].stderr
     assert (site / "papers" / "n11-threshold-bound-review.md").read_text() == (
         "threshold review md"
     )
     assert not (site / "papers" / "n11-optimality-review.html").exists()
 
-    site, results = _assembled(tmp_path, "moved", overview=("t-018-explainer.md",))
+    site, results = _assembled(tmp_path, "methods", methods=("n11-optimality-review.md",))
     assert [result.returncode for result in results] == [0, 0, 0, 1]
-    assert "t-018-explainer.md is already published" in results[3].stdout
+    assert "publication collision: papers/n11-optimality-review.md" in results[3].stderr
+    assert (site / "papers" / "n11-optimality-review.md").read_text() == "review md"
+    assert not (site / "papers" / "square-packing-methods-survey.html").exists()
+
+    site, results = _assembled(tmp_path, "moved", overview=("t-018-explainer.md",))
+    assert [result.returncode for result in results] == [0, 0, 0, 0, 1]
+    assert "t-018-explainer.md is already published" in results[4].stdout
     assert (site / "t-018-explainer.md").read_text() == "overview build's t-018-explainer.md"
 
 
@@ -1151,8 +1334,12 @@ def test_publication_refuses_a_name_two_builds_publish(tmp_path: Path) -> None:
 _SCOPE_GATE = re.compile(r"needs\.scope\.outputs\.(\w+) (==|!=) 'true'")
 
 
-def pull_request_outcomes(decision: Mapping[str, bool]) -> dict[str, str]:
-    """Every pull-request job's result, for one scope decision, when nothing fails.
+def pull_request_outcomes(
+    decision: Mapping[str, bool],
+    *,
+    failures: Mapping[str, str] | None = None,
+) -> dict[str, str]:
+    """Scheduled pull-request outcomes, optionally injecting a failed prerequisite.
 
     GitHub's rule, for the forms this workflow uses: a job whose condition has no status
     function runs only when every need succeeded; `always()` and `!cancelled()` run
@@ -1184,33 +1371,30 @@ def pull_request_outcomes(decision: Mapping[str, bool]) -> dict[str, str]:
                 if gate:
                     half, operator = gate.groups()
                     runs = runs and decision[half] == (operator == "==")
-            results[name] = "success" if runs else "skipped"
+            results[name] = (failures or {}).get(name, "success") if runs else "skipped"
             pending.remove(name)
     return results
 
 
 def test_every_scope_decision_passes_the_aggregate_and_builds_its_pages() -> None:
-    """Thirty-two decisions, from nothing in scope to everything, on a pull request.
+    """Every scope combination, from nothing in scope to everything, on a pull request.
 
     Each build runs exactly when its page is in scope, and no job runs when it is not
     (`scope` says why itself); the assembly runs only for a whole site, which is every
     push to `main`; and the required
     aggregate, which sees a skip as a pass only because its scope decided it, passes all
-    thirty-two. A pull request that changes only the overview's inputs builds the
+    combinations. A pull request that changes only the overview's inputs builds the
     overview and nothing else.
     """
     halves = tuple(BUILDER_INPUTS)
     assert halves == (
-        "n11_lower_bounds_explainer",
-        "n11_threshold_bound_review",
-        "n11_optimality_review",
+        *(paper.slug.replace("-", "_") for paper in render_overview.PAPERS),
         "workbench",
         "overview",
     )
     builds = {
         "n11_lower_bounds_explainer": "prepare",
-        "n11_threshold_bound_review": "n11-threshold-bound-review",
-        "n11_optimality_review": "n11-optimality-review",
+        **{slug.replace("-", "_"): slug for slug in PAPER_JOBS},
         "workbench": "workbench",
         "overview": "overview",
     }
@@ -1593,8 +1777,8 @@ def test_every_browser_checks_the_same_prepared_publication() -> None:
         "startup-timing",
     } <= set(checks)
     for name in checks:
-        if name in OVERLAPPED_PREPARED_PAGE_JOBS:
-            assert needs_of(jobs[name]) == ["scope"], name
+        if name in PREPARED_PAGE_CONSUMERS:
+            assert needs_of(jobs[name]) == ["scope", "prepare"], name
             artifact_id = "${{ steps.prepared.outputs.artifact_id }}"
         else:
             assert needs_of(jobs[name]) == ["prepare"], name
@@ -1637,6 +1821,7 @@ def test_the_partial_checkouts_keep_the_directories_the_render_links() -> None:
             "/packing/resources/papers/kingbird-square-11-provenance.svg",
             KLEDDAMAG_README_PATTERN,
         ),
+        "square-packing-methods-survey": METHODS_ARCHIVED_RENDER_PATTERNS,
         "n11-threshold-bound-review": (
             "/packing/resources/web/external-square-certificates-2026-09-22/kleddamag-11/",
             "/packing/resources/web/wand125-tools-2026-09-29/receipts/n11-bound-full.jsonl.gz",
@@ -1649,9 +1834,21 @@ def test_the_partial_checkouts_keep_the_directories_the_render_links() -> None:
             "/packing/campaign/agent-sessions/session-153-native-reconciliation.json",
         ),
     }
-    assert set(kept) == REVIEW_JOBS
+    kept["overview"] = (
+        "/packing/resources/web/",
+        "!/packing/resources/web/*",
+        "/packing/resources/web/evand-square-packing-2026-10-05/",
+        "!/packing/resources/web/evand-square-packing-2026-10-05/*",
+        "/packing/resources/web/evand-square-packing-2026-10-05/receipts/",
+        "!/packing/resources/web/evand-square-packing-2026-10-05/receipts/*",
+        "/packing/resources/web/evand-square-packing-2026-10-05/receipts/register-comparison.json",
+    )
+    kept["publish"] = kept["overview"]
+    assert set(kept) == PAPER_JOBS | {"overview", "publish"}
 
     def keeps(job: str, declared: Path) -> bool:
+        if job in {"overview", "publish"}:
+            return declared == REPO / kept["overview"][-1].removeprefix("/")
         for pattern in kept.get(job, ()):
             path = REPO / pattern.strip("/")
             if declared == path or (pattern.endswith("/") and declared.is_relative_to(path)):
@@ -1683,7 +1880,7 @@ def test_the_partial_checkouts_keep_the_directories_the_render_links() -> None:
         "prepare",
         "workbench",
         "overview",
-        *REVIEW_JOBS,
+        *PAPER_JOBS,
         *browser_check_jobs(jobs),
     } <= set(sparse)
     omitted_roots = (REPO / "packing/resources", REPO / "packing/campaign")
@@ -1733,6 +1930,27 @@ def test_optimality_archive_links_are_all_in_its_sparse_checkout() -> None:
 #: What each review's partial checkout must materialize of the two omitted trees, and two
 #: files beside them it must not.
 REVIEW_CHECKOUTS: dict[str, tuple[tuple[str, ...], tuple[str, ...]]] = {
+    "overview": (
+        (
+            "packing/resources/bibliography.yaml",
+            "packing/resources/web/evand-square-packing-2026-10-05/receipts/register-comparison.json",
+        ),
+        (
+            "packing/resources/web/unrelated/README.md",
+            "packing/resources/web/evand-square-packing-2026-10-05/README.md",
+            "packing/resources/web/evand-square-packing-2026-10-05/receipts/other.json",
+            "packing/resources/web/evand-square-packing-2026-10-05/square-packing/README.md",
+            "packing/campaign/old/README.md",
+        ),
+    ),
+    "square-packing-methods-survey": (
+        tuple(pattern.removeprefix("/") for pattern in METHODS_ARCHIVED_RENDER_PATTERNS),
+        (
+            "packing/resources/web/unrelated/README.md",
+            "packing/resources/papers/unrelated.pdf",
+            "packing/campaign/old/README.md",
+        ),
+    ),
     "n11-optimality-review": (
         (
             "packing/resources/README.md",
@@ -1769,11 +1987,14 @@ REVIEW_CHECKOUTS: dict[str, tuple[tuple[str, ...], tuple[str, ...]]] = {
 }
 
 
+REVIEW_CHECKOUTS["publish"] = REVIEW_CHECKOUTS["overview"]
+
+
 @pytest.mark.parametrize("job", sorted(REVIEW_CHECKOUTS))
 def test_each_review_sparse_checkout_keeps_only_its_archive_inputs(
     tmp_path: Path, job: str
 ) -> None:
-    """Git must actually materialize a review's data and citations despite the archive
+    """Git must actually materialize a page's data and citations despite the archive
     and campaign exclusions, and nothing else of them."""
     source = tmp_path / "source"
     checkout = tmp_path / "checkout"
@@ -2044,3 +2265,180 @@ def test_dispatch_timing_uses_frozen_pairs_and_retains_failed_measurements() -> 
     assert uploads[0]["if"] == "always()"
     assert uploads[0]["with"]["path"] == "/tmp/math-startup-timing"
     assert uploads[0]["with"]["if-no-files-found"] == "error"
+
+
+@pytest.mark.parametrize("producer_result", ["failure", "cancelled", "scope-skipped"])
+def test_prepare_failure_skips_consumers_and_fails_the_real_aggregate(
+    producer_result: str,
+) -> None:
+    decision = dict.fromkeys(BUILDER_INPUTS, True)
+    decision["n11_lower_bounds_explainer"] = producer_result != "scope-skipped"
+    failures = {} if producer_result == "scope-skipped" else {"prepare": producer_result}
+    outcome = pull_request_outcomes(decision, failures=failures)
+    assert outcome["prepare"] == (
+        "skipped" if producer_result == "scope-skipped" else producer_result
+    )
+    assert all(outcome[name] == "skipped" for name in PREPARED_PAGE_CONSUMERS)
+    assert all(outcome[name] == "success" for name in {"overview", "workbench", *PAPER_JOBS})
+    jobs = load()["jobs"]
+    assert "prepare" in needs_of(jobs["pages-required"])
+    aggregate = next(
+        step
+        for step in jobs["pages-required"]["steps"]
+        if step.get("name") == "Require every page this run builds to pass"
+    )
+    needs: dict[str, dict[str, Any]] = {
+        name: {"result": outcome[name]} for name in needs_of(jobs["pages-required"])
+    }
+    needs["scope"]["outputs"] = {
+        half: "true" if in_scope else "false" for half, in_scope in decision.items()
+    }
+    ran = subprocess.run(
+        ("bash", "-c", aggregate["run"]),
+        env={**os.environ, "NEEDS": json.dumps(needs)},
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    assert ran.returncode == (0 if producer_result == "scope-skipped" else 1), ran
+
+
+def test_candidate_infographics_are_dispatch_only_independent_and_source_bound() -> None:
+    workflow = load()
+    option = workflow["on"]["workflow_dispatch"]["inputs"]["redraw_infographics"]
+    assert option["type"] == "boolean"
+    assert option["default"] is False
+    jobs = workflow["jobs"]
+    job = jobs["candidate-infographics"]
+    assert job["if"] == "github.event_name == 'workflow_dispatch' && inputs.redraw_infographics"
+    assert job["timeout-minutes"] == 15
+    assert job["permissions"] == {"contents": "read"}
+    assert needs_of(job) == []
+    assert "candidate-infographics" not in pull_request_jobs(workflow)
+    assert all("candidate-infographics" not in needs_of(other) for other in jobs.values())
+    assert "environment" not in job
+    # GitHub excludes `runner` from job-level env, before any runner is selected.
+    assert job["env"] == {"PYTHONDONTWRITEBYTECODE": "1"}
+    assert not any("runner." in str(value) for value in job["env"].values())
+    steps = job["steps"]
+    prepare = steps[0]
+    assert prepare["name"] == "Prepare isolated candidate scratch"
+    assert prepare["working-directory"] == "${{ runner.temp }}"
+    assert "if" not in prepare
+    assert "continue-on-error" not in prepare
+    scratch = {
+        "TMPDIR": "candidate-infographics-tmp",
+        "UV_CACHE_DIR": "candidate-infographics-uv",
+        "CARGO_TARGET_DIR": "candidate-infographics-cargo",
+    }
+    expected_exports = {
+        f'''printf '{name}=%s\\n' "$RUNNER_TEMP/{directory}" >> "$GITHUB_ENV"'''
+        for name, directory in scratch.items()
+    }
+    prepare_lines = prepare["run"].splitlines()
+    assert set(prepare_lines[1:]) == expected_exports
+    assert len(prepare_lines[1:]) == len(expected_exports) == 3
+    assert shlex.split(prepare_lines[0]) == [
+        "mkdir",
+        "-p",
+        *(f"$RUNNER_TEMP/{directory}" for directory in scratch.values()),
+        "$RUNNER_TEMP/candidate-infographics",
+    ]
+    checkout = next(
+        step for step in steps if step.get("uses", "").startswith("actions/checkout@")
+    )
+    assert checkout["with"] == {
+        "ref": "${{ github.sha }}",
+        "fetch-depth": 0,
+        "submodules": True,
+        "persist-credentials": False,
+        "filter": "blob:none",
+    }
+    uv = next(step for step in steps if step.get("uses", "").startswith("astral-sh/setup-uv@"))
+    node = next(
+        step for step in steps if step.get("uses", "").startswith("actions/setup-node@")
+    )
+    assert uv["with"]["version"] == "0.12.8"
+    assert uv["with"]["python-version"] == "3.14.7"
+    assert node["with"]["node-version"] == "24.18.0"
+    assert all(re.search(r"@[0-9a-f]{40}\Z", step["uses"]) for step in steps if "uses" in step)
+    commands = [step["run"] for step in steps if "run" in step]
+    assert "uv sync --frozen --all-extras --group dev" in commands
+    assert "npm ci --ignore-scripts" in commands
+    redraw = next(command for command in commands if "--update-composites" in command)
+    assert redraw.index("--update-composites") < redraw.index("--check-composites")
+    assert redraw.count("uv run --frozen --no-sync --all-extras --group dev") == 2
+    retain = next(command for command in commands if "exports=(" in command)
+    array = re.search(r"exports=\(\s*(.*?)\s*\)", retain, re.DOTALL)
+    assert array is not None
+    expected = {
+        name
+        for spec in KNOWN_BEST_COMPOSITES
+        for name in (
+            spec.svg_name,
+            spec.pdf_name,
+            *(spec.raster_name(scale) for scale in spec.raster_scales),
+        )
+    }
+    expected.update(
+        spec.card_png_name for spec in KNOWN_BEST_COMPOSITES if spec.card_units is not None
+    )
+    exports = shlex.split(array[1])
+    assert len(exports) == len(set(exports)) == 8
+    assert set(exports) == expected
+    assert 'test "$(git rev-parse HEAD)" = "$GITHUB_SHA"' in retain
+    assert 'test -s "atlas/known-best/$name"' in retain
+    assert 'cp "atlas/known-best/$name" "$RUNNER_TEMP/candidate-infographics/$name"' in retain
+    assert '"$GITHUB_SHA" > "$RUNNER_TEMP/candidate-infographics/source-sha.txt"' in retain
+    upload = next(
+        step for step in steps if step.get("uses", "").startswith("actions/upload-artifact@")
+    )
+    assert upload["with"]["name"] == "candidate-infographics-${{ github.sha }}"
+    assert upload["with"]["path"] == "${{ runner.temp }}/candidate-infographics/"
+    assert upload["with"]["if-no-files-found"] == "error"
+    assert upload["with"]["retention-days"] == 7
+    assert "if" not in upload
+    assert "continue-on-error" not in upload
+    assert not any("deploy-pages@" in step.get("uses", "") for step in steps)
+
+
+def test_export_dispatch_skips_deployment_but_normal_main_launches_still_deploy() -> None:
+    """Even successful normal jobs must not deploy an export-only dispatch."""
+    jobs = load()["jobs"]
+
+    def deploys(
+        *,
+        event: str,
+        ref: str = "refs/heads/main",
+        redraw: bool | None = None,
+        cancelled: bool = False,
+        publish: str = "success",
+        required: str = "success",
+    ) -> bool:
+        clauses = conjuncts(jobs["deploy"]["if"])
+        assert clauses is not None
+        values = {
+            "!cancelled()": not cancelled,
+            "github.ref == 'refs/heads/main'": ref == "refs/heads/main",
+            "github.event_name != 'pull_request'": event != "pull_request",
+            "!inputs.redraw_infographics": not redraw,
+            "needs.publish.result == 'success'": publish == "success",
+            "needs.pages-required.result == 'success'": required == "success",
+        }
+        assert set(clauses) <= values.keys(), clauses
+        return all(values[clause] for clause in clauses)
+
+    assert deploys(event="push")
+    assert deploys(event="workflow_dispatch", redraw=False)
+    assert not deploys(event="workflow_dispatch", redraw=True)
+    assert not deploys(event="pull_request")
+    assert not deploys(event="workflow_dispatch", ref="refs/heads/candidate", redraw=False)
+    assert not deploys(event="push", cancelled=True)
+    assert not deploys(event="push", publish="failure")
+    assert not deploys(event="push", required="failure")
+    verify_clauses = conjuncts(jobs["verify-deployment"]["if"])
+    assert verify_clauses is not None
+    assert verify_clauses == ["!cancelled()", "needs.deploy.result == 'success'"]
+    for result, expected in (("success", True), ("skipped", False), ("failure", False)):
+        values = {"!cancelled()": True, "needs.deploy.result == 'success'": result == "success"}
+        assert all(values[clause] for clause in verify_clauses) is expected

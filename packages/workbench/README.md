@@ -72,9 +72,11 @@ each bound’s reference and the frontier case record they are held in.
 Everything this project has to say about a bound is one grey parenthesis after the
 reference, in one vocabulary: `(reported)` where the register carries the bound without
 certifying it, `(confirmed T-009)` where a result of ours checks it, and
-`(reported; confirmed T-009)` where both are true, which in the whole corpus is n = 29
-alone. The words are composed with the data, not at the stage, and the width a line is
-checked against counts them.
+`(reported; confirmed T-009)` where both are true.
+A certificate of an earlier, weaker ceiling remains linked in the case record and does
+not confirm the displayed bound.
+The words are composed with the data, not at the stage, and the width a line is checked
+against counts them.
 It is a setting — `show citations`, off until it is asked for, `setCitations` on the
 browser API — and its data is
 [`bound-citations.json`](../../packing/atlas/known-best/bound-citations.json), read at
@@ -118,14 +120,14 @@ Three contracts hold it:
 - `workbench_tools.check_layout` measures Animate at rest and mid-step, the animation
   studio, Pack and Search in Chromium at 1440 × 900, 1024 × 768 and 390 × 844. It checks
   the shared edges, gutters and gaps, one height per control kind, horizontal overflow,
-  panel overlap, the stage panel’s OPEN and badge rules (one type, with `new result`
-  alone in the star’s scarlet), one type for the PROVEN, CITATION and OPEN heads, the
-  CITATION section inside its column and above what it is set over, the one frame width
-  in its three colours, and that the attribution stands one legend line under the legend
-  at its left edge, with the shared version on its baseline at the column’s right edge,
-  both clear of what each mode draws.
-  It runs inside `check_stage_resize`’s browser session in `check_frontend`, and
-  `tests/test_check_layout.py` proves each rule refuses a page that breaks it.
+  panel overlap, the stage panel’s OPEN and badge rules, red case numbers for recent
+  results, one type for the PROVEN, CITATION and OPEN heads, the CITATION section inside
+  its column and above what it is set over, the one frame width in its three colours,
+  and that the attribution stands one legend line under the legend at its left edge,
+  with the shared version on its baseline at the column’s right edge, both clear of what
+  each mode draws. It runs inside `check_stage_resize`’s browser session in
+  `check_frontend`, and `tests/test_check_layout.py` proves each rule refuses a page
+  that breaks it.
 - `workbench_tools.layout_gallery` photographs every view at every review viewport and
   writes a side-by-side comparison page for design review.
 
@@ -170,7 +172,7 @@ The explainer plays, and the README links, two cuts of this page’s Animate mod
 1080p60 with the CITATION section on: $n = 1\ldots100$ under the `social` profile and
 the full $n = 1\ldots324$ under `archive`. They are GitHub Release assets, never
 committed. Why, and what each profile holds, is the
-[delivery-profiles plan](../../docs/project/specs/active/plan-2026-09-21-video-delivery-profiles.md#publication);
+[delivery-profiles plan](../../docs/project/specs/done/plan-2026-09-21-video-delivery-profiles.md#publication);
 this section is the procedure, in order.
 The spikes under `packing/atlas/known-best/video/spikes/` are not part of it.
 
@@ -304,7 +306,7 @@ of each `python -m` and `squares-workbench-*` command below.
    (`gh api repos/jlevy/squares/releases/tags/$TAG --jq '.assets[] | [.name, .content_type] | @tsv'`).
    The download itself is served as `application/octet-stream`, which is expected; the
    plan’s
-   [procedure](../../docs/project/specs/active/plan-2026-09-21-video-delivery-profiles.md#the-procedure)
+   [procedure](../../docs/project/specs/done/plan-2026-09-21-video-delivery-profiles.md#the-procedure)
    says why a player accepts it.
 
 9. **Open one pull request** with the poster from step 6 and these edits, then run
@@ -316,10 +318,10 @@ of each `python -m` and `squares-workbench-*` command below.
      Figure 2: the tag in its three release URLs and the full cut’s length (“runs 8m
      14s”).
    - The plan’s
-     [What was published](../../docs/project/specs/active/plan-2026-09-21-video-delivery-profiles.md#what-was-published):
+     [What was published](../../docs/project/specs/done/plan-2026-09-21-video-delivery-profiles.md#what-was-published):
      tag, commit and date, the table rows from the receipts, the page digest prefix and
      stamp, and the cadence findings from step 5; and the URL in
-     [The embed](../../docs/project/specs/active/plan-2026-09-21-video-delivery-profiles.md#the-embed)
+     [The embed](../../docs/project/specs/done/plan-2026-09-21-video-delivery-profiles.md#the-embed)
      if the tag changed.
 
 10. **After it merges**, confirm the deploy as

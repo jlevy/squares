@@ -105,6 +105,7 @@ class Document:
 DOCUMENTS: tuple[Document, ...] = (
     Document("README.md"),
     Document("TUTORIAL.md"),
+    Document("TUTORIAL-ADVANCED.md"),
     Document(
         "SYNOPSIS.md",
         # The reader's account: the opening and the results, then the mathematics. What
@@ -116,6 +117,7 @@ DOCUMENTS: tuple[Document, ...] = (
     ),
     Document("conventions.md"),
     Document("epistemics.md"),
+    Document("docs/project/policies/regularization-policy.md"),
     Document("packing/frontier/README.md"),
     Document("packing/frontier/STATUS.md"),
     Document("packing/devtools/templates/*-article.md"),

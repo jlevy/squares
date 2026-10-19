@@ -436,6 +436,10 @@ def apply_case(n: int, text: str) -> str:
     """One case record with the exact optimum written over it; others unchanged."""
     if n not in certificates.IMPROVING:
         return text
+    from devtools.source_supersession import preserve_selected_case  # noqa: PLC0415
+
+    if preserve_selected_case(n, text, {COVERAGE_ID}):
+        return text
     _, front, body = text.split("---\n", 2)
     payload = safe_load(front)["packing"]
     written = markdown_math(body_text(n, body, payload))
@@ -461,15 +465,22 @@ def coverage_entries(name: str, entries: Sequence[Mapping[str, Any]]) -> str:
 
 def coverage_text(text: str) -> str:
     """The coverage record with the packet's report selected at the 48 counts."""
+    original = text
     coverage = safe_load(text)
-    counts = set(certificates.IMPROVING)
+    from devtools.source_supersession import (  # noqa: PLC0415
+        preserve_other_coverage,
+        replace_coverage_list,
+        superseded_counts,
+    )
+
+    counts = set(certificates.IMPROVING) - superseded_counts(coverage, {COVERAGE_ID})
     previous = {
         entry["n"]: entry
         for entry in coverage["selected_overrides"]
         if entry["n"] in counts and entry["source_id"] != COVERAGE_ID
     }
     overrides = [entry for entry in coverage["selected_overrides"] if entry["n"] not in counts]
-    for n in certificates.IMPROVING:
+    for n in sorted(counts):
         row = comparison()[n]
         earlier = (
             "the Kingbird catalogue's side for Joost de Winter's packing"
@@ -518,20 +529,13 @@ def coverage_text(text: str) -> str:
             }
         )
     superseded.sort(key=lambda entry: (entry["n"], entry["source_id"]))
-    text = re.sub(
-        r"^selected_overrides:.*\n(?:(?:  |    ).*\n)*",
-        lambda _match: coverage_entries("selected_overrides", overrides),
-        text,
-        count=1,
-        flags=re.MULTILINE,
+    text = replace_coverage_list(
+        text, "selected_overrides", coverage_entries("selected_overrides", overrides)
     )
-    return re.sub(
-        r"^superseded_reports:.*\n(?:(?:  |    ).*\n)*",
-        lambda _match: coverage_entries("superseded_reports", superseded),
-        text,
-        count=1,
-        flags=re.MULTILINE,
+    text = replace_coverage_list(
+        text, "superseded_reports", coverage_entries("superseded_reports", superseded)
     )
+    return preserve_other_coverage(original, text, counts)
 
 
 # --------------------------------------------------------------------------------------

@@ -1,0 +1,23 @@
+{
+  "schema": "n17-coarse-slider-floor-launch-draft/v1",
+  "registered": false,
+  "owner": "root",
+  "hypothesis": "H-285",
+  "experiment": "exp-270",
+  "cwd": "/Users/levy/wrk/github/squares/packing",
+  "source": "packing/devtools/check_n17_coarse_slider_floor.py",
+  "test": "packing/tests/test_check_n17_coarse_slider_floor.py",
+  "input": {"accepted_root":"packing/campaign/series/series-000-smoke-and-calibration/results/exp-237-n17-polynomial-root/run-001/certificate.json","H278_required":false,"BWprime_required":false},
+  "generation_argv": ["/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python3","-m","devtools.check_n17_coarse_slider_floor","--root","campaign/series/series-000-smoke-and-calibration/results/exp-237-n17-polynomial-root/run-001/certificate.json","--output","campaign/series/series-000-smoke-and-calibration/results/exp-270-coarse-slider-floor/certificate.json"],
+  "fresh_replay_argv": ["/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python3","-m","devtools.check_n17_coarse_slider_floor","--root","campaign/series/series-000-smoke-and-calibration/results/exp-237-n17-polynomial-root/run-001/certificate.json","--certificate","campaign/series/series-000-smoke-and-calibration/results/exp-270-coarse-slider-floor/certificate.json","--output","campaign/series/series-000-smoke-and-calibration/results/exp-270-coarse-slider-floor/replay.json"],
+  "budget": {"combined_generation_and_replay_seconds":180,"TERM_seconds":180,"KILL_seconds":190,"TERM_cleanup_seconds":10,"single_owned_enclosing_supervisor":true},
+  "criteria": "Both generated and fresh replay receipts require verification_passed=true AND floor_certified=true AND root_guard_passed=true. Full accepted root inclusion R gives -1/3<=tau0=c(s-1)<=-1/8; exact x9*-x11*=tau0*u+v, unit/half-angle/projection/rearrangement identities; fixed independent closed coarse domain; exactly8 SAT options against x9-x11,6 strict universal-support exclusions and2 +v survivors; positive cosine; exact floor -14333333/41666665000 and strict headroom2333333/41666665000 above -1/2500. No H278/BWprime premise or actual leaf/global admission.",
+  "synthetic_controls": {"count":26,"seconds":4.64,"target_forecast":false,"ruff":"zero","types":"zero"},
+  "target_evaluated": false,
+  "source_files_frozen": true,
+  "assurance": "Astra hand derivation; not independently mathematically reviewed or machine-checked",
+  "environment": {"TMPDIR":"/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/tmp","UV_CACHE_DIR":"/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/uv-cache","CARGO_TARGET_DIR":"/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/cargo","PYTHONDONTWRITEBYTECODE":"1"},
+  "draft": false,
+  "no_target_run": true,
+  "source_freeze": "Registration commit, relevant source clean before target."
+}

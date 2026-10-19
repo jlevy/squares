@@ -1,0 +1,24 @@
+{
+  "schema": "n17-numeric-cap-first-round-launch/v1",
+  "registration_revision": "5694a21f7a1201b8d115c506312b2095b5f0915c",
+  "started_at": "2026-10-07T11:14:27.238213+00:00",
+  "phase": "input_control",
+  "argv": [
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python3",
+    "-m",
+    "devtools.check_n17_capture_checkpoint",
+    "--cap-certificate",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-275-capture-cap-root-join/certificate.json",
+    "--max-seconds",
+    "60",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-276-n17-numeric-cap-first-round/input-control.json"
+  ],
+  "source_git_blobs": {
+    "packing/devtools/check_n17_capture_checkpoint.py": "91d4ff8080c400060e236c990050c149283aedaf",
+    "packing/devtools/pilot_n17_capture.py": "505c01541ac72138615b660983fe3b2d03f3cf9b",
+    "packing/devtools/check_n17_capture_cap.py": "04eef27093b63d8d52f853291a018fd0ffa7849f",
+    "packing/devtools/check_n17_endpoint_prefix.py": "c004b1c908ede918ce833fcad5a3e5555c7740dd"
+  },
+  "no_previous_target": true
+}

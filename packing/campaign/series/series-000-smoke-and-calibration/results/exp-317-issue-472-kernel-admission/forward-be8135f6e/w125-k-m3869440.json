@@ -1,0 +1,63 @@
+{
+ "schema": "n17-certificate-verification/v1",
+ "verifier": "kernel",
+ "provenance": {
+  "revision": "6a0499ba4ed83e147488b2ee584af500207d9d1f",
+  "dirty": false,
+  "files": {
+   "packing/devtools/verify_n17_kernel_certificate.py": "be8135f6ebff0c97ac0c9fa195012587efc763dd"
+  }
+ },
+ "directory": "packing/campaign/explorations/X048-session-168-pilots/certificates/w125-k-m3869440",
+ "cells_source": {
+  "kind": "cover",
+  "design": "ring-3-voronoi-8-tabbed-unique"
+ },
+ "mode": "full",
+ "sample_rows_per_step": null,
+ "sample_seed": null,
+ "certificate": {
+  "seed_sha256": "2d36cbf01b04fd27d18cc1eb517f5f130e276566c487a5b9cf995d206880b4a7",
+  "node_sha256": "89e0d29971356f8a227f7587dedcb0a7da86d3d2a68f761462230dbf196228d9"
+ },
+ "mask": [
+  8,
+  9,
+  11,
+  16,
+  17,
+  19,
+  20,
+  21
+ ],
+ "cells": [
+  "side-S1",
+  "side-N1",
+  "side-E1",
+  "interior-SW",
+  "interior-NW",
+  "interior-S",
+  "interior-N",
+  "interior-E"
+ ],
+ "bins": 128,
+ "closure": {
+  "kind": "all_parent_poses_forbidden",
+  "owner": 21,
+  "step": 23
+ },
+ "closed": true,
+ "counts": {
+  "collision_facet_checks": 162246404,
+  "collision_regions": 7377,
+  "cover_checks": 2984,
+  "partner_rows": 20473,
+  "rows_full": 2984,
+  "seed_points": 4,
+  "seed_rows": 1024,
+  "steps": 24
+ },
+ "status": "PASS",
+ "failure": null,
+ "seconds": 665.872
+}

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import posixpath
 import re
 
 import pytest
@@ -66,6 +67,8 @@ def rewrite(
         ),
         ("TUTORIAL.md#start", "#start"),
         ("TUTORIAL.md", "tutorial.html"),
+        ("TUTORIAL-ADVANCED.md", "tutorial-advanced.html"),
+        ("TUTORIAL-ADVANCED.md#9-vocabulary", "tutorial-advanced.html#9-vocabulary"),
         ("#local", "#local"),
         ("https://example.org/x.md", "https://example.org/x.md"),
         ("mailto:someone@example.org", "mailto:someone@example.org"),
@@ -157,24 +160,54 @@ def _record_context(base: str = "") -> LinkContext:
 
 
 @pytest.mark.parametrize(
+    ("url", "anchor"),
+    [
+        ("CHANGELOG.md", "changelog"),
+        (
+            "CHANGELOG.md#regularization-foundations",
+            "changelog-entry-regularization-foundations",
+        ),
+        ("CHANGELOG.md#missing-entry", "changelog-entry-missing-entry"),
+    ],
+)
+def test_changelog_alias_preserves_and_checks_the_news_landing(url: str, anchor: str) -> None:
+    report = LinkReport()
+    rewritten = rewrite_link(url, tag="a", context=_record_context(), report=report)
+    assert rewritten == f"news.html#{anchor}"
+    assert report.anchors == [("news.html", anchor, url)]
+    assert not report.missing
+    page = render_overview.Page(
+        "news.html",
+        '<article><h2 id="changelog">Changelog</h2>'
+        '<h4 id="changelog-entry-regularization-foundations">Regularization</h4></article>',
+    )
+    problems = unresolved({"news.html": page}, report)
+    assert problems == (
+        [f"no heading #{anchor} in news.html: {url}"]
+        if anchor == "changelog-entry-missing-entry"
+        else []
+    )
+
+
+@pytest.mark.parametrize(
     ("link", "base", "expected"),
     [
         # A result's id, plain or as code, is its row in the results table.
-        ('<a href="packing/frontier/RESULTS.md">T-060</a>', "", "all-results.html#t-060"),
+        ('<a href="packing/frontier/RESULTS.md">T-060</a>', "", "results.html#t-060"),
         (
             '<a href="packing/frontier/RESULTS.md"><code>T-017</code></a>',
             "",
-            "all-results.html#t-017",
+            "results.html#t-017",
         ),
         (
             '<a href="RESULTS.md"><code>T-018</code></a>',
             "packing/frontier",
-            "all-results.html#t-018",
+            "results.html#t-018",
         ),
         # Any other text is the page that shows what the register or the table holds.
-        ('<a href="packing/frontier/RESULTS.md">results register</a>', "", "all-results.html"),
-        ('<a href="packing/frontier/STATUS.md">status table</a>', "", "frontier.html"),
-        ('<a href="STATUS.md">the status table</a>', "packing/frontier", "frontier.html"),
+        ('<a href="packing/frontier/RESULTS.md">results register</a>', "", "results.html"),
+        ('<a href="packing/frontier/STATUS.md">status table</a>', "", "atlas.html"),
+        ('<a href="STATUS.md">the status table</a>', "packing/frontier", "atlas.html"),
         # A code span naming the file is about the file, which is on `main`.
         (
             '<a href="packing/frontier/RESULTS.md"><code>frontier/RESULTS.md</code></a>',
@@ -202,7 +235,7 @@ def test_a_link_to_a_record_reaches_the_page_that_shows_it(
 ) -> None:
     """`RESULTS.md`, `STATUS.md` and `defects.md` are not pages of the site. A link to
     the first two leads to the page built from the same record, and one to the defect
-    log to the file; none leads to `results.html`, `status.html` or `defects.html`."""
+    log to the file; none leads to `all-results.html`, `status.html` or `defects.html`."""
     report = LinkReport()
     out = site_documents.rewrite_links(link, context=_record_context(base), report=report)
     assert re.findall(r'href="([^"]*)"', out) == [expected]
@@ -217,12 +250,12 @@ def test_a_result_id_the_register_lacks_is_reported() -> None:
     report = LinkReport()
     link = '<a href="packing/frontier/RESULTS.md">T-999</a>'
     out = site_documents.rewrite_links(link, context=_record_context(), report=report)
-    assert "all-results.html#t-999" not in out
+    assert "results.html#t-999" not in out
     assert report.missing == ["packing/frontier/RESULTS.md (no result T-999 in the register)"]
 
 
 def test_the_documents_are_the_cards_in_their_order_and_three_views_are_not_pages() -> None:
-    """The reader documents served as pages are the tutorial and the overview's five
+    """The reader documents served as pages are both tutorials and the overview's five
     cards, README and `epistemics.md` first. The results register, the status table and
     the defect log are not among them: each old address is a forwarder."""
     from devtools import overview_sections, repo_links  # noqa: PLC0415
@@ -231,7 +264,11 @@ def test_the_documents_are_the_cards_in_their_order_and_three_views_are_not_page
         doc.name: doc.source.relative_to(site_documents.REPO).as_posix()
         for doc in site_documents.DOCUMENTS
     }
-    assert list(by_page) == ["tutorial.html", *render_overview.DOCUMENT_PAGES]
+    assert list(by_page) == [
+        "tutorial.html",
+        "tutorial-advanced.html",
+        *render_overview.DOCUMENT_PAGES,
+    ]
     assert render_overview.DOCUMENT_PAGES == (
         "readme.html",
         "epistemics.html",
@@ -244,7 +281,7 @@ def test_the_documents_are_the_cards_in_their_order_and_three_views_are_not_page
     # A card and its page are paired by position, so the two lists must agree.
     assert cards == [by_page[page] for page in render_overview.DOCUMENT_PAGES]
     moved = dict(render_overview.MOVED_PAGES)
-    assert {"results.html", "status.html", "defects.html"} <= set(moved)
+    assert {"all-results.html", "status.html", "defects.html"} <= set(moved)
     assert not set(moved) & set(render_overview.SITE_PAGES)
     assert not set(moved) & set(render_overview.PAGES)
     for old in moved:
@@ -257,21 +294,25 @@ def test_a_forwarder_stands_at_each_address_a_page_used_to_have() -> None:
     anyone neither reaches, and the canonical address of the place it stands for."""
     forwarders = {page.name: page.html for page in render_overview.forwarder_pages()}
     assert list(forwarders) == [old for old, _ in render_overview.MOVED_PAGES]
-    defects = f"{REPO_URL}/blob/{BRANCH}/defects.md"
-    expected = {
-        "results.html": ("all-results.html", f"{render_overview.SITE_URL}all-results.html"),
-        "status.html": ("frontier.html", f"{render_overview.SITE_URL}frontier.html"),
-        "defects.html": (defects, defects),
-    }
     script = render_overview.FORWARD_SCRIPT.read_text(encoding="utf-8")
-    for old, (target, canonical) in expected.items():
+    for old, destination in render_overview.MOVED_PAGES:
+        external = destination.startswith("https://")
+        physical = (
+            destination if external else posixpath.relpath(destination, posixpath.dirname(old))
+        )
+        target = physical
+        canonical = destination if external else render_overview.canonical_url(destination)
         page = forwarders[old]
-        assert f'<html lang="en" data-moved-to="{target}">' in page, old
+        opening = re.search(r"<html\b[^>]*>", page)
+        assert opening is not None, old
+        assert 'lang="en"' in opening[0], old
+        assert f'data-moved-to="{target}"' in opening[0], old
+        assert f'data-file-moved-to="{physical}"' in opening[0], old
         assert (
-            f'<noscript><meta http-equiv="refresh" content="0; url={target}"></noscript>'
+            f'<noscript><meta http-equiv="refresh" content="0; url={physical}"></noscript>'
             in page
         )
-        assert f'<a href="{target}">' in page, old
+        assert f'<a href="{physical}">' in page, old
         assert f'<link rel="canonical" href="{canonical}">' in page, old
         assert f"<script>{script}</script>" in page, old
         assert "{{" not in page, old
@@ -305,9 +346,9 @@ def test_no_page_of_the_site_links_a_page_that_moved(
 ) -> None:
     """A forwarder is for links written before the change. The site's own pages, the
     reader documents and every result's overview name the page a reader is going to."""
-    assert MOVED_LINK.search(' href="results.html#next-actions"')
+    assert MOVED_LINK.search(' href="all-results.html#next-actions"')
     assert MOVED_LINK.search(' src="../defects.html?view=embed"')
-    assert not MOVED_LINK.search(' href="all-results.html#t-060"')
+    assert not MOVED_LINK.search(' href="results.html#t-060"')
     for name, text in every_page.items():
         assert not MOVED_LINK.findall(text), name
     for result, body in every_result_body.items():
@@ -335,7 +376,9 @@ def test_the_build_fails_on_an_unresolved_link(monkeypatch: pytest.MonkeyPatch) 
 
 @pytest.fixture(scope="module")
 def pages() -> dict[str, render_overview.Page]:
-    return {name: site_renders.page(name) for name in ("tutorial.html",)}
+    return {
+        name: site_renders.page(name) for name in ("tutorial.html", "tutorial-advanced.html")
+    }
 
 
 def test_the_pages_render_self_contained_with_a_toc(
@@ -361,10 +404,13 @@ def test_no_relative_repository_link_survives(pages: dict[str, render_overview.P
 
 
 def test_the_tutorial_math_is_kpress_math(pages: dict[str, render_overview.Page]) -> None:
-    """Each `$…$` span reaches the page as kpress math markup, which KaTeX renders on load."""
-    body = pages["tutorial.html"].html
-    assert len(re.findall(r'data-kpress-math="inline"', body)) >= 14
-    assert 'data-kpress-math-error="true">' not in body
+    """Each formula retains KPress semantics and a visual prepared before publication."""
+    for page in pages.values():
+        body = page.html
+        assert len(re.findall(r'data-kpress-math="inline"', body)) >= 14
+        assert 'data-kpress-math-error="true">' not in body
+        assert len(re.findall(r'data-kpress-math-rendered="true"', body)) >= 14
+        assert len(re.findall(r'class="katex-html"', body)) >= 14
 
 
 def test_long_reports_get_a_contents_rail_and_short_ones_do_not(
@@ -386,7 +432,8 @@ def test_long_reports_get_a_contents_rail_and_short_ones_do_not(
         return 'class="kpress-toc ' in page.html
 
     assert not rail(short)
-    assert 'class="kpress-toc ' in pages["tutorial.html"].html
+    for page in pages.values():
+        assert 'class="kpress-toc ' in page.html
 
 
 def test_a_hand_written_contents_list_is_dropped_from_the_page(
@@ -396,9 +443,24 @@ def test_a_hand_written_contents_list_is_dropped_from_the_page(
     the contents rail lists the headings; the text around it stays."""
     markdown = "Intro.\n\n## Contents\n\n1. [One](#one)\n2. [Two](#two)\n\n## One\n\nBody.\n"
     assert site_documents.without_manual_contents(markdown) == "Intro.\n\n## One\n\nBody.\n"
-    page = pages["tutorial.html"].html
+    page = pages["tutorial-advanced.html"].html
     assert 'id="contents"' not in page
     assert 'href="#contents"' not in page
+    # The basic page keeps the original fragment as a visible relocation landing.
+    assert 'id="contents"' in pages["tutorial.html"].html
+
+
+def test_a_github_alert_is_a_plain_quote_on_the_page() -> None:
+    """README's callout is drawn by GitHub from its `[!IMPORTANT]` marker; the site has
+    no such syntax, so the marker line goes and the quote stays."""
+    markdown = "Intro.\n\n> [!IMPORTANT]\n> **Have a result?** File it.\n\n> Plain [!NOTE].\n"
+    assert site_documents.without_alert_markers(markdown) == (
+        "Intro.\n\n> **Have a result?** File it.\n\n> Plain [!NOTE].\n"
+    )
+    readme = site_documents.without_alert_markers(
+        site_documents.README.read_text(encoding="utf-8")
+    )
+    assert "> [!" not in readme.split("<!-- BEGIN SHARED", 1)[0]
 
 
 def _readme(body: str) -> str:
@@ -541,9 +603,9 @@ def test_the_introductions_links_reach_the_sites_own_pages(
     )
     intro = out.split(OVERVIEW_INTRO_OPEN, 1)[1].split(OVERVIEW_INTRO_CLOSE, 1)[0]
     assert re.findall(r'<a href="([^"]+)">([^<]+)</a>', intro) == [
-        ("all-results.html#t-060", "T-060"),
-        ("all-results.html", "results register"),
-        ("frontier.html", "frontier"),
+        ("results.html#t-060", "T-060"),
+        ("results.html", "results register"),
+        ("atlas.html", "frontier"),
         ("cases/11.html", "case record"),
         ("epistemics.html", "the rungs"),
         (f"{REPO_URL}/blob/{BRANCH}/docs/review.md", "review"),
@@ -563,7 +625,7 @@ def test_only_the_shared_block_has_its_links_rewritten(
         _overview('<p><a href="packing/frontier/STATUS.md">frontier</a></p>')
     )
     intro = out.split(OVERVIEW_INTRO_OPEN, 1)[1].split(OVERVIEW_INTRO_CLOSE, 1)[0]
-    assert intro == '<p><a href="frontier.html">frontier</a></p>'
+    assert intro == '<p><a href="atlas.html">frontier</a></p>'
     assert out.count('<a href="packing/frontier/RESULTS.md">outside the block</a>') == 3
     assert "recent-progress" not in out
 
@@ -584,3 +646,84 @@ def test_the_overview_fails_on_an_unresolved_introduction_link(
         "<!-- /README recent-progress -->"
     )
     assert rewrite_overview_blocks(stale) == stale
+
+
+#: Published tutorial fragments retained as invisible landings.
+LEGACY_TUTORIAL_FRAGMENTS = (
+    "tutorial-square-packing-from-first-principles",
+    "1-the-problem",
+    "contents",
+    "the-state-of-n--11-in-one-table",
+    "how-a-weighted-atomic-lower-bound-proof-works",
+    "how-the-finite-covering-lp-searches-for-atoms",
+    "why-condition-on-corner-squares",
+    "2-the-configuration-space",
+    "the-cell-decomposition",
+    "thirty-four-dimensions-become-one",
+    "3-cells-basins-and-two-traps",
+    "the-quench-map",
+    "trap-1a-fixed-angle-cell-solve-is-not-a-basin",
+    "trap-2a-point-basin-need-not-be-a-terminal-component",
+    "the-generalized-lesson-learned-twice",
+    "4-the-corner",
+    "5-algebra-versus-numerics",
+    "why-exactness-is-not-optional",
+    "the-number-field",
+    "how-many-roots-does-a-packing-need",
+    "assurance-method-and-precision",
+    "contact-graphs-stationary-branches-and-rattlers",
+    "from-a-numeric-solution-to-an-exact-one",
+    "6-what-is-built-and-what-is-not",
+    "7-how-the-search-is-approached-and-why",
+    "the-catalogue",
+    "the-strategy-why-pointing-should-beat-scaling",
+    "steering-keep-the-loss-change-what-you-keep",
+    "relaxation-ladders-turn-rare-event-search-into-path-following",
+    "calibration-must-match-mechanism-not-just-difficulty",
+    "near-misses-are-the-data",
+    "8-what-is-known-and-what-is-not",
+    "established",
+    "open",
+    "9-how-an-optimality-proof-is-built",
+    "three-parts",
+    "the-cap-above-the-optimum",
+    "the-centre-box-and-capacity-one-covers",
+    "symmetry-and-orbits",
+    "sub-pattern-exclusion-by-containment",
+    "selection-versus-certification",
+    "what-makes-a-certificate-admissible",
+    "a-local-minimum-modulo-sliders",
+    "capture",
+    "why-exact-arithmetic-dominates-the-cost",
+    "10-a-vocabulary-card",
+    "11-a-notation-card",
+    "12-further-reading",
+    "what-does-the-arithmetic-here",
+    "13-where-to-go-next",
+)
+
+
+def test_tutorials_link_to_current_topics(
+    pages: dict[str, render_overview.Page],
+) -> None:
+    basic = pages["tutorial.html"].html
+    advanced = pages["tutorial-advanced.html"].html
+    basic_ids = re.findall(r'\bid="([^"]+)"', basic)
+    assert len(basic_ids) == len(set(basic_ids))
+    assert set(LEGACY_TUTORIAL_FRAGMENTS) <= set(basic_ids)
+    assert 'href="tutorial-advanced.html"' in basic
+    assert 'href="tutorial.html"' in advanced
+    destinations = re.findall(r'href="tutorial-advanced.html#([^"]+)"', basic)
+    assert destinations
+    assert set(destinations) <= site_documents.element_ids(advanced)
+
+
+def test_tutorial_pages_fit_their_registered_publication_budgets(
+    pages: dict[str, render_overview.Page],
+) -> None:
+    from devtools import site_urls  # noqa: PLC0415
+
+    registered = {row.path: row for row in site_urls.load_registry()}
+    for name, page in pages.items():
+        size = len(page.html.encode("utf-8"))
+        assert size <= site_urls.page_budget(registered[name]), (name, size)

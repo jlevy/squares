@@ -11,12 +11,36 @@ from nodejs_wheel import node
 from devtools import check_math_startup
 from devtools.check_math_startup import (
     JsonRecord,
+    delay_findings,
     run_measurements,
     startup_findings,
     summarize,
 )
 
 NODE = Path(__file__).resolve().parent / "node" / "math_startup"
+
+#: `parameters_ready_ms` and `runtime_available_ms` of each control in the full-mode
+#: self-test of Pages run 37898417552 (typography job 113716869137), in launch order.
+#: The first two launches carry launch cost; every later undelayed load is about 15 ms.
+RECORDED_SELF_TEST = {
+    "control": (173, 162),
+    "no-warmup": (125.10000000000582, 123.10000000000582),
+    "delayed": (317, 9),
+    "variants": (16.60000000000582, 11.30000000000291),
+    "wrong-active-variant": (None, 9.5),
+    "missing-math": (None, 9.099999999991269),
+    "missing-counters": (14.19999999999709, 9.5),
+    "late-target": (14.5, 9.700000000011642),
+    "width-change": (324.8000000000029, 10.099999999991269),
+    "missing-anchors": (15, 9.69999999999709),
+}
+
+
+def self_test_observations(**overrides: tuple[float | None, float | None]) -> JsonRecord:
+    return {
+        control: {"metrics": {"parameters_ready_ms": ready, "runtime_available_ms": runtime}}
+        for control, (ready, runtime) in (RECORDED_SELF_TEST | overrides).items()
+    }
 
 
 def clean_report() -> JsonRecord:
@@ -206,6 +230,45 @@ def test_summaries_retain_missing_values_and_the_full_observed_range() -> None:
         "min": None,
         "max": None,
     }
+
+
+def test_launch_cost_on_the_first_controls_cannot_hide_the_injected_delay() -> None:
+    # Against the first control alone this run kept only 317 - 173 = 144 ms of the delay.
+    assert delay_findings(self_test_observations()) == []
+
+
+def test_a_delay_the_readiness_milestone_does_not_show_is_still_reported() -> None:
+    findings = delay_findings(self_test_observations(delayed=(17, 9)))
+    assert len(findings) == 2
+    assert all(
+        finding.startswith("the delayed control did not record the known 300 ms delay")
+        for finding in findings
+    )
+
+
+def test_launch_cost_on_the_delayed_load_cannot_stand_in_for_the_delay() -> None:
+    # Launch cost holds this load's runtime back to 180 ms, so readiness at 190 ms clears
+    # the fastest undelayed control by over 150 ms with none of the delay in it.
+    assert delay_findings(self_test_observations(delayed=(190, 180))) == [
+        (
+            "the delayed control did not record the known 300 ms delay:"
+            " ready 10 ms after its math runtime arrived"
+        )
+    ]
+
+
+@pytest.mark.parametrize(
+    "overrides",
+    [
+        {"delayed": (None, 9)},
+        {"delayed": (317, None)},
+        {"control": (None, 162), "no-warmup": (None, 123), "variants": (None, 11)},
+    ],
+)
+def test_a_missing_delay_milestone_is_not_a_recorded_delay(
+    overrides: dict[str, tuple[float | None, float | None]],
+) -> None:
+    assert delay_findings(self_test_observations(**overrides))
 
 
 def test_matched_runs_are_sequential_and_reverse_order_without_discarding_failures(

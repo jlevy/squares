@@ -15,6 +15,7 @@ is relied on.
 from __future__ import annotations
 
 import json
+from fractions import Fraction
 from pathlib import Path
 
 from devtools.census_chunk_taxonomy import (
@@ -26,6 +27,7 @@ from devtools.census_chunk_taxonomy import (
     taxonomy,
     wall_seating,
 )
+from sqpack.witness import load_witness, materialize_exact_witness
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -34,7 +36,7 @@ def _record() -> dict:
     return json.loads(RECORD.read_text(encoding="utf-8"))
 
 
-def test_no_component_the_grammar_misses_is_tilted() -> None:
+def test_only_the_new_radical_strip_has_tilted_unexpressed_components() -> None:
     """The finding, stated as sharply as the data allows.
 
     Checked from the census directly rather than from the taxonomy record, so this fails if
@@ -48,10 +50,11 @@ def test_no_component_the_grammar_misses_is_tilted() -> None:
         and is_tilted(str(component["angle_degrees"]))
     ]
 
-    assert tilted_and_unexpressed == []
+    assert tilted_and_unexpressed == [(51, "45"), (51, "45")]
     angles = {
         str(component["angle_degrees"])
         for entry in band()
+        if entry["n"] != 51
         for component in entry["components"]
         if component["shape"] == "other-polyomino"
     }
@@ -59,6 +62,29 @@ def test_no_component_the_grammar_misses_is_tilted() -> None:
     # Francisco Couzo's numerically optimized pose since 2026-09-29, at 3.2e-10 degrees.
     assert "0" in angles
     assert all(abs(float(angle)) < 1e-9 for angle in angles), angles
+    # Gupta's refined n = 88 puts both residue components in the zero-degree class.
+    # Inspect every member's rational edge as well as that descriptive fitted angle.
+    witness = load_witness(ROOT / "witnesses/known-best/n-088.yaml")
+    geometry, _side = materialize_exact_witness(witness)
+    squares = {
+        str(square["id"]): corners
+        for square, corners in zip(witness["squares"], geometry, strict=True)
+    }
+    residue = [
+        component
+        for entry in band()
+        if entry["n"] == 88
+        for component in entry["components"]
+        if component["shape"] == "other-polyomino"
+    ]
+    assert sorted(component["size"] for component in residue) == [16, 25]
+    for component in residue:
+        assert component["angle_degrees"] == "0"
+        for member in component["members"]:
+            corners = squares[member]
+            dx = Fraction(str(corners[1][0])) - Fraction(str(corners[0][0]))
+            dy = Fraction(str(corners[1][1])) - Fraction(str(corners[0][1]))
+            assert (dx == 0) != (dy == 0), member
 
 
 def test_the_residue_is_two_populations_and_nothing_between() -> None:
@@ -67,21 +93,26 @@ def test_the_residue_is_two_populations_and_nothing_between() -> None:
     The wall seating separates them: 4 for a subset of an integer grid, which spans the
     container, and 2 for a block seated in a corner of a packing that is otherwise
     tilted. Among the catalogue's packings no residue component touches one wall or
-    three. The one exception is n = 68, whose record moved on 2026-09-29 from its
+    three. The new radical n51 strip adds two tilted interior components. The one-wall
+    exception is n = 68, whose record moved on 2026-09-29 from its
     UnitSquare rendering, where every square is a singleton, to Francisco Couzo's packing:
     its five-square block seats against one wall. n = 69 made the same move on 2026-10-05,
     to the catalogue's packing (T-088), and its two blocks, of 21 and 28 squares, are corner
-    blocks like the catalogue's others.
+    blocks like the catalogue's others. The house adoption of 11 October 2026 (think-fvz4)
+    moved n = 70 to T-146's regularization of Ryan Xu's packing, whose larger corner block
+    has 31 squares rather than 30, and n = 84 and 86 to Couzo's T-130 packings, which leave
+    one corner block of 12 at 84 and none at 86 where Xu's had three and two.
     """
     residue = _record()["residue"]
 
-    assert residue["walls_touched"] == {"1": 1, "2": 67, "4": 44}
+    assert residue["walls_touched"] == {"0": 2, "1": 1, "2": 64, "4": 44}
+    # n = 29 moved from the catalogue to PR #622's packet (T-195) on 17 October 2026.
     assert residue["by_source"] == {
         "exact-grid": 44,
-        "kingbird-derived-facts": 67,
-        "packet-derived-facts": 1,
+        "kingbird-derived-facts": 56,
+        "packet-derived-facts": 11,
     }
-    assert residue["tilted"] == 0
+    assert residue["tilted"] == 2
     assert residue["whole_record"] == 44
 
     for item in residue["detail"]:
@@ -89,7 +120,18 @@ def test_the_residue_is_two_populations_and_nothing_between() -> None:
             assert item["is_the_whole_record"], item
             assert item["walls_touched"] == 4, item
         elif item["source"] == "packet-derived-facts":
-            assert (item["n"], item["size"], item["walls_touched"]) == (68, 5, 1), item
+            assert (item["n"], item["size"], item["walls_touched"]) in {
+                (29, 5, 2),
+                (51, 5, 0),
+                (51, 10, 2),
+                (51, 18, 2),
+                (68, 5, 1),
+                (70, 18, 2),
+                (70, 31, 2),
+                (84, 12, 2),
+                (88, 16, 2),
+                (88, 25, 2),
+            }, item
         else:
             assert item["walls_touched"] == 2, item
 
@@ -109,8 +151,9 @@ def test_the_strata_are_not_three_samples_of_one_population() -> None:
     assert strata["exact-grid"]["components"] == 64  # one connected component per record
     assert strata["kingbird-derived-facts"]["tilted_components"] > 0
     assert "unitsquare-rendering" not in strata
-    assert strata["kingbird-derived-facts"]["records"] == 35
-    assert strata["packet-derived-facts"]["records"] == 1
+    # n = 29 moved from the catalogue to PR #622's packet (T-195) on 17 October 2026.
+    assert strata["kingbird-derived-facts"]["records"] == 29
+    assert strata["packet-derived-facts"]["records"] == 7
     assert strata["packet-derived-facts"]["tilted_components"] > 0
 
 

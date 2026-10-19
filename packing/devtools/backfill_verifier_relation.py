@@ -435,6 +435,19 @@ REPLAY_RULES: tuple[Rule, ...] = (
         runs(("V-evand-zmx2", "V-audit-wand125-point-and-mixed"), PRODUCER),
     ),
     (
+        "zmx2 and zm_mixed.py sub-roots of a split cover, audited as one decision",
+        _in_replay(r"audit_evand_mixed_covers composite"),
+        runs(
+            (
+                "V-evand-zmx2",
+                "V-evand-zm-mixed-py",
+                "V-replay-evand-zmx2",
+                "V-audit-evand-mixed-covers",
+            ),
+            PRODUCER,
+        ),
+    ),
+    (
         "zmx2 through the replay driver, audited",
         _in_replay(r"replay_evand_zmx2"),
         runs(("V-evand-zmx2", "V-replay-evand-zmx2", "V-audit-evand-mixed-covers"), PRODUCER),
@@ -465,17 +478,17 @@ REPLAY_RULES: tuple[Rule, ...] = (
         runs(("V-wand125-check-with-sqpack", "V-sqpack-fractional-exact"), PRODUCER),
     ),
     (
-        "Wang and Li's verify.py, and Kleddamag's launcher adapted to their certificate",
+        "Wang and Li's verify.py, and Overbeck's launcher adapted to their certificate",
         _in_replay(r"verify_wang_li|PASS_FRESH_TWO_IMPLEMENTATION"),
         runs(("V-wang-li-n11-verify", "V-kleddamag-n11-verify"), PRODUCER),
     ),
     (
-        "Kleddamag's n = 11 verify.py",
+        "Overbeck's n = 11 verify.py",
         _in_replay(r"N11_SOURCE_TREE"),
         runs(("V-kleddamag-n11-verify",), PRODUCER),
     ),
     (
-        "Guzhou0806's paired launcher: its verify.cpp beside Kleddamag's BigInt checker",
+        "Guzhou0806's paired launcher: its verify.cpp beside Overbeck's BigInt checker",
         _in_replay(r"replay\.js\b"),
         runs(
             ("V-guzhou-n17-verify-cpp", "V-kleddamag-n17-verify", "V-audit-guzhou-r068"),
@@ -493,7 +506,7 @@ REPLAY_RULES: tuple[Rule, ...] = (
         runs(("V-guzhou-r012-verify-py",), PRODUCER),
     ),
     (
-        "Kleddamag's n = 17 verify.py",
+        "Overbeck's n = 17 verify.py",
         _in_replay(r"kleddamag-17-squares-certified-bound|on verify\.py --jobs"),
         runs(("V-kleddamag-n17-verify",), PRODUCER),
     ),
@@ -729,17 +742,17 @@ SOURCE_RULES: tuple[Rule, ...] = (
     ),
     ("wand125's tools", _source(r"^\[wand125 tools"), runs(("V-wand125-tools",), None)),
     (
-        "Wang and Li's verify.py and Kleddamag's sweep",
+        "Wang and Li's verify.py and Overbeck's sweep",
         _source(r"^\[Wang Li n11"),
         runs(("V-wang-li-n11-verify", "V-kleddamag-n11-verify"), PRODUCER),
     ),
     (
-        "Kleddamag's n = 11 verify.py",
+        "Overbeck's n = 11 verify.py",
         _source(r"^\[Kleddamag n11"),
         runs(("V-kleddamag-n11-verify",), PRODUCER),
     ),
     (
-        "Kleddamag's n = 17 verify.py",
+        "Overbeck's n = 17 verify.py",
         _source(r"^\[Kleddamag n17"),
         runs(("V-kleddamag-n17-verify",), PRODUCER),
     ),
@@ -755,7 +768,7 @@ SOURCE_RULES: tuple[Rule, ...] = (
     ),
     (
         "the publisher's n = 11 optimality driver",
-        _source(r"^\[Queuingtheorydotcom"),
+        _source(r"^\[Ahmed"),
         runs(("V-queuingtheory-n11-verify",), PRODUCER),
     ),
     (

@@ -1,0 +1,12 @@
+certificate data/stair_k100000.json.gz: k = 100000, b = 623, y0 = 257/4, construction = stair; arithmetic fractions.Fraction
+S < k: True   (k - S = 8.271171e-09)
+unmutated end right/bottom: pass True
+mutation colshift: contain failures 0, overlaps 1, shape failures 0 -> rejected
+mutation coldown: contain failures 0, overlaps 1, shape failures 0 -> rejected
+mutation colgrow: contain failures 1, overlaps 0, shape failures 0 -> rejected
+mutation layerup: contain failures 0, overlaps 9, shape failures 0 -> rejected
+mutation layerlong: contain failures 0, overlaps 1, shape failures 0 -> rejected
+mutation wedgeplus: contain failures 0, overlaps 1, shape failures 0 -> rejected
+mutation region_lowered_1/100: contain failures 197, overlaps 0, shape failures 0 -> rejected
+wrongly accepted: 0
+MUTATION TEST: PASS  (0.6 s)

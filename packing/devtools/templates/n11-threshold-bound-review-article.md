@@ -1,8 +1,8 @@
 {{FRONT_MATTER}}
 
 This paper explains the computer-assisted proof of a lower bound of 31/8 for eleven unit
-squares, published by
-[Kleddamag in 11-squares-certified-bound](https://github.com/Kleddamag/11-squares-certified-bound):
+squares, published by Marc Leonard Overbeck (Kleddamag) in
+[11-squares-certified-bound](https://github.com/Kleddamag/11-squares-certified-bound):
 the
 [proof](https://github.com/Kleddamag/11-squares-certified-bound/blob/6a733f339395c3514f2ab63d8c4aa64cf63c0b5a/PROOF.md),
 [certificate](https://github.com/Kleddamag/11-squares-certified-bound/blob/6a733f339395c3514f2ab63d8c4aa64cf63c0b5a/global-certificate.json)
@@ -69,8 +69,8 @@ Write $T=3.8770835900\ldots$ for the side of Walter Trump’s packing of 1979, t
 packing known; the **bound gap**, the distance between the best upper and lower bounds,
 was ${{LADDER_GAP}}$ after this proof.[^register] The result was superseded within a
 week: on 2026-09-29 Ke Wang and Can Li reweighted and scaled this same certificate to
-$s(11)>3875000000/999999999$, a step of about $3.9\times10^{-9}$ (T-061), and
-Queuingtheorydotcom proved $s(11)=T$ by different machinery (T-060), which
+$s(11)>3875000000/999999999$, a step of about $3.9\times10^{-9}$ (T-061), and Ahmed
+proved $s(11)=T$ by different machinery (T-060), which
 [Part III]({{PAPER:n11-optimality-review}}) reviews.
 With T-061’s reweighting of it, it is the furthest the charge method reached, and Part
 III’s field certificates, which also charge cores, are easiest to follow against it.
@@ -184,7 +184,7 @@ The inventory:
   [integer difference sweep](#every-legal-center-collects-enough-charge) that evaluates
   it, are T-025’s; the source’s coefficients are the same.[^credit]
 - 2-of-3 charges beside point charges over contiguous intervals of
-  [parent](#parents-and-the-one-inequality) angles are inherited from Kleddamag’s own
+  [parent](#parents-and-the-one-inequality) angles are inherited from Overbeck’s own
   proof for seventeen squares (T-038); point charges over such intervals are older (next
   item), and T-037 is the first certificate of that form at eleven squares.[^register]
 - The shrunken parent of side $A<1$, the bound $L_0/A$, one closed core per angle
@@ -660,7 +660,7 @@ core of every row collects at least $0.99996$, and the value is known because tw
 complete sweeps computed it and a third method bounded it from below.[^statement]
 
 The register counts the two source checkers as one method, an exact event-cell sweep
-with signed rectangle terms, in two code lineages, the Python generalizing Kleddamag’s
+with signed rectangle terms, in two code lineages, the Python generalizing Overbeck’s
 seventeen-square checker and the JavaScript adapting R038’s: the Python geometry uses
 polygon edges and the JavaScript geometry clamped extrema, and the two partition the
 frame differently, 86,299,918 slabs against 86,275,862, exactly two fewer per row, yet

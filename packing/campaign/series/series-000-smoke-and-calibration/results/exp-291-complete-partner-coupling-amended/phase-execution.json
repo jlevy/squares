@@ -1,0 +1,17 @@
+{
+  "combined_resource_guard": "external supervisor; no internal wall/RSS guard",
+  "ended_at": "2026-10-07T19:42:00.323701Z",
+  "manifest": "campaign/series/series-000-smoke-and-calibration/results/exp-291-complete-partner-coupling-amended/execution-manifest.json",
+  "manifest_sha256": "86a6d2db53ee01f61d798266180b8a59707d294f33baaa79df9edb25ca2d1faa",
+  "phases": [
+    {"argv":["/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python","-m","devtools.check_n17_partner_pose_coupling","--descriptor","campaign/series/series-000-smoke-and-calibration/results/exp-291-complete-partner-coupling-amended/descriptor.json","--max-seconds","120","--output","campaign/series/series-000-smoke-and-calibration/results/exp-291-complete-partner-coupling-amended/certificate.json"],"ended_at":"2026-10-07T19:41:05.374381Z","name":"construction","returncode":0,"started_at":"2026-10-07T19:40:13.674656Z","status":"completed","wall_seconds":51.699170999985654},
+    {"argv":["/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python","-m","devtools.check_n17_partner_pose_coupling","--descriptor","campaign/series/series-000-smoke-and-calibration/results/exp-291-complete-partner-coupling-amended/descriptor.json","--max-seconds","120","--certificate","campaign/series/series-000-smoke-and-calibration/results/exp-291-complete-partner-coupling-amended/certificate.json","--output","campaign/series/series-000-smoke-and-calibration/results/exp-291-complete-partner-coupling-amended/replay.json"],"ended_at":"2026-10-07T19:42:00.322168Z","name":"fresh_verification","returncode":0,"started_at":"2026-10-07T19:41:05.375438Z","status":"completed","wall_seconds":54.94613545900211}
+  ],
+  "schema": "registered-phase-execution/v1",
+  "scientific_result_interpreted": false,
+  "started_at": "2026-10-07T19:40:13.674229Z",
+  "status": "completed",
+  "unstarted_phase_names": [],
+  "wall_seconds": 106.64836995897349
+}
+

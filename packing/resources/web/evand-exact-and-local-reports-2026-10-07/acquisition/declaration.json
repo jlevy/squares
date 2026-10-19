@@ -1,0 +1,42 @@
+{
+  "format": "external-source-declaration-v1",
+  "id": "evand-exact-and-local-reports",
+  "source_url": "https://github.com/evand/square-packing",
+  "source_ref": "f58a01774a733b232a88576470332185d8d11641",
+  "source_commit": "f58a01774a733b232a88576470332185d8d11641",
+  "retrieved_at_utc": "2026-10-08T00:52Z",
+  "git_scope": "Selected immutable source files for issues #419 and #420. The complete committed Lean tree, catalogue and named generators/checker are retained as source reports. Referenced minpoly geometry data and uncommitted generated Packs files are not included; no independent checker or Lean replay is claimed.",
+  "archived_dir": "source",
+  "license": "MIT, Evan Daniel (LICENSE and s12/LICENSE); source credit retained in s12/CREDITS.md",
+  "claims": [
+    "The source catalogue reports 269 exact configurations, 258 Lean Packs claims, and four newly reported side polynomials at n=102,106,152,177 of degrees 8,32,40,32. Reported polynomial minimality and published-expression identity are separate from geometry feasibility.",
+    "The source reports 178 non-strict matched-index local-minimum claims: 176 band-lemma rows and n=11,28. These are not rigidity or global lower bounds."
+  ],
+  "scope": [
+    "LICENSE",
+    "s12/LICENSE",
+    "s12/CREDITS.md",
+    "s12/search/exact/README.md",
+    "s12/search/exact/EXACT_FORMS.md",
+    "s12/search/exact/exact_forms.json",
+    "s12/search/exact/verify_exact.py",
+    "s12/search/exact/chain_lean.py",
+    "s12/search/exact/localmin_lean.py",
+    "s12/tasks/exact-minpoly/chain-lemma.md",
+    "s12/lean"
+  ],
+  "retain": [
+    "LICENSE",
+    "s12/LICENSE",
+    "s12/CREDITS.md",
+    "s12/search/exact/README.md",
+    "s12/search/exact/EXACT_FORMS.md",
+    "s12/search/exact/exact_forms.json",
+    "s12/search/exact/verify_exact.py",
+    "s12/search/exact/chain_lean.py",
+    "s12/search/exact/localmin_lean.py",
+    "s12/tasks/exact-minpoly/chain-lemma.md",
+    "s12/lean"
+  ],
+  "pinned_only": []
+}

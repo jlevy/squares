@@ -1,0 +1,76 @@
+{
+  "schema": "registered-phase-command-plan/v1",
+  "registered_at": "2026-10-07T21:33:18.352269+00:00",
+  "source_freeze": "registrationcommitresolved/recordedatlaunch",
+  "target_unrun": true,
+  "phases": [
+    {
+      "name": "construction",
+      "argv": [
+        "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+        "-m",
+        "devtools.check_n17_collective_row_coverage",
+        "--descriptor",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-296-collective-row-coverage/descriptor.json",
+        "--max-seconds",
+        "60",
+        "--output",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-296-collective-row-coverage/certificate.json"
+      ]
+    },
+    {
+      "name": "fresh_verification",
+      "argv": [
+        "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+        "-m",
+        "devtools.check_n17_collective_row_coverage",
+        "--descriptor",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-296-collective-row-coverage/descriptor.json",
+        "--max-seconds",
+        "60",
+        "--certificate",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-296-collective-row-coverage/certificate.json",
+        "--output",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-296-collective-row-coverage/replay.json"
+      ]
+    }
+  ],
+  "primary_criterion": "A complete simultaneous pass over all992 inherited foreign closed rows strictly decreases the exact length of the surviving closed angle-interval union for at least one owner, and a separate fresh process reconstructs the entire mathematical payload identically. Each row uses only the ORIGINAL accepted exp293 owned sets, excludes its own owner, and removes its full domain only after exact closed-union coverage. An outside vertex is a negative shortcut; covered vertices alone never prove coverage. Every row, reference and seam is retained in accounting. A whole owner cover becoming empty is secondary point contradiction. No ownership recovery, sequential feedback, second pass, regional branch, whole-parent exclusion, census admission or packing claim is licensed. Resource/refusal stops are not completed negative results.",
+  "budget": "One worker;60s construction plus60s fresh inside120s, outerTERM120/KILL130; sampled4096MiB current RSS per live owned process. Descriptor10MiB, each accepted finite receipt64MiB, output64MiB. Inherited geometry1048576 vertices/domain1024/K2048, normalized4096-bit geometry. StrictD32; F hull4096; cached raw Minkowski vertex products1048576 over cache misses; point-in-union conservative facet products16M; per-row sweep edges8192 including target and all forbidden boundaries; cumulative prospective sweep pairs8M charged before calls. This version does not clip F to P (clipped vertex counter0; allocation2097152 unchanged). Trusted sweep internal homogeneous arithmetic has no separate bit/event cap; deadline before/after plus outer guard.",
+  "runner_argv": [
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-m",
+    "devtools.run_registered_phases",
+    "--manifest",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-296-collective-row-coverage/execution-manifest.json",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-296-collective-row-coverage/phase-execution.json"
+  ],
+  "supervisor_argv": [
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-m",
+    "devtools.supervise_posix",
+    "--max-seconds",
+    "120",
+    "--max-memory-mib",
+    "4096",
+    "--sample-seconds",
+    "0.25",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-296-collective-row-coverage/supervision.json",
+    "--stdout",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-296-collective-row-coverage/stdout.log",
+    "--stderr",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-296-collective-row-coverage/stderr.log",
+    "--",
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-m",
+    "devtools.run_registered_phases",
+    "--manifest",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-296-collective-row-coverage/execution-manifest.json",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-296-collective-row-coverage/phase-execution.json"
+  ],
+  "memory_scope": "sampled_per_live_process_in_owned_group",
+  "max_memory_mib": 4096
+}

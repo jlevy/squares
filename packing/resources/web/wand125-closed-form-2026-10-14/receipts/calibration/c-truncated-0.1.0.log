@@ -1,0 +1,10 @@
+# command: ./replay4d-0.1.0 interval_0.495_0.5/family.json controls/truncated.rec --region 167/100 301/100 272/100 38/10 --threads 1 --out out/c-truncated-0.1.0.json
+# cwd: the run directory: replay4d binaries and the unpacked release assets of closed-form-v1
+# python3: not used by this command
+# host: 4 cores; load 2.69 4.31 7.11; started 2026-10-14T18:13:54Z
+roots 2 leaf kinds {"CORE1:Tx":2}
+BAD {"source":"domain","why":"u-range does not cover 90 degrees"}
+BAD {"source":"domain","why":"root intervals are not partitions"}
+cpu 0.130271s wall 0.130954s
+REPLAY BAD (2)
+# finished 2026-10-14T18:13:55Z; exit 1; wall 0.137 s; CPU 0.1 s (user 0.133 + sys 0.004); load 2.69 4.31 7.11

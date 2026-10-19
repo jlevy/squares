@@ -1,0 +1,52 @@
+{
+"title": "Packing k^2-c unit squares: an upper bound of order k^{3/8} for the deficiency (preprint, programs and data)",
+"upload_type": "software",
+"description": "Licences in this single record: the paper (paper/paper.pdf, paper/paper.tex) is licensed under CC BY 4.0; the programs (code/) and the data (data/) under the MIT License, which is the licence shown for the record. Preprint with programs and data. For an integer k >= 2 let c*(k) be the largest integer c with s(k^2-c) = k, where s(n) is the side of the smallest square containing n non-overlapping unit squares. The preprint proves c*(k) < 43.06 k^{3/8} + 2*10^-5 for every integer k >= 4*10^26 (Theorem 1.1; constants certified in interval arithmetic; the asymptotic regime cannot be tested by explicit computation), c*(k) < 20.668 k^{2/5} + 0.623 for every integer k >= 1.6*10^7 (Theorem 1.2; the better bound for all k below about 5.6*10^12) and c*(k) <= 8*ceil(sqrt(k-4)) - 1 for every integer k >= 6 (Theorem 1.4). The band ends of an L-shaped packing are filled by a staircase of columns with one common tilt, and for the exponent 3/8 the walls of each end by chains of staircases with slowly decreasing tilt; these ideas are those of H. D. Bui (arXiv:2508.04603v2, Sections 3-4); the proofs are self-contained. Computer-assisted (Theorem 1.6; end packings checked in exact rational arithmetic, including by an independently written checker): c*(10^5) <= 1583, c*(10^6) <= 3972, c*(10^7) <= 10039, c*(3.825*10^7) <= 16988, c*(10^8) <= 24790. Includes the data of these packings, the checker with negative controls, the generator, interval-arithmetic checks of the constants of both theorems (for k^{3/8}: a covering of the whole range b >= 10^16), and an explicit exact check of the wall filler. Status: not refereed; the paper has been checked only by AI-based reviews and by computer programs, some of them independent re-implementations; no human expert has reviewed it. Use of AI: developed with the assistance of Claude (Anthropic), including the proofs, the text and the programs; the author takes full responsibility.",
+"notes": "Licences: paper/paper.tex and paper/paper.pdf under CC BY 4.0 (see paper/LICENSE); programs in code/ and data in data/ under the MIT License (see LICENSE). The licence field of this record refers to the software (MIT). Cited preprints by the same author (not refereed): 'Packing k^2-c unit squares: s(k^2-c)=k for all large k', version 1.2, https://doi.org/10.5281/zenodo.23194104 (programs and data: https://doi.org/10.5281/zenodo.23194031); 'a lower bound of order k^{1/4} for the deficiency', version 1.0, https://doi.org/10.5281/zenodo.23212643 (programs: https://doi.org/10.5281/zenodo.23211207); 'a lower bound of order k^{1/3} for the deficiency', version 1.0, https://doi.org/10.5281/zenodo.23213564 (programs: https://doi.org/10.5281/zenodo.23212059).",
+"creators": [
+{
+"name": "Ryu, Sungjoon"
+}
+],
+"license": "MIT",
+"keywords": [
+"square packing",
+"unit squares",
+"wasted area",
+"c*(k)",
+"computer-assisted proof"
+],
+"related_identifiers": [
+{
+"identifier": "10.5281/zenodo.23194104",
+"relation": "references",
+"resource_type": "publication-preprint"
+},
+{
+"identifier": "10.5281/zenodo.23194031",
+"relation": "references",
+"resource_type": "software"
+},
+{
+"identifier": "10.5281/zenodo.23212643",
+"relation": "references",
+"resource_type": "publication-preprint"
+},
+{
+"identifier": "10.5281/zenodo.23211207",
+"relation": "references",
+"resource_type": "software"
+},
+{
+"identifier": "10.5281/zenodo.23213564",
+"relation": "references",
+"resource_type": "publication-preprint"
+},
+{
+"identifier": "10.5281/zenodo.23212059",
+"relation": "references",
+"resource_type": "software"
+}
+],
+"version": "1.0"
+}

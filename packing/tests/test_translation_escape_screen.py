@@ -86,53 +86,80 @@ def _rendering_entry(directory: Path) -> dict[str, Any]:
 #: Cases whose movable-square count differs between the screen's four tolerances; each
 #: still carries a replayed hit at the primary tolerance. Couzo's and de Winter's poses
 #: carry binary64 coordinates, so a contact gap near the tightest tolerance moves more
-#: of them than it moved the 28-digit records they replaced.
+#: of them than it moved the 28-digit records they replaced. The house adoption of 11
+#: October 2026 (think-fvz4) moved the n = 1..324 list only at adopted counts: 23 of them
+#: left it and 156 and 232 joined it. Its pass of 12 October moved it at its own nine:
+#: 176 and 270 joined, and 238, 271, 272 and 304 left. The pass for issue 528 (T-158)
+#: moved it at its three: 175 and 264 joined, and 232 stayed; that for issue 552 (T-160)
+#: at 154, which left. The pass of 15 October 2026 moved it at its eight: 154 and 304
+#: joined, and 211 and 302 left; once a hold skipped only the held entry, its ten next
+#: candidates moved it again: 129 and 204 joined, and 156, 176 and 303 left. The
+#: adoption of 16 October 2026 (think-z7wn) moved it at its fifteen: 176 joined.
+#: Re-screening the adopted
+#: counts with the screen's own `--update --n` rebuilds the retained screen byte for byte.
 GOLDEN_UNSTABLE = {
-    "n=1..100": [68],
-    "n=1..200": [68, 102, 105, 106, 110, 123, 130, 132, 155, 172, 177, 179, 199],
-    "n=1..324": [
+    "n=1..100": [
         68,
-        102,
-        105,
+        84,
+        88,
+    ],
+    "n=1..200": [
+        68,
+        84,
+        88,
         106,
         110,
-        123,
-        126,
+        129,
         130,
-        132,
-        155,
+        146,
+        154,
         172,
+        175,
         177,
+        179,
+        180,
         199,
+    ],
+    "n=1..324": [
+        68,
+        84,
+        88,
+        106,
+        110,
+        129,
+        130,
+        146,
+        154,
+        172,
+        175,
+        176,
+        177,
+        179,
+        180,
+        199,
+        204,
         206,
         207,
-        209,
         210,
-        211,
-        228,
-        236,
-        237,
-        238,
+        232,
+        239,
         241,
         259,
-        263,
+        261,
+        264,
+        266,
+        267,
         268,
         269,
         270,
-        271,
-        272,
         273,
-        292,
         297,
         301,
-        302,
-        303,
         304,
-        305,
-        306,
         307,
     ],
 }
+
 """Records screened at a corpus whose result has actually been looked at.
 
 The count itself is derived below -- the corpus less the shape-residual exclusions -- so
@@ -212,6 +239,20 @@ def test_small_records_rescreen_to_the_retained_result() -> None:
     for n in (5, 10, 11, 27):
         screened = screen_translation_escape._screen_entry(entries[n])  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
         assert screened == (True, cases[n])
+
+
+@pytest.mark.slow
+def test_an_adopted_house_retains_its_replayed_tolerance_instability() -> None:
+    """A fresh screen of an unstable adopted house reproduces the retained result.
+
+    SQUISH's n = 108 was the case until the house adoption of 11 October 2026
+    (think-fvz4) gave 108 to T-128, whose packing is stable across the screen's
+    tolerances. Couzo's n = 84 (T-130), adopted the same day, is not.
+    """
+    entry = next(row for row in manifest_entries() if row["n"] == 84)
+    screened = screen_translation_escape._screen_entry(entry)  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+    assert screened == (True, _cases()[84])
+    assert screened[1]["stable_across_tolerances"] is False
 
 
 def test_every_retained_result_names_the_record_the_manifest_holds() -> None:

@@ -28,7 +28,16 @@ result the clause is about holds (`devtools.rung_prose`); a statement of what a 
 needs is not such an assertion. A result's status (recorded, reviewed, confirmed, incomplete) is
 derived from its rungs by `devtools.result_status` and never stored; this holds
 the one hand-recorded workflow fact, an entry's `activity`, to its fields, its
-link and its age. Human review owns evidence relevance, claim
+link and its age, and an entry's `unfinished_confirmations`, the confirmations it names
+and has not run, to rungs above its own, one listing each, a link that resolves and a
+price that is positive, ordered and dated no later than the register's last review
+(`unfinished_confirmations_problems`). It holds an entry's `regularizations`, the counts
+at which its certificate rearranges a packing another result holds, to counts in its
+scope, each once, to a registered result (`of`, and `first_certified_in` where named)
+dated no later whose scope holds the count, to a regularizer among the entry's own
+sources (or `project`, on a result of this project), and to measurements that are
+numbers no lower than zero, one at least where the identity was decided here
+(`regularizations_problems`). Human review owns evidence relevance, claim
 coverage, composition, significance, novelty, whether a headline says what its
 claim says, and the choice between kinds the record cannot tell apart.
 
@@ -46,9 +55,15 @@ from typing import Any
 
 from devtools.build_bound_citations import RECENT_SINCE
 from devtools.render_document_map import document_link
-from devtools.result_status import STATUSES, activity_problems, latest_review, status
+from devtools.result_status import (
+    STATUSES,
+    activity_problems,
+    latest_review,
+    link_problem,
+    status,
+)
 from devtools.rung_prose import REGISTER_FIELDS, Standing, label_problems
-from devtools.verifier_registry import RANK, confirming_runs, strongest
+from devtools.verifier_registry import RANK, confirming_runs, sampled, strongest
 from sqpack.assurance import EXTERNAL_ORIGINS, PROOF_METHODS
 from sqpack.yamlio import safe_load
 
@@ -68,6 +83,8 @@ READER_TIER = (
     REPO / "README.md",
     REPO / "SYNOPSIS.md",
     ROOT / "devtools" / "templates" / "overview-article.md",
+    ROOT / "devtools" / "templates" / "about-article.md",
+    ROOT / "devtools" / "templates" / "atlas-article.md",
     ROOT / "devtools" / "templates" / "all-results-article.md",
     ROOT / "devtools" / "templates" / "frontier-article.md",
     ROOT / "devtools" / "templates" / "papers-article.md",
@@ -125,6 +142,7 @@ KINDS = (
     "optimality",
     "uniqueness",
     "simplification",
+    "formalization",
     "rigidity",
     "case-exclusion",
     "restricted-optimality",
@@ -133,6 +151,16 @@ KINDS = (
     "audit",
 )
 SIMPLIFICATION = "simplification"
+#: The result kind `formalization`. A review of `kind: formalization` is another thing,
+#: a human expert's review of a formal proof (`FORMALIZATION_REVIEWS`, `FORMALIZATION_CHECKS`).
+FORMALIZATION_KIND = "formalization"
+#: The kinds of a second proof: each proves again a result the record already holds and
+#: moves no bound by itself, its claim names that result, and its headline may restate the
+#: result's relation on `s(n)`. A formalization is one a proof assistant checked, by
+#: evidence of its own; a simplification is one by a shorter, cleaner or more elementary
+#: route, which a proof assistant may also have checked. Where a second proof is both,
+#: either kind fits and the owner chooses at registration (epistemics.md, Result Kinds).
+SECOND_PROOF_KINDS = frozenset({SIMPLIFICATION, FORMALIZATION_KIND})
 #: The relations on `s(n)` each bound kind states, as a headline (`≥`) and a claim (`>=`)
 #: write them. These three kinds are the bounds; every other kind is no bound on `s(n)`.
 KIND_RELATIONS = {
@@ -169,12 +197,15 @@ def _rank(rung: str) -> int:
 
 def _machine_proof_shaped(entry: dict) -> bool:
     """A certificate that replays: exact, interval or kernel-checked, with a replay
-    command and a passing status. Rung 3's machine evidence on either axis."""
+    command and a passing status. Rung 3's machine evidence on either axis. A run whose
+    independence record states a sample is not: it decides the instances it ran and
+    nothing about the others (epistemics.md, The Independence Ladder)."""
     return (
         (entry.get("method") in MACHINE_METHODS or entry.get("method") == FORMAL_METHOD)
         and bool(entry.get("certificate"))
         and bool(entry.get("replay"))
         and entry.get("replay_status") == "passed"
+        and not sampled(entry)
     )
 
 
@@ -245,10 +276,30 @@ def formalization_reviews(reviews: list[dict], *, confirming: bool = False) -> i
 
 
 def derive_confirmation(
-    entries: list[dict], reviews: list[dict] | None = None, *, open_review: bool = False
+    entries: list[dict],
+    reviews: list[dict] | None = None,
+    *,
+    open_review: bool = False,
+    record: Mapping[str, Any] | None = None,
 ) -> str:
     """The confirmation rung the confirming-origin evidence and the confirming-side
     reviews support (epistemics.md, Confirmation)."""
+    entries = [entry for entry in entries if not sampled(entry)]
+    if record is not None:
+        return min(
+            (
+                _derive_confirmation(pool, reviews, open_review=open_review)
+                for pool in _claim_pools(record, entries)
+            ),
+            key=_rank,
+        )
+    return _derive_confirmation(entries, reviews, open_review=open_review)
+
+
+def _derive_confirmation(
+    entries: list[dict], reviews: list[dict] | None = None, *, open_review: bool = False
+) -> str:
+    """The rung supported by one complete claim pool."""
     reviews = list(reviews or [])
     ours = [entry for entry in entries if entry.get("origin") in CONFIRMING_ORIGINS]
     rebuilt = [
@@ -269,7 +320,10 @@ def derive_confirmation(
         return "C4"
     if machine:
         return "C3"
-    if any(entry.get("replay") and entry.get("replay_status") == "passed" for entry in ours):
+    if any(
+        entry.get("replay") and entry.get("replay_status") == "passed" and not sampled(entry)
+        for entry in ours
+    ):
         return "C2"
     if any(
         entry.get("origin") in EXTERNAL_ORIGINS
@@ -305,6 +359,49 @@ _LOWER_CLAIMS = frozenset({"lower-bound", "exact-value"})
 _UPPER_CLAIMS = frozenset({"upper-bound", "exact-value"})
 
 
+def proved_kind(record: Mapping[str, Any]) -> str | None:
+    """The conclusion of a result, including the kind a second proof proves again."""
+    kind = record.get("kind")
+    return record.get("proves_kind") if kind in SECOND_PROOF_KINDS else kind
+
+
+def _claim_pools(record: Mapping[str, Any], entries: list[dict]) -> list[list[dict]]:
+    """Evidence for each required conclusion at each count, never a component proof.
+
+    Exact-value evidence covers both bound sides. A whole result takes its weakest side
+    and count. A second proof requires the conclusion its `proves_kind` declares, which
+    kind validation checks against its target and the relations its own claim states.
+    """
+    kind = proved_kind(record)
+    if record.get("kind") in SECOND_PROOF_KINDS and (
+        kind not in KINDS or kind in SECOND_PROOF_KINDS
+    ):
+        return [[]]
+    if kind in BOUND_KINDS:
+        claims = (
+            (_LOWER_CLAIMS,)
+            if kind == "lower-bound"
+            else (_UPPER_CLAIMS,)
+            if kind == "upper-bound"
+            else (_LOWER_CLAIMS, _UPPER_CLAIMS)
+        )
+    elif record.get("kind") in SECOND_PROOF_KINDS:
+        claims = (frozenset({STRUCTURE_CLAIM}),)
+    else:
+        return [entries]
+    counts = scope_values(dict(record["scope"]))
+    return [
+        [
+            entry
+            for entry in entries
+            if entry.get("claim") in side
+            and n in scope_values(entry.get("scope") or {"n_values": []})
+        ]
+        for n in sorted(counts)
+        for side in claims
+    ] or [[]]
+
+
 def confirmation_code(
     record: Mapping[str, Any], entries: Sequence[Mapping[str, Any]]
 ) -> str | None:
@@ -318,28 +415,26 @@ def confirmation_code(
     producer's code among the runs that confirm it, and the result takes the part closest
     to it: an optimality result is as independent as the less independent of its halves,
     so the grid replay of an upper half never makes a lower half re-run with the source's
-    own checker read as re-implemented. A bound reads its own runs, and any other kind
-    reads all of them.
+    own checker read as re-implemented. A bound reads its own runs. Values and second
+    proofs require their declared conclusion at every count; other kinds read all runs.
     """
     runs = confirming_runs(entries)
     machine = [entry for entry in runs if _machine_proof_shaped(dict(entry))]
     pool = machine or runs
     if not pool:
         return None
-    kind = record.get("kind")
-    if kind in {"lower-bound", "upper-bound"}:
-        own = [entry for entry in pool if entry.get("claim") in {kind, "exact-value"}]
-        return strongest(own or pool)
-    lower = strongest(entry for entry in pool if entry.get("claim") in _LOWER_CLAIMS)
-    upper = strongest(entry for entry in pool if entry.get("claim") in _UPPER_CLAIMS)
-    if lower and upper:
-        return min((lower, upper), key=RANK.__getitem__)
-    return strongest(pool)
+    pools = _claim_pools(record, [dict(entry) for entry in pool])
+    relations = [strongest(part) for part in pools]
+    if any(relation is None for relation in relations):
+        return None
+    return min(
+        (relation for relation in relations if relation is not None), key=RANK.__getitem__
+    )
 
 
-#: The word whose kind the prose rule asks for, as a verb or a participle; a novelty label
-#: or a status in code is not the word.
-_CONFIRMED = re.compile(r"(?<![\w`])confirmed(?![\w`-])", re.IGNORECASE)
+#: The word whose kind the prose rule asks for, as a verb or a participle; a novelty label,
+#: a status in code, or a hypothesis a run bears out (``confirms H-219``) is not the word.
+_CONFIRMED = re.compile(r"(?<![\w`])confirm(?:ed|s)(?![\w`-])(?!\s+H-\d)", re.IGNORECASE)
 #: The phrases that say which kind of confirmation a sentence means (epistemics.md,
 #: Confirmation): the producer's own code re-run, a re-implementation sharing its named
 #: components, or an independent re-implementation.
@@ -353,8 +448,8 @@ _SENTENCE_END = re.compile(r"(?<=[.;:])\s+(?=[A-Z`(\[])")
 
 
 def confirmation_prose_problems(record: Mapping[str, Any]) -> list[str]:
-    """Sentences of a result's `claim`, `composition` or `next_rung` that say "confirmed"
-    without saying which kind of confirmation: the producer's code re-run, shared
+    """Sentences of a result's `claim`, `composition` or `next_rung` that say "confirmed" or
+    "confirms" without saying which kind of confirmation: the producer's code re-run, shared
     components, or an independent re-implementation. `notes` is history and exempt."""
     return [
         f"{record['id']}: {name} says confirmed without saying how: {sentence[:90]}"
@@ -433,10 +528,101 @@ def repository_file_problem(path: str) -> str | None:
     try:
         target.relative_to(REPO.resolve())
     except ValueError:
-        return "resolves outside the repository"
+        return linked_repository_file_problem(path)
     if not target.is_file():
         return "does not name a file"
     return None
+
+
+def linked_repository_file_problem(path: str) -> str | None:
+    """Only separately admitted exact proof and atlas leaves may link outside."""
+    from devtools import evand_arrangement_houses as evand  # noqa: PLC0415
+    from devtools import gupta_house_links as gupta  # noqa: PLC0415
+    from devtools import refinement_house_links as refinements  # noqa: PLC0415
+    from devtools import ryxu_house_links as ryxu  # noqa: PLC0415
+    from devtools import squish_second_update_confirmation as second  # noqa: PLC0415
+    from devtools import squish_second_update_house_links as house  # noqa: PLC0415
+    from devtools import upper_bound_houses as adopted  # noqa: PLC0415
+    from devtools.squish_followup_packets import linked_certificate_problem  # noqa: PLC0415
+
+    # Proof paths name their fixed source; atlas paths additionally require the
+    # private current selection. A linked witness cannot choose its own validator.
+    proofs = {
+        f"packing/witnesses/squish-422-second-update-2026/n-{n:03d}-rational.yaml.gz"
+        for n in second.NUMBERS
+    }
+    if path in proofs:
+        return second.linked_certificate_problem(path, repository=REPO)
+    owners = (
+        (gupta, gupta.NUMBERS, gupta.reports.SOURCE_KEY),
+        (ryxu, ryxu.NUMBERS, ryxu.SOURCE_KEY),
+        (house, house.LINK_NUMBERS, house.confirmation.reported.SOURCE_KEY),
+        (refinements, refinements.packets.COUZO.numbers, refinements.packets.COUZO.key),
+        (refinements, refinements.packets.N68.numbers, refinements.packets.N68.key),
+        (evand, evand.NUMBERS, evand.reports.SOURCE_KEY),
+        # The houses adopted on 2026-10-11, each count under its own source's key.
+        *((adopted, (m,), adopted.source_for(m).key) for m in adopted.NUMBERS),
+    )
+    declared = {
+        f"packing/witnesses/known-best/n-{n:03d}.yaml": n
+        for _owner, numbers, _key in owners
+        for n in numbers
+    }
+    if path in declared:
+        n = declared[path]
+        frontier = REPO / "packing/frontier" / f"n-{n:03d}.md"
+        if frontier.is_symlink() or not frontier.resolve().is_relative_to(REPO.resolve()):
+            return "selected frontier escapes the private checkout"
+        try:
+            selected = _frontmatter(frontier)["packing"]
+            selected_n = selected["n"]
+            source_key = selected["reported_upper_bound"]["source_key"]
+        except ValueError, KeyError, TypeError, OSError:
+            return "linked house requires its complete private selected frontier"
+        for owner, numbers, expected_key in owners:
+            if n not in numbers:
+                continue
+            if selected_n == n and source_key == expected_key:
+                return owner.linked_house_problem(path, repository=REPO)
+        return "selected source has no admitted linked-house owner"
+    return linked_certificate_problem(path, repository=REPO)
+
+
+def repository_file_problems(paths: Iterable[str]) -> dict[str, str | None]:
+    """Check one register invocation, sharing each packet's complete linked-proof admission."""
+    from devtools import squish_followup_packets as first  # noqa: PLC0415
+    from devtools.squish_second_update_packets import NUMBERS  # noqa: PLC0415
+
+    selected = dict.fromkeys(paths)
+    declared = {
+        f"packing/witnesses/squish-422-second-update-2026/n-{n:03d}-rational.yaml.gz"
+        for n in NUMBERS
+    }
+    linked = [
+        path
+        for path in selected
+        if path in declared and not (REPO / path).resolve().is_relative_to(REPO.resolve())
+    ]
+    problems: dict[str, str | None] = {}
+    if linked:
+        from devtools import squish_second_update_confirmation as second  # noqa: PLC0415
+
+        problems.update(second.linked_certificate_problems(linked, repository=REPO))
+    first_declared = {
+        f"packing/witnesses/squish-401-update-2026/n-{n:03d}-rational.yaml.gz"
+        for n in first.RESULT_NUMBERS
+    }
+    first_linked = [
+        path
+        for path in selected
+        if path in first_declared and not (REPO / path).resolve().is_relative_to(REPO.resolve())
+    ]
+    if first_linked:
+        problems.update(first.linked_certificate_problems(first_linked, repository=REPO))
+    problems.update(
+        (path, repository_file_problem(path)) for path in selected if path not in problems
+    )
+    return problems
 
 
 def _frontmatter(path: Path) -> dict:
@@ -673,7 +859,7 @@ def _relation_problems(kind: str, headline: str, claim: str) -> list[str]:
     """Where the relations a headline and a claim write disagree with a declared kind."""
     label = kind_label(kind)
     opens = headline_kind(headline)
-    if opens is not None and kind not in {opens, SIMPLIFICATION}:
+    if opens is not None and kind != opens and kind not in SECOND_PROOF_KINDS:
         return [f"kind is {label}, but its headline opens with {_OPENS_WITH[opens]}"]
     in_headline, in_claim = stated_relations(headline), stated_relations(claim)
     if kind == "optimality":
@@ -711,23 +897,36 @@ def _evidence_needed(kind: str, claims: set[str]) -> str | None:
 
 
 def kind_problems(
-    record: dict, cited: Iterable[Mapping[str, Any]], scopes: Mapping[str, set[int]]
+    record: dict,
+    cited: Iterable[Mapping[str, Any]],
+    scopes: Mapping[str, set[int]],
+    evidence_of: Mapping[str, Iterable[str]] | None = None,
+    records: Mapping[str, Mapping[str, Any]] | None = None,
 ) -> list[str]:
     """What is wrong with a result's `kind`, read against its own record.
 
     The kind is declared, and three things the record already holds check it.
 
     - **The relations written.** A headline that opens with a relation on `s(n)` states
-      its kind, and only a simplification, a second proof of a result the record holds,
-      may restate one under another kind. A bound's headline writes no relation of
-      another direction, its claim writes one of its own if it writes any, and an
-      optimality result writes its `=`. A kind that says nothing about `s(n)` has a
-      headline that writes none.
+      its kind, and only a second proof of a result the record holds, a simplification or
+      a formalization (`SECOND_PROOF_KINDS`), may restate one under another kind. A
+      bound's headline writes no relation of another direction, its claim writes one of
+      its own if it writes any, and an optimality result writes its `=`. A kind that says
+      nothing about `s(n)` has a headline that writes none.
     - **The cited evidence.** It claims what the kind needs: the bound for a bound, an
       exact value or both halves for optimality, and `derived-structure` for the kinds
-      that say nothing about `s(n)`.
-    - **The results the claim names.** A simplification's claim names the registered
-      result it proves again, on a case they share. `scopes` is every result's cases.
+      that say nothing about `s(n)`. A formalization cites evidence of its own that a
+      proof assistant checked (`proof_assistant_checked`), covering its conclusion on every
+      claimed case. `proves_kind` declares that conclusion and matches the target's kind.
+      Its own is what the results
+      it proves again do not cite: a second proof may cite their evidence for the half
+      it shares with them, as `T-054` and `T-055` cite the grid's, and a proof assistant's
+      check of the result it proves again is no check of the second proof.
+      `evidence_of` is every result's cited evidence ids. A simplification may cite such
+      evidence too: where a second proof is both, the owner chooses its kind.
+    - **The results the claim names.** The claim of a simplification or a formalization
+      names the registered result it proves again, on a case they share. `scopes` is
+      every result's cases.
 
     Method limit, correction and audit are told apart by review alone.
     """
@@ -739,19 +938,64 @@ def kind_problems(
         return [f"{rid}: kind {kind} is not one of {', '.join(KINDS)}"]
     headline = str(record.get("headline", ""))
     claim = " ".join(str(record.get("claim", "")).split())
+    cited = list(cited)
+    conclusion = proved_kind(record)
     problems = _relation_problems(kind, headline, claim)
-    needed = _evidence_needed(kind, {str(entry.get("claim")) for entry in cited})
+    if kind in SECOND_PROOF_KINDS:
+        if conclusion not in KINDS or conclusion in SECOND_PROOF_KINDS:
+            problems.append(
+                "a second proof declares the non-second-proof kind it proves again "
+                "in proves_kind"
+            )
+        else:
+            problems.extend(_relation_problems(conclusion, headline, claim))
+    needed = _evidence_needed(conclusion or kind, {str(entry.get("claim")) for entry in cited})
     if needed is not None:
         problems.append(f"kind is {kind_label(kind)}, and no cited evidence claims {needed}")
-    if kind == SIMPLIFICATION:
+    if kind in SECOND_PROOF_KINDS:
         cases = scopes.get(rid, set())
         named = {other for other in _RESULT_ID.findall(claim) if other != rid}
-        if not any(cases & scopes.get(other, set()) for other in named):
+        again_of = {other for other in named if cases & scopes.get(other, set())}
+        if not again_of:
+            again = (
+                "formalizes or proves again" if kind == FORMALIZATION_KIND else "proves again"
+            )
             problems.append(
-                "a simplification's claim names the registered result it proves again, "
-                "on a case they share"
+                f"a {kind}'s claim names the registered result it {again}, on a case they share"
+            )
+        if records is not None and again_of:
+            matching = {
+                other
+                for other in again_of
+                if other in records and proved_kind(records[other]) == conclusion
+            }
+            if cases - set().union(*(scopes[other] for other in matching)):
+                problems.append(
+                    "proves_kind does not match a named target's conclusion "
+                    "on every claimed case"
+                )
+        theirs = {str(ref) for other in again_of for ref in (evidence_of or {}).get(other, ())}
+        own = [
+            dict(entry)
+            for entry in cited
+            if proof_assistant_checked(entry)
+            and str(entry.get("id")) not in theirs
+            and not sampled(entry)
+        ]
+        scoped = {**record, "scope": {"n_values": sorted(cases)}}
+        checked = bool(cases) and all(_claim_pools(scoped, own))
+        if kind == FORMALIZATION_KIND and not checked:
+            problems.append(
+                "kind is formalization, and no cited evidence of its own is "
+                f"`{FORMAL_METHOD}`, performed or reported"
             )
     return [f"{rid}: {problem}" for problem in problems]
+
+
+def proof_assistant_checked(entry: Mapping[str, Any]) -> bool:
+    """Whether an evidence entry is a proof assistant's check, performed (`method`) or
+    reported by its source (`reported_method`)."""
+    return FORMAL_METHOD in {entry.get("method"), entry.get("reported_method")}
 
 
 def result_date(record: Mapping[str, Any]) -> str:
@@ -909,6 +1153,272 @@ def _established_date_problem(established: str, last_reviewed: str) -> str | Non
     return None
 
 
+#: The confirmation rungs an unfinished confirmation may name: a confirmation reaches one
+#: of them, never `C0`.
+UNFINISHED_RUNGS = ("C1", "C2", "C3", "C4", "C5")
+
+
+def _cpu_hours(value: object) -> float | None:
+    """A price in CPU-hours as the schema types it, a positive number, or nothing."""
+    if isinstance(value, bool) or not isinstance(value, int | float) or value <= 0:
+        return None
+    return float(value)
+
+
+def unfinished_confirmations_problems(
+    record: Mapping[str, Any], last_reviewed: str
+) -> list[str]:
+    """What is wrong with a result's `unfinished_confirmations`, the confirmations its
+    record names and has not run (epistemics.md, Status).
+
+    Each names what it is and the confirmation rung it would reach, which lies above the
+    result's own: a confirmation that has landed raised the rung and is removed. It is
+    listed once, its `link` is a bead, an issue, a branch or a repository file, and a
+    price, where one is recorded, is a positive number of CPU-hours whose upper end is no
+    lower than its estimate, dated no later than the register's last review. The check
+    reads the register's own date and never the clock, as `activity_problems` does.
+    """
+    items = record.get("unfinished_confirmations")
+    if not items:
+        return []
+    rid = record["id"]
+    held = str(record.get("confirmation", "C0"))
+    reviewed = _iso_date(last_reviewed)
+    problems: list[str] = []
+    seen: dict[str, int] = {}
+    for number, item in enumerate(items, start=1):
+        rung = str(item.get("rung"))
+        name = f"{rid}: unfinished confirmation {number} ({rung})"
+        what = " ".join(str(item.get("what") or "").split())
+        if not what:
+            problems.append(f"{name} says what it is in `what`")
+        elif (first := seen.setdefault(what.casefold(), number)) != number:
+            problems.append(f"{name} repeats unfinished confirmation {first}")
+        if rung not in UNFINISHED_RUNGS:
+            problems.append(f"{name} names no rung among {', '.join(UNFINISHED_RUNGS)}")
+        elif _rank(rung) <= _rank(held):
+            problems.append(
+                f"{name} is not above the result's confirmation, {held}; a confirmation "
+                "that has landed is removed"
+            )
+        if item.get("link") and (problem := link_problem(str(item["link"]))):
+            problems.append(f"{name}: link {problem}: {item['link']}")
+        problems.extend(_cost_problems(name, item.get("estimated_cost"), reviewed))
+    return problems
+
+
+def _cost_problems(
+    name: str, cost: Mapping[str, Any] | None, reviewed: date | None
+) -> list[str]:
+    """What is wrong with one unfinished confirmation's `estimated_cost`, if it has one."""
+    if cost is None:
+        return []
+    problems: list[str] = []
+    central = _cpu_hours(cost.get("cpu_hours"))
+    if central is None:
+        problems.append(f"{name}: estimated_cost.cpu_hours is not a positive number")
+    if "cpu_hours_high" in cost:
+        high = _cpu_hours(cost.get("cpu_hours_high"))
+        if high is None:
+            problems.append(f"{name}: estimated_cost.cpu_hours_high is not a positive number")
+        elif central is not None and high < central:
+            problems.append(
+                f"{name}: estimated_cost.cpu_hours_high, {cost['cpu_hours_high']}, is below "
+                f"its estimate, {cost['cpu_hours']}"
+            )
+    if not str(cost.get("basis") or "").strip():
+        problems.append(f"{name}: estimated_cost says how it was priced in `basis`")
+    priced = _iso_date(cost.get("priced"))
+    if priced is None:
+        problems.append(f"{name}: estimated_cost.priced is not a calendar date")
+    elif reviewed is not None and priced > reviewed:
+        problems.append(
+            f"{name}: estimated_cost.priced {priced.isoformat()} is after the register's "
+            f"last_reviewed {reviewed.isoformat()}"
+        )
+    return problems
+
+
+#: The `by` of a regularization this project made, of a result without `attribution`.
+PROJECT_REGULARIZER = "project"
+#: What a regularization's `changes` and `identity` count or measure, none below zero;
+#: the counts are whole numbers.
+REGULARIZATION_NUMBERS = {
+    "changes": ("merged_rotation_groups_deg", "straightened", "re_angled"),
+    "identity": ("moved", "max_move", "max_turn_deg"),
+}
+REGULARIZATION_COUNTS = frozenset({"straightened", "re_angled", "moved"})
+#: The measurements an identity decided here rests on; `measured` needs one at least.
+IDENTITY_MEASUREMENTS = ("one_to_one", "moved", "max_move", "max_turn_deg")
+#: The fields of a regularization that name an earlier registered result, with what
+#: each names: the result holding the packing (`of`, required), and the one whose
+#: certificate first stated the item's exact side (`first_certified_in`, optional).
+REGULARIZATION_EARLIER = {
+    "of": "the packing it regularizes",
+    "first_certified_in": "the certificate that first stated its side",
+}
+
+
+def _regularization_number_problems(name: str, item: Mapping[str, Any]) -> list[str]:
+    """The counts and measurements of one regularization that are no number, negative, or
+    a count that is no whole number."""
+    problems: list[str] = []
+    for block, fields in REGULARIZATION_NUMBERS.items():
+        values = item.get(block) or {}
+        for field in fields:
+            if field not in values:
+                continue
+            value = values[field]
+            whole = isinstance(value, int) and not isinstance(value, bool)
+            number = whole or isinstance(value, float)
+            if not number or value < 0 or (field in REGULARIZATION_COUNTS and not whole):
+                kind = "a whole number" if field in REGULARIZATION_COUNTS else "a number"
+                problems.append(f"{name}: {block}.{field} is not {kind} of at least 0: {value}")
+    return problems
+
+
+def regularizations_problems(
+    record: Mapping[str, Any],
+    dated: Mapping[str, str],
+    scopes: Mapping[str, set[int]],
+) -> list[str]:
+    """What is wrong with a result's `regularizations`, the counts at which its certificate
+    is a regularization of a packing another registered result holds (epistemics.md,
+    Results by Others).
+
+    Each count lies in this result's scope and is listed once. The result it names as
+    `of`, and as `first_certified_in` where it names one, is registered, is not this one,
+    holds that count in its scope and is dated no later than this one (`result_date`, as
+    `superseded_by_problems` compares them): a packing is regularized after it is
+    published, and a side is first certified before it is registered again. `by` is one
+    of this result's
+    `attribution.source_keys`, or `project` on a result of this project, which has none.
+    The counts and measurements are numbers no lower than zero, `moved` is no more
+    squares than the count holds, a `measured_in` names a repository file, and an
+    identity decided here (`measured`) carries at least one measurement. `dated` and
+    `scopes` are every result's date and cases.
+    """
+    items = record.get("regularizations")
+    if not items:
+        return []
+    rid = str(record["id"])
+    keys = set((record.get("attribution") or {}).get("source_keys") or [])
+    own = scopes.get(rid, set())
+    problems: list[str] = []
+    seen: set[int] = set()
+    for item in items:
+        n = item.get("n")
+        name = f"{rid}: regularization at n = {n}"
+        if n in seen:
+            problems.append(f"{name} is listed twice")
+        seen.add(n)
+        if n not in own:
+            problems.append(f"{name} is outside this result's scope")
+        for field, role in REGULARIZATION_EARLIER.items():
+            if field != "of" and item.get(field) is None:
+                continue
+            other = str(item.get(field))
+            if other == rid:
+                problems.append(f"{name} names the result itself as {role}")
+            elif other not in dated:
+                problems.append(f"{name} names {other}, which is not registered")
+            else:
+                if n not in scopes.get(other, set()):
+                    problems.append(f"{name} names {other}, whose scope does not hold n = {n}")
+                if _earlier(dated[rid], dated[other]):
+                    problems.append(
+                        f"{name} names {other}, dated {dated[other]}, after this result's "
+                        f"{dated[rid]}"
+                    )
+        by = str(item.get("by"))
+        if keys and by not in keys:
+            problems.append(
+                f"{name} is by {by}, which is not among this result's attribution.source_keys"
+            )
+        elif not keys and by != PROJECT_REGULARIZER:
+            problems.append(
+                f"{name} is by {by}, but a result of this project is regularized by "
+                f"`{PROJECT_REGULARIZER}`"
+            )
+        problems.extend(_regularization_number_problems(name, item))
+        identity = item.get("identity") or {}
+        moved = identity.get("moved")
+        if isinstance(moved, int) and isinstance(n, int) and moved > n:
+            problems.append(f"{name}: identity.moved, {moved}, is more squares than n = {n}")
+        if identity.get("measured_in") and (
+            problem := repository_file_problem(str(identity["measured_in"]))
+        ):
+            problems.append(
+                f"{name}: identity.measured_in {problem}: {identity['measured_in']}"
+            )
+        if identity.get("basis") == "measured" and not any(
+            field in identity for field in IDENTITY_MEASUREMENTS
+        ):
+            problems.append(
+                f"{name}: an identity measured here carries at least one of "
+                f"{', '.join(IDENTITY_MEASUREMENTS)}"
+            )
+    return problems
+
+
+def regularized_drawings_problems(
+    register: Mapping[str, Any], scopes: Mapping[str, set[int]], *, drift: bool = True
+) -> list[str]:
+    """What is wrong with the register's `regularized_drawings`, this project's own
+    regularizations of registered packings as the atlas's regularized layer draws them.
+
+    Each item is held as a result's `regularizations` item is, less what a result alone
+    has: its count listed once, its `of` registered with the count in its scope, `by` this
+    project, the measurements numbers no lower than zero with `moved` no more squares than
+    the count holds, a measured identity carrying a measurement, and its `measured_in`
+    a repository file. The drawings date from the layer's own runs, which carry no
+    register date, so `of` is not held to a date, and each `view` is the layer's to hold
+    (`regularize_axis_components --check-atlas`). The block as a whole must be what
+    `devtools.regularized_drawings` generates from the layer's index (`drift`).
+    """
+    drawings = register.get("regularized_drawings") or {}
+    problems: list[str] = []
+    seen: set[int] = set()
+    for item in drawings.get("items") or []:
+        n = item.get("n")
+        name = f"regularized drawing at n = {n}"
+        if n in seen:
+            problems.append(f"{name} is listed twice")
+        seen.add(n)
+        other = str(item.get("of"))
+        if other not in scopes:
+            problems.append(f"{name} names {other}, which is not registered")
+        elif n not in scopes[other]:
+            problems.append(f"{name} names {other}, whose scope does not hold n = {n}")
+        if item.get("by") != PROJECT_REGULARIZER:
+            problems.append(f"{name} is by {item.get('by')}, not `{PROJECT_REGULARIZER}`")
+        problems.extend(_regularization_number_problems(name, item))
+        identity = item.get("identity") or {}
+        moved = identity.get("moved")
+        if isinstance(moved, int) and isinstance(n, int) and moved > n:
+            problems.append(f"{name}: identity.moved, {moved}, is more squares than n = {n}")
+        measured_in = identity.get("measured_in")
+        if measured_in and (problem := repository_file_problem(str(measured_in))):
+            problems.append(f"{name}: identity.measured_in {problem}: {measured_in}")
+        if identity.get("basis") == "measured" and not any(
+            field in identity for field in IDENTITY_MEASUREMENTS
+        ):
+            problems.append(
+                f"{name}: an identity measured here carries at least one of "
+                f"{', '.join(IDENTITY_MEASUREMENTS)}"
+            )
+    listed = {row.get("n") for row in drawings.get("unregistered") or []}
+    problems.extend(
+        f"regularized drawing at n = {n} is both an item and unregistered"
+        for n in sorted(seen & listed)
+    )
+    if drift:
+        from devtools import regularized_drawings  # noqa: PLC0415
+
+        problems.extend(regularized_drawings.problems())
+    return problems
+
+
 def coverage_problems(
     results: list[dict],
     evidence_index: dict[str, dict],
@@ -968,9 +1478,25 @@ def registered_problems(record: dict, last_reviewed: str) -> list[str]:
     return []
 
 
-def derive_verification(entries: list[dict], reviews: list[dict] | None = None) -> str:
+def derive_verification(
+    entries: list[dict],
+    reviews: list[dict] | None = None,
+    *,
+    record: Mapping[str, Any] | None = None,
+) -> str:
     """The verification rung the cited evidence, of any origin, and the retained
     reviews support (epistemics.md, Verification)."""
+    entries = [entry for entry in entries if not sampled(entry)]
+    if record is not None:
+        return min(
+            (_derive_verification(pool, reviews) for pool in _claim_pools(record, entries)),
+            key=_rank,
+        )
+    return _derive_verification(entries, reviews)
+
+
+def _derive_verification(entries: list[dict], reviews: list[dict] | None = None) -> str:
+    """The rung supported by one complete claim pool."""
     reviews = list(reviews or [])
     if any(_formal(entry) for entry in entries) and (
         formalization_reviews(reviews) >= FORMALIZATION_REVIEWS["V"]
@@ -1089,6 +1615,7 @@ def main() -> int:
     if actual_ids != expected_ids:
         problems.append(f"register ids are not contiguous T-001..: {actual_ids}")
     scopes = {record["id"]: scope_values(record["scope"]) for record in results}
+    evidence_of = {record["id"]: record["evidence"] for record in results}
     by_id = {record["id"]: record for record in results}
     dated = {record["id"]: result_date(record) for record in results}
     try:
@@ -1102,6 +1629,12 @@ def main() -> int:
     problems.extend(superseded_by_cycles(results))
 
     standings: dict[str, Standing] = {}
+    artifact_problems = repository_file_problems(
+        path
+        for record in results
+        for field in ("artifacts", "controls")
+        for path in record.get(field) or []
+    )
     for record in results:
         rid = record["id"]
         scope = record["scope"]
@@ -1121,7 +1654,7 @@ def main() -> int:
             problems.extend(
                 f"{rid}: {field} path {problem}: {path}"
                 for path in record.get(field) or []
-                if (problem := repository_file_problem(path))
+                if (problem := artifact_problems[path])
             )
 
         problems.extend(attribution_problems(record, sources))
@@ -1129,10 +1662,14 @@ def main() -> int:
         problems.extend(corrects_problems(record, sources, by_id))
         problems.extend(registered_problems(record, str(register["last_reviewed"])))
         problems.extend(headline_problems(record))
-        problems.extend(kind_problems(record, cited, scopes))
+        problems.extend(kind_problems(record, cited, scopes, evidence_of, by_id))
         problems.extend(superseded_by_problems(record, dated, scopes, holding))
         problems.extend(established_problems(record, register["last_reviewed"]))
         problems.extend(activity_problems(record, str(register["last_reviewed"])))
+        problems.extend(
+            unfinished_confirmations_problems(record, str(register["last_reviewed"]))
+        )
+        problems.extend(regularizations_problems(record, dated, scopes))
         problems.extend(confirmation_prose_problems(record))
 
         for kind, value in (record.get("produced_by") or {}).items():
@@ -1149,7 +1686,10 @@ def main() -> int:
         # A review with a structural fault earns nothing until it is fixed.
         reviews = [] if review_faults else list(record.get("reviews") or [])
         derived_c = derive_confirmation(
-            cited, reviews, open_review=bool(record.get("open_review")) and not review_faults
+            cited,
+            reviews,
+            open_review=bool(record.get("open_review")) and not review_faults,
+            record=record,
         )
         has_composition = bool(record.get("composition"))
         # A replay, rebuild or review record is also verification evidence, so C never
@@ -1174,7 +1714,7 @@ def main() -> int:
             problems.append(
                 f"{rid}: {declared_v} is declared-only and needs a notes field saying why"
             )
-        derived_v = derive_verification(cited, reviews)
+        derived_v = derive_verification(cited, reviews, record=record)
         relation = verification_relation(declared_v, derived_v)
         if relation == "inflated":
             problems.append(
@@ -1191,6 +1731,7 @@ def main() -> int:
         standings[rid] = Standing(declared_v, declared_c, derived_v, derived_c)
 
     problems.extend(coverage_problems(results, evidence_index, sources, case_bound_evidence()))
+    problems.extend(regularized_drawings_problems(register, scopes))
     problems.extend(rung_label_problems(results, standings))
 
     known = set(actual_ids)
@@ -1216,8 +1757,10 @@ def main() -> int:
         "headline and date holds, every kind agrees with its claim and evidence, every "
         "declared supersession names a result no earlier on a shared case, never "
         "supersedes all of a result a case bound rests on and never leads back, every "
-        "recent case lower bound is covered, every reader-tier mention exists; by status, "
-        + ", ".join(f"{held.count(name)} {name}" for name in STATUSES)
+        "unfinished confirmation lies above its result's rung, every regularization names "
+        "a registered packing no later on the count it regularizes, by a source of its "
+        "own, every recent case lower bound is covered, every reader-tier mention exists; "
+        "by status, " + ", ".join(f"{held.count(name)} {name}" for name in STATUSES)
     )
     return 0
 

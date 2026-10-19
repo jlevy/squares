@@ -1,0 +1,51 @@
+{
+  "format": "sq17-lean-endpoint-comparison-v1",
+  "inputs": {
+    "lean": [
+      "sq17-lean/Sq17Lean/EndpointRootData.lean",
+      "sq17-lean/Sq17Lean/EndpointGeometry.lean"
+    ],
+    "record": [
+      "packing/campaign/series/series-000-smoke-and-calibration/results/exp-237-n17-polynomial-root/run-001/certificate.json",
+      "packing/campaign/series/series-000-smoke-and-calibration/results/exp-245-n17-catalogue-polynomial/run-001/receipt.json",
+      "packing/frontier/n-017.md",
+      "packing/devtools/check_n17_root_certificate.py",
+      "packing/devtools/check_n17_endpoint_feasibility.py"
+    ]
+  },
+  "identity": {
+    "polynomial0_equals_exp237": true,
+    "polynomial1_equals_exp237": true,
+    "midpoint_equals_exp237": true,
+    "radius_equals_exp237": true,
+    "polynomial0_equals_H255_formula": true,
+    "polynomial1_equals_H255_formula": true,
+    "lean_side_definition": "(6+4*t)/(1+2*t-t*t)",
+    "lean_side_definition_is_the_record_map": true,
+    "record_map_equals_H256_layout_side": true
+  },
+  "contraction": {
+    "determinant_nonzero": true,
+    "mass_newton0": 1.2954011922065543e-08,
+    "mass_newton1": 7.123623478106241e-09,
+    "slope_newton0": 1.2957738727106479e-08,
+    "slope_newton1": 7.127205112472945e-09,
+    "check_passes": true,
+    "newton0_identity_exact": true,
+    "newton1_identity_exact": true
+  },
+  "side": {
+    "root_in_box": true,
+    "t_60": "0.362043893314323383453621978739944164218293243036741520638379",
+    "beta_60": "0.330948674722739910429808533282915634174672003999685385633441",
+    "side_60": "4.675530093604550951634111270483146648767143855015879695416889",
+    "residual_polynomial0": 6.400703260495473e-201,
+    "residual_polynomial1": 8.649622362760072e-201,
+    "catalogue_degree": 18,
+    "catalogue_residual_at_side": 7.836126920472209e-191,
+    "catalogue_sign_change_across_side_pm_1e-40": true,
+    "verified_ceiling_minus_side": 1.0358337035875123e-22,
+    "exp245_enclosure_width": 9.896605444049923e-41,
+    "side_in_exp245_enclosure": true
+  }
+}

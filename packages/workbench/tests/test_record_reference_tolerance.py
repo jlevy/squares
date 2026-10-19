@@ -9,12 +9,14 @@ sets it.
 from __future__ import annotations
 
 import math
-from decimal import Decimal
 from fractions import Fraction
+from pathlib import Path
 from typing import Any
 
 import pytest
+import yaml
 
+from devtools import known_structure
 from devtools.known_structure import WITNESSES, record
 from sqpack.yamlio import safe_load
 from workbench_tools.animation_records import ANIMATION_CONTRACT, decode_animation
@@ -31,7 +33,78 @@ CATALOGUE_ANGLE_ROUNDING = math.radians(0.5e-4)
 #: Above anything binary64 conversion of a witness produces (2.4e-15 over all 324).
 CONVERSION_SCALE = 1e-12
 #: Every sixth retained witness, with n = 2 and 12, which are stored as corners.
-SAMPLED_WITNESSES = sorted({*range(1, 325, 6), 2, 12})
+SAMPLED_WITNESSES = sorted({*range(1, 325, 6), 2, 12, 199})
+
+
+@pytest.mark.parametrize("representation", ["corners", "degrees", "radians"])
+def test_record_decodes_exact_rational_scalars(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, representation: str
+) -> None:
+    """Exact packet fractions reach the diagnostic reader without changing units."""
+    if representation == "corners":
+        square = {"corners": [["1/3", "1/2"], ["4/3", "1/2"], ["4/3", "3/2"], ["1/3", "3/2"]]}
+        expected_angle = 0.0
+    else:
+        square = {"center": ["5/6", "1/1"], "angle": "1/3"}
+        expected_angle = math.radians(1 / 3) if representation == "degrees" else 1 / 3
+    payload = {
+        "witness": {
+            "side": "9/4",
+            "coordinates": {
+                "angle_unit": "degrees" if representation == "corners" else representation
+            },
+            "squares": [square],
+        }
+    }
+    (tmp_path / "n-001.yaml").write_text(yaml.safe_dump(payload), encoding="utf-8")
+    monkeypatch.setattr(known_structure, "WITNESSES", tmp_path)
+    poses, side = known_structure.record(1)
+    assert side == 9 / 4
+    assert poses[0, 0] == pytest.approx(5 / 6, abs=CONVERSION_SCALE, rel=0)
+    assert poses[0, 1] == 1.0
+    assert poses[0, 2] == expected_angle
+
+
+@pytest.mark.parametrize("n", [51, 70])
+def test_record_projects_complete_exact_bases_without_geometry_decisions(
+    n: int, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """The radical and rational houses retain every centre in diagnostic float poses."""
+    from decimal import Decimal, localcontext  # noqa: PLC0415
+
+    from sqpack import witness as witness_api  # noqa: PLC0415
+
+    source = WITNESSES / f"n-{n:03d}.yaml"
+    original = source.read_bytes()
+    witness = safe_load(original.decode())["witness"]
+
+    def forbidden(*_args: Any, **_kwargs: Any) -> None:
+        raise AssertionError("a diagnostic reader must not decide feasibility")
+
+    monkeypatch.setattr(witness_api, "verify_packing", forbidden)
+    poses, side = record(n)
+    with localcontext() as context:
+        context.prec = 80
+
+        def scalar(value: Any) -> float:
+            if n == 70:
+                return float(Fraction(str(value)))
+            rational, root = (Fraction(str(part)) for part in value)
+            return float(
+                Decimal(rational.numerator) / Decimal(rational.denominator)
+                + Decimal(root.numerator) / Decimal(root.denominator) * Decimal(2).sqrt()
+            )
+
+        assert side == scalar(witness["side"])
+        assert poses.shape == (n, 3)
+        for index, square in enumerate(witness["squares"]):
+            for axis in (0, 1):
+                assert poses[index, axis] == pytest.approx(
+                    scalar(square["center"][axis]), abs=CONVERSION_SCALE, rel=0
+                )
+            angle = math.atan2(scalar(square["basis"][1]), scalar(square["basis"][0]))
+            assert poses[index, 2] == pytest.approx(angle, abs=CONVERSION_SCALE, rel=0)
+    assert source.read_bytes() == original
 
 
 def _record_frame(*, lift: float = 0.0, grow: float = 0.0) -> dict[str, Any]:
@@ -84,14 +157,13 @@ def test_the_tolerance_sits_between_float_conversion_and_catalogue_rounding() ->
         payload = safe_load((WITNESSES / f"n-{n:03d}.yaml").read_text(encoding="utf-8"))
         witness = payload["witness"]
         poses, side = record(n)
-        worst = max(worst, float(abs(Fraction(Decimal(witness["side"])) - Fraction(side))))
+        worst = max(worst, float(abs(Fraction(str(witness["side"])) - Fraction(side))))
         for index, square in enumerate(witness["squares"]):
             if "center" in square:
-                exact = [Fraction(Decimal(str(value))) for value in square["center"]]
+                exact = [Fraction(str(value)) for value in square["center"]]
             else:
                 corners = [
-                    [Fraction(Decimal(str(value))) for value in corner]
-                    for corner in square["corners"]
+                    [Fraction(str(value)) for value in corner] for corner in square["corners"]
                 ]
                 exact = [sum(axis) / len(corners) for axis in zip(*corners, strict=True)]
             worst = max(

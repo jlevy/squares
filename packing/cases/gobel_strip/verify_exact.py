@@ -2,7 +2,8 @@
 """Replay Goebel's diagonal-strip family at `a = 4..8` with exact algebraic predicates.
 
 Five sizes, one rule: `n = 27, 38, 52, 67, 84` are the open cases where the strip is
-exactly the best known this repository retains, and every one verifies here with no
+historically retained as best known; n = 84 now has a smaller selected packing.
+Every strip verifies here with no
 tolerance anywhere -- all pairs and all four walls decided by an exact sign over
 `Q(sqrt 2)` at side `a + 1 + sqrt(2)/2`.
 
@@ -34,13 +35,14 @@ from pathlib import Path
 from cases.gobel_strip.packing import build, count, diamonds, extra_diamond
 from sqpack.verify import exact_sign, verify_packing
 from sqpack.witness import load_witness
+from sqpack.yamlio import safe_load
 
 ROOT = Path(__file__).resolve().parent.parent.parent
 WITNESSES = ROOT / "witnesses" / "known-best"
 WITNESS_SCHEMA = ROOT / "witnesses" / "witness.schema.yaml"
 
 SUBJECTS = (4, 5, 6, 7, 8)
-"""`a` for `n = 27, 38, 52, 67, 84`: the sizes where the strip is the retained record."""
+"""`a` for `n = 27, 38, 52, 67, 84`: the sizes where the strip was the retained record."""
 
 CERTIFIES = (27, 38, 52, 67, 84)
 """The sizes `SUBJECTS` decides. See `CERTIFIES` in `cases/gobel5`."""
@@ -91,9 +93,15 @@ def main() -> int:
 
         with localcontext() as context:
             context.prec = 60
-            witness = load_witness(
-                WITNESSES / f"n-{n:03d}.yaml", fallback_schema=WITNESS_SCHEMA
-            )
+            if n == 84:
+                from devtools.register_ryxu_reports import read_history  # noqa: PLC0415
+
+                original = next(row["house"] for row in read_history() if row["n"] == n)
+                witness = safe_load(original)["witness"]
+            else:
+                witness = load_witness(
+                    WITNESSES / f"n-{n:03d}.yaml", fallback_schema=WITNESS_SCHEMA
+                )
             gap = Decimal(str(witness["side"])) - _decimal(side)
             if abs(gap) > WITNESS_ROUNDING or gap == 0:
                 print(f"n={n}: witness side differs from the exact side by {gap}")

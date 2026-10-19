@@ -38,6 +38,22 @@
         "wall_seating_edge_count": 20
       },
       {
+        "component_count": 9,
+        "contact_edge_count": 28,
+        "free_square_count": 3,
+        "internal_slide_dof": 14,
+        "n": 29,
+        "rendering": "contact-overlays/n-029.svg",
+        "selection_rule": "first source-packet-derived geometry, a parallel project's packing",
+        "source_kind": "packet-derived-facts",
+        "topology_counts": {
+          "contact-chain": 4,
+          "contact-patch": 2,
+          "singleton": 3
+        },
+        "wall_seating_edge_count": 19
+      },
+      {
         "component_count": 5,
         "contact_edge_count": 48,
         "free_square_count": 0,
@@ -50,22 +66,6 @@
           "contact-patch": 5
         },
         "wall_seating_edge_count": 24
-      },
-      {
-        "component_count": 16,
-        "contact_edge_count": 85,
-        "free_square_count": 9,
-        "internal_slide_dof": 33,
-        "n": 68,
-        "rendering": "contact-overlays/n-068.svg",
-        "selection_rule": "first source-packet-derived geometry, a parallel project's packing",
-        "source_kind": "packet-derived-facts",
-        "topology_counts": {
-          "contact-chain": 2,
-          "contact-patch": 5,
-          "singleton": 9
-        },
-        "wall_seating_edge_count": 26
       },
       {
         "component_count": 5,

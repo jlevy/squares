@@ -1,0 +1,29 @@
+{
+  "status": "CLEAN_SOURCE_BUILD_ACCEPTED",
+  "theorem": "Sq17.square17_optimality",
+  "statement": "forall L : Real, PlainPacking L iff EndpointGeometry.side <= L",
+  "lean_version": "4.34.1",
+  "project_modules_rebuilt": 4951,
+  "project_prebuilt_oleans_used": false,
+  "pinned_third_party_cache_used": true,
+  "standard_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "native_decide_facts": 13343,
+  "unexpected_axioms": [],
+  "axiom_set_matches_local_build": true,
+  "final_log_sha256": "5e74c4afe1e55f1e1c64193eb9a06aa413075a7355ad5faa108c4930da8ac241",
+  "source_list_sha256": "8300469e655423c3414a7f29b4742b281ac3eb3a54d4fe453554ef4c567c3979",
+  "controls": {
+    "HalfPlanePositiveControl": {
+      "exit_code": 0,
+      "log_sha256": "d8ed9f61a0f13e1d2e452f4f673a7e920f91cc01d3cea70a14a0db94ab5f4a02"
+    },
+    "HalfPlaneBoundaryControl": {
+      "exit_code": 0,
+      "log_sha256": "b40c54d60cf4c8dcd806f1a363e3ad44d8c6cbc8391df3af4353e3ad22dc4ef1"
+    }
+  }
+}

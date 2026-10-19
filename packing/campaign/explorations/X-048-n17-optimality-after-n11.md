@@ -30,7 +30,7 @@ exploration:
     - packing/frontier/n-029.md
     - packing/resources/web/n11-optimality-2026-09-29/source/PROOF.md
     - docs/project/reviews/review-2026-09-30-n11-expository-simplification.md
-    - docs/project/specs/active/plan-2026-09-25-after-r052-planning.md
+    - docs/project/specs/archive/plan-2026-09-25-after-r052-planning.md
     - packing/campaign/explorations/X-043-new-lower-bound-proof-directions.md
     - packing/campaign/explorations/X-044-low-n-certificate-transfer.md
     - packing/campaign/explorations/X-047-low-n-angles-after-the-parent-core-advance.md
@@ -79,7 +79,7 @@ exploration:
     - docs/project/reviews/review-2026-10-03-n17-verifier-rewrites.md
     - docs/project/reviews/review-2026-10-04-n17-flag2-diagnosis.md
     - docs/project/reviews/review-2026-10-05-n17-capture-r9.md
-    - docs/project/n17-optimality-explainer.md
+    - docs/project/guides/n17-optimality-explainer.md
     - packing/campaign/explorations/X048-session-168-pilots/README.md
     - packing/campaign/explorations/X048-session-168-pilots/certified-sub-patterns.yaml
     - packing/hosted/n17-x048-session-168-certificates.yaml
@@ -93,7 +93,7 @@ exploration:
     - packing/campaign/explorations/X048-session-168-pilots/handoff/k2/h-F1.json
     - packing/campaign/explorations/X048-session-168-pilots/handoff/k2/h-sample.json
     - packing/campaign/explorations/X048-session-182-overnight/kernel-targets.txt
-    - docs/project/specs/active/plan-2026-10-05-n17-overnight.md
+    - docs/project/specs/done/plan-2026-10-05-n17-overnight.md
     - https://github.com/jlevy/squares/pull/347
     - https://github.com/jlevy/squares/pull/350
     - https://github.com/jlevy/squares/pull/354
@@ -104,6 +104,40 @@ exploration:
     H-264, H-265, H-266, H-267, H-268]
 ---
 # X-048: Optimality Routes After n = 11
+
+## Current Selection: 6 October 2026
+
+The
+[W3 consolidation](../../../docs/project/reviews/review-2026-10-06-n17-w3-consolidation.md)
+reconciles Sessions 182 and 183, the diagnostic packets and the current capture review.
+It governs the next selection under BC-418 (`think-tmz6`). The dated sections below
+retain the reasoning and frozen proposals; their snapshot figures and future-work lists
+are historical where the consolidation supplies a later disposition.
+
+The
+[ten-hour continuation plan](../../../docs/project/specs/done/plan-2026-10-06-n17-ten-hour-session.md)
+and agenda-043 select BC-430 / `think-ipel` as its launch coordinator.
+The overnight session remains planned; no target or session clock starts with this
+consolidation.
+
+The verified bracket is now
+$4.66044275 < s(17) \le 4.6755300936045509516342148538535054$. R071 is replayed, the
+degree-18 side identity and first-order stress are accepted, and the capture-target
+local theorem is reviewed with its stated frame and radius.
+The latest certified residue is 36,784 states in 4,685 orbits under 58 admitted entries,
+with the endpoint surviving.
+H-275’s 26 of 29 counted closures describe its draw frame, not all 4,685 remaining
+orbits.
+
+The selected direction keeps global exclusion and family capture, with three parallel
+questions: proof interfaces and portable replay, a controlled capture discriminator
+alongside cheap widened-projection reconnaissance, and stratification of the actual hard
+exclusion tail. Completed adaptive-row reruns are not future work.
+C2 aimed splits depend on diagnosing the remaining stalls; C5 requires complete
+parent-cover certificates.
+The fixed R071 charge cannot deliver a material further advance.
+
+## Original Exploration and Dated Checkpoints
 
 The n = 11 proof supplies a useful architecture for another optimality proof: cover
 every packing, exclude most possibilities, capture the survivors in a region where a
@@ -117,7 +151,7 @@ after Sessions 166 to 168 and the open stack above PR 347.
 
 This is a W3 exploration, with untested proposals below.
 The
-[next-session plan](../../../docs/project/specs/active/plan-2026-10-01-post-optimality-w3-session.md)
+[next-session plan](../../../docs/project/specs/done/plan-2026-10-01-post-optimality-w3-session.md)
 maps the proposed entry and checkpoints; W10 selects experiments after the opening W3
 work. The source baseline is merged main at `f9a3409f0f03298fbeeb0a03788cd016087626b9`,
 including the September 30 epistemics revision.
@@ -446,7 +480,7 @@ W10 may select a small discriminator from these leads without waiting for every 
 external replay. It must state which unverified source premise it assumes.
 The finite family premise, s60 replay, and recovered dual checks have separate beads
 `think-4k80`, `think-e7xa`, and `think-q5tt`. The
-[session plan](../../../docs/project/specs/active/plan-2026-10-01-post-optimality-w3-session.md)
+[session plan](../../../docs/project/specs/done/plan-2026-10-01-post-optimality-w3-session.md)
 keeps n17 first and limits secondary work to what changes the next decision.
 
 ## Approaches to Retire or Restrict
@@ -477,7 +511,7 @@ the selected alternatives.
 Record source revisions, assumptions, expected information, unresolved proof obligations
 and the exact next artifact for every selected route.
 The
-[session plan](../../../docs/project/specs/active/plan-2026-10-01-post-optimality-w3-session.md)
+[session plan](../../../docs/project/specs/done/plan-2026-10-01-post-optimality-w3-session.md)
 sets execution dependencies, review boundaries and efficiency triggers.
 H-253 through H-257 now discharge rational feasibility, chart fidelity, root existence,
 endpoint feasibility and the complete active-feature inventory.
@@ -547,8 +581,7 @@ This review covers Sessions 166 to 168 (PR 347), the four diagnostic layers rebu
 Guzhou0806’s work (PRs 354 to 360) and wand125’s native branch-and-bound kernel (PR
 350). It is a W3 reading of the record: it certifies nothing, runs no experiment, and
 changes no bound, verdict or frontier field.
-The
-[overnight plan](../../../docs/project/specs/active/plan-2026-10-05-n17-overnight.md)
+The [overnight plan](../../../docs/project/specs/done/plan-2026-10-05-n17-overnight.md)
 selects the night’s work from it.
 
 ### Where the Proof Stands
@@ -793,8 +826,7 @@ throughput for large certificates (37.3 ms a node for the branch and bound, 0.10
 s a row for the kernel after F2’s rewrite); the hosting block; and the absence of a
 second review on every piece.
 
-The
-[overnight plan](../../../docs/project/specs/active/plan-2026-10-05-n17-overnight.md)
+The [overnight plan](../../../docs/project/specs/done/plan-2026-10-05-n17-overnight.md)
 (session-182) selects the night’s work from this reading and the adversarial review of
 it. Its lanes, with the question each answers and what each outcome changes:
 

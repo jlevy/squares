@@ -1,0 +1,12 @@
+matrix bounds parsed: 4 x 52 x 45; distinct value codes used: 83
+weight boxes parsed: 93
+owner/first/direction names parsed: 93 90 90
+support covers every nonzero code: True
+all 93 weight checks pass: True
+worst residual budget over 93 boxes = 0.199543 (box 53, direction -u11); bound 1/4
+max mass over boxes = 131499357511999117439/10995116277760000  (<= 12000; used as 1200000/100)
+dense == sparse budget on boxes 0,55,56,92: True
+direction 55 (-omega11) z-splits: [('-1/8', '-5/64'), ('-5/64', '-1/32'), ('-1/32', '1/64'), ('1/64', '1/16')]
+93 boxes cover the slider box for all 90 signed directions: True
+targets are the signed unit coordinate of the owner direction: True
+q/4 + 600000 q^2 < q at q = 1e-7: True  (margin factor 0.310)

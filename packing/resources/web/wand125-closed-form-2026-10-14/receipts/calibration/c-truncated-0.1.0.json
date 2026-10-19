@@ -1,0 +1,34 @@
+{
+  "bad": [
+    {
+      "source": "domain",
+      "why": "u-range does not cover 90 degrees"
+    },
+    {
+      "source": "domain",
+      "why": "root intervals are not partitions"
+    }
+  ],
+  "bad_count": 2,
+  "cpu_seconds": 0.130271,
+  "family": {
+    "path": "interval_0.495_0.5/family.json",
+    "sha256": "224f6d0f43d6b864af1ec5cbeb1007fb39880c36881c36649d046dcc1fd72bd3"
+  },
+  "kinds": {
+    "CORE1:Tx": 2
+  },
+  "leaves": [],
+  "mode": "replay",
+  "ok": false,
+  "records": [
+    {
+      "path": "controls/truncated.rec",
+      "sha256": "0bb7647fea378b9335d42e6f2992adc8912a8fcd915399e6e16efda827a47bc3"
+    }
+  ],
+  "roots": 2,
+  "source_sha256": "92002e0e8924d96f0e5962eabb8fce6e4de67a2f350ca66d4889abee0762c193",
+  "version": "0.1.0",
+  "wall_seconds": 0.130953739
+}

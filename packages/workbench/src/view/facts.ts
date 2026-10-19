@@ -3,15 +3,12 @@ import { createDom, requireHtml } from "./dom.ts";
 
 /** The label under each badge the panel draws, keyed `glyph/style`. */
 export const BADGE_LABELS: Readonly<Record<string, string>> = {
-  "★/star": "new result",
   "O/solid": "optimal",
   "=/solid": "exact",
   "≈/muted": "numerical",
   "R/solid": "rigid",
-  "R/muted": "rigid (catalogue)",
+  "R/muted": "rigid", // Compatibility for previously generated corpus data.
 };
-/** The badge that says the lower bound on the stage is a recent result, whoever proved it. */
-export const NEW_RESULT_BADGE = Object.freeze({ glyph: "★", style: "star" });
 const OPEN_LABELS: Readonly<Record<string, string>> = {
   optimality: "optimality",
   "exact value": "exact value",
@@ -25,7 +22,9 @@ export interface FactsBadge {
 }
 /** What the panel says about one n, before any of it is drawn. */
 export interface FactsPlan {
-  /** PROVEN's badges, in order: `new result` first when the lower bound is a recent result. */
+  /** Whether the case number is drawn in recent-result red. */
+  recentResult: boolean;
+  /** PROVEN's mathematical status badges, in record order. */
   badges: FactsBadge[];
   /** OPEN's items, or null when nothing is open and the section is left out, heading and all. */
   open: FactsBadge[] | null;
@@ -34,24 +33,23 @@ export interface FactsPlan {
 /**
  * The panel's content for one n.
  *
- * A recent result is a badge of its own, `new result` under the red star, in the same
- * row and the same type as every other badge; it used to be a separate serif line under the
- * bound. OPEN is drawn only when something is open: a heading over the word "none" said nothing
- * the absence of the section does not.
+ * Recent results use red case numbers. OPEN is drawn only when something is open.
  */
 export function planFacts(facts: CorpusFacts, n: number): FactsPlan {
   const badges: FactsBadge[] = [];
-  if (facts.star) {
-    badges.push({ ...NEW_RESULT_BADGE, label: badgeLabel(NEW_RESULT_BADGE, n) });
-  }
   for (const badge of facts.badges) {
-    badges.push({ glyph: badge.glyph, style: badge.style, label: badgeLabel(badge, n) });
+    const label = badgeLabel(badge, n);
+    if (badge.glyph === "R" && badges.some((shown) => shown.glyph === "R")) {
+      continue;
+    }
+    const shown = badge.glyph === "R" ? { ...badge, style: "solid" } : badge;
+    badges.push({ glyph: shown.glyph, style: shown.style, label });
   }
   const open =
     facts.open.length === 0
       ? null
       : facts.open.map((key) => ({ glyph: "?", style: "query", label: OPEN_LABELS[key] ?? key }));
-  return { badges, open };
+  return { recentResult: facts.star, badges, open };
 }
 
 /** The section's head. The owner's word for it (2026-09-21), and one word at every n: a head that
@@ -106,13 +104,6 @@ export function planCitations(cited: CorpusBoundCitations | undefined): Citation
   return { record: cited.record, lines: [line("lower"), line("upper")] };
 }
 
-/** A badge item's classes: `new result` is set in the star's colour, every other in the label's. */
-export function badgeClass(badge: { glyph: string; style: string }): string {
-  return badge.glyph === NEW_RESULT_BADGE.glyph && badge.style === NEW_RESULT_BADGE.style
-    ? "badge-item is-new-result"
-    : "badge-item";
-}
-
 function badgeLabel(badge: { glyph: string; style: string }, n: number): string {
   const label = BADGE_LABELS[`${badge.glyph}/${badge.style}`];
   if (label === undefined) {
@@ -157,14 +148,6 @@ export function createFactsView(document: Document, DATA: Corpus) {
       class: `badge badge-${style}`,
       "aria-hidden": "true",
     });
-    if (style === "star") {
-      const k = (19 * METRICS.star_span) / (2 * METRICS.star_inset);
-      const pts = DATA.star_points
-        .map((p) => `${(9.5 + p[0] * k).toFixed(3)},${(9.5 + p[1] * k).toFixed(3)}`)
-        .join(" ");
-      s.appendChild(el("polygon", { points: pts, class: "star" }));
-      return s;
-    }
     s.appendChild(
       el("rect", { x: "0", y: "0", width: "19", height: "19", rx: "4.5", class: "box" }),
     );
@@ -184,6 +167,7 @@ export function createFactsView(document: Document, DATA: Corpus) {
   }
   function badgeItem(cls: string, glyph: string, style: string, label: string) {
     const item = text("span", cls);
+    item.title = label;
     item.appendChild(badgeSvg(glyph, style));
     item.appendChild(text("span", "label", label));
     return item;
@@ -266,7 +250,11 @@ export function createFactsView(document: Document, DATA: Corpus) {
     // rolling slot draws only the number; a third, still slot draws `n =` and never fades (see
     // `buildPair` and the stylesheet), because a step changes the number and nothing else. Where it
     // starts is the headline's `--stage-numeral-left`, which the page measures once the faces land.
-    const numeral = text("div", "numeral");
+    const plan = planFacts(f, n);
+    const numeral = text("div", plan.recentResult ? "numeral is-new-result" : "numeral");
+    if (plan.recentResult) {
+      numeral.title = "Recent result";
+    }
     if (f.html_headline) {
       numeral.innerHTML = f.html_headline;
     } else {
@@ -293,23 +281,12 @@ export function createFactsView(document: Document, DATA: Corpus) {
       }
       return line;
     }
-    // PROVED, in the order a reader wants it: the chained bound on the side, then the badges, led by
-    // `new result` when its lower bound is a recent result, and OPEN below carries the questions.
+    // PROVED: the chained bound, then its mathematical status badges; OPEN carries the questions.
     // The upper bound is here because a construction shows it, but the register has certified only
     // some constructions: where it reports one it has not checked, the bound stays on this line and
     // the citation section says `reported` against it (the owner, 2026-09-22, think-n56i).
-    const plan = planFacts(f, n);
     layer.appendChild(text("div", "section-head head-proved", "Proven"));
-    // The bound is one chained statement now, so it is one row. The star sits to the LEFT of
-    // the lower bound it marks, inside a slot that is always the star's width whether or not
-    // there is a star in it -- otherwise the whole inequality would step sideways at every n
-    // that has one, which during a sweep is a line that jitters rather than rolls.
     const bound = mathLine("side", f.html_side);
-    const starSlot = text("span", "bound-star");
-    if (f.star) {
-      starSlot.appendChild(badgeSvg("", "star"));
-    }
-    bound.insertBefore(starSlot, bound.firstChild);
     layer.appendChild(bound);
     // No closed-form line. It sat under a chain of two bounds and did not say which bound it was
     // the value of -- 108 of the 110 n that had one show `lower <= s(n) <= upper` -- so the owner
@@ -317,7 +294,7 @@ export function createFactsView(document: Document, DATA: Corpus) {
     // form to the bound it belongs to.
     const badges = text("div", "badges");
     for (const b of plan.badges) {
-      badges.appendChild(badgeItem(badgeClass(b), b.glyph, b.style, b.label));
+      badges.appendChild(badgeItem("badge-item", b.glyph, b.style, b.label));
     }
     layer.appendChild(badges);
     // CITATION, under PROVEN, while the setting is on: where each bound on the line above comes

@@ -253,7 +253,7 @@ session:
   - packing/campaign/session-close-report.yaml
   - packing/campaign/ideas.md
   - docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
-  - docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+  - docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
   - SYNOPSIS.md
   resource_rollups:
   - packing/campaign/resource-usage/codex-task-tree-session-135.yaml

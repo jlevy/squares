@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Found by Erich Friedman in 1997.
+        Source: Packing Unit Squares in Squares: A Survey and New Results, by Erich Friedman, Versions 1 (March 6, 1998) and later: https://www.combinatorics.org/ojs/index.php/eljc/article/view/DS7/versions and https://erich-friedman.github.io/papers/squares/squares.html
+    This has been modified from the original for bilateral symmetry.
+-->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" [
+    <!ENTITY s "5.62132034355964257320253308632"> <!-- 7/2 + Sqrt[2]*3/2 -->
+]>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 &s; &s;" style="fill:#B2B2B2; stroke:black; stroke-width:0.002" id="svg">
+    <script xlink:href="svgDisp.js"/>
+    <defs>
+        <rect width="&s;" height="&s;" id="outer"/>
+    </defs>
+    <use xlink:href="#outer" style="fill:white; stroke:none"/>
+    <g id="top">
+        <g id="side1">
+            <path style="stroke:none" d="M2,0 V1 H1 V2 H0 V0"/>
+            <path style=  "fill:none" d="M0,1 H2 V0
+                                         M0,2 H1 V0"/>
+        </g>
+        <g transform="translate(&s;) scale(-1 1)">
+            <use xlink:href="#side1" transform="translate(1)"/>
+            <rect style="stroke:none" width="1" height="2"/>
+            <path style=  "fill:none" d="M1,0 V2 H0
+                                         M1,1 H0"/>
+        </g>
+    </g>
+    <g transform="scale(1 .5) translate(&s; &s;) translate(0 -1) scale(1 2) scale(-1 1)">
+        <rect style="stroke:none" width="1" height="1"/>
+        <path style=  "fill:none" d="M0,0 H1 V1 H0"/>
+    </g>
+    <use xlink:href="#top" transform="translate(0 &s;) scale(1 -1)"/>
+    <g transform="scale(.5) translate(&s; &s;) translate(-1) scale(2) rotate(45) translate(-1.5 -1.5)">
+        <rect width="3" height="3"/>
+        <path style="fill:none" d="M0,1 H3 M1,0 V3
+                                   M0,2 H3 M2,0 V3"/>
+    </g>
+    <use xlink:href="#outer" style="fill:none"/>
+</svg>

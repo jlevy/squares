@@ -1,0 +1,367 @@
+{
+  "format": "external-source-declaration-v1",
+  "id": "squarepacker-k2-minus-c-v1.2",
+  "source_url": "https://github.com/squarepacker/k2-minus-c",
+  "source_ref": "v1.2",
+  "source_commit": "e16a5cfa7eed489ea8d84b500e590bf6855a5f2f",
+  "retrieved_at_utc": "2026-10-08T03:04:09Z",
+  "git_scope": "Complete version 1.2 tree: ten changed files retained byte-for-byte; 68 identical files bound to their existing version 1.1 retained copies.",
+  "archived_dir": "source",
+  "license": "MIT for code and data; CC BY 4.0 for paper, with both original notices retained through the unchanged version 1.1 copies.",
+  "claims": [
+    "Issue #368 comment 6022000514: Theorem 1.1 reports deficiency at least 0.0353 log k for every integer k >= 2 and the explicit lower bound 1.99954 (log k - 13.06675)/30.418, with asymptotic coefficient 0.0657.",
+    "The analytic variant reports 0.0319; Corollary 1.3 reports 0.0541 conditional on Daniel s(k^2-3)=k for k>=6. New proof and constant claims remain unconfirmed here; version 1.1 assurance is unchanged."
+  ],
+  "scope": [
+    ".zenodo.json",
+    "LICENSE",
+    "README.md",
+    "SHA256SUMS",
+    "code",
+    "data",
+    "paper",
+    "reviews"
+  ],
+  "pinned_only": [
+    {
+      "match": "LICENSE",
+      "reason": "The complete original bytes are already retained in the version 1.1 packet; this version binds the same bytes to its own immutable tree.",
+      "identical_to": "packing/resources/web/squarepacker-k2-minus-c-2026-10-05/k2-minus-c/LICENSE"
+    },
+    {
+      "match": "code/SUPERSEDED.md",
+      "reason": "The complete original bytes are already retained in the version 1.1 packet; this version binds the same bytes to its own immutable tree.",
+      "identical_to": "packing/resources/web/squarepacker-k2-minus-c-2026-10-05/k2-minus-c/code/SUPERSEDED.md"
+    },
+    {
+      "match": "code/attack_kw/hand9.json",
+      "reason": "The complete original bytes are already retained in the version 1.1 packet; this version binds the same bytes to its own immutable tree.",
+      "identical_to": "packing/resources/web/squarepacker-k2-minus-c-2026-10-05/k2-minus-c/code/attack_kw/hand9.json"
+    },
+    {
+      "match": "code/bnb.py",
+      "reason": "The complete original bytes are already retained in the version 1.1 packet; this version binds the same bytes to its own immutable tree.",
+      "identical_to": "packing/resources/web/squarepacker-k2-minus-c-2026-10-05/k2-minus-c/code/bnb.py"
+    },
+    {
+      "match": "code/bnb_wall.py",
+      "reason": "The complete original bytes are already retained in the version 1.1 packet; this version binds the same bytes to its own immutable tree.",
+      "identical_to": "packing/resources/web/squarepacker-k2-minus-c-2026-10-05/k2-minus-c/code/bnb_wall.py"
+    },
+    {
+      "match": "code/check_hand9_indep.py",
+      "reason": "The complete original bytes are already retained in the version 1.1 packet; this version binds the same bytes to its own immutable tree.",
+      "identical_to": "packing/resources/web/squarepacker-k2-minus-c-2026-10-05/k2-minus-c/code/check_hand9_indep.py"
+    },
+    {
+      "match": "code/coverage_check.py",
+      "reason": "The complete original bytes are already retained in the version 1.1 packet; this version binds the same bytes to its own immutable tree.",
+      "identical_to": "packing/resources/web/squarepacker-k2-minus-c-2026-10-05/k2-minus-c/code/coverage_check.py"
+    },
+    {
+      "match": "code/coverage_independent/README.md",
+      "reason": "The complete original bytes are already retained in the version 1.1 packet; this version binds the same bytes to its own immutable tree.",
+      "identical_to": "packing/resources/web/squarepacker-k2-minus-c-2026-10-05/k2-minus-c/code/coverage_independent/README.md"
+    },
+    {
+      "match": "code/coverage_independent/exact_volume/indep_cover.py",
+      "reason": "The complete original bytes are already retained in the version 1.1 packet; this version binds the same bytes to its own immutable tree.",
+      "identical_to": "packing/resources/web/squarepacker-k2-minus-c-2026-10-05/k2-minus-c/code/coverage_independent/exact_volume/indep_cover.py"
+    },
+    {
+      "match": "code/coverage_independent/exact_volume/results/bnb_n1_T9_0of1.json",
+      "reason": "The complete original bytes are already retained in the version 1.1 packet; this version binds the same bytes to its own immutable tree.",
+      "identical_to": "packing/resources/web/squarepacker-k2-minus-c-2026-10-05/k2-minus-c/code/coverage_independent/exact_volume/results/bnb_n1_T9_0of1.json"
+    },
+    {
+      "match": "code/coverage_independent/exact_volume/results/bnb_n2_T9_0of1.json",
+      "reason": "The complete original bytes are already retained in the version 1.1 packet; this version binds the same bytes to its own immutable tree.",
+      "identical_to": "packing/resources/web/squarepacker-k2-minus-c-2026-10-05/k2-minus-c/code/coverage_independent/exact_volume/results/bnb_n2_T9_0of1.json"
+    },
+    {
+      "match": "code/coverage_independent/exact_volume/results/bnb_n3_T9_0of1.json",
+      "reason": "The complete original bytes are already retained in the version 1.1 packet; this version binds the same bytes to its own immutable tree.",
+      "identical_to": "packing/resources/web/squarepacker-k2-minus-c-2026-10-05/k2-minus-c/code/coverage_independent/exact_volume/results/bnb_n3_T9_0of1.json"
+    },
+    {
+      "match": "code/coverage_independent/exact_volume/results/bnb_n4_T9_0of2.json",
+      "reason": "The complete original bytes are already retained in the version 1.1 packet; this version binds the same bytes to its own immutable tree.",
+      "identical_to": "packing/resources/web/squarepacker-k2-minus-c-2026-10-05/k2-minus-c/code/coverage_independent/exact_volume/results/bnb_n4_T9_0of2.json"
+    },
+    {
+      "match": "code/coverage_independent/exact_volume/results/bnb_n4_T9_1of2.json",
+      "reason": "The complete original bytes are already retained in the version 1.1 packet; this version binds the same bytes to its own immutable tree.",
+      "identical_to": "packing/resources/web/squarepacker-k2-minus-c-2026-10-05/k2-minus-c/code/coverage_independent/exact_volume/results/bnb_n4_T9_1of2.json"
+    },
+    {
+      "match": "code/coverage_independent/exact_volume/results/bnb_n5_T9_0of2.json",
+      "reason": "The complete original bytes are already retained in the version 1.1 packet; this version binds the same bytes to its own immutable tree.",
+      "identical_to": "packing/resources/web/squarepacker-k2-minus-c-2026-10-05/k2-minus-c/code/coverage_independent/exact_volume/results/bnb_n5_T9_0of2.json"
+    },
+    {
+      "match": "code/coverage_independent/exact_volume/results/bnb_n5_T9_1of2.json",
+      "reason": "The complete original bytes are already retained in the version 1.1 packet; this version binds the same bytes to its own immutable tree.",
+      "identical_to": "packing/resources/web/squarepacker-k2-minus-c-2026-10-05/k2-minus-c/code/coverage_independent/exact_volume/results/bnb_n5_T9_1of2.json"
+    },
+    {
+      "match": "code/coverage_independent/exact_volume/results/bnbw_n1_T9_0of1.json",
+      "reason": "The complete original bytes are already retained in the version 1.1 packet; this version binds the same bytes to its own immutable tree.",
+      "identical_to": "packing/resources/web/squarepacker-k2-minus-c-2026-10-05/k2-minus-c/code/coverage_independent/exact_volume/results/bnbw_n1_T9_0of1.json"
+    },
+    {
+      "match": "code/coverage_independent/exact_volume/results/bnbw_n2_T9_0of1.json",
+      "reason": "The complete original bytes are already retained in the version 1.1 packet; this version binds the same bytes to its own immutable tree.",
+      "identical_to": "packing/resources/web/squarepacker-k2-minus-c-2026-10-05/k2-minus-c/code/coverage_independent/exact_volume/results/bnbw_n2_T9_0of1.json"
+    },
+    {
+      "match": "code/coverage_independent/exact_volume/results/bnbw_n3_T9_0of1.json",
+      "reason": "The complete original bytes are already retained in the version 1.1 packet; this version binds the same bytes to its own immutable tree.",
+      "identical_to": "packing/resources/web/squarepacker-k2-minus-c-2026-10-05/k2-minus-c/code/coverage_independent/exact_volume/results/bnbw_n3_T9_0of1.json"
+    },
+    {
+      "match": "code/coverage_independent/exact_volume/results/bnbw_n4_T9_0of2.json",
+      "reason": "The complete original bytes are already retained in the version 1.1 packet; this version binds the same bytes to its own immutable tree.",
+      "identical_to": "packing/resources/web/squarepacker-k2-minus-c-2026-10-05/k2-minus-c/code/coverage_independent/exact_volume/results/bnbw_n4_T9_0of2.json"
+    },
+    {
+      "match": "code/coverage_independent/exact_volume/results/bnbw_n4_T9_1of2.json",
+      "reason": "The complete original bytes are already retained in the version 1.1 packet; this version binds the same bytes to its own immutable tree.",
+      "identical_to": "packing/resources/web/squarepacker-k2-minus-c-2026-10-05/k2-minus-c/code/coverage_independent/exact_volume/results/bnbw_n4_T9_1of2.json"
+    },
+    {
+      "match": "code/coverage_independent/exact_volume/results/bnbw_n5_T9_0of1.json",
+      "reason": "The complete original bytes are already retained in the version 1.1 packet; this version binds the same bytes to its own immutable tree.",
+      "identical_to": "packing/resources/web/squarepacker-k2-minus-c-2026-10-05/k2-minus-c/code/coverage_independent/exact_volume/results/bnbw_n5_T9_0of1.json"
+    },
+    {
+      "match": "code/coverage_independent/exact_volume/run_all.py",
+      "reason": "The complete original bytes are already retained in the version 1.1 packet; this version binds the same bytes to its own immutable tree.",
+      "identical_to": "packing/resources/web/squarepacker-k2-minus-c-2026-10-05/k2-minus-c/code/coverage_independent/exact_volume/run_all.py"
+    },
+    {
+      "match": "code/coverage_independent/exact_volume/run_all_log.txt",
+      "reason": "The complete original bytes are already retained in the version 1.1 packet; this version binds the same bytes to its own immutable tree.",
+      "identical_to": "packing/resources/web/squarepacker-k2-minus-c-2026-10-05/k2-minus-c/code/coverage_independent/exact_volume/run_all_log.txt"
+    },
+    {
+      "match": "code/coverage_independent/recursive_cover/coverage_lowmem.py",
+      "reason": "The complete original bytes are already retained in the version 1.1 packet; this version binds the same bytes to its own immutable tree.",
+      "identical_to": "packing/resources/web/squarepacker-k2-minus-c-2026-10-05/k2-minus-c/code/coverage_independent/recursive_cover/coverage_lowmem.py"
+    },
+    {
+      "match": "code/coverage_independent/recursive_cover/results.jsonl",
+      "reason": "The complete original bytes are already retained in the version 1.1 packet; this version binds the same bytes to its own immutable tree.",
+      "identical_to": "packing/resources/web/squarepacker-k2-minus-c-2026-10-05/k2-minus-c/code/coverage_independent/recursive_cover/results.jsonl"
+    },
+    {
+      "match": "code/coverage_independent/recursive_cover/run.log",
+      "reason": "The complete original bytes are already retained in the version 1.1 packet; this version binds the same bytes to its own immutable tree.",
+      "identical_to": "packing/resources/web/squarepacker-k2-minus-c-2026-10-05/k2-minus-c/code/coverage_independent/recursive_cover/run.log"
+    },
+    {
+      "match": "code/coverage_independent/recursive_cover/selftest.log",
+      "reason": "The complete original bytes are already retained in the version 1.1 packet; this version binds the same bytes to its own immutable tree.",
+      "identical_to": "packing/resources/web/squarepacker-k2-minus-c-2026-10-05/k2-minus-c/code/coverage_independent/recursive_cover/selftest.log"
+    },
+    {
+      "match": "code/coverage_independent/recursive_cover/summary.log",
+      "reason": "The complete original bytes are already retained in the version 1.1 packet; this version binds the same bytes to its own immutable tree.",
+      "identical_to": "packing/resources/web/squarepacker-k2-minus-c-2026-10-05/k2-minus-c/code/coverage_independent/recursive_cover/summary.log"
+    },
+    {
+      "match": "code/experiments/README.md",
+      "reason": "The complete original bytes are already retained in the version 1.1 packet; this version binds the same bytes to its own immutable tree.",
+      "identical_to": "packing/resources/web/squarepacker-k2-minus-c-2026-10-05/k2-minus-c/code/experiments/README.md"
+    },
+    {
+      "match": "code/experiments/kw_pairs/angle_degree2.json",
+      "reason": "The complete original bytes are already retained in the version 1.1 packet; this version binds the same bytes to its own immutable tree.",
+      "identical_to": "packing/resources/web/squarepacker-k2-minus-c-2026-10-05/k2-minus-c/code/experiments/kw_pairs/angle_degree2.json"
+    },
+    {
+      "match": "code/experiments/kw_pairs/angle_degree2.log",
+      "reason": "The complete original bytes are already retained in the version 1.1 packet; this version binds the same bytes to its own immutable tree.",
+      "identical_to": "packing/resources/web/squarepacker-k2-minus-c-2026-10-05/k2-minus-c/code/experiments/kw_pairs/angle_degree2.log"
+    },
+    {
+      "match": "code/experiments/kw_pairs/angle_degree2.py",
+      "reason": "The complete original bytes are already retained in the version 1.1 packet; this version binds the same bytes to its own immutable tree.",
+      "identical_to": "packing/resources/web/squarepacker-k2-minus-c-2026-10-05/k2-minus-c/code/experiments/kw_pairs/angle_degree2.py"
+    },
+    {
+      "match": "code/experiments/kw_pairs/degree1.log",
+      "reason": "The complete original bytes are already retained in the version 1.1 packet; this version binds the same bytes to its own immutable tree.",
+      "identical_to": "packing/resources/web/squarepacker-k2-minus-c-2026-10-05/k2-minus-c/code/experiments/kw_pairs/degree1.log"
+    },
+    {
+      "match": "code/experiments/kw_pairs/degree1.py",
+      "reason": "The complete original bytes are already retained in the version 1.1 packet; this version binds the same bytes to its own immutable tree.",
+      "identical_to": "packing/resources/web/squarepacker-k2-minus-c-2026-10-05/k2-minus-c/code/experiments/kw_pairs/degree1.py"
+    },
+    {
+      "match": "code/experiments/kw_pairs/fastsa.py",
+      "reason": "The complete original bytes are already retained in the version 1.1 packet; this version binds the same bytes to its own immutable tree.",
+      "identical_to": "packing/resources/web/squarepacker-k2-minus-c-2026-10-05/k2-minus-c/code/experiments/kw_pairs/fastsa.py"
+    },
+    {
+      "match": "code/experiments/kw_pairs/geom.py",
+      "reason": "The complete original bytes are already retained in the version 1.1 packet; this version binds the same bytes to its own immutable tree.",
+      "identical_to": "packing/resources/web/squarepacker-k2-minus-c-2026-10-05/k2-minus-c/code/experiments/kw_pairs/geom.py"
+    },
+    {
+      "match": "code/experiments/kw_pairs/grid_try.py",
+      "reason": "The complete original bytes are already retained in the version 1.1 packet; this version binds the same bytes to its own immutable tree.",
+      "identical_to": "packing/resources/web/squarepacker-k2-minus-c-2026-10-05/k2-minus-c/code/experiments/kw_pairs/grid_try.py"
+    },
+    {
+      "match": "code/experiments/kw_pairs/hand7.json",
+      "reason": "The complete original bytes are already retained in the version 1.1 packet; this version binds the same bytes to its own immutable tree.",
+      "identical_to": "packing/resources/web/squarepacker-k2-minus-c-2026-10-05/k2-minus-c/code/experiments/kw_pairs/hand7.json"
+    },
+    {
+      "match": "code/experiments/kw_pairs/hand7.py",
+      "reason": "The complete original bytes are already retained in the version 1.1 packet; this version binds the same bytes to its own immutable tree.",
+      "identical_to": "packing/resources/web/squarepacker-k2-minus-c-2026-10-05/k2-minus-c/code/experiments/kw_pairs/hand7.py"
+    },
+    {
+      "match": "code/experiments/kw_pairs/hand9.json",
+      "reason": "The complete original bytes are already retained in the version 1.1 packet; this version binds the same bytes to its own immutable tree.",
+      "identical_to": "packing/resources/web/squarepacker-k2-minus-c-2026-10-05/k2-minus-c/code/experiments/kw_pairs/hand9.json"
+    },
+    {
+      "match": "code/experiments/kw_pairs/hand9.log",
+      "reason": "The complete original bytes are already retained in the version 1.1 packet; this version binds the same bytes to its own immutable tree.",
+      "identical_to": "packing/resources/web/squarepacker-k2-minus-c-2026-10-05/k2-minus-c/code/experiments/kw_pairs/hand9.log"
+    },
+    {
+      "match": "code/experiments/kw_pairs/hand9.py",
+      "reason": "The complete original bytes are already retained in the version 1.1 packet; this version binds the same bytes to its own immutable tree.",
+      "identical_to": "packing/resources/web/squarepacker-k2-minus-c-2026-10-05/k2-minus-c/code/experiments/kw_pairs/hand9.py"
+    },
+    {
+      "match": "code/experiments/kw_pairs/improve.py",
+      "reason": "The complete original bytes are already retained in the version 1.1 packet; this version binds the same bytes to its own immutable tree.",
+      "identical_to": "packing/resources/web/squarepacker-k2-minus-c-2026-10-05/k2-minus-c/code/experiments/kw_pairs/improve.py"
+    },
+    {
+      "match": "code/experiments/kw_pairs/jam.py",
+      "reason": "The complete original bytes are already retained in the version 1.1 packet; this version binds the same bytes to its own immutable tree.",
+      "identical_to": "packing/resources/web/squarepacker-k2-minus-c-2026-10-05/k2-minus-c/code/experiments/kw_pairs/jam.py"
+    },
+    {
+      "match": "code/experiments/kw_pairs/jam_run1.jsonl",
+      "reason": "The complete original bytes are already retained in the version 1.1 packet; this version binds the same bytes to its own immutable tree.",
+      "identical_to": "packing/resources/web/squarepacker-k2-minus-c-2026-10-05/k2-minus-c/code/experiments/kw_pairs/jam_run1.jsonl"
+    },
+    {
+      "match": "code/experiments/kw_pairs/jam_run1.log",
+      "reason": "The complete original bytes are already retained in the version 1.1 packet; this version binds the same bytes to its own immutable tree.",
+      "identical_to": "packing/resources/web/squarepacker-k2-minus-c-2026-10-05/k2-minus-c/code/experiments/kw_pairs/jam_run1.log"
+    },
+    {
+      "match": "code/experiments/kw_pairs/sa.py",
+      "reason": "The complete original bytes are already retained in the version 1.1 packet; this version binds the same bytes to its own immutable tree.",
+      "identical_to": "packing/resources/web/squarepacker-k2-minus-c-2026-10-05/k2-minus-c/code/experiments/kw_pairs/sa.py"
+    },
+    {
+      "match": "code/experiments/kw_pairs/snap.py",
+      "reason": "The complete original bytes are already retained in the version 1.1 packet; this version binds the same bytes to its own immutable tree.",
+      "identical_to": "packing/resources/web/squarepacker-k2-minus-c-2026-10-05/k2-minus-c/code/experiments/kw_pairs/snap.py"
+    },
+    {
+      "match": "code/experiments/kw_pairs/summarize.py",
+      "reason": "The complete original bytes are already retained in the version 1.1 packet; this version binds the same bytes to its own immutable tree.",
+      "identical_to": "packing/resources/web/squarepacker-k2-minus-c-2026-10-05/k2-minus-c/code/experiments/kw_pairs/summarize.py"
+    },
+    {
+      "match": "code/experiments/kw_pairs/test_geom.log",
+      "reason": "The complete original bytes are already retained in the version 1.1 packet; this version binds the same bytes to its own immutable tree.",
+      "identical_to": "packing/resources/web/squarepacker-k2-minus-c-2026-10-05/k2-minus-c/code/experiments/kw_pairs/test_geom.log"
+    },
+    {
+      "match": "code/experiments/kw_pairs/test_geom.py",
+      "reason": "The complete original bytes are already retained in the version 1.1 packet; this version binds the same bytes to its own immutable tree.",
+      "identical_to": "packing/resources/web/squarepacker-k2-minus-c-2026-10-05/k2-minus-c/code/experiments/kw_pairs/test_geom.py"
+    },
+    {
+      "match": "code/experiments/rv_mult_flpar/count_mult.log",
+      "reason": "The complete original bytes are already retained in the version 1.1 packet; this version binds the same bytes to its own immutable tree.",
+      "identical_to": "packing/resources/web/squarepacker-k2-minus-c-2026-10-05/k2-minus-c/code/experiments/rv_mult_flpar/count_mult.log"
+    },
+    {
+      "match": "code/experiments/rv_mult_flpar/count_mult.py",
+      "reason": "The complete original bytes are already retained in the version 1.1 packet; this version binds the same bytes to its own immutable tree.",
+      "identical_to": "packing/resources/web/squarepacker-k2-minus-c-2026-10-05/k2-minus-c/code/experiments/rv_mult_flpar/count_mult.py"
+    },
+    {
+      "match": "code/experiments/rv_mult_flpar/count_mult_results.json",
+      "reason": "The complete original bytes are already retained in the version 1.1 packet; this version binds the same bytes to its own immutable tree.",
+      "identical_to": "packing/resources/web/squarepacker-k2-minus-c-2026-10-05/k2-minus-c/code/experiments/rv_mult_flpar/count_mult_results.json"
+    },
+    {
+      "match": "code/experiments/rv_mult_flpar/flpar_results.json",
+      "reason": "The complete original bytes are already retained in the version 1.1 packet; this version binds the same bytes to its own immutable tree.",
+      "identical_to": "packing/resources/web/squarepacker-k2-minus-c-2026-10-05/k2-minus-c/code/experiments/rv_mult_flpar/flpar_results.json"
+    },
+    {
+      "match": "code/experiments/rv_mult_flpar/flpar_results_3.json",
+      "reason": "The complete original bytes are already retained in the version 1.1 packet; this version binds the same bytes to its own immutable tree.",
+      "identical_to": "packing/resources/web/squarepacker-k2-minus-c-2026-10-05/k2-minus-c/code/experiments/rv_mult_flpar/flpar_results_3.json"
+    },
+    {
+      "match": "code/experiments/rv_mult_flpar/flpar_test.py",
+      "reason": "The complete original bytes are already retained in the version 1.1 packet; this version binds the same bytes to its own immutable tree.",
+      "identical_to": "packing/resources/web/squarepacker-k2-minus-c-2026-10-05/k2-minus-c/code/experiments/rv_mult_flpar/flpar_test.py"
+    },
+    {
+      "match": "code/experiments/rv_mult_flpar/geom.py",
+      "reason": "The complete original bytes are already retained in the version 1.1 packet; this version binds the same bytes to its own immutable tree.",
+      "identical_to": "packing/resources/web/squarepacker-k2-minus-c-2026-10-05/k2-minus-c/code/experiments/rv_mult_flpar/geom.py"
+    },
+    {
+      "match": "code/experiments/rv_mult_flpar/mult_climb.py",
+      "reason": "The complete original bytes are already retained in the version 1.1 packet; this version binds the same bytes to its own immutable tree.",
+      "identical_to": "packing/resources/web/squarepacker-k2-minus-c-2026-10-05/k2-minus-c/code/experiments/rv_mult_flpar/mult_climb.py"
+    },
+    {
+      "match": "code/experiments/rv_mult_flpar/mult_climb_results.json",
+      "reason": "The complete original bytes are already retained in the version 1.1 packet; this version binds the same bytes to its own immutable tree.",
+      "identical_to": "packing/resources/web/squarepacker-k2-minus-c-2026-10-05/k2-minus-c/code/experiments/rv_mult_flpar/mult_climb_results.json"
+    },
+    {
+      "match": "code/make_stats_v10.py",
+      "reason": "The complete original bytes are already retained in the version 1.1 packet; this version binds the same bytes to its own immutable tree.",
+      "identical_to": "packing/resources/web/squarepacker-k2-minus-c-2026-10-05/k2-minus-c/code/make_stats_v10.py"
+    },
+    {
+      "match": "code/run_seq.py",
+      "reason": "The complete original bytes are already retained in the version 1.1 packet; this version binds the same bytes to its own immutable tree.",
+      "identical_to": "packing/resources/web/squarepacker-k2-minus-c-2026-10-05/k2-minus-c/code/run_seq.py"
+    },
+    {
+      "match": "code/run_v2.py",
+      "reason": "The complete original bytes are already retained in the version 1.1 packet; this version binds the same bytes to its own immutable tree.",
+      "identical_to": "packing/resources/web/squarepacker-k2-minus-c-2026-10-05/k2-minus-c/code/run_v2.py"
+    },
+    {
+      "match": "code/verify_leaves.py",
+      "reason": "The complete original bytes are already retained in the version 1.1 packet; this version binds the same bytes to its own immutable tree.",
+      "identical_to": "packing/resources/web/squarepacker-k2-minus-c-2026-10-05/k2-minus-c/code/verify_leaves.py"
+    },
+    {
+      "match": "code/verify_leaves2.py",
+      "reason": "The complete original bytes are already retained in the version 1.1 packet; this version binds the same bytes to its own immutable tree.",
+      "identical_to": "packing/resources/web/squarepacker-k2-minus-c-2026-10-05/k2-minus-c/code/verify_leaves2.py"
+    },
+    {
+      "match": "data/kw9_data.zip",
+      "reason": "The complete original bytes are already retained in the version 1.1 packet; this version binds the same bytes to its own immutable tree.",
+      "identical_to": "packing/resources/web/squarepacker-k2-minus-c-2026-10-05/k2-minus-c/data/kw9_data.zip"
+    },
+    {
+      "match": "paper/LICENSE",
+      "reason": "The complete original bytes are already retained in the version 1.1 packet; this version binds the same bytes to its own immutable tree.",
+      "identical_to": "packing/resources/web/squarepacker-k2-minus-c-2026-10-05/k2-minus-c/paper/LICENSE"
+    }
+  ]
+}

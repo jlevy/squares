@@ -102,7 +102,7 @@ session:
       skipped and 19 deselected in 856.20 seconds wall. The merged branch was published; hosted certification
       remains in progress.'
     evidence:
-    - packing/campaign/agent-sessions/session-164-push-final.log
+    - packing/campaign/agent-sessions/session-164-push-final.log.gz
     - packing/tests/test_synopsis_handoff.py
     stop_reason: Local merged-source push validation passed and was published.
     next_action: Run the supervised efficiency slice beside hosted certification, then reconcile its results
@@ -169,7 +169,7 @@ session:
       and all nine workers started.
     evidence:
     - docs/project/reviews/review-2026-09-29-validation-parallelism.md
-    - packing/campaign/agent-sessions/session-164-efficiency-push.log
+    - packing/campaign/agent-sessions/session-164-efficiency-push.log.gz
     stop_reason: The repaired candidate is published and its hosted checks are running.
     next_action: Integrate the independently reviewed parallel follow-ups and measure the new worker allocation
       while the hosted fanout runs.
@@ -360,7 +360,7 @@ session:
     evidence:
     - packing/resources/web/n11-optimality-2026-09-29/README.md
     - packing/frontier/results.yaml
-    - docs/project/verification-tooling.md
+    - docs/project/guides/verification-tooling.md
     stop_reason: Intake and first measured independent controls complete; continue local acceptance.
     next_action: Finish nonlinear local isolation and map complete case-census and ancestry checks.
   - workflow: pipeline-improvement
@@ -457,7 +457,7 @@ session:
       mask0 and mask202 exclusions in 17.37 and 17.75 seconds outer wall; no new case
       is claimed. Published fbc1fb6a0 passes all selected hosted checks.
     evidence:
-    - docs/project/verification-tooling.md
+    - docs/project/guides/verification-tooling.md
     - docs/project/specs/active/plan-2026-09-29-proof-verification-consolidation.md
     stop_reason: Source audit, controlled comparison and hotspot profile are retained;
       user explicitly prioritizes fixing the arithmetic bottleneck with native code.
@@ -489,7 +489,7 @@ session:
       all 201 analytic-control angles. Rust batch geometry passes focused differential
       controls and is awaiting independent review and live integration.
     evidence:
-    - docs/project/verification-tooling.md
+    - docs/project/guides/verification-tooling.md
     - docs/project/specs/active/plan-2026-09-29-proof-verification-consolidation.md
     stop_reason: Initial measured kernel slice completed; closure recorded after its deadline
       during the user coordination exchange. No timely closure is implied.
@@ -1158,7 +1158,7 @@ session:
     outcome: All 22 focused controls passed; frozen source 66c37b255 produced a complete 13-box diagnostic with zero improved bounds and zero closures. Preflight plus diagnostic took 1.163 seconds, frontier generation 5.977 seconds and whole invocation 7.160 seconds. Adoption is rejected; exact Rust area backend and Python default remain unchanged. First-principles overview and both PR descriptions/comments are current.
     evidence:
     - docs/project/reviews/review-2026-09-30-rectangle-derivative-bound.md
-    - docs/project/verification-tooling.md
+    - docs/project/guides/verification-tooling.md
     stop_reason: Complete negative diagnostic and packaging delta published at 6a307f6a4; 52 affected checks and 2180 tests pass, as do all required hosted PR checks.
     next_action: Finish the hosted merge checkpoint while consolidating diagnostic admission in an isolated follow-up branch.
   - workflow: pipeline-improvement
@@ -1187,7 +1187,7 @@ session:
       interrupted after choosing redundant slow work; think-ufhu tracks this gap and
       the interrupted run grants no pass credit.
     evidence:
-    - docs/project/verification-tooling.md
+    - docs/project/guides/verification-tooling.md
     - docs/project/reviews/review-2026-09-30-rectangle-derivative-bound.md
     - packing/tests/test_n11_generic_fresh.py
     - packing/tests/test_known_best_atlas.py
@@ -1293,7 +1293,7 @@ session:
     files:
     - packing/frontier/results.yaml
     - packing/frontier/evidence.yaml
-    - docs/project/verification-tooling.md
+    - docs/project/guides/verification-tooling.md
     checks:
     - Read-only source and receipt identity audit completed; report received at 20:09:34Z.
     uncertainty: Full native external rectangle coverage and T-057 source row equality remain open.
@@ -1311,7 +1311,7 @@ session:
     write_scope:
     - packing/frontier/results.yaml
     - packing/frontier/evidence.yaml
-    - docs/project/verification-tooling.md
+    - docs/project/guides/verification-tooling.md
     excluded_commands:
     - git commit
     - git push
@@ -1455,7 +1455,7 @@ session:
     results certify the predecessor integration tree.
   - 'Efficiency candidate 1afb75ca6: default broad push passed 7,714 tests with 9 skips in 968.77 seconds;
     total wall 1,034.70 seconds. The sole failed step was an unmapped new review document. The document-map
-    omission is repaired separately; the original failed log is retained as session-164-efficiency-push.log.
+    omission is repaired separately; the original failed log is retained as session-164-efficiency-push.log.gz.
     Different selection from the earlier 2,959-test run prevents a matched speedup claim.'
   - 'Parallel efficiency follow-ups: think-08ht main/daily fanout passed independent Sol review and five
     focused tests in an isolated checkout; think-14lz child-pytest observability and think-ysvk pool-heavy

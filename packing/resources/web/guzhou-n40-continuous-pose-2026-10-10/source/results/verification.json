@@ -1,0 +1,272 @@
+{
+  "admission": {
+    "axis_evaluation_bound": "384178892657373682994447839008000000",
+    "axis_input_sha256": "d57e8bb267dc1a17d57fa0f17f662bf552b6aef46427a0eb9308ae16539ed1cb",
+    "mass": "3999/100",
+    "pose_input_sha256": "ccf7b68aa89fdcfcf0d78ac135cfa24e4a73b822eb412b2aac46e9c49e2b9925",
+    "positive_representatives": 480,
+    "source_sha256": "71011d0356dd179c6e7e6e02c9a064ff30f6f13844016ce3b97463bf7ef53dc0",
+    "terms": 3840
+  },
+  "author_claim_status": "CERTIFIED",
+  "axis": {
+    "margin": "896232809301864786207/250000000000000000000000000",
+    "minimum_capture_lower": "249950896232809301864786207/250000000000000000000000000",
+    "vertices": 4897369
+  },
+  "axis_sha256": "041ac9d9f1f2cbae17b642f41f67beaddb4974247dcd93d083c99a38ad1e7b9c",
+  "binaries": {
+    "axis": "051e306dc867ddd20a10135ae0a39a49117931c642e8caed0d452c09f85fca2d",
+    "pose": "a5dcfa3e6ec48bc67c524fe75ef57d52dcdef5d618086b61ffa9d775b2910122"
+  },
+  "claim": "s(40) > 1340000/199529",
+  "code_distinct_full": false,
+  "compile_flags": [
+    "-O3",
+    "-std=c++17",
+    "-fno-fast-math",
+    "-ffp-contract=off"
+  ],
+  "compiler": "g++ (Ubuntu 15.2.0-16ubuntu1) 15.2.0",
+  "completed_utc": "2026-10-10T14:29:53.507126+00:00",
+  "coverage": {
+    "angle_bisections": 14096668,
+    "leaves": 30930485,
+    "minimum_capture_lower": "2251349454150741/2251799813685248",
+    "nodes": 61860927,
+    "slabs": 43
+  },
+  "external_review_of_new_kernel": false,
+  "formal_proof": false,
+  "ieee": {
+    "seed": 4010041010,
+    "status": "PASSED",
+    "values": 1000008
+  },
+  "method_distinct_full": false,
+  "oracle": {
+    "cases": 160,
+    "classified_inside": 419,
+    "classified_outside": 461,
+    "compile_exit": 0,
+    "compile_flags": [
+      "-O3",
+      "-std=c++17",
+      "-fno-fast-math",
+      "-ffp-contract=off"
+    ],
+    "driver_sha256": "6963d2ef8b0d16f1aa41b31f9091b2185be8630c03994bf66ac97105d7299aa5",
+    "exact_area_checks": 3568,
+    "exact_pose_checks": 4014,
+    "kernel_sha256": "da06206b8e83a57b8a710ba62e743c6d3a1959e9160ff32ae89ede583841c73c",
+    "oracle_sha256": "395fa622bec60607798a3da4103162313833fe9c139a40ca2023cd00c14d581e",
+    "run_exit": 0,
+    "scope": "Finite regression only; continuous coverage uses interval proof, not these samples",
+    "seconds": 3.4662757349999964,
+    "seed": 40004261010,
+    "status": "PASSED_FINITE_ORACLE_TESTS",
+    "stdout_sha256": "9b95b293aa0f828946f6abecc0eda9a3219c3a9c2ca1163c16ff7c468551bd8d"
+  },
+  "parameters": {
+    "B": "199529/200000",
+    "L": "67/10",
+    "X": "1340000/199529",
+    "axis_side": "997643/1000000",
+    "denominator": 1000000,
+    "endpoints": [
+      1,
+      500,
+      10000,
+      20000,
+      30000,
+      40000,
+      50000,
+      60000,
+      70000,
+      80000,
+      90000,
+      100000,
+      110000,
+      120000,
+      130000,
+      140000,
+      150000,
+      160000,
+      170000,
+      180000,
+      190000,
+      200000,
+      210000,
+      220000,
+      230000,
+      240000,
+      250000,
+      260000,
+      270000,
+      280000,
+      290000,
+      300000,
+      310000,
+      320000,
+      330000,
+      340000,
+      350000,
+      360000,
+      370000,
+      380000,
+      390000,
+      400000,
+      410000,
+      415000
+    ],
+    "epsilon": "1/1000000",
+    "last_t": "83/200",
+    "mass": "3999/100",
+    "n": 40,
+    "node_budget": 30000000,
+    "threshold": "4999/5000"
+  },
+  "platform": "x86_64 Linux",
+  "python": "3.14.4",
+  "scalar": {
+    "X": "1340000/199529",
+    "axis_containment_margin": "589499411/125000000000125000",
+    "claim": "s(40) > 1340000/199529",
+    "counting_margin": "1/500",
+    "mass": "3999/100",
+    "threshold": "4999/5000"
+  },
+  "schema": "n40-continuous-replay/v1",
+  "seconds": 510.960118967,
+  "slabs_sha256": "4fb7708313eebe540d7674c62d3352e5e1be0b1ea777067346b117dfe4b123f0",
+  "source_commit": null,
+  "source_sha256": {
+    ".gitattributes": "2d5c072f5cbe11a4c74660a6e47beffcf246fc3546a5aaa534b21c724fe2f9fc",
+    ".github/workflows/verify.yml": "9c209614911a6adc4f1e7f496fa62b5a91255f0034efd8c314aaa8a1f674907a",
+    ".gitignore": "85e9e61c0a8dee51b98253a262d7a2f3f8fe29badf2d145a68b510bdd330b7f5",
+    "LICENSE": "94be33291ae276999b6f49d7ebc3ed2d35e11e61e2fcd443f810178c09a2fad9",
+    "PROOF.md": "6fc34dff6ccd9bd8a3aa1703baf200f2cde75f3151759f8c76186fe4214e5856",
+    "README.md": "49b16634ff28668272fb8201667c4a1d635ea3391c30e417286385446891fc21",
+    "REPRODUCIBILITY.md": "99abb5ff99a3575badb752fe971950264ddbf9e93497edee07e3f3c9c39f6b04",
+    "SOURCES.md": "76d52c1c9957d1993d3d891fa94f17b137595582b684ce506fc9915ef2792cb3",
+    "VERIFICATION.md": "f4372132f34829fe1e167fe03add00f03a60fa30a28d4e598fffddabc0edda71",
+    "certificate/certified_candidate.json": "71011d0356dd179c6e7e6e02c9a064ff30f6f13844016ce3b97463bf7ef53dc0",
+    "certificate/parameters.json": "4d153cb377a84e52333cbd76facb7a7a48ee586ea2567b5ac5d397ab7d9407c5",
+    "licenses/jlevy-squares.txt": "7428341239cf4ee78c4b951b7fd8a2284b24835aeb0ede82f032b2e95e92cc00",
+    "licenses/tokoharu.txt": "8dc3364f10709e043998e74d0de02774a7f6c9b08dde3a8a58336948d9ed8ad8",
+    "licenses/wand125.txt": "c0dd43e7892932c81335f74a2fdbf1a98f5977bab14c0c4c30e3abcc97c34904",
+    "tests/kernel_harness.cpp": "4ee681bced642c708eda7d71845836d3ea18d61c350ff49ef26e199fb9ee6e40",
+    "tests/oracle.py": "395fa622bec60607798a3da4103162313833fe9c139a40ca2023cd00c14d581e",
+    "tests/rounding_harness.cpp": "96bd022242b4c0e44ff3eb27a8294d3d359bc74263f898e350768eeb78fdfc9f",
+    "tests/test_admission.py": "797689e9f891e59d6f8caea9d691cfb81606378e401e8489881fde19f13f632c",
+    "tests/test_kernel.py": "6963d2ef8b0d16f1aa41b31f9091b2185be8630c03994bf66ac97105d7299aa5",
+    "verifier/audit.py": "9ecbabfc483b181d21dc2a298d5c35b228218176eba97dcf856113238348281e",
+    "verifier/axis_integer_grid.cpp": "f5bc3f60065aaea3d14ffb8465865750fca22cf8bbc6bd8739b5120200b6277d",
+    "verifier/continuous_pose.cpp": "da06206b8e83a57b8a710ba62e743c6d3a1959e9160ff32ae89ede583841c73c",
+    "verifier/exact.py": "3e2aa3ca8e324a39e018ccb28267606344a9de585d72f43d79d80663b7c312cf",
+    "verifier/run.py": "3387697cfba17021242b06e06d11df7975c72f5cca97a276cf758fea7e187ba6"
+  },
+  "stages": [
+    {
+      "exit_code": 0,
+      "seconds": 1.3223225500000098,
+      "stage": "build-pose",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "exit_code": 0,
+      "seconds": 0.7202930090000024,
+      "stage": "build-axis",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "exit_code": 0,
+      "seconds": 0.3694492860000054,
+      "stage": "unit-tests",
+      "stderr_sha256": "779e3e97f87d13e5a2e60b38f32845ae85d93dbe6b847a185fc7f5bfd2840780",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "exit_code": 0,
+      "seconds": 5.0824493430000075,
+      "stage": "exact-oracle",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "00f080aece144fc41d9f3bad729fadfd7804d0e52a3bf359cf3a65761b278823"
+    },
+    {
+      "exit_code": 0,
+      "seconds": 1.4713089589999981,
+      "stage": "build-rounding",
+      "stderr_sha256": "1c5674166e36233752a7ce1dc6764f7135d5f49a29cfc7bdac2d0f051561be95",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "exit_code": 0,
+      "seconds": 0.037498851999998806,
+      "stage": "ieee-neighbors",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "f5b609ab17887c4e6853e48d43db8150e9ce5140994304f343f633e09c1293e8"
+    },
+    {
+      "exit_code": -6,
+      "seconds": 0.00997323300001085,
+      "stage": "wrong-rounding",
+      "stderr_sha256": "ab08c0ec8e96068c7128aa9a52672f30b88f4dfeae2109124502db80eca1aff8",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "exit_code": -6,
+      "seconds": 0.008709992000007105,
+      "stage": "ftz",
+      "stderr_sha256": "38267989fbae773b653bb294dc1e5d3bf3394cbd022e130ef02f68c32aec175b",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "exit_code": 1,
+      "seconds": 0.36933846499999845,
+      "stage": "reject-ndebug",
+      "stderr_sha256": "d795d1494c37a8777f18891ad4c0bb366e3e32a6f6216e3fd2a4d9b4f750e37a",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "exit_code": 1,
+      "seconds": 0.4702909009999985,
+      "stage": "reject-fastmath",
+      "stderr_sha256": "d795d1494c37a8777f18891ad4c0bb366e3e32a6f6216e3fd2a4d9b4f750e37a",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "exit_code": 0,
+      "seconds": 0.015269310000007863,
+      "stage": "synthetic-positive",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "84f422f84db0fb438f20a91e13db4782a53de7f4ea78af0ded0fad4f732621c8"
+    },
+    {
+      "exit_code": 3,
+      "seconds": 0.014263882999998145,
+      "stage": "synthetic-negative",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "cb1a5ca005e2355383166d017aedc665f80d8a010e6e7b627e40b6464c0f203b"
+    },
+    {
+      "exit_code": 3,
+      "seconds": 0.03856652200001065,
+      "stage": "limited-budget",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "186b6000b00833f9bf1f0c07961c5f7e63816c6a17d2eccb0c7bdb5e51e64f70"
+    },
+    {
+      "exit_code": 0,
+      "seconds": 0.37087913100000947,
+      "stage": "axis",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "989c0db8cecb3961adab9db1ee960e2faeab1184686bb0227160ec5dd2df2d72"
+    }
+  ],
+  "started_utc": "2026-10-10T14:21:22.547143+00:00",
+  "status": "REPLAYED_SAME_KERNEL",
+  "workers": 4
+}

@@ -1,0 +1,75 @@
+{
+  "schema": "n17-incircle-disk-projection-mechanical-summary/v1",
+  "status": "proper_disk_convexification_detected",
+  "source_commit": "0db24daac5ea1be2dd416971b0c78b3dfc087388",
+  "source_files": 16,
+  "all_source_bytes_match": true,
+  "full_payload_equal": true,
+  "fresh_verification_passed": true,
+  "complete_classification": true,
+  "outer_seconds": 1.751898667018395,
+  "cleanup_complete": true,
+  "cells": 24,
+  "relevant_pairs": 228,
+  "states": 95,
+  "state_pair_incidences": 12920,
+  "proper_cut_pairs": 114,
+  "mathematical_review": "sole Astra CLEAR; independent confirmation false",
+  "ordinary_assignment_exclusion_proved": false,
+  "census_admission_proved": false,
+  "global_bound_proved": false,
+  "global_optimality_proved": false,
+  "shared_center_LP_solved": false,
+  "work": {
+    "face_checks": 10856,
+    "state_pairs_accounted": 12920,
+    "vertex_differences": 4298
+  },
+  "phases": [
+    {
+      "argv": [
+        "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+        "-m",
+        "devtools.check_n17_incircle_disk_projection",
+        "--descriptor",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-314-incircle-disk-projection/descriptor.json",
+        "--max-seconds",
+        "60",
+        "--output",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-314-incircle-disk-projection/certificate.json"
+      ],
+      "ended_at": "2026-10-08T05:18:41.920139Z",
+      "name": "construction",
+      "returncode": 0,
+      "started_at": "2026-10-08T05:18:41.221066Z",
+      "status": "completed",
+      "wall_seconds": 0.6989795420086011
+    },
+    {
+      "argv": [
+        "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+        "-m",
+        "devtools.check_n17_incircle_disk_projection",
+        "--descriptor",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-314-incircle-disk-projection/descriptor.json",
+        "--max-seconds",
+        "60",
+        "--certificate",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-314-incircle-disk-projection/certificate.json",
+        "--output",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-314-incircle-disk-projection/replay.json"
+      ],
+      "ended_at": "2026-10-08T05:18:42.630100Z",
+      "name": "fresh_verification",
+      "returncode": 0,
+      "started_at": "2026-10-08T05:18:41.920669Z",
+      "status": "completed",
+      "wall_seconds": 0.7093329589697532
+    }
+  ],
+  "disk_work": {
+    "norms_checked": 1357
+  },
+  "ordinary_impossible_pair_candidates": 0,
+  "additional_pairs_beyond_octagon": 12
+}

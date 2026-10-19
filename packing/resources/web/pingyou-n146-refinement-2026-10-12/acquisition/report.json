@@ -1,0 +1,45 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "https://github.com/jlevy/squares/issues/566",
+  "author": "PingYou Ltd",
+  "source_key": "[PingYou n146 refinement 2026-10-12]",
+  "report_evidence": "E-pingyou-566-certificate-report",
+  "receipt_format": "pingyou-566-exact-replay-v1",
+  "witness_prefix": "W-pingyou-566-n",
+  "claim_limitations": "Complete 820b9ff rational centre/half-angle certificate converted exactly from a checkout at the pin whose bytes have the digests the packet records, and equal there to the source's own corners Witness/v2; no upstream byte is retained. Finite construction feasibility only; no local minimum, rigidity, novelty, priority or global optimality claim.",
+  "read_on": "2026-10-14",
+  "read_at_main": "aeef99ef0ef27ace054434094118a6ac355da384",
+  "certificates": [
+    {"n": 146, "path": "n146.cert.json", "format": "pingyou-json", "offered": "12.5837822039508342919134679370511513667729", "first_committed": "2026-10-12T23:41:08Z", "same_packing": [{"path": "pingyou-n146-rational.yaml", "format": "witness-corners"}], "fact": "facts/n-146.yaml"}
+  ],
+  "requested": [146],
+  "replayed": [146],
+  "houses": [
+    {"n": 146, "reader": "[Barnett refinements 2026-10-11]", "source_key": "[Barnett refinements 2026-10-11]", "holders": "Ryan Xu, improved by Robert Barnett", "result": "T-150", "reported_value": "12.5837822039510463", "verified_value": "12.5837822039510463", "evidence": ["E-barnett-505-exact-feasibility"]}
+  ],
+  "pending": [
+    {"n": 146, "report": "T-101 (#375)", "url": "https://github.com/jlevy/squares/issues/375", "holders": "the Kingbird catalogue, verified by Evan Daniel's exact ceiling", "result": "T-101", "reader": "[evand exact optima 2026-10-05]"},
+    {"n": 146, "report": "T-125 (#432)", "url": "https://github.com/jlevy/squares/issues/432", "holders": "Ryan Xu", "result": "T-125", "reader": "[ry-xu square packing 2026]"},
+    {"n": 146, "report": "T-146 (no issue)", "url": "https://github.com/evand/square-packing/tree/ea1a2f23678a13bd1d252f9f4c95ca5dd2ffd2b7/search/regularize/lists", "holders": "Evan Daniel", "result": "T-146", "reader": "[Daniel regularized lists 2026-10-10]"},
+    {"n": 146, "report": "#593", "url": "https://github.com/jlevy/squares/issues/593", "holders": "Mykhailo Polkovskyi (Mishapolk)", "reader": "[Mishapolk records 2026-10-14]"},
+    {"n": 146, "report": "PR #574", "url": "https://github.com/jlevy/squares/pull/574", "holders": "PingYou Ltd", "reader": "[PingYou PR 574 certificates 2026-10-13]"}
+  ],
+  "register": {
+    "title": "PingYou Ltd's n146 refinement at 820b9ff, issue566",
+    "headline": "A further exact refinement of Ryan Xu's packing of 146 squares, after Robert Barnett's",
+    "significance": 2,
+    "source_checks": "The author reports that its exact separating-axis checker and a separate rational polygon-intersection checker accept all 146 squares, every wall and all 10,585 pairs, with duplicate and outside controls refused and the conversion to its corners Witness/v2 lossless; and that this repository's sqpack exact_verify and check_rational_witness_independent, unchanged at 074ac28, accept that witness. Those statements are the author's; no source program ran here.",
+    "credit": "Credit PingYou Ltd (https://github.com/BuddenPing/square-packing-certificates) with this further refinement, as the source asks, of Robert Barnett's refinement (T-150, issue 505) of Ryan Xu's packing of 146 (ry-xu, issue 432); the source credits Evan Daniel with the contact-solver source and the earlier n146 regularization. The pinned source makes no statement about AI assistance.",
+    "next_rung": "Independently review the retained replay, then record source-specific adoption of the n146 side, 2.12e-13 below the ceiling T-150 holds and below every other report at 146 but the author's own PR #574, whose 40-place and 68-place prints do not separate it from this side. Final exact-head CI remains required.",
+    "bead": "think-r8ti",
+    "bibliography": {
+      "authors": [
+        "PingYou Ltd"
+      ],
+      "lineage": "builds-on-project",
+      "credit": "PingYou Ltd after Xu, Barnett, Daniel, Levy",
+      "short_credit": "PingYou Ltd after Xu et al.",
+      "note": "One complete exact certificate at 820b9ffb11dd602d735f7a03cd472db98a2d3bb6, a coupled contact realization refining Barnett's refinement of Xu's n146 with Daniel's contact-solver source. The source checks with Squares Project (Levy) verification code and supplies a corners Witness/v2. Derived exact facts only; no upstream byte is retained. No local or global optimality claim."
+    }
+  }
+}

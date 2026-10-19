@@ -50,6 +50,7 @@ DEFAULT_BRANCH = "main"
 # and its page's source share.
 README = "README.md"
 TUTORIAL = "TUTORIAL.md"
+TUTORIAL_ADVANCED = "TUTORIAL-ADVANCED.md"
 SYNOPSIS = "SYNOPSIS.md"
 CONVENTIONS = "conventions.md"
 DEVELOPMENT = "development.md"
@@ -62,6 +63,7 @@ EPISTEMICS = "epistemics.md"
 RESULTS = "packing/frontier/RESULTS.md"
 STATUS = "packing/frontier/STATUS.md"
 DEFECTS = "defects.md"
+CHANGELOG = "CHANGELOG.md"
 
 Kind = Literal["blob", "tree", "raw"]
 
@@ -158,6 +160,18 @@ BRANCH_LINK = re.compile(
     + re.escape(DEFAULT_BRANCH)
     + r"(?:/([^\s\"'<>)?#]*))?"
 )
+
+#: First-party result reports are citations, not files in the repository's tree.
+REPORT_LINK = re.compile(
+    re.escape(REPO_URL)
+    + r"/(?:issues/[1-9][0-9]*(?:#issuecomment-[1-9][0-9]*)?"
+    + r"|discussions/[1-9][0-9]*(?:#discussioncomment-[1-9][0-9]*)?)"
+)
+
+
+def is_report_link(url: str) -> bool:
+    """Whether `url` cites a numbered issue/discussion or its numbered comment."""
+    return REPORT_LINK.fullmatch(url) is not None
 
 
 def hash_pinned_links(text: str) -> list[str]:

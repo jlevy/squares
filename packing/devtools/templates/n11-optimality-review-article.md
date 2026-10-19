@@ -1,16 +1,17 @@
 {{FRONT_MATTER}}
 
 This paper explains the computer-assisted optimality proof published by
-[Queuingtheorydotcom in 11SquaresOptimal](https://github.com/Queuingtheorydotcom/11SquaresOptimal).
-The original
+[Mannaseh Ahmed](https://x.com/ManassehA06) in
+[11SquaresOptimal](https://github.com/Queuingtheorydotcom/11SquaresOptimal). The
+original
 [mathematical argument](https://github.com/Queuingtheorydotcom/11SquaresOptimal/blob/f9e0de713a0949d1bc6a0fa6b59d96edf6c3d65c/PROOF.md),
 [verification driver](https://github.com/Queuingtheorydotcom/11SquaresOptimal/blob/f9e0de713a0949d1bc6a0fa6b59d96edf6c3d65c/VERIFY.py),
 [certificate data](https://github.com/Queuingtheorydotcom/11SquaresOptimal/tree/f9e0de713a0949d1bc6a0fa6b59d96edf6c3d65c/data),
 and
 [reproduction instructions](https://github.com/Queuingtheorydotcom/11SquaresOptimal/blob/f9e0de713a0949d1bc6a0fa6b59d96edf6c3d65c/docs/REPRODUCING.md)
 are pinned to the source revision reviewed here.
-[Queuingtheorydotcom’s announcement](https://x.com/MathCompSciFTW/status/2104772485816168618)
-credits Astra’s work building on the Squares Project and Kleddamag.
+[Ahmed’s announcement](https://x.com/MathCompSciFTW/status/2104772485816168618) credits
+Astra’s work building on the Squares Project and Marc Leonard Overbeck.
 
 The components have distinct provenance:
 
@@ -22,8 +23,8 @@ The components have distinct provenance:
   [threshold-certificate method](../../cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md),
   which [Part I of this series]({{PAPER:n11-lower-bounds-explainer}}) explains, and its
   [local-isolation theorem](../../cases/trump11/isolation-theorem.md), together with
-  [Kleddamag’s earlier proof](https://github.com/Kleddamag/11-squares-certified-bound)
-  of a lower bound of 31/8
+  [Overbeck’s earlier proof](https://github.com/Kleddamag/11-squares-certified-bound) of
+  a lower bound of 31/8
   ([retained source](../../resources/web/external-square-certificates-2026-09-22/kleddamag-11/README.md)),
   which [Part II]({{PAPER:n11-threshold-bound-review}}) explains.
   The original proof’s
@@ -149,7 +150,7 @@ Exact coverage checks turn that idea into a theorem about every position and
 orientation. Part I explains the point certificate T-018, the threshold certificate
 T-025, whose $k$-of-$m$ charges pay a core holding at least $k$ of its $m$ charge sites,
 and T-026’s dilation bound $s(11)\ge3.8264474\ldots$.
-[Part II]({{PAPER:n11-threshold-bound-review}}) explains Kleddamag’s T-037,
+[Part II]({{PAPER:n11-threshold-bound-review}}) explains Overbeck’s T-037,
 $s(11)>31/8=3.875$, and what it changes in T-026’s certificate.[^lineage] Figure 3
 places these bounds in order.
 
@@ -195,10 +196,10 @@ disjoint interiors. For two convex polygons, project both onto a direction and c
 distance between the two projection intervals the **gap** in that direction, negative
 when the intervals overlap.
 The polygons have disjoint interiors exactly when some edge normal of one of them has a
-nonnegative gap, a **weak separating axis**; a gap of zero in that direction means the
-polygons touch, which is legal.
-Fourteen pairs touch in the construction, and the other 41 are separated by a positive
-gap.
+nonnegative gap, a **weak separating axis**; a zero gap is allowed.
+The polygons touch exactly when the largest gap over the edge normals of both polygons
+is zero.[^guzhou] Fourteen pairs touch in the construction, and the other 41 are
+separated by a positive gap.
 
 The calculations take place in the **number field** $\mathbb Q(u)$, the polynomial
 expressions in $u$ with rational coefficients.
@@ -213,12 +214,12 @@ vertices on all four walls, so the construction’s horizontal and vertical span
 exactly $T$; the last step of the proof uses this fact.
 
 The defining polynomial of $u$ is itself one of the fourteen contacts.
-If $u$ is treated as a free parameter in Appendix A, every wall contact (a square
+If $u$ is varied near its selected root in Appendix A, every wall contact (a square
 touching a side of the container) and thirteen of the square contacts hold identically.
 The remaining one, between square 2, $A(x_0,T-1)$, and square 10, the image of
 $A(\eta+2,-\zeta)$, has gap $p(u)/\bigl(2u(1-u^4)(1+2u-u^2)\bigr)$, which vanishes
-exactly at the root; for smaller $u$ the two squares overlap.[^adversarial] On the
-interval $[9/25,37/100]$ the derivative $p'$ exceeds $4$, so the root there is
+exactly at the root; for $u$ just below the root the two squares overlap.[^guzhou] On
+the interval $[9/25,37/100]$ the derivative $p'$ exceeds $4$, so the root there is
 unique.[^gpt6]
 
 ## Sixteen Regions Cover All Possible Centers
@@ -385,20 +386,6 @@ We can reject a whole region of centers at once, provided the collision is guara
 for every angle in the row.
 All other positions remain available until a further argument excludes them.
 
-<figure>
-{{POSE_SVG}}
-<figcaption><strong>Figure 6.</strong> A schematic of one safe exclusion. A possible-center
-region records uncertainty; a guaranteed inner region records what a valid packing must
-contain. A translated strict core meeting the other square’s owned hull forces overlap:
-if $x \in K - Q$, a core point meets the owned hull $K$. $Q$ stays strictly inside the
-square throughout the angle row, $K$ is owned in every valid packing under the accepted
-prior, and a shared interior forbids even a boundary center $x$.
-The forbidden centers can be discarded, while the retained region remains an
-overestimate. The drawing illustrates the
-<a href="../../devtools/check_n11_generic_fresh.py">geometric checker’s</a>
-invariant; it is not a certificate for the displayed schematic.</figcaption>
-</figure>
-
 For an angle interval, choose a convex core $Q$ around the origin that lies strictly
 inside the centered unit square at every angle in the interval.
 After substituting the half-angle formulas, the needed inequalities reduce to signs of
@@ -412,7 +399,7 @@ Let $K$ be an owned hull of another square.
 A proposed center $x$ is forbidden if
 
 $$
-x\in K+(-Q)=\{k-q:k\in K,\ q\in Q\}.
+x\in K-Q=K+(-Q)=\{k-q:k\in K,\ q\in Q\}.
 $$
 
 For such a center, $k=x+q$ belongs to both squares’ interiors.
@@ -421,6 +408,20 @@ The strict interior guarantees justify rejecting even the boundary of this close
 forbidden region.
 If the cores merely touched the squares’ boundaries, the same rejection
 could incorrectly remove a legal touching configuration.
+
+<figure>
+{{POSE_SVG}}
+<figcaption><strong>Figure 6.</strong> A schematic of one safe exclusion. A possible-center
+region records uncertainty; a guaranteed inner region records what a valid packing must
+contain. A translated strict core meeting the other square’s owned hull forces overlap:
+if $x \in K - Q$, a core point meets the owned hull $K$. $Q$ stays strictly inside the
+square throughout the angle row, $K$ is owned in every valid packing under the current
+assumptions, and a shared interior forbids even a boundary center $x$.
+The forbidden centers can be discarded, while the retained region remains an
+overestimate. The drawing illustrates the
+<a href="../../devtools/check_n11_generic_fresh.py">geometric checker’s</a>
+invariant; it is not a certificate for the displayed schematic.</figcaption>
+</figure>
 
 A second collision check compares a region of proposed centers, over one angle row,
 against every row of another square’s pose cover, its **partner rows**. It may exclude
@@ -548,19 +549,6 @@ So each of the two cells receives charge one, the total is $2>1$, and the certif
 excludes every case whose mask or half-turn contains its five owner cells: 459 of
 them.[^field]
 
-<figure>
-{{CHARGE_SVG}}
-<figcaption><strong>Figure 8.</strong> Median-projection charge as a capacity argument.
-In a separating direction, two disjoint strict cores have disjoint projection
-intervals, so both cannot contain the same median. Receiving charge one requires the
-median condition in every direction; a single projection illustrates the capacity
-argument, not that full test. Required owners and a strict excess over the budget are
-necessary for the
-<a href="../../resources/web/n11-optimality-2026-09-29/receipts/shared-field-mask0/summary.json">accepted field certificate</a>
-to transfer to another mask. The exact checker certifies every required direction; the
-drawing does not show three sites inside a core.</figcaption>
-</figure>
-
 A certificate requires certain owner cells $O$ to be present, because their owned hulls
 supply its collision regions, and assigns lower bounds $\Gamma_i$ to the cells in a set
 $P$. It excludes a mask $J$ when
@@ -579,6 +567,19 @@ Equality with the budget excludes nothing.
 In every accepted certificate the charged cells lie in $O$ and their bounds already
 exceed the budget, so in practice the rule reads: a certificate excludes every case
 whose mask, or its half-turn, contains its owner set.[^adversarial]
+
+<figure>
+{{CHARGE_SVG}}
+<figcaption><strong>Figure 8.</strong> Median-projection charge as a capacity argument.
+In a separating direction, two disjoint strict cores have disjoint projection
+intervals, so both cannot contain the same median. Receiving charge one requires the
+median condition in every direction; a single projection illustrates the capacity
+argument, not that full test. Required owners and a strict excess over the budget are
+necessary for the
+<a href="../../resources/web/n11-optimality-2026-09-29/receipts/shared-field-mask0/summary.json">accepted field certificate</a>
+to transfer to another mask. The exact checker certifies every required direction; the
+drawing does not show three sites inside a core.</figcaption>
+</figure>
 
 The accepted exclusion inventory combines 1,904 cases excluded by field certificates and
 276 cases excluded one at a time by the pose-cover updates above, which the proof data
@@ -612,13 +613,13 @@ though the common geometric invariant lets us describe them briefly.
 ## Symmetry Reduces the Four Survivors to One
 
 Rotating or reflecting the entire container preserves feasibility.
-The four surviving masks are the construction’s own center pattern seen under the eight
-symmetries of the square: the identity and the half-turn give mask 1462, the two
-reflections in the axes give 999, the two reflections in the diagonals give 1659, and
-the two quarter-turns give 438 (no center of the construction lies within $0.0079$ of a
-cell boundary in normalized units, so these labels are unambiguous).[^adversarial] It is
-tempting to rotate the cell labels and declare the four masks equivalent, but the
-irregular Voronoi cover does not permit that shortcut.
+The construction’s center patterns under the eight symmetries of the square belong to
+the four surviving cases: the identity and the half-turn give case 1462, the two
+reflections in the axes give case 999, the two reflections in the diagonals give case
+1659, and the two quarter-turns give case 438 (no center of the construction lies within
+$0.0079$ of a cell boundary in normalized units, so these labels are
+unambiguous).[^adversarial] It is tempting to rotate the cell labels and declare the
+four cases equivalent, but the irregular Voronoi cover does not permit that shortcut.
 The half-turn is the cover’s only symmetry; a quarter-turn or reflection need not send a
 whole cell to another cell.
 
@@ -679,13 +680,16 @@ non-438 masks to each of the other three views.
 Propagating the cell labels through the overlay, each owner keeps only the regions whose
 labels in every view agree with that view’s mask, and an owner left with no region, or a
 mask label that no owner carries, ends the triple at once.
-That leaves 47, 17 and 20 triples for the identity masks 999, 1462 and 1659, and
-forcing, an owner reduced to one region reserving its labels, leaves one, one and none.
-In the survivor for 999, the owners of cells 1 and 2 are each confined to one overlay
-region, inside $[23/50,27/50]\times[0,11/100]$ and $[11/25,14/25]\times[23/100,7/25]$ in
-normalized coordinates, so their centers differ by at most $1/10$ horizontally and
-$7/25$ vertically and lie less than one unit apart, since
-$(U-1)^2\bigl((1/10)^2+(7/25)^2\bigr)<1989/2500<1$. The survivor for 1462 is the
+That leaves 48, 18 and 20 triples for the identity cases 999, 1462 and 1659. Two rules
+then propagate the labels: an owner confined to one region reserves that region’s
+labels, deleting conflicting regions from the other owners; and if only one owner can
+supply a required label in a view, that owner keeps only regions carrying that label.
+Repeating both rules, and rejecting an empty owner domain or an unsupported view label,
+leaves one, one and none.[^guzhou] In the survivor for 999, the owners of cells 1 and 2
+are each confined to one overlay region, inside $[23/50,27/50]\times[0,11/100]$ and
+$[11/25,14/25]\times[23/100,7/25]$ in normalized coordinates, so their centers differ by
+at most $1/10$ horizontally and $7/25$ vertically and lie less than one unit apart,
+since $(U-1)^2\bigl((1/10)^2+(7/25)^2\bigr)<1989/2500<1$. The survivor for 1462 is the
 reflection of that one through the first view, and the same pair of regions closes
 it.[^gpt6]
 
@@ -985,8 +989,9 @@ claim. Reexecution tests reproducibility; it does not, by itself, prove that a c
 implements a sound mathematical rule.
 
 The independence has limits.
-The local construction, derivative calculations and exact arithmetic include shared
-first-party primitives.
+The consumers share this project’s exact clipping, closed-cover and collision routines,
+which the published source also bundles; the local checks also share construction,
+derivative and exact-arithmetic primitives.
 The confirmation follows the same mathematical argument, rather than supplying a
 distinct proof method.
 The Squares Project therefore records the result as T-060, S5/V3/C3, rungs on the
@@ -997,24 +1002,24 @@ verification and the confirmation axes.
 Under the ladder of 2026-09-30, rung 4 on either axis also needs a second adversarial
 review by a distinct reviewer and a retained human oversight record; the reviews linked
 from this paper that record V4/C5 were written under the ladder in force before that
-date. Neither distinct-method confirmation nor proof-assistant formalization is claimed.
-The trust base includes the reviewed mathematical reductions, checker source, arithmetic
-libraries, runtime and executing system.
+date.
+This confirmation claims neither a distinct proof method nor a full proof-assistant
+replay. The trust base includes the reviewed mathematical reductions, checker source,
+arithmetic libraries, runtime and executing system.
 
-Lean 4 formalizations of the proof are in progress elsewhere, in
+Two Lean 4 formalization projects are
 [wand125/n11-optimality-lean](https://github.com/wand125/n11-optimality-lean) and
 [Queuingtheorydotcom/11SquaresFormalized](https://github.com/Queuingtheorydotcom/11SquaresFormalized).
 wand125 reports that the 76 prior-family cases and the 173 returned cases are already
 kernel-checked using only Lean’s standard axioms; an independent replay of the 173
 against the 11SquaresFormalized assembly is recorded in
 [an open pull request to that repository](https://github.com/Queuingtheorydotcom/11SquaresFormalized/pull/7),
-not merged as of October 4.[^lean] On October 6 Queuingtheorydotcom reported the
-formalization in 11SquaresFormalized complete: 7,920 Lean modules with no admitted goal,
-its numerical certificates checked by `native_decide`, so that it trusts Lean’s compiler
-as well as its kernel.[^lean-done] The Squares Project’s statement audit of October 6
-reads its theorem, `ElevenSquare.optimality`, as exactly $s(11)=T$; the full run is
-private, so T-060 records it as the source’s report, and no rung rests on either
-formalization.
+not merged as of October 4.[^lean] On October 6 Ahmed reported the formalization in
+11SquaresFormalized complete: 7,920 Lean modules with no admitted goal, its numerical
+certificates checked by `native_decide`, so that it trusts Lean’s compiler as well as
+its kernel.[^lean-done] The Squares Project’s statement audit of October 6 reads its
+theorem, `ElevenSquare.optimality`, as exactly $s(11)=T$; the full run is private, so
+T-060 records it as the source’s report, and no rung rests on either formalization.
 
 The final composition receipt reconciles the completed geometric executions and their
 reviewed dependencies.
@@ -1177,6 +1182,10 @@ recomputed the paper’s numbers independently and found no mathematical error; 
 [integration record](../../../docs/project/reviews/review-2026-10-03-n11-gpt6-pro-review-integration.md)
 dispositions every finding of the second, and the retained components it added stand
 beside the accepted ones rather than in their place.
+The [October 7 review][guzhou] checks the revised exposition and selected proof
+components, including the contact criterion, local contact deformation and shorter
+symmetry census. It records seven corrections and distinguishes its fresh component
+checks from retained-receipt composition and a full proof replay.
 
 ## Version History
 
@@ -1204,7 +1213,7 @@ beside the accepted ones rather than in their place.
     [n = 11 result history](../../frontier/n-011.md);
     [result register](../../frontier/results.yaml).
 
-[^tools]: [Tooling overview and scope of independent verification](../../../docs/project/verification-tooling.md).
+[^tools]: [Tooling overview and scope of independent verification](../../../docs/project/guides/verification-tooling.md).
     T-059 concerns reported row-minimum equality, while T-060 concerns global
     optimality. A rectangle-density or row-minimum check cannot substitute for the
     latter’s complete case and capture argument.
@@ -1277,6 +1286,9 @@ beside the accepted ones rather than in their place.
     the accepted charge certificates and the clearance of the non-contacting pairs were
     computed there, outside the accepted certificate ensemble.
 
+[^guzhou]: [October 7 exposition and component review](../../../docs/project/reviews/review-2026-10-07-n11-optimality-paper-guzhou.md),
+    findings F1–F4; its verification table states the scope of each fresh check.
+
 [^gpt6]: [GPT-6 Pro’s unified adversarial review](../../../docs/project/reviews/review-2026-10-03-n11-optimality-adversarial-gpt6-pro-unified.md),
     received 3 October 2026: its findings C1, C5, C6, C7 and C9 and simplifications S1,
     S5, S6 and S7 are applied in this revision, and the
@@ -1311,13 +1323,14 @@ beside the accepted ones rather than in their place.
     of the theorem it states.
 
 [^reproduce]: [Reproduction guide and disclosed limits](../../resources/web/n11-optimality-2026-09-29/README.md#reproducing-the-independent-checks);
-    [tooling overview](../../../docs/project/verification-tooling.md).
+    [tooling overview](../../../docs/project/guides/verification-tooling.md).
     The final composition has `geometry_rerun: false`; it binds the observed executions
     rather than replacing them.
 
 [earlier]: {{PAPER:n11-lower-bounds-explainer}}
 [reproduction]: ../../resources/web/n11-optimality-2026-09-29/VALIDATION.md
 [simplification]: ../../../docs/project/reviews/review-2026-09-30-n11-expository-simplification.md
+[guzhou]: ../../../docs/project/reviews/review-2026-10-07-n11-optimality-paper-guzhou.md
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

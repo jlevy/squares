@@ -1,0 +1,39 @@
+{
+  "schema": "n17-conditional-owned-hull-launch/v1",
+  "source_head": "3fb9b8e6f09a69410fe97e13080b6f06df2f46c1",
+  "started_at": "2026-10-07T13:18:00.469996+00:00",
+  "relevant_source_clean": true,
+  "source_blobs": {
+    "packing/devtools/probe_n17_conditional_owned_hull.py": "5d0402637370f5aa7b8cd65ea3092a4f308b42e4",
+    "packing/devtools/verify_n17_kernel_certificate.py": "526548939861b811d1be45f4f28352995434c151",
+    "packing/devtools/supervise_posix.py": "4ed7f34a91779292ea0f1b943d21cc00b87505ce"
+  },
+  "controls": {
+    "focused_tests": 48,
+    "independent_focused_seconds": 1.21,
+    "independent_engineering_review": "clear",
+    "astra_mathematical_review": "clear"
+  },
+  "argv": [
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-m",
+    "devtools.supervise_posix",
+    "--max-seconds",
+    "120",
+    "--max-memory-mib",
+    "4096",
+    "--sample-seconds",
+    "1",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-282-conditional-owned-hull-scoped-input/supervision.json",
+    "--stdout",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-282-conditional-owned-hull-scoped-input/stdout.log",
+    "--stderr",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-282-conditional-owned-hull-scoped-input/stderr.log",
+    "--",
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-c",
+    "import json,subprocess,sys; from pathlib import Path; m=json.loads(Path(\"campaign/series/series-000-smoke-and-calibration/results/exp-282-conditional-owned-hull-scoped-input/execution-manifest.json\").read_text()); a=subprocess.run(m[\"construction\"],check=False); sys.exit(a.returncode) if a.returncode else None; sys.exit(subprocess.run(m[\"fresh_verification\"],check=False).returncode)"
+  ],
+  "scope": "one separately registered scoped-input replication; same finite geometry/thresholds; no propagation or automatic retry"
+}

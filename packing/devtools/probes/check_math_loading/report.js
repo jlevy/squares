@@ -16,5 +16,20 @@
     readouts: [],
     no_javascript: {},
     findings: [],
+    timing: globalThis.__mathLoadControl?.timing,
+    font_wait: Reflect.get(globalThis, "kpressMathFaceWait") || [],
+    font_resources: performance
+      .getEntriesByType("resource")
+      .filter((entry) => entry.name.endsWith(".woff2"))
+      .map((entry) => {
+        const resource = /** @type {PerformanceResourceTiming} */ (entry);
+        return {
+          name: resource.name,
+          start: resource.startTime,
+          end: resource.responseEnd,
+          kind: resource.initiatorType,
+          transferred: resource.transferSize,
+        };
+      }),
   };
 };

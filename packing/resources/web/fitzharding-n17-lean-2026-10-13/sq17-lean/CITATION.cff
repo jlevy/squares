@@ -1,0 +1,28 @@
+cff-version: 1.2.0
+message: "If you use this formal proof or its verification software, please cite this release."
+type: software
+title: "A Lean proof of optimal square packing for 17 unit squares"
+authors:
+  - family-names: "Fitzharding"
+    given-names: "Oscar"
+version: "1.0.0"
+date-released: "2026-10-12"
+license: MIT
+repository-code: "https://github.com/ofitzharding/sq17-lean"
+url: "https://github.com/ofitzharding/sq17-lean/releases/tag/v1.0.0"
+commit: "0a7167efa8dcae7fa73855890630fb7e2de550ed"
+abstract: >-
+  Lean 4 formalization of global optimality for John Bidwell's 1998 packing of
+  seventeen unit squares in a square. The theorem proves that a packing exists
+  at container side L exactly when L is at least the specified exact algebraic
+  endpoint, approximately 4.675530093604551. Arbitrary independent rotations
+  and boundary contact are allowed. Geometric soundness is proved in Lean;
+  finite certificate checks use native_decide and trust Lean's compiler and
+  native evaluator and the C toolchain. The complete source release includes
+  three certificate-source archives and a clean source rebuild receipt.
+keywords:
+  - square packing
+  - discrete geometry
+  - Lean
+  - formal verification
+  - computer-assisted proof

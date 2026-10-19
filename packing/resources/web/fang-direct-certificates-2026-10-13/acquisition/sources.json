@@ -1,0 +1,246 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-10-14T09:20Z",
+  "git_scope": "Blobless clone checked out at the pinned commit, the head when retrieved and eleven commits past the c75bebd pin, with no issue asking. In scope are the fourteen direct-packing folders added in e646c47 and c284cd0, with each certificate in three formats, notes, checksums and the two checkers' outputs; the licence, attribution, README, changelog, verification report, manifest and standalone checker verify.py at the root; and tools/rectcheck.py and Evan Daniel's verify_cert.py with its notice, the other two checkers VERIFICATION.md runs on the direct certificates. The fourteen drawings and 40-digit decimal exports are pinned by digest only, and tools/verify_cert_daniel.py by digest against the identical copy the issue-399 packet retains. The folders n0308, n0343 and n0344 are unchanged since c75bebd and stay in fang-two-wedge-certificates-2026-10-10; theorem/, composites/, rectangles/, third_party/ and tools/glue.py are another packet's subject. No program was executed.",
+  "sources": [
+    {
+      "id": "thesnakefang-squarepack-certs",
+      "source_url": "https://github.com/TheSnakeFang/squarepack-certs",
+      "source_ref": "main",
+      "source_commit": "078789a4cfd36f915f1bfbe76d742413d79b2965",
+      "committed_utc": "2026-10-13T06:57:58Z",
+      "git_tree": "89b612b787b7a2004e26cc217011b0999dc5b092",
+      "archived_path": "packing/resources/web/fang-direct-certificates-2026-10-13/source",
+      "subtree_manifest": "packing/resources/web/fang-direct-certificates-2026-10-13/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "ATTRIBUTION.md",
+        "CHANGELOG.md",
+        "LICENSE",
+        "MANIFEST.sha256",
+        "README.md",
+        "VERIFICATION.md",
+        "verify.py",
+        "tools/NOTICE-verify_cert_daniel",
+        "tools/rectcheck.py",
+        "tools/verify_cert_daniel.py",
+        "n0380",
+        "n0381",
+        "n0382",
+        "n0421",
+        "n0422",
+        "n0463",
+        "n0464",
+        "n0507",
+        "n0508",
+        "n0553",
+        "n0601",
+        "n0651",
+        "n0758",
+        "n0814"
+      ],
+      "subtree_file_count": 122,
+      "subtree_total_bytes": 5152308,
+      "retained_file_count": 93,
+      "retained_total_bytes": 3060676,
+      "compressed": [
+        "source/n0380/n0380.cert.json.gz",
+        "source/n0381/n0381.cert.json.gz",
+        "source/n0382/n0382.cert.json.gz",
+        "source/n0421/n0421.cert.json.gz",
+        "source/n0422/n0422.cert.json.gz",
+        "source/n0463/n0463.cert.json.gz",
+        "source/n0464/n0464.cert.json.gz",
+        "source/n0507/n0507.cert.json.gz",
+        "source/n0508/n0508.cert.json.gz",
+        "source/n0553/n0553.cert.json.gz",
+        "source/n0601/n0601.cert.json.gz",
+        "source/n0651/n0651.cert.json.gz",
+        "source/n0758/n0758.cert.json.gz",
+        "source/n0814/n0814.cert.json.gz"
+      ],
+      "pinned_only": [
+        {
+          "path": "n0380/n0380.svg",
+          "bytes": 51159,
+          "sha256": "606f900035495bc7896c906699d0c7e2a6f1c8cad81750fe529775df0d944fea",
+          "reason": "The drawing of each packing, under CC0; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n0380/n0380.txt",
+          "bytes": 57648,
+          "sha256": "874bf811bd0a9b10d5ec29793b46eab3136a6beeb326782425942b1167a5392a",
+          "reason": "David Ellsworth's 40-digit centre-origin decimal export of each packing, under CC0; pinned for provenance, as no claim here rests on it and the exact certificate is retained in two formats."
+        },
+        {
+          "path": "n0381/n0381.svg",
+          "bytes": 51338,
+          "sha256": "b6786ff18bbabe8ced9340a69b83d5b9f880adf44614ec4ca54eed78c7aea67e",
+          "reason": "The drawing of each packing, under CC0; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n0381/n0381.txt",
+          "bytes": 57105,
+          "sha256": "878eb4f18e62e2023ae7abe3f9854f199c906918ee3e0aa939a34e8b283e8b26",
+          "reason": "David Ellsworth's 40-digit centre-origin decimal export of each packing, under CC0; pinned for provenance, as no claim here rests on it and the exact certificate is retained in two formats."
+        },
+        {
+          "path": "n0382/n0382.svg",
+          "bytes": 51426,
+          "sha256": "7ce923bf32bdf9cfa0e93dcd16acb1aca063ca046ead650d1b3734bddb588968",
+          "reason": "The drawing of each packing, under CC0; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n0382/n0382.txt",
+          "bytes": 55937,
+          "sha256": "ea0095338342c65ddf0f17a65674cd15b6fbb8a600eb402ca7870e626365a4e8",
+          "reason": "David Ellsworth's 40-digit centre-origin decimal export of each packing, under CC0; pinned for provenance, as no claim here rests on it and the exact certificate is retained in two formats."
+        },
+        {
+          "path": "n0421/n0421.svg",
+          "bytes": 56862,
+          "sha256": "b3d6d7c91217911274f6637e3e9639ba2b40da844786d2fa82633910b0f83deb",
+          "reason": "The drawing of each packing, under CC0; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n0421/n0421.txt",
+          "bytes": 63832,
+          "sha256": "2a940230c0ea5bc930bff8275c624e9fe05902c51aa4b783f9b35ba189799116",
+          "reason": "David Ellsworth's 40-digit centre-origin decimal export of each packing, under CC0; pinned for provenance, as no claim here rests on it and the exact certificate is retained in two formats."
+        },
+        {
+          "path": "n0422/n0422.svg",
+          "bytes": 57017,
+          "sha256": "13c8cc3e5bb086b674b2025f9d91b56edb9154b504fe3ebfacd46056dc7fbb2b",
+          "reason": "The drawing of each packing, under CC0; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n0422/n0422.txt",
+          "bytes": 64152,
+          "sha256": "054e0b7b9e62c41b878256f4f34446cea1b361d522ca408ab3ec817532838864",
+          "reason": "David Ellsworth's 40-digit centre-origin decimal export of each packing, under CC0; pinned for provenance, as no claim here rests on it and the exact certificate is retained in two formats."
+        },
+        {
+          "path": "n0463/n0463.svg",
+          "bytes": 62604,
+          "sha256": "6254b078b31bead4deb5747949f213f710bf73a1ce3c326049f7602ce5d9d892",
+          "reason": "The drawing of each packing, under CC0; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n0463/n0463.txt",
+          "bytes": 70005,
+          "sha256": "487df2223e96c5f6429ab318926ef199f4dbaf73aac61f4368d8dfb34c3ffefe",
+          "reason": "David Ellsworth's 40-digit centre-origin decimal export of each packing, under CC0; pinned for provenance, as no claim here rests on it and the exact certificate is retained in two formats."
+        },
+        {
+          "path": "n0464/n0464.svg",
+          "bytes": 62737,
+          "sha256": "3d80ae7ebcbe591f6d90f2b35c19bf824e01a5bea8754e1e0c23d2aeed3825e5",
+          "reason": "The drawing of each packing, under CC0; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n0464/n0464.txt",
+          "bytes": 70020,
+          "sha256": "43390e0b00eec6793bbb3500ff697e67dcad04dde788a8fcfdbbc575359e6ff8",
+          "reason": "David Ellsworth's 40-digit centre-origin decimal export of each packing, under CC0; pinned for provenance, as no claim here rests on it and the exact certificate is retained in two formats."
+        },
+        {
+          "path": "n0507/n0507.svg",
+          "bytes": 68675,
+          "sha256": "085bb9bb4a105b5bac4c0ec64c7fb910c6915e7bdee09d8b28fde9dbb5d31247",
+          "reason": "The drawing of each packing, under CC0; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n0507/n0507.txt",
+          "bytes": 77230,
+          "sha256": "29549e972ab222ae3a7335a7becfbe95ec70b3ac7123986f56a0d9427f7d546a",
+          "reason": "David Ellsworth's 40-digit centre-origin decimal export of each packing, under CC0; pinned for provenance, as no claim here rests on it and the exact certificate is retained in two formats."
+        },
+        {
+          "path": "n0508/n0508.svg",
+          "bytes": 68774,
+          "sha256": "53f3a735fe29cb58a48dfdcc127efb2e789a2a73e05c31711c9c712f1f8f7171",
+          "reason": "The drawing of each packing, under CC0; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n0508/n0508.txt",
+          "bytes": 76663,
+          "sha256": "a04c15110d2064f5b4134c3dd318e641d00410123a7d942388fa0bbe68d60a28",
+          "reason": "David Ellsworth's 40-digit centre-origin decimal export of each packing, under CC0; pinned for provenance, as no claim here rests on it and the exact certificate is retained in two formats."
+        },
+        {
+          "path": "n0553/n0553.svg",
+          "bytes": 74661,
+          "sha256": "862bf9ac2a29260d304f1d95500b08f78868daae4ea01a5d3f6d4622956e25f9",
+          "reason": "The drawing of each packing, under CC0; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n0553/n0553.txt",
+          "bytes": 83443,
+          "sha256": "4139da9273423a6f81b782c5d9f45746cab8dc0111de09c9950287f4358dff5c",
+          "reason": "David Ellsworth's 40-digit centre-origin decimal export of each packing, under CC0; pinned for provenance, as no claim here rests on it and the exact certificate is retained in two formats."
+        },
+        {
+          "path": "n0601/n0601.svg",
+          "bytes": 81280,
+          "sha256": "92d57bc79e7e9c4cd08e643de6ace83ff869a81a32d832e605fc50cb8fd2236f",
+          "reason": "The drawing of each packing, under CC0; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n0601/n0601.txt",
+          "bytes": 91151,
+          "sha256": "217743969f617befb2c6385482bfa914c6074f74bcdcebe8a310effe95adb786",
+          "reason": "David Ellsworth's 40-digit centre-origin decimal export of each packing, under CC0; pinned for provenance, as no claim here rests on it and the exact certificate is retained in two formats."
+        },
+        {
+          "path": "n0651/n0651.svg",
+          "bytes": 88040,
+          "sha256": "4aa279a910e8e3e73ccb9eb43237c0b9c48dcbd41fc4657133587d6673c2f8d5",
+          "reason": "The drawing of each packing, under CC0; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n0651/n0651.txt",
+          "bytes": 98316,
+          "sha256": "59d7d06136882be687074c9a446b06432494d09158afbcebc27228012b4f2d19",
+          "reason": "David Ellsworth's 40-digit centre-origin decimal export of each packing, under CC0; pinned for provenance, as no claim here rests on it and the exact certificate is retained in two formats."
+        },
+        {
+          "path": "n0758/n0758.svg",
+          "bytes": 102790,
+          "sha256": "d14389c036de8945cdf45d39f1fe30d2d11c3431423600b2affc2e49f505d11d",
+          "reason": "The drawing of each packing, under CC0; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n0758/n0758.txt",
+          "bytes": 111713,
+          "sha256": "9235bac14a1d1007e6daadd0edbb88b8b273b66b26ed251498b7274acf507cef",
+          "reason": "David Ellsworth's 40-digit centre-origin decimal export of each packing, under CC0; pinned for provenance, as no claim here rests on it and the exact certificate is retained in two formats."
+        },
+        {
+          "path": "n0814/n0814.svg",
+          "bytes": 110499,
+          "sha256": "af16f25a9bba6624654db095d00a9a5e39ce88657035c5f530475ee5fd266e04",
+          "reason": "The drawing of each packing, under CC0; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n0814/n0814.txt",
+          "bytes": 123154,
+          "sha256": "cd77aa489a0a683ebb207c4bb393d9ad15f49512711d1500d43ad71f2578429f",
+          "reason": "David Ellsworth's 40-digit centre-origin decimal export of each packing, under CC0; pinned for provenance, as no claim here rests on it and the exact certificate is retained in two formats."
+        },
+        {
+          "path": "tools/verify_cert_daniel.py",
+          "bytes": 3401,
+          "sha256": "3299ca0c0f02f7c221deeea69a9a85b5a90db6bc410b20727fdff211c92bed52",
+          "reason": "Evan Daniel's exact checker search/exact/verify_cert.py, copied unchanged, byte-identical to the copy the issue-399 packet retains; never executed here.",
+          "identical_to": "packing/resources/web/evand-new-arrangements-2026-10-07/source/s12/search/exact/verify_cert.py"
+        }
+      ],
+      "license": "MIT, copyright 2026 Kevin Fang (LICENSE), for verify.py, tools/rectcheck.py and the shell scripts; ATTRIBUTION.md and README.md release the certificates, text files, tables and drawings in the nNNNN folders under CC0 1.0. tools/verify_cert_daniel.py is Evan Daniel's, under the MIT licence its notice carries. The source discloses that the search, the verifier and the bundle were written and run with Claude (Anthropic), directed and reviewed by Kevin Fang.",
+      "claims": [
+        "Commit e646c47 (2026-10-12T19:06:24Z) adds eight direct certificates, whose sides the README table and each folder's NOTES.md print rounded up at 15 places: s(380) <= 19.976775433974195, s(381) <= 19.976969740405508, s(421) <= 20.986150316947159, s(463) <= 21.986880406196935, s(507) <= 22.997807183348823, s(553) <= 23.998811020144984, s(601) <= 24.998914572427130 and s(651) <= 25.991547815274380.",
+        "Commit c284cd0 (2026-10-13T00:05:31Z) adds six more: s(382) <= 19.989479729399675, s(422) <= 20.988436524095744, s(464) <= 21.991709536768996, s(508) <= 22.994733849702143, s(758) <= 27.996346242823117 and s(814) <= 28.999873603982716.",
+        "Every count lies beyond the n <= 324 case corpus. Each certificate is a finite construction found by a time-budgeted penalty search from a two-wedge seed: Francisco Couzo's packing of 342 squares for 380 and 381, and through 381 for 421; Evan Daniel's improved packing of 343 for 382; and a parametric seed for the other ten. No exact form, local minimality or optimality is claimed. The n0508 side is below the n0507 side, so it also bounds s(507)."
+      ]
+    }
+  ]
+}

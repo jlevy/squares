@@ -1,0 +1,31 @@
+name: 连续姿态完整复验 / Full continuous-pose replay
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  full:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: 公开目录核查 / Public-tree audit
+        run: python3 -B verifier/audit.py --check
+      - name: 全量连续姿态复验 / Complete continuous-pose replay
+        run: python3 -B verifier/run.py --output "$RUNNER_TEMP/n40-continuous-replay" --workers 4
+      - name: 生成并复核归档 / Build and audit archive
+        run: python3 -B verifier/audit.py --package --runtime "$RUNNER_TEMP/n40-continuous-replay" --output "$RUNNER_TEMP/n40-continuous-public"
+      - name: 已复跑成果包 / Replayed artifact
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: n40-continuous-${{ github.sha }}
+          path: |
+            ${{ runner.temp }}/n40-continuous-public/n40-continuous-1340000-199529.zip
+            ${{ runner.temp }}/n40-continuous-public/n40-continuous-1340000-199529.zip.sha256
+            ${{ runner.temp }}/n40-continuous-public/audit.json
+          retention-days: 30
+          if-no-files-found: error

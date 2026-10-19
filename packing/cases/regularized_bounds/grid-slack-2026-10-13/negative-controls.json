@@ -1,0 +1,44 @@
+{
+ "format": "regularized-bounds-receipt-v1",
+ "tool": "python -m devtools.register_regularized_bounds controls --batch grid-slack",
+ "what": "Three mutants of each retained view, decided by both maintained routes: the tightest pair pushed into overlap and the box shrunk past its least top or right clearance, which both must refuse, and the box shrunk by one unit of the side's denominator, which both must accept where the clearance exceeds that unit. The overlap is judged by the independent checker's own pair gap, so its refusal of that mutant is circular; the mutant is invalid regardless, since a negative gap on every face axis means, by the separating-axis theorem, that the interiors meet.",
+ "controls": 3,
+ "all_as_expected": true,
+ "cpu_seconds": 48.2,
+ "rows": [
+  {
+   "n": 290,
+   "control": "tightest-pair-overlapped",
+   "squares": [
+    1,
+    2
+   ],
+   "exact_gap": 0.0,
+   "moved_by_gap_plus": 2.5e-31,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 290,
+   "control": "side-shrunk-past-clearance",
+   "clearance": 0.0,
+   "unit": 2.5e-31,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  },
+  {
+   "n": 290,
+   "control": "side-shrunk-one-unit",
+   "clearance": 0.0,
+   "unit": 2.5e-31,
+   "expect": "refused",
+   "exact_verify": false,
+   "independent": false,
+   "as_expected": true
+  }
+ ]
+}

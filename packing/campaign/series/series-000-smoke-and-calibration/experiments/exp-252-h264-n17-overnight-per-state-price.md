@@ -184,7 +184,7 @@ rewritten in Session 182’s registration, asks what fraction of a seeded draw o
 orbits the 17-owner kernel excludes by a certificate the standing verifier re-proves,
 and at what cost per state.
 This round is lane A of the
-[n17 overnight plan](../../../../../docs/project/specs/active/plan-2026-10-05-n17-overnight.md)
+[n17 overnight plan](../../../../../docs/project/specs/done/plan-2026-10-05-n17-overnight.md)
 (BC-419). All twelve draws have run.
 
 ## Verdict

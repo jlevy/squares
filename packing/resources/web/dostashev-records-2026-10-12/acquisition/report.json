@@ -1,0 +1,44 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "https://github.com/jlevy/squares/issues/528",
+  "author": "Daniil Ostashev",
+  "source_key": "[Ostashev records 2026-10-12]",
+  "report_evidence": "E-ostashev-528-certificate-report",
+  "receipt_format": "ostashev-528-exact-replay-v1",
+  "witness_prefix": "W-ostashev-528-n",
+  "claim_limitations": "Complete a8db6ff rational centre/half-angle certificate in the source's sqcert format, centres in [0, S]^2, read from the retained file at the pin. Finite construction feasibility only; no local minimum, KKT, rigidity, novelty, priority or global optimality claim.",
+  "read_on": "2026-10-12",
+  "read_at_main": "dead83f0eaf5e83ef1577e6ce902d7ab2b6eedf7",
+  "certificates": [
+    {"n": 175, "path": "records/n0175.sqcert", "format": "sqcert", "offered": "13.76417431748659662942782322004234282577", "first_committed": "2026-10-12T03:05:21Z"},
+    {"n": 232, "path": "records/n0232.sqcert", "format": "sqcert", "offered": "15.76417431748659662944782322004234282577", "first_committed": "2026-10-12T03:05:21Z"},
+    {"n": 264, "path": "records/n0264.sqcert", "format": "sqcert", "offered": "16.77473513238783284261026458732177098083", "first_committed": "2026-10-12T03:05:21Z"}
+  ],
+  "requested": [175, 232, 264],
+  "replayed": [175, 232, 264],
+  "houses": [
+    {"n": 175, "reader": "[Couzo certificates 2026-10-10]", "source_key": "[Couzo certificates 2026-10-10]", "holders": "ry-xu, improved by Francisco Couzo", "result": "T-140", "reported_value": "13.7671207246923133", "verified_value": "13.7671207246923133", "evidence": ["E-couzo-488-exact-feasibility"]},
+    {"n": 232, "reader": "[SQUISH third request 2026-10-09]", "source_key": "[SQUISH third request 2026-10-09]", "holders": "Nate Chaoweeraprasit", "result": "T-136", "reported_value": "15.7674283499418417", "verified_value": "15.7674283499418417", "evidence": ["E-squish-481-exact-feasibility"]},
+    {"n": 264, "reader": "[evand exact optima 2026-10-05]", "source_key": "[Kingbird]", "holders": "the Kingbird catalogue, verified by Evan Daniel's exact ceiling", "result": "T-101", "reported_value": "16.77817459305202", "verified_value": "16.77817459305203", "evidence": ["E-evand-exact-ceilings-2026-10-05-exact-replay", "E-evand-exact-ceilings-2026-10-05-source-replay"], "reported_rounding": "unstated"}
+  ],
+  "pending": [
+    {"n": 175, "report": "Couzo 337078c (think-9fjl)", "url": "https://github.com/franciscouzo/square-packing/blob/337078ca3e05153aceb099237b175cf64af5748a/certificates/n175.cert", "holders": "Francisco Couzo", "reader": "[Couzo certificates 2026-10-11]"},
+    {"n": 175, "report": "T-125 (#432)", "url": "https://github.com/jlevy/squares/issues/432", "holders": "ry-xu", "result": "T-125", "reader": "[ry-xu square packing 2026]"}
+  ],
+  "register": {
+    "title": "Daniil Ostashev's three composition packings at a8db6ff, issue528",
+    "headline": "New packings of 175, 232 and 264 squares, each composed with a new 38-square rectangle and certified exactly",
+    "significance": 3,
+    "source_checks": "The author reports that each packing passes its own C++ checker (sqverify --precise --certify, MPFR then GMP rationals) at delta = 1e-60, that sqverify --check-cert certifies the shipped certificates in GMP rationals with no dilation and no tolerance, and that a separately written 80-digit mpmath cross-check finds a least separation of 5.0e-21; the issue states that all three checkers are the author's, written with AI assistance, the first two sharing the C++ parser and geometry. It also states that each side is the exact first-order optimum of its contact topology, with nonnegative KKT multipliers at a 60-digit solution and the load-bearing squares scaled by 1 + 1e-20. Those statements are the author's; no source program ran here.",
+    "credit": "Credit Daniil Ostashev (https://github.com/dostashev/square-packing) with the three packings and their certificates, compositions the issue says are new arrangements and not refinements: two library rectangles in opposite corners plus aligned squares, each using the author's new packing of 38 unit squares in an (h + 2) x h rectangle, h = 5.7641743..., found by a GPU soft-to-rigid search after Yohei Nakajima's idea; at 175 with David Ellsworth's s(171) template, whose pieces are cut from Thomas Schadt's s(50), at 232 with a 76-square piece of Erich Friedman's s(85), and at 264 with a 93-square piece of Evan Daniel's exact optimum of Joost de Winter's s(126). The author asks to be credited and leaves the pieces' acknowledgement to the record. The issue states AI assistance: the author set up and drove an AI-assisted research loop with his own ideas, the rectangle library and composition being his; AI agents wrote and ran the search, composition and verification code.",
+    "next_rung": "Independently review the retained replay, then weigh adoption: each side is below its case's ceiling and below every other report at its count, by 2.95e-03 at 175 (Francisco Couzo's 337078c, not registered, think-9fjl), 3.25e-03 at 232 (T-136) and 3.44e-03 at 264 (the catalogue's 9 + 11 sqrt(2)/2, which the issue calls Goebel's pattern, T-101). Then record source-specific adoption and confirming evidence. Final exact-head CI remains required.",
+    "bead": "think-em0b",
+    "bibliography": {
+      "authors": ["Ostashev"],
+      "lineage": "builds-on-project",
+      "credit": "Ostashev after Nakajima, Ellsworth, Schadt, Friedman, de Winter, Daniel, Levy, Xu",
+      "short_credit": "Ostashev after Nakajima et al.",
+      "note": "Three complete exact certificates at a8db6ff941fc93d1d68d4d7aed90bb2a18a3a41f in the source's sqcert format, at 175, 232 and 264: compositions with the author's new 38-square (h + 2) x h rectangle and pieces cut from Ellsworth's s(171) template (Schadt's s(50)), Friedman's s(85) and Daniel's exact optimum of de Winter's s(126), each solved to the exact optimum of its contact topology and dilated by 1 + 1e-60. Methods credited: Nakajima's soft-to-rigid search, this project's fixed-angle linear program and Ryan Xu's certificate construction. Retained under the MIT licence with the source's C++ GMP checker and mpmath cross-check pinned against the issue-501 packet, neither run here. AI assistance stated: AI agents wrote and ran the search, composition and verification code. No local or global optimality is registered."
+    }
+  }
+}

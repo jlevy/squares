@@ -1,0 +1,2 @@
+records read: 98; slices bound: 1152 (3456 output files with SHA-256 and size); rows per checker reported identical: 1728000
+COMPARISON RECORDS RESULT: PASS (98 statements, each IDENTICAL in its record; the stored side is not in this edition and is not tested)

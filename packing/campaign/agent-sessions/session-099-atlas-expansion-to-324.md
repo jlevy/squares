@@ -514,7 +514,7 @@ session:
     - packing/atlas/known-best/composite-figure.schema.yaml
     - packing/tests/test_known_best_atlas.py
     - packing/tests/test_render_colors.py
-    - packing/atlas/known-best/FIGURE-PLAYBOOK.md
+    - packing/atlas/known-best/figure-playbook.md
     - packing/atlas/known-best/README.md
     checks:
     - Coordinator re-ran ruff, basedpyright, both PDF receipts, the figure record check, schema

@@ -1,0 +1,35 @@
+{
+  "cwd": "packing",
+  "construction": [
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-m",
+    "devtools.probe_n17_pooled_forbidden_cover",
+    "--descriptor",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-286-pooled-forbidden-cover/descriptor.json",
+    "--max-seconds",
+    "60",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-286-pooled-forbidden-cover/certificate.json"
+  ],
+  "fresh_verification": [
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-m",
+    "devtools.probe_n17_pooled_forbidden_cover",
+    "--descriptor",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-286-pooled-forbidden-cover/descriptor.json",
+    "--certificate",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-286-pooled-forbidden-cover/certificate.json",
+    "--max-seconds",
+    "60",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-286-pooled-forbidden-cover/replay.json"
+  ],
+  "combined_max_seconds": 120,
+  "term_seconds": 120,
+  "kill_seconds": 130,
+  "max_memory_mib_per_process": 4096,
+  "one_worker": true,
+  "actual_unrun": true,
+  "memory_scope": "process_group",
+  "max_memory_mib": 4096
+}

@@ -1,0 +1,38 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-10-08T00:22:01Z",
+  "git_scope": "Published v1.0 theorem text, original PDF, attribution, licences, source review summary and constant-checking programs only; numerical analogue campaigns are outside this packet.",
+  "sources": [
+    {
+      "id": "squarepacker-k2-minus-c-quarter",
+      "source_url": "https://github.com/squarepacker/k2-minus-c-quarter",
+      "source_ref": "v1.0",
+      "source_commit": "abbedcf4bba2e4053f0278e669d84966a89c8b73",
+      "committed_utc": "2026-10-07T11:19:22Z",
+      "git_tree": "8d89b7b7c2de658e11301b6e2259e8e8d4444ee0",
+      "archived_path": "packing/resources/web/squarepacker-k2-minus-c-quarter-2026-10-07/source",
+      "subtree_manifest": "packing/resources/web/squarepacker-k2-minus-c-quarter-2026-10-07/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        ".zenodo.json",
+        "LICENSE",
+        "README.md",
+        "SHA256SUMS",
+        "paper/paper.tex",
+        "paper/paper.pdf",
+        "paper/LICENSE",
+        "reviews/REVIEWS.md",
+        "code/k14_constants_check.py"
+      ],
+      "subtree_file_count": 9,
+      "subtree_total_bytes": 2247251,
+      "retained_file_count": 9,
+      "retained_total_bytes": 2247251,
+      "compressed": [],
+      "pinned_only": [],
+      "license": "CC BY 4.0 for paper; MIT for code, with original notices retained.",
+      "claims": [
+        "Issue #414: the quarter asymptotic deficiency theorem and its analytic-Lemma-4.9 variant, read as reported claims from the pinned primary text."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "schema": "n17-conditional-center-cases-launch/v1",
+  "started_at": "2026-10-07T14:58:23.339342+00:00",
+  "source": {"revision":"4c76e0003e46fcc780a215d94029c8e46741219f","dirty":false,"files":{"packing/devtools/probe_n17_conditional_center_cases.py":"1ddb1a0fbb9e9b23d5f136f75d6ddaf46c5563c6","packing/devtools/probe_n17_conditional_owned_hull.py":"5d0402637370f5aa7b8cd65ea3092a4f308b42e4","packing/devtools/verify_n17_conditional_owned_hull.py":"70dac66c25e0e0c060b1bbc9182fec301a1738d6","packing/devtools/verify_n17_kernel_certificate.py":"526548939861b811d1be45f4f28352995434c151"}},
+  "argv": ["/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python","/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/tmp/run-exp285.py"],
+  "registered_arrays": "campaign/series/series-000-smoke-and-calibration/results/exp-285-pooled-parent-center-cases/execution-manifest.json",
+  "combined_wall_seconds": 120,
+  "term_at_seconds": 120,
+  "kill_at_seconds": 130,
+  "sampled_current_rss_mib_per_process": 4096,
+  "no_retry": true,
+  "incomplete_exp284_geometry_used": false
+}
+

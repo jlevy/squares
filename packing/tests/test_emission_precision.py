@@ -17,11 +17,27 @@ import decimal
 import subprocess
 import sys
 from pathlib import Path
+from textwrap import dedent
+from xml.etree import ElementTree as ET
 
+import pytest
+
+from devtools import atlas_print_font
 from devtools.build_known_best_atlas import frame_from_witness
 from sqpack.field import NumberField
 from sqpack.render import RenderSpec, render_packing_svg
 from sqpack.render.numbers import SVG_EMISSION_PRECISION
+from sqpack.render.svg import (
+    PRINT_FONT_MARKER,
+    XML_DECLARATION,
+    append_exact_comment,
+    append_metadata,
+    element,
+    serialize_svg,
+    sqpack_tag,
+    sub,
+    svg_tag,
+)
 from sqpack.witness import load_witness
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -93,3 +109,120 @@ def test_rendering_ignores_a_widened_ambient_decimal_context() -> None:
         f"the emitted SVG followed the ambient decimal context to {WIDENED_PRECISION} "
         f"digits instead of the renderer's pinned {SVG_EMISSION_PRECISION}"
     )
+
+
+def _parse_svg(text: str) -> ET.Element:
+    return ET.fromstring(text, parser=ET.XMLParser(target=ET.TreeBuilder(insert_comments=True)))
+
+
+def assert_compact_svg_roundtrip(text: str, *, embedded_print_fonts: str | None = None) -> str:
+    """Replay a complete pretty artifact, also usable for an external composite receipt."""
+    compact = serialize_svg(
+        _parse_svg(text), compact=True, embedded_print_fonts=embedded_print_fonts
+    )
+    assert len(compact.encode("utf-8")) < len(text.encode("utf-8"))
+    assert serialize_svg(_parse_svg(compact), embedded_print_fonts=embedded_print_fonts) == text
+    return compact
+
+
+def test_default_svg_serialization_keeps_its_existing_bytes() -> None:
+    root = element("svg")
+    label = sub(sub(root, "g"), "text")
+    sub(label, "tspan").text = "A"
+    sub(label, "tspan").text = "B"
+    expected = XML_DECLARATION + dedent("""\
+        <svg xmlns="http://www.w3.org/2000/svg">
+          <g>
+            <text><tspan>A</tspan><tspan>B</tspan></text>
+          </g>
+        </svg>
+        """)
+    assert serialize_svg(root) == expected
+    compact = serialize_svg(root, compact=True)
+    assert compact == (
+        XML_DECLARATION
+        + '<svg xmlns="http://www.w3.org/2000/svg"><g><text>'
+        + "<tspan>A</tspan><tspan>B</tspan></text></g></svg>\n"
+    )
+    assert serialize_svg(_parse_svg(compact)) == expected
+    assert root.text is None
+    assert label.text is None
+
+
+def test_compact_svg_preserves_semantic_whitespace_and_payloads() -> None:
+    root = element("svg")
+    root.text = "\n  "
+    group = sub(root, "g")
+    group.text = "\n    "
+    group.tail = "\n"
+    label = sub(group, "text")
+    label.text = "\n  "
+    first = sub(label, "tspan")
+    first.text = "first"
+    first.tail = " \t "
+    second = sub(label, "tspan")
+    second.text = "second "
+    sub(second, "tspan").text = "inner"
+    second.tail = "\n  "
+    label.tail = "\n  "
+    title = sub(root, "title")
+    title.text = "  Title\n "
+    desc = sub(root, "desc")
+    desc.text = "before "
+    sub(desc, "tspan").text = "description"
+    desc[0].tail = "\n  "
+    append_exact_comment(root, " exact = 1/3 ")
+    append_metadata(root, {"blank": "\n  ", "credit": " A & B\n C ", "json": '{"n":5}'})
+    css = atlas_print_font.embedded_css()
+    sub(root, "style", {"data-sqpack-style": PRINT_FONT_MARKER}).text = css
+
+    compact = serialize_svg(root, compact=True, embedded_print_fonts=css)
+    parsed = _parse_svg(compact)
+    assert parsed.text is None
+    assert parsed[0].text is None
+    assert parsed[0].tail is None
+    for name in ("text", "title", "desc"):
+        expected = next(root.iter(svg_tag(name)))
+        actual = next(parsed.iter(svg_tag(name)))
+        assert list(actual.itertext()) == list(expected.itertext())
+    assert [node.text for node in parsed.iter(sqpack_tag("value"))] == [
+        "\n  ",
+        " A & B\n C ",
+        '{"n":5}',
+    ]
+    assert next(parsed.iter(svg_tag("style"))).text == css
+    assert "<!-- exact = 1/3 -->" in compact
+    assert root.text == "\n  "
+    assert label.tail == "\n  "
+
+
+def test_compact_svg_leaves_mixed_container_content_intact() -> None:
+    root = element("svg")
+    group = sub(root, "g")
+    group.text = "mixed "
+    sub(group, "text").text = "label"
+    group[0].tail = "\n  "
+    parsed = _parse_svg(serialize_svg(root, compact=True))
+    assert list(parsed[0].itertext()) == ["mixed ", "label", "\n  "]
+
+
+def test_compact_svg_keeps_font_opt_in_and_security_validation() -> None:
+    css = atlas_print_font.embedded_css()
+    root = element("svg")
+    style = sub(root, "style", {"data-sqpack-style": PRINT_FONT_MARKER})
+    style.text = css
+    with pytest.raises(ValueError, match="arbitrary CSS"):
+        serialize_svg(root, compact=True)
+    with pytest.raises(ValueError, match="arbitrary CSS"):
+        serialize_svg(root, compact=True, embedded_print_fonts=css + "\n")
+    style.text = css + '\n@import "https://example.invalid/font.css";'
+    with pytest.raises(ValueError, match="retained-face grammar"):
+        serialize_svg(root, compact=True, embedded_print_fonts=style.text)
+    style.text = css
+    sub(root, "use", {"href": "https://example.invalid/shape.svg#shape"})
+    with pytest.raises(ValueError, match="external SVG reference"):
+        serialize_svg(root, compact=True, embedded_print_fonts=css)
+
+
+def test_a_real_packing_roundtrips_through_compact_svg() -> None:
+    assert_compact_svg_roundtrip(_rendering())

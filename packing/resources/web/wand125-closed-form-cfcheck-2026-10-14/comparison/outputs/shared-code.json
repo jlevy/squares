@@ -1,0 +1,611 @@
+{
+ "schema": "cfcheck-shared-code/v1",
+ "cfcheck": "packing/resources/web/wand125-closed-form-cfcheck-2026-10-14/square-packing/problems/closed-form/indep-checker",
+ "producer": [
+  "packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker",
+  "packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/structure"
+ ],
+ "cfcheck_files": 31,
+ "producer_files": 16,
+ "parameters": {
+  "line_min_chars": 40,
+  "seed_window_tokens": 12,
+  "share_window_tokens": 25,
+  "generic_window_occurrences": 50
+ },
+ "verdict": {
+  "identical_files": 0,
+  "path_dependencies": 0,
+  "shared_local_crates": [],
+  "longest_plain_run_tokens": 34,
+  "longest_renamed_run_tokens": 96,
+  "plain_window_share": 0.0002,
+  "renamed_window_share": 0.01162,
+  "shared_lines": 0,
+  "shared_comments": 0,
+  "positive_control_found": true
+ },
+ "identical_files": [],
+ "cfcheck_path_dependencies": [],
+ "cfcheck_dependencies": [
+  "num-bigint",
+  "num-integer",
+  "num-rational",
+  "num-traits",
+  "rayon",
+  "serde",
+  "serde_json",
+  "sha2"
+ ],
+ "producer_lock_crates": [
+  "az",
+  "gmp-mpfr-sys",
+  "itoa",
+  "libc",
+  "libm",
+  "memchr",
+  "proc-macro2",
+  "quote",
+  "replay4d",
+  "rug",
+  "seam4d_core",
+  "serde",
+  "serde_core",
+  "serde_derive",
+  "serde_json",
+  "syn",
+  "unicode-ident",
+  "windows-link",
+  "windows-sys",
+  "zmij"
+ ],
+ "shared_lock_crates": {
+  "itoa": "registry",
+  "libc": "registry",
+  "memchr": "registry",
+  "proc-macro2": "registry",
+  "quote": "registry",
+  "serde": "registry",
+  "serde_core": "registry",
+  "serde_derive": "registry",
+  "serde_json": "registry",
+  "syn": "registry",
+  "unicode-ident": "registry",
+  "zmij": "registry"
+ },
+ "against_producer": {
+  "plain": {
+   "windows": 55333,
+   "windows_found_in_other": 11,
+   "share": 0.0002,
+   "longest_run_tokens": 34,
+   "runs_at_least_report_length": 1,
+   "longest_runs": [
+    {
+     "cfcheck_file": "packing/resources/web/wand125-closed-form-cfcheck-2026-10-14/square-packing/problems/closed-form/indep-checker/src/record.rs",
+     "other_file": "packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/replay4d/src/main.rs",
+     "tokens": 34,
+     "cfcheck_lines": "127-128",
+     "other_lines": "25-26",
+     "text": ". clone ( ) , ( 0 .. leaves . len ( ) ) . collect :: < Vec < _ >> ( ) ) ] ; while let Some ( ( b ,"
+    }
+   ]
+  },
+  "renamed": {
+   "windows": 55333,
+   "windows_found_in_other": 643,
+   "share": 0.01162,
+   "longest_run_tokens": 96,
+   "runs_at_least_report_length": 26,
+   "longest_runs": [
+    {
+     "cfcheck_file": "packing/resources/web/wand125-closed-form-cfcheck-2026-10-14/square-packing/problems/closed-form/indep-checker/src/stage_b.rs",
+     "other_file": "packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/seam4d_core/src/b3d.rs",
+     "tokens": 96,
+     "cfcheck_lines": "540-543",
+     "other_lines": "2357-2359",
+     "text": "[ a [ 1 ] . mul ( & z [ 2 ] ) . sub ( & a [ 2 ] . mul ( & z [ 1 ] ) ) , a [ 2 ] . mul ( & z [ 0 ] ) . sub ( & a [ 0 ] . mul ( & z [ 2 ] ) ) , a [ 0 ] . mul ( & z [ 1 ] ) . sub ( & a [ 1 ] . mul ( & z [ 0 ] ) )"
+    },
+    {
+     "cfcheck_file": "packing/resources/web/wand125-closed-form-cfcheck-2026-10-14/square-packing/problems/closed-form/indep-checker/src/stage_b.rs",
+     "other_file": "packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/seam4d_core/src/b3d.rs",
+     "tokens": 64,
+     "cfcheck_lines": "542-543",
+     "other_lines": "2357-2358",
+     "text": "a [ 2 ] . mul ( & z [ 0 ] ) . sub ( & a [ 0 ] . mul ( & z [ 2 ] ) ) , a [ 0 ] . mul ( & z [ 1 ] ) . sub ( & a [ 1 ] . mul ( & z [ 0 ] ) ) ,"
+    },
+    {
+     "cfcheck_file": "packing/resources/web/wand125-closed-form-cfcheck-2026-10-14/square-packing/problems/closed-form/indep-checker/src/stage_b.rs",
+     "other_file": "packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/seam4d_core/src/b3d.rs",
+     "tokens": 63,
+     "cfcheck_lines": "541-542",
+     "other_lines": "2358-2359",
+     "text": "a [ 1 ] . mul ( & z [ 2 ] ) . sub ( & a [ 2 ] . mul ( & z [ 1 ] ) ) , a [ 2 ] . mul ( & z [ 0 ] ) . sub ( & a [ 0 ] . mul ( & z [ 2 ] ) )"
+    },
+    {
+     "cfcheck_file": "packing/resources/web/wand125-closed-form-cfcheck-2026-10-14/square-packing/problems/closed-form/indep-checker/src/record.rs",
+     "other_file": "packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/replay4d/src/main.rs",
+     "tokens": 61,
+     "cfcheck_lines": "127-129",
+     "other_lines": "25-27",
+     "text": "let mut stack = vec ! [ ( root . clone ( ) , ( 0 .. leaves . len ( ) ) . collect :: < Vec < _ >> ( ) ) ] ; while let Some ( ( b , indices ) ) = stack . pop ( ) { if indices . len ( ) == 1"
+    },
+    {
+     "cfcheck_file": "packing/resources/web/wand125-closed-form-cfcheck-2026-10-14/square-packing/problems/closed-form/indep-checker/src/symbolic.rs",
+     "other_file": "packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/seam4d_core/src/b3d.rs",
+     "tokens": 58,
+     "cfcheck_lines": "345-349",
+     "other_lines": "1188-1192",
+     "text": "{ let u = RF :: u ( ) ; let u2 = u . mul ( & u ) ; let d = RF :: i ( 1 ) . add ( & u2 ) ; let c = RF :: i ( 1 ) . sub ( & u2 ) . div ( & d )"
+    },
+    {
+     "cfcheck_file": "packing/resources/web/wand125-closed-form-cfcheck-2026-10-14/square-packing/problems/closed-form/indep-checker/src/symbolic.rs",
+     "other_file": "packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/seam4d_core/src/b3d.rs",
+     "tokens": 57,
+     "cfcheck_lines": "285-293",
+     "other_lines": "2475-2480",
+     "text": "; let mut result = None ; for _ in 0 .. 60 { let mut e = Eval :: new ( s . clone ( ) ) ; match compute ( & mut e ) { Ok ( values ) => { result = Some ( ( e , values ) ) ; break ; }"
+    },
+    {
+     "cfcheck_file": "packing/resources/web/wand125-closed-form-cfcheck-2026-10-14/square-packing/problems/closed-form/indep-checker/src/record.rs",
+     "other_file": "packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/replay4d/src/sha256.rs",
+     "tokens": 54,
+     "cfcheck_lines": "21-45",
+     "other_lines": "3-6",
+     "text": "str ; 24 ] = [ \"EMPTY\" , \"CORE\" , \"B3D\" , \"EDGE\" , \"EX:CORE\" , \"EX:B3D\" , \"EY:CORE\" , \"EY:B3D\" , \"B3U:x\" , \"B3U:y\" , \"B3U:xy\" , \"B3U:xyh\" , \"B3T:x\" , \"B3T:y\" , \"CORE1:P\" , \"CORE1:x\" , \"CORE1:y\" , \"CORE1:xy\" , \"CORE1:xyh\" , \"CORE1:Tx\" , \"COR"
+    },
+    {
+     "cfcheck_file": "packing/resources/web/wand125-closed-form-cfcheck-2026-10-14/square-packing/problems/closed-form/indep-checker/src/symbolic.rs",
+     "other_file": "packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/seam4d_core/src/b3d.rs",
+     "tokens": 43,
+     "cfcheck_lines": "557-562",
+     "other_lines": "2478-2480",
+     "text": "let mut e = Eval :: new ( s . clone ( ) ) ; match compute ( & mut e ) { Ok ( v ) => { found = Some ( ( e , v ) ) ; break ; }"
+    },
+    {
+     "cfcheck_file": "packing/resources/web/wand125-closed-form-cfcheck-2026-10-14/square-packing/problems/closed-form/indep-checker/tests/exact.rs",
+     "other_file": "packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/seam4d_core/src/b3d.rs",
+     "tokens": 41,
+     "cfcheck_lines": "139-141",
+     "other_lines": "2438-2440",
+     "text": "; let b = fq . sub ( & fp ) . sub ( & a ) ; let t = b . neg ( ) . div ( & a . scale ( & int ( 2 ) ) )"
+    },
+    {
+     "cfcheck_file": "packing/resources/web/wand125-closed-form-cfcheck-2026-10-14/square-packing/problems/closed-form/indep-checker/src/profile.rs",
+     "other_file": "packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/seam4d_core/src/b3d.rs",
+     "tokens": 38,
+     "cfcheck_lines": "9-16",
+     "other_lines": "1595-1602",
+     "text": "pub struct Stats { pub local_segments : usize , pub planes_before : usize , pub planes_after : usize , pub nonzero_triples : usize , pub prove_calls : usize , pub sturm_sequences : usize , pub max_degree : usize"
+    },
+    {
+     "cfcheck_file": "packing/resources/web/wand125-closed-form-cfcheck-2026-10-14/square-packing/problems/closed-form/indep-checker/src/profile.rs",
+     "other_file": "packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/seam4d_core/src/b3d.rs",
+     "tokens": 36,
+     "cfcheck_lines": "12-18",
+     "other_lines": "1596-1602",
+     "text": "pub planes_after : usize , pub nonzero_triples : usize , pub prove_calls : usize , pub sturm_sequences : usize , pub max_degree : usize , pub max_coefficient_bits : u64 , pub stages : BTreeMap < String"
+    },
+    {
+     "cfcheck_file": "packing/resources/web/wand125-closed-form-cfcheck-2026-10-14/square-packing/problems/closed-form/indep-checker/src/stage_b.rs",
+     "other_file": "packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/seam4d_core/src/replay.rs",
+     "tokens": 35,
+     "cfcheck_lines": "388-392",
+     "other_lines": "180-180",
+     "text": "[ n [ 0 ] . clone ( ) , n [ 1 ] . clone ( ) , n [ 0 ] . neg ( ) , n [ 0 ] . scale ("
+    },
+    {
+     "cfcheck_file": "packing/resources/web/wand125-closed-form-cfcheck-2026-10-14/square-packing/problems/closed-form/indep-checker/src/stage_b.rs",
+     "other_file": "packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/seam4d_core/src/replay.rs",
+     "tokens": 35,
+     "cfcheck_lines": "388-392",
+     "other_lines": "225-225",
+     "text": "[ n [ 0 ] . clone ( ) , n [ 1 ] . clone ( ) , n [ 0 ] . neg ( ) , n [ 0 ] . scale ("
+    },
+    {
+     "cfcheck_file": "packing/resources/web/wand125-closed-form-cfcheck-2026-10-14/square-packing/problems/closed-form/indep-checker/src/stage_b.rs",
+     "other_file": "packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/seam4d_core/src/replay.rs",
+     "tokens": 35,
+     "cfcheck_lines": "388-392",
+     "other_lines": "239-239",
+     "text": "[ n [ 0 ] . clone ( ) , n [ 1 ] . clone ( ) , n [ 0 ] . neg ( ) , n [ 0 ] . scale ("
+    },
+    {
+     "cfcheck_file": "packing/resources/web/wand125-closed-form-cfcheck-2026-10-14/square-packing/problems/closed-form/indep-checker/tests/exact.rs",
+     "other_file": "packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/seam4d_core/src/b3d.rs",
+     "tokens": 35,
+     "cfcheck_lines": "139-139",
+     "other_lines": "2435-2435",
+     "text": "let a = fp . sub ( & gm . scale ( & int ( 2 ) ) ) . add ( & fq ) . scale ( & int ( 2 ) ) ;"
+    },
+    {
+     "cfcheck_file": "packing/resources/web/wand125-closed-form-cfcheck-2026-10-14/square-packing/problems/closed-form/indep-checker/tests/exact.rs",
+     "other_file": "packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/seam4d_core/src/replay.rs",
+     "tokens": 35,
+     "cfcheck_lines": "67-70",
+     "other_lines": "326-327",
+     "text": ") ; b [ 0 ] = q ( 17 , 10 ) ; b [ 1 ] = q ( 18 , 10 ) ; for kind in [ \"CORE1:Tx\" , \"CORE1:TxHy\" , \"B3T:x\""
+    },
+    {
+     "cfcheck_file": "packing/resources/web/wand125-closed-form-cfcheck-2026-10-14/square-packing/problems/closed-form/indep-checker/src/profile.rs",
+     "other_file": "packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/seam4d_core/src/b3d.rs",
+     "tokens": 34,
+     "cfcheck_lines": "11-17",
+     "other_lines": "1596-1602",
+     "text": "pub planes_before : usize , pub planes_after : usize , pub nonzero_triples : usize , pub prove_calls : usize , pub sturm_sequences : usize , pub max_degree : usize , pub max_coefficient_bits : u64"
+    },
+    {
+     "cfcheck_file": "packing/resources/web/wand125-closed-form-cfcheck-2026-10-14/square-packing/problems/closed-form/indep-checker/src/geom.rs",
+     "other_file": "packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/seam4d_core/src/replay.rs",
+     "tokens": 32,
+     "cfcheck_lines": "23-24",
+     "other_lines": "80-81",
+     "text": "fn clip ( p : & [ Point ] , n : & Point , b : & Q ) -> Polygon { let mut out = vec ! [ ] ;"
+    },
+    {
+     "cfcheck_file": "packing/resources/web/wand125-closed-form-cfcheck-2026-10-14/square-packing/problems/closed-form/indep-checker/src/geom.rs",
+     "other_file": "packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/seam4d_core/src/lib.rs",
+     "tokens": 31,
+     "cfcheck_lines": "67-69",
+     "other_lines": "328-330",
+     "text": "fn intersection ( a : & [ Point ] , b : & [ Point ] ) -> Polygon { if b . len ( ) < 3 { return vec"
+    },
+    {
+     "cfcheck_file": "packing/resources/web/wand125-closed-form-cfcheck-2026-10-14/square-packing/problems/closed-form/indep-checker/src/rat.rs",
+     "other_file": "packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/replay4d/src/sha256.rs",
+     "tokens": 31,
+     "cfcheck_lines": "57-64",
+     "other_lines": "34-39",
+     "text": ") } # [ cfg ( test ) ] mod tests { use super :: * ; # [ test ] fn rationals ( ) { assert_eq ! ( parse ("
+    },
+    {
+     "cfcheck_file": "packing/resources/web/wand125-closed-form-cfcheck-2026-10-14/square-packing/problems/closed-form/indep-checker/src/rat.rs",
+     "other_file": "packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/seam4d_core/src/lib.rs",
+     "tokens": 31,
+     "cfcheck_lines": "24-26",
+     "other_lines": "541-543",
+     "text": "; if digits . is_empty ( ) || ! digits . bytes ( ) . all ( | x | x . is_ascii_digit ( ) ) { return Err ( parse_error"
+    },
+    {
+     "cfcheck_file": "packing/resources/web/wand125-closed-form-cfcheck-2026-10-14/square-packing/problems/closed-form/indep-checker/tests/exact.rs",
+     "other_file": "packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/seam4d_core/src/replay.rs",
+     "tokens": 31,
+     "cfcheck_lines": "101-104",
+     "other_lines": "303-304",
+     "text": ") ; b [ 0 ] = int ( 0 ) ; b [ 1 ] = q ( 1 , 2 ) ; b [ 4 ] = q ("
+    },
+    {
+     "cfcheck_file": "packing/resources/web/wand125-closed-form-cfcheck-2026-10-14/square-packing/problems/closed-form/indep-checker/src/family.rs",
+     "other_file": "packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/replay4d/src/sha256.rs",
+     "tokens": 30,
+     "cfcheck_lines": "68-82",
+     "other_lines": "3-5",
+     "text": "= [ \"d0\" , \"d1\" , \"UA\" , \"F\" , \"T\" , \"V\" , \"U\" , \"eps\" , \"bumps\" , \"note\" , \"edge_variant\" , \"target\" , \"S_d0\" , \"S_d1\" ,"
+    },
+    {
+     "cfcheck_file": "packing/resources/web/wand125-closed-form-cfcheck-2026-10-14/square-packing/problems/closed-form/indep-checker/src/leaf.rs",
+     "other_file": "packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/seam4d_core/src/replay.rs",
+     "tokens": 30,
+     "cfcheck_lines": "141-141",
+     "other_lines": "105-105",
+     "text": "fn dy ( f : & Family , lo : & Q , hi : & Q , e0 : & Q , e1 : & Q ) -> Q"
+    },
+    {
+     "cfcheck_file": "packing/resources/web/wand125-closed-form-cfcheck-2026-10-14/square-packing/problems/closed-form/indep-checker/src/poly.rs",
+     "other_file": "packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/seam4d_core/src/b3d.rs",
+     "tokens": 30,
+     "cfcheck_lines": "363-367",
+     "other_lines": "777-781",
+     "text": "bool ) -> usize { let mut prev = 0 ; let mut out = 0 ; for p in seq { let s = p . side_sign ( x"
+    },
+    {
+     "cfcheck_file": "packing/resources/web/wand125-closed-form-cfcheck-2026-10-14/square-packing/problems/closed-form/indep-checker/tests/support/poly_reference.rs",
+     "other_file": "packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/seam4d_core/src/b3d.rs",
+     "tokens": 30,
+     "cfcheck_lines": "171-175",
+     "other_lines": "777-781",
+     "text": "bool ) -> usize { let mut prev = 0 ; let mut out = 0 ; for p in seq { let s = p . side_sign ( x"
+    }
+   ]
+  },
+  "shared_lines": [],
+  "shared_function_names": [
+   "add",
+   "area",
+   "b",
+   "canonical",
+   "check",
+   "clip",
+   "cross",
+   "density",
+   "derivative",
+   "div",
+   "dot",
+   "drop",
+   "eval",
+   "gcd",
+   "half",
+   "hull",
+   "intersection",
+   "is_zero",
+   "isolate",
+   "main",
+   "monic",
+   "mul",
+   "neg",
+   "new",
+   "nonneg_open",
+   "one",
+   "parse_box",
+   "poly_lower",
+   "primitive",
+   "refine",
+   "require",
+   "roots_open",
+   "run",
+   "shift",
+   "sign",
+   "sign_poly",
+   "sturm",
+   "sub",
+   "width",
+   "x",
+   "zero"
+  ],
+  "shared_comments": []
+ },
+ "baselines": {
+  "evand-zmx2": {
+   "files": [
+    "packing/resources/web/evand-zmx2-sym-atoms-2026-09-30/square-packing/s12/verify2/src/bin/zmx2.rs"
+   ],
+   "cfcheck_vs_baseline": {
+    "plain": {
+     "windows": 55333,
+     "windows_found_in_other": 0,
+     "share": 0.0,
+     "longest_run_tokens": 18,
+     "runs_at_least_report_length": 0,
+     "longest_runs": [
+      {
+       "cfcheck_file": "packing/resources/web/wand125-closed-form-cfcheck-2026-10-14/square-packing/problems/closed-form/indep-checker/src/checkpoint.rs",
+       "other_file": "packing/resources/web/evand-zmx2-sym-atoms-2026-09-30/square-packing/s12/verify2/src/bin/zmx2.rs",
+       "tokens": 18,
+       "cfcheck_lines": "132-132",
+       "other_lines": "2037-2037",
+       "text": "OpenOptions :: new ( ) . create ( true ) . append ( true ) . open ("
+      }
+     ]
+    },
+    "renamed": {
+     "windows": 55333,
+     "windows_found_in_other": 25,
+     "share": 0.00045,
+     "longest_run_tokens": 28,
+     "runs_at_least_report_length": 0,
+     "longest_runs": [
+      {
+       "cfcheck_file": "packing/resources/web/wand125-closed-form-cfcheck-2026-10-14/square-packing/problems/closed-form/indep-checker/src/symbolic.rs",
+       "other_file": "packing/resources/web/evand-zmx2-sym-atoms-2026-09-30/square-packing/s12/verify2/src/bin/zmx2.rs",
+       "tokens": 28,
+       "cfcheck_lines": "155-156",
+       "other_lines": "46-47",
+       "text": "Bound ) -> Q { let ( mut a , mut b ) = ( a . clone ( ) , b . clone ( ) ) ;"
+      }
+     ]
+    }
+   },
+   "producer_vs_baseline": {
+    "plain": {
+     "windows": 58702,
+     "windows_found_in_other": 0,
+     "share": 0.0,
+     "longest_run_tokens": 17,
+     "runs_at_least_report_length": 0,
+     "longest_runs": [
+      {
+       "cfcheck_file": "packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/replay4d/src/main.rs",
+       "other_file": "packing/resources/web/evand-zmx2-sym-atoms-2026-09-30/square-packing/s12/verify2/src/bin/zmx2.rs",
+       "tokens": 17,
+       "cfcheck_lines": "132-132",
+       "other_lines": "2065-2066",
+       "text": "let i = next . fetch_add ( 1 , Ordering :: Relaxed ) ; if i >="
+      }
+     ]
+    },
+    "renamed": {
+     "windows": 58702,
+     "windows_found_in_other": 71,
+     "share": 0.00121,
+     "longest_run_tokens": 42,
+     "runs_at_least_report_length": 7,
+     "longest_runs": [
+      {
+       "cfcheck_file": "packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/seam4d_core/src/lib.rs",
+       "other_file": "packing/resources/web/evand-zmx2-sym-atoms-2026-09-30/square-packing/s12/verify2/src/bin/zmx2.rs",
+       "tokens": 42,
+       "cfcheck_lines": "281-294",
+       "other_lines": "886-896",
+       "text": "w : Q , gx0 : i64 , gx1 : i64 , gy0 : i64 , gy1 : i64 , bx0 : Q , bx1 : Q , by0 : Q , by1 : Q , k : Integer , ak :"
+      }
+     ]
+    }
+   }
+  },
+  "evand-verify2": {
+   "files": [
+    "packing/resources/web/evand-square-packing-2026-09-26/square-packing/s12/verify2/src/main.rs"
+   ],
+   "cfcheck_vs_baseline": {
+    "plain": {
+     "windows": 55333,
+     "windows_found_in_other": 0,
+     "share": 0.0,
+     "longest_run_tokens": 16,
+     "runs_at_least_report_length": 0,
+     "longest_runs": [
+      {
+       "cfcheck_file": "packing/resources/web/wand125-closed-form-cfcheck-2026-10-14/square-packing/problems/closed-form/indep-checker/src/main.rs",
+       "other_file": "packing/resources/web/evand-square-packing-2026-09-26/square-packing/s12/verify2/src/main.rs",
+       "tokens": 16,
+       "cfcheck_lines": "100-102",
+       "other_lines": "2264-2266",
+       "text": ". map ( | s | { s . split ( ',' ) . map ("
+      }
+     ]
+    },
+    "renamed": {
+     "windows": 55333,
+     "windows_found_in_other": 26,
+     "share": 0.00047,
+     "longest_run_tokens": 36,
+     "runs_at_least_report_length": 3,
+     "longest_runs": [
+      {
+       "cfcheck_file": "packing/resources/web/wand125-closed-form-cfcheck-2026-10-14/square-packing/problems/closed-form/indep-checker/src/leaf.rs",
+       "other_file": "packing/resources/web/evand-square-packing-2026-09-26/square-packing/s12/verify2/src/main.rs",
+       "tokens": 36,
+       "cfcheck_lines": "306-306",
+       "other_lines": "257-260",
+       "text": "[ [ \"9/5\" , \"0\" , \"9/5\" , \"2\" , \"4\" ] , [ \"9/5\" , \"1\" , \"9/5\" , \"3\" , \"2\" ] , [ \"0\" , \"9/5\" , \"2\" , \"9/5\" , \"2\" ]"
+      }
+     ]
+    }
+   },
+   "producer_vs_baseline": {
+    "plain": {
+     "windows": 58702,
+     "windows_found_in_other": 0,
+     "share": 0.0,
+     "longest_run_tokens": 15,
+     "runs_at_least_report_length": 0,
+     "longest_runs": [
+      {
+       "cfcheck_file": "packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/seam4d_core/src/lib.rs",
+       "other_file": "packing/resources/web/evand-square-packing-2026-09-26/square-packing/s12/verify2/src/main.rs",
+       "tokens": 15,
+       "cfcheck_lines": "636-636",
+       "other_lines": "568-568",
+       "text": "= std :: fs :: read_to_string ( path ) . map_err ( | e |"
+      }
+     ]
+    },
+    "renamed": {
+     "windows": 58702,
+     "windows_found_in_other": 86,
+     "share": 0.00147,
+     "longest_run_tokens": 45,
+     "runs_at_least_report_length": 8,
+     "longest_runs": [
+      {
+       "cfcheck_file": "packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/seam4d_core/src/lib.rs",
+       "other_file": "packing/resources/web/evand-square-packing-2026-09-26/square-packing/s12/verify2/src/main.rs",
+       "tokens": 45,
+       "cfcheck_lines": "280-294",
+       "other_lines": "363-374",
+       "text": "struct Seg { w : Q , gx0 : i64 , gx1 : i64 , gy0 : i64 , gy1 : i64 , bx0 : Q , bx1 : Q , by0 : Q , by1 : Q , k : Integer , ak :"
+      }
+     ]
+    }
+   }
+  },
+  "sqverify_exact": {
+   "files": [
+    "packing/sqverify_exact/src/lib.rs",
+    "packing/sqverify_exact/src/main.rs"
+   ],
+   "cfcheck_vs_baseline": {
+    "plain": {
+     "windows": 55333,
+     "windows_found_in_other": 0,
+     "share": 0.0,
+     "longest_run_tokens": 18,
+     "runs_at_least_report_length": 0,
+     "longest_runs": [
+      {
+       "cfcheck_file": "packing/resources/web/wand125-closed-form-cfcheck-2026-10-14/square-packing/problems/closed-form/indep-checker/src/rat.rs",
+       "other_file": "packing/sqverify_exact/src/lib.rs",
+       "tokens": 18,
+       "cfcheck_lines": "24-25",
+       "other_lines": "113-114",
+       "text": "; if digits . is_empty ( ) || ! digits . bytes ( ) . all ( |"
+      }
+     ]
+    },
+    "renamed": {
+     "windows": 55333,
+     "windows_found_in_other": 35,
+     "share": 0.00063,
+     "longest_run_tokens": 34,
+     "runs_at_least_report_length": 3,
+     "longest_runs": [
+      {
+       "cfcheck_file": "packing/resources/web/wand125-closed-form-cfcheck-2026-10-14/square-packing/problems/closed-form/indep-checker/src/geom.rs",
+       "other_file": "packing/sqverify_exact/src/lib.rs",
+       "tokens": 34,
+       "cfcheck_lines": "168-169",
+       "other_lines": "165-168",
+       "text": "fn hmax ( u0 : & Q , u1 : & Q ) -> Q { let m = u0 . abs ( ) . max ( u1 . abs ( ) ) ;"
+      }
+     ]
+    }
+   },
+   "producer_vs_baseline": {
+    "plain": {
+     "windows": 58702,
+     "windows_found_in_other": 0,
+     "share": 0.0,
+     "longest_run_tokens": 15,
+     "runs_at_least_report_length": 0,
+     "longest_runs": [
+      {
+       "cfcheck_file": "packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/replay4d/src/main.rs",
+       "other_file": "packing/sqverify_exact/src/lib.rs",
+       "tokens": 15,
+       "cfcheck_lines": "13-13",
+       "other_lines": "206-207",
+       "text": ") . collect :: < Result < _ , String >> ( ) ? ;"
+      }
+     ]
+    },
+    "renamed": {
+     "windows": 58702,
+     "windows_found_in_other": 33,
+     "share": 0.00056,
+     "longest_run_tokens": 33,
+     "runs_at_least_report_length": 3,
+     "longest_runs": [
+      {
+       "cfcheck_file": "packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/replay4d/src/main.rs",
+       "other_file": "packing/sqverify_exact/src/lib.rs",
+       "tokens": 33,
+       "cfcheck_lines": "15-18",
+       "other_lines": "119-125",
+       "text": "{ return Err ( \"box has nonpositive interval\" . into ( ) ) ; } Ok ( b ) } fn parse_leaf ( v : & Value ) -> Result < Leaf , String > {"
+      }
+     ]
+    }
+   }
+  }
+ },
+ "positive_control": {
+  "pasted": "packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/seam4d_core/src/lib.rs: pub fn wmin, appended to a copy of packing/resources/web/wand125-closed-form-cfcheck-2026-10-14/square-packing/problems/closed-form/indep-checker/src/geom.rs; renamed: wmin, u0 and u1 replaced",
+  "verbatim_longest_run": {
+   "cfcheck_file": "packing/resources/web/wand125-closed-form-cfcheck-2026-10-14/square-packing/problems/closed-form/indep-checker/src/geom.rs",
+   "other_file": "packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/seam4d_core/src/lib.rs",
+   "tokens": 122,
+   "cfcheck_lines": "199-214",
+   "other_lines": "261-276",
+   "text": "} pub fn wmin ( u0 : & Q , u1 : & Q ) -> Q { if u0 . cmp0 ( ) != Ordering :: Greater && u1 . cmp0 ( ) != Ordering :: Less { return qi ( 1 ) ; } let ( c0 , s0 ) = cs ( u0 ) ; let ( c1 , s1 ) = cs ( u1 ) ; let w0 = add ( & absq ( & c0 ) , & a"
+  },
+  "renamed_longest_run": {
+   "cfcheck_file": "packing/resources/web/wand125-closed-form-cfcheck-2026-10-14/square-packing/problems/closed-form/indep-checker/src/geom.rs",
+   "other_file": "packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/seam4d_core/src/lib.rs",
+   "tokens": 122,
+   "cfcheck_lines": "199-214",
+   "other_lines": "261-276",
+   "text": "} pub fn min_width_ctl ( lo_ctl : & Q , hi_ctl : & Q ) -> Q { if lo_ctl . cmp0 ( ) != Ordering :: Greater && hi_ctl . cmp0 ( ) != Ordering :: Less { return qi ( 1 ) ; } let ( c0 , s0 ) = cs ( lo_ctl ) ; let ( c1 , s1 ) = cs ( hi_ctl ) ; let"
+  },
+  "found": true
+ }
+}

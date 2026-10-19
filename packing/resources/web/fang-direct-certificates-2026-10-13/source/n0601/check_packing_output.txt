@@ -1,0 +1,7 @@
+$ python3 check_packing.py n0601.txt 40    # David Ellsworth's checker
+Checking n0601.txt
+Epsilon: 1E-40
+S: 24.99891457242712934655454616240590116754
+Container: OK
+Overlaps: NONE
+VALID

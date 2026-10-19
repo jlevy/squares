@@ -1,0 +1,17 @@
+{
+  "combined_resource_guard": "external supervisor; no internal wall/RSS guard",
+  "ended_at": "2026-10-08T05:17:50.528000Z",
+  "manifest": "campaign/series/series-000-smoke-and-calibration/results/exp-313-incircle-projection-redundancy/execution-manifest.json",
+  "manifest_sha256": "06a9d7581ad8d714e019468651f3a4827168e8c3cdd082a2fafbd1dc3effa218",
+  "phases": [
+    {"argv":["/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python","-m","devtools.check_n17_incircle_projection_redundancy","--descriptor","campaign/series/series-000-smoke-and-calibration/results/exp-313-incircle-projection-redundancy/descriptor.json","--max-seconds","60","--output","campaign/series/series-000-smoke-and-calibration/results/exp-313-incircle-projection-redundancy/certificate.json"],"ended_at":"2026-10-08T05:17:49.856431Z","name":"construction","returncode":0,"started_at":"2026-10-08T05:17:49.185227Z","status":"completed","wall_seconds":0.6711119590327144},
+    {"argv":["/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python","-m","devtools.check_n17_incircle_projection_redundancy","--descriptor","campaign/series/series-000-smoke-and-calibration/results/exp-313-incircle-projection-redundancy/descriptor.json","--max-seconds","60","--certificate","campaign/series/series-000-smoke-and-calibration/results/exp-313-incircle-projection-redundancy/certificate.json","--output","campaign/series/series-000-smoke-and-calibration/results/exp-313-incircle-projection-redundancy/replay.json"],"ended_at":"2026-10-08T05:17:50.527476Z","name":"fresh_verification","returncode":0,"started_at":"2026-10-08T05:17:49.856937Z","status":"completed","wall_seconds":0.6704453330021352}
+  ],
+  "schema": "registered-phase-execution/v1",
+  "scientific_result_interpreted": false,
+  "started_at": "2026-10-08T05:17:49.184888Z",
+  "status": "completed",
+  "unstarted_phase_names": [],
+  "wall_seconds": 1.3428967079962604
+}
+

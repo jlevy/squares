@@ -1,0 +1,38 @@
+{
+  "cwd": "packing",
+  "construction": [
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-m",
+    "devtools.probe_n17_conditional_center_cases",
+    "--descriptor",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-285-pooled-parent-center-cases/descriptor.json",
+    "--max-seconds",
+    "60",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-285-pooled-parent-center-cases/certificate.json"
+  ],
+  "fresh_verification": [
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-m",
+    "devtools.probe_n17_conditional_center_cases",
+    "--descriptor",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-285-pooled-parent-center-cases/descriptor.json",
+    "--certificate",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-285-pooled-parent-center-cases/certificate.json",
+    "--max-seconds",
+    "60",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-285-pooled-parent-center-cases/replay.json"
+  ],
+  "combined_max_seconds": 120,
+  "term_seconds": 120,
+  "kill_seconds": 130,
+  "max_memory_mib_per_process": 4096,
+  "one_worker": true,
+  "schema": "n17-conditional-center-cases-registration/v1",
+  "registered_at": "2026-10-07T14:51:33Z",
+  "lease_expires": "2026-10-07T15:11:33Z",
+  "lease_scope": "20min preparation/source-launch lease; actual two phases share120s",
+  "source_freeze": "This registration commit; clean relevant source required at launch",
+  "target_unrun": true
+}

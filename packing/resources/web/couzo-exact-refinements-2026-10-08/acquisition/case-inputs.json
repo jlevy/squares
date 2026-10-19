@@ -1,0 +1,182 @@
+{
+  "format": "issue451-factual-source-custody-preparation/v1",
+  "source": "https://github.com/franciscouzo/square-packing",
+  "revision": "ffd900dfff6d2674ad995359208c2f0714915c82",
+  "issue": "https://github.com/jlevy/squares/issues/451",
+  "acquired_at": "2026-10-08T16:06:14.484345+00:00",
+  "bead": "think-edo8",
+  "cases": [
+    {
+      "n": 105,
+      "certificate": {
+        "path": "certificates/n105.cert",
+        "stored": "source/certificates/n105.cert.gz",
+        "git_blob": "d2e337c9217b3b2a29a4e8de4668936d6cd647f6",
+        "size": 17863,
+        "sha256": "6f22b0cf51cf6ff8d4c2d930995a044daada5de8c4a99e211ae7fe545211384b",
+        "compressed_size": 3617,
+        "compressed_sha256": "0d1fd58900db39b1c46214ef10786c9fca8d24049dec27c593ba8afc1c091c09"
+      },
+      "decimal_pose": {
+        "path": "n105.txt",
+        "stored": "source/n105.txt.gz",
+        "git_blob": "b5258293beedc27d5deb22e986762af179087384",
+        "size": 7679,
+        "sha256": "f7e35af93307e169f6f5db6715085e336d15c25b76b46bfec45c068893783bfd",
+        "compressed_size": 2767,
+        "compressed_sha256": "235613a5452f8a0fabf0338204b4d80c25338b63a9eff5880c9d01713a35cb14"
+      }
+    },
+    {
+      "n": 108,
+      "certificate": {
+        "path": "certificates/n108.cert",
+        "stored": "source/certificates/n108.cert.gz",
+        "git_blob": "b7bc8379c1180e20be6c06e410ed9ff0b2c4d7ed",
+        "size": 16101,
+        "sha256": "528741a37ad0ae6ddd4c08d6d6efa72a29700bd95fde137b44c987f18d44d69e",
+        "compressed_size": 2340,
+        "compressed_sha256": "1615a47ad7dda1e09f707b67e806849df882f4ecd2206478e7ee9d68937464ea"
+      },
+      "decimal_pose": {
+        "path": "n108.txt",
+        "stored": "source/n108.txt.gz",
+        "git_blob": "05d614e217868d25a9983be658d85b2752e8b1b4",
+        "size": 7845,
+        "sha256": "8fc5b716f2bd761c544490e82c81b22a27b61ef91e415e9ab463a82fd55d40f7",
+        "compressed_size": 1469,
+        "compressed_sha256": "98c884522381ffb804e1cd1e7038252af8bfe4af45eaf187afab18b186a7cca7"
+      }
+    },
+    {
+      "n": 127,
+      "certificate": {
+        "path": "certificates/n127.cert",
+        "stored": "source/certificates/n127.cert.gz",
+        "git_blob": "9a0f17cd25525ee8c90d98743275cc9bd6c2da61",
+        "size": 21205,
+        "sha256": "2e039a654aa7afbeb9c8f447833aa8e9ff64f70e218c5fce0f2eb13435cda3a9",
+        "compressed_size": 4242,
+        "compressed_sha256": "5e2309a56cb286dd8e30789a328ca5a4006c397915405a61cdb3234a34069fca"
+      },
+      "decimal_pose": {
+        "path": "n127.txt",
+        "stored": "source/n127.txt.gz",
+        "git_blob": "98c9e2602dfe78758380da53001d47517c89a683",
+        "size": 9237,
+        "sha256": "510c4f816468050006892a294f49d794de16b71356dbf55d0de3d3f749800bf2",
+        "compressed_size": 3651,
+        "compressed_sha256": "2c72768d449da592e0a305d072c4d469cbcb45228ec149726f38bdacd28999a5"
+      }
+    },
+    {
+      "n": 131,
+      "certificate": {
+        "path": "certificates/n131.cert",
+        "stored": "source/certificates/n131.cert.gz",
+        "git_blob": "00253359b72a422af851a7142ead7dcffbd9d708",
+        "size": 21209,
+        "sha256": "9ce74fda03fac60e997a3e0d1175cb6d3a6563523d7305ab3af08a9ad30b169c",
+        "compressed_size": 2996,
+        "compressed_sha256": "85a8c4707fbbd7e64d5c53a988497b4bafbaa0f056fa53f84c8c7de5ec0ae44f"
+      },
+      "decimal_pose": {
+        "path": "n131.txt",
+        "stored": "source/n131.txt.gz",
+        "git_blob": "8a047ed58bbd9960d5704962eb141ea07bbfbc2f",
+        "size": 9543,
+        "sha256": "196daf9edfbd987efa18d92b1708b5df42a050d3043748e7a146f4eff91d4c7e",
+        "compressed_size": 3054,
+        "compressed_sha256": "f101fea13c9fb08c06d0f910ad76cfad4562e1f42727d0c08901cbdbc42706df"
+      }
+    },
+    {
+      "n": 155,
+      "certificate": {
+        "path": "certificates/n155.cert",
+        "stored": "source/certificates/n155.cert.gz",
+        "git_blob": "22e0d557802f0df172ae6fd7d4304435d9b57c49",
+        "size": 25405,
+        "sha256": "cc9f7c800211acc21c66196c43fab392dd96c920eba8f13851ff313c8e1bb477",
+        "compressed_size": 3514,
+        "compressed_sha256": "806631b6688d8abe580577f785e944931d06e0653ab9177605afa816346d341c"
+      },
+      "decimal_pose": {
+        "path": "n155.txt",
+        "stored": "source/n155.txt.gz",
+        "git_blob": "f6ba1c3e5aef6d27a83976ba3aa8ee84ddf1e13b",
+        "size": 11293,
+        "sha256": "b2dd538c4f102058b1561652fa5f83c79c1e995fae6f3da3fbcb4573511c48ee",
+        "compressed_size": 3563,
+        "compressed_sha256": "e9a43347436d6e6e6327d357680e680fc13605eff6a69c7d7140b27415b7af15"
+      }
+    },
+    {
+      "n": 180,
+      "certificate": {
+        "path": "certificates/n180.cert",
+        "stored": "source/certificates/n180.cert.gz",
+        "git_blob": "54efb6b67c0fbe217e1472ebd210684e8ccb7928",
+        "size": 27871,
+        "sha256": "a66d49e35a3c841df0ca1daf5bb364f36139b36ae5126fbf21200ebd6db4128e",
+        "compressed_size": 3460,
+        "compressed_sha256": "bd1aeb21a3dd02f5e08973f9bb29e4c231d9efb8e5c7d266f8cfb73a9fd06803"
+      },
+      "decimal_pose": {
+        "path": "n180.txt",
+        "stored": "source/n180.txt.gz",
+        "git_blob": "431aca33894de053400c9dfaaf5ef7cb65ce648b",
+        "size": 13115,
+        "sha256": "855a88d9bbbe5b8558f380ac5368eb50b8a78837c547d5b5bdb40a4d7204b638",
+        "compressed_size": 3961,
+        "compressed_sha256": "5e6875a7717575b1187c690034469ad251ac57d41f2fbfe2b5b91aad94850f80"
+      }
+    },
+    {
+      "n": 228,
+      "certificate": {
+        "path": "certificates/n228.cert",
+        "stored": "source/certificates/n228.cert.gz",
+        "git_blob": "c3351d524d41eec2221cccaf285a9b87e6bd6cef",
+        "size": 33426,
+        "sha256": "cb5e49904ac5e4b548bf6c20cbcb4d0a72f52ccc0eee6a36c784d4c3495d38ad",
+        "compressed_size": 4436,
+        "compressed_sha256": "c914a1d7e519103beb9ab713caea580487845b53961b8c606573bc1ed6718fae"
+      },
+      "decimal_pose": {
+        "path": "n228.txt",
+        "stored": "source/n228.txt.gz",
+        "git_blob": "bf97337668c13514cdacda5ffefc71e88146a358",
+        "size": 16468,
+        "sha256": "157be40980af0925adf87b3272e95e6db81c4a881f46c1d45dd0449a347c21e0",
+        "compressed_size": 5073,
+        "compressed_sha256": "aecc69251739a5c543967746474975be19e616b614ac916bfd4723488e47bf53"
+      }
+    },
+    {
+      "n": 306,
+      "certificate": {
+        "path": "certificates/n306.cert",
+        "stored": "source/certificates/n306.cert.gz",
+        "git_blob": "601038fdfae10fbac4395da6bd6ca3d4bfa11541",
+        "size": 49716,
+        "sha256": "f58de39d385fcc006f7e6f967e16640ff3471534b6cb54aadcd59be14df0b3c7",
+        "compressed_size": 6919,
+        "compressed_sha256": "f271a4f700ab0d5ce410eebc60bbe69bc9acb60a2d78cd195cd81795389d51ef"
+      },
+      "decimal_pose": {
+        "path": "n306.txt",
+        "stored": "source/n306.txt.gz",
+        "git_blob": "0cdfc9f02c6eb7e25e50e9ef00758ed39968ed0e",
+        "size": 22233,
+        "sha256": "2c3ecf4b3937b5b33ee2cebfeeb89ac2080d4c69a989317f0512b2f94850ee44",
+        "compressed_size": 6805,
+        "compressed_sha256": "0c93a02b82540be1fb58deb908d203386e5f9cdd7de35b6ca86a70324356ce10"
+      }
+    }
+  ],
+  "original_bytes": 310209,
+  "compressed_bytes": 61867,
+  "license_boundary": "Repository API reports no license. Complete factual certificates and decimal poses retained losslessly; program/prose files hash-pinned in git-tree.json only. Evan Daniel solver MIT notice does not imply a bundle license.",
+  "execution": "No upstream code, native geometry, optimizer, verifier or checker executed."
+}

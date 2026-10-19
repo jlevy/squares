@@ -217,14 +217,14 @@ def test_each_card_ends_with_its_tally_linked_to_its_results(
         assert text == f"{total} ({', '.join(f'{n} at S{level}' for level, n in counts)})", url
         links = re.findall(r'<a href="([^"]+)">([^<]+)</a>', foot)
         assert links == [
-            (f"all-results.html?project={slug}", total),
+            (f"results.html?project={slug}", total),
             *(
-                (f"all-results.html?project={slug}&amp;s={level}", f"{n} at S{level}")
+                (f"results.html?project={slug}&amp;s={level}", f"{n} at S{level}")
                 for level, n in counts
             ),
         ], url
     assert with_tally >= 9
-    assert render_overview.RESULTS_PAGE == "all-results.html"
+    assert render_overview.RESULTS_PAGE == "results.html"
 
 
 def test_a_tally_link_selects_exactly_its_projects_rows(
@@ -323,7 +323,7 @@ def browser() -> Iterator[Any]:
 
 @pytest.fixture(scope="module")
 def site(tmp_path_factory: pytest.TempPathFactory) -> Path:
-    """The overview and the results page side by side, so a link between them works."""
+    """The project catalogue and results page, so a tally link between them works."""
     root = tmp_path_factory.mktemp("site")
     site_renders.write(root, "index.html", render_overview.RESULTS_PAGE)
     return root
@@ -331,7 +331,7 @@ def site(tmp_path_factory: pytest.TempPathFactory) -> Path:
 
 def _follow(browser: Any, site: Path, overview: overview_data.Overview, link: str) -> Any:
     """The results page as a reader reaches it by pressing `link`, a tally's link on the
-    overview, on the register's reference date."""
+    project catalogue, on the register's reference date."""
     opened = browser.new_page(viewport={"width": 1280, "height": 900})
     noon = datetime.combine(overview_sections.reference_date(overview), time(12))
     opened.clock.set_fixed_time(noon)
@@ -365,12 +365,12 @@ def test_following_a_cards_links_shows_the_rows_they_count(
     slug = overview_sections.project_slug(url)
     own = sorted(result.lower() for result in tally.results)
     total = len(overview.results)
-    opened = _follow(browser, site, overview, f"all-results.html?project={slug}")
+    opened = _follow(browser, site, overview, f"results.html?project={slug}")
     try:
         found = opened.evaluate(PRESETS)
     finally:
         opened.close()
-    assert found["page"] == "all-results.html"
+    assert found["page"] == "results.html"
     assert found["search"] == f"?project={slug}"
     assert sorted(found["shown"]) == own
     assert found["total"] == total
@@ -398,7 +398,7 @@ def test_following_a_cards_links_shows_the_rows_they_count(
         if result.id in tally.results and overview_sections.significance(result) == level
     )
     assert 0 < len(at_level) < len(own)
-    opened = _follow(browser, site, overview, f"all-results.html?project={slug}&s={level}")
+    opened = _follow(browser, site, overview, f"results.html?project={slug}&s={level}")
     try:
         found = opened.evaluate(PRESETS)
         assert sorted(found["shown"]) == at_level

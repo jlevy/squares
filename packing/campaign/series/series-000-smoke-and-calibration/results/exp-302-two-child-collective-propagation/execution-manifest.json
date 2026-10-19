@@ -1,0 +1,85 @@
+{
+  "schema": "registered-phase-command-plan/v1",
+  "target_unrun": true,
+  "registration_state": "registered_before_target",
+  "working_directory": "packing",
+  "phases": [
+    {
+      "name": "construction",
+      "argv": [
+        "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+        "-m",
+        "devtools.check_n17_two_child_collective_propagation",
+        "--descriptor",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-302-two-child-collective-propagation/descriptor.json",
+        "--max-seconds",
+        "180",
+        "--output",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-302-two-child-collective-propagation/certificate.json"
+      ]
+    },
+    {
+      "name": "fresh_verification",
+      "argv": [
+        "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+        "-m",
+        "devtools.check_n17_two_child_collective_propagation",
+        "--descriptor",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-302-two-child-collective-propagation/descriptor.json",
+        "--max-seconds",
+        "180",
+        "--certificate",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-302-two-child-collective-propagation/certificate.json",
+        "--output",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-302-two-child-collective-propagation/replay.json"
+      ]
+    }
+  ],
+  "runner_argv": [
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-m",
+    "devtools.run_registered_phases",
+    "--manifest",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-302-two-child-collective-propagation/execution-manifest.json",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-302-two-child-collective-propagation/phase-execution.json"
+  ],
+  "supervisor_argv": [
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-m",
+    "devtools.supervise_posix",
+    "--max-seconds",
+    "360",
+    "--max-memory-mib",
+    "4096",
+    "--sample-seconds",
+    "0.25",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-302-two-child-collective-propagation/supervision.json",
+    "--stdout",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-302-two-child-collective-propagation/stdout.log",
+    "--stderr",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-302-two-child-collective-propagation/stderr.log",
+    "--",
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-m",
+    "devtools.run_registered_phases",
+    "--manifest",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-302-two-child-collective-propagation/execution-manifest.json",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-302-two-child-collective-propagation/phase-execution.json"
+  ],
+  "resources": {
+    "construction_seconds": 180,
+    "fresh_seconds": 180,
+    "combined_term_seconds": 360,
+    "combined_kill_seconds": 370,
+    "sampled_memory_mib_per_live_process": 4096,
+    "memory_scope": "per_live_process_in_owned_group",
+    "workers": 1,
+    "output_bytes": 67108864
+  },
+  "criterion": "Exact accepted300 three-role wide h1/512 complete proof/MISS with inherited1056/all992/all16 recoveries and old11/32 baseline, plus accepted295 certificate/replay ONLYsameparent fixed owner18/x471/250 selection. Join all992 original closed typed rows/flags once; parse all17 acceptedgroups. Two closed centre cases cover owner18 including sharedseam; recover ONLY18 percase with othergroups/owner0fixed. Each open case freshly reconstructs full992 self-excluded collective coverage, no feedback. Primary STRICT additional exact half-angle UNION length loss after union of surviving case covers for every owner, or both complete cases contradicted. One case gain/closure alone does not count. Separate fresh process matches complete payload/custody/fullcaseaccounting. No globalcapture, point/tinyguard substitution, parent/root replay or ordinary/census claim. Resource/refusal incomplete is not negative.",
+  "registered_at": "2026-10-08T02:03:21.350069+00:00",
+  "source_freeze": "reviewedsourcecommit/bytesresolvedatlaunch"
+}

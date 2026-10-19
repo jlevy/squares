@@ -1,0 +1,40 @@
+{
+  "schema": "n17-certificate-relocation-custody/v1",
+  "original_standing_receipt": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-274-current-tail-b-replication/tail-b-standing-full.json",
+  "original_directory": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-274-current-tail-b-replication/tail-b-objects",
+  "canonical_directory": "packing/campaign/explorations/X048-session-168-pilots/certificates/s184-tail-b-m3096315",
+  "scientific_verification_payload_unchanged": true,
+  "changed_metadata": [
+    "directory"
+  ],
+  "compressed_objects_copied_verbatim": true,
+  "objects": [
+    {
+      "path": "packing/campaign/explorations/X048-session-168-pilots/certificates/s184-tail-b-m3096315/node-2098d790374d452c3b3c35684beea54b72215640d52fd0e12f06f8134b6d83b6.json.gz",
+      "asset": "node-2098d790374d452c3b3c35684beea54b72215640d52fd0e12f06f8134b6d83b6.json.gz",
+      "size": 16818984,
+      "sha256": "cdaf14a0e2311265104592cd4db8914cbc2c985294e04666c7ab78c44a35b203"
+    },
+    {
+      "path": "packing/campaign/explorations/X048-session-168-pilots/certificates/s184-tail-b-m3096315/seed-b9d072687d39cc3cc6d3670be61eec2755587139235dd93c72ece0ba66ce59f2.json.gz",
+      "asset": "seed-b9d072687d39cc3cc6d3670be61eec2755587139235dd93c72ece0ba66ce59f2.json.gz",
+      "size": 21968,
+      "sha256": "5bd5cb7b3a1aec1556aaf4d7014f9e69516db38c8bb0b7bdeb8fbba545c98808"
+    }
+  ],
+  "canonical_identities": {
+    "seed_sha256": "b9d072687d39cc3cc6d3670be61eec2755587139235dd93c72ece0ba66ce59f2",
+    "node_sha256": "2098d790374d452c3b3c35684beea54b72215640d52fd0e12f06f8134b6d83b6"
+  },
+  "full_standing_counts": {
+    "collision_facet_checks": 34004964,
+    "collision_regions": 5791,
+    "cover_checks": 1728,
+    "partner_rows": 26762,
+    "rows_full": 1728,
+    "seed_points": 10,
+    "seed_rows": 1088,
+    "steps": 27
+  },
+  "publication_complete": false
+}

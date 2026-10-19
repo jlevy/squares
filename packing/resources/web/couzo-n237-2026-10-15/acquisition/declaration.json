@@ -1,0 +1,69 @@
+{
+  "format": "external-source-declaration-v1",
+  "id": "franciscouzo-square-packing",
+  "source_url": "https://github.com/franciscouzo/square-packing",
+  "source_ref": "master",
+  "source_commit": "58a783368d4b7e70bb800f0009ea9ca03e578739",
+  "retrieved_at_utc": "2026-10-15T02:45Z",
+  "git_scope": "Blobless clone, sparse checkout of the named files at the pinned commit, the head of master when retrieved and four commits past 43ac7d2, the pin of issue #607. 4e4c8ce (2026-10-15T00:31:53Z) adds certificates/n237.cert, an exact certificate at 237 that no issue reports, and the same bytes at certificates/best/n237.cert; 58a7833 leaves both unchanged and adds the Göbel square and strip comparison. The certificate is retained as factual data. Its metadata, the decimal packing and its drawing, the three READMEs that print its side, the author's index files and checker, and the checker's licence are pinned by digest only. The rest of the tree, including the several hundred other certificates of 4e4c8ce and the search programs, is pinned by the commit and was not retained or executed.",
+  "archived_dir": "source",
+  "license": "No licence file or reuse terms for the author's files at the pin: the tree has no LICENSE, and neither README.md nor certificates/README.md states terms. BOUND_VERIFIER_LICENSE.txt is Evan Daniel's MIT licence, which covers the author's checker verify_bound_certificate.py and not the certificates. The certificate is retained as factual data under the owner decision of 2026-10-09 recorded in resources/web/known-best-packings/README.md (Retained Factual Data); prose is hash-pinned and not copied.",
+  "claims": [
+    "Commit 4e4c8ce (2026-10-15T00:31:53Z) adds certificates/n237.cert, stating s(237) <= 7951301819129798440089572127137/500000000000000000000000000000 = 15.90260363825959688..., printed rounded up as 15.902603638260 in certificates/README.md and certificates/best/README.md. No issue reports it. Its metadata calls it an exact optimum seeded from Mykhailo Polkovskyi's issue-593 certificate and found by the author's fq search; the index credits Francisco Couzo, with construction credit Nate Chaoweeraprasit (itsnaka).",
+    "The certificate is 2.40e-11 below the n237 certificate of issue #607 (43ac7d2, submissions/2026-10-14/certificates/n237.cert, printed 15.902603638284), a different file, and the issue has not been updated to name it.",
+    "certificates/best/manifest.json reports that the author's checker verify_bound_certificate.py and this repository's sqpack verify.py at 37e6757 accept it in exact rational arithmetic. Those statements are the author's; no source program ran here."
+  ],
+  "scope": [
+    "README.md",
+    "BOUND_VERIFIER_LICENSE.txt",
+    "verify_bound_certificate.py",
+    "upper_bounds.json",
+    "n237.txt",
+    "n237.svg",
+    "certificates/README.md",
+    "certificates/n237.cert",
+    "certificates/n237.json",
+    "certificates/best/README.md",
+    "certificates/best/SHA256SUMS",
+    "certificates/best/manifest.json",
+    "certificates/best/n237.cert"
+  ],
+  "pinned_only": [
+    {
+      "match": "**/README.md",
+      "reason": "No licence for the author's prose; the root README and the two certificate READMEs print the side and the credits. Hash-pinned, not copied."
+    },
+    {
+      "match": "certificates/best/n237.cert",
+      "reason": "Byte-identical to the retained certificates/n237.cert (Git blob 788bdc538d8a561f5e33dfd517d227fa8c0bb04c at both paths); pinned so the index's copy is bound too."
+    },
+    {
+      "match": "certificates/n237.json",
+      "reason": "The source's per-certificate metadata: digests, exact side, kind and seed credit as prose; pinned for provenance, as no claim rests on it."
+    },
+    {
+      "match": "certificates/best/SHA256SUMS",
+      "reason": "The author's digest list for the index directory; its n237.cert line equals the retained file's SHA-256. Pinned for provenance."
+    },
+    {
+      "match": "certificates/best/manifest.json",
+      "reason": "The author's index of every count's witness, credit and checker receipts, 1 MB; pinned for provenance, as no claim here rests on it."
+    },
+    {
+      "match": "upper_bounds.json",
+      "reason": "The author's upper-bound index for n = 1..1024; pinned for provenance, as no claim here rests on it."
+    },
+    {
+      "match": "n237.*",
+      "reason": "The decimal packing the certificate was solved from and its drawing; pinned for provenance, as no claim rests on them."
+    },
+    {
+      "match": "BOUND_VERIFIER_LICENSE.txt",
+      "reason": "Evan Daniel's MIT licence for the author's checker; pinned beside the checker it covers."
+    },
+    {
+      "match": "verify_bound_certificate.py",
+      "reason": "The author's exact checker; pinned for provenance and never executed here."
+    }
+  ]
+}

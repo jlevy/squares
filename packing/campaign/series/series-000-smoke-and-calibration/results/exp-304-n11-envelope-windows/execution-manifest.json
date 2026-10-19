@@ -1,0 +1,86 @@
+{
+  "schema": "registered-phase-command-plan/v1",
+  "target_unrun": true,
+  "registration_state": "registered_before_target",
+  "working_directory": "packing",
+  "phases": [
+    {
+      "name": "construction",
+      "argv": [
+        "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+        "-m",
+        "devtools.check_n17_n11_envelope_windows",
+        "--descriptor",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-304-n11-envelope-windows/descriptor.json",
+        "--max-seconds",
+        "60",
+        "--output",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-304-n11-envelope-windows/certificate.json"
+      ]
+    },
+    {
+      "name": "fresh_verification",
+      "argv": [
+        "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+        "-m",
+        "devtools.check_n17_n11_envelope_windows",
+        "--descriptor",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-304-n11-envelope-windows/descriptor.json",
+        "--max-seconds",
+        "60",
+        "--certificate",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-304-n11-envelope-windows/certificate.json",
+        "--output",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-304-n11-envelope-windows/replay.json"
+      ]
+    }
+  ],
+  "runner_argv": [
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-m",
+    "devtools.run_registered_phases",
+    "--manifest",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-304-n11-envelope-windows/execution-manifest.json",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-304-n11-envelope-windows/phase-execution.json"
+  ],
+  "supervisor_argv": [
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-m",
+    "devtools.supervise_posix",
+    "--max-seconds",
+    "120",
+    "--max-memory-mib",
+    "4096",
+    "--sample-seconds",
+    "0.25",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-304-n11-envelope-windows/supervision.json",
+    "--stdout",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-304-n11-envelope-windows/stdout.log",
+    "--stderr",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-304-n11-envelope-windows/stderr.log",
+    "--",
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-m",
+    "devtools.run_registered_phases",
+    "--manifest",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-304-n11-envelope-windows/execution-manifest.json",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-304-n11-envelope-windows/phase-execution.json"
+  ],
+  "resources": {
+    "construction_seconds": 60,
+    "fresh_seconds": 60,
+    "combined_term_seconds": 120,
+    "combined_kill_seconds": 130,
+    "sampled_memory_mib_per_live_process": 4096,
+    "memory_scope": "per_live_process_in_owned_group",
+    "workers": 1,
+    "input_bytes": 10485760,
+    "output_bytes": 67108864,
+    "normalized_geometry_bits": 4096
+  },
+  "criterion": "All95 accepted distance2 representatives receive complete exact576-window classifications,54,720 counts total. Primary: at least one checked window contains whole unit-square envelopes from11 distinct occupied cells in an H=31/8 square, contradicting the inherited T061 exact n11 lower bound3875000000/999999999. Whole-square containment is required, not centre containment. Fresh positive checking rejoins eleven names, exact envelope/window containment and theorem roles; fresh negative checking recomputes every count. All95 complete negatives retire this conservative envelope rule only. No ordinary census admission occurs without separate review/integration. Resource/refusal or partial outcomes remain unresolved.",
+  "registered_at": "2026-10-08T02:27:42.201379+00:00"
+}

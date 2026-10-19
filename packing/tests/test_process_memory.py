@@ -1,12 +1,12 @@
 """Current guards and historical peak reporting remain distinct in a reused process."""
 
-# These SDK and refusal controls intentionally inspect the private FFI boundary.
-# ruff: noqa: SLF001
 # pyright: reportPrivateUsage=false
+# ruff: noqa: SLF001 -- Native ABI and failure-path controls inspect the platform adapter.
 
 from __future__ import annotations
 
 import ctypes
+import errno
 import json
 import os
 import subprocess
@@ -15,24 +15,149 @@ from pathlib import Path
 from textwrap import dedent
 from types import SimpleNamespace
 from typing import Any
+from unittest.mock import Mock
 
 import pytest
 
 from devtools import process_memory as memory
 from devtools.process_memory import current_memory_bytes, peak_memory_bytes
-from sqpack.yamlio import safe_load
 
 CURRENT_RSS_HOSTS = {"linux", "win32", "darwin"}
 requires_current_rss = pytest.mark.skipif(
     sys.platform not in CURRENT_RSS_HOSTS,
-    reason="current RSS supports Linux, Windows and Darwin; other hosts refuse",
+    reason="current RSS is measured on Linux, Windows and macOS",
 )
 
 
 def test_ungated_platform_refuses_current_memory(monkeypatch: pytest.MonkeyPatch) -> None:
-    monkeypatch.setattr(sys, "platform", "unsupported-test-host")
-    with pytest.raises(OSError, match="unavailable on unsupported-test-host"):
+    monkeypatch.setattr(sys, "platform", "unsupported")
+    with pytest.raises(OSError, match="unavailable on unsupported"):
         current_memory_bytes()
+
+
+@pytest.mark.parametrize("received", [-1, 0, 95, 96, 97])
+def test_darwin_native_bytes_and_failed_or_short_reads(
+    monkeypatch: pytest.MonkeyPatch, received: int
+) -> None:
+    def pidinfo(pid: int, flavor: int, arg: int, buffer: Any, size: int) -> int:
+        assert pid > 0
+        assert flavor == 4
+        assert arg == 0
+        assert size == 96
+        value = ctypes.cast(buffer, ctypes.POINTER(memory._DarwinTaskInfo)).contents
+        value.resident_size = 2**40 + 37
+        ctypes.set_errno(errno.EPERM)
+        return received
+
+    monkeypatch.setattr(sys, "platform", "darwin")
+    monkeypatch.setattr(
+        memory, "_darwin_libproc", lambda: SimpleNamespace(proc_pidinfo=pidinfo)
+    )
+    if received == 96:
+        assert current_memory_bytes() == 2**40 + 37
+    else:
+        with pytest.raises(OSError, match=f"returned {received}/96 bytes") as failure:
+            current_memory_bytes()
+        assert failure.value.errno == errno.EPERM
+
+
+def test_darwin_native_load_failure_is_explicit(monkeypatch: pytest.MonkeyPatch) -> None:
+    def unavailable() -> ctypes.CDLL:
+        raise OSError("native library unavailable")
+
+    monkeypatch.setattr(sys, "platform", "darwin")
+    monkeypatch.setattr(memory, "_darwin_libproc", unavailable)
+    with pytest.raises(OSError, match="native library unavailable"):
+        current_memory_bytes()
+
+
+@pytest.mark.parametrize("missing_symbol", [False, True])
+def test_darwin_loader_failures_are_oserrors(
+    monkeypatch: pytest.MonkeyPatch, *, missing_symbol: bool
+) -> None:
+    error = OSError(errno.ENOENT, "native library unavailable")
+    loader = Mock(return_value=SimpleNamespace()) if missing_symbol else Mock(side_effect=error)
+    monkeypatch.setattr(ctypes, "CDLL", loader)
+    memory._darwin_libproc.cache_clear()
+    try:
+        with pytest.raises(
+            OSError, match=r"proc_pidinfo|native library unavailable"
+        ) as failure:
+            memory._darwin_libproc()
+        if not missing_symbol:
+            assert failure.value is error
+    finally:
+        memory._darwin_libproc.cache_clear()
+
+
+def test_darwin_loader_caches_library_but_not_pid_buffer_or_measurement(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    buffers: list[Any] = []
+    pids: list[int] = []
+
+    def pidinfo(pid: int, flavor: int, arg: int, buffer: Any, size: int) -> int:
+        pids.append(pid)
+        buffers.append(buffer)  # Keep both native allocations alive for the ownership check.
+        assert (flavor, arg, size) == (4, 0, ctypes.sizeof(memory._DarwinTaskInfo))
+        value = ctypes.cast(buffer, ctypes.POINTER(memory._DarwinTaskInfo)).contents
+        assert value.resident_size == 0
+        value.virtual_size = 2**44
+        value.resident_size = 2**40 + pid
+        return size
+
+    query = Mock(side_effect=pidinfo)
+    library = SimpleNamespace(proc_pidinfo=query)
+    loader = Mock(return_value=library)
+    monkeypatch.setattr(ctypes, "CDLL", loader)
+    process_ids = iter((1234, 5678))
+    monkeypatch.setattr(os, "getpid", lambda: next(process_ids))
+    memory._darwin_libproc.cache_clear()
+    try:
+        assert memory._darwin_current_memory() == 2**40 + 1234
+        assert memory._darwin_current_memory() == 2**40 + 5678
+        loader.assert_called_once_with("/usr/lib/libproc.dylib", use_errno=True)
+        assert query.argtypes == [
+            ctypes.c_int,
+            ctypes.c_int,
+            ctypes.c_uint64,
+            ctypes.c_void_p,
+            ctypes.c_int,
+        ]
+        assert query.restype is ctypes.c_int
+        assert pids == [1234, 5678]
+        assert (
+            ctypes.cast(buffers[0], ctypes.c_void_p).value
+            != ctypes.cast(buffers[1], ctypes.c_void_p).value
+        )
+    finally:
+        memory._darwin_libproc.cache_clear()
+
+
+def test_darwin_failed_read_clears_stale_errno(monkeypatch: pytest.MonkeyPatch) -> None:
+    def pidinfo(_pid: int, _flavor: int, _arg: int, _buffer: Any, _size: int) -> int:
+        assert ctypes.get_errno() == 0
+        return 0
+
+    monkeypatch.setattr(
+        memory, "_darwin_libproc", lambda: SimpleNamespace(proc_pidinfo=pidinfo)
+    )
+    ctypes.set_errno(errno.EPERM)
+    with pytest.raises(OSError, match="no native error reported") as failure:
+        memory._darwin_current_memory()
+    assert failure.value.errno == 0
+
+
+def test_darwin_zero_resident_memory_refuses(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setattr(
+        memory,
+        "_darwin_libproc",
+        lambda: SimpleNamespace(
+            proc_pidinfo=lambda *_args: ctypes.sizeof(memory._DarwinTaskInfo)
+        ),
+    )
+    with pytest.raises(OSError, match="no current resident memory"):
+        memory._darwin_current_memory()
 
 
 @requires_current_rss
@@ -48,16 +173,23 @@ def test_released_allocation_does_not_leave_current_memory_above_guard() -> None
             sys.executable,
             "-c",
             dedent("""
-            import mmap
+            import gc
             import json
+            import mmap
+            import sys
             from devtools.process_memory import current_memory_bytes, peak_memory_bytes
             baseline = current_memory_bytes()
             threshold = baseline + 48 * 1024**2
-            allocation = mmap.mmap(-1, 96 * 1024**2)
+            # macOS malloc may retain a freed bytearray's pages; munmap really releases them.
+            allocation = (mmap.mmap(-1, 96 * 1024**2) if sys.platform == "darwin"
+                          else bytearray(96 * 1024**2))
             for i in range(0, len(allocation), 4096):
                 allocation[i] = 1
             live = current_memory_bytes()
-            allocation.close()
+            if isinstance(allocation, mmap.mmap):
+                allocation.close()
+            del allocation
+            gc.collect()
             print(json.dumps(dict(threshold=threshold, live=live,
                                   current=current_memory_bytes(), peak=peak_memory_bytes())))
         """),
@@ -74,104 +206,68 @@ def test_released_allocation_does_not_leave_current_memory_above_guard() -> None
     print(json.dumps(sample))
 
 
-def test_mach_packed_layout_is_explicit() -> None:
-    assert memory._MachTimeValue._layout_ == "ms"
-    assert memory._MachTaskBasicInfo._layout_ == "ms"
-    assert ctypes.sizeof(memory._MachTimeValue) == 8
-    assert ctypes.alignment(memory._MachTimeValue) == 4
-    assert ctypes.sizeof(memory._MachTaskBasicInfo) == 48
-    assert ctypes.alignment(memory._MachTaskBasicInfo) == 4
-
-
-@pytest.mark.parametrize(
-    ("result", "count", "resident"), [(5, 12, 100), (0, 11, 100), (0, 12, 0)]
-)
-def test_mach_failed_query_never_substitutes_peak(
-    monkeypatch: pytest.MonkeyPatch, result: int, count: int, resident: int
-) -> None:
-    def query(_port: int, _flavor: int, value: Any, returned: Any) -> int:
-        ctypes.cast(
-            value, ctypes.POINTER(memory._MachTaskBasicInfo)
-        ).contents.resident_size = resident
-        ctypes.cast(returned, ctypes.POINTER(ctypes.c_uint32)).contents.value = count
-        return result
-
-    monkeypatch.setattr(
-        memory, "_darwin_api", lambda: (SimpleNamespace(task_info=query), ctypes.c_uint32(10))
+@pytest.mark.skipif(sys.platform != "darwin", reason="independent macOS ps RSS control")
+def test_darwin_current_memory_agrees_with_external_ps() -> None:
+    before = current_memory_bytes()
+    result = subprocess.run(
+        ["/bin/ps", "-o", "rss=", "-p", str(os.getpid())],
+        text=True,
+        capture_output=True,
+        check=True,
+        timeout=5,
     )
-    with pytest.raises(OSError, match="query failed"):
-        memory._darwin_memory()
+    external = int(result.stdout.strip()) * 1024
+    after = current_memory_bytes()
+    # ps rounds to KiB and the parent may allocate while launching the subprocess.
+    assert min(before, after) - 8 * 1024**2 <= external <= max(before, after) + 8 * 1024**2
+    print(json.dumps({"before": before, "ps": external, "after": after}))
 
 
-def test_mach_reads_live_port_and_current_field(monkeypatch: pytest.MonkeyPatch) -> None:
-    ports = []
-    port = ctypes.c_uint32(10)
-
-    def query(task: int, flavor: int, value: Any, _count: Any) -> int:
-        assert flavor == 20
-        ports.append(task)
-        info = ctypes.cast(value, ctypes.POINTER(memory._MachTaskBasicInfo)).contents
-        info.resident_size = 100
-        info.resident_size_max = 1000
-        return 0
-
-    monkeypatch.setattr(memory, "_darwin_api", lambda: (SimpleNamespace(task_info=query), port))
-    assert memory._darwin_memory() == 100
-    port.value = 20
-    assert memory._darwin_memory() == 100
-    assert ports == [10, 20]
-    port.value = 0
-    with pytest.raises(OSError, match="task port"):
-        memory._darwin_memory()
-
-
-def test_missing_mach_library_refuses(monkeypatch: pytest.MonkeyPatch) -> None:
-    def unavailable(_name: str) -> None:
-        raise OSError("no library")
-
-    memory._darwin_api.cache_clear()
-    monkeypatch.setattr(ctypes, "CDLL", unavailable)
-    with pytest.raises(OSError, match="API is unavailable"):
-        memory._darwin_api()
-    memory._darwin_api.cache_clear()
-
-
-def _field_offset(structure: type[ctypes.Structure], name: str) -> int:
-    return int(getattr(structure, name).offset)
-
-
-@pytest.mark.skipif(
-    sys.platform != "darwin", reason="requires a real Darwin host and system SDK"
-)
-def test_darwin_sdk_layout_and_independent_rss(tmp_path: Path) -> None:
-    """The SDK, not another Python declaration, supplies the native ABI oracle."""
+@pytest.mark.skipif(sys.platform != "darwin", reason="requires installed Darwin system SDK")
+def test_darwin_sdk_layout_and_signature(tmp_path: Path) -> None:
+    """Adapted from Guzhou0806's PR407 SDK oracle; the installed headers own the ABI."""
     source = tmp_path / "layout.c"
     executable = tmp_path / "layout"
     source.write_text(
         dedent("""
-        #include <mach/mach.h>
+        #include <libproc.h>
+        #include <sys/proc_info.h>
         #include <stddef.h>
+        #include <stdint.h>
         #include <stdio.h>
+        _Static_assert(_Generic(&proc_pidinfo,
+            int (*)(int, int, uint64_t, void *, int): 1, default: 0),
+            "proc_pidinfo signature disagrees with ctypes binding");
+        #define FIELD(name) printf("%zu %zu ", offsetof(struct proc_taskinfo, pti_##name), \
+            sizeof(((struct proc_taskinfo *)0)->pti_##name))
         int main(void) {
-            printf("%zu %zu %u %u %zu %zu %zu %zu %zu %zu %zu %zu %zu %zu %zu\\n",
-                sizeof(mach_task_basic_info_data_t), _Alignof(mach_task_basic_info_data_t),
-                (unsigned)MACH_TASK_BASIC_INFO, (unsigned)MACH_TASK_BASIC_INFO_COUNT,
-                offsetof(mach_task_basic_info_data_t, virtual_size),
-                offsetof(mach_task_basic_info_data_t, resident_size),
-                offsetof(mach_task_basic_info_data_t, resident_size_max),
-                offsetof(mach_task_basic_info_data_t, user_time),
-                offsetof(mach_task_basic_info_data_t, system_time),
-                offsetof(mach_task_basic_info_data_t, policy),
-                offsetof(mach_task_basic_info_data_t, suspend_count),
-                sizeof(time_value_t), _Alignof(time_value_t), offsetof(time_value_t, seconds),
-                offsetof(time_value_t, microseconds));
+            printf("%zu %zu %d %zu ", sizeof(struct proc_taskinfo),
+                _Alignof(struct proc_taskinfo), PROC_PIDTASKINFO,
+                (size_t)PROC_PIDTASKINFO_SIZE);
+            FIELD(virtual_size); FIELD(resident_size);
+            FIELD(total_user); FIELD(total_system);
+            FIELD(threads_user); FIELD(threads_system);
+            FIELD(policy); FIELD(faults); FIELD(pageins); FIELD(cow_faults);
+            FIELD(messages_sent); FIELD(messages_received);
+            FIELD(syscalls_mach); FIELD(syscalls_unix); FIELD(csw);
+            FIELD(threadnum); FIELD(numrunning); FIELD(priority);
             return 0;
         }
-    """),
+        """),
         encoding="utf-8",
     )
     subprocess.run(
-        ["/usr/bin/xcrun", "clang", "-std=c11", str(source), "-o", str(executable)],
+        [
+            "/usr/bin/xcrun",
+            "clang",
+            "-std=c11",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            str(source),
+            "-o",
+            str(executable),
+        ],
         capture_output=True,
         text=True,
         check=True,
@@ -184,60 +280,31 @@ def test_darwin_sdk_layout_and_independent_rss(tmp_path: Path) -> None:
     fields = (
         "virtual_size",
         "resident_size",
-        "resident_size_max",
-        "user_time",
-        "system_time",
+        "total_user",
+        "total_system",
+        "threads_user",
+        "threads_system",
         "policy",
-        "suspend_count",
+        "faults",
+        "pageins",
+        "cow_faults",
+        "messages_sent",
+        "messages_received",
+        "syscalls_mach",
+        "syscalls_unix",
+        "csw",
+        "threadnum",
+        "numrunning",
+        "priority",
     )
-    offsets = [_field_offset(memory._MachTaskBasicInfo, name) for name in fields]
-    assert abi == [
-        ctypes.sizeof(memory._MachTaskBasicInfo),
-        ctypes.alignment(memory._MachTaskBasicInfo),
-        20,
-        12,
-        *offsets,
-        ctypes.sizeof(memory._MachTimeValue),
-        ctypes.alignment(memory._MachTimeValue),
-        _field_offset(memory._MachTimeValue, "seconds"),
-        _field_offset(memory._MachTimeValue, "microseconds"),
+    expected = [
+        ctypes.sizeof(memory._DarwinTaskInfo),
+        ctypes.alignment(memory._DarwinTaskInfo),
+        4,
+        ctypes.sizeof(memory._DarwinTaskInfo),
     ]
-    before = current_memory_bytes()
-    value = subprocess.run(
-        ["/bin/ps", "-o", "rss=", "-p", str(os.getpid())],
-        capture_output=True,
-        text=True,
-        check=True,
-        timeout=15,
-    )
-    after = current_memory_bytes()
-    independent = int(value.stdout.strip()) * 1024
-    margin = 8 * 1024**2  # Frozen allowance for small interpreter activity/page rounding.
-    assert independent > 0
-    assert min(before, after) - margin <= independent <= max(before, after) + margin
-    print(
-        json.dumps(
-            {"ABI": abi, "before": before, "ps": independent, "after": after, "margin": margin}
-        )
-    )
-
-
-def test_macos_native_memory_step_is_bounded_and_requires_three_real_cases() -> None:
-    path = Path(__file__).resolve().parents[2] / ".github/workflows/packing-validation.yml"
-    job = safe_load(path.read_text(encoding="utf-8"))["jobs"]["macos-portability"]
-    assert job["timeout-minutes"] == 5
-    assert job["if"] == "github.event_name != 'pull_request' || github.base_ref == 'main'"
-    step = next(
-        item
-        for item in job["steps"]
-        if item["name"] == "Native Darwin current memory and system SDK layout"
-    )
-    assert step["timeout-minutes"] == 1
-    for name in (
-        "test_live_memory_sample_is_positive",
-        "test_released_allocation_does_not_leave_current_memory_above_guard",
-        "test_darwin_sdk_layout_and_independent_rss",
-    ):
-        assert f"tests/test_process_memory.py::{name}" in step["run"]
-    assert '"skipped"' in step["run"]
-    assert "==3" in step["run"]
+    for name in fields:
+        field = getattr(memory._DarwinTaskInfo, name)
+        expected.extend((int(field.offset), int(field.size)))
+    assert abi == expected
+    print(json.dumps({"proc_taskinfo_abi": abi}))

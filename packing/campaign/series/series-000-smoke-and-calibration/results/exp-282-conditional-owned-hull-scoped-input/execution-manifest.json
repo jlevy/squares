@@ -1,0 +1,60 @@
+{
+  "cwd": "packing",
+  "construction": [
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-m",
+    "devtools.probe_n17_conditional_owned_hull",
+    "--descriptor",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-282-conditional-owned-hull-scoped-input/descriptor.json",
+    "--max-seconds",
+    "60",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-282-conditional-owned-hull-scoped-input/certificate.json"
+  ],
+  "fresh_verification": [
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-m",
+    "devtools.probe_n17_conditional_owned_hull",
+    "--descriptor",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-282-conditional-owned-hull-scoped-input/descriptor.json",
+    "--max-seconds",
+    "60",
+    "--check",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-282-conditional-owned-hull-scoped-input/certificate.json",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-282-conditional-owned-hull-scoped-input/replay.json"
+  ],
+  "combined_supervision": {
+    "wall_seconds": 120,
+    "term_at_seconds": 120,
+    "kill_at_seconds": 130,
+    "sampled_current_rss_mib": 4096,
+    "scope": "two sequential phase arrays inside one parent lease; no retry or propagation"
+  },
+  "schema": "n17-conditional-owned-hull-registration/v1",
+  "registered_at": "2026-10-07T13:16:33Z",
+  "lease_expires": "2026-10-07T13:36:33Z",
+  "target_unrun": true,
+  "source_freeze": "This registration commit; clean relevant source blobs required at actual launch.",
+  "supervisor_argv": [
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-m",
+    "devtools.supervise_posix",
+    "--max-seconds",
+    "120",
+    "--max-memory-mib",
+    "4096",
+    "--sample-seconds",
+    "1",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-282-conditional-owned-hull-scoped-input/supervision.json",
+    "--stdout",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-282-conditional-owned-hull-scoped-input/stdout.log",
+    "--stderr",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-282-conditional-owned-hull-scoped-input/stderr.log",
+    "--",
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-c",
+    "import json,subprocess,sys; from pathlib import Path; m=json.loads(Path(\"campaign/series/series-000-smoke-and-calibration/results/exp-282-conditional-owned-hull-scoped-input/execution-manifest.json\").read_text()); a=subprocess.run(m[\"construction\"],check=False); sys.exit(a.returncode) if a.returncode else None; sys.exit(subprocess.run(m[\"fresh_verification\"],check=False).returncode)"
+  ]
+}

@@ -41,7 +41,7 @@ accepted the C and S geometry after correcting the C rational-witness statement 
 The proposed readers are not implemented or admitted here.
 
 The working plan is the
-[daytime strategy plan](../../../docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md),
+[daytime strategy plan](../../../docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md),
 with agenda 035. That plan explicitly leaves the owner-requested V3 source unresolved
 under `think-i1fr`; this analysis does not claim V3 alignment.
 That missing planning source does not prevent the following deductions from the frozen

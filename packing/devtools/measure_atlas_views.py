@@ -4,24 +4,25 @@ layouts.
 
 The atlas is one set of tiles, a drawing of the best packing known for each case, that
 the reader sets as a grid or as a triangle (`templates/paper-design.md`, Atlas views),
-at a size of tile, Small, Medium or Large (`overview/atlas-view.js`). A tile carries the
-new-result star after its number where the case has a new result, and the regularized
-layer's badge before it where it is drawn from that view.
-The triangle's row k holds the 2k - 1 cases a square of side k is known to hold and ends
-at k squared on the right edge; a row too long for the page wraps in reading order, every
-line but its last full from the left and the last holding what is left over, set from the
-right. This opens a built overview in Chromium and reports what the browser made of that:
+at a size of tile, Small, Medium or Large (`overview/atlas-view.js`). A tile carries its
+centered case number. Selected derived
+drawings are shown directly, without layer labels.
+The triangle keeps each complete row of 2k - 1 cases, ending at k squared, aligned to
+a common right edge. Its scroll frame pans wide rows at the same drawing scale as Grid.
+This opens a built overview in Chromium and reports what the
+browser made of that:
 
 - `layout` reports each view at each width, with the first hundred cases and with all of
   them: the block's width, how many tiles a line holds, a tile's and a drawing's width,
   the size of a tile's number, how many lines the tiles take and how tall they stand, and
   the rows that wrap. With them it reports what a layout may not do (`layout_problems`):
   run past the window, set a tile outside the block or over another, break the order of
-  the cases, leave a perfect square off the right edge, cut a row into lines other than
-  `row_lines` gives, or start a line of a wrapped row, but its last, anywhere but the
-  left edge. Each layout is read at each size (`SIZES`), and a tile's marks have their
-  own faults (`mark_problems`): a star that runs over its number or leaves its tile, a
-  badge that does either, and a number not centred in its tile.
+  the cases, cut a row into lines other than `row_lines` gives, or start any Triangle
+  row away from the canvas's right edge. Each layout is read at each size (`SIZES`), and
+  count centering is checked by `mark_problems`. The probe also records actual
+  enclosing-outline and count-ink bounds; `ink_clearances` measures ordinary horizontal
+  gaps and the deepest count's clearance above the next drawing. Stars and obsolete
+  layer badges are also reported for geometry and presence checks.
   `--markdown` prints one line a layout.
 - `move` times each change of layout (`CHANGES`: to the triangle and back, with a hundred
   cases and with all, the expander's change in the triangle, and changes of size in each
@@ -40,12 +41,17 @@ right. This opens a built overview in Chromium and reports what the browser made
   counters then show what a reader's browser does.
 - `shots` writes pictures to `--out`: the atlas block in each view at each width, in the
   light theme and the dark, with a hundred cases and with all, at each size (the
-  pictures at Small and Large end `-small` and `-large`); the two actions under a
+  pictures at Medium and Large end `-medium` and `-large`); the two actions under a
   table and under the grid, "See all results" and the expander collapsed and expanded,
   at each width in both themes; and the window at five points of the move from the grid
   to the triangle (0, 25, 50, 75 and 100 percent).
+- `readme` writes the one picture README opens with to `--out`: the tiles alone, every
+  case in the triangle at the page's own size, in the light theme, at twice the pixels
+  of a window wide enough that no row pans (`README_WINDOW`), cut to the tiles. Run it
+  on the published site, so the picture shows what a reader who clicks it finds.
 
-`PAGE` is a built `index.html`, or a directory `preview_site` built. `--render` renders
+`PAGE` is a built `atlas.html`, a directory `preview_site` built, or the address of a
+published one, such as `https://jlevy.github.io/squares/atlas.html`. `--render` renders
 the overview alone into `PAGE` first, which takes seconds where a whole site takes a
 minute. Usage, from `packing/`:
 
@@ -55,6 +61,9 @@ minute. Usage, from `packing/`:
         move PAGE --width 1280 --runs 5 --markdown
     uv run --frozen --all-extras --group dev python -m devtools.measure_atlas_views \
         shots PAGE --out DIR
+    uv run --frozen --all-extras --group dev python -m devtools.measure_atlas_views \
+        readme https://jlevy.github.io/squares/atlas.html \
+        --out ../docs/images/atlas-triangle-1-324.png
 
 Set `SQPACK_CHROMIUM` to use a browser the environment supplies, as the other tools do.
 """
@@ -62,6 +71,7 @@ Set `SQPACK_CHROMIUM` to use a browser the environment supplies, as the other to
 from __future__ import annotations
 
 import argparse
+import io
 import itertools
 import json
 import math
@@ -77,20 +87,25 @@ from sqpack.probes import probe
 
 PROBES = Path(__file__).resolve().parent / "probes"
 LAYOUT = probe(PROBES, "measure_atlas_views/layout")
+EXPANSION = probe(PROBES, "measure_atlas_views/expansion")
 MOVE = probe(PROBES, "measure_atlas_views/move")
 HOLD = probe(PROBES, "measure_atlas_views/hold")
 SETTLED = probe(PROBES, "measure_atlas_views/settled")
 TOP = probe(PROBES, "measure_atlas_views/top")
 QUIET = probe(PROBES, "measure_atlas_views/quiet")
+DRAWN = probe(PROBES, "measure_atlas_views/drawn")
+WHOLE = probe(PROBES, "measure_atlas_views/whole")
 
-MODES = ("layout", "move", "shots")
+MODES = ("layout", "move", "shots", "readme")
 VIEWS = ("grid", "triangle")
 #: The atlas's three sizes of tile, in tab order: the key `?size=` takes. The drawing
 #: tabs, House and Regularized, that stood here as `LAYERS` went on 2026-10-04
 #: (think-k8x9).
 SIZES = ("small", "medium", "large")
-#: The size a plain address opens at, which `?size=` does not name.
-MEDIUM = "medium"
+#: The explicit baseline size used by measurements; wide-screen defaults vary.
+DEFAULT_SIZE = "small"
+SCALES = ("fixed", "row", "global")
+DEFAULT_SCALE = "row"
 WIDTHS = (1280, 1024, 768, 390)
 SCHEMES = ("light", "dark")
 #: The points of a move a picture is taken at, as shares of its duration.
@@ -98,6 +113,17 @@ FRACTIONS = (0.0, 0.25, 0.5, 0.75, 1.0)
 #: The windows the move is pictured in, each with the hundred and with every case: a
 #: desktop tall enough to hold the whole triangle under its heading, and a phone.
 FRAME_WINDOWS = ((1280, 1200), (390, 844))
+#: The window README's picture is taken in, wide enough that the triangle's last row of
+#: 35 tiles stands whole at Small once the block may fill it and tall enough to hold
+#: every row, and the device pixels a CSS pixel becomes.
+README_WINDOW, README_PIXELS = (3200, 2000), 2
+#: The margin README's picture keeps around the tiles, in CSS pixels.
+README_MARGIN = 8
+#: The colours README's picture is reduced to. The tiles are flat fills, so a palette
+#: loses nothing visible and takes the file from 1.9 MB to about 0.6 MB, which matters:
+#: `docs/` is copied whole into every negative-control worker, against its 216 MiB cap
+#: (`run_negative_controls.SNAPSHOT_MAX_BYTES`).
+README_COLORS = 256
 #: How far two edges may differ and still be one edge, in CSS pixels.
 EDGE = 0.75
 EXPANDER = "[data-atlas-toggle]"
@@ -131,7 +157,9 @@ def size_tab(size: str) -> str:
 
 
 #: The presses `move` makes on one page, in order: what the change is called, how many
-#: cases show once it is made, and the control pressed. A change with no name is made
+#: nominal cases for the state, and the control pressed. Preview Grid counts finish
+#: complete rows near 100; the report reads the actual count after its timed window.
+#: A change with no name is made
 #: and not timed: it only sets the page up for the next. The first two are such a pair,
 #: to the triangle and back. A first change of view brings the sections under the atlas
 #: nearer the window, and the page then typesets their math and loads the pages its
@@ -145,7 +173,7 @@ CHANGES: tuple[tuple[str | None, int, str], ...] = (
     ("triangle to grid", 100, tab("grid")),
     ("grid, medium to large", 100, size_tab("large")),
     ("grid, large to small", 100, size_tab("small")),
-    (None, 100, size_tab(MEDIUM)),
+    (None, 100, size_tab("medium")),
     (None, 324, EXPANDER),
     ("grid to triangle", 324, tab("triangle")),
     ("triangle to grid", 324, tab("grid")),
@@ -154,7 +182,7 @@ CHANGES: tuple[tuple[str | None, int, str], ...] = (
     ("triangle, 100 to 324", 324, EXPANDER),
     ("triangle, medium to large", 324, size_tab("large")),
     ("triangle, large to small", 324, size_tab("small")),
-    (None, 324, size_tab(MEDIUM)),
+    (None, 324, size_tab("medium")),
 )
 
 
@@ -170,15 +198,11 @@ def is_square(n: int) -> bool:
     return n >= 1 and math.isqrt(n) ** 2 == n
 
 
-def row_lines(k: int, per: int) -> tuple[int, ...]:
-    """How many tiles each line of row k holds when a line holds `per`: one line of
-    2k - 1 where that fits, else full lines and then what is left over, in reading
-    order. Nineteen tiles at eight a line are 8, 8 and 3."""
+def row_lines(k: int, per: int, _first_grid: int | None = None) -> tuple[int, ...]:
+    """One complete bound row, independent of viewport capacity and grid threshold."""
     if k < 1 or per < 1:
         raise ValueError(f"no row {k} at {per} a line")
-    tiles = 2 * k - 1
-    lines = -(-tiles // per)
-    return (*([per] * (lines - 1)), tiles - (lines - 1) * per)
+    return (2 * k - 1,)
 
 
 def _lines(tiles: Sequence[dict[str, Any]]) -> list[list[dict[str, Any]]]:
@@ -193,9 +217,9 @@ def _lines(tiles: Sequence[dict[str, Any]]) -> list[list[dict[str, Any]]]:
 def layout_problems(report: dict[str, Any]) -> list[str]:
     """What is wrong with a settled layout, in either view: the page runs past the
     window, a tile stands outside the block or over another, or the cases are out of
-    order reading left to right and top to bottom. In the triangle also: a perfect
-    square off the right edge, a row cut into lines other than `row_lines` gives, and a
-    wrapped row with a line, other than its last, that does not start at the left edge."""
+    order reading left to right and top to bottom. In the triangle also: a row cut into
+    lines other than `row_lines` gives, a row off the right edge of the pannable canvas,
+    or a segment separator unlike half a drawing."""
     problems: list[str] = []
     tiles: list[dict[str, Any]] = report["tiles"]
     if not tiles:
@@ -204,7 +228,11 @@ def layout_problems(report: dict[str, Any]) -> list[str]:
         problems.append(f"{report['moving']} tiles are still in a move")
     if report["overflow"] > 0:
         problems.append(f"the page runs {report['overflow']}px past the window")
-    cells = report["cells"]
+    cells = (
+        report.get("canvas", report["cells"])
+        if report["view"] == "triangle"
+        else report["cells"]
+    )
     outside = [
         tile["n"]
         for tile in tiles
@@ -229,34 +257,36 @@ def layout_problems(report: dict[str, Any]) -> list[str]:
     per = report["per_line"]
     if not per:
         return [*problems, "the triangle has no tiles to a line"]
-    right = max(tile["right"] for tile in tiles)
-    left = min(tile["left"] for tile in tiles)
-    off = [
-        tile["n"]
-        for tile in tiles
-        if is_square(tile["n"]) and abs(tile["right"] - right) > EDGE
-    ]
-    if off:
-        problems.append(f"perfect squares off the right edge: {off}")
     last = max(reading)
+    starts = {row_of(tile["n"]): tile["n"] for tile in tiles if tile.get("grid_from")}
     by_row: dict[int, list[list[int]]] = {}
     for line in lines:
-        by_row.setdefault(row_of(line[0]["n"]), []).append([tile["n"] for tile in line])
+        k = row_of(line[0]["n"])
+        by_row.setdefault(k, []).append([tile["n"] for tile in line])
         if len({row_of(tile["n"]) for tile in line}) > 1:
             problems.append(f"the line of n = {line[0]['n']} holds two rows")
+        if abs(line[-1]["right"] - cells["right"]) > EDGE:
+            problems.append(f"row {k}'s line of n = {line[0]['n']} misses the right edge")
     for k, found in sorted(by_row.items()):
         if k * k > last:
             continue
         sizes = tuple(len(line) for line in found)
-        if sizes != row_lines(k, per):
-            problems.append(f"row {k} is set {sizes}, not {row_lines(k, per)}")
-        for line in found[:-1]:
-            first = next(tile for tile in tiles if tile["n"] == line[0])
-            if abs(first["left"] - left) > EDGE:
-                problems.append(
-                    f"row {k} wraps and its line of n = {line[0]} starts "
-                    f"{first['left'] - left}px in"
-                )
+        expected = row_lines(k, per, starts.get(k))
+        if sizes != expected:
+            problems.append(f"row {k} is set {sizes}, not {expected}")
+    if "gap_px" in report:
+        for line in lines:
+            for left, right in itertools.pairwise(line):
+                expected_gap = report["gap_px"]
+                if right.get("grid_from"):
+                    expected_gap += (
+                        right.get("drawing_slot_width", right["drawing"]["width"]) / 2
+                    )
+                gap = right["left"] - left["right"]
+                if abs(gap - expected_gap) > EDGE:
+                    problems.append(
+                        f"the gap before n = {right['n']} is {gap}px, not {expected_gap}px"
+                    )
     return problems
 
 
@@ -305,6 +335,31 @@ def mark_problems(report: dict[str, Any]) -> list[str]:
     return problems
 
 
+def ink_clearances(report: dict[str, Any]) -> dict[str, tuple[float, float]]:
+    """Measured outline gaps and deepest count-ink gaps, excluding grid separators."""
+    lines = _lines(report["tiles"])
+    horizontal = [
+        after["outline"]["left"] - before["outline"]["right"]
+        for line in lines
+        for before, after in itertools.pairwise(line)
+        if before.get("outline")
+        and after.get("outline")
+        and not (report["view"] == "triangle" and after.get("grid_from"))
+    ]
+    vertical = [
+        min(tile["outline"]["top"] for tile in after)
+        - max(tile["number_ink"]["bottom"] for tile in before)
+        for before, after in itertools.pairwise(lines)
+        if all(tile.get("number_ink") for tile in before)
+        and all(tile.get("outline") for tile in after)
+    ]
+    return {
+        name: (min(gaps), max(gaps))
+        for name, gaps in (("horizontal", horizontal), ("vertical", vertical))
+        if gaps
+    }
+
+
 def summary(report: dict[str, Any]) -> dict[str, Any]:
     """One layout in a line: its sizes, its lines and the rows that wrap."""
     tiles: list[dict[str, Any]] = report["tiles"]
@@ -318,8 +373,10 @@ def summary(report: dict[str, Any]) -> dict[str, Any]:
     return {
         "view": report["view"],
         "size": report.get("size"),
+        "scale": report.get("scale", DEFAULT_SCALE),
         "shown": len(tiles),
         "starred": sum(tile.get("star") is not None for tile in tiles),
+        "ink_clearances": ink_clearances(report),
         "badged": sum(tile.get("mark") is not None for tile in tiles),
         "block": report["cells"]["width"],
         "per_line": report["per_line"] if report["view"] == "triangle" else len(lines[0]),
@@ -337,21 +394,28 @@ def launch(driver: Any) -> Any:
     return driver.chromium.launch(executable_path=os.environ.get(BROWSER_OVERRIDE))
 
 
+def expansion(page: Any, *, interrupt: bool = False) -> dict[str, Any]:
+    """Read real viewport heights through one expansion and optional interruption."""
+    return page.evaluate(EXPANSION, {"interrupt": interrupt})
+
+
 def settle(page: Any) -> None:
     """Wait until the tiles are placed and none is in a move."""
     page.wait_for_function(SETTLED)
 
 
-def query_for(view: str, size: str = MEDIUM) -> str:
-    """The query string that asks for `view` and `size`: nothing for the grid at Medium,
-    the defaults."""
+def query_for(view: str, size: str = DEFAULT_SIZE, scale: str = DEFAULT_SCALE) -> str:
+    """Ask for the measured size explicitly, including Small on wide screens."""
     if view not in VIEWS:
         raise ValueError(f"the atlas has no view {view!r}")
     if size not in SIZES:
         raise ValueError(f"the atlas has no size {size!r}")
+    if scale not in SCALES:
+        raise ValueError(f"the atlas has no scale {scale!r}")
     params = [
-        *(["atlas=triangle"] if view == "triangle" else []),
-        *([f"size={size}"] if size != MEDIUM else []),
+        *(["atlas=grid"] if view == "grid" else []),
+        f"size={size}",
+        *([f"scale={scale}"] if scale != DEFAULT_SCALE else []),
     ]
     return f"?{'&'.join(params)}" if params else ""
 
@@ -361,26 +425,32 @@ def open_atlas(
     address: str,
     *,
     width: int,
-    view: str = "grid",
-    size: str = MEDIUM,
+    view: str = "triangle",
+    size: str = DEFAULT_SIZE,
+    scale: str = DEFAULT_SCALE,
     query: str | None = None,
     scheme: str = "light",
     height: int = 900,
     reduced_motion: str | None = None,
     init_script: str | None = None,
+    pixels: float | None = None,
 ) -> Any:
     """A page showing the atlas in `view` at `size`, asked for in the address, with its
     tiles placed and the block in the window. `query` is the whole of what follows the page's
-    name instead, a query string and any fragment, for an address that says more, and
-    `init_script` a script the page runs before any of its own."""
+    name instead, a query string and any fragment, for an address that says more,
+    `init_script` a script the page runs before any of its own, and `pixels` the device
+    pixels a CSS pixel becomes."""
     page = browser.new_page(
         viewport={"width": width, "height": height},
         color_scheme=scheme,
         reduced_motion=reduced_motion,
+        device_scale_factor=pixels,
     )
     if init_script is not None:
         page.add_init_script(init_script)
-    page.goto(address + (query_for(view, size) if query is None else query), wait_until="load")
+    page.goto(
+        address + (query_for(view, size, scale) if query is None else query), wait_until="load"
+    )
     page.locator(BLOCK).scroll_into_view_if_needed()
     settle(page)
     return page
@@ -410,7 +480,7 @@ def layout(page: Any) -> dict[str, Any]:
 def measure_layout(
     address: str, widths: Sequence[int], sizes: Sequence[str] = SIZES
 ) -> list[dict[str, Any]]:
-    """Each view at each width at each size, with a hundred cases and with all."""
+    """Each view at each width at each size, with its preview and with all cases."""
     from playwright.sync_api import sync_playwright  # noqa: PLC0415
 
     rows: list[dict[str, Any]] = []
@@ -464,11 +534,11 @@ def measure_move(
         browser = launch(driver)
         for width in widths:
             for run in range(runs):
-                page = open_atlas(browser, address, width=width)
+                page = open_atlas(browser, address, width=width, view="grid", size="medium")
                 top(page)
                 client = page.context.new_cdp_session(page)
                 client.send("Performance.enable", {"timeDomain": "threadTicks"})
-                for change, shown, press in CHANGES:
+                for change, _, press in CHANGES:
                     if change is None:
                         page.locator(press).click()
                         settle(page)
@@ -483,6 +553,7 @@ def measure_move(
                     else:
                         top(page)
                     report = timed(page, client, press, frames=frames)
+                    shown = len(layout(page)["tiles"])
                     rows.append(
                         {"width": width, "change": change, "shown": shown, "run": run, **report}
                     )
@@ -520,7 +591,7 @@ ACTIONS = (("see-all", ".site-more"), ("expander", ".site-atlas-toggle-row"))
 
 
 def shots(address: str, out: Path, widths: Sequence[int]) -> list[Path]:
-    """The atlas block in each view at each width, light and dark, with a hundred cases
+    """The atlas block in each view at each width, light and dark, with its preview
     and with all, at each size; the two actions (`ACTIONS`) at each width in both
     themes, the expander collapsed and expanded; then the window at each of `FRACTIONS`
     of the move to the triangle."""
@@ -533,21 +604,23 @@ def shots(address: str, out: Path, widths: Sequence[int]) -> list[Path]:
         for scheme in SCHEMES:
             for width in widths:
                 for view in VIEWS:
-                    for size in (size for size in SIZES if size != MEDIUM):
+                    for size in (size for size in SIZES if size != DEFAULT_SIZE):
                         page = open_atlas(
                             browser, address, width=width, view=view, size=size, scheme=scheme
                         )
-                        for shown in (100, 324):
-                            if shown == 324:
+                        for all_cases in (False, True):
+                            if all_cases:
                                 expand(page)
+                            shown = len(layout(page)["tiles"])
                             target = out / f"atlas-{view}-{shown}-{width}-{scheme}-{size}.png"
                             page.locator(BLOCK).screenshot(path=str(target))
                             written.append(target)
                         page.close()
                     page = open_atlas(browser, address, width=width, view=view, scheme=scheme)
-                    for shown in (100, 324):
-                        if shown == 324:
+                    for all_cases in (False, True):
+                        if all_cases:
                             expand(page)
+                        shown = len(layout(page)["tiles"])
                         target = out / f"atlas-{view}-{shown}-{width}-{scheme}.png"
                         page.locator(BLOCK).screenshot(path=str(target))
                         written.append(target)
@@ -567,7 +640,7 @@ def shots(address: str, out: Path, widths: Sequence[int]) -> list[Path]:
                     page.close()
         for width, height in FRAME_WINDOWS:
             for shown in (100, 324):
-                page = open_atlas(browser, address, width=width, height=height)
+                page = open_atlas(browser, address, width=width, height=height, view="grid")
                 if shown == 324:
                     expand(page)
                 top(page)
@@ -580,6 +653,50 @@ def shots(address: str, out: Path, widths: Sequence[int]) -> list[Path]:
                 page.close()
         browser.close()
     return written
+
+
+def readme(address: str, target: Path) -> Path:
+    """README's picture: every case in the triangle, the tiles alone, light, at
+    `README_PIXELS` in `README_WINDOW`, once no row pans and each drawing has loaded,
+    cut to the tiles' own extent and `README_MARGIN`, without the controls and key above
+    them or the frame's empty width, and reduced to `README_COLORS`. The pointer is
+    moved off the tiles first, so none is shown under a hover."""
+    from PIL import Image  # noqa: PLC0415
+    from playwright.sync_api import sync_playwright  # noqa: PLC0415
+
+    target.parent.mkdir(parents=True, exist_ok=True)
+    width, height = README_WINDOW
+    with sync_playwright() as driver:
+        browser = launch(driver)
+        page = open_atlas(browser, address, width=width, height=height, pixels=README_PIXELS)
+        expand(page)
+        page.wait_for_function(WHOLE)
+        settle(page)
+        page.mouse.move(0, 0)
+        page.locator(".site-atlas-cells").scroll_into_view_if_needed()
+        report = layout(page)
+        problems = layout_problems(report)
+        if len(report["tiles"]) != 324 or problems:
+            browser.close()
+            raise SystemExit(f"the triangle is not whole: {problems or len(report['tiles'])}")
+        page.wait_for_function(DRAWN)
+        tiles = report["tiles"]
+        left = min(tile["left"] for tile in tiles) - README_MARGIN
+        top_edge = min(tile["top"] for tile in tiles) - README_MARGIN
+        clip = {
+            "x": left,
+            "y": top_edge,
+            "width": max(tile["right"] for tile in tiles) + README_MARGIN - left,
+            "height": max(tile["bottom"] for tile in tiles) + README_MARGIN - top_edge,
+        }
+        shot = page.screenshot(clip=clip, animations="disabled")
+        browser.close()
+    with Image.open(io.BytesIO(shot)) as image:
+        palette = image.convert("RGB").quantize(
+            colors=README_COLORS, method=Image.Quantize.MEDIANCUT, dither=Image.Dither.NONE
+        )
+        palette.save(target, optimize=True)
+    return target
 
 
 def markdown_table(rows: Sequence[dict[str, Any]]) -> str:
@@ -599,17 +716,22 @@ def markdown_table(rows: Sequence[dict[str, Any]]) -> str:
     return "\n".join(lines)
 
 
-def page_address(target: Path, *, render: bool) -> str:
-    """The address of the overview at `target`, a built `index.html` or the directory
-    that holds one; with `render`, the overview is rendered there first."""
-    path = target / "index.html" if target.is_dir() or target.suffix != ".html" else target
+def page_address(target: Path | str, *, render: bool) -> str:
+    """The complete atlas at `target`, rendered there first when requested; a published
+    page's address is taken as it is, and one that ends in `/` names its `atlas.html`."""
+    if str(target).startswith(("https://", "http://")):
+        if render:
+            raise SystemExit("--render writes a file and cannot write to a published site")
+        return f"{target}atlas.html" if str(target).endswith("/") else str(target)
+    target = Path(target)
+    path = target / "atlas.html" if target.is_dir() or target.suffix != ".html" else target
     if render:
         from devtools import render_overview  # noqa: PLC0415
 
         path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(render_overview.PAGES["index.html"]().html, encoding="utf-8")
+        path.write_text(render_overview.PAGES["atlas.html"]().html, encoding="utf-8")
     if not path.is_file():
-        raise SystemExit(f"no built overview at {path}; pass --render to write one")
+        raise SystemExit(f"no built atlas at {path}; pass --render to write one")
     return path.resolve().as_uri()
 
 
@@ -618,8 +740,10 @@ def main(argv: Sequence[str] | None = None) -> int:
         description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
     )
     parser.add_argument("mode", choices=MODES)
-    parser.add_argument("page", type=Path, help="a built index.html, or its directory")
-    parser.add_argument("--render", action="store_true", help="render the overview there first")
+    parser.add_argument(
+        "page", help="a built atlas.html, its directory, or a published page's address"
+    )
+    parser.add_argument("--render", action="store_true", help="render the atlas there first")
     parser.add_argument("--width", type=int, action="append", help="window width; repeatable")
     parser.add_argument("--runs", type=int, default=5, help="move: how many times each change")
     parser.add_argument(
@@ -634,11 +758,18 @@ def main(argv: Sequence[str] | None = None) -> int:
         default="median",
         help="move, with --markdown: the median of the runs, or the least",
     )
-    parser.add_argument("--out", type=Path, help="shots: where the pictures go")
+    parser.add_argument(
+        "--out", type=Path, help="shots: where the pictures go; readme: the picture's file"
+    )
     parser.add_argument("--markdown", action="store_true", help="print a table, not JSON")
     args = parser.parse_args(argv)
     address = page_address(args.page, render=args.render)
     widths = tuple(args.width or WIDTHS)
+    if args.mode == "readme":
+        if args.out is None:
+            parser.error("readme needs --out")
+        print(f"shot {readme(address, args.out.resolve())}")
+        return 0
     if args.mode == "shots":
         if args.out is None:
             parser.error("shots needs --out")

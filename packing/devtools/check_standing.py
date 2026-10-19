@@ -3,8 +3,10 @@
 
 Standing is derived and never stored: `render_recent_results.standing` reads it from the
 case records, by following evidence ids. An entry holds a case bound where a case
-record's bound cites the evidence the entry carries, and it is *superseded* where it
-claims a bound and no case bound rests on it. That derivation never compares a number,
+record's bound cites the evidence the entry carries. Where it claims a bound and no case
+bound rests on it, it is *superseded*, unless a bound it states is strictly better than
+the case record's (`improvements`): then nothing has replaced it, and it is *pending
+adoption*. That second step reads this module's numbers; the first never compares one,
 so it is only as good as the citations: a case record that cites the wrong entry, or an
 entry whose value is still the best on record while another entry is cited for it, would
 be labelled wrongly and nothing would say so.
@@ -22,15 +24,28 @@ same direction, in both lanes:
   above others that no replay holds yet. One whose words state no bound this can read is
   held to the weaker structural rule that another entry holds a verified bound at every
   case in its scope;
+- an entry **pending adoption** states, at some case, a bound strictly better than the
+  case record's in a lane it can hold, and no case bound rests on it: `T-128`'s eight
+  rational certificates, below the ceilings `T-125` and others hold, before the case
+  records take them in;
 - an entry that is the **current best** states, at some case, exactly the verified bound
   (the reported one, where it is the current best as reported), and never more than the
   record carries;
-- a **second certificate** states exactly the verified value at every case;
+- a **second certificate** states exactly the verified value at every case, and a
+  reported one may state exactly the reported value instead where the verified lane does
+  not beat it: a report that proves again a value an open case's reported lane holds under
+  another entry's citation (`restates`);
 - an entry with **no standing**, one whose evidence claims no bound, states none.
 
 An entry that still holds one case of several is not superseded, and this reports the
 cases it no longer holds without refusing them: `T-047` holds `n = 26, 29, 30` and is
 beaten at `n = 11, 27, 28, 31`.
+
+A simplification or a formalization proves again a value the record holds, so one that
+states a bound strictly better than its case's reported one is refused whatever its
+standing: no lane holds that value. It moves no bound by itself, so one that a case bound
+rests on is refused too, until the register records the kind the owner decides for it
+(`second_proof_problems`).
 
 What a table of results draws of a standing is its place on the frontier, `superseded`
 or `second certificate`, beside the result's status (`devtools.result_status`); the
@@ -40,8 +55,11 @@ where its entry declares a later result that implies it (`superseded_by`), which
 `devtools.check_results` holds to the register instead.
 
 A value written as cut decimals, `3.8100257…`, stands for every number that starts so,
-and equals a bound that does. Two lanes are never mixed: a verified bound is not beaten
-by a higher reported one, which is what `current best, reported` is for.
+and equals a bound that does. A case record's bound beside a closed form stands for every
+number within one unit of its printed value's last place (`render_recent_results.span`),
+since that value is a display, cut or rounded. Two lanes are never mixed: a verified
+bound is not beaten by a higher reported one, which is what `current best, reported` is
+for.
 
 Usage, from `packing/`:
     uv run --frozen --all-extras --group dev python -m devtools.check_standing [--list]
@@ -60,10 +78,13 @@ from fractions import Fraction
 from typing import Any, NamedTuple
 
 from devtools import render_recent_results as view
-from devtools.check_results import kind_label, scope_values
+from devtools.build_bound_citations import own_evidence
+from devtools.check_results import SECOND_PROOF_KINDS, kind_label, scope_values
 
 LOWER = "lower"
 UPPER = "upper"
+#: The two lanes of a case record, each with a bound in each direction.
+LANES = ("verified", "reported")
 #: What each relation bounds: `=` states both.
 DIRECTIONS: Mapping[str, tuple[str, ...]] = {
     "≥": (LOWER,),
@@ -93,11 +114,21 @@ _FOR = re.compile(r"`? for `?n = (?P<cases>\d[\d, …]*(?: and \d+)?)")
 
 BEATEN = "beaten"
 #: Confirmation rungs that no replay reached: an entry at one is held in the reported
-#: lane alone when it is superseded.
-UNREPLAYED = frozenset({"C0", "C1"})
+#: lane alone. The one partition `render_recent_results` also labels a second certificate
+#: by, so the lane and the word agree at every rung.
+UNREPLAYED = view.UNREPLAYED
 EN_DASH = "\u2013"
 EQUAL = "equal"
 EXCEEDS = "exceeds"
+#: The directions each bound kind bounds, the only ones in which it can improve on its
+#: case record: a lower bound's words may quote a ceiling, and that is no claim of its. A
+#: second proof, a simplification or a formalization, has none of its own; the relations
+#: its words state stand in (`directions`).
+KIND_DIRECTIONS: Mapping[str, tuple[str, ...]] = {
+    "lower-bound": (LOWER,),
+    "upper-bound": (UPPER,),
+    "optimality": (LOWER, UPPER),
+}
 
 
 class Stated(NamedTuple):
@@ -181,23 +212,29 @@ def stated_bounds(record: Mapping[str, Any]) -> dict[tuple[int, str], Stated]:
     states none. The claim is the fallback and not an addition, since a claim may quote
     a bound that is another entry's."""
     scope = sorted(scope_values(dict(record["scope"])))
-    headline = statements(str(record["headline"]), scope)
-    return headline or statements(" ".join(str(record["claim"]).split()), scope)
+    headline = statements(str(record.get("headline") or ""), scope)
+    return headline or statements(" ".join(str(record.get("claim") or "").split()), scope)
 
 
 def relation(stated: Stated, bound: Mapping[str, Any] | None, direction: str) -> str | None:
     """How a stated bound stands against a case record's: beaten by it, equal to it at
-    the precision written, or more than it."""
+    the precision written, or more than it.
+
+    Both sides are sets of numbers, compared exactly: cut decimals are every number from
+    `low` up to, and not including, `high`, and the case record's bound is its `span`, a
+    single number where it is exact and a unit either side of a closed form's printed
+    value. Where the two sets meet, nothing tells them apart and they are equal; beaten
+    and more mean every number of one is better than every number of the other."""
     if not bound:
         return None
-    current = view.magnitude(bound)
+    floor, ceiling = view.span(bound)
     low, high = stated.value, stated.value + stated.slack
-    # Cut decimals are every number from `low` up to, and not including, `high`.
-    if current == low or low <= current < high:
+    meets = floor < high and ceiling >= low if stated.slack else floor <= low <= ceiling
+    if meets:
         return EQUAL
     if direction == LOWER:
-        return BEATEN if current > low else EXCEEDS
-    return BEATEN if current < low else EXCEEDS
+        return BEATEN if floor > low else EXCEEDS
+    return BEATEN if ceiling < low else EXCEEDS
 
 
 def findings(record: Mapping[str, Any], records: view.Records) -> list[Finding]:
@@ -218,8 +255,119 @@ def findings(record: Mapping[str, Any], records: view.Records) -> list[Finding]:
     return found
 
 
+def directions(record: Mapping[str, Any], found: Sequence[Finding]) -> frozenset[str]:
+    """The directions in which an entry's stated bounds are claims of its own: those its
+    kind bounds (`KIND_DIRECTIONS`), and for a second proof, a simplification or a
+    formalization (`SECOND_PROOF_KINDS`), which proves again a result the record holds and
+    states that result's relation, every direction its words state. So `s(17) = …` is a
+    claim on both sides whether its kind is optimality or a second proof of one, and a
+    kind that is no bound claims none."""
+    kind = str(record.get("kind"))
+    if kind in SECOND_PROOF_KINDS:
+        return frozenset(finding.direction for finding in found)
+    return frozenset(KIND_DIRECTIONS.get(kind, ()))
+
+
+def improvements(record: Mapping[str, Any], records: view.Records) -> list[Finding]:
+    """The bounds an entry states that are strictly better than its case record's bound of
+    the same direction in a lane the entry can hold: the reported lane for a report
+    (`UNREPLAYED`), either lane for a replayed result, since two lanes are never mixed.
+    Only a direction the entry claims counts (`directions`), and a kind that is no bound
+    improves on nothing.
+
+    Each is a bound that nothing on record has replaced, so an entry that holds no case
+    bound and states one is pending adoption (`render_recent_results.PENDING_ADOPTION`)
+    and not superseded: a simplification or a formalization replayed here before its case
+    records adopt the value it proves again is one. A tie is no improvement: the case
+    record holds that value under another entry's citation. Compared as `relation`
+    compares, by sets of numbers: cut decimals improve on a bound only where every number
+    they stand for is better than every number the case record's bound may be."""
+    report = str(record.get("confirmation")) in UNREPLAYED
+    found = findings(record, records)
+    claimed = directions(record, found)
+    return [
+        finding
+        for finding in found
+        if finding.direction in claimed
+        and (finding.reported == EXCEEDS or (not report and finding.verified == EXCEEDS))
+    ]
+
+
+def restates(record: Mapping[str, Any], records: view.Records) -> bool:
+    """Whether an entry states at least one bound and every one equals its case record's
+    bound of the same direction in the lane the entry can hold: the verified lane for a
+    replayed result, and for a report (`UNREPLAYED`) the reported lane, where the verified
+    lane must not beat it either, since a reported value the verified lane has passed is
+    replaced whatever the reported lane still carries. A simplification or a formalization
+    that holds no bound and restates its case record's value so is a second certificate
+    (`render_recent_results.standing`), such as a report that proves again the value an
+    open case's reported lane holds under another entry's citation."""
+    found = findings(record, records)
+    if str(record.get("confirmation")) in UNREPLAYED:
+        held = [f.reported == EQUAL and f.verified != BEATEN for f in found]
+    else:
+        held = [f.verified == EQUAL for f in found]
+    return bool(held) and all(held)
+
+
+def citing(record: Mapping[str, Any], records: view.Records) -> list[int]:
+    """The cases in an entry's scope whose bounds, in either lane and direction, cite
+    evidence of its own (not the grid's or the area bound's). Read from the evidence ids
+    alone, apart from the holders `standing` credits: a case that cites an entry pending
+    adoption has taken it in, and the credit has gone to another entry."""
+    own = set(own_evidence(record["evidence"], records.register))
+    found = []
+    for n in sorted(scope_values(dict(record["scope"]))):
+        case = records.cases.get(n) or {}
+        bounds = [case.get(f"{lane}_{way}_bound") for lane in LANES for way in (LOWER, UPPER)]
+        if any(
+            own & {str(item) for item in (bound or {}).get("evidence") or []}
+            for bound in bounds
+        ):
+            found.append(n)
+    return found
+
+
 def _at(found: Sequence[Finding]) -> str:
     return "n = " + compress(sorted({finding.n for finding in found}))
+
+
+def second_proof_problems(
+    record: Mapping[str, Any], standing: str, found: Sequence[Finding]
+) -> list[str]:
+    """What a simplification or a formalization may not be (epistemics.md, Result Kinds).
+
+    - It proves again a value the record holds, so a bound it states strictly better than
+      its case's reported one, in a direction it claims (`directions`), is a value no lane
+      holds: by the first rule of Result Kinds it takes that value's kind. Replayed, a
+      second proof may still beat the verified lane alone, as one whose build lands before
+      that of the result it proves again does; that is pending adoption, not this.
+    - It moves no bound by itself, so once a case bound rests on it (`HOLDS` or
+      `HOLDS_REPORTED`) its kind is revisited: the owner decides what kind it then is, and
+      its result page's registered identity is amended with a dated reason
+      (`packing/site-urls.yaml`). This refuses until the register records the decision.
+    """
+    kind = str(record.get("kind"))
+    if kind not in SECOND_PROOF_KINDS:
+        return []
+    entry, label = record["id"], kind_label(kind)
+    wrong = []
+    claimed = directions(record, found)
+    beyond = [f for f in found if f.direction in claimed and f.reported == EXCEEDS]
+    if beyond:
+        wrong.append(
+            f"{entry} is a {label}, yet at {_at(beyond)} it states a bound better than the "
+            "reported one: no lane holds that value, so it is no second proof and takes that "
+            "value's kind"
+        )
+    if standing in {view.HOLDS, view.HOLDS_REPORTED}:
+        wrong.append(
+            f"{entry} is a {label}, yet a case bound rests on it ({standing}), and a second "
+            "proof moves no bound by itself: its kind is revisited, as the owner decides, "
+            "and its result page's registered identity amended with a dated reason in "
+            "packing/site-urls.yaml"
+        )
+    return wrong
 
 
 def problems(record: Mapping[str, Any], standing: str, records: view.Records) -> list[str]:
@@ -228,7 +376,7 @@ def problems(record: Mapping[str, Any], standing: str, records: view.Records) ->
     found = findings(record, records)
     stands = [f for f in found if f.verified in {EQUAL, EXCEEDS}]
     reported = [f for f in found if f.reported in {EQUAL, EXCEEDS}]
-    wrong: list[str] = []
+    wrong: list[str] = second_proof_problems(record, standing, found)
     if standing == view.NO_STANDING:
         if found:
             wrong.append(f"{entry} has no standing, yet states a bound at {_at(found)}")
@@ -259,12 +407,36 @@ def problems(record: Mapping[str, Any], standing: str, records: view.Records) ->
                     f"{entry} is superseded and states no bound this reads, and at n = "
                     f"{compress(alone)} no other entry holds a verified bound"
                 )
-    elif standing in {view.SECOND_CERTIFICATE, view.SECOND_CERTIFICATE_REPORTED}:
-        off = [f for f in found if f.verified != EQUAL]
-        if off:
+    elif standing == view.PENDING_ADOPTION:
+        # `standing` derives this word from `improvements`, so the first test only holds a
+        # standing given from elsewhere to the numbers; the second reads the case records
+        # apart from the derivation's holders.
+        if not improvements(record, records):
             wrong.append(
-                f"{entry} is a second certificate, yet at {_at(off)} it does not state "
-                "the verified value"
+                f"{entry} is pending adoption, yet no bound it states is better than the "
+                "bound its case record holds"
+            )
+        if cases := citing(record, records):
+            wrong.append(
+                f"{entry} is pending adoption, yet a case bound at n = {compress(cases)} "
+                "cites its evidence: the record has taken it in"
+            )
+    elif standing in {view.SECOND_CERTIFICATE, view.SECOND_CERTIFICATE_REPORTED}:
+        # A reported second certificate may restate the reported value of an open case,
+        # where the verified lane does not beat it (`restates`).
+        reported_ok = standing == view.SECOND_CERTIFICATE_REPORTED
+        off = [
+            f
+            for f in found
+            if f.verified != EQUAL
+            and not (reported_ok and f.reported == EQUAL and f.verified != BEATEN)
+        ]
+        if off:
+            stated = "the verified value"
+            if reported_ok:
+                stated += ", or a reported one the verified bound does not beat"
+            wrong.append(
+                f"{entry} is a second certificate, yet at {_at(off)} it does not state {stated}"
             )
     else:
         lane = "reported" if standing == view.HOLDS_REPORTED else "verified"
@@ -286,13 +458,19 @@ def problems(record: Mapping[str, Any], standing: str, records: view.Records) ->
 def summary(record: Mapping[str, Any], standing: str, records: view.Records) -> str:
     """One line for an entry: its standing, and where its stated bounds still hold."""
     found = findings(record, records)
-    lane = "reported" if standing == view.HOLDS_REPORTED else "verified"
+    reported = standing == view.HOLDS_REPORTED or (
+        standing == view.SECOND_CERTIFICATE_REPORTED and restates(record, records)
+    )
+    lane = "reported" if reported else "verified"
     holds = [f for f in found if (f.reported if lane == "reported" else f.verified) == EQUAL]
+    better = improvements(record, records) if standing == view.PENDING_ADOPTION else []
     beaten = [f for f in found if f.verified == BEATEN and f not in holds]
     name = standing or f"({kind_label(str(record['kind']))})"
     parts = [f"{record['id']}  {name:<28s}"]
     if not found:
         parts.append("states no bound this reads")
+    if better:
+        parts.append(f"better than the case record at {_at(better)}")
     if holds:
         parts.append(f"equals the {lane} bound at {_at(holds)}")
     if beaten:

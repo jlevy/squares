@@ -1,0 +1,85 @@
+{
+  "schema": "registered-phase-command-plan/v1",
+  "target_unrun": true,
+  "registration_state": "registered_before_target",
+  "working_directory": "packing",
+  "phases": [
+    {
+      "name": "construction",
+      "argv": [
+        "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+        "-m",
+        "devtools.check_n17_normalized_contact_rank_filter",
+        "--descriptor",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-303-normalized-contact-rank-filter/descriptor.json",
+        "--max-seconds",
+        "120",
+        "--output",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-303-normalized-contact-rank-filter/certificate.json"
+      ]
+    },
+    {
+      "name": "fresh_verification",
+      "argv": [
+        "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+        "-m",
+        "devtools.check_n17_normalized_contact_rank_filter",
+        "--descriptor",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-303-normalized-contact-rank-filter/descriptor.json",
+        "--max-seconds",
+        "60",
+        "--certificate",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-303-normalized-contact-rank-filter/certificate.json",
+        "--output",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-303-normalized-contact-rank-filter/replay.json"
+      ]
+    }
+  ],
+  "runner_argv": [
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-m",
+    "devtools.run_registered_phases",
+    "--manifest",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-303-normalized-contact-rank-filter/execution-manifest.json",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-303-normalized-contact-rank-filter/phase-execution.json"
+  ],
+  "supervisor_argv": [
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-m",
+    "devtools.supervise_posix",
+    "--max-seconds",
+    "180",
+    "--max-memory-mib",
+    "4096",
+    "--sample-seconds",
+    "0.25",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-303-normalized-contact-rank-filter/supervision.json",
+    "--stdout",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-303-normalized-contact-rank-filter/stdout.log",
+    "--stderr",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-303-normalized-contact-rank-filter/stderr.log",
+    "--",
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-m",
+    "devtools.run_registered_phases",
+    "--manifest",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-303-normalized-contact-rank-filter/execution-manifest.json",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-303-normalized-contact-rank-filter/phase-execution.json"
+  ],
+  "resources": {
+    "construction_seconds": 120,
+    "fresh_seconds": 60,
+    "combined_term_seconds": 180,
+    "combined_kill_seconds": 190,
+    "sampled_memory_mib_per_live_process": 4096,
+    "memory_scope": "per_live_process_in_owned_group",
+    "workers": 1,
+    "output_bytes": 67108864
+  },
+  "criterion": "All95 accepted distance2 representatives, covering744 states, are completely classified by exact reconstructed normalized contact incidence rosters. Primary: at least one independently checked rank obstruction rank_graph(A)+rank_capacity(E\\A)<35, with every other state also receiving a complete finite outcome. All95 survival is a complete method miss and retires the unchanged coarse filter. Separate fresh process checks all selected certificates and complete payload equality. Normalization and determinant expansion remain explicit hand-proof premises; no ordinary state exclusion or census admission follows. Partial, resource-stopped or refused work is unresolved.",
+  "registered_at": "2026-10-08T02:23:25.287895+00:00",
+  "source_freeze": "reviewedsourcecommit/bytesresolvedatlaunch"
+}

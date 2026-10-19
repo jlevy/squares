@@ -8,9 +8,11 @@ A producer receipt is distinct from independent verification.
 The shared `bounded_diagnostics` helper checks the monotonic deadline and current worker
 RSS. `process_memory.peak_memory_bytes` reports the lifetime high-water mark separately;
 an earlier allocation does not permanently poison a reusable worker’s guard.
-Current RSS is supported and tested on Windows and Linux.
-Other platforms, including macOS, refuse that sampler explicitly; no native macOS
-validation is claimed.
+Current RSS is supported and tested on Windows, Linux and macOS. The macOS sampler reads
+native `proc_pidinfo(PROC_PIDTASKINFO)` resident bytes and refuses failed or incomplete
+responses. Its controls compare a live sample with `ps` and release a mapped allocation
+to distinguish current RSS from the lifetime peak.
+Other platforms refuse the sampler explicitly.
 The external supervisor still provides whole-process-tree cleanup and its own limits.
 
 Saved seed and node objects use semantic content digests because they are external

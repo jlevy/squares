@@ -13,6 +13,7 @@
     return found;
   };
   const handle = element("stage-resize");
+  const stage = element("stage-wrap");
   /** @type {string | null} */
   let stored = null;
   try {
@@ -21,7 +22,13 @@
     stored = null;
   }
   return {
-    stageHeight: element("stage-wrap").offsetHeight,
+    stageHeight: stage.offsetHeight,
+    stageVisible: stage.getClientRects().length > 0,
+    documentVisibility: document.visibilityState,
+    documentReadyState: document.readyState,
+    apiReady: window.atlasTransitions !== undefined,
+    fontsStatus: document.fonts.status,
+    innerWidth: window.innerWidth,
     controlsFit: element("controls").getBoundingClientRect().bottom <= window.innerHeight + 1,
     resizing: document.body.classList.contains("resizing"),
     stored,

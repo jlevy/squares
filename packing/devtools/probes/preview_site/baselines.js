@@ -2,11 +2,10 @@
 // pixels: the site's name, every link in the navigation bar, and every section tab. A
 // baseline is measured, not inferred from a box's edge: a zero-size inline-block with
 // nothing in it sits with its bottom edge on the baseline of the line it is in, so one
-// is placed at the end of each label, read, and taken away again. The name's is null
-// where its text is not shown, on a narrow window, where the mark alone leads home.
+// is placed at the end of each label, read, and taken away again. The full or compact
+// name is measured according to which label is visible at the current width.
 //
-// With them: the mark's box and the name's text box, to see that the mark is centred on
-// the name; the rule under the bar; and for the current link and the current tab how far
+// With them: the rule under the bar, and for the current link and the current tab how far
 // the baseline stands above the rule (the bar's own, and the foot of the tab strip), which
 // is where the current link's underline is drawn from.
 // `preview_site.baseline_problems` holds the name and the links to one baseline with it.
@@ -23,11 +22,6 @@
     return round(y);
   };
   /** @param {Element} el */
-  const span = (el) => {
-    const rect = el.getBoundingClientRect();
-    return { top: round(rect.top + window.scrollY), bottom: round(rect.bottom + window.scrollY) };
-  };
-  /** @param {Element} el */
   const shown = (el) => el.getClientRects().length > 0;
   /** @param {Element} el */
   const labelled = (el) => ({
@@ -38,8 +32,7 @@
   });
   const nav = document.querySelector(".site-nav");
   const header = document.querySelector(".kpress-site-header");
-  const text = document.querySelector(".site-nav .site-name-text");
-  const logo = document.querySelector(".site-nav .site-logo");
+  const text = [...document.querySelectorAll(".site-nav .site-name-text")].find(shown);
   const tabs = document.querySelector("nav.site-tabs");
   /** @param {Element | null} el */
   const ruled = (el) =>
@@ -51,9 +44,7 @@
   const current = links.find((link) => link.current) ?? null;
   const currentTab = strip.find((tab) => tab.current) ?? null;
   return {
-    name: text && shown(text) ? baseline(text) : null,
-    name_text: text && shown(text) ? span(text) : null,
-    logo: logo && shown(logo) ? span(logo) : null,
+    name: text ? baseline(text) : null,
     links,
     tabs: strip,
     rule,

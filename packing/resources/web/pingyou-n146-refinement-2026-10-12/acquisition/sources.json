@@ -1,0 +1,80 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-10-14T04:47Z",
+  "git_scope": "Full clone of the sixteen-commit repository, head 318ab94 at retrieval, checked out at the pin issue #566 names since its update of 2026-10-12T23:41Z. The scope is the seven n146 paths the pinned commit changed, which 18092df first published with the certificate the update supersedes; the tree's README.md and SHA256SUMS index them only from the head 318ab94, outside the scope. Every n146 file has the same blob at the head. Under derived-only custody none is copied. No source program was executed.",
+  "sources": [
+    {
+      "id": "buddenping-square-packing-certificates",
+      "source_url": "https://github.com/BuddenPing/square-packing-certificates",
+      "source_ref": "main",
+      "source_commit": "820b9ffb11dd602d735f7a03cd472db98a2d3bb6",
+      "committed_utc": "2026-10-12T23:41:08Z",
+      "git_tree": "32adc0e3cfbb0159774d36500055ef303faddf48",
+      "archived_path": "packing/resources/web/pingyou-n146-refinement-2026-10-12/source",
+      "subtree_manifest": "packing/resources/web/pingyou-n146-refinement-2026-10-12/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "n146-README.txt",
+        "n146-SHA256SUMS",
+        "n146-native-replay.json",
+        "n146-squares-project.zip",
+        "n146-verification.json",
+        "n146.cert.json",
+        "pingyou-n146-rational.yaml"
+      ],
+      "subtree_file_count": 7,
+      "subtree_total_bytes": 856526,
+      "retained_file_count": 0,
+      "retained_total_bytes": 0,
+      "compressed": [],
+      "pinned_only": [
+        {
+          "path": "n146-README.txt",
+          "bytes": 2618,
+          "sha256": "5f01faa0d31fa34b1ee793c606e8eda8deb9247f7893c2cfe333642f2c9bc398",
+          "reason": "Author prose stating the claim, the method, the credit and the replay commands, quoted in this packet's README. No licence: pinned by digest only."
+        },
+        {
+          "path": "n146-SHA256SUMS",
+          "bytes": 5989,
+          "sha256": "30156d7461897c8a49aa7fdefa05fe2bdc017d505288f47c02049bc6333cb3c9",
+          "reason": "The source's digest list for the n146 release files, each equal to the digest this manifest records. Pinned by digest only."
+        },
+        {
+          "path": "n146-native-replay.json",
+          "bytes": 3246,
+          "sha256": "cae9ee7d80b9e9f49db8b71e0dbe20bd4148a71622109cb5aafe7ac11edc13a5",
+          "reason": "The author's receipt of this repository's two exact checkers run on the release's witness at 074ac28, an author report. Pinned by digest only."
+        },
+        {
+          "path": "n146-squares-project.zip",
+          "bytes": 399603,
+          "sha256": "8a900e2887983e81bd95ee1cbee675c6ae4b9e0edf71b251d6be9ee2277fd742",
+          "reason": "The source's complete package of 59 files: the certificate and witness again, the method, the inherited contact system and its solver states, Evan Daniel's contact solver with its licence, the prior witnesses, exact checkers, receipts, and the sources and licences of this repository's two checkers at 074ac28. No licence for the source's own files: pinned by digest only; no program in it was executed."
+        },
+        {
+          "path": "n146-verification.json",
+          "bytes": 1927,
+          "sha256": "a346ee7d431d0c16de78d66c51cdcc8b3948b15ecf070861d81851f430e4863a",
+          "reason": "The author's receipt of its own exact checks, an author report. Pinned by digest only."
+        },
+        {
+          "path": "n146.cert.json",
+          "bytes": 68539,
+          "sha256": "a88ede7e2faa9d62fe8b6d0e46f7d38dde7df1f5a198d15bc6d6d726df77d13d",
+          "reason": "The exact rational certificate: n, s_exact and 146 [x, y, t] rows of rational strings, centres in [0, S]^2 and t = tan(theta/2), and a provenance record naming machine-local paths. No licence, so derived-only custody: an importer reads it from a checkout at this pin and must match this digest."
+        },
+        {
+          "path": "pingyou-n146-rational.yaml",
+          "bytes": 374604,
+          "sha256": "15c7ce633c73e8ac6a60b6e1cffef81e76ae4c5beb28efd643c9c3a62e843ee4",
+          "reason": "The source's rational corners Witness/v2 of the same packing, in JSON syntax. No licence: pinned by digest only; derive reads it from the same checkout and holds it to the certificate's poses and side."
+        }
+      ],
+      "license": "No licence file in the pinned tree, and GitHub detects none. The release READMEs say that upstream software and schema licences are retained beside the files they cover and that no new licence is asserted for third-party material; nothing grants one for the source's own files. Derived-only custody under the known-best retention policy: no upstream byte is retained, every file is bound here by SHA-256 and at the pin by its Git blob, and no redistribution permission or licence determination is asserted. The source asks that PingYou Ltd be credited with this further refinement, Ryan Xu with the original layout, Robert Barnett with the preceding refinement, and Evan Daniel with the contact-solver source and the earlier n146 regularization.",
+      "claims": [
+        "Issue #566, as updated at 2026-10-12T23:41Z, reports s(146) <= 12.5837822039508342919134679370511513667729, rounded up from the exact rational side of n146.cert.json: a high-precision coupled realization of the inherited square-corner, square-side and wall contacts of Robert Barnett's refinement of Ryan Xu's packing, whose raw rational output needs no dilation repair. It is about 1.3171282204e-13 below the author's first n146 certificate at 18092df, which it supersedes.",
+        "The source reports that its exact separating-axis and rational polygon checks accept all 146 squares, every wall and all 10,585 pairs, and that this repository's sqpack exact_verify and check_rational_witness_independent at 074ac28 accept its native Witness/v2. These are author reports; no local or global optimality is claimed."
+      ]
+    }
+  ]
+}

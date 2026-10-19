@@ -32,6 +32,10 @@ from pathlib import Path
 import pytest
 import yaml
 
+from devtools import apply_exact_ceilings
+from devtools import squish_followup_packets as squish_update
+from devtools import squish_second_update_packets as squish_second
+from devtools import squish_upper_bound_packets as squish
 from devtools.check_case_prose import Reading
 from sqpack.assurance import bounds_agree_at_declared_precision
 from sqpack.known_best import KNOWN_BEST_CORPUS
@@ -86,6 +90,190 @@ DECLARED_CONSUMER_TREES = {
 }
 
 DECLARED_CONSUMERS = {
+    "packing/devtools/regularize_evand.py": (
+        "the regularization driver reads each case's verified bound as U, the ceiling a "
+        "regularized view's exact side is compared with (policy rows 3 and 4), held exactly: "
+        "a rational U as itself, a closed form as a root of its minimal polynomial, and a form "
+        "it cannot read as deciding nothing. A side below it is a register-result candidate, "
+        "a side exactly at a rational U is a drawing frame (`bound`), and a side above it is "
+        "not; `reclassify --refresh-bounds` copies it into a finished run's reports again "
+        "from the case record before deciding. It never reads the field as s(n) or as the "
+        "witness's side, which it takes from the witness"
+    ),
+    "packing/tests/test_regularize_evand.py": (
+        "a synthetic report for the driver's tests carries U as the driver writes it, so the "
+        "test can check a view at exactly U is decided as `bound`; it is a ceiling there, "
+        "never s(n)"
+    ),
+    "packing/devtools/register_regularized_bounds.py": (
+        "writes the ceiling an exact regularized view proves at 59 counts (T-155) and at "
+        "n = 290 (T-156): the view's "
+        "exact side as the exact form, below the ceiling it replaces, and the decimal the "
+        "record printed before as the value, an upper display of it; it keeps a blocker and a "
+        "ceiling section where that value and the report disagree at the printed precision, "
+        "and reads the field as a ceiling and never as s(n)"
+    ),
+    "packing/tests/test_register_regularized_bounds.py": (
+        "holds the case records' ceilings to the registered views' exact sides (T-155, T-156) "
+        "and "
+        "to the earlier ceilings they replace; a ceiling throughout, never s(n)"
+    ),
+    "packing/devtools/regularize_gallery.py": (
+        "the regularization review gallery prints U from a run's report beside the view's "
+        "side, labelled as the certified upper bound; a ceiling shown for comparison, never "
+        "s(n)"
+    ),
+    "packing/devtools/regularize_grid_slack.py": (
+        "the grid-slack generator re-solves a view at the case's verified bound U where the "
+        "witness's own side is not a frame, and only where U is rational exactly "
+        "(`rational_bound`): a closed form's evaluation is not U; U is the ceiling the "
+        "view's side is held to, never s(n)"
+    ),
+    "packing/devtools/regularize_select.py": (
+        "the selection among finished regularization runs reads each case's verified bound "
+        "as U through the driver: a view whose exact side is above it is not drawn, one "
+        "below it is listed as a register candidate (policy row 3) and never drawn; U is "
+        "the ceiling a view's side is held to, never s(n) or the witness's side"
+    ),
+    "packing/tests/test_regularize_select.py": (
+        "a stand-in case record for the selection's tests carries U as the driver reads it, "
+        "so a synthetic run is decided against a ceiling its view at the bound meets; the "
+        "test also holds every drawn view's exact side to the case records' U. A ceiling "
+        "throughout, never s(n)"
+    ),
+    "packing/devtools/regularized_drawings.py": (
+        "the regularized-drawings record reads a count's verified bound to test whether a "
+        "drawn view's exact side is at it and, only where it is, to find the registered result "
+        "whose evidence holds that ceiling and name it as the drawn packing's result; a "
+        "ceiling and its holder, never s(n)"
+    ),
+    "packing/atlas/known-best/regularized-atlas-index.schema.yaml": (
+        "the regularized layer's index schema names the field `view_minus_verified_upper_bound`"
+        ", the view's side minus the case's ceiling U as its generator measured it; it "
+        "states a difference to a ceiling, never s(n)"
+    ),
+    "packing/tests/test_regularize_axis_components.py": (
+        "synthetic index entries and case records for the axis tool's tests carry the v2 "
+        "contract's `view_minus_verified_upper_bound` and a case's verified bound U, so the "
+        "test can check the layer's check holds a drawn view's side to U; a ceiling there, "
+        "never s(n)"
+    ),
+    "packing/devtools/regularize_axis_components.py": (
+        "the regularized layer's check reads each drawn count's verified bound U from its "
+        "case record and decides the view's exact side against it: none below U, a `bound` "
+        "view at it, and the views above it named; U is the ceiling a drawing frame is held "
+        "to, never s(n) (#548 review B1)"
+    ),
+    "packing/tests/test_regularize_gallery.py": (
+        "a synthetic run report for the gallery's tests carries U as the driver writes it; "
+        "the test checks it is printed, and reads no value from it"
+    ),
+    "vendor/evand-regularize/search/exact/batch/register.py": (
+        "Evan Daniel's vendored batch builder (third-party bytes at a pin, changed only by "
+        "a recorded patch): copies the frontier's verified value beside the reported one into "
+        "his results.json as the record a count was solved against, a ceiling it compares "
+        "with and never s(n); this project's driver writes its own inputs and does not run it"
+    ),
+    "packing/devtools/result_status.py": (
+        "reads ceiling evidence to distinguish grid bounds from certified construction "
+        "reports, without redating the reported construction; a ceiling alone never "
+        "establishes s(n), and recent optimality also requires proved case status"
+    ),
+    "packing/tests/test_recent_contributions.py": (
+        "checks that fresh ceiling verification does not redate a historical construction "
+        "or imply optimality; upper, lower and optimality contribution roles remain distinct"
+    ),
+    "packing/tests/test_confirm_gupta_records.py": (
+        "tests finite ceiling confirmation, retained prior lanes and complete custody; "
+        "a feasibility certificate confers neither s(n) nor optimality"
+    ),
+    "packing/devtools/confirm_gupta_records.py": (
+        "publishes complete admitted rational feasibility as finite upper ceilings; "
+        "preserves historical lower lanes and never claims s(n), optimality or rigidity"
+    ),
+    "packing/devtools/confirm_ryxu_records.py": (
+        "records finite upper ceilings from complete admitted exact replay, never s(n)"
+    ),
+    "packing/devtools/register_ryxu_reports.py": (
+        "preserves the historical verified ceiling while selecting a reported upper bound"
+    ),
+    "packing/tests/test_ryxu_house_links.py": (
+        "checks finite upper-bound admission and complete custody, never optimality"
+    ),
+    "packing/devtools/register_gupta_reports.py": (
+        "adopts a reported finite construction while preserving the older verified "
+        "ceiling and both lower lanes; no value is read as s(n) or optimality"
+    ),
+    "packing/tests/test_gupta_adoption.py": (
+        "checks historical ceilings and lower lanes survive complete reported adoption "
+        "and interruption; a smaller reported side gains no confirmation"
+    ),
+    "packing/devtools/register_refinement_reports.py": (
+        "registers rational source reports while preserving earlier verified ceilings; "
+        "the reported geometry and a historical ceiling never establish s(n)"
+    ),
+    "packing/tests/test_couzo_followup_reports.py": (
+        "holds each frozen comparison to the verified finite ceiling it was frozen against, "
+        "live or as a later adoption retained it; a smaller side establishes neither s(n) "
+        "nor adoption"
+    ),
+    "packing/devtools/upper_bound_reports.py": (
+        "compares each reported certificate with the case's selected verified ceiling when "
+        "its claim record is frozen, and refuses a rewrite once that ceiling has moved; a "
+        "smaller side establishes neither s(n) nor adoption"
+    ),
+    "packing/devtools/algebraic_witness_reports.py": (
+        "compares each algebraic witness's exact side with the case's verified ceiling, "
+        "exactly over its field, and records the relation and the ceiling's value and exact "
+        "form in the frozen comparison; a smaller side establishes neither s(n) nor "
+        "adoption"
+    ),
+    "packing/devtools/apply_closed_form.py": (
+        "refuses to raise a case's reported lower bound to the closed form's a(n) unless a(n) "
+        "is below the case's verified upper bound, read exactly where its exact form is a "
+        "rational; a lower bound below the ceiling establishes neither s(n) nor a house"
+    ),
+    "packing/tests/test_apply_closed_form.py": (
+        "writes a synthetic record's verified upper bound to hold the closed-form writer to "
+        "its refusal when a(n) is not below that ceiling; it reads no case's bound"
+    ),
+    "packing/devtools/check_half_angle_area.py": (
+        "prints the case's verified finite ceiling beside each certificate it decides, as "
+        "context for the review; it decides feasibility only, never s(n) or adoption"
+    ),
+    "packing/devtools/confirm_refinement_records.py": (
+        "publishes accepted complete replay as a finite feasible upper ceiling; "
+        "retains historical verification and establishes no optimality or value of s(n)"
+    ),
+    "packing/devtools/squish_second_update_confirmation.py": (
+        "publishes the admitted complete exact replay as a feasible upper ceiling, "
+        "retaining earlier ceilings and refusing optimality claims"
+    ),
+    "packing/tests/test_squish_second_update_confirmation.py": (
+        "checks complete replay custody and preservation of earlier upper ceilings; "
+        "the confirmed feasible construction does not establish s(n)"
+    ),
+    "packing/devtools/squish_second_update_packets.py": (
+        "preserves the previous independently certified ceiling while adopting a stronger "
+        "second-update source report; the historical ceiling is never promoted to the "
+        "new geometry or read as s(n)"
+    ),
+    "packing/tests/test_squish_upper_bound_packets.py": (
+        "checks that source-packet admission preserves the independently certified "
+        "ceiling and cannot grant verification or optimality to a reported packing"
+    ),
+    "packing/devtools/source_supersession.py": (
+        "rebuilds an explicitly selected source report from exact facts while retaining "
+        "the historical independently certified ceiling until the reviewed SQUISH lane "
+        "is present; and tells an earlier ceiling layer when a later layer holds the lane "
+        "below the ceiling it would write; the two fields remain upper bounds, never exact "
+        "optima"
+    ),
+    "packing/tests/test_source_supersession.py": (
+        "replaces a record's ceiling with a later layer's, below and above an earlier "
+        "layer's own, to test that the earlier layer leaves only the lower one alone; a "
+        "ceiling throughout, never s(n)"
+    ),
     "packing/devtools/render_n11_lower_bounds_explainer.py": (
         "admits the solved n11 caption only when the case is proved, its exact lower "
         "identity matches the ceiling and T-060 confirmation is present; the ceiling "
@@ -130,6 +318,11 @@ DECLARED_CONSUMERS = {
     "packing/tests/test_render_stack_results.py": (
         "builds two case records whose ceiling is the same and checks the rendered count of "
         "changed ceilings is zero; it asserts nothing about s(n)"
+    ),
+    "packing/tests/test_check_standing.py": (
+        "collects the evidence ids every case bound cites, the ceiling's among them, to find "
+        "register entries no case record cites; it reads no value of the ceiling and "
+        "asserts nothing about s(n)"
     ),
     "packing/tests/test_catalogue_upper_bounds.py": (
         "checks that n = 69, 83 and 87 carry the ceiling their exact certificates' receipts "
@@ -188,6 +381,58 @@ DECLARED_CONSUMERS = {
         "the check of that review's fixes, quoting its proposed bracket of a conjecture "
         "between the verified floor and ceiling; a ceiling, not s(n)"
     ),
+    "docs/project/reviews/review-2026-10-14-intake-ledger.md": (
+        "the intake ledger's review checks that each count's start holds both upper lanes, "
+        "the verified one read as a ceiling the record proves exactly, so a later report "
+        "is recorded only when it is decidably below both; it never reads the field as s(n)"
+    ),
+    "packing/devtools/intake_ledger.py": (
+        "the report-order ledger starts each count from both upper lanes of its case record: "
+        "the verified lane as a ceiling the record proves (an exact rational, a closed form "
+        "evaluated as a rigorous interval, a root enclosure, or else its print within one "
+        "unit of its last place), beside the reported lane; a report is recorded only when "
+        "it is decidably below every member. It never reads the field as s(n)"
+    ),
+    "packing/campaign/issue-intake/upper-bounds-20261014/review/recompute.py": (
+        "the ledger review's independent walk seeds each count with both upper lanes, the "
+        "verified one as a ceiling (rational, interval or root), to recompute the ledger's "
+        "verdicts; it reads the field as a ceiling, never as s(n)"
+    ),
+    "packing/campaign/issue-intake/upper-bounds-20261014/review/scan_cases.py": (
+        "the ledger review's scan lists, per count, which upper lanes carry an exact form, "
+        "the verified lane among them, to show where the start needs both; it describes the "
+        "field and reads no value of it as s(n)"
+    ),
+    "docs/project/reviews/review-2026-10-13-verification-gaps.md": (
+        "the verification-gaps review measures each drawn side and each reported side "
+        "against the field as U, the best side the record verifies exactly; it reads it "
+        "as a ceiling, never as s(n)"
+    ),
+    "packing/devtools/register_evand_arrangements.py": (
+        "adopts an exact rational feasible ceiling for the complete new #399 pose; "
+        "preserves older ceilings and poses as historical evidence, never as s(n)"
+    ),
+    "packing/tests/test_evand_arrangement_adoption.py": (
+        "checks exact ceiling/complete-pose adoption and generator preservation; "
+        "never identifies feasibility with optimality or s(n)"
+    ),
+    "packing/devtools/select_houses.py": (
+        "reads each case's verified ceiling to select the smallest reviewed, replayed "
+        "certificate below it as the house; a smaller feasible side is a ceiling, not s(n)"
+    ),
+    "packing/devtools/adopt_houses.py": (
+        "moves the reported and verified ceilings together to an adopted exact feasible "
+        "side and keeps the earlier ceiling as history; it never reads either as s(n)"
+    ),
+    "packing/tests/test_exact_sides.py": (
+        "reads a closed-form ceiling through regularize_evand.verified_bound, as "
+        "select_houses does, to hold it exactly beside the sides a house is chosen from; "
+        "it compares a ceiling, never s(n)"
+    ),
+    "packing/tests/test_house_adoption.py": (
+        "checks each retained prior record's ceiling stood above its adopted house and "
+        "that a redraft keeps the adopted ceiling; feasibility, never s(n) or optimality"
+    ),
     "packing/tests/test_evand_exact_certificates.py": (
         "holds a synthetic case's ceiling against conjectures inside and past half a unit "
         "of their last place, and each T-101 ceiling to the certified side rounded up and "
@@ -201,7 +446,7 @@ DECLARED_CONSUMERS = {
         "reads the verified ceiling to measure a bounded transfer-diagnostic gap; it "
         "does not identify that ceiling with s(n) or claim optimality"
     ),
-    "packing/atlas/known-best/video/spikes/v1-slideshow/NOTES.md": (
+    "packing/atlas/known-best/video/spikes/v1-slideshow/notes.md": (
         "a retained prototype's notes, listing the record fields the slideshow panel "
         "deliberately does not draw; it names this field to say the figure omits it "
         "because it is a ceiling rather than s(n), which is the contract's own reading"
@@ -343,7 +588,7 @@ DECLARED_CONSUMERS = {
     "packing/campaign/agendas/agenda-005-symbolic-promotion-and-identity.md": (
         "plans promotion work that reads the ceiling, never as the value"
     ),
-    "docs/project/specs/active/plan-2026-08-28-interval-certification.md": (
+    "docs/project/specs/done/plan-2026-08-28-interval-certification.md": (
         "specs certification that would tighten the ceiling toward the report"
     ),
     "packing/campaign/research-loop-logbook/run-002-2026-08-29-overnight-promotion-blocks.md": (
@@ -441,6 +686,26 @@ def trailing_ceilings(loaded_cases: dict[int, dict]) -> dict[int, tuple[Decimal,
     return trailing
 
 
+def test_no_verified_ceiling_lies_above_the_next_counts() -> None:
+    """`s(n) <= s(n + 1)`, since deleting a square from a packing leaves a packing in the
+    same square, so a ceiling above the next count's is weaker than the record already
+    proves. From 12 October 2026, when T-155 certified n = 291 at the side T-156 later
+    registered, n = 290's ceiling lay 2.4e-15 above n = 291's until T-156 moved it (PR
+    #587, review B1). A count whose ceiling the next one implies is registered by
+    monotonicity, as T-002 and T-156 are, and this test finds the next such gap."""
+    loaded = cases()
+    ceilings = {
+        n: apply_exact_ceilings.bound_value(case["verified_upper_bound"])
+        for n, case in loaded.items()
+    }
+    above = [
+        (n, float(ceilings[n] - ceilings[n + 1]))
+        for n in sorted(ceilings)
+        if n + 1 in ceilings and ceilings[n] > ceilings[n + 1]
+    ]
+    assert above == []
+
+
 def test_a_third_of_the_corpus_certifies_a_weaker_bound_than_it_reports() -> None:
     loaded_cases = cases()
     trailing = trailing_ceilings(loaded_cases)
@@ -456,13 +721,74 @@ def test_a_third_of_the_corpus_certifies_a_weaker_bound_than_it_reports() -> Non
     # 3/7 as the widest.
     # 16 at n = 1..100 after n=17's certified endpoint. New cases above 100 trail
     # on the grid ceiling wherever the catalogue reports a non-integer side.
-    assert len(trailing) == TRAILING_BY_CORPUS[KNOWN_BEST_CORPUS.label]
+    # The frozen catalogue certificates identify the old trailing closed forms.
+    # A newly reported source can precede its replay, then disappear from this set
+    # when its own exact ceiling is adopted. Neither event rewrites that old audit.
+    frozen_trailing = {
+        n
+        for n, row in apply_exact_ceilings.committed().items()
+        if not row["agrees_with_report"]
+    } | {29}
+    for corpus, expected in TRAILING_BY_CORPUS.items():
+        limit = int(corpus.split("..", 1)[1])
+        assert sum(n <= limit for n in frozen_trailing) == expected
+    historical = {
+        n
+        for n, row in apply_exact_ceilings.committed().items()
+        if not row["agrees_with_report"]
+        and loaded_cases[n]["reported_upper_bound"]["source_key"] == "[Kingbird]"
+    }
+    pending = {
+        n
+        for n in squish.NUMBERS
+        if loaded_cases[n]["reported_upper_bound"]["source_key"] == squish.source_key(n)
+        and not any(
+            e.startswith("E-squish-")
+            for e in loaded_cases[n]["verified_upper_bound"]["evidence"]
+        )
+    }
+    # Earlier SQUISH replay evidence certifies the earlier geometry, not this update.
+    pending |= {
+        n
+        for n in squish_update.NUMBERS
+        if loaded_cases[n]["reported_upper_bound"]["source_key"] == squish_update.SOURCE_KEY
+        and not any(
+            e.startswith("E-squish-update-")
+            for e in loaded_cases[n]["verified_upper_bound"]["evidence"]
+        )
+    }
+    pending |= {
+        n
+        for n in squish_second.NUMBERS
+        if loaded_cases[n]["reported_upper_bound"]["source_key"] == squish_second.SOURCE_KEY
+        and not any(
+            e.startswith("E-squish-second-update-")
+            for e in loaded_cases[n]["verified_upper_bound"]["evidence"]
+        )
+    }
+    from devtools import gupta_house_links as gupta  # noqa: PLC0415
+
+    pending |= {
+        n
+        for n in gupta.NUMBERS
+        if loaded_cases[n]["reported_upper_bound"]["source_key"] == gupta.reports.SOURCE_KEY
+        and gupta.reports.EXACT_EVIDENCE
+        not in loaded_cases[n]["verified_upper_bound"]["evidence"]
+    }
+    interval = (
+        {29}
+        if loaded_cases[29]["reported_upper_bound"]["source_key"] == "[Kingbird]"
+        else set()
+    )
+    assert set(trailing) == historical | interval | pending
     for n, (reported, verified) in trailing.items():
         assert verified > reported, n
     # Up to 0.464 until 2026-10-06, when T-101's certificates took the last trailing
     # ceilings off the integer grid; what trails now does so by one unit of the printed
     # fourteenth decimal at most.
-    worst = max(verified - reported for reported, verified in trailing.values())
+    worst = max(
+        verified - reported for n, (reported, verified) in trailing.items() if n not in pending
+    )
     assert worst <= Decimal("1E-14")
 
     # And in those cases `exact_form` is exact about the ceiling and says nothing about
@@ -476,7 +802,7 @@ def test_a_third_of_the_corpus_certifies_a_weaker_bound_than_it_reports() -> Non
     }
     assert not grids
     closed = {n for n in trailing if loaded_cases[n]["reported_upper_bound"]["exact_form"]}
-    assert sorted(set(trailing) - closed) == [29]
+    assert sorted(set(trailing) - closed - pending) == sorted(interval)
 
     # Every case carrying an exact_form on the ceiling, split by whether s(n) is known.
     exact_forms = sum(

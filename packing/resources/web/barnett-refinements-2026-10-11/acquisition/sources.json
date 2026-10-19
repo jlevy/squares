@@ -1,0 +1,101 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-10-11T20:35Z",
+  "git_scope": "Full clone, checked out at the commit issue #505 pins; main had moved to 52cf1cc7ba006731ef76818267216c87bb63281e, which adds diagrams and moves the historical certificates into superseded/ and leaves certificates/n146.cert and certificates/n261.cert byte-identical. All eleven files of the pinned tree are in the scope and bound to their Git blobs; under derived-only custody none is copied. No source program was executed.",
+  "sources": [
+    {
+      "id": "robertbarnett-square-packing-research",
+      "source_url": "https://github.com/RobertBarnettProjects/square-packing-research",
+      "source_ref": "2573ff51c4b160c952bbb2d1c399e7430d9f9ae2",
+      "source_commit": "2573ff51c4b160c952bbb2d1c399e7430d9f9ae2",
+      "committed_utc": "2026-10-11T13:52:00Z",
+      "git_tree": "074518888aa78d0175eaa8d37a3e599e4e9f6067",
+      "archived_path": "packing/resources/web/barnett-refinements-2026-10-11/source",
+      "subtree_manifest": "packing/resources/web/barnett-refinements-2026-10-11/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "README.md",
+        "certificates",
+        "results"
+      ],
+      "subtree_file_count": 11,
+      "subtree_total_bytes": 502546,
+      "retained_file_count": 0,
+      "retained_total_bytes": 0,
+      "compressed": [],
+      "pinned_only": [
+        {
+          "path": "README.md",
+          "bytes": 8399,
+          "sha256": "40b97e99f8b16856264b2bf6c3fbf053045f24203397d6666718edee4f7de922",
+          "reason": "Author prose stating the claims, method, credit and AI assistance, quoted in this packet's README. No licence: pinned by digest only."
+        },
+        {
+          "path": "certificates/n070.cert",
+          "bytes": 5892,
+          "sha256": "767adfdc54477bf1fc2c46eeaf0f71cdfc87c8639391bb43ec5a0586bff4cdc2",
+          "reason": "An exact rational certificate in Evan Daniel's format: the header n S, then x y t per square with centres in [0, S]^2 and rational half-angle tangents t. No licence in the tree, so derived-only custody: an importer reads it from a checkout at this pin and must match this digest."
+        },
+        {
+          "path": "certificates/n103.cert",
+          "bytes": 8802,
+          "sha256": "496da623c14ea7983729f7b3e380cb1c7431612a85de52b0c30f636d3d3a2952",
+          "reason": "An exact rational certificate in Evan Daniel's format: the header n S, then x y t per square with centres in [0, S]^2 and rational half-angle tangents t. No licence in the tree, so derived-only custody: an importer reads it from a checkout at this pin and must match this digest."
+        },
+        {
+          "path": "certificates/n123.cert",
+          "bytes": 9859,
+          "sha256": "b3ea89a34eda651cc851f126d9adb023f74e9e2cdb49745c114abe4b9142cd1c",
+          "reason": "An exact rational certificate in Evan Daniel's format: the header n S, then x y t per square with centres in [0, S]^2 and rational half-angle tangents t. No licence in the tree, so derived-only custody: an importer reads it from a checkout at this pin and must match this digest."
+        },
+        {
+          "path": "certificates/n146.cert",
+          "bytes": 74239,
+          "sha256": "77b5524f387472a8e5996e319d05735e2a6a0046c24e7043995549bf3945fa3d",
+          "reason": "An exact rational certificate in Evan Daniel's format: the header n S, then x y t per square with centres in [0, S]^2 and rational half-angle tangents t. No licence in the tree, so derived-only custody: an importer reads it from a checkout at this pin and must match this digest."
+        },
+        {
+          "path": "certificates/n2043.cert",
+          "bytes": 198698,
+          "sha256": "bfbefba7df7481d409620da9843a51fcaf92c02fdcb733f0c0e24796fb5bd779",
+          "reason": "An exact rational certificate in Evan Daniel's format: the header n S, then x y t per square with centres in [0, S]^2 and rational half-angle tangents t. No licence in the tree, so derived-only custody: an importer reads it from a checkout at this pin and must match this digest."
+        },
+        {
+          "path": "certificates/n237.cert",
+          "bytes": 22290,
+          "sha256": "76253edce982bae58907c8c39a18433a053eb2a89adccd2dcea58737e09966b6",
+          "reason": "An exact rational certificate in Evan Daniel's format: the header n S, then x y t per square with centres in [0, S]^2 and rational half-angle tangents t. No licence in the tree, so derived-only custody: an importer reads it from a checkout at this pin and must match this digest."
+        },
+        {
+          "path": "certificates/n261.cert",
+          "bytes": 125135,
+          "sha256": "9141f7eb86ae23388d349efd810992727f16ca09bc9d0d1a5b94cd5e2a3f0019",
+          "reason": "An exact rational certificate in Evan Daniel's format: the header n S, then x y t per square with centres in [0, S]^2 and rational half-angle tangents t. No licence in the tree, so derived-only custody: an importer reads it from a checkout at this pin and must match this digest."
+        },
+        {
+          "path": "certificates/n295.cert",
+          "bytes": 27730,
+          "sha256": "e9226d79456445dd4513c6fb95d8b34ebe568959816bf77e60a19af937b3ac73",
+          "reason": "An exact rational certificate in Evan Daniel's format: the header n S, then x y t per square with centres in [0, S]^2 and rational half-angle tangents t. No licence in the tree, so derived-only custody: an importer reads it from a checkout at this pin and must match this digest."
+        },
+        {
+          "path": "results/quiet-2026-10-10.json",
+          "bytes": 4979,
+          "sha256": "cc7527ae32674bb2700db8be72f5af05984498924fd113adca42369c89d584c4",
+          "reason": "The source's result metadata: exact sides, comparisons, check receipts and timings, an author report. No licence: pinned by digest only."
+        },
+        {
+          "path": "results/review-2026-10-11.json",
+          "bytes": 16523,
+          "sha256": "7b19d2fe41037206ae44fe4a3d43ee5d4e3024e83507a75d2e67fe058936b712",
+          "reason": "The source's result metadata: exact sides, comparisons, check receipts and timings, an author report. No licence: pinned by digest only."
+        }
+      ],
+      "license": "No licence file in the pinned tree, and its README states no reuse terms. Derived-only custody under the known-best retention policy: no upstream byte is retained, every file is bound here by SHA-256 and at the pin by its Git blob, and no redistribution permission or licence determination is asserted. The source credits Ryan Xu with both layouts (and Evan Daniel's regularization at 146 in the comparison) and Robert Barnett with the refinements, and discloses OpenAI Codex assistance.",
+      "claims": [
+        "Issue #505 reports the exact rational certificates s(146) <= 116279649124311595126849961042493265136092670741573762928668277775998122712863472766532671969348798419026610394581005669/9240437194455113887096299456817024243377978045957194209468060456305894240222303442118770000000000000000000000000000000 (rounded up, 12.583782203951046204) and s(261) <= 281511998443714605777671262552678001053511713995864784318453182156213791529093472577894719178723409384395264262601/16878452773388004800535351238155816857400040173477095354881922318666694517637251382500000000000000000000000000000 (rounded up, 16.678779875343207747), local refinements of Ryan Xu's packings by sequential linear programming and exact rational contraction.",
+        "The README at the pin also lists s(2043) <= 2284784566027863/50000000000000, a refinement of David Ellsworth's packing as improved by Grigoriy Dyachkov, beyond the case corpus, and five historical certificates at 70, 103, 123, 237 and 295 that it marks superseded and excludes from the request.",
+        "The source reports that each certificate passes two exact checkers written in the same assisted project and Evan Daniel's verify_cert.py and verify_cert2.py at 268af529546176a25224ea3b2c7d29cef8d9e911, and that David Ellsworth's check_packing.py accepts 140-digit exports at tolerance 1e-90. These are author reports; no global or local optimality is claimed."
+      ]
+    }
+  ]
+}

@@ -25,7 +25,21 @@ the interval decision several first-party certificates cite, does not make every
 decided hold the bound. Where only a reported bound rests on an entry, it is the current
 best as reported. An entry that holds no bound is a *second certificate* where it proves
 the exact value of a proved case (it cites that case's verified upper bound beside a
-lower bound of its own) and *superseded* where it is any other bound.
+lower bound of its own), or where it is a second proof of a value the record holds, a
+simplification or a formalization, whose every stated bound equals its case record's in
+the lane it can hold (`check_standing.restates`), such as a report that proves again a
+value the case's reported lane holds under another entry's citation. Any other bound
+that holds none is *superseded* where its case records hold a bound at least as good as
+every bound it states, and *pending adoption* (`PENDING_ADOPTION`) where one it states
+is strictly better than the case record's, in a lane it can hold
+(`check_standing.improvements`): a report the case records have not taken in yet, such
+as `T-128`'s eight rational certificates, which nothing on record has replaced, or a
+simplification or a formalization replayed here before its case records adopt the value
+its claim states. Superseded means replaced, so it is decided by the numbers the entry's
+words state, compared exactly where the case record's bound is exact and, beside a
+closed form, within one unit of its printed value's last place (`span`), where a tie is
+all that can be said; an entry whose words state no bound the check reads is held to the
+structure alone, and is superseded wherever no case bound rests on it.
 
 **Standing is about bounds, so an entry whose evidence claims none has no standing**
 (`NO_STANDING`): no later bound supersedes a rigidity or a case exclusion. The views show
@@ -60,6 +74,7 @@ from __future__ import annotations
 
 from collections.abc import Iterable, Mapping, Sequence
 from dataclasses import dataclass, field
+from decimal import Decimal
 from fractions import Fraction
 from typing import Any, NamedTuple
 
@@ -77,7 +92,12 @@ from devtools.build_bound_citations import (
     project_result,
     results_carrying,
 )
-from devtools.check_results import BOUND_KINDS, recent_evidence, scope_values
+from devtools.check_results import (
+    BOUND_KINDS,
+    SECOND_PROOF_KINDS,
+    recent_evidence,
+    scope_values,
+)
 from devtools.result_credit import source_lineage
 from devtools.result_status import CONFIRMED_FROM
 from sqpack.assurance import bounds_agree_at_declared_precision
@@ -107,9 +127,14 @@ ELLIPSIS = "…"
 HOLDS = "current best"
 HOLDS_REPORTED = "current best, reported"
 SECOND_CERTIFICATE = "second certificate"
-#: A second route to a proved value that this repository has not replayed: the same word
-#: as a replayed one would say it had been checked here.
+#: A second route to a value the case records hold, proved or reported, that no replay
+#: has confirmed (`UNREPLAYED`): the same word as a replayed one would say it had been
+#: checked.
 SECOND_CERTIFICATE_REPORTED = "second certificate, reported"
+#: A bound no case bound rests on, that states one strictly better than its case record
+#: holds in a lane it can hold: not yet taken into the case records, and replaced by
+#: nothing. The views draw no mark for it; its status says how far it has been checked.
+PENDING_ADOPTION = "pending adoption"
 SUPERSEDED = "superseded"
 #: The mark of a result of a kind that is no bound, part of which a later result implies,
 #: where its entry declares it (`superseded_by`, extent `part`); it is drawn after
@@ -123,12 +148,18 @@ STANDINGS = (
     HOLDS_REPORTED,
     SECOND_CERTIFICATE,
     SECOND_CERTIFICATE_REPORTED,
+    PENDING_ADOPTION,
     SUPERSEDED,
 )
 #: What `standing` returns for an entry whose evidence claims no bound: it has none.
 NO_STANDING = ""
-#: The confirmation rungs at which a certificate has been replayed here (epistemics.md).
-REPLAYED_RUNGS = frozenset({"C3", "C4", "C5"})
+#: The confirmation rungs below a passed replay (epistemics.md, Confirmation), where a
+#: result is recorded or reviewed and the status is not yet `confirmed`
+#: (`devtools.result_status.CONFIRMED_FROM`). An entry at one is a report: it can hold the
+#: reported lane and never the verified one (`check_standing`), and a second certificate
+#: at one is `SECOND_CERTIFICATE_REPORTED`. One partition serves both, so the lane an
+#: entry is held to and the word its standing takes cannot disagree at `C2`.
+UNREPLAYED = frozenset(f"C{rung}" for rung in range(CONFIRMED_FROM))
 #: The evidence claims that make an entry a bound on `s(n)`, as the evidence schema types
 #: them; `derived-structure` and the witness claims are not bounds.
 BOUND_CLAIMS = frozenset({"lower-bound", "upper-bound", "exact-value"})
@@ -252,6 +283,25 @@ def magnitude(bound: Mapping[str, Any]) -> Fraction:
     """A bound's value: its exact form where that is a number, else its recorded value."""
     rational = _rational(bound.get("exact_form"))
     return rational if rational is not None else Fraction(str(bound["value"]))
+
+
+def span(bound: Mapping[str, Any]) -> tuple[Fraction, Fraction]:
+    """The numbers a case record's bound may be, as a closed interval, for comparing a
+    stated bound with it exactly. Its exact form where that is a number, and the value it
+    prints where it gives no exact form. Beside a closed form, such as a root or `sqrt`,
+    the printed value is a display that may be cut or rounded either way, so it stands for
+    every number within one unit of its last printed place, as
+    `bounds_agree_at_declared_precision` reads a display: n = 5's verified ceiling prints
+    `2 + (1/2)sqrt(2)` rounded up in its 32nd place."""
+    rational = _rational(bound.get("exact_form"))
+    if rational is not None:
+        return rational, rational
+    value = Fraction(str(bound["value"]))
+    exponent = Decimal(str(bound["value"])).as_tuple().exponent
+    if not bound.get("exact_form") or not isinstance(exponent, int):
+        return value, value
+    unit = Fraction(10) ** exponent
+    return value - unit, value + unit
 
 
 def shown(bound: Mapping[str, Any]) -> str:
@@ -474,9 +524,30 @@ def held(n: int, records: Records) -> Held:
     )
 
 
+def lane_holders(n: int, records: Records, direction: str, lanes: Iterable[str]) -> set[str]:
+    """The entries case `n`'s bounds in `direction` (`lower` or `upper`) rest on, in the
+    named `lanes` (`verified`, `reported`), read as `held` reads them."""
+    case = records.cases[n]
+    found: set[str] = set()
+    for lane in lanes:
+        bound = case.get(f"{lane}_{direction}_bound")
+        if direction == "upper":
+            found |= _upper_holders(n, bound, records)
+        elif bound:
+            label = "lower" if lane == "verified" else "reported lower"
+            found |= _lower_holders(n, bound, records, label)
+    return found
+
+
 def standing(record: Mapping[str, Any], records: Records) -> str:
     """Whether an entry holds a case bound now, and if not, why not. An entry whose
-    evidence claims no bound has no standing, `NO_STANDING`."""
+    evidence claims no bound has no standing, `NO_STANDING`.
+
+    A bound that holds none is superseded only where nothing it states is strictly better
+    than its case records' bounds; where something is, it is `PENDING_ADOPTION`. An entry
+    better at some of its cases and beaten at others is pending adoption as a whole, as
+    an entry that still holds one case of several is the current best; asked of the
+    beaten cases alone (`result_overview.standing_on`), it is superseded there."""
     entry = str(record["id"])
     cases = [held(n, records) for n in _scope(record) if n in records.cases]
     if any(entry in case.verified for case in cases):
@@ -487,13 +558,19 @@ def standing(record: Mapping[str, Any], records: Records) -> str:
     claims = {records.register.evidence[item].get("claim") for item in cited}
     if not claims & BOUND_CLAIMS:
         return NO_STANDING
-    if "lower-bound" in claims and any(
-        case.proved and cited & case.upper_evidence for case in cases
-    ):
-        if str(record["confirmation"]) in REPLAYED_RUNGS:
-            return SECOND_CERTIFICATE
-        return SECOND_CERTIFICATE_REPORTED
-    return SUPERSEDED
+    # `check_standing` reads this module, so its reader of stated bounds is imported here.
+    from devtools.check_standing import improvements, restates  # noqa: PLC0415
+
+    # A second proof: of a proved case's value, or a simplification or a formalization
+    # that restates the value its case records hold in the lane it can hold.
+    second = (
+        "lower-bound" in claims
+        and any(case.proved and cited & case.upper_evidence for case in cases)
+    ) or (str(record.get("kind")) in SECOND_PROOF_KINDS and restates(record, records))
+    if second:
+        reported = str(record["confirmation"]) in UNREPLAYED
+        return SECOND_CERTIFICATE_REPORTED if reported else SECOND_CERTIFICATE
+    return PENDING_ADOPTION if improvements(record, records) else SUPERSEDED
 
 
 def _declared(record: Mapping[str, Any], extent: str) -> tuple[str, ...]:
@@ -510,10 +587,12 @@ def superseded(record: Mapping[str, Any], held: str) -> bool:
     """Whether a table of results marks an entry superseded, given its standing `held`.
 
     A bound, a result whose `kind` is one of `BOUND_KINDS`, is superseded where no case
-    bound rests on it now, which is derived from the case records and never stored.
+    bound rests on it now and the case records hold one at least as good as each it
+    states, which is derived from the case records and never stored. A better bound they
+    have not taken in yet is pending adoption and not superseded: nothing replaced it.
     That a bound is only reported is the result's status (`devtools.result_status`:
     recorded), and a second proof of a value another result holds says so by its kind,
-    simplification.
+    simplification or formalization.
 
     A result of any other kind has no place on the frontier to lose, though it may cite
     the evidence of the bound it is about and so derive a standing: `T-003`, the limit
@@ -534,13 +613,33 @@ def superseding(record: Mapping[str, Any], records: Records) -> tuple[str, ...]:
     a lower bound's and an exact value's are the lower bounds' holders, since a
     construction never supersedes a proof. An audit or a correction that cites a bound's
     evidence carries it and supersedes nothing. Empty where no register entry carries
-    those bounds."""
-    upper = str(record["kind"]) == "upper-bound"
+    those bounds.
+
+    Where the entry's words state its bound at a case (`check_standing.findings`), only
+    the lanes whose bound ties or beats it there are named. A lane whose bound is worse
+    than the entry's replaced nothing: a report beaten in the reported lane is not
+    superseded by the holder of a worse verified bound. Where the words state none, both
+    lanes are named, as `held` reads them."""
+    # `check_standing` reads this module, so its reader of stated bounds is imported here.
+    from devtools.check_standing import (  # noqa: PLC0415
+        BEATEN,
+        EQUAL,
+        LANES,
+        LOWER,
+        UPPER,
+        findings,
+    )
+
+    direction = UPPER if str(record["kind"]) == "upper-bound" else LOWER
+    replaced = {
+        finding.n: {lane for lane in LANES if getattr(finding, lane) in {BEATEN, EQUAL}}
+        for finding in findings(record, records)
+        if finding.direction == direction
+    }
     found: set[str] = set()
     for n in _scope(record):
         if n in records.cases:
-            case = held(n, records)
-            found |= case.upper_holders if upper else case.lower_holders
+            found |= lane_holders(n, records, direction, replaced.get(n, set(LANES)))
     found.discard(str(record["id"]))
     return tuple(
         sorted(entry for entry in found if records.results[entry]["kind"] in BOUND_KINDS)
@@ -605,11 +704,11 @@ def supersessions(
 
 def reports(results: Iterable[str], records: Records) -> frozenset[str]:
     """The results among `results` that no replay has confirmed: below `C2`, which is
-    recorded or reviewed (`devtools.result_status`)."""
+    recorded or reviewed (`UNREPLAYED`)."""
     return frozenset(
         result
         for result in results
-        if int(str(records.results[result]["confirmation"])[1]) < CONFIRMED_FROM
+        if str(records.results[result]["confirmation"]) in UNREPLAYED
     )
 
 

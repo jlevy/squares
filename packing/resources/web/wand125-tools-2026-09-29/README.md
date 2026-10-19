@@ -34,7 +34,7 @@ The [updated source archive](update-3eb08e6/upstream.tar.gz) and
 `3eb08e6c675d8d5aa953cb93da049a3f3cdc6123`, four commits after the original pin.
 The update addresses our mass-budget and ceiling-guidance findings and adds upstream CI;
 Tokoharu's canonical C++ coverage checker remains unchanged. The
-[current process map](../../../../docs/project/verification-tooling.md#wand125-verification-process-and-independent-equivalence)
+[current process map](../../../../docs/project/guides/verification-tooling.md#wand125-verification-process-and-independent-equivalence)
 separates wrapper admission, complete coverage, independent acceptance and matched
 performance. Updated controls and benchmarks remain separate from historical receipts.
 
@@ -75,7 +75,7 @@ not been replayed or admitted here; the existing evidence and V/C ratings for T-
 T-053 remain unchanged. Separate replay and performance work remains under `think-lg4u`
 and `think-wk08`; `think-lest` tracks this classification.
 
-The [verification tooling overview](../../../../docs/project/verification-tooling.md)
+The [verification tooling overview](../../../../docs/project/guides/verification-tooling.md)
 records which checks are independent, which replay upstream code, and what remains to be
 implemented or replayed.
 Review and integration work is tracked by `think-8cps`.

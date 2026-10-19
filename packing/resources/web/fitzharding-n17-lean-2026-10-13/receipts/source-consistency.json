@@ -1,0 +1,95 @@
+{
+  "format": "sq17-lean-source-consistency-v1",
+  "manifest_schema": "sq17-source-release-v1",
+  "manifest_status": "complete",
+  "manifest_entry": "Sq17Lean.Square17Optimality",
+  "manifest_counts": {
+    "finalClosure": 4951,
+    "pendingOrdinary": 0,
+    "validationOnly": 2
+  },
+  "source_modules_listed": 4953,
+  "validation_only": [
+    "Sq17Lean/HalfPlaneBoundaryControl.lean",
+    "Sq17Lean/HalfPlanePositiveControl.lean"
+  ],
+  "in_tree_modules_listed": 1215,
+  "lean_files_in_checkout": 1215,
+  "in_tree_listed_equals_checkout_lean_files": true,
+  "in_tree_modules_mismatched": [],
+  "root_files_listed": [
+    ".gitignore",
+    "LICENSE",
+    "README.md",
+    "lake-manifest.json",
+    "lakefile.toml",
+    "lean-toolchain",
+    "scripts/reproduce.py",
+    "scripts/unpack.py",
+    "verification/HalfPlaneBoundaryControl.log",
+    "verification/HalfPlanePositiveControl.log",
+    "verification/Square17Optimality.log",
+    "verification/clean-build-receipt.json"
+  ],
+  "root_files_mismatched": [],
+  "archives": [
+    {
+      "name": "certificates/generated-sources.tar.gz",
+      "bytes": 718897665,
+      "sha256": "5e0f823f9853b18509f2001e94dab9fea200eaa88bef2dd0b9200c97bd16f029",
+      "format": "tar.gz",
+      "members": 526,
+      "modules_assigned": 526,
+      "module_bytes": 2316893868
+    },
+    {
+      "name": "certificates/ordinary-generated-sources.tar.xz",
+      "bytes": 721405188,
+      "sha256": "27770a1963be6264e368463d562d49eb90b8b38f1b2fae7dcef8c56b7785c83c",
+      "format": "tar.xz",
+      "members": 2832,
+      "modules_assigned": 2832,
+      "module_bytes": 3104229541
+    },
+    {
+      "name": "certificates/tree1563-sources.tar.gz",
+      "bytes": 522564562,
+      "sha256": "37f0e0174eb4195798e1a0f11f8d9f20ada412b8655985e138b7931917363b5a",
+      "format": "tar.gz",
+      "members": 380,
+      "modules_assigned": 380,
+      "module_bytes": 1565188303
+    }
+  ],
+  "archive_bytes_total": 1962867415,
+  "axiom_report": {
+    "theorem": "Sq17.square17_optimality",
+    "axioms_listed": 13346,
+    "standard_axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "native_decide_facts": 13343,
+    "distinct_native_decide_facts": 13343,
+    "other_axioms": [],
+    "sorryAx_anywhere": false,
+    "statement_line": "Sq17.square17_optimality (L : ℝ) : Sq17.HalfPlaneAssembly.PlainPacking L ↔ Sq17.EndpointGeometry.side ≤ L",
+    "log_sha256": "5e74c4afe1e55f1e1c64193eb9a06aa413075a7355ad5faa108c4930da8ac241",
+    "log_sha256_matches_receipt": true,
+    "native_decide_facts_match_receipt": true,
+    "standard_axioms_match_receipt": true
+  },
+  "receipt_status": "CLEAN_SOURCE_BUILD_ACCEPTED",
+  "receipt_modules_rebuilt": 4951,
+  "controls": {
+    "HalfPlaneBoundaryControl": {
+      "exit_code": 0,
+      "log_sha256_matches_receipt": true
+    },
+    "HalfPlanePositiveControl": {
+      "exit_code": 0,
+      "log_sha256_matches_receipt": true
+    }
+  }
+}

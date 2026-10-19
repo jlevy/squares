@@ -13,4 +13,5 @@
   behaviors.override("tooltip", () => undefined);
   window.kpressInitTooltips = initKpressTooltips;
   window.kpressInitCodeCopy = initKpressCodeCopy;
+  globalThis.siteKpressTooltipPosition = positionTooltip;
 })();

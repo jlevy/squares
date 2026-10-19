@@ -30,7 +30,7 @@ from collections import Counter
 from collections.abc import Sequence
 from pathlib import Path
 
-from devtools.verifier_registry import SHORT_LABELS, runs_code
+from devtools.verifier_registry import coverage_line, runs_code, sampled, short_relation_label
 from sqpack.assurance import conditions, discharges, undischarged
 from sqpack.yamlio import safe_load
 
@@ -134,7 +134,8 @@ def render() -> str:
         "",
     ]
 
-    formal = [r for r in records if r.get("assurance") == "verified"]
+    samples = [r for r in records if sampled(r)]
+    formal = [r for r in records if r.get("assurance") == "verified" and not sampled(r)]
     own_formal = [r for r in formal if ours(r)]
     external = [r for r in records if r.get("origin") in EXTERNAL_ORIGINS]
     unreviewed = [
@@ -150,7 +151,8 @@ def render() -> str:
         "",
         (
             f"- **{len(records)}** evidence records. **{len(formal)}** are formal; "
-            f"**{len(own_formal)}** of those were established here."
+            f"**{len(own_formal)}** of those were established here. "
+            f"**{len(samples)}** are samples, counted separately."
         ),
         (
             f"- **{len(external)}** rest on an argument made elsewhere, of which "
@@ -194,9 +196,9 @@ def render() -> str:
         "",
         (
             "| evidence | cases | claim | assurance | method decides "
-            "| whose work | read here | novelty | code | programs |"
+            "| whose work | read here | novelty | code | coverage | programs |"
         ),
-        "| --- | ---: | --- | --- | --- | --- | --- | --- | --- | --- |",
+        "| --- | ---: | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
     ]
 
     for record in records:
@@ -204,14 +206,15 @@ def render() -> str:
         whose = "here" if ours(record) else ("elsewhere" if record.get("origin") else "-")
         review = (record.get("external_review") or {}).get("state", "-")
         novelty = record.get("novelty") or "*not assessed*"
-        code = SHORT_LABELS.get(str(record.get("relationship_to_generator")), "-")
+        code = short_relation_label(record)
         programs = ", ".join(f"`{v}`" for v in record.get("verifiers") or []) or (
             "*none held*" if runs_code(record) else "-"
         )
         lines.append(
             f"| `{record['id']}` | {load.get(record['id'], 0)} "
             f"| {claim_text(record, by_id)} | {record.get('assurance', '-')} "
-            f"| {decides} | {whose} | {review} | {novelty} | {code} | {programs} |"
+            f"| {decides} | {whose} | {review} | {novelty} | {code} "
+            f"| {coverage_line(record)} | {programs} |"
         )
 
     lines += ["", "## What the register rests on", ""]

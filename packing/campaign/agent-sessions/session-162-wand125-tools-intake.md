@@ -92,7 +92,7 @@ session:
       and formal-kernel boundaries. Updated SYNOPSIS, kept TUTORIAL unchanged as requested, and documented
       the native prototype's complete control separately from its inconclusive external probe.
     evidence:
-    - docs/project/verification-tooling.md
+    - docs/project/guides/verification-tooling.md
     - packing/resources/README.md
     - SYNOPSIS.md
     stop_reason: Reader-facing descriptions reconciled with retained evidence.
@@ -184,9 +184,9 @@ session:
     outcome: Audited existing families, reviewed native trust boundaries and reconciled the overview
       against the actual receipts.
     evidence:
-    - docs/project/verification-tooling.md
+    - docs/project/guides/verification-tooling.md
     files:
-    - docs/project/verification-tooling.md
+    - docs/project/guides/verification-tooling.md
     - SYNOPSIS.md
     checks:
     - Flowmark 0.4.0 formatting, local-link and footer checks, and git diff --check passed for assigned
@@ -201,7 +201,7 @@ session:
   - packing/resources/web/wand125-tools-2026-09-29/README.md
   - docs/project/reviews/review-2026-09-29-wand125-tools-mathematics.md
   - docs/project/specs/active/plan-2026-09-29-native-rectangle-verification.md
-  - docs/project/verification-tooling.md
+  - docs/project/guides/verification-tooling.md
   - packing/src/sqpack/rectangle_density.py
   - packing/devtools/verify_rectangle_density.py
   - packing/devtools/audit_wand125_tools.py

@@ -1,0 +1,154 @@
+{
+ "argv": [
+  "python",
+  "-B",
+  "obstruction/run.py",
+  "--output",
+  "duals"
+ ],
+ "compiler": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+ "cpu_seconds": 385.278,
+ "exit_code": 0,
+ "kind": "n40-new-supports-replay-duals/v1",
+ "loadavg_after": [
+  23.94,
+  19.03,
+  17.99
+ ],
+ "loadavg_before": [
+  13.05,
+  17.75,
+  19.0
+ ],
+ "obstruction": {
+  "actual_exits": {
+   "build-cpp": 0,
+   "cpp": 0,
+   "false-dual": 2,
+   "python": 0
+  },
+  "binary_sha256": "d5ecc193a842c21e86281c7facdc4f92a70cec92a28f5f7e002ed5d3a77cf51c",
+  "certificate_sha256": "f4edfa9a08efaffe8916d3da2c2a8ff567489a2185319de742e8b9e97e3939f9",
+  "code_sha256": {
+   "obstruction/check.cpp": "fd46b3c6235b2ad5fc720b9df89e338149be4e8b48b9d925810c88a4392fba92",
+   "obstruction/check.py": "ab7098051a951fb400882d546a1cc27ceaf85fd4b8c180bd356fcbffa962a026",
+   "obstruction/run.py": "c8feec6bed2148abb1b1640a5c9bd1fd561db50da2b7ad4a099630b9ab48095e",
+   "tests/oracle.py": "395fa622bec60607798a3da4103162313833fe9c139a40ca2023cd00c14d581e",
+   "verifier/exact.py": "41423a54d1c5ba2262bbf086f57fd03bd0457d9e35ddc8fdafb4b819b04e677e"
+  },
+  "coefficients_per_implementation": 980088,
+  "cpp": {
+   "max_column": 201,
+   "max_score_denominator": "1000000000003000000000000",
+   "max_score_numerator": "24998348431654956215746",
+   "partial_clippings": 90359,
+   "poses": 388,
+   "seconds": 360.777,
+   "sites": 2526,
+   "status": "EXACT_FAMILY_OBSTRUCTION",
+   "strict_scaled_slack": "66062736801751370160"
+  },
+  "input_sha256": "87bc1fe1bd72973719cd230267d024ff8952b05f8674c75e32c8f20a5f07d29b",
+  "packing_upper_bound": false,
+  "poses": 388,
+  "positive_bound_at_target": false,
+  "python": {
+   "certificate_sha256": "f4edfa9a08efaffe8916d3da2c2a8ff567489a2185319de742e8b9e97e3939f9",
+   "checker_sha256": "ab7098051a951fb400882d546a1cc27ceaf85fd4b8c180bd356fcbffa962a026",
+   "max_column": 201,
+   "max_score_denominator": "1000000000003000000000000",
+   "max_score_numerator": "24998348431654956215746",
+   "method": "Python Fraction clipping; independent D4 expansion and clip implementation",
+   "poses": 388,
+   "schema": "n40-all-source-family-check/v1",
+   "seconds": 310.36117446299977,
+   "sites": 2526,
+   "source_sha256": "71011d0356dd179c6e7e6e02c9a064ff30f6f13844016ce3b97463bf7ef53dc0",
+   "status": "EXACT_FAMILY_OBSTRUCTION",
+   "strict_scaled_slack": "66062736801751370160"
+  },
+  "schema": "n40-support-obstruction/v1",
+  "scope": "original-2526-uniform-D4-rectangle-orbits",
+  "seconds": 702.6207837360016,
+  "sites": 2526,
+  "source_sha256": "71011d0356dd179c6e7e6e02c9a064ff30f6f13844016ce3b97463bf7ef53dc0",
+  "stages": [
+   {
+    "exit_code": 0,
+    "expected_exit": 0,
+    "seconds": 311.00117807100105,
+    "stage": "python",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout_sha256": "410b52f6583a765f77bbe8740aa1d127d622f5e0b4c8d02470e19284e40b46d6"
+   },
+   {
+    "exit_code": 0,
+    "expected_exit": 0,
+    "seconds": 29.466201299001114,
+    "stage": "build-cpp",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+   },
+   {
+    "exit_code": 0,
+    "expected_exit": 0,
+    "seconds": 360.8638357630007,
+    "stage": "cpp",
+    "stderr_sha256": "76908d610309b3e48bac502f4eceb6ead2269f0178ae8be9db238212442cba8d",
+    "stdout_sha256": "383eb761ce824c8524e80be8cde526e4e5d9484aa5e044420f069949c3c7d30e"
+   },
+   {
+    "exit_code": 2,
+    "expected_exit": 2,
+    "seconds": 1.2625311500014504,
+    "stage": "false-dual",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stdout_sha256": "537061be7f1cd16e7e00f73217269cb3ec48f45e26014853fc8ff2e9650e7109"
+   }
+  ],
+  "status": "EXACT_DUAL_CODE_DISTINCT_CHECKED",
+  "target": "168/25"
+ },
+ "python": "3.14.7",
+ "started_utc": "2026-10-12T13:21:25+00:00",
+ "stderr": "",
+ "stdout": "{\n  \"schema\": \"n40-support-obstruction/v1\",\n  \"status\": \"EXACT_DUAL_CODE_DISTINCT_CHECKED\",\n  \"scope\": \"original-2526-uniform-D4-rectangle-orbits\",\n  \"target\": \"168/25\",\n  \"sites\": 2526,\n  \"poses\": 388,\n  \"coefficients_per_implementation\": 980088,\n  \"source_sha256\": \"71011d0356dd179c6e7e6e02c9a064ff30f6f13844016ce3b97463bf7ef53dc0\",\n  \"certificate_sha256\": \"f4edfa9a08efaffe8916d3da2c2a8ff567489a2185319de742e8b9e97e3939f9\",\n  \"code_sha256\": {\n    \"obstruction/check.cpp\": \"fd46b3c6235b2ad5fc720b9df89e338149be4e8b48b9d925810c88a4392fba92\",\n    \"obstruction/check.py\": \"ab7098051a951fb400882d546a1cc27ceaf85fd4b8c180bd356fcbffa962a026\",\n    \"obstruction/run.py\": \"c8feec6bed2148abb1b1640a5c9bd1fd561db50da2b7ad4a099630b9ab48095e\",\n    \"tests/oracle.py\": \"395fa622bec60607798a3da4103162313833fe9c139a40ca2023cd00c14d581e\",\n    \"verifier/exact.py\": \"41423a54d1c5ba2262bbf086f57fd03bd0457d9e35ddc8fdafb4b819b04e677e\"\n  },\n  \"input_sha256\": \"87bc1fe1bd72973719cd230267d024ff8952b05f8674c75e32c8f20a5f07d29b\",\n  \"binary_sha256\": \"d5ecc193a842c21e86281c7facdc4f92a70cec92a28f5f7e002ed5d3a77cf51c\",\n  \"python\": {\n    \"certificate_sha256\": \"f4edfa9a08efaffe8916d3da2c2a8ff567489a2185319de742e8b9e97e3939f9\",\n    \"checker_sha256\": \"ab7098051a951fb400882d546a1cc27ceaf85fd4b8c180bd356fcbffa962a026\",\n    \"max_column\": 201,\n    \"max_score_denominator\": \"1000000000003000000000000\",\n    \"max_score_numerator\": \"24998348431654956215746\",\n    \"method\": \"Python Fraction clipping; independent D4 expansion and clip implementation\",\n    \"poses\": 388,\n    \"schema\": \"n40-all-source-family-check/v1\",\n    \"seconds\": 310.36117446299977,\n    \"sites\": 2526,\n    \"source_sha256\": \"71011d0356dd179c6e7e6e02c9a064ff30f6f13844016ce3b97463bf7ef53dc0\",\n    \"status\": \"EXACT_FAMILY_OBSTRUCTION\",\n    \"strict_scaled_slack\": \"66062736801751370160\"\n  },\n  \"cpp\": {\n    \"status\": \"EXACT_FAMILY_OBSTRUCTION\",\n    \"sites\": 2526,\n    \"poses\": 388,\n    \"max_column\": 201,\n    \"max_score_numerator\": \"24998348431654956215746\",\n    \"max_score_denominator\": \"1000000000003000000000000\",\n    \"strict_scaled_slack\": \"66062736801751370160\",\n    \"partial_clippings\": 90359,\n    \"seconds\": 360.777\n  },\n  \"actual_exits\": {\n    \"python\": 0,\n    \"build-cpp\": 0,\n    \"cpp\": 0,\n    \"false-dual\": 2\n  },\n  \"stages\": [\n    {\n      \"stage\": \"python\",\n      \"exit_code\": 0,\n      \"expected_exit\": 0,\n      \"seconds\": 311.00117807100105,\n      \"stdout_sha256\": \"410b52f6583a765f77bbe8740aa1d127d622f5e0b4c8d02470e19284e40b46d6\",\n      \"stderr_sha256\": \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"\n    },\n    {\n      \"stage\": \"build-cpp\",\n      \"exit_code\": 0,\n      \"expected_exit\": 0,\n      \"seconds\": 29.466201299001114,\n      \"stdout_sha256\": \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\",\n      \"stderr_sha256\": \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"\n    },\n    {\n      \"stage\": \"cpp\",\n      \"exit_code\": 0,\n      \"expected_exit\": 0,\n      \"seconds\": 360.8638357630007,\n      \"stdout_sha256\": \"383eb761ce824c8524e80be8cde526e4e5d9484aa5e044420f069949c3c7d30e\",\n      \"stderr_sha256\": \"76908d610309b3e48bac502f4eceb6ead2269f0178ae8be9db238212442cba8d\"\n    },\n    {\n      \"stage\": \"false-dual\",\n      \"exit_code\": 2,\n      \"expected_exit\": 2,\n      \"seconds\": 1.2625311500014504,\n      \"stdout_sha256\": \"537061be7f1cd16e7e00f73217269cb3ec48f45e26014853fc8ff2e9650e7109\",\n      \"stderr_sha256\": \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"\n    }\n  ],\n  \"seconds\": 702.6207837360016,\n  \"packing_upper_bound\": false,\n  \"positive_bound_at_target\": false\n}\n",
+ "tree": {
+  ".gitattributes": "2d5c072f5cbe11a4c74660a6e47beffcf246fc3546a5aaa534b21c724fe2f9fc",
+  ".github/workflows/verify.yml": "e22fb3fd8a977166546b04fde0ebe18d18b1ea4339627068185f04a59ee410dc",
+  ".gitignore": "85e9e61c0a8dee51b98253a262d7a2f3f8fe29badf2d145a68b510bdd330b7f5",
+  "LICENSE": "94be33291ae276999b6f49d7ebc3ed2d35e11e61e2fcd443f810178c09a2fad9",
+  "OBSTRUCTION.md": "2c3f1d8bb879564020c2b5002dd535aa3aa6e930ed9651d14c6854b6b85993e1",
+  "PROOF.md": "bff9666bd08582f990041684c66c489be543f99a7646acdddfbe6995ef361a40",
+  "README.md": "69c54ccfd67c625977f0b89496e624cbef8c059a68a3f3d9398f569ad3b128ba",
+  "REPRODUCIBILITY.md": "f03db2eff1693d52a4a3c9882cff0756d4335163c9204798ba9421c863ba22a1",
+  "SHA256SUMS": "8dfd478ca99bd6d3f644c9d396e48df6fddfcc7981f058e3b22071ce2065ae17",
+  "SOURCES.md": "5d5d28122bcfd045e777443ed857502999c332bd5ca24247dd98981eeae0a0f7",
+  "VERIFICATION.md": "4bb5a30cb6757bcd4bfd6d141e71043865902dfb7df1d340dca606c82bcfb4f9",
+  "certificate/certified_candidate.json": "984fcd3acc605fe3c50a84912eed77e0192ca5b7253b19b6aa31a4e28e1bf5c2",
+  "certificate/original_density.json": "71011d0356dd179c6e7e6e02c9a064ff30f6f13844016ce3b97463bf7ef53dc0",
+  "certificate/parameters.json": "498d01eda89a0cedecce25f944329a26da578ff73f52850b92a9390eb7f4dc11",
+  "licenses/jlevy-squares.txt": "7428341239cf4ee78c4b951b7fd8a2284b24835aeb0ede82f032b2e95e92cc00",
+  "licenses/tokoharu.txt": "8dc3364f10709e043998e74d0de02774a7f6c9b08dde3a8a58336948d9ed8ad8",
+  "licenses/wand125.txt": "c0dd43e7892932c81335f74a2fdbf1a98f5977bab14c0c4c30e3abcc97c34904",
+  "obstruction/certificate.json": "f4edfa9a08efaffe8916d3da2c2a8ff567489a2185319de742e8b9e97e3939f9",
+  "obstruction/check.cpp": "fd46b3c6235b2ad5fc720b9df89e338149be4e8b48b9d925810c88a4392fba92",
+  "obstruction/check.py": "ab7098051a951fb400882d546a1cc27ceaf85fd4b8c180bd356fcbffa962a026",
+  "obstruction/run.py": "c8feec6bed2148abb1b1640a5c9bd1fd561db50da2b7ad4a099630b9ab48095e",
+  "results/axis.json": "0db283c86a302e2efa23dbb024bda1f244f12d0205a294630fc298bc59df0136",
+  "results/obstruction.json": "63e88db5a4ba9bce053d7d20650916621b60c205637f98fc5b63c242ef929591",
+  "results/slabs.jsonl": "7f66379f4c4be56092cdad20289b98268c9ec7329c0a4afba0bdfc27c344dcb8",
+  "results/verification.json": "201c8cc0fab66ffac023095efea404cb544ae988f9bf8d278e7078d34c45b608",
+  "tests/kernel_harness.cpp": "4ee681bced642c708eda7d71845836d3ea18d61c350ff49ef26e199fb9ee6e40",
+  "tests/oracle.py": "395fa622bec60607798a3da4103162313833fe9c139a40ca2023cd00c14d581e",
+  "tests/rounding_harness.cpp": "96bd022242b4c0e44ff3eb27a8294d3d359bc74263f898e350768eeb78fdfc9f",
+  "tests/test_admission.py": "cea5c8839fe193244cf0c826c51904eba7401c777ca8f1adad4f75ca22bc14de",
+  "tests/test_kernel.py": "3632528e0ef39973ab0cfbc39db8b0cc40a773652e94c2848889d92d6c179087",
+  "verifier/audit.py": "3d7f6a426060ef054bb52fed1af4e0bf336e06ae4805879fa6f6bdf0460f91a1",
+  "verifier/axis_integer_grid.cpp": "f5bc3f60065aaea3d14ffb8465865750fca22cf8bbc6bd8739b5120200b6277d",
+  "verifier/continuous_pose.cpp": "da06206b8e83a57b8a710ba62e743c6d3a1959e9160ff32ae89ede583841c73c",
+  "verifier/exact.py": "41423a54d1c5ba2262bbf086f57fd03bd0457d9e35ddc8fdafb4b819b04e677e",
+  "verifier/run.py": "a62978611fa2f4a57b8cab0f36051ed7cea62a6ac947274ddffcf606c76d7534"
+ },
+ "wall_seconds": 702.984
+}

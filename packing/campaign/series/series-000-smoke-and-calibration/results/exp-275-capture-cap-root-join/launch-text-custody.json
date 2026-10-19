@@ -1,0 +1,11 @@
+{
+  "schema": "retained-launch-text-custody-move/v1",
+  "recorded_at": "2026-10-07T12:25:20.166106+00:00",
+  "original_launch_path": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-275-capture-cap-root-join/run-cap.sh",
+  "retained_text_path": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-275-capture-cap-root-join/run-cap.sh.txt",
+  "bytes_preserved": true,
+  "source_mode": "non-executable archival launch text; historical argv preserved",
+  "scientific_rerun": false,
+  "scientific_objects_modified": false,
+  "reason": "The repository requires Python entry points. Completed historical shell launch text is evidence, not a supported shell entry point."
+}

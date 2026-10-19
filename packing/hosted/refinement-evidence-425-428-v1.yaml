@@ -1,0 +1,14 @@
+softschema:
+  contract: packing.squares:HostedData/v1
+  schema: hosted-data.schema.yaml
+  status: enforced
+
+repository: jlevy/squares
+tag: data/refinement-evidence-425-428-v1
+description: 'Complete #425/#428 source, frozen protocols, actual full-roster replay, runtime and accepted
+  review custody; no assurance assigned by publication.'
+objects:
+- path: attic/refinement-evidence/refinement-evidence-425-428-v1.tar.xz
+  asset: refinement-evidence-425-428-v1.tar.xz
+  size: 1689220
+  sha256: 2784fde12d1ea2c7067cbe9c739cdbe9f8dfcd5ae2aecf29968ad25d6a2301ec

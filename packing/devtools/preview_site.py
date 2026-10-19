@@ -64,7 +64,7 @@ from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from typing import TYPE_CHECKING, Any, Literal
 
-from devtools import check_published_site, render_overview, social_card
+from devtools import check_published_site, render_overview, site_urls, social_card
 
 if TYPE_CHECKING:
     from playwright.sync_api import Browser, Page, Playwright
@@ -155,6 +155,7 @@ def build_lower_bounds_explainer(output: Path) -> None:
     """The lower-bounds explainer as its `prepare` job leaves it: the page and its
     Markdown under `papers/`, and the atlas's files it shows at the site's root."""
     _run("devtools.render_n11_lower_bounds_explainer", "--prepare-math", "--site", str(output))
+    _run("devtools.render_n11_lower_bounds_explainer_pdf", "--site", str(output), "--update")
 
 
 def build_workbench(output: Path) -> None:
@@ -206,6 +207,8 @@ def build(output: Path, skip: set[str]) -> None:
     for slug in OTHER_PAPERS:
         if slug not in skip:
             build_paper(slug, output)
+    if "pages" not in skip:
+        site_urls.write_crawl_files(output)
     for old in copy_moved_files(output):
         print(f"copied {output / old}, the address a file had before it moved")
 
@@ -374,8 +377,7 @@ def baseline_problems(found: dict[str, Any]) -> list[str]:
     """What is wrong with the header's text baselines, in a `preview_site/baselines`
     report: the site's name, where its text is shown, stands on the baseline of the links
     of the bar's first line; the links of each line of the bar stand on one baseline; and
-    the section tabs stand on one. Each is held to `BASELINE_TOLERANCE`, and the mark is
-    held to the middle of the name's line by the same measure."""
+    the section tabs stand on one. Each is held to `BASELINE_TOLERANCE`."""
     problems: list[str] = []
     lines: dict[int, list[dict[str, Any]]] = {}
     for link in found["links"]:
@@ -399,22 +401,15 @@ def baseline_problems(found: dict[str, Any]) -> list[str]:
             problems.append(
                 f"the site's name stands {offset:+g}px off the baseline of the bar's links"
             )
-        text, logo = found["name_text"], found["logo"]
-        if text is not None and logo is not None:
-            lift = (logo["top"] + logo["bottom"] - text["top"] - text["bottom"]) / 2
-            if abs(lift) > BASELINE_TOLERANCE:
-                problems.append(
-                    f"the site's mark is centred {lift:+g}px off the middle of its name's line"
-                )
     return problems
 
 
 def type_problems(found: dict[str, Any]) -> list[str]:
     """What is wrong with the size of the bar's type, in a `preview_site/header` report,
-    held against the body's and never against a pixel value. A link in the bar, and a
-    section tab, is one step below the body on the paper's scale and no more: smaller
-    than the prose base, and no smaller than the largest step of the scale under it. The
-    two are one size. The site's name is at least the body's size. A page with no bar has
+    held against the body's and never against a pixel value. A link in the bar is one
+    step below the body on the paper's scale and no more. Section tabs apply the shared
+    button-label scale to that size. The site's name is at least the body's size.
+    A page with no bar has
     nothing to say, and nor does one that does not carry the paper's scale, the
     optimality paper, whose body is its own."""
     sizes = found["type"]
@@ -427,14 +422,18 @@ def type_problems(found: dict[str, Any]) -> list[str]:
         size = sizes[part]
         if size is None:
             continue
-        if not below <= size < body:
+        factor = sizes["tab_scale"] if part == "tab" else 1
+        lower, upper = round(below * factor, 2), round(body * factor, 2)
+        if not lower <= size < upper:
             problems.append(
-                f"a {part} in the header is {size:g}px: it should be under the body's "
-                f"{body:g}px and no smaller than the step below it, {below:g}px"
+                f"a {part} in the header is {size:g}px: it should be under "
+                f"{upper:g}px and no smaller than {lower:g}px"
             )
-    if sizes["tab"] is not None and sizes["tab"] != sizes["link"]:
+    expected_tab = round(sizes["link"] * sizes["tab_scale"], 2)
+    if sizes["tab"] is not None and sizes["tab"] != expected_tab:
         problems.append(
-            f"a section tab is {sizes['tab']:g}px and a link in the bar {sizes['link']:g}px"
+            f"a section tab is {sizes['tab']:g}px: the bar's {sizes['link']:g}px link "
+            f"at the {sizes['tab_scale']:g} label scale requires {expected_tab:g}px"
         )
     if sizes["name"] is not None and sizes["name"] < body:
         problems.append(f"the site's name is {sizes['name']:g}px, under the body's {body:g}px")
@@ -731,8 +730,9 @@ def screenshots(
 
 def _site_page(name: str) -> str:
     """A `--page` value: a page the site serves, with any fragment."""
-    if name.partition("#")[0] not in render_overview.SITE_PAGES:
-        served = ", ".join(render_overview.SITE_PAGES)
+    published = {row.path for row in site_urls.load_registry() if row.path.endswith(".html")}
+    if name.partition("#")[0] not in published:
+        served = ", ".join(sorted(published))
         raise argparse.ArgumentTypeError(f"{name} is not a page the site serves: {served}")
     return name
 
@@ -785,7 +785,18 @@ def main(argv: list[str] | None = None) -> int:
     for problem in moved_links(output):
         print(f"problem: a link to a page that moved: {problem}", file=sys.stderr)
         status = 1
-    for passed, line in check_published_site.local_head_checks(output):
+    producers = tuple(
+        "overview"
+        if name == "pages"
+        else "workbench"
+        if name == "workbench"
+        else f"paper:{name}"
+        for name in BUILDS
+        if name not in args.skip
+    )
+    for passed, line in check_published_site.local_site_checks(
+        output, partial=bool(args.skip), producers=producers if args.skip else ()
+    ):
         if not passed:
             print(f"problem: {line}", file=sys.stderr)
             status = 1

@@ -12,10 +12,19 @@ const FACE = { serif: '"KPress Math Text", serif', sans: '"KPress Math Text Sans
 
 /** The stand-in for the page's `Element`, which the probe tests child nodes against. */
 class Element {
-  /** @param {string} classes */
-  constructor(classes) {
+  /**
+   * @param {string} classes
+   * @param {Record<string, string>} [attributes]
+   */
+  constructor(classes, attributes = {}) {
     this.classes = classes.split(" ");
+    this.attributes = attributes;
     this.textContent = "";
+  }
+
+  /** @param {string} name */
+  getAttribute(name) {
+    return this.attributes[name] ?? null;
   }
 
   /** @param {string} selector */
@@ -54,8 +63,55 @@ function formula(face, family, { headline = false, words = "", id = "host" } = {
 }
 
 /**
+ * An explicitly marked frontier cell with a real MathML root and a visible token.
+ * @param {string} family
+ * @param {{ id?: string, tokenFamily?: string, visibility?: string, missing?: boolean, insideTable?: boolean }} [options]
+ */
+function nativeFormula(
+  family,
+  {
+    id = "frontier-cell",
+    tokenFamily = family,
+    visibility = "visible",
+    missing = false,
+    insideTable = true,
+  } = {},
+) {
+  const token = {
+    namespaceURI: "http://www.w3.org/1998/Math/MathML",
+    localName: "mn",
+    textContent: "31",
+    fontFamily: tokenFamily,
+    visibility,
+    getBoundingClientRect: () => ({ width: 12, height: 18 }),
+  };
+  const root = {
+    namespaceURI: "http://www.w3.org/1998/Math/MathML",
+    localName: "math",
+    /** @param {string} selector */
+    querySelectorAll: (selector) => {
+      assert.equal(selector, "mi, mn, mtext, ms");
+      return missing ? [] : [token];
+    },
+  };
+  const host = Object.assign(new Element("frontier-value"), { fontFamily: family });
+  return Object.assign(new Element("kpress-math", { "data-site-native-math": "frontier" }), {
+    parentElement: host,
+    children: [root],
+    /** @param {string} selector */
+    closest: (selector) => {
+      if (selector === "[id]") {
+        return { id };
+      }
+      assert.equal(selector, ".site-frontier td");
+      return insideTable ? host : null;
+    },
+  });
+}
+
+/**
  * What the probe reports for a page of these formulas.
- * @param {ReturnType<typeof formula>[]} formulas
+ * @param {(ReturnType<typeof formula> | ReturnType<typeof nativeFormula>)[]} formulas
  * @returns {string[]}
  */
 function report(formulas) {
@@ -63,9 +119,10 @@ function report(formulas) {
   Object.assign(globalThis, {
     Element,
     document: { documentElement: root, querySelectorAll: () => formulas },
-    /** @param {{ fontFamily?: string }} element */
+    /** @param {{ fontFamily?: string, visibility?: string }} element */
     getComputedStyle: (element) => ({
       fontFamily: element.fontFamily ?? "",
+      visibility: element.visibility ?? "visible",
       getPropertyValue: () => (element === root ? SANS : ""),
     }),
   });
@@ -105,4 +162,22 @@ void test("a headline with words expects its math in their sans face", () => {
     report([formula("serif", SANS, { headline: true, words: "Earlier ", id: "pop" })]),
     ["serif math in sans text: p.site-popover-value in #pop: tex of pop"],
   );
+});
+
+void test("native frontier math uses its actual visible token face in custom and system text", () => {
+  assert.deepEqual(report([nativeFormula(SANS), nativeFormula("Arial, sans-serif")]), []);
+});
+
+void test("native frontier math in the wrong actual token face is reported", () => {
+  assert.deepEqual(report([nativeFormula(SANS, { tokenFamily: SERIF, id: "row-11" })]), [
+    "native frontier math differs from surrounding text in #row-11",
+  ]);
+});
+
+void test("native frontier math needs a visible token inside a frontier table cell", () => {
+  for (const options of [{ missing: true }, { visibility: "hidden" }, { insideTable: false }]) {
+    assert.deepEqual(report([nativeFormula(SANS, options)]), [
+      "native frontier math has no visible mathematical token",
+    ]);
+  }
 });

@@ -1,0 +1,8 @@
+{
+  "fact": "packing/resources/web/pingyou-pr622-certificate-2026-10-15/facts/n-029.yaml.gz",
+  "side_equal": true,
+  "squares": 29,
+  "ids": "1 to 29, id k the certificate's square k - 1 (the reader refuses any other)",
+  "mismatches": [],
+  "equal": true
+}

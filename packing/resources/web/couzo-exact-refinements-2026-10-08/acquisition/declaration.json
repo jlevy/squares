@@ -1,0 +1,46 @@
+{
+  "format": "external-source-declaration-v1",
+  "id": "couzo-exact-refinements",
+  "source_url": "https://github.com/franciscouzo/square-packing",
+  "source_ref": "master",
+  "source_commit": "ffd900dfff6d2674ad995359208c2f0714915c82",
+  "retrieved_at_utc": "2026-10-08T16:06:14Z",
+  "git_scope": "The pinned GitHub recursive tree lists 126 blobs. The declared 18-file scope binds eight complete certificates, eight complete decimal poses and two hash-only READMEs to their Git blobs. No checkout or author program executes.",
+  "archived_dir": "source",
+  "scope": [
+    "README.md",
+    "certificates/README.md",
+    "certificates/n105.cert",
+    "certificates/n108.cert",
+    "certificates/n127.cert",
+    "certificates/n131.cert",
+    "certificates/n155.cert",
+    "certificates/n180.cert",
+    "certificates/n228.cert",
+    "certificates/n306.cert",
+    "n105.txt",
+    "n108.txt",
+    "n127.txt",
+    "n131.txt",
+    "n155.txt",
+    "n180.txt",
+    "n228.txt",
+    "n306.txt"
+  ],
+  "pinned_only": [
+    {
+      "match": "README.md",
+      "reason": "No repository-wide licence found for original prose. Hash-pinned, not copied or executed."
+    },
+    {
+      "match": "certificates/README.md",
+      "reason": "No repository-wide licence found for original prose. Hash-pinned, not copied or executed."
+    }
+  ],
+  "license": "No repository-wide licence stated. The author attributes an MIT-licensed Evan Daniel optimizer; that notice does not license this complete source bundle. Only factual certificate and decimal-pose data are retained; prose is hash-pinned.",
+  "claims": [
+    "Eight exact rational finite-construction upper bounds reported at n=105,108,127,131,155,180,228,306.",
+    "The author reports both exact checkers pass, including a copy of this repository verifier. These author reports are separate from any maintained native replay.",
+    "Optimizer, KKT and no-first-order-descent claims remain author reports; this packet admits no local or global optimality, rigidity or novelty claim."
+  ]
+}

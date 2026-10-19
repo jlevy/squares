@@ -1,0 +1,49 @@
+<h1 id="the-squares-project" class="site-title">The Squares Project</h1>
+
+Work on the square packing problem has exploded in the summer of 2026 thanks to
+AI-powered research efforts.
+
+Contributions include:
+
+- [Joshua Levy](https://x.com/ojoshe) began the Squares Project in August 2026 with
+  [new lower bounds](papers/n11-lower-bounds-explainer.html) for
+  $n = 11, 17, 18, 19, 20$ and other low values.
+- [Marc Leonard Overbeck](https://x.com/kleddamag)’s
+  [certified lower bound of $31/8$](papers/n11-threshold-bound-review.html) for eleven
+  squares.
+- [Mannaseh Ahmed](https://x.com/ManassehA06)’s
+  [proof of optimality](papers/n11-optimality-review.html) for
+  [eleven squares](cases/11.html).
+- Independently, [Evan Daniel](https://x.com/evanbd) has proved the optimality of
+  [an infinite family](results.html#t-064), $s(k^2 - 3) = k$ for every $k \ge 6$, along
+  with exact values at [21](cases/21.html), [32](cases/32.html), [45](cases/45.html) and
+  [60](cases/60.html) squares.
+- [Marc Leonard Overbeck](https://x.com/kleddamag)’s
+  [candidate proof for seventeen squares](news.html#changelog-entry-overbeck-n17-candidate-proof),
+  reported and unverified here (V0/C1).
+- Oscar Fitzharding’s
+  [Lean proof report for seventeen squares](news.html#changelog-entry-fitzharding-n17-reported-proof),
+  also unverified here (V0/C1).
+
+Other new results are tabulated on the [Results page](results.html).
+
+This project now independently tabulates all known new results and does
+[AI-assisted verification](results.html#verification-ladders) of the proofs and
+certificates behind them, to encourage open collaboration on open questions and
+formalizations of current proofs.
+
+<h1 id="report-your-results" class="site-title">Report Your Results!<a id="contribute-your-results"></a></h1>
+
+{{REPORT_RESULTS}}
+
+<h1 id="squares-project-documentation" class="site-title">Squares Project Documentation</h1>
+
+{{DOCUMENTATION_BLOCK}}
+
+{{NEWS_LEGACY_ANCHORS}}
+
+<a id="news"></a>
+
+<!-- This document follows common-doc-guidelines.md.
+See github.com/jlevy/practical-prose and review guidelines before editing.
+-->

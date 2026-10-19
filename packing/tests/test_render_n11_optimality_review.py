@@ -88,9 +88,9 @@ def test_the_papers_head_is_the_sites_set_at_the_papers_own_address(
     html, _ = rendered
     url = render_overview.canonical_url(paper.SITE_PATH)
     assert url == render_overview.SITE_URL + paper.SITE_PATH
-    assert check_published_site.head_problems(html, url) == []
+    assert check_published_site.head_problems(html, url, allow_inline_favicon=True) == []
     head = check_published_site.read_head(html)
-    assert head.titles == (f"{paper.TITLE} · {render_overview.PROJECT_NAME}",)
+    assert head.titles == (paper.TITLE,)
     assert head.meta("og:title") == [paper.TITLE]
     assert head.meta("og:type") == ["article"]
     assert head.meta("description") == [paper.DESCRIPTION]
@@ -102,7 +102,9 @@ def test_the_papers_head_is_the_sites_set_at_the_papers_own_address(
         release.OPTIMALITY_REVIEW_REVISED
     )
     assert head.meta("article:modified_time") == [meta.modified]
-    assert meta.published == ""
+    assert meta.published == paper_front.iso_date(
+        release.OPTIMALITY_REVIEW_HISTORY[-1].first_published
+    )
     assert (meta.kind, meta.path) == ("article", paper.SITE_PATH)
     assert paper_front.revised(paper.FRONT) == release.OPTIMALITY_REVIEW_REVISED
 
@@ -130,7 +132,16 @@ def test_the_forwarders_at_the_old_addresses_preview_the_paper_as_it_does(
         "n11-optimality/t-060-explainer.html",
     ]
     for name, forwarder in forwarders.items():
-        assert check_published_site.forwarder_problems(forwarder, url, html) == [], name
+        assert (
+            check_published_site.forwarder_problems(
+                forwarder,
+                url,
+                html,
+                allow_inline_favicon=True,
+                page_url=render_overview.SITE_URL + name,
+            )
+            == []
+        ), name
         head = check_published_site.read_head(forwarder)
         assert head.titles == own.titles, name
         assert head.link("canonical") == own.link("canonical") == [url], name
@@ -185,7 +196,10 @@ def test_the_page_carries_the_sites_bar_with_papers_current(rendered: tuple[str,
     assert paper.SITE_PATH in render_overview.SITE_PAGES
     assert paper.SITE_PATH.count("/") == paper.SITE_ROOT.count("../") == 1
     assert render_overview.nav_html("papers", root="../") in html
-    assert '<a data-page="papers" aria-current="page" href="../papers.html">Papers</a>' in html
+    assert (
+        '<a data-page="explanations" aria-current="page" href="../papers.html">Explanations</a>'
+        in html
+    )
     # One link is current, the bar's entry: the format chips link the other formats.
     assert len(re.findall(r'<a\b[^>]*\saria-current="page"', html)) == 1
     main = html.split('<main class="kpress-page-main kpress-viewport">', 1)[1]
@@ -505,9 +519,9 @@ def test_the_front_is_the_shared_components_in_the_owners_form(
     take it from `paper_front`, written from this paper's record: the original proof
     first, by its author's name in bold and then its address as a plain link; this
     review's own credits a line's space below, names in bold; the draft's version not
-    bold, with no history to link; then the dates. The credits' column and the space
-    before a paper's own credits are the publication layer's, so the paper's own sheet
-    says nothing about them."""
+    bold, with its version-history link; then the dates. The credits' column and the
+    space before a paper's own credits are the shared typography layer's, so the
+    paper's own sheet says nothing about them."""
     article = paper.ARTICLE.read_text(encoding="utf-8")
     assert article.count("{{FRONT_MATTER}}") == 1
     assert '<div class="credits' not in article
@@ -521,7 +535,8 @@ def test_the_front_is_the_shared_components_in_the_owners_form(
     assert [line.strip() for line in block.strip().splitlines()] == [
         (
             '<span class="credits-source">From the original proof by '
-            "<strong>Queuingtheorydotcom</strong></span>"
+            '<a href="https://x.com/ManassehA06" target="_blank" rel="noopener noreferrer">'
+            "<strong>Mannaseh Ahmed</strong></a></span>"
         ),
         (
             f'<span class="credits-source"><a href="https://{address}" target="_blank" '
@@ -538,6 +553,7 @@ def test_the_front_is_the_shared_components_in_the_owners_form(
         ),
         (
             '<span class="publication-date">'
+            f"First published {release.OPTIMALITY_REVIEW_HISTORY[-1].first_published} · "
             f"Original proof {release.OPTIMALITY_PROOF_PUBLISHED} · "
             f"Last revised {release.OPTIMALITY_REVIEW_REVISED}</span>"
         ),
@@ -553,9 +569,7 @@ def test_the_front_is_the_shared_components_in_the_owners_form(
         ),
     ]
     assert html.index('<div class="doc-links screen-only">') < html.index('<div class="hero">')
-    shared = paper.render_n11_lower_bounds_explainer.PUBLICATION_STYLE.read_text(
-        encoding="utf-8"
-    )
+    shared = render_overview.PAPER_TYPE_CSS.read_text(encoding="utf-8")
     assert "  grid-template-columns: minmax(0, 1fr);\n" in shared
     assert ".credits a {\n  overflow-wrap: anywhere;\n}" in shared
     assert (
@@ -563,12 +577,13 @@ def test_the_front_is_the_shared_components_in_the_owners_form(
         ".credits .publication-date + .series {\n  margin-block-start: 1lh;\n}"
     ) in shared
     assert markdown.startswith(
-        f"# {paper.TITLE}\n\n- From the original proof by **Queuingtheorydotcom**\n"
+        f"# {paper.TITLE}\n\n- From the original proof by [**Mannaseh Ahmed**](https://x.com/ManassehA06)\n"
         f"- [{address}](https://{address})\n"
         "- Human oversight: [**Joshua Levy**](https://x.com/ojoshe)\n"
         "- Agents: **GPT-6 Astra** and **GPT-6 Sol**\n"
         f"- {release.OPTIMALITY_REVIEW_EDITION} ([version history](#version-history))\n"
-        f"- Original proof {release.OPTIMALITY_PROOF_PUBLISHED} · "
+        f"- First published {release.OPTIMALITY_REVIEW_HISTORY[-1].first_published} · "
+        f"Original proof {release.OPTIMALITY_PROOF_PUBLISHED} · "
         f"Last revised {release.OPTIMALITY_REVIEW_REVISED}\n"
         "- Part III of 3 in the n = 11 series\n"
         "- Part I: [New Lower Bounds for Square Packing for n = 11]"

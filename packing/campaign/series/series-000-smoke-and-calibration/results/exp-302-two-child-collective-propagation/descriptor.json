@@ -1,0 +1,13 @@
+{
+  "schema": "n17-two-child-collective-propagation-context/v1",
+  "propagation_descriptor": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-300-one-round-direct-regional-propagation/descriptor.json",
+  "propagation_descriptor_sha256": "bc57c6827e32f1fbf365111d56efe5a0521159b2a3ecc2e5a5e77738341efa66",
+  "propagation_certificate": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-300-one-round-direct-regional-propagation/certificate.json",
+  "propagation_certificate_sha256": "c92d3c98028323cfea39eab341d5e51325a2e6eb5367b2fd2fad036cea740d3d",
+  "propagation_replay": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-300-one-round-direct-regional-propagation/replay.json",
+  "propagation_replay_sha256": "fb9681de19211e3aad3a7888bf358d4506443473a11ba5b4cf1dfe8c8cd9da81",
+  "selection_certificate": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-295-two-center-children/certificate.json",
+  "selection_certificate_sha256": "af9a97ffa5a499b7771d8e3c3dbf79488a1edd2197423e0c9abb3bc834590cf9",
+  "selection_replay": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-295-two-center-children/replay.json",
+  "selection_replay_sha256": "0c7968f1802fe533e47468e9e6abb178d7be9eb157f064dcbfcbb682c1b1983b"
+}

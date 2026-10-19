@@ -1,0 +1,14 @@
+The files in this folder are copied unchanged from Evan Daniel's repository
+https://github.com/evand/square-packing, released under the MIT License (LICENSE in this folder,
+copied unchanged from the repository root; Copyright (c) 2026 Evan Daniel).
+
+  n-5.cert ... n-273.cert       commit 29d0cee87c1d717f7b4497b8fb0ee17ac9d0087d, path search/exact/batch/certs/
+  hunt3_n308.cert, hunt3_n343.cert, hunt3_n344.cert
+                                commit c013f43cefd006f007a6f37bc3a56aadead815d6, path search/packer/candidates/
+  LICENSE                       commit 29d0cee87c1d717f7b4497b8fb0ee17ac9d0087d (identical at c013f43), path LICENSE
+
+The n-K certificates are Daniel's exact certificates of known packings (the B pieces of the
+gluing). The hunt3 files are his improvements of our n = 308, 343, 344 packings by local search
+(jlevy/squares#489); they are not used in any composite here and are included for reference.
+SHA-256 of every file: ../SOURCES.md. tools/verify_cert_daniel.py is his checker from the same
+commit 29d0cee, also MIT.

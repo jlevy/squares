@@ -1,0 +1,492 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-10-10T16:44Z",
+  "git_scope": "Sparse blobless checkout of the named files at the pinned commit for issue #488. The commit adds one certificate, n209, and changes eight, at 132, 175, 237, 270, 303, 305, 338 and 340; those nine are retained as factual data. The other 54 certificates the commit holds are unchanged since 02f9690 and pinned by digest against the copies the issue-476 packet retains; 102, 103 and 272 were removed in 9bf90e7. The two READMEs and the nine changed decimal pose files are pinned by digest only. The rest of the tree, including the drawings, is pinned by the commit and was not retained or executed.",
+  "sources": [
+    {
+      "id": "franciscouzo-square-packing",
+      "source_url": "https://github.com/franciscouzo/square-packing",
+      "source_ref": "master",
+      "source_commit": "3ef76349025bf4bfa99c9c3600bcc273f4c33e02",
+      "committed_utc": "2026-10-10T13:52:27Z",
+      "git_tree": "2978a99cdbb71c3221956d59b9606c3a7a40ad94",
+      "archived_path": "packing/resources/web/couzo-certificates-2026-10-10/source",
+      "subtree_manifest": "packing/resources/web/couzo-certificates-2026-10-10/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "README.md",
+        "certificates",
+        "n132.txt",
+        "n175.txt",
+        "n209.txt",
+        "n237.txt",
+        "n270.txt",
+        "n303.txt",
+        "n305.txt",
+        "n338.txt",
+        "n340.txt"
+      ],
+      "subtree_file_count": 74,
+      "subtree_total_bytes": 2610667,
+      "retained_file_count": 9,
+      "retained_total_bytes": 360513,
+      "compressed": [],
+      "pinned_only": [
+        {
+          "path": "README.md",
+          "bytes": 11306,
+          "sha256": "6f5b6d026c0a92d8ae97d14491088cf373874d322d67221396840f49ad04afe7",
+          "reason": "No repository-wide licence found for original prose. Hash-pinned, not copied or executed."
+        },
+        {
+          "path": "certificates/README.md",
+          "bytes": 10728,
+          "sha256": "4704452c482d170a98eb88a5b1019f6301dbf9daf5a90fed80d35442a76f8535",
+          "reason": "No repository-wide licence found for original prose. Hash-pinned, not copied or executed."
+        },
+        {
+          "path": "certificates/n105.cert",
+          "bytes": 17147,
+          "sha256": "3d4fc1ed6193ede6787e3f9dee2f29ca9ca83f0dc7e85eb0b46c95081d7e3212",
+          "reason": "Unchanged since 02f9690: byte-identical to the certificate the issue-476 packet retains, so pinned by digest here and compared with that copy.",
+          "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n105.cert"
+        },
+        {
+          "path": "certificates/n106.cert",
+          "bytes": 15232,
+          "sha256": "186d69780b5cfbac068584dd24ce3ce81bfe2f188b5c522b0bcc6faf2dc920f5",
+          "reason": "Unchanged since 02f9690: byte-identical to the certificate the issue-476 packet retains, so pinned by digest here and compared with that copy.",
+          "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n106.cert"
+        },
+        {
+          "path": "certificates/n108.cert",
+          "bytes": 16101,
+          "sha256": "528741a37ad0ae6ddd4c08d6d6efa72a29700bd95fde137b44c987f18d44d69e",
+          "reason": "Unchanged since 02f9690: byte-identical to the certificate the issue-476 packet retains, so pinned by digest here and compared with that copy.",
+          "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n108.cert"
+        },
+        {
+          "path": "certificates/n110.cert",
+          "bytes": 18733,
+          "sha256": "91e46c27e6252f878c8d102c63dd407bbff2abfc1cec3b6438b6e4a3be3d51c9",
+          "reason": "Unchanged since 02f9690: byte-identical to the certificate the issue-476 packet retains, so pinned by digest here and compared with that copy.",
+          "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n110.cert"
+        },
+        {
+          "path": "certificates/n127.cert",
+          "bytes": 21205,
+          "sha256": "2e039a654aa7afbeb9c8f447833aa8e9ff64f70e218c5fce0f2eb13435cda3a9",
+          "reason": "Unchanged since 02f9690: byte-identical to the certificate the issue-476 packet retains, so pinned by digest here and compared with that copy.",
+          "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n127.cert"
+        },
+        {
+          "path": "certificates/n131.cert",
+          "bytes": 21209,
+          "sha256": "9ce74fda03fac60e997a3e0d1175cb6d3a6563523d7305ab3af08a9ad30b169c",
+          "reason": "Unchanged since 02f9690: byte-identical to the certificate the issue-476 packet retains, so pinned by digest here and compared with that copy.",
+          "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n131.cert"
+        },
+        {
+          "path": "certificates/n152.cert",
+          "bytes": 21163,
+          "sha256": "0ef3fca3ad11bacf3c00649a6cd376e3c28e7cea38f7bf81d43d3d3e3e1ff5e0",
+          "reason": "Unchanged since 02f9690: byte-identical to the certificate the issue-476 packet retains, so pinned by digest here and compared with that copy.",
+          "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n152.cert"
+        },
+        {
+          "path": "certificates/n155.cert",
+          "bytes": 25405,
+          "sha256": "cc9f7c800211acc21c66196c43fab392dd96c920eba8f13851ff313c8e1bb477",
+          "reason": "Unchanged since 02f9690: byte-identical to the certificate the issue-476 packet retains, so pinned by digest here and compared with that copy.",
+          "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n155.cert"
+        },
+        {
+          "path": "certificates/n156.cert",
+          "bytes": 26047,
+          "sha256": "b308cf4407d694cced651391979066135b7bf608ea5983c6b8e48757c9028a8d",
+          "reason": "Unchanged since 02f9690: byte-identical to the certificate the issue-476 packet retains, so pinned by digest here and compared with that copy.",
+          "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n156.cert"
+        },
+        {
+          "path": "certificates/n172.cert",
+          "bytes": 26218,
+          "sha256": "62ff74ec0426b1515b2436200ca1c2892fd2c3d9c8367d5bbec9fc1f22253a00",
+          "reason": "Unchanged since 02f9690: byte-identical to the certificate the issue-476 packet retains, so pinned by digest here and compared with that copy.",
+          "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n172.cert"
+        },
+        {
+          "path": "certificates/n177.cert",
+          "bytes": 24634,
+          "sha256": "522383966164b4b0a708bd4e68908f2630f87f5ba8f4476f3b6745b039ba84d4",
+          "reason": "Unchanged since 02f9690: byte-identical to the certificate the issue-476 packet retains, so pinned by digest here and compared with that copy.",
+          "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n177.cert"
+        },
+        {
+          "path": "certificates/n180.cert",
+          "bytes": 27871,
+          "sha256": "a66d49e35a3c841df0ca1daf5bb364f36139b36ae5126fbf21200ebd6db4128e",
+          "reason": "Unchanged since 02f9690: byte-identical to the certificate the issue-476 packet retains, so pinned by digest here and compared with that copy.",
+          "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n180.cert"
+        },
+        {
+          "path": "certificates/n181.cert",
+          "bytes": 29154,
+          "sha256": "9f9698545f8a7a3e78b3e198c39f6525871b172d9307a3a2031cef79c44d2048",
+          "reason": "Unchanged since 02f9690: byte-identical to the certificate the issue-476 packet retains, so pinned by digest here and compared with that copy.",
+          "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n181.cert"
+        },
+        {
+          "path": "certificates/n182.cert",
+          "bytes": 29859,
+          "sha256": "5826ad138cf2c98b57fff1036132a1c80fc2043219452f8f8ee760131e12061d",
+          "reason": "Unchanged since 02f9690: byte-identical to the certificate the issue-476 packet retains, so pinned by digest here and compared with that copy.",
+          "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n182.cert"
+        },
+        {
+          "path": "certificates/n206.cert",
+          "bytes": 32623,
+          "sha256": "2167021c418c9689f3a1f15b7cc3d5f4cc6fb3a2ba9debe2bdd71a7e2e71c472",
+          "reason": "Unchanged since 02f9690: byte-identical to the certificate the issue-476 packet retains, so pinned by digest here and compared with that copy.",
+          "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n206.cert"
+        },
+        {
+          "path": "certificates/n208.cert",
+          "bytes": 32227,
+          "sha256": "e6b94dde10d83811e6a05a1b69bc5adde22229d0ed552421461271a8954da9c0",
+          "reason": "Unchanged since 02f9690: byte-identical to the certificate the issue-476 packet retains, so pinned by digest here and compared with that copy.",
+          "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n208.cert"
+        },
+        {
+          "path": "certificates/n210.cert",
+          "bytes": 35049,
+          "sha256": "85648fe7d80c9486d1d4a32560696390da25e1cc09dc4bf16695298548baf679",
+          "reason": "Unchanged since 02f9690: byte-identical to the certificate the issue-476 packet retains, so pinned by digest here and compared with that copy.",
+          "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n210.cert"
+        },
+        {
+          "path": "certificates/n228.cert",
+          "bytes": 33426,
+          "sha256": "cb5e49904ac5e4b548bf6c20cbcb4d0a72f52ccc0eee6a36c784d4c3495d38ad",
+          "reason": "Unchanged since 02f9690: byte-identical to the certificate the issue-476 packet retains, so pinned by digest here and compared with that copy.",
+          "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n228.cert"
+        },
+        {
+          "path": "certificates/n240.cert",
+          "bytes": 40044,
+          "sha256": "7e76b3cce42829f029e7a5ab7137504bb0aab050731f4b37e32ed0a0a0bf6239",
+          "reason": "Unchanged since 02f9690: byte-identical to the certificate the issue-476 packet retains, so pinned by digest here and compared with that copy.",
+          "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n240.cert"
+        },
+        {
+          "path": "certificates/n241.cert",
+          "bytes": 39917,
+          "sha256": "68d9b0c8bbe67c061757e328fa6b9817b2117cc408d4ee4ffadb655f4a2b9810",
+          "reason": "Unchanged since 02f9690: byte-identical to the certificate the issue-476 packet retains, so pinned by digest here and compared with that copy.",
+          "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n241.cert"
+        },
+        {
+          "path": "certificates/n259.cert",
+          "bytes": 39129,
+          "sha256": "9535ff04c86189d28ae1cefdfe0d2498b5b0d899fe6d7758decc288b92822847",
+          "reason": "Unchanged since 02f9690: byte-identical to the certificate the issue-476 packet retains, so pinned by digest here and compared with that copy.",
+          "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n259.cert"
+        },
+        {
+          "path": "certificates/n263.cert",
+          "bytes": 32933,
+          "sha256": "ca6069b167fadd5d5a5cdb594b82c0ebe8224270ed07a4209788a31fcd0d12a9",
+          "reason": "Unchanged since 02f9690: byte-identical to the certificate the issue-476 packet retains, so pinned by digest here and compared with that copy.",
+          "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n263.cert"
+        },
+        {
+          "path": "certificates/n267.cert",
+          "bytes": 45824,
+          "sha256": "711814d2d7ca078dc1b8b0256240867a53eec24f8025fd3ba257aaab57dd4e12",
+          "reason": "Unchanged since 02f9690: byte-identical to the certificate the issue-476 packet retains, so pinned by digest here and compared with that copy.",
+          "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n267.cert"
+        },
+        {
+          "path": "certificates/n268.cert",
+          "bytes": 41846,
+          "sha256": "ecd9e4a38fe3cf6c27a7a262ec3e897510fe630fae38528bedb7e067050942a8",
+          "reason": "Unchanged since 02f9690: byte-identical to the certificate the issue-476 packet retains, so pinned by digest here and compared with that copy.",
+          "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n268.cert"
+        },
+        {
+          "path": "certificates/n269.cert",
+          "bytes": 38987,
+          "sha256": "c04661e5d520152f744c38a6ea1ba6363da6065fcfbf1d07777623cc4b8d1e90",
+          "reason": "Unchanged since 02f9690: byte-identical to the certificate the issue-476 packet retains, so pinned by digest here and compared with that copy.",
+          "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n269.cert"
+        },
+        {
+          "path": "certificates/n271.cert",
+          "bytes": 44115,
+          "sha256": "c2e0ea8b183831c4d4d236aa129cd37aeb459e54a664f8a47f6b838dc7d8c1c9",
+          "reason": "Unchanged since 02f9690: byte-identical to the certificate the issue-476 packet retains, so pinned by digest here and compared with that copy.",
+          "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n271.cert"
+        },
+        {
+          "path": "certificates/n273.cert",
+          "bytes": 45133,
+          "sha256": "405171da4809f61be5c42b8dc6439d422ea3051aa4c98e51b7e28faf2be5c2c5",
+          "reason": "Unchanged since 02f9690: byte-identical to the certificate the issue-476 packet retains, so pinned by digest here and compared with that copy.",
+          "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n273.cert"
+        },
+        {
+          "path": "certificates/n292.cert",
+          "bytes": 35370,
+          "sha256": "4e1d5f1e9968c1bdbb7579a2446b848d04f5ddc618a2cf1c97edbe3e330ad1ce",
+          "reason": "Unchanged since 02f9690: byte-identical to the certificate the issue-476 packet retains, so pinned by digest here and compared with that copy.",
+          "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n292.cert"
+        },
+        {
+          "path": "certificates/n297.cert",
+          "bytes": 47671,
+          "sha256": "9efe45053a36bba4a4fc2fa0c6780b4c4094e771323600c71e3a426362675801",
+          "reason": "Unchanged since 02f9690: byte-identical to the certificate the issue-476 packet retains, so pinned by digest here and compared with that copy.",
+          "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n297.cert"
+        },
+        {
+          "path": "certificates/n301.cert",
+          "bytes": 56426,
+          "sha256": "55090ed78b6e9688c4040985ae8d9a94148871206690501d28e937d8b049c7de",
+          "reason": "Unchanged since 02f9690: byte-identical to the certificate the issue-476 packet retains, so pinned by digest here and compared with that copy.",
+          "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n301.cert"
+        },
+        {
+          "path": "certificates/n304.cert",
+          "bytes": 47167,
+          "sha256": "a980c9c7b2f6b5eb6365965d5798b8be7c82c4cdf21c341f2c4e5363356fdc8c",
+          "reason": "Unchanged since 02f9690: byte-identical to the certificate the issue-476 packet retains, so pinned by digest here and compared with that copy.",
+          "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n304.cert"
+        },
+        {
+          "path": "certificates/n306.cert",
+          "bytes": 49716,
+          "sha256": "f58de39d385fcc006f7e6f967e16640ff3471534b6cb54aadcd59be14df0b3c7",
+          "reason": "Unchanged since 02f9690: byte-identical to the certificate the issue-476 packet retains, so pinned by digest here and compared with that copy.",
+          "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n306.cert"
+        },
+        {
+          "path": "certificates/n307.cert",
+          "bytes": 50287,
+          "sha256": "af58eda57121e0d242ff13bcd696bfbe51990b3daad964118bb05df21a9ad000",
+          "reason": "Unchanged since 02f9690: byte-identical to the certificate the issue-476 packet retains, so pinned by digest here and compared with that copy.",
+          "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n307.cert"
+        },
+        {
+          "path": "certificates/n327.cert",
+          "bytes": 39478,
+          "sha256": "4dd3101020b950d4fb444704a7b22d39cbc723b78c1f8922d733fbb575d000b1",
+          "reason": "Unchanged since 02f9690: byte-identical to the certificate the issue-476 packet retains, so pinned by digest here and compared with that copy.",
+          "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n327.cert"
+        },
+        {
+          "path": "certificates/n332.cert",
+          "bytes": 52978,
+          "sha256": "67de10536e34aa6367b50fe9e5d29119ef2357b7fe369b2dc22e6f6bc5e42864",
+          "reason": "Unchanged since 02f9690: byte-identical to the certificate the issue-476 packet retains, so pinned by digest here and compared with that copy.",
+          "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n332.cert"
+        },
+        {
+          "path": "certificates/n335.cert",
+          "bytes": 39822,
+          "sha256": "d500b46c6bad15967033ee4bf5b207d8afb6d8073272d407b22e8e8d450e380a",
+          "reason": "Unchanged since 02f9690: byte-identical to the certificate the issue-476 packet retains, so pinned by digest here and compared with that copy.",
+          "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n335.cert"
+        },
+        {
+          "path": "certificates/n336.cert",
+          "bytes": 44954,
+          "sha256": "08f1dafe436d44ba2e6d4eb72bffe0d5cfa71145d7f5957e330347edf774ddda",
+          "reason": "Unchanged since 02f9690: byte-identical to the certificate the issue-476 packet retains, so pinned by digest here and compared with that copy.",
+          "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n336.cert"
+        },
+        {
+          "path": "certificates/n337.cert",
+          "bytes": 45644,
+          "sha256": "2bcf92a216a88380cdb103896fb39cefd82cd0ce9b2f20a1bdd9eab549ab0a47",
+          "reason": "Unchanged since 02f9690: byte-identical to the certificate the issue-476 packet retains, so pinned by digest here and compared with that copy.",
+          "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n337.cert"
+        },
+        {
+          "path": "certificates/n339.cert",
+          "bytes": 52738,
+          "sha256": "9823e0ffa6a98cd9b20c171acdac7d60bea2e785d8302c865c8adbcf2bb1d76f",
+          "reason": "Unchanged since 02f9690: byte-identical to the certificate the issue-476 packet retains, so pinned by digest here and compared with that copy.",
+          "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n339.cert"
+        },
+        {
+          "path": "certificates/n341.cert",
+          "bytes": 55261,
+          "sha256": "249ae108d9be02f905af2d5b4989b082f23005c97bcec8b0baf16d5ea0982762",
+          "reason": "Unchanged since 02f9690: byte-identical to the certificate the issue-476 packet retains, so pinned by digest here and compared with that copy.",
+          "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n341.cert"
+        },
+        {
+          "path": "certificates/n342.cert",
+          "bytes": 42733,
+          "sha256": "a51f7557e4c724f67af8161ceadd332e9744ff7d28fadd65033d6642c6aee912",
+          "reason": "Unchanged since 02f9690: byte-identical to the certificate the issue-476 packet retains, so pinned by digest here and compared with that copy.",
+          "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n342.cert"
+        },
+        {
+          "path": "certificates/n364.cert",
+          "bytes": 43822,
+          "sha256": "f1f93edc5a672f3ae518be1dc0299e83b133444592b2c029f4f31778287a982d",
+          "reason": "Unchanged since 02f9690: byte-identical to the certificate the issue-476 packet retains, so pinned by digest here and compared with that copy.",
+          "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n364.cert"
+        },
+        {
+          "path": "certificates/n369.cert",
+          "bytes": 56418,
+          "sha256": "9ac80a13d962dfcba2c6438c8e7542377fd9b71c29bf4510016e2a5f4ad98243",
+          "reason": "Unchanged since 02f9690: byte-identical to the certificate the issue-476 packet retains, so pinned by digest here and compared with that copy.",
+          "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n369.cert"
+        },
+        {
+          "path": "certificates/n372.cert",
+          "bytes": 44483,
+          "sha256": "61a0f1998b0348abfdcbb24ebc889cf7ee133d485e0fe33f21956f0cdc689908",
+          "reason": "Unchanged since 02f9690: byte-identical to the certificate the issue-476 packet retains, so pinned by digest here and compared with that copy.",
+          "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n372.cert"
+        },
+        {
+          "path": "certificates/n373.cert",
+          "bytes": 49680,
+          "sha256": "494742aa3408d8a34ebbdfe5811fe017bfebdd8430e8c3c840f7fdb13e2d43da",
+          "reason": "Unchanged since 02f9690: byte-identical to the certificate the issue-476 packet retains, so pinned by digest here and compared with that copy.",
+          "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n373.cert"
+        },
+        {
+          "path": "certificates/n374.cert",
+          "bytes": 51945,
+          "sha256": "e46d218321a2ba492f90a7112e2fc00832f6723aa09d7980f67f589f73364bc9",
+          "reason": "Unchanged since 02f9690: byte-identical to the certificate the issue-476 packet retains, so pinned by digest here and compared with that copy.",
+          "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n374.cert"
+        },
+        {
+          "path": "certificates/n375.cert",
+          "bytes": 55153,
+          "sha256": "1a737f5b8d7a7fd5709702bb3012ddb1e485855f9489aefa723f898040a94974",
+          "reason": "Unchanged since 02f9690: byte-identical to the certificate the issue-476 packet retains, so pinned by digest here and compared with that copy.",
+          "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n375.cert"
+        },
+        {
+          "path": "certificates/n376.cert",
+          "bytes": 57701,
+          "sha256": "ae28ec76e6b18dbef02b780c2469d0f6dc60c848bcd9d82d07bace45024708ae",
+          "reason": "Unchanged since 02f9690: byte-identical to the certificate the issue-476 packet retains, so pinned by digest here and compared with that copy.",
+          "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n376.cert"
+        },
+        {
+          "path": "certificates/n377.cert",
+          "bytes": 56489,
+          "sha256": "cec44dca3dd05293a0ff5be0383d4ec3a0c259964f44bd19166bae003546b1e0",
+          "reason": "Unchanged since 02f9690: byte-identical to the certificate the issue-476 packet retains, so pinned by digest here and compared with that copy.",
+          "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n377.cert"
+        },
+        {
+          "path": "certificates/n378.cert",
+          "bytes": 59998,
+          "sha256": "67620ad1f4b3752fbe733f947f801de3ca6c8e7fa5663112f88ccb8175d59d1f",
+          "reason": "Unchanged since 02f9690: byte-identical to the certificate the issue-476 packet retains, so pinned by digest here and compared with that copy.",
+          "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n378.cert"
+        },
+        {
+          "path": "certificates/n379.cert",
+          "bytes": 61412,
+          "sha256": "231fcd2f3f0b630d9de0080d8032a0f7ba8ebd857ac87807a15e8a197d719a2a",
+          "reason": "Unchanged since 02f9690: byte-identical to the certificate the issue-476 packet retains, so pinned by digest here and compared with that copy.",
+          "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n379.cert"
+        },
+        {
+          "path": "certificates/n68.cert",
+          "bytes": 12100,
+          "sha256": "c52392c2601407084e7dba21e2175009a8c4799a119ae88e0e8ab11dcf3ffefa",
+          "reason": "Unchanged since 02f9690: byte-identical to the certificate the issue-476 packet retains, so pinned by digest here and compared with that copy.",
+          "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n68.cert"
+        },
+        {
+          "path": "certificates/n84.cert",
+          "bytes": 14721,
+          "sha256": "cba90c594dbc90d632d1d3f1f91bc8fd90489717dcb8f67c735480b5acaf22c4",
+          "reason": "Unchanged since 02f9690: byte-identical to the certificate the issue-476 packet retains, so pinned by digest here and compared with that copy.",
+          "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n84.cert"
+        },
+        {
+          "path": "certificates/n86.cert",
+          "bytes": 15646,
+          "sha256": "4edaab308b05847ceca5953a115bb290c541c8cc3b333cf3b542fba1a4675535",
+          "reason": "Unchanged since 02f9690: byte-identical to the certificate the issue-476 packet retains, so pinned by digest here and compared with that copy.",
+          "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n86.cert"
+        },
+        {
+          "path": "n132.txt",
+          "bytes": 9581,
+          "sha256": "da274e51e233d8b0055f1d0e18842d4107abf0a7282c5047d954f540349770fa",
+          "reason": "The decimal packing each changed certificate was solved from; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n175.txt",
+          "bytes": 12717,
+          "sha256": "368c947561397905bc158598efabdf712e1b64ebc6763209e14b199a8ff43ff3",
+          "reason": "The decimal packing each changed certificate was solved from; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n209.txt",
+          "bytes": 15129,
+          "sha256": "85ee8207f16bfcc67d4288987fdfb00cc1959f5ad3097237b0c1b80c59a302ff",
+          "reason": "The decimal packing each changed certificate was solved from; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n237.txt",
+          "bytes": 17140,
+          "sha256": "c6ff5d1e2b0596c993f84e10c14785eb4fa9bdb49110e10ab7a78e565b966367",
+          "reason": "The decimal packing each changed certificate was solved from; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n270.txt",
+          "bytes": 19523,
+          "sha256": "f4676d8978231b8268b2983251052070ae29a2ac3fe4246323e0acb24256a0cf",
+          "reason": "The decimal packing each changed certificate was solved from; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n303.txt",
+          "bytes": 21901,
+          "sha256": "cfb02bd9dd972a5f26837032225ed81f4aeb6ca6cd37f0fff2163aec3c21fed7",
+          "reason": "The decimal packing each changed certificate was solved from; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n305.txt",
+          "bytes": 22076,
+          "sha256": "2cff699166c0c2a033be4ab6178242cc87d076cc64771ea264d8bf69c79d4f6f",
+          "reason": "The decimal packing each changed certificate was solved from; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n338.txt",
+          "bytes": 24422,
+          "sha256": "225b28589a164421c1e4d4629a052a0a44f119e42dd42e059385e749cd480c56",
+          "reason": "The decimal packing each changed certificate was solved from; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n340.txt",
+          "bytes": 24587,
+          "sha256": "7e4fdd789e11af47c00b3011776fd42d0d7cf6c8180d07c8c8b09c6d79c8fc57",
+          "reason": "The decimal packing each changed certificate was solved from; pinned for provenance, as no claim rests on it."
+        }
+      ],
+      "license": "No licence file or reuse terms at the pin: the tree has no LICENSE, and neither README.md nor certificates/README.md states terms. The nine changed certificates are retained as factual data under the owner decision of 2026-10-09 recorded in resources/web/known-best-packings/README.md (Retained Factual Data); prose is hash-pinned and not copied. certificates/README.md credits Evan Daniel's MIT-licensed exact contact solver, which does not license this bundle.",
+      "claims": [
+        "Issue #488 reports s(209) <= 14946223226446451055256712327571/1000000000000000000000000000000, printed rounded up to 12 decimals as 14.946223226447, an exact optimum from Evan Daniel's exact contact solver started from SQUISH's #481 packing.",
+        "Issue #488 reports s(237) <= 99393435047986448060704927533/6250000000000000000000000000, printed as 15.902949607678, an exact optimum from the same solver started from SQUISH's #481 packing.",
+        "Issue #488 reports s(270) <= 2116221919192669947792003526953/125000000000000000000000000000, printed as 16.929775353542, an exact optimum from the same solver started from SQUISH's #481 packing.",
+        "Issue #488 reports s(305) <= 8975569886103498772971256586313/500000000000000000000000000000, printed as 17.951139772207, an exact optimum from the same solver started from SQUISH's #481 packing.",
+        "Issue #488 reports s(132) <= 11986953587254420950497823747297/1000000000000000000000000000000, printed as 11.986953587255, an exact optimum from the same solver started from Mishapolk's #470 packing.",
+        "Issue #488 reports s(175) <= 860445045293269576081339809497/62500000000000000000000000000, printed as 13.767120724693, an exact optimum from the same solver started from Ryan Xu's #432 packing.",
+        "The same commit changes three further certificates the issue does not name, each with its exact side and its side rounded up to 12 decimals in certificates/README.md: 303 in the case corpus, and 338 and 340 beyond the n <= 324 corpus.",
+        "The KKT, no-descent and checker statements are the author's; no optimality claim is made."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+Neighbour329.Chunk0050: side-L? side=4.675530093604551 shift=1.000e-12 table 3423 entries, owners 17
+Neighbour329.Chunk0050: S0 rows [510, 511, 510, 511, 512, 504, 511, 510, 509, 512, 512, 511, 512, 510, 512, 367, 512], E rows [510, 511, 510, 511, 512, 504, 511, 510, 509, 512, 512, 511, 512, 510, 512, 512, 497], steps 2493 {'cut': 2331, 'kill': 16, 'split': 146}
+Neighbour329.Chunk0050: all 2493 steps accepted; final rows [510, 511, 510, 511, 512, 504, 511, 510, 509, 512, 512, 511, 512, 510, 512, 512, 497]; R == E exactly: True
+runToCheck replayed = True
+wall 102s

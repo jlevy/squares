@@ -84,6 +84,15 @@ properties:
         bead: {$ref: '#/$defs/bead'}
         recorded: {type: string, pattern: '^\d{4}-\d{2}-\d{2}$'}
   beyond_horizon_claims:
+    description: >-
+      Claims beyond the case corpus, one row per count and source. A count may carry
+      several dated rows: at most one current row, and each earlier report that a later
+      one beats, kept as it was printed, with `disposition: superseded` and
+      `superseded_by` naming the source of the row that beats it, as a superseded report
+      names its source. check_source_coverage holds every row to its source's reparsed
+      record byte for byte, and each successor to be a row at the same count, of the same
+      claim, from a source dated no earlier, strictly better by exact decimal comparison,
+      and never a cycle back to the row it supersedes.
     type: array
     items:
       type: object
@@ -91,9 +100,14 @@ properties:
       required: [n, source_id, claim, value, assurance, disposition]
       description: >-
         A `deferred-conflict` is a deferral, like a pending intake, so it names the open
-        bead that owns resolving it.
-      if: {properties: {disposition: {const: deferred-conflict}}}
-      then: {required: [bead]}
+        bead that owns resolving it. A `superseded` row names its successor, and only a
+        superseded row names one.
+      allOf:
+        - if: {properties: {disposition: {const: deferred-conflict}}}
+          then: {required: [bead]}
+        - if: {properties: {disposition: {const: superseded}}}
+          then: {required: [superseded_by]}
+          else: {not: {required: [superseded_by]}}
       properties:
         n: {type: integer, minimum: 1}
         source_id: {type: string, pattern: '^[a-z0-9-]+$'}
@@ -101,6 +115,7 @@ properties:
         value: {type: string, pattern: '^[0-9]+(?:\.[0-9]+)?$'}
         assurance: {enum: [reported, numerically-checked, verified]}
         disposition: {enum: [tracked-outside-case-corpus, deferred-conflict, superseded]}
+        superseded_by: {type: string, pattern: '^[a-z0-9-]+$'}
         bead: {$ref: '#/$defs/bead'}
 $defs:
   bead:

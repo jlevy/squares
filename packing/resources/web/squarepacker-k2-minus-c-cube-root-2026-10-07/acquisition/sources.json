@@ -1,0 +1,40 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-10-08T00:22:01Z",
+  "git_scope": "Published v1.0 theorem text, original PDF, attribution, licences, source review summary and constant-checking programs only; numerical analogue campaigns are outside this packet.",
+  "sources": [
+    {
+      "id": "squarepacker-k2-minus-c-cube-root",
+      "source_url": "https://github.com/squarepacker/k2-minus-c-cube-root",
+      "source_ref": "v1.0",
+      "source_commit": "15045f9c6b74bd52f60394b9be593ebe4fb3debc",
+      "committed_utc": "2026-10-07T12:04:22Z",
+      "git_tree": "b7036a3d1ff332b078ab4c56e336051445818a21",
+      "archived_path": "packing/resources/web/squarepacker-k2-minus-c-cube-root-2026-10-07/source",
+      "subtree_manifest": "packing/resources/web/squarepacker-k2-minus-c-cube-root-2026-10-07/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        ".zenodo.json",
+        "LICENSE",
+        "README.md",
+        "SHA256SUMS",
+        "paper/paper.tex",
+        "paper/paper.pdf",
+        "paper/LICENSE",
+        "reviews/REVIEWS.md",
+        "code/check_table_exact.py",
+        "code/check_table_exact2.py",
+        "code/check_table_iv.py"
+      ],
+      "subtree_file_count": 11,
+      "subtree_total_bytes": 534546,
+      "retained_file_count": 11,
+      "retained_total_bytes": 534546,
+      "compressed": [],
+      "pinned_only": [],
+      "license": "CC BY 4.0 for paper; MIT for code, with original notices retained.",
+      "claims": [
+        "Issue #414: the cube-root asymptotic deficiency theorem and its analytic-Lemma-4.9 variant, read as reported claims from the pinned primary text."
+      ]
+    }
+  ]
+}

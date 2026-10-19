@@ -7,6 +7,7 @@ import json
 from pathlib import Path
 from typing import Any
 
+import pytest
 from jsonschema_rs import Draft202012Validator
 
 from devtools import check_source_coverage as coverage_check
@@ -73,12 +74,83 @@ def test_an_override_must_print_what_its_source_prints() -> None:
     assert any("repository prints 2.8" in error for error in _errors(coverage))
 
 
-def test_an_override_must_beat_the_catalogue_baseline() -> None:
+def _against_print(value: str, printed: str, houses: dict[int, str] | None = None) -> list[str]:
+    """The errors of n = 6's override at `value` against a catalogue print of `printed`,
+    the override's source keyed `[release]`, with `houses` the adopted houses' sources."""
     coverage = _coverage()
+    coverage["sources"][0]["source_key"] = "[release]"
     claims = copy.deepcopy(CLAIMS)
-    claims["release"][6] = "3"
-    coverage["selected_overrides"][0]["value"] = "3"
-    assert any("does not beat the catalogue" in error for error in _errors(coverage, claims))
+    claims["release"][6] = value
+    coverage["selected_overrides"][0]["value"] = value
+    return coverage_check.selection_errors(coverage, {**KINGBIRD, 6: printed}, claims, houses)
+
+
+@pytest.mark.parametrize("value", ["3", "3.5", "3.9999999999", "4"])
+def test_an_integral_baseline_is_exact_and_refuses_anything_at_or_above_it(value: str) -> None:
+    """An integral print is the catalogue's `s = k` or the `ceil(sqrt(n))` fallback, an
+    exact side, so it orders every override, a house or not (review C4 of #661)."""
+    for houses in (None, {6: "[release]"}):
+        (error,) = _against_print(value, "3", houses)
+        assert error == "selected override n=6 does not beat the catalogue baseline 3"
+    assert _against_print("2.9999999999", "3") == []
+
+
+@pytest.mark.parametrize(
+    ("value", "outcome"),
+    [
+        # Below the print, the override beats it.
+        ("2.9299999999", "beats"),
+        # Inside the print's last-place unit nothing is decided: a decimal print is a
+        # truncation or a rounding, as at n = 29, where T-195 lies 9.19e-15 above the
+        # catalogue's 5.93383346267692 and inside T-009's box for the catalogue's own
+        # packing (think-adgd).
+        ("2.93", "undecided"),
+        ("2.9399999999", "undecided"),
+        # From the next unit on, the print shows the override to be larger.
+        ("2.94", "loses"),
+        ("2.9400000001", "loses"),
+    ],
+)
+def test_a_decimal_print_leaves_its_last_unit_to_the_exact_house_selection(
+    value: str, outcome: str
+) -> None:
+    """Inside the print's last-place unit an override stands only as the count's adopted
+    house from its own source, which `select_houses` orders exactly against the verified
+    ceiling; anywhere else the window lets nothing through (review C4 of #661)."""
+    assert coverage_check.print_order(value, "2.93") == outcome
+    alone = _against_print(value, "2.93")
+    house = _against_print(value, "2.93", {6: "[release]"})
+    other = _against_print(value, "2.93", {6: "[repository]"})
+    if outcome == "beats":
+        assert alone == house == other == []
+    elif outcome == "undecided":
+        assert house == []
+        for errors in (alone, other):
+            (error,) = errors
+            assert "within one unit of the print's last place" in error
+            assert "not the count's adopted house" in error
+    else:
+        for errors in (alone, house, other):
+            assert errors == ["selected override n=6 does not beat the catalogue baseline 2.93"]
+
+
+def test_the_catalogues_integral_baselines_are_read_as_exact() -> None:
+    """The 177 integral baselines of the current capture refuse half a unit above them,
+    where one unit of their written place would have admitted it: 18.7 at n = 308
+    against 18 (review C4 of #661)."""
+    coverage = safe_load(coverage_check.COVERAGE.read_text(encoding="utf-8"))
+    corpus = coverage["case_corpus"]
+    source = coverage_check.source_by_id(coverage, "kingbird-current")
+    kingbird = coverage_check.parse_kingbird(
+        coverage_check.ROOT / source["local"], corpus["n_min"], corpus["n_max"]
+    )
+    integral = {n: printed for n, printed in kingbird.items() if "." not in printed}
+    assert len(integral) == 177
+    assert kingbird[308] == "18"
+    for n, printed in integral.items():
+        assert coverage_check.print_order(f"{printed}.5", printed) == coverage_check.LOSES, n
+        assert coverage_check.print_order(printed, printed) == coverage_check.LOSES, n
+    assert coverage_check.print_order("18.7", kingbird[308]) == coverage_check.LOSES
 
 
 def test_a_superseded_report_must_lose_to_the_selected_source() -> None:
@@ -269,3 +341,387 @@ def test_the_schema_requires_an_owner_on_every_deferral() -> None:
 
 def test_the_recorded_coverage_reconciles() -> None:
     assert coverage_check.main() == 0
+
+
+def _named_houses() -> tuple[dict[str, Any], list[dict[str, Any]]]:
+    """n = 7 moved twice: T-800 adopted on 11 October, then T-900 on 12 October."""
+    coverage: dict[str, Any] = {
+        "sources": [
+            {"id": "older", "source_key": "[older]"},
+            {"id": "earlier", "source_key": "[earlier]"},
+            {"id": "later", "source_key": "[later]"},
+            {"id": "later-in-corpus", "source_key": "[later]"},
+            {"id": "sibling", "source_key": "[sibling]"},
+        ],
+        "selected_overrides": [
+            {
+                "n": 7,
+                "source_id": "later-in-corpus",
+                "reason": "The smallest exact side ..., adopted on 2026-10-12 (T-900).",
+            }
+        ],
+        "superseded_reports": [
+            {
+                "n": 7,
+                "source_id": "older",
+                "reason": (
+                    "The house until 2026-10-11; its certificate stays retained and "
+                    "verified, and T-900's exact side is smaller."
+                ),
+                "superseded_by": "later-in-corpus",
+            },
+            {
+                "n": 7,
+                "source_id": "earlier",
+                "reason": (
+                    "The house from 2026-10-11 until 2026-10-12; its certificate stays "
+                    "retained and verified, and T-900's exact side is smaller."
+                ),
+                "superseded_by": "later-in-corpus",
+            },
+            {
+                "n": 7,
+                "source_id": "sibling",
+                "reason": (
+                    "A certificate of the same release that no register entry cites; its "
+                    "exact side equals the house adopted here on 2026-10-12, which "
+                    "T-900's registered certificate holds."
+                ),
+                "superseded_by": "later-in-corpus",
+            },
+        ],
+    }
+    results = [
+        {"id": "T-800", "attribution": {"source_keys": ["[earlier]"]}},
+        {"id": "T-900", "attribution": {"source_keys": ["[later]"]}},
+    ]
+    return coverage, results
+
+
+def test_a_reason_that_names_the_house_names_the_one_that_supersedes_it() -> None:
+    """Both ways a reason names its house hold to `superseded_by`, the source key matched
+    through any of the source's coverage entries."""
+    coverage, results = _named_houses()
+    assert coverage_check.house_reason_errors(coverage, results) == []
+    unnamed = copy.deepcopy(coverage)
+    unnamed["superseded_reports"][0]["reason"] = "Grid."
+    assert coverage_check.house_reason_errors(unnamed, results) == []
+
+
+def test_a_reason_left_naming_the_earlier_house_is_refused() -> None:
+    """The stale rows of #518 (A1) and #553 (B3): the count moved again, the row was
+    re-pointed at the new house, and its reason still names the old one."""
+    coverage, results = _named_houses()
+    stale = copy.deepcopy(coverage)
+    stale["superseded_reports"][0]["reason"] = (
+        "The house until 2026-10-11; its certificate stays retained and verified, and "
+        "T-800's exact side is smaller."
+    )
+    (error,) = coverage_check.house_reason_errors(stale, results)
+    assert "n=7 from older names T-800" in error
+    assert "later-in-corpus, which is not T-800's source" in error
+    dated = copy.deepcopy(coverage)
+    dated["superseded_reports"][2]["reason"] = (
+        "A certificate of the same release that no register entry cites; the side it prints "
+        "is above the house adopted here on 2026-10-11."
+    )
+    (error,) = coverage_check.house_reason_errors(dated, results)
+    assert "names the house adopted on 2026-10-11" in error
+    assert "was adopted on 2026-10-12" in error
+    unadopted = copy.deepcopy(coverage)
+    unadopted["selected_overrides"][0]["reason"] = "Selected by hand."
+    errors = coverage_check.house_reason_errors(unadopted, results)
+    assert errors == [
+        (
+            "superseded report n=7 from sibling names the house adopted on 2026-10-12, but "
+            "later-in-corpus, which supersedes it, was adopted on no day"
+        )
+    ]
+
+
+def _dated_source(identifier: str, day: str | None, values: list[int]) -> dict[str, Any]:
+    return {
+        "id": identifier,
+        "scope": {"n_values": values},
+        "evidence": [f"E-{identifier}-report"],
+        "source_date": day,
+        "claims_record": f"resources/web/{identifier}/acquisition/sources.json",
+    }
+
+
+def _row(
+    source_id: str, n: int, value: str, superseded_by: str | None = None
+) -> dict[str, Any]:
+    row: dict[str, Any] = {
+        "n": n,
+        "source_id": source_id,
+        "claim": "upper-bound",
+        "value": value,
+        "assurance": "reported",
+        "disposition": "tracked-outside-case-corpus",
+    }
+    if superseded_by is not None:
+        row |= {"disposition": "superseded", "superseded_by": superseded_by}
+    return row
+
+
+#: Three dated reports of one upper bound at n = 400, each beating the last by less than
+#: a binary64 value can show, and two at n = 401.
+FIRST_SIDE, SECOND_SIDE, THIRD_SIDE = (
+    "20.00000000000000000002",
+    "20.00000000000000000001",
+    "20.0",
+)
+
+
+def _beyond() -> tuple[dict[str, Any], dict[str, dict[int, str]]]:
+    coverage = _coverage()
+    coverage["sources"] += [
+        _dated_source("first", "2026-10-01", [400, 401]),
+        _dated_source("second", "2026-10-02", [400]),
+        _dated_source("third", "2026-10-02", [400]),
+        _dated_source("late", "2026-10-03", [401]),
+    ]
+    coverage["beyond_horizon_claims"] = [
+        _row("first", 400, FIRST_SIDE, superseded_by="second"),
+        _row("second", 400, SECOND_SIDE, superseded_by="third"),
+        _row("third", 400, THIRD_SIDE),
+        _row("first", 401, "20.1", superseded_by="late"),
+        _row("late", 401, "20.05"),
+    ]
+    claims = {
+        **CLAIMS,
+        "first": {400: FIRST_SIDE, 401: "20.1"},
+        "second": {400: SECOND_SIDE},
+        "third": {400: THIRD_SIDE},
+        "late": {401: "20.05"},
+    }
+    return coverage, claims
+
+
+def _beyond_errors(coverage: dict[str, Any], claims: dict[str, dict[int, str]]) -> list[str]:
+    return coverage_check.beyond_horizon_errors(coverage, claims)[0]
+
+
+def test_dated_beyond_horizon_rows_reconcile_by_exact_comparison() -> None:
+    """Each successor beats its predecessor below binary64 resolution, and is accepted."""
+    assert float(FIRST_SIDE) == float(SECOND_SIDE) == float(THIRD_SIDE)
+    coverage, claims = _beyond()
+    assert _errors(coverage, claims) == []
+    errors, inventory = coverage_check.beyond_horizon_errors(coverage, claims)
+    assert errors == []
+    assert inventory == {"first": {400, 401}, "second": {400}, "third": {400}, "late": {401}}
+    current = coverage_check.current_beyond_horizon(coverage)
+    assert {n: row["source_id"] for n, row in current.items()} == {400: "third", 401: "late"}
+
+
+def test_the_current_row_is_found_wherever_it_is_listed_and_never_chosen() -> None:
+    coverage, claims = _beyond()
+    rows = coverage["beyond_horizon_claims"]
+    # Each count's current row listed before the rows it supersedes.
+    rows.insert(0, rows.pop(2))
+    rows.insert(0, rows.pop())
+    assert [(row["n"], row["source_id"]) for row in rows[:3]] == [
+        (401, "late"),
+        (400, "third"),
+        (400, "first"),
+    ]
+    assert _beyond_errors(coverage, claims) == []
+    current = coverage_check.current_beyond_horizon(coverage)
+    assert {n: row["source_id"] for n, row in current.items()} == {400: "third", 401: "late"}
+    rows[2] = _row("first", 400, FIRST_SIDE)
+    with pytest.raises(
+        ValueError, match=r"n=400 has more than one current row \(third, first\)"
+    ):
+        coverage_check.current_beyond_horizon(coverage)
+
+
+def test_a_beyond_horizon_row_is_unique_by_count_and_source() -> None:
+    coverage, claims = _beyond()
+    coverage["beyond_horizon_claims"].append(_row("third", 400, THIRD_SIDE))
+    assert _beyond_errors(coverage, claims) == [
+        "beyond-horizon n=400 from third is listed twice; a count has one row per source"
+    ]
+
+
+def test_a_count_has_at_most_one_current_row() -> None:
+    coverage, claims = _beyond()
+    coverage["beyond_horizon_claims"][0] = _row("first", 400, FIRST_SIDE)
+    assert _beyond_errors(coverage, claims) == [
+        (
+            "beyond-horizon n=400 has 2 current rows (first, third); a count has at most one, "
+            "and each earlier report names the row that supersedes it"
+        )
+    ]
+
+
+def test_only_a_superseded_row_names_a_successor_and_it_always_does() -> None:
+    coverage, claims = _beyond()
+    del coverage["beyond_horizon_claims"][1]["superseded_by"]
+    coverage["beyond_horizon_claims"][2]["superseded_by"] = "second"
+    errors = _beyond_errors(coverage, claims)
+    assert "beyond-horizon n=400 from second is superseded but names no successor" in errors
+    assert (
+        "beyond-horizon n=400 from third names successor second but is not superseded" in errors
+    )
+
+
+def test_a_successor_is_a_row_at_the_same_count() -> None:
+    coverage, claims = _beyond()
+    coverage["beyond_horizon_claims"][1]["superseded_by"] = "late"
+    assert _beyond_errors(coverage, claims) == [
+        (
+            "beyond-horizon n=400 from second names successor late, which has no row at "
+            "n=400; its rows are at n=[401]"
+        )
+    ]
+    coverage["beyond_horizon_claims"][1]["superseded_by"] = "unknown"
+    assert _beyond_errors(coverage, claims) == [
+        ("beyond-horizon n=400 from second names successor unknown, which has no row at n=400")
+    ]
+
+
+def test_a_successor_is_dated_no_earlier() -> None:
+    coverage, claims = _beyond()
+    coverage["sources"][-2]["source_date"] = "2026-09-30"
+    assert _beyond_errors(coverage, claims) == [
+        (
+            "beyond-horizon n=400 from second is dated 2026-10-02, after its successor from "
+            "third, dated 2026-09-30"
+        )
+    ]
+    coverage["sources"][-2]["source_date"] = None
+    assert _beyond_errors(coverage, claims) == [
+        (
+            "beyond-horizon n=400 from second: third has no source_date, and a supersession "
+            "orders dated reports"
+        )
+    ]
+
+
+def test_a_successor_is_strictly_better_compared_exactly() -> None:
+    coverage, claims = _beyond()
+    # Equal to its predecessor, and then above it: by less than binary64 can show.
+    for value in (SECOND_SIDE, "20.000000000000000000015"):
+        coverage["beyond_horizon_claims"][2]["value"] = value
+        claims["third"][400] = value
+        assert _beyond_errors(coverage, claims) == [
+            (
+                f"beyond-horizon n=400 from second: {SECOND_SIDE} is not strictly beaten by "
+                f"{value} from third, compared exactly"
+            )
+        ]
+
+
+def test_a_lower_bound_is_beaten_from_below_and_an_exact_value_never_is() -> None:
+    coverage, claims = _beyond()
+    rows = coverage["beyond_horizon_claims"]
+    for row in rows[:3]:
+        row["claim"] = "lower-bound"
+    # Each later side is smaller, which loses as a lower bound.
+    assert _beyond_errors(coverage, claims) == [
+        (
+            f"beyond-horizon n=400 from {owner}: {earlier} is not strictly beaten by "
+            f"{later} from {successor}, compared exactly"
+        )
+        for owner, earlier, successor, later in (
+            ("first", FIRST_SIDE, "second", SECOND_SIDE),
+            ("second", SECOND_SIDE, "third", THIRD_SIDE),
+        )
+    ]
+    for row, value in zip(rows[:3], (THIRD_SIDE, SECOND_SIDE, FIRST_SIDE), strict=True):
+        row["value"] = value
+        claims[row["source_id"]][400] = value
+    assert _beyond_errors(coverage, claims) == []
+    # A lower bound, too, must be beaten strictly: an equal later report does not.
+    rows[2]["value"] = claims["third"][400] = SECOND_SIDE
+    assert _beyond_errors(coverage, claims) == [
+        (
+            f"beyond-horizon n=400 from second: {SECOND_SIDE} is not strictly beaten by "
+            f"{SECOND_SIDE} from third, compared exactly"
+        )
+    ]
+    rows[2]["value"] = claims["third"][400] = FIRST_SIDE
+    rows[2]["claim"] = "upper-bound"
+    assert _beyond_errors(coverage, claims) == [
+        (
+            "beyond-horizon n=400 from second claims lower-bound, and its successor from "
+            "third claims upper-bound"
+        )
+    ]
+    for row in rows[:3]:
+        row["claim"] = "exact-value"
+    message = (
+        "an exact-value claim is never superseded; a later report that differs from it "
+        "conflicts with it, and one that agrees adds nothing"
+    )
+    assert _beyond_errors(coverage, claims) == [
+        f"beyond-horizon n=400 from {owner}: {message}" for owner in ("first", "second")
+    ]
+    # Equal exact values are refused the same way.
+    for row in rows[:3]:
+        row["value"] = claims[row["source_id"]][400] = THIRD_SIDE
+    assert _beyond_errors(coverage, claims) == [
+        f"beyond-horizon n=400 from {owner}: {message}" for owner in ("first", "second")
+    ]
+
+
+def test_a_row_never_names_itself_as_its_successor() -> None:
+    """Longer cycles need no check of their own: a cycle of strictly better links would
+    make some value strictly better than itself, so the strictness rule refuses one."""
+    coverage, claims = _beyond()
+    rows = coverage["beyond_horizon_claims"]
+    rows[0]["superseded_by"] = "first"
+    assert _beyond_errors(coverage, claims) == [
+        "beyond-horizon n=400 from first names itself as its successor"
+    ]
+
+
+def test_a_dated_row_keeps_its_sources_facts_byte_for_byte() -> None:
+    coverage, claims = _beyond()
+    coverage["beyond_horizon_claims"][3]["value"] = "20.10"
+    assert _beyond_errors(coverage, claims) == [
+        (
+            "beyond-horizon n=401 from first reads '20.10', not '20.1' as its source prints "
+            "it; a dated row keeps its source's facts byte for byte"
+        )
+    ]
+    coverage["beyond_horizon_claims"][3]["value"] = "20.2"
+    assert _beyond_errors(coverage, claims) == [
+        "beyond-horizon n=401 from first: first prints 20.1, the inventory says 20.2"
+    ]
+
+
+def test_every_beyond_horizon_row_names_a_source_with_a_claims_record() -> None:
+    """A row is held to what its source prints, so its source must retain a record."""
+    coverage, claims = _beyond()
+    # A caller may pass only the claims it loaded; what decides is the source's record.
+    del claims["late"]
+    assert _beyond_errors(coverage, claims) == []
+    del coverage["sources"][-1]["claims_record"]
+    assert _beyond_errors(coverage, claims) == [
+        (
+            "beyond-horizon n=401 from late: late declares no claims record, so the row "
+            "is compared with nothing its source prints"
+        )
+    ]
+
+
+def test_the_schema_names_a_successor_exactly_when_a_row_is_superseded() -> None:
+    schema = safe_load(
+        coverage_check.COVERAGE.with_name("source-coverage.schema.yaml").read_text()
+    )
+    validator = Draft202012Validator(schema)
+    document = safe_load(coverage_check.COVERAGE.read_text(encoding="utf-8"))
+    document.pop("softschema")
+    later = {**_row("later", 400, "20.0"), "bead": "think-ab12"}
+    earlier = {**_row("earlier", 400, "20.1", superseded_by="later"), "bead": "think-ab12"}
+    document["beyond_horizon_claims"] = [earlier, later]
+    assert validator.is_valid(document)
+    document["beyond_horizon_claims"] = [
+        {key: value for key, value in earlier.items() if key != "superseded_by"},
+        later,
+    ]
+    assert not validator.is_valid(document)
+    document["beyond_horizon_claims"] = [earlier, {**later, "superseded_by": "earlier"}]
+    assert not validator.is_valid(document)

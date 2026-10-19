@@ -1,0 +1,16 @@
+{
+  "cells_sha256": "3cdb291b927abaf6a61f0127ddf208329765f77debe793881ec01879b18158b5",
+  "cells_bytes": 3590,
+  "attempt2_absent": true,
+  "objects": [
+    {
+      "path": "packing/campaign/retained/session-184-n17-numeric-cap-readiness/seed-375e78a4dead8856b6d2e88b6118a2e0aeadb9671d4c4b79c46c2d790fcaa48d.json.gz",
+      "exists": true
+    },
+    {
+      "path": "packing/campaign/retained/session-184-n17-numeric-cap-readiness/node-687cfe6d24f0e01bc0e39af0978b554787b7ffef24eb378b1e29c246e463df82.json.gz",
+      "exists": true
+    }
+  ],
+  "frozen_source_diff": []
+}

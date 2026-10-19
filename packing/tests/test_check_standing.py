@@ -1,15 +1,20 @@
 """Each result's derived standing agrees with the bounds its own words state.
 
-`render_recent_results.standing` derives a standing from evidence ids and never compares
-a number. `devtools.check_standing` reads the bounds an entry states and holds them
-against the case records, so an entry that is no longer the best is superseded and one
-that still stands is not (think-nr0y). These hold the register to that, the reader to
-the headlines it must read, and the check to refusing each kind of mismatch.
+`render_recent_results.standing` derives whether an entry holds a bound from evidence ids
+and compares no number for it. `devtools.check_standing` reads the bounds an entry states
+and holds them against the case records, so an entry that is no longer the best is
+superseded and one that still stands is not (think-nr0y); for an entry that holds no
+bound, `standing` asks it whether a bound the entry states is better than its case
+record's, and calls that entry pending adoption rather than superseded (think-h0d1).
+These hold the register to that, the reader to the headlines it must read, and the check
+to refusing each kind of mismatch.
 """
 
 from __future__ import annotations
 
+import dataclasses
 from collections.abc import Mapping
+from decimal import Decimal
 from fractions import Fraction
 from typing import Any
 
@@ -17,7 +22,7 @@ import pytest
 
 from devtools import check_standing
 from devtools import render_recent_results as view
-from devtools.check_results import BOUND_KINDS
+from devtools.check_results import BOUND_KINDS, SECOND_PROOF_KINDS
 from devtools.check_standing import BEATEN, EQUAL, EXCEEDS, LOWER, UPPER, Stated
 
 EXACT = Fraction(0)
@@ -264,6 +269,160 @@ def test_a_standing_entry_whose_every_bound_is_beaten_is_refused(records: view.R
         records.results["T-001"], view.SECOND_CERTIFICATE, records
     )
     assert "does not state the verified value" in second
+    assert "or a reported one" not in second
+    (reported,) = check_standing.problems(
+        records.results["T-001"], view.SECOND_CERTIFICATE_REPORTED, records
+    )
+    assert reported.endswith(
+        "does not state the verified value, or a reported one the verified bound does not beat"
+    )
+
+
+@pytest.mark.parametrize("kind", sorted(SECOND_PROOF_KINDS))
+def test_a_second_proof_of_a_reported_value_is_a_reported_second_certificate(
+    records: view.Records, kind: str
+) -> None:
+    """T-154, Fitzharding's Lean proof of s(17) = L, is a formalization at C1 of the value
+    T-153 holds in n = 17's reported lane, and holds no bound itself; it was a
+    simplification until the owner's decision of 13 October 2026 (think-8e0p), and both
+    kinds of second proof read the same here. It restates the reported value, which the
+    verified lane does not beat, so it is a reported second certificate, held to the
+    reported lane, and not superseded. Given a bound's kind, the same words tie the
+    reported lane under T-153's citation and derive superseded, which the check refuses: a
+    tie is cited by the case record or recorded as a second proof."""
+    assert records.results["T-154"]["kind"] == "formalization"
+    record = _entry(records, "T-154", kind=kind)
+    assert record["confirmation"] in check_standing.UNREPLAYED
+    assert check_standing.restates(record, records)
+    reported = view.SECOND_CERTIFICATE_REPORTED
+    assert view.standing(record, records) == reported
+    assert check_standing.problems(record, reported, records) == []
+    line = check_standing.summary(record, reported, records)
+    assert "equals the reported bound at n = 17" in line
+    (verified,) = check_standing.problems(record, view.SECOND_CERTIFICATE, records)
+    assert "does not state the verified value" in verified
+    bound = {**record, "kind": "optimality"}
+    assert view.standing(bound, records) == view.SUPERSEDED
+    (refused,) = check_standing.problems(bound, view.SUPERSEDED, records)
+    assert "T-154 is superseded, yet at n = 17" in refused
+    assert "no worse than the reported one" in refused
+
+
+@pytest.mark.parametrize("kind", sorted(SECOND_PROOF_KINDS))
+def test_a_second_proof_keeps_a_standing_through_its_later_rungs(
+    records: view.Records, kind: str
+) -> None:
+    """The claim of a simplification or a formalization states the relations of the
+    result it proves again, so those relations stand in for a bound kind's directions.
+    Replayed (C2 or C3) before the case records adopt it, T-154's `s(17) = …` states a
+    lower bound strictly above n = 17's verified one: it is pending adoption, not
+    superseded, and the check agrees. Adopted, with n = 17's verified lower bound citing
+    its evidence, it is the current best, and a second proof moves no bound by itself, so
+    the check refuses it until its kind is revisited (review A4 on #592); so too where
+    the reported lane alone cites it. The owner decides the kind it then takes, and once
+    the register records one outside the second proofs, the check is satisfied. A second
+    proof that states only what its case records hold still has nothing to improve on
+    (`test_an_entry_improves_only_in_the_directions_its_kind_bounds`)."""
+    record = _entry(records, "T-154", kind=kind)
+    assert check_standing.directions(record, check_standing.findings(record, records)) == {
+        LOWER,
+        UPPER,
+    }
+    for rung in ("C2", "C3"):
+        replayed = {**record, "confirmation": rung}
+        assert not check_standing.restates(replayed, records)
+        better = check_standing.improvements(replayed, records)
+        assert [(finding.n, finding.direction) for finding in better] == [(17, LOWER)]
+        assert view.standing(replayed, records) == view.PENDING_ADOPTION
+        assert check_standing.problems(replayed, view.PENDING_ADOPTION, records) == []
+        line = check_standing.summary(replayed, view.PENDING_ADOPTION, records)
+        assert "better than the case record at n = 17" in line
+        assert not view.superseded(replayed, view.PENDING_ADOPTION)
+    case = records.cases[17]
+    lane = {**case["reported_lower_bound"], "evidence": ["E-n017-fitzharding-lean-report"]}
+    adopted = dataclasses.replace(
+        records,
+        cases={**records.cases, 17: {**case, "status": "proved", "verified_lower_bound": lane}},
+    )
+    replayed = {**record, "confirmation": "C3"}
+    assert view.standing(replayed, adopted) == view.HOLDS
+    (revisit,) = check_standing.problems(replayed, view.HOLDS, adopted)
+    assert revisit.startswith(f"T-154 is a {kind}, yet a case bound rests on it (current best)")
+    assert "its kind is revisited, as the owner decides" in revisit
+    assert "packing/site-urls.yaml" in revisit
+    reported = dataclasses.replace(
+        records, cases={**records.cases, 17: {**case, "reported_lower_bound": lane}}
+    )
+    assert view.standing(record, reported) == view.HOLDS_REPORTED
+    (alone,) = check_standing.problems(record, view.HOLDS_REPORTED, reported)
+    assert "a case bound rests on it (current best, reported)" in alone
+    # Whichever kind the owner decides; a bound's kind stands for any outside the two.
+    decided = {**replayed, "kind": "optimality"}
+    assert view.standing(decided, adopted) == view.HOLDS
+    assert check_standing.problems(decided, view.HOLDS, adopted) == []
+
+
+@pytest.mark.parametrize("kind", sorted(SECOND_PROOF_KINDS))
+def test_a_second_proof_of_a_value_no_lane_holds_is_refused(
+    records: view.Records, kind: str
+) -> None:
+    """A simplification or a formalization proves again a value the record holds. Given
+    the words `s(17) = 4.68`, above n = 17's reported lower bound, T-154 states a value
+    no lane holds: it derives pending adoption at C1 and at C3, and the check refuses it
+    at both, since by the first rule of Result Kinds it takes that value's kind (review A3
+    on #592). T-154 as written, replayed, beats the verified lane alone and is refused
+    nothing (`test_a_second_proof_keeps_a_standing_through_its_later_rungs`)."""
+    probe = _entry(records, "T-154", kind=kind, headline="`s(17) = 4.68` in Lean 4")
+    for rung in ("C1", "C3"):
+        beyond = {**probe, "confirmation": rung}
+        (finding,) = [
+            f for f in check_standing.findings(beyond, records) if f.direction == LOWER
+        ]
+        assert finding.reported == EXCEEDS
+        assert view.standing(beyond, records) == view.PENDING_ADOPTION
+        (problem,) = check_standing.problems(beyond, view.PENDING_ADOPTION, records)
+        assert problem.startswith(
+            f"T-154 is a {kind}, yet at n = 17 it states a bound better than the reported one"
+        )
+    assert (
+        check_standing.problems({**probe, "kind": "optimality"}, view.PENDING_ADOPTION, records)
+        == []
+    )
+
+
+def test_a_reported_second_certificate_is_not_beaten_in_the_verified_lane(
+    records: view.Records,
+) -> None:
+    """n = 11's reported lower bound is the source's display, 3.87708359002281, below the
+    exact verified T. A simplification at C1 that restates the display ties the reported
+    lane and is beaten in the verified one, so it restates nothing: it is superseded, and
+    the check refuses it the word second certificate, reported."""
+    probe = _entry(
+        records, "T-154", headline="`s(11) ≥ 3.87708359002281`", scope={"n_values": [11]}
+    )
+    (finding,) = check_standing.findings(probe, records)
+    assert (finding.verified, finding.reported) == (BEATEN, EQUAL)
+    assert not check_standing.restates(probe, records)
+    assert view.standing(probe, records) == view.SUPERSEDED
+    (problem,) = check_standing.problems(probe, view.SECOND_CERTIFICATE_REPORTED, records)
+    assert "T-154 is a second certificate, yet at n = 11" in problem
+    assert "or a reported one the verified bound does not beat" in problem
+
+
+def test_one_rung_partition_decides_the_lane_and_the_word(records: view.Records) -> None:
+    """A replay has passed from C2 up (the status `confirmed`), so a second certificate at
+    C2 is held to the verified lane and takes the word a replayed one does, and the summary
+    reads the lane the label names. T-054 and T-055, replayed second proofs at C3, read the
+    same at C2."""
+    assert check_standing.UNREPLAYED == view.UNREPLAYED == frozenset({"C0", "C1"})
+    for entry in ("T-054", "T-055"):
+        record = {**records.results[entry], "confirmation": "C2"}
+        assert check_standing.restates(record, records)
+        assert view.standing(record, records) == view.SECOND_CERTIFICATE
+        line = check_standing.summary(record, view.SECOND_CERTIFICATE, records)
+        assert "equals the verified bound" in line
+        reported = {**record, "confirmation": "C1"}
+        assert view.standing(reported, records) == view.SECOND_CERTIFICATE_REPORTED
 
 
 def test_an_entry_that_holds_one_case_of_several_stands(records: view.Records) -> None:
@@ -325,5 +484,156 @@ def test_the_command_fails_on_a_mismatch(
     assert check_standing.main(["--cases"]) == 1
     printed = capsys.readouterr()
     assert "FAIL  T-093 is superseded, yet at n = 17" in printed.err
-    assert "n = 17 lower 18641771/4000000: verified equal, reported equal" in printed.out
+    assert "n = 17 lower 18641771/4000000: verified equal, reported beaten" in printed.out
     assert "n = 17 lower 116511/25000: verified beaten, reported beaten" in printed.out
+
+
+def test_a_bound_better_than_its_case_record_is_pending_adoption(
+    records: view.Records,
+) -> None:
+    """T-122 states n = 152's exact side cut below the reported and the verified ceiling
+    its case holds, and no case bound rests on it. Marked superseded, it is refused: as
+    registered, a report at V0 held to the reported lane, and were a replay to raise it to
+    C3, held to the verified lane, as T-128 was from its review of 10 October until the
+    house adoption of 11 October 2026 took its sides in (think-fvz4). Pending adoption, it
+    passes, and the summary names where it is better. An entry beaten everywhere is refused
+    the word (think-h0d1)."""
+    reported = records.results["T-122"]
+    assert view.standing(reported, records) == view.PENDING_ADOPTION
+    assert check_standing.problems(reported, view.PENDING_ADOPTION, records) == []
+    cases = "n = 152"
+    (superseded,) = check_standing.problems(reported, view.SUPERSEDED, records)
+    assert f"T-122 is superseded, yet at {cases} its stated bound" in superseded
+    assert "no worse than the reported one" in superseded
+    record = {**reported, "verification": "V3", "confirmation": "C3"}
+    assert view.standing(record, records) == view.PENDING_ADOPTION
+    (superseded,) = check_standing.problems(record, view.SUPERSEDED, records)
+    assert f"T-122 is superseded, yet at {cases} its stated bound" in superseded
+    assert "no worse than the verified one" in superseded
+    line = check_standing.summary(record, view.PENDING_ADOPTION, records)
+    assert f"better than the case record at {cases}" in line
+    (beaten,) = check_standing.problems(
+        records.results["T-001"], view.PENDING_ADOPTION, records
+    )
+    assert "T-001 is pending adoption, yet no bound it states is better" in beaten
+
+
+def test_a_confirmed_bound_better_at_several_cases_names_each_one(
+    records: view.Records,
+) -> None:
+    """The shape T-128 had from its review of 10 October until the house adoption of 11
+    October 2026 (think-fvz4): a confirmed entry better than its case records at several
+    counts. No live entry has it now, so T-122 is given three counts, each side a
+    thousandth below the verified ceiling its case holds."""
+    sides = {
+        n: Decimal(str(records.cases[n]["verified_upper_bound"]["value"])) - Decimal("0.001")
+        for n in (152, 154, 157)
+    }
+    headline = ", ".join(f"`s({n}) ≤ {side}`" for n, side in sides.items())
+    record = _entry(
+        records,
+        "T-122",
+        verification="V3",
+        confirmation="C3",
+        scope={"n_values": list(sides)},
+        headline=headline,
+    )
+    cases = "n = 152, 154, 157"
+    assert view.standing(record, records) == view.PENDING_ADOPTION
+    assert check_standing.problems(record, view.PENDING_ADOPTION, records) == []
+    (superseded,) = check_standing.problems(record, view.SUPERSEDED, records)
+    assert superseded == (
+        f"T-122 is superseded, yet at {cases} its stated bound is no worse than the "
+        "verified one"
+    )
+    line = check_standing.summary(record, view.PENDING_ADOPTION, records)
+    assert f"better than the case record at {cases}" in line
+
+
+def test_a_bound_no_case_record_cites_states_what_it_bounds(records: view.Records) -> None:
+    """A source-only report, one whose evidence no case record cites, is related to the
+    case records by nothing but the bounds its words state, so a bound of that kind states
+    its sides, as T-128's claim does, and `standing` can tell a better report the case
+    records have not taken in from one they have beaten (think-h0d1). The four exact-form
+    reports of 7 October (T-120..T-123), sides that are roots of polynomials, state them
+    cut where their root intervals' ends agree."""
+    lanes = ("verified_lower_bound", "reported_lower_bound")
+    lanes += ("verified_upper_bound", "reported_upper_bound")
+    cited = set()
+    for case in records.cases.values():
+        cited.update(str(item) for item in case.get("evidence") or [])
+        for lane in lanes:
+            cited.update(str(item) for item in (case.get(lane) or {}).get("evidence") or [])
+    unplaced = [
+        str(record["id"])
+        for record in records.register.results
+        if record["kind"] in BOUND_KINDS
+        and not {str(item) for item in record["evidence"]} & cited
+        and not check_standing.stated_bounds(record)
+    ]
+    assert unplaced == []
+
+
+def test_a_closed_form_bound_is_a_display_a_unit_either_side(records: view.Records) -> None:
+    """n = 5's verified ceiling is `2 + (1/2)sqrt(2)`, printed rounded up in its 32nd
+    place. Read as an exact number, a statement of the optimum cut at that place lies
+    below it and would read as an improvement, pending adoption; read as the display it
+    is, a unit either side of its last place, the two tie, and the entry is superseded."""
+    bound = records.cases[5]["verified_upper_bound"]
+    assert bound["exact_form"] == "2 + (1/2)sqrt(2)"
+    floor, ceiling = view.span(bound)
+    assert ceiling - floor == Fraction(2, 10**32)
+    assert ((floor - 2) * 2) ** 2 < 2 < ((ceiling - 2) * 2) ** 2
+    cut = Stated(Fraction("2.70710678118654752440084436210484"), Fraction(1, 10**32))
+    assert check_standing.relation(cut, bound, UPPER) == EQUAL
+    printed = {"value": bound["value"], "exact_form": None}
+    assert view.span(printed) == (Fraction(bound["value"]),) * 2
+    assert check_standing.relation(cut, printed, UPPER) == EXCEEDS
+    stating = _entry(
+        records,
+        "T-128",
+        claim="Reported s(5) <= 2.70710678118654752440084436210484….",
+        scope={"n_values": [5]},
+        confirmation="C3",
+    )
+    assert check_standing.improvements(stating, records) == []
+    assert view.standing(stating, records) == view.SUPERSEDED
+
+
+def test_an_entry_improves_only_in_the_directions_its_kind_bounds(
+    records: view.Records,
+) -> None:
+    """A lower bound's words may quote a ceiling, and an upper bound's a floor; neither is
+    its claim. T-128's sides read as a lower bound's words improve on nothing, and the
+    entry is superseded; read as an optimality's, both directions count."""
+    record = records.results["T-122"]
+    assert [finding.direction for finding in check_standing.improvements(record, records)] == [
+        UPPER
+    ]
+    floor = _entry(records, "T-122", kind="lower-bound")
+    assert check_standing.improvements(floor, records) == []
+    assert view.standing(floor, records) == view.SUPERSEDED
+    exact = _entry(records, "T-122", kind="optimality")
+    assert len(check_standing.improvements(exact, records)) == 1
+    other = _entry(records, "T-122", kind="method-limit")
+    assert check_standing.improvements(other, records) == []
+
+
+def test_an_entry_pending_adoption_is_cited_by_no_case_bound(records: view.Records) -> None:
+    """Pending adoption is derived from the numbers, so the check also reads the case
+    records apart from the holders `standing` credits: a case bound that cites the entry's
+    own evidence has taken it in. Were n = 152's reported ceiling to cite T-122's report
+    beside Evan Daniel's, T-122 would be refused the word there."""
+    record = records.results["T-122"]
+    assert check_standing.citing(record, records) == []
+    case = records.cases[152]
+    lane = case["reported_upper_bound"]
+    cited = {**lane, "evidence": [*lane.get("evidence", []), "E-evand-exact-form-n152-report"]}
+    adopted = dataclasses.replace(
+        records, cases={**records.cases, 152: {**case, "reported_upper_bound": cited}}
+    )
+    assert check_standing.citing(record, adopted) == [152]
+    (problem,) = check_standing.problems(record, view.PENDING_ADOPTION, adopted)
+    assert (
+        "T-122 is pending adoption, yet a case bound at n = 152 cites its evidence" in problem
+    )

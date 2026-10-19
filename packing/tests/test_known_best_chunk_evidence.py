@@ -28,61 +28,61 @@ def test_known_best_chunk_evidence_profile_replays_byte_for_byte() -> None:
     assert retained == expected
     assert RENDERING.read_text(encoding="utf-8") == rendering
     profile = retained["profile"]
+    # Re-derived by `--update` after the house adoption of 11 October 2026 (think-fvz4),
+    # which moved n = 70 to T-146 and n = 84 and 86 to T-130: 24 fewer structured squares
+    # (n = 86 structures 50 where Xu's packing structured 84), and the sensitivity sweep
+    # now moves 86 rather than 70 and 84, with no within-budget flip left. The adoption of
+    # 17 October 2026 (think-30n2) moved n = 29 from the catalogue's stratum to the
+    # packets' (T-195), the same packing, so only the strata move.
     assert profile["aggregate"] == {
         "case_count": 36,
-        "contact_component_count": 166,
+        "contact_component_count": 164,
         "coverage_threshold_cases": {
             "at_least_50_percent": 35,
-            "at_least_75_percent": 33,
-            "at_least_90_percent": 28,
+            "at_least_75_percent": 32,
+            "at_least_90_percent": 25,
         },
-        "fully_structured_cases": 10,
-        "internal_slide_dof": 869,
+        "fully_structured_cases": 9,
+        "internal_slide_dof": 861,
         "narrow_partition_status_counts": {
             "established": 3,
-            "not-established": 23,
-            "not-established-search-limit": 8,
+            "not-established": 24,
+            "not-established-search-limit": 7,
             "outside-registered-budget": 2,
         },
         "sensitivity_comparison": {
-            "changed_case_count": 2,
-            "changed_ns": [68, 71],
-            "primary_structured_square_count": 1792,
-            "sensitivity_structured_square_count": 1797,
+            "changed_case_count": 4,
+            "changed_ns": [68, 71, 86, 88],
+            "primary_structured_square_count": 1731,
+            "sensitivity_structured_square_count": 1764,
             "within_budget_flip_ns": [],
         },
         "source_strata": [
-            # n = 69 left its UnitSquare rendering on 2026-10-05 for the catalogue's later
-            # side for the same packing (T-088), read from a binary64 parse of the SVG; the
-            # rendering stratum is empty and is not listed. n = 83 and 87 stay here with
-            # their new packings (T-089).
             {
-                "case_count": 35,
-                "fully_structured_cases": 10,
+                "case_count": 29,
+                "fully_structured_cases": 8,
                 "sensitivity_changed_ns": [71],
                 "source_kind": "kingbird-derived-facts",
-                "square_count": 1792,
-                "structured_fraction": "0.967075892857",
-                "structured_square_count": 1733,
-                "within_six_components_and_three_free_cases": 26,
+                "square_count": 1384,
+                "structured_fraction": "0.963150289017",
+                "structured_square_count": 1333,
+                "within_six_components_and_three_free_cases": 22,
             },
-            # n = 68 moved from its UnitSquare rendering onto Francisco Couzo's
-            # packet facts on 2026-09-29.
             {
-                "case_count": 1,
-                "fully_structured_cases": 0,
-                "sensitivity_changed_ns": [68],
+                "case_count": 7,
+                "fully_structured_cases": 1,
+                "sensitivity_changed_ns": [68, 86, 88],
                 "source_kind": "packet-derived-facts",
-                "square_count": 68,
-                "structured_fraction": "0.867647058824",
-                "structured_square_count": 59,
-                "within_six_components_and_three_free_cases": 0,
+                "square_count": 476,
+                "structured_fraction": "0.836134453782",
+                "structured_square_count": 398,
+                "within_six_components_and_three_free_cases": 3,
             },
         ],
         "square_count": 1860,
-        "structured_fraction": "0.963440860215",
-        "structured_square_count": 1792,
-        "within_six_components_and_three_free_cases": 26,
+        "structured_fraction": "0.93064516129",
+        "structured_square_count": 1731,
+        "within_six_components_and_three_free_cases": 25,
     }
     assert "DESCRIPTIVE · NO VERDICT" in rendering
     assert "Connectedness is not rigidity" in rendering

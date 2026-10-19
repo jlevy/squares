@@ -34,6 +34,22 @@ def test_variant_builder_binds_executed_features_and_binary_bytes(
     candidate, baseline, provenance = benchmark._build_variants(tmp_path / "variants")  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
     assert baseline.read_bytes() == b"experimental-normalized-mul"
     assert candidate.read_bytes() == b"experimental-coprime-mul"
+    assert commands[-2][2:] == (
+        "--offline",
+        "--locked",
+        "--release",
+        "--no-default-features",
+        "--features",
+        "experimental-normalized-mul",
+    )
+    assert commands[-1][2:] == (
+        "--offline",
+        "--locked",
+        "--release",
+        "--no-default-features",
+        "--features",
+        "experimental-coprime-mul",
+    )
     assert commands[-2][-1] == "experimental-normalized-mul"
     assert commands[-1][-1] == "experimental-coprime-mul"
     builds = provenance["builds"]

@@ -25,8 +25,9 @@ earlier), and one intake paragraph under the title, ending in wand125's AI-assis
 statement as ``devtools.state_ai_assistance`` words it, and it retires the claims an
 earlier registration's paragraph makes once they stop being current. In ``evidence.yaml``
 it inserts the registration's report entries when they are missing, keeps every wand125
-rectangle entry's scope equal to the cases that cite it, and keeps each replay entry's
-command. Other prose in a promoted
+rectangle report's scope equal to the cases that cite it, retains replay coverage
+that complete receipts support even when a case no longer cites it, and keeps each
+replay entry's command. Other prose in a promoted
 case can still describe the superseded bound, which ``check_case_prose`` reports, and is
 edited by hand.
 
@@ -1051,7 +1052,8 @@ def _citing(texts: Mapping[int, str], identifier: str) -> list[int]:
 
 
 def update_evidence(text: str, registration: Registration, texts: Mapping[int, str]) -> str:
-    """Insert the registration's missing entries, and keep each scope and replay command."""
+    """Insert missing entries and preserve receipt-backed replay coverage and commands."""
+    recorded = {row["id"]: row for row in safe_load(text)["evidence"]}
     for item in REGISTRATIONS[: _index(registration) + 1]:
         citing = _citing(texts, item.replay)
         if _entry_span(text, item.replay) is None:
@@ -1064,8 +1066,15 @@ def update_evidence(text: str, registration: Registration, texts: Mapping[int, s
         if not citing or not own:
             continue
         carried = monotone_bounds(own, upto=max(registration.packet.cases))
-        sources = sorted({carried[n][1] for n in citing if n in carried})
-        text = _replay_command(_set_scope(text, item.replay, citing), item, sources)
+        scope = recorded[item.replay]["scope"]
+        previous = (
+            set(scope["n_values"])
+            if "n_values" in scope
+            else set(range(scope["n_min"], scope["n_max"] + 1))
+        )
+        covered = sorted(set(citing) | (previous & carried.keys()))
+        sources = sorted({carried[n][1] for n in covered if n in carried})
+        text = _replay_command(_set_scope(text, item.replay, covered), item, sources)
     owned = [
         n
         for n, (name, _side) in registration.packet.cases.items()

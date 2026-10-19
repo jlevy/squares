@@ -1,0 +1,49 @@
+{
+  "command": [
+    "python",
+    "-m",
+    "devtools.gupta_refinement_reports",
+    "certify",
+    "--jobs-dir",
+    "/Volumes/spud-ext1/source-worktrees/squares-import-resume/issue438-native-evidence/jobs",
+    "--workers",
+    "2",
+    "--timeout",
+    "600"
+  ],
+  "scope": [
+    88,
+    108,
+    123,
+    129,
+    130,
+    153,
+    154,
+    179,
+    180,
+    199,
+    207,
+    208,
+    209,
+    236,
+    237,
+    238,
+    239
+  ],
+  "workers": 2,
+  "timeout_seconds": 600,
+  "native_routes": [
+    "exact_verify",
+    "independent"
+  ],
+  "status": "PASS",
+  "wall_seconds": 255.69298608397366,
+  "jobs": 51,
+  "pair_decisions": 1714956,
+  "receipt_bytes": 58260,
+  "receipt_uncompressed_bytes": 1554242,
+  "route_cpu_seconds": {
+    "exact_verify": 291.66273,
+    "independent": 153.263304
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "schema": "n17-centered-cap-standing-context/v1",
+  "status": "refused",
+  "error": "fresh standing child refused",
+  "readiness_passed": false,
+  "verification_passed": false,
+  "failed_child": {"argv":["/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python","-m","devtools.check_n17_centered_cap_standing","--relative-child","campaign/series/series-000-smoke-and-calibration/results/exp-279-centered-endpoint-diagnostics/descriptor.json","--max-seconds","300.0","--output","/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/tmp/centered-child-xizu78cu/receipt.json"],"exit_code":1,"stdout_tail":"{\"status\": \"refused\", \"error\": \"full centered standing replay failed: step 0: owned hull too large\"}\n","stderr_tail":"","scope":"failed child evidence only; no replay or exclusion accepted","receipt":{"schema":"n17-centered-cap-standing-context/v1","status":"refused","error":"full centered standing replay failed: step 0: owned hull too large","readiness_passed":false,"verification_passed":false,"existing_U_census_admission":false,"new_target_admission_proved":false,"global_optimality_proved":false}},
+  "existing_U_census_admission": false,
+  "new_target_admission_proved": false,
+  "global_optimality_proved": false
+}

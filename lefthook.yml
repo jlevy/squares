@@ -21,12 +21,13 @@ pre-commit:
     # for checking the model-assisted transcriptions against. Reflowing them
     # would silently void that guarantee. Do not "optimise" this to staged files.
     #
-    # The `glob` filter means the hook only fires when Markdown is actually
-    # staged; flowmark is fast enough across the whole tree that scoping further
-    # buys nothing.
+    # Python also carries generated paper prose and title metadata. Either source
+    # kind runs the same Markdown formatter and the paper-title contract. Generated
+    # histories pass through Flowmark in the shared renderer before publication.
+    # The title check writes no output; Markdown fixes are staged automatically.
     format-markdown:
-      glob: "*.{md,markdown,mdc}"
-      run: make format
+      glob: "*.{md,markdown,mdc,py}"
+      run: make format paper-style-check
       stage_fixed: true
 
     # The JavaScript and CSS floor, fixed at commit the same way Markdown is formatted at

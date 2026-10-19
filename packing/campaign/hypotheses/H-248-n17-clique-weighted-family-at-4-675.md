@@ -56,7 +56,7 @@ hypothesis:
   notes: >-
     The successor of H-243 after Kleddamag v1.1.0 (s(17) > 4.640020), from the
     2026-09-27 planning block
-    (docs/project/specs/active/plan-2026-09-27-after-4640020-overnight.md). Every atom
+    (docs/project/specs/archive/plan-2026-09-27-after-4640020-overnight.md). Every atom
     in v1.1.0 has capacity one, so a valid certificate at 4.640020 shows no such family
     fits at any side up to 4.640020. Registered at 465/100 and 466/100, where a
     two-minute anneal at 4.65 ended at two triangles among 34 squares with fractional

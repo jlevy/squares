@@ -48,8 +48,8 @@ it.
 | `v1-slideshow/test_candidate.py`, `timeline_harness.js`, `node-harness.d.ts` | The slideshow’s checks, with the stub-DOM harness its timeline test runs in |
 | `v1-slideshow/render_review.py` | The slideshow’s review stills |
 | `v1-slideshow/probes/`, `v2-transitions/probes/` | The JavaScript each tool runs in a page, one file per probe in a directory per tool, loaded by `sqpack.probes`. `atlas-video.d.ts` declares the slideshow’s `window.atlasVideo`, and the page script is checked against it |
-| `v1-slideshow/NOTES.md` | Sizes, the font composition, the fact provenance tables, the capture sketch, four revisions of owner feedback |
-| `v2-transitions/NOTES.md` | The first build and its revisions through 16, with the measurements that answer the plan’s open questions; a dated correction at the top says what moved |
+| `v1-slideshow/notes.md` | Sizes, the font composition, the fact provenance tables, the capture sketch, four revisions of owner feedback |
+| `v2-transitions/notes.md` | The first build and its revisions through 16, with the measurements that answer the plan’s open questions; a dated correction at the top says what moved |
 | `v2-transitions/transition-stats.json`, `v2-transitions/stats-summary.md` | **Frozen historical output**, last regenerated at `0281a508`: per pair, the matching method, the identity chain, block statistics, displacements and turns, and their summary. Nothing rebuilds them or compares them with a build. At `f3874426` a fresh record differed from this one only in `generated_by`; the summary’s closing run times omit `correct`, where the generator now prints the run time the page reports |
 | `v2-transitions/compare_palette.py`, `dump_fills.py`, `experiment_*.py`, `grade_motion.py`, `measure_*.py`, `smoke_styles.py` | The instruments that produced the measured tables in the notes |
 

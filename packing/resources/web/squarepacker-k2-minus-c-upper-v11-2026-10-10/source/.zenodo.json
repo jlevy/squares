@@ -1,0 +1,52 @@
+{
+"title": "Packing k^2-c unit squares: an upper bound of order k^{3/8} for the deficiency (preprint, programs and data)",
+"upload_type": "software",
+"description": "Licences in this single record: the paper (paper/paper.pdf, paper/paper.tex) is licensed under CC BY 4.0; the programs (code/) and the data (data/) under the MIT License, which is the licence shown for the record. Preprint with programs and data, version 1.1. For an integer k >= 2 let c*(k) be the largest integer c with s(k^2-c) = k, where s(n) is the side of the smallest square containing n non-overlapping unit squares. The preprint proves, for each of 12 tiers i, c*(k) < C_i k^{3/8} + a_i for every integer k >= k_i (Theorem 1.1; constants certified in interval arithmetic): c*(k) < 46.31 k^{3/8} + 0.035 for k >= 2.2*10^13 (B1, uses Lemmas 8.2-8.5); c*(k) < 45.49 k^{3/8} + 0.029 for k >= 4.5*10^13 (B1s, uses Lemmas 8.2-8.5); c*(k) < 45.08 k^{3/8} + 0.026 for k >= 6.4*10^13 (B2, uses Lemmas 8.2-8.5); c*(k) < 48.76 k^{3/8} + 0.019 for k >= 4.6*10^14 (A1); c*(k) < 48.38 k^{3/8} + 0.017 for k >= 6.1*10^14 (A1s); c*(k) < 46.42 k^{3/8} + 0.011 for k >= 2.7*10^15 (A2); c*(k) < 43.61 k^{3/8} + 0.0039 for k >= 9.6*10^16 (A3); c*(k) < 41.73 k^{3/8} + 5.7*10^-4 for k >= 1.5*10^20 (A4); c*(k) < 40.62 k^{3/8} + 1.4*10^-5 for k >= 3.4*10^26 (A5); c*(k) < 41.19 k^{3/8} + 0.04 for k >= 5.22*10^12 (C1, uses Lemmas 8.2-8.5, 8.6-8.8 and 8.11); c*(k) < 41.78 k^{3/8} + 0.047 for k >= 2.95*10^12 (C2, uses Lemmas 8.2-8.5, 8.6-8.8 and 8.11); c*(k) < 42.09 k^{3/8} + 0.05 for k >= 2.48*10^12 (C3, uses Lemmas 8.2-8.5, 8.6-8.8 and 8.11). With the tiers that use only the lemmas of version 1.0, this is smaller than the bound 20.668 k^{2/5} + 0.623 for every k >= 6.1*10^14; with the tiers that also use the new Lemmas 8.2-8.5 of version 1.1, for every k >= 5.07*10^13; with the tiers that also use the new Lemmas 8.6-8.8 and 8.11 (sawtooth accounting and a choice of the lifts), for every k >= 2.48*10^12. Version 1.0 stated c*(k) < 43.06 k^{3/8} + 2*10^-5 for k >= 4*10^26; this is superseded by the tier A5. It also proves c*(k) < 20.668 k^{2/5} + 0.623 for every integer k >= 1.6*10^7 (Theorem 1.2) and c*(k) <= 8*ceil(sqrt(k-4)) - 1 for every integer k >= 6 (Theorem 1.4). The band ends of an L-shaped packing are filled by a staircase of columns with one common tilt, and for the exponent 3/8 the walls of each end by chains of staircases with slowly decreasing tilt; these ideas are those of H. D. Bui (arXiv:2508.04603v2, Sections 3-4); the proofs are self-contained. Computer-assisted (Theorem 1.6; end packings checked in exact rational arithmetic, including by an independently written checker): c*(10^5) <= 1583, c*(10^6) <= 3972, c*(10^7) <= 10039, c*(3.825*10^7) <= 16988, c*(10^8) <= 24790. Includes the data of these packings, the checker with negative controls, the generator, interval-arithmetic checks of the constants (for k^{3/8}: the author's coverings of every tier, cert_v3.py and, for the tiers with a double dagger, cert_v4.py, and the covering of version 1.0), explicit exact checks of the wall fillers and end packings, and the recorded outputs. Status: not refereed; the paper has been checked only by AI-based reviews and by computer programs, some of them independent re-implementations and three independent coverings of the constants (all three implement the same normalised inequalities of Appendices A and B, so they are only a weak check of the transcription of these inequalities from the lemmas, partly addressed by point checks of the un-normalised formulas), all written by AI systems; for the tiers with a double dagger, a direct covering of the un-normalised bound for b0 <= b <= 10^16 (python-flint arb) and 15 complete end packings near b0 checked exactly also passed, and that the cited results hold for real lifts was checked by two independent AI readings; no human expert has reviewed it. Use of AI: developed with the assistance of Claude (Anthropic), including the proofs, the text and the programs; the author takes full responsibility.",
+"notes": "Licences: paper/paper.tex and paper/paper.pdf under CC BY 4.0 (see paper/LICENSE); programs in code/ and data in data/ under the MIT License (see LICENSE). The licence field of this record refers to the software (MIT). Version 1.0 of this work: https://doi.org/10.5281/zenodo.23256655 (all versions: https://doi.org/10.5281/zenodo.23256654). Cited preprints by the same author (not refereed): 'Packing k^2-c unit squares: s(k^2-c)=k for all large k', version 1.2, https://doi.org/10.5281/zenodo.23194104 (programs and data: https://doi.org/10.5281/zenodo.23194031); 'a lower bound of order k^{1/4} for the deficiency', version 1.0, https://doi.org/10.5281/zenodo.23212643 (programs: https://doi.org/10.5281/zenodo.23211207); 'a lower bound of order k^{1/3} for the deficiency', version 1.0, https://doi.org/10.5281/zenodo.23213564 (programs: https://doi.org/10.5281/zenodo.23212059).",
+"creators": [
+{
+"name": "Ryu, Sungjoon"
+}
+],
+"license": "MIT",
+"keywords": [
+"square packing",
+"unit squares",
+"wasted area",
+"c*(k)",
+"computer-assisted proof"
+],
+"related_identifiers": [
+{
+"identifier": "10.5281/zenodo.23194104",
+"relation": "references",
+"resource_type": "publication-preprint"
+},
+{
+"identifier": "10.5281/zenodo.23194031",
+"relation": "references",
+"resource_type": "software"
+},
+{
+"identifier": "10.5281/zenodo.23212643",
+"relation": "references",
+"resource_type": "publication-preprint"
+},
+{
+"identifier": "10.5281/zenodo.23211207",
+"relation": "references",
+"resource_type": "software"
+},
+{
+"identifier": "10.5281/zenodo.23213564",
+"relation": "references",
+"resource_type": "publication-preprint"
+},
+{
+"identifier": "10.5281/zenodo.23212059",
+"relation": "references",
+"resource_type": "software"
+}
+],
+"version": "1.1"
+}

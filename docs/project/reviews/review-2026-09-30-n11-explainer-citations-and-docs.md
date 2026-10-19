@@ -48,8 +48,8 @@ Walter Trump’s construction, David Ellsworth’s reconstruction, and the incor
 Squares Project source have distinct roles.
 The [source packet](../../../packing/resources/web/n11-optimality-2026-09-29/README.md)
 and [T-060 register](../../../packing/frontier/results.yaml) preserve the
-Queuingtheorydotcom/Astra-assisted proof attribution; the article does not assign the
-original global argument to this repository’s confirmation.
+Ahmed/Astra-assisted proof attribution; the article does not assign the original global
+argument to this repository’s confirmation.
 The retained Ellsworth SVG contains both the reconstruction diagram and exact formulas,
 so that specific opening citation is supported.
 No link in the generated results table was given a fabricated T-060 fragment anchor.
@@ -110,7 +110,7 @@ applied:
   the positive denominator and derivation later in the same section.
   This is a navigation improvement, not a proposed change to the inequality.
 
-The [illustration plan](../specs/active/plan-2026-09-30-n11-optimality-illustrations.md)
+The [illustration plan](../specs/done/plan-2026-09-30-n11-optimality-illustrations.md)
 separately lists the proof mechanisms the current four SVGs do not yet show.
 The upstream original
 [PROOF.md](../../../packing/resources/web/n11-optimality-2026-09-29/source/PROOF.md),

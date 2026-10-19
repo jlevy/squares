@@ -1,0 +1,27 @@
+{
+  "started_at": "2026-10-07T21:15:01.104036+00:00",
+  "source_commit": "d68a3fd24a2dc86580c02f5fba922228a88782c1",
+  "overall_working_tree_dirty": true,
+  "scientific_source_clean": true,
+  "manifest_sha256": "a62cc9d2299615fd01f04589315f16041adaf560ae938939c00d0ca405a8673a",
+  "author_controls": "29 PASS1.35s",
+  "independent_sol_controls": "29 PASS2.75s",
+  "root_controls": "29 PASS1.33s",
+  "mathematical_review": "Sole Astra source/prereg CLEAR before target",
+  "target_unrun_before_launch": true,
+  "scientific_source_recheck_at": "2026-10-07T21:16:03.775232+00:00",
+  "scientific_source_recheck_command": [
+    "git",
+    "-C",
+    "..",
+    "status",
+    "--porcelain",
+    "--",
+    "packing/devtools/check_n17_two_center_children.py",
+    "packing/devtools/check_n17_guard_conditioned_ownership.py",
+    "packing/devtools/check_n17_full_square_partner_coupling.py",
+    "packing/devtools/check_n17_partner_pose_coupling.py"
+  ],
+  "initial_launch_path_check_valid": false,
+  "metadata_correction": "Initial launch-only source status query used repository-relative paths from packing cwd; corrected repository-root query is clean. Scientific modules and frozen criterion did not change."
+}

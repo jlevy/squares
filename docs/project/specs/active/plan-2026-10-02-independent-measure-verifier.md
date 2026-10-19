@@ -4,8 +4,10 @@
 
 **Author:** Claude (agent), lane W1 of `think-gpe0`, for the repository owner
 
-**Status:** Slice 1 complete: this specification, the clean-room protocol and the
-baseline profile. Implementation is lane W2’s, running in parallel from this document.
+**Status:** Active.
+The clean-room verifier and its complete census are on main (PR #332,
+fa5133b49: 149 of 149 verified); slice 4, the independence-record audit and confirming
+evidence entries, remains open under think-3ok2.
 
 **Workflow:** W7 `pipeline-improvement`: a new verifier capability with controls, an
 evidence limit and a cost receipt, and no scientific verdict of its own

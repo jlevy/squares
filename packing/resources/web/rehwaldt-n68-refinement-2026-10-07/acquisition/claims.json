@@ -1,0 +1,14 @@
+{
+  "results": [
+    {
+      "exact_side": "879879523721828390257668096702139408352101903022787926324037/100000000000000000000000000000000000000000000000000000000000",
+      "facts": "packing/resources/web/rehwaldt-n68-refinement-2026-10-07/facts/n-068.json.gz",
+      "n": 68,
+      "offered_side": "8.79879523721828390257668096702139408352101903022787926324037",
+      "source_bytes": 49162,
+      "source_path": "refinement-v1.1.0/n68.json",
+      "source_sha256": "6d4f72debae83b5825e91f7b090e0cee08851ad7b85400343c0dee52f468dff9",
+      "source_url": "https://github.com/lollipoll/certified-square-packing-68/blob/fded686668e29258dad2eb29d0482fa3fd51bd6b/refinement-v1.1.0/n68.json"
+    }
+  ]
+}

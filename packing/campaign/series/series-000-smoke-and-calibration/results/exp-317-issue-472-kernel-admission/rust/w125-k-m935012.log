@@ -1,0 +1,53 @@
+{"step": 0, "owner": 2, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 0.4}
+{"step": 1, "owner": 5, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 0.6}
+{"step": 2, "owner": 6, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 1.1}
+{"step": 3, "owner": 10, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 2.3}
+{"step": 4, "owner": 14, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 3.1}
+{"step": 5, "owner": 17, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 3.5}
+{"step": 6, "owner": 18, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 4.7}
+{"step": 7, "owner": 19, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 5.3}
+{"step": 8, "owner": 2, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 5.8}
+{"step": 9, "owner": 5, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 6.3}
+{"step": 10, "owner": 6, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 7.1}
+{"step": 11, "owner": 10, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 8.0}
+{"step": 12, "owner": 14, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 8.5}
+{"step": 13, "owner": 17, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 9.0}
+{"step": 14, "owner": 18, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 9.6}
+{"step": 15, "owner": 19, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 10.1}
+{"step": 16, "owner": 2, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 10.6}
+{"step": 17, "owner": 5, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 11.1}
+{"step": 18, "owner": 6, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 12.8}
+{"step": 19, "owner": 10, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 13.4}
+{"step": 20, "owner": 14, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 14.0}
+{"step": 21, "owner": 17, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 14.8}
+{"step": 22, "owner": 18, "live_rows": 61, "rows_checked_in_full": 64, "closure": false, "seconds": 16.2}
+{"step": 23, "owner": 19, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 16.6}
+{"step": 24, "owner": 2, "live_rows": 60, "rows_checked_in_full": 64, "closure": false, "seconds": 17.0}
+{"step": 25, "owner": 5, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 17.4}
+{"step": 26, "owner": 6, "live_rows": 31, "rows_checked_in_full": 64, "closure": false, "seconds": 17.8}
+{"step": 27, "owner": 10, "live_rows": 0, "rows_checked_in_full": 64, "closure": true, "seconds": 18.0}
+{"status": "PASS", "failure": null, "mode": "full", "seconds": 18.473}
+exit=0
+	Command being timed: "/tmp/claude-0/-home-user-squares/affcf58a-3fc1-5c70-94ed-519d58974816/scratchpad/wt-i472-rust/packing/n17_kernel_verify/target/release/n17-kernel-verifier /tmp/claude-0/-home-user-squares/affcf58a-3fc1-5c70-94ed-519d58974816/scratchpad/i472/stage/packing/campaign/explorations/X048-session-168-pilots/certificates/w125-k-m935012 --output /tmp/claude-0/-home-user-squares/affcf58a-3fc1-5c70-94ed-519d58974816/scratchpad/i472/rust/w125-k-m935012.json --threads 2 --progress"
+	User time (seconds): 21.93
+	System time (seconds): 0.27
+	Percent of CPU this job got: 119%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:18.51
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 171280
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 62882
+	Voluntary context switches: 145
+	Involuntary context switches: 2114
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 48
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

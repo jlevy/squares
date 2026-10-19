@@ -1,0 +1,9 @@
+# zmx2 cba78a9eb5a30e7b cert data/s95_cover_v2.txt --d4 --threads 1 --xlo 5 --xhi 5 --ylo 45 --yhi 45 --bins 0-0; cover sha256 8b2d2152867585c82920bc90c6c3ec2a2458ef2ba57311ccd7dd436d1344cb7c
+D4: measure invariant under x->s-x and x<->y (exact)
+# zmx2 cert hash=e6e0d4182d7f6e43 mode=d4 atoms=grid depth=40 node_cap=20000000 kappa=1.5 K=30 region=x5-5,y45-45,bins0-0
+cover: s = 10/1, 48352 points, 11438 segments, total 3791753447/40000000 = 94.79383617500
+roots: 1 in region, 0 already done (log), 1 to run, 1 threads
+progress 1/1 roots, 0s
+done in 0s wall: roots 1 (missing 0), boxes 2383, certified 704, empty 488, uncertified 0, max depth 18, cpu 0s
+REGION CLEAN (restricted region; no verdict for the whole cover)
+# exit 0 wall .122491597 s

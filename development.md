@@ -7,7 +7,7 @@ This guide owns runtime support, code placement, validation, and refactoring pra
 
 The governing rule is assurance proportional to reuse and consequence.
 Shared code and research-state boundaries are designed, typed, tested, and kept easy to
-orient around. A retained checker for one value of $n$ may stay direct and specialized.
+navigate. A retained checker for one value of $n$ may stay direct and specialized.
 Do not turn a one-off investigation into a framework without a second real consumer.
 
 ## Supported Environment
@@ -26,6 +26,7 @@ uses the stable Cargo toolchain.
 From the repository root, then from `packing/`:
 
 ```shell
+git submodule update --init --recursive
 npm ci --ignore-scripts
 cd packing
 uv sync --frozen --all-extras --group dev
@@ -33,6 +34,8 @@ uv run --frozen --all-extras --group dev python --version
 uv run --frozen --all-extras --group dev packing-validate --fast
 ```
 
+The submodule command initializes `vendor/kpress`, the local dependency uv needs before
+it can sync the environment.
 `npm ci` installs the pinned Node tools the browser-floor step runs; without them that
 step fails. `make hooks-install` runs the same install and then the Git hooks.
 The version command must report Python 3.14.7. Do not run a bare `pip install`, commit a
@@ -55,19 +58,30 @@ library is otherwise outside the loader’s path.
 
 ### Current memory in bounded diagnostics
 
-`devtools.process_memory.current_memory_bytes()` reads the current process's resident
+`devtools.process_memory.current_memory_bytes()` reads the current process’s resident
 bytes on Linux, Windows and macOS. Lifetime peak reporting is separate: releasing a
 mapping must lower a current-memory guard even when its historical peak stays high.
-On Darwin it uses the self-only Mach `task_info` interface and the packed layout in
-[Apple's task_info.h](https://github.com/apple-oss-distributions/xnu/blob/main/osfmk/mach/task_info.h).
-Missing APIs or a failed query raise `OSError`; they never return zero or substitute a
-peak. This does not supply a process-tree supervisor or a system-available-memory guard.
+On Darwin it queries the calling PID through cached `/usr/lib/libproc.dylib`, reading
+`proc_taskinfo.pti_resident_size` as declared in
+[Apple’s proc_info.h](https://github.com/apple-oss-distributions/xnu/blob/main/bsd/sys/proc_info.h).
+Each query owns a fresh buffer and uses the current PID; the cache holds only the
+library binding. Missing libraries or symbols, failed or partial queries, and zero
+resident bytes raise `OSError`. Current RSS is distinct from physical footprint and
+lifetime peak. The API measures only the calling process, not its children or available
+system memory.
 
-The existing `macos-portability` job includes three native memory controls under a
-one-minute step and a five-minute job ceiling. They compare the declaration with the
-system SDK, cross-read RSS with `ps`, and touch/release a 96 MiB mapping. Windows tests
-and mocked failures do not certify Darwin, and the job retains its existing non-gating
-policy and stacked-PR selection.
+The `macos-portability` job requires four successful native memory cases with zero skips
+under a one-minute step and a five-minute job ceiling: a positive sample, a
+touched/released 96 MiB mapping, an independent `ps` RSS reading, and an installed-SDK
+oracle for the structure’s size, alignment, field offsets and widths, flavor, buffer
+size and C function signature.
+Guzhou0806 contributed the SDK oracle and bounded CI controls in
+[PR407](https://github.com/jlevy/squares/pull/407).
+`devtools.check_darwin_memory_results` checks the JUnit case identities and results; the
+XML remains in the job’s validation artifact.
+Native results qualify the tested architecture and SDK only.
+Windows tests and mocked failures do not certify Darwin.
+The job retains its existing non-gating policy and stacked-PR selection.
 
 ### Windows worker supervision
 
@@ -181,7 +195,7 @@ The
 owns the current work on cost, naming, and checkpoint placement.
 
 Use **PR fast surface** for `--fast`, **full checkpoint** for the default command, and
-**deferred checkpoint** for the twelve steps outside PR fast coverage.
+**deferred checkpoint** for the steps outside PR fast coverage.
 The advisory `Deferred checkpoint` workflow runs those steps.
 **Golden rebuild** means `--deep`, which also regenerates expensive golden producers;
 **strict checkpoint** means `--strict`, which includes that rebuild and refuses skipped
@@ -200,25 +214,33 @@ alone is not full pre-merge evidence.
 
 | Tier | Who runs it, and when | Steps | Ceiling | Cost when last measured |
 | --- | --- | ---: | ---: | --- |
-| `--records` | contributor, before touching a registry; also every pull request | 43 of 98 | 300 s | 11.0 s |
-| `--edit` | contributor, in the edit loop | 58 of 98 | 240 s | 59.4 s |
-| `--push` | contributor, once before a push — the edit tier plus tests reachable from the diff (`--since`) | varies with the diff | 1800 s | about a minute for a narrow code change; an implicitly configured broad diff selects the whole suite and assigns one outer job so pytest can use the host, see below |
-| `--fast` | contributor, at a block boundary; the union of the ten tiers below | 85 of 98 | 600 s | record cleared 2026-09-07 when the corpus widened; 229.1 s locally, only the ceiling applies |
-| `--checks` | **CI, on every pull request**, in the `validate` job | 61 of 98 | 150 s | 103.70 s, the geometric mean of thirty-three hosted readings on 2026-09-30 and 10-01, with the band 59.4–137.1 s (2.31x) the runner pool spanned on unchanged steps; the 114.34 s two-attempt record stays in the register as history |
-| `--frontend` | **CI, on every pull request**, in the `frontend` job, concurrently | 4 of 98 | 165 s | 104.74 s, the geometric mean of 32 hosted readings from 27 to 30 September (70.97–134.86 s, 1.90x); 85.25 s from two readings stays in the register as history |
-| `--typecheck` | **CI, on every pull request**, in the `typecheck` job, concurrently | 1 of 98 | 130 s | 86.71 s, the geometric mean of 174 hosted step walls from 2 to 4 October on 17 branches, with the band 54–123 s that its two runner regimes span; the 111 s ceiling it replaced was breached by 3–6% of runs with zero findings, and the 76.5 s eighteen-reading record stays in the register as history |
-| `--geometry` | **CI, on every pull request**, in the `geometry` job, concurrently | 9 of 98 | 180 s | 98.07 s, the geometric mean of fourteen hosted readings, with the band 58.75–116.19 s that its two runner regimes span |
-| `--suite-a` | **CI, on every pull request**, in the `suite-a` job, concurrently | 1 of 98 | 143 s | 114.58 s, the geometric mean of twelve hosted readings on 2026-10-01 of the three-shard partition after the day’s growth, band 83.91–128.65 s (1.53x); two more walls that day, 131.58 and 132.67 s, were over the ceiling with every test green and are named, not averaged; the 85.03 s two-reading record stays in the register as history |
-| `--suite-b` | **CI, on every pull request**, in the `suite-b` job, concurrently | 1 of 98 | 168 s | 114.38 s, the geometric mean of eleven hosted readings on 2026-10-01 of the same partition, band 79.30–139.35 s (1.76x); the 104.65 s single reading stays as history |
-| `--suite-c` | **CI, on every pull request**, in the `suite-c` job, concurrently | 1 of 98 | 168 s | 132.05 s, the geometric mean of eleven hosted readings on 2026-10-01 after the day’s files landed in it, band 90.34–147.16 s (1.63x); the 102.94 s thirty-one-reading record and the 88.59 s first reading stay as history |
-| `--suite-d` | **CI, on every pull request**, in the `suite-d` job, concurrently | 1 of 98 | 143 s | pending its first hosted cohort under `think-t7k5`; the record’s cohort predicts about 84 s for its 278.9 test-second share |
-| `--sweeps` | **CI, on every pull request**, in the `sweeps` job, concurrently | 5 of 98 | 200 s | 101.51 s, the geometric mean of six 4-of-80 hosted readings (66.36–130.77 s, spread 1.97x); the 119.72 s seven-reading mean and PR 180’s 138.84 s predecessor remain in the register as history |
-| `--measure-verifier` | **CI, on every pull request**, in the `measure-verifier` job, concurrently | 2 of 98 | 90 s | pending its first hosted cohort under `think-th8p`; the native n17 kernel’s step joined it after a cold 52.83 s inside `--checks`; the verifier’s step read 21.20 s and, on a runner where every step was about 1.9x slow, 45.30 s inside `--checks` |
-| *(no flag)* | Full checkpoint before final review and at block close; main, dispatch, and daily CI | 98 of 98 | 3600 s | integration plus ten deferred workers; new whole-wall measurement pending |
+| `--records` | contributor, before touching a registry; also every pull request | 51 of 109 | 300 s | 11.0 s |
+| `--edit` | contributor, in the edit loop | 67 of 109 | 240 s | 59.4 s |
+| `--push` | contributor, once before a push — affected edit-tier prerequisites and reachable quick tests (`--since`); add `--include-reachable-slow` for selected slow tests | varies with the diff | 1800 s | new quick default not yet measured; large implicit selections run after prerequisites, subject to the load lock, see below |
+| `--fast` | contributor, at a block boundary; the union of the ten tiers below | 96 of 109 | 600 s | record cleared 2026-09-07 when the corpus widened; 229.1 s locally, only the ceiling applies |
+| `--checks` | **CI, on every pull request**, in the `validate` job | 70 of 109 | 150 s | 103.70 s, the geometric mean of thirty-three hosted readings on 2026-09-30 and 10-01, with the band 59.4–137.1 s (2.31x) the runner pool spanned on unchanged steps; the 114.34 s two-attempt record stays in the register as history |
+| `--frontend` | **CI, on every pull request**, in the `frontend` job, concurrently | 4 of 109 | 165 s | 104.74 s, the geometric mean of 32 hosted readings from 27 to 30 September (70.97–134.86 s, 1.90x); 85.25 s from two readings stays in the register as history |
+| `--typecheck` | **CI, on every pull request**, in the `typecheck` job, concurrently | 1 of 109 | 130 s | 86.71 s, the geometric mean of 174 hosted step walls from 2 to 4 October on 17 branches, with the band 54–123 s that its two runner regimes span; the 111 s ceiling it replaced was breached by 3–6% of runs with zero findings, and the 76.5 s eighteen-reading record stays in the register as history |
+| `--geometry` | **CI, on every pull request**, in the `geometry` job, concurrently | 9 of 109 | 180 s | 98.07 s, the geometric mean of fourteen hosted readings, with the band 58.75–116.19 s that its two runner regimes span |
+| `--suite-a` | **CI, on every pull request**, in the `suite-a` job, concurrently | 1 of 109 | 335 s | 180.84 s, the geometric mean of 160 hosted readings on 2026-10-09, 92.84–250.54 s (2.70x), a point record because that spread is wider than a band may be; the 114.58 s record of 2026-10-01 and its band stay in the register as history |
+| `--suite-b` | **CI, on every pull request**, in the `suite-b` job, concurrently | 1 of 109 | 360 s | 215.82 s, the geometric mean of 171 hosted readings on 2026-10-09, 124.82–327.07 s (2.62x), a point record; the 114.38 s record of 2026-10-01 stays as history |
+| `--suite-c` | **CI, on every pull request**, in the `suite-c` job, concurrently | 1 of 109 | 360 s | 190.24 s, the geometric mean of 164 hosted readings on 2026-10-09, 108.29–294.60 s (2.72x), a point record; the 132.05 s record of 2026-10-01, the 102.94 s thirty-one-reading record and the 88.59 s first reading stay as history |
+| `--suite-d` | **CI, on every pull request**, in the `suite-d` job, concurrently | 1 of 109 | 335 s | 183.08 s, the geometric mean of 167 hosted readings on 2026-10-09, 90.60–288.47 s (3.18x), a point record; the 104.95 s first four-shard reading of 2026-10-01 stays as history |
+| `--sweeps` | **CI, on every pull request**, in the `sweeps` job, concurrently | 5 of 109 | 200 s | 101.51 s, the geometric mean of six 4-of-80 hosted readings (66.36–130.77 s, spread 1.97x); the 119.72 s seven-reading mean and PR 180’s 138.84 s predecessor remain in the register as history |
+| `--measure-verifier` | **CI, on every pull request**, in the `measure-verifier` job, concurrently | 3 of 109 | 90 s | 72.83 s, the geometric mean of ten hosted readings on 2026-10-11, 59.12–90.06 s (1.52x), the first cohort of the three-step tier (`think-th8p`); the native n17 branch-and-bound step joined it after a cold 52.83 s inside `--checks` |
+| *(no flag)* | Full checkpoint before final review and at block close; main, dispatch, and daily CI | 109 of 109 | 3600 s | integration, serial quick suites and ten deferred workers; new whole-wall measurement pending |
 
-Step counts describe the current 98-step registry, read from `packing-validate --list`
-on 2026-10-03. Dated costs retain their measured source and resource shape; they are not
-fresh measurements of the new scheduling.
+Step counts describe the current 109-step registry, read from the validator’s canonical
+selection API on 2026-10-15. Its ten PR partitions cover all 96 fast steps.
+Dated costs retain their measured source and resource shape; they are not fresh
+measurements of the new scheduling.
+
+The ordinary n17 kernel verifier adds a third step to `--measure-verifier`. The hosted
+workflow prepares its cold build separately under a provisional 600-second ceiling,
+reuses dependencies keyed by the compiler, lockfile and crate tree, and reruns native
+controls and live lint probes.
+Its warm commands each have a 120-second limit; the verifier tier retains its 90-second
+wall ceiling. The first hosted measurement of the expanded tier is pending.
 
 `--geometry`’s recorded cost is the geometric mean of seven readings at the reference
 shape. The earlier four-reading baseline remains in the register’s history.
@@ -250,23 +272,55 @@ Each file belongs to exactly one shard and each runner imports only its own file
 The shard jobs retain full Git history for history-reading tests, but none installs Node
 or a browser.
 Browser-floor liveness runs under `--frontend`, on the runner that owns the
-pinned Node toolchain, and so does `site table layout in Chromium`, the two test files
-that pin the tables’ pixels, on the runner that installs the pinned Chromium.
-They launch it with `--font-render-hinting=none`: the headless shell hints text at
+pinned Node toolchain.
+`site table layout in Chromium` runs its declared test modules on the runner that
+installs pinned Chromium.
+Browser navigation and functional pixel/layout checks, including the atlas’s readable
+drawing sizes and interactions, run in parallel with file-based distribution, except for
+the forwarder module.
+After those workers exit, all 51 forwarder cases run serially in a fresh pytest process.
+The four native-frontier HTTP load-budget cases then run in another serial process,
+without xdist workers; each checks JavaScript and no-JavaScript contexts under the same
+assertions and budgets.
+All three phases share the step’s original total timeout.
+They launch Chromium with `--font-render-hinting=none`: the headless shell hints text at
 `HINTING_FULL` by default, which on Linux rounds every glyph’s advance to a whole pixel,
-and the pins were read on macOS, where nothing is hinted ([D-513](defects.md)). Where no
-Chromium launches they fail rather than skip, because a skip on that runner is a hole in
-the surface. Each shard writes a per-file cost report beside its JUnit and timing
-artifacts; the recorder accepts complete coherent cohorts and rejects failed, partial,
-duplicated, coverage-mismatched, and mixed-provenance evidence, and a cohort recorded at
-one shard count may be packed into another, which is how the lane is repartitioned.
-The current declared ceilings are 143 seconds for shards A and D and 168 seconds for B
-and C. They rose from 131 and 154 seconds on 2026-10-05, with `frontend` (150 to 165
-seconds) and `checks` (140 to 150 seconds), by the owner’s decision under `think-p684`,
-selected on purpose as `OR-17` requires: PR 347 adds 133.9 recorded test-seconds to the
-lane, about 10%, and 16 of 24 of its stack’s cohorts put a job over a ceiling against 2
-of 27 on `main`, every test green.
-The 12-second per-test wall is unchanged.
+and the pins were read on macOS, where nothing is hinted ([D-513](defects.md)). All
+three phases require Chromium and fail rather than skip when it cannot launch, because a
+skip on that runner is a hole in the surface.
+Each shard writes a per-file cost report beside its JUnit and timing artifacts; the
+recorder accepts complete coherent cohorts and rejects failed, partial, duplicated,
+coverage-mismatched, and mixed-provenance evidence, and a cohort recorded at one shard
+count may be packed into another, which is how the lane is repartitioned.
+The current declared ceilings are 335 seconds for shards A and D and 360 seconds for B
+and C, raised for the moment on 2026-10-09 by the owner’s decision and selected on
+purpose as `OR-17` requires; `think-2hm6` tracks the structural fix (a fifth shard, slow
+modules moved off the pull-request surface on their own measurement, or cheaper modules)
+that brings them back down.
+The lane had outgrown the four ceilings: its recorded cost went from 1,213.6
+test-seconds on 2026-10-01 to 3,178.9 on 2026-10-09, and of 1,328 hosted shard readings
+from 2026-10-07 to 2026-10-09, every test green, 944 were over their ceiling and three
+shard D walls (288.47 to 300.27 seconds) were over the twice-the-ceiling hang detector
+and failed their jobs.
+Each pair of shards the partition plans alike shares a ceiling: the slowest reading
+either gave in that window plus at least 10%, rounded up to five seconds — 300.27
+seconds on shard D for A and D, 327.07 seconds on shard B for B and C. The suite jobs
+run only on pull requests, where a ceiling breach has been advisory since 2026-10-05, so
+what the raise moves there is the fail bound, the hang detector at twice the ceiling:
+from 286 to 670 seconds for A and D and from 336 to 720 seconds for B and C. Each tier’s
+record was re-taken from that day’s readings, so every ceiling stays within the
+register’s 2x of its record; the day’s spread, 2.62x to 3.18x, is wider than a band may
+span, so the records are points, and a few of the day’s own readings fall outside their
+0.6x–1.5x window (shard A’s 92.84-second low, for one), which prints a stale or drift
+warning on a pull request and would fail off one at the reference shape.
+`think-e5y4` folds the window sampling and the per-shard growth behind these records
+into `read_tier_walls` and `suite_files`. Before that the ceilings were 143 and 168
+seconds, raised from 131 and 154 seconds on 2026-10-05, with `frontend` (150 to 165
+seconds) and `checks` (140 to 150 seconds), by the owner’s decision under `think-p684`:
+PR 347 adds 133.9 recorded test-seconds to the lane, about 10%, and 16 of 24 of its
+stack’s cohorts put a job over a ceiling against 2 of 27 on `main`, every test green.
+The 12-second per-test wall, the 45-second per-test hang, and the planning capacities
+are unchanged.
 
 The frontend browser runner builds one page and runs eight isolated browser contracts.
 The gate permits two contracts concurrently when the CPU count and outer job count leave
@@ -339,8 +393,8 @@ split cannot lose a check the way a set of independent filters could.
 
 The four behavioral shards use a source-bound file-cost record and deterministic
 partitioning weighted by the planning capacities 131/154/154/131, which were the live
-ceilings when the record was taken; the frozen weights define the measured assignment,
-and the ceilings are enforced separately.
+ceilings when the four-shard partition was first recorded on 2026-10-01; the frozen
+weights define the measured assignment, and the ceilings are enforced separately.
 Each test file belongs to exactly one shard.
 
 The fourth shard was added on 2026-10-01, when about 450 tests landed in a day on a
@@ -456,12 +510,15 @@ it has also read over 180 seconds on PR 188, at 182 seconds in run 35182460356.
 hosted runs hold both walls at or under 180 seconds.
 Five is the planned default, and `think-g4n9` owns it.
 
-On a push to `main`, the integration job looks for a successful pull-request run that
-validated the exact same Git tree and explicitly passed `packing-required`. A match
-licenses reuse only for fast steps named in the positive `TREE_REUSABLE_FAST_STEPS`
-allowlist. Every deferred step and every unclassified fast step repeats after merge;
-missing artifacts, expired artifacts, API errors, fork runs, and incomplete checks all
-fall back to the complete surface.
+On a push to `main`, the integration job, serial quick-suite worker and ten dedicated
+workers run the complete post-merge surface.
+Each run executes its selected checks, even when the pull-request checks already passed.
+`integration-suites` owns the four quick Steps at their existing process shape and
+strict per-test limits; the integration job skips exactly those Steps and the deferred
+workers’ Steps. The native aggregate requires every owner.
+This adds one complete browser bootstrap and artifact cycle; its whole-job cost is
+recorded with the other post-merge walls.
+The named PR tier commands and their ceilings remain unchanged.
 
 ### A job no runner took
 
@@ -535,7 +592,8 @@ controls, the n=40 rigidity replay, the whole known-best atlas rebuild, the whol
 single-square translation escape screen, and the whole exact rational grid replay.
 T-024 and T-026 add four exact dilation-limit replays at 720 and 1440 steps, and
 `think-bgkz` adds the exact re-derivation of the regularized atlas views.
-These are the twelve steps outside the [PR fast surface](#validation-tiers).
+Together with the full measure-verifier controls, these are the thirteen Steps outside
+the [PR fast surface](#validation-tiers).
 [D-470](defects.md) records why checking them only after a merge is insufficient: a
 stale certificate test left main red across three merges despite green PR checks.
 
@@ -551,8 +609,9 @@ Timing artifacts have distinct job names and record the checked-out commit.
 For a dispatched PR, that resolved merge commit can differ from the workflow dispatch
 ref; the checkout receipt identifies the source actually validated.
 Main, daily and manually dispatched packing validation use the same deferred groups.
-Their separate `post-merge-required` aggregate requires the integration job and all ten
-deferred workers to succeed; the seven-job PR aggregate remains separate.
+Their separate `post-merge-required` aggregate requires the integration job, the serial
+quick-suite worker and all ten deferred workers to succeed; the ten-job PR aggregate
+remains separate.
 
 The last three joined on 2026-09-07 because the corpus tripled, not because the gate
 changed its mind about them.
@@ -597,10 +656,29 @@ regularizes every record of the
 [derived layer](packing/atlas/known-best/README.md#the-regularized-views) again from its
 witness, re-runs both exact verifications, and requires the index and every retained
 view to come out byte-identical.
-Its stand-in on every pull request is the records-tier step `regularized atlas views
+Since 12 October 2026 the layer also draws views by Evan Daniel’s regularizer and by the
+grid-slack generator; for each of those the step requires the axis tool’s re-derived
+record to equal the `reference` kept beside it, and decides the drawn view again over
+the rationals on both maintained routes, with its square count, its identity against the
+witness and its shades measured again.
+The identity was the costly part until 14 October 2026: `arrangement_gap` compared every
+pair of centres exactly, 40 to 68 seconds a view at $n = 182$, $241$ and $297$, and over
+the 90 drawn views at #559, 62 of them decided again, the step took 1,410 s of wall at
+four workers on a loaded host (#559 review C, C1). It now compares exactly only the
+centres that binary64 puts within `nearest_reach` of the nearest, a margin far above
+binary64’s error, which always holds the exact nearest and its ties, so the matching and
+every measurement are the ones the exhaustive search gives.
+The identity at $n = 182$ takes 0.4 s, and the independent checker is most of a drawn
+view’s cost. At #559 the whole step then took 325.7 s of wall at four workers, 713 s of
+summed drawn-view time and 559 s of record time (measured on 2026-10-14, host load
+average 2 to 4), inside its 450 s ceiling.
+`think-uomm` holds the hosted reading still owed at this head: the last one, run
+38325954699 before the identity was measured again, read 445 s. Its stand-in on every
+pull request is the records-tier step `regularized atlas views
 match their index`, which compares the same index with the manifest, the witnesses and
-the views by digest in about a tenth of a second.
-The tool’s pool follows `PACK_JOBS`.
+the views by digest, reads each other generator’s view against its entry, and holds
+every drawn view’s exact side to the witness’s $s_W$ and to the case record’s $U$, in
+about two seconds. The tool’s pool follows `PACK_JOBS`.
 
 It was measured on 2026-10-02 on a four-cpu host that other sessions were also using, so
 read these as upper bounds:
@@ -709,12 +787,15 @@ uv run --frozen --all-extras --group dev packing-validate --records
 # Edit loop: everything fast except the broad test suite. Seconds, runs during a gate.
 uv run --frozen --all-extras --group dev packing-validate --edit
 
-# Pre-push floor: the edit tier plus the behavioral tests reachable from the change
-# (against origin/main, or --since REF). Broad changes may select the whole suite.
+# Pre-push floor: affected edit prerequisites plus reachable quick tests
+# (against origin/main, or --since REF). Broad changes may select every quick test.
 uv run --frozen --all-extras --group dev packing-validate --push
 
+# Deliberately include reachable slow tests; exhaustive checks retain their checkpoint.
+uv run --frozen --all-extras --group dev packing-validate --push --include-reachable-slow
+
 # The pull-request surface: the edit tier plus every behavioral test under the
-# per-test ceiling. CI runs it as the nine parts below, one per runner; run it whole
+# per-test ceiling. CI runs it as the ten parts below, one per runner; run it whole
 # here, where there is only one machine and nothing to overlap with.
 uv run --frozen --all-extras --group dev packing-validate --fast
 
@@ -794,28 +875,73 @@ Checks run concurrently, but their captured output is replayed in declared order
 workers.
 Strict mode cannot be combined with a partial selection and fails on every skip.
 
-`--push` is the pre-push floor (`BC-086`). It selects the edit tier plus a
-`reachable behavioral tests` step: `devtools.reachable_tests` computes the test files
-the change can reach — import closure over `src/sqpack`, `devtools`, `cases` and
-`tests`, text mention of a changed module or file, repository walkers always included —
-and errs toward running too many, up to the whole suite when nothing narrower is
-defensible. Each of 2026-08-30’s three red pushes broke a test reachable this way from
-the changed paths ([D-381, D-393](defects.md)), and the floor would have caught all
-three.
+`--push` is the pre-push floor (`BC-086`). It scopes edit-tier prerequisites and
+reachable behavioral tests from one changed-path snapshot, including old and new rename
+paths and deleted files.
+Unclaimed inputs and an empty diff retain the complete prerequisite floor; checks
+without declared inputs always run.
+Scoping is only as sound as each check’s declared inputs (`Step.touches`), so a contract
+test (`test_every_attributed_step_claims_the_modules_it_runs`) derives the Python
+modules every attributed check runs, follows their static import closure, lazy imports
+included, and fails on any file the check does not claim.
+The site renderers import one another, so the checks that reach them claim
+`packing/devtools/*` as a group; a change under `devtools/` therefore selects more
+prerequisites than its own name suggests.
+Under `--format json` the selection banners go to stderr, leaving stdout one document.
+For behavioral tests, `devtools.reachable_tests` computes the test files the change can
+reach — import closure over `src/sqpack`, `devtools`, `cases` and `tests`, text mention
+of a changed module or file, repository walkers always included — and errs toward
+running too many, up to the whole suite when nothing narrower is defensible.
+Each of 2026-08-30’s three red pushes broke a test reachable this way from the changed
+paths ([D-381, D-393](defects.md)), and the floor would have caught all three.
 
-**Large implicit push selections receive a separate pytest phase.** A changed workflow
-file or suite configuration expands the selector to everything: the quick and slow lanes
-together, against `FAST_SUITE_BUDGET_SECONDS`. A large proper subset can also dominate
-the run. When resource settings are implicit, the edit checks run with their normal
-concurrency, then the reachable tests use the available pytest workers after the edit
-pool has drained. Nested tool pools are capped at one during the parallel pytest phase.
-Tests marked `pool_heavy` run afterward in a separate serial pytest process with the
-reserved CPUs assigned to their internal pool.
-The whole-atlas composite test uses this allocation; its per-case builder and global
-assertions are unchanged.
-Both phases use the same selected files and complementary markers, so every selected
-non-exhaustive test belongs to exactly one phase.
-Other slow tests remain parallel.
+The Pages workflow has an explicit publication invocation contract.
+Its first-party commands, named test files, explicit builder files and workflow/scope
+contracts seed the same import, text and walker closure.
+A scheduling edit does not mark every module in an unchanged library directory as
+changed. Unreadable or unknown first-party entrypoints select the whole suite.
+
+**Ordinary pushes run reachable quick tests.** File selection remains conservative:
+unknown workflows, empty or unresolved changes and suite configuration still select all
+test files. Execution uses the same `QUICK_TESTS` predicate as the PR fast lane, so a
+mixed source or record change does not silently start the slow suite.
+
+To include the selected slow tests deliberately, run
+`packing-validate --push --include-reachable-slow`. The standalone selector,
+`python -m devtools.reachable_tests --run` in the project environment, accepts
+`--lane quick` (the default), `--lane slow` or `--lane all`. The `all` lane combines
+quick and slow tests; exhaustive checks retain their existing checkpoint.
+The invocation reports its lane, selected files, worker allocation and excluded
+categories. Child progress receipts retain `lane`, `marker` and `exclusions` so a quick
+result cannot be mistaken for complete coverage.
+
+A local quick pass does not discharge the omitted slow or exhaustive obligations.
+Obtain the documented full checkpoint for final review; passing PR fast and deferred
+runs together supply that coverage when their source and base identities agree.
+The Deferred workflow remains advisory, started by a label or dispatch.
+This push option adds no automatic merge protection.
+All fast tests remain automatic in CI. The quick default has no measured hosted wall.
+
+**Large implicit push selections receive a separate pytest phase.** Other changed
+workflow files or suite configuration expand the selector to everything.
+The requested lane runs against the existing fallback budget.
+A large proper subset can also dominate the run.
+When resource settings are implicit, the edit checks run with their normal concurrency,
+then the reachable tests use the available pytest workers after the edit pool has
+drained. Nested tool pools that read `PACK_JOBS` are capped at one during the parallel
+pytest phase.
+Tests marked `pool_heavy` run afterward in a separate serial pytest process
+with `PACK_JOBS` set to the reserved CPU count.
+The marker covers real internal execution pools and short-deadline real subprocess
+controls. This includes the whole-atlas composite test’s per-case builder, the
+collection-refusal control’s two-worker xdist invocation, and the resident
+exact-geometry transport controls.
+The collection control keeps its fixed two workers and 30 s command deadline.
+Classification leaves each control’s transport, assertions and time bounds intact.
+Quick/slow membership remains unchanged.
+Both phases use the same selected files and complementary pool markers, so each test in
+the requested quick, slow or combined lane executes exactly once.
+Slow tests run only when explicitly selected.
 This prevents the CPU-wide outer default from leaving pytest with one worker after the
 other checks finish.
 It also prevents two internally parallel checks from each claiming the same CPUs.
@@ -841,12 +967,31 @@ The CLI reports which allocation it selected, and command receipts record the ef
 worker settings. Selections containing a broad or full-tier step still take the marker
 and still refuse a second gate.
 
+The exclusive pytest phase starts only after its edit prerequisites pass; failed checks,
+or skipped checks under strict mode, leave it explicitly skipped in the final report.
+Validation reports active step names and elapsed time to stderr every 30 seconds and
+reports failures as they occur.
+Captured output remains in declared order at the end.
+
+A global `PYTEST_ADDOPTS` override of `cache_dir` breaks nested probes that disable
+pytest’s cache plugin, so validation rejects it before selecting checks.
+Remove that override from `PYTEST_ADDOPTS`; set `cache_dir` on a direct pytest
+invocation or use `--basetemp` to place temporary test directories.
+The progress-receipt and slow-lane subprocess probes use a separate `--basetemp` for
+each invocation to avoid cleanup of unrelated numbered directories under a shared
+`PYTEST_DEBUG_TEMPROOT`.
+
 When command artifacts are enabled, the reachable-test wrapper records separate JUnit
 and duration reports for each child phase.
-Flushed per-worker JSONL progress identifies the source commit, run, test node and
-effective worker allocation; an interrupted test leaves its start event available before
-JUnit can finish. These are operational timing receipts, not mathematical acceptance
-evidence. Artifacts stay outside the source tree.
+Flushed per-worker JSONL progress identifies the source commit, run, test node,
+effective worker allocation, selected `lane`, actual phase `marker` and `exclusions`.
+The marker includes the normal/pool-heavy split when used.
+An interrupted test leaves its start event available before JUnit can finish; missing
+completion is not a pass.
+A quick receipt does not certify omitted slow or exhaustive tests: their matching-source
+merge obligations remain.
+These are operational timing receipts, not mathematical acceptance evidence.
+Artifacts stay outside the source tree.
 
 Every validation subprocess has a finite 900-second default deadline.
 Override it with `--timeout-seconds SECONDS` or `PACKING_VALIDATE_TIMEOUT_SECONDS`;
@@ -894,8 +1039,10 @@ labelled or dispatched deferred checkpoint.
 The behavioural [lane definitions](#the-behavioural-lanes) preserve the partition.
 Quick-test timing uses the `call` phase because shared fixture setup can be charged to
 whichever test starts first.
-Optimize a test that exceeds its ceiling, or retain its measurement when moving it to
-`slow`; remove that marker when its measured cost falls below the floor.
+Investigate calls at or above the 12-second classification threshold.
+Optimize avoidable work before moving a test to `slow`, and retain its individual
+measurement when moving it; remove that marker when its measured cost falls below the
+floor. Hosted CALL findings alone are advisory below 45 seconds, as described below.
 The marker registry tests enforce both declarations.
 Both behavioural lanes use xdist workers sized by `cpus - jobs + 1`; `--inner-jobs`
 controls other internal pools, including the negative-control pool.
@@ -948,43 +1095,46 @@ The records check independently rejects a ceiling above `max_headroom` times the
 baseline. A `null` baseline leaves those ratio checks unarmed; a measurement printed by
 CI does not update the file automatically.
 
-**On a hosted pull-request run the drift and stale rules are advisory under
-`think-be1s`, since 2026-10-01; since 2026-10-05 the ceiling is too, up to a hang
-detector, under `think-6erz`.** The register’s `policy.pull_request_relative_rules`
-declares it, the way `pull_request_walls` declares an advisory wall: `enforcing` when
-absent, and `advisory` only with a `tracking_bead` and an `advisory_reason`, which
-`devtools.check_gate_budgets` refuses when the bead is closed or unknown.
-The gate detects the run from the runner’s own `GITHUB_ACTIONS` and `GITHUB_EVENT_NAME`,
-computes both rules as before, prints each finding as `FAIL (advisory, not enforced)`
-with the bead, raises a warning annotation on the run, and passes; a run over its
-ceiling still fails, and `--enforce-budget` overrides the relaxation for an operator
-asking on purpose. Off a pull request nothing changes.
-The measurement behind it, 2026-09-30, is retained with every reading’s verdict in
-`packing/tests/fixtures/tier-walls/hosted-readings-2026-09-30.yaml` and replayed by
-`test_the_day_of_2026_09_30_is_judged_on_code_not_on_the_runner`: on unchanged steps the
-`checks` tier read 59.4 to 137.1 s and shard C 62.96 to 143.87 s across one day’s hosted
-runs, 2.3x apart with every test green, and the two rules failed four runs for the
-runner they drew while a re-run of the identical commit passed.
-The policy’s window around a point record is 2.5x, so no record can hold that pool, and
-a single hosted reading cannot tell a slow draw from a slow change.
-What can is a median over several hosted readings, which the wall register already
-judges and `think-be1s` owns for the tiers, or a wall normalised by the runner’s
-measured speed; until one of those judges a pull request, the ceiling is the rule a pull
-request is held to.
+**Hosted pull-request cost findings are advisory.** The drift and stale rules are
+tracked by `think-be1s`; completed tier walls and ordinary per-test cost findings are
+tracked by `think-ht59`. The register computes and reports each finding, adds a `Cost`
+warning annotation, and requires an open tracking bead and an advisory reason.
+`devtools.check_gate_budgets` rejects a closed or unknown tracker.
 
-**The ceiling and the per-test call-wall rule followed on 2026-10-05.**
-`policy.pull_request_ceiling` declares it under the same contract, plus a hang detector:
-on a hosted pull-request run a tier wall over its ceiling, or a test call of 12 s or
-more, is printed with its bead and a `Cost` warning annotation and does not fail the
-run, but a wall above `hang_ratio` (2) times the ceiling, or one call of
-`per_test_hang_seconds` (45) or more, still does.
-Main, scheduled and deep runs keep the ceiling enforced, and `--enforce-budget` again
-overrides it on purpose.
-The evidence is that day’s CI stabilization evaluation: 28 of 36 red pushes to stack
-pull requests failed on a wall verdict alone with every test green, and the +9% raise of
-`3d89c6fa5` was breached again within hours, shard C at 171.2 s against 168 s on #356.
-`think-6erz` returns the ceiling to enforcement when it is judged against a median or a
-runner-normalised wall.
+A completed wall above a multiple of its ceiling does not distinguish a slow runner from
+a slow change. On website PR head `34e5581a`, all 408 functional tests and four HTTP
+checks passed, but the frontend wall of 399.44 seconds exceeded the effective 330-second
+ceiling. Earlier stabilization evidence found 28 of 36 red pushes failed only on wall
+findings. Raising ceilings repeatedly did not resolve that ambiguity.
+`think-ht59` keeps this policy open until controlled repeated measurements or a
+runner-normalised wall can judge regressions attributable to a change.
+
+**Failures and deadlines still fail the run.** Functional failures, command timeouts,
+and hosted test calls of 45 seconds or more remain enforcing.
+The 12-second quick-test threshold reports classification findings on every hosted
+Actions event, including full, main, scheduled and dispatched runs.
+Local runs remain strict at 12 seconds.
+`--strict` and `--enforce-budget`, including `PACKING_VALIDATE_ENFORCE_BUDGET`, enforce
+12 seconds on hosted runs too.
+The existing policy record declares this CALL scope separately from PR-only tier-wall
+advisory and requires a live tracking bead.
+Missing or unreadable policy retains strict enforcement.
+
+This distinction follows
+[run 38763716551](https://github.com/jlevy/squares/actions/runs/38763716551): all quick
+assertions passed, but eleven completed calls failed the 12-second rule.
+Across 590 matched successful nodes that previously took one to three seconds, the
+median inclusive JUnit duration increased by a factor of 1.636. Those durations include
+setup and teardown and do not identify a CALL regression or establish its cause.
+A single uncalibrated hosted reading is classification evidence; it is not enough to
+attribute a performance regression to the change.
+This policy changes the verdict, not the amount of work or the three-minute target.
+
+Numeric tier budgets and whole-workflow wall policies are unchanged.
+Main and scheduled tier walls, full and strict checkpoint tier walls, and explicit
+`--enforce-budget` retain their existing enforcement.
+The gate identifies hosted execution through `GITHUB_ACTIONS`; the separate PR tier-wall
+exception also requires `GITHUB_EVENT_NAME=pull_request`.
 
 A different CPU/worker shape reports the budget result without failing, unless
 explicitly enforced.
@@ -1100,6 +1250,211 @@ The gate step `the branch cost rollup renders` runs the renderer over every bran
 the records, including one no rollup mentions, because a division by a turn count fails
 on exactly that edge.
 
+## Merging a Pull Request
+
+**A pull request merges with a merge commit.** That is the repository’s policy (the
+owner, 2026-10-14: “Always merge with a merge commit.
+Squashes cause problems.”). Squash only for a significant reason, such as removing
+extraneous items from history, and say in the pull request why.
+Rebase-merging is not the default either.
+
+A squash or a rebase lands the branch as new commits, and leaves the branch’s own
+commits on no branch once it is deleted.
+The record names those commits:
+
+- A release cut sets `PUBLICATION_REVISION` to the commit it runs on, the branch’s head
+  at the cut ([Cutting an edition](#cutting-an-edition)), and the claim documents link
+  to it, so it has to stay reachable from `main`.
+- Recorded engine and provenance commits, which `check_provenance` resolves, and the
+  claim documents’ verifier pins name branch commits.
+- A stacked or dependent branch loses its ancestry: its base’s commits are no longer in
+  `main`, and merging it replays them as conflicts.
+- A link to the commit a page was built from 404s, which is why `check_published_site`
+  refuses repository links that name a commit
+  ([Publishing the Explainer](#publishing-the-explainer)).
+
+## Issue and Pull-Request Labels
+
+Issues and pull requests on jlevy/squares carry labels from this set, which is the
+repository’s policy (the owner, 2026-10-14). Labels combine: an import for the
+seventeen-square case carries `n-17,intake`.
+
+| Label | Carried by |
+| --- | --- |
+| `intake` | An issue or pull request that brings in, validates, tabulates or credits new results: every result-registration issue, every intake pull request, an external pull request that submits results (jlevy/squares#574), and an issue the project opens itself for an unreported result scored `S4` or above |
+| `tracker` | A tracking issue for a major effort |
+| `n-11`, `n-17`, `n-18` | Work on a notable case. A count gets a case label once it has a tracker issue of its own, or an optimality proof or claim under review. A new one is named `n-<k>`, coloured `7E3D1D` as the others are, and described `Work on the n = <k> case…` |
+| `deep-gate` | A pull request whose [deferred surface](#the-deep-gate-the-deferred-surface-before-the-merge) runs before merge; the label’s own description lists what that surface runs |
+| `bug`, `enhancement`, `documentation`, `question`, `duplicate`, `invalid`, `wontfix`, `good first issue`, `help wanted` | GitHub’s defaults, in their usual senses; `question` also marks a list of decisions for the owner, such as jlevy/squares#543 |
+
+An intake pass adds `intake` and any case label under the `github-workflows` grant
+([the runbook’s stage 0](packing/campaign/result-import.md#stage-0-sweep)).
+
+## The Published Site
+
+Every content page is complete in its first HTML response: navigation, headings,
+records, drawings and server-rendered math.
+Each case has `cases/N.html`, each result has `result/t-nnn.html`, and directory indexes
+use a trailing slash in reader links.
+The workbench loads its application data from separate cacheable files.
+
+The [published URL table](docs/project/site-urls.md) is generated from
+[site-urls.py](packing/devtools/site_urls.py) and retained in
+[site-urls.yaml](packing/site-urls.yaml).
+Physical paths identify output files; canonical paths identify reader addresses.
+Builder declarations supply live rows.
+Registrations survive as live pages, registered forwarders, file copies or explained
+HTML tombstones. A forwarder’s target must resolve through the register; unknown targets
+and cycles fail validation.
+Hashed CSS, JavaScript, fonts and workbench data have constrained namespace patterns
+rather than one registration for each revision.
+
+A result ID binds to its kind, scope, establishment date, attribution, source lineage,
+evidence IDs and artifact paths.
+Editing a headline or review rating does not change that identity.
+A legitimate correction to the binding adds an `amendments` entry to its registry row,
+with an ISO `date`, a `reason` and the `previous` identity mapping.
+The historical check preserves every prior amendment and requires an identity change to
+name the previous binding.
+Bootstrap history retains the earliest publication date observed for a path even when
+its current result token has a later binding.
+A pre-registry token reuse is recorded explicitly, with a visible article notice linking
+the prior result’s current address.
+The generator refuses to write either generated file when a registry or history check
+fails; changing a date alone cannot authorize ID reuse.
+
+`sitemap.xml` lists live canonical content pages.
+Its dates come from publication records: the site edition, a paper’s revision, a
+result’s registration or amendment, and a case’s latest relevant result or source
+review. Rendering does not read the clock.
+`404.html` uses project-root asset references at every missing depth and redirects only
+known case/result aliases.
+Unrecognized addresses keep the not-found page.
+
+### Adding or Moving a URL
+
+Add a page to its builder’s declarations; add a paper to `render_overview.PAPERS`, a
+case to the frontier or a result to the results register.
+A new family exposes lightweight output-path declarations beside its writer.
+Add a producer and a constrained asset pattern in `site_urls.py` when the family needs
+one; never admit an arbitrary subtree.
+Run the generator, then check its history from `packing/` with the task scratch
+environment:
+
+```bash
+uv run --frozen --all-extras --group dev python -m devtools.site_urls --write
+uv run --frozen --all-extras --group dev python -m devtools.site_urls --check --history-ref origin/main
+```
+
+New page declarations use the explicit `REGISTRATION_DATE`; update that date for a later
+URL migration. Existing registrations retain their first publication dates.
+
+To move a page, retain its entry in `render_overview.MOVED_PAGES`. The generated
+forwarder carries the query and fragment, a refresh and a link for readers without
+scripts, and the destination’s canonical address and link preview.
+`MOVED_FILES` retains Markdown and PDF addresses as byte-identical copies.
+To withdraw a case or result, retain its registration with `status: withdrawn`, a
+`tombstone` explanation and, when applicable, a registered replacement `target`. The
+crawl-file writer renders that disposition at the retained address.
+
+### Validation and Page Budgets
+
+Required PR validation checks registry drift and history.
+Each selected producer checks its own output without rebuilding unrelated papers:
+
+```bash
+uv run --frozen --all-extras --group dev python -m devtools.check_published_site \
+  --local OUTPUT --partial --producer overview
+```
+
+Other producer names are `workbench` and `paper:<slug>`; repeat `--producer` to select
+several. Partial mode is explicit and every selected output is required, including in an
+empty directory. A selected patterned namespace must contain a matching output.
+The assembled tree is checked with `--local OUTPUT` and requires all registrations.
+Unexpected files, missing outputs, malformed metadata and oversized pages fail.
+The deployed check fetches every retained non-asset registration, all cases and results
+included, and validates forwarders and copies.
+
+[HTML budgets](docs/project/site-urls.md#html-byte-budgets) are 600,000 bytes for normal
+pages and the workbench, 800,000 for papers and 300,000 for cases and results.
+Every published HTML file also has a 2,000,000-byte hard ceiling.
+A path-specific exception is a reviewed edit to `site_urls.PAGE_BUDGET_EXCEPTIONS` with
+measured evidence. The generated
+[budget table](docs/project/site-urls.md#html-byte-budgets) records each exception and
+its reason.
+
+### Content-Page Script Classes
+
+A script declares its class in its header: **Head bootstrap** sets root preferences
+before first paint; **Input response** handles reader input, such as sorting or opening
+an overlay; **Non-layout enhancement** adds behavior without moving laid-out content.
+Content pages do not fetch their required content or typeset math after paint.
+Registered forwarders and the 404 alias resolver may redirect; the workbench’s
+application scripts follow its separate startup contract.
+The executable inventory is `devtools.check_site_scripts`: it checks every script file
+and executable HTML tag, including the workbench’s application entry.
+Known program families carry their class and reason; unknown programs, missing files and
+remote startup dependencies fail the build.
+Content hashes select cache editions, not policy exceptions.
+The assembled publication check runs this inventory automatically.
+
+| Class | Retained programs | Initial-content contract |
+| --- | --- | --- |
+| Pre-paint bootstrap | persisted theme/font attributes, embed/atlas query attributes, font hinting | Root attributes are set before body paint; inline programs stay under 4,096 bytes |
+| Input response | table filters/sorts, theme controls, case/result popovers, atlas controls, paper certificate controls | Primary records and mathematics already exist; a reader action may open or update a reserved region |
+| Non-layout enhancement | film playback, atlas grid helpers, document behavior and paper readiness wiring | Reserved media boxes and prepared prose/math retain their layout |
+| Registered forwarding | moved-page and case-index forwarders, and the known-alias 404 resolver | Only registered historical paths and fragments are redirected |
+| Workbench application | validated corpus loader and the packing application | Static heading/help remains readable; application data loads from an immutable JSON URL |
+
+Keep browser code in `.js` or `.ts` files under the browser floor, including probes and
+tests.
+
+### Browser Load and Readability Protocol
+
+`devtools.check_site_rendering` measures a producer tree with fresh Chromium contexts at
+1,280 and 390 pixels, in light and dark schemes.
+It uses the local gzip server without network throttling.
+A native performance observer is installed before navigation; after load and font
+readiness, the tool samples the initial viewport and scrolls to the middle and end, with
+a 250 ms settling interval at each point.
+No reader input is generated.
+CLS uses native session windows, excluding shifts after recent input.
+A separate context with JavaScript disabled requires visible primary headings/prose,
+rendered mathematics and reserved image dimensions.
+Marked frontier table cells require one visible, nonempty semantic MathML subtree; other
+formulas require visible prepared KaTeX.
+
+Limits are CLS 0.1, LCP 4,000 ms, longest task 300 ms and cumulative blocking beyond 50
+ms of 600 ms.
+Missing native timing, page errors, failed requests, hidden primary content
+and missing visual math fail the check.
+Every structural sample must pass; `--runs 3` retains all samples and reports the median
+of each timing metric.
+The default `--timing-mode enforce` makes timing exceedances fail controlled runs.
+Ordinary shared CI explicitly selects `--timing-mode report-only` for producer checks
+and `--site-timing-mode=report-only` for the native HTTP browser contract.
+It retains the same limits, measurements and exceedances in JSON artifacts; CLS,
+readability, reserved dimensions, missing native timing, errors and failed requests
+still fail, as does the separate attributable startup-restyle trace guard.
+Shared-CI timing enforcement is tracked as **think-9dhb**, owned by jlevy: re-enable it
+when a controlled runner or repeated same-run comparison against a fixed baseline
+defines a regression margin above the measured noise envelope.
+The early-shift and hidden-content negative fixtures prove that the gate observes
+failures.
+
+Run from `packing/`, with the task scratch environment:
+
+```bash
+uv run --frozen --all-extras --group dev python -m devtools.check_site_rendering OUTPUT --runs 3
+uv run --frozen --all-extras --group dev python -m devtools.check_site_rendering OUTPUT \
+  --page 'index.html?atlas=triangle&size=large' --runs 3
+```
+
+Overview and paper producer jobs run the protocol on pull requests.
+The final assembly checks every registered output and script, while the retained browser
+contracts cover mobile atlas geometry, complete case/result content, overlays, font
+choices, keyboard controls and the workbench’s same-origin loading contract.
+
 ## Publishing the Explainer
 
 For every newly retained result, first complete the
@@ -1174,8 +1529,8 @@ uv run --frozen --all-extras --group dev python -m devtools.render_n11_threshold
 
 The outputs are `site/papers/n11-threshold-bound-review.html`, `.md`, and `.pdf`;
 `--site`, `--check` and `--revision` work as Part III’s do.
-Its Pages job, `n11-threshold-bound-review`, checks out the archived Kleddamag proof,
-the T-059 replay journal and the native verifier’s row journal beside the code, runs the
+Its Pages job, `n11-threshold-bound-review`, checks out the archived Overbeck proof, the
+T-059 replay journal and the native verifier’s row journal beside the code, runs the
 figure and renderer tests, and renders and checks the page, the Markdown and the PDF;
 `scope`’s notice says why when no input of it changed.
 It explains accepted evidence and reruns no sweep.
@@ -1225,37 +1580,26 @@ not need a browser. The canonical
 lives in KPress, alongside the shared runtime’s public API documentation.
 
 The prepare job renders the page twice at once, requires the two renders to agree, and
-shares one page artifact with the Chromium PDF, print, typography, screen and geometry
-jobs and the Firefox/WebKit loading and geometry jobs, which run in parallel.
-Deployment waits for all of them.
-The workbench job selects Node 24.18.0, installs the root lockfile with scripts
-disabled, and builds the typed workbench package into the self-contained `/workbench/`
-page, beside `prepare` rather than after it.
+shares one page artifact with seven consumer jobs: `pdf`, `print-layout`, `typography`,
+`screen`, `geometry`, `font-loading` and `browser-geometry`. Each consumer depends on
+`scope` and `prepare`; the consumers run in parallel after preparation, retaining their
+scope conditions. Their artifact guard accepts an artifact only before its 600-second
+deadline, from the exact current run and attempt, and requires a nonempty artifact ID
+before download. Deployment waits for all of them.
+The overview, other papers and workbench build beside `prepare`. The workbench job
+selects Node 24.18.0, installs the root lockfile with scripts disabled, and builds the
+typed workbench package into the self-contained `/workbench/` page, beside `prepare`
+rather than after it.
 The publish job puts the three papers, the checked PDF, the site’s own pages and the
 workbench back into one tree and holds every page’s head in it to the site’s contract,
 and every shared asset a page names to being there whole (`check_published_site
 --local`); only a push to `main` uploads that tree to Pages.
 The site’s own pages link their design system as content-hashed files under `assets/`,
 which the overview job writes with them (`devtools/site_assets.py`;
-`templates/paper-design.md`, Shared Assets); the papers and the workbench still inline
-theirs.
+`templates/paper-design.md`, Shared Assets); the papers share that bundle, and the
+published workbench links its own assets and corpus data.
+The offline editions remain self-contained.
 
-**An address the site has served keeps working.** The papers moved to `papers/<slug>` on
-2026-10-01, from `explainer.html` and from `n11-optimality/t-060-explainer.html`.
-`render_overview.MOVED_PAGES` lists each page that moved, and the overview’s build
-writes a forwarder at each old address: a page of a few lines whose script
-(`devtools/overview/forward.js`, the one the overview forwards its own old fragments
-with) sends the reader on with the query string and the fragment they came with, with a
-refresh and a link for a reader without scripts, the new address as its canonical URL,
-and, where it leads to a page of the site, that page’s own link preview, written from
-the record the page’s head is written from, so an old link shared now previews the page
-it leads to as a link to that page would.
-`render_overview.MOVED_FILES` lists each file that moved and cannot forward, a paper’s
-Markdown and PDF; the publish job copies each to its old address, and a test holds that
-step to the list. Nothing on the site links an old address.
-`check_published_site` asks the deployed site for every one of them, and visits each
-forwarder in the pinned browser with a query string and a fragment.
-To move a page again, add it to the list; do not delete an entry.
 Before drawing PDF bytes, the exporter checks that visible math is typeset; a completed
 font-error fallback that exposes literal TeX fails this check.
 Readable native MathML fallback is accepted by that check and remains subject to the
@@ -1277,9 +1621,14 @@ parameter startup and neighboring text movement are measured by
 `devtools.check_math_startup`; its controlled fixtures run in CI, while timing
 comparisons are retained in the
 [math startup campaign](packing/benchmarks/math-startup/README.md).
-The site’s other pages load math through the same pipeline, typeset in the client;
+The other papers and ordinary content pages prepare their math at build time with
+`site_math.prepare`, retaining one semantic MathML subtree per formula.
+Dense frontier table cells display their existing MathML directly under
+`data-site-native-math="frontier"`; the page’s prose remains prepared KaTeX. Native
+structures and operators use the platform’s math font; text tokens use the table’s sans
+reader font on screen and in print.
 [paper-design.md → Math Loading](packing/devtools/templates/paper-design.md#math-loading)
-describes it and records its load timings, which `devtools.measure_site_pages` measures.
+describes these contracts and the historical client-runtime load measurements.
 
 **Merging is the whole publish.** Every repository link on the site names `main`, the
 branch the site deploys from, through one helper
@@ -1313,6 +1662,26 @@ results page carries its own, and the overviews of three sampled results carry e
 repository link the renderer writes for them ([D-512](defects.md)). Run it from a
 checkout at the deployed commit, since the register it reads is the checkout’s.
 
+The live command reports phase timings, unique transport requests, retries, and slow
+requests to stderr during execution.
+URL fragments share a transport request while query strings remain distinct; every
+original link retains its own verdict.
+Persistent HTTP errors fail verification after bounded retries; a connection that times
+out, resets or answers malformed headers is retried as unreachable rather than ending
+the audit.
+
+In the Pages workflow the `verify-deployment` job runs under a 30-minute
+`timeout-minutes` ceiling, and the checker’s own `--deadline-minutes 25` stops it first.
+At the deadline it prints every verdict it has, one failing line naming the phase it
+interrupted, and the summary, so a throttled audit still leaves its diagnosis in the
+log.
+The five minutes between them cover the job’s setup and teardown, which took 41–72 s
+and 2–6 s across forty measured jobs; the slowest healthy audit took 388 s. Run locally,
+the check has no deadline unless one is passed.
+A successful Pages deploy with a failed link audit remains incomplete publication
+verification; preserve the failed receipt and rerun only verification after diagnosing
+the external response.
+
 The check also reads every page’s head for the site’s identity and link-preview tags and
 fetches the card they name:
 [paper-design.md → Page Metadata and Social Cards](packing/devtools/templates/paper-design.md#page-metadata-and-social-cards)
@@ -1335,8 +1704,9 @@ writes.
 page’s footer and the workbench stage print `PUBLICATION_EDITION` from
 `src/sqpack/release.py`, written like `v0.4.1-3b50e2`. The version comes from the first
 entry in `PUBLICATION_HISTORY`, and the six characters after it name the data.
-The atlas posters and the films carry the same spelling at the data commit each was
-drawn from, as
+The atlas posters use the independent `INFOGRAPHIC_VERSION` with the data revision they
+were drawn from. Both poster families share that edition; the films retain the stamp of
+their capture. See
 [Release assets](#release-assets-are-drawn-at-a-version-bump-or-on-demand) describes.
 The six characters after the version name the data, not the build: they are the pinned
 `DATA_REVISION`, the last commit that changed `DATA_PATHS` (the frontier records and the
@@ -1420,7 +1790,7 @@ release may carry assets drawn from different revisions.
 Actions artifacts, Git LFS or a committed file; the tag; the upload’s content type; the
 receipt that travels with each video; and the `<video>` embed with its codec string --
 is
-[Publication](docs/project/specs/active/plan-2026-09-21-video-delivery-profiles.md#publication)
+[Publication](docs/project/specs/done/plan-2026-09-21-video-delivery-profiles.md#publication)
 in the delivery-profiles plan.
 To re-cut and publish them, follow
 [Regenerating and publishing the ascent videos](packages/workbench/README.md#regenerating-and-publishing-the-ascent-videos),
@@ -1440,12 +1810,14 @@ Only a branch’s head has to agree; a merge keeps the branch’s data commit un
 data moved too, and then the merge is the data commit and the branch re-pins after
 merging `main`.
 
-### Release assets are drawn at a version bump, or on demand
+<a id="release-assets-are-drawn-at-a-version-bump-or-on-demand"></a>
+
+### Release assets are drawn at their component’s version bump
 
 The atlas posters (`known-best-1-100` and `known-best-1-324`, each an SVG with its PNG
 and PDF exports) and the films are expensive to draw and large to keep, so they are
-drawn when the version is bumped and when someone asks, never because the data moved
-(the owner, 2026-10-01). Each states what it was drawn from.
+drawn at a deliberate component revision, never because the data moved (the owner,
+2026-10-01). Each states what it was drawn from.
 A poster records the data commit and that commit’s date in its SVG metadata, prints them
 as its footer stamp and its dateline, and binds its PNGs and PDF to the SVG by digest
 receipts. A film’s frames carry the stamp they were captured with.
@@ -1453,7 +1825,7 @@ receipts. A film’s frames carry the stamp they were captured with.
 A poster may therefore trail the data between bumps.
 While its data revision is the pin, every label on it must agree with the figure record.
 Once the pin has moved, the cards that differ are listed by every check and fail none.
-A version bump fails every poster until it is redrawn.
+An infographic version bump fails every poster until the complete family is redrawn.
 `COMPOSITES_MAY_TRAIL` in `release.py` is the switch; `False` makes a trailing card a
 failure. From `packing/`:
 
@@ -1461,14 +1833,18 @@ failure. From `packing/`:
 # Hold the retained posters to their own records. Rebuilds nothing; about five seconds.
 uv run --frozen --all-extras --group dev python -m devtools.build_known_best_atlas --check-composites
 
-# Redraw both posters and their six exports from the retained witnesses. About a minute.
-uv run --frozen --all-extras --group dev python -m devtools.build_known_best_atlas --update-composites
+# Prepare a shared patch edition and redraw both posters and all their exports.
+uv run --frozen --all-extras --group dev python -m devtools.cut_release v0.6.1 \
+    --component infographics --impact patch --scope "Refresh the atlas posters."
 ```
 
 `--update-composites` refuses a stale pin and uncommitted data, since the stamp it draws
 has to name the data in the tree.
+Changing published infographic content or exports requires a new edition; an unpublished
+successor can be corrected at its selected edition throughout review.
+A byte-identical rebuild may retain its edition.
 `--update` rewrites the data layer alone: witnesses, renderings, manifest and frontier
-links. [The plan](docs/project/specs/active/plan-2026-10-01-release-assets-on-demand.md)
+links. [The plan](docs/project/specs/done/plan-2026-10-01-release-assets-on-demand.md)
 has the measurements behind this and the options that were weighed, and
 `python -m devtools.measure_release_assets` repeats them.
 
@@ -1493,14 +1869,17 @@ its source and whether it is what the rule gives:
 
 ### Cutting an edition
 
-Bumping the site’s version is editorial, and it is when the release assets are redrawn.
-Use at most one publication patch bump per merge, and keep the chosen version fixed
+Bumping a component’s version is editorial.
+Select patch for an ordinary correction or refresh, and minor for substantial new
+capability or coverage.
+Use at most one bump per component per merge, and keep the chosen version fixed
 throughout a pull request.
 One command prepares the bump and prints what is left.
 From `packing/`, on a clean tree whose pin is current:
 
 ```bash
-uv run --frozen --all-extras --group dev python -m devtools.cut_release v0.5.0 \
+uv run --frozen --all-extras --group dev python -m devtools.cut_release v0.7.0 \
+    --component site --impact minor \
     --scope "One sentence on what the edition adds."
 ```
 
@@ -1510,42 +1889,80 @@ It does these, and `--dry-run` lists them without doing any:
    UTC by default; correct it if the deployment lands on another day), and sets
    `PUBLICATION_REVISION`, the commit the claim documents link to, to `HEAD`.
    `DATA_REVISION` follows the data, not the edition.
-2. Redraws both posters and their exports (`build_known_best_atlas --update-composites`;
-   see the cairo note under Supported Environment).
-3. Regenerates the claim documents (`render_verifiable_claim`).
-4. Runs `--check-composites` and
-   `pytest tests/test_release.py tests/test_n11_lower_bounds_explainer.py tests/test_verify_claim.py tests/test_known_best_composites.py tests/test_artifact_dates.py`.
+2. Records the component’s patch or minor release-impact decision.
+3. Regenerates the claim documents (`render_verifiable_claim`) for a site cut.
+4. Runs the relevant release and artifact checks.
+   An `infographics` cut redraws both posters and their complete exports; a site cut
+   keeps those editions.
+
+Each cut runs the shared release/date contracts and its component’s quick tests, using
+the same quick predicate as ordinary validation.
+A site cut checks claim documents; it does not start the whole-atlas composite or
+exhaustive proof sweeps.
+Add `--include-deep-tests` to run the selected component’s slow and exhaustive tests
+deliberately. Generation stays component-owned: an infographic cut still redraws and
+checks both posters.
+Neither test selection replaces the full matching-source/base checkpoint required for
+final review.
 
 It commits nothing and publishes nothing, and it moves no paper: a site bump adds no
 entry to any paper’s history and changes no paper’s version line.
-What it prints for the owner to do: commit the release module, the eight atlas files and
-the generated documents together and merge them, with README’s edition sentence updated;
-wait for the “Certificate page” workflow and run `check_published_site`, which completes
-the version; correct the date and record the deployment above the history.
+Commit the release module and the generated outputs selected by the cut together, with
+README’s edition sentence updated; wait for the “Certificate page” workflow and run
+`check_published_site`, which completes the version; correct the date and record the
+deployment above the history.
 No tag and no GitHub release: a release is cut only when there are generated assets that
 need a download address, the films, and they stay on `render_overview.FILM_RELEASE`
 until they are cut again
 ([Regenerating and publishing the ascent videos](packages/workbench/README.md#regenerating-and-publishing-the-ascent-videos)).
 The papers’ PDFs are built by Pages from the merge.
 
+#### Hosted infographic exports when local scratch is unavailable
+
+After committing the selected edition and checking its data pin, set `CANDIDATE_REF` to
+the reviewed branch and dispatch the existing Pages workflow:
+
+```bash
+gh workflow run pages.yml --ref "$CANDIDATE_REF" -f redraw_infographics=true
+```
+
+The optional `candidate-infographics` job has a fifteen-minute ceiling and builds the
+complete pair independently of publication checks.
+It uploads eight checked SVG/PNG/PDF exports plus `source-sha.txt` as
+`candidate-infographics-<full-source-sha>`. Before promotion, match that receipt to the
+reviewed commit, reject missing or extra archive members, and review all eight outputs.
+Commit the complete family and rerun the ordinary publication gates; those gates build
+the explainer’s own HTML and PDF. The candidate job uploads outputs without deployment,
+commits or repository writes.
+An unchanged selected successor can be redrawn through review; main’s published edition
+remains immutable.
+
 ### Bumping a paper’s version
 
 A paper’s version moves when the paper changes in a way its author calls a new version,
 and only then; a site bump, a re-pin, a redraw of the posters and a change to the page’s
 chrome are not versions of the paper.
-It is one edit, in the commit that makes the change, with no command:
+Prepare the article revision, then cut the paper’s own patch or minor successor from a
+clean tree. For example, a patch to Part I’s current edition:
 
-1. Add a `PublicationHistoryEntry` to the front of the paper’s history in `release.py`
-   (`EXPLAINER_HISTORY`; the review gets one as the explainer’s when it leaves
-   `OPTIMALITY_REVIEW_VERSION` behind, linked from its front through
-   `PaperFront.history`): the new number, the day it will first be published, written
-   `October 2, 2026`, and one sentence on what changed in the paper.
-   The number is the paper’s own and is not the site’s; a number already published is
-   never changed.
-2. Set `EXPLAINER_REVISED` (or `THRESHOLD_REVIEW_REVISED`, or
-   `OPTIMALITY_REVIEW_REVISED`) to the commit’s date, as any change to the article
-   requires; `python -m devtools.artifact_dates --check` and
-   `tests/test_artifact_dates.py` hold it to git.
+```bash
+uv run --frozen --all-extras --group dev python -m devtools.cut_release v0.4.7 \
+    --component paper:n11-lower-bounds-explainer --impact patch \
+    --scope "Correct the explanation of the threshold argument."
+```
+
+1. Set `EXPLAINER_REVISED`, `THRESHOLD_REVIEW_REVISED`, `OPTIMALITY_REVIEW_REVISED` or
+   `PACKING_METHODS_REVISED` to the article commit’s date and commit the article
+   revision, as any change to the article requires;
+   `python -m devtools.artifact_dates --check` and `tests/test_artifact_dates.py` hold
+   it to git.
+2. Run the component cut command.
+   It adds the owning `PublicationHistoryEntry` and `ReleaseImpactDecision`, enforces
+   the selected patch or minor successor, and builds that paper’s HTML, Markdown and
+   PDF. Use `--date` for its planned first-publication date and correct it if deployment
+   lands on another day.
+   Keep the selected edition fixed through review; a published edition is never
+   renumbered.
 3. Where the entry points name the paper’s version, update them: TUTORIAL.md names the
    explainer’s (`test_reader_facing_version_references_follow_release_metadata`).
 4. Run
@@ -1555,6 +1972,84 @@ It is one edit, in the commit that makes the change, with no command:
 
 The version line and the history on a paper reflect versions of the paper, not of the
 website or anything else.
+
+### Maintaining the project changelog
+
+[`CHANGELOG.md`](CHANGELOG.md) and [News](https://jlevy.github.io/squares/news.html) are
+generated from [`packing/site-changelog.yaml`](packing/site-changelog.yaml).
+Edit the YAML, then run
+`uv run --frozen --all-extras --group dev python -m devtools.render_changelog` from
+`packing/`; its `--check` mode runs in the ordinary documentation gate.
+The enforced Soft Schema contract validates the stored fields, and the loader checks
+calendar dates, unique article IDs and PR numbers within each article, delivered stack
+layers and release references.
+
+At PR closeout, record a noteworthy contribution after the source PR has merged into
+`main`. Keep the summary to a sentence or a few lines, and use a short bullet list for
+the parts of a larger effort.
+Group delivered layers of a formal stack; later deliveries get a new entry with the same
+stack ID. One merged PR may support separate articles for distinct contributions, with
+one retained delivery row and all article IDs listed in its coverage audit.
+Preserve each existing entry’s date and PR membership.
+Record an editorial omission reason for purely administrative work or a changelog
+synchronization PR.
+
+The candidate importer reads merged PR metadata during authoring, retains that metadata
+with the candidate YAML, and leaves the wording for editorial review.
+Normal rendering uses the committed inputs and makes no network requests.
+Run its `--help` for the authoring options.
+Review the candidate against the merged diff and local records before publishing it; a
+PR description is a starting point for the summary.
+
+Link public papers, PDF downloads, result reports and other launched artifacts directly.
+Add `publication` evidence before calling a change launched.
+Its optional UTC date is the evidenced date the complete announced set became public;
+leave it absent when that date is unknown.
+The entry’s date remains its merge date.
+A moving download URL must be labeled as the current artifact, rather than an archived
+edition.
+
+Release references name entries in the component’s retained history.
+The site, shared infographic family and each paper have distinct histories; changelog
+bookkeeping alone does not cut a release.
+Review the release-impact decision for every externally changed component: an ordinary
+correction or refresh advances patch, while a substantial new capability or coverage
+expansion advances minor and resets patch.
+Both infographic families and every advertised export advance together.
+Paper content and typesetting revisions advance the affected paper’s edition; a site
+navigation or footer update keeps the paper’s content edition.
+
+The ordinary documentation gate runs `devtools.check_release_impact`. It compares
+producer-owned inputs against the comparison merge base and requires a disposition for
+each candidate component: a valid owning successor, or a fresh `ReleaseNoPublicChange`
+review in `release.py` naming the exact changed paths, outputs examined and reason.
+A prior no-change review cannot excuse another batch.
+Tests and checker changes do not independently select a public component; broad builder
+inputs can select one even when the changed code does not run in that output.
+Changelog-only maintenance can use the explicit bookkeeping exception; its reason should
+acknowledge the updated changelog rather than claim identical output.
+
+This gate verifies ownership, coverage and successor arithmetic.
+Reviewers decide whether the public output changed and whether patch or minor is
+appropriate; an input diff does not prove visual equality.
+The existing page and PDF checks still verify the actual artifacts.
+`--baseline-ref origin/main` uses the branch’s merge base; `--base` selects a delivery
+baseline explicitly.
+For a dependent PR, hosted CI sets `PACKING_RELEASE_BASE_REF` to the PR event’s pinned
+parent commit.
+The validator uses that explicit ref first, then `origin/$GITHUB_BASE_REF`
+if the explicit ref is absent.
+Locally, set `PACKING_RELEASE_BASE_REF` to the actual parent branch or pinned parent
+commit; ordinary branches default to `origin/main`. Changelog delivery coverage
+continues to compare against `origin/main`. The validator uses `HEAD^1` on a main
+checkout whose head already equals `origin/main`, so it checks the preceding delivery
+rather than comparing a commit with itself.
+
+Validate with the change-reachable push tier, review both reader views, and verify the
+published News page with the normal deployment audit after merging.
+The
+[initial backfill review](docs/project/reviews/review-2026-10-13-site-changelog-backfill.md)
+records the disposition of the first 36 PRs.
 
 ## Focused Quality Commands
 
@@ -1596,10 +2091,35 @@ That gate uses the crate’s pinned toolchain, runs rustfmt, Clippy, tests, rust
 locked release build, then compares exact results with the Python reference.
 It leaves the binary at `$CARGO_TARGET_DIR/release/sqverify-exact` when the target
 directory is absolute.
+The Rust crate enables canonical cross-cancelled multiplication by default.
+Build with `--no-default-features` to select the original `num-rational` multiplication
+expressions. For the constructor ablation, combine `--no-default-features` with
+`--features experimental-normalized-mul` or `--features experimental-coprime-mul`; the
+historical feature names remain supported.
+Cargo features are additive, so a normalized-only control must disable defaults.
+The gate checks these modes, production defaults and the combined feature mode before
+building the production release binary.
+
+The
+[adoption measurement](docs/project/research/research-2026-09-30-exact-arithmetic-verifier-performance.md#2026-10-19-default-adoption)
+records the fixed-work benefit and its limits.
+To repeat the three-pair diagnostic with fresh reference and default builds, provide
+writable absolute scratch outside the checkout through `TMPDIR`, `UV_CACHE_DIR` and
+`CARGO_TARGET_DIR`, then run:
+
+```bash
+uv run --frozen --all-extras --group dev python -m benchmarks.bench_rectangle_rust_verifier_ab \
+  --target-root "$CARGO_TARGET_DIR/verifier-arms" --output "$TMPDIR/verifier-ab.json"
+```
+
+Linux admits those resolved external directories; macOS retains the configured mounted
+agent-scratch volume requirement.
+Output files cannot overwrite prior receipts.
+
 Pass that path to `devtools.verify_rectangle_density` with
 `--backend rust --rust-binary PATH`; Python remains the default.
-The [tooling overview](docs/project/verification-tooling.md) records the supported
-inputs, refusal behavior, golden controls and measured performance limits.
+The [tooling overview](docs/project/guides/verification-tooling.md) records the
+supported inputs, refusal behavior, golden controls and measured performance limits.
 This crate verifies rectangle geometry, a separate contract from the global n11 proof.
 
 The optional [n17 native kernel](packing/n17bb_native/README.md) accelerates the
@@ -1669,7 +2189,14 @@ section before changing either.
 Markdown is owned by Flowmark at repository root.
 Durable documentation follows the common documentation guidelines and carries their
 footer. Run the repository hook or `make format`; do not introduce a second Markdown
-formatter.
+formatter. The auto-staging commit hook runs on Markdown and Python source changes and
+checks paper titles against the reviewed Chicago title case in `render_overview.PAPERS`
+and `render_overview.REFERENCED_PAPER_TITLES`. The reference check covers authored
+reader documents and article templates while preserving quoted source text and archives.
+Generated version histories use the same Flowmark typography before insertion into the
+HTML and Markdown editions; formatting the source Markdown alone cannot reach prose
+stored in Python metadata.
+Tests enforce these generated-output contracts in the fast PR suite.
 
 ### Probing the promotion pipeline
 
@@ -1873,6 +2400,10 @@ is the rule; this is how to follow it.
   Record a commit or blob id as provenance if it helps a reader.
   Where a verdict must be tied to the input it was computed from, give the input a
   semantic identity (a design name and version) and compare that, or recompute.
+  Comparing a change with its base branch at their merge base, as the release-impact,
+  changelog, requests, bead-tree and regularization-state gates do, reads no recorded
+  revision
+  ([OR-18](operating-rules.md#or-18-keep-bulk-data-out-of-git-and-never-bind-code-or-verdicts-to-a-git-commit-or-blob)).
 - **No self-pins.** Do not pin the SHA-256 of a file this repository writes and commits.
   Git already holds it, and the pin makes regenerating the file identically, or moving
   it, a failure.
@@ -2197,7 +2728,7 @@ Do not replace those records with a timing comment or treat an incomplete CPU lo
 bound as total test CPU. The prior
 [efficiency infrastructure plan](docs/project/specs/active/plan-2026-08-25-research-loop-efficiency-infrastructure.md)
 and
-[gate validation plan](docs/project/specs/active/plan-2026-08-29-gate-validation-speed.md)
+[gate validation plan](docs/project/specs/done/plan-2026-08-29-gate-validation-speed.md)
 retain the earlier experiments and their outcomes.
 
 ### What a deep run repeats, and what that licenses

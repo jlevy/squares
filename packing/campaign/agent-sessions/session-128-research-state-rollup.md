@@ -125,7 +125,7 @@ session:
     - SYNOPSIS.md
     - README.md
     - docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
-    - docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+    - docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
     stop_reason: >-
       The source reconciliation and reader routing are implemented; merge certification
       remains the only open part of this block.
@@ -252,7 +252,7 @@ session:
   - SYNOPSIS.md
   - README.md
   - docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
-  - docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+  - docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
   checks:
   - Branch codex/synopsis-research-rollup was created from exact origin/main revision 80bcdbb0819504354e1278c37f211dd8cc2158fb after fetching main.
   - Three independent read-only audits agreed that W8 owns the roll-up process, SYNOPSIS owns current synthesis, README owns navigation, and W10 owns the next selection.

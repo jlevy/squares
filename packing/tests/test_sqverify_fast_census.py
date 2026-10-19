@@ -32,7 +32,14 @@ from typing import Any
 import pytest
 
 from devtools import sqverify_fast_census as census
-from devtools.check_sqverify_fast import direction, mixed_exact, net_step, read_raw
+from devtools.check_sqverify_fast import (
+    direction,
+    metadata_net,
+    mixed_exact,
+    net_step,
+    read_raw,
+    scaled,
+)
 from sqpack.rectangle_density import coverage_at_point, load_candidate
 from sqpack.yamlio import safe_load
 
@@ -133,15 +140,36 @@ def decided() -> dict[str, dict[str, Any]]:
     }
 
 
+#: The entries that decide a lemma with the crate's exact axis sweep and rest on no
+#: census row, since the census rows are bounds: the near-axis lemmas of T-145 (on
+#: wand125's rect_n40_L67, which only shares a census row's file) and T-157 (on
+#: Guzhou0806's new-supports density, which has none). Their receipts are their packets'
+#: (`test_audit_n40_new_supports`). A third lemma entry fails here until it is named.
+LEMMA_ENTRIES = frozenset(
+    {"E-n040-guzhou-continuous-pose-crate-axis", "E-n040-guzhou-new-supports-crate-axis"}
+)
+
+
+def test_only_the_named_lemma_entries_rest_on_no_census_row() -> None:
+    lemmas = {ident for ident, entry in decided().items() if entry["claim"] != "lower-bound"}
+    assert lemmas == LEMMA_ENTRIES
+
+
 @cache
 def cited() -> dict[str, str]:
-    """Each evidence entry that `V-sqverify-fast` decides, by the certificate it names."""
+    """Each evidence entry that `V-sqverify-fast` decides a bound for, by the census
+    certificate it names; the lemma entries (`LEMMA_ENTRIES`) rest on no census row."""
+    # The current record uses repository-relative paths; older evidence entries
+    # retain their packing-relative spelling. Both must identify the same census case.
     by_path = {
-        str(case.candidate.relative_to(census.PROJECT)): name
+        str(case.candidate.relative_to(root)): name
         for name, case in {**cases(), **rectangle_cases()}.items()
+        for root in (census.PROJECT.parent, census.PROJECT)
     }
     found: dict[str, str] = {}
     for ident, entry in decided().items():
+        if ident in LEMMA_ENTRIES:
+            continue
         name = by_path.get(str(entry.get("certificate")))
         assert name is not None, f"{ident}: no census case for its certificate"
         found[ident] = name
@@ -388,7 +416,7 @@ def test_every_entry_the_verifier_decides_rests_on_a_review_of_its_certificate()
     covering the result: the 5 October review of the route for T-094's two, and for
     T-097's mixed_n66_L843 the review of the same day that read it before its replay.
     """
-    for evidence_id in cited():
+    for evidence_id in decided():
         record = decided()[evidence_id]["proof"]["audit_record"]
         results = citing().get(evidence_id) or []
         assert results, f"{evidence_id}: no result cites it"
@@ -1096,6 +1124,38 @@ def test_the_exact_evaluator_reads_a_declared_net() -> None:
     assert mixed_exact(raw, x, y, int(least["r"])) == Fraction(least["exact_coverage"])
 
 
+def test_the_census_reads_a_format_t_metadata_net(tmp_path: Path) -> None:
+    """GN-5 of the review of jlevy/squares#485: a format T file whose metadata sets a net
+    (rect_n40_L67's density on 401 directions of step 83/80000, as the release decided
+    it) is read on that net, as admission reads it: its direction count, its step, the
+    net its mutants keep, and the exact evaluator's angle. Before, the census counted 201
+    directions, scored the standard step, dropped the net from the mutants and could not
+    load the file in the evaluator."""
+    original = rectangle_cases()["rect_n40_L67"].candidate
+    raw = read_raw(original)
+    finer = {**raw, "certificate": {**raw["certificate"], "D": "83/80000", "angle_count": 401}}
+    path = tmp_path / "certified_candidate.json"
+    path.write_text(json.dumps(finer), encoding="utf-8")
+    case = census.Case("2026-10-10", "rect_n40_L67-401", 40, "67/10", path=path)
+    assert metadata_net(finer) == (Fraction(83, 80000), 401)
+    assert census.net_directions(case) == 401
+    assert net_step(finer) == Fraction(83, 80000)
+    assert scaled(finer, Fraction(99, 100))["certificate"] == {
+        "D": "83/80000",
+        "angle_count": 401,
+    }
+    # The standard net in metadata is still dropped from a mutant, as before.
+    assert metadata_net(raw) == (Fraction(83, 40000), 201)
+    assert "certificate" not in scaled(raw, Fraction(99, 100))
+    assert census.net_directions(rectangle_cases()["rect_n40_L67"]) == 201
+    # The release's control centre at direction 220 of the 401 net (the review's item 8).
+    x, y = Fraction(3.353931795732347), Fraction(5.09801085267264)
+    cosine, sine = direction(220, Fraction(83, 80000))
+    expected = coverage_at_point(load_candidate(original, n=40), x, y, cosine, sine)
+    assert census.exact_capture(case, finer, x, y, 220) == expected
+    assert float(expected) == pytest.approx(1.0013165657619967, abs=1e-15)
+
+
 def test_a_control_refuses_a_row_decided_on_another_net() -> None:
     """The census control evaluates on the file's net and refuses a row whose net differs."""
     entry = entries()[DECLARED]
@@ -1116,3 +1176,13 @@ def test_a_control_serves_format_m_and_format_t_rows_only() -> None:
     bare = {key: value for key, value in rectangle.items() if key != "threshold"}
     with pytest.raises(SystemExit, match="records no threshold"):
         census.control(Path("/nonexistent"), rectangle_cases()[RECOMPUTED_T], bare)
+
+
+def test_the_16_october_fine_net_packet_is_read_from_its_retained_release_members() -> None:
+    packet = "wand125-fine-net-lower-bounds-2026-10-16"
+    found = {name: case for name, case in cases().items() if case.packet == packet}
+    assert len(found) == 18
+    root = census.WEB / packet / "release/certificates"
+    for name, case in found.items():
+        assert case.candidate == root / name / "candidate.json.gz"
+        assert census.net_directions(case) == (2073 if case.n <= 51 else 201)

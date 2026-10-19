@@ -1,0 +1,13 @@
+{
+  "acquire_source_check": "PASS",
+  "author_programs_executed": false,
+  "checked_at_utc": "2026-10-08T05:29:38Z",
+  "complete_comparators": 17,
+  "compressed_source_files": 42,
+  "format": "gupta-438-custody-contract-check-v1",
+  "hash_pinned_source_files": 7,
+  "native_geometry_executed": false,
+  "original_certificates": 17,
+  "retained_data_check_packet": "PASS",
+  "retained_source_files": 42
+}

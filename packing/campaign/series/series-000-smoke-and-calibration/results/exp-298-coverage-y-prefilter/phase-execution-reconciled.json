@@ -1,0 +1,47 @@
+{
+  "inputs": {"journal":{"path":"campaign/series/series-000-smoke-and-calibration/results/exp-298-coverage-y-prefilter/phase-execution.json","sha256":"3cf805f9ba5533d52efeb16992684a59691991d8c81bc621dbacbd44f12dd318"},"manifest":{"path":"campaign/series/series-000-smoke-and-calibration/results/exp-298-coverage-y-prefilter/execution-manifest.json","sha256":"d3b39a4f7ad28c44ab9e74ed05aef2b7d8ecee03b7d780db8e6f63590dca9182"},"supervision":{"path":"campaign/series/series-000-smoke-and-calibration/results/exp-298-coverage-y-prefilter/supervision.json","sha256":"22a0ba9956ce6ce551cb5895b4fff3023cf55ca745459361be5588a7b01dbf1b"}},
+  "missing_child_returncodes_inferred": false,
+  "original_journal_status": "running",
+  "phases": [
+    {"argv":["/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python","-m","devtools.profile_n17_coverage_candidate","replay","--arm","baseline","--directory","campaign/retained/session-184-n17-numeric-cap-readiness","--cells","campaign/series/series-000-smoke-and-calibration/results/exp-290-matched-exact-replay/cells.json","--cells-sha256","3cdb291b927abaf6a61f0127ddf208329765f77debe793881ec01879b18158b5","--centered-inner-cap","935106018721/200000000000","--max-seconds","180","--compare","campaign/series/series-000-smoke-and-calibration/results/exp-290-matched-exact-replay/attempt2/none.json","--output","campaign/series/series-000-smoke-and-calibration/results/exp-298-coverage-y-prefilter/01-baseline.json"],"ended_at":"2026-10-08T01:11:12.974926Z","name":"01-baseline","returncode":0,"started_at":"2026-10-08T01:09:32.079402Z","status":"completed","wall_seconds":100.89426125003956},
+    {"argv":["/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python","-m","devtools.profile_n17_coverage_candidate","replay","--arm","candidate","--directory","campaign/retained/session-184-n17-numeric-cap-readiness","--cells","campaign/series/series-000-smoke-and-calibration/results/exp-290-matched-exact-replay/cells.json","--cells-sha256","3cdb291b927abaf6a61f0127ddf208329765f77debe793881ec01879b18158b5","--centered-inner-cap","935106018721/200000000000","--max-seconds","180","--compare","campaign/series/series-000-smoke-and-calibration/results/exp-290-matched-exact-replay/attempt2/none.json","--output","campaign/series/series-000-smoke-and-calibration/results/exp-298-coverage-y-prefilter/02-candidate.json"],"ended_at":"2026-10-08T01:12:44.705997Z","name":"02-candidate","returncode":0,"started_at":"2026-10-08T01:11:12.975607Z","status":"completed","wall_seconds":91.72923274995992},
+    {"argv":["/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python","-m","devtools.profile_n17_coverage_candidate","replay","--arm","candidate","--directory","campaign/retained/session-184-n17-numeric-cap-readiness","--cells","campaign/series/series-000-smoke-and-calibration/results/exp-290-matched-exact-replay/cells.json","--cells-sha256","3cdb291b927abaf6a61f0127ddf208329765f77debe793881ec01879b18158b5","--centered-inner-cap","935106018721/200000000000","--max-seconds","180","--compare","campaign/series/series-000-smoke-and-calibration/results/exp-290-matched-exact-replay/attempt2/none.json","--output","campaign/series/series-000-smoke-and-calibration/results/exp-298-coverage-y-prefilter/03-candidate.json"],"ended_at":"2026-10-08T01:14:15.824306Z","name":"03-candidate","returncode":0,"started_at":"2026-10-08T01:12:44.706662Z","status":"completed","wall_seconds":91.11649695801316},
+    {"argv":["/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python","-m","devtools.profile_n17_coverage_candidate","replay","--arm","baseline","--directory","campaign/retained/session-184-n17-numeric-cap-readiness","--cells","campaign/series/series-000-smoke-and-calibration/results/exp-290-matched-exact-replay/cells.json","--cells-sha256","3cdb291b927abaf6a61f0127ddf208329765f77debe793881ec01879b18158b5","--centered-inner-cap","935106018721/200000000000","--max-seconds","180","--compare","campaign/series/series-000-smoke-and-calibration/results/exp-290-matched-exact-replay/attempt2/none.json","--output","campaign/series/series-000-smoke-and-calibration/results/exp-298-coverage-y-prefilter/04-baseline.json"],"ended_at":"2026-10-08T01:16:36.667198Z","name":"04-baseline","returncode":0,"started_at":"2026-10-08T01:14:15.824980Z","status":"completed","wall_seconds":140.84041900001466},
+    {"argv":["/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python","-m","devtools.profile_n17_coverage_candidate","replay","--arm","baseline","--directory","campaign/retained/session-184-n17-numeric-cap-readiness","--cells","campaign/series/series-000-smoke-and-calibration/results/exp-290-matched-exact-replay/cells.json","--cells-sha256","3cdb291b927abaf6a61f0127ddf208329765f77debe793881ec01879b18158b5","--centered-inner-cap","935106018721/200000000000","--max-seconds","180","--compare","campaign/series/series-000-smoke-and-calibration/results/exp-290-matched-exact-replay/attempt2/none.json","--output","campaign/series/series-000-smoke-and-calibration/results/exp-298-coverage-y-prefilter/05-baseline.json"],"ended_at":"2026-10-08T01:19:10.050846Z","name":"05-baseline","returncode":0,"started_at":"2026-10-08T01:16:36.668596Z","status":"completed","wall_seconds":153.38036216597538},
+    {"argv":["/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python","-m","devtools.profile_n17_coverage_candidate","replay","--arm","candidate","--directory","campaign/retained/session-184-n17-numeric-cap-readiness","--cells","campaign/series/series-000-smoke-and-calibration/results/exp-290-matched-exact-replay/cells.json","--cells-sha256","3cdb291b927abaf6a61f0127ddf208329765f77debe793881ec01879b18158b5","--centered-inner-cap","935106018721/200000000000","--max-seconds","180","--compare","campaign/series/series-000-smoke-and-calibration/results/exp-290-matched-exact-replay/attempt2/none.json","--output","campaign/series/series-000-smoke-and-calibration/results/exp-298-coverage-y-prefilter/06-candidate.json"],"ended_at":"2026-10-08T01:21:19.421674Z","name":"06-candidate","returncode":0,"started_at":"2026-10-08T01:19:10.051725Z","status":"completed","wall_seconds":129.36833304102765},
+    {"argv":["/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python","-m","devtools.profile_n17_coverage_candidate","replay","--arm","candidate","--directory","campaign/retained/session-184-n17-numeric-cap-readiness","--cells","campaign/series/series-000-smoke-and-calibration/results/exp-290-matched-exact-replay/cells.json","--cells-sha256","3cdb291b927abaf6a61f0127ddf208329765f77debe793881ec01879b18158b5","--centered-inner-cap","935106018721/200000000000","--max-seconds","180","--compare","campaign/series/series-000-smoke-and-calibration/results/exp-290-matched-exact-replay/attempt2/none.json","--output","campaign/series/series-000-smoke-and-calibration/results/exp-298-coverage-y-prefilter/07-candidate.json"],"name":"07-candidate","returncode":null,"started_at":"2026-10-08T01:21:19.423306Z","status":"interrupted_by_supervisor","wall_seconds":null}
+  ],
+  "raw_evidence_modified": false,
+  "reconciled_at": "2026-10-08T01:55:34.769129Z",
+  "schema": "registered-phase-supervision-reconciliation/v1",
+  "scientific_result_interpreted": false,
+  "status": "incomplete",
+  "supervisor": {
+    "argv": ["/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python","-m","devtools.run_registered_phases","--manifest","campaign/series/series-000-smoke-and-calibration/results/exp-298-coverage-y-prefilter/execution-manifest.json","--output","campaign/series/series-000-smoke-and-calibration/results/exp-298-coverage-y-prefilter/phase-execution.json"],
+    "cleanup_complete": true,
+    "cleanup_seconds": 10,
+    "failure": "Command '['/bin/ps', '-axo', 'pid=,pgid=,rss=,stat=']' timed out after 1 seconds",
+    "kill_elapsed_seconds": null,
+    "max_memory_mib_per_process": 4096.0,
+    "max_seconds": 1440.0,
+    "maximum_sampled_current_rss_bytes_by_pid": {"41372":28524544,"41374":428916736,"42956":431423488,"42959":1490944,"44402":440221696,"46192":163840,"46195":402440192,"52965":435453952,"65748":434012160,"73317":332824576,"73358":1441792},
+    "owned_pgid": 41372,
+    "pid": 41372,
+    "reason": "guard_unavailable",
+    "returncode": -15,
+    "rss_enforcement": "sampled per live process in owned group; not allocation-time hardcap",
+    "rss_source": "/bin/ps RSS KiB; current resident bytes, not lifetime peak",
+    "sample_seconds": 0.25,
+    "samples": 2556,
+    "schema": "posix-bounded-command-supervision/v1",
+    "scope": "one owned process group; children must not escape it",
+    "signal_received": null,
+    "status": "INCOMPLETE",
+    "stderr": "/Users/levy/wrk/github/squares/packing/campaign/series/series-000-smoke-and-calibration/results/exp-298-coverage-y-prefilter/stderr.log",
+    "stdout": "/Users/levy/wrk/github/squares/packing/campaign/series/series-000-smoke-and-calibration/results/exp-298-coverage-y-prefilter/stdout.log",
+    "term_elapsed_seconds": 738.0286617079983,
+    "wall_seconds": 738.1659635830438
+  },
+  "unstarted_phase_names": ["08-baseline"]
+}
+

@@ -1,0 +1,73 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "https://github.com/jlevy/squares/issues/500",
+  "author": "Nate Chaoweeraprasit",
+  "source_key": "[SQUISH fourth request 2026-10-11]",
+  "report_evidence": "E-squish-500-certificate-report",
+  "receipt_format": "squish-500-exact-replay-v1",
+  "witness_prefix": "W-squish-500-n",
+  "claim_limitations": "Complete aeacc6c rational centre/half-angle certificate converted exactly from a checkout at the pin whose bytes have the digests the packet records; no upstream byte is retained. Finite construction feasibility only; no KKT, interval, local minimum, rigidity, novelty, priority or global optimality claim.",
+  "read_on": "2026-10-11",
+  "read_at_main": "3a5a91a90f997a65da52c42000769c1e6b6c3eae",
+  "certificates": [
+    {"n": 176, "path": "squish-submission-2026-10-11/n176/n176.cert.json", "format": "squish-json", "offered": "305005022674381157367132529416905207296020948646520876053762749858683599318120744/22081242074898135703849455266036121393870562834861102970956326327326447327968587", "first_committed": "2026-10-11T05:30:10Z", "printed_in": "https://github.com/itsnaka/squish-certs/blob/aeacc6c124df339074f7370e1e010bb6e8c1b5ca/squish-submission-2026-10-11/summary.csv", "fact": "facts/n-176.yaml"},
+    {"n": 181, "path": "squish-submission-2026-10-11/n181/n181.cert.json", "format": "squish-json", "offered": "249935253501271447722872166122379040683260708184410574609224560771762048914945913/17915453134884420632048333509167003378124582375369499899268894615896769573805255", "first_committed": "2026-10-11T05:30:10Z", "printed_in": "https://github.com/itsnaka/squish-certs/blob/aeacc6c124df339074f7370e1e010bb6e8c1b5ca/squish-submission-2026-10-11/summary.csv", "fact": "facts/n-181.yaml"},
+    {"n": 238, "path": "squish-submission-2026-10-11/n238/n238.cert.json", "format": "squish-json", "offered": "516829548917904437965878091074886828293320996185960477809932175908043454736320288/32455795222015655007007970530566514770773816146192500722754413705465356352461141", "first_committed": "2026-10-11T05:30:10Z", "printed_in": "https://github.com/itsnaka/squish-certs/blob/aeacc6c124df339074f7370e1e010bb6e8c1b5ca/squish-submission-2026-10-11/summary.csv", "fact": "facts/n-238.yaml"},
+    {"n": 239, "path": "squish-submission-2026-10-11/n239/n239.cert.json", "format": "squish-json", "offered": "957883664741088666359826291012097714608415772761965190010564315177693226164065987/60061263979374471914223634546066156202761470614164034734590750736057272204798672", "first_committed": "2026-10-11T05:30:10Z", "printed_in": "https://github.com/itsnaka/squish-certs/blob/aeacc6c124df339074f7370e1e010bb6e8c1b5ca/squish-submission-2026-10-11/summary.csv", "fact": "facts/n-239.yaml"},
+    {"n": 270, "path": "squish-submission-2026-10-11/n270/n270.cert.json", "format": "squish-json", "offered": "761203984658924994781689956746506132479479002945859948235062760911587068049389066/44966630820689093059794938239713705461989197412012889888820554168494459778549053", "first_committed": "2026-10-11T05:30:10Z", "printed_in": "https://github.com/itsnaka/squish-certs/blob/aeacc6c124df339074f7370e1e010bb6e8c1b5ca/squish-submission-2026-10-11/summary.csv", "fact": "facts/n-270.yaml"},
+    {"n": 271, "path": "squish-submission-2026-10-11/n271/n271.cert.json", "format": "squish-json", "offered": "226641509159806817533826968807522186618590497703207479506050881660303454046913630/13371877327550822127276902291903146156943895843133007855104572641371568124309293", "first_committed": "2026-10-11T05:30:10Z", "printed_in": "https://github.com/itsnaka/squish-certs/blob/aeacc6c124df339074f7370e1e010bb6e8c1b5ca/squish-submission-2026-10-11/summary.csv", "fact": "facts/n-271.yaml"},
+    {"n": 272, "path": "squish-submission-2026-10-11/n272/n272.cert.json", "format": "squish-json", "offered": "1114257766245565718930315998681473968716597475579279287292886911189991499936935381/65677527145799837468063782221943718992249135546143429464936478230690701220023471", "first_committed": "2026-10-11T05:30:10Z", "printed_in": "https://github.com/itsnaka/squish-certs/blob/aeacc6c124df339074f7370e1e010bb6e8c1b5ca/squish-submission-2026-10-11/summary.csv", "fact": "facts/n-272.yaml"},
+    {"n": 304, "path": "squish-submission-2026-10-11/n304/n304.cert.json", "format": "squish-json", "offered": "510485576549308947359639122176771480874060688471611521000826585202734096682803420/28471575075230807279259985772792709540176911602103069986239820873572704667056489", "first_committed": "2026-10-11T05:30:10Z", "printed_in": "https://github.com/itsnaka/squish-certs/blob/aeacc6c124df339074f7370e1e010bb6e8c1b5ca/squish-submission-2026-10-11/summary.csv", "fact": "facts/n-304.yaml"},
+    {"n": 305, "path": "squish-submission-2026-10-11/n305/n305.cert.json", "format": "squish-json", "offered": "176574386584524522718242075735181894343653439251445905894414633471908824717084407/9836714596766635588546138051753839920746733217534271639970138607199828771763358", "first_committed": "2026-10-11T05:30:10Z", "printed_in": "https://github.com/itsnaka/squish-certs/blob/aeacc6c124df339074f7370e1e010bb6e8c1b5ca/squish-submission-2026-10-11/summary.csv", "fact": "facts/n-305.yaml"}
+  ],
+  "requested": [176, 181, 238, 239, 270, 271, 272, 304, 305],
+  "replayed": [176, 181, 238, 239, 270, 271, 272, 304, 305],
+  "houses": [
+    {"n": 176, "reader": "[evand exact optima 2026-10-05]", "source_key": "[Kingbird]", "holders": "the Kingbird catalogue, verified by Evan Daniel's exact ceiling", "result": "T-101", "reported_value": "13.82287565553229", "verified_value": "13.82287565553230", "evidence": ["E-evand-exact-ceilings-2026-10-05-exact-replay", "E-evand-exact-ceilings-2026-10-05-source-replay"], "reported_rounding": "unstated"},
+    {"n": 181, "reader": "[evand exact optima 2026-10-05]", "source_key": "[evand exact optima 2026-10-05]", "holders": "Francisco Couzo, improved by Evan Daniel", "result": "T-098", "reported_value": "13.953748821954402498045544433567", "verified_value": "13.953748821954402498045544433567", "evidence": ["E-evand-exact-optima-2026-10-05-exact-replay", "E-evand-exact-optima-2026-10-05-source-replay"]},
+    {"n": 238, "reader": "[Gupta rational refinements 2026-10-08]", "source_key": "[Gupta rational refinements 2026-10-08]", "holders": "Nate Chaoweeraprasit (itsnaka), improved by Siddharth Gupta", "result": "T-127", "reported_value": "15.9261468570109784", "verified_value": "15.9261468570109784", "evidence": ["E-gupta-438-exact-feasibility"]},
+    {"n": 239, "reader": "[Gupta rational refinements 2026-10-08]", "source_key": "[Gupta rational refinements 2026-10-08]", "holders": "Nate Chaoweeraprasit (itsnaka), improved by Siddharth Gupta", "result": "T-127", "reported_value": "15.9493131697276962", "verified_value": "15.9493131697276962", "evidence": ["E-gupta-438-exact-feasibility"]},
+    {"n": 270, "reader": "[Daniel new arrangements 2026-10-07]", "source_key": "[Daniel new arrangements 2026-10-07]", "holders": "Evan Daniel", "result": "T-119", "reported_value": "16.937807228446029110709567408515", "verified_value": "16.9378072284460292", "evidence": ["E-evand-399-exact-feasibility"]},
+    {"n": 271, "reader": "[evand exact optima 2026-10-05]", "source_key": "[evand exact optima 2026-10-05]", "holders": "Francisco Couzo, improved by Evan Daniel", "result": "T-098", "reported_value": "16.950820792624958786450490084388", "verified_value": "16.950820792624958786450490084388", "evidence": ["E-evand-exact-optima-2026-10-05-exact-replay", "E-evand-exact-optima-2026-10-05-source-replay"]},
+    {"n": 272, "reader": "[Daniel new arrangements 2026-10-07]", "source_key": "[Daniel new arrangements 2026-10-07]", "holders": "Evan Daniel", "result": "T-119", "reported_value": "16.968110145769600505005359235592", "verified_value": "16.9681101457696006", "evidence": ["E-evand-399-exact-feasibility"]},
+    {"n": 304, "reader": "[evand exact optima 2026-10-05]", "source_key": "[evand exact optima 2026-10-05]", "holders": "Francisco Couzo, improved by Evan Daniel", "result": "T-098", "reported_value": "17.934650018390681724105084929881", "verified_value": "17.934650018390681724105084929881", "evidence": ["E-evand-exact-optima-2026-10-05-exact-replay", "E-evand-exact-optima-2026-10-05-source-replay"]},
+    {"n": 305, "reader": "[evand exact optima 2026-10-05]", "source_key": "[evand exact optima 2026-10-05]", "holders": "Francisco Couzo, improved by Evan Daniel", "result": "T-098", "reported_value": "17.952959459015527962875662582531", "verified_value": "17.952959459015527962875662582531", "evidence": ["E-evand-exact-optima-2026-10-05-exact-replay", "E-evand-exact-optima-2026-10-05-source-replay"]}
+  ],
+  "pending": [
+    {"n": 181, "report": "#476", "url": "https://github.com/jlevy/squares/issues/476", "holders": "Francisco Couzo", "reader": "[Couzo exact certificates 2026-10-09]"},
+    {"n": 238, "report": "#470", "url": "https://github.com/jlevy/squares/issues/470", "holders": "Mishapolk", "reader": "[Mishapolk decimal poses 2026-10-09]"},
+    {"n": 239, "report": "#470", "url": "https://github.com/jlevy/squares/issues/470", "holders": "Mishapolk", "reader": "[Mishapolk decimal poses 2026-10-09]"},
+    {"n": 270, "report": "T-130 (#460)", "url": "https://github.com/jlevy/squares/pull/460#issuecomment-6070798890", "holders": "Francisco Couzo", "result": "T-130", "reader": "[Couzo follow-up refinements 2026-10-08]"},
+    {"n": 270, "report": "T-134 (#476)", "url": "https://github.com/jlevy/squares/issues/476", "holders": "Francisco Couzo", "result": "T-134", "reader": "[Couzo exact certificates 2026-10-09]"},
+    {"n": 270, "report": "T-136 (#481)", "url": "https://github.com/jlevy/squares/issues/481", "holders": "Nate Chaoweeraprasit", "result": "T-136", "reader": "[SQUISH third request 2026-10-09]"},
+    {"n": 270, "report": "T-138 (#470)", "url": "https://github.com/jlevy/squares/issues/470", "holders": "Mishapolk", "result": "T-138", "reader": "[Mishapolk decimal poses 2026-10-09]"},
+    {"n": 270, "report": "T-140 (#488)", "url": "https://github.com/jlevy/squares/issues/488", "holders": "Francisco Couzo", "result": "T-140", "reader": "[Couzo certificates 2026-10-10]"},
+    {"n": 271, "report": "#476", "url": "https://github.com/jlevy/squares/issues/476", "holders": "Francisco Couzo", "reader": "[Couzo exact certificates 2026-10-09]"},
+    {"n": 272, "report": "#476", "url": "https://github.com/jlevy/squares/issues/476", "holders": "Francisco Couzo", "reader": "[Couzo exact certificates 2026-10-09]"},
+    {"n": 304, "report": "#476", "url": "https://github.com/jlevy/squares/issues/476", "holders": "Francisco Couzo", "reader": "[Couzo exact certificates 2026-10-09]"},
+    {"n": 304, "report": "#506", "url": "https://github.com/jlevy/squares/issues/506", "holders": "Francisco Couzo", "printed": "17.929565946849", "rounding": "up"},
+    {"n": 305, "report": "#476", "url": "https://github.com/jlevy/squares/issues/476", "holders": "Francisco Couzo", "reader": "[Couzo exact certificates 2026-10-09]"},
+    {"n": 305, "report": "T-136 (#481)", "url": "https://github.com/jlevy/squares/issues/481", "holders": "Nate Chaoweeraprasit", "result": "T-136", "reader": "[SQUISH third request 2026-10-09]"},
+    {"n": 305, "report": "T-140 (#488)", "url": "https://github.com/jlevy/squares/issues/488", "holders": "Francisco Couzo", "result": "T-140", "reader": "[Couzo certificates 2026-10-10]"},
+    {"n": 305, "report": "#489", "url": "https://github.com/jlevy/squares/issues/489", "holders": "Evan Daniel", "reader": "[Daniel record hunt 3 2026-10-10]"},
+    {"n": 305, "report": "#506", "url": "https://github.com/jlevy/squares/issues/506", "holders": "Francisco Couzo", "printed": "17.950466482138", "rounding": "up"}
+  ],
+  "register": {
+    "title": "Nate Chaoweeraprasit's SQUISH fourth request at aeacc6c, issue500",
+    "headline": "Nine exact rational packings from SQUISH's fourth request",
+    "significance": 3,
+    "source_checks": "The author reports that SQUISH's exact Fraction checker accepts all nine, testing every pair close enough to touch by separating axes and every square against the box, and that David Ellsworth's check_packing.py accepts each 50-digit export at epsilon 1e-50; each certificate was drawn from a 60-digit contact solution with clearance 1e-32, and an hour of nearby search and a deep squeeze moved none by more than 7e-07. Those statements are the author's; no source program ran here.",
+    "credit": "Credit Nate Chaoweeraprasit (https://github.com/itsnaka/squish-certs), using SQUISH and its Mondrian composition method, with the packings the pieces came from as the source names them: Francisco Couzo's s(127) (#451), interlocked with the Kingbird catalogue's s(5) at 176; the Kingbird catalogue's former records at 11, 19 and 182; SQUISH's own s(209) from #401 as refined by Siddharth Gupta and from #481; and SQUISH's earlier unfiled packings of 154, 240, 272 and 305. The source states the solver, its verification and the issue were written with Claude Opus 5.5, and that the Mondrian method was planned and formulated by the author and implemented with it, under his direction.",
+    "next_rung": "Independently review the retained replay, then record source-specific adoption at 176, 181, 238, 239, 270, 271 and 272 with confirming evidence; at 270 and 305 these sides are below T-136's and T-140's, which stay recorded, and at 304 and 305 issue 506's smaller sides, built from these packings, are imported on their own. Final exact-head CI remains required.",
+    "bead": "think-ga3m",
+    "bibliography": {
+      "authors": [
+        "Chaoweeraprasit"
+      ],
+      "lineage": "builds-on-project",
+      "credit": "Chaoweeraprasit after Couzo, Gupta, Ellsworth, Friedman, Levy",
+      "short_credit": "Chaoweeraprasit after Couzo et al.",
+      "note": "Nine complete exact certificates at aeacc6c124df339074f7370e1e010bb6e8c1b5ca from SQUISH's Mondrian composition of pieces of earlier packings, Couzo's, the Kingbird catalogue's and SQUISH's own, one as refined by Gupta, compared against this project's register. Derived exact facts only; no upstream byte is retained. Claude assistance disclosed. No KKT, interval, local or global optimality claim."
+    }
+  }
+}

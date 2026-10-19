@@ -1,0 +1,88 @@
+{
+  "schema": "n17-finite-discriminator-summary/v1",
+  "source_commit": "5e15b712f94b8950f9e87a5e4838efdc1b4bb2d3",
+  "source_files": 25,
+  "all_source_bytes_match": true,
+  "outer_seconds": 10.257993582985364,
+  "cleanup_complete": true,
+  "ordinary_census_admission": false,
+  "global_optimality": false,
+  "phases": [
+    {
+      "argv": [
+        "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+        "-m",
+        "devtools.check_n17_owned_core_guarded_clause",
+        "--descriptor",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-307-owned-core-guarded-clause/descriptor.json",
+        "--max-seconds",
+        "60",
+        "--output",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-307-owned-core-guarded-clause/certificate.json"
+      ],
+      "ended_at": "2026-10-08T03:05:55.902473Z",
+      "name": "construction",
+      "returncode": 0,
+      "started_at": "2026-10-08T03:05:50.573186Z",
+      "status": "completed",
+      "wall_seconds": 5.329125624964945
+    },
+    {
+      "argv": [
+        "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+        "-m",
+        "devtools.check_n17_owned_core_guarded_clause",
+        "--descriptor",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-307-owned-core-guarded-clause/descriptor.json",
+        "--max-seconds",
+        "60",
+        "--certificate",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-307-owned-core-guarded-clause/certificate.json",
+        "--output",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-307-owned-core-guarded-clause/replay.json"
+      ],
+      "ended_at": "2026-10-08T03:06:00.570336Z",
+      "name": "fresh_verification",
+      "returncode": 0,
+      "started_at": "2026-10-08T03:05:55.903268Z",
+      "status": "completed",
+      "wall_seconds": 4.6668201250140555
+    }
+  ],
+  "status": "guarded_clause_verified",
+  "full_payload_equal": true,
+  "fresh_verification_passed": true,
+  "quadratic_checks": 64,
+  "polynomials": 16,
+  "conditional_clauses": [
+    {
+      "closed_interval_union": [
+        [
+          "1/16",
+          "19/32"
+        ]
+      ],
+      "owner": 6
+    },
+    {
+      "closed_interval_union": [
+        [
+          "0",
+          "19/64"
+        ],
+        [
+          "3/8",
+          "35/64"
+        ],
+        [
+          "13/16",
+          "1"
+        ]
+      ],
+      "owner": 18
+    }
+  ],
+  "hand_transport_independently_verified": false,
+  "preregistration_notation_deviation": "The historical prospective shorthand says quadratic minima<=0. That sign direction is a documentation error: the pretarget frozen source and hand contract use MIN of nonnegative clearance slack>=0. Equivalently MAX of its negative<=0, not MIN of the negative<=0. The historical criterion text is preserved. Acceptance here is against that already-frozen source/contract, not the incorrect literal shorthand; no source, threshold or outcome was retuned and no target rerun occurred.",
+  "acceptance_contract": "Frozen source and pretarget hand contract: MIN clearance slack>=0."
+}

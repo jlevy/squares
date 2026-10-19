@@ -1,0 +1,60 @@
+{
+  "schema": "packing.squares:TestFileCosts/2",
+  "shard": null,
+  "provenance": {},
+  "exit_status": 0,
+  "tests": 45,
+  "seconds": 26.139,
+  "files": [
+    {
+      "file": "packing/tests/test_gupta_adoption.py",
+      "tests": 36,
+      "seconds": 22.831
+    },
+    {
+      "file": "packing/tests/test_gupta_refinement_reports.py",
+      "tests": 9,
+      "seconds": 3.308
+    }
+  ],
+  "module_scope": {
+    "requested_files": [
+      "packing/tests/test_gupta_adoption.py",
+      "packing/tests/test_gupta_refinement_reports.py"
+    ],
+    "keyword": "",
+    "markexpr": "",
+    "collection_patterns": {
+      "python_files": [
+        "test_*.py"
+      ],
+      "python_classes": [
+        "Test"
+      ],
+      "python_functions": [
+        "test"
+      ]
+    },
+    "collection_overrides": [],
+    "collection_controls": {
+      "ignore": [],
+      "ignore_glob": [],
+      "deselect": [],
+      "confcutdir": null,
+      "noconftest": false,
+      "pyargs": false,
+      "keepduplicates": false,
+      "lf": false,
+      "stepwise": false,
+      "stepwise_skip": false,
+      "setuponly": false,
+      "setupplan": false,
+      "collectonly": false
+    },
+    "collected_tests": {
+      "packing/tests/test_gupta_adoption.py": 36,
+      "packing/tests/test_gupta_refinement_reports.py": 9
+    },
+    "deselected_tests": 0
+  }
+}

@@ -147,7 +147,7 @@ def test_the_columns_table_has_one_line_a_column() -> None:
     shown has no width."""
     report: list[dict[str, object]] = [
         {
-            "page": "all-results.html",
+            "page": "results.html",
             "width": 1280,
             "table": "site-table.site-results",
             "section": "Every Result",
@@ -174,7 +174,7 @@ def test_the_columns_table_has_one_line_a_column() -> None:
                     "column": "Credit",
                     "width": 102.6,
                     "lines": 9,
-                    "broken": ["Queuingtheorydotcom", "Guzhou0806"],
+                    "broken": ["Ahmed", "Guzhou0806"],
                     "tallest": {"row": "t-048", "height": 238.8, "lines": 9},
                 },
                 {
@@ -213,7 +213,7 @@ def test_the_chips_table_has_one_line_a_kind_of_chip_on_a_surface() -> None:
 
     def chip(kind: str, text: str, block: float, lines: int) -> dict[str, object]:
         return {
-            "page": "all-results.html",
+            "page": "results.html",
             "width": 1280,
             "state": "page",
             "chip": kind,
@@ -334,34 +334,43 @@ SCALE = {"prose": 18, "sans": 19, "support": 18.05, "note": 17.48, "colophon": 1
 
 def _type(link: float | None, tab: float | None, name: float | None = 19) -> dict:
     """A `preview_site/header` report's type: a link's size, a tab's and the name's."""
-    return {"type": {"body": 18, "name": name, "link": link, "tab": tab, "scale": SCALE}}
+    return {
+        "type": {
+            "body": 18,
+            "name": name,
+            "link": link,
+            "tab": tab,
+            "tab_scale": 0.9,
+            "scale": SCALE,
+        }
+    }
 
 
 def test_the_bars_type_is_one_step_under_the_bodys_and_no_more() -> None:
-    """A link in the bar and a section tab are under the prose base and no smaller than
-    the first step of the scale under it, whatever those are in pixels; the two are one
-    size; and the site's name is at least the body's. The sizes the bar had, 16px links
+    """A link in the bar is under the prose base and no smaller than
+    the first step below it; section tabs apply the shared label scale.
+    The site's name is at least the body's. The sizes the bar had, 16px links
     and 14.4px tabs under a 16px name, are each named."""
-    assert type_problems(_type(17.48, 17.48)) == []
+    assert type_problems(_type(17.48, 15.73)) == []
     assert type_problems(_type(17.48, None)) == []
     assert type_problems(_type(None, None, None)) == []
     unscaled = _type(17.48, None)
     unscaled["type"]["scale"] = None
     assert type_problems(unscaled) == []
-    wide = "it should be under the body's 18px and no smaller than the step below it, 17.48px"
+    wide = "it should be under 18px and no smaller than 17.48px"
+    tab = "it should be under 16.2px and no smaller than 15.73px"
     assert type_problems(_type(16, 14.4, 16)) == [
         f"a link in the header is 16px: {wide}",
-        f"a tab in the header is 14.4px: {wide}",
-        "a section tab is 14.4px and a link in the bar 16px",
+        f"a tab in the header is 14.4px: {tab}",
         "the site's name is 16px, under the body's 18px",
     ]
     # The support size is a step of the scale, but not one under the body.
-    assert type_problems(_type(18.05, 18.05)) == [
+    assert type_problems(_type(18.05, 16.25)) == [
         f"a link in the header is 18.05px: {wide}",
-        f"a tab in the header is 18.05px: {wide}",
+        f"a tab in the header is 16.25px: {tab}",
     ]
     # A body of another size moves the step with it.
-    larger = _type(18.05, 18.05, 20)
+    larger = _type(18.05, 16.25, 20)
     larger["type"]["scale"] = {**SCALE, "prose": 19}
     assert type_problems(larger) == []
 
@@ -469,13 +478,10 @@ def _labels(
     *lines: tuple[int, float], name: float | None = 46.8, tabs: float | None = None
 ) -> dict:
     """A `preview_site/baselines` report: two links on each line of the bar, a line given
-    as its top and its baseline, the name's baseline, and two tabs on one of theirs. The
-    name's line is 25px tall, with the mark centred on it."""
+    as its top and its baseline, the name's baseline, and two tabs on one of theirs."""
     words = iter(("Overview", "Results", "Papers", "Frontier"))
     return {
         "name": name,
-        "name_text": name and {"top": name - 18, "bottom": name + 7},
-        "logo": {"top": 32.3, "bottom": 50.3},
         "links": [
             {"label": next(words), "baseline": baseline, "top": top, "current": False}
             for top, baseline in lines
@@ -491,15 +497,13 @@ def _labels(
 def test_the_name_and_the_links_stand_on_one_baseline() -> None:
     """The site's name stands on the baseline of the bar's first line of links, within
     half a pixel, and so does each link beside another; a bar that wraps has a baseline
-    a line. A name set above the links, as it was while the bar's baseline was the foot
-    of its mark, is named with how far; where the name's text is not shown there is
-    nothing to hold it to."""
+    a line. A name set above the links is named with how far; where its text is not shown
+    there is nothing to hold it to."""
     assert baseline_problems(_labels((25, 46.8))) == []
     assert baseline_problems(_labels((25, 46.8), name=47.2, tabs=102.58)) == []
     assert baseline_problems(_labels((22, 40.78), (50, 68.28), name=None, tabs=119.77)) == []
     assert baseline_problems(_labels((29, 51.3), name=47.8)) == [
         "the site's name stands -3.5px off the baseline of the bar's links",
-        "the site's mark is centred -1px off the middle of its name's line",
     ]
     uneven = _labels((25, 46.8), tabs=102.58)
     uneven["links"][1]["baseline"] = 48.0
@@ -532,29 +536,29 @@ def test_a_link_to_a_page_that_moved_is_reported(tmp_path: Path) -> None:
     `render_overview.MOVED_PAGES` is named with the link, from the root or from a
     directory under it. The forwarders themselves and an address off the site are not."""
     moved = [old for old, _ in render_overview.MOVED_PAGES]
-    assert moved[:3] == ["results.html", "status.html", "defects.html"]
+    assert moved[:4] == ["all-results.html", "status.html", "frontier.html", "defects.html"]
     (tmp_path / "result").mkdir()
     for old in moved:
         (tmp_path / old).parent.mkdir(exist_ok=True)
-        (tmp_path / old).write_text('<a href="all-results.html">moved</a>', encoding="utf-8")
-    (tmp_path / "all-results.html").write_text(
-        '<a href="frontier.html#n-11">a row</a>'
-        '<a href="https://example.org/results.html">elsewhere</a>',
+        (tmp_path / old).write_text('<a href="results.html">moved</a>', encoding="utf-8")
+    (tmp_path / "results.html").write_text(
+        '<a href="atlas.html#n-11">a row</a>'
+        '<a href="https://example.org/all-results.html">elsewhere</a>',
         encoding="utf-8",
     )
     assert moved_links(tmp_path) == []
     (tmp_path / "index.html").write_text(
-        '<a href="results.html#next-actions">old</a>'
+        '<a href="all-results.html#next-actions">old</a>'
         '<iframe src="defects.html?view=embed"></iframe>'
-        '<a href="all-results.html#t-060">new</a>',
+        '<a href="results.html#t-060">new</a>',
         encoding="utf-8",
     )
     (tmp_path / "result" / "t-001.html").write_text(
         '<a href="../status.html">old</a>', encoding="utf-8"
     )
     assert moved_links(tmp_path) == [
+        "index.html: all-results.html#next-actions",
         "index.html: defects.html?view=embed",
-        "index.html: results.html#next-actions",
         "result/t-001.html: ../status.html",
     ]
 
@@ -593,25 +597,25 @@ def test_the_builds_are_named_for_what_they_build(
 ) -> None:
     """`--skip` takes a paper by its slug, as everything else names it, and every paper
     of the site is a build (`render_overview.PAPERS`): the first, then the site's pages
-    and the workbench, then each review, built by the renderer the registry names for it
+    and the workbench, then each independent paper, built by its registered renderer
     with its PDF, as its Pages job builds it."""
     from devtools import preview_site  # noqa: PLC0415
 
-    assert preview_site.BUILDS == (
-        "n11-lower-bounds-explainer",
+    independent = tuple(
+        paper
+        for paper in render_overview.PAPERS
+        if paper.slug != render_overview.N11_LOWER_BOUNDS_EXPLAINER
+    )
+    assert independent
+    assert (
+        render_overview.N11_LOWER_BOUNDS_EXPLAINER,
         "pages",
         "workbench",
-        "n11-threshold-bound-review",
-        "n11-optimality-review",
-    )
-    assert (
-        tuple(paper.slug for paper in render_overview.PAPERS[1:]) == preview_site.OTHER_PAPERS
-    )
+        *(paper.slug for paper in independent),
+    ) == preview_site.BUILDS
+    assert tuple(paper.slug for paper in independent) == preview_site.OTHER_PAPERS
     ran: list[tuple[str, ...]] = []
     monkeypatch.setattr(preview_site, "_run", lambda *args: ran.append(args))
-    for slug in preview_site.OTHER_PAPERS:
-        preview_site.build_paper(slug, Path("/site"))
-    assert ran == [
-        ("devtools.render_n11_threshold_bound_review", "--site", "/site", "--pdf"),
-        ("devtools.render_n11_optimality_review", "--site", "/site", "--pdf"),
-    ]
+    for paper in independent:
+        preview_site.build_paper(paper.slug, Path("/site"))
+    assert ran == [(paper.module, "--site", "/site", "--pdf") for paper in independent]

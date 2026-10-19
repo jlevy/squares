@@ -1,0 +1,15 @@
+{"round": 1, "step": 0, "cell": "0", "rows": 64, "live_rows": 64, "splits": 32, "producer": 3.3, "checker": 3.2, "seconds": 7.2}
+{"round": 1, "step": 1, "cell": "1", "rows": 64, "live_rows": 64, "splits": 32, "producer": 6.0, "checker": 6.2, "seconds": 19.4}
+{"round": 1, "step": 2, "cell": "2", "rows": 64, "live_rows": 37, "splits": 32, "producer": 5.4, "checker": 5.4, "seconds": 30.2}
+{"round": 1, "step": 3, "cell": "3", "rows": 64, "live_rows": 14, "splits": 32, "producer": 3.5, "checker": 2.7, "seconds": 36.5}
+{"round": 1, "step": 4, "cell": "4", "rows": 64, "live_rows": 64, "splits": 32, "producer": 11.5, "checker": 10.9, "seconds": 58.9}
+{"round": 1, "step": 5, "cell": "8", "rows": 64, "live_rows": 64, "splits": 32, "producer": 7.4, "checker": 6.5, "seconds": 72.7}
+{"round": 1, "step": 6, "cell": "9", "rows": 64, "live_rows": 64, "splits": 32, "producer": 37.1, "checker": 37.1, "seconds": 146.9}
+{"round": 1, "step": 7, "cell": "10", "rows": 64, "live_rows": 64, "splits": 32, "producer": 63.2, "checker": 18.9, "seconds": 229.0}
+{"round": 1, "step": 8, "cell": "11", "rows": 64, "live_rows": 64, "splits": 32, "producer": 47.8, "checker": 34.0, "seconds": 310.9}
+{"round": 1, "step": 9, "cell": "13", "rows": 64, "live_rows": 64, "splits": 32, "producer": 39.3, "checker": 16.4, "seconds": 366.5}
+{"round": 1, "step": 10, "cell": "15", "rows": 64, "live_rows": 55, "splits": 32, "producer": 35.9, "checker": 7.9, "seconds": 410.4}
+{"round": 1, "worst": 0.785398, "extent": "7.6612e-01", "min_g_extent": 0.07357535676367945, "row_to_extent": 0.2481, "binding": "3", "fine": false, "flat": false, "volume": "5.5328e-01", "live": 618, "splits": 352}
+real 422.24
+user 415.20
+sys 3.24

@@ -1,7 +1,10 @@
 # Proof Verification Consolidation and Independent n11 Completion
 
 **Date:** 2026-09-29\
-**Status:** Reviewed; implementation pending\
+**Status:** Active. T-060 and its verification were integrated in PR #246 on 2026-09-30,
+with lossless evidence compression and shared kernels; packaging, efficiency and
+evidence-storage work remains under think-7nkq (nine checklist items, fourteen open
+beads).\
 **Workflow:** W7 pipeline improvement supporting W2 proof confirmation, with measured W5
 work\
 **Owners:** coordinator; Sol implementation; Astra at max reasoning for mathematical
@@ -83,9 +86,14 @@ The
 [current review](../../reviews/review-2026-09-29-n11-optimality.md#independent-verification-checkpoint)
 records the acceptance boundaries.
 The reviewed Rust rectangle backend is optional: matched exact reports pass, but
-measured rational geometry is slower than Python.
-The weighted mask1155 extension checks 71 owners and 522 rows and adds 131 IDs; its
-complete source-bound receipt is linked from the mathematical review.
+measured rational geometry is slower than Python in the retained comparison.
+The
+[2026-10-19 fixed-work replication](../../research/research-2026-09-30-exact-arithmetic-verifier-performance.md#2026-10-19-default-adoption)
+supports enabling canonical multiplication inside the optional Rust crate, with an
+explicit original reference mode and preserved exact controls.
+Python remains the verifier’s default backend; complete external-certificate throughput
+remains unmeasured. The weighted mask1155 extension checks 71 owners and 522 rows and
+adds 131 IDs; its complete source-bound receipt is linked from the mathematical review.
 Fixed-T local isolation is accepted.
 D4 reduction and near-pose inclusion retain their stated premises.
 The ten-node capture parent graph is structurally checked.
@@ -320,7 +328,7 @@ The user additionally requires reproduction and audit of wand125’s verificatio
 then independent verification at least as fast and effective.
 **think-om8z** owns this work; **think-0jps** owns the reusable comparison tool.
 The
-[process map](../../verification-tooling.md#wand125-verification-process-and-independent-equivalence)
+[process map](../../guides/verification-tooling.md#wand125-verification-process-and-independent-equivalence)
 separates source acquisition, proposals, exact admission, continuous coverage, complete
 angle census, packing deduction and receipt publication.
 
@@ -487,7 +495,7 @@ first-party proof later succeeds.
 - [PR #246 and size audit](https://github.com/jlevy/squares/pull/246#issuecomment-5904217093)
 - [Proof review](../../reviews/review-2026-09-29-n11-optimality.md)
 - [Census/capture contract](../../reviews/review-2026-09-29-n11-optimality-census-contract.md)
-- [Tooling overview](../../verification-tooling.md)
+- [Tooling overview](../../guides/verification-tooling.md)
 - [Session 164](../../../../packing/campaign/agent-sessions/session-164-upstream-merge-and-certification.md)
 - [Validation tiers](../../../../development.md#validation-tiers)
 

@@ -1,0 +1,261 @@
+{
+  "schema": "k17-statement-comparison/v1",
+  "inputs": {
+    "edition_statement": {
+      "path": "STATEMENT.md",
+      "sha256": "dd73365b0681f0efb00e351f89a1dcb1f80a8e758d44563b1e5e81f851521870"
+    },
+    "edition_seed": {
+      "path": "upper-packing-certificate.json",
+      "sha256": "24e296f5995abc9424e2d8d39ea0a8e44953b919430a04f006fa84c56fef45f7"
+    },
+    "exp237_certificate": {
+      "path": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-237-n17-polynomial-root/run-001/certificate.json",
+      "sha256": "883f51b994c19476908353781cb4c1b8f8da68deaa484a2e8f192cc56d809057"
+    },
+    "exp237_checker": {
+      "path": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-237-n17-polynomial-root/run-001/checker.json",
+      "sha256": "f6f2dc98c86d6b60c7ab110b25bed604263df19833e66f05f20c07eeebc27242"
+    },
+    "exp245_receipt": {
+      "path": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-245-n17-catalogue-polynomial/run-001/receipt.json",
+      "sha256": "b11169edf0633d8ca8f17829b48cde73ccc8ba0abdd51a8e10d8c7bf9d91d948"
+    },
+    "case_record": {
+      "path": "packing/frontier/n-017.md",
+      "sha256": "d158b16ab9d5b86f449c7acf9bb9ddfa056bb5325bad27ecb226d173626b28c6"
+    },
+    "retained_seed": {
+      "path": "packing/resources/web/n17-kleddamag-certified-bound-2026-09-21/kleddamag-17-squares-certified-bound/upper-packing-certificate.json",
+      "sha256": "24e296f5995abc9424e2d8d39ea0a8e44953b919430a04f006fa84c56fef45f7"
+    },
+    "comparison_program_sha256": "50290901c3c48f471533e9f75f3168b4d5a96347b7e9dd3b2774aad2fb264a24"
+  },
+  "statement": {
+    "t0": "362043893314323383453621978739944164218293243036741520638379/1000000000000000000000000000000000000000000000000000000000000",
+    "b0": "330948674722739910429808533282915634174672003999685385633441/1000000000000000000000000000000000000000000000000000000000000",
+    "radius": "1/1000000000000",
+    "F": [
+      [
+        0,
+        1,
+        "1"
+      ],
+      [
+        1,
+        0,
+        "1"
+      ],
+      [
+        1,
+        1,
+        "-1"
+      ],
+      [
+        1,
+        2,
+        "-3"
+      ],
+      [
+        2,
+        0,
+        "-3"
+      ],
+      [
+        2,
+        2,
+        "1"
+      ],
+      [
+        3,
+        0,
+        "-1"
+      ],
+      [
+        3,
+        2,
+        "-1"
+      ],
+      [
+        4,
+        0,
+        "-1"
+      ],
+      [
+        4,
+        1,
+        "-1"
+      ],
+      [
+        4,
+        2,
+        "-1"
+      ],
+      [
+        5,
+        1,
+        "1"
+      ]
+    ],
+    "G": [
+      [
+        0,
+        1,
+        "-1"
+      ],
+      [
+        0,
+        2,
+        "4"
+      ],
+      [
+        0,
+        3,
+        "-1"
+      ],
+      [
+        1,
+        1,
+        "3"
+      ],
+      [
+        1,
+        2,
+        "-2"
+      ],
+      [
+        1,
+        3,
+        "-5"
+      ],
+      [
+        1,
+        4,
+        "2"
+      ],
+      [
+        2,
+        1,
+        "-4"
+      ],
+      [
+        2,
+        2,
+        "-2"
+      ],
+      [
+        2,
+        3,
+        "4"
+      ],
+      [
+        2,
+        4,
+        "2"
+      ],
+      [
+        3,
+        0,
+        "-2"
+      ],
+      [
+        3,
+        2,
+        "2"
+      ],
+      [
+        4,
+        0,
+        "-2"
+      ],
+      [
+        4,
+        1,
+        "1"
+      ],
+      [
+        4,
+        2,
+        "-2"
+      ],
+      [
+        4,
+        3,
+        "1"
+      ],
+      [
+        5,
+        1,
+        "1"
+      ],
+      [
+        5,
+        3,
+        "1"
+      ]
+    ],
+    "side_map": "L = (6 + 4t*)/(1 + 2t* - t*^2)",
+    "L_enclosure": [
+      "4.67553009360455095163",
+      "4.67553009360455095164"
+    ]
+  },
+  "ours": {
+    "exp237_contraction_norm_q_below": "0.000000000065",
+    "exp237_inclusion_bounds_below": [
+      "9.859231e-24",
+      "6.525346e-23"
+    ],
+    "tight_t_range_decimal": [
+      "0.3620438933143233834536121195091600352379",
+      "0.3620438933143233834536318379707282931985"
+    ],
+    "L_outward_from_tight_t_range": [
+      "4.6755300936045509516340991054974125294248",
+      "4.6755300936045509516341234354688807681093"
+    ],
+    "L_width_from_tight_t_range": "2.433e-23",
+    "exp245_S_star_enclosure": [
+      "4.675530093604550951634111270483146648767132843",
+      "4.675530093604550951634111270483146648767231809"
+    ],
+    "exp245_S_star_enclosure_width": "9.897e-41",
+    "exp237_checker_verification_passed": true
+  },
+  "record": {
+    "verified_upper_bound_value": "4.6755300936045509516342148538535054",
+    "verified_upper_bound_exact_form": "23377650468022754758171074269267527/5000000000000000000000000000000000",
+    "verified_upper_bound_evidence": [
+      "E-n017-certified-endpoint"
+    ],
+    "ceiling_minus_L_upper": "1.035834e-22",
+    "ceiling_minus_L_lower": "1.035834e-22",
+    "reported_upper_bound_value": "4.67553009360455",
+    "catalogue_decimal_minus_L": "-9.516341e-16",
+    "reported_lower_bound": "18641771/4000000",
+    "verified_lower_bound": "18641771/4000000",
+    "gap_L_minus_verified_lower": "0.015087343605"
+  },
+  "checks": {
+    "statement_sha256_matches_manifest": true,
+    "F_equals_our_first_chart_polynomial": true,
+    "G_equals_our_second_chart_polynomial": true,
+    "t0_b0_equal_exp237_box_midpoint": true,
+    "rectangle_radius_equals_exp237_radius": true,
+    "exp237_certificate_and_checker_passed": true,
+    "exp237_inclusion_strictly_inside_box": true,
+    "exp237_contraction_norm_below_one": true,
+    "side_denominator_positive_on_tight_t_range": true,
+    "L_enclosure_strictly_inside_statement_enclosure": true,
+    "exp245_S_star_enclosure_inside_tight_L_enclosure": true,
+    "exp245_S_star_enclosure_inside_statement_enclosure": true,
+    "exp245_verdict_identical_and_irreducible": true,
+    "verified_upper_value_is_exact_form": true,
+    "L_strictly_below_verified_ceiling": true,
+    "ceiling_minus_L_below_1e-16": true,
+    "catalogue_decimal_within_1e-15_of_L": true,
+    "L_above_record_lower_bounds": true,
+    "edition_seed_identical_to_retained_seed": true
+  },
+  "verdict": "AGREES"
+}

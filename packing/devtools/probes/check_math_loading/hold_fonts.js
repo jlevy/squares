@@ -13,18 +13,36 @@
   const control = /** @type {SquaresMathLoadControl} */ ({
     heldLoads: 0,
     released: false,
+    timing: {
+      started: performance.now(),
+      firstFontCall: null,
+      firstHeldLoad: null,
+      domContentLoaded: null,
+      earlyEventsStarted: null,
+      earlyEventsCompleted: null,
+      released: null,
+    },
     release() {
+      this.timing.released = performance.now();
       this.released = true;
       release();
     },
   });
   globalThis.__mathLoadControl = control;
+  document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+      control.timing.domContentLoaded = performance.now();
+    },
+    { once: true },
+  );
   const fontSet = Object.getPrototypeOf(document.fonts),
     loadSet = fontSet.load;
   control.nativeLoad = loadSet.bind(document.fonts);
   // Some pinned Chromium versions have no global FontFaceSet constructor.
   /** @param {Parameters<FontFaceSet["load"]>} args */
   fontSet.load = function (...args) {
+    control.timing.firstFontCall ??= performance.now();
     const promise = loadSet.apply(this, args);
     if (control.released) {
       return promise;
@@ -34,16 +52,19 @@
         return faces;
       }
       control.heldLoads++;
+      control.timing.firstHeldLoad ??= performance.now();
       return gate.then(() => faces);
     });
   };
   const loadFace = FontFace.prototype.load;
   /** @this {FontFace} @param {unknown[]} args */
   FontFace.prototype.load = function (...args) {
+    control.timing.firstFontCall ??= performance.now();
     if (control.released) {
       return loadFace.apply(this, /** @type {[]} */ (args));
     }
     control.heldLoads++;
+    control.timing.firstHeldLoad ??= performance.now();
     return gate.then(() => loadFace.apply(this, /** @type {[]} */ (args)));
   };
 };

@@ -1,0 +1,14 @@
+{
+  "schema": "n17-conditional-owned-hull-gate/v1",
+  "finite_reconstruction_verified": true,
+  "status": "conditional_gain_candidate",
+  "certificate_sha256": "48fb1f11ba20aefc97a3fcffb4d4072768c0608f289c23858a204abd55c77590",
+  "producer_run": false,
+  "root_checked_now": false,
+  "parent_geometry_replayed": false,
+  "conditional_owned_exclusion": false,
+  "global_optimality_proved": false,
+  "provenance": {"revision":"3fb9b8e6f09a69410fe97e13080b6f06df2f46c1","dirty":false,"files":{"packing/devtools/probe_n17_conditional_owned_hull.py":"5d0402637370f5aa7b8cd65ea3092a4f308b42e4"}},
+  "invocation": {"argv":["--descriptor","campaign/series/series-000-smoke-and-calibration/results/exp-282-conditional-owned-hull-scoped-input/descriptor.json","--max-seconds","60","--check","campaign/series/series-000-smoke-and-calibration/results/exp-282-conditional-owned-hull-scoped-input/certificate.json","--output","campaign/series/series-000-smoke-and-calibration/results/exp-282-conditional-owned-hull-scoped-input/replay.json"],"executable":"/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python","max_seconds":60.0},
+  "census_admission_proved": false
+}

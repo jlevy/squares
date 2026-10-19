@@ -1,0 +1,12 @@
+{
+  "combined_resource_guard": "external supervisor; no internal wall/RSS guard",
+  "manifest": "campaign/series/series-000-smoke-and-calibration/results/exp-311-c2-full-replay/execution-manifest.json",
+  "manifest_sha256": "5eb16198b8c5fa36c066110b45a45db9dca5ab85d4388192b5eafc9bd9e7d65c",
+  "phases": [{"argv":["/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python","-m","devtools.verify_n17_bb_certificate","/Volumes/spud-ext1/agent-scratch/n17-six-hour-01a114fb/published-C2-cache/packing/campaign/retained/session-186-n17-issue358-readiness/C2","--manifest","505d611c98703789d574ad2ad0311b12f57fdd59124863c8dc444377a19d7e57","--progress","--output","/Users/levy/wrk/github/squares/packing/campaign/series/series-000-smoke-and-calibration/results/exp-311-c2-full-replay/full-receipt.json"],"name":"C2-FULL-unsampled","returncode":null,"started_at":"2026-10-08T04:50:05.145904Z","status":"running","wall_seconds":null}],
+  "schema": "registered-phase-execution/v1",
+  "scientific_result_interpreted": false,
+  "started_at": "2026-10-08T04:50:05.145567Z",
+  "status": "running",
+  "unstarted_phase_names": []
+}
+

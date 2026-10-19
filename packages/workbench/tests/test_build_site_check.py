@@ -80,7 +80,7 @@ def test_check_runs_two_builds_at_once_into_distinct_directories(
     assert {(call.revision, call.dirty) for call in fake.calls} == {(REVISION, False)}
     # The builder's own default for both, so the twins read one citation file.
     assert {call.citations for call in fake.calls} == {None}
-    assert "deterministic, self-contained" in capsys.readouterr().out
+    assert "deterministic, linked assets" in capsys.readouterr().out
 
 
 def test_check_gives_both_builds_the_same_citations(
@@ -121,3 +121,21 @@ def test_check_publishes_the_page_only_under_out(
         Path("site/index.html"),
     ]
     assert (out / "index.html").read_text(encoding="utf-8") == "<html></html>"
+
+
+def test_check_compares_data_and_assets_even_when_html_is_identical(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    out = tmp_path / "site"
+    fake = FakeBuild(out, published="same HTML", twin="same HTML")
+
+    def differing_assets(into: Path, **_kwargs: object) -> str:
+        html = fake(into, revision=REVISION, dirty=False)
+        resource = into / "data/corpus.json"
+        resource.parent.mkdir()
+        resource.write_text("first" if into == out else "second", encoding="utf-8")
+        return html
+
+    monkeypatch.setattr(build_site, "build", differing_assets)
+    with pytest.raises(ValueError, match="emitted files differ"):
+        build_site.check_builds(out, revision=REVISION, dirty=False)

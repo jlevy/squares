@@ -1,0 +1,102 @@
+{
+ "builds": {
+  "axis": {
+   "argv": [
+    "g++",
+    "-O3",
+    "-std=c++17",
+    "-fno-fast-math",
+    "-ffp-contract=off",
+    "verifier/axis_integer_grid.cpp",
+    "-o",
+    "axis"
+   ],
+   "binary_sha256": "19288b2f9bcb1cfa86a0bde9db1e1fbb79d43dc8044bc7243af8f6ad405899af",
+   "cpu_seconds": 1.486,
+   "exit_code": 0,
+   "loadavg_after": [
+    7.69,
+    5.77,
+    5.17
+   ],
+   "loadavg_before": [
+    7.69,
+    5.77,
+    5.17
+   ],
+   "started_utc": "2026-10-12T06:48:30+00:00",
+   "stderr": "",
+   "stdout": "",
+   "wall_seconds": 2.192
+  },
+  "pose": {
+   "argv": [
+    "g++",
+    "-O3",
+    "-std=c++17",
+    "-fno-fast-math",
+    "-ffp-contract=off",
+    "verifier/continuous_pose.cpp",
+    "-o",
+    "continuous"
+   ],
+   "binary_sha256": "69bc9e6485102d3636db5377884ba6304f749be94d6ca913d82d80108f1ed4ab",
+   "cpu_seconds": 2.586,
+   "exit_code": 0,
+   "loadavg_after": [
+    7.69,
+    5.77,
+    5.17
+   ],
+   "loadavg_before": [
+    7.75,
+    5.75,
+    5.16
+   ],
+   "started_utc": "2026-10-12T06:48:25+00:00",
+   "stderr": "",
+   "stdout": "",
+   "wall_seconds": 4.89
+  },
+  "rounding": {
+   "argv": [
+    "g++",
+    "-O3",
+    "-std=c++17",
+    "-fno-fast-math",
+    "-ffp-contract=off",
+    "-I",
+    "verifier",
+    "tests/rounding_harness.cpp",
+    "-o",
+    "rounding"
+   ],
+   "binary_sha256": "81f15ab01acc6b83da063f0bc824cdf75452611467437e12b0a04f0bdb08be37",
+   "cpu_seconds": 2.73,
+   "exit_code": 0,
+   "loadavg_after": [
+    7.56,
+    5.78,
+    5.17
+   ],
+   "loadavg_before": [
+    7.69,
+    5.77,
+    5.17
+   ],
+   "started_utc": "2026-10-12T06:48:32+00:00",
+   "stderr": "In file included from tests/rounding_harness.cpp:4:\nverifier/continuous_pose.cpp: In function \u2018int continuous_entry(int, char**)\u2019:\nverifier/continuous_pose.cpp:195:1: warning: control reaches end of non-void function [-Wreturn-type]\n  195 | }\n      | ^\n",
+   "stdout": "",
+   "wall_seconds": 4.063
+  }
+ },
+ "compiler": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+ "compiler_version": "13.3.0",
+ "cwd": "a copy of the retained verifier/ and tests/ files, at their upstream paths",
+ "kind": "continuous-pose-replay-builds/v1",
+ "sources": {
+  "tests/rounding_harness.cpp": "96bd022242b4c0e44ff3eb27a8294d3d359bc74263f898e350768eeb78fdfc9f",
+  "verifier/axis_integer_grid.cpp": "f5bc3f60065aaea3d14ffb8465865750fca22cf8bbc6bd8739b5120200b6277d",
+  "verifier/continuous_pose.cpp": "da06206b8e83a57b8a710ba62e743c6d3a1959e9160ff32ae89ede583841c73c"
+ }
+}

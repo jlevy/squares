@@ -55,6 +55,14 @@ type JsonRecord = dict[str, Any]
 
 EXPECTED_PARAMETERS = 14
 
+#: The readiness delay the `delayed` fixture starts as its math runtime arrives.
+INJECTED_DELAY_MS = 300
+#: How much of that delay the self-test must see. Half of it is ten times the 15 ms an
+#: undelayed fixture takes once warm, and leaves the other half to frame and timer jitter.
+DELAY_EVIDENCE_MS = 150
+#: The positive controls that load the same fixture with nothing delayed.
+UNDELAYED_CONTROLS = ("control", "no-warmup", "variants")
+
 #: The probes this module hands the page, one file each under `probes/`.
 PROBES = Path(__file__).resolve().parent / "probes"
 
@@ -346,6 +354,43 @@ dt, dd {height:24px; margin:0} dt {float:left; width:240px} dd {width:480px}
     )
 
 
+def delay_findings(observations: Mapping[str, JsonRecord]) -> list[str]:
+    """Require the delayed fixture's readiness to show most of its injected delay.
+
+    Each control launches a fresh browser, and launch cost lands before the page's own
+    script runs. In one hosted self-test the first two launches reached readiness at 173
+    and 125 ms where every later undelayed load took about 15 ms, so a comparison with
+    the first control alone saw 144 of the 300 ms. That cost only ever adds time, so the
+    undelayed baseline is the fastest undelayed control. The same cost on the delayed
+    load cannot stand in for the delay either: its readiness must also trail the arrival
+    of its own math runtime, where the fixture starts the delay, by the same margin.
+    """
+
+    def milestone(control: str, name: str) -> float | None:
+        value = observations.get(control, {}).get("metrics", {}).get(name)
+        return value if isinstance(value, (int, float)) and math.isfinite(value) else None
+
+    stem = f"the delayed control did not record the known {INJECTED_DELAY_MS} ms delay"
+    ready = milestone("delayed", "parameters_ready_ms")
+    runtime = milestone("delayed", "runtime_available_ms")
+    undelayed = {
+        control: value
+        for control in UNDELAYED_CONTROLS
+        if (value := milestone(control, "parameters_ready_ms")) is not None
+    }
+    if ready is None or runtime is None or not undelayed:
+        return [f"{stem}: a readiness or runtime milestone is missing"]
+    fastest = min(undelayed, key=undelayed.__getitem__)
+    findings: list[str] = []
+    if ready - undelayed[fastest] < DELAY_EVIDENCE_MS:
+        findings.append(
+            f"{stem}: ready at {ready:g} ms against {undelayed[fastest]:g} ms for {fastest}"
+        )
+    if ready - runtime < DELAY_EVIDENCE_MS:
+        findings.append(f"{stem}: ready {ready - runtime:g} ms after its math runtime arrived")
+    return findings
+
+
 def self_test(
     *, browser_name: BrowserName = "chromium", mode: MeasurementMode = "full"
 ) -> JsonRecord:
@@ -390,10 +435,8 @@ def self_test(
             or duration < 0
         ):
             findings.append(f"{control}: missing final-validation cost")
+    findings.extend(delay_findings(observations))
     baseline = observations["control"]["metrics"]
-    delayed = observations["delayed"]["metrics"]
-    if delayed.get("parameters_ready_ms", 0) - baseline.get("parameters_ready_ms", 0) < 150:
-        findings.append("the delayed control did not record the known 300 ms delay")
     if mode == "full":
         changed = observations["width-change"]
         if baseline.get("anchor_max_displacement_px", math.inf) > 0.1:

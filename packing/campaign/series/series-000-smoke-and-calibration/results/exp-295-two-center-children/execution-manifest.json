@@ -1,0 +1,74 @@
+{
+  "schema": "registered-phase-command-plan/v1",
+  "registered_at": "2026-10-07T20:58:54.849370+00:00",
+  "source_freeze": "registrationcommitresolved/recordedatlaunch",
+  "target_unrun": true,
+  "phases": [
+    {
+      "name": "construction",
+      "argv": [
+        "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+        "-m",
+        "devtools.check_n17_two_center_children",
+        "--descriptor",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-295-two-center-children/descriptor.json",
+        "--max-seconds",
+        "180",
+        "--output",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-295-two-center-children/certificate.json"
+      ]
+    },
+    {
+      "name": "fresh_verification",
+      "argv": [
+        "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+        "-m",
+        "devtools.check_n17_two_center_children",
+        "--descriptor",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-295-two-center-children/descriptor.json",
+        "--max-seconds",
+        "180",
+        "--certificate",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-295-two-center-children/certificate.json",
+        "--output",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-295-two-center-children/replay.json"
+      ]
+    }
+  ],
+  "primary_criterion": "Construction and independent fresh reconstruction return criterion_met=true after both point children and both h=1/512 regional children close. The selector minimizes the worst child aggregate bounding-box squared diagonal among the ten empty-owned-set foreign owners and two coordinate midpoint cuts, with owner then x/y tie breaks. Both closed halves retain equality, all rows and angular seams. Exact empty full-owner cover or shared strictly owned point closes each child. Accepted exp293 point hulls and owned sets are byte-bound explicit premises; a regional phase freshly reconstructs original-parent conditional domains and uses the identical selected owner, axis and cut. Point miss skips region by fixed-cut monotonicity; one closed point child is only a scoped secondary branch result. Full new mathematical payloads agree fresh, all original endpoint and custody controls hold, and no limit/refusal is accepted as a negative result. No global capture, census admission, whole-I exclusion or packing claim follows.",
+  "budget": "One worker; construction180s plus fresh180s, TERM360s/KILL370s outer ceiling; sampled4096MiB currentRSS per live owned process. Descriptor10MiB, each inherited receipt64MiB, new output64MiB. New selector/child cumulative limits:2097152 generated clip vertices,16M recovery support products,2M strict vertex pairs/8M quadratic minima,2M intersection pairs; each domain1024/owned set2048/intersection4096 vertices;4096-bit geometry. Original conditional reconstruction keeps its separate frozen counters and native/input ceilings. No producer or altered standing primitive.",
+  "runner_argv": [
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-m",
+    "devtools.run_registered_phases",
+    "--manifest",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-295-two-center-children/execution-manifest.json",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-295-two-center-children/phase-execution.json"
+  ],
+  "supervisor_argv": [
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-m",
+    "devtools.supervise_posix",
+    "--max-seconds",
+    "360",
+    "--max-memory-mib",
+    "4096",
+    "--sample-seconds",
+    "0.25",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-295-two-center-children/supervision.json",
+    "--stdout",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-295-two-center-children/stdout.log",
+    "--stderr",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-295-two-center-children/stderr.log",
+    "--",
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-m",
+    "devtools.run_registered_phases",
+    "--manifest",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-295-two-center-children/execution-manifest.json",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-295-two-center-children/phase-execution.json"
+  ]
+}

@@ -1,0 +1,178 @@
+[
+  {
+    "experiment": "exp-273",
+    "frozen_manifest_retained": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-273-tail-a-dependency-inventory/execution-manifest.json",
+    "scientific_commands": [
+      {
+        "receipt": "inventory.json",
+        "frozen_argv": [
+          "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python3",
+          "-m",
+          "devtools.audit_n17_certificate_dependencies",
+          "--saved",
+          "campaign/explorations/X048-session-168-pilots/certificates/s184-tail-a-m3096311",
+          "--standing-receipt",
+          "campaign/explorations/X048-session-168-pilots/certificates/s184-tail-a-m3096311/verification.json",
+          "--max-seconds",
+          "90",
+          "--max-facts",
+          "25000",
+          "--max-edges",
+          "500000",
+          "--max-node-bytes",
+          "536870912",
+          "--max-decoded-node-bytes",
+          "2147483648",
+          "--max-output-bytes",
+          "67108864",
+          "--output",
+          "campaign/series/series-000-smoke-and-calibration/results/exp-273-tail-a-dependency-inventory/inventory.json"
+        ],
+        "actual_module_argv": [
+          "--saved",
+          "campaign/explorations/X048-session-168-pilots/certificates/s184-tail-a-m3096311",
+          "--standing-receipt",
+          "campaign/explorations/X048-session-168-pilots/certificates/s184-tail-a-m3096311/verification.json",
+          "--max-seconds",
+          "90",
+          "--max-facts",
+          "25000",
+          "--max-edges",
+          "500000",
+          "--max-node-bytes",
+          "536870912",
+          "--max-decoded-node-bytes",
+          "2147483648",
+          "--max-output-bytes",
+          "67108864",
+          "--output",
+          "campaign/series/series-000-smoke-and-calibration/results/exp-273-tail-a-dependency-inventory/inventory.json"
+        ],
+        "unchanged": true
+      },
+      {
+        "receipt": "fresh-inventory.json",
+        "frozen_argv": [
+          "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python3",
+          "-m",
+          "devtools.audit_n17_certificate_dependencies",
+          "--saved",
+          "campaign/explorations/X048-session-168-pilots/certificates/s184-tail-a-m3096311",
+          "--standing-receipt",
+          "campaign/explorations/X048-session-168-pilots/certificates/s184-tail-a-m3096311/verification.json",
+          "--max-seconds",
+          "90",
+          "--max-facts",
+          "25000",
+          "--max-edges",
+          "500000",
+          "--max-node-bytes",
+          "536870912",
+          "--max-decoded-node-bytes",
+          "2147483648",
+          "--max-output-bytes",
+          "67108864",
+          "--output",
+          "campaign/series/series-000-smoke-and-calibration/results/exp-273-tail-a-dependency-inventory/fresh-inventory.json"
+        ],
+        "actual_module_argv": [
+          "--saved",
+          "campaign/explorations/X048-session-168-pilots/certificates/s184-tail-a-m3096311",
+          "--standing-receipt",
+          "campaign/explorations/X048-session-168-pilots/certificates/s184-tail-a-m3096311/verification.json",
+          "--max-seconds",
+          "90",
+          "--max-facts",
+          "25000",
+          "--max-edges",
+          "500000",
+          "--max-node-bytes",
+          "536870912",
+          "--max-decoded-node-bytes",
+          "2147483648",
+          "--max-output-bytes",
+          "67108864",
+          "--output",
+          "campaign/series/series-000-smoke-and-calibration/results/exp-273-tail-a-dependency-inventory/fresh-inventory.json"
+        ],
+        "unchanged": true
+      }
+    ],
+    "operational_naming_deltas": {
+      "--output": {
+        "frozen": "campaign/series/series-000-smoke-and-calibration/results/exp-273-tail-a-dependency-inventory/supervision.json",
+        "actual": "campaign/series/series-000-smoke-and-calibration/results/exp-273-tail-a-dependency-inventory/exp273-supervision.json"
+      },
+      "--stdout": {
+        "frozen": "campaign/series/series-000-smoke-and-calibration/results/exp-273-tail-a-dependency-inventory/stdout.log",
+        "actual": "campaign/series/series-000-smoke-and-calibration/results/exp-273-tail-a-dependency-inventory/exp273-stdout.log"
+      },
+      "--stderr": {
+        "frozen": "campaign/series/series-000-smoke-and-calibration/results/exp-273-tail-a-dependency-inventory/stderr.log",
+        "actual": "campaign/series/series-000-smoke-and-calibration/results/exp-273-tail-a-dependency-inventory/exp273-stderr.log"
+      }
+    },
+    "owned_command_matches": true,
+    "limits_match": true,
+    "interpretation": "Scientific argv/input/custody unchanged. Actual supervision/stdout/stderr filenames use expNNN prefix. Frozen prelaunch manifest remains untouched; retain this explicit execution delta with actual receipts.",
+    "supervision_actual": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-273-tail-a-dependency-inventory/exp273-supervision.json"
+  },
+  {
+    "experiment": "exp-275",
+    "frozen_manifest_retained": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-275-capture-cap-root-join/execution-manifest.json",
+    "scientific_commands": [
+      {
+        "receipt": "certificate.json",
+        "frozen_argv": [
+          "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python3",
+          "-m",
+          "devtools.check_n17_capture_cap",
+          "--output",
+          "campaign/series/series-000-smoke-and-calibration/results/exp-275-capture-cap-root-join/certificate.json"
+        ],
+        "actual_module_argv": [
+          "--output",
+          "campaign/series/series-000-smoke-and-calibration/results/exp-275-capture-cap-root-join/certificate.json"
+        ],
+        "unchanged": true
+      },
+      {
+        "receipt": "replay.json",
+        "frozen_argv": [
+          "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python3",
+          "-m",
+          "devtools.check_n17_capture_cap",
+          "--certificate",
+          "campaign/series/series-000-smoke-and-calibration/results/exp-275-capture-cap-root-join/certificate.json",
+          "--output",
+          "campaign/series/series-000-smoke-and-calibration/results/exp-275-capture-cap-root-join/replay.json"
+        ],
+        "actual_module_argv": [
+          "--certificate",
+          "campaign/series/series-000-smoke-and-calibration/results/exp-275-capture-cap-root-join/certificate.json",
+          "--output",
+          "campaign/series/series-000-smoke-and-calibration/results/exp-275-capture-cap-root-join/replay.json"
+        ],
+        "unchanged": true
+      }
+    ],
+    "operational_naming_deltas": {
+      "--output": {
+        "frozen": "campaign/series/series-000-smoke-and-calibration/results/exp-275-capture-cap-root-join/supervision.json",
+        "actual": "campaign/series/series-000-smoke-and-calibration/results/exp-275-capture-cap-root-join/exp275-supervision.json"
+      },
+      "--stdout": {
+        "frozen": "campaign/series/series-000-smoke-and-calibration/results/exp-275-capture-cap-root-join/stdout.log",
+        "actual": "campaign/series/series-000-smoke-and-calibration/results/exp-275-capture-cap-root-join/exp275-stdout.log"
+      },
+      "--stderr": {
+        "frozen": "campaign/series/series-000-smoke-and-calibration/results/exp-275-capture-cap-root-join/stderr.log",
+        "actual": "campaign/series/series-000-smoke-and-calibration/results/exp-275-capture-cap-root-join/exp275-stderr.log"
+      }
+    },
+    "owned_command_matches": true,
+    "limits_match": true,
+    "interpretation": "Scientific argv/input/custody unchanged. Actual supervision/stdout/stderr filenames use expNNN prefix. Frozen prelaunch manifest remains untouched; retain this explicit execution delta with actual receipts.",
+    "supervision_actual": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-275-capture-cap-root-join/exp275-supervision.json"
+  }
+]

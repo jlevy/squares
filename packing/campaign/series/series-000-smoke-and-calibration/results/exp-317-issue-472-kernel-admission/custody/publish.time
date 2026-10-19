@@ -1,0 +1,23 @@
+	Command being timed: ".venv/bin/python3 -m devtools.hosted_data publish --manifest hosted/n17-issue-472-kernel-certificates.yaml"
+	User time (seconds): 3.78
+	System time (seconds): 6.42
+	Percent of CPU this job got: 12%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:19.27
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 46324
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 16
+	Minor (reclaiming a frame) page faults: 248030
+	Voluntary context switches: 69008
+	Involuntary context switches: 1697
+	Swaps: 0
+	File system inputs: 807224
+	File system outputs: 804584
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

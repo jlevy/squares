@@ -1,0 +1,89 @@
+{
+  "schema": "registered-phase-command-plan/v1",
+  "target_unrun": true,
+  "registration_state": "registered_before_target",
+  "working_directory": "packing",
+  "phases": [
+    {
+      "name": "construction",
+      "argv": [
+        "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+        "-m",
+        "devtools.check_n17_case_preserving_owned_propagation",
+        "--descriptor",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-305-case-preserving-owned-propagation/descriptor.json",
+        "--max-seconds",
+        "180",
+        "--output",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-305-case-preserving-owned-propagation/certificate.json"
+      ]
+    },
+    {
+      "name": "fresh_verification",
+      "argv": [
+        "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+        "-m",
+        "devtools.check_n17_case_preserving_owned_propagation",
+        "--descriptor",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-305-case-preserving-owned-propagation/descriptor.json",
+        "--max-seconds",
+        "180",
+        "--certificate",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-305-case-preserving-owned-propagation/certificate.json",
+        "--output",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-305-case-preserving-owned-propagation/replay.json"
+      ]
+    }
+  ],
+  "runner_argv": [
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-m",
+    "devtools.run_registered_phases",
+    "--manifest",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-305-case-preserving-owned-propagation/execution-manifest.json",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-305-case-preserving-owned-propagation/phase-execution.json"
+  ],
+  "supervisor_argv": [
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-m",
+    "devtools.supervise_posix",
+    "--max-seconds",
+    "360",
+    "--max-memory-mib",
+    "4096",
+    "--sample-seconds",
+    "0.25",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-305-case-preserving-owned-propagation/supervision.json",
+    "--stdout",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-305-case-preserving-owned-propagation/stdout.log",
+    "--stderr",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-305-case-preserving-owned-propagation/stderr.log",
+    "--",
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-m",
+    "devtools.run_registered_phases",
+    "--manifest",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-305-case-preserving-owned-propagation/execution-manifest.json",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-305-case-preserving-owned-propagation/phase-execution.json"
+  ],
+  "resources": {
+    "construction_seconds": 180,
+    "fresh_seconds": 180,
+    "combined_term_seconds": 360,
+    "combined_kill_seconds": 370,
+    "sampled_memory_mib_per_live_process": 4096,
+    "memory_scope": "per_live_process_in_owned_group",
+    "workers": 1,
+    "output_bytes": 67108864,
+    "shared_recovery_support_products": 32000000,
+    "shared_strict_vertex_pairs": 4000000,
+    "shared_strict_quadratic_checks": 16000000,
+    "shared_owned_intersection_products": 4000000
+  },
+  "criterion": "Bind accepted302 complete descriptor/certificate/fresh replay, preserve BOTH correlated closed cases and every original typed992 row flag. In EACH open case apply its proved row exclusions, recover ALL16 foreign groups simultaneously at fixedowner0Q0, then run ONE complete992 self-excluded collective pass with no feedback. Union surviving-case covers BEFORE comparing every owner with accepted302 combined baseline; oldowner6 loss15/32 andowner18 loss11/32 nevercountagain. Primary strict additional exact half-angle UNION loss for anyowner or closure of BOTH cases. One-case gain/closure alone does not count. Full fresh payload/custody equality and every case/group/row accounted; finite limits precharged. Complete no-gain is an unchanged-method miss and stops this operator. No new split, globalcapture, endpoint substitution, ordinarycensus or bound claim. Partial/resource/refusal is unresolved.",
+  "source_freeze": "reviewedsourcecommit/bytesresolvedatlaunch",
+  "registered_at": "2026-10-08T02:37:01.236330+00:00"
+}

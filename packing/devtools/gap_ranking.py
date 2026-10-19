@@ -1,14 +1,20 @@
 #!/usr/bin/env python3
 """Rank every open case by its verified gap: reported upper minus verified lower.
 
+A case is open when its verified `status` is, whatever its `reported_status` says: a
+report can close a case whose verified lane stays open, and such a case keeps its row
+(D-520).
+
 `BC-088`'s entry recorded the impression that this gap "is about 0.5 for every open
-case", so ranking by it ranks nothing (D-405). Measured, the spread is a factor of ten
--- 0.056 at `n = 97` to 0.536 at `n = 51` -- and the ranking is structured: writing
-`n = m^2 - k`, the gap shrinks as `k` falls and as `m` rises, so the open `k = 3` line
-(61, 78, 97) and `n = 11` head the table, then the `k = 4` line. A narrow gap is not a
-difficulty estimate -- Nagamochi's closed form is simply tighter relative to `m` there
--- but which stratum of the table a case occupies is what a proof-lane sequencing
-decision needs, and X-010 sequences on it.
+case", so ranking by it ranks nothing (D-405). Measured on 2026-08-31 over the 65 cases
+then open, the spread was a factor of ten -- 0.056 at `n = 97` to 0.536 at `n = 51` --
+and the ranking structured: writing `n = m^2 - k`, the gap shrinks as `k` falls and as
+`m` rises, so the open `k = 3` line (61, 78, 97) and `n = 11` headed the table, then
+the `k = 4` line. All four have since been proved; frontier/README.md's Smallest Open
+Gaps table gives the current head. A narrow gap is not a difficulty estimate --
+Nagamochi's closed form was simply tighter relative to `m` there -- but which stratum
+of the table a case occupies is what a proof-lane sequencing decision needs, and X-010
+sequences on it.
 
 Usage, from `packing/`:
     uv run --frozen python -m devtools.gap_ranking [--limit N]
@@ -58,7 +64,7 @@ def open_cases() -> list[OpenCase]:
     found: list[OpenCase] = []
     for path in sorted(FRONTIER.glob("n-*.md")):
         payload = safe_load(path.read_text(encoding="utf-8").split("---\n")[1])["packing"]
-        if payload.get("reported_status") != "open":
+        if payload.get("status") != "open":
             continue
         upper = (payload.get("reported_upper_bound") or {}).get("value")
         lower = (payload.get("verified_lower_bound") or {}).get("value")

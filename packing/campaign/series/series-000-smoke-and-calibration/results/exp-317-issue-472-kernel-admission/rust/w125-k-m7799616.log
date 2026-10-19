@@ -1,0 +1,96 @@
+{"step": 0, "owner": 6, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 0.2}
+{"step": 1, "owner": 8, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 1.2}
+{"step": 2, "owner": 9, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 1.9}
+{"step": 3, "owner": 16, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 2.2}
+{"step": 4, "owner": 17, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 2.5}
+{"step": 5, "owner": 18, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 3.6}
+{"step": 6, "owner": 20, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 5.6}
+{"step": 7, "owner": 21, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 6.4}
+{"step": 8, "owner": 22, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 7.2}
+{"step": 9, "owner": 6, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 7.7}
+{"step": 10, "owner": 8, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 8.9}
+{"step": 11, "owner": 9, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 11.7}
+{"step": 12, "owner": 16, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 12.6}
+{"step": 13, "owner": 17, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 13.3}
+{"step": 14, "owner": 18, "live_rows": 53, "rows_checked_in_full": 64, "closure": false, "seconds": 14.6}
+{"step": 15, "owner": 20, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 15.6}
+{"step": 16, "owner": 21, "live_rows": 45, "rows_checked_in_full": 64, "closure": false, "seconds": 16.1}
+{"step": 17, "owner": 22, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 17.6}
+{"step": 18, "owner": 6, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 18.2}
+{"step": 19, "owner": 8, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 18.9}
+{"step": 20, "owner": 9, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 19.5}
+{"step": 21, "owner": 16, "live_rows": 49, "rows_checked_in_full": 64, "closure": false, "seconds": 19.9}
+{"step": 22, "owner": 17, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 20.4}
+{"step": 23, "owner": 18, "live_rows": 34, "rows_checked_in_full": 64, "closure": false, "seconds": 21.4}
+{"step": 24, "owner": 20, "live_rows": 26, "rows_checked_in_full": 64, "closure": false, "seconds": 21.9}
+{"step": 25, "owner": 21, "live_rows": 34, "rows_checked_in_full": 64, "closure": false, "seconds": 22.1}
+{"step": 26, "owner": 22, "live_rows": 33, "rows_checked_in_full": 64, "closure": false, "seconds": 22.5}
+{"step": 27, "owner": 6, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 23.1}
+{"step": 28, "owner": 8, "live_rows": 39, "rows_checked_in_full": 64, "closure": false, "seconds": 23.6}
+{"step": 29, "owner": 9, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 24.0}
+{"step": 30, "owner": 16, "live_rows": 47, "rows_checked_in_full": 64, "closure": false, "seconds": 24.5}
+{"step": 31, "owner": 17, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 25.1}
+{"step": 32, "owner": 18, "live_rows": 34, "rows_checked_in_full": 64, "closure": false, "seconds": 25.7}
+{"step": 33, "owner": 20, "live_rows": 25, "rows_checked_in_full": 64, "closure": false, "seconds": 25.9}
+{"step": 34, "owner": 21, "live_rows": 31, "rows_checked_in_full": 64, "closure": false, "seconds": 26.2}
+{"step": 35, "owner": 22, "live_rows": 28, "rows_checked_in_full": 64, "closure": false, "seconds": 26.5}
+{"step": 36, "owner": 6, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 27.0}
+{"step": 37, "owner": 8, "live_rows": 21, "rows_checked_in_full": 64, "closure": false, "seconds": 27.1}
+{"step": 38, "owner": 9, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 27.4}
+{"step": 39, "owner": 16, "live_rows": 47, "rows_checked_in_full": 64, "closure": false, "seconds": 27.6}
+{"step": 40, "owner": 17, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 28.0}
+{"step": 41, "owner": 18, "live_rows": 34, "rows_checked_in_full": 64, "closure": false, "seconds": 28.5}
+{"step": 42, "owner": 20, "live_rows": 25, "rows_checked_in_full": 64, "closure": false, "seconds": 28.8}
+{"step": 43, "owner": 21, "live_rows": 30, "rows_checked_in_full": 64, "closure": false, "seconds": 29.0}
+{"step": 44, "owner": 22, "live_rows": 17, "rows_checked_in_full": 64, "closure": false, "seconds": 29.1}
+{"step": 45, "owner": 6, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 29.5}
+{"step": 46, "owner": 8, "live_rows": 17, "rows_checked_in_full": 64, "closure": false, "seconds": 29.6}
+{"step": 47, "owner": 9, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 29.8}
+{"step": 48, "owner": 16, "live_rows": 18, "rows_checked_in_full": 64, "closure": false, "seconds": 30.0}
+{"step": 49, "owner": 17, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 30.3}
+{"step": 50, "owner": 18, "live_rows": 33, "rows_checked_in_full": 64, "closure": false, "seconds": 30.9}
+{"step": 51, "owner": 20, "live_rows": 25, "rows_checked_in_full": 64, "closure": false, "seconds": 31.1}
+{"step": 52, "owner": 21, "live_rows": 8, "rows_checked_in_full": 64, "closure": false, "seconds": 31.2}
+{"step": 53, "owner": 22, "live_rows": 13, "rows_checked_in_full": 64, "closure": false, "seconds": 31.3}
+{"step": 54, "owner": 6, "live_rows": 13, "rows_checked_in_full": 64, "closure": false, "seconds": 31.4}
+{"step": 55, "owner": 8, "live_rows": 12, "rows_checked_in_full": 64, "closure": false, "seconds": 31.5}
+{"step": 56, "owner": 9, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 31.7}
+{"step": 57, "owner": 16, "live_rows": 6, "rows_checked_in_full": 64, "closure": false, "seconds": 31.8}
+{"step": 58, "owner": 17, "live_rows": 64, "rows_checked_in_full": 64, "closure": false, "seconds": 32.3}
+{"step": 59, "owner": 18, "live_rows": 25, "rows_checked_in_full": 64, "closure": false, "seconds": 32.5}
+{"step": 60, "owner": 20, "live_rows": 10, "rows_checked_in_full": 64, "closure": false, "seconds": 32.6}
+{"step": 61, "owner": 21, "live_rows": 7, "rows_checked_in_full": 64, "closure": false, "seconds": 32.6}
+{"step": 62, "owner": 22, "live_rows": 12, "rows_checked_in_full": 64, "closure": false, "seconds": 32.7}
+{"step": 63, "owner": 6, "live_rows": 6, "rows_checked_in_full": 64, "closure": false, "seconds": 32.7}
+{"step": 64, "owner": 8, "live_rows": 4, "rows_checked_in_full": 64, "closure": false, "seconds": 32.7}
+{"step": 65, "owner": 9, "live_rows": 6, "rows_checked_in_full": 64, "closure": false, "seconds": 32.8}
+{"step": 66, "owner": 16, "live_rows": 2, "rows_checked_in_full": 64, "closure": false, "seconds": 32.9}
+{"step": 67, "owner": 17, "live_rows": 22, "rows_checked_in_full": 64, "closure": false, "seconds": 33.0}
+{"step": 68, "owner": 18, "live_rows": 9, "rows_checked_in_full": 64, "closure": false, "seconds": 33.1}
+{"step": 69, "owner": 20, "live_rows": 6, "rows_checked_in_full": 64, "closure": false, "seconds": 33.1}
+{"step": 70, "owner": 21, "live_rows": 0, "rows_checked_in_full": 64, "closure": true, "seconds": 33.1}
+{"status": "PASS", "failure": null, "mode": "full", "seconds": 33.195}
+exit=0
+	Command being timed: "/tmp/claude-0/-home-user-squares/affcf58a-3fc1-5c70-94ed-519d58974816/scratchpad/wt-i472-rust/packing/n17_kernel_verify/target/release/n17-kernel-verifier /tmp/claude-0/-home-user-squares/affcf58a-3fc1-5c70-94ed-519d58974816/scratchpad/i472/stage/packing/campaign/explorations/X048-session-168-pilots/certificates/w125-k-m7799616 --output /tmp/claude-0/-home-user-squares/affcf58a-3fc1-5c70-94ed-519d58974816/scratchpad/i472/rust/w125-k-m7799616.json --threads 2 --progress"
+	User time (seconds): 39.71
+	System time (seconds): 0.72
+	Percent of CPU this job got: 121%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:33.23
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 192852
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 70657
+	Voluntary context switches: 321
+	Involuntary context switches: 4315
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 72
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

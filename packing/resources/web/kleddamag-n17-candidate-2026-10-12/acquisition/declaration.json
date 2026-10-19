@@ -1,0 +1,88 @@
+{
+  "format": "external-source-declaration-v1",
+  "id": "kleddamag-the-seventeenth-square-candidate",
+  "source_url": "https://github.com/Kleddamag/the-seventeenth-square-candidate",
+  "source_ref": "main",
+  "source_commit": "653b9589d0f8a152f01adc56b1d48ba53d49abc3",
+  "retrieved_at_utc": "2026-10-12T16:47Z",
+  "git_scope": "Full clone of the one-commit repository (7,119 tracked files), checked out at the pin for jlevy/squares#557, with the 12 release assets of large-files-v1 (4,785,719,080 bytes) fetched beside it into the git-ignored _large/. The manifest covers the 28 top-level files and the load-bearing checker, specification and obligation files named in the scope; MANIFEST.sha256, which is in the scope, gives the SHA-256 of every other tracked file, and acquisition/large-files.json binds the 12 release assets, which are not in the tree. Under derived-only custody no upstream byte is copied. Only the author's check.py ran here, from a scratch directory outside this repository.",
+  "archived_dir": "source",
+  "license": "README.md, section Licence: \"No licence for reuse is granted yet. You may download the files and run the checks to verify the result. A licence will be chosen after the first round of review.\" Derived-only custody: no upstream byte is retained; every scoped file is bound here by SHA-256 and at the pin by its Git blob, the release assets by SHA-256, and no redistribution permission or licence determination is asserted. README.md and CREDITS.md say Marc Leonard Overbeck (GitHub Kleddamag, ORCID 0009-0008-8607-8197) conceived and led the project and that the mathematics, engines, certificates, checkers, reviews and text were produced by AI systems under his direction, Codex (OpenAI) and Claude (Anthropic), which are named and are not authors; within the project no human has read the mathematics. CREDITS.md credits John Bidwell for the packing, Gensane and Ryckelynck, David Ellsworth, this project (Joshua Levy), Manasseh Ahmed's 11SquaresOptimal, Mira-acc, Guzhou0806 and Muhammad Maaz. THIRD_PARTY.md lists copies of this project's exp-237 root certificate, exp-238 endpoint certificate, H-256 sheet and endpoint checker inside the edition.",
+  "claims": [
+    "STATEMENT.md, line 9: with (t*, b*) the unique simultaneous zero of F and G in the stated isolating rectangle and L = (6 + 4t*)/(1 + 2t* - t*^2), 4.67553009360455095163 < L < 4.67553009360455095164, a packing of seventeen unit squares exists at side L, and for every S >= 0 a packing at side S implies L <= S; that is, s(17) = L, the side of John Bidwell's 1998 packing. Uniqueness of an optimal packing is not claimed.",
+    "STATEMENT_STATUS.md: the status is a candidate proof, not an established theorem. The claim holds if the 210 obligations of OBLIGATIONS.json hold (15 mathematical premises, 50 base capture rows, 1 slab statement, 49 strict budgets, 84 branch implications, 11 local roots). No independent outside verification; Guzhou0806 read the premises in an earlier state and ran a checker of his own on two of the thirteen trees.",
+    "README.md: five steps. Upper bound (68 wall and 136 pair conditions, exact); capture at side at most C = 4675531/10^6 by 98 weighted counting certificates, leaving 11 cases; admission of each case into one of 11 explicit regions; local trees (13 tree certificates: ten regions empty below L, the eleventh inside a tube around the known packing); rigidity in the tube (a finite exact stage of 17 rounds and a contraction with ratio 159201934153319/200000000000000 < 1).",
+    "CHECK.md: python3 check.py (levels 0-2, 41 checks) checks structure and cheap exact checks, including a re-decision of every stored capture row from its recorded numbers; it does not recompute the 1,728,000 capture rows per checker or the 13 tree certificates, which CHECK.md describes as manual full recomputations."
+  ],
+  "scope": [
+    ".gitattributes",
+    ".gitignore",
+    "AGENTS.md",
+    "AUDIT.md",
+    "CHANGELOG.md",
+    "CHECK.md",
+    "CITATION.cff",
+    "CREDITS.md",
+    "EDITION_BINDINGS.json",
+    "KNOWN_ISSUES.md",
+    "KNOWN_LIMITS.md",
+    "LARGE_FILES.tsv",
+    "MANIFEST.sha256",
+    "OVERVIEW.md",
+    "PATH_NEUTRAL.tsv",
+    "PREMISES.md",
+    "PROOF.md",
+    "READING_ORDER.md",
+    "README.md",
+    "STATEMENT.md",
+    "STATEMENT_STATUS.md",
+    "THIRD_PARTY.md",
+    "check.py",
+    "check_comparison_records.py",
+    "fetch_large.py",
+    "packing.png",
+    "recompute_slice.py",
+    "upper-packing-certificate.json",
+    "research/finishing-threshold-goal-20261007/current-author-20261012t/fifth-order-20261010/public-edition-round2-20261011/OBLIGATIONS.json",
+    "research/finishing-threshold-goal-20261007/current-author-20261012t/fifth-order-20261010/public-edition-round2-20261011/revision-v7/CLASS_ROW_LEMMA.md",
+    "research/finishing-threshold-goal-20261007/current-author-20261012t/fifth-order-20261010/public-edition-round2-20261011/runbook_public.json",
+    "research/finishing-threshold-goal-20261007/current-author-20261012t/fifth-order-20261010/public-edition-round2-20261011/replay_round2.py",
+    "research/finishing-threshold-goal-20261007/clean-rerun-20261011/current-build-0122/capture/checker_sources",
+    "research/window-extension-20261008/SPEC_v3.0.md",
+    "research/window-extension-20261008/checker",
+    "research/window-extension-20261008/checker2",
+    "research/window-extension-20261008/acceptance/h_report30.py",
+    "research/window-extension-20261008/acceptance/FROZEN_30.json"
+  ],
+  "pinned_only": [
+    {
+      "match": "STATEMENT.md",
+      "reason": "The exact statement: the packing, t0 and b0, F and G, the isolating rectangle, the side map, the 20-place enclosure of L and the claim. Its numbers and polynomials are transcribed as derived facts in facts/statement.json and decided against this repository's record in receipts/statement-comparison.json. No licence: pinned by digest only."
+    },
+    {
+      "match": "MANIFEST.sha256",
+      "reason": "The edition's list of the SHA-256 of all 7,118 other tracked files; its own SHA-256 equals the one the release notes of large-files-v1 publish, and it is the pin of every tracked file outside this scope. No licence: pinned by digest only."
+    },
+    {
+      "match": "check.py",
+      "reason": "The author's one checking command (levels 0-2, 41 checks). Read in full before it ran here once, under CPython 3.12.3 with SymPy 1.14.0 outside this repository; its SHA-256 equals the release notes' value and its manifest line. The run is receipts/check-py/. No licence: pinned by digest only."
+    },
+    {
+      "match": "LARGE_FILES.tsv",
+      "reason": "The list of the 12 release assets with path, size and SHA-256, each confirmed here against the file fetched and the release's asset digest (acquisition/large-files.json). No licence: pinned by digest only."
+    },
+    {
+      "match": "upper-packing-certificate.json",
+      "reason": "The rational seed packing of side 4675530093604551/10^15. Byte-identical to the file this repository retained on 2026-09-21 and built its certified endpoint from, so it is already retained there under that packet's custody. No licence for this copy: pinned by digest only.",
+      "identical_to": "packing/resources/web/n17-kleddamag-certified-bound-2026-09-21/kleddamag-17-squares-certified-bound/upper-packing-certificate.json"
+    },
+    {
+      "match": "research/**",
+      "reason": "The producers' packet, capture checkers and tree checkers, pinned so that a later replay can name the bytes it ran. No licence: pinned by digest only and never retained; the capture and tree recomputations are not run in this intake."
+    },
+    {
+      "match": "*",
+      "reason": "Top-level edition file: documentation, checking scripts, tables or the figure. No licence: pinned by digest only."
+    }
+  ]
+}

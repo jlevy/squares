@@ -1,0 +1,6 @@
+# sqpk v1
+# test: square at 30 deg pokes out of [0,3]^2 (extent 0.683)
+n 2
+s 3
+0.5 0.5 0
+2.5 2.5 30

@@ -1,0 +1,2 @@
+n=175 couzo-certificates-2026-10-11 vs couzo-certificates-2026-10-10: side diff -1.700e-06; best symmetry 0: max centre distance 1.122e-02; within 1e-6: 4, 1e-3: 137, 0.1: 175 of 175; tangents moved > 1e-6: 43
+n=175 couzo-certificates-2026-10-11 vs dostashev-records-2026-10-12: side diff +2.945e-03; best symmetry 1: max centre distance 1.086e+01; within 1e-6: 21, 1e-3: 22, 0.1: 93 of 175; tangents moved > 1e-6: n/a

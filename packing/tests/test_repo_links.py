@@ -72,22 +72,27 @@ def test_a_path_the_checkout_lacks_is_asked_of_the_commit(
 
 def test_the_named_documents_exist_and_are_the_pages_the_site_serves() -> None:
     """Each document the site links by name is defined once. The reader documents are
-    served as pages; the three generated views are not, and each is either shown by a
-    page built from the same record or linked on `main`."""
+    served as pages, the changelog also on About; each generated record view is shown
+    by a page built from the same record or linked on `main`."""
     documents = {
         repo_links.README,
         repo_links.TUTORIAL,
+        repo_links.TUTORIAL_ADVANCED,
         repo_links.SYNOPSIS,
         repo_links.CONVENTIONS,
         repo_links.DEVELOPMENT,
         repo_links.EPISTEMICS,
     }
-    views = {repo_links.DEFECTS, repo_links.RESULTS, repo_links.STATUS}
+    views = {repo_links.DEFECTS, repo_links.RESULTS, repo_links.STATUS, repo_links.CHANGELOG}
     for path in documents | views:
         assert (REPO / path).is_file(), path
     served = {doc.source.relative_to(REPO).as_posix() for doc in site_documents.DOCUMENTS}
     assert served == documents
-    assert set(site_documents.RECORD_PAGES) == {repo_links.RESULTS, repo_links.STATUS}
+    assert set(site_documents.RECORD_PAGES) == {
+        repo_links.RESULTS,
+        repo_links.STATUS,
+        repo_links.CHANGELOG,
+    }
     assert views - set(site_documents.RECORD_PAGES) == {repo_links.DEFECTS}
 
 
@@ -113,6 +118,40 @@ def test_missing_names_each_absent_path() -> None:
     tree = RepositoryTree(files=frozenset({"README.md"}), directories=frozenset({"", "docs"}))
     links = {("blob", "README.md"), ("tree", "docs"), ("tree", "README.md"), ("raw", "x.svg")}
     assert tree.missing(links) == ["raw/x.svg", "tree/README.md"]
+
+
+@pytest.mark.parametrize(
+    "suffix",
+    [
+        "/issues/401",
+        "/issues/401#issuecomment-6031977107",
+        "/discussions/12",
+        "/discussions/12#discussioncomment-345",
+    ],
+)
+def test_numbered_first_party_reports_are_source_citations(suffix: str) -> None:
+    assert repo_links.is_report_link(REPO_URL + suffix)
+
+
+@pytest.mark.parametrize(
+    "url",
+    [
+        "https://github.com/other/squares/issues/401",
+        "https://github.com/jlevy/other/issues/401",
+        "https://github.com.evil.test/jlevy/squares/issues/401",
+        f"{REPO_URL}/issues/0",
+        f"{REPO_URL}/issues/not-a-number",
+        f"{REPO_URL}/issues/401#discussioncomment-345",
+        f"{REPO_URL}/discussions/12#issuecomment-345",
+        f"{REPO_URL}/issues/401/blob/main/README.md",
+        f"{REPO_URL}/issues/401?redirect=/blob/{SHA}/README.md",
+        f"{REPO_URL}/blob/{SHA}/README.md",
+        f"{REPO_URL}/blob/review/README.md",
+        f"{REPO_URL}/blob/main/README.md",
+    ],
+)
+def test_report_citation_recognition_does_not_admit_other_locations(url: str) -> None:
+    assert not repo_links.is_report_link(url)
 
 
 @pytest.fixture(scope="module")

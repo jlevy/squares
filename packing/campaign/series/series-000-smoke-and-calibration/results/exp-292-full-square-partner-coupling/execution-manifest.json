@@ -1,0 +1,76 @@
+{
+  "schema": "registered-phase-command-plan/v1",
+  "draft_only": true,
+  "registered": false,
+  "target_unrun": true,
+  "phases": [
+    {
+      "name": "construction",
+      "argv": [
+        "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+        "-m",
+        "devtools.check_n17_full_square_partner_coupling",
+        "--descriptor",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-292-full-square-partner-coupling/descriptor.json",
+        "--max-seconds",
+        "120",
+        "--output",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-292-full-square-partner-coupling/certificate.json"
+      ]
+    },
+    {
+      "name": "fresh_verification",
+      "argv": [
+        "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+        "-m",
+        "devtools.check_n17_full_square_partner_coupling",
+        "--descriptor",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-292-full-square-partner-coupling/descriptor.json",
+        "--max-seconds",
+        "120",
+        "--certificate",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-292-full-square-partner-coupling/certificate.json",
+        "--output",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-292-full-square-partner-coupling/replay.json"
+      ]
+    }
+  ],
+  "primary_criterion": "Construction and a fresh process both reconstruct closed_region_exclusion with criterion_met=true. All1056 original rows/992 foreign rows and all17 endpoint controls are accounted; all16 partner minima are reconstructed over every centre-domain vertex, all eight signed axes and all closed angular subintervals. Choose the least owner with exact M_j>0. Its h=min(1/128,M_j/(8L)), L=2838/125, must be positive, the angle guard must be in [13/32,27/64], and M_j/4-Lh>=M_j/8 must hold exactly. Fresh mathematical payloads, selected owner, all minima and the nonzero closed region must agree. All M_j<=0 is a completed recipe miss; limits are incomplete and custody/endpoint failures refused. Negative-minimizer exact numeric-wall margins are secondary only. Conditional accepted-parent scope; no seventeen-square packing, whole-guard exclusion, census/capture/global optimality claim.",
+  "budget": "One worker; construction120s + fresh120s, combined240s owned-group TERM240/KILL250; sampled4096MiB current RSS PER live process, no aggregate/allocation-time hardcap. Amended1024 original pieces/row and1048576 parsed vertices; 8000000 exact quadratic minimizations. Normalized geometry4096bits; endpoint inputs16384bits/arithmetic32768bits; five10MiB JSON roles; native seed10MiB/node512MiBcompressed+2GiBdecoded/final64MiB; output64MiB. Other inherited caps unchanged.",
+  "runner_argv": [
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-m",
+    "devtools.run_registered_phases",
+    "--manifest",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-292-full-square-partner-coupling/execution-manifest.json",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-292-full-square-partner-coupling/phase-execution.json"
+  ],
+  "supervisor_argv": [
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-m",
+    "devtools.supervise_posix",
+    "--max-seconds",
+    "240",
+    "--max-memory-mib",
+    "4096",
+    "--sample-seconds",
+    "0.25",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-292-full-square-partner-coupling/supervision.json",
+    "--stdout",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-292-full-square-partner-coupling/stdout.log",
+    "--stderr",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-292-full-square-partner-coupling/stderr.log",
+    "--",
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-m",
+    "devtools.run_registered_phases",
+    "--manifest",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-292-full-square-partner-coupling/execution-manifest.json",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-292-full-square-partner-coupling/phase-execution.json"
+  ],
+  "registered_at": "2026-10-07T19:49:03.823038+00:00",
+  "source_freeze": "registration commit resolved and recorded at launch"
+}

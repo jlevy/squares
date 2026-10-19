@@ -1,0 +1,135 @@
+{
+  "schema": "registered-target-launch/v1",
+  "source_commit": "f8bacf1c836a41ab520f8a467a46c23a0c091b1a",
+  "launched_at": "2026-10-08T02:40:19.147351+00:00",
+  "working_directory": "packing",
+  "imported_source_files": {
+    "packing/devtools/__init__.py": {
+      "sha256": "9ac88104b563973f3ce95fe9a202473bf04f596082b3d9f92fa3eaef7b52a958",
+      "bytes": 74
+    },
+    "packing/devtools/check_n17_case_preserving_owned_propagation.py": {
+      "sha256": "a90cf2605105a0cb6e9dcd3a0578578c813564f29461ede0b07a1f58ad7be3b1",
+      "bytes": 25385
+    },
+    "packing/devtools/check_n17_collective_row_coverage.py": {
+      "sha256": "8fd962550b6d809f593a8142576506dd7aa7ce61ead2cdfc22879b2a8b8ee469",
+      "bytes": 19657
+    },
+    "packing/devtools/check_n17_full_square_partner_coupling.py": {
+      "sha256": "e711a74160b414f3b62c3a429d2f91b370994821cc10ba630d5329bea60b303b",
+      "bytes": 19109
+    },
+    "packing/devtools/check_n17_guard_conditioned_ownership.py": {
+      "sha256": "40380494faccb67d57827a0f20630e02c20c1648a17489a58e0ce79eb44f680e",
+      "bytes": 35876
+    },
+    "packing/devtools/check_n17_one_round_owned_domain_propagation.py": {
+      "sha256": "7bd0378518eb192ed485d0043315242d45c768e75e88469e426ea0c80aa457e4",
+      "bytes": 32221
+    },
+    "packing/devtools/check_n17_partner_pose_coupling.py": {
+      "sha256": "12d827b50b1d21a2a138bf7b0022aaad60a23c3edc96306d78b7b5711eb8ea61",
+      "bytes": 37508
+    },
+    "packing/devtools/check_n17_regional_row_coverage.py": {
+      "sha256": "732dbea822db6d7554463bfe09130fddc3b7856f5bed9d1856252c9d162d3f2c",
+      "bytes": 19572
+    },
+    "packing/devtools/check_n17_strict_core_regional_transfer.py": {
+      "sha256": "fe73f42375c4b39f6ed6b83d7b9ec9e772ea0f65977f86291431aad5172b8e7a",
+      "bytes": 17190
+    },
+    "packing/devtools/check_n17_two_center_children.py": {
+      "sha256": "15e0d71247a825471421efaa1293e1f308cf4a3e24b43815ffadf62cc09245d2",
+      "bytes": 20746
+    },
+    "packing/devtools/check_n17_two_child_collective_propagation.py": {
+      "sha256": "2a11b396b4468307fb838710cbe53525a795ad79aa35a33c13eabafbad6ba70b",
+      "bytes": 27491
+    },
+    "packing/devtools/probe_n17_conditional_center_cases.py": {
+      "sha256": "3a72f430923cb067692ab47a6ed39e17dc03e6439d15501f4bcbc5e01e319b0c",
+      "bytes": 31613
+    },
+    "packing/devtools/probe_n17_conditional_owned_hull.py": {
+      "sha256": "df3028f369d87301e17781650772a1286380fd970f082944b5812714d4886b29",
+      "bytes": 30571
+    },
+    "packing/devtools/probe_n17_pooled_feasible_center.py": {
+      "sha256": "1d3c34142b8b38da77a5eaad7905e4b0d338a916bd94438cbe50f88a920d1810",
+      "bytes": 14483
+    },
+    "packing/devtools/probe_n17_pooled_forbidden_cover.py": {
+      "sha256": "d4fd6aec09f163b2f862f5a1a557e2dbab5f369e7ff3e1d39fb02f701d9be267",
+      "bytes": 13499
+    },
+    "packing/devtools/probe_n17_pooled_relaxation_witness.py": {
+      "sha256": "4eca2b2cac26fdfe00f9eb223355a1e304957347efe3b23caa7e076c1338750d",
+      "bytes": 20843
+    },
+    "packing/devtools/provenance.py": {
+      "sha256": "c80ab631f9282675df2a46fa981846747f18470a46536a576b3756021853b7ad",
+      "bytes": 3164
+    },
+    "packing/devtools/run_registered_phases.py": {
+      "sha256": "10aa4a5c47d9c7a83df3dfb9ac239b47ac21a80197d6ec8ea9e7253b7f7a2a25",
+      "bytes": 14425
+    },
+    "packing/devtools/supervise_posix.py": {
+      "sha256": "d541775dcb73e8e4ce779ae3577307467a929a30dc431e171b13a701f306e126",
+      "bytes": 9506
+    },
+    "packing/devtools/verify_n17_conditional_owned_hull.py": {
+      "sha256": "cb4b51bb98b56a140e767929ac9864aed301d214a25794dffbcfa557fc83e502",
+      "bytes": 26799
+    },
+    "packing/devtools/verify_n17_kernel_certificate.py": {
+      "sha256": "08f4de68db8b835bbcec3ff13cec00bf113421547641a107b695fe2d3b3f7eb7",
+      "bytes": 70206
+    },
+    "packing/src/sqpack/__init__.py": {
+      "sha256": "a1945b4bc45e6ece266d3f63cb328a3cd6f280e646d73b63c3cbe606e42fe19e",
+      "bytes": 367
+    },
+    "packing/src/sqpack/field.py": {
+      "sha256": "734a645d9b95bf43018b1d9662cf255fbf3b834b74ae5e1f10dcf2455a0e3de6",
+      "bytes": 25048
+    },
+    "packing/src/sqpack/retained_json.py": {
+      "sha256": "2a2578714e8d327737bb7e1ad95b93bc4cb00c3a9f8ef326084b5d7340d7bd18",
+      "bytes": 14967
+    },
+    "packing/src/sqpack/verify.py": {
+      "sha256": "56bc5b9f690b054ba30e82547dea4aa9d0ccea0a2b1827fab28fcc4e98677337",
+      "bytes": 8678
+    }
+  },
+  "source_worktree_clean": true,
+  "manifest_sha256": "a592bc98d58510fa86dc53b5d230478d53e07dbcd4cdc4fb2791d532e0f1db8c",
+  "supervisor_argv": [
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-m",
+    "devtools.supervise_posix",
+    "--max-seconds",
+    "360",
+    "--max-memory-mib",
+    "4096",
+    "--sample-seconds",
+    "0.25",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-305-case-preserving-owned-propagation/supervision.json",
+    "--stdout",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-305-case-preserving-owned-propagation/stdout.log",
+    "--stderr",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-305-case-preserving-owned-propagation/stderr.log",
+    "--",
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-m",
+    "devtools.run_registered_phases",
+    "--manifest",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-305-case-preserving-owned-propagation/execution-manifest.json",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-305-case-preserving-owned-propagation/phase-execution.json"
+  ]
+}

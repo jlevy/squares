@@ -23,6 +23,7 @@
       size: style.fontSize,
       weight: style.fontWeight,
       style: style.fontStyle,
+      transform: style.textTransform,
       line_height: style.lineHeight,
       margin: `${style.marginBlockStart} ${style.marginBlockEnd}`,
       box_width: `${Math.round(el.getBoundingClientRect().width)}px`,

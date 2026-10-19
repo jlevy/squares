@@ -27,6 +27,7 @@ from __future__ import annotations
 import os
 import re
 import subprocess
+from collections.abc import Mapping
 from functools import cache
 from pathlib import Path
 
@@ -66,7 +67,9 @@ def is_vendored(path: Path) -> bool:
     return bool(prefixes & vendored_directories())
 
 
-def tracked_files(root: Path, pathspec: str) -> list[Path] | None:
+def tracked_files(
+    root: Path, pathspec: str, *, environment: Mapping[str, str] | None = None
+) -> list[Path] | None:
     """Every file `root` tracks that matches the git `pathspec`, or `None` with no index here.
 
     `None` means "there is no index to ask here", not "nothing matched": `root` is not the
@@ -86,12 +89,16 @@ def tracked_files(root: Path, pathspec: str) -> list[Path] | None:
 
     Files inside a submodule are not listed: git reports the gitlink, and the submodule's
     own index is its own. That matches `is_vendored` above, which excludes them too.
+
+    A caller constructing an isolated worker can supply its sanitized environment;
+    both Git queries then use it without changing the process environment.
     """
     try:
         top = subprocess.run(
             ("git", "-C", str(root), "rev-parse", "--show-toplevel"),
             check=True,
             capture_output=True,
+            env=environment,
         ).stdout
     except OSError, subprocess.CalledProcessError:
         return None
@@ -101,6 +108,7 @@ def tracked_files(root: Path, pathspec: str) -> list[Path] | None:
         ("git", "-C", str(root), "ls-files", "-z", "--cached", "--", pathspec),
         check=True,
         capture_output=True,
+        env=environment,
     ).stdout
     found = (root / os.fsdecode(name) for name in listed.split(b"\0") if name)
     return sorted(path for path in found if path.is_file())

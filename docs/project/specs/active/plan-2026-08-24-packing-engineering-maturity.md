@@ -3,7 +3,7 @@ title: Packing Engineering Maturity and Research-Loop Scalability
 description: Implemented module segregation, Python 3.14 baseline, refactor harness, validation CLI, CI, and engineering guidance
 author: Codex and project maintainers
 date: 2026-08-24
-status: implemented
+status: active
 ---
 # Packing Engineering Maturity and Research-Loop Scalability
 
@@ -11,7 +11,9 @@ status: implemented
 > [`development.md`](../../../../development.md).
 > Retained as the implementation record.
 
-**Status:** Implemented and merged through PR #23.
+**Status:** Active. The first milestone was implemented and merged through PR #23; ten
+follow-ups remain open under epic think-9a7v (think-sk15, think-y91x, think-lwao,
+think-5ht0, think-tx0b, think-9qz0, think-u97a, think-uvmb, think-r33j).
 
 **Workflow entry:** `general-improvement`
 
@@ -299,7 +301,7 @@ algorithms or claims.
 - [Packing synopsis](../../../../SYNOPSIS.md)
 - [Packing conventions](../../../../conventions.md)
 - [Campaign runbook](../../../../packing/campaign/README.md)
-- [Minimal Packing Toolkit](plan-2026-08-22-minimal-packing-toolkit.md)
+- [Minimal Packing Toolkit](../paused/plan-2026-08-22-minimal-packing-toolkit.md)
 - `think-9a7v` — engineering-maturity epic
 
 <!-- This document follows common-doc-guidelines.md.

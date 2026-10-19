@@ -161,8 +161,8 @@ Then regenerate and re-pin.
 ### U-2 (blocking on rebase): the Lean sentences contradict the import main already holds
 
 The commit adds to `README.md` (lines 35 to 40 of the diff) and to T-060’s `notes` a
-paragraph saying Queuingtheorydotcom reported a complete Lean 4 formalization and “This
-project has not yet reviewed or replayed it.”
+paragraph saying Ahmed reported a complete Lean 4 formalization and “This project has
+not yet reviewed or replayed it.”
 PR #391 (`claude/ecstatic-pascal-pothtx-n11lean`), merged to main at `b6f8993f3`,
 retains that formalization as a packet
 (`packing/resources/web/queuingtheorydotcom-n11-lean-2026-10-06/`), registers

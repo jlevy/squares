@@ -1,0 +1,10 @@
+{
+  "schema": "n17-registered-two-phase-execution/v1",
+  "started_at": "2026-10-07T15:18:39.185613+00:00",
+  "phase_runs": [
+    {"phase":"construction","argv":["/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python","-m","devtools.probe_n17_pooled_forbidden_cover","--descriptor","campaign/series/series-000-smoke-and-calibration/results/exp-286-pooled-forbidden-cover/descriptor.json","--max-seconds","60","--output","campaign/series/series-000-smoke-and-calibration/results/exp-286-pooled-forbidden-cover/certificate.json"],"returncode":0,"wall_seconds":9.844988958968315},
+    {"phase":"fresh_verification","argv":["/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python","-m","devtools.probe_n17_pooled_forbidden_cover","--descriptor","campaign/series/series-000-smoke-and-calibration/results/exp-286-pooled-forbidden-cover/descriptor.json","--certificate","campaign/series/series-000-smoke-and-calibration/results/exp-286-pooled-forbidden-cover/certificate.json","--max-seconds","60","--output","campaign/series/series-000-smoke-and-calibration/results/exp-286-pooled-forbidden-cover/replay.json"],"returncode":0,"wall_seconds":10.042251291975845}
+  ],
+  "wall_seconds": 19.888207582989708
+}
+

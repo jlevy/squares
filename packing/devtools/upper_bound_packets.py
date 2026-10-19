@@ -15,10 +15,12 @@ Couzo's next revision, ``6042c56`` (3 October 2026), lowered seven of his 49 sid
 packet keeps those seven alone and names the first as the packet it follows
 (`Source.supersedes`).
 
-The first two publish no licence, so their packets keep only derived Witness/v2 facts
-and metadata, never the upstream bytes (``raw_asset_retained: false``), on the
-known-best retention policy of ``resources/web/known-best-packings/README.md``. Casson
-licenses his packings CC BY 4.0, so they are retained raw.
+The first two publish no licence, and their packets keep only derived Witness/v2 facts
+and metadata, never the upstream bytes (``raw_asset_retained: false``): the
+derived-only form of the known-best retention policy in
+``resources/web/known-best-packings/README.md``, which also permits retaining an
+unlicensed source's factual data. Casson licenses his packings CC BY 4.0, so they are
+retained raw.
 
 The main subcommands, run from ``packing/``:
 

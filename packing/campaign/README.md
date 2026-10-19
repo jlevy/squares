@@ -706,7 +706,7 @@ contract.
 
 The campaign is the *experiment record*; the toolkit that produces the numbers is
 specified in
-[plan-2026-08-22-minimal-packing-toolkit.md](../../docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md),
+[plan-2026-08-22-minimal-packing-toolkit.md](../../docs/project/specs/paused/plan-2026-08-22-minimal-packing-toolkit.md),
 whose Phase 2 (the quench spine) is what makes basins nameable and this record’s
 numerical refinement record reproducible.
 The hypothesis registry here is the codified form of the

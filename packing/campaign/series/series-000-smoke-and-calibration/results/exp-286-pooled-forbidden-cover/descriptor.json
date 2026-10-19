@@ -1,0 +1,7 @@
+{
+  "schema": "n17-conditional-center-cases-context/v1",
+  "base_kind": "accepted_conditional_initialization",
+  "proof_pool": "accepted_original_parent_kernels",
+  "initialization_descriptor": "packing/campaign/series/series-000-smoke-and-calibration/results/exp-283-parent-guard-owned-hull/descriptor.json",
+  "initialization_descriptor_sha256": "c40b6653cecadfce21a66801582f01057261b78ffbe1cd8b4113340a6dfb91b3"
+}

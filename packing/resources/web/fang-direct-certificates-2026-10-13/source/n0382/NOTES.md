@@ -1,0 +1,1 @@
+n = 382, S = 19.989479729399675 (rounded up; exact value in the certificate), 20² − 20 + 2, seeded from Evan Daniel's improved n = 343 packing (jlevy/squares#489, third_party/daniel/hunt3_n343.cert) by one growth step, found 2026-10-12, not analytically optimised.

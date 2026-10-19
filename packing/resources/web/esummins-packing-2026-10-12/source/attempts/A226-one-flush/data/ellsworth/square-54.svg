@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Found by Joe DeVincentis in April 2014.
+    Exact closed-form solution by David Ellsworth on May 29, 2023.
+
+    FullSimplify[Solve[{2*s-8-4*Sec[a]-2*Sin[a]-2*Cos[a]*(-2+(-6+s)*Cos[a]+(s-7)*Sin[a])-12*Tan[a]+2*Tan[a]*s-2*Sin[a] == 3,
+                        s-6-2*Sin[a]-2*Cos[a]-6*Cos[a]*Sin[a]+Cos[a]*Sin[a]*s+(-1-2*Cos[a]+2*Sin[a]-6*Cos[a]^2+Cos[a]^2*s)/Tan[a] == 0},
+                       {s,a}][[2]]]
+    s = 7-1/Sqrt[2]+Sqrt[1+Sqrt[2]]
+    a = ArcTan[(3+Sqrt[2]+2*Sqrt[1+5*Sqrt[2]])/7]
+    
+    (* "a" in terms of "s" *)
+    a = Solve[s-6-2*Sin[a]-2*Cos[a]-6*Cos[a]*Sin[a]+Cos[a]*Sin[a]*s+(-1-2*Cos[a]+2*Sin[a]-6*Cos[a]^2+Cos[a]^2*s)/Tan[a] == 0, a][[2, 1, 2, 1, 1]]
+    a = ArcTan[1/2*z, (7/2*z+2-s*z/2)/(s-6)] /. z->(4*s-28+2*Sqrt[465*s^2-1908*s+2916-50*s^3+2*s^4])/(85-26*s+2*s^2)
+-->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" [
+    <!ENTITY s  "7.84666719284348978294331459096">
+    <!ENTITY a  "55.2650997396489041743253949403">
+    <!ENTITY y2 "6.67333359642174489147165729548"> <!-- s-1-(1-(s-7)*Sin[a])*Cos[a] -->
+    <!ENTITY x3 ".776886987015018653672079476532"> <!-- Cos[a]+Sin[a]*(2-(s-6)*Cos[a]-(s-7)*Sin[a]) -->
+    <!ENTITY y3 "5.32179712645279131236772171871"> <!-- s-1-2*Sec[a]-Sin[a]-Cos[a]*((s-6)*Cos[a]+(s-7)*Sin[a]-2)-6*Tan[a]+s*Tan[a] -->
+    <!ENTITY x4 "1.52688698701501865367207947653"> <!-- 1+Sin[a]+Cos[a]+6*Cos[a]*Sin[a]-Cos[a]*Sin[a]*s -->
+    <!ENTITY y4 "5.99513072287453620383937901419"> <!-- s-1+Cos[a]-Sin[a]+6*Cos[a]^2-Cos[a]^2*s -->
+    <!ENTITY x5 "1.55377397403003730734415895306"> <!-- 2*Cos[a]+2*Sin[a]*(2-(-6+s)*Cos[a]-(s-7)*Sin[a]) -->
+    <!ENTITY y5 "4.64359425290558262473544343742"> <!-- 2*(s-4-2*Sec[a]-Sin[a]-Cos[a]*((s-6)*Cos[a]+(s-7)*Sin[a]-2)-6*Tan[a]+s*Tan[a]) -->
+    <!ENTITY r1 ".077284923780532858179616104875"> <!-- Cos[a]*(2*(s-7)+(s-6)*Cot[a])+(6-s+2*Csc[a])*(1+2*Csc[a]*Sec[a])*Sin[a]-6*Cot[a] -->
+]>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 &s; &s;" style="fill:#B2B2B2; stroke:black; stroke-width:0.002" id="svg">
+    <script xlink:href="svgDisp.js"/>
+    <defs>
+        <rect width="&s;" height="&s;" id="outer"/>
+    </defs>
+    <use xlink:href="#outer" style="fill:white; stroke:none"/>
+    <g id="side1">
+        <path style="stroke:none" d="M0,0 V5 H1 V4 H2 V3 H4 V2 H5 V1 H6 V0"/>
+        <path style=  "fill:none" d="M1,0 V5 H0
+                                     M2,0 V4 H0
+                                     M3,0 V3
+                                     M4,0 V3 H0
+                                     M5,0 V2 H0
+                                     M6,0 V1 H0"/>
+        <g transform="translate(0 &s;) scale(1 -1)">
+            <rect style="stroke:none" width="1" height="1"/>
+            <path style=  "fill:none" d="M0,1 H1 V0"/>
+        </g>
+        <rect width="1" height="1" transform="translate(0    6   ) rotate(-&a;)"/>
+        <rect width="1" height="1" transform="translate(0.75 &y2;) rotate(-&a;)"/>
+        <rect width="1" height="1" transform="translate(&x3; &y3;) rotate(-&a;)"/>
+        <rect width="1" height="1" transform="translate(&x4; &y4;) rotate(-&a;)"/>
+        <g transform="translate(&x5; &y5;) rotate(-&a;)">
+            <g id="two" >
+                <rect width="2" height="1"/>
+                <path style="fill:none" d="M1,0 V1"/>
+            </g>
+            <use xlink:href="#two" transform="translate(-&r1; 1)"/>
+        </g>
+    </g>
+    <use xlink:href="#side1" transform="translate(&s; &s;) scale(-1)"/>
+    <use xlink:href="#outer" style="fill:none"/>
+</svg>

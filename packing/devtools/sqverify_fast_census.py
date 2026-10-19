@@ -123,8 +123,10 @@ from pathlib import Path
 from typing import Any
 
 from devtools.check_sqverify_fast import (
+    STEP,
     crate_source_sha256,
     direction,
+    metadata_net,
     mixed_exact,
     mixed_mutant,
     net_step,
@@ -136,6 +138,7 @@ from sqpack.rectangle_density import (
     RectangleDensityCandidate,
     coverage_at_point,
     load_candidate,
+    load_candidate_bytes,
 )
 from sqpack.yamlio import safe_load
 
@@ -161,7 +164,12 @@ MIXED_PACKETS = (
     "wand125-mixed-bounds-finer-net-2026-10-05",
     "wand125-mixed-bounds-finer-net-2026-10-06",
     "wand125-mixed-bounds-check2-2026-10-06",
+    "wand125-fine-net-lower-bounds-2026-10-16",
 )
+#: A packet that keeps its certificates elsewhere than `square-packing-bounds/certificates`:
+#: the 16 October fine-net packet keeps its release assets' members at the assets' own
+#: paths (`devtools.fine_net_followup retain`).
+MIXED_ROOTS = {"wand125-fine-net-lower-bounds-2026-10-16": "release/certificates"}
 #: The standard net's direction count; a format M file may declare another.
 STANDARD_DIRECTIONS = 201
 CENSUS_ROOT = PROJECT / "benchmarks/measure-verifier"
@@ -242,11 +250,16 @@ def rectangle_cases() -> list[Case]:
     return cases
 
 
+def certificates_root(packet: str) -> Path:
+    """The folder a mixed or linear packet keeps its certificate folders in."""
+    return WEB / packet / MIXED_ROOTS.get(packet, "square-packing-bounds/certificates")
+
+
 def mixed_cases() -> list[Case]:
     """Every format M or L certificate of the wand125 mixed and linear packets."""
     cases: list[Case] = []
     for packet in MIXED_PACKETS:
-        root = WEB / packet / "square-packing-bounds/certificates"
+        root = certificates_root(packet)
         for path in sorted(root.glob("mixed_n*_L*/candidate.json.gz")):
             name = path.parent.name
             data = json.loads(gzip.decompress(path.read_bytes()), parse_float=str)
@@ -259,11 +272,18 @@ def mixed_cases() -> list[Case]:
 
 
 def net_directions(case: Case) -> int:
-    """How many net directions a case's certificate has: its `proof_net`'s, else 201."""
+    """How many net directions a case's certificate has: its `proof_net`'s, else the
+    count its format T metadata sets (`metadata_net`, GN-5 of jlevy/squares#485's
+    review), else 201."""
     raw = case.candidate.read_bytes()
     data = json.loads(gzip.decompress(raw) if raw[:2] == b"\x1f\x8b" else raw)
-    net = data.get("proof_net") if isinstance(data, dict) else None
-    return int(net["last"]) + 1 if isinstance(net, dict) else STANDARD_DIRECTIONS
+    if not isinstance(data, dict):
+        return STANDARD_DIRECTIONS
+    net = data.get("proof_net")
+    if isinstance(net, dict):
+        return int(net["last"]) + 1
+    declared = metadata_net(data)
+    return STANDARD_DIRECTIONS if declared is None else declared[1]
 
 
 def replay_folders(case: Case) -> list[Path]:
@@ -281,9 +301,7 @@ def has_siblings(case: Case) -> bool:
     """Whether another certificate of the packet has the same n (and so `nN` is shared)."""
     return any(
         other.name != case.certificate
-        for other in (WEB / case.packet / "square-packing-bounds/certificates").glob(
-            f"mixed_n{case.n}_L*"
-        )
+        for other in certificates_root(case.packet).glob(f"mixed_n{case.n}_L*")
     )
 
 
@@ -519,8 +537,16 @@ def exact_capture(
 @functools.cache
 def exact_candidate(path: Path, n: int) -> RectangleDensityCandidate:
     """A format T candidate read once by `sqpack.rectangle_density`, for its exact
-    captures at many centres."""
-    return load_candidate(path, n=n)
+    captures at many centres. That loader admits only the standard net in metadata,
+    since its own verifier runs on it; a file whose metadata sets another net is read
+    without the metadata, as `exact_capture` gives every angle from the file's net."""
+    data = path.read_bytes()
+    text = gzip.decompress(data) if data[:2] == b"\x1f\x8b" else data
+    raw = json.loads(text, parse_float=str)
+    if metadata_net(raw) in (None, (STEP, STANDARD_DIRECTIONS)):
+        return load_candidate(path, n=n)
+    raw.pop("certificate")
+    return load_candidate_bytes(json.dumps(raw).encode(), n=n)
 
 
 def mutant(case: Case, raw: dict[str, Any], factor: Fraction) -> dict[str, Any]:
@@ -656,6 +682,12 @@ def refusal_record(
     }
 
 
+#: The wall-clock limit on one whole-net sweep of a mutant. Four hours held the nets of 6
+#: October; the 2,073-direction net of s(43) >= 2777/400 costs about 12 CPU-hours a sweep,
+#: six hours of wall at two threads, so the limit is a day: a hung run still ends.
+SWEEP_TIMEOUT = 24 * 3600
+
+
 def scaled_sweep(
     binary: Path,
     raw: dict[str, Any],
@@ -680,7 +712,9 @@ def scaled_sweep(
     argv = [str(binary.resolve()), "--candidate", str(mutant), "--n", str(n)]
     argv += ["--directions", "all", "--threads", str(threads), "--confirm"]
     start = time.monotonic()
-    result = subprocess.run(argv, capture_output=True, text=True, check=False, timeout=14400)
+    result = subprocess.run(
+        argv, capture_output=True, text=True, check=False, timeout=SWEEP_TIMEOUT
+    )
     lines = [json.loads(line) for line in result.stdout.splitlines() if line.startswith("{")]
     rows = sorted((line for line in lines if "r" in line), key=lambda row: int(row["r"]))
     summary = next(
@@ -1208,7 +1242,8 @@ def evidence_entry(
     (report,) = (
         item
         for item in register["evidence"]
-        if item.get("assurance") == "reported" and item.get("certificate") == certificate
+        if item.get("assurance") == "reported"
+        and item.get("certificate") in (certificate, f"packing/{certificate}")
     )
     premises = entry["premises"]
     built = str((entry.get("build") or {}).get("source_sha256", ""))

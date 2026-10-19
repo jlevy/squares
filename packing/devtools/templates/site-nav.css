@@ -13,6 +13,48 @@
   --site-wash: var(--kpress-doc-surface-hover);
   --site-shadow: oklch(0% 0 0 / 0.15);
   --site-tab-current-tint: 16%;
+  --site-action-row-gap: 0.7rem;
+  --site-chooser-small-size: var(--site-font-size-control, 0.8rem);
+  --site-chooser-small-leading: 1.35;
+  --site-chooser-small-padding: 0.15rem 0.65rem;
+  --site-header-duration: 180ms;
+  --site-header-layer: 5;
+}
+/* JS measures the entire header, including wrapped links and section tabs. Its sticky
+   box keeps its original space while a transform hides it. Without JS the bar retains
+   its ordinary, visible layout; print and embedded documents retain theirs too. */
+@media screen {
+  :root {
+    scroll-padding-block-start: 0px;
+  }
+  .site-headroom {
+    background: var(--kpress-doc-bg);
+    inset-block-start: 0;
+    position: sticky;
+    transform: translateY(0);
+    transition: transform var(--site-header-duration) ease-out;
+    z-index: var(--site-header-layer);
+  }
+  /* On direct paper shells, the navigation itself is the sticky carrier. */
+  .site-nav.site-headroom {
+    position: sticky;
+  }
+  .site-headroom-hidden {
+    pointer-events: none;
+    transform: translateY(-100%);
+  }
+  /* Keyboard focus and an opening native menu reveal the control immediately, so the
+     menu is placed against its final position rather than a moving button. */
+  .site-headroom:is(:focus-within, :has(.site-theme-menu:popover-open)) {
+    pointer-events: auto;
+    transform: translateY(0);
+    transition: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --site-header-duration: 0ms;
+  }
 }
 /* ---------- Motion ----------
    Every hover and focus change on the site runs on one timing, fast and smooth, here
@@ -55,7 +97,6 @@
 .kpress-page-main {
   --kpress-page-margin-block-start: 1rem;
   --site-page-top: 4rem;
-  --site-gear-drop: 0.11em;
 }
 /* The space from the bar's rule to the top of a page's first block (its title, its hero,
    or the explainer's hero), one token for every page: kpress's document padding above
@@ -90,10 +131,11 @@
   padding: 0;
 }
 /* The bar's type, on the paper's scale (paper-type.css, which the site's pages, the
-   explainer and the workbench inline). The body is 18px prose. The bar's links, and a section's tabs, are one
+   explainer and the workbench inline). The body is 18px prose. The bar's links are one
    step below the body and no more: the note size, 0.92 of the sans base, 17.48px, which
    is the first size on the scale under 18px (the support size between them, 0.95, is
-   18.05px). The site's name is the sans base, 19px, the size sans text takes beside the
+   18.05px). Section tabs apply the shared button-label scale to that link size. The
+   site's name is the sans base, 19px, the size sans text takes beside the
    prose, and heavier, so it reads as the name. Both are taken from the host base, which
    is the same on every page, not from KPress's derived base, which a page may rescale,
    so the bar does not change size between pages. The optimality paper carries the bar
@@ -114,6 +156,7 @@
   font-family: var(--kpress-font-sans);
   font-feature-settings: var(--kpress-font-features-sans);
   font-size: var(--site-nav-font-size);
+  line-height: var(--site-nav-line);
 }
 .site-nav-inner {
   align-items: baseline;
@@ -139,8 +182,7 @@
   color: var(--kpress-doc-accent);
   text-decoration: none;
 }
-/* The name is set as written, in the bar's sans, a step heavier than the links. */
-/* The site name is set in capitals by style, so its text stays "Square Packing". */
+/* The full and compact names share the links' baseline and stay on one line. */
 .site-nav .site-name {
   color: var(--kpress-doc-text);
   font-size: var(--site-nav-name-size);
@@ -148,32 +190,10 @@
   letter-spacing: 0.06em;
   text-transform: uppercase;
   margin-inline: -0.55rem auto;
+  white-space: nowrap;
 }
-/* The mark, case 11 as the tab's icon draws it, sits before the name, centred on the
-   name's line, in the bar's ink, and takes the name's hover with it. */
-.site-nav .site-name {
-  align-items: center;
-  display: inline-flex;
-  gap: 0.45rem;
-}
-/* The name's text stands on the links' baseline. The bar aligns its items by their
-   baselines, and the name is a row of its own, a mark and the text, whose baseline would
-   be its first item's, the mark's lower edge: the links' text then stood level with the
-   foot of the mark, and the name's text, centred on the mark, some pixels above it. The
-   text is the one item of that row aligned by its baseline, so the row's baseline is the
-   text's, at any size of either, and the mark stays centred on the text's line. That
-   line is the links' own (`--site-nav-line`), so the name is no taller than a link and
-   the links stand where they do without it, the current one's underline the same
-   distance over the rule at every width. */
-.site-nav .site-name-text {
-  align-self: baseline;
-}
-/* 18px, whole pixels, the size `render_overview.SITE_LOGO_PX` draws its one-pixel frame
-   for, so the container's outline is one crisp pixel (two on a 2x screen). */
-.site-nav .site-logo {
-  block-size: 18px;
-  flex: none;
-  inline-size: 18px;
+.site-nav .site-name-short {
+  display: none;
 }
 .site-nav .site-name:is(:hover, :focus-visible) {
   color: var(--kpress-doc-text);
@@ -192,43 +212,29 @@
    (`kpress.theme`), which kpress's head bootstrap applies before first paint, so the
    stylesheets only ever key on `data-kpress-resolved-theme`; overview/theme.js wires the
    menu. The gear takes the nav items' wash and never underlines. */
-/* The bar centres the gear on its row, but the eye reads a row of text at the middle of
-   its capitals, which sits lower than the middle of its line box, so the gear drops by
-   `--site-gear-drop` to put its centre there, level with the tab text at every width. */
+/* The button takes the links' line box. Its inline SVG is centred on the font's capital
+   height, so the taller icon does not sit above the label's visible ink. Its wrapper
+   participates in the same baseline-aligned flex row, including wrapped phone rows. */
 .site-theme {
-  align-self: center;
+  align-self: baseline;
   display: flex;
   flex: 0 0 auto;
-  translate: 0 var(--site-gear-drop);
-}
-/* On a wide screen the links keep their centred track and the gear leaves it for the
-   bar's far right, its edge over the right end of the rule under the bar. From 80rem
-   the margin beside the 70rem track holds it clear of the last link; below that the
-   track spans the bar, and the gear ends the row. */
-@media (width >= 80rem) {
-  .site-nav {
-    position: relative;
-  }
-  .site-nav .site-theme {
-    inset-block: 0;
-    inset-inline-end: 0;
-    position: absolute;
-  }
 }
 .site-theme-button {
-  align-items: center;
   background: none;
   border: 0;
   color: var(--kpress-doc-muted);
   cursor: pointer;
-  display: flex;
+  display: block;
   font: inherit;
   padding: 0.3rem 0.45rem;
   transition: var(--site-hover-transition);
 }
 .site-theme-button svg {
   block-size: 1.05rem;
+  display: inline-block;
   inline-size: 1.05rem;
+  vertical-align: calc((1cap - 1.05rem) / 2);
 }
 .site-theme-button:is(:hover, :focus-visible, [aria-expanded="true"]) {
   background: var(--site-wash);
@@ -296,14 +302,13 @@
     display: none;
   }
 }
-/* On a phone the links keep to one row that scrolls sideways rather than wrapping to
-   three lines; the site name goes, since "Overview" is the same link. */
-/* On a phone every link stays in view: the row wraps, centred, rather than scrolling
-   links out of sight, and the gear ends the last line. */
 /* On a phone the links wrap to two or three rows, so each row is set closer: a shorter
    line and less padding above and below each link, with no gap between rows. A link
    stays 26px tall, above the 24px a tap target needs. */
 @media (width < 40rem) {
+  .site-nav {
+    --site-nav-line: calc(var(--site-nav-font-size) * 1.3);
+  }
   .site-nav-inner {
     gap: 0 0.1rem;
     justify-content: center;
@@ -311,20 +316,27 @@
     padding-inline: 0.5rem;
   }
   .site-nav a {
-    line-height: 1.3;
     padding-block: 0.15rem;
     padding-inline: 0.45rem;
   }
 }
-/* Narrower than the whole bar fits in one row with the name (56rem), the name gives
-   way and the mark alone leads home, so the links keep one row down to a phone. The
-   link keeps its label, "Square Packing home", for a screen reader. */
-@media (width < 56rem) {
-  .site-nav .site-name-text {
+/* With eight destinations the tablet row also needs the phone's shorter horizontal
+   padding and smaller gaps; otherwise the gear alone wraps below all the links. */
+@media (40rem <= width < 56rem) {
+  .site-nav-inner {
+    column-gap: 0.2rem;
+  }
+  .site-nav a {
+    padding-inline: 0.45rem;
+  }
+}
+/* Use the compact name below the width that fits the full bar on one row. */
+@media (width < 72rem) {
+  .site-nav .site-name-full {
     display: none;
   }
-  .site-nav .site-name {
-    align-self: flex-start;
+  .site-nav .site-name-short {
+    display: inline;
   }
 }
 /* On the explainer the bar is the first thing in the page, not in kpress's header slot. */
@@ -388,7 +400,10 @@
    hue and drew the light tab lavender rather than teal.
    The same strip also switches a view in place: there it is a tablist of buttons
    (`role="tab"`), the selected one filled as the current page's link is. The homepage's
-   atlas uses it for its Grid and Triangle views (site.css places it). */
+   atlas uses it for its Grid and Triangle views (site.css places it). Multi-select
+   chooser groups use the same native buttons with aria-pressed; momentary actions
+   keep ordinary button semantics. Visual selection is shared, keyboard behavior
+   stays with the control's semantics. */
 /* The tabs sit below the rule under the bar, not above it. That rule is the header
    slot's lower border and the tabs are in the slot, so a header that holds tabs hands
    its rule to the bar: from the top, the bar, the rule, then the tabs. The bar spans
@@ -407,17 +422,20 @@
   --site-tabs-space: 0.7rem;
   border: 1px solid var(--kpress-doc-border);
   display: flex;
+  flex-wrap: wrap;
+  max-inline-size: 100%;
   font-family: var(--kpress-font-sans);
   font-feature-settings: var(--kpress-font-features-sans);
-  font-size: var(--site-nav-font-size);
+  font-size: calc(var(--site-nav-font-size) * var(--paper-button-label-scale));
+  line-height: var(--site-nav-line);
   inline-size: fit-content;
   margin: var(--site-tabs-space) auto 0;
 }
 .site-app-shell .site-tabs {
   margin-block-end: var(--site-tabs-space);
 }
-/* A button tab takes the strip's type and none of a button's own chrome. */
-.site-tabs [role="tab"] {
+/* Every chooser button takes the strip's type and none of its native chrome. */
+.site-tabs :is([role="tab"], button) {
   background: none;
   border: 0;
   border-radius: 0;
@@ -425,7 +443,7 @@
   font: inherit;
 }
 nav.site-tabs a,
-.site-tabs [role="tab"] {
+.site-tabs :is([role="tab"], button) {
   color: var(--kpress-doc-muted);
   font-weight: 550;
   padding: 0.3rem 1.1rem;
@@ -433,17 +451,17 @@ nav.site-tabs a,
   transition: var(--site-hover-transition);
 }
 nav.site-tabs a + a,
-.site-tabs [role="tab"] + [role="tab"] {
+.site-tabs :is([role="tab"], button) + :is([role="tab"], button) {
   border-inline-start: 1px solid var(--kpress-doc-border);
 }
 nav.site-tabs a:is(:hover, :focus-visible),
-.site-tabs [role="tab"]:is(:hover, :focus-visible) {
+.site-tabs :is([role="tab"], button):is(:hover, :focus-visible) {
   background: var(--site-wash);
   color: var(--kpress-doc-accent);
   text-decoration: none;
 }
 nav.site-tabs a[aria-current="page"],
-.site-tabs [role="tab"][aria-selected="true"] {
+.site-tabs :is([role="tab"][aria-selected="true"], button[aria-pressed="true"]) {
   background: color-mix(
     in srgb,
     var(--kpress-doc-accent) var(--site-tab-current-tint),
@@ -470,4 +488,14 @@ nav.site-tabs a[aria-current="page"],
 }
 :root[data-site-view="embed"] .kpress-page-main > .kpress-doc {
   padding-block-start: 0.5rem;
+}
+
+/* Compact in-place choosers share the Results widget type scale. */
+.site-tabs.site-chooser-small {
+  font-size: var(--site-chooser-small-size);
+  line-height: var(--site-chooser-small-leading);
+}
+.site-tabs.site-chooser-small :is([role="tab"], button) {
+  font-weight: var(--site-font-weight-sans-medium, 500);
+  padding: var(--site-chooser-small-padding);
 }

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Found by Pertti Hämäläinen (of Finland) in 1980.
+        Source: Private communication between Erich Friedman and Martin Gardner, 1998
+            Source: Packing Unit Squares in Squares: A Survey and New Results, by Erich Friedman, Version 2 (July 17, 2000) and later: https://www.combinatorics.org/ojs/index.php/eljc/article/view/DS7/versions and https://erich-friedman.github.io/papers/squares/squares.html
+        Source: {Fractal Music, Hypercards and More...: Mathematical Recreations from Scientific American Magazine}, by Martin Gardner (1991)
+    Independently rediscovered by Walter R. Stromquist in 1984.
+        Source: "Packing Unit Squares Inside Squares III", November 15, 1984, an originally unpublished manuscript that is now available on his website: http://walterstromquist.com/papers/squares3.pdf
+        Source: {Fractal Music, Hypercards and More...: Mathematical Recreations from Scientific American Magazine}, by Martin Gardner (1991)
+            The packing is unattributed in Stromquist's paper, but the fact that he mailed it to Martin Gardner that same year without attributing it to anybody else means that he independently rediscovered it.
+
+    si = 4;
+    RootReduce[Solve[{EuclideanDistance[{0, 0}, {s - si, s - (si - 1)}] == 2, Tan[a] == (s - si)/(s - (si - 1)) && 0 < a < Pi/4}, {s, a}]]
+(*
+    s = 7/2 + Sqrt[7]/2
+    a = ArcTan[(4 - Sqrt[7])/3]
+*)
+-->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" [
+    <!ENTITY s  "4.82287565553229529525080787682" >
+    <!ENTITY a  "24.2951889453645703307597489065" >
+    <!ENTITY x1 "3.22001619859075838334445689222" > <!-- 5/2+1/2*Sqrt[7]-Cos[a]+3/4*Sin[a] -->
+    <!ENTITY y1 "0.727859456941536911906350984602"> <!-- 1-Sin[a]+3/4*Sin[a]*Tan[a]        -->    
+    <!ENTITY x2 "2.31642162917538926428094704619" > <!-- 3/2*Sin[a]*Cos[a]-2*Sin[a]+1/2*Sqrt[7]*Sin[a]*Cos[a]+5/2-Cos[a]^2+1/2*Sqrt[7]-Cos[a] -->
+    <!ENTITY y2 "2.51429728470768455953175492301" > <!-- 5/2-3/2*Cos[a]^2+2*Cos[a]+1/2*Sqrt[7]-1/2*Sqrt[7]*Cos[a]^2-Sin[a]*Cos[a]-Sin[a]      -->
+]>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 &s; &s;" style="fill:#B2B2B2; stroke:black; stroke-width:0.0017" id="svg">
+    <script xlink:href="svgDisp.js"/>
+    <defs>
+        <rect width="&s;" height="&s;" id="outer"/>
+        <g transform="rotate(&a;)" id="two">
+            <rect width="1" height="2"/>
+            <path style="fill:none" d="M0,1 H1"/>
+        </g>
+    </defs>
+    <use xlink:href="#outer" style="fill:white; stroke:none"/>
+    <g transform="translate(0 &s;) scale(1 -1)">
+        <g id="side1">
+            <g style="stroke:none">
+                <rect width="1" height="3"/>
+                <rect x="1" y="0" width="1" height="1"/>
+            </g>
+            <path style="fill:none" d="M0,3 H1 V0
+                                       M0,2 H1
+                                       M0,1 H2 V0"/>
+            <g transform="translate(0 &s;) scale(1 -1)">
+                <rect width="1" height="1" style="stroke:none"/>
+                <path style="fill:none" d="M0,1 H1 V0"/>
+            </g>
+            <use xlink:href="#two" transform="translate(&x1; &y1;)"/>
+            <use xlink:href="#two" transform="translate(&x2; &y2;)"/>
+        </g>
+        <g transform="translate(&s; &s;) scale(-1)">
+            <use xlink:href="#side1"/>
+        </g>
+    </g>
+    <use xlink:href="#outer" style="fill:none"/>
+</svg>

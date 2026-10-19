@@ -1,0 +1,3 @@
+# Invalid inline test fixtures may panic; production unwraps remain denied.
+allow-unwrap-in-tests = true
+allow-expect-in-tests = true

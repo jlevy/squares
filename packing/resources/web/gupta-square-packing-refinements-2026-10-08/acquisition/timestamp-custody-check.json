@@ -1,0 +1,67 @@
+{
+  "checked_at_utc": "2026-10-08T05:31:33Z",
+  "format": "gupta-438-timestamp-custody-check-v1",
+  "openssl_version": "OpenSSL 3.6.3 9 Jun 2026 (Library: OpenSSL 3.6.3 9 Jun 2026)",
+  "release_sha512_manifest_matches": 7,
+  "reply_text": "Status info:\nStatus: Granted.\nStatus description: unspecified\nFailure info: unspecified\n\nTST info:\nVersion: 1\nPolicy OID: tsa_policy1\nHash Algorithm: sha512\nMessage data:\n    0000 - fc e8 00 51 b0 4c 03 2b-c3 07 3b 5f 05 14 10 b8   ...Q.L.+..;_....\n    0010 - 6d 9f 2b 0d 82 32 d3 5f-ba 43 45 db 85 44 3c 63   m.+..2._.CE..D<c\n    0020 - bb 2c 71 bc c9 f6 7c 99-e0 81 b2 4b 45 88 71 c0   .,q...|....KE.q.\n    0030 - ad c3 6a c7 0c ea 4a f4-ab 51 74 7d bf 2b fc 11   ..j...J..Qt}.+..\nSerial number: 0x090610D0\nTime stamp: Oct  8 02:55:16 2026 GMT\nAccuracy: unspecified\nOrdering: yes\nNonce: 0xA5D84EBA775E06E5\nTSA: DirName:/O=Free TSA/OU=TSA/description=This certificate digitally signs documents and time stamp requests made using the freetsa.org online services/CN=www.freetsa.org/emailAddress=busilezas@mailbox.org/L=Wuerzburg/C=DE/ST=Bayern\nExtensions:\n",
+  "results": [
+    {
+      "command": [
+        "openssl",
+        "ts",
+        "-verify",
+        "-in",
+        "acquisition/release/square-packing-refinements-v1.0.0.tsr",
+        "-CAfile",
+        "acquisition/release/freetsa-ca.pem",
+        "-untrusted",
+        "acquisition/release/freetsa-tsa.crt",
+        "-queryfile",
+        "acquisition/release/square-packing-refinements-v1.0.0.tsq"
+      ],
+      "control": "query",
+      "returncode": 0,
+      "stderr": "Using configuration from /opt/homebrew/etc/openssl@3/openssl.cnf\nWarning: certificate from 'acquisition/release/freetsa-tsa.crt' with subject '/O=Free TSA/OU=TSA/description=This certificate digitally signs documents and time stamp requests made using the freetsa.org online services/CN=www.freetsa.org/emailAddress=busilezas@mailbox.org/L=Wuerzburg/C=DE/ST=Bayern' is not a CA cert\n",
+      "stdout": "Verification: OK\n"
+    },
+    {
+      "command": [
+        "openssl",
+        "ts",
+        "-verify",
+        "-in",
+        "acquisition/release/square-packing-refinements-v1.0.0.tsr",
+        "-CAfile",
+        "acquisition/release/freetsa-ca.pem",
+        "-untrusted",
+        "acquisition/release/freetsa-tsa.crt",
+        "-digest",
+        "fce80051b04c032bc3073b5f051410b86d9f2b0d8232d35fba4345db85443c63bb2c71bcc9f67c99e081b24b458871c0adc36ac70cea4af4ab51747dbf2bfc11"
+      ],
+      "control": "archive-sha512",
+      "returncode": 0,
+      "stderr": "Using configuration from /opt/homebrew/etc/openssl@3/openssl.cnf\nWarning: certificate from 'acquisition/release/freetsa-tsa.crt' with subject '/O=Free TSA/OU=TSA/description=This certificate digitally signs documents and time stamp requests made using the freetsa.org online services/CN=www.freetsa.org/emailAddress=busilezas@mailbox.org/L=Wuerzburg/C=DE/ST=Bayern' is not a CA cert\n",
+      "stdout": "Verification: OK\n"
+    },
+    {
+      "command": [
+        "openssl",
+        "ts",
+        "-verify",
+        "-in",
+        "acquisition/release/square-packing-refinements-v1.0.0.tsr",
+        "-CAfile",
+        "acquisition/release/freetsa-ca.pem",
+        "-untrusted",
+        "acquisition/release/freetsa-tsa.crt",
+        "-digest",
+        "0ce80051b04c032bc3073b5f051410b86d9f2b0d8232d35fba4345db85443c63bb2c71bcc9f67c99e081b24b458871c0adc36ac70cea4af4ab51747dbf2bfc11"
+      ],
+      "control": "altered-imprint",
+      "returncode": 1,
+      "stderr": "Using configuration from /opt/homebrew/etc/openssl@3/openssl.cnf\nWarning: certificate from 'acquisition/release/freetsa-tsa.crt' with subject '/O=Free TSA/OU=TSA/description=This certificate digitally signs documents and time stamp requests made using the freetsa.org online services/CN=www.freetsa.org/emailAddress=busilezas@mailbox.org/L=Wuerzburg/C=DE/ST=Bayern' is not a CA cert\n801D5BED01000000:error:17800067:time stamp routines:ts_check_imprints:message imprint mismatch:crypto/ts/ts_rsp_verify.c:508:\n",
+      "stdout": "Verification: FAILED\n"
+    }
+  ],
+  "trust_boundary": "Signature and message imprint checked against the source-supplied CA and signer certificate. Independent trust in that CA and the asserted signing time was not established. This says nothing about mathematical correctness or priority."
+}

@@ -63,6 +63,12 @@ web read. No bound moved, no witness changed, and no hypothesis was registered.
 The epic is `think-los0`; the session record is
 [session-168](../agent-sessions/session-168-known-best-families-and-shading.md).
 
+The statistics below describe the 2026-10-02 atlas baseline, retained in the census
+files at commit `69ddc7d988ba689cf887bdd0cb7fd64fdcf8c103`. The linked census files are
+live generated views and are refreshed when the retained atlas changes, including the
+SQUISH import on 2026-10-07. Those refreshes do not change this exploration’s dated
+measurements or H-272’s frozen targets.
+
 ## The Answers in Brief
 
 1. **Have the families been studied?** One at a time, never as a taxonomy.

@@ -1,0 +1,76 @@
+{
+  "schema": "registered-phase-command-plan/v1",
+  "registered_at": "2026-10-08T00:53:33.661096+00:00",
+  "source_freeze": "exact sourcecommit recorded at launch; target unrun",
+  "target_unrun": true,
+  "phases": [
+    {
+      "name": "construction",
+      "argv": [
+        "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+        "-m",
+        "devtools.check_n17_strict_core_regional_transfer",
+        "--descriptor",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-299-strict-core-regional-transfer/descriptor.json",
+        "--max-seconds",
+        "60",
+        "--output",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-299-strict-core-regional-transfer/certificate.json"
+      ]
+    },
+    {
+      "name": "fresh_verification",
+      "argv": [
+        "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+        "-m",
+        "devtools.check_n17_strict_core_regional_transfer",
+        "--descriptor",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-299-strict-core-regional-transfer/descriptor.json",
+        "--max-seconds",
+        "60",
+        "--certificate",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-299-strict-core-regional-transfer/certificate.json",
+        "--output",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-299-strict-core-regional-transfer/replay.json"
+      ]
+    }
+  ],
+  "primary_criterion": "Freshly bind accepted exp296descriptor/construction/fresh byte custody and complete original parent joins; reconstruct all992 accepted foreign row decisions and SAME25 identities. Check actual accepted Q0 point margin epsilon=2^-20 and closed guard h=2^-23. Exact corner/closed-arc quadratic checks prove fixed Q0 is strictly owned by every new guard pose with declared reserve, newguard-family disjointness and explicitly inherited original17endpoint retention. Fresh independent process matches compact complete premise/quantifier payload. Reuse foreign necessary domains/K/union proof only through the reviewed Q0 dependency; do not transport old point-only guarded_owner0 diagnostic. No full parent/root replay, unconditional restriction, census/global theorem or adaptive radius. Refusal/incomplete has no negative verdict.",
+  "budget": "60s construction plus60s fresh; owned-group outerTERM120/KILL130, one worker, sampled4096MiB currentRSS per live process;32 corevertices/512 closedquadratics/1MiBoutput; accepted64MiBinputs/10MiBdescriptor and unchanged collective exactwork caps. No cap or radius change after observation.",
+  "runner_argv": [
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-m",
+    "devtools.run_registered_phases",
+    "--manifest",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-299-strict-core-regional-transfer/execution-manifest.json",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-299-strict-core-regional-transfer/phase-execution.json"
+  ],
+  "supervisor_argv": [
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-m",
+    "devtools.supervise_posix",
+    "--max-seconds",
+    "120",
+    "--max-memory-mib",
+    "4096",
+    "--sample-seconds",
+    "0.25",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-299-strict-core-regional-transfer/supervision.json",
+    "--stdout",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-299-strict-core-regional-transfer/stdout.log",
+    "--stderr",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-299-strict-core-regional-transfer/stderr.log",
+    "--",
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-m",
+    "devtools.run_registered_phases",
+    "--manifest",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-299-strict-core-regional-transfer/execution-manifest.json",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-299-strict-core-regional-transfer/phase-execution.json"
+  ],
+  "max_memory_mib": 4096,
+  "memory_scope": "sampled_per_live_process_in_owned_group"
+}

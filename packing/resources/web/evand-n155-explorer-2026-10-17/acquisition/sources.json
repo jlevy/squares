@@ -1,0 +1,68 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-10-18T12:43:43Z",
+  "git_scope": "Shallow sparse blobless fetch of the issue #669 pin. Retained the MIT licence, credits, format and packer READMEs, both standalone exact checkers, and the eight s155_ex2 candidate files. The packer chronological log, basin explorer and numerical exact solver are digest-only lineage pins; unrelated certificates, sites, bulk histories and solver dependencies are omitted and commit-pinned only. No source code was executed.",
+  "sources": [
+    {
+      "id": "evand-n155-explorer-2026-10-17",
+      "source_url": "https://github.com/evand/square-packing",
+      "source_ref": "59326b86291b76c39d843f3f156e8f25fa0f6e3f",
+      "source_commit": "59326b86291b76c39d843f3f156e8f25fa0f6e3f",
+      "committed_utc": "2026-10-17T14:48:34Z",
+      "git_tree": "b8d24c45c5d5981f41111a8bee19aa54ce2c908d",
+      "archived_path": "packing/resources/web/evand-n155-explorer-2026-10-17/source",
+      "subtree_manifest": "packing/resources/web/evand-n155-explorer-2026-10-17/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "LICENSE",
+        "CREDITS.md",
+        "README.md",
+        "search/exact/README.md",
+        "search/exact/verify_cert.py",
+        "search/exact/verify_cert2.py",
+        "search/packer/README.md",
+        "search/packer/PACKER.md",
+        "search/packer/explore.py",
+        "search/packer/candidates/s155_ex2.cert",
+        "search/packer/candidates/s155_ex2.exact.txt",
+        "search/packer/candidates/s155_ex2.input.txt",
+        "search/packer/candidates/s155_ex2.json",
+        "search/packer/candidates/s155_ex2_prior.json",
+        "search/packer/candidates/s155_ex2_regularized.cert",
+        "search/packer/candidates/s155_ex2_regularized.json",
+        "search/packer/candidates/s155_ex2_vs_prior.json",
+        "search/exact/exactsolve.py"
+      ],
+      "subtree_file_count": 18,
+      "subtree_total_bytes": 684677,
+      "retained_file_count": 15,
+      "retained_total_bytes": 186330,
+      "compressed": [],
+      "pinned_only": [
+        {
+          "path": "search/exact/exactsolve.py",
+          "bytes": 62041,
+          "sha256": "ca32d01fea8ca125bb4a3c26cfcfd2bcbc2c1ecf99e140be08662d327d589111",
+          "reason": "Numerical high-precision certificate producer; replay consumes the completed certificates without this solver or its dependencies."
+        },
+        {
+          "path": "search/packer/PACKER.md",
+          "bytes": 388281,
+          "sha256": "0146c27fea347561af1c3c12e27adae4459e87fcce982fb5a1d644e271489514",
+          "reason": "Chronological packer log, 388281 bytes, useful provenance but not required to replay the exact certificate."
+        },
+        {
+          "path": "search/packer/explore.py",
+          "bytes": 48025,
+          "sha256": "a179923bf038991391160785e3517326b390998753208cde1d4bc87805b326d9",
+          "reason": "Numerical basin explorer used for discovery; not required by either standalone exact checker."
+        }
+      ],
+      "license": "MIT, copyright (c) 2026 Evan Daniel (LICENSE retained). CREDITS.md states Claude (Anthropic) under human direction, no peer review; the source commit names Claude Opus 5.5 as co-author. Issue #669 credits Daniil Ostashev's T-149 packing as the search start.",
+      "claims": [
+        "Issue #669 reports s(155) <= 12.952260944651, the certificate's exact rational side 2590452188930112807053435932173/200000000000000000000000000000 = 12.952260944650564035267179660865 rounded upward at 12 decimal places. Both original and regularized certificates have this side; issue SHA-256 values a1a3b6e7c2ce4d7de79efc2e07fc0bf53616dc44b732a2849b4dc4d8f7e2c4cc and ab3c0b93aa205a907da5387cc119df11164c0a6d63b49b81332d7ce77910a897.",
+        "The author reports both standalone stdlib exact checkers accept both certificates. They share authorship and certificate format but use separating axes and polygon intersections, respectively. Acquisition retains their source and does not execute them or infer independent outside authorship.",
+        "The issue credits Daniil Ostashev's T-149 as the starting packing, then a chain of 18 basin-explorer moves. It reports a different local minimum, KKT/second-order and corner-corner MILP diagnostics at 80 digits, and a 17-angle-group regularized view; these are numerical evidence, not interval proofs or a claim of global optimality. Comparison files and numerical inputs are retained as source assertions."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "combined_resource_guard": "external supervisor; no internal wall/RSS guard",
+  "ended_at": "2026-10-07T18:59:09.026370Z",
+  "manifest": "campaign/series/series-000-smoke-and-calibration/results/exp-289-complete-partner-coupling/execution-manifest.json",
+  "manifest_sha256": "cc73882e0fd92d3ac97aaccdd6beda6c613736183e73bac592883f7a27897334",
+  "phases": [{"argv":["/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python","-m","devtools.check_n17_partner_pose_coupling","--descriptor","campaign/series/series-000-smoke-and-calibration/results/exp-289-complete-partner-coupling/descriptor.json","--max-seconds","120","--output","campaign/series/series-000-smoke-and-calibration/results/exp-289-complete-partner-coupling/certificate.json"],"ended_at":"2026-10-07T18:59:09.025936Z","name":"construction","returncode":1,"started_at":"2026-10-07T18:59:05.850318Z","status":"failed","wall_seconds":3.1755243750521913}],
+  "schema": "registered-phase-execution/v1",
+  "scientific_result_interpreted": false,
+  "started_at": "2026-10-07T18:59:05.849962Z",
+  "status": "failed",
+  "unstarted_phase_names": ["fresh_verification"],
+  "wall_seconds": 3.176176665991079
+}
+

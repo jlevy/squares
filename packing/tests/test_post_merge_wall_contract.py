@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import re
+import subprocess
 from pathlib import Path
 from typing import Any
 
@@ -20,6 +21,7 @@ AGGREGATE = "post-merge-required"
 GATE = "post-merge"
 RESULT_ENVIRONMENTS = {
     "validate": "VALIDATE_RESULT",
+    "integration-suites": "INTEGRATION_SUITES_RESULT",
     "deferred-threshold-1440": "THRESHOLD_1440_RESULT",
     "deferred-atlas-grid": "ATLAS_GRID_RESULT",
     "deferred-controls-finer": "CONTROLS_FINER_RESULT",
@@ -184,3 +186,31 @@ def test_post_merge_wall_reports_unknown_until_every_declared_worker_finishes() 
     wall = next(verdict for verdict in found if verdict.tier == "wall")
     assert wall.status == "unknown"
     assert "not measured" in wall.notes[0]
+
+
+@pytest.mark.parametrize("result", ["success", "failure", "skipped", "cancelled", ""])
+def test_post_merge_aggregate_refuses_every_unsuccessful_suite_owner(result: str) -> None:
+    verdict = _workflow()["jobs"][AGGREGATE]["steps"][0]
+    environment = dict.fromkeys(RESULT_ENVIRONMENTS.values(), "success")
+    environment[RESULT_ENVIRONMENTS["integration-suites"]] = result
+    completed = subprocess.run(
+        ["bash", "-e", "-c", verdict["run"]],
+        env=environment,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    assert (completed.returncode == 0) is (result == "success")
+
+
+def test_post_merge_suite_cost_is_declared_without_inventing_a_measurement() -> None:
+    register = load(BUDGETS)
+    gate = register.ci_gate(GATE)
+    assert gate is not None
+    budget = next(item for item in gate.jobs if item.id == "integration-suites")
+    assert budget.ceiling_seconds == 1390
+    assert budget.measured_seconds is None
+    assert gate.wall.ceiling_seconds == 3430
+    full = register.tier("full")
+    assert full is not None
+    assert full.ceiling_seconds == 3600

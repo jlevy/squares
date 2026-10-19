@@ -1,0 +1,5 @@
+Chunk0000: table 825 entries, previousEntryIds.size = 0, fresh 825, bounds 825
+Chunk0000: failing fresh entries: []
+Chunk0000: angle range [-1.424603820, 1.480125756], max width 2.454e-02, min core h 0.987951, min span 0.000000
+freshCheck 44 replayed = True
+wall 3s

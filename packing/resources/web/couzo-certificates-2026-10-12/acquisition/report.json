@@ -1,0 +1,72 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "https://github.com/jlevy/squares/issues/561",
+  "author": "Francisco Couzo",
+  "source_key": "[Couzo certificates 2026-10-12]",
+  "report_evidence": "E-couzo-561-certificate-report",
+  "receipt_format": "couzo-561-exact-replay-v1",
+  "witness_prefix": "W-couzo-561-n",
+  "claim_limitations": "Complete 0fa0e0d rational centre/half-angle certificate converted exactly from the retained source. Finite construction feasibility only; no KKT, local minimum, rigidity, novelty, priority or global optimality claim.",
+  "read_on": "2026-10-14",
+  "read_at_main": "aeef99ef0ef27ace054434094118a6ac355da384",
+  "certificates": [
+    {"n": 156, "path": "certificates/n156.cert", "format": "evand-cert", "offered": "12.979165853835", "first_committed": "2026-10-12T17:55:52Z"},
+    {"n": 176, "path": "certificates/n176.cert", "format": "evand-cert", "offered": "13.807637227056", "first_committed": "2026-10-12T17:55:52Z"},
+    {"n": 237, "path": "certificates/n237.cert", "format": "evand-cert", "offered": "15.902947773659", "first_committed": "2026-10-12T17:55:52Z"},
+    {"n": 271, "path": "certificates/n271.cert", "format": "evand-cert", "offered": "16.948992356452", "first_committed": "2026-10-12T17:55:52Z"},
+    {"n": 338, "path": "certificates/n338.cert", "format": "evand-cert", "offered": "18.906332809853", "first_committed": "2026-10-12T17:55:52Z"},
+    {"n": 344, "path": "certificates/n344.cert", "format": "evand-cert", "offered": "18.993741872920", "first_committed": "2026-10-12T18:07:42Z"},
+    {"n": 375, "path": "certificates/n375.cert", "format": "evand-cert", "offered": "19.901618621328", "first_committed": "2026-10-12T18:26:28Z"},
+    {"n": 376, "path": "certificates/n376.cert", "format": "evand-cert", "offered": "19.904949736499", "first_committed": "2026-10-12T17:55:52Z"},
+    {"n": 378, "path": "certificates/n378.cert", "format": "evand-cert", "offered": "19.942536155970", "first_committed": "2026-10-12T17:55:52Z"}
+  ],
+  "requested": [156, 176, 237, 271, 338, 344, 375, 376, 378],
+  "replayed": [156, 176, 237, 271, 338, 344, 375, 376, 378],
+  "houses": [
+    {"n": 156, "reader": "[Ostashev records 2026-10-11]", "source_key": "[Ostashev records 2026-10-11]", "holders": "Daniil Ostashev", "result": "T-149", "reported_value": "12.9791726136444261", "verified_value": "12.9791726136444261", "evidence": ["E-ostashev-501-exact-feasibility"]},
+    {"n": 176, "reader": "[SQUISH fourth request 2026-10-11]", "source_key": "[SQUISH fourth request 2026-10-11]", "holders": "Nate Chaoweeraprasit (itsnaka)", "result": "T-151", "reported_value": "13.8128562532770564", "verified_value": "13.8128562532770564", "evidence": ["E-squish-500-exact-feasibility"]},
+    {"n": 237, "reader": "[Couzo certificates 2026-10-10]", "source_key": "[Couzo certificates 2026-10-10]", "holders": "Nate Chaoweeraprasit (itsnaka), improved by Francisco Couzo", "result": "T-140", "reported_value": "15.9029496076778317", "verified_value": "15.9029496076778317", "evidence": ["E-couzo-488-exact-feasibility"]},
+    {"n": 271, "reader": "[SQUISH fourth request 2026-10-11]", "source_key": "[SQUISH fourth request 2026-10-11]", "holders": "Nate Chaoweeraprasit (itsnaka)", "result": "T-151", "reported_value": "16.9491166878150100", "verified_value": "16.9491166878150100", "evidence": ["E-squish-500-exact-feasibility"]}
+  ],
+  "pending": [
+    {"n": 156, "report": "PR #574", "url": "https://github.com/jlevy/squares/pull/574", "holders": "PingYou Ltd (BuddenPing)", "reader": "[PingYou PR 574 certificates 2026-10-13]"},
+    {"n": 156, "report": "#593", "url": "https://github.com/jlevy/squares/issues/593", "holders": "Mykhailo Polkovskyi (Mishapolk)", "reader": "[Mishapolk records 2026-10-14]"},
+    {"n": 176, "report": "PR #574", "url": "https://github.com/jlevy/squares/pull/574", "holders": "PingYou Ltd (BuddenPing)", "reader": "[PingYou PR 574 certificates 2026-10-13]"},
+    {"n": 176, "report": "#575", "url": "https://github.com/jlevy/squares/issues/575", "holders": "Daniil Ostashev", "reader": "[Ostashev merged bands 2026-10-13]"},
+    {"n": 176, "report": "#593", "url": "https://github.com/jlevy/squares/issues/593", "holders": "Mykhailo Polkovskyi (Mishapolk)", "reader": "[Mishapolk records 2026-10-14]"},
+    {"n": 176, "report": "#562", "url": "https://github.com/jlevy/squares/issues/562", "holders": "Daniil Ostashev", "reader": "[Ostashev compositions 2026-10-12]"},
+    {"n": 176, "report": "#586", "url": "https://github.com/jlevy/squares/issues/586", "holders": "Francisco Couzo", "reader": "[Couzo certificates 2026-10-13]"},
+    {"n": 237, "report": "PR #574", "url": "https://github.com/jlevy/squares/pull/574", "holders": "PingYou Ltd (BuddenPing)", "reader": "[PingYou PR 574 certificates 2026-10-13]"},
+    {"n": 237, "report": "#593", "url": "https://github.com/jlevy/squares/issues/593", "holders": "Mykhailo Polkovskyi (Mishapolk)", "reader": "[Mishapolk records 2026-10-14]"},
+    {"n": 237, "report": "#573", "url": "https://github.com/jlevy/squares/issues/573", "holders": "Mykhailo Polkovskyi (Mishapolk)", "reader": "[Mishapolk exact certificates 2026-10-12]"},
+    {"n": 271, "report": "PR #574", "url": "https://github.com/jlevy/squares/pull/574", "holders": "PingYou Ltd (BuddenPing)", "reader": "[PingYou PR 574 certificates 2026-10-13]"},
+    {"n": 271, "report": "#593", "url": "https://github.com/jlevy/squares/issues/593", "holders": "Mykhailo Polkovskyi (Mishapolk)", "reader": "[Mishapolk records 2026-10-14]"},
+    {"n": 338, "report": "couzo-certificates-2026-10-11", "url": "packing/frontier/source-coverage.yaml", "holders": "Francisco Couzo", "printed": "18.906436500552", "rounding": "up"},
+    {"n": 344, "report": "couzo-certificates-2026-10-11", "url": "packing/frontier/source-coverage.yaml", "holders": "Francisco Couzo", "printed": "18.994353244944", "rounding": "up"},
+    {"n": 344, "report": "couzo-certificates-2026-10-13", "url": "packing/frontier/source-coverage.yaml", "holders": "Francisco Couzo", "printed": "18.993724693587", "rounding": "up"},
+    {"n": 375, "report": "couzo-certificates-2026-10-11", "url": "packing/frontier/source-coverage.yaml", "holders": "Francisco Couzo", "printed": "19.906335145009", "rounding": "up"},
+    {"n": 375, "report": "evand-compositions-2026-10-13", "url": "packing/frontier/source-coverage.yaml", "holders": "Evan Daniel", "printed": "19.882451030482", "rounding": "up"},
+    {"n": 376, "report": "couzo-certificates-2026-10-11", "url": "packing/frontier/source-coverage.yaml", "holders": "Francisco Couzo", "printed": "19.910276586885", "rounding": "up"},
+    {"n": 376, "report": "couzo-certificates-2026-10-13", "url": "packing/frontier/source-coverage.yaml", "holders": "Francisco Couzo", "printed": "19.904068025747", "rounding": "up"},
+    {"n": 378, "report": "couzo-certificates-2026-10-11", "url": "packing/frontier/source-coverage.yaml", "holders": "Francisco Couzo", "printed": "19.942541777355", "rounding": "up"},
+    {"n": 378, "report": "couzo-certificates-2026-10-13", "url": "packing/frontier/source-coverage.yaml", "holders": "Francisco Couzo", "printed": "19.942519693846", "rounding": "up"}
+  ],
+  "register": {
+    "title": "Francisco Couzo's exact rational certificates at 0fa0e0d, issue561",
+    "headline": "Exact rational certificates at 156, 176, 237 and 271 from Francisco Couzo",
+    "significance": 2,
+    "source_checks": "The author reports that all nine requested certificates, fetched at the pin and checked against their SHA-256 digests and row counts, pass this repository's sqpack verify.py at 562fdbd and Evan Daniel's verify_cert.py at 31523f8 in exact rational arithmetic, in 4.52 and 5.56 seconds; that 156, 237, 271, 338 and 376 are exact optima from Evan Daniel's exact contact solver; and that 176, 344, 375 and 378 are rational witnesses of their decimal packings with centres dilated by 1 + 1e-11, 1 + 1e-12, 1 + 1e-10 and 1 + 1e-12. Those statements, and the author's replay script and receipt at e9eb44b, are the author's; no source program ran here.",
+    "credit": "Credit Francisco Couzo (https://github.com/franciscouzo/square-packing), with the packings each started from, as the author asks: Daniil Ostashev's arrangements at 156 and 176, continued with the author's basin hopping and refinement and, at 176, through his web app; Nate Chaoweeraprasit's SQUISH arrangements at 237 and 271, continued with the author's basin hopping and Evan Daniel's fq refinement (237 improves the author's T-140 certificate). Beyond the case corpus, 344 continues Kevin Fang's 344 (issue 484) from the packing reported in issue 506, and 338, 375, 376 and 378 the author's L-border constructions of issue 506 (338 and 375 from his 303, itself from SQUISH's issue 401; 376 from his earlier 304; 378 from his 306), refined with Evan Daniel's fq at 338 and 376 and basin hopping at 378; the latest step at 375 came through the author's browser web app with David Ellsworth's search (record a87a2fa7). Evan Daniel's optimizer, exact contact solver and verifier, David Ellsworth's refinement and search ideas, and this project's sqpack verifier were used. The author states that OpenAI Codex assisted the continuing search, the application work, the source audit, the verification orchestration and the request, that earlier search code and submissions were prepared with Claude Code, and that he directed the work.",
+    "next_rung": "Independently review the retained replay and weigh every pending report at each count before any selected-house replacement: at 176 Daniil Ostashev's issue 575 (13.795872318437) is smaller, and the same author's later certificate at b85dee2 (couzo-certificates-2026-10-13, named by no issue) supersedes this one; at 237 Mishapolk's issue 593 prints a smaller side; and PingYou Ltd's open pull request 574 states this release's certificates at 156 and 271, and issue 575's at 176, each with its side reduced by about one part in 1e20, 1.3e-19 to 1.7e-19; its certificates were not read here. Then record source-specific adoption and confirming evidence. Final exact-head CI remains required.",
+    "bead": "think-rfce",
+    "bibliography": {
+      "authors": [
+        "Couzo"
+      ],
+      "lineage": "builds-on-project",
+      "credit": "Couzo after Ostashev, Chaoweeraprasit, Fang, Daniel, Ellsworth, Levy",
+      "short_credit": "Couzo after Ostashev et al.",
+      "note": "Nine complete exact certificates at 0fa0e0de2ef0b414655e871b1baffcfe0d33c815, all requested on issue 561: 156 and 176 continued from Ostashev's arrangements, 237 and 271 from Chaoweeraprasit's SQUISH arrangements with Daniel's fq, and five beyond the case corpus continuing the author's issue-506 L-border constructions and Fang's 344; five exact optima from Daniel's exact contact solver and four dilated rational witnesses. The source checks with Squares Project (Levy) verification code; this project lineage is not independent. The certificates are retained as factual data; the unlicensed prose is hash-pinned. No optimizer, local or global claim."
+    }
+  }
+}

@@ -303,7 +303,7 @@ bound, probability estimate, or method-wide exhaustion claim.
 [bridge]: ../../../docs/project/research/research-2026-09-13-bc303-t2-charge-bridge.md
 [bridgereview]: ../../../docs/project/reviews/review-2026-09-13-bc303-t2-charge-bridge.md
 [bc329]: ../../../docs/project/reviews/review-2026-09-10-n11-bc329-packet-preflight.md
-[runsheet]: ../../../docs/project/specs/active/plan-2026-09-13-n11-bc329-three-profile-run-sheet.md
+[runsheet]: ../../../docs/project/specs/archive/plan-2026-09-13-n11-bc329-three-profile-run-sheet.md
 [x028]: X-028-n11-strategy-portfolio-draft.md
 [routing]: ../../../docs/project/research/research-2026-09-12-n11-selection-routing-first-principles.md
 [mechanisms]: ../../../docs/project/research/research-2026-09-10-x027-certificate-mechanisms.md

@@ -9,15 +9,20 @@ Usage, from `packing/`:
         python -m devtools.render_regularized_atlas --check
 
 `atlas/known-best/regularized/index.json`, which `devtools.regularize_axis_components
---update-atlas` writes, names every record that has a regularized view: the record's
+--update-atlas` writes and `devtools.regularize_evand layer` adds admitted views to, names
+every record that has a regularized view and the generator that made it: the record's
 exact frame with its near-axis squares straightened and slid into exact contact (X-049,
-"Exact Regularization"). This draws each such view to
+"Exact Regularization"), Evan Daniel's regularizer's view brought to the record's side,
+or the grid-slack generator's (docs/project/policies/regularization-policy.md). This
+draws each such view to
 `atlas/known-best/regularized/rendering/n-NNN.svg` with `sqpack.render`, the renderer
 that draws `atlas/known-best/rendering/n-NNN.svg`, at the same settings. A square's
 shade is therefore the house rule (`sqpack.render.color`) applied to the regularized
-pose, and the homepage's atlas reduces a regularized drawing to a tile by the code that
-reduces a house drawing (`render_frontier_page.packing_svg`), so the House/Regularized
-toggle compares two drawings made one way.
+pose, and the site reduces a regularized drawing to a tile by the code that reduces a
+house drawing (`render_frontier_page.packing_svg`), so a count's default picture
+(`devtools.default_drawings`) and its house drawing, which the case page keeps as
+published, are two drawings made one way. The posters draw a regularized default from
+the same frame (`build_known_best_atlas.tile_frame`).
 
 The set is read from the index, never listed here: a view another run adds is drawn by
 the next `--update`, and `--check` fails until it is. A view is drawn only from the
@@ -28,9 +33,10 @@ claims), so a stale view is refused rather than drawn.
 A drawing never promotes anything. It carries the record's evidence tier and check,
 read from the source witness, not the view's own exact verification; its title and
 description say it is a regularized derived view; and its source id is the view's
-(`W-known-best-nNNN-regularized`). The container side is the view's certified side,
-which differs from the record's printed side by at most a unit in the fifteenth
-decimal, invisible at any size the drawing is shown.
+(`W-known-best-nNNN-regularized`); a view his method made also carries the credit line
+the policy's section 7 gives it. The container side is the view's certified side: the
+record's printed side, or its verified upper bound for a view at the bound, which
+differ by less than `10^-11`, invisible at any size the drawing is shown.
 
 `--check` re-renders every view and compares bytes, and names a missing, stale or
 unexpected file. It takes a few seconds, about a tenth of a second for each of the
@@ -52,7 +58,15 @@ from typing import Any
 from strif import atomic_output_file
 
 from devtools.build_known_best_atlas import frame_from_witness
-from devtools.regularize_axis_components import ATLAS_CONTRACT, DRAWING_LABEL
+from devtools.regularize_axis_components import (
+    ALGORITHM,
+    ATLAS_CONTRACT,
+    DRAWING_LABEL,
+    EVAND_CREDIT,
+    EVAND_GENERATOR,
+    GRID_GENERATOR,
+    GRID_GENERATOR_V1,
+)
 from sqpack.render import render_packing_svg
 from sqpack.render.model import PackingFrame, RenderSpec
 from sqpack.workers import worker_count
@@ -68,6 +82,22 @@ GENERATOR = "python -m devtools.render_regularized_atlas"
 WITNESS_CONTRACT = "packing.squares:Witness/v2"
 #: What a view's certificate says it is (`regularize_axis_components.regularized_witness`).
 VIEW_KIND = "regularized-view"
+#: What each generator did to the record's exact frame, as a drawing's description says.
+#: The axis tool's sentence is the one its drawings have always carried.
+MADE_BY = {
+    ALGORITHM: (
+        "its exact frame with the near-axis squares straightened and slid into exact contact"
+    ),
+    EVAND_GENERATOR: (
+        "Evan Daniel's regularizer's view of it, its contacts re-solved exactly at the "
+        "record's side"
+    ),
+    **dict.fromkeys(
+        (GRID_GENERATOR, GRID_GENERATOR_V1),
+        "its exact frame with the free grid slack closed and the near-axis squares "
+        "straightened at the record's side",
+    ),
+}
 
 
 @dataclass(frozen=True)
@@ -178,6 +208,8 @@ def render(entry: dict[str, Any], layout: Layout = LAYOUT) -> str:
     """One view drawn as the house atlas draws its record (`build_known_best_atlas`),
     titled and described as the regularized derived view it is."""
     n = entry["n"]
+    generator = entry.get("generator", ALGORITHM)
+    credit = "" if generator == ALGORITHM else f" {EVAND_CREDIT}."
     return render_packing_svg(
         regularized_frame(entry, layout),
         spec=RenderSpec(
@@ -185,12 +217,11 @@ def render(entry: dict[str, Any], layout: Layout = LAYOUT) -> str:
             title=f"Known-best packing of {n} unit squares, {DRAWING_LABEL}",
             description=(
                 f"A {DRAWING_LABEL} derived view of the retained known-best n={n} "
-                "construction, never the source witness: its exact frame with the "
-                "near-axis squares straightened and slid into exact contact, verified "
+                f"construction, never the source witness: {MADE_BY[generator]}, verified "
                 "over the rationals (atlas/known-best/regularized/index.json), and "
                 "rendered with the repository's deterministic house renderer. It changes "
                 "no side, frontier value or evidence tier; the evidence stated here is "
-                "the record's."
+                f"the record's.{credit}"
             ),
         ),
     )

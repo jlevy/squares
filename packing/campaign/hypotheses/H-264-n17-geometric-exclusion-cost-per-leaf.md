@@ -72,7 +72,7 @@ exclusion it makes is reusable in a final proof.
 The instrument is n11’s kernel adapted to n17 (`devtools/check_n17_subpattern.py` on
 `sqpack.hull_kernel`), with every closure re-proved by the standing kernel verifier
 before it counts. Session 182 runs it as lane A of the
-[n17 overnight plan](../../../docs/project/specs/active/plan-2026-10-05-n17-overnight.md)
+[n17 overnight plan](../../../docs/project/specs/done/plan-2026-10-05-n17-overnight.md)
 (BC-419), after the float pre-screen and a kernel control on the endpoint’s own state,
 which must not close.
 

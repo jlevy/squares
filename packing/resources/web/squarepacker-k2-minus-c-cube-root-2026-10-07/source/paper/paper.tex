@@ -1,0 +1,584 @@
+\documentclass[11pt]{amsart}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[shortlabels]{enumitem}
+\usepackage{booktabs}
+\usepackage[hidelinks]{hyperref}
+\newcommand{\R}{\mathbb R}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\cP}{\mathcal P}
+\newcommand{\cD}{\mathcal D}
+\newcommand{\cM}{\mathcal M}
+\newcommand{\cE}{\mathcal E}
+\newcommand{\cR}{\mathcal R}
+\newcommand{\cZ}{\mathcal Z}
+\newcommand{\cX}{\mathcal X}
+\newcommand{\cH}{\mathcal H}
+\newcommand{\relint}{\operatorname{relint}}
+\newcommand{\Bot}{\operatorname{bot}}
+\newcommand{\Top}{\operatorname{top}}
+\newcommand{\dist}{\operatorname{dist}}
+\newcommand{\Sh}{\operatorname{Sh}}
+\newcommand{\Ovgap}{\operatorname{Ov}_{\mathrm{gap}}}
+\newcommand{\Exc}{\operatorname{Exc}}
+\newcommand{\amax}{\alpha_{\max}}
+\newcommand{\bbar}{\bar\beta}
+\newcommand{\Abar}{\bar A}
+\newcommand{\Lam}{\Lambda}
+\newcommand{\Wmin}{W_{\min}}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\numberwithin{equation}{section}
+
+\title[Deficiency of order $k^{1/3}$]{Packing $k^2-c$ unit squares:\\ a lower bound of order $k^{1/3}$ for the deficiency}
+\author{Sungjoon Ryu}
+\date{Preprint, version 1.0, 7 October 2026}
+
+\raggedbottom
+\begin{document}
+\begin{abstract}
+Let $M(k)$ be the largest number of unit squares that can be placed in $[0,k]^2$ so that they are pairwise disjoint as
+closed sets; then, for integers $k\ge2$ and $0\le c<k^2$, $s(k^2-c)=k$ exactly when $c<k^2-M(k)$. Building on [Q], where
+$k^2-M(k)\ge0.1\,k^{1/4}$ is shown for every integer $k\ge4.62\cdot10^{12}$, we prove that $k^2-M(k)>10^{-4}\sqrt k$
+for every integer $k\in[10^8,\,2.5\cdot10^{15}]$, that $k^2-M(k)>7\cdot10^{-5}\sqrt k$ for every integer
+$k\in[2.5\cdot10^{15},\,3.5\cdot10^{17}]$, that $k^2-M(k)>0.06\,k^{1/3}$ for every integer $k\ge3.5\cdot10^{17}$, and
+that $\liminf_{k\to\infty}(k^2-M(k))/k^{1/3}\ge0.06285$. For every $k\ge4.62\cdot10^{12}$ these bounds exceed the bound
+of [Q]. The new ingredient is a bound for the total inclination of the squares crossed by a single path of the flow of
+[Q]: the height ranges of the crossings are disjoint, so the lemma of [R] on the cost of inclinations applies to their
+union. It allows a single flow, with a tilt threshold of order $1/W$, to keep every path quantized at every height. The
+constants rely on the computer-assisted Lemma~4.10 of [R]; without it the same argument gives $8.5\cdot10^{-5}\sqrt k$
+on $[10^8,\,2.4\cdot10^{15}]$, $6\cdot10^{-5}\sqrt k$ on $[2.4\cdot10^{15},\,3.39\cdot10^{17}]$, $0.05\,k^{1/3}$ from
+$3.39\cdot10^{17}$ on, and the constant $0.05229$. This paper has not been peer reviewed.
+\end{abstract}
+\maketitle
+
+\section{Introduction and results}\label{sec:intro}
+
+For $n\ge1$ let $s(n)$ be the side of the smallest square that contains $n$ unit squares with pairwise disjoint
+interiors. A \emph{closed packing} of $[0,k]^2$ is a finite family of closed unit squares contained in $[0,k]^2$ that
+are pairwise disjoint as closed sets. Let $M(k)$ be the largest size of a closed packing of $[0,k]^2$ and
+$\Wmin(k):=k^2-M(k)$; for a given closed packing $\cP$ we write $W:=k^2-|\cP|$, an integer, the area of the uncovered
+part of $[0,k]^2$. For integers $k\ge2$ and $0\le c<k^2$ one has $s(k^2-c)=k$ if and only if $c<\Wmin(k)$
+([Q, Section~1]).
+
+Nagamochi stated $s(k^2-1)=s(k^2-2)=k$ for every $k\ge2$; his published proof has a gap, and replacement proofs have
+been given, of $s(k^2-1)=k$ in a preprint and of $s(k^2-2)=k$ with a formalization in Lean (see [R, Section~1] for the
+references). Thus $\Wmin(k)\ge3$ for $k\ge2$. Computer-assisted announcements that have not yet been refereed give
+$s(k^2-3)=k$ for $k\ge6$ and $s(k^2-4)=k$ for $k\ge5$, i.e.\ $\Wmin(k)\ge5$ for $k\ge6$ ([R, Section~1]). The previous
+paper [R] shows $\Wmin(k)\ge0.0353\log k$ for every integer $k\ge2$, and [Q] shows $\Wmin(k)\ge0.1\,k^{1/4}$
+for every integer $k\ge4.62\cdot10^{12}$ and $\liminf\Wmin(k)/k^{1/4}\ge0.1696$. In the other direction
+$\Wmin(k)=O(k^{3/5})$, by recent work on the wasted area that has not yet been refereed ([Bui], [McC]; see
+[Q, Section~1]).
+
+\begin{theorem}\label{thm:main}
+Let $k$ be an integer and $\cP$ a closed packing of $[0,k]^2$ with waste $W$.
+\begin{enumerate}[label=(\alph*)]
+\item If $10^8\le k\le2.5\cdot10^{15}$, then $W>10^{-4}\sqrt k$.
+\item If $2.5\cdot10^{15}\le k\le3.5\cdot10^{17}$, then $W>7\cdot10^{-5}\sqrt k$.
+\item If $k\ge3.5\cdot10^{17}$, then $W>0.06\,k^{1/3}$; if $k\ge10^{21}$, then $W>0.0625\,k^{1/3}$.
+\item $\liminf_{k\to\infty}\Wmin(k)/k^{1/3}\ge0.06285$.
+\end{enumerate}
+\end{theorem}
+
+\begin{theorem}[without {[R, Lemma~4.10]}]\label{thm:main13}
+With [R, Lemma~4.9] in place of [R, Lemma~4.10]: if $10^8\le k\le2.4\cdot10^{15}$, then $W>8.5\cdot10^{-5}\sqrt k$; if
+$2.4\cdot10^{15}\le k\le3.39\cdot10^{17}$, then $W>6\cdot10^{-5}\sqrt k$; if $k\ge3.39\cdot10^{17}$, then
+$W>0.05\,k^{1/3}$; if $k\ge10^{21}$, then $W>0.052\,k^{1/3}$; and $\liminf_{k\to\infty}\Wmin(k)/k^{1/3}\ge0.05229$.
+\end{theorem}
+
+\begin{corollary}\label{cor:s}
+$s(k^2-c)=k$ for every integer $k\ge3.5\cdot10^{17}$ and every integer $0\le c\le0.06\,k^{1/3}$, for every integer
+$k\in[2.5\cdot10^{15},3.5\cdot10^{17}]$ and every integer $0\le c\le7\cdot10^{-5}\sqrt k$, and for every integer
+$k\in[10^8,2.5\cdot10^{15}]$ and every integer $0\le c\le10^{-4}\sqrt k$. Theorem~\ref{thm:main13} gives the same with
+its constants and ranges.
+\end{corollary}
+
+\begin{proof}
+In each case Theorem~\ref{thm:main} (resp.\ Theorem~\ref{thm:main13}) gives $\Wmin(k)>c$.
+\end{proof}
+
+\emph{Comparison.} For $k\ge4.62\cdot10^{12}$ the bounds of Theorem~\ref{thm:main} exceed $0.1\,k^{1/4}$: on
+$[10^{12},2.5\cdot10^{15}]$ because $10^{-4}\sqrt k\ge0.1\,k^{1/4}$ there, on $[2.5\cdot10^{15},3.5\cdot10^{17}]$ because
+$7\cdot10^{-5}\sqrt k\ge0.1\,k^{1/4}$ for $k\ge4.17\cdot10^{12}$, and for $k\ge3.5\cdot10^{17}$ because
+$0.06\,k^{1/3}\ge0.1\,k^{1/4}$ for $k\ge460$. At $k=4.62\cdot10^{12}$, Theorem~\ref{thm:main}(a) gives $W>214.9$, so
+$W\ge215$, whereas [Q] gives $W\ge147$. As $W$ is an integer, Theorem~\ref{thm:main}(a) gives $W\ge4$ from
+$k\ge9\cdot10^8$ on, which goes beyond $\Wmin\ge3$, and $W\ge6$ from $k\ge2.5\cdot10^9$ on, which goes beyond the
+announced $\Wmin\ge5$.
+
+The constant drops from $10^{-4}$ in (a) to $7\cdot10^{-5}$ in (b) because of a trade-off in the proof
+(Proposition~\ref{prop:reduce}): for bounds of order $\sqrt k$ the range of $k$ is limited by $W\le W_1\propto\tau_1$,
+and a larger $\tau_1$ costs a factor $1-2\tau_0<1-2\tau_1$. A finer subdivision of the range would give intermediate
+constants.
+
+\subsection{The idea}\label{ssec:idea}
+We use the \emph{master flow} of [Q]: from every point $(x,0)$ of the bottom side a path moves upwards; when it meets
+the bottom side of a square of inclination less than a threshold $\theta$ it crosses the square along the square's own
+upward normal, and when it meets a square of inclination at least $\theta$ it stops (a \emph{tilt termination}). A path
+that has crossed $m$ squares $Z_1,\dots,Z_m$ arrives at height $m-D+(\text{gaps})$, where $D=\sum_j(1-\cos\varphi_j)$
+is its \emph{deficit} ([Q, Theorem~4.2]). In [Q] the deficit is bounded by about $m\cdot\theta^2/2$ ([Q,
+Corollary~4.4]); to keep it small up to height $s$ this forces $\theta\lesssim s^{-1/2}$, hence a family of flows over a
+continuum of scales, and the exponent $1/4$.
+
+Here we observe that the crossings of one path occupy pairwise disjoint height intervals, and that on each of them the
+horizontal line meets a square of inclination $a(Z_j)$. The lemma of [R] on the cost of inclinations ([R, Lemma~4.13])
+therefore applies to the union of these intervals and gives
+\[
+\sum_j a(Z_j)\cos\varphi_j\ \le\ (A/2+2\theta)\,W
+\]
+for every path (Lemma~\ref{lem:path}). So $D\le\frac\theta2\sum_ja(Z_j)\lesssim\theta W$, independently of the height.
+With $\theta\asymp1/W$ one flow keeps all paths quantized at all heights, at the cost of tilt terminations of total
+measure $\lesssim W/\theta\asymp W^2$ ([Q, Theorem~8.3]). The rest of the argument is that of [Q]: the slightly tilted
+squares that produce the short chords required by [R, Lemma~3.5] on lines of the third kind cannot be reached by
+quantized paths, so they lie in the shadow of the terminated paths, whose size is bounded by [Q, Theorem~6.9]. Balancing
+the three kinds of lines gives $k\lesssim(kW^3)^{1/2}$, that is, $W\gtrsim k^{1/3}$.
+
+\subsection{Dependence and status}\label{ssec:status}
+The proof uses, as black boxes, the results of [Q, Sections~3--8] listed in Section~\ref{sec:setting} and the lemmas
+of [R] quoted in [Q, Section~2]. Theorem~\ref{thm:main} uses the computer-assisted [R, Lemma~4.10] through the constants
+$A$, $A'$ and those of [Q, Theorem~7.1 and Proposition~5.10]; the box computations of [R, Lemma~4.10] have not yet been
+reproduced by an independent implementation. Theorem~\ref{thm:main13} does not use [R, Lemma~4.10]. The verification done so far is described at the end of the paper; none of it is by a human referee.
+
+\section{Setting and results used}\label{sec:setting}
+
+\subsection{Conventions}
+We use the notation of [Q]. In particular $k\ge4$ is an integer, $\cP$ a closed packing of $[0,k]^2$ with waste $W$;
+$\omega(y)$ is the length of the uncovered part of the line $\ell_y=\R\times\{y\}$ in $[0,k]^2$, so that
+$\int_0^k\omega=W$; $c_S(y)$ is the length of $S\cap\ell_y$; $\varphi_S\in(-\pi/4,\pi/4]$ is the phase of a square $S$ and
+$a(S)=|\varphi_S|$ its inclination; $\Bot(S)$, $\Top(S)$ are its bottom and top sides and $u_S,n_S$ its frame
+([Q, Definition~3.7]); $\Phi(S)=\{y:0<c_S(y)<1\}$; $E(y):=\sum_{S:\,c_S(y)\ge1}(c_S(y)-1)$ is the excess of the long
+chords on $\ell_y$ ([R, Lemma~3.5]); $d(y)=\min(y,k-y)$; and $\rho(x,y)=(x,k-y)$. By [R, Corollary~3.3], $W\ge1$ for
+$k\ge2$. Throughout,
+\[
+\delta:=10^{-5},\qquad\bbar:=1.5\cdot10^{-6}.
+\]
+
+\emph{Constants.} $A=4\sqrt{9/0.32}/(2-3\cdot10^{-6})$ is the constant of [R, Lemmas~4.13 and~4.15] and
+$A'=A/\cos\bbar+10^{-8}$ that of [Q, Theorem~8.3(a)]; $A<10.6067=:\Abar$ and $A'<10.6068=:\bar A'$. Put
+$S_K:=56.2501$, $C_M:=318.20$, $C_G:=56.2501$ ([Q, Theorem~7.1]) and $C_E:=754.8$ ([Q, Proposition~5.10]).
+
+\emph{The analytic variant} (without [R, Lemma~4.10]). Put $A_{13}:=4\sqrt{13/0.32}/(2-3\cdot10^{-6})<12.7476$ and
+$A'_{13}:=A_{13}/\cos\bbar+10^{-8}<12.7476$. Then [R, Lemmas~4.13--4.15] hold with $A_{13}$ in place of $A$
+([Q, Remark~2.2]), and [Q, Theorem~8.3] holds with $A'_{13}$ in place of $A'$ ([Q, Theorem~8.3(c)]). In the analytic
+variant, $A$ and $A'$ stand for $A_{13}$ and $A'_{13}$ everywhere below (Lemmas~\ref{lem:tilt}, \ref{lem:path},
+\ref{lem:short} and~\ref{lem:term}, Theorem~\ref{thm:ineq} and Section~\ref{sec:explicit}), and we put
+$\Abar=\bar A':=12.7476$, $S_K:=81.2502$, $C_M:=459.7$, $C_G:=81.26$ and $C_E:=1090.3$ ([Q, Theorem~7.1 and
+Proposition~5.10]). In both cases put
+\[
+B_1:=\frac{\Abar/2+2\bbar}{\cos\bbar},\qquad L_1:=\frac{1+S_K\delta^2}{\delta}+(C_M+C_E+C_G)\,\delta+4B_1 .
+\]
+Thus $B_1\le5.3033531$ and $L_1\le100021.23$, respectively $B_1\le6.3738031$ and $L_1\le100025.52$.
+
+\emph{Notation.} Some letters of [Q] are used here with a different meaning: $H_{\tau_0}$ (Theorem~\ref{thm:ineq}) is
+not the set $H$ of [Q, Definition~3.5]; $\beta$ is a number (not the function $\beta(y)$ of [Q]); $L(W)$ in
+Section~\ref{sec:explicit} is not the function $L(y)$ of [Q]; and $K$ denotes a set of lines, while the subscript in
+$S_K$ refers to the multiplicity bound $K\in\{9,13\}$ of [Q]. The letter $E$ is used for $E(y)$ above, for the bound
+$E^*$ of Lemma~\ref{lem:short} and for the function $E(\beta,W)$ of Section~\ref{sec:explicit}.
+
+\subsection{The flow}
+Let $0<\theta\le\bbar$ and $k\ge14$. Consider the parameter vector of [Q, Definition~3.1]
+\[
+\pi_\theta:=(c_0,c_1,y_0,\varepsilon,\omega_0)=(\theta,\ \theta/2,\ 1,\ \tfrac12,\ \tfrac14).
+\]
+
+\begin{lemma}\label{lem:inst}
+$\pi_\theta$ satisfies the constraints \textup{(C0)--(C7)}, \textup{(Q1)} and \textup{(Q2)} of [Q, Definition~3.2].
+Its master flow \textup{([Q, Definition~3.20])} is $F_\theta:=F(\theta,\delta,\frac k2-1)$, with $\amax=\theta$.
+\end{lemma}
+
+\begin{proof}
+(C0) is clear. (C1): $\alpha(y_0)=\theta\le\bbar$. (C2): $\hat\beta(y_0)=\theta/2\le1.5\cdot10^{-6}$. (C3):
+$c_1(1-\varepsilon)^{-3/4}=2^{-1/4}\theta<\theta=c_0y_0^{1/4}$. (C4): $\frac14<\frac12$. (C5): with
+$b^*=\hat\beta(\frac12)=2^{-1/4}\theta$,
+$w_0=0.50001\,\theta^2(1+1.0001)+\delta+1.0001\cdot2^{-1/4}\theta+10^{-12}<1.13\cdot10^{-5}<\frac12$. (C6):
+$\delta\le\frac12\cos2\theta$, which follows from (C1) by [Q, Lemma~3.3(a)]. (C7): $y_0+1=2\le\frac12(\frac k2-3)$ for $k\ge14$. (Q1): $\theta\le10^{-3}$. (Q2):
+$b^*\le10^{-4}$. The master flow is $F(\alpha(y_0),\delta,\frac k2-1)$ and $\alpha(y_0)=\theta$.
+\end{proof}
+
+The ceiling version $\tilde F_\theta$ of $F_\theta$ is the master flow of $\rho\cP$ transported by $\rho$
+([Q, Definition~3.24]); $\rho\cP$ is a closed packing with the same $W$ ([Q, Lemma~3.8]). Only the master flow is used;
+the scale flows of [Q] play no role.
+
+\emph{Choosing $\theta$ from $W$.} The parameter $\theta$ will be chosen depending on $W$ (Definition~\ref{def:theta};
+$W\ge1$, so $\theta$ is well defined). This is legitimate: every result of [Q] used below is a statement about one fixed
+closed packing and one parameter vector, and its hypotheses do not involve the packing. Precisely, Proposition~5.10 and
+Theorem~7.1 assume the standing assumptions of [Q, Section~5.1] ($0<\delta\le10^{-5}$, $0<\amax\le1.5\cdot10^{-6}$,
+$h_{\max}=\frac k2-1$); Theorem~8.3 assumes $0<\delta\le10^{-5}$, (C0) and (C1); Theorem~6.9 is stated for the parameters
+of [Q, Section~3], and, besides the definitions of the flows and [Q, Lemma~6.1], its proofs use only [Q, (6.1)]
+([Q, Remark~6.13]); the results of [Q, Sections~3 and~4] used below
+hold for any flow $F(\alpha_F,\delta,h_F)$ or under (C0), (C1). Since $\rho\cP$ has the same $W$, the floor and the ceiling
+flow have the same $\theta$; this matters because Proposition~5.10 and Theorems~7.1 and~8.3 are joint statements about the
+floor and the ceiling master flow of one parameter vector.
+
+\subsection{Results used}
+From [Q] (for the master flow $F_\theta$, and by reflection for $\tilde F_\theta$):
+\begin{itemize}
+\item Remark~2.2 (the analytic variant: [R, Lemmas~4.13--4.15] with $A_{13}$);
+\item Definitions~3.1 and~3.2 (parameters, constraints) and Lemma~3.3(a); Lemma~3.8 (reflection of the packing);
+\item Definition~3.9 (the flow; in particular $t_D=\delta-g$, so the cumulative gap never exceeds $\delta$), Definition~3.10
+(rule R2: a square is passed only if its inclination is $<\amax$), Definition~3.14 (rule R1), Remark~3.34 (rule R1 is
+applied before rule R2), Lemma~3.17(a),(e),(f) (trajectories);
+\item Definitions~3.20 and~3.24 (master and ceiling flows); Definitions~3.26, 3.28 and~3.30 (losses $L_\star$, line
+quantities $\mu_Z$, $\Sh$, and $\Lam$), Lemma~3.29(a) (crossings), Lemma~3.31 (measurability), Definitions~3.32 and~6.6
+and Lemma~3.33(a) (the set $\Exc$ is finite);
+\item Theorem~4.2 and Corollary~4.4 (height identity), Lemma~4.5(a) (bottom side), Lemma~4.6(c) (auxiliary inequality),
+Lemma~4.7(a)--(c) (reflection);
+\item Proposition~5.10 (end collisions), Theorem~6.9(f) (shadow inequality) with Remark~6.13 and (6.1), Theorem~7.1
+(deaths, merges, gap overlaps), Theorem~8.3(a),(c) (tilt terminations).
+\end{itemize}
+From [R] (as quoted in [Q, Section~2]): Lemma~3.1(a),(b) (vertical extent and ramp set $\cR(S)$), Lemma~3.4 (second part:
+$\Phi(S)\subset\cR(S)$ and $\int_{\Phi(S)}c_S=\sin a\cos a$ for $a=a(S)>0$, $\Phi(S)=\emptyset$ for $a(S)=0$), Lemma~3.5
+(short chords and the excess $E(y)$ of the long chords), Corollary~3.3 ($W\ge1$), Lemma~4.13 and Lemma~4.15.
+
+\section{The tilt budget}\label{sec:tilt}
+
+\begin{lemma}[tilt budget]\label{lem:tilt}
+Let $0<\theta\le\bbar$, let $I_1,\dots,I_m\subset(0,k)$ be pairwise disjoint intervals and $Z_1,\dots,Z_m\in\cP$
+\textup{(}not necessarily distinct\textup{)} such that $a(Z_j)<\theta$ and $\ell_y$ meets $Z_j$ for every $y\in I_j$. Then
+\[
+\sum_{j=1}^ma(Z_j)\,|I_j|\ \le\ \Big(\frac A2+2\theta\Big)W .
+\]
+\end{lemma}
+
+\begin{proof}
+Put $Y:=\bigcup_jI_j$ and $\beta(y):=a(Z_j)$ for $y\in I_j$, a Borel function with values in $[0,\theta]$. Let
+$Y_1:=\{y\in Y:\omega(y)<\frac12\}$. For $y\in Y_1$ the line $y$ meets a square of inclination $\ge\beta(y)$, namely
+$Z_j$, and $\omega(y)<\frac12$; so [R, Lemma~4.13], applied with $\theta$ in the role of its constant $\bar\beta$, gives
+$\int_{Y_1}2\beta\le AW$. Since $\int_0^k\omega=W$, the set $\{\omega\ge\frac12\}$ has measure $\le2W$, so
+$\int_{Y\setminus Y_1}\beta\le2\theta W$. Adding, $\sum_ja(Z_j)|I_j|=\int_Y\beta\le AW/2+2\theta W$.
+\end{proof}
+
+[R, Lemma~4.13] is stated for an arbitrary (measurable) set $Y\subset[0,k]$ and function $\beta$ with the stated
+properties; here $Y$ is a finite union of intervals and $\beta$ a step function. Its constant $A$ does not depend on the
+value of $\bar\beta\le1.5\cdot10^{-6}$: the proof uses $\bar\beta$ only through the cap
+$\theta_{\max}=2\bar\beta\le3\cdot10^{-6}$.
+
+\begin{lemma}[one path]\label{lem:path}
+Let $0<\theta\le\bbar$ and let $Z_1,\dots,Z_m$ be the squares passed by a path of $F_\theta$, in order, with
+$\varphi_j:=\varphi_{Z_j}$. Then
+\[
+\sum_{j=1}^ma(Z_j)\cos\varphi_j\le\Big(\frac A2+2\theta\Big)W\qquad\text{and}\qquad\sum_{j=1}^ma(Z_j)\le B_1W .
+\]
+The same holds for the paths of $\tilde F_\theta$.
+\end{lemma}
+
+\begin{proof}
+Let $q_j$ be the entry point into $Z_j$; the pass segment is $[q_j,q_j+n_{Z_j}]$ and its height range is
+$I_j:=(q_{j,y},\,q_{j,y}+\cos\varphi_j)$. Its open part lies in $\operatorname{int}Z_j$ ([Q, Lemma~3.17(e)]), so $\ell_y$
+meets $Z_j$ for $y\in I_j$. Heights increase strictly along a trajectory ([Q, Lemma~3.17(a)]), so the $I_j$ are pairwise
+disjoint. By rule R2 ([Q, Definition~3.10]) $a(Z_j)<\theta$. Lemma~\ref{lem:tilt} gives the first inequality; the second
+follows from $\cos\varphi_j\ge\cos\bbar$ and $A\le\Abar$. For $\tilde F_\theta$ apply this to $\rho\cP$.
+\end{proof}
+
+\begin{lemma}[lateral drift]\label{lem:drift}
+Let $0<\theta\le\bbar$. Every point $p$ of the trajectory of the path of $F_\theta$ that starts at $(x,0)$ satisfies
+$|p_x-x|\le B_1W+\delta$. Consequently the set of $x$ whose path terminates at a side wall \textup{(}type W\textup{)}
+has measure $L_W\le2(B_1W+\delta)$, and the same holds for $\tilde F_\theta$.
+\end{lemma}
+
+\begin{proof}
+A pass through $Z_j$ moves the path horizontally by $|\sin\varphi_j|\le a(Z_j)$. The gap segments have total length at
+most $\delta$ at every point of the trajectory: by [Q, Definition~3.9] the cumulative gap $g$ is the total length of
+the gap segments travelled, and $t^*\le t_D=\delta-g$ in every ray step. Hence
+$|p_x-x|\le\sum_ja(Z_j)+\delta\le B_1W+\delta$ by Lemma~\ref{lem:path}. A W-termination point has abscissa $0$ or $k$,
+so $\min(x,k-x)\le B_1W+\delta$.
+\end{proof}
+
+\begin{definition}\label{def:theta}
+For $\delta<\tau_1<\frac12$ put $\theta:=\min\big(\bbar,\ 2\tau_1/(B_1W)\big)$ and let $F_\theta$, $\tilde F_\theta$ be the
+flows of Section~\ref{sec:setting} for this $\theta$. From here on $k\ge14$, as required by Lemma~\ref{lem:inst}.
+\end{definition}
+
+\begin{lemma}[quantization]\label{lem:quant}
+Let $\theta$ be as in Definition~\ref{def:theta}. Let $q$ be the point of an entry candidate of a path of $F_\theta$,
+reached after passing $Z_1,\dots,Z_m$. Then
+\[
+q_y-m\in[-D,\delta),\qquad D:=\sum_{j=1}^m(1-\cos\varphi_j)\le\tau_1 ,
+\]
+so $\dist(q_y,\Z)\le\tau_1$. For $\tilde F_\theta$ the same holds with $k-q_y$ in place of $q_y$.
+\end{lemma}
+
+\begin{proof}
+By [Q, Theorem~4.2 and Corollary~4.4], $q_y-m=-D+\sum_ig_i\cos\varphi_i$, and the last sum lies in $[0,\delta)$ at an
+entry candidate, since the cumulative gap there is $<\delta$ ([Q, Lemma~3.17(f)]). Since $|\varphi_j|=a(Z_j)<\theta$, $1-\cos\varphi_j\le\varphi_j^2/2\le\frac\theta2a(Z_j)$. The squares
+passed before $q$ are passed by the path, so Lemma~\ref{lem:path} gives $D\le\frac\theta2B_1W\le\tau_1$. As
+$\delta<\tau_1$, $\dist(q_y,\Z)\le\max(D,\delta)\le\tau_1$.
+\end{proof}
+
+\section{Unreachable squares and the shadow}\label{sec:shadow}
+
+\begin{lemma}[unreachable squares]\label{lem:unreach}
+Let $\theta$ be as in Definition~\ref{def:theta}, $\tau_1<\tau_0<\frac12$ and $0<\beta\le\bbar$ with
+$\tau_0-1.0001\beta>\tau_1$. Let $S\in\cP$ with $0<a(S)<\beta$, and suppose that $\Phi(S)$ contains a height $y$ with
+$\dist(y,\Z)\ge\tau_0$. Then no path of $F_\theta$ has an entry candidate on $S$, and $\mu_S^{F_\theta}(y')=0$ for every
+$y'\in(0,\frac k2-1)$. Likewise no path of $\tilde F_\theta$ has an entry candidate on $\Top(S)=\rho(\Bot(\rho S))$, and
+$\mu_S^{\tilde F_\theta}\equiv0$.
+\end{lemma}
+
+\begin{proof}
+Let $a:=a(S)$ and let $v$ be the lowest height of $S$. By [R, Lemmas~3.4 and~3.1(b)],
+$y\in\Phi(S)\subset\cR(S)=[v,v+\sin a)\cup(v+\cos a,v+\cos a+\sin a]$, and the heights of the points of $\Bot(S)$ fill
+exactly $[v,v+\sin a]$ ([Q, Lemma~4.5(a)]). If $y<v+\sin a$, every $z\in\Bot(S)$ has $|z_y-y|\le\sin a<\beta$. If
+$y>v+\cos a$, every $z\in\Bot(S)$ has $|z_y-(y-1)|\le(1-\cos a)+\sin a\le1.0001\,a<1.0001\,\beta$ ([Q, Lemma~4.6(c)],
+as $a<\bbar\le2\cdot10^{-4}$). In both cases $\dist(z_y,\Z)\ge\tau_0-1.0001\beta>\tau_1$, which contradicts
+Lemma~\ref{lem:quant} for an entry candidate at $z$. Entry candidates lie in $\relint\Bot(S)$ ([Q, Definition~3.9]); a path
+crosses $\ell_{y'}$ in $\operatorname{int}S$ only if it passes $S$ ([Q, Lemma~3.29(a)]), and passing requires an entry
+candidate on $S$. Hence $\mu_S^{F_\theta}\equiv0$. The ceiling statement is the floor statement for $\rho\cP$, using
+$a(\rho S)=a(S)$, $\rho(\Bot(\rho S))=\Top(S)$, $\Phi(\rho S)=k-\Phi(S)$ and $\dist(k-y,\Z)=\dist(y,\Z)$ ($k$ is an
+integer) ([Q, Lemma~4.7(a)--(c)]).
+\end{proof}
+
+\begin{lemma}[short chords]\label{lem:short}
+Let $0<\beta\le\bbar$, $0<\nu_0<\frac12$, and let $K\subset(0,k)$ be a Borel set such that for every $y\in K$:
+$d(y)\le\frac k2-1$, $\omega(y)<\nu_0$, and every square meeting $\ell_y$ has inclination $<\beta$. Let
+$\cZ_K:=\{S\in\cP:\Phi(S)\cap K\ne\emptyset\}$. Then
+\[
+\beta\,|\cZ_K|\ \ge\ (1-\nu_0-E^*)\,|K|,\qquad E^*:=0.50001\,\beta\Big(A+\frac\beta\delta\Big)W .
+\]
+\end{lemma}
+
+\begin{proof}
+For $y\in K$, [R, Lemma~3.5] gives $\sum_{S:0<c_S(y)<1}c_S(y)\ge1-\omega(y)-E(y)$, and every $S$ in this sum has
+$y\in\Phi(S)$, so $S\in\cZ_K$. By [R, Lemma~4.15] (with $\alpha:=\beta$) $E(y)\le E^*$ on $K$. Each $S\in\cZ_K$ meets a
+line of $K$, so $a(S)<\beta$, and $a(S)>0$ as $\Phi(S)\ne\emptyset$; by [R, Lemma~3.4],
+$\int_{\Phi(S)}c_S=\sin a\cos a<\beta$. Integrating over $K$ (the sum is finite),
+$(1-\nu_0-E^*)|K|\le\sum_{S\in\cZ_K}\int_{K\cap\Phi(S)}c_S\le\beta|\cZ_K|$.
+\end{proof}
+
+\begin{lemma}[shadow budget]\label{lem:budget}
+Let $\theta$ be as in Definition~\ref{def:theta}, $h:=\frac k2-1$, and let $\cZ$ be a set of squares $S\in\cP$ with
+$S\subset\R\times[0,h]$ and $\mu_S^{F_\theta}\equiv0$ on $(0,h)$. Then $|\cZ|\le h\,(L_T+\Lam_b)$, where $L_T$ is the
+measure of the set of floor points whose path in $F_\theta$ is T-terminated, $L_W$ that of the W-terminated ones
+(Lemma~\ref{lem:drift}), and $\Lam_b:=|\cD|+|\cM|+L_E+L_W+\sup_{0<y<h}\Ovgap^{F_\theta}(y)$. The same holds for
+$\tilde F_\theta$, for squares $S\in\cP$ with $S\subset\R\times[k-h,k]$ and $\mu_S^{\tilde F_\theta}\equiv0$ on $(k-h,k)$.
+\end{lemma}
+
+\begin{proof}
+Let $\Exc$ be the exceptional set of the master flow ([Q, Definitions~3.32 and~6.6]); it is finite
+([Q, Lemma~3.33(a)]). For $y\in(0,h)\setminus\Exc$, [Q, Theorem~6.9(f)] gives $\Sh(y)\le L_T(y)+\Lam(y)\le L_T+\Lam_b$,
+since each $L_\star(y)$ counts only terminations below $y$ and $\Ovgap(y)\le\sup_{0<y'<h}\Ovgap(y')$
+([Q, Definitions~3.26 and~3.30]). By [Q, Definition~3.28],
+$\Sh(y)=\sum_Z(c_Z(y)-\mu_Z(y))_+\ge\sum_{S\in\cZ}c_S(y)$. As $\Sh$ is Borel ([Q, Lemma~3.31(d)]), integrating over
+$(0,h)$ gives $\sum_{S\in\cZ}\int_0^hc_S=|\cZ|\le h(L_T+\Lam_b)$.
+\end{proof}
+
+\begin{lemma}[terminations]\label{lem:term}
+Let $\theta$ be as in Definition~\ref{def:theta} and let $L_{\rm tot}$ be the sum of $L_T+\Lam_b$ for $F_\theta$ and for
+$\tilde F_\theta$. Then
+\[
+L_{\rm tot}\ \le\ \frac{\bar A'W}\theta+L_1W+4\delta\ =\ \bar A'W\max\Big(\frac1\bbar,\frac{B_1W}{2\tau_1}\Big)+L_1W+4\delta .
+\]
+\end{lemma}
+
+\begin{proof}
+A path that is T-terminated in $F_\theta$ is the R1 winner at its last entry ([Q, Definition~3.14]; rule R1 is applied
+before rule R2, [Q, Remark~3.34]), at a square of inclination $\ge\amax=\theta$. So [Q, Theorem~8.3(a)] (resp.\ (c)), with
+$\cX$ and $\cX'$ the T-terminated floor and ceiling points (finite unions of intervals and points, [Q, Lemma~3.31(a)]) and $\zeta\equiv\zeta'\equiv
+\theta\le\bbar$, gives $\theta(L_T+\tilde L_T)\le\bar A'W$. By [Q, Theorem~7.1], $|\cD|+|\tilde\cD|\le(1+S_K\delta^2)W/\delta$,
+$|\cM|+|\tilde\cM|\le C_M\delta W$ and the two suprema of $\Ovgap$ add up to at most $C_G\delta W$; by
+[Q, Proposition~5.10], $L_E+\tilde L_E\le C_E\delta W$; and by Lemma~\ref{lem:drift} the two wall terms add up to at most
+$4(B_1W+\delta)$. (The hypotheses of these results of [Q] are $0<\delta\le10^{-5}$, $0<\amax\le1.5\cdot10^{-6}$,
+$h_{\max}=\frac k2-1$, and \textup{(C0)}, \textup{(C1)}; they hold by Lemma~\ref{lem:inst}.)
+\end{proof}
+
+\section{The main inequality}\label{sec:main}
+
+\begin{theorem}\label{thm:ineq}
+Let $k\ge14$ be an integer and $\cP$ a closed packing of $[0,k]^2$ with waste $W$. Let $\delta<\tau_1<\tau_0<\frac12$,
+$0<\nu_0<\frac12$ and $0<\beta\le\bbar$ with $\tau_0-1.0001\beta>\tau_1$ and $E^*=0.50001\beta(A+\beta/\delta)W<1-\nu_0$,
+and let $\theta$ be as in Definition~\ref{def:theta} for this $\tau_1$. Then
+\begin{equation}\label{eq:main}
+(1-2\tau_0)(k-6)\ \le\ \frac W{\nu_0}+\frac{AW}{2\beta}+\frac{\beta\,(\frac k2-1)\,L_{\rm tot}}{1-\nu_0-E^*},
+\end{equation}
+with $L_{\rm tot}$ bounded by Lemma~\ref{lem:term}.
+\end{theorem}
+
+\begin{proof}
+Let $H_{\tau_0}:=\{y:\dist(y,\Z)\ge\tau_0\}$ and $\cH:=H_{\tau_0}\cap\big((0,\frac k2-3)\cup(\frac k2+3,k)\big)$. As $k$ is
+an integer, $(0,\frac k2-3)$ consists of $\frac k2-3$ unit intervals $[n,n+1)$, or of $\frac{k-7}2$ unit intervals and
+one half interval $[n,n+\frac12)$; $H_{\tau_0}$ has measure $1-2\tau_0$ in each unit interval and $\frac12-\tau_0$ in each such half
+interval; the same holds for $(\frac k2+3,k)$. So $|\cH|=(1-2\tau_0)(k-6)$. Split $\cH$ into
+$J_1:=\{y\in\cH:\omega(y)\ge\nu_0\}$, $J_2:=\{y\in\cH:\omega(y)<\nu_0$ and $\ell_y$ meets a square of inclination
+$\ge\beta\}$, and $K:=\cH\setminus(J_1\cup J_2)$ (lines of the first, second and third kind).
+
+(i) $|J_1|\le W/\nu_0$, since $\int\omega=W$.
+
+(ii) $|J_2|\le AW/(2\beta)$: apply [R, Lemma~4.13] with $\beta$ as its constant and $\beta(\cdot)\equiv\beta$ on $J_2$, a
+finite union of intervals; $\omega<\nu_0<\frac12$ there.
+
+(iii) Let $K_b:=K\cap(0,\frac k2-3)$ and $K_t:=K\cap(\frac k2+3,k)$. On $K_b$, $d(y)=y<\frac k2-3$, so
+Lemma~\ref{lem:short} applies to $K_b$. Every $S\in\cZ_{K_b}$ satisfies the hypotheses of Lemma~\ref{lem:unreach}
+($0<a(S)<\beta$, and $\Phi(S)$ meets $K_b\subset H_{\tau_0}$), so $\mu_S^{F_\theta}\equiv0$; moreover $S$ meets a line of
+$K_b$ and has vertical extent $\cos a+\sin a<1.0001$ ([R, Lemma~3.1(a)]), so
+$S\subset\R\times[0,\frac k2-1.9999]\subset\R\times[0,h]$. By
+Lemmas~\ref{lem:short} and~\ref{lem:budget}, $(1-\nu_0-E^*)|K_b|\le\beta|\cZ_{K_b}|\le\beta h(L_T+\Lam_b)$. The same
+argument with $\tilde F_\theta$ gives $(1-\nu_0-E^*)|K_t|\le\beta h(\tilde L_T+\tilde\Lam_b)$. Adding,
+$|K|\le\beta hL_{\rm tot}/(1-\nu_0-E^*)$.
+
+Summing (i)--(iii) gives \eqref{eq:main}.
+\end{proof}
+
+\section{Proof of the explicit bounds}\label{sec:explicit}
+
+Write $L(W):=\bar A'W\max(1/\bbar,B_1W/(2\tau_1))+L_1W+4\delta$ and $E(\beta,W):=0.50001\beta(\Abar+\beta/\delta)W$. Since
+$A\le\Abar$, Theorem~\ref{thm:ineq} remains true with $A$ replaced by $\Abar$, $E^*$ by $E(\beta,W)$ and $L_{\rm tot}$ by
+$L(W)$.
+
+\begin{proposition}\label{prop:reduce}
+Let $p\in\{\frac12,\frac13\}$, $\gamma,b>0$, $\delta<\tau_1<\tau_0<\frac12$, $0<\nu_0<\frac12$ and
+$14\le k_a\le k_b\le\infty$. Put $\beta(k):=bk^{p-1}$, $W(k):=\gamma k^p$ and
+\[
+R^+(k):=\frac{W(k)}{\nu_0}+\frac{\Abar W(k)}{2\beta(k)}+\frac{\beta(k)\,\frac k2\,L(W(k))}{1-\nu_0-E(\beta(k),W(k))}.
+\]
+Assume: \textup{(i)} $\beta(k_a)\le\bbar$ and $\tau_0-1.0001\beta(k_a)>\tau_1$; \textup{(ii)}
+$E(\beta(k_a),W(k_a))<1-\nu_0$; \textup{(iii)} $(1-2\tau_0)(k_a-6)>R^+(k_a)$; \textup{(iv)} if $p=\frac12$, then
+$\gamma\,k_b^{1/2}\le W_1:=2\tau_1/(B_1\bbar)$. Then every closed packing of $[0,k]^2$ with an integer $k\in[k_a,k_b]$
+has $W>\gamma k^p$.
+\end{proposition}
+
+\begin{proof}
+For $k\ge k_a$ the functions $\beta(k)$ and $E(\beta(k),W(k))=0.50001\,b\gamma\,k^{2p-1}(\Abar+bk^{p-1}/\delta)$ are
+non-increasing, so (i) and (ii) hold at every $k\in[k_a,k_b]$. Next, $R^+(k)/k$ is non-increasing on $[k_a,k_b]$: its terms
+are $\gamma k^{p-1}/\nu_0$, the constant $\Abar\gamma/(2b)$, and $\beta L/(2(1-\nu_0-E))$, where
+$\beta\bar A'W\max(\dots)=\max(b\gamma\bar A'k^{2p-1}/\bbar,\ b\gamma^2\bar A'B_1k^{3p-1}/(2\tau_1))$,
+$\beta L_1W=b\gamma L_1k^{2p-1}$ and $4\delta\beta$. For $p=\frac13$ all exponents are $\le0$. For $p=\frac12$, (iv) gives $W(k)\le W_1$, so the maximum is
+$1/\bbar$ and the remaining exponents are $\le0$. On the other hand $(1-2\tau_0)(k-6)/k$ is increasing. By (iii),
+$(1-2\tau_0)(k-6)>R^+(k)$ for all $k\in[k_a,k_b]$.
+
+Now let $\cP$ be a closed packing of $[0,k]^2$, $k\in[k_a,k_b]$ an integer, with $W\le W(k)$. Theorem~\ref{thm:ineq}
+applies with $\beta=\beta(k)$: $E(\beta,W)\le E(\beta,W(k))<1-\nu_0$. Its right side is non-decreasing in $W$ (as
+$\theta(W)$ is non-increasing, $W/\theta(W)$ and $E$ are increasing). Hence
+$(1-2\tau_0)(k-6)\le R^+(k)$, a contradiction.
+\end{proof}
+
+\begin{table}[ht]
+\centering\footnotesize
+\setlength{\tabcolsep}{3.5pt}
+\begin{tabular}{@{}cccccccccc@{}}
+\toprule
+case & $p$ & $\gamma$ & $b$ & $[k_a,k_b]$ & $\tau_0$ & $\tau_1$ & $\nu_0$ & left$/k_a\ge$ & $R^+(k_a)/k_a\le$\\
+\midrule
+1 & $\frac12$ & $10^{-4}$ & $1.2\cdot10^{-3}$ & $[10^8,\,2.5\cdot10^{15}]$ & $0.0205$ & $0.02$ & $0.001$ & $0.95899994$ & $0.87266009$\\
+2 & $\frac12$ & $7\cdot10^{-5}$ & $1.2\cdot10^{-3}$ & $[2.5\cdot10^{15},\,3.5\cdot10^{17}]$ & $0.1675$ & $0.167$ & $0.001$ & $0.66499999$ & $0.61085501$\\
+3 & $\frac13$ & $0.06$ & $1$ & $[3.5\cdot10^{17},\,\infty)$ & $0.1675$ & $0.167$ & $0.01$ & $0.66499999$ & $0.62871651$\\
+4 & $\frac13$ & $0.0625$ & $1$ & $[10^{21},\,\infty)$ & $0.1668$ & $0.1667$ & $0.005$ & $0.66639999$ & $0.66296281$\\
+\midrule
+5 & $\frac12$ & $8.5\cdot10^{-5}$ & $1.2\cdot10^{-3}$ & $[10^8,\,2.4\cdot10^{15}]$ & $0.0205$ & $0.02$ & $0.001$ & $0.95899994$ & $0.89044495$\\
+6 & $\frac12$ & $6\cdot10^{-5}$ & $1.2\cdot10^{-3}$ & $[2.4\cdot10^{15},\,3.39\cdot10^{17}]$ & $0.1675$ & $0.167$ & $0.001$ & $0.66499999$ & $0.62854332$\\
+7 & $\frac13$ & $0.05$ & $1$ & $[3.39\cdot10^{17},\,\infty)$ & $0.1675$ & $0.167$ & $0.01$ & $0.66499999$ & $0.63009391$\\
+8 & $\frac13$ & $0.052$ & $1$ & $[10^{21},\,\infty)$ & $0.1668$ & $0.1667$ & $0.005$ & $0.66639999$ & $0.66284161$\\
+\bottomrule
+\end{tabular}
+\caption{The eight cases of Proposition~\ref{prop:reduce}: cases 1--4 with the constants that use [R, Lemma~4.10],
+cases 5--8 with the analytic constants. The last two columns are a lower bound for $(1-2\tau_0)(k_a-6)/k_a$ and an upper
+bound for $R^+(k_a)/k_a$, rounded outwards to eight digits from the interval computation. $R^+$ is computed with $\Abar$,
+$\bar A'$, $S_K$, $C_M$, $C_G$, $C_E$ of Section~\ref{sec:setting} and with $B_1$, $L_1$ as defined there. With the
+decimal bounds for $B_1$ and $L_1$ in their place, $R^+(k_a)/k_a$ exceeds the entries of cases 3 and~4 by about
+$5\cdot10^{-9}$, and (iii) still holds.}
+\label{tab:cases}
+\end{table}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}\textup{(a)--(c)} and of the explicit bounds of Theorem~\ref{thm:main13}]
+Apply Proposition~\ref{prop:reduce} to the cases of Table~\ref{tab:cases}. Conditions (i)--(iv) were checked in
+interval arithmetic by three programs in the folder \texttt{code/} that accompanies this paper. The first,
+\texttt{check\_table\_iv.py}, uses mpmath interval arithmetic with 40 digits. The other two,
+\texttt{check\_table\_exact.py} and \texttt{check\_table\_exact2.py}, use exact rational arithmetic with rigorous bounds
+for roots, sine and cosine; they were written from the statements, independently of the first program and of each
+other. In all cases $\beta(k_a)\le2.5\cdot10^{-7}$ and $E(\beta(k_a),W(k_a))\le6.6\cdot10^{-7}$. The smallest margin in
+(iv) occurs in case~6, where $\gamma\,k_b^{1/2}\le34934.23$ and $W_1\ge34934.66$.
+\end{proof}
+
+\begin{proof}[Proof of the $\liminf$ statements]
+Let $\bar c_\infty:=\big((4/27)/(\Abar\bar A'B_1)\big)^{1/3}$; then $\bar c_\infty>0.062853$, resp.\ $>0.052297$. Let
+$0<\gamma<\bar c_\infty$. Since $\max_{0<\tau<1/2}\tau(1-2\tau)^2=\frac2{27}$, attained at $\tau=\frac16$, we can choose
+$\delta<\tau_1<\tau_0<\frac12$ close to $\frac16$ and $\nu_0>0$ small with
+$\gamma^3<2\tau_1(1-\nu_0)(1-2\tau_0)^2/(\Abar\bar A'B_1)$. Put $p=\frac13$ and
+$b:=\big(2\Abar\tau_1(1-\nu_0)/(\bar A'B_1\gamma)\big)^{1/2}$. Then
+\[
+\frac{\Abar\gamma}{2b}+\frac{\bar A'B_1b\gamma^2}{4\tau_1(1-\nu_0)}
+=\gamma^{3/2}\Big(\frac{\Abar\bar A'B_1}{2\tau_1(1-\nu_0)}\Big)^{1/2}<1-2\tau_0 .
+\]
+As $k\to\infty$, $R^+(k)/k$ tends to the left side of this inequality, $\beta(k)\to0$ and $E\to0$, while
+$(1-2\tau_0)(k-6)/k\to1-2\tau_0$. Hence (i)--(iii) hold for some finite $k_a$, and Proposition~\ref{prop:reduce} gives
+$\Wmin(k)>\gamma k^{1/3}$ for all $k\ge k_a$.
+\end{proof}
+
+\section{Remarks}\label{sec:remarks}
+
+\begin{remark}[where the gain comes from]
+There are two new estimates. The first is Lemma~\ref{lem:tilt}, which is used through Lemma~\ref{lem:path}; the
+second is Lemma~\ref{lem:drift}, which replaces the wall term $2(s+2)\tan\alpha(s)$ of the scale flows of [Q]. In [Q] the deficit of a path at height $q_y$ is
+bounded by $(\sec\amax-1)\,q_y$ ([Q, Corollary~4.4]), which grows with the height. Lemma~\ref{lem:path} bounds it by
+$\frac\theta2B_1W$, independently of the height.
+
+The threshold of Definition~\ref{def:theta} equals $\bbar$ exactly when $W\le W_1:=2\tau_1/(B_1\bbar)$. With the
+constants of Theorem~\ref{thm:main}, $W_1\approx5.03\cdot10^3$ for $\tau_1=0.02$, and $W_1\approx4.20\cdot10^4$ for
+$\tau_1=0.167$ (with the analytic constants, $W_1\approx4183.79$ and $34934.66$). In cases 1, 2, 5 and~6 of Table~\ref{tab:cases}, condition (iv) keeps $W$ in this range. The flow is
+then the master flow of [Q] with $\amax=\bbar$, and the bounds are of order $\sqrt k$.
+\end{remark}
+
+\begin{remark}[the exponent $1/3$; heuristic]
+In \eqref{eq:main} the term $\bar A'W/\theta\asymp W^2$ of $L_{\rm tot}$ comes from tilt terminations. Heuristically,
+a row of about $W^2$ squares of inclination about $1/W$, each sitting on axis-parallel squares, costs waste of order $W$
+and stops paths of total measure of order $W^2$ when $\theta\asymp1/W$. This suggests that the bound of
+[Q, Theorem~8.3] used in Lemma~\ref{lem:term} is attained up to a constant factor. Another source of loss is the factor
+$h=\frac k2-1$ in Lemma~\ref{lem:budget}, which charges every terminated path for the whole height. An exponent larger
+than $1/3$ would need a different treatment of these terms. We do not claim more.
+\end{remark}
+
+\section*{Verification status}
+This paper has not been peer reviewed, and neither have [Q] and [R]. So far it has been checked only by AI systems and
+by computer programs.
+\begin{itemize}
+\item The argument was checked by two independent blank-slate AI reviews, of a first and of a corrected draft, and a
+draft of this text by a third one. Each read the cited statements and, where generality matters, the proofs in [Q] and
+[R] (in particular the proof of [R, Lemma~4.13] for arbitrary $Y$ and $\beta$). None of them found a critical or a major
+issue; their minor remarks (12, 6 and 12 of them) have been addressed.
+\item A further blank-slate AI review of the version of this text prepared for release was made in a separate session
+by a lead reviewer and five independent agents with separate scopes ([Q, Sections~3--4]; [Q, Sections~5--8]; the
+citations of [R] and the main inequality; the constants and Table~\ref{tab:cases}; an adversarial reading of the whole).
+It checked the cited statement numbers of [Q] by script and the quotations of [R] letter by letter, and recomputed
+Table~\ref{tab:cases} and the constants with several new programs (interval and exact rational arithmetic). It found
+no critical or major issue and 10 minor ones, all addressed: one displayed number rounded in the wrong direction
+($34934.22$ instead of $34934.23$ in Section~\ref{sec:explicit}), a missing hypothesis $k\ge2$ in the abstract, and
+points of notation, citation and wording.
+\item The eight cases of Table~\ref{tab:cases} were checked by the three programs named in
+Section~\ref{sec:explicit}; the second and the third were written by two of these AI reviewers, independently of the
+first and of each other.
+\item A numerical test on scaled analogues ($k=14,16$, inclinations $0.01$--$0.34$, $\delta\in\{1/20,1/10\}$; 2{,}560
+exactly verified closed packings, exact rational path tracing) found no counterexample to Lemmas~\ref{lem:tilt}--%
+\ref{lem:budget} and to Theorem~\ref{thm:ineq} with measured constants, and every negative control (removing one
+hypothesis or one term) made the corresponding check fail. Such a test cannot check the constants of [Q] and [R].
+Its programs and results are in the folder \texttt{code/numerical\_tests/}.
+\end{itemize}
+All reviewers are AI systems of the same family and may share blind spots. The argument rests on [Q, Sections~3--8] and
+on [R, Lemmas~3.1--3.5, 4.13 and 4.15]; Theorem~\ref{thm:main} also rests on the computer-assisted [R, Lemma~4.10],
+whose box computations have not yet been reproduced by an independent implementation. These deserve priority in any
+human review.
+
+\subsection*{Use of AI}
+Claude (Anthropic) was used extensively in developing the argument, writing the text and the programs, and in checking
+them. It is not an author; the author takes full responsibility for the contents.
+
+\subsection*{Licence}
+This text is distributed under the Creative Commons Attribution 4.0 International licence (CC BY 4.0); the accompanying
+programs are distributed under the MIT licence.
+
+\begin{thebibliography}{McC}
+\raggedright
+\bibitem[Bui]{Bui} H.~D.~Bui, Square packing with $O(x^{0.6})$ wasted area, arXiv:2508.04603v2 (2025, revised 2026).
+\bibitem[McC]{McC} R.~McClenagan, Optimally packing a large square by unit squares, arXiv:2602.01484 (2026).
+\bibitem[Q]{Q} S.~Ryu, Packing $k^2-c$ unit squares: a lower bound of order $k^{1/4}$ for the deficiency, preprint,
+version~1.0, 2026, doi:10.5281/zenodo.23211207 (preprint and programs) and \url{https://github.com/squarepacker/k2-minus-c-quarter} (release v1.0).
+\bibitem[R]{R} S.~Ryu, Packing $k^2-c$ unit squares: $s(k^2-c)=k$ for all large $k$, preprint, version~1.2, 2026,
+doi:10.5281/zenodo.23194104; programs and data: doi:10.5281/zenodo.23194031 and
+\url{https://github.com/squarepacker/k2-minus-c} (release v1.2).
+\end{thebibliography}
+\end{document}

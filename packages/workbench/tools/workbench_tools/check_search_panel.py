@@ -10,6 +10,7 @@ from typing import Any
 
 from playwright.sync_api import Page, expect, sync_playwright
 
+from workbench_tools.browser_page import open_page
 from workbench_tools.probes import probe
 
 # The status line once a run stops, whichever way it stops.
@@ -235,7 +236,7 @@ def check(page_path: Path) -> str:
             "console",
             lambda event: errors.append(event.text) if event.type == "error" else None,
         )
-        page.goto(page_path.resolve().as_uri())
+        open_page(page, page_path)
         page.locator("#mode-search").click()
         if not page.locator("#search-workspace").is_visible():
             raise ValueError("Search tab did not expose its panel")

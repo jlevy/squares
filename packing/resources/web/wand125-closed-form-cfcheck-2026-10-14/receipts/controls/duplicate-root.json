@@ -1,0 +1,120 @@
+{
+ "schema": "cfcheck-run/v1",
+ "label": "control-duplicate-root",
+ "binary_sha256": "c5a163d48d10155dbe6d319a8a8cae8cab3feb9278c6fb7116c2d0396e686484",
+ "toolchain": {
+  "rustc": "rustc 1.97.0 (2d8144b78 2026-07-07)",
+  "cargo": "cargo 1.97.0 (c980f4866 2026-06-30)"
+ },
+ "command": [
+  "cfcheck",
+  "interval",
+  "interval_0_0.02",
+  "--intervals",
+  "intervals.json",
+  "--index",
+  "1",
+  "--threads",
+  "2",
+  "--max-roots",
+  "0"
+ ],
+ "cwd": "the run directory: intervals.json and assets/<asset>/ unpacked from the release",
+ "started": "2026-10-14T12:17:30Z",
+ "finished": "2026-10-14T12:17:45Z",
+ "wall_seconds": 15.12,
+ "cpu_seconds": {
+  "user": 14.117,
+  "system": 0.497
+ },
+ "max_rss_kib": 76116,
+ "host": {
+  "cpus": 4,
+  "load_average_before": [
+   4.27,
+   4.19,
+   3.51
+  ],
+  "load_average_after": [
+   4.51,
+   4.24,
+   3.54
+  ],
+  "platform": "Linux-6.18.44-fc-v114-x86_64-with-glibc2.39"
+ },
+ "exit_code": 1,
+ "verdict": "CFCHECK REFUSE: duplicate root",
+ "stderr_tail": "",
+ "report": "duplicate-root.report.json",
+ "report_sha256": "b7dfb718521f23049e863e317693dd9d1490e760d821fc389646c59ed2d2e74d",
+ "sample": {
+  "interval": 1,
+  "region": "top",
+  "note": "control: {\"mutation\": \"duplicate-root\", \"interval\": 1, \"from\": \"interval_0_0.02\", \"region\": \"top\", \"line\": 1, \"appended_copy_of_line\": 1, \"resealed\": [\"top.rec\", \"SHA256SUMS\", \"intervals.json (digests and published counts)\"]}"
+ },
+ "summary": {
+  "ok": false,
+  "command": "interval",
+  "partial": true,
+  "incomplete": false,
+  "roots": 40258,
+  "leaves": 1653458,
+  "resumed_roots": 0,
+  "seconds": 15.113315486,
+  "leaf_kinds": {
+   "B3D": 216408,
+   "B3T:x": 11534,
+   "B3T:y": 14539,
+   "B3U:x": 14886,
+   "B3U:xy": 433,
+   "B3U:xyh": 19,
+   "B3U:y": 102096,
+   "B4U": 111,
+   "CORE": 503357,
+   "CORE1:P": 140107,
+   "CORE1:Tx": 127856,
+   "CORE1:TxHy": 1498,
+   "CORE1:Ty": 134675,
+   "CORE1:x": 128474,
+   "CORE1:xy": 6989,
+   "CORE1:xyh": 2943,
+   "CORE1:y": 170722,
+   "EDGE": 43128,
+   "EMPTY": 33605,
+   "EX:CORE": 14,
+   "EY:CORE": 64
+  },
+  "checked_leaf_kinds": {},
+  "refusal_count": 1,
+  "refusals": [
+   {
+    "where": "domain",
+    "reason": "duplicate root"
+   }
+  ],
+  "interruptions": 0,
+  "regions": {
+   "left": {
+    "checked_roots": 0,
+    "accepted_roots": 0,
+    "resumed_roots": 0
+   },
+   "right": {
+    "checked_roots": 0,
+    "accepted_roots": 0,
+    "resumed_roots": 0
+   },
+   "straddle": {
+    "checked_roots": 0,
+    "accepted_roots": 0,
+    "resumed_roots": 0
+   },
+   "top": {
+    "checked_roots": 0,
+    "accepted_roots": 0,
+    "resumed_roots": 0
+   }
+  },
+  "leaf_timing": {}
+ }
+}

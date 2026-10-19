@@ -9,12 +9,160 @@ scope: >
   excluded because its role and lifecycle come from resources/README.md rather than
   current project documentation rules.
 documents:
+  - {path: docs/project/reviews/review-2026-10-19-pr671-integration-diagnostic.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-16-pingyou-n29.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-18-intake-audit.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-18-open-work.md, role: review, authority: record, lifecycle: retained}
+  - {path: packing/campaign/issue-intake/intake-20261018/README.md, role: source-index, authority: record, lifecycle: retained}
+  - {path: packing/campaign/issue-intake/intake-20261019/README.md, role: source-index, authority: record, lifecycle: retained}
+  - {path: packing/campaign/issue-intake/upper-bounds-20261018/README.md, role: generated-view, authority: generated, lifecycle: generated}
+  - {path: packing/campaign/issue-intake/upper-bounds-20261018/lane-claims/README.md, role: source-index, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-18-n108-fine-net-mathematics-max.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-18-wand125-n108-certificate-mathematics.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-16-upper-bound-imports-506-607.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-16-fitzharding-n19-lean.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-14-upper-bound-imports-574.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-14-intake-ledger.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-14-wand125-fine-net-and-linear-lower-bounds.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-14-fang-excess-theorem-and-direct-certificates.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-16-greff-k2m5-mixed-covers-76-95.md, role: review, authority: record, lifecycle: retained}
+  - {path: CHANGELOG.md, role: generated-view, authority: generated, lifecycle: generated}
+  - {path: docs/project/reviews/review-2026-10-13-site-changelog-backfill.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/specs/active/plan-2026-10-13-site-changelog.md, role: plan, authority: current, lifecycle: transient}
+  - {path: docs/project/reviews/review-2026-10-14-wand125-closed-form-lower-bound.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-13-fitzharding-n17-mathematical-correctness.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-13-overbeck-n17-mathematical-correctness.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-13-fitzharding-n17-lean.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-13-verification-gaps.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-13-overbeck-n17-candidate-second.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-12-kleddamag-n17-candidate.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-13-owner-decisions.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-12-bead-reconciliation-round-2.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-10-tbd-coordination.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-10-bead-reconciliation-a.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-10-bead-reconciliation-b.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-12-upper-bound-import-552.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-12-upper-bound-imports-528-529.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-11-upper-bound-imports-505-501.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-11-upper-bound-imports-506.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-11-upper-bound-imports-500.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-11-upper-bound-imports-503-504.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-11-recent-register-rungs.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-11-lean-backed-rungs.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-11-significance-scores.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-12-n40-new-supports-6718.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-11-front-door-prose.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-11-top-level-prose.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-10-evand-regularized-certificates.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-11-final-asymptotic-and-grading.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-11-final-lower-bounds.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-11-final-upper-bounds.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-10-upper-bound-imports-488-489.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-10-upper-bound-imports-470-and-trio126.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-10-upper-bound-imports-476-481-483-484.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-10-couzo-daniel-refinement-replays.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-10-guzhou-n40-continuous-pose-bound.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-10-guzhou-n40-clipped-corner-bound.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-08-gupta-exact-refinements.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-08-ryxu-rational-radical-packets.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-08-n17-global-optimization-and-sos.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-08-n17-merge-readiness.md, role: review, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/exp-315-shared-centre-endpoint/README.md, role: session-record, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/exp-316-shared-centre-explicit-f1/README.md, role: session-record, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-08-n17-strategy-and-exact-sos.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-08-n17-issue-pattern-reconciliation.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-07-n17-pr410-integration.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-07-n17-session-186-storage.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/research/research-2026-10-07-n17-shared-centre-lp-readiness.md, role: research-report, authority: supporting, lifecycle: retained}
+  - {path: docs/project/research/research-2026-10-11-evand-regularization-assessment.md, role: research-report, authority: supporting, lifecycle: retained}
+  - {path: docs/project/research/research-2026-10-11-regularization-state-and-approach.md, role: research-report, authority: supporting, lifecycle: retained}
+  - {path: vendor/evand-regularize/README.md, role: component-guide, authority: definitive, lifecycle: maintained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/exp-312-saved-pose-incircles/README.md, role: session-record, authority: record, lifecycle: retained}
+  - {path: docs/project/research/research-2026-10-07-n17-owned-core-guarded-clauses.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: docs/project/research/research-2026-10-07-n17-case-preserving-owned-propagation.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: docs/project/research/research-2026-10-07-n17-n11-envelope-transfer.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: docs/project/research/research-2026-10-07-n17-normalized-contact-rank-filter.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: docs/project/research/research-2026-10-07-n17-global-contact-budget.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: docs/project/research/research-2026-10-07-n17-two-child-collective-propagation.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: docs/project/research/research-2026-10-07-n17-one-round-owned-domain-propagation.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: docs/project/research/research-2026-10-07-n17-strict-core-regional-transfer.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: docs/project/specs/done/plan-2026-10-07-n17-six-hour-continuation.md, role: plan, authority: record, lifecycle: retained}
+  - {path: docs/project/research/research-2026-10-07-n17-session-186-w3-strategy.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-07-n17-session-186-performance.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-07-n17-session-186-readiness.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-07-n17-session-185-progress.md, role: review, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/exp-296-collective-row-coverage/README.md, role: session-record, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/exp-297-regional-row-coverage/README.md, role: session-record, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/exp-298-coverage-y-prefilter/README.md, role: session-record, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/exp-299-strict-core-regional-transfer/README.md, role: session-record, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/exp-300-one-round-direct-regional-propagation/README.md, role: session-record, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/exp-301-one-round-fixed-core-regional-propagation/README.md, role: session-record, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/exp-302-two-child-collective-propagation/README.md, role: session-record, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/exp-303-normalized-contact-rank-filter/README.md, role: session-record, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/exp-304-n11-envelope-windows/README.md, role: session-record, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/exp-305-case-preserving-owned-propagation/README.md, role: session-record, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/exp-306-n11-envelope-representation/README.md, role: session-record, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/exp-307-owned-core-guarded-clause/README.md, role: session-record, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/exp-308-n11-corner-cardinality/README.md, role: session-record, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/exp-310-bb-header-preflight/README.md, role: session-record, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/exp-309-subpattern-relevance/README.md, role: session-record, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/exp-311-c2-full-replay/README.md, role: session-record, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/exp-313-incircle-projection-redundancy/README.md, role: session-record, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/exp-314-incircle-disk-projection/README.md, role: session-record, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/exp-295-two-center-children/README.md, role: session-record, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-07-n17-issue-coordination.md, role: review, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/exp-294-stages-exact-replay/README.md, role: session-record, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/exp-293-guard-conditioned-ownership/README.md, role: session-record, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/exp-292-full-square-partner-coupling/README.md, role: session-record, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/exp-291-complete-partner-coupling-amended/README.md, role: session-record, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/exp-289-complete-partner-coupling/README.md, role: session-record, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/exp-290-matched-exact-replay/README.md, role: session-record, authority: record, lifecycle: retained}
+  - {path: docs/project/research/research-2026-10-07-n17-full-square-partner-coupling.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: docs/project/research/research-2026-10-07-n17-complete-partner-coupling.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: docs/project/specs/done/plan-2026-10-07-n17-four-hour-continuation.md, role: plan, authority: record, lifecycle: retained}
+  - {path: docs/project/research/research-2026-10-07-n17-w3-capacity-and-route-selection.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/exp-288-pooled-feasible-center/README.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/exp-287-pooled-relaxation-witness/README.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/exp-286-pooled-forbidden-cover/README.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/exp-285-pooled-parent-center-cases/README.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/exp-284-parent-guard-native-custody/README.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/series/series-000-smoke-and-calibration/results/exp-283-parent-guard-owned-hull/README.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-07-n17-session-184-progress.md, role: review, authority: record, lifecycle: retained}
+  - {path: packing/campaign/retained/session-184-n17-numeric-cap-readiness/README.md, role: session-record, authority: record, lifecycle: retained}
+  - {path: packing/campaign/retained/session-184-tail-a-dependencies/README.md, role: session-record, authority: record, lifecycle: retained}
+  - {path: packing/campaign/retained/session-184-n11-readiness/README.md, role: session-record, authority: record, lifecycle: retained}
+  - {path: docs/project/research/research-2026-10-07-n17-proof-interfaces-and-lp-contract.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: docs/project/specs/done/plan-2026-10-06-n17-ten-hour-session.md, role: plan, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-07-refinement-custody-closure.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-07-refinement-host-rebind.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/site-urls.md, role: generated-view, authority: generated, lifecycle: generated}
+  - {path: docs/project/reviews/review-2026-10-07-fibonacci-torus-algebra.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-07-fibonacci-torus-geometry.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-07-fibonacci-torus-sources.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/specs/done/plan-2026-10-07-fibonacci-torus.md, role: plan, authority: record, lifecycle: retained}
+  - {path: packing/cases/fibonacci_torus/README.md, role: component-guide, authority: record, lifecycle: retained}
+  - {path: packing/cases/regularized_bounds/README.md, role: component-guide, authority: record, lifecycle: retained}
+  - {path: packing/cases/regularized_drawings/think-30n2-2026-10-16/README.md, role: source-index, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-07-squish-second-update-mathematics.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-07-squish-second-update-semantic-binding.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-07-squish-update-mathematics.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-07-squish-update-semantic-binding.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-06-squish-upper-bound-packings.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-06-squish-import-correctness.md, role: review, authority: record, lifecycle: retained}
   - {path: packing/campaign/results/session-173-windows-supervision/README.md, role: session-record, authority: record, lifecycle: retained}
   - {path: packing/devtools/windows-supervision.md, role: development-guide, authority: current, lifecycle: maintained}
   - {path: packing/devtools/n17-diagnostics.md, role: development-guide, authority: current, lifecycle: maintained}
-  - {path: docs/project/n17-optimality-explainer.md, role: tutorial, authority: supporting, lifecycle: maintained}
-  - {path: docs/project/specs/active/plan-2026-10-05-n11-explainer-series.md, role: plan, authority: current, lifecycle: transient}
+  - {path: docs/project/guides/n17-optimality-explainer.md, role: tutorial, authority: supporting, lifecycle: maintained}
+  - {path: docs/project/specs/done/plan-2026-10-05-n11-explainer-series.md, role: plan, authority: record, lifecycle: retained}
+  - {path: docs/project/specs/done/plan-2026-10-06-site-urls-seo-performance.md, role: plan, authority: record, lifecycle: retained}
+  - {path: docs/project/specs/active/plan-2026-10-08-site-layout-and-navigation.md, role: plan, authority: current, lifecycle: transient}
+  - {path: docs/project/specs/active/plan-2026-10-10-website-development-loop.md, role: plan, authority: current, lifecycle: transient}
+  - {path: docs/project/specs/active/plan-2026-10-11-documentation-organization.md, role: plan, authority: current, lifecycle: transient}
   - {path: docs/project/reviews/review-2026-10-05-squarepacker-k2-minus-c.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-08-squarepacker-k2-minus-c-v12.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-08-quarter-cube-proof-chains.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-10-squarepacker-k2-minus-c-upper.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-05-n11-threshold-bound-review.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-02-nagamochi-lemma1-karakus.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-06-karakus-proposition-5-1-machine-check.md, role: review, authority: record, lifecycle: retained}
@@ -22,6 +170,7 @@ documents:
   - {path: docs/project/reviews/review-2026-10-03-n11-optimality-upstream-delta.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-03-n11-optimality-adversarial-gpt6-pro-unified.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-04-n11-optimality-paper-v0.1.4-changes.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-07-n11-optimality-paper-guzhou.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-06-n11-lean-formalization-statement-audit.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-06-n11-lean-formalization-adversarial.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-05-wand125-october-4-certificates.md, role: review, authority: record, lifecycle: retained}
@@ -68,6 +217,7 @@ documents:
   - {path: docs/project/reviews/review-2026-10-04-n17-streamed-verifier.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-04-n17-flag2-diagnosis.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-05-n17-capture-r9.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-07-n17-hull-pull.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-05-n17-stall-classification.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-05-exp-252-h264.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-05-exp-253-h274.md, role: review, authority: record, lifecycle: retained}
@@ -80,8 +230,8 @@ documents:
   - {path: packing/campaign/explorations/X048-session-169-pilots/README.md, role: research-report, authority: record, lifecycle: retained}
   - {path: packing/campaign/explorations/X048-session-170-compatibility/README.md, role: research-report, authority: record, lifecycle: retained}
   - {path: packing/campaign/explorations/X048-session-171-raw-row-support/README.md, role: research-report, authority: record, lifecycle: retained}
-  - {path: packing/campaign/explorations/X048-session-171-raw-row-support/D1_REPORT.md, role: research-report, authority: record, lifecycle: retained}
-  - {path: packing/campaign/explorations/X048-session-171-raw-row-support/D2_REPORT.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/explorations/X048-session-171-raw-row-support/d1-report.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/campaign/explorations/X048-session-171-raw-row-support/d2-report.md, role: research-report, authority: record, lifecycle: retained}
   - {path: packing/campaign/explorations/X048-session-172-capacity-support/README.md, role: research-report, authority: record, lifecycle: retained}
   - {path: packing/campaign/explorations/X048-session-174-core-refinement/README.md, role: research-report, authority: record, lifecycle: retained}
   - {path: packing/campaign/explorations/X048-session-175-enhanced-support/README.md, role: research-report, authority: record, lifecycle: retained}
@@ -107,9 +257,11 @@ documents:
   - {path: packing/campaign/series/series-000-smoke-and-calibration/results/exp-237-n17-polynomial-root/output-review.md, role: review, authority: record, lifecycle: retained}
   - {path: packing/campaign/series/series-000-smoke-and-calibration/results/exp-238-n17-endpoint-feasibility/output-review.md, role: review, authority: record, lifecycle: retained}
   - {path: packing/campaign/series/series-000-smoke-and-calibration/results/exp-235-n17-rational-upper/output-review.md, role: review, authority: record, lifecycle: retained}
-  - {path: docs/project/specs/active/plan-2026-10-01-post-optimality-w3-session.md, role: plan, authority: current, lifecycle: transient}
-  - {path: docs/project/specs/active/plan-2026-10-01-release-assets-on-demand.md, role: plan, authority: current, lifecycle: transient}
+  - {path: docs/project/specs/done/plan-2026-10-01-post-optimality-w3-session.md, role: plan, authority: record, lifecycle: retained}
+  - {path: docs/project/specs/done/plan-2026-10-01-release-assets-on-demand.md, role: plan, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-09-30-n11-explainer-intuition.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/research/research-2026-10-07-codex-cloud-github-publication.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: docs/project/research/research-2026-10-07-cloud-intake-state-checkpoint.md, role: research-report, authority: record, lifecycle: retained}
   - {path: docs/project/research/research-2026-10-02-s12-beyond-rescaling.md, role: research-report, authority: record, lifecycle: retained}
   - {path: docs/project/research/research-2026-09-30-exact-arithmetic-verifier-performance.md, role: research-report, authority: record, lifecycle: retained}
   - {path: docs/project/research/research-2026-10-02-author-checker-profile.md, role: research-report, authority: record, lifecycle: retained}
@@ -119,7 +271,7 @@ documents:
   - {path: docs/project/reviews/review-2026-09-30-n11-optimality-explainer.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-09-30-n11-explainer-citations-and-docs.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-09-30-n11-explainer-proof-reconciliation.md, role: review, authority: record, lifecycle: retained}
-  - {path: docs/project/specs/active/plan-2026-09-30-n11-optimality-illustrations.md, role: plan, authority: current, lifecycle: transient}
+  - {path: docs/project/specs/done/plan-2026-09-30-n11-optimality-illustrations.md, role: plan, authority: record, lifecycle: retained}
   - {path: packing/campaign/agent-sessions/session-152-validation/pdf-d490-run-35784981711.md, role: postmortem, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-09-19-pr199-201-correctness.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-09-20-n17-r012-and-mira-4613-proof-review.md, role: review, authority: record, lifecycle: retained}
@@ -142,28 +294,28 @@ documents:
   - {path: docs/project/research/research-2026-09-08-annealing-for-square-packing.md, role: research-report, authority: supporting, lifecycle: maintained}
   - {path: packing/atlas/known-best/video/spikes/README.md, role: component-guide, authority: supporting, lifecycle: maintained}
   - {path: packing/strategies/preview/README.md, role: component-guide, authority: supporting, lifecycle: maintained}
-  - {path: packing/atlas/known-best/video/spikes/v1-slideshow/NOTES.md, role: research-report, authority: record, lifecycle: retained}
-  - {path: packing/atlas/known-best/video/spikes/v2-transitions/NOTES.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/atlas/known-best/video/spikes/v1-slideshow/notes.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: packing/atlas/known-best/video/spikes/v2-transitions/notes.md, role: research-report, authority: record, lifecycle: retained}
   - {path: packing/atlas/known-best/video/spikes/v2-transitions/stats-summary.md, role: generated-view, authority: record, lifecycle: retained}
   - {path: packing/cases/n11_fractional_certificate/a6_dual_upper/README.md, role: research-report, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-09-10-n11-a6-scope-and-plan.md, role: review, authority: record, lifecycle: retained}
-  - {path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md, role: plan, authority: current, lifecycle: transient}
+  - {path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md, role: plan, authority: record, lifecycle: superseded, superseded_by: packing/frontier/n-011.md}
   - {path: docs/project/specs/active/plan-2026-09-11-workbench-from-spike-to-product.md, role: plan, authority: current, lifecycle: transient}
-  - {path: docs/project/specs/active/plan-2026-09-13-n11-bc329-three-profile-run-sheet.md, role: plan, authority: current, lifecycle: transient}
-  - {path: docs/project/specs/active/plan-2026-09-13-pr157-integrated-calibration-launch-supplement.md, role: plan, authority: current, lifecycle: transient}
-  - {path: docs/project/specs/active/plan-2026-09-13-n11-bc329-runset-verifier.md, role: plan, authority: current, lifecycle: transient}
-  - {path: docs/project/specs/active/plan-2026-09-21-video-delivery-profiles.md, role: plan, authority: current, lifecycle: transient}
+  - {path: docs/project/specs/archive/plan-2026-09-13-n11-bc329-three-profile-run-sheet.md, role: plan, authority: record, lifecycle: retained}
+  - {path: docs/project/specs/done/plan-2026-09-13-pr157-integrated-calibration-launch-supplement.md, role: plan, authority: record, lifecycle: retained}
+  - {path: docs/project/specs/done/plan-2026-09-13-n11-bc329-runset-verifier.md, role: plan, authority: record, lifecycle: retained}
+  - {path: docs/project/specs/done/plan-2026-09-21-video-delivery-profiles.md, role: plan, authority: record, lifecycle: retained}
   - {path: docs/project/specs/active/plan-2026-09-22-upper-bound-certification-blocks.md, role: plan, authority: current, lifecycle: transient}
-  - {path: docs/project/specs/active/plan-2026-09-25-after-r052-planning.md, role: plan, authority: current, lifecycle: transient}
-  - {path: docs/project/specs/active/plan-2026-09-27-after-4640020-overnight.md, role: plan, authority: current, lifecycle: transient}
+  - {path: docs/project/specs/archive/plan-2026-09-25-after-r052-planning.md, role: plan, authority: record, lifecycle: superseded, superseded_by: packing/campaign/agendas/agenda-042-overnight-n11-settlement-and-low-n-angles.md}
+  - {path: docs/project/specs/archive/plan-2026-09-27-after-4640020-overnight.md, role: plan, authority: record, lifecycle: superseded, superseded_by: packing/campaign/agendas/agenda-042-overnight-n11-settlement-and-low-n-angles.md}
   - {path: docs/project/specs/active/plan-2026-09-29-third-party-results-register.md, role: plan, authority: current, lifecycle: transient}
-  - {path: docs/project/specs/active/plan-2026-09-30-epistemics-ladder-review.md, role: plan, authority: current, lifecycle: transient}
-  - {path: docs/project/specs/active/plan-2026-10-01-result-kinds.md, role: plan, authority: current, lifecycle: transient}
-  - {path: docs/project/specs/active/plan-2026-10-01-result-status.md, role: plan, authority: current, lifecycle: transient}
+  - {path: docs/project/specs/done/plan-2026-09-30-epistemics-ladder-review.md, role: plan, authority: record, lifecycle: retained}
+  - {path: docs/project/specs/done/plan-2026-10-01-result-kinds.md, role: plan, authority: record, lifecycle: retained}
+  - {path: docs/project/specs/done/plan-2026-10-01-result-status.md, role: plan, authority: record, lifecycle: retained}
   - {path: docs/project/specs/active/plan-2026-10-02-independent-measure-verifier.md, role: plan, authority: current, lifecycle: transient}
   - {path: docs/project/specs/active/plan-2026-10-01-result-import-first-application.md, role: plan, authority: current, lifecycle: transient}
   - {path: docs/project/specs/active/plan-2026-10-03-measure-verifier-milestone-c.md, role: plan, authority: current, lifecycle: transient}
-  - {path: docs/project/specs/active/plan-2026-10-05-n17-overnight.md, role: plan, authority: current, lifecycle: transient}
+  - {path: docs/project/specs/done/plan-2026-10-05-n17-overnight.md, role: plan, authority: record, lifecycle: retained}
   - {path: docs/project/specs/active/plan-2026-09-29-github-pages-overview.md, role: plan, authority: current, lifecycle: transient}
   - {path: docs/project/reviews/review-2026-09-13-n11-bc329-source-distinct-reader.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-09-13-n11-bc329-reader-rereview.md, role: review, authority: record, lifecycle: retained}
@@ -183,7 +335,7 @@ documents:
   - {path: docs/project/reviews/review-2026-09-13-n11-bc329-run-sheet-flowmark-final.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-09-13-pr156-usage-delta.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-09-13-n11-bc303-t1-reader-final-math.md, role: review, authority: record, lifecycle: retained}
-  - {path: docs/project/specs/active/plan-2026-09-10-n11-overnight-three-blocks.md, role: plan, authority: record, lifecycle: superseded, superseded_by: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md}
+  - {path: docs/project/specs/archive/plan-2026-09-10-n11-overnight-three-blocks.md, role: plan, authority: record, lifecycle: superseded, superseded_by: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md}
   - {path: docs/project/reviews/review-2026-09-10-n11-parent-centre-independent-review.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-09-10-n11-parent-adapter-admission.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-09-10-n11-parent-domain-translation.md, role: review, authority: record, lifecycle: retained}
@@ -288,7 +440,7 @@ documents:
   - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-041/exp-224-n19-10x/exp-224-n19-10x-receipt.md, role: research-report, authority: record, lifecycle: retained}
   - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-041/exp-225-n27-n28-548-100-rebump-receipt.md, role: research-report, authority: record, lifecycle: retained}
   - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-041/exp-226-n11-net2880-receipt.md, role: research-report, authority: record, lifecycle: retained}
-  - {path: docs/project/handoff-2026-09-22-low-n-review-and-the-2880-rung.md, role: handoff, authority: record, lifecycle: retained}
+  - {path: docs/project/handoffs/handoff-2026-09-22-low-n-review-and-the-2880-rung.md, role: handoff, authority: record, lifecycle: retained}
   - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-038/n20-973-200-t021-grid4-windows7-receipt.md, role: research-report, authority: record, lifecycle: retained}
   - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-038/n20-973-200-t021-grid4-windows7-2400-receipt.md, role: research-report, authority: record, lifecycle: retained}
   - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-038/n21-97-20-t021-auto-windows6-receipt.md, role: research-report, authority: record, lifecycle: retained}
@@ -344,6 +496,9 @@ documents:
   - {path: packing/sqverify_fast/SOUNDNESS.md, role: component-guide, authority: definitive, lifecycle: maintained}
   - {path: packing/sqverify_fast/README.md, role: component-guide, authority: supporting, lifecycle: maintained}
   - {path: packing/n17bb_native/README.md, role: component-guide, authority: supporting, lifecycle: maintained}
+  - {path: packing/n17_kernel_verify/README.md, role: component-guide, authority: supporting, lifecycle: maintained}
+  - {path: packing/n17_kernel_verify/provenance.md, role: component-guide, authority: supporting, lifecycle: maintained}
+  - {path: packing/n17_kernel_verify/testing.md, role: component-guide, authority: supporting, lifecycle: maintained}
   - {path: packing/benchmarks/n17-bb-native/README.md, role: component-guide, authority: supporting, lifecycle: maintained}
   - {path: packing/benchmarks/measure-verifier/census/README.md, role: generated-view, authority: generated, lifecycle: generated}
   - {path: packing/benchmarks/measure-verifier/census-mixed/README.md, role: generated-view, authority: generated, lifecycle: generated}
@@ -443,7 +598,7 @@ documents:
   - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-028/bc-260-direct-hybrid-contracts.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/research/research-2026-09-07-stromquist-memos-and-helper-arguments.md, role: research-report, authority: supporting, lifecycle: maintained}
   - {path: docs/project/reviews/review-2026-09-07-stromquist-incorporation.md, role: review, authority: record, lifecycle: retained}
-  - {path: docs/project/stromquist-helper-arguments-math-review.md, role: review, authority: supporting, lifecycle: maintained}
+  - {path: docs/project/reviews/review-2026-09-07-stromquist-helper-arguments.md, role: review, authority: supporting, lifecycle: maintained}
   - {path: docs/project/reviews/review-2026-09-07-n6-pure-dots-obstruction.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-09-07-n6-quantitative-piercing-bound.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-09-07-stromquist-segment-helper.md, role: review, authority: record, lifecycle: retained}
@@ -465,14 +620,21 @@ documents:
   - {path: README.md, role: orientation, authority: definitive, lifecycle: maintained}
   - {path: SYNOPSIS.md, role: technical-synthesis, authority: definitive, lifecycle: maintained}
   - {path: TUTORIAL.md, role: tutorial, authority: supporting, lifecycle: maintained}
+  - {path: TUTORIAL-ADVANCED.md, role: tutorial, authority: supporting, lifecycle: maintained}
+  - {path: docs/project/specs/active/plan-2026-10-14-basic-and-advanced-tutorials.md, role: plan, authority: current, lifecycle: transient}
+  - {path: docs/project/specs/active/plan-2026-10-14-ci-iteration-cost.md, role: plan, authority: current, lifecycle: transient}
+  - {path: docs/project/reviews/review-2026-10-14-tutorial-split-editorial.md, role: review, authority: record, lifecycle: retained}
   - {path: packing/atlas/README.md, role: component-guide, authority: supporting, lifecycle: maintained}
   - {path: packing/atlas/enumerated/README.md, role: component-guide, authority: supporting, lifecycle: maintained}
   - {path: packing/atlas/known-best/README.md, role: component-guide, authority: supporting, lifecycle: maintained}
-  - {path: packing/atlas/known-best/FIGURE-PLAYBOOK.md, role: component-guide, authority: supporting, lifecycle: maintained}
+  - {path: packing/atlas/known-best/figure-playbook.md, role: component-guide, authority: supporting, lifecycle: maintained}
+  - {path: packing/devtools/templates/paper-design.md, role: component-guide, authority: supporting, lifecycle: maintained}
   - {path: packing/atlas/prospective/README.md, role: component-guide, authority: supporting, lifecycle: maintained}
   - {path: packing/atlas/rendering/README.md, role: component-guide, authority: supporting, lifecycle: maintained}
   - {path: conventions.md, role: conventions, authority: definitive, lifecycle: maintained}
   - {path: epistemics.md, role: epistemic-policy, authority: definitive, lifecycle: maintained}
+  - {path: docs/project/policies/regularization-policy.md, role: component-guide, authority: definitive, lifecycle: maintained}
+  - {path: docs/project/guides/regularization-process.md, role: component-guide, authority: supporting, lifecycle: maintained}
   - {path: operating-rules.md, role: operating-rules, authority: definitive, lifecycle: maintained}
   - {path: development.md, role: development-guide, authority: definitive, lifecycle: maintained}
   - {path: packing/campaign/README.md, role: research-runbook, authority: definitive, lifecycle: maintained}
@@ -486,6 +648,14 @@ documents:
   - {path: packing/campaign/ideas.md, role: registry, authority: definitive, lifecycle: maintained}
   - {path: packing/campaign/ledger.md, role: generated-view, authority: generated, lifecycle: generated}
   - {path: packing/campaign/agenda-map.md, role: generated-view, authority: generated, lifecycle: generated}
+  - {path: packing/campaign/issue-intake/upper-bounds-20261014/README.md, role: generated-view, authority: generated, lifecycle: generated}
+  - {path: packing/campaign/issue-intake/upper-bounds-20261014/lane-claims/README.md, role: source-index, authority: record, lifecycle: retained}
+  - {path: packing/campaign/issue-intake/upper-bounds-20261014/review/README.md, role: review, authority: record, lifecycle: retained}
+  - {path: packing/campaign/issue-intake/upper-bounds-20261016/README.md, role: generated-view, authority: generated, lifecycle: generated}
+  - {path: packing/campaign/issue-intake/upper-bounds-20261016/lane-claims/README.md, role: source-index, authority: record, lifecycle: retained}
+  - {path: packing/campaign/issue-intake/upper-bounds-20261016/review/README.md, role: review, authority: record, lifecycle: retained}
+  - {path: packing/campaign/issue-intake/upper-bounds-n29-20261016/README.md, role: generated-view, authority: generated, lifecycle: generated}
+  - {path: packing/campaign/issue-intake/upper-bounds-n29-20261016/lane-claims/README.md, role: source-index, authority: record, lifecycle: retained}
   - {path: packing/campaign/series/series-000-smoke-and-calibration/README.md, role: series-guide, authority: definitive, lifecycle: maintained}
   - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-024/launch-t-plus-00.md, role: research-report, authority: record, lifecycle: retained}
   - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-024/commissioning-gate-minute-015.md, role: research-report, authority: record, lifecycle: retained}
@@ -754,7 +924,7 @@ documents:
     role: review
     authority: record
     lifecycle: superseded
-    superseded_by: docs/project/handoff-2026-09-06-post-381-t2-commissioning.md
+    superseded_by: docs/project/handoffs/handoff-2026-09-06-post-381-t2-commissioning.md
   - path: docs/project/reviews/review-2026-09-06-t022-dilation-limit.md
     role: review
     authority: record
@@ -875,7 +1045,7 @@ documents:
     role: review
     authority: record
     lifecycle: retained
-  - path: docs/project/verification-tooling.md
+  - path: docs/project/guides/verification-tooling.md
     role: component-guide
     authority: record
     lifecycle: retained
@@ -947,23 +1117,23 @@ documents:
     role: review
     authority: record
     lifecycle: retained
-  - path: docs/project/three-lane-research-method.md
+  - path: docs/project/guides/three-lane-research-method.md
     role: component-guide
     authority: record
     lifecycle: retained
-  - path: docs/project/handoff-2026-09-04-block-close.md
+  - path: docs/project/handoffs/handoff-2026-09-04-block-close.md
     role: handoff
     authority: record
     lifecycle: retained
-  - path: docs/project/handoff-2026-09-06-post-381-t2-commissioning.md
+  - path: docs/project/handoffs/handoff-2026-09-06-post-381-t2-commissioning.md
     role: handoff
     authority: record
     lifecycle: retained
-  - path: docs/project/handoff-2026-09-21-n17-external-intake.md
+  - path: docs/project/handoffs/handoff-2026-09-21-n17-external-intake.md
     role: handoff
     authority: record
     lifecycle: retained
-  - path: docs/project/handoff-2026-09-06-post-381-t2-t10-continuation.md
+  - path: docs/project/handoffs/handoff-2026-09-06-post-381-t2-t10-continuation.md
     role: handoff
     authority: record
     lifecycle: superseded
@@ -1044,12 +1214,12 @@ documents:
     role: generated-view
     authority: generated
     lifecycle: generated
-  - path: docs/project/handoff-2026-08-23-basin-identity-and-two-reviews.md
+  - path: docs/project/handoffs/handoff-2026-08-23-basin-identity-and-two-reviews.md
     role: handoff
     authority: record
     lifecycle: superseded
     superseded_by: SYNOPSIS.md
-  - path: docs/project/handoff-2026-08-23-quench-spine.md
+  - path: docs/project/handoffs/handoff-2026-08-23-quench-spine.md
     role: handoff
     authority: record
     lifecycle: superseded
@@ -1057,23 +1227,25 @@ documents:
   - {path: docs/project/postmortems/postmortem-2026-08-23-soundness-class.md, role: postmortem, authority: supporting, lifecycle: maintained}
   - {path: docs/project/postmortems/postmortem-2026-10-05-orphaned-catalogue-intake.md, role: postmortem, authority: record, lifecycle: retained}
   - {path: docs/project/specs/active/plan-2026-09-29-proof-verification-consolidation.md, role: plan, authority: current, lifecycle: transient}
-  - {path: docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md, role: plan, authority: current, lifecycle: transient}
+  - {path: docs/project/specs/future/plan-2026-10-10-n17-eight-hour-proof-block.md, role: plan, authority: current, lifecycle: transient}
+  - {path: docs/project/specs/future/plan-2026-10-10-n17-three-block-session.md, role: plan, authority: current, lifecycle: transient}
+  - {path: docs/project/specs/paused/plan-2026-08-22-minimal-packing-toolkit.md, role: plan, authority: current, lifecycle: transient}
   - {path: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md, role: plan, authority: current, lifecycle: transient}
   - {path: docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md, role: plan, authority: current, lifecycle: transient}
   - {path: docs/project/specs/active/plan-2026-08-25-research-loop-efficiency-infrastructure.md, role: plan, authority: current, lifecycle: transient}
-  - {path: docs/project/specs/active/plan-2026-08-26-overnight-constructive-enumeration.md, role: plan, authority: current, lifecycle: transient}
-  - {path: docs/project/specs/active/plan-2026-08-28-symbolic-promotion-and-the-atlas.md, role: plan, authority: current, lifecycle: transient}
-  - {path: docs/project/specs/active/plan-2026-08-28-numeric-symbolic-round-trip.md, role: plan, authority: current, lifecycle: transient}
-  - {path: docs/project/specs/active/plan-2026-08-28-promotion-pipeline-implementation.md, role: plan, authority: current, lifecycle: transient}
-  - {path: docs/project/specs/active/plan-2026-08-28-interval-certification.md, role: plan, authority: current, lifecycle: transient}
-  - {path: docs/project/specs/active/plan-2026-08-29-gate-validation-speed.md, role: plan, authority: current, lifecycle: transient}
+  - {path: docs/project/specs/done/plan-2026-08-26-overnight-constructive-enumeration.md, role: plan, authority: record, lifecycle: retained}
+  - {path: docs/project/specs/done/plan-2026-08-28-symbolic-promotion-and-the-atlas.md, role: plan, authority: record, lifecycle: retained}
+  - {path: docs/project/specs/archive/plan-2026-08-28-numeric-symbolic-round-trip.md, role: plan, authority: record, lifecycle: superseded, superseded_by: docs/project/specs/paused/plan-2026-08-28-promotion-pipeline-implementation.md}
+  - {path: docs/project/specs/paused/plan-2026-08-28-promotion-pipeline-implementation.md, role: plan, authority: current, lifecycle: transient}
+  - {path: docs/project/specs/done/plan-2026-08-28-interval-certification.md, role: plan, authority: record, lifecycle: retained}
+  - {path: docs/project/specs/done/plan-2026-08-29-gate-validation-speed.md, role: plan, authority: record, lifecycle: retained}
   - {path: docs/project/specs/active/plan-2026-09-06-validation-efficiency-and-checkpoints.md, role: plan, authority: current, lifecycle: transient}
-  - {path: docs/project/specs/active/plan-2026-09-06-post-381-research-sequence.md, role: plan, authority: supporting, lifecycle: transient}
+  - {path: docs/project/specs/done/plan-2026-09-06-post-381-research-sequence.md, role: plan, authority: record, lifecycle: retained}
   - {path: docs/project/specs/active/plan-2026-09-07-atlas-expansion-to-324.md, role: plan, authority: current, lifecycle: transient}
   - {path: docs/project/specs/active/plan-2026-09-07-math-text-face.md, role: plan, authority: current, lifecycle: transient}
   - {path: docs/project/specs/active/plan-2026-09-07-known-best-atlas-video.md, role: plan, authority: current, lifecycle: transient}
   - {path: docs/project/specs/active/plan-2026-09-09-packing-strategies-as-a-shared-language.md, role: plan, authority: current, lifecycle: transient}
-  - path: docs/project/specs/active/plan-2026-08-24-deterministic-svg-rendering-toolkit.md
+  - path: docs/project/specs/done/plan-2026-08-24-deterministic-svg-rendering-toolkit.md
     role: plan
     authority: record
     lifecycle: superseded
@@ -1083,11 +1255,11 @@ documents:
     authority: record
     lifecycle: superseded
     superseded_by: development.md
-  - path: docs/project/specs/active/spike-2026-08-25-n5-motion-lab.md
+  - path: docs/project/specs/done/spike-2026-08-25-n5-motion-lab.md
     role: plan
     authority: record
     lifecycle: retained
-  - path: docs/project/specs/active/plan-2026-08-25-generalized-motion-lab.md
+  - path: docs/project/specs/paused/plan-2026-08-25-generalized-motion-lab.md
     role: plan
     authority: current
     lifecycle: transient
@@ -1126,7 +1298,24 @@ documents:
   - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/proofs/five-dot-transfer-review.md, role: research-report, authority: record, lifecycle: retained}
   - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/sprint-report.md, role: research-report, authority: record, lifecycle: retained}
   - {path: packing/campaign/series/series-000-smoke-and-calibration/results/agenda-032/gaps-to-global-bound.md, role: research-report, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-06-n17-w3-consolidation.md, role: review, authority: record, lifecycle: retained}
+
+  - path: docs/project/reviews/review-2026-10-08-evand-new-arrangements.md
+    role: review
+    authority: record
+    lifecycle: retained
+  - {path: docs/project/research/research-2026-10-09-n17-family-cell-audit.md, role: research-report, authority: supporting, lifecycle: retained}
+  - path: docs/project/reviews/review-2026-10-08-fn1-original-input-bindings.md
+    role: review
+    authority: record
+    lifecycle: retained
 collections:
+  - pattern: packing/site-changelog.yaml
+    role: registry
+    authority: current
+    lifecycle: maintained
+    contract: packing.squares:SiteChangelog/v1
+    schema: packing/site-changelog.schema.yaml
   - pattern: packing/benchmarks/math-startup/experiments/*.md
     role: experiment-record
     authority: record
@@ -1208,8 +1397,33 @@ exclusions:
     reason: >-
       Test inputs whose exact text is what a test or a measuring tool reads, such as the
       GitHub math probe `devtools.check_github_math --probe` fetches: not documents.
-  - pattern: packing/devtools/templates/*.md
+  - pattern: packing/devtools/templates/*-article.md
     reason: >-
-      Templates for devtools.render_n11_lower_bounds_explainer and devtools.render_verifiable_claim:
-      Markdown with placeholders and stamping markers, not documents. The rendered page
-      and the generated claim documents are the documents.
+      Manuscripts for the paper and site renderers: Markdown with placeholders and
+      stamping markers. The rendered papers and pages are the published documents.
+  - pattern: packing/devtools/templates/report-results.md
+    reason: >-
+      A fragment with a placeholder that `render_overview` inlines into the site's
+      results pages; the rendered pages are the published documents.
+  - pattern: packing/devtools/templates/proof_card.md
+    reason: >-
+      The claim renderer's template; the generated proof cards are the published
+      documents.
+  - pattern: packing/devtools/templates/*verifiable_claim.md
+    reason: >-
+      The claim renderer's two templates; the generated verifiable claims are the
+      published documents.
+  - pattern: vendor/evand-regularize/CREDITS.md
+    reason: >-
+      Evan Daniel's credits for evand/square-packing, vendored byte for byte at a pin
+      with his MIT code; held to its digest by devtools.check_vendored_evand, so never
+      edited here. The README.md beside it is this project's mapped document.
+  - pattern: vendor/evand-regularize/search/**/*.md
+    reason: >-
+      Evan Daniel's method logs and generated lists under the vendored search/ tree,
+      upstream prose at the pin rather than this project's documents.
+  - pattern: packing/cases/regularized_drawings/*/selection-*.md
+    reason: >-
+      A regularization selection's Markdown report, retained byte for byte as
+      devtools.regularize_select wrote it, beside its JSON report, as the run evidence
+      of the pull request that admitted its views: a run output, not project prose.

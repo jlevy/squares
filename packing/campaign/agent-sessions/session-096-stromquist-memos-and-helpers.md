@@ -47,7 +47,7 @@ session:
     kill_condition: A failed geometric case, boundary equality or unstated hypothesis prevents accepting the affected proposition.
     fallback: Retain the missing premise and stop short of a theorem or packing-bound promotion.
     outcome: Reviewed conditional mass inequality, D4 averaging, arbitrary-five-point obstruction, rational 101/100 control and open-unit endpoint (12+2sqrt(2))/5; no packing bound changed.
-    evidence: [docs/project/stromquist-helper-arguments-math-review.md, docs/project/reviews/review-2026-09-07-n6-pure-dots-obstruction.md, docs/project/reviews/review-2026-09-07-n6-quantitative-piercing-bound.md, docs/project/reviews/review-2026-09-07-stromquist-incorporation.md]
+    evidence: [docs/project/reviews/review-2026-09-07-stromquist-helper-arguments.md, docs/project/reviews/review-2026-09-07-n6-pure-dots-obstruction.md, docs/project/reviews/review-2026-09-07-n6-quantitative-piercing-bound.md, docs/project/reviews/review-2026-09-07-stromquist-incorporation.md]
     stop_reason: Independent proof review accepted the statements at their declared scopes.
     next_action: Commission exact finite controls while keeping the geometric premises explicit.
   - workflow: pipeline-improvement
@@ -117,7 +117,7 @@ session:
     status: completed
     recording: retrospective
     outcome: Implemented exact incidence tools and independent controls; derived the rational and algebraic piercing bounds and verified the published upper-bound interval.
-    evidence: [docs/project/stromquist-helper-arguments-math-review.md, docs/project/reviews/review-2026-09-07-n6-quantitative-piercing-bound.md]
+    evidence: [docs/project/reviews/review-2026-09-07-stromquist-helper-arguments.md, docs/project/reviews/review-2026-09-07-n6-quantitative-piercing-bound.md]
     files: [packing/src/sqpack/incidence.py, packing/cases/stromquist/memo1.py, packing/tests/test_incidence.py, packing/tests/test_stromquist_memo1.py]
     checks: [Eight focused tests passed; Ruff and BasedPyright clean; analytic proofs independently reviewed.]
     uncertainty: A complete geometric replay of the source helpers remains separate from the finite allocation control.

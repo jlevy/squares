@@ -1,0 +1,85 @@
+{
+  "schema": "registered-phase-command-plan/v1",
+  "target_unrun": true,
+  "registration_state": "registered_before_target",
+  "working_directory": "packing",
+  "phases": [
+    {
+      "name": "construction",
+      "argv": [
+        "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+        "-m",
+        "devtools.check_n17_incircle_disk_projection",
+        "--descriptor",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-314-incircle-disk-projection/descriptor.json",
+        "--max-seconds",
+        "60",
+        "--output",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-314-incircle-disk-projection/certificate.json"
+      ]
+    },
+    {
+      "name": "fresh_verification",
+      "argv": [
+        "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+        "-m",
+        "devtools.check_n17_incircle_disk_projection",
+        "--descriptor",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-314-incircle-disk-projection/descriptor.json",
+        "--max-seconds",
+        "60",
+        "--certificate",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-314-incircle-disk-projection/certificate.json",
+        "--output",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-314-incircle-disk-projection/replay.json"
+      ]
+    }
+  ],
+  "runner_argv": [
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-m",
+    "devtools.run_registered_phases",
+    "--manifest",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-314-incircle-disk-projection/execution-manifest.json",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-314-incircle-disk-projection/phase-execution.json"
+  ],
+  "supervisor_argv": [
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-m",
+    "devtools.supervise_posix",
+    "--max-seconds",
+    "120",
+    "--max-memory-mib",
+    "4096",
+    "--sample-seconds",
+    "0.25",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-314-incircle-disk-projection/supervision.json",
+    "--stdout",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-314-incircle-disk-projection/stdout.log",
+    "--stderr",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-314-incircle-disk-projection/stderr.log",
+    "--",
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-m",
+    "devtools.run_registered_phases",
+    "--manifest",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-314-incircle-disk-projection/execution-manifest.json",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-314-incircle-disk-projection/phase-execution.json"
+  ],
+  "resources": {
+    "construction_seconds": 60,
+    "fresh_seconds": 60,
+    "combined_term_seconds": 120,
+    "combined_kill_seconds": 130,
+    "sampled_memory_mib_per_live_process": 4096,
+    "memory_scope": "per_live_process_in_owned_group",
+    "workers": 1,
+    "output_bytes": 1048576
+  },
+  "criterion": "Reconstruct original all24 wall-clipped E_i and EVERY relevant D_ij from same accepted308 three byte-bound roles, using313.construct and ONE intake. Primary ANY EXTREME D vertex exactnormsquared<1: disk convexification is proper and a stronger model may gain a necessary constraint. EVERY extreme norm>=1 proves ALL pairwise incircle convexifications redundant, including every inscribedpolygon, and retires convex pair LPs plus forest-only disjunctions. Equality1 retained. Secondary ALL Dextremes norm<1 identifies a whole original-cell pair-exclusion candidate; no ordinary flag/admission/census here. Complete every extreme/every pair/all12920 statepair accounting, ALL transitive heldbytes rechecked AFTER norm stage, fullfresh payload/source match. Per-state/per-pair octagon flags explicitly labelled, disk-relaxation witness only when globaldiskredundancy holds. Partial/resource/refusal unresolved. No arbitrary newpolygon/LP/forest test/physical packing/globalbound.",
+  "registered_at": "2026-10-08T05:14:52.137949+00:00",
+  "source_freeze": "reviewedsourcecommit/bytesresolvedatlaunch"
+}

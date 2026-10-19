@@ -2,7 +2,7 @@
 
 Reviewed 2026-09-27, read-only, by a Fable max sub-agent acting as the mathematical
 reviewer, on the branch `claude/happy-hawking-br4fwg`. The object is three claims the
-[post-4.640020 plan](../specs/active/plan-2026-09-27-after-4640020-overnight.md) flags
+[post-4.640020 plan](../specs/archive/plan-2026-09-27-after-4640020-overnight.md) flags
 as unsure, all resting on the
 [4.640020 review](review-2026-09-27-n17-kleddamag-4640020.md) and on Kleddamag’s v1.1.0
 certificate, re-read here from the clone at `13821ddfa241`. It is evidence for the

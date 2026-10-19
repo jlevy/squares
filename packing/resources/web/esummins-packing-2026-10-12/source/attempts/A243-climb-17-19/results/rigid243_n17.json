@@ -1,0 +1,24 @@
+{
+ "n": 17,
+ "side": 4.675530093604551,
+ "n_squares": 17,
+ "n_contacts": 39,
+ "min_gap": -1.0977885267493548e-12,
+ "rank": 37,
+ "ker_dim": 14,
+ "rattlers": [],
+ "tilted": [
+  8,
+  9,
+  10,
+  11,
+  12,
+  13,
+  15
+ ],
+ "lp": {
+  "max_l1": 0.0,
+  "moving": []
+ },
+ "rigid_first_order": true
+}

@@ -1,0 +1,5 @@
+CaptureOpen.Chunk0164: side-L? side=4.675530093604551 shift=1.000e-12 table 15399 entries, owners 17
+CaptureOpen.Chunk0164: S0 rows [1024, 1024, 1024, 1024, 1024, 1024, 1024, 1024, 1024, 1024, 1024, 1024, 1024, 1024, 1024, 1024, 1024], E rows [1024, 1024, 1024, 1024, 1024, 1024, 1024, 1024, 1024, 1024, 1024, 1024, 1024, 1024, 1024, 1024, 1024], steps 2820 {'cut': 2616, 'kill': 69, 'split': 69, 'wall': 66}
+CaptureOpen.Chunk0164: all 2820 steps accepted; final rows [1024, 1024, 1024, 1024, 1024, 1024, 1024, 1024, 1024, 1024, 1024, 1024, 1024, 1024, 1024, 1024, 1024]; R == E exactly: True
+runToCheck replayed = True
+wall 127s

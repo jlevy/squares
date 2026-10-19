@@ -1,0 +1,297 @@
+{
+ "schema": "cfcheck-price/v1",
+ "basis": "The source's cfcheck receipts, details.regions.*.leaf_timing: per-leaf elapsed seconds summed on worker threads, which the source calls an approximation to CPU cost. Leaves the source resumed from earlier checkpoints carry no timing and are priced at the source's rate for their kind in the same region, or pooled over the interval, or over the other interval.",
+ "regions": [
+  {
+   "interval": 1,
+   "region": "straddle",
+   "roots": 6804,
+   "leaves": 177505,
+   "roots_resumed_by_source": 6804,
+   "leaves_timed_by_source": 0,
+   "recorded_worker_hours": 0.0,
+   "untimed_leaves": 177505,
+   "estimated_untimed_worker_hours": 19.952,
+   "unmeasured_leaves": 78,
+   "replay4d_cpu_hours": 24.74
+  },
+  {
+   "interval": 1,
+   "region": "left",
+   "roots": 17442,
+   "leaves": 645823,
+   "roots_resumed_by_source": 17422,
+   "leaves_timed_by_source": 70863,
+   "recorded_worker_hours": 67.367,
+   "untimed_leaves": 574960,
+   "estimated_untimed_worker_hours": 26.479,
+   "unmeasured_leaves": 0,
+   "replay4d_cpu_hours": 40.97
+  },
+  {
+   "interval": 1,
+   "region": "top",
+   "roots": 2673,
+   "leaves": 171634,
+   "roots_resumed_by_source": 0,
+   "leaves_timed_by_source": 171634,
+   "recorded_worker_hours": 1.847,
+   "untimed_leaves": 0,
+   "estimated_untimed_worker_hours": 0.0,
+   "unmeasured_leaves": 0,
+   "replay4d_cpu_hours": 2.16
+  },
+  {
+   "interval": 1,
+   "region": "right",
+   "roots": 13338,
+   "leaves": 658495,
+   "roots_resumed_by_source": 0,
+   "leaves_timed_by_source": 658495,
+   "recorded_worker_hours": 16.59,
+   "untimed_leaves": 0,
+   "estimated_untimed_worker_hours": 0.0,
+   "unmeasured_leaves": 0,
+   "replay4d_cpu_hours": 15.32
+  },
+  {
+   "interval": 34,
+   "region": "straddle",
+   "roots": 14364,
+   "leaves": 485906,
+   "roots_resumed_by_source": 0,
+   "leaves_timed_by_source": 485906,
+   "recorded_worker_hours": 70.131,
+   "untimed_leaves": 0,
+   "estimated_untimed_worker_hours": 0.0,
+   "unmeasured_leaves": 0,
+   "replay4d_cpu_hours": 19.45
+  },
+  {
+   "interval": 34,
+   "region": "left",
+   "roots": 17442,
+   "leaves": 594009,
+   "roots_resumed_by_source": 0,
+   "leaves_timed_by_source": 594009,
+   "recorded_worker_hours": 52.88,
+   "untimed_leaves": 0,
+   "estimated_untimed_worker_hours": 0.0,
+   "unmeasured_leaves": 0,
+   "replay4d_cpu_hours": 13.81
+  },
+  {
+   "interval": 34,
+   "region": "top",
+   "roots": 5643,
+   "leaves": 71393,
+   "roots_resumed_by_source": 0,
+   "leaves_timed_by_source": 71393,
+   "recorded_worker_hours": 3.577,
+   "untimed_leaves": 0,
+   "estimated_untimed_worker_hours": 0.0,
+   "unmeasured_leaves": 0,
+   "replay4d_cpu_hours": 1.59
+  },
+  {
+   "interval": 34,
+   "region": "right",
+   "roots": 13338,
+   "leaves": 333916,
+   "roots_resumed_by_source": 0,
+   "leaves_timed_by_source": 333916,
+   "recorded_worker_hours": 29.624,
+   "untimed_leaves": 0,
+   "estimated_untimed_worker_hours": 0.0,
+   "unmeasured_leaves": 0,
+   "replay4d_cpu_hours": 6.61
+  }
+ ],
+ "source_recorded_worker_hours": 242.02,
+ "source_estimated_untimed_worker_hours": 46.43,
+ "source_total_worker_hours": 288.45,
+ "unmeasured_leaves": 78,
+ "source_receipt_custody": {
+  "1": {
+   "receipt_sha256": "9b228bb8e520ab4cf9daabbd65fb5ebfe96b01c9b283373979474001163bf547",
+   "inputs_named": [
+    "family.json",
+    "family_right.json",
+    "intervals.json",
+    "left.rec",
+    "right.rec",
+    "straddle.rec",
+    "top.rec"
+   ],
+   "every_input_is_published": true,
+   "roots_published": true,
+   "leaves_published": true,
+   "leaf_kinds_published": true,
+   "checked_leaf_kinds_equal_leaf_kinds": true,
+   "ok_complete": true,
+   "resumed_roots": 24226
+  },
+  "34": {
+   "receipt_sha256": "78febff2f83cb981e022403e3084437a1de9e0f5c8d141c4943f1ece7a78a125",
+   "inputs_named": [
+    "family.json",
+    "family_right.json",
+    "intervals.json",
+    "left.rec",
+    "right.rec",
+    "straddle.rec",
+    "top.rec"
+   ],
+   "every_input_is_published": true,
+   "roots_published": true,
+   "leaves_published": true,
+   "leaf_kinds_published": true,
+   "checked_leaf_kinds_equal_leaf_kinds": true,
+   "ok_complete": true,
+   "resumed_roots": 0
+  }
+ },
+ "replay4d": {
+  "basis": "The source's receipts of replay4d, receipts/published_checker.json for the eight records of intervals 1 and 34 (cpu_hours per record) and receipts/replay.json for one replay of all 136 records (cpu_hours_total).",
+  "intervals_1_and_34_cpu_hours": 124.65,
+  "all_136_records_cpu_hours": 4294.0,
+  "cfcheck_to_replay4d": {
+   "1": 1.59,
+   "34": 3.768
+  },
+  "cfcheck_to_replay4d_both": 2.314,
+  "extrapolated_all_records_worker_hours": {
+   "at_both_intervals_ratio": 9937,
+   "low": 6826,
+   "high": 16179
+  }
+ },
+ "calibration": {
+  "rows": [
+   {
+    "receipt": "smallest-record-timing.json",
+    "interval": 1,
+    "region": "top",
+    "leaves": 1320,
+    "leaf_seconds_here": 247.747,
+    "leaf_seconds_at_source_rates": 223.491,
+    "ratio": 1.109
+   },
+   {
+    "receipt": "smallest-record-timing.json",
+    "process_cpu_seconds": 245.824,
+    "leaf_seconds_here": 247.747,
+    "cpu_to_leaf_seconds": 0.9922
+   },
+   {
+    "receipt": "interval-1-premises-and-kind-sample.json",
+    "interval": 1,
+    "region": "left",
+    "leaves": 175,
+    "leaf_seconds_here": 23.976,
+    "leaf_seconds_at_source_rates": 56.44,
+    "ratio": 0.425
+   },
+   {
+    "receipt": "interval-1-premises-and-kind-sample.json",
+    "interval": 1,
+    "region": "right",
+    "leaves": 206,
+    "leaf_seconds_here": 70.275,
+    "leaf_seconds_at_source_rates": 34.548,
+    "ratio": 2.034
+   },
+   {
+    "receipt": "interval-1-premises-and-kind-sample.json",
+    "interval": 1,
+    "region": "straddle",
+    "leaves": 435,
+    "leaf_seconds_here": 1277.115,
+    "leaf_seconds_at_source_rates": 223.839,
+    "ratio": 5.706
+   },
+   {
+    "receipt": "interval-1-premises-and-kind-sample.json",
+    "interval": 1,
+    "region": "top",
+    "leaves": 185,
+    "leaf_seconds_here": 110.668,
+    "leaf_seconds_at_source_rates": 79.573,
+    "ratio": 1.391
+   },
+   {
+    "receipt": "interval-1-premises-and-kind-sample.json",
+    "process_cpu_seconds": 1469.186,
+    "leaf_seconds_here": 1482.033,
+    "cpu_to_leaf_seconds": 0.9913
+   },
+   {
+    "receipt": "interval-34-premises-and-kind-sample.json",
+    "interval": 34,
+    "region": "left",
+    "leaves": 140,
+    "leaf_seconds_here": 198.076,
+    "leaf_seconds_at_source_rates": 62.456,
+    "ratio": 3.171
+   },
+   {
+    "receipt": "interval-34-premises-and-kind-sample.json",
+    "interval": 34,
+    "region": "right",
+    "leaves": 160,
+    "leaf_seconds_here": 189.493,
+    "leaf_seconds_at_source_rates": 53.104,
+    "ratio": 3.568
+   },
+   {
+    "receipt": "interval-34-premises-and-kind-sample.json",
+    "interval": 34,
+    "region": "straddle",
+    "leaves": 313,
+    "leaf_seconds_here": 398.357,
+    "leaf_seconds_at_source_rates": 331.23,
+    "ratio": 1.203
+   },
+   {
+    "receipt": "interval-34-premises-and-kind-sample.json",
+    "interval": 34,
+    "region": "top",
+    "leaves": 160,
+    "leaf_seconds_here": 167.808,
+    "leaf_seconds_at_source_rates": 58.177,
+    "ratio": 2.884
+   },
+   {
+    "receipt": "interval-34-premises-and-kind-sample.json",
+    "process_cpu_seconds": 831.423,
+    "leaf_seconds_here": 953.735,
+    "cpu_to_leaf_seconds": 0.8718
+   }
+  ],
+  "ratio_here_to_source": 2.3899,
+  "ratio_range_over_regions": [
+   0.425,
+   5.706
+  ],
+  "cpu_to_leaf_seconds": 0.9489,
+  "kinds_the_source_did_not_time": {
+   "EX:CORE": {
+    "leaves": 14,
+    "seconds_per_leaf_here": 0.00277
+   },
+   "EY:CORE": {
+    "leaves": 25,
+    "seconds_per_leaf_here": 0.0026
+   }
+  }
+ },
+ "here_cpu_hours": 654.1,
+ "here_cpu_hours_over_region_ratios": [
+  116.3,
+  1561.8
+ ],
+ "here_wall_hours_at_threads": {
+  "2": 327.1,
+  "4": 163.5
+ }
+}

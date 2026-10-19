@@ -17,8 +17,9 @@ with its rungs; and the case file’s own account.
 All {{COUNT}} are read from their records, `packing/frontier/n-NNN.md`, when the site is
 built.
 Each has an address of its own to share, such as [`cases/11.html`](cases/11.html),
-and a case in the [frontier survey](frontier.html) or the overview’s atlas grid opens
-the same record. In the index below, a solved case is set in the accent.
+and a case in the [frontier survey](atlas.html#the-frontier-survey) or the overview’s
+atlas grid opens the same record.
+In the index below, a solved case is set in the accent.
 
 {{INDEX}}
 

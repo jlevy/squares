@@ -1,0 +1,144 @@
+{
+ "format": "regularized-bounds-receipt-v1",
+ "tool": "python -m devtools.register_regularized_bounds select --batch grid-slack",
+ "policy": "docs/project/policies/regularization-policy.md",
+ "what": "Each named count's view of this project's grid-slack regularizer (devtools.regularize_grid_slack, its port of Evan Daniel's coincidence placement) decided at row 3 of the policy's table, its side below the case's verified upper bound: the view with the least exact side among the named runs, the first run named among equals, retained under views/, with every run's side at row 3 keyed by run (run_sides, runs_at_row_3, where the first batch keys its outputs), the bound the record held before, the next count's ceiling where it already implies the bound (implied_by), the witness's own side as read from it, the printed side and closed form, the drawing decision before and after registration, and the identity measured on the retained view against the witness's exact frame.",
+ "runs": [
+  {
+   "run": "deg5-1013-a",
+   "generator": [
+    "regularize_grid_slack/1"
+   ],
+   "parameters": {
+    "near_axis_degrees": 5.0,
+    "trust": 0.45,
+    "time_limit": 120.0,
+    "stage_margin": 0.0099
+   },
+   "counts": [
+    290
+   ],
+   "cost": {
+    "cpu_seconds": 19.16,
+    "note": "the seconds these counts' reports record, summed; a grid-slack run keeps no receipt of its own"
+   }
+  },
+  {
+   "run": "deg05-1013-n290",
+   "generator": [
+    "regularize_grid_slack/1"
+   ],
+   "parameters": {
+    "near_axis_degrees": 0.5,
+    "trust": 0.45,
+    "time_limit": 120.0,
+    "stage_margin": 0.0099
+   },
+   "counts": [
+    290
+   ],
+   "cost": {
+    "cpu_seconds": 20.17,
+    "note": "the seconds these counts' reports record, summed; a grid-slack run keeps no receipt of its own"
+   }
+  }
+ ],
+ "candidates": [
+  290
+ ],
+ "excluded": [],
+ "registered": [
+  290
+ ],
+ "rows": [
+  {
+   "n": 290,
+   "run": "deg5-1013-a",
+   "output": "same",
+   "runs_at_row_3": [
+    "deg5-1013-a",
+    "deg05-1013-n290"
+   ],
+   "run_sides": {
+    "deg5-1013-a": "70142135623730950488016887242097/4000000000000000000000000000000",
+    "deg05-1013-n290": "70142135623730950488016887242097/4000000000000000000000000000000"
+   },
+   "side": "70142135623730950488016887242097/4000000000000000000000000000000",
+   "side_decimal": "17.53553390593273762200422181052425",
+   "side_text": "17.53553390593273762200422181052425",
+   "value": "17.53553390593274",
+   "value_raised": false,
+   "earlier_verified": {
+    "value": "17.53553390593274",
+    "exact_form": "876776695296637/50000000000000",
+    "evidence": [
+     "E-evand-exact-ceilings-2026-10-05-exact-replay",
+     "E-evand-exact-ceilings-2026-10-05-source-replay"
+    ]
+   },
+   "below_earlier_by": 2.378e-15,
+   "implied_by": {
+    "n": 291,
+    "side": "70142135623730950488016887242097/4000000000000000000000000000000",
+    "evidence": [
+     "E-regularized-bounds-2026-10-12-exact-decision"
+    ],
+    "results": [
+     "T-155"
+    ]
+   },
+   "t101_side": "1095970869120796101386223571849/62500000000000000000000000000",
+   "below_t101_side_by": 1.7536e-19,
+   "witness_side": "70142135623730950488016887242097/4000000000000000000000000000000",
+   "witness_frame": "the 36-digit rational promotion at centre dilation 1",
+   "printed_side": "17.53553390593273",
+   "printed_exact_form": "14 + (5/2)sqrt(2)",
+   "printed_exact_form_degree": 2,
+   "above_printed_side_by": 7.622e-15,
+   "above_exact_side_by": 4.8036e-33,
+   "agrees_with_report": false,
+   "drawing": "no-change",
+   "decided": {
+    "row": 3,
+    "reason": "nothing visible changes (register first: the same side is below the verified upper bound by 2.378e-15, a register-result candidate)"
+   },
+   "after_registration": {
+    "decision": "no-change",
+    "index_record": "unchanged",
+    "reason": "nothing visible changes (every admission condition holds)"
+   },
+   "identity": {
+    "one_to_one": true,
+    "moved": 0,
+    "moved_beyond": {
+     "1e-9": 0,
+     "1e-6": 0,
+     "1e-3": 0,
+     "1e-2": 0,
+     "1e-1": 0
+    },
+    "max_move": 5.970081e-31,
+    "max_turn_deg": 8.41808e-35,
+    "turned": 0,
+    "unnamed_turns": [],
+    "symmetry": 7
+   },
+   "regularization": {
+    "of": "T-101",
+    "method": "regularize_grid_slack/1: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack",
+    "side": "same",
+    "changes": {}
+   },
+   "straightened": [],
+   "generator": {
+    "name": "regularize_grid_slack/1",
+    "settings": {
+     "near_axis_degrees": 5.0,
+     "trust": 0.45,
+     "time_limit": 120.0,
+     "stage_margin": 0.0099
+    }
+   }
+  }
+ ]
+}

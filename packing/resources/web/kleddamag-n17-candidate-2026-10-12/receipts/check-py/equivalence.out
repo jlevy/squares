@@ -1,0 +1,16 @@
+{
+  "status": "PASS_CURRENT_PUBLIC_BYTES_SCOPE_AND_READ_CLOSURE",
+  "claims": 210,
+  "literal_statements": 100,
+  "capture_statements": 98,
+  "signed_restrictions": 2,
+  "data_projections": 11,
+  "fresh_checks": 31,
+  "proof_label_rows": 278,
+  "distinct_proof_labels": 95,
+  "public_inputs": 6748,
+  "reading_copy_tables": 2,
+  "reading_copy_entries": 49,
+  "auxiliary_current_pins": 7582,
+  "scope": "Byte, explicit data-projection, statement and observed-read closure. English reasoning and actual-execution authenticity are separate premises."
+}

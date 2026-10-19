@@ -11,8 +11,10 @@
     ),
   ].map((svg) => /** @type {SVGSVGElement} */ (svg));
   function sizeDiagramLabels() {
+    const sizes = [];
     for (const svg of diagrams) {
-      if (!svg.getBoundingClientRect().width) {
+      const width = svg.getBoundingClientRect().width;
+      if (!width) {
         continue;
       }
       const matrix = svg.getScreenCTM();
@@ -23,13 +25,18 @@
       const fitFrom = parseFloat(
         getComputedStyle(svg).getPropertyValue("--paper-diagram-fit-from"),
       );
-      const width = svg.getBoundingClientRect().width;
       const shrink = fitFrom > width ? width / fitFrom : 1;
       const size = (parseFloat(getComputedStyle(svg.parentElement).fontSize) * shrink) / scale;
-      svg.style.setProperty("--paper-diagram-font-size", `${size}px`);
       const caption = svg.closest("figure")?.querySelector("figcaption");
-      if (caption) {
-        const noteSize = (parseFloat(getComputedStyle(caption).fontSize) * shrink) / scale;
+      const noteSize = caption
+        ? (parseFloat(getComputedStyle(caption).fontSize) * shrink) / scale
+        : null;
+      sizes.push({ svg, size, noteSize });
+    }
+    // Reading the next diagram after a label mutation would force style/layout again.
+    for (const { svg, size, noteSize } of sizes) {
+      svg.style.setProperty("--paper-diagram-font-size", `${size}px`);
+      if (noteSize !== null) {
         svg.style.setProperty("--paper-diagram-note-size", `${noteSize}px`);
       }
     }

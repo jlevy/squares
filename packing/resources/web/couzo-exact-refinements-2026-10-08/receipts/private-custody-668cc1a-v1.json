@@ -1,0 +1,73 @@
+{
+  "format": "CouzoPrivateCustody/v1",
+  "source_revision": "ffd900dfff6d2674ad995359208c2f0714915c82",
+  "outcome": "PASS",
+  "test": "tests/test_negative_controls.py::test_couzo_complete_sources_survive_native_worker_boundaries",
+  "command": [
+    "python",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "tests/test_negative_controls.py::test_couzo_complete_sources_survive_native_worker_boundaries",
+    "--basetemp=/Volumes/spud-ext1/agent-scratch/import-resume-gupta-438/tmp/issue451-actual-worker-v1",
+    "--junitxml=/Volumes/spud-ext1/source-worktrees/squares-import-resume/review-notes/issue451-actual-worker-v1.xml",
+    "--durations=10"
+  ],
+  "runtime": "project CPython 3.14.7",
+  "host": "spud10.local",
+  "wall_seconds": 38.36,
+  "call_seconds": 8.91,
+  "setup_seconds": 26.72,
+  "wrapper_wall_seconds": 39.19,
+  "wrapper_user_seconds": 10.54,
+  "wrapper_system_seconds": 10.57,
+  "child_timeout_seconds": 45,
+  "fast_call_ceiling_seconds": 12,
+  "snapshot_cap_bytes": 201326592,
+  "complete_certificates": 8,
+  "source_poses": 1340,
+  "stored_native_jobs": 24,
+  "fresh_geometric_deciders": false,
+  "inputs": [
+    {
+      "path": "acquisition/case-inputs.json",
+      "bytes": 7619,
+      "sha256": "67495e4cb9400d9db6c86aa6ac4e3ec578b515de063cc927b2ecd334369e624e"
+    },
+    {
+      "path": "facts/complete-certificates-and-decimal-poses.json.xz",
+      "bytes": 47416,
+      "sha256": "48c85094c124164173732a034d25908bffbabedf4ad51e9e487fdf81b8c3900e"
+    },
+    {
+      "path": "receipts/exact-certification.json.xz",
+      "bytes": 26808,
+      "sha256": "469435b6ad4cd224eecbb225c0da36caed33665ae30c69e4061bd7de52ff69cd"
+    }
+  ],
+  "mutations_refused_and_restored": [
+    "late native outside-control verdict",
+    "late independent-route limitations",
+    "late complete checker-input position",
+    "late original certificate bytes",
+    "late complete decimal-context bytes",
+    "late independently pinned source map"
+  ],
+  "producer_escape_controls": [
+    "fact output symlink refused before source reads",
+    "receipt output symlink refused before source reads or child work"
+  ],
+  "original_inputs_byte_equal": true,
+  "restored_worker_inputs_byte_equal": true,
+  "log": {
+    "sha256": "990ea1090276240d49574faed27bb3a44f35b16e38401c39b40f46390a83669a",
+    "text": ".                                                                        [100%]\n============================= slowest 10 durations =============================\n26.72s setup    tests/test_negative_controls.py::test_couzo_complete_sources_survive_native_worker_boundaries\n8.91s call     tests/test_negative_controls.py::test_couzo_complete_sources_survive_native_worker_boundaries\n\n(1 durations < 0.005s hidden.  Use -vv to show these durations.)\n1 passed in 38.36s\nreal 39.19\nuser 10.54\nsys 10.57\n"
+  },
+  "junit": {
+    "sha256": "a4543b530eb58124faf27c9d6057bc62af6b0a65143ff6b6755c3975d402283d",
+    "text": "<?xml version=\"1.0\" encoding=\"utf-8\"?><testsuites name=\"pytest tests\"><testsuite name=\"pytest\" errors=\"0\" failures=\"0\" skipped=\"0\" tests=\"1\" time=\"38.356\" timestamp=\"2026-10-08T11:05:16.379298-07:00\" hostname=\"spud10.local\"><testcase classname=\"tests.test_negative_controls\" name=\"test_couzo_complete_sources_survive_native_worker_boundaries\" time=\"35.636\" /></testsuite></testsuites>"
+  },
+  "scope": "Production custody of retained complete inputs/results; no new geometry, house adoption, assurance promotion, optimality or human oversight."
+}

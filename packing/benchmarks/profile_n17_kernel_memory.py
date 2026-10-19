@@ -12,10 +12,12 @@ Runs one of them in this process and records its resident set:
 Each step is marked: a produced one through the producer's progress callback, a checked
 one through the function both checkers call once per step before its rows
 (`sequential.admit_partner_covers`, `verify_n17_kernel_certificate.check_partners`), and
-`produce` also marks the end of the production and of the save. A mark reads `VmRSS`
-from `/proc/self/status`. The peaks are the kernel's own high-water mark, `VmHWM`, read
+`produce` also marks the end of the production and of the save. Marks use native current
+RSS on Linux, macOS and Windows. On Linux the peaks are `VmHWM`, read
 at the first checked step and reset there through `/proc/self/clear_refs`, so the report
-gives the peak before the check and the peak in it exactly, with no sampling. A sampling
+gives the peak before the check and the peak in it exactly, with no sampling. Other
+hosts report lifetime peak RSS and sampled check marks; the isolated check peak remains
+unavailable when the kernel does not support resetting it. A sampling
 thread was tried first and dropped: on a loaded machine its contention for the GIL cost
 the measured process most of its share of a CPU.
 
@@ -48,11 +50,17 @@ from collections.abc import Callable
 from pathlib import Path
 from typing import Any
 
+from devtools.process_memory import current_memory_bytes, peak_memory_bytes
+
 CEILING_SECONDS = 1.0
 
 
 def status_mb(field: str) -> int:
-    """A `/proc/self/status` field in MiB, or -1 where there is none."""
+    """Current RSS or lifetime peak in MiB; retain Linux's resettable VmHWM."""
+    if field == "VmRSS":
+        return current_memory_bytes() // (1024 * 1024)
+    if field == "VmHWM" and not sys.platform.startswith("linux"):
+        return peak_memory_bytes() // (1024 * 1024)
     try:
         lines = Path("/proc/self/status").read_text(encoding="ascii").splitlines()
     except OSError:

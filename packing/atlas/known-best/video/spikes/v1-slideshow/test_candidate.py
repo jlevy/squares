@@ -105,8 +105,14 @@ def _expected_badges(entry: dict) -> list[tuple[str, str]]:
     if entry["lower"]["first_proved_here"]:
         rows.append((build_candidate.STAR_ID, build_candidate.STAR_LABEL))
     for badge in entry["badges"]:
-        key = (badge["glyph"], badge["style"])
-        rows.append((build_candidate.BADGE_IDS[key], build_candidate.BADGE_LABELS[key]))
+        if badge["glyph"] != "R":
+            key = (badge["glyph"], badge["style"])
+            rows.append((build_candidate.BADGE_IDS[key], build_candidate.BADGE_LABELS[key]))
+    known_rigid = entry["rigidity"].get(
+        "known_rigid", any(badge["glyph"] == "R" for badge in entry["badges"])
+    )
+    if known_rigid:
+        rows.append((build_candidate.BADGE_IDS[("R", "solid")], "rigid"))
     return rows
 
 
@@ -116,8 +122,6 @@ def _expected_open(entry: dict) -> list[str]:
         items.append(build_candidate.OPEN_LABELS[0])
     if entry["exactness"]["state"] not in ("closed-form", "minimal-polynomial"):
         items.append(build_candidate.OPEN_LABELS[1])
-    if entry["rigidity"]["state"] == "not-established":
-        items.append(build_candidate.OPEN_LABELS[2])
     return items
 
 
@@ -437,3 +441,43 @@ def test_candidate() -> None:
 
 if __name__ == "__main__":
     test_candidate()
+
+
+def test_legacy_rigidity_symbol_has_the_same_dark_fill_as_canonical_r() -> None:
+    from decimal import Decimal  # noqa: PLC0415
+
+    outlines = {
+        glyph: ("M0 0L1 1", Decimal(1), Decimal(0), Decimal(1))
+        for glyph in ("O", "=", "\u2248", "R", "?")
+    }
+    outlines["cap"] = ("", Decimal(1), Decimal(0), Decimal(0))
+    symbols = build_candidate.badge_symbols(outlines)
+    canonical = require_match(
+        re.search(r'<symbol id="badge-r">(.*?)</symbol>', symbols), "canonical R symbol"
+    ).group(1)
+    legacy = require_match(
+        re.search(r'<symbol id="badge-r-muted">(.*?)</symbol>', symbols), "legacy R symbol"
+    ).group(1)
+    assert legacy == canonical
+    assert f'fill="{build_candidate.BADGE_MUTED}" stroke="none"' in canonical
+
+
+def test_selected_geometry_assessment_controls_the_single_r_badge() -> None:
+    repo = HERE.parents[5]
+    entry = build_candidate.read_composite(repo)[1]
+    manifest = build_candidate.read_manifest(repo)[1]
+    frontier = build_candidate.read_frontier(repo, 1)
+    entry["badges"] = [badge for badge in entry["badges"] if badge["glyph"] != "R"]
+    entry["badges"].append(
+        {"glyph": "R", "style": "muted", "meaning": "legacy catalogue annotation"}
+    )
+    entry["rigidity"]["state"] = "not-established"
+    for known in (True, False):
+        entry["rigidity"]["known_rigid"] = known
+        assessment = dict(entry["rigidity"])
+        template, spoken, _ = build_candidate.build_facts(1, entry, manifest, frontier, "")
+        assert (template.count('href="#badge-r"') == 1) == known
+        assert 'href="#badge-r-muted"' not in template
+        assert ("known rigid" in spoken.lower()) == known
+        assert ">rigidity</li>" not in template
+        assert entry["rigidity"] == assessment

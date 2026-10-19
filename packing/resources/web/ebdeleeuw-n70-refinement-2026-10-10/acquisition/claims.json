@@ -1,0 +1,12 @@
+{
+  "format": "upper-bound-report-claims-v1",
+  "issue": "https://github.com/jlevy/squares/issues/483",
+  "source": "https://github.com/ebdeleeuw/square-packing-n70",
+  "revision": "24221d5e51244ca5290d5b1c43f1fbe36f9749e0",
+  "read_on": "2026-10-10",
+  "read_at_main": "657cc486130e9020608ff244d8a86d1d04153634",
+  "horizon": 324,
+  "results": [
+    {"n": 70, "certificate": "certificate.json", "format": "centred-json", "requested": true, "replayed": true, "offered_side": "8.88096037156625096037155737", "printed_in": "https://github.com/jlevy/squares/issues/483", "exact_side": "888096037156625096037155737/100000000000000000000000000", "ceiling": "8.8809603715662510", "first_committed": "2026-10-10T02:04:48Z", "grid_side": "9", "case": {"source_key": "[ry-xu square packing 2026]", "holders": "ry-xu", "result": "T-125", "reported_value": "8.8809603717088810", "verified_value": "8.8809603717088810", "evidence": ["E-ryxu-432-rational-feasibility"], "exact_side": "88809603717088809603717/10000000000000000000000", "relation": "below", "difference": "14263000000014263/100000000000000000000000000"}, "pending": [], "smallest": "this certificate"}
+  ]
+}

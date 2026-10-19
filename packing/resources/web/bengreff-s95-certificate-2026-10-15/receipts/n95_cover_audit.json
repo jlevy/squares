@@ -1,0 +1,54 @@
+{
+ "cover": "s95_cover_v2.txt",
+ "sha256": "8b2d2152867585c82920bc90c6c3ec2a2458ef2ba57311ccd7dd436d1344cb7c",
+ "side": "10",
+ "coordinate_denominator": 8000,
+ "mass_denominator": 400000000,
+ "points": 48352,
+ "segments": 11438,
+ "polygons": 0,
+ "lines_carrying_segments": {
+  "x": [
+   "0",
+   "1",
+   "10",
+   "2",
+   "3",
+   "4",
+   "5",
+   "6",
+   "7",
+   "8",
+   "9"
+  ],
+  "y": [
+   "0",
+   "1",
+   "10",
+   "2",
+   "3",
+   "4",
+   "5",
+   "6",
+   "7",
+   "8",
+   "9"
+  ]
+ },
+ "segment_lengths": {
+  "1/500": 3222,
+  "1/50": 5976,
+  "1/16": 2240
+ },
+ "point_mass": "1779367899/50000000",
+ "segment_mass": "11841295639/200000000",
+ "total": "3791753447/40000000",
+ "total_decimal": "94.793836175",
+ "total_equals_stated": true,
+ "total_below_n": true,
+ "counts_as_stated": true,
+ "d4_invariant_entry_by_entry": true,
+ "d4_invariant_as_measure": true,
+ "points_on_segment_lines": 0,
+ "problems": []
+}

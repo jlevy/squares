@@ -1,0 +1,6 @@
+# sqpk v1
+# test: two axis-aligned squares 0.9 apart (overlap 0.1)
+n 2
+s 3
+0.5 0.5 0
+1.4 0.5 0

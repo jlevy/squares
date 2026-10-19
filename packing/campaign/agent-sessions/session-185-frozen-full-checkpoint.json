@@ -1,0 +1,128 @@
+{
+  "behavioral": {
+    "A": {
+      "failed": 18,
+      "passed": 2829,
+      "pytest_wall_seconds": 327.05,
+      "skipped": 22,
+      "xfailed": 1
+    },
+    "B": {
+      "failed": 4,
+      "passed": 3342,
+      "pytest_wall_seconds": 384.84,
+      "skipped": 9
+    },
+    "C": {
+      "failed": 0,
+      "passed": 3366,
+      "pytest_wall_seconds": 288.58,
+      "skipped": 3
+    },
+    "D": {
+      "failed": 2,
+      "passed": 4061,
+      "pytest_wall_seconds": 218.2
+    },
+    "exhaustive_exact": {
+      "deselected": 13986,
+      "passed": 61,
+      "pytest_wall_seconds": 3294.31
+    },
+    "slow": {
+      "passed": 175,
+      "pytest_wall_seconds": 816.24
+    }
+  },
+  "cleanup_scope": "root reported normal completion before scheduled INT; no independent whole-group cleanup receipt in this audit",
+  "count_evidence": "104 rendered headings less setup build and two report headings; five failed step names and one explicit SKIP in retained log",
+  "diagnostics": [
+    "19 page/workbench tests compare imported primary-checkout paths against the managed-worktree REPO; shared editable environment is a concrete setup/scope mismatch",
+    "guard CLI partial-context control sees refused instead of incomplete under parent module contamination; later clean-process fixture repair already independently tested",
+    "campaign record literal packing-ledger check. is non-runnable; later root record repair already committed",
+    "two Taylor three-owner controls fail historical literal byte pins; own-candidate exact verification previously passed; pins intentionally unchanged and cause unproved",
+    "partial-line Rust fake server times out before recording an angle; report remains INCONCLUSIVE, not a false acceptance",
+    "two-worker progress toy reaches four dots/100 percent but subprocess exceeds its unchanged 30-second ceiling",
+    "contact-shade Mac census differences are numerical floating clearances/bin counts; no geometry or census regeneration performed"
+  ],
+  "failed_steps": [
+    "known-best family and contact-shade censuses",
+    "fast behavioral tests, shard A",
+    "fast behavioral tests, shard B",
+    "fast behavioral tests, shard D",
+    "campaign record"
+  ],
+  "failed_test_lines": [
+    "tests/test_n11_lower_bounds_explainer.py::test_the_pages_filter_covers_every_workbench_input",
+    "tests/test_n11_lower_bounds_explainer.py::test_the_workbench_input_guard_detects_an_omitted_input_class",
+    "tests/test_n11_lower_bounds_explainer.py::test_generated_workbench_palette_declares_its_renderer_source",
+    "tests/test_check_n17_guard_conditioned_ownership.py::test_cli_second_context_stop_retains_candidate_without_primary_claim",
+    "tests/test_pages_scope.py::test_every_builder_input_puts_its_page_in_scope[n11_lower_bounds_explainer-<lambda>]",
+    "tests/test_pages_scope.py::test_every_builder_input_puts_its_page_in_scope[workbench-<lambda>]",
+    "tests/test_pages_scope.py::test_every_builder_input_puts_its_page_in_scope[overview-<lambda>0]",
+    "tests/test_pages_scope.py::test_every_builder_input_puts_its_page_in_scope[overview-<lambda>1]",
+    "tests/test_pages_scope.py::test_every_builder_input_puts_its_page_in_scope[n11_optimality_review-<lambda>]",
+    "tests/test_pages_scope.py::test_every_builder_input_puts_its_page_in_scope[n11_threshold_bound_review-<lambda>]",
+    "tests/test_pages_scope.py::test_the_scope_reads_each_builder_declaration_live",
+    "tests/test_pages_scope.py::test_every_tool_a_pull_request_runs_for_a_page_is_that_pages_input",
+    "tests/test_pages_scope.py::test_every_pdf_browser_control_probe_selects_the_explainer",
+    "tests/test_pages_scope.py::test_pull_request_178_would_have_run_no_browser_work",
+    "tests/test_pages_scope.py::test_a_change_to_the_record_or_the_reader_documents_builds_only_the_overview",
+    "tests/test_pages_scope.py::test_t037_article_selects_only_its_page - V...",
+    "tests/test_pages_scope.py::test_t060_article_selects_only_its_page - V...",
+    "tests/test_pages_scope.py::test_every_page_says_why_it_was_skipped - V...",
+    "tests/test_pages_workflow.py::test_pages_filters_cover_the_probes_its_tools_and_controls_load",
+    "tests/test_pages_workflow.py::test_pages_filter_contract_rejects_each_omitted_declared_probe_input",
+    "tests/test_rust_rectangle_geometry.py::test_partial_line_timeout_retains_unresolved_event_census",
+    "tests/test_reachable_progress.py::test_two_workers_write_separate_complete_progress_and_junit",
+    "tests/test_pilot_n17_subpattern_bb.py::test_interval_certificates_are_unchanged_by_the_taylor_option[2.80-3]",
+    "tests/test_pilot_n17_subpattern_bb.py::test_interval_certificates_are_unchanged_by_the_taylor_option[2.94-3]"
+  ],
+  "new_source_ci_assessment": "Frozen0adfe full checkpoint remains95PASS/5FAIL/1SKIP. Later65dbccbcaf07b8913ca49f9e2a899bbf5a9ebf54 required hosted checks all passed by21:46:27Z. This does not establish full current-source certification. Terminal local push-tier hit240s ceiling without a verdict; latest pushed-head CI is tracked separately.",
+  "passed_steps": 95,
+  "root_reported_completed_at": "2026-10-07T21:38:59Z",
+  "root_reported_exit_code": 1,
+  "root_session": "80791",
+  "scheduled_outer_INT": "2026-10-07T21:39:32Z",
+  "scheduled_outer_KILL": "2026-10-07T21:39:42Z",
+  "scope": "retained completed frozen-checkpoint log audit only; no rerun; not certification of current merged source",
+  "selected_steps": 101,
+  "skip_detail": "sqsearch built in external CARGO_TARGET_DIR, but the soundness perimeter did not find its expected engine path and skipped engine cells",
+  "skipped_steps": [
+    "soundness perimeter"
+  ],
+  "source": "0adfe2c5ee5ac349408dcebed411b91c6d62d068",
+  "validator_wall_seconds": 3402.14,
+  "wall_ceiling_seconds": 3600,
+  "schema": "session-185-frozen-full-checkpoint/v1",
+  "session": "session-185",
+  "branch": "codex/n17-state-review",
+  "full_current_source_pass": false,
+  "certification_owner": "think-7hy3",
+  "argv": [
+    "gtimeout",
+    "--signal=INT",
+    "--kill-after=10s",
+    "3600s",
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-m",
+    "sqpack.cli.validate",
+    "--jobs",
+    "3",
+    "--inner-jobs",
+    "2"
+  ],
+  "runtime": {
+    "reported_cpus": 4,
+    "jobs": 3,
+    "inner_jobs": 2,
+    "PYTHON_CPU_COUNT_is_scheduling_only": true,
+    "scratch_volume": "spud-ext1",
+    "standalone_step_artifact_directory_set": false,
+    "run_id": null,
+    "run_id_reason": "No per-step artifact directory was set; raw transcript is the retained checkpoint evidence."
+  },
+  "started_at": "2026-10-07T20:39:32Z",
+  "raw_log_retained": "attic/n17-four-hour-engineering/full-checkpoint-0adfe-audit/validate.log",
+  "raw_log_is_ignored_local_evidence": true
+}

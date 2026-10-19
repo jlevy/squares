@@ -89,7 +89,7 @@ session:
     outcome: D1 published as f0b94b047; same-model FC/MRV D2 selected and preregistered. Sole
       Sol executor now also owns integration; root retains independent review and fresh replay.
     evidence:
-    - packing/campaign/explorations/X048-session-171-raw-row-support/D1_REPORT.md
+    - packing/campaign/explorations/X048-session-171-raw-row-support/d1-report.md
     stop_reason: D1 checkpoint retained and D2 contract frozen.
     next_action: Implement and control the separately frozen forward-checking/MRV strategy.
   - workflow: pipeline-improvement
@@ -163,7 +163,7 @@ session:
       required checks SUCCESS. One native usage interval retained at actual cutoff; early administrative
       closeout preserves planned reserve.
     evidence:
-    - packing/campaign/explorations/X048-session-171-raw-row-support/D2_REPORT.md
+    - packing/campaign/explorations/X048-session-171-raw-row-support/d2-report.md
     - packing/campaign/resource-usage/codex-session-171.yaml
     stop_reason: Scoped publication checkpoint complete; terminal administrative closeout without
       further target.
@@ -195,7 +195,7 @@ session:
     recording: contemporaneous
     outcome: D1 code/control gate passed; endpoint and freshly replayed B evidence delivered.
     evidence:
-    - packing/campaign/explorations/X048-session-171-raw-row-support/D1_REPORT.md
+    - packing/campaign/explorations/X048-session-171-raw-row-support/d1-report.md
     files:
     - packing/devtools/probe_n17_raw_row_support.py
     - packing/tests/test_n17_raw_row_support.py
@@ -223,7 +223,7 @@ session:
   - packing/campaign/explorations/X048-session-171-raw-row-support/README.md
   - packing/devtools/probe_n17_raw_row_support.py
   - packing/tests/test_n17_raw_row_support.py
-  - packing/campaign/explorations/X048-session-171-raw-row-support/D2_REPORT.md
+  - packing/campaign/explorations/X048-session-171-raw-row-support/d2-report.md
   checks:
   - Original gate declarations below are historical branch evidence. The rewritten
     review layer remains uncertified; no source target or mathematical replay was rerun.

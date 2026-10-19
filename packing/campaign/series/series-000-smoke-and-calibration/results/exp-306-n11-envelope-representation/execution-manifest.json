@@ -1,0 +1,85 @@
+{
+  "schema": "registered-phase-command-plan/v1",
+  "target_unrun": true,
+  "registration_state": "registered_before_target",
+  "working_directory": "packing",
+  "phases": [
+    {
+      "name": "construction",
+      "argv": [
+        "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+        "-m",
+        "devtools.check_n17_n11_envelope_representation",
+        "--descriptor",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-306-n11-envelope-representation/descriptor.json",
+        "--max-seconds",
+        "60",
+        "--output",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-306-n11-envelope-representation/certificate.json"
+      ]
+    },
+    {
+      "name": "fresh_verification",
+      "argv": [
+        "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+        "-m",
+        "devtools.check_n17_n11_envelope_representation",
+        "--descriptor",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-306-n11-envelope-representation/descriptor.json",
+        "--max-seconds",
+        "60",
+        "--certificate",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-306-n11-envelope-representation/certificate.json",
+        "--output",
+        "campaign/series/series-000-smoke-and-calibration/results/exp-306-n11-envelope-representation/replay.json"
+      ]
+    }
+  ],
+  "runner_argv": [
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-m",
+    "devtools.run_registered_phases",
+    "--manifest",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-306-n11-envelope-representation/execution-manifest.json",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-306-n11-envelope-representation/phase-execution.json"
+  ],
+  "supervisor_argv": [
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-m",
+    "devtools.supervise_posix",
+    "--max-seconds",
+    "120",
+    "--max-memory-mib",
+    "4096",
+    "--sample-seconds",
+    "0.25",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-306-n11-envelope-representation/supervision.json",
+    "--stdout",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-306-n11-envelope-representation/stdout.log",
+    "--stderr",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-306-n11-envelope-representation/stderr.log",
+    "--",
+    "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+    "-m",
+    "devtools.run_registered_phases",
+    "--manifest",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-306-n11-envelope-representation/execution-manifest.json",
+    "--output",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-306-n11-envelope-representation/phase-execution.json"
+  ],
+  "resources": {
+    "construction_seconds": 60,
+    "fresh_seconds": 60,
+    "combined_term_seconds": 120,
+    "combined_kill_seconds": 130,
+    "sampled_memory_mib_per_live_process": 4096,
+    "memory_scope": "per_live_process_in_owned_group",
+    "workers": 1,
+    "output_bytes": 67108864
+  },
+  "criterion": "All95 states have complete576 upper and576 optimistic lower window counts (109440 total) with sandwich/monotonic checks; endpointupper576 calibration muststay<=10. Primary either checked11-square UPPER window obstruction or COMPLETE all95 optimisticLOWER no11 architecturekill: no independent whole-cell axis-aligned envelope enclosing every cell/wall-compatible square can succeed atH31/8. Lower positives only show potential and NEVERexclude an assignment. Fresh reconstruction compares fullpayload. Existing304negativecounts inherited andchecked; no ordinarycensus admission/globalbound claim. Partial/resource/refusal unresolved. AftercompletearchitecturekillSTOPindependentenvelopes.",
+  "registered_at": "2026-10-08T02:57:27.142564+00:00",
+  "source_freeze": "reviewedsourcecommit/bytesresolvedatlaunch"
+}

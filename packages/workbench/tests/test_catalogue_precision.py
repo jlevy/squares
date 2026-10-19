@@ -86,5 +86,8 @@ def test_every_stored_frame_passes_at_catalogue_precision_and_some_need_it() -> 
     assert worst_wall <= wall_bound, worst_wall
     # Without frames that fail 1e-9 the exception would be unjustified; the count is recorded
     # in `CATALOGUE_PRECISION`'s comment. 148 since the #227 intake: de Winter's tilted
-    # n = 211 replaced the exact 15 x 15 grid, and its rounded frame is the one added.
-    assert len(needing_precision) == 148, (len(needing_precision), worst_pair, worst_wall)
+    # n = 211 replaced the exact 15 x 15 grid, and its rounded frame is the one added. 149
+    # since the house adoption of 11 October 2026 (think-fvz4): T-141's tilted n = 308
+    # replaced the grid, and its rounded frame is the one added; the other 41 adopted
+    # houses replaced tilted frames that already needed it.
+    assert len(needing_precision) == 149, (len(needing_precision), worst_pair, worst_wall)

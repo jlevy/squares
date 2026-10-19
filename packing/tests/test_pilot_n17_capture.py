@@ -2,23 +2,342 @@
 
 from __future__ import annotations
 
+import gzip
 import json
 import math
+import subprocess
+import sys
 import time
+from fractions import Fraction
 from pathlib import Path
-from typing import Any
+from types import SimpleNamespace
+from typing import Any, cast
 
 import pytest
 
 from devtools import pilot_n17_capture as pilot
 from devtools.provenance import git_blob
 from sqpack.hull_kernel import Budget, RefusalError, node, sequential
-from sqpack.hull_kernel.frame import Frame
+from sqpack.hull_kernel.frame import Frame, SymmetryAction
 from sqpack.hull_kernel.geometry import area2, trig
 from sqpack.hull_kernel.induction import strict_core
 from sqpack.hull_kernel.rational import Q
 
 EXCLUSION_CAP = Q(1169, 250)
+
+
+def synthetic_seventeen_owner_endpoint() -> tuple[Frame, pilot.Endpoint]:
+    """A rational replay fixture; no accepted-root or campaign input is loaded."""
+    centres = tuple((Q(2 + 2 * (i % 5)), Q(2 + 2 * (i // 5))) for i in range(17))
+    cells = tuple(
+        tuple(
+            (x + dx, y + dy)
+            for dx, dy in (
+                (Q(-1, 10), Q(-1, 10)),
+                (Q(1, 10), Q(-1, 10)),
+                (Q(1, 10), Q(1, 10)),
+                (Q(-1, 10), Q(1, 10)),
+            )
+        )
+        for x, y in centres
+    )
+    names = tuple(f"synthetic-{i + 1}" for i in range(17))
+    frame = Frame(
+        "synthetic-n17-resume",
+        Q(12),
+        Q(12),
+        cells,
+        names,
+        17,
+        (SymmetryAction("r0", (1, 0, 0, 1), tuple(range(17))),),
+    )
+    targets = tuple(
+        pilot.Target(
+            i + 1,
+            i,
+            names[i],
+            (pilot.Box.point(Fraction(str(x))), pilot.Box.point(Fraction(str(y)))),
+            ((Q(0), Q(0)),),
+            0.0,
+        )
+        for i, (x, y) in enumerate(centres)
+    )
+    return frame, pilot.Endpoint(
+        targets,
+        pilot.Box.point(12),
+        Q(12),
+        (1.0, 0.0),
+        (0.0, 1.0),
+        {"fixture": "synthetic-seventeen-owner"},
+        slides={},
+        coarse=6,
+    )
+
+
+def test_synthetic_n17_sixteen_step_fresh_cli_resume(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    frame, endpoint = synthetic_seventeen_owner_endpoint()
+    checked_labels: list[int] = []
+    original_holds = pilot.endpoint_holds
+
+    def track_holds(target: pilot.Target, rows: Any) -> Any:
+        checked_labels.append(target.label)
+        return original_holds(target, rows)
+
+    monkeypatch.setattr(pilot, "endpoint_holds", track_holds)
+    first = pilot.run_pilot(
+        frame,
+        endpoint,
+        bins=1,
+        max_rounds=1,
+        max_live=1,
+        min_width=Q(1, 2),
+        hull_limit=16,
+        max_seconds=30,
+        progress=False,
+        checkpoints=tmp_path,
+        node_id="n17-capture-pilot",
+    )
+    checkpoint = tmp_path / "checkpoint-round-001.json.gz"
+    assert checkpoint.exists()
+    assert first.endpoint_lost is None
+    assert first.closure is None
+    assert first.rounds[-1]["complete"] is True
+    assert len(first.updates) == len(first.node["steps"]) == 16
+    assert {update["label"] for update in first.updates} == set(range(1, 18)) - {6}
+    assert checked_labels == list(range(1, 18)) * 17
+    assert len(first.seed["cells"]) == len(first.seed["groups"]) == 17
+
+    output, observations = tmp_path / "fresh.json", tmp_path / "observations.json"
+    script = """
+import json, runpy, sys
+from pathlib import Path
+from devtools import pilot_n17_capture as pilot
+namespace = runpy.run_path(sys.argv[1])
+frame, endpoint = namespace['synthetic_seventeen_owner_endpoint']()
+pilot.capture_frame = lambda cap: frame
+pilot.load_endpoint = lambda frame: endpoint
+def forbidden(*args, **kwargs):
+    raise AssertionError('fresh resume attempted production or new seed')
+pilot.produce_step = forbidden
+pilot.build_seed = forbidden
+admitted, checked = [], []
+original_admit, original_holds = pilot.node.admit_seed, pilot.endpoint_holds
+def admit(*args, **kwargs):
+    admitted.append(pilot.producer.content_sha256(args[1]))
+    return original_admit(*args, **kwargs)
+def holds(target, rows):
+    checked.append(target.label)
+    return original_holds(target, rows)
+pilot.node.admit_seed, pilot.endpoint_holds = admit, holds
+status = pilot.main(sys.argv[3:])
+Path(sys.argv[2]).write_text(json.dumps({'admitted': admitted, 'checked': checked}))
+raise SystemExit(status)
+"""
+    argv = [
+        sys.executable,
+        "-c",
+        script,
+        str(Path(__file__).resolve()),
+        str(observations),
+        "--system",
+        "n17",
+        "--cap",
+        "capture",
+        "--max-rounds",
+        "1",
+        "--resume",
+        str(checkpoint),
+        "--bins",
+        "1",
+        "--max-live",
+        "1",
+        "--min-width-log2",
+        "1",
+        "--hull-limit",
+        "16",
+        "--max-seconds",
+        "30",
+        "--replay-share",
+        "0.5",
+        "--output",
+        str(output),
+    ]
+    fresh = subprocess.run(argv, capture_output=True, text=True, timeout=40, check=False)
+    assert fresh.returncode == 0, fresh.stderr
+    result, observed = json.loads(output.read_text()), json.loads(observations.read_text())
+    seed_id, node_id = map(pilot.producer.content_sha256, (first.seed, first.node))
+    assert observed["admitted"] == [seed_id]
+    assert observed["checked"] == list(range(1, 18))
+    assert result["system"] == "n17"
+    assert result["settings"]["box"] is None
+    assert [owner["label"] for owner in result["owners"] if owner["coarse"]] == [6]
+    assert result["updates"] == first.updates
+    assert result["rounds"] == first.rounds
+    assert result["seed_sha256"] == seed_id
+    assert result["node_sha256"] == node_id
+    assert result["resumed"]["round"] == 1
+    assert result["resumed"]["changed_since"] == []
+    assert result["endpoint_control"]["held"] is True
+    assert result["replay"]["status"] == "PASS_REPLAYED"
+    assert result["replay"]["steps"] == 16
+    assert result["replay"]["final_state_agrees"] is True
+
+
+def test_endpoint_cap_upper_excess_uses_side_lower_bound(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    t, beta = pilot.Box.point(Fraction(2, 5)), pilot.Box.point(Fraction(1, 4))
+    exact_side = Fraction(190, 41)
+    side = pilot.Box(exact_side - Fraction(2, 10**12), exact_side)
+    point = SimpleNamespace(shift=(pilot.Box.point(pilot.cover.U) - side) * Fraction(1, 2))
+    monkeypatch.setattr(
+        pilot.cover,
+        "load_root_box",
+        lambda _path: (t, beta, {"criterion_passed": True}),
+    )
+    monkeypatch.setattr(pilot.cover, "endpoint", lambda *_args: point)
+    candidate = Fraction(math.ceil(exact_side * pilot.CAP_GRID), pilot.CAP_GRID)
+    assert 0 < candidate - side.hi <= Fraction(1, pilot.CAP_GRID)
+    assert candidate - side.lo > Fraction(1, pilot.CAP_GRID)
+    with pytest.raises(RefusalError, match="within 10"):
+        # The guard must fail before any frame/owner or actual root data is used.
+        pilot.load_endpoint(cast(Frame, None))
+
+
+def test_memory_guard_uses_current_bytes_and_reports_peak_separately(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    samples = iter((1024, 2049))
+    monkeypatch.setattr(pilot, "current_memory_bytes", lambda: next(samples))
+    monkeypatch.setattr(pilot, "peak_memory_bytes", lambda: 10**9)
+    guard = pilot.MemoryGuard(2048)
+    assert guard.check("safe")
+    assert not guard.check("over")
+    assert guard.stop is not None
+    assert guard.stop["outcome"] == "memory_cap"
+    assert guard.stop["current_rss_bytes"] == 2049
+    assert guard.stop["lifetime_peak_rss_bytes"] == 10**9
+
+
+def test_missing_current_memory_stops_without_peak_fallback(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    def unavailable() -> int:
+        raise OSError("sampler unavailable")
+
+    monkeypatch.setattr(pilot, "current_memory_bytes", unavailable)
+    monkeypatch.setattr(pilot, "peak_memory_bytes", lambda: 1)
+    guard = pilot.MemoryGuard(2048)
+    assert not guard.check("native_failure")
+    assert guard.stop is not None
+    assert guard.stop["outcome"] == "memory_unavailable"
+    assert guard.stop["current_rss_bytes"] is None
+
+
+def test_early_memory_stop_retains_incomplete_receipt_and_checks_no_sources(
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+) -> None:
+    monkeypatch.setattr(pilot, "current_memory_bytes", lambda: 2 * 1024**2)
+    monkeypatch.setattr(pilot, "peak_memory_bytes", lambda: 3 * 1024**2)
+
+    def forbidden(*_args: Any, **_kwargs: Any) -> Frame:
+        raise AssertionError("guard must stop before loading sources")
+
+    monkeypatch.setattr(pilot, "n11_frame", forbidden)
+    partial = tmp_path / "partial.json"
+    result = pilot.run(
+        system="n11",
+        cap="capture",
+        bins=4,
+        max_rounds=1,
+        max_live=8,
+        min_width=Q(1, 64),
+        hull_limit=16,
+        max_seconds=10,
+        replay_share=0,
+        save_objects=None,
+        max_memory_mib=1,
+        partial=partial,
+    )
+    assert result["status"] == "INCOMPLETE_MEMORY_CAP"
+    assert result["endpoint_control"] == {"held": None, "checked_after": 0}
+    assert result["rounds"] == []
+    assert json.loads(partial.read_text())["memory"] == result["memory"]
+
+
+def test_memory_stop_after_checked_update_keeps_partial_state_without_resumable_round(
+    endpoint: pilot.Endpoint,
+    frame: Frame,
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    readings = iter([1] * 5 + [2049])
+    monkeypatch.setattr(pilot, "current_memory_bytes", lambda: next(readings))
+    monkeypatch.setattr(pilot, "peak_memory_bytes", lambda: 10**9)
+    partial = tmp_path / "partial.json"
+    guard = pilot.MemoryGuard(2048)
+    result = pilot.run_pilot(
+        frame,
+        endpoint,
+        bins=4,
+        max_rounds=2,
+        max_live=8,
+        min_width=Q(1, 64),
+        hull_limit=16,
+        max_seconds=120,
+        progress=False,
+        partial=partial,
+        checkpoints=tmp_path,
+        memory_guard=guard,
+    )
+    assert result.outcome == "memory_cap"
+    assert result.endpoint_lost is None
+    assert len(result.updates) == len(result.node["steps"]) == 1
+    assert result.rounds[-1]["complete"] is False
+    assert guard.stop is not None
+    assert guard.stop["boundary"] == "after_certified_update"
+    retained = json.loads(partial.read_text())
+    assert retained["outcome"] == "memory_cap"
+    assert retained["endpoint_control"]["held"] is True
+    checkpoint = tmp_path / "checkpoint-memory-stop.json.gz"
+    stopped = json.loads(gzip.decompress(checkpoint.read_bytes()))
+    assert stopped["resumable"] is False
+    assert len(stopped["node"]["steps"]) == 1
+    with pytest.raises(RefusalError, match="not a pilot checkpoint"):
+        pilot.load_checkpoint(checkpoint, {})
+    replayed = pilot.replay(frame, result, max_seconds=120)
+    assert replayed["status"] == "PASS_REPLAYED"
+    assert replayed["final_state_agrees"]
+
+
+def test_no_memory_flag_never_calls_memory_sampler(
+    endpoint: pilot.Endpoint,
+    frame: Frame,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    def forbidden() -> int:
+        raise AssertionError("unrequested memory sampler")
+
+    monkeypatch.setattr(pilot, "current_memory_bytes", forbidden)
+    monkeypatch.setattr(pilot, "peak_memory_bytes", forbidden)
+    result = pilot.run_pilot(
+        frame,
+        endpoint,
+        bins=4,
+        max_rounds=1,
+        max_live=8,
+        min_width=Q(1, 64),
+        hull_limit=16,
+        max_seconds=120,
+        max_steps=0,
+        progress=False,
+    )
+    assert result.outcome == "step_cap"
+    assert result.memory is None
 
 
 @pytest.fixture(scope="module")
@@ -454,3 +773,81 @@ def test_a_checkpoint_resumes_after_a_comment_only_kernel_change(
         pilot.run_pilot(
             boxed, renumbered, max_rounds=2, resume=saved, **{**settings, "bins": 8}
         )
+
+
+def test_cli_round_one_resume_produces_no_updates_and_replays_saved_seed(
+    endpoint: pilot.Endpoint, frame: Frame, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    boxed, renumbered = pilot.box_frame(frame, endpoint, Q(1, 64))
+    first = pilot.run_pilot(
+        boxed,
+        renumbered,
+        bins=2,
+        max_rounds=1,
+        max_live=4,
+        min_width=Q(1, 64),
+        hull_limit=16,
+        max_seconds=120,
+        progress=False,
+        checkpoints=tmp_path,
+        node_id="n17-capture-pilot",
+    )
+    saved = tmp_path / "checkpoint-round-001.json.gz"
+    assert saved.exists()
+    assert first.rounds[-1]["round"] == 1
+    assert first.rounds[-1]["complete"] is True
+    assert first.endpoint_lost is None
+
+    def forbidden(*_args: Any, **_kwargs: Any) -> Any:
+        pytest.fail("round-one replay must not produce an owner update or a new seed")
+
+    original_admit = pilot.node.admit_seed
+    admitted_seed_ids: list[str] = []
+
+    def admit_saved_seed(*args: Any, **kwargs: Any) -> Any:
+        admitted_seed_ids.append(pilot.producer.content_sha256(args[1]))
+        return original_admit(*args, **kwargs)
+
+    monkeypatch.setattr(pilot, "capture_frame", lambda _cap: boxed)
+    monkeypatch.setattr(pilot, "load_endpoint", lambda _frame: renumbered)
+    monkeypatch.setattr(pilot, "produce_step", forbidden)
+    monkeypatch.setattr(pilot, "build_seed", forbidden)
+    monkeypatch.setattr(pilot.node, "admit_seed", admit_saved_seed)
+    output = tmp_path / "fresh-replay.json"
+    assert (
+        pilot.main(
+            [
+                "--max-rounds",
+                "1",
+                "--resume",
+                str(saved),
+                "--bins",
+                "2",
+                "--max-live",
+                "4",
+                "--min-width-log2",
+                "6",
+                "--hull-limit",
+                "16",
+                "--max-seconds",
+                "120",
+                "--replay-share",
+                "0.5",
+                "--output",
+                str(output),
+            ]
+        )
+        == 0
+    )
+    result = json.loads(output.read_text())
+    assert admitted_seed_ids == [pilot.producer.content_sha256(first.seed)]
+    assert result["resumed"]["round"] == 1
+    assert result["resumed"]["changed_since"] == []
+    assert result["updates"] == first.updates
+    assert result["rounds"] == first.rounds
+    assert result["seed_sha256"] == pilot.producer.content_sha256(first.seed)
+    assert result["node_sha256"] == pilot.producer.content_sha256(first.node)
+    assert result["endpoint_control"]["held"] is True
+    assert result["replay"]["status"] == "PASS_REPLAYED"
+    assert result["replay"]["steps"] == len(first.node["steps"])
+    assert result["replay"]["final_state_agrees"] is True

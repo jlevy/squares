@@ -10,7 +10,7 @@ passed. No positive profile or BC329 target was run.
 ## Exact Boundary
 
 - Reviewed file:
-  `docs/project/specs/active/plan-2026-09-13-n11-bc329-three-profile-run-sheet.md` in
+  `docs/project/specs/archive/plan-2026-09-13-n11-bc329-three-profile-run-sheet.md` in
   `/private/tmp/squares-n11-bc329-stack`, uncommitted Git blob
   `e6f448896b28ed4f7163aa70a9439a9621d8e466`, SHA-256
   `5bbbf8753ab2edcb683a7592a1a22db910f0932443dacfdd8e064cfca982127b`.

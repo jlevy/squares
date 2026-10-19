@@ -1,0 +1,12 @@
+couzo-certificates-2026-10-11 1 files {'jobs': 45, 'pair_decisions': 5234106, 'route_cpu_seconds': 2540.17, 'job_wall_seconds': 5568.25, 'longest_job_seconds': 287.72}
+   per-n wall: {175: 58.8, 304: 189.4, 305: 226.1, 308: 365.8, 338: 213.3, 339: 250.5, 340: 219.9, 343: 470.3, 344: 438.9, 375: 462.7, 376: 437.4, 378: 569.8, 379: 717.7, 380: 583.9, 381: 363.7}
+mishapolk-kkt-refinements-2026-10-14 24 files {'jobs': 72, 'pair_decisions': 4186086, 'route_cpu_seconds': 2167.9, 'job_wall_seconds': 2194.11, 'longest_job_seconds': 78.28}
+   per-n wall: {129: 19.7, 153: 25.5, 154: 31.0, 155: 25.6, 156: 39.3, 175: 60.0, 176: 87.8, 181: 36.4, 204: 103.0, 207: 75.3, 209: 46.9, 232: 153.3, 264: 170.8, 267: 107.4, 270: 73.8, 271: 162.9, 272: 77.1, 302: 112.7, 303: 232.8, 304: 131.0, 305: 98.2, 306: 104.5, 307: 108.3, 308: 110.7}
+evand-n146-2026-10-14 1 files {'jobs': 3, 'pair_decisions': 63510, 'route_cpu_seconds': 21.14, 'job_wall_seconds': 21.33, 'longest_job_seconds': 7.24}
+   per-n wall: {146: 21.3}
+couzo-verified-bounds-2026-10-14 1 files {'jobs': 3, 'pair_decisions': 132930, 'route_cpu_seconds': 50.25, 'job_wall_seconds': 69.01, 'longest_job_seconds': 23.77}
+   per-n wall: {211: 69.0}
+couzo-certificates-2026-10-14 23 files {'jobs': 69, 'pair_decisions': 31386744, 'route_cpu_seconds': 12425.76, 'job_wall_seconds': 14795.58, 'longest_job_seconds': 632.89}
+   per-n wall: {237: 48.5, 339: 88.5, 342: 106.5, 382: 180.7, 409: 165.9, 419: 289.3, 450: 206.7, 461: 322.7, 542: 244.9, 552: 558.6, 599: 541.1, 648: 518.0, 649: 442.9, 651: 602.9, 703: 544.2, 757: 1038.2, 804: 1109.9, 812: 986.6, 930: 1064.6, 931: 1157.0, 992: 1539.6, 993: 1474.8, 994: 1563.6}
+couzo-n237-2026-10-15 1 files {'jobs': 3, 'pair_decisions': 167796, 'route_cpu_seconds': 50.9, 'job_wall_seconds': 65.48, 'longest_job_seconds': 22.07}
+   per-n wall: {237: 65.5}

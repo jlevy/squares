@@ -238,8 +238,9 @@ def status_fills() -> list[Fill]:
     pages = page_colours()
     rules = [
         (match.group(2), declared)
-        for selector, declared in _blocks(SITE_CSS)
-        if (match := _STATUS_RULE.fullmatch(selector))
+        for selectors, declared in _blocks(SITE_CSS)
+        for selector in selectors.split(",")
+        if (match := _STATUS_RULE.fullmatch(selector.strip()))
     ]
     if not rules:
         raise SystemExit("site.css has no status chip rule")

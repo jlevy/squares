@@ -50,7 +50,7 @@ agenda:
     - SYNOPSIS.md
     - README.md
     - packing/campaign/documentation-pass.md
-    - docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+    - docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
     parallel_group: research-state-rollup
     outcomes:
     - scope: >-

@@ -38,8 +38,8 @@ This lane will neither cross the T+4 gate nor open successor work during the hol
 ### Frozen Scientific Inputs
 
 The binding commit changes only
-`docs/project/handoff-2026-09-06-post-381-t2-t10-continuation.md` relative to the
-authorized pre-launch head.
+`docs/project/handoffs/handoff-2026-09-06-post-381-t2-t10-continuation.md` relative to
+the authorized pre-launch head.
 The scientific paths below are byte-identical across that transition.
 
 | Input | SHA-256 | Disposition |

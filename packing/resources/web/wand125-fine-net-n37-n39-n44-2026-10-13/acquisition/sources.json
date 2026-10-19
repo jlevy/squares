@@ -1,0 +1,184 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-10-14T09:22Z",
+  "git_scope": "A blobless clone of the single public branch with its history, sparsely checked out at this commit: the three certificate directories that dfb2cf8 (n = 39), 9f24185 (n = 44) and this commit (n = 37) add, each the same Git tree from its adding commit through the head 9a28a84 read on 2026-10-14, and the enclosing licence. Every file under those directories is digested; the rest of the tree is pinned by the commit. The candidates, run logs, receipts and the nested verifier archive are assets of release square-lower-bounds-v1, outside Git, and the packet README pins them by size and SHA-256.",
+  "sources": [
+    {
+      "id": "wand125-square-packing",
+      "source_url": "https://github.com/wand125/square-packing",
+      "source_ref": "refs/heads/main",
+      "source_commit": "7a42c16eacaab112b537ab09e89d3485f6f4c75f",
+      "committed_utc": "2026-10-13T03:18:05Z",
+      "git_tree": "25ebf6587ccf96fa97f21ca88201cb05291eaeba",
+      "archived_path": "packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/square-packing",
+      "subtree_manifest": "packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "problems/square-lower-bounds/LICENSE",
+        "problems/square-lower-bounds/certificates/mixed_n37_L64975",
+        "problems/square-lower-bounds/certificates/mixed_n39_L66625",
+        "problems/square-lower-bounds/certificates/mixed_n44_L69975"
+      ],
+      "subtree_file_count": 34,
+      "subtree_total_bytes": 208115,
+      "retained_file_count": 12,
+      "retained_total_bytes": 29664,
+      "compressed": [],
+      "pinned_only": [
+        {
+          "path": "problems/square-lower-bounds/LICENSE",
+          "bytes": 1064,
+          "sha256": "c0dd43e7892932c81335f74a2fdbf1a98f5977bab14c0c4c30e3abcc97c34904",
+          "reason": "retained byte-identical by the FN-1 input bindings packet",
+          "identical_to": "packing/resources/web/wand125-fn1-input-bindings-2026-10-07/square-packing-bounds/LICENSE"
+        },
+        {
+          "path": "problems/square-lower-bounds/certificates/mixed_n37_L64975/check2/src/INDEPENDENCE.md",
+          "bytes": 12283,
+          "sha256": "2e4fb5abf4efa326838216eaea1bc6e75c7ce06d7b1d84504d0973c613dbbaa6",
+          "reason": "this repository's own packing/sqverify_fast/INDEPENDENCE.md as of e020eb1e2 (Git blob 9b60b4af, from 61acc9dcb until f007d7afd), which its history holds; the bundle copies it beside the verifier source"
+        },
+        {
+          "path": "problems/square-lower-bounds/certificates/mixed_n37_L64975/check2/src/REPRODUCE.md",
+          "bytes": 3677,
+          "sha256": "c810bad48155011257dcc4a7a0459bcefebbbccac3fb4495f9df870aefdcb533",
+          "reason": "byte-identical to the mixed_n18_L4705 check2/src/ file of the same name, retained by the 2026-10-06 check2 packet",
+          "identical_to": "packing/resources/web/wand125-mixed-bounds-check2-2026-10-06/square-packing-bounds/certificates/mixed_n18_L4705/check2/src/REPRODUCE.md"
+        },
+        {
+          "path": "problems/square-lower-bounds/certificates/mixed_n37_L64975/check2/src/SOUNDNESS.md",
+          "bytes": 33225,
+          "sha256": "16f1e679f35d4319f4a1ae8be694549dffc3bbd1b435a9005a505ed1d0586f86",
+          "reason": "this repository's own packing/sqverify_fast/SOUNDNESS.md as of e020eb1e2 (Git blob cadf59b6, from b2c98e3bd until f007d7afd added lemma N0), which its history holds; the bundle copies it beside the verifier source"
+        },
+        {
+          "path": "problems/square-lower-bounds/certificates/mixed_n37_L64975/check2/src/SPEC.md",
+          "bytes": 5049,
+          "sha256": "2ba83bc06ddfb6028b29ad586580512831988549405a8666fc212bf4a59444b1",
+          "reason": "byte-identical to the mixed_n18_L4705 check2/src/ file of the same name, retained by the 2026-10-06 check2 packet",
+          "identical_to": "packing/resources/web/wand125-mixed-bounds-check2-2026-10-06/square-packing-bounds/certificates/mixed_n18_L4705/check2/src/SPEC.md"
+        },
+        {
+          "path": "problems/square-lower-bounds/certificates/mixed_n37_L64975/check2/src/UPSTREAM_COMMIT",
+          "bytes": 41,
+          "sha256": "b6fb3b20ba48e5f06cfe487d2b692839bb92668a0534aea59bc9cf83029dbcf3",
+          "reason": "byte-identical to the mixed_n18_L4705 check2/src/ file of the same name, retained by the 2026-10-06 check2 packet",
+          "identical_to": "packing/resources/web/wand125-mixed-bounds-check2-2026-10-06/square-packing-bounds/certificates/mixed_n18_L4705/check2/src/UPSTREAM_COMMIT"
+        },
+        {
+          "path": "problems/square-lower-bounds/certificates/mixed_n37_L64975/check2/src/fine_net_check.sh",
+          "bytes": 4410,
+          "sha256": "a4069c4b55a4da94214b02b2fff50751f0026130b27733f10a775ee7dbb23e36",
+          "reason": "byte-identical to the mixed_n18_L4705 check2/src/ file of the same name, retained by the 2026-10-06 check2 packet",
+          "identical_to": "packing/resources/web/wand125-mixed-bounds-check2-2026-10-06/square-packing-bounds/certificates/mixed_n18_L4705/check2/src/fine_net_check.sh"
+        },
+        {
+          "path": "problems/square-lower-bounds/certificates/mixed_n37_L64975/provenance/search-notes.md",
+          "bytes": 444,
+          "sha256": "21813bbbb3fd2c432d14ede624429865343d6a4863d5c012052433e0f421ec5f",
+          "reason": "byte-identical to mixed_n39_L665/provenance/search-notes.md, retained by the 2026-10-06 check2 packet",
+          "identical_to": "packing/resources/web/wand125-mixed-bounds-check2-2026-10-06/square-packing-bounds/certificates/mixed_n39_L665/provenance/search-notes.md"
+        },
+        {
+          "path": "problems/square-lower-bounds/certificates/mixed_n39_L66625/check2/src/INDEPENDENCE.md",
+          "bytes": 12283,
+          "sha256": "2e4fb5abf4efa326838216eaea1bc6e75c7ce06d7b1d84504d0973c613dbbaa6",
+          "reason": "this repository's own packing/sqverify_fast/INDEPENDENCE.md as of e020eb1e2 (Git blob 9b60b4af, from 61acc9dcb until f007d7afd), which its history holds; the bundle copies it beside the verifier source"
+        },
+        {
+          "path": "problems/square-lower-bounds/certificates/mixed_n39_L66625/check2/src/REPRODUCE.md",
+          "bytes": 3677,
+          "sha256": "c810bad48155011257dcc4a7a0459bcefebbbccac3fb4495f9df870aefdcb533",
+          "reason": "byte-identical to the mixed_n18_L4705 check2/src/ file of the same name, retained by the 2026-10-06 check2 packet",
+          "identical_to": "packing/resources/web/wand125-mixed-bounds-check2-2026-10-06/square-packing-bounds/certificates/mixed_n18_L4705/check2/src/REPRODUCE.md"
+        },
+        {
+          "path": "problems/square-lower-bounds/certificates/mixed_n39_L66625/check2/src/SOUNDNESS.md",
+          "bytes": 33225,
+          "sha256": "16f1e679f35d4319f4a1ae8be694549dffc3bbd1b435a9005a505ed1d0586f86",
+          "reason": "this repository's own packing/sqverify_fast/SOUNDNESS.md as of e020eb1e2 (Git blob cadf59b6, from b2c98e3bd until f007d7afd added lemma N0), which its history holds; the bundle copies it beside the verifier source"
+        },
+        {
+          "path": "problems/square-lower-bounds/certificates/mixed_n39_L66625/check2/src/SPEC.md",
+          "bytes": 5049,
+          "sha256": "2ba83bc06ddfb6028b29ad586580512831988549405a8666fc212bf4a59444b1",
+          "reason": "byte-identical to the mixed_n18_L4705 check2/src/ file of the same name, retained by the 2026-10-06 check2 packet",
+          "identical_to": "packing/resources/web/wand125-mixed-bounds-check2-2026-10-06/square-packing-bounds/certificates/mixed_n18_L4705/check2/src/SPEC.md"
+        },
+        {
+          "path": "problems/square-lower-bounds/certificates/mixed_n39_L66625/check2/src/UPSTREAM_COMMIT",
+          "bytes": 41,
+          "sha256": "b6fb3b20ba48e5f06cfe487d2b692839bb92668a0534aea59bc9cf83029dbcf3",
+          "reason": "byte-identical to the mixed_n18_L4705 check2/src/ file of the same name, retained by the 2026-10-06 check2 packet",
+          "identical_to": "packing/resources/web/wand125-mixed-bounds-check2-2026-10-06/square-packing-bounds/certificates/mixed_n18_L4705/check2/src/UPSTREAM_COMMIT"
+        },
+        {
+          "path": "problems/square-lower-bounds/certificates/mixed_n39_L66625/check2/src/fine_net_check.sh",
+          "bytes": 4410,
+          "sha256": "a4069c4b55a4da94214b02b2fff50751f0026130b27733f10a775ee7dbb23e36",
+          "reason": "byte-identical to the mixed_n18_L4705 check2/src/ file of the same name, retained by the 2026-10-06 check2 packet",
+          "identical_to": "packing/resources/web/wand125-mixed-bounds-check2-2026-10-06/square-packing-bounds/certificates/mixed_n18_L4705/check2/src/fine_net_check.sh"
+        },
+        {
+          "path": "problems/square-lower-bounds/certificates/mixed_n39_L66625/provenance/search-notes.md",
+          "bytes": 444,
+          "sha256": "21813bbbb3fd2c432d14ede624429865343d6a4863d5c012052433e0f421ec5f",
+          "reason": "byte-identical to mixed_n39_L665/provenance/search-notes.md, retained by the 2026-10-06 check2 packet",
+          "identical_to": "packing/resources/web/wand125-mixed-bounds-check2-2026-10-06/square-packing-bounds/certificates/mixed_n39_L665/provenance/search-notes.md"
+        },
+        {
+          "path": "problems/square-lower-bounds/certificates/mixed_n44_L69975/check2/src/INDEPENDENCE.md",
+          "bytes": 12283,
+          "sha256": "2e4fb5abf4efa326838216eaea1bc6e75c7ce06d7b1d84504d0973c613dbbaa6",
+          "reason": "this repository's own packing/sqverify_fast/INDEPENDENCE.md as of e020eb1e2 (Git blob 9b60b4af, from 61acc9dcb until f007d7afd), which its history holds; the bundle copies it beside the verifier source"
+        },
+        {
+          "path": "problems/square-lower-bounds/certificates/mixed_n44_L69975/check2/src/REPRODUCE.md",
+          "bytes": 3677,
+          "sha256": "c810bad48155011257dcc4a7a0459bcefebbbccac3fb4495f9df870aefdcb533",
+          "reason": "byte-identical to the mixed_n18_L4705 check2/src/ file of the same name, retained by the 2026-10-06 check2 packet",
+          "identical_to": "packing/resources/web/wand125-mixed-bounds-check2-2026-10-06/square-packing-bounds/certificates/mixed_n18_L4705/check2/src/REPRODUCE.md"
+        },
+        {
+          "path": "problems/square-lower-bounds/certificates/mixed_n44_L69975/check2/src/SOUNDNESS.md",
+          "bytes": 33225,
+          "sha256": "16f1e679f35d4319f4a1ae8be694549dffc3bbd1b435a9005a505ed1d0586f86",
+          "reason": "this repository's own packing/sqverify_fast/SOUNDNESS.md as of e020eb1e2 (Git blob cadf59b6, from b2c98e3bd until f007d7afd added lemma N0), which its history holds; the bundle copies it beside the verifier source"
+        },
+        {
+          "path": "problems/square-lower-bounds/certificates/mixed_n44_L69975/check2/src/SPEC.md",
+          "bytes": 5049,
+          "sha256": "2ba83bc06ddfb6028b29ad586580512831988549405a8666fc212bf4a59444b1",
+          "reason": "byte-identical to the mixed_n18_L4705 check2/src/ file of the same name, retained by the 2026-10-06 check2 packet",
+          "identical_to": "packing/resources/web/wand125-mixed-bounds-check2-2026-10-06/square-packing-bounds/certificates/mixed_n18_L4705/check2/src/SPEC.md"
+        },
+        {
+          "path": "problems/square-lower-bounds/certificates/mixed_n44_L69975/check2/src/UPSTREAM_COMMIT",
+          "bytes": 41,
+          "sha256": "b6fb3b20ba48e5f06cfe487d2b692839bb92668a0534aea59bc9cf83029dbcf3",
+          "reason": "byte-identical to the mixed_n18_L4705 check2/src/ file of the same name, retained by the 2026-10-06 check2 packet",
+          "identical_to": "packing/resources/web/wand125-mixed-bounds-check2-2026-10-06/square-packing-bounds/certificates/mixed_n18_L4705/check2/src/UPSTREAM_COMMIT"
+        },
+        {
+          "path": "problems/square-lower-bounds/certificates/mixed_n44_L69975/check2/src/fine_net_check.sh",
+          "bytes": 4410,
+          "sha256": "a4069c4b55a4da94214b02b2fff50751f0026130b27733f10a775ee7dbb23e36",
+          "reason": "byte-identical to the mixed_n18_L4705 check2/src/ file of the same name, retained by the 2026-10-06 check2 packet",
+          "identical_to": "packing/resources/web/wand125-mixed-bounds-check2-2026-10-06/square-packing-bounds/certificates/mixed_n18_L4705/check2/src/fine_net_check.sh"
+        },
+        {
+          "path": "problems/square-lower-bounds/certificates/mixed_n44_L69975/provenance/search-notes.md",
+          "bytes": 444,
+          "sha256": "21813bbbb3fd2c432d14ede624429865343d6a4863d5c012052433e0f421ec5f",
+          "reason": "byte-identical to mixed_n39_L665/provenance/search-notes.md, retained by the 2026-10-06 check2 packet",
+          "identical_to": "packing/resources/web/wand125-mixed-bounds-check2-2026-10-06/square-packing-bounds/certificates/mixed_n39_L665/provenance/search-notes.md"
+        }
+      ],
+      "license": "MIT, Copyright (c) 2026 wand125 (problems/square-lower-bounds/LICENSE)",
+      "claims": [
+        "s(37) >= 2599/400 = 6.4975 (problems/square-lower-bounds/certificates/mixed_n37_L64975, added at 7a42c16)",
+        "s(39) >= 533/80 = 6.6625 (problems/square-lower-bounds/certificates/mixed_n39_L66625, added at dfb2cf8)",
+        "s(44) >= 2799/400 = 6.9975 (problems/square-lower-bounds/certificates/mixed_n44_L69975, added at 9f24185)"
+      ]
+    }
+  ]
+}

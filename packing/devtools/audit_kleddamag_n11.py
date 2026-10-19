@@ -1,4 +1,4 @@
-"""Audit the pinned Kleddamag n=11 certificate and exercise its checker boundaries.
+"""Audit Overbeck's pinned n=11 certificate and exercise its checker boundaries.
 
 This complements the complete upstream replay; it does not replace that replay.
 The structural and quadratic checks do not import upstream code. Optional source

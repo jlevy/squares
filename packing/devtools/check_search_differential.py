@@ -16,10 +16,10 @@ disagreement could hide.
 
 from __future__ import annotations
 
+import argparse
 import json
 import math
 import subprocess
-import sys
 from pathlib import Path
 
 from sqpack.verify import float_sign, separated
@@ -42,9 +42,13 @@ def corners(x: float, y: float, t: float) -> list[tuple[float, float]]:
 
 
 def main() -> int:
-    pairs = int(sys.argv[1]) if len(sys.argv) > 1 else 20000
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("pairs", nargs="?", type=int, default=20000)
+    parser.add_argument("--binary", type=Path, default=BIN)
+    arguments = parser.parse_args()
+    pairs = arguments.pairs
     out = subprocess.run(
-        [str(BIN), "--pairdump", "--pairs", str(pairs)],
+        [str(arguments.binary), "--pairdump", "--pairs", str(pairs)],
         capture_output=True,
         text=True,
         check=True,

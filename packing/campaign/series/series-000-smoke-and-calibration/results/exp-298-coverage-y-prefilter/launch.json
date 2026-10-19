@@ -1,0 +1,19 @@
+{
+  "schema": "n17-registered-experiment-launch/v1",
+  "experiment": "exp-298",
+  "launch_utc": "2026-10-08T01:09:31.961389+00:00",
+  "git_commit": "2d6b35c8b995d3502c98d90545714df0cb956abb",
+  "scientific_sources_clean_at_launch": true,
+  "target_unrun_at_launch": true,
+  "manifest_sha256": "d3b39a4f7ad28c44ab9e74ed05aef2b7d8ecee03b7d780db8e6f63590dca9182",
+  "python": "3.14.7 (main, Aug 25 2026, 13:50:14) [Clang 22.1.3 ]",
+  "executable": "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+  "source_byte_sha256": {
+    "devtools/profile_n17_coverage_candidate.py": "c617ecaba82add6d802f99a4866e9c39a02fcae83e41b550e1f34416ba42f944",
+    "devtools/profile_n17_exact_replay.py": "b1400f6b46fb59a5d233f1d4afa57ccf7524281267c7f3488554853e35cd0e8e",
+    "devtools/verify_n17_kernel_certificate.py": "08f4de68db8b835bbcec3ff13cec00bf113421547641a107b695fe2d3b3f7eb7"
+  },
+  "quiet_owned_cpu_checkpoints": "All author/peer/CI source controls terminated before launch; source reasoning and metadata only across8phases.",
+  "host_other_tasks": "Not controlled; runtime load averages retained by each arm.",
+  "accepted_control_receipt_sha256": "c391ce53f8616cd7ff831f77b29faa0a50f2f63be578111c6a7afe1014d464a7"
+}

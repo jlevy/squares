@@ -31,8 +31,7 @@ cleaned transcription and the unedited extraction it was checked against, and th
 [evidence inventory]({{INVENTORY_URL}}) shows what each claim rests on and who did the
 work.
 
-**Recent results.** A star marks a recent verified lower bound, one proved since
-{{RECENT_SINCE}}, when this project’s work began.
+**Recent results.** Red indicates a recent result, since {{RECENT_SINCE}}.
 {{SURVEY_COUNTS}}
 {{CORRECTIONS}}
 
@@ -41,9 +40,13 @@ lower bounds for seventeen squares, some also for eighteen, all independently:
 Brandwijk’s $89/20$ (18 July), Burns’s $4.4811$ (6 August), MacIver’s $4.4502\ldots$ (8
 August), Mira’s and Fort’s sixteen-point sets (10 and 11 August), anabologyco-maker’s
 $4.57$ and $9141/2000$ (13 and 16 August), and Massaccesi’s $4.5058$ (21 August),
-replayed here as [T-015](all-results.html#t-015) and [T-016](all-results.html#t-016).
-The [seventeen-square record](cases/17.html) lists them all; each has since been
-superseded.
+replayed here as [T-015](results.html#t-015) and [T-016](results.html#t-016). The
+[seventeen-square record](cases/17.html) lists them all; each has since been superseded.
+On 12 October 2026 two proofs that Bidwell’s 1998 packing is optimal were published by
+separate routes: Marc Leonard Overbeck’s candidate proof ([T-153](results.html#t-153))
+and Oscar Fitzharding’s Lean 4 proof ([T-154](results.html#t-154)). The case is reported
+proved; neither proof has yet been replayed in full here, so its verified bounds are
+unchanged.
 
 **Reported and verified.** The *best known packing* and the *reported lower* bound are
 what the published sources say, credited to whoever found or proved them.
@@ -60,7 +63,7 @@ here found a defect, and that no verified bound reaches, says *defect recorded* 
 its credit. A finite-precision result is numerically checked and never enters a verified
 column.
 
-**The other columns.** *Recent* holds the star.
+**The other columns.** *Recent* sorts recent verified bounds first.
 The *gap* is the verified upper bound minus the verified lower bound, exact where both
 are closed forms and zero where the case is solved.
 *Records* links each case file.
@@ -73,4 +76,10 @@ The same record opens from the overview’s atlas, and has an address of its own
 
 Click a column heading to sort; the filters narrow the rows.
 
+<h1 id="best-known-results" class="site-title">Best Known Results for <i>n</i> ≤ 324</h1>
+
 {{TABLE}}
+
+<!-- This document follows common-doc-guidelines.md.
+See github.com/jlevy/practical-prose and review guidelines before editing.
+-->

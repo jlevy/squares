@@ -1,0 +1,137 @@
+{
+ "build": {
+  "argv": [
+   "g++",
+   "-O3",
+   "-std=c++17",
+   "-fno-fast-math",
+   "-ffp-contract=off",
+   "verifier/axis_integer_grid.cpp",
+   "-o",
+   "axis"
+  ],
+  "binary_sha256": "19288b2f9bcb1cfa86a0bde9db1e1fbb79d43dc8044bc7243af8f6ad405899af",
+  "cpu_seconds": 1.267,
+  "exit_code": 0,
+  "loadavg_after": [
+   13.53,
+   9.39,
+   5.28
+  ],
+  "loadavg_before": [
+   13.53,
+   9.39,
+   5.28
+  ],
+  "source_sha256": "f5bc3f60065aaea3d14ffb8465865750fca22cf8bbc6bd8739b5120200b6277d",
+  "started_utc": "2026-10-11T20:48:16+00:00",
+  "stderr": "",
+  "stdout": "",
+  "wall_seconds": 2.049
+ },
+ "compiler": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+ "crate": {
+  "argv": [
+   "sqverify-fast",
+   "--candidate",
+   "axis-A.json",
+   "--n",
+   "40",
+   "--side",
+   "67/10",
+   "--directions",
+   "0",
+   "--threshold",
+   "1",
+   "--threads",
+   "1",
+   "--confirm"
+  ],
+  "binary_sha256": "567a0fd58f7ae4e981580f2a90bed5c92ac44fa8f3ebb442b166e93043c15ed4",
+  "cpu_seconds": 1.316,
+  "crate_source_sha256": "d97758bbc9639edc70b8bd7dc83106d4e8d1be034bacb3e88f8c539b88091c88",
+  "exit_code": 0,
+  "input_sha256": "192f5df66e91783bfe1536a284c3e98e41c43028c37f2ab5ee1d9c4ba41397aa",
+  "loadavg_after": [
+   12.82,
+   9.38,
+   5.32
+  ],
+  "loadavg_before": [
+   13.33,
+   9.42,
+   5.32
+  ],
+  "reviewed_source": {
+   "commit": "910b6b12c",
+   "review": "docs/project/reviews/review-2026-10-06-sqverify-fast-declared-net-soundness.md"
+  },
+  "started_utc": "2026-10-11T20:48:23+00:00",
+  "stderr": "",
+  "stdout": "{\"argmin\":[\"3490012394923077/1000000000000000\",\"3100670341/500000000\"],\"cpu_seconds\":0.951243147,\"method\":\"axis-vertex-sweep\",\"min_certified_lower_bound\":1.0016868361671276,\"r\":0,\"seconds\":1.821352133,\"threshold\":\"1\",\"verdict\":\"verified\",\"vertices\":10929636,\"x_events\":3306,\"y_events\":3306}\n{\"build\":{\"profile\":\"release\",\"rustc\":\"rustc 1.98.0 (88d9e12ae 2026-08-18)\",\"source_sha256\":\"d97758bbc9639edc70b8bd7dc83106d4e8d1be034bacb3e88f8c539b88091c88\",\"target\":\"x86_64-unknown-linux-gnu\"},\"direction_cpu_seconds\":0.951243147,\"direction_seconds\":1.821352133,\"directions\":1,\"fault_injected_at_box\":null,\"kind\":\"sqverify-fast-summary/v1\",\"nodes\":0,\"premises\":{\"B\":\"249329659/250000000\",\"D\":\"83/40000\",\"L\":\"67/10\",\"angle_count\":201,\"centre_domain\":\"tokoharu\",\"expanded_points\":0,\"expanded_rectangles\":5424,\"expanded_segments\":0,\"format\":\"T\",\"input_sha256\":\"192f5df66e91783bfe1536a284c3e98e41c43028c37f2ab5ee1d9c4ba41397aa\",\"mass_below_n\":\"10/4999\",\"mass_exact\":\"199950/4999\",\"n\":40,\"net_last_tangent\":\"83/200\",\"net_origin\":\"metadata\",\"shrink_bound\":\"9993880721697/10000000000000\",\"source_rectangles\":685},\"refused_directions\":[],\"status\":\"PARTIAL\",\"threads\":1,\"threshold\":\"1\",\"wall_seconds\":1.821761417}\n",
+  "wall_seconds": 2.792
+ },
+ "kind": "n40-new-supports-axis-stage/v1",
+ "runs": {
+  "H-above": {
+   "cpu_seconds": 0.794,
+   "exit_code": 2,
+   "input_sha256": "a5cedd3ab85d49c4575b401610e81912d06945e99a9f49d23d942b8ac8ec5912",
+   "loadavg_after": [
+    13.33,
+    9.42,
+    5.32
+   ],
+   "loadavg_before": [
+    13.53,
+    9.39,
+    5.28
+   ],
+   "started_utc": "2026-10-11T20:48:20+00:00",
+   "stderr": "",
+   "stdout": "{\"status\":\"AXIS_TEST_REFUSED\",\"x_nodes\":3293,\"y_nodes\":3293,\"minimum_numerator\":\"1001486431423867090847280653\",\"scale\":\"1000000000000000000000000000\",\"minimizer_x_integer\":3490012394,\"minimizer_y_integer\":6201340682,\"direct_sum_matches\":true,\"evaluation_abs_bound\":\"627444222088298915573283512797161984\"}\n",
+   "tau": "62593/62500",
+   "wall_seconds": 1.546
+  },
+  "H-below": {
+   "cpu_seconds": 0.917,
+   "exit_code": 0,
+   "input_sha256": "fc0db1ba34690a6babb5d5d4381c58509bcf68c7140f39c0d106dd1b66d9db1c",
+   "loadavg_after": [
+    13.33,
+    9.42,
+    5.32
+   ],
+   "loadavg_before": [
+    13.33,
+    9.42,
+    5.32
+   ],
+   "started_utc": "2026-10-11T20:48:21+00:00",
+   "stderr": "",
+   "stdout": "{\"status\":\"AXIS_COVERAGE_PROVED\",\"x_nodes\":3293,\"y_nodes\":3293,\"minimum_numerator\":\"1001486431423867090847280653\",\"scale\":\"1000000000000000000000000000\",\"minimizer_x_integer\":3490012394,\"minimizer_y_integer\":6201340682,\"direct_sum_matches\":true,\"evaluation_abs_bound\":\"627444222088298915573283512797161984\"}\n",
+   "tau": "500743/500000",
+   "wall_seconds": 1.837
+  },
+  "axis": {
+   "cpu_seconds": 0.905,
+   "exit_code": 0,
+   "input_sha256": "10dd46b06f14144619bf9de03151c43215e43e34f7e60df440f4e27d6a594396",
+   "loadavg_after": [
+    13.53,
+    9.39,
+    5.28
+   ],
+   "loadavg_before": [
+    13.53,
+    9.39,
+    5.28
+   ],
+   "started_utc": "2026-10-11T20:48:18+00:00",
+   "stderr": "",
+   "stdout": "{\"status\":\"AXIS_COVERAGE_PROVED\",\"x_nodes\":3293,\"y_nodes\":3293,\"minimum_numerator\":\"1001486431423867090847280653\",\"scale\":\"1000000000000000000000000000\",\"minimizer_x_integer\":3490012394,\"minimizer_y_integer\":6201340682,\"direct_sum_matches\":true,\"evaluation_abs_bound\":\"627444222088298915573283512797161984\"}\n",
+   "tau": "4999/5000",
+   "wall_seconds": 1.912
+  }
+ }
+}

@@ -1,0 +1,14 @@
+{
+  "combined_resource_guard": "external supervisor; no internal wall/RSS guard",
+  "ended_at": "2026-10-07T20:30:34.494677Z",
+  "manifest": "campaign/series/series-000-smoke-and-calibration/results/exp-294-stages-exact-replay/execution-manifest.json",
+  "manifest_sha256": "fcf4769bc91ef764445ba1aa3755d4e9a394a03bb3db362f228984fd66ddf22b",
+  "phases": [{"argv":["/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python","-m","devtools.profile_n17_exact_replay","--directory","campaign/retained/session-184-n17-numeric-cap-readiness","--cells","campaign/series/series-000-smoke-and-calibration/results/exp-290-matched-exact-replay/cells.json","--cells-sha256","3cdb291b927abaf6a61f0127ddf208329765f77debe793881ec01879b18158b5","--centered-inner-cap","935106018721/200000000000","--max-seconds","180","--instrumentation","stages","--compare","campaign/series/series-000-smoke-and-calibration/results/exp-290-matched-exact-replay/attempt2/none.json","--output","campaign/series/series-000-smoke-and-calibration/results/exp-294-stages-exact-replay/stages.json"],"ended_at":"2026-10-07T20:30:34.493338Z","name":"stage_observations","returncode":0,"started_at":"2026-10-07T20:28:46.036942Z","status":"completed","wall_seconds":108.45514799997909}],
+  "schema": "registered-phase-execution/v1",
+  "scientific_result_interpreted": false,
+  "started_at": "2026-10-07T20:28:46.036478Z",
+  "status": "completed",
+  "unstarted_phase_names": [],
+  "wall_seconds": 108.45679562498117
+}
+

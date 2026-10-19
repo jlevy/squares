@@ -1,0 +1,32 @@
+{
+ "format": "regularized-bounds-receipt-v1",
+ "tool": "python -m devtools.register_regularized_bounds decide --batch grid-slack",
+ "what": "Each retained view decided over Q, every pair and every wall, by sqpack.witness.exact_verify and devtools.check_rational_witness_independent, the two checkers the run that made the views decided them with.",
+ "decided": 1,
+ "all_passed": true,
+ "pairs_tested": 41905,
+ "cpu_seconds": 14.9,
+ "least_wall_clearance": 0.0,
+ "rows": [
+  {
+   "n": 290,
+   "side": "70142135623730950488016887242097/4000000000000000000000000000000",
+   "exact_verify": {
+    "passed": true,
+    "pairs_tested": 41905,
+    "minimum_containment_clearance": 0.0,
+    "minimum_best_pair_gap": 0.0,
+    "failures": 0,
+    "cpu_seconds": 10.15
+   },
+   "independent": {
+    "passed": true,
+    "pairs_tested": 41905,
+    "minimum_containment_clearance": 0.0,
+    "minimum_best_pair_gap": 0.0,
+    "failures": 0,
+    "cpu_seconds": 4.79
+   }
+  }
+ ]
+}

@@ -145,14 +145,17 @@ def test_each_edition_is_dated_by_when_it_was_first_published() -> None:
 
     Two of the three differ from the old label dates, in opposite directions: v0.3.0 went
     live on September 5 and was named on September 8; v0.4.0 was named on a branch on
-    September 10 and went live on September 13. The deployments behind each are in the
-    comment on `PUBLICATION_HISTORY`.
+    September 10 and went live on September 13. v0.7.11 was cut dated October 15 and its
+    first deployment went live on October 16 in UTC (think-tk0u). The deployments behind
+    each are in the comment on `PUBLICATION_HISTORY`.
     """
     dated = {entry.version: entry.first_published for entry in PUBLICATION_HISTORY}
     assert dated["v0.3.0"] == "September 5, 2026"
     assert dated["v0.4.0"] == "September 13, 2026"
     assert dated["v0.4.1"] == "September 22, 2026"
     assert dated["v0.4.2"] == "September 28, 2026"
+    assert dated["v0.5.0"] == "October 2, 2026"
+    assert dated["v0.7.11"] == "October 16, 2026"
     assert PUBLICATION_HISTORY[0].first_published == PUBLICATION_DATE
     assert PUBLICATION_HISTORY[-1].first_published == FIRST_PUBLISHED
 
@@ -345,6 +348,23 @@ def test_the_data_commit_is_the_last_one_that_changed_the_data(
     repo, data = history
     assert data_revision(repo) == data
     assert data_version(repo) == f"{PUBLICATION_VERSION}-{data[:DATA_REVISION_LENGTH]}"
+
+
+def test_dated_pdf_exports_do_not_move_the_data_revision(history: tuple[Path, str]) -> None:
+    repo, data = history
+    for name in (
+        "known-best-1-100.pdf",
+        "known-best-1-324.pdf",
+        "square-packings-100-20261008.pdf",
+        "square-packings-324-20261008.pdf",
+        "square-packings-324-20261009.pdf",
+    ):
+        path = f"packing/atlas/known-best/{name}"
+        _commit(repo, path, "generated PDF receipt\n")
+        assert path not in _git(repo, "ls-files", "--", *data_pathspec()).splitlines()
+        assert data_revision(repo) == data
+    changed = _commit(repo, "packing/atlas/known-best/manifest.json", "new evidence\n")
+    assert data_revision(repo) == changed
 
 
 def test_a_merge_keeps_the_data_commit_its_branch_pinned(history: tuple[Path, str]) -> None:

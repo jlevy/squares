@@ -1,0 +1,15 @@
+{
+  "schema": "n17-registered-experiment-launch/v1",
+  "experiment": "exp-297",
+  "launch_utc": "2026-10-08T00:51:14.616763+00:00",
+  "git_commit": "a01f9adf5ac108f755ce164e410220da42fe9c8d",
+  "scientific_sources_clean_at_launch": true,
+  "target_unrun_at_launch": true,
+  "manifest_sha256": "1f298becfaa3ea969ddcbcb23b3d68e8dfbd0f5e9ba3bfe155b34fd65c984326",
+  "python": "3.14.7 (main, Aug 25 2026, 13:50:14) [Clang 22.1.3 ]",
+  "executable": "/Volumes/spud-ext1/agent-scratch/n17-w3-01a114fb/venv/bin/python",
+  "source_byte_sha256": {
+    "devtools/check_n17_regional_row_coverage.py": "732dbea822db6d7554463bfe09130fddc3b7856f5bed9d1856252c9d162d3f2c",
+    "devtools/check_n17_collective_row_coverage.py": "8fd962550b6d809f593a8142576506dd7aa7ce61ead2cdfc22879b2a8b8ee469"
+  }
+}

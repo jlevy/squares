@@ -1,0 +1,476 @@
+{
+  "F17_obstructions": {
+    "alternative_coker_A_minus_I": [
+      1,
+      17
+    ],
+    "alternative_determinant": 1,
+    "alternative_has_packing_interpretation": false,
+    "alternative_monodromy": [
+      [
+        -2,
+        5
+      ],
+      [
+        5,
+        -13
+      ]
+    ],
+    "alternative_trace": -15,
+    "fibonacci_invariant_index_17_lattice_exists": false,
+    "fibonacci_polynomial_roots_mod_17": [],
+    "proof": "A group of order 136 has an involution; any nonidentity involution on 17 points fixes a pair.",
+    "regular_action_on_136_pairs_impossible": true,
+    "square_slope_affine_action": {
+      "group_order": 136,
+      "pair_count": 136,
+      "pair_orbit_sizes": [
+        68,
+        68
+      ],
+      "prime": 17,
+      "regular": false,
+      "slopes": [
+        1,
+        2,
+        4,
+        8,
+        9,
+        13,
+        15,
+        16
+      ],
+      "stabilizer_order_histogram": {
+        "2": 136
+      }
+    }
+  },
+  "R10_return_model": {
+    "controls": {
+      "beta_zero_rejected": true,
+      "unit_ring_translation_orbit_preservation_failures": 110,
+      "without_reciprocal_equivariance_failures": 55
+    },
+    "crt_roots": [
+      4,
+      8
+    ],
+    "distinct_reciprocal_pairs": 55,
+    "fixed_cells": 11,
+    "geometric_cover_identified": false,
+    "return": "phi^5: (alpha,beta) -> (alpha,-beta)",
+    "ring": "R_10 = Z[phi]/(11) = F_11 x F_11; not F_121",
+    "translation_lift_coefficients_1_phi": [
+      2,
+      8
+    ],
+    "two_cell_orbits": 55
+  },
+  "bundle_and_geodesic": {
+    "affine_55_quotient": {
+      "base_multiplier": 5,
+      "fiber_label": "a+8b mod 11"
+    },
+    "covers": [
+      {
+        "R_index": 3,
+        "cover_degree": 1,
+        "torsion_smith_factors": [
+          2,
+          2
+        ]
+      },
+      {
+        "R_index": 6,
+        "cover_degree": 2,
+        "torsion_smith_factors": [
+          4,
+          4
+        ]
+      },
+      {
+        "R_index": 9,
+        "cover_degree": 3,
+        "torsion_smith_factors": [
+          2,
+          38
+        ]
+      },
+      {
+        "R_index": 12,
+        "cover_degree": 4,
+        "torsion_smith_factors": [
+          8,
+          40
+        ]
+      },
+      {
+        "R_index": 15,
+        "cover_degree": 5,
+        "torsion_smith_factors": [
+          2,
+          682
+        ]
+      },
+      {
+        "R_index": 18,
+        "cover_degree": 6,
+        "torsion_smith_factors": [
+          76,
+          76
+        ]
+      }
+    ],
+    "cyclic_cover_homology": "Z direct_sum R_(3k) as abelian groups",
+    "determinant": -1,
+    "mapping_torus_orientable": false,
+    "modular_geodesic": {
+      "assumed_lattice_matrix": "I+wQ",
+      "axis_equation": "(x-1/2)^2+y^2=5/4",
+      "lattice_basis_period_matrix": [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "length": "2 arccosh(3/2) = 4 log(phi)",
+      "manuscript_lattice_identified": false,
+      "shape": "x=(2w+w^2)/(1+w^2), y=(1+w-w^2)/(1+w^2)",
+      "trace": 3,
+      "upper_half_plane_period_matrix": [
+        [
+          2,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ]
+    },
+    "monodromy": [
+      [
+        -1,
+        -2
+      ],
+      [
+        -2,
+        -3
+      ]
+    ]
+  },
+  "enlarged_affine_group_control": {
+    "group_order": 110,
+    "pair_count": 55,
+    "pair_orbit_sizes": [
+      55
+    ],
+    "prime": 11,
+    "regular": false,
+    "slopes": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "stabilizer_order_histogram": {
+      "2": 55
+    }
+  },
+  "quotients_m3_through_m16": [
+    {
+      "affine_group_order": 12,
+      "cardinality_allows_regular_pair_action": false,
+      "m": 3,
+      "pair_count": 6,
+      "phi_order": 3,
+      "size": 4,
+      "smith_factors": [
+        2,
+        2
+      ]
+    },
+    {
+      "affine_group_order": 20,
+      "cardinality_allows_regular_pair_action": false,
+      "m": 4,
+      "pair_count": 10,
+      "phi_order": 4,
+      "size": 5,
+      "smith_factors": [
+        1,
+        5
+      ]
+    },
+    {
+      "affine_group_order": 55,
+      "cardinality_allows_regular_pair_action": true,
+      "m": 5,
+      "pair_count": 55,
+      "phi_order": 5,
+      "size": 11,
+      "smith_factors": [
+        1,
+        11
+      ]
+    },
+    {
+      "affine_group_order": 96,
+      "cardinality_allows_regular_pair_action": false,
+      "m": 6,
+      "pair_count": 120,
+      "phi_order": 6,
+      "size": 16,
+      "smith_factors": [
+        4,
+        4
+      ]
+    },
+    {
+      "affine_group_order": 203,
+      "cardinality_allows_regular_pair_action": false,
+      "m": 7,
+      "pair_count": 406,
+      "phi_order": 7,
+      "size": 29,
+      "smith_factors": [
+        1,
+        29
+      ]
+    },
+    {
+      "affine_group_order": 360,
+      "cardinality_allows_regular_pair_action": false,
+      "m": 8,
+      "pair_count": 990,
+      "phi_order": 8,
+      "size": 45,
+      "smith_factors": [
+        3,
+        15
+      ]
+    },
+    {
+      "affine_group_order": 684,
+      "cardinality_allows_regular_pair_action": false,
+      "m": 9,
+      "pair_count": 2850,
+      "phi_order": 9,
+      "size": 76,
+      "smith_factors": [
+        2,
+        38
+      ]
+    },
+    {
+      "affine_group_order": 1210,
+      "cardinality_allows_regular_pair_action": false,
+      "m": 10,
+      "pair_count": 7260,
+      "phi_order": 10,
+      "size": 121,
+      "smith_factors": [
+        11,
+        11
+      ]
+    },
+    {
+      "affine_group_order": 2189,
+      "cardinality_allows_regular_pair_action": false,
+      "m": 11,
+      "pair_count": 19701,
+      "phi_order": 11,
+      "size": 199,
+      "smith_factors": [
+        1,
+        199
+      ]
+    },
+    {
+      "affine_group_order": 3840,
+      "cardinality_allows_regular_pair_action": false,
+      "m": 12,
+      "pair_count": 51040,
+      "phi_order": 12,
+      "size": 320,
+      "smith_factors": [
+        8,
+        40
+      ]
+    },
+    {
+      "affine_group_order": 6773,
+      "cardinality_allows_regular_pair_action": false,
+      "m": 13,
+      "pair_count": 135460,
+      "phi_order": 13,
+      "size": 521,
+      "smith_factors": [
+        1,
+        521
+      ]
+    },
+    {
+      "affine_group_order": 11774,
+      "cardinality_allows_regular_pair_action": false,
+      "m": 14,
+      "pair_count": 353220,
+      "phi_order": 14,
+      "size": 841,
+      "smith_factors": [
+        29,
+        29
+      ]
+    },
+    {
+      "affine_group_order": 20460,
+      "cardinality_allows_regular_pair_action": false,
+      "m": 15,
+      "pair_count": 929566,
+      "phi_order": 15,
+      "size": 1364,
+      "smith_factors": [
+        2,
+        682
+      ]
+    },
+    {
+      "affine_group_order": 35280,
+      "cardinality_allows_regular_pair_action": false,
+      "m": 16,
+      "pair_count": 2429910,
+      "phi_order": 16,
+      "size": 2205,
+      "smith_factors": [
+        21,
+        105
+      ]
+    }
+  ],
+  "regular_affine_action_F11": {
+    "group_order": 55,
+    "pair_count": 55,
+    "pair_orbit_sizes": [
+      55
+    ],
+    "prime": 11,
+    "regular": true,
+    "slopes": [
+      1,
+      3,
+      4,
+      5,
+      9
+    ],
+    "stabilizer_order_histogram": {
+      "1": 55
+    }
+  },
+  "schema_version": 1,
+  "side_field": {
+    "coefficients_descending": [
+      1,
+      -20,
+      178,
+      -842,
+      1923,
+      -496,
+      -6754,
+      12420,
+      -6865
+    ],
+    "controls": {
+      "constant_coefficient_mutant_rejected_at_all_three_primes": true
+    },
+    "degree": 8,
+    "factor_certificates": [
+      {
+        "factor_degrees": [
+          1,
+          7
+        ],
+        "factors": [
+          [
+            1,
+            -1
+          ],
+          [
+            1,
+            2,
+            -2,
+            3,
+            1,
+            2,
+            3,
+            -2
+          ]
+        ],
+        "prime": 7
+      },
+      {
+        "factor_degrees": [
+          8
+        ],
+        "factors": [
+          [
+            1,
+            9,
+            4,
+            -1,
+            9,
+            -3,
+            3,
+            8,
+            8
+          ]
+        ],
+        "prime": 29
+      },
+      {
+        "factor_degrees": [
+          1,
+          2,
+          5
+        ],
+        "factors": [
+          [
+            1,
+            32
+          ],
+          [
+            1,
+            -2,
+            -32
+          ],
+          [
+            1,
+            23,
+            22,
+            -22,
+            -4,
+            -35
+          ]
+        ],
+        "prime": 73
+      }
+    ],
+    "galois_group": "S_8",
+    "proof": [
+      "Irreducible mod 29 implies irreducible over Q and a transitive Galois action.",
+      "The mod-7 cycle type (1,7) makes that transitive action 2-transitive.",
+      "The fifth power of a mod-73 cycle of type (1,2,5) is a transposition.",
+      "2-transitivity conjugates that transposition to every transposition, giving S_8."
+    ]
+  },
+  "status": "verified-algebra-only"
+}

@@ -1,0 +1,14 @@
+{
+  "format": "upper-bound-report-claims-v1",
+  "issue": "https://github.com/jlevy/squares/issues/484",
+  "source": "https://github.com/TheSnakeFang/squarepack-certs",
+  "revision": "c75bebd87933416d3e1c7aba35ec733ea8ac7da0",
+  "read_on": "2026-10-10",
+  "read_at_main": "657cc486130e9020608ff244d8a86d1d04153634",
+  "horizon": 324,
+  "results": [
+    {"n": 308, "certificate": "n0308/n0308.cert", "format": "evand-cert", "requested": true, "replayed": true, "offered_side": "17.999309855162748", "printed_in": "https://github.com/jlevy/squares/issues/484", "exact_side": "496906684150483564257053639569689586211617178631487101147707692165192097/27606985387162255916575391130373464080218179016903156277167119960899584", "ceiling": "17.9993098551627480", "first_committed": "2026-10-10T02:22:44Z", "grid_side": "18", "case": {"source_key": "[Kingbird]", "holders": "the grid", "reported_value": "18.0", "verified_value": "18", "evidence": ["E-basic-grid-upper"], "exact_side": "18", "relation": "below", "difference": "19052818437042241303400777032767232310043672769711841300467131000415/27606985387162255916575391130373464080218179016903156277167119960899584"}, "pending": [], "smallest": "this certificate"},
+    {"n": 343, "certificate": "n0343/n0343.cert", "format": "evand-cert", "requested": true, "replayed": true, "offered_side": "18.994903529220497", "printed_in": "https://github.com/jlevy/squares/issues/484", "exact_side": "789017423383549575129979982295456201/41538374868278621028243970633760768", "ceiling": "18.9949035292204970", "first_committed": "2026-10-10T02:22:44Z", "grid_side": "19", "case": null, "pending": [{"report": "#470", "url": "https://github.com/Mishapolk/square-packing-records/blob/dd3da5c753c5ded6cb3b89476193b7b801005415/README.md", "holders": "Mishapolk", "printed": "19.000000000007", "rounding": "unstated", "relation": "below", "difference": "51684354012449470393898948534203807235431/10141204801825835211973625643008000000000000"}], "smallest": "this certificate"},
+    {"n": 344, "certificate": "n0344/n0344.cert", "format": "evand-cert", "requested": true, "replayed": true, "offered_side": "18.995489275430816", "printed_in": "https://github.com/jlevy/squares/issues/484", "exact_side": "262204097424407923560664994905454377606094204426897481135606818230728643/13803492693581127593573619627880932674597656005283617050019749892718592", "ceiling": "18.9954892754308151", "first_committed": "2026-10-10T02:22:44Z", "grid_side": "19", "case": null, "pending": [{"report": "#470", "url": "https://github.com/Mishapolk/square-packing-records/blob/dd3da5c753c5ded6cb3b89476193b7b801005415/README.md", "holders": "Mishapolk", "printed": "19.002369297056", "rounding": "unstated", "relation": "below", "difference": "23185627010478513900974698678453447403739771935806154563006086202949090786637/3369993333393829978899809479463118328759193360664945568852478001152000000000000"}], "smallest": "this certificate"}
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "issue": 446,
+  "comment_url": "https://github.com/jlevy/squares/issues/446#issuecomment-6064831911",
+  "comment_created_at": "2026-10-08T16:53:52Z",
+  "source_repository": "wand125/square-packing",
+  "source_commit": "bf85d6b537a7e854ac2f885c871474ea46db65ac",
+  "source_path": "problems/square-lower-bounds/certificates/mixed_n27_L5655",
+  "n": 27,
+  "reported_lower_bound": "1131/200",
+  "replaces_reported_lower_bound": "2261/400",
+  "source_declared_improvement": "1/400",
+  "archive_asset_id": 622426767,
+  "archive_metadata": {
+    "asset": "certificates__mixed_n27_L5655.tar.gz",
+    "size": 642635,
+    "sha256": "4f1b449af9de93f0384c7c67f52a3848717c996ddc1ea22f90185cbd1da859cf"
+  },
+  "candidate_sha256_declared": "971988936fe73cf62ffbd8645f9aad5006b7bb297d3a5bfa5d9226d75bec6ec8",
+  "candidate_digest_declared": "3bd905d30d38a83168ae16009a10c05ec8e50256f33c2050da7692ee5826e566",
+  "source_declared_net": {
+    "step": "1/5002",
+    "last": 2072
+  },
+  "source_declared_mass": "2699999/100000",
+  "source_declared_verifier_archive_sha256": "e495f9bf14dc5ca20d8890aa0601183b8b955b94580c4e99ddffa64254371e81",
+  "source_declared_build_digest": "ab6e33e164dbc5c32b40349ba55981b58e630b5eef59534196a69d259404fd7c",
+  "schema": "authored-source-followup/1",
+  "status": "reported; source-only",
+  "original_byte_custody": {
+    "complete": true,
+    "stored_archive_bytes": 642635,
+    "archive_sha256": "4f1b449af9de93f0384c7c67f52a3848717c996ddc1ea22f90185cbd1da859cf",
+    "outer_members": 8,
+    "inner_members": 20,
+    "decoded_materializations_bytes": 2580452,
+    "raw_sources_retained_outside_live_git": true,
+    "sealed_manifest_hashes_matching": 15,
+    "repeated_outer_inner_payloads_matching": 6
+  },
+  "maintained_input_premises": {
+    "candidate_rows": 714,
+    "positive_rows": 714,
+    "mass": "2699999/100000",
+    "core": "4999/5000",
+    "step": "1/5002",
+    "directions": 2073,
+    "checks": {
+      "a_positive_step_and_count": true,
+      "b_core_fits": true,
+      "c_reaches_past_pi_over_4": true,
+      "d_last_tangent_at_most_half": true,
+      "e_tangent_form": true
+    },
+    "facts": {
+      "step": "1/5002",
+      "count": "2073",
+      "endpoint": "1036/2501",
+      "endpoint_check": "367/6255001",
+      "rotated_side_upper": "25009997/25010000",
+      "side_margin": "3/25010000",
+      "per_edge_margin": "3/50020000",
+      "tangent_form": "500400014977/500400075000"
+    },
+    "entrypoints": [
+      "audit_wand125_declared_net.measure",
+      "audit_wand125_declared_net.declared_net",
+      "audit_wand125_declared_net.semantic_digest"
+    ],
+    "audit_wall_seconds": 0.06693762500071898,
+    "scope": "Exact input premises only; continuous-orientation conclusion remains conditional on complete native capture."
+  },
+  "source_reported_outcomes": {
+    "full_direction_positive_count": 2073,
+    "check2_wall_seconds": 1061.844175785,
+    "prepublication_wall_seconds": 4380,
+    "sampled_negative_directions": 32,
+    "sampled_mass_scale": "197/200",
+    "whole_net_negative_control": false,
+    "attribution": "Source-author receipts, not fresh project execution or independent result review."
+  },
+  "readme_editions": {
+    "sealed_sha256": "5b642c8c39bedb6b010b8ddac3916719921d7c95500953f0f2193706896ef928",
+    "current_pinned_sha256": "3db8bea74db000d088074a2e0c028bf12a928f0c4f5c486e1ca8fa87db6c1129",
+    "different": true,
+    "both_preserved_in_original_archive_and_pinned_document": true
+  },
+  "lineage": "builds-on-project; author verifier copies this project's geometric kernel",
+  "license_status": "Whole nested bundle unrecorded; enclosing MIT notice does not settle nested verifier redistribution.",
+  "fresh_project_native_replay": false,
+  "author_code_executed": false,
+  "bound_adopted": false,
+  "remaining": [
+    "Fresh maintained full 2073-direction capture over the complete centre domain",
+    "Whole-net v2 rejection controls and restored positives",
+    "Actual private-worker full input/result binding and independent result review",
+    "Reviewed explicit research budget and source/license disposition"
+  ]
+}
