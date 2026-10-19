@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import re
-from collections.abc import Mapping, Sequence
+from collections.abc import Callable, Mapping, Sequence
 from decimal import Decimal, InvalidOperation
 
 NUMERICAL_METHODS = frozenset({"numerical-f64", "numerical-multiprecision"})
@@ -51,47 +51,249 @@ def _scope_contains(scope: object, n: int) -> bool:
     return isinstance(lower, int) and isinstance(upper, int) and lower <= n <= upper
 
 
-#: The origins of a run that can discharge a conditional theorem's hypothesis: a passing
-#: replay or audit here, or a third party's replay retained here.
+#: The origins of execution beyond the producer, eligible for confirmation.
 DISCHARGING_ORIGINS = frozenset({"replayed-here", "audited-here", "independently-external"})
+#: Origins of a run made here, by this repository.
+HERE_ORIGINS = frozenset({"replayed-here", "audited-here"})
+
+
+def sampled(entry: Mapping[str, object]) -> bool:
+    """Samples and malformed coverage cannot establish a whole claim."""
+    raw = entry.get("independence")
+    if "independence" in entry and not isinstance(raw, Mapping):
+        return True
+    if not isinstance(raw, Mapping) or "coverage" not in raw:
+        return False
+    coverage = raw["coverage"]
+    return not isinstance(coverage, Mapping) or coverage.get("extent") != "full"
+
+
+#: The actor each origin names: the producer's run is external, a retained third-party
+#: run is independently-external, and a run here names the repository.
+ORIGIN_ACTORS: Mapping[str, str] = {
+    "external": "source-author",
+    "independently-external": "independent-external",
+    "replayed-here": "repository",
+    "audited-here": "repository",
+}
+
+
+def formal_actor_origin_problems(evidence: Mapping[str, object]) -> list[str]:
+    """A formal execution's actor must agree with its displayed origin.
+
+    A proof-assistant build here is `replayed-here`. `audited-here` is refused for one:
+    reading another party's build receipt is that entry's `external_review`, not a run
+    here, and the label would otherwise let a receipt audit pass as a build here.
+    """
+    if evidence.get("method") != "proof-assistant-checked":
+        return []
+    if evidence.get("origin") == "audited-here":
+        return [
+            (
+                "a proof-assistant build here is replayed-here; an audit of another "
+                "party's build is a read on that build's own entry, not audited-here"
+            )
+        ]
+    expected = ORIGIN_ACTORS.get(str(evidence.get("origin")))
+    if expected is None or evidence.get("performed_by") != expected:
+        return ["formal execution actor performed_by must agree with its origin"]
+    return []
+
+
+def confirming_execution(evidence: Mapping[str, object]) -> bool:
+    """Execution beyond the producer, by the actor its origin names, for every method.
+
+    An origin label cannot turn the producer's execution into confirmation, and a run
+    whose actor is unidentified or disagrees with its origin confirms nothing.
+    """
+    origin = evidence.get("origin")
+    return (
+        isinstance(origin, str)
+        and origin in DISCHARGING_ORIGINS
+        and evidence.get("performed_by") == ORIGIN_ACTORS[origin]
+    )
+
+
+def verified_here(evidence: Mapping[str, object]) -> bool:
+    """Whether verified evidence can carry a case's verified lane.
+
+    A machine method's run counts only when this repository ran it, by the actor its
+    origin names, and a formal build only as admitted. The producer's own build can
+    earn V for the result it reports (epistemics.md, Reported Formal Proofs and Source
+    Builds), and a third party's retained replay can confirm it, but "for a result by
+    others, that is a complete replay here and a review of its mathematics"
+    (frontier/README.md; epistemics.md's *Integrated* end point). Published and audited
+    proofs are read, not run, and keep their own rules.
+    """
+    return evidence.get("method") not in MACHINE_FORMAL_METHODS or (
+        confirming_execution(evidence)
+        and evidence.get("origin") in HERE_ORIGINS
+        and not external_formal_build_problems(evidence)
+    )
+
+
+#: The hypothesis a malformed `proof.conditional_on` stands for: one nothing discharges.
+MALFORMED_PREMISE = "an unreadable proof.conditional_on"
 
 
 def conditions(evidence: Mapping[str, object]) -> list[tuple[str, list[str]]]:
     """The hypotheses a proved theorem takes and does not prove (`proof.conditional_on`),
-    each with the entries recorded as discharging it, in record order."""
+    each with the entries recorded as discharging it, in record order.
+
+    Fails closed: a present `conditional_on` that is not a list, and each item that is
+    not a mapping, is one hypothesis nothing discharges, so a malformed record never
+    reads as unconditional. The schema refuses those shapes as well.
+    """
     proof = evidence.get("proof")
-    if not isinstance(proof, Mapping):
+    if not isinstance(proof, Mapping) or "conditional_on" not in proof:
         return []
     items = proof.get("conditional_on")
     if not isinstance(items, list):
-        return []
+        return [(MALFORMED_PREMISE, [])]
     return [
         (str(item.get("hypothesis")), _string_list(item.get("discharged_by")))
-        for item in items
         if isinstance(item, Mapping)
+        else (MALFORMED_PREMISE, [])
+        for item in items
     ]
 
 
-def discharges(evidence: Mapping[str, object] | None) -> bool:
-    """Whether an entry can discharge a hypothesis: a verified run with a passing
-    replay, performed here or retained here from a third party."""
+def discharges(evidence: Mapping[str, object] | None, *, confirming: bool = True) -> bool:
+    """A complete machine execution can discharge a premise on the selected axis.
+
+    Confirmation requires execution beyond the producer. Verification also accepts the
+    producer's own formal build once it is admitted (`external_formal_build_problems`);
+    a producer's exact or interval run has no admission rule and discharges nothing.
+    Only machine executions discharge: a published or audited proof of a premise is
+    read, not run (epistemics.md, Reported Formal Proofs and Source Builds). This checks
+    one run, not its own premise closure.
+    """
     return (
         evidence is not None
         and evidence.get("assurance") == "verified"
-        and evidence.get("origin") in DISCHARGING_ORIGINS
+        and evidence.get("method") in MACHINE_FORMAL_METHODS
+        and bool(evidence.get("certificate"))
+        and bool(evidence.get("replay"))
         and evidence.get("replay_status") == "passed"
+        and not sampled(evidence)
+        and not external_formal_build_problems(evidence)
+        and (
+            confirming_execution(evidence)
+            or (not confirming and formal_run_elsewhere(evidence))
+        )
     )
 
 
+#: Support already settled for an entry object within one closure, keyed by identity.
+_Memo = dict[int, int]
+
+
+def _hypothesis_support(
+    evidence: Mapping[str, object],
+    refs: list[str],
+    evidence_by_id: Mapping[str, Mapping[str, object]],
+    level: Callable[[Mapping[str, object]], int],
+    *,
+    confirming: bool,
+    active: frozenset[str],
+    memo: _Memo,
+) -> tuple[int, bool]:
+    """The strongest discharge of one hypothesis, and whether a cycle was cut below it."""
+    best, cut = 0, False
+    for ref in refs:
+        other = evidence_by_id.get(ref)
+        if (
+            other is None
+            or not discharges(other, confirming=confirming)
+            or not _scope_covers(other.get("scope"), evidence.get("scope"))
+        ):
+            continue
+        value, hit = _support(
+            other, evidence_by_id, level, confirming=confirming, active=active, memo=memo
+        )
+        best, cut = max(best, value), cut or hit
+    return best, cut
+
+
+def _support(
+    evidence: Mapping[str, object],
+    evidence_by_id: Mapping[str, Mapping[str, object]],
+    level: Callable[[Mapping[str, object]], int],
+    *,
+    confirming: bool,
+    active: frozenset[str],
+    memo: _Memo,
+) -> tuple[int, bool]:
+    """`claim_support_level`, with whether the answer depended on a cycle cut.
+
+    An answer reached without cutting a cycle is the same from every path: if an entry
+    on another path to it were reachable below it, that path and this subtree would form
+    a cycle through it, which this evaluation would have cut. Such answers are
+    memoized, so a shared sub-chain is settled once per closure.
+    """
+    key = str(evidence.get("id", ""))
+    if key in active:
+        return 0, True
+    if (known := memo.get(id(evidence))) is not None:
+        return known, False
+    active = active | {key}
+    result, cut = level(evidence), False
+    for _, refs in conditions(evidence):
+        value, hit = _hypothesis_support(
+            evidence,
+            refs,
+            evidence_by_id,
+            level,
+            confirming=confirming,
+            active=active,
+            memo=memo,
+        )
+        result, cut = min(result, value), cut or hit
+    if not cut:
+        memo[id(evidence)] = result
+    return result, cut
+
+
+def claim_support_level(
+    evidence: Mapping[str, object],
+    evidence_by_id: Mapping[str, Mapping[str, object]],
+    level: Callable[[Mapping[str, object]], int],
+    *,
+    confirming: bool,
+    active: frozenset[str] = frozenset(),
+) -> int:
+    """The weakest support in an acyclic proof chain, using only supplied evidence.
+
+    Each hypothesis needs one complete, scope-covering discharge. Alternative proofs
+    take their maximum; serial premises take their minimum. The caller supplies the
+    axis's rung for each atom, so an exact premise cannot silently earn formal rung 5.
+    """
+    return _support(
+        evidence, evidence_by_id, level, confirming=confirming, active=active, memo={}
+    )[0]
+
+
 def undischarged(
-    evidence: Mapping[str, object], evidence_by_id: Mapping[str, Mapping[str, object]]
+    evidence: Mapping[str, object],
+    evidence_by_id: Mapping[str, Mapping[str, object]],
+    *,
+    confirming: bool = True,
 ) -> list[str]:
     """The hypotheses of a conditional theorem that no recorded entry discharges: the
     entry is verified as an implication only, and nothing here has decided its premise."""
+    memo: _Memo = {}
     return [
         hypothesis
         for hypothesis, refs in conditions(evidence)
-        if not any(discharges(evidence_by_id.get(ref)) for ref in refs)
+        if not _hypothesis_support(
+            evidence,
+            refs,
+            evidence_by_id,
+            lambda _: 1,
+            confirming=confirming,
+            active=frozenset({str(evidence.get("id", ""))}),
+            memo=memo,
+        )[0]
     ]
 
 
@@ -102,21 +304,36 @@ def conditional_problems(evidence_by_id: Mapping[str, Mapping[str, object]]) -> 
     errors: list[str] = []
     for evidence_id, evidence in evidence_by_id.items():
         for hypothesis, refs in conditions(evidence):
+            if hypothesis == MALFORMED_PREMISE:
+                errors.append(
+                    f"{evidence_id}: proof.conditional_on is not a list of hypotheses"
+                )
             for ref in refs:
                 other = evidence_by_id.get(ref)
                 if other is None:
                     errors.append(
                         f"{evidence_id}: {hypothesis} is discharged by unknown evidence {ref}"
                     )
-                elif not discharges(other):
+                elif not discharges(other, confirming=False):
                     errors.append(
                         f"{evidence_id}: {hypothesis} is discharged by {ref}, which is not "
-                        "a verified replay with a passing status, here or retained here"
+                        "a verified replay with a passing status and complete coverage"
                     )
                 elif not _scope_covers(other.get("scope"), evidence.get("scope")):
                     errors.append(
                         f"{evidence_id}: {hypothesis} is discharged by {ref}, whose scope "
                         "does not cover this entry's"
+                    )
+                elif not claim_support_level(
+                    other,
+                    evidence_by_id,
+                    lambda _: 1,
+                    confirming=False,
+                    active=frozenset({evidence_id}),
+                ):
+                    errors.append(
+                        f"{evidence_id}: {hypothesis} is discharged by {ref}, whose "
+                        "own premises are unresolved or circular"
                     )
     return errors
 
@@ -133,11 +350,97 @@ def _scope_covers(outer: object, inner: object) -> bool:
     return all(_scope_contains(outer, n) for n in range(lower, upper + 1))
 
 
+def formal_run_elsewhere(evidence: Mapping[str, object]) -> bool:
+    """A proof-assistant execution this repository did not perform: the producer's own
+    build, or a third party's build retained here. Its pass is known only from what it
+    left behind, so both are held to the same retained-evidence rules; a stronger claim
+    must not need less evidence than a weaker one. Only `replayed-here` is a build here
+    (`formal_actor_origin_problems`)."""
+    return evidence.get("method") == "proof-assistant-checked" and not (
+        evidence.get("origin") == "replayed-here"
+        and evidence.get("performed_by") == "repository"
+    )
+
+
+def external_formal_build_problems(evidence: Mapping[str, object]) -> list[str]:
+    """Require inspected execution evidence before crediting a formal build run elsewhere.
+
+    Source verification earns V independently of C. A credible announcement, a source
+    tree or a partial build alone must not become a passing full-theorem execution, and
+    a third party's build needs at least what the producer's does. Review owns receipt
+    contents and statement fidelity; this checks their record.
+    """
+    if evidence.get("method") != "proof-assistant-checked":
+        return []
+    errors = formal_actor_origin_problems(evidence)
+    if not formal_run_elsewhere(evidence):
+        return errors
+    errors.extend(
+        f"a formal build run elsewhere requires retained {field}"
+        for field in ("build_receipt", "axioms_receipt")
+        if not evidence.get(field)
+    )
+    proof = evidence.get("proof")
+    required = {"source", "theorem", "scope", "pinpoints", "assumptions", "audit_record"}
+    if not isinstance(proof, Mapping) or not required.issubset(proof):
+        errors.append("a formal build run elsewhere requires a scoped proof and audit_record")
+    independence = evidence.get("independence")
+    coverage = independence.get("coverage") if isinstance(independence, Mapping) else None
+    if not isinstance(coverage, Mapping) or coverage.get("extent") != "full":
+        errors.append("a formal build run elsewhere requires explicit full coverage")
+    review = evidence.get("external_review")
+    if (
+        not isinstance(review, Mapping)
+        or review.get("state") != "informally-verified"
+        or not all(review.get(key) for key in ("date", "reviewed_by", "note"))
+    ):
+        errors.append(
+            "a formal build run elsewhere requires a qualifying receipt and statement read"
+        )
+    if evidence.get("replay_status") != "passed":
+        errors.append("a formal build run elsewhere must record its passing execution")
+    return errors
+
+
+#: The fields that name one execution's own record: its build and its axiom report.
+RECEIPT_FIELDS = ("build_receipt", "axioms_receipt")
+
+
+def shared_receipt_problems(evidence_by_id: Mapping[str, Mapping[str, object]]) -> list[str]:
+    """A receipt records one execution, so every entry citing it names one actor.
+
+    A confirming entry that carries the producer's `build_receipt` or `axioms_receipt`
+    is the producer's run under another label; refusing the shared receipt keeps
+    relabelling from turning the source's execution into a third party's or this
+    repository's. A path is one receipt whichever of the two fields names it.
+    Certificates are not compared: a replay here re-runs the source's certificate.
+    """
+    actors: dict[str, dict[tuple[str, str], list[str]]] = {}
+    for evidence_id, evidence in evidence_by_id.items():
+        actor = (str(evidence.get("origin")), str(evidence.get("performed_by")))
+        for field in RECEIPT_FIELDS:
+            receipt = evidence.get(field)
+            if isinstance(receipt, str) and receipt:
+                cited = actors.setdefault(receipt, {}).setdefault(actor, [])
+                cited.append(f"{evidence_id} ({field})")
+    return [
+        f"{receipt}: one receipt is cited by entries of different actors ("
+        + "; ".join(
+            f"{', '.join(ids)} as {origin}/{performer}"
+            for (origin, performer), ids in sorted(by_actor.items())
+        )
+        + ")"
+        for receipt, by_actor in sorted(actors.items())
+        if len(by_actor) > 1
+    ]
+
+
 def check_evidence_semantics(evidence: Mapping[str, object]) -> list[str]:
     """Return assurance-method violations for one evidence record."""
     errors: list[str] = []
     evidence_id = evidence.get("id", "<unknown evidence>")
     prefix = f"{evidence_id}: "
+    errors.extend(prefix + problem for problem in external_formal_build_problems(evidence))
     assurance = evidence.get("assurance")
     method = evidence.get("method")
 
@@ -322,6 +625,12 @@ def _check_bound_evidence(
         if verified:
             if evidence.get("assurance") != "verified":
                 errors.append(f"{label}: evidence {ref} is not verified")
+            elif not verified_here(evidence):
+                errors.append(
+                    f"{label}: evidence {ref} is a machine run not made here; the verified "
+                    "lane takes another party's machine result only through a complete "
+                    "replay here"
+                )
             if evidence.get("claim") not in {expected_claim, "exact-value"}:
                 errors.append(
                     f"{label}: evidence {ref} has claim {evidence.get('claim')!r}, "
@@ -388,9 +697,18 @@ def _check_rigidity_claim(
             errors.append("verified requires a formal method")
         # A verified claim must rest on verified evidence. Without this the block's own
         # label is the whole of the argument, which is what the contract exists to refuse.
-        backing = [record for record in cited if record.get("assurance") == "verified"]
+        # A machine run not made here, the producer's or a third party's, is not backing
+        # either, as in the verified bound lanes (`verified_here`).
+        backing = [
+            record
+            for record in cited
+            if record.get("assurance") == "verified" and verified_here(record)
+        ]
         if not backing:
-            errors.append("verified rigidity requires at least one verified evidence record")
+            errors.append(
+                "verified rigidity requires at least one verified evidence record "
+                "that is a proof or a machine run made here"
+            )
         # ...and on evidence about rigidity. Verified alone let a rigidity claim rest on a
         # record of the right n proving something else entirely -- an upper bound, say --
         # which is backing in name only. `_check_bound_evidence` already constrains claim
@@ -402,16 +720,19 @@ def _check_rigidity_claim(
             )
         if method in MACHINE_FORMAL_METHODS:
             backed = rigidity.get("certificate") and rigidity.get("replay")
+            # A delegated certificate and replay come from a run made here, as backing
+            # does: the producer's own run cannot supply the block's machine method.
             delegated = any(
                 record.get("assurance") == "verified"
                 and record.get("certificate")
                 and record.get("replay")
+                and verified_here(record)
                 for record in cited
             )
             if not backed and not delegated:
                 errors.append(
                     f"{method} requires certificate and replay, "
-                    "on the block or on a cited verified record"
+                    "on the block or on a cited verified record made here"
                 )
 
     return errors

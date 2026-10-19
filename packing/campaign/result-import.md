@@ -492,7 +492,18 @@ credit.
 
 Record the claim as reported, by the frontier README’s rules: a reported evidence entry,
 a coverage entry that cites it, the reported lane of each case it improves, and a
-register entry with its ratings and `next_rung`. Six rules are the process’s own:
+register entry with its ratings and `next_rung`.
+
+For a formal proof, also inspect the producer’s execution evidence under
+[epistemics.md → Reported Formal Proofs and Source Builds](../../epistemics.md#reported-formal-proofs-and-source-builds).
+When a complete source build qualifies, keep the literal reported entry and add a
+separate external source-build entry.
+It can raise V at intake; its passing status describes the producer’s run and cannot
+raise C beyond a qualifying read.
+An announcement, source scan, private run summary with unresolved build coverage, or
+partial build does not qualify as complete execution.
+
+The six record rules are:
 
 - **`attribution.published` is the claim’s date, not the pin’s:** the date the source
   gives for it, or the UTC date of the first commit that contains the certificate; for
