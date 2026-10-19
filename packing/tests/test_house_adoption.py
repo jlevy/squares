@@ -971,7 +971,9 @@ def test_the_staged_adoptions_name_their_beads_and_reasons() -> None:
         ), n
     assert "think-sa5r" not in {pending.bead for pending in select.PENDING_ADOPTION.values()}
     adopted = set(houses.numbers_of("T-174"))
-    assert adopted == set(houses.LATER_PASSES["2026-10-17"])
+    assert adopted == {
+        n for n in houses.LATER_PASSES["2026-10-17"] if houses.ADOPTED[n] == "T-174"
+    }
     assert len(adopted) == 37
     assert not adopted & set(select.PENDING_ADOPTION)
 

@@ -489,7 +489,7 @@ regularizer and 21 by the grid-slack generator (1 by its version 0 and 20 by its
 1).
 
 On 17 October 2026 the first adoption under the owner’s house rule (think-3mry) moved 37
-houses to PingYou Ltd’s certificates of PR #574 (T-174), 1.7e-99 to 4.6e-61 below the
+houses to PingYou Ltd’s certificates of PR #574 (T-174), 1.7e-99 to 1.8e-19 below the
 earlier ones: 68, 84, 86, 103, 105, 108, 110, 127, 130 to 132, 155, 172, 179 to 182,
 206, 208 to 210, 228, 238 to 240, 261, 263, 268 to 270, 272, 273, 297 and 305 to 308.
 Every earlier view there was drawn at the earlier house’s side, now above $U$, so 28
