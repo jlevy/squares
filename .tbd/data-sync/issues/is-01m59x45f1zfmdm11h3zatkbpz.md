@@ -5,17 +5,18 @@ title: Stabilize main browser tabs-rule negative-control diagnostics
 kind: bug
 status: closed
 priority: 1
-version: 6
+version: 7
 delegate: claude-code@spud10.local
 labels: []
 dependencies: []
 child_order_hints:
   - is-01m59xqxsanjw4ka6c4n3jbq4f
   - is-01m59y31hw55x5tde7na26w6tp
+  - is-01m59ycca3xrarayfebxxz1g6x
 hold: null
 hold_until: null
 created_at: 2026-10-19T11:00:39.519Z
-updated_at: 2026-10-19T11:17:31.323Z
+updated_at: 2026-10-19T11:22:37.251Z
 started_at: 2026-10-19T11:01:13.252Z
 closed_at: 2026-10-19T11:11:38.367Z
 close_reason: "Diagnosis and source-repair scope complete: deterministic actual-film37.59px before/after observer proof;4focused tests pass; exact4line test-only PR683 published at8c935cc2b12d77d24ad5beda98d110a0787b878b on6833d05aa. Normal hooks and focused Ruff pass. Local broad gate has explicit sparse-input failures, not claimed green. Parent explicitly owns hostedCI/finalgate and independent Astra683 review; PR not merged. Retained diagnosis .codex/intake-resume-20261019/main-browser-diagnostic-repair.md."
