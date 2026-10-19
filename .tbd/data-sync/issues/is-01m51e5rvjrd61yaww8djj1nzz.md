@@ -5,8 +5,8 @@ title: "Import evand: exact algebraic sides for 22 current best-known packings (
 kind: task
 status: in_progress
 priority: 1
-version: 23
-delegate: user-eb-intake-1016
+version: 25
+delegate: lane-658
 labels:
   - result-import
 dependencies: []
@@ -17,7 +17,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-16T04:05:28.050Z
-updated_at: 2026-10-18T08:51:47.833Z
+updated_at: 2026-10-19T20:37:11.755Z
 started_at: 2026-10-16T04:05:36.125Z
 ---
 Stage 1 triage of jlevy/squares#639 (evand, Evan Daniel, "Exact algebraic sides for 22 current best-known packings (minimal polynomial, isolating interval, exact configuration): registration request", opened 2026-10-16T03:37:13Z, labelled `intake`, no comments when read at about 04:20Z). Intake pass 2026-10-16 (epic think-mdnn), read-only: nothing was run but exact sign evaluations of the source's polynomials at the record's rationals (seconds), and nothing of the source is retained yet.
@@ -135,3 +135,5 @@ Replace "The case pages keep their houses until adoption, which is the owner's, 
 The supersession note of ~11:05Z still applies: if T-193 is not yet at V3/C3 on main when this reply is posted, the reply must not say it is confirmed.
 
 2026-10-18 W1 intake (think-xmxb): New evidence at evand/square-packing 5ca0dc3ae7a4eebce16838bf41bedc2ce7e98241: exact three-angle witness at232 over degree14 K(sqrt2), same side as degree7 exact form, verify_exact.py claimed VALID and Lean Sqpack.Exact.Packs.N232R3.packs standard axioms; tasks/reg-cert-232/README.md. Retain/review and classify evidence update versus separate formalization. No build/replay here; T-193 underlying result keeps identity.
+
+2026-10-19 lane-658: taken over by the 19 October handoff (issue #684) to land PR #658. Worktree branch lane-658/records-193-194: fast-forwarded #658 head 3022eb984 to checkpoint codex/handoff-20261019/658 d0b9ec2f9, merged origin/main 14fd9e27f (#685, v0.7.32) cleanly as c41eb33ec. Next: paper decision (AM1), re-pin, review round D, edition last, merge; then stage 7 replies.

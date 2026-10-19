@@ -5,15 +5,15 @@ title: "Review: mathematical correctness of Fitzharding's s(19) Lean proof (#640
 kind: task
 status: in_progress
 priority: 1
-version: 13
-delegate: user-eb-review-640
+version: 15
+delegate: lane-658
 labels: []
 dependencies: []
 parent_id: is-01m51e5sp1t03c20hqp7d3wajm
 hold: null
 hold_until: null
 created_at: 2026-10-16T04:25:48.211Z
-updated_at: 2026-10-17T07:10:34.591Z
+updated_at: 2026-10-19T20:37:03.451Z
 started_at: 2026-10-16T09:57:24.915Z
 ---
 Stage 4's review lane for #640 (think-a4x3): a mathematical-correctness review of Oscar Fitzharding's Lean proof that s(19) = 3 + 4 sqrt 2 / 3 (ofitzharding/sq19 at 34fb2b7bc39465db368c45cb48d4db58829d3051, tag v1.0.0), as campaign/result-import.md stage 4 ("Who reviews, and when") requires for every proof an import registers, and as T-154's two reviews did for his s(17) proof.
@@ -46,3 +46,5 @@ user-eb-addr-655 12:12Z: done. Head b47efdca4; CI green (runs 38897329248, 38897
 2026-10-17 user-eb-addr-658: pushed 764cf17ed (main merge + A1/A6-A9 fixes + render-backed papers record); review A dispositions posted (pullrequestreview-5556221912). CI at 764cf17ed: all green except validate/packing-required on the site release impact (coordinator's edition). A2-A5 wait on #660 under think-3q9x.
 
 2026-10-17 user-eb-addr-658: #660 merged (804eff369); merged into #658 (1af453321), prepared fix landed as 8f46741ad (tree identical to the rehearsed 7a51693af), papers' record re-rendered (a0f762262), re-pinned (a0c9087d5), pushed. select_houses --all --check exit 0; 23 test files 941 passed; records tier passes except the site edition. Dispositions update: pullrequestreview-5556772214. think-3q9x can close at merge.
+
+2026-10-19 lane-658: taken over by the 19 October handoff (issue #684) to land PR #658. Worktree branch lane-658/records-193-194: fast-forwarded #658 head 3022eb984 to checkpoint codex/handoff-20261019/658 d0b9ec2f9, merged origin/main 14fd9e27f (#685, v0.7.32) cleanly as c41eb33ec. Next: paper decision (AM1), re-pin, review round D, edition last, merge; then stage 7 replies.

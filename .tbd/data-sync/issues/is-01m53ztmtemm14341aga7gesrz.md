@@ -5,8 +5,8 @@ title: "PR #658: land T-193's house-gate change after #660 merges (review A2 to 
 kind: task
 status: in_progress
 priority: 1
-version: 5
-delegate: user-eb-addr-658
+version: 7
+delegate: lane-658
 labels:
   - result-import
 dependencies: []
@@ -14,7 +14,7 @@ parent_id: is-01m51e5r3sg4h1wcrh7c826v7b
 hold: null
 hold_until: null
 created_at: 2026-10-17T03:52:26.702Z
-updated_at: 2026-10-17T07:10:29.899Z
+updated_at: 2026-10-19T20:36:59.317Z
 started_at: 2026-10-17T03:52:33.493Z
 ---
 PR #658's review A (findings A2 to A5) asks that T-193's exemption from the house gate be bounded, per count and owned by `select_houses`. Under the owner's house rule of 16 October 2026, implemented by PR #660, no exemption is allowed at all, and #660's guard tests fail if #658's `deferred_results` merges. The fix needs #660's mechanism (`ALGEBRAIC_READERS`, `PENDING_ADOPTION` with `STAGING_REASONS`, `devtools.exact_sides`), so it lands on #658 after #660 merges to main.
@@ -39,3 +39,5 @@ What lands, as rehearsed on a local merge of #658 with #660's head f76706d17 (no
 blocked_on: none
 
 2026-10-17 user-eb-addr-658: #660 merged (804eff369); merged into #658 (1af453321), prepared fix landed as 8f46741ad (tree identical to the rehearsed 7a51693af), papers' record re-rendered (a0f762262), re-pinned (a0c9087d5), pushed. select_houses --all --check exit 0; 23 test files 941 passed; records tier passes except the site edition. Dispositions update: pullrequestreview-5556772214. think-3q9x can close at merge.
+
+2026-10-19 lane-658: taken over by the 19 October handoff (issue #684) to land PR #658. Worktree branch lane-658/records-193-194: fast-forwarded #658 head 3022eb984 to checkpoint codex/handoff-20261019/658 d0b9ec2f9, merged origin/main 14fd9e27f (#685, v0.7.32) cleanly as c41eb33ec. Next: paper decision (AM1), re-pin, review round D, edition last, merge; then stage 7 replies.
