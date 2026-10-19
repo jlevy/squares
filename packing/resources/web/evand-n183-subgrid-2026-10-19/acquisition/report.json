@@ -1,0 +1,59 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "https://github.com/jlevy/squares/issues/680",
+  "author": "Evan Daniel",
+  "source_key": "[Daniel n183 subgrid 2026-10-19]",
+  "report_evidence": "E-evand-680-n183-report",
+  "receipt_format": "evand-680-primary-exact-replay-v1",
+  "witness_prefix": "W-evand-680-primary-n",
+  "claim_limitations": "Only the original s183_h183b.cert at 3a9948c781be668b1547cc2bf64a0d1e614f9bca, admitted at expected n=183 with its exact rational side and all rows. Finite feasibility only. The regularized certificate, same-packing identity, no-expansion path, numerical KKT or local-minimum diagnostics, rigidity, priority and global optimality are not decided by this replay.",
+  "read_on": "2026-10-19",
+  "read_at_main": "2891494ee6b097aef023fcf5cbf43fd623768dbf",
+  "certificates": [
+    {
+      "n": 183,
+      "path": "search/packer/candidates/s183_h183b.cert",
+      "format": "evand-cert",
+      "offered": "13999580178736252502081470897571/1000000000000000000000000000000",
+      "first_committed": "2026-10-19T05:20:24Z"
+    }
+  ],
+  "requested": [
+    183
+  ],
+  "replayed": [
+    183
+  ],
+  "houses": [
+    {
+      "n": 183,
+      "reader": "grid",
+      "source_key": "[Kingbird]",
+      "holders": "trivial grid",
+      "reported_value": "14.0",
+      "verified_value": "14",
+      "evidence": [
+        "E-basic-grid-upper"
+      ]
+    }
+  ],
+  "pending": [],
+  "register": {
+    "title": "Evan Daniel n183 primary certificate at 3a9948c, issue680",
+    "headline": "Daniel reports a sub-grid packing of 183 squares, descended from Couzo's n182 packing",
+    "significance": 3,
+    "source_checks": "The author reports that both standalone exact checkers accept both source certificates. Those source programs have not run here. This declaration selects the original certificate only for the maintained repository geometry routes and their complete controls.",
+    "credit": "Evan Daniel after Francisco Couzo's n182 donor packing, through an explorer descendant, insertion, crossovers and refinement. A crossover mate was not logged. Claude assistance disclosed by the source.",
+    "next_rung": "Map the independent mathematical review and accepted replay to the actual registered claim in a separately reviewed change; the regularized view and source-checker execution remain open under think-1hmn. No rating or adoption change is made by creating this declaration or its receipt.",
+    "bead": "think-1hmn",
+    "bibliography": {
+      "authors": [
+        "Evan Daniel"
+      ],
+      "lineage": "builds-on-project",
+      "credit": "Daniel after Couzo",
+      "short_credit": "Daniel after Couzo",
+      "note": "Issue 680 and evand/square-packing 3a9948c781be668b1547cc2bf64a0d1e614f9bca; one n183 upper bound with original and regularized certificates. This declaration replays only the original. Numerical local optimality, no-expansion regularization path and public priority remain unproved source assertions."
+    }
+  }
+}

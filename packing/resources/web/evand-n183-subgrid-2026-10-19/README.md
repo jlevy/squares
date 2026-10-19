@@ -103,6 +103,42 @@ all planned routes, with a 360-second first-batch ceiling; it is not a measured 
 timing. The source report’s 12 seconds describes numerical production and does not price
 an exact checker. No new environment or compiled tool is needed.
 
+## Bounded Primary-Certificate Replay
+
+The maintained `devtools.upper_bound_reports` importer ran one complete batch on the
+original certificate, using the [primary-only declaration](acquisition/report.json).
+Custody admission precedes parsing; `evand-cert` requires expected n = 183, exactly 183
+pose rows and the declared exact rational side.
+The declaration does not name the regularized view as `same_packing`.
+
+Both repository geometry routes accepted the positive and rejected the duplicate-square
+and outside-container controls.
+Each route tested all 16,653 pairs in each of the three jobs: 99,918 pair decisions.
+Both positives have wall clearance exactly `5e-21` and positive pair gap about `1e-20`;
+the native receipt retains the exact fractions.
+
+The one-worker batch took 34.87 seconds wall time, within its 360-second ceiling; each
+child had a 100-second deadline.
+The receipt records 30.55 route CPU seconds, 31.27 summed job wall seconds and a longest
+job of 10.79 seconds.
+The subsequent `check --n 183` admitted all three jobs without deciding geometry again.
+
+- [Complete native receipt](receipts/exact-certification.json.xz)
+- [Batch declaration, commands, timings and outcomes](../../../campaign/issue-intake/intake-followup-20261019/n183-primary-replay.json)
+
+The two routes use `sqpack.witness.exact_verify` and
+`devtools.check_rational_witness_independent`. Their geometry implementations differ;
+they share the importer’s rational parser, half-angle conversion and Python runtime.
+No upstream checker ran.
+The original source generator was not rerun.
+
+This is unintegrated validation evidence under **think-1hmn**. Regularized-certificate
+replay and source-checker execution remain open.
+Mapping the independent mathematical review and deciding-program metadata to the actual
+registered claim requires a separate reviewed change; no assurance rating, case bound,
+house or result ID changes here.
+Endpoint feasibility would not establish same-packing identity or a no-expansion path.
+
 Independent mathematical review is **think-glg8**, separate from replay.
 It reviews the finite feasibility implication and both certificate views, preserves the
 numerical and lineage limits above, and runs only its own retained code.

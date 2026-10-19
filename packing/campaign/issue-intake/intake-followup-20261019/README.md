@@ -74,6 +74,24 @@ No house is adopted here.
 Any later adoption owes the project’s strong-generator regularization in that change;
 the source’s display view alone does not discharge it.
 
+### Bounded primary-certificate replay
+
+After the custody checkpoint, **think-1hmn** ran the maintained
+`devtools.upper_bound_reports` route on the original certificate only.
+The [batch record](n183-primary-replay.json) declares expected n = 183, the exact side,
+three complete jobs, one worker and a 100-second child deadline within the 360-second
+batch ceiling. Both repository geometry routes accepted the positive and rejected the
+duplicate-square and outside-container controls: 99,918 pair decisions in 34.87 seconds
+process wall time. Receipt admission also passed.
+
+The
+[source packet’s replay section](../../../resources/web/evand-n183-subgrid-2026-10-19/README.md#bounded-primary-certificate-replay)
+links the native receipt and records the shared parser and conversion boundary.
+No upstream checker ran; the regularized view and source-execution obligations remain
+open. The receipt is unintegrated validation evidence.
+The actual result ID, mapped review, deciding-program metadata, assurance decision,
+adoption and release disposition remain separate obligations.
+
 ## Manual Reads and Gate Evidence
 
 The two opening manual-source items are read at this checkpoint:
