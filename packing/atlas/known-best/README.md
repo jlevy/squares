@@ -543,16 +543,17 @@ read pending.
 Both generators then ran on it, on a shared host at a load average of about
 fifteen: Evan Daniel’s regularizer (`evand-regularize-adopt-2026-10-19-n183-evand`, 345
 CPU-seconds, 892 seconds of wall at two workers) and grid-slack at 0.5, 1 and 5 degrees
-(`grid-slack-adopt-2026-10-19-n183-grid-0.5`, `-grid-1` and `-grid-5`, about 152
-CPU-seconds each). Every view is admitted at row 10 at the witness’s own side.
+(`grid-slack-adopt-2026-10-19-n183-grid-0.5`, `-grid-1` and `-grid-5`, 352–388
+CPU-seconds each, about 1,114 in all).
+Every view is admitted at row 10 at the witness’s own side.
 The three grid-slack runs drew one view, which ties his same-side view on light, uneven
 and near-axis squares and on house sides, and draws one more angle class, one more hue
 and two fewer stage sides.
-So the selection, 1,586 seconds of wall at two workers, draws his same-side view: light
-/ uneven / near-axis squares 2 / 8 / 0, as the axis tool’s view draws them, against the
-house drawing’s 21 / 51 / 0; 18 angle classes and hues against 19; and 426 / 446 house
-and stage sides against the axis view’s 410 / 438 and the house drawing’s 327 / 390. It
-moves 24 squares, by at most 0.358, and turns none by more than 6.23 degrees.
+So the selection draws his same-side view: light / uneven / near-axis squares 2 / 8 / 0,
+as the axis tool’s view draws them, against the house drawing’s 21 / 51 / 0; 18 angle
+classes and hues against 19; and 426 / 446 house and stage sides against the axis view’s
+410 / 438 and the house drawing’s 327 / 390. It moves 24 squares, by at most 0.358, and
+turns none by more than 6.23 degrees.
 The evidence is retained in
 [`cases/regularized_drawings/think-jh4w-2026-10-19/`](../../cases/regularized_drawings/think-jh4w-2026-10-19/)
 in think-kpm3’s layout, with `selection-n183.json` and `selection-n183.md`. After it the
