@@ -4288,6 +4288,27 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "on both. The explainer prints no rung of T-154, so it keeps v0.4.8."
         ),
     ),
+    ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer",),
+        paths=(
+            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
+            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
+            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+        ),
+        reason=(
+            "PR #645's site v0.7.33 cut regenerated the five claim documents, and every "
+            "changed line differs from main only in its source-link revision, b23abea0 to "
+            "d24b3bf9. The explainer links those documents rather than inlining them, so "
+            "its HTML and Markdown are unchanged by them and it keeps v0.4.8. This is a "
+            "source-reviewed disposition; the render comparison above predates the cut."
+        ),
+    ),
 )
 
 
