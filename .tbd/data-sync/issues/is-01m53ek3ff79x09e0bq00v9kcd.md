@@ -5,7 +5,7 @@ title: "Adopt T-174 at its 38 staged rational counts under the house rule, regul
 kind: task
 status: in_progress
 priority: 2
-version: 16
+version: 17
 delegate: user-eb-adopt-174
 labels:
   - regularization
@@ -15,10 +15,11 @@ dependencies: []
 parent_id: is-01m51hyxstsa9ptekd2ss26ksn
 child_order_hints:
   - is-01m57j9xsga57szgfah5ex2bcd
+  - is-01m59jbf3zmjznc12k8g2b5cwk
 hold: null
 hold_until: null
 created_at: 2026-10-16T22:51:13.774Z
-updated_at: 2026-10-18T13:13:05.070Z
+updated_at: 2026-10-19T07:52:24.446Z
 started_at: 2026-10-17T06:39:00.754Z
 ---
 The house rule (packing/campaign/result-import.md, "The House Rule"; the owner, 16 October 2026) makes T-174 (PR #574's PingYou certificates) the house at 63 counts on main. PR #660 stages them in `select_houses.PENDING_ADOPTION`: the 60 rational ones under this bead, staged as `next pull request`, and the three algebraic ones (70, 153, 207) under think-ot5c (the writer), staged as `no writer`. This bead's pull request adopts the 60, regularizes every count it re-houses in that same pull request, and takes each count off `PENDING_ADOPTION`. Opened by #660's addressing pass for its review A1 (the staged adoption had sat under the policy lane's own bead, think-sa5r).
