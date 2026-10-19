@@ -113,7 +113,10 @@ PAGE_BUDGET_EXCEPTIONS: dict[str, tuple[int, str]] = {
             "Each row links its full record; no record body is repeated in the table. "
             "Three-run desktop/mobile, light/dark and no-JS checks pass: "
             "CLS <=0.001, LCP <=576 ms, longest task <=153 ms and blocking <=123 ms. "
-            "The ceiling retains about 100 kB of headroom for registered results."
+            "With the seven days' arrivals and the weekly rollup above the table (#514) "
+            "the page measures 1,203,626 bytes at 217 results on 19 October 2026, so the "
+            "ceiling holds it through `test_overview`'s 225 results at today's "
+            "90th-percentile row and average seven-day entry."
         ),
     ),
     "result/t-174.html": (
