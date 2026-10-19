@@ -5,8 +5,8 @@ title: Repair Atlas resize measurement and homepage theme fixture synchronizatio
 kind: bug
 status: in_progress
 priority: 1
-version: 12
-delegate: atlas-theme-race-repair
+version: 13
+delegate: claude-css-perf-20261019
 labels: []
 dependencies: []
 child_order_hints:
@@ -20,7 +20,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-19T12:02:06.384Z
-updated_at: 2026-10-19T15:39:31.342Z
+updated_at: 2026-10-19T16:47:42.372Z
 started_at: 2026-10-19T12:02:26.441Z
 closed_at: 2026-10-19T12:25:54.850Z
 close_reason: Focused Atlas source repair frozen and committed locally as fa56edc20b68afe909c9d0feea144d392cbd57dc on codex/atlas-width-transition-hno8; dedicated checkout clean. Controlled inherited outer native geometry transitions demonstrated, deterministic pre-fix regression1failed26.28s and final repair2passed38.11s with both pages/scripts and width-cap negative control. Focused lint/types and normalhooks pass. Remaining theme diagnosis is open child think-9qtc. Coordinator explicitly owns source-review,665 integration,release0.7.32,publication and CI; no push or PR created in this lane.

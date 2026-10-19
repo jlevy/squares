@@ -3,18 +3,21 @@ type: is
 id: is-01m59y0atyr8k5exy2jbg9wmwt
 title: Adopt T-218 at n183 and regularize it in the next intake PR
 kind: task
-status: open
+status: in_progress
 priority: 2
-version: 1
-delegate: codex-n183-house-adoption-20261019
+version: 3
+delegate: claude-n183-adoption-20261019
 labels:
   - result-import
   - regularization
   - validation
 dependencies: []
 parent_id: is-01m59few7wa6j6yrnw49hjap7r
+hold: null
+hold_until: null
 created_at: 2026-10-19T11:16:02.525Z
-updated_at: 2026-10-19T11:16:02.525Z
+updated_at: 2026-10-19T18:47:43.192Z
+started_at: 2026-10-19T16:47:23.660Z
 ---
 Adopt T-218's original n183 rational certificate in the next intake pull request and finish both maintained strong-generator regularizations in that same pull request. Owner: codex-n183-house-adoption-20261019. This open obligation supplies select_houses.PENDING_ADOPTION n183; the registration slice does not move a house or run a generator. Credit Daniel after Couzo, with Levy acknowledged only for register seed data.
 
@@ -30,3 +33,7 @@ Adopt T-218's original n183 rational certificate in the next intake pull request
 - Machine note: reuse the existing primary Python 3.14.7 environment and existing checkout; explicit mounted writable external TMPDIR/CARGO_TARGET_DIR/UV_CACHE_DIR. No new clone/environment, bulk restoration or source-program execution; coordinate generator CPU with live gates.
 
 Backlog: this item is listed in packing/campaign/issue-intake/intake-followup-20261019/README.md; coordinator reconciles the existing pass backlog think-wpyh without transferring its owner.
+
+## Notes
+
+2026-10-19 claude-n183-adoption-20261019: claude/intake-n183-adoption 180d04ce4 adopts T-218 as n183 house (s(183) <= 13999580178736252502081470897571/10^30), integer conjecture withdrawn, both strong generators run (~953 CPU-s measured + selection), Evan Daniel same-side view admitted. Pending: independent Fable review (running), integration into claude/intake-2026-10-19 (running; custody SNAPSHOT_MAX_BYTES overage 230,964,958 vs 229,638,144 under investigation).
