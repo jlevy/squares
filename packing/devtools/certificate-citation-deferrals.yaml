@@ -42,6 +42,21 @@ deferrals:
       staged in select_houses.PENDING_ADOPTION under think-ot5c, until adopt_houses can
       write an algebraic side; at 302 the certificate is above the case. A case record
       cites the evidence once a house adopts one.
+  - evidence: E-evand-639-verify-exact-replay
+    results: [T-193]
+    bead: think-ot5c
+    blocked_on: think-ot5c
+    recorded: '2026-10-16'
+    reason: >-
+      Issue 639's exact algebraic sides at sixteen counts are replayed on one route, the
+      source's own verify_exact.py over each number field, which is what stage 4 asks, and
+      reviewed at stage 4 with no blocking defect
+      (docs/project/reviews/review-2026-10-16-evand-exact-sides-639.md). They are the
+      smallest sides known at all sixteen, and the house rule of 16 October 2026 makes them
+      the houses there. Their adoption is staged in select_houses.PENDING_ADOPTION under
+      think-ot5c, until adopt_houses can write an algebraic side, and an adopted house's
+      record is rebuilt by its writer (tests/test_house_adoption.py), so its evidence list
+      takes no hand edit. A case record cites the evidence once a house adopts one.
   - evidence: E-bengreff-594-cover-replay
     results: [T-184]
     bead: think-ccjt
