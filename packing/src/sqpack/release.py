@@ -1493,12 +1493,14 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         reason=(
             "The results page's overview and its Added filter (#514) change only the "
             "results page, the results table's rows and bar, the results page's byte "
-            "ceiling, each register entry's new `landed` day, and the register entries "
-            "the import generators draft, which now write `landed`. Rendered with main's "
-            "nine files and with this branch's, the four papers' HTML and Markdown are "
-            "byte-identical; the order of the explainer's empty style attribute on a math "
-            "span varies between any two renders of the same code. Each PDF prints from "
-            "that HTML, so every paper keeps its edition."
+            "ceiling's reason, each register entry's new `landed` day, and the register "
+            "entries the import generators draft, which now write `landed`. Rendered at "
+            "6ff2017d, after the merge of main 14fd9e27, once from this branch's tree and "
+            "once with main's copies of its changed files: all 68 files the four papers' "
+            "renderers write are byte-identical, the explainer's HTML included (the order "
+            "of its empty style attribute on a math span can vary between two renders of "
+            "the same code). Each PDF prints from that HTML, so every paper keeps its "
+            "edition: v0.4.8, v0.1.7, v0.1.0 and v0.2.3."
         ),
     ),
     ReleaseNoPublicChange(
