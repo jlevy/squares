@@ -462,6 +462,15 @@ PUBLICATION_STATUS = ""
 #: Both retained 1-100 and 1-324 graphics, their PDFs and PNGs share this history.
 INFOGRAPHIC_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.6.4",
+        first_published="October 19, 2026",
+        result_scope=(
+            "Redraw both atlas posters and every export at the 19 October data, with the "
+            "replayed n68, n84 and n85 lower bounds, the reviewed n108 bound and T-218's "
+            "house below the grid at 183."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.6.3",
         first_published="October 17, 2026",
         result_scope=(
@@ -994,6 +1003,17 @@ class ReleaseImpactDecision(NamedTuple):
 # New component cuts append decisions here, newest first, alongside their own histories.
 # No impact is invented retrospectively for the published baseline editions.
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
+    ReleaseImpactDecision(
+        component="infographics",
+        previous_version="v0.6.3",
+        version="v0.6.4",
+        impact="patch",
+        reason=(
+            "Redraw both atlas posters and every export at the 19 October data, with the "
+            "replayed n68, n84 and n85 lower bounds, the reviewed n108 bound and T-218's "
+            "house below the grid at 183."
+        ),
+    ),
     ReleaseImpactDecision(
         component="paper:n11-lower-bounds-explainer",
         previous_version="v0.4.8",
