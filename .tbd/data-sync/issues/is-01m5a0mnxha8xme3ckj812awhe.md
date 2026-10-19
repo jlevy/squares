@@ -5,14 +5,16 @@ title: Repair Atlas resize measurement and homepage theme fixture synchronizatio
 kind: bug
 status: in_progress
 priority: 1
-version: 2
+version: 3
 delegate: atlas-theme-race-repair
 labels: []
 dependencies: []
+child_order_hints:
+  - is-01m5a1m3jckkgafs33x037gtr8
 hold: null
 hold_until: null
 created_at: 2026-10-19T12:02:06.384Z
-updated_at: 2026-10-19T12:02:26.442Z
+updated_at: 2026-10-19T12:19:16.171Z
 started_at: 2026-10-19T12:02:26.441Z
 ---
 Own the focused actual-main e0319 browser failures: Atlas fills_available_width index.html no-script viewport transitions and toggle_seen theme fixture invisible system choice. Reproduce deterministically, record exact cause, preserve functional assertions, and prepare minimal repair in the dedicated fix-665-adoption checkout. Publication remains with root.
