@@ -3,15 +3,19 @@ type: is
 id: is-01m59h3nyp9m8en4keze936pkz
 title: "Validation backlog: 19 October intake continuation and n183 claim"
 kind: task
-status: open
+status: in_progress
 priority: 2
-version: 1
+version: 2
+delegate: codex-intake-backlog-20261019
 labels:
   - validation
 dependencies: []
 parent_id: is-01m59frtdq5mb5wp445nqb4sbd
+hold: null
+hold_until: null
 created_at: 2026-10-19T07:30:40.725Z
-updated_at: 2026-10-19T07:30:40.725Z
+updated_at: 2026-10-19T11:18:22.881Z
+started_at: 2026-10-19T11:18:22.880Z
 ---
 Validation backlog for W1 continuation think-kwol. No unapproved long replay or numerical search has started.
 
