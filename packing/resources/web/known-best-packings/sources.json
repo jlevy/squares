@@ -1190,6 +1190,21 @@
       "url": "https://github.com/BuddenPing/squares/blob/4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde/numerical-refinements/certificates/n182.cert.json"
     },
     {
+      "attribution": "Evan Daniel, https://github.com/evand/square-packing/blob/3a9948c781be668b1547cc2bf64a0d1e614f9bca/search/packer/candidates/s183_h183b.cert at 3a9948c781be668b1547cc2bf64a0d1e614f9bca",
+      "kind": "packet-derived-facts",
+      "license_status": "MIT",
+      "listed_n": [
+        183
+      ],
+      "n": 183,
+      "path": "resources/web/evand-n183-subgrid-2026-10-19/source/search/packer/candidates/s183_h183b.cert",
+      "raw_asset_retained": true,
+      "retention_policy": "Complete source certificate retained losslessly and bound to the SHA-256 its packet pins upstream; no upstream program or prose is copied.",
+      "retrieved": "2026-10-19",
+      "source_n": 183,
+      "url": "https://github.com/evand/square-packing/blob/3a9948c781be668b1547cc2bf64a0d1e614f9bca/search/packer/candidates/s183_h183b.cert"
+    },
+    {
       "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
       "kind": "kingbird-derived-facts",
       "license_status": "no-express-reuse-terms-found",
