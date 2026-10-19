@@ -3498,7 +3498,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-17'
   status: live
 - path: cases/107.html
   canonical: cases/107.html
@@ -3506,7 +3506,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-17'
   status: live
 - path: cases/108.html
   canonical: cases/108.html
@@ -3514,7 +3514,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-18'
   status: live
 - path: cases/109.html
   canonical: cases/109.html
@@ -3538,7 +3538,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-17'
   status: live
 - path: cases/111.html
   canonical: cases/111.html
@@ -5482,7 +5482,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-03'
+  lastmod: '2026-10-17'
   status: live
 - path: cases/39.html
   canonical: cases/39.html
@@ -5506,7 +5506,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-12'
+  lastmod: '2026-10-17'
   status: live
 - path: cases/41.html
   canonical: cases/41.html
@@ -5514,7 +5514,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-12'
+  lastmod: '2026-10-17'
   status: live
 - path: cases/42.html
   canonical: cases/42.html
@@ -5530,7 +5530,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-07'
+  lastmod: '2026-10-17'
   status: live
 - path: cases/44.html
   canonical: cases/44.html
@@ -5602,7 +5602,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-17'
   status: live
 - path: cases/52.html
   canonical: cases/52.html
@@ -5746,7 +5746,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-17'
   status: live
 - path: cases/69.html
   canonical: cases/69.html
@@ -5890,7 +5890,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-17'
   status: live
 - path: cases/85.html
   canonical: cases/85.html
@@ -5898,7 +5898,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-17'
   status: live
 - path: cases/86.html
   canonical: cases/86.html
@@ -5906,7 +5906,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-17'
   status: live
 - path: cases/87.html
   canonical: cases/87.html
@@ -5922,7 +5922,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-16'
+  lastmod: '2026-10-17'
   status: live
 - path: cases/89.html
   canonical: cases/89.html
@@ -5930,7 +5930,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-17'
   status: live
 - path: cases/9.html
   canonical: cases/9.html
@@ -5946,7 +5946,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-17'
   status: live
 - path: cases/91.html
   canonical: cases/91.html
@@ -5954,7 +5954,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-17'
   status: live
 - path: cases/92.html
   canonical: cases/92.html
@@ -5962,7 +5962,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-17'
   status: live
 - path: cases/93.html
   canonical: cases/93.html
@@ -16195,6 +16195,567 @@ urls:
     - packing/resources/web/evand-n229-dilation-update-2026-10-18/README.md
     - packing/resources/web/evand-n229-dilation-update-2026-10-18/source/search/packer/candidates/s229_v2.cert
     - packing/campaign/issue-intake/upper-bounds-20261018/README.md
+- path: result/t-200.html
+  canonical: result/t-200.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-17'
+  lastmod: '2026-10-17'
+  status: live
+  identity:
+    kind: lower-bound
+    scope:
+      n_values:
+      - 38
+    established: null
+    attribution:
+      source_keys:
+      - '[wand125 fine-net lower bounds 2026-10-16]'
+      published: '2026-10-16'
+    builds_on: null
+    evidence:
+    - E-wand125-fine-net-n38-65775-report
+    artifacts:
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/README.md
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/acquisition/sources.json
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/acquisition/release-assets.json
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n38_L65775/candidate.json.gz
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n38_L65775/check2/receipt.json
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/receipts/premises-n38.json
+    - packing/devtools/fine_net_followup.py
+- path: result/t-201.html
+  canonical: result/t-201.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-17'
+  lastmod: '2026-10-17'
+  status: live
+  identity:
+    kind: lower-bound
+    scope:
+      n_values:
+      - 40
+    established: null
+    attribution:
+      source_keys:
+      - '[wand125 fine-net lower bounds 2026-10-16]'
+      published: '2026-10-16'
+    builds_on: null
+    evidence:
+    - E-wand125-fine-net-n40-6735-report
+    artifacts:
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/README.md
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/acquisition/sources.json
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/acquisition/release-assets.json
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n40_L6735/candidate.json.gz
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n40_L6735/check2/receipt.json
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/receipts/premises-n40.json
+    - packing/devtools/fine_net_followup.py
+- path: result/t-202.html
+  canonical: result/t-202.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-17'
+  lastmod: '2026-10-17'
+  status: live
+  identity:
+    kind: lower-bound
+    scope:
+      n_values:
+      - 41
+    established: null
+    attribution:
+      source_keys:
+      - '[wand125 fine-net lower bounds 2026-10-16]'
+      published: '2026-10-16'
+    builds_on: null
+    evidence:
+    - E-wand125-fine-net-n41-68025-report
+    artifacts:
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/README.md
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/acquisition/sources.json
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/acquisition/release-assets.json
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n41_L68025/candidate.json.gz
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n41_L68025/check2/receipt.json
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/receipts/premises-n41.json
+    - packing/devtools/fine_net_followup.py
+- path: result/t-203.html
+  canonical: result/t-203.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-17'
+  lastmod: '2026-10-17'
+  status: live
+  identity:
+    kind: lower-bound
+    scope:
+      n_values:
+      - 43
+    established: null
+    attribution:
+      source_keys:
+      - '[wand125 fine-net lower bounds 2026-10-16]'
+      published: '2026-10-16'
+    builds_on: null
+    evidence:
+    - E-wand125-fine-net-n43-69425-report
+    artifacts:
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/README.md
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/acquisition/sources.json
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/acquisition/release-assets.json
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n43_L69425/candidate.json.gz
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n43_L69425/check2/receipt.json
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/receipts/premises-n43.json
+    - packing/devtools/fine_net_followup.py
+- path: result/t-204.html
+  canonical: result/t-204.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-17'
+  lastmod: '2026-10-17'
+  status: live
+  identity:
+    kind: lower-bound
+    scope:
+      n_values:
+      - 51
+    established: null
+    attribution:
+      source_keys:
+      - '[wand125 fine-net lower bounds 2026-10-16]'
+      published: '2026-10-16'
+    builds_on: null
+    evidence:
+    - E-wand125-fine-net-n51-75275-report
+    artifacts:
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/README.md
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/acquisition/sources.json
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/acquisition/release-assets.json
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n51_L75275/candidate.json.gz
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n51_L75275/check2/receipt.json
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/receipts/premises-n51.json
+    - packing/devtools/fine_net_followup.py
+- path: result/t-205.html
+  canonical: result/t-205.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-17'
+  lastmod: '2026-10-17'
+  status: live
+  identity:
+    kind: lower-bound
+    scope:
+      n_values:
+      - 68
+    established: null
+    attribution:
+      source_keys:
+      - '[wand125 fine-net lower bounds 2026-10-16]'
+      published: '2026-10-16'
+    builds_on: null
+    evidence:
+    - E-wand125-fine-net-n68-853-report
+    artifacts:
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/README.md
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/acquisition/sources.json
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/acquisition/release-assets.json
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n68_L853/candidate.json.gz
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n68_L853/check2/receipt.json
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/receipts/premises-n68.json
+    - packing/devtools/fine_net_followup.py
+- path: result/t-206.html
+  canonical: result/t-206.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-17'
+  lastmod: '2026-10-17'
+  status: live
+  identity:
+    kind: lower-bound
+    scope:
+      n_values:
+      - 84
+    established: null
+    attribution:
+      source_keys:
+      - '[wand125 fine-net lower bounds 2026-10-16]'
+      published: '2026-10-16'
+    builds_on: null
+    evidence:
+    - E-wand125-fine-net-n84-94225-report
+    artifacts:
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/README.md
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/acquisition/sources.json
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/acquisition/release-assets.json
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n84_L94225/candidate.json.gz
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n84_L94225/check2/receipt.json
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/receipts/premises-n84.json
+    - packing/devtools/fine_net_followup.py
+- path: result/t-207.html
+  canonical: result/t-207.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-17'
+  lastmod: '2026-10-17'
+  status: live
+  identity:
+    kind: lower-bound
+    scope:
+      n_values:
+      - 85
+    established: null
+    attribution:
+      source_keys:
+      - '[wand125 fine-net lower bounds 2026-10-16]'
+      published: '2026-10-16'
+    builds_on: null
+    evidence:
+    - E-wand125-fine-net-n85-9475-report
+    artifacts:
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/README.md
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/acquisition/sources.json
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/acquisition/release-assets.json
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n85_L9475/candidate.json.gz
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n85_L9475/check2/receipt.json
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/receipts/premises-n85.json
+    - packing/devtools/fine_net_followup.py
+- path: result/t-208.html
+  canonical: result/t-208.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-17'
+  lastmod: '2026-10-17'
+  status: live
+  identity:
+    kind: lower-bound
+    scope:
+      n_values:
+      - 86
+    established: null
+    attribution:
+      source_keys:
+      - '[wand125 fine-net lower bounds 2026-10-16]'
+      published: '2026-10-16'
+    builds_on: null
+    evidence:
+    - E-wand125-fine-net-n86-95275-report
+    artifacts:
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/README.md
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/acquisition/sources.json
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/acquisition/release-assets.json
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n86_L95275/candidate.json.gz
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n86_L95275/check2/receipt.json
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/receipts/premises-n86.json
+    - packing/devtools/fine_net_followup.py
+- path: result/t-209.html
+  canonical: result/t-209.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-17'
+  lastmod: '2026-10-17'
+  status: live
+  identity:
+    kind: lower-bound
+    scope:
+      n_values:
+      - 88
+    established: null
+    attribution:
+      source_keys:
+      - '[wand125 fine-net lower bounds 2026-10-16]'
+      published: '2026-10-16'
+    builds_on: null
+    evidence:
+    - E-wand125-fine-net-n88-96325-report
+    artifacts:
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/README.md
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/acquisition/sources.json
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/acquisition/release-assets.json
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n88_L96325/candidate.json.gz
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n88_L96325/check2/receipt.json
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/receipts/premises-n88.json
+    - packing/devtools/fine_net_followup.py
+- path: result/t-210.html
+  canonical: result/t-210.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-17'
+  lastmod: '2026-10-17'
+  status: live
+  identity:
+    kind: lower-bound
+    scope:
+      n_values:
+      - 89
+    established: null
+    attribution:
+      source_keys:
+      - '[wand125 fine-net lower bounds 2026-10-16]'
+      published: '2026-10-16'
+    builds_on: null
+    evidence:
+    - E-wand125-fine-net-n89-9685-report
+    artifacts:
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/README.md
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/acquisition/sources.json
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/acquisition/release-assets.json
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n89_L9685/candidate.json.gz
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n89_L9685/check2/receipt.json
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/receipts/premises-n89.json
+    - packing/devtools/fine_net_followup.py
+- path: result/t-211.html
+  canonical: result/t-211.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-17'
+  lastmod: '2026-10-17'
+  status: live
+  identity:
+    kind: lower-bound
+    scope:
+      n_values:
+      - 91
+    established: null
+    attribution:
+      source_keys:
+      - '[wand125 fine-net lower bounds 2026-10-16]'
+      published: '2026-10-16'
+    builds_on: null
+    evidence:
+    - E-wand125-fine-net-n91-97875-report
+    artifacts:
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/README.md
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/acquisition/sources.json
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/acquisition/release-assets.json
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n91_L97875/candidate.json.gz
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n91_L97875/check2/receipt.json
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/receipts/premises-n91.json
+    - packing/devtools/fine_net_followup.py
+- path: result/t-212.html
+  canonical: result/t-212.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-17'
+  lastmod: '2026-10-17'
+  status: live
+  identity:
+    kind: lower-bound
+    scope:
+      n_values:
+      - 90
+    established: null
+    attribution:
+      source_keys:
+      - '[wand125 fine-net lower bounds 2026-10-16]'
+      published: '2026-10-16'
+    builds_on: null
+    evidence:
+    - E-wand125-fine-net-n90-978-report
+    artifacts:
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/README.md
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/acquisition/sources.json
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/acquisition/release-assets.json
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n90_L978/candidate.json.gz
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n90_L978/check2/receipt.json
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/receipts/premises-n90.json
+    - packing/devtools/fine_net_followup.py
+- path: result/t-213.html
+  canonical: result/t-213.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-17'
+  lastmod: '2026-10-17'
+  status: live
+  identity:
+    kind: lower-bound
+    scope:
+      n_values:
+      - 92
+    established: null
+    attribution:
+      source_keys:
+      - '[wand125 fine-net lower bounds 2026-10-16]'
+      published: '2026-10-16'
+    builds_on: null
+    evidence:
+    - E-wand125-fine-net-n92-986-report
+    artifacts:
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/README.md
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/acquisition/sources.json
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/acquisition/release-assets.json
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n92_L986/candidate.json.gz
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n92_L986/check2/receipt.json
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/receipts/premises-n92.json
+    - packing/devtools/fine_net_followup.py
+- path: result/t-214.html
+  canonical: result/t-214.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-17'
+  lastmod: '2026-10-17'
+  status: live
+  identity:
+    kind: lower-bound
+    scope:
+      n_values:
+      - 106
+    established: null
+    attribution:
+      source_keys:
+      - '[wand125 fine-net lower bounds 2026-10-16]'
+      published: '2026-10-16'
+    builds_on: null
+    evidence:
+    - E-wand125-fine-net-n106-10503-report
+    artifacts:
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/README.md
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/acquisition/sources.json
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/acquisition/release-assets.json
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n106_L10503/candidate.json.gz
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n106_L10503/check2/receipt.json
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/receipts/premises-n106.json
+    - packing/devtools/fine_net_followup.py
+- path: result/t-215.html
+  canonical: result/t-215.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-17'
+  lastmod: '2026-10-17'
+  status: live
+  identity:
+    kind: lower-bound
+    scope:
+      n_values:
+      - 107
+    established: null
+    attribution:
+      source_keys:
+      - '[wand125 fine-net lower bounds 2026-10-16]'
+      published: '2026-10-16'
+    builds_on: null
+    evidence:
+    - E-wand125-fine-net-n107-1058-report
+    artifacts:
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/README.md
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/acquisition/sources.json
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/acquisition/release-assets.json
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n107_L1058/candidate.json.gz
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n107_L1058/check2/receipt.json
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/receipts/premises-n107.json
+    - packing/devtools/fine_net_followup.py
+- path: result/t-216.html
+  canonical: result/t-216.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-17'
+  lastmod: '2026-10-18'
+  status: live
+  identity:
+    kind: lower-bound
+    scope:
+      n_values:
+      - 108
+    established: null
+    attribution:
+      source_keys:
+      - '[wand125 fine-net lower bounds 2026-10-16]'
+      published: '2026-10-16'
+    builds_on: null
+    evidence:
+    - E-wand125-fine-net-n108-1062-report
+    - E-wand125-fine-net-n108-1062-sqverify-fast-replay
+    - E-n108-review-max-premises
+    - E-n108-review-max-captures
+    artifacts:
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/README.md
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/acquisition/sources.json
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/acquisition/release-assets.json
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n108_L1062/candidate.json.gz
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n108_L1062/check2/receipt.json
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/receipts/premises-n108.json
+    - packing/devtools/fine_net_followup.py
+    - docs/project/reviews/review-2026-10-18-wand125-n108-certificate-mathematics.md
+    - docs/project/reviews/review-2026-10-18-n108-fine-net-mathematics-max.md
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review/n108-exact-audit.json
+    - packing/devtools/audit_fine_net_receipt.py
+    - packing/sqverify_fast/SOUNDNESS.md
+    - packing/benchmarks/measure-verifier/census-mixed/census.json
+    - packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-2026-10-16/mixed_n108_L1062.jsonl.gz
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-max/README.md
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-max/n108_audit.py
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-max/audit.json
+  amendments:
+  - date: '2026-10-18'
+    reason: Adopt the n108 retained native replay after certificate-specific mathematical reviews,
+      adding its separate replay evidence and the supporting receipt, code and review artifacts; the
+      lower-bound claim and source attribution retain their original identity.
+    previous:
+      kind: lower-bound
+      scope:
+        n_values:
+        - 108
+      established: null
+      attribution:
+        source_keys:
+        - '[wand125 fine-net lower bounds 2026-10-16]'
+        published: '2026-10-16'
+      builds_on: null
+      evidence:
+      - E-wand125-fine-net-n108-1062-report
+      artifacts:
+      - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/README.md
+      - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/acquisition/sources.json
+      - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/acquisition/release-assets.json
+      - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n108_L1062/candidate.json.gz
+      - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n108_L1062/check2/receipt.json
+      - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/receipts/premises-n108.json
+      - packing/devtools/fine_net_followup.py
+- path: result/t-217.html
+  canonical: result/t-217.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-17'
+  lastmod: '2026-10-17'
+  status: live
+  identity:
+    kind: lower-bound
+    scope:
+      n_values:
+      - 110
+    established: null
+    attribution:
+      source_keys:
+      - '[wand125 fine-net lower bounds 2026-10-16]'
+      published: '2026-10-16'
+    builds_on: null
+    evidence:
+    - E-wand125-fine-net-n110-1073-report
+    artifacts:
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/README.md
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/acquisition/sources.json
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/acquisition/release-assets.json
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n110_L1073/candidate.json.gz
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n110_L1073/check2/receipt.json
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/receipts/premises-n110.json
+    - packing/devtools/fine_net_followup.py
 - path: results.html
   canonical: results.html
   kind: page

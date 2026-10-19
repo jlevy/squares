@@ -1,0 +1,132 @@
+{
+  "format": "external-source-declaration-v1",
+  "id": "wand125-square-packing",
+  "source_url": "https://github.com/wand125/square-packing",
+  "source_ref": "refs/heads/main",
+  "source_commit": "718887cfaa8727cc75108c5924fa1330df4fa098",
+  "retrieved_at_utc": "2026-10-17T17:58Z",
+  "git_scope": "A blobless clone of the single public branch with its history, sparsely checked out at this commit: the 18 certificate directories that the 18 commits 02c5595 (n = 38) to this commit (n = 110) add on 2026-10-16 between 07:45:44Z and 07:53:40Z, one each, each the same Git tree from its adding commit through the head aaed7d5 read on 2026-10-17, and the enclosing licence. Every file under those directories is digested; the rest of the tree is pinned by the commit. The candidates, receipts, run and control logs, the sealed inner bundles and the nested verifier archive are assets of release square-lower-bounds-v1, outside Git; devtools.fine_net_followup retain copies each asset's data members under release/ and pins the rest (acquisition/release-assets.json).",
+  "archived_dir": "square-packing",
+  "license": "MIT, Copyright (c) 2026 wand125 (problems/square-lower-bounds/LICENSE)",
+  "claims": [
+    "s(38) >= 2631/400 = 6.5775 (problems/square-lower-bounds/certificates/mixed_n38_L65775, added at 02c5595)",
+    "s(40) >= 1347/200 = 6.735 (problems/square-lower-bounds/certificates/mixed_n40_L6735, added at 4762e42)",
+    "s(41) >= 2721/400 = 6.8025 (problems/square-lower-bounds/certificates/mixed_n41_L68025, added at 209369b)",
+    "s(43) >= 2777/400 = 6.9425 (problems/square-lower-bounds/certificates/mixed_n43_L69425, added at d3c115c)",
+    "s(51) >= 3011/400 = 7.5275 (problems/square-lower-bounds/certificates/mixed_n51_L75275, added at 9cd2b2d)",
+    "s(68) >= 853/100 = 8.53 (problems/square-lower-bounds/certificates/mixed_n68_L853, added at 14b4b0b)",
+    "s(84) >= 3769/400 = 9.4225 (problems/square-lower-bounds/certificates/mixed_n84_L94225, added at f28b5f3)",
+    "s(85) >= 379/40 = 9.475 (problems/square-lower-bounds/certificates/mixed_n85_L9475, added at fc2e96f)",
+    "s(86) >= 3811/400 = 9.5275 (problems/square-lower-bounds/certificates/mixed_n86_L95275, added at 2ad6bda)",
+    "s(88) >= 3853/400 = 9.6325 (problems/square-lower-bounds/certificates/mixed_n88_L96325, added at f8f99e3)",
+    "s(89) >= 1937/200 = 9.685 (problems/square-lower-bounds/certificates/mixed_n89_L9685, added at a361ba2)",
+    "s(90) >= 489/50 = 9.78 (problems/square-lower-bounds/certificates/mixed_n90_L978, added at 8155028)",
+    "s(91) >= 783/80 = 9.7875 (problems/square-lower-bounds/certificates/mixed_n91_L97875, added at e060e98)",
+    "s(92) >= 493/50 = 9.86 (problems/square-lower-bounds/certificates/mixed_n92_L986, added at 599a67c)",
+    "s(106) >= 10503/1000 = 10.503 (problems/square-lower-bounds/certificates/mixed_n106_L10503, added at 3b25387)",
+    "s(107) >= 529/50 = 10.58 (problems/square-lower-bounds/certificates/mixed_n107_L1058, added at 021702f)",
+    "s(108) >= 531/50 = 10.62 (problems/square-lower-bounds/certificates/mixed_n108_L1062, added at 6af3c00)",
+    "s(110) >= 1073/100 = 10.73 (problems/square-lower-bounds/certificates/mixed_n110_L1073, added at 718887c)"
+  ],
+  "scope": [
+    "problems/square-lower-bounds/LICENSE",
+    "problems/square-lower-bounds/certificates/mixed_n38_L65775",
+    "problems/square-lower-bounds/certificates/mixed_n40_L6735",
+    "problems/square-lower-bounds/certificates/mixed_n41_L68025",
+    "problems/square-lower-bounds/certificates/mixed_n43_L69425",
+    "problems/square-lower-bounds/certificates/mixed_n51_L75275",
+    "problems/square-lower-bounds/certificates/mixed_n68_L853",
+    "problems/square-lower-bounds/certificates/mixed_n84_L94225",
+    "problems/square-lower-bounds/certificates/mixed_n85_L9475",
+    "problems/square-lower-bounds/certificates/mixed_n86_L95275",
+    "problems/square-lower-bounds/certificates/mixed_n88_L96325",
+    "problems/square-lower-bounds/certificates/mixed_n89_L9685",
+    "problems/square-lower-bounds/certificates/mixed_n90_L978",
+    "problems/square-lower-bounds/certificates/mixed_n91_L97875",
+    "problems/square-lower-bounds/certificates/mixed_n92_L986",
+    "problems/square-lower-bounds/certificates/mixed_n106_L10503",
+    "problems/square-lower-bounds/certificates/mixed_n107_L1058",
+    "problems/square-lower-bounds/certificates/mixed_n108_L1062",
+    "problems/square-lower-bounds/certificates/mixed_n110_L1073"
+  ],
+  "pinned_only": [
+    {
+      "match": "problems/square-lower-bounds/LICENSE",
+      "reason": "retained byte-identical by the FN-1 input bindings packet",
+      "identical_to": "packing/resources/web/wand125-fn1-input-bindings-2026-10-07/square-packing-bounds/LICENSE"
+    },
+    {
+      "match": "problems/square-lower-bounds/certificates/mixed_*/check2/src/SOUNDNESS.md",
+      "reason": "this repository's own packing/sqverify_fast/SOUNDNESS.md as of e020eb1e2 (Git blob cadf59b6, from b2c98e3bd until f007d7afd added lemma N0), which its history holds; the bundle copies it beside the verifier source"
+    },
+    {
+      "match": "problems/square-lower-bounds/certificates/mixed_*/check2/src/INDEPENDENCE.md",
+      "reason": "this repository's own packing/sqverify_fast/INDEPENDENCE.md as of e020eb1e2 (Git blob 9b60b4af, from 61acc9dcb until f007d7afd), which its history holds; the bundle copies it beside the verifier source"
+    },
+    {
+      "match": "problems/square-lower-bounds/certificates/mixed_*/check2/src/*",
+      "reason": "byte-identical to the mixed_n18_L4705 check2/src/ file of the same name, retained by the 2026-10-06 check2 packet",
+      "identical_to": "packing/resources/web/wand125-mixed-bounds-check2-2026-10-06/square-packing-bounds/certificates/mixed_n18_L4705/check2/src"
+    },
+    {
+      "match": "problems/square-lower-bounds/certificates/mixed_n38_L65775/provenance/search-notes.md",
+      "reason": "byte-identical to mixed_n39_L665/provenance/search-notes.md, retained by the 2026-10-06 check2 packet",
+      "identical_to": "packing/resources/web/wand125-mixed-bounds-check2-2026-10-06/square-packing-bounds/certificates/mixed_n39_L665/provenance/search-notes.md"
+    },
+    {
+      "match": "problems/square-lower-bounds/certificates/mixed_n40_L6735/provenance/search-notes.md",
+      "reason": "byte-identical to mixed_n39_L665/provenance/search-notes.md, retained by the 2026-10-06 check2 packet",
+      "identical_to": "packing/resources/web/wand125-mixed-bounds-check2-2026-10-06/square-packing-bounds/certificates/mixed_n39_L665/provenance/search-notes.md"
+    },
+    {
+      "match": "problems/square-lower-bounds/certificates/mixed_n41_L68025/provenance/search-notes.md",
+      "reason": "byte-identical to mixed_n39_L665/provenance/search-notes.md, retained by the 2026-10-06 check2 packet",
+      "identical_to": "packing/resources/web/wand125-mixed-bounds-check2-2026-10-06/square-packing-bounds/certificates/mixed_n39_L665/provenance/search-notes.md"
+    },
+    {
+      "match": "problems/square-lower-bounds/certificates/mixed_n43_L69425/provenance/search-notes.md",
+      "reason": "byte-identical to mixed_n39_L665/provenance/search-notes.md, retained by the 2026-10-06 check2 packet",
+      "identical_to": "packing/resources/web/wand125-mixed-bounds-check2-2026-10-06/square-packing-bounds/certificates/mixed_n39_L665/provenance/search-notes.md"
+    },
+    {
+      "match": "problems/square-lower-bounds/certificates/mixed_n51_L75275/provenance/search-notes.md",
+      "reason": "byte-identical to mixed_n39_L665/provenance/search-notes.md, retained by the 2026-10-06 check2 packet",
+      "identical_to": "packing/resources/web/wand125-mixed-bounds-check2-2026-10-06/square-packing-bounds/certificates/mixed_n39_L665/provenance/search-notes.md"
+    },
+    {
+      "match": "problems/square-lower-bounds/certificates/mixed_n68_L853/provenance/search-notes.md",
+      "reason": "byte-identical to mixed_n39_L665/provenance/search-notes.md, retained by the 2026-10-06 check2 packet",
+      "identical_to": "packing/resources/web/wand125-mixed-bounds-check2-2026-10-06/square-packing-bounds/certificates/mixed_n39_L665/provenance/search-notes.md"
+    },
+    {
+      "match": "problems/square-lower-bounds/certificates/mixed_n84_L94225/provenance/search-notes.md",
+      "reason": "byte-identical to mixed_n39_L665/provenance/search-notes.md, retained by the 2026-10-06 check2 packet",
+      "identical_to": "packing/resources/web/wand125-mixed-bounds-check2-2026-10-06/square-packing-bounds/certificates/mixed_n39_L665/provenance/search-notes.md"
+    },
+    {
+      "match": "problems/square-lower-bounds/certificates/mixed_n85_L9475/provenance/search-notes.md",
+      "reason": "byte-identical to mixed_n39_L665/provenance/search-notes.md, retained by the 2026-10-06 check2 packet",
+      "identical_to": "packing/resources/web/wand125-mixed-bounds-check2-2026-10-06/square-packing-bounds/certificates/mixed_n39_L665/provenance/search-notes.md"
+    },
+    {
+      "match": "problems/square-lower-bounds/certificates/mixed_n86_L95275/provenance/search-notes.md",
+      "reason": "byte-identical to mixed_n39_L665/provenance/search-notes.md, retained by the 2026-10-06 check2 packet",
+      "identical_to": "packing/resources/web/wand125-mixed-bounds-check2-2026-10-06/square-packing-bounds/certificates/mixed_n39_L665/provenance/search-notes.md"
+    },
+    {
+      "match": "problems/square-lower-bounds/certificates/mixed_n88_L96325/provenance/search-notes.md",
+      "reason": "byte-identical to mixed_n39_L665/provenance/search-notes.md, retained by the 2026-10-06 check2 packet",
+      "identical_to": "packing/resources/web/wand125-mixed-bounds-check2-2026-10-06/square-packing-bounds/certificates/mixed_n39_L665/provenance/search-notes.md"
+    },
+    {
+      "match": "problems/square-lower-bounds/certificates/mixed_n89_L9685/provenance/search-notes.md",
+      "reason": "byte-identical to mixed_n39_L665/provenance/search-notes.md, retained by the 2026-10-06 check2 packet",
+      "identical_to": "packing/resources/web/wand125-mixed-bounds-check2-2026-10-06/square-packing-bounds/certificates/mixed_n39_L665/provenance/search-notes.md"
+    },
+    {
+      "match": "problems/square-lower-bounds/certificates/mixed_n91_L97875/provenance/search-notes.md",
+      "reason": "byte-identical to mixed_n39_L665/provenance/search-notes.md, retained by the 2026-10-06 check2 packet",
+      "identical_to": "packing/resources/web/wand125-mixed-bounds-check2-2026-10-06/square-packing-bounds/certificates/mixed_n39_L665/provenance/search-notes.md"
+    }
+  ]
+}

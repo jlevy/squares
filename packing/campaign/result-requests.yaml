@@ -3547,16 +3547,55 @@ issues:
         release square-lower-bounds-v1. The author ran sqverify-fast at every direction and refused
         the 197/200 mass control in 32 sampled directions.
       source: https://github.com/jlevy/squares/issues/446#issuecomment-6210736972
-      not_registered: >-
-        Triage only (17 October 2026, think-f40c). Each is above both lower lanes at its count, by
-        0.0115 (84) to 0.09 (92) against wand125's and Guzhou0806's earlier certificates and by
-        0.099 to 0.143 at 106 to 108 and 110 against the closed form (T-180). Stage 2 retains the 18 bundles at
-        their commits; stage 3 registers them as reported. A complete sqverify-fast census with
-        whole-net controls is priced from the bundles' own receipts at 0.6 to 25 CPU-hours each, about
-        83 to 95 in all.
-      queued: true
-      bead: think-f40c
+      register:
+      - T-200
+      - T-201
+      - T-202
+      - T-203
+      - T-204
+      - T-205
+      - T-206
+      - T-207
+      - T-208
+      - T-209
+      - T-210
+      - T-211
+      - T-212
+      - T-213
+      - T-214
+      - T-215
+      - T-216
+      - T-217
+      evidence:
+      - E-wand125-fine-net-n38-65775-report
+      - E-wand125-fine-net-n40-6735-report
+      - E-wand125-fine-net-n41-68025-report
+      - E-wand125-fine-net-n43-69425-report
+      - E-wand125-fine-net-n51-75275-report
+      - E-wand125-fine-net-n68-853-report
+      - E-wand125-fine-net-n84-94225-report
+      - E-wand125-fine-net-n85-9475-report
+      - E-wand125-fine-net-n86-95275-report
+      - E-wand125-fine-net-n88-96325-report
+      - E-wand125-fine-net-n89-9685-report
+      - E-wand125-fine-net-n91-97875-report
+      - E-wand125-fine-net-n90-978-report
+      - E-wand125-fine-net-n92-986-report
+      - E-wand125-fine-net-n106-10503-report
+      - E-wand125-fine-net-n107-1058-report
+      - E-wand125-fine-net-n108-1062-report
+      - E-wand125-fine-net-n110-1073-report
+      - E-wand125-fine-net-n108-1062-sqverify-fast-replay
     asks:
+    - what: Complete the maintained census, whole-net controls and certificate-specific mathematical
+        review for the other 17 fine-net lower bounds of 16 October before adopting their case lanes.
+      state: queued
+      bead: think-f40c
+      note: >-
+        n108 is adopted at 531/50 after its retained complete native replay and two accepted
+        mathematical reviews; confirmation shares the producer's verifier components. The other
+        17 remain V0/C0. The former batch-1 plan is a continuation queue, not evidence that its
+        remaining native runs are active or complete.
     - what: Replay and review the n29 candidate at 291/50 over all 2073 directions with whole-net
         controls and restored positives, from a candidate retained where the census reads it.
       state: queued

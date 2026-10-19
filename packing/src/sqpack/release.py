@@ -88,6 +88,14 @@ class PublicationHistoryEntry(NamedTuple):
 #: for each deployment's commit, what the page it built stated.
 PUBLICATION_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.7.29",
+        first_published="October 19, 2026",
+        result_scope=(
+            "Register eighteen fine-net lower bounds, adopt the reviewed n108 bound and "
+            "retain its exact audit provenance and safe packet publication."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.7.28",
         first_published="October 19, 2026",
         result_scope=(
@@ -508,7 +516,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "7e51e269a03567b28d34d4b3ec566510496a571e"
+DATA_REVISION = "13558793c653c5d0bc4bb6a17755b5f8d8d249e2"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -604,6 +612,14 @@ FIRST_PUBLISHED = PUBLICATION_HISTORY[-1].first_published
 #:                                            on October 1 and 2, so the substantive
 #:                                            day is the one recorded
 EXPLAINER_HISTORY = (
+    PublicationHistoryEntry(
+        version="v0.4.8",
+        first_published="October 19, 2026",
+        result_scope=(
+            "Update the registered result count and current bound citations after the "
+            "fine-net imports and reviewed n108 adoption."
+        ),
+    ),
     PublicationHistoryEntry(
         version="v0.4.7",
         first_published="October 15, 2026",
@@ -937,6 +953,26 @@ class ReleaseImpactDecision(NamedTuple):
 # New component cuts append decisions here, newest first, alongside their own histories.
 # No impact is invented retrospectively for the published baseline editions.
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
+    ReleaseImpactDecision(
+        component="site",
+        previous_version="v0.7.28",
+        version="v0.7.29",
+        impact="patch",
+        reason=(
+            "Register eighteen fine-net lower bounds, adopt the reviewed n108 bound and "
+            "retain its exact audit provenance and safe packet publication."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="paper:n11-lower-bounds-explainer",
+        previous_version="v0.4.7",
+        version="v0.4.8",
+        impact="patch",
+        reason=(
+            "Update the registered result count and current bound citations after the "
+            "fine-net imports and reviewed n108 adoption."
+        ),
+    ),
     ReleaseImpactDecision(
         component="site",
         previous_version="v0.7.27",
@@ -1372,6 +1408,79 @@ class ReleaseNoPublicChange(NamedTuple):
 
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
+    ReleaseNoPublicChange(
+        components=("paper:n11-optimality-review",),
+        paths=(
+            "packing/devtools/acquire_source.py",
+            "packing/devtools/apply_closed_form.py",
+            "packing/devtools/render_n11_lower_bounds_explainer_pdf.py",
+            "packing/devtools/site_urls.py",
+            "packing/devtools/verifier_registry.py",
+            "packing/frontier/results.yaml",
+        ),
+        outputs=(
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+        ),
+        reason=(
+            "For PR 671, rendered HTML and Markdown against reviewed PR 679 candidate "
+            "e22a9f9f4 and the current integration tree, using source-link revision "
+            "e22a9f9f4 in both. Both outputs are byte-identical. The n11 optimality "
+            "review retains its article, selected facts and figures, so its edition "
+            "remains v0.1.7. The fine-net records, monotone case planning, safe packet "
+            "publication and explainer pagination guard do not change these outputs."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:n11-threshold-bound-review",),
+        paths=(
+            "packing/devtools/acquire_source.py",
+            "packing/devtools/apply_closed_form.py",
+            "packing/devtools/render_n11_lower_bounds_explainer_pdf.py",
+            "packing/devtools/site_urls.py",
+            "packing/devtools/verifier_registry.py",
+            "packing/frontier/results.yaml",
+        ),
+        outputs=(
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+        ),
+        reason=(
+            "For PR 671, rendered HTML and Markdown against reviewed PR 679 candidate "
+            "e22a9f9f4 and the current integration tree, using source-link revision "
+            "e22a9f9f4 in both. Both outputs are byte-identical. The n11 threshold review "
+            "retains its article, selected facts and figures, so its edition remains "
+            "v0.1.0. The fine-net records, monotone case planning, safe packet "
+            "publication and explainer pagination guard do not change these outputs."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/devtools/acquire_source.py",
+            "packing/devtools/apply_closed_form.py",
+            "packing/devtools/render_n11_lower_bounds_explainer_pdf.py",
+            "packing/devtools/site_urls.py",
+            "packing/devtools/verifier_registry.py",
+            "packing/frontier/n-108.md",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "For PR 671, rendered HTML and Markdown against reviewed PR 679 candidate "
+            "e22a9f9f4 and the current integration tree, using source-link revision "
+            "e22a9f9f4 in both. Both outputs are byte-identical. The square-packing "
+            "methods survey retains its article, selected facts and figures, so its "
+            "edition remains v0.2.3. The fine-net records, monotone case planning, safe "
+            "packet publication and explainer pagination guard do not change these "
+            "outputs."
+        ),
+    ),
     ReleaseNoPublicChange(
         components=("paper:n11-lower-bounds-explainer",),
         paths=(
@@ -3916,7 +4025,7 @@ def validate_release_impacts(
 #: fresh render, so a link naming the build commit would fail their drift check forever. It is
 #: in no version string. It moves when the claim documents are regenerated for an edition. It
 #: must be a commit on `main`; the site's own links name `main` itself (`devtools.repo_links`).
-PUBLICATION_REVISION = "c36eb7d6"
+PUBLICATION_REVISION = "a450742e"
 
 
 def data_pathspec() -> tuple[str, ...]:

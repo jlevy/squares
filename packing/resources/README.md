@@ -955,6 +955,19 @@ whole-net control’s mutant at two directions each; at n39 the axis refusal fal
 the census’s rounding allowance.
 A complete replay and whole-net controls remain pending.
 
+**[wand125 fine-net lower bounds 2026-10-16]**: wand125’s 18 certificates of 16 October,
+`mixed_n38_L65775` to `mixed_n110_L1073`, report lower bounds at n = 38, 40, 41, 43 and
+51 on the 2,073-direction net and at n = 68, 84 to 86, 88 to 92 and 106 to 110 on the
+201-direction standard net, each above both lower lanes of its case; wand125 reports
+them in jlevy/squares#446. The
+[packet](web/wand125-fine-net-lower-bounds-2026-10-16/README.md) retains the
+directories’ MIT documents at revision `718887c` and, under OR-18, each release asset’s
+candidate, receipts and logs, with the maintained premise checks; the nested verifier
+archive is pinned by digest.
+T-200 to T-217 record these bounds.
+T-216 adopts n108 at V3/C3 after its complete replay and mathematical reviews; the other
+seventeen remain V0/C0, with census and whole-net controls owned by think-f40c.
+
 - **[Couzo exact refinements 2026-10-08]** — Francisco Couzo’s eight complete rational
   certificates and separate decimal context poses.
   T-128 is at V3/C3 on the
