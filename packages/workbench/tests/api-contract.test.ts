@@ -56,7 +56,7 @@ test("the public API rejects missing, extra, and incompatible members", async ()
   const fixtures = new Map([
     [
       "valid",
-      `import type { AtlasTransitions } from "${relativeApi}";\ndeclare const api: AtlasTransitions;\nconst checked: AtlasTransitions = api;\nconst integration = checked.physics(0).integration;\nconst requested: "adaptive" | number = integration.requested;\nconst warning: "below-adaptive-stability-bound" | null = integration.warning;\nvoid requested;\nvoid warning;\n`,
+      `import type { AtlasPhysics, AtlasTransitions } from "${relativeApi}";\ndeclare const api: AtlasTransitions;\nconst checked: AtlasTransitions = api;\nconst integration = checked.physics(0).integration;\nconst requested: "adaptive" | number = integration.requested;\nconst warning: "below-adaptive-stability-bound" | null = integration.warning;\nconst measured: AtlasPhysics = checked.measurePhysics(0, "bodies", "free");\nconst cost: number = measured.ms + measured.bytes;\nvoid requested;\nvoid warning;\nvoid cost;\n`,
     ],
     [
       "missing",
@@ -134,4 +134,23 @@ test("the browser physics report preserves the trajectory integration receipt", 
     /integration:\s*Object\.assign\(\{\}, tr\.receipt\.configuration\.integration\)/,
   );
   assert.match(application, /animationIntegration\(LAW, WALLLAW, response\.storedTimestep\)/);
+});
+
+test("the trajectory measurement builds past the cache that the physics report reads", async () => {
+  const application = await readFile(resolve(PACKAGE_ROOT, "src/application.js"), "utf8");
+  const body = (name: string): string => {
+    const pattern = new RegExp(`\\n  function ${name}\\([^)]*\\) \\{\\n([\\s\\S]*?)\\n  \\}\\n`);
+    const found = pattern.exec(application)?.[1];
+    assert.ok(found !== undefined, `application.js defines no ${name}`);
+    return found;
+  };
+  // The measurement builds afresh on every call, so a repeat times the build again.
+  const measure = body("measurePhysics");
+  assert.match(measure, /freshTrajectory\(/);
+  assert.doesNotMatch(measure, /ensureTrajectory|physicsCache/);
+  assert.doesNotMatch(body("freshTrajectory"), /physicsCache/);
+  // The cache fills from the same build, so what is timed is the trajectory the page would play.
+  assert.match(body("ensureTrajectory"), /tr = freshTrajectory\(pairIndex, style, mode\);/);
+  // And the page's API object carries it.
+  assert.match(application, /\n {4}physics,\n {4}measurePhysics,\n/);
 });
