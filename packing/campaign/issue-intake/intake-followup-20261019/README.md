@@ -70,10 +70,16 @@ Couzo’s n182 donor credit and the unlogged crossover mate remain explicit sour
 | Primary certificate, complete exact routes and sensitive pair/wall controls | **think-1hmn** | Complete: 34.87 process wall seconds, 30.55 route CPU seconds, within the 360-second ceiling. Regularized/source-checker runs remain separate open scope from the broader original estimate. |
 | Independent finite-geometry and trust-boundary review | **think-glg8** | Complete and mapped locally: primary finite upper bound accepted on retained replay plus read-only admission; no geometry rerun or new deciding program by the reviewer. |
 | Local review/replay evidence handoff | **think-arhu** | Maps the review, historical execution provenance and prospective program/evidence metadata; actual result and registry binding remain with the coordinator. |
+| Adopt T-218 at n183 and run both strong regularizers in that PR | **think-jh4w** | Open, owned next-PR obligation: 5–25 CPU-minutes (0.083–0.417 CPU-hours), estimated from the maintained per-count receipt range, within the standing 40 CPU-hour item cap. Gated on ordered registration and the adoption code slice; full `## Validation` block in the bead. |
 
 No house is adopted here.
 Any later adoption owes the project’s strong-generator regularization in that change;
 the source’s display view alone does not discharge it.
+The exact house reader admits the original certificate from its custody-bound packet.
+It selects T-218 below 14 and stages n183 under **think-jh4w** for the next pull request
+in `select_houses.PENDING_ADOPTION`. The adopting pull request removes that staging and
+decides both strong generators’ runs; it cannot defer this moved house to
+`default_drawings.PENDING_ALLOWED`.
 
 ### Bounded primary-certificate replay
 

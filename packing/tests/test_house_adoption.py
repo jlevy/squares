@@ -70,6 +70,30 @@ def test_every_smaller_validated_packing_is_the_house_or_staged(
     )
 
 
+def test_n183_primary_certificate_is_read_exactly_and_staged_with_its_runs() -> None:
+    entry = next(row for row in select.load_results() if row["id"] == "T-218")
+    unread: list[str] = []
+    selected = select.select([entry], select.load_evidence(), unread=unread)
+    assert unread == []
+    assert set(selected) == {183}
+    selection = selected[183]
+    house = selection.house
+    assert house is not None
+    assert house.side == Fraction(13999580178736252502081470897571, 10**30)
+    assert house.side < selection.case.verified == 14
+    assert house.result == "T-218"
+    assert house.report_evidence == ("E-evand-680-n183-report",)
+    assert house.confirming_evidence == ("E-evand-680-n183-primary-exact-feasibility",)
+    assert select.PENDING_ADOPTION[183] == select.Pending(
+        house="T-218", bead="think-jh4w", why=select.NEXT_PULL_REQUEST
+    )
+    assert 183 not in defaults.PENDING_ALLOWED
+    # Registration leaves the old case and its recorded adoption replay intact.
+    assert adopt.plan(selected) == []
+    recorded = select.select([entry], select.load_evidence(), recorded={183: "2026-10-19"})
+    assert recorded[183].house is None
+
+
 def test_every_adopted_case_holds_the_house_its_record_was_written_for(
     selections: dict[int, select.Selection], recorded: dict[int, select.Selection]
 ) -> None:
@@ -133,7 +157,9 @@ def test_the_records_of_the_lifted_hold_keep_their_next_candidates_until_adopted
     held_counts = {n for n, s in recorded.items() if s.held}
     assert set(NEXT_CANDIDATES) < held_counts
     assert len(held_counts) == 50
-    assert held_counts | {70, 153, 207} == set(select.PENDING_ADOPTION)
+    assert held_counts | {70, 153, 207} == {
+        n for n, pending in select.PENDING_ADOPTION.items() if pending.house == "T-174"
+    }
 
 
 def test_a_house_below_the_held_entry_leaves_the_hold_deciding_nothing(
@@ -945,6 +971,8 @@ def test_the_staged_adoptions_name_their_beads_and_reasons() -> None:
     and its algebraic ones for the writer's bead and the writer."""
     for n, pending in select.PENDING_ADOPTION.items():
         assert pending.why in select.STAGING_REASONS, n
+        if pending.house != "T-174":
+            continue
         algebraic = n in (70, 153, 207)
         assert (pending.bead, pending.why) == (
             (select.WRITER_BEAD, select.NO_WRITER)

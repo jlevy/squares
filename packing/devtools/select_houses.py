@@ -112,6 +112,8 @@ RULE_PASSES_FROM = "2026-10-17"
 #: the writer to take an algebraic side.
 ADOPTION_BEAD = "think-3mry"
 WRITER_BEAD = "think-ot5c"
+#: The original n183 certificate, adopted with both strong generators in the next PR.
+N183_ADOPTION_BEAD = "think-jh4w"
 #: Why a count's adoption waits for a later pull request, from a closed set: nothing
 #: else stages one (packing/campaign/result-import.md, "The House Rule"). The pass
 #: validated it in one pull request and adopts it in its next:
@@ -206,6 +208,7 @@ PENDING_ADOPTION: dict[int, Pending] = {
         n: Pending(house="T-174", bead=WRITER_BEAD, why=NO_WRITER)
         for n in (70, 153, 207)
     },
+    183: Pending(house="T-218", bead=N183_ADOPTION_BEAD, why=NEXT_PULL_REQUEST),
 }  # fmt: skip
 
 
