@@ -803,6 +803,13 @@ No case records, evidence or identity joins changed, so no data repin is needed.
 The callback type fix also passes focused BasedPyright.
 Both repairs are queued for final hosted CI; that run remains required for acceptance.
 
+The final hosted release-impact check correctly found that the n = 29 writer repair was
+missing from both reviewed no-change scopes.
+Under `think-97m2`, those scopes now include `adopt_houses.py`: 25 inputs for the
+explainer and 53 for the methods survey.
+The writer repair reproduces historical wording already retained in the case record, so
+this added input is source-reviewed without claiming a new render or PDF comparison.
+
 Review and validation receipts for this integration are recorded on PR #578 and
 `think-5bao`. The historical PDF census and profiles without sufficient identity
 evidence remain Phase 4 work under `think-m7il`.

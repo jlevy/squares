@@ -2648,6 +2648,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         components=("paper:n11-lower-bounds-explainer",),
         paths=(
             "packing/atlas/known-best/bound-citations.json",
+            "packing/devtools/adopt_houses.py",
             "packing/devtools/apply_closed_form.py",
             "packing/devtools/contributor_credit.py",
             "packing/devtools/overview_data.py",
@@ -2675,7 +2676,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         outputs=("papers/n11-lower-bounds-explainer.md",),
         reason=(
             "Compared with main d167d4b86 after the upstream merge, the exact candidate "
-            "scope is the 24 paths above. The manuscript and producer are unchanged, "
+            "scope is the 25 paths above. The manuscript and producer are unchanged, "
             "and Figure 3 reads only the unchanged n11 bound-citation entry. The merged "
             "Markdown edition was rendered and inspected; the numeric substitutions, "
             "certificate figures and paper text retain the published content. Changed "
@@ -2683,12 +2684,16 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "case/result serialization do not enter this manuscript. Shared navigation "
             "and sibling-paper metadata do not revise its content edition. This is a "
             "source-reviewed disposition: no baseline explainer render comparison or PDF "
-            "comparison is claimed. The explainer keeps v0.4.7."
+            "comparison is claimed. The final n29 adoption-writer repair reproduces "
+            "the historical wording already retained in its case record, without "
+            "changing a retained record or manuscript; that added input was "
+            "source-reviewed. The explainer keeps v0.4.7."
         ),
     ),
     ReleaseNoPublicChange(
         components=("paper:square-packing-methods-survey",),
         paths=(
+            "packing/devtools/adopt_houses.py",
             "packing/devtools/apply_closed_form.py",
             "packing/devtools/contributor_credit.py",
             "packing/devtools/overview_data.py",
@@ -2745,7 +2750,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         outputs=("papers/square-packing-methods-survey.md",),
         reason=(
             "Compared with main d167d4b86 after the upstream merge, the exact candidate "
-            "scope is the 52 paths above. Rendered both source trees at that same source-link "
+            "scope is the 53 paths above. Rendered both source trees at that same source-link "
             "revision, the methods survey HTML before browser math preparation and its "
             "expanded Markdown, including all five figures, are byte-identical. The "
             "baseline figure inputs are unchanged by this branch. In particular, Figure 3 "
@@ -2753,7 +2758,11 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "the earlier v0.2.2 comparison is not evidence for this integration. Changed "
             "frontier and source-coverage records are linked citations whose bodies are "
             "not incorporated. Profile links in News and standalone case/result "
-            "serialization do not enter this paper. No PDF was rebuilt or compared."
+            "serialization do not enter this paper. The final n29 adoption-writer "
+            "repair reproduces the historical wording already retained in its case "
+            "record, without changing a retained record or manuscript. That added "
+            "input was source-reviewed; the earlier render comparison was not "
+            "repeated. No PDF was rebuilt or compared."
         ),
     ),
     ReleaseNoPublicChange(
