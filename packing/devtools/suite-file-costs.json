@@ -642,6 +642,7 @@
     "packing/tests/test_snapshot_link_consumers.py": 0.112,
     "packing/tests/test_soundness_perimeter.py": 0.045,
     "packing/tests/test_source_coverage.py": 1.367,
+    "packing/tests/test_source_formal_verification.py": 1.131,
     "packing/tests/test_source_supersession.py": 0.007,
     "packing/tests/test_squish_receipt_binding.py": 0.524,
     "packing/tests/test_squish_receipt_retention.py": 3.672,
@@ -950,6 +951,20 @@
           "report": "packing/devtools/suite-file-cost-admissions/pingyou-pr622-2026-10-16.json",
           "provenance": {},
           "tests": 7
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_source_formal_verification.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/formal-proof-rubric-645-2026-10-16.json",
+          "provenance": {},
+          "tests": 47
         }
       ]
     }

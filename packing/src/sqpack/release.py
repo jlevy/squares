@@ -88,6 +88,15 @@ class PublicationHistoryEntry(NamedTuple):
 #: for each deployment's commit, what the page it built stated.
 PUBLICATION_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.7.33",
+        first_published="October 19, 2026",
+        result_scope=(
+            "Count a retained formal source build toward verification rather than "
+            "confirmation, moving Fitzharding's Lean proof of s(17) (T-154) from V0 to V3 "
+            "while it stays at C1."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.7.32",
         first_published="October 19, 2026",
         result_scope=(
@@ -540,7 +549,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "d0a60c660e33a5e009f95e6402021ff5726a5f5f"
+DATA_REVISION = "3025f3d5f049390ae642903449e410d70fbb7699"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -977,6 +986,17 @@ class ReleaseImpactDecision(NamedTuple):
 # New component cuts append decisions here, newest first, alongside their own histories.
 # No impact is invented retrospectively for the published baseline editions.
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
+    ReleaseImpactDecision(
+        component="site",
+        previous_version="v0.7.32",
+        version="v0.7.33",
+        impact="patch",
+        reason=(
+            "Count a retained formal source build toward verification rather than "
+            "confirmation, moving Fitzharding's Lean proof of s(17) (T-154) from V0 to V3 "
+            "while it stays at C1."
+        ),
+    ),
     ReleaseImpactDecision(
         component="site",
         previous_version="v0.7.31",
@@ -4247,6 +4267,89 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "explainer keeps v0.4.7."
         ),
     ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/devtools/check_results.py",
+            "packing/devtools/overview_data.py",
+            "packing/devtools/result_overview.py",
+            "packing/devtools/select_houses.py",
+            "packing/devtools/site_urls.py",
+            "packing/devtools/validate_schemas.py",
+            "packing/devtools/verifier_registry.py",
+            "packing/frontier/README.md",
+            "packing/frontier/results.yaml",
+        ),
+        outputs=(
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "Rendered for PR #645 at link revision b23abea0, once from this branch's tree "
+            "at a6e1bf30 and once with main's 14fd9e27 copies of the branch's changed files: "
+            "the three papers' HTML and Markdown and every asset their renderers write are "
+            "byte-identical, and each PDF prints from that HTML. The branch separates "
+            "source verification from confirmation, moves T-154 from V0 to V3 and changes "
+            "the assurance predicates, record links and the n = 17 page ceiling; none of "
+            "the three papers prints T-154, its evidence or those predicates' results, so "
+            "each keeps its edition: v0.1.7, v0.1.0 and v0.2.3."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer",),
+        paths=(
+            "packing/devtools/check_results.py",
+            "packing/devtools/overview_data.py",
+            "packing/devtools/result_overview.py",
+            "packing/devtools/select_houses.py",
+            "packing/devtools/site_urls.py",
+            "packing/devtools/validate_schemas.py",
+            "packing/devtools/verifier_registry.py",
+            "packing/frontier/results.yaml",
+            "packing/src/sqpack/assurance.py",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+        ),
+        reason=(
+            "Rendered for PR #645 with the browser's math pass, once from this branch's "
+            "tree at a6e1bf30 and once with main's 14fd9e27 copies of the branch's changed "
+            "files: the Markdown is byte-identical and the HTML, 1,416,033 bytes on both, "
+            "differs only in where an empty style attribute falls in two formulas' spans, "
+            "which moves between two renders of the same input. The register count is 217 "
+            "on both. The explainer prints no rung of T-154, so it keeps v0.4.8."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer",),
+        paths=(
+            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
+            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
+            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+        ),
+        reason=(
+            "PR #645's site v0.7.33 cut regenerated the five claim documents, and every "
+            "changed line differs from main only in its source-link revision, b23abea0 to "
+            "d24b3bf9. The explainer links those documents rather than inlining them, so "
+            "its HTML and Markdown are unchanged by them and it keeps v0.4.8. This is a "
+            "source-reviewed disposition; the render comparison above predates the cut."
+        ),
+    ),
 )
 
 
@@ -4383,7 +4486,7 @@ def validate_release_impacts(
 #: fresh render, so a link naming the build commit would fail their drift check forever. It is
 #: in no version string. It moves when the claim documents are regenerated for an edition. It
 #: must be a commit on `main`; the site's own links name `main` itself (`devtools.repo_links`).
-PUBLICATION_REVISION = "b23abea0"
+PUBLICATION_REVISION = "d24b3bf9"
 
 
 def data_pathspec() -> tuple[str, ...]:

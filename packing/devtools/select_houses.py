@@ -84,6 +84,7 @@ from devtools import exact_sides
 from devtools import upper_bound_reports as reports
 from devtools.check_results import scope_values
 from devtools.exact_sides import Side
+from sqpack.assurance import confirming_execution
 from sqpack.field import FieldPreconditionError
 from sqpack.yamlio import safe_load
 
@@ -399,6 +400,7 @@ def confirming(
             and item.get("claim") == "upper-bound"
             and item.get("assurance") == "verified"
             and item.get("origin") in CONFIRMING_ORIGINS
+            and confirming_execution(item)
             and item.get("replay_status") == "passed"
             and ("scope" not in item or n in scope_values(dict(item["scope"])))
         ):
