@@ -88,6 +88,14 @@ class PublicationHistoryEntry(NamedTuple):
 #: for each deployment's commit, what the page it built stated.
 PUBLICATION_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.8.0",
+        first_published="October 20, 2026",
+        result_scope=(
+            "Open the results page on what was added in the last seven days, day by day, "
+            "above the weekly rollup, with an Added filter on the table."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.7.35",
         first_published="October 19, 2026",
         result_scope=(
@@ -1002,6 +1010,16 @@ class ReleaseImpactDecision(NamedTuple):
 # New component cuts append decisions here, newest first, alongside their own histories.
 # No impact is invented retrospectively for the published baseline editions.
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
+    ReleaseImpactDecision(
+        component="site",
+        previous_version="v0.7.35",
+        version="v0.8.0",
+        impact="minor",
+        reason=(
+            "Open the results page on what was added in the last seven days, day by day, "
+            "above the weekly rollup, with an Added filter on the table."
+        ),
+    ),
     ReleaseImpactDecision(
         component="site",
         previous_version="v0.7.34",
@@ -4694,7 +4712,7 @@ def validate_release_impacts(
 #: fresh render, so a link naming the build commit would fail their drift check forever. It is
 #: in no version string. It moves when the claim documents are regenerated for an edition. It
 #: must be a commit on `main`; the site's own links name `main` itself (`devtools.repo_links`).
-PUBLICATION_REVISION = "e00bfbe5"
+PUBLICATION_REVISION = "98845675"
 
 
 def data_pathspec() -> tuple[str, ...]:
