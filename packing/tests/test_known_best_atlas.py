@@ -865,8 +865,7 @@ def test_known_best_composite_contains_every_case_and_square() -> None:
     # deferred slow lane's wall (runs 39292263543, 39262635681, 39297968153) and held one
     # xdist worker to its 1800s deadline. That the data layer `--update` writes leaves
     # the composites out is held by the whole `--check`, which builds that layer anyway.
-    # The builds are memoized on the worker count and the case, so the serial memo the
-    # corrupted-source test above builds is untouched by this one.
+    # The builds are memoized on the worker count and the case.
     workers = worker_count(known_best_builder.CORPUS.count)
     composite_path = ATLAS / "known-best-1-100.svg"
     canvas = known_best_builder.PRIMARY_COMPOSITE
@@ -3499,15 +3498,29 @@ def test_only_the_bound_numeral_carries_the_new_result_accent() -> None:
         assert set(plain) == set(expected_plain)
 
 
-def test_check_refuses_a_data_layer_that_would_write_a_composite() -> None:
+def test_check_refuses_a_data_layer_that_would_write_a_composite(monkeypatch) -> None:
     """Negative control for check(): a composite among the data layer's outputs is refused."""
     canvas = known_best_builder.COMPOSITES[0]
-    outputs = {canvas.svg_path: "<svg/>", known_best_builder.WITNESS_ROOT / "n-001.yaml": ""}
-    problems = known_best_builder._composite_write_problems(outputs)  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
     relative = known_best_builder._relative(canvas.svg_path)  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
-    assert problems == [f"the data layer would write the composite {relative}"]
-    del outputs[canvas.svg_path]
-    assert not known_best_builder._composite_write_problems(outputs)  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+    manifest = {
+        "atlas": {
+            "range": known_best_builder.range_record(known_best_builder.CORPUS),
+            "entries": [],
+        }
+    }
+    monkeypatch.setattr(
+        known_best_builder,
+        "expected_outputs",
+        lambda _workers=1: ({canvas.svg_path: "<svg/>"}, manifest),
+    )
+    monkeypatch.setattr(
+        known_best_builder,
+        "composite_findings",
+        lambda *_args, **_kwargs: known_best_builder.CompositeFindings((), ()),
+    )
+    with pytest.raises(ValueError, match="known-best atlas drift") as refused:
+        known_best_builder.check()
+    assert f"the data layer would write the composite {relative}" in str(refused.value)
 
 
 def test_fast_composite_check_rejects_a_stale_bound_label(monkeypatch) -> None:

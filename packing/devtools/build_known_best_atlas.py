@@ -1144,9 +1144,9 @@ def clear_build_caches() -> None:
 
     source_plans() reads the module-level source roots, so a caller that repoints
     one -- the negative controls do, to corrupt a retained SVG on purpose -- would
-    otherwise read or leave a plan set built against the other root. The built-case
-    memo and the expected outputs are keyed on worker count and n, not on the plan,
-    so they are cleared with it. _build_case() is keyed on the plan itself, which
+    otherwise read or leave a plan set built against the other root. _BUILT is keyed
+    on worker count and n, and _expected_outputs on worker count; neither is keyed
+    on the plan, so both are cleared with it. _build_case() is keyed on the plan itself, which
     carries the source path and its declared digest, so a corrupted source is a
     different key and cannot collide with the real one.
     """
@@ -4036,7 +4036,7 @@ def _cards(built: Sequence[BuiltCase], canvas: CompositeCanvas) -> list[BuiltCas
 def expected_composite(
     canvas: CompositeCanvas, identity: CompositeIdentity, workers: int = 1
 ) -> str:
-    """One composite as a rebuild of the whole corpus draws it, under `identity`.
+    """One composite drawn from freshly built cases, under `identity`.
 
     This is the expensive drawing, from cases re-derived from their sources, and it is
     what the whole `--check` compares a retained composite with. `workers` is as
@@ -4570,8 +4570,11 @@ def update_composites() -> None:
 
 
 def _composite_write_problems(outputs: Mapping[Path, str]) -> list[str]:
-    """The composites are not part of the data layer `--update` writes: they are drawn
-    apart, under the record of the data each was drawn from, and redrawn on demand."""
+    """One problem for each composite the data layer would write.
+
+    The composites are not part of the data layer `--update` writes: they are drawn
+    apart, under the record of the data each was drawn from, and redrawn on demand.
+    """
     return [
         f"the data layer would write the composite {_relative(canvas.svg_path)}"
         for canvas in COMPOSITES
