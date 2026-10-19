@@ -907,11 +907,13 @@ RECORDED: dict[int, tuple[tuple[str, str, str] | None, tuple[str, str, str] | No
     # 1 October replayed as T-074, which took the case on 2026-10-02 from its 28 September
     # certificate (T-070), itself raised that day from the point bound of T-044. Since the
     # adoption of 17 October 2026 PingYou Ltd's refinement of Rehwaldt's packing (T-174),
-    # the finder and two improvers.
+    # the finder and two improvers. Since the intake of 19 October 2026 the lower line is
+    # wand125's fine-net certificate of 16 October, 853/100, replayed as T-205, whose
+    # source record credits "wand125 after Tokoharu and Levy".
     68: (
         ("Couzo et al., GitHub (confirmed T-174)", "external", "verified"),
         (
-            "wand125 after Tokoharu, Levy et al. 2026, GitHub (confirmed T-074)",
+            "wand125 after Tokoharu and Levy 2026, GitHub (confirmed T-205)",
             "external",
             "verified",
         ),
