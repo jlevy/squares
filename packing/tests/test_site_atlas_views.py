@@ -1934,6 +1934,11 @@ def test_atlas_fills_available_width_with_and_without_scripts(
             page = context.new_page()
             page.goto((atlas_files / name).as_uri(), wait_until="load")
             check_site_rendering.wait_for_fonts(page)
+            # Reduced motion still inherits 0.01ms native transitions. Freeze their
+            # clock so an unintended interpolation cannot disappear before we read it.
+            client = context.new_cdp_session(page)
+            client.send("Animation.enable")
+            client.send("Animation.setPlaybackRate", {"playbackRate": 0})
             for width in (390, 1920, 3200):
                 page.set_viewport_size({"width": width, "height": 900})
                 if javascript:
@@ -1943,7 +1948,10 @@ def test_atlas_fills_available_width_with_and_without_scripts(
                         page.locator(atlas.tab(view)).click()
                         atlas.settle(page)
                     report = page.evaluate(LAYOUT)
-                    where = f"{name}, {width}px, {view}, scripts {javascript}"
+                    where = (
+                        f"{name}, {width}px, {view}, scripts {javascript}",
+                        report["block_transition"],
+                    )
                     assert report["block"]["left"] == pytest.approx(
                         report["available"]["left"], abs=0.5
                     ), where
