@@ -822,16 +822,17 @@ Review and validation receipts for this integration are recorded on PR #578 and
 `think-5bao`. The historical PDF census and profiles without sufficient identity
 evidence remain Phase 4 work under `think-m7il`.
 
-## Landed-Main Integration: 2026-10-19
+## Integration After PR #671 and PR #407: 2026-10-19
 
 The Sol continuation under `think-wrh8` integrates actual main
-`6833d05aa44f48140170e631b7766cb295876c31`, after PR #671 landed.
+`e0319ffd1c96986e0260083db7d3f3411f3bb4ef`, after PR #671 and PR #407 landed.
+The earlier qualification against `6833d05` retains its own source and test receipts.
 All 217 result IDs, rungs and significance scores, 641 evidence IDs, every case’s bound
 values and exact forms, and the current houses, rigidity records and default views are
 retained. The eighteen new lower-bound rows remain V0/C0 except T-216 at V3/C3; n108’s
 adopted lower bound remains `531/50`.
 
-The selected site edition remains proposed `v0.8.0`, following actual `v0.7.29`. The
+The selected site edition remains proposed `v0.8.0`, following actual `v0.7.30`. The
 explainer inherits `v0.4.8` and its October 13 article revision; the methods survey
 keeps `v0.2.3`, and the posters keep `v0.6.3`. Fresh release dispositions compare the
 final 30/52 input scopes with actual main: five regenerated claim-link inputs enter the

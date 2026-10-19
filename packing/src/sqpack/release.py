@@ -97,6 +97,14 @@ PUBLICATION_HISTORY = (
         ),
     ),
     PublicationHistoryEntry(
+        version="v0.7.30",
+        first_published="October 19, 2026",
+        result_scope=(
+            "Document the cached libproc current-RSS contract and installed-SDK native "
+            "assurance on macOS."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.7.29",
         first_published="October 19, 2026",
         result_scope=(
@@ -979,12 +987,22 @@ class ReleaseImpactDecision(NamedTuple):
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
     ReleaseImpactDecision(
         component="site",
-        previous_version="v0.7.29",
+        previous_version="v0.7.30",
         version="v0.8.0",
         impact="minor",
         reason=(
             "Add person profiles and reviewed credit links, with direct profile "
             "navigation and shared article popovers for complete case and result records."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="site",
+        previous_version="v0.7.29",
+        version="v0.7.30",
+        impact="patch",
+        reason=(
+            "Document the cached libproc current-RSS contract and installed-SDK native "
+            "assurance on macOS."
         ),
     ),
     ReleaseImpactDecision(
@@ -1459,6 +1477,33 @@ class ReleaseNoPublicChange(NamedTuple):
 
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
+    ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer",),
+        paths=(
+            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
+            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
+            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-lower-bounds-explainer.pdf",
+        ),
+        reason=(
+            "For PR407 against main 6833d05aa, the five generated claim documents "
+            "differ only in GitHub source-link revisions, from a450742e to c0fc4f9d, "
+            "the clean integration checkpoint before the site cut. Their claims, "
+            "proofs, embedded certificates and verifier text are unchanged. The "
+            "explainer checks these documents' presence and links to them; it does "
+            "not inline their bodies. Its manuscript, certificate inputs, figures, "
+            "renderer and own release metadata are unchanged, so it retains v0.4.8. "
+            "This is a source-based review of the HTML, Markdown and PDF producers; "
+            "no PDF redraw, proof rerun or artifact byte identity is claimed. Site "
+            "v0.7.30 owns the published development-guide correction."
+        ),
+    ),
     ReleaseNoPublicChange(
         components=("paper:n11-optimality-review",),
         paths=(
@@ -2835,20 +2880,19 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         ),
         outputs=("papers/n11-lower-bounds-explainer.md",),
         reason=(
-            "Compared with actual main 6833d05aa44f48140170e631b7766cb295876c31 after "
-            "PR 671 landed, the exact candidate scope is the 30 paths above. The "
-            "explainer manuscript and producer are byte-identical to main, and its n11 "
-            "bound-citation entry is unchanged; other counts and source-specific credit "
-            "links do not enter the article. The inherited register count, explainer "
-            "v0.4.8 history and October 13 article revision remain current. Changed "
-            "standalone case/result serialization, News/profile navigation and "
+            "Compared with actual main e0319ffd1c96986e0260083db7d3f3411f3bb4ef after "
+            "PR 671 and PR 407 landed, the exact candidate scope is the 30 paths above. "
+            "The explainer manuscript and producer are byte-identical to main, and its "
+            "n11 bound-citation entry is unchanged; other counts and source-specific "
+            "credit links do not enter the article. The inherited register count, "
+            "explainer v0.4.8 history and October 13 article revision remain current. "
+            "Changed standalone case/result serialization, News/profile navigation and "
             "sibling-paper metadata do not revise this paper content. The n29 "
             "adoption-writer repair reproduces retained historical wording. This is a "
             "fresh source review against actual main; no baseline paper render, PDF "
             "rebuild or byte-identity comparison of rendered output is claimed. The "
-            "five claim documents were regenerated at source revision 4a418c7c; exact "
-            "comparison against the pre-repin documents confirms only source-link "
-            "revision replacements."
+            "five claim documents are regenerated with the selected edition source pin; "
+            "exact comparison confirms only source-link revision replacements."
         ),
     ),
     ReleaseNoPublicChange(
@@ -2909,9 +2953,9 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         ),
         outputs=("papers/square-packing-methods-survey.md",),
         reason=(
-            "Compared with actual main 6833d05aa44f48140170e631b7766cb295876c31 after "
-            "PR 671 landed, the exact candidate scope is the 52 paths above. The "
-            "methods manuscript, producer and every passive figure input are "
+            "Compared with actual main e0319ffd1c96986e0260083db7d3f3411f3bb4ef after "
+            "PR 671 and PR 407 landed, the exact candidate scope is the 52 paths above. "
+            "The methods manuscript, producer and every passive figure input are "
             "byte-identical to main, including the n29 certificate drawing. Changed "
             "frontier/source-coverage prose is cited by link rather than incorporated; "
             "shared News, profile and standalone case/result helpers do not enter the "
