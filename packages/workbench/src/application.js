@@ -1859,17 +1859,22 @@ const SQUARES_WORKBENCH_CORE = workbenchBundle.core;
     const tm = timelineBaseTiming(timelineConfiguration(), pairIndex, style);
     return Math.max(1, Math.round(PHYS.stepsPerSecond * (tm.move + tm.correct)));
   }
+  // One trajectory built from scratch under the page's settings, neither read from nor kept in the
+  // cache. The cache fills from this, so `measurePhysics` times the build the cache would hold.
+  function freshTrajectory(pairIndex, style, mode) {
+    return simulate(
+      pairIndex,
+      physicsSteps(pairIndex, style),
+      style,
+      trajectoryMode(mode),
+      state.anneal,
+    );
+  }
   function ensureTrajectory(pairIndex, style, mode) {
     const key = trajectoryKey(pairIndex, style, mode);
     let tr = physicsCache.get(key);
     if (!tr) {
-      tr = simulate(
-        pairIndex,
-        physicsSteps(pairIndex, style),
-        style,
-        trajectoryMode(mode),
-        state.anneal,
-      );
+      tr = freshTrajectory(pairIndex, style, mode);
       if (physicsCache.size >= PHYS_CACHE_MAX) {
         physicsCache.delete(physicsCache.keys().next().value);
       }
@@ -5351,9 +5356,23 @@ const SQUARES_WORKBENCH_CORE = workbenchBundle.core;
   // For verification: the cached trajectory's size, cost and final poses (degrees) for one pair
   // under a style (the current physical style by default; B when the tween is showing).
   function physics(index, style, mode) {
-    index = Math.max(0, Math.min(PAIRS.length - 1, index | 0));
-    style = isPhysical(style) ? style : isPhysical(state.style) ? state.style : DEFAULT_PACK_STYLE;
-    const tr = ensureTrajectory(index, style, mode);
+    const pair = physicsPair(index);
+    return physicsReport(pair, ensureTrajectory(pair, physicsStyle(style), mode));
+  }
+  // The same report for a trajectory built from scratch, past the cache: `physics` hands a repeat
+  // the first build's `ms`, and this times the build again on every call, so a cost check can
+  // judge the fastest of several builds rather than one that a loaded host slowed (#538).
+  function measurePhysics(index, style, mode) {
+    const pair = physicsPair(index);
+    return physicsReport(pair, freshTrajectory(pair, physicsStyle(style), mode));
+  }
+  function physicsPair(index) {
+    return Math.max(0, Math.min(PAIRS.length - 1, index | 0));
+  }
+  function physicsStyle(style) {
+    return isPhysical(style) ? style : isPhysical(state.style) ? state.style : DEFAULT_PACK_STYLE;
+  }
+  function physicsReport(index, tr) {
     const N = tr.n + 1;
     const o = tr.steps * N * 3;
     /** @type {[number, number, number][]} */
@@ -6290,6 +6309,7 @@ const SQUARES_WORKBENCH_CORE = workbenchBundle.core;
     sequenceDuration,
     seekSequence,
     physics,
+    measurePhysics,
     // Revision 6, feature 4: the whole sequence back to back, and the jump to a given n.
     playAll,
     stopAll,
