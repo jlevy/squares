@@ -88,11 +88,19 @@ class PublicationHistoryEntry(NamedTuple):
 #: for each deployment's commit, what the page it built stated.
 PUBLICATION_HISTORY = (
     PublicationHistoryEntry(
-        version="v0.7.28",
-        first_published="October 18, 2026",
+        version="v0.7.29",
+        first_published="October 19, 2026",
         result_scope=(
             "Register eighteen fine-net lower bounds, adopt the reviewed n108 bound and "
             "retain its exact audit provenance and safe packet publication."
+        ),
+    ),
+    PublicationHistoryEntry(
+        version="v0.7.28",
+        first_published="October 19, 2026",
+        result_scope=(
+            "Document the canonical Rust multiplication default and reproducible "
+            "benchmark controls, and refresh the session accounting in the synopsis."
         ),
     ),
     PublicationHistoryEntry(
@@ -606,7 +614,7 @@ FIRST_PUBLISHED = PUBLICATION_HISTORY[-1].first_published
 EXPLAINER_HISTORY = (
     PublicationHistoryEntry(
         version="v0.4.8",
-        first_published="October 18, 2026",
+        first_published="October 19, 2026",
         result_scope=(
             "Update the registered result count and current bound citations after the "
             "fine-net imports and reviewed n108 adoption."
@@ -696,7 +704,7 @@ EXPLAINER_FIRST_PUBLISHED = EXPLAINER_HISTORY[-1].first_published
 #: `PUBLICATION_DATE`, the day the edition was first published, which stood still while
 #: the article changed under it: merging is the whole publish, so the text a reader sees
 #: moves between editions. Change it in the commit that changes the article.
-EXPLAINER_REVISED = "October 13, 2026"
+EXPLAINER_REVISED = "October 19, 2026"
 
 #: The optimality review's own editions, newest first, each with the day it was first
 #: published and what changed in the paper: the review's history, as `EXPLAINER_HISTORY`
@@ -947,8 +955,8 @@ class ReleaseImpactDecision(NamedTuple):
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
     ReleaseImpactDecision(
         component="site",
-        previous_version="v0.7.27",
-        version="v0.7.28",
+        previous_version="v0.7.28",
+        version="v0.7.29",
         impact="patch",
         reason=(
             "Register eighteen fine-net lower bounds, adopt the reviewed n108 bound and "
@@ -963,6 +971,16 @@ RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
         reason=(
             "Update the registered result count and current bound citations after the "
             "fine-net imports and reviewed n108 adoption."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="site",
+        previous_version="v0.7.27",
+        version="v0.7.28",
+        impact="patch",
+        reason=(
+            "Document the canonical Rust multiplication default and reproducible "
+            "benchmark controls, and refresh the session accounting in the synopsis."
         ),
     ),
     ReleaseImpactDecision(
@@ -1405,12 +1423,12 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "papers/n11-optimality-review.md",
         ),
         reason=(
-            "For PR 671, rendered HTML and Markdown against main d167d4b86 and the "
-            "current integration tree, using source-link revision d167d4b86 in both. Both "
-            "outputs are byte-identical. The n11 optimality review retains its article, "
-            "selected facts and figures, so its edition remains v0.1.7. The fine-net "
-            "records, monotone case planning, safe packet publication and explainer "
-            "pagination guard do not change these outputs."
+            "For PR 671, rendered HTML and Markdown against reviewed PR 679 candidate "
+            "e22a9f9f4 and the current integration tree, using source-link revision "
+            "e22a9f9f4 in both. Both outputs are byte-identical. The n11 optimality "
+            "review retains its article, selected facts and figures, so its edition "
+            "remains v0.1.7. The fine-net records, monotone case planning, safe packet "
+            "publication and explainer pagination guard do not change these outputs."
         ),
     ),
     ReleaseNoPublicChange(
@@ -1428,12 +1446,12 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "papers/n11-threshold-bound-review.md",
         ),
         reason=(
-            "For PR 671, rendered HTML and Markdown against main d167d4b86 and the "
-            "current integration tree, using source-link revision d167d4b86 in both. Both "
-            "outputs are byte-identical. The n11 threshold review retains its article, "
-            "selected facts and figures, so its edition remains v0.1.0. The fine-net "
-            "records, monotone case planning, safe packet publication and explainer "
-            "pagination guard do not change these outputs."
+            "For PR 671, rendered HTML and Markdown against reviewed PR 679 candidate "
+            "e22a9f9f4 and the current integration tree, using source-link revision "
+            "e22a9f9f4 in both. Both outputs are byte-identical. The n11 threshold review "
+            "retains its article, selected facts and figures, so its edition remains "
+            "v0.1.0. The fine-net records, monotone case planning, safe packet "
+            "publication and explainer pagination guard do not change these outputs."
         ),
     ),
     ReleaseNoPublicChange(
@@ -1454,12 +1472,41 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "papers/square-packing-methods-survey.md",
         ),
         reason=(
-            "For PR 671, rendered HTML and Markdown against main d167d4b86 and the "
-            "current integration tree, using source-link revision d167d4b86 in both. Both "
-            "outputs are byte-identical. The square-packing methods survey retains its "
-            "article, selected facts and figures, so its edition remains v0.2.3. The "
-            "fine-net records, monotone case planning, safe packet publication and "
-            "explainer pagination guard do not change these outputs."
+            "For PR 671, rendered HTML and Markdown against reviewed PR 679 candidate "
+            "e22a9f9f4 and the current integration tree, using source-link revision "
+            "e22a9f9f4 in both. Both outputs are byte-identical. The square-packing "
+            "methods survey retains its article, selected facts and figures, so its "
+            "edition remains v0.2.3. The fine-net records, monotone case planning, safe "
+            "packet publication and explainer pagination guard do not change these "
+            "outputs."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer",),
+        paths=(
+            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
+            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
+            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
+            "packing/src/sqpack/cli/validate.py",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-lower-bounds-explainer.pdf",
+        ),
+        reason=(
+            "Reviewed against main d167d4b86 for PR #679 A1: the validate.py delta "
+            "only extends _rust_exact_geometry's Cargo feature-selection checks. It "
+            "changes no paper renderer, input, proof, figure, substitution or citation. "
+            "The paper's declared import closure conservatively includes this command "
+            "module, but rendering the paper never runs that validation step. This is "
+            "a source-path review, not an HTML/PDF byte comparison. The five generated "
+            "claim documents only refresh their source links to PUBLICATION_REVISION; "
+            "their claims, proofs, certificate bytes and verifier text are unchanged. "
+            "The explainer keeps v0.4.7. Site v0.7.28 owns the published development-guide and "
+            "synopsis changes."
         ),
     ),
     ReleaseNoPublicChange(
@@ -3978,7 +4025,7 @@ def validate_release_impacts(
 #: fresh render, so a link naming the build commit would fail their drift check forever. It is
 #: in no version string. It moves when the claim documents are regenerated for an edition. It
 #: must be a commit on `main`; the site's own links name `main` itself (`devtools.repo_links`).
-PUBLICATION_REVISION = "337b84df"
+PUBLICATION_REVISION = "c36eb7d6"
 
 
 def data_pathspec() -> tuple[str, ...]:

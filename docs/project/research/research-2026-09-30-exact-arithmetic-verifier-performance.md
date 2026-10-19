@@ -5,12 +5,17 @@
 **Author:** Codex (Astra mathematical and source review; Sol profiling), for the squares
 project
 
-**Status:** Complete: source survey, mathematical review, reduction ablation, and
-bounded verifier comparison.
+**Status (2026-09-30):** Complete: source survey, mathematical review, reduction
+ablation, and bounded verifier comparison.
 Alternative libraries and a full external certificate replay remain unmeasured;
 production defaults are unchanged.
 
 **Tracking:** `think-i5x7` and `think-ss4a`, under `think-3cwg`.
+
+**2026-10-19 update:** The [default-adoption replication](#2026-10-19-default-adoption)
+supports enabling the reviewed multiplication helper.
+The September observations and receipts below retain their original configurations and
+dates.
 
 ## Overview
 
@@ -733,6 +738,60 @@ different from scalar exact rectangle clipping.
 No blanket claim about Rust, Python, GMP, FLINT, or pure-Rust arithmetic follows from
 any one of them.
 
+## 2026-10-19 Default Adoption
+
+Task `think-1ozu` repeats the bounded verifier comparison on `x86_64-unknown-linux-gnu`
+with Rust 1.98.0 and Python 3.14.7. Both arms are freshly built from the same source,
+lockfile, compiler and flags: `reference` disables default features, while `default`
+enables the reviewed canonical multiplication helper.
+Parsing, addition, division, geometry and the Python backend selection are unchanged.
+
+The [new receipt][canonical-default-ab] preserves all twelve observations.
+Three alternating pairs on each fixture matched every retained normalized report: the
+analytic 201-angle control remained VERIFIED at 1,781 nodes, and the external 1,000-node
+control remained INCONCLUSIVE with the same pending geometry.
+
+| Fixture and Metric | Reference Median (Range), Seconds | Default Median (Range), Seconds | Ratio of Medians |
+| --- | ---: | ---: | ---: |
+| External child CPU | 5.795166 (5.772984–5.953937) | 4.911765 (4.877964–4.942065) | 0.847562 |
+| External invocation wall | 6.086723 (6.071685–6.257285) | 5.195644 (5.161995–5.227063) | 0.853603 |
+| Analytic child CPU | 0.521186 (0.517598–0.524426) | 0.405132 (0.403470–0.408227) | 0.777327 |
+| Analytic invocation wall | 0.864333 (0.862052–0.870713) | 0.745305 (0.743025–0.750353) | 0.862289 |
+
+The original material rule passes: external child-CPU median is at most 90% of reference
+with separated ranges, and neither invocation-wall median exceeds 105% of reference.
+External paired CPU ratios are 0.850819, 0.830050 and 0.841730; paired wall ratios are
+0.855717, 0.835356 and 0.848075. The 15.24% CPU and 14.64% wall reductions compare
+medians, not the median of paired changes.
+This is an exploratory three-pair replication, without a confirmatory confidence
+interval or a claim about other certificates or Python speed.
+Build setup is recorded separately from the invocation timings.
+
+Each release arm also passed the
+[210-polygon, ten-refusal and two-verifier controls][canonical-default-controls] against
+the Python oracle. The Rust tests add 5,184 bounded small-rational pair executions and
+retain six zero, signed and large-cancellation cases, comparing exact numerators and
+denominators with the library operator.
+These executions include duplicate normalized values.
+Direct batch and resident queries cover unreduced fractions, negative denominators and
+noncanonical zero tokens; they return the canonical values $6$, $21/4$ and $0$. These
+finite checks supplement the private canonical-input invariant argument above.
+
+The production default now selects `experimental-coprime-mul`. The historical feature
+name remains available; `--no-default-features` preserves the original expressions, and
+explicit no-default normalized/coprime modes preserve the constructor ablation.
+The gate also checks the combined-feature mode, which selects the coprime helper.
+
+The maintained verifier benchmark builds both arms itself with `--target-root` and
+`--output`, rejects source/input/binary changes and incomplete work, and supports
+declared Linux scratch outside the checkout while preserving its macOS mounted-volume
+policy. The September receipts are unchanged; replaying their obsolete prior-binary CLI
+requires the original source at `804eff369193b698d497a9c06847059eb9de0470`. The new
+public receipts replace only local path prefixes with declared aliases; measured values
+and identities are retained.
+Two local setup attempts stopped before any trial (module import and the old Mac-only
+scratch admission); neither contributes a timing sample.
+
 ## References and Retained Artifacts
 
 - [Matched Python/Rust exact reports][matched]: result identities and bounded verifier
@@ -760,6 +819,8 @@ any one of them.
 - [August infrastructure study][older-report]: earlier search-predicate and number-field
   benchmarks, with a different performance scope.
 
+[canonical-default-ab]: ../../../packing/resources/web/wand125-tools-2026-09-29/receipts/rust-exact-canonical-default-ab-2026-10-19.json
+[canonical-default-controls]: ../../../packing/resources/web/wand125-tools-2026-09-29/receipts/rust-exact-canonical-default-controls-2026-10-19.json
 [matched]: ../../../packing/resources/web/wand125-tools-2026-09-29/receipts/native-rust-backend-matched-2026-09-30.json
 [verifier-ab]: ../../../packing/resources/web/wand125-tools-2026-09-29/receipts/rust-exact-bounded-verifier-ab-2026-09-30.json
 [verifier-benchmark]: ../../../packing/benchmarks/bench_rectangle_rust_verifier_ab.py
