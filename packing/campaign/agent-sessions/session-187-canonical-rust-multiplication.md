@@ -255,11 +255,17 @@ session:
     kill_condition: Stop at the phase deadline or resource refusal; do not change tests, coverage,
       limits, skips or thresholds to obtain acceptance.
     fallback: Retain the exact failure and actionable repair; keep the contribution incomplete.
-    outcome: null
-    evidence: []
+    outcome: The repaired local contribution gate passed all 69 steps in 1218.142 seconds, including
+      6668 passing and 36 conditionally skipped reachable cases; the same frozen source passed
+      all 52 records steps. PR 679 was submitted, but its first hosted run failed release-impact
+      decisions and a frontend command deadline. Hosted acceptance remains incomplete.
+    evidence:
+    - https://github.com/jlevy/squares/pull/679
+    - https://github.com/jlevy/squares/actions/runs/39191999508
+    - https://github.com/jlevy/squares/pull/679#pullrequestreview-5566794562
     stop_reason: null
-    next_action: Verify the launcher, complete exact-source checks, then submit the independently
-      reviewed checkpoint for think-1ozu.
+    next_action: Address review A1-A3 under think-hv53, then obtain complete ordinary and deferred
+      hosted gates on matching final source and base before acceptance of think-1ozu.
   primary_bead: think-1ozu
   status: in_progress
   budget:
@@ -426,7 +432,7 @@ session:
   - docs/project/research/research-2026-09-30-exact-arithmetic-verifier-performance.md
   - packing/campaign/resource-usage/codex-task-tree-session-187.yaml
   checks:
-  - Upstream main remains 804eff369193b698d497a9c06847059eb9de0470; Windows-owned tracker claim/sync/readback
+  - Opening upstream main was 804eff369193b698d497a9c06847059eb9de0470; Windows-owned tracker claim/sync/readback
     completed.
   - Independent review supports the canonical-input argument and twelve-report exploratory improvement;
     publication fix and full contribution gates are still under review.
@@ -440,9 +446,18 @@ session:
   - 'Task-local runtime repair: jq/libjq1 1.8.1-4ubuntu2, libonig5 6.9.10-1build1 and Liberation fonts
     2.1.5-3build1 admitted by exact cached apt hashes; seven original failures pass. Native/host HTTPS
     transport receipts are retained privately. No global apt source or package database was modified.'
+  - 'Hosted run 39191999508 at PR head c78cc5e271: validate, frontend and packing-required failed.
+    The frontend completed 425 cases with 6 skips, then its serial forwarder command timed out
+    after 488.387 seconds. Retained progress identifies test_the_deployed_site_check_follows_the_same_forwarders
+    in its call phase after 18 completed cases; the underlying Playwright wait is not yet diagnosed.'
+  - 'Independent formal reviews A-D cover senior engineering, correctness, security and performance.
+    Only A has findings: missing release dispositions, incomplete frontend validation and a stale
+    current-phase handoff. Review repair integrates main d167d4b86; the mathematical result and
+    retained performance measurements are unchanged.'
   stop_reason: null
-  next_action: Verify the launcher, complete exact-source checks, then submit the independently reviewed
-    checkpoint for think-1ozu.
+  next_action: Complete PR 679 review A1-A3 through think-hv53, obtain passing ordinary and deferred
+    hosted gates on matching final source and base, then submit think-1ozu for acceptance. Keep
+    the separately claimed follow-up experiment pending.
   resource_rollups:
   - packing/campaign/resource-usage/codex-task-tree-session-187.yaml
 ---
@@ -457,8 +472,11 @@ diagnostic proves it valid.
 
 Slots start at 00:21:25 UTC on 2026-10-19. Later slots are maximum allocations, revised
 from retained evidence at each boundary.
-Current phase is 7: the task-local runtime repair and all seven focused controls pass.
-Complete unchanged pre-push validation is being repeated before submission.
+Current phase is 8: the runtime-repaired local records and pre-push checks passed, and
+PR [#679](https://github.com/jlevy/squares/pull/679) is awaiting hosted acceptance.
+Its first hosted run failed the release-impact gate and stalled in the serial forwarder
+test. Review A1-A3 is tracked in think-hv53; the next checkpoint must complete the
+ordinary PR surface and deferred hosted checks on the final source and base.
 The cycle ceiling is prospectively revised from 12 to 18 because earlier checkpoints
 finished before their 30-minute allocations; the six-hour hard deadline and final
 30-minute reserve are unchanged.
