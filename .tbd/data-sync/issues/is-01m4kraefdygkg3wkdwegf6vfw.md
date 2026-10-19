@@ -5,13 +5,15 @@ title: "check_requests --draft: fix the seven defects the 2026-10-10 reply draft
 kind: bug
 status: open
 priority: 2
-version: 2
+version: 3
 labels:
   - result-import
 dependencies: []
 parent_id: is-01m4jk37jkzx9bzdws5jj72qg7
+child_order_hints:
+  - is-01m59f4zkye3agw7a31k3a885t
 created_at: 2026-10-10T20:33:24.973Z
-updated_at: 2026-10-15T19:58:15.406Z
+updated_at: 2026-10-19T06:56:26.238Z
 ---
 `python -m devtools.check_requests --draft N` produces stage 7 status comments that the 2026-10-10 reply lanes had to rewrite every time. Defects found (think-mtwe's notes record the first three; lane L27 of the 2026-10-10 pass found the rest):
 
