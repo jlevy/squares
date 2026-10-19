@@ -30,8 +30,19 @@ Their relative links outside this packet describe the original checkout location
 This README is maintained navigation; the four reviewer files are archival source under
 the existing archive formatting, lint and type exclusions.
 
-The separate full-tree custody operation remains required for the 66-house union.
-The historical 65-house receipt does not cover n29 and remains historical evidence.
+The [historical 65-house custody receipt](historical-65-house-custody.json) preserves
+the canonical receipt exactly as it stood at `34903e701bb8a73d6a65f419525c354743bd94b7`,
+before the complete-tree custody run for the 66-house union.
+[Its retention record](historical-65-house-custody-retention.json) records the original
+Git path, byte count and hash separately from the four reviewer files above.
+The historical receipt does not cover n29; its timings and house map belong to that
+65-house run. The current complete-tree receipt is
+[`packing/devtools/house-custody-2026-10-11.json`](../../../devtools/house-custody-2026-10-11.json).
+Its operation admitted all 66 houses from 156 inputs and refused and restored 24 late
+mutations, with no geometric decider run and both input byte-equality checks passing.
+Its measured snapshot was 228,578,604 bytes against a 226,492,416-byte cap.
+That operation’s `PASS` records its admission and mutation outcome; the snapshot-cap
+assertion still fails, so the complete custody gate remains open.
 The retained diagnostic and this packet claim no new replay of a packing certificate or
 regularization run.
 

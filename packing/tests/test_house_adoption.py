@@ -142,7 +142,9 @@ def test_the_records_of_the_lifted_hold_keep_their_next_candidates_until_adopted
     held_counts = {n for n, s in recorded.items() if s.held}
     assert set(NEXT_CANDIDATES) < held_counts
     assert len(held_counts) == 50
-    assert held_counts | {70, 153, 207} == (set(select.PENDING_ADOPTION) | set(previous))
+    previous_t174 = {n for n in previous if houses.ADOPTED[n] == "T-174"}
+    assert held_counts | {70, 153, 207} == (set(select.PENDING_ADOPTION) | previous_t174)
+    assert {n: houses.ADOPTED[n] for n in previous if n not in previous_t174} == {29: "T-195"}
 
 
 def test_a_house_below_the_held_entry_leaves_the_hold_deciding_nothing(
@@ -1006,6 +1008,32 @@ def test_the_retained_integration_diagnostic_keeps_its_executed_bytes() -> None:
         )
 
 
+def test_the_historical_custody_receipt_is_retained_separately_from_the_union() -> None:
+    packet = houses.ROOT / "resources/web/t174-adoption-integration-diagnostic-2026-10-19"
+    retention = json.loads((packet / "historical-65-house-custody-retention.json").read_text())
+    assert retention["format"] == "historical-house-custody-retention-v1"
+    assert retention["source_ref"] == "34903e701bb8a73d6a65f419525c354743bd94b7"
+    assert retention["source_path"] == "packing/devtools/house-custody-2026-10-11.json"
+    raw = (packet / retention["path"]).read_bytes()
+    assert len(raw) == retention["bytes"] == 31822
+    assert (
+        hashlib.sha256(raw).hexdigest()
+        == retention["sha256"]
+        == ("e2366300564a93226ffd479d78883ec688e9c11fc8b3a88d8ae24191f08eb39e")
+    )
+    historical = json.loads(raw)
+    assert historical["format"] == houses.CUSTODY_FORMAT
+    assert historical["outcome"] == "PASS"
+    assert len(historical["houses"]) == 65
+    assert "29" not in historical["houses"]
+    assert historical["houses"] == {
+        str(n): result for n, result in houses.ADOPTED.items() if n != 29
+    }
+    assert {int(n) for n, result in historical["houses"].items() if result == "T-174"} == (
+        set(houses.numbers_of("T-174"))
+    )
+
+
 def test_check_judges_the_whole_register_and_refuses_since() -> None:
     """Review A9 of #660: narrowed to entries registered since a day, `--check` judged the
     staged counts without the entries they were staged for and advised unstaging all 63."""
@@ -1496,10 +1524,10 @@ def test_a_house_that_is_the_replaced_packing_keeps_what_the_record_knew_of_it(
 def test_where_the_replaced_lanes_differ_the_margin_is_read_from_the_verified_ceiling(
     replayed: list[adopt.Move],
 ) -> None:
-    """The replaced displays differ at 29 and 132. Their opening, section and history
+    """The replaced displays differ at 29, 132 and 308. Their opening, section and history
     note use the exact verified baseline (reviews C3 and D1 of #661; M2/M3 of #665).
-    At 29 the catalogue print orders nothing; at 132 the reported exact side agrees
-    with the verified side, but its display differs from the verified display."""
+    At 29 the catalogue print orders nothing; at 132 and 308 the reported exact side
+    agrees with the verified side, but its display differs from the verified display."""
     differing = {
         29: (
             Fraction(
@@ -1522,6 +1550,14 @@ def test_where_the_replaced_lanes_differ_the_margin_is_read_from_the_verified_ce
             "[Daniel record hunt 3 2026-10-10]",
             "lies `1.20e-19` above the new side",
         ),
+        308: (
+            Fraction("17998269879526255875387992744507/1000000000000000000000000000000"),
+            "17.998269879526255875387992744507",
+            "17.9982698795262559",
+            "T-141",
+            "[Daniel record hunt 3 2026-10-10]",
+            "lies `1.80e-19` above the new side",
+        ),
     }
     for n, (expected, printed, verified_display, result, source, relation) in differing.items():
         move = next(move for move in replayed if move.n == n)
@@ -1532,7 +1568,7 @@ def test_where_the_replaced_lanes_differ_the_margin_is_read_from_the_verified_ce
         assert reported["value"] == printed
         assert bound["value"] == verified_display
         assert adopt._lanes_differ(move.packing)  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
-        if n == 132:
+        if n in (132, 308):
             assert Fraction(str(reported["exact_form"])) == expected
         assert Fraction(str(bound["value"])) != verified
         margin = verified - move.side
@@ -1558,9 +1594,31 @@ def test_where_the_replaced_lanes_differ_the_margin_is_read_from_the_verified_ce
             f"Earlier house {verified} from {result} (reported as {printed} from"
         )
         written = adopt.replayed_text(move)
-        stale = written.replace(str(verified), str(bound["value"]))
-        assert adopt.refreshed(move, stale) == written
-    # Lanes that agree as numbers keep the reported print, as at 308, '18.0' beside '18'.
+        fence, front, body = adopt._split(written)  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+        normalized = (
+            fence
+            + adopt._replace(front, "priority_notes", _front(written)["priority_notes"])  # pyright: ignore[reportPrivateUsage]
+            + body
+        )
+        assert _front(normalized) == _front(written)
+        assert _flat(_body(normalized)) == _flat(_body(written))
+        # Corrupt only the current writer-owned spans; n308's hand-marked historical
+        # certificate must retain its original exact side and is not this refresh's input.
+        stale_notes = _front(normalized)["priority_notes"]
+        stale_notes[-1]["claim"] = stale_notes[-1]["claim"].replace(
+            str(verified), str(bound["value"])
+        )
+        stale = fence + adopt._replace(front, "priority_notes", stale_notes) + body  # pyright: ignore[reportPrivateUsage]
+        for start, end in (
+            (f"\n**House adoption, {adopt.day_words(move.n)}.**", "\n\n"),
+            (f"\n## {adopt._title(move)}\n", adopt.FOOTER),  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+        ):
+            a, b = adopt._span(stale, start, end)  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+            stale = (
+                stale[:a] + stale[a:b].replace(str(verified), str(bound["value"])) + stale[b:]
+            )
+        assert adopt.refreshed(move, stale) == normalized
+    # Numeric agreement, including differently padded displays, keeps the reported print.
     for move in replayed:
         reported_number = Decimal(str(move.packing["reported_upper_bound"]["value"]))
         verified_number = Decimal(str(move.packing["verified_upper_bound"]["value"]))
