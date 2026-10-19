@@ -1529,10 +1529,11 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "reads are unchanged. The site v0.7.35 cut regenerated the five claim and "
             "card documents, which change only their source-link commit and are linked "
             "from the paper, not inlined. run_negative_controls.py changes only the "
-            "snapshot cap and its comment and is not a paper producer. Its HTML and "
-            "Markdown rendered at the base record tree and at the candidate head are "
-            "identical; the PDF prints that HTML. Retain v0.4.8; no PDF redraw or byte "
-            "identity of the PDF is claimed."
+            "snapshot cap and its comment and is not a paper producer. Its Markdown "
+            "rendered at the base record tree and at the candidate head is identical, "
+            "and its HTML differs at most in where the browser math preparation "
+            "serializes one empty style attribute; the PDF prints that HTML. Retain "
+            "v0.4.8; no PDF redraw or byte identity of the PDF is claimed."
         ),
     ),
     ReleaseNoPublicChange(
