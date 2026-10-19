@@ -3130,18 +3130,9 @@ def test_the_poster_badges_every_perfect_square_and_counts_them_in_its_legend() 
     assert solid_rigid == sorted([k * k for k in range(1, 19)] + [5, 11, 28, 40])
     assert set(solid_rigid) >= {121, 144, 169, 196, 225, 256, 289, 324}
 
-    # The retained poster predates T-174's adoption but includes T-195 at 29. The
-    # same-day archive also holds 29's prior record, so restore only T-174's roster.
-    from devtools import adopt_houses  # noqa: PLC0415
-
-    previous = adopt_houses.read_pass("2026-10-17")
-    t174_counts = {n for n, result in adopted_houses.ADOPTED.items() if result == "T-174"}
-    assert len(t174_counts) == 37
-    assert 29 not in t174_counts
+    # The v0.6.4 poster is drawn at the 19 October data, after T-174's adoption and with
+    # T-218's house at 183, so it is held to the current case records.
     cases = {n: build_bound_citations.load_case(n) for n in cards}
-    cases.update(
-        {n: safe_load(previous[n].split("---\n", 2)[1])["packing"] for n in t174_counts}
-    )
     numeric_cases = {
         n
         for n, case in cases.items()
@@ -3151,8 +3142,10 @@ def test_the_poster_badges_every_perfect_square_and_counts_them_in_its_legend() 
         )
     }
     exact_cases = set(cards) - numeric_cases
-    # 29 is exact since its house moved to PR #622's rational certificate on 17 October.
-    assert (len(exact_cases), len(numeric_cases)) == (309, 15)
+    # 29 is exact since its house moved to PR #622's rational certificate on 17 October;
+    # T-174's adoption gave nine numeric counts, 110 to 297, rational certificates.
+    assert (len(exact_cases), len(numeric_cases)) == (318, 6)
+    assert numeric_cases == {55, 71, 106, 152, 177, 301}
     for evidence, expected in (
         ("exact value known", exact_cases),
         ("only known numerically", numeric_cases),
@@ -3176,11 +3169,12 @@ def test_the_poster_badges_every_perfect_square_and_counts_them_in_its_legend() 
     # The house adoption of 11 October 2026 gave nine cases known only numerically an
     # exact certificate, and its pass of 12 October three more, 181, 271 and 304, whose
     # reported lanes stated no exact form (think-fvz4); the adoption of 17 October gave
-    # 29 one, PR #622's rational certificate (T-195).
+    # 29 one, PR #622's rational certificate (T-195), and the same day's adoption of
+    # T-174 nine more, 110, 172, 182, 206, 210, 240, 268, 273 and 297.
     assert labels == [
         "proved optimal (77 of 324)",
-        "exact value known (309 of 324)",
-        "only known numerically (15 of 324)",
+        "exact value known (318 of 324)",
+        "only known numerically (6 of 324)",
         "rigid (22 of 324)",
         "colors indicate distinct tilt angles",
         "shade indicates number of full-side contacts",
