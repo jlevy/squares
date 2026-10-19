@@ -5,16 +5,18 @@ title: "Intake process: add a regularization step to result-import.md stages (on
 kind: task
 status: in_progress
 priority: 1
-version: 5
+version: 6
 delegate: ecstatic-edison-reg-intake
 labels:
   - regularization
 dependencies: []
 parent_id: is-01m50wdrbfnwsq05w150az5z88
+child_order_hints:
+  - is-01m51kef47pgjm20f7988m9rzv
 hold: null
 hold_until: null
 created_at: 2026-10-15T22:55:18.902Z
-updated_at: 2026-10-16T05:31:41.180Z
+updated_at: 2026-10-16T05:37:35.878Z
 started_at: 2026-10-16T04:17:15.710Z
 ---
 
