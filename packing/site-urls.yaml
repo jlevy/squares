@@ -4650,7 +4650,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-19'
   status: live
 - path: cases/237.html
   canonical: cases/237.html
@@ -4962,7 +4962,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-16'
+  lastmod: '2026-10-19'
   status: live
 - path: cases/272.html
   canonical: cases/272.html
@@ -16756,6 +16756,60 @@ urls:
     - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n110_L1073/check2/receipt.json
     - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/receipts/premises-n110.json
     - packing/devtools/fine_net_followup.py
+- path: result/t-218.html
+  canonical: result/t-218.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-19'
+  lastmod: '2026-10-19'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 236
+    established: null
+    attribution:
+      source_keys:
+      - '[Daniel n236 2026-10-16]'
+      published: '2026-10-16'
+    builds_on: null
+    evidence:
+    - E-evand-659-n236-report
+    artifacts:
+    - packing/resources/web/evand-n236-2026-10-16/README.md
+    - packing/resources/web/evand-n236-2026-10-16/acquisition/claims.json
+    - packing/resources/web/evand-n236-2026-10-16/source/search/packer/candidates/s236_bm3c.cert
+    - packing/resources/web/evand-n236-2026-10-16/receipts/exact-certification.json.xz
+    - packing/devtools/upper_bound_reports.py
+- path: result/t-219.html
+  canonical: result/t-219.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-19'
+  lastmod: '2026-10-19'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 271
+    established: null
+    attribution:
+      source_keys:
+      - '[Daniel n271 2026-10-17]'
+      published: '2026-10-17'
+    builds_on: null
+    evidence:
+    - E-evand-664-n271-report
+    artifacts:
+    - packing/resources/web/evand-n271-2026-10-17/README.md
+    - packing/resources/web/evand-n271-2026-10-17/acquisition/claims.json
+    - packing/resources/web/evand-n271-2026-10-17/source/search/packer/candidates/s271_ex1.cert
+    - packing/resources/web/evand-n271-2026-10-17/receipts/exact-certification.json.xz
+    - packing/devtools/upper_bound_reports.py
 - path: results.html
   canonical: results.html
   kind: page

@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:ResultsRegister/v1
   schema: results.schema.yaml
   status: enforced
-last_reviewed: '2026-10-18'
+last_reviewed: '2026-10-19'
 results:
   - id: T-001
     kind: lower-bound
@@ -29356,6 +29356,140 @@ results:
       author runs are reported. The release asset's data members are retained in Git
       under OR-18; the adapted verifier archive inside it is pinned by digest and not
       opened.
+  - id: T-218
+    kind: upper-bound
+    registered: '2026-10-19'
+    headline: Daniel's smaller n236 packing, after Chaoweeraprasit's composition, certified exactly
+    claim: 'One complete rational source certificate reports a finite upper-bound improvement at the exact
+      side it states: s(236) <= 15.861934390607358617243798571394. Complete native feasibility outcomes
+      are retained separately; the selected standing case is unchanged pending independent review and record
+      review.
+
+
+      The author reports that his two exact rational checkers, verify_cert.py (separating axes) and verify_cert2.py
+      (polygon intersection), accept the certificate and its 6-group regularized view at the same side.
+      The source reports a KKT local minimum strict modulo 92 exact flat motions, 114 corner-corner contacts
+      with no corner-corner MILP descent and 18 rattlers, and measures it against #481''s packing as a different
+      local minimum, with no tilt angle shared; those are numerical evidence at 80 digits, as the source
+      says, not proofs. No source program ran here.
+
+
+      Credit Evan Daniel (https://github.com/evand/square-packing), whose basin explorer descended to this
+      packing from a rebuild of Nate Chaoweeraprasit''s (itsnaka''s) SQUISH Mondrian composition of #481
+      (T-136), and credit that composition for the construction, as the issue asks; the rebuild used Kingbird''s
+      s(152)_r2 corner piece and itsnaka''s s(88) (#422). The search, the checks and the request were done
+      with Claude (Claude Code) under Evan Daniel''s direction.'
+    scope:
+      n_values:
+      - 236
+    verification: V0
+    confirmation: C0
+    significance:
+      score: 2
+      rationale: A smaller finite construction side at n = 236, 2.02e-03 below the case ceiling; no lower
+        bound or optimum.
+      scored: '2026-10-19'
+      by: think-6wtz Evan Daniel import
+    novelty: previously-published
+    attribution:
+      source_keys:
+      - '[Daniel n236 2026-10-16]'
+      published: '2026-10-16'
+    evidence:
+    - E-evand-659-n236-report
+    artifacts:
+    - packing/resources/web/evand-n236-2026-10-16/README.md
+    - packing/resources/web/evand-n236-2026-10-16/acquisition/claims.json
+    - packing/resources/web/evand-n236-2026-10-16/source/search/packer/candidates/s236_bm3c.cert
+    - packing/resources/web/evand-n236-2026-10-16/receipts/exact-certification.json.xz
+    - packing/devtools/upper_bound_reports.py
+    controls:
+    - packing/tests/test_upper_bound_reports.py
+    notes: 'A separate complete repository replay is retained for n = 236: 1 positive and 2 duplicate-square
+      and outside-container controls passed their required outcomes on both routes, 166380 pair decisions;
+      summed over the 3 jobs, the receipt records 70.45 route CPU seconds and 104.2 job wall seconds, the
+      longest job 45.11 seconds. Every positive clears every wall by at least 5.00e-21 and every pair by
+      at least 9.99e-21.
+
+
+      At n = 236 the certificate is below the case''s ceiling (Nate Chaoweeraprasit (itsnaka), improved
+      by Evan Daniel, T-146) by 2.02e-03; below T-136 (#481) (Nate Chaoweeraprasit (itsnaka)) by 2.02e-03;
+      below T-174 (PR #574) (PingYou Ltd) by 2.02e-03; smallest: this certificate.
+
+
+      The source''s own checkers were not run here. The two maintained routes, the sqpack rational witness
+      verifier and the independent rational corner checker, share certificate parsing, half-angle conversion,
+      Fraction arithmetic and the separating-axis method. No two independent methods, human oversight or
+      optimality is claimed.'
+    next_rung: Independently review the retained replay, then adopt at 236.
+  - id: T-219
+    kind: upper-bound
+    registered: '2026-10-19'
+    headline: Daniel's smaller n271 packing, refining Couzo's packing, certified exactly
+    claim: 'One complete rational source certificate reports a finite upper-bound improvement at the exact
+      side it states: s(271) <= 16.948947733713657510723401112423. Complete native feasibility outcomes
+      are retained separately; the selected standing case is unchanged pending independent review and record
+      review.
+
+
+      The author reports that his two exact rational checkers, verify_cert.py (separating axes) and verify_cert2.py
+      (polygon intersection), accept the certificate and its 21-group regularized view at the same side.
+      The source calls it a refinement of #561''s packing and a different local minimum: its load-bearing
+      tilt angles match #561''s group for group within 0.12 degrees except that four squares near 31.7 to
+      32.0 degrees are three here; it reports a KKT local minimum strict modulo 54 exact flat motions, 259
+      corner-corner contacts with no corner-corner MILP descent and 4 rattlers. Those are numerical evidence
+      at 80 digits, as the source says, not proofs. No source program ran here.
+
+
+      Credit Evan Daniel (https://github.com/evand/square-packing), whose basin explorer started from the
+      register''s witness for 271 and found this packing with one tilt-swap move and a re-polish, and credit
+      Francisco Couzo''s #561 packing and Nate Chaoweeraprasit''s SQUISH packing (#500) it refines, as the
+      issue asks. The search, the checks and the request were done with Claude (Claude Code) under Evan
+      Daniel''s direction.'
+    scope:
+      n_values:
+      - 271
+    verification: V0
+    confirmation: C0
+    significance:
+      score: 2
+      rationale: A smaller finite construction side at n = 271, 4.46e-05 below the case ceiling; no lower
+        bound or optimum.
+      scored: '2026-10-19'
+      by: think-8o5j Evan Daniel import
+    novelty: previously-published
+    attribution:
+      source_keys:
+      - '[Daniel n271 2026-10-17]'
+      published: '2026-10-17'
+    evidence:
+    - E-evand-664-n271-report
+    artifacts:
+    - packing/resources/web/evand-n271-2026-10-17/README.md
+    - packing/resources/web/evand-n271-2026-10-17/acquisition/claims.json
+    - packing/resources/web/evand-n271-2026-10-17/source/search/packer/candidates/s271_ex1.cert
+    - packing/resources/web/evand-n271-2026-10-17/receipts/exact-certification.json.xz
+    - packing/devtools/upper_bound_reports.py
+    controls:
+    - packing/tests/test_upper_bound_reports.py
+    notes: 'A separate complete repository replay is retained for n = 271: 1 positive and 2 duplicate-square
+      and outside-container controls passed their required outcomes on both routes, 219510 pair decisions;
+      summed over the 3 jobs, the receipt records 103.33 route CPU seconds and 119.55 job wall seconds,
+      the longest job 45.41 seconds. Every positive clears every wall by at least 5.00e-21 and every pair
+      by at least 9.99e-21.
+
+
+      At n = 271 the certificate is below the case''s ceiling (Nate Chaoweeraprasit (itsnaka), improved
+      by Francisco Couzo, PingYou Ltd, Mishapolk, T-186) by 4.46e-05; below T-151 (#500) (Nate Chaoweeraprasit
+      (itsnaka)) by 1.69e-04; below T-161 (#561) (Francisco Couzo) by 4.46e-05; below T-174 (PR #574) (PingYou
+      Ltd) by 4.46e-05; smallest: this certificate.
+
+
+      The source''s own checkers were not run here. The two maintained routes, the sqpack rational witness
+      verifier and the independent rational corner checker, share certificate parsing, half-angle conversion,
+      Fraction arithmetic and the separating-axis method. No two independent methods, human oversight or
+      optimality is claimed.'
+    next_rung: Independently review the retained replay, then adopt at 271.
 
 # Generated by python -m devtools.regularized_drawings from the regularized layer's
 # index (packing/atlas/known-best/regularized/index.json); do not edit by hand.

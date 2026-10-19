@@ -1,0 +1,83 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-10-19T20:50Z",
+  "git_scope": "Blobless fetch of the issue #664 pin 757b40b, the commit that adds the eight s271_ex1 files under search/packer/candidates/. All eight are retained: the certificate the claim rests on (s271_ex1.cert), its 80-digit KKT point, the binary64 input it was solved from, the solver's report, the prior-record summary, the same-side regularized view with its report, and the source's comparison with #561's packing; with the licence, credits and the format and packer READMEs. The two source checkers are pinned by digest against the identical copies the n155 packet retains, and the packer log, basin explorer and exact solver by digest only. The rest of the tree is pinned by the commit and was not retained or executed.",
+  "sources": [
+    {
+      "id": "evand-n271-2026-10-17",
+      "source_url": "https://github.com/evand/square-packing",
+      "source_ref": "757b40bc6c5f681033ff1572177d408afbf26dfe",
+      "source_commit": "757b40bc6c5f681033ff1572177d408afbf26dfe",
+      "committed_utc": "2026-10-17T04:29:03Z",
+      "git_tree": "205fdb1d8838747d2f2fc455436e7f6461e70139",
+      "archived_path": "packing/resources/web/evand-n271-2026-10-17/source",
+      "subtree_manifest": "packing/resources/web/evand-n271-2026-10-17/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "LICENSE",
+        "CREDITS.md",
+        "README.md",
+        "search/exact/README.md",
+        "search/exact/verify_cert.py",
+        "search/exact/verify_cert2.py",
+        "search/exact/exactsolve.py",
+        "search/packer/README.md",
+        "search/packer/PACKER.md",
+        "search/packer/explore.py",
+        "search/packer/candidates/s271_ex1.cert",
+        "search/packer/candidates/s271_ex1.exact.txt",
+        "search/packer/candidates/s271_ex1.input.txt",
+        "search/packer/candidates/s271_ex1.json",
+        "search/packer/candidates/s271_ex1_prior.json",
+        "search/packer/candidates/s271_ex1_regularized.cert",
+        "search/packer/candidates/s271_ex1_regularized.json",
+        "search/packer/candidates/s271_ex1_vs_prior.json"
+      ],
+      "subtree_file_count": 18,
+      "subtree_total_bytes": 765595,
+      "retained_file_count": 13,
+      "retained_total_bytes": 260746,
+      "compressed": [],
+      "pinned_only": [
+        {
+          "path": "search/exact/exactsolve.py",
+          "bytes": 62041,
+          "sha256": "ca32d01fea8ca125bb4a3c26cfcfd2bcbc2c1ecf99e140be08662d327d589111",
+          "reason": "Numerical high-precision certificate producer; a replay consumes the completed certificate without this solver or its dependencies."
+        },
+        {
+          "path": "search/exact/verify_cert.py",
+          "bytes": 3401,
+          "sha256": "3299ca0c0f02f7c221deeea69a9a85b5a90db6bc410b20727fdff211c92bed52",
+          "reason": "The source's two standalone exact checkers, byte-identical to the copies the n155 packet retains at 59326b8; never executed by this acquisition.",
+          "identical_to": "packing/resources/web/evand-n155-explorer-2026-10-17/source/search/exact/verify_cert.py"
+        },
+        {
+          "path": "search/exact/verify_cert2.py",
+          "bytes": 3101,
+          "sha256": "55140a35d95d9eaa64a14c3b044641efbcda94ebfc3b12b7dec9fa52692e31d3",
+          "reason": "The source's two standalone exact checkers, byte-identical to the copies the n155 packet retains at 59326b8; never executed by this acquisition.",
+          "identical_to": "packing/resources/web/evand-n155-explorer-2026-10-17/source/search/exact/verify_cert2.py"
+        },
+        {
+          "path": "search/packer/PACKER.md",
+          "bytes": 388281,
+          "sha256": "0146c27fea347561af1c3c12e27adae4459e87fcce982fb5a1d644e271489514",
+          "reason": "The packer's chronological working log, which records the explorer test run that found the packing; pinned for provenance."
+        },
+        {
+          "path": "search/packer/explore.py",
+          "bytes": 48025,
+          "sha256": "a179923bf038991391160785e3517326b390998753208cde1d4bc87805b326d9",
+          "reason": "Numerical basin explorer used for discovery; not required by either standalone exact checker."
+        }
+      ],
+      "license": "MIT, copyright (c) 2026 Evan Daniel (LICENSE retained). CREDITS.md states Claude (Anthropic) under human direction, no peer review; the pinned commit names Claude Opus 5.5 as co-author and says the submission was approved by Evan Daniel. Issue #664 asks credit for Francisco Couzo's #561 packing and Nate Chaoweeraprasit's SQUISH packing it refines.",
+      "claims": [
+        "Issue #664 reports s(271) <= 16.948947733714, the exact rational side 16948947733713657510723401112423/1000000000000000000000000000000 of search/packer/candidates/s271_ex1.cert rounded up at 12 places, 4.46e-5 below Francisco Couzo's #561 (16.948992356451); it prints the SHA-256 of s271_ex1.cert and of s271_ex1_regularized.cert, the same packing at the same side regularized for display with 21 angle groups.",
+        "The issue calls it a refinement of the #561 packing, not a new construction, and a different local minimum: its load-bearing tilt angles match #561's group for group within 0.12 degrees, except that four squares near 31.7 to 32.0 degrees in #561 are three here; KKT, strict modulo 54 exact flat motions against #561's 56, no corner-corner MILP descent, 116 + 1488 contact equations, 259 corner-corner contacts and 4 rattlers; matched over the eight symmetries, 59 load-bearing squares move by more than 1e-4 and 2 by more than 1e-2. These are numerical evidence at 80 digits, as the issue says, not interval proofs.",
+        "The issue says the basin explorer (search/packer/explore.py) started from the register's witness for 271 as one of 52 counts in a test run, and the improvement came 90 seconds in from one move that swaps the tilt angles of two neighbouring squares, then a re-polish; exactsolve.py certified the point.",
+        "The author's two standard-library exact checkers, verify_cert.py (separating axes) and verify_cert2.py (polygon intersection), are reported to accept both files; they share an author and the certificate format. No closed form, interval proof of local optimality or optimality is claimed."
+      ]
+    }
+  ]
+}

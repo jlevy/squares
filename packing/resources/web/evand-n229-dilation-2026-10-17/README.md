@@ -104,6 +104,46 @@ The [inspection receipt](acquisition/custody-review.json) records the command an
 outcome. The check establishes declaration, manifest and retained-byte consistency.
 Geometric replay, dedicated review, registration and any house adoption remain separate.
 
+## Exact Replay
+
+Added on 19 October 2026 for the stage 4 replay (think-8kx2, think-0lu6), with the import
+declaration [acquisition/report.json](acquisition/report.json) that
+`devtools.upper_bound_reports` reads.
+The certificate goes through the maintained two-route kernel of
+`devtools.evand_arrangement_reports`: `sqpack`’s exact witness verifier and the
+independent rational corner checker, each deciding every wall and every pair over
+$\mathbb{Q}$ after an exact half-angle conversion.
+The count ran a positive job, a duplicate-square control and an outside-container
+control, each in its own child process, on one worker.
+The positive passes both routes, and both routes refuse both controls.
+Every positive clears every wall by at least $5.01 \times 10^{-13}$ and every pair by at least
+$9.99 \times 10^{-13}$.
+The 3 jobs made 156,636 pair decisions in 92.75 route CPU seconds and 140.22 job wall
+seconds, summed; the longest job took 47.78 seconds.
+[receipts/exact-certification.json.xz](receipts/exact-certification.json.xz) keeps every
+deciding input and both routes’ complete outputs.
+The two routes share certificate parsing, the half-angle conversion, Python’s rational
+arithmetic and the separating-axis method, so they are two implementations of one
+method. Neither is the author’s code, and the source’s own checkers were not run.
+The clearances are the dilation’s $10^{-12}$ margin, as the source describes it.
+
+[acquisition/claims.json](acquisition/claims.json) freezes the certificate against the
+record at `main` `14fd9e27f` (19 October 2026), each side rebuilt from its own retained
+packet or read from its print:
+
+| Report at 229 | Holder | This certificate is below it by |
+| --- | --- | --- |
+| `T-155`, the case’s verified ceiling (the catalogue’s $10 + 4\sqrt{2}$ reported) | the Kingbird catalogue | $6.69 \times 10^{-3}$ |
+| `T-196` (#668), printed | Joost de Winter | $1.15 \times 10^{-5}$ |
+| #672, printed | Francisco Couzo | $1.15 \times 10^{-5}$ |
+
+From `packing/`:
+
+```sh
+uv run --frozen --all-extras --group dev python -m devtools.upper_bound_reports evand-n229-dilation-2026-10-17 check-claims
+uv run --frozen --all-extras --group dev python -m devtools.upper_bound_reports evand-n229-dilation-2026-10-17 check --replay
+```
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

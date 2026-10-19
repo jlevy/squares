@@ -6192,6 +6192,52 @@ sources:
     and retained house stay unchanged until Stage 4 adoption. The exact bounds are
     registered as pending adoption where they improve the case, as Stage 3 permits.
 
+- id: evand-n236-2026-10-16
+  title: Evan Daniel's n236 certificate at 5ad0069, issue659
+  role: source-repository
+  url: https://github.com/evand/square-packing/tree/5ad00693899ef50ccf6502f0346187cc422cc914
+  local: resources/web/evand-n236-2026-10-16/
+  source_key: '[Daniel n236 2026-10-16]'
+  scope:
+    n_values:
+    - 236
+  reviewed: '2026-10-19'
+  source_date: '2026-10-16'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/evand-n236-2026-10-16/acquisition/claims.json
+  evidence:
+  - E-evand-659-n236-report
+  notes: The 1 complete certificate is retained as the source wrote them, admitted only where its exact
+    side equals, or rounds up to, the side its source prints. T-218 records the in-horizon report. All
+    3 native jobs have full outcomes. No selected override or superseded claim is created at this source-only
+    stage; current cases and earlier source ownership remain unchanged.
+
+- id: evand-n271-2026-10-17
+  title: Evan Daniel's n271 certificate at 757b40b, issue664
+  role: source-repository
+  url: https://github.com/evand/square-packing/tree/757b40bc6c5f681033ff1572177d408afbf26dfe
+  local: resources/web/evand-n271-2026-10-17/
+  source_key: '[Daniel n271 2026-10-17]'
+  scope:
+    n_values:
+    - 271
+  reviewed: '2026-10-19'
+  source_date: '2026-10-17'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/evand-n271-2026-10-17/acquisition/claims.json
+  evidence:
+  - E-evand-664-n271-report
+  notes: The 1 complete certificate is retained as the source wrote them, admitted only where its exact
+    side equals, or rounds up to, the side its source prints. T-219 records the in-horizon report. All
+    3 native jobs have full outcomes. No selected override or superseded claim is created at this source-only
+    stage; current cases and earlier source ownership remain unchanged.
+
 - id: wand125-fine-net-n38-65775-2026-10-16
   title: Wand125 reported n38 fine-net lower bound (#446)
   role: source-repository

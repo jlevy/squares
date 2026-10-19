@@ -8,8 +8,8 @@ ours, which rest on someone else's argument, and how far each has been checked.
 
 ## The short version
 
-- **641** evidence records. **362** are formal; **355** of those were established here. **10** are samples, counted separately.
-- **261** rest on an argument made elsewhere, of which **7** have been read by nobody here.
+- **643** evidence records. **362** are formal; **355** of those were established here. **10** are samples, counted separately.
+- **263** rest on an argument made elsewhere, of which **7** have been read by nobody here.
 - **1** formal record proves a theorem only under a hypothesis nothing here has replayed, and is verified as that implication alone: `E-k2m4-evand-bentz4-lean-build` (ValidTilt9).
 - **43** claim to be first established here. **14** make no novelty statement at all - not assessed, which is not the same as not novel.
 
@@ -643,6 +643,8 @@ results, it is a statement about what this repository has itself examined.
 | `E-evand-669-n155-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
 | `E-evand-674-n229-opening-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
 | `E-evand-674-n229-update-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
+| `E-evand-659-n236-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
+| `E-evand-664-n271-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
 | `E-wand125-fine-net-n38-65775-report` | 0 | lower-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | `V-wand125-sqverify-proof-net` |
 | `E-wand125-fine-net-n40-6735-report` | 0 | lower-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | `V-wand125-sqverify-proof-net` |
 | `E-wand125-fine-net-n41-68025-report` | 0 | lower-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | `V-wand125-sqverify-proof-net` |
@@ -667,10 +669,10 @@ results, it is a statement about what this repository has itself examined.
 
 ## What the register rests on
 
-- **assurance**: numerically-checked 5, reported 265, verified 371
-- **method**: exact-algebraic 186, interval-certified 169, numerical-multiprecision 5, proof-assistant-checked 5, proof-audited 4, published-proof 7, reported 265
-- **novelty**: apparently-novel 43, common-knowledge 4, not assessed 14, previously-published 580
-- **relationship to the producer's code**: generator 5, independent-implementation 231, not-applicable 25, same-implementation 355, shared-components 19, unknown-historical 6
+- **assurance**: numerically-checked 5, reported 267, verified 371
+- **method**: exact-algebraic 186, interval-certified 169, numerical-multiprecision 5, proof-assistant-checked 5, proof-audited 4, published-proof 7, reported 267
+- **novelty**: apparently-novel 43, common-knowledge 4, not assessed 14, previously-published 582
+- **relationship to the producer's code**: generator 5, independent-implementation 231, not-applicable 25, same-implementation 357, shared-components 19, unknown-historical 6
 
 The `cases` column is how many frontier records cite each piece of evidence, and it is the reason to read this table rather than count records. Ranked below are the *formal* records only: a `reported` record cited across the frontier may be a shared catalogue and is labelled as such, which is the register working rather than risk. The risk is a verified claim resting on an argument nobody has examined.
 

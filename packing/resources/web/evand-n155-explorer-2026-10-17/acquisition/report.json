@@ -1,0 +1,70 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "https://github.com/jlevy/squares/issues/669",
+  "author": "Evan Daniel",
+  "source_key": "[Daniel n155 explorer 2026-10-17]",
+  "report_evidence": "E-evand-669-n155-report",
+  "receipt_format": "evand-669-exact-replay-v1",
+  "witness_prefix": "W-evand-669-n",
+  "claim_limitations": "Complete 59326b8 rational centre/half-angle certificate converted exactly from the retained source. Finite construction feasibility only; no KKT, local minimum, rigidity, novelty, priority or global optimality claim.",
+  "read_on": "2026-10-19",
+  "read_at_main": "14fd9e27f3e1e800c41b3d49280e4c7055ab6681",
+  "certificates": [
+    {
+      "n": 155,
+      "path": "search/packer/candidates/s155_ex2.cert",
+      "format": "evand-cert",
+      "offered": "12.952260944651",
+      "first_committed": "2026-10-17T14:48:34Z",
+      "same_packing": []
+    }
+  ],
+  "requested": [
+    155
+  ],
+  "replayed": [
+    155
+  ],
+  "houses": [
+    {
+      "n": 155,
+      "reader": "[PingYou PR 574 certificates 2026-10-13]",
+      "source_key": "[PingYou PR 574 certificates 2026-10-13]",
+      "holders": "Daniil Ostashev, improved by PingYou Ltd",
+      "result": "T-174",
+      "reported_value": "12.95242540695845614",
+      "verified_value": "12.95242540695845614",
+      "evidence": [
+        "E-pingyou-574-exact-feasibility"
+      ]
+    }
+  ],
+  "pending": [
+    {
+      "n": 155,
+      "report": "T-149 (#501)",
+      "url": "https://github.com/jlevy/squares/issues/501",
+      "holders": "Daniil Ostashev",
+      "result": "T-149",
+      "reader": "[Ostashev records 2026-10-11]"
+    }
+  ],
+  "register": {
+    "title": "Evan Daniel's n155 certificate at 59326b8, issue669",
+    "headline": "Daniel reports a smaller n155 packing, started from Ostashev's packing",
+    "significance": 2,
+    "source_checks": "The author reports that his two exact rational checkers, verify_cert.py (separating axes) and verify_cert2.py (polygon intersection), accept the certificate and its 17-group regularized view at the same side. The source reports a KKT local minimum strict modulo 31 exact flat motions, 96 corner-corner contacts with no corner-corner MILP descent and 4 rattlers, a different local minimum from T-149's packing with no load-bearing tilt angle shared; those are numerical evidence at 80 digits, as the source says, not proofs. No source program ran here.",
+    "credit": "Credit Evan Daniel (https://github.com/evand/square-packing), whose basin explorer started from the register's witness for 155 (Daniil Ostashev's T-149 packing) and reached this packing after a chain of 18 moves, as the issue says; the issue asks that Ostashev's packing be credited as the start. The search, the checks and the request were done with Claude (Claude Code) under Evan Daniel's direction.",
+    "next_rung": "Independently review the retained replay, then adopt at 155.",
+    "bead": "think-n1ga",
+    "bibliography": {
+      "authors": [
+        "Daniel"
+      ],
+      "lineage": "builds-on-project",
+      "credit": "Daniel after Ostashev, Levy",
+      "short_credit": "Daniel after Ostashev, Levy",
+      "note": "The existing bibliography key, unchanged by this import."
+    }
+  }
+}
