@@ -5,19 +5,20 @@ title: "Intake process: add a regularization step to result-import.md stages (on
 kind: task
 status: in_progress
 priority: 1
-version: 16
+version: 17
 delegate: user-eb-reg-intake
 labels:
   - regularization
 dependencies: []
 parent_id: is-01m50wdrbfnwsq05w150az5z88
 child_order_hints:
+  - is-01m51kef47pgjm20f7988m9rzv
   - is-01m51wb7qswjsy83afdvrxyk3j
   - is-01m52ct0hx1ynh99j59jej4tze
 hold: null
 hold_until: null
 created_at: 2026-10-15T22:55:18.902Z
-updated_at: 2026-10-16T13:00:48.573Z
+updated_at: 2026-10-19T20:27:57.258Z
 started_at: 2026-10-16T04:17:15.710Z
 ---
 
