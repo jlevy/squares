@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:FrontierEvidenceSet/v1
   schema: frontier-evidence.schema.yaml
   status: enforced
-last_reviewed: '2026-10-18'
+last_reviewed: '2026-10-19'
 evidence:
   - id: E-n017-kleddamag-rational-upper
     claim: upper-bound
@@ -37952,10 +37952,656 @@ evidence:
       This atom records the source report only; it incorporates no separate review, source-replay receipt
       or confirmation rung. Both case upper lanes and the retained house remain unchanged
       until Stage 4 adoption; the exact claim is registered as pending adoption where better.
+
+  - id: E-wand125-fine-net-n38-65775-report
+    claim: lower-bound
+    scope: {n_values: [38]}
+    assurance: reported
+    reported_method: interval-certified
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+    certificate: >-
+      packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n38_L65775/candidate.json.gz
+    replay_status: not-attempted
+    verifiers: [V-wand125-sqverify-proof-net]
+    limitations: >-
+      The author reports 2631/400 at all 2,073 directions of the net its candidate
+      declares (step 1/5002, core 4999/5000) by sqverify-proof-net, its copy of this
+      repository's sqverify_fast, at 02c5595, in jlevy/squares#446, in a check2 run
+      (1,000.3 s at 16 threads) and a pre-publication run on a fresh machine (656 s).
+      Complete source-byte custody and the maintained mass, net and check2 premises
+      are accepted (receipts/premises-n38.json). The 32-direction 197/200 control
+      remains sampled. A complete capture, whole-net controls and a review that reads
+      this certificate remain pending under think-f40c, priced at about 7.46 to 8.57
+      CPU-hours. The shared crate establishes no independent implementation. No
+      standing bound or rating changes.
+    source_reviewed: '2026-10-17'
+  - id: E-wand125-fine-net-n40-6735-report
+    claim: lower-bound
+    scope: {n_values: [40]}
+    assurance: reported
+    reported_method: interval-certified
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+    certificate: >-
+      packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n40_L6735/candidate.json.gz
+    replay_status: not-attempted
+    verifiers: [V-wand125-sqverify-proof-net]
+    limitations: >-
+      The author reports 1347/200 at all 2,073 directions of the net its candidate
+      declares (step 1/5002, core 4999/5000) by sqverify-proof-net, its copy of this
+      repository's sqverify_fast, at 4762e42, in jlevy/squares#446, in a check2 run
+      (2,740.4 s at 12 threads) and a pre-publication run on a fresh machine (1042 s).
+      Complete source-byte custody and the maintained mass, net and check2 premises
+      are accepted (receipts/premises-n40.json). The 32-direction 197/200 control
+      remains sampled. A complete capture, whole-net controls and a review that reads
+      this certificate remain pending under think-f40c, priced at about 11.37 to 13.06
+      CPU-hours. The shared crate establishes no independent implementation. No
+      standing bound or rating changes.
+    source_reviewed: '2026-10-17'
+  - id: E-wand125-fine-net-n41-68025-report
+    claim: lower-bound
+    scope: {n_values: [41]}
+    assurance: reported
+    reported_method: interval-certified
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+    certificate: >-
+      packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n41_L68025/candidate.json.gz
+    replay_status: not-attempted
+    verifiers: [V-wand125-sqverify-proof-net]
+    limitations: >-
+      The author reports 2721/400 at all 2,073 directions of the net its candidate
+      declares (step 1/5002, core 4999/5000) by sqverify-proof-net, its copy of this
+      repository's sqverify_fast, at 209369b, in jlevy/squares#446, in a check2 run
+      (1,951.5 s at 16 threads) and a pre-publication run on a fresh machine (1051 s).
+      Complete source-byte custody and the maintained mass, net and check2 premises
+      are accepted (receipts/premises-n41.json). The 32-direction 197/200 control
+      remains sampled. A complete capture, whole-net controls and a review that reads
+      this certificate remain pending under think-f40c, priced at about 10.98 to 12.61
+      CPU-hours. The shared crate establishes no independent implementation. No
+      standing bound or rating changes.
+    source_reviewed: '2026-10-17'
+  - id: E-wand125-fine-net-n43-69425-report
+    claim: lower-bound
+    scope: {n_values: [43]}
+    assurance: reported
+    reported_method: interval-certified
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+    certificate: >-
+      packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n43_L69425/candidate.json.gz
+    replay_status: not-attempted
+    verifiers: [V-wand125-sqverify-proof-net]
+    limitations: >-
+      The author reports 2777/400 at all 2,073 directions of the net its candidate
+      declares (step 1/5002, core 4999/5000) by sqverify-proof-net, its copy of this
+      repository's sqverify_fast, at d3c115c, in jlevy/squares#446, in a check2 run
+      (4,451.4 s at 16 threads) and a pre-publication run on a fresh machine (2143 s).
+      Complete source-byte custody and the maintained mass, net and check2 premises
+      are accepted (receipts/premises-n43.json). The 32-direction 197/200 control
+      remains sampled. A complete capture, whole-net controls and a review that reads
+      this certificate remain pending under think-f40c, priced at about 21.73 to 24.95
+      CPU-hours. The shared crate establishes no independent implementation. No
+      standing bound or rating changes.
+    source_reviewed: '2026-10-17'
+  - id: E-wand125-fine-net-n51-75275-report
+    claim: lower-bound
+    scope: {n_values: [51]}
+    assurance: reported
+    reported_method: interval-certified
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+    certificate: >-
+      packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n51_L75275/candidate.json.gz
+    replay_status: not-attempted
+    verifiers: [V-wand125-sqverify-proof-net]
+    limitations: >-
+      The author reports 3011/400 at all 2,073 directions of the net its candidate
+      declares (step 1/5002, core 4999/5000) by sqverify-proof-net, its copy of this
+      repository's sqverify_fast, at 9cd2b2d, in jlevy/squares#446, in a check2 run
+      (2,395.2 s at 16 threads) and a pre-publication run on a fresh machine (1354 s).
+      Complete source-byte custody and the maintained mass, net and check2 premises
+      are accepted (receipts/premises-n51.json). The 32-direction 197/200 control
+      remains sampled. A complete capture, whole-net controls and a review that reads
+      this certificate remain pending under think-f40c, priced at about 13.84 to 15.89
+      CPU-hours. The shared crate establishes no independent implementation. No
+      standing bound or rating changes.
+    source_reviewed: '2026-10-17'
+  - id: E-wand125-fine-net-n68-853-report
+    claim: lower-bound
+    scope: {n_values: [68]}
+    assurance: reported
+    reported_method: interval-certified
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+    certificate: >-
+      packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n68_L853/candidate.json.gz
+    replay_status: not-attempted
+    verifiers: [V-wand125-sqverify-proof-net]
+    limitations: >-
+      The author reports 853/100 at all 201 directions of the net its candidate
+      declares (step 83/40000, core 9977/10000) by sqverify-proof-net, its copy of
+      this repository's sqverify_fast, at 14b4b0b, in jlevy/squares#446, in a check2
+      run (255.6 s at 12 threads) and a pre-publication run on a fresh machine (75 s).
+      Complete source-byte custody and the maintained mass, net and check2 premises
+      are accepted (receipts/premises-n68.json). The 32-direction 197/200 control
+      remains sampled. A complete capture, whole-net controls and a review that reads
+      this certificate remain pending under think-f40c, priced at about 0.84 to 0.96
+      CPU-hours. The shared crate establishes no independent implementation. No
+      standing bound or rating changes.
+    source_reviewed: '2026-10-17'
+  - id: E-wand125-fine-net-n84-94225-report
+    claim: lower-bound
+    scope: {n_values: [84]}
+    assurance: reported
+    reported_method: interval-certified
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+    certificate: >-
+      packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n84_L94225/candidate.json.gz
+    replay_status: not-attempted
+    verifiers: [V-wand125-sqverify-proof-net]
+    limitations: >-
+      The author reports 3769/400 at all 201 directions of the net its candidate
+      declares (step 83/40000, core 9977/10000) by sqverify-proof-net, its copy of
+      this repository's sqverify_fast, at f28b5f3, in jlevy/squares#446, in a check2
+      run (328.4 s at 12 threads) and a pre-publication run on a fresh machine (121
+      s). Complete source-byte custody and the maintained mass, net and check2
+      premises are accepted (receipts/premises-n84.json). The 32-direction 197/200
+      control remains sampled. A complete capture, whole-net controls and a review
+      that reads this certificate remain pending under think-f40c, priced at about 1.5
+      to 1.72 CPU-hours. The shared crate establishes no independent implementation.
+      No standing bound or rating changes.
+    source_reviewed: '2026-10-17'
+  - id: E-wand125-fine-net-n85-9475-report
+    claim: lower-bound
+    scope: {n_values: [85]}
+    assurance: reported
+    reported_method: interval-certified
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+    certificate: >-
+      packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n85_L9475/candidate.json.gz
+    replay_status: not-attempted
+    verifiers: [V-wand125-sqverify-proof-net]
+    limitations: >-
+      The author reports 379/40 at all 201 directions of the net its candidate
+      declares (step 83/40000, core 9977/10000) by sqverify-proof-net, its copy of
+      this repository's sqverify_fast, at fc2e96f, in jlevy/squares#446, in a check2
+      run (255.1 s at 12 threads) and a pre-publication run on a fresh machine (124
+      s). Complete source-byte custody and the maintained mass, net and check2
+      premises are accepted (receipts/premises-n85.json). The 32-direction 197/200
+      control remains sampled. A complete capture, whole-net controls and a review
+      that reads this certificate remain pending under think-f40c, priced at about
+      1.32 to 1.52 CPU-hours. The shared crate establishes no independent
+      implementation. No standing bound or rating changes.
+    source_reviewed: '2026-10-17'
+  - id: E-wand125-fine-net-n86-95275-report
+    claim: lower-bound
+    scope: {n_values: [86]}
+    assurance: reported
+    reported_method: interval-certified
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+    certificate: >-
+      packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n86_L95275/candidate.json.gz
+    replay_status: not-attempted
+    verifiers: [V-wand125-sqverify-proof-net]
+    limitations: >-
+      The author reports 3811/400 at all 201 directions of the net its candidate
+      declares (step 83/40000, core 9977/10000) by sqverify-proof-net, its copy of
+      this repository's sqverify_fast, at 2ad6bda, in jlevy/squares#446, in a check2
+      run (173.6 s at 8 threads) and a pre-publication run on a fresh machine (131 s).
+      Complete source-byte custody and the maintained mass, net and check2 premises
+      are accepted (receipts/premises-n86.json). The 32-direction 197/200 control
+      remains sampled. A complete capture, whole-net controls and a review that reads
+      this certificate remain pending under think-f40c, priced at about 0.65 to 0.75
+      CPU-hours. The shared crate establishes no independent implementation. No
+      standing bound or rating changes.
+    source_reviewed: '2026-10-17'
+  - id: E-wand125-fine-net-n88-96325-report
+    claim: lower-bound
+    scope: {n_values: [88]}
+    assurance: reported
+    reported_method: interval-certified
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+    certificate: >-
+      packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n88_L96325/candidate.json.gz
+    replay_status: not-attempted
+    verifiers: [V-wand125-sqverify-proof-net]
+    limitations: >-
+      The author reports 3853/400 at all 201 directions of the net its candidate
+      declares (step 83/40000, core 9977/10000) by sqverify-proof-net, its copy of
+      this repository's sqverify_fast, at f8f99e3, in jlevy/squares#446, in a check2
+      run (453.2 s at 12 threads) and a pre-publication run on a fresh machine (156
+      s). Complete source-byte custody and the maintained mass, net and check2
+      premises are accepted (receipts/premises-n88.json). The 32-direction 197/200
+      control remains sampled. A complete capture, whole-net controls and a review
+      that reads this certificate remain pending under think-f40c, priced at about
+      1.88 to 2.16 CPU-hours. The shared crate establishes no independent
+      implementation. No standing bound or rating changes.
+    source_reviewed: '2026-10-17'
+  - id: E-wand125-fine-net-n89-9685-report
+    claim: lower-bound
+    scope: {n_values: [89]}
+    assurance: reported
+    reported_method: interval-certified
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+    certificate: >-
+      packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n89_L9685/candidate.json.gz
+    replay_status: not-attempted
+    verifiers: [V-wand125-sqverify-proof-net]
+    limitations: >-
+      The author reports 1937/200 at all 201 directions of the net its candidate
+      declares (step 83/40000, core 9977/10000) by sqverify-proof-net, its copy of
+      this repository's sqverify_fast, at a361ba2, in jlevy/squares#446, in a check2
+      run (164.2 s at 8 threads) and a pre-publication run on a fresh machine (123 s).
+      Complete source-byte custody and the maintained mass, net and check2 premises
+      are accepted (receipts/premises-n89.json). The 32-direction 197/200 control
+      remains sampled. A complete capture, whole-net controls and a review that reads
+      this certificate remain pending under think-f40c, priced at about 0.62 to 0.71
+      CPU-hours. The shared crate establishes no independent implementation. No
+      standing bound or rating changes.
+    source_reviewed: '2026-10-17'
+  - id: E-wand125-fine-net-n91-97875-report
+    claim: lower-bound
+    scope: {n_values: [91]}
+    assurance: reported
+    reported_method: interval-certified
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+    certificate: >-
+      packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n91_L97875/candidate.json.gz
+    replay_status: not-attempted
+    verifiers: [V-wand125-sqverify-proof-net]
+    limitations: >-
+      The author reports 783/80 at all 201 directions of the net its candidate
+      declares (step 83/40000, core 9977/10000) by sqverify-proof-net, its copy of
+      this repository's sqverify_fast, at e060e98, in jlevy/squares#446, in a check2
+      run (225.4 s at 8 threads) and a pre-publication run on a fresh machine (167 s).
+      Complete source-byte custody and the maintained mass, net and check2 premises
+      are accepted (receipts/premises-n91.json). The 32-direction 197/200 control
+      remains sampled. A complete capture, whole-net controls and a review that reads
+      this certificate remain pending under think-f40c, priced at about 0.83 to 0.96
+      CPU-hours. The shared crate establishes no independent implementation. No
+      standing bound or rating changes.
+    source_reviewed: '2026-10-17'
+  - id: E-wand125-fine-net-n90-978-report
+    claim: lower-bound
+    scope: {n_values: [90]}
+    assurance: reported
+    reported_method: interval-certified
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+    certificate: >-
+      packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n90_L978/candidate.json.gz
+    replay_status: not-attempted
+    verifiers: [V-wand125-sqverify-proof-net]
+    limitations: >-
+      The author reports 489/50 at all 201 directions of the net its candidate
+      declares (step 83/40000, core 9977/10000) by sqverify-proof-net, its copy of
+      this repository's sqverify_fast, at 8155028, in jlevy/squares#446, in a check2
+      run (688.8 s at 7 threads) and a pre-publication run on a fresh machine (489 s).
+      Complete source-byte custody and the maintained mass, net and check2 premises
+      are accepted (receipts/premises-n90.json). The 32-direction 197/200 control
+      remains sampled. A complete capture, whole-net controls and a review that reads
+      this certificate remain pending under think-f40c, priced at about 2.26 to 2.6
+      CPU-hours. The shared crate establishes no independent implementation. No
+      standing bound or rating changes.
+    source_reviewed: '2026-10-17'
+  - id: E-wand125-fine-net-n92-986-report
+    claim: lower-bound
+    scope: {n_values: [92]}
+    assurance: reported
+    reported_method: interval-certified
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+    certificate: >-
+      packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n92_L986/candidate.json.gz
+    replay_status: not-attempted
+    verifiers: [V-wand125-sqverify-proof-net]
+    limitations: >-
+      The author reports 493/50 at all 201 directions of the net its candidate
+      declares (step 83/40000, core 9977/10000) by sqverify-proof-net, its copy of
+      this repository's sqverify_fast, at 599a67c, in jlevy/squares#446, in a check2
+      run (404.2 s at 7 threads) and a pre-publication run on a fresh machine (255 s).
+      Complete source-byte custody and the maintained mass, net and check2 premises
+      are accepted (receipts/premises-n92.json). The 32-direction 197/200 control
+      remains sampled. A complete capture, whole-net controls and a review that reads
+      this certificate remain pending under think-f40c, priced at about 1.16 to 1.33
+      CPU-hours. The shared crate establishes no independent implementation. No
+      standing bound or rating changes.
+    source_reviewed: '2026-10-17'
+  - id: E-wand125-fine-net-n106-10503-report
+    claim: lower-bound
+    scope: {n_values: [106]}
+    assurance: reported
+    reported_method: interval-certified
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+    certificate: >-
+      packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n106_L10503/candidate.json.gz
+    replay_status: not-attempted
+    verifiers: [V-wand125-sqverify-proof-net]
+    limitations: >-
+      The author reports 10503/1000 at all 201 directions of the net its candidate
+      declares (step 83/40000, core 9977/10000) by sqverify-proof-net, its copy of
+      this repository's sqverify_fast, at 3b25387, in jlevy/squares#446, in a check2
+      run (179.2 s at 8 threads) and a pre-publication run on a fresh machine (150 s).
+      Complete source-byte custody and the maintained mass, net and check2 premises
+      are accepted (receipts/premises-n106.json). The 32-direction 197/200 control
+      remains sampled. A complete capture, whole-net controls and a review that reads
+      this certificate remain pending under think-f40c, priced at about 0.67 to 0.77
+      CPU-hours. The shared crate establishes no independent implementation. No
+      standing bound or rating changes.
+    source_reviewed: '2026-10-17'
+  - id: E-wand125-fine-net-n107-1058-report
+    claim: lower-bound
+    scope: {n_values: [107]}
+    assurance: reported
+    reported_method: interval-certified
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+    certificate: >-
+      packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n107_L1058/candidate.json.gz
+    replay_status: not-attempted
+    verifiers: [V-wand125-sqverify-proof-net]
+    limitations: >-
+      The author reports 529/50 at all 201 directions of the net its candidate
+      declares (step 83/40000, core 9977/10000) by sqverify-proof-net, its copy of
+      this repository's sqverify_fast, at 021702f, in jlevy/squares#446, in a check2
+      run (1,733.1 s at 16 threads) and a pre-publication run on a fresh machine (244
+      s). Complete source-byte custody and the maintained mass, net and check2
+      premises are accepted (receipts/premises-n107.json). The 32-direction 197/200
+      control remains sampled. A complete capture, whole-net controls and a review
+      that reads this certificate remain pending under think-f40c, priced at about
+      2.45 to 2.82 CPU-hours. The shared crate establishes no independent
+      implementation. No standing bound or rating changes.
+    source_reviewed: '2026-10-17'
+  - id: E-wand125-fine-net-n108-1062-report
+    claim: lower-bound
+    scope: {n_values: [108]}
+    assurance: reported
+    reported_method: interval-certified
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+    certificate: >-
+      packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n108_L1062/candidate.json.gz
+    replay_status: not-attempted
+    verifiers: [V-wand125-sqverify-proof-net]
+    external_review:
+      state: informally-verified
+      date: '2026-10-18'
+      reviewed_by: Codex (OpenAI), separately prompted strong xhigh and strongest maximum-reasoning mathematical lanes
+      note: >-
+        docs/project/reviews/review-2026-10-18-wand125-n108-certificate-mathematics.md
+        and docs/project/reviews/review-2026-10-18-n108-fine-net-mathematics-max.md accept the
+        n108 implication and checked exact premises, with retained complete replay
+        coverage and the shared-components limitation. Neither review reran the
+        native engine or decided the other 17 certificates.
+    limitations: >-
+      The author reports 531/50 at all 201 directions of the candidate's declared
+      net, by its adapted sqverify-proof-net, in a check2 run and a separate
+      pre-publication run. This source-author entry remains reported and its
+      checker was not run here. The maintained native replay is separately
+      registered as E-wand125-fine-net-n108-1062-sqverify-fast-replay. The accepted
+      certificate reviews read the retained candidate, exact premises, complete
+      replay and controls; the standard-library audit independently recomputed all
+      201 saved refusal points. The author's 32-direction 197/200 control remains
+      a sampled report. The shared crate establishes no independent full implementation.
+      The source README's control.jsonl.gz filename is a documentation error:
+      the retained manifest and release name check2/control-197_200.jsonl.gz;
+      the archived README remains unchanged and our packet records the correction.
+    source_reviewed: '2026-10-18'
+  - id: E-wand125-fine-net-n108-1062-sqverify-fast-replay
+    claim: lower-bound
+    scope: {n_values: [108]}
+    assurance: verified
+    method: interval-certified
+    performed_by: repository
+    relationship_to_generator: shared-components
+    shared_components:
+      - The sqverify_fast crate, apart from the producer's declared-net reader; sqverify-proof-net adapts this repository's crate.
+    independence:
+      coverage:
+        extent: full
+        unit: complete legal core-centre domains at every declared-net direction
+        checked: 201
+        of: 201
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+    certificate: packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n108_L1062/candidate.json.gz
+    replay: >-
+      The retained native invocation is the mixed-family sqverify_fast_census run
+      for mixed_n108_L1062, at threshold one and all 201 declared-net directions,
+      with two workers; its census row is in packing/benchmarks/measure-verifier/census-mixed/census.json,
+      and the complete direction log and whole-net control receipt are in
+      packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-2026-10-16/mixed_n108_L1062.jsonl.gz
+      and packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-2026-10-16/mixed_n108_L1062.control.json.
+      The row is VERIFIED, every direction is verified, exit 0, and the control
+      receipt is CONTROLS_REFUSED. Its historical build reports source SHA-256
+      d97758bbc9639edc70b8bd7dc83106d4e8d1be034bacb3e88f8c539b88091c88;
+      the retained native binary SHA-256 is
+      567a0fd58f7ae4e981580f2a90bed5c92ac44fa8f3ebb442b166e93043c15ed4.
+      For the independently recomputed saved-point receipt, from the repository
+      root run PYTHONPATH=packing:packing/src packing/.venv/bin/python3 -m
+      devtools.audit_fine_net_receipt --root . --packet
+      wand125-fine-net-lower-bounds-2026-10-16 --certificate mixed_n108_L1062
+      --n 108 --side 531/50.
+      The point audit checks input/binary custody and complete historical build
+      agreement across the receipts; its recorded source digest is informational.
+      It does not read or gate current crate source or Git revisions.
+      Its retained PASS is packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review/n108-exact-audit.json.
+      The accepted mathematical review notes retain the separate exact audit
+      invocations and limitations. This records an existing native replay;
+      the 18 October integration did not rerun it.
+    replay_status: passed
+    verifiers: [V-sqverify-fast, V-audit-fine-net-receipt]
+    proof:
+      source: packing/sqverify_fast/SOUNDNESS.md
+      theorem: >-
+        The net-and-shrink measure-capture obstruction (The Claim, Format M,
+        lemma D for the centre domain and lemma N0 for the declared net), applied
+        to mixed_n108_L1062: no 108 unit squares with disjoint interiors pack
+        in a square of side 531/50, hence s(108) >= 531/50.
+      scope: Unrestricted unit-square packing with disjoint interiors and arbitrary rotations.
+      pinpoints: >-
+        The native soundness and census-route reviews at
+        docs/project/reviews/review-2026-10-03-sqverify-fast-soundness.md,
+        docs/project/reviews/review-2026-10-05-wand125-october-5-and-independent-replays.md,
+        docs/project/reviews/review-2026-10-06-sqverify-fast-declared-net-soundness.md
+        and docs/project/reviews/review-2026-10-06-sqverify-fast-declared-net-fix-check.md;
+        the n108 certificate reviews at docs/project/reviews/review-2026-10-18-wand125-n108-certificate-mathematics.md
+        and docs/project/reviews/review-2026-10-18-n108-fine-net-mathematics-max.md; the census row and receipts named in replay.
+      assumptions:
+        - The nonnegative exact rectangle density has total mass 10799999/100000 < 108, recomputed from all 823 rows and their multiplicity-preserving D4 expansion into 6524 distinct rectangles.
+        - Every unit square contains a closed core strictly in its interior at one of 201 declared-net directions, core 9977/10000 and step 83/40000, with B(1+D) = 399908091/400000000 < 1 and final half-angle tangent 83/200 past tan(pi/8).
+        - Every legal centre is covered by format M's per-bin domain and the complete native axis sweep or interval branch-and-bound search at threshold one.
+        - The native binary, compiler and dependencies implement the directed-rounding IEEE binary64 operations used by the reviewed source.
+        - The native receipt binds retained gzip SHA-256 acaf27593b53c3472ab249805f672030e3cbd3323033641b1df1d8460ae8835b, whose decompressed bytes are the source candidate; the retained receipt faithfully records the process that wrote it.
+      audit_record: docs/project/reviews/review-2026-10-18-n108-fine-net-mathematics-max.md
+    limitations: >-
+      The retained native run decided all 201 directions, with 136113602 boxes,
+      30140100 axis vertices, least certified lower bound 1.0000000001765084,
+      and exact capture about 1.0475325246573444 at the least-bound leaf centre,
+      index 157. It used 2086.786416 CPU seconds and 1859.046492 wall seconds.
+      Its whole-net 99/100 mass control was refused at every direction; the
+      near-threshold mutant at index 157 was refused with exact capture below
+      one, and the original positive was restored and verified. The retained
+      standard-library audit recomputed all 201 saved refusal captures and
+      originals, and the source-distinct maximum-reasoning review independently
+      checked exact premises and five poses. These audits decide premises and
+      points, not universal coverage between points. That coverage rests on the
+      reviewed native census and its receipt bindings. The source's checker
+      and this replay share the sqverify_fast crate, apart from their declared-net
+      readers, so their agreement is not an independent full implementation or
+      a second method. No native replay was rerun during the 18 October review
+      or integration, and the other 17 imports receive no verdict from it.
+    source_reviewed: '2026-10-18'
+  - id: E-n108-review-max-premises
+    claim: derived-structure
+    scope: {n_values: [108]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: not-applicable
+    origin: audited-here
+    novelty: previously-published
+    source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+    certificate: packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n108_L1062/candidate.json.gz
+    replay: >-
+      From the repository root, packing/.venv/bin/python3 -I
+      packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-max/n108_audit.py --repo .
+      recomputes the exact candidate premises and prints
+      EXACT_PREMISES_AND_FIVE_POSES_PASS. The invocation and read log are retained
+      in packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-max/README.md and its stdout in packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-max/audit.json.
+      This entry covers the exact input premises and receipt inventories only.
+    replay_status: passed
+    verifiers: [V-n108-review-max-exact]
+    independence_record: packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-max/README.md
+    independence:
+      coverage:
+        extent: full
+        unit: exact mass, D4 expansion, core/net/domain premises and retained receipt inventories of this one candidate
+    limitations: >-
+      This premise-only audit records no relation to the producer's full coverage
+      decision. The program's separate authorship and read log are recorded in its
+      verifier registry entry. The maximum-reasoning review's standard-library
+      Fraction program independently
+      checks all 823 positive representatives, 6524 expanded rectangles with stabilizer
+      multiplicity, total mass 10799999/100000, the declared 201-direction net and
+      core-fit/last-bin/domain premises, and the retained logs' complete inventories.
+      Reading a complete receipt inventory is not rerunning its coverage search.
+      This is derived premise evidence; it does not prove the lower bound without
+      the separate native universal-capture decision and accepted implication.
+      The reviewer later read maintained admission/domain code and earlier reviews,
+      so the read log makes no clean-room claim; no producer code was reused.
+    source_reviewed: '2026-10-18'
+  - id: E-n108-review-max-captures
+    claim: derived-structure
+    scope: {n_values: [108]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: not-applicable
+    origin: audited-here
+    novelty: previously-published
+    source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+    certificate: packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-max/audit.json
+    replay: >-
+      The same packing/.venv/bin/python3 -I packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-max/n108_audit.py
+      --repo . invocation retained in packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-max/README.md
+      computes exact captures at native 99/100 control indices 1, 100, 157 and
+      200, and at the source's 197/200 axis control pose. All five pass, as do
+      four analytic geometry controls. It compares full rational values, with
+      adjacent decimal enclosures used only to display large fractions.
+    replay_status: passed
+    verifiers: [V-n108-review-max-exact]
+    independence_record: packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-max/README.md
+    independence:
+      coverage:
+        extent: sample
+        unit: recorded control witness poses, no whole direction domain
+        checked: 5
+        of: 233
+    limitations: >-
+      This point-only audit records no relation to the producer's full coverage
+      decision; its verifier registry entry retains the separate code/read log.
+      Four of the 201 saved native mutant witness poses and one of the 32 sampled
+      source mutant poses were independently calculated. This is five of 233
+      recorded poses, not five direction domains or a complete coverage proof.
+      The original and scaled capture calculations settle those points only.
+      The audit uses no producer code, but its author later read maintained
+      admission/domain code; the read log makes no clean-room claim. The retained
+      native replay remains shared-components confirmation and receives no
+      independent full confirmation or new rung from this sample.
+    source_reviewed: '2026-10-18'
+  - id: E-wand125-fine-net-n110-1073-report
+    claim: lower-bound
+    scope: {n_values: [110]}
+    assurance: reported
+    reported_method: interval-certified
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+    certificate: >-
+      packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n110_L1073/candidate.json.gz
+    replay_status: not-attempted
+    verifiers: [V-wand125-sqverify-proof-net]
+    limitations: >-
+      The author reports 1073/100 at all 201 directions of the net its candidate
+      declares (step 83/40000, core 9977/10000) by sqverify-proof-net, its copy of
+      this repository's sqverify_fast, at 718887c, in jlevy/squares#446, in a check2
+      run (976.3 s at 16 threads) and a pre-publication run on a fresh machine (249
+      s). Complete source-byte custody and the maintained mass, net and check2
+      premises are accepted (receipts/premises-n110.json). The 32-direction 197/200
+      control remains sampled. A complete capture, whole-net controls and a review
+      that reads this certificate remain pending under think-f40c, priced at about
+      2.47 to 2.83 CPU-hours. The shared crate establishes no independent
+      implementation. No standing bound or rating changes.
+    source_reviewed: '2026-10-17'
   - id: E-evand-680-n183-report
     claim: upper-bound
     scope:
-      n_values: [183]
+      n_values:
+      - 183
     assurance: reported
     reported_method: exact-algebraic
     performed_by: source-author
@@ -37965,15 +38611,113 @@ evidence:
     source_key: '[Daniel n183 subgrid 2026-10-19]'
     certificate: packing/resources/web/evand-n183-subgrid-2026-10-19/source/
     replay_status: not-attempted
-    verifiers: []
+    verifiers: [V-evand-verify-cert-py, V-evand-verify-cert2-py]
     source_reviewed: '2026-10-19'
-    limitations: >-
-      Source report in issue 680: one n183 upper bound, exact side
-      13999580178736252502081470897571/1000000000000000000000000000000.
-      The original and regularized display certificates have the same side. Source
-      checker outcomes, numerical KKT/local-minimum claims, regularization identity
-      and first-public comparison remain author assertions. Credit Daniel after
-      Couzo's n182 donor, preserving the unlogged crossover mate. Custody ran no source
-      code or geometry. Full replay and controls are think-1hmn; independent mathematical
-      review is think-glg8. Registration takes its ID only in actual merge order;
-      no case bound, house, verification or confirmation rung is promoted here.
+    limitations: 'Issue 680 reports one n183 upper bound, exact side 13999580178736252502081470897571/1000000000000000000000000000000.
+      Original and regularized display certificates report one bound. The accepted separately
+      prompted mathematical review and separate E-evand-680-n183-primary-exact-feasibility confirm
+      only the original finite certificate by independently re-implemented project geometry.
+      No upstream checker ran. The regularized endpoint is unexecuted. Source numerical KKT/local-minimum
+      descriptions, regularization identity/path and public priority remain assertions. The
+      27 numerical candidate flat modes concern the 182-square force-bearing subsystem, excluding
+      rattler index 11. Credit Evan Daniel after Francisco Couzo''s n182 donor, preserving unlogged
+      crossover mates. T-218 is local and provisional after the unmerged frozen #671 sequence;
+      no case/house adoption.'
+    external_review:
+      state: informally-verified
+      date: '2026-10-19'
+      reviewed_by: OpenAI Codex system family, strong tier, maximum reasoning; separately prompted
+        mathematical reviewer
+      note: docs/project/reviews/review-2026-10-19-evand-n183-subgrid.md accepts the original
+        finite upper bound on the retained native replay. No blocking mathematical defect; M1
+        wording is qualified, M2 discharged for the primary route, M3/M4 retained as limits.
+  - id: E-evand-680-n183-primary-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values:
+      - 183
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Daniel n183 subgrid 2026-10-19]'
+    certificate: packing/resources/web/evand-n183-subgrid-2026-10-19/source/search/packer/candidates/s183_h183b.cert
+    replay: 'Completed primary-only batch, not a new run in this registration slice: from /Users/levy/wrk/github/squares/.worktrees/confirm-422/packing
+      after sourcing the retained historical intake-env.sh, /Users/levy/wrk/github/squares/packing/.venv/bin/python3
+      -m devtools.upper_bound_reports evand-n183-subgrid-2026-10-19 certify --jobs-dir /Volumes/spud-ext1/agent-scratch/squares-intake-followup-20261019/n183-primary-jobs-01
+      --workers 1 --timeout 100, exit 0. Python 3.14.7; original source and exact side admitted
+      before deciding all 183 rows, every wall and 16653 pairs per route/job. Both maintained
+      routes accept the positive and refuse duplicate-square and outside-container controls:
+      3 jobs, 99918 pair decisions, 34.87 process wall seconds and 30.55 route CPU seconds,
+      no timeout or retry. The full historical command/cwd/PYTHONPATH is receipts/certify-execution-provenance.json;
+      native complete inputs/results/controls are receipts/exact-certification.json.xz in the
+      packet. The actual seven source versions and the retained historical custody source are
+      recorded by n183-evidence-integration.yaml and the named verifiers'' versions. Current
+      maintained check --n 183 without --replay admits those receipts and executes no geometry.'
+    replay_status: passed
+    verifiers:
+    - V-sqpack-verify
+    - V-check-rational-witness-independent
+    - V-upper-bound-reports
+    - V-evand-arrangement-receipts
+    - V-evand-exact-certificates
+    - V-acquire-source
+    independence:
+      coverage:
+        extent: full
+        unit: the original n183 rational certificate, all 183 squares, every wall and all 16653
+          unordered pairs in each of three jobs through both maintained routes; positive plus
+          two sensitive invalid controls
+        checked: 1
+        of: 1
+      read:
+      - mathematics
+      - specification
+      - certificate-format
+      - producer-code
+      clean_room: false
+      shares: []
+      written_by:
+      - kind: ai
+        system: Claude (Anthropic)
+        setting: The earlier project geometry and conversion lanes, as recorded for these same
+          maintained programs in E-evand-552-exact-feasibility and the conversion module read
+          log. Per-program individual identities, tiers and reasoning settings were not retained;
+          this integration authors no deciding code.
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: null
+        separate_code: true
+        note: Existing project evidence attributes the earlier deciding/conversion lanes to
+          Claude, and the producer discloses Claude assistance. Prompt separation for every
+          original author is not reconstructed here. The implementations import or copy none
+          of the producer's code; no human or model-family diversity is inferred.
+      note: The two maintained routes share strict parsing, rational half-angle conversion,
+        Fraction arithmetic, runtime and the separating-axis theorem. They provide two implementations,
+        not two mathematical methods. The conversion author's retained read log discloses reading
+        both producer checkers. shares refers to producer components; common first-party components
+        between routes are disclosed here.
+    independence_record: docs/project/reviews/review-2026-10-19-evand-n183-subgrid.md
+    external_review:
+      state: informally-verified
+      date: '2026-10-19'
+      reviewed_by: OpenAI Codex system family, strong tier, maximum reasoning; separately prompted
+        mathematical reviewer
+      note: docs/project/reviews/review-2026-10-19-evand-n183-subgrid.md accepts the original
+        finite upper bound on the retained native replay. No blocking mathematical defect; M1
+        wording is qualified, M2 discharged for the primary route, M3/M4 retained as limits.
+    source_reviewed: '2026-10-19'
+    limitations: 'Finite feasibility of the original rational certificate only: s(183) <= 13.999580178736252502081470897571
+      < 13.999580178737 < 14. No upstream program ran, no regularized endpoint replay or same_packing
+      assertion, no path/identity, local or global optimality, exact rigidity or flat family,
+      public priority or recovery of missing crossover lineage. M1''s numerical modes concern
+      182 force-bearing squares excluding rattler 11; M2 is discharged by strict expected-count/side/full-row
+      and complete-input custody admission. Positive exact wall clearance 1/200000000000000000000;
+      the native receipt retains the identical strictly positive rational SAT projection gap
+      for both routes, not an exact shortest Euclidean distance. Duplicate gap -1 and translated-square
+      wall margin negative in both routes. Historical acquire_source bytes are retained as nonexecuted
+      text because the inherited #671 version differs. Case lanes/grid house remain unchanged
+      pending separate adoption and strong regularization. No publication or actual main-order
+      result ID is established by this local checkpoint.'

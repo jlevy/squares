@@ -7,11 +7,11 @@ softschema:
   schema: schemas/session-close-report.schema.yaml
   envelope: null
   status: enforced
-count: 185
+count: 186
 generated_by: >-
   uv run --frozen --all-extras --group dev python -m devtools.close_session --render
 totals:
-  sessions_measured: 129
+  sessions_measured: 130
   sessions_unmeasured: 56
   attributed:
     rollups: 297
@@ -35,9 +35,9 @@ totals:
     one_off_code: 9299
     wall_hours: 958.61
 codex_receipts:
-  attributed: 82
+  attributed: 83
   unattributed: 9
-  measured: 91
+  measured: 92
 # Per-session figures below are the logs each session DECLARES. They overlap when
 # sessions share a harness log, so they do not sum to `attributed` above.
 sessions:
@@ -3252,4 +3252,24 @@ sessions:
     agent_hours: 21.42
     active_union_hours: 5.83
     wall_hours: 5.83
+    snapshot_incomplete: true
+- id: session-187
+  title: "Canonical Rust Multiplication Promotion"
+  status: stopped
+  primary_bead: think-1ozu
+  phases: 8
+  measured: true
+  rollups:
+  - packing/campaign/resource-usage/codex-task-tree-session-187.yaml
+  turns: null
+  tool_calls: null
+  tool_errors: null
+  one_off_code: null
+  wall_hours: null
+  codex_receipts:
+  - path: packing/campaign/resource-usage/codex-task-tree-session-187.yaml
+    model_responses: 522
+    agent_hours: 2.75
+    active_union_hours: 1.63
+    wall_hours: 1.63
     snapshot_incomplete: true

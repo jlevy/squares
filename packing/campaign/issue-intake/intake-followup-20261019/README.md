@@ -100,13 +100,35 @@ source hashes, historical certify working directory and full `PYTHONPATH`, the f
 existing deciding/premise verifier IDs, the custody helper awaiting registry
 representation, and M1–M4 dispositions.
 The original batch JSON and native receipt remain unchanged from the reviewer’s audit.
-The [prospective row](registration-plan.yaml) keeps V0/C0 as an unapplied proposal while
-the coordinator settles registration order.
+The historical [prospective row](registration-plan.yaml) kept V0/C0 as an unapplied
+proposal before the subsequent local registration checkpoint below.
 V3/C3 is proposed for the primary finite upper bound only after actual cited evidence,
 review and program bindings land.
 No further primary geometry run is required.
 Actual result allocation, registry integration, adoption and release disposition remain
 separate obligations.
+
+## Local Provisional Registration Checkpoint
+
+The [registration checkpoint](n183-registration-checkpoint.yaml) locally binds the
+original primary certificate to **T-218**, provisionally after frozen, unmerged #671 at
+`f319bdfd9771def53383dd6674923e5c29f4bd01` and its 217 result objects.
+The earlier proposal and evidence handoff above remain historical preparation inputs.
+The actual result row cites `E-evand-680-n183-report` with its accepted mapped review
+and `E-evand-680-n183-primary-exact-feasibility` with complete native coverage and
+controls. The maintained APIs derive V3/C3; the review endorses S3. Actual main order,
+final senior review, CI and publication remain pending.
+
+`V-acquire-source` now represents custody admission with explicit versions.
+The historical source that ran is retained as nonexecuted `.py.txt` because #671 changes
+the current helper; the registry distinguishes that old version from current
+admission-only code.
+All other six recorded source files remain the replay versions.
+No geometry or source checker reran.
+The two case upper lanes and retained grid house remain 14, and the regularized endpoint
+remains unexecuted and unadopted.
+Original replay/review/import owners retain their work; this slice owns only
+**think-7c78** and the local checkpoint.
 
 ## Manual Reads and Gate Evidence
 

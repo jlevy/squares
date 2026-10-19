@@ -1,0 +1,39 @@
+# Effective local registration; the earlier proposal/handoff remain historical inputs.
+format: local-registration-checkpoint-v1
+bead: think-7c78
+prepared_by: codex-680-local-registration-20261019
+date: '2026-10-19'
+status: local-provisional-awaiting-final-review-main-order-and-publication
+inherited_671: f319bdfd9771def53383dd6674923e5c29f4bd01
+preserved_intake_checkpoint: 80d33d65da5660537cb0b8cbfd515c1b79cffafb
+inherited_result_count: 217
+result: T-218
+scope: {n_values: [183]}
+verification: V3
+confirmation: C3
+significance: S3
+reported_evidence: E-evand-680-n183-report
+confirming_evidence: E-evand-680-n183-primary-exact-feasibility
+review: docs/project/reviews/review-2026-10-19-evand-n183-subgrid.md
+historical_evidence_handoff: packing/campaign/issue-intake/intake-followup-20261019/n183-evidence-integration.yaml
+historical_stage3_proposal: packing/campaign/issue-intake/intake-followup-20261019/registration-plan.yaml
+custody_verifier: V-acquire-source
+historical_custody_source: packing/resources/web/evand-n183-subgrid-2026-10-19/receipts/programs/acquire-source-replay-2026-10-19.py.txt
+custody_version_note: >-
+  The actual completed replay used f2badc973c8aa3c1bc90e4ebf89836ba7c0fa74fa7527e7be7dc205d48d701e4;
+  the inherited current admission code is a53cf8375a9122d3daa18f1997faa2281a8821ba2612a40d7b512d2f1861727f.
+  Both are explicitly distinguished in the registry; archived text is never executed.
+limits:
+- Original finite feasibility only; regularized endpoint unexecuted and not adopted.
+- All 217 inherited result objects and existing case/house lanes remain semantically unchanged.
+- No geometry/proof rerun, upstream/archived-code execution, new environment, final release/pin change, push or PR.
+- The pre-edit records gate checks the retained Lean replay receipt with --check; printed build time/module count is historical receipt data, not a new build.
+- Original replay batch, native receipt, source and completed review bytes remain identical.
+- Original source/replay/review/import owners remain open and retain ownership; no other bead is claimed or closed.
+remaining:
+- Confirm actual #671/main order and the final ID before publication; renumber all bindings if needed.
+- Obtain final independent senior/integration review and required qualification/CI.
+- Resolve final release-impact/edition/pin disposition in the publication slice.
+- Root reconciles original owner/backlog beads after actual binding lands; primary confirmation no longer has an unrun geometry task.
+- Separate case/house adoption and strong-generator regularization; optional regularized/source-checker scope remains with original owners.
+- Post qualified author reply only after merge and deployed-site checks.

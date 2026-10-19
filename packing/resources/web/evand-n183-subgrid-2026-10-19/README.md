@@ -169,12 +169,30 @@ families.
 
 The review proposes V3/C3 for the primary finite upper bound once the actual result
 cites registered confirming evidence and the complete deciding/premise metadata.
-This checkpoint maps the review locally; it allocates no result ID and applies no
-rating, case bound, house or release change.
-Regularized-certificate replay and source-checker execution remain separate open scope
-under **think-1hmn**; neither is needed to confirm this one original certificate.
-Endpoint feasibility would not establish same-packing identity or a no-expansion path.
-House adoption and strong-generator regularization remain subsequent obligations.
+The earlier evidence-mapping checkpoint applied no result ID, rating, case bound, house
+or release change. The subsequent provisional registration below binds the completed
+evidence locally. Regularized-certificate replay and source-checker execution remain
+separate open scope under **think-1hmn**; neither is needed to confirm this one original
+certificate. Endpoint feasibility would not establish same-packing identity or a
+no-expansion path. House adoption and strong-generator regularization remain subsequent
+obligations.
+
+The
+[local registration checkpoint](../../../campaign/issue-intake/intake-followup-20261019/n183-registration-checkpoint.yaml)
+now binds the original finite upper bound to provisional T-218 at locally derived V3/C3,
+with S3 endorsed by the review, after frozen, unmerged #671. It is not on main and
+supplies no publication evidence.
+The reported and confirming evidence are separate, and the actual ID/order and final
+review/CI/release disposition remain pending.
+The earlier proposal and handoff remain historical preparation inputs.
+
+The custody premise is `V-acquire-source`. Its
+[historical replay source](receipts/programs/acquire-source-replay-2026-10-19.py.txt) is
+retained verbatim as text, SHA-256
+`f2badc973c8aa3c1bc90e4ebf89836ba7c0fa74fa7527e7be7dc205d48d701e4`. The inherited #671
+helper has different bytes and is recorded separately for current admission checks.
+The archived text has not been executed.
+The other six importer/geometry source versions are unchanged.
 
 To check custody from `packing/`, with the project interpreter and external scratch:
 
