@@ -506,6 +506,7 @@ documents:
   - {path: packing/benchmarks/n17-bb-native/README.md, role: component-guide, authority: supporting, lifecycle: maintained}
   - {path: packing/benchmarks/measure-verifier/census/README.md, role: generated-view, authority: generated, lifecycle: generated}
   - {path: packing/benchmarks/measure-verifier/census-mixed/README.md, role: generated-view, authority: generated, lifecycle: generated}
+  - {path: packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-2026-10-16/README.md, role: generated-view, authority: generated, lifecycle: generated}
   - {path: packing/benchmarks/measure-verifier/census-summary.md, role: generated-view, authority: generated, lifecycle: generated}
   - {path: packing/benchmarks/measure-verifier/experiments/exp-006-whole-certificate-n32.md, role: research-report, authority: record, lifecycle: retained}
   - {path: packing/benchmarks/measure-verifier/experiments/exp-007-h005-error-budget.md, role: research-report, authority: record, lifecycle: retained}
