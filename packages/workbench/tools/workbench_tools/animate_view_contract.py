@@ -1069,6 +1069,10 @@ def timing_transport_physics(session: Session) -> str:
         at = pair_index(session, n)
         for style in ("physics", "bodies"):
             costs = [session.look("physics/build", index=at, style=style) for _ in range(3)]
+            sizes = {cost["bytes"] for cost in costs}
+            session.require(
+                len(sizes) == 1, f"three builds of n = {n}, {style} differ in bytes: {sizes}"
+            )
             built.append((n, style, min(cost["ms"] for cost in costs), costs[0]["bytes"]))
     slow = [row for row in built if not (row[2] < 400.0 and row[3] < 4_000_000)]
     session.require(

@@ -283,7 +283,8 @@ SITE_LAYOUT_TESTS = (
 #: unanswered lifecycle RPC survives a deadline kill. A passing run prints about 2.6 MB
 #: and 103,000 lines of it: on PR #685 that took the frontend job log from 397 KB to
 #: 6.0 MB. The artifact log keeps every byte; the step reports at most this many trailing
-#: characters, which hold pytest's summary and the last RPCs before any hang.
+#: bytes of it (characters, when output is piped), which hold pytest's summary and the last
+#: RPCs before any hang.
 SITE_FORWARDER_OUTPUT_TAIL = 64 * 1024
 #: The four HTTP load/no-JS cases measure browser timing without competing browser
 #: workers from the functional layout command. Their assertions and budgets stay shared
@@ -963,9 +964,10 @@ def _timeout_output(error: subprocess.TimeoutExpired) -> str:
 def _command_output(stdout: str | None, output_path: Path | None, tail: int | None) -> str:
     """What a command printed, as its step reports it.
 
-    With `tail`, only the last `tail` characters are kept, from a line boundary, under a
-    line saying what was cut and where all of it is. An artifact log is read from its end,
-    so the gate never holds the rest in memory. Without `tail`, all of it.
+    With `tail`, only the last `tail` bytes of an artifact log, or characters of piped
+    output, are kept, from a line boundary, under a line saying what was cut and where all
+    of it is. An artifact log is read from its end, so the gate never holds the rest in
+    memory. Without `tail`, all of it.
     """
     if tail is None:
         if output_path is None:
@@ -1137,8 +1139,9 @@ def _run(
     """Run `command` as a step's subprocess; `extra_environment` is laid over the gate's
     environment for this command alone. `pytest_progress` names the lane and exclusions
     of an explicitly selected pytest command that has no quick/slow marker expression.
-    `output_tail` bounds what the step reports to that many trailing characters; the
-    artifact log, where there is one, still keeps everything."""
+    `output_tail` bounds what the step reports to that many trailing bytes of the artifact
+    log, or characters of piped output; the artifact log, where there is one, still keeps
+    everything."""
     if pytest_progress is not None and list(command[1:3]) != ["-m", "pytest"]:
         raise StepFailureError("pytest progress requires a native pytest command")
     if extra_environment:
