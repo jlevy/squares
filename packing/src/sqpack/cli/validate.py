@@ -2104,7 +2104,7 @@ def _site_layout_tests(context: Context) -> str:
             "-k",
             f"not {SITE_LOAD_BUDGET_TEST.rpartition('::')[-1]}",
         ),
-        (*common, "-n", "0", SITE_FORWARDER_TEST),
+        (*common, "-n", "0", "-s", SITE_FORWARDER_TEST),
         (*common, "-n", "0", SITE_LOAD_BUDGET_TEST),
     )
     outputs: list[str] = []
@@ -2118,6 +2118,10 @@ def _site_layout_tests(context: Context) -> str:
         ),
         strict=True,
     ):
+        environment = {REQUIRE_CHROMIUM: "1"}
+        if progress[0] == "browser-forwarders":
+            # Retain unanswered lifecycle RPCs even if the shared deadline kills pytest.
+            environment.update({"DEBUGP": "1", "DEBUG": "pw:api"})
         try:
             remaining = deadline - time.monotonic()
             if remaining <= 0:
@@ -2130,7 +2134,7 @@ def _site_layout_tests(context: Context) -> str:
                     context,
                     command,
                     timeout_seconds=remaining,
-                    extra_environment={REQUIRE_CHROMIUM: "1"},
+                    extra_environment=environment,
                     pytest_progress=progress,
                 )
             )

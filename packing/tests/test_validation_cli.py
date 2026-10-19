@@ -4646,6 +4646,7 @@ def test_the_site_layout_step_requires_a_chromium_and_runs_all_its_files(
             *common,
             "-n",
             "0",
+            "-s",
             "tests/test_site_forwarders.py",
         ),
         (
@@ -4655,9 +4656,50 @@ def test_the_site_layout_step_requires_a_chromium_and_runs_all_its_files(
             validate.SITE_LOAD_BUDGET_TEST,
         ),
     ]
-    assert environments == [{validate.REQUIRE_CHROMIUM: "1"}] * 3
+    assert environments == [
+        {validate.REQUIRE_CHROMIUM: "1"},
+        {validate.REQUIRE_CHROMIUM: "1", "DEBUGP": "1", "DEBUG": "pw:api"},
+        {validate.REQUIRE_CHROMIUM: "1"},
+    ]
     assert output == "command 1 passed\ncommand 2 passed\ncommand 3 passed"
     assert validate.REQUIRE_CHROMIUM == site_browser.REQUIRED
+
+
+def test_site_forwarder_diagnostics_do_not_leak_to_other_commands_or_the_parent(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Override caller debug settings only while the serial forwarders run."""
+    monkeypatch.setenv("DEBUGP", "caller-wire")
+    monkeypatch.setenv("DEBUG", "caller-api")
+    parent_environment = {"KEPT": "1", "DEBUGP": "caller-wire", "DEBUG": "caller-api"}
+    seen: list[dict[str, str]] = []
+
+    def capture(context: validate.Context, *_args: Any, **_options: Any) -> str:
+        seen.append(dict(context.environment))
+        return "passed"
+
+    monkeypatch.setattr(validate, "_run_command", capture)
+    monkeypatch.setattr(validate, "_artifact_directory", lambda _context: None)
+    monkeypatch.setattr(validate, "_pytest_workers", lambda _jobs: 2)
+    context = validate.Context(
+        deep=False,
+        strict=False,
+        jobs=1,
+        inner_jobs=1,
+        environment=parent_environment,
+    )
+    validate._site_layout_tests(context)
+    validate._run(context, ("next-command",))
+    chromium_environment = {**parent_environment, validate.REQUIRE_CHROMIUM: "1"}
+    assert seen == [
+        chromium_environment,
+        {**chromium_environment, "DEBUGP": "1", "DEBUG": "pw:api"},
+        chromium_environment,
+        parent_environment,
+    ]
+    assert context.environment == {"KEPT": "1", "DEBUGP": "caller-wire", "DEBUG": "caller-api"}
+    assert os.environ["DEBUGP"] == "caller-wire"
+    assert os.environ["DEBUG"] == "caller-api"
 
 
 def test_site_layout_commands_partition_the_original_collection(
