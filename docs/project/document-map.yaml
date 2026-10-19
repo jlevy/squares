@@ -10,6 +10,8 @@ scope: >
   current project documentation rules.
 documents:
   - {path: docs/project/reviews/review-2026-10-16-evand-exact-sides-639.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-19-pr665-integration-diagnostic.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-19-pr671-integration-diagnostic.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-16-pingyou-n29.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-18-intake-audit.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-18-open-work.md, role: review, authority: record, lifecycle: retained}

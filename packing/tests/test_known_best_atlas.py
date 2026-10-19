@@ -3126,14 +3126,17 @@ def test_the_poster_badges_every_perfect_square_and_counts_them_in_its_legend() 
     assert solid_rigid == sorted([k * k for k in range(1, 19)] + [5, 11, 28, 40])
     assert set(solid_rigid) >= {121, 144, 169, 196, 225, 256, 289, 324}
 
-    # The retained poster predates the 17 October adoption. Read the cases as that
-    # pass found them, independently of the poster's computed totals.
+    # The retained poster predates T-174's adoption but includes T-195 at 29. The
+    # same-day archive also holds 29's prior record, so restore only T-174's roster.
     from devtools import adopt_houses  # noqa: PLC0415
 
     previous = adopt_houses.read_pass("2026-10-17")
+    t174_counts = {n for n, result in adopted_houses.ADOPTED.items() if result == "T-174"}
+    assert len(t174_counts) == 37
+    assert 29 not in t174_counts
     cases = {n: build_bound_citations.load_case(n) for n in cards}
     cases.update(
-        {n: safe_load(text.split("---\n", 2)[1])["packing"] for n, text in previous.items()}
+        {n: safe_load(previous[n].split("---\n", 2)[1])["packing"] for n in t174_counts}
     )
     numeric_cases = {
         n

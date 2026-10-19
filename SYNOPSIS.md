@@ -680,6 +680,8 @@ case or experiment separately.
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
 | [Review: Evan Daniel’s Exact Algebraic Sides at Sixteen Counts (#639, T-193)](docs/project/reviews/review-2026-10-16-evand-exact-sides-639.md) | dated review record | record | retained | — |
+| [PR #665 Integration Diagnostic and Custody Retention](docs/project/reviews/review-2026-10-19-pr665-integration-diagnostic.md) | dated review record | record | retained | — |
+| [PR #671 Integration Review Diagnostic](docs/project/reviews/review-2026-10-19-pr671-integration-diagnostic.md) | dated review record | record | retained | — |
 | [Review: PingYou Ltd’s Exact Rational Certificate for s(29) (PR #622)](docs/project/reviews/review-2026-10-16-pingyou-n29.md) | dated review record | record | retained | — |
 | [Intake Audit, 18 October 2026](docs/project/reviews/review-2026-10-18-intake-audit.md) | dated review record | record | retained | — |
 | [Open Work Review — 18 October 2026](docs/project/reviews/review-2026-10-18-open-work.md) | dated review record | record | retained | — |
