@@ -29427,14 +29427,14 @@ results:
       index 11. No full183 local-optimality, exact flat-family or rigidity theorem.
 
       M2 claim binding is discharged for this primary replay; regularized endpoint/path/identity and
-      priority/missing-lineage claims are not confirmed. Both strong generators ran on the new
-      witness in the adoption's pull request; no final release or public reply here.
+      priority/missing-lineage claims are not confirmed. Both strong generators decided the new
+      witness in the adoption's pull request.
     next_rung: Finite feasibility is confirmed by independently re-implemented project geometry,
       with the common parser/conversion/Fraction/SAT/runtime limits disclosed. No additional
       primary geometry run is required. The case house was adopted at n183 on 2026-10-19, and
-      both strong generators decided its witness in the same pull request. V4/C4 would require the prescribed accepted
-      distinct reviews and human oversight; regularized/source-checker work is separate and
-      optional for this bound.
+      both strong generators decided its witness in the same pull request. V4/C4 would require
+      the prescribed accepted distinct reviews and human oversight; regularized/source-checker
+      work is separate and optional for this bound.
     controls:
     - packing/tests/test_upper_bound_reports.py
     - packing/resources/web/evand-n183-subgrid-2026-10-19/receipts/exact-certification.json.xz

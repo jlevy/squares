@@ -10,6 +10,7 @@ the #446 and #678 work, are carried by their own owners and are not recorded her
 | File | What it holds |
 | --- | --- |
 | [issue-680.json](issue-680.json) | The issue as read, body and metadata |
+| [issue-680-replies.json](issue-680-replies.json) | The body of the interim reply posted on #680 on 19 October |
 | [evand-source-inventory.json](evand-source-inventory.json) | The six source commits past `ddf09e3` and what each changes |
 | [n183-ledger/](n183-ledger/README.md) | The report-order ledger at 183: one claim, recorded |
 | [monotone-case-lanes.txt](monotone-case-lanes.txt) | Both upper lanes at each count 184–195, all exactly 14 |

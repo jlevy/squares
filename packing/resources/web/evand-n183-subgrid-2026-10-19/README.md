@@ -137,7 +137,7 @@ they share the importer’s rational parser, half-angle conversion and Python ru
 No upstream checker ran.
 The original source generator was not rerun.
 
-## Independent Mathematical Review and Local Registration
+## Independent Mathematical Review, Registration and Adoption
 
 The
 [completed review](../../../../docs/project/reviews/review-2026-10-19-evand-n183-subgrid.md)
@@ -168,26 +168,18 @@ This establishes neither a clean room nor distinct mathematical methods, humans 
 families.
 
 The review proposed V3/C3 for the primary finite upper bound once the actual result
-cited registered confirming evidence and the complete deciding/premise metadata.
-The earlier evidence-mapping checkpoint applied no result ID, rating, case bound, house
-or release change. The subsequent provisional registration below binds the completed
-evidence locally. Regularized-certificate replay and source-checker execution remain
-separate open scope under **think-1hmn**; neither is needed to confirm this one original
-certificate. Endpoint feasibility would not establish same-packing identity or a
-no-expansion path. House adoption and strong-generator regularization remain subsequent
-obligations.
+cited registered confirming evidence and the complete deciding and premise metadata.
+The registration does so: [T-218](../../../frontier/RESULTS.md) cites the reported
+evidence `E-evand-680-n183-report` and the confirming replay
+`E-evand-680-n183-primary-exact-feasibility`, at V3/C3, with S3 endorsed by the review.
+Regularized-certificate replay and source-checker execution remain separate optional
+scope under **think-1hmn**; neither is needed to confirm this one original certificate.
+Endpoint feasibility would not establish same-packing identity or a no-expansion path.
 
-The
-[local registration checkpoint](../../../campaign/issue-intake/intake-followup-20261019/n183-registration-checkpoint.yaml)
-binds the original finite upper bound to T-218 at locally derived V3/C3, with S3
-endorsed by the review.
-The checkpoint was prepared against #671 before its merge.
-#671 has since merged at `6833d05aa44f48140170e631b7766cb295876c31` and is integrated
-here through main `e0319ffd1c96986e0260083db7d3f3411f3bb4ef`. The reported and
-confirming evidence are separate.
-T-218’s final qualification, CI and publication remain pending; this local checkpoint
-supplies no publication evidence.
-The earlier proposal and handoff remain historical preparation inputs.
+The same pull request adopted the original certificate as the case’s house on 19 October
+2026 (**think-jh4w**): both upper lanes of [n-183.md](../../../frontier/n-183.md) moved
+from the trivial 14 × 14 grid, which stays retained as history, and both strong
+generators decided the new witness.
 
 The custody premise is `V-acquire-source`. Its
 [historical replay source](receipts/programs/acquire-source-replay-2026-10-19.py.txt) is
