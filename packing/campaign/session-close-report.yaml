@@ -3255,7 +3255,7 @@ sessions:
     snapshot_incomplete: true
 - id: session-187
   title: "Canonical Rust Multiplication Promotion"
-  status: in_progress
+  status: stopped
   primary_bead: think-1ozu
   phases: 8
   measured: true
