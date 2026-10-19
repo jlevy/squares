@@ -524,14 +524,14 @@ mod tests {
         feature = "experimental-coprime-mul"
     ))]
     #[test]
-    fn experimental_multiply_matches_canonical_rationals() {
+    fn canonical_multiply_matches_library_and_invariants() {
         use super::{Rational, multiply};
         use num_bigint::BigInt;
         use num_integer::Integer;
         use num_traits::One;
 
         let huge = BigInt::from(10_u32).pow(160) + BigInt::one();
-        let cases = [
+        let mut cases = vec![
             (
                 Rational::new(0.into(), 1.into()),
                 Rational::new(3.into(), 7.into()),
@@ -557,9 +557,23 @@ mod tests {
                 Rational::new(&huge + 4, &huge + 6),
             ),
         ];
+        let small: Vec<Rational> = (-4..=4)
+            .flat_map(|numerator| {
+                (-4..=4)
+                    .filter(|&denominator| denominator != 0)
+                    .map(move |denominator| Rational::new(numerator.into(), denominator.into()))
+            })
+            .collect();
+        cases.extend(
+            small
+                .iter()
+                .flat_map(|left| small.iter().map(move |right| (left.clone(), right.clone()))),
+        );
         for (left, right) in cases {
             let result = multiply(&left, &right);
-            assert_eq!(result, left * right);
+            let expected = left * right;
+            assert_eq!(result.numer(), expected.numer());
+            assert_eq!(result.denom(), expected.denom());
             assert!(result.denom() > &BigInt::from(0));
             assert_eq!(result.numer().gcd(result.denom()), BigInt::one());
         }
@@ -570,6 +584,26 @@ mod tests {
         let input = r#"{"version":1,"rectangles":[{"left":"0","bottom":"0","right":"1","top":"1","density":"2"}],"polygons":[[["0","0"],["1","0"],["1","1"],["0","1"]],[["1","0"],["2","0"],["2","1"],["1","1"]],[["1","1"]]]}"#;
         let result = evaluate(input).expect("valid exact batch");
         assert_eq!(result, r#"{"version":1,"coverages":["2","0","0"]}"#);
+    }
+
+    #[test]
+    fn batch_and_resident_normalize_noncanonical_inputs() {
+        let rectangles =
+            r#"[{"left":"2/-2","bottom":"-6/6","right":"6/6","top":"-4/-4","density":"-6/-4"}]"#;
+        let polygons = r#"[[["3/-3","-2/2"],["-5/-5","4/-4"],["2/2","-7/-7"],["-8/8","6/6"]],[["4/-2","-6/3"],["6/3","8/-4"],["0/-9","-8/-4"]],[["0/-11","-0/7"]]]"#;
+        let batch = format!(r#"{{"version":1,"rectangles":{rectangles},"polygons":{polygons}}}"#);
+        assert_eq!(
+            evaluate(&batch).expect("normalized exact batch"),
+            r#"{"version":1,"coverages":["6","21/4","0"]}"#
+        );
+        let opening = format!(r#"{{"version":1,"rectangles":{rectangles}}}"#);
+        let mut table = open_session(&opening).expect("normalized resident table");
+        let query = format!(
+            r#"{{"version":1,"sequence":0,"table_sha256":"{}","polygons":{polygons}}}"#,
+            table.sha256()
+        );
+        let answer = query_session(&mut table, &query).expect("normalized resident query");
+        assert!(answer.contains(r#""coverages":["6","21/4","0"]"#));
     }
 
     #[test]

@@ -3928,3 +3928,132 @@ verifiers:
       - packing/devtools/continuous_pose_followup.py
       - packing/tests/test_continuous_pose_followup.py
     independence_record: packing/devtools/continuous_pose_followup.py
+  - id: V-pingyou-622-exact-review
+    program: review/programs/n29_exact_review.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      Decides PingYou Ltd's n = 29 certificate of PR 622 from its release asset, read by
+      member and held to its pinned size and digest: every wall and every pair over Q by
+      separating axes on the squares' own axes, with a strict reader of the certificate's
+      fractions; refuses four mutated copies, each for exactly its expected violations, two
+      of them 1e-3000 past exact contact; decides the replay's retained jobs again from
+      their checker inputs; and measures the certificate against the record's witnesses,
+      which decides nothing. Standard library only.
+    source:
+      - packing/resources/web/pingyou-pr622-certificate-2026-10-15/review/programs/n29_exact_review.py
+      - packing/resources/web/pingyou-pr622-certificate-2026-10-15/review/programs/run_review.sh
+    versions:
+      - sha256: 57bcd639d84df6782baa4347a10d94e98d356cda061c9624735aa11d6d154ea7
+    independence_record: >-
+      packing/resources/web/pingyou-pr622-certificate-2026-10-15/review/README.md
+    independence:
+      read:
+        - specification
+        - certificate-format
+        - producer-output
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 review lane of PR 622's import (think-2jzy), strong sub-agent tier,
+            max reasoning
+      overlaps_producer:
+        extent: unknown
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The source names no system behind the PY agentic offering. The decision was written
+          from the asset's README.txt geometry statement and the certificate's layout, and
+          decided the certificate before any of the replay's code was read; the source's
+          COMPARISON.json and corners witness were read afterwards, to compare. None of the
+          source's programs was opened. The replay's routes are also Claude lanes' work, a
+          system-family overlap with the replay and not, as far as the record knows, with the
+          producer.
+    note: >-
+      Written on 16 October 2026 for docs/project/reviews/review-2026-10-16-pingyou-n29.md
+      and kept, with everything it printed, in the packet's review/ directory.
+
+  - id: V-audit-fine-net-receipt
+    program: devtools.audit_fine_net_receipt
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: premises
+    summary: >-
+      Checks a rectangle-only declared-net candidate's exact mass, geometry and net
+      premises, binds its saved native census and complete direction log, and recomputes
+      every saved control-witness capture using exact polygon clipping. It decides
+      premises and particular points, never universal coverage between them.
+    source:
+      - packing/devtools/audit_fine_net_receipt.py
+      - packing/tests/test_audit_fine_net_receipt.py
+    independence_record: docs/project/reviews/review-2026-10-18-wand125-n108-certificate-mathematics.md
+    independence:
+      read: [mathematics, specification, certificate-format, producer-code, producer-output]
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Codex (OpenAI)
+          setting: >-
+            A separately prompted mathematical review lane, strong tier at xhigh
+            reasoning; the retained review records the system family and exact scope.
+      overlaps_producer:
+        extent: unknown
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The source discloses AI assistance without identifying every system family.
+          This audit was separately prompted and imports only the Python standard
+          library. Its author read the maintained admission and control code that the
+          producer's adapted checker shares, so it does not claim a clean room.
+    note: >-
+      The 18 October review's complete n108 point audit is retained at
+      packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review/n108-exact-audit.json.
+      Its PASS is a premise-and-point result beside the
+      native replay, not a full coverage decision or an independent full verifier.
+  - id: V-n108-review-max-exact
+    program: n108_audit.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: premises
+    summary: >-
+      Independently recomputes the n108 certificate's exact mass, multiplicity-preserving
+      D4 expansion and declared-net premises, checks retained source/native direction
+      inventories, and computes four saved native control poses and the source's axis
+      control pose. It checks premises and five points, not universal capture.
+    source:
+      - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-max/n108_audit.py
+    independence_record: packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-max/README.md
+    independence:
+      read: [mathematics, proof-text, specification, certificate-format, producer-code, producer-output, earlier-review]
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Codex (OpenAI)
+          setting: A separately prompted source-distinct mathematical review, strongest tier at maximum reasoning.
+      overlaps_producer:
+        extent: unknown
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The producer discloses AI assistance without identifying every system family.
+          This standard-library audit was written separately, before reading maintained
+          admission/domain code; its input adapters were corrected after those reads.
+          Findings and code were completed before the later comparison with Review B.
+          No producer code is copied, imported or executed; the review claims no clean room.
+    note: >-
+      The retained packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-max/audit.json records
+      EXACT_PREMISES_AND_FIVE_POSES_PASS. The five poses are four of 201 recorded
+      native control poses and one of 32 source control poses, not five entire
+      direction domains. The accepted bounded review is docs/project/reviews/review-2026-10-18-n108-fine-net-mathematics-max.md.

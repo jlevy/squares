@@ -1109,9 +1109,12 @@ def _regularization_owed(
                         f"{row['why']}",
                         NEEDS_OWNER,
                         step=(
-                            "run the strong generators on its witness, or allow it with "
-                            "the open bead that owns the runs, in the change that made it "
-                            "pending"
+                            "run the strong generators on its witness in the change that "
+                            "made it pending; only where that change corrected the "
+                            "witness, its house's source and exact side unchanged, allow "
+                            "it with the open bead that owns the runs and name the witness "
+                            "it replaced in default_drawings.CORRECTED (result-import.md, "
+                            '"The House Rule")'
                         ),
                     )
                 )

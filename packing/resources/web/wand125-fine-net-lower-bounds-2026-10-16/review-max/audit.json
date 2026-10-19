@@ -1,0 +1,178 @@
+{
+  "schema": "n108-review-max-audit/v1",
+  "status": "EXACT_PREMISES_AND_FIVE_POSES_PASS",
+  "coverage": "Exact input premises; retained receipt inventories; four native 99/100 control witnesses and the source 197/200 axis pose. No universal coverage decision and no native replay.",
+  "candidate": "packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n108_L1062/candidate.json.gz",
+  "input_sha256": {
+    "json": "4d72da64052667a3ebf057f7e78ea9d40f1521a0b86ddef210a2be319d27042a",
+    "gzip": "acaf27593b53c3472ab249805f672030e3cbd3323033641b1df1d8460ae8835b"
+  },
+  "n": 108,
+  "side": "531/50",
+  "core": "9977/10000",
+  "step": "83/40000",
+  "directions": 201,
+  "source_rectangles": 823,
+  "distinct_expanded_rectangles": 6524,
+  "mass": "10799999/100000",
+  "mass_deficit": "1/100000",
+  "net_endpoint_polynomial": "89/40000",
+  "last_bin_left": "33117/80000",
+  "last_bin_left_polynomial": "-4544311/6400000000",
+  "shrink_margin": "91909/400000000",
+  "tangent_form": "63985225828447/63999931110000",
+  "source_receipt_inventory": {
+    "directions": 201,
+    "complete_unique_indices": true,
+    "verdict_counts": {
+      "verified": 201
+    },
+    "nodes": 136113602,
+    "build": {
+      "profile": "release",
+      "rustc": "rustc 1.98.0 (88d9e12ae 2026-08-18)",
+      "source_sha256": "ab6e33e164dbc5c32b40349ba55981b58e630b5eef59534196a69d259404fd7c",
+      "target": "x86_64-unknown-linux-gnu"
+    },
+    "premises": {
+      "B": "9977/10000",
+      "D": "83/40000",
+      "L": "531/50",
+      "angle_count": 201,
+      "centre_domain": "per-bin",
+      "expanded_points": 0,
+      "expanded_rectangles": 6524,
+      "expanded_segments": 0,
+      "format": "M",
+      "input_sha256": "4d72da64052667a3ebf057f7e78ea9d40f1521a0b86ddef210a2be319d27042a",
+      "mass_below_n": "1/100000",
+      "mass_exact": "10799999/100000",
+      "n": 108,
+      "source_rectangles": 823
+    },
+    "min_reported_bound": "4503599628165419/4503599627370496"
+  },
+  "native_receipt_inventory": {
+    "directions": 201,
+    "complete_unique_indices": true,
+    "verdict_counts": {
+      "verified": 201
+    },
+    "nodes": 136113602,
+    "build": {
+      "profile": "release",
+      "rustc": "rustc 1.98.0 (88d9e12ae 2026-08-18)",
+      "source_sha256": "d97758bbc9639edc70b8bd7dc83106d4e8d1be034bacb3e88f8c539b88091c88",
+      "target": "x86_64-unknown-linux-gnu"
+    },
+    "premises": {
+      "B": "9977/10000",
+      "D": "83/40000",
+      "L": "531/50",
+      "angle_count": 201,
+      "centre_domain": "per-bin",
+      "expanded_points": 0,
+      "expanded_rectangles": 6524,
+      "expanded_segments": 0,
+      "format": "M",
+      "input_sha256": "acaf27593b53c3472ab249805f672030e3cbd3323033641b1df1d8460ae8835b",
+      "mass_below_n": "1/100000",
+      "mass_exact": "10799999/100000",
+      "n": 108,
+      "net_last_tangent": "83/200",
+      "net_origin": "proof_net",
+      "shrink_bound": "399908091/400000000",
+      "source_rectangles": 823
+    },
+    "min_reported_bound": "4503599628165419/4503599627370496"
+  },
+  "source_native_matching_node_counts": 201,
+  "analytic_geometry_controls": 4,
+  "samples": [
+    {
+      "index": 1,
+      "pose_binary64_as_rationals": [
+        "6180113029516111/1125899906842624",
+        "3089995472632389/562949953421312"
+      ],
+      "in_domain": true,
+      "original_capture_interval": {
+        "lower": "252525252007975717/250000000000000000",
+        "upper": "1010101008031902869/1000000000000000000"
+      },
+      "scaled_capture_interval": {
+        "lower": "6249999987197399/6250000000000000",
+        "upper": "999999997951583841/1000000000000000000"
+      },
+      "agrees_exactly_with_retained_capture": true
+    },
+    {
+      "index": 100,
+      "pose_binary64_as_rationals": [
+        "3252731889826029/562949953421312",
+        "1771528939172873/281474976710656"
+      ],
+      "in_domain": true,
+      "original_capture_interval": {
+        "lower": "1009873278423689969/1000000000000000000",
+        "upper": "100987327842368997/100000000000000000"
+      },
+      "scaled_capture_interval": {
+        "lower": "999774545639453069/1000000000000000000",
+        "upper": "99977454563945307/100000000000000000"
+      },
+      "agrees_exactly_with_retained_capture": true
+    },
+    {
+      "index": 157,
+      "pose_binary64_as_rationals": [
+        "7071897141318389/1125899906842624",
+        "6627558482820669/1125899906842624"
+      ],
+      "in_domain": true,
+      "original_capture_interval": {
+        "lower": "1010101009632020733/1000000000000000000",
+        "upper": "505050504816010367/500000000000000000"
+      },
+      "scaled_capture_interval": {
+        "lower": "499999999767850263/500000000000000000",
+        "upper": "999999999535700527/1000000000000000000"
+      },
+      "agrees_exactly_with_retained_capture": true
+    },
+    {
+      "index": 200,
+      "pose_binary64_as_rationals": [
+        "3009507991414831/562949953421312",
+        "6180965892810979/1125899906842624"
+      ],
+      "in_domain": true,
+      "original_capture_interval": {
+        "lower": "100991504130036791/100000000000000000",
+        "upper": "1009915041300367911/1000000000000000000"
+      },
+      "scaled_capture_interval": {
+        "lower": "999815890887364231/1000000000000000000",
+        "upper": "124976986360920529/125000000000000000"
+      },
+      "agrees_exactly_with_retained_capture": true
+    }
+  ],
+  "source_axis_control": {
+    "index": 0,
+    "pose": [
+      "3651115457206321/400000000000000",
+      "1173507998437367/200000000000000"
+    ],
+    "original_capture_interval": {
+      "lower": "502005557329335371/500000000000000000",
+      "upper": "1004011114658670743/1000000000000000000"
+    },
+    "scaled_capture_interval": {
+      "lower": "988950947938790681/1000000000000000000",
+      "upper": "494475473969395341/500000000000000000"
+    },
+    "in_domain": true,
+    "exactly_below_one": true
+  }
+}

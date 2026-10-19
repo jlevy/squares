@@ -352,8 +352,10 @@ def test_n29_trails_its_report_and_keeps_its_own_ceiling() -> None:
     case = certificates.case_record(29)
     # The interval certificate held it until 12 October 2026, when the exact regularized
     # view at the witness's own side, below both, became its exact form (T-155), the
-    # endpoint still printed as its value; this survey never moved it.
-    assert case["verified_upper_bound"]["evidence"] == [regularized.EVIDENCE]
+    # endpoint still printed as its value; this survey never moved it. Since the house
+    # adoption of 17 October 2026 both lanes are PR #622's tighter certificate of the same
+    # packing (T-195).
+    assert case["verified_upper_bound"]["evidence"] == ["E-pingyou-622-exact-feasibility"]
     assert "E-n029-interval-certified-upper" in case["evidence"]
 
 

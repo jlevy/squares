@@ -50,12 +50,19 @@ W1 phase on one branch:
    validation bead. Start each new proof’s mathematical review as soon as its source is
    retained, in parallel with stage 3, by [stage 4’s review lane](#stage-4-validate).
    It does not wait for a replay budget, and it lands in a pull request of its own when
-   it returns. **Every new packing that becomes a house is regularized** in the pull
-   request that makes it one, or deferred there in `default_drawings.PENDING_ALLOWED`
-   with the open bead that owns its runs ([stage 5](#adopt-a-house-then-regularize-it)):
-   an adoption from any import, such as a register result like T-174 or T-186 to T-190
-   when its house is adopted, a Kingbird catalogue intake, or an exact re-solve of a
-   witness. The sweep then lists each count still owed.
+   it returns. Where a validated result is smaller than a house, the pass adopts it
+   ([the house rule](#the-house-rule)). **Every new packing that becomes a house is
+   regularized** in the pull request that makes it one
+   ([stage 5](#adopt-a-house-then-regularize-it)), whichever import made it: the
+   adoption of a register result like T-174 or T-186 to T-190, a Kingbird catalogue
+   intake, or an exact re-solve that moves a house.
+   None defers its runs: they run in the pull request that makes the house, under the
+   item cap (the owner’s 40 CPU-hours where the pass sets none), and an adoption too
+   large for one is split, its other counts waiting with their runs, never apart from
+   them. Only a witness corrected or re-solved with its house’s source and exact side
+   unchanged may defer its runs, in `default_drawings.PENDING_ALLOWED` with the open
+   bead that owns them, naming the witness it replaced in `default_drawings.CORRECTED`.
+   The sweep then lists each count still owed.
 4. **Validate** from `packing/` with `packing-validate --records`, then `--push`, and
    leave `--fast` to CI ([stage 5](#stage-5-publish)).
 5. **Open one draft pull request** with `tbd shortcut create-or-update-pr-simple`,
@@ -147,16 +154,23 @@ claude/intake-YYYY-MM-DD, with today's date.
    or with no cap, when the source prices it at minutes; otherwise give it a
    validation bead and a row in the backlog bead (stage 4, "The Compute Cap and the
    Validation Backlog"). Start each new proof's mathematical review (stage 4, "Who
-   reviews, and when") as soon as its source is retained, in parallel. Every new
-   packing that becomes a house is regularized in the same pull request: an adoption
-   from any import (a register result such as T-174 or T-186 to T-190 once adopted,
-   with devtools.adopt_houses), a Kingbird catalogue intake, or an exact re-solve.
-   Regularize every count whose witness changes (stage 5, "Adopt a House, Then
-   Regularize It"), priced as one validation item at the total adopt_houses prints:
-   the strong generators on the new witness when that fits under the compute cap,
-   otherwise each pending count added to default_drawings.PENDING_ALLOWED with the
-   open bead that owns its runs, labelled regularization and validation, and its
-   drawing listed before and after.
+   reviews, and when") as soon as its source is retained, in parallel. Where a
+   validated result is smaller than a case's house, adopt it in this pass, whoever
+   found it and however large its witness: no adoption waits for the owner (stage 5, "The
+   House Rule"). Every new packing that becomes a house is regularized in the same pull
+   request: an adoption from any import (a register result such as T-174 or T-186 to
+   T-190, with devtools.adopt_houses), a Kingbird catalogue intake, or an exact
+   re-solve that moves a house (stage 5, "Adopt a House, Then Regularize It"), priced
+   as one validation item at the total adopt_houses prints, with each re-housed
+   count's drawing listed before and after. Its runs are within the item cap, the
+   owner's 40 CPU-hours where the pass sets none, and run in that pull request. A
+   re-housed count is never deferred to default_drawings.PENDING_ALLOWED: where the runs
+   of a large adoption would pass the cap, split it, staging the counts it leaves in
+   select_houses.PENDING_ADOPTION with the open validation bead that adopts them, and
+   adopt the rest. Only a witness corrected or re-solved with its house's source and
+   exact side unchanged may defer its runs there, naming an open bead labelled
+   regularization and validation, and naming the witness it replaced in
+   default_drawings.CORRECTED.
 5. From packing/, run `uv run --frozen --all-extras --group dev packing-validate
    --records`, then `--push`, and fix what fails.
 6. Commit, push the branch, and open one draft pull request, labelled intake, with
@@ -229,7 +243,7 @@ steps, and `--json` prints the whole sweep.
 | 2. Retain | W1 | The source in a packet at a pinned revision, with its bibliography key |
 | 3. Record | W1 | The claim registered as reported, with its coverage entry, and merged: *imported* |
 | 4. Validate | W2 | Replay evidence, a mapped review and the rungs they derive: status `confirmed`, or `incomplete` |
-| 5. Publish | The change that moves the record | The reader documents state the result, and each count it re-houses is regularized or deferred with its bead; once stage 4 has passed, *integrated* |
+| 5. Publish | The change that moves the record | The reader documents state the result, and each count it re-houses is regularized in the same change; once stage 4 has passed, *integrated* |
 | 6. Explain | W8, with a W2 review | A review paper, for the results that warrant one |
 | 7. Answer | After each merge, by the pass | A reply on the issue for each change of its state, to the final comment: *answered* |
 
@@ -332,8 +346,9 @@ happened:
   `regularization` (and `validation`, with stage 4’s block and a backlog row, where the
   runs are held above the cap) and named in the count’s `PENDING_ALLOWED` entry
   ([stage 5](#adopt-a-house-then-regularize-it)). The entry is made by the pull request
-  that re-houses the count; for a count re-housed earlier whose bead has since closed,
-  this pass’s pull request names the new bead.
+  that corrects the witness, never by one that re-houses the count, whose runs are owed
+  in that pull request ([the house rule](#the-house-rule)); for a count re-housed
+  earlier whose bead has since closed, this pass’s pull request names the new bead.
   The owner, 16 October 2026: “we should make sure all of the intake process covers the
   regularization and we update that for any other new packings we have.
   That should be part of our standard process to do the regularization.”
@@ -422,6 +437,17 @@ Transcribe each report’s claims into the directory’s `sources.yaml`, then, f
 saved `github-issues.json`; `--refresh-starts` freezes the starts again), `render DIR`
 with `--write` and then `--check`, and `check DIR`. Stage 3 registers what `ledger.json`
 records, and nothing it does not unless the owner names a key reason.
+
+The owner has named one standing key reason, the [house rule](#the-house-rule): a claim
+validated exactly below the case’s verified upper bound, and undecided only against the
+reported lane’s print of the packing the verified lane certifies, is recorded.
+The pass lists it under the ledger’s `exceptions` with the house rule as its reason, and
+asks the owner nothing more: “This should be built into our policy.
+It shouldn’t even be a question.
+If there’s any ambiguity on that, we should fix that in our process docs for intake.”
+(the owner, 16 October 2026). PR #622 at 29 was the first (T-195): 1.57e-36 below
+T-155’s exact side, and 9.19e-15 above the catalogue’s print $5.93383346267692$, within
+one unit of its last place.
 
 A comparison the prints leave undecided, and an exact decision later settles, is
 transcribed into `sources.yaml` as the claim’s `record_relations`: the case lane’s value
@@ -631,7 +657,10 @@ the work above it is tracked in beads (the owner, 2026-10-14, setting the first 
 and details are in beads”). A validation item priced within it runs in the pass, and one
 priced above it is *held* until the owner raises the cap or approves a subset.
 The cap applies to each item; whether the runnable items together may pass it is the
-owner’s call. With no cap set, only a replay the source prices at minutes runs.
+owner’s call. With no cap set, only a replay the source prices at minutes runs; an
+adoption’s regularization runs are the one exception, held to the owner’s standing 40
+CPU-hours an item
+([Adopt a House, Then Regularize It](#adopt-a-house-then-regularize-it)).
 
 Every validation item the pass leaves pending is a bead labelled `validation` under the
 import bead it serves, and its description carries one block:
@@ -666,18 +695,125 @@ running a replay, where a tier’s wall measures the contention rather than the 
 It merges on the owner’s word, by
 [the merge policy](../../development.md#merging-a-pull-request).
 
+### The House Rule
+
+A case record’s two upper lanes hold one certificate, its **house**. At every count the
+house is the smallest of the case’s own house and every packing whose certificate has
+passed [stage 4](#stage-4-validate), whoever found it: a validated packing smaller than
+the house replaces it, and a larger one never does.
+A smaller validated packing is adopted in the intake pass that validates it, and every
+count the adoption re-houses is regularized in the same pull request
+([Adopt a House, Then Regularize It](#adopt-a-house-then-regularize-it)). The owner set
+the rule on 16 October 2026: “We should always be adopting the smallest packing and then
+regularizing it. That should be the policy, obviously.”
+and “This should be built into our policy.
+It shouldn’t even be a question.”
+
+No adoption waits for the owner’s word, and each case that once did is decided here:
+
+- **Validated** is stage 4’s exit: the register entry at `V3` and `C3` with an accepted
+  review covering it. One complete replay is what `C3` needs, so a certificate decided on
+  one exact route, as a number-field witness is today, is adopted like any other.
+- **Smaller** is decided by exact arithmetic, never by a print or a person.
+  `devtools.exact_sides` holds each side exactly, as a fraction or as the one root of an
+  irreducible polynomial in a rational interval, and the case’s ceiling the same way, a
+  closed form included.
+  Where the code cannot order two sides, the code is fixed, and `select_houses --check`
+  fails until it is.
+- **Size never holds a house.** The certificate stays where its packet keeps it, as a
+  gzipped derived fact or as an upstream file pinned by its digest.
+  The house’s witness, `witnesses/known-best/n-NNN.yaml`, goes into Git while
+  [OR-18](../../operating-rules.md#or-18-keep-bulk-data-out-of-git-and-never-bind-code-or-verdicts-to-a-git-commit-or-blob)
+  allows, its sizes counted as Git stores them, which OR-18 defines: no file of more
+  than a few megabytes and no pass’s set of tens.
+  Past that it is published as a hosted data release, in the same pass, and read through
+  its manifest with `sqpack.hosted_data.require`
+  ([Publishing Hosted Data](../../development.md#publishing-hosted-data)). No house
+  reader takes a hosted witness yet, so the adoption that first needs one writes that
+  reader in its own pull request (think-ot5c names it for T-193’s forms).
+  `python -m devtools.upper_bound_houses sizes` measures the witnesses a staged adoption
+  would write. On 17 October 2026 T-174’s 50 staged rational houses add 2.84 MB to
+  history as Git stores them, since the witnesses they replace stay in it, and 14.55 MB
+  to a checkout, the largest 0.22 MB stored: they go into Git.
+- **A regularized view below the house’s side is a smaller packing.** It is registered
+  as a result and taken through stages 3 and 4 like any report, with the packing
+  credited to its finder and the regularization to the regularizer
+  ([epistemics.md](../../epistemics.md#parallel-projects-and-their-credit)), and adopted
+  once validated (the regularization guide’s
+  [Register Candidates](../../docs/project/guides/regularization-process.md#register-candidates)).
+- **Equal sides** keep the earlier report, by the
+  [report-order rule](#several-reports-at-one-count) the ledger applies, which governs
+  wherever two orders could differ.
+  An exact tie between different holders is decided by it: the ledger lists one for the
+  owner only as a possible exception to recording a result, and an exception moves no
+  house. `select_houses` moves a house only to a smaller side, so the case keeps its own
+  at an exact tie; between validated candidates of one side it keeps the earlier
+  `attribution.published`, then the earlier entry.
+  That date is the last of an entry’s certificates where it has several, so it stands in
+  for report order only where the two agree.
+  On 16 October 2026 no two candidates at a count that moves are exactly equal.
+- **Regularizing is part of adopting.** Both strong generators run on each count the
+  adoption re-houses, in the adoption’s pull request, and the count is admitted or
+  settled on what they find: its runs are owed there, so a re-housed count is never
+  deferred to `default_drawings.PENDING_ALLOWED`. A drawing less regular than the strong
+  view it replaces is no reason to wait.
+  The owner on n = 176, 16 October 2026: “Adopt as settled.”
+  - A view that rows 7 or 8 of the regularization policy’s
+    [decision table](../../docs/project/policies/regularization-policy.md#the-decision-table)
+    send to the owner settles the count on its current drawing and waits in the review
+    queue, holding neither the adoption nor the count.
+    The owner reviews it under the policy’s
+    [section 5](../../docs/project/policies/regularization-policy.md#5-manual-review-and-adjustment),
+    and a view the owner admits is drawn on its review record, as at n = 211 on 16
+    October 2026: “Admit it.”
+  - At an algebraic house the runs settle the count: no rational view is `same` or
+    `bound` at an irrational side, and no number-field view is decided on two exact
+    routes yet (the policy’s obligation 1; think-mbdw is that second route).
+    Keeping a rational view just above an algebraic U is a question 13 decision, put to
+    the owner once with the counts it concerns, and it holds no adoption.
+- **A conjectured optimum** the new house is below, wherever its print rounds, is
+  withdrawn, and any other stays; the adoption goes ahead either way.
+
+`devtools.select_houses --check` is the gate, and `tests/test_house_adoption.py` runs it
+on every pull request: it fails wherever a validated smaller packing is not the house.
+A count’s adoption may follow in a later pull request than the one that validates it
+only where the count is staged in `select_houses.PENDING_ADOPTION`, with the open bead
+that adopts it and one of three reasons (`STAGING_REASONS`): the pass’s next pull
+request; regularization runs over the item cap, which split the adoption
+([Adopt a House, Then Regularize It](#adopt-a-house-then-regularize-it)); or no writer,
+where `adopt_houses` cannot yet write the house.
+An algebraic house is the one such gap the rule names, and the writer’s bead,
+think-ot5c, owns its counts.
+`bead tree` holds each bead open, and the adopting pull request takes the count off.
+`--check` fails on a staged count the selection no longer moves or names another house
+for, and on one staged for the writer whose house the writer writes, or the reverse.
+`default_drawings --check-state` fails while `PENDING_ALLOWED` defers the runs of a
+witness whose house has moved, whichever import moved it.
+Each entry is a corrected witness’s, and `default_drawings.CORRECTED` names the witness
+it replaced, by its source, path, revision and exact side.
+The records tier holds that to the record of the commit the change is built on
+(`--check-state --base-ref origin/main`, which reads its merge base): the base’s witness
+at the count must be the one named, the record’s must have its source and exact side,
+and it must be another witness only, by another path or revision, or, at a source that
+pins no revision, by another witness file.
+So a house moved by an adoption, a Kingbird catalogue intake, whose source key never
+changes, or an exact re-solve fails, whatever its entry declares (review C3 of #660).
+Once the base defers the count, the entry stands while the record’s witness keeps the
+base’s source and exact side, whatever a later change does to the witness’s file or path
+(review D1).
+
 ### Adopt a House, Then Regularize It
 
 Once stage 4 has confirmed and reviewed a certificate below a case’s house, the pass
-adopts it as the case’s new house wherever the house selection takes it.
-`devtools.select_houses` names the counts, `devtools.upper_bound_houses` rebuilds each
-witness from the retained certificate, and `devtools.adopt_houses` moves the case
-records; its docstring, under “A later pass”, lists what the pass adds first.
+adopts it as the case’s new house wherever the house selection takes it
+([The House Rule](#the-house-rule)). `devtools.select_houses` names the counts,
+`devtools.upper_bound_houses` rebuilds each witness from the retained certificate, and
+`devtools.adopt_houses` moves the case records; its docstring, under “A later pass”,
+lists what the pass adds first.
 
 A new house is a new witness, and the count’s regularized view lapses with it.
 So every count whose known-best witness changes is regularized in the pull request that
-changes it, or deferred there with the open bead that owns its runs, whichever import
-made the new packing a house:
+changes it, whichever import made the new packing a house:
 
 - a house adoption, the usual cause, of a result from any import, such as T-174 or T-186
   to T-190 once its house is adopted;
@@ -685,6 +821,8 @@ made the new packing a house:
 - an exact re-solve or a correction of a witness;
 - any other result that `build_known_best_atlas --update` takes into the atlas.
 
+None of them defers its runs but a witness corrected or re-solved with its house’s side
+unchanged, as below.
 The steps are the regularization guide’s
 [When a Witness Changes](../../docs/project/guides/regularization-process.md#when-a-witness-changes):
 `build_known_best_atlas --update` writes the new witness, the axis tool’s
@@ -711,45 +849,61 @@ The strong runs cost 5 to 25 CPU-minutes a count, from the layer’s run receipt
 
 Ten re-housed counts take 50 to 250 CPU-minutes.
 The regularization an adoption owes is one validation item, priced at the total
-`adopt_houses` prints and held to the pass’s
-[compute cap](#the-compute-cap-and-the-validation-backlog) as a replay is.
-Within the cap, it runs in the pass.
-Above it, or with no cap set and a total above minutes, it is held, and its counts are
-deferred:
+`adopt_houses` prints and held to the cap the owner set for the pass
+([The Compute Cap and the Validation Backlog](#the-compute-cap-and-the-validation-backlog)).
+Unlike a replay, it has a default where the pass sets no cap: the owner’s standing cap
+of 40 CPU-hours an item (14 October 2026, think-lh7d), since its runs are part of the
+adoption ([The House Rule](#the-house-rule)) and a pass with no cap would otherwise
+stage every adoption larger than minutes (review C8 of #660). They are within the cap
+and run in the adoption’s pull request: at the receipts’ dearest, 25 CPU-minutes a
+count, about a hundred re-housed counts fit.
+An adoption whose runs would pass the cap is split into pull requests that each fit, and
+the counts a pull request does not adopt are staged in `select_houses.PENDING_ADOPTION`
+as over the item cap, with the open bead that adopts them, labelled `regularization` and
+`validation` and carrying stage 4’s `## Validation` block, with a row in the backlog
+bead. A re-housed count is never deferred to `default_drawings.PENDING_ALLOWED`, and
+`default_drawings --check-state` fails while the list defers the runs of a witness whose
+house has moved since.
+A count the list already names, such as one of the twenty below, is run in the
+adoption’s pull request and taken off it.
 
-1. The adoption’s pull request adds each pending count to
-   `default_drawings.PENDING_ALLOWED`, naming the open bead that owns its runs: labelled
-   `regularization`, as every such bead is, and `validation`, since its runs are held
-   above the cap, carrying stage 4’s `## Validation` block, with a row in the backlog
-   bead.
-2. It runs `default_drawings --update` again, since the record copies the entry into the
-   count’s reason, and then the guide’s render step.
-3. It lists each deferred count’s drawing before and after, with
-   `default_drawings --compare` on its base branch’s record, `BASE` being `main` unless
-   the pull request is stacked:
-   `python -m devtools.default_drawings --compare <(git show origin/$BASE:packing/atlas/known-best/default-drawings.json)`.
-   Where a strong view gives way to a drawing worse than it on a goal of the improvement
-   rule, whatever drew it, its runs are not deferred: they run in the adoption’s pull
-   request. The owner, 16 October 2026: “We should always be adopting the smallest
-   packing and then regularizing it.”
-   The table names those goals at each such count, and marks each one that still reads
-   pending; one its runs have regularized or decided is listed and not marked.
-   The axis tool’s view is the usual replacement, since the refresh draws it wherever it
-   improves on the new house: it replaced all seven strong views the adoption of 16
-   October 2026 (#657) lost, and at n = 302 a drawing with no uneven and no near-axis
-   square gave way to one with 26 and 11. A house drawing is the rarer one, as at n =
-   176 on 15 October (review D1 of #641).
+The adoption’s pull request lists each re-housed count’s drawing before and after, with
+`default_drawings --compare` on its base branch’s record, `BASE` being `main` unless the
+pull request is stacked:
+`python -m devtools.default_drawings --compare <(git show origin/$BASE:packing/atlas/known-best/default-drawings.json)`.
+Where a strong view gives way to a drawing worse than it on a goal of the improvement
+rule, whatever drew it, the table names those goals at each such count, and marks each
+one that still reads pending, “its runs are owed in this pull request”, as every
+re-housed count’s are; one its runs have regularized or decided is listed and not
+marked. The axis tool’s view is the usual replacement, since the refresh draws it
+wherever it improves on the new house: it replaced all seven strong views the adoption
+of 16 October 2026 (#657) lost, and at n = 302 a drawing with no uneven and no near-axis
+square gave way to one with 26 and 11. A house drawing is the rarer one, as at n = 176
+on 15 October (review D1 of #641).
+
+A witness corrected or re-solved with its house’s source and exact side unchanged may
+defer its runs where they do not fit under the cap, except at a count the table marks.
+Its pull request adds each deferred count to `default_drawings.PENDING_ALLOWED`, naming
+the open bead that owns its runs: labelled `regularization`, as every such bead is, and
+`validation`, since its runs are held above the cap, carrying stage 4’s `## Validation`
+block, with a row in the backlog bead.
+It names the witness the correction replaced in `default_drawings.CORRECTED` too, by its
+source, path, revision and exact side as the base branch’s record names them, since
+`--check-state` reads any other entry as deferring a moved house’s runs and fails it,
+and holds this one to the base record ([The House Rule](#the-house-rule)). It runs
+`default_drawings --update` again, since the record copies the entry into the count’s
+reason, then the guide’s render step, and lists the drawings as above.
 
 The records tier’s
 `every drawn picture is regularized, regular as published, decided or exempt`
 (`default_drawings --check-state`) fails on a pending count that the list does not name,
-so an adoption cannot pass without one or the other.
+so an adoption cannot pass until its runs have decided every count it re-houses.
 It also fails on a listed count that is no longer pending and on a `SETTLED` entry
 decided on the earlier witness.
 So the adoption’s pull request takes each count its runs decided off the list, and
 settles each such entry again or removes it.
 A new house that reads regular does not take a listed count off: on the list, a count
-waits for the runs its bead owes.
+waits for runs that decide it.
 The gate cannot tell a hand-dropped entry from a decided one: dropping an entry whose
 count then reads regular as published passes it, and so does adding a count whose house
 reads regular, which the list then holds pending.

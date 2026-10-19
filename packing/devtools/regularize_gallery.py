@@ -1180,17 +1180,35 @@ def _regressions_text(case: CountCase) -> str:
     return f'<span class="flag">{_e(short(items, 400))}</span>'
 
 
+def exact_bound(report: Mapping[str, Any]) -> Fraction | None:
+    """The report's verified upper bound `U` as an exact rational: its exact form, or the
+    rational it was read as, and only failing both its printed decimal, which the record
+    rounds up and the decision table never compares a side with (review J1 of #657)."""
+    for text in (
+        field(report, "verified_upper_bound_exact_form"),
+        field(report, "verified_upper_bound_as_read", "value"),
+        field(report, "verified_upper_bound"),
+    ):
+        value = rational(text)
+        if value is not None:
+            return value
+    return None
+
+
 def _upper_bound_text(case: CountCase) -> str:
     bound = field(case.report, "verified_upper_bound")
     if bound is None:
         return "not recorded"
     after = case.panel("view")
-    value = rational(bound)
+    value = exact_bound(case.report)
     if after is None or after.side is None or value is None:
         return _e(bound)
-    relation = (
-        "at or above U" if after.side >= value else "below U: a register-result candidate"
-    )
+    if after.side == value:
+        relation = "at U"
+    elif after.side > value:
+        relation = "above U"
+    else:
+        relation = "below U: a register-result candidate"
     difference = difference_text(after.side - value)
     return _e(f"U = {bound}; s_V {MINUS} U = {difference}, {relation}")
 

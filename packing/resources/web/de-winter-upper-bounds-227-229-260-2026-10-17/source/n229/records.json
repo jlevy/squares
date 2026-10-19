@@ -1,0 +1,30 @@
+{
+  "date": "2026-10-17",
+  "credit_handle": "JoostdeWinter",
+  "claim": "improved feasible upper bounds against the website-listed values",
+  "baseline_repository": "https://github.com/jlevy/squares",
+  "baseline_commit": "804eff369193b698d497a9c06847059eb9de0470",
+  "search_status": "stopped",
+  "records": [
+    {
+      "n": 229,
+      "utc": "2026-10-17T10:45:24.409375+00:00",
+      "source": "campaign_patch_library/nonlinear229/polished229_best.json",
+      "numerical_side": 15.650174740301038,
+      "certified_side_float": 15.650174756948212,
+      "certified_side_exact": "156501747569482131747919637148801852719869637315233948984618327625011520667543259632677498716011131748832131668750692746335433269145213277034738380207139541/10000000000000000000000000000001737366297119815888250696550926607660931327350731575578989919015034082413286101971092035771621296900000000000000000000000000",
+      "previous_bound": 15.65685424949238,
+      "improvement": 0.006679492544166825,
+      "public_baseline_url": "https://jlevy.github.io/squares/cases/229.html",
+      "scope": "improves website-listed bound",
+      "source_sha256": "bfc6c8559a027214c3867837ac7eddf4b8b422da7e3059d41df74208c8ab3fab",
+      "witness": "verification/n229_side15.650174740301_bfc6c8559a_rational.json",
+      "results": "verification/n229_side15.650174740301_bfc6c8559a_result.json",
+      "validators_passed": 2,
+      "decimal_upper_bound": "15.650174756949",
+      "exact_file": "n229_exact.json",
+      "numeric_file": "n229_record.json",
+      "exact_sha256": "edb3ef2eed16e561c379350ac28882078e17717882ddc8284b67b794fef8111b"
+    }
+  ]
+}

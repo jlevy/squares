@@ -429,6 +429,11 @@ DECLARED_CONSUMERS = {
         "moves the reported and verified ceilings together to an adopted exact feasible "
         "side and keeps the earlier ceiling as history; it never reads either as s(n)"
     ),
+    "packing/tests/test_exact_sides.py": (
+        "reads a closed-form ceiling through regularize_evand.verified_bound, as "
+        "select_houses does, to hold it exactly beside the sides a house is chosen from; "
+        "it compares a ceiling, never s(n)"
+    ),
     "packing/tests/test_house_adoption.py": (
         "checks each retained prior record's ceiling stood above its adopted house and "
         "that a redraft keeps the adopted ceiling; feasibility, never s(n) or optimality"

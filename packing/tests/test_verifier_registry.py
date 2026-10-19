@@ -546,6 +546,52 @@ def test_a_third_partys_report_reads_as_a_report() -> None:
     assert "a third party\u2019s run" not in render_results.render()
 
 
+@pytest.mark.parametrize("eid", ["E-n108-review-max-premises", "E-n108-review-max-captures"])
+def test_premise_only_runs_keep_execution_separate_from_code_relation(eid: str) -> None:
+    entry = EVIDENCE[eid]
+    assert verifier_registry.runs_code(entry)
+    assert all(not VERIFIERS[vid].decides for vid in entry["verifiers"])
+    section = "\n".join(
+        render_verifiers.program_section(
+            VERIFIERS["V-n108-review-max-exact"], [entry], {}, VERIFIERS
+        )
+    )
+    assert f"| `{eid}` | audited here | not applicable |" in section
+    inventory_row = next(
+        row
+        for row in render_evidence_inventory.render().splitlines()
+        if row.startswith(f"| `{eid}` |")
+    )
+    assert f" | not applicable | {verifier_registry.coverage_line(entry)} | " in inventory_row
+    line = verifier_registry.entry_line(entry, VERIFIERS)
+    assert ": `V-n108-review-max-exact` (first-party, premises)" in line
+    assert "independently re-implemented" not in line
+
+
+def test_a_no_code_proof_keeps_execution_separate_from_code_relation() -> None:
+    proof = EVIDENCE["E-karakus-strip-lower"]
+    assert verifier_registry.ladder_label(proof, VERIFIERS) == "no code"
+    assert verifier_registry.entry_line(proof, VERIFIERS) == (
+        "`E-karakus-strip-lower`, a published proof: no verification code"
+    )
+
+
+def test_a_reported_method_without_a_replay_keeps_no_code_label() -> None:
+    report = EVIDENCE["E-wand125-rectangle-monotone-report"]
+    section = "\n".join(
+        render_verifiers.program_section(
+            VERIFIERS["V-tokoharu-verify-cpp"], [report], {}, VERIFIERS
+        )
+    )
+    assert "| `E-wand125-rectangle-monotone-report` | audited here | no code |" in section
+    inventory_row = next(
+        row
+        for row in render_evidence_inventory.render().splitlines()
+        if row.startswith("| `E-wand125-rectangle-monotone-report` |")
+    )
+    assert " | no code | not recorded | " in inventory_row
+
+
 def test_the_committed_views_agree_with_the_records() -> None:
     assert render_verifiers.main(["--check"]) == 0
     assert render_case_verifiers.main(["--check"]) == 0

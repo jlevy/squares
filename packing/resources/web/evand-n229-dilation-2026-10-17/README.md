@@ -1,0 +1,109 @@
+# Evan Daniel’s n229 Dilation Bound: Opening Report
+
+This packet retains one chronological version of the upper-bound claim in
+[issue #674](https://github.com/jlevy/squares/issues/674). It is source custody only.
+No source verifier, source control or stage 4 review was executed during acquisition.
+
+## Source, Licence and Dates
+
+| Field | Value |
+| --- | --- |
+| Source | [evand/square-packing](https://github.com/evand/square-packing) |
+| Pin | `e0338c7becf95dbc7584b48d8868c0a1cd21079c` |
+| Source publication | 2026-10-17T23:09:24Z; author and committer dates agree, and this commit adds the named certificate and input |
+| Report publication | 2026-10-17T23:10:59Z |
+| Licence | MIT, copyright 2026 Evan Daniel; [LICENSE](source/LICENSE) retained |
+| Retrieval | Exact UTC time in [acquisition record](acquisition/sources.json) |
+| Custody | [Declaration](acquisition/declaration.json), [manifest](acquisition/upstream-subtree.sha256), [inspection receipt](acquisition/custody-review.json) |
+
+## Claim and Chronology
+
+The single reported claim is
+`s(229) <= 7825081627429265081627421439843/500000000000000000000000000000`, reported as
+the upward-rounded bound `15.650163254859`.
+
+The author’s
+[later update](https://github.com/jlevy/squares/issues/674#issuecomment-6244298663) asks
+to register its smaller side in place of this opening value.
+That is retained separately in
+[the 18 October update packet](../evand-n229-dilation-update-2026-10-18/README.md).
+This packet preserves the original report; it does not treat the opening value as the
+final requested bound.
+
+| File | Role | SHA-256 |
+| --- | --- | --- |
+| [s229.cert](source/search/packer/candidates/s229.cert) | Exact rational certificate | `0366e8178e37d7c5b4baf002d35f4c1088b4e20ab8f90283d418f634c8af204d` |
+| [s229.input.txt](source/search/packer/candidates/s229.input.txt) | Source binary64 packing | `7df8cd6fe3252fb8b015fea731229ef065130498014f1660aa0ccf435ee990fe` |
+
+Both versions are dilation certificates for upper bounds only.
+Neither the issue nor this acquisition establishes optimality or local minimality.
+Comparison with the current register and other intake reports is separate work.
+
+## Credit and AI Disclosure
+
+The issue names Evan Daniel and asks for Francisco Couzo’s #672 packing to be credited
+as the start, following Joost de Winter’s #668. It describes the same tilted structure
+as #672, with upright squares rearranged; the update continues that lineage.
+The issue’s stated comparison is against Couzo’s `15.650174740273`, after de Winter’s
+`15.650174756949`, rather than against the older register alone.
+Those are the author’s historical comparison statements, not a fresh standing check.
+
+The retained [CREDITS.md](source/CREDITS.md) discloses Claude (Anthropic) working under
+human direction and states no peer review.
+The pinned certificate commit names Claude Opus 5.5 as co-author.
+Both exact checkers share authorship and certificate format; algorithmic differences do
+not establish outside independent authorship.
+
+## Checker Dependencies and Source Assertions
+
+The retained `search/exact/verify_cert.py` and `verify_cert2.py` each read the named
+certificate directly and import only `sys` and `fractions.Fraction`. The first uses
+separating axes; the second tests exact polygon containment and edge intersection.
+Both use a circumscribed-disc shortcut.
+No other repository, compiled engine, network data or numerical solver is required by
+these standalone exact-replay entry points.
+
+The source reports both accept this certificate and gives pair separation about
+`1.0e-12` and wall clearance about `5.0e-13`. These are author-reported outcomes, not
+acquisition measurements.
+No per-claim corrupted-input or analytic control receipt accompanies the two claim
+files. This packet claims no new controls or acceptance verdicts.
+
+The retained `search/packer/dilate_cert.py` documents the construction: scale centres
+and the box by approximately `1 + 10^-12`, keep unit square size, round coordinates to
+rationals and replace each angle with a rational half-angle tangent.
+The script imports only standard-library `argparse`, `math`, `sys` and `fractions`; it
+is a numerical producer, separate from exact-certificate acceptance.
+It was read as source and never executed here.
+
+## Retained and Omitted Material
+
+`devtools.acquire_source` retained nine files, 85,722 bytes: the licence, credits, root
+and exact-format READMEs, both standalone checkers, dilation producer and this version’s
+certificate and binary64 input.
+No retained data file crosses the repository’s 1,000-line compression threshold.
+
+No file is digest-only within this packet’s declared nine-file scope.
+
+Other certificates, numerical search tools and their dependency closures, run histories,
+site assets, figures and bulk source data are omitted and pinned by the source commit
+only. The opening and updated pins also differ in unrelated site files; this packet does
+not retain or review those changes.
+It does not reproduce numerical search or independently certify the dilation argument.
+
+## Custody Check
+
+From `packing/`, with the project interpreter and external scratch configured:
+
+```bash
+uv run --frozen --all-extras --group dev python -m devtools.acquire_source \
+  evand-n229-dilation-2026-10-17 --check
+```
+
+The [inspection receipt](acquisition/custody-review.json) records the command and
+outcome. The check establishes declaration, manifest and retained-byte consistency.
+Geometric replay, dedicated review, registration and any house adoption remain separate.
+
+<!-- This document follows common-doc-guidelines.md.
+See github.com/jlevy/practical-prose and review guidelines before editing.
+-->

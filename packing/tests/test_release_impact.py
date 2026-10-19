@@ -1,10 +1,15 @@
 """The impact gate selects publication inputs and requires fresh owning dispositions."""
 
+# These contracts exercise the validation command's internal step boundary.
+# pyright: reportPrivateUsage=false
+
 from __future__ import annotations
 
 import os
 import shlex
 import subprocess
+import sys
+from collections.abc import Sequence
 from pathlib import Path
 
 import pytest
@@ -12,12 +17,102 @@ import yaml
 
 from devtools import check_release_impact as gate
 from sqpack import release
+from sqpack.cli import validate
 
 PAPER = "paper:n11-lower-bounds-explainer"
 OTHER = "paper:n11-optimality-review"
 PAPERS = tuple(
     component for component in release.COMPONENT_HISTORY_NAMES if component.startswith("paper:")
 )
+
+
+@pytest.mark.parametrize(
+    ("environment", "on_main", "expected"),
+    [
+        ({}, False, ("--baseline-ref", "origin/main")),
+        (
+            {"PACKING_RELEASE_BASE_REF": "pinned-parent"},
+            False,
+            ("--baseline-ref", "pinned-parent"),
+        ),
+        (
+            {"GITHUB_BASE_REF": "parent-branch"},
+            False,
+            ("--baseline-ref", "origin/parent-branch"),
+        ),
+        (
+            {"GITHUB_BASE_REF": "parent-branch", "PACKING_RELEASE_BASE_REF": "local"},
+            False,
+            ("--baseline-ref", "local"),
+        ),
+        (
+            {
+                "GITHUB_BASE_REF": "main",
+                "PACKING_RELEASE_BASE_REF": "a87de0cf735af2f84ce3ffaceb6d4d619bc64d80",
+            },
+            False,
+            ("--baseline-ref", "a87de0cf735af2f84ce3ffaceb6d4d619bc64d80"),
+        ),
+        (
+            {"GITHUB_BASE_REF": "main", "PACKING_RELEASE_BASE_REF": ""},
+            False,
+            ("--baseline-ref", "origin/main"),
+        ),
+        (
+            {"GITHUB_BASE_REF": "parent-branch", "PACKING_RELEASE_BASE_REF": "local"},
+            True,
+            ("--base", "HEAD^1"),
+        ),
+    ],
+)
+def test_synopsis_selects_release_parent_without_moving_changelog_baseline(
+    monkeypatch: pytest.MonkeyPatch,
+    environment: dict[str, str],
+    *,
+    on_main: bool,
+    expected: tuple[str, str],
+) -> None:
+    commands: list[Sequence[str]] = []
+
+    def capture(_context: validate.Context, selected: Sequence[Sequence[str]]) -> str:
+        commands.extend(selected)
+        return "checked"
+
+    monkeypatch.setattr(validate, "_commands", capture)
+    monkeypatch.setattr(
+        validate,
+        "_git",
+        lambda *args: "main" if on_main or args[-1] == "origin/main" else "feature",
+    )
+    context = validate.Context(
+        deep=False, strict=False, jobs=1, inner_jobs=1, environment=environment
+    )
+    assert validate._synopsis(context) == "checked"  # noqa: SLF001
+    assert tuple(commands[-1]) == (
+        sys.executable,
+        "-m",
+        "devtools.check_release_impact",
+        *expected,
+    )
+    assert tuple(commands[-2]) == (
+        sys.executable,
+        "-m",
+        "devtools.render_changelog",
+        "--check",
+        "--baseline-ref",
+        "origin/main",
+    )
+
+
+def test_hosted_workflow_pins_release_base_to_pull_request_event_commit() -> None:
+    workflow = yaml.safe_load(
+        (validate.REPOSITORY_ROOT / ".github/workflows/packing-validation.yml").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert workflow["env"]["PACKING_RELEASE_BASE_REF"] == (
+        "${{ github.event_name == 'pull_request' && github.event.pull_request.base.sha || '' }}"
+    )
 
 
 def test_real_producer_helper_closure_covers_overview_content_without_workflow_tests() -> None:
@@ -318,6 +413,119 @@ def test_merge_base_excludes_unrelated_upstream_changes(
     report = repo.inspect()
     assert report.baseline == repo.base
     assert set(report.candidate_paths) == {PAPER}
+
+
+def test_dependent_base_requires_own_successor_and_keeps_uncovered_input_red(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    repo = Repository(tmp_path, monkeypatch)
+    repo.write("about.md", "A parent-layer public correction.\n")
+    repo.bump("site")
+    parent = repo.commit("parent site successor")
+    repo.git("update-ref", "refs/remotes/origin/parent", parent)
+    repo.write("about.md", "The parent correction and this layer's public correction.\n")
+    repo.bump("site")
+    repo.commit("own site successor")
+
+    # Main sees two cuts; this layer must still own the immediate parent-to-child cut.
+    assert any("site" in error for error in repo.inspect().errors)
+    own = gate.inspect(repo=repo.root, baseline_ref="origin/parent")
+    assert own.baseline == parent
+    assert own.baseline_versions["site"] == "v1.0.1"
+    assert own.errors == ()
+
+    paper_path = repo.inputs[PAPER][0]
+    repo.write(paper_path, "An uncovered public paper change in this layer.\n")
+    uncovered = gate.inspect(repo=repo.root, baseline_ref="origin/parent")
+    assert paper_path in uncovered.candidate_paths[PAPER]
+    assert any(PAPER in error for error in uncovered.errors)
+
+
+def test_atomic_delivery_accepts_complete_fresh_adjacent_cuts(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    repo = Repository(tmp_path, monkeypatch)
+    repo.git("checkout", "-qb", "fixture-stack")
+    for layer in ("first", "second"):
+        repo.write("about.md", f"The {layer} layer's public correction.\n")
+        repo.bump("site")
+        repo.commit(f"{layer} layer")
+    repo.git("checkout", "-qb", "fixture-main", repo.base)
+    repo.git(
+        "-c",
+        "user.name=Gate fixture",
+        "-c",
+        "user.email=fixture@example.invalid",
+        "merge",
+        "--no-ff",
+        "-qm",
+        "atomic stack delivery",
+        "fixture-stack",
+    )
+
+    report = gate.inspect(repo=repo.root, base="HEAD^1")
+    assert report.baseline == repo.base
+    assert report.baseline_versions["site"] == "v1.0.0"
+    assert report.errors == ()
+
+
+@pytest.mark.parametrize(
+    ("damage", "expected"),
+    [
+        ("missing-first", "site: candidate public inputs"),
+        ("missing-last", "site: candidate public inputs"),
+        ("arithmetic", "requires its minor successor v1.1.0"),
+        ("backward", "requires its patch successor v1.0.2"),
+        ("lost-baseline", "site: delivery baseline has no retained edition"),
+        ("unchanged-edition", "site: candidate public inputs"),
+    ],
+)
+def test_delivery_rejects_incomplete_or_invalid_retained_chains(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, damage: str, expected: str
+) -> None:
+    repo = Repository(tmp_path, monkeypatch)
+    repo.write("about.md", "Two public corrections in one delivery.\n")
+    repo.bump("site")
+    repo.bump("site")
+    if damage == "missing-first":
+        repo.decisions.pop(0)
+    elif damage == "missing-last":
+        repo.decisions.pop()
+    elif damage == "arithmetic":
+        repo.decisions[-1] = repo.decisions[-1]._replace(impact="minor")
+    elif damage == "backward":
+        repo.histories["site"] = (
+            repo.histories["site"][0]._replace(version="v0.9.0"),
+            *repo.histories["site"][1:],
+        )
+        repo.decisions[-1] = repo.decisions[-1]._replace(version="v0.9.0")
+    elif damage == "lost-baseline":
+        repo.histories["site"] = repo.histories["site"][:-1]
+    else:
+        repo.histories["site"] = repo.histories["site"][-1:]
+        repo.decisions.clear()
+    repo.write_release()
+
+    report = gate.inspect(repo=repo.root, base=repo.base)
+    assert any(expected in error for error in report.errors)
+
+
+def test_delivery_cannot_reuse_a_decision_already_present_at_its_baseline(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    repo = Repository(tmp_path, monkeypatch)
+    repo.bump("site")
+    repo.bump("site")
+    repo.histories["site"] = repo.histories["site"][-1:]
+    repo.write_release()
+    baseline = repo.commit("predeclared decisions without their editions or changes")
+    repo.decisions.clear()
+    repo.write("about.md", "The later public corrections need fresh decisions.\n")
+    repo.bump("site")
+    repo.bump("site")
+
+    report = gate.inspect(repo=repo.root, base=baseline)
+    assert any("site: candidate public inputs" in error for error in report.errors)
 
 
 def test_retained_composite_export_has_only_its_infographic_owner(

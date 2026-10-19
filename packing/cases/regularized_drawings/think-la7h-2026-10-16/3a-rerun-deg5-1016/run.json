@@ -1,0 +1,10 @@
+{
+  "id": "grid-slack-3a-rerun-deg5-1016",
+  "generator": "regularize_grid_slack/1",
+  "finished": "2026-10-16",
+  "parameters": {"near_axis_degrees":5.0,"trust":0.45,"time_limit":120.0,"stage_margin":0.0099},
+  "counts": 7,
+  "decisions": {"admit":6,"refuse":1},
+  "cost": {"cpu_seconds":1517.5,"wall_seconds":1517.5,"workers":1,"note":"per-count seconds the reports record, summed; no receipt of the run's own"}
+}
+

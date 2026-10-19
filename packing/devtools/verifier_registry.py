@@ -778,12 +778,12 @@ def ladder_level(entry: Mapping[str, Any], verifiers: Mapping[str, Verifier]) ->
 
 
 def ladder_label(entry: Mapping[str, Any], verifiers: Mapping[str, Verifier]) -> str:
-    """The entry's ladder level, or its non-computational relation label."""
+    """The entry's ladder level, or its non-ladder relation label."""
     return LADDER.get(
         ladder_level(entry, verifiers) or "",
         LABELS[INDEPENDENT]
         if entry.get("relationship_to_generator") == INDEPENDENT
-        else SHORT_LABELS.get(str(entry.get("relationship_to_generator")), "-"),
+        else short_relation_label(entry),
     )
 
 
@@ -1157,6 +1157,18 @@ def runs_code(entry: Mapping[str, Any]) -> bool:
     performed or as reported, or a replay."""
     method = entry.get("method") or entry.get("reported_method")
     return method in _CODE_METHODS or bool(entry.get("replay"))
+
+
+def short_relation_label(entry: Mapping[str, Any]) -> str:
+    """A short code-relation label, distinguishing passed program runs from no code."""
+    relation = entry.get("relationship_to_generator")
+    if (
+        relation == NOT_APPLICABLE
+        and runs_code(entry)
+        and entry.get("replay_status") == "passed"
+    ):
+        return "not applicable"
+    return SHORT_LABELS.get(str(relation), "-")
 
 
 #: Who ran a third party's check that this repository holds only as their report: its
