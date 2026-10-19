@@ -12611,7 +12611,7 @@ issues:
       replay and accepted mathematical review as T-218 after #671, merged at 6833d05 and integrated
       here. T-218 final qualification and publication remain pending. The original certificate is
       adopted as the n183 house on 2026-10-19, regularized by both strong generators in the same
-      pull request; the source's regularized endpoint is not adopted.'
+      pull request; the source''s regularized endpoint is not adopted.'
     read_through: '2026-10-19T13:54:01Z'
     results:
     - key: n183
