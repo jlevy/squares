@@ -57,6 +57,7 @@ from devtools import upper_bound_houses as adopted_houses
 from devtools.atlas_legend import AtlasLegendCounts, atlas_legend
 from devtools.result_status import RecentContributions, recent_contributions_by_case
 from devtools.retained_data import read_retained_bytes
+from sqpack import atlas_trace
 from sqpack.known_best import (
     ATLAS_SAMPLE_STRIDE,
     COMPOSITE_PDF_EDITION_DATE,
@@ -856,6 +857,7 @@ def test_a_pool_worker_builds_the_same_bytes_as_this_process() -> None:
 
 @pytest.mark.slow
 @pytest.mark.pool_heavy
+@atlas_trace.composite_test
 def test_known_best_composite_contains_every_case_and_square() -> None:
     # Pooled rather than serial, and the count comes from the same policy every other
     # pool-backed step reads: `PACK_JOBS` where a gate has capped it, the machine where
@@ -865,7 +867,8 @@ def test_known_best_composite_contains_every_case_and_square() -> None:
     # memoized on the worker count, so the serial memo the corrupted-source test above
     # builds is untouched by this one.
     workers = worker_count(known_best_builder.CORPUS.count)
-    outputs, _manifest = known_best_builder.expected_outputs(workers)
+    with atlas_trace.phase("composite.expected_outputs", workers=workers):
+        outputs, _manifest = known_best_builder.expected_outputs(workers)
     composite_path = ATLAS / "known-best-1-100.svg"
     canvas = known_best_builder.PRIMARY_COMPOSITE
     assert canvas.svg_path == composite_path
@@ -875,13 +878,18 @@ def test_known_best_composite_contains_every_case_and_square() -> None:
     assert not any(item.svg_path in outputs for item in known_best_builder.COMPOSITES)
     retained = composite_path.read_text(encoding="utf-8")
     identity = known_best_builder.retained_identity(retained)
-    rebuilt = known_best_builder.expected_composite(canvas, identity, workers)
+    with atlas_trace.phase("composite.expected_composite", workers=workers):
+        rebuilt = known_best_builder.expected_composite(canvas, identity, workers)
 
     # A composite is drawn from the retained witnesses, which costs seconds where this
     # rebuild costs minutes. That is sound exactly when the two drawings are one, which
     # is held here for the figure and by `--check` for every witness it is drawn from.
-    cards = known_best_builder.retained_cases(canvas.spec.numbers)
-    assert known_best_builder.render_known_best_summary_svg(cards, canvas, identity) == rebuilt
+    with atlas_trace.phase("composite.retained_cases"):
+        cards = known_best_builder.retained_cases(canvas.spec.numbers)
+    with atlas_trace.phase("composite.retained_render"):
+        assert (
+            known_best_builder.render_known_best_summary_svg(cards, canvas, identity) == rebuilt
+        )
 
     # The pin the quick lane's four composite tests stand on: they read the retained
     # vector, and this is where "retained" and "built" are made one thing inside pytest.

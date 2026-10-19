@@ -80,7 +80,7 @@ from devtools.atlas_orientation import orient_atlas_witness
 from devtools.build_composite_figure_data import load_record as load_figure_record
 from devtools.result_status import RecentContributions, recent_contributions_by_case
 from devtools.rigidity_status import load_context as load_rigidity_context
-from sqpack import release, retained_json
+from sqpack import atlas_trace, release, retained_json
 from sqpack.field import FieldElement
 from sqpack.known_best import (
     ATLAS_SAMPLE_STRIDE,
@@ -3716,17 +3716,22 @@ def _composite_pdf_problems(
 @cache
 def _build_case(n: int, plan: SourcePlan) -> BuiltCase:
     case = _frontier_case(n)
-    witness = _build_witness(case, plan)
+    with atlas_trace.phase("case.witness"):
+        witness = _build_witness(case, plan)
     if not _adopted(case, pictured_source_key(case)):
         # An adopted house is drawn as its certificate states it (`upper_bound_houses`);
         # the registered n = 211 orientation belongs to de Winter's parent, which the
         # adoption of 11 October 2026 replaced there.
         witness = orient_atlas_witness(witness)
-    problems = check_witness_semantics(witness)
+    with atlas_trace.phase("case.semantics"):
+        problems = check_witness_semantics(witness)
     if problems:
         raise ValueError(f"{witness['id']}: {problems[0]}")
-    witness_text = witness_document(witness, schema="../witness.schema.yaml")
-    return BuiltCase(case, plan, witness, witness_text, _render(witness))
+    with atlas_trace.phase("case.serialize"):
+        witness_text = witness_document(witness, schema="../witness.schema.yaml")
+    with atlas_trace.phase("case.render"):
+        rendering = _render(witness)
+    return BuiltCase(case, plan, witness, witness_text, rendering)
 
 
 def _build_case_unit(unit: tuple[int, SourcePlan]) -> BuiltCase:
@@ -3735,7 +3740,14 @@ def _build_case_unit(unit: tuple[int, SourcePlan]) -> BuiltCase:
     `_build_case` takes two arguments and `pool.map` passes one; a lambda or a `partial`
     over a memoized function is not picklable, and a named module-level adapter is.
     """
-    return _build_case(*unit)
+    if atlas_trace.current_context() is None:
+        return _build_case(*unit)
+    with atlas_trace.case(unit[0], unit[1].kind):
+        key = {"n": unit[0], "plan": repr(unit[1])}
+        atlas_trace.cache_snapshot("case.before", key, _build_case.cache_info()._asdict())
+        built = _build_case(*unit)
+        atlas_trace.cache_snapshot("case.after", key, _build_case.cache_info()._asdict())
+        return built
 
 
 def built_cases(numbers: Sequence[int], workers: int) -> list[BuiltCase]:
@@ -3765,8 +3777,20 @@ def built_cases(numbers: Sequence[int], workers: int) -> list[BuiltCase]:
     units = [(n, plans[n]) for n in numbers]
     count = max(1, min(workers, len(units)))
     if count == 1:
+        if atlas_trace.current_context() is not None:
+            return [_build_case_unit(unit) for unit in units]
         return [_build_case(n, plan) for n, plan in units]
-    with ProcessPoolExecutor(max_workers=count) as pool:
+    trace_context = atlas_trace.current_context()
+    pool = (
+        ProcessPoolExecutor(max_workers=count)
+        if trace_context is None
+        else ProcessPoolExecutor(
+            max_workers=count,
+            initializer=atlas_trace.install_context,
+            initargs=(trace_context,),
+        )
+    )
+    with pool:
         return list(pool.map(_build_case_unit, units))
 
 
@@ -3990,8 +4014,16 @@ def _built_corpus(workers: int) -> tuple[BuiltCase, ...]:
 @cache
 def _expected_outputs(workers: int) -> tuple[dict[Path, str], dict]:
     plans = source_plans()
-    source_index = _source_index(plans)
-    built = _built_corpus(workers)
+    with atlas_trace.phase("outputs.source_index"):
+        source_index = _source_index(plans)
+    atlas_trace.cache_snapshot(
+        "corpus.before_outputs", workers, _built_corpus.cache_info()._asdict()
+    )
+    with atlas_trace.phase("outputs.corpus", workers=workers):
+        built = _built_corpus(workers)
+    atlas_trace.cache_snapshot(
+        "corpus.after_outputs", workers, _built_corpus.cache_info()._asdict()
+    )
     outputs: dict[Path, str] = {SOURCE_MANIFEST: _json_text(source_index)}
     for item in built:
         n = item.frontier.n
@@ -4024,9 +4056,14 @@ def expected_composite(
     what the whole `--check` compares a retained composite with. `workers` is as
     `expected_outputs` has it, and the corpus build is shared with it.
     """
-    return render_known_best_summary_svg(
-        _cards(_built_corpus(workers), canvas), canvas, identity
+    atlas_trace.cache_snapshot(
+        "corpus.before_composite", workers, _built_corpus.cache_info()._asdict()
     )
+    built = _built_corpus(workers)
+    atlas_trace.cache_snapshot(
+        "corpus.after_composite", workers, _built_corpus.cache_info()._asdict()
+    )
+    return render_known_best_summary_svg(_cards(built, canvas), canvas, identity)
 
 
 def retained_cases(numbers: Sequence[int]) -> list[BuiltCase]:

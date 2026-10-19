@@ -60,6 +60,7 @@ from devtools import retained_data
 from devtools import squish_second_update_house_links as house
 from devtools import upper_bound_reports as reports
 from devtools.retained_data import read_retained_bytes
+from sqpack import atlas_trace
 from sqpack.witness import witness_document
 from sqpack.yamlio import safe_load
 
@@ -553,13 +554,16 @@ def expected_house(n: int) -> dict[str, Any]:
 
 def _house_witness(n: int, source: Source) -> dict[str, Any]:
     """The witness `source` makes the house at `n`: its certificate, with its native result."""
-    exact = source.certificate(n)
-    positive = source.jobs(n, exact)["positive"]
-    witness = kernel.to_witness(
-        exact,
-        witness_prefix=source.witness_prefix,
-        claim_limitations=source.claim_limitations,
-    )
+    with atlas_trace.phase("house.fact_admission", source=source.result, n=n):
+        exact = source.certificate(n)
+    with atlas_trace.phase("house.native_admission", source=source.result, n=n):
+        positive = source.jobs(n, exact)["positive"]
+    with atlas_trace.phase("house.basis_witness", source=source.result, n=n):
+        witness = kernel.to_witness(
+            exact,
+            witness_prefix=source.witness_prefix,
+            claim_limitations=source.claim_limitations,
+        )
     identifier = f"W-known-best-n{n:03d}"
     witness["id"] = identifier
     witness["claim"]["coordinate_provenance"] = "verified"
@@ -584,7 +588,8 @@ def _house_witness(n: int, source: Source) -> dict[str, Any]:
 def build_witness(n: int) -> dict[str, Any]:
     """The house, decided again by `sqpack`'s exact verifier and held to the native result."""
     witness = expected_house(n)
-    native, verification = legacy.exact_verify(witness)
+    with atlas_trace.phase("house.exact_verify", source=ADOPTED[n], n=n):
+        native, verification = legacy.exact_verify(witness)
     _require(
         verification.valid and native == witness["certificate"]["result"],
         f"n={n}: the house's exact decision differs from its retained native job",

@@ -17,6 +17,7 @@ import yaml
 from jsonschema import Draft202012Validator
 from strif import atomic_output_file
 
+from sqpack import atlas_trace
 from sqpack.field import FieldElement, NumberField
 from sqpack.promote.interval import from_endpoints, interval, midpoint
 from sqpack.promote.interval_verify import verify_interval
@@ -627,15 +628,18 @@ def exact_verify(witness: Mapping[str, Any]) -> tuple[dict[str, Any], Report]:
     """Verify a rational or certified algebraic witness with exact predicates."""
     if witness["claim"]["method"] == "interval-certified":
         return _interval_verify(witness)
-    squares, side, field = _exact_materialize(witness)
+    with atlas_trace.phase("exact.materialize"):
+        squares, side, field = _exact_materialize(witness)
     if field is None:
         sign: Callable[[Scalar], int] = _rational_sign
         field_certificate = {"field": "Q", "preconditions": "degree-one rational field"}
     else:
         sign = exact_sign
         field_certificate = field.precondition_certificate()
-    report = verify_packing(squares, side, sign=sign)
-    containment, separation = _margin_summary(squares, side, sign)
+    with atlas_trace.phase("exact.verify_packing"):
+        report = verify_packing(squares, side, sign=sign)
+    with atlas_trace.phase("exact.margin_summary"):
+        containment, separation = _margin_summary(squares, side, sign)
     result = {
         "operation": "verify",
         "id": witness["id"],
