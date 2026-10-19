@@ -4232,14 +4232,14 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "papers/square-packing-methods-survey.md",
         ),
         reason=(
-            "Rendered for PR #645 at link revision 26d8bb33, once from this branch's tree "
-            "and once from main at 26d8bb33, the branch's base after its merge of main: the "
-            "three papers' HTML and Markdown are byte-identical in all 42 files each "
-            "renderer writes, and each PDF prints from that HTML. The branch separates "
+            "Rendered for PR #645 at link revision b23abea0, once from this branch's tree "
+            "at a6e1bf30 and once with main's 14fd9e27 copies of the branch's changed files: "
+            "the three papers' HTML and Markdown and every asset their renderers write are "
+            "byte-identical, and each PDF prints from that HTML. The branch separates "
             "source verification from confirmation, moves T-154 from V0 to V3 and changes "
             "the assurance predicates, record links and the n = 17 page ceiling; none of "
             "the three papers prints T-154, its evidence or those predicates' results, so "
-            "each keeps its edition: v0.1.7, v0.1.0 and v0.2.2."
+            "each keeps its edition: v0.1.7, v0.1.0 and v0.2.3."
         ),
     ),
     ReleaseNoPublicChange(
@@ -4261,10 +4261,11 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         ),
         reason=(
             "Rendered for PR #645 with the browser's math pass, once from this branch's "
-            "tree and once from main at 26d8bb33: the Markdown is byte-identical and the "
-            "HTML differs only in where an empty style attribute falls in two formulas' "
-            "spans, which moves between two renders of the same input. The register count "
-            "is 194 on both. The explainer prints no rung of T-154, so it keeps v0.4.7."
+            "tree at a6e1bf30 and once with main's 14fd9e27 copies of the branch's changed "
+            "files: the Markdown is byte-identical and the HTML, 1,416,033 bytes on both, "
+            "differs only in where an empty style attribute falls in two formulas' spans, "
+            "which moves between two renders of the same input. The register count is 217 "
+            "on both. The explainer prints no rung of T-154, so it keeps v0.4.8."
         ),
     ),
 )
