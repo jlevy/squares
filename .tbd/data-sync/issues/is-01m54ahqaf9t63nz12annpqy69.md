@@ -5,16 +5,18 @@ title: "Import wand125: 18 fine-net mixed-measure lower bounds at n = 38 to 110,
 kind: task
 status: in_progress
 priority: 1
-version: 9
+version: 10
 delegate: codex@spud10.local
 labels:
   - result-import
 dependencies: []
 parent_id: is-01m549eweq3c13b32tjzbf0ats
+child_order_hints:
+  - is-01m59ddf80h74jfaxny0srnyfd
 hold: null
 hold_until: null
 created_at: 2026-10-17T06:59:48.686Z
-updated_at: 2026-10-18T11:53:50.236Z
+updated_at: 2026-10-19T06:26:07.230Z
 started_at: 2026-10-18T08:47:56.014Z
 ---
 Hiroaki Hosono (wand125) reports 21 fine-net mixed-measure lower-bound certificates in jlevy/squares#446#issuecomment-6210736972 (created 2026-10-16T07:49:56Z, edited 09:00:31Z to cover all of them). Three are already registered: n = 37 (T-178), 39 (T-176) and 44 (T-177), published 2026-10-13 and registered on 14 October with no issue. This bead imports the **18 new ones**, at n = 38, 40, 41, 43, 51, 68, 84, 85, 86, 88, 89, 90, 91, 92, 106, 107, 108 and 110. Found by the 17 October intake pass (think-e2sz), lane W (user-eb-sweep-1017). Stage 1 triage below; stages 2 to 4 are this bead's.
