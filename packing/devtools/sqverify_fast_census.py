@@ -97,8 +97,9 @@ the native summary records zero. An optional `PACKET/CERTIFICATE.execution.json`
 beside the receipts retains the checkpoint's authentic execution record: when its
 candidate, binary and build match, the evidence entry names its aggregate control
 timing and any recovered capture whose outer exit was unobserved. Packet relationships
-are explicit: the fine-net and check2 producers adapted this crate, with separate
-declared-net readers, so these replays share components.
+are explicit: the fine-net and most check2 replays share this crate with the producer,
+apart from their declared-net readers. Check2's mixed_n29_L581 follows its published
+C++ records instead.
 
 From `packing/`:
 
@@ -1202,7 +1203,11 @@ def recorded_seconds(value: Any) -> float | None:
     """Missing or invalid timing is unavailable, never a measured zero."""
     if isinstance(value, bool) or not isinstance(value, (int, float)):
         return None
-    return float(value) if math.isfinite(value) and value >= 0 else None
+    try:
+        seconds = float(value)
+    except OverflowError:
+        return None
+    return seconds if math.isfinite(seconds) and seconds >= 0 else None
 
 
 def direction_cpu(entry: dict[str, Any], indices: list[int] | None = None) -> float | None:
@@ -1356,6 +1361,22 @@ INDEPENDENT_MIXED_PACKETS = frozenset(
 
 def mixed_relationship(case: Case) -> tuple[list[str], str]:
     """Reviewed producer relationship fields and prose for a mixed packet."""
+    if (case.packet, case.certificate) == (
+        "wand125-mixed-bounds-check2-2026-10-06",
+        "mixed_n29_L581",
+    ):
+        return ["    relationship_to_generator: independent-implementation"], (
+            "The published claim rests on the shipped C++ records of "
+            "mixed_rotated_verify.cpp; the maintained crate shares no code with that "
+            "checker (packing/sqverify_fast/INDEPENDENCE.md). The source reports a "
+            "pre-publication run of its adapted crate on this candidate, but that run has "
+            "no retained receipt. The independent-implementation relationship follows "
+            "the published C++ records, as the accepted review records in "
+            "docs/project/reviews/review-2026-10-06-wand125-check2-ten-certificates.md "
+            "(T-114 and FN-4). The theorem, net, core side, per-bin domain and threshold "
+            "are shared mathematics, so this supplies a second implementation of the "
+            "same method. "
+        )
     if case.packet in SHARED_CRATE_PACKETS:
         return [
             "    relationship_to_generator: shared-components",
