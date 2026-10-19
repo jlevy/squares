@@ -3930,7 +3930,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-18'
+  lastmod: '2026-10-19'
   status: live
 - path: cases/156.html
   canonical: cases/156.html
@@ -4586,7 +4586,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-18'
+  lastmod: '2026-10-19'
   status: live
 - path: cases/23.html
   canonical: cases/23.html
@@ -16125,7 +16125,7 @@ urls:
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-18'
-  lastmod: '2026-10-18'
+  lastmod: '2026-10-19'
   status: live
   identity:
     kind: upper-bound
@@ -16140,18 +16140,43 @@ urls:
     builds_on: null
     evidence:
     - E-evand-669-n155-report
+    - E-evand-669-n155-exact-feasibility
     artifacts:
     - packing/resources/web/evand-n155-explorer-2026-10-17/README.md
     - packing/resources/web/evand-n155-explorer-2026-10-17/source/search/packer/candidates/s155_ex2.cert
     - packing/resources/web/evand-n155-explorer-2026-10-17/source/search/packer/candidates/s155_ex2_regularized.cert
-    - packing/campaign/issue-intake/upper-bounds-20261018/README.md
+    - docs/project/reviews/review-2026-10-19-upper-bound-imports-659-664-669-674.md
+  amendments:
+  - date: '2026-10-19'
+    reason: 'The 19 October review accepts the retained replay: the result rises to V3/C3 and cites
+      its confirming evidence (E-evand-669-n155-exact-feasibility), with the review among its artifacts,
+      and on 19 October 2026 the case at 155 adopted it as its house; the bound, scope and attribution
+      are unchanged.'
+    previous:
+      kind: upper-bound
+      scope:
+        n_values:
+        - 155
+      established: null
+      attribution:
+        source_keys:
+        - '[Daniel n155 explorer 2026-10-17]'
+        published: '2026-10-17'
+      builds_on: null
+      evidence:
+      - E-evand-669-n155-report
+      artifacts:
+      - packing/resources/web/evand-n155-explorer-2026-10-17/README.md
+      - packing/resources/web/evand-n155-explorer-2026-10-17/source/search/packer/candidates/s155_ex2.cert
+      - packing/resources/web/evand-n155-explorer-2026-10-17/source/search/packer/candidates/s155_ex2_regularized.cert
+      - packing/campaign/issue-intake/upper-bounds-20261018/README.md
 - path: result/t-198.html
   canonical: result/t-198.html
   kind: result
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-18'
-  lastmod: '2026-10-18'
+  lastmod: '2026-10-19'
   status: live
   identity:
     kind: upper-bound
@@ -16166,17 +16191,41 @@ urls:
     builds_on: null
     evidence:
     - E-evand-674-n229-opening-report
+    - E-evand-674-n229-opening-exact-feasibility
     artifacts:
     - packing/resources/web/evand-n229-dilation-2026-10-17/README.md
     - packing/resources/web/evand-n229-dilation-2026-10-17/source/search/packer/candidates/s229.cert
-    - packing/campaign/issue-intake/upper-bounds-20261018/README.md
+    - docs/project/reviews/review-2026-10-19-upper-bound-imports-659-664-669-674.md
+  amendments:
+  - date: '2026-10-19'
+    reason: 'The 19 October review accepts the retained replay: the result rises to V3/C3 and cites
+      its confirming evidence (E-evand-674-n229-opening-exact-feasibility), with the review among
+      its artifacts; T-199, the author''s update, houses 229. The bound, scope and attribution are
+      unchanged.'
+    previous:
+      kind: upper-bound
+      scope:
+        n_values:
+        - 229
+      established: null
+      attribution:
+        source_keys:
+        - '[Daniel n229 dilation 2026-10-17]'
+        published: '2026-10-17'
+      builds_on: null
+      evidence:
+      - E-evand-674-n229-opening-report
+      artifacts:
+      - packing/resources/web/evand-n229-dilation-2026-10-17/README.md
+      - packing/resources/web/evand-n229-dilation-2026-10-17/source/search/packer/candidates/s229.cert
+      - packing/campaign/issue-intake/upper-bounds-20261018/README.md
 - path: result/t-199.html
   canonical: result/t-199.html
   kind: result
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-18'
-  lastmod: '2026-10-18'
+  lastmod: '2026-10-19'
   status: live
   identity:
     kind: upper-bound
@@ -16191,10 +16240,34 @@ urls:
     builds_on: null
     evidence:
     - E-evand-674-n229-update-report
+    - E-evand-674-n229-update-exact-feasibility
     artifacts:
     - packing/resources/web/evand-n229-dilation-update-2026-10-18/README.md
     - packing/resources/web/evand-n229-dilation-update-2026-10-18/source/search/packer/candidates/s229_v2.cert
-    - packing/campaign/issue-intake/upper-bounds-20261018/README.md
+    - docs/project/reviews/review-2026-10-19-upper-bound-imports-659-664-669-674.md
+  amendments:
+  - date: '2026-10-19'
+    reason: 'The 19 October review accepts the retained replay: the result rises to V3/C3 and cites
+      its confirming evidence (E-evand-674-n229-update-exact-feasibility), with the review among its
+      artifacts, and on 19 October 2026 the case at 229 adopted it as its house; the bound, scope
+      and attribution are unchanged.'
+    previous:
+      kind: upper-bound
+      scope:
+        n_values:
+        - 229
+      established: null
+      attribution:
+        source_keys:
+        - '[Daniel n229 dilation update 2026-10-18]'
+        published: '2026-10-18'
+      builds_on: null
+      evidence:
+      - E-evand-674-n229-update-report
+      artifacts:
+      - packing/resources/web/evand-n229-dilation-update-2026-10-18/README.md
+      - packing/resources/web/evand-n229-dilation-update-2026-10-18/source/search/packer/candidates/s229_v2.cert
+      - packing/campaign/issue-intake/upper-bounds-20261018/README.md
 - path: result/t-200.html
   canonical: result/t-200.html
   kind: result
@@ -16777,12 +16850,13 @@ urls:
     builds_on: null
     evidence:
     - E-evand-659-n236-report
+    - E-evand-659-n236-exact-feasibility
     artifacts:
     - packing/resources/web/evand-n236-2026-10-16/README.md
     - packing/resources/web/evand-n236-2026-10-16/acquisition/claims.json
     - packing/resources/web/evand-n236-2026-10-16/source/search/packer/candidates/s236_bm3c.cert
-    - packing/resources/web/evand-n236-2026-10-16/receipts/exact-certification.json.xz
     - packing/devtools/upper_bound_reports.py
+    - docs/project/reviews/review-2026-10-19-upper-bound-imports-659-664-669-674.md
 - path: result/t-219.html
   canonical: result/t-219.html
   kind: result
@@ -16804,12 +16878,13 @@ urls:
     builds_on: null
     evidence:
     - E-evand-664-n271-report
+    - E-evand-664-n271-exact-feasibility
     artifacts:
     - packing/resources/web/evand-n271-2026-10-17/README.md
     - packing/resources/web/evand-n271-2026-10-17/acquisition/claims.json
     - packing/resources/web/evand-n271-2026-10-17/source/search/packer/candidates/s271_ex1.cert
-    - packing/resources/web/evand-n271-2026-10-17/receipts/exact-certification.json.xz
     - packing/devtools/upper_bound_reports.py
+    - docs/project/reviews/review-2026-10-19-upper-bound-imports-659-664-669-674.md
 - path: results.html
   canonical: results.html
   kind: page

@@ -128,7 +128,7 @@ deciding input and both routes’ complete outputs.
 The two routes share certificate parsing, the half-angle conversion, Python’s rational
 arithmetic and the separating-axis method, so they are two implementations of one
 method. Neither is the author’s code, and the source’s own checkers were not run.
-The clearances are the dilation’s $10^{-12}$ margin, as the source describes it.
+The clearances are the binary64 input’s own, about $1.0 \times 10^{-13}$ at the walls and $2.0 \times 10^{-13}$ between squares, plus the dilation’s $5 \times 10^{-13}$ and $10^{-12}$, as the [review of 19 October 2026](../../../../docs/project/reviews/review-2026-10-19-upper-bound-imports-659-664-669-674.md) measured them (RV-5); the source describes the dilation’s share alone.
 
 [acquisition/claims.json](acquisition/claims.json) freezes the certificate against the
 record at `main` `14fd9e27f` (19 October 2026), each side rebuilt from its own retained
