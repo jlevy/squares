@@ -222,6 +222,35 @@ def test_missing_build_facts_are_not_invented_and_linux_timings_remain_available
     assert "container" not in text
 
 
+def test_check2_n29_relationship_follows_its_published_cpp_records_only() -> None:
+    check2 = "wand125-mixed-bounds-check2-2026-10-06"
+    cases = [
+        (census.Case(check2, "mixed_n29_L581", 29, "581/100"), "independent-implementation"),
+        (census.Case(check2, "mixed_n28_L5735", 28, "1147/200"), "shared-components"),
+        (census.Case(FINE_NET, "mixed_n68_L853", 68, "853/100"), "shared-components"),
+        (census.Case(check2, "mixed_n29_L582", 29, "291/50"), "shared-components"),
+        (
+            census.Case("unreviewed-new-packet", "mixed_n29_L581", 29, "581/100"),
+            "unknown-historical",
+        ),
+    ]
+    for case, expected in cases:
+        fields, text = census.mixed_relationship(case)
+        record = safe_load("\n".join(fields))
+        assert record["relationship_to_generator"] == expected
+        if expected == "independent-implementation":
+            assert "mixed_rotated_verify.cpp" in text
+            assert "published claim rests on the shipped C++ records" in text
+            assert "pre-publication run" in text
+            assert "no retained receipt" in text
+            assert "shared_components" not in record
+        elif expected == "shared-components":
+            assert "declared-net reader" in " ".join(record["shared_components"])
+            assert "not an independent full implementation or a second method" in text
+        else:
+            assert "relationship to the producer's checker is not recorded" in text
+
+
 def test_companion_preserves_recovery_and_control_aggregate_timing_only_when_bound(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
@@ -257,10 +286,11 @@ def test_companion_preserves_recovery_and_control_aggregate_timing_only_when_bou
     assert "186.31 seconds of wall time" in text
     assert "/usr/bin/time" in text
     assert f"{case.certificate}.execution.json" in text
-    execution["commands"][1]["timing"].pop("cpu_seconds")
-    companion.write_text(json.dumps(execution))
-    text = " ".join(evidence(case, entry, out)["limitations"].split())
-    assert "aggregate control CPU seconds" not in text
+    for invalid_cpu in (None, True, -1, float("nan"), float("inf"), "346.81", 10**400):
+        execution["commands"][1]["timing"]["cpu_seconds"] = invalid_cpu
+        companion.write_text(json.dumps(execution))
+        text = " ".join(evidence(case, entry, out)["limitations"].split())
+        assert "aggregate control CPU seconds" not in text
     execution["commands"][1]["timing"]["cpu_seconds"] = 346.81
     execution["candidate_sha256"] = "different"
     companion.write_text(json.dumps(execution))
