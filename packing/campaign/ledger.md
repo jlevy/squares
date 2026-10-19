@@ -200,6 +200,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-184](agent-sessions/session-184-n17-proof-contracts-and-instruments.md) | stopped | contemporaneous | `review-planning-oversight` (process) | `documentation-pass` (correctness) | 20 | think-ipel | Complete owed current-source certification under think-7hy3 without relabeling failed predecessor/push receipts or weakening tests. Keep the coordinator and n17 program open. Mathematical coupling/profile handoffs remain planned in the reviewed W3 memo; no target starts automatically. Native publication/clean recovery and global proof composition remain open; agenda043 stays active under certification debt. |
 | [session-185](agent-sessions/session-185-n17-coupling-and-replay.md) | stopped | contemporaneous | `insight-iteration` (insight) | `review-planning-oversight` (process) | 8 | think-tvxs | think-7hy3 |
 | [session-186](agent-sessions/session-186-n17-mathematics-and-efficiency.md) | stopped | contemporaneous | `insight-iteration` (insight) | `review-planning-oversight` (process) | 12 | think-2mzl | think-7hy3 |
+| [session-187](agent-sessions/session-187-canonical-rust-multiplication.md) | in_progress | contemporaneous | `efficiency-loop` (efficiency) | `efficiency-loop` (efficiency) | 8 | think-1ozu | Verify the launcher, complete exact-source checks, then submit the independently reviewed checkpoint for think-1ozu. |
 
 ### Workflow summary
 
@@ -211,7 +212,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `factual-review` | 11 | 1 | 67 | 3 |
 | `insight-iteration` | 31 | 1 | 96 | 4 |
 | `process-review` | 16 | 4 | 64 | 6 |
-| `efficiency-loop` | 11 | 1 | 47 | 1 |
+| `efficiency-loop` | 12 | 1 | 55 | 1 |
 | `research-loop` | 37 | 4 | 154 | 9 |
 | `pipeline-improvement` | 42 | 2 | 216 | 7 |
 | `documentation-pass` | 1 | 0 | 31 | 3 |

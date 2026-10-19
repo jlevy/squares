@@ -2057,6 +2057,31 @@ That gate uses the crate’s pinned toolchain, runs rustfmt, Clippy, tests, rust
 locked release build, then compares exact results with the Python reference.
 It leaves the binary at `$CARGO_TARGET_DIR/release/sqverify-exact` when the target
 directory is absolute.
+The Rust crate enables canonical cross-cancelled multiplication by default.
+Build with `--no-default-features` to select the original `num-rational` multiplication
+expressions. For the constructor ablation, combine `--no-default-features` with
+`--features experimental-normalized-mul` or `--features experimental-coprime-mul`; the
+historical feature names remain supported.
+Cargo features are additive, so a normalized-only control must disable defaults.
+The gate checks these modes, production defaults and the combined feature mode before
+building the production release binary.
+
+The
+[adoption measurement](docs/project/research/research-2026-09-30-exact-arithmetic-verifier-performance.md#2026-10-19-default-adoption)
+records the fixed-work benefit and its limits.
+To repeat the three-pair diagnostic with fresh reference and default builds, provide
+writable absolute scratch outside the checkout through `TMPDIR`, `UV_CACHE_DIR` and
+`CARGO_TARGET_DIR`, then run:
+
+```bash
+uv run --frozen --all-extras --group dev python -m benchmarks.bench_rectangle_rust_verifier_ab \
+  --target-root "$CARGO_TARGET_DIR/verifier-arms" --output "$TMPDIR/verifier-ab.json"
+```
+
+Linux admits those resolved external directories; macOS retains the configured mounted
+agent-scratch volume requirement.
+Output files cannot overwrite prior receipts.
+
 Pass that path to `devtools.verify_rectangle_density` with
 `--backend rust --rust-binary PATH`; Python remains the default.
 The [tooling overview](docs/project/guides/verification-tooling.md) records the

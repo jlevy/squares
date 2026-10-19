@@ -86,9 +86,14 @@ The
 [current review](../../reviews/review-2026-09-29-n11-optimality.md#independent-verification-checkpoint)
 records the acceptance boundaries.
 The reviewed Rust rectangle backend is optional: matched exact reports pass, but
-measured rational geometry is slower than Python.
-The weighted mask1155 extension checks 71 owners and 522 rows and adds 131 IDs; its
-complete source-bound receipt is linked from the mathematical review.
+measured rational geometry is slower than Python in the retained comparison.
+The
+[2026-10-19 fixed-work replication](../../research/research-2026-09-30-exact-arithmetic-verifier-performance.md#2026-10-19-default-adoption)
+supports enabling canonical multiplication inside the optional Rust crate, with an
+explicit original reference mode and preserved exact controls.
+Python remains the verifier’s default backend; complete external-certificate throughput
+remains unmeasured. The weighted mask1155 extension checks 71 owners and 522 rows and
+adds 131 IDs; its complete source-bound receipt is linked from the mathematical review.
 Fixed-T local isolation is accepted.
 D4 reduction and near-pose inclusion retain their stated premises.
 The ten-node capture parent graph is structurally checked.
