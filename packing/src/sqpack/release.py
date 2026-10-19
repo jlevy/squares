@@ -1564,21 +1564,35 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "packing/devtools/select_houses.py",
             "packing/devtools/upper_bound_houses.py",
             "packing/frontier/n-029.md",
+            "packing/frontier/n-070.md",
             "packing/frontier/n-084.md",
             "packing/frontier/n-086.md",
+            "packing/frontier/n-102.md",
             "packing/frontier/n-103.md",
             "packing/frontier/n-105.md",
             "packing/frontier/n-108.md",
+            "packing/frontier/n-123.md",
+            "packing/frontier/n-126.md",
             "packing/frontier/n-127.md",
+            "packing/frontier/n-129.md",
             "packing/frontier/n-130.md",
             "packing/frontier/n-131.md",
+            "packing/frontier/n-146.md",
+            "packing/frontier/n-153.md",
+            "packing/frontier/n-154.md",
+            "packing/frontier/n-175.md",
             "packing/frontier/n-179.md",
             "packing/frontier/n-180.md",
+            "packing/frontier/n-207.md",
             "packing/frontier/n-208.md",
             "packing/frontier/n-209.md",
+            "packing/frontier/n-236.md",
+            "packing/frontier/n-237.md",
             "packing/frontier/n-238.md",
             "packing/frontier/n-239.md",
             "packing/frontier/n-261.md",
+            "packing/frontier/n-267.md",
+            "packing/frontier/n-295.md",
             "packing/frontier/results.yaml",
             "packing/frontier/source-coverage.yaml",
         ),
@@ -1594,8 +1608,8 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "facts. Changed case records, result requests, source coverage and results "
             "are citation targets whose existence the producer checks; their bodies are "
             "not inlined. All cited paths remain present at both revisions. The C1 "
-            "margin wording also changes the n29 citation target's current opening, "
-            "with every other byte and its T195 metadata retained. The "
+            "margin wording changes current openings at 15 additional citation targets, "
+            "including n29, with every other byte and all metadata retained. The "
             "manuscript, renderer and own publication metadata are unchanged. "
             "House-selection, regularization, result-page and control changes do not "
             "enter its output. Retain v0.2.3; no search, PDF redraw or artifact byte "
