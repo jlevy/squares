@@ -27985,8 +27985,8 @@ results:
 
 
       This raises the verified and reported lower lanes from 851/100 to 853/100, confirmed by a
-      re-implementation sharing the producer''s sqverify_fast components apart from the declared-net
-      readers. The exact audits check premises and saved poses, not coverage between poses; no independent
+      re-implementation sharing the producer''s components, the sqverify_fast crate apart from the
+      declared-net readers. The exact audits check premises and saved poses, not coverage between poses; no independent
       full implementation, second method, proof-assistant check or optimality theorem is claimed.
 
 
@@ -28083,8 +28083,8 @@ results:
 
 
       This raises the verified and reported lower lanes from 9411/1000 to 3769/400, confirmed by
-      a re-implementation sharing the producer''s sqverify_fast components apart from the declared-net
-      readers. The exact audits check premises and saved poses, not coverage between poses; no independent
+      a re-implementation sharing the producer''s components, the sqverify_fast crate apart from
+      the declared-net readers. The exact audits check premises and saved poses, not coverage between poses; no independent
       full implementation, second method, proof-assistant check or optimality theorem is claimed.
 
 
@@ -28182,7 +28182,7 @@ results:
 
 
       This raises the verified and reported lower lanes from 473/50 to 379/40, confirmed by a re-implementation
-      sharing the producer''s sqverify_fast components apart from the declared-net readers. The
+      sharing the producer''s components, the sqverify_fast crate apart from the declared-net readers. The
       exact audits check premises and saved poses, not coverage between poses; no independent full
       implementation, second method, proof-assistant check or optimality theorem is claimed.
 
