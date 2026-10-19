@@ -61,8 +61,12 @@ PAGE_BUDGET_EXCEPTIONS: dict[str, tuple[int, str]] = {
         "Complete n=11 proof/certificate record and prepared bounds measure 416,870 bytes.",
     ),
     "cases/17.html": (
-        500_000,
-        "Complete n=17 proof/certificate record and prepared bounds measure 443,761 bytes.",
+        550_000,
+        (
+            "Complete n=17 proof/certificate record and prepared bounds measure 501,977 "
+            "bytes on 16 October 2026 with T-154's source-build evidence, 499,855 on main "
+            "at 26d8bb335. The ceiling leaves room for the open n=17 intakes."
+        ),
     ),
     "cases/18.html": (
         350_000,

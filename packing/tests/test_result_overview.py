@@ -65,6 +65,19 @@ def _result(overview: overview_data.Overview, result_id: str) -> overview_data.R
     return next(result for result in overview.results if result.id == result_id)
 
 
+def test_formal_source_execution_links_remain_visible_beside_low_confirmation(
+    overview: overview_data.Overview,
+) -> None:
+    result = _result(overview, "T-154")
+    body = result_overview.links_section(result, overview, [17])
+    assert "source build receipt" in body
+    assert "verification/clean-build-receipt.json" in body
+    assert "verification/Square17Optimality.log.gz" in body
+    assert result.record["verification"] == "V3"
+    assert result.record["confirmation"] == "C1"
+    assert "E-n017-fitzharding-lean-source-build" in body
+
+
 def test_every_register_result_has_an_overview(bodies: dict[str, str]) -> None:
     register = safe_load(overview_data.RESULTS.read_text(encoding="utf-8"))["results"]
     assert set(bodies) == {record["id"] for record in register}

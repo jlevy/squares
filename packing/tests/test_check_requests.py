@@ -79,6 +79,7 @@ REGISTER = Register(
         },
         "E-replay": {
             "origin": "replayed-here",
+            "performed_by": "repository",
             "assurance": "verified",
             "replay_status": "passed",
             "relationship_to_generator": "same-implementation",
@@ -703,6 +704,7 @@ def test_an_exact_value_is_described_by_its_lower_half_and_not_by_the_grid() -> 
     grid = {
         "claim": "upper-bound",
         "origin": "replayed-here",
+        "performed_by": "repository",
         "replay_status": "passed",
         "relationship_to_generator": "independent-implementation",
     }
@@ -722,7 +724,13 @@ def test_an_exact_value_is_described_by_its_lower_half_and_not_by_the_grid() -> 
 def test_a_confirmation_without_the_relation_says_it_is_not_yet_recorded() -> None:
     bare = Register(
         results={"T-001": result_entry("T-001", "V3", "C3", "E-bare")},
-        evidence={"E-bare": {"origin": "replayed-here", "replay_status": "passed"}},
+        evidence={
+            "E-bare": {
+                "origin": "replayed-here",
+                "performed_by": "repository",
+                "replay_status": "passed",
+            }
+        },
     )
     assert (
         check_requests.entry_state("T-001", bare).how
@@ -784,8 +792,9 @@ def test_a_recorded_result_is_told_what_was_run_on_it_here_and_not_only_its_rung
         evidence={
             **REGISTER.evidence,
             "E-passed": {
-                "origin": "external",
-                "assurance": "reported",
+                "origin": "replayed-here",
+                "performed_by": "repository",
+                "assurance": "verified",
                 "replay_status": "passed",
             },
         },
@@ -1180,3 +1189,98 @@ def test_a_page_size_github_does_not_serve_is_refused(size: str) -> None:
 
     with pytest.raises(ValueError, match="per_page"):
         check_requests.gh_fetch(f"repos/a/b/issues?per_page={size}", never)
+
+
+def _live_with(*entries: Record) -> Register:
+    live = check_requests.load_register()
+    return Register(
+        live.results, {**live.evidence, **{e["id"]: e for e in entries}}, live.verifiers
+    )
+
+
+def test_an_open_implication_is_not_called_confirmed() -> None:
+    """E-k2m4-evand-bentz4-lean-build is a replay here of a Lean implication whose
+    ValidTilt9 premise nothing here has decided; T-081 cites it at V0/C1."""
+    register = check_requests.load_register()
+    entry = check_requests.entry_state("E-k2m4-evand-bentz4-lean-build", register)
+    assert entry.state == OPEN, entry
+    assert entry.why == "an implication whose premise ValidTilt9 is not confirmed here"
+    words = check_requests._plain(entry, None, register)  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+    assert words == (
+        "recorded as evidence (verified, replayed-here): an implication whose premise "
+        "ValidTilt9 is not confirmed here, so it confirms the implication and not its "
+        "conclusion"
+    )
+    assert "decides those" not in words
+    assert (
+        check_requests.confirmation_phrase(["E-k2m4-evand-bentz4-lean-build"], register)
+        == "how it was re-verified is not yet recorded"
+    )
+
+
+def test_a_producer_run_is_not_called_confirmed_whatever_its_origin_says() -> None:
+    producer = {
+        "id": "E-producer-relabelled",
+        "claim": "exact-value",
+        "scope": {"n_values": [17]},
+        "assurance": "verified",
+        "method": "exact-algebraic",
+        "origin": "replayed-here",
+        "performed_by": "source-author",
+        "relationship_to_generator": "same-implementation",
+        "certificate": "certificate.json",
+        "replay": "python -m check certificate.json",
+        "replay_status": "passed",
+    }
+    register = _live_with(producer)
+    assert check_requests.entry_state(producer["id"], register).state == OPEN
+    assert (
+        check_requests.confirmation_phrase([producer["id"]], register)
+        == "how it was re-verified is not yet recorded"
+    )
+    ours = {**producer, "id": "E-ours", "performed_by": "repository"}
+    register = _live_with(ours)
+    assert check_requests.entry_state(ours["id"], register).state == CONFIRMED
+
+
+def test_a_confirmed_conditional_entry_says_how_it_was_re_verified() -> None:
+    """Review E5: T-064's Valid7 Lean build is confirmed with its premise discharged in
+    the register, and its phrase must be read in that same register, not only among the
+    one id named."""
+    register = check_requests.load_register()
+    entry = check_requests.entry_state("E-k2m3-evand-bentz-lean-build", register)
+    assert entry.state == CONFIRMED, entry
+    assert entry.how.startswith("reproduced here with the author's own checker"), entry
+    assert "not yet recorded" not in check_requests._plain(entry, None, register)  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+
+
+@pytest.mark.parametrize(
+    ("origin", "actor"),
+    [("external", "source-author"), ("independently-external", "independent-external")],
+)
+def test_a_run_not_made_here_is_not_worded_as_work_done_here(origin: str, actor: str) -> None:
+    """Review E6: a C0 result citing a passing run drafted "the replay of ... has
+    passed" as work done here, whoever ran it."""
+    run = {
+        "id": "E-run",
+        "claim": "upper-bound",
+        "scope": {"n_values": [17]},
+        "assurance": "verified",
+        "method": "exact-algebraic",
+        "origin": origin,
+        "performed_by": actor,
+        "relationship_to_generator": "same-implementation",
+        "certificate": "c.json",
+        "replay": "python -m check c.json",
+        "replay_status": "passed",
+    }
+    record = result_entry("T-900", "V3", "C0", "E-run", kind="upper-bound")
+    register = Register(results={"T-900": record}, evidence={"E-run": run})
+    state = check_requests.entry_state("T-900", register)
+    words = check_requests._plain(state, record, register)  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+    assert "has passed" not in words, words
+    ours = {**run, "origin": "replayed-here", "performed_by": "repository"}
+    register = Register(results={"T-900": record}, evidence={"E-run": ours})
+    state = check_requests.entry_state("T-900", register)
+    words = check_requests._plain(state, record, register)  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+    assert "the replay of E-run has passed" in words, words

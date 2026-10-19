@@ -43,9 +43,10 @@
       const style = getComputedStyle(day);
       const box = day.getBoundingClientRect();
       const body = day.querySelector(".site-news-body");
-      const prose = day.querySelector(".site-news-item p");
+      const prose = day.querySelector(".site-news-item > p");
       const title = day.querySelector(".site-news-item h3");
       const date = day.querySelector("time");
+      const dateBox = date?.parentElement?.getBoundingClientRect();
       const topics = day.querySelector(".site-news-topics");
       const metadata = day.querySelector(".site-news-metadata");
       const meter = metadata?.querySelector(".site-significance");
@@ -77,6 +78,17 @@
         title_style: title ? typography(title) : null,
         headline_style: title ? typography(title.querySelector("a") ?? title) : null,
         topic_styles: [...(topics?.querySelectorAll(".site-chip") ?? [])].map(typography),
+        title_date_gap: dateBox && titleBox ? dateBox.top - titleBox.bottom : null,
+        date_metadata_gap:
+          metadata && dateBox ? metadata.getBoundingClientRect().top - dateBox.bottom : null,
+        metadata_body_gap:
+          metadata && prose
+            ? prose.getBoundingClientRect().top - metadata.getBoundingClientRect().bottom
+            : null,
+        paragraph_gap: prose?.nextElementSibling?.matches("p")
+          ? prose.nextElementSibling.getBoundingClientRect().top -
+            prose.getBoundingClientRect().bottom
+          : null,
         title_before_date:
           !!date && !!titleBox && titleBox.bottom <= date.getBoundingClientRect().top,
         date_before_topics:

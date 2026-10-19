@@ -7073,21 +7073,35 @@ issues:
     read_through: '2026-10-12T07:51:08Z'
     results: []
     asks:
-    - what: Compare the best of three timings with 400 ms, keep both ceilings, and attribute the play
-        message to load or to a regression.
+    - what: Compare the best of three timings with 400 ms and keep both ceilings.
+      state: done
+      note: >-
+        Landed in #685 (02b644c6f, merged at 14fd9e27f): the Animate view contract builds each
+        of the six trajectories three times through measurePhysics, past the trajectory cache,
+        compares the fastest with 400 ms and one build's bytes with 4 MB, both ceilings
+        unchanged, and af12aca78 requires the three builds to agree in bytes. #685's hosted
+        check_frontend passed at af12aca78 (Packing run 39312783060, frontend job
+        118266427235: the dearest trajectory 223 ms at its fastest of three builds)
+        (think-1bm2).
+    - what: Attribute the Animate view play message to load or to a regression.
       state: queued
-      bead: think-1bm2
+      note: >-
+        Neither #685 nor earlier work attributed `play did not carry on from step to step: the
+        stage showed n = [5, 6]`, and no third occurrence is recorded. Narrowed onto its own
+        bead.
+      bead: think-8vsk
     beads:
     - think-1bm2
-    answer_bead: think-1bm2
+    - think-8vsk
+    answer_bead: think-8vsk
     replies:
     - url: https://github.com/jlevy/squares/issues/538#issuecomment-6200838139
       date: '2026-10-15'
       by: jlevy
       kind: follow-up
       reported: []
-    close_when: The check compares the best of three timings with 400 ms, both ceilings are
-      unchanged, the play message is attributed, and check_frontend passes.
+    close_when: The play message is attributed to load or to a regression; the timing check landed
+      in #685.
   - number: 539
     title: 'check_scroll_restoration: wait for the reload''s own navigation'
     author: jlevy
@@ -8258,10 +8272,11 @@ issues:
       The reply `--report` lists as due (T-174 at V3/C3 and its two evidence entries reviewed, where
       the follow-up of 14 October stated V0/C0 and recorded) waits for the owner, who decides the
       pull request and, by `close_when`, posts the resulting state; T-174's adoption is no longer
-      the owner's: the house rule of 16 October 2026 made it the house at 53 counts, the adoption of
-      17 October 2026 (think-3mry) moved 37 rational ones to it, and the algebraic 70, 153 and 207
-      wait for the writer, as do twelve where issue 639's sides (T-193) are smaller; at 236 Evan
-      Daniel's issue 659 is smaller. It goes out on the owner's instruction,
+      the owner's: the house rule of 16 October 2026 makes it the house at 41 counts, the adoption
+      of 17 October 2026 (think-3mry) moved 37 rational ones to it, and the algebraic 70, 153 and
+      207 wait under think-ot5c for the writer. T-193's smaller sides are staged at twelve
+      others under think-ot5c; at 236 Evan Daniel's issue 659 reports a smaller side, whose
+      import adopts it, with T-174 still staged under think-3mry until then. It goes out on the owner's instruction,
       from think-9v2k, and a pass that finds it due does not post it before then (PR #637's review,
       A4).
   - number: 575
@@ -9461,7 +9476,11 @@ issues:
       #574's rational certificates are
       smaller, by about 1e-62. Retained on 16 October in the evand-exact-cur-2026-10-16 packet; the 16
       October report-order ledger (campaign/issue-intake/upper-bounds-20261016) agrees with the triage at
-      every count, and T-193 registers the 16 recorded counts. Claude assistance disclosed.
+      every count, and T-193 registers the 16 recorded counts. The source's verify_exact.py, replayed here
+      on all 23 forms with controls, and the stage 4 review of 16 October, which found no blocking defect
+      and one major credit-route finding (RE-1), take T-193 to V3/C3 at all sixteen counts, where the
+      house rule of 16 October 2026 makes its sides the houses, staged under think-ot5c until the
+      writer takes an algebraic side. Claude assistance disclosed.
     read_through: '2026-10-16T03:37:13Z'
     results:
     - key: exact-sides-below-record
@@ -9475,6 +9494,7 @@ issues:
       - T-193
       evidence:
       - E-evand-639-exact-sides-report
+      - E-evand-639-verify-exact-replay
     - key: exact-side-51
       claim: s(51) <= (16 + 5√2)/3, the root of 9x^2 - 96x + 206.
       source: body
@@ -9538,8 +9558,11 @@ issues:
       announcement as X returned it, is retained in the fitzharding-n19-lean-2026-10-16 packet. A full
       rebuild, several hours on 64 cores by the source's account, is above the pass's cap and held for the
       owner. Registered on 16 October 2026 as T-194, an optimality result at V0/C0, with its bibliography
-      key and a link from the n = 19 case page; its mathematical review (think-o40t) is the next step.
-      Claude and Codex assistance disclosed.
+      key and a link from the n = 19 case page. Its mathematical review of 16 October (think-o40t) found
+      no blocking or major defect, three minor findings and four notes, and re-established with programs of
+      its own the property each of the 2,328 native facts in the Git tree certifies; mapped the same day,
+      T-194 stands at V0/C1, its programs registered and their runs on n-019's case record. Claude and
+      Codex assistance disclosed.
     read_through: '2026-10-16T03:41:08Z'
     results:
     - key: n19-optimality-lean
@@ -9555,6 +9578,12 @@ issues:
       - T-194
       evidence:
       - E-n019-fitzharding-lean-report
+      - E-n019-fitzharding-endpoint-review
+      - E-n019-fitzharding-cover-census-review
+      - E-n019-fitzharding-region-review
+      - E-n019-fitzharding-capture-link-review
+      - E-n019-fitzharding-endgame-review
+      - E-n019-fitzharding-archives-review
     asks:
     - what: Link the proof from the n = 19 case page.
       state: done
