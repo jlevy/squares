@@ -116,7 +116,13 @@ $defs:
       grouping:
         const: related
         description: Related PRs sharing one contribution, without claiming a formal stack.
+      news_exclusion:
+        allOf:
+          - {$ref: '#/$defs/text'}
+          - {pattern: '\S'}
+        description: Reason to omit an entry from News while retaining its published changelog history.
       categories:
+        description: Internal contribution bookkeeping, independent of public subject topics.
         type: array
         uniqueItems: true
         items: {enum: [records, pipeline, regularization, site, documentation]}
@@ -125,7 +131,7 @@ $defs:
         minItems: 1
         uniqueItems: true
         items:
-          enum: [lower-bound, upper-bound, optimality, uniqueness, simplification, formalization, rigidity, case-exclusion, restricted-optimality, method-limit, correction, audit, engineering, verification, documentation]
+          enum: [lower-bound, upper-bound, optimality, uniqueness, simplification, formalization, rigidity, case-exclusion, restricted-optimality, method-limit, project, engineering, verification]
         description: Subjects covered by the item; these labels do not state proof or assurance status.
       result_ids:
         type: array

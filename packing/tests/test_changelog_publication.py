@@ -10,6 +10,7 @@ import pytest
 
 from devtools import (
     check_published_site,
+    news_highlights,
     pages_scope,
     render_changelog,
     render_overview,
@@ -32,7 +33,7 @@ def views() -> tuple[dict, str, str, str, str]:
     )
 
 
-def test_news_contains_the_same_launch_history_as_github(
+def test_news_keeps_public_launches_and_archives_maintenance_in_github(
     views: tuple[dict, str, str, str, str],
 ) -> None:
     document, news, github, _about, _home = views
@@ -41,12 +42,19 @@ def test_news_contains_the_same_launch_history_as_github(
         anchor = render_changelog.entry_anchor(entry["id"])
         assert f'id="{anchor}"' in history
         assert f'id="{anchor}"' in github
+        excluded = "news_exclusion" in entry or entry["significance"]["score"] < 3
+        if excluded:
+            target = render_changelog.archived_news_targets(document)[anchor]
+            assert f'href="{target}" data-news-target' in history
+            assert f'data-news-entry="{entry["id"]}"' not in history
         for number in entry["pull_requests"]:
             target = f"{document['repository']}/pull/{number}"
-            assert target in history
+            if not excluded:
+                assert target in history
             assert target in github
         for artifact in entry.get("artifacts", []):
-            assert artifact["target"] in history
+            if not excluded:
+                assert artifact["target"] in history
             assert artifact["target"] in github
 
 
@@ -97,18 +105,27 @@ def test_news_has_one_card_per_entry_and_home_highlights_three_existing_s5_resul
     views: tuple[dict, str, str, str, str],
 ) -> None:
     document, news, _github, about, home = views
-    ordered = render_changelog.ordered_entries(document)
+    ordered = render_changelog.news_entries(document)
+    assert {entry["significance"]["score"] for entry in ordered} <= {3, 4, 5}
+    assert re.findall(r'<button[^>]*data-news-score="(\d)"', news) == ["3", "4", "5"]
     assert re.findall(r'data-news-entry="([^"]+)"', news) == [e["id"] for e in ordered]
     assert re.findall(r'data-news-day="([^"]+)"', news) == [e["date"] for e in ordered]
     for day in {entry["date"] for entry in ordered}:
         assert news.count(f'id="changelog-date-{day}"') == 1
-    assert re.findall(r'data-news-entry="([^"]+)"', home) == ["T-154", "T-153", "T-060"]
+    selected = news_highlights.highlights(document)
+    assert [entry["result_ids"] for entry in selected] == [["T-154"], ["T-153"], ["T-060"]]
+    assert re.findall(r'data-news-entry="([^"]+)"', home) == [entry["id"] for entry in selected]
+    for entry in selected:
+        anchor = render_changelog.entry_anchor(entry["id"])
+        assert f'href="news.html#{anchor}"' in home
     assert '<a class="site-action" href="news.html">All news' in home
     assert 'id="news" class="site-title">News' in news
     assert 'data-page="news" aria-current="page" href="news.html"' in news
     assert 'href="news.html"' in about
     assert "data-news-entry=" not in about
     assert 'class="site-news-day"' not in about
+    for anchor, target in render_changelog.archived_news_targets(document).items():
+        assert f'id="{anchor}" href="{target}" data-news-target' in about
     for entry in ordered:
         anchor = render_changelog.entry_anchor(entry["id"])
         assert f'id="{anchor}" href="news.html#{anchor}" data-news-target' in about
@@ -129,7 +146,7 @@ def test_news_cards_keep_the_actual_article_and_structured_math_once(
     formula: str, structure: str
 ) -> None:
     document = copy.deepcopy(render_changelog.load())
-    first = render_changelog.ordered_entries(document)[0]
+    first = render_changelog.news_entries(document)[0]
     first["summary"] = f"Verified **bound & label** ${formula}$. Use `<tag>`."
     first["details"] = "Actual article detail with a [proof](https://example.com/proof)."
     rendered = render_changelog.render_news(document, limit=1)
@@ -144,3 +161,21 @@ def test_news_cards_keep_the_actual_article_and_structured_math_once(
     formulas = site_math.formula_sources(rendered)
     assert [item.source for item in formulas].count(formula) == 1
     assert all(item.profile == "sans" for item in formulas)
+
+
+def test_publication_audit_refuses_lost_archives_or_reintroduced_maintenance(
+    views: tuple[dict, str, str, str, str],
+) -> None:
+    document, news, _github, _about, _home = views
+    excluded = [entry for entry in document["entries"] if "news_exclusion" in entry]
+    assert [entry["id"] for entry in excluded] == ["paper-typography-and-title-case"]
+    assert excluded[0]["pull_requests"] == [492]
+    assert "documentation" in excluded[0]["categories"]
+    assert all("documentation" not in entry.get("topics", []) for entry in document["entries"])
+    assert all(passed for passed, _line in check_published_site.changelog_checks(news))
+    archived = render_changelog.archived_news_targets(document)
+    target = next(iter(archived.values()))
+    damaged = news.replace(target, "https://example.com/missing-archive")
+    assert not all(passed for passed, _line in check_published_site.changelog_checks(damaged))
+    damaged = news + f'<article data-news-entry="{excluded[0]["id"]}"></article>'
+    assert not all(passed for passed, _line in check_published_site.changelog_checks(damaged))

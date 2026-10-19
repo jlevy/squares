@@ -56,6 +56,9 @@ ROOT = Path(__file__).resolve().parent.parent
 REPO = ROOT.parent
 SYNOPSIS = REPO / "SYNOPSIS.md"
 README = REPO / "README.md"
+#: A Markdown link's target as `check_links` reads it, fragment included. The
+#: negative-control copier is tested against this pattern, not a copy of it.
+LINK_TARGET = re.compile(r"\[[^\]]*\]\(([^)]+)\)")
 HYPOTHESES = ROOT / "campaign/hypotheses"
 AGENT_SESSIONS = ROOT / "campaign/agent-sessions"
 AGENDAS = ROOT / "campaign/agendas"
@@ -113,7 +116,7 @@ def check_links(text: str, doc: Path = SYNOPSIS) -> list[str]:
     """
     label = doc.name
     problems = []
-    for target in re.findall(r"\[[^\]]*\]\(([^)]+)\)", text):
+    for target in LINK_TARGET.findall(text):
         if target.startswith(("http://", "https://", "mailto:")):
             continue
         path, _, frag = target.partition("#")

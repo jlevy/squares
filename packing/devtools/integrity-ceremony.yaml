@@ -25,6 +25,23 @@ mark: '(?i)(?<![a-z])(?:sha\d*s?|(?:hex)?digests?|blake2[bs]?|md5|checksum|hashe
 # file holds no site is refused, so the list cannot outlive the code. The letters cite
 # the audit's inventory.
 allowlist:
+  - path: packing/devtools/audit_fine_net_receipt.py
+    kind: generated-artifact
+    boundary: >-
+      The retained downloaded candidate bytes are joined to the native census,
+      complete direction log and control input identities. Native census and
+      whole-net control receipts must identify the same generated executable.
+      These two comparisons bind runtime inputs and build products across saved
+      recordings, not Git source. The historical source digest remains reported
+      build metadata; current crate source and Git revisions do not gate acceptance.
+  - path: packing/campaign/issue-intake/upper-bounds-20261016/review/exact_sides.py
+    kind: download
+    boundary: >-
+      The four exact forms of issue 639 (n = 204, 263, 267 and 297) that the
+      evand-exact-cur-2026-10-16 packet pins by size and SHA-256 and keeps outside Git
+      (OR-18), fetched from evand/square-packing at 7d1407a into a scratch directory;
+      each is held to the packet manifest's digest before it is parsed. The 19 retained
+      forms are read from Git and compared with nothing.
   - path: packing/devtools/couzo_refinement_reports.py
     kind: download
     boundary: >-
@@ -301,6 +318,9 @@ allowlist:
   - path: packing/devtools/fine_net_followup.py
     kind: download
     boundary: wand125's fine-net release assets kept outside Git against the size and digest the packet pins, and their sealed inner bundles against the source's own files-sha256.json (#446).
+  - path: packing/devtools/continuous_pose_followup.py
+    kind: download
+    boundary: wand125's continuous-pose release asset kept outside Git against the size and digest the packet pins, its sealed inner bundle against the source's files-sha256.json, check2's kernel inputs regenerated here against the digests its manifests name, and each program's source digest by the rule the source states for it.
   - path: packing/devtools/audit_n11_lean.py
     kind: download
     boundary: 11SquaresFormalized's final audit, downloaded from the source, against the digest the packet's manifest pinned at retention and the uncompressed digest the source's summary.json states.

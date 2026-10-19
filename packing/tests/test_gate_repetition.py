@@ -17,6 +17,7 @@ from pathlib import Path
 
 import pytest
 
+from devtools import measure_gate_repetition
 from devtools.measure_gate_repetition import (
     MeasurementError,
     Trigger,
@@ -31,7 +32,7 @@ from devtools.measure_gate_repetition import (
 )
 from sqpack.campaign import ledger
 from sqpack.campaign.commit_clock import commit_clock
-from sqpack.cli.validate import STEPS
+from sqpack.cli.validate import STEPS, Step
 
 TRIGGER = Trigger(kind="push", when=datetime(2026, 9, 5, tzinfo=UTC), commit="beef")
 #: A short window for the two tests that walk the real graph. `DEFAULT_DAYS` is the
@@ -253,6 +254,23 @@ def test_the_escape_hatch_is_measured_and_not_assumed() -> None:
     tracked, claimed, unclaimed = attribution_reach()
     assert tracked > 0
     assert claimed + unclaimed == tracked
+
+
+def test_attribution_measurement_counts_exact_owners_without_claiming_neighbors(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    news = ("packing/site-changelog.yaml", "packing/site-changelog.schema.yaml")
+    tracked = (*news, "code/check.py", "packing/site-changelog.future.yaml")
+    monkeypatch.setattr(measure_gate_repetition, "_git", lambda *_args: "\0".join(tracked))
+    monkeypatch.setattr(
+        measure_gate_repetition,
+        "STEPS",
+        (
+            Step("native", lambda _c: "", known_inputs=news),
+            Step("conditional", lambda _c: "", touches=("code/*",)),
+        ),
+    )
+    assert attribution_reach() == (4, 3, 1)
 
 
 def test_merge_tree_identity_agrees_with_the_diff() -> None:

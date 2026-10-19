@@ -511,3 +511,321 @@ def test_the_linear_price_takes_the_larger_estimate_and_the_costliest_angle() ->
     assert price["costliest_angle"] == 0
     assert price["total_wall_seconds_at_workers"] == 25.0
     assert price["full_replay_within_limit"] is True
+
+
+def retained_asset(tmp_path: Path) -> tuple[Path, bytes]:
+    """An asset with one member of each kind `retain` distinguishes."""
+    lines = b"".join(b'{"row": %d}\n' % index for index in range(1200))
+    members = {
+        "candidate.json": lines,
+        "check2/receipt.json": dumps({"status": "VERIFIED"}),
+        "check2/run.jsonl.gz": gzip.compress(b'{"r":0}\n', mtime=0),
+        "check2/src/sqverify-proof-net-fe12e036c.tar.gz": tarball({"src/lib.rs": b"//\n"}),
+        f"{BUNDLE}.tar.gz": tarball({f"{BUNDLE}/README.md": b"# sealed\n"}),
+    }
+    data = tarball({f"certificates/{NAME}/{k}": v for k, v in members.items()})
+    path = tmp_path / f"certificates__{NAME}.tar.gz"
+    path.write_bytes(data)
+    return path, data
+
+
+def retain_argv(tmp_path: Path, asset: Path, data: bytes, packet: Path) -> list[str]:
+    return [
+        "retain",
+        *("--asset", str(asset), "--sha256", digest(data), "--bytes", str(len(data))),
+        *("--name", NAME, "--packet", str(packet), "--work", str(tmp_path / "work")),
+        *("--release", "lower-bounds-v1", "--repository", "someone/square-packing"),
+    ]
+
+
+def test_retain_keeps_the_data_members_and_pins_the_verifier_and_the_bundle(
+    tmp_path: Path,
+) -> None:
+    asset, data = retained_asset(tmp_path)
+    packet = tmp_path / "packet"
+    assert followup.main(retain_argv(tmp_path, asset, data, packet)) == 0
+    stored = packet / "release/certificates" / NAME
+    assert sorted(
+        p.relative_to(stored).as_posix() for p in stored.rglob("*") if p.is_file()
+    ) == [
+        "candidate.json.gz",
+        "check2/receipt.json",
+        "check2/run.jsonl.gz",
+    ]
+    record = json.loads((packet / followup.RETAINED_RECORD).read_text())
+    (entry,) = record["assets"]
+    forms = {row["path"].split(f"{NAME}/")[1]: row.get("form") for row in entry["members"]}
+    assert forms == {
+        "candidate.json": "gzip",
+        "check2/receipt.json": "plain",
+        "check2/run.jsonl.gz": "original-gzip",
+        "check2/src/sqverify-proof-net-fe12e036c.tar.gz": None,
+        f"{BUNDLE}.tar.gz": None,
+    }
+    assert all("pinned_only" in row for row in entry["members"] if row.get("form") is None)
+    assert gzip.decompress((stored / "candidate.json.gz").read_bytes()).count(b"\n") == 1200
+    assert followup.check_retained(packet) == []
+    # Retaining the same asset again changes nothing.
+    before = (packet / followup.RETAINED_RECORD).read_bytes()
+    assert followup.main(retain_argv(tmp_path, asset, data, packet)) == 0
+    assert (packet / followup.RETAINED_RECORD).read_bytes() == before
+
+
+def test_check_retained_reports_changed_stray_and_misnamed_members(tmp_path: Path) -> None:
+    asset, data = retained_asset(tmp_path)
+    packet = tmp_path / "packet"
+    assert followup.main(retain_argv(tmp_path, asset, data, packet)) == 0
+    stored = packet / "release/certificates" / NAME
+    (stored / "check2/receipt.json").write_bytes(b"{}\n")
+    (stored / "stray.json").write_bytes(b"{}\n")
+    document = packet / "upstream/certificates" / NAME / "ASSET.json"
+    document.parent.mkdir(parents=True)
+    named = {"asset": asset.name, "size": len(data), "sha256": "0" * 64}
+    document.write_text(json.dumps({"assets": [named]}))
+    problems = followup.check_retained(packet)
+    assert any("check2/receipt.json differs" in problem for problem in problems)
+    assert any("stray.json is not in" in problem for problem in problems)
+    assert any("is not the asset" in problem for problem in problems)
+    assert followup.main(["check-retained", str(packet)]) == 1
+
+
+def test_retain_refuses_an_asset_that_is_not_the_pinned_one(tmp_path: Path) -> None:
+    asset, data = retained_asset(tmp_path)
+    packet = tmp_path / "packet"
+    argv = retain_argv(tmp_path, asset, data, packet)
+    argv[argv.index("--sha256") + 1] = "f" * 64
+    assert followup.main(argv) == 1
+    assert not (packet / followup.RETAINED_RECORD).exists()
+
+
+@pytest.mark.parametrize(
+    "linked", ["release", "acquisition", f"release/certificates/{NAME}/check2"]
+)
+def test_retain_refuses_linked_parents_before_any_member_publication(
+    tmp_path: Path, capsys: pytest.CaptureFixture[str], linked: str
+) -> None:
+    asset, data = retained_asset(tmp_path)
+    packet, outside = tmp_path / "packet", tmp_path / "outside"
+    packet.mkdir()
+    outside.mkdir()
+    (outside / "sentinel").write_bytes(b"outside bytes must survive")
+    if linked == "acquisition":
+        (outside / "release-assets.json").write_text(
+            json.dumps(
+                {
+                    "format": followup.RETAINED_FORMAT,
+                    "repository": "someone/square-packing",
+                    "release": "lower-bounds-v1",
+                    "retained_dir": "release",
+                    "assets": [],
+                }
+            )
+        )
+    parent = packet / linked
+    parent.parent.mkdir(parents=True, exist_ok=True)
+    parent.symlink_to(outside, target_is_directory=True)
+    before = {p.relative_to(outside): p.read_bytes() for p in outside.rglob("*")}
+
+    assert followup.main(retain_argv(tmp_path, asset, data, packet)) == 1
+    assert {p.relative_to(outside): p.read_bytes() for p in outside.rglob("*")} == before
+    assert not [p for p in packet.rglob("*") if p.is_file()]
+    assert parent.is_symlink()
+    output = capsys.readouterr()
+    assert "symlink" in output.err
+    assert "members retained" not in output.out
+
+
+@pytest.mark.parametrize(
+    "linked", ["release", "acquisition", f"release/certificates/{NAME}/check2"]
+)
+def test_check_retained_refuses_linked_parents(tmp_path: Path, linked: str) -> None:
+    asset, data = retained_asset(tmp_path)
+    packet, outside = tmp_path / "packet", tmp_path / "outside"
+    assert followup.main(retain_argv(tmp_path, asset, data, packet)) == 0
+    parent = packet / linked
+    parent.rename(outside)
+    parent.symlink_to(outside, target_is_directory=True)
+    before = {p.relative_to(outside): p.read_bytes() for p in outside.rglob("*") if p.is_file()}
+
+    problems = followup.check_retained(packet)
+    assert any("symlink" in problem for problem in problems), problems
+    assert {
+        p.relative_to(outside): p.read_bytes() for p in outside.rglob("*") if p.is_file()
+    } == before
+
+
+def test_retain_refuses_a_linked_packet_root_before_extraction(tmp_path: Path) -> None:
+    asset, data = retained_asset(tmp_path)
+    packet, outside = tmp_path / "packet", tmp_path / "outside"
+    outside.mkdir()
+    (outside / "sentinel").write_bytes(b"untouched")
+    packet.symlink_to(outside, target_is_directory=True)
+
+    assert followup.main(retain_argv(tmp_path, asset, data, packet)) == 1
+    assert sorted(p.name for p in outside.iterdir()) == ["sentinel"]
+    assert (outside / "sentinel").read_bytes() == b"untouched"
+    assert not (tmp_path / "work").exists()
+
+
+def test_member_publication_rechecks_the_manifest_parent(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    asset, data = retained_asset(tmp_path)
+    packet, outside = tmp_path / "packet", tmp_path / "outside"
+    outside.mkdir()
+    (outside / "sentinel").write_bytes(b"untouched")
+    compress = followup.compress
+
+    def link_manifest_parent(path: Path) -> Path:
+        result = compress(path)
+        (packet / "acquisition").symlink_to(outside, target_is_directory=True)
+        return result
+
+    monkeypatch.setattr(followup, "compress", link_manifest_parent)
+    assert followup.main(retain_argv(tmp_path, asset, data, packet)) == 1
+    assert sorted(p.name for p in outside.iterdir()) == ["sentinel"]
+    assert (outside / "sentinel").read_bytes() == b"untouched"
+    assert not list((packet / "release").rglob("*.json*"))
+    assert not list((packet / "release").rglob(".retain-*"))
+
+
+@pytest.mark.parametrize("collision", ["plain", "matching-plain", "gzip", "both", "receipt"])
+def test_retain_refuses_collisions_before_writing_any_packet_member(
+    tmp_path: Path, capsys: pytest.CaptureFixture[str], collision: str
+) -> None:
+    asset, data = retained_asset(tmp_path)
+    packet = tmp_path / "packet"
+    stored = packet / "release/certificates" / NAME
+    stored.mkdir(parents=True)
+    plain = stored / "candidate.json"
+    packed = stored / "candidate.json.gz"
+    with tarfile.open(asset) as archive:
+        stream = archive.extractfile(f"certificates/{NAME}/candidate.json")
+        assert stream is not None
+        candidate = stream.read()
+    if collision in {"plain", "both"}:
+        plain.write_bytes(b"previous candidate")
+    elif collision == "matching-plain":
+        plain.write_bytes(candidate)
+    if collision in {"gzip", "both"}:
+        packed.write_bytes(
+            gzip.compress(candidate if collision == "both" else b"previous candidate", mtime=0)
+        )
+    if collision == "receipt":
+        receipt = stored / "check2/receipt.json"
+        receipt.parent.mkdir()
+        receipt.write_bytes(b"previous receipt")
+    before = {p.relative_to(packet): p.read_bytes() for p in packet.rglob("*") if p.is_file()}
+
+    assert followup.main(retain_argv(tmp_path, asset, data, packet)) == 1
+    assert {
+        p.relative_to(packet): p.read_bytes() for p in packet.rglob("*") if p.is_file()
+    } == before
+    assert not (packet / followup.RETAINED_RECORD).exists()
+    output = capsys.readouterr()
+    assert "members retained" not in output.out
+    assert (
+        "move it aside" if "plain" in collision or collision == "both" else "other bytes"
+    ) in output.err
+
+
+def test_interrupted_manifest_publication_preserves_the_previous_complete_record(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    asset, data = retained_asset(tmp_path)
+    packet = tmp_path / "packet"
+    assert followup.main(retain_argv(tmp_path, asset, data, packet)) == 0
+    record = packet / followup.RETAINED_RECORD
+    before = record.read_bytes()
+    capsys.readouterr()
+    renamed = asset.with_name("another-asset.tar.gz")
+    asset.rename(renamed)
+    write_text = Path.write_text
+
+    def interrupted(path: Path, text: str, *args: Any, **kwargs: Any) -> int:
+        if path.name.startswith(record.name):
+            write_text(path, '{"assets":', *args, **kwargs)
+            raise OSError("injected interrupted manifest publication")
+        return write_text(path, text, *args, **kwargs)
+
+    with monkeypatch.context() as patch:
+        patch.setattr(Path, "write_text", interrupted)
+        with pytest.raises(OSError, match="injected interrupted manifest"):
+            followup.main(retain_argv(tmp_path, renamed, data, packet))
+    assert record.read_bytes() == before
+    assert len(json.loads(record.read_bytes())["assets"]) == 1
+    assert followup.check_retained(packet) == []
+    assert "members retained" not in capsys.readouterr().out
+    # The failed publication remains retryable without losing the older asset's row.
+    assert followup.main(retain_argv(tmp_path, renamed, data, packet)) == 0
+    assert len(json.loads(record.read_bytes())["assets"]) == 2
+
+
+def test_interrupted_compression_leaves_no_candidate_or_staging_file(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    asset, data = retained_asset(tmp_path)
+    packet = tmp_path / "packet"
+
+    def interrupted(path: Path) -> Path:
+        path.with_name(path.name + ".gz").write_bytes(b"incomplete gzip")
+        raise OSError("injected interrupted compression")
+
+    monkeypatch.setattr(followup, "compress", interrupted)
+    with pytest.raises(OSError, match="injected interrupted compression"):
+        followup.main(retain_argv(tmp_path, asset, data, packet))
+    assert not list((packet / "release").rglob("*.json*"))
+    assert not list((packet / "release").rglob(".retain-*"))
+    assert not (packet / followup.RETAINED_RECORD).exists()
+    assert "members retained" not in capsys.readouterr().out
+
+
+@pytest.mark.parametrize("suffix", [".json", ".json.gz"])
+def test_a_candidate_appearing_during_compression_is_never_replaced(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+    suffix: str,
+) -> None:
+    asset, data = retained_asset(tmp_path)
+    packet = tmp_path / "packet"
+    target = packet / "release/certificates" / NAME / f"candidate{suffix}"
+    compress = followup.compress
+
+    def competing_write(path: Path) -> Path:
+        target.write_bytes(b"another writer's candidate")
+        return compress(path)
+
+    monkeypatch.setattr(followup, "compress", competing_write)
+    assert followup.main(retain_argv(tmp_path, asset, data, packet)) == 1
+    assert target.read_bytes() == b"another writer's candidate"
+    assert not list(target.parent.glob(".retain-*"))
+    assert not (packet / followup.RETAINED_RECORD).exists()
+    output = capsys.readouterr()
+    assert "appeared while retaining" in output.err
+    assert "members retained" not in output.out
+
+
+@pytest.mark.parametrize("kind", ["directory", "symlink", "broken-symlink"])
+def test_retain_refuses_a_nonregular_manifest_before_publishing_members(
+    tmp_path: Path, capsys: pytest.CaptureFixture[str], kind: str
+) -> None:
+    asset, data = retained_asset(tmp_path)
+    packet = tmp_path / "packet"
+    record = packet / followup.RETAINED_RECORD
+    record.parent.mkdir(parents=True)
+    other = tmp_path / "other.json"
+    if kind == "directory":
+        record.mkdir()
+    else:
+        if kind == "symlink":
+            other.write_bytes(b"another record")
+        record.symlink_to(other)
+    assert followup.main(retain_argv(tmp_path, asset, data, packet)) == 1
+    assert not (packet / "release").exists()
+    assert record.is_dir() if kind == "directory" else record.is_symlink()
+    if kind == "symlink":
+        assert other.read_bytes() == b"another record"
+    output = capsys.readouterr()
+    assert "not a regular file; move it aside" in output.err
+    assert "members retained" not in output.out

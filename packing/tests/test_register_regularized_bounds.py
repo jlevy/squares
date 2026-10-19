@@ -127,8 +127,14 @@ def test_each_record_says_whether_its_bound_agrees_with_the_report() -> None:
 def test_a_count_a_later_house_holds_keeps_the_view_as_history() -> None:
     """At n = 264 issue 528's packing (T-158) was adopted on 12 October 2026, below T-155's
     view: the record's verified upper bound is the house's, this layer leaves the record as
-    it is, and the view's dated paragraph and section say it held until that day."""
-    assert [n for n in registered.committed() if registered.readopted(n)] == [264]
+    it is, and the view's dated paragraph and section say it held until that day. At n = 204
+    issue 562's packing (T-162) was adopted so on 15 October 2026, and at n = 29 PR #622's
+    certificate (T-195) on 17 October 2026, the first adoption under the house rule."""
+    assert [n for n in registered.committed() if registered.readopted(n)] == [29, 204, 264]
+    assert registered.readopted_by(204, "T-155")
+    text = (registered.FRONTIER / "n-204.md").read_text(encoding="utf-8")
+    assert registered.apply_case(204, text) == text
+    assert "The verified upper bound was that side exactly until 15 October 2026" in _flat(204)
     assert registered.readopted_by(264, "T-155")
     assert not registered.readopted_by(264, "T-156")
     row = registered.committed()[264]
@@ -322,12 +328,20 @@ def test_a_view_not_paired_with_its_witness_is_not_called_its_arrangement() -> N
     ],
 )
 def test_a_reworded_earlier_sentence_is_refused_rather_than_left_present(
-    n: int, sentence: str, reworded: str
+    n: int, sentence: str, reworded: str, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     """An earlier layer's sentence this layer puts in the past must be found in one tense or
     the other; reworded past both, the record is refused, since a sentence no longer
-    matched would keep calling a superseded ceiling the verified upper bound (review A3)."""
-    text = (registered.FRONTIER / f"n-{n:03d}.md").read_text(encoding="utf-8")
+    matched would keep calling a superseded ceiling the verified upper bound (review A3).
+    Since the house adoption of 17 October 2026 the record at 29 is `adopt_houses`'s, so
+    this layer is held to it as it stood before that pass (`adopt_houses.read_history`)."""
+    if registered.readopted(n):
+        from devtools import adopt_houses  # noqa: PLC0415
+
+        text = adopt_houses.read_history()[n]
+        monkeypatch.setattr(registered, "readopted", lambda _count: False)
+    else:
+        text = (registered.FRONTIER / f"n-{n:03d}.md").read_text(encoding="utf-8")
     changed, count = re.subn(sentence, reworded, text)
     assert count == 1
     with pytest.raises(registered.RegistrationError, match=f"n={n}: neither"):

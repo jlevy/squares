@@ -33,9 +33,10 @@ from mdit_py_plugins.attrs import attrs_block_plugin, attrs_plugin
 from mdit_py_plugins.dollarmath import dollarmath_plugin
 from strif import atomic_output_file
 
-from devtools.overview_data import tex_bounds
+from devtools.migrate_math import classify
+from devtools.overview_data import MATH, breakable_quotients, prose_tex
 from devtools.repo_links import path_kind, repo_url
-from devtools.site_topics import TOPICS, topic_chip
+from devtools.site_topics import NEWS_TOPICS, topic_chip
 from sqpack import release
 from sqpack.yamlio import load_yaml
 
@@ -164,12 +165,17 @@ def _https_authority(parts: SplitResult, target: str) -> None:
 class _RenderedURLs(HTMLParser):
     """Apply the changelog URL policy to safe HTML, including generated MathML links."""
 
-    def __init__(self, destination: Destination) -> None:
+    def __init__(self, destination: Destination, *, allow_links: bool = True) -> None:
         super().__init__(convert_charrefs=False)
         self.destination: Destination = destination
+        self.allow_links = allow_links
         self.parts: list[str] = []
 
     def _start(self, tag: str, attrs: list[tuple[str, str | None]], closing: str) -> None:
+        if not self.allow_links and (
+            tag == "a" or any(name in {"href", "xlink:href"} and value for name, value in attrs)
+        ):
+            raise ValueError("links are not allowed in News headlines")
         serialized = []
         for name, value in attrs:
             safe_value = (
@@ -311,6 +317,69 @@ def _prose(text: str, *, destination: Destination = "github") -> str:
     rendered.close()
     if destination == "github":
         return _inline_references(text, parsed, env).strip()
+    return "".join(rendered.parts).strip()
+
+
+def _inline_math(tex: str) -> str:
+    rendered = _prose(f"${tex}$", destination="site")
+    return rendered.removeprefix("<p>").removesuffix("</p>")
+
+
+def _inline_text(text: str) -> str:
+    parts: list[str] = []
+    last = 0
+    for match in MATH.finditer(text):
+        parts.append(html.escape(text[last : match.start()], quote=False))
+        parts.append(_inline_math(breakable_quotients(prose_tex(match.group(0)))))
+        last = match.end()
+    parts.append(html.escape(text[last:], quote=False))
+    return "".join(parts)
+
+
+def inline_html(text: str, *, allow_links: bool = True) -> str:
+    """Safe inline News Markdown, with authored and legacy register math set by KPress.
+
+    Raw HTML stays visible text. A linked preview headline disables authored links
+    so its enclosing article link never contains another anchor.
+    """
+    parser = _markdown()
+    parser.options["html"] = False
+    env: dict[str, Any] = {}
+    parsed = parser.parseInline(text, env)
+    for token in _walk(parsed):
+        if set(token.attrs) - {"href", "title"}:
+            raise ValueError("Markdown HTML attributes are not allowed in News text")
+        if token.type == "image":
+            raise ValueError("images are not allowed in News text")
+        if token.type == "link_open":
+            if not allow_links:
+                raise ValueError("links are not allowed in News headlines")
+            token.attrSet(
+                "href", serialized_target(str(token.attrGet("href")), destination="site")
+            )
+
+    def render_inline(
+        _renderer: object,
+        tokens: Sequence[Token],
+        index: int,
+        _options: Any,
+        _env: Any,
+    ) -> str:
+        token = tokens[index]
+        if token.type == "math_inline":
+            return _inline_math(token.content.strip())
+        if token.type == "code_inline":
+            classified = classify(token.content)
+            if classified.kind == "math" and classified.latex:
+                return _inline_math(breakable_quotients(classified.latex))
+            return f"<code>{html.escape(token.content, quote=False)}</code>"
+        return _inline_text(token.content)
+
+    for kind in ("text", "math_inline", "code_inline"):
+        parser.add_render_rule(kind, render_inline)
+    rendered = _RenderedURLs("site", allow_links=allow_links)
+    rendered.feed(str(parser.renderer.render(parsed, parser.options, env)))
+    rendered.close()
     return "".join(rendered.parts).strip()
 
 
@@ -467,6 +536,7 @@ def validate(document: Document, *, schema: Document | None = None) -> None:
         _day(entry["date"], identifier)
         if not entry["title"].strip() or "\n" in entry["title"]:
             raise ValueError(f"{identifier}: blank or multiline title")
+        inline_html(entry["title"], allow_links=False)
         if "significance" in entry:
             rationale = entry_significance(entry)["rationale"]
             if not rationale.strip() or re.search(r"[\r\n<>`*_\[\]$]", rationale):
@@ -493,8 +563,6 @@ def validate(document: Document, *, schema: Document | None = None) -> None:
             )
         merge_dates: list[str] = []
         for number in entry["pull_requests"]:
-            if number in represented:
-                raise ValueError(f"PR #{number}: duplicate membership across entries")
             represented.add(number)
             if number not in deliveries:
                 raise ValueError(f"PR #{number}: no retained merged main delivery")
@@ -553,8 +621,8 @@ def validate(document: Document, *, schema: Document | None = None) -> None:
         omitted.add(number)
     if coverage != set(deliveries) or coverage != represented | omitted:
         raise ValueError(
-            "coverage: every retained main delivery must occur exactly once "
-            "in entries or omissions"
+            "coverage: every retained main delivery must appear in one or more entries "
+            "or exactly one omission"
         )
 
 
@@ -686,7 +754,13 @@ def render_markdown(
         anchor = entry_anchor(entry["id"])
         if destination == "site":
             out.extend(
-                [f'<h{level} id="{anchor}">{html.escape(entry["title"])}</h{level}>', ""]
+                [
+                    (
+                        f'<h{level} id="{anchor}">'
+                        f"{inline_html(entry['title'], allow_links=False)}</h{level}>"
+                    ),
+                    "",
+                ]
             )
         else:
             out.extend(
@@ -709,7 +783,38 @@ def ordered_entries(document: Document) -> list[Document]:
     )
 
 
-NEWS_TOPICS = TOPICS
+def news_entries(document: Document) -> list[Document]:
+    """S3 to S5 public announcements; lower scores remain in the GitHub history."""
+    return [
+        entry
+        for entry in ordered_entries(document)
+        if "news_exclusion" not in entry and entry_significance(entry)["score"] >= 3
+    ]
+
+
+def archived_news_targets(document: Document) -> dict[str, str]:
+    """Retired article and day bookmarks still reach their retained changelog entries."""
+    public_ids = {entry["id"] for entry in news_entries(document)}
+    excluded = [entry for entry in document["entries"] if entry["id"] not in public_ids]
+    anchors = [entry_anchor(entry["id"]) for entry in excluded]
+    public_days = {entry["date"] for entry in news_entries(document)}
+    anchors.extend(
+        f"changelog-date-{day}"
+        for day in sorted({entry["date"] for entry in excluded} - public_days)
+    )
+    return {
+        anchor: f"{document['repository']}/blob/main/CHANGELOG.md#{anchor}"
+        for anchor in anchors
+    }
+
+
+def _news_forward_anchors(targets: dict[str, str]) -> str:
+    return "".join(
+        f'<a class="site-news-legacy-anchor" id="{html.escape(anchor, quote=True)}" '
+        f'href="{html.escape(target, quote=True)}" data-news-target '
+        'aria-hidden="true" tabindex="-1"></a>'
+        for anchor, target in targets.items()
+    )
 
 
 def news_topics(topics: Sequence[str]) -> str:
@@ -738,15 +843,16 @@ def news_rating(rating: Significance) -> str:
 def news_article_header(
     title_html: str, day_text: str, topics: Sequence[str], rating: Significance
 ) -> str:
-    """The shared News head: title, publication date, then topics and the rating."""
-    day = date.fromisoformat(day_text)
-    label = f"{day:%B} {day.day}, {day.year}"
-    return (
-        f'<header class="site-news-header"><h3>{title_html}</h3>'
-        '<p class="site-news-date publication-date">'
-        f'<time datetime="{day_text}">{label}</time></p>'
-        f'<div class="site-news-metadata">{news_topics(topics)}{news_rating(rating)}</div>'
-        "</header>"
+    """The reading-card heading, followed by News topics and the importance tooltip."""
+    from devtools.overview_sections import article_header  # noqa: PLC0415
+
+    return article_header(
+        title_html,
+        date.fromisoformat(day_text),
+        metadata_html=(
+            f'<div class="site-news-metadata">{news_topics(topics)}{news_rating(rating)}</div>'
+        ),
+        extra_class="site-news-header",
     )
 
 
@@ -755,10 +861,12 @@ def news_filters(topics_present: set[str] | None = None) -> str:
     scores = "".join(
         f'<button type="button" data-news-score="{score}" '
         f'aria-pressed="{str(score >= 4).lower()}">S{score}</button>'
-        for score in range(1, 6)
+        for score in range(3, 6)
     )
     topics = "".join(
-        f'<button type="button" data-news-topic="{topic}" aria-pressed="true">{label}</button>'
+        f'<button type="button" class="site-chip" data-news-topic="{topic}" '
+        f'aria-pressed="true"><span data-news-topic-label>{label}</span>'
+        '<span class="site-cell-quiet" data-news-tally> (0)</span></button>'
         for topic, label in NEWS_TOPICS.items()
         if topics_present is None or topic in topics_present
     )
@@ -774,7 +882,9 @@ def news_filters(topics_present: set[str] | None = None) -> str:
         '<div class="site-tabs site-chooser-small" role="group" '
         f'aria-labelledby="news-topics-label">{topics}'
         '<button type="button" data-news-all="topics" '
-        'aria-label="All topics">All</button></div></fieldset>'
+        'aria-label="All topics (0)">All'
+        '<span class="site-cell-quiet" data-news-tally> (0)</span>'
+        "</button></div></fieldset>"
         '<div class="site-table-tools">'
         '<div class="site-tabs site-chooser-small">'
         '<button type="button" data-news-reset>Reset filters</button></div>'
@@ -802,12 +912,18 @@ def news_card(anchor: str, day_text: str, body: str) -> str:
     )
 
 
-def render_news(document: Document, *, limit: int | None = None) -> str:
-    """One complete article per card, optionally limited to the first few items."""
+def render_news(
+    document: Document, *, limit: int | None = None, entry_ids: set[str] | None = None
+) -> str:
+    """Complete canonical cards, optionally selected by ID and limited for a preview."""
     validate(document)
     if limit is not None and limit < 1:
         raise ValueError("a News preview needs at least one item")
-    entries = ordered_entries(document)
+    entries = [
+        entry
+        for entry in news_entries(document)
+        if entry_ids is None or entry["id"] in entry_ids
+    ]
     if limit is not None:
         entries = entries[:limit]
     out = [
@@ -819,7 +935,7 @@ def render_news(document: Document, *, limit: int | None = None) -> str:
     seen_dates: set[str] = set()
     for entry in entries:
         anchor = entry_anchor(entry["id"])
-        title = tex_bounds(entry["title"])
+        title = inline_html(entry["title"], allow_links=False)
         if limit is not None:
             title = f'<a href="news.html#{anchor}">{title}</a>'
         article = []
@@ -852,6 +968,16 @@ def render_news(document: Document, *, limit: int | None = None) -> str:
             )
         out.append(card)
     out.append("</div>")
+    if limit is None and (archived := archived_news_targets(document)):
+        out.append(_news_forward_anchors(archived))
+        target = html.escape(f"{document['repository']}/blob/main/CHANGELOG.md", quote=True)
+        from devtools.overview_sections import arrow_icon  # noqa: PLC0415
+
+        out.append(
+            f'<p class="site-action-row"><a class="site-action" href="{target}" '
+            'aria-label="Full changelog on GitHub">Full changelog '
+            f"{arrow_icon('external')}</a></p>"
+        )
     return "\n".join(out)
 
 
@@ -861,11 +987,9 @@ def legacy_news_anchors(document: Document) -> str:
     anchors.extend(
         f"changelog-date-{day}" for day in sorted({e["date"] for e in document["entries"]})
     )
-    return "".join(
-        f'<a class="site-news-legacy-anchor" id="{anchor}" '
-        f'href="news.html#{anchor}" data-news-target aria-hidden="true" tabindex="-1"></a>'
-        for anchor in anchors
-    )
+    targets = {anchor: f"news.html#{anchor}" for anchor in anchors}
+    targets.update(archived_news_targets(document))
+    return _news_forward_anchors(targets)
 
 
 def render(document: Document) -> str:

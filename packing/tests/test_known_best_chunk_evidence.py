@@ -28,20 +28,19 @@ def test_known_best_chunk_evidence_profile_replays_byte_for_byte() -> None:
     assert retained == expected
     assert RENDERING.read_text(encoding="utf-8") == rendering
     profile = retained["profile"]
-    # Re-derived by `--update` after the house adoption of 11 October 2026 (think-fvz4),
-    # which moved n = 70 to T-146 and n = 84 and 86 to T-130: 24 fewer structured squares
-    # (n = 86 structures 50 where Xu's packing structured 84), and the sensitivity sweep
-    # now moves 86 rather than 70 and 84, with no within-budget flip left.
+    # Re-derived after the 17 October adoption: T-174's three calibration witnesses
+    # add 48 structured squares, and 86 no longer changes under the sensitivity sweep.
+    # T-195 moves n = 29 from the catalogue's stratum to the packets'.
     assert profile["aggregate"] == {
         "case_count": 36,
-        "contact_component_count": 164,
+        "contact_component_count": 163,
         "coverage_threshold_cases": {
             "at_least_50_percent": 35,
-            "at_least_75_percent": 32,
-            "at_least_90_percent": 25,
+            "at_least_75_percent": 33,
+            "at_least_90_percent": 27,
         },
         "fully_structured_cases": 9,
-        "internal_slide_dof": 861,
+        "internal_slide_dof": 867,
         "narrow_partition_status_counts": {
             "established": 3,
             "not-established": 24,
@@ -49,38 +48,38 @@ def test_known_best_chunk_evidence_profile_replays_byte_for_byte() -> None:
             "outside-registered-budget": 2,
         },
         "sensitivity_comparison": {
-            "changed_case_count": 4,
-            "changed_ns": [68, 71, 86, 88],
-            "primary_structured_square_count": 1731,
-            "sensitivity_structured_square_count": 1764,
+            "changed_case_count": 3,
+            "changed_ns": [68, 71, 88],
+            "primary_structured_square_count": 1779,
+            "sensitivity_structured_square_count": 1784,
             "within_budget_flip_ns": [],
         },
         "source_strata": [
             {
-                "case_count": 30,
+                "case_count": 29,
                 "fully_structured_cases": 8,
                 "sensitivity_changed_ns": [71],
                 "source_kind": "kingbird-derived-facts",
-                "square_count": 1413,
-                "structured_fraction": "0.96178343949",
-                "structured_square_count": 1359,
-                "within_six_components_and_three_free_cases": 23,
+                "square_count": 1384,
+                "structured_fraction": "0.963150289017",
+                "structured_square_count": 1333,
+                "within_six_components_and_three_free_cases": 22,
             },
             {
-                "case_count": 6,
+                "case_count": 7,
                 "fully_structured_cases": 1,
-                "sensitivity_changed_ns": [68, 86, 88],
+                "sensitivity_changed_ns": [68, 88],
                 "source_kind": "packet-derived-facts",
-                "square_count": 447,
-                "structured_fraction": "0.832214765101",
-                "structured_square_count": 372,
-                "within_six_components_and_three_free_cases": 2,
+                "square_count": 476,
+                "structured_fraction": "0.936974789916",
+                "structured_square_count": 446,
+                "within_six_components_and_three_free_cases": 5,
             },
         ],
         "square_count": 1860,
-        "structured_fraction": "0.93064516129",
-        "structured_square_count": 1731,
-        "within_six_components_and_three_free_cases": 25,
+        "structured_fraction": "0.956451612903",
+        "structured_square_count": 1779,
+        "within_six_components_and_three_free_cases": 27,
     }
     assert "DESCRIPTIVE · NO VERDICT" in rendering
     assert "Connectedness is not rigidity" in rendering
@@ -100,7 +99,7 @@ def test_known_best_chunk_evidence_profile_preserves_outliers_and_sensitivity() 
     assert by_n[5]["primary"]["contact_component_count"] == 0
     assert by_n[28]["primary"]["structured_square_count"] == 28
     assert by_n[89]["primary"]["largest_component_size"] == 49
-    assert by_n[68]["sensitivity_delta"]["structured_square_count"] == 5
+    assert by_n[68]["sensitivity_delta"]["structured_square_count"] == 3
     # n = 69's six-decimal UnitSquare rendering moved ten squares between the two contact
     # tolerances; the catalogue packing that replaced it on 2026-10-05 (T-088) moves none.
     assert by_n[69]["sensitivity_delta"] == {

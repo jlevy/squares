@@ -95,13 +95,15 @@ policy:
   # Completed-run cost findings on hosted pull requests remain measured and annotated,
   # regardless of their ratio to the cost ceiling. A finished wall does not diagnose a
   # hang; the actual subprocess deadlines and the per-test guard do. Main, scheduled and
-  # full checkpoints (even in a PR job) and explicit --enforce-budget runs retain cost
-  # enforcement. This exception must have a
+  # full checkpoints (even in a PR job) retain tier-wall enforcement. The separate
+  # per_test_scope extends only CALL reporting; explicit --enforce-budget is strict. This exception must have a
   # live tracking bead and reason, checked by devtools.check_gate_budgets.
   pull_request_ceiling:
     enforcement: advisory
     tracking_bead: think-ht59
     per_test_hang_seconds: 45.0
+    # CALL cost alone is advisory on every hosted event; tier walls remain PR-only.
+    per_test_scope: hosted
     advisory_reason: >-
       Owner decision 2026-10-10 under think-ht59: of 36 red pushes reviewed on 2026-10-05,
       28 failed only on a wall verdict with every test green. Hosted runner draws vary
@@ -110,7 +112,15 @@ policy:
       the unchanged 165s cost ceiling misclassified it as a hang. Completed-run PR cost
       is advisory until think-ht59 establishes attributable, controlled measurements;
       functional failures, actual command deadlines, explicit timeout caps and the 45s
-      per-test guard remain enforced. No cost ceiling or startup assertion is raised.
+      per-test guard remain enforced. On 2026-10-15 run 38763716551 at 43ee60f6
+      completed every quick assertion but failed 11 calls at 12.39–27.72s. Against
+      run 38756833833, 590 matched successful nodes previously taking 1–3s had median
+      inclusive duration ratio 1.636; these are setup/call/teardown totals, not CALL
+      attribution. Extend only CALL advisory to hosted main/dispatch/schedule under
+      think-ht59. Keep 12s classification output, 45s hard CALL backstop, strict local
+      defaults and explicit --enforce-budget at 12s. Whole-job/full/workflow ceilings
+      and all coverage stay unchanged. This revises noisy cost enforcement; it saves
+      no scientific execution and makes no three-minute claim.
 
 # One entry per tier `packing-validate` can select as a whole. A tier with no entry here
 # fails `devtools.check_gate_budgets`, so a new tier cannot arrive without a ceiling.
@@ -2527,19 +2537,22 @@ ci_gates:
   aggregate: post-merge-required
   selected_by: >-
     A push to `main`, the daily schedule or a `workflow_dispatch`. Pull requests keep
-    their nine-job fast surface and leave this aggregate skipped.
+    their ten-job fast surface and leave this aggregate skipped.
   reference: {runner: ubuntu-latest, cpus: 4}
   drift_ratio: 1.25
   enforcement: reporting
   tracking_bead: think-0atx
   reporting_reason: >-
-    The post-merge fanout has no hosted reading in its current ten-worker shape. Report
-    every job and the critical-path wall until think-0atx replaces the derived ceilings
-    with observations from complete main or scheduled runs.
+    The current twelve-worker post-merge shape has no hosted reading. Run 38744311408
+    measured the predecessor integration command at 2301.62s, including 1177.37s across
+    the four quick Steps now owned by integration-suites. Report every job and the
+    critical-path wall until think-0atx replaces derived estimates with complete runs.
   argument: >-
     The complete integration checkpoint after a merge and on the daily backstop. Its
-    aggregate requires the integration worker plus nine deferred workers; pull requests
-    continue to use packing-required and are outside this gate.
+    aggregate requires the remaining integration worker, the serial quick-suite worker
+    and ten deferred workers. The split adds one checkout, locked environment, browser
+    toolchain and artifact cycle per non-PR run; it does not reduce test work. Pull
+    requests keep packing-required and their existing commands and tier ceilings.
   wall:
     measured_seconds: null
     measured_on: null
@@ -2548,9 +2561,11 @@ ci_gates:
     pending_measurement: think-0atx
     ceiling_seconds: 3430.0
     argument: >-
-      Derived reporting estimate from the predecessor complete-checkpoint wall and the
-      deep-gate runner spread. No hosted run has measured the new post-merge fanout; the
-      first complete run must replace this estimate with its critical-path observation.
+      Existing derived reporting estimate from the predecessor complete-checkpoint wall
+      and deep-gate runner spread, unchanged by the quick-suite relocation. The first
+      complete twelve-worker run must replace this estimate with its critical-path
+      observation, including the extra setup and queue cost; the local full tier keeps
+      its separate 3600s ceiling.
   jobs:
   - id: validate
     measured_seconds: null
@@ -2560,9 +2575,26 @@ ci_gates:
     pending_measurement: think-0atx
     ceiling_seconds: 2400.0
     argument: >-
-      Derived reporting estimate from the predecessor integration worker's 24m19s wall
-      on run 34025346801, setup cost and hosted-runner variance. The current narrowed
-      integration worker has not been observed in this topology.
+      Existing derived reporting estimate from the predecessor integration worker's
+      24m19s wall on run 34025346801, setup and runner variance. Retained as the four
+      quick Steps move to integration-suites; no observation yet measures the remaining
+      integration worker in this topology.
+  - id: integration-suites
+    measured_seconds: null
+    measured_on: null
+    measured_where: null
+    spread: null
+    pending_measurement: think-0atx
+    ceiling_seconds: 1390.0
+    argument: >-
+      Derived provisional whole-job reporting estimate: the unchanged suite A/B/C/D
+      ceilings sum to 335 + 360 + 360 + 335 = 1390s. This is not a job measurement or
+      a deadline increase. The four existing Steps retain --jobs 1 --inner-jobs 2,
+      four xdist workers per command and the 900s child deadline. Hosted CALL cost
+      reports at 12s and fails at 45s; explicit --enforce-budget restores strict 12s.
+      --only produces no named-tier cost verdict. Count the added checkout, uv/npm,
+      Chromium, collection and artifact costs inside this estimate; compare the
+      complete collected/executed roster and skip reasons against run 38744311408.
   - id: deferred-threshold-1440
     measured_seconds: null
     measured_on: null

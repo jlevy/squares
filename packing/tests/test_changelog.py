@@ -14,7 +14,12 @@ import pytest
 import yaml
 from kpress.format.markdown import parse_markdown
 
-from devtools import import_changelog, render_changelog, render_overview
+from devtools import (
+    import_changelog,
+    render_changelog,
+    render_overview,
+    site_math,
+)
 from devtools.repo_links import repo_url
 
 
@@ -98,10 +103,86 @@ def test_news_title_math_uses_the_escaped_register_headline_boundary() -> None:
     title = "Initial Review of proofs for n = 17 <script>forbidden</script>"
     data["entries"][0]["title"] = title
     rendered = render_changelog.render_news(data)
-    assert f"<h3>{render_changelog.tex_bounds(title)}</h3>" in rendered
-    assert "<math" in rendered
+    article = rendered.split('data-news-entry="admission">', 1)[1].split("</article>", 1)[0]
+    header = article.split("<h3>", 1)[1].split("</h3>", 1)[0]
+    assert [formula.source for formula in site_math.formula_sources(header)] == ["n = 17"]
+    assert "<math" in header
+    assert "<mi>n</mi>" in header
+    assert "<mn>17</mn>" in header
+    assert "&lt;script&gt;forbidden&lt;/script&gt;" in header
+    assert "<script>" not in header
+    assert "$" not in header
+
+
+def test_authored_headline_markdown_and_math_survive_archive_and_preview() -> None:
+    data = document()
+    entry = render_changelog.ordered_entries(data)[0]
+    entry["title"] = r"**A bound** for $n = 17$: $s(n) \ge \sqrt{n}$ and `T-154`"
+    anchor = render_changelog.entry_anchor(entry["id"])
+    for limit in (None, 1):
+        rendered = render_changelog.render_news(data, limit=limit)
+        header = rendered.split("<h3>", 1)[1].split("</h3>", 1)[0]
+        assert "<strong>A bound</strong>" in header
+        assert "<code>T-154</code>" in header
+        assert "<msqrt>" in header
+        assert "$" not in header
+        assert [formula.source for formula in site_math.formula_sources(header)] == [
+            "n = 17",
+            r"s(n) \ge \sqrt{n}",
+        ]
+        if limit is not None:
+            assert header.startswith(f'<a href="news.html#{anchor}">')
+            assert header.count("<a ") == 1
+    site = render_changelog.render_markdown(data, destination="site")
+    assert f'<h4 id="{anchor}"><strong>A bound</strong>' in site
+    assert "<msqrt>" in site
+
+
+def test_inline_markdown_keeps_safe_links_and_escaped_literals_distinct() -> None:
+    rendered = render_changelog.inline_html(
+        r"*Reviewed* [policy](README.md), `T-154`, \[literal](https://example.com), "
+        r"<script>forbidden</script>; $N \ne n$ and n = 17."
+    )
+    assert "<em>Reviewed</em>" in rendered
+    assert f'<a href="{repo_url("README.md")}">policy</a>' in rendered
+    assert "<code>T-154</code>" in rendered
+    assert "[literal](https://example.com)" in rendered
     assert "&lt;script&gt;forbidden&lt;/script&gt;" in rendered
     assert "<script>" not in rendered
+    assert rendered.count("<a ") == 1
+    assert [formula.source for formula in site_math.formula_sources(rendered)] == [
+        r"N \ne n",
+        "n = 17",
+    ]
+    for payload in (
+        "[bad](javascript:alert%281%29)",
+        r"$\href{javascript:alert(1)}{X}$",
+        '[text](https://example.com){onclick="forbidden"}',
+        "![image](https://example.com/image.png)",
+    ):
+        with pytest.raises(ValueError, match=r"unsafe|attributes|images"):
+            render_changelog.inline_html(payload)
+    for linked in (
+        "[source](https://example.com/proof)",
+        r"$\href{https://example.com/proof}{X}$",
+    ):
+        with pytest.raises(ValueError, match="links are not allowed"):
+            render_changelog.inline_html(linked, allow_links=False)
+
+    names = (
+        '[John Bidwell](<https://example.org/John Bidwell> "John Bidwell"); '
+        r"`John Bidwell`; $\text{John Bidwell}$; John Bidwell."
+    )
+    rendered_names = render_changelog.inline_html(names)
+    assert (
+        '<a href="https://example.org/John%20Bidwell" title="John Bidwell">John Bidwell</a>'
+        in rendered_names
+    )
+    assert "<code>John Bidwell</code>" in rendered_names
+    assert [formula.source for formula in site_math.formula_sources(rendered_names)] == [
+        r"\text{John Bidwell}"
+    ]
+    assert rendered_names.endswith("; John Bidwell.")
 
 
 def test_shared_renderer_orders_links_math_and_anchors() -> None:
@@ -127,6 +208,70 @@ def test_shared_renderer_orders_links_math_and_anchors() -> None:
         in site
     )
     assert "Regularization &amp; tooling" in github
+
+
+def test_one_delivery_can_support_distinct_articles_and_complete_audit() -> None:
+    data = document()
+    previous = copy.deepcopy(data)
+    second = copy.deepcopy(data["entries"][0])
+    second.update(id="second-admission", title="Another result", summary="A distinct result.")
+    data["entries"].append(second)
+    render_changelog.validate(data)
+    render_changelog.validate_frozen(data, previous)
+
+    news = render_changelog.render_news(data)
+    for identifier in ("admission", "second-admission"):
+        assert news.count(f'data-news-entry="{identifier}"') == 1
+    audit = import_changelog.coverage_audit(data)
+    assert audit.count("| [#553](") == 1
+    assert "| admission, second-admission |" in audit
+
+    delivery = data["deliveries"][0]
+    row = {
+        "number": delivery["number"],
+        "title": delivery["title"],
+        "state": "MERGED",
+        "mergedAt": delivery["merged_at"],
+        "baseRefName": delivery["base_ref"],
+        "mergeCommit": {"oid": delivery["merge_commit"]},
+    }
+    candidate = import_changelog.draft([row], data)
+    for field in ("entries", "deliveries", "coverage"):
+        assert candidate[field] == data[field]
+    remaining = copy.deepcopy(data)
+    remaining["entries"].pop()
+    render_changelog.validate(remaining)
+    with pytest.raises(ValueError, match="frozen entry second-admission"):
+        render_changelog.validate_frozen(remaining, data)
+
+
+def test_shared_delivery_keeps_identity_date_stack_and_coverage_boundaries() -> None:
+    mutations = [
+        (
+            lambda d: d["deliveries"].append(copy.deepcopy(d["deliveries"][0])),
+            "duplicate retained",
+        ),
+        (lambda d: d["entries"][-1].update(id="admission"), "duplicate entry"),
+        (lambda d: d["entries"][-1].update(pull_requests=[553, 553]), "non-unique"),
+        (lambda d: d["entries"][-1].update(pull_requests=[999]), "no retained"),
+        (lambda d: d["entries"][-1].update(date="2026-10-11"), "latest merge date"),
+        (lambda d: d["entries"][-1].update(stack_id=498), "stack disagrees"),
+        (lambda d: d["coverage"]["pull_requests"].pop(), "coverage"),
+        (
+            lambda d: d["coverage"]["omissions"].append(
+                {"pull_request": 553, "reason": "Already announced"}
+            ),
+            "coverage",
+        ),
+    ]
+    for mutate, message in mutations:
+        data = document()
+        second = copy.deepcopy(data["entries"][0])
+        second["id"] = "second-admission"
+        data["entries"].append(second)
+        mutate(data)
+        with pytest.raises(ValueError, match=message):
+            render_changelog.validate(data)
 
 
 def test_semantic_negative_boundaries() -> None:
@@ -203,7 +348,7 @@ def test_math_generated_markup_and_urls_are_rejected_through_full_news(
         r"$\href{mailto:person@example.com}{X}$",
         r'$\text{<img src="https://example.com/a.png" onerror="forbidden">}$',
     ]
-    for field in ("summary", "details"):
+    for field in ("title", "summary", "details"):
         for payload in payloads:
             data = document()
             data["entries"][0][field] = payload
@@ -696,3 +841,194 @@ def test_imported_result_citations_do_not_assign_importance() -> None:
     row["significance"] = {"score": 2, "rationale": "A routine policy clarification."}
     candidate = import_changelog.draft([row], document())
     assert candidate["entries"][-1]["significance"] == row["significance"]
+
+
+def test_pr_label_import_keeps_editorial_rationale_and_project_topic(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    row = {
+        "number": 700,
+        "title": "Project capability mentioning T-060",
+        "body": "See T-060 for background.",
+        "state": "MERGED",
+        "mergedAt": "2026-10-15T00:01:00Z",
+        "baseRefName": "main",
+        "mergeCommit": {"oid": "b" * 40},
+        "labels": [{"name": "S3"}, {"name": "project"}],
+    }
+    calls = []
+
+    def github(args, **_kwargs):
+        calls.append(args)
+        return subprocess.CompletedProcess(args, 0, stdout=json.dumps(row))
+
+    monkeypatch.setattr(import_changelog.subprocess, "run", github)
+    monkeypatch.setattr(import_changelog, "verify_main_delivery", lambda *_args: None)
+    output = tmp_path / "candidate.yaml"
+    args = [
+        "--pr",
+        "700",
+        "--baseline",
+        str(tmp_path / "absent.yaml"),
+        "--output",
+        str(output),
+    ]
+    assert import_changelog.main(args) == 1
+    assert not output.exists()
+    rationale = "A new focused public project capability."
+    assert (
+        import_changelog.main(
+            [*args, "--significance", "4", "--significance-rationale", rationale]
+        )
+        == 1
+    )
+    assert not output.exists()
+    assert import_changelog.main([*args, "--significance-rationale", rationale]) == 0
+    assert "labels" in calls[-1][-1].split(",")
+    data = render_changelog.load(output)
+    entry = data["entries"][-1]
+    assert entry["significance"] == {"score": 3, "rationale": rationale}
+    assert entry["topics"] == ["project"]
+    assert 'data-news-topic="project">Project</span>' in render_changelog.render_news(data)
+    row["labels"] = ["project", "S2"]
+    row["significance"] = {"rationale": rationale}
+    data = import_changelog.draft([row])
+    assert data["entries"][0]["significance"]["score"] == 2
+    assert 'id="changelog-entry-pr-700"' in render_changelog.render_markdown(data)
+    assert 'data-news-entry="pr-700"' not in render_changelog.render_news(data)
+
+
+def test_pr_significance_labels_reject_ambiguity_and_metadata_score_conflicts() -> None:
+    row = {
+        "number": 700,
+        "title": "New project work",
+        "state": "MERGED",
+        "mergedAt": "2026-10-15T00:01:00Z",
+        "baseRefName": "main",
+        "mergeCommit": {"oid": "b" * 40},
+        "significance": {"score": 3, "rationale": "A focused public improvement."},
+    }
+    for labels in (["S3", "S4"], [{"name": "S3"}, {"name": "S4"}], ["S3", "S3"]):
+        with pytest.raises(ValueError, match="exactly one"):
+            import_changelog.draft([{**row, "labels": labels}])
+    with pytest.raises(ValueError, match="conflict"):
+        import_changelog.draft([{**row, "labels": ["S4"]}])
+    for score in (True, 0, 6, "3"):
+        with pytest.raises(ValueError, match="score"):
+            import_changelog.draft(
+                [{**row, "labels": ["S3"], "significance": {"score": score}}]
+            )
+    retained = import_changelog.draft([row])
+    assert retained["entries"][0]["significance"] == row["significance"]
+    for score in range(1, 6):
+        labeled = {
+            **row,
+            "labels": [f"S{score}"],
+            "significance": {"rationale": row["significance"]["rationale"]},
+        }
+        entry = import_changelog.draft([labeled])["entries"][0]
+        assert entry["significance"]["score"] == score
+
+
+def test_retained_pr_reimport_preserves_entries_and_omissions_without_new_ratings() -> None:
+    for omitted in (False, True):
+        baseline = document()
+        if omitted:
+            baseline["entries"].pop()
+            baseline["coverage"]["omissions"] = [
+                {"pull_request": 549, "reason": "Administrative closeout"}
+            ]
+        delivery = baseline["deliveries"][-1]
+        row = {
+            "number": delivery["number"],
+            "title": delivery["title"],
+            "state": "MERGED",
+            "mergedAt": delivery["merged_at"],
+            "baseRefName": delivery["base_ref"],
+            "mergeCommit": {"oid": delivery["merge_commit"]},
+        }
+        for labels in ([], ["S4", "project"]):
+            candidate = import_changelog.draft([{**row, "labels": labels}], baseline)
+            for field in ("entries", "deliveries", "coverage"):
+                assert candidate[field] == baseline[field]
+        with pytest.raises(ValueError, match="exactly one"):
+            import_changelog.draft([{**row, "labels": ["S3", "S4"]}], baseline)
+
+
+def test_score_like_labels_fail_for_new_and_retained_prs() -> None:
+    row = {
+        "number": 700,
+        "title": "A focused public improvement",
+        "state": "MERGED",
+        "mergedAt": "2026-10-15T00:01:00Z",
+        "baseRefName": "main",
+        "mergeCommit": {"oid": "b" * 40},
+        "significance": {"score": 3, "rationale": "A focused public improvement."},
+    }
+    retained = import_changelog.draft([row])
+    for name in ("S0", "S6", "S10", "S03", "s3", " S3 ", "S 3", "S+3", "S-3", "S3.0"):
+        for labels in (
+            [name],
+            ["S3", name],
+            [{"name": name}],
+            [{"name": "S3"}, {"name": name}],
+        ):
+            for baseline in (None, retained):
+                with pytest.raises(ValueError, match="invalid significance label"):
+                    import_changelog.draft([{**row, "labels": labels}], baseline)
+    candidate = import_changelog.draft([{**row, "labels": ["security", "project"]}])
+    assert candidate["entries"][0]["significance"] == row["significance"]
+    assert candidate["entries"][0]["topics"] == ["project"]
+
+
+def test_news_exclusion_keeps_history_and_fills_the_preview_from_eligible_entries() -> None:
+    data = document()
+    previous = copy.deepcopy(data)
+    excluded = data["entries"][-1]
+    excluded["news_exclusion"] = "Routine typography maintenance."
+    excluded["categories"] = ["documentation"]
+    render_changelog.validate(data)
+    render_changelog.validate_frozen(data, previous)
+    assert data["coverage"] == previous["coverage"]
+    assert data["deliveries"] == previous["deliveries"]
+    github = render_changelog.render_markdown(data)
+    anchor = render_changelog.entry_anchor(excluded["id"])
+    assert f'id="{anchor}"' in github
+    assert f"{data['repository']}/pull/549" in github
+    news = render_changelog.render_news(data)
+    assert 'data-news-entry="later-delivery"' not in news
+    assert 'data-news-entry="foundations"' in news
+    assert 'data-news-entry="admission"' in news
+    archive = f"{data['repository']}/blob/main/CHANGELOG.md#{anchor}"
+    assert f'id="{anchor}" href="{archive}" data-news-target' in news
+    day = "changelog-date-2026-10-14"
+    assert f'id="{day}" href="{data["repository"]}/blob/main/CHANGELOG.md#{day}"' in news
+    assert '<p class="site-action-row"><a class="site-action"' in news
+    assert f'href="{data["repository"]}/blob/main/CHANGELOG.md"' in news
+    assert 'aria-label="Full changelog on GitHub">Full changelog' in news
+    assert 'data-arrow="external"' in news
+    about = render_changelog.legacy_news_anchors(data)
+    assert f'id="{anchor}" href="{archive}" data-news-target' in about
+    preview = render_changelog.render_news(data, limit=1)
+    assert re.findall(r'data-news-entry="([^"]+)"', preview) == ["foundations"]
+    assert anchor not in preview
+
+
+@pytest.mark.parametrize("reason", ["", " \t\n", False, {"reason": "maintenance"}])
+def test_news_exclusion_requires_a_nonblank_reason(reason: object) -> None:
+    data = document()
+    data["entries"][0]["news_exclusion"] = reason
+    with pytest.raises(ValueError, match="news_exclusion"):
+        render_changelog.validate(data)
+
+
+def test_documentation_is_bookkeeping_but_not_a_public_news_topic() -> None:
+    data = document()
+    data["entries"][0]["categories"] = ["documentation"]
+    data["entries"][0]["topics"] = ["upper-bound", "verification"]
+    render_changelog.validate(data)
+    assert 'data-news-entry="admission"' in render_changelog.render_news(data)
+    for topic in ("documentation", "correction", "audit"):
+        data["entries"][0]["topics"] = [topic]
+        with pytest.raises(ValueError, match="topics"):
+            render_changelog.validate(data)

@@ -56,6 +56,33 @@ Direct renderer commands do not pass through the validator; export
 `DYLD_FALLBACK_LIBRARY_PATH=/opt/homebrew/lib` before running them when Homebrew’s
 library is otherwise outside the loader’s path.
 
+### Current memory in bounded diagnostics
+
+`devtools.process_memory.current_memory_bytes()` reads the current process’s resident
+bytes on Linux, Windows and macOS. Lifetime peak reporting is separate: releasing a
+mapping must lower a current-memory guard even when its historical peak stays high.
+On Darwin it queries the calling PID through cached `/usr/lib/libproc.dylib`, reading
+`proc_taskinfo.pti_resident_size` as declared in
+[Apple’s proc_info.h](https://github.com/apple-oss-distributions/xnu/blob/main/bsd/sys/proc_info.h).
+Each query owns a fresh buffer and uses the current PID; the cache holds only the
+library binding. Missing libraries or symbols, failed or partial queries, and zero
+resident bytes raise `OSError`. Current RSS is distinct from physical footprint and
+lifetime peak. The API measures only the calling process, not its children or available
+system memory.
+
+The `macos-portability` job requires four successful native memory cases with zero skips
+under a one-minute step and a five-minute job ceiling: a positive sample, a
+touched/released 96 MiB mapping, an independent `ps` RSS reading, and an installed-SDK
+oracle for the structure’s size, alignment, field offsets and widths, flavor, buffer
+size and C function signature.
+Guzhou0806 contributed the SDK oracle and bounded CI controls in
+[PR407](https://github.com/jlevy/squares/pull/407).
+`devtools.check_darwin_memory_results` checks the JUnit case identities and results; the
+XML remains in the job’s validation artifact.
+Native results qualify the tested architecture and SDK only.
+Windows tests and mocked failures do not certify Darwin.
+The job retains its existing non-gating policy and stacked-PR selection.
+
 ### Windows worker supervision
 
 Windows is not a supported development host, and `packing-validate` refuses to run on
@@ -187,24 +214,24 @@ alone is not full pre-merge evidence.
 
 | Tier | Who runs it, and when | Steps | Ceiling | Cost when last measured |
 | --- | --- | ---: | ---: | --- |
-| `--records` | contributor, before touching a registry; also every pull request | 50 of 108 | 300 s | 11.0 s |
-| `--edit` | contributor, in the edit loop | 66 of 108 | 240 s | 59.4 s |
-| `--push` | contributor, once before a push — the edit-tier prerequisites the diff can affect, plus tests reachable from it (`--since`) | varies with the diff | 1800 s | about a minute for a narrow code change; an implicitly configured broad diff selects the whole suite and assigns one outer job so pytest can use the host, see below |
-| `--fast` | contributor, at a block boundary; the union of the ten tiers below | 95 of 108 | 600 s | record cleared 2026-09-07 when the corpus widened; 229.1 s locally, only the ceiling applies |
-| `--checks` | **CI, on every pull request**, in the `validate` job | 69 of 108 | 150 s | 103.70 s, the geometric mean of thirty-three hosted readings on 2026-09-30 and 10-01, with the band 59.4–137.1 s (2.31x) the runner pool spanned on unchanged steps; the 114.34 s two-attempt record stays in the register as history |
-| `--frontend` | **CI, on every pull request**, in the `frontend` job, concurrently | 4 of 108 | 165 s | 104.74 s, the geometric mean of 32 hosted readings from 27 to 30 September (70.97–134.86 s, 1.90x); 85.25 s from two readings stays in the register as history |
-| `--typecheck` | **CI, on every pull request**, in the `typecheck` job, concurrently | 1 of 108 | 130 s | 86.71 s, the geometric mean of 174 hosted step walls from 2 to 4 October on 17 branches, with the band 54–123 s that its two runner regimes span; the 111 s ceiling it replaced was breached by 3–6% of runs with zero findings, and the 76.5 s eighteen-reading record stays in the register as history |
-| `--geometry` | **CI, on every pull request**, in the `geometry` job, concurrently | 9 of 108 | 180 s | 98.07 s, the geometric mean of fourteen hosted readings, with the band 58.75–116.19 s that its two runner regimes span |
-| `--suite-a` | **CI, on every pull request**, in the `suite-a` job, concurrently | 1 of 108 | 335 s | 180.84 s, the geometric mean of 160 hosted readings on 2026-10-09, 92.84–250.54 s (2.70x), a point record because that spread is wider than a band may be; the 114.58 s record of 2026-10-01 and its band stay in the register as history |
-| `--suite-b` | **CI, on every pull request**, in the `suite-b` job, concurrently | 1 of 108 | 360 s | 215.82 s, the geometric mean of 171 hosted readings on 2026-10-09, 124.82–327.07 s (2.62x), a point record; the 114.38 s record of 2026-10-01 stays as history |
-| `--suite-c` | **CI, on every pull request**, in the `suite-c` job, concurrently | 1 of 108 | 360 s | 190.24 s, the geometric mean of 164 hosted readings on 2026-10-09, 108.29–294.60 s (2.72x), a point record; the 132.05 s record of 2026-10-01, the 102.94 s thirty-one-reading record and the 88.59 s first reading stay as history |
-| `--suite-d` | **CI, on every pull request**, in the `suite-d` job, concurrently | 1 of 108 | 335 s | 183.08 s, the geometric mean of 167 hosted readings on 2026-10-09, 90.60–288.47 s (3.18x), a point record; the 104.95 s first four-shard reading of 2026-10-01 stays as history |
-| `--sweeps` | **CI, on every pull request**, in the `sweeps` job, concurrently | 5 of 108 | 200 s | 101.51 s, the geometric mean of six 4-of-80 hosted readings (66.36–130.77 s, spread 1.97x); the 119.72 s seven-reading mean and PR 180’s 138.84 s predecessor remain in the register as history |
-| `--measure-verifier` | **CI, on every pull request**, in the `measure-verifier` job, concurrently | 3 of 108 | 90 s | 72.83 s, the geometric mean of ten hosted readings on 2026-10-11, 59.12–90.06 s (1.52x), the first cohort of the three-step tier (`think-th8p`); the native n17 branch-and-bound step joined it after a cold 52.83 s inside `--checks` |
-| *(no flag)* | Full checkpoint before final review and at block close; main, dispatch, and daily CI | 108 of 108 | 3600 s | integration plus ten deferred workers; new whole-wall measurement pending |
+| `--records` | contributor, before touching a registry; also every pull request | 51 of 109 | 300 s | 11.0 s |
+| `--edit` | contributor, in the edit loop | 67 of 109 | 240 s | 59.4 s |
+| `--push` | contributor, once before a push — affected edit-tier prerequisites and reachable quick tests (`--since`); add `--include-reachable-slow` for selected slow tests | varies with the diff | 1800 s | new quick default not yet measured; large implicit selections run after prerequisites, subject to the load lock, see below |
+| `--fast` | contributor, at a block boundary; the union of the ten tiers below | 96 of 109 | 600 s | record cleared 2026-09-07 when the corpus widened; 229.1 s locally, only the ceiling applies |
+| `--checks` | **CI, on every pull request**, in the `validate` job | 70 of 109 | 150 s | 103.70 s, the geometric mean of thirty-three hosted readings on 2026-09-30 and 10-01, with the band 59.4–137.1 s (2.31x) the runner pool spanned on unchanged steps; the 114.34 s two-attempt record stays in the register as history |
+| `--frontend` | **CI, on every pull request**, in the `frontend` job, concurrently | 4 of 109 | 165 s | 104.74 s, the geometric mean of 32 hosted readings from 27 to 30 September (70.97–134.86 s, 1.90x); 85.25 s from two readings stays in the register as history |
+| `--typecheck` | **CI, on every pull request**, in the `typecheck` job, concurrently | 1 of 109 | 130 s | 86.71 s, the geometric mean of 174 hosted step walls from 2 to 4 October on 17 branches, with the band 54–123 s that its two runner regimes span; the 111 s ceiling it replaced was breached by 3–6% of runs with zero findings, and the 76.5 s eighteen-reading record stays in the register as history |
+| `--geometry` | **CI, on every pull request**, in the `geometry` job, concurrently | 9 of 109 | 180 s | 98.07 s, the geometric mean of fourteen hosted readings, with the band 58.75–116.19 s that its two runner regimes span |
+| `--suite-a` | **CI, on every pull request**, in the `suite-a` job, concurrently | 1 of 109 | 335 s | 180.84 s, the geometric mean of 160 hosted readings on 2026-10-09, 92.84–250.54 s (2.70x), a point record because that spread is wider than a band may be; the 114.58 s record of 2026-10-01 and its band stay in the register as history |
+| `--suite-b` | **CI, on every pull request**, in the `suite-b` job, concurrently | 1 of 109 | 360 s | 215.82 s, the geometric mean of 171 hosted readings on 2026-10-09, 124.82–327.07 s (2.62x), a point record; the 114.38 s record of 2026-10-01 stays as history |
+| `--suite-c` | **CI, on every pull request**, in the `suite-c` job, concurrently | 1 of 109 | 360 s | 190.24 s, the geometric mean of 164 hosted readings on 2026-10-09, 108.29–294.60 s (2.72x), a point record; the 132.05 s record of 2026-10-01, the 102.94 s thirty-one-reading record and the 88.59 s first reading stay as history |
+| `--suite-d` | **CI, on every pull request**, in the `suite-d` job, concurrently | 1 of 109 | 335 s | 183.08 s, the geometric mean of 167 hosted readings on 2026-10-09, 90.60–288.47 s (3.18x), a point record; the 104.95 s first four-shard reading of 2026-10-01 stays as history |
+| `--sweeps` | **CI, on every pull request**, in the `sweeps` job, concurrently | 5 of 109 | 200 s | 101.51 s, the geometric mean of six 4-of-80 hosted readings (66.36–130.77 s, spread 1.97x); the 119.72 s seven-reading mean and PR 180’s 138.84 s predecessor remain in the register as history |
+| `--measure-verifier` | **CI, on every pull request**, in the `measure-verifier` job, concurrently | 3 of 109 | 90 s | 72.83 s, the geometric mean of ten hosted readings on 2026-10-11, 59.12–90.06 s (1.52x), the first cohort of the three-step tier (`think-th8p`); the native n17 branch-and-bound step joined it after a cold 52.83 s inside `--checks` |
+| *(no flag)* | Full checkpoint before final review and at block close; main, dispatch, and daily CI | 109 of 109 | 3600 s | integration, serial quick suites and ten deferred workers; new whole-wall measurement pending |
 
-Step counts describe the current 108-step registry, read from the validator’s canonical
-selection API on 2026-10-11. Its ten PR partitions cover all 95 fast steps.
+Step counts describe the current 109-step registry, read from the validator’s canonical
+selection API on 2026-10-15. Its ten PR partitions cover all 96 fast steps.
 Dated costs retain their measured source and resource shape; they are not fresh
 measurements of the new scheduling.
 
@@ -246,18 +273,21 @@ The shard jobs retain full Git history for history-reading tests, but none insta
 or a browser.
 Browser-floor liveness runs under `--frontend`, on the runner that owns the
 pinned Node toolchain.
-`site table layout in Chromium` runs thirteen test files on the runner that installs the
-pinned Chromium. Functional pixel/layout checks, including the atlas’s readable drawing
-sizes and interactions, run in parallel with file-based distribution.
-After those workers exit, the four native-frontier HTTP load-budget cases run serially,
+`site table layout in Chromium` runs its declared test modules on the runner that
+installs pinned Chromium.
+Browser navigation and functional pixel/layout checks, including the atlas’s readable
+drawing sizes and interactions, run in parallel with file-based distribution, except for
+the forwarder module.
+After those workers exit, all 51 forwarder cases run serially in a fresh pytest process.
+The four native-frontier HTTP load-budget cases then run in another serial process,
 without xdist workers; each checks JavaScript and no-JavaScript contexts under the same
 assertions and budgets.
-Both phases share the step’s original total timeout.
+All three phases share the step’s original total timeout.
 They launch Chromium with `--font-render-hinting=none`: the headless shell hints text at
 `HINTING_FULL` by default, which on Linux rounds every glyph’s advance to a whole pixel,
-and the pins were read on macOS, where nothing is hinted ([D-513](defects.md)). Both
-phases require Chromium and fail rather than skip when it cannot launch, because a skip
-on that runner is a hole in the surface.
+and the pins were read on macOS, where nothing is hinted ([D-513](defects.md)). All
+three phases require Chromium and fail rather than skip when it cannot launch, because a
+skip on that runner is a hole in the surface.
 Each shard writes a per-file cost report beside its JUnit and timing artifacts; the
 recorder accepts complete coherent cohorts and rejects failed, partial, duplicated,
 coverage-mismatched, and mixed-provenance evidence, and a cohort recorded at one shard
@@ -480,12 +510,15 @@ it has also read over 180 seconds on PR 188, at 182 seconds in run 35182460356.
 hosted runs hold both walls at or under 180 seconds.
 Five is the planned default, and `think-g4n9` owns it.
 
-On a push to `main`, the integration job looks for a successful pull-request run that
-validated the exact same Git tree and explicitly passed `packing-required`. A match
-licenses reuse only for fast steps named in the positive `TREE_REUSABLE_FAST_STEPS`
-allowlist. Every deferred step and every unclassified fast step repeats after merge;
-missing artifacts, expired artifacts, API errors, fork runs, and incomplete checks all
-fall back to the complete surface.
+On a push to `main`, the integration job, serial quick-suite worker and ten dedicated
+workers run the complete post-merge surface.
+Each run executes its selected checks, even when the pull-request checks already passed.
+`integration-suites` owns the four quick Steps at their existing process shape and
+strict per-test limits; the integration job skips exactly those Steps and the deferred
+workers’ Steps. The native aggregate requires every owner.
+This adds one complete browser bootstrap and artifact cycle; its whole-job cost is
+recorded with the other post-merge walls.
+The named PR tier commands and their ceilings remain unchanged.
 
 ### A job no runner took
 
@@ -559,7 +592,8 @@ controls, the n=40 rigidity replay, the whole known-best atlas rebuild, the whol
 single-square translation escape screen, and the whole exact rational grid replay.
 T-024 and T-026 add four exact dilation-limit replays at 720 and 1440 steps, and
 `think-bgkz` adds the exact re-derivation of the regularized atlas views.
-These are the twelve steps outside the [PR fast surface](#validation-tiers).
+Together with the full measure-verifier controls, these are the thirteen Steps outside
+the [PR fast surface](#validation-tiers).
 [D-470](defects.md) records why checking them only after a merge is insufficient: a
 stale certificate test left main red across three merges despite green PR checks.
 
@@ -575,8 +609,9 @@ Timing artifacts have distinct job names and record the checked-out commit.
 For a dispatched PR, that resolved merge commit can differ from the workflow dispatch
 ref; the checkout receipt identifies the source actually validated.
 Main, daily and manually dispatched packing validation use the same deferred groups.
-Their separate `post-merge-required` aggregate requires the integration job and all ten
-deferred workers to succeed; the seven-job PR aggregate remains separate.
+Their separate `post-merge-required` aggregate requires the integration job, the serial
+quick-suite worker and all ten deferred workers to succeed; the ten-job PR aggregate
+remains separate.
 
 The last three joined on 2026-09-07 because the corpus tripled, not because the gate
 changed its mind about them.
@@ -752,9 +787,12 @@ uv run --frozen --all-extras --group dev packing-validate --records
 # Edit loop: everything fast except the broad test suite. Seconds, runs during a gate.
 uv run --frozen --all-extras --group dev packing-validate --edit
 
-# Pre-push floor: the edit tier plus the behavioral tests reachable from the change
-# (against origin/main, or --since REF). Broad changes may select the whole suite.
+# Pre-push floor: affected edit prerequisites plus reachable quick tests
+# (against origin/main, or --since REF). Broad changes may select every quick test.
 uv run --frozen --all-extras --group dev packing-validate --push
+
+# Deliberately include reachable slow tests; exhaustive checks retain their checkpoint.
+uv run --frozen --all-extras --group dev packing-validate --push --include-reachable-slow
 
 # The pull-request surface: the edit tier plus every behavioral test under the
 # per-test ceiling. CI runs it as the ten parts below, one per runner; run it whole
@@ -863,29 +901,37 @@ contracts seed the same import, text and walker closure.
 A scheduling edit does not mark every module in an unchanged library directory as
 changed. Unreadable or unknown first-party entrypoints select the whole suite.
 
-Configuration-only pushes still select every test file.
-If every changed path belongs to `SUITE_WIDE` in `devtools.reachable_tests` or is
-`packing-validation.yml` or `deep-gate.yml`, local execution runs the complete quick
-lane and reports the slow lane as deferred (`think-xyub`). Before merge, passing PR fast
-and Deferred checkpoint runs must cover the same source/base; their existing complement
-contract supplies all slow and exhaustive tests.
-This avoids repeating the complete slow lane locally for a configuration-only edit.
-Any mixed change, including source, renderer, test or record edits, keeps the original
-local slow coverage.
-Unknown workflows and empty, unmapped or otherwise unresolved selections also retain the
-original execution policy.
-Narrow reachable selections still include directly reached slow tests.
+**Ordinary pushes run reachable quick tests.** File selection remains conservative:
+unknown workflows, empty or unresolved changes and suite configuration still select all
+test files. Execution uses the same `QUICK_TESTS` predicate as the PR fast lane, so a
+mixed source or record change does not silently start the slow suite.
+
+To include the selected slow tests deliberately, run
+`packing-validate --push --include-reachable-slow`. The standalone selector,
+`python -m devtools.reachable_tests --run` in the project environment, accepts
+`--lane quick` (the default), `--lane slow` or `--lane all`. The `all` lane combines
+quick and slow tests; exhaustive checks retain their existing checkpoint.
+The invocation reports its lane, selected files, worker allocation and excluded
+categories. Child progress receipts retain `lane`, `marker` and `exclusions` so a quick
+result cannot be mistaken for complete coverage.
+
+A local quick pass does not discharge the omitted slow or exhaustive obligations.
+Obtain the documented full checkpoint for final review; passing PR fast and deferred
+runs together supply that coverage when their source and base identities agree.
+The Deferred workflow remains advisory, started by a label or dispatch.
+This push option adds no automatic merge protection.
+All fast tests remain automatic in CI. The quick default has no measured hosted wall.
 
 **Large implicit push selections receive a separate pytest phase.** Other changed
 workflow files or suite configuration expand the selector to everything.
-Except for the configuration-only execution policy above, this runs the quick and slow
-lanes together, against `FAST_SUITE_BUDGET_SECONDS`. A large proper subset can also
-dominate the run. When resource settings are implicit, the edit checks run with their
-normal concurrency, then the reachable tests use the available pytest workers after the
-edit pool has drained.
-Nested tool pools that read `PACK_JOBS` are capped at one during the parallel pytest
-phase. Tests marked `pool_heavy` run afterward in a separate serial pytest process with
-`PACK_JOBS` set to the reserved CPU count.
+The requested lane runs against the existing fallback budget.
+A large proper subset can also dominate the run.
+When resource settings are implicit, the edit checks run with their normal concurrency,
+then the reachable tests use the available pytest workers after the edit pool has
+drained. Nested tool pools that read `PACK_JOBS` are capped at one during the parallel
+pytest phase.
+Tests marked `pool_heavy` run afterward in a separate serial pytest process
+with `PACK_JOBS` set to the reserved CPU count.
 The marker covers real internal execution pools and short-deadline real subprocess
 controls. This includes the whole-atlas composite test’s per-case builder, the
 collection-refusal control’s two-worker xdist invocation, and the resident
@@ -893,9 +939,9 @@ exact-geometry transport controls.
 The collection control keeps its fixed two workers and 30 s command deadline.
 Classification leaves each control’s transport, assertions and time bounds intact.
 Quick/slow membership remains unchanged.
-Both phases use the same selected files and complementary markers, so every selected
-non-exhaustive test belongs to exactly one phase.
-Other slow tests remain parallel.
+Both phases use the same selected files and complementary pool markers, so each test in
+the requested quick, slow or combined lane executes exactly once.
+Slow tests run only when explicitly selected.
 This prevents the CPU-wide outer default from leaving pytest with one worker after the
 other checks finish.
 It also prevents two internally parallel checks from each claiming the same CPUs.
@@ -937,10 +983,15 @@ each invocation to avoid cleanup of unrelated numbered directories under a share
 
 When command artifacts are enabled, the reachable-test wrapper records separate JUnit
 and duration reports for each child phase.
-Flushed per-worker JSONL progress identifies the source commit, run, test node and
-effective worker allocation; an interrupted test leaves its start event available before
-JUnit can finish. These are operational timing receipts, not mathematical acceptance
-evidence. Artifacts stay outside the source tree.
+Flushed per-worker JSONL progress identifies the source commit, run, test node,
+effective worker allocation, selected `lane`, actual phase `marker` and `exclusions`.
+The marker includes the normal/pool-heavy split when used.
+An interrupted test leaves its start event available before JUnit can finish; missing
+completion is not a pass.
+A quick receipt does not certify omitted slow or exhaustive tests: their matching-source
+merge obligations remain.
+These are operational timing receipts, not mathematical acceptance evidence.
+Artifacts stay outside the source tree.
 
 Every validation subprocess has a finite 900-second default deadline.
 Override it with `--timeout-seconds SECONDS` or `PACKING_VALIDATE_TIMEOUT_SECONDS`;
@@ -988,8 +1039,10 @@ labelled or dispatched deferred checkpoint.
 The behavioural [lane definitions](#the-behavioural-lanes) preserve the partition.
 Quick-test timing uses the `call` phase because shared fixture setup can be charged to
 whichever test starts first.
-Optimize a test that exceeds its ceiling, or retain its measurement when moving it to
-`slow`; remove that marker when its measured cost falls below the floor.
+Investigate calls at or above the 12-second classification threshold.
+Optimize avoidable work before moving a test to `slow`, and retain its individual
+measurement when moving it; remove that marker when its measured cost falls below the
+floor. Hosted CALL findings alone are advisory below 45 seconds, as described below.
 The marker registry tests enforce both declarations.
 Both behavioural lanes use xdist workers sized by `cpus - jobs + 1`; `--inner-jobs`
 controls other internal pools, including the negative-control pool.
@@ -1057,12 +1110,31 @@ findings. Raising ceilings repeatedly did not resolve that ambiguity.
 runner-normalised wall can judge regressions attributable to a change.
 
 **Failures and deadlines still fail the run.** Functional failures, command timeouts,
-and test calls of 45 seconds or more remain enforcing.
-Numeric tier budgets are unchanged.
-Main and scheduled runs, full and strict checkpoints (including those invoked within a
-pull request), and explicit `--enforce-budget` retain cost enforcement.
-The gate identifies hosted pull requests from `GITHUB_ACTIONS` and `GITHUB_EVENT_NAME`;
-an advisory policy does not apply to every invocation on that runner.
+and hosted test calls of 45 seconds or more remain enforcing.
+The 12-second quick-test threshold reports classification findings on every hosted
+Actions event, including full, main, scheduled and dispatched runs.
+Local runs remain strict at 12 seconds.
+`--strict` and `--enforce-budget`, including `PACKING_VALIDATE_ENFORCE_BUDGET`, enforce
+12 seconds on hosted runs too.
+The existing policy record declares this CALL scope separately from PR-only tier-wall
+advisory and requires a live tracking bead.
+Missing or unreadable policy retains strict enforcement.
+
+This distinction follows
+[run 38763716551](https://github.com/jlevy/squares/actions/runs/38763716551): all quick
+assertions passed, but eleven completed calls failed the 12-second rule.
+Across 590 matched successful nodes that previously took one to three seconds, the
+median inclusive JUnit duration increased by a factor of 1.636. Those durations include
+setup and teardown and do not identify a CALL regression or establish its cause.
+A single uncalibrated hosted reading is classification evidence; it is not enough to
+attribute a performance regression to the change.
+This policy changes the verdict, not the amount of work or the three-minute target.
+
+Numeric tier budgets and whole-workflow wall policies are unchanged.
+Main and scheduled tier walls, full and strict checkpoint tier walls, and explicit
+`--enforce-budget` retain their existing enforcement.
+The gate identifies hosted execution through `GITHUB_ACTIONS`; the separate PR tier-wall
+exception also requires `GITHUB_EVENT_NAME=pull_request`.
 
 A different CPU/worker shape reports the budget result without failing, unless
 explicitly enforced.
@@ -1823,6 +1895,16 @@ It does these, and `--dry-run` lists them without doing any:
    An `infographics` cut redraws both posters and their complete exports; a site cut
    keeps those editions.
 
+Each cut runs the shared release/date contracts and its component’s quick tests, using
+the same quick predicate as ordinary validation.
+A site cut checks claim documents; it does not start the whole-atlas composite or
+exhaustive proof sweeps.
+Add `--include-deep-tests` to run the selected component’s slow and exhaustive tests
+deliberately. Generation stays component-owned: an infographic cut still redraws and
+checks both posters.
+Neither test selection replaces the full matching-source/base checkpoint required for
+final review.
+
 It commits nothing and publishes nothing, and it moves no paper: a site bump adds no
 entry to any paper’s history and changes no paper’s version line.
 Commit the release module and the generated outputs selected by the cut together, with
@@ -1899,13 +1981,16 @@ Edit the YAML, then run
 `uv run --frozen --all-extras --group dev python -m devtools.render_changelog` from
 `packing/`; its `--check` mode runs in the ordinary documentation gate.
 The enforced Soft Schema contract validates the stored fields, and the loader checks
-calendar dates, unique PR membership, delivered stack layers and release references.
+calendar dates, unique article IDs and PR numbers within each article, delivered stack
+layers and release references.
 
 At PR closeout, record a noteworthy contribution after the source PR has merged into
 `main`. Keep the summary to a sentence or a few lines, and use a short bullet list for
 the parts of a larger effort.
 Group delivered layers of a formal stack; later deliveries get a new entry with the same
-stack ID. Preserve an existing entry’s date and PR membership.
+stack ID. One merged PR may support separate articles for distinct contributions, with
+one retained delivery row and all article IDs listed in its coverage audit.
+Preserve each existing entry’s date and PR membership.
 Record an editorial omission reason for purely administrative work or a changelog
 synchronization PR.
 
@@ -1935,7 +2020,7 @@ Paper content and typesetting revisions advance the affected paper’s edition; 
 navigation or footer update keeps the paper’s content edition.
 
 The ordinary documentation gate runs `devtools.check_release_impact`. It compares
-producer-owned inputs against the local main merge base and requires a disposition for
+producer-owned inputs against the comparison merge base and requires a disposition for
 each candidate component: a valid owning successor, or a fresh `ReleaseNoPublicChange`
 review in `release.py` naming the exact changed paths, outputs examined and reason.
 A prior no-change review cannot excuse another batch.
@@ -1950,8 +2035,15 @@ appropriate; an input diff does not prove visual equality.
 The existing page and PDF checks still verify the actual artifacts.
 `--baseline-ref origin/main` uses the branch’s merge base; `--base` selects a delivery
 baseline explicitly.
-The validator uses `HEAD^1` on a main checkout whose head already equals `origin/main`,
-so it checks the preceding delivery rather than comparing a commit with itself.
+For a dependent PR, hosted CI sets `PACKING_RELEASE_BASE_REF` to the PR event’s pinned
+parent commit.
+The validator uses that explicit ref first, then `origin/$GITHUB_BASE_REF`
+if the explicit ref is absent.
+Locally, set `PACKING_RELEASE_BASE_REF` to the actual parent branch or pinned parent
+commit; ordinary branches default to `origin/main`. Changelog delivery coverage
+continues to compare against `origin/main`. The validator uses `HEAD^1` on a main
+checkout whose head already equals `origin/main`, so it checks the preceding delivery
+rather than comparing a commit with itself.
 
 Validate with the change-reachable push tier, review both reader views, and verify the
 published News page with the normal deployment audit after merging.
@@ -1999,6 +2091,31 @@ That gate uses the crate’s pinned toolchain, runs rustfmt, Clippy, tests, rust
 locked release build, then compares exact results with the Python reference.
 It leaves the binary at `$CARGO_TARGET_DIR/release/sqverify-exact` when the target
 directory is absolute.
+The Rust crate enables canonical cross-cancelled multiplication by default.
+Build with `--no-default-features` to select the original `num-rational` multiplication
+expressions. For the constructor ablation, combine `--no-default-features` with
+`--features experimental-normalized-mul` or `--features experimental-coprime-mul`; the
+historical feature names remain supported.
+Cargo features are additive, so a normalized-only control must disable defaults.
+The gate checks these modes, production defaults and the combined feature mode before
+building the production release binary.
+
+The
+[adoption measurement](docs/project/research/research-2026-09-30-exact-arithmetic-verifier-performance.md#2026-10-19-default-adoption)
+records the fixed-work benefit and its limits.
+To repeat the three-pair diagnostic with fresh reference and default builds, provide
+writable absolute scratch outside the checkout through `TMPDIR`, `UV_CACHE_DIR` and
+`CARGO_TARGET_DIR`, then run:
+
+```bash
+uv run --frozen --all-extras --group dev python -m benchmarks.bench_rectangle_rust_verifier_ab \
+  --target-root "$CARGO_TARGET_DIR/verifier-arms" --output "$TMPDIR/verifier-ab.json"
+```
+
+Linux admits those resolved external directories; macOS retains the configured mounted
+agent-scratch volume requirement.
+Output files cannot overwrite prior receipts.
+
 Pass that path to `devtools.verify_rectangle_density` with
 `--backend rust --rust-binary PATH`; Python remains the default.
 The [tooling overview](docs/project/guides/verification-tooling.md) records the
@@ -2283,6 +2400,10 @@ is the rule; this is how to follow it.
   Record a commit or blob id as provenance if it helps a reader.
   Where a verdict must be tied to the input it was computed from, give the input a
   semantic identity (a design name and version) and compare that, or recompute.
+  Comparing a change with its base branch at their merge base, as the release-impact,
+  changelog, requests, bead-tree and regularization-state gates do, reads no recorded
+  revision
+  ([OR-18](operating-rules.md#or-18-keep-bulk-data-out-of-git-and-never-bind-code-or-verdicts-to-a-git-commit-or-blob)).
 - **No self-pins.** Do not pin the SHA-256 of a file this repository writes and commits.
   Git already holds it, and the pin makes regenerating the file identically, or moving
   it, a failure.

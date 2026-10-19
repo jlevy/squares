@@ -193,7 +193,8 @@ verification blue so it reads as neither, and darker and bluer than the accent s
 never reads as a link; it is light in dark mode.
 Every score uses `overview_sections.significance_mark`: an S label and five segments in
 one square-cornered border box, 5.5em wide at the shared note size and sans medium
-weight. Each bar is 0.5em wide and 0.6em tall; the first S bars are solid and the rest
+weight. The label and bars have a 0.18em gap, smaller than a word space but visibly
+separate. Each bar is 0.5em wide and 0.6em tall; the first S bars are solid and the rest
 are empty outlines.
 The box keeps the same width from S0 through S5, while its accessible
 name states the score and its tooltip explains the judgment.
@@ -377,6 +378,12 @@ a note names, such as $n = 21$, is sans math too, never upright words.
 Documents write math as LaTeX (`$…$`) rather than in code spans;
 `devtools.check_math_markup` holds the documents already migrated to it.
 Code uses Planetaire Mono Text at KPress’s calibrated monospace size.
+Literal source code keeps its Unicode characters.
+Two site-only KaTeX subsets supply AMS’s blackboard-R outline for `ℝ` and Main’s
+outlines for `↔` and `≤` within the monospace family, preserving ordinary ASCII glyphs
+and metrics.
+Both subsets travel through the shared asset bundle; standalone paper styles
+keep their existing declarations.
 
 **A formula is drawn as its text is.** Beside the face, a formula takes the size of the
 text it sits in (KaTeX’s outer em is 1 of its text’s on every surface), its colour, and
@@ -634,9 +641,9 @@ one of them changes.
 | How much nearer the bar an opening picture starts | `--site-hero-lift` | 0.5rem, 8px | `site.css` |
 | Above a section heading (`h2`) | `--paper-section-space` | 2.7 of the prose base, 48.6px | `paper-type.css` |
 | Below a section heading (`h2`) | `--paper-section-space-below` | 1.7rem, 27.2px | `paper-type.css` |
-| Above a visible site-title H1 or H2 | `--site-title-space-above` | 3.5rem, 56px | `site.css` |
-| Below a visible site-title H1 or H2 | `--site-title-space-below` | 2rem, 32px | `site.css` |
-| Below a page’s title, and below its subtitle | `--site-subtitle-space` | 1.5rem, 24px | `site.css` |
+| Above a visible site-title H1 or H2 | `--site-title-space-above` | 3.75rem, 60px | `site.css` |
+| Below a visible site-title H1 or H2 | `--site-title-space-below` | 2.5rem, 40px | `site.css` |
+| Below a page’s title, and below its subtitle | `--site-subtitle-space` | 2rem, 32px | `site.css` |
 | Above and below a table | `--site-table-space` | 2rem, 32px | `site.css` |
 | Between a wide block and the edge of the page’s content area | `--site-wide-gutter` | 0.5rem, 8px | `site.css` |
 
@@ -866,42 +873,68 @@ it.
   problem and explaining upper/lower bounds (`think-8xzs`). About uses only H1 section
   headings, each with the same `site-title` styling as The Squares Project
   (`think-6m9n`, `think-sq1i`). Every visible `h1.site-title` and `h2.site-title` shares
-  the screen-only 3.5rem margin above it and 2rem below it (`--site-title-space-above`
-  and `--site-title-space-below`); compact Legend and introduction-card headings keep
-  their own spacing. The hero graphic opens the case popover, with the case-record link
-  as its no-script fallback.
-  Case popovers offer separate record, Frontier-row and Atlas-tile actions.
+  the screen-only 3.75rem margin above it and 2.5rem below it
+  (`--site-title-space-above` and `--site-title-space-below`); compact Legend and
+  introduction-card headings keep their own spacing.
+  The hero graphic opens the case popover, with the case-record link as its no-script
+  fallback. Case popovers offer separate record, Frontier-row and Atlas-tile actions.
   Atlas case targets fully expand the grid before scrolling to and highlighting the
   requested tile. Every row containing one card is centered.
   The full project narrative and attribution live on About; documentation cards also
   appear on the homepage; **About** sits immediately before **GitHub** in the shared
   navigation.
 
-- **News.** News is the second navigation item and carries the complete retained project
-  history. Its H1 uses the shared sans-serif caps; its operational text uses the sans
-  face. Each entry is one hairline-bordered card containing its actual article once.
-  Dates use the paper heading’s sans-base date role.
-  Each card starts with an ordinary H3 in the theme’s text foreground, followed by the
-  date, then a metadata row with smaller Results-style topic chips on the left and the
-  shared significance meter fixed at the right.
-  The article follows.
-  H3 typography comes from the shared heading role; the chips retain shared fills,
-  corners and leading at 85% of the note-size chip scale.
+- **News.** News is the second navigation item and carries eligible public
+  announcements. The changelog record retains excluded historical entries and their
+  reasons; `CHANGELOG.md` contains the complete history.
+  Its H1 uses the shared sans-serif caps; its operational text uses the sans face.
+  Each eligible entry is one hairline-bordered card containing its actual article once.
+  News and Explanations share an article heading: an optional eyebrow, the title, the
+  original publication date, then optional topic tags and significance metadata.
+  The title uses the Explanations card’s sans face, medium weight, size and leading; it
+  stays upright, left aligned and in the theme’s text foreground.
+  A linked article title inherits the heading’s color and typography.
+  News uses surnames in titles, article text and displayed credits unless distinct
+  people share a surname.
+  Keep published handles and organization names intact.
+  Full identities remain in canonical attribution and source-reference records.
+  The date is a prominent sans-base line in medium weight, with a machine-readable
+  `time` value. Paper dates come from the oldest edition in each component’s retained
+  publication history.
+  Tutorial dates name their first site deployments; manuscript creation and later
+  revisions do not restamp them.
+  News and homepage highlights retain each announcement’s frozen date.
+  No current site edition or filesystem timestamp supplies a date.
+  Explanations uses the eyebrow for the paper’s series part or tutorial label.
+  News places smaller Results-style topic chips on the left and the shared significance
+  meter at the right below the date, followed by the article.
+  The chips retain shared fills, corners and leading at 85% of the note-size chip scale.
   Homepage News and the archive use the same card renderer and CSS roles.
   Every post has an explicit importance score and a plain rationale.
   The meter’s accessible label names its S level; its shared tooltip explains the level
   and the post’s rationale.
-  Homepage highlights keep their actual result scores and assurance qualifiers, with one
-  S meter per card. Archive controls default to S4/S5 and all topics, with OR within a
+  Its S and five bars remain one tightly paired mark.
+  Homepage highlights keep the announcement’s significance and assurance qualifiers,
+  with one S meter per card.
+  News includes only S3, S4 and S5; S1/S2 remain in the full GitHub changelog, with old
+  News bookmarks forwarded there.
+  Archive controls offer S3/S4/S5 and default to S4/S5 and all topics, with OR within a
   facet and AND across facets.
   All significance and All topics clear their facet; Reset restores the defaults.
   The compact chooser groups share the homepage’s small controls, wrap inline, and keep
   their group names accessible without visible headings.
+  Multi-select topic buttons form a joined strip, wrap between labels on narrow screens,
+  and use the cards’ sentence-case labels and topic fills in both color themes.
+  An inset underline marks selected topics; hover underlines the label and keyboard
+  focus keeps the shared outline.
+  Each topic’s muted tally counts articles at the selected significance levels,
+  independently of topic selection; All counts unique articles across those levels.
   Counts use the Results control row, right aligned above the cards; an empty state
   describes a selection without matches.
   URL state preserves unrelated query parameters and browser history; a low-score
   bookmark widens the filters to reveal its target.
-  Without JavaScript the controls stay hidden and the complete history remains visible.
+  Without JavaScript the controls stay hidden and complete eligible articles remain
+  visible, with a link to the full changelog.
   After the enhancement loads, about ten lines are visible.
   Clicking or tapping the card or its small shared arrow in the footer expands or
   contracts it inline; Enter and Space activate the button.
@@ -911,24 +944,29 @@ it.
   Height, fade and arrow rotation share the existing motion timing and honor reduced
   motion. Hover adds a subtle green wash without changing height.
   Article links retain their ordinary actions; body-link focus reveals the article.
-  Readers without scripting see complete articles.
-  Entry and legacy date fragments reveal their corresponding card.
+  Eligible entry and legacy date fragments reveal their corresponding card.
+  Bookmarks for excluded entries, and dates with no eligible articles, forward to the
+  retained GitHub changelog.
   Topic labels reuse square-cornered Results chips with distinct subject metadata: lower
   and upper bounds and optimality reuse bound fills, engineering uses the accent tint,
-  verification the review-blue palette, and documentation the neutral chip.
+  and verification the review-blue palette.
   These subject labels assert no result kind or verification status.
   Results and News use the shared topic vocabulary and sentence-case labels in
-  `devtools/site_topics.py`. Every registered result kind keeps its precise topic; News
-  also accepts Engineering, Verification and Documentation.
+  `devtools/site_topics.py`. News uses the shared vocabulary’s subset without Correction
+  and Audit, including Project, Engineering and Verification.
   News filters offer the topics present in the archive, in the shared vocabulary’s
   order. Topic chips explicitly reset text transformation, small caps and letter spacing,
   so parent headings cannot change their casing.
   The chip renderer preserves each consumer’s filter attribute.
-  All surfaces retain the result’s real kind, status, claim and credit.
-  The homepage highlights the three newest S5 results from the results register, using
-  their existing claims, credit and evidence, and follows them with “All news →”.
-  Formalization and simplification highlights use their precise registered topic labels
-  and retain the original result-kind and evidence chips.
+  Full result records retain the result’s real kind, status, claim and credit.
+  The homepage highlights up to three newest eligible S5 News announcements that name
+  result IDs, ordered by the announcement’s frozen date and stable ID, followed by “All
+  news →”. Each preview uses the archive’s title, date, topic chips, complete article
+  and disclosure. Its title links to the stable News article anchor.
+  Keep claim qualifications in that shared article; result records carry the detailed
+  verification, confirmation and status marks.
+  The archive ends with a shared action button, “Full changelog”, using the
+  external-link arrow and linking to the complete GitHub changelog.
   About keeps one short News link; its old history bookmarks forward without duplicating
   the feed.
 
@@ -952,13 +990,13 @@ it.
   separate case-directory hero and index (**Case records**, below).
   A subtitle, where a page has one, is the sans face at 1.1 times the sans base
   (`--site-subtitle-scale`, about 21px), in the page’s own text colour, never gray, with
-  the same space above it and below it (`--site-subtitle-space`, 1.5rem). A title with
-  no subtitle, a document’s own `h1` among them, stands that space above its first
+  the same space above it and below it (`--site-subtitle-space`, 2rem). A title with no
+  subtitle, a document’s own `h1` among them, stands that space above its first
   paragraph. The page title style (every hero `h1`, and `.site-title`) is the sans face
   in upright caps (not KPress’s italic `h2`) at 1.5 times the sans base, centred.
-  On screen, `h1.site-title` and `h2.site-title` use `--site-title-space-above` (3.5rem)
-  above and `--site-title-space-below` (2rem) below the title on every content page;
-  print keeps its existing heading spacing.
+  On screen, `h1.site-title` and `h2.site-title` use `--site-title-space-above`
+  (3.75rem) above and `--site-title-space-below` (2.5rem) below the title on every
+  content page; print keeps its existing heading spacing.
   The homepage’s first section, The Square Packing Problem, takes it through
   `.site-title`, so it reads as the Frontier page’s title does.
   That section opens with README’s two opening paragraphs: the block between README’s
@@ -1641,8 +1679,12 @@ it.
   for the text, the medium sans at the note size, `0.45rem 0.9rem` of padding and square
   corners, darkened a step on hover and keyboard focus), with its icon from the one set
   after the label at the label’s size, the arrow right where the control is a link that
-  navigates and the double chevron where it is a button that shows more or less in
-  place. Both forms share one rule in `site.css`, and the row sets `--site-action-space`
+  navigates, the external arrow for an off-site destination, and the double chevron
+  where it is a button that shows more or less in place.
+  Navigation components always use the sans face, including links styled as action
+  buttons. Their shared rules set the font explicitly so a prose container cannot supply
+  a serif face. Inline citations within prose retain the surrounding text’s face.
+  Both forms share one rule in `site.css`, and the row sets `--site-action-space`
   (1.2rem) above itself and a table’s own space, `--site-table-space` (2rem), below, so
   text that follows a button stands as clear of it as of a table; where a heading
   follows, its larger space takes over (the owner, 2026-10-02, `think-0o9u`; nothing
@@ -1779,12 +1821,12 @@ it.
 - **Small choosers.** Single-select and multi-select choices share the homepage Atlas’s
   `site-tabs site-chooser-small` component in `site-nav.css`. The text uses the Results
   widget control size, 1.35 leading, and 0.15rem by 0.65rem padding (`think-ticj`).
-  Borders, selected fill, hover, keyboard focus and motion use the same rules on every
-  page. Single-select tabs keep `aria-selected` and arrow-key navigation; multi-select
-  groups use native buttons with `aria-pressed`. Group names remain accessible when
-  visually hidden. Momentary All and Reset actions use the same compact button appearance
-  without a selected state.
-  Chooser strips wrap at narrow widths; pages only place the groups.
+  Borders, hover, keyboard focus and motion use the same rules on every page.
+  Topic filters use their shared chip fills and mark selection with an inset underline.
+  Single-select tabs keep `aria-selected` and arrow-key navigation; multi-select groups
+  use native buttons with `aria-pressed`. Group names remain accessible when visually
+  hidden. Momentary All and Reset actions use the same compact button appearance without
+  a selected state. Chooser strips wrap at narrow widths; pages only place the groups.
   All action groups use a shared 0.7rem gap and wrap together at narrow widths; no
   section owns separate button spacing.
   Filter counts use the Results `site-table-tools` row and `site-count` role, aligned to
@@ -2747,8 +2789,8 @@ The front is, in order:
 
 - **The title.** A Markdown `h1` in the hero, centred, in the page-title role.
 
-- **The credits.** One line each, in the owner’s form (2026-10-01): names in bold,
-  addresses as plain links, the version plain.
+- **The credits.** One line each, with names in bold, addresses as plain links, the
+  version plain.
 
   ```
   From the original proof by **Mannaseh Ahmed**
@@ -2816,9 +2858,14 @@ In the head, the title is the paper’s name, without a site suffix, and the rev
 is `article:modified_time`; every paper’s first publication is `article:published_time`
 (**Page Metadata and Social Cards**, above).
 
-The credits are one grid column the width of the page (`.credits`, in the publication
-layer), an address in them may break anywhere, and the three lines’ spaces are `1lh`, on
-`.credits-source + .credits-own`, on `.publication-date` and on
+Tutorials use the same credit component, with human oversight, agents, original
+publication date and revision date directly below the title.
+Their Markdown sources retain a readable list; the site presents that list as centered
+credits. Tutorials do not borrow the site’s edition number.
+
+The credits are one grid column the width of the page (`.credits`, in the shared
+typography layer), an address in them may break anywhere, and the three lines’ spaces
+are `1lh`, on `.credits-source + .credits-own`, on `.publication-date` and on
 `.publication-date + .series`.
 
 `devtools.paper_structure` reads every rendered paper, from a built site or from the

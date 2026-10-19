@@ -1,5 +1,9 @@
 # Tutorial: Square Packing from First Principles
 
+- Human oversight: [**Joshua Levy**](https://x.com/ojoshe)
+- Agents: **Opus 5**, **Fable 5**, **Fable 5.1**, **Opus 5.5**, and **GPT-6 Astra**
+- First published October 1, 2026 · Last revised October 15, 2026
+
 How small a square can hold eleven unit squares?
 A $4\times4$ grid leaves five spaces empty.
 Rotating some of the squares gives a packing with side about $3.87708$, and a matching
@@ -157,6 +161,9 @@ adjusts the configuration to improve the container side.
 It explores only some of the possible arrangements.
 A run that finds nothing better supplies a search result, not a lower-bound proof.
 
+<a id="the-cell-decomposition"></a> <a id="3-cells-basins-and-two-traps"></a>
+<a id="the-quench-map"></a>
+
 Refinement improves a candidate near where it already lies.
 A **local minimum** cannot be improved by a sufficiently small feasible change, while a
 **global minimum** is best among all feasible configurations.
@@ -182,6 +189,14 @@ Algebraic coordinates can specify a root of a polynomial, distinguish it from th
 polynomial’s other roots, and express the remaining coordinates in terms of that root.
 Then a checker can decide whether a contact is exactly zero and whether every other
 clearance has the correct sign.
+
+<a id="from-a-numeric-solution-to-an-exact-one"></a>
+<a id="contact-graphs-stationary-branches-and-rattlers"></a>
+
+The advanced tutorial explains how
+[typed contacts and stationary branches](TUTORIAL-ADVANCED.md#contact-graphs-stationary-branches-and-rattlers)
+support
+[exact reconstruction from numerical candidates](TUTORIAL-ADVANCED.md#from-a-numeric-solution-to-an-exact-one).
 
 **Rigorous interval arithmetic** offers another route: it encloses the true answer,
 including rounding error.
@@ -285,7 +300,7 @@ A new report, an accepted intake review, and an adopted bound are also different
 The
 [14 October intake ledger](packing/campaign/issue-intake/upper-bounds-20261014/README.md)
 compares reported sides; it does not verify their certificates.
-A tutorial or news item should not silently promote those reports into the case records.
+Only the case records establish which bounds the project has adopted.
 
 ## 6. Reading a Packing Picture
 
@@ -315,6 +330,38 @@ possible packing.
 
 ## 7. Further Reading
 
+<a id="contents"></a> <a id="the-state-of-n--11-in-one-table"></a>
+<a id="how-a-weighted-atomic-lower-bound-proof-works"></a>
+<a id="how-the-finite-covering-lp-searches-for-atoms"></a>
+<a id="why-condition-on-corner-squares"></a> <a id="2-the-configuration-space"></a>
+<a id="thirty-four-dimensions-become-one"></a>
+
+<a id="trap-1a-fixed-angle-cell-solve-is-not-a-basin"></a>
+<a id="trap-2a-point-basin-need-not-be-a-terminal-component"></a>
+<a id="the-generalized-lesson-learned-twice"></a> <a id="4-the-corner"></a>
+<a id="5-algebra-versus-numerics"></a> <a id="why-exactness-is-not-optional"></a>
+<a id="the-number-field"></a> <a id="how-many-roots-does-a-packing-need"></a>
+<a id="assurance-method-and-precision"></a>
+
+<a id="6-what-is-built-and-what-is-not"></a>
+<a id="7-how-the-search-is-approached-and-why"></a> <a id="the-catalogue"></a>
+<a id="the-strategy-why-pointing-should-beat-scaling"></a>
+<a id="steering-keep-the-loss-change-what-you-keep"></a>
+<a id="relaxation-ladders-turn-rare-event-search-into-path-following"></a>
+<a id="calibration-must-match-mechanism-not-just-difficulty"></a>
+<a id="near-misses-are-the-data"></a> <a id="8-what-is-known-and-what-is-not"></a>
+<a id="established"></a> <a id="open"></a>
+<a id="9-how-an-optimality-proof-is-built"></a> <a id="three-parts"></a>
+<a id="the-cap-above-the-optimum"></a>
+<a id="the-centre-box-and-capacity-one-covers"></a> <a id="symmetry-and-orbits"></a>
+<a id="sub-pattern-exclusion-by-containment"></a>
+<a id="selection-versus-certification"></a>
+<a id="what-makes-a-certificate-admissible"></a>
+<a id="a-local-minimum-modulo-sliders"></a> <a id="capture"></a>
+<a id="why-exact-arithmetic-dominates-the-cost"></a> <a id="10-a-vocabulary-card"></a>
+<a id="11-a-notation-card"></a> <a id="12-further-reading"></a>
+<a id="what-does-the-arithmetic-here"></a> <a id="13-where-to-go-next"></a>
+
 | To explore | Read |
 | --- | --- |
 | Linear programs, exact arithmetic, search and proofs | [Advanced Tutorial: Square Packing, Search, and Proof](TUTORIAL-ADVANCED.md) |
@@ -323,62 +370,6 @@ possible packing.
 | The complete eleven-square argument | [Eleven-Square Optimality](https://jlevy.github.io/squares/papers/n11-optimality-review.html) |
 | Evidence grades, confirmation and credit | [Epistemics](epistemics.md) |
 | The program, tools and retained research | [Synopsis](SYNOPSIS.md) and [development guide](development.md) |
-
-## Advanced Topics and Earlier Links
-
-The longer tutorial’s technical sections now live in the advanced companion.
-These landings keep earlier section links usable without JavaScript.
-
-| Earlier section | Current location |
-| --- | --- |
-| <a id="contents"></a>Contents | [Advanced tutorial](TUTORIAL-ADVANCED.md#1-configuration-space-and-linear-programs) |
-| <a id="the-state-of-n--11-in-one-table"></a>The state of $n = 11$, in one table | [Advanced tutorial](TUTORIAL-ADVANCED.md#the-state-of-n--11-in-one-table) |
-| <a id="how-a-weighted-atomic-lower-bound-proof-works"></a>How a weighted atomic lower-bound proof works | [Advanced tutorial](TUTORIAL-ADVANCED.md#how-a-weighted-atomic-lower-bound-proof-works) |
-| <a id="how-the-finite-covering-lp-searches-for-atoms"></a>How the finite covering LP searches for atoms | [Advanced tutorial](TUTORIAL-ADVANCED.md#how-the-finite-covering-lp-searches-for-atoms) |
-| <a id="why-condition-on-corner-squares"></a>Why condition on corner squares? | [Advanced tutorial](TUTORIAL-ADVANCED.md#why-condition-on-corner-squares) |
-| <a id="2-the-configuration-space"></a>2. The Configuration Space | [Advanced tutorial](TUTORIAL-ADVANCED.md#1-configuration-space-and-linear-programs) |
-| <a id="the-cell-decomposition"></a>The cell decomposition | [Advanced tutorial](TUTORIAL-ADVANCED.md#the-cell-decomposition) |
-| <a id="thirty-four-dimensions-become-one"></a>Thirty-four dimensions become one | [Advanced tutorial](TUTORIAL-ADVANCED.md#thirty-four-dimensions-become-one) |
-| <a id="3-cells-basins-and-two-traps"></a>3. Cells, Basins, and Two Traps | [Advanced tutorial](TUTORIAL-ADVANCED.md#2-refinement-corners-and-connected-families) |
-| <a id="the-quench-map"></a>The quench map | [Advanced tutorial](TUTORIAL-ADVANCED.md#the-quench-map) |
-| <a id="trap-1a-fixed-angle-cell-solve-is-not-a-basin"></a>Trap 1—a fixed-angle cell solve is not a basin | [Advanced tutorial](TUTORIAL-ADVANCED.md#trap-1a-fixed-angle-cell-solve-is-not-a-basin) |
-| <a id="trap-2a-point-basin-need-not-be-a-terminal-component"></a>Trap 2—a point-basin need not be a terminal component | [Advanced tutorial](TUTORIAL-ADVANCED.md#trap-2a-point-basin-need-not-be-a-terminal-component) |
-| <a id="the-generalized-lesson-learned-twice"></a>The generalized lesson, learned twice | [Advanced tutorial](TUTORIAL-ADVANCED.md#the-generalized-lesson-learned-twice) |
-| <a id="4-the-corner"></a>4. The Corner | [Advanced tutorial](TUTORIAL-ADVANCED.md#the-corner) |
-| <a id="5-algebra-versus-numerics"></a>5. Algebra Versus Numerics | [Advanced tutorial](TUTORIAL-ADVANCED.md#3-exact-arithmetic-and-reconstruction) |
-| <a id="why-exactness-is-not-optional"></a>Why exactness is not optional | [Advanced tutorial](TUTORIAL-ADVANCED.md#why-exactness-is-not-optional) |
-| <a id="the-number-field"></a>The number field | [Advanced tutorial](TUTORIAL-ADVANCED.md#the-number-field) |
-| <a id="how-many-roots-does-a-packing-need"></a>How many roots does a packing need? | [Advanced tutorial](TUTORIAL-ADVANCED.md#how-many-roots-does-a-packing-need) |
-| <a id="assurance-method-and-precision"></a>Assurance, method, and precision | [Advanced tutorial](TUTORIAL-ADVANCED.md#assurance-method-and-precision) |
-| <a id="contact-graphs-stationary-branches-and-rattlers"></a>Contact graphs, stationary branches, and rattlers | [Advanced tutorial](TUTORIAL-ADVANCED.md#contact-graphs-stationary-branches-and-rattlers) |
-| <a id="from-a-numeric-solution-to-an-exact-one"></a>From a numeric solution to an exact one | [Advanced tutorial](TUTORIAL-ADVANCED.md#from-a-numeric-solution-to-an-exact-one) |
-| <a id="6-what-is-built-and-what-is-not"></a>6. What Is Built, and What Is Not | [Advanced tutorial](TUTORIAL-ADVANCED.md#4-certificates-regularization-and-evidence) |
-| <a id="7-how-the-search-is-approached-and-why"></a>7. How the Search Is Approached, and Why | [Advanced tutorial](TUTORIAL-ADVANCED.md#5-search-design-and-its-limits) |
-| <a id="the-catalogue"></a>The catalogue | [Advanced tutorial](TUTORIAL-ADVANCED.md#the-catalogue) |
-| <a id="the-strategy-why-pointing-should-beat-scaling"></a>The strategy: why pointing should beat scaling | [Advanced tutorial](TUTORIAL-ADVANCED.md#the-strategy-why-pointing-should-beat-scaling) |
-| <a id="steering-keep-the-loss-change-what-you-keep"></a>Steering: keep the loss, change what you keep | [Advanced tutorial](TUTORIAL-ADVANCED.md#steering-keep-the-loss-change-what-you-keep) |
-| <a id="relaxation-ladders-turn-rare-event-search-into-path-following"></a>Relaxation ladders: turn rare-event search into path-following | [Advanced tutorial](TUTORIAL-ADVANCED.md#relaxation-ladders-turn-rare-event-search-into-path-following) |
-| <a id="calibration-must-match-mechanism-not-just-difficulty"></a>Calibration must match mechanism, not just difficulty | [Advanced tutorial](TUTORIAL-ADVANCED.md#calibration-must-match-mechanism-not-just-difficulty) |
-| <a id="near-misses-are-the-data"></a>Near-misses are the data | [Advanced tutorial](TUTORIAL-ADVANCED.md#near-misses-are-the-data) |
-| <a id="8-what-is-known-and-what-is-not"></a>8. What Is Known, and What Is Not | [Advanced tutorial](TUTORIAL-ADVANCED.md#8-results-and-open-questions) |
-| <a id="established"></a>Established | [Advanced tutorial](TUTORIAL-ADVANCED.md#established) |
-| <a id="open"></a>Open | [Advanced tutorial](TUTORIAL-ADVANCED.md#open) |
-| <a id="9-how-an-optimality-proof-is-built"></a>9. How an Optimality Proof Is Built | [Advanced tutorial](TUTORIAL-ADVANCED.md#7-global-optimality-by-exclusion-and-capture) |
-| <a id="three-parts"></a>Three parts | [Advanced tutorial](TUTORIAL-ADVANCED.md#three-parts) |
-| <a id="the-cap-above-the-optimum"></a>The cap above the optimum | [Advanced tutorial](TUTORIAL-ADVANCED.md#the-cap-above-the-optimum) |
-| <a id="the-centre-box-and-capacity-one-covers"></a>The centre box and capacity-one covers | [Advanced tutorial](TUTORIAL-ADVANCED.md#the-centre-box-and-capacity-one-covers) |
-| <a id="symmetry-and-orbits"></a>Symmetry and orbits | [Advanced tutorial](TUTORIAL-ADVANCED.md#symmetry-and-orbits) |
-| <a id="sub-pattern-exclusion-by-containment"></a>Sub-pattern exclusion by containment | [Advanced tutorial](TUTORIAL-ADVANCED.md#sub-pattern-exclusion-by-containment) |
-| <a id="selection-versus-certification"></a>Selection versus certification | [Advanced tutorial](TUTORIAL-ADVANCED.md#selection-versus-certification) |
-| <a id="what-makes-a-certificate-admissible"></a>What makes a certificate admissible | [Advanced tutorial](TUTORIAL-ADVANCED.md#what-makes-a-certificate-admissible) |
-| <a id="a-local-minimum-modulo-sliders"></a>A local minimum modulo sliders | [Advanced tutorial](TUTORIAL-ADVANCED.md#a-local-minimum-modulo-sliders) |
-| <a id="capture"></a>Capture | [Advanced tutorial](TUTORIAL-ADVANCED.md#capture) |
-| <a id="why-exact-arithmetic-dominates-the-cost"></a>Why exact arithmetic dominates the cost | [Advanced tutorial](TUTORIAL-ADVANCED.md#why-exact-arithmetic-dominates-the-cost) |
-| <a id="10-a-vocabulary-card"></a>10. A Vocabulary Card | [Advanced tutorial](TUTORIAL-ADVANCED.md#9-vocabulary) |
-| <a id="11-a-notation-card"></a>11. A Notation Card | [Advanced tutorial](TUTORIAL-ADVANCED.md#10-notation) |
-| <a id="12-further-reading"></a>12. Further Reading | [Advanced tutorial](TUTORIAL-ADVANCED.md#11-further-reading) |
-| <a id="what-does-the-arithmetic-here"></a>What does the arithmetic here | [Advanced tutorial](TUTORIAL-ADVANCED.md#what-does-the-arithmetic-here) |
-| <a id="13-where-to-go-next"></a>13. Where to Go Next | [Advanced tutorial](TUTORIAL-ADVANCED.md#12-research-and-implementation-guides) |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

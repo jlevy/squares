@@ -32,6 +32,7 @@ from devtools.regularize_axis_components import (
     ATLAS_CONTRACT,
     EVAND_CREDIT,
     EVAND_GENERATOR,
+    LAPSED,
     RATIONAL_DIGITS,
     ROOT,
     SMALLEST_DILATION,
@@ -648,7 +649,9 @@ def test_another_generators_view_is_checked_kept_and_decided_again(
     assert any("certificate credit is 'someone else'" in problem for problem in problems)
     layout.view(4).write_bytes(retained)
 
-    # Its witness changed: the view lapses, and this tool's record is drawn again.
+    # Its witness changed: the view lapses, and this tool's record is drawn again. The lapse
+    # is written into that record, not only printed, so the count reads pending in the
+    # default-drawings record until the generators decide the new witness (think-gvke).
     path = layout.packing / "w/n-004.yaml"
     path.write_text(path.read_text() + "# corrected\n", encoding="utf-8")
     assert main(["--update-atlas"], layout=layout) == 0
@@ -656,7 +659,29 @@ def test_another_generators_view_is_checked_kept_and_decided_again(
     assert {record["generator"] for record in index["entries"]} == {ALGORITHM}
     assert index["runs"] == []
     assert list(index["generators"]) == [ALGORITHM]
+    lapsed = next(record for record in index["entries"] if record["n"] == 4)
+    assert lapsed[LAPSED] == {
+        "generator": EVAND_GENERATOR,
+        "run": "fixture-run",
+        "witness_sha256": entry["source"]["sha256"],
+    }
+    assert lapsed["source"]["sha256"] != entry["source"]["sha256"]
     assert check_atlas(layout) == []
+    # The lapse is history, not derived: the re-derivation compares the record without it,
+    # and a later update of the same witness carries it forward.
+    assert main(["--verify-atlas"], layout=layout) == 0
+    assert main(["--update-atlas", "--n", "4"], layout=layout) == 0
+    again = json.loads(layout.index.read_text())
+    assert next(record for record in again["entries"] if record["n"] == 4) == lapsed
+
+    # A lapse names the generator whose view lapsed and its run, and only this tool's own
+    # record carries one.
+    lapsed[LAPSED]["generator"] = ALGORITHM
+    again["entries"] = [lapsed if record["n"] == 4 else record for record in again["entries"]]
+    layout.index.write_text(json.dumps(again), encoding="utf-8")
+    assert check_atlas(layout) == [
+        f"n=4: the lapsed view's generator is {ALGORITHM!r}",
+    ]
 
 
 # Two squares meeting a hair too closely: their 31-digit centres put them 1e-30 into each

@@ -1,0 +1,4 @@
+{
+  "format": "intake-ledger-github-v1",
+  "items": [{"report":"PR #574","kind":"pull-request","number":574,"url":"https://github.com/jlevy/squares/pull/574","author":"BuddenPing","created_at":"2026-10-13T00:13:11Z","state":"open","closed_at":null,"title":"research: submit 148 square-packing certificate refinements with exact endpoints"},{"report":"PR #622","kind":"pull-request","number":622,"url":"https://github.com/jlevy/squares/pull/622","author":"BuddenPing","created_at":"2026-10-15T18:43:54Z","state":"open","closed_at":null,"title":"data: submit a tighter exact N29 packing certificate"}]
+}

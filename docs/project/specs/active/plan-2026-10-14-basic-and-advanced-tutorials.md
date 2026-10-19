@@ -4,10 +4,10 @@
 
 **Author:** Codex, Astra strong tier at xhigh, on the owner’s revision brief
 
-**Status:** Manuscripts independently reviewed and corrected; tutorial-specific site
-integration implemented.
-Focused validation is in progress; the coordinator owns the release disposition, PR and
-publication.
+**Status:** Delivered in [PR #604](https://github.com/jlevy/squares/pull/604), merged as
+`16ea3bd0606c` and published on 14 October 2026. Shared headings and original
+publication dates followed in [PR #617](https://github.com/jlevy/squares/pull/617),
+merged as `f97bc0b199e2` and published on 15 October 2026.
 
 **Tracking:** `think-n8md`, under `think-jpto`; the coordinator owns bead changes.
 
@@ -35,7 +35,7 @@ October 2026; intake packets and reported formalizations retain their recorded l
 
 ## Manuscripts and Reading Order
 
-| Manuscript | Proposed page | Role |
+| Manuscript | Published page | Role |
 | --- | --- | --- |
 | [TUTORIAL.md](../../../../TUTORIAL.md) | `tutorial.html`, unchanged | Short beginner paper, prominently featured at the top of Explanations |
 | [TUTORIAL-ADVANCED.md](../../../../TUTORIAL-ADVANCED.md) | `tutorial-advanced.html` | Advanced companion after the basic paper in the prominent Tutorial section |
@@ -212,16 +212,27 @@ manuscript commit. The coordinator retains release and publication ownership.
 - [x] Render both papers and check browser typography and clipping at desktop and phone
   widths; verify source/website links and all legacy landings.
 - [x] Run focused publication, documentation, source-scope and static checks.
-- [ ] Complete the coordinator’s combined release disposition, PR review and hosted CI.
+- [x] Complete the coordinator’s combined release disposition, PR review and hosted CI.
 
 Validation reuses the installed Python environment and the pinned local kpress checkout.
 There is no dependency installation, PDF build or scientific replay.
-The focused source and browser receipts are recorded in the editorial review; full CI
-and release approval remain with the coordinator.
+The focused source and browser receipts are recorded in the editorial review.
+PR #604’s reviewed head passed
+[Packing](https://github.com/jlevy/squares/actions/runs/38634417915) and
+[Pages](https://github.com/jlevy/squares/actions/runs/38634417893); the
+[merged deployment](https://github.com/jlevy/squares/actions/runs/38636016372) published
+both tutorials and passed the
+[4,243-check live audit](https://github.com/jlevy/squares/actions/runs/38636016372/job/116103959611).
+The later original-date and heading refinements passed
+[main Packing](https://github.com/jlevy/squares/actions/runs/38722914629) and
+[Pages with deployed-site verification](https://github.com/jlevy/squares/actions/runs/38722914631)
+at PR #617’s merge. The basic tutorial retains its 1 October first-publication date; the
+advanced tutorial’s first publication is 14 October.
+The separate CI iteration-cost follow-up, `think-h96x`, remains open.
 External scratch is the dedicated `tutorial-basic-advanced` directory; unique source and
 editorial evidence live in this worktree.
-The writer makes local source commits and tutorial registry updates.
-Pushes, PRs, release metadata and bead synchronization remain with the coordinator.
+The writer made local source commits and tutorial registry updates.
+The coordinator owned pushes, PRs, release metadata and bead synchronization.
 
 ## References
 

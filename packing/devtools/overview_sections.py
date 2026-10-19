@@ -28,6 +28,7 @@ from urllib.parse import urlsplit
 from xml.etree import ElementTree as ET
 
 from devtools import repo_links
+from devtools.artifact_dates import long_date, written_date
 from devtools.check_results import KINDS, kind_label
 from devtools.overview_data import (
     APOSTROPHE,
@@ -56,6 +57,7 @@ from devtools.render_recent_results import REPORTED_MARK, SUPERSEDED, listed, su
 from devtools.repo_links import branch_file
 from devtools.result_status import CONFIRMED, STATUSES, recent_contributions_by_case
 from devtools.site_topics import topic_chip, topic_label
+from sqpack import release
 from sqpack.known_best import PackingSegment, grid_transitions
 from sqpack.yamlio import safe_load
 
@@ -2036,21 +2038,56 @@ THRESHOLD_REVIEW = next(paper for paper in PAPERS if paper.href == THRESHOLD_BOU
 OPTIMALITY = next(paper for paper in PAPERS if paper.href == OPTIMALITY_PAPER)
 
 
+#: First site publications, independent of later tutorial revisions. The basic page
+#: first shipped in Pages run 36833533118 (2026-10-01, source f9a3409f0); its manuscript
+#: predates the website. The advanced page first shipped in run 38636016372
+#: (2026-10-14, source 16ea3bd0606). Both runs successfully deployed these addresses.
+TUTORIAL_FIRST_PUBLISHED = {
+    "tutorial.html": date(2026, 10, 1),
+    "tutorial-advanced.html": date(2026, 10, 14),
+}
+
+
+def article_header(
+    title_html: str,
+    published: date,
+    *,
+    eyebrow: str = "",
+    metadata_html: str = "",
+    extra_class: str = "",
+) -> str:
+    """A reading card's heading; title and optional metadata are already safe HTML."""
+    label = f'<span class="site-card-label">{_esc(eyebrow)}</span>' if eyebrow else ""
+    classes = "site-article-header" + (f" {_esc(extra_class)}" if extra_class else "")
+    return (
+        f'<header class="{classes}">{label}'
+        f"<h3{headline_math_face(title_html)}>{title_html}</h3>"
+        '<p class="site-article-date publication-date">'
+        f'<time datetime="{published.isoformat()}">{long_date(published)}</time></p>'
+        f"{metadata_html}</header>"
+    )
+
+
+def paper_first_published(paper: Paper) -> date:
+    """Use the paper's first retained edition, never its current revision or site cut."""
+    if paper.href in TUTORIAL_FIRST_PUBLISHED:
+        return TUTORIAL_FIRST_PUBLISHED[paper.href]
+    slug = Path(paper.href).stem
+    return written_date(release.component_history(f"paper:{slug}")[-1].first_published)
+
+
 def paper_cards(*, papers: Sequence[Paper] | None = None) -> str:
-    """One card per paper. Each card is the link itself and goes to its paper in the same
-    tab, as the overview's page cards do (`page_cards`): a paper is a full page the site
-    serves, so no popover previews it (`link_card`, `new_tab=False`). A link holds no
-    other link, so the Papers page's introduction links what a description names."""
+    """Same-tab reading cards with the shared article heading and original dates."""
     return _cards(
         [
-            link_card(
-                paper.href,
-                paper.label,
+            f'<a class="site-card site-card-link" href="{_esc(paper.href)}" '
+            f'data-go="page" {_size_attribute(paper.size)}>'
+            + article_header(
                 tex_bounds(paper.title),
-                tex_bounds(paper.description),
-                size=paper.size,
-                new_tab=False,
+                paper_first_published(paper),
+                eyebrow=paper.label,
             )
+            + f'<span class="site-card-note">{tex_bounds(paper.description)}</span></a>'
             for paper in (PAPERS if papers is None else papers)
         ]
     )
@@ -2292,6 +2329,14 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
         ),
     ),
     (
+        "https://github.com/bengreff/s95-certificate",
+        "Benjamin Greff",
+        (
+            "A mixed cover of points and grid-line segments for s(95) = 10, with the run"
+            " records of both checkers; reported, both checkers replayed in triage (T-191)."
+        ),
+    ),
+    (
         "https://github.com/RobertBarnettProjects/square-packing-research",
         "Robert Barnett",
         (
@@ -2308,6 +2353,14 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
         "https://github.com/JoostdeWinter/square-packing-211",
         "Joost de Winter",
         "A packing of 211 squares in a square of side under 15.",
+    ),
+    (
+        "https://github.com/JoostdeWinter/square-packing",
+        "Joost de Winter",
+        (
+            "Reported exact rational certificates for 227, 229 and 260 squares,"
+            " pending adoption (T-196)."
+        ),
     ),
     (
         "https://github.com/Queuingtheorydotcom/11SquaresOptimal",
@@ -2339,6 +2392,14 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
         "Oscar Fitzharding",
         (
             "A Lean 4 proof that Bidwell's packing of seventeen squares is optimal, "
+            "trusting Lean's compiler for its certificates."
+        ),
+    ),
+    (
+        "https://github.com/ofitzharding/sq19",
+        "Oscar Fitzharding",
+        (
+            "A Lean 4 proof that Wainwright's packing of nineteen squares is optimal, "
             "trusting Lean's compiler for its certificates."
         ),
     ),

@@ -1,0 +1,117 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-10-15T02:45Z",
+  "git_scope": "Blobless clone, sparse checkout of the named files at the pinned commit, the head of master when retrieved and four commits past 43ac7d2, the pin of issue #607. 4e4c8ce (2026-10-15T00:31:53Z) adds certificates/n237.cert, an exact certificate at 237 that no issue reports, and the same bytes at certificates/best/n237.cert; 58a7833 leaves both unchanged and adds the G\u00f6bel square and strip comparison. The certificate is retained as factual data. Its metadata, the decimal packing and its drawing, the three READMEs that print its side, the author's index files and checker, and the checker's licence are pinned by digest only. The rest of the tree, including the several hundred other certificates of 4e4c8ce and the search programs, is pinned by the commit and was not retained or executed.",
+  "sources": [
+    {
+      "id": "franciscouzo-square-packing",
+      "source_url": "https://github.com/franciscouzo/square-packing",
+      "source_ref": "master",
+      "source_commit": "58a783368d4b7e70bb800f0009ea9ca03e578739",
+      "committed_utc": "2026-10-15T01:25:11Z",
+      "git_tree": "01cd91c65212b6a3336504c6c00adb90066caf8c",
+      "archived_path": "packing/resources/web/couzo-n237-2026-10-15/source",
+      "subtree_manifest": "packing/resources/web/couzo-n237-2026-10-15/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "README.md",
+        "BOUND_VERIFIER_LICENSE.txt",
+        "verify_bound_certificate.py",
+        "upper_bounds.json",
+        "n237.txt",
+        "n237.svg",
+        "certificates/README.md",
+        "certificates/n237.cert",
+        "certificates/n237.json",
+        "certificates/best/README.md",
+        "certificates/best/SHA256SUMS",
+        "certificates/best/manifest.json",
+        "certificates/best/n237.cert"
+      ],
+      "subtree_file_count": 13,
+      "subtree_total_bytes": 2213004,
+      "retained_file_count": 1,
+      "retained_total_bytes": 33742,
+      "compressed": [],
+      "pinned_only": [
+        {
+          "path": "BOUND_VERIFIER_LICENSE.txt",
+          "bytes": 1068,
+          "sha256": "c51886c0f7e6724a7d89fc22cb237a1688ba1bbff04cb21a13b8e1a01fb15578",
+          "reason": "Evan Daniel's MIT licence for the author's checker; pinned beside the checker it covers."
+        },
+        {
+          "path": "README.md",
+          "bytes": 57107,
+          "sha256": "ede952af7a0623390aa3fdb42a50f35c445ef5150629d45bf05718c1d1c615c7",
+          "reason": "No licence for the author's prose; the root README and the two certificate READMEs print the side and the credits. Hash-pinned, not copied."
+        },
+        {
+          "path": "certificates/README.md",
+          "bytes": 71839,
+          "sha256": "c14c285849fc5bce669191b72482b9d9b615d74ff9373d0034160a25f8c3875e",
+          "reason": "No licence for the author's prose; the root README and the two certificate READMEs print the side and the credits. Hash-pinned, not copied."
+        },
+        {
+          "path": "certificates/best/README.md",
+          "bytes": 95086,
+          "sha256": "9f94e26435c01a9d657deb142fa2c397b0f9ad89c5d466f6160d76dba8de6085",
+          "reason": "No licence for the author's prose; the root README and the two certificate READMEs print the side and the credits. Hash-pinned, not copied."
+        },
+        {
+          "path": "certificates/best/SHA256SUMS",
+          "bytes": 39259,
+          "sha256": "87dbbe3e415f4e59804cdecdf3027cd02b31c2a954a55df24a43abd104da5640",
+          "reason": "The author's digest list for the index directory; its n237.cert line equals the retained file's SHA-256. Pinned for provenance."
+        },
+        {
+          "path": "certificates/best/manifest.json",
+          "bytes": 1045237,
+          "sha256": "08f257e7c992ea1333c7a77e6aa8828fe7144fec6d9c737821c6e4ef2388de2a",
+          "reason": "The author's index of every count's witness, credit and checker receipts, 1 MB; pinned for provenance, as no claim here rests on it."
+        },
+        {
+          "path": "certificates/best/n237.cert",
+          "bytes": 33742,
+          "sha256": "e367f769988aaa47ebeb4e5c40d0410c3a0bb23bad50f7478d3d3de452c1da7f",
+          "reason": "Byte-identical to the retained certificates/n237.cert (Git blob 788bdc538d8a561f5e33dfd517d227fa8c0bb04c at both paths); pinned so the index's copy is bound too."
+        },
+        {
+          "path": "certificates/n237.json",
+          "bytes": 1062,
+          "sha256": "562863a1241cde21dfbbb907875f78cdf5a0c4529fbc9353f7ec22c9abf6de8c",
+          "reason": "The source's per-certificate metadata: digests, exact side, kind and seed credit as prose; pinned for provenance, as no claim rests on it."
+        },
+        {
+          "path": "n237.svg",
+          "bytes": 31210,
+          "sha256": "00350ee64f7bc814aec553624fdda77234f220b90e0e124ca3bd6733c51c3b99",
+          "reason": "The decimal packing the certificate was solved from and its drawing; pinned for provenance, as no claim rests on them."
+        },
+        {
+          "path": "n237.txt",
+          "bytes": 17133,
+          "sha256": "884db8d572767657ffba049ee52041d2454596f861a8b346f3d516aacb50c37b",
+          "reason": "The decimal packing the certificate was solved from and its drawing; pinned for provenance, as no claim rests on them."
+        },
+        {
+          "path": "upper_bounds.json",
+          "bytes": 782952,
+          "sha256": "9e9025b439a59961fa0e046b62e61d29d615f31b0849e1ed1fd36b5139e4370e",
+          "reason": "The author's upper-bound index for n = 1..1024; pinned for provenance, as no claim here rests on it."
+        },
+        {
+          "path": "verify_bound_certificate.py",
+          "bytes": 3567,
+          "sha256": "1c8b89eb0de71bc751db57061a015b8ed8ffb354d38ce13bcf8201ce8c90e98b",
+          "reason": "The author's exact checker; pinned for provenance and never executed here."
+        }
+      ],
+      "license": "No licence file or reuse terms for the author's files at the pin: the tree has no LICENSE, and neither README.md nor certificates/README.md states terms. BOUND_VERIFIER_LICENSE.txt is Evan Daniel's MIT licence, which covers the author's checker verify_bound_certificate.py and not the certificates. The certificate is retained as factual data under the owner decision of 2026-10-09 recorded in resources/web/known-best-packings/README.md (Retained Factual Data); prose is hash-pinned and not copied.",
+      "claims": [
+        "Commit 4e4c8ce (2026-10-15T00:31:53Z) adds certificates/n237.cert, stating s(237) <= 7951301819129798440089572127137/500000000000000000000000000000 = 15.90260363825959688..., printed rounded up as 15.902603638260 in certificates/README.md and certificates/best/README.md. No issue reports it. Its metadata calls it an exact optimum seeded from Mykhailo Polkovskyi's issue-593 certificate and found by the author's fq search; the index credits Francisco Couzo, with construction credit Nate Chaoweeraprasit (itsnaka).",
+        "The certificate is 2.40e-11 below the n237 certificate of issue #607 (43ac7d2, submissions/2026-10-14/certificates/n237.cert, printed 15.902603638284), a different file, and the issue has not been updated to name it.",
+        "certificates/best/manifest.json reports that the author's checker verify_bound_certificate.py and this repository's sqpack verify.py at 37e6757 accept it in exact rational arithmetic. Those statements are the author's; no source program ran here."
+      ]
+    }
+  ]
+}

@@ -107,15 +107,28 @@ PAGE_BUDGET_EXCEPTIONS: dict[str, tuple[int, str]] = {
         ),
     ),
     "results.html": (
-        1_150_000,
+        1_250_000,
         (
-            "The complete registered-result table with prepared math, and the seven days' "
-            "arrivals and weekly rollup above it, measures 1,046,291 bytes at 184 results "
-            "on 14 October 2026; the table alone measured 843,037 at 146 and 976,783 at "
-            "184. A result adds 3,474 bytes to the table on average (4,723 at the 90th "
-            "percentile) and about 280 to the seven days while it is recent, so the "
-            "ceiling holds the page through 200 results at the 90th-percentile cost and "
-            "about 210 at the average; `test_overview` holds it through 200."
+            "The complete 212-result table with prepared math measures 1,141,207 bytes. "
+            "Each row links its full record; no record body is repeated in the table. "
+            "Three-run desktop/mobile, light/dark and no-JS checks pass: "
+            "CLS <=0.001, LCP <=576 ms, longest task <=153 ms and blocking <=123 ms. "
+            "The ceiling retained about 100 kB of headroom for registered results. With "
+            "the seven days' arrivals and weekly rollup above the table, the page "
+            "measures 1,203,626 bytes at 217 results on 19 October 2026. A result adds "
+            "3,423 bytes to the table on average (4,607 at the 90th percentile) and "
+            "about 291 to the seven days while it is recent, so the ceiling holds the "
+            "page through 225 results at the 90th-percentile cost; `test_overview` "
+            "holds it there."
+        ),
+    ),
+    "result/t-174.html": (
+        350_000,
+        (
+            "The complete 68-case result and its 89-step history with prepared math "
+            "measure 305,917 bytes. Three-run desktop/mobile, light/dark and no-JS "
+            "checks pass: CLS <=0.001, LCP <=576 ms, longest task <=153 ms and "
+            "blocking <=123 ms."
         ),
     ),
     "result/t-180.html": (
