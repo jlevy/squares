@@ -69,7 +69,7 @@ DECIDES = {
     "numerical-f64": "nothing formally; a measurement at a tolerance",
     "published-proof": "whatever its theorem states",
     "proof-audited": "whatever its theorem states",
-    "proof-assistant-checked": "its theorem, against a named kernel",
+    "proof-assistant-checked": "its theorem, within the recorded execution trust boundary",
 }
 
 

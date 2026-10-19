@@ -13190,7 +13190,7 @@ urls:
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-13'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-15'
   status: live
   identity:
     kind: formalization
@@ -13205,6 +13205,7 @@ urls:
     builds_on: null
     evidence:
     - E-n017-fitzharding-lean-report
+    - E-n017-fitzharding-lean-source-build
     artifacts:
     - packing/resources/web/fitzharding-n17-lean-2026-10-13/README.md
     - packing/resources/web/fitzharding-n17-lean-2026-10-13/sq17-lean/Sq17Lean/Square17Optimality.lean
@@ -13225,6 +13226,36 @@ urls:
       change to the claim's statement, scope, evidence, status or bound.
     previous:
       kind: simplification
+      scope:
+        n_values:
+        - 17
+      established: null
+      attribution:
+        source_keys:
+        - '[Fitzharding n17 Lean 2026]'
+        published: '2026-10-12'
+      builds_on: null
+      evidence:
+      - E-n017-fitzharding-lean-report
+      artifacts:
+      - packing/resources/web/fitzharding-n17-lean-2026-10-13/README.md
+      - packing/resources/web/fitzharding-n17-lean-2026-10-13/sq17-lean/Sq17Lean/Square17Optimality.lean
+      - packing/resources/web/fitzharding-n17-lean-2026-10-13/sq17-lean/Sq17Lean/PackingStatement.lean
+      - packing/resources/web/fitzharding-n17-lean-2026-10-13/sq17-lean/Sq17Lean/EndpointGeometry.lean
+      - packing/resources/web/fitzharding-n17-lean-2026-10-13/sq17-lean/Sq17Lean/EndpointRootData.lean
+      - packing/resources/web/fitzharding-n17-lean-2026-10-13/sq17-lean/verification/clean-build-receipt.json
+      - packing/resources/web/fitzharding-n17-lean-2026-10-13/sq17-lean/verification/Square17Optimality.log.gz
+      - packing/resources/web/fitzharding-n17-lean-2026-10-13/receipts/source-consistency.json
+      - packing/resources/web/fitzharding-n17-lean-2026-10-13/receipts/endpoint-comparison.json
+      - packing/resources/web/fitzharding-n17-lean-2026-10-13/receipts/cover-comparison.json
+      - packing/resources/web/fitzharding-n17-lean-2026-10-13/receipts/closures.json
+      - docs/project/reviews/review-2026-10-13-fitzharding-n17-lean.md
+  - date: '2026-10-15'
+    reason: The formal-proof audit (think-o6ou) admits the retained complete producer build as separate
+      external evidence. T-154 moves from V0/C1 to V3/C1; its mathematical statement, scope, source
+      credit and case bounds are unchanged, and no independent proof build is claimed.
+    previous:
+      kind: formalization
       scope:
         n_values:
         - 17

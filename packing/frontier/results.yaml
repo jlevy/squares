@@ -5368,9 +5368,11 @@ results:
       - docs/project/reviews/review-2026-10-06-n11-lean-formalization-statement-audit.md
     next_rung: >-
       V5 needs two records the register lacks. One is a complete build of the
-      11SquaresFormalized proof that the record can rest on, with its axiom receipt: run here
-      from the retained pin at its toolchain, or a third party's build retained here. The
-      source's own run is private and is recorded as reported
+      11SquaresFormalized proof that the record can rest on, with its axiom receipt:
+      an adequate inspected source execution record, or a complete run here or by a third
+      party. The source's own run is private and resumed from earlier receipts, with
+      conflicting pending-build metadata and no retained record resolving which modules
+      it compiled, so it remains reported
       (E-n011-lean-formalization-report). The other is a retained formalization review by a
       named human expert who is not its author and states competence in Lean and in the
       mathematics, checking statement fidelity, the definitions, the axioms (the 13,308
@@ -17838,7 +17840,7 @@ results:
       assistance from Claude and Codex"; the author's post says it was "Built with @OpenAI
       Astra + @AnthropicAI Opus 5.5" and thanks Ahmed and Joshua Levy for prior work.
     scope: {n_values: [17]}
-    verification: V0
+    verification: V3
     confirmation: C1
     significance:
       score: 5
@@ -17850,9 +17852,10 @@ results:
         statement. n = 17 is, with n = 12, one of the two open cases below n = 18.
 
         Its kind is formalization, a proof-assistant proof of a value the record already
-        holds; what it adds is a lower-bound proof checked in one proof-assistant build, so a single
-        complete build, here or by a third party and retained here, would carry it to V3
-        and C3, where T-153 needs its capture recomputation and ten trees replayed.
+        holds; what it adds is a lower-bound proof checked in one proof-assistant build.
+        Its inspected source build supports V3; a complete confirming build here or by
+        a third party and retained here would support C3, where T-153 needs its capture
+        recomputation and ten trees replayed.
         Significance is separate from whether the proof is correct. Proposed for the owner's
         confirmation.
       scored: '2026-10-13'
@@ -17861,11 +17864,14 @@ results:
     attribution:
       source_keys: ['[Fitzharding n17 Lean 2026]']
       published: '2026-10-12'
-    evidence: [E-n017-fitzharding-lean-report]
+    evidence: [E-n017-fitzharding-lean-report, E-n017-fitzharding-lean-source-build]
     composition: >-
-      One cited entry, the source's report (E-n017-fitzharding-lean-report), which claims
-      the exact value and carries the first review of 13 October as its external_review; it sets
-      both rungs. The upper half, a packing at side L, is proved in the Lean without native
+      The original report (E-n017-fitzharding-lean-report) preserves the source's claim
+      and the first review. The separately admitted source build
+      (E-n017-fitzharding-lean-source-build) establishes V3 on the producer's execution
+      record; neither is a confirming run, so the qualifying reads establish C1.
+
+      The upper half, a packing at side L, is proved in the Lean without native
       evaluation: endpoint_plainPacking, in PackingStatement, whose 241-module import
       closure holds no native_decide, wraps EndpointPacking's endpoint_packing, whose
       18-module closure holds none either (the packet's receipts/closures.json). It is the
@@ -17886,12 +17892,12 @@ results:
       so citing them would make the checker derive a rung from parts (epistemics.md, Every
       Run's Code Is Kept).
 
-      By epistemics.md's predicates: V3 needs proof-assistant-checked evidence with a
-      certificate, a replay command and a passing replay, and no build of the proof is
-      retained here, so the result stands at V0, declared with the notes as the ladder asks;
-      no numerical method (V1) or unavailable proof (V2) fits. C3 would need that build with
-      a confirming origin; C2 needs a method that yields no certificate, which this is not.
-      C1's predicate holds: a qualifying, dated read with its reviewer and note.
+      The source's retained clean-build receipt and bound axiom log qualify under
+      epistemics.md's source-build admission rule, audited on 15 October. V describes
+      source verification and does not require an independent build. The record's
+      earlier explanation conflated that requirement with C. C3 still needs complete
+      execution beyond the producer; the source build and partial local checks cannot
+      supply it. The source's compiler trust and receipt limitations remain explicit.
     reviews:
       - path: docs/project/reviews/review-2026-10-13-fitzharding-n17-lean.md
         kind: adversarial
@@ -17956,8 +17962,8 @@ results:
       - packing/resources/web/fitzharding-n17-lean-2026-10-13/receipts/closures.json
       - docs/project/reviews/review-2026-10-13-fitzharding-n17-lean.md
     next_rung: >-
-      V3 and C3 need a complete build of the theorem's 4,951-module import closure that the
-      record can rest on, with its axiom receipt: the source's own command run from the
+      C3 needs a complete confirming build of the theorem's 4,951-module import closure,
+      with its axiom receipt: the source's own command run from the
       retained pin and the three release archives at Lean 4.34.1, here or by a third party
       whose build is retained here (think-r109). That would be reproduction with the
       producer's code. The intake's host, with 4 cores, 15 GB of memory and 18 GB of free
@@ -17977,13 +17983,15 @@ results:
       a dated reason in packing/site-urls.yaml; until the register records that decision,
       the standing check refuses it (epistemics.md, Result Kinds).
 
-      V4 and C4 need, on top of V3 and C3, the owner's oversight record naming
+      V4 needs, on top of the source build's V3, the owner's oversight record naming
       trust-boundary, certificate-meaning and ai-findings, which would disposition the two
       reviews' fourteen findings, none blocking; the two accepting adversarial AI reviews by
-      distinct reviewers they also need are on file since 13 October. V5 needs a retained formalization
+      distinct reviewers it also needs are on file since 13 October. C4 additionally
+      needs the complete confirming build and qualifying reviews on the confirming side.
+      V5 needs a retained formalization
       review by a named human expert in Lean and the mathematics who is not the author,
       checking statement fidelity, the definitions, the axioms (the 13,343 native_decide
-      facts among them) and that build; C5 needs the build made here, an open_review pointer
+      facts among them) and the inspected source build; C5 needs the build made here, an open_review pointer
       and two such reviews.
     unfinished_confirmations:
       - what: >-
@@ -18003,9 +18011,9 @@ results:
       17 case page and from #405, and from the owner's report of the repository and the
       author's post the same day (think-hcqr). It is a result of its own: the owner asked
       that a formalization be reported as its own result where it is one, since a proof may
-      be formalized later or by someone else. V0 is declared, with this note as the ladder
-      asks: the only entry is the source's report of its own build, and no build of the
-      proof is retained here.
+      be formalized later or by someone else. Registered at V0/C1; the 15 October audit
+      corrects V to V3 by admitting the retained complete source-build record as separate
+      external evidence. It performs no new build and leaves C1 unchanged.
 
       Kind, by the owner's decision of 13 October 2026: it was registered as a
       simplification, a second proof of a value the record holds, and the owner moved it to
@@ -18047,12 +18055,12 @@ results:
       begins at the release, so the order of development cannot be checked (the first review's
       F-7).
 
-      Rungs on 14 October 2026, after the second review (think-32rl): nothing moved. T-154
-      holds two accepting adversarial AI reviews by distinct, separately prompted
-      reviewers, which is what rung 4 asks of reviews, but rung 4 also needs V3 and C3, a
-      complete build here or by a third party, and the owner's oversight record, and
-      neither exists. The runs of the second review are on n-017's case record and derive
-      no rung here.
+      On 14 October, after the second review (think-32rl), the record left the original
+      rungs unchanged. The 15 October audit separates source verification from independent
+      confirmation: the two accepting adversarial AI reviews are retained, and the source
+      build supplies V3, but the human oversight required for V4 and the confirming
+      execution required for C3 are absent. The second review's component runs establish
+      no whole-theorem rung.
 
       The second review's six findings, MR-1 to MR-6, are none blocking: module docstrings
       that still call the development conditional (MR-1, the first review's F-3), modules

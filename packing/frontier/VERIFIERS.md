@@ -25,8 +25,8 @@ second implementation agrees.
 
 ## The Short Version
 
-- **166** programs: **50** external and **116** first-party; **113** decide claims and **53** check premises.
-- **545** of **650** evidence entries name the programs that verified them: 273 reproduced with the producer’s code, 231 independently re-implemented, 22 re-implemented, sharing the producer’s components, 19 no relation: a proof, a derivation or a report.
+- **165** programs: **50** external and **115** first-party; **113** decide claims and **52** check premises.
+- **537** of **642** evidence entries name the programs that verified them: 274 reproduced with the producer’s code, 231 independently re-implemented, 19 re-implemented, sharing the producer’s components, 13 no relation: a proof, a derivation or a report.
 
 ## Programs
 
@@ -75,7 +75,7 @@ second implementation agrees.
 | [`V-overbeck-n17-check-py`](#v-overbeck-n17-check-py) | check.py | Overbeck | external | decides | 2 | 1 |
 | [`V-overbeck-n17-capture-checkers`](#v-overbeck-n17-capture-checkers) | recompute_slice.py | Overbeck | external | decides | 2 | 1 |
 | [`V-overbeck-n17-tree-checkers`](#v-overbeck-n17-tree-checkers) | wxcheck_v30.py and wxcheck2_v30.js | Overbeck | external | decides | 2 | 1 |
-| [`V-fitzharding-n17-lean`](#v-fitzharding-n17-lean) | The sq17-lean Lean 4 development (Sq17Lean) | Fitzharding | external | decides | 1 | 1 |
+| [`V-fitzharding-n17-lean`](#v-fitzharding-n17-lean) | The sq17-lean Lean 4 development (Sq17Lean) | Fitzharding | external | decides | 2 | 1 |
 | [`V-check-basic-bounds`](#v-check-basic-bounds) | devtools.check_basic_bounds | Squares Project (Levy) | first-party | decides | 3 | 16 |
 | [`V-optimal-moduli`](#v-optimal-moduli) | cases.small_n.optimal_moduli | Squares Project (Levy) | first-party | decides | 1 | 0 |
 | [`V-sqpack-verify`](#v-sqpack-verify) | sqpack.verify | Squares Project (Levy) | first-party | decides | 72 | 61 |
@@ -147,7 +147,7 @@ second implementation agrees.
 | [`V-audit-wand125-point-and-mixed`](#v-audit-wand125-point-and-mixed) | devtools.audit_wand125_point_and_mixed | Squares Project (Levy) | first-party | premises | 17 | 7 |
 | [`V-audit-wand125-declared-net`](#v-audit-wand125-declared-net) | devtools.audit_wand125_declared_net | Squares Project (Levy) | first-party | premises | 2 | 2 |
 | [`V-audit-wand125-linear`](#v-audit-wand125-linear) | devtools.audit_wand125_linear | Squares Project (Levy) | first-party | premises | 3 | 3 |
-| [`V-sqverify-fast`](#v-sqverify-fast) | sqverify-fast | Squares Project (Levy) | first-party | decides | 115 | 27 |
+| [`V-sqverify-fast`](#v-sqverify-fast) | sqverify-fast | Squares Project (Levy) | first-party | decides | 112 | 24 |
 | [`V-replay-chelokot-lean`](#v-replay-chelokot-lean) | devtools.replay_chelokot_lean | Squares Project (Levy) | first-party | premises | 1 | 1 |
 | [`V-replay-evand-zmx2`](#v-replay-evand-zmx2) | devtools.replay_evand_zmx2 | Squares Project (Levy) | first-party | premises | 7 | 7 |
 | [`V-audit-evand-mixed-covers`](#v-audit-evand-mixed-covers) | devtools.audit_evand_mixed_covers | Squares Project (Levy) | first-party | premises | 11 | 10 |
@@ -197,7 +197,6 @@ second implementation agrees.
 | [`V-pingyou-622-exact-review`](#v-pingyou-622-exact-review) | review/programs/n29_exact_review.py | Squares Project (Levy) | first-party | decides | 1 | 1 |
 | [`V-audit-fine-net-receipt`](#v-audit-fine-net-receipt) | devtools.audit_fine_net_receipt | Squares Project (Levy) | first-party | premises | 1 | 1 |
 | [`V-n108-review-max-exact`](#v-n108-review-max-exact) | n108_audit.py | Squares Project (Levy) | first-party | premises | 2 | 1 |
-| [`V-fine-net-mac-review-exact`](#v-fine-net-mac-review-exact) | Historical fine-net Mac exact-checkpoint audits and analytical geometry controls | Squares Project (Levy) | first-party | premises | 6 | 0 |
 
 ## By Program
 
@@ -1099,6 +1098,7 @@ Proves Sq17.square17_optimality, s(17) = L, in Lean 4.34.1 with Mathlib v4.34.1 
 
 | evidence | run | code | coverage | results |
 | --- | --- | --- | --- | --- |
+| `E-n017-fitzharding-lean-source-build` | the source’s own run | reproduced with the producer’s code | full: the source's 4,951-module import closure of Sq17.square17_optimality | T-154 |
 | `E-n017-fitzharding-lean-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-154 |
 
 ### `V-check-basic-bounds`
@@ -2427,7 +2427,7 @@ The audit, replay driver and controls for wand125's linear certificates.
 
 Decides a measure-capture lower-bound certificate of format T, M or L on the 201-direction net, of format M on the uniform net its file declares (proof_net, lemma N0), or of format T on the uniform net its certificate metadata sets (D and angle_count, admitted under lemma N0's premises): exact admission of its premises, then an exact-event vertex sweep at the axis and outward-rounded interval branch and bound at every other direction, every shrunk square at every centre of its domain capturing at least the threshold.
 
-- Source: [`packing/sqverify_fast`](../../packing/sqverify_fast), [`packing/devtools/sqverify_fast_census.py`](../../packing/devtools/sqverify_fast_census.py), [`packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/orchestration/sqverify_fast_census.py.txt`](../../packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/orchestration/sqverify_fast_census.py.txt), [`packing/devtools/check_sqverify_fast.py`](../../packing/devtools/check_sqverify_fast.py), [`packing/src/sqpack/rectangle_density.py`](../../packing/src/sqpack/rectangle_density.py)
+- Source: [`packing/sqverify_fast`](../../packing/sqverify_fast), [`packing/devtools/sqverify_fast_census.py`](../../packing/devtools/sqverify_fast_census.py), [`packing/devtools/check_sqverify_fast.py`](../../packing/devtools/check_sqverify_fast.py), [`packing/src/sqpack/rectangle_density.py`](../../packing/src/sqpack/rectangle_density.py)
 - Versions run: this repository's commits, which Git holds
 - What its authors read and used: [`packing/sqverify_fast/independence-record.yaml`](../../packing/sqverify_fast/independence-record.yaml)
 - Note: A clean-room verifier, written from the mathematics without opening the authors' checkers (packing/sqverify_fast/INDEPENDENCE.md), its lemmas proved in packing/sqverify_fast/SOUNDNESS.md, and accepted at 4ddf37d9c by the two adversarial reviews of 3 October 2026, of its soundness and of its testing and independence. Its declared-net change (f007d7afd and 910b6b12c, source_sha256 d97758bb...) was accepted by the soundness review of 6 October 2026 (docs/project/reviews/review-2026-10-06-sqverify-fast-declared-net-soundness.md), for a declared net once the control's exact evaluator read that net (its DR-1), which the same day's re-check confirmed. Its format T metadata-net path, by which a format T file's certificate block sets D and angle_count, has no review of its own: lemma N0 is stated for every net admission accepts, and the review of 10 October 2026 of Guzhou0806's s(40) bound (docs/project/reviews/review-2026-10-10-guzhou-n40-clipped-corner-bound.md, its GN-6) read the admission path and every use of the admitted step and found the admitted net used wherever the net enters; admission refuses a metadata net that stops short of pi/4 (control D there). Since 0b5a62ca5 the census driver and the control evaluator read such a net as admission does (that review's GN-5), and no census case holds one yet. Its census drives the binary, keeps every direction's receipt and puts negative controls on a certificate: for format M the original and a near-threshold mutant at its least-bound direction, and since the review of 6 October of FC-1's fix (docs/project/reviews/review-2026-10-06-sqverify-fast-census-control-fc1.md) the 99/100 mutant at every direction of the net, with check_sqverify_fast's exact evaluator and mutation helpers; for format T the original and both mutants at the least-bound leaf centre of least exact capture, evaluated by sqpack.rectangle_density, which was written before the crate and which its authors read (the format T route review of 6 October 2026, docs/project/reviews/review-2026-10-06-sqverify-fast-format-t-route.md). None of these decides coverage. tests/test_sqverify_fast_census.py admits a census row as evidence only for a build of a reviewed source.
@@ -2546,9 +2546,6 @@ Decides a measure-capture lower-bound certificate of format T, M or L on the 201
 | `E-n040-guzhou-continuous-pose-crate-axis` | audited here | independently re-implemented | not recorded | T-145 |
 | `E-n040-guzhou-new-supports-crate-axis` | audited here | independently re-implemented after reading the producer’s code | full: the near-axis statement at side 249329659/250000000, decided by sqverify-fast's exact axis-vertex sweep on the density itself over all 10,929,636 vertices, with the 401-direction necessary condition at side 3350/3359 over all 401 directions | T-157 |
 | `E-wand125-fine-net-n108-1062-sqverify-fast-replay` | replayed here | re-implemented, sharing named components | full, 201 of 201: complete legal core-centre domains at every declared-net direction | T-216 |
-| `E-wand125-fine-net-n68-853-sqverify-fast-replay` | replayed here | re-implemented, sharing named components | full, 201 of 201: complete legal core-centre domains at every declared-net direction | T-205 |
-| `E-wand125-fine-net-n84-94225-sqverify-fast-replay` | replayed here | re-implemented, sharing named components | full, 201 of 201: complete legal core-centre domains at every declared-net direction | T-206 |
-| `E-wand125-fine-net-n85-9475-sqverify-fast-replay` | replayed here | re-implemented, sharing named components | full, 201 of 201: complete legal core-centre domains at every declared-net direction | T-207 |
 
 ### `V-replay-chelokot-lean`
 
@@ -3339,27 +3336,6 @@ Independently recomputes the n108 certificate's exact mass, multiplicity-preserv
 | --- | --- | --- | --- | --- |
 | `E-n108-review-max-premises` | audited here | not applicable | full: exact mass, D4 expansion, core/net/domain premises and retained receipt inventories of this one candidate | T-216 |
 | `E-n108-review-max-captures` | audited here | not applicable | sample, 5 of 233: recorded control witness poses, no whole direction domain | T-216 |
-
-### `V-fine-net-mac-review-exact`
-
-**Historical fine-net Mac exact-checkpoint audits and analytical geometry controls** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
-
-Recomputes exact rectangle-measure premises and saved native positive/refusal witness captures for the accepted n68,n84,n85 checkpoints; validates receipt inventories and execution/timing bindings. Analytical geometry fixtures and negative in-memory receipt mutations constrain the auditor. It decides no universal coverage or lower bound alone.
-
-- Source: [`packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/n68-certificate-math/audit_checkpoint.py.txt`](../../packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/n68-certificate-math/audit_checkpoint.py.txt), [`packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/n68-certificate-math/exact_geometry.py.txt`](../../packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/n68-certificate-math/exact_geometry.py.txt), [`packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/n68-certificate-math/check_geometry.py.txt`](../../packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/n68-certificate-math/check_geometry.py.txt), [`packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/n84-n85-certificate-math/audit_checkpoint.py.txt`](../../packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/n84-n85-certificate-math/audit_checkpoint.py.txt)
-- Versions run: SHA-256 `e5ce398a0ff0…` (Verbatim historical source actually executed by the accepted maximum-reasoning reviews; preserved as text, not changed to fit the current source tree.; of `audit_checkpoint.py.txt`); SHA-256 `820a8d4f1274…` (Verbatim historical source actually executed by the accepted maximum-reasoning reviews; preserved as text, not changed to fit the current source tree.; of `exact_geometry.py.txt`); SHA-256 `341c67802544…` (Verbatim historical source actually executed by the accepted maximum-reasoning reviews; preserved as text, not changed to fit the current source tree.; of `check_geometry.py.txt`); SHA-256 `05a48f157987…` (Verbatim historical source actually executed by the accepted maximum-reasoning reviews; preserved as text, not changed to fit the current source tree.; of `audit_checkpoint.py.txt`)
-- What its authors read and used: [`packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/README.md`](../../packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/README.md)
-- Independence: its authors read mathematics, proof-text, specification, certificate-format, producer-code, producer-output, earlier-review; it shares none of the producer’s code; written by Codex (OpenAI) (Separately prompted strongest-tier certificate mathematics lanes at maximum reasoning; n84/n85 reuse the retained n68 helper and geometry source.), with its own prompt and code; authorship in common with the producer’s: unknown, The producer discloses AI assistance without identifying every authoring system. These point-audit programs share no producer code, but their authors read maintained code and earlier reviews. The two-case driver reuses the n68 helper/import closure; this is explicit reuse within the registered audit, not another universal implementation.
-- Note: The original import closure, read logs, historical commands, failed diagnostic and authentic PASS receipts are retained in review-mac/README.md. No audit was rerun during records preparation; historical source-context comparisons are recorded observations, not gates on current Git/source identity.
-
-| evidence | run | code | coverage | results |
-| --- | --- | --- | --- | --- |
-| `E-n68-review-max-premises` | audited here | not applicable | full: exact mass, D4 expansion, core/net/domain premises and retained receipt inventories of this candidate | - |
-| `E-n68-review-max-captures` | audited here | not applicable | full, 199 of 199: saved native 99/100 refusal poses plus selected positive centre and near-threshold witness; no whole direction domain | - |
-| `E-n84-review-max-premises` | audited here | not applicable | full: exact mass, D4 expansion, core/net/domain premises and retained receipt inventories of this candidate | - |
-| `E-n84-review-max-captures` | audited here | not applicable | full, 203 of 203: saved native 99/100 refusal poses plus selected positive centre and near-threshold witness; no whole direction domain | - |
-| `E-n85-review-max-premises` | audited here | not applicable | full: exact mass, D4 expansion, core/net/domain premises and retained receipt inventories of this candidate | - |
-| `E-n85-review-max-captures` | audited here | not applicable | full, 203 of 203: saved native 99/100 refusal poses plus selected positive centre and near-threshold witness; no whole direction domain | - |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
