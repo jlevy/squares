@@ -5,7 +5,7 @@ title: "Import Evan Daniel: s(236) <= 15.861934390608, a new local minimum 2.02e
 kind: task
 status: in_progress
 priority: 1
-version: 7
+version: 8
 delegate: lane-new
 labels:
   - result-import
@@ -16,7 +16,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-17T06:59:46.452Z
-updated_at: 2026-10-19T21:28:33.428Z
+updated_at: 2026-10-19T21:40:39.529Z
 started_at: 2026-10-18T08:47:56.022Z
 ---
 Evan Daniel (@evand) reports s(236) <= 15.861934390608 on jlevy/squares#659 (filed 2026-10-16T14:05:14Z): the exact rational side 7930967195303679308621899285697/(5*10^29) = 15.861934390607358617243798571394 of evand/square-packing 5ad00693899ef50ccf6502f0346187cc422cc914 (committed 2026-10-16T14:03:49Z), search/packer/candidates/s236_bm3c.cert, rounded up at 12 places. Found by the 17 October intake pass (think-e2sz), lane W (user-eb-sweep-1017). Stage 1 triage below; stages 2 to 4 are this bead's, in an import lane the coordinator assigns.
@@ -64,3 +64,5 @@ blocked_on: none
 2026-10-18 W1 intake (think-xmxb): PR667 A8 corrected: other open reports state236 (#593 and #470), so compare their registered/pending claims in stage3 ledger. Triage reading says the new certificate is smaller; it becomes an intake_ledger verdict only when the ledger renders. Replacement sweep carries this open owner; no packet/replay/house change yet.
 
 2026-10-19 20:53Z lane-new: taken over from the 19 October handoff (issue #684) by the coordinator's lane brief; delegate changed from the spud10.local agent. Working in worktree scratchpad lnew/wt, branch claude/intake-2026-10-19-evand-singles (first PR: #659, #664, #669, #673).
+
+2026-10-19 21:40Z lane-new: stage 2 and 3 committed and pushed, d7413ccdb on claude/intake-2026-10-19-evand-singles: packet (evand-n236-2026-10-16 / evand-n271-2026-10-17) retained by acquire_source at the issue pin, import declaration, certify receipt on both maintained routes (positive + 2 controls), check --replay passed, registered at V0/C0 as T-218 (236) / T-219 (271) [ids provisional: lane-680 also holds T-218; whichever PR merges second renumbers]. Stage 4 review requested from the coordinator (review branch claude/review-2026-10-19-evand-659-664-669-674). Adoption at the count written locally, strong regularizer runs under think-ip1p in progress.
