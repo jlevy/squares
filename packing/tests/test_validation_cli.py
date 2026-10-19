@@ -10,6 +10,7 @@ import hashlib
 import io
 import json
 import os
+import re
 import shlex
 import signal
 import subprocess
@@ -2860,6 +2861,39 @@ def test_an_interrupt_inside_a_command_pool_still_stops_the_whole_run(
     assert context.processes.stopping
 
 
+def _frontier_progress_only(stderr: str) -> bool:
+    # The reporter can run before launch or after completion with no active step.
+    heartbeat = (
+        r"== validation progress: (?:"
+        r"0/1 complete, [0-9]+s elapsed; active: frontier corpus \([0-9]+s\)"
+        r"|[01]/1 complete, [0-9]+s elapsed; active: starting"
+        r") ==\n"
+    )
+    return re.fullmatch(f"(?:{heartbeat})*", stderr) is not None
+
+
+def test_frontier_progress_rejects_other_stderr() -> None:
+    active = (
+        "== validation progress: 0/1 complete, 30s elapsed; active: frontier corpus (30s) ==\n"
+    )
+    starting = "== validation progress: 0/1 complete, 0s elapsed; active: starting ==\n"
+    completed = "== validation progress: 1/1 complete, 31s elapsed; active: starting ==\n"
+    for stderr in ("", active, starting, completed, starting + active + completed):
+        assert _frontier_progress_only(stderr), repr(stderr)
+    for stderr in (
+        "unexpected warning\n",
+        active + "unexpected warning\n",
+        active + "\n",
+        active.replace("0/1", "0/2"),
+        active.replace("0/1", "1/1"),
+        active.replace("frontier corpus", "another step"),
+        active.replace("30s", "30.5s"),
+        active.removesuffix("\n"),
+        "== validation failed: frontier corpus (1.0s): invalid metadata ==\n",
+    ):
+        assert not _frontier_progress_only(stderr), repr(stderr)
+
+
 def test_frontier_contract_accepts_the_declared_schema_metadata(
     monkeypatch: pytest.MonkeyPatch, tmp_path: Path
 ) -> None:
@@ -2870,7 +2904,7 @@ def test_frontier_contract_accepts_the_declared_schema_metadata(
     status, stdout, stderr = _invoke("--only", "frontier corpus", "--jobs", "1")
 
     assert status == 0
-    assert stderr == ""
+    assert _frontier_progress_only(stderr), stderr
     # The corpus summary is a corpus fact and follows KNOWN_BEST_CORPUS; the split is
     # pinned per corpus so a record silently changing status still fails (think-93on).
     proved, open_cases = FRONTIER_LANE_SPLIT[validate.KNOWN_BEST_CORPUS.label]

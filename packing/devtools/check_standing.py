@@ -370,6 +370,22 @@ def second_proof_problems(
     return wrong
 
 
+def staged(entry: str) -> frozenset[int]:
+    """The counts whose adoption of `entry` waits, staged in `select_houses.PENDING_ADOPTION`.
+
+    Under the house rule (packing/campaign/result-import.md, "The House Rule") an entry
+    that holds some of its counts may be smaller than its case records at others whose
+    adoption is staged for a later pull request, with the bead that adopts them:
+    `select_houses --check` holds each staging to the selection. There the entry is
+    pending adoption, not over its case: T-174 holds 37 counts since 17 October 2026, and
+    its algebraic sides at 70, 153 and 207 wait for the writer (think-ot5c)."""
+    from devtools import select_houses  # noqa: PLC0415
+
+    return frozenset(
+        n for n, pending in select_houses.PENDING_ADOPTION.items() if pending.house == entry
+    )
+
+
 def problems(record: Mapping[str, Any], standing: str, records: view.Records) -> list[str]:
     """What is wrong with `standing` for this entry, by the bounds its words state."""
     entry = str(record["id"])
@@ -441,7 +457,12 @@ def problems(record: Mapping[str, Any], standing: str, records: view.Records) ->
     else:
         lane = "reported" if standing == view.HOLDS_REPORTED else "verified"
         placed = [f.reported if lane == "reported" else f.verified for f in found]
-        over = [f for f, where in zip(found, placed, strict=True) if where == EXCEEDS]
+        waiting = staged(entry)
+        over = [
+            f
+            for f, where in zip(found, placed, strict=True)
+            if where == EXCEEDS and f.n not in waiting
+        ]
         if over:
             wrong.append(
                 f"{entry} states more than the {lane} bound its case record carries at "
@@ -464,13 +485,19 @@ def summary(record: Mapping[str, Any], standing: str, records: view.Records) -> 
     lane = "reported" if reported else "verified"
     holds = [f for f in found if (f.reported if lane == "reported" else f.verified) == EQUAL]
     better = improvements(record, records) if standing == view.PENDING_ADOPTION else []
+    if standing in {view.HOLDS, view.HOLDS_REPORTED}:
+        waiting = staged(str(record["id"]))
+        better = [f for f in found if f.n in waiting and EXCEEDS in {f.verified, f.reported}]
     beaten = [f for f in found if f.verified == BEATEN and f not in holds]
     name = standing or f"({kind_label(str(record['kind']))})"
     parts = [f"{record['id']}  {name:<28s}"]
     if not found:
         parts.append("states no bound this reads")
     if better:
-        parts.append(f"better than the case record at {_at(better)}")
+        waits = (
+            " (staged for adoption)" if standing in {view.HOLDS, view.HOLDS_REPORTED} else ""
+        )
+        parts.append(f"better than the case record at {_at(better)}{waits}")
     if holds:
         parts.append(f"equals the {lane} bound at {_at(holds)}")
     if beaten:

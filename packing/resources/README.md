@@ -1706,6 +1706,15 @@ T-195 records it at V3/C3, 1.57e-36 below T-155, by exception in the
 owner’s standing house rule (PR #660), pending adoption.
 The author says its submissions are assisted by PingYou Ltd’s PY agentic offering.
 
+## T-174 Adoption Integration Diagnostic, 19 October 2026
+
+The
+[retained diagnostic packet](web/t174-adoption-integration-diagnostic-2026-10-19/README.md)
+keeps the exact source, JSON output, README and local review of the prospective 37-count
+T-174 adoption. It is an unregistered integration diagnostic cited by no evidence entry;
+it adds no result, rung or geometric replay.
+Its historical custody observation leaves the fresh 66-house custody gate open.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

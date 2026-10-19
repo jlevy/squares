@@ -1542,6 +1542,16 @@ def root_files() -> tuple[Path, ...]:
 # and reads 212,861,306 with this change's code, tests and comments counted,
 # 13,631,110 under the cap.
 #
+# 2026-10-19, T-174's 37-house adoption on the landed T-200--T-217 intake:
+# the staged actual-main union projects 228,587,228 bytes before this allowance's
+# rationale and tests. The retained 66-house operation actually copied 228,578,604
+# bytes, admitted 156 inputs and refused/restored 24 late mutations without a geometry
+# decision (19.51 s setup, 15.71 s worker). Its receipt still records the former 216 MiB
+# cap; assess those unchanged measurements under this new allowance, never rewrite them.
+# Propose 219 MiB for this measured source surface, with unchanged selection and the
+# oversized pre-clone refusal. Three portable workers remain bounded at 657 MiB.
+# This allowance covers neither unlanded contributor-profile inputs nor future intakes.
+#
 # 2026-10-19, contributor profiles (think-iyao): before the capacity change,
 # --audit-snapshot read 229,065,765 bytes against 216 MiB; pinned main d167d4b86
 # projects 222,575,174 bytes with this selector. Required new evidence includes

@@ -905,9 +905,11 @@ RECORDED: dict[int, tuple[tuple[str, str, str] | None, tuple[str, str, str] | No
     # optimum of the same packing took both lanes (T-098): the finder and the improver,
     # with no year, since the year dates the find. Below it, Hosono's rectangle bound of
     # 1 October replayed as T-074, which took the case on 2026-10-02 from its 28 September
-    # certificate (T-070), itself raised that day from the point bound of T-044.
+    # certificate (T-070), itself raised that day from the point bound of T-044. Since the
+    # adoption of 17 October 2026 PingYou Ltd's refinement of Rehwaldt's packing (T-174),
+    # the finder and two improvers.
     68: (
-        ("Couzo & Rehwaldt, GitHub (confirmed T-118)", "external", "verified"),
+        ("Couzo et al., GitHub (confirmed T-174)", "external", "verified"),
         (
             "Hosono after Tokoharu, Levy et al. 2026, GitHub (confirmed T-074)",
             "external",
@@ -933,9 +935,10 @@ RECORDED: dict[int, tuple[tuple[str, str, str] | None, tuple[str, str, str] | No
     # Three finders and two improvers gave "Arslanov et al." with no year here until
     # Couzo's certified packing took the case; the synthetic test above keeps that shape.
     # From 2026-10-05 its exact optimum, Couzo's packing improved by Daniel (T-098), and
-    # since the house adoption of 11 October 2026 Daniel's record-hunt packing (T-141).
+    # since the house adoption of 11 October 2026 Daniel's record-hunt packing (T-141), as
+    # PingYou Ltd refined it since the adoption of 17 October 2026 (T-174).
     132: (
-        ("Daniel 2026, GitHub (confirmed T-141)", "external", "verified"),
+        ("Daniel & PingYou Ltd, GitHub (confirmed T-174)", "external", "verified"),
         (
             "Karakuş 2026, arXiv corrects Nagamochi 2005 (confirmed T-083)",
             "external",
@@ -944,9 +947,10 @@ RECORDED: dict[int, tuple[tuple[str, str, str] | None, tuple[str, str, str] | No
     ),
     # A certified ceiling that trailed its report by two units of the printed place was
     # cited as reported until 2026-10-05, when the exact optimum of the same packing put
-    # both lanes on one side (T-098).
+    # both lanes on one side (T-098), and PingYou Ltd's tighter certificate of it since the
+    # adoption of 17 October 2026 (T-174).
     206: (
-        ("Couzo & Daniel, GitHub (confirmed T-098)", "external", "verified"),
+        ("Couzo et al., GitHub (confirmed T-174)", "external", "verified"),
         (
             "Karakuş 2026, arXiv corrects Nagamochi 2005 (confirmed T-083)",
             "external",

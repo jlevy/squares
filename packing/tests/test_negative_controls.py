@@ -531,6 +531,23 @@ def test_native_profile_real_child_failure_retains_profile_and_output(
     assert output.with_suffix(".prof").stat().st_size > 0
 
 
+@pytest.mark.parametrize("offset", [-1, 0, 1])
+def test_the_snapshot_byte_report_enforces_the_exact_capacity_boundary(
+    offset: int, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    measured = controls.SNAPSHOT_MAX_BYTES + offset
+    monkeypatch.setattr(controls, "snapshot_source_bytes", lambda: measured)
+    monkeypatch.setattr(controls, "snapshot_duplicate_copy_bytes", lambda: 0)
+    monkeypatch.setattr(
+        controls, "clone_tree", lambda _tree: pytest.fail("a byte report cloned a worker")
+    )
+    assert controls.main(["--source-bytes"]) == int(offset > 0)
+    report = json.loads(capsys.readouterr().out)
+    assert report["source_bytes"] == measured
+    assert report["cap_bytes"] == controls.SNAPSHOT_MAX_BYTES
+    assert report["headroom_bytes"] == -offset
+
+
 def test_oversized_snapshot_is_refused_before_cloning(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
 ) -> None:

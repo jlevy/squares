@@ -856,6 +856,27 @@ the earlier lower bound’s reviewed identity join.
 News wording remains prepared on PR #578; record the actual merge and delivery dates
 after those events. This integration has not been deployed.
 
+## Prospective PR #665 Integration: 2026-10-19
+
+The local preparation under `think-hos9` combines the reviewed profiles source
+`ff614ad2` with frozen PR #665 source `3f20a458`, before its actual merge.
+It retains all 37 exact T-174 improvements, 66 houses and 156 custody inputs, the
+217-result register and all eighteen lower-bound rungs.
+Only T-216 among those rungs is V3/C3; n108 retains its separate `531/50` lower lane.
+The opening-only writer and the full-refresh guard preserve the later lower layer.
+
+The reconciled census retains all 1,437 earlier occurrence objects and adds 34 literal
+`PingYou Ltd` spans as unresolved: 27 profiles, 1,072 resolved spans, 393 unresolved,
+six non-person spans and 146 PDFs awaiting full-credit inspection.
+The four earlier bibliography spans and n108’s `wand125` span remain unresolved.
+
+Both proposed site `v0.8.0` and PR #665’s `v0.7.31` history are retained.
+Actual PR #665 and the separate CSS landing must precede final release pins, independent
+review, hosted qualification and publication.
+The combined private snapshot exceeds the retained 224 MiB cap.
+A measured 225 MiB proposal remains subject to review; this preparation changes neither
+the allowance nor the worker’s refusal behavior.
+
 ## WIP Handoff: 2026-10-10
 
 The owner requested a work-in-progress PR and handoff before further implementation.
