@@ -2916,6 +2916,14 @@ urls:
   first_published: '2026-10-07'
   lastmod: '2026-10-19'
   status: live
+- path: atlas/regularized/n-183.svg
+  canonical: atlas/regularized/n-183.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-19'
+  status: live
 - path: atlas/regularized/n-198.svg
   canonical: atlas/regularized/n-198.svg
   kind: asset-file
