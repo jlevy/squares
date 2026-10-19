@@ -1519,6 +1519,20 @@ class ReleaseNoPublicChange(NamedTuple):
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
     ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=("packing/campaign/result-requests.yaml",),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "Issue #538's request record gains its 19 October follow-up reply. Rendered "
+            "at 6c8e4fc0 with and without that reply: all 42 files the survey's renderer "
+            "writes are byte-identical, since the survey only links the request record, "
+            "and its PDF prints from that HTML, so it keeps v0.2.3."
+        ),
+    ),
+    ReleaseNoPublicChange(
         components=(
             "paper:n11-lower-bounds-explainer",
             "paper:n11-optimality-review",
