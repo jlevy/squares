@@ -126,9 +126,8 @@ BIBLIOGRAPHY = ROOT / "resources" / "bibliography.yaml"
 #: present.
 CONTRIBUTORS = ROOT / "contributors"
 
-#: The fewest decimal places a bound is printed to, and the most.
+#: The fewest decimal places a bound is printed to.
 PLACES = 5
-MAX_PLACES = 40
 #: The significance a result needs by default to be announced (epistemics.md, Significance).
 MIN_SIGNIFICANCE = 3
 #: The verification rung from which a line says "verified".
@@ -271,14 +270,16 @@ def shown(bound: Span, direction: str, previous: Span | None = None) -> str:
         previous.low > bound.high if direction == UPPER else bound.low > previous.high
     ):
         target = previous
-    scaled, places = 0, PLACES
-    for places in range(PLACES, (PLACES if target is None else MAX_PLACES) + 1):
-        scale = 10**places
+    places, scale = PLACES, 10**PLACES
+    while True:
         scaled = _ceil(edge * scale) if direction == UPPER else _floor(edge * scale)
         printed = Fraction(scaled, scale)
         if target is None or better(Span(printed, printed), target, direction):
-            break
-    return _decimal(scaled, places)
+            return _decimal(scaled, places)
+        # `target` has a strict rational gap from `edge`, so some finite decimal
+        # resolves it. T-174's improvements can need more than 40 places.
+        places += 1
+        scale *= 10
 
 
 def margin_text(margin: Fraction) -> str:

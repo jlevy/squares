@@ -135,9 +135,10 @@ ROOT = Path(__file__).resolve().parent.parent
 REPO = ROOT.parent
 FRONTIER = ROOT / "frontier"
 
-#: Enough significant figures for any fraction this register carries; matches
-#: `check_rung_figures`'s own constant, for the same reason.
-_DECIMAL_PRECISION = 60
+#: Enough significant figures for any fraction this register carries and the longest
+#: print a case record carries; matches `check_rung_figures`'s own constant, for the same
+#: reason.
+_DECIMAL_PRECISION = 100
 
 #: Sentence boundaries within raw (line-wrapped) Markdown prose: identical to
 #: `check_rung_figures`'s rule, which already handles a period that is not itself part of a

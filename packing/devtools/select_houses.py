@@ -189,20 +189,20 @@ class Pending:
 #: request, and its algebraic ones at 70, 153 and 207, which RP-3 kept out, for the
 #: writer. There were 60 rational counts on 16 October 2026; the same day's adoption of
 #: T-186 to T-190 (#657) took ten of them below T-174 (129, 146, 156, 175, 176, 204, 232,
-#: 264, 271 and 303), which left 50. A pull request that validates a smaller packing
-#: adopts it or stages its counts here with the bead that adopts them and why
-#: (`STAGING_REASONS`); an adoption waits with its regularization runs, never apart from
-#: them (`default_drawings.deferral_problems`). The pull request that adopts a count takes
-#: it off.
+#: 264, 271 and 303), which left 50, and the adoption of 17 October 2026 (think-3mry) took
+#: 37 of those off. Of the thirteen it leaves, twelve, 88, 102, 123, 126, 199, 258, 259,
+#: 266, 267, 292, 295 and 301, are below T-174 by issue 639's algebraic sides (T-193),
+#: which #658 reads and stages for the writer, and at 236 Evan Daniel's issue 659 reports a
+#: side 2.02e-3 below it, whose import adopts it; until those land they stay staged here. A
+#: pull request that
+#: validates a smaller packing adopts it or stages its counts here with the bead that
+#: adopts them and why (`STAGING_REASONS`); an adoption waits with its regularization runs,
+#: never apart from them (`default_drawings.deferral_problems`). The pull request that
+#: adopts a count takes it off.
 PENDING_ADOPTION: dict[int, Pending] = {
     **{
         n: Pending(house="T-174", bead=ADOPTION_BEAD, why=NEXT_PULL_REQUEST)
-        for n in (
-            68, 84, 86, 88, 102, 103, 105, 108, 110, 123, 126, 127, 130, 131, 132, 155,
-            172, 179, 180, 181, 182, 199, 206, 208, 209, 210, 228, 236, 238, 239, 240,
-            258, 259, 261, 263, 266, 267, 268, 269, 270, 272, 273, 292, 295, 297, 301,
-            305, 306, 307, 308,
-        )
+        for n in (88, 102, 123, 126, 199, 236, 258, 259, 266, 267, 292, 295, 301)
     },
     **{
         n: Pending(house="T-174", bead=WRITER_BEAD, why=NO_WRITER)

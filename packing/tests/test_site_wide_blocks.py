@@ -227,6 +227,10 @@ def test_tabs_over_the_rule_are_caught(
         )
         try:
             page.goto(path.as_uri(), wait_until="load")
+            if name != "workbench/":
+                # ResizeObserver can add site-headroom after load; the workbench
+                # fixture deliberately has no program.
+                page.locator("header.site-headroom").wait_for(state="attached")
             page.add_style_tag(content=RULE_UNDER_THE_TABS)
             problems = tabs_problems(page.evaluate(HEADER))
         finally:

@@ -184,8 +184,9 @@ def test_production_snapshot_copies_complete_refinement_custody(tmp_path: Path) 
                 "c.check_index(c.read_index()); "
                 "ns=[n for n in h.NUMBERS if safe_load((h.REPO/'packing/frontier'/"
                 "f'n-{n:03d}.md').read_text().split('---'+chr(10),2)[1])['packing']"
-                "['reported_upper_bound']['source_key']==h.source(n).key]; "
-                "h.check_houses(ns)"
+                "['reported_upper_bound']['source_key']==h.source(n).key]\n"
+                "if ns:\n"
+                "    h.check_houses(ns)"
             ),
         ],
         cwd=tree / controls.HERE,

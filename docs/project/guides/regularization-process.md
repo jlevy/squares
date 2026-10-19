@@ -22,8 +22,8 @@ A pull request may change a count’s drawing only to a view that
   checker (question 15);
 - has a side no larger than the verified upper bound $U$ (question 13), and no larger
   than the side today’s drawing is drawn at where that drawing is exactly verified (the
-  layer still draws seven views above $U$, at 18, 26, 66, 85, 110, 241 and 297, each an
-  exception question 13 names; a pass may replace them, never add to them);
+  layer still draws four views above $U$, at 18, 26, 66 and 85, each an exception
+  question 13 names; a pass may replace them, never add to them);
 - row 10 of the decision table admits;
 - improves on today’s drawing under the policy’s
   [improvement rule](../policies/regularization-policy.md#11-the-improvement-rule)
