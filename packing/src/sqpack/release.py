@@ -1464,6 +1464,83 @@ class ReleaseNoPublicChange(NamedTuple):
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
     ReleaseNoPublicChange(
         components=("paper:n11-lower-bounds-explainer",),
+        paths=("packing/frontier/results.yaml",),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-lower-bounds-explainer.pdf",
+        ),
+        reason=(
+            "Reviewed October 19, 2026 against main 14fd9e27 for the #446 landing of "
+            "T-205, T-206 and T-207: results.yaml changes only those three n68, n84 and "
+            "n85 lower-bound entries and last_reviewed. The explainer reads the register "
+            "for its count of 217 results and of apparently or confirmed novel ones, "
+            "both unchanged since the three stay previously-published, and its Figure 2 "
+            "totals from the unchanged atlas composite record. Rendering its HTML and "
+            "Markdown at the base and candidate record trees gave identical Markdown and "
+            "HTML that differs only in the position of one empty style attribute that "
+            "the browser math preparation serializes; the PDF prints that HTML. Retain "
+            "v0.4.8; no PDF redraw or byte identity of the PDF is claimed."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:n11-optimality-review",),
+        paths=("packing/frontier/results.yaml",),
+        outputs=(
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-optimality-review.pdf",
+        ),
+        reason=(
+            "Reviewed October 19, 2026 against main 14fd9e27 for the #446 landing of "
+            "T-205, T-206 and T-207: the changed results are the n68, n84 and n85 lower "
+            "bounds, outside the n11 ladder rows this paper consumes. Its HTML and "
+            "Markdown rendered at the base and candidate record trees with the same "
+            "source-link revision are byte-identical. Retain v0.1.7; no PDF redraw is "
+            "claimed."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:n11-threshold-bound-review",),
+        paths=("packing/frontier/results.yaml",),
+        outputs=(
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/n11-threshold-bound-review.pdf",
+        ),
+        reason=(
+            "Reviewed October 19, 2026 against main 14fd9e27 for the #446 landing of "
+            "T-205, T-206 and T-207: the changed results are the n68, n84 and n85 lower "
+            "bounds, outside the n11 ladder rows, T-060 included, that this paper "
+            "consumes. Its HTML and Markdown rendered at the base and candidate record "
+            "trees with the same source-link revision are byte-identical. Retain v0.1.0; "
+            "no PDF redraw is claimed."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/frontier/n-084.md",
+            "packing/frontier/results.yaml",
+        ),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+            "papers/square-packing-methods-survey.pdf",
+        ),
+        reason=(
+            "Reviewed October 19, 2026 against main 14fd9e27 for the #446 landing of "
+            "T-205, T-206 and T-207: the #446 request entry, the n84 case record and the "
+            "three register entries are citation targets whose existence the producer "
+            "checks, not inlined text, and every cited path exists at both revisions. "
+            "Its HTML and Markdown rendered at the base and candidate record trees with "
+            "the same source-link revision are byte-identical. Retain v0.2.3; no PDF "
+            "redraw is claimed."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer",),
         paths=("packing/src/sqpack/cli/validate.py",),
         outputs=(
             "papers/n11-lower-bounds-explainer.html",
