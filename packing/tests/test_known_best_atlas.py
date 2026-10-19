@@ -109,21 +109,23 @@ GOLDEN_SOURCE_KINDS: dict[str, dict[str, int]] = {
         "kingbird-derived-facts": 29,
         "packet-derived-facts": 7,
     },
-    # 176 moved from Kingbird to SQUISH's issue 500 packet on 12 October 2026 (think-fvz4).
+    # 176 moved from Kingbird to SQUISH's issue 500 packet on 12 October 2026 (think-fvz4),
+    # and 183 from the grid to Evan Daniel's issue 680 packet on 19 October (T-218).
     "n=1..200": {
-        "exact-grid": 114,
+        "exact-grid": 113,
         "kingbird-derived-facts": 51,
-        "packet-derived-facts": 35,
+        "packet-derived-facts": 36,
     },
     # 232 (from Kingbird) and 308 (from the grid) moved to packet houses in the house
     # adoption of 11 October 2026, and 176 (from Kingbird) on 12 October (think-fvz4), as
     # did 264 (from Kingbird) in the pass for issue 528 (think-cq95), and 204 (from
     # Kingbird) on 15 October, to Daniil Ostashev's issue 562 packet (T-162), and 29 (from
-    # Kingbird) on 17 October, to PR #622's packet (T-195).
+    # Kingbird) on 17 October, to PR #622's packet (T-195), and 183 (from the grid) on 19
+    # October, to Evan Daniel's issue 680 packet (T-218, think-jh4w).
     "n=1..324": {
-        "exact-grid": 175,
+        "exact-grid": 174,
         "kingbird-derived-facts": 75,
-        "packet-derived-facts": 74,
+        "packet-derived-facts": 75,
     },
 }
 
@@ -2153,9 +2155,10 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
     # October compositions and records and 13 October merged bands, or PingYou Ltd's
     # n = 146 refinement: two sources fewer, and no new name.
     # T-174's 37-count adoption consolidates ten source keys while retaining every
-    # construction credit. T-195 adds one source at n = 29.
+    # construction credit. T-195 adds one source at n = 29, and T-218 one at n = 183,
+    # Evan Daniel's issue 680 packet, with no new name.
     assert len(expected_names) == 26
-    assert len(expected_sources) == 17
+    assert len(expected_sources) == 18
     assert set(json.loads(credit_block.attrib["data-credited-names"])) == expected_names
     assert set(json.loads(credit_block.attrib["data-source-keys"])) == expected_sources
     assert credit_block.find("svg:text[@data-feature='packing-credits-heading']", SVG) is None
