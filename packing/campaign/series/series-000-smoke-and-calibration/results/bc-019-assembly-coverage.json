@@ -514,7 +514,7 @@
         "not_a_verdict": "the current detector did not express these; the census's known_gap says that is not a refutation of chunk expressibility until the minimal partition solver exists"
       },
       "n": 29,
-      "source": "kingbird-derived-facts"
+      "source": "packet-derived-facts"
     }
   ],
   "schema_version": 1,

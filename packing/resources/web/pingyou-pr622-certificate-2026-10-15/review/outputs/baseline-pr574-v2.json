@@ -1,0 +1,45 @@
+{
+  "asset_sha256": "0dc9bcd1cf5f2806a4d2e0c4c1c07e4903d91bbea611b8b938bda770b9782537",
+  "member": "n29-certificate/baselines/pr574-v2-n029.cert.json",
+  "member_sha256": "0769d793b301f1ec3fb012660a0697e3dbe6cc088c6783fd5bd41b094b494aaf",
+  "n": 29,
+  "side_digits": [
+    662,
+    661
+  ],
+  "side_sci": "5.933833462676929189689460616352019138433e+00",
+  "axis_aligned": [
+    1,
+    2,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14
+  ],
+  "accepted": true,
+  "walls_decided": 116,
+  "pairs_decided": 406,
+  "violations": [],
+  "touching_walls": [
+    "0 left",
+    "6 right",
+    "8 bottom",
+    "9 bottom",
+    "10 bottom",
+    "11 bottom",
+    "12 bottom"
+  ],
+  "touching_pairs": [
+    "24 25 along i.u"
+  ],
+  "least_positive_wall_clearance": "3.999999999999999e-95",
+  "least_positive_pair_gap": "3.719481669554005e-92",
+  "cpu_s": 0.98
+}

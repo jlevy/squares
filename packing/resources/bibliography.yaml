@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:Bibliography/v1
   schema: bibliography.schema.yaml
   status: enforced
-last_reviewed: '2026-10-16'
+last_reviewed: '2026-10-18'
 # The citation fields a generator needs, keyed by the source keys the frontier records
 # use. The Markdown tables in README.md stay the human index; this file holds only what
 # a line of citation text is built from, for the keys something cites.
@@ -2795,6 +2795,108 @@ sources:
       says it "extends the method and checker code of the s(17) Lean proof (#565)", thanks
       the Squares Project and Manasseh Ahmed, and says "Development used Claude and Codex
       assistance."
+  - key: '[PingYou PR 622 certificate 2026-10-15]'
+    authors: [PingYou Ltd]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-15'
+    lineage: builds-on-project
+    credit: PingYou Ltd after Schadt, Ellsworth, Daniel, Levy
+    short_credit: PingYou Ltd after Schadt et al.
+    note: >-
+      Pull request jlevy/squares#622 at 31155575ce1e6b461f77bfc9f3e201adf101115b
+      (BuddenPing/squares): a submission packet and a HostedData manifest pinning the
+      release data/pingyou-n29-certificate-2026-10-15-v1 of
+      BuddenPing/square-packing-certificates (pingyou-n29-certificate-2026-10-15.zip,
+      430,075 bytes, SHA-256 0dc9bcd1cf5f2806a4d2e0c4c1c07e4903d91bbea611b8b938bda770b9782537),
+      which holds one complete exact rational certificate at n = 29: a refinement of Thomas
+      Schadt's packing, improved by David Ellsworth, made with Evan Daniel's tools and data
+      and checked by the source with Squares Project (Levy) verification code. Derived exact
+      facts only; no upstream byte is retained. No new nominal construction, local or global
+      optimality claim. The author says its submissions are assisted by the PY agentic
+      offering.
+  - key: '[de Winter upper bounds 2026-10-17]'
+    authors: [de Winter]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-17'
+    lineage: builds-on-project
+    credit: de Winter after Levy
+    note: >-
+      Joost de Winter's issue 668 reports three rational upper-bound certificates at
+      227, 229 and 260, first published at c95c4938f068ed44a1819ef973e770ec241aa567 on
+      17 October 2026. The retained MIT-licensed successor
+      9bf5d9be4d0ca13a1dbef7d7953032fe87d4e81d changes only LICENSE and root README
+      text; the three witness directories are unchanged. Source records, exact witnesses,
+      three standalone Fraction checkers and source audit receipts are retained in
+      web/de-winter-upper-bounds-227-229-260-2026-10-17/. The issue credits the public
+      jlevy/squares catalogue as the search start and preserves its prior-packing credits.
+      It discloses Codex agents under the author's direction and subsequent Claude
+      replay. Stage 3 registers these claims as T-196 in packing/frontier/results.yaml,
+      V0/C0 and pending adoption. The separately completed mathematical review and
+      source replay with controls await descendant integration; this entry adopts no
+      confirmation, and both case upper lanes and houses remain unchanged.
+  - key: '[Daniel n155 explorer 2026-10-17]'
+    authors: [Daniel]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-17'
+    lineage: builds-on-project
+    credit: Daniel after Ostashev, Levy
+    note: >-
+      Evan Daniel's issue 669 reports s(155) <= 12.952260944651, rounded upward from
+      the exact rational certificate side, first published at the retained MIT-licensed
+      pin 59326b86291b76c39d843f3f156e8f25fa0f6e3f on 17 October 2026. The original
+      and same-side regularized certificates, both standalone exact checkers and the
+      numerical reports are retained in web/evand-n155-explorer-2026-10-17/. The issue
+      explicitly credits Daniil Ostashev's T-149 packing as the search start; the
+      regularized JSON instead carries by: [Francisco Couzo]. That discrepancy remains
+      unresolved, with both source statements preserved. Claude assistance is disclosed;
+      the KKT and local-minimum diagnostics are numerical source assertions. This entry
+      records T-197 in packing/frontier/results.yaml at V0/C0, pending adoption.
+      Separate returned mathematical review and completed source replay/controls await
+      descendant integration; both case upper lanes and the house remain unchanged.
+  - key: '[Daniel n229 dilation 2026-10-17]'
+    authors: [Daniel]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-17'
+    lineage: builds-on-project
+    credit: Daniel after Couzo, de Winter, Levy
+    note: >-
+      Evan Daniel's opening report in issue 674 gives s(229) <= 15.650163254859,
+      rounded upward from the retained exact rational certificate at MIT-licensed
+      e0338c7becf95dbc7584b48d8868c0a1cd21079c, first published on 17 October 2026.
+      The packet web/evand-n229-dilation-2026-10-17/ retains the certificate, binary64
+      input, two standalone exact checkers, dilation producer, licence and credits.
+      The issue credits Francisco Couzo's 672 packing after Joost de Winter's 668.
+      The later author update asks to replace this side; both chronological claims are
+      retained, with the update the current request. Claude assistance is disclosed.
+      Stage 3 records T-198 in packing/frontier/results.yaml at V0/C0, pending adoption,
+      preserving this chronological report before T-199. Separate returned mathematical
+      review and completed source replay/controls await descendant integration; both
+      case upper lanes and the house remain unchanged.
+  - key: '[Daniel n229 dilation update 2026-10-18]'
+    authors: [Daniel]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-18'
+    lineage: builds-on-project
+    credit: Daniel after Couzo, de Winter, Levy
+    note: >-
+      Evan Daniel's update to issue 674 gives s(229) <= 15.650161513896, rounded upward
+      from the retained exact rational certificate at MIT-licensed
+      00e68dfbe1d29ab5dbab1cddfb8f6ca19d5470db, first published on 18 October 2026.
+      The packet web/evand-n229-dilation-update-2026-10-18/ retains the updated inputs
+      and standalone checker dependencies and binds the unchanged opening inputs to
+      their earlier packet. This is the current request, after the opening bound of
+      15.650163254859; both retain Daniel after Couzo's 672 after de Winter's 668.
+      The update's introductory words say lower bound, but its table and certificate
+      state an upper bound only. Claude assistance is disclosed. Source custody gives
+      no geometric verdict by itself. Stage 3 records T-199 in packing/frontier/results.yaml
+      at V0/C0, the latest registered n229 report pending adoption. Separate returned
+      mathematical review and completed source replay/controls await descendant
+      integration; both case upper lanes and the house remain unchanged.
 credited_names:
   Benjamin Greff: Greff
   Hiroaki Hosono: Hosono

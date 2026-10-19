@@ -1,0 +1,21 @@
+{
+  "valid": true,
+  "n": 229,
+  "side_exact": "156501747569482131747919637148801852719869637315233948984618327625011520667543259632677498716011131748832131668750692746335433269145213277034738380207139541/10000000000000000000000000000001737366297119815888250696550926607660931327350731575578989919015034082413286101971092035771621296900000000000000000000000000",
+  "unit_geometry_checked_exactly": 229,
+  "wall_containment_checked_exactly": true,
+  "minimum_wall_clearance_exact": "1/1000000000",
+  "all_pairs_considered": 26106,
+  "pairs_pruned_by_zero_area_bounding_box": 25911,
+  "pairs_clipped_with_exact_rationals": 195,
+  "degenerate_point_or_segment_intersections": 0,
+  "maximum_clipped_polygon_vertices": 0,
+  "all_pair_intersection_areas_zero": true,
+  "total_positive_intersection_area_exact": "0",
+  "algorithm": "convex polygon clipping and exact shoelace intersection area",
+  "arithmetic": "Python fractions.Fraction, with no floating-point tolerance",
+  "authorship_disclosure": "Implemented by another agent within the same campaign, using the same shared rational witnesses. Algorithmically distinct from the existing SAT/projection checks; not verification by an outside independent author.",
+  "elapsed_seconds": 0.7108913060001214,
+  "witness": "verification/n229_side15.650174740301_bfc6c8559a_rational.json",
+  "witness_sha256": "edb3ef2eed16e561c379350ac28882078e17717882ddc8284b67b794fef8111b"
+}

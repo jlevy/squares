@@ -1021,18 +1021,21 @@ def test_n29_credits_finder_and_optimizer_and_takes_the_registers_verdict() -> N
 
     Its assurance is whatever `bounds_agree_at_declared_precision` says, as for every other
     case; this test names it so a change of that rule is seen here, not special-cased. The
-    certificate is scored new and the packing is still Schadt and Ellsworth's. Since 12
-    October 2026 the ceiling is the exact regularized view's side (T-155), below T-009's
-    endpoint; it still lies above the truncated decimal, so it confirms no displayed bound.
+    certificate is scored new and the packing is still Schadt and Ellsworth's. From 12
+    October 2026 the ceiling was the exact regularized view's side (T-155), above the
+    truncated decimal, so it confirmed no displayed bound. Since the house adoption of 17
+    October both lanes are PR #622's tighter certificate of the same packing (T-195), so
+    the reported bound is the certificate's side and is confirmed; the packing keeps its
+    finder, with Ellsworth's and PingYou Ltd's improvements, as at 105 (T-170).
     """
     case = citations.load_case(29)
     upper = _entry(29)["upper"]
-    assert upper["text"] == "Schadt & Ellsworth, Squares in Squares"
-    assert upper["note"] == "(reported)"
+    assert upper["text"] == "Schadt et al., GitHub"
+    assert upper["note"] == "(confirmed T-195)"
     assert (upper["basis"], upper["confirmed_by"], upper["results"]) == (
         "external",
-        [],
-        ["T-155"],
+        ["T-195"],
+        ["T-195"],
     )
     agrees = bounds_agree_at_declared_precision(
         case["reported_upper_bound"], case["verified_upper_bound"]

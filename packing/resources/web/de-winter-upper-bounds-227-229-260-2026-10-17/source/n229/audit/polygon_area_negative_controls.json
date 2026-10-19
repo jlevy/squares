@@ -1,0 +1,137 @@
+{
+  "227": [
+    {
+      "name": "wrong_count",
+      "rejected": true,
+      "expected_error": "count_mismatch",
+      "actual_error": "count_mismatch",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "duplicated_square",
+      "rejected": true,
+      "expected_error": "positive_intersection_area",
+      "actual_error": "positive_intersection_area",
+      "passed": true,
+      "details": {
+        "pair": [
+          0,
+          1
+        ],
+        "exact_area": "1"
+      }
+    },
+    {
+      "name": "invalid_unit_basis",
+      "rejected": true,
+      "expected_error": "nonunit_basis",
+      "actual_error": "nonunit_basis",
+      "passed": true,
+      "details": {
+        "square": 0
+      }
+    },
+    {
+      "name": "shrunken_box",
+      "rejected": true,
+      "expected_error": "wall_violation",
+      "actual_error": "wall_violation",
+      "passed": true,
+      "details": {
+        "square": 1,
+        "vertex": 1
+      }
+    }
+  ],
+  "229": [
+    {
+      "name": "wrong_count",
+      "rejected": true,
+      "expected_error": "count_mismatch",
+      "actual_error": "count_mismatch",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "duplicated_square",
+      "rejected": true,
+      "expected_error": "positive_intersection_area",
+      "actual_error": "positive_intersection_area",
+      "passed": true,
+      "details": {
+        "pair": [
+          0,
+          1
+        ],
+        "exact_area": "1"
+      }
+    },
+    {
+      "name": "invalid_unit_basis",
+      "rejected": true,
+      "expected_error": "nonunit_basis",
+      "actual_error": "nonunit_basis",
+      "passed": true,
+      "details": {
+        "square": 0
+      }
+    },
+    {
+      "name": "shrunken_box",
+      "rejected": true,
+      "expected_error": "wall_violation",
+      "actual_error": "wall_violation",
+      "passed": true,
+      "details": {
+        "square": 6,
+        "vertex": 2
+      }
+    }
+  ],
+  "260": [
+    {
+      "name": "wrong_count",
+      "rejected": true,
+      "expected_error": "count_mismatch",
+      "actual_error": "count_mismatch",
+      "passed": true,
+      "details": {}
+    },
+    {
+      "name": "duplicated_square",
+      "rejected": true,
+      "expected_error": "positive_intersection_area",
+      "actual_error": "positive_intersection_area",
+      "passed": true,
+      "details": {
+        "pair": [
+          0,
+          1
+        ],
+        "exact_area": "1"
+      }
+    },
+    {
+      "name": "invalid_unit_basis",
+      "rejected": true,
+      "expected_error": "nonunit_basis",
+      "actual_error": "nonunit_basis",
+      "passed": true,
+      "details": {
+        "square": 0
+      }
+    },
+    {
+      "name": "shrunken_box",
+      "rejected": true,
+      "expected_error": "wall_violation",
+      "actual_error": "wall_violation",
+      "passed": true,
+      "details": {
+        "square": 0,
+        "vertex": 1
+      }
+    }
+  ]
+}
