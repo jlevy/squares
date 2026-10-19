@@ -1335,7 +1335,9 @@ HOUSES: dict[str, Callable[[int], Fraction]] = {
     "[Daniel n271 2026-10-17]": _import("evand-n271-2026-10-17"),
     "[Daniel n155 explorer 2026-10-17]": _import("evand-n155-explorer-2026-10-17"),
     "[Daniel n229 dilation 2026-10-17]": _import("evand-n229-dilation-2026-10-17"),
-    "[Daniel n229 dilation update 2026-10-18]": _import("evand-n229-dilation-update-2026-10-18"),
+    "[Daniel n229 dilation update 2026-10-18]": _import(
+        "evand-n229-dilation-update-2026-10-18"
+    ),
     # T-155: the side of the retained view of Evan Daniel's regularizer at each count.
     "[Daniel regularizer 2026-10-11]": regularized.view_side,
 }

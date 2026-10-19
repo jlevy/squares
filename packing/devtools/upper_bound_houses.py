@@ -309,6 +309,10 @@ def _sources() -> dict[str, Source]:
         packet_source("T-188", "couzo-verified-bounds-2026-10-14"),
         packet_source("T-190", "couzo-n237-2026-10-15"),
         packet_source("T-195", "pingyou-pr622-certificate-2026-10-15"),
+        packet_source("T-197", "evand-n155-explorer-2026-10-17"),
+        packet_source("T-199", "evand-n229-dilation-update-2026-10-18"),
+        packet_source("T-218", "evand-n236-2026-10-16"),
+        packet_source("T-219", "evand-n271-2026-10-17"),
     ]
     found = {source.result: source for source in sources}
     # Two results may read one packet (T-181 and T-182 both read issue 586's), so the
@@ -332,7 +336,9 @@ def _sources() -> dict[str, Source]:
 #: adoption of PingYou Ltd's PR 574 (T-174), at 37 of its rational counts, 68, 84, 86, 103,
 #: 105, 108, 110, 127, 130 to 132, 155, 172, 179 to 182, 206, 208 to 210, 228, 238 to 240,
 #: 261, 263, 268 to 270, 272, 273, 297 and 305 to 308. The same day adopted PR 622's
-#: certificate (T-195) at 29.
+#: certificate (T-195) at 29. The pass of 19 October 2026 adopted Evan Daniel's
+#: certificates of issues 669 (T-197), 674 (T-199), 659 (T-218) and 664 (T-219) at 155,
+#: 229, 236 and 271.
 ADOPTED: dict[int, str] = {
     29: "T-195",
     68: "T-174",
@@ -354,7 +360,7 @@ ADOPTED: dict[int, str] = {
     146: "T-187",
     153: "T-173",
     154: "T-186",
-    155: "T-174",
+    155: "T-197",
     156: "T-186",
     172: "T-174",
     175: "T-186",
@@ -371,8 +377,9 @@ ADOPTED: dict[int, str] = {
     210: "T-174",
     211: "T-188",
     228: "T-174",
+    229: "T-199",
     232: "T-186",
-    236: "T-146",
+    236: "T-218",
     237: "T-190",
     238: "T-174",
     239: "T-174",
@@ -387,7 +394,7 @@ ADOPTED: dict[int, str] = {
     268: "T-174",
     269: "T-174",
     270: "T-174",
-    271: "T-186",
+    271: "T-219",
     272: "T-174",
     273: "T-174",
     292: "T-146",
@@ -430,7 +437,12 @@ NUMBERS = tuple(sorted(ADOPTED))
 #: counts are below it by issue 639's algebraic sides (T-193, #658), which wait for the
 #: writer, and 236 by Evan Daniel's issue 659, whose import adopts it. The same day
 #: adopted PR 622's certificate (T-195) at 29 from T-155, the case's replay of the
-#: Kingbird catalogue's packing, which no pass had adopted before.
+#: Kingbird catalogue's packing, which no pass had adopted before. The pass of 19 October
+#: 2026 adopted Evan Daniel's certificates after the 19 October review: issue 669 (T-197)
+#: at 155 from T-174, issue 674's update (T-199) at 229, first adopted here, from the case
+#: record's own (the Kingbird catalogue's packing, verified by T-155's exact ceiling),
+#: issue 659 (T-218) at 236 from T-146, which takes 236 off T-174's staged adoption, and
+#: issue 664 (T-219) at 271 from T-186.
 #: A count a pass names keeps its place in the earlier passes' sets, which their archives
 #: hold; it was adopted on the latest day that names it.
 LATER_PASSES: dict[str, frozenset[int]] = {
@@ -502,6 +514,7 @@ LATER_PASSES: dict[str, frozenset[int]] = {
             308,
         }
     ),
+    "2026-10-19": frozenset({155, 229, 236, 271}),
 }
 
 

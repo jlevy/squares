@@ -151,6 +151,9 @@ VERIFIER_TABLE = re.compile(
 #: prose no tool writes in a fixed form (`historical`): the SQUISH update sections at 155,
 #: 258, 263 and 302 and the grid prose at 308. Only their owned parts are the writer's.
 HAND_MARKED = frozenset({155, 258, 263, 302, 308})
+#: The first pass whose writer also marks the closing sentence of a T-155 view's section as
+#: history (`_regularized_certificate`); earlier passes' records read as they wrote them.
+VIEW_SECTION_FROM = "2026-10-19"
 
 
 @dataclass(frozen=True)
@@ -560,6 +563,78 @@ RESULTS: dict[str, Prose] = {
             "re-implemented."
         ),
     ),
+    "T-197": Prose(
+        author="Evan Daniel",
+        reported="on [jlevy/squares#669](https://github.com/jlevy/squares/issues/669)",
+        producer_route=False,
+        ai=(
+            "The issue says the work was done with Claude (Claude Code), directed and "
+            "approved by Evan Daniel."
+        ),
+        lineage=(
+            "The author’s basin explorer started from Daniil Ostashev’s packing, the "
+            "register’s witness for 155 when the search ran, and reached this one after a "
+            "chain of 18 moves; the issue credits that packing as the start. Measured here "
+            "square by square, no symmetry of the box pairs the two one to one, and the best "
+            "assignment moves 29 squares beyond a tenth, sharing no tilt: a new arrangement "
+            "found from Ostashev’s packing (T-197)."
+        ),
+    ),
+    "T-199": Prose(
+        author="Evan Daniel",
+        reported=(
+            "in [an update]"
+            "(https://github.com/jlevy/squares/issues/674#issuecomment-6244298663) on "
+            "[jlevy/squares#674](https://github.com/jlevy/squares/issues/674)"
+        ),
+        producer_route=False,
+        ai=(
+            "The issue says the work was done with Claude (Claude Code), directed and "
+            "approved by Evan Daniel."
+        ),
+        lineage=(
+            "The certificate is a dilation of the author’s binary64 packing by about "
+            "1 + 10⁻¹² with rational half-angle tangents; measured here, it pairs one to one "
+            "with his opening report (T-198), eight squares beyond a tenth. The issue credits "
+            "Francisco Couzo’s #672 packing, itself after Joost de Winter’s #668, as the "
+            "start; it carries de Winter’s four tilt bands but does not pair with his packing, "
+            "and #672 is not yet retained, so that step is the source’s (T-199)."
+        ),
+    ),
+    "T-218": Prose(
+        author="Evan Daniel",
+        reported="on [jlevy/squares#659](https://github.com/jlevy/squares/issues/659)",
+        producer_route=False,
+        ai=(
+            "The issue says the work was done with Claude (Claude Code), directed and "
+            "approved by Evan Daniel."
+        ),
+        lineage=(
+            "The author’s basin explorer descended to this packing from a rebuild of Nate "
+            "Chaoweeraprasit’s SQUISH composition of #481, made from Kingbird’s s(152)_r2 "
+            "corner piece and itsnaka’s s(88); the issue credits that composition for the "
+            "construction. Measured here, the best assignment against the view of #481’s "
+            "packing the case held moves ten squares beyond a tenth and keeps 226 within one: "
+            "another arrangement of #481’s design (T-218)."
+        ),
+    ),
+    "T-219": Prose(
+        author="Evan Daniel",
+        reported="on [jlevy/squares#664](https://github.com/jlevy/squares/issues/664)",
+        producer_route=False,
+        ai=(
+            "The issue says the work was done with Claude (Claude Code), directed and "
+            "approved by Evan Daniel."
+        ),
+        lineage=(
+            "The author’s basin explorer started from the register’s witness for 271 and "
+            "found this packing with one tilt-swap move and a re-polish; the issue calls it a "
+            "refinement of Francisco Couzo’s #561 packing of Nate Chaoweeraprasit’s SQUISH "
+            "design and asks that both be credited. Measured here, it pairs one to one with "
+            "#561’s packing, three squares beyond a tenth: Couzo’s arrangement continued, not "
+            "a refinement in this record’s sense (T-219)."
+        ),
+    ),
 }
 
 XU = "Ryan Xu"
@@ -723,10 +798,15 @@ CREDITS: dict[int, Credit] = {
         (PINGYOU,),
         "PingYou Ltd’s refinement of Evan Daniel’s record-hunt packing",
     ),
-    # Evan Daniel's chain search from Ryan Xu's packing: another arrangement of Xu's design,
-    # nine squares beyond a tenth against Xu's and Barnett's (RT-5 of the 16 October
-    # review; T-187 records no regularization).
-    146: Credit((XU,), (DANIEL,), "Evan Daniel’s arrangement of Ryan Xu’s n = 146 design"),
+    # Evan Daniel's chain search from Ryan Xu's packing: nine squares beyond a tenth
+    # against Xu's and Barnett's (RT-5 of the 16 October review; T-187 records no
+    # regularization). Issue 673 corrects the source's credit: the start was named as
+    # "based on", and the finder of the packing posted is Daniel (19 October 2026).
+    146: Credit(
+        (DANIEL,),
+        (),
+        "Evan Daniel’s packing from a chain search started from Ryan Xu’s n = 146 packing",
+    ),
     # PingYou Ltd's design rearranged by Mykhailo Polkovskyi, as the 14 October review
     # measured it (RQ-5); whether it is a new arrangement is the owner's decision 1 on
     # pull request 602 (T-173).
@@ -746,10 +826,13 @@ CREDITS: dict[int, Credit] = {
     ),
     # T-174's regularization of T-149's packing, 3 squares moved beyond 1e-3, one to one;
     # that it is that packing is the source's statement (the 14 October review of PR 574).
+    # Evan Daniel's basin explorer from Ostashev's packing to a different local minimum;
+    # the issue credits Ostashev's packing as the start, which the author's issue 673
+    # reads as "based on", not as the finder of the packing posted.
     155: Credit(
-        (OSTASHEV,),
-        (PINGYOU,),
-        "PingYou Ltd’s refinement of Daniil Ostashev’s packing",
+        (DANIEL,),
+        (),
+        "Evan Daniel’s packing from a search started from Daniil Ostashev’s",
     ),
     # PR 574's padding of issue 561's continuation of Ostashev's packing, padded again
     # (T-186's regularization of T-174; RT-4).
@@ -875,6 +958,15 @@ CREDITS: dict[int, Credit] = {
         (PINGYOU,),
         "PingYou Ltd’s refinement of Francisco Couzo’s refinement of his own packing",
     ),
+    # Evan Daniel's dilation of a nearby configuration of his opening packing (T-198); the
+    # issue credits Couzo's issue-672 packing, after de Winter's issue 668, as the start,
+    # which the author's issue 673 reads as "based on".
+    229: Credit(
+        (DANIEL,),
+        (),
+        "Evan Daniel’s packing from a search started from Francisco Couzo’s refinement of "
+        "Joost de Winter’s",
+    ),
     # PR 574's re-solve of issue 528's composition, re-solved again (T-186's
     # regularization of T-174).
     232: Credit(
@@ -884,7 +976,14 @@ CREDITS: dict[int, Credit] = {
         "composition of his 38-square rectangle with a 76-square piece of Erich Friedman’s "
         "n = 85 packing",
     ),
-    236: _regularized(SQUISH, "Nate Chaoweeraprasit’s SQUISH"),
+    # Evan Daniel's basin explorer from a rebuild of issue 481's composition to a different
+    # local minimum; the issue credits the composition for the construction, which the
+    # author's issue 673 reads as "based on", not as the finder of the packing posted.
+    236: Credit(
+        (DANIEL,),
+        (),
+        "Evan Daniel’s packing from a rebuild of Nate Chaoweeraprasit’s SQUISH composition",
+    ),
     # Couzo's refinement of issue 593's arrangement of his issue-561 design (T-190's
     # regularization of T-183).
     237: Credit(
@@ -974,13 +1073,15 @@ CREDITS: dict[int, Credit] = {
         "composed from SQUISH’s issue 481 n = 209 packing, whole, and the Kingbird "
         "catalogue’s former n = 19 packing",
     ),
-    # PR 574's padding of issue 561's refinement of SQUISH's packing, padded again
-    # (T-186's regularization of T-174; RT-4: whether T-161 lists T-151 is the owner's).
+    # Evan Daniel's tilt-swap from the register's witness (T-186's tightening of issue 561's
+    # packing): issue 561's arrangement continued, three squares beyond a tenth (RV-2 of the
+    # 19 October review), which issue 664 calls a refinement of Couzo's packing of SQUISH's
+    # and asks both be credited.
     271: Credit(
         (SQUISH,),
-        (COUZO, PINGYOU, POLKOVSKYI),
-        "Mykhailo Polkovskyi’s tighter certificate, after PingYou Ltd’s, of Francisco "
-        "Couzo’s refinement of Nate Chaoweeraprasit’s SQUISH packing",
+        (COUZO, DANIEL),
+        "Evan Daniel’s continuation of Francisco Couzo’s arrangement of Nate "
+        "Chaoweeraprasit’s SQUISH packing",
     ),
     # T-174's regularization of T-151's packing, as T-171 re-solved it, measured one to
     # one, no square moved beyond 1.5e-4 (the 14 October review of PR 574).
@@ -1052,10 +1153,13 @@ CREDITS: dict[int, Credit] = {
     ),
     # T-174's regularization of T-141's packing, 25 squares moved beyond 1e-3, one to one;
     # that it is that packing is the source's statement (the 14 October review of PR 574).
+    # Issue 673 corrects T-141's credit: Kevin Fang's construction is what Daniel's search
+    # was based on, and the finder of the packing posted is Daniel (19 October 2026).
     308: Credit(
-        ("Kevin Fang",),
-        (DANIEL, PINGYOU),
-        "PingYou Ltd’s refinement of Evan Daniel’s move of Kevin Fang’s two-wedge construction",
+        (DANIEL,),
+        (PINGYOU,),
+        "PingYou Ltd’s refinement of Evan Daniel’s packing based on Kevin Fang’s two-wedge "
+        "construction",
     ),
 }
 
@@ -2014,11 +2118,25 @@ def _regularized_certificate(move: Move, text: str) -> str:
         rf"That proves \1, the verified upper bound until {until}.\2",
         text,
     )
-    return re.sub(
+    text = re.sub(
         r"\bThat\s+side\s+is\s+the\s+exact\s+form\s+of\s+the\s+case’s\s+`verified_upper_bound`,"
         r"\s+which\s+cites\s+both\s+certificates\s+\(([^)]*)\)\s+and\s+prints\s+it\s+as",
         rf"That side was the exact form of the case’s `verified_upper_bound` until {until}, "
         r"which cited both certificates (\1) and printed it as",
+        text,
+    )
+    if houses.adopted_on(n) < VIEW_SECTION_FROM:
+        return text
+    # Where the view's section closes with the bound it proved as the verified lane, that
+    # sentence is history too, from the pass of 19 October 2026 on: n = 229 was the first
+    # count whose house moved off a T-155 view by more than the section's printed places.
+    return re.sub(
+        rf"\bThat\s+proves\s+({bound}),\s+the\s+verified\s+upper\s+bound\s+\((T-\d+)\),\s+the"
+        r"\s+exact\s+form\s+of\s+the\s+case’s\s+`verified_upper_bound`,\s+which\s+prints\s+it\s+as"
+        r"\s+(\$[0-9.]+\$),\s+the\s+decimal\s+it\s+printed\s+before",
+        rf"That proves \1, the verified upper bound until {until} (\2), then the exact form "
+        r"of the case’s `verified_upper_bound`, which printed it as \3, the decimal it printed "
+        r"before",
         text,
     )
 

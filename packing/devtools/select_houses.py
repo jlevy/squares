@@ -200,7 +200,7 @@ class Pending:
 PENDING_ADOPTION: dict[int, Pending] = {
     **{
         n: Pending(house="T-174", bead=ADOPTION_BEAD, why=NEXT_PULL_REQUEST)
-        for n in (88, 102, 123, 126, 199, 236, 258, 259, 266, 267, 292, 295, 301)
+        for n in (88, 102, 123, 126, 199, 258, 259, 266, 267, 292, 295, 301)
     },
     **{
         n: Pending(house="T-174", bead=WRITER_BEAD, why=NO_WRITER)
