@@ -11944,7 +11944,7 @@ issues:
       7b6c87e129cf80b5ff9847b90b47fd30b4563c54. Each printed side is rounded upward;
       the exact rational certificate side is authoritative. Comparisons and source verification
       receipts remain author assertions pending intake under think-xu4d.
-    read_through: '2026-10-19T00:31:50Z'
+    read_through: '2026-10-19T15:31:25Z'
     results:
     - key: n204
       claim: s(204) <= 14.808642841982, rounded upward; exact certificate side is authoritative.
@@ -12541,6 +12541,17 @@ issues:
         priced validation remain on the import bead; no claim is registered by this audit.
       queued: true
       bead: think-xu4d
+    asks:
+    - what: Review the promised source-pin, hash-kind and certificate-credit correction when the author links it.
+      state: queued
+      bead: think-xu4d
+      note: The retained author comment identifies the exact n260 seed bytes, but its promised source patch
+        is not linked in the three retained comments. Coordinate the follow-up with think-pvav for issue 675.
+    - what: Review the author's n260 float-conversion, search-chain, packing-identity and analytic-optimum assertions separately from seed custody.
+      state: queued
+      bead: think-xu4d
+      note: These remain source-reported assertions. Neither the custody check nor the public acknowledgement
+        establishes geometry, identity, conversion correctness or an optimum.
     beads:
     - think-xu4d
     answer_bead: think-xu4d
@@ -12551,17 +12562,44 @@ issues:
       kind: acknowledgement
       reported:
       - result: n260
+      outdated:
+      - Called e90993b1c0f625d1d6c2d1ea3b5f391bfe6d98f5bc387a10863434bb9db4934e a decompressed hash; it hashes the gzip bytes.
+    - url: https://github.com/jlevy/squares/issues/678#issuecomment-6270970266
+      date: '2026-10-19'
+      by: jlevy
+      kind: correction
+      reported:
+      - result: n260
+      corrects:
+      - https://github.com/jlevy/squares/issues/678#issuecomment-6257122870
     close_when: Every claim or correction has a reviewed disposition on main, pending validation has a priced
       owner, any changed house is regularized in its adoption, and the author has received a reply verified
       against main and the deployed site.
     notes: >-
       Issue body retained in packing/campaign/issue-intake/intake-20261019/issue-678.json.
       This is a distinct chronological submission from issues 672 and 675; their claims and
-      dispositions remain separate. The n260 predecessor seed provenance remains unresolved
-      and must be preserved through custody and attribution review. Author-reported verification
-      receipts are not local replays. The n545 and n641 witnesses require deletion of one surplus
-      square from n546 and n642 respectively. No register entry, adopted upper bound, house
-      choice or confirmation rung changes in this Stage 1 inventory; Stage 4 adoption is separate.
+      dispositions remain separate. Author clarification
+      https://github.com/jlevy/squares/issues/678#issuecomment-6269517369 identifies the n260
+      predecessor seed at evand/square-packing 14a9af8be4a8b8a8328c3eb6b486a2e553380193,
+      search/regularize/lists/certs/n-260.cert.gz. Our retained custody check confirms 4,112 gzip
+      bytes with SHA-256 e90993b1c0f625d1d6c2d1ea3b5f391bfe6d98f5bc387a10863434bb9db4934e,
+      38,184 decompressed bytes with SHA-256
+      34b203dd126640c533f2ab88b5af8d593db8bf60a8f3d3527defd9cac85c6d40, and header
+      260 4161444696515435316429350771309/250000000000000000000000000000.
+      The custody receipt and original gzip are retained beside the body as
+      issue-678-n260-seed-custody.json and issue-678-n260-seed-14a9af8.cert.gz;
+      issue-678-comments.json retains all three comments through the public correction above.
+      This resolves immutable-source and hash-kind custody only. The author's construction credit
+      to Joost de Winter (issue 668) and exact-form certificate credit to Evan Daniel remain
+      source-reported, distinct from identity or analytic-optimum verification. The promised
+      source-pin/hash-kind/credit patch is not yet linked. T-196 already merged through issue 676
+      as the earlier submission; no later seed or refinement rewrites it. Coordinate with
+      think-pvav for issue 675. All 85 new claims remain unreplayed and unregistered, with no
+      T number allocated; the 83 new witnesses totaling 8,107,636 source-reported bytes are
+      not retained by this custody update. Author-reported verification receipts are not local
+      replays. The n545 and n641 witnesses require deletion of one surplus square from n546
+      and n642 respectively. No register entry, adopted upper bound, house choice or
+      confirmation rung changes in this Stage 1 inventory; Stage 4 adoption is separate.
   - number: 680
     title: 's(183) ≤ 13.999580178737: registration request (first 183 below the grid)'
     author: evand

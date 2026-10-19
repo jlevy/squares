@@ -1,0 +1,25 @@
+{
+  "checked_at": "2026-10-19T15:30:55.074876+00:00",
+  "source_repository": "evand/square-packing",
+  "source_commit": "14a9af8be4a8b8a8328c3eb6b486a2e553380193",
+  "source_path": "search/regularize/lists/certs/n-260.cert.gz",
+  "gzip_bytes": 4112,
+  "gzip_sha256": "e90993b1c0f625d1d6c2d1ea3b5f391bfe6d98f5bc387a10863434bb9db4934e",
+  "decompressed_bytes": 38184,
+  "decompressed_sha256": "34b203dd126640c533f2ab88b5af8d593db8bf60a8f3d3527defd9cac85c6d40",
+  "first_noncomment_header": "260 4161444696515435316429350771309/250000000000000000000000000000",
+  "retained_gzip": "issue-678-n260-seed-14a9af8.cert.gz",
+  "scope": "Data custody only. No source executed, no geometry or conversion or identity proof evaluated. Construction attribution Joost de Winter (#668), exact-form certificate Evan Daniel as source-reported pending review.",
+  "retained_issue": "issue-678.json",
+  "retained_comments": "issue-678-comments.json",
+  "source_issue_capture_updated_at": "2026-10-19T14:22:50Z",
+  "read_through": "2026-10-19T15:31:25Z",
+  "comment_ids": [
+    6257122870,
+    6269517369,
+    6270970266
+  ],
+  "author_clarification": "https://github.com/jlevy/squares/issues/678#issuecomment-6269517369",
+  "public_correction": "https://github.com/jlevy/squares/issues/678#issuecomment-6270970266",
+  "promised_source_patch": "not linked in the three retained comments"
+}
