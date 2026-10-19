@@ -5,7 +5,7 @@ title: "Merge the n = 17 stack (#560, #571, #577) and later landings of main int
 kind: task
 status: in_progress
 priority: 2
-version: 28
+version: 30
 spec_path: docs/project/specs/active/plan-2026-10-10-contributor-profiles.md
 delegate: profiles-final-merge
 labels: []
@@ -18,14 +18,15 @@ child_order_hints:
   - is-01m59gqa1rq6jbsah86qha7xtt
   - is-01m59gsv3bsj068eq0mbhnga56
   - is-01m59jfeg786bcnxfbrm0mmjq3
+  - is-01m59kfzac51p79k9q2myr0t18
 hold: null
 hold_until: null
 created_at: 2026-10-13T17:20:02.981Z
-updated_at: 2026-10-19T07:54:34.886Z
+updated_at: 2026-10-19T08:12:20.683Z
 started_at: 2026-10-13T17:20:09.838Z
 ---
 Watch origin/main and merge it into the profiles branch, keeping both the Overbeck and Hosono renames, reconciling the census and regenerating views. Stack merged in 37b1c8bf7.
 
 ## Notes
 
-2026-10-18 continuation: fetched main d167d4b86 (381 incoming commits). Main checkout is active in Review open issues and PRs; all merge and source work isolated at /Volumes/spud-ext1/worktrees/squares-profiles-review-20261018 on codex/profiles-upstream-review-20261018. Original checkout/head e1f921bf0 remains unchanged. Merge had14 conflicted files; source conflict resolutions and generated views prepared, not yet committed. Two fresh Astra xhigh reviews cover architecture and design; Sol handles release integration. New attribution reconciliation findings tracked in think-um9i. Previous full hosted checkpoint is confirmed passed14 jobs,10 skipped at77fe330dd; current integration still needs fresh gates and independent resolution review. No PR merge authorized or performed.
+2026-10-19 review/integration: all source work is isolated at /Volumes/spud-ext1/worktrees/squares-profiles-review-20261018, branch codex/profiles-upstream-review-20261018. Original checkout /Users/levy/.codex/worktrees/1116/squares remains clean at e1f921bf0; main checkout belongs to another active agent and was not changed. Integrated385 upstream commits through2891494ee;14 original conflicts resolved, followed by two clean small merges. Pushed34fd06feaeaa374511d9c9423ca62cb7d65291bd to draftPR578. Independent Astra architecture/design review and final patch review found defects that were fixed: source-specific identity authorization, overlapping spans, native-panel request race, bounded evidence snapshot, T174 HTML size/link audit, parser callback signature and n29 historical writer replay. Source records/numeric preservation comparisons and50screenshot/25navigation checks are retained. Latestfocused checks:89result/preview tests,6writer tests(all53adopted contracts),35release-impact tests, browserfloor341Node tests. Original local broad gate did not complete; timing diagnostics remain open underthink-j13b. Final standardCI39220334742/Pages39220334772 and fullcheckpoint39220360885 are running at34fd06fea; superseded full39218248533 canceled after8passes, not a fullpass. Next entry: resolve any finalCI failures, publish prepared ReviewB and ReviewA dispositions, close fixed childbeads, update this handoff and sync. DraftPR not merged/deployed. Remaining population underthink-m7il:354unresolved spans,146PDFs awaiting fullcredit inspection. Previewhttp://127.0.0.1:8792/profiles/index.html opened in defaultbrowser. Durable evidence /Volumes/spud-ext1/agent-evidence/squares-profiles-review-20261019/; prepared ReviewB/PRbody in external task scratch tmp. No data repin needed for final tool-only fixes.
