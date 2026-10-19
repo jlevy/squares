@@ -38760,6 +38760,12 @@ evidence:
     shared_components:
     - The sqverify_fast crate, apart from the producer's declared-net reader; sqverify-proof-net
       adapts this repository's crate.
+    independence:
+      coverage:
+        extent: full
+        unit: complete legal core-centre domains at every declared-net direction
+        checked: 201
+        of: 201
     origin: replayed-here
     novelty: previously-published
     source_key: '[wand125 fine-net lower bounds 2026-10-16]'
@@ -38925,6 +38931,12 @@ evidence:
     shared_components:
     - The sqverify_fast crate, apart from the producer's declared-net reader; sqverify-proof-net
       adapts this repository's crate.
+    independence:
+      coverage:
+        extent: full
+        unit: complete legal core-centre domains at every declared-net direction
+        checked: 201
+        of: 201
     origin: replayed-here
     novelty: previously-published
     source_key: '[wand125 fine-net lower bounds 2026-10-16]'
@@ -39087,6 +39099,12 @@ evidence:
     shared_components:
     - The sqverify_fast crate, apart from the producer's declared-net reader; sqverify-proof-net
       adapts this repository's crate.
+    independence:
+      coverage:
+        extent: full
+        unit: complete legal core-centre domains at every declared-net direction
+        checked: 201
+        of: 201
     origin: replayed-here
     novelty: previously-published
     source_key: '[wand125 fine-net lower bounds 2026-10-16]'
