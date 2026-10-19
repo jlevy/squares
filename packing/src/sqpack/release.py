@@ -2835,18 +2835,20 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         ),
         outputs=("papers/n11-lower-bounds-explainer.md",),
         reason=(
-            "Compared with actual main 6833d05aa44f48140170e631b7766cb295876c31 after PR 671 "
-            "landed, the exact candidate scope is the 30 paths above. The explainer manuscript "
-            "and producer are byte-identical to main, and its n11 bound-citation entry is "
-            "unchanged; other counts and source-specific credit links do not enter the article. "
-            "The inherited register count, explainer v0.4.8 history and October 13 article "
-            "revision remain current. Changed standalone case/result serialization, News/profile "
-            "navigation and sibling-paper metadata do not revise this paper content. The n29 "
-            "adoption-writer repair reproduces retained historical wording. This is a fresh "
-            "source review against actual main; no baseline paper render, PDF rebuild or "
-            "byte-identity comparison of rendered output is claimed. The five claim documents "
-            "were regenerated at source revision 4a418c7c; exact comparison against the pre-repin "
-            "documents confirms only source-link revision replacements."
+            "Compared with actual main 6833d05aa44f48140170e631b7766cb295876c31 after "
+            "PR 671 landed, the exact candidate scope is the 30 paths above. The "
+            "explainer manuscript and producer are byte-identical to main, and its n11 "
+            "bound-citation entry is unchanged; other counts and source-specific credit "
+            "links do not enter the article. The inherited register count, explainer "
+            "v0.4.8 history and October 13 article revision remain current. Changed "
+            "standalone case/result serialization, News/profile navigation and "
+            "sibling-paper metadata do not revise this paper content. The n29 "
+            "adoption-writer repair reproduces retained historical wording. This is a "
+            "fresh source review against actual main; no baseline paper render, PDF "
+            "rebuild or byte-identity comparison of rendered output is claimed. The "
+            "five claim documents were regenerated at source revision 4a418c7c; exact "
+            "comparison against the pre-repin documents confirms only source-link "
+            "revision replacements."
         ),
     ),
     ReleaseNoPublicChange(
@@ -2907,16 +2909,18 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         ),
         outputs=("papers/square-packing-methods-survey.md",),
         reason=(
-            "Compared with actual main 6833d05aa44f48140170e631b7766cb295876c31 after PR 671 "
-            "landed, the exact candidate scope is the 52 paths above. The methods manuscript, "
-            "producer and every passive figure input are byte-identical to main, including the "
-            "n29 certificate drawing. Changed frontier/source-coverage prose is cited by link "
-            "rather than incorporated; shared News, profile and standalone case/result helpers do "
-            "not enter the paper article. The n29 writer repair and the exact later n108 adoption "
-            "projection preserve retained historical facts. Its v0.2.3 content edition remains "
-            "current. This is a fresh source review against actual main; the earlier comparison "
-            "at d167d4b86 does not qualify this integration. No baseline paper render, PDF "
-            "rebuild or rendered byte-identity comparison is claimed."
+            "Compared with actual main 6833d05aa44f48140170e631b7766cb295876c31 after "
+            "PR 671 landed, the exact candidate scope is the 52 paths above. The "
+            "methods manuscript, producer and every passive figure input are "
+            "byte-identical to main, including the n29 certificate drawing. Changed "
+            "frontier/source-coverage prose is cited by link rather than incorporated; "
+            "shared News, profile and standalone case/result helpers do not enter the "
+            "paper article. The n29 writer repair and the exact later n108 adoption "
+            "projection preserve retained historical facts. Its v0.2.3 content edition "
+            "remains current. This is a fresh source review against actual main; the "
+            "earlier comparison at d167d4b86 does not qualify this integration. No "
+            "baseline paper render, PDF rebuild or rendered byte-identity comparison is "
+            "claimed."
         ),
     ),
     ReleaseNoPublicChange(
