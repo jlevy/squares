@@ -1,0 +1,15 @@
+{
+  "environment": {"implementation":"CPython","machine":"x86_64","python":"3.14.7"},
+  "format": "couzo-678-exhaustive-sample-v1",
+  "kernel": "devtools.evand_arrangement_reports.run_case, positive job, every pair",
+  "price": {"all_pairs_of_83_certificates":21039911,"certify_and_replay_cpu_hours":20.12,"certify_three_jobs_cpu_hours":10.06,"positive_cpu_hours":3.35,"sample_cpu_seconds":267.6,"sample_pairs":466389,"seconds_per_pair_both_routes":0.0005738138296143349},
+  "rows": [
+    {"cpu_seconds":{"exact_verify":7.315599000000001,"independent":3.5692743069999997},"equals_filtered_least_gap":true,"equals_filtered_least_wall":true,"exact_verify_passed":true,"independent_passed":true,"least_pair_gap":"19393777832215110850002293904201121998896992458864930891047616814455259/348725840364746259045903601310906709485310533577424592468948863701483520000000000","least_wall_clearance":"0","n":204,"pairs_tested":20706,"routes_agree_on_least_gap":true,"wall_seconds":57.7},
+    {"cpu_seconds":{"exact_verify":10.551985141000001,"independent":4.922770894000001},"equals_filtered_least_gap":true,"equals_filtered_least_wall":true,"exact_verify_passed":true,"independent_passed":true,"least_pair_gap":"147556112062046079467311/119186041988467709397237450000000000","least_wall_clearance":"0","n":260,"pairs_tested":33670,"routes_agree_on_least_gap":true,"wall_seconds":99.3},
+    {"cpu_seconds":{"exact_verify":20.552204699,"independent":9.546667536999998},"equals_filtered_least_gap":true,"equals_filtered_least_wall":true,"exact_verify_passed":true,"independent_passed":true,"least_pair_gap":"63188045812853187339816427/39438670973022437964976620000000000000","least_wall_clearance":"0","n":343,"pairs_tested":58653,"routes_agree_on_least_gap":true,"wall_seconds":210.5},
+    {"cpu_seconds":{"exact_verify":60.387168962000004,"independent":30.36760777500001},"equals_filtered_least_gap":true,"equals_filtered_least_wall":true,"exact_verify_passed":true,"independent_passed":true,"least_pair_gap":"28133024891330125889769251/23746137129074739002007000000000000000","least_wall_clearance":"1/1000000000000000","n":545,"pairs_tested":148240,"routes_agree_on_least_gap":true,"wall_seconds":581.4},
+    {"cpu_seconds":{"exact_verify":79.835169207,"independent":40.572010657999996},"equals_filtered_least_gap":true,"equals_filtered_least_wall":true,"exact_verify_passed":true,"independent_passed":true,"least_pair_gap":"34196015780938439265018053/402556353201931012188829230000000000","least_wall_clearance":"0","n":641,"pairs_tested":205120,"routes_agree_on_least_gap":true,"wall_seconds":586.9}
+  ],
+  "started_utc": "2026-10-19T17:21:19Z",
+  "workers": 2
+}
