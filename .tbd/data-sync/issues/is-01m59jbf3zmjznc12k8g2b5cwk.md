@@ -5,7 +5,7 @@ title: "Codex PR #665 engineering reconciliation of reviewed repairs and T-174 h
 kind: task
 status: in_progress
 priority: 2
-version: 12
+version: 13
 delegate: codex-665-adoption-reconcile
 labels: []
 dependencies: []
@@ -19,7 +19,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-19T07:52:24.446Z
-updated_at: 2026-10-19T10:31:04.590Z
+updated_at: 2026-10-19T10:40:13.915Z
 started_at: 2026-10-19T07:52:32.599Z
 ---
 Engineering-only child; preserve original think-3mry owner user-eb-adopt-174. Exclusive checkout .worktrees/fix-665-adoption-20261018. Recover and commit reviewed README/test repairs; compare all 37 rational T-174 adopted sides against landed main T-195 n29 using exact fractions; prepare bounded local source reconciliation. Final records/release integration waits for both #679 and #671 on actual main; no publication, push, PR mutation, merge, rating/credit changes, or new result IDs in this slice.
@@ -77,3 +77,5 @@ Independent exact invariants pass:37T174upper lanes match349and each strictly im
 M2fixed(think-6om1) and M3fixed(think-plcr), now closed with source/test evidence. M1think-2921 and parentthink-fz6p remain open pending shared snapshot reduction, corrected671actualmain ancestry, actual66housecustody undercap, final665release/URL/pin qualification, freshAstra and hosted gates. No push/PRbase/public review/publication/newID/merge; original think-3mry delegate user-eb-adopt-174 unchanged.
 
 Capacity diagnosis think-33q7 complete/closed. Memo .codex/intake-resume-20261019/665-capacity-20261019/CAPACITY.md. Read-only same-selector additive665+671f319+578b76 projection235094940bytes exceeds proposed224MiB by213916; exact mergedsize unresolved across75overlappingpaths/regenerators, so224fitNOTestablished and M1remainsopen. Onlyprovedduplicateroute9013bytes witnessschema, insufficientalone. No source/cap/prune/checkout/push changes. Originalworktree407andfullintake671untouched.
+
+Local219MiBproposal childthink-2gt3complete/closed at3226f0af659d0b05a19c9743f85db474f0c22059(review-661, actualmain6833ancestor). Posthookinventory228589850<229638144by1048294;218MiBshort282. Selection/rejectioncode unchangedexceptcap;old65/actual66receiptsrawunchanged;retainedcapacitytestexplicitlyusescurrentallowancewithoutrewritinghistoric216limit. 11focusedtests+final5boundary/receiptpass,Ruff/types/normalhooksallpass. Source217results/37T174/324lower/n29/18rows/releasepinspreserved. Fullhandoff .codex/intake-resume-20261019/665-capacity-proposal-20261019/PROPOSAL.md. Freshindependentreview/M1acceptance/finalcutstillOPEN. No push/CI/newworker/replay/bulkrestore. Do nottouchold665worktree407orfull578.
