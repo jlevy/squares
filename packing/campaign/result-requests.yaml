@@ -9182,19 +9182,19 @@ issues:
     state: open
     kind: result-report
     triage: done
-    summary: The project opened this issue to track Kevin Fang's theorem, which reached the project through
-      his watched repository TheSnakeFang/squarepack-certs rather than an issue, as the owner asks for results
-      at S4 and above. Triage done; the result maps to T-163, dated by Theorem 1's first commit on 12 October,
-      at V2/C1 on the review of 14 October, with the four finite bounds in the case corpus replayed on both
-      maintained exact routes. Fang's comment of 18 October announces note draft v0.8 at
-      squarepack-certs 0e9be7961773aa78b879c4ee6ba584a67e2e5513 and public squarepack-lean at
-      947bdae. These source assertions await statement, axiom and replay review under think-494l;
+    summary: The project opened this issue to track Kevin Fang's theorem, which reached the project
+      through his watched repository TheSnakeFang/squarepack-certs rather than an issue, as the owner
+      asks for results at S4 and above. Triage done; the result maps to T-163, dated by Theorem 1's
+      first commit on 12 October, at V2/C1 on the review of 14 October, with the four finite bounds
+      in the case corpus replayed on both maintained exact routes. Fang's comment of 18 October announces
+      note draft v0.8 at squarepack-certs 0e9be7961773aa78b879c4ee6ba584a67e2e5513 and public squarepack-lean
+      at 947bdae. These source assertions await statement, axiom and replay review under think-494l;
       T-163 remains V2/C1, and Stage 4 adoption is separate.
-    read_through: '2026-10-19T03:30:28Z'
+    read_through: '2026-10-19T13:53:59Z'
     results:
     - key: excess-theorem
-      claim: 's(n^2 - n + 1) < n for every n >= 15, and s(n^2 - n + F(n)) < n with F(n) = 1 + max{p + 2q
-        : 16p + 21q <= n - 15}.'
+      claim: 's(n^2 - n + 1) < n for every n >= 15, and s(n^2 - n + F(n)) < n with F(n) = 1 + max{p
+        + 2q : 16p + 21q <= n - 15}.'
       source: body
       register:
       - T-163
@@ -9202,24 +9202,22 @@ issues:
       - E-fang-excess-theorem-report
       - E-fang-excess-theorem-exact-feasibility
     - key: note-v08-lean-2026-10-18
-      claim: >-
-        Fang announces note draft v0.8 with the mixed-step (p, q) form of Theorem 2 and a public
-        Lean formalisation at TheSnakeFang/squarepack-lean 947bdae covering Theorem 1, its
-        side n - 1/10000 version, and the single-step form of Theorem 2 on Daniel's unchanged
-        Spec.lean. The author reports standard axioms only, no sorry or native_decide.
+      claim: Fang announces note draft v0.8 with the mixed-step (p, q) form of Theorem 2 and a public
+        Lean formalisation at TheSnakeFang/squarepack-lean 947bdae covering Theorem 1, its side n
+        - 1/10000 version, and the single-step form of Theorem 2 on Daniel's unchanged Spec.lean.
+        The author reports standard axioms only, no sorry or native_decide.
       source: https://github.com/jlevy/squares/issues/603#issuecomment-6255103888
-      not_registered: >-
-        Source announcement retained for separate statement and axiom binding and priced replay
-        under think-494l. The note's mixed-step Theorem 2 and Lean's single-step version require
-        distinct checks. No replay, rung promotion or Stage 4 adoption is claimed by intake;
-        T-163 retains V2/C1 and the existing finite-witness disposition.
+      not_registered: Source announcement retained for separate statement and axiom binding and priced
+        replay under think-494l. The note's mixed-step Theorem 2 and Lean's single-step version require
+        distinct checks. No replay, rung promotion or Stage 4 adoption is claimed by intake; T-163
+        retains V2/C1 and the existing finite-witness disposition.
       queued: true
       bead: think-494l
     - key: note-v09-doi-2026-10-19
-      claim: Fang announces note v0.9, dated 18 October, archived as DOI 10.5281/zenodo.23463481 with PDF
-        and LaTeX under CC BY; he states it is the same text as note/fang-2026-n2-n-1.md at 6e265256061b7c8b4be7e690008fa59c12ca5ae7.
-        The source README scopes the unchanged Lean pin 947bdae to Theorem 1 and the unmixed bounds of Theorem
-        2.
+      claim: Fang announces note v0.9, dated 18 October, archived as DOI 10.5281/zenodo.23463481 with
+        PDF and LaTeX under CC BY; he states it is the same text as note/fang-2026-n2-n-1.md at 6e265256061b7c8b4be7e690008fa59c12ca5ae7.
+        The source README scopes the unchanged Lean pin 947bdae to Theorem 1 and the unmixed bounds
+        of Theorem 2.
       source: https://github.com/jlevy/squares/issues/603#issuecomment-6259031488
       not_registered: Publication and statement update to the existing theorem, queued with the existing
         note and Lean review owner. DOI assets and statement binding remain to be retained and reviewed;
@@ -9256,9 +9254,24 @@ issues:
         id: T-163
         verification: V2
         confirmation: C1
-    close_when: The import and its disposition are on main, the owner has posted the resulting state with
-      the entry's id, and the review and replay that would raise its rungs are owned by its bead; optimality
-      is outside this request.
+    - url: https://github.com/jlevy/squares/issues/603#issuecomment-6268897002
+      date: '2026-10-19'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: excess-theorem
+        id: T-163
+        verification: V2
+        confirmation: C1
+        status: reviewed
+      - result: note-v09-doi-2026-10-19
+      - result: note-v08-lean-2026-10-18
+    close_when: The import and its disposition are on main, the owner has posted the resulting state
+      with the entry's id, and the review and replay that would raise its rungs are owned by its bead;
+      optimality is outside this request.
+    notes: 'The 19 October posted acknowledgement records note v0.9/DOI and unchanged limited Lean
+      scope as queued for review, with T-163 still V2/C1; it claims no completed DOI-asset review
+      or new rung. Exact posted bodies are retained in packing/campaign/issue-intake/intake-followup-20261019/posted-interim-acknowledgements.json.'
   - number: 643
     title: 's(k² − 4) = k for every k ≥ 8 in the Lean kernel: ValidTilt9 (Hosono, after Daniel): tracking
       an unreported result'
@@ -12534,10 +12547,10 @@ issues:
     kind: result-report
     triage: done
     summary: 'Evan Daniel''s original n183 finite upper bound is locally bound to retained complete
-      replay and accepted mathematical review as T-218 after #671, merged at 6833d05 and integrated here.
-      T-218 final qualification and publication remain pending; neither house nor regularized endpoint
-      is adopted.'
-    read_through: '2026-10-19T05:24:01Z'
+      replay and accepted mathematical review as T-218 after #671, merged at 6833d05 and integrated
+      here. T-218 final qualification and publication remain pending; neither house nor regularized
+      endpoint is adopted.'
+    read_through: '2026-10-19T13:54:01Z'
     results:
     - key: n183
       claim: s(183) <= 13999580178736252502081470897571/1000000000000000000000000000000 = 13.999580178736252502081470897571,
@@ -12552,15 +12565,24 @@ issues:
     beads:
     - think-xp0o
     answer_bead: think-xp0o
-    replies: []
-    close_when: The reported claim has a reviewed disposition on main, replay and mathematical
-      review have explicit owners, any adopted house is regularized in the adoption change,
-      and a reply checked against main and the deployed site reports the resulting state.
+    replies:
+    - url: https://github.com/jlevy/squares/issues/680#issuecomment-6268897692
+      date: '2026-10-19'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n183
+    close_when: The reported claim has a reviewed disposition on main, replay and mathematical review
+      have explicit owners, any adopted house is regularized in the adoption change, and a reply checked
+      against main and the deployed site reports the resulting state.
     notes: 'Issue body retained in packing/campaign/issue-intake/intake-followup-20261019/issue-680.json.
-      Source commit date is 2026-10-19T05:20:24Z, despite the author-local 18 October date.
-      The second crossover parent was not logged; exact geometry can be checked without reconstructing
-      that lineage. No independent source-priority conclusion is drawn. Local registration
-      T-218 follows #671, merged at 6833d05 and integrated here; final qualification, publication
-      and the post-merge/deployment reply are owned by the coordinator. Retained original primary receipt and mathematical
-      review support finite feasibility only. Case/house adoption, regularized endpoint and
-      stronger numerical/lineage/priority claims remain separate.'
+      Source commit date is 2026-10-19T05:20:24Z, despite the author-local 18 October date. The second
+      crossover parent was not logged; exact geometry can be checked without reconstructing that lineage.
+      No independent source-priority conclusion is drawn. Local registration T-218 follows #671, merged
+      at 6833d05 and integrated here; final qualification, publication and the post-merge/deployment
+      reply are owned by the coordinator. Retained original primary receipt and mathematical review
+      support finite feasibility only. Case/house adoption, regularized endpoint and stronger numerical/lineage/priority
+      claims remain separate. The 19 October posted interim reply reports completed local original-certificate
+      replay and mathematical review, while registration is unlanded, undeployed and its result number
+      provisional. It names no T-218 and makes no published-registration claim; house adoption and
+      regularized endpoint remain separate. Exact posted bodies are retained in packing/campaign/issue-intake/intake-followup-20261019/posted-interim-acknowledgements.json.'

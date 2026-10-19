@@ -1,0 +1,81 @@
+   Compiling typenum v1.20.1
+   Compiling num-traits v0.2.19
+   Compiling generic-array v0.14.7
+   Compiling cfg-if v1.0.5
+   Compiling num-integer v0.1.47
+   Compiling serde_core v1.0.229
+   Compiling crypto-common v0.1.7
+   Compiling block-buffer v0.10.4
+   Compiling libc v0.2.189
+   Compiling adler2 v2.0.1
+   Compiling miniz_oxide v0.8.9
+   Compiling cpufeatures v0.2.17
+   Compiling digest v0.10.7
+   Compiling num-bigint v0.4.6
+   Compiling crc32fast v1.5.2
+   Compiling zmij v1.0.23
+   Compiling memchr v2.8.3
+   Compiling itoa v1.0.18
+   Compiling serde_json v1.0.151
+   Compiling num-rational v0.4.2
+   Compiling flate2 v1.1.2
+   Compiling serde v1.0.229
+   Compiling sha2 v0.10.9
+   Compiling sqverify-fast v0.1.0 (/Users/levy/wrk/github/squares/.worktrees/review-668-math-20261018/packing/sqverify_fast)
+    Finished `release` profile [optimized] target(s) in 23.64s
+     Running unittests src/lib.rs (/Volumes/spud-ext1/agent-scratch/squares-fine-net-mac-haaq/cargo-target/release/deps/sqverify_fast-a1bce9253b822407)
+
+running 13 tests
+test certificate::tests::net_directions_are_rational_rotations ... ok
+test certificate::tests::images_preserve_area_and_cover_the_orbit ... ok
+test exact::tests::decimals_are_their_literal_values ... ok
+test exact::tests::enclosures_are_tight_and_contain_the_value ... ok
+test interval::tests::directed_steps_bracket_exact_sums ... ok
+test interval::tests::interval_product_covers_sign_changes ... ok
+test interval::tests::nan_is_never_dropped ... ok
+test interval::tests::steps_reach_the_adjacent_values ... ok
+test rotated::tests::area_lower_bound_is_below_and_close_to_exact ... ok
+test rotated::tests::edge_length_enclosures_contain_exact_lengths_over_the_box ... ok
+test rotated::tests::gradient_enclosures_contain_difference_quotients ... ok
+test rotated::tests::oracle_counts_closed_intersections ... ok
+test rotated::tests::atom_bounds_hold_at_every_sampled_centre ... ok
+
+test result: ok. 13 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 6.07s
+
+     Running tests/adversarial.rs (/Volumes/spud-ext1/agent-scratch/squares-fine-net-mac-haaq/cargo-target/release/deps/adversarial-58565c7d283b09e0)
+
+running 17 tests
+test admission_refuses_each_broken_premise ... ok
+test a_fault_injected_run_is_never_verified ... ok
+test admission_refuses_the_overflow_densities ... ok
+test axis_sweep_refuses_an_overflow_inside_the_domain ... ok
+test axis_sweep_refuses_the_overflow_certificate ... ok
+test decimal_masses_are_exact_and_the_mass_premise_is_strict ... ok
+test duplicate_keys_are_refused_before_any_reader_disagrees ... ok
+test fmin_and_fmax_are_exact_on_finite_operands_and_poison_on_failure ... ok
+test format_l_and_m_nets_cannot_be_overridden ... ok
+test gzip_input_must_be_one_member_and_nothing_else ... ok
+test lemma_f3_holds_at_its_extremes ... ok
+test overflow_certificate_has_an_uncovered_centre ... ok
+test overflow_in_the_rotated_search_is_never_verified ... ok
+test per_bin_domain_needs_the_fold_at_pi_over_four ... ok
+test the_per_bin_domain_checks_the_tangent_form_of_the_shrink_premise ... ok
+test the_s1_shape_at_the_density_cap_is_refused_and_finite ... ok
+test box_bounds_never_exceed_exact_capture_on_boundary_configurations ... ok
+
+test result: ok. 17 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 5.53s
+
+     Running tests/declared_net.rs (/Volumes/spud-ext1/agent-scratch/squares-fine-net-mac-haaq/cargo-target/release/deps/declared_net-9a9df06807f6cc6e)
+
+running 8 tests
+test a_corrupted_declaration_is_refused ... ok
+test a_declared_net_replaces_the_standard_one ... ok
+test a_net_block_outside_format_l_is_refused_not_ignored ... ok
+test metadata_may_restate_a_declared_net_but_never_change_it ... ok
+test only_format_m_declares_a_net ... ok
+test the_per_bin_tangent_form_is_checked_on_the_declared_step ... ok
+test a_duplicate_key_inside_the_declaration_is_refused_by_the_reader ... ok
+test without_its_declaration_the_core_does_not_fit_the_standard_net ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

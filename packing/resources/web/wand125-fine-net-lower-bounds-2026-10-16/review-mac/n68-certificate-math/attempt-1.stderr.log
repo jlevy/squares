@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/Users/levy/wrk/github/squares/.codex/intake-resume-20261019/n68-certificate-math/audit_checkpoint.py", line 291, in <module>
+    main()
+    ~~~~^^
+  File "/Users/levy/wrk/github/squares/.codex/intake-resume-20261019/n68-certificate-math/audit_checkpoint.py", line 228, in main
+    require(math.isclose(sum(float(t['cpu_seconds']) for t in times), execution['cpu_seconds'], abs_tol=1e-9), 'cost CPU total')
+                         ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/levy/wrk/github/squares/.codex/intake-resume-20261019/n68-certificate-math/audit_checkpoint.py", line 228, in <genexpr>
+    require(math.isclose(sum(float(t['cpu_seconds']) for t in times), execution['cpu_seconds'], abs_tol=1e-9), 'cost CPU total')
+                             ~~~~~^^^^^^^^^^^^^^^^^^
+ValueError: could not convert string to float: '85653/100'
