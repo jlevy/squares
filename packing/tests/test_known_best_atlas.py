@@ -2151,11 +2151,11 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
     # October, Evan Daniel's n = 146 packet and Couzo's n = 237 packet, and no longer from
     # Couzo's 12 October certificates, Mishapolk's 14 October records, Ostashev's 12
     # October compositions and records and 13 October merged bands, or PingYou Ltd's
-    # n = 146 refinement: two sources fewer, and no new name. The adoption of 17 October
-    # (think-30n2) draws 29 from PR #622's certificate, where Schadt, Ellsworth and
-    # PingYou Ltd are named already: one source more, and no new name.
+    # n = 146 refinement: two sources fewer, and no new name.
+    # T-174's 37-count adoption consolidates ten source keys while retaining every
+    # construction credit. T-195 adds one source at n = 29.
     assert len(expected_names) == 26
-    assert len(expected_sources) == 27
+    assert len(expected_sources) == 17
     assert set(json.loads(credit_block.attrib["data-credited-names"])) == expected_names
     assert set(json.loads(credit_block.attrib["data-source-keys"])) == expected_sources
     assert credit_block.find("svg:text[@data-feature='packing-credits-heading']", SVG) is None
@@ -2184,16 +2184,16 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
         "Couzo",
         "Daniel",
         "Fang",
+        "Gupta",
         "Ostashev",
         "PingYou Ltd",
-        "Rehwaldt",
-        "Gupta",
         "Xu",
         "Barnett",
         "Chang",
         "DeVincentis",
         "hmbelvedere",
         "Mishapolk",
+        "Rehwaldt",
     ]
     assert all(body.count(name) == 1 for name in expected_names)
     assert "et al." not in body
@@ -3126,8 +3126,18 @@ def test_the_poster_badges_every_perfect_square_and_counts_them_in_its_legend() 
     assert solid_rigid == sorted([k * k for k in range(1, 19)] + [5, 11, 28, 40])
     assert set(solid_rigid) >= {121, 144, 169, 196, 225, 256, 289, 324}
 
-    # Read exactness from the frontier, independently of the figure's computed totals.
+    # The retained poster predates T-174's adoption but includes T-195 at 29. The
+    # same-day archive also holds 29's prior record, so restore only T-174's roster.
+    from devtools import adopt_houses  # noqa: PLC0415
+
+    previous = adopt_houses.read_pass("2026-10-17")
+    t174_counts = {n for n, result in adopted_houses.ADOPTED.items() if result == "T-174"}
+    assert len(t174_counts) == 37
+    assert 29 not in t174_counts
     cases = {n: build_bound_citations.load_case(n) for n in cards}
+    cases.update(
+        {n: safe_load(previous[n].split("---\n", 2)[1])["packing"] for n in t174_counts}
+    )
     numeric_cases = {
         n
         for n, case in cases.items()

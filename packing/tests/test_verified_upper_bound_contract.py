@@ -183,6 +183,11 @@ DECLARED_CONSUMERS = {
         "checks that fresh ceiling verification does not redate a historical construction "
         "or imply optimality; upper, lower and optimality contribution roles remain distinct"
     ),
+    "packing/tests/test_result_status.py": (
+        "uses a case's exact certified ceiling as the reported side of a synthetic tied "
+        "result, confirming that equality is no strict improvement; the ceiling is "
+        "never treated as s(n) or as an optimality claim"
+    ),
     "packing/tests/test_confirm_gupta_records.py": (
         "tests finite ceiling confirmation, retained prior lanes and complete custody; "
         "a feasibility certificate confers neither s(n) nor optimality"

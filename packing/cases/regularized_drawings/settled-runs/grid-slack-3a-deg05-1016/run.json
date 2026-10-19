@@ -1,9 +1,0 @@
-{
-  "id": "grid-slack-3a-deg05-1016",
-  "generator": "regularize_grid_slack/1",
-  "finished": "2026-10-16",
-  "parameters": {"near_axis_degrees":0.5,"trust":0.45,"time_limit":120.0,"stage_margin":0.0099},
-  "counts": 9,
-  "decisions": {"admit":7,"refuse":1,"review":1},
-  "cost": {"cpu_seconds":915.99,"wall_seconds":915.99,"workers":1,"note":"per-count seconds the reports record, summed; no receipt of the run's own"}
-}
