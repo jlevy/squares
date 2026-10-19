@@ -98,6 +98,7 @@
     "packing/tests/test_check_checkout_imports.py": 0.449,
     "packing/tests/test_check_class_record_claims.py": 0.891,
     "packing/tests/test_check_closed_polygon_cover.py": 0.125,
+    "packing/tests/test_check_darwin_memory_results.py": 0.031,
     "packing/tests/test_check_declared_bounds.py": 1.182,
     "packing/tests/test_check_diamond_cover_witness.py": 0.274,
     "packing/tests/test_check_full_square_compatibility.py": 0.243,
@@ -942,6 +943,20 @@
           "report": "packing/devtools/suite-file-cost-admissions/pingyou-pr622-2026-10-16.json",
           "provenance": {},
           "tests": 7
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_check_darwin_memory_results.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/darwin-memory-results-2026-10-19.json",
+          "provenance": {},
+          "tests": 20
         }
       ]
     }
