@@ -13,8 +13,11 @@ The packet also preserves the exact historical 65-house custody receipt separate
 the fresh complete-tree operation’s canonical receipt.
 The latter admitted 66 houses from 156 inputs and refused and restored 24 late
 mutations; it ran no geometric decider and passed both input byte-equality checks.
-Its snapshot measured 228,578,604 bytes against the unchanged 226,492,416-byte cap, so
-the complete custody gate remains open.
+Its snapshot measured 228,578,604 bytes against its recorded 226,492,416-byte cap, so
+that operation exceeded the allowance recorded at the time.
+The proposed 219 MiB allowance reassesses the unchanged operation and current source
+surface; it changes no selection, receipt field, input or timing.
+Independent capacity review is still required before accepting the custody gate.
 Neither the saved diagnostic’s success nor the custody operation’s admission outcome
 qualifies that snapshot or any later source head.
 Final actual-main integration, publication and hosted checks remain pending.

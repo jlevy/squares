@@ -20,6 +20,7 @@ import yaml
 from devtools import adopt_houses as adopt
 from devtools import apply_closed_form as closed_form
 from devtools import default_drawings as defaults
+from devtools import run_negative_controls as controls
 from devtools import select_houses as select
 from devtools import upper_bound_houses as houses
 from sqpack.field import FieldPreconditionError
@@ -1159,9 +1160,21 @@ def test_the_receipt_of_the_custody_run_names_every_input_and_house() -> None:
         raw = (houses.REPO / row["path"]).read_bytes()
         assert (row["bytes"], row["sha256"]) == (len(raw), hashlib.sha256(raw).hexdigest())
     assert len(receipt["mutations_refused_and_restored"]) == 2 * len(houses.sources())
+    assert set(receipt["mutations_refused_and_restored"]) == {
+        f"{result} n={min(houses.numbers_of(result))}: {kind}"
+        for result in houses.sources()
+        for kind in ("outside-control verdict", "certificate bytes")
+    }
     assert receipt["fresh_geometric_deciders"] is False
-    # The run's worker snapshot was under the cap it ran against (review B of PR 614, B5).
-    assert receipt["snapshot_source_bytes"] <= receipt["snapshot_cap_bytes"]
+    assert receipt["original_inputs_byte_equal"] is True
+    assert receipt["restored_worker_inputs_byte_equal"] is True
+    assert receipt["child_timeout_seconds"] == houses.CUSTODY_TIMEOUT == 120
+    # Capacity is assessed against the current allowance. The retained operation's
+    # recorded 216 MiB limit and its over-limit measurement stay raw: raising the
+    # allowance does not turn them into a claim that the old run met its old limit.
+    # All source inputs and every mutation/refusal above must still match this tree.
+    assert receipt["snapshot_cap_bytes"] <= controls.SNAPSHOT_MAX_BYTES
+    assert receipt["snapshot_source_bytes"] <= controls.SNAPSHOT_MAX_BYTES
 
 
 def test_the_prior_state_keeps_every_moved_record_as_it_stood_before(

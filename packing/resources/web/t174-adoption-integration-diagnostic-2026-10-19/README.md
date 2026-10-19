@@ -41,8 +41,12 @@ The historical receipt does not cover n29; its timings and house map belong to t
 Its operation admitted all 66 houses from 156 inputs and refused and restored 24 late
 mutations, with no geometric decider run and both input byte-equality checks passing.
 Its measured snapshot was 228,578,604 bytes against a 226,492,416-byte cap.
-That operation’s `PASS` records its admission and mutation outcome; the snapshot-cap
-assertion still fails, so the complete custody gate remains open.
+That operation’s `PASS` records its admission and mutation outcome; its snapshot
+exceeded the recorded 216 MiB allowance.
+The proposed current allowance of 219 MiB reassesses these retained measurements and the
+current source inventory without rewriting the receipt or changing source selection.
+Its regression still checks every retained input and refusal, as well as the current
+limit. Independent capacity review remains required before accepting the custody gate.
 The retained diagnostic and this packet claim no new replay of a packing certificate or
 regularization run.
 
