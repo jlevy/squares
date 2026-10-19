@@ -1506,3 +1506,26 @@ def test_malformed_coverage_does_not_interrupt_the_schema_gate(
     diagnostic = capsys.readouterr().err
     assert "FAIL evidence.yaml" in diagnostic
     assert "coverage" in diagnostic
+
+
+def test_a_producer_run_under_a_confirming_origin_names_no_code_relation() -> None:
+    """The words a confirmation is read in belong to runs beyond the producer: a
+    relabelled producer run reads as the source's own and names no relation."""
+    producer = {
+        "id": "E-producer-relabelled",
+        "method": "exact-algebraic",
+        "origin": "replayed-here",
+        "performed_by": "source-author",
+        "relationship_to_generator": "same-implementation",
+        "replay": "python -m check certificate.json",
+        "replay_status": "passed",
+    }
+    line = verifier_registry.entry_line(producer, VERIFIERS)
+    assert line.startswith(
+        f"`E-producer-relabelled`, the source{verifier_registry.APOSTROPHE}s own run"
+    )
+    assert not any(label in line for label in verifier_registry.LABELS.values()), line
+    ours = {**producer, "performed_by": "repository"}
+    assert verifier_registry.LABELS["same-implementation"] in verifier_registry.entry_line(
+        ours, VERIFIERS
+    )
