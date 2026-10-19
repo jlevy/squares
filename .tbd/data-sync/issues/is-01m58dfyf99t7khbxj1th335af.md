@@ -5,7 +5,7 @@ title: "PR #406 C1: bound both Git metadata streams during capture"
 kind: bug
 status: in_progress
 priority: 1
-version: 12
+version: 13
 delegate: codex@spud10.local
 labels: []
 dependencies: []
@@ -19,10 +19,11 @@ child_order_hints:
   - is-01m5a9znvp10awr1kf6s9f9ph9
   - is-01m5aaexwh6kw61bgmtr7mkq0d
   - is-01m5abczyr52cdwv3njq9jqee5
+  - is-01m5abvzd0xk8vvwh8qgavt7yz
 hold: null
 hold_until: null
 created_at: 2026-10-18T21:08:13.927Z
-updated_at: 2026-10-19T15:10:08.855Z
+updated_at: 2026-10-19T15:18:19.807Z
 started_at: 2026-10-18T21:08:20.463Z
 ---
 Security preflight S1 at PR #406 head 8811bd763d437aaf8d75dc5d1dd4ac761a1bc39d: packing/devtools/check_added_blobs.py:_git currently uses subprocess.run(capture_output=True), buffering unlimited stdout and stderr before checking MAX_METADATA_BYTES. Consume both streams concurrently with an enforced per-stream cap, kill/reap the child immediately on excess, retain the existing deadline and fail-closed errors, and add focused small-cap oversized-stdout/stderr regressions proving early termination in packing/tests/test_added_blob_guard.py. Coordinator root owns publishing and schedules focused tests after #676 Stage 3 releases the heavy slot.
