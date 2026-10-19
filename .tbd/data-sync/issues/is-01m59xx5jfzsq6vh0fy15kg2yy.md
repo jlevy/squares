@@ -5,8 +5,8 @@ title: Admit T-218 exact house source and stage n183 adoption
 kind: bug
 status: in_progress
 priority: 2
-version: 7
-delegate: codex-n183-house-rule-20261019
+version: 8
+delegate: lane-680
 labels:
   - result-import
 dependencies: []
@@ -18,7 +18,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-19T11:14:18.830Z
-updated_at: 2026-10-19T13:10:49.364Z
+updated_at: 2026-10-19T20:39:50.497Z
 started_at: 2026-10-19T11:14:30.522Z
 ---
 Bounded registration slice on codex/intake-post671-followup-20261019: add maintained exact-side source wiring for T-218 from retained n183 packet without any geometry/proof/source replay; test real admission and House Rule staging. Stage only genuinely moving n183 under an owned open next-PR adoption plus strong-generator regularization obligation. Preserve all 324 bound lanes, assurance, credits, witnesses and receipts. Release/main ordering remains coordinator-owned.
