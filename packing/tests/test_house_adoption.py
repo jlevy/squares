@@ -224,10 +224,18 @@ def _confirmed_entry() -> tuple[dict[str, Any], dict[str, Any]]:
             "claim": "upper-bound",
             "assurance": "verified",
             "origin": "replayed-here",
+            "performed_by": "repository",
             "replay_status": "passed",
         }
     }
     return entry, evidence
+
+
+def test_only_a_run_beyond_the_producer_confirms_a_house() -> None:
+    entry, evidence = _confirmed_entry()
+    assert select.confirming(entry, evidence, 7) == ("E-test-replay",)
+    producer = {**evidence["E-test-replay"], "performed_by": "source-author"}
+    assert select.confirming(entry, {"E-test-replay": producer}, 7) == ()
 
 
 def test_a_case_keeps_its_own_house_where_nothing_is_below(
