@@ -30054,6 +30054,21 @@ regularized_drawings:
         max_move: 9.207591e-95
         max_turn_deg: 0.0
       view: packing/atlas/known-best/regularized/n-182-regularized.yaml.gz
+    - n: 183
+      of: T-218
+      by: project
+      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
+      side: same
+      changes: {re_angled: 1}
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 24
+        max_move: 0.3578448
+        max_turn_deg: 6.23142
+      view: packing/atlas/known-best/regularized/n-183-regularized.yaml.gz
     - n: 198
       of: T-155
       by: project
