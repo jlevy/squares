@@ -8,12 +8,16 @@
 # path already over it at the pull request's base is grandfathered. 5 MiB is OR-18's
 # "a retained binary or dump of more than a few megabytes".
 #
-# total_bytes applies to the largest version of each path, each blob object counted once.
+# total_bytes applies to the larger of the historical largest-version-per-path charge
+# and the selected head/index retained-blob charge. Both deduplicate blob objects and
+# charge grandfathered paths only for growth above their base size.
 # 48 MiB is OR-18's "a set of them totalling tens of megabytes", sized on 2026-10-11 from
 # `--census 38` over the merges into main from #416 to #398: the largest routine merge,
-# #469 (403 commits), charged 37.07 MiB, and 48 MiB is that reading times 1.25 rounded up
-# to a multiple of 8 MiB. The only merge it refuses is #461, for exp-29x results of 6-34
-# MiB each, which is the case OR-18 names.
+# #469 (403 commits), charged 37.07 MiB under the historical path-maximum rule, and
+# 48 MiB is that reading times 1.25 rounded up to a multiple of 8 MiB. That census refused
+# only #461, for exp-29x results of 6-34 MiB each, which is the case OR-18 names.
+# This historical census predates the retained-blob floor; remeasure its merge verdicts
+# before treating it as evidence for that floor.
 #
 # Re-measure before changing either, from `packing/`:
 #   uv run --frozen --all-extras --group dev python -m devtools.check_added_blobs --census 40

@@ -2399,9 +2399,13 @@ is the rule; this is how to follow it.
   [`added-blobs.yaml`](packing/devtools/added-blobs.yaml), sized by the tool’s own
   `--census` replay of recent merges into `main`; re-measure with it before changing
   one. Every blob version the branch adds is checked, so committing then deleting a dump
-  still fails, and the total counts each path once, at its largest version.
-  A path already over 5 MiB at the base is grandfathered until `think-xeav` moves it to
-  hosted data; a new path, a copy or an edited rename is not.
+  still fails. The total is the larger of the historical largest-version-per-path charge
+  and the charge for blobs retained at the selected head or index.
+  Both count each blob object once, so repeated edits of one path and identical copies
+  deduplicate, while distinct retained files count even after sharing an earlier
+  version. A grandfathered path contributes only growth above its base size to either
+  charge. A path already over 5 MiB at the base is grandfathered until `think-xeav` moves
+  it to hosted data; a new path, a copy or an edited rename is not.
   A Git LFS pointer is refused, since the repository does not use LFS. `--help` has the
   rest. `GUARD_REFUSED` is never a pass, and its message names the remedy: fetch a
   missing base or a shallow clone’s history; after the base is force-pushed, recheck

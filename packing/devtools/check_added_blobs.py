@@ -11,9 +11,11 @@ policy diff (OR-18). Against them the guard checks:
             that reintroduce older base history. A path whose blob at BASE already
             exceeds the per-blob ceiling is grandfathered: changing it is the status
             quo, not added bulk data. A new path, a copy or an edited rename is not.
-  in total  the largest version of each path, each blob object once, so a text file
-            edited in twenty commits is charged once rather than once per version Git
-            stores as a delta. A grandfathered path is charged only its growth.
+  in total  the larger of two charges: each path's largest historical version, or
+            the blobs retained at the selected head/index. Each charge counts a blob
+            object once and a grandfathered path only for its growth. A text file
+            edited in twenty commits is charged once; distinct retained files still
+            count separately after sharing an earlier version.
   LFS       a Git LFS pointer is refused: this repository does not use LFS, and a
             pointer would carry bulk data past the gate.
 
@@ -44,7 +46,7 @@ import selectors
 import subprocess
 import sys
 import time
-from collections.abc import Mapping, Sequence
+from collections.abc import Iterable, Mapping, Sequence
 from dataclasses import dataclass, replace
 from pathlib import Path
 
@@ -98,6 +100,8 @@ class Blob:
     size: int
     paths: tuple[str, ...]
     lfs_pointer: bool = False
+    # Admission-relevant paths at the selected head/index, separate from history.
+    retained_paths: tuple[str, ...] = ()
 
 
 @dataclass(frozen=True)
@@ -385,6 +389,7 @@ def inventory(repo: Path, base: str, *, head: str = "HEAD", staged: bool = False
     for change in history:
         if change.after in paths:
             paths[change.after].add(change.path)
+    retained: dict[bytes, set[str]] = {}
     tip_arguments = ["diff", "--raw", "-z", "--no-abbrev", "--no-ext-diff", "-M100%"]
     tip_arguments.extend(["--cached", fork] if staged else [fork, end])
     for change in parse_changes(_git(repo, *tip_arguments, "--", deadline=deadline)):
@@ -398,6 +403,7 @@ def inventory(repo: Path, base: str, *, head: str = "HEAD", staged: bool = False
         ):
             continue
         paths.setdefault(change.after, set()).add(change.path)
+        retained.setdefault(change.after, set()).add(change.path)
     if not paths:
         return []
     identifiers = sorted(paths)
@@ -422,7 +428,12 @@ def inventory(repo: Path, base: str, *, head: str = "HEAD", staged: bool = False
             if not paths[expected]:
                 raise MetadataError("new blob lacks its historical path inventory")
             blobs.append(
-                Blob(expected.decode("ascii"), int(columns[2]), tuple(sorted(paths[expected])))
+                Blob(
+                    expected.decode("ascii"),
+                    int(columns[2]),
+                    tuple(sorted(paths[expected])),
+                    retained_paths=tuple(sorted(retained.get(expected, ()))),
+                )
             )
     small = [blob.object_id for blob in blobs if blob.size <= LFS_POINTER_BYTES]
     pointers = _lfs_pointers(repo, small, deadline) if small else set()
@@ -466,10 +477,20 @@ def _exempt(blob: Blob, per_blob: int, exempt: Mapping[str, int]) -> bool:
     )
 
 
-def charged_bytes(blobs: Sequence[Blob], exempt: Mapping[str, int] | None = None) -> int:
-    """What the aggregate ceiling charges: each path's largest version, each blob once.
+def _charge_paths(versions: Iterable[tuple[str, Blob]], exempt: Mapping[str, int]) -> int:
+    charges: dict[str, int] = {}
+    for path, blob in versions:
+        amount = max(0, blob.size - exempt.get(path, 0))
+        charges[blob.object_id] = max(charges.get(blob.object_id, 0), amount)
+    return sum(charges.values())
 
-    A grandfathered path is charged only what its largest version adds to its base size.
+
+def charged_bytes(blobs: Sequence[Blob], exempt: Mapping[str, int] | None = None) -> int:
+    """The larger historical path-maximum or retained head/index unique-blob charge.
+
+    Both charges deduplicate objects and charge grandfathered paths only for growth.
+    Keeping the retained charge prevents a shared historical maximum from hiding
+    distinct files; keeping the historical charge bills deleted paths and edit churn.
     """
     exempt = exempt or {}
     largest: dict[str, Blob] = {}
@@ -481,11 +502,10 @@ def charged_bytes(blobs: Sequence[Blob], exempt: Mapping[str, int] | None = None
                 current.object_id,
             ):
                 largest[path] = blob
-    charges: dict[str, int] = {}
-    for path, blob in largest.items():
-        amount = max(0, blob.size - exempt[path]) if path in exempt else blob.size
-        charges[blob.object_id] = max(charges.get(blob.object_id, 0), amount)
-    return sum(charges.values())
+    return max(
+        _charge_paths(largest.items(), exempt),
+        _charge_paths(((path, blob) for blob in blobs for path in blob.retained_paths), exempt),
+    )
 
 
 def violations(
@@ -513,9 +533,7 @@ def violations(
     )
     amount = charged_bytes(blobs, exempt)
     if amount > total:
-        failures.append(
-            f"the largest version of each path totals {amount} bytes, exceeding {total}"
-        )
+        failures.append(f"the aggregate charge totals {amount} bytes, exceeding {total}")
     return failures
 
 

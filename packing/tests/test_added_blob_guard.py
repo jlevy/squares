@@ -139,6 +139,71 @@ def test_unique_storage_is_deduplicated_and_distinct_objects_aggregate(
     assert tool.violations(tool.inventory(path, base), per_blob=20, total=23)
 
 
+@pytest.mark.parametrize("staged", [False, True])
+def test_shared_history_does_not_hide_distinct_retained_blobs(
+    repo: tuple[Path, str],
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+    *,
+    staged: bool,
+) -> None:
+    """D1: a shared larger template cannot hide smaller distinct head/index blobs."""
+    path, base = repo
+    names = ("one.bin", "two.bin", "three.bin")
+    for name in names:
+        add(path, name, b"template")
+    commit(path)
+    monkeypatch.chdir(path)
+    monkeypatch.setattr(tool, "load_ceilings", lambda: tool.Ceilings(per_blob=8, total=20))
+    arguments = ["--base", base, *(["--staged"] if staged else [])]
+    # Identical retained copies still charge their one object, even at three paths.
+    assert tool.main(arguments) == 0
+    assert "8 bytes charged" in capsys.readouterr().out
+    for name, content in zip(names, (b"a" * 7, b"b" * 7, b"c" * 7), strict=True):
+        add(path, name, content)
+    if not staged:
+        commit(path)
+    else:
+        # Retained membership comes from the index, even if worktree bytes disagree.
+        for name in names:
+            (path / name).write_bytes(b"template")
+    assert tool.main(arguments) == 1
+    output = capsys.readouterr().out
+    assert "REJECT_ADDED_STORAGE" in output
+    assert "21 bytes, exceeding 20" in output
+
+
+def test_retained_blob_charge_uses_path_growth_exemptions() -> None:
+    names = ("one", "two", "three")
+    history = tool.Blob("template", 24, names)
+    retained = [tool.Blob(name, 23, (name,), retained_paths=(name,)) for name in names]
+    exempt = {"one": 16, "two": 18, "three": 20}
+    assert tool.charged_bytes([history, *retained], exempt) == 15
+    assert tool.violations([history, *retained], per_blob=8, total=15, exempt=exempt) == []
+    assert tool.violations([history, *retained], per_blob=8, total=14, exempt=exempt) == [
+        "the aggregate charge totals 15 bytes, exceeding 14"
+    ]
+    # The same retained object at exempt and new paths charges its full size once.
+    shared = tool.Blob("shared", 23, (*names, "new"), retained_paths=(*names, "new"))
+    assert tool.charged_bytes([shared], exempt) == 23
+    # The historical template's growth is still a separate maximum-path charge.
+    assert tool.charged_bytes([history, shared], exempt) == 31
+
+
+def test_retained_membership_uses_the_selected_head(repo: tuple[Path, str]) -> None:
+    path, base = repo
+    for name in ("one", "two", "three"):
+        add(path, name, b"template")
+    shared = commit(path)
+    for name, data in zip(("one", "two", "three"), (b"a" * 7, b"b" * 7, b"c" * 7), strict=True):
+        add(path, name, data)
+    distinct = commit(path)
+    git(path, "checkout", "--detach", shared)
+    blobs = tool.inventory(path, base, head=distinct)
+    assert tool.charged_bytes(blobs) == 21
+    assert tool.charged_bytes(tool.inventory(path, base, head=shared)) == 8
+
+
 def test_edit_churn_is_charged_once_per_path_at_its_largest_version(
     repo: tuple[Path, str],
 ) -> None:
@@ -152,7 +217,7 @@ def test_edit_churn_is_charged_once_per_path_at_its_largest_version(
     assert tool.charged_bytes(blobs) == 12
     assert tool.violations(blobs, per_blob=20, total=12) == []
     assert tool.violations(blobs, per_blob=20, total=11) == [
-        "the largest version of each path totals 12 bytes, exceeding 11"
+        "the aggregate charge totals 12 bytes, exceeding 11"
     ]
     # Every version still meets the per-blob ceiling, including the ones no tree keeps.
     assert len(tool.violations(blobs, per_blob=9, total=64)) == 3
@@ -190,7 +255,7 @@ def test_changed_oversize_base_path_is_grandfathered_and_charged_its_growth(
     assert tool.violations(blobs, per_blob=8, total=32, exempt=exempt) == []
     assert tool.charged_bytes(blobs, exempt) == 4
     assert tool.violations(blobs, per_blob=8, total=3, exempt=exempt) == [
-        "the largest version of each path totals 4 bytes, exceeding 3"
+        "the aggregate charge totals 4 bytes, exceeding 3"
     ]
 
 
