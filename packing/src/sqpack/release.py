@@ -88,6 +88,14 @@ class PublicationHistoryEntry(NamedTuple):
 #: for each deployment's commit, what the page it built stated.
 PUBLICATION_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.7.30",
+        first_published="October 19, 2026",
+        result_scope=(
+            "Document the cached libproc current-RSS contract and installed-SDK native "
+            "assurance on macOS."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.7.29",
         first_published="October 19, 2026",
         result_scope=(
@@ -955,6 +963,16 @@ class ReleaseImpactDecision(NamedTuple):
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
     ReleaseImpactDecision(
         component="site",
+        previous_version="v0.7.29",
+        version="v0.7.30",
+        impact="patch",
+        reason=(
+            "Document the cached libproc current-RSS contract and installed-SDK native "
+            "assurance on macOS."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="site",
         previous_version="v0.7.28",
         version="v0.7.29",
         impact="patch",
@@ -1408,6 +1426,33 @@ class ReleaseNoPublicChange(NamedTuple):
 
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
+    ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer",),
+        paths=(
+            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
+            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
+            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-lower-bounds-explainer.pdf",
+        ),
+        reason=(
+            "For PR407 against main 6833d05aa, the five generated claim documents "
+            "differ only in GitHub source-link revisions, from a450742e to c0fc4f9d, "
+            "the clean integration checkpoint before the site cut. Their claims, "
+            "proofs, embedded certificates and verifier text are unchanged. The "
+            "explainer checks these documents' presence and links to them; it does "
+            "not inline their bodies. Its manuscript, certificate inputs, figures, "
+            "renderer and own release metadata are unchanged, so it retains v0.4.8. "
+            "This is a source-based review of the HTML, Markdown and PDF producers; "
+            "no PDF redraw, proof rerun or artifact byte identity is claimed. Site "
+            "v0.7.30 owns the published development-guide correction."
+        ),
+    ),
     ReleaseNoPublicChange(
         components=("paper:n11-optimality-review",),
         paths=(
@@ -4025,7 +4070,7 @@ def validate_release_impacts(
 #: fresh render, so a link naming the build commit would fail their drift check forever. It is
 #: in no version string. It moves when the claim documents are regenerated for an edition. It
 #: must be a commit on `main`; the site's own links name `main` itself (`devtools.repo_links`).
-PUBLICATION_REVISION = "a450742e"
+PUBLICATION_REVISION = "c0fc4f9d"
 
 
 def data_pathspec() -> tuple[str, ...]:
