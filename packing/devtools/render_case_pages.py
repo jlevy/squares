@@ -1211,30 +1211,71 @@ def compact_math_entities(record: str) -> str:
     return _MATH_MARKUP.sub(compact, record)
 
 
-class _VisualMathClasses(HTMLParser):
-    """Locate optional attribute quotes in KaTeX's HTML atom classes."""
+class _OptionalAttributeQuotes(HTMLParser):
+    """Locate optional HTML quotes while retaining foreign XML and article anchors."""
 
     ATOMS = re.compile(
         r'^(<span) class="(mord|mop|mbin|mrel|mopen|mclose|mpunct|minner)"(?=[\t\n\f\r >])'
     )
     HTML_CLASSES = re.compile(r'^(<[a-z][a-z0-9-]*) class="([A-Za-z0-9_-]+)"(?=[\t\n\f\r >])')
+    ATTRIBUTES = re.compile(
+        r"""[\t\n\f\r ]+(?P<name>[^\t\n\f\r \"'<>/=]+)"""
+        r"""(?:[\t\n\f\r ]*=[\t\n\f\r ]*"""
+        r"""(?:(?P<double>"(?P<value>[^"]*)")|'[^']*'|[^\t\n\f\r \"'=<>`]+))?"""
+    )
+    TOKEN = re.compile(r"""[^\t\n\f\r \"'=<>`]+""")
 
-    def __init__(self, record: str, *, all_html_classes: bool = False) -> None:
+    def __init__(
+        self,
+        record: str,
+        *,
+        all_html_classes: bool = False,
+        result_article_attributes: bool = False,
+    ) -> None:
         super().__init__(convert_charrefs=False)
         self.pattern = self.HTML_CLASSES if all_html_classes else self.ATOMS
+        self.result_article_attributes = result_article_attributes
         self.lines = [0, *(match.end() for match in re.finditer("\n", record))]
         self.foreign = 0
+        self.article = 0
+        self.target: int | None = None
         self.changes: list[tuple[int, int, str]] = []
 
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
         if tag in {"math", "svg"}:
             self.foreign += 1
-        # Complete articles keep the quoted extraction anchor used by site consumers.
-        if self.foreign or tag == "article" or not attrs:
+        if self.foreign:
+            return
+        if tag == "article":
+            self.article += 1
+            if (
+                self.target is None
+                and "site-result" in (dict(attrs).get("class") or "").split()
+            ):
+                self.target = self.article
+            # Complete articles keep the quoted extraction anchor used by site consumers.
             return
         original = self.get_starttag_text()
         assert original is not None
-        compact = self.pattern.sub(r"\1 class=\2", original)
+        compact = original
+        if self.result_article_attributes and self.target is not None:
+
+            def unquote(match: re.Match[str]) -> str:
+                value = match["value"]
+                if (
+                    value is None
+                    or not self.TOKEN.fullmatch(value)
+                    # Shared-asset discovery still consumes quoted href/src references.
+                    or match["name"].lower() == "src"
+                    or (match["name"].lower() == "href" and "assets/" in value)
+                    # Without separating whitespace, an unquoted value absorbs '/>'.
+                    or original[match.end() : match.end() + 1] == "/"
+                ):
+                    return match[0]
+                return match[0][: -len(match["double"])] + value
+
+            compact = self.ATTRIBUTES.sub(unquote, compact)
+        compact = self.pattern.sub(r"\1 class=\2", compact)
         if compact != original:
             line, column = self.getpos()
             start = self.lines[line - 1] + column
@@ -1243,15 +1284,30 @@ class _VisualMathClasses(HTMLParser):
     def handle_endtag(self, tag: str) -> None:
         if tag in {"math", "svg"}:
             self.foreign -= 1
+        if tag == "article" and not self.foreign:
+            if self.target == self.article:
+                self.target = None
+            self.article -= 1
 
 
-def compact_visual_math_classes(record: str, *, all_html_classes: bool = False) -> str:
-    """Omit optional class quotes, retaining SVG/MathML XML and article anchors.
+def compact_visual_math_classes(
+    record: str,
+    *,
+    all_html_classes: bool = False,
+    result_article_attributes: bool = False,
+) -> str:
+    """Omit optional HTML quotes, retaining SVG/MathML XML and article anchors.
 
-    Cases compact only KaTeX atom classes; complete result pages opt in to every
-    first-position class with one ASCII identifier. Other attributes stay untouched.
+    Cases compact only KaTeX atom classes. Complete result pages opt in to every
+    first-position class with one ASCII identifier, plus valid unquoted attribute
+    tokens inside their result article. Source bodies and other page attributes keep
+    their quotes. Complete attribute tokens protect attribute-like text inside values.
     """
-    parser = _VisualMathClasses(record, all_html_classes=all_html_classes)
+    parser = _OptionalAttributeQuotes(
+        record,
+        all_html_classes=all_html_classes,
+        result_article_attributes=result_article_attributes,
+    )
     parser.feed(record)
     parser.close()
     pieces = []

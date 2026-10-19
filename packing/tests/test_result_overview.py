@@ -10,6 +10,7 @@ from collections import Counter
 from collections.abc import Callable
 from dataclasses import replace
 from decimal import ROUND_FLOOR, Decimal
+from html.parser import HTMLParser
 from unittest.mock import patch
 from urllib.parse import urljoin
 
@@ -42,6 +43,25 @@ SETTLED, EARLIER, BROAD = "T-060", "T-037", "T-056"
 HREF = re.compile(r'href="([^"]+)"')
 LINE_LINK = re.compile(re.escape(REPO_URL) + r"/blob/main/([^\"?#]+)\?plain=1#L(\d+)")
 STEP = re.compile(r'<li data-step="(t-\d{3})" data-standing="([a-z-]*)"')
+
+
+class _HtmlEvents(HTMLParser):
+    def __init__(self, source: str) -> None:
+        super().__init__(convert_charrefs=True)
+        self.events: list[tuple[str, object]] = []
+        self.elements: list[tuple[str, dict[str, str | None]]] = []
+        self.feed(source)
+        self.close()
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        self.events.append(("start", (tag, attrs)))
+        self.elements.append((tag, dict(attrs)))
+
+    def handle_endtag(self, tag: str) -> None:
+        self.events.append(("end", tag))
+
+    def handle_data(self, data: str) -> None:
+        self.events.append(("text", data))
 
 
 @pytest.fixture(scope="module")
@@ -393,24 +413,40 @@ def test_a_broad_report_keeps_its_full_payload_within_the_canonical_page_budget(
     record_property("html_bytes", len(page.html.encode("utf-8")))
     assert len(page.html.encode("utf-8")) <= site_urls.page_budget(row)
     article = page.html.split('<article class="site-result"', 1)[1].split("</article>", 1)[0]
-    assert re.findall(r'data-overview-case="(\d+)"', article) == [str(n) for n in cases]
-    assert STEP.findall(article) == STEP.findall(body)
+    elements = _HtmlEvents('<article class="site-result"' + article + "</article>").elements
+    assert [
+        attrs["data-overview-case"] for _, attrs in elements if "data-overview-case" in attrs
+    ] == [str(n) for n in cases]
+    assert [
+        (attrs["data-step"], attrs["data-standing"])
+        for _, attrs in elements
+        if "data-step" in attrs
+    ] == STEP.findall(body)
     expected_links = Counter(html.unescape(link) for link in HREF.findall(body))
     ordered = sorted(overview.results, key=lambda other: other.id)
     index = next(i for i, other in enumerate(ordered) if other.id == result.id)
     for offset, relation in ((-1, "prev"), (1, "next")):
-        neighbor_href = re.search(rf'rel="{relation}" href="([^"]+)"', article)
+        neighbor_links = [
+            attrs["href"]
+            for tag, attrs in elements
+            if tag == "a" and attrs.get("rel") == relation
+        ]
         neighbor_index = index + offset
         if not 0 <= neighbor_index < len(ordered):
-            assert neighbor_href is None
+            assert neighbor_links == []
             continue
         neighbor = ordered[neighbor_index].id
         target = overview_sections.result_fragment(neighbor)
         expected_links[target] += 1
-        assert neighbor_href is not None
-        assert urljoin(page.name, html.unescape(neighbor_href[1])) == target
+        assert len(neighbor_links) == 1
+        assert neighbor_links[0] is not None
+        assert urljoin(page.name, neighbor_links[0]) == target
     assert (
-        Counter(urljoin(page.name, html.unescape(link)) for link in HREF.findall(article))
+        Counter(
+            urljoin(page.name, href)
+            for _, attrs in elements
+            if (href := attrs.get("href")) is not None
+        )
         == expected_links
     )
 
@@ -435,10 +471,107 @@ def test_every_result_page_keeps_its_registered_byte_budget(
         assert Counter(HREF.findall(result.credit_html)) <= Counter(HREF.findall(output))
 
 
-def test_complete_broad_result_page_keeps_its_registered_byte_budget() -> None:
+def test_complete_broad_result_page_keeps_its_registered_byte_budget(
+    monkeypatch: pytest.MonkeyPatch, record_property: Callable[[str, object], None]
+) -> None:
+    compact = render_case_pages.compact_visual_math_classes
+    original: list[str] = []
+
+    def retain_before(
+        source: str,
+        *,
+        all_html_classes: bool = False,
+        result_article_attributes: bool = False,
+    ) -> str:
+        if result_article_attributes:
+            original.append(compact(source, all_html_classes=all_html_classes))
+        return compact(
+            source,
+            all_html_classes=all_html_classes,
+            result_article_attributes=result_article_attributes,
+        )
+
+    monkeypatch.setattr(render_case_pages, "compact_visual_math_classes", retain_before)
     page = next(render_overview.iter_result_fragments(result_ids=frozenset({"T-174"})))
     row = next(row for row in site_urls.load_registry() if row.path == page.name)
+    [before] = original
+    record_property("pre_attribute_compaction_bytes", len(before.encode("utf-8")))
+    record_property("html_bytes", len(page.html.encode("utf-8")))
     assert len(page.html.encode("utf-8")) < site_urls.page_budget(row)
+    assert _HtmlEvents(before).events == _HtmlEvents(page.html).events
+    for foreign in re.findall(r"<(?:math|svg)\b.*?</(?:math|svg)>", before, re.DOTALL):
+        assert foreign in page.html
+    assert (
+        compact(page.html, all_html_classes=True, result_article_attributes=True) == page.html
+    )
+
+
+@pytest.mark.parametrize("separator", ["\n", "\u2028", "\r\n"])
+def test_final_article_quote_compaction_preserves_attributes_and_foreign_xml(
+    separator: str,
+) -> None:
+    shell = f'<p data-outside="untouched">before{separator}after</p>'
+    foreign = (
+        '<math xmlns="http://www.w3.org/1998/Math/MathML"><mtext>'
+        '<span data-value="keep">native</span></mtext></math>'
+        '<svg xmlns="http://www.w3.org/2000/svg"><foreignObject>'
+        '<article class="site-result"><math><mtext data-value="keep">Nested</mtext></math>'
+        '<span data-value="keep">drawing</span></article></foreignObject></svg>'
+        '<math xmlns="http://www.w3.org/1998/Math/MathML"/>'
+        '<svg xmlns="http://www.w3.org/2000/svg"/>'
+    )
+    source = (
+        shell + '<article class="site-result" data-result-overview="t-174">'
+        '<p data-value="one" title=\' href="literal"\'>Text &amp; context</p>'
+        '<a data-mark=\' href="literal"\' href="../profiles/person.html">Person</a>'
+        '<a href="https://example.org/?a=1&amp;b=2">Source</a>'
+        '<input data-first="safe" data-last="tail"/>'
+        '<img src="../assets/img/diagram.svg"><a href="../assets/css/math.css">Asset</a>'
+        + foreign
+        + '</article><article class="other"><p data-value="keep">Other</p></article>'
+        + shell
+    )
+    compact = render_case_pages.compact_visual_math_classes(
+        source, result_article_attributes=True
+    )
+    assert _HtmlEvents(source).events == _HtmlEvents(compact).events
+    assert compact.startswith(shell)
+    assert compact.endswith(shell)
+    assert foreign in compact
+    assert '<article class="site-result" data-result-overview="t-174">' in compact
+    assert '<article class="other"><p data-value="keep">Other</p></article>' in compact
+    assert "data-value=one" in compact
+    assert "href=../profiles/person.html" in compact
+    assert 'href="https://example.org/?a=1&amp;b=2"' in compact
+    assert 'data-last="tail"/>' in compact
+    assert 'src="../assets/img/diagram.svg"' in compact
+    assert 'href="../assets/css/math.css"' in compact
+    assert len(compact.encode("utf-8")) < len(source.encode("utf-8"))
+    assert (
+        render_case_pages.compact_visual_math_classes(compact, result_article_attributes=True)
+        == compact
+    )
+
+    for value in (
+        "",
+        "two words",
+        "a\tb",
+        "a\nb",
+        "a\fb",
+        "a\rb",
+        "a'b",
+        "a`b",
+        "a<b",
+        "a>b",
+        "a=b",
+    ):
+        blocked = f'<article class="site-result"><p data-blocked="{value}">Keep</p></article>'
+        assert (
+            render_case_pages.compact_visual_math_classes(
+                blocked, result_article_attributes=True
+            )
+            == blocked
+        )
 
 
 def test_case_table_compaction_keeps_xml_source_values_and_links(
@@ -950,7 +1083,8 @@ def test_amended_result_address_notice_is_inside_the_complete_article(
     notice = article.split('class="site-result-section site-result-compatibility"', 1)[1]
     notice = notice.split("</aside>", 1)[0]
     assert html.escape(amendment["historical_title"]) in notice
-    target = html.unescape(HREF.findall(notice)[0])
+    target = next(attrs["href"] for tag, attrs in _HtmlEvents(notice).elements if tag == "a")
+    assert target is not None
     assert urljoin(row.path, target) == amendment["historical_target"]
     assert "separate upper bound result" in notice
     assert str(amendment["date"]) in notice

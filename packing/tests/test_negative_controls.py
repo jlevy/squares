@@ -38,6 +38,8 @@ from devtools.run_negative_controls import (
     run_control_command,
     snapshot_source_bytes,
 )
+from sqpack.contributor_occurrences import load_occurrences
+from sqpack.contributors import PEOPLE_DIR, ContributorError, load_contributors
 from sqpack.yamlio import safe_load
 
 MOTION_LAB_GOLDEN = ROOT / "tests/golden/motion-lab-pages.json"
@@ -263,7 +265,39 @@ def test_historical_site_snapshot_outputs_leave_workers_after_dependency_rescue(
         "devtools/regularize_axis_components.py",
     ):
         assert (tree / HERE / relative).read_bytes() == (ROOT / relative).read_bytes()
-    assert SNAPSHOT_MAX_BYTES == 216 * 1024 * 1024
+    assert SNAPSHOT_MAX_BYTES == 224 * 1024 * 1024
+    assert snapshot_source_bytes() < SNAPSHOT_MAX_BYTES
+
+
+def test_profile_evidence_and_inspected_pdf_survive_bounded_workers(
+    control_snapshot: tuple[Path, set[Path]],
+) -> None:
+    tree, copied_targets = control_snapshot
+    source = ROOT / "resources/papers/gobel-1979-geometrical-packing-and-covering-problems.pdf"
+    relative = source.relative_to(controls.REPO)
+    private = tree / relative
+    payload = source.read_bytes()
+    assert relative in copied_targets
+    assert not private.is_symlink()
+    assert private.read_bytes() == payload
+    assert private in (tracked_files(tree, "packing/resources") or [])
+    profiles = load_contributors(tree / HERE / PEOPLE_DIR, repo=tree)
+    assert any(
+        evidence.archive_path == relative.as_posix()
+        for evidence in profiles.by_id["f-gobel"].sources
+    )
+    occurrences = load_occurrences(repo=tree, profiles=profiles)
+    assert any(
+        receipt.path == relative.as_posix() and receipt.status == "inspected"
+        for receipt in occurrences.inspections
+    )
+    try:
+        private.unlink()
+        with pytest.raises(ContributorError, match="archive_path"):
+            load_contributors(tree / HERE / PEOPLE_DIR, repo=tree)
+    finally:
+        private.write_bytes(payload)
+    assert source.read_bytes() == payload
     assert snapshot_source_bytes() < SNAPSHOT_MAX_BYTES
 
 

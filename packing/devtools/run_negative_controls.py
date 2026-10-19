@@ -1541,7 +1541,19 @@ def root_files() -> tuple[Path, ...]:
 # the regularized drawings. `--audit-snapshot` read 212,848,544 bytes on main c4c690a3e
 # and reads 212,861,306 with this change's code, tests and comments counted,
 # 13,631,110 under the cap.
-SNAPSHOT_MAX_BYTES = 216 * 1024 * 1024
+#
+# 2026-10-19, contributor profiles (think-iyao): before the capacity change,
+# --audit-snapshot read 229,065,765 bytes against 216 MiB; pinned main d167d4b86
+# projects 222,575,174 bytes with this selector. Required new evidence includes
+# Gobel's retained 1979 PDF,
+# 4,982,398 bytes, declared both by his profile and an inspected-byline receipt.
+# validate_schemas consumes these declarations, so keep the complete private PDF
+# and all other profile/occurrence dependencies. No unrelated prune is justified.
+# Allow 224 MiB for this measured new consumer; the copier and input selection stay
+# unchanged. Three portable workers remain bounded at 672 MiB. The custody regression
+# checks the PDF's bytes, private index and both loaders; the oversized guard still
+# refuses before cloning.
+SNAPSHOT_MAX_BYTES = 224 * 1024 * 1024
 DEFAULT_CONTROL_TIMEOUT_SECONDS = 120.0
 TERMINATION_GRACE_SECONDS = 1.0
 # Directories that must be walked into rather than bulk-copied, because something

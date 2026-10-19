@@ -712,8 +712,9 @@ The draft remains unmerged, and archive population remains open.
 
 ### Senior Review and Upstream Integration: 2026-10-18
 
-The next integration incorporates 381 commits from main through `d167d4b86`. Work runs
-in an external-drive worktree, separate from both the active main checkout and the
+The next integration incorporates 383 commits from main through `7d3504551`, including
+the two policy-only commits that followed the reviewed code snapshot `d167d4b86`. Work
+runs in an external-drive worktree, separate from both the active main checkout and the
 original profile checkout.
 Fourteen files conflicted: source records, generated indexes, the document map and
 release declarations.
@@ -770,6 +771,28 @@ Focused validation passed 10 occurrence tests, 10 profile-rendering tests and 35
 Chromium profile tests.
 The browser floor passed its lint and type checks and 341 Node tests; schemas validated
 351 Markdown records and 973 YAML datasets.
+
+The fresh built-site review passed 50 screenshot contexts and 25 navigation checks at
+1280px and 390px, in light and dark themes, including long credit lists and mobile
+navigation without JavaScript.
+This is Chromium coverage; physical devices, screen readers, zoom and print were not
+tested.
+
+The broader pre-push run passed all 68 prerequisites, then exposed a worker snapshot
+capacity failure and an oversized T-174 page.
+That run was interrupted after retaining its failures.
+A desktop browser timing check also exceeded its limits; a separate navigation trace
+does not establish the cause of the failed navigation.
+
+`think-iyao` tracks the measured snapshot allowance: profile evidence newly requires
+Göbel’s 4,982,398-byte archived paper.
+The reviewed main snapshot occupies 222,575,174 bytes, and the integrated snapshot
+approximately 229 MB. The selected repair retains that evidence and changes the bounded
+allowance from 216 to 224 MiB, with private-worker custody and oversized-input refusal
+tests. It does not remove evidence to fit the old limit.
+`think-jhst` tracks T-174’s 300 KB limit: compact optional attribute quotes only within
+published result articles, preserving parsed content, links and foreign XML. Final test
+outcomes and the browser timing disposition belong in the PR receipts.
 
 Review and validation receipts for this integration are recorded on PR #578 and
 `think-5bao`. The historical PDF census and profiles without sufficient identity
