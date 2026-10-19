@@ -13433,6 +13433,54 @@ occurrences:
     ojoshe receipt; project credit does not imply sole personal authorship.
   contributor_id: joshua-levy
 - origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[wand125 fine-net lower bounds 2026-10-16]'
+    field: /authors/0
+  expected_text: wand125
+  start: 0
+  end: 7
+  label: wand125
+  role: source-author
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[wand125 fine-net lower bounds 2026-10-16]'
+    field: /credit
+  expected_text: wand125 after Tokoharu and Levy
+  start: 0
+  end: 7
+  label: wand125
+  role: credited-contributor
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[wand125 fine-net lower bounds 2026-10-16]'
+    field: /credit
+  expected_text: wand125 after Tokoharu and Levy
+  start: 14
+  end: 22
+  label: Tokoharu
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
+    path: packing/resources/bibliography.yaml
+    record_key: '[wand125 fine-net lower bounds 2026-10-16]'
+    field: /credit
+  expected_text: wand125 after Tokoharu and Levy
+  start: 27
+  end: 31
+  label: Levy
+  role: prerequisite
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
+- origin:
     path: packing/frontier/results.yaml
     record_key: T-001
     field: /builds_on/credit/0
@@ -16411,19 +16459,14 @@ occurrences:
     path: packing/frontier/n-108.md
     record_key: '108'
     field: /reported_lower_bound/proved_by/0
-  expected_text: Hosono
+  expected_text: wand125
   start: 0
-  end: 6
-  label: Hosono
+  end: 7
+  label: wand125
   role: lower-bound-prover
-  disposition: resolved
-  evidence:
-  - commit-author
-  - owner-confirmation
-  contributor_id: hiroaki-hosono
-  note: Reviewed packing/frontier/n-108.md [108] /reported_lower_bound/proved_by/0
-    span 0:6. Source-keyed wand125 certificate/tool lineage; retained commit-author
-    metadata and owner confirmation bind wand125 to Hiroaki Hosono.
+  disposition: unresolved
+  evidence: []
+  note: Identity review pending.
 - origin:
     path: packing/frontier/n-108.md
     record_key: '108'

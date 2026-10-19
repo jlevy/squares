@@ -97,6 +97,14 @@ PUBLICATION_HISTORY = (
         ),
     ),
     PublicationHistoryEntry(
+        version="v0.7.29",
+        first_published="October 19, 2026",
+        result_scope=(
+            "Register eighteen fine-net lower bounds, adopt the reviewed n108 bound and "
+            "retain its exact audit provenance and safe packet publication."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.7.28",
         first_published="October 19, 2026",
         result_scope=(
@@ -517,7 +525,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "0adba2aa6e329c550e964c574e90388f45bed433"
+DATA_REVISION = "13558793c653c5d0bc4bb6a17755b5f8d8d249e2"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -613,6 +621,14 @@ FIRST_PUBLISHED = PUBLICATION_HISTORY[-1].first_published
 #:                                            on October 1 and 2, so the substantive
 #:                                            day is the one recorded
 EXPLAINER_HISTORY = (
+    PublicationHistoryEntry(
+        version="v0.4.8",
+        first_published="October 19, 2026",
+        result_scope=(
+            "Update the registered result count and current bound citations after the "
+            "fine-net imports and reviewed n108 adoption."
+        ),
+    ),
     PublicationHistoryEntry(
         version="v0.4.7",
         first_published="October 15, 2026",
@@ -963,12 +979,32 @@ class ReleaseImpactDecision(NamedTuple):
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
     ReleaseImpactDecision(
         component="site",
-        previous_version="v0.7.28",
+        previous_version="v0.7.29",
         version="v0.8.0",
         impact="minor",
         reason=(
             "Add person profiles and reviewed credit links, with direct profile "
             "navigation and shared article popovers for complete case and result records."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="site",
+        previous_version="v0.7.28",
+        version="v0.7.29",
+        impact="patch",
+        reason=(
+            "Register eighteen fine-net lower bounds, adopt the reviewed n108 bound and "
+            "retain its exact audit provenance and safe packet publication."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="paper:n11-lower-bounds-explainer",
+        previous_version="v0.4.7",
+        version="v0.4.8",
+        impact="patch",
+        reason=(
+            "Update the registered result count and current bound citations after the "
+            "fine-net imports and reviewed n108 adoption."
         ),
     ),
     ReleaseImpactDecision(
@@ -1423,6 +1459,79 @@ class ReleaseNoPublicChange(NamedTuple):
 
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
+    ReleaseNoPublicChange(
+        components=("paper:n11-optimality-review",),
+        paths=(
+            "packing/devtools/acquire_source.py",
+            "packing/devtools/apply_closed_form.py",
+            "packing/devtools/render_n11_lower_bounds_explainer_pdf.py",
+            "packing/devtools/site_urls.py",
+            "packing/devtools/verifier_registry.py",
+            "packing/frontier/results.yaml",
+        ),
+        outputs=(
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+        ),
+        reason=(
+            "For PR 671, rendered HTML and Markdown against reviewed PR 679 candidate "
+            "e22a9f9f4 and the current integration tree, using source-link revision "
+            "e22a9f9f4 in both. Both outputs are byte-identical. The n11 optimality "
+            "review retains its article, selected facts and figures, so its edition "
+            "remains v0.1.7. The fine-net records, monotone case planning, safe packet "
+            "publication and explainer pagination guard do not change these outputs."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:n11-threshold-bound-review",),
+        paths=(
+            "packing/devtools/acquire_source.py",
+            "packing/devtools/apply_closed_form.py",
+            "packing/devtools/render_n11_lower_bounds_explainer_pdf.py",
+            "packing/devtools/site_urls.py",
+            "packing/devtools/verifier_registry.py",
+            "packing/frontier/results.yaml",
+        ),
+        outputs=(
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+        ),
+        reason=(
+            "For PR 671, rendered HTML and Markdown against reviewed PR 679 candidate "
+            "e22a9f9f4 and the current integration tree, using source-link revision "
+            "e22a9f9f4 in both. Both outputs are byte-identical. The n11 threshold review "
+            "retains its article, selected facts and figures, so its edition remains "
+            "v0.1.0. The fine-net records, monotone case planning, safe packet "
+            "publication and explainer pagination guard do not change these outputs."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/devtools/acquire_source.py",
+            "packing/devtools/apply_closed_form.py",
+            "packing/devtools/render_n11_lower_bounds_explainer_pdf.py",
+            "packing/devtools/site_urls.py",
+            "packing/devtools/verifier_registry.py",
+            "packing/frontier/n-108.md",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "For PR 671, rendered HTML and Markdown against reviewed PR 679 candidate "
+            "e22a9f9f4 and the current integration tree, using source-link revision "
+            "e22a9f9f4 in both. Both outputs are byte-identical. The square-packing "
+            "methods survey retains its article, selected facts and figures, so its "
+            "edition remains v0.2.3. The fine-net records, monotone case planning, safe "
+            "packet publication and explainer pagination guard do not change these "
+            "outputs."
+        ),
+    ),
     ReleaseNoPublicChange(
         components=("paper:n11-lower-bounds-explainer",),
         paths=(
@@ -2721,19 +2830,16 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         ),
         outputs=("papers/n11-lower-bounds-explainer.md",),
         reason=(
-            "Compared with main d167d4b86 after the upstream merge, the exact candidate "
-            "scope is the 25 paths above. The manuscript and producer are unchanged, "
-            "and Figure 3 reads only the unchanged n11 bound-citation entry. The merged "
-            "Markdown edition was rendered and inspected; the numeric substitutions, "
-            "certificate figures and paper text retain the published content. Changed "
-            "credit fields at other counts, direct profile links in News, and standalone "
-            "case/result serialization do not enter this manuscript. Shared navigation "
-            "and sibling-paper metadata do not revise its content edition. This is a "
-            "source-reviewed disposition: no baseline explainer render comparison or PDF "
-            "comparison is claimed. The final n29 adoption-writer repair reproduces "
-            "the historical wording already retained in its case record, without "
-            "changing a retained record or manuscript; that added input was "
-            "source-reviewed. The explainer keeps v0.4.7."
+            "Compared with actual main 6833d05aa44f48140170e631b7766cb295876c31 after PR 671 "
+            "landed, the exact candidate scope is the 25 paths above. The explainer manuscript "
+            "and producer are byte-identical to main, and its n11 bound-citation entry is "
+            "unchanged; other counts and source-specific credit links do not enter the article. "
+            "The inherited register count, explainer v0.4.8 history and October 13 article "
+            "revision remain current. Changed standalone case/result serialization, News/profile "
+            "navigation and sibling-paper metadata do not revise this paper content. The n29 "
+            "adoption-writer repair reproduces retained historical wording. This is a fresh "
+            "source review against actual main; no baseline paper render, PDF rebuild or "
+            "byte-identity comparison of rendered output is claimed."
         ),
     ),
     ReleaseNoPublicChange(
@@ -2795,20 +2901,16 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         ),
         outputs=("papers/square-packing-methods-survey.md",),
         reason=(
-            "Compared with main d167d4b86 after the upstream merge, the exact candidate "
-            "scope is the 53 paths above. Rendered both source trees at that same source-link "
-            "revision, the methods survey HTML before browser math preparation and its "
-            "expanded Markdown, including all five figures, are byte-identical. The "
-            "baseline figure inputs are unchanged by this branch. In particular, Figure 3 "
-            "retains the n29 certificate admitted by main and the survey retains v0.2.3; "
-            "the earlier v0.2.2 comparison is not evidence for this integration. Changed "
-            "frontier and source-coverage records are linked citations whose bodies are "
-            "not incorporated. Profile links in News and standalone case/result "
-            "serialization do not enter this paper. The final n29 adoption-writer "
-            "repair reproduces the historical wording already retained in its case "
-            "record, without changing a retained record or manuscript. That added "
-            "input was source-reviewed; the earlier render comparison was not "
-            "repeated. No PDF was rebuilt or compared."
+            "Compared with actual main 6833d05aa44f48140170e631b7766cb295876c31 after PR 671 "
+            "landed, the exact candidate scope is the 53 paths above. The methods manuscript, "
+            "producer and every passive figure input are byte-identical to main, including the "
+            "n29 certificate drawing. Changed frontier/source-coverage prose is cited by link "
+            "rather than incorporated; shared News, profile and standalone case/result helpers do "
+            "not enter the paper article. The n29 writer repair and the exact later n108 adoption "
+            "projection preserve retained historical facts. Its v0.2.3 content edition remains "
+            "current. This is a fresh source review against actual main; the earlier comparison "
+            "at d167d4b86 does not qualify this integration. No baseline paper render, PDF "
+            "rebuild or rendered byte-identity comparison is claimed."
         ),
     ),
     ReleaseNoPublicChange(
@@ -4088,7 +4190,7 @@ def validate_release_impacts(
 #: fresh render, so a link naming the build commit would fail their drift check forever. It is
 #: in no version string. It moves when the claim documents are regenerated for an edition. It
 #: must be a commit on `main`; the site's own links name `main` itself (`devtools.repo_links`).
-PUBLICATION_REVISION = "c36eb7d6"
+PUBLICATION_REVISION = "a450742e"
 
 
 def data_pathspec() -> tuple[str, ...]:

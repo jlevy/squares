@@ -25,8 +25,8 @@ second implementation agrees.
 
 ## The Short Version
 
-- **163** programs: **50** external and **113** first-party; **113** decide claims and **50** check premises.
-- **515** of **620** evidence entries name the programs that verified them: 255 reproduced with the producer’s code, 231 independently re-implemented, 18 re-implemented, sharing the producer’s components, 11 no relation: a proof, a derivation or a report.
+- **165** programs: **50** external and **115** first-party; **113** decide claims and **52** check premises.
+- **536** of **641** evidence entries name the programs that verified them: 273 reproduced with the producer’s code, 231 independently re-implemented, 19 re-implemented, sharing the producer’s components, 13 no relation: a proof, a derivation or a report.
 
 ## Programs
 
@@ -37,7 +37,7 @@ second implementation agrees.
 | [`V-tokoharu-verify-cpp`](#v-tokoharu-verify-cpp) | verify.cpp | Tokoharu | external | decides | 13 | 7 |
 | [`V-wand125-mixed-rotated-verify-cpp`](#v-wand125-mixed-rotated-verify-cpp) | mixed_rotated_verify.cpp | Hosono | external | decides | 89 | 14 |
 | [`V-wand125-verify-mixed-full-proof-py`](#v-wand125-verify-mixed-full-proof-py) | verify_mixed_full_proof.py | Hosono | external | decides | 66 | 11 |
-| [`V-wand125-sqverify-proof-net`](#v-wand125-sqverify-proof-net) | sqverify-proof-net | Hosono, adapting this repository's sqverify_fast | external | decides | 15 | 15 |
+| [`V-wand125-sqverify-proof-net`](#v-wand125-sqverify-proof-net) | sqverify-proof-net | Hosono, adapting this repository's sqverify_fast | external | decides | 33 | 33 |
 | [`V-wand125-unified-linear-verify-cpp`](#v-wand125-unified-linear-verify-cpp) | unified_linear_verify.cpp | Hosono | external | decides | 8 | 5 |
 | [`V-wand125-verify-portable-py`](#v-wand125-verify-portable-py) | verify_portable.py | Hosono | external | decides | 2 | 1 |
 | [`V-wand125-check-with-sqpack`](#v-wand125-check-with-sqpack) | check_with_sqpack.py | Hosono | external | decides | 5 | 1 |
@@ -147,7 +147,7 @@ second implementation agrees.
 | [`V-audit-wand125-point-and-mixed`](#v-audit-wand125-point-and-mixed) | devtools.audit_wand125_point_and_mixed | Squares Project (Levy) | first-party | premises | 17 | 7 |
 | [`V-audit-wand125-declared-net`](#v-audit-wand125-declared-net) | devtools.audit_wand125_declared_net | Squares Project (Levy) | first-party | premises | 2 | 2 |
 | [`V-audit-wand125-linear`](#v-audit-wand125-linear) | devtools.audit_wand125_linear | Squares Project (Levy) | first-party | premises | 3 | 3 |
-| [`V-sqverify-fast`](#v-sqverify-fast) | sqverify-fast | Squares Project (Levy) | first-party | decides | 111 | 23 |
+| [`V-sqverify-fast`](#v-sqverify-fast) | sqverify-fast | Squares Project (Levy) | first-party | decides | 112 | 24 |
 | [`V-replay-chelokot-lean`](#v-replay-chelokot-lean) | devtools.replay_chelokot_lean | Squares Project (Levy) | first-party | premises | 1 | 1 |
 | [`V-replay-evand-zmx2`](#v-replay-evand-zmx2) | devtools.replay_evand_zmx2 | Squares Project (Levy) | first-party | premises | 7 | 7 |
 | [`V-audit-evand-mixed-covers`](#v-audit-evand-mixed-covers) | devtools.audit_evand_mixed_covers | Squares Project (Levy) | first-party | premises | 11 | 10 |
@@ -195,6 +195,8 @@ second implementation agrees.
 | [`V-wand125-contpose-check3`](#v-wand125-contpose-check3) | contpose_check3 v1.2 | wand125 (the driver, written to a specification for Codex), around Guzhou0806's kernels | external | decides | 1 | 1 |
 | [`V-continuous-pose-followup`](#v-continuous-pose-followup) | devtools.continuous_pose_followup | Squares Project (Levy) | first-party | premises | 0 | 0 |
 | [`V-pingyou-622-exact-review`](#v-pingyou-622-exact-review) | review/programs/n29_exact_review.py | Squares Project (Levy) | first-party | decides | 1 | 1 |
+| [`V-audit-fine-net-receipt`](#v-audit-fine-net-receipt) | devtools.audit_fine_net_receipt | Squares Project (Levy) | first-party | premises | 1 | 1 |
+| [`V-n108-review-max-exact`](#v-n108-review-max-exact) | n108_audit.py | Squares Project (Levy) | first-party | premises | 2 | 1 |
 
 ## By Program
 
@@ -455,6 +457,24 @@ The source's copy of this repository's sqverify_fast with one change, reading a 
 | `E-wand125-fine-net-n39-66625-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-176 |
 | `E-wand125-fine-net-n44-69975-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-177 |
 | `E-wand125-fine-net-n37-64975-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-178 |
+| `E-wand125-fine-net-n38-65775-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-200 |
+| `E-wand125-fine-net-n40-6735-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-201 |
+| `E-wand125-fine-net-n41-68025-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-202 |
+| `E-wand125-fine-net-n43-69425-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-203 |
+| `E-wand125-fine-net-n51-75275-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-204 |
+| `E-wand125-fine-net-n68-853-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-205 |
+| `E-wand125-fine-net-n84-94225-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-206 |
+| `E-wand125-fine-net-n85-9475-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-207 |
+| `E-wand125-fine-net-n86-95275-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-208 |
+| `E-wand125-fine-net-n88-96325-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-209 |
+| `E-wand125-fine-net-n89-9685-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-210 |
+| `E-wand125-fine-net-n91-97875-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-211 |
+| `E-wand125-fine-net-n90-978-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-212 |
+| `E-wand125-fine-net-n92-986-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-213 |
+| `E-wand125-fine-net-n106-10503-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-214 |
+| `E-wand125-fine-net-n107-1058-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-215 |
+| `E-wand125-fine-net-n108-1062-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-216 |
+| `E-wand125-fine-net-n110-1073-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-217 |
 
 ### `V-wand125-unified-linear-verify-cpp`
 
@@ -1461,7 +1481,7 @@ Decides rigidity for the perfect square tilings among the frontier cases.
 
 | evidence | run | code | coverage | results |
 | --- | --- | --- | --- | --- |
-| `E-perfect-square-tiling-rigid` | replayed here | no code | not recorded | - |
+| `E-perfect-square-tiling-rigid` | replayed here | not applicable | not recorded | - |
 
 ### `V-trump11-tangent-cones`
 
@@ -2524,6 +2544,7 @@ Decides a measure-capture lower-bound certificate of format T, M or L on the 201
 | `E-n040-guzhou-clipped-corner-sqverify-fast-replay` | replayed here | reproduced with the producer’s code | not recorded | T-133 |
 | `E-n040-guzhou-continuous-pose-crate-axis` | audited here | independently re-implemented | not recorded | T-145 |
 | `E-n040-guzhou-new-supports-crate-axis` | audited here | independently re-implemented after reading the producer’s code | full: the near-axis statement at side 249329659/250000000, decided by sqverify-fast's exact axis-vertex sweep on the density itself over all 10,929,636 vertices, with the 401-direction necessary condition at side 3350/3359 over all 401 directions | T-157 |
+| `E-wand125-fine-net-n108-1062-sqverify-fast-replay` | replayed here | re-implemented, sharing named components | full, 201 of 201: complete legal core-centre domains at every declared-net direction | T-216 |
 
 ### `V-replay-chelokot-lean`
 
@@ -2593,7 +2614,7 @@ Decides everything the re-weighted s(12) certificate rests on but coverage, in i
 
 | evidence | run | code | coverage | results |
 | --- | --- | --- | --- | --- |
-| `E-n012-levy-15680000-3949423-audit` | audited here | no code | not recorded | T-079 |
+| `E-n012-levy-15680000-3949423-audit` | audited here | not applicable | not recorded | T-079 |
 
 ### `V-audit-s12-v11`
 
@@ -2607,7 +2628,7 @@ Decides everything squarepacker's v1.1 s(12) certificate rests on but coverage, 
 
 | evidence | run | code | coverage | results |
 | --- | --- | --- | --- | --- |
-| `E-n012-squarepacker-7943-2000-audit` | audited here | no code | not recorded | T-095 |
+| `E-n012-squarepacker-7943-2000-audit` | audited here | not applicable | not recorded | T-095 |
 
 ### `V-compare-evand-s32-sweep`
 
@@ -3281,6 +3302,39 @@ Decides PingYou Ltd's n = 29 certificate of PR 622 from its release asset, read 
 | evidence | run | code | coverage | results |
 | --- | --- | --- | --- | --- |
 | `E-pingyou-622-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 29 that T-195 cites, every wall and every pair decided by both maintained routes, again by the third route and again by the review's clean-room checker; the kernel's controls are retained in the packet's receipt and the other two checks' in review/outputs/ | T-195 |
+
+### `V-audit-fine-net-receipt`
+
+**devtools.audit_fine_net_receipt** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
+
+Checks a rectangle-only declared-net candidate's exact mass, geometry and net premises, binds its saved native census and complete direction log, and recomputes every saved control-witness capture using exact polygon clipping. It decides premises and particular points, never universal coverage between them.
+
+- Source: [`packing/devtools/audit_fine_net_receipt.py`](../../packing/devtools/audit_fine_net_receipt.py), [`packing/tests/test_audit_fine_net_receipt.py`](../../packing/tests/test_audit_fine_net_receipt.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-10-18-wand125-n108-certificate-mathematics.md`](../../docs/project/reviews/review-2026-10-18-wand125-n108-certificate-mathematics.md)
+- Independence: its authors read mathematics, specification, certificate-format, producer-code, producer-output; it shares none of the producer’s code; written by Codex (OpenAI) (A separately prompted mathematical review lane, strong tier at xhigh reasoning; the retained review records the system family and exact scope.), with its own prompt and code; authorship in common with the producer’s: unknown, The source discloses AI assistance without identifying every system family. This audit was separately prompted and imports only the Python standard library. Its author read the maintained admission and control code that the producer's adapted checker shares, so it does not claim a clean room.
+- Note: The 18 October review's complete n108 point audit is retained at packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review/n108-exact-audit.json. Its PASS is a premise-and-point result beside the native replay, not a full coverage decision or an independent full verifier.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-wand125-fine-net-n108-1062-sqverify-fast-replay` | replayed here | re-implemented, sharing named components | full, 201 of 201: complete legal core-centre domains at every declared-net direction | T-216 |
+
+### `V-n108-review-max-exact`
+
+**n108_audit.py** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
+
+Independently recomputes the n108 certificate's exact mass, multiplicity-preserving D4 expansion and declared-net premises, checks retained source/native direction inventories, and computes four saved native control poses and the source's axis control pose. It checks premises and five points, not universal capture.
+
+- Source: [`packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-max/n108_audit.py`](../../packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-max/n108_audit.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-max/README.md`](../../packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-max/README.md)
+- Independence: its authors read mathematics, proof-text, specification, certificate-format, producer-code, producer-output, earlier-review; it shares none of the producer’s code; written by Codex (OpenAI) (A separately prompted source-distinct mathematical review, strongest tier at maximum reasoning.), with its own prompt and code; authorship in common with the producer’s: unknown, The producer discloses AI assistance without identifying every system family. This standard-library audit was written separately, before reading maintained admission/domain code; its input adapters were corrected after those reads. Findings and code were completed before the later comparison with Review B. No producer code is copied, imported or executed; the review claims no clean room.
+- Note: The retained packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-max/audit.json records EXACT_PREMISES_AND_FIVE_POSES_PASS. The five poses are four of 201 recorded native control poses and one of 32 source control poses, not five entire direction domains. The accepted bounded review is docs/project/reviews/review-2026-10-18-n108-fine-net-mathematics-max.md.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n108-review-max-premises` | audited here | not applicable | full: exact mass, D4 expansion, core/net/domain premises and retained receipt inventories of this one candidate | T-216 |
+| `E-n108-review-max-captures` | audited here | not applicable | sample, 5 of 233: recorded control witness poses, no whole direction domain | T-216 |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

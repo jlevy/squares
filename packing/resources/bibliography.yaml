@@ -1882,6 +1882,25 @@ sources:
       full check2 premises accepted at all three. Native capture, controls and adoption pending.
       The nested verifier adapts this project's sqverify_fast, so a maintained replay is not
       another independent implementation.
+  - key: '[wand125 fine-net lower bounds 2026-10-16]'
+    authors: [wand125]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-16'
+    credit: wand125 after Tokoharu and Levy
+    lineage: builds-on-project
+    note: >-
+      The 18 fine-net measure lower-bound reports that wand125/square-packing added on
+      2026-10-16, one commit each from 02c5595f26e8cf1f6be89080fdd66a9a5d6d364f (n = 38) to
+      718887cfaa8727cc75108c5924fa1330df4fa098 (n = 110), the packet's pin, at n = 38, 40, 41,
+      43 and 51 on the 2,073-direction net and n = 68, 84 to 86, 88 to 92 and 106 to 110 on the
+      201-direction standard net, and reported in jlevy/squares#446. Their data are in release
+      square-lower-bounds-v1; each asset's candidate, receipts and logs are retained under
+      OR-18, the nested verifier archive is pinned by digest, and the directories' MIT
+      documents are retained. Maintained measure, declared-net and full check2 premises
+      accepted at all 18. Native capture, controls and adoption pending under think-f40c. The
+      nested verifier adapts this project's sqverify_fast, so a maintained replay is not
+      another independent implementation.
   - key: '[wand125 linear n145 2026-10-13]'
     authors: [Hosono]
     year: 2026

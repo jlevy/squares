@@ -164,7 +164,12 @@ MIXED_PACKETS = (
     "wand125-mixed-bounds-finer-net-2026-10-05",
     "wand125-mixed-bounds-finer-net-2026-10-06",
     "wand125-mixed-bounds-check2-2026-10-06",
+    "wand125-fine-net-lower-bounds-2026-10-16",
 )
+#: A packet that keeps its certificates elsewhere than `square-packing-bounds/certificates`:
+#: the 16 October fine-net packet keeps its release assets' members at the assets' own
+#: paths (`devtools.fine_net_followup retain`).
+MIXED_ROOTS = {"wand125-fine-net-lower-bounds-2026-10-16": "release/certificates"}
 #: The standard net's direction count; a format M file may declare another.
 STANDARD_DIRECTIONS = 201
 CENSUS_ROOT = PROJECT / "benchmarks/measure-verifier"
@@ -245,11 +250,16 @@ def rectangle_cases() -> list[Case]:
     return cases
 
 
+def certificates_root(packet: str) -> Path:
+    """The folder a mixed or linear packet keeps its certificate folders in."""
+    return WEB / packet / MIXED_ROOTS.get(packet, "square-packing-bounds/certificates")
+
+
 def mixed_cases() -> list[Case]:
     """Every format M or L certificate of Hosono's mixed and linear packets."""
     cases: list[Case] = []
     for packet in MIXED_PACKETS:
-        root = WEB / packet / "square-packing-bounds/certificates"
+        root = certificates_root(packet)
         for path in sorted(root.glob("mixed_n*_L*/candidate.json.gz")):
             name = path.parent.name
             data = json.loads(gzip.decompress(path.read_bytes()), parse_float=str)
@@ -291,9 +301,7 @@ def has_siblings(case: Case) -> bool:
     """Whether another certificate of the packet has the same n (and so `nN` is shared)."""
     return any(
         other.name != case.certificate
-        for other in (WEB / case.packet / "square-packing-bounds/certificates").glob(
-            f"mixed_n{case.n}_L*"
-        )
+        for other in certificates_root(case.packet).glob(f"mixed_n{case.n}_L*")
     )
 
 
@@ -674,6 +682,12 @@ def refusal_record(
     }
 
 
+#: The wall-clock limit on one whole-net sweep of a mutant. Four hours held the nets of 6
+#: October; the 2,073-direction net of s(43) >= 2777/400 costs about 12 CPU-hours a sweep,
+#: six hours of wall at two threads, so the limit is a day: a hung run still ends.
+SWEEP_TIMEOUT = 24 * 3600
+
+
 def scaled_sweep(
     binary: Path,
     raw: dict[str, Any],
@@ -698,7 +712,9 @@ def scaled_sweep(
     argv = [str(binary.resolve()), "--candidate", str(mutant), "--n", str(n)]
     argv += ["--directions", "all", "--threads", str(threads), "--confirm"]
     start = time.monotonic()
-    result = subprocess.run(argv, capture_output=True, text=True, check=False, timeout=14400)
+    result = subprocess.run(
+        argv, capture_output=True, text=True, check=False, timeout=SWEEP_TIMEOUT
+    )
     lines = [json.loads(line) for line in result.stdout.splitlines() if line.startswith("{")]
     rows = sorted((line for line in lines if "r" in line), key=lambda row: int(row["r"]))
     summary = next(
@@ -1226,7 +1242,8 @@ def evidence_entry(
     (report,) = (
         item
         for item in register["evidence"]
-        if item.get("assurance") == "reported" and item.get("certificate") == certificate
+        if item.get("assurance") == "reported"
+        and item.get("certificate") in (certificate, f"packing/{certificate}")
     )
     premises = entry["premises"]
     built = str((entry.get("build") or {}).get("source_sha256", ""))

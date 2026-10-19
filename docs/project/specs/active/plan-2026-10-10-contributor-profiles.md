@@ -822,6 +822,38 @@ Review and validation receipts for this integration are recorded on PR #578 and
 `think-5bao`. The historical PDF census and profiles without sufficient identity
 evidence remain Phase 4 work under `think-m7il`.
 
+## Landed-Main Integration: 2026-10-19
+
+The Sol continuation under `think-wrh8` integrates actual main
+`6833d05aa44f48140170e631b7766cb295876c31`, after PR #671 landed.
+All 217 result IDs, rungs and significance scores, 641 evidence IDs, every case’s bound
+values and exact forms, and the current houses, rigidity records and default views are
+retained. The eighteen new lower-bound rows remain V0/C0 except T-216 at V3/C3; n108’s
+adopted lower bound remains `531/50`.
+
+The selected site edition remains proposed `v0.8.0`, following actual `v0.7.29`. The
+explainer inherits `v0.4.8` and its October 13 article revision; the methods survey
+keeps `v0.2.3`, and the posters keep `v0.6.3`. Fresh release dispositions compare the
+exact 25/53 input scopes with actual main.
+The paper manuscripts, producers, methods figure inputs and explainer’s n11 citation
+entry were compared exactly; no baseline paper render or PDF comparison was performed.
+
+Review F’s F1 is fixed in `9812f19afba96325547ec02644cab03d138c4b67`: the cached
+original article is detached after stylesheet discovery, before clone consumers receive
+it. Its ownership regression failed before the fix and passes with all 29 tests in the
+Node article-loader suite.
+No heap or latency improvement was measured.
+The final merged-source gates and independent follow-up review remain required; earlier
+hosted success at `b76a24fd` does not qualify this integration.
+
+The conservative census has 27 profiles and 1,437 structured spans: 1,072 resolved, 359
+unresolved and six non-person.
+All 146 PDFs still await full-credit inspection.
+The new source’s literal n108 `wand125` credit stays unresolved rather than inheriting
+the earlier lower bound’s reviewed identity join.
+News wording remains prepared on PR #578; record the actual merge and delivery dates
+after those events. This integration has not been deployed.
+
 ## WIP Handoff: 2026-10-10
 
 The owner requested a work-in-progress PR and handoff before further implementation.

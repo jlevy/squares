@@ -25,6 +25,15 @@ mark: '(?i)(?<![a-z])(?:sha\d*s?|(?:hex)?digests?|blake2[bs]?|md5|checksum|hashe
 # file holds no site is refused, so the list cannot outlive the code. The letters cite
 # the audit's inventory.
 allowlist:
+  - path: packing/devtools/audit_fine_net_receipt.py
+    kind: generated-artifact
+    boundary: >-
+      The retained downloaded candidate bytes are joined to the native census,
+      complete direction log and control input identities. Native census and
+      whole-net control receipts must identify the same generated executable.
+      These two comparisons bind runtime inputs and build products across saved
+      recordings, not Git source. The historical source digest remains reported
+      build metadata; current crate source and Git revisions do not gate acceptance.
   - path: packing/campaign/issue-intake/upper-bounds-20261016/review/exact_sides.py
     kind: download
     boundary: >-

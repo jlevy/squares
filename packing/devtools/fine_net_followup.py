@@ -1,11 +1,22 @@
 """Check a reported certificate of Hosono's kept outside Git, and price its replay.
 
 Hosono's fine-net certificates of jlevy/squares#446 and its follow-ups are retained as
-authored facts and hash references (`resources/web/wand125-fine-net-*`): the release
-asset that holds the candidate, its logs and the adapted verifier's source stays outside
-live Git, since the nested verifier carries no licence of its own. This tool reads a
-local copy of that asset beside the certificate's documents from the pinned tree, and
-writes the receipts a packet keeps. Its check2 commands run no program of the source.
+authored facts and hash references (`resources/web/wand125-fine-net-*`). Until 16
+October the release asset that holds the candidate, its logs and the adapted verifier's
+source stayed outside live Git, since the nested verifier carries no licence of its own;
+from the 16 October packet on, ``retain`` copies the asset's data members into the packet
+under OR-18's size rule, so the census can read the candidate, and pins the nested
+verifier and the sealed inner bundle by digest. This tool reads a local copy of that
+asset beside the certificate's documents from the pinned tree, and writes the receipts a
+packet keeps. Its check2 commands run no program of the source.
+
+- ``retain`` refuses the asset unless its size and SHA-256 are the pinned ones, unpacks
+  it as ``premises`` does, and copies each member to ``PACKET/release/`` at its path in
+  the asset (a data file of more than 1,000 lines as deterministic gzip, an upstream
+  ``.gz`` as published, anything else byte for byte), except the members `PINNED_MEMBERS`
+  names, which it pins with their reasons. ``acquisition/release-assets.json`` records
+  every member of every asset; ``check-retained PACKET`` re-derives it from the packet
+  alone, and compares each asset with the retained ``ASSET.json`` that names it.
 
 - ``premises`` refuses the asset unless its size and SHA-256 are the pinned ones, unpacks
   it safely (plain files and directories under ``certificates/<name>/`` only), lays the
@@ -59,6 +70,11 @@ From ``packing/``::
         --candidate WORK/certificates/mixed_n29_L582/candidate.json --n 29 --side 291/50 \\
         --directions 0,296,592 --workers 2 --source-run WORK/.../check2/run.jsonl.gz \\
         --out RECEIPT
+    .venv/bin/python3 -m devtools.fine_net_followup retain \\
+        --asset ASSET.tar.gz --sha256 HEX --bytes N --name mixed_n68_L853 \\
+        --packet resources/web/PACKET --work WORK \\
+        --release square-lower-bounds-v1 --repository wand125/square-packing
+    .venv/bin/python3 -m devtools.fine_net_followup check-retained resources/web/PACKET
     .venv/bin/python3 -m devtools.fine_net_followup linear-premises \\
         --asset ASSET.tar.gz --sha256 HEX --bytes N --documents CERT_DIR \\
         --name mixed_n122_L1126 --n 122 --side 563/50 --orbits 502,1268,3 \\
@@ -87,6 +103,8 @@ from fractions import Fraction
 from pathlib import Path, PurePosixPath
 from typing import Any
 
+from strif import atomic_write_text
+
 from devtools import audit_wand125_linear as linear
 from devtools import audit_wand125_point_and_mixed as mixed
 from devtools.audit_wand125_declared_net import (
@@ -107,7 +125,16 @@ from devtools.audit_wand125_linear import (
 from devtools.audit_wand125_point_and_mixed import (
     _passes,  # pyright: ignore[reportPrivateUsage]
 )
-from devtools.retained_data import git_blob
+from devtools.retained_data import (
+    DATA_SUFFIXES,
+    GZIP_SUFFIX,
+    LINE_THRESHOLD,
+    compress,
+    git_blob,
+    gunzip_bytes,
+    is_deterministic_gzip,
+    read_retained_bytes,
+)
 from sqpack import retained_json
 
 #: The budget the intake brief sets: a full capture runs in the import's own branch only
@@ -402,6 +429,287 @@ def premises(
             " documents; no coverage is decided and no program of the source is run."
         ),
     }
+
+
+# --------------------------------------------------------------------------- retention
+
+#: The record ``retain`` writes beside a packet's acquisition record.
+RETAINED_RECORD = PurePosixPath("acquisition/release-assets.json")
+RETAINED_FORMAT = "release-asset-retention-v1"
+#: Where a packet keeps the members it retains, at the asset's own member paths.
+RETAINED_DIR = "release"
+#: The members a check2 asset holds that a packet pins by digest and does not copy, by
+#: the last part of their path, with the reason the record states.
+PINNED_MEMBERS = {
+    "sqverify-proof-net-fe12e036c.tar.gz": (
+        "the source's adaptation of this repository's sqverify_fast, which carries no "
+        "notice of its own and is kept out of this tree beside the crate whose declared-net "
+        "change was written apart from it (sqverify_fast/INDEPENDENCE.md); the archive the "
+        "2026-10-06 check2 packet pins by the same digest"
+    ),
+    BUNDLE_SUFFIX: (
+        "the sealed inner bundle, whose payloads repeat this directory's files and whose "
+        "members the premises receipt inventories"
+    ),
+}
+
+
+def pinned_reason(member: str) -> str | None:
+    """Why a member is pinned by digest only, or None for a member a packet retains."""
+    last = PurePosixPath(member).name
+    for key, reason in PINNED_MEMBERS.items():
+        if last == key or (key.startswith("-") and last.endswith(key)):
+            return reason
+    return None
+
+
+def stored_name(member: str, data: bytes) -> tuple[str, str]:
+    """How a retained member is stored: its packet-relative path and its form.
+
+    An upstream ``.gz`` file is kept as published (``original-gzip``), a data file of
+    more than `retained_data.LINE_THRESHOLD` lines as deterministic gzip (``gzip``), by
+    the archive's rule, and anything else byte for byte (``plain``).
+    """
+    path = f"{RETAINED_DIR}/{member}"
+    if member.endswith(GZIP_SUFFIX):
+        return path, "original-gzip"
+    if PurePosixPath(member).suffix in DATA_SUFFIXES and data.count(b"\n") > LINE_THRESHOLD:
+        return path + GZIP_SUFFIX, "gzip"
+    return path, "plain"
+
+
+def retention_root(packet: Path) -> Path:
+    """Pin the operator-selected root without accepting a linked packet directory."""
+    require(not packet.is_symlink(), "packet root is a symlink; move it aside")
+    require(not packet.exists() or packet.is_dir(), "packet root is not a directory")
+    return packet.resolve()
+
+
+def retention_path(packet: Path, root: Path, relative: str | PurePosixPath) -> Path:
+    """Refuse linked/escaping components under the pinned packet root, without writing."""
+    require(retention_root(packet) == root, "packet root changed while retaining")
+    member = PurePosixPath(relative)
+    require(
+        bool(member.parts) and not member.is_absolute() and ".." not in member.parts,
+        f"{relative}: expected a packet-relative path without parent traversal",
+    )
+    path = packet
+    for index, part in enumerate(member.parts):
+        path /= part
+        require(
+            not path.is_symlink(), f"{path.relative_to(packet)} is a symlink; move it aside"
+        )
+        require(
+            path.resolve().is_relative_to(root),
+            f"{path.relative_to(packet)} escapes the packet root",
+        )
+        if index < len(member.parts) - 1:
+            require(
+                not path.exists() or path.is_dir(),
+                f"{path.relative_to(packet)} is not a directory",
+            )
+    return path
+
+
+def retain(
+    asset: Path,
+    *,
+    sha256: str,
+    size: int,
+    name: str,
+    packet: Path,
+    work: Path,
+    release_tag: str,
+    repository: str,
+) -> dict[str, Any]:
+    """Copy one pinned check2 asset's data members into ``packet`` and record them.
+
+    The asset is refused unless its size and SHA-256 are the pinned ones, and unpacked
+    safely as ``premises`` unpacks it. Every member is either retained under
+    ``packet/release/`` at its own path in the asset, stored as `stored_name` says, or
+    pinned by digest with the reason `PINNED_MEMBERS` gives; the record
+    `RETAINED_RECORD` lists both, and ``check-retained`` re-derives it from the packet.
+    A member already stored with other bytes is refused: a packet's bytes are its
+    record's. An existing plain counterpart of a gzip member is always refused, even
+    when its bytes match; move it aside explicitly rather than letting compression
+    consume it. All destinations are checked before any packet member is written.
+    Completed members are linked into place without replacing existing files; the
+    manifest is atomically replaced. This promises atomic visibility, not power-loss
+    durability. The packet root is resolved once; linked components inside it are
+    refused, including links whose targets are inside it. The operator must control
+    this directory tree and allow only one trusted writer: no other process may
+    replace directories or links during retention. Boundary checks are repeated at
+    publication, but are not race-hardened against hostile concurrent tree changes.
+    """
+    root = retention_root(packet)
+    record_path = packet / RETAINED_RECORD
+    require(
+        not (record_path.exists() or record_path.is_symlink())
+        or (record_path.is_file() and not record_path.is_symlink()),
+        f"{RETAINED_RECORD} is not a regular file; move it aside before retaining",
+    )
+    retention_path(packet, root, RETAINED_RECORD)
+    retention_path(packet, root, RETAINED_DIR)
+    directory = unpack_asset(asset, sha256, size, name, work)
+    record: dict[str, Any] = (
+        load_json(record_path.read_bytes())
+        if record_path.is_file()
+        else {
+            "format": RETAINED_FORMAT,
+            "repository": repository,
+            "release": release_tag,
+            "retained_dir": RETAINED_DIR,
+            "assets": [],
+        }
+    )
+    require(
+        (record["repository"], record["release"]) == (repository, release_tag),
+        f"{RETAINED_RECORD} records another release",
+    )
+    members: list[dict[str, Any]] = []
+    copies: list[tuple[Path, Path, str]] = []
+    for path in sorted(p for p in directory.rglob("*") if p.is_file()):
+        member = f"certificates/{name}/{path.relative_to(directory).as_posix()}"
+        data = path.read_bytes()
+        row: dict[str, Any] = {
+            "path": member,
+            "bytes": len(data),
+            "sha256": hashlib.sha256(data).hexdigest(),
+        }
+        reason = pinned_reason(member)
+        if reason is not None:
+            members.append(row | {"pinned_only": reason})
+            continue
+        stored, form = stored_name(member, data)
+        target = retention_path(packet, root, stored)
+        if form == "gzip":
+            plain = target.with_name(target.name.removesuffix(GZIP_SUFFIX))
+            require(
+                not (plain.exists() or plain.is_symlink()),
+                f"{plain.relative_to(packet)} already exists; "
+                "move it aside before retaining gzip",
+            )
+        require(not target.is_symlink(), f"{stored} is a symlink; move it aside")
+        if target.exists():
+            held = read_retained_bytes(target) if form == "gzip" else target.read_bytes()
+            require(held == data, f"{stored} is already stored with other bytes")
+        else:
+            copies.append((target, path, form))
+        members.append(row | {"stored": stored, "form": form})
+    entry = {
+        "asset": asset.name,
+        "certificate": name,
+        "bytes": size,
+        "sha256": sha256,
+        "members": members,
+    }
+    record["assets"] = sorted(
+        [item for item in record["assets"] if item["asset"] != asset.name] + [entry],
+        key=lambda item: item["asset"],
+    )
+
+    def check_destinations() -> None:
+        retention_path(packet, root, RETAINED_RECORD)
+        for member in members:
+            if "stored" in member:
+                retention_path(packet, root, member["stored"])
+
+    check_destinations()
+    for target, source, form in copies:
+        check_destinations()
+        target.parent.mkdir(parents=True, exist_ok=True)
+        check_destinations()
+        with tempfile.TemporaryDirectory(prefix=".retain-", dir=target.parent) as staging:
+            temporary = Path(staging) / target.name
+            if form == "gzip":
+                # Keep `gzip -9n` bytes, but never let gzip consume a packet's plain file.
+                temporary = temporary.with_name(temporary.name.removesuffix(GZIP_SUFFIX))
+            shutil.copyfile(source, temporary)
+            if form == "gzip":
+                temporary = compress(temporary)
+                plain = target.with_name(target.name.removesuffix(GZIP_SUFFIX))
+                require(
+                    not (plain.exists() or plain.is_symlink()),
+                    f"{plain.relative_to(packet)} appeared while retaining; move it aside",
+                )
+            check_destinations()
+            try:
+                os.link(temporary, target)
+            except FileExistsError as error:
+                raise AuditError(
+                    f"{target.relative_to(packet)} appeared while retaining; move it aside"
+                ) from error
+    check_destinations()
+    atomic_write_text(record_path, retained_json.dumps(record), make_parents=True)
+    return entry
+
+
+def check_retained(packet: Path) -> list[str]:
+    """Every problem with a packet's retained asset members against its record.
+
+    From the packet alone: each stored member decompresses (``gzip``) or reads (``plain``,
+    ``original-gzip``) to the size and SHA-256 its row records, a ``gzip`` member is a
+    deterministic gzip, every file under ``release/`` is a stored member, and each asset
+    is the one the retained ``ASSET.json`` of its certificate names, where the packet
+    keeps that document. The writer's no-directory-links policy also applies to every
+    read: an external member is not accepted merely because its recorded digest agrees.
+    """
+    problems: list[str] = []
+    try:
+        root = retention_root(packet)
+        record_path = retention_path(packet, root, RETAINED_RECORD)
+        release = retention_path(packet, root, RETAINED_DIR)
+    except AuditError as error:
+        return [str(error)]
+    record = load_json(record_path.read_bytes())
+    if record.get("format") != RETAINED_FORMAT:
+        return [f"{RETAINED_RECORD}: format is not {RETAINED_FORMAT}"]
+    stored: set[str] = set()
+    for item in record["assets"]:
+        for row in item["members"]:
+            if "pinned_only" in row:
+                continue
+            stored.add(row["stored"])
+            try:
+                path = retention_path(packet, root, row["stored"])
+            except AuditError as error:
+                problems.append(str(error))
+                continue
+            if not path.is_file():
+                problems.append(f"{row['stored']} is recorded but absent")
+                continue
+            raw = path.read_bytes()
+            if row["form"] == "gzip":
+                if not is_deterministic_gzip(raw):
+                    problems.append(f"{row['stored']} carries a name or timestamp")
+                data = gunzip_bytes(raw, name=row["stored"])
+            else:
+                data = raw
+            if (len(data), hashlib.sha256(data).hexdigest()) != (row["bytes"], row["sha256"]):
+                problems.append(f"{row['stored']} differs from its recorded member")
+        named = {"asset": item["asset"], "size": item["bytes"], "sha256": item["sha256"]}
+        for document in sorted(
+            packet.glob(f"**/certificates/{item['certificate']}/ASSET.json")
+        ):
+            if document.relative_to(packet).parts[0] == RETAINED_DIR:
+                continue
+            try:
+                retention_path(packet, root, document.relative_to(packet).as_posix())
+            except AuditError as error:
+                problems.append(str(error))
+                continue
+            assets = load_json(document.read_bytes()).get("assets") or []
+            if not any(all(value.get(key) == named[key] for key in named) for value in assets):
+                problems.append(f"{item['asset']} is not the asset {document} names")
+    present: set[str] = set()
+    for path in release.rglob("*"):
+        relative = path.relative_to(packet).as_posix()
+        if path.is_symlink():
+            problems.append(f"{relative} is a symlink; move it aside")
+        elif path.is_file():
+            present.add(relative)
+    problems.extend(f"{name} is not in {RETAINED_RECORD}" for name in sorted(present - stored))
+    return problems
 
 
 # --------------------------------------------------------------------------- the sample
@@ -870,7 +1178,49 @@ def main(argv: list[str] | None = None) -> int:
         command.add_argument("--n", type=int, required=True)
         command.add_argument("--side", required=True)
         command.add_argument("--out", type=Path, required=True)
+    keep = commands.add_parser("retain", help="copy an asset's data members into a packet")
+    keep.add_argument("--asset", type=Path, required=True)
+    keep.add_argument("--sha256", required=True)
+    keep.add_argument("--bytes", type=int, required=True)
+    keep.add_argument("--name", required=True)
+    keep.add_argument("--packet", type=Path, required=True)
+    keep.add_argument("--work", type=Path, required=True)
+    keep.add_argument("--release", required=True, help="the release tag, as the asset names it")
+    keep.add_argument("--repository", required=True, help="owner/name of the source")
+    kept = commands.add_parser("check-retained", help="a packet's retained members")
+    kept.add_argument("packets", type=Path, nargs="+")
     args = parser.parse_args(argv)
+    if args.command == "check-retained":
+        problems = [
+            f"{packet}: {problem}"
+            for packet in args.packets
+            for problem in check_retained(packet)
+        ]
+        for problem in problems:
+            print(problem, file=sys.stderr)
+        print(f"{len(args.packets)} packets, {len(problems)} problems")
+        return 1 if problems else 0
+    if args.command == "retain":
+        try:
+            entry = retain(
+                args.asset,
+                sha256=args.sha256,
+                size=args.bytes,
+                name=args.name,
+                packet=args.packet,
+                work=args.work,
+                release_tag=args.release,
+                repository=args.repository,
+            )
+        except AuditError as error:
+            print(f"refused: {error}", file=sys.stderr)
+            return 1
+        kept_rows = [row for row in entry["members"] if "stored" in row]
+        print(
+            f"{args.name}: {len(kept_rows)} members retained, "
+            f"{len(entry['members']) - len(kept_rows)} pinned by digest"
+        )
+        return 0
     try:
         if args.command == "premises":
             stated = Certificate(

@@ -1301,9 +1301,11 @@ def test_the_corrections_on_record_are_recent_and_name_nagamochi_2005() -> None:
     # corrected floors, none of them correcting anything; 220 since the second merge that
     # day, when Hosono's replayed linear certificate (T-080) took n = 101 to 105; 219
     # since the third, when its replayed n = 82 linear certificate (T-076) took n = 82.
-    assert len(corrected) == 219
+    # 218 since 18 October, when T-216's replayed fine-net certificate took n = 108.
+    assert len(corrected) == 218
     assert 37 not in corrected
     assert 61 not in corrected
+    assert 108 not in corrected
     assert all(line["recent"] for line in corrected.values())
     assert {line["source_key"] for line in corrected.values()} == {
         "[Karakuş 2026]",
@@ -1314,7 +1316,7 @@ def test_the_corrections_on_record_are_recent_and_name_nagamochi_2005() -> None:
         for line in corrected.values()
     } == {("Nagamochi 2005", "T-007", "[Nagamochi 2005]")}
     # Recent bounds that correct nothing keep the star and no tag.
-    for n in (11, 12, 17, 18, 21):
+    for n in (11, 12, 17, 18, 21, 108):
         assert lines[n]["recent"], n
         assert lines[n]["corrects"] is None, n
     corrected_result = next(r for r in _register().results if r["id"] == "T-007")
