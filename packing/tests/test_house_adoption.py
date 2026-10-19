@@ -8,6 +8,7 @@ import dataclasses
 import hashlib
 import json
 import re
+from datetime import date
 from decimal import Decimal
 from fractions import Fraction
 from pathlib import Path
@@ -1390,6 +1391,95 @@ def test_a_count_adopted_again_on_a_later_day_has_one_current_house(
     assert check_case_prose.check_case_file(path) == []
     assert adopt.adopted(dataclasses.replace(again, packing=packing))
     assert not adopt.adopted(dataclasses.replace(first, packing=packing))
+
+
+def test_a_house_of_an_earlier_finders_packing_keeps_the_finders_year(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, replayed: list[adopt.Move]
+) -> None:
+    """The reported lane's year is the packing's: the house's own year unless its credit
+    names an earlier one, as at 29, where PingYou Ltd's certificate of 2026 is of Thomas
+    Schadt's packing of 2025 (review A's A7 of #661). The synthetic later house at 84
+    takes its own year, published in 2025, unless its credit says otherwise (review C10)."""
+    assert all(c.found_year is None for n, c in adopt.CREDITS.items() if n != 29)
+    _, _, again = _readopted(tmp_path, monkeypatch, replayed)
+    assert adopt.reported_bound(again)["found_year"] == date.fromisoformat(PUBLISHED).year
+    earlier = dataclasses.replace(adopt.CREDITS[84], found_year=2019)
+    monkeypatch.setitem(adopt.CREDITS, 84, earlier)
+    assert adopt.reported_bound(again)["found_year"] == 2019
+    at29 = next(move for move in replayed if move.n == 29)
+    assert date.fromisoformat(at29.house.published).year == 2026
+    assert adopt.reported_bound(at29)["found_year"] == 2025 == adopt.CREDITS[29].found_year
+    lane = _front(select.case_path(29).read_text(encoding="utf-8"))["reported_upper_bound"]
+    assert lane["found_by"] == list(adopt.CREDITS[29].found_by)
+    assert lane["found_year"] == 2025
+
+
+def test_a_house_that_is_the_replaced_packing_keeps_what_the_record_knew_of_it(
+    replayed: list[adopt.Move],
+) -> None:
+    """At 29 the house is the catalogue's packing measured pose for pose, no square turned
+    beyond 1e-9 degrees (T-195's regularization of T-009), so the reported lane keeps the
+    packing's facts: analytically optimized, found by simulated annealing, its six tilt
+    angles, which the certificate reach reads for its cap. No other credit says so, and a
+    house of another packing knows none of them (review C6 of #661)."""
+    assert [n for n, c in adopt.CREDITS.items() if c.same_packing] == [29]
+    at29 = next(move for move in replayed if move.n == 29)
+    replaced = at29.packing["reported_upper_bound"]
+    written = adopt.reported_bound(at29)
+    for field in adopt.PACKING_FACTS:
+        assert written[field] == replaced[field], field
+    assert written["construction_method"] == "simulated-annealing"
+    assert len(written["tilt_angles_deg"]) == 6
+    (t195,) = (entry for entry in adopt._register() if entry["id"] == "T-195")  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+    (item,) = t195["regularizations"]
+    assert item["of"] == "T-009"
+    assert item["identity"]["basis"] == "measured"
+    assert float(item["identity"]["max_turn_deg"]) < 1e-9
+    other = next(move for move in replayed if move.n == 84)
+    assert adopt.reported_bound(other)["construction_method"] == "unknown"
+
+
+def test_where_the_replaced_lanes_differ_the_margin_is_read_from_the_verified_ceiling(
+    replayed: list[adopt.Move],
+) -> None:
+    """At 29 the replaced record's reported bound was the catalogue's print and its
+    verified bound T-155's exact side. Its retained display differs from that side, so
+    the opening, section and history note must use the exact form for the margin's
+    baseline (reviews C3 and D1 of #661). The catalogue print orders nothing."""
+    at29 = next(move for move in replayed if move.n == 29)
+    bound = at29.packing["verified_upper_bound"]
+    verified = Fraction(str(bound["exact_form"]))
+    printed = str(at29.packing["reported_upper_bound"]["value"])
+    assert Fraction(str(bound["value"])) != verified
+    margin = verified - at29.side
+    assert margin == at29.selection.margin > 0
+    opening = _flat(adopt.opening(at29))
+    baseline = re.search(
+        r"below the ceiling the case held until then, \$([^$]+)\$ from", opening
+    )
+    assert baseline is not None
+    assert Fraction(baseline.group(1)) == verified
+    stated_margin = re.search(r"`([^`]+)` below the ceiling", opening)
+    assert stated_margin is not None
+    rounded_margin = Decimal(stated_margin.group(1))
+    last_place = Decimal(1).scaleb(int(rounded_margin.as_tuple().exponent))
+    assert abs(Fraction(rounded_margin) - margin) <= Fraction(last_place) / 2
+    assert f"below the ceiling the case held until then, ${printed}$" not in opening
+    assert (
+        f"the reported upper bound it replaces, ${printed}$ from [Kingbird], is a print "
+        "`9.19e-15` below the new side, within one unit of its last place, so it does not "
+        "order them"
+    ) in opening
+    assert f"The house it replaces, ${verified}$ from" in _flat(adopt.section(at29))
+    note = adopt.history_note(at29)["claim"]
+    assert note.startswith(f"Earlier house {verified} from T-155 (reported as {printed} from")
+    written = adopt.replayed_text(at29)
+    stale = written.replace(str(verified), str(bound["value"]))
+    assert adopt.refreshed(at29, stale) == written
+    # Lanes that agree as numbers keep the reported print, as at 308, '18.0' beside '18'.
+    for move in replayed:
+        if move.n != 29:
+            assert not adopt._lanes_differ(move.packing), move.n  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
 
 
 def test_the_coverage_of_a_count_adopted_again_names_the_new_house_throughout(

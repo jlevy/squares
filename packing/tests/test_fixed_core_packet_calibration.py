@@ -2252,6 +2252,7 @@ pid_path = Path({str(worker_pid_path)!r})
 prior_handler_path = Path({str(prior_handler_path)!r})
 during_launch = {during_launch!r}
 signal_number = signal.Signals({int(signal_number)!r})
+worker_command = (sys.executable, "-c", "import time; time.sleep(60)")
 
 if {custom_handler!r}:
     def prior_handler(signum, _frame):
@@ -2260,6 +2261,9 @@ if {custom_handler!r}:
 
 def launch(*args, **kwargs):
     process = real_popen(*args, **kwargs)
+    # RSS sampling also uses Popen; this assertion owns only the worker launch.
+    if args[0] != worker_command or kwargs.get("start_new_session") is not True:
+        return process
     # Publish by rename: the test polls for the file and must never see it empty.
     staged_pid_path = pid_path.with_name(pid_path.name + ".tmp")
     staged_pid_path.write_text(str(process.pid), encoding="utf-8")
@@ -2271,7 +2275,7 @@ def launch(*args, **kwargs):
 calibration.subprocess.Popen = launch
 started = time.perf_counter()
 status = calibration.supervise_worker(
-    (sys.executable, "-c", "import time; time.sleep(60)"),
+    worker_command,
     Path({str(output)!r}),
     repository=Path({str(REPOSITORY)!r}),
     expected_revision={REVISION!r},
@@ -2305,6 +2309,7 @@ raise SystemExit(status)
     assert prior_handler_path.exists() is custom_handler
     if custom_handler:
         assert prior_handler_path.read_text(encoding="utf-8") == str(signal_number)
+    assert cast(dict[str, object], receipt["supervision"])["coordinator_pid"] == worker_pid
     with pytest.raises(ProcessLookupError):
         os.kill(worker_pid, 0)
 

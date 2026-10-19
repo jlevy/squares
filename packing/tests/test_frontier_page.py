@@ -230,7 +230,7 @@ def test_a_correcting_bound_keeps_its_recency_and_names_what_it_corrects(
     # in parallel took 40 of the corrected floors, none of them correcting anything; 220
     # since the second merge that day, when T-080's replayed certificate took n = 101 to 105;
     # 219 since the third, when T-076's replayed linear certificate took n = 82.
-    # 218 since 18 October, when T-211's replayed fine-net certificate took n = 108.
+    # 218 since 18 October, when T-216's replayed fine-net certificate took n = 108.
     assert len(corrected) == 218
     seen = 0
     for attributes, cells in rows:

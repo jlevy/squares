@@ -125,7 +125,9 @@ def _run_fixture(tmp_path: Path, rows: str = "0-2") -> tuple[Path, Path, Path]:
         certificate,
         output,
         rows,
-        max_seconds=2,
+        # Allow startup and journal writes on loaded hosts; the separate sleeping
+        # checker control below owns timeout behavior.
+        max_seconds=30,
         expected_rows=3,
         expected_revision=None,
         expected_certificate_sha256=None,

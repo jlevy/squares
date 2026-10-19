@@ -3928,6 +3928,56 @@ verifiers:
       - packing/devtools/continuous_pose_followup.py
       - packing/tests/test_continuous_pose_followup.py
     independence_record: packing/devtools/continuous_pose_followup.py
+  - id: V-pingyou-622-exact-review
+    program: review/programs/n29_exact_review.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      Decides PingYou Ltd's n = 29 certificate of PR 622 from its release asset, read by
+      member and held to its pinned size and digest: every wall and every pair over Q by
+      separating axes on the squares' own axes, with a strict reader of the certificate's
+      fractions; refuses four mutated copies, each for exactly its expected violations, two
+      of them 1e-3000 past exact contact; decides the replay's retained jobs again from
+      their checker inputs; and measures the certificate against the record's witnesses,
+      which decides nothing. Standard library only.
+    source:
+      - packing/resources/web/pingyou-pr622-certificate-2026-10-15/review/programs/n29_exact_review.py
+      - packing/resources/web/pingyou-pr622-certificate-2026-10-15/review/programs/run_review.sh
+    versions:
+      - sha256: 57bcd639d84df6782baa4347a10d94e98d356cda061c9624735aa11d6d154ea7
+    independence_record: >-
+      packing/resources/web/pingyou-pr622-certificate-2026-10-15/review/README.md
+    independence:
+      read:
+        - specification
+        - certificate-format
+        - producer-output
+      clean_room: true
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 review lane of PR 622's import (think-2jzy), strong sub-agent tier,
+            max reasoning
+      overlaps_producer:
+        extent: unknown
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The source names no system behind the PY agentic offering. The decision was written
+          from the asset's README.txt geometry statement and the certificate's layout, and
+          decided the certificate before any of the replay's code was read; the source's
+          COMPARISON.json and corners witness were read afterwards, to compare. None of the
+          source's programs was opened. The replay's routes are also Claude lanes' work, a
+          system-family overlap with the replay and not, as far as the record knows, with the
+          producer.
+    note: >-
+      Written on 16 October 2026 for docs/project/reviews/review-2026-10-16-pingyou-n29.md
+      and kept, with everything it printed, in the packet's review/ directory.
 
   - id: V-audit-fine-net-receipt
     program: devtools.audit_fine_net_receipt
@@ -3969,7 +4019,6 @@ verifiers:
       packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review/n108-exact-audit.json.
       Its PASS is a premise-and-point result beside the
       native replay, not a full coverage decision or an independent full verifier.
-
   - id: V-n108-review-max-exact
     program: n108_audit.py
     author: Squares Project (Levy)

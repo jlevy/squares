@@ -8,8 +8,8 @@ ours, which rest on someone else's argument, and how far each has been checked.
 
 ## The short version
 
-- **635** evidence records. **361** are formal; **354** of those were established here. **10** are samples, counted separately.
-- **256** rest on an argument made elsewhere, of which **7** have been read by nobody here.
+- **641** evidence records. **362** are formal; **355** of those were established here. **10** are samples, counted separately.
+- **261** rest on an argument made elsewhere, of which **7** have been read by nobody here.
 - **1** formal record proves a theorem only under a hypothesis nothing here has replayed, and is verified as that implication alone: `E-k2m4-evand-bentz4-lean-build` (ValidTilt9).
 - **43** claim to be first established here. **14** make no novelty statement at all - not assessed, which is not the same as not novel.
 
@@ -154,7 +154,7 @@ results, it is a statement about what this repository has itself examined.
 | `E-friedman-ds7-table2-opaque-lower` | 0 | lower-bound | reported | - | elsewhere | - | previously-published | unknown | not recorded | - |
 | `E-n017-maciver-reported-lower` | 0 | lower-bound | reported | - | elsewhere | not-reviewed | previously-published | unknown | not recorded | *none held* |
 | `E-green26-reported-lower` | 0 | lower-bound | reported | - | - | defect-found | previously-published | unknown | not recorded | - |
-| `E-kingbird-upper-register` | 156 | upper-bound | reported | - | - | - | previously-published | producer’s code | not recorded | - |
+| `E-kingbird-upper-register` | 155 | upper-bound | reported | - | - | - | previously-published | producer’s code | not recorded | - |
 | `E-kingbird-grid-completeness` | 95 | upper-bound | reported | - | - | - | previously-published | producer’s code | not recorded | - |
 | `E-unitsquare-release1-report` | 0 | upper-bound | reported | - | - | - | previously-published | producer’s code | not recorded | *none held* |
 | `E-basic-grid-upper` | 175 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | common-knowledge | independent | not recorded | `V-check-basic-bounds` |
@@ -188,7 +188,7 @@ results, it is a statement about what this repository has itself examined.
 | `E-n011-trump-local-rigidity` | 1 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | apparently-novel | producer’s code | not recorded | `V-trump11-tangent-cones` |
 | `E-n011-repaired-lower` | 0 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel | producer’s code | not recorded | `V-sqpack-cover` |
 | `E-n012-monotonicity-lower` | 0 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | previously-published | independent | not recorded | `V-check-basic-bounds` |
-| `E-n029-kingbird-report` | 1 | upper-bound | reported | - | - | - | previously-published | producer’s code | not recorded | *none held* |
+| `E-n029-kingbird-report` | 0 | upper-bound | reported | - | - | - | previously-published | producer’s code | not recorded | *none held* |
 | `E-n029-kingbird-numerical` | 0 | witness-feasibility | numerically-checked | nothing formally; a measurement at a tolerance | here | - | *not assessed* | independent | not recorded | `V-kingbird29-verify-svg` |
 | `E-n029-orientation-classes` | 0 | derived-structure | numerically-checked | nothing formally; a measurement at a tolerance | here | - | *not assessed* | independent | not recorded | `V-kingbird29-verify-svg` |
 | `E-n029-schadt-report` | 0 | upper-bound | reported | - | - | - | previously-published | producer’s code | not recorded | `V-schadt-n29-check-py` |
@@ -557,7 +557,7 @@ results, it is a statement about what this repository has itself examined.
 | `E-n017-overbeck-literal-checks-review3` | 0 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | previously-published | independent | full, 193 of 193: the literal geometric facts of the proof text's sections 3 to 6 over the 98 capture class files and the case partition: 192 printed literal checks at 83 sites, plus one partition check on all 15,000 product atoms | `V-overbeck-review3-literal-checks` |
 | `E-n017-overbeck-handovers-review3` | 0 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | previously-published | independent | full, 3 of 3: the three hand-overs of the rigidity step, P092 to P095, between the regions stated in EXPECT_G20S.json, EXPECT_HW.json and JG_exact_v2.json | `V-overbeck-review3-handovers` |
 | `E-n017-overbeck-gate-review2` | 0 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | previously-published | independent | full: the normalized 52-row gate of G20S_PHYSICAL (PROOF.md P110): the 152 separating options, the 52 base-gap identities, the 52 geometric rows of each of the five stored stopped models, and the chain from B6 through the five stopped rounds, taking the stop cuts as premises stated by PROOF.md P096 | `V-overbeck-review2-row-builder`, `V-overbeck-review2-groebner-identities`, `V-overbeck-review2-duality-bounds`, `V-overbeck-review2-krawczyk-root` |
-| `E-regularized-bounds-2026-10-12-exact-decision` | 57 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel | producer’s code | full, 59 of 59: retained rational packing views, every wall and every pair decided by both maintained checkers: 1,051,241 pair decisions per checker, with the 177 negative-control decisions on the 59 views retained separately | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-register-regularized-bounds` |
+| `E-regularized-bounds-2026-10-12-exact-decision` | 56 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel | producer’s code | full, 59 of 59: retained rational packing views, every wall and every pair decided by both maintained checkers: 1,051,241 pair decisions per checker, with the 177 negative-control decisions on the 59 views retained separately | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-register-regularized-bounds` |
 | `E-regularized-bounds-2026-10-13-grid-slack-exact-decision` | 1 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | apparently-novel | producer’s code | full, 1 of 1: the retained rational packing view at n = 290, every wall and all 41,905 pairs decided by both maintained checkers; the three negative-control decisions on two distinct mutants are retained separately | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-register-regularized-bounds` |
 | `E-n040-guzhou-new-supports-report` | 1 | lower-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | `V-guzhou-n40-continuous-pose`, `V-guzhou-n40-axis-integer-grid` |
 | `E-n040-guzhou-new-supports-kernel-replay` | 1 | lower-bound | verified | strict inequalities only | here | - | previously-published | producer’s code | full, 44 of 44: the near-axis statement by the release's axis kernel and the continuous cover of all 43 slabs of t in [10^-6, 83/200] by its continuous-pose kernel, both rebuilt from the retained source and run on inputs regenerated here | `V-guzhou-n40-continuous-pose`, `V-guzhou-n40-axis-integer-grid`, `V-audit-n40-new-supports`, `V-audit-continuous-pose` |
@@ -637,6 +637,12 @@ results, it is a statement about what this repository has itself examined.
 | `E-wand125-continuous-n28-5745-report` | 0 | lower-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | `V-wand125-sqverify-continuous`, `V-wand125-contpose-check3` |
 | `E-evand-639-exact-sides-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
 | `E-n019-fitzharding-lean-report` | 0 | exact-value | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
+| `E-pingyou-622-certificate-report` | 1 | upper-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | *none held* |
+| `E-pingyou-622-exact-feasibility` | 1 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | independent | full, 1 of 1: the certificate at n = 29 that T-195 cites, every wall and every pair decided by both maintained routes, again by the third route and again by the review's clean-room checker; the kernel's controls are retained in the packet's receipt and the other two checks' in review/outputs/ | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-evand-arrangement-receipts`, `V-upper-bound-reports`, `V-evand-exact-certificates`, `V-check-half-angle-area`, `V-pingyou-622-exact-review` |
+| `E-de-winter-668-upper-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
+| `E-evand-669-n155-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
+| `E-evand-674-n229-opening-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
+| `E-evand-674-n229-update-report` | 0 | upper-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | *none held* |
 | `E-wand125-fine-net-n38-65775-report` | 0 | lower-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | `V-wand125-sqverify-proof-net` |
 | `E-wand125-fine-net-n40-6735-report` | 0 | lower-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | `V-wand125-sqverify-proof-net` |
 | `E-wand125-fine-net-n41-68025-report` | 0 | lower-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | `V-wand125-sqverify-proof-net` |
@@ -661,10 +667,10 @@ results, it is a statement about what this repository has itself examined.
 
 ## What the register rests on
 
-- **assurance**: numerically-checked 5, reported 260, verified 370
-- **method**: exact-algebraic 185, interval-certified 169, numerical-multiprecision 5, proof-assistant-checked 5, proof-audited 4, published-proof 7, reported 260
-- **novelty**: apparently-novel 43, common-knowledge 4, not assessed 14, previously-published 574
-- **relationship to the producer's code**: generator 5, independent-implementation 230, not-applicable 25, same-implementation 350, shared-components 19, unknown-historical 6
+- **assurance**: numerically-checked 5, reported 265, verified 371
+- **method**: exact-algebraic 186, interval-certified 169, numerical-multiprecision 5, proof-assistant-checked 5, proof-audited 4, published-proof 7, reported 265
+- **novelty**: apparently-novel 43, common-knowledge 4, not assessed 14, previously-published 580
+- **relationship to the producer's code**: generator 5, independent-implementation 231, not-applicable 25, same-implementation 355, shared-components 19, unknown-historical 6
 
 The `cases` column is how many frontier records cite each piece of evidence, and it is the reason to read this table rather than count records. Ranked below are the *formal* records only: a `reported` record cited across the frontier may be a shared catalogue and is labelled as such, which is the register working rather than risk. The risk is a verified claim resting on an argument nobody has examined.
 
@@ -675,7 +681,7 @@ Claims marked `apparently-novel`: first established here as far as the archived 
 | result | n | what is new | cases | assurance |
 | --- | --- | --- | ---: | --- |
 | `E-translation-escape-not-rigid` | 303 sizes | A systematic screen over 318 configurations with replayable certificates; the idea of checking a slide is not new | 303 | numerically-checked |
-| `E-regularized-bounds-2026-10-12-exact-decision` | 59 sizes | Exact rational certificates of the catalogue's packings at the witnesses' own sides at 26 counts, below the record's ceilings, and at 25 of them below the sides of Evan Daniel's certificates of the same packings (T-101). At the other 33 the side is exactly that of Evan Daniel's certificate, previously published on 5 October 2026 and proved here by T-101's replays, so there only a second certificate at that side is new, not the bound. The packings are their finders'; the solver and the regularizer are Evan Daniel's. | 57 | verified |
+| `E-regularized-bounds-2026-10-12-exact-decision` | 59 sizes | Exact rational certificates of the catalogue's packings at the witnesses' own sides at 26 counts, below the record's ceilings, and at 25 of them below the sides of Evan Daniel's certificates of the same packings (T-101). At the other 33 the side is exactly that of Evan Daniel's certificate, previously published on 5 October 2026 and proved here by T-101's replays, so there only a second certificate at that side is new, not the bound. The packings are their finders'; the solver and the regularizer are Evan Daniel's. | 56 | verified |
 | `E-n005-fixed-side-local-rigidity` | 5 | The first exact PROOF that Goebel's n = 5 optimum is locally rigid at fixed side -- a property ASSERTED WITHOUT PROOF by Kingbird (archived main page, line 44, "Rigid." with a link and no argument), not stated by Goebel 1979 (zero occurrences of "rigid" or "uniqu" in the extraction) and not annotated by Friedman DS7, whose Theorem 2 is a lower bound only and analyses no equality case | 1 | verified |
 | `E-n005-second-order-rigidity` | 5 | That n = 5 is not infinitesimally rigid but is second-order rigid, proved exactly; the catalogue asserts 'Rigid.' without defining or arguing it | 1 | verified |
 | `E-n011-trump-local-rigidity` | 11 | Local rigidity proved by exhausting all 128 branchwise cones; sources assert rigidity, and zero algebraic freedom does not exclude a branching motion | 1 | verified |
@@ -725,7 +731,7 @@ The `n` column is what each covers and `cases` is how many frontier records cite
 | `E-karakus-strip-lower` | 202 | elsewhere | informally-verified |
 | `E-karakus-strip-measure-interval` | 202 | here | - |
 | `E-basic-grid-upper` | 175 | here | - |
-| `E-regularized-bounds-2026-10-12-exact-decision` | 57 | here | - |
+| `E-regularized-bounds-2026-10-12-exact-decision` | 56 | here | - |
 | `E-evand-exact-ceilings-2026-10-05-exact-replay` | 32 | here | - |
 
 The most-cited argument this repository did not produce is `E-karakus-strip-lower`, carrying 202 frontier cases. It is an external proof, and it has been read here: its record carries the review, what was re-derived, and the four things that were not. The arithmetic is what picked it out for reading -- being cited this heavily is the reason to open an argument, not a reason to trust it.

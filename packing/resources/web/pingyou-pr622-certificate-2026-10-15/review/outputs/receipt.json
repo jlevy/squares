@@ -1,0 +1,125 @@
+{
+  "receipt": "packing/resources/web/pingyou-pr622-certificate-2026-10-15/receipts/exact-certification.json.xz",
+  "format": "pingyou-622-exact-replay-v1",
+  "jobs": [
+    {
+      "control": "positive",
+      "side_is_the_certificate's": true,
+      "squares_changed_from_the_certificate": [],
+      "this_program": {
+        "violations": [],
+        "least_pair_gap": "0",
+        "least_wall_clearance": "0",
+        "expected": [],
+        "for_the_right_reason": true
+      },
+      "routes": {
+        "exact_verify": {
+          "verification_passed": true,
+          "failures": [],
+          "least_pair_gap_equals_this_program's": true,
+          "least_wall_clearance_equals_this_program's": true
+        },
+        "independent": {
+          "verification_passed": true,
+          "failures": [],
+          "least_pair_gap_equals_this_program's": true,
+          "least_wall_clearance_equals_this_program's": true
+        }
+      },
+      "cpu_s": 11.94
+    },
+    {
+      "control": "duplicate-square-overlap",
+      "side_is_the_certificate's": true,
+      "squares_changed_from_the_certificate": [
+        1
+      ],
+      "this_program": {
+        "violations": [
+          "pair 0 1"
+        ],
+        "least_pair_gap": "-1.000000000000000e+00",
+        "least_wall_clearance": "0",
+        "expected": [
+          "pair 0 1"
+        ],
+        "for_the_right_reason": true
+      },
+      "routes": {
+        "exact_verify": {
+          "verification_passed": false,
+          "failures": [
+            [
+              "overlap",
+              "squares 0 and 1 overlap"
+            ]
+          ],
+          "least_pair_gap_equals_this_program's": true,
+          "least_wall_clearance_equals_this_program's": true
+        },
+        "independent": {
+          "verification_passed": false,
+          "failures": [
+            "1 overlapping pairs; worst exact gap -1"
+          ],
+          "least_pair_gap_equals_this_program's": true,
+          "least_wall_clearance_equals_this_program's": true
+        }
+      },
+      "cpu_s": 12.05
+    },
+    {
+      "control": "square-translated-outside-container",
+      "side_is_the_certificate's": true,
+      "squares_changed_from_the_certificate": [
+        0
+      ],
+      "this_program": {
+        "violations": [
+          "wall 0 right"
+        ],
+        "least_pair_gap": "0",
+        "least_wall_clearance": "-3.000000000000000e+00",
+        "expected": [
+          "wall 0 right"
+        ],
+        "for_the_right_reason": true
+      },
+      "routes": {
+        "exact_verify": {
+          "verification_passed": false,
+          "failures": [
+            [
+              "container",
+              "square 0 violates x<=s"
+            ],
+            [
+              "container",
+              "square 0 violates x<=s"
+            ],
+            [
+              "container",
+              "square 0 violates x<=s"
+            ],
+            [
+              "container",
+              "square 0 violates x<=s"
+            ]
+          ],
+          "least_pair_gap_equals_this_program's": true,
+          "least_wall_clearance_equals_this_program's": true
+        },
+        "independent": {
+          "verification_passed": false,
+          "failures": [
+            "container penetration -3"
+          ],
+          "least_pair_gap_equals_this_program's": true,
+          "least_wall_clearance_equals_this_program's": true
+        }
+      },
+      "cpu_s": 12.23
+    }
+  ]
+}

@@ -563,6 +563,10 @@ key remain bound to the bytes they originally named.
 
 | Repository | Role in this record | Pinned record |
 | --- | --- | --- |
+| [evand/square-packing, n229 opening](https://github.com/evand/square-packing/tree/e0338c7becf95dbc7584b48d8868c0a1cd21079c/search/packer/candidates) | Daniel’s opening upper-bound report in #674, `15.650163254859`, preserving Daniel after Couzo #672 after de Winter #668 | **[Daniel n229 dilation 2026-10-17]**; [17 October packet](web/evand-n229-dilation-2026-10-17/README.md), MIT-licensed pin `e0338c7becf95dbc7584b48d8868c0a1cd21079c`; stage 3 reported registration [T-198](../frontier/RESULTS.md), V0/C0, pending adoption; both case upper lanes and houses unchanged |
+| [evand/square-packing, n229 update](https://github.com/evand/square-packing/tree/00e68dfbe1d29ab5dbab1cddfb8f6ca19d5470db/search/packer/candidates) | Daniel’s current requested upper bound in #674, `15.650161513896`, after its retained opening report and with the same lineage | **[Daniel n229 dilation update 2026-10-18]**; [18 October packet](web/evand-n229-dilation-update-2026-10-18/README.md), MIT-licensed pin `00e68dfbe1d29ab5dbab1cddfb8f6ca19d5470db`; stage 3 reported registration [T-199](../frontier/RESULTS.md), V0/C0, pending adoption; both case upper lanes and houses unchanged |
+| [JoostdeWinter/square-packing](https://github.com/JoostdeWinter/square-packing) | Joost de Winter’s reported upper bounds at 227, 229 and 260, issue #668; [T-196](../frontier/RESULTS.md), V0/C0, pending adoption with both case upper lanes and houses unchanged | **[de Winter upper bounds 2026-10-17]**; [17 October packet](web/de-winter-upper-bounds-227-229-260-2026-10-17/README.md), retained at MIT-licensed `9bf5d9be4d0ca13a1dbef7d7953032fe87d4e81d`; the three witness directories are unchanged from original claim pin `c95c4938f068ed44a1819ef973e770ec241aa567` |
+| [evand/square-packing, n155](https://github.com/evand/square-packing/tree/59326b86291b76c39d843f3f156e8f25fa0f6e3f/search/packer/candidates) | Evan Daniel’s reported upper bound at 155 and same-side display certificate, issue #669; [T-197](../frontier/RESULTS.md), V0/C0, pending adoption, with the Ostashev/Couzo metadata discrepancy preserved | **[Daniel n155 explorer 2026-10-17]**; [17 October packet](web/evand-n155-explorer-2026-10-17/README.md), MIT-licensed pin `59326b86291b76c39d843f3f156e8f25fa0f6e3f`; both case upper lanes and the house unchanged |
 | [Queuingtheorydotcom/11SquaresOptimal](https://github.com/Queuingtheorydotcom/11SquaresOptimal) | **Priority proof review:** claimed global optimality of Trump’s eleven-square packing; distinct from the `s(11) > 31/8` bound and wand125 row checks | **[Ahmed n11 optimality 2026]**, T-060; [29 September intake](web/n11-optimality-2026-09-29/README.md); pinned `f9e0de713a0949d1bc6a0fa6b59d96edf6c3d65c`; [GPT-6 Pro’s review evidence of 3 October](web/n11-optimality-gpt6-pro-review-2026-10-03/README.md) |
 | [Queuingtheorydotcom/11SquaresFormalized](https://github.com/Queuingtheorydotcom/11SquaresFormalized) | The Lean 4 formalization of `T-060`’s proof, `ElevenSquare.optimality`, announced on 6 October 2026: the source reports a full verification run and axiom audit, private and resumed from earlier receipts, trusting Lean’s compiler for 13,308 `native_decide` axioms | **[Ahmed 11SquaresFormalized 2026]**, T-060; [6 October packet](web/queuingtheorydotcom-n11-lean-2026-10-06/README.md), pinned `cdc746ed907d258057c283aeb6d077cb2c27e349`; [statement audit](../../docs/project/reviews/review-2026-10-06-n11-lean-formalization-statement-audit.md) |
 | [wand125/square-packing-tools](https://github.com/wand125/square-packing-tools) | MIT-licensed drivers for moving rectangle-density certificates in `n` and `L`, performance variants around Tokoharu’s solver, and the exact `general_pose_tree` checker | **[wand125 tools 2026]**; [29 September packet](web/wand125-tools-2026-09-29/README.md) |
@@ -960,8 +964,9 @@ them in jlevy/squares#446. The
 directories’ MIT documents at revision `718887c` and, under OR-18, each release asset’s
 candidate, receipts and logs, with the maintained premise checks; the nested verifier
 archive is pinned by digest.
-T-195 to T-212 record them as reported; the census and its whole-net controls run under
-think-f40c.
+T-200 to T-217 record these bounds.
+T-216 adopts n108 at V3/C3 after its complete replay and mathematical reviews; the other
+seventeen remain V0/C0, with census and whole-net controls owned by think-f40c.
 
 - **[Couzo exact refinements 2026-10-08]** — Francisco Couzo’s eight complete rational
   certificates and separate decimal context poses.
@@ -1687,6 +1692,18 @@ below every earlier report there, at V0/C0, pending review and adoption; at 51, 
 and 207 the side ties a side the record holds, and at 172, 263 and 297 PR #574’s
 rational certificates are smaller.
 Claude assistance disclosed.
+
+**[PingYou PR 622 certificate 2026-10-15]**: PingYou Ltd’s exact rational certificate
+for n = 29, a refinement of Thomas Schadt’s packing, improved by David Ellsworth, pinned
+at `31155575ce1e6b461f77bfc9f3e201adf101115b` with its release asset pinned by size and
+SHA-256, kept as a derived exact fact, no upstream byte retained;
+[packet](web/pingyou-pr622-certificate-2026-10-15/README.md).
+Both project exact routes accept it and refuse both controls, and the 16 October review
+accepted it for finite feasibility.
+T-195 records it at V3/C3, 1.57e-36 below T-155, by exception in the
+[per-count ledger](../campaign/issue-intake/upper-bounds-n29-20261016/README.md), on the
+owner’s standing house rule (PR #660), pending adoption.
+The author says its submissions are assisted by PingYou Ltd’s PY agentic offering.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

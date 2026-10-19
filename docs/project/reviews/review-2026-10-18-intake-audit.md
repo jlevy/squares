@@ -1,0 +1,527 @@
+# Intake Audit, 18 October 2026
+
+Workflow entry: W1 intake, following
+[the import runbook](../../../packing/campaign/result-import.md#running-an-intake-pass).
+The coordinator is think-xmxb.
+This change replaces the stage 0 and 1 records proposed in
+[PR #667](https://github.com/jlevy/squares/pull/667), at
+`a5b5f0ec28c1880f53bdc161e5224e282e18eb8a`, and preserves its import owners and source
+reads. The base is `origin/main` at `804eff369193b698d497a9c06847059eb9de0470`.
+
+The audit retrieved all 68 open issue bodies and comments, compared them with the
+requests record, and assigned owners to eight new issues and four results found in
+watched commits. It registers no result and changes no bound, rung, house or drawing.
+The new reports remain at `triage: pending` until their source inventories, comparisons
+and complete validation prices are settled.
+A clean ownership sweep does not mean their imports or replies are complete.
+
+## Current Stage 3 Checkpoint, 18 October 2026
+
+This supplement is recorded at `2026-10-18T17:25:44+00:00` after the historical opening
+inventory. There are now **17 open PRs**, including replacement draft #676. Its remote
+remains `5fb743b3e`; the local intake branch is based on #661 `a87de0cf7`, whose hosted
+checks are green. #665’s local repair head `1d20b28d` is awaiting its full gate; the
+older remote `bb85cbb59` remains the source of its recorded hosted failures.
+
+The four retained packets now have a local Stage 3 candidate: six claim/count rows,
+grouped into four reported results.
+IDs below are provisional branch positions after #661’s T-195; every later PR updates
+from main and takes IDs in actual merge order.
+No ordering of #671 and this branch is assumed.
+
+| Report | Local register group | Reported claim/count rows | Case disposition |
+| --- | --- | --- | --- |
+| #668, 17 October | T-196 | 227, 229, 260 | All three pending adoption |
+| #669, 17 October | T-197 | 155, one bound with original and same-side display certificates | Pending adoption |
+| #674 opening, 17 October | T-198 | 229 | Earlier registered improvement; house unchanged |
+| #674 update, 18 October | T-199 | 229 | Latest registered n229 report; pending adoption |
+
+All four entries remain V0/C0. Both case upper lanes, house witnesses and drawings
+remain unchanged until adoption.
+The atlas producer binds its retained geometry to the case side; updating only the
+reported lane refused n155 because its old house has a larger side.
+The bounded refresh wrote no outputs.
+Stage 3 therefore uses the runbook’s pending-adoption route (T-128 precedent), retaining
+exact claims in the register and source coverage while separate Stage 4 descendants own
+adoption and regularization.
+At n229 the chain is de Winter, Couzo #672, Daniel opening and Daniel update; Couzo
+remains a separate Stage 1 import under `think-2vjc`, with no certificate or rung
+adopted here. No `regularizations.of` is assigned because Couzo’s antecedent is not
+registered. The contract permits `identity.basis: source-claim` until a measurement here
+decides it. At n155 the explicit issue/prior attribution credits Daniel’s new local
+minimum from Ostashev’s packing; the conflicting regularized JSON credit is retained but
+is not used as finder evidence.
+
+Separate Stage 4 lanes have returned results, pending their own descendant PRs:
+
+- #668’s exact mathematics review accepted all 716 squares and 85,427 pairs, refused 15
+  mutants and sharp contact controls, and found no blocking defect.
+  Its source replay accepted all three certificates and refused 18 geometric mutants in
+  64.464 seconds.
+- Astra’s independent #669/#674 mathematics review accepted four certificates and all
+  76,082 pairs; 40 control outcomes agree in ordinary and optimized Python.
+  It found no blocking mathematical defect and records a Low source-checker limitation:
+  completeness guards based on `assert` disappear under optimized Python.
+  The review’s checker uses explicit failures.
+  Numerical local-minimum, search, dilation and path-identity claims are outside that
+  accepted scope.
+- A separate normal source-checker replay of those four certificates returned eight
+  accepted decisions and 16 geometric mutant refusals in 41.386 seconds.
+  The sealed receipt is owned by `think-8kx2` and `think-0lu6` (SHA-256
+  `cab73c96110bd0866a295bd8fbb406d682ded95f8845522f65fca529c19f3c39`).
+
+These are AI reviews and machine decisions, with their shared interpreter/Fraction and
+source-reading boundaries recorded in the separate reviews; they are not human
+oversight. This Stage 3 registration incorporates none of those confirmation receipts.
+#671’s current draft records n108 at V3/C3 from its retained census and accepted
+mathematical reviews B/C; its other 17 entries remain V0/C0. No fresh native replay of
+#671 occurred in this session.
+The all-V0/C0 statements below describe the pinned opening snapshot only.
+
+The clean pre-registry head `5458a50d5` passed 52/52 records steps in 138.07 seconds,
+with the concurrent read-only disk scanner disclosed.
+Local Stage 3 publication checks, independent review, exact final-head records/push,
+hosted CI and the final online intake sweep remain required.
+The remaining #666/#670/#672/#675 source work keeps its named owners; #666 uses the
+settled digest-only unlicensed-verifier boundary, and the bulk sources still need
+Git-packed size measurements and bounded custody carriers.
+The eight answer-bead drafts remain unpublished.
+#673’s two-count credit successor waits for #665 integration.
+
+## Evidence and Scope
+
+The [retained intake directory](../../../packing/campaign/issue-intake/intake-20261018/)
+holds the raw issue snapshot, PR #667’s description and file list, the already posted
+#432 final reply, source commit and path inventories, the new claims, manual source
+receipts, and sweep receipts.
+Its
+[issue disposition map](../../../packing/campaign/issue-intake/intake-20261018/issue-dispositions.yaml)
+has one row for every open issue, with its existing claim scope and answer/import
+owners. Existing mathematical claims were compared with their recorded mapping; this was
+not a new mathematical review of every earlier source.
+
+The snapshot contains every comment returned for the 68 issues; the largest thread has
+25 comments. The online sweep separately reads GitHub’s issue and comment state,
+including edits and missing replies.
+The requests record also includes result-report pull requests #574 and #622, so its 70
+open entries are not the number of open issues.
+The companion open-work review owns the pull-request review and in-flight branch map.
+
+The closing online `make intake` exits 0: zero unowned items, zero resolved blockers,
+321 owned items, and every GitHub issue, reply and comment held in the record.
+It checked all 44 established watched repositories.
+The two manual-source notices remain listed by design and have the completed checks
+below.
+
+The initial `make intake` completed its network reads with 18 action items, 79 owned
+items, no resolved blocker, and two sources marked Not Checked for manual reading.
+The Kingbird capture was 209,455 bytes; all counts agree with the retained 5 October
+capture.
+It remains in `attic/intake/kingbird-2026-10-18/`, the tool’s disposable capture
+location; the sweep receipt preserves the comparison result.
+
+## New Issue Dispositions
+
+The claim inventory contains 223 upper-bound rows: 222 in issue bodies and one later
+update on #674. Each row names a count and the author’s upward-rounded side; the raw
+report remains the source for its certificate, credit, checker and qualification.
+
+| Issue | Received | Owner | Remaining work |
+| --- | --- | --- | --- |
+| [#666](https://github.com/jlevy/squares/issues/666) | De Winter: 19 exact rational packings at 464–1568, including 18 below the integer grid | think-3m10 | Compare the full source with earlier reports and the classical envelope, retain certificates, price complete checks. Source prices its checker at about 1.5 one-core minutes for all 19 |
+| [#668](https://github.com/jlevy/squares/issues/668) | De Winter: 227, 229 and 260 at `c95c4938f068ed44a1819ef973e770ec241aa567` | think-qdcc | Retain the witnesses and three exact source checkers; preserve lineage through #672/#674. Source prices its checkers at 0.6–1.2 seconds per count |
+| [#669](https://github.com/jlevy/squares/issues/669) | Daniel: 155 at `59326b86291b76c39d843f3f156e8f25fa0f6e3f`, with a same-side regularized view | think-n1ga | Retain and review the source, replay the certificate with controls, then adopt and regularize when validated. Numerical local-minimum diagnostics remain qualified |
+| [#670](https://github.com/jlevy/squares/issues/670) | Couzo: 73 upper-bound rows, `23aff0c6f992271e1ad13a148d44f392c4b386c0` | think-f28n | Inventory the complete release, compare report order and classical consequences, preserve deletion and source/seed relationships, price bulk replay |
+| [#672](https://github.com/jlevy/squares/issues/672) | Couzo: 46 rows, `af8cb7959aead318c0cf5e9f873de3caa763f77a`; comment credits De Winter at 227 and 229 | think-2vjc | Same comparison and custody obligations; retain that explicit lineage |
+| [#673](https://github.com/jlevy/squares/issues/673) | Daniel’s requested finder corrections at 146 and 308 | think-gzvu | Correct only these case front-matter finder fields to Evan Daniel, keeping Xu/Fang as “based on,” consistently with the original reports and existing “Daniel after” result credits. Coordinate with #665’s generated n146/n308 assets; the eleven other counts are illustrative, not requested changes. No path-continuity proof is inferred |
+| [#674](https://github.com/jlevy/squares/issues/674) | Daniel: opening certificate at `e0338c7becf95dbc7584b48d8868c0a1cd21079c`, then `00e68dfbe1d29ab5dbab1cddfb8f6ca19d5470db` | think-5ij2 | Use the update’s side, 15.650161513896 rounded up, as the current request. Preserve both reports in chronological comparison; credit Couzo after De Winter |
+| [#675](https://github.com/jlevy/squares/issues/675) | Couzo: 79 rows, `c6da0fc7524d667bf3d224559724ba9b60762e60` | think-pvav | Inventory all 542 finite witnesses and the 1024-count index; distinguish Daniel’s adopted 229 from Couzo discoveries and price complete replay |
+
+The
+[report-order ledger](../../../packing/campaign/issue-intake/upper-bounds-20261018/README.md)
+compares these upper-bound reports and #659/#664 against the frozen base record.
+All 225 are below the standing sequence at their report time, with no printed-side
+undecided comparisons; source identity remains unclassified by this ledger.
+It is a triage comparison of 225 claims from ten reports, including #674’s comment.
+It verifies no certificate.
+The complete source inventories, exact-header decisions and any earlier unimported
+publication or classical consequence still belong to the named import beads; a
+printed-side ledger verdict alone does not justify registration.
+
+All eight new issues received the `intake` label under the project’s existing
+`github-workflows` grant.
+No issue comment was posted and no issue was closed.
+There are no case labels for 155 or 229 in the current label set; only `n-11`, `n-17`
+and `n-18` exist. Draft acknowledgements are in the import/answer beads.
+
+## Watched Source Dispositions
+
+The retained inventory covers 17 commits in Evan Daniel’s repository, eight in Hosono’s
+and three in Couzo’s after PR #667’s reads.
+Independent review found that the original compare responses stopped at 300 files for
+Daniel and Couzo. The completed per-commit pagination retains 353, 40 and 1,067 unique
+paths respectively, including 53 Daniel paths and 767 Couzo paths absent from those
+compare responses. No per-commit response reached the 3,000-file endpoint ceiling.
+The additional paths include Daniel’s n232 formalization and site/history files, and
+Couzo’s certificates and parent witnesses; they remain with the named n232 and bulk
+import owners below.
+This completes the changed-path inventory, not the stage 2 review of every source file
+or certificate. The source’s claim that a checker passed is kept as a source claim.
+
+| Source result | Pin | Owner and disposition |
+| --- | --- | --- |
+| Valid7 kernel version 2, new comment on #537 | Hosono `649a92042b4b79dda1eca1749c34029aee60990e`, release `valid7-lean-v2` | think-0ayk; retain and audit the new release. Same theorem and standard axiom set are reported; 62,626 generated files, 9,800 unchanged roots and re-certified leaves. Source reports 798 CPU-hours, with 37 GB peak for a module and 51 GB for Main. The comment’s component CPU figures sum to 796, so reconcile its receipt before treating the new price as settled |
+| Fine-net lower bound at 42, `s(42) >= 2749/400` | Hosono `d7afe3e525299d70de298af72cf17c581a86c0b1` | think-kjd7; triage, source custody, price a full census and whole-net controls, and mathematical review. The source reports 2073/2073 directions accepted and a refused control |
+| Unconditional Lean Fang gluing Theorems 1 and 2 | Daniel `f4883b41853732b240606b3a532ce48d542ead28` | think-57ei, coordinating think-0esw/#603; decide formalization versus evidence scope, retain the theorem and 18 piece certificates, review and price a rebuild |
+| Lean Ryu bound `c*(k) <= 8 ceil(sqrt(k-4))-1`, `k >= 6` | Daniel `8475bdf41571c59c8c240aedaddc48e19e0e4707` | think-ahr2; map the asymptotic record and finite consequences, retain, review and price a rebuild |
+| Improved filled L-shape bound `c*(k) <= 4 ceil(sqrt(2k-7))+5`, `k >= 7` | Daniel `a645fe3610425507ddfb9825045094028c1d28f4` | think-f8py; new claimed bound, not admitted here. Check strictness, count conventions and the construction, then retain/review and price a rebuild |
+| Exact three-angle witness at 232 and Lean packing proof | Daniel `5ca0dc3ae7a4eebce16838bf41bedc2ce7e98241` | think-phyb; new evidence for T-193, same stated side as the earlier degree-seven form. Classify the new degree-fourteen witness and formalization after retention/review |
+| Path-certificate soundness theorem and credit classification | Daniel `b4e9d31aa635aaf515ae610224e00a2baf0166a5` and associated lineage commits | think-gzvu/#673; source policy is not project policy. Float evaluations and the far-pair filter remain outside the theorem’s soundness claim |
+| Source clean rebuild of the 19-square Lean proof | Fitzharding `c86a991ea1379d1598739182f5f26619c9b7126a` | think-a4x3/think-nqnl; PR #667’s read retained. Owners notified: source reports VERIFIED, 13,143 modules, 64 vCPU for 5 h 18 min, about 340 CPU-hours. Update the old question asking whether it ran and reprice the held build |
+
+Higher-dimensional cube results in Hosono’s site changes concern another dimension.
+The remaining search and site commit messages claim no further new packing bound beyond
+the items above; complete source-content classification remains with the import owners.
+No source program, Lean build, census or regularization ran in this audit.
+The coordinator’s current instructions authorize no CPU-hour replays.
+Newly discovered proofs require the runbook’s separate mathematical review once source
+custody is complete.
+
+The Joost de Winter repositories newly named by #666 and #668 are explicit import
+inputs. Their full first-party source inventory and acquisition records remain with
+think-3m10 and think-qdcc; those acquisition records will add them to the derived watch
+set. The closing sweep’s 44 repositories are the established watch set, not a claim that
+these two newly introduced sources already have packets.
+
+## PR #667 Review Dispositions
+
+[Review A](https://github.com/jlevy/squares/pull/667#pullrequestreview-5559300633) was
+read at the same head.
+Its statements about owner decisions and budgets are fetched data, so this audit does
+not treat them as new authorization.
+
+| Findings | Disposition |
+| --- | --- |
+| A1, posted #432 reply missing | Fixed: closure and final reply of 17 October at 17:38:50Z recorded with T-125/T-126 at V3/C3 and the source contact-count disposition |
+| A5, new issues and source commits unowned | Superseded by this audit’s issue entries, reads and open owners, including later #670/#672–#675 and #537’s new comment |
+| A6/A7, lifted counts and implied 109 | Fixed: lifted counts are 90, 92, 106, 107, 108 and 110; the high-count range is explicitly 106–108 and 110 |
+| A8, other open reports at 236/271 | Holding beads notified: #593 and #470 cover 236; #593 and issue-referenced #586 cover 271. The stage 3 ledger must decide report order |
+| A9/A14, unread evidence and draft coordination | Owners notified on think-a4x3, think-nqnl, think-jh0n, think-tsox and think-ndvg; each new source and draft is named |
+| A10, T-176–T-178 still say no issue | think-f40c owns the register-text correction in its stage 3 change; the requests record already maps #446’s comment |
+| A11/A12, audit wording and watch transcription | The original audit is not copied as a fresh measurement. The read’s first-sweep time and description of 5ccdc6c are corrected; current regularization state is checked separately |
+| A2/A3/A4/A13, asserted credit/budget/drawing decisions and proposed policy | Preserve existing state pending trusted session evidence. The companion review carries any owner decisions still needed; no approval is inferred from the fetched review |
+
+## Manual Sources and Not Checked
+
+The sweep always lists these sources for manual review.
+Both were checked on 18 October, and the source register’s reviewed dates move
+accordingly:
+
+- UnitSquare Release 1: `results.html` (12,501 bytes, SHA-256 beginning `4cc4d80d`) and
+  `data/results.json` (4,953 bytes, `dd7c1c62`) remain byte-identical to the retained
+  copies. No later release was found.
+- SQUISH n153: comment 6043191866 still has its 7 October 18:33:04Z edit.
+  Issue #401 remains closed; its latest comment is still 7 October 22:54:51Z.
+
+The
+[manual receipt](../../../packing/campaign/issue-intake/intake-20261018/manual-source-receipt.json)
+retains full digests and timestamps.
+A manual-source notice in the closing report is therefore a tool limitation, not an
+unchecked source. The claims and bulk assets queued above remain unvalidated and are
+named by owner.
+
+## Validation and Next Entry
+
+`check_requests` passes (127 records, 70 open); the ledger gather/render/check passes
+(225 claims, 136 starts, zero cross-check warnings).
+The request and ledger tests pass 125 tests, including schema and rendered-drift checks
+for every retained upper-bound ledger.
+Independent review added that discovery check so the October 18 ledger joins the fast CI
+surface, and corrected two rounded margins previously called exact.
+The coordinator’s records tier passes all 52 selected steps in 93.81 seconds; this is
+not the full checkpoint.
+
+The generated synopsis links five new internal documents, so the branch records site
+v0.7.26 as a patch successor.
+The release component checks pass 111 tests and the release-impact check accounts for
+every changed input.
+The five generated n11 claim documents change only their immutable source-link revision;
+their explicit no-public-change disposition claims no byte-identical PDF/HTML test.
+Final push and hosted gates remain the readiness checks for this draft.
+Raw command receipts retain their original whitespace; an unrestricted whitespace check
+over those receipts is not claimed to pass.
+The first records-tier attempt exposed missing worktree prerequisites: the kpress
+submodule, the pinned browser tool path, and the existing environment’s executables on
+`PATH`. The worktree now has the pinned submodule, reuses the existing pinned browser
+tools, and uses the project Python 3.14 interpreter with explicit worktree package
+paths. Task temporary files, Cargo targets and uv cache are on the verified writable
+external scratch volume.
+No environment was built inside the worktree.
+
+The selected next entry is a W1 continuation of think-qdcc: complete source custody and
+the exact report-order comparison at 227, 229 and 260, then its mathematical review and
+bounded replays. Parallel follow-ups are the single-count Daniel imports
+think-n1ga/think-5ij2, #659/#664’s existing lanes, and think-f40c’s source retention.
+Bulk Couzo inventories and the larger Lean results keep their explicit owners and need
+complete prices before execution.
+
+Every touched issue’s reply follows its records merge and verification of main and the
+deployed site. No announcement is generated because this change allocates no T ids.
+Significance is S1, bookkeeping: retain a changelog coverage omission and publish no
+News entry. Merge and issue posting remain the coordinator’s later steps.
+
+## Stage 2 Follow-up — 18 October 2026
+
+This interim addendum preserves the original audit above and advances three imports to
+source custody through four packets.
+It does not complete W1: the runbook still requires stages 1–3 for every new result on
+this branch.
+
+| Issue and owner | Completed custody | Remaining work |
+| --- | --- | --- |
+| #668, `think-qdcc` | [Three-count packet](../../../packing/resources/web/de-winter-upper-bounds-227-229-260-2026-10-17/README.md): 44 retained upstream files, including the three exact witnesses and standalone checker dependencies. Licensed pin `9bf5d9be` changes only LICENSE and root README from original claim pin `c95c4938` | Stage 3 registration, exact source-side comparisons, complete review and replay with controls; no checker ran here |
+| #669, `think-n1ga` | [Single-count packet](../../../packing/resources/web/evand-n155-explorer-2026-10-17/README.md): 15 retained upstream files at MIT-licensed `59326b86`, including both exact certificates, both standalone checkers and numerical reports. The display certificate has the original certificate’s side and is not another bound | Resolve the attribution discrepancy, register, review and replay with controls; adopt and regularize only after validation |
+| #674 opening, `think-5ij2` | [Opening packet](../../../packing/resources/web/evand-n229-dilation-2026-10-17/README.md): nine retained upstream files at MIT-licensed `e0338c7`, including the exact certificate, binary64 input, two standalone checkers and dilation producer | Preserve its chronological claim, `15.650163254859`, while the current request follows the smaller update; no geometric verdict or registration |
+| #674 update, `think-5ij2` | [Update packet](../../../packing/resources/web/evand-n229-dilation-update-2026-10-18/README.md): nine retained upstream files at MIT-licensed `00e68df`; the opening inputs remain unchanged and are bound to their retained copies | Register, review and replay with controls; the current requested bound is `15.650161513896`, not a lower-bound claim |
+
+The original claim dates are 17 October 2026 for #668, #669 and #674’s opening, and 18
+October for #674’s update.
+Retrieval does not change those dates.
+The source index and bibliography name all four packets.
+Their custody checks establish retained bytes and checker-input completeness, without a
+geometric verdict or evidential upgrade.
+Separately, `think-qdcc` records a bounded source-level mathematical read of #668 with
+no blocking geometry finding; binding the exact witnesses to `records.json` and
+exercising controls remain pending.
+
+For #669, the issue explicitly credits Daniil Ostashev’s T-149 as the start, as does
+`s155_ex2_prior.json`; `s155_ex2_regularized.json` instead contains
+`by: ["Francisco Couzo"]`. The packet preserves that disagreement.
+The bibliography reports the issue’s requested lineage and names the conflicting field;
+acquisition does not decide whether it is stale metadata.
+Numerical KKT, local-minimum and matching diagnostics remain the source’s assertions.
+
+The printed-side ledger records #668 before #672 at 227, and before #672, #674 and
+#674’s update at 229; each later report is stronger.
+All three #668 claims remain eligible for historical registration, while 260 has no
+later competing report in this ledger.
+#674 preserves Daniel after Couzo’s #672 after de Winter’s #668; its opening and update
+are separate chronological reports, and the update is the final requested side.
+This comparison verifies no packing.
+
+Stage 3’s final IDs and publication require an update from main and allocation in actual
+merge order: #661 retains T-195; each later PR takes the next available IDs only after
+updating from main, then regenerates its views and data pin.
+#671’s entries are provisional; no ordering between it and #676 is assumed.
+No number is reserved or communicated to an author.
+The requests remain queued and `triage: pending`; no register entry, case lane, house or
+drawing changes in this addendum.
+Full push qualification, remote push and PR editing remain held for the coordinator’s
+integration window and diff review.
+
+Focused validation of this addendum passes all four packet custody checks, the schema
+check (324 frontmatter artifacts and 972 YAML datasets), the request check (127 records,
+70 open), the documentation check (2,065 documents), and 66 bibliography and request
+contract tests in 10.70 seconds.
+A parsed comparison preserves all existing claim values, source locations, triage and
+queue flags; only the three issues’ custody notes and non-registration reasons change.
+The pre-edit records tier passed all 52 selected steps in 88.98 seconds.
+Post-edit records and full push qualification remain held for the coordinator’s CPU
+window; no current-head gate pass is claimed.
+
+#666 follows the owner’s explicit digest-only custody decision for the unlicensed
+verifier/source archive: retain its source pin and digest with derived claim facts,
+without copying the verifier code into the tree or exposing it to the independent
+checker. The coordinator’s inspection of `b3152f` found no published repository licence
+at the current head.
+No raw source packet was added; acquiring the bounded facts and digests and establishing
+exactly which certificate inputs are available remain intake work, rather than another
+custody-approval question.
+This does not block #668, #669 or #674. The larger Couzo and Lean imports retain the
+owners and pricing obligations recorded above.
+The next entry is stage 3 for retained packets after updating from main, alongside their
+dedicated mathematical reviews and bounded replays.
+
+## Bulk Source Inventory Follow-up — 18 October 2026
+
+The later bounded source inspection maps three Couzo releases at stage 1:
+
+| Request and source pin | Inventory finding | Candidate custody scope |
+| --- | --- | --- |
+| #670, `23aff0c6f992271e1ad13a148d44f392c4b386c0` | 73 issue-table local improvements; four issue-linked root certificates differ from same-count `best/` files | About 9.7 MB before compression; `think-f28n` owns the import |
+| #672, `af8cb7959aead318c0cf5e9f873de3caa763f77a` | 46 issue-table local improvements; nine root certificates differ from same-count `best/` files; preserve the de Winter lineage at 227 and 229 | About 8.0 MB before compression; `think-2vjc` owns the import |
+| #675, `c6da0fc7524d667bf3d224559724ba9b60762e60` | 79 issue-table local improvements, plus the broader index’s credited adoption of Daniel’s 229 and two deletion-derived witnesses | About 10.4 MB before compression; `think-pvav` owns the import |
+
+These are candidate scopes for custody planning, not retained-byte totals or measured
+replay prices. Source receipts stay attached to their actual inputs; the same count in
+the root and `best/` directories does not establish byte or claim identity.
+The imports need a bounded data-carrier decision under OR-18 before acquisition, plus
+the exact report-order and classical-construction comparisons and complete replay
+prices.
+No source packet, checker execution, geometric verdict or stage 3 entry was added
+by this inspection.
+
+Runbook reply drafting is also complete for the eight new requests: #666, #668, #669,
+#670, #672, #673, #674 and #675. Their existing answer beads hold concise drafts with
+the claim dates and pending stage 2/3 work, without provisional result numbers or
+verification rungs. The drafts are synced and remain unposted.
+After the relevant records merge, each draft must be refreshed from main against later
+comments and the deployed site; an intervening registration or replay changes what it
+may say.
+
+## Census Draft Follow-up — 18 October 2026
+
+The opening
+[#671 snapshot at `32d47d321`](https://github.com/jlevy/squares/blob/32d47d3214ec28f2a82b89689cd8bb8f63f98e02/packing/frontier/results.yaml)
+records all 18 census entries at V0/C0. The later
+[draft at `89166716`](https://github.com/jlevy/squares/blob/89166716d492ae7e4e76f61550e80849dec7edc3/packing/frontier/results.yaml)
+records n108, provisionally T-211, at V3/C3 using its retained 201-direction census and
+two accepted mathematical reviews; the other 17 entries remain V0/C0. These are
+draft-branch records: #671 remains unmerged, with no promotion to main.
+This follow-up claims no fresh native replay or independent full implementation.
+The opening audit statements describe their pinned snapshot; the current draft’s IDs
+remain provisional under the merge-order rule above.
+
+## Local Qualification Follow-up — 18 October 2026
+
+At clean `611b45437`, the records tier passed all 52 selected steps in 95.57 seconds.
+The push tier passed 66 of 67 selected steps in 1,219.13 seconds, failing only the
+[resident-Rust shutdown control](../../../packing/tests/test_rust_rectangle_geometry.py).
+Its half-second fixture deadline yielded zero completed angles, consistent with expiry
+before the first angle; the unchanged control passed in isolation in 0.59 seconds.
+
+`think-26gw` tracks the test repair: hold the clock through startup and the completed
+angle, then allow a real 0.05-second shutdown wait through the actual protocol code.
+The control still requires INCONCLUSIVE, a backend timeout and one VERIFIED angle; it
+also requires the worker to have terminated.
+All seven focused boundary controls pass in 2.63 seconds, with Ruff and BasedPyright
+clean. The production verifier and its deadlines are unchanged; no newly reported
+certificate was replayed.
+The resulting head requires a green push tier before publication, with terminal gate and
+hosted-check evidence retained in #676 and `think-1ayi`.
+
+## Watched-Source Freshness Follow-up — 18 October 2026
+
+The interim online refresh read 45 watched repositories, including the newly watched
+[Joost de Winter repository](https://github.com/JoostdeWinter/square-packing) retained
+by the stage 2 addendum.
+GitHub issue bodies, replies and comments still match the intake record.
+This refresh is separate from the earlier closing sweep above and is not the final
+post-publication sweep.
+
+It found two new wand125 commits.
+Both complete diffs were read:
+[`08d77305`](https://github.com/wand125/square-packing/commit/08d77305c0838d521e5a5339ea5f41fd60b625b8)
+changes four site metadata, sitemap and page files, and
+[`6d93afc1`](https://github.com/wand125/square-packing/commit/6d93afc1e5336aa498c0a7657c0869dc648a7b92)
+changes the theme index.
+Their edits only rename “two unit cubes in a cube” to “two unit hypercubes in a
+hypercube” in English and Japanese titles and links.
+The mathematical expressions, n = 3 to 6 scope, proof text, certificates and checkers
+are unchanged. A no-result watch read now records the new head; the earlier Valid7 and
+n42 imports remain with `think-0ayk` and `think-kjd7`.
+
+The original full history/tree fetches for BuddenPing, Esummins, Daniel and Couzo each
+hit the 60-second cap.
+The retained
+[bounded HEAD refresh](../../../packing/campaign/issue-intake/intake-20261018/bounded-four-head-refresh-20261018.json)
+records four successful GitHub API reads whose default-branch SHAs exactly equal the
+existing `read_through` pins: `73d25427`, `eb3ae154`, `5ca0dc3a` and `c6da0fc7`. This
+covers current head freshness without claiming fresh full-history or source-content
+audits, imports or replays.
+The original fetch timeouts remain limits of the interim sweep, and the existing import
+owners retain their work.
+UnitSquare and SQUISH remain the separately hand-checked sources recorded for 18
+October.
+
+## Isolated Qualification Environment — 18 October 2026
+
+The later push attempt at `8f4f8a5ce` was cleanly stopped after 309.30 seconds (exit
+130), when another worktree’s hook rebuilt editable packages in the shared Python
+environment. Direct imports with this branch’s `PYTHONPATH` remained local, but a fresh
+process without it resolved `sqpack` and `kpress` to #665; nested subprocesses can
+replace or clear that variable.
+This invalidates the qualification attempt without establishing a source failure.
+Its original log and import-origin receipt are retained under `think-1ayi`.
+
+A frozen install now gives #676 an isolated environment on external scratch through
+`UV_PROJECT_ENVIRONMENT`. Fresh imports without `PYTHONPATH` resolve `sqpack`, `kpress`
+and the workbench tools to this checkout; the checkout-import preflight passes, and
+Ruff, BasedPyright and browser dependency paths resolve correctly.
+The shared environment was not changed by this mitigation.
+`think-rl4i` tracks a reusable safeguard separately; this branch changes no validation
+harness code for it.
+The resulting head requires fresh records and push tiers in the isolated environment.
+
+## Census Admission Fixture Follow-up — 18 October 2026
+
+At clean `600539c43`, the isolated records tier passed all 52 selected steps in 111.27
+seconds.
+Its push tier passed 66 of 67 selected steps in 741.09 seconds, failing only the
+complete-row census fixture.
+The retained journal records a 2-second timeout after exact rows 0 and 1 of the
+requested 0, 1 and 2; the wrapper correctly returned PARTIAL_ROW_EQUALITY. The unchanged
+case and adjacent subset and malformed-value controls pass in isolation (three tests in
+1.95 seconds).
+
+`think-urgl` gives only the success/admission helper a bounded 30-second budget for
+startup and journal writes on loaded hosts.
+The separate sleeping-checker timeout control remains at 2.0 seconds, with the
+complete-row and exactness assertions and production admission rules unchanged.
+All 13 focused module tests pass in 3.88 seconds; Ruff and BasedPyright are clean.
+Fresh exact-head records and push tiers remain required before publication; this failed
+gate is retained as a fixture timing failure.
+
+## Supervisor Signal Fixture Follow-up — 18 October 2026
+
+At clean `372902046`, isolated records passed all 52 selected steps in 223.82 seconds
+against the 300-second ceiling.
+The subsequent normal-worker n5 push was stopped after one concrete signal-control
+failure, at 579.26 seconds (exit 130), with the last progress report showing 49 of 67
+selected steps complete.
+Two command-termination markers are cancellation artifacts, not additional source
+failures.
+
+The test’s captured PID was 1992; its retained supervisor receipt identifies worker
+1989, with exit status -15 and `process_group_reaped: true`. The test replaced the
+shared `subprocess.Popen` and published every launched PID, including RSS sampling’s
+`ps` observer, so its final process-absence assertion could inspect the observer rather
+than the worker. This does not establish a production worker-reaping defect.
+
+`think-469b` restricts PID publication and injected launch signals to the exact worker
+command with `start_new_session=True`. It adds a binding assertion against the receipt’s
+coordinator PID and retains the existing `ProcessLookupError` assertion.
+Production supervision and deadlines are unchanged.
+The failed receipt is preserved outside disposable scratch; timed controls and
+exact-head records/push qualification wait for the other branch’s heavy gate to finish.
+
+## Dependent-Branch Qualification Follow-up, 18 October 2026
+
+The intake branch was rebased locally onto #661 at `a87de0cf7`, preserving its T-195.
+The pre-rebase checkpoint remains recoverable from
+`codex/intake-stage2-checkpoint-2a7a11ea6`. Regenerating the five n11 claim documents
+from the combined tree leaves them byte-identical to #661, and the data pin already
+names the last combined data commit.
+No mathematical result has been registered by this intake layer yet.
+
+Fresh pre-registry records at `2627322e1` passed 51 of 52 steps in 110.18 seconds.
+The sole failure was release-impact baseline selection: the validator compared main’s
+site v0.7.25 with the combined v0.7.27, despite the retained adjacent cuts through
+#661’s v0.7.26. A focused comparison against #661 accepted the site’s own successor but
+rejected the intake layer’s now-redundant n11 no-change exemption, since those files
+equal the parent. The failure log and focused contrast are retained outside disposable
+scratch. `think-e05x` owns the narrow repair: release impact uses the GitHub PR base in
+hosted CI, an explicit `PACKING_RELEASE_BASE_REF` locally, or main otherwise; the main
+delivery’s `HEAD^1` path and changelog’s main baseline stay unchanged.
+The five selector controls first failed in the three dependent-base cases, then the
+focused release-impact module passed all 24 cases, including an uncovered-input negative
+control. Ruff and BasedPyright pass.
+The redundant claim-document exemption is replaced by a source-reviewed exemption over
+the validator file alone, selected by the explainer’s broad package input; no HTML/PDF
+byte comparison is claimed.
+Fresh records must pass before Stage 3 registry edits, and the final head still requires
+its full push gate. The remote draft has not been updated.
+
+<!-- This document follows common-doc-guidelines.md.
+See github.com/jlevy/practical-prose and review guidelines before editing.
+-->
