@@ -1,0 +1,1025 @@
+== validation failed: lint floor (ruff) (0.0s): required development tool is unavailable: ruff; run `uv sync --group dev` ==
+== validation failed: published URL registry and historical compatibility (0.6s): command exited 1: /Users/levy/wrk/github/squares/packing/.venv/bin/python3 -m devtools.site_urls --check --history-ref origin/main Traceback (most recent call last): File "<frozen runpy>", line 203, in _run_module_as_main File "<frozen runp ==
+== validation failed: soft-schema validation (7.4s): command exited 1: /Users/levy/wrk/github/squares/packing/.venv/bin/python3 -m devtools.validate_schemas Traceback (most recent call last): File "<frozen runpy>", line 203, in _run_module_as_main File "<frozen runpy>", line 88, in _run_code  ==
+== validation failed: X-027 mathematics parses with pinned KaTeX (0.7s): command exited 1: /Users/levy/wrk/github/squares/packing/.venv/bin/python3 -m devtools.check_katex /Users/levy/wrk/github/squares/.worktrees/intake-review-20261018/packing/campaign/explorations/X-027-stromquist-fractional-and-structural-str ==
+== validation failed: synopsis agrees with the artifacts (6.6s): command exited 1: /Users/levy/wrk/github/squares/packing/.venv/bin/python3 -m devtools.check_documentation FAIL development.md: dead link -> vendor/kpress/docs/project/architecture/arch-2026-09-08-font-and-math-loading.md FAIL docs/project/ ==
+== validation failed: README agrees with the directory (0.4s): command exited 1: /Users/levy/wrk/github/squares/packing/.venv/bin/python3 -m devtools.check_readme Traceback (most recent call last): File "<frozen runpy>", line 203, in _run_module_as_main File "<frozen runpy>", line 88, in _run_code File ==
+== validation progress: 24/52 complete, 30s elapsed; active: every session's cost is attributed (5s); the branch cost rollup renders (5s) ==
+== validation progress: 39/52 complete, 60s elapsed; active: default pictures improve on their house drawings (15s); rung figures agree with their certificates (1s) ==
+required development tool is unavailable: ruff; run `uv sync --group dev`
+command exited 1: /Users/levy/wrk/github/squares/packing/.venv/bin/python3 -m devtools.site_urls --check --history-ref origin/main
+Traceback (most recent call last):
+  File "<frozen runpy>", line 203, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/Users/levy/wrk/github/squares/.worktrees/intake-review-20261018/packing/devtools/site_urls.py", line 1365, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "/Users/levy/wrk/github/squares/.worktrees/intake-review-20261018/packing/devtools/site_urls.py", line 1339, in main
+    rows = derive_registry(previous)
+  File "/Users/levy/wrk/github/squares/.worktrees/intake-review-20261018/packing/devtools/site_urls.py", line 298, in derive_registry
+    from devtools import (  # noqa: PLC0415
+    ...<4 lines>...
+    )
+  File "/Users/levy/wrk/github/squares/.worktrees/intake-review-20261018/packing/devtools/site_documents.py", line 57, in <module>
+    from devtools import render_changelog, render_overview, repo_links
+  File "/Users/levy/wrk/github/squares/.worktrees/intake-review-20261018/packing/devtools/render_changelog.py", line 25, in <module>
+    from kpress.format.markdown import parse_markdown
+ModuleNotFoundError: No module named 'kpress'
+command exited 1: /Users/levy/wrk/github/squares/packing/.venv/bin/python3 -m devtools.validate_schemas
+Traceback (most recent call last):
+  File "<frozen runpy>", line 203, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/Users/levy/wrk/github/squares/.worktrees/intake-review-20261018/packing/devtools/validate_schemas.py", line 408, in <module>
+    raise SystemExit(main())
+                     ~~~~^^
+  File "/Users/levy/wrk/github/squares/.worktrees/intake-review-20261018/packing/devtools/validate_schemas.py", line 387, in main
+    from devtools import render_changelog  # noqa: PLC0415
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/levy/wrk/github/squares/.worktrees/intake-review-20261018/packing/devtools/render_changelog.py", line 25, in <module>
+    from kpress.format.markdown import parse_markdown
+ModuleNotFoundError: No module named 'kpress'
+command exited 1: /Users/levy/wrk/github/squares/packing/.venv/bin/python3 -m devtools.check_katex /Users/levy/wrk/github/squares/.worktrees/intake-review-20261018/packing/campaign/explorations/X-027-stromquist-fractional-and-structural-strategy.md /Users/levy/wrk/github/squares/.worktrees/intake-review-20261018/docs/project/research/research-2026-09-10-x027-fractional-duality.md /Users/levy/wrk/github/squares/.worktrees/intake-review-20261018/docs/project/research/research-2026-09-10-x027-structural-helpers.md /Users/levy/wrk/github/squares/.worktrees/intake-review-20261018/docs/project/research/research-2026-09-10-x027-certificate-mechanisms.md
+kpress is not installed. Run with `--group dev`, which pins it.
+command exited 1: /Users/levy/wrk/github/squares/packing/.venv/bin/python3 -m devtools.check_documentation
+FAIL development.md: dead link -> vendor/kpress/docs/project/architecture/arch-2026-09-08-font-and-math-loading.md
+FAIL docs/project/specs/active/plan-2026-09-07-math-text-face.md: dead link -> ../../../../vendor/kpress/docs/project/architecture/arch-2026-09-08-font-and-math-loading.md
+FAIL docs/project/specs/active/plan-2026-09-07-math-text-face.md: dead link -> ../../../../vendor/kpress/docs/project/research/research-2026-09-07-math-text-face.md
+FAIL docs/project/specs/active/plan-2026-09-07-math-text-face.md: dead link -> ../../../../vendor/kpress/docs/math-text-face.plan.md
+FAIL docs/project/specs/active/plan-2026-09-07-math-text-face.md: dead link -> ../../../../vendor/kpress/docs/project/architecture/arch-2026-09-08-font-and-math-loading.md
+FAIL docs/project/specs/active/plan-2026-09-07-math-text-face.md: dead link -> ../../../../vendor/kpress/docs/project/research/research-2026-09-07-math-text-face.md
+FAIL docs/project/specs/active/plan-2026-09-07-math-text-face.md: dead link -> ../../../../vendor/kpress/docs/math-text-face.plan.md
+FAIL packing/devtools/templates/paper-design.md: dead link -> ../../../vendor/kpress/docs/project/architecture/arch-2026-09-08-font-and-math-loading.md
+command exited 1: /Users/levy/wrk/github/squares/packing/.venv/bin/python3 -m devtools.check_readme
+Traceback (most recent call last):
+  File "<frozen runpy>", line 203, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/Users/levy/wrk/github/squares/.worktrees/intake-review-20261018/packing/devtools/check_readme.py", line 64, in <module>
+    from devtools.site_documents import shared_blocks
+  File "/Users/levy/wrk/github/squares/.worktrees/intake-review-20261018/packing/devtools/site_documents.py", line 57, in <module>
+    from devtools import render_changelog, render_overview, repo_links
+  File "/Users/levy/wrk/github/squares/.worktrees/intake-review-20261018/packing/devtools/render_changelog.py", line 25, in <module>
+    from kpress.format.markdown import parse_markdown
+ModuleNotFoundError: No module named 'kpress'
+== no gate marker: every selected step is read-only and edit-tier ==
+
+== lint floor (ruff) ==
+
+== published URL registry and historical compatibility ==
+
+== bead tree ==
+  5728 beads from /Users/levy/wrk/github/squares/.git/tbd/data-sync-worktree/.tbd/data-sync/issues
+  report 11 in-progress bead(s) named only by terminal agenda cells
+    think-4o6l  BC-031 complete  Missing resources: acquire the 11 cited sources not in the archive
+    think-ouf0  BC-008 complete, BC-015 complete  Engine anchors: sqsearch must recover s(n) at the trivial n, and budget must be monotone
+    think-1s0h  BC-029 complete, BC-037 complete  Measure terminal flatness and connectivity before defining basin identity
+    think-xzew  BC-007 complete  Baseline and profile the end-to-end research loop
+    think-ykt7  BC-034 complete  Advance the asymptotic waste and finite-transfer lane
+    think-wbra  BC-001 complete, BC-003 complete, BC-004 complete, BC-005 complete, BC-006 complete  Rebuild the small-n basin calibration after typed termination
+    think-75ll  BC-032 complete, BC-045 complete  Bridge numerical witnesses to exact or interval-certified certificates
+    think-q6vy  BC-101 complete  Lane A2: certified lower bounds past Nagamochi at the Green Table-2 sizes
+    think-j6qy  BC-437 complete  Certify the remaining flagged classes and the residue's head (after S2's re-search)
+    think-ui2y  BC-452 complete  Compiled exact kernel checker in Rust (lane X1): row cover sweep and collision facets behind the resident protocol
+    think-98mg  BC-451 complete  n17: quantitatively lift the accepted 25-row point restriction to one closed region
+  report 290 in-progress bead(s) named by no agenda cell
+    think-r1yl  Efficiency (Infrastructure): trustworthy experimental throughput
+    think-rthe  Profile and reduce negative-control latency
+    think-2w1a  Maintain the review, defect logbook, and bead reconciliation map
+    think-m79h  Define lane-specific agent handoffs and evidence contracts
+    think-ydus  Unattended square-packing research readiness
+    think-9qz0  solve_to_fixed_point decides convergence by exact float equality of the cell tuple
+    think-1q3g  Test angle-active stationarity along the exact n=5 face
+    think-yi6x  Stabilize n4 and n10 fixed-cell acceptance without weakening the screen
+    think-tx0b  Bound packing validation steps and reap timed-out process groups
+    think-23td  Spec: Generalized square-packing Motion Lab
+    think-t1lk  The mutation-snapshot cap has 0.9% headroom and the record keeps growing
+    think-aads  Address the 2026-09-06 Claude Code adversarial review of the explainer
+    think-jogv  W5: propose reusable testing and CI performance guidance upstream to tbd
+    think-uutz  Review the Burns n = 17 page against the n = 17 record: coverage audit and integration items
+    think-lkjf  Reserve initial math geometry and remove host startup barriers
+    think-fatc  Preserve prepared math geometry under saved font preferences
+    think-nnvo  Keep queued math hidden through bootstrap recovery
+    think-jk1r  Stabilize prepared math line carriers during print font loading
+    think-r2qd  Make rigid contacts a constraint instead of a very stiff spring
+    think-883t  Play a strategy plan in the workbench
+    think-ooi2  Ship a clean standalone packing workbench
+    think-4ylo  Complete the strict Python and TypeScript/JavaScript floor for retained workbench code
+    think-ywj4  Extract deterministic illustration timeline and trace capture adapters
+    think-o4wo  Stabilize Animate physical trajectories and enforce frame-continuity budgets
+    think-5tyy  Make Animate presets truthful and continuous when settings change
+    think-1an7  Integrate wand125's 2026-09-28 update: evand s(21)=5 and s(45)=7, wand125 rectangle bounds n=18-95 and s(50)>=7.40, then the reader documents and atlas
+    think-l6la  Intake evand's s(21) = 5 and s(45) = 7: pin evand/square-packing past 167d842c, retain the new covers, replay, review, register
+    think-20mv  Finish the verified-lane replays of wand125's rectangle certificates so the atlas draws them
+    think-angg  Replay evand's Lean builds: s(13) = 4 and s(32) = 6 reported kernel-checked with no hypothesis (a V5 candidate), s(21)'s reduction, and the small s(11)/s(12) bounds
+    think-8cps  Review wand125 tools claims and maintain upstream repository references
+    think-bmf3  W7: implement native exact rectangle-density coverage verifier
+    think-xcij  Improve validation scheduling and test-selection efficiency
+    think-0atx  Declare and report post-merge validation wall ceilings
+    think-3i74  Independently validate or refute the n11 global-optimality claim
+    think-7nkq  Consolidate proof verification and decouple the validation pipeline
+    think-om8z  Audit updated wand125 pipeline and define independent performance parity
+    think-3cwg  Reduce independent rectangle verification work before full corpus replay
+    think-7x1u  W3: transfer recent optimality methods to n17 and low-n targets
+    think-t7k5  CI: the three behavioral shards run at their ceilings since the suite grew on 1 October
+    think-5xr9  Codify the result import process: one runbook for importing, recording, validating, rating and publishing a result by others, fitted to W1-W10
+    think-qh3s  One rescoring pass over the 23 draft significance scores of imported results, by an independent review lane
+    think-los0  Families of the n = 1..324 known-best packings: patterns, contact shading, exact regularization and asymptotics
+    think-g2qn  n17 capture route: reconcile pilot2 falsifier and select controlled successor
+    think-wcqs  Close Session 168: session record, rollups, PR description, SYNOPSIS handoff
+    think-hen3  Follow up on every result-report issue: acknowledge now, final reply from main after the stack lands, close the settled ones
+    think-ntuu  Land the T-007 correction stack (#305, #323) and close the result-integration record gaps
+    think-1qms  Import Guzhou0806: s(17) R070 and R071 (4.6604427, 18641771/4000000), above the verified 116511/25000
+    think-segb  Address PR #347 Review B (round 1)
+    think-nns5  Negative controls on check_readme, validate_schemas and ledger check run over a red worker baseline
+    think-wyf4  Complete import of every filed issue (6 October, round 2): #282, #281, #295, #316 to their exits; n = 17 held
+    think-vtc1  Paper: devtools.render_exact_side_values + exact-side-values-article.md template
+    think-t7a9  Import process: record exact facts at Stage 3 and regenerate register and paper at Stage 5
+    think-eu89  Lane: high-precision KKT re-solve + bounded integer-relation sweep for numeric-only counts
+    think-nymu  Lane: retain Kingbird square-55/71/83 SVGs and transcribe any defining system or polynomial
+    think-gcft  Import squarepacker/k2-minus-c v1.2 (0ff7d6a, Zenodo 10.5281/zenodo.23194031): constant 0.0353 for k >= 2, 0.0541 with T-064; RF fixes; then the independent Lemma 4.10 labelling (think-k3tk)
+    think-msos  Review current PR reports and plan separate import and verification slices
+    think-8sm2  Intake issue419 exact forms with separate feasibility and minimality checks
+    think-juuq  Intake issue420 local-minimum proofs with exact scope and assumptions
+    think-6ptr  Intake issue414 asymptotic square-packing preprints and dependency bridge
+    think-4y7u  Add canonical square-packing source watch while preserving historical pins
+    think-v42c  Review and import issue428 n68 rational refinement without display-ceiling regression
+    think-tl8n  Assess optional latency savings for additive archive-path CI changes
+    think-u1kq  Answer Sungjoon Ryu: two asymptotic deficiency preprints (#414)
+    think-wgo1  Continue exact polynomial collection and publication from PR403
+    think-klm7  Import and verify issue432 newly reported ry-xu packings
+    think-1cvf  Integrate issue432 exact inputs into the frontier and private atlas workers
+    think-l360  Import issue #438: fourteen exact rational ceiling refinements
+    think-dvcs  n17: implement and preregister the first eight-state shared-centre exact LP pilot
+    think-kk7w  n17: gate PR410 native verifier and establish ordinary-U full parity before adoption
+    think-upzs  Restore measured import validation lanes without relaxing gates
+    think-ewea  n17: reconcile the current reported #413 patterns with admitted, tail and pilot obligations
+    think-nv5o  Import issue428 v1.2 algebraic-root source with explicit replay disposition
+    think-ndvg  Intake issue #446 fine-net lower-bound certificates
+    think-bmwd  Record issue413 latest 31-pattern report with unpublished-certificate disposition
+    think-okcb  Sync polynomial catalogue with upstream and audit tracked PDFs
+    think-edo8  Import Francisco Couzo: eight exact rational refinements (#451)
+    think-n01y  n17 outstanding-issue followthrough: mathematical disposition and first integration slices
+    think-w5tm  Build and present the left-aligned atlas preview
+    think-p9mb  n17 supporting CI: attribute Frontier initial-load layout shifts
+    think-3y4q  Retain rational polynomials through upstream frontier refresh
+    think-uy3e  Align web publication contracts after upstream sync
+    think-9sgi  Repair validation census and unknown-path attribution
+    think-kfpc  Keep mutation-control snapshots below the existing cap
+    think-qr37  Declare exact-register ceiling consumers and align marker registry
+    think-s5ou  Measure the delayed startup control within its own readiness wait
+    think-0mlq  Adopt Couzo eight-case bounds with complete historical source-house custody
+    think-mx4n  Reconcile resumed intake ledger and dated source follow-ups
+    think-tiou  Acquire and review evand dated375 certificate additions
+    think-1545  Triage Couzo extended-range construction updates beyond the eight-case intake (no issue)
+    think-o061  Qualify inherited intake coverage notes after maintained confirmations
+    think-jygq  Resume polynomial catalogue recovery, upstream sync and database work map
+    think-808n  Project verified finite rational bounds with replay-backed provenance
+    think-5jr5  Resolve intake frontend checkpoint failures within existing rendering budgets
+    think-z3qh  Resolve catalogue review findings with lossless storage and bounded publication
+    think-2u4x  Website: compact homepage, consistent case layouts, and scroll-aware navigation
+    think-x0j9  Retain exact-catalogue KKT input in sparse publication checkout
+    think-wiu3  Declare complete exact catalogue publication outputs and approved scripts
+    think-vore  Keep complete catalogue equations within the PDF page
+    think-utky  Resolve Gupta-layer native house-reader wall failure within 12 seconds
+    think-3okf  Make certificate-receipt negative controls individually bounded
+    think-3pyf  Preserve snapshot custody within the source cap after catalogue registration
+    think-a0qb  Reconcile concurrent parent repairs and lossless catalogue storage
+    think-wuol  Refresh polynomial catalogue for admitted finite bounds and source roots
+    think-8wie  PR448 diagnostic transport control must pass zero-warning typecheck
+    think-rxyl  PR #449: identify and fix cold font layout shifts
+    think-70h9  Make all open n-17 PRs source-qualified and merge-ready
+    think-okxn  Finish current-source qualification of n17-related catalogue403/435
+    think-sb9c  W3 insight-iteration review of the n17 program after consolidation
+    think-ja78  Publish the exact-side collection as a web-only report
+    think-wzmf  INLINE_LINK in run_negative_controls ignores #fragment links (latent worker-copy hole)
+    think-2hm6  Quick lane over capacity: replace the temporary suite_a..d ceiling raise with a structural fix (fifth shard or lane-capacity decision)
+    think-ff6c  Intake pass 2026-10-10: eight new issues, unread replies and comments, five watched repositories
+    think-3oi5  Import Guzhou0806: s(40) > 335427/50000 from wand125's rect_n40_L67 density with a clipped-corner estimate (#485)
+    think-jpre  Import Mishapolk: 28 packings below the register at n = 84-306 (#470)
+    think-md2i  Build one declaration-driven importer for rational upper-bound certificate reports, replacing per-author report modules
+    think-fvz4  Stage 4-5: independently review and adopt the pending upper-bound reports (T-128, T-130, T-131 and the 2026-10-10 imports), choosing one house per count
+    think-mtwe  Draft the stage-7 replies owed after the 9 October intake stack merged (#425, #428, #432, #438, #446, #451, #375, #414, #411, #413), for the owner to post
+    think-ht59  Review and repair the website development and CI critical path
+    think-m7il  Populate key contributor profiles and reconcile the complete credit census
+    think-9yli  Publish contributor pages and convert credited names to profile links
+    think-39mp  Contributor profiles: census, linked credits and reviewable website
+    think-t3a9  Reconcile Ahmed and public handles to one sourced contributor identity
+    think-vix3  Credit Levy personally for new results while retaining The Squares Project as the project name
+    think-8yk4  Reconcile evolvingprograms with Lewis and simplify duplicate personal credits
+    think-e7sr  Synchronize polynomial PR stack and audit Git history size
+    think-cdud  Regularization: a typed credit in the register, and every packing n = 1..324 regularized (stacked on PR #487)
+    think-ux1v  Regularize every packing n = 1..324 with the adapted process, in pull requests after the #497 plan
+    think-k35c  Atlas: adopt the register's regularizations definition for the project's own regularized layer, as a softschema contract
+    think-moel  PR #406 (merge): refuse added bulk Git blobs using actual PR base
+    think-6i3c  PR #493 (merge): reconcile beads and specs and clarify agent ownership
+    think-6vrv  PR stack #403 + #435 (merge): exact-side source records and polynomial web report
+    think-t9sr  PR #497 (merge-ready, owner reviews before merge): regularization assessment
+    think-up3h  Driver devtools.regularize_evand: witness input at full precision, exact solve, conservative regularize, import and decide on project routes, identity and non-regression measures (slices 1-2)
+    think-7hmc  Exact same-side re-solve over Q of a regularized view at the witness side (slice 3)
+    think-ubr0  Regularization spikes across n, with a before/after gallery, and the end-to-end effort scope
+    think-xfuz  Documentation organization: one consistent structure under docs/, lowercase names, root holds entry points only
+    think-pwmi  Research doc: regularization, what has happened, what was learned, and the standard approach for every result
+    think-mq0k  Intake pass 2026-10-11: six new upper-bound reports, two n17 issues, four unread comments, six watched repositories
+    think-om5l  Import Francisco Couzo: 304, 305 and nine beyond-horizon counts 338-381 (#506)
+    think-tln9  Import Guzhou0806: s(40) > 3359/500 = 6.718 with 163 new rectangle supports (#485 follow-up)
+    think-18b8  Review the verification and confirmation rungs of the recent register entries (T-120 to T-146) against their retained evidence
+    think-66e5  Lean-backed claims: what V4/V5 and C4/C5 would need for T-060 (n = 11, Ahmed's 11SquaresOptimal and 11SquaresFormalized), T-084, T-055 and T-120..T-124 (#419)
+    think-0ayk  Import wand125 via evand: Valid7 in the Lean kernel (evand PR #6, merged 060c1a1), a kernel route to T-064's finite premise (no issue)
+    think-2z22  Results page: a rollup of S3+ results by day or week (design and prototype)
+    think-pn0e  Owner decisions from the regularization pilots: decision-table amendments (rows 4, 5, 7), variant, and the record changes before the full run
+    think-cb34  Adopt the register's lower exact certificates as atlas witnesses before the full regularization run (T-146 at 15 counts; imports in flight)
+    think-omqv  Register exact packings at the witnesses' printed sides where they fall below the 14-decimal verified bound, in one batch
+    think-ghbx  Intake announcement: generate a one-line-per-result summary with X handles where self-declared, names otherwise
+    think-58lu  Codify replies on every intake issue, posted after merge, and read two watched repositories (2026-10-12)
+    think-b6ir  Narrow the negative-control copy-back to links a control checks (about 14.4 MB of archive files)
+    think-0mq7  Grid slack: decide the third generator and its straightening threshold, then run it where grid regions still vary (PR #530)
+    think-gn16  Layer 5: rungs, significance, announcement, reply rule
+    think-em0b  Import dostashev: s(175) <= 13.764174317487, s(232) <= 15.764174317487, s(264) <= 16.774735132388 (#528)
+    think-s2i8  Import Rio Calle: s(102) <= 10.605828696455852 (#529)
+    think-6t6q  Import E. Summins: independent replay of T-037 (Kleddamag s(11) > 31/8 v1.0.2), a confirmation record (#521)
+    think-3m7d  Import E. Summins: simple-square stratification of s(n), n = 11 scoreboard and Lean layer, a strategy registration (#522)
+    think-j891  Import E. Summins: the simple-square climb at n = 17 and n = 19, a 2,500-class census and a compute request (#523)
+    think-s1ru  Import E. Summins: Conjecture ONE-FLUSH(n), its equivalences, reduction and evidence (#524)
+    think-3nc2  Import E. Summins: forced double meeters (Theorem FC, SLOT-CROWD) and the forced-cell traction finding (#525)
+    think-tnfo  Import E. Summins: k = 0 at n = 11, theorems, ten refuted routes with witnesses, measured facts (#526)
+    think-kok7  Import E. Summins: geometry-before-LP toolkit for stratum trees, exact-rational leaf rules, 7.2x on closed nodes (#527)
+    think-6gti  Import Evan Daniel: degree-7213 minimal polynomial of the s(29) record side, polynomial unpublished (#545)
+    think-7scz  Import Evan Daniel: grade-C local minima at 233 configurations of field degree <= 4, 53 current-record counts beyond T-124 (#545)
+    think-cq95  Layer 6: records for the 2026-10-12 intake
+    think-6no5  Import Evan Daniel: s(154) <= 12922566401934059503377267965457/10^30, 5.04e-4 below T-136 (#552)
+    think-r7m8  Independent checks of #557's computations
+    think-00y8  Intake #557: Kleddamag's candidate proof of s(17) = L
+    think-ckjc  Replies after #553 merged
+    think-07jt  Records lane #557: register Overbeck's candidate s(17) = L as T-153 (fast-path PR)
+    think-sdsl  Put the T-153 reviews' questions to the author and post the #557 acknowledgement (owner's call)
+    think-ckp1  Register n=290's exact side below its rounded ceiling
+    think-5bao  Merge the n = 17 stack (#560, #571, #577) and later landings of main into PR #578
+    think-hcqr  Import Fitzharding: s(17) = L by a complete Lean 4 proof (#565)
+    think-mxhc  Answer #565: Fitzharding's registration request (draft; post only on the owner's word)
+    think-jpto  Implement the project changelog, recent PR backfill, and component version policy
+    think-ra01  PR #592 (merge): formalization kind, n = 17 correctness reviews, documented independence of confirmations
+    think-z5gq  Import BuddenPing: s(302) <= 17.870275382734 (#564)
+    think-r8ti  Import BuddenPing: s(146) <= 12.5837822039508342919134679370511513667729, refining T-150 (#566)
+    think-9rm5  Import BuddenPing: s(261) <= 16.6787798753429098149372205115301919485639, refining T-150 (#567)
+    think-ztup  Import BuddenPing: s(105) <= 10.7893037837481588309268366600396176597363 (#568)
+    think-0qvc  Import BuddenPing: s(272) <= 16.9655864748376706357560070334220455696299, refining T-151 (#569)
+    think-z8aj  Import BuddenPing: s(207) <= 14.880960371559, refining T-147 (#503 comment)
+    think-rb3n  Import BuddenPing: s(153) <= 12.870013850408, refining T-148 (#504 comment)
+    think-7xai  Reader pages: state the reported n = 17 proofs (T-153, T-154) on About, README, TUTORIAL, the explainer and the Frontier page
+    think-rfce  Import Francisco Couzo: 154, 156, 176, 211, 237, 241, 271, 302 and beyond-horizon 338-382 (#561, #570, #583, #586)
+    think-k8z2  Import mstrmg (Miles Gray): s(381) <= 19.985624661051481, beyond the case corpus (#582)
+    think-osvq  Import Benjamin Greff (bengreff): s(76) = 9 by a mixed cover (#594)
+    think-h3kb  Restore external scratch capacity for regularization and n17 closeout gates
+    think-nrqu  Import dostashev: s(129) <= 11.870013850405, s(204) <= 14.808663234387, s(303) <= 17.909958291070 (#562)
+    think-x333  Import evand: s(339) <= 18.926898900357, s(364) <= 19.583782203951, s(375) <= 19.882451030482, beyond the case corpus (#584)
+    think-2zz8  Import Mishapolk: exact certificates at n = 103, 153, 207, 209, 258, 270 (#573)
+    think-2ep3  Import Mishapolk: 73 upper bounds across n = 51 to 308 (#593)
+    think-9v2k  Import BuddenPing: 148 certificate refinements, 60 of them exact algebraic or tightened rational (#574)
+    think-yxkt  Import evand: s(365) <= 19.621320343560, s(370) <= 19.767730746255, s(460) <= 21.959969683021, beyond the case corpus (#596)
+    think-abi1  Intake 2026-10-14: evaluate every open upper-bound report per count, in report order, and record only the strongest
+    think-7bw3  Import Kevin Fang: s(380), s(381), s(382) and any other new certificates at TheSnakeFang/squarepack-certs 078789a (no issue)
+    think-h96x  Resolve four scheduled main test-time ceiling overruns without weakening assertions
+    think-0esw  Import Kevin Fang: s(n^2 - n + 1) < n for every n >= 15 and the F(n) excess (Theorems 1-2), with the theorem/ certificates at TheSnakeFang/squarepack-certs 078789a (no issue)
+    think-u0av  Import wand125: s(37) >= 2599/400, s(39) >= 533/80, s(44) >= 2799/400 (check2 fine-net) and s(145) >= 306/25 (linear measure) at wand125/square-packing aba0e59 (no issue)
+    think-tsox  Import wand125: the closed-form lower bound s(N) >= a(N) for every non-square N >= 49 (closed-form-v1, eb0fd19), with its Rust replay checker (no issue)
+    think-5pn5  Watch reads 2026-10-14: ofitzharding/sq17-lean d9653fd, RobertBarnett 52cf1cc, itsnaka 56fa71f (drop think-ga3m), TheSnakeFang 078789a (think-7bw3), wand125 aba0e59, in intake-watch.yaml
+    think-toaf  Keep shared atlas construction within measured test calls
+    think-gzrw  n-029.md prints a verified upper bound 5.43e-20 above its own exact form
+    think-3n1x  Import wand125: the independent checker cfcheck for the closed form (problems/closed-form/indep-checker at 746e2c5), intervals 1 and 34 (#600)
+    think-dfm1  Remove cold atlas construction duplication under the enforced call ceiling
+    think-6esb  Keep the complete malformed-coverage schema gate within the enforced call ceiling
+    think-4il8  Reduce fixture work in the three additional main call-ceiling overruns
+    think-igmd  Keep remaining browser arrivals and forwarder checks within measured test calls
+    think-4syd  Expose an enforced quick-lane checkpoint without weakening full validation
+    think-kh8p  Preserve physical workbench module and JUnit identity in enforced receipts
+    think-w3w7  Retain decimal corner tuple arity refusal in side-only presentation reader
+    think-t01m  Refresh quick shard costs from complete hosted pytest cohort
+    think-j4xs  Avoid repeated cold interpreter imports in real layout collection partition test
+    think-teez  Reuse one fresh source-coverage snapshot per packet apply invocation
+    think-t93p  Avoid unnecessary AST walks in the complete YAML loader policy audit
+    think-ehkm  Retain flushed controller test phases when a shard reaches its command deadline
+    think-jxo0  Remove repeated work in real atlas pool-worker byte comparison
+    think-kxmq  Redesign CI around a three-minute default gate and explicit deeper validation
+    think-o644  Import Mishapolk 70a033f (no issue): 12 KKT refinements below best now at n = 129, 154, 156, 175, 176, 204, 232, 264, 271, 302, 303, 304; 207 undecided
+    think-rvv7  Import Evan Daniel: s(146) <= 12583782190151860342292508597077/10^30, 1.38e-8 below T-150 (#606)
+    think-xoiw  Profile repeated site document rendering at the producer boundary
+    think-qik6  Import Francisco Couzo: 14 campaign upper bounds (237, and 13 beyond 324), 7 replayed Kevin Fang composites, 2 precision refinements (#607)
+    think-nj7h  Import Francisco Couzo: franciscouzo/square-packing 487b058 (no issue): s(211) 9.29e-6 below #586, and 296 certificates beyond 324
+    think-zyyn  Verify the zero-pending live budget state instead of skipping required coverage
+    think-vrof  Remove repeated work from the PR574 exact-bound checks
+    think-abys  Read project-tally attribution inputs once per test invocation
+    think-dmz9  Reduce repeated work in complete Gupta adoption output validation
+    think-y3dt  Refresh stale quick-check weights from the complete hosted cohort
+    think-ribz  Import Benjamin Greff (bengreff): s(95) = 10 by a mixed cover (#610)
+    think-ccjt  Register cases 76 and 95 in the mixed-cover tools, then record the zmx2 + zm_mixed reproductions of T-184 and #610 as evidence
+    think-7wpx  Record each control's mutated output before and after a worker-content change
+    think-zb5w  Import wand125: s(28) > 1149/200 by a continuous-pose certificate (no issue)
+    think-uebw  Profile and reduce repeated witness-schema validation cost
+    think-jabk  Require selected expensive integration checks without slowing unrelated PRs
+    think-u0iy  Evaluate native validation only for the built-in witness schema
+    think-63k0  Restore the gate-selection controls green private-worker baseline
+    think-ezpi  Restore declared verifier and independence inputs in private workers
+    think-wnsv  Intake pass 2026-10-15 evening: carry #616 forward, stage-7 replies, residual reads, resolved blockers
+    think-30n2  Import pingyou: s(29) exact rational certificate, 1.57e-36 below T-155 and 7.32e-90 below #574's N29 (#622)
+    think-yops  Diagnose original main CI timeouts after restoring required browser coverage
+    think-hd6a  Import mstrmg: n = 366 registration request (#624)
+    think-g3q7  Intake process: add a regularization step to result-import.md stages (on adoption/registration of a new best), with a gate that fails on an unregularized current drawing
+    think-qag2  Reopen #575 with a reply if the owner rules for Ostashev's certificate at 176
+    think-phyb  Import evand: exact algebraic sides for 22 current best-known packings (#639)
+    think-a4x3  Import ofitzharding: complete Lean proof of s(19) optimality (#640)
+    think-nqnl  Validate: Fitzharding s(19) Lean proof (#640), full from-source build, axiom check and kernel replay (~190-420 CPU-h estimate; HELD)
+    think-o40t  Review: mathematical correctness of Fitzharding's s(19) Lean proof (#640), strongest tier, after stage 2, for sharing with the author
+    think-xik9  Intake: Oscar Fitzharding's public announcement (X) of the Lean proof of s(19) optimality, ofitzharding/sq19 v1.0.0 (#640)
+    think-slt2  Refine News chooser states, shared topic colors and article spacing
+    think-ny7q  Use gray, colored and pale hover states for compact News filters
+    think-z9za  Give Optimality, Project and Engineering distinct shared topic colors
+    think-w0jm  Tighten shared News card title, date and tag spacing
+    think-e80k  Reduce significance meter padding and match borders to labels
+    think-yznf  Shorten significance tooltips to brief level descriptions
+    think-o6ou  Review verification and confirmation levels for formal proof reports
+    think-mxhw  Conclude outstanding regularization work and verify published drawings
+    think-hg5s  Intake pass 2026-10-16 overnight: sweep residue, regularization 3b/3c, validation review of T-185..T-190
+    think-mu5v  Sweep residue 2026-10-16: wand125 319a779, redundant reads, six resolved blockers, closeable issues, think-tk0u
+    think-tdna  Review: retained replays of T-185 to T-190 (stage 4 review lane, upper bounds registered 15 October)
+    think-1644  PR #641 (merge): regularize every re-housed count during intake
+    think-l8wi  Review: Greff's mixed covers for s(76) = 9 (T-184, #594) and s(95) = 10 (T-191, #610), stage 4 review lane
+    think-jh0n  Import wand125: the Lean kernel proof of ValidTilt9, s(k^2 - 4) = k for every k >= 8 (2c75edc), a formalization of T-081 (#643)
+    think-7fkv  Publish the retained CI retrospective and three-minute gate plan as a draft PR
+    think-9qm5  Intake sweep: report regularization debt (pending counts and owed decisions with their beads), and make regularization a standard step for every new house
+    think-drze  Irregular drawings no bead owns: 292, 131, 273, 126, 259 and others still draw 14 to 36 light + uneven squares after the strong generators decided them
+    think-k6rj  PR #641 C2: gate cannot tell a hand-dropped PENDING_ALLOWED entry from a decided one
+    think-7qxm  Review: T-193, Evan Daniel's exact algebraic sides at 16 counts (#639), stage 4 review lane
+    think-e1u5  PR #651 A1: link #642 and #651 as a formal GitHub stack
+    think-v860  intake_ledger start omits pending entries whose claim does not print their bounds (T-174's rationals)
+    think-e533  PR #653 A4: regularize_select records its tree's revision and a dirty flag
+    think-j9r6  Grid-slack run blocks record summed wall time as cpu_seconds; fix the tool and the 16 October README figures
+    think-9e3w  Records: map the s(19) review onto T-194 (C1) and do T-193's stage 4 exit after its review (#639, #640)
+    think-sa5r  Policy: the house is always the smallest validated packing, regularized in the same PR (owner, 16 Oct)
+    think-wh7r  PR #644 E2: regularization.changes leaves out the regularizer's free-angle turns (129: 21 re-angled squares unrecorded)
+    think-29vy  PR #646 C6: re-cut the site edition at merge after the v0.7.15 collision
+    think-odys  PR #645 C12: restate T-194's next_rung and notes under the V/C rule once #645 and #658 land; retitle think-r109 to C3
+    think-2jzy  Stage 4 review of #622's s(29) certificate (T-195)
+    think-fe3b  PR #644 review I: I3 self-contained retained-run fixture; I4 docstring line
+    think-3mry  Adopt T-174 at its 38 staged rational counts under the house rule, regularizing each in the adoption's PR (#660 A1; 12 more go to T-193 via #658/think-ot5c)
+    think-mbdw  Regularization: a second exact route over number fields, so a strong view at an algebraic house can be admitted (#660 A4)
+    think-z6aj  Measure n = 17's row-3 view against today's ceiling, and ask whether think-x4v4's suspension covers upper-bound certificates at 17 (#660 A11)
+    think-adgd  Standing and supersession read a reported print with no exact form as exact (T-195 hold, #661 A2)
+    think-qu30  Exact sides: hold a closed form whose minimal polynomial is a non-monic quartic (#660 C13)
+    think-8ido  T-193 RE-1: name the packing each of nine exact forms solves, with measured identities (#658 A8)
+    think-3q9x  PR #658: land T-193's house-gate change after #660 merges (review A2 to A5)
+    think-e2sz  Intake pass 2026-10-17
+    think-6wtz  Import Evan Daniel: s(236) <= 15.861934390608, a new local minimum 2.02e-3 below T-146 (#659)
+    think-8o5j  Import Evan Daniel: s(271) <= 16.948947733714, refining Couzo's #561 packing 4.46e-5 below T-186 (#664)
+    think-f40c  Import wand125: 18 fine-net mixed-measure lower bounds at n = 38 to 110, square-lower-bounds-v1 (#446 comment of 16 October)
+    think-xmxb  W1/W2: review all open PRs and reconcile interrupted October intake
+  ok  no open bead under a closed parent, no duplicate open siblings, every deferral owned by an open bead
+
+== soft-schema validation ==
+
+== FN1 original-input bindings ==
+{
+  "schema": "wand125-fn1-input-binding/v1",
+  "input_count": 8,
+  "geometry_replay": false,
+  "bounds_changed": false,
+  "entries": [
+    {
+      "certificate": "mixed_n19_L4825",
+      "compressed_sha256": "9132b84eceb4c9913bcf3065be58828665c5b12469c585f1700c1408c7f43cb7",
+      "decompressed_sha256": "f6b0c354e66563005b0fad7663a6c77172af549dd9feaa3284115c12e43ff063",
+      "candidate_digest": "0527d8a7e465c6d1eb2f5bebd873aac364d4f49de9a3f625c97bcbdc09abb57d",
+      "compressed_bytes": 19660,
+      "source_blob": "2a5983df6d96da56f76010e2beac265755c27689"
+    },
+    {
+      "certificate": "mixed_n20_L4905",
+      "compressed_sha256": "c446837b499de48ede56a5b3a660abf81615b6332a36314012bca642306cd07f",
+      "decompressed_sha256": "45a17658c3881fb18c6e2f60fa4979bb54a7099ff5f3812de95f2f1140f7fbf0",
+      "candidate_digest": "687ce2fbac0922881d6c3819c1a2ce17a16f87b517e3e0f9a2e488b8eb29b2d6",
+      "compressed_bytes": 18568,
+      "source_blob": "ea535ef37ce1c68845e3085b0af0eb3fa92f5009"
+    },
+    {
+      "certificate": "mixed_n26_L5545",
+      "compressed_sha256": "6ea9cce160259694f48b9bb5f1ba3222332b7d8051284278f11a4413c6933c95",
+      "decompressed_sha256": "842bee847fcb1f6aa67fb58dbbe865e1b111028af71a64684b879ce1832fc119",
+      "candidate_digest": "cb94c1fd84f304bf2b53674d4efcfaac1282753d5b579d5e509e8451c0bf884d",
+      "compressed_bytes": 26613,
+      "source_blob": "86ef4bb2003e16a7b0b4528cadf047f1044ce86b"
+    },
+    {
+      "certificate": "mixed_n27_L56435",
+      "compressed_sha256": "e6561fe4d114945a99f81aee05ef3028fb95ee60cf139990e8cd1deffc312dbf",
+      "decompressed_sha256": "210af2260ecd6945dc2490d30418990a1fd174f322be59a6c6a2b03902a61a71",
+      "candidate_digest": "537a411f75516dff40bf9f893e7dc2e96dcdc3e2345a59113585164d84c2ff54",
+      "compressed_bytes": 24444,
+      "source_blob": "789fdc30bcf1dc46c7602878c9e3688ceb38eb87"
+    },
+    {
+      "certificate": "mixed_n28_L5735",
+      "compressed_sha256": "c0218bf04ce2fe50a714cde1a4fe124ec1c90aebc50e5b5d65259cd094522bfd",
+      "decompressed_sha256": "8438a806e1864cd11ae89d9505069e8bffaae8a4d5f9a3705e46268ee827e1de",
+      "candidate_digest": "0e7c5d71425390a69012a462ae27e09349c887e2f1f40a26ac11082fa7c2e2ba",
+      "compressed_bytes": 28866,
+      "source_blob": "336556b2c419be122a4bb1e4e3f6970608264e51"
+    },
+    {
+      "certificate": "mixed_n30_L58835",
+      "compressed_sha256": "6b3d9075e5faa99015409f531c8d3cdc3af69356d9a933e987da5f505ec9d766",
+      "decompressed_sha256": "32f2e77d7871e2ef41e026077816544a9c69de3bd5be12fa742f21986e74cba2",
+      "candidate_digest": "8836a300570e321de3b7a171924dad8850548c130675eb371df07e083ee3b93e",
+      "compressed_bytes": 21967,
+      "source_blob": "66370af859d65b1ddd7f4021e0c1660e32d4ecc1"
+    },
+    {
+      "certificate": "mixed_n39_L665",
+      "compressed_sha256": "012755340a2a7dd214891d3e123ddc29e8dfd6f03c07dccedaf563c02da931ca",
+      "decompressed_sha256": "c05781e733ad0b83769d7944ca0ed8b214f9a6c49bf5a46db7fa19c2c325746a",
+      "candidate_digest": "25b812fe22e7298a5e27f5eac4bc7b8ce6db6d288c8578534d92cde08c1ceb54",
+      "compressed_bytes": 32378,
+      "source_blob": "1266ade4b6a9bdf4ff2f33023d1571e8602a262c"
+    },
+    {
+      "certificate": "mixed_n41_L6775",
+      "compressed_sha256": "cbc04bd94c0f7041178419115990eb193ba52a79bc67efa2a2b7d00f8d9588b2",
+      "decompressed_sha256": "854e8b34748919ef55dcff67ded76b51be6b2860bc874e3adb5c572d1897382e",
+      "candidate_digest": "65a7a107e8e4906c56c4a3adfa365336fbd53d44bec453d1e1e04c5cab52f691",
+      "compressed_bytes": 21220,
+      "source_blob": "b1e02f27b3766ce0b9eff87104b7c282199a69da"
+    }
+  ]
+}
+
+== class records do not claim the unconditional bound ==
+class record claims: 0 failures, 1 exempt
+
+== retained JSON is one record per line ==
+retained JSON layout: 33 file(s) over 5,000 lines held to the layout, 31 exemption(s), 0 failure(s)
+
+== Route S compression admission checkpoint is consistent ==
+Route S compression checkpoint check passed
+
+== generated tables in sync with frontier/ ==
+  6 generated report tables and frontier/STATUS.md match frontier/ (400 data rows)
+
+== strategy catalogues ==
+  search: 28 strategies, 4 families, all fields populated
+  proof: 30 strategies, 6 families, all fields populated
+
+== defect log ==
+  defects.md matches defects.yaml (521 defects)
+  every generated view is exempt from the Markdown formatter
+
+== skills mirrored between .agents and .claude ==
+hand-written skills in sync
+
+== X-027 mathematics parses with pinned KaTeX ==
+
+== synopsis agrees with the artifacts ==
+
+== README agrees with the directory ==
+
+== migrated Markdown writes its math as LaTeX ==
+  math markup: 1530 migrated files checked, 149 spans kept as code
+  backlog: 469 of 2019 hand-written Markdown files not yet migrated, 20 exempt; 23 generated views move at their renderers; 1338 excluded (document-map exclusion 1272, flowmark exclusion 17, tool-owned 49)
+  (2.23s)
+
+== archive annotation census agrees with the archive ==
+archive annotation census: 10 annotated transcriptions, 58 annotations, 1 read the narrative way, 0 failures
+
+== AGENTS.md mirrors the operating rules ==
+  AGENTS.md mirrors all 19 rules in operating-rules.md
+
+== agenda map agrees with the agendas ==
+  agenda map matches 443 commitments across 43 agendas: 20 in progress, 31 ready, 72 blocked, 233 complete
+
+== work accounting agrees on one unit ==
+  work accounting reproduces: 1 shared unit, 4 roles the solver collapses
+
+== assembly coverage agrees with the contract ==
+  assembly coverage reproduces: 17 certificates and 13 typed limitations over n <= 30
+
+== chunk taxonomy agrees with the corpus ==
+  chunk taxonomy reproduces: 3 source strata, 111 components in the residue
+
+== session clocks are readable ==
+  185 session artifacts, 806 phases, 775 carrying a clock: every declared start is one that could have been read
+  note: session-044-agenda006-continuation.md phase 7 starts before phase 6; a delegated lane run in a worktree does this legitimately
+  note: session-151-low-n-review-and-first-party-n17.md phase 4 starts before phase 3; a delegated lane run in a worktree does this legitimately
+  elapsed against budget in session-186-n17-mathematics-and-efficiency.md:
+      phase  1 insight-iteration          11 min against a budget of   30
+      phase  2 efficiency-loop            22 min against a budget of   30
+      phase  3 research-loop              31 min against a budget of   30
+      phase  4 efficiency-loop            30 min against a budget of   30
+      phase  5 research-loop              39 min against a budget of   30
+      phase  6 research-loop              35 min against a budget of   30
+      phase  7 insight-iteration          31 min against a budget of   30
+      phase  8 efficiency-loop            31 min against a budget of   30
+      phase  9 research-loop              50 min against a budget of   30
+      phase 10 research-loop              43 min against a budget of   30
+      phase 11 insight-iteration          11 min against a budget of   30
+      phase 12 review-planning-oversight  14590 min against a budget of   30
+
+== n=5 rigidity certificates still verify ==
+  n=5 cone reproduces: 14 coordinates pinned with exact Farkas certificates, 1 free
+  1 of 1 free directions obstructed at second order by a verified self-stress
+
+== every session's cost is attributed ==
+  the close report and its synopsis view agree with 185 sessions
+214 rollups no session declares (pre-field sessions do this legitimately):
+    11222fc8-7b65-5cb8-8e3b-982ecf899ca8.yaml    span starts 2026-09-05
+    28d4077b-bdef-511a-9dea-be6b8c4337f8.yaml    span starts 2026-10-12
+    35e8ab73-ad4e-41b5-9a56-e0ec1adfcb15.yaml    span starts 2026-09-07
+    387dc0a2-0a91-51c6-bf71-f69e33945398.yaml    span starts 2026-10-11
+    456418a9-4d9f-5777-8b4d-f72dfe4dabde.yaml    span starts 2026-10-11
+    5cd11e53-fb82-4a28-ab2a-0c26f16fe7e5.yaml    span starts 2026-08-30
+    894aa5e3-ede4-4a8b-a3d9-d23e54163083.yaml    span starts 2026-09-28
+    9010767e-5bb7-5e7d-99d2-858400f3969a.yaml    span starts 2026-09-08
+    a0db9ee15ade6fe61.yaml                       span starts 2026-09-07
+    a111e1d2fa5f53b01.yaml                       span starts 2026-09-07
+    a12ef962d0a15bebf.yaml                       span starts 2026-09-07
+    a1a476c8731055c17.yaml                       span starts 2026-09-07
+    a239063cb08b29168.yaml                       span starts 2026-09-07
+    a26ec030a56b8440c.yaml                       span starts 2026-09-07
+    a36e7ccaf6b631c9b.yaml                       span starts 2026-09-07
+    a43bae08bfc5ff474.yaml                       span starts 2026-09-07
+    a46a0ec9964123329.yaml                       span starts 2026-09-07
+    a47a35ef4431682e7.yaml                       span starts 2026-09-07
+    a4e2e0cfd6ec7807f.yaml                       span starts 2026-09-07
+    a55a92f0c5d0a6bd3.yaml                       span starts 2026-09-07
+    a5e7f904f3399f8f6.yaml                       span starts 2026-09-07
+    a5f694d0e668eb739.yaml                       span starts 2026-09-07
+    a64b38456e125068f.yaml                       span starts 2026-09-07
+    a6c89c40072f7c002.yaml                       span starts 2026-09-07
+    a78f6ef8b49142830.yaml                       span starts 2026-09-07
+    a7a7ceaa7bd33b8b3.yaml                       span starts 2026-09-07
+    a85c772de5ad30e5d.yaml                       span starts 2026-09-07
+    a89d83a407053fb83.yaml                       span starts 2026-09-07
+    a8d329430c32a2e6d.yaml                       span starts 2026-09-07
+    a8d7d80db12f3d174.yaml                       span starts 2026-09-07
+    a8db29bb0095a31b4.yaml                       span starts 2026-09-07
+    a9b9b284ad2dfc7c9.yaml                       span starts 2026-09-07
+    a9e1902ee68a8be1e.yaml                       span starts 2026-09-07
+    a9f86294dfc3c1a2f.yaml                       span starts 2026-09-07
+    aa2932cd1b7d84502.yaml                       span starts 2026-09-07
+    aa96ae9ba0acbfe88.yaml                       span starts 2026-09-07
+    ab433852149216fca.yaml                       span starts 2026-09-07
+    ab9f4da0aa95625f4.yaml                       span starts 2026-09-07
+    aba98822ec70381be.yaml                       span starts 2026-09-07
+    ac7ba8e2e36a59c3f.yaml                       span starts 2026-09-07
+    ad4f6b7a8ea346050.yaml                       span starts 2026-09-07
+    ad87a13807cdd996d.yaml                       span starts 2026-09-07
+    ad9ea87d53de3f375.yaml                       span starts 2026-09-07
+    addd7880d2ee9e4e8.yaml                       span starts 2026-09-07
+    ae2b98d674d84437d.yaml                       span starts 2026-09-07
+    ae423b4491880dd7a.yaml                       span starts 2026-09-07
+    af9cf70e49498fdcd.yaml                       span starts 2026-09-07
+    aff0747e3336f450e.yaml                       span starts 2026-09-07
+    aff102ab8ef57c5af.yaml                       span starts 2026-09-07
+    agent-a011cc222d6df9f13.yaml                 span starts 2026-10-11
+    agent-a0167196f910fcd68.yaml                 span starts 2026-10-12
+    agent-a03748098ddaa724f.yaml                 span starts 2026-10-13
+    agent-a06a55470e3c146a3.yaml                 span starts 2026-10-12
+    agent-a071451124e9c1977.yaml                 span starts 2026-10-11
+    agent-a083f5edf89079571.yaml                 span starts 2026-10-11
+    agent-a08edd169546ca236.yaml                 span starts 2026-10-11
+    agent-a08f3946676cbcc6f.yaml                 span starts 2026-10-14
+    agent-a0a4b8f10faa3af55.yaml                 span starts 2026-09-08
+    agent-a0cbc8a8625fc3a48.yaml                 span starts 2026-10-12
+    agent-a0d6c1ad57fec2115.yaml                 span starts 2026-10-10
+    agent-a1068c79ef45f69b5.yaml                 span starts 2026-10-11
+    agent-a10888f5a2fd13100.yaml                 span starts 2026-10-11
+    agent-a11014c31dd6436e7.yaml                 span starts 2026-10-12
+    agent-a12ee45b02556fe77.yaml                 span starts 2026-10-11
+    agent-a139890ae4462f327.yaml                 span starts 2026-10-11
+    agent-a14b7b7eaadbb1806.yaml                 span starts 2026-10-14
+    agent-a16342d415747a15f.yaml                 span starts 2026-10-10
+    agent-a16eb85fa5fc890aa.yaml                 span starts 2026-10-12
+    agent-a17d853b8856c5169.yaml                 span starts 2026-10-10
+    agent-a1a6d43e4d2761761.yaml                 span starts 2026-10-10
+    agent-a1b70b9b5fc3a1369.yaml                 span starts 2026-10-13
+    agent-a1e19192c86a18113.yaml                 span starts 2026-10-13
+    agent-a2005bc0419561660.yaml                 span starts 2026-10-12
+    agent-a20a69aa8145fdddf.yaml                 span starts 2026-10-12
+    agent-a242efd549d80d0ae.yaml                 span starts 2026-10-12
+    agent-a252d156c8501f9c5.yaml                 span starts 2026-10-12
+    agent-a26d26b4448852fc5.yaml                 span starts 2026-10-10
+    agent-a2856a0982cd86969.yaml                 span starts 2026-10-12
+    agent-a29aa05c090097181.yaml                 span starts 2026-08-29
+    agent-a2b0910a834fe014e.yaml                 span starts 2026-10-14
+    agent-a2b26389a68623fec.yaml                 span starts 2026-08-29
+    agent-a33de5cda68279e31.yaml                 span starts 2026-10-12
+    agent-a3416c54ccc40832e.yaml                 span starts 2026-10-12
+    agent-a34297660e2292e07.yaml                 span starts 2026-09-08
+    agent-a352dd4b254da0afc.yaml                 span starts 2026-09-08
+    agent-a354094fb22c18d31.yaml                 span starts 2026-10-12
+    agent-a37be0a83978f08f6.yaml                 span starts 2026-10-12
+    agent-a3d3681a4b18ca3ed.yaml                 span starts 2026-10-11
+    agent-a3f94adbd6e0a919b.yaml                 span starts 2026-10-12
+    agent-a45ab9e0e00fe9076.yaml                 span starts 2026-10-13
+    agent-a45d986d0210d7ec5.yaml                 span starts 2026-10-10
+    agent-a498c3f37ac3199b7.yaml                 span starts 2026-08-29
+    agent-a4a75cb3921cba0d8.yaml                 span starts 2026-08-29
+    agent-a4cb59249f83c802a.yaml                 span starts 2026-10-10
+    agent-a5216ea30b8b8ce96.yaml                 span starts 2026-10-14
+    agent-a526a036278895efc.yaml                 span starts 2026-10-11
+    agent-a52951eff0f5644d2.yaml                 span starts 2026-10-12
+    agent-a558a5333cb887880.yaml                 span starts 2026-10-12
+    agent-a5700fa32f52e605d.yaml                 span starts 2026-09-08
+    agent-a5d295abde4d09a70.yaml                 span starts 2026-10-14
+    agent-a5d3587297abc1137.yaml                 span starts 2026-10-11
+    agent-a5e938b4cf9effee0.yaml                 span starts 2026-10-12
+    agent-a6182a4e8c2ad9931.yaml                 span starts 2026-10-13
+    agent-a62afbae4785f826a.yaml                 span starts 2026-10-12
+    agent-a65f7ffc90a7523a6.yaml                 span starts 2026-10-10
+    agent-a6860500b6bc15836.yaml                 span starts 2026-10-12
+    agent-a6a01bf75f2ba5ea9.yaml                 span starts 2026-10-11
+    agent-a707205c75e3c5431.yaml                 span starts 2026-09-23
+    agent-a717630f351063391.yaml                 span starts 2026-10-10
+    agent-a7190a01c1e048c4b.yaml                 span starts 2026-10-13
+    agent-a74546a7611ea2549.yaml                 span starts 2026-09-24
+    agent-a77991fdc413ad30d.yaml                 span starts 2026-10-12
+    agent-a790e638083667522.yaml                 span starts 2026-10-11
+    agent-a795a627b86cc1149.yaml                 span starts 2026-10-11
+    agent-a7a658f3e0eba311e.yaml                 span starts 2026-10-12
+    agent-a7c3f30347ea4640b.yaml                 span starts 2026-08-29
+    agent-a7c7887a3045fbc12.yaml                 span starts 2026-10-10
+    agent-a7d3efe4c4511d0ed.yaml                 span starts 2026-10-12
+    agent-a84da2374f947e8a6.yaml                 span starts 2026-08-29
+    agent-a84fbe513c757c899.yaml                 span starts 2026-09-08
+    agent-a86d4098c7e60167c.yaml                 span starts 2026-10-11
+    agent-a87a9f012cfec6bf0.yaml                 span starts 2026-10-11
+    agent-a8a06078d486d466a.yaml                 span starts 2026-10-12
+    agent-a8faee13c4ef1173d.yaml                 span starts 2026-10-11
+    agent-a9063ef70f8b26a7a.yaml                 span starts 2026-10-14
+    agent-a9267b496fd91a64d.yaml                 span starts 2026-10-12
+    agent-a93d11365c62eefe2.yaml                 span starts 2026-08-29
+    agent-a940d047cfb981896.yaml                 span starts 2026-10-12
+    agent-a95ec8524a719d868.yaml                 span starts 2026-09-08
+    agent-a9618067d54db172b.yaml                 span starts 2026-10-12
+    agent-a96d05b94bf14e20a.yaml                 span starts 2026-10-10
+    agent-a98213c7a81ccc393.yaml                 span starts 2026-10-10
+    agent-a9b94d6aa27948295.yaml                 span starts 2026-10-12
+    agent-a9d8fa9c23fcafee7.yaml                 span starts 2026-10-10
+    agent-a9f0d5b33c6a8afa4.yaml                 span starts 2026-10-12
+    agent-a9f5ed23077e16d8d.yaml                 span starts 2026-10-14
+    agent-aa2600ec1412c5ddb.yaml                 span starts 2026-10-10
+    agent-aa48d92ed84f9f4ca.yaml                 span starts 2026-10-12
+    agent-aa5acfe90f7eb1681.yaml                 span starts 2026-10-13
+    agent-aa7e2838e10dafaa4.yaml                 span starts 2026-10-11
+    agent-aa8f7a174adb0d25e.yaml                 span starts 2026-10-10
+    agent-aa9fa88dc2268833c.yaml                 span starts 2026-10-10
+    agent-aaaf4d68d6a5916dd.yaml                 span starts 2026-08-29
+    agent-aaf0a7c4205ec3cb5.yaml                 span starts 2026-10-13
+    agent-aaf676ffde6e7135d.yaml                 span starts 2026-10-10
+    agent-ab132bac51daef3a4.yaml                 span starts 2026-10-14
+    agent-ab41d23ec2e273420.yaml                 span starts 2026-10-12
+    agent-ab6efb74f996ab04b.yaml                 span starts 2026-10-12
+    agent-abbe31cba2e78771b.yaml                 span starts 2026-10-12
+    agent-abe4242091e30fcb5.yaml                 span starts 2026-10-12
+    agent-ac023df3fbe3880aa.yaml                 span starts 2026-10-11
+    agent-ac18bbf0f290f9dea.yaml                 span starts 2026-10-10
+    agent-ac23697def198d73b.yaml                 span starts 2026-10-10
+    agent-ac3948f5c0392da9f.yaml                 span starts 2026-10-12
+    agent-ac4983cfde728f524.yaml                 span starts 2026-10-11
+    agent-ac5512d093f1a5f97.yaml                 span starts 2026-10-11
+    agent-ac820c030272dfee0.yaml                 span starts 2026-10-11
+    agent-ac86b33c9ba834e48.yaml                 span starts 2026-10-12
+    agent-ac898de73570860b2.yaml                 span starts 2026-10-11
+    agent-aca26f1f60d5479c0.yaml                 span starts 2026-10-12
+    agent-acaa529c175fa58a5.yaml                 span starts 2026-10-12
+    agent-acad637db467d827d.yaml                 span starts 2026-10-12
+    agent-accfca805f72a3ce7.yaml                 span starts 2026-10-11
+    agent-acd310efbd76a74d1.yaml                 span starts 2026-10-12
+    agent-acdab8c31142d473a.yaml                 span starts 2026-10-13
+    agent-acdfff04486c4f34e.yaml                 span starts 2026-10-12
+    agent-acf69446d27af85ee.yaml                 span starts 2026-10-12
+    agent-ad2ad145229f6acb2.yaml                 span starts 2026-10-11
+    agent-ad4fa320871ccb912.yaml                 span starts 2026-10-14
+    agent-ad53aec90a65f8e45.yaml                 span starts 2026-10-11
+    agent-ad6222b29b6c64137.yaml                 span starts 2026-10-10
+    agent-ad6780f12d8b9dd5b.yaml                 span starts 2026-10-11
+    agent-ad8b905ad5cec3f32.yaml                 span starts 2026-10-11
+    agent-ada1c00522b840796.yaml                 span starts 2026-10-12
+    agent-adf4676833d746daf.yaml                 span starts 2026-10-10
+    agent-ae20dced27ea45031.yaml                 span starts 2026-10-10
+    agent-ae2ab8bf71c6979d9.yaml                 span starts 2026-10-12
+    agent-ae3174122e07656f4.yaml                 span starts 2026-10-10
+    agent-ae46e3b9f939fdcc9.yaml                 span starts 2026-10-12
+    agent-ae78a4077b6ecafac.yaml                 span starts 2026-08-29
+    agent-ae7e1e6d77dc3301f.yaml                 span starts 2026-10-13
+    agent-aea6e45c2fb8e7a4d.yaml                 span starts 2026-10-11
+    agent-aeb41492abe327e92.yaml                 span starts 2026-10-12
+    agent-aebb5ec1bc44bd991.yaml                 span starts 2026-10-13
+    agent-aecf342fc0b42d30d.yaml                 span starts 2026-10-12
+    agent-aee718f92b61a1293.yaml                 span starts 2026-10-11
+    agent-af1304354bf317e13.yaml                 span starts 2026-10-10
+    agent-af22382952a5d839e.yaml                 span starts 2026-10-10
+    agent-af2bba7ed63e3f9e5.yaml                 span starts 2026-10-10
+    agent-af3c94f7d89d86292.yaml                 span starts 2026-10-11
+    agent-af50ac6f952ba9008.yaml                 span starts 2026-10-12
+    agent-af6b118a4767d1278.yaml                 span starts 2026-10-10
+    agent-af77bc1990859851b.yaml                 span starts 2026-10-10
+    agent-af79b930e2e4e5db3.yaml                 span starts 2026-10-11
+    agent-afa06ae671f93c1a9.yaml                 span starts 2026-10-10
+    agent-afa2878c1e588ead3.yaml                 span starts 2026-10-12
+    agent-afc2c852a1be6beb9.yaml                 span starts 2026-10-12
+    agent-afcc17056fbe7fb53.yaml                 span starts 2026-10-10
+    agent-afd0e09abab917b31.yaml                 span starts 2026-10-10
+    agent-afda68485dfcb8eea.yaml                 span starts 2026-10-10
+    agent-afe6ee10554b8b071.yaml                 span starts 2026-10-10
+    agent-aff8d2c1bb39e3d11.yaml                 span starts 2026-09-24
+    b5cf94b1-01cb-4a19-bb70-9051d5eecc8d.yaml    span starts 2026-09-21
+    b631c4e5-343e-524d-b3e3-75217093489f.yaml    span starts 2026-10-14
+    codex-task-tree-pr137-publication-tail.yaml  span starts 2026-09-09
+    codex-task-tree-pr142-publication-tail.yaml  span starts 2026-09-09
+    codex-task-tree-pr410-preparation-checkpoint span starts 2026-10-08
+    codex-task-tree-session184-through-100444.ya span starts 2026-10-07
+    codex-task-tree-session184-through-121500.ya span starts 2026-10-07
+    codex-task-tree-session184-through-20261007T span starts 2026-10-07
+    codex-task-tree-session185-checkpoint.yaml   span starts 2026-10-07
+    codex-task-tree-session186-checkpoint0148.ya span starts 2026-10-08
+    codex-task-tree-session186-checkpoint0535.ya span starts 2026-10-08
+    f60d937a-f117-59ae-9cf5-3bab82b979ce.yaml    span starts 2026-10-10
+
+185 terminal sessions: 129 declare rollups that exist, 12 explicitly unmeasured, 44 predate the requirement
+
+== the branch cost rollup renders ==
+  the branch cost rollup renders for 173 branches, and for none
+
+== control anchors still resolve ==
+174 negative control anchors each match their file exactly once
+
+== tier ceilings are declared and not slack ==
+note: the drift and stale rules are advisory on pull requests under live bead think-be1s: Owner decision 2026-10-01 under think-53a2: on 2026-09-30 the checks tier read 59.4 to 137.1 s and shard C 62.96 to 143.87 s across one day's hosted runs of unchanged work, 2.3x on identical code, and the drift and stale rules failed four runs with every test green. On a pull request both rules report and do not fail until think-be1s arms them against run-to-run spread -- a median over hosted samples or a runner-normalised wall -- rather than one reading. The independent ceiling policy below states which completed-run cost findings remain advisory.
+note: the tier ceilings and the per-test call-wall rule are advisory on pull requests under live bead think-ht59: Owner decision 2026-10-10 under think-ht59: of 36 red pushes reviewed on 2026-10-05, 28 failed only on a wall verdict with every test green. Hosted runner draws vary 1.6 to 2.3x on unchanged work (think-g4n9, think-53a2). The completed 399s frontend run on PR462 passed all 408 tests and four HTTP budgets, yet hang_ratio 2 against the unchanged 165s cost ceiling misclassified it as a hang. Completed-run PR cost is advisory until think-ht59 establishes attributable, controlled measurements; functional failures, actual command deadlines, explicit timeout caps and the 45s per-test guard remain enforced. On 2026-10-15 run 38763716551 at 43ee60f6 completed every quick assertion but failed 11 calls at 12.39–27.72s. Against run 38756833833, 590 matched successful nodes previously taking 1–3s had median inclusive duration ratio 1.636; these are setup/call/teardown totals, not CALL attribution. Extend only CALL advisory to hosted main/dispatch/schedule under think-ht59. Keep 12s classification output, 45s hard CALL backstop, strict local defaults and explicit --enforce-budget at 12s. Whole-job/full/workflow ceilings and all coverage stay unchanged. This revises noisy cost enforcement; it saves no scientific execution and makes no three-minute claim.
+note: pull-request wall 'packing-validation' is advisory under live bead think-g4n9: Owner decision 2026-09-17: five hosted runs read 194, 189, 178, 166 and 216 s on 1.6-1.8x runner variance, so the wall is reported rather than enforced until think-g4n9 holds it at or under 180 s.
+note: pull-request wall 'certificate-page' is advisory under live bead think-g4n9: Owner decision 2026-09-17 covers the pull-request wall generally, and this wall has also read over 180 s on PR 188 itself (182 s, run 35182460356), so it is reported rather than enforced until think-g4n9 re-enforces both walls.
+gate budget declaration passed: 15 tiers, 10 with a recorded cost, all ceilings within 2x of it, every pull-request tier (checks, frontend, geometry, measure_verifier, suite_a, suite_b, suite_c, suite_d, sweeps, typecheck) recorded from hosted runs, no unattributed rise, the pull-request walls inside OR-14 and wired with every advisory wall tracked by a live bead, all named in development.md
+
+== the borrowed lower bounds re-derive ==
+26 lower bounds re-derived from Nagamochi's Theorem 2 and 203 from Karakuş's (6.1), all agreeing, none inverted; the README, case-body, citation (319) and operative (0) counts agree with the records
+
+== regularized atlas views match their index ==
+324 records {'refused': 51, 'regularized': 92, 'unchanged': 181}, refusals {'promotion-overlap': 50, 'unsupported-scalar-kind': 1}; house light 7720 -> 5328 (green 45251 -> 45781); stage light 6361 -> 5327; residual regressions {'house': 0, 'stage': 0}; held squares 1
+regularized atlas check passed in 2.36s
+
+== regularized atlas drawings match their index ==
+regularized renderings check passed: 92 regularized views drawn by the house renderer
+
+== default pictures improve on their house drawings ==
+n=70 keeps the house picture: no gain
+n=102 keeps the house picture: no gain
+n=103 keeps the house picture: no gain
+n=236 keeps the house picture: no gain
+n=258 keeps the house picture: no gain
+n=261 keeps the house picture: no gain
+n=263 keeps the house picture: no gain
+n=269 keeps the house picture: no gain
+n=295 keeps the house picture: no gain
+rule (docs/project/policies/regularization-policy.md#11-the-improvement-rule): A view improves on a drawing when it is worse than the drawing on none of the goals and better on at least one. Ties on the other goals are fine, and a tie on every goal is no improvement. The goals: light squares: fewer is better; uneven squares: fewer is better; near-axis squares: fewer is better; angle classes: fewer is better; hues: fewer is better; house total of full shared sides: more is better; stage total of full shared sides: more is better; exact side: smaller is better; exactness: exactly verified is better than numerically checked.
+regularization states: 324 counts: 73 regularized, 232 regular as published, 15 decided no better, 4 exempt, 0 pending
+default drawings check passed: 83 of 92 drawn views are their counts' default pictures, each improving on its house drawing; 9 keep the house
+
+== every drawn picture is regularized, regular as published, decided or exempt ==
+PENDING_ALLOWED: 0 counts
+regularization states: 324 counts: 73 regularized, 232 regular as published, 15 decided no better, 4 exempt, 0 pending
+CORRECTED is held to the record at the merge base of HEAD^1; nothing is deferred, so none was read
+regularization state check passed: every count is regularized, regular as published, decided or exempt, or pending and named in PENDING_ALLOWED, which equals the pending set and grows only by a reviewed change naming its bead
+
+== the Lean replay receipt for s(k^2-2) = k holds ==
+replay passed: SquarePackingArchive.Records.NearSquare.squareMinusTwo_isMinimumSide depends only on Classical.choice, Quot.sound, propext; build step 13.7 s over an existing build, 4 module(s) rebuilt, at 753079eb
+
+== the vendored regularizer matches its manifest ==
+vendored copy check passed: 351 files match vendored.yaml (pinned at https://github.com/evand/square-packing@675a5ea, 1 local change(s) recorded), not compared with upstream (--upstream does that)
+
+== the register's reliance on T-007 is inventoried ==
+T-007 consumer audit current: 324 cases
+
+== the inventory agrees with the register ==
+inventory agrees with 614 evidence records
+packing/frontier/VERIFIERS.md agrees with verifiers.yaml and evidence.yaml
+324 case records' verification-code sections agree with the records
+
+== results rungs are earned and the view agrees ==
+194 registered results: every declared rung passes its structural checks, every path, source and produced_by id resolves, every headline and date holds, every kind agrees with its claim and evidence, every declared supersession names a result no earlier on a shared case, never supersedes all of a result a case bound rests on and never leads back, every unfinished confirmation lies above its result's rung, every regularization names a registered packing no later on the count it regularizes, by a source of its own, every recent case lower bound is covered, every reader-tier mention exists; by status, 14 recorded, 12 reviewed, 167 confirmed, 1 incomplete
+packing/frontier/RESULTS.md agrees with results.yaml
+
+== the synopsis headline carries every result ==
+  synopsis headline carries all 194 registered results
+
+== exact certificates are named by their records ==
+10 case packages certify 18 sizes, every one cited by its record
+  cases/gobel10 -> [10]
+  cases/gobel40 -> [40]
+  cases/gobel5 -> [5]
+  cases/gobel82 -> [82]
+  cases/gobel_family -> [65, 89]
+  cases/gobel_offcentre -> [26, 85]
+  cases/gobel_strip -> [27, 38, 52, 67, 84]
+  cases/lifted_q2 -> [19, 66]
+  cases/lifted_q7 -> [18, 86]
+  cases/trump11 -> [11]
+5 verified certificates wait for their case records by a recorded deferral (certificate-citation-deferrals.yaml): E-bengreff-594-cover-replay, E-bengreff-610-cover-replay, E-pingyou-574-algebraic-feasibility, E-wand125-closed-form-cfcheck-sample, E-wand125-closed-form-replay4d-sample
+
+== rung figures agree with their certificates ==
+  194 results and 574 certificate-bearing evidence entries checked, 31 certificate artifacts recomputed from their own atoms, all quoted figures and fraction-decimal claims agree (results.yaml, evidence.yaml, defects.yaml)
+
+== standings agree with the bounds their entries state ==
+OK: 194 results, each standing agrees with the bounds the entry states; 162 state a bound this reads
+
+== SQUISH update certification binds complete reviewed inputs ==
+SQUISH update packet: certification bound without rerunning decisions
+
+== SQUISH second update certification binds complete reviewed inputs ==
+
+== rational refinement custody binds complete replay inputs ==
+13 complete replay jobs structurally admitted; no new scientific execution
+
+== result requests name registered results ==
+result requests: 127 issues, 70 open; every id resolves
+  #420  open   0/1 settled     
+  #419  open   1/3 settled     
+  #399  closed 1/1 settled     
+  #432  closed 3/3 settled     
+  #400  open   1/1 settled     
+  #405  open   1/1 settled     
+  #413  open   1/11 settled    
+  #414  open   2/2 settled     
+  #411  closed 1/1 settled     
+  #375  open   7/10 settled    
+  #368  closed 1/2 settled     
+  #367  open   0/0 settled     
+  #366  closed 13/13 settled   
+  #363  closed 1/1 settled     
+  #358  open   0/0 settled     
+  #317  open   0/0 settled     closeable
+  #316  closed 1/2 settled     
+  #309  closed 1/1 settled     
+  #308  closed 1/1 settled     
+  #296  closed 2/2 settled     
+  #295  closed 3/3 settled     
+  #294  closed 3/3 settled     
+  #282  closed 14/14 settled   
+  #281  closed 1/1 settled     
+  #280  closed 1/1 settled     
+  #279  closed 1/1 settled     
+  #256  closed 2/2 settled     
+  #247  closed 1/1 settled     
+  #238  closed 4/4 settled     
+  #227  closed 1/1 settled     
+  #170  closed 1/1 settled     
+  #401  closed 3/3 settled     
+  #422  closed 2/2 settled     
+  #428  open   1/3 settled     
+  #446  open   0/11 settled    reply due
+  #451  closed 2/2 settled     
+  #425  closed 4/4 settled     
+  #438  closed 2/2 settled     
+  #445  closed 1/1 settled     
+  #465  closed 3/3 settled     
+  #470  open   4/4 settled     closeable
+  #471  closed 4/4 settled     
+  #472  closed 2/2 settled     
+  #476  closed 1/1 settled     
+  #481  closed 2/2 settled     
+  #483  closed 1/1 settled     
+  #484  closed 2/2 settled     
+  #485  open   5/6 settled     
+  #486  closed 1/1 settled     
+  #488  closed 3/3 settled     
+  #489  closed 3/3 settled     
+  #494  open   0/1 settled     
+  #495  open   0/2 settled     
+  #503  closed 2/2 settled     
+  #504  closed 2/2 settled     
+  #501  closed 2/2 settled     
+  #505  closed 1/1 settled     
+  #500  closed 2/2 settled     
+  #506  closed 5/5 settled     reply due
+  #557  open   0/1 settled     reply due
+  #565  open   0/1 settled     reply due
+  #521  open   0/1 settled     
+  #522  open   4/5 settled     
+  #523  open   2/2 settled     
+  #524  open   1/1 settled     
+  #525  open   1/1 settled     
+  #526  open   1/1 settled     
+  #527  open   1/1 settled     
+  #528  closed 4/4 settled     
+  #529  open   4/4 settled     closeable
+  #532  open   0/0 settled     
+  #533  open   0/0 settled     
+  #534  open   0/1 settled     
+  #535  open   0/0 settled     
+  #536  open   0/0 settled     
+  #537  open   0/0 settled     
+  #538  open   0/0 settled     
+  #539  open   0/0 settled     
+  #540  open   0/0 settled     
+  #541  open   0/0 settled     
+  #542  open   0/0 settled     
+  #543  open   0/0 settled     
+  #544  open   0/0 settled     
+  #545  open   0/2 settled     
+  #550  open   0/0 settled     
+  #554  open   0/0 settled     
+  #552  closed 3/3 settled     
+  #561  closed 2/2 settled     
+  #562  closed 1/1 settled     
+  #564  closed 1/1 settled     
+  #566  closed 1/1 settled     
+  #567  closed 1/1 settled     
+  #568  closed 1/1 settled     
+  #569  closed 1/1 settled     
+  #570  open   2/2 settled     reply due, closeable
+  #573  open   2/2 settled     closeable
+  #574  open   1/1 settled     reply due, closeable
+  #575  closed 2/2 settled     
+  #582  open   1/1 settled     closeable
+  #583  closed 3/3 settled     
+  #584  open   1/1 settled     closeable
+  #586  closed 3/3 settled     
+  #589  closed 1/1 settled     
+  #593  open   4/4 settled     reply due, closeable
+  #594  open   1/2 settled     reply due
+  #596  closed 1/1 settled     
+  #600  open   0/1 settled     
+  #603  open   0/1 settled     
+  #643  open   0/1 settled     reply due
+  #606  open   2/2 settled     reply due, closeable
+  #607  open   2/3 settled     reply due
+  #610  open   0/1 settled     reply due
+  #613  open   0/0 settled     
+  #622  open   0/1 settled     
+  #624  open   1/1 settled     closeable
+  #639  open   3/4 settled     reply due
+  #640  open   0/1 settled     reply due
+  #659  open   0/1 settled     reply due
+  #664  open   0/1 settled     reply due
+  #666  open   awaiting triage reply due
+  #668  open   awaiting triage reply due
+  #669  open   awaiting triage reply due
+  #670  open   awaiting triage reply due
+  #672  open   awaiting triage reply due
+  #673  open   awaiting triage reply due
+  #674  open   awaiting triage reply due
+  #675  open   awaiting triage reply due
+
+== case prose agrees with its own front matter ==
+  324 case files checked, every quoted bound figure and fraction-decimal claim in their prose agrees with their own front matter
+
+== reader prose credits and links, without audit mechanics ==
+reader prose carries no audit mechanics: 194 register entries and 346 reader documents read, 1 flagged words excused by name
+
+== terminal sessions name what they cost ==
+  129 terminal sessions declare 417 resource rollups, all present
+  12 stopped sessions explicitly record unavailable resource measurement: session-099, session-128, session-129, session-130, session-136, session-137, session-138, session-139, session-140, session-141, session-182, session-183
+  44 closed before the field existed and are not checked: session-001, session-002, session-003, session-004, session-005, session-006, session-007, session-008, session-009, session-010, session-011, session-012, session-013, session-014, session-015, session-016, session-017, session-018, session-019, session-020, session-021, session-022, session-023, session-024, session-025, session-026, session-027, session-028, session-029, session-030, session-031, session-032, session-033, session-034, session-035, session-036, session-037, session-038, session-039, session-040, session-041, session-042, session-043, session-044
+
+== terminal sessions name the gate that certified them ==
+  89 terminal sessions name a full-gate run on a commit in their history
+  10 stopped sessions remain UNCERTIFIED; follow-up owners:
+    session-123 -> think-ta8s
+    session-124 -> think-ta8s
+    session-136 -> think-g4n9
+    session-137 -> think-g4n9
+    session-138 -> think-qqzs
+    session-151 -> think-gvlg
+    session-161 -> think-l6la
+    session-184 -> think-7hy3
+    session-185 -> think-7hy3
+    session-186 -> think-7hy3
+  86 closed before the rule existed and are not checked: session-001..session-086 (86 sessions)
+
+== Goebel's family reaches the sizes it reaches ==
+  Goebel family reproduces: 12 sizes below 100, optimal at [5, 40, 65, 89], exact and unbuilt at []
+
+== campaign record ==
+OK 1 series, 50 reports, 283 hypotheses, 246 rounds, 185 agent sessions, 43 agendas, 2 logbook entries
+  time-based refusals: 0 judged, 0 uncheckable (HEAD committed 2026-10-16T23:37:10-07:00)
+  403 declared packing-CLI invocations parse against their own CLIs
+
+== where the time went ==
+    42.35s  default pictures improve on their house drawings
+    20.36s  every session's cost is attributed
+    16.96s  retained JSON is one record per line
+    13.41s  regularized atlas drawings match their index
+     8.48s  terminal sessions name the gate that certified them
+     7.37s  soft-schema validation
+     6.65s  synopsis agrees with the artifacts
+     5.64s  the branch cost rollup renders
+    88.62s  TOTAL (wall)
+
+== the tier against its ceiling ==
+    88.62s  wall of a 300s ceiling (30%), never recorded at this shape
+  note: no cost is recorded for the records tier at 2 cpus, --jobs 2 --inner-jobs 1; write `measured_seconds: 88.6` into /Users/levy/wrk/github/squares/.worktrees/intake-review-20261018/packing/devtools/gate-budgets.yaml to arm the drift rule
+  note: within the declared band, but this run's shape (10 cpus, 2 jobs, 1 inner) is not the records tier's reference (2 cpus, --jobs 2 --inner-jobs 1), so the band was reported and not enforced
+
+6 STEPS FAILED:
+  - lint floor (ruff)
+  - published URL registry and historical compatibility
+  - soft-schema validation
+  - X-027 mathematics parses with pinned KaTeX
+  - synopsis agrees with the artifacts
+  - README agrees with the directory
+FAILURE CLASS: 6 steps failed (lint floor (ruff), published URL registry and historical compatibility, soft-schema validation, X-027 mathematics parses with pinned KaTeX, synopsis agrees with the artifacts, README agrees with the directory)

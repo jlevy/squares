@@ -710,6 +710,71 @@ The complete hosted checkpoint and local diagnostic dispositions are recorded in
 receipts carry the final status.
 The draft remains unmerged, and archive population remains open.
 
+### Senior Review and Upstream Integration: 2026-10-18
+
+The next integration incorporates 381 commits from main through `d167d4b86`. Work runs
+in an external-drive worktree, separate from both the active main checkout and the
+original profile checkout.
+Fourteen files conflicted: source records, generated indexes, the document map and
+release declarations.
+Resolutions preserve upstream result status, evidence and publication history through
+site v0.7.27, posters v0.6.3 and methods survey v0.2.3. The profiles edition remains
+v0.8.0.
+
+Two independent Astra reviews examined the identity model, attribution boundaries,
+rendering and publication interfaces, navigation, accessibility and design-system
+consistency. They found the following defects:
+
+- Reconciliation authorized a new source occurrence from a matching label or alias.
+  New and changed spans now remain unresolved; candidate identities appear in the report
+  for source-specific review.
+  Unchanged reviewed source fields retain their decisions.
+  `think-um9i` tracks this correction.
+- Reconciliation could add an extractor’s whole-field span over a reviewed substring.
+  It now preserves reviewed field coverage and validates the proposed complete manifest
+  before atomic replacement.
+  Failed validation leaves the prior file intact.
+- A delayed profile response could replace a newer ordinary native popover, or navigate
+  away after the reader opened that newer panel.
+  Native openings now cancel pending article requests; success and failure responses
+  have regression coverage under `think-uivz`.
+- The profile-build command in the component README was invalid.
+  The documented command now uses `devtools.render_overview` through the locked project
+  environment.
+
+The design review also requested readable role labels and a person-specific accessible
+name for profile dialogs.
+Those changes preserve credit provenance and use the existing article heading.
+The earlier suggestion of a failed-stylesheet loading hang was not reproduced for 404,
+500, aborted or wrong-MIME responses in the supported Chromium; disabled and preload
+stylesheets are not emitted by the site.
+
+The source-context audit checked all 729 existing automatically joined spans: 728
+retained their supported identities and one stale Couzo span was removed after the
+upstream case changed.
+Primary sources were reviewed in documentary groups; this was not an independent reread
+of every archived file or a new verification of result lineage.
+The record now retains source-specific audit notes instead of matching-label
+justifications. Of 60 new spans, 22 received explicit reviewed joins.
+Three proposed Levy joins remain unresolved because their sources credit the project
+collectively.
+
+The resulting census has 27 profiles and 1,433 structured spans: 1,073 resolved, 354
+unresolved and six non-person.
+All 146 PDFs still await full-credit inspection.
+The proposed site and two paper edition dates are provisional for first deployment; this
+draft has not been deployed.
+Published editions keep their original dates.
+
+Focused validation passed 10 occurrence tests, 10 profile-rendering tests and 35
+Chromium profile tests.
+The browser floor passed its lint and type checks and 341 Node tests; schemas validated
+351 Markdown records and 973 YAML datasets.
+
+Review and validation receipts for this integration are recorded on PR #578 and
+`think-5bao`. The historical PDF census and profiles without sufficient identity
+evidence remain Phase 4 work under `think-m7il`.
+
 ## WIP Handoff: 2026-10-10
 
 The owner requested a work-in-progress PR and handoff before further implementation.

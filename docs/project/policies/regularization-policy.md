@@ -37,6 +37,8 @@ A run produces two kinds of output, and they take different paths:
 
 A certificate that proves more than the record holds is registered as a result first,
 and its drawing enters the layer only after that.
+Once validated, a register result below the case’s house is the house, by the import
+runbook’s [house rule](../../../packing/campaign/result-import.md#the-house-rule).
 
 ## 2. Definitions
 
@@ -85,6 +87,10 @@ records.
    guidelines”): a view without the pairing, with an unnamed turn or with a move over
    $1/2$ is admitted when every other obligation holds, and the reason it is admitted
    with names the change.
+   The move and the turns are measured on the pairing, so a view without one records
+   only that it has none (`one_to_one: false`), with no move or turn to state (16
+   October 2026, a clarification of the owner’s answer of 13 October, first applied to
+   Evan Daniel’s view at n = 176).
 4. **Non-regression.** Neither the house nor the stage total of shared sides falls,
    against the source witness or against the admitted view it would replace.
    A view in which some square’s count falls while neither total does goes to review
@@ -198,6 +204,7 @@ where there is one.
 
 | Decision | How it is made reproducible |
 | --- | --- |
+| Admit a view row 7 sent to review (a square’s count falls while no total does) | A review record naming that very view: its count, generator and version, run, output and row, and the source witness as it identifies itself; `layer` then draws it, and the entry names the record |
 | Admit a row 8 alternate | Only once question 2 is answered yes, and then labelled an alternate, never the credited packing |
 | Choose symmetry or contact, attached or separate sub-blocks, or a placement style | A per-count generator parameter in the review record, which the driver reads on every later run |
 | Choose an orientation | A recorded isometry of the witness’s frame, as `devtools/atlas_orientation.py` records them |
@@ -210,7 +217,8 @@ where there is one.
 - Edit a view’s coordinates or angles by hand.
   Every pose comes from a generator run and, for `same`, from the exact re-solve.
 - Admit a view that fails any obligation of [section 3](#3-admission-obligations), or
-  override rows 1 to 7.
+  override a refusal or a hold of rows 1 to 7; row 7’s review, where no total falls, is
+  the reviewer’s to decide.
 - Change a side, a tier or a credit.
 - Draw an alternate as the credited packing.
 
@@ -218,13 +226,18 @@ where there is one.
 `packing/atlas/known-best/regularized/reviews.yaml`, a hand-written input beside the
 index.
 A record holds the count, the date, the reviewer, the decision and its reason; any
-parameters or generator choice; the generator version and source-witness digest it was
-made against; and the gallery it was made from.
-The index entry will name its record, and a records-tier check will hold the two to each
-other. Neither the file nor the check exists yet: the first review creates both, and
-until then no view rests on a review record.
-A review of a whole pass may also be written up under `docs/project/reviews/` and mapped
-in the document map.
+parameters or generator choice; the generator version and the source witness it was made
+against, as the witness identifies itself; and the gallery it was made from.
+The index entry names its record, and the records tier’s check of the layer
+(`regularize_axis_components --check-atlas`) holds the two to each other.
+The first review created both: on 16 October 2026 the owner admitted Evan Daniel’s
+same-side view at n = 211, which row 7 had sent to review, as recommended by the
+coordinating agent that asked.
+`regularize_evand layer` draws a view the table sent to review only as a record admits
+that very view: its count, generator and version, run, output and row, and its source
+witness as the witness identifies itself (its id, its source’s key, path and revision,
+and its side), never a digest of its bytes (OR-16). A review of a whole pass may also be
+written up under `docs/project/reviews/` and mapped in the document map.
 
 **Re-review:** a record lapses, and its count goes back through the automated pass, when
 
@@ -236,6 +249,8 @@ in the document map.
 
 A lapsed adjustment is re-applied only if its parameters still produce a view that meets
 every obligation, and the reviewer confirms it in a new record.
+A lapsed view goes back through the pass by the
+[regularization process](../guides/regularization-process.md#when-a-witness-changes).
 
 ## 6. Forking the Vendored Generator
 
@@ -312,6 +327,10 @@ routine gate’s wall ceiling.
 So it runs on request with a receipt, and the gates hold the decisions it produced
 ([OR-13](../../../operating-rules.md#or-13-every-fast-check-runs-in-ci-only-the-unavoidably-slow-ones-leave),
 [OR-17](../../../operating-rules.md#or-17-every-routine-gate-has-a-wall-ceiling-and-anything-above-it-is-selected-on-purpose)).
+A house adoption is such a request: the intake pass that re-houses a count runs the
+generators on the new witness in the adoption’s pull request, by the import runbook’s
+[house rule](../../../packing/campaign/result-import.md#the-house-rule), which says how
+the runs fit the compute cap and which deferrals `--check-state` allows.
 
 | Check | What it holds | Where it runs |
 | --- | --- | --- |
@@ -650,19 +669,27 @@ house picture and why.
 The owner asked on 15 October 2026 that the records make it evident which drawings are
 regularized. So the same record states, for every count, whether the picture it draws is
 `regularized` (a view of Evan Daniel’s regularizer or the grid-slack generator),
-`regular-as-published` (the house drawing has no uneven and no near-axis square, and no
-strong view of the count has lapsed), `decided-no-better` (the strong generators ran on
-that witness and drew nothing the improvement rule takes), `exempt` (with a reason and
-the bead that owns it) or `pending`, with the witness it was decided on (its source’s
-key, path and revision and its side, never a digest of the file, under OR-16) and the
-runs that decided it.
+`regular-as-published` (the house drawing has no uneven and no near-axis square, no
+strong view of the count has lapsed, and `PENDING_ALLOWED` does not hold it for its
+bead’s runs), `decided-no-better` (the strong generators ran on that witness and drew
+nothing the improvement rule takes), `exempt` (with a reason and the bead that owns it)
+or `pending`, with the witness it was decided on (its source’s key, path and revision
+and its side, never a digest of the file, under OR-16) and the runs that decided it.
 The index’s `status: regularized` says only that the layer holds a view.
 A view that lapses with its witness is recorded on the axis tool’s record (`lapsed`),
 and the count is pending until the generators decide the new witness.
+So is a count that `default_drawings.PENDING_ALLOWED` names, whatever a new house reads:
+the list’s first entries are the record of strong views that lapsed before the axis
+record kept that block.
 The records tier fails on a pending count unless `default_drawings.PENDING_ALLOWED`
 names it with its bead, and on a named count that is no longer pending, so the list
-equals the pending set: it shrinks as counts are regularized and grows only by a
-reviewed change, and `bead tree` holds each bead it names open.
+equals the pending set, and `bead tree` holds each bead it names open.
+Since the list also holds its counts pending, it changes only by reviewed changes: a
+count leaves it when the strong generators or a `SETTLED` decision decide it, or when a
+reviewed change drops its entry, which the gate accepts where the count then reads
+regular as published; and a count joins it with its bead, whatever its house reads.
+The gate cannot tell a dropped entry from a decided one, so the pull request that drops
+one shows its bead’s runs or what the count draws before and after.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

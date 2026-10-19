@@ -60,6 +60,13 @@
           origin = returnTo;
           articles.setReturnFocus(popover, origin);
           body.replaceChildren(article);
+          const heading = Array.from(article.children).find((child) => child.matches("h1"));
+          if (heading instanceof HTMLElement) {
+            if (!heading.id) {
+              heading.id = `${popover.id}-record-title`;
+            }
+            popover.setAttribute("aria-labelledby", heading.id);
+          }
           action?.setAttribute("href", responseUrl);
           if (!popover.matches(":popover-open")) {
             // Auto popovers nested by DOM/event ancestry can coexist; replacement is explicit.

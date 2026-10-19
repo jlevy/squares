@@ -92,7 +92,10 @@ def served(tmp_path_factory: pytest.TempPathFactory) -> Iterator[str]:
         'data-contributor="evan-daniel">Evan Daniel</a><a id="case-link" '
         'href="cases/11.html" data-case="11">Case 11</a><table><tbody>'
         '<tr id="result-row" data-row-popover="pop-result"><td>Result details</td></tr>'
-        '</tbody></table><div id="pop-result" class="site-popover" popover="auto">'
+        '</tbody></table><button id="native-opener" popovertarget="pop-native">'
+        'Open native panel</button><div id="pop-native" class="site-popover" '
+        'popover="auto">Native panel content</div>'
+        '<div id="pop-result" class="site-popover" popover="auto">'
         '<button class="site-popover-close" popovertarget="pop-result" '
         'popovertargetaction="hide">Close</button><div data-row-pop-src="result/test.html">'
         '<a href="result/test.html">Read result</a></div></div>'
@@ -232,6 +235,8 @@ def test_profile_content_scoped_links_and_focus(
         heading_id = article.locator("h1").get_attribute("id")
         assert heading_id != "title"
         assert article.get_attribute("aria-labelledby") == heading_id
+        assert panel.get_attribute("aria-labelledby") == heading_id
+        site_browser.api().expect(panel).to_have_accessible_name("Walter Stromquist")
         assert (
             article.locator('[data-case="11"]').get_attribute("href")
             == f"{served}cases/11.html"
@@ -423,9 +428,12 @@ def test_late_response_cannot_replace_newer_profile_or_reopen_after_escape(
         held.pop().fulfill(status=200, content_type="text/html", body=PROFILE)
         page.evaluate(SETTLED)
         assert panel.locator("h1").inner_text() == "Evan Daniel"
+        assert panel.get_attribute("aria-labelledby") == panel.locator("h1").get_attribute("id")
+        site_browser.api().expect(panel).to_have_accessible_name("Evan Daniel")
         page.keyboard.press("Escape")
         page.locator("#profile-link").click()
         panel.locator('h1:has-text("Walter Stromquist")').wait_for(state="visible")
+        site_browser.api().expect(panel).to_have_accessible_name("Walter Stromquist")
         page.keyboard.press("Escape")
         # A separate page gives the second request its own empty cache.
         page.goto(served)
@@ -436,6 +444,34 @@ def test_late_response_cannot_replace_newer_profile_or_reopen_after_escape(
             held.pop().fulfill(status=200, content_type="text/html", body=PROFILE)
         page.evaluate(SETTLED)
         assert not panel.is_visible()
+
+
+@pytest.mark.parametrize("status", [200, 503], ids=["success", "failure"])
+def test_native_panel_cancels_pending_profile_response(
+    browser: Any, served: str, status: int
+) -> None:
+    with _page(browser) as page:
+        held: list[Any] = []
+
+        def hold(route: Any) -> None:
+            if route.request.resource_type == "fetch":
+                held.append(route)
+            else:
+                route.continue_()
+
+        page.route("**/profiles/walter-stromquist.html", hold)
+        page.goto(served)
+        page.locator("#profile-link").click()
+        page.locator("#native-opener").click()
+        native = page.locator("#pop-native")
+        site_browser.api().expect(native).to_be_visible()
+        assert len(held) == 1
+        with page.expect_response("**/profiles/walter-stromquist.html"):
+            held.pop().fulfill(status=status, content_type="text/html", body=PROFILE)
+        page.evaluate(SETTLED)
+        assert page.url == served
+        assert native.is_visible()
+        assert not page.locator("#pop-contributor").is_visible()
 
 
 def test_closing_source_cancels_pending_profile_failure(browser: Any, served: str) -> None:

@@ -682,15 +682,18 @@ repositories:
     read_through: eb3ae15418ce99ab72c448551f998628d2d5d76a
     read_on: '2026-10-12'
     note: >-
-      New to the record on 2026-10-12: E. Summins' n = 11 lab, whose outreach series is issues
-      #521 to #527. The esummins-packing-2026-10-12 packet pins 651a9a5 (2026-10-12T04:11:54Z),
-      the commit the issues name, and retains the paths its index writeup/outreach/00-README.md
-      section 4 cites; the tree is 71,035 files and about 20.75 GB, almost all under attempts/,
-      pinned by the commit. One commit follows the pin at the read, eb3ae15 (04:13:07Z,
-      "outreach: posted as jlevy/squares issues 521-527"), which adds only
-      writeup/outreach/POSTED.md (13 lines); nothing to import from it. Later commits of the
-      running campaigns (A243's descent, the k0 chains) are expected and hold nothing to import
-      unless a note of the series changes.
+      New to the record on 2026-10-12: E. Summins' n = 11 lab, whose outreach series is issues #521
+      to #527. The esummins-packing-2026-10-12 packet pins 651a9a5 (2026-10-12T04:11:54Z), the
+      commit the issues name, and retains the paths its index writeup/outreach/00-README.md section
+      4 cites; the tree is 71,035 files and about 20.75 GB, almost all under attempts/, pinned by
+      the commit. One commit follows the pin at the read, eb3ae15 (04:13:07Z, "outreach: posted as
+      jlevy/squares issues 521-527"), which adds only writeup/outreach/POSTED.md (13 lines); nothing
+      to import from it. Later commits of the running campaigns (A243's descent, the k0 chains) are
+      expected and hold nothing to import unless a note of the series changes. On 18 October, a
+      bounded GitHub API HEAD read confirmed this unchanged head; the original full history/tree
+      fetch hit its 60-second cap. This checks head freshness only, not a fresh full source-content
+      audit. The receipt is
+      packing/campaign/issue-intake/intake-20261018/bounded-four-head-refresh-20261018.json.
   - url: https://github.com/evand/square-packing
     read_through: 31523f87316bdfda00f5459dd9077928e264f133
     read_on: '2026-10-12'
@@ -890,8 +893,225 @@ repositories:
     read_on: '2026-10-15'
     note: >-
       A fork of this repository. Its default branch is 73d2542, the merge of jlevy/squares#621, an
-      ancestor of main, so the 1,039 commits past the e96e9ea read are this repository's own
-      history and the fork publishes nothing of its own there. Its other branches are PR #574's
-      head 4c319c2, which the pingyou-pr574-certificates-2026-10-13 packet pins (T-174), and
+      ancestor of main, so the 1,039 commits past the e96e9ea read are this repository's own history
+      and the fork publishes nothing of its own there. Its other branches are PR #574's head
+      4c319c2, which the pingyou-pr574-certificates-2026-10-13 packet pins (T-174), and
       pingyou/n29-certificate-20261015 at 3115557, PR #622's head, an N29 certificate refinement
-      that think-30n2 triages as an intake report. Nothing to import from the default branch.
+      that think-30n2 triages as an intake report. Nothing to import from the default branch. On 18
+      October, a bounded GitHub API HEAD read confirmed this unchanged head; the original full
+      history/tree fetch hit its 60-second cap. This checks head freshness only, not a fresh full
+      source-content audit. The receipt is
+      packing/campaign/issue-intake/intake-20261018/bounded-four-head-refresh-20261018.json.
+  # The intake pass of 2026-10-16 (think-mdnn): evand's head, the pin #639 names.
+  - url: https://github.com/evand/square-packing
+    read_through: 44a105ef95ac1925d83aab087d7ddab7f672b747
+    read_on: '2026-10-16'
+    bead: think-0ayk
+    note: >-
+      The merge of wand125's PR #7 (16 October, 02:34Z) past the 1038892 read, and its one branch
+      commit, 4eb59c4 of 11 October. lean/Sqpack/ExTreeTilt.lean proves validTilt_of_tree, so
+      gen_main.py derives validTilt7 from the pose tree and valid7 by Bentz.valid7_of_tilt, and
+      V7/Face.lean and scripts/gen_face.py are gone, the root modules unchanged; LebMassBridge.lean
+      bridges ExTree.CovT and LebMass.CovT for mcoverP and no root module imports it; VALID7.md,
+      Valid7Checker.lean and Axioms.lean put the rebuild at about 6,650 CPU-hours, measured. New
+      evidence for the Valid7 kernel route to T-064's finite premise, which think-0ayk owns (#537)
+      until a packet pins it. Nothing else to import.
+  - url: https://github.com/evand/square-packing
+    read_through: 7d1407a0b66c46e32cdbcbd5619586fe2bdd52a1
+    read_on: '2026-10-16'
+    bead: think-phyb
+    note: >-
+      The head, 93 commits past the 1038892 read, of 15 and 16 October apart from 4eb59c4, which the
+      44a105e read covers. 058b671 adds search/exact/cur/, the exact algebraic sides at 23 counts that
+      #639 reports, and 7d1407a its comparison with the register; think-phyb holds them until a packet
+      pins this commit. 046ab37 adds an exact-multiplier fallback to exactsolve.py, and f94480f, ae1fd30
+      and 3f004b7 the s(110) census and landscape page of 1,076 to 1,078 certified minima, with no
+      certificate. The rest is the packer's development: TT3 polish gating and a parent value model,
+      the H110-PM holdout, removal, graft and composition baselines, blind Mondrian screens and hunts
+      (BM1 to BM3, JT1, L2b to L2e, MH3, RB62, GX1, NH3), the EV1 and EV2 program-evolution pilots,
+      whose best rows tie the hidden 234 and 235 records, fillfast, task notes and site data. None
+      states a bound or certificate the record lacks. Nothing else to import.
+  # The overnight intake pass of 2026-10-16 (think-hg5s), lane A (think-mu5v): the sweep
+  # residue of 05:08Z.
+  - url: https://github.com/wand125/square-packing
+    read_through: 319a779efcc78db2f92bffc87844446f8723b01d
+    read_on: '2026-10-16'
+    bead: think-jh0n
+    note: >-
+      The six commits of 16 October (03:25Z to 04:47Z) past the 0eb3fe5 read. 2c75edc and e99f5e3
+      add problems/square-lower-bounds/certificates/k2m4_n77_L9/lean/, a Lean kernel proof of
+      Evan Daniel's ValidTilt9 and, with his reduction, of s(k^2 - 4) = k for every k >= 8
+      (validTilt9, valid9 and bentz4, axioms propext, Classical.choice and Quot.sound), whose
+      per-root certificates and list of 1,275,911 generated files are in the release
+      validtilt9-lean-v1: a formalization of T-081 that think-jh0n owns until a packet pins it
+      (#643). 0aa00f7 lists it in the source's index and site. 4c926da proves s(46) = 10 +
+      2/sqrt(3) for unit squares in an equilateral triangle, another container, outside this
+      record; 574d27c and 319a779 add it to the source's triangle paper. Nothing else to import.
+  # The intake pass of 2026-10-17 (think-e2sz), lane W: what the sweep of 06:41Z to 06:42Z listed.
+  - url: https://github.com/evand/square-packing
+    read_through: 5ad00693899ef50ccf6502f0346187cc422cc914
+    read_on: '2026-10-17'
+    bead: think-6wtz
+    note: >-
+      The three commits of 16 October (03:37Z to 14:03Z) past the 7d1407a read. 255423f and b348144
+      update the source's TODO.md and Completed.md: #639 posted, and PR #7 merged and thanked, which
+      the 44a105e read covers. 5ad0069 adds search/packer/candidates/s236_bm3c*, the certificate of
+      s(236) <= 15.861934390608 that #659 reports, which think-6wtz holds until a packet pins this
+      commit. Nothing else to import.
+  - url: https://github.com/evand/square-packing
+    read_through: 757b40bc6c5f681033ff1572177d408afbf26dfe
+    read_on: '2026-10-17'
+    bead: think-8o5j
+    note: >-
+      The two commits past the 5ad0069 read, the head. 5ccdc6c (16 October, 17:00Z) appends to the
+      packer's notes, adds two analysis scripts and edits harden_explore.py and TODO.md. Its live
+      hunts LH1 and LH2 found nothing below the register at 50 to 324 and name no certificate. 757b40b (17 October, 04:29Z) adds
+      search/packer/candidates/s271_ex1*, the certificate of s(271) <= 16.948947733714 that #664
+      reports, which think-8o5j holds until a packet pins this commit. Nothing else to import.
+  - url: https://github.com/ofitzharding/sq19
+    read_through: c86a991ea1379d1598739182f5f26619c9b7126a
+    read_on: '2026-10-17'
+    bead: think-a4x3
+    note: >-
+      One commit of 16 October (14:28Z) past the fitzharding-n19-lean-2026-10-16 packet's pin 34fb2b7
+      (v1.0.0). It adds verification/clean-build-receipt.json, verification/clean-build.log and a README
+      paragraph: a fresh clone of v1.0.0 with the release's certificates, rebuilt from source by
+      scripts/verify.py --kernel-replay on a 64-vCPU machine in 5 h 18 min (about 340 CPU-hours),
+      VERIFIED, 13,143 modules replayed with no failure, statement and axioms as T-194 records them, and
+      every generated certificate module byte-identical to the research build. The author's own
+      rebuild of the proof T-194 registers, not a replay here: new evidence for T-194, which
+      think-a4x3 holds until a packet pins this commit, and the measure think-nqnl's held rebuild can
+      be priced against. The Lean proof itself is unchanged.
+  - url: https://github.com/wand125/square-packing
+    read_through: 718887cfaa8727cc75108c5924fa1330df4fa098
+    read_on: '2026-10-17'
+    bead: think-f40c
+    note: >-
+      The eighteen commits of 16 October (07:45Z to 07:53Z) past the 319a779 read, 02c5595 to 718887c,
+      one fine-net mixed-measure certificate each under problems/square-lower-bounds/certificates/:
+      s(n) >= 2631/400, 1347/200, 2721/400, 2777/400 and 3011/400 at n = 38, 40, 41, 43 and 51 on the
+      2,073-direction net, and 853/100, 3769/400, 379/40, 3811/400, 3853/400, 1937/200, 489/50, 783/80,
+      493/50, 10503/1000, 529/50, 531/50 and 1073/100 at n = 68, 84, 85, 86, 88, 89, 90, 91, 92, 106,
+      107, 108 and 110 on the 201-direction net, with their data in the release square-lower-bounds-v1
+      (each tarball's SHA-256 matches its ASSET.json). Each is above both of the record's lower lanes
+      at its count, and #446's comment of 16 October reports them; think-f40c holds them until a
+      packet pins these commits. Nothing else to import.
+  - url: https://github.com/wand125/square-packing
+    read_through: 746b0c06cdb1ef7988381153cebfba1b5e720b04
+    read_on: '2026-10-17'
+    bead: think-jh0n
+    note: >-
+      The fourteen commits of 16 October (08:08Z to 11:39Z) past the 718887c read. 0a2ef54, 37db469,
+      0dd6ec9 and b55a61f are the source's site: certificate data for the eighteen bounds, and the
+      closed-form and Valid7 papers marking the ValidTilt9 Lean check complete. d73fe88, 9bbb9ae,
+      dec7408, b8488a2, 1dc56b2 and c3123ff prove s_4(2) = 2 for two unit 4-cubes in a 4-cube, another
+      dimension, outside this record. 43ad1b0, fd2c42c, 5ad5ffe and 746b0c0 add
+      problems/rectangle-upper-bounds/ and lean/rectangle-k2m4/: for integers A, B >= 8, at most AB - 5
+      unit squares fit in an a x b rectangle with a < A and b < B, proved in Lean (Rect4.rect4, standard
+      axioms) from Evan Daniel's k2m4 family and the kernel proof of ValidTilt9. Rectangles are another
+      container, but at A = B = k the theorem is s(k^2 - 4) >= k for k >= 8, the lower half of T-081,
+      by a second Lean route over the same finite premise as #643's: new evidence for T-081's
+      formalization, which think-jh0n holds until a packet pins this commit or its import declines it.
+      Nothing else to import.
+  - url: https://github.com/wand125/square-packing
+    read_through: fbc5fc4ca042843481ec6cd3686153cfc7cd72a2
+    read_on: '2026-10-17'
+    bead: think-tsox
+    note: >-
+      The six commits past the 746b0c0 read, 16 October 13:29Z to 17 October 03:58Z, the head. 54e9a4b
+      and 7662c09 put the rectangle theorem on the source's site. fa23d97, 98aace2 and fbc5fc4 prove
+      s_n(2) = 2 for two unit n-cubes in an n-cube at n = 3 to 6 by a spectral bound, outside this
+      record. 3dbb4b5 adds lean/closed-form-layer-a/, layer A of the closed form T-180 registers: a Lean
+      proof (standard axioms) that a(N) <= s(N) for every N >= 49 assuming LocalCovers on each of the
+      34 intervals, the leaf-by-leaf check of the certificate records (layer B) not done, with its
+      generated sources in the release closed-form-lean-layer-a-v1. New evidence for T-180, conditional
+      as the source says, which think-tsox holds until a packet pins this commit. Nothing else to
+      import.
+  - url: https://github.com/evand/square-packing
+    read_through: 5ca0dc3ae7a4eebce16838bf41bedc2ce7e98241
+    read_on: '2026-10-18'
+    bead: think-xmxb
+    note: >-
+      Read all 17 commits past 757b40b, through 5ca0dc3. #669 s155 is think-n1ga; #674 both s229
+      certificates are think-5ij2; #673 credit clarification and PathCert theorem are think-gzvu.
+      Fang gluing formalization f4883b4 is think-57ei (coordinate think-0esw); Ryu formalization
+      8475bdf is think-ahr2; improved filled L-shape bound a645fe3 is think-f8py. The exact 3-angle
+      n232 witness/Lean proof at 5ca0dc3 is evidence for T-193, held by think-phyb. Other commits
+      change search tooling, status, site/provenance and displays; the complete changed-path
+      inventory is retained in campaign/issue-intake/intake-20261018/source-commit-files.json. Full
+      source-content classification remains with the named import owners. Nothing is silently
+      treated as imported or replayed. On 18 October, a bounded GitHub API HEAD read confirmed this
+      unchanged head; the original full history/tree fetch hit its 60-second cap. This checks head
+      freshness only, not a fresh full source-content audit. The receipt is
+      packing/campaign/issue-intake/intake-20261018/bounded-four-head-refresh-20261018.json.
+  - url: https://github.com/franciscouzo/square-packing
+    read_through: c6da0fc7524d667bf3d224559724ba9b60762e60
+    read_on: '2026-10-18'
+    bead: think-pvav
+    note: >-
+      All three new commits are #670 (23aff0c6, think-f28n), #672 (af8cb795, think-2vjc) and #675
+      (c6da0fc7, think-pvav). Their 73, 46 and 79 reported rows and whole-source index/manifest
+      inventory are owned separately; read is not an import. Preserve author source/seed credits and
+      distinguish index adoption of Daniel s229 from a Couzo discovery.
+      Chronological/classical-envelope comparison and bulk replay remain queued. On 18 October, a
+      bounded GitHub API HEAD read confirmed this unchanged head; the original full history/tree
+      fetch hit its 60-second cap. This checks head freshness only, not a fresh full source-content
+      audit. The receipt is
+      packing/campaign/issue-intake/intake-20261018/bounded-four-head-refresh-20261018.json.
+  - url: https://github.com/wand125/square-packing
+    read_through: d7afe3e525299d70de298af72cf17c581a86c0b1
+    read_on: '2026-10-18'
+    bead: think-0ayk
+    note: 'Read all eight commits past fbc5fc4. Valid7 kernel v2 at 649a920 (valid7-lean-v2) and its revised
+      paper wording are new evidence for T-064/#537, held by think-0ayk: author reports 798 CPU-hours, same
+      theorem and standard axioms, peak51GB; no build here. d7afe3e adds s42 >=2749/400 over2073 directions,
+      held by think-kjd7. Other commits are site/index wording, paper links and higher-dimensional cube
+      results outside this record. New claim/replay cost and proof review remain owned, not completed.'
+  - url: https://github.com/wand125/square-packing
+    read_through: 6d93afc1e5336aa498c0a7657c0869dc648a7b92
+    read_on: '2026-10-18'
+    note: >-
+      Read both complete commit diffs past d7afe3e: 08d77305 changes four site files
+      (paper metadata, sitemap, cube-page link and paper title), and 6d93afc1 changes
+      the theme-21 index title. Their only edits rename "two unit cubes in a cube" to
+      "two unit hypercubes in a hypercube" in English and Japanese. The mathematical
+      expressions, n = 3 to 6 scope, proof text, certificates and checkers are unchanged.
+      No new result or evidence to import. This read covers only those two naming
+      commits; the earlier Valid7 and n42 imports remain with think-0ayk and think-kjd7.
+  # Incremental intake of 19 October: source scope and import ownership, no replay.
+  - url: https://github.com/evand/square-packing
+    read_through: ddf09e382ab3c63675476503d51d1a405bb2f7e6
+    read_on: '2026-10-19'
+    bead: think-pf37
+    note: >-
+      Five commits past 5ca0dc3. 4b456fe reports the stronger filled L-shape deficiency
+      bound, owned by think-f8py; 13da782 reports the staircase/Ryu threshold, owned by
+      think-pf37. The other three package the proof route and update pages, viewer and
+      credit presentation. Commit messages and changed paths are retained in
+      packing/campaign/issue-intake/intake-20261019/evand-source-inventory.json.
+      Source-content review and theorem custody remain with those owners; no build,
+      replay, bound adoption or assurance change here.
+  - url: https://github.com/franciscouzo/square-packing
+    read_through: 7b6c87e129cf80b5ff9847b90b47fd30b4563c54
+    read_on: '2026-10-19'
+    bead: think-xu4d
+    note: >-
+      One commit past c6da0fc, reporting the 85 upper bounds in #678, owned by
+      think-xu4d. All commit-file pages retain 543 changed paths in
+      packing/campaign/issue-intake/intake-20261019/couzo-source-inventory.json.
+      This inventory is not whole-source custody or certificate replay. Exact-side,
+      report-order and classical-envelope comparison and seed/construction provenance
+      remain open. Earlier #672 stays with think-2vjc. No discovery-credit decision or
+      assurance change here.
+  - url: https://github.com/TheSnakeFang/squarepack-certs
+    read_through: 0e9be7961773aa78b879c4ee6ba584a67e2e5513
+    read_on: '2026-10-19'
+    bead: think-494l
+    note: >-
+      One commit past 078789a changes only README and adds the v0.8 note at
+      note/fang-2026-n2-n-1.md. #603 comment 6255103888 also announces the separate
+      public squarepack-lean project at 947bdae. Note and Lean review are owned by
+      think-494l under think-0esw. The note's mixed-step and announced Lean single-step
+      statements require separate binding checks; no new certificate in this commit
+      and no build, replay or assurance promotion here. Receipt:
+      packing/campaign/issue-intake/intake-20261019/fang-source-inventory.json.

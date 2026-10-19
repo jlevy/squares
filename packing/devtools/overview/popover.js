@@ -1,5 +1,7 @@
 // The overview's card popovers. They open and close natively (`popovertarget`), so the
-// page works without this script; it adds two things the platform does not:
+// page works without this script; it adds three things the platform does not:
+//   - opening a panel cancels any pending article request, including a native card
+//     that has no asynchronous controller of its own;
 //   - a formula inside a popover is typeset when the popover opens, since the math driver
 //     leaves hidden math until it is shown;
 //   - following a link in a popover closes it, so a reader sent to a row on this page
@@ -10,6 +12,11 @@
     if (!(popover instanceof HTMLElement)) {
       continue;
     }
+    popover.addEventListener("beforetoggle", (event) => {
+      if (event instanceof ToggleEvent && event.newState === "open") {
+        globalThis.siteArticles?.cancelRequests();
+      }
+    });
     popover.addEventListener("toggle", (event) => {
       if (event instanceof ToggleEvent && event.newState === "open") {
         void globalThis.siteMath?.typeset(popover, true);

@@ -2005,7 +2005,7 @@ Paper content and typesetting revisions advance the affected paper’s edition; 
 navigation or footer update keeps the paper’s content edition.
 
 The ordinary documentation gate runs `devtools.check_release_impact`. It compares
-producer-owned inputs against the local main merge base and requires a disposition for
+producer-owned inputs against the comparison merge base and requires a disposition for
 each candidate component: a valid owning successor, or a fresh `ReleaseNoPublicChange`
 review in `release.py` naming the exact changed paths, outputs examined and reason.
 A prior no-change review cannot excuse another batch.
@@ -2020,8 +2020,15 @@ appropriate; an input diff does not prove visual equality.
 The existing page and PDF checks still verify the actual artifacts.
 `--baseline-ref origin/main` uses the branch’s merge base; `--base` selects a delivery
 baseline explicitly.
-The validator uses `HEAD^1` on a main checkout whose head already equals `origin/main`,
-so it checks the preceding delivery rather than comparing a commit with itself.
+For a dependent PR, hosted CI sets `PACKING_RELEASE_BASE_REF` to the PR event’s pinned
+parent commit.
+The validator uses that explicit ref first, then `origin/$GITHUB_BASE_REF`
+if the explicit ref is absent.
+Locally, set `PACKING_RELEASE_BASE_REF` to the actual parent branch or pinned parent
+commit; ordinary branches default to `origin/main`. Changelog delivery coverage
+continues to compare against `origin/main`. The validator uses `HEAD^1` on a main
+checkout whose head already equals `origin/main`, so it checks the preceding delivery
+rather than comparing a commit with itself.
 
 Validate with the change-reachable push tier, review both reader views, and verify the
 published News page with the normal deployment audit after merging.
@@ -2353,6 +2360,10 @@ is the rule; this is how to follow it.
   Record a commit or blob id as provenance if it helps a reader.
   Where a verdict must be tied to the input it was computed from, give the input a
   semantic identity (a design name and version) and compare that, or recompute.
+  Comparing a change with its base branch at their merge base, as the release-impact,
+  changelog, requests, bead-tree and regularization-state gates do, reads no recorded
+  revision
+  ([OR-18](operating-rules.md#or-18-keep-bulk-data-out-of-git-and-never-bind-code-or-verdicts-to-a-git-commit-or-blob)).
 - **No self-pins.** Do not pin the SHA-256 of a file this repository writes and commits.
   Git already holds it, and the pin makes regenerating the file identically, or moving
   it, a failure.

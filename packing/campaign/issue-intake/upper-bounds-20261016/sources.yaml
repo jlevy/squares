@@ -1,0 +1,502 @@
+format: intake-ledger-sources-v1
+read_at_main: e2e018f32b2627a7d4b38ed95790bee145b1524a
+read_on: '2026-10-16'
+rule: If they are reported in order, then each one should be recorded as a result, as long
+  as each one is stronger than the last. If a stronger result is reported first, then the
+  other one should not be recorded since it's weaker after that, unless there's some key reason
+  it should be recorded.
+display_names:
+  ry-xu: Ryan Xu
+lanes:
+- name: main
+  branch: main
+  commit: e2e018f32b2627a7d4b38ed95790bee145b1524a
+  note: 'PR #574''s packet as merged with T-174 (pingyou-pr574-certificates-2026-10-13)'
+reports:
+- report: 'PR #574'
+  pull: 574
+  holders: PingYou Ltd (BuddenPing)
+  bead: think-9v2k
+  lanes:
+  - lane: main
+    packet: pingyou-pr574-certificates-2026-10-13
+    record: claims.json
+    counts:
+    - 88
+    - 102
+    - 123
+    - 126
+    - 172
+    - 199
+    - 258
+    - 259
+    - 263
+    - 266
+    - 267
+    - 292
+    - 295
+    - 297
+    - 301
+    not_ours:
+    - 28
+    - 37
+    - 39
+    - 41
+    - 50
+    - 55
+    - 68
+    - 69
+    - 71
+    - 83
+    - 84
+    - 86
+    - 87
+    - 103
+    - 105
+    - 106
+    - 108
+    - 110
+    - 127
+    - 128
+    - 129
+    - 130
+    - 131
+    - 132
+    - 146
+    - 152
+    - 155
+    - 156
+    - 171
+    - 175
+    - 176
+    - 177
+    - 179
+    - 180
+    - 181
+    - 182
+    - 198
+    - 204
+    - 205
+    - 206
+    - 208
+    - 209
+    - 210
+    - 211
+    - 228
+    - 230
+    - 232
+    - 235
+    - 236
+    - 237
+    - 238
+    - 239
+    - 240
+    - 241
+    - 261
+    - 264
+    - 268
+    - 269
+    - 270
+    - 271
+    - 272
+    - 273
+    - 293
+    - 300
+    - 303
+    - 304
+    - 305
+    - 306
+    - 307
+    - 308
+  claims:
+  - n: 88
+    refines:
+      packing_of: Nate Chaoweeraprasit (itsnaka)
+      entry: T-127
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 102
+    refines:
+      packing_of: Ryan Xu
+      entry: T-146
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 123
+    refines:
+      packing_of: Ryan Xu
+      entry: T-146
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 126
+    refines:
+      packing_of: Ryan Xu
+      entry: T-139
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 172
+    refines:
+      packing_of: Francisco Couzo
+      entry: T-098
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 199
+    refines:
+      packing_of: Nate Chaoweeraprasit (itsnaka)
+      entry: T-127
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 258
+    refines:
+      packing_of: Nate Chaoweeraprasit (itsnaka)
+      entry: T-146
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 259
+    refines:
+      packing_of: Nate Chaoweeraprasit (itsnaka)
+      entry: T-136
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 263
+    refines:
+      packing_of: Nate Chaoweeraprasit (itsnaka)
+      entry: T-146
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 266
+    refines:
+      packing_of: Evan Daniel
+      entry: T-119
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 267
+    refines:
+      packing_of: Ryan Xu
+      entry: T-134
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 292
+    refines:
+      packing_of: Nate Chaoweeraprasit (itsnaka)
+      entry: T-146
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 295
+    refines:
+      packing_of: Ryan Xu
+      entry: T-146
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 297
+    refines:
+      packing_of: Francisco Couzo
+      entry: T-098
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  - n: 301
+    refines:
+      packing_of: Francisco Couzo
+      entry: T-098
+      source: 'packing/resources/web/pingyou-pr574-certificates-2026-10-13/README.md at claude/wizardly-meitner-wqn4x3-intake-1014-pr574@56cf868c617975eaada5b0c10dab953cc6fa2e37:
+        at 73 counts the margin is padding below a certificate of the same packing (the case''s,
+        as frozen in its claims.json); think-9v2k'
+  note: 'Walked again only at the 15 counts of #639 where T-174 states a rational side its
+    claim does not print, so the start read from the register omits it (devtools.check_standing.improvements
+    reads a pending entry''s bound from its words); the 14 October ledger recorded it at all
+    of them. Elsewhere T-174 is in the start by its printed algebraic sides (70, 153, 207,
+    302), or T-186 (#593, 14 October) is smaller and in the start (175, 204, 232, 302).'
+- report: '#639'
+  issue: 639
+  holders: Evan Daniel (evand)
+  bead: think-phyb
+  rounding: cut
+  claims:
+  - n: 51
+    printed: '7.690355937288491748002814540349496797616119792294913455294466229984554130770178398083979223879402621225023077051520495041'
+    rounding: cut
+    first_committed: '2026-10-16T03:30:10Z'
+    refines:
+      packing_of: Ryan Xu
+      entry: T-126
+      source: '#639: ''The packings are their finders’ (the register’s credits in the table)'';
+        search/exact/cur/README.md at evand/square-packing@7d1407a: ''an exact form for that
+        same packing'''
+    record_relations:
+    - lane: reported
+      relation: equal
+      value: '7.6903559372884918'
+      exact_form: (16+5*sqrt(2))/3
+      read_from: packing/campaign/issue-intake/upper-bounds-20261016/exact-sides.json rows[n
+        = 51].tie, by packing/campaign/issue-intake/upper-bounds-20261016/review/exact_sides.py
+      margin: '0'
+    - lane: verified
+      relation: equal
+      value: '7.6903559372884918'
+      exact_form: (16+5*sqrt(2))/3
+      read_from: packing/campaign/issue-intake/upper-bounds-20261016/exact-sides.json rows[n
+        = 51].tie, by packing/campaign/issue-intake/upper-bounds-20261016/review/exact_sides.py
+      margin: '0'
+  - n: 70
+    printed: '8.880960371555579594696691574923364158994514568180299308474000166551378423865387042783218418656963207461534043730805407211'
+    rounding: cut
+    first_committed: '2026-10-16T03:30:10Z'
+    refines:
+      packing_of: Ryan Xu
+      entry: T-146
+      source: '#639: ''The packings are their finders’ (the register’s credits in the table)'';
+        search/exact/cur/README.md at evand/square-packing@7d1407a: ''an exact form for that
+        same packing'''
+    record_relations:
+    - lane: T-174
+      relation: equal
+      value: 8880960371555579594696691574923/1000000000000000000000000000000
+      exact_form: ''
+      read_from: packing/campaign/issue-intake/upper-bounds-20261016/exact-sides.json rows[n
+        = 70].tie, by packing/campaign/issue-intake/upper-bounds-20261016/review/exact_sides.py
+      margin: '0'
+  - n: 88
+    printed: '9.882451030481246819328457155691896966869370243723413796836318497220535093571471489556912244562442808991977475255202212524'
+    rounding: cut
+    first_committed: '2026-10-16T03:30:10Z'
+    refines:
+      packing_of: Nate Chaoweeraprasit (itsnaka)
+      entry: T-127
+      source: '#639: ''The packings are their finders’ (the register’s credits in the table)'';
+        search/exact/cur/README.md at evand/square-packing@7d1407a: ''an exact form for that
+        same packing'''
+  - n: 102
+    printed: '10.605828696431578360384676657088009666941885142423731609413637923375768982225726502617081075603425861935697158116153479329'
+    rounding: cut
+    first_committed: '2026-10-16T03:30:10Z'
+    refines:
+      packing_of: Ryan Xu
+      entry: T-146
+      source: '#639: ''The packings are their finders’ (the register’s credits in the table)'';
+        search/exact/cur/README.md at evand/square-packing@7d1407a: ''an exact form for that
+        same packing'''
+  - n: 123
+    printed: '11.591378145497698159434949402013020808699597517825075741109122150106694672847573103914631453898709930821052039736999850760'
+    rounding: cut
+    first_committed: '2026-10-16T03:30:10Z'
+    refines:
+      packing_of: Ryan Xu
+      entry: T-146
+      source: '#639: ''The packings are their finders’ (the register’s credits in the table)'';
+        search/exact/cur/README.md at evand/square-packing@7d1407a: ''an exact form for that
+        same packing'''
+  - n: 126
+    printed: '11.742640687119285146405066172629094235709015626130844219530039213972197435386321116551162602982924718205041538692736891074'
+    rounding: cut
+    first_committed: '2026-10-16T03:30:10Z'
+    refines:
+      packing_of: Ryan Xu
+      entry: T-139
+      source: '#639: ''The packings are their finders’ (the register’s credits in the table)'';
+        search/exact/cur/README.md at evand/square-packing@7d1407a: ''an exact form for that
+        same packing'''
+  - n: 153
+    printed: '12.870013850404464344460153400780593998965895322894174996588127386511274528808030333484525787462535674605047938786347847412'
+    rounding: cut
+    first_committed: '2026-10-16T03:30:10Z'
+    refines:
+      packing_of: PingYou Ltd
+      entry: T-173
+      source: '#639: ''The packings are their finders’ (the register’s credits in the table)'';
+        search/exact/cur/README.md at evand/square-packing@7d1407a: ''an exact form for that
+        same packing'''
+    record_relations:
+    - lane: T-174
+      relation: equal
+      value: 643500692520223217223007670039/50000000000000000000000000000
+      exact_form: ''
+      read_from: packing/campaign/issue-intake/upper-bounds-20261016/exact-sides.json rows[n
+        = 153].tie, by packing/campaign/issue-intake/upper-bounds-20261016/review/exact_sides.py
+      margin: '0'
+  - n: 172
+    printed: '13.618988956899398428863501629350489899504015052196179381477954915409440551351518160774132546091533359942619352179311930606'
+    rounding: cut
+    first_committed: '2026-10-16T03:30:10Z'
+    refines:
+      packing_of: Francisco Couzo
+      entry: T-098
+      source: '#639: ''The packings are their finders’ (the register’s credits in the table)'';
+        search/exact/cur/README.md at evand/square-packing@7d1407a: ''an exact form for that
+        same packing'''
+  - n: 175
+    printed: '13.764174317486596629290181476867476859469193705842084385694796937211798005123856354139691162080719512645166622451588118486'
+    rounding: cut
+    first_committed: '2026-10-16T03:30:10Z'
+    refines:
+      packing_of: Daniil Ostashev
+      entry: T-158
+      source: '#639: ''The packings are their finders’ (the register’s credits in the table)'';
+        search/exact/cur/README.md at evand/square-packing@7d1407a: ''an exact form for that
+        same packing'''
+  - n: 199
+    printed: '14.617572173592806843555861272450032808198694673915512195908423151531452779602096468418349409394717723881212977210770806224'
+    rounding: cut
+    first_committed: '2026-10-16T03:30:10Z'
+    refines:
+      packing_of: Nate Chaoweeraprasit (itsnaka)
+      entry: T-127
+      source: '#639: ''The packings are their finders’ (the register’s credits in the table)'';
+        search/exact/cur/README.md at evand/square-packing@7d1407a: ''an exact form for that
+        same packing'''
+  - n: 204
+    printed: '14.808663234386956566322903448602095229622526777443573430618319867381381339457834149685725113316867650840696920820796225178'
+    rounding: cut
+    first_committed: '2026-10-16T03:30:10Z'
+    refines:
+      packing_of: Daniil Ostashev
+      entry: T-162
+      source: '#639: ''The packings are their finders’ (the register’s credits in the table)'';
+        search/exact/cur/README.md at evand/square-packing@7d1407a: ''an exact form for that
+        same packing'''
+  - n: 207
+    printed: '14.880960371555579594696691574923364158994514568180299308474000166551378423865387042783218418656963207461534043730805407211'
+    rounding: cut
+    first_committed: '2026-10-16T03:30:10Z'
+    refines:
+      packing_of: PingYou Ltd
+      entry: T-173
+      source: '#639: ''The packings are their finders’ (the register’s credits in the table)'';
+        search/exact/cur/README.md at evand/square-packing@7d1407a: ''an exact form for that
+        same packing'''
+    record_relations:
+    - lane: T-174
+      relation: equal
+      value: 14880960371555579594696691574923/1000000000000000000000000000000
+      exact_form: ''
+      read_from: packing/campaign/issue-intake/upper-bounds-20261016/exact-sides.json rows[n
+        = 207].tie, by packing/campaign/issue-intake/upper-bounds-20261016/review/exact_sides.py
+      margin: '0'
+  - n: 232
+    printed: '15.764174317486596629290181476867476859469193705842084385694796937211798005123856354139691162080719512645166622451588118486'
+    rounding: cut
+    first_committed: '2026-10-16T03:30:10Z'
+    refines:
+      packing_of: Daniil Ostashev
+      entry: T-158
+      source: '#639: ''The packings are their finders’ (the register’s credits in the table)'';
+        search/exact/cur/README.md at evand/square-packing@7d1407a: ''an exact form for that
+        same packing'''
+  - n: 258
+    printed: '16.563448002133789379600181711251396315864079804358148359622415721028494480520907652240204295239932306414043764567652572103'
+    rounding: cut
+    first_committed: '2026-10-16T03:30:10Z'
+    refines:
+      packing_of: Nate Chaoweeraprasit (itsnaka)
+      entry: T-146
+      source: '#639: ''The packings are their finders’ (the register’s credits in the table)'';
+        search/exact/cur/README.md at evand/square-packing@7d1407a: ''an exact form for that
+        same packing'''
+  - n: 259
+    printed: '16.591378145497698159434949402013020808699597517825075741109122150106694672847573103914631453898709930821052039736999850760'
+    rounding: cut
+    first_committed: '2026-10-16T03:30:10Z'
+    refines:
+      packing_of: Nate Chaoweeraprasit (itsnaka)
+      entry: T-136
+      source: '#639: ''The packings are their finders’ (the register’s credits in the table)'';
+        search/exact/cur/README.md at evand/square-packing@7d1407a: ''an exact form for that
+        same packing'''
+  - n: 263
+    printed: '16.733166007899378970512281483959673446247147248387105171085331411950300429250989398448223694760287836502828868536846900217'
+    rounding: cut
+    first_committed: '2026-10-16T03:30:10Z'
+    refines:
+      packing_of: Nate Chaoweeraprasit (itsnaka)
+      entry: T-146
+      source: '#639: ''The packings are their finders’ (the register’s credits in the table)'';
+        search/exact/cur/README.md at evand/square-packing@7d1407a: ''an exact form for that
+        same packing'''
+  - n: 266
+    printed: '16.823028750756475970540553423745444870225267268188803767419532174973756081447018009873798268730095789162327142604143200825'
+    rounding: cut
+    first_committed: '2026-10-16T03:30:10Z'
+    refines:
+      packing_of: Evan Daniel
+      entry: T-119
+      source: '#639: ''The packings are their finders’ (the register’s credits in the table)'';
+        search/exact/cur/README.md at evand/square-packing@7d1407a: ''an exact form for that
+        same packing'''
+  - n: 267
+    printed: '16.838815269948262260266093189503657539675305172510724744919959148336971566995324012520296413981766341836286670684670196070'
+    rounding: cut
+    first_committed: '2026-10-16T03:30:10Z'
+    refines:
+      packing_of: Ryan Xu
+      entry: T-134
+      source: '#639: ''The packings are their finders’ (the register’s credits in the table)'';
+        search/exact/cur/README.md at evand/square-packing@7d1407a: ''an exact form for that
+        same packing'''
+  - n: 292
+    printed: '17.591378145497698159434949402013020808699597517825075741109122150106694672847573103914631453898709930821052039736999850760'
+    rounding: cut
+    first_committed: '2026-10-16T03:30:10Z'
+    refines:
+      packing_of: Nate Chaoweeraprasit (itsnaka)
+      entry: T-146
+      source: '#639: ''The packings are their finders’ (the register’s credits in the table)'';
+        search/exact/cur/README.md at evand/square-packing@7d1407a: ''an exact form for that
+        same packing'''
+  - n: 295
+    printed: '17.704232790736030357879050644204452576177593752764285869962318078598704842055451618236175251736038200056768205693356844849'
+    rounding: cut
+    first_committed: '2026-10-16T03:30:10Z'
+    refines:
+      packing_of: Ryan Xu
+      entry: T-146
+      source: '#639: ''The packings are their finders’ (the register’s credits in the table)'';
+        search/exact/cur/README.md at evand/square-packing@7d1407a: ''an exact form for that
+        same packing'''
+  - n: 297
+    printed: '17.740417287543801850975801594884289593640654923446195273425233567973779494177049708731163209444647890693381173474332687525'
+    rounding: cut
+    first_committed: '2026-10-16T03:30:10Z'
+    refines:
+      packing_of: Francisco Couzo
+      entry: T-098
+      source: '#639: ''The packings are their finders’ (the register’s credits in the table)'';
+        search/exact/cur/README.md at evand/square-packing@7d1407a: ''an exact form for that
+        same packing'''
+  - n: 301
+    printed: '17.846667192843489782943314590958297908879747561721833799744331279338309017557679583302744118953615988125376810428210517683'
+    rounding: cut
+    first_committed: '2026-10-16T03:30:10Z'
+    refines:
+      packing_of: Francisco Couzo
+      entry: T-098
+      source: '#639: ''The packings are their finders’ (the register’s credits in the table)'';
+        search/exact/cur/README.md at evand/square-packing@7d1407a: ''an exact form for that
+        same packing'''
+  - n: 302
+    printed: '17.870013850404464344460153400780593998965895322894174996588127386511274528808030333484525787462535674605047938786347847412'
+    rounding: cut
+    first_committed: '2026-10-16T03:30:10Z'
+    refines:
+      packing_of: PingYou Ltd
+      entry: T-181
+      source: '#639: ''The packings are their finders’ (the register’s credits in the table)'';
+        search/exact/cur/README.md at evand/square-packing@7d1407a: ''an exact form for that
+        same packing'''
+  note: Each side is the one root of the source's polynomial in its interval, printed cut
+    at 120 places by review/exact_sides.py from the evand-exact-cur-2026-10-16 packet (exact-sides.json);
+    the ties at 51, 70, 153 and 207 are decided there exactly. The certificate was first committed
+    in 058b671 (2026-10-16T03:30:10Z), before the issue.
+exceptions: []
+other_items: []

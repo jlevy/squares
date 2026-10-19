@@ -25,15 +25,21 @@ and `sqpack.contributor_occurrences` refuse a record whose header names another 
 
 Run these from `packing/`:
 
-- `python -m devtools.contributor_census` summarizes the census: resolved, unresolved
-  and non-person spans, and the PDFs still awaiting inspection.
-- `python -m devtools.contributor_census --stale` lists every reviewed span whose source
-  text has changed.
-- After merging new credit records, `python -m devtools.contributor_census --reconcile`
-  rewrites `occurrences.yaml`. It drops stale spans and adds new ones.
-  A new span is joined only when its exact label is already reviewed as one person, or
-  when exactly one record claims that spelling with sources.
-- `python -m devtools.render_contributors` renders the profile pages under `profiles/`.
+- `uv run --frozen --all-extras --group dev python -m devtools.contributor_census`
+  summarizes the census: resolved, unresolved and non-person spans, and the PDFs still
+  awaiting inspection.
+- `uv run --frozen --all-extras --group dev python -m devtools.contributor_census --stale`
+  lists every reviewed span whose source text has changed.
+- After merging new credit records,
+  `uv run --frozen --all-extras --group dev python -m devtools.contributor_census --reconcile`
+  rewrites `occurrences.yaml` after validating the complete replacement.
+  It preserves unchanged reviewed fields, including manual span boundaries, drops stale
+  fields and adds the live spans of changed or new fields.
+  New person spans remain unresolved for source-specific review.
+  The report lists candidate profile IDs as suggestions and retains the dropped spans’
+  prior dispositions and notes for that review.
+- `uv run --frozen --all-extras --group dev python -m devtools.render_overview --output DIR`
+  renders the site, including the profile pages under `DIR/profiles/`.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

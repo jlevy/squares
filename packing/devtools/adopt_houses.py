@@ -10,9 +10,9 @@ owner lifted that wait on 11 October 2026. For every count whose house moves, th
   the verified lane its confirming replay; the earlier house becomes a priority note,
   kept as history; every confirmed certificate at the count, selected or not, joins the
   case's evidence roster, which is what lets `check_certificate_citations` drop its
-  deferrals; the source joins the resources; a conjectured optimum the house beats is
-  withdrawn, and one it does not beat stops the adoption for a human to decide; a blocker
-  that only said the verified lane trailed the report goes;
+  deferrals; the source joins the resources; a conjectured optimum the house is below,
+  wherever its print may round, is withdrawn, and any other stays (`conjecture_stands`);
+  a blocker that only said the verified lane trailed the report goes;
 - **the case record's body**: a dated paragraph under the title that states the move,
   and a section after the verification code that says whose certificate the house is,
   how it was confirmed here and which certificates it replaces;
@@ -29,7 +29,21 @@ owner lifted that wait on 11 October 2026. For every count whose house moves, th
   from its own retained packet.
 
 The drawing, `witnesses/known-best/n-NNN.yaml`, is `devtools.upper_bound_houses`'s; this
-refuses a count that module does not house, and the atlas is refreshed after it runs.
+refuses a count that module does not house. A new house is a new witness, so what follows
+a write is the regularization guide's "When a Witness Changes", not the axis tool's
+refresh alone: `build_known_best_atlas --update` for the witness, the axis tool's
+`--update-atlas`, `default_drawings --update`, then the strong generators on each count it
+reads `pending`, in the same pull request, with each re-housed count's drawing listed
+before and after. The house rule defers no re-housed count's runs to
+`default_drawings.PENDING_ALLOWED`: an adoption whose runs do not fit under the pass's
+compute cap waits with them, staged in `select_houses.PENDING_ADOPTION`. The adoptions of
+#553, #598 and #614 ran only the axis tool's refresh and left twenty counts without a
+strong generator's decision, n = 176 drawn raw (think-sfas). So a write, and `--dry-run`,
+print what the moves owe the regularized layer (`regularization_owed`): the counts, the
+commands with run directories no earlier run has named, and what they cost;
+`default_drawings --check-state` fails until each pending count is decided, and while the
+allowlist defers the runs of a witness whose house has moved since
+(`default_drawings.deferral_problems`, keyed on the witness, not on a pass's day).
 `adopt_case` is the generator's half: `generate_frontier_case` redrafts an adopted case
 through it (`source_supersession.adopt_selected_report`), which keeps the house and takes
 the ordinary lower lanes from the draft.
@@ -37,12 +51,19 @@ the ordinary lower lanes from the draft.
 It is idempotent: a count already at its house is left alone, so a second run writes
 nothing, and ``--check`` reports any adopted count whose record differs from its house.
 
-**A held result** (`select_houses.HELD`) is no candidate, but the records say where it
-waits: an adopted record's certificate section names each held certificate below its
-house, with why it waits, and so does a dated paragraph under the title of a record no
-pass houses (`held_note`), which also cites the held certificate's evidence. An algebraic
-certificate below the house, which the selection leaves out for the owner (RP-3), is
-named in the section the same way.
+**The house rule** (packing/campaign/result-import.md, "The House Rule") leaves nothing
+here to a person: the house is the smallest validated side, and a count whose adoption
+waits does so only staged in `select_houses.PENDING_ADOPTION` with the bead that adopts
+it, which `plan` leaves to that bead's pull request. Until the counts are adopted, their
+records keep the houses the rule of 15 October chose, and say why, with no wait left to
+the owner (review A2 of #660): an adopted record's certificate section names each
+certificate the lifted hold kept out (`select_houses.LIFTED`) below its house, why it
+waited, that the house rule lifted the hold, and the bead its staged adoption waits
+under, and so does a dated paragraph under the title of a record no pass houses
+(`held_note`), which also cites the held certificate's evidence; an algebraic certificate
+below the house, which that rule left out (RP-3), is named in the section the same way,
+its adoption staged for the writer. Every replay and check here reads the records as
+written (`recorded_days`, `select_houses.select(recorded=...)`).
 
 Usage, from ``packing/`` with the project interpreter::
 
@@ -53,9 +74,8 @@ Usage, from ``packing/`` with the project interpreter::
 
 ``--refresh`` brings every adopted record's evidence roster, dated paragraph and
 certificate section to what its last pass's writer writes now, from the record that pass
-read, and every held count's note to the held results; nothing another tool writes moves.
-A record changes this way when the register gains a confirmed certificate at its count, or
-the owner's holds change.
+read, and every held count's note to the lifted holds; nothing another tool writes moves.
+A record changes this way when the register gains a confirmed certificate at its count.
 
 **A later pass.** A later import adopted the same way needs:
 
@@ -85,11 +105,12 @@ find each count as it stood before its first (`read_history`).
 from __future__ import annotations
 
 import argparse
+import json
 import re
 import sys
 from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
-from datetime import date
+from datetime import UTC, date, datetime
 from decimal import Decimal
 from fractions import Fraction
 from functools import cache
@@ -100,7 +121,7 @@ import yaml
 from strif import atomic_output_file
 
 from devtools import apply_closed_form as closed_form
-from devtools import select_houses
+from devtools import default_drawings, exact_sides, select_houses
 from devtools import upper_bound_houses as houses
 from sqpack.yamlio import safe_load
 
@@ -441,6 +462,85 @@ RESULTS: dict[str, Prose] = {
             "and formatting."
         ),
     ),
+    "T-186": Prose(
+        author="Mykhailo Polkovskyi",
+        reported=(
+            "in [his repository](https://github.com/Mishapolk/square-packing-records) on 14 "
+            "October 2026, with no issue"
+        ),
+        producer_route=False,
+        ai=(
+            "The commit makes no statement about AI assistance; the author’s issue 593 "
+            "discloses Gemini assistance with solver scripting, precision checks and "
+            "formatting."
+        ),
+    ),
+    "T-187": Prose(
+        author="Evan Daniel",
+        reported="on [jlevy/squares#606](https://github.com/jlevy/squares/issues/606)",
+        producer_route=False,
+        ai=(
+            "The issue says the search, the checks and the request were done with Claude "
+            "(Claude Code), directed and reviewed by Evan Daniel."
+        ),
+        lineage=(
+            "The author started his chain search from Ryan Xu’s packing and names Robert "
+            "Barnett’s refinement of it as the record it improves, calling the result a "
+            "different local minimum. Measured here pose by pose, it pairs one to one with "
+            "Xu’s packing and with Barnett’s under the identity, nine squares moving beyond a "
+            "tenth: another arrangement of Xu’s design, a refinement of neither (T-187)."
+        ),
+    ),
+    "T-188": Prose(
+        author="Francisco Couzo",
+        reported=(
+            "in [his repository](https://github.com/franciscouzo/square-packing) on 14 "
+            "October 2026, with no issue"
+        ),
+        producer_route=True,
+        ai=(
+            "The commit makes no statement about AI assistance; the author’s issues of 13 and "
+            "14 October say OpenAI Codex assisted the search and verification "
+            "orchestration, that earlier search work used Claude Code, and that he directed "
+            "the work."
+        ),
+        lineage=(
+            "The certificate’s metadata seeds the author’s search from Daniil Ostashev’s "
+            "certificate, whose digest is that of issue 575’s, though it labels it issue 501. "
+            "Measured here pose by pose, it continues Ostashev’s issue-575 arrangement as the "
+            "author’s issue-583 and issue-586 certificates did, five squares moving beyond a "
+            "tenth against each: another arrangement of that design (T-188)."
+        ),
+    ),
+    "T-190": Prose(
+        author="Francisco Couzo",
+        reported=(
+            "in [his repository](https://github.com/franciscouzo/square-packing) on 15 "
+            "October 2026, with no issue"
+        ),
+        producer_route=True,
+        ai=(
+            "The commit makes no statement about AI assistance; the author’s issue 607, of "
+            "the day before, says OpenAI Codex assisted the search and verification "
+            "orchestration, that earlier search work used Claude Code, and that he directed "
+            "the work."
+        ),
+    ),
+    "T-195": Prose(
+        author="PingYou Ltd",
+        reported="in [pull request #622](https://github.com/jlevy/squares/pull/622)",
+        producer_route=False,
+        ai=(
+            "The author says all of its submissions are PingYou Ltd’s, assisted by the PY "
+            "agentic offering."
+        ),
+        routes=(
+            "The source ran both maintained routes itself on its corners witness, so on them "
+            "the replay reproduces its runs; the third route and the review’s clean-room "
+            "checker, which share no code with any check it ran, are independently "
+            "re-implemented."
+        ),
+    ),
 }
 
 XU = "Ryan Xu"
@@ -450,6 +550,8 @@ DANIEL = "Evan Daniel"
 PINGYOU = "PingYou Ltd"
 OSTASHEV = "Daniil Ostashev"
 BARNETT = "Robert Barnett"
+#: Mykhailo Polkovskyi, by the handle his earlier credits use (T-173, T-183).
+POLKOVSKYI = "Mishapolk"
 
 
 @dataclass(frozen=True)
@@ -459,6 +561,19 @@ class Credit:
     found_by: tuple[str, ...]
     improved_by: tuple[str, ...]
     phrase: str
+    #: The year the packing was found, where its house's certificate is of a later year:
+    #: a tighter certificate of an earlier finder's packing leaves the packing with its
+    #: finder and its year (review A's A7 of #661). Unset, the house's own year.
+    found_year: int | None = None
+    #: Whether the house is the replaced reported lane's own packing, measured pose for
+    #: pose with no square turned (the result's `regularizations`), so the lane keeps
+    #: what the record knew of that packing, `PACKING_FACTS` (review C6 of #661).
+    same_packing: bool = False
+
+
+#: What a reported lane says of its packing rather than of its certificate, carried to a
+#: house that is the same packing (`Credit.same_packing`), and otherwise not known.
+PACKING_FACTS = ("analytically_optimized", "construction_method", "tilt_angles_deg")
 
 
 def _couzo(start: str) -> Credit:
@@ -494,6 +609,18 @@ def _regularized(finder: str, whose: str, *, via: str | None = None) -> Credit:
 #: tables of the reviews that recommended each house; a regularization leaves the packing
 #: with its finder (`T-146`'s `regularizations`).
 CREDITS: dict[int, Credit] = {
+    # PingYou Ltd's tighter certificate of the packing the Kingbird catalogue credits to
+    # Thomas Schadt, improved by David Ellsworth (T-195's regularization of T-009); padding
+    # only, as the source says. The packing is of 2025, as n-029.md's reported lane and the
+    # release asset's credits say; the certificate is of 2026.
+    29: Credit(
+        ("Thomas Schadt",),
+        ("David Ellsworth", PINGYOU),
+        "PingYou Ltd’s tighter certificate of Thomas Schadt’s packing, as David Ellsworth "
+        "improved it",
+        found_year=2025,
+        same_packing=True,
+    ),
     70: _regularized(XU, "Ryan Xu’s"),
     84: _couzo("Xu"),
     86: _couzo("Xu"),
@@ -515,18 +642,20 @@ CREDITS: dict[int, Credit] = {
         "Evan Daniel’s reconstruction and exact certificate of Ryan Xu’s arrangement",
     ),
     127: _couzo("Xu"),
-    # Issue 562's cut-out; the piece lineage stays in the author's voice (RQ-11), in
-    # T-162's `lineage`.
-    129: Credit((OSTASHEV,), (), "Daniil Ostashev’s packing"),
+    # Mykhailo Polkovskyi's KKT refinement of PR 574's re-solve of issue 562's packing
+    # (T-186's regularization of T-174), no square moved beyond 1e-3.
+    129: Credit(
+        (OSTASHEV,),
+        (PINGYOU, POLKOVSKYI),
+        "Mykhailo Polkovskyi’s refinement of Daniil Ostashev’s n = 129 packing, as PingYou "
+        "Ltd refined it",
+    ),
     131: Credit((SQUISH,), (), "Nate Chaoweeraprasit’s SQUISH packing"),
     132: Credit((DANIEL,), (), "Evan Daniel’s record-hunt packing"),
-    # Barnett's packing re-solved, no square moved beyond 2e-06 (T-168's regularization
-    # of T-150).
-    146: Credit(
-        (XU,),
-        (BARNETT, PINGYOU),
-        "PingYou Ltd’s exact re-solve of Robert Barnett’s refinement of Ryan Xu’s packing",
-    ),
+    # Evan Daniel's chain search from Ryan Xu's packing: another arrangement of Xu's design,
+    # nine squares beyond a tenth against Xu's and Barnett's (RT-5 of the 16 October
+    # review; T-187 records no regularization).
+    146: Credit((XU,), (DANIEL,), "Evan Daniel’s arrangement of Ryan Xu’s n = 146 design"),
     # PingYou Ltd's design rearranged by Mykhailo Polkovskyi, as the 14 October review
     # measured it (RQ-5); whether it is a new arrangement is the owner's decision 1 on
     # pull request 602 (T-173).
@@ -536,31 +665,39 @@ CREDITS: dict[int, Credit] = {
         "Mykhailo Polkovskyi’s arrangement of PingYou Ltd’s n = 153 design, after Ryan "
         "Xu’s n = 70 packing and Evan Daniel’s exact certificate of it",
     ),
-    # Francisco Couzo's issue-586 packing, from Evan Daniel's arrangement through his own
-    # issue-583 refinement of it, moved well beyond a refinement (T-182).
+    # T-182's packing re-solved (T-186's regularization of T-182), after Evan Daniel's
+    # issue-552 arrangement (RT-4 of the 16 October review).
     154: Credit(
         (DANIEL,),
-        (COUZO,),
-        "Francisco Couzo’s further arrangement of Evan Daniel’s n = 154 packing",
+        (COUZO, POLKOVSKYI),
+        "Mykhailo Polkovskyi’s refinement of Francisco Couzo’s further arrangement of Evan "
+        "Daniel’s n = 154 packing",
     ),
     155: Credit((OSTASHEV,), (), "Daniil Ostashev’s packing"),
-    # Issue 561's continuation of Ostashev's packing (T-149), paired square for square.
+    # PR 574's padding of issue 561's continuation of Ostashev's packing, padded again
+    # (T-186's regularization of T-174; RT-4).
     156: Credit(
         (OSTASHEV,),
-        (COUZO,),
-        "Francisco Couzo’s continuation of Daniil Ostashev’s n = 156 packing",
+        (COUZO, PINGYOU, POLKOVSKYI),
+        "Mykhailo Polkovskyi’s tighter certificate of Francisco Couzo’s continuation of "
+        "Daniil Ostashev’s n = 156 packing, after PingYou Ltd’s",
     ),
-    175: _composed(
-        "two of his 38-square rectangles with David Ellsworth’s n = 171 template, in place "
-        "of its pieces of Thomas Schadt’s n = 50 packing"
+    # PR 574's padding of issue 528's composition, padded again (T-186's regularization of
+    # T-174).
+    175: Credit(
+        (OSTASHEV,),
+        (PINGYOU, POLKOVSKYI),
+        "Mykhailo Polkovskyi’s tighter certificate, after PingYou Ltd’s, of Daniil "
+        "Ostashev’s composition of two of his 38-square rectangles with David Ellsworth’s "
+        "n = 171 template, in place of its pieces of Thomas Schadt’s n = 50 packing",
     ),
-    # Couzo's re-solve of his issue-561 packing (T-165's regularization of T-161), which
-    # moves Daniil Ostashev's issue-562 arrangement, as issue 561 states.
+    # Ostashev's issue-575 packing re-solved, through PR 574's (T-186's regularization of
+    # T-174; RP-4 of the PR 574 review).
     176: Credit(
         (OSTASHEV,),
-        (COUZO,),
-        "Francisco Couzo’s exact re-solve of his issue-561 packing, which moves Daniil "
-        "Ostashev’s n = 176 arrangement",
+        (PINGYOU, POLKOVSKYI),
+        "Mykhailo Polkovskyi’s exact re-solve of Daniil Ostashev’s issue-575 n = 176 "
+        "packing, after PingYou Ltd’s",
     ),
     180: Credit(
         (SQUISH,),
@@ -576,27 +713,41 @@ CREDITS: dict[int, Credit] = {
         "Mykhailo Polkovskyi’s exact re-solve of PingYou Ltd’s assembly of two placed "
         "patches of Ryan Xu’s n = 70 packing, from Evan Daniel’s exact certificate of it",
     ),
-    # A new arrangement, as issue 562 states (T-162).
-    204: Credit((OSTASHEV,), (), "Daniil Ostashev’s packing"),
+    # PR 574's re-solve of issue 562's packing, re-solved again (T-186's regularization of
+    # T-174), two squares moved beyond 1e-3.
+    204: Credit(
+        (OSTASHEV,),
+        (PINGYOU, POLKOVSKYI),
+        "Mykhailo Polkovskyi’s refinement of Daniil Ostashev’s n = 204 packing, as PingYou "
+        "Ltd refined it",
+    ),
     209: _couzo("SQUISH"),
-    # Issue 583's continuation of Daniil Ostashev's issue-575 packings, tightened by issue
-    # 586 (T-182's regularizations of T-181); issue 593's joint request is the owner's.
+    # Couzo's further arrangement of Ostashev's issue-575 design, five squares beyond a
+    # tenth against T-182 and T-175 (RT-1 of the 16 October review; T-188 records no
+    # regularization).
     211: Credit(
         (OSTASHEV,),
         (COUZO,),
-        "Francisco Couzo’s continuation of Daniil Ostashev’s n = 211 packing",
+        "Francisco Couzo’s further arrangement of Daniil Ostashev’s n = 211 design",
     ),
     228: Credit((COUZO,), (), "Francisco Couzo’s refinement of his own packing"),
-    232: _composed(
-        "his 38-square rectangle with a 76-square piece of Erich Friedman’s n = 85 packing"
+    # PR 574's re-solve of issue 528's composition, re-solved again (T-186's
+    # regularization of T-174).
+    232: Credit(
+        (OSTASHEV,),
+        (PINGYOU, POLKOVSKYI),
+        "Mykhailo Polkovskyi’s refinement, after PingYou Ltd’s, of Daniil Ostashev’s "
+        "composition of his 38-square rectangle with a 76-square piece of Erich Friedman’s "
+        "n = 85 packing",
     ),
     236: _regularized(SQUISH, "Nate Chaoweeraprasit’s SQUISH"),
-    # Francisco Couzo's issue-561 design, after SQUISH's packing, rearranged (T-183).
+    # Couzo's refinement of issue 593's arrangement of his issue-561 design (T-190's
+    # regularization of T-183).
     237: Credit(
         (SQUISH,),
-        (COUZO, "Mishapolk"),
-        "Mykhailo Polkovskyi’s arrangement of Francisco Couzo’s design, after Nate "
-        "Chaoweeraprasit’s SQUISH packing",
+        (COUZO, POLKOVSKYI),
+        "Francisco Couzo’s refinement of Mykhailo Polkovskyi’s arrangement of Couzo’s "
+        "design, after Nate Chaoweeraprasit’s SQUISH packing",
     ),
     238: _mondrian("SQUISH’s own n = 305 and n = 154 packings"),
     239: _mondrian(
@@ -617,9 +768,14 @@ CREDITS: dict[int, Credit] = {
         "PingYou Ltd’s exact re-solve of Robert Barnett’s refinement of Ryan Xu’s packing",
     ),
     263: _regularized(SQUISH, "Nate Chaoweeraprasit’s SQUISH"),
-    264: _composed(
-        "his 38-square rectangle with a 93-square piece of Evan Daniel’s exact optimum of "
-        "Joost de Winter’s n = 126 packing"
+    # PR 574's padding of issue 528's composition, padded again (T-186's regularization of
+    # T-174).
+    264: Credit(
+        (OSTASHEV,),
+        (PINGYOU, POLKOVSKYI),
+        "Mykhailo Polkovskyi’s tighter certificate, after PingYou Ltd’s, of Daniil "
+        "Ostashev’s composition of his 38-square rectangle with a 93-square piece of Evan "
+        "Daniel’s exact optimum of Joost de Winter’s n = 126 packing",
     ),
     267: _couzo("Xu"),
     269: _regularized(SQUISH, "Nate Chaoweeraprasit’s SQUISH"),
@@ -627,11 +783,13 @@ CREDITS: dict[int, Credit] = {
         "SQUISH’s issue 481 n = 209 packing, whole, and the Kingbird catalogue’s former "
         "n = 19 packing"
     ),
-    # Issue 561's refinement of SQUISH's packing (T-151), paired square for square.
+    # PR 574's padding of issue 561's refinement of SQUISH's packing, padded again
+    # (T-186's regularization of T-174; RT-4: whether T-161 lists T-151 is the owner's).
     271: Credit(
         (SQUISH,),
-        (COUZO,),
-        "Francisco Couzo’s refinement of Nate Chaoweeraprasit’s SQUISH packing",
+        (COUZO, PINGYOU, POLKOVSKYI),
+        "Mykhailo Polkovskyi’s tighter certificate, after PingYou Ltd’s, of Francisco "
+        "Couzo’s refinement of Nate Chaoweeraprasit’s SQUISH packing",
     ),
     # SQUISH's packing re-solved, no square moved beyond 2e-07 (T-171's regularization of
     # T-151).
@@ -642,15 +800,28 @@ CREDITS: dict[int, Credit] = {
     ),
     292: _regularized(SQUISH, "Nate Chaoweeraprasit’s SQUISH"),
     295: _regularized(XU, "Ryan Xu’s"),
-    # Issue 583's continuation of PingYou Ltd's n302 arrangement (T-181, T-164).
+    # Issue 583's continuation of PingYou Ltd's arrangement, padded (T-186's
+    # regularization of T-181; RT-4).
     302: Credit(
         (PINGYOU,),
-        (COUZO,),
-        "Francisco Couzo’s continuation of PingYou Ltd’s n = 302 arrangement",
+        (COUZO, POLKOVSKYI),
+        "Mykhailo Polkovskyi’s tighter certificate of Francisco Couzo’s continuation of "
+        "PingYou Ltd’s n = 302 arrangement",
     ),
-    # A new arrangement, as issue 562 states (T-162).
-    303: Credit((OSTASHEV,), (), "Daniil Ostashev’s packing"),
-    304: Credit((OSTASHEV,), (), "Daniil Ostashev’s packing"),
+    # PR 574's padding of issue 562's packing, padded again (T-186's regularization of
+    # T-174).
+    303: Credit(
+        (OSTASHEV,),
+        (PINGYOU, POLKOVSKYI),
+        "Mykhailo Polkovskyi’s tighter certificate, after PingYou Ltd’s, of Daniil "
+        "Ostashev’s n = 303 packing",
+    ),
+    # Issue 575's packing padded (T-186's regularization of T-175).
+    304: Credit(
+        (OSTASHEV,),
+        (POLKOVSKYI,),
+        "Mykhailo Polkovskyi’s tighter certificate of Daniil Ostashev’s n = 304 packing",
+    ),
     305: Credit(
         (SQUISH,),
         (COUZO,),
@@ -725,8 +896,11 @@ def _register() -> tuple[Mapping[str, Any], ...]:
     return tuple(select_houses.load_results())
 
 
-def display(side: Fraction) -> str:
-    """A side as prose shows it: exact where it ends within sixteen places, else rounded up."""
+def display(side: exact_sides.Side) -> str:
+    """A side as prose shows it: exact where it ends within sixteen places, else rounded up;
+    an algebraic side never ends, and is rounded up."""
+    if isinstance(side, exact_sides.Algebraic):
+        return select_houses.ceiling(side)
     for places in range(PLACES + 1):
         if (side * 10**places).denominator == 1:
             return select_houses.ceiling(side, places) if places else str(side.numerator)
@@ -797,6 +971,22 @@ class Move:
     def n(self) -> int:
         return self.selection.n
 
+    @property
+    def side(self) -> Fraction:
+        """The house's exact side, which this writer states: a fraction (`rational`)."""
+        return rational(self.house.side)
+
+
+def rational(side: exact_sides.Side) -> Fraction:
+    """A side this writer states. It writes rational houses only, and `plan` refuses an
+    algebraic one; a certificate the prose quotes beside a house is rational wherever the
+    rule of 15 October wrote it, which left every algebraic certificate out."""
+    if isinstance(side, exact_sides.Algebraic):
+        raise AdoptionError(
+            f"the writer states rational sides, not {exact_sides.literal(side)}"
+        )
+    return side
+
 
 @cache
 def _claims(path: Path) -> Mapping[int, str]:
@@ -857,7 +1047,7 @@ def _value(candidate: select_houses.Candidate, above: object = None) -> str:
                 f"n={candidate.n}: {source['id']}'s claims record does not print the exact side"
             )
         return printed
-    return shown(candidate.side, above)
+    return shown(rational(candidate.side), above)
 
 
 def words(iso: str) -> str:
@@ -960,7 +1150,9 @@ def plan(
     """Every count whose derived house is below its case and is one this adoption houses.
 
     Each move carries its case record's text, read from the frontier unless `texts` holds
-    the count, as a replay of the retained prior state passes it.
+    the count, as a replay of the retained prior state passes it. A count staged in
+    `select_houses.PENDING_ADOPTION` for the house the selection names is no move here
+    until its bead's pull request takes it off the list.
     """
     selections = select_houses.select() if selections is None else selections
     moves = []
@@ -968,6 +1160,17 @@ def plan(
         if selection.house is None:
             continue
         house = selection.house
+        staged = select_houses.PENDING_ADOPTION.get(n)
+        if staged is not None and staged.house == house.result:
+            # Owed to the staged bead's pull request, which takes the count off the list
+            # and then adopts it here.
+            continue
+        if house.algebraic:
+            raise AdoptionError(
+                f"n={n}: the house is {house.result}'s algebraic side, and this writes a "
+                "rational exact form and witness only; stage the count with the bead that "
+                "adds the algebraic writer (select_houses.PENDING_ADOPTION)"
+            )
         if houses.ADOPTED.get(n) != house.result:
             raise AdoptionError(
                 f"n={n}: the house is {house.result}, which upper_bound_houses does not draw "
@@ -991,18 +1194,30 @@ def reported_bound(move: Move) -> dict[str, Any]:
     house, credit = move.house, CREDITS[move.n]
     bibliography = _bibliography()[house.source_key]
     origin = houses.source_for(move.n).origin(move.n)
+    replaced = move.packing["reported_upper_bound"]
+    known: dict[str, Any] = {
+        "analytically_optimized": None,
+        "construction_method": "unknown",
+        "tilt_angles_deg": None,
+    }
+    if credit.same_packing:
+        known = {field: replaced.get(field, known[field]) for field in PACKING_FACTS}
     return {
         "value": _value(house, _above(move)),
-        "exact_form": houses.legacy.literal(house.side),
+        "exact_form": houses.legacy.literal(move.side),
         "evidence": list(house.report_evidence),
         "algebraic_degree": 1,
         "minimal_polynomial": None,
-        "analytically_optimized": None,
+        "analytically_optimized": known["analytically_optimized"],
         "catalogue_rigid": "not-stated",
-        "construction_method": "unknown",
-        "tilt_angles_deg": None,
+        "construction_method": known["construction_method"],
+        "tilt_angles_deg": known["tilt_angles_deg"],
         "found_by": list(credit.found_by),
-        "found_year": date.fromisoformat(house.published).year,
+        "found_year": (
+            credit.found_year
+            if credit.found_year is not None
+            else date.fromisoformat(house.published).year
+        ),
         "improved_by": list(credit.improved_by),
         "catalogue_pictured": False,
         "source_key": house.source_key,
@@ -1014,8 +1229,8 @@ def reported_bound(move: Move) -> dict[str, Any]:
 
 def verified_bound(move: Move) -> dict[str, Any]:
     return {
-        "value": shown(move.house.side, _above(move)),
-        "exact_form": houses.legacy.literal(move.house.side),
+        "value": shown(move.side, _above(move)),
+        "exact_form": houses.legacy.literal(move.side),
         "evidence": list(move.house.confirming_evidence),
     }
 
@@ -1044,10 +1259,17 @@ def history_note(move: Move) -> dict[str, Any]:
     claimed = [*(upper.get("found_by") or ()), *(upper.get("improved_by") or ())]
     since = held_since(move.packing)
     held = f"from {since} until" if since else "until"
+    earlier = f"{upper['value']} from {upper['source_key']}"
+    if _lanes_differ(move.packing):
+        results = ", ".join(_earlier(move.packing)) or "its verified evidence"
+        earlier = (
+            f"{_ceiling(move.packing)} from {results} (reported as {upper['value']} from "
+            f"{upper['source_key']})"
+        )
     return {
         "claim": (
-            f"Earlier house {upper['value']} from {upper['source_key']}, the case’s ceiling "
-            f"{held} {day_words(move.n)}; its certificate and replay remain retained."
+            f"Earlier house {earlier}, the case’s ceiling {held} {day_words(move.n)}; its "
+            "certificate and replay remain retained."
         ),
         "claimed_by": [RECORD_NAMES.get(str(name), str(name)) for name in claimed],
         "published": upper.get("source_date"),
@@ -1076,19 +1298,13 @@ def _resource(move: Move) -> dict[str, Any]:
 
 def front_matter(move: Move, front: str) -> str:
     packing = move.packing
-    conjecture = conjectured(packing)
-    if conjecture is not None and move.house.side >= conjecture:
-        raise AdoptionError(
-            f"n={move.n}: the house {select_houses.ceiling(move.house.side)} does not "
-            f"beat the conjectured optimum {packing['conjectured_optimum']}; whether the "
-            "conjecture stands is decided by hand"
-        )
+    withdrawn = not conjecture_stands(packing, move.house.side)
     front = _named_fields(front)
     reviewed = f"  source_reviewed: '{houses.adopted_on(move.n)}'"
     front = re.sub(r"^  source_reviewed: .*$", reviewed, front, count=1, flags=re.MULTILINE)
     front = _replace(front, "reported_upper_bound", reported_bound(move))
     front = _replace(front, "verified_upper_bound", verified_bound(move))
-    if conjecture is not None:
+    if withdrawn:
         front = re.sub(
             r"^  conjectured_optimum: .*$",
             "  conjectured_optimum: null",
@@ -1107,6 +1323,28 @@ def front_matter(move: Move, front: str) -> str:
     if kept != blockers:
         front = _replace(front, "blockers", kept)
     return front
+
+
+def conjecture_stands(packing: Mapping[str, Any], side: exact_sides.Side) -> bool:
+    """Whether a record's conjectured optimum stands beside a house at `side`.
+
+    A conjecture the house is below is refuted and withdrawn. A conjecture is the
+    catalogue's printed side, whose rounding the record does not state: however it was
+    rounded, the number it stands for lies strictly within one unit of its last place of
+    the print, so the house is below it wherever it is at or below the print less that
+    unit (review B6 of #660). An integer conjecture is exact, and a house below it refutes
+    it. Any other conjecture stands: a house at it, or above, or within its print's
+    rounding, is no evidence against it, and the adoption goes ahead either way
+    (result-import.md, "The House Rule").
+    """
+    conjecture = conjectured(packing)
+    if conjecture is None:
+        return True
+    text = str(packing.get("conjectured_optimum"))
+    places = 0 if text == "integer" else len(text.strip().partition(".")[2])
+    if not places:
+        return not side < conjecture
+    return not side <= conjecture - Fraction(1, 10**places)
 
 
 def conjectured(packing: Mapping[str, Any]) -> Fraction | None:
@@ -1154,16 +1392,58 @@ def _finally_reviewed(result: str) -> bool:
     return any(r["path"] == FINAL_REVIEW for r in entry["reviews"])
 
 
+def _lanes_differ(packing: Mapping[str, Any]) -> bool:
+    """Whether the replaced record's reported and verified upper bounds are two numbers.
+
+    Where they are, the ceiling a house is measured from is the verified one, and the
+    reported one is said apart (review C3 of #661): at 29 the catalogue's print
+    5.93383346267692 beside T-155's exact side."""
+    reported = packing["reported_upper_bound"]["value"]
+    verified = packing["verified_upper_bound"]["value"]
+    return Decimal(str(reported)) != Decimal(str(verified))
+
+
+def _ceiling(packing: Mapping[str, Any]) -> str:
+    """The margin's verified baseline where the lanes differ, not its retained display."""
+    if _lanes_differ(packing):
+        return str(packing["verified_upper_bound"]["exact_form"])
+    return str(packing["reported_upper_bound"]["value"])
+
+
+def _reported_apart(move: Move) -> str:
+    """What the replaced reported bound says of the new side, where it is a number apart
+    from the verified ceiling: a print orders a side only beyond one unit of its last
+    place, so inside that unit it orders nothing (`check_source_coverage.print_order`)."""
+    if not _lanes_differ(move.packing):
+        return ""
+    upper = move.packing["reported_upper_bound"]
+    printed = Decimal(str(upper["value"]))
+    bound, side = Fraction(printed), Fraction(move.side)
+    unit = Fraction(Decimal(1).scaleb(int(printed.as_tuple().exponent)))
+    if side < bound:
+        relation = f"lies `{_sci(bound - side)}` above the new side"
+    elif side < bound + unit and printed != printed.to_integral_value():
+        relation = (
+            f"is a print `{_sci(side - bound)}` below the new side, within one unit of its "
+            "last place, so it does not order them"
+        )
+    else:
+        relation = f"lies `{_sci(side - bound)}` below the new side"
+    return (
+        f"; the reported upper bound it replaces, ${upper['value']}$ from "
+        f"{upper['source_key']}, {relation}"
+    )
+
+
 def opening(move: Move) -> str:
     n, house, credit = move.n, move.house, CREDITS[move.n]
-    upper = move.packing["reported_upper_bound"]
     return (
         f"**House adoption, {day_words(n)}.** {credit.phrase[0].upper()}{credit.phrase[1:]} "
         f"({house.result}) is now this case’s house: its exact certificate proves "
-        f"$s({n}) \\le {shown(house.side, _above(move))}$, the reported and the verified "
+        f"$s({n}) \\le {shown(move.side, _above(move))}$, the reported and the verified "
         f"upper bound, `{_sci(move.selection.margin)}` below the ceiling the case held until "
-        f"then, ${upper['value']}$ from {_holder(move.packing)}, which stays retained as "
-        f"history ([the certificate](#{_anchor(move)}))."
+        f"then, ${_ceiling(move.packing)}$ from {_holder(move.packing)}, which stays retained "
+        f"as history{_reported_apart(move)} ([the certificate](#{_anchor(move)}))."
     )
 
 
@@ -1181,8 +1461,8 @@ def section(move: Move) -> str:
     prose = RESULTS[house.result]
     packet = houses.source_for(n).packet.name
     review, reviewed = _review(house.result)
-    fraction = _math_fraction(house.side)
-    ceiling = shown(house.side, _above(move))
+    fraction = _math_fraction(move.side)
+    ceiling = shown(move.side, _above(move))
     side = (
         f"at exact side {fraction}, displayed upward as ${ceiling}$"
         if fraction
@@ -1240,10 +1520,9 @@ def section(move: Move) -> str:
         for c in move.selection.candidates
         if c is not house and c.result not in earlier and c not in held
     ]
-    upper = move.packing["reported_upper_bound"]
     history = (
-        f"The house it replaces, ${upper['value']}$ from {_holder(move.packing)}, stays "
-        "retained with its own replay as history."
+        f"The house it replaces, ${_ceiling(move.packing)}$ from {_holder(move.packing)}, "
+        "stays retained with its own replay as history."
     )
     if others:
         listed = _join([f"{c.result} at ${display(c.side)}$" for c in others])
@@ -1252,10 +1531,8 @@ def section(move: Move) -> str:
             "and are not selected."
         )
     waiting = [
-        *held_sentences(
-            move.selection.held, house.side, below="this house", keeps="this house"
-        ),
-        *algebraic_sentences(move.selection, house.side),
+        *held_sentences(move.selection.held, move.side, below="this house", keeps="this house"),
+        *algebraic_sentences(move.selection, move.side),
     ]
     if waiting:
         history += " " + " ".join(waiting)
@@ -1264,31 +1541,113 @@ def section(move: Move) -> str:
 
 
 def _reason(result: str) -> str:
-    """Why a held result waits, as case prose writes it."""
-    return select_houses.HELD[result].reason.replace("'", "’")
+    """Why a held result waited, as case prose writes it, in the past since the house rule."""
+    return select_houses.LIFTED[result].reason.replace("'", "’")
+
+
+def _staged(n: int, result: str) -> str:
+    """Where a record says the count's adoption of `result` waits: its staged bead."""
+    staged = select_houses.PENDING_ADOPTION.get(n)
+    if staged is None or staged.house != result:
+        return ""
+    return f", staged under {staged.bead},"
 
 
 def held_sentences(
-    held: Sequence[select_houses.Candidate], side: Fraction, *, below: str, keeps: str
+    held: Sequence[select_houses.Candidate], side: exact_sides.Side, *, below: str, keeps: str
 ) -> list[str]:
     """What a record says of each held certificate below `side`: smaller, confirmed and
-    reviewed, why it waits, and that the case moves to it if the owner adopts it."""
+    reviewed, when it was held and why, and that the house rule lifted the hold, so the
+    case moves to it when its staged adoption lands. No wait is the owner's (reviews A2
+    and C7 of #660)."""
     sentences = []
     for candidate in held:
         review, reviewed = _review(candidate.result)
         sentences.append(
             f"{candidate.result} at ${display(candidate.side)}$, "
-            f"`{_sci(side - candidate.side)}` below {below}, is confirmed here and accepted by "
-            f"the [review of {reviewed}](../../{review}), but {_reason(candidate.result)}; "
-            f"the case keeps {keeps} until the owner decides, and moves to "
-            f"{candidate.result}’s side if the owner adopts them."
+            f"`{_sci(exact_sides.lower_gap(side, candidate.side))}` below {below}, is "
+            "confirmed here and accepted by "
+            f"the [review of {reviewed}](../../{review}). {lifted_sentence(candidate.result)} "
+            f"The case keeps {keeps} until {candidate.result}’s adoption"
+            f"{_staged(candidate.n, candidate.result)} moves it to {candidate.result}’s "
+            "side."
         )
     return sentences
 
 
+def lifted_sentence(result: str) -> str:
+    """The sentence a record gives a lifted hold: from when to when, and why it held."""
+    hold = select_houses.LIFTED[result]
+    return (
+        f"From {words(hold.since)} until the owner’s house rule of {words(hold.until)} "
+        f"lifted the hold, {_reason(result)}."
+    )
+
+
+def _spaced(words_: str) -> str:
+    """A phrase as a pattern that matches it wrapped at any space."""
+    return r"\s+".join(re.escape(word) for word in words_.split())
+
+
+def held_history(text: str) -> str:
+    """A section's held sentences once a later pass moves the house, as history.
+
+    The section says why a lifted hold's certificate below its house waited and that the
+    case would keep that house until the certificate's adoption. A later pass has moved
+    the house, to that certificate or below it, so the section keeps when the hold held
+    and why, and the clause that the case keeps the house goes: #657's adoption moved ten
+    such counts below T-174 on 16 October 2026. The sentence is matched as each writer
+    wrote it: the rule of 15 October's, which left the wait to the owner, and the house
+    rule's, before and since its dates came first (review C7 of #660).
+    """
+    for result, hold in select_houses.LIFTED.items():
+        whose = _spaced(hold.whose.replace("'", "’"))
+        name = re.escape(result)
+        since, until = _spaced(words(hold.since)), _spaced(words(hold.until))
+        lifted = rf"until\s+the\s+owner’s\s+house\s+rule\s+of\s+{until}\s+lifted\s+the\s+hold"
+        keeps = (
+            rf"case\s+keeps\s+(?:this|its)\s+house\s+until\s+{name}’s\s+adoption"
+            rf"(?:,\s+staged\s+under\s+think-[a-z0-9]+,)?\s+moves\s+it\s+to\s+{name}’s\s+side\."
+        )
+        history = f". {lifted_sentence(result)}"
+        # The rule of 15 October's: "..., but PR #574's houses are held for the owner:
+        # <why>; the case keeps this house until the owner decides, and moves to T-174's
+        # side if the owner adopts them."
+        text = re.sub(
+            rf",\s+but\s+{whose}\s+houses\s+are\s+held\s+for\s+the\s+owner:\s+(?:(?!\n\n).)*?;"
+            rf"\s+the\s+case\s+keeps\s+(?:this|its)\s+house\s+until\s+the\s+owner\s+decides,"
+            rf"\s+and\s+moves\s+to\s+{name}’s\s+side\s+if\s+the\s+owner\s+adopts\s+them\.",
+            lambda _match, history=history: history,
+            text,
+            flags=re.DOTALL,
+        )
+        # The house rule's first: ". PR #574's houses were held for the owner, since <why>,
+        # from <since> until the owner's house rule of <until> lifted the hold: the case
+        # keeps this house until T-174's adoption[, staged under <bead>,] moves it ..."
+        text = re.sub(
+            rf"\.\s+{whose}\s+houses\s+were\s+held\s+for\s+the\s+owner,\s+since\s+"
+            rf"(?:(?!\n\n).)*?,\s+from\s+{since}\s+{lifted}:\s+the\s+{keeps}",
+            lambda _match, history=history: history,
+            text,
+            flags=re.DOTALL,
+        )
+        # The house rule's since: "From <since> until ... lifted the hold, PR #574's houses
+        # were held for the owner, since <why>. The case keeps this house until ..."
+        text = re.sub(
+            rf"(From\s+{since}\s+{lifted},\s+{whose}\s+houses\s+were\s+held\s+for\s+the\s+"
+            rf"owner,\s+since\s+(?:(?!\n\n).)*?\.)\s+The\s+{keeps}",
+            r"\1",
+            text,
+            flags=re.DOTALL,
+        )
+    return text
+
+
 def algebraic_sentences(selection: select_houses.Selection, side: Fraction) -> list[str]:
-    """What a record says of an algebraic certificate below its house: left out of the
-    selection on one route, for the owner's decision (RP-3 of PR 574's review)."""
+    """What a record says of an algebraic certificate below its house: decided on one exact
+    route, which the rule of 15 October left out for the owner (RP-3 of PR 574's review),
+    and which the house rule adopts, staged until the writer takes an algebraic side
+    (review A2 of #660)."""
     sentences = []
     for result, key in selection.algebraic:
         if not select_houses.algebraic_below(key, selection.n, side):
@@ -1299,9 +1658,11 @@ def algebraic_sentences(selection: select_houses.Selection, side: Fraction) -> l
         sentences.append(
             f"{result}’s algebraic certificate at this count, a root of a degree-{degree} "
             f"integer polynomial `{_sci(margin)}` below this house, is decided here on one "
-            "exact route only, so it is left out of the selection: adopting it is the "
-            f"owner’s decision (RP-3 of the [review of {reviewed}](../../{review})), pending "
-            "a second route."
+            "exact route. The rule of 15 October left it out for the owner (RP-3 of the "
+            f"[review of {reviewed}](../../{review})), and the owner’s house rule of "
+            f"{words(select_houses.RULE_SET_ON)} adopts it: the case keeps this house until "
+            f"its adoption{_staged(selection.n, result)} moves it to {result}’s side, once "
+            "the writer takes an algebraic side."
         )
     return sentences
 
@@ -1464,6 +1825,7 @@ def historical(move: Move, text: str) -> str:
     )
     text = _earlier_ceiling(move, text)
     text = _regularized_certificate(move, text)
+    text = held_history(text)
     # The records are wrapped, so a sentence may break at any space; whitespace is
     # matched as such and the reflow is the formatter's.
     text = re.sub(
@@ -1835,11 +2197,15 @@ HELD_OPENING = "**Held for the owner, "
 
 
 def held_at(n: int, case: select_houses.Case) -> tuple[select_houses.Candidate, ...]:
-    """The certificates of held results (`select_houses.HELD`) below the case at `n`."""
-    entries = [e for e in select_houses.load_results() if str(e["id"]) in select_houses.HELD]
+    """The rational certificates of lifted holds (`select_houses.LIFTED`) below the case at
+    `n`: what the record's held note says, as the rule of 15 October wrote it."""
+    entries = [e for e in select_houses.load_results() if str(e["id"]) in select_houses.LIFTED]
     found = select_houses.candidates(entries, select_houses.load_evidence()).get(n, [])
     return tuple(
-        sorted((c for c in found if c.side < case.verified), key=select_houses.precedence)
+        sorted(
+            (c for c in found if not c.algebraic and c.side < case.verified),
+            key=select_houses.precedence,
+        )
     )
 
 
@@ -1869,14 +2235,17 @@ def held_note(n: int, text: str) -> str:
         raise AdoptionError(f"n={n} holds {len(mine)} held notes")
     kept = [part for i, part in enumerate(parts) if i not in mine]
     if held:
-        since = min(select_houses.HELD[c.result].since for c in held)
+        since = min(select_houses.LIFTED[c.result].since for c in held)
+        until = max(select_houses.LIFTED[c.result].until for c in held)
         sentences = held_sentences(
             held,
             select_houses.parse_case(n, text).verified,
             below="this case’s verified ceiling",
             keeps="its house",
         )
-        written = f"{HELD_OPENING}{words(since)}.** " + " ".join(sentences)
+        written = f"{HELD_OPENING}{words(since)}; lifted {words(until)}.** " + " ".join(
+            sentences
+        )
         if mine and " ".join(parts[mine[0]].split()) == written:
             written = parts[mine[0]]
         else:
@@ -1899,8 +2268,9 @@ def carries_held_note(text: str) -> bool:
 
 
 def held_counts() -> list[int]:
-    """The counts no pass houses where a held result is below the case, or a note stands."""
-    entries = [e for e in select_houses.load_results() if str(e["id"]) in select_houses.HELD]
+    """The counts no pass houses where a lifted hold's result is below the case, or a note
+    stands."""
+    entries = [e for e in select_houses.load_results() if str(e["id"]) in select_houses.LIFTED]
     reached = {n for entry in entries for n in select_houses.scope_values(dict(entry["scope"]))}
     noted = {
         int(path.stem.removeprefix("n-"))
@@ -1917,15 +2287,28 @@ def held_counts() -> list[int]:
 # ------------------------------------------------------------------------- refreshing
 
 
+def recorded_days() -> dict[int, str]:
+    """The day each record this adoption owns was last written: its last pass's, or, for a
+    record no pass houses that carries a held note, the day of the hold it names. The
+    replays and checks here select as each record was written
+    (`select_houses.select(recorded=...)`)."""
+    days = {n: houses.adopted_on(n) for n in houses.ADOPTED}
+    first = min((hold.since for hold in select_houses.LIFTED.values()), default=None)
+    if first is not None:
+        days.update({n: first for n in held_counts() if n not in days})
+    return days
+
+
 def replay_plan() -> list[Move]:
     """Each adopted count's last pass planned again from the record as that pass read it."""
     latest = before_last_pass()
-    current = select_houses.select()
+    days = recorded_days()
+    current = select_houses.select(recorded=days)
     cases = {
         n: select_houses.parse_case(n, latest[n]) if n in latest else selection.case
         for n, selection in current.items()
     }
-    return plan(select_houses.select(cases=cases), texts=latest)
+    return plan(select_houses.select(cases=cases, recorded=days), texts=latest)
 
 
 def replayed_text(move: Move) -> str:
@@ -1942,15 +2325,16 @@ def _span(text: str, start: str, end: str) -> tuple[int, int]:
 
 def refreshed(move: Move, committed: str) -> str:
     """The committed record with what its last pass's writer writes now in the parts the
-    writer alone owns: the evidence roster, the dated paragraph and the certificate
-    section, and, outside `HAND_MARKED`, the rest of the body, which it marks as history.
+    writer alone owns: the evidence roster, priority notes, the dated paragraph and the
+    certificate section, and, outside `HAND_MARKED`, the rest of the body, marked as history.
     The rest, the verifier table and the front matter other tools refresh, stays as it
     is."""
     written = replayed_text(move)
     fence, front, rest = _split(committed)
-    evidence = _packing(_split(written)[1])["evidence"]
-    if _packing(front).get("evidence") != evidence:
-        front = _replace(front, "evidence", evidence)
+    packing = _packing(_split(written)[1])
+    for key in ("evidence", "priority_notes"):
+        if _packing(front).get(key) != packing.get(key):
+            front = _replace(front, key, packing[key])
     if move.n not in HAND_MARKED:
         rest = _with_history(rest, _split(written)[2])
     text = fence + front + rest
@@ -2100,6 +2484,231 @@ def check() -> list[str]:
     return problems
 
 
+#: Where the steps that follow a new house are written (think-g3q7).
+WITNESS_CHANGES = 'docs/project/guides/regularization-process.md, "When a Witness Changes"'
+#: Where the intake runbook schedules those steps and their compute.
+INTAKE_STEP = 'packing/campaign/result-import.md, "Adopt a House, Then Regularize It"'
+#: Both strong generators and the selection on one re-housed count, in CPU-minutes, as the
+#: regularization audit of 15 October 2026 read the layer's run receipts (think-sfas):
+#: Evan Daniel's driver 140 to 220 CPU-seconds a count, grid-slack 37 to 110 at each of
+#: its three thresholds, and the selection seconds to about four minutes for each of the
+#: count's four candidate views (review A7 of #641). No receipt yet measures the selection
+#: on a new witness, so the upper end is the guide's largest view taken four times.
+REGULARIZE_CPU_MINUTES = (5, 25)
+#: The workers the printed commands give the driver and the selection, as the guide's
+#: examples do: what a shared host can spare, which the reader sets (review B3 of #641).
+WORKERS = 2
+#: The base branch's record as the file `default_drawings --compare` reads, in a shell
+#: (review C4 of #641), for a pull request on main; a stacked one names its own base, as
+#: the runbook and the guide say (review D2).
+BASE_RECORD = f"`<(git show origin/main:{default_drawings.RECORD_PATH})`"
+STACKED_BASE = "with a stacked pull request's base branch for main"
+#: What the runbook, the guide and this printout say of every count an adoption re-houses,
+#: in one wording (reviews C4, D1 and E1 of #641): the owner's rule is to adopt the
+#: smallest packing and then regularize it, so the count's runs are owed in the adoption's
+#: pull request (`default_drawings.RUNS_OWED`), and an adoption whose runs do not fit under
+#: the pass's compute cap waits with them, staged in `select_houses.PENDING_ADOPTION`.
+NEVER_DEFERRED = "never deferred to default_drawings.PENDING_ALLOWED"
+#: What follows a write, as `python -m devtools.` commands from `packing/` with `{n}` the
+#: re-housed counts: the new witness, the axis tool's view of it, and each count's state.
+REFRESH_COMMANDS = (
+    "build_known_best_atlas --update",
+    "regularize_axis_components --update-atlas --n {n}",
+    "default_drawings --update",
+)
+#: The strong runs' directories under `$RUNS`, each with the prefix the layer gives its
+#: run id: a run is recorded as its directory's name after `grid-slack-`
+#: (`regularize_grid_slack.admitted_views`) or `evand-regularize-`
+#: (`regularize_evand.evand_candidates`), and admitting a run whose id the index already
+#: holds replaces that run's block, its cost and decisions, under the views that name it
+#: (review B2 of #641). So each name starts with a label no run in the index has, and
+#: that names the re-housed counts, so that two adoptions in flight on one day print
+#: different names (`run_label`, review C3 of #641).
+RUN_DIRECTORIES = {
+    "grid05": ("grid-slack", "{label}-grid-0.5"),
+    "grid1": ("grid-slack", "{label}-grid-1"),
+    "grid5": ("grid-slack", "{label}-grid-5"),
+    "evand": ("evand-regularize", "{label}-evand"),
+}
+#: Then the strong generators on each pending count, grid-slack at its three thresholds
+#: and Evan Daniel's driver, and the selection, which prints the `layer` commands.
+STRONG_COMMANDS = (
+    "regularize_grid_slack --n {n} --run-dir $RUNS/{grid05}",
+    "regularize_grid_slack --n {n} --run-dir $RUNS/{grid1} --near-axis-degrees 1",
+    "regularize_grid_slack --n {n} --run-dir $RUNS/{grid5} --near-axis-degrees 5",
+    "regularize_evand run --run-dir $RUNS/{evand} --n {n} --workers $WORKERS",
+    (
+        "regularize_select --evand-run $RUNS/{evand} --grid-run $RUNS/{grid05} "
+        "$RUNS/{grid1} $RUNS/{grid5} --workers $WORKERS "
+        "--output $RUNS/{label}-selection.json --markdown $RUNS/{label}-selection.md"
+    ),
+)
+
+
+def run_ids(label: str) -> dict[str, str]:
+    """The run id each strong run under `label` gives the layer, by its directory's key."""
+    return {
+        key: f"{prefix}-{directory.format(label=label)}"
+        for key, (prefix, directory) in RUN_DIRECTORIES.items()
+    }
+
+
+def run_label(day: str, counts: Sequence[int], index: Path = default_drawings.INDEX) -> str:
+    """A label for an adoption's strong runs that gives no run an id the layer's index
+    already has (review B2 of #641), and that names the re-housed counts by the lowest and
+    the highest: `adopt-<day>-n176`, `adopt-<day>-n105-304`, or the same with `-b`, `-c`
+    and on where an earlier run took it. The index holds only the runs merged into the
+    branch, so two adoptions opened on one day would otherwise print the same ids and the
+    second to admit would replace the first's block; two adoptions that re-house the same
+    count already conflict on its case record (review C3 of #641)."""
+    if not counts:
+        raise ValueError("an adoption's run label names the counts it re-houses")
+    low, high = min(counts), max(counts)
+    named = f"adopt-{day}-n{low}" if low == high else f"adopt-{day}-n{low}-{high}"
+    document = json.loads(index.read_text(encoding="utf-8"))
+    taken = {str(run.get("id")) for run in document.get("runs") or []}
+    for suffix in ("", *(f"-{letter}" for letter in "bcdefghijklmnopqrstuvwxyz")):
+        label = f"{named}{suffix}"
+        if not taken & set(run_ids(label).values()):
+            return label
+    raise SystemExit(f"every {named} run label is taken in {index}")
+
+
+def _plural(count: int, noun: str) -> str:
+    return f"{count} {noun}" if count == 1 else f"{count} {noun}s"
+
+
+def _cost(certain: int, every: int) -> str:
+    """The strong runs' cost, from the counts certain to be pending to all re-housed."""
+    low, high = REGULARIZE_CPU_MINUTES
+    each = f"{low} to {high} CPU-minutes a count for both strong generators and the selection"
+    if certain == every:
+        return f"{each}, {low * every} to {high * every} for these"
+    if not certain:
+        return f"{each}, up to {low * every} to {high * every} for all {every}"
+    return (
+        f"{each}, {low * certain} to {high * certain} for the {certain} certain to be "
+        f"pending, up to {low * every} to {high * every} for all {every}"
+    )
+
+
+def regularization_owed(
+    counts: Sequence[int],
+    *,
+    index: Path = default_drawings.INDEX,
+    allowed: Mapping[int, str] | None = None,
+    settled: Mapping[int, object] | None = None,
+    day: str | None = None,
+) -> list[str]:
+    """What re-housing `counts` owes the regularized layer, as the lines `main` prints.
+
+    A new house is a new witness: the layer's view of the count lapses with it, and the
+    count reads `pending` in `default-drawings.json` until the strong generators decide the
+    new witness, unless the new house drawing has no uneven and no near-axis square, no
+    strong view of the count has lapsed, and `PENDING_ALLOWED` does not hold it for its
+    bead's runs (`default_drawings.count_state`). Read from the committed index before the
+    atlas is refreshed, this names the counts certain to be pending, one count a line, and
+    a `SETTLED` decision the new witness voids, then gives the commands, with run
+    directories named for `day` (the adoption's, by default) and the counts, that no run
+    in the index has (`run_label`), what they cost, and what the adoption's pull request
+    owes: the drawings before and after, and every re-housed count's runs, none deferred.
+    It measures and runs nothing: the runs take minutes a count, and the pass prices them
+    as one validation item under its compute cap (`INTAKE_STEP`).
+    """
+    if not counts:
+        return []
+    allowed = default_drawings.PENDING_ALLOWED if allowed is None else allowed
+    settled = default_drawings.SETTLED if settled is None else settled
+    if day is None:
+        days = [houses.adopted_on(n) for n in counts if n in houses.ADOPTED]
+        day = max(days, default=datetime.now(UTC).date().isoformat())
+    label = run_label(day, counts, index)
+    entries = default_drawings.index_entries(index)
+    spaced = " ".join(map(str, counts))
+    certain: list[str] = []
+    unless: list[str] = []
+    for n in counts:
+        entry = entries.get(n, {})
+        lapse = entry.get(default_drawings.LAPSED)
+        why: list[str] = []
+        if entry.get("generator") in default_drawings.STRONG_GENERATORS:
+            why.append(f"its {entry['generator']} view lapses")
+        elif lapse:
+            why.append(f"a {lapse['generator']} view lapsed earlier")
+        if n in allowed:
+            bead = default_drawings.BEAD.match(allowed[n])
+            holder = bead[0] if bead else repr(allowed[n])
+            why.append(
+                f"PENDING_ALLOWED holds it for {holder}'s runs, whatever the new house "
+                "reads: they run here, on the new witness, and the entry comes off"
+            )
+        if why:
+            certain.append(f"    {n}: {'; '.join(why)}")
+        else:
+            unless.append(str(n))
+    lines = [
+        (
+            f"regularization owed: {_plural(len(counts), 're-housed count')}, {spaced} "
+            f"({WITNESS_CHANGES})"
+        )
+    ]
+    if certain:
+        lines.append("  pending until the strong generators decide the new witness:")
+        lines.extend(certain)
+    if unless:
+        lines.append(
+            "  pending unless the new house drawing has no uneven and no near-axis square: "
+            + " ".join(unless)
+        )
+    lines.extend(
+        f"  n={n}: SETTLED was decided on the earlier witness; decide the new one and settle "
+        "it again, or take it off"
+        for n in counts
+        if n in settled
+    )
+    lines.append(
+        f"  cost: {_cost(len(certain), len(counts))}; one validation item under the pass's "
+        f"compute cap ({INTAKE_STEP})"
+    )
+    lines.append(
+        "  from packing/, in one shell, each python command after `uv run --frozen "
+        "--all-extras --group dev`; RUNS is outside the checkout, WORKERS what the host can "
+        "spare:"
+    )
+    lines.append(f"    RUNS=/tmp/regularize WORKERS={WORKERS}")
+    lines.extend(f"    python -m devtools.{line.format(n=spaced)}" for line in REFRESH_COMMANDS)
+    lines.append(
+        "  then on each count `default_drawings --check-state` names pending (these, less any "
+        "it reads regular), in run directories no run in the index has named:"
+    )
+    directories = {
+        key: directory.format(label=label)
+        for key, (_prefix, directory) in RUN_DIRECTORIES.items()
+    }
+    lines.extend(
+        f"    python -m devtools.{line.format(n=spaced, label=label, **directories)}"
+        for line in STRONG_COMMANDS
+    )
+    lines.append(
+        "  and the `layer` commands it prints, then the guide's step 5 (render and record)."
+    )
+    lines.append(
+        "  List each re-housed count's drawing before and after in this pull request "
+        f"(`default_drawings --compare` with the base branch's record, {BASE_RECORD}, "
+        f"{STACKED_BASE}); where {default_drawings.STRONG_VIEW_LOST}, it names those goals "
+        f"and marks each such count still pending: {default_drawings.RUNS_OWED}."
+    )
+    lines.append(
+        f"  A re-housed count is {NEVER_DEFERRED}: where the runs do not fit under the "
+        "pass's compute cap, stage the counts they do not cover in "
+        "select_houses.PENDING_ADOPTION with the open bead that adopts them, and adopt the "
+        "rest. `python -m devtools.default_drawings --check-state` fails until the runs "
+        "decide every re-housed count, and while the list defers the runs of a witness "
+        "whose house has moved since."
+    )
+    return lines
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=(__doc__ or "").split("\n\n", 1)[0])
     mode = parser.add_mutually_exclusive_group()
@@ -2125,9 +2734,13 @@ def main(argv: Sequence[str] | None = None) -> int:
     if arguments.dry_run:
         for move in moves:
             print(f"n={move.n}: {move.house.result} {select_houses.ceiling(move.house.side)}")
+        for line in regularization_owed([move.n for move in moves if not adopted(move)]):
+            print(line)
         return 0
     written = write(moves)
     print(f"adopted {len(written)} houses: {', '.join(map(str, written)) or 'none'}")
+    for line in regularization_owed(written):
+        print(line)
     return 0
 
 

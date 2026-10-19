@@ -725,6 +725,25 @@ def test_the_three_under_selections_review_g_reproduced() -> None:
         assert expected <= names, f"changing {path} must select {sorted(expected - names)}"
 
 
+def test_the_retained_regularization_evidence_selects_the_state_step() -> None:
+    """Every settlement in `default_drawings.SETTLED` rests on the run evidence retained
+    under `packing/cases/regularized_drawings/`, so a change to it alone selects the
+    regularization-state step (review G1 of #644)."""
+    evidence = "packing/cases/regularized_drawings"
+    for path in (
+        f"{evidence}/settled-runs/grid-slack-on518/run.json",
+        f"{evidence}/think-la7h-2026-10-16/3a-rerun-s-1016/receipt.json",
+        f"{evidence}/think-la7h-2026-10-16/3a-rerun-s-1016/n-204/report.json.gz",
+    ):
+        selection = select_for_paths([path])
+        assert not selection.is_whole_gate, path
+        names = {step.name for step in selection.steps}
+        assert (
+            "every drawn picture is regularized, regular as published, decided or exempt"
+            in names
+        ), path
+
+
 def test_push_paths_include_committed_and_worktree_renames_deletions_and_additions(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:

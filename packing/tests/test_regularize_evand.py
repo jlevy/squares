@@ -765,6 +765,141 @@ def test_an_admitted_view_enters_the_layer_under_its_contract(
     assert axis.main(["--verify-atlas"], layout=layout) == 0
 
 
+def test_a_view_sent_to_review_is_drawn_only_as_a_review_record_admits_it(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Row 7 sends a view to review, and the layer draws it only through a review record
+    (policy section 5): one admitting this count's view of this generator, run and
+    output, at that row, against the same source witness. The entry names its record,
+    and the layer's check holds the two to each other: the owner admitted Evan Daniel's
+    view at n = 211 this way on 16 October 2026."""
+    monkeypatch.setenv("PACK_JOBS", "1")
+    root, layout = scratch_tree(tmp_path)
+    run_dir = a_run(root, layout, tmp_path / "full")
+    path = run_dir / "n-004" / "report.json"
+    report = json.loads(path.read_text(encoding="utf-8"))
+    report["decision"] = {
+        "row": 7,
+        "decision": "review",
+        "reason": "1 per-square count fell while no total did: for review",
+    }
+    path.write_text(json.dumps(report), encoding="utf-8")
+    assert drive.write_layer([run_dir], root, "admitted")["written"] == []
+
+    record = {
+        "n": 4,
+        "date": "2026-10-16",
+        "reviewer": "the owner",
+        "decision": "admit",
+        "reason": "a test",
+        "generator": axis.EVAND_GENERATOR,
+        "run": "evand-regularize-full",
+        "output": "same",
+        "row": 7,
+        "source": axis.witness_self(root, report["source"]["path"]),
+        "generator_version": axis.review_version(drive.evand_generator_block()),
+        "gallery": ["packing/atlas/known-best/manifest.json"],
+    }
+    reviews = layout.directory / axis.REVIEWS
+    write = lambda *records: reviews.write_text(  # noqa: E731
+        json.dumps({"reviews": list(records)}), encoding="utf-8"
+    )
+    # A record of another run, or of another version of the generator, or one rejecting
+    # the view, admits nothing.
+    write({**record, "run": "evand-regularize-other"})
+    assert drive.write_layer([run_dir], root, "admitted")["written"] == []
+    write({**record, "generator_version": {**record["generator_version"], "pin": "0000000"}})
+    assert drive.write_layer([run_dir], root, "admitted")["written"] == []
+    write({**record, "decision": "reject"})
+    assert drive.write_layer([run_dir], root, "admitted")["written"] == []
+    # Nor does one bound to another witness than the tree's, as it identifies itself, or
+    # one naming no row the review rows hold, nor a report sent to review at no such row
+    # (review J4 of #657).
+    write({**record, "source": {**record["source"], "revision": "an upstream fix"}})
+    assert drive.write_layer([run_dir], root, "admitted")["written"] == []
+    write({key: value for key, value in record.items() if key != "row"})
+    assert drive.write_layer([run_dir], root, "admitted")["written"] == []
+    unrowed = {**report, "decision": {**report["decision"], "row": None}}
+    rowless = {key: value for key, value in record.items() if key != "row"}
+    for held in (record, rowless):
+        assert drive.reviewed_output(unrowed, "evand-regularize-full", [held], root) == (
+            None,
+            None,
+        )
+    assert drive.reviewed_output(report, "evand-regularize-full", [record], root) == (
+        "same",
+        record,
+    )
+    write({**record, "decision": "reject"})
+    assert axis.check_atlas(layout) == []
+
+    write(record)
+    assert drive.write_layer([run_dir], root, "admitted")["written"] == [4]
+    assert axis.check_atlas(layout) == []
+    # The gallery the reviewer decided from is in the repository.
+    write({**record, "gallery": ["packing/no-such-gallery.html"]})
+    assert any("is not in the repository" in p for p in axis.check_atlas(layout))
+    (entry,) = json.loads(layout.index.read_text())["entries"]
+    assert (entry["decision"]["row"], entry["decision"]["decision"]) == (7, "review")
+    assert entry["review"] == {
+        "record": drive.LAYER_REVIEWS_PATH,
+        "date": "2026-10-16",
+        "reviewer": "the owner",
+    }
+    schema = load_yaml(
+        (axis.ATLAS_DIR.parent / "regularized-atlas-index.schema.yaml").read_text()
+    )
+    drawn = Draft202012Validator(
+        {**schema["$defs"]["generated_record"], "$defs": schema["$defs"]}
+    )
+    assert list(drawn.iter_errors(entry)) == []
+    assert list(drawn.iter_errors({k: v for k, v in entry.items() if k != "review"}))
+
+    # The check holds the record and the entry to each other: a record of another view
+    # than the one drawn, a record withdrawn, and an entry naming the record otherwise.
+    write({**record, "output": "solved"})
+    assert any("does not draw" in problem for problem in axis.check_atlas(layout))
+    write()
+    found = axis.check_atlas(layout)
+    assert any("names a review record" in problem for problem in found)
+    write(record)
+    index = json.loads(layout.index.read_text())
+    index["entries"][0]["review"] = {**entry["review"], "reviewer": "someone else"}
+    layout.index.write_text(json.dumps(index), encoding="utf-8")
+    assert any("names its review record as" in p for p in axis.check_atlas(layout))
+    del index["entries"][0]["review"]
+    layout.index.write_text(json.dumps(index), encoding="utf-8")
+    found = axis.check_atlas(layout)
+    assert any("or a review record's" in problem for problem in found)
+    assert any("admits a view the layer does not draw" in problem for problem in found)
+    # A record of another witness than the count's has lapsed with it (the policy's
+    # re-review): a view drawn on it is drawn without a record, and where the layer draws
+    # another view, the lapsed record asks for nothing.
+    lapsed = {**record, "source": {**record["source"], "revision": "an upstream fix"}}
+    write(lapsed)
+    index["entries"][0]["review"] = entry["review"]
+    layout.index.write_text(json.dumps(index), encoding="utf-8")
+    found = axis.check_atlas(layout)
+    assert any(
+        "not of the drawn view: its witness now identifies itself otherwise (revision)"
+        in problem
+        for problem in found
+    ), found
+    generators = index["generators"]
+    assert axis.review_problems(layout, {4: entry["reference"]}, generators) == []
+    write(record)
+    assert axis.review_problems(layout, {4: entry["reference"]}, generators) == [
+        (
+            f"n=4: {drive.LAYER_REVIEWS_PATH} admits a view the layer does not draw (its "
+            "generator is 'evand-regularize', the entry's 'regularize_axis_components/2'; "
+            "its run is 'evand-regularize-full', the entry's None; its output is 'same', "
+            "the entry's None; its row is 7, the entry's None); run `layer` over the "
+            "record's run, or, where the witness was re-derived with the same identity, "
+            "withdraw the record or confirm it in a new one"
+        )
+    ]
+
+
 def test_an_admitted_view_ends_the_lapse_the_axis_record_carried(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
@@ -1053,6 +1188,103 @@ def test_a_ladder_report_admits_its_rungs_and_records_them_only_for_its_own_view
     assert drive.record_rungs([run_dir], root)["not_drawn"] == [4]
     (entry,) = json.loads(layout.index.read_text())["entries"]
     assert "rungs" not in entry["run"]
+
+
+def test_rungs_check_lists_the_drawn_views_a_run_reproduces_and_writes_nothing(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    """A fresh run reproduces a drawn view when its admitted view, under the entry's own
+    run, is the drawn view byte for byte and the values the view's text does not carry --
+    the retry rungs, the regularizer's level, the regularization record -- are the
+    entry's too (review D1 of #644). The check writes nothing, and its exit says whether
+    every drawn view the runs cover was reproduced."""
+    monkeypatch.setenv("PACK_JOBS", "1")
+    root, layout = scratch_tree(tmp_path)
+    run_dir = a_run(root, layout, tmp_path / "full")
+    path = run_dir / "n-004" / "report.json"
+    report = json.loads(path.read_text(encoding="utf-8"))
+    report["solve"] = {"status": "KKT local min", "rungs": []}
+    path.write_text(json.dumps(report), encoding="utf-8")
+    drive.write_layer([run_dir], root, "admitted")
+    index = layout.index.read_bytes()
+    again = tmp_path / "again"
+    for source in run_dir.glob("n-*/*"):
+        target = again / source.parent.name / source.name
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes(source.read_bytes())
+    again_report = again / "n-004" / "report.json"
+    assert drive.reproduced_views([again], root) == {
+        "reproduced": [4],
+        "agrees": [],
+        "differs": {},
+        "not_drawn": [],
+        "uncompared": [],
+    }
+    arguments = ["rungs", "--check", "--run-dir", str(again), "--repo-root", str(root)]
+    assert drive.main(arguments) == 0
+
+    # Retained as evidence, a run keeps its reports gzip-compressed and not its views,
+    # so its view's text cannot be compared: a report that agrees on everything else is
+    # listed as agreeing, not as reproduced (review F2 of #644).
+    kept = tmp_path / "kept"
+    (kept / "n-004").mkdir(parents=True)
+    retained = kept / "n-004" / "report.json.gz"
+    retained.write_bytes(gzip.compress(again_report.read_bytes(), mtime=0))
+    assert drive.reproduced_views([kept], root) == {
+        "reproduced": [],
+        "agrees": [4],
+        "differs": {},
+        "not_drawn": [],
+        "uncompared": [],
+    }
+    held = ["rungs", "--check", "--run-dir", str(kept), "--repo-root", str(root)]
+    assert drive.main(held) == 0
+    tampered = json.loads(again_report.read_text(encoding="utf-8"))
+    tampered["regularize"]["level"] = 3
+    retained.write_bytes(gzip.compress(json.dumps(tampered).encode(), mtime=0))
+    assert drive.reproduced_views([kept], root)["differs"] == {"4": ["measured"]}
+    capsys.readouterr()
+    assert drive.main(held) == 1
+    # A view that differs was compared, so the check does not say nothing was (review G3
+    # of #644).
+    assert "nothing was compared" not in capsys.readouterr().out
+
+    # It fails closed: on a missing directory, on one holding no report, and where no
+    # report is of a view the layer draws from the driver, since then it compared nothing.
+    (tmp_path / "empty").mkdir()
+    for directory in (tmp_path / "no-such-run", tmp_path / "empty"):
+        check = ["rungs", "--check", "--run-dir", str(directory), "--repo-root", str(root)]
+        assert drive.main(check) == 1
+    refused = json.loads(again_report.read_text(encoding="utf-8"))
+    refused["decision"] = {**refused["decision"], "row": 7, "decision": "refuse"}
+    retained.write_bytes(gzip.compress(json.dumps(refused).encode(), mtime=0))
+    assert drive.reproduced_views([kept], root)["not_drawn"] == [4]
+    assert drive.reproduced_views([kept], root)["uncompared"] == [str(kept)]
+    assert drive.main(held) == 1
+    # Over several runs, each must compare something: one that reproduces its view does
+    # not carry another that compared nothing (review G5 of #644).
+    both = ["rungs", "--check", "--run-dir", str(again), str(kept), "--repo-root", str(root)]
+    capsys.readouterr()
+    assert drive.main(both) == 1
+    assert f"no report under {kept} is of a view" in capsys.readouterr().out
+
+    # A run whose regularizer worked at another level reproduces nothing, though the
+    # level is not in the view's text: it is the evidence a level 2 view is drawn as the
+    # packing on, and only the report records it.
+    changed = json.loads(again_report.read_text(encoding="utf-8"))
+    changed["regularize"]["level"] = 3
+    again_report.write_text(json.dumps(changed), encoding="utf-8")
+    assert drive.reproduced_views([again], root)["differs"] == {"4": ["measured"]}
+    # Nor does one that climbed a rung, or says another thing of its changes; both are
+    # in the view's text as well.
+    changed["solve"]["rungs"] = ["force-kkt"]
+    changed["regularization"]["changes"] = {"re_angled": 1}
+    again_report.write_text(json.dumps(changed), encoding="utf-8")
+    assert drive.reproduced_views([again], root)["differs"] == {
+        "4": ["view", "run.rungs", "measured", "regularization"]
+    }
+    assert drive.main(arguments) == 1
+    assert layout.index.read_bytes() == index
 
 
 def test_only_an_admitted_grid_view_is_admitted() -> None:
@@ -2180,3 +2412,25 @@ def test_a_closed_form_bound_narrower_than_its_evaluation_is_still_read() -> Non
     assert bound.compare(Fraction(4)) == -1
     assert bound.compare(Fraction(4) + Fraction(1, 10**40)) == 1
     assert f"{bound.difference(Fraction(4)):.3e}" == "-1.250e-41"
+
+
+def test_the_index_records_a_view_without_the_pairing() -> None:
+    """A view no symmetry of the box pairs square for square with its witness is admitted
+    when every other obligation holds (the policy's obligation 3, owner, 13 October
+    2026), and there is no pairing to measure a move or a turn on: the index's identity
+    then records `one_to_one: false` alone, as Evan Daniel's view at n = 176 does (16
+    October 2026). A paired view still records its moves and turns."""
+    schema = load_yaml(
+        (axis.ATLAS_DIR.parent / "regularized-atlas-index.schema.yaml").read_text()
+    )
+    identity = Draft202012Validator(schema["$defs"]["regularization"]["properties"]["identity"])
+    unpaired = {
+        "basis": "measured",
+        "measured_in": "packing/atlas/known-best/regularized/index.json",
+        "one_to_one": False,
+    }
+    assert list(identity.iter_errors(unpaired)) == []
+    paired = {**unpaired, "one_to_one": True}
+    assert list(identity.iter_errors(paired))
+    measured = {**paired, "moved": 3, "max_move": 0.125, "max_turn_deg": 0.0}
+    assert list(identity.iter_errors(measured)) == []

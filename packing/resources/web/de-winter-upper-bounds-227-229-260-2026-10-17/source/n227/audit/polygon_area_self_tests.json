@@ -1,0 +1,51 @@
+[
+  {
+    "name": "identical",
+    "expected_area": "1",
+    "computed_area": "1",
+    "passed": true,
+    "intersection_vertices": 4
+  },
+  {
+    "name": "half_width_overlap",
+    "expected_area": "1/2",
+    "computed_area": "1/2",
+    "passed": true,
+    "intersection_vertices": 4
+  },
+  {
+    "name": "edge_touch",
+    "expected_area": "0",
+    "computed_area": "0",
+    "passed": true,
+    "intersection_vertices": 2
+  },
+  {
+    "name": "vertex_touch",
+    "expected_area": "0",
+    "computed_area": "0",
+    "passed": true,
+    "intersection_vertices": 1
+  },
+  {
+    "name": "separated",
+    "expected_area": "0",
+    "computed_area": "0",
+    "passed": true,
+    "intersection_vertices": 0
+  },
+  {
+    "name": "rational_rotation",
+    "expected_area": "5/6",
+    "computed_area": "5/6",
+    "passed": true,
+    "intersection_vertices": 8
+  },
+  {
+    "name": "tiny_positive_sliver",
+    "expected_area": "1/1000000000000",
+    "computed_area": "1/1000000000000",
+    "passed": true,
+    "intersection_vertices": 4
+  }
+]

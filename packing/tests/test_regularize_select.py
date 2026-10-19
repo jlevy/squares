@@ -247,6 +247,20 @@ def test_preference_puts_evand_first_then_grid_slack_by_rising_threshold() -> No
     ]
 
 
+def test_preference_orders_a_driver_count_with_no_view_after_the_runs_views() -> None:
+    """A count the driver drew no view of keeps one row with no output (n = 264 on 16
+    October 2026, where upstream's checker refused the regularizer's certificate); the
+    sort that orders a count's candidates must not fail on it."""
+    empty = _row("evand:3c:none", output=None, view=False, row=1, decision="no-view")
+    rows = [_row("grid:half"), empty, _row("evand:3c:same", output="same")]
+    ordered = [row["source"] for row in sorted(rows, key=select.preference)]
+    assert ordered == ["evand:3c:same", "evand:3c:none", "grid:half"]
+    # Only the missing output sorts last; an output the selection does not know still
+    # fails the sort rather than being filed after the views (review A1 of #654).
+    with pytest.raises(ValueError, match="not in tuple"):
+        select.preference(_row("evand:3c:misspelt", output="smae"))
+
+
 def test_register_candidates_are_exactly_verified_views_below_u() -> None:
     below = _judged(side="29/10", measures={"near_axis": 0})
     refused = _judged(side="29/10", routes={"exact_verify": False, "independent": True})

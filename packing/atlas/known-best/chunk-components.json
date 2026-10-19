@@ -38121,8 +38121,8 @@
       "summary": {
         "by_source_kind": {
           "exact-grid": {"component_slide_dof":{"1":1,"10":6,"11":1,"12":7,"13":1,"14":8,"15":1,"16":9,"17":1,"18":10,"2":2,"3":1,"4":3,"5":1,"6":4,"7":1,"8":5,"9":1},"internal_slide_dof":741,"records":64,"structured_squares":3189,"topologies":{"contact-chain":2,"contact-patch":61},"total_squares":3190,"wall_seated_squares":1282,"within_six_chunks_and_three_free":64},
-          "kingbird-derived-facts": {"component_slide_dof":{"1":14,"10":7,"12":7,"14":1,"2":22,"3":17,"4":14,"5":6,"6":18,"7":9,"8":10,"9":6},"internal_slide_dof":668,"records":30,"structured_squares":1359,"topologies":{"contact-chain":40,"contact-patch":91},"total_squares":1413,"wall_seated_squares":621,"within_six_chunks_and_three_free":23},
-          "packet-derived-facts": {"component_slide_dof":{"1":3,"10":1,"11":1,"12":2,"13":2,"17":1,"2":7,"3":4,"4":3,"5":2,"6":2,"8":3,"9":2},"internal_slide_dof":193,"records":6,"structured_squares":372,"topologies":{"contact-chain":13,"contact-patch":19,"contact-tree":1},"total_squares":447,"wall_seated_squares":148,"within_six_chunks_and_three_free":2}
+          "kingbird-derived-facts": {"component_slide_dof":{"1":12,"10":7,"12":7,"14":1,"2":21,"3":15,"4":13,"5":6,"6":18,"7":9,"8":10,"9":6},"internal_slide_dof":654,"records":29,"structured_squares":1333,"topologies":{"contact-chain":36,"contact-patch":89},"total_squares":1384,"wall_seated_squares":606,"within_six_chunks_and_three_free":22},
+          "packet-derived-facts": {"component_slide_dof":{"1":5,"10":1,"11":1,"12":2,"13":2,"17":1,"2":8,"3":6,"4":4,"5":2,"6":2,"8":3,"9":2},"internal_slide_dof":207,"records":7,"structured_squares":398,"topologies":{"contact-chain":17,"contact-patch":21,"contact-tree":1},"total_squares":476,"wall_seated_squares":163,"within_six_chunks_and_three_free":3}
         },
         "component_slide_dof": {"1":18,"10":14,"11":2,"12":16,"13":3,"14":9,"15":1,"16":9,"17":2,"18":10,"2":31,"3":22,"4":20,"5":9,"6":24,"7":10,"8":18,"9":9},
         "internal_slide_dof": 1602,
@@ -49477,8 +49477,8 @@
       "summary": {
         "by_source_kind": {
           "exact-grid": {"component_slide_dof":{"1":1,"10":6,"11":1,"12":7,"13":1,"14":8,"15":1,"16":9,"17":1,"18":10,"2":2,"3":1,"4":3,"5":1,"6":4,"7":1,"8":5,"9":1},"internal_slide_dof":741,"records":64,"structured_squares":3189,"topologies":{"contact-chain":2,"contact-patch":61},"total_squares":3190,"wall_seated_squares":1282,"within_six_chunks_and_three_free":64},
-          "kingbird-derived-facts": {"component_slide_dof":{"1":14,"10":7,"12":7,"14":1,"2":22,"3":15,"4":16,"5":4,"6":18,"7":10,"8":10,"9":6},"internal_slide_dof":667,"records":30,"structured_squares":1359,"topologies":{"contact-chain":40,"contact-patch":90},"total_squares":1413,"wall_seated_squares":621,"within_six_chunks_and_three_free":23},
-          "packet-derived-facts": {"component_slide_dof":{"1":3,"10":1,"11":1,"13":2,"2":7,"3":4,"4":2,"5":1,"6":5,"7":1,"8":3,"9":4},"internal_slide_dof":186,"records":6,"structured_squares":405,"topologies":{"contact-chain":12,"contact-patch":21,"contact-tree":1},"total_squares":447,"wall_seated_squares":165,"within_six_chunks_and_three_free":2}
+          "kingbird-derived-facts": {"component_slide_dof":{"1":12,"10":7,"12":7,"14":1,"2":21,"3":13,"4":15,"5":4,"6":18,"7":10,"8":10,"9":6},"internal_slide_dof":653,"records":29,"structured_squares":1333,"topologies":{"contact-chain":36,"contact-patch":88},"total_squares":1384,"wall_seated_squares":606,"within_six_chunks_and_three_free":22},
+          "packet-derived-facts": {"component_slide_dof":{"1":5,"10":1,"11":1,"13":2,"2":8,"3":6,"4":3,"5":1,"6":5,"7":1,"8":3,"9":4},"internal_slide_dof":200,"records":7,"structured_squares":431,"topologies":{"contact-chain":16,"contact-patch":23,"contact-tree":1},"total_squares":476,"wall_seated_squares":180,"within_six_chunks_and_three_free":3}
         },
         "component_slide_dof": {"1":18,"10":14,"11":2,"12":14,"13":3,"14":9,"15":1,"16":9,"17":1,"18":10,"2":31,"3":20,"4":21,"5":6,"6":27,"7":12,"8":18,"9":11},
         "internal_slide_dof": 1594,

@@ -179,6 +179,9 @@ UPPER_BOUND = "upper-bound"
 #: How an item names each of this project's modifications to Evan Daniel's regularizer.
 SAME_SIDE_RESOLVE = "same-side exact re-solve (devtools.regularize_same_side)"
 BOUND_RESOLVE = "exact re-solve at the verified upper bound (devtools.regularize_same_side)"
+#: The outputs of a driver run an index entry can draw: the same-side re-solve's
+#: (`same`), or his solve's own (`solved`) where that re-solve was refused or not tried.
+EVAND_OUTPUTS = frozenset({"same", "solved"})
 #: The retry rungs, by the name the driver records (`devtools.regularize_evand`). The
 #: stall-stop rung's one change is its replica patch, which the view's `method` names, so
 #: it has no words of its own (`SILENT_RUNGS`); any other rung is refused.
@@ -450,9 +453,16 @@ def project_modifications(
     """This project's modifications to Evan Daniel's regularizer that made a drawn view,
     read from its index entry: the retry rungs its solve climbed, the vendored copy's
     patches its `method` names, and the exact re-solve that brought it to the witness's
-    side; for a grid-slack view, the port of his placement, which is this project's code,
-    and its re-solve. An empty list: his regularizer ran unmodified. None: the view is
-    this project's axis tool's, which is not his regularizer."""
+    side where that re-solve made the view (`run.output` is `same`); for a grid-slack
+    view, the port of his placement, which is this project's code, and its re-solve. An
+    empty list: his regularizer ran unmodified. None: the view is this project's axis
+    tool's, which is not his regularizer.
+
+    The re-solve is read from the run's output, not from the side relation: a solve the
+    re-solve refused can still sit at the witness's side (241 and 302, whose solves
+    closed to it), and his solve drawn unmodified is not credited with a re-solve that
+    did not run. An output the tool does not know is refused rather than read either
+    way."""
     generator = str(entry.get("generator"))
     kind = generator_kind(generator)
     if kind == "grid":
@@ -463,7 +473,13 @@ def project_modifications(
     found.extend(
         patch_words(str((entry.get("regularization") or {}).get("method") or ""), kinds)
     )
-    if relation(entry) == "same":
+    output = (entry.get("run") or {}).get("output")
+    if output not in EVAND_OUTPUTS:
+        raise RegularizedDrawingsError(
+            f"n={entry.get('n')}: run output {output!r} does not say whether the same-side "
+            f"re-solve made the view; expected one of {sorted(EVAND_OUTPUTS)}"
+        )
+    if output == "same":
         found.append(SAME_SIDE_RESOLVE)
     return found
 

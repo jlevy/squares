@@ -1,0 +1,9 @@
+#!/bin/bash
+# In-scope counts first, one process at a time.
+/tmp/claude-0/-home-user/497b954f-f1d7-5565-9258-beec4cbe400c/scratchpad/laneC/run_serial.sh evand-n146 -- /home/user/squares/.claude/worktrees/review-185/packing/.venv/bin/python -m devtools.upper_bound_reports evand-n146-2026-10-14 check --replay
+/tmp/claude-0/-home-user/497b954f-f1d7-5565-9258-beec4cbe400c/scratchpad/laneC/run_serial.sh couzo-verified-bounds -- /home/user/squares/.claude/worktrees/review-185/packing/.venv/bin/python -m devtools.upper_bound_reports couzo-verified-bounds-2026-10-14 check --replay
+/tmp/claude-0/-home-user/497b954f-f1d7-5565-9258-beec4cbe400c/scratchpad/laneC/run_serial.sh couzo-n237 -- /home/user/squares/.claude/worktrees/review-185/packing/.venv/bin/python -m devtools.upper_bound_reports couzo-n237-2026-10-15 check --replay
+/tmp/claude-0/-home-user/497b954f-f1d7-5565-9258-beec4cbe400c/scratchpad/laneC/run_serial.sh couzo-607-n237 -- /home/user/squares/.claude/worktrees/review-185/packing/.venv/bin/python -m devtools.upper_bound_reports couzo-certificates-2026-10-14 check --n 237 --replay
+/tmp/claude-0/-home-user/497b954f-f1d7-5565-9258-beec4cbe400c/scratchpad/laneC/run_serial.sh couzo-506-n175 -- /home/user/squares/.claude/worktrees/review-185/packing/.venv/bin/python -m devtools.upper_bound_reports couzo-certificates-2026-10-11 check --n 175 --replay
+/tmp/claude-0/-home-user/497b954f-f1d7-5565-9258-beec4cbe400c/scratchpad/laneC/run_serial.sh mishapolk-12 -- /home/user/squares/.claude/worktrees/review-185/packing/.venv/bin/python -m devtools.upper_bound_reports mishapolk-kkt-refinements-2026-10-14 check --n 129 154 156 175 176 204 232 264 271 302 303 304 --replay
+echo chain-inscope-done >> /tmp/claude-0/-home-user/497b954f-f1d7-5565-9258-beec4cbe400c/scratchpad/laneC/replay/SUMMARY.txt

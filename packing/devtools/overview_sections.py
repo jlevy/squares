@@ -1950,6 +1950,14 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
         "A packing of 211 squares in a square of side under 15.",
     ),
     (
+        "https://github.com/JoostdeWinter/square-packing",
+        "Joost de Winter",
+        (
+            "Reported exact rational certificates for 227, 229 and 260 squares,"
+            " pending adoption (T-196)."
+        ),
+    ),
+    (
         "https://github.com/Queuingtheorydotcom/11SquaresOptimal",
         "Manasseh Ahmed",
         "A computer-assisted proof that Trump's packing of eleven squares is optimal.",
@@ -1979,6 +1987,14 @@ OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
         "Oscar Fitzharding",
         (
             "A Lean 4 proof that Bidwell's packing of seventeen squares is optimal, "
+            "trusting Lean's compiler for its certificates."
+        ),
+    ),
+    (
+        "https://github.com/ofitzharding/sq19",
+        "Oscar Fitzharding",
+        (
+            "A Lean 4 proof that Wainwright's packing of nineteen squares is optimal, "
             "trusting Lean's compiler for its certificates."
         ),
     ),

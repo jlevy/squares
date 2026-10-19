@@ -6,7 +6,7 @@ import copy
 import html
 import re
 import shutil
-from dataclasses import replace
+from dataclasses import asdict, replace
 from pathlib import Path
 from typing import Any
 
@@ -14,8 +14,6 @@ import pytest
 import yaml
 
 from devtools.contributor_census import (
-    _join,  # pyright: ignore[reportPrivateUsage]
-    _spelling_identities,  # pyright: ignore[reportPrivateUsage]
     census,
     reconcile,
     stale_occurrences,
@@ -24,6 +22,7 @@ from devtools.contributor_census import (
 from devtools.contributor_credit import render_credit
 from devtools.result_credit import credit_line, result_credit_html
 from sqpack.contributor_occurrences import (
+    CONTRACT,
     SCHEMA_PATH,
     CreditOccurrence,
     CreditOrigin,
@@ -110,74 +109,164 @@ def test_stale_spans_sources_ids_and_evidence_are_rejected(
             load_occurrences(path, repo=REPO)
 
 
-def test_reconcile_replaces_stale_spans_and_joins_only_reviewed_labels(
-    manifest: tuple[Path, dict[str, Any]],
+@pytest.fixture
+def census_repo(tmp_path: Path) -> tuple[Path, Path, dict[str, Any]]:
+    repo = tmp_path / "repo"
+    packing = repo / "packing"
+    profiles = packing / "contributors"
+    (profiles / "people").mkdir(parents=True)
+    shutil.copytree(PACKING / "contributors/schemas", profiles / "schemas")
+    for profile_id, display_name, alias in (
+        ("ryan-xu", "Ryan Xu", "Xu"),
+        ("evan-daniel", "Evan Daniel", "evand"),
+    ):
+        source = PACKING / "contributors/people" / f"{profile_id}.md"
+        document = load_yaml(source.read_text().split("---", 2)[1])
+        document["contributor"] = {
+            "id": profile_id,
+            "display_name": display_name,
+            "aliases": [alias],
+            "sources": [
+                {"id": "profile", "url": "https://example.com/author", "locator": "Byline"}
+            ],
+            "provenance": [
+                {"field": "/display_name", "sources": ["profile"]},
+                {"field": "/aliases", "sources": ["profile"]},
+            ],
+        }
+        footer = source.read_text().split("<!-- This document follows", 1)[1]
+        (profiles / "people" / source.name).write_text(
+            "---\n"
+            + yaml.safe_dump(document, sort_keys=False)
+            + "---\n<!-- This document follows"
+            + footer
+        )
+    (packing / "resources").mkdir()
+    authors = ["Xu", "Xu", "Evan Daniel(evand)", "Xu", "evand", "Unknown Author"]
+    (packing / "resources/bibliography.yaml").write_text(
+        yaml.safe_dump({"sources": [{"key": "test-source", "authors": authors}]})
+    )
+    (packing / "frontier").mkdir()
+    (packing / "frontier/results.yaml").write_text("results: []\n")
+    rows = []
+    for index, profile_id in ((0, "ryan-xu"), (2, "evan-daniel")):
+        item = CreditOccurrence(
+            CreditOrigin(
+                "packing/resources/bibliography.yaml", "test-source", f"/authors/{index}"
+            ),
+            authors[index],
+            0,
+            len(authors[index]),
+            authors[index],
+            "source-author",
+            "resolved",
+            contributor_id=profile_id,
+            evidence=("profile",),
+            note="Reviewed this source.",
+        )
+        rows.append(asdict(item))
+    document = {
+        "softschema": {"contract": CONTRACT, "schema": SCHEMA_PATH, "status": "enforced"},
+        "occurrences": rows,
+        "inspections": [],
+    }
+    path = profiles / "occurrences.yaml"
+    path.write_text(yaml.safe_dump(document, sort_keys=False))
+    return repo, path, document
+
+
+def test_reconcile_requires_review_for_each_new_source_occurrence(
+    census_repo: tuple[Path, Path, dict[str, Any]],
 ) -> None:
-    path, _ = manifest
-    document = load_yaml((PACKING / "contributors/occurrences.yaml").read_text())
-    rows = document["occurrences"]
-    stale = next(
-        row
-        for row in rows
-        if row["disposition"] == "resolved"
-        and row["origin"]["path"].startswith("packing/frontier/n-")
-    )
-    stale.update(expected_text="Somebody Else", label="Somebody Else", start=0, end=13)
-    levy = next(row for row in rows if row["label"] == "Levy")["origin"]
-    open_label = next(
-        row
-        for row in rows
-        if row["label"] == "Chaoweeraprasit" and row["disposition"] == "unresolved"
-    )
-    removed = (levy, open_label["origin"])
-    document["occurrences"] = [row for row in rows if row["origin"] not in removed]
-    path.write_text(yaml.safe_dump(document, sort_keys=False, allow_unicode=True))
+    repo, path, document = census_repo
+    report = reconcile(repo, path)
+    registry = load_occurrences(path, repo=repo)
+    assert [asdict(item) for item in registry.occurrences[:1]] == document["occurrences"][:1]
+    for index, label, candidate_ids in (
+        (1, "Xu", ["ryan-xu"]),
+        (4, "evand", ["evan-daniel"]),
+        (5, "Unknown Author", []),
+    ):
+        origin = CreditOrigin(
+            "packing/resources/bibliography.yaml", "test-source", f"/authors/{index}"
+        )
+        (item,) = registry.by_origin[origin]
+        assert (item.disposition, item.contributor_id, item.evidence) == (
+            "unresolved",
+            None,
+            (),
+        )
+        assert text_content(render_credit(origin, label, registry=registry)) == label
+        assert "data-contributor" not in render_credit(origin, label, registry=registry)
+        proposal = next(row for row in report["unresolved"] if row["origin"] == asdict(origin))
+        assert proposal["candidate_ids"] == candidate_ids
 
-    assert [item["origin"] for item in stale_occurrences(REPO, path)] == [stale["origin"]]
-    with pytest.raises(OccurrenceError, match="reviewed source text changed"):
-        load_occurrences(path, repo=REPO)
-    report = reconcile(REPO, path)
-    assert len(report["dropped"]) == 1
-    assert stale_occurrences(REPO, path) == []
-    registry = load_occurrences(path, repo=REPO)
-    by_origin = {
-        (origin.path, origin.record_key, origin.field): items
-        for origin, items in registry.by_origin.items()
+
+def test_changed_declined_span_stays_unresolved_and_unchanged_refusal_survives(
+    census_repo: tuple[Path, Path, dict[str, Any]],
+) -> None:
+    repo, path, document = census_repo
+    declined = {
+        **copy.deepcopy(document["occurrences"][0]),
+        "expected_text": "Xu and somebody else",
+        "disposition": "unresolved",
+        "evidence": [],
+        "note": "Identity review declined; a surname does not establish this author.",
     }
-    restored = by_origin[
-        (stale["origin"]["path"], stale["origin"]["record_key"], stale["origin"]["field"])
-    ]
-    assert all(item.label != "Somebody Else" for item in restored)
-    levy_items = by_origin[(levy["path"], levy["record_key"], levy["field"])]
-    joined = next(item for item in levy_items if item.label == "Levy")
-    assert (joined.disposition, joined.contributor_id) == ("resolved", "joshua-levy")
-    assert joined.note.startswith("Joined by the reviewed identity")
-    origin = open_label["origin"]
-    reopened = by_origin[(origin["path"], origin["record_key"], origin["field"])]
-    assert [item.disposition for item in reopened if item.label == "Chaoweeraprasit"] == [
-        "unresolved"
-    ]
+    declined.pop("contributor_id")
+    declined["origin"]["field"] = "/authors/3"
+    unchanged = copy.deepcopy(declined)
+    unchanged["origin"]["field"] = "/authors/5"
+    unchanged.update(expected_text="Unknown Author", label="Unknown Author", end=14)
+    document["occurrences"].extend([declined, unchanged])
+    path.write_text(yaml.safe_dump(document, sort_keys=False))
+    assert len(stale_occurrences(repo, path)) == 1
+    report = reconcile(repo, path)
+    assert report["dropped"] == [declined]
+    assert stale_occurrences(repo, path) == []
+    registry = load_occurrences(path, repo=repo)
+    (changed,) = registry.by_origin[CreditOrigin(**declined["origin"])]
+    assert (changed.label, changed.disposition, changed.contributor_id) == (
+        "Xu",
+        "unresolved",
+        None,
+    )
+    (retained,) = registry.by_origin[CreditOrigin(**unchanged["origin"])]
+    assert asdict(retained) == {**unchanged, "contributor_id": None, "evidence": ()}
 
 
-def test_a_renamed_credit_joins_by_the_spelling_its_record_sources() -> None:
-    spellings = _spelling_identities(load_contributors())
-    overbeck = {
-        "contributor_id": "marc-leonard-overbeck",
-        "evidence": ["citation-cff", "owner-confirmation"],
-    }
-    assert spellings["Overbeck"] == overbeck
-    assert spellings["Kleddamag"]["contributor_id"] == "marc-leonard-overbeck"
-    origin = CreditOrigin(
-        "packing/frontier/n-017.md", "17", "/reported_lower_bound/proved_by/0"
+def test_reconcile_preserves_reviewed_manual_field_coverage(
+    census_repo: tuple[Path, Path, dict[str, Any]],
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    repo, path, document = census_repo
+    manual = document["occurrences"][1]
+    manual.update(end=11, label="Evan Daniel")
+    path.write_text(yaml.safe_dump(document, sort_keys=False))
+    original = load_occurrences(path, repo=repo).by_origin[CreditOrigin(**manual["origin"])]
+    reconcile(repo, path)
+    registry = load_occurrences(path, repo=repo)
+    assert registry.by_origin[CreditOrigin(**manual["origin"])] == original
+    monkeypatch.setattr("devtools.contributor_census.tracked_pdfs", lambda _repo: ())
+    report = census(repo, registry)
+    assert report["dispositions"].get("unreviewed", 0) == 0
+    assert all(row["label"] != "Evan Daniel(evand)" for row in report["pending_occurrences"])
+
+
+def test_reconcile_validates_complete_output_before_replacing_manifest(
+    census_repo: tuple[Path, Path, dict[str, Any]],
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    repo, path, _ = census_repo
+    before = path.read_bytes()
+    malformed = replace(structured_occurrences(repo)[1], label="wrong label")
+    monkeypatch.setattr(
+        "devtools.contributor_census.structured_occurrences", lambda _repo: (malformed,)
     )
-    span = CreditOccurrence(
-        origin, "Overbeck", 0, 8, "Overbeck", "lower-bound-prover", "unresolved", note="pending"
-    )
-    join, key, _ = _join(span, {}, spellings, set())
-    assert (join, key) == (overbeck, "joined_by_spelling")
-    assert _join(span, {}, spellings, {"Overbeck"})[:2] == (None, "unresolved")
-    reviewed = {"contributor_id": "joshua-levy", "evidence": ["primary-byline"], "count": 2}
-    assert _join(span, {"Overbeck": reviewed}, spellings, set())[:2] == (reviewed, "joined")
+    with pytest.raises(OccurrenceError, match="label span"):
+        reconcile(repo, path)
+    assert path.read_bytes() == before
+    load_occurrences(path, repo=repo)
 
 
 def test_unknown_and_conflicting_duplicate_credit_remain_plain() -> None:

@@ -205,7 +205,7 @@ def contributor_article(
             case = f' data-case="{match[1]}"' if match else ""
             pieces.append(
                 f'<li><a href="{html.escape(target)}"{case}>{html.escape(label)}</a>: '
-                f"{html.escape(role)} — {html.escape(original_label)}</li>"
+                f"{html.escape(role.replace('-', ' '))} — {html.escape(original_label)}</li>"
             )
         pieces.append("</ul>")
         if len(credited) > 12:

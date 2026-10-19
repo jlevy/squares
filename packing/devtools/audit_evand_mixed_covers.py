@@ -1,4 +1,4 @@
-"""Audit the mixed covers for ``s(n)``, n = 21, 45, 59, 60 and 77, independently.
+"""Audit the mixed covers for ``s(n)``, n = 21, 45, 59, 60, 76, 77 and 95, independently.
 
 A *mixed cover* is point masses plus mass spread uniformly along axis-parallel segments
 of the grid lines, of total below ``n``, such that every closed unit square in
@@ -13,7 +13,12 @@ three packets under ``resources/web/``:
   the ``s(32)`` point cover's ``zmx2 --full --pair-points --sym-atoms`` log;
 - ``wand125-point-and-mixed-2026-10-01/``: Hosono's ``s(59) = 8`` and ``s(77) = 9``,
   whose ``zmx2`` logs and ``zm_mixed.py`` per-root records are not published, only the
-  ``zm_mixed.py`` manifests.
+  ``zm_mixed.py`` manifests;
+- ``bengreff-s76-certificate-2026-10-14/`` and ``bengreff-s95-certificate-2026-10-15/``:
+  Benjamin Greff's ``s(76) = 9`` and ``s(95) = 10``, whose D4 region is *split*: ``zmx2``
+  decides every root but a few, and ``zm_mixed.py`` the sub-roots that tile those. Each
+  packet holds the source's ``zmx2`` log and sub-root records and this repository's
+  replay of both (``receipts/``).
 
 This tool decides, with its own parser and exact integer arithmetic, the facts that do
 not need a sweep, and re-reads the sweeps' records without the source's summarisers:
@@ -72,6 +77,23 @@ not need a sweep, and re-reads the sweeps' records without the source's summaris
     complete run's per-root records and log, neither published, so whether ``R``
     contains them cannot be decided from the manifests; the report lists what they do
     decide, and the command exits 1. With the records, ``zm-mixed --deep`` decides it.
+``composite``
+    A split cover's two checkers read as one decision over the D4 region (``76``,
+    ``95``). The ``zmx2 cert --d4`` log must be what the ``zmx2`` command requires apart
+    from the roots it leaves open, those holding an uncertified or capped box, and every
+    header must name this cover by the FNV-1a 64 hash ``zmx2`` computes over its bytes
+    and carry the source's ``depth``, ``node_cap``, ``kappa`` and ``K``. Each
+    ``zm_mixed.py`` record file must name the case's checker files and cover by SHA-256
+    and state its total, carry the certificate-mode D4 settings at depth 24, all files
+    the same apart from ``region``, record exactly the roots of the 1/20 by 1/32 grid its
+    ``region`` holds, and certify each without an uncertified box. Clean when every
+    sub-root of every open ``zmx2`` root is so certified. The report also says whether
+    the open roots are the source's ``failing_roots.txt`` and the sub-roots its
+    ``jobs.txt``, and whether the sub-roots tile the open roots exactly. Without paths it
+    reads this repository's retained replay; ``--source`` reads the source's records.
+``compare-sub-roots``
+    Record file for record file, by name, a replay's ``zm_mixed.py`` sub-root records
+    against the source's, as ``compare-zm-mixed`` compares one file.
 ``compare-zmx2``, ``compare-zm-mixed``
     Root for root, a replay's census equals the source's record of the same root, timing
     fields excepted. Source roots the replay did not run are counted, not failed, so a
@@ -80,19 +102,21 @@ not need a sweep, and re-reads the sweeps' records without the source's summaris
     every field but ``region``, which a joined or partial replay legitimately names
     differently (``not_compared`` says why; ``headers_identical`` compares whole lines),
     each root must appear once, and its ``UNCERT`` lines must match the reference's.
-    The default reference is the source's log (``21``, ``45``, ``60``; for
-    ``32 --mode full`` its ``--sym-atoms`` run) or, for the point covers' ``d4`` runs,
-    this repository's retained run. For ``59`` and ``77`` the source publishes no log,
-    so a reference must be named.
+    The default reference is the source's log (``21``, ``45``, ``60``, and ``d4`` for
+    ``76`` and ``95``; for ``32 --mode full`` its ``--sym-atoms`` run) or, for the point
+    covers' ``d4`` runs, this repository's retained run. For ``59`` and ``77`` the source
+    publishes no log, so a reference must be named.
 ``check``
     All of the above on the retained files: the five covers; the shipped records and
     receipts of ``21``, ``45`` and ``60``, and the source's ``zmx2`` manifests of ``60``
     and of the ``s(32)`` ``--sym-atoms`` log, whose log digest, line counts, header and
     totals must be the audited log's; the retained ``zmx2`` runs on the source's
     ``s(13)`` and ``s(32)`` point covers, which must be present and whose totals must
-    equal the ones ``search/ZMX2.md`` reports; and the manifests. What the retained
-    files cannot decide (``s(59)``'s composite) is listed under ``undecided`` and is not
-    counted clean or failed.
+    equal the ones ``search/ZMX2.md`` reports; the manifests; and, for the split covers,
+    the source's composite and the replay's, the replay against the source root for
+    root and file for file, and the wall control's census against the replay's. What the
+    retained files cannot decide (``s(59)``'s composite) is listed under ``undecided``
+    and is not counted clean or failed.
 
 Usage (from ``packing/``)::
 
@@ -104,6 +128,9 @@ Usage (from ``packing/``)::
     ... audit_evand_mixed_covers zm-mixed --case 60
     ... audit_evand_mixed_covers zm-mixed --case 59 OUT/roots.jsonl --deep DEEP/roots.jsonl
     ... audit_evand_mixed_covers zm-mixed-manifest --case 59
+    ... audit_evand_mixed_covers composite --case 76 [--source]
+    ... audit_evand_mixed_covers composite --case 95 OUT/roots.log --zm-mixed OUT/zm_mixed/
+    ... audit_evand_mixed_covers compare-sub-roots --case 95 OUT/zm_mixed/
     ... audit_evand_mixed_covers compare-zm-mixed --case 21 --records OUT/roots.jsonl
 
 Every command prints JSON and exits 0 when the audit is clean, 1 otherwise. Files stored
@@ -145,6 +172,8 @@ RECEIPTS = PACKET / "receipts"
 EVAND_0928 = PACKET / "square-packing/s12"
 EVAND_1001 = WEB / "evand-square-packing-2026-10-01/source/s12"
 WAND125_1001 = WEB / "wand125-point-and-mixed-2026-10-01/square-packing-bounds"
+BENGREFF_S76 = WEB / "bengreff-s76-certificate-2026-10-14"
+BENGREFF_S95 = WEB / "bengreff-s95-certificate-2026-10-15"
 CHECKER_FILES = ("zm_mixed.py", "mixed_cover.py", "zeromargin.py")
 #: The checker files Hosono's ``verify.sh`` pins at evand ``b91d70b6`` (``zm_mixed.py``
 #: ``ee3e2915``), which the s(59) and s(77) manifests name; ``zeromargin.py`` is retained
@@ -184,6 +213,33 @@ ZM_MIXED_SETTINGS: dict[str, Any] = {
 
 
 @dataclass(frozen=True, slots=True)
+class Split:
+    """Where a split cover's records are: the source's, and this repository's replay.
+
+    The source's ``zmx2 cert --d4`` root log and the roots it leaves (``failing``), its
+    ``zm_mixed.py`` sub-root records, one ``j<id>.jsonl`` per line of ``jobs``; the
+    replay's root log and record directory; and the root log of ``zmx2`` run on the
+    cover without its wall segments, where one was run.
+    """
+
+    zmx2: Path
+    failing: Path
+    zm_mixed: Path
+    jobs: Path
+    replay_zmx2: Path
+    replay_zm_mixed: Path
+    wall_control: Path | None = None
+    #: The ``zmx2 cert`` header fields the source's run carries: ``zmx2.rs`` ``6b7f0f79``'s
+    #: defaults, since the sources' ``verify.sh`` sets none of them.
+    zmx2_settings: tuple[tuple[str, str], ...] = (
+        ("depth", "40"),
+        ("node_cap", "20000000"),
+        ("kappa", "1.5"),
+        ("K", "30"),
+    )
+
+
+@dataclass(frozen=True, slots=True)
 class Case:
     """One claim: the cover, the total the source states, and where the records live."""
 
@@ -210,6 +266,8 @@ class Case:
     zmx2_boxes_stated: tuple[tuple[str, int], ...] = ()
     #: The directory holding the cover where it is not ``source/certificates/<bundle>``.
     directory: Path | None = None
+    #: A split cover's records (`Split`); ``None`` for a cover one checker decides whole.
+    split: Split | None = None
 
     @property
     def bundle_dir(self) -> Path:
@@ -285,7 +343,57 @@ IMPORTED_CASES = {
         zmx2_boxes_stated=(("d4", 5810824), ("full", 46583600)),
     ),
 }
-MIXED_CASES = {**CASES, **IMPORTED_CASES}
+
+
+def _split(packet: Path, n: int, zmx2_log: str) -> Split:
+    """A Greff packet's layout: the source tree's ``records/`` and the intake's receipts."""
+    records = packet / f"s{n}-certificate/records"
+    receipts = packet / "receipts"
+    return Split(
+        zmx2=records / "zmx2" / zmx2_log,
+        failing=records / "zmx2/failing_roots.txt",
+        zm_mixed=records / "zm_mixed",
+        jobs=records / "zm_mixed/jobs.txt",
+        replay_zmx2=receipts / f"n{n}_zmx2_d4_roots.log",
+        replay_zm_mixed=receipts / f"n{n}_zm_mixed",
+        wall_control=receipts / f"controls/n{n}_control_nowall_zmx2_d4_roots.log",
+    )
+
+
+#: Benjamin Greff's covers of 14 and 15 October, with the totals and counts their READMEs
+#: state. ``zmx2`` leaves 4 and 19 D4 roots, and ``zm_mixed.py`` certifies their 64 and 304
+#: sub-roots; the checker files are the ones their ``verify.sh`` pins at evand ``b91d70b6``.
+SPLIT_CASES = {
+    76: Case(
+        n=76,
+        side=9,
+        bundle="s76-certificate",
+        cover="s76_cover_v5.txt",
+        total=Fraction(3788361049, 5 * 10**7),
+        points=41633,
+        segments=9744,
+        zmx2_modes=(),
+        zm_mixed_records=False,
+        checker=CHECKER_B91D70B6,
+        directory=BENGREFF_S76 / "s76-certificate/cover",
+        split=_split(BENGREFF_S76, 76, "zmx2_v5.log"),
+    ),
+    95: Case(
+        n=95,
+        side=10,
+        bundle="s95-certificate",
+        cover="s95_cover_v2.txt",
+        total=Fraction(3791753447, 4 * 10**7),
+        points=48352,
+        segments=11438,
+        zmx2_modes=(),
+        zm_mixed_records=False,
+        checker=CHECKER_B91D70B6,
+        directory=BENGREFF_S95 / "s95-certificate/cover",
+        split=_split(BENGREFF_S95, 95, "zmx2_s95_v2.log"),
+    ),
+}
+MIXED_CASES = {**CASES, **IMPORTED_CASES, **SPLIT_CASES}
 #: A cover in the plain point format, audited by ``cover`` alone: its sweeps are the
 #: ``PointCoverRun`` below. Hosono's s(61) total is the one its ``provenance.json`` states.
 POINT_ONLY_CASES = {
@@ -1443,6 +1551,259 @@ def comparison_clean(result: dict[str, Any]) -> bool:
     )
 
 
+# --- split covers: zmx2 roots and zm_mixed.py sub-roots read as one decision -------------
+
+
+def record_files(paths: Path | Sequence[Path]) -> list[Path]:
+    """Record files: each path itself, or the ``j*.jsonl`` files of a directory, by name."""
+    out: list[Path] = []
+    for path in _as_paths(paths):
+        out += sorted(path.glob("j*.jsonl")) if path.is_dir() else [path]
+    return out
+
+
+def zmx2_open_roots(log: Zmx2Log, region: Mapping[Zmx2Key, int]) -> list[Zmx2Key]:
+    """The roots of ``region`` whose census holds an uncertified box or a cap."""
+    uncert, capped = ZMX2_CENSUS.index("uncert"), ZMX2_CENSUS.index("capped")
+    return [
+        key
+        for key in region
+        if key in log.census and (log.census[key][uncert] or log.census[key][capped])
+    ]
+
+
+def root_bounds(root: str) -> tuple[Fraction, ...]:
+    """A root written ``x0,x1,y0,y1,u0,u1``, by ``zmx2`` or ``zm_mixed.py``, as fractions."""
+    bounds = tuple(Fraction(v) for v in root.split(","))
+    if len(bounds) != 6:
+        raise ValueError(f"not a root: {root!r}")
+    return bounds
+
+
+def sub_roots(side: int, root: str) -> set[tuple[str, ...]]:
+    """The ``zm_mixed.py`` roots, of the 1/20 by 1/32 grid, that tile a ``zmx2`` root."""
+    x0, x1, y0, y1, u0, u1 = root_bounds(root)
+    bounds = {"cx_lo": x0, "cx_hi": x1, "cy_lo": y0, "cy_hi": y1, "u_lo": u0, "u_hi": u1}
+    return zm_mixed_region(side, {k: str(v) for k, v in bounds.items()})
+
+
+def _zmx2_sound_apart_from_open_roots(result: dict[str, Any]) -> bool:
+    """`zmx2_clean` without its uncertified and capped boxes, which the open roots hold."""
+    return zmx2_clean({**result, "uncertified_boxes": 0, "uncert_lines": 0, "capped_roots": 0})
+
+
+def audit_sub_root_file(
+    case: Case, path: Path, expected: Mapping[str, str], reference: Mapping[str, Any] | None
+) -> tuple[dict[str, Any], dict[tuple[str, ...], dict[str, Any]], dict[str, Any]]:
+    """One ``zm_mixed.py`` record file of a split cover: report, records, header.
+
+    ``reference`` is another file's settings; the file must equal it apart from region.
+    """
+    header, records = read_zm_mixed(path)
+    settings = header["settings"]
+    region = {k: v for k, v in settings.get("region", {}).items() if v is not None}
+    declared = zm_mixed_region(case.side, region) if region else set()
+    uncertified = sorted(",".join(k) for k, record in records.items() if _uncertified(record))
+    report: dict[str, Any] = {
+        "records": _display(path),
+        "header_sha256_match_retained_files": header["sha256"] == dict(expected),
+        "header_total_equals_stated": Fraction(header["total"]) == case.total,
+        "settings_as_required": all(settings.get(k) == v for k, v in ZM_MIXED_SETTINGS.items()),
+        "settings_equal_apart_from_region": reference is None
+        or _settings_apart_from(header, ("region",))
+        == {k: v for k, v in reference.items() if k != "region"},
+        "region": region,
+        "roots_in_region": len(declared),
+        "roots_missing": len(declared - records.keys()),
+        "roots_outside_region": len(records.keys() - declared),
+        "uncertified_roots": uncertified[:20],
+    }
+    report["clean"] = (
+        report["header_sha256_match_retained_files"]
+        and report["header_total_equals_stated"]
+        and report["settings_as_required"]
+        and report["settings_equal_apart_from_region"]
+        and bool(region)
+        and bool(declared)
+        and report["roots_missing"] == 0
+        and report["roots_outside_region"] == 0
+        and not uncertified
+    )
+    return report, records, header
+
+
+def _jobs(path: Path) -> set[tuple[str, ...]]:
+    """A ``jobs.txt``: ``id cx_lo cx_hi cy_lo cy_hi u_lo u_hi`` per line, as roots."""
+    rows = [line.split() for line in read_record_bytes(path).decode("ascii").splitlines()]
+    return {tuple(str(Fraction(v)) for v in row[1:]) for row in rows if row}
+
+
+def _failing(path: Path) -> set[tuple[Fraction, ...]]:
+    lines = read_record_bytes(path).decode("ascii").splitlines()
+    return {root_bounds(line.strip()) for line in lines if line.strip()}
+
+
+FNV_OFFSET, FNV_PRIME = 0xCBF29CE484222325, 0x100000001B3
+
+
+def fnv1a64(data: bytes) -> str:
+    """FNV-1a 64 of ``data`` in hex, the cover hash ``zmx2 cert`` writes into its header."""
+    value = FNV_OFFSET
+    for byte in data:
+        value = ((value ^ byte) * FNV_PRIME) & 0xFFFFFFFFFFFFFFFF
+    return f"{value:016x}"
+
+
+@functools.lru_cache(maxsize=8)
+def _cover_fnv1a64(path: Path, stamp: tuple[int, int]) -> str:
+    del stamp
+    return fnv1a64(read_record_bytes(path))
+
+
+def audit_split_composite(
+    case: Case,
+    zmx2_logs: Path | Sequence[Path],
+    zm_mixed: Path | Sequence[Path],
+    checker_dir: Path | None = None,
+) -> dict[str, Any]:
+    """A ``zmx2 cert --d4`` log and ``zm_mixed.py`` sub-root records as one decision.
+
+    Clean when the log is sound apart from its open roots (`zmx2_open_roots`), every
+    header names this cover by the FNV-1a 64 hash ``zmx2`` writes and carries the
+    source's settings (`Split.zmx2_settings`), every record file is clean
+    (`audit_sub_root_file`), no sub-root is recorded twice, and every sub-root of every
+    open root is a certified one.
+    """
+    zmx2 = require_atoms(audit_zmx2(case, zmx2_logs, "d4"), case.zmx2_atoms)
+    log = read_zmx2(zmx2_logs)
+    cover_hash = _cover_fnv1a64(case.cover_path, _stamp(case.cover_path))
+    headers = [parse_zmx2_header(run.header)[0] for run in log.runs]
+    required = dict(case.split.zmx2_settings) if case.split is not None else {}
+    region = zmx2_roots(case.side, "d4")
+    open_roots = zmx2_open_roots(log, region)
+    files = record_files(zm_mixed)
+    if not files:
+        raise ValueError("no zm_mixed.py record file named")
+    expected = _expected_digests(case, checker_paths(case, files[0], checker_dir))
+    reference: dict[str, Any] | None = None
+    certified: set[tuple[str, ...]] = set()
+    seen: set[tuple[str, ...]] = set()
+    repeated = 0
+    unclean: list[dict[str, Any]] = []
+    census: Counter[str] = Counter()
+    max_depth = 0
+    cpu = 0.0
+    for path in files:
+        report, records, header = audit_sub_root_file(case, path, expected, reference)
+        reference = reference or header["settings"]
+        if not report["clean"]:
+            unclean.append(report)
+        repeated += len(seen & records.keys())
+        seen |= records.keys()
+        for key, record in records.items():
+            leaves = _census(record)
+            max_depth = max(max_depth, leaves.pop("maxdepth"))
+            census.update(leaves)
+            cpu += float(record["st"]["cpu"])
+            if not _uncertified(record):
+                certified.add(key)
+    needed: dict[Zmx2Key, set[tuple[str, ...]]] = {
+        key: sub_roots(case.side, key[1]) for key in open_roots
+    }
+    tiling: set[tuple[str, ...]] = set()
+    for cells in needed.values():
+        tiling |= cells
+    untiled = [f"pass {p} root {r}" for (p, r), cells in needed.items() if cells - certified]
+    result: dict[str, Any] = {
+        "zmx2": zmx2,
+        "zmx2_sound_apart_from_open_roots": _zmx2_sound_apart_from_open_roots(zmx2),
+        "cover_fnv1a64": cover_hash,
+        "zmx2_header_hashes": sorted({fields.get("hash", "") for fields in headers}),
+        "zmx2_headers_name_this_cover": bool(headers)
+        and all(fields.get("hash") == cover_hash for fields in headers),
+        "zmx2_settings_required": required,
+        "zmx2_settings_as_required": bool(headers)
+        and all(fields.get(k) == v for fields in headers for k, v in required.items()),
+        "open_roots": [f"pass {p} root {r}" for p, r in open_roots],
+        "open_root_count": len(open_roots),
+        "roots_certified_by_zmx2": len(region) - len(open_roots),
+        "zm_mixed_files": len(files),
+        "zm_mixed_settings_apart_from_region": {
+            k: v for k, v in (reference or {}).items() if k != "region"
+        },
+        "zm_mixed_files_not_clean": unclean[:20],
+        "zm_mixed_files_not_clean_count": len(unclean),
+        "zm_mixed_roots_certified": len(certified),
+        "zm_mixed_roots_recorded_more_than_once": repeated,
+        "zm_mixed_census": dict(sorted({**census, "maxdepth": max_depth}.items())),
+        "zm_mixed_cpu_seconds": round(cpu, 1),
+        "sub_roots_of_open_roots": len(tiling),
+        "open_roots_not_tiled": untiled[:20],
+        "zm_mixed_roots_outside_open_roots": len(certified - tiling),
+        "sub_roots_tile_open_roots_exactly": certified == tiling,
+    }
+    result["composite_clean"] = (
+        result["zmx2_sound_apart_from_open_roots"]
+        and result["zmx2_headers_name_this_cover"]
+        and result["zmx2_settings_as_required"]
+        and not unclean
+        and repeated == 0
+        and not untiled
+    )
+    split = case.split
+    if split is not None:
+        result["open_roots_equal_source_list"] = {
+            root_bounds(r) for _, r in open_roots
+        } == _failing(split.failing)
+        result["zm_mixed_roots_equal_source_jobs"] = certified == _jobs(split.jobs)
+    return result
+
+
+def compare_sub_roots(shipped: Path, replay: Path) -> dict[str, Any]:
+    """A replay's sub-root record files against the source's, each by its file name."""
+    source = {path.name: path for path in record_files(shipped)}
+    fresh = {path.name: path for path in record_files(replay)}
+    differ: list[str] = []
+    roots = identical = 0
+    replay_cpu = source_cpu = 0.0
+    for name in sorted(source.keys() & fresh.keys()):
+        result = compare_zm_mixed(source[name], [fresh[name]])
+        roots += result["roots_compared"]
+        identical += result["roots_identical"]
+        replay_cpu += result["replay_cpu_seconds_on_compared_roots"]
+        source_cpu += result["shipped_cpu_seconds_on_compared_roots"]
+        if not (
+            comparison_clean(result)
+            and result["header_sha256_equal"]
+            and result["settings_equal_apart_from_region"]
+            and result["shipped_roots_not_replayed"] == 0
+        ):
+            differ.append(name)
+    return {
+        "shipped": _display(shipped),
+        "replay": _display(replay),
+        "shipped_files": len(source),
+        "replay_files": len(fresh),
+        "files_compared": len(source.keys() & fresh.keys()),
+        "files_not_replayed": sorted(source.keys() - fresh.keys())[:20],
+        "replay_files_not_in_shipped": sorted(fresh.keys() - source.keys())[:20],
+        "files_that_differ": differ[:20],
+        "roots_compared": roots,
+        "roots_identical": identical,
+        "replay_cpu_seconds": round(replay_cpu, 1),
+        "shipped_cpu_seconds": round(source_cpu, 1),
+    }
+
+
+def sub_root_comparison_clean(result: dict[str, Any]) -> bool:
+    return (
+        result["files_compared"] > 0
+        and result["files_compared"] == result["shipped_files"] == result["replay_files"]
+        and not result["files_that_differ"]
+        and result["roots_identical"] == result["roots_compared"] > 0
+    )
+
+
 # --- the packets -------------------------------------------------------------------------
 
 
@@ -1512,6 +1873,8 @@ def shipped_zmx2(n: int, mode: str) -> Path | None:
     if run is not None:
         return run.log if mode == "d4" else run.full_log
     case = MIXED_CASES[n]
+    if case.split is not None:
+        return case.split.zmx2 if mode == "d4" else None
     return case.bundle_dir / f"zmx2_{mode}/roots.log" if mode in case.zmx2_modes else None
 
 
@@ -1623,6 +1986,46 @@ def check_imported_case(case: Case) -> tuple[dict[str, Any], bool, str | None]:
     return entry, clean, undecided
 
 
+def check_split_case(case: Case) -> tuple[dict[str, Any], bool]:
+    """A split cover: the cover, the source's composite and the replay's, the replay against
+    the source for both checkers, and the wall control against the replay."""
+    split = case.split
+    if split is None:
+        raise ValueError(f"s({case.n}) is not a split cover")
+    entry: dict[str, Any] = {"cover": audit_cover(case)}
+    clean = cover_clean(entry["cover"])
+    for name, zmx2, zm_mixed in (
+        ("source", split.zmx2, split.zm_mixed),
+        ("replay", split.replay_zmx2, split.replay_zm_mixed),
+    ):
+        composite = audit_split_composite(case, zmx2, zm_mixed)
+        entry[f"{name}_composite"] = composite
+        clean &= (
+            composite["composite_clean"]
+            and composite["open_roots_equal_source_list"]
+            and composite["zm_mixed_roots_equal_source_jobs"]
+            and composite["sub_roots_tile_open_roots_exactly"]
+        )
+    compared = compare_zmx2(split.zmx2, split.replay_zmx2)
+    entry["replay_zmx2_vs_source"] = compared
+    clean &= zmx2_comparison_clean(compared) and compared["shipped_roots_not_replayed"] == 0
+    sub = compare_sub_roots(split.zm_mixed, split.replay_zm_mixed)
+    entry["replay_zm_mixed_vs_source"] = sub
+    clean &= sub_root_comparison_clean(sub)
+    if split.wall_control is not None:
+        # The cover without its wall segments has another hash, so its header differs;
+        # every root's census and every UNCERT line must still be the replay's.
+        wall = compare_zmx2(split.replay_zmx2, split.wall_control)
+        entry["wall_control_vs_replay"] = wall
+        clean &= (
+            comparison_clean(wall)
+            and wall["shipped_roots_not_replayed"] == 0
+            and wall["replay_uncert_lines"] == wall["shipped_uncert_lines"]
+            and wall["replay_unparsed_lines"] == wall["shipped_unparsed_lines"] == 0
+        )
+    return entry, clean
+
+
 def check_packet() -> dict[str, Any]:
     """The cover, shipped-record and receipt audits over the packets' retained files."""
     report: dict[str, Any] = {}
@@ -1641,6 +2044,9 @@ def check_packet() -> dict[str, Any]:
         clean &= ok
         if open_question is not None:
             undecided[f"s{n}_zm_mixed"] = open_question
+    for n, case in SPLIT_CASES.items():
+        report[f"s{n}"], ok = check_split_case(case)
+        clean &= ok
     for run in POINT_COVER_RUNS:
         if run.full_log is not None:
             key = f"s{run.n}_point_cover_zmx2_full_source"
@@ -1742,6 +2148,33 @@ def main(argv: Sequence[str] | None = None) -> int:
     manifest.add_argument("manifest", type=Path, nargs="?")
     manifest.add_argument("--deep", type=Path, help="default: the case's deeper run, if any")
     manifest.add_argument("--checker-dir", type=Path)
+    split = sorted(SPLIT_CASES)
+    composite = commands.add_parser(
+        "composite",
+        parents=[common],
+        help="a split cover's zmx2 log and zm_mixed.py sub-roots as one decision",
+    )
+    composite.add_argument("--case", type=int, choices=split, required=True)
+    composite.add_argument(
+        "zmx2_log",
+        type=Path,
+        nargs="*",
+        help="default: the replay's, or with --source the source's",
+    )
+    composite.add_argument(
+        "--zm-mixed", type=Path, nargs="+", help="record files, or directories of j*.jsonl"
+    )
+    composite.add_argument(
+        "--source", action="store_true", help="read the source's records, not the replay's"
+    )
+    composite.add_argument("--checker-dir", type=Path)
+    sub = commands.add_parser(
+        "compare-sub-roots",
+        parents=[common],
+        help="a replay's zm_mixed.py sub-root files against the source's, by name",
+    )
+    sub.add_argument("--case", type=int, choices=split, required=True)
+    sub.add_argument("replay", type=Path, nargs="?", help="default: the retained replay's")
     for name, choices in (("compare-zmx2", zmx2_cases), ("compare-zm-mixed", mixed)):
         compare = commands.add_parser(
             name, parents=[common], help="root-for-root census against the source"
@@ -1763,6 +2196,24 @@ def main(argv: Sequence[str] | None = None) -> int:
         return 0 if result["clean"] else 1
     if args.command in {"zmx2", "compare-zmx2"}:
         result, ok = _zmx2_command(parser, args)
+    elif args.command == "composite":
+        case = SPLIT_CASES[args.case]
+        assert case.split is not None
+        zmx2_logs = args.zmx2_log or [
+            case.split.zmx2 if args.source else case.split.replay_zmx2
+        ]
+        records = args.zm_mixed or [
+            case.split.zm_mixed if args.source else case.split.replay_zm_mixed
+        ]
+        result = audit_split_composite(case, zmx2_logs, records, args.checker_dir)
+        ok = result["composite_clean"]
+    elif args.command == "compare-sub-roots":
+        case = SPLIT_CASES[args.case]
+        assert case.split is not None
+        result = compare_sub_roots(
+            case.split.zm_mixed, args.replay or case.split.replay_zm_mixed
+        )
+        ok = sub_root_comparison_clean(result)
     elif args.command == "cover":
         result = audit_cover({**MIXED_CASES, **POINT_ONLY_CASES}[args.case], args.path)
         ok = cover_clean(result)
