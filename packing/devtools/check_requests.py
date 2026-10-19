@@ -53,7 +53,7 @@ from typing import Any
 
 from jsonschema_rs import Draft202012Validator
 
-from devtools import result_status
+from devtools import result_status, verifier_registry
 from sqpack.yamlio import load_yaml, safe_load
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -261,7 +261,7 @@ def confirmation_phrase(cited: Iterable[str], register: Register, kind: str = ""
             continue
         if kind == OPTIMALITY and entry.get("claim") == UPPER_BOUND:
             continue
-        if entry.get("replay_status") != "passed":
+        if entry.get("replay_status") != "passed" or verifier_registry.sampled(entry):
             continue
         phrase = verifier_phrase(entry, register.verifiers)
         if phrase:
@@ -312,12 +312,29 @@ def _evidence_entry(ident: str, register: Register) -> Entry:
         return Entry(ident, rungs, DEFECT, result_status.INCOMPLETE, why, "")
     if entry.get("replay_status") == result_status.FAILED_REPLAY:
         return Entry(ident, rungs, DEFECT, result_status.INCOMPLETE, "its replay failed", "")
-    if entry.get("replay_status") == "passed" and entry.get("origin") in CONFIRMING_ORIGINS:
-        how = confirmation_phrase([ident], register)
-        return Entry(ident, rungs, CONFIRMED, result_status.CONFIRMED, "", how)
     read = review.get("state") == "informally-verified"
     status = result_status.REVIEWED if read else result_status.RECORDED
+    if entry.get("replay_status") == "passed" and entry.get("origin") in CONFIRMING_ORIGINS:
+        if verifier_registry.sampled(entry):
+            # A sample decides only what it ran and is never called confirmed
+            # (epistemics.md, The Independence Ladder).
+            return Entry(ident, rungs, OPEN, status, _sample_phrase(entry), "")
+        how = confirmation_phrase([ident], register)
+        return Entry(ident, rungs, CONFIRMED, result_status.CONFIRMED, "", how)
     return Entry(ident, rungs, OPEN, status, "", "")
+
+
+def _sample_phrase(entry: Mapped) -> str:
+    """What a sampled run checked, as a count of its units."""
+    ran = "replayed here" if entry.get("origin") == "replayed-here" else "checked"
+    independence = entry.get("independence")
+    coverage = independence.get("coverage") if isinstance(independence, Mapping) else None
+    checked = coverage.get("checked") if isinstance(coverage, Mapping) else None
+    total = coverage.get("of") if isinstance(coverage, Mapping) else None
+    if not isinstance(checked, int) or not isinstance(total, int):
+        return f"a sample {ran}"
+    unit = str(coverage.get("unit") or "units") if isinstance(coverage, Mapping) else "units"
+    return f"a sample, {checked:,} of {total:,} {unit}, {ran}"
 
 
 def mapped_ids(result: Mapped) -> list[str]:
@@ -793,7 +810,8 @@ def _issue_section(issue: Mapped, state: IssueState, on_main: set[str] | None) -
                 shown = entry.state if entry.state != OPEN else f"open, {entry.status}"
                 lines.append(
                     f"| {result.key} | {entry.id} | {_cell(entry.rungs)} | {shown} "
-                    f"| {_cell(entry.how)} | {_on_main(entry.id, on_main)} |"
+                    f"| {_cell(entry.how or (entry.why if entry.state == OPEN else ''))} "
+                    f"| {_on_main(entry.id, on_main)} |"
                 )
         lines.append("")
     replies = issue.get("replies", ())
@@ -992,6 +1010,11 @@ def _plain(entry: Entry, record: Mapped | None, register: Register) -> str:
     if entry.state == DEFECT:
         return f"a defect is recorded against it: {entry.why}"
     if not entry.id.startswith("T-"):
+        if entry.why:
+            return (
+                f"recorded as evidence ({entry.rungs}): {entry.why}, which decides those "
+                "and confirms nothing beyond them"
+            )
         return f"recorded as evidence ({entry.rungs}); not yet confirmed here"
     ran = _run_here(record, register) if entry.status == result_status.RECORDED else ""
     words = {
@@ -1014,12 +1037,13 @@ def _plain(entry: Entry, record: Mapped | None, register: Register) -> str:
 
 
 def _shown(result: ResultState, reported: Mapped) -> list[Entry]:
-    """The entries a draft names for a result: every register entry, and the evidence
-    entries that decide something. A report entry beside its register entry adds only
-    the word "recorded", which the register entry already says better."""
+    """The entries a draft names for a result: every register entry, the evidence
+    entries that decide something, and the samples, which say what they checked. A
+    report entry beside its register entry adds only the word "recorded", which the
+    register entry already says better."""
     if reported.get("defect") or not any(e.id.startswith("T-") for e in result.entries):
         return list(result.entries)
-    return [e for e in result.entries if e.id.startswith("T-") or e.state != OPEN]
+    return [e for e in result.entries if e.id.startswith("T-") or e.state != OPEN or e.why]
 
 
 def _links(states: Sequence[ResultState], register: Register, base: str) -> list[str]:

@@ -10,9 +10,11 @@ import argparse
 import hashlib
 import json
 import os
+import platform
 import resource
 import subprocess
 import sys
+import tempfile
 import time
 from datetime import UTC, datetime
 from fractions import Fraction
@@ -43,9 +45,6 @@ EXPECTED_REPORT_SHA = {
     "analytic": "bd878de9d1f469c749015aea091e96eceb98d8820db3fdc47f3e6562948117c8",
     "external": "68123cb6992b9971c370c1fd677985a1c6c5f31c74390e53c47303d5a5d49105",
 }
-EXPECTED_BINARY_SHA = {
-    "coprime": "d25afa57a162cb821c5cae752209c77df7ff51715430b0d6ffd2f542f09e983b",
-}
 PAIRS = 3
 INTERNAL_SECONDS = 30
 INVOCATION_SECONDS = 40
@@ -57,23 +56,66 @@ def _sha(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def _build_default(target: Path) -> tuple[Path, dict[str, object]]:
-    """Execute the maintained default-feature release build before any paired timing."""
-    if not all(os.environ.get(name) for name in ("TMPDIR", "UV_CACHE_DIR", "CARGO_TARGET_DIR")):
+def _external_scratch(path: Path) -> Path:
+    """Admit declared scratch without a repository or relative-path fallback."""
+    if not path.is_absolute():
+        raise ValueError("scratch paths must be absolute")
+    resolved = path.resolve()
+    if resolved.is_relative_to(PROJECT.parent.resolve()):
+        raise ValueError("scratch paths must be outside the repository")
+    system = platform.system()
+    if system == "Darwin":
+        # Keep the original mounted-volume requirement on the original host.
+        ensure_external_scratch(resolved)
+    elif system == "Linux":
+        if not resolved.parent.is_dir():
+            raise ValueError("scratch parent must be existing writable storage")
+        resolved.mkdir(exist_ok=True)
+        with tempfile.NamedTemporaryFile(dir=resolved) as probe:
+            probe.write(b"writable")
+            probe.flush()
+    else:
+        raise ValueError("paired verifier builds require Linux or macOS scratch")
+    return resolved
+
+
+def _build_environment(target: Path) -> dict[str, str]:
+    names = ("TMPDIR", "UV_CACHE_DIR", "CARGO_TARGET_DIR")
+    if not all(os.environ.get(name) for name in names):
         raise ValueError("external TMPDIR, UV_CACHE_DIR and CARGO_TARGET_DIR are required")
-    target = target.resolve()
-    ensure_external_scratch(target)
-    source_paths = (
-        CRATE / "Cargo.toml",
-        CRATE / "Cargo.lock",
-        CRATE / "rust-toolchain.toml",
-        CRATE / "src/lib.rs",
-        CRATE / "src/main.rs",
-    )
-    sources = {str(path): _sha(path) for path in source_paths}
+    environment = dict(os.environ)
+    for name in names:
+        environment[name] = str(_external_scratch(Path(environment[name])))
+    environment["CARGO_TARGET_DIR"] = str(_external_scratch(target))
+    return environment
+
+
+def _build_command(arm: str) -> list[str]:
+    command = ["cargo", "build", "--offline", "--locked", "--release"]
+    if arm == "reference":
+        command.append("--no-default-features")
+    elif arm != "default":
+        raise ValueError("unknown verifier build arm")
+    return command
+
+
+def _require_unchanged(sources: dict[str, str]) -> None:
+    if sources != {name: _sha(Path(name)) for name in sources}:
+        raise ValueError("verifier source, input, or binary changed during the benchmark")
+
+
+def _build_variant(
+    arm: str, target: Path, sources: dict[str, str]
+) -> tuple[Path, dict[str, object]]:
+    """Execute one release arm against the inventory frozen before either build."""
+    command = _build_command(arm)
+    environment = _build_environment(target)
+    target = Path(environment["CARGO_TARGET_DIR"])
+    _require_unchanged(sources)
     rustc = subprocess.run(
         ["rustc", "-vV"],
         cwd=CRATE,
+        env=environment,
         capture_output=True,
         text=True,
         check=True,
@@ -82,14 +124,12 @@ def _build_default(target: Path) -> tuple[Path, dict[str, object]]:
     cargo = subprocess.run(
         ["cargo", "--version"],
         cwd=CRATE,
+        env=environment,
         capture_output=True,
         text=True,
         check=True,
         timeout=10,
     ).stdout.strip()
-    command = ["cargo", "build", "--offline", "--locked", "--release"]
-    environment = dict(os.environ)
-    environment["CARGO_TARGET_DIR"] = str(target)
     started = time.perf_counter()
     completed = subprocess.run(
         command,
@@ -101,57 +141,92 @@ def _build_default(target: Path) -> tuple[Path, dict[str, object]]:
         timeout=BUILD_SECONDS,
     )
     if completed.returncode != 0:
-        raise ValueError(f"default release build failed: {completed.stderr[-500:]}")
+        raise ValueError(f"{arm} release build failed: {completed.stderr[-500:]}")
     binary = target / "release/sqverify-exact"
-    if sources != {str(path): _sha(path) for path in source_paths}:
-        raise ValueError("Rust source changed during default release build")
+    _require_unchanged(sources)
     return binary, {
+        "arm": arm,
         "command": command,
+        "default_features": arm == "default",
         "cwd": str(CRATE),
+        "target_dir": str(target),
         "wall_seconds": time.perf_counter() - started,
         "ceiling_seconds": BUILD_SECONDS,
-        "source_sha256": sources,
+        "source_sha256": dict(sources),
         "rustc_version": rustc,
         "cargo_version": cargo,
-        "rustflags": os.environ.get("RUSTFLAGS", ""),
-        "cargo_encoded_rustflags": os.environ.get("CARGO_ENCODED_RUSTFLAGS", ""),
+        "rustflags": environment.get("RUSTFLAGS", ""),
+        "cargo_encoded_rustflags": environment.get("CARGO_ENCODED_RUSTFLAGS", ""),
+        "scratch_policy": (
+            "darwin-mounted-agent-scratch"
+            if platform.system() == "Darwin"
+            else "linux-absolute-writable-outside-repository"
+        ),
+        "scratch_paths": {
+            name: environment[name] for name in ("TMPDIR", "UV_CACHE_DIR", "CARGO_TARGET_DIR")
+        },
         "binary_sha256": _sha(binary),
     }
 
 
-def _admit_coprime_build(
-    binary: Path, receipt_path: Path, default_build: dict[str, object]
-) -> str:
-    """Bind the prior measured feature build to this default-source build."""
-    prior: Any = json.loads(receipt_path.read_text())
-    if not isinstance(prior, dict) or not isinstance(prior.get("arithmetic_ab"), dict):
-        raise TypeError("prior coprime build receipt is missing")
-    arithmetic: dict[str, Any] = prior["arithmetic_ab"]
-    build: Any = arithmetic.get("build")
-    if not isinstance(build, dict) or not isinstance(build.get("builds"), list):
-        raise TypeError("prior feature build inventory is missing")
-    matching = [
-        item
-        for item in build["builds"]
-        if isinstance(item, dict) and item.get("feature") == "experimental-coprime-mul"
-    ]
+def _admit_builds(
+    binaries: dict[str, Path],
+    builds: dict[str, dict[str, object]],
+    sources: dict[str, str],
+) -> dict[str, str]:
+    """Admit executed reference/default builds, never a retained host-specific binary."""
+    if set(binaries) != {"reference", "default"} or set(builds) != set(binaries):
+        raise ValueError("paired build arms are missing or unexpected")
+    _require_unchanged(sources)
+    reference = builds["reference"]
+    hashes: dict[str, str] = {}
+    for arm, binary in binaries.items():
+        build = builds[arm]
+        if (
+            build.get("arm") != arm
+            or build.get("command") != _build_command(arm)
+            or build.get("default_features") is not (arm == "default")
+            or build.get("cwd") != str(CRATE)
+            or build.get("target_dir") != str(binary.parent.parent)
+        ):
+            raise ValueError("build feature selection or target differs from its intended arm")
+        if build.get("source_sha256") != sources:
+            raise ValueError("paired builds used different source inventories")
+        if not all(
+            isinstance(build.get(field), str) and build[field]
+            for field in ("rustc_version", "cargo_version")
+        ):
+            raise ValueError("build toolchain identity is missing")
+        for field in (
+            "rustc_version",
+            "cargo_version",
+            "rustflags",
+            "cargo_encoded_rustflags",
+            "scratch_policy",
+        ):
+            if build.get(field) != reference.get(field):
+                raise ValueError("paired build environment differs")
+        scratch = build.get("scratch_paths")
+        reference_scratch = reference.get("scratch_paths")
+        if (
+            not isinstance(scratch, dict)
+            or not isinstance(reference_scratch, dict)
+            or scratch.get("CARGO_TARGET_DIR") != build["target_dir"]
+            or any(
+                scratch.get(name) != reference_scratch.get(name)
+                for name in ("TMPDIR", "UV_CACHE_DIR")
+            )
+        ):
+            raise ValueError("paired build scratch environment differs")
+        hashes[arm] = _sha(binary)
+        if build.get("binary_sha256") != hashes[arm]:
+            raise ValueError("binary differs from its executed build")
     if (
-        len(matching) != 1
-        or matching[0].get("binary_sha256") != _sha(binary)
-        or build.get("rustc_version") != default_build["rustc_version"]
-        or build.get("cargo_version") != default_build["cargo_version"]
-        or build.get("rustflags") != default_build["rustflags"]
-        or build.get("cargo_encoded_rustflags") != default_build["cargo_encoded_rustflags"]
+        len({binary.resolve(strict=True) for binary in binaries.values()}) != 2
+        or len(set(hashes.values())) != 2
     ):
-        raise ValueError("coprime build differs from the default build environment")
-    source_hashes: Any = prior.get("source_sha256")
-    if not isinstance(source_hashes, dict):
-        raise TypeError("prior feature source inventory is missing")
-    default_sources = default_build["source_sha256"]
-    assert isinstance(default_sources, dict)
-    if any(source_hashes.get(path) != sha for path, sha in default_sources.items()):
-        raise ValueError("coprime and default builds used different Rust source")
-    return _sha(receipt_path)
+        raise ValueError("reference and default binaries are identical")
+    return hashes
 
 
 def _normalized(report: dict[str, Any]) -> dict[str, Any]:
@@ -217,38 +292,40 @@ def _worker(dataset: str, binary: Path) -> int:
 
 def _assess(observations: list[dict[str, Any]]) -> dict[str, object]:
     metrics: dict[str, object] = {}
+    if len(observations) != 4 * PAIRS:
+        raise ValueError("paired verifier census is incomplete or unexpected")
     for dataset in ("analytic", "external"):
         rows = [row for row in observations if row["dataset"] == dataset]
         if len(rows) != 2 * PAIRS:
             raise ValueError("paired verifier census is incomplete")
         if {(row["pair"], row["arm"]) for row in rows} != {
-            (pair, arm) for pair in range(PAIRS) for arm in ("default", "coprime")
+            (pair, arm) for pair in range(PAIRS) for arm in ("reference", "default")
         }:
             raise ValueError("paired verifier identities are duplicated or missing")
         for field in ("rust_child_cpu_seconds", "invocation_wall_seconds"):
-            baseline = [float(row[field]) for row in rows if row["arm"] == "default"]
-            candidate = [float(row[field]) for row in rows if row["arm"] == "coprime"]
+            baseline = [float(row[field]) for row in rows if row["arm"] == "reference"]
+            candidate = [float(row[field]) for row in rows if row["arm"] == "default"]
             if len(baseline) != PAIRS or len(candidate) != PAIRS:
                 raise ValueError("paired verifier arms are incomplete")
             metrics[f"{dataset}_{field}"] = {
-                "default_median": median(baseline),
-                "default_range": [min(baseline), max(baseline)],
-                "coprime_median": median(candidate),
-                "coprime_range": [min(candidate), max(candidate)],
-                "coprime_over_default_median": median(candidate) / median(baseline),
-                "paired_coprime_over_default": [
+                "reference_median": median(baseline),
+                "reference_range": [min(baseline), max(baseline)],
+                "default_median": median(candidate),
+                "default_range": [min(candidate), max(candidate)],
+                "default_over_reference_median": median(candidate) / median(baseline),
+                "paired_default_over_reference": [
                     float(
                         next(
                             row[field]
                             for row in rows
-                            if row["pair"] == pair and row["arm"] == "coprime"
+                            if row["pair"] == pair and row["arm"] == "default"
                         )
                     )
                     / float(
                         next(
                             row[field]
                             for row in rows
-                            if row["pair"] == pair and row["arm"] == "default"
+                            if row["pair"] == pair and row["arm"] == "reference"
                         )
                     )
                     for pair in range(PAIRS)
@@ -261,65 +338,75 @@ def _assess(observations: list[dict[str, Any]]) -> dict[str, object]:
     assert isinstance(external_wall, dict)
     assert isinstance(analytic_wall, dict)
     metrics["material_bounded_verifier_improvement"] = (
-        external_cpu["coprime_over_default_median"] <= 0.90
-        and external_cpu["coprime_range"][1] < external_cpu["default_range"][0]
-        and external_wall["coprime_over_default_median"] <= 1.05
-        and analytic_wall["coprime_over_default_median"] <= 1.05
+        external_cpu["default_over_reference_median"] <= 0.90
+        and external_cpu["default_range"][1] < external_cpu["reference_range"][0]
+        and external_wall["default_over_reference_median"] <= 1.05
+        and analytic_wall["default_over_reference_median"] <= 1.05
     )
     return metrics
 
 
-def run(
-    default_target: Path, coprime_binary: Path, prior_ab_receipt: Path, output: Path
-) -> dict[str, object]:
-    ensure_external_scratch(output.parent)
+def _publish_receipt(output: Path, result: dict[str, object]) -> None:
+    """Publish complete JSON atomically, refusing even a late destination collision."""
+    content = json.dumps(result, indent=2, sort_keys=True) + "\n"
+    with tempfile.TemporaryDirectory(prefix=f".{output.name}.", dir=output.parent) as staging:
+        temporary = Path(staging) / "receipt.json"
+        with temporary.open("x", encoding="utf-8") as stream:
+            stream.write(content)
+            stream.flush()
+            os.fsync(stream.fileno())
+        try:
+            os.link(temporary, output)
+        except FileExistsError as error:
+            raise ValueError("refusing to overwrite a prior verifier A/B receipt") from error
+
+
+def run(target_root: Path, output: Path) -> dict[str, object]:
+    if not output.is_absolute():
+        raise ValueError("benchmark output path must be absolute")
+    output = output.resolve()
+    _external_scratch(output.parent)
+    target_root = _external_scratch(target_root)
     if output.exists():
         raise ValueError("refusing to overwrite a prior verifier A/B receipt")
-    default_binary, default_build = _build_default(default_target)
-    print(
-        "DEFAULT_BUILD_PREFLIGHT " + json.dumps(default_build, sort_keys=True),
-        file=sys.stderr,
-        flush=True,
-    )
-    binaries = {"default": default_binary, "coprime": coprime_binary.resolve(strict=True)}
-    prior_receipt_sha = _admit_coprime_build(
-        binaries["coprime"], prior_ab_receipt, default_build
-    )
     source_paths = (
         Path(__file__),
         Path(rectangle_density.__file__),
         Path(rust_rectangle_geometry.__file__),
         PROJECT / "benchmarks/bench_rectangle_verifier_parity.py",
-        PROJECT / "sqverify_exact/Cargo.toml",
-        PROJECT / "sqverify_exact/Cargo.lock",
-        PROJECT / "sqverify_exact/rust-toolchain.toml",
-        PROJECT / "sqverify_exact/src/lib.rs",
-        PROJECT / "sqverify_exact/src/main.rs",
+        CRATE / "Cargo.toml",
+        CRATE / "Cargo.lock",
+        CRATE / "rust-toolchain.toml",
+        CRATE / "src/lib.rs",
+        CRATE / "src/main.rs",
         ANALYTIC,
         EXTERNAL,
-        prior_ab_receipt,
-        *binaries.values(),
     )
-    before = {str(path): _sha(path) for path in source_paths}
-    for dataset, source in (("analytic", ANALYTIC), ("external", EXTERNAL)):
-        if before[str(source)] != EXPECTED_INPUT_SHA[dataset]:
+    # Freeze the complete instrument and input inventory before the first build.
+    sources = {str(path): _sha(path) for path in source_paths}
+    for dataset, path in (("analytic", ANALYTIC), ("external", EXTERNAL)):
+        if sources[str(path)] != EXPECTED_INPUT_SHA[dataset]:
             raise ValueError(f"{dataset} input differs from the retained workload")
-    for arm, binary in binaries.items():
-        expected_binary = (
-            default_build["binary_sha256"]
-            if arm == "default"
-            else EXPECTED_BINARY_SHA["coprime"]
-        )
-        if before[str(binary)] != expected_binary:
-            raise ValueError(f"{arm} binary differs from the retained build")
+    binaries: dict[str, Path] = {}
+    builds: dict[str, dict[str, object]] = {}
+    for arm in ("reference", "default"):
+        binaries[arm], builds[arm] = _build_variant(arm, target_root / arm, sources)
+    binary_hashes = _admit_builds(binaries, builds, sources)
+    before = sources | {str(binaries[arm]): sha for arm, sha in binary_hashes.items()}
+    print(
+        "PAIRED_BUILD_PREFLIGHT " + json.dumps(builds, sort_keys=True),
+        file=sys.stderr,
+        flush=True,
+    )
     started = time.monotonic()
     observations: list[dict[str, Any]] = []
     for dataset in ("analytic", "external"):
         for pair in range(PAIRS):
-            order = ("default", "coprime") if pair % 2 == 0 else ("coprime", "default")
+            order = ("reference", "default") if pair % 2 == 0 else ("default", "reference")
             for arm in order:
                 if time.monotonic() - started >= TOTAL_SECONDS - INVOCATION_SECONDS:
                     raise TimeoutError("paired verifier benchmark reached its total ceiling")
+                _require_unchanged(before)
                 binary = binaries[arm]
                 command = [
                     sys.executable,
@@ -341,7 +428,7 @@ def run(
                 if not isinstance(payload, dict) or not isinstance(payload.get("report"), dict):
                     raise TypeError("worker omitted its exact verifier report")
                 report: dict[str, Any] = payload["report"]
-                if report["rust_binary_sha256"] != before[str(binary)]:
+                if report["rust_binary_sha256"] != binary_hashes[arm]:
                     raise ValueError("worker used a different Rust binary")
                 normalized = _normalized(report)
                 expected_status = "VERIFIED" if dataset == "analytic" else "INCONCLUSIVE"
@@ -369,21 +456,26 @@ def run(
                         "rust_child_cpu_seconds": payload["rust_child_cpu_seconds"],
                     }
                 )
-    if before != {str(path): _sha(path) for path in source_paths}:
-        raise ValueError("verifier source, input, or binary changed during the benchmark")
+    _require_unchanged(before)
     if time.monotonic() - started >= TOTAL_SECONDS:
         raise TimeoutError("paired verifier benchmark exceeded its total ceiling")
     result: dict[str, object] = {
         "status": "MATCHED_BOUNDED_VERIFIER_DIAGNOSTIC_ONLY",
         "created_utc": datetime.now(UTC).isoformat(),
-        "source_sha256": before,
-        "default_build": default_build,
-        "coprime_build_receipt_sha256": prior_receipt_sha,
+        "source_sha256": sources,
+        "binary_sha256": binary_hashes,
+        "builds": builds,
+        "scratch_paths": {"target_root": str(target_root), "output": str(output)},
         "python_executable": sys.executable,
         "python_version": sys.version,
         "settings": {
             "pairs": PAIRS,
+            "arms": {
+                "reference": "original Rust expressions, --no-default-features",
+                "default": "production default features",
+            },
             "internal_seconds": INTERNAL_SECONDS,
+            "per_build_ceiling_seconds": BUILD_SECONDS,
             "per_invocation_ceiling_seconds": INVOCATION_SECONDS,
             "total_ceiling_seconds": TOTAL_SECONDS,
             "bound_mode": "common-core",
@@ -393,13 +485,14 @@ def run(
         "observations": observations,
         "assessment": _assess(observations),
         "scope": (
-            "Complete analytic control and capped external angle only; the latter remains "
-            "INCONCLUSIVE. Invocation wall includes Python startup/admission/serialization "
-            "and resident Rust startup/shutdown. Child CPU measures the Rust subprocess; "
-            "coordinator CPU excludes it. This is no full certificate or proof claim."
+            "Exploratory three-pair comparison of a complete analytic control and capped "
+            "external angle only; the latter remains INCONCLUSIVE. Invocation wall includes "
+            "Python startup/admission/serialization and resident Rust startup/shutdown. "
+            "Child CPU measures the Rust subprocess; coordinator CPU excludes it. "
+            "This is no full certificate or proof claim."
         ),
     }
-    output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n")
+    _publish_receipt(output, result)
     return result
 
 
@@ -407,26 +500,18 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--worker", choices=("analytic", "external"))
     parser.add_argument("--binary", type=Path)
-    parser.add_argument("--default-target", type=Path)
-    parser.add_argument("--coprime-binary", type=Path)
-    parser.add_argument("--prior-ab-receipt", type=Path)
+    parser.add_argument("--target-root", type=Path)
     parser.add_argument("--output", type=Path)
     args = parser.parse_args()
     if args.worker is not None:
         if args.binary is None:
             parser.error("worker needs --binary")
         raise SystemExit(_worker(args.worker, args.binary))
-    if any(
-        item is None
-        for item in (
-            args.default_target,
-            args.coprime_binary,
-            args.prior_ab_receipt,
-            args.output,
-        )
-    ):
-        parser.error("paired run needs the default target, coprime binary/receipt and output")
-    result = run(args.default_target, args.coprime_binary, args.prior_ab_receipt, args.output)
+    if args.binary is not None:
+        parser.error("--binary is only accepted for a worker")
+    if args.target_root is None or args.output is None:
+        parser.error("paired run needs --target-root and --output")
+    result = run(args.target_root, args.output)
     print(json.dumps({"status": result["status"], "assessment": result["assessment"]}))
 
 

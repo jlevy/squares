@@ -3,8 +3,9 @@
 from __future__ import annotations
 
 import dataclasses
-from decimal import Decimal
+from decimal import Decimal, localcontext
 from fractions import Fraction
+from pathlib import Path
 
 import pytest
 
@@ -23,11 +24,38 @@ def test_every_record_is_written() -> None:
 
 def test_the_lanes_it_raises_and_the_ones_it_leaves() -> None:
     raised = {plan.n for plan in tool.plans()}
-    assert len(raised) == 154
+    assert len(raised) == 153
+    # The later fine-net adoption now holds a stronger lane at 108.
+    assert 108 not in raised
     # A registered report pending adoption is stronger at 125 (T-144) and 148 (T-179).
     assert 125 not in raised
     assert 148 not in raised
     assert {126, 149} <= raised
+
+
+@pytest.mark.parametrize("delta", [Decimal(0), Decimal("0.01")])
+def test_planning_leaves_a_current_reported_lane_at_least_as_strong(
+    tmp_path: Path, delta: Decimal
+) -> None:
+    plan = _plan()
+    with localcontext() as context:
+        context.prec = 80
+        text = _record(held=str(plan.a30 + delta))
+    (tmp_path / "n-149.md").write_text(text)
+    assert tool.plans(tmp_path) == []
+    assert tool.stale(tmp_path) == []
+
+
+def test_planning_still_refuses_a_divergent_weaker_lane(tmp_path: Path) -> None:
+    (tmp_path / "n-149.md").write_text(_record(held="12.2250"))
+    assert [plan.n for plan in tool.plans(tmp_path)] == [149]
+    with pytest.raises(ValueError, match="not the"):
+        tool.stale(tmp_path)
+
+
+def test_historical_replay_keeps_a_later_stronger_lane() -> None:
+    text = (tool.FRONTIER / "n-108.md").read_text()
+    assert tool.replay(108, text) == text
 
 
 def test_a_raised_lane_rounds_down_and_cites_the_report() -> None:

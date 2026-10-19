@@ -4,7 +4,9 @@ from __future__ import annotations
 
 import gzip
 import hashlib
+import io
 import json
+import zipfile
 from decimal import Decimal
 from fractions import Fraction
 from pathlib import Path
@@ -765,9 +767,15 @@ def test_a_regularized_slide_too_far_to_match_is_recorded_not_refused(
     monkeypatch.setitem(route.CREDITED_READERS, "T-999", lambda _n: (side + TINY, stacked))
     gaps = route.credited_gaps([case])
     assert gaps["regularized n=4 against T-998"]["moved_beyond"]["1e-9"] == 0
+    # The placement that keeps most squares in place is still measured: three of four.
     assert gaps["regularized n=4 against T-999"] == {
         "unmatched": "no symmetry matches the two packings square for square",
         "side_difference": "-1/1000000000000000000000000000000",
+        "unmoved": {
+            "symmetry": 0,
+            "within": dict.fromkeys(("1e-9", "1e-6", "1e-3", "1e-2", "1e-1"), 3),
+            "one_to_one": False,
+        },
     }
 
 
@@ -1897,6 +1905,7 @@ def test_a_calle_layout_is_derived_as_the_importers_adapter_derives_it() -> None
     assert {
         "decimal-dilation": route.derive_decimal_pose,
         "calle-txt": route.derive_calle_txt,
+        "witness-center-basis": route.derive_center_basis,
     } == route.DERIVED_READERS
 
 
@@ -2268,3 +2277,266 @@ def test_daniels_154_is_another_arrangement_than_squishs_and_nearer_couzos_155()
     coarse_154 = route.patch_lineage(child, couzo_154, Fraction(1), near=tenth)
     assert max(placement["squares"] for placement in coarse_155) == 114
     assert max(placement["squares"] for placement in coarse_154) == 87
+
+
+# --------------------------------------------------------------------------- 14 October
+
+#: The counts each 14 October import is decided at, and the entry citing each count.
+CITED_1014: dict[str, dict[int, str]] = {
+    "#561": dict.fromkeys((156, 176, 237, 271), "T-161"),
+    "#562": dict.fromkeys((129, 204, 303), "T-162"),
+    "#564": {302: "T-164"},
+    "#504-refined": {153: "T-166"},
+    "#503-refined": {207: "T-167"},
+    "#566": {146: "T-168"},
+    "#567": {261: "T-169"},
+    "#568": {105: "T-170"},
+    "#569": {272: "T-171"},
+    "#573": dict.fromkeys((153, 207), "T-173"),
+    "#575": dict.fromkeys((211, 241, 304), "T-175"),
+    "#583": {154: "T-172", 211: "T-181", 241: "T-181"},
+    "#586": {154: "T-182", 176: "T-165", 211: "T-182", 241: "T-182", 302: "T-181"},
+    "#593": {237: "T-183"},
+}
+
+
+def _declared(key: str) -> dict[str, Any]:
+    """An import's declaration as the route reads it, a JSON object."""
+    packet = route.WEB / route.ALL_IMPORTS[key]
+    return json.loads((packet / "acquisition/report.json").read_text(encoding="utf-8"))
+
+
+def test_the_1014_rosters_are_the_counts_their_registered_entries_cite() -> None:
+    """Each packet is decided at the counts a registered entry cites from it, every one in
+    its replayed roster, and PR #574 at the 64 rational counts T-174 cites, its whole
+    replayed roster; T-174's claim prints no side per count, every other entry's does."""
+    citations = route.registered_citations()
+    for key, cited in CITED_1014.items():
+        declaration = _declared(key)
+        assert route.roster(key, declaration) == list(cited)
+        for n, entry in cited.items():
+            found, printed = citations[route.ALL_IMPORTS[key], n]
+            assert found == entry
+            assert printed is not None
+    declaration = _declared("#574")
+    rational = route.roster("#574", declaration)
+    assert rational == declaration["replayed"]
+    assert len(rational) == 64
+    assert not {70, 153, 207, 302} & set(rational)
+    for n in rational:
+        assert citations[route.ALL_IMPORTS["#574"], n] == ("T-174", None)
+
+
+@pytest.mark.parametrize(
+    ("citation", "problem"),
+    [
+        (("T-900", "3/7"), None),
+        (("T-900", "0.43"), None),
+        (("T-900", "0.4286"), None),
+        (("T-900", "0.42"), "T-900's claim 0.42 is neither the side nor rounds up to it"),
+        (("T-900", "0.44"), "T-900's claim 0.44 is neither the side nor rounds up to it"),
+        (("T-174", None), None),
+        (("T-900", None), "T-900's claim prints no side for the count"),
+        (None, "no register entry cites the certificate"),
+    ],
+)
+def test_a_registered_claim_prints_the_side_or_its_rounding_up(
+    citation: tuple[str, str | None] | None, problem: str | None
+) -> None:
+    assert route.claim_problem(Fraction(3, 7), citation) == problem
+
+
+def _release(tmp_path: Path, member: bytes) -> tuple[dict[str, str], dict[str, Any]]:
+    """A pinned manifest naming one zip asset that holds ``member``, fetched into tmp_path."""
+    buffer = io.BytesIO()
+    with zipfile.ZipFile(buffer, "w") as bundle:
+        bundle.writestr("certificates/n001.cert.json", member)
+    asset = buffer.getvalue()
+    manifest = (
+        "repository: owner/assets\ntag: data/v1\nobjects:\n"
+        f"- asset: bundle.zip\n  size: {len(asset)}\n"
+        f"  sha256: {hashlib.sha256(asset).hexdigest()}\n"
+    ).encode()
+    (tmp_path / "hosted").mkdir()
+    (tmp_path / "hosted/manifest.yaml").write_bytes(manifest)
+    (tmp_path / "bundle.zip").write_bytes(asset)
+    pinned = {"hosted/manifest.yaml": hashlib.sha256(manifest).hexdigest()}
+    archive = {
+        "manifest": "hosted/manifest.yaml",
+        "repository": "owner/assets",
+        "tag": "data/v1",
+        "asset": "bundle.zip",
+        "member": "certificates/n001.cert.json",
+        "sha256": hashlib.sha256(member).hexdigest(),
+    }
+    return pinned, archive
+
+
+def test_a_release_asset_member_is_held_to_its_manifest_asset_and_digest(
+    tmp_path: Path,
+) -> None:
+    """The member is read only from the asset the pinned manifest names, at its size and
+    digest, and only at the digest its row states."""
+    member = b'{"n": 1}'
+    pinned, archive = _release(tmp_path, member)
+    assert route.archive_member(tmp_path, pinned, archive) == member
+    for change, message in (
+        ({"sha256": "0" * 64}, "is not the member the row pins"),
+        ({"member": "certificates/n002.cert.json"}, "does not hold"),
+        ({"tag": "data/v2"}, "does not name the row's release"),
+        ({"asset": "other.zip"}, "does not name other.zip once"),
+    ):
+        with pytest.raises(AreaRouteError, match=message):
+            route.archive_member(tmp_path, pinned, archive | change)
+    with pytest.raises(AreaRouteError, match="is not the manifest the packet pins"):
+        route.archive_member(tmp_path, {}, archive)
+    (tmp_path / "bundle.zip").write_bytes(b"not the asset")
+    with pytest.raises(AreaRouteError, match="is not the asset"):
+        route.archive_member(tmp_path, pinned, archive)
+
+
+def _centre_basis(ids: list[object]) -> str:
+    squares = [
+        {"id": label, "center": [f"{2 * k + 1}/2", "1/2"], "basis": ["1", "0"]}
+        for k, label in enumerate(ids)
+    ]
+    witness = {
+        "n": len(ids),
+        "side": str(len(ids)),
+        "square_size": "1",
+        "representation": "center-basis",
+        "scalar": {"kind": "rational"},
+        "coordinates": {"origin": "lower-left", "axes": "x-right-y-up"},
+        "squares": squares,
+    }
+    return json.dumps({"witness": witness})
+
+
+def test_a_labelled_centre_basis_witness_is_read_in_the_order_listed() -> None:
+    """PR #574's supplement witnesses label their squares; a fact numbers them."""
+    expected = (Fraction(2), ((HALF_TURN, HALF_TURN, 1, 0), (Fraction(3, 2), HALF_TURN, 1, 0)))
+    labelled = _centre_basis(["owner-0", "owner-1"])
+    assert read_fact(labelled, 2, labelled=True) == expected
+    assert route.derive_center_basis(labelled.encode(), {"n": 2}) == expected
+    assert read_fact(_centre_basis([1, 2]), 2) == expected
+    for text, flag in (
+        (labelled, False),
+        (_centre_basis(["a", "a"]), True),
+        (_centre_basis([2, 1]), False),
+        (_centre_basis([1.5, 2]), True),
+    ):
+        with pytest.raises(AreaRouteError, match="not one exact pose"):
+            read_fact(text, 2, labelled=flag)
+
+
+def test_a_json_census_prints_each_side_by_its_count() -> None:
+    """Mishapolk's census lists each certificate as a record with its count."""
+    census = json.dumps(
+        [
+            {"n": 68, "side_fraction": "8/1", "side_float": 8.0, "source": "x"},
+            {"n": 237, "side_fraction": "7951/500", "sha256_cert": "ab"},
+            "not a record",
+        ]
+    ).encode()
+    assert route.printed_rows(census, "certificates/census.json") == [
+        ["68", "8/1", "x"],
+        ["237", "7951/500", "ab"],
+    ]
+    with pytest.raises(AreaRouteError, match="is not a list of records"):
+        route.printed_rows(b"{}", "certificates/census.json")
+
+
+def test_the_route_writes_its_own_long_margins_and_reads_them_back() -> None:
+    """A margin past the 4,300-digit text limit is written and read back exactly, and a
+    certificate's own literal is still read under the limit."""
+    long = Fraction(10**5000 + 1, 3)
+    written = route._text(long)  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+    assert route._own(written) == long  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+    with pytest.raises(ValueError, match="limit"):
+        literal("1" * 5000)
+
+
+def test_the_packings_the_1014_entries_name_are_read_as_their_entries_state() -> None:
+    """The four earlier entries read by the packet modules agree with the importer's own
+    house readers, and T-181 reads issue 583's certificates at 211 and 241 and b85dee2's
+    at 302; every import is also measured against #593's certificate at its count."""
+    for key, source, n in (
+        ("T-118", "[Rehwaldt n68 refinement 2026-10-07]", 68),
+        ("T-119", "[Daniel new arrangements 2026-10-07]", 266),
+        ("T-127", "[Gupta rational refinements 2026-10-08]", 88),
+        ("T-130", "[Couzo follow-up refinements 2026-10-08]", 84),
+    ):
+        side, placements = route.parent_packing(key, n)
+        assert side == upper.house_side(source, n)
+        assert len(placements) == n
+    for n, packet in (
+        (211, "couzo-issue583-2026-10-13"),
+        (302, "couzo-certificates-2026-10-13"),
+    ):
+        assert route.parent_packing("T-181", n)[0] == upper.import_side(packet, n)
+    assert route.credited("#574", 176) == ("#575", "T-151", "#593")
+    assert route.credited("#574", 68) == ("T-118", "#593")
+    assert route.credited("#586", 211) == ("T-181", "T-175", "#593")
+    assert route.credited("#593", 237) == ("T-161", "T-140", "T-174")
+
+
+def test_unmoved_finds_the_placement_that_keeps_most_squares() -> None:
+    """One square moved far is no reason to prefer another symmetry: the identity keeps
+    three of four squares in place, and their nearest centres stay one to one."""
+    parent = tuple(placed(GRID))
+    x, y, c, s = parent[3]
+    child = (*parent[:3], (x + Fraction(3, 10), y, c, s))
+    found = route.unmoved((Fraction(2), child), (Fraction(2), parent))
+    assert found["symmetry"] == 0
+    assert found["one_to_one"] is True
+    assert found["within"] == {"1e-9": 3, "1e-6": 3, "1e-3": 3, "1e-2": 3, "1e-1": 3}
+
+
+@pytest.mark.slow
+def test_the_pingyou_refinements_are_their_named_packings_moved_so_little() -> None:
+    """Each of PingYou Ltd's refinements of 12 October pairs one to one with the packing
+    its entry says it regularizes, every square within 1e-6 at 105, 146, 261 and 272 and
+    every square within a tenth at 153; Couzo's b85dee2 at 211 is issue 583's packing
+    within 1e-9, so T-182's regularization holds by pose."""
+    found = route.import_cases(("#568", "#566", "#567", "#569", "#504-refined", "#586"))
+    counts = {105, 146, 153, 211, 261, 272}
+    gaps = route.credited_gaps([case for case in found if case.n in counts])
+    for name, bound in (
+        ("#568 n=105 against T-130", Fraction(1, 10**18)),
+        ("#566 n=146 against T-150", Fraction(2, 10**6)),
+        ("#567 n=261 against T-150", Fraction(2, 10**6)),
+        ("#569 n=272 against T-151", Fraction(1, 10**6)),
+        ("#504-refined n=153 against T-148", Fraction(1, 10)),
+        ("#586 n=211 against T-181", Fraction(1, 10**9)),
+    ):
+        gap = gaps[name]
+        assert gap["unmoved"]["one_to_one"] is True
+        assert literal(gap["largest_squared"]) < bound * bound
+        assert gap["moved_beyond"]["1e-1"] == 0
+
+
+@pytest.mark.slow
+def test_593_restates_earlier_certificates_pose_for_pose_and_moves_couzos_237() -> None:
+    """Mykhailo Polkovskyi's #593 states, square for square, Couzo's issue-583 154 and his
+    b85dee2 211, Couzo's issue-561 156 and 271, Ostashev's #575 304 and his own #573 153
+    and 207; its 237, the one the ledger records, is Couzo's #561 design with 236 squares
+    moved, 7 of them beyond a tenth."""
+    found = route.import_cases(("#583", "#561", "#575", "#573", "#586"))
+    gaps = route.credited_gaps(found)
+    for name, bound in (
+        ("#583 n=154 against #593", Fraction(1, 10**14)),
+        ("#586 n=211 against #593", Fraction(1, 10**15)),
+        ("#561 n=156 against #593", Fraction(1, 10**11)),
+        ("#561 n=271 against #593", Fraction(1, 10**11)),
+        ("#575 n=304 against #593", Fraction(1, 10**18)),
+        ("#573 n=153 against #593", Fraction(0)),
+        ("#573 n=207 against #593", Fraction(0)),
+    ):
+        assert literal(gaps[name]["largest_squared"]) <= bound * bound
+    (case,) = route.import_cases(("#593",))
+    gap = route.credited_gaps([case])["#593 n=237 against T-161"]
+    assert (gap["symmetry"], gap["moved_beyond"]["1e-6"], gap["moved_beyond"]["1e-1"]) == (
+        0,
+        236,
+        7,
+    )

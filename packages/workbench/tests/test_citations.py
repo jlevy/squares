@@ -298,12 +298,13 @@ def test_the_current_handover_does_not_label_an_earlier_ceiling_as_confirmation(
         assert entry["upper"]["confirmed_by"] == ["T-146"]
         assert cited_lines(entry)["upper"][2] == "(confirmed T-146)"
     else:
-        # T-155's regularized certificate holds n = 29's ceiling now, still above the
-        # report, so neither it nor T-009 before it confirms the displayed bound.
-        assert entry["upper"]["results"] == ["T-155"]
-        assert entry["upper"]["assurance"] == "reported"
-        assert entry["upper"]["confirmed_by"] == []
-        assert cited_lines(entry)["upper"][2] == "(reported)"
+        # The house since the adoption of 17 October 2026 (think-30n2): PR #622's
+        # certificate (T-195) holds both of n = 29's lanes, after T-009 and T-155. Only the
+        # displayed house confirms.
+        assert entry["upper"]["results"] == ["T-195"]
+        assert entry["upper"]["assurance"] == "verified"
+        assert entry["upper"]["confirmed_by"] == ["T-195"]
+        assert cited_lines(entry)["upper"][2] == "(confirmed T-195)"
 
 
 def test_a_lower_bound_names_the_published_work_it_corrects(tmp_path: Path) -> None:

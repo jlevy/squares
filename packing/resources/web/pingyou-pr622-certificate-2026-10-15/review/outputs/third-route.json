@@ -1,0 +1,38 @@
+{
+  "route": "devtools.check_half_angle_area (V-check-half-angle-area), unchanged",
+  "route_sha256": "ec9dabcf34b43c2296be60b48ba96bf31994e7680fc20e826cf7fd21395e65ec",
+  "driver": "this file, which only reads and hands over",
+  "read": {
+    "certificate (read_pingyou_json)": "n29-certificate/certificates/n029.cert.json",
+    "fact (read_fact)": "facts/n-029.yaml.gz",
+    "corners witness (read_witness_corners)": "n29-certificate/native/pingyou-20261015-n29-rational.yaml"
+  },
+  "fact equals the certificate, side and every pose": true,
+  "corners witness: same side and the same 29 squares": true,
+  "verdict": {
+    "passed": true,
+    "pairs": 406,
+    "clipped_pairs": 54,
+    "overlapping_pairs": 0,
+    "outside_squares": 0,
+    "wall_clearance": "0",
+    "far_wall_clearance": "0",
+    "wall_contacts": 18,
+    "least_distance_squared": "0",
+    "least_distance": "0.000000e+6",
+    "closest_pair": [
+      23,
+      24
+    ],
+    "controls": {
+      "duplicate-square-refused": true,
+      "square-outside-refused": true,
+      "side-at-far-wall-contact-accepted": true,
+      "side-past-far-wall-contact-refused": true,
+      "closest-pair-in-contact-accepted": true,
+      "closest-pair-pushed-past-contact-refused": true
+    }
+  },
+  "cpu_s": 29.5,
+  "wall_s": 29.9
+}

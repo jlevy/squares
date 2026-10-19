@@ -12,10 +12,10 @@ import json
 import os
 import shutil
 import subprocess
-from collections.abc import Callable, Mapping
+from collections.abc import Callable, Collection, Mapping
 from fractions import Fraction
 from pathlib import Path
-from typing import Any
+from typing import Any, cast
 
 import pytest
 
@@ -87,6 +87,14 @@ DANIEL_552 = "evand-n154-2026-10-12"
 #: Issue #583's seven certificates at 4596670 that #586 replaced at b85dee2, and #570's
 #: 154 by its digest, retained by the records lane of 14 October.
 COUZO_583 = "couzo-issue583-2026-10-13"
+#: Issue #606, Evan Daniel's s(146), and Mykhailo Polkovskyi's 70a033f, which no issue
+#: reports, kept as derived facts: the evening intake of 14 October
+#: (`test_upper_bound_reports_606_70a033f`).
+DANIEL_606 = "evand-n146-2026-10-14"
+MISHAPOLK_70A = "mishapolk-kkt-refinements-2026-10-14"
+#: PR #622, PingYou Ltd's N29 certificate in a release asset, kept as a derived fact: the
+#: evening intake of 16 October (`test_upper_bound_reports_622`).
+PINGYOU_622 = "pingyou-pr622-certificate-2026-10-15"
 #: How a declaration cites a beyond-horizon row of the source register.
 COVERAGE_URL = "packing/frontier/source-coverage.yaml"
 EVERY = (
@@ -113,6 +121,9 @@ EVERY = (
     CALLE,
     DANIEL_552,
     COUZO_583,
+    DANIEL_606,
+    MISHAPOLK_70A,
+    PINGYOU_622,
 )
 
 
@@ -575,6 +586,100 @@ def test_admission_refuses_a_print_that_is_no_plain_decimal() -> None:
 # --------------------------------------------------------------------------- comparison
 
 
+def test_comparisons_admit_only_needed_imports_once_per_packet_and_refresh_next_time(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """House and pending aliases share a private read, never another comparison's truth."""
+    name = "synthetic-comparison-2026-10-15"
+    for reader in ("first", "alias"):
+        monkeypatch.setitem(
+            reports.HOUSES, reader, functools.partial(reports.import_side, name)
+        )
+    declaration = cast(
+        "reports.Declaration",
+        {
+            "houses": [{"n": 2, "reader": "first"}, {"n": 3, "reader": "first"}],
+            "pending": [{"n": 2, "reader": "alias"}, {"n": 4, "reader": "grid"}],
+        },
+    )
+    calls: list[tuple[Path, frozenset[int]]] = []
+    side = Fraction(3)
+
+    def facts(
+        packet: Path, numbers: Collection[int] | None = None
+    ) -> dict[int, legacy.Certificate]:
+        assert numbers is not None
+        calls.append((packet, frozenset(numbers)))
+        return {n: legacy.Certificate(n, side, ()) for n in numbers}
+
+    monkeypatch.setattr(reports, "read_facts", facts)
+    first_packet = reports.packet_path(name)
+    first = reports.comparison_reader(declaration)
+    assert first("first", 2) == first("alias", 2) == first("first", 3) == 3
+    assert first("grid", 4) == 2
+    assert calls == [(first_packet, frozenset({2, 3}))]
+
+    # The same packet path can change between calls; the next comparison must reread it.
+    side = Fraction(4)
+    second = reports.comparison_reader(declaration)
+    assert second("first", 2) == second("alias", 2) == 4
+    assert first("first", 2) == 3
+    assert calls == [(first_packet, frozenset({2, 3}))] * 2
+
+    # The same reader name under another repository must resolve to that private packet.
+    monkeypatch.setattr(reports, "WEB", tmp_path / "other-repository")
+    third = reports.comparison_reader(declaration)
+    assert third("first", 3) == 4
+    assert calls[-1] == (reports.packet_path(name), frozenset({2, 3}))
+    assert calls[-1][0] != first_packet
+
+
+def test_comparison_rereads_a_changed_private_fact_at_the_same_path(
+    private: Callable[[str], Path],
+) -> None:
+    packet = private(DELEEUW)
+    reader = "[Deleeuw n70 refinement 2026-10-10]"
+    declaration = cast(
+        "reports.Declaration", {"houses": [{"n": 70, "reader": reader}], "pending": []}
+    )
+    before = reports.comparison_reader(declaration)(reader, 70)
+    assert before > 0
+    fact = packet / "facts/n-070.yaml.gz"
+    original = fact.read_bytes()
+    document = reports.load_yaml(gzip.decompress(original).decode("utf-8"))
+    document["witness"]["squares"][0]["basis"][0] = "2"
+    fact.write_bytes(gzip.compress(json.dumps(document).encode(), mtime=0))
+    with pytest.raises(reports.ReportError):
+        reports.comparison_reader(declaration)(reader, 70)
+    fact.write_bytes(original)
+    assert reports.comparison_reader(declaration)(reader, 70) == before
+
+
+@pytest.mark.parametrize("fault", ["custody", "missing-count"])
+def test_comparison_import_failures_remain_report_errors(
+    monkeypatch: pytest.MonkeyPatch, fault: str
+) -> None:
+    name = "synthetic-comparison-2026-10-15"
+    monkeypatch.setitem(reports.HOUSES, "first", functools.partial(reports.import_side, name))
+    declaration = cast(
+        "reports.Declaration", {"houses": [{"n": 2, "reader": "first"}], "pending": []}
+    )
+
+    def facts(
+        packet: Path, numbers: Collection[int] | None = None
+    ) -> dict[int, legacy.Certificate]:
+        assert packet == reports.packet_path(name)
+        assert set(numbers or ()) == {2}
+        if fault == "custody":
+            raise reports.ReportError("packet custody: changed retained bytes")
+        return {}
+
+    monkeypatch.setattr(reports, "read_facts", facts)
+    detail = "packet custody: changed retained bytes" if fault == "custody" else "2"
+    with pytest.raises(reports.ReportError, match=f"n=2: first does not rebuild: {detail}"):
+        reports.comparison_reader(declaration)("first", 2)
+
+
 def test_a_printed_side_stands_for_the_numbers_its_rounding_allows() -> None:
     up = reports.printed_span("1.25", "up")
     assert (up.low, up.high, up.open_low, up.open_high) == (
@@ -984,18 +1089,18 @@ def test_the_receipt_admits_every_job_on_both_routes(name: str) -> None:
             assert margins[f"exact_verify_{field}"] == margins[f"independent_{field}"]
         assert Fraction(margins["exact_verify_best_pair_gap"]) >= 0
         assert Fraction(margins["exact_verify_containment_clearance"]) >= 0
-    # SQUISH's and #567's squares touch the box; every other source's clear it.
+    # SQUISH's, #567's and #622's squares touch the box; every other source's clear it.
     walls = {
         Fraction(m["exact_verify_containment_clearance"])
         for m in reports.margins(positives).values()
     }
-    assert (walls == {0}) is (name in {SQUISH_481, SQUISH_500, PINGYOU_261})
-    # Only #567's squares touch each other, an exact contact the kernel admits; every other
-    # source's pairs clear.
+    assert (walls == {0}) is (name in {SQUISH_481, SQUISH_500, PINGYOU_261, PINGYOU_622})
+    # Only #567's and #622's squares touch each other, an exact contact the kernel admits;
+    # every other source's pairs clear.
     gaps = {
         Fraction(m["exact_verify_best_pair_gap"]) for m in reports.margins(positives).values()
     }
-    assert (0 in gaps) is (name == PINGYOU_261)
+    assert (0 in gaps) is (name in {PINGYOU_261, PINGYOU_622})
 
 
 def _jobs_from_receipt(packet: Path, directory: Path) -> None:
@@ -1152,12 +1257,27 @@ def test_every_import_reader_is_the_packet_whose_source_key_names_it() -> None:
         if isinstance(reader, functools.partial) and reader.func is reports.import_side
     }
     assert len(readers) >= 35
+    #: T-185's 175 is the 11 October release's certificate under a key of its own, read
+    #: from that release's packet.
+    shared = {"[Couzo n175 2026-10-11]": "[Couzo certificates 2026-10-11]"}
     for key, reader in readers.items():
         packet = reports.packet_path(reader.args[0])
-        assert reports.load_declaration(packet)["source_key"] == key
+        assert reports.load_declaration(packet)["source_key"] == shared.get(key, key)
 
 
-@pytest.mark.parametrize("name", [name for name in EVERY if name not in BEYOND_ONLY])
+# Full run 38756833833 measured these two complete plan/independent-claim reads at
+# 23.91s and 14.92s CALL; the fresh local #593 read took 18.18s. Only those cases move
+# to the existing slow lane. Every other packet and the refusal controls remain quick.
+@pytest.mark.parametrize(
+    "name",
+    [
+        pytest.param(name, marks=pytest.mark.slow)
+        if name in {MISHAPOLK_593, MISHAPOLK_70A}
+        else name
+        for name in EVERY
+        if name not in BEYOND_ONLY
+    ],
+)
 def test_the_register_plan_states_each_bound_as_check_standing_reads_it(name: str) -> None:
     plan = reports.register_plan(_packet(name))
     result = plan["results.yaml"]
@@ -1195,6 +1315,9 @@ def test_the_register_plan_states_each_bound_as_check_standing_reads_it(name: st
         CALLE: "2026-10-12",
         DANIEL_552: "2026-10-12",
         COUZO_583: "2026-10-13",
+        DANIEL_606: "2026-10-14",
+        MISHAPOLK_70A: "2026-10-14",
+        PINGYOU_622: "2026-10-15",
     }
     assert result["attribution"]["published"] == published.get(name, "2026-10-10")
     evidence = plan["evidence.yaml"]
@@ -1579,6 +1702,9 @@ def test_the_593_prints_are_refused_and_each_census_fraction_is_admitted() -> No
             reports.admit(certificates[n], printed)
 
 
+# Complete 72-certificate and competing-house claim rebuild: 12.76s CALL in full
+# run 38756833833. Its exact comparisons stay intact in the existing slow lane.
+@pytest.mark.slow
 def test_the_593_release_is_smallest_only_at_237_and_ties_couzo_at_211_and_241() -> None:
     rows = _rows(MISHAPOLK_593)
     relations: dict[str, int] = {}

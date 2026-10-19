@@ -1,0 +1,12 @@
+.lake/
+build/
+.downloads/
+__pycache__/
+# generated certificate sources (scripts/fetch.sh)
+Sq19Lean/Capture/S*/P*.lean
+Sq19Lean/Capture/S*/Common.lean
+Sq19Lean/Capture/S*/common.json
+Sq19Lean/Census/Pat/
+Sq19Lean/Census/Complete.lean
+Sq19Lean/Census/Covered.lean
+Sq19Lean/Survivors/O*/

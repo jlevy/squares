@@ -1,0 +1,2 @@
+start 2026-10-16T06:12:20Z: /home/user/squares/.claude/worktrees/review-185/packing/.venv/bin/python -m devtools.upper_bound_reports couzo-certificates-2026-10-11 check --n 304 305 308 338 339 340 343 344 375 376 378 379 380 381 --replay
+end 2026-10-16T06:28:24Z exit 143 wall 964.1 s

@@ -1,0 +1,20 @@
+{
+  "checked_at_utc": "2026-10-19T00:54:00Z",
+  "unitsquare": {
+    "page": "https://hmbelvedere.com/",
+    "page_sha256": "4cc4d80ddf3a9ea95db5ca57202f349c6de3b2add261be2d5370cb4cb4a56c8f",
+    "page_identical_to_retained": true,
+    "data": "https://hmbelvedere.com/data/results.json",
+    "data_sha256": "dd7c1c62050b004c86959e59621c51d097f70d51cb142be9c19b15a16693d8b3",
+    "data_identical_to_retained": true
+  },
+  "squish": {
+    "issue": "https://github.com/jlevy/squares/issues/401",
+    "comment_id": 6043191866,
+    "comment_updated_at": "2026-10-07T18:33:04Z",
+    "unchanged_from_2026_10_18_receipt": true,
+    "issue_state": "closed",
+    "issue_updated_at": "2026-10-12T07:24:18Z",
+    "issue_comments": 6
+  }
+}

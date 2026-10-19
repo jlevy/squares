@@ -21,9 +21,13 @@ A third invariant joins the tree to the records:
 3. **Every deferral a record declares names a bead that is still open.** A deferral is
    work the record knows it has not done: a Kingbird count pending intake, a
    beyond-horizon claim held as a deferred conflict, a watched repository read past its
-   newest packet, an issue still open, a result or ask queued on one. Each names its
-   owning bead (`deferrals`), and a bead is still open while its state is one
-   `devtools.bead_state.LIVE` holds: `closed` and `deferred` are not. The three counts
+   newest packet, an issue still open, a result or ask queued on one, in the
+   regularization record a count allowed to stay pending, an exempt count, or a decided
+   count whose runs are still owed (`devtools.default_drawings.deferrals`), and a count
+   whose house adoption is staged (`devtools.select_houses.deferrals`). Each names its
+   owning bead (`deferrals`, `regularization_deferrals`, `adoption_deferrals`), and a bead
+   is still open while its state is one `devtools.bead_state.LIVE` holds: `closed` and
+   `deferred` are not. The three counts
    pending intake from 2026-09-30 named none, nothing listed them, and the record called
    the older sides best known for five days; a bead closed under a live deferral is the
    same orphan by another route.
@@ -75,7 +79,9 @@ AGENDAS = REPO / "packing" / "campaign" / "agendas"
 COVERAGE = REPO / "packing" / "frontier" / "source-coverage.yaml"
 REQUESTS = REPO / "packing" / "campaign" / "result-requests.yaml"
 INTAKE_WATCH = REPO / "packing" / "campaign" / "intake-watch.yaml"
-#: The flag the gate passes when the change touches none of the three records above.
+#: The flag the gate passes when the change touches none of the records declaring
+#: deferrals: the three above, `devtools/default_drawings.py` and
+#: `devtools/select_houses.py`.
 WARN_DEAD_DEFERRALS = "--warn-dead-deferrals"
 # The agenda schema's `bead` pattern is `^think-[a-z0-9]+$`; the part after the prefix
 # is the alias table's key.
@@ -309,6 +315,24 @@ def deferrals(
     return named
 
 
+def regularization_deferrals() -> list[tuple[str, str]]:
+    """The regularization record's deferrals, as (where, the bead alias): each count
+    `default_drawings.PENDING_ALLOWED` allows pending, each exemption and each decision's
+    `owed` bead (review A2 of #636). Imported here, not at the top, so that what else
+    reads this module (`devtools.intake_sweep`) does not load the measuring code."""
+    from devtools import default_drawings  # noqa: PLC0415
+
+    return default_drawings.deferrals()
+
+
+def adoption_deferrals() -> list[tuple[str, str]]:
+    """Each count `select_houses.PENDING_ADOPTION` stages for a later adoption, as (where,
+    the bead alias): the bead adopts it, so it stays open while the count is staged."""
+    from devtools import select_houses  # noqa: PLC0415
+
+    return select_houses.deferrals()
+
+
 def deferral_problems(
     beads: list[dict[str, Any]], aliases: dict[str, str], named: list[tuple[str, str]]
 ) -> list[dict[str, str]]:
@@ -374,7 +398,9 @@ def main(argv: Sequence[str] | None = None) -> int:
         return 0
 
     beads, source, aliases = found
-    dead = deferral_problems(beads, aliases, deferrals())
+    dead = deferral_problems(
+        beads, aliases, [*deferrals(), *regularization_deferrals(), *adoption_deferrals()]
+    )
     problems = check(beads) + ([] if warn_deferrals else dead)
     warnings = dead if warn_deferrals else []
     report = staleness(beads, aliases, agenda_cells() if AGENDAS.is_dir() else [])

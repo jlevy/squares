@@ -1,0 +1,136 @@
+{
+ "n": 76,
+ "mutants": [
+  {
+   "mutation": "drop the heaviest point orbit",
+   "removed_mass": "157157/3125000",
+   "total": "3785846537/50000000",
+   "pose": [
+    "40696381/26214400",
+    "10305157/6553600",
+    "3231/1048576"
+   ],
+   "mu_mutant": "1.007962641357",
+   "mu_published": "1.020535201357",
+   "refused_at_pose": false,
+   "published_ok_there": true,
+   "zmx2_root": [
+    15,
+    15,
+    0
+   ]
+  },
+  {
+   "mutation": "drop the heaviest segment orbit",
+   "removed_mass": "11044179/12500000",
+   "total": "3744184333/50000000",
+   "pose": [
+    "1745557/3276800",
+    "1858623/524288",
+    "15495/524288"
+   ],
+   "mu_mutant": "0.905766287465",
+   "mu_published": "1.016208077465",
+   "refused_at_pose": true,
+   "published_ok_there": true,
+   "zmx2_root": [
+    5,
+    35,
+    0
+   ]
+  },
+  {
+   "mutation": "drop the heaviest point orbit, at the triage control pose",
+   "pose": [
+    "1500011/1000000",
+    "750001/500000",
+    "1/250000"
+   ],
+   "mu_mutant": "7791864319064305387589347613/7812499999875000000000000000",
+   "mu_mutant_decimal": "0.997358632856",
+   "mu_mutant_agrees_with_zm_mixed_pose": true,
+   "mu_published": "1.009931192856",
+   "mu_published_agrees_with_zm_mixed_pose": true,
+   "refused_at_pose": true,
+   "zmx2_root": [
+    15,
+    15,
+    0
+   ]
+  },
+  {
+   "mutation": "drop the heaviest segment orbit, at the triage control pose",
+   "pose": [
+    "250003/500000",
+    "7/2",
+    "19/5000000"
+   ],
+   "mu_mutant": "7473478837793402735985184733/8333333333213000000000000000",
+   "mu_mutant_decimal": "0.896817460548",
+   "mu_mutant_agrees_with_zm_mixed_pose": true,
+   "mu_published": "1.007259250548",
+   "mu_published_agrees_with_zm_mixed_pose": true,
+   "refused_at_pose": true,
+   "zmx2_root": [
+    5,
+    35,
+    0
+   ]
+  },
+  {
+   "mutation": "every mass scaled by 199/200",
+   "pose": [
+    "364053/81920",
+    "11561/5120",
+    "21845/65536"
+   ],
+   "mu_published": "1.004805655988",
+   "mu_mutant": "0.999781627708",
+   "refused_at_pose": true,
+   "total": "753883848751/10000000000",
+   "zmx2_root": [
+    44,
+    22,
+    2
+   ]
+  }
+ ],
+ "without_wall_segments": {
+  "total": "3788361047/50000000",
+  "flush_axis_parallel_squares": 1600,
+  "min_mu_without": "1.009510261859",
+  "min_mu_published": "1.009510261859"
+ },
+ "written": [
+  {
+   "path": "n76_drop-heaviest-point.txt",
+   "total": "3785846537/50000000",
+   "sha256": "6c665a9bf2ed009436f2a6d9c6fe8dab4f84ba130346ad168fd09615718b472b",
+   "fnv1a64": "2765d231ef68c4f2"
+  },
+  {
+   "path": "n76_drop-heaviest-segment.txt",
+   "total": "3744184333/50000000",
+   "sha256": "236cddff3c002f7e0462d315f0e2cf5ef1ec697efea9970a855f772970f7b9ad",
+   "fnv1a64": "ac60fa79e8c77446"
+  },
+  {
+   "path": "n76_nowall.txt",
+   "total": "3788361047/50000000",
+   "sha256": "a3620c57ebd1f5c7d4ddf1b44ad0067d7fb866455585fc5b7c19f6528ae7d1bf",
+   "fnv1a64": "28054e02caf3015b"
+  },
+  {
+   "path": "n76_scaled-199-200.txt",
+   "total": "753883848751/10000000000",
+   "sha256": "a4a0a5136798aa513bc82ce0316b428921130d7d9469464f28e9aa5a146dddff",
+   "fnv1a64": "23659dc3c43fc196"
+  }
+ ],
+ "wall_s": 29.7,
+ "program": {
+  "name": "k2m5_review.py",
+  "sha256": "4fa7ed605b14893893dba03cde8054ab47360963e03514b0a554820813e1e848",
+  "python": "3.14.7"
+ }
+}

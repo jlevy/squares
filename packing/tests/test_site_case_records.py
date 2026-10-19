@@ -92,9 +92,12 @@ def test_a_case_page_prints_its_regularization_note_and_nothing_without_one() ->
     assert ("Regularized drawing" in housed) == drawn_here
     assert ('<span class="site-card-label">Regularization</span>' in housed) != drawn_here
     assert "The house is itself its source" in housed
-    # Where the view is held but not drawn, the note says why the page draws the house.
+    # Where the view is held but not drawn, the note opens by saying the page draws the
+    # house and why, rather than "Regularized by" (n = 176, think-gvke), and says it once.
     held = "does not improve on the packing as published"
     assert (held in housed) != drawn_here
+    assert ("<p>Drawn as published: " in housed) != drawn_here
+    assert housed.count(held) <= 1
     assert held not in drawn
 
     registered = regularization(cases[53])
@@ -720,8 +723,13 @@ def test_case_summaries_keep_math_and_layout_when_fetched(
             direct_page.goto(f"{served}cases/{n}.html", wait_until="load")
             direct_page.locator(f'article.site-case[data-case="{n}"]').wait_for(state="visible")
             if n == 291 and width == 1280 and theme == "light":
+                desktop_drawing_width = direct_page.evaluate(LAYOUT)["drawingWidth"]
                 _case_bounds_at_the_two_column_boundary(direct_page)
                 direct_page.set_viewport_size({"width": width, "height": 900})
+                # The article can resize before its drawing leaves the narrow query.
+                site_browser.api().expect(
+                    direct_page.locator(".site-case-figure > svg")
+                ).to_have_css("width", f"{desktop_drawing_width:g}px")
             direct = direct_page.evaluate(LAYOUT)
             if n == 291:
                 direct_page.screenshot(path=tmp_path / f"n291-direct-{width}-{theme}.png")

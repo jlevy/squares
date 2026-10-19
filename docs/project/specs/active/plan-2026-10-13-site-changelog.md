@@ -9,8 +9,8 @@ author: Codex, for the repository owner
 
 **Author:** Codex, for the repository owner
 
-**Status:** Changelog implemented in PR #590; News and full-width Atlas follow-up in
-progress.
+**Status:** Delivered in PR #590, PR #604 and PR #617. The delivery record below links
+the reviewed releases and deployment checks.
 
 **Tracking:** `think-j7nb` (planning), `think-jpto` (implementation epic), `think-kzet`
 (News), `think-q65u` (Atlas width)
@@ -122,7 +122,7 @@ Authoring/backfill checks public destinations and retains deployment or
 publication-history evidence before presenting an artifact as launched.
 Unknown historical first-live dates stay absent.
 
-Render the complete history on News with readable contribution titles, concise
+Render the eligible history on News with readable contribution titles, concise
 summaries, optional subpieces, artifact links and component versions.
 Distinguish a confirmed launch from project-only or prepared work in the wording.
 The complete history should make it easy to find both the public deliverable and the
@@ -151,6 +151,7 @@ They demonstrate the record shape, not a completed production backfill.
 | `details` | Optional Markdown, usually a short nested bullet list for a substantial effort |
 | `stack_id` | Optional verified formal-stack identity; repeated across later deliveries |
 | `grouping` | Explicit `related` grouping for several PRs sharing a contribution without a formal-stack claim |
+| `news_exclusion` | Nonblank reason to omit an entry from News while retaining its published changelog history and archive bookmark |
 | `categories` | Optional structured labels: records, pipeline, regularization, site or documentation |
 | `result_ids` | Optional record identities for linking, without duplicating their current state |
 | `artifacts` | Optional labeled links to launched papers, PDFs, results, pages or graphics |
@@ -165,8 +166,12 @@ The current `validate_schemas` corpus requires `enforced`, so production integra
 must use the settled contract rather than silently weakening that corpus.
 
 Validate types and required fields structurally.
-Check calendar dates, unique entry IDs, PR membership across entries, main-branch
+Check calendar dates, unique entry IDs, unique PR numbers within each entry, main-branch
 delivery and stack membership at the appropriate semantic boundary.
+A retained delivery may support several distinct articles; its coverage audit lists all
+of them. Every delivery must be represented by at least one article or exactly one
+omission, never both.
+Existing article dates and PR memberships remain frozen.
 A JSON Schema date format is only an annotation.
 Never fetch GitHub during ordinary rendering: merge metadata and editorial decisions are
 acquired during authoring and backfill, then committed as local inputs.
@@ -183,7 +188,7 @@ absolute PR links, and provides `--check` for freshness.
 The YAML remains authoritative; the generated Markdown is a reader view, not another
 manually maintained source.
 
-Publish the complete history at `news.html`, with News as the second navigation item.
+Publish the eligible history at `news.html`, with News as the second navigation item.
 Use the usual uppercase sans-serif H1 and sans-serif operational text, with one
 hairline-bordered card per entry.
 Each card starts with an ordinary H3 in the theme’s text foreground, followed by the
@@ -208,10 +213,16 @@ Compact single-select and multi-select choosers share the homepage component, in
 typography, padding, selected states, hover and keyboard focus.
 News defaults to S4/S5 and all topics; its group names remain accessible without visible
 labels. The result count reuses the Results control row and aligns right immediately
-above the cards. The homepage highlights the three newest S5 results from the
-authoritative results register, followed by the shared “All news →” action.
-These highlights reuse result claims, credit and evidence without inventing changelog
-launch entries for older results.
+above the cards. The homepage highlights up to three newest eligible S5 News articles
+that name result IDs, ordered by frozen announcement date and stable ID, followed by the
+shared “All news →” action.
+Homepage and archive use the same title, date, topic chips, complete article,
+significance meter and disclosure renderer.
+Claim qualifications remain in the shared article; the title links to its stable News
+anchor. Detailed result status stays in the linked result record.
+The archive’s “Full changelog” link uses the shared action button with an external-link
+arrow. Navigation components use explicit sans typography, including action links inside
+prose containers; inline prose citations keep their surrounding face.
 Explanations combines the former Papers and Visualize navigation entries.
 Its landing page (`papers.html`) has the Explanations H1 and four sections: Tutorial,
 Papers, PDFs and Visuals.
@@ -439,7 +450,9 @@ bottom S/V/C strip while retaining the Results page’s complete ladder document
 Use a small set of meaningful behavioral and negative checks:
 
 - Schema and semantics accept the examples and refuse missing prose, malformed dates,
-  duplicate IDs, duplicate PR membership, unmerged layers and invalid stack grouping.
+  duplicate IDs, duplicate PR numbers within an article, unmerged layers and invalid
+  stack grouping. Distinct articles may share one retained delivery without losing any
+  article from the coverage audit.
 - One fixture covers a standalone admission, a multi-piece stack delivery and a later
   delivery from the same stack, with frozen old membership and dates.
 - GitHub and News show the same entries, PR links and order.
@@ -475,6 +488,34 @@ YAML. Publish News and its homepage preview, then verify the deployed history wi
 normal publication audit.
 Begin routine updates with the documented closeout process.
 
+## Delivery Record
+
+The initial changelog and component-version policy shipped in
+[PR #590](https://github.com/jlevy/squares/pull/590).
+[PR #604](https://github.com/jlevy/squares/pull/604), merged as `16ea3bd0606c`, added
+News, the full-width web Atlas, Explanations navigation and the basic/advanced tutorial
+split. Its reviewed head passed
+[Packing](https://github.com/jlevy/squares/actions/runs/38634417915) and
+[Pages](https://github.com/jlevy/squares/actions/runs/38634417893). The
+[main deployment](https://github.com/jlevy/squares/actions/runs/38636016372) published
+that merge on 14 October 2026; its
+[live audit](https://github.com/jlevy/squares/actions/runs/38636016372/job/116103959611)
+passed all 4,243 checks.
+
+[PR #617](https://github.com/jlevy/squares/pull/617), merged as `f97bc0b199e2`,
+delivered the shared article headings and original publication dates, compact filters
+and meters, News editorial exclusions, bundled code glyphs and the separate adoption
+announcement. The merged site edition is `v0.7.5`.
+[Packing](https://github.com/jlevy/squares/actions/runs/38722914629) and
+[Pages](https://github.com/jlevy/squares/actions/runs/38722914631), including the
+deployed site verification, passed at that merge on 15 October 2026.
+
+These receipts complete the reader delivery.
+CI iteration-cost work remains separately tracked by `think-h96x`; its timing and
+checkpoint obligations are unchanged.
+The subsequent closeout batch under `think-h3iv` records the PR #604 tutorial launch
+with its original date and gives PR #617’s routine refinements an editorial disposition.
+
 ## Open Questions
 
 The proposed initial cutoff is 36 merged main-branch PRs.
@@ -482,22 +523,16 @@ Extend it if the owner wants more historical context; the schema and backfill co
 must support that without changing the rendering design.
 No unresolved question blocks the draft implementation plan.
 
-## Significance and archive filters follow-up
+## Significance and Archive Filters Follow-up
 
 Each News entry requires `significance: {score, rationale}`: an integer S1–S5 and a
 nonempty plain-text editorial explanation.
 Importance is separate from V/C truth.
-An announcement of a new registered result inherits that result’s score; a grouped
-announcement takes the maximum of the actual new results.
-An incidental citation never assigns an article the cited result’s score.
-
-| Score | News anchor |
-| --- | --- |
-| S1 | Minor housekeeping |
-| S2 | Routine engineering or internal reliability |
-| S3 | A notable focused public improvement, verification, method explanation or new S3 result |
-| S4 | A substantial new result or major public capability or policy launch |
-| S5 | A landmark mathematical advance or major resolution |
+The intake runbook’s
+[Label the PR and Prepare News](../../../../packing/campaign/result-import.md#label-the-pr-and-prepare-news)
+owns the conservative rubric, examples, result inheritance, grouping and individual
+stack-layer rules, and the independent Project label.
+The PR template points to that policy.
 
 The archive has keyboard- and touch-operable significance and topic toggles.
 S4/S5 and all topics are the defaults; choices within each facet combine with OR and the
@@ -516,9 +551,47 @@ meter. News and Atlas expansion footers share a centering rule.
 Filtered cards remeasure on revelation and width changes; the existing ten-line fade,
 click/tap expansion, hover wash and reduced-motion behavior remain.
 
-Importing a new candidate requires an explicit editorial score/rationale in retained
-metadata or the paired `--significance` and `--significance-rationale` CLI options.
-The importer never derives importance from incidental result references.
+Every PR receives exactly one S1–S5 GitHub label under the intake policy.
+News contains eligible S3–S5 entries; intermediate research checkpoints can have an
+editorial omission. S1/S2 stay in the complete changelog or coverage audit.
+News defaults to S4/S5 and offers S3 through its filters.
+
+The importer reads GitHub label objects or retained label strings and takes the score
+from the S label. An explicit editorial rationale remains required in retained
+`significance` metadata or `--significance-rationale`; editors need not retype the
+score. Multiple S labels and conflicts with an explicit score are rejected.
+Unlabeled historical JSON remains supported with explicit score/rationale metadata or
+the CLI options. Incidental result references never derive importance.
+
+Draft wording and assign labels before merge, retain the actual event date and delivered
+claim limits, then check the deployed entry and public artifacts before announcing
+publication. The PR template includes this disposition without changing its required
+section order.
+
+## Retrospective PR Classification, October 8–15
+
+The seven-day window from 2026-10-08 17:20:10 UTC through 2026-10-15 17:20:10 UTC
+contains 94 merged PRs.
+Every PR has an explicit News or omission disposition in the delivery coverage,
+including internal maintenance.
+Classification assigns nine S1, 48 S2, 27 S3, eight S4 and two S5 labels; 24 PRs also
+receive Project.
+The conservative review replaced 20 earlier scores; 57 of the 94 PRs are
+S1/S2.
+
+The backfill adds eleven changelog entries, nine eligible for News: earlier packing
+reports and certificates, the asymptotic deficiency families, the original methods
+survey, the finite seventeen-square certificate admission and a second candidate-proof
+review. Routine static-math repairs and the October poster refresh remain S2 entries in
+the complete changelog.
+Existing articles are corrected where their wording, score or topic confused new work
+with an incidental citation or maintenance.
+Existing article identities, dates and PR membership remain fixed.
+
+S1/S2 remain in the complete GitHub history.
+S3 intermediate research checkpoints can have an explicit omission when they add no
+distinct reader-facing development.
+The public News archive contains S3/S4/S5 only and defaults to S4/S5.
 
 ## References
 
@@ -535,10 +608,20 @@ The importer never derives importance from incidental result references.
 
 Results, homepage News and the News archive use the same stable topic keys and
 sentence-case labels from `packing/devtools/site_topics.py`. Registered result kinds
-retain their precise meanings; Engineering, Verification and Documentation cover project
-news. News accepts the complete vocabulary and offers filters for the topics present in
-its archive. Shared chips reset text transformation and small caps so the same label has
-the same casing on each surface.
+retain their precise meanings; Project, Engineering and Verification cover project news.
+Project uses the existing Engineering chip fill and never becomes a result kind.
+Documentation remains an internal contribution category, not a public topic.
+Pure document-maintenance entries use `news_exclusion` and remain in the full changelog;
+their earlier News bookmarks forward there.
+News excludes Correction and Audit as topic labels while Results retains those
+registered kinds. News offers joined, compact filters for the topics present in its
+eligible archive, using the cards’ shared fills and sentence-case labels in both themes.
+Each topic’s tally counts articles at the selected significance levels, independently of
+which topics are selected; All counts unique articles across those levels.
+The homepage displays the same topics as the selected archive article, once in its
+shared metadata row.
+Shared chips reset text transformation and small caps so the same label has the same
+casing on each surface.
 The Results Kind selector uses the same display labels without changing the register’s
 kinds or scientific claims.
 

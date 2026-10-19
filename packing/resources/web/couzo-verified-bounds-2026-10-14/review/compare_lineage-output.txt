@@ -1,0 +1,4 @@
+n=211 couzo-verified-bounds-2026-10-14 vs couzo-certificates-2026-10-13: side diff -9.288e-06; best symmetry 1: max centre distance 3.535e-01; within 1e-6: 1, 1e-3: 139, 0.1: 206 of 211; tangents moved > 1e-6: n/a
+n=211 couzo-verified-bounds-2026-10-14 vs couzo-issue583-2026-10-13: side diff -9.288e-06; best symmetry 1: max centre distance 3.535e-01; within 1e-6: 1, 1e-3: 139, 0.1: 206 of 211; tangents moved > 1e-6: n/a
+n=211 couzo-verified-bounds-2026-10-14 vs dostashev-merged-bands-2026-10-13: side diff -1.446e-04; best symmetry 0: max centre distance 4.454e-01; within 1e-6: 9, 1e-3: 112, 0.1: 206 of 211; tangents moved > 1e-6: 82
+n=211 couzo-verified-bounds-2026-10-14 vs dostashev-records-2026-10-11: side diff -2.787e-03; best symmetry 5: max centre distance 1.081e+01; within 1e-6: 0, 1e-3: 1, 0.1: 54 of 211; tangents moved > 1e-6: n/a

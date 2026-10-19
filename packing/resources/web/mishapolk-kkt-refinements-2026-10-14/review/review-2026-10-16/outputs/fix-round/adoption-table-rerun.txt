@@ -1,0 +1,60 @@
+129 11.8700138504044644 E-ostashev-562-exact-feasibility
+   T-186 11.8700138504044644 below case by 1.187e-19
+   T-174 11.8700138504044644 below case by 1.176e-19
+   T-186 below T-174 by 1.098e-21
+146 12.5837822039508343 E-pingyou-566-exact-feasibility
+   T-187 12.5837821901518604 below case by 1.380e-08
+   T-174 12.5837822039508343 below case by 1.258e-79
+   T-187 below T-174 by 1.380e-08
+154 12.9212065771326311 E-couzo-586-exact-feasibility
+   T-186 12.9212065771326311 below case by 1.292e-19
+156 12.9791658538342765 E-couzo-561-exact-feasibility
+   T-186 12.9791658538342765 below case by 1.298e-19
+   T-174 12.9791658538342765 below case by 1.298e-19
+   T-186 below T-174 by 1.194e-34
+175 13.7641743174865967 E-ostashev-528-exact-feasibility
+   T-186 13.7641743174865967 below case by 1.376e-19
+   T-174 13.7641743174865967 below case by 1.376e-19
+   T-185 13.7671190241983643 below case by -2.945e-03
+   T-186 below T-174 by 7.229e-75
+   T-174 below T-185 by 2.945e-03
+176 13.8076372268022796 E-couzo-586-exact-feasibility
+   T-186 13.7958723184364073 below case by 1.176e-02
+   T-174 13.7958723184364073 below case by 1.176e-02
+   T-186 below T-174 by 1.254e-94
+204 14.8086632343869566 E-ostashev-562-exact-feasibility
+   T-186 14.8086632343869566 below case by 1.481e-19
+   T-174 14.8086632343869566 below case by 1.463e-19
+   T-186 below T-174 by 1.828e-21
+211 14.9935589139740062 E-couzo-586-exact-feasibility
+   T-188 14.9935496262994211 below case by 9.288e-06
+   T-174 14.9963367213363157 below case by -2.778e-03
+   T-188 below T-174 by 2.787e-03
+232 15.7641743174865967 E-ostashev-528-exact-feasibility
+   T-186 15.7641743174865967 below case by 1.576e-19
+   T-174 15.7641743174865967 below case by 1.576e-19
+   T-186 below T-174 by 1.445e-74
+237 15.9027050578663668 E-mishapolk-593-exact-feasibility
+   T-190 15.9026036382595969 below case by 1.014e-04
+   T-189 15.9026036382835755 below case by 1.014e-04
+   T-174 15.9029477736581859 below case by -2.427e-04
+   T-190 below T-189 by 2.398e-11
+   T-189 below T-174 by 3.441e-04
+264 16.7747351323878329 E-ostashev-528-exact-feasibility
+   T-186 16.7747351323878329 below case by 1.677e-19
+   T-174 16.7747351323878329 below case by 1.677e-19
+   T-186 below T-174 by 1.753e-74
+271 16.9489923564512057 E-couzo-561-exact-feasibility
+   T-186 16.9489923564512057 below case by 1.695e-19
+   T-174 16.9489923564512057 below case by 1.695e-19
+   T-186 below T-174 by 2.089e-34
+302 17.8700138504044644 E-couzo-586-n302-exact-feasibility
+   T-186 17.8700138504044644 below case by 1.787e-19
+303 17.9099582910699080 E-ostashev-562-exact-feasibility
+   T-186 17.9099582910699080 below case by 1.791e-19
+   T-174 17.9099582910699080 below case by 1.791e-19
+   T-186 below T-174 by 2.432e-74
+304 17.9294277580751750 E-ostashev-575-exact-feasibility
+   T-186 17.9294277580751750 below case by 1.793e-19
+   T-174 17.9295659468485010 below case by -1.382e-04
+   T-186 below T-174 by 1.382e-04

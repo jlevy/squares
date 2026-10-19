@@ -37,6 +37,8 @@ A run produces two kinds of output, and they take different paths:
 
 A certificate that proves more than the record holds is registered as a result first,
 and its drawing enters the layer only after that.
+Once validated, a register result below the case’s house is the house, by the import
+runbook’s [house rule](../../../packing/campaign/result-import.md#the-house-rule).
 
 ## 2. Definitions
 
@@ -85,6 +87,10 @@ records.
    guidelines”): a view without the pairing, with an unnamed turn or with a move over
    $1/2$ is admitted when every other obligation holds, and the reason it is admitted
    with names the change.
+   The move and the turns are measured on the pairing, so a view without one records
+   only that it has none (`one_to_one: false`), with no move or turn to state (16
+   October 2026, a clarification of the owner’s answer of 13 October, first applied to
+   Evan Daniel’s view at n = 176).
 4. **Non-regression.** Neither the house nor the stage total of shared sides falls,
    against the source witness or against the admitted view it would replace.
    A view in which some square’s count falls while neither total does goes to review
@@ -198,6 +204,7 @@ where there is one.
 
 | Decision | How it is made reproducible |
 | --- | --- |
+| Admit a view row 7 sent to review (a square’s count falls while no total does) | A review record naming that very view: its count, generator and version, run, output and row, and the source witness as it identifies itself; `layer` then draws it, and the entry names the record |
 | Admit a row 8 alternate | Only once question 2 is answered yes, and then labelled an alternate, never the credited packing |
 | Choose symmetry or contact, attached or separate sub-blocks, or a placement style | A per-count generator parameter in the review record, which the driver reads on every later run |
 | Choose an orientation | A recorded isometry of the witness’s frame, as `devtools/atlas_orientation.py` records them |
@@ -210,7 +217,8 @@ where there is one.
 - Edit a view’s coordinates or angles by hand.
   Every pose comes from a generator run and, for `same`, from the exact re-solve.
 - Admit a view that fails any obligation of [section 3](#3-admission-obligations), or
-  override rows 1 to 7.
+  override a refusal or a hold of rows 1 to 7; row 7’s review, where no total falls, is
+  the reviewer’s to decide.
 - Change a side, a tier or a credit.
 - Draw an alternate as the credited packing.
 
@@ -218,13 +226,18 @@ where there is one.
 `packing/atlas/known-best/regularized/reviews.yaml`, a hand-written input beside the
 index.
 A record holds the count, the date, the reviewer, the decision and its reason; any
-parameters or generator choice; the generator version and source-witness digest it was
-made against; and the gallery it was made from.
-The index entry will name its record, and a records-tier check will hold the two to each
-other. Neither the file nor the check exists yet: the first review creates both, and
-until then no view rests on a review record.
-A review of a whole pass may also be written up under `docs/project/reviews/` and mapped
-in the document map.
+parameters or generator choice; the generator version and the source witness it was made
+against, as the witness identifies itself; and the gallery it was made from.
+The index entry names its record, and the records tier’s check of the layer
+(`regularize_axis_components --check-atlas`) holds the two to each other.
+The first review created both: on 16 October 2026 the owner admitted Evan Daniel’s
+same-side view at n = 211, which row 7 had sent to review, as recommended by the
+coordinating agent that asked.
+`regularize_evand layer` draws a view the table sent to review only as a record admits
+that very view: its count, generator and version, run, output and row, and its source
+witness as the witness identifies itself (its id, its source’s key, path and revision,
+and its side), never a digest of its bytes (OR-16). A review of a whole pass may also be
+written up under `docs/project/reviews/` and mapped in the document map.
 
 **Re-review:** a record lapses, and its count goes back through the automated pass, when
 
@@ -236,6 +249,8 @@ in the document map.
 
 A lapsed adjustment is re-applied only if its parameters still produce a view that meets
 every obligation, and the reviewer confirms it in a new record.
+A lapsed view goes back through the pass by the
+[regularization process](../guides/regularization-process.md#when-a-witness-changes).
 
 ## 6. Forking the Vendored Generator
 
@@ -306,17 +321,23 @@ solve `T-155` registered, so its item still says the rungs are not recorded.
 
 ## 8. Gates
 
-The generator costs about three to four CPU-hours for $n = 1..324$, far above any
+The generator costs about 13.7 CPU-hours for $n = 1..324$ (49,302 CPU-seconds in the
+`evand-regularize-full` receipt, 3.8 hours of wall at four workers), far above any
 routine gate’s wall ceiling.
 So it runs on request with a receipt, and the gates hold the decisions it produced
 ([OR-13](../../../operating-rules.md#or-13-every-fast-check-runs-in-ci-only-the-unavoidably-slow-ones-leave),
 [OR-17](../../../operating-rules.md#or-17-every-routine-gate-has-a-wall-ceiling-and-anything-above-it-is-selected-on-purpose)).
+A house adoption is such a request: the intake pass that re-houses a count runs the
+generators on the new witness in the adoption’s pull request, by the import runbook’s
+[house rule](../../../packing/campaign/result-import.md#the-house-rule), which says how
+the runs fit the compute cap and which deferrals `--check-state` allows.
 
 | Check | What it holds | Where it runs |
 | --- | --- | --- |
 | `regularized atlas views match their index` | The index against the manifest, the witnesses and the views, by digest; with the layer’s contract, also the generator, method, side relation, identity and review-record fields; every drawn view’s exact side against $s_W$ and against the case record’s $U$, decided exactly, with the views above $U$ named in `ABOVE_U` | Records tier, every pull request |
 | `regularized atlas drawings match their index` | Every drawing re-rendered from its retained view | Records tier, every pull request |
 | `default pictures improve on their house drawings` | Every drawn view measured against its house drawing again, each count’s default picture decided under the improvement rule ([section 11](#11-the-improvement-rule)) and held to `default-drawings.json` | Records tier, every pull request |
+| `every drawn picture is regularized, regular as published, decided or exempt` | Every count’s regularization state in `default-drawings.json` against the index; no count pending unless `default_drawings.PENDING_ALLOWED` names it with its bead, and no named count that is no longer pending ([section 12](#12-the-default-picture)) | Records tier, every pull request |
 | `results rungs are earned and the view agrees` | `devtools.check_results` on each register result’s `regularizations` items, and on `regularized_drawings` and every case record’s `regularization` note against the layer’s index | Records tier, every pull request |
 | `regularized atlas views re-derive exactly` | Every `regularize_axis_components/2` view re-derived byte for byte; every other generator’s view decided again over $\mathbb{Q}$ on the maintained routes, its square count, identity and shades re-measured and its digests held | Deferred: the `regularized-views` job, whose 450 s ceiling bead think-uomm revisits |
 | The generator run | The views reproduced from the pinned code and inputs | On request only, with a receipt |
@@ -411,15 +432,15 @@ policy applies until there is one.
     reached it (obligation 2), and the grid-slack generator tries a rational $U$ first
     wherever the witness’s side is above it.
     A view at a side below $U$ is a new result and is registered, as question 3
-    answered. Seven drawn views sit above $U$ and stay, by name, until a view at $U$
-    draws as well. At 18, 26, 66 and 85 Evan Daniel’s views are rationals about
-    $10^{-30}$ above a closed-form optimum, the status quo of question 4. At 110, 241
-    and 297 the drawing is at Francisco Couzo’s decimal side, $3 \times 10^{-12}$ to
-    $1.3 \times 10^{-11}$ above Evan Daniel’s exact optimum: the view at $U$ draws fewer
-    shared sides at 110 and 241 (bead think-jnso) and goes to the owner at row 7 at 297.
-    `packing/tests/test_regularize_select.py` reads every drawn view’s side against $U$
-    and fails on a view above it at any other count, and on a listed count once it is
-    drawn at $U$.
+    answered. Four drawn views sit above $U$ and stay, by name, until a view at $U$ draws
+    as well: at 18, 26, 66 and 85 Evan Daniel’s views are rationals about $10^{-30}$
+    above a closed-form optimum, the status quo of question 4. Three more did until
+    their houses moved: at 110, 241 and 297 the drawing was at Francisco Couzo’s decimal
+    side, $3 \times 10^{-12}$ to $1.3 \times 10^{-11}$ above Evan Daniel’s exact
+    optimum, until 241 moved to T-182 on 15 October 2026 and 110 and 297 to T-174 on 17
+    October 2026. `packing/tests/test_regularize_select.py` reads every drawn view’s
+    side against $U$ and fails on a view above it at any other count, and on a listed
+    count once it is drawn at $U$.
 
 14. **A changed pose:** *answered by the owner on 13 October 2026:* “once things have
     been verified correct, that they are equal or better, we can commit and use them.
@@ -636,14 +657,39 @@ Original shows the current house packing as published, with its source credit.
 Switching preserves the tiles and their links, and the drawing choice lasts for that
 page only; a new page starts with Regularized.
 Without scripts, the default drawings remain available.
-Where the layer holds a view that is not the default, the case page’s regularization
-note says why it draws the house drawing.
+Where the layer holds a view that is not the default, the case record’s regularization
+note opens by saying that the house drawing is drawn as published, and why.
 The house witness stays the record’s witness, and the view changes no side, value, tier
 or credit (section 1). `devtools.default_drawings` writes each count’s default and its
 reason to `packing/atlas/known-best/default-drawings.json`; its check, in the records
 tier on every pull request, measures every view against its house drawing again, fails
 when the record or a default departs from the rule, and lists the counts that keep the
 house picture and why.
+
+The owner asked on 15 October 2026 that the records make it evident which drawings are
+regularized. So the same record states, for every count, whether the picture it draws is
+`regularized` (a view of Evan Daniel’s regularizer or the grid-slack generator),
+`regular-as-published` (the house drawing has no uneven and no near-axis square, no
+strong view of the count has lapsed, and `PENDING_ALLOWED` does not hold it for its
+bead’s runs), `decided-no-better` (the strong generators ran on that witness and drew
+nothing the improvement rule takes), `exempt` (with a reason and the bead that owns it)
+or `pending`, with the witness it was decided on (its source’s key, path and revision
+and its side, never a digest of the file, under OR-16) and the runs that decided it.
+The index’s `status: regularized` says only that the layer holds a view.
+A view that lapses with its witness is recorded on the axis tool’s record (`lapsed`),
+and the count is pending until the generators decide the new witness.
+So is a count that `default_drawings.PENDING_ALLOWED` names, whatever a new house reads:
+the list’s first entries are the record of strong views that lapsed before the axis
+record kept that block.
+The records tier fails on a pending count unless `default_drawings.PENDING_ALLOWED`
+names it with its bead, and on a named count that is no longer pending, so the list
+equals the pending set, and `bead tree` holds each bead it names open.
+Since the list also holds its counts pending, it changes only by reviewed changes: a
+count leaves it when the strong generators or a `SETTLED` decision decide it, or when a
+reviewed change drops its entry, which the gate accepts where the count then reads
+regular as published; and a count joins it with its bead, whatever its house reads.
+The gate cannot tell a dropped entry from a decided one, so the pull request that drops
+one shows its bead’s runs or what the count draws before and after.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
