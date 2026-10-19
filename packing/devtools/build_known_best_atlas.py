@@ -1142,10 +1142,11 @@ def _catalogue_source_plan(
 def clear_build_caches() -> None:
     """Drop the memoized source plans and built cases.
 
-    Only source_plans() needs clearing. It reads the module-level source roots,
-    so a caller that repoints one -- the negative controls do, to corrupt a
-    retained SVG on purpose -- would otherwise read or leave a plan set built
-    against the other root. _build_case() is keyed on the plan itself, which
+    source_plans() reads the module-level source roots, so a caller that repoints
+    one -- the negative controls do, to corrupt a retained SVG on purpose -- would
+    otherwise read or leave a plan set built against the other root. The built-case
+    memo and the expected outputs are keyed on worker count and n, not on the plan,
+    so they are cleared with it. _build_case() is keyed on the plan itself, which
     carries the source path and its declared digest, so a corrupted source is a
     different key and cannot collide with the real one.
     """
@@ -4568,16 +4569,21 @@ def update_composites() -> None:
     )
 
 
-def check(workers: int = 1) -> None:
-    outputs, manifest = expected_outputs(workers)
-    # The composites are not part of the data layer `--update` writes: they are drawn
-    # apart, under the record of the data each was drawn from, and redrawn on demand. Held
-    # here, where the whole data layer is built anyway, rather than by building it again.
-    problems = [
+def _composite_write_problems(outputs: Mapping[Path, str]) -> list[str]:
+    """The composites are not part of the data layer `--update` writes: they are drawn
+    apart, under the record of the data each was drawn from, and redrawn on demand."""
+    return [
         f"the data layer would write the composite {_relative(canvas.svg_path)}"
         for canvas in COMPOSITES
         if canvas.svg_path in outputs
     ]
+
+
+def check(workers: int = 1) -> None:
+    outputs, manifest = expected_outputs(workers)
+    # Held here, where the whole data layer is built anyway, rather than by building it
+    # again.
+    problems = _composite_write_problems(outputs)
     for path, expected in sorted(outputs.items(), key=lambda item: item[0].as_posix()):
         if not path.is_file():
             problems.append(f"missing {_relative(path)}")

@@ -3499,6 +3499,17 @@ def test_only_the_bound_numeral_carries_the_new_result_accent() -> None:
         assert set(plain) == set(expected_plain)
 
 
+def test_check_refuses_a_data_layer_that_would_write_a_composite() -> None:
+    """Negative control for check(): a composite among the data layer's outputs is refused."""
+    canvas = known_best_builder.COMPOSITES[0]
+    outputs = {canvas.svg_path: "<svg/>", known_best_builder.WITNESS_ROOT / "n-001.yaml": ""}
+    problems = known_best_builder._composite_write_problems(outputs)  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+    relative = known_best_builder._relative(canvas.svg_path)  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+    assert problems == [f"the data layer would write the composite {relative}"]
+    del outputs[canvas.svg_path]
+    assert not known_best_builder._composite_write_problems(outputs)  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+
+
 def test_fast_composite_check_rejects_a_stale_bound_label(monkeypatch) -> None:
     canvas = known_best_builder.CompositeCanvas(
         CompositeSpec(first_n=18, last_n=18, columns=1, stem="synthetic")
