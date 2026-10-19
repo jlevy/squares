@@ -992,8 +992,11 @@ def test_a_held_count_restaged_for_a_smaller_house_names_it_and_becomes_history(
         "to T-193’s side, below T-174’s, once the writer takes an algebraic side."
     )
     assert adopt._keeps_until(88, "T-174", "its house") == sentence  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
-    assert adopt._keeps_until(236, "T-174", "its house") == (  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
-        "The case keeps its house until T-174’s adoption, staged under think-3mry, moves it "
+    # A count staged for its own held house names that house's adoption: 70, under the
+    # writer's bead, since the adoption of 19 October 2026 took 236, the last rational
+    # count staged for T-174, to issue 659's certificate (T-218).
+    assert adopt._keeps_until(70, "T-174", "its house") == (  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+        "The case keeps its house until T-174’s adoption, staged under think-ot5c, moves it "
         "to T-174’s side."
     )
     tail = sentence.split(" until ", 1)[1]
