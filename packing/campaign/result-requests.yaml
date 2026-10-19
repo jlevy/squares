@@ -12592,8 +12592,9 @@ issues:
       This resolves immutable-source and hash-kind custody only. The author's construction credit
       to Joost de Winter (issue 668) and exact-form certificate credit to Evan Daniel remain
       source-reported, distinct from identity or analytic-optimum verification. The promised
-      source-pin/hash-kind/credit patch is not yet linked. T-196 already merged through issue 676
-      as the earlier submission; no later seed or refinement rewrites it. Coordinate with
+      source-pin/hash-kind/credit patch is not yet linked. T-196 (issue 668) already merged
+      through pull request #676 as the earlier submission; no later seed or refinement rewrites
+      it. Coordinate with
       think-pvav for issue 675. All 85 new claims remain unreplayed and unregistered, with no
       T number allocated; the 83 new witnesses totaling 8,107,636 source-reported bytes are
       not retained by this custody update. Author-reported verification receipts are not local
