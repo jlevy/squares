@@ -5,7 +5,7 @@ title: Adopt T-218 at n183 and regularize it in the next intake PR
 kind: task
 status: in_progress
 priority: 2
-version: 6
+version: 7
 delegate: lane-680
 labels:
   - result-import
@@ -16,7 +16,7 @@ parent_id: is-01m59few7wa6j6yrnw49hjap7r
 hold: null
 hold_until: null
 created_at: 2026-10-19T11:16:02.525Z
-updated_at: 2026-10-19T21:54:16.808Z
+updated_at: 2026-10-19T23:37:38.324Z
 started_at: 2026-10-19T16:47:23.660Z
 ---
 Adopt T-218's original n183 rational certificate in the next intake pull request and finish both maintained strong-generator regularizations in that same pull request. Owner: codex-n183-house-adoption-20261019. This open obligation supplies select_houses.PENDING_ADOPTION n183; the registration slice does not move a house or run a generator. Credit Daniel after Couzo, with Levy acknowledged only for register seed data.
@@ -41,3 +41,5 @@ Backlog: this item is listed in packing/campaign/issue-intake/intake-followup-20
 2026-10-19 lane-680: took over from the handoff (#684). Fresh branch claude/ecstatic-edison-8en33t-680-n183 from main 14fd9e27f carries only the n183 portion: 018eae944 stage 2-4 registration (T-218, from codex/handoff-20261019/intake without #446/#678 work), f81b6b576 adoption (port of 05bb6a7b3), 1c9... witness rebuild byte-identical to d126d43f1, axis view/default drawings byte-identical to d35ad3eda, custody re-run (67 houses, 26 mutations, snapshot 228,867,849 < 219 MiB cap), strong-generator receipts carried from 1c31a3b36 (inputs byte-identical), regenerated views, provisional-wording cleanup. adopt_houses --check OK (67), records tier green except release impact (cut pending). Reproduction of grid-slack 0.5 on this branch: same view, only timings/against-current differ. Next: push, draft PR, review, edition cut, merge, stage 7 reply.
 
 2026-10-19 lane-680: reproduced all four strong-generator runs on branch head (scratch run dirs l680/runs): grid-slack 0.5/1/5 and regularize_evand run give the same views and receipts as the carried 1c31a3b36 runs; differences are only timings, workers, run-dir names and the against-current comparison (the drawn view is now the evand one). ~18 CPU-min at load ~30. CI at ea6a6d97e exposed grid-departure follow-ons (closed-form paragraph order, corpus-count tests, workbench grid fills, poster layout); fixed locally in 102812ec6/09bf45c99, posters being redrawn as infographics v0.6.4.
+
+2026-10-19 23:50Z lane-680: PR #687 (https://github.com/jlevy/squares/pull/687). Review A round 1 (request changes) dispositioned in issuecomment-6278998921: A1-A5 fixed (count contracts, closed-form order, re-pin, verifier notes, merge with main), A6 fixed/withdrawn (reproduction not retained, not cited), A7 fixed, A8 declined (optional under think-1hmn). Posters redrawn as infographics v0.6.4; site v0.7.36 (after #645/#658/#646 took 0.7.33-0.7.35), explainer v0.4.9, no-change records for three papers. Hosted CI green at 1692c96d1; head now 5cda2a1de, records tier green locally. Round 2 review requested.
