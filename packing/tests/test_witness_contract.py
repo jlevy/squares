@@ -1,20 +1,34 @@
 #!/usr/bin/env python3
 """Behavior and regression checks for the generic Witness/v2 command boundary."""
 
+# pyright: reportPrivateUsage=false
+
 from __future__ import annotations
 
+import random
+from collections.abc import Callable, Sequence
 from copy import deepcopy
 from fractions import Fraction
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
+import mpmath as mp
 import pytest
 import yaml
 
 from cases.schadt29.import_witness import parse_source
 from devtools.check_rational_witness_independent import check as independent_check
+from sqpack.verify import edge_axes, exact_sign, project
 from sqpack.witness import (
+    Scalar,
+    Square,
     WitnessError,
+    _approximate_materialize,
+    _exact_materialize,
+    _f64_materialize,
+    _margin_summary,
+    _rational_sign,
+    _sign_with_tolerance,
     check_witness_semantics,
     exact_verify,
     inspect_witness,
@@ -279,3 +293,127 @@ def test_parsed_document_keeps_schema_fallback_and_strict_file_duplicates(
     with pytest.raises(WitnessError, match="duplicate key 'n'") as failure:
         load_witness(path, fallback_schema=schema)
     assert failure.value.kind == "malformed-input"
+
+
+type Sign = Callable[[Scalar], int]
+type Layout = tuple[Sequence[Square], Scalar, Sign]
+
+
+def _defined_margin_summary(
+    squares: Sequence[Square], side: Scalar, sign: Sign
+) -> tuple[Scalar, Scalar]:
+    """The margins as they are defined, written out in full: every pair, every axis.
+
+    This is `_margin_summary` as it stood until 2026-10-19, kept verbatim as the reference
+    the faster one is held to. Under a tolerance it keeps the tolerance-blurred minimum
+    D-521 records; `think-jtot`, which fixes that, changes this definition and the
+    verifier together.
+    """
+    containment = [
+        clearance
+        for square in squares
+        for x, y in square
+        for clearance in (x, y, side - x, side - y)
+    ]
+    pair_margins: list[Scalar] = []
+    for left_index, left in enumerate(squares):
+        for right in squares[left_index + 1 :]:
+            gaps: list[Scalar] = []
+            for axis in edge_axes(left) + edge_axes(right):
+                left_lo, left_hi = project(left, axis, sign)
+                right_lo, right_hi = project(right, axis, sign)
+                gaps.extend((right_lo - left_hi, left_lo - right_hi))
+            best_gap = gaps[0]
+            for gap in gaps[1:]:
+                if sign(gap - best_gap) > 0:
+                    best_gap = gap
+            pair_margins.append(best_gap)
+    minimum_containment = containment[0]
+    for clearance in containment[1:]:
+        if sign(clearance - minimum_containment) < 0:
+            minimum_containment = clearance
+    minimum_pair_gap = side
+    if pair_margins:
+        minimum_pair_gap = pair_margins[0]
+        for gap in pair_margins[1:]:
+            if sign(gap - minimum_pair_gap) < 0:
+                minimum_pair_gap = gap
+    return minimum_containment, minimum_pair_gap
+
+
+def _unit_square(x: Fraction, y: Fraction, cos: Fraction, sin: Fraction) -> Square:
+    """A unit square with its first corner at (x, y), turned by the given cosine and sine."""
+    return [(x, y), (x + cos, y + sin), (x + cos - sin, y + sin + cos), (x - sin, y + cos)]
+
+
+def _synthetic_layouts() -> list[Layout]:
+    """Seeded layouts where the pruned search has the most room to differ, if it could.
+
+    Exact rational squares on a jittered grid, axis-aligned or turned by the Pythagorean
+    angle (3/5, 4/5), so touching, separated and overlapping pairs all occur; and the same
+    squares in binary64 under a coarse tolerance, so that many gaps sit within `sign`'s
+    dead zone of one another and which of two near-equal gaps is kept depends on the order
+    they are read in.
+    """
+    generator = random.Random(20261019)
+    turns = [(Fraction(1), Fraction(0)), (Fraction(3, 5), Fraction(4, 5))]
+    layouts: list[Layout] = []
+    for _ in range(40):
+        rational: list[Square] = []
+        for index in range(generator.randint(2, 14)):
+            row, column = divmod(index, 4)
+            cos, sin = generator.choice(turns)
+            x = Fraction(2 * column) + Fraction(generator.randint(-6, 6), 8)
+            rational.append(_unit_square(x, Fraction(2 * row), cos, sin))
+        floating: list[Square] = [
+            [(float(x), float(y)) for x, y in square] for square in rational
+        ]
+        layouts.extend(
+            [
+                (rational, Fraction(10), _rational_sign),
+                (floating, 10.0, _sign_with_tolerance(0.2)),
+                (floating, 10.0, _sign_with_tolerance(1e-12)),
+            ]
+        )
+    return layouts
+
+
+def test_margin_summary_matches_the_exhaustive_definition() -> None:
+    """The verifier's margins are the definition's, element for element, under every sign.
+
+    `_margin_summary` reuses each square's projections onto its own axes and stops
+    measuring a pair once it cannot lower the running minimum. Neither is allowed to
+    change a returned value, under an exact sign or under a tolerance. This holds that on
+    the retained witnesses of every scalar kind the verifier reads -- valid, overlapping,
+    rational and algebraic, exact, binary64 and multiprecision -- and on seeded layouts
+    built to put many gaps within a tolerance of one another.
+    """
+    schema = WITNESSES / "witness.schema.yaml"
+    exact = [
+        load_witness(WITNESSES / name, fallback_schema=schema)
+        for name in (
+            "grid-n004.yaml",
+            "overlap-negative-control.yaml",
+            "rotated-n001-sqrt2.yaml",
+            "schadt-n029-2025-rational.yaml",
+            "known-best-n011-rational-control.yaml",
+            "known-best/n-051.yaml",
+        )
+    ]
+    layouts: list[Layout] = []
+    for witness in exact:
+        squares, side, field = _exact_materialize(witness)
+        layouts.append((squares, side, _rational_sign if field is None else exact_sign))
+    decimal = load_witness(WITNESSES / "schadt-n029-2025-decimal.yaml")
+    binary64, binary64_side = _f64_materialize(decimal)
+    layouts.append((binary64, binary64_side, _sign_with_tolerance(1e-12)))
+    precise, precise_side = _approximate_materialize(decimal, 120)
+    layouts.append((precise, precise_side, _sign_with_tolerance(mp.mpf("1e-100"))))
+    layouts.extend(_synthetic_layouts())
+
+    for squares, side, sign in layouts:
+        expected = _defined_margin_summary(squares, side, sign)
+        actual = _margin_summary(squares, side, sign)
+        assert [(type(value), repr(value)) for value in actual] == [
+            (type(value), repr(value)) for value in expected
+        ]
