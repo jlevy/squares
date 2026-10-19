@@ -8333,7 +8333,7 @@ issues:
       left undecided, devtools.decide_undecided_comparisons decided 17 exactly, none below the
       standing side, and 29, 55, 71 and 83 stay undecided. Whether to merge the pull request is
       the owner's call.
-    read_through: '2026-10-13T00:13:11Z'
+    read_through: '2026-10-19T14:47:23Z'
     results:
     - key: pr574-certificates
       claim: Finite upper-bound improvements at the 68 counts the 14 October ledger records, by 64
@@ -8344,6 +8344,13 @@ issues:
       evidence:
       - E-pingyou-574-certificate-report
       - E-pingyou-574-algebraic-report
+    asks:
+    - what: Complete and record the disposition of the full 148-count submission and the pull request.
+      state: queued
+      bead: think-9v2k
+      note: The existing intake owner retains the supplement and per-count decisions. Accepted certificates,
+        ties, superseded reports and reasoned non-imports remain distinct; unimported does not by itself
+        require a new replay. The algebraic house writer is separately tracked under think-ot5c.
     beads:
     - think-9v2k
     answer_bead: think-9v2k
@@ -8370,6 +8377,22 @@ issues:
       - result: pr574-certificates
         id: E-pingyou-574-algebraic-report
         status: recorded
+    - url: https://github.com/jlevy/squares/issues/574#issuecomment-6270041615
+      date: '2026-10-19'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: pr574-certificates
+        id: T-174
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: pr574-certificates
+        id: E-pingyou-574-certificate-report
+        status: reviewed
+      - result: pr574-certificates
+        id: E-pingyou-574-algebraic-report
+        status: reviewed
     close_when: The import and its disposition are on main, the owner has decided the pull request and
       posted the resulting state with T-174's id, and the review and second route that would confirm
       T-174 are owned by its bead; optimality is outside this request.
@@ -8380,13 +8403,13 @@ issues:
       decided 17 of the 21 undecided comparisons exactly (result-import.md, Report-Order Verdict
       Comments); the comment as recorded is the edited one.
 
-      The reply `--report` lists as due (T-174 at V3/C3 and its two evidence entries reviewed, where
-      the follow-up of 14 October stated V0/C0 and recorded) waits for the owner, who decides the
-      pull request and, by `close_when`, posts the resulting state; T-174's adoption is no longer
-      the owner's: the house rule of 16 October 2026 makes it the house at 53 counts, staged under
-      think-3mry and, at 70, 153 and 207, under think-ot5c. It goes out on the owner's instruction,
-      from think-9v2k, and a pass that finds it due does not post it before then (PR #637's review,
-      A4).
+      The owner's requested follow-up on 19 October updates T-174 to V3/C3 and acknowledges the
+      37 current rational houses adopted by PR665, after its actual-main deployment passed all
+      4705 checks. Eleven were regularized, 25 decided with no better regularization and n103
+      retained as published. This does not accept the complete 148-count submission or close
+      its pull request. The existing think-9v2k owner retains the full supplement/per-count
+      disposition and final PR decision; think-ot5c retains the algebraic house writer. The
+      structured queued ask prevents a draft from proposing closure while that work remains.
   - number: 575
     title: 's(176) ≤ 13.795872318437, s(211) ≤ 14.993694186584, s(241) ≤ 15.987134249051, s(304) ≤ 17.929427758076:
       registration request'
