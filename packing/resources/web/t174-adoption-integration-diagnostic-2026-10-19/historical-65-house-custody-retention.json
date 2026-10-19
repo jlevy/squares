@@ -1,0 +1,8 @@
+{
+  "format": "historical-house-custody-retention-v1",
+  "source_ref": "34903e701bb8a73d6a65f419525c354743bd94b7",
+  "source_path": "packing/devtools/house-custody-2026-10-11.json",
+  "path": "historical-65-house-custody.json",
+  "bytes": 31822,
+  "sha256": "e2366300564a93226ffd479d78883ec688e9c11fc8b3a88d8ae24191f08eb39e"
+}

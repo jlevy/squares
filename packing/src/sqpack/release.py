@@ -88,6 +88,22 @@ class PublicationHistoryEntry(NamedTuple):
 #: for each deployment's commit, what the page it built stated.
 PUBLICATION_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.7.31",
+        first_published="October 19, 2026",
+        result_scope=(
+            "Adopt T-174 at 37 rational counts with exact house custody, maintained "
+            "history and regularized default drawings."
+        ),
+    ),
+    PublicationHistoryEntry(
+        version="v0.7.30",
+        first_published="October 19, 2026",
+        result_scope=(
+            "Document the cached libproc current-RSS contract and installed-SDK native "
+            "assurance on macOS."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.7.29",
         first_published="October 19, 2026",
         result_scope=(
@@ -516,7 +532,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "13558793c653c5d0bc4bb6a17755b5f8d8d249e2"
+DATA_REVISION = "00119d1b37526792d9790d43723a364271925185"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -953,6 +969,26 @@ class ReleaseImpactDecision(NamedTuple):
 # New component cuts append decisions here, newest first, alongside their own histories.
 # No impact is invented retrospectively for the published baseline editions.
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
+    ReleaseImpactDecision(
+        component="site",
+        previous_version="v0.7.30",
+        version="v0.7.31",
+        impact="patch",
+        reason=(
+            "Adopt T-174 at 37 rational counts with exact house custody, maintained "
+            "history and regularized default drawings."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="site",
+        previous_version="v0.7.29",
+        version="v0.7.30",
+        impact="patch",
+        reason=(
+            "Document the cached libproc current-RSS contract and installed-SDK native "
+            "assurance on macOS."
+        ),
+    ),
     ReleaseImpactDecision(
         component="site",
         previous_version="v0.7.28",
@@ -1408,6 +1444,205 @@ class ReleaseNoPublicChange(NamedTuple):
 
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
+    ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer",),
+        paths=(
+            "packing/atlas/known-best/bound-citations.json",
+            "packing/atlas/known-best/composite-figure.json",
+            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
+            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
+            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
+            "packing/devtools/adopt_houses.py",
+            "packing/devtools/check_case_prose.py",
+            "packing/devtools/check_rung_figures.py",
+            "packing/devtools/check_standing.py",
+            "packing/devtools/default_drawings.py",
+            "packing/devtools/regularize_axis_components.py",
+            "packing/devtools/result_overview.py",
+            "packing/devtools/run_negative_controls.py",
+            "packing/devtools/select_houses.py",
+            "packing/devtools/upper_bound_houses.py",
+            "packing/frontier/results.yaml",
+            "packing/src/sqpack/cli/validate.py",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-lower-bounds-explainer.pdf",
+        ),
+        reason=(
+            "For PR665 against landed main e0319ffd, a source-based review of the HTML, "
+            "Markdown and PDF producers finds the consumed values unchanged: 217 "
+            "registered results, 32 novel results, the n11 verified-lower citation, and "
+            "Figure 2 caption totals 81 recent lower bounds and zero first proved here. "
+            "Its n11 manuscripts, certificates, verifier text, figures and paper metadata "
+            "are unchanged. Changed claim documents carry only refreshed source-link "
+            "revisions and are linked rather than inlined. Changed house-selection, "
+            "regularization, result-page and control tools are outside the paper output "
+            "paths; the CLI validation change selects checks. The site patch owns the "
+            "adopted houses. Retain v0.4.8; no render, PDF redraw or artifact byte "
+            "identity is claimed."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:n11-optimality-review",),
+        paths=(
+            "packing/devtools/adopt_houses.py",
+            "packing/devtools/check_case_prose.py",
+            "packing/devtools/check_rung_figures.py",
+            "packing/devtools/check_standing.py",
+            "packing/devtools/default_drawings.py",
+            "packing/devtools/regularize_axis_components.py",
+            "packing/devtools/result_overview.py",
+            "packing/devtools/run_negative_controls.py",
+            "packing/devtools/select_houses.py",
+            "packing/devtools/upper_bound_houses.py",
+            "packing/frontier/results.yaml",
+        ),
+        outputs=(
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-optimality-review.pdf",
+        ),
+        reason=(
+            "For PR665 against landed main e0319ffd, source review of the HTML, Markdown "
+            "and PDF producers finds the complete consumed n11 ladder rows T010, T018, "
+            "T025, T026, T033, T037, T060 and T061 unchanged. Changed result claims are "
+            "T169, T170, T171 and T174, outside that ladder. Its manuscript, retained "
+            "proof and figure inputs, renderers and own publication metadata are "
+            "unchanged. The house-selection, regularization, result-page and control "
+            "changes are not called by this paper producer. Retain v0.1.7; this is a "
+            "source-based review, with no proof rerun, PDF redraw or artifact "
+            "byte-identity claim."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:n11-threshold-bound-review",),
+        paths=(
+            "packing/devtools/adopt_houses.py",
+            "packing/devtools/check_case_prose.py",
+            "packing/devtools/check_rung_figures.py",
+            "packing/devtools/check_standing.py",
+            "packing/devtools/default_drawings.py",
+            "packing/devtools/regularize_axis_components.py",
+            "packing/devtools/result_overview.py",
+            "packing/devtools/run_negative_controls.py",
+            "packing/devtools/select_houses.py",
+            "packing/devtools/upper_bound_houses.py",
+            "packing/frontier/results.yaml",
+        ),
+        outputs=(
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/n11-threshold-bound-review.pdf",
+        ),
+        reason=(
+            "For PR665 against landed main e0319ffd, source review of the HTML, Markdown "
+            "and PDF producers finds the consumed n11 ladder, including the T060 claim "
+            "used for its gap caption, unchanged. The T169, T170, T171 and T174 claim "
+            "edits are outside those consumed rows. Its manuscript, certificates, "
+            "retained figure inputs, renderer and own publication metadata are unchanged. "
+            "Changed house-selection, regularization, result-page and control tools are "
+            "not called by this producer. Retain v0.1.0; no proof rerun, PDF redraw or "
+            "artifact byte identity is claimed."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/devtools/adopt_houses.py",
+            "packing/devtools/check_case_prose.py",
+            "packing/devtools/check_rung_figures.py",
+            "packing/devtools/check_standing.py",
+            "packing/devtools/default_drawings.py",
+            "packing/devtools/regularize_axis_components.py",
+            "packing/devtools/result_overview.py",
+            "packing/devtools/run_negative_controls.py",
+            "packing/devtools/select_houses.py",
+            "packing/devtools/upper_bound_houses.py",
+            "packing/frontier/n-029.md",
+            "packing/frontier/n-070.md",
+            "packing/frontier/n-084.md",
+            "packing/frontier/n-086.md",
+            "packing/frontier/n-102.md",
+            "packing/frontier/n-103.md",
+            "packing/frontier/n-105.md",
+            "packing/frontier/n-108.md",
+            "packing/frontier/n-123.md",
+            "packing/frontier/n-126.md",
+            "packing/frontier/n-127.md",
+            "packing/frontier/n-129.md",
+            "packing/frontier/n-130.md",
+            "packing/frontier/n-131.md",
+            "packing/frontier/n-146.md",
+            "packing/frontier/n-153.md",
+            "packing/frontier/n-154.md",
+            "packing/frontier/n-175.md",
+            "packing/frontier/n-179.md",
+            "packing/frontier/n-180.md",
+            "packing/frontier/n-207.md",
+            "packing/frontier/n-208.md",
+            "packing/frontier/n-209.md",
+            "packing/frontier/n-236.md",
+            "packing/frontier/n-237.md",
+            "packing/frontier/n-238.md",
+            "packing/frontier/n-239.md",
+            "packing/frontier/n-261.md",
+            "packing/frontier/n-267.md",
+            "packing/frontier/n-295.md",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+            "papers/square-packing-methods-survey.pdf",
+        ),
+        reason=(
+            "For PR665 against landed main e0319ffd, source review of the HTML, Markdown "
+            "and PDF producers finds every declared historical figure input unchanged, "
+            "including the n29 and n51 SVGs, Casson n106 source and retained SQUISH n108 "
+            "facts. Changed case records, result requests, source coverage and results "
+            "are citation targets whose existence the producer checks; their bodies are "
+            "not inlined. All cited paths remain present at both revisions. The C1 "
+            "margin wording changes current openings at 15 additional citation targets, "
+            "including n29, with every other byte and all metadata retained. The "
+            "manuscript, renderer and own publication metadata are unchanged. "
+            "House-selection, regularization, result-page and control changes do not "
+            "enter its output. Retain v0.2.3; no search, PDF redraw or artifact byte "
+            "identity is claimed."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer",),
+        paths=(
+            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
+            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
+            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-lower-bounds-explainer.pdf",
+        ),
+        reason=(
+            "For PR407 against main 6833d05aa, the five generated claim documents "
+            "differ only in GitHub source-link revisions, from a450742e to c0fc4f9d, "
+            "the clean integration checkpoint before the site cut. Their claims, "
+            "proofs, embedded certificates and verifier text are unchanged. The "
+            "explainer checks these documents' presence and links to them; it does "
+            "not inline their bodies. Its manuscript, certificate inputs, figures, "
+            "renderer and own release metadata are unchanged, so it retains v0.4.8. "
+            "This is a source-based review of the HTML, Markdown and PDF producers; "
+            "no PDF redraw, proof rerun or artifact byte identity is claimed. Site "
+            "v0.7.30 owns the published development-guide correction."
+        ),
+    ),
     ReleaseNoPublicChange(
         components=("paper:n11-optimality-review",),
         paths=(
@@ -4086,7 +4321,7 @@ def validate_release_impacts(
 #: fresh render, so a link naming the build commit would fail their drift check forever. It is
 #: in no version string. It moves when the claim documents are regenerated for an edition. It
 #: must be a commit on `main`; the site's own links name `main` itself (`devtools.repo_links`).
-PUBLICATION_REVISION = "a450742e"
+PUBLICATION_REVISION = "d29aa141"
 
 
 def data_pathspec() -> tuple[str, ...]:

@@ -478,6 +478,39 @@ def stored_name(member: str, data: bytes) -> tuple[str, str]:
     return path, "plain"
 
 
+def retention_root(packet: Path) -> Path:
+    """Pin the operator-selected root without accepting a linked packet directory."""
+    require(not packet.is_symlink(), "packet root is a symlink; move it aside")
+    require(not packet.exists() or packet.is_dir(), "packet root is not a directory")
+    return packet.resolve()
+
+
+def retention_path(packet: Path, root: Path, relative: str | PurePosixPath) -> Path:
+    """Refuse linked/escaping components under the pinned packet root, without writing."""
+    require(retention_root(packet) == root, "packet root changed while retaining")
+    member = PurePosixPath(relative)
+    require(
+        bool(member.parts) and not member.is_absolute() and ".." not in member.parts,
+        f"{relative}: expected a packet-relative path without parent traversal",
+    )
+    path = packet
+    for index, part in enumerate(member.parts):
+        path /= part
+        require(
+            not path.is_symlink(), f"{path.relative_to(packet)} is a symlink; move it aside"
+        )
+        require(
+            path.resolve().is_relative_to(root),
+            f"{path.relative_to(packet)} escapes the packet root",
+        )
+        if index < len(member.parts) - 1:
+            require(
+                not path.exists() or path.is_dir(),
+                f"{path.relative_to(packet)} is not a directory",
+            )
+    return path
+
+
 def retain(
     asset: Path,
     *,
@@ -502,15 +535,22 @@ def retain(
     consume it. All destinations are checked before any packet member is written.
     Completed members are linked into place without replacing existing files; the
     manifest is atomically replaced. This promises atomic visibility, not power-loss
-    durability. A packet must have only one retention writer at a time.
+    durability. The packet root is resolved once; linked components inside it are
+    refused, including links whose targets are inside it. The operator must control
+    this directory tree and allow only one trusted writer: no other process may
+    replace directories or links during retention. Boundary checks are repeated at
+    publication, but are not race-hardened against hostile concurrent tree changes.
     """
-    directory = unpack_asset(asset, sha256, size, name, work)
+    root = retention_root(packet)
     record_path = packet / RETAINED_RECORD
     require(
         not (record_path.exists() or record_path.is_symlink())
         or (record_path.is_file() and not record_path.is_symlink()),
         f"{RETAINED_RECORD} is not a regular file; move it aside before retaining",
     )
+    retention_path(packet, root, RETAINED_RECORD)
+    retention_path(packet, root, RETAINED_DIR)
+    directory = unpack_asset(asset, sha256, size, name, work)
     record: dict[str, Any] = (
         load_json(record_path.read_bytes())
         if record_path.is_file()
@@ -541,7 +581,7 @@ def retain(
             members.append(row | {"pinned_only": reason})
             continue
         stored, form = stored_name(member, data)
-        target = packet / stored
+        target = retention_path(packet, root, stored)
         if form == "gzip":
             plain = target.with_name(target.name.removesuffix(GZIP_SUFFIX))
             require(
@@ -567,8 +607,18 @@ def retain(
         [item for item in record["assets"] if item["asset"] != asset.name] + [entry],
         key=lambda item: item["asset"],
     )
+
+    def check_destinations() -> None:
+        retention_path(packet, root, RETAINED_RECORD)
+        for member in members:
+            if "stored" in member:
+                retention_path(packet, root, member["stored"])
+
+    check_destinations()
     for target, source, form in copies:
+        check_destinations()
         target.parent.mkdir(parents=True, exist_ok=True)
+        check_destinations()
         with tempfile.TemporaryDirectory(prefix=".retain-", dir=target.parent) as staging:
             temporary = Path(staging) / target.name
             if form == "gzip":
@@ -582,12 +632,14 @@ def retain(
                     not (plain.exists() or plain.is_symlink()),
                     f"{plain.relative_to(packet)} appeared while retaining; move it aside",
                 )
+            check_destinations()
             try:
                 os.link(temporary, target)
             except FileExistsError as error:
                 raise AuditError(
                     f"{target.relative_to(packet)} appeared while retaining; move it aside"
                 ) from error
+    check_destinations()
     atomic_write_text(record_path, retained_json.dumps(record), make_parents=True)
     return entry
 
@@ -599,10 +651,17 @@ def check_retained(packet: Path) -> list[str]:
     ``original-gzip``) to the size and SHA-256 its row records, a ``gzip`` member is a
     deterministic gzip, every file under ``release/`` is a stored member, and each asset
     is the one the retained ``ASSET.json`` of its certificate names, where the packet
-    keeps that document.
+    keeps that document. The writer's no-directory-links policy also applies to every
+    read: an external member is not accepted merely because its recorded digest agrees.
     """
     problems: list[str] = []
-    record = load_json((packet / RETAINED_RECORD).read_bytes())
+    try:
+        root = retention_root(packet)
+        record_path = retention_path(packet, root, RETAINED_RECORD)
+        release = retention_path(packet, root, RETAINED_DIR)
+    except AuditError as error:
+        return [str(error)]
+    record = load_json(record_path.read_bytes())
     if record.get("format") != RETAINED_FORMAT:
         return [f"{RETAINED_RECORD}: format is not {RETAINED_FORMAT}"]
     stored: set[str] = set()
@@ -610,8 +669,12 @@ def check_retained(packet: Path) -> list[str]:
         for row in item["members"]:
             if "pinned_only" in row:
                 continue
-            path = packet / row["stored"]
             stored.add(row["stored"])
+            try:
+                path = retention_path(packet, root, row["stored"])
+            except AuditError as error:
+                problems.append(str(error))
+                continue
             if not path.is_file():
                 problems.append(f"{row['stored']} is recorded but absent")
                 continue
@@ -630,14 +693,21 @@ def check_retained(packet: Path) -> list[str]:
         ):
             if document.relative_to(packet).parts[0] == RETAINED_DIR:
                 continue
+            try:
+                retention_path(packet, root, document.relative_to(packet).as_posix())
+            except AuditError as error:
+                problems.append(str(error))
+                continue
             assets = load_json(document.read_bytes()).get("assets") or []
             if not any(all(value.get(key) == named[key] for key in named) for value in assets):
                 problems.append(f"{item['asset']} is not the asset {document} names")
-    present = {
-        path.relative_to(packet).as_posix()
-        for path in (packet / RETAINED_DIR).rglob("*")
-        if path.is_file()
-    }
+    present: set[str] = set()
+    for path in release.rglob("*"):
+        relative = path.relative_to(packet).as_posix()
+        if path.is_symlink():
+            problems.append(f"{relative} is a symlink; move it aside")
+        elif path.is_file():
+            present.add(relative)
     problems.extend(f"{name} is not in {RETAINED_RECORD}" for name in sorted(present - stored))
     return problems
 
