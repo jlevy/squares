@@ -1521,6 +1521,88 @@ class ReleaseNoPublicChange(NamedTuple):
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
     ReleaseNoPublicChange(
+        components=("paper:n11-optimality-review",),
+        paths=(
+            "packing/devtools/adopt_houses.py",
+            "packing/devtools/run_negative_controls.py",
+            "packing/devtools/upper_bound_houses.py",
+            "packing/devtools/upper_bound_reports.py",
+            "packing/frontier/results.yaml",
+        ),
+        outputs=(
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+        ),
+        reason=(
+            "Reviewed October 19, 2026 for the 19 October intake (think-bjvs): "
+            "render_n11_optimality_review, run with source-link revision f3d70f9e4 from "
+            "main 14fd9e27f's tree and from this branch's d2ae6e7f6, writes byte-identical "
+            "HTML and Markdown. The register changes T-205, T-206 and T-207 and adds "
+            "T-218, all outside the n11 ladder rows T-010 to T-061 the paper draws, which "
+            "LADDER_DIGEST holds. The changed house-adoption, negative-control and report "
+            "tools carry T-218's prose, credit and packet source and the 221 MiB snapshot "
+            "cap, none of which this producer calls. Its manuscript, figures and own "
+            "publication metadata are unchanged, so it retains v0.1.7. No PDF was printed "
+            "and no PDF byte identity is claimed."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:n11-threshold-bound-review",),
+        paths=(
+            "packing/devtools/adopt_houses.py",
+            "packing/devtools/run_negative_controls.py",
+            "packing/devtools/upper_bound_houses.py",
+            "packing/devtools/upper_bound_reports.py",
+            "packing/frontier/results.yaml",
+        ),
+        outputs=(
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+        ),
+        reason=(
+            "Reviewed October 19, 2026 for the 19 October intake (think-bjvs): "
+            "render_n11_threshold_bound_review, run with source-link revision f3d70f9e4 "
+            "from main 14fd9e27f's tree and from this branch's d2ae6e7f6, writes "
+            "byte-identical HTML and Markdown. The register changes T-205, T-206 and "
+            "T-207 and adds T-218, outside the n11 ladder and the T-060 row its gap "
+            "caption reads. The changed house-adoption, negative-control and report tools "
+            "carry T-218's prose, credit and packet source and the 221 MiB snapshot cap, "
+            "none of which this producer calls. Its manuscript, certificates, figures and "
+            "own publication metadata are unchanged, so it retains v0.1.0. No PDF was "
+            "printed and no PDF byte identity is claimed."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/devtools/adopt_houses.py",
+            "packing/devtools/run_negative_controls.py",
+            "packing/devtools/upper_bound_houses.py",
+            "packing/devtools/upper_bound_reports.py",
+            "packing/frontier/n-084.md",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "Reviewed October 19, 2026 for the 19 October intake (think-bjvs): "
+            "render_packing_methods, run with source-link revision f3d70f9e4 from main "
+            "14fd9e27f's tree and from this branch's d2ae6e7f6, writes byte-identical HTML "
+            "and Markdown. The intake requests, source coverage, results register and the "
+            "n84 case record are citation targets whose presence the producer checks; "
+            "their bodies are not inlined, and its n84 row types the upper bounds, not "
+            "the lower bound T-206 raises. The changed house-adoption, negative-control "
+            "and report tools carry T-218's prose, credit and packet source and the 221 "
+            "MiB snapshot cap, none of which enters its output. Its manuscript, figure "
+            "inputs and own publication metadata are unchanged, so it retains v0.2.3. No "
+            "PDF was printed and no PDF byte identity is claimed."
+        ),
+    ),
+    ReleaseNoPublicChange(
         components=("paper:n11-lower-bounds-explainer",),
         paths=("packing/src/sqpack/cli/validate.py",),
         outputs=(
