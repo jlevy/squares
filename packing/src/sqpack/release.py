@@ -1483,11 +1483,14 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
     ReleaseNoPublicChange(
         components=("paper:n11-lower-bounds-explainer",),
         paths=(
+            "packing/atlas/known-best/bound-citations.json",
+            "packing/atlas/known-best/composite-figure.json",
             "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
             "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
             "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
             "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
             "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
+            "packing/devtools/run_negative_controls.py",
             "packing/frontier/results.yaml",
         ),
         outputs=(
@@ -1500,19 +1503,24 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "T-205, T-206 and T-207: results.yaml changes only those three n68, n84 and "
             "n85 lower-bound entries and last_reviewed. The explainer reads the register "
             "for its count of 217 results and of apparently or confirmed novel ones, "
-            "both unchanged since the three stay previously-published, and its Figure 2 "
-            "totals from the unchanged atlas composite record. The site v0.7.33 cut "
-            "regenerated the five claim and card documents, which change only their "
-            "source-link commit and are linked from the paper, not inlined. Rendering "
-            "its HTML and Markdown at the base and candidate record trees gave identical "
-            "Markdown and HTML that differs only in the position of one empty style "
-            "attribute that the browser math preparation serializes; the PDF prints that "
-            "HTML. Retain v0.4.8; no PDF redraw or byte identity of the PDF is claimed."
+            "both unchanged since the three stay previously-published. The composite "
+            "figure record and bound citations change only the n68, n84 and n85 lower "
+            "displays and citations; Figure 2's totals and the n11 citation the paper "
+            "reads are unchanged. The site v0.7.33 cut regenerated the five claim and "
+            "card documents, which change only their source-link commit and are linked "
+            "from the paper, not inlined. run_negative_controls.py changes only the "
+            "snapshot cap and its comment and is not a paper producer. Its HTML and "
+            "Markdown rendered at the base record tree and at the candidate head are "
+            "identical; the PDF prints that HTML. Retain v0.4.8; no PDF redraw or byte "
+            "identity of the PDF is claimed."
         ),
     ),
     ReleaseNoPublicChange(
         components=("paper:n11-optimality-review",),
-        paths=("packing/frontier/results.yaml",),
+        paths=(
+            "packing/devtools/run_negative_controls.py",
+            "packing/frontier/results.yaml",
+        ),
         outputs=(
             "papers/n11-optimality-review.html",
             "papers/n11-optimality-review.md",
@@ -1521,15 +1529,19 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         reason=(
             "Reviewed October 19, 2026 against main 14fd9e27 for the #446 landing of "
             "T-205, T-206 and T-207: the changed results are the n68, n84 and n85 lower "
-            "bounds, outside the n11 ladder rows this paper consumes. Its HTML and "
-            "Markdown rendered at the base and candidate record trees with the same "
-            "source-link revision are byte-identical. Retain v0.1.7; no PDF redraw is "
-            "claimed."
+            "bounds, outside the n11 ladder rows this paper consumes, and "
+            "run_negative_controls.py changes only the snapshot cap and its comment. Its "
+            "HTML and Markdown rendered at the base record tree and at the candidate "
+            "head with the same source-link revision are byte-identical. Retain v0.1.7; "
+            "no PDF redraw is claimed."
         ),
     ),
     ReleaseNoPublicChange(
         components=("paper:n11-threshold-bound-review",),
-        paths=("packing/frontier/results.yaml",),
+        paths=(
+            "packing/devtools/run_negative_controls.py",
+            "packing/frontier/results.yaml",
+        ),
         outputs=(
             "papers/n11-threshold-bound-review.html",
             "papers/n11-threshold-bound-review.md",
@@ -1539,15 +1551,17 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "Reviewed October 19, 2026 against main 14fd9e27 for the #446 landing of "
             "T-205, T-206 and T-207: the changed results are the n68, n84 and n85 lower "
             "bounds, outside the n11 ladder rows, T-060 included, that this paper "
-            "consumes. Its HTML and Markdown rendered at the base and candidate record "
-            "trees with the same source-link revision are byte-identical. Retain v0.1.0; "
-            "no PDF redraw is claimed."
+            "consumes, and run_negative_controls.py changes only the snapshot cap and "
+            "its comment. Its HTML and Markdown rendered at the base record tree and at "
+            "the candidate head with the same source-link revision are byte-identical. "
+            "Retain v0.1.0; no PDF redraw is claimed."
         ),
     ),
     ReleaseNoPublicChange(
         components=("paper:square-packing-methods-survey",),
         paths=(
             "packing/campaign/result-requests.yaml",
+            "packing/devtools/run_negative_controls.py",
             "packing/frontier/n-084.md",
             "packing/frontier/results.yaml",
         ),
@@ -1560,10 +1574,11 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "Reviewed October 19, 2026 against main 14fd9e27 for the #446 landing of "
             "T-205, T-206 and T-207: the #446 request entry, the n84 case record and the "
             "three register entries are citation targets whose existence the producer "
-            "checks, not inlined text, and every cited path exists at both revisions. "
-            "Its HTML and Markdown rendered at the base and candidate record trees with "
-            "the same source-link revision are byte-identical. Retain v0.2.3; no PDF "
-            "redraw is claimed."
+            "checks, not inlined text, and every cited path exists at both revisions; "
+            "run_negative_controls.py changes only the snapshot cap and its comment. Its "
+            "HTML and Markdown rendered at the base record tree and at the candidate "
+            "head with the same source-link revision are byte-identical. Retain v0.2.3; "
+            "no PDF redraw is claimed."
         ),
     ),
     ReleaseNoPublicChange(
