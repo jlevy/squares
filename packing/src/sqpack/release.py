@@ -1463,6 +1463,29 @@ class ReleaseNoPublicChange(NamedTuple):
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
     ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer",),
+        paths=("packing/src/sqpack/cli/validate.py",),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-lower-bounds-explainer.pdf",
+        ),
+        reason=(
+            "Reviewed October 19, 2026 against main f3d5da7b: the explainer's "
+            "RENDER_INPUTS includes the entire sqpack tree, but its HTML, Markdown "
+            "and PDF producer import closure excludes the validation CLI. This "
+            "file changes only _site_layout_tests to disable pytest capture and "
+            "enable existing Playwright wire/API logging for serial forwarders. "
+            "Paper producers neither call that runner nor consume its logs. "
+            "Manuscripts, scientific inputs, figures, paper metadata and the "
+            "pre-cut publication link revision are unchanged; the five claim/card "
+            "documents remain current. The article's last change remains October "
+            "13, 2026, matching EXPLAINER_REVISED. Retain explainer v0.4.8 and the "
+            "prepared site v0.7.32. This is a source-reviewed disposition, with "
+            "no paper render, PDF redraw or output-byte comparison claimed."
+        ),
+    ),
+    ReleaseNoPublicChange(
         components=(
             "paper:n11-lower-bounds-explainer",
             "paper:square-packing-methods-survey",
