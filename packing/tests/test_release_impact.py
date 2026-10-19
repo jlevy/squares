@@ -644,3 +644,73 @@ def test_disposable_git_fixtures_ignore_inherited_repository_and_hook_configurat
         if path.is_file()
     }
     assert after == before
+
+
+#: A runbook with the News label rubric among its process text, as
+#: `packing/campaign/result-import.md` carries it.
+RUBRIC = (
+    "# Runbook\n\nIntake process.\n\n### Label the PR and Prepare News\n\n"
+    "| Label | Delivered contribution | Short | Examples |\n| --- | --- | --- | --- |\n"
+    + "".join(
+        f"| `S{n}` | Contribution {n} | Meaning {n} | Example {n} |\n" for n in range(1, 6)
+    )
+    + "\nScore conservatively.\n\n## The Next Stage\n\nMore process.\n"
+)
+
+
+def test_only_the_news_rubric_rows_of_the_intake_runbook_are_a_site_candidate(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """The site reads one thing from the intake runbook, each S label's `Short` meaning
+    (`render_changelog.news_rubric_meanings`), so a process edit anywhere else in it,
+    the rubric's other columns included, owes the site no release decision; an edit to a
+    `Short` meaning does, and so does a rubric the site can no longer read."""
+    repo = Repository(tmp_path, monkeypatch)
+    repo.inputs["site"] = (*repo.inputs["site"], gate.NEWS_RUBRIC_PATH)
+    repo.write(gate.NEWS_RUBRIC_PATH, RUBRIC)
+    repo.base = repo.commit("rubric baseline")
+    repo.git("update-ref", "refs/remotes/origin/main", repo.base)
+
+    repo.write(
+        gate.NEWS_RUBRIC_PATH,
+        RUBRIC.replace("More process.", "Reworded process.")
+        .replace("Contribution 3", "A reworded anchor")
+        .replace("Score conservatively.", "Score every PR conservatively."),
+    )
+    report = repo.inspect()
+    assert report.candidate_paths == {}
+    assert report.errors == ()
+
+    repo.write(gate.NEWS_RUBRIC_PATH, RUBRIC.replace("Meaning 4", "A new short meaning"))
+    report = repo.inspect()
+    assert set(report.candidate_paths["site"]) == {gate.NEWS_RUBRIC_PATH}
+    assert any("site" in error for error in report.errors)
+
+    without_short = "".join(
+        line.replace(" Short |", "").replace(" --- | --- | --- | --- |", " --- | --- | --- |")
+        for line in RUBRIC.splitlines(keepends=True)
+        if not line.startswith("| `S")
+    ) + "".join(f"| `S{n}` | Contribution {n} | Example {n} |\n" for n in range(1, 6))
+    repo.write(gate.NEWS_RUBRIC_PATH, without_short)
+    report = repo.inspect()
+    assert set(report.candidate_paths["site"]) == {gate.NEWS_RUBRIC_PATH}
+
+
+def test_a_second_unit_declaring_the_intake_runbook_compares_its_bytes(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """The rubric comparison holds for the site alone. Once another unit declares the
+    runbook too, nothing says what that unit reads of it, so a process edit outside the
+    rubric is a candidate for every owner, the site included."""
+    repo = Repository(tmp_path, monkeypatch)
+    repo.inputs["site"] = (*repo.inputs["site"], gate.NEWS_RUBRIC_PATH)
+    repo.inputs[PAPER] = (*repo.inputs[PAPER], gate.NEWS_RUBRIC_PATH)
+    repo.write(gate.NEWS_RUBRIC_PATH, RUBRIC)
+    repo.base = repo.commit("rubric baseline")
+    repo.git("update-ref", "refs/remotes/origin/main", repo.base)
+    repo.write(gate.NEWS_RUBRIC_PATH, RUBRIC.replace("More process.", "Reworded process."))
+    report = repo.inspect()
+    assert report.candidate_paths == {
+        PAPER: (gate.NEWS_RUBRIC_PATH,),
+        "site": (gate.NEWS_RUBRIC_PATH,),
+    }

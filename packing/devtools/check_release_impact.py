@@ -18,7 +18,7 @@ from itertools import pairwise
 from pathlib import Path, PurePosixPath
 from typing import override
 
-from devtools import pages_scope, render_overview
+from devtools import pages_scope, render_changelog, render_overview
 from sqpack import release
 from sqpack.known_best import KNOWN_BEST_COMPOSITES
 from sqpack.yamlio import load_yaml
@@ -26,6 +26,12 @@ from sqpack.yamlio import load_yaml
 REPO = pages_scope.REPO
 RELEASE_PATH = "packing/src/sqpack/release.py"
 CHANGELOG_PATH = "packing/site-changelog.yaml"
+#: The intake runbook, a site input only for its News label rubric: an edit elsewhere in
+#: the process document changes no page, so only the rubric's rows are compared. That
+#: holds for the site alone; where another unit declares the runbook too, nothing says
+#: what it reads, so the path is compared by its bytes for every owner.
+NEWS_RUBRIC_PATH = render_changelog.NEWS_RUBRIC.relative_to(REPO).as_posix()
+NEWS_RUBRIC_READERS = frozenset({"site"})
 
 
 def _git(repo: Path, *args: str) -> bytes:
@@ -89,7 +95,10 @@ class _WithoutDocstrings(ast.NodeTransformer):
         return node
 
 
-def _semantic_bytes(path: str, content: bytes | None) -> object:
+def _semantic_bytes(
+    path: str, content: bytes | None, owners: frozenset[str] = frozenset()
+) -> object:
+    """What of `content` its publication units read, for the `owners` that declare it."""
     if content is None:
         return None
     if path.endswith(".py"):
@@ -98,6 +107,13 @@ def _semantic_bytes(path: str, content: bytes | None) -> object:
     if path == CHANGELOG_PATH:
         document = load_yaml(content.decode())
         return document["entries"]
+    if path == NEWS_RUBRIC_PATH and owners == NEWS_RUBRIC_READERS:
+        # A side whose rubric does not parse, such as a revision before the table had
+        # its `Short` column, stays a byte comparison, so its change remains a candidate.
+        try:
+            return render_changelog.news_rubric_meanings(content.decode())
+        except ValueError:
+            return content
     return content
 
 
@@ -333,7 +349,9 @@ def candidate_paths(repo: Path, base: str) -> dict[str, tuple[str, ...]]:
                 owners.update(inputs)
         elif path in infographic_outputs:
             owners = {"infographics"} if old != current else set()
-        elif _semantic_bytes(path, old) == _semantic_bytes(path, current):
+        elif _semantic_bytes(path, old, frozenset(matched)) == _semantic_bytes(
+            path, current, frozenset(matched)
+        ):
             owners = set()
         else:
             owners = matched

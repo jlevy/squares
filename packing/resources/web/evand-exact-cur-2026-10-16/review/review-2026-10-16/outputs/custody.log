@@ -1,0 +1,6 @@
+commit 7d1407a0b66c46e32cdbcbd5619586fe2bdd52a1 tree d6b9aae32affbece209e4b5dca9e120f67b05860
+"git_tree": "d6b9aae32affbece209e4b5dca9e120f67b05860"
+manifest: 35 lines match at the pin
+retained files compared: 30, differing: 0
+verify_exact.py at the pin is the retained copy
+ran 11:06:58Z

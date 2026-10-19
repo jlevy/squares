@@ -22170,9 +22170,11 @@ results:
 
       The adoption of 17 October 2026 (think-3mry), the first under the house rule, moved 37 of the
       other 50 to this entry and regularized each in the same pull request. At twelve of the
-      thirteen left, 88, 102, 123, 126, 199, 258, 259, 266, 267, 292, 295 and 301, issue 639's
-      algebraic sides (T-193) are smaller, staged for the writer, and at 236 Evan Daniel's
-      issue 659 reports a side 2.02e-3 below this entry's, whose import adopts it.
+      thirteen left, 88, 102, 123, 126, 199, 258, 259, 266, 267, 292, 295 and 301, T-193's
+      exact algebraic sides, at V3/C3 since its stage 4 review of 16 October (PR #658), are
+      smaller and staged under think-ot5c. At 236 Evan Daniel's issue 659 reports a side
+      2.02e-3 below this entry's, whose import adopts it; this entry stays staged there under
+      think-3mry until then.
 
       At 70, 153 and 207 the algebraic certificates are the smallest sides known but rest on one
       route; the rule of 15 October left them out for the owner (RP-3), and the house rule of 16
@@ -22653,13 +22655,13 @@ results:
     next_rung: >-
       V4 and C4 need a second accepted adversarial review by a distinct reviewer and a retained
       human oversight record; one AI review, of 14 October, is retained. The house rule of 16
-      October 2026 made it the house at its 53 smallest counts: the adoption of 17 October
-      2026 (think-3mry) moved 37 rational ones to it, issue 639's algebraic sides (T-193) are
-      smaller at twelve others and Evan Daniel's issue 659 at 236, and the algebraic ones at
-      70, 153 and 207 wait under
-      think-ot5c, staged for adoption (devtools.select_houses.PENDING_ADOPTION) until the
-      writer takes an algebraic side. It was the smallest at 63 counts until the adoption of
-      16 October 2026 (PR #657) took ten of them below it, with T-186 and T-187.
+      October 2026 makes it the house at its 41 smallest counts: the adoption of 17 October
+      2026 (think-3mry) moved 37 rational ones to it, 236 stays staged under think-3mry until
+      Evan Daniel's smaller issue 659 side is adopted, and the algebraic ones at 70, 153 and
+      207 wait under think-ot5c, staged in devtools.select_houses.PENDING_ADOPTION until the
+      writer takes an algebraic side. It was the smallest at 63 counts until the adoption
+      of 16 October 2026 (PR #657) took ten of them below it, with T-186 and T-187, and
+      T-193's stage 4 exit (PR #658) twelve more.
     reviews:
       - path: docs/project/reviews/review-2026-10-14-upper-bound-imports-574.md
         kind: adversarial
@@ -26859,9 +26861,15 @@ results:
       each of the 19 forms the packet retains: a square moved 1e-6 through the wall it
       touches, the side raised by 1e-6 in the field, the side's interval moved below its
       root, and a duplicate square. That is a reproduction with the producer's code, on one
-      route, retained until the stage 4 review lane (think-7qxm) has read it. SymPy factored
-      each polynomial over the integers and found every one squarefree and a single factor
-      of multiplicity 1, so irreducible, and each side algebraic of the degree stated.
+      route. SymPy factored each polynomial over the integers and found every one
+      squarefree and a single factor of multiplicity 1, so irreducible, and each side
+      algebraic of the degree stated.
+
+      The stage 4 review of 16 October read verify_exact.py line by line, stated the five
+      hypotheses under which its VALID proves the packing, reproduced three of the replay's
+      runs, and with a check of its own sharing no code with the checker decided all
+      sixteen forms a packing at S* again; it found no blocking defect and accepted the
+      claim at all sixteen counts, for finite feasibility only.
 
       The 16 October report-order ledger records it at these sixteen counts, each below
       every earlier report, by 1.48e-99 (204) to 7.77e-35 (126): below PR 574's rational
@@ -26878,28 +26886,57 @@ results:
       T-127), 258 (as Mykhailo Polkovskyi improved it), 259 and 292; Ryan Xu's at 102, 123,
       126, 267 (as Francisco Couzo improved it, T-134) and 295; Daniil Ostashev's at 175, 204
       and 232; Francisco Couzo's at 301; PingYou Ltd's at 302, as Couzo improved it (T-181);
-      and his own at 266 (T-119); at every count by way of PingYou Ltd's refinement (T-174) or
-      Polkovskyi's (T-186), as the entry's regularizations list.
+      and his own at 266 (T-119).
+
+      The regularizations items name PingYou Ltd's refinement
+      (T-174) or Polkovskyi's (T-186) as the packing each form solves; the stage 4 review
+      measured that route at 102, 123, 258, 259, 267, 295 and 302, and at the other nine
+      counts found each form to be the case's own packing, to within 4.5e-4 at every centre
+      (RE-1), so there the form refines the case's packing directly. The items are
+      corrected in a later change (think-8ido).
 
       The issue says the solver, checkers and batch were written and run with Claude
       (Anthropic) as a coding and research agent, directed and reviewed by the author.
     scope: {n_values: [88, 102, 123, 126, 175, 199, 204, 232, 258, 259, 266, 267, 292, 295, 301, 302]}
-    verification: V0
-    confirmation: C0
+    verification: V3
+    confirmation: C3
     significance:
       score: 2
       rationale: >-
         Exact algebraic forms of packings the record already credits, 1.5e-99 to 7.8e-35
         below the nearest earlier report at each of sixteen counts: a citable detail of each
         case that changes no theorem, S2 as T-120 to T-123's exact forms are; the rational
-        refinements they tighten (T-174, T-186) are S1. No lower bound or optimum.
+        refinements they name (T-174, T-186) are S1, and at nine counts, by the review's
+        RE-1, the forms tighten the case's own packing directly. No lower bound or optimum.
       scored: '2026-10-16'
-      by: think-phyb Evan Daniel import (draft)
+      by: think-phyb Evan Daniel import (draft), confirmed by the stage 4 review (think-7qxm)
     novelty: previously-published
     attribution:
       source_keys: ['[Daniel exact current records 2026-10-16]']
       published: '2026-10-16'
-    evidence: [E-evand-639-exact-sides-report]
+    evidence: [E-evand-639-exact-sides-report, E-evand-639-verify-exact-replay]
+    reviews:
+      - path: docs/project/reviews/review-2026-10-16-evand-exact-sides-639.md
+        kind: adversarial
+        reviewer: >-
+          Claude (AI review), strong sub-agent tier at max reasoning, the stage 4 review lane
+          of the #639 import (bead think-7qxm), prompted separately from the import, records
+          and addressing lanes, sharing no context with them beyond their committed packet,
+          register entry and ledger
+        reviewer_kind: ai
+        relation: project
+        date: '2026-10-16'
+        scope: >-
+          What verify_exact.py's VALID proves, read line by line, with the hypotheses it
+          assumes; three of the replay's runs reproduced (126, 266, 267); custody at 7d1407a;
+          an independent decision of the 21 forms (19 retained, 204 and 267) by interval
+          arithmetic at 1,400 bits and exact identities in Q[t]/f, with 63 controls;
+          irreducibility and squarefreeness of every p and f; the claim's cuts and margins;
+          and each form measured pose by pose against the packing its regularization names
+          and the case's house, at ef43dd02f. It decided no lower bound, optimum or
+          rigidity.
+        verdict: accepted
+        covers: [T-193]
     artifacts:
       - packing/resources/web/evand-exact-cur-2026-10-16/README.md
       - packing/resources/web/evand-exact-cur-2026-10-16/source/search/exact/cur/RESULTS.md
@@ -26910,45 +26947,61 @@ results:
       - packing/resources/web/evand-exact-cur-2026-10-16/receipts/replay-verify-exact.json
       - packing/resources/web/evand-exact-cur-2026-10-16/review/replay_verify_exact.py
     controls: [packing/tests/test_evand_exact_cur.py]
-    activity:
-      state: in-analysis
-      what: >-
-        The stage 4 review lane reads the retained replay of the source's verify_exact.py
-        and this entry, strong tier, on a branch stacked on PR 651, as the 14 October lanes
-        read T-161 to T-175 and T-181 to T-183.
-      since: '2026-10-16'
-      link: think-7qxm
     next_rung: >-
-      The stage 4 review lane, think-7qxm, reads the retained replay
-      (receipts/replay-verify-exact.json in the packet): what verify_exact.py's VALID implies,
-      each form measured against the packing its regularization names, and each print held to
-      its exact side. With no blocking defect open, the stage 4 exit then adds the replay's
-      evidence entry, cites it and rewrites the claim, notes and next_rung together.
+      V4 and C4 need, on top of V3 and C3, a second accepting adversarial AI review by a
+      distinct reviewer of the checker's soundness and of this entry, and the owner's
+      oversight record naming trust-boundary, certificate-meaning and ai-findings, which
+      would disposition the stage 4 review's nine findings, none blocking. The review's own
+      check, an independent decision of the same forms kept in the packet, would be an
+      attribute beside the rung once registered (RE-9); a second route over number fields
+      here, sqpack.witness.exact_verify, needs a converter of the source's format, a W7
+      slice with no bead.
 
-      V4 and C4 need two accepting adversarial AI reviews by distinct reviewers of the
-      checker's soundness and of this entry, and the owner's oversight record. A second route
-      over number fields here, sqpack.witness.exact_verify, needs a converter of the source's
-      format, a W7 slice with no bead; it would be an attribute beside the rung. Adoption of
-      the sixteen sides as the cases' houses is the owner's, with T-174's.
-    unfinished_confirmations:
-      - what: >-
-          the stage 4 review of the retained replay of the source's verify_exact.py
-          (receipts/replay-verify-exact.json in the packet), with no blocking defect open,
-          after which the exit adds the replay's evidence entry and cites it
-        rung: C3
-        link: think-7qxm
+      The regularizations items at nine counts wait for the correction
+      RE-1 asks, after the owner's Q2 (think-8ido). The house rule of 16 October 2026 makes
+      the sixteen sides the houses at their counts, the smallest validated at each, and stages
+      their adoption under think-ot5c (devtools.select_houses.PENDING_ADOPTION), until
+      adopt_houses can write an algebraic side.
+
+      At 88, 126, 175, 199, 204, 232, 266, 292 and 301 the adoption also waits for RE-1's
+      correction: the writer credits the packing a regularizations item names, so
+      adopt_houses refuses T-193 there while the item names T-174 or T-186
+      (devtools.select_houses.CORRECTIONS_OWED, think-8ido).
     notes: >-
-      The replay is retained in the packet, its receipt and driver with it, and the entry is
-      held at its reported rungs until the stage 4 review lane (think-7qxm) has read it, as
-      the 14 October imports were held until their reviews merged: result-import.md's stage 4
-      exit follows both lanes. The replay's evidence entry is added at the exit, as those
-      imports' confirming entries were.
+      Rungs on 16 October 2026, at the stage 4 exit after the review (think-7qxm): V0/C0 to
+      V3/C3 at all sixteen counts, by check_results, on the replay of the source's own
+      verify_exact.py (E-evand-639-verify-exact-replay, receipt refreshed after PR 651's
+      review A) and the accepted review recorded as the report entry's external_review.
+      The confirmation is reproduction with the producer's code, one route.
 
-      The case records are unchanged: each side is below its case's reported and verified
-      upper bounds, so the entry is pending adoption, as T-174 and T-186 are.
+      The review's findings, none blocking: RE-1 (major), the regularizations items' `of`
+      at 88, 126, 175, 199, 204, 232, 266, 292 and 301 is not the packing the form solves,
+      which is the case's house there (T-127, T-139, T-158, T-162, T-119, T-146, T-098);
+      the claim says so, and the items, with identity.basis measured and the review as
+      measured_in, are corrected in a later change (think-8ido), Q2 (whether a square
+      turned at its centre is the same packing) being the owner's.
+
+      The other findings: RE-2 (minor), the driver's
+      irreducibility test, fixed in the refreshed receipt; RE-3 and RE-4 (minor), the
+      margin and credit wording: the margins are fixed and the credit at 258 names
+      Polkovskyi, while the author's own improvements the cases list at 102, 123, 126, 292,
+      295 and 301 are not yet named; RE-5 to RE-8 (notes) on the checker's asserts, the root isolation and
+      count outside it, strict gaps far below any contact tolerance and controls that never
+      move a contact pair; RE-9 (minor), the review's programs kept and not registered. Q1
+      on T-174's own items at six counts is the owner's.
+
+      Each side is below its case's reported and verified upper bounds and every other
+      validated side at its count, so under the house rule of 16 October 2026 it is the house
+      at all sixteen counts, read exactly by devtools.select_houses (evand_exact_side) and
+      staged for adoption under think-ot5c with T-174's algebraic houses: at twelve counts it
+      is below T-174's staged rational side, which held them for think-3mry before, and at
+      175, 204, 232 and 302 below T-186's houses of PR #657. The case records keep their
+      houses until the writer takes an algebraic side; the twelve that named T-174's adoption
+      name T-193's.
 
       The identity of each certificate with the packing it solves is the source's claim
-      (exactsolve.py from the record's own witness); no measurement here decides it. At 153
+      (exactsolve.py from the record's own witness); the stage 4 review measured it pose by
+      pose (RE-1, above). At 153
       and 207 the source's input was a copy of the packing that ties the register's witness,
       and its re-solve of the register's witness at 207 did not verify one pair; neither count
       is recorded. The ledger's owner questions are in its README.
@@ -27117,8 +27170,15 @@ results:
       with the standard axioms propext, Classical.choice and Quot.sound and no sorryAx. The
       source reports a kernel replay of the theorem's 13,143-module import closure with no
       failure, which takes the native facts as axioms, and says that a complete rebuild from
-      its published sources has not yet been run. Nothing here has built it, and no review of
-      it is on file yet.
+      its published sources has not yet been run. Nothing here has built it.
+
+      A mathematical review of 16 October, by an AI lane prompted separately and reading
+      the source as data, found no blocking or major defect: it read the statement, the
+      endpoint, the six-step chain to the final theorem and the trust boundary, decided the
+      endpoint packing exactly, and with programs of its own re-established the property
+      each of the 2,328 native facts whose modules are in the Git tree certifies; the 1,992
+      facts in the release archives, mostly half-plane propagation traces, were scanned but
+      not re-run.
 
       Fitzharding, [sq19](https://github.com/ofitzharding/sq19/tree/34fb2b7bc39465db368c45cb48d4db58829d3051),
       release v1.0.0 of 16 October 2026, announced on X the same day. Its README says it
@@ -27128,7 +27188,7 @@ results:
       assistance from Claude and Codex".
     scope: {n_values: [19]}
     verification: V0
-    confirmation: C0
+    confirmation: C1
     significance:
       score: 5
       rationale: >-
@@ -27139,9 +27199,10 @@ results:
         assistant with a stated trust boundary. It is the first optimality claim the record
         holds at 19. Significance is separate from whether the proof is correct; the
         conservative reading is the same, since nothing less than the case's value is
-        claimed. A draft for the review lane to confirm or change.
+        claimed. The review of 16 October found no reason to change it. Proposed for the
+        owner's confirmation.
       scored: '2026-10-16'
-      by: think-a4x3 Oscar Fitzharding import (draft; the review lane think-o40t confirms or changes it)
+      by: think-a4x3 Oscar Fitzharding import (draft; the review think-o40t found no reason to change it)
     novelty: previously-published
     attribution:
       source_keys: ['[Fitzharding n19 Lean 2026]']
@@ -27149,17 +27210,54 @@ results:
     evidence: [E-n019-fitzharding-lean-report]
     composition: >-
       One cited entry, the source's report (E-n019-fitzharding-lean-report), which claims
-      the exact value; it sets both rungs. The upper half, a packing at side 3 + 4√2/3, is
+      the exact value and carries the review of 16 October as its external_review; it sets
+      both rungs. The upper half, a packing at side 3 + 4√2/3, is
       proved in the Lean by endpoint_packing, in a file with no native_decide; it is the
       packing E-lifted-q2-upper holds, V3/C3 here and independent of the source. That entry
       is not cited, since citing it would make this result hold the case's verified upper
       bound in its place. The lower half rests on the Lean build and its 4,320 native_decide
       facts, and the only record of that build is the source's own.
 
+      The review's own programs decided the endpoint packing, the cover and census, the
+      nine region facts' property, the twelve capture-link facts, the endgame's property
+      over all 4,096 cases, and the archives' custody, each in full for what it covers
+      (E-n019-fitzharding-endpoint-review, -cover-census-review, -region-review,
+      -capture-link-review, -endgame-review and -archives-review). They are evidence on
+      n-019's case record and are not cited here: none is a build of the proof, and each
+      decides a part, so citing them would make the checker derive a rung from parts
+      (epistemics.md, Every Run's Code Is Kept).
+
       By epistemics.md's predicates: V3 needs proof-assistant-checked evidence with a
       certificate, a replay command and a passing replay, and no build of the proof is
-      retained here, so the result stands at V0, declared with the notes; C1 needs a
-      qualifying, dated read, which the review lane has not yet written.
+      retained here, so the result stands at V0, declared with the notes; no numerical
+      method (V1) or unavailable proof (V2) fits. C1's predicate holds: a qualifying,
+      dated read with its reviewer and note. C3 would need that build with a confirming
+      origin.
+    reviews:
+      - path: docs/project/reviews/review-2026-10-16-fitzharding-n19-lean.md
+        kind: adversarial
+        reviewer: >-
+          Claude (AI review), strong sub-agent tier at max reasoning, the stage 4
+          mathematical review lane of the #640 import (bead think-o40t), prompted separately
+          from the packet and records lanes, reading the source as data and running only code
+          it wrote, and blind to the two reviews of the s(17) proof until its own findings
+          were written
+        reviewer_kind: ai
+        relation: project
+        date: '2026-10-16'
+        scope: >-
+          Statement fidelity of Sq19.square19_optimality against the record's s(19) = 3 +
+          4√2/3 and the bridge to sq17-lean's definitions; the endpoint packing, decided
+          exactly in Q(sqrt 2) and compared with W-known-best-n019; the six-step
+          impossibility chain re-derived (cover, census, sub-pattern exclusions, branch
+          trees, capture, endgame) with its case splits and assembly; the trust boundary,
+          from the axiom report, the build scripts and a scan of the five release archives;
+          and, with seven programs of its own, the property each of the 2,328 tree-resident
+          native facts certifies, at 34fb2b7. It built and ran nothing of the source and did
+          not re-run the 1,992 archived facts, the census pattern traces, capture runs and
+          tables and survivor trees.
+        verdict: accepted
+        covers: [T-194]
     artifacts:
       - packing/resources/web/fitzharding-n19-lean-2026-10-16/README.md
       - packing/resources/web/fitzharding-n19-lean-2026-10-16/sq19/Sq19Lean/Assembly/Optimality.lean
@@ -27169,10 +27267,10 @@ results:
       - packing/resources/web/fitzharding-n19-lean-2026-10-16/sq19/Sq19Lean/EndpointPacking.lean
       - packing/resources/web/fitzharding-n19-lean-2026-10-16/sq19/verification/Square19Optimality.log.gz
       - packing/resources/web/fitzharding-n19-lean-2026-10-16/sq19/verification/kernel-replay.json
+      - packing/resources/web/fitzharding-n19-lean-2026-10-16/review/README.md
+      - docs/project/reviews/review-2026-10-16-fitzharding-n19-lean.md
     next_rung: >-
-      C1 needs the mathematical review that reads the statement, the endpoint, the trust
-      boundary and the chain to the final theorem (think-o40t), at the tbd-strong-max tier in
-      a lane of its own, as T-154 had two. V3 and C3 need a complete build of the theorem's
+      V3 and C3 need a complete build of the theorem's
       import closure that the record can rest on, with its axiom receipt: the source's
       scripts/fetch.sh and scripts/verify.py from the retained pin and the five release
       archives at Lean 4.34.1, here or by a third party whose build is retained here
@@ -27180,21 +27278,18 @@ results:
 
       It is held: the
       source gives several hours on a 64-core, 512 GB machine, above the pass's 40 CPU-hour
-      cap and this host. A cheaper subset decides parts and moves no rung: fetch.sh's
-      download and hash check of the five archives, and a build of the existence half,
-      EndpointPacking, with its axioms printed.
+      cap and this host. A cheaper subset decides parts and moves no rung: a build of the
+      existence half, EndpointPacking, with its axioms printed; the five archives' digests
+      against SHA256SUMS, which fetch.sh checks, the review has already decided
+      (E-n019-fitzharding-archives-review).
 
       V4 and C4 need, on top of V3 and C3, two
-      accepting adversarial AI reviews by distinct reviewers and the owner's oversight
-      record. V5 needs a formalization review by a named human expert who is not the
+      accepting adversarial AI reviews by distinct reviewers, of which the review of 16
+      October is one, and the owner's oversight record naming trust-boundary,
+      certificate-meaning and ai-findings, which would disposition its seven findings,
+      none blocking. V5 needs a formalization review by a named human expert who is not the
       author.
     unfinished_confirmations:
-      - what: >-
-          the mathematical review of the proof, read without a build: statement fidelity,
-          the endpoint, the trust boundary and the chain to the final theorem, as T-154's
-          first review read sq17-lean
-        rung: C1
-        link: think-o40t
       - what: >-
           the source's complete build of the theorem's import closure, from the retained pin
           and the five v1.0.0 archives with Lean 4.34.1 and the Mathlib v4.34.1 cache,
@@ -27203,13 +27298,16 @@ results:
         rung: C3
         link: think-nqnl
         estimated_cost:
-          cpu_hours: 285
+          cpu_hours: 290
           cpu_hours_high: 420
           basis: >-
             The source's "several hours on a 64-core, 512 GB machine", read as 3 to 6 wall
-            hours with 64 cores busy, plus at most about 40 CPU-hours for the optional kernel
-            replay (37 wall-minutes on 64 cores by verification/kernel-replay.json); an
-            estimate from the source's words, not a receipt
+            hours with 64 cores busy, about 190 to 380 CPU-hours, plus at most about 40
+            CPU-hours for the optional kernel replay (37 wall-minutes on 64 cores by
+            verification/kernel-replay.json): about 190 to 420 CPU-hours in all, central
+            about 290, the upper end including the kernel replay, as the report entry
+            E-n019-fitzharding-lean-report states it; an estimate from the source's words,
+            not a receipt
           priced: '2026-10-16'
     notes: >-
       Registered on 16 October 2026 from issue 640, which Fitzharding opened that day asking
@@ -27231,6 +27329,25 @@ results:
       optimality. By GitHub's and X's times, all on 16 October 2026, the repository's first
       commit is of 02:15:45Z, release v1.0.0 was published at 02:38:08Z, the author's post
       at 03:27:40Z and issue 640 at 03:41:08Z.
+
+      Rungs on 16 October 2026, after the mathematical review (think-o40t): C0 to C1, by
+      the accepted adversarial AI read recorded as the report entry's external_review, as
+      T-154 took C1 on its first review; V stays V0, since no build of the proof is
+      retained here. Nothing higher moves without the complete build (think-nqnl). The
+      review's runs are on n-019's case record and derive no rung here.
+
+      The review's findings, none blocking or major: N19-1 (minor), the endpoint data and
+      the square numbering are this project's witness W-known-best-n019, from Kingbird's
+      SVG, in the same order, and neither the source of packing_exact.json nor the witness
+      is credited; N19-2 (minor), the generators, their data and the notes LOCAL_THEOREM.md
+      and ENDGAME.md are cited but not published, so the certificates cannot be
+      regenerated; N19-3 (minor), the kernel-replay receipt binds to an unpublished build,
+      and its closure list and per-module log are not published.
+
+      The four notes, N19-4 to N19-7, concern stale development text and 170 unused native
+      theorems, the compiled-C trust base, the census roster read from pattern names, and
+      the margins of the census and capture sides. Its five questions go to the author with the review (think-a4x3).
+
   - id: T-195
     kind: upper-bound
     registered: '2026-10-16'

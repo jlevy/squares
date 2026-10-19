@@ -948,13 +948,18 @@ Most supporting work belongs at S1 or S2; choose a higher score only when the de
 contribution meets its anchor.
 Being public alone does not make a change noteworthy.
 
-| Label | Delivered contribution | Examples |
-| --- | --- | --- |
-| `S1` | Bookkeeping, internal documentation, planning or formatting only | Session closeout, a roadmap, changelog synchronization, prose reflow |
-| `S2` | A routine fix or refactor, custody or attribution work, modest UI refinement, ordinary maintenance or supporting prototype | Refreshing a source packet, correcting credit, adjusting spacing, preparing a vendor import or an internal prototype |
-| `S3` | A distinct noteworthy new result, substantive public explanation, verification or policy, key tooling, or meaningful artifact delivery | A new S3 result, a substantive proof explanation, a reproducible verification tool, a useful new paper or certificate delivery |
-| `S4` | A major delivered capability or site restructure, or a substantial new result | A complete regularization capability, a major site reorganization, a new S4 result |
-| `S5` | A landmark mathematical contribution or major resolution | A new S5 result establishing an important previously open case |
+| Label | Delivered contribution | Short | Examples |
+| --- | --- | --- | --- |
+| `S1` | Bookkeeping, internal documentation, planning or formatting only | Minor housekeeping or internal documentation | Session closeout, a roadmap, changelog synchronization, prose reflow |
+| `S2` | A routine fix or refactor, custody or attribution work, modest UI refinement, ordinary maintenance or supporting prototype | Routine engineering, maintenance or internal reliability | Refreshing a source packet, correcting credit, adjusting spacing, preparing a vendor import or an internal prototype |
+| `S3` | A distinct noteworthy new result, substantive public explanation, verification or policy, key tooling, or meaningful artifact delivery | Distinct noteworthy result, explanation, verification, policy or key usable tooling | A new S3 result, a substantive proof explanation, a reproducible verification tool, a useful new paper or certificate delivery |
+| `S4` | A major delivered capability or site restructure, or a substantial new result | Substantial result or major public project capability | A complete regularization capability, a major site reorganization, a new S4 result |
+| `S5` | A landmark mathematical contribution or major resolution | Landmark mathematical advance or major resolution | A new S5 result establishing an important previously open case |
+
+The Short column is each label’s description on GitHub.
+It is also what a News meter and the archive’s S buttons say a level means
+(`render_changelog.news_significance_meanings`); a result’s meter keeps the result
+ladder in `epistemics.md`.
 
 A new registered result and its announcement inherit that result’s actual S score.
 An incidental reference to a result does not raise the PR’s score.

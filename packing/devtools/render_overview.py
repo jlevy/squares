@@ -485,6 +485,9 @@ RENDER_INPUTS: tuple[Path, ...] = (
     PACKING / "site-changelog.yaml",
     PACKING / "site-changelog.schema.yaml",
     PACKING / "devtools/render_changelog.py",
+    # The News label rubric, whose `Short` column a News meter and the archive's S
+    # buttons quote (`render_changelog.news_significance_meanings`).
+    PACKING / "campaign" / "result-import.md",
     PACKING / "devtools/news_highlights.py",
     PACKING / "devtools/build_known_best_atlas.py",
     PACKING / "devtools/atlas_print_font.py",
