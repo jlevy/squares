@@ -1,0 +1,50 @@
+{
+  "T-009's witness (the packing the regularization names)": {
+    "path": "packing/witnesses/kingbird-n029-2026-interval.yaml",
+    "symmetry": "y -> L - y",
+    "one_to_one": true,
+    "paired_by_index": true,
+    "moved": 0,
+    "moved_beyond": {
+      "1e-3": 0,
+      "1e-9": 0,
+      "1e-30": 29
+    },
+    "max_move": "7.685e-20",
+    "max_turn_deg": "3.255e-38",
+    "turns": "exact cross and dot products",
+    "side_difference": "-5.433833462798086e-20"
+  },
+  "T-155's view (the verified lane)": {
+    "path": "packing/cases/regularized_bounds/views/n-029.yaml.gz",
+    "symmetry": "identity",
+    "one_to_one": true,
+    "paired_by_index": true,
+    "moved": 3,
+    "moved_beyond": {
+      "1e-3": 3,
+      "1e-9": 3,
+      "1e-30": 3
+    },
+    "max_move": "0.01241",
+    "max_turn_deg": "3.708e-35",
+    "turns": "exact cross and dot products",
+    "side_difference": "-1.566165818922113e-36"
+  },
+  "the house witness (Kingbird derived numerical facts)": {
+    "path": "packing/witnesses/known-best/n-029.yaml",
+    "symmetry": "identity",
+    "one_to_one": true,
+    "paired_by_index": true,
+    "moved": 0,
+    "moved_beyond": {
+      "1e-3": 0,
+      "1e-9": 0,
+      "1e-30": 0
+    },
+    "max_move": "8.776e-100",
+    "max_turn_deg": "0",
+    "turns": "float angles",
+    "side_difference": "-2.985530566813067e-100"
+  }
+}

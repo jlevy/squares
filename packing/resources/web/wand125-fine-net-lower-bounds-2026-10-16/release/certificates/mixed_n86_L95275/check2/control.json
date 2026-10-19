@@ -1,0 +1,16 @@
+{
+ "kind": "every mass times factor, 32 directions spread over the net",
+ "tries": [
+  {
+   "factor": "197/200",
+   "status": "REFUSED",
+   "exit": 1,
+   "directions": 32,
+   "refused": 32,
+   "exact_below_threshold": 31,
+   "seconds": 1.6
+  }
+ ],
+ "refused": true,
+ "source_sha256": "ab6e33e164dbc5c32b40349ba55981b58e630b5eef59534196a69d259404fd7c"
+}

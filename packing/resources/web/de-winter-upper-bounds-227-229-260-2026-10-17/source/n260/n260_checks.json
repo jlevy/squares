@@ -1,0 +1,18 @@
+{
+  "center_basis_validator": {
+    "n": 260,
+    "side": "16645778804181379786535601/1000000000000000000000000",
+    "all_pairs_checked": 33670,
+    "wall_margin": "1/1000000000",
+    "pair_margin": "5393592233059145661184458394653141515480278981333/5236495370382421088144072649985104500000000000000000000000",
+    "valid": true
+  },
+  "vertex_validator": {
+    "valid": true,
+    "n": 260,
+    "side": "16645778804181379786535601/1000000000000000000000000",
+    "all_pairs_checked": 33670,
+    "pairs_separated_by_boxes": 33484,
+    "validator": "exact vertex projections, independent implementation"
+  }
+}

@@ -154,11 +154,11 @@ SCREEN_EXCLUDED: dict[str, tuple[str, ...]] = {
 #: October 2026 the eighteen counts it moved, 105, 129, 146, 153, 154, 156, 176, 204, 207,
 #: 211, 237, 241, 261, 271, 272, 302, 303 and 304, and the pass of 16 October 2026 the
 #: fifteen it moved, 129, 146, 154, 156, 175, 176, 204, 211, 232, 237, 264, 271, 302, 303
-#: and 304.
+#: and 304, and the pass of 17 October 2026 the 37 it moved to T-174 (think-3mry).
 SCREEN_FINDINGS: dict[str, tuple[int, int, int, int]] = {
-    "n=1..100": (28, 146, 86, 659),
-    "n=1..200": (65, 534, 182, 2293),
-    "n=1..324": (122, 1545, 302, 5445),
+    "n=1..100": (28, 112, 86, 577),
+    "n=1..200": (65, 429, 182, 2055),
+    "n=1..324": (121, 1184, 302, 4979),
 }
 UNDETERMINED_BY_MISS = (28,)
 #: The cases the two sampled sweeps re-derive on every pull request, computed here from
@@ -3040,6 +3040,7 @@ def _rust_exact_geometry(context: Context) -> str:
                 "clippy",
                 "--locked",
                 "--all-targets",
+                "--no-default-features",
                 "--features",
                 "experimental-normalized-mul",
                 "--",
@@ -3051,6 +3052,7 @@ def _rust_exact_geometry(context: Context) -> str:
                 "test",
                 "--locked",
                 "--all-targets",
+                "--no-default-features",
                 "--features",
                 "experimental-normalized-mul",
                 "--quiet",
@@ -3060,6 +3062,7 @@ def _rust_exact_geometry(context: Context) -> str:
                 "clippy",
                 "--locked",
                 "--all-targets",
+                "--no-default-features",
                 "--features",
                 "experimental-coprime-mul",
                 "--",
@@ -3071,10 +3074,33 @@ def _rust_exact_geometry(context: Context) -> str:
                 "test",
                 "--locked",
                 "--all-targets",
+                "--no-default-features",
                 "--features",
                 "experimental-coprime-mul",
                 "--quiet",
             ),
+            (
+                cargo,
+                "clippy",
+                "--locked",
+                "--all-targets",
+                "--no-default-features",
+                "--",
+                "-D",
+                "warnings",
+            ),
+            (cargo, "test", "--locked", "--all-targets", "--no-default-features", "--quiet"),
+            (
+                cargo,
+                "clippy",
+                "--locked",
+                "--all-targets",
+                "--all-features",
+                "--",
+                "-D",
+                "warnings",
+            ),
+            (cargo, "test", "--locked", "--all-targets", "--all-features", "--quiet"),
             (cargo, "doc", "--locked", "--no-deps", "--quiet"),
             (cargo, "build", "--locked", "--release", "--quiet"),
         ),
@@ -3574,10 +3600,15 @@ def _skills_mirrored(context: Context) -> str:
 
 
 def _synopsis(context: Context) -> str:
+    # Each dependent layer owns its immediate parent-to-child publication cut.
+    pull_request_base = context.environment.get("GITHUB_BASE_REF")
+    release_base = context.environment.get("PACKING_RELEASE_BASE_REF") or (
+        f"origin/{pull_request_base}" if pull_request_base else "origin/main"
+    )
     impact_baseline = (
         ("--base", "HEAD^1")
         if _git("rev-parse", "HEAD").strip() == _git("rev-parse", "origin/main").strip()
-        else ("--baseline-ref", "origin/main")
+        else ("--baseline-ref", release_base)
     )
     return _commands(
         context,

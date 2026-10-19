@@ -248,7 +248,7 @@ def _before_ryxu(n: int, monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> str
     historical_coverage = tmp_path / "historical-source-selection.yaml"
     historical_coverage.write_text(yaml.safe_dump(coverage, sort_keys=False))
     monkeypatch.setattr(source_supersession, "COVERAGE", historical_coverage)
-    if n in (105, 292):
+    if n in (68, 105, 292):
         from devtools import refinement_house_links as houses  # noqa: PLC0415
 
         custody = tmp_path / "historical-refinement"
@@ -937,12 +937,13 @@ def test_the_improvement_rule_reproduces_the_hand_transcription() -> None:
     """Measured over every catalogue-sourced pictured record below the register.
 
     The rule reads a sentence-initial, dated "Improved by <names> in <month> <year>", or
-    "Improved and optimized by", and nothing else. It reproduces 39 of the 42 currently
-    selected catalogue records; the other pictured records have later selected sources. One
-    miss is `n = 29`, where the hand pass read an "Optimized by" sentence as an
-    improvement and five sibling records read the same sentence as nothing; the other two
-    are `n = 69` and `83`, whose records were transcribed on 2026-10-05 from drafts, which
-    also credit the optimizer the line names nowhere else (T-088, T-089).
+    "Improved and optimized by", and nothing else. It reproduces 39 of the 41 currently
+    selected catalogue records; the other pictured records have later selected sources. The
+    two misses are `n = 69` and `83`, whose records were transcribed on 2026-10-05 from
+    drafts, which also credit the optimizer the line names nowhere else (T-088, T-089). A
+    third, `n = 29`, where the hand pass read an "Optimized by" sentence as an improvement
+    and five sibling records read the same sentence as nothing, left the comparison on 17
+    October 2026, when the house adoption moved its reported lane to T-195.
     """
     catalogue = _record_facts()
     disagreed: dict[int, tuple[list[str], list[str]]] = {}
@@ -959,8 +960,8 @@ def test_the_improvement_rule_reproduces_the_hand_transcription() -> None:
         if list(facts.improved_by) != list(reported["improved_by"]):
             disagreed[n] = (list(reported["improved_by"]), list(facts.improved_by))
     print(f"compared {compared} record(s); the rule disagrees at {sorted(disagreed)}")
-    assert compared == 42
-    assert set(disagreed) == {29, 69, 83}
+    assert compared == 41
+    assert set(disagreed) == {69, 83}
     for n in (69, 83):
         assert disagreed[n][0] == [*disagreed[n][1], *catalogue[n].uncredited_optimizers], n
 
@@ -1079,10 +1080,11 @@ def test_the_credit_rules_reproduce_the_hand_transcription_below_the_register() 
 
     The comparison runs over the pictured entries at `n <= 100` that a person transcribed
     from the catalogue, and `n = 69`, transcribed from a draft since its 2026-10-05 intake
-    (T-088). Where a rule fires it must agree with what they wrote -- 20 cases, and no
-    disagreement anywhere. Where none fires the case stays `unknown`, and those are
-    reported rather than checked: a rule that fired there would be an invention, and the
-    count is what a reviewer inherits.
+    (T-088). Where a rule fires it must agree with what they wrote -- 19 cases, and no
+    disagreement anywhere; `n = 29` was a twentieth until the house adoption of 17 October
+    2026 moved its reported lane to T-195. Where none fires the case stays `unknown`, and
+    those are reported rather than checked: a rule that fired there would be an invention,
+    and the count is what a reviewer inherits.
     """
     catalogue = _catalogue_facts()
     fired: dict[int, tuple[str, str]] = {}
@@ -1101,7 +1103,7 @@ def test_the_credit_rules_reproduce_the_hand_transcription_below_the_register() 
     print(f"rules fired at {len(fired)} case(s), silent at {len(silent)}: {sorted(silent)}")
     print(f"what the hand transcription called the silent ones: {sorted(set(silent.values()))}")
     assert disagreed == {}
-    assert len(fired) == 20
+    assert len(fired) == 19
     assert all(catalogue[n].analytically_optimized is True for n in fired)
     # Every case no rule reaches is one a person called `hand-construction`, `trivial-grid`
     # or `unknown` -- never one of the four methods the rules are for, which is what makes

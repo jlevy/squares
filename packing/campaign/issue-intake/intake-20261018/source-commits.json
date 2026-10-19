@@ -1,0 +1,2723 @@
+{
+  "evand/square-packing": {
+    "total_commits": 17,
+    "commits": [
+      {
+        "sha": "59326b86291b76c39d843f3f156e8f25fa0f6e3f",
+        "date": "2026-10-17T14:48:34Z",
+        "message": "s(155) <= 12.952260944651: certificate (EX2, 10-17), staged for registration\n\nExplorer (explore.py) from the register witness (Ostashev T-149); exactsolve certificate,\nboth checkers VALID on certificate and regularized view; distinct minimum from T-149.\nCommit approved by Evan 2026-10-17 (\"Let's commit, push, and post it!\").\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_017dQaqxoRw6hF49ndWbnV13"
+      },
+      {
+        "sha": "a19e5e70961b6e9ac5a3ddb991aefc5c141a3b66",
+        "date": "2026-10-17T14:59:30Z",
+        "message": "10-16/17 night: corner shove (CS1), EX1/EX2 explorer passes, focus backtest, live-check and watch fixes; s(155) posted (#669)\n\n- shove/: corner-shove harness, bench, three fills (greedy best-of-K, local re-solve, infeasible+relax) and notes\n- analysis/: wastemodel, mx1, gs1 (flexible-rectangle studies), focus_bt (FB1 backtest), aswap_sweep (AS1)\n- explore.py --focus (off by default; FB2 showed no effect); harden_explore.py --seed-offset, live-flag scoring\n- candidate.py: issue decimals that match a known packing at another count on the same line no longer count at n\n  (#401 gave n = 155 the s(154) value)\n- pk/watch.py: a linked tree dir is narrowed to the backticked file names in the issue body; pending.yaml fixes, #669\n- PACKER.md / TODO.md: the night's runs, predictions and outcomes\n\nCommit approved by Evan 2026-10-17 (\"Let's commit.\").\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_017dQaqxoRw6hF49ndWbnV13"
+      },
+      {
+        "sha": "43dda76de398e762e8500c168fc93d85b074b591",
+        "date": "2026-10-17T15:37:23Z",
+        "message": "Record checks through the store: watcher reads comments and updated issues, claim/file reconciliation, freshness probe\n\n- store: sync table (register sha, issue-update cursor, watched repo HEADs)\n- watch: every issue updated since the cursor, body + comments; supplemental entries for later attachments / claims;\n  one pending entry per linked commit (#607); every linked repo watched; tree links not narrowed; probe()\n- sources: claims from the author's body / comments / title, smallest plausible side per table row (#668), link-wrapped\n  counts (#607); entries merge claims by min; reconcile marks each issue's packings claim / context and flags files\n  below their claim; per-issue import; stale frontier rows dropped\n- candidate.live: probe (+ sync when stale) + the store; the direct reads and issue decimal grep removed\n- pending.yaml: #607, #570, #503 re-proposed; #666, #668 (JoostdeWinter: new records at 227, 229, 260)\n- tests: text_claims, reconcile, supplement\n\nCommit approved by Evan 2026-10-17 (\"Yes please\").\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_017dQaqxoRw6hF49ndWbnV13"
+      },
+      {
+        "sha": "82b023138568644e987495eb9f8a9356cfb6119c",
+        "date": "2026-10-17T16:26:44Z",
+        "message": "Issues derived from their current text; frontier as a derived view of published packings\n\n- pk/issues.py (pure parsing: links per repo and commit, the author's claims, import units), pk/github.py (every\n  network read, moved with its caps), pk/overrides.yaml (credit names; per-issue entries only for unbacked cases)\n- pending.yaml removed: each updated issue is re-derived on every sync; pk.py sync-issues replaces sync-pending;\n  state in the store (sync, issue, resolved tables); propose / supplement / import_pending gone\n- Store.frontier(): the best feasible published packing per n, or a claim nothing published backs (unverified);\n  the frontier table is the claims table; one definition of a public sighting (pool:ours excluded)\n- candidate.live reads the view and lists unverified claims\n- migration: 45 issues re-derived; frontier identical; tests 29 pass\n\nCommit and local merge approved by Evan 2026-10-17 (\"Yes please!\").\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_017dQaqxoRw6hF49ndWbnV13"
+      },
+      {
+        "sha": "14a9af8be4a8b8a8328c3eb6b486a2e553380193",
+        "date": "2026-10-17T17:25:17Z",
+        "message": "Site up to date: 28 newer records regularized, provenance from the store, credit names, n = 40 floor\n\n- pk/people.py: credit names from site/data/people.yaml (by GitHub handle), else the profile name; overrides.yaml\n  per-issue only (empty)\n- pk/issues.py / watch.py: claims only from claim issues; bare repo links imported only from claim issues; only\n  repos that gave packings are watched; issue table records creation time and credit (all 669 issues synced)\n- site/tools/provenance.py: postings from the store's issue table + site/data/lineage.yaml (repo postings, lineage\n  incl. posts since 10-11); every issue claim row read; register-only records get their own event; tolerance 1e-7\n- search/regularize: 30 n with newer records refreshed (28 certified; 229, 261 drawn as posted), conservative +\n  fewest, lists rebuilt; refreshed inputs carry their own credit (was the previous holder's)\n- site: records2026 (76 n), record drawings, credits, history (553 holders), lower bounds (n = 40: 3359/500)\n\nCommit approved by Evan 2026-10-17 (\"let the web site update finish, then commit and push\").\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_017dQaqxoRw6hF49ndWbnV13"
+      },
+      {
+        "sha": "ff979c2c5235c99c0cb0b0e1f4133872f6288912",
+        "date": "2026-10-17T21:25:53Z",
+        "message": "Same minimum = certified path; credit follows it; s(146) credited to #606\n\nLineage credit rule (Evan, 10-17): a later posting is a refinement when the two\nare the same local minimum; otherwise the poster is the finder and the earlier\npacking is \"based on\".  \"Same\" is decided by a certified continuous path from\nthe higher posting's core to the lower's with the side never above the higher's\n(analysis/pathcert.py: per-pair separating line over each step with an explicit\ncurvature bound, shortfall closed by scaling, exact quadratic check at 50\ndigits; descent iterates via slp2.TRACE; rattlers excluded from the core).\n\n- analysis/same_minimum.py: lineage pairs and every two postings within 1e-7 at\n  one n; exact solves (descending postings that aren't at a KKT point); path\n  certificates.  33 same (incl. 108 #432 -> #451), 34 distinct, 11 no path yet\n  (261: a multi-pair corner switch), 7 unknown.  site/data/lineage_minima.json.\n- provenance.py: one packing = within SAME_TOL and not decided distinct; the\n  register's value goes to the posting carrying it when found_by's own claim is\n  a different minimum (146 -> #606 based on #432; 179, 180, 209, 237, 238, 239,\n  263 credit the improver based on #401); no synthetic register-N in `also`; no\n  self \"based on\"; Compare history for every n <= 324.\n- import_lists.py: raw-drawn records credit the earliest posting of the minimum\n  (261: Ryan Xu, not the #567 repost).\n- analysis/basin.py: distance / margin / growth prototype (growth push stalls\n  in half the directions; superseded by pathcert for \"same\").\n- descend_census.py recover: rebuild results of a stopped run (s(110) census\n  stopped at 1,397 / 4,509 points; 1,097 minima).\n- slp2.py: opt-in TRACE of accepted iterates.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_017dQaqxoRw6hF49ndWbnV13"
+      },
+      {
+        "sha": "b88aa9a6ee8cb894808dcfd1402a7e4d61b278d3",
+        "date": "2026-10-17T21:43:49Z",
+        "message": "Credits: register found_by matched by name, one entry per person, reader-facing rule\n\n- provenance.py: a register found_by that register_event doesn't know (Ostashev,\n  PingYou, Mishapolk, Fang) maps to that person's earliest posting at n, so 241\n  and 302 get \"based on\" like 84 / 86 / 105; a register value no posting carries\n  whose found_by posted a different minimum is credited to the register's\n  improved_by (211: Couzo, based on Ostashev's #501); refined_by keeps the\n  register's improvers minus anyone already credited on the line (was dropped\n  whole when credit moved); based_on and also list each person once (180, 209,\n  108); docstring states the rule and the two defaults for undecided cases.\n- leaderboard.html: the Lineage bullet states the same-minimum rule.\n- index.html, sources.html: counts as of 10-17 (76 n; 70 registered; 8 posters).\n- Rebuilt lists, credits, history.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
+      },
+      {
+        "sha": "b4e9d31aa635aaf515ae610224e00a2baf0166a5",
+        "date": "2026-10-17T22:26:37Z",
+        "message": "Lean: path certificates are sound (PathCert.lean); step_ok checks 0 < s <= L\n\nlean/Sqpack/PathCert.lean proves the step test of search/packer/analysis/pathcert.py\nsound, no sorry, standard axioms only:\n- chord_lower: f'' <= q on [0, 1] => f >= chord - t(1-t)q/2.\n- hw_chord, pairGap_chord, wallGap_chord: the margins along a linear step, with the\n  script's q = W dθo^2 + 2 D |dθo| + (√2/2) dφ^2 (pairs) and (√2/2) dθ^2 (walls); the\n  half-width (|cos| + |sin|)/2 is handled as a max of four cosines, so no kink argument.\n- disjoint_of_gapAt, subset_container_of_walls, disjoint_of_far (via ExactPack's\n  SepSide / InBox); isPacking_scale: scaling by ρ >= 1 turns g + 1 - 1/ρ >= 0 (pairs)\n  and m + (1 - 1/ρ)/2 >= 0 (walls) into a packing.\n- StepCert (= step_ok's tests), step_isPacking, step_joined, chain_joined,\n  joined_of_chain: a certified chain joins its end packings inside the packings of\n  side <= L.  qmin_nonneg / cond_eq: the closed-form minimum covers [0, 1].\nOutside the proof: 50-digit float evaluation (1e-30 margin) and the far-pair pre-filter.\n\npathcert.py: step_ok now rejects a step unless 0 < s <= L at both ends (the scaling\nargument needs it; callers ensured it, step_ok didn't check).  108 #432 -> #451 re-run:\nstill certified (239 steps, worst margin 5e-13).\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
+      },
+      {
+        "sha": "898fdc3596e37a4c3113f344772bdfde2203a4f3",
+        "date": "2026-10-17T22:31:50Z",
+        "message": "TODO: jlevy#673 (146 / 308 credit correction) posted 10-17\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
+      },
+      {
+        "sha": "e0338c7becf95dbc7584b48d8868c0a1cd21079c",
+        "date": "2026-10-17T23:09:24Z",
+        "message": "s(229) <= 15.650163254859: dilation certificate + f64 packing\n\nCommit, push and post approved by Evan 2026-10-17 (\"Yes: commit, push, post\"); only these two files.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
+      },
+      {
+        "sha": "8f069afde737b03f5cefcdf18437f81673960578",
+        "date": "2026-10-18T00:44:18Z",
+        "message": "Site: our regularized copy replaces the drawing it was made from, also in the history\n\nA record's certified, regularized drawing (best-N) now stands in for the dated\ntimeline entry it was made from (the catalogue's record drawing, or a since-beaten\n2026 posting), not only when the two are identical and still the record.  The\nsource is marked dup_of (linked from Explore's source line); Explore lends the\nsource's prose and closed form to the copy; the leaderboard's history drawings\nuse the copies too.  s(229): the 1979 diamond is shown once.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
+      },
+      {
+        "sha": "00e68dfbe1d29ab5dbab1cddfb8f6ca19d5470db",
+        "date": "2026-10-18T01:35:40Z",
+        "message": "s(229) <= 15.650161513896: dilation certificate + f64 packing (update to jlevy#674)\n\nCommit, push and comment approved by Evan 2026-10-17 (\"Yes: commit, push, comment\"); only these two files.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
+      },
+      {
+        "sha": "76ba998ec451010eaf5fabe3d9f2daac767548ae",
+        "date": "2026-10-18T01:42:54Z",
+        "message": "Job queue, finisher and candidate fallbacks, parent sources, bench shards\n\n- pk/jobs.py: queue (priority / FIFO / backfill, elastic procs, 16 - 2 reserve, high up to 20), scheduler job _queue,\n  peek; zombies reaped\n- pk/nearmiss.finish: no stop below the bar (Evan 10-17)\n- candidate.py: dilation-certificate fallback when exactsolve fails (--no-dilate: old behaviour)\n- pk/parents.sources() + elite+banded; shove/bench.py: --from-task / --to-task shards, per-task ms / tags, plain-float hits\n- tasks/certify-pipeline (TODO); PACKER tool note; .gitignore for held files (Evan 10-17: method notes held a day or two)\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
+      },
+      {
+        "sha": "f4883b41853732b240606b3a532ce48d542ead28",
+        "date": "2026-10-18T02:08:26Z",
+        "message": "Fang's s(n² − n + 1) < n (jlevy#603) in Lean, unconditional\n\n- FangGlue/FangTheorem: Fang's gluing lemma (after Arslanov–Mustafin–Shangitbayev)\n  on PacksIn, Squeezable/Excess, and Theorems 1-2 from a FangPieces structure.\n- ExactCheckCut: sweep-line pair pruning for the kernel checker (n = 651:\n  23.5k pairs instead of 212k, 110 s instead of >11 min); lean_cert.py --cut.\n- ExactRect: rectangle containers (top wall on shadows); lean_cert.py --rect-h.\n- certificates/fang-gluing: the 18 piece certificates with credits;\n  search/exact/fang_pieces.py generates Sqpack/Exact/Fang (gitignored);\n  lean/scripts/build_chunks.sh builds chunks a few at a time.\n- FangFinal: theorem1, theorem2 with no hypotheses; standard axioms only.\n- literature/waste-constructions-2026-10-17.md: Ryu's explicit bounds, #414.\n- CLAUDE.md: licensing rule (packings are facts; never copy code).\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
+      },
+      {
+        "sha": "8475bdf41571c59c8c240aedaddc48e19e0e4707",
+        "date": "2026-10-18T02:17:40Z",
+        "message": "Ryu's c*(k) ≤ 8⌈√(k−4)⌉ − 1 (jlevy#471) in Lean, every k ≥ 6\n\n- RyuBand: same-angle separation in rotated coordinates, square-in-box from\n  corners, PacksIn.transpose, one band of tilted rows (Ryu's Lemmas 3.1-3.4),\n  the L-shape (Lemma 4.1) and lpacking.\n- RyuBound: rational tilt t = 1/b + 1/((b²+1)(6k+4b)); rows k − 4 and\n  k − b − 4 (no ceilings), slack 4/(b²+1) at 1/b, three one-variable\n  perturbation bounds in place of Ryu's mean-value step.\n  packs_sub_8sqrt, packs_sub_8b; standard axioms, no certificates.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
+      },
+      {
+        "sha": "a645fe3610425507ddfb9825045094028c1d28f4",
+        "date": "2026-10-18T02:28:04Z",
+        "message": "c*(k) ≤ 4⌈√(2k−7)⌉ + 5 for every k ≥ 7, in Lean (Ryu's L-shape with filled ends)\n\n- RyuBand: half-plane separation, append of explicit families, band_explicit,\n  band_fill (floor(b/2) - 1 axis squares under the first and over the last row),\n  lpacking_fill.\n- RyuFill: L - 3 rows per band for 2L <= b^2 + 7 (length_ok4), the fill\n  inequality nf <= b cos - cot (fill_ok), packs_fill, packs_sub_4sqrt2.\n  Standard axioms, no certificates.  About 5.66 sqrt k against Ryu's 8 sqrt k;\n  smaller than Ryu's bound for 14 <= k <= 10^6 and than Fang's for k >= 55.\n- search/ryu/r1prime.py: exact construction with all top layers + pairwise\n  check (reproduces the R1' counts of the 10-17 literature note).\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
+      },
+      {
+        "sha": "5ca0dc3ae7a4eebce16838bf41bedc2ce7e98241",
+        "date": "2026-10-18T05:10:23Z",
+        "message": "s(232) record: exact certificate with exactly 3 angle groups, over K(sqrt 2)\n\nThe regularized drawing of the n = 232 record (0 deg x172, 45 deg x36, theta1 x24) solved exactly over\nL = K(sqrt 2) (degree 14, w = t + sqrt 2) from its 2049 contacts; same S* as the degree-7 exact form.\nverify_exact.py (unchanged): VALID.  Lean: Sqpack.Exact.Packs.N232R3.packs, standard axioms only; also the\nfirst Lean proof of the current record side.  tasks/reg-cert-232/README.md.\n\nTODO: site should show minimal polynomials (later).\n\nCommit + push approved by Evan in chat 2026-10-17.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
+      }
+    ],
+    "files": [
+      {
+        "path": ".gitignore",
+        "status": "modified"
+      },
+      {
+        "path": "CLAUDE.md",
+        "status": "modified"
+      },
+      {
+        "path": "Completed.md",
+        "status": "modified"
+      },
+      {
+        "path": "TODO.md",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/fang-gluing/README.md",
+        "status": "added"
+      },
+      {
+        "path": "certificates/fang-gluing/SHA256SUMS",
+        "status": "added"
+      },
+      {
+        "path": "certificates/fang-gluing/inputs/P110.cert",
+        "status": "added"
+      },
+      {
+        "path": "certificates/fang-gluing/inputs/P132.cert",
+        "status": "added"
+      },
+      {
+        "path": "certificates/fang-gluing/inputs/P156.cert",
+        "status": "added"
+      },
+      {
+        "path": "certificates/fang-gluing/inputs/P182.cert",
+        "status": "added"
+      },
+      {
+        "path": "certificates/fang-gluing/inputs/P211.cert",
+        "status": "added"
+      },
+      {
+        "path": "certificates/fang-gluing/inputs/P241.cert",
+        "status": "added"
+      },
+      {
+        "path": "certificates/fang-gluing/inputs/P273.cert",
+        "status": "added"
+      },
+      {
+        "path": "certificates/fang-gluing/inputs/P308.cert",
+        "status": "added"
+      },
+      {
+        "path": "certificates/fang-gluing/inputs/P343.cert",
+        "status": "added"
+      },
+      {
+        "path": "certificates/fang-gluing/inputs/P381.cert",
+        "status": "added"
+      },
+      {
+        "path": "certificates/fang-gluing/inputs/P421.cert",
+        "status": "added"
+      },
+      {
+        "path": "certificates/fang-gluing/inputs/P463.cert",
+        "status": "added"
+      },
+      {
+        "path": "certificates/fang-gluing/inputs/P507.cert",
+        "status": "added"
+      },
+      {
+        "path": "certificates/fang-gluing/inputs/P553.cert",
+        "status": "added"
+      },
+      {
+        "path": "certificates/fang-gluing/inputs/P601.cert",
+        "status": "added"
+      },
+      {
+        "path": "certificates/fang-gluing/inputs/P651.cert",
+        "status": "added"
+      },
+      {
+        "path": "certificates/fang-gluing/inputs/R257.cert",
+        "status": "added"
+      },
+      {
+        "path": "certificates/fang-gluing/inputs/R443.cert",
+        "status": "added"
+      },
+      {
+        "path": "lean/Axioms.lean",
+        "status": "modified"
+      },
+      {
+        "path": "lean/AxiomsSpot.lean",
+        "status": "modified"
+      },
+      {
+        "path": "lean/Sqpack.lean",
+        "status": "modified"
+      },
+      {
+        "path": "lean/Sqpack/Exact/Packs/N232R3.lean",
+        "status": "added"
+      },
+      {
+        "path": "lean/Sqpack/Exact/Packs/N232R3/C0.lean",
+        "status": "added"
+      },
+      {
+        "path": "lean/Sqpack/Exact/Packs/N232R3/C1.lean",
+        "status": "added"
+      },
+      {
+        "path": "lean/Sqpack/Exact/Packs/N232R3/C2.lean",
+        "status": "added"
+      },
+      {
+        "path": "lean/Sqpack/Exact/Packs/N232R3/C3.lean",
+        "status": "added"
+      },
+      {
+        "path": "lean/Sqpack/Exact/Packs/N232R3/C4.lean",
+        "status": "added"
+      },
+      {
+        "path": "lean/Sqpack/Exact/Packs/N232R3/C5.lean",
+        "status": "added"
+      },
+      {
+        "path": "lean/Sqpack/Exact/Packs/N232R3/C6.lean",
+        "status": "added"
+      },
+      {
+        "path": "lean/Sqpack/Exact/Packs/N232R3/C7.lean",
+        "status": "added"
+      },
+      {
+        "path": "lean/Sqpack/Exact/Packs/N232R3/C8.lean",
+        "status": "added"
+      },
+      {
+        "path": "lean/Sqpack/Exact/Packs/N232R3/C9.lean",
+        "status": "added"
+      },
+      {
+        "path": "lean/Sqpack/Exact/Packs/N232R3/Data.lean",
+        "status": "added"
+      },
+      {
+        "path": "lean/Sqpack/ExactCheckCut.lean",
+        "status": "added"
+      },
+      {
+        "path": "lean/Sqpack/ExactRect.lean",
+        "status": "added"
+      },
+      {
+        "path": "lean/Sqpack/FangFinal.lean",
+        "status": "added"
+      },
+      {
+        "path": "lean/Sqpack/FangGlue.lean",
+        "status": "added"
+      },
+      {
+        "path": "lean/Sqpack/FangTheorem.lean",
+        "status": "added"
+      },
+      {
+        "path": "lean/Sqpack/PathCert.lean",
+        "status": "added"
+      },
+      {
+        "path": "lean/Sqpack/RyuBand.lean",
+        "status": "added"
+      },
+      {
+        "path": "lean/Sqpack/RyuBound.lean",
+        "status": "added"
+      },
+      {
+        "path": "lean/Sqpack/RyuFill.lean",
+        "status": "added"
+      },
+      {
+        "path": "lean/scripts/build_chunks.sh",
+        "status": "added"
+      },
+      {
+        "path": "literature/README.md",
+        "status": "modified"
+      },
+      {
+        "path": "literature/waste-constructions-2026-10-17.md",
+        "status": "added"
+      },
+      {
+        "path": "search/exact/fang_pieces.py",
+        "status": "added"
+      },
+      {
+        "path": "search/exact/lean_cert.py",
+        "status": "modified"
+      },
+      {
+        "path": "search/packer/DESIGN.md",
+        "status": "modified"
+      },
+      {
+        "path": "search/packer/PACKER.md",
+        "status": "modified"
+      },
+      {
+        "path": "search/packer/README.md",
+        "status": "modified"
+      },
+      {
+        "path": "search/packer/analysis/aswap_sweep.py",
+        "status": "added"
+      },
+      {
+        "path": "search/packer/analysis/basin.py",
+        "status": "added"
+      },
+      {
+        "path": "search/packer/analysis/focus_bt.py",
+        "status": "added"
+      },
+      {
+        "path": "search/packer/analysis/gs1.py",
+        "status": "added"
+      },
+      {
+        "path": "search/packer/analysis/mx1.py",
+        "status": "added"
+      },
+      {
+        "path": "search/packer/analysis/pathcert.py",
+        "status": "added"
+      },
+      {
+        "path": "search/packer/analysis/same_minimum.py",
+        "status": "added"
+      },
+      {
+        "path": "search/packer/analysis/wastemodel.py",
+        "status": "added"
+      },
+      {
+        "path": "search/packer/candidate.py",
+        "status": "modified"
+      },
+      {
+        "path": "search/packer/candidates/s155_ex2.cert",
+        "status": "added"
+      },
+      {
+        "path": "search/packer/candidates/s155_ex2.exact.txt",
+        "status": "added"
+      },
+      {
+        "path": "search/packer/candidates/s155_ex2.input.txt",
+        "status": "added"
+      },
+      {
+        "path": "search/packer/candidates/s155_ex2.json",
+        "status": "added"
+      },
+      {
+        "path": "search/packer/candidates/s155_ex2_prior.json",
+        "status": "added"
+      },
+      {
+        "path": "search/packer/candidates/s155_ex2_regularized.cert",
+        "status": "added"
+      },
+      {
+        "path": "search/packer/candidates/s155_ex2_regularized.json",
+        "status": "added"
+      },
+      {
+        "path": "search/packer/candidates/s155_ex2_vs_prior.json",
+        "status": "added"
+      },
+      {
+        "path": "search/packer/candidates/s229.cert",
+        "status": "added"
+      },
+      {
+        "path": "search/packer/candidates/s229.input.txt",
+        "status": "added"
+      },
+      {
+        "path": "search/packer/candidates/s229_v2.cert",
+        "status": "added"
+      },
+      {
+        "path": "search/packer/candidates/s229_v2.input.txt",
+        "status": "added"
+      },
+      {
+        "path": "search/packer/descend_census.py",
+        "status": "modified"
+      },
+      {
+        "path": "search/packer/explore.py",
+        "status": "modified"
+      },
+      {
+        "path": "search/packer/fresh.py",
+        "status": "modified"
+      },
+      {
+        "path": "search/packer/harden_explore.py",
+        "status": "modified"
+      },
+      {
+        "path": "search/packer/pk.py",
+        "status": "modified"
+      },
+      {
+        "path": "search/packer/pk/README.md",
+        "status": "modified"
+      },
+      {
+        "path": "search/packer/pk/distinct.py",
+        "status": "modified"
+      },
+      {
+        "path": "search/packer/pk/eventbench.py",
+        "status": "modified"
+      },
+      {
+        "path": "search/packer/pk/github.py",
+        "status": "added"
+      },
+      {
+        "path": "search/packer/pk/ingest.py",
+        "status": "modified"
+      },
+      {
+        "path": "search/packer/pk/issues.py",
+        "status": "added"
+      },
+      {
+        "path": "search/packer/pk/jobs.py",
+        "status": "modified"
+      },
+      {
+        "path": "search/packer/pk/nearmiss.py",
+        "status": "modified"
+      },
+      {
+        "path": "search/packer/pk/overrides.yaml",
+        "status": "added"
+      },
+      {
+        "path": "search/packer/pk/parents.py",
+        "status": "modified"
+      },
+      {
+        "path": "search/packer/pk/pending.yaml",
+        "status": "removed"
+      },
+      {
+        "path": "search/packer/pk/people.py",
+        "status": "added"
+      },
+      {
+        "path": "search/packer/pk/sources.py",
+        "status": "modified"
+      },
+      {
+        "path": "search/packer/pk/store.py",
+        "status": "modified"
+      },
+      {
+        "path": "search/packer/pk/tests/test_nearmiss.py",
+        "status": "modified"
+      },
+      {
+        "path": "search/packer/pk/tests/test_watch.py",
+        "status": "modified"
+      },
+      {
+        "path": "search/packer/pk/watch.py",
+        "status": "modified"
+      },
+      {
+        "path": "search/packer/shove/NOTES_greedy.md",
+        "status": "added"
+      },
+      {
+        "path": "search/packer/shove/NOTES_relax.md",
+        "status": "added"
+      },
+      {
+        "path": "search/packer/shove/NOTES_resolve.md",
+        "status": "added"
+      },
+      {
+        "path": "search/packer/shove/README.md",
+        "status": "added"
+      },
+      {
+        "path": "search/packer/shove/__init__.py",
+        "status": "added"
+      },
+      {
+        "path": "search/packer/shove/bench.py",
+        "status": "added"
+      },
+      {
+        "path": "search/packer/shove/fill_example.py",
+        "status": "added"
+      },
+      {
+        "path": "search/packer/shove/fill_greedy.py",
+        "status": "added"
+      },
+      {
+        "path": "search/packer/shove/fill_relax.py",
+        "status": "added"
+      },
+      {
+        "path": "search/packer/shove/fill_resolve.py",
+        "status": "added"
+      },
+      {
+        "path": "search/packer/shove/harness.py",
+        "status": "added"
+      },
+      {
+        "path": "search/packer/slp2.py",
+        "status": "modified"
+      },
+      {
+        "path": "search/regularize/lists/alternates.csv",
+        "status": "modified"
+      },
+      {
+        "path": "search/regularize/lists/alternates.json",
+        "status": "modified"
+      },
+      {
+        "path": "search/regularize/lists/alternates.md",
+        "status": "modified"
+      },
+      {
+        "path": "search/regularize/lists/best.csv",
+        "status": "modified"
+      },
+      {
+        "path": "search/regularize/lists/best.json",
+        "status": "modified"
+      },
+      {
+        "path": "search/regularize/lists/best.md",
+        "status": "modified"
+      },
+      {
+        "path": "search/regularize/lists/certs/alt/n-227.cert.gz",
+        "status": "added"
+      },
+      {
+        "path": "search/regularize/lists/certs/alt/n-227.json.gz",
+        "status": "added"
+      },
+      {
+        "path": "search/regularize/lists/certs/alt/n-304.cert.gz",
+        "status": "added"
+      },
+      {
+        "path": "search/regularize/lists/certs/alt/n-304.json.gz",
+        "status": "added"
+      },
+      {
+        "path": "search/regularize/lists/certs/n-129.cert.gz",
+        "status": "modified"
+      },
+      {
+        "path": "search/regularize/lists/certs/n-129.json.gz",
+        "status": "modified"
+      },
+      {
+        "path": "search/regularize/lists/certs/n-146.cert.gz",
+        "status": "modified"
+      },
+      {
+        "path": "search/regularize/lists/certs/n-146.json.gz",
+        "status": "modified"
+      },
+      {
+        "path": "search/regularize/lists/certs/n-153.cert.gz",
+        "status": "modified"
+      },
+      {
+        "path": "search/regularize/lists/certs/n-153.json.gz",
+        "status": "modified"
+      },
+      {
+        "path": "search/regularize/lists/certs/n-154.cert.gz",
+        "status": "modified"
+      },
+      {
+        "path": "search/regularize/lists/certs/n-154.json.gz",
+        "status": "modified"
+      },
+      {
+        "path": "search/regularize/lists/certs/n-155.cert.gz",
+        "status": "modified"
+      },
+      {
+        "path": "search/regularize/lists/certs/n-155.json.gz",
+        "status": "modified"
+      },
+      {
+        "path": "search/regularize/lists/certs/n-156.cert.gz",
+        "status": "modified"
+      },
+      {
+        "path": "search/regularize/lists/certs/n-156.json.gz",
+        "status": "modified"
+      },
+      {
+        "path": "search/regularize/lists/certs/n-175.cert.gz",
+        "status": "modified"
+      },
+      {
+        "path": "search/regularize/lists/certs/n-175.json.gz",
+        "status": "modified"
+      },
+      {
+        "path": "search/regularize/lists/certs/n-176.cert.gz",
+        "status": "modified"
+      },
+      {
+        "path": "search/regularize/lists/certs/n-176.json.gz",
+        "status": "modified"
+      },
+      {
+        "path": "search/regularize/lists/certs/n-181.cert.gz",
+        "status": "modified"
+      },
+      {
+        "path": "search/regularize/lists/certs/n-181.json.gz",
+        "status": "modified"
+      },
+      {
+        "path": "search/regularize/lists/certs/n-204.cert.gz",
+        "status": "modified"
+      },
+      {
+        "path": "search/regularize/lists/certs/n-204.json.gz",
+        "status": "modified"
+      },
+      {
+        "path": "search/regularize/lists/certs/n-207.cert.gz",
+        "status": "modified"
+      },
+      {
+        "path": "search/regularize/lists/certs/n-207.json.gz",
+        "status": "modified"
+      },
+      {
+        "path": "search/regularize/lists/certs/n-211.cert.gz",
+        "status": "modified"
+      },
+      {
+        "path": "search/regularize/lists/certs/n-211.json.gz",
+        "status": "modified"
+      },
+      {
+        "path": "search/regularize/lists/certs/n-227.cert.gz",
+        "status": "modified"
+      },
+      {
+        "path": "search/regularize/lists/certs/n-227.json.gz",
+        "status": "modified"
+      },
+      {
+        "path": "search/regularize/lists/certs/n-232.cert.gz",
+        "status": "modified"
+      },
+      {
+        "path": "search/regularize/lists/certs/n-232.json.gz",
+        "status": "modified"
+      },
+      {
+        "path": "search/regularize/lists/certs/n-236.cert.gz",
+        "status": "modified"
+      },
+      {
+        "path": "search/regularize/lists/certs/n-236.json.gz",
+        "status": "modified"
+      },
+      {
+        "path": "search/regularize/lists/certs/n-237.cert.gz",
+        "status": "modified"
+      },
+      {
+        "path": "search/regularize/lists/certs/n-237.json.gz",
+        "status": "modified"
+      },
+      {
+        "path": "search/regularize/lists/certs/n-238.cert.gz",
+        "status": "modified"
+      },
+      {
+        "path": "search/regularize/lists/certs/n-238.json.gz",
+        "status": "modified"
+      },
+      {
+        "path": "search/regularize/lists/certs/n-239.cert.gz",
+        "status": "modified"
+      },
+      {
+        "path": "search/regularize/lists/certs/n-239.json.gz",
+        "status": "modified"
+      },
+      {
+        "path": "search/regularize/lists/certs/n-241.cert.gz",
+        "status": "modified"
+      },
+      {
+        "path": "search/regularize/lists/certs/n-241.json.gz",
+        "status": "modified"
+      },
+      {
+        "path": "search/regularize/lists/certs/n-260.cert.gz",
+        "status": "modified"
+      },
+      {
+        "path": "search/regularize/lists/certs/n-260.json.gz",
+        "status": "modified"
+      },
+      {
+        "path": "search/regularize/lists/certs/n-264.cert.gz",
+        "status": "modified"
+      },
+      {
+        "path": "search/regularize/lists/certs/n-264.json.gz",
+        "status": "modified"
+      },
+      {
+        "path": "search/regularize/lists/certs/n-270.cert.gz",
+        "status": "modified"
+      },
+      {
+        "path": "search/regularize/lists/certs/n-270.json.gz",
+        "status": "modified"
+      },
+      {
+        "path": "search/regularize/lists/certs/n-271.cert.gz",
+        "status": "modified"
+      },
+      {
+        "path": "search/regularize/lists/certs/n-271.json.gz",
+        "status": "modified"
+      },
+      {
+        "path": "search/regularize/lists/certs/n-272.cert.gz",
+        "status": "modified"
+      },
+      {
+        "path": "search/regularize/lists/certs/n-272.json.gz",
+        "status": "modified"
+      },
+      {
+        "path": "search/regularize/lists/certs/n-302.cert.gz",
+        "status": "modified"
+      },
+      {
+        "path": "search/regularize/lists/certs/n-302.json.gz",
+        "status": "modified"
+      },
+      {
+        "path": "search/regularize/lists/certs/n-303.cert.gz",
+        "status": "modified"
+      },
+      {
+        "path": "search/regularize/lists/certs/n-303.json.gz",
+        "status": "modified"
+      },
+      {
+        "path": "search/regularize/lists/certs/n-304.cert.gz",
+        "status": "modified"
+      },
+      {
+        "path": "search/regularize/lists/certs/n-304.json.gz",
+        "status": "modified"
+      },
+      {
+        "path": "search/regularize/lists/certs/n-305.cert.gz",
+        "status": "modified"
+      },
+      {
+        "path": "search/regularize/lists/certs/n-305.json.gz",
+        "status": "modified"
+      },
+      {
+        "path": "search/regularize/refresh.py",
+        "status": "modified"
+      },
+      {
+        "path": "search/regularize/reg.py",
+        "status": "modified"
+      },
+      {
+        "path": "search/ryu/r1prime.py",
+        "status": "added"
+      },
+      {
+        "path": "site/README.md",
+        "status": "modified"
+      },
+      {
+        "path": "site/TODO.md",
+        "status": "modified"
+      },
+      {
+        "path": "site/data/credits.json",
+        "status": "modified"
+      },
+      {
+        "path": "site/data/lineage.yaml",
+        "status": "added"
+      },
+      {
+        "path": "site/data/lineage_minima.json",
+        "status": "added"
+      },
+      {
+        "path": "site/data/lower_bounds.json",
+        "status": "modified"
+      },
+      {
+        "path": "site/data/people.yaml",
+        "status": "modified"
+      },
+      {
+        "path": "site/data/records2026.json",
+        "status": "modified"
+      },
+      {
+        "path": "site/notes/credits-review.md",
+        "status": "modified"
+      },
+      {
+        "path": "site/tools/credits.py",
+        "status": "modified"
+      },
+      {
+        "path": "site/tools/history_packings.py",
+        "status": "modified"
+      },
+      {
+        "path": "site/tools/import_lists.py",
+        "status": "modified"
+      },
+      {
+        "path": "site/tools/provenance.py",
+        "status": "modified"
+      },
+      {
+        "path": "site/www/data/credits.json",
+        "status": "modified"
+      },
+      {
+        "path": "site/www/data/hist.json",
+        "status": "modified"
+      },
+      {
+        "path": "site/www/data/index.json",
+        "status": "modified"
+      },
+      {
+        "path": "site/www/data/lower_bounds.json",
+        "status": "modified"
+      },
+      {
+        "path": "site/www/data/p/alt-227.json",
+        "status": "added"
+      },
+      {
+        "path": "site/www/data/p/alt-304.json",
+        "status": "added"
+      },
+      {
+        "path": "site/www/data/p/best-129.json",
+        "status": "modified"
+      },
+      {
+        "path": "site/www/data/p/best-146.json",
+        "status": "modified"
+      },
+      {
+        "path": "site/www/data/p/best-153.json",
+        "status": "modified"
+      },
+      {
+        "path": "site/www/data/p/best-154.json",
+        "status": "modified"
+      },
+      {
+        "path": "site/www/data/p/best-155.json",
+        "status": "modified"
+      },
+      {
+        "path": "site/www/data/p/best-156.json",
+        "status": "modified"
+      },
+      {
+        "path": "site/www/data/p/best-175.json",
+        "status": "modified"
+      },
+      {
+        "path": "site/www/data/p/best-176.json",
+        "status": "modified"
+      },
+      {
+        "path": "site/www/data/p/best-181.json",
+        "status": "modified"
+      },
+      {
+        "path": "site/www/data/p/best-204.json",
+        "status": "modified"
+      },
+      {
+        "path": "site/www/data/p/best-207.json",
+        "status": "modified"
+      },
+      {
+        "path": "site/www/data/p/best-211.json",
+        "status": "modified"
+      },
+      {
+        "path": "site/www/data/p/best-227.json",
+        "status": "modified"
+      },
+      {
+        "path": "site/www/data/p/best-232.json",
+        "status": "modified"
+      },
+      {
+        "path": "site/www/data/p/best-236.json",
+        "status": "modified"
+      },
+      {
+        "path": "site/www/data/p/best-237.json",
+        "status": "modified"
+      },
+      {
+        "path": "site/www/data/p/best-238.json",
+        "status": "modified"
+      },
+      {
+        "path": "site/www/data/p/best-239.json",
+        "status": "modified"
+      },
+      {
+        "path": "site/www/data/p/best-241.json",
+        "status": "modified"
+      },
+      {
+        "path": "site/www/data/p/best-260.json",
+        "status": "modified"
+      },
+      {
+        "path": "site/www/data/p/best-264.json",
+        "status": "modified"
+      },
+      {
+        "path": "site/www/data/p/best-270.json",
+        "status": "modified"
+      },
+      {
+        "path": "site/www/data/p/best-271.json",
+        "status": "modified"
+      },
+      {
+        "path": "site/www/data/p/best-272.json",
+        "status": "modified"
+      },
+      {
+        "path": "site/www/data/p/best-302.json",
+        "status": "modified"
+      },
+      {
+        "path": "site/www/data/p/best-303.json",
+        "status": "modified"
+      },
+      {
+        "path": "site/www/data/p/best-304.json",
+        "status": "modified"
+      },
+      {
+        "path": "site/www/data/p/best-305.json",
+        "status": "modified"
+      },
+      {
+        "path": "site/www/data/p/hist-105-432.json",
+        "status": "removed"
+      },
+      {
+        "path": "site/www/data/p/hist-127-432.json",
+        "status": "removed"
+      },
+      {
+        "path": "site/www/data/p/hist-131-432.json",
+        "status": "removed"
+      },
+      {
+        "path": "site/www/data/p/hist-132-465.json",
+        "status": "removed"
+      },
+      {
+        "path": "site/www/data/p/hist-132-476.json",
+        "status": "removed"
+      },
+      {
+        "path": "site/www/data/p/hist-132-couzo0927.json",
+        "status": "removed"
+      },
+      {
+        "path": "site/www/data/p/hist-146-432.json",
+        "status": "removed"
+      },
+      {
+        "path": "site/www/data/p/hist-175-432.json",
+        "status": "removed"
+      },
+      {
+        "path": "site/www/data/p/hist-175-470.json",
+        "status": "removed"
+      },
+      {
+        "path": "site/www/data/p/hist-180-422.json",
+        "status": "removed"
+      },
+      {
+        "path": "site/www/data/p/hist-209-401.json",
+        "status": "removed"
+      },
+      {
+        "path": "site/www/data/p/hist-237-401.json",
+        "status": "removed"
+      },
+      {
+        "path": "site/www/data/p/hist-259-couzo0927.json",
+        "status": "removed"
+      },
+      {
+        "path": "site/www/data/p/hist-261-432.json",
+        "status": "removed"
+      },
+      {
+        "path": "site/www/data/p/hist-267-432.json",
+        "status": "removed"
+      },
+      {
+        "path": "site/www/data/p/hist-270-399.json",
+        "status": "removed"
+      },
+      {
+        "path": "site/www/data/p/hist-270-470.json",
+        "status": "removed"
+      },
+      {
+        "path": "site/www/data/p/hist-270-476.json",
+        "status": "removed"
+      },
+      {
+        "path": "site/www/data/p/hist-292-375.json",
+        "status": "added"
+      },
+      {
+        "path": "site/www/data/p/hist-292-couzo0927.json",
+        "status": "removed"
+      },
+      {
+        "path": "site/www/data/p/hist-305-couzo0927.json",
+        "status": "removed"
+      },
+      {
+        "path": "site/www/data/p/hist-307-couzo0927.json",
+        "status": "removed"
+      },
+      {
+        "path": "site/www/data/p/hist-308-484.json",
+        "status": "removed"
+      },
+      {
+        "path": "site/www/data/p/rec-229.json",
+        "status": "added"
+      },
+      {
+        "path": "site/www/data/p/rec-261.json",
+        "status": "modified"
+      },
+      {
+        "path": "site/www/data/p/step-105-0.json",
+        "status": "added"
+      },
+      {
+        "path": "site/www/data/p/step-105-1.json",
+        "status": "added"
+      },
+      {
+        "path": "site/www/data/p/step-105-2.json",
+        "status": "added"
+      },
+      {
+        "path": "site/www/data/p/step-108-0.json",
+        "status": "added"
+      },
+      {
+        "path": "site/www/data/p/step-108-1.json",
+        "status": "added"
+      },
+      {
+        "path": "site/www/data/p/step-108-2.json",
+        "status": "added"
+      },
+      {
+        "path": "site/www/data/p/step-123-0.json",
+        "status": "added"
+      },
+      {
+        "path": "site/www/data/p/step-126-0.json",
+        "status": "added"
+      },
+      {
+        "path": "site/www/data/p/step-127-0.json",
+        "status": "added"
+      },
+      {
+        "path": "site/www/data/p/step-129-0.json",
+        "status": "added"
+      },
+      {
+        "path": "site/www/data/p/step-129-1.json",
+        "status": "added"
+      },
+      {
+        "path": "site/www/data/p/step-130-0.json",
+        "status": "added"
+      },
+      {
+        "path": "site/www/data/p/step-146-0.json",
+        "status": "added"
+      },
+      {
+        "path": "site/www/data/p/step-146-1.json",
+        "status": "added"
+      },
+      {
+        "path": "site/www/data/p/step-153-0.json",
+        "status": "added"
+      },
+      {
+        "path": "site/www/data/p/step-153-1.json",
+        "status": "added"
+      },
+      {
+        "path": "site/www/data/p/step-155-0.json",
+        "status": "added"
+      },
+      {
+        "path": "site/www/data/p/step-155-1.json",
+        "status": "added"
+      },
+      {
+        "path": "site/www/data/p/step-155-2.json",
+        "status": "added"
+      },
+      {
+        "path": "site/www/data/p/step-156-0.json",
+        "status": "added"
+      },
+      {
+        "path": "site/www/data/p/step-175-0.json",
+        "status": "added"
+      },
+      {
+        "path": "site/www/data/p/step-175-1.json",
+        "status": "added"
+      },
+      {
+        "path": "site/www/data/p/step-175-2.json",
+        "status": "added"
+      },
+      {
+        "path": "site/www/data/p/step-176-0.json",
+        "status": "added"
+      },
+      {
+        "path": "site/www/data/p/step-176-1.json",
+        "status": "added"
+      },
+      {
+        "path": "site/www/data/p/step-179-0.json",
+        "status": "added"
+      },
+      {
+        "path": "site/www/data/p/step-180-0.json",
+        "status": "added"
+      },
+      {
+        "path": "site/www/data/p/step-180-1.json",
+        "status": "added"
+      },
+      {
+        "path": "site/www/data/p/step-207-0.json",
+        "status": "added"
+      },
+      {
+        "path": "site/www/data/p/step-207-1.json",
+        "status": "added"
+      },
+      {
+        "path": "site/www/data/p/step-209-0.json",
+        "status": "added"
+      },
+      {
+        "path": "site/www/data/p/step-209-1.json",
+        "status": "added"
+      },
+      {
+        "path": "site/www/data/p/step-211-0.json",
+        "status": "added"
+      },
+      {
+        "path": "site/www/data/p/step-211-1.json",
+        "status": "added"
+      },
+      {
+        "path": "site/www/data/p/step-211-2.json",
+        "status": "added"
+      },
+      {
+        "path": "site/www/data/p/step-232-0.json",
+        "status": "added"
+      },
+      {
+        "path": "site/www/data/p/step-236-0.json",
+        "status": "added"
+      },
+      {
+        "path": "site/www/data/p/step-237-0.json",
+        "status": "added"
+      },
+      {
+        "path": "site/www/data/p/step-237-1.json",
+        "status": "added"
+      },
+      {
+        "path": "site/www/data/p/step-237-2.json",
+        "status": "added"
+      },
+      {
+        "path": "site/www/data/p/step-237-3.json",
+        "status": "added"
+      },
+      {
+        "path": "site/www/data/p/step-237-4.json",
+        "status": "added"
+      },
+      {
+        "path": "site/www/data/p/step-237-5.json",
+        "status": "added"
+      },
+      {
+        "path": "site/www/data/p/step-238-0.json",
+        "status": "added"
+      },
+      {
+        "path": "site/www/data/p/step-239-0.json",
+        "status": "added"
+      },
+      {
+        "path": "site/www/data/p/step-241-0.json",
+        "status": "added"
+      },
+      {
+        "path": "site/www/data/p/step-263-0.json",
+        "status": "added"
+      },
+      {
+        "path": "site/www/data/p/step-263-1.json",
+        "status": "added"
+      }
+    ]
+  },
+  "wand125/square-packing": {
+    "total_commits": 8,
+    "commits": [
+      {
+        "sha": "aaed7d505f5d0eacb9e6eb7136d54e0a54d793a7",
+        "date": "2026-10-17T15:24:49Z",
+        "message": "Site: cubes-n-dim v2 (n = 3, 4, 5, 6)\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
+      },
+      {
+        "sha": "eff4fc99468a1a8946a59de217631d85e1f69f8c",
+        "date": "2026-10-17T23:44:48Z",
+        "message": "Site: paper icons for closed-form plots/table and the cube papers; v2 commit for cubes-n-dim\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
+      },
+      {
+        "sha": "649a92042b4b79dda1eca1749c34029aee60990e",
+        "date": "2026-10-17T23:45:52Z",
+        "message": "lean/valid7: Valid7 in the Lean kernel, version 2\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
+      },
+      {
+        "sha": "5feae404dddc610fd0d6299bdf7999778108a547",
+        "date": "2026-10-18T01:41:43Z",
+        "message": "Site: link Valid7 Lean version 2 (lean/valid7, release valid7-lean-v2)\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
+      },
+      {
+        "sha": "83980a83e877f98f9a8853a88e6985ceb24ce04a",
+        "date": "2026-10-18T01:41:44Z",
+        "message": "INDEX: list lean/rectangle-k2m4\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
+      },
+      {
+        "sha": "f735d22257a022eecc1603ecf273a6fbca6871f7",
+        "date": "2026-10-18T01:43:47Z",
+        "message": "Site: commit for Valid7 paper version 3\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
+      },
+      {
+        "sha": "b2b4bc7e59751864ae330f1b47cf5d833a0930e1",
+        "date": "2026-10-18T06:48:15Z",
+        "message": "Site: Valid7 paper wording (compute figures, cover description, Lean v2 note)\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
+      },
+      {
+        "sha": "d7afe3e525299d70de298af72cf17c581a86c0b1",
+        "date": "2026-10-18T07:10:19Z",
+        "message": "Mixed certificate: s(42) >= 2749/400 = 6.8725 (finer angle net, check2 bundle)\n\nChecked with the independent sqverify_fast; pre-publication check on a fresh Ubuntu 24.04 machine:\n2073/2073 directions VERIFIED, control refused.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
+      }
+    ],
+    "files": [
+      {
+        "path": "INDEX.json",
+        "status": "modified"
+      },
+      {
+        "path": "README.md",
+        "status": "modified"
+      },
+      {
+        "path": "checks/valid7/README.md",
+        "status": "modified"
+      },
+      {
+        "path": "docs/data/methods.json",
+        "status": "modified"
+      },
+      {
+        "path": "docs/data/themes.json",
+        "status": "modified"
+      },
+      {
+        "path": "docs/data/verify.json",
+        "status": "modified"
+      },
+      {
+        "path": "lean/valid7/Axioms7.lean",
+        "status": "added"
+      },
+      {
+        "path": "lean/valid7/README.md",
+        "status": "added"
+      },
+      {
+        "path": "lean/valid7/expected/axioms.txt",
+        "status": "added"
+      },
+      {
+        "path": "lean/valid7/expected/statement.txt",
+        "status": "added"
+      },
+      {
+        "path": "lean/valid7/fetch.sh",
+        "status": "added"
+      },
+      {
+        "path": "lean/valid7/generated-sources.sha256",
+        "status": "added"
+      },
+      {
+        "path": "lean/valid7/library.sha256",
+        "status": "added"
+      },
+      {
+        "path": "lean/valid7/receipts/axioms.log",
+        "status": "added"
+      },
+      {
+        "path": "lean/valid7/receipts/main.log",
+        "status": "added"
+      },
+      {
+        "path": "lean/valid7/release-assets.sha256",
+        "status": "added"
+      },
+      {
+        "path": "lean/valid7/verify.py",
+        "status": "added"
+      },
+      {
+        "path": "problems/square-lower-bounds/README.md",
+        "status": "modified"
+      },
+      {
+        "path": "problems/square-lower-bounds/certificates/mixed_n42_L68725/ASSET.json",
+        "status": "added"
+      },
+      {
+        "path": "problems/square-lower-bounds/certificates/mixed_n42_L68725/README.md",
+        "status": "added"
+      },
+      {
+        "path": "problems/square-lower-bounds/certificates/mixed_n42_L68725/bundle.json",
+        "status": "added"
+      },
+      {
+        "path": "problems/square-lower-bounds/certificates/mixed_n42_L68725/check2/src/INDEPENDENCE.md",
+        "status": "added"
+      },
+      {
+        "path": "problems/square-lower-bounds/certificates/mixed_n42_L68725/check2/src/REPRODUCE.md",
+        "status": "added"
+      },
+      {
+        "path": "problems/square-lower-bounds/certificates/mixed_n42_L68725/check2/src/SOUNDNESS.md",
+        "status": "added"
+      },
+      {
+        "path": "problems/square-lower-bounds/certificates/mixed_n42_L68725/check2/src/SPEC.md",
+        "status": "added"
+      },
+      {
+        "path": "problems/square-lower-bounds/certificates/mixed_n42_L68725/check2/src/UPSTREAM_COMMIT",
+        "status": "added"
+      },
+      {
+        "path": "problems/square-lower-bounds/certificates/mixed_n42_L68725/check2/src/fine_net_check.sh",
+        "status": "added"
+      },
+      {
+        "path": "problems/square-lower-bounds/certificates/mixed_n42_L68725/files-sha256.json",
+        "status": "added"
+      },
+      {
+        "path": "problems/square-lower-bounds/certificates/mixed_n42_L68725/provenance/search-notes.md",
+        "status": "added"
+      },
+      {
+        "path": "site/src/content/papers/cubes-n-dim/en.mdx",
+        "status": "modified"
+      },
+      {
+        "path": "site/src/content/papers/cubes-n-dim/ja.mdx",
+        "status": "modified"
+      },
+      {
+        "path": "site/src/content/papers/cubes-n-dim/meta.json",
+        "status": "modified"
+      },
+      {
+        "path": "site/src/content/papers/valid7/en.mdx",
+        "status": "modified"
+      },
+      {
+        "path": "site/src/content/papers/valid7/ja.mdx",
+        "status": "modified"
+      },
+      {
+        "path": "site/src/content/papers/valid7/meta.json",
+        "status": "modified"
+      },
+      {
+        "path": "site/src/lib/figures.ts",
+        "status": "modified"
+      },
+      {
+        "path": "site/src/lib/results.ts",
+        "status": "modified"
+      },
+      {
+        "path": "site/src/lib/sitemap.ts",
+        "status": "modified"
+      },
+      {
+        "path": "site/src/pages/cubes.astro",
+        "status": "modified"
+      },
+      {
+        "path": "site/src/pages/paper-cubes-n-dim.astro",
+        "status": "modified"
+      }
+    ]
+  },
+  "franciscouzo/square-packing": {
+    "total_commits": 3,
+    "commits": [
+      {
+        "sha": "23aff0c6f992271e1ad13a148d44f392c4b386c0",
+        "date": "2026-10-17T18:00:09Z",
+        "message": "Land verified October 17 packing records and source certificates\n\nAdopt the desktopo and CT105 results and newly reported public witnesses,\nretaining original construction, seed and certificate credits. Preserve\nexact Gobel/Friedman bounds and repeated L-border/deletion consequences\nthrough n=1024. Refresh previews, exact witness registries and source\nreceipts; leave private search configuration and code outside the commit.\n\nValidation: 532 retained finite witnesses with two\nexact verification routes, 438 checked previews, complete\nall-count non-regression, monotonicity, byte bindings and upward rounding;\n25 focused construction, bound-selection and certificate regression tests."
+      },
+      {
+        "sha": "af8cb7959aead318c0cf5e9f873de3caa763f77a",
+        "date": "2026-10-17T20:44:59Z",
+        "message": "Land further verified packing records through n=1024\n\nAdopt the desktopo and CT105 results and newly reported public witnesses,\nretaining original construction, seed and certificate credits. Preserve\nexact Gobel/Friedman bounds and repeated L-border/deletion consequences\nthrough n=1024. Refresh previews, exact witness registries and source\nreceipts; leave private search configuration and code outside the commit.\n\nValidation: 542 retained finite witnesses with two\nexact verification routes, 438 checked previews, complete\nall-count non-regression, monotonicity, byte bindings and upward rounding;\nfocused construction, bound-selection and certificate regression checks."
+      },
+      {
+        "sha": "c6da0fc7524d667bf3d224559724ba9b60762e60",
+        "date": "2026-10-18T05:46:00Z",
+        "message": "Land 80 verified packing bounds and source provenance\n\nUpdate 79 locally improved counts below 1024 and adopt Evan Daniel's\ncredited n=229 certificate. Retain all 542 finite source witnesses,\ncanonical packing previews, exact L-border/deletion consequences,\nparent certificates, and complete bound coverage through n=1024.\n\nPreserve construction and seed credits, publication-order findings,\nand exact checker receipts. All 79 registration rows beat the reviewed\npublic and classical comparison envelope.\n\nValidation: frozen public tree audited for 1024 non-regressing bounds,\noutward rounding, monotonicity, 438 preview bindings, and 542 witness\nbindings. Focused tests: 25 passed, one optional upstream-checkout test\nskipped; 26 passed in the working tree with that checkout available."
+      }
+    ],
+    "files": [
+      {
+        "path": "README.md",
+        "status": "modified"
+      },
+      {
+        "path": "RECORD_PROVENANCE.md",
+        "status": "added"
+      },
+      {
+        "path": "bound_sources.json",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/README.md",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/SHA256SUMS",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/manifest.json",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n155.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n204.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n227.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n229.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n236.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n260.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n271.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n29.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n330.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n339.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n364.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n367.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n368.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n370.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n378.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n379.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n382.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n403.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n406.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n407.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n416.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n417.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n418.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n419.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n421.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n422.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n444.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n445.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n447.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n448.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n452.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n458.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n459.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n460.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n461.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n462.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n463.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n464.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n489.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n491.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n493.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n501.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n502.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n503.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n505.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n507.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n509.cert",
+        "status": "added"
+      },
+      {
+        "path": "certificates/best/n536.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n538.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n541.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n542.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n543.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n545.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n546.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n547.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n548.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n549.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n551.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n553.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n554.cert",
+        "status": "added"
+      },
+      {
+        "path": "certificates/best/n555.cert",
+        "status": "added"
+      },
+      {
+        "path": "certificates/best/n586.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n588.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n589.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n590.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n592.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n593.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n595.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n598.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n600.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n602.cert",
+        "status": "added"
+      },
+      {
+        "path": "certificates/best/n603.cert",
+        "status": "added"
+      },
+      {
+        "path": "certificates/best/n626.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n635.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n636.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n638.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n639.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n641.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n642.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n647.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n650.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n651.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n652.cert",
+        "status": "added"
+      },
+      {
+        "path": "certificates/best/n653.cert",
+        "status": "added"
+      },
+      {
+        "path": "certificates/best/n654.cert",
+        "status": "added"
+      },
+      {
+        "path": "certificates/best/n677.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n686.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n688.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n690.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n693.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n700.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n701.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n702.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n703.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n704.cert",
+        "status": "added"
+      },
+      {
+        "path": "certificates/best/n705.cert",
+        "status": "added"
+      },
+      {
+        "path": "certificates/best/n706.cert",
+        "status": "added"
+      },
+      {
+        "path": "certificates/best/n730.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n740.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n749.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n750.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n751.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n752.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n753.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n754.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n755.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n756.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n757.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n758.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n759.cert",
+        "status": "added"
+      },
+      {
+        "path": "certificates/best/n760.cert",
+        "status": "added"
+      },
+      {
+        "path": "certificates/best/n785.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n795.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n804.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n805.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n806.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n807.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n809.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n811.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n812.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n813.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n814.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n815.cert",
+        "status": "added"
+      },
+      {
+        "path": "certificates/best/n816.cert",
+        "status": "added"
+      },
+      {
+        "path": "certificates/best/n817.cert",
+        "status": "added"
+      },
+      {
+        "path": "certificates/best/n842.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n847.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n848.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n849.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n853.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n861.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n863.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n864.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n865.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n866.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n867.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n868.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n869.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n870.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n871.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n872.cert",
+        "status": "added"
+      },
+      {
+        "path": "certificates/best/n873.cert",
+        "status": "added"
+      },
+      {
+        "path": "certificates/best/n874.cert",
+        "status": "added"
+      },
+      {
+        "path": "certificates/best/n875.cert",
+        "status": "added"
+      },
+      {
+        "path": "certificates/best/n901.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n906.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n907.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n908.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n912.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n919.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n921.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n922.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n923.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n924.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n925.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n926.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n927.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n928.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n929.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n930.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n931.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n932.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n933.cert",
+        "status": "added"
+      },
+      {
+        "path": "certificates/best/n934.cert",
+        "status": "added"
+      },
+      {
+        "path": "certificates/best/n935.cert",
+        "status": "added"
+      },
+      {
+        "path": "certificates/best/n962.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n964.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n967.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n968.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n969.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n974.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n985.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n987.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n989.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n990.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n991.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n992.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n993.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n994.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/best/n995.cert",
+        "status": "added"
+      },
+      {
+        "path": "certificates/best/n996.cert",
+        "status": "added"
+      },
+      {
+        "path": "certificates/best/n997.cert",
+        "status": "added"
+      },
+      {
+        "path": "certificates/best/n998.cert",
+        "status": "added"
+      },
+      {
+        "path": "certificates/n102.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n102.json",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n103.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n103.json",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n123.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n123.json",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n126.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n126.json",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n129.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n129.json",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n130.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n130.json",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n131.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n131.json",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n132.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n132.json",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n146.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n146.json",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n153.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n153.json",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n155.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n155.json",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n175.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n175.json",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n176.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n176.json",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n179.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n179.json",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n181.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n181.json",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n199.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n199.json",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n204.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n204.json",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n207.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n207.json",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n227.cert",
+        "status": "added"
+      },
+      {
+        "path": "certificates/n227.json",
+        "status": "added"
+      },
+      {
+        "path": "certificates/n229.cert",
+        "status": "added"
+      },
+      {
+        "path": "certificates/n229.json",
+        "status": "added"
+      },
+      {
+        "path": "certificates/n232.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n232.json",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n236.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n236.json",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n238.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n238.json",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n239.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n239.json",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n258.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n258.json",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n259.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n259.json",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n260.cert",
+        "status": "added"
+      },
+      {
+        "path": "certificates/n260.json",
+        "status": "added"
+      },
+      {
+        "path": "certificates/n263.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n263.json",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n264.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n264.json",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n266.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n266.json",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n269.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n269.json",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n270.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n270.json",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n271.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n271.json",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n272.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n272.json",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n292.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n292.json",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n295.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n295.json",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n303.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n303.json",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n304.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n304.json",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n307.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n307.json",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n308.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n308.json",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n327.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n327.json",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n330.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n330.json",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n339.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n339.json",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n343.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n343.json",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n344.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n344.json",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n364.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n364.json",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n365.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n365.json",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n367.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n367.json",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n368.cert",
+        "status": "added"
+      },
+      {
+        "path": "certificates/n368.json",
+        "status": "added"
+      },
+      {
+        "path": "certificates/n369.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n369.json",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n370.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n370.json",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n375.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n375.json",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n376.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n376.json",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n378.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n378.json",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n379.cert",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n379.json",
+        "status": "modified"
+      },
+      {
+        "path": "certificates/n382.cert",
+        "status": "modified"
+      }
+    ]
+  }
+}

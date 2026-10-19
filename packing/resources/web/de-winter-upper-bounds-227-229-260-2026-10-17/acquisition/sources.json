@@ -1,0 +1,101 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-10-18T12:39:07Z",
+  "git_scope": "Sparse blobless checkout of the licence, root and per-count READMEs, exact rational witnesses, claim manifests, the four stdlib replay scripts per count, source checksum lists and bounded audit receipts. Equivalent text certificates are digest-only. Figures, proof PDFs/ZIPs, float illustrations and figure-generation inputs are omitted and commit-pinned only. Issue #668 reports c95c4938f068ed44a1819ef973e770ec241aa567; the selected licensed successor changes only LICENSE and root README, leaving all count-directory blobs unchanged. No upstream code is executed.",
+  "sources": [
+    {
+      "id": "de-winter-upper-bounds-227-229-260-2026-10-17",
+      "source_url": "https://github.com/JoostdeWinter/square-packing",
+      "source_ref": "9bf5d9be4d0ca13a1dbef7d7953032fe87d4e81d",
+      "source_commit": "9bf5d9be4d0ca13a1dbef7d7953032fe87d4e81d",
+      "committed_utc": "2026-10-17T14:27:31Z",
+      "git_tree": "7a0134c72ebe7e8a3c1978b9f903bee8aa3c0291",
+      "archived_path": "packing/resources/web/de-winter-upper-bounds-227-229-260-2026-10-17/source",
+      "subtree_manifest": "packing/resources/web/de-winter-upper-bounds-227-229-260-2026-10-17/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "LICENSE",
+        "README.md",
+        "n227/README.md",
+        "n227/SHA256SUMS",
+        "n227/records.json",
+        "n227/n227_exact.json",
+        "n227/n227_record.cert",
+        "n227/n227_checks.json",
+        "n227/verify_all.py",
+        "n227/verify_exact.py",
+        "n227/verify_polygon_exact.py",
+        "n227/verify_polygon_clipping.py",
+        "n227/audit/AUDIT_SUMMARY.md",
+        "n227/audit/audit_summary.json",
+        "n227/audit/polygon_area_n227.json",
+        "n227/audit/polygon_area_negative_controls.json",
+        "n227/audit/polygon_area_self_tests.json",
+        "n229/README.md",
+        "n229/SHA256SUMS",
+        "n229/records.json",
+        "n229/n229_exact.json",
+        "n229/n229_record.cert",
+        "n229/n229_checks.json",
+        "n229/verify_all.py",
+        "n229/verify_exact.py",
+        "n229/verify_polygon_exact.py",
+        "n229/verify_polygon_clipping.py",
+        "n229/audit/AUDIT_SUMMARY.md",
+        "n229/audit/audit_summary.json",
+        "n229/audit/polygon_area_n229.json",
+        "n229/audit/polygon_area_negative_controls.json",
+        "n229/audit/polygon_area_self_tests.json",
+        "n260/README.md",
+        "n260/SHA256SUMS",
+        "n260/records.json",
+        "n260/n260_exact.json",
+        "n260/n260_record.cert",
+        "n260/n260_checks.json",
+        "n260/verify_all.py",
+        "n260/verify_exact.py",
+        "n260/verify_polygon_exact.py",
+        "n260/verify_polygon_clipping.py",
+        "n260/audit/AUDIT_SUMMARY.md",
+        "n260/audit/audit_summary.json",
+        "n260/audit/polygon_area_n260.json",
+        "n260/audit/polygon_area_negative_controls.json",
+        "n260/audit/polygon_area_self_tests.json"
+      ],
+      "subtree_file_count": 47,
+      "subtree_total_bytes": 711597,
+      "retained_file_count": 44,
+      "retained_total_bytes": 492606,
+      "compressed": [
+        "source/n227/n227_exact.json.gz",
+        "source/n229/n229_exact.json.gz",
+        "source/n260/n260_exact.json.gz"
+      ],
+      "pinned_only": [
+        {
+          "path": "n227/n227_record.cert",
+          "bytes": 94509,
+          "sha256": "7d386887c4acdfe2472c0b83fff54e76eae76d414fef9ddc45478d0e03011d1f",
+          "reason": "Equivalent rational text export; authoritative exact JSON retained, so avoid redundant witness data."
+        },
+        {
+          "path": "n229/n229_record.cert",
+          "bytes": 95257,
+          "sha256": "34ddede798ec3bc6ff9e94fd4c12ee12207946dd43435001e8ac9e9aacdde419",
+          "reason": "Equivalent rational text export; authoritative exact JSON retained, so avoid redundant witness data."
+        },
+        {
+          "path": "n260/n260_record.cert",
+          "bytes": 29225,
+          "sha256": "df90e58d702555c8487a93f34b023f43903cb116c42ed50623d429dba2252d31",
+          "reason": "Equivalent rational text export; authoritative exact JSON retained, so avoid redundant witness data."
+        }
+      ],
+      "license": "MIT, copyright (c) 2026 Joost de Winter, added in 9bf5d9be at 2026-10-17T14:27:31Z; LICENSE retained. The earlier issue pin c95c4938 has no licence file. Source credit is Joost de Winter with OpenAI Codex agents under his direction; issue #668 additionally discloses Claude replay/publication preparation.",
+      "claims": [
+        "Issue #668 reports s(227) <= 15.563796703670, s(229) <= 15.650174756949 and s(260) <= 16.645778804182, rounded upward from authoritative exact rational sides in each records.json and nN_exact.json, against catalogue commit 804eff369193b698d497a9c06847059eb9de0470.",
+        "Three counts from one Young-corner/slipped-ribbon construction family; n229 descends from n260. No optimality, uniqueness or exhaustive worldwide novelty claimed. Source metadata date 2026-10-17; original witness commit c95c4938 published at 13:52:56Z and issue #668 at 14:06:25Z.",
+        "Each per-count verify_all.py reads records.json and nN_exact.json and imports verify_exact.py, verify_polygon_exact.py and verify_polygon_clipping.py. All use Python 3.10+ standard library and shared Fraction/witness inputs within one AI-assisted campaign. Source audit receipts are retained assertions; acquisition does not replay them or establish checker independence."
+      ]
+    }
+  ]
+}

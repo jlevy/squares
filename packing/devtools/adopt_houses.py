@@ -423,6 +423,20 @@ RESULTS: dict[str, Prose] = {
             "orchestration and the issue’s preparation, directed by the author."
         ),
     ),
+    "T-174": Prose(
+        author="PingYou Ltd",
+        reported="in [pull request #574](https://github.com/jlevy/squares/pull/574)",
+        producer_route=False,
+        ai=(
+            "The source makes no statement about AI assistance in this pull request; for "
+            "its #503 and #504 certificates the author said on 12 October 2026 that they "
+            "were AI assisted by ‘PY’, an unreleased agentic AI offering by PingYou Ltd."
+        ),
+        routes=(
+            "The source ran both maintained routes itself on its corners witnesses; those "
+            "runs are its own, and the replay here is independently re-implemented."
+        ),
+    ),
     "T-175": Prose(
         author="Daniil Ostashev",
         reported="on [jlevy/squares#575](https://github.com/jlevy/squares/issues/575)",
@@ -526,6 +540,21 @@ RESULTS: dict[str, Prose] = {
             "the work."
         ),
     ),
+    "T-195": Prose(
+        author="PingYou Ltd",
+        reported="in [pull request #622](https://github.com/jlevy/squares/pull/622)",
+        producer_route=False,
+        ai=(
+            "The author says all of its submissions are PingYou Ltd’s, assisted by the PY "
+            "agentic offering."
+        ),
+        routes=(
+            "The source ran both maintained routes itself on its corners witness, so on them "
+            "the replay reproduces its runs; the third route and the review’s clean-room "
+            "checker, which share no code with any check it ran, are independently "
+            "re-implemented."
+        ),
+    ),
 }
 
 XU = "Ryan Xu"
@@ -546,25 +575,25 @@ class Credit:
     found_by: tuple[str, ...]
     improved_by: tuple[str, ...]
     phrase: str
+    #: The year the packing was found, where its house's certificate is of a later year:
+    #: a tighter certificate of an earlier finder's packing leaves the packing with its
+    #: finder and its year (review A's A7 of #661). Unset, the house's own year.
+    found_year: int | None = None
+    #: Whether the house is the replaced reported lane's own packing, measured pose for
+    #: pose with no square turned (the result's `regularizations`), so the lane keeps
+    #: what the record knew of that packing, `PACKING_FACTS` (review C6 of #661).
+    same_packing: bool = False
+
+
+#: What a reported lane says of its packing rather than of its certificate, carried to a
+#: house that is the same packing (`Credit.same_packing`), and otherwise not known.
+PACKING_FACTS = ("analytically_optimized", "construction_method", "tilt_angles_deg")
 
 
 def _couzo(start: str) -> Credit:
     finder = XU if start == "Xu" else SQUISH
     whose = "Ryan Xu’s" if start == "Xu" else "Nate Chaoweeraprasit’s SQUISH"
     return Credit((finder,), (COUZO,), f"Francisco Couzo’s refinement of {whose} packing")
-
-
-def _mondrian(pieces: str) -> Credit:
-    """A SQUISH Mondrian composition, with the pieces as its source names them (T-151)."""
-    return Credit(
-        (SQUISH,), (), f"Nate Chaoweeraprasit’s SQUISH packing, composed from {pieces}"
-    )
-
-
-def _composed(what: str) -> Credit:
-    """Daniil Ostashev's composition with his 38-square rectangle, as his issue names the
-    pieces (T-158); the pieces' sources are acknowledged, the packing is his."""
-    return Credit((OSTASHEV,), (), f"Daniil Ostashev’s composition of {what}")
 
 
 def _regularized(finder: str, whose: str, *, via: str | None = None) -> Credit:
@@ -581,27 +610,84 @@ def _regularized(finder: str, whose: str, *, via: str | None = None) -> Credit:
 #: tables of the reviews that recommended each house; a regularization leaves the packing
 #: with its finder (`T-146`'s `regularizations`).
 CREDITS: dict[int, Credit] = {
+    # PingYou Ltd's tighter certificate of the packing the Kingbird catalogue credits to
+    # Thomas Schadt, improved by David Ellsworth (T-195's regularization of T-009); padding
+    # only, as the source says. The packing is of 2025, as n-029.md's reported lane and the
+    # release asset's credits say; the certificate is of 2026.
+    29: Credit(
+        ("Thomas Schadt",),
+        ("David Ellsworth", PINGYOU),
+        "PingYou Ltd’s tighter certificate of Thomas Schadt’s packing, as David Ellsworth "
+        "improved it",
+        found_year=2025,
+        same_packing=True,
+    ),
+    # T-174's regularization of T-118's packing, 22 squares moved beyond 1e-3, one to one;
+    # that it is that packing is the source's statement (the 14 October review of PR 574).
+    68: Credit(
+        (COUZO,),
+        ("Seth Rehwaldt", PINGYOU),
+        "PingYou Ltd’s refinement of Seth Rehwaldt’s refinement of Francisco Couzo’s packing",
+    ),
     70: _regularized(XU, "Ryan Xu’s"),
-    84: _couzo("Xu"),
-    86: _couzo("Xu"),
+    # T-174's regularization of T-130's packing, 45 squares moved beyond 1e-3, one to one;
+    # that it is that packing is the source's statement (the 14 October review of PR 574).
+    84: Credit(
+        (XU,),
+        (COUZO, PINGYOU),
+        "PingYou Ltd’s refinement of Francisco Couzo’s refinement of Ryan Xu’s packing",
+    ),
+    # T-174's regularization of T-130's packing, 64 squares moved beyond 1e-3, one to one;
+    # that it is that packing is the source's statement (the 14 October review of PR 574).
+    86: Credit(
+        (XU,),
+        (COUZO, PINGYOU),
+        "PingYou Ltd’s refinement of Francisco Couzo’s refinement of Ryan Xu’s packing",
+    ),
     102: _regularized(XU, "Ryan Xu’s"),
-    103: _regularized(XU, "Ryan Xu’s", via="Mishapolk"),
-    # PingYou Ltd's tighter certificate of Couzo's packing, padding only (T-170's
-    # regularization of T-130, measured by the 14 October review).
+    # T-174's regularization of T-146's view, measured one to one, no square moved beyond
+    # 1e-12 (the 14 October review of PR 574).
+    103: Credit(
+        (XU,),
+        (POLKOVSKYI, DANIEL, PINGYOU),
+        "PingYou Ltd’s tighter certificate of Evan Daniel’s display regularization of Ryan "
+        "Xu’s packing as Mykhailo Polkovskyi refined it",
+    ),
+    # T-174's regularization of T-130's packing, as T-170 padded it, measured one to one,
+    # no square moved beyond 1e-12 (the 14 October review of PR 574).
     105: Credit(
         (XU,),
         (COUZO, PINGYOU),
         "PingYou Ltd’s tighter certificate of Francisco Couzo’s refinement of Ryan Xu’s "
         "packing",
     ),
-    108: _couzo("Xu"),
+    # T-174's regularization of T-128's packing, 13 squares moved beyond 1e-3, one to one;
+    # that it is that packing is the source's statement (the 14 October review of PR 574).
+    108: Credit(
+        (XU,),
+        (COUZO, PINGYOU),
+        "PingYou Ltd’s refinement of Francisco Couzo’s refinement of Ryan Xu’s packing",
+    ),
+    # T-174's regularization of T-098's packing, 5 squares moved beyond 1e-3, one to one;
+    # that it is that packing is the source's statement (the 14 October review of PR 574).
+    110: Credit(
+        (COUZO,),
+        (DANIEL, PINGYOU),
+        "PingYou Ltd’s refinement of Evan Daniel’s exact optimum of Francisco Couzo’s packing",
+    ),
     123: _regularized(XU, "Ryan Xu’s"),
     126: Credit(
         (XU,),
         (DANIEL,),
         "Evan Daniel’s reconstruction and exact certificate of Ryan Xu’s arrangement",
     ),
-    127: _couzo("Xu"),
+    # T-174's regularization of T-128's packing, 53 squares moved beyond 1e-3, one to one;
+    # that it is that packing is the source's statement (the 14 October review of PR 574).
+    127: Credit(
+        (XU,),
+        (COUZO, PINGYOU),
+        "PingYou Ltd’s refinement of Francisco Couzo’s refinement of Ryan Xu’s packing",
+    ),
     # Mykhailo Polkovskyi's KKT refinement of PR 574's re-solve of issue 562's packing
     # (T-186's regularization of T-174), no square moved beyond 1e-3.
     129: Credit(
@@ -610,8 +696,28 @@ CREDITS: dict[int, Credit] = {
         "Mykhailo Polkovskyi’s refinement of Daniil Ostashev’s n = 129 packing, as PingYou "
         "Ltd refined it",
     ),
-    131: Credit((SQUISH,), (), "Nate Chaoweeraprasit’s SQUISH packing"),
-    132: Credit((DANIEL,), (), "Evan Daniel’s record-hunt packing"),
+    # T-174's regularization of T-127's packing, 15 squares moved beyond 1e-3, one to one;
+    # that it is that packing is the source's statement (the 14 October review of PR 574).
+    130: Credit(
+        (SQUISH,),
+        ("Siddharth Gupta", PINGYOU),
+        "PingYou Ltd’s refinement of Siddharth Gupta’s refinement of Nate Chaoweeraprasit’s "
+        "SQUISH packing",
+    ),
+    # T-174's regularization of T-136's packing, measured one to one, no square moved
+    # beyond 1e-12 (the 14 October review of PR 574).
+    131: Credit(
+        (SQUISH,),
+        (PINGYOU,),
+        "PingYou Ltd’s tighter certificate of Nate Chaoweeraprasit’s SQUISH packing",
+    ),
+    # T-174's regularization of T-141's packing, 18 squares moved beyond 1e-3, one to one;
+    # that it is that packing is the source's statement (the 14 October review of PR 574).
+    132: Credit(
+        (DANIEL,),
+        (PINGYOU,),
+        "PingYou Ltd’s refinement of Evan Daniel’s record-hunt packing",
+    ),
     # Evan Daniel's chain search from Ryan Xu's packing: another arrangement of Xu's design,
     # nine squares beyond a tenth against Xu's and Barnett's (RT-5 of the 16 October
     # review; T-187 records no regularization).
@@ -633,7 +739,13 @@ CREDITS: dict[int, Credit] = {
         "Mykhailo Polkovskyi’s refinement of Francisco Couzo’s further arrangement of Evan "
         "Daniel’s n = 154 packing",
     ),
-    155: Credit((OSTASHEV,), (), "Daniil Ostashev’s packing"),
+    # T-174's regularization of T-149's packing, 3 squares moved beyond 1e-3, one to one;
+    # that it is that packing is the source's statement (the 14 October review of PR 574).
+    155: Credit(
+        (OSTASHEV,),
+        (PINGYOU,),
+        "PingYou Ltd’s refinement of Daniil Ostashev’s packing",
+    ),
     # PR 574's padding of issue 561's continuation of Ostashev's packing, padded again
     # (T-186's regularization of T-174; RT-4).
     156: Credit(
@@ -641,6 +753,13 @@ CREDITS: dict[int, Credit] = {
         (COUZO, PINGYOU, POLKOVSKYI),
         "Mykhailo Polkovskyi’s tighter certificate of Francisco Couzo’s continuation of "
         "Daniil Ostashev’s n = 156 packing, after PingYou Ltd’s",
+    ),
+    # T-174's regularization of T-098's packing, 69 squares moved beyond 1e-3, one to one;
+    # that it is that packing is the source's statement (the 14 October review of PR 574).
+    172: Credit(
+        (COUZO,),
+        (DANIEL, PINGYOU),
+        "PingYou Ltd’s refinement of Evan Daniel’s exact optimum of Francisco Couzo’s packing",
     ),
     # PR 574's padding of issue 528's composition, padded again (T-186's regularization of
     # T-174).
@@ -659,19 +778,36 @@ CREDITS: dict[int, Credit] = {
         "Mykhailo Polkovskyi’s exact re-solve of Daniil Ostashev’s issue-575 n = 176 "
         "packing, after PingYou Ltd’s",
     ),
+    # T-174's regularization of T-127's packing, 42 squares moved beyond 1e-3, one to one;
+    # that it is that packing is the source's statement (the 14 October review of PR 574).
+    179: Credit(
+        (SQUISH,),
+        ("Siddharth Gupta", PINGYOU),
+        "PingYou Ltd’s refinement of Siddharth Gupta’s refinement of Nate Chaoweeraprasit’s "
+        "SQUISH packing",
+    ),
+    # T-174's regularization of T-128's packing, 25 squares moved beyond 1e-3, one to one;
+    # that it is that packing is the source's statement (the 14 October review of PR 574).
     180: Credit(
         (SQUISH,),
-        ("Siddharth Gupta", COUZO),
-        "Francisco Couzo’s refinement of Nate Chaoweeraprasit’s SQUISH packing, "
-        "as Siddharth Gupta refined it",
+        ("Siddharth Gupta", COUZO, PINGYOU),
+        "PingYou Ltd’s refinement of Francisco Couzo’s refinement of Nate Chaoweeraprasit’s "
+        "SQUISH packing, after Siddharth Gupta’s",
     ),
-    181: _mondrian("two of SQUISH’s own n = 154 packings"),
-    # By pose an exact re-solve of PingYou Ltd's packing (RQ-5 of the 14 October review).
-    207: Credit(
+    # T-174's regularization of T-151's packing re-solved, measured one to one, no square
+    # moved beyond 1.5e-4 (the 14 October review of PR 574).
+    181: Credit(
+        (SQUISH,),
         (PINGYOU,),
-        ("Mishapolk",),
-        "Mykhailo Polkovskyi’s exact re-solve of PingYou Ltd’s assembly of two placed "
-        "patches of Ryan Xu’s n = 70 packing, from Evan Daniel’s exact certificate of it",
+        "PingYou Ltd’s exact re-solve of Nate Chaoweeraprasit’s SQUISH packing composed "
+        "from two of SQUISH’s own n = 154 packings",
+    ),
+    # T-174's regularization of T-098's packing, 27 squares moved beyond 1e-3, one to one;
+    # that it is that packing is the source's statement (the 14 October review of PR 574).
+    182: Credit(
+        (COUZO,),
+        (DANIEL, PINGYOU),
+        "PingYou Ltd’s refinement of Evan Daniel’s exact optimum of Francisco Couzo’s packing",
     ),
     # PR 574's re-solve of issue 562's packing, re-solved again (T-186's regularization of
     # T-174), two squares moved beyond 1e-3.
@@ -681,7 +817,44 @@ CREDITS: dict[int, Credit] = {
         "Mykhailo Polkovskyi’s refinement of Daniil Ostashev’s n = 204 packing, as PingYou "
         "Ltd refined it",
     ),
-    209: _couzo("SQUISH"),
+    # T-174's regularization of T-098's packing, measured one to one, no square moved
+    # beyond 1e-12 (the 14 October review of PR 574).
+    206: Credit(
+        (COUZO,),
+        (DANIEL, PINGYOU),
+        "PingYou Ltd’s tighter certificate of Evan Daniel’s exact optimum of Francisco "
+        "Couzo’s packing",
+    ),
+    # By pose an exact re-solve of PingYou Ltd's packing (RQ-5 of the 14 October review).
+    207: Credit(
+        (PINGYOU,),
+        ("Mishapolk",),
+        "Mykhailo Polkovskyi’s exact re-solve of PingYou Ltd’s assembly of two placed "
+        "patches of Ryan Xu’s n = 70 packing, from Evan Daniel’s exact certificate of it",
+    ),
+    # T-174's regularization of T-127's packing, 20 squares moved beyond 1e-3, one to one;
+    # that it is that packing is the source's statement (the 14 October review of PR 574).
+    208: Credit(
+        (SQUISH,),
+        ("Siddharth Gupta", PINGYOU),
+        "PingYou Ltd’s refinement of Siddharth Gupta’s refinement of Nate Chaoweeraprasit’s "
+        "SQUISH packing",
+    ),
+    # T-174's regularization of T-140's packing, 23 squares moved beyond 1e-3, one to one;
+    # that it is that packing is the source's statement (the 14 October review of PR 574).
+    209: Credit(
+        (SQUISH,),
+        (COUZO, PINGYOU),
+        "PingYou Ltd’s refinement of Francisco Couzo’s refinement of Nate Chaoweeraprasit’s "
+        "SQUISH packing",
+    ),
+    # T-174's regularization of T-098's packing, 33 squares moved beyond 1e-3, one to one;
+    # that it is that packing is the source's statement (the 14 October review of PR 574).
+    210: Credit(
+        (COUZO,),
+        (DANIEL, PINGYOU),
+        "PingYou Ltd’s refinement of Evan Daniel’s exact optimum of Francisco Couzo’s packing",
+    ),
     # Couzo's further arrangement of Ostashev's issue-575 design, five squares beyond a
     # tenth against T-182 and T-175 (RT-1 of the 16 October review; T-188 records no
     # regularization).
@@ -690,7 +863,13 @@ CREDITS: dict[int, Credit] = {
         (COUZO,),
         "Francisco Couzo’s further arrangement of Daniil Ostashev’s n = 211 design",
     ),
-    228: Credit((COUZO,), (), "Francisco Couzo’s refinement of his own packing"),
+    # T-174's regularization of T-128's packing, 46 squares moved beyond 1e-3, one to one;
+    # that it is that packing is the source's statement (the 14 October review of PR 574).
+    228: Credit(
+        (COUZO,),
+        (PINGYOU,),
+        "PingYou Ltd’s refinement of Francisco Couzo’s refinement of his own packing",
+    ),
     # PR 574's re-solve of issue 528's composition, re-solved again (T-186's
     # regularization of T-174).
     232: Credit(
@@ -709,9 +888,29 @@ CREDITS: dict[int, Credit] = {
         "Francisco Couzo’s refinement of Mykhailo Polkovskyi’s arrangement of Couzo’s "
         "design, after Nate Chaoweeraprasit’s SQUISH packing",
     ),
-    238: _mondrian("SQUISH’s own n = 305 and n = 154 packings"),
-    239: _mondrian(
-        "SQUISH’s n = 209 packing as Siddharth Gupta refined it and its own n = 240 packing"
+    # T-174's regularization of T-151's packing, measured one to one, no square moved
+    # beyond 1e-12 (the 14 October review of PR 574).
+    238: Credit(
+        (SQUISH,),
+        (PINGYOU,),
+        "PingYou Ltd’s tighter certificate of Nate Chaoweeraprasit’s SQUISH packing "
+        "composed from SQUISH’s own n = 305 and n = 154 packings",
+    ),
+    # T-174's regularization of T-151's packing re-solved, measured one to one, no square
+    # moved beyond 1.5e-4 (the 14 October review of PR 574).
+    239: Credit(
+        (SQUISH,),
+        (PINGYOU,),
+        "PingYou Ltd’s exact re-solve of Nate Chaoweeraprasit’s SQUISH packing composed "
+        "from SQUISH’s n = 209 packing as Siddharth Gupta refined it and its own n = 240 "
+        "packing",
+    ),
+    # T-174's regularization of T-098's packing, 28 squares moved beyond 1e-3, one to one;
+    # that it is that packing is the source's statement (the 14 October review of PR 574).
+    240: Credit(
+        (COUZO,),
+        (DANIEL, PINGYOU),
+        "PingYou Ltd’s refinement of Evan Daniel’s exact optimum of Francisco Couzo’s packing",
     ),
     241: Credit(
         (OSTASHEV,),
@@ -720,14 +919,21 @@ CREDITS: dict[int, Credit] = {
     ),
     258: _regularized(SQUISH, "Nate Chaoweeraprasit’s SQUISH", via="Mishapolk"),
     259: Credit((SQUISH,), (), "Nate Chaoweeraprasit’s SQUISH packing"),
-    # Barnett's packing re-solved, no square moved beyond 2e-06 (T-169's regularization
-    # of T-150).
+    # T-174's regularization of T-169's re-solve, measured one to one, no square moved
+    # beyond 1e-12 (the 14 October review of PR 574).
     261: Credit(
         (XU,),
         (BARNETT, PINGYOU),
         "PingYou Ltd’s exact re-solve of Robert Barnett’s refinement of Ryan Xu’s packing",
     ),
-    263: _regularized(SQUISH, "Nate Chaoweeraprasit’s SQUISH"),
+    # T-174's regularization of T-146's view, measured one to one, no square moved beyond
+    # 1e-12 (the 14 October review of PR 574).
+    263: Credit(
+        (SQUISH,),
+        (DANIEL, PINGYOU),
+        "PingYou Ltd’s tighter certificate of Evan Daniel’s display regularization of Nate "
+        "Chaoweeraprasit’s SQUISH packing",
+    ),
     # PR 574's padding of issue 528's composition, padded again (T-186's regularization of
     # T-174).
     264: Credit(
@@ -738,10 +944,30 @@ CREDITS: dict[int, Credit] = {
         "Daniel’s exact optimum of Joost de Winter’s n = 126 packing",
     ),
     267: _couzo("Xu"),
-    269: _regularized(SQUISH, "Nate Chaoweeraprasit’s SQUISH"),
-    270: _mondrian(
-        "SQUISH’s issue 481 n = 209 packing, whole, and the Kingbird catalogue’s former "
-        "n = 19 packing"
+    # T-174's regularization of T-098's packing, 117 squares moved beyond 1e-3, one to
+    # one; that it is that packing is the source's statement (the 14 October review of PR
+    # 574).
+    268: Credit(
+        (COUZO,),
+        (DANIEL, PINGYOU),
+        "PingYou Ltd’s refinement of Evan Daniel’s exact optimum of Francisco Couzo’s packing",
+    ),
+    # T-174's regularization of T-146's view, measured one to one, no square moved beyond
+    # 1e-12 (the 14 October review of PR 574).
+    269: Credit(
+        (SQUISH,),
+        (DANIEL, PINGYOU),
+        "PingYou Ltd’s tighter certificate of Evan Daniel’s display regularization of Nate "
+        "Chaoweeraprasit’s SQUISH packing",
+    ),
+    # T-174's regularization of T-151's packing, measured one to one, no square moved
+    # beyond 1e-12 (the 14 October review of PR 574).
+    270: Credit(
+        (SQUISH,),
+        (PINGYOU,),
+        "PingYou Ltd’s tighter certificate of Nate Chaoweeraprasit’s SQUISH packing "
+        "composed from SQUISH’s issue 481 n = 209 packing, whole, and the Kingbird "
+        "catalogue’s former n = 19 packing",
     ),
     # PR 574's padding of issue 561's refinement of SQUISH's packing, padded again
     # (T-186's regularization of T-174; RT-4: whether T-161 lists T-151 is the owner's).
@@ -751,15 +977,30 @@ CREDITS: dict[int, Credit] = {
         "Mykhailo Polkovskyi’s tighter certificate, after PingYou Ltd’s, of Francisco "
         "Couzo’s refinement of Nate Chaoweeraprasit’s SQUISH packing",
     ),
-    # SQUISH's packing re-solved, no square moved beyond 2e-07 (T-171's regularization of
-    # T-151).
+    # T-174's regularization of T-151's packing, as T-171 re-solved it, measured one to
+    # one, no square moved beyond 1.5e-4 (the 14 October review of PR 574).
     272: Credit(
         (SQUISH,),
         (PINGYOU,),
         "PingYou Ltd’s exact re-solve of Nate Chaoweeraprasit’s SQUISH packing",
     ),
+    # T-174's regularization of T-098's packing, 49 squares moved beyond 1e-3, one to one;
+    # that it is that packing is the source's statement (the 14 October review of PR 574).
+    273: Credit(
+        (COUZO,),
+        (DANIEL, PINGYOU),
+        "PingYou Ltd’s refinement of Evan Daniel’s exact optimum of Francisco Couzo’s packing",
+    ),
     292: _regularized(SQUISH, "Nate Chaoweeraprasit’s SQUISH"),
     295: _regularized(XU, "Ryan Xu’s"),
+    # T-174's regularization of T-098's packing, 119 squares moved beyond 1e-3, one to
+    # one; that it is that packing is the source's statement (the 14 October review of PR
+    # 574).
+    297: Credit(
+        (COUZO,),
+        (DANIEL, PINGYOU),
+        "PingYou Ltd’s refinement of Evan Daniel’s exact optimum of Francisco Couzo’s packing",
+    ),
     # Issue 583's continuation of PingYou Ltd's arrangement, padded (T-186's
     # regularization of T-181; RT-4).
     302: Credit(
@@ -782,17 +1023,34 @@ CREDITS: dict[int, Credit] = {
         (POLKOVSKYI,),
         "Mykhailo Polkovskyi’s tighter certificate of Daniil Ostashev’s n = 304 packing",
     ),
+    # T-174's regularization of T-152's packing, measured one to one, no square moved
+    # beyond 1e-12 (the 14 October review of PR 574).
     305: Credit(
         (SQUISH,),
-        (COUZO,),
-        "Francisco Couzo’s refinement of Nate Chaoweeraprasit’s SQUISH Mondrian packing",
+        (COUZO, PINGYOU),
+        "PingYou Ltd’s tighter certificate of Francisco Couzo’s refinement of Nate "
+        "Chaoweeraprasit’s SQUISH Mondrian packing",
     ),
-    306: Credit((COUZO,), (), "Francisco Couzo’s refinement of his own packing"),
-    307: Credit((SQUISH,), (), "Nate Chaoweeraprasit’s SQUISH packing"),
+    # T-174's regularization of T-128's packing, 34 squares moved beyond 1e-3, one to one;
+    # that it is that packing is the source's statement (the 14 October review of PR 574).
+    306: Credit(
+        (COUZO,),
+        (PINGYOU,),
+        "PingYou Ltd’s refinement of Francisco Couzo’s refinement of his own packing",
+    ),
+    # T-174's regularization of T-136's packing re-solved, measured one to one, no square
+    # moved beyond 1.5e-4 (the 14 October review of PR 574).
+    307: Credit(
+        (SQUISH,),
+        (PINGYOU,),
+        "PingYou Ltd’s exact re-solve of Nate Chaoweeraprasit’s SQUISH packing",
+    ),
+    # T-174's regularization of T-141's packing, 25 squares moved beyond 1e-3, one to one;
+    # that it is that packing is the source's statement (the 14 October review of PR 574).
     308: Credit(
         ("Kevin Fang",),
-        (DANIEL,),
-        "Evan Daniel’s move of Kevin Fang’s two-wedge construction",
+        (DANIEL, PINGYOU),
+        "PingYou Ltd’s refinement of Evan Daniel’s move of Kevin Fang’s two-wedge construction",
     ),
 }
 
@@ -957,8 +1215,10 @@ def _claims(path: Path) -> Mapping[int, str]:
     return load_claims(path)
 
 
-#: The most places a house's side is printed at to stay below the house it replaces.
-MAX_PLACES = 40
+#: The most places a house's side is printed at to stay below the house it replaces: 40
+#: until 17 October 2026, when T-174's 68 came in 4.58e-61 below Seth Rehwaldt's exact
+#: 59-place print (T-118), which 40 places tie.
+MAX_PLACES = 72
 
 
 def shown(side: Fraction, above: object = None) -> str:
@@ -1164,18 +1424,30 @@ def reported_bound(move: Move) -> dict[str, Any]:
     house, credit = move.house, CREDITS[move.n]
     bibliography = _bibliography()[house.source_key]
     origin = houses.source_for(move.n).origin(move.n)
+    replaced = move.packing["reported_upper_bound"]
+    known: dict[str, Any] = {
+        "analytically_optimized": None,
+        "construction_method": "unknown",
+        "tilt_angles_deg": None,
+    }
+    if credit.same_packing:
+        known = {field: replaced.get(field, known[field]) for field in PACKING_FACTS}
     return {
         "value": _value(house, _above(move)),
         "exact_form": houses.legacy.literal(move.side),
         "evidence": list(house.report_evidence),
         "algebraic_degree": 1,
         "minimal_polynomial": None,
-        "analytically_optimized": None,
+        "analytically_optimized": known["analytically_optimized"],
         "catalogue_rigid": "not-stated",
-        "construction_method": "unknown",
-        "tilt_angles_deg": None,
+        "construction_method": known["construction_method"],
+        "tilt_angles_deg": known["tilt_angles_deg"],
         "found_by": list(credit.found_by),
-        "found_year": date.fromisoformat(house.published).year,
+        "found_year": (
+            credit.found_year
+            if credit.found_year is not None
+            else date.fromisoformat(house.published).year
+        ),
         "improved_by": list(credit.improved_by),
         "catalogue_pictured": False,
         "source_key": house.source_key,
@@ -1217,10 +1489,17 @@ def history_note(move: Move) -> dict[str, Any]:
     claimed = [*(upper.get("found_by") or ()), *(upper.get("improved_by") or ())]
     since = held_since(move.packing)
     held = f"from {since} until" if since else "until"
+    earlier = f"{upper['value']} from {upper['source_key']}"
+    if _lanes_differ(move.packing):
+        results = ", ".join(_earlier(move.packing)) or "its verified evidence"
+        earlier = (
+            f"{_ceiling(move.packing)} from {results} (reported as {upper['value']} from "
+            f"{upper['source_key']})"
+        )
     return {
         "claim": (
-            f"Earlier house {upper['value']} from {upper['source_key']}, the case’s ceiling "
-            f"{held} {day_words(move.n)}; its certificate and replay remain retained."
+            f"Earlier house {earlier}, the case’s ceiling {held} {day_words(move.n)}; its "
+            "certificate and replay remain retained."
         ),
         "claimed_by": [RECORD_NAMES.get(str(name), str(name)) for name in claimed],
         "published": upper.get("source_date"),
@@ -1343,16 +1622,58 @@ def _finally_reviewed(result: str) -> bool:
     return any(r["path"] == FINAL_REVIEW for r in entry["reviews"])
 
 
+def _lanes_differ(packing: Mapping[str, Any]) -> bool:
+    """Whether the replaced record's reported and verified upper bounds are two numbers.
+
+    Where they are, the ceiling a house is measured from is the verified one, and the
+    reported one is said apart (review C3 of #661): at 29 the catalogue's print
+    5.93383346267692 beside T-155's exact side."""
+    reported = packing["reported_upper_bound"]["value"]
+    verified = packing["verified_upper_bound"]["value"]
+    return Decimal(str(reported)) != Decimal(str(verified))
+
+
+def _ceiling(packing: Mapping[str, Any]) -> str:
+    """The margin's verified baseline where the lanes differ, not its retained display."""
+    if _lanes_differ(packing):
+        return str(packing["verified_upper_bound"]["exact_form"])
+    return str(packing["reported_upper_bound"]["value"])
+
+
+def _reported_apart(move: Move) -> str:
+    """What the replaced reported bound says of the new side, where it is a number apart
+    from the verified ceiling: a print orders a side only beyond one unit of its last
+    place, so inside that unit it orders nothing (`check_source_coverage.print_order`)."""
+    if not _lanes_differ(move.packing):
+        return ""
+    upper = move.packing["reported_upper_bound"]
+    printed = Decimal(str(upper["value"]))
+    bound, side = Fraction(printed), Fraction(move.side)
+    unit = Fraction(Decimal(1).scaleb(int(printed.as_tuple().exponent)))
+    if side < bound:
+        relation = f"lies `{_sci(bound - side)}` above the new side"
+    elif side < bound + unit and printed != printed.to_integral_value():
+        relation = (
+            f"is a print `{_sci(side - bound)}` below the new side, within one unit of its "
+            "last place, so it does not order them"
+        )
+    else:
+        relation = f"lies `{_sci(side - bound)}` below the new side"
+    return (
+        f"; the reported upper bound it replaces, ${upper['value']}$ from "
+        f"{upper['source_key']}, {relation}"
+    )
+
+
 def opening(move: Move) -> str:
     n, house, credit = move.n, move.house, CREDITS[move.n]
-    upper = move.packing["reported_upper_bound"]
     return (
         f"**House adoption, {day_words(n)}.** {credit.phrase[0].upper()}{credit.phrase[1:]} "
         f"({house.result}) is now this case’s house: its exact certificate proves "
         f"$s({n}) \\le {shown(move.side, _above(move))}$, the reported and the verified "
         f"upper bound, `{_sci(move.selection.margin)}` below the ceiling the case held until "
-        f"then, ${upper['value']}$ from {_holder(move.packing)}, which stays retained as "
-        f"history ([the certificate](#{_anchor(move)}))."
+        f"then, ${_ceiling(move.packing)}$ from {_holder(move.packing)}, which stays retained "
+        f"as history{_reported_apart(move)} ([the certificate](#{_anchor(move)}))."
     )
 
 
@@ -1429,10 +1750,9 @@ def section(move: Move) -> str:
         for c in move.selection.candidates
         if c is not house and c.result not in earlier and c not in held
     ]
-    upper = move.packing["reported_upper_bound"]
     history = (
-        f"The house it replaces, ${upper['value']}$ from {_holder(move.packing)}, stays "
-        "retained with its own replay as history."
+        f"The house it replaces, ${_ceiling(move.packing)}$ from {_holder(move.packing)}, "
+        "stays retained with its own replay as history."
     )
     if others:
         listed = _join([f"{c.result} at ${display(c.side)}$" for c in others])
@@ -1911,6 +2231,12 @@ def _section_span(text: str, key: str) -> tuple[int, int]:
 
 #: The clause of a displaced house's row that names the certificate below it.
 DISPLACED_BY = re.compile(r"and T-\d+'s exact side is smaller\.$")
+#: A superseded row's words for the house above which its report lies, as `_unaccounted`
+#: writes them or a pass wrote them by hand: a later house is smaller still, so the report
+#: lies above it too, and the row names it (n = 305's issue-489 row, 17 October 2026).
+ABOVE_HOUSE = re.compile(
+    r"\babove the house adopted (here )?on \d{4}-\d{2}-\d{2}(?: \(T-\d+\))?"
+)
 #: The day a selected override's reason says its house was adopted.
 ADOPTED_ON_DAY = re.compile(r"\badopted on (\d{4}-\d{2}-\d{2}) \(T-\d+\)")
 
@@ -1940,6 +2266,13 @@ def coverage(moves: Sequence[Move], text: str) -> str:
                 if "reason" in report:
                     report["reason"] = DISPLACED_BY.sub(
                         f"and {house.result}'s exact side is smaller.", str(report["reason"])
+                    )
+                    report["reason"] = ABOVE_HOUSE.sub(
+                        lambda match, n=n, result=house.result: (
+                            f"above the house adopted {match.group(1) or ''}on "
+                            f"{houses.adopted_on(n)} ({result})"
+                        ),
+                        str(report["reason"]),
                     )
         # The displaced house is recorded whether or not its source has a claims record:
         # its selected value is the source's print where it has one and the ceiling of
@@ -2350,15 +2683,16 @@ def _span(text: str, start: str, end: str) -> tuple[int, int]:
 
 def refreshed(move: Move, committed: str) -> str:
     """The committed record with what its last pass's writer writes now in the parts the
-    writer alone owns: the evidence roster, the dated paragraph and the certificate
-    section, and, outside `HAND_MARKED`, the rest of the body, which it marks as history.
+    writer alone owns: the evidence roster, priority notes, the dated paragraph and the
+    certificate section, and, outside `HAND_MARKED`, the rest of the body, marked as history.
     The rest, the verifier table and the front matter other tools refresh, stays as it
     is."""
     written = replayed_text(move)
     fence, front, rest = _split(committed)
-    evidence = _packing(_split(written)[1])["evidence"]
-    if _packing(front).get("evidence") != evidence:
-        front = _replace(front, "evidence", evidence)
+    packing = _packing(_split(written)[1])
+    for key in ("evidence", "priority_notes"):
+        if _packing(front).get(key) != packing.get(key):
+            front = _replace(front, key, packing[key])
     if move.n not in HAND_MARKED:
         rest = _with_history(rest, _split(written)[2])
     text = fence + front + rest

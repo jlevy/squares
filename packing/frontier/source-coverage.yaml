@@ -2486,7 +2486,7 @@ sources:
     - 105
     - 110
     - 131
-  reviewed: '2026-10-16'
+  reviewed: '2026-10-18'
   source_date: '2026-07-29'
   disposition: superseded-covered
   replay_disposition: public-certificate-missing
@@ -2510,7 +2510,10 @@ sources:
     intake pass, think-wnsv): the page, still "Release 1 · 29 July 2026" with datePublished 2026-07-29,
     and data/results.json are byte-identical to results.html and results.json here (SHA-256 4cc4d80d...
     and dd7c1c62...), so nothing changed. Read again on 2026-10-16 (the morning intake pass,
-    think-mu5v): both are still byte-identical to the retained copies, so nothing changed.
+    think-mu5v): both are still byte-identical to the retained copies, so nothing changed. Read again on
+    2026-10-17 (the intake pass, think-e2sz): the page and data/results.json are still byte-identical to
+    the retained copies, so nothing changed. Read again on 2026-10-18 (think-xmxb): both files remain byte-identical;
+    campaign/issue-intake/intake-20261018/manual-source-receipt.json retains the measured source digests.
 
     '
 - id: schadt-n29-2025
@@ -2593,7 +2596,7 @@ sources:
   scope:
     n_values:
     - 153
-  reviewed: '2026-10-16'
+  reviewed: '2026-10-18'
   source_date: '2026-10-07'
   disposition: current-report
   replay_disposition: case-specific
@@ -2624,7 +2627,11 @@ sources:
     2026-10-07T18:33:04Z edit, and issue 401 has no comment after 2026-10-07T22:54:51Z, only the intake
     label added on 2026-10-12, so nothing changed. Read again on 2026-10-16 (the morning intake
     pass, think-mu5v): the comment still carries its 2026-10-07T18:33:04Z edit, and the last comment
-    on issue 401 is still that of 2026-10-07T22:54:51Z, so nothing changed.'
+    on issue 401 is still that of 2026-10-07T22:54:51Z, so nothing changed. Read again on 2026-10-17
+    (the intake pass, think-e2sz): the same edit, the same last comment, and the issue still closed
+    with only its intake label, so nothing changed. Read again on 2026-10-18 (think-xmxb): same
+    edit and final comment, still closed; the read receipt is in
+    campaign/issue-intake/intake-20261018/manual-source-receipt.json.'
 - id: squish-update-2026-10-07
   title: 'SQUISH update: seven additional and five tighter rational packings'
   role: source-repository
@@ -4556,14 +4563,15 @@ sources:
     prints. T-174 records the in-horizon report, at V3/C3 since the 14 October review
     (docs/project/reviews/review-2026-10-14-upper-bound-imports-574.md) reproduced the
     replay and decided the cited certificates again by the third route. All 117 native jobs
-    have full outcomes. No selected override is created yet: the house rule of 16 October
-    2026 makes T-174 the house at the 41 counts where it is smallest, which ended the hold
-    of 15 October and RP-3's wait, and stages their adoption in
-    devtools.select_houses.PENDING_ADOPTION, the 38 rational counts under think-3mry, the
-    next candidate holding the case at three of them meanwhile, and the algebraic
-    certificates at 70, 153 and 207 under think-ot5c. It was the smallest at 63 counts until
-    the adoption of 16 October 2026 (PR #657) took ten of them below it and T-193's exact
-    sides (PR #658) twelve more.
+    have full outcomes. The house rule of 16 October 2026 makes T-174 the house at the 41
+    counts where it is smallest, which ended the hold of 15 October and RP-3's wait: the
+    adoption of 17 October 2026 (think-3mry) moved 37 rational counts to it, the selected
+    overrides below. At 236 Evan Daniel's issue 659 reports a smaller side, whose import
+    adopts it; T-174 stays staged there under think-3mry. The algebraic certificates at
+    70, 153 and 207 wait under think-ot5c. These four counts are staged in
+    devtools.select_houses.PENDING_ADOPTION. It was the smallest at 63 counts until the
+    adoption of 16 October 2026 (PR #657) took ten of them below it and T-193's exact
+    sides (PR #658), staged under think-ot5c, twelve more.
 - id: dostashev-merged-bands-2026-10-13
   title: Daniil Ostashev's merged-band and relaxed-composition packings at b909e1b, issue575
   role: source-repository
@@ -6043,18 +6051,570 @@ sources:
     trusts Lean's compiler for 4,320 native_decide facts and reports a kernel replay of the
     import closure; nothing here has built it. T-194 records the claim; the case's lanes and
     status are unchanged.
+- id: pingyou-pr622-certificate-2026-10-15
+  title: PingYou Ltd's N29 certificate refinement at 3115557, PR 622
+  role: source-repository
+  url: https://github.com/BuddenPing/squares/tree/31155575ce1e6b461f77bfc9f3e201adf101115b
+  local: resources/web/pingyou-pr622-certificate-2026-10-15/
+  source_key: '[PingYou PR 622 certificate 2026-10-15]'
+  scope: {n_values: [29]}
+  reviewed: '2026-10-16'
+  source_date: '2026-10-15'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/pingyou-pr622-certificate-2026-10-15/acquisition/claims.json
+  evidence: [E-pingyou-622-certificate-report, E-pingyou-622-exact-feasibility]
+  notes: >-
+    The 1 complete certificate is kept as a derived exact fact, no upstream byte retained,
+    read from the release asset data/pingyou-n29-certificate-2026-10-15-v1 through the
+    manifest the pinned commit adds, and admitted at the exact side its claim record prints.
+    T-195 records the in-horizon report, 1.57e-36 below T-155, by exception in the
+    per-count ledger of 16 October (campaign/issue-intake/upper-bounds-n29-20261016), on
+    the owner's standing house rule (PR #660, think-sa5r); the 16 October review accepted it.
+    All 3 native jobs have full outcomes. No selected override or superseded claim is
+    created at this stage; the case is unchanged until adoption.
+- id: de-winter-upper-bounds-2026-10-17
+  title: de Winter's three exact rational upper-bound reports, issue 668
+  role: source-repository
+  url: https://github.com/JoostdeWinter/square-packing/tree/9bf5d9be4d0ca13a1dbef7d7953032fe87d4e81d
+  local: resources/web/de-winter-upper-bounds-227-229-260-2026-10-17/
+  source_key: '[de Winter upper bounds 2026-10-17]'
+  scope:
+    n_values:
+    - 227
+    - 229
+    - 260
+  reviewed: '2026-10-18'
+  source_date: '2026-10-17'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/de-winter-upper-bounds-227-229-260-2026-10-17/README.md
+  - campaign/issue-intake/upper-bounds-20261018/README.md
+  evidence:
+  - E-de-winter-668-upper-report
+  notes: >-
+    Issue 668 reports the three exact rational certificate sides from c95c4938 on 17 October; the
+    retained licensed successor 9bf5d9be changes only LICENSE and the root README. The ledger preserves
+    this report before Couzo issue 672 and Daniel issue 674 at overlapping counts. At 227 Couzo has a
+    later smaller pending claim, owned by think-2vjc; at 229 the final retained Daniel update is the latest registered report.
+    No arrangement identity, local minimum or optimum is established. The separately owned mathematical
+    review (think-455r) and completed source replay with controls (think-8xr0) await their own dependent
+    PRs and are not adopted by this registration.
+    No selected override or superseded-report row changes: the case's two upper lanes
+    and retained house stay unchanged until Stage 4 adoption. The exact bounds are
+    registered as pending adoption where they improve the case, as Stage 3 permits.
+- id: evand-n155-explorer-2026-10-17
+  title: Daniel's n155 explorer certificate and same-side display, issue 669
+  role: source-repository
+  url: https://github.com/evand/square-packing/tree/59326b86291b76c39d843f3f156e8f25fa0f6e3f
+  local: resources/web/evand-n155-explorer-2026-10-17/
+  source_key: '[Daniel n155 explorer 2026-10-17]'
+  scope:
+    n_values:
+    - 155
+  reviewed: '2026-10-18'
+  source_date: '2026-10-17'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/evand-n155-explorer-2026-10-17/README.md
+  - campaign/issue-intake/upper-bounds-20261018/README.md
+  evidence:
+  - E-evand-669-n155-report
+  notes: >-
+    Issue 669 reports a different numerical local minimum found by Evan Daniel from Daniil Ostashev's
+    T-149 packing as the search start. Its original and regularized display certificates have the same
+    exact side and form one bound. The issue and prior JSON explicitly credit Ostashev; the regularized
+    JSON instead says by Francisco Couzo. Both metadata statements remain retained, and this entry follows
+    the explicit issue/prior attribution without treating the conflicting field as evidence. Numerical
+    KKT, local-minimum and basin claims remain the author's, with no optimality or identity proof adopted.
+    No selected override or superseded-report row changes: the case's two upper lanes
+    and retained house stay unchanged until Stage 4 adoption. The exact bounds are
+    registered as pending adoption where they improve the case, as Stage 3 permits.
+- id: evand-n229-dilation-2026-10-17
+  title: Daniel's opening n229 dilation certificate, issue 674
+  role: source-repository
+  url: https://github.com/evand/square-packing/tree/e0338c7becf95dbc7584b48d8868c0a1cd21079c
+  local: resources/web/evand-n229-dilation-2026-10-17/
+  source_key: '[Daniel n229 dilation 2026-10-17]'
+  scope:
+    n_values:
+    - 229
+  reviewed: '2026-10-18'
+  source_date: '2026-10-17'
+  disposition: superseded-covered
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/evand-n229-dilation-2026-10-17/README.md
+  - campaign/issue-intake/upper-bounds-20261018/README.md
+  evidence:
+  - E-evand-674-n229-opening-report
+  notes: >-
+    The opening report of issue 674, 17 October, remains a chronological finite upper bound even
+    though the author later asks to replace its certificate. Preserve the source-claimed lineage de Winter
+    issue 668, Couzo issue 672, then Daniel's opening dilation and the next-day update. Couzo's intervening
+    claim remains Stage 1, owned by think-2vjc at af8cb795; it is not retained, replayed or registered
+    by this change. No regularizations.of is assigned because Couzo's antecedent is not registered; identity.basis may
+    remain source-claim until measured. The author's dilation description is attribution, not a measured identity or continuous-path
+    proof.
+    No selected override or superseded-report row changes: the case's two upper lanes
+    and retained house stay unchanged until Stage 4 adoption. The exact bounds are
+    registered as pending adoption where they improve the case, as Stage 3 permits.
+- id: evand-n229-dilation-update-2026-10-18
+  title: Daniel's updated n229 dilation certificate, issue 674
+  role: source-repository
+  url: https://github.com/evand/square-packing/tree/00e68dfbe1d29ab5dbab1cddfb8f6ca19d5470db
+  local: resources/web/evand-n229-dilation-update-2026-10-18/
+  source_key: '[Daniel n229 dilation update 2026-10-18]'
+  scope:
+    n_values:
+    - 229
+  reviewed: '2026-10-18'
+  source_date: '2026-10-18'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - frontier/results.yaml
+  - resources/web/evand-n229-dilation-update-2026-10-18/README.md
+  - campaign/issue-intake/upper-bounds-20261018/README.md
+  evidence:
+  - E-evand-674-n229-update-report
+  notes: >-
+    The 18 October comment on issue 674 requests this smaller certificate in place of the opening
+    value. Both chronological claims remain registered, and this update is the latest registered report at 229, pending adoption. Credit Daniel after Couzo, de Winter and Levy. Couzo's issue 672 remains Stage 1 under
+    think-2vjc; no registered antecedent or measured identity is inferred. The source's dilation and regularization
+    lineage is retained as its claim; no regularizations.of or continuous-path proof is adopted.
+    No selected override or superseded-report row changes: the case's two upper lanes
+    and retained house stay unchanged until Stage 4 adoption. The exact bounds are
+    registered as pending adoption where they improve the case, as Stage 3 permits.
+
+- id: wand125-fine-net-n38-65775-2026-10-16
+  title: Wand125 reported n38 fine-net lower bound (#446)
+  role: source-repository
+  url: https://github.com/wand125/square-packing/tree/02c5595f26e8cf1f6be89080fdd66a9a5d6d364f/problems/square-lower-bounds/certificates/mixed_n38_L65775
+  local: resources/web/wand125-fine-net-lower-bounds-2026-10-16/
+  source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+  scope:
+    n_values:
+    - 38
+  reviewed: '2026-10-17'
+  source_date: '2026-10-16'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/wand125-fine-net-lower-bounds-2026-10-16/README.md
+  evidence:
+  - E-wand125-fine-net-n38-65775-report
+  notes: The reported 2631/400 at n38 is above both lower lanes, which are unchanged. Complete
+    release-asset and document custody and the exact mass, declared-net and check2 premises are
+    accepted, and the asset's data members are retained for the census. The author's full positives
+    and 32-direction controls do not supply a maintained capture or whole-net controls. T-200
+    registers it; replay and adoption remain under think-f40c.
+- id: wand125-fine-net-n40-6735-2026-10-16
+  title: Wand125 reported n40 fine-net lower bound (#446)
+  role: source-repository
+  url: https://github.com/wand125/square-packing/tree/4762e420765d663f601f007c60c9c47351c959ea/problems/square-lower-bounds/certificates/mixed_n40_L6735
+  local: resources/web/wand125-fine-net-lower-bounds-2026-10-16/
+  source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+  scope:
+    n_values:
+    - 40
+  reviewed: '2026-10-17'
+  source_date: '2026-10-16'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/wand125-fine-net-lower-bounds-2026-10-16/README.md
+  evidence:
+  - E-wand125-fine-net-n40-6735-report
+  notes: The reported 1347/200 at n40 is above both lower lanes, which are unchanged. Complete
+    release-asset and document custody and the exact mass, declared-net and check2 premises are
+    accepted, and the asset's data members are retained for the census. The author's full positives
+    and 32-direction controls do not supply a maintained capture or whole-net controls. T-201
+    registers it; replay and adoption remain under think-f40c.
+- id: wand125-fine-net-n41-68025-2026-10-16
+  title: Wand125 reported n41 fine-net lower bound (#446)
+  role: source-repository
+  url: https://github.com/wand125/square-packing/tree/209369b6a186e2304548d52584425125d4c97736/problems/square-lower-bounds/certificates/mixed_n41_L68025
+  local: resources/web/wand125-fine-net-lower-bounds-2026-10-16/
+  source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+  scope:
+    n_values:
+    - 41
+  reviewed: '2026-10-17'
+  source_date: '2026-10-16'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/wand125-fine-net-lower-bounds-2026-10-16/README.md
+  evidence:
+  - E-wand125-fine-net-n41-68025-report
+  notes: The reported 2721/400 at n41 is above both lower lanes, which are unchanged. Complete
+    release-asset and document custody and the exact mass, declared-net and check2 premises are
+    accepted, and the asset's data members are retained for the census. The author's full positives
+    and 32-direction controls do not supply a maintained capture or whole-net controls. T-202
+    registers it; replay and adoption remain under think-f40c.
+- id: wand125-fine-net-n43-69425-2026-10-16
+  title: Wand125 reported n43 fine-net lower bound (#446)
+  role: source-repository
+  url: https://github.com/wand125/square-packing/tree/d3c115c5b7a12c7c057ef567cc426df909846e92/problems/square-lower-bounds/certificates/mixed_n43_L69425
+  local: resources/web/wand125-fine-net-lower-bounds-2026-10-16/
+  source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+  scope:
+    n_values:
+    - 43
+  reviewed: '2026-10-17'
+  source_date: '2026-10-16'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/wand125-fine-net-lower-bounds-2026-10-16/README.md
+  evidence:
+  - E-wand125-fine-net-n43-69425-report
+  notes: The reported 2777/400 at n43 is above both lower lanes, which are unchanged. Complete
+    release-asset and document custody and the exact mass, declared-net and check2 premises are
+    accepted, and the asset's data members are retained for the census. The author's full positives
+    and 32-direction controls do not supply a maintained capture or whole-net controls. T-203
+    registers it; replay and adoption remain under think-f40c.
+- id: wand125-fine-net-n51-75275-2026-10-16
+  title: Wand125 reported n51 fine-net lower bound (#446)
+  role: source-repository
+  url: https://github.com/wand125/square-packing/tree/9cd2b2d43dfe57e12da066a1e85a51f457c0fc9f/problems/square-lower-bounds/certificates/mixed_n51_L75275
+  local: resources/web/wand125-fine-net-lower-bounds-2026-10-16/
+  source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+  scope:
+    n_values:
+    - 51
+  reviewed: '2026-10-17'
+  source_date: '2026-10-16'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/wand125-fine-net-lower-bounds-2026-10-16/README.md
+  evidence:
+  - E-wand125-fine-net-n51-75275-report
+  notes: The reported 3011/400 at n51 is above both lower lanes, which are unchanged. Complete
+    release-asset and document custody and the exact mass, declared-net and check2 premises are
+    accepted, and the asset's data members are retained for the census. The author's full positives
+    and 32-direction controls do not supply a maintained capture or whole-net controls. T-204
+    registers it; replay and adoption remain under think-f40c.
+- id: wand125-fine-net-n68-853-2026-10-16
+  title: Wand125 reported n68 fine-net lower bound (#446)
+  role: source-repository
+  url: https://github.com/wand125/square-packing/tree/14b4b0badd79cd95f9456143b304d5d158cf2ac7/problems/square-lower-bounds/certificates/mixed_n68_L853
+  local: resources/web/wand125-fine-net-lower-bounds-2026-10-16/
+  source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+  scope:
+    n_values:
+    - 68
+  reviewed: '2026-10-17'
+  source_date: '2026-10-16'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/wand125-fine-net-lower-bounds-2026-10-16/README.md
+  evidence:
+  - E-wand125-fine-net-n68-853-report
+  notes: The reported 853/100 at n68 is above both lower lanes, which are unchanged. Complete
+    release-asset and document custody and the exact mass, declared-net and check2 premises are
+    accepted, and the asset's data members are retained for the census. The author's full positives
+    and 32-direction controls do not supply a maintained capture or whole-net controls. T-205
+    registers it; replay and adoption remain under think-f40c.
+- id: wand125-fine-net-n84-94225-2026-10-16
+  title: Wand125 reported n84 fine-net lower bound (#446)
+  role: source-repository
+  url: https://github.com/wand125/square-packing/tree/f28b5f3d0ebc500a761a02514c1ce5b9b9e203f1/problems/square-lower-bounds/certificates/mixed_n84_L94225
+  local: resources/web/wand125-fine-net-lower-bounds-2026-10-16/
+  source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+  scope:
+    n_values:
+    - 84
+  reviewed: '2026-10-17'
+  source_date: '2026-10-16'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/wand125-fine-net-lower-bounds-2026-10-16/README.md
+  evidence:
+  - E-wand125-fine-net-n84-94225-report
+  notes: The reported 3769/400 at n84 is above both lower lanes, which are unchanged. Complete
+    release-asset and document custody and the exact mass, declared-net and check2 premises are
+    accepted, and the asset's data members are retained for the census. The author's full positives
+    and 32-direction controls do not supply a maintained capture or whole-net controls. T-206
+    registers it; replay and adoption remain under think-f40c.
+- id: wand125-fine-net-n85-9475-2026-10-16
+  title: Wand125 reported n85 fine-net lower bound (#446)
+  role: source-repository
+  url: https://github.com/wand125/square-packing/tree/fc2e96f0a253e00fbc4263625f4fc34774d157a6/problems/square-lower-bounds/certificates/mixed_n85_L9475
+  local: resources/web/wand125-fine-net-lower-bounds-2026-10-16/
+  source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+  scope:
+    n_values:
+    - 85
+  reviewed: '2026-10-17'
+  source_date: '2026-10-16'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/wand125-fine-net-lower-bounds-2026-10-16/README.md
+  evidence:
+  - E-wand125-fine-net-n85-9475-report
+  notes: The reported 379/40 at n85 is above both lower lanes, which are unchanged. Complete
+    release-asset and document custody and the exact mass, declared-net and check2 premises are
+    accepted, and the asset's data members are retained for the census. The author's full positives
+    and 32-direction controls do not supply a maintained capture or whole-net controls. T-207
+    registers it; replay and adoption remain under think-f40c.
+- id: wand125-fine-net-n86-95275-2026-10-16
+  title: Wand125 reported n86 fine-net lower bound (#446)
+  role: source-repository
+  url: https://github.com/wand125/square-packing/tree/2ad6bda87c58fa9a67debc3d3ef303810525fd34/problems/square-lower-bounds/certificates/mixed_n86_L95275
+  local: resources/web/wand125-fine-net-lower-bounds-2026-10-16/
+  source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+  scope:
+    n_values:
+    - 86
+  reviewed: '2026-10-17'
+  source_date: '2026-10-16'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/wand125-fine-net-lower-bounds-2026-10-16/README.md
+  evidence:
+  - E-wand125-fine-net-n86-95275-report
+  notes: The reported 3811/400 at n86 is above both lower lanes, which are unchanged. Complete
+    release-asset and document custody and the exact mass, declared-net and check2 premises are
+    accepted, and the asset's data members are retained for the census. The author's full positives
+    and 32-direction controls do not supply a maintained capture or whole-net controls. T-208
+    registers it; replay and adoption remain under think-f40c.
+- id: wand125-fine-net-n88-96325-2026-10-16
+  title: Wand125 reported n88 fine-net lower bound (#446)
+  role: source-repository
+  url: https://github.com/wand125/square-packing/tree/f8f99e3d82c682f9600539c15b2a6f76b9e4e4c3/problems/square-lower-bounds/certificates/mixed_n88_L96325
+  local: resources/web/wand125-fine-net-lower-bounds-2026-10-16/
+  source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+  scope:
+    n_values:
+    - 88
+  reviewed: '2026-10-17'
+  source_date: '2026-10-16'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/wand125-fine-net-lower-bounds-2026-10-16/README.md
+  evidence:
+  - E-wand125-fine-net-n88-96325-report
+  notes: The reported 3853/400 at n88 is above both lower lanes, which are unchanged. Complete
+    release-asset and document custody and the exact mass, declared-net and check2 premises are
+    accepted, and the asset's data members are retained for the census. The author's full positives
+    and 32-direction controls do not supply a maintained capture or whole-net controls. T-209
+    registers it; replay and adoption remain under think-f40c.
+- id: wand125-fine-net-n89-9685-2026-10-16
+  title: Wand125 reported n89 fine-net lower bound (#446)
+  role: source-repository
+  url: https://github.com/wand125/square-packing/tree/a361ba247b3dac28ee3ab8ff8e62e827bcdf8120/problems/square-lower-bounds/certificates/mixed_n89_L9685
+  local: resources/web/wand125-fine-net-lower-bounds-2026-10-16/
+  source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+  scope:
+    n_values:
+    - 89
+  reviewed: '2026-10-17'
+  source_date: '2026-10-16'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/wand125-fine-net-lower-bounds-2026-10-16/README.md
+  evidence:
+  - E-wand125-fine-net-n89-9685-report
+  notes: The reported 1937/200 at n89 is above both lower lanes, which are unchanged. Complete
+    release-asset and document custody and the exact mass, declared-net and check2 premises are
+    accepted, and the asset's data members are retained for the census. The author's full positives
+    and 32-direction controls do not supply a maintained capture or whole-net controls. T-210
+    registers it; replay and adoption remain under think-f40c.
+- id: wand125-fine-net-n91-97875-2026-10-16
+  title: Wand125 reported n91 fine-net lower bound (#446)
+  role: source-repository
+  url: https://github.com/wand125/square-packing/tree/e060e98b540e46f88e84ac6fd18462dcb209ee42/problems/square-lower-bounds/certificates/mixed_n91_L97875
+  local: resources/web/wand125-fine-net-lower-bounds-2026-10-16/
+  source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+  scope:
+    n_values:
+    - 91
+  reviewed: '2026-10-17'
+  source_date: '2026-10-16'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/wand125-fine-net-lower-bounds-2026-10-16/README.md
+  evidence:
+  - E-wand125-fine-net-n91-97875-report
+  notes: The reported 783/80 at n91 is above both lower lanes, which are unchanged. Complete
+    release-asset and document custody and the exact mass, declared-net and check2 premises are
+    accepted, and the asset's data members are retained for the census. The author's full positives
+    and 32-direction controls do not supply a maintained capture or whole-net controls. T-211
+    registers it; replay and adoption remain under think-f40c.
+- id: wand125-fine-net-n90-978-2026-10-16
+  title: Wand125 reported n90 fine-net lower bound (#446)
+  role: source-repository
+  url: https://github.com/wand125/square-packing/tree/8155028aea6ed235b0c2766b38657dd21704aff4/problems/square-lower-bounds/certificates/mixed_n90_L978
+  local: resources/web/wand125-fine-net-lower-bounds-2026-10-16/
+  source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+  scope:
+    n_values:
+    - 90
+  reviewed: '2026-10-17'
+  source_date: '2026-10-16'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/wand125-fine-net-lower-bounds-2026-10-16/README.md
+  evidence:
+  - E-wand125-fine-net-n90-978-report
+  notes: The reported 489/50 at n90 is above both lower lanes, which are unchanged. Complete
+    release-asset and document custody and the exact mass, declared-net and check2 premises are
+    accepted, and the asset's data members are retained for the census. The author's full positives
+    and 32-direction controls do not supply a maintained capture or whole-net controls. T-212
+    registers it; replay and adoption remain under think-f40c.
+- id: wand125-fine-net-n92-986-2026-10-16
+  title: Wand125 reported n92 fine-net lower bound (#446)
+  role: source-repository
+  url: https://github.com/wand125/square-packing/tree/599a67c371b09a4c05d3709be63c3d6be4a9cd14/problems/square-lower-bounds/certificates/mixed_n92_L986
+  local: resources/web/wand125-fine-net-lower-bounds-2026-10-16/
+  source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+  scope:
+    n_values:
+    - 92
+  reviewed: '2026-10-17'
+  source_date: '2026-10-16'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/wand125-fine-net-lower-bounds-2026-10-16/README.md
+  evidence:
+  - E-wand125-fine-net-n92-986-report
+  notes: The reported 493/50 at n92 is above both lower lanes, which are unchanged. Complete
+    release-asset and document custody and the exact mass, declared-net and check2 premises are
+    accepted, and the asset's data members are retained for the census. The author's full positives
+    and 32-direction controls do not supply a maintained capture or whole-net controls. T-213
+    registers it; replay and adoption remain under think-f40c.
+- id: wand125-fine-net-n106-10503-2026-10-16
+  title: Wand125 reported n106 fine-net lower bound (#446)
+  role: source-repository
+  url: https://github.com/wand125/square-packing/tree/3b2538704f36b699795a50b5ef19686c843150ab/problems/square-lower-bounds/certificates/mixed_n106_L10503
+  local: resources/web/wand125-fine-net-lower-bounds-2026-10-16/
+  source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+  scope:
+    n_values:
+    - 106
+  reviewed: '2026-10-17'
+  source_date: '2026-10-16'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/wand125-fine-net-lower-bounds-2026-10-16/README.md
+  evidence:
+  - E-wand125-fine-net-n106-10503-report
+  notes: The reported 10503/1000 at n106 is above both lower lanes, which are unchanged. Complete
+    release-asset and document custody and the exact mass, declared-net and check2 premises are
+    accepted, and the asset's data members are retained for the census. The author's full positives
+    and 32-direction controls do not supply a maintained capture or whole-net controls. T-214
+    registers it; replay and adoption remain under think-f40c.
+- id: wand125-fine-net-n107-1058-2026-10-16
+  title: Wand125 reported n107 fine-net lower bound (#446)
+  role: source-repository
+  url: https://github.com/wand125/square-packing/tree/021702fa6b3d345ffc51e053ef6b05f03df55cd5/problems/square-lower-bounds/certificates/mixed_n107_L1058
+  local: resources/web/wand125-fine-net-lower-bounds-2026-10-16/
+  source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+  scope:
+    n_values:
+    - 107
+  reviewed: '2026-10-17'
+  source_date: '2026-10-16'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/wand125-fine-net-lower-bounds-2026-10-16/README.md
+  evidence:
+  - E-wand125-fine-net-n107-1058-report
+  notes: The reported 529/50 at n107 is above both lower lanes, which are unchanged. Complete
+    release-asset and document custody and the exact mass, declared-net and check2 premises are
+    accepted, and the asset's data members are retained for the census. The author's full positives
+    and 32-direction controls do not supply a maintained capture or whole-net controls. T-215
+    registers it; replay and adoption remain under think-f40c.
+- id: wand125-fine-net-n108-1062-2026-10-16
+  title: Wand125 n108 fine-net lower bound (#446)
+  role: source-repository
+  url: https://github.com/wand125/square-packing/tree/6af3c00991c937d40ac0fe867fe049b8e9f3bf2d/problems/square-lower-bounds/certificates/mixed_n108_L1062
+  local: resources/web/wand125-fine-net-lower-bounds-2026-10-16/
+  source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+  scope:
+    n_values:
+    - 108
+  reviewed: '2026-10-18'
+  source_date: '2026-10-16'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/wand125-fine-net-lower-bounds-2026-10-16/README.md
+  evidence:
+  - E-wand125-fine-net-n108-1062-report
+  - E-wand125-fine-net-n108-1062-sqverify-fast-replay
+  notes: >-
+    The n108 case adopts 531/50 in both lower lanes after its retained complete
+    maintained sqverify-fast census and whole-net controls, with the two mapped
+    certificate-specific mathematical reviews of 18 October. The native replay
+    shares the producer's verifier components. Separate exact audits check the
+    premises and saved poses; neither establishes independent full coverage.
+    No fresh native run was made during this review/integration. The archived
+    source README's control-log filename is preserved; the first-party packet
+    identifies check2/control-197_200.jsonl.gz from the retained manifest.
+    The other 17 fine-net imports remain reported at V0/C0 under think-f40c.
+- id: wand125-fine-net-n110-1073-2026-10-16
+  title: Wand125 reported n110 fine-net lower bound (#446)
+  role: source-repository
+  url: https://github.com/wand125/square-packing/tree/718887cfaa8727cc75108c5924fa1330df4fa098/problems/square-lower-bounds/certificates/mixed_n110_L1073
+  local: resources/web/wand125-fine-net-lower-bounds-2026-10-16/
+  source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+  scope:
+    n_values:
+    - 110
+  reviewed: '2026-10-17'
+  source_date: '2026-10-16'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/wand125-fine-net-lower-bounds-2026-10-16/README.md
+  evidence:
+  - E-wand125-fine-net-n110-1073-report
+  notes: The reported 1073/100 at n110 is above both lower lanes, which are unchanged. Complete
+    release-asset and document custody and the exact mass, declared-net and check2 premises are
+    accepted, and the asset's data members are retained for the census. The author's full positives
+    and 32-direction controls do not supply a maintained capture or whole-net controls. T-217
+    registers it; replay and adoption remain under think-f40c.
+
 selected_overrides:
+- n: 29
+  source_id: pingyou-pr622-certificate-2026-10-15
+  value: '5.9338334626769292'
+  evidence: E-pingyou-622-certificate-report
+  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
+    here and an accepted review, adopted on 2026-10-17 (T-195).
 - n: 51
   source_id: ry-xu-undilated-n51-2026
   value: '7.6903559372884918'
   evidence: E-ryxu-432-radical-n51-report
   reason: Smaller exact finite construction confirmed after scoped replay/custody review.
 - n: 68
-  source_id: rehwaldt-n68-refinement-2026-10-07
-  value: '8.79879523721828390257668096702139408352101903022787926324037'
-  evidence: E-rehwaldt-n68-refinement-2026-10-07-report
-  reason: Smaller exact finite rational source ceiling, retained as reported pending replay admission
-    and review.
+  source_id: pingyou-pr574-certificates-2026-10-13
+  value: '8.7987952372182839025766809670213940835210190302278792632403696'
+  evidence: E-pingyou-574-certificate-report
+  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
+    here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 70
   source_id: evand-regularized-2026-10-10
   value: '8.8809603715555796'
@@ -6062,17 +6622,17 @@ selected_overrides:
   reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
     here and an accepted review, adopted on 2026-10-11 (T-146).
 - n: 84
-  source_id: couzo-followup-refinements-2026-10-08
-  value: '9.6979347990149214'
-  evidence: E-couzo-460-followup-rational-report
+  source_id: pingyou-pr574-certificates-2026-10-13
+  value: '9.69793479901492131'
+  evidence: E-pingyou-574-certificate-report
   reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-11 (T-130).
+    here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 86
-  source_id: couzo-followup-refinements-2026-10-08
-  value: '9.8205354074967423'
-  evidence: E-couzo-460-followup-rational-report
+  source_id: pingyou-pr574-certificates-2026-10-13
+  value: '9.82053540749674221'
+  evidence: E-pingyou-574-certificate-report
   reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-11 (T-130).
+    here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 88
   source_id: gupta-square-packing-refinements-2026-10-08
   value: '9.8824510304812469'
@@ -6086,17 +6646,17 @@ selected_overrides:
   reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
     here and an accepted review, adopted on 2026-10-11 (T-146).
 - n: 103
-  source_id: evand-regularized-2026-10-10
-  value: '10.6792320473613065'
-  evidence: E-evand-regularized-certificate-report
+  source_id: pingyou-pr574-certificates-2026-10-13
+  value: '10.67923204736130645'
+  evidence: E-pingyou-574-certificate-report
   reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-11 (T-146).
+    here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 105
-  source_id: pingyou-n105-refinement-2026-10-12
-  value: '10.78930378374815884'
-  evidence: E-pingyou-568-certificate-report
+  source_id: pingyou-pr574-certificates-2026-10-13
+  value: '10.789303783748158831'
+  evidence: E-pingyou-574-certificate-report
   reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-15 (T-170).
+    here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 106
   source_id: evand-square-packing-2026-10-05
   value: '10.822908044132847555194436943331'
@@ -6104,17 +6664,17 @@ selected_overrides:
   reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's printed
     side (T-056).
 - n: 108
-  source_id: couzo-451-exact-refinements
-  value: '10.9048210123203565'
-  evidence: E-couzo-451-rational-report
+  source_id: pingyou-pr574-certificates-2026-10-13
+  value: '10.90482101232035643'
+  evidence: E-pingyou-574-certificate-report
   reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-11 (T-128).
+    here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 110
-  source_id: evand-square-packing-2026-10-05
-  value: '10.996783396631591639612746267957'
-  evidence: E-evand-exact-optima-2026-10-05-report
-  reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's printed
-    side (T-056).
+  source_id: pingyou-pr574-certificates-2026-10-13
+  value: '10.9967833966315916396'
+  evidence: E-pingyou-574-certificate-report
+  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
+    here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 123
   source_id: evand-regularized-2026-10-10
   value: '11.5913781454976982'
@@ -6128,11 +6688,11 @@ selected_overrides:
   reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
     here and an accepted review, adopted on 2026-10-11 (T-139).
 - n: 127
-  source_id: couzo-451-exact-refinements
-  value: '11.8108787875891799'
-  evidence: E-couzo-451-rational-report
+  source_id: pingyou-pr574-certificates-2026-10-13
+  value: '11.81087878758917984'
+  evidence: E-pingyou-574-certificate-report
   reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-11 (T-128).
+    here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 129
   source_id: mishapolk-kkt-refinements-2026-10-14
   value: '11.87001385040446435'
@@ -6140,23 +6700,23 @@ selected_overrides:
   reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
     here and an accepted review, adopted on 2026-10-16 (T-186).
 - n: 130
-  source_id: gupta-square-packing-refinements-2026-10-08
-  value: '11.9044830325157865'
-  evidence: E-gupta-438-rational-report
-  reason: The complete rational precision refinement is strictly smaller than both previous exact
-    upper lanes.
+  source_id: pingyou-pr574-certificates-2026-10-13
+  value: '11.90448303251578644'
+  evidence: E-pingyou-574-certificate-report
+  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
+    here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 131
-  source_id: squish-481-third-request-2026-10-09
-  value: '11.9496595880358604'
-  evidence: E-squish-481-certificate-report
+  source_id: pingyou-pr574-certificates-2026-10-13
+  value: '11.949659588035860397'
+  evidence: E-pingyou-574-certificate-report
   reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-11 (T-136).
+    here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 132
-  source_id: evand-record-hunt3-2026-10-10
-  value: '11.985680198845808811522231964102'
-  evidence: E-evand-489-hunt3-report
+  source_id: pingyou-pr574-certificates-2026-10-13
+  value: '11.9856801988458088115'
+  evidence: E-pingyou-574-certificate-report
   reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-11 (T-141).
+    here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 146
   source_id: evand-n146-2026-10-14
   value: '12.5837821901518604'
@@ -6182,11 +6742,11 @@ selected_overrides:
   reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
     here and an accepted review, adopted on 2026-10-16 (T-186).
 - n: 155
-  source_id: dostashev-records-2026-10-11
-  value: '12.9524254069584562'
-  evidence: E-ostashev-501-certificate-report
+  source_id: pingyou-pr574-certificates-2026-10-13
+  value: '12.95242540695845614'
+  evidence: E-pingyou-574-certificate-report
   reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-11 (T-149).
+    here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 156
   source_id: mishapolk-kkt-refinements-2026-10-14
   value: '12.97916585383427646'
@@ -6194,11 +6754,11 @@ selected_overrides:
   reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
     here and an accepted review, adopted on 2026-10-16 (T-186).
 - n: 172
-  source_id: evand-square-packing-2026-10-05
-  value: '13.61898895689939842899969151892'
-  evidence: E-evand-exact-optima-2026-10-05-report
-  reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's printed
-    side (T-056).
+  source_id: pingyou-pr574-certificates-2026-10-13
+  value: '13.6189889568993984289'
+  evidence: E-pingyou-574-certificate-report
+  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
+    here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 175
   source_id: mishapolk-kkt-refinements-2026-10-14
   value: '13.76417431748659663'
@@ -6218,29 +6778,29 @@ selected_overrides:
   reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's printed
     side (T-056).
 - n: 179
-  source_id: gupta-square-packing-refinements-2026-10-08
-  value: '13.8837954905108985'
-  evidence: E-gupta-438-rational-report
-  reason: The complete rational precision refinement is strictly smaller than both previous exact
-    upper lanes.
+  source_id: pingyou-pr574-certificates-2026-10-13
+  value: '13.88379549051089845'
+  evidence: E-pingyou-574-certificate-report
+  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
+    here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 180
-  source_id: couzo-451-exact-refinements
-  value: '13.9169935224778325'
-  evidence: E-couzo-451-rational-report
+  source_id: pingyou-pr574-certificates-2026-10-13
+  value: '13.91699352247783249'
+  evidence: E-pingyou-574-certificate-report
   reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-11 (T-128).
+    here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 181
-  source_id: squish-500-fourth-request-2026-10-11
-  value: '13.9508195310229241'
-  evidence: E-squish-500-certificate-report
+  source_id: pingyou-pr574-certificates-2026-10-13
+  value: '13.95081953102292407'
+  evidence: E-pingyou-574-certificate-report
   reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-12 (T-151).
+    here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 182
-  source_id: evand-square-packing-2026-10-05
-  value: '13.974090713121439007150130032772'
-  evidence: E-evand-exact-optima-2026-10-05-report
-  reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's printed
-    side (T-056).
+  source_id: pingyou-pr574-certificates-2026-10-13
+  value: '13.9740907131214390071'
+  evidence: E-pingyou-574-certificate-report
+  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
+    here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 199
   source_id: gupta-square-packing-refinements-2026-10-08
   value: '14.6175721735928069'
@@ -6254,11 +6814,11 @@ selected_overrides:
   reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
     here and an accepted review, adopted on 2026-10-16 (T-186).
 - n: 206
-  source_id: evand-square-packing-2026-10-05
-  value: '14.860158663391903236840250629824'
-  evidence: E-evand-exact-optima-2026-10-05-report
-  reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's printed
-    side (T-056).
+  source_id: pingyou-pr574-certificates-2026-10-13
+  value: '14.8601586633919032367'
+  evidence: E-pingyou-574-certificate-report
+  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
+    here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 207
   source_id: mishapolk-exact-certificates-2026-10-12
   value: '14.8809603715580000'
@@ -6266,23 +6826,23 @@ selected_overrides:
   reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
     here and an accepted review, adopted on 2026-10-15 (T-173).
 - n: 208
-  source_id: gupta-square-packing-refinements-2026-10-08
-  value: '14.9245187720293559'
-  evidence: E-gupta-438-rational-report
-  reason: The complete rational precision refinement is strictly smaller than both previous exact
-    upper lanes.
-- n: 209
-  source_id: couzo-certificates-2026-10-10
-  value: '14.9462232264464511'
-  evidence: E-couzo-488-certificate-report
+  source_id: pingyou-pr574-certificates-2026-10-13
+  value: '14.92451877202935589'
+  evidence: E-pingyou-574-certificate-report
   reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-11 (T-140).
+    here and an accepted review, adopted on 2026-10-17 (T-174).
+- n: 209
+  source_id: pingyou-pr574-certificates-2026-10-13
+  value: '14.94622322644645106'
+  evidence: E-pingyou-574-certificate-report
+  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
+    here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 210
-  source_id: evand-square-packing-2026-10-05
-  value: '14.973001116587625741983018050468'
-  evidence: E-evand-exact-optima-2026-10-05-report
-  reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's printed
-    side (T-056).
+  source_id: pingyou-pr574-certificates-2026-10-13
+  value: '14.9730011165876257419'
+  evidence: E-pingyou-574-certificate-report
+  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
+    here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 211
   source_id: couzo-verified-bounds-2026-10-14-in-corpus
   value: '14.9935496262994211'
@@ -6290,11 +6850,11 @@ selected_overrides:
   reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
     here and an accepted review, adopted on 2026-10-16 (T-188).
 - n: 228
-  source_id: couzo-451-exact-refinements
-  value: '15.6046014757296743'
-  evidence: E-couzo-451-rational-report
+  source_id: pingyou-pr574-certificates-2026-10-13
+  value: '15.60460147572967429'
+  evidence: E-pingyou-574-certificate-report
   reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-11 (T-128).
+    here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 232
   source_id: mishapolk-kkt-refinements-2026-10-14
   value: '15.76417431748659663'
@@ -6314,23 +6874,23 @@ selected_overrides:
   reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
     here and an accepted review, adopted on 2026-10-16 (T-190).
 - n: 238
-  source_id: squish-500-fourth-request-2026-10-11
-  value: '15.9241067853214947'
-  evidence: E-squish-500-certificate-report
+  source_id: pingyou-pr574-certificates-2026-10-13
+  value: '15.92410678532149466'
+  evidence: E-pingyou-574-certificate-report
   reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-12 (T-151).
+    here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 239
-  source_id: squish-500-fourth-request-2026-10-11
-  value: '15.9484433273005000'
-  evidence: E-squish-500-certificate-report
+  source_id: pingyou-pr574-certificates-2026-10-13
+  value: '15.94844332730049991'
+  evidence: E-pingyou-574-certificate-report
   reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-12 (T-151).
+    here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 240
-  source_id: evand-square-packing-2026-10-05
-  value: '15.969685337530780336056074320582'
-  evidence: E-evand-exact-optima-2026-10-05-report
-  reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's printed
-    side (T-056).
+  source_id: pingyou-pr574-certificates-2026-10-13
+  value: '15.969685337530780336'
+  evidence: E-pingyou-574-certificate-report
+  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
+    here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 241
   source_id: couzo-certificates-2026-10-13-in-corpus
   value: '15.9871170951502388'
@@ -6350,17 +6910,17 @@ selected_overrides:
   reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
     here and an accepted review, adopted on 2026-10-11 (T-136).
 - n: 261
-  source_id: pingyou-n261-refinement-2026-10-12
-  value: '16.6787798753429099'
-  evidence: E-pingyou-567-certificate-report
+  source_id: pingyou-pr574-certificates-2026-10-13
+  value: '16.67877987534290982'
+  evidence: E-pingyou-574-certificate-report
   reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-15 (T-169).
+    here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 263
-  source_id: evand-regularized-2026-10-10
-  value: '16.7331660078993790'
-  evidence: E-evand-regularized-certificate-report
+  source_id: pingyou-pr574-certificates-2026-10-13
+  value: '16.73316600789937898'
+  evidence: E-pingyou-574-certificate-report
   reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-11 (T-146).
+    here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 264
   source_id: mishapolk-kkt-refinements-2026-10-14
   value: '16.77473513238783285'
@@ -6380,23 +6940,23 @@ selected_overrides:
   reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
     here and an accepted review, adopted on 2026-10-11 (T-134).
 - n: 268
-  source_id: evand-square-packing-2026-10-05
-  value: '16.878814821006764724747121053018'
-  evidence: E-evand-exact-optima-2026-10-05-report
-  reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's printed
-    side (T-056).
+  source_id: pingyou-pr574-certificates-2026-10-13
+  value: '16.8788148210067647246'
+  evidence: E-pingyou-574-certificate-report
+  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
+    here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 269
-  source_id: evand-regularized-2026-10-10
-  value: '16.9015135821891322'
-  evidence: E-evand-regularized-certificate-report
+  source_id: pingyou-pr574-certificates-2026-10-13
+  value: '16.901513582189132199'
+  evidence: E-pingyou-574-certificate-report
   reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-11 (T-146).
+    here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 270
-  source_id: squish-500-fourth-request-2026-10-11
-  value: '16.9281969933290166'
-  evidence: E-squish-500-certificate-report
+  source_id: pingyou-pr574-certificates-2026-10-13
+  value: '16.92819699332901659'
+  evidence: E-pingyou-574-certificate-report
   reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-12 (T-151).
+    here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 271
   source_id: mishapolk-kkt-refinements-2026-10-14
   value: '16.94899235645120561'
@@ -6404,17 +6964,17 @@ selected_overrides:
   reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
     here and an accepted review, adopted on 2026-10-16 (T-186).
 - n: 272
-  source_id: pingyou-n272-refinement-2026-10-12
-  value: '16.9655864748376707'
-  evidence: E-pingyou-569-certificate-report
+  source_id: pingyou-pr574-certificates-2026-10-13
+  value: '16.96558647483767064'
+  evidence: E-pingyou-574-certificate-report
   reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-15 (T-171).
+    here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 273
-  source_id: evand-square-packing-2026-10-05
-  value: '16.983925962650404316108837346991'
-  evidence: E-evand-exact-optima-2026-10-05-report
-  reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's printed
-    side (T-056).
+  source_id: pingyou-pr574-certificates-2026-10-13
+  value: '16.983925962650404316'
+  evidence: E-pingyou-574-certificate-report
+  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
+    here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 292
   source_id: evand-regularized-2026-10-10
   value: '17.5913781454976982'
@@ -6428,11 +6988,11 @@ selected_overrides:
   reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
     here and an accepted review, adopted on 2026-10-11 (T-146).
 - n: 297
-  source_id: evand-square-packing-2026-10-05
-  value: '17.74041728754380185115320576776'
-  evidence: E-evand-exact-optima-2026-10-05-report
-  reason: The exact optimum of the same packing, certified here (T-098), below Francisco Couzo's printed
-    side (T-056).
+  source_id: pingyou-pr574-certificates-2026-10-13
+  value: '17.740417287543801851'
+  evidence: E-pingyou-574-certificate-report
+  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
+    here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 301
   source_id: evand-square-packing-2026-10-05
   value: '17.846667192843489783121781262887'
@@ -6458,29 +7018,29 @@ selected_overrides:
   reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
     here and an accepted review, adopted on 2026-10-16 (T-186).
 - n: 305
-  source_id: couzo-certificates-2026-10-11-in-corpus
-  value: '17.9504664821377123'
-  evidence: E-couzo-506-certificate-report
+  source_id: pingyou-pr574-certificates-2026-10-13
+  value: '17.95046648213771228'
+  evidence: E-pingyou-574-certificate-report
   reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-12 (T-152).
+    here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 306
-  source_id: couzo-451-exact-refinements
-  value: '17.9634337174914258'
-  evidence: E-couzo-451-rational-report
+  source_id: pingyou-pr574-certificates-2026-10-13
+  value: '17.96343371749142574'
+  evidence: E-pingyou-574-certificate-report
   reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-11 (T-128).
+    here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 307
-  source_id: squish-481-third-request-2026-10-09
-  value: '17.9808627840546911'
-  evidence: E-squish-481-certificate-report
+  source_id: pingyou-pr574-certificates-2026-10-13
+  value: '17.98086278405469107'
+  evidence: E-pingyou-574-certificate-report
   reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-11 (T-136).
+    here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 308
-  source_id: evand-record-hunt3-2026-10-10
-  value: '17.998269879526255875387992744507'
-  evidence: E-evand-489-hunt3-report
+  source_id: pingyou-pr574-certificates-2026-10-13
+  value: '17.9982698795262558753'
+  evidence: E-pingyou-574-certificate-report
   reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-11 (T-141).
+    here and an accepted review, adopted on 2026-10-17 (T-174).
 superseded_reports:
 - n: 123
   source_id: evand-square-packing-2026-10-05
@@ -6493,7 +7053,7 @@ superseded_reports:
   value: '14.926534459699423246906428356506'
   reason: The newer SQUISH update reports a smaller exact rational side; earlier source geometry and
     verification remain retained.
-  superseded_by: gupta-square-packing-refinements-2026-10-08
+  superseded_by: pingyou-pr574-certificates-2026-10-13
 - n: 237
   source_id: evand-square-packing-2026-10-05
   value: '15.911191683001783031028912780176'
@@ -6505,13 +7065,13 @@ superseded_reports:
   value: '15.953819333480779915463620238818'
   reason: The newer SQUISH update reports a smaller exact rational side; earlier source geometry and
     verification remain retained.
-  superseded_by: squish-500-fourth-request-2026-10-11
+  superseded_by: pingyou-pr574-certificates-2026-10-13
 - n: 263
   source_id: evand-square-packing-2026-10-05
   value: '16.742270262025057683757892778345'
   reason: The newer SQUISH update reports a smaller exact rational side; earlier source geometry and
     verification remain retained.
-  superseded_by: evand-regularized-2026-10-10
+  superseded_by: pingyou-pr574-certificates-2026-10-13
 - n: 126
   source_id: squish-ten-packings-2026-10-07
   value: '11.7735852916961071'
@@ -6535,13 +7095,13 @@ superseded_reports:
   value: '12.9536770693532733'
   reason: The newer SQUISH update reports a smaller exact rational side; earlier source geometry and
     verification remain retained.
-  superseded_by: dostashev-records-2026-10-11
+  superseded_by: pingyou-pr574-certificates-2026-10-13
 - n: 238
   source_id: squish-ten-packings-2026-10-07
   value: '15.9294090272583145'
   reason: The newer SQUISH update reports a smaller exact rational side; earlier source geometry and
     verification remain retained.
-  superseded_by: squish-500-fourth-request-2026-10-11
+  superseded_by: pingyou-pr574-certificates-2026-10-13
 - n: 28
   source_id: evand-square-packing-2026-10-05
   value: '5.824444616674059297016873205016'
@@ -6608,13 +7168,13 @@ superseded_reports:
 - n: 68
   source_id: franciscouzo-square-packing-2026
   value: '8.798795237222592'
-  superseded_by: rehwaldt-n68-refinement-2026-10-07
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: Superseded on 2026-10-05 by Evan Daniel's exact optimum of the same packing, certified here
     (T-098).
 - n: 68
   source_id: unitsquare-release1
   value: '8.803383074716108386903836683375989697670063329'
-  superseded_by: rehwaldt-n68-refinement-2026-10-07
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: Superseded on 2026-09-29 by Francisco Couzo's smaller certified side; since 2026-10-05 the
     selected report is Evan Daniel's exact optimum of that packing (T-098).
 - n: 69
@@ -6681,20 +7241,20 @@ superseded_reports:
 - n: 103
   source_id: casson-square-packing-2026
   value: '10.70377984436967189'
-  superseded_by: evand-regularized-2026-10-10
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: Larger than Francisco Couzo's side at this count; the case record states both sources' dates
     and values; since 2026-10-05 the selected report is Evan Daniel's exact optimum of that packing
     (T-098).
 - n: 103
   source_id: franciscouzo-square-packing-2026
   value: '10.703516755580015'
-  superseded_by: evand-regularized-2026-10-10
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: Superseded on 2026-10-05 by Evan Daniel's exact optimum of the same packing, certified here
     (T-098).
 - n: 103
   source_id: unitsquare-release1
   value: '10.703790283762427'
-  superseded_by: evand-regularized-2026-10-10
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: Superseded on 2026-09-29 by Francisco Couzo's smaller certified side; since 2026-10-05 the
     selected report is Evan Daniel's exact optimum of that packing (T-098).
 - n: 104
@@ -6707,13 +7267,13 @@ superseded_reports:
 - n: 105
   source_id: casson-square-packing-2026
   value: '10.80758853319602153'
-  superseded_by: pingyou-n105-refinement-2026-10-12
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: Larger than Francisco Couzo's side at this count; the case record states both sources' dates
     and values.
 - n: 105
   source_id: unitsquare-release1
   value: '10.807847913867976'
-  superseded_by: pingyou-n105-refinement-2026-10-12
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: Superseded on 2026-09-29 by Francisco Couzo's smaller certified side.
 - n: 106
   source_id: casson-square-packing-2026
@@ -6738,7 +7298,7 @@ superseded_reports:
 - n: 108
   source_id: evand-square-packing-2026-10-05
   value: '10.925919390161387510637107841608'
-  superseded_by: couzo-451-exact-refinements
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: The SQUISH reported new packing is smaller than this retained earlier claim.
 - n: 109
   source_id: evand-square-packing-2026-10-05
@@ -6750,13 +7310,13 @@ superseded_reports:
 - n: 110
   source_id: franciscouzo-square-packing-2026
   value: '10.996783396634358'
-  superseded_by: evand-square-packing-2026-10-05
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: Superseded on 2026-10-05 by Evan Daniel's exact optimum of the same packing, certified here
     (T-098).
 - n: 110
   source_id: unitsquare-release1
   value: '10.996797773597706'
-  superseded_by: evand-square-packing-2026-10-05
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: Superseded on 2026-09-29 by Francisco Couzo's smaller certified side; since 2026-10-05 the
     selected report is Evan Daniel's exact optimum of that packing (T-098).
 - n: 122
@@ -6796,7 +7356,7 @@ superseded_reports:
 - n: 127
   source_id: evand-square-packing-2026-10-05
   value: '11.822875655532295295369036633375'
-  superseded_by: couzo-451-exact-refinements
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: Certifies the catalogue's packing at a side 5.3e-15 above the one it prints, which stays
     the report; since 2026-10-06 it is the verified upper bound, rounded up at the printed precision
     (T-101).
@@ -6815,33 +7375,33 @@ superseded_reports:
 - n: 131
   source_id: casson-square-packing-2026
   value: '11.95652190193193043'
-  superseded_by: squish-481-third-request-2026-10-09
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: Larger than Francisco Couzo's side at this count; the case record states both sources' dates
     and values; since 2026-10-05 the selected report is Evan Daniel's exact optimum of that packing
     (T-098).
 - n: 131
   source_id: franciscouzo-square-packing-2026
   value: '11.954916830219048'
-  superseded_by: squish-481-third-request-2026-10-09
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: Superseded on 2026-10-05 by Evan Daniel's exact optimum of the same packing, certified here
     (T-098).
 - n: 131
   source_id: unitsquare-release1
   value: '11.956543108124773261501115489978287643498579738'
-  superseded_by: squish-481-third-request-2026-10-09
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: Superseded on 2026-09-29 by Francisco Couzo's smaller certified side; since 2026-10-05 the
     selected report is Evan Daniel's exact optimum of that packing (T-098).
 - n: 132
   source_id: casson-square-packing-2026
   value: '11.99134529315214159'
-  superseded_by: evand-record-hunt3-2026-10-10
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: Larger than Francisco Couzo's side at this count; the case record states both sources' dates
     and values; since 2026-10-05 the selected report is Evan Daniel's exact optimum of that packing
     (T-098).
 - n: 132
   source_id: franciscouzo-square-packing-2026
   value: '11.991327887694469'
-  superseded_by: evand-record-hunt3-2026-10-10
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: Superseded on 2026-10-05 by Evan Daniel's exact optimum of the same packing, certified here
     (T-098).
 - n: 145
@@ -6924,12 +7484,12 @@ superseded_reports:
 - n: 155
   source_id: casson-square-packing-2026
   value: '12.95820609164224457'
-  superseded_by: dostashev-records-2026-10-11
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: The SQUISH reported new packing is smaller than this retained earlier claim.
 - n: 155
   source_id: franciscouzo-square-packing-2026
   value: '12.955619592137850'
-  superseded_by: dostashev-records-2026-10-11
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: The SQUISH reported new packing is smaller than this retained earlier claim.
 - n: 156
   source_id: casson-square-packing-2026
@@ -6961,7 +7521,7 @@ superseded_reports:
 - n: 172
   source_id: franciscouzo-square-packing-2026
   value: '13.618988956935731'
-  superseded_by: evand-square-packing-2026-10-05
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: Superseded on 2026-10-05 by Evan Daniel's exact optimum of the same packing, certified here
     (T-098).
 - n: 173
@@ -7008,44 +7568,44 @@ superseded_reports:
 - n: 179
   source_id: evand-square-packing-2026-10-05
   value: '13.895341069976490731724097384352'
-  superseded_by: gupta-square-packing-refinements-2026-10-08
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: Certifies the catalogue's packing at a side 7.3e-16 above the one it prints, which stays
     the report; since 2026-10-06 it is the verified upper bound, rounded up at the printed precision
     (T-101).
 - n: 180
   source_id: casson-square-packing-2026
   value: '13.93500418116475004'
-  superseded_by: couzo-451-exact-refinements
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: The SQUISH reported new packing is smaller than this retained earlier claim.
 - n: 180
   source_id: franciscouzo-square-packing-2026
   value: '13.927888140501693'
-  superseded_by: couzo-451-exact-refinements
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: The SQUISH reported new packing is smaller than this retained earlier claim.
 - n: 181
   source_id: casson-square-packing-2026
   value: '13.95679529257278872'
-  superseded_by: squish-500-fourth-request-2026-10-11
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: Larger than Francisco Couzo's side at this count; the case record states both sources' dates
     and values; since 2026-10-05 the selected report is Evan Daniel's exact optimum of that packing
     (T-098).
 - n: 181
   source_id: franciscouzo-square-packing-2026
   value: '13.953748821957927'
-  superseded_by: squish-500-fourth-request-2026-10-11
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: Superseded on 2026-10-05 by Evan Daniel's exact optimum of the same packing, certified here
     (T-098).
 - n: 182
   source_id: casson-square-packing-2026
   value: '13.97409071444282525'
-  superseded_by: evand-square-packing-2026-10-05
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: Larger than Francisco Couzo's side at this count; the case record states both sources' dates
     and values; since 2026-10-05 the selected report is Evan Daniel's exact optimum of that packing
     (T-098).
 - n: 182
   source_id: franciscouzo-square-packing-2026
   value: '13.974090713124822'
-  superseded_by: evand-square-packing-2026-10-05
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: Superseded on 2026-10-05 by Evan Daniel's exact optimum of the same packing, certified here
     (T-098).
 - n: 197
@@ -7113,7 +7673,7 @@ superseded_reports:
 - n: 206
   source_id: franciscouzo-square-packing-2026
   value: '14.860158663395859'
-  superseded_by: evand-square-packing-2026-10-05
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: Superseded on 2026-10-05 by Evan Daniel's exact optimum of the same packing, certified here
     (T-098).
 - n: 207
@@ -7132,48 +7692,48 @@ superseded_reports:
 - n: 208
   source_id: casson-square-packing-2026
   value: '14.93761283595916289'
-  superseded_by: gupta-square-packing-refinements-2026-10-08
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: Larger than Francisco Couzo's side at this count; the case record states both sources' dates
     and values; since 2026-10-05 the selected report is Evan Daniel's exact optimum of that packing
     (T-098).
 - n: 208
   source_id: franciscouzo-square-packing-2026
   value: '14.937018796984567'
-  superseded_by: gupta-square-packing-refinements-2026-10-08
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: Superseded on 2026-10-05 by Francisco Couzo's own later and smaller certified side (T-092);
     since 2026-10-05 the selected report is Evan Daniel's exact optimum of that packing (T-098).
 - n: 208
   source_id: franciscouzo-square-packing-2026-10-03
   value: '14.926534459703511'
-  superseded_by: gupta-square-packing-refinements-2026-10-08
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: Superseded on 2026-10-05 by Evan Daniel's exact optimum of the same packing, certified here
     (T-098).
 - n: 209
   source_id: casson-square-packing-2026
   value: '14.95856148981292932'
-  superseded_by: couzo-certificates-2026-10-10
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: The SQUISH reported new packing is smaller than this retained earlier claim.
 - n: 209
   source_id: franciscouzo-square-packing-2026
   value: '14.955041639430016'
-  superseded_by: couzo-certificates-2026-10-10
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: The SQUISH reported new packing is smaller than this retained earlier claim.
 - n: 209
   source_id: franciscouzo-square-packing-2026-10-03
   value: '14.953939011860642'
-  superseded_by: couzo-certificates-2026-10-10
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: The SQUISH reported new packing is smaller than this retained earlier claim.
 - n: 210
   source_id: casson-square-packing-2026
   value: '14.97381035691250695'
-  superseded_by: evand-square-packing-2026-10-05
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: Larger than Francisco Couzo's side at this count; the case record states both sources' dates
     and values; since 2026-10-05 the selected report is Evan Daniel's exact optimum of that packing
     (T-098).
 - n: 210
   source_id: franciscouzo-square-packing-2026
   value: '14.973001116591412'
-  superseded_by: evand-square-packing-2026-10-05
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: Superseded on 2026-10-05 by Evan Daniel's exact optimum of the same packing, certified here
     (T-098).
 - n: 211
@@ -7199,20 +7759,20 @@ superseded_reports:
 - n: 228
   source_id: casson-square-packing-2026
   value: '15.60895620815939289'
-  superseded_by: couzo-451-exact-refinements
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: Larger than Francisco Couzo's side at this count; the case record states both sources' dates
     and values; since 2026-10-05 the selected report is Evan Daniel's exact optimum of that packing
     (T-098).
 - n: 228
   source_id: franciscouzo-square-packing-2026
   value: '15.604638007678682'
-  superseded_by: couzo-451-exact-refinements
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: Superseded on 2026-10-05 by Francisco Couzo's own later and smaller certified side (T-092);
     since 2026-10-05 the selected report is Evan Daniel's exact optimum of that packing (T-098).
 - n: 228
   source_id: franciscouzo-square-packing-2026-10-03
   value: '15.604602454552252'
-  superseded_by: couzo-451-exact-refinements
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: Superseded on 2026-10-05 by Evan Daniel's exact optimum of the same packing, certified here
     (T-098).
 - n: 229
@@ -7293,37 +7853,37 @@ superseded_reports:
 - n: 238
   source_id: casson-square-packing-2026
   value: '15.93958571370620980'
-  superseded_by: squish-500-fourth-request-2026-10-11
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: The SQUISH reported new packing is smaller than this retained earlier claim.
 - n: 238
   source_id: franciscouzo-square-packing-2026
   value: '15.931725503598480'
-  superseded_by: squish-500-fourth-request-2026-10-11
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: The SQUISH reported new packing is smaller than this retained earlier claim.
 - n: 239
   source_id: casson-square-packing-2026
   value: '15.95623903092502971'
-  superseded_by: squish-500-fourth-request-2026-10-11
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: Larger than Francisco Couzo's side at this count; the case record states both sources' dates
     and values; since 2026-10-05 the selected report is Evan Daniel's exact optimum of that packing
     (T-098).
 - n: 239
   source_id: franciscouzo-square-packing-2026
   value: '15.953819333484685'
-  superseded_by: squish-500-fourth-request-2026-10-11
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: Superseded on 2026-10-05 by Evan Daniel's exact optimum of the same packing, certified here
     (T-098).
 - n: 240
   source_id: casson-square-packing-2026
   value: '15.97536577224557242'
-  superseded_by: evand-square-packing-2026-10-05
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: Larger than Francisco Couzo's side at this count; the case record states both sources' dates
     and values; since 2026-10-05 the selected report is Evan Daniel's exact optimum of that packing
     (T-098).
 - n: 240
   source_id: franciscouzo-square-packing-2026
   value: '15.969685337536875'
-  superseded_by: evand-square-packing-2026-10-05
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: Superseded on 2026-10-05 by Evan Daniel's exact optimum of the same packing, certified here
     (T-098).
 - n: 241
@@ -7376,7 +7936,7 @@ superseded_reports:
 - n: 261
   source_id: evand-square-packing-2026-10-05
   value: '16.682926829268292683093658536586'
-  superseded_by: pingyou-n261-refinement-2026-10-12
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: Certifies the catalogue's packing at a side 2.7e-15 above the one it prints, which stays
     the report; since 2026-10-06 it is the verified upper bound, rounded up at the printed precision
     (T-101).
@@ -7390,13 +7950,13 @@ superseded_reports:
 - n: 263
   source_id: franciscouzo-square-packing-2026
   value: '16.742280159187313'
-  superseded_by: evand-regularized-2026-10-10
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: Superseded on 2026-10-05 by Francisco Couzo's own later and smaller certified side (T-092);
     since 2026-10-05 the selected report is Evan Daniel's exact optimum of that packing (T-098).
 - n: 263
   source_id: franciscouzo-square-packing-2026-10-03
   value: '16.742270262031791'
-  superseded_by: evand-regularized-2026-10-10
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: Superseded on 2026-10-05 by Evan Daniel's exact optimum of the same packing, certified here
     (T-098).
 - n: 264
@@ -7430,40 +7990,40 @@ superseded_reports:
 - n: 268
   source_id: casson-square-packing-2026
   value: '16.87895510935973675'
-  superseded_by: evand-square-packing-2026-10-05
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: Larger than Francisco Couzo's side at this count; the case record states both sources' dates
     and values; since 2026-10-05 the selected report is Evan Daniel's exact optimum of that packing
     (T-098).
 - n: 268
   source_id: franciscouzo-square-packing-2026
   value: '16.878814821018413'
-  superseded_by: evand-square-packing-2026-10-05
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: Superseded on 2026-10-05 by Evan Daniel's exact optimum of the same packing, certified here
     (T-098).
 - n: 269
   source_id: casson-square-packing-2026
   value: '16.90596713867399714'
-  superseded_by: evand-regularized-2026-10-10
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: Larger than Francisco Couzo's side at this count; the case record states both sources' dates
     and values; since 2026-10-05 the selected report is Evan Daniel's exact optimum of that packing
     (T-098).
 - n: 269
   source_id: franciscouzo-square-packing-2026
   value: '16.905967058598858'
-  superseded_by: evand-regularized-2026-10-10
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: Superseded on 2026-10-05 by Evan Daniel's exact optimum of the same packing, certified here
     (T-098).
 - n: 270
   source_id: casson-square-packing-2026
   value: '16.94057158197226087'
-  superseded_by: squish-500-fourth-request-2026-10-11
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: 'Larger than Francisco Couzo''s side at this count; the case record states both sources''
     dates and values; since 2026-10-05 the selected report is Evan Daniel''s exact optimum of that
     packing (T-098). The separately certified #399 arrangement is now strictly smaller.'
 - n: 270
   source_id: franciscouzo-square-packing-2026
   value: '16.937810329390629'
-  superseded_by: squish-500-fourth-request-2026-10-11
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: 'Superseded on 2026-10-05 by Evan Daniel''s exact optimum of the same packing, certified
     here (T-098). The separately certified #399 arrangement is now strictly smaller.'
 - n: 271
@@ -7482,34 +8042,34 @@ superseded_reports:
 - n: 272
   source_id: casson-square-packing-2026
   value: '16.96944950195848989'
-  superseded_by: pingyou-n272-refinement-2026-10-12
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: 'Larger than Francisco Couzo''s side at this count; the case record states both sources''
     dates and values; since 2026-10-05 the selected report is Evan Daniel''s exact optimum of that
     packing (T-098). The separately certified #399 arrangement is now strictly smaller.'
 - n: 272
   source_id: franciscouzo-square-packing-2026
   value: '16.968279785326896'
-  superseded_by: pingyou-n272-refinement-2026-10-12
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: 'Superseded on 2026-10-05 by Francisco Couzo''s own later and smaller certified side (T-092);
     since 2026-10-05 the selected report is Evan Daniel''s exact optimum of that packing (T-098).
     The separately certified #399 arrangement is now strictly smaller.'
 - n: 272
   source_id: franciscouzo-square-packing-2026-10-03
   value: '16.968165867864400'
-  superseded_by: pingyou-n272-refinement-2026-10-12
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: 'Superseded on 2026-10-05 by Evan Daniel''s exact optimum of the same packing, certified
     here (T-098). The separately certified #399 arrangement is now strictly smaller.'
 - n: 273
   source_id: casson-square-packing-2026
   value: '16.98811467146214582'
-  superseded_by: evand-square-packing-2026-10-05
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: Larger than Francisco Couzo's side at this count; the case record states both sources' dates
     and values; since 2026-10-05 the selected report is Evan Daniel's exact optimum of that packing
     (T-098).
 - n: 273
   source_id: franciscouzo-square-packing-2026
   value: '16.983925962660670'
-  superseded_by: evand-square-packing-2026-10-05
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: Superseded on 2026-10-05 by Evan Daniel's exact optimum of the same packing, certified here
     (T-098).
 - n: 290
@@ -7563,14 +8123,14 @@ superseded_reports:
 - n: 297
   source_id: casson-square-packing-2026
   value: '17.74092885618564353'
-  superseded_by: evand-square-packing-2026-10-05
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: Larger than Francisco Couzo's side at this count; the case record states both sources' dates
     and values; since 2026-10-05 the selected report is Evan Daniel's exact optimum of that packing
     (T-098).
 - n: 297
   source_id: franciscouzo-square-packing-2026
   value: '17.740417287548325'
-  superseded_by: evand-square-packing-2026-10-05
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: Superseded on 2026-10-05 by Evan Daniel's exact optimum of the same packing, certified here
     (T-098).
 - n: 298
@@ -7644,46 +8204,46 @@ superseded_reports:
 - n: 305
   source_id: casson-square-packing-2026
   value: '17.96053668235995815'
-  superseded_by: couzo-certificates-2026-10-11-in-corpus
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: Larger than Francisco Couzo's side at this count; the case record states both sources' dates
     and values; since 2026-10-05 the selected report is Evan Daniel's exact optimum of that packing
     (T-098).
 - n: 305
   source_id: franciscouzo-square-packing-2026
   value: '17.952959459023539'
-  superseded_by: couzo-certificates-2026-10-11-in-corpus
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: Superseded on 2026-10-05 by Evan Daniel's exact optimum of the same packing, certified here
     (T-098).
 - n: 306
   source_id: casson-square-packing-2026
   value: '17.96846609160515484'
-  superseded_by: couzo-451-exact-refinements
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: Larger than Francisco Couzo's side at this count; the case record states both sources' dates
     and values; since 2026-10-05 the selected report is Evan Daniel's exact optimum of that packing
     (T-098).
 - n: 306
   source_id: franciscouzo-square-packing-2026
   value: '17.963449907261179'
-  superseded_by: couzo-451-exact-refinements
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: Superseded on 2026-10-05 by Francisco Couzo's own later and smaller certified side (T-092);
     since 2026-10-05 the selected report is Evan Daniel's exact optimum of that packing (T-098).
 - n: 306
   source_id: franciscouzo-square-packing-2026-10-03
   value: '17.963438139777139'
-  superseded_by: couzo-451-exact-refinements
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: Superseded on 2026-10-05 by Evan Daniel's exact optimum of the same packing, certified here
     (T-098).
 - n: 307
   source_id: casson-square-packing-2026
   value: '17.98205200143469895'
-  superseded_by: squish-481-third-request-2026-10-09
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: Larger than Francisco Couzo's side at this count; the case record states both sources' dates
     and values; since 2026-10-05 the selected report is Evan Daniel's exact optimum of that packing
     (T-098).
 - n: 307
   source_id: franciscouzo-square-packing-2026
   value: '17.981030548643712'
-  superseded_by: squish-481-third-request-2026-10-09
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: Superseded on 2026-10-05 by Evan Daniel's exact optimum of the same packing, certified here
     (T-098).
 - n: 126
@@ -7694,7 +8254,7 @@ superseded_reports:
 - n: 130
   source_id: franciscouzo-square-packing-2026
   value: '11.911187706548755'
-  superseded_by: gupta-square-packing-refinements-2026-10-08
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: The SQUISH reported new packing is smaller than this retained earlier claim.
 - n: 154
   source_id: evand-square-packing-2026-10-05
@@ -7704,22 +8264,22 @@ superseded_reports:
 - n: 155
   source_id: evand-square-packing-2026-10-05
   value: '12.95561959213445243801096476729'
-  superseded_by: dostashev-records-2026-10-11
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: The SQUISH reported new packing is smaller than this retained earlier claim.
 - n: 180
   source_id: evand-square-packing-2026-10-05
   value: '13.927888140498096339178993024781'
-  superseded_by: couzo-451-exact-refinements
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: The SQUISH reported new packing is smaller than this retained earlier claim.
 - n: 209
   source_id: evand-square-packing-2026-10-05
   value: '14.953939011857122362887224108935'
-  superseded_by: couzo-certificates-2026-10-10
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: The SQUISH reported new packing is smaller than this retained earlier claim.
 - n: 238
   source_id: evand-square-packing-2026-10-05
   value: '15.931725503591328233767187231141'
-  superseded_by: squish-500-fourth-request-2026-10-11
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: The SQUISH reported new packing is smaller than this retained earlier claim.
 - n: 303
   source_id: evand-square-packing-2026-10-05
@@ -7735,19 +8295,19 @@ superseded_reports:
 - n: 108
   source_id: squish-ten-packings-2026-10-07
   value: '10.9206589394033085'
-  superseded_by: couzo-451-exact-refinements
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: The second SQUISH update reports a smaller geometry. Earlier certificates, exact sides,
     finder credits and accepted evidence remain retained for their own bounds.
 - n: 179
   source_id: squish-update-2026-10-07
   value: '13.8913125657406980'
-  superseded_by: gupta-square-packing-refinements-2026-10-08
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: The second SQUISH update reports a smaller geometry. Earlier certificates, exact sides,
     finder credits and accepted evidence remain retained for their own bounds.
 - n: 180
   source_id: squish-ten-packings-2026-10-07
   value: '13.9236350042524224'
-  superseded_by: couzo-451-exact-refinements
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: The second SQUISH update reports a smaller geometry. Earlier certificates, exact sides,
     finder credits and accepted evidence remain retained for their own bounds.
 - n: 199
@@ -7771,7 +8331,7 @@ superseded_reports:
 - n: 263
   source_id: squish-update-2026-10-07
   value: '16.7404464800428692'
-  superseded_by: evand-regularized-2026-10-10
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: The second SQUISH update reports a smaller geometry. Earlier certificates, exact sides,
     finder credits and accepted evidence remain retained for their own bounds.
 - n: 302
@@ -7783,7 +8343,7 @@ superseded_reports:
 - n: 105
   source_id: franciscouzo-square-packing-2026
   value: '10.806077865540567'
-  superseded_by: pingyou-n105-refinement-2026-10-12
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: Retained historical ceiling; the selected exact rational report is smaller.
 - n: 292
   source_id: franciscouzo-square-packing-2026
@@ -7793,7 +8353,7 @@ superseded_reports:
 - n: 68
   source_id: evand-square-packing-2026-10-05
   value: '8.798795237218283902664668919394'
-  superseded_by: rehwaldt-n68-refinement-2026-10-07
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: Retained historical ceiling; the selected exact rational report is smaller.
 - n: 102
   source_id: evand-square-packing-2026-10-05
@@ -7803,17 +8363,17 @@ superseded_reports:
 - n: 103
   source_id: evand-square-packing-2026-10-05
   value: '10.703516755572542008729416503972'
-  superseded_by: evand-regularized-2026-10-10
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: Historical source ceiling superseded by a smaller exact Xu construction.
 - n: 105
   source_id: rehwaldt-couzo-refinements-2026-10-07
   value: '10.80607786551970463257490535044771520398745274'
-  superseded_by: pingyou-n105-refinement-2026-10-12
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: Historical source ceiling superseded by a smaller exact Xu construction.
 - n: 108
   source_id: squish-second-update-2026-10-07
   value: '10.9099400734448775'
-  superseded_by: couzo-451-exact-refinements
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: Historical source ceiling superseded by a smaller exact Xu construction.
 - n: 123
   source_id: squish-update-2026-10-07
@@ -7833,7 +8393,7 @@ superseded_reports:
 - n: 131
   source_id: evand-square-packing-2026-10-05
   value: '11.954916830216124410139679227683'
-  superseded_by: squish-481-third-request-2026-10-09
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: Historical source ceiling superseded by a smaller exact Xu construction.
 - n: 51
   source_id: ry-xu-new-packings-2026-10-08
@@ -7848,7 +8408,7 @@ superseded_reports:
 - n: 130
   source_id: ry-xu-new-packings-2026-10-08
   value: '11.9086935692119087'
-  superseded_by: gupta-square-packing-refinements-2026-10-08
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: Complete rational certificate retained; the current exact construction is smaller.
 - n: 153
   source_id: ry-xu-new-packings-2026-10-08
@@ -7858,7 +8418,7 @@ superseded_reports:
 - n: 179
   source_id: ry-xu-new-packings-2026-10-08
   value: '13.8939549425138940'
-  superseded_by: gupta-square-packing-refinements-2026-10-08
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: Complete rational certificate retained; the current exact construction is smaller.
 - n: 236
   source_id: ry-xu-new-packings-2026-10-08
@@ -7873,18 +8433,18 @@ superseded_reports:
 - n: 263
   source_id: ry-xu-new-packings-2026-10-08
   value: '16.7406234266167407'
-  superseded_by: evand-regularized-2026-10-10
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: Complete rational certificate retained; the current exact construction is smaller.
 - n: 270
   source_id: evand-square-packing-2026-10-05
   value: '16.937810329340954110200218669924'
-  superseded_by: squish-500-fourth-request-2026-10-11
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: 'The complete #399 construction has a strictly smaller side; the earlier report and its
     full certificates remain historical.'
 - n: 272
   source_id: evand-square-packing-2026-10-05
   value: '16.968165867852158332894136646166'
-  superseded_by: pingyou-n272-refinement-2026-10-12
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: 'The complete #399 construction has a strictly smaller side; the earlier report and its
     full certificates remain historical.'
 - n: 199
@@ -7905,7 +8465,7 @@ superseded_reports:
 - n: 130
   source_id: squish-ten-packings-2026-10-07
   value: '11.9044830325168772'
-  superseded_by: gupta-square-packing-refinements-2026-10-08
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: Complete Gupta source certificate is strictly smaller.
 - n: 153
   source_id: squish-n153-2026-10-07
@@ -7915,12 +8475,12 @@ superseded_reports:
 - n: 180
   source_id: squish-second-update-2026-10-07
   value: '13.9176534174514757'
-  superseded_by: couzo-451-exact-refinements
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: Complete Gupta source certificate is strictly smaller.
 - n: 209
   source_id: squish-ten-packings-2026-10-07
   value: '14.9496179522017921'
-  superseded_by: couzo-certificates-2026-10-10
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: Complete Gupta source certificate is strictly smaller.
 - n: 154
   source_id: squish-update-2026-10-07
@@ -7930,12 +8490,12 @@ superseded_reports:
 - n: 179
   source_id: squish-second-update-2026-10-07
   value: '13.8837954905121866'
-  superseded_by: gupta-square-packing-refinements-2026-10-08
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: Complete Gupta source certificate is strictly smaller.
 - n: 208
   source_id: squish-update-2026-10-07
   value: '14.9245187720328190'
-  superseded_by: gupta-square-packing-refinements-2026-10-08
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: Complete Gupta source certificate is strictly smaller.
 - n: 237
   source_id: squish-update-2026-10-07
@@ -7945,12 +8505,12 @@ superseded_reports:
 - n: 238
   source_id: squish-update-2026-10-07
   value: '15.9261468570124710'
-  superseded_by: squish-500-fourth-request-2026-10-11
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: Complete Gupta source certificate is strictly smaller.
 - n: 239
   source_id: squish-update-2026-10-07
   value: '15.9493131697291908'
-  superseded_by: squish-500-fourth-request-2026-10-11
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: Complete Gupta source certificate is strictly smaller.
 - n: 88
   source_id: squish-second-update-2026-10-07
@@ -7960,7 +8520,7 @@ superseded_reports:
 - n: 108
   source_id: gupta-square-packing-refinements-2026-10-08
   value: '10.9099400734438859'
-  superseded_by: couzo-451-exact-refinements
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: The withdrawn Gupta rational certificate is larger than the selected Xu construction; its
     complete source and replay remain retained.
 - n: 123
@@ -7978,14 +8538,14 @@ superseded_reports:
 - n: 105
   source_id: evand-batch-105-130-2026-10-07
   value: '10.806077865519704632682966129102'
-  superseded_by: pingyou-n105-refinement-2026-10-12
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: The complete dated source certificate has a strictly larger exact rational side than the
     current verified selected bound; original custody remains historical and does not inherit another
     packet's geometry verification.
 - n: 130
   source_id: evand-batch-105-130-2026-10-07
   value: '11.911187706535762355657987890878'
-  superseded_by: gupta-square-packing-refinements-2026-10-08
+  superseded_by: pingyou-pr574-certificates-2026-10-13
   reason: The complete dated source certificate has a strictly larger exact rational side than the
     current verified selected bound; original custody remains historical and does not inherit another
     packet's geometry verification.
@@ -8005,15 +8565,15 @@ superseded_reports:
 - n: 84
   source_id: ry-xu-new-packings-2026-10-08
   value: '9.6980520605096981'
-  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-130's exact
+  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-174's exact
     side is smaller.
-  superseded_by: couzo-followup-refinements-2026-10-08
+  superseded_by: pingyou-pr574-certificates-2026-10-13
 - n: 86
   source_id: ry-xu-new-packings-2026-10-08
   value: '9.8205657300098206'
-  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-130's exact
+  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-174's exact
     side is smaller.
-  superseded_by: couzo-followup-refinements-2026-10-08
+  superseded_by: pingyou-pr574-certificates-2026-10-13
 - n: 102
   source_id: ry-xu-new-packings-2026-10-08
   value: '10.6058286965106059'
@@ -8023,21 +8583,21 @@ superseded_reports:
 - n: 103
   source_id: ry-xu-new-packings-2026-10-08
   value: '10.6792320475106793'
-  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-146's exact
+  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-174's exact
     side is smaller.
-  superseded_by: evand-regularized-2026-10-10
+  superseded_by: pingyou-pr574-certificates-2026-10-13
 - n: 105
   source_id: ry-xu-new-packings-2026-10-08
   value: '10.7906765754107907'
-  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-170's exact
+  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-174's exact
     side is smaller.
-  superseded_by: pingyou-n105-refinement-2026-10-12
+  superseded_by: pingyou-pr574-certificates-2026-10-13
 - n: 108
   source_id: ry-xu-new-packings-2026-10-08
   value: '10.9048247851109049'
-  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-128's exact
+  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-174's exact
     side is smaller.
-  superseded_by: couzo-451-exact-refinements
+  superseded_by: pingyou-pr574-certificates-2026-10-13
 - n: 123
   source_id: ry-xu-new-packings-2026-10-08
   value: '11.5913781457115914'
@@ -8053,9 +8613,9 @@ superseded_reports:
 - n: 127
   source_id: ry-xu-new-packings-2026-10-08
   value: '11.8109366475118110'
-  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-128's exact
+  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-174's exact
     side is smaller.
-  superseded_by: couzo-451-exact-refinements
+  superseded_by: pingyou-pr574-certificates-2026-10-13
 - n: 129
   source_id: ry-xu-new-packings-2026-10-08
   value: '11.8720298492118721'
@@ -8065,15 +8625,15 @@ superseded_reports:
 - n: 131
   source_id: ry-xu-new-packings-2026-10-08
   value: '11.9511500449119512'
-  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-136's exact
+  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-174's exact
     side is smaller.
-  superseded_by: squish-481-third-request-2026-10-09
+  superseded_by: pingyou-pr574-certificates-2026-10-13
 - n: 132
   source_id: evand-square-packing-2026-10-05
   value: '11.991327887691501411687842131585'
-  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-141's exact
+  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-174's exact
     side is smaller.
-  superseded_by: evand-record-hunt3-2026-10-10
+  superseded_by: pingyou-pr574-certificates-2026-10-13
 - n: 146
   source_id: ry-xu-new-packings-2026-10-08
   value: '12.5837822775125838'
@@ -8095,9 +8655,9 @@ superseded_reports:
 - n: 155
   source_id: squish-update-2026-10-07
   value: '12.9525032026045129'
-  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-149's exact
+  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-174's exact
     side is smaller.
-  superseded_by: dostashev-records-2026-10-11
+  superseded_by: pingyou-pr574-certificates-2026-10-13
 - n: 175
   source_id: ry-xu-new-packings-2026-10-08
   value: '13.7688992766137689'
@@ -8107,9 +8667,9 @@ superseded_reports:
 - n: 180
   source_id: gupta-square-packing-refinements-2026-10-08
   value: '13.9176534174501843'
-  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-128's exact
+  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-174's exact
     side is smaller.
-  superseded_by: couzo-451-exact-refinements
+  superseded_by: pingyou-pr574-certificates-2026-10-13
 - n: 207
   source_id: gupta-square-packing-refinements-2026-10-08
   value: '14.8879922583026574'
@@ -8119,15 +8679,15 @@ superseded_reports:
 - n: 209
   source_id: gupta-square-packing-refinements-2026-10-08
   value: '14.9496179522003981'
-  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-140's exact
+  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-174's exact
     side is smaller.
-  superseded_by: couzo-certificates-2026-10-10
+  superseded_by: pingyou-pr574-certificates-2026-10-13
 - n: 228
   source_id: evand-square-packing-2026-10-05
   value: '15.604602454546056967137037190451'
-  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-128's exact
+  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-174's exact
     side is smaller.
-  superseded_by: couzo-451-exact-refinements
+  superseded_by: pingyou-pr574-certificates-2026-10-13
 - n: 236
   source_id: gupta-square-packing-refinements-2026-10-08
   value: '15.8678008394199166'
@@ -8161,15 +8721,15 @@ superseded_reports:
 - n: 269
   source_id: evand-square-packing-2026-10-05
   value: '16.905967058583840911467960094275'
-  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-146's exact
+  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-174's exact
     side is smaller.
-  superseded_by: evand-regularized-2026-10-10
+  superseded_by: pingyou-pr574-certificates-2026-10-13
 - n: 270
   source_id: evand-new-arrangements-2026-10-07
   value: '16.937807228446029110709567408515'
-  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-151's exact
+  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-174's exact
     side is smaller.
-  superseded_by: squish-500-fourth-request-2026-10-11
+  superseded_by: pingyou-pr574-certificates-2026-10-13
 - n: 292
   source_id: rehwaldt-couzo-refinements-2026-10-07
   value: '17.597249391156465040471442005510391858592626557'
@@ -8191,27 +8751,27 @@ superseded_reports:
 - n: 305
   source_id: evand-square-packing-2026-10-05
   value: '17.952959459015527962875662582531'
-  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-152's exact
+  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-174's exact
     side is smaller.
-  superseded_by: couzo-certificates-2026-10-11-in-corpus
+  superseded_by: pingyou-pr574-certificates-2026-10-13
 - n: 306
   source_id: evand-square-packing-2026-10-05
   value: '17.963438139764002853611723469441'
-  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-128's exact
+  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-174's exact
     side is smaller.
-  superseded_by: couzo-451-exact-refinements
+  superseded_by: pingyou-pr574-certificates-2026-10-13
 - n: 307
   source_id: evand-square-packing-2026-10-05
   value: '17.981030548633310696277454165157'
-  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-136's exact
+  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-174's exact
     side is smaller.
-  superseded_by: squish-481-third-request-2026-10-09
+  superseded_by: pingyou-pr574-certificates-2026-10-13
 - n: 305
   source_id: evand-record-hunt3-2026-10-10
   value: '17.951139772207'
   reason: A certificate of the same release that no register entry cites; its exact side equals T-140's,
-    the house from 11 to 12 October 2026; above the house adopted on 2026-10-12 (T-152).
-  superseded_by: couzo-certificates-2026-10-11-in-corpus
+    the house from 11 to 12 October 2026; above the house adopted on 2026-10-17 (T-174).
+  superseded_by: pingyou-pr574-certificates-2026-10-13
 - n: 156
   source_id: evand-square-packing-2026-10-05
   value: '12.982082698516893102076828502036'
@@ -8227,27 +8787,27 @@ superseded_reports:
 - n: 261
   source_id: ry-xu-new-packings-2026-10-08
   value: '16.6787798754166788'
-  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-169's exact
+  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-174's exact
     side is smaller.
-  superseded_by: pingyou-n261-refinement-2026-10-12
+  superseded_by: pingyou-pr574-certificates-2026-10-13
 - n: 181
   source_id: evand-square-packing-2026-10-05
   value: '13.953748821954402498045544433567'
-  reason: The house until 2026-10-12; its certificate stays retained and verified, and T-151's exact
+  reason: The house until 2026-10-12; its certificate stays retained and verified, and T-174's exact
     side is smaller.
-  superseded_by: squish-500-fourth-request-2026-10-11
+  superseded_by: pingyou-pr574-certificates-2026-10-13
 - n: 238
   source_id: gupta-square-packing-refinements-2026-10-08
   value: '15.9261468570109784'
-  reason: The house until 2026-10-12; its certificate stays retained and verified, and T-151's exact
+  reason: The house until 2026-10-12; its certificate stays retained and verified, and T-174's exact
     side is smaller.
-  superseded_by: squish-500-fourth-request-2026-10-11
+  superseded_by: pingyou-pr574-certificates-2026-10-13
 - n: 239
   source_id: gupta-square-packing-refinements-2026-10-08
   value: '15.9493131697276962'
-  reason: The house until 2026-10-12; its certificate stays retained and verified, and T-151's exact
+  reason: The house until 2026-10-12; its certificate stays retained and verified, and T-174's exact
     side is smaller.
-  superseded_by: squish-500-fourth-request-2026-10-11
+  superseded_by: pingyou-pr574-certificates-2026-10-13
 - n: 271
   source_id: evand-square-packing-2026-10-05
   value: '16.950820792624958786450490084388'
@@ -8257,9 +8817,9 @@ superseded_reports:
 - n: 272
   source_id: evand-new-arrangements-2026-10-07
   value: '16.968110145769600505005359235592'
-  reason: The house until 2026-10-12; its certificate stays retained and verified, and T-171's exact
+  reason: The house until 2026-10-12; its certificate stays retained and verified, and T-174's exact
     side is smaller.
-  superseded_by: pingyou-n272-refinement-2026-10-12
+  superseded_by: pingyou-pr574-certificates-2026-10-13
 - n: 304
   source_id: evand-square-packing-2026-10-05
   value: '17.934650018390681724105084929881'
@@ -8270,14 +8830,14 @@ superseded_reports:
   source_id: couzo-certificates-2026-10-10
   value: '16.9297753535413596'
   reason: The house from 2026-10-11 until 2026-10-12; its certificate stays retained and verified,
-    and T-151's exact side is smaller.
-  superseded_by: squish-500-fourth-request-2026-10-11
+    and T-174's exact side is smaller.
+  superseded_by: pingyou-pr574-certificates-2026-10-13
 - n: 305
   source_id: couzo-certificates-2026-10-10
   value: '17.9511397722069976'
   reason: The house from 2026-10-11 until 2026-10-12; its certificate stays retained and verified,
-    and T-152's exact side is smaller.
-  superseded_by: couzo-certificates-2026-10-11-in-corpus
+    and T-174's exact side is smaller.
+  superseded_by: pingyou-pr574-certificates-2026-10-13
 - n: 154
   source_id: squish-481-third-request-2026-10-09
   value: '12.9230702023011408'
@@ -8348,8 +8908,8 @@ superseded_reports:
   source_id: couzo-followup-refinements-2026-10-08
   value: '10.7893037837481589'
   reason: The house from 2026-10-11 until 2026-10-15; its certificate stays retained and verified,
-    and T-170's exact side is smaller.
-  superseded_by: pingyou-n105-refinement-2026-10-12
+    and T-174's exact side is smaller.
+  superseded_by: pingyou-pr574-certificates-2026-10-13
 - n: 129
   source_id: evand-regularized-2026-10-10
   value: '11.8720298490811800'
@@ -8378,8 +8938,8 @@ superseded_reports:
   source_id: barnett-refinements-2026-10-11
   value: '16.6787798753432078'
   reason: The house from 2026-10-11 until 2026-10-15; its certificate stays retained and verified,
-    and T-169's exact side is smaller.
-  superseded_by: pingyou-n261-refinement-2026-10-12
+    and T-174's exact side is smaller.
+  superseded_by: pingyou-pr574-certificates-2026-10-13
 - n: 271
   source_id: squish-500-fourth-request-2026-10-11
   value: '16.9491166878150100'
@@ -8390,8 +8950,8 @@ superseded_reports:
   source_id: squish-500-fourth-request-2026-10-11
   value: '16.9655864748376712'
   reason: The house from 2026-10-12 until 2026-10-15; its certificate stays retained and verified,
-    and T-171's exact side is smaller.
-  superseded_by: pingyou-n272-refinement-2026-10-12
+    and T-174's exact side is smaller.
+  superseded_by: pingyou-pr574-certificates-2026-10-13
 - n: 303
   source_id: evand-regularized-2026-10-10
   value: '17.9130654627385324'
@@ -8488,6 +9048,228 @@ superseded_reports:
   reason: The house from 2026-10-15 until 2026-10-16; its certificate stays retained and verified,
     and T-186's exact side is smaller.
   superseded_by: mishapolk-kkt-refinements-2026-10-14
+- n: 68
+  source_id: rehwaldt-n68-refinement-2026-10-07
+  value: '8.79879523721828390257668096702139408352101903022787926324037'
+  reason: The house until 2026-10-17; its certificate stays retained and verified, and T-174's exact
+    side is smaller.
+  superseded_by: pingyou-pr574-certificates-2026-10-13
+- n: 84
+  source_id: couzo-followup-refinements-2026-10-08
+  value: '9.6979347990149214'
+  reason: The house from 2026-10-11 until 2026-10-17; its certificate stays retained and verified,
+    and T-174's exact side is smaller.
+  superseded_by: pingyou-pr574-certificates-2026-10-13
+- n: 86
+  source_id: couzo-followup-refinements-2026-10-08
+  value: '9.8205354074967423'
+  reason: The house from 2026-10-11 until 2026-10-17; its certificate stays retained and verified,
+    and T-174's exact side is smaller.
+  superseded_by: pingyou-pr574-certificates-2026-10-13
+- n: 103
+  source_id: evand-regularized-2026-10-10
+  value: '10.6792320473613065'
+  reason: The house from 2026-10-11 until 2026-10-17; its certificate stays retained and verified,
+    and T-174's exact side is smaller.
+  superseded_by: pingyou-pr574-certificates-2026-10-13
+- n: 105
+  source_id: pingyou-n105-refinement-2026-10-12
+  value: '10.78930378374815884'
+  reason: The house from 2026-10-15 until 2026-10-17; its certificate stays retained and verified,
+    and T-174's exact side is smaller.
+  superseded_by: pingyou-pr574-certificates-2026-10-13
+- n: 108
+  source_id: couzo-451-exact-refinements
+  value: '10.9048210123203565'
+  reason: The house from 2026-10-11 until 2026-10-17; its certificate stays retained and verified,
+    and T-174's exact side is smaller.
+  superseded_by: pingyou-pr574-certificates-2026-10-13
+- n: 110
+  source_id: evand-square-packing-2026-10-05
+  value: '10.996783396631591639612746267957'
+  reason: The house until 2026-10-17; its certificate stays retained and verified, and T-174's exact
+    side is smaller.
+  superseded_by: pingyou-pr574-certificates-2026-10-13
+- n: 127
+  source_id: couzo-451-exact-refinements
+  value: '11.8108787875891799'
+  reason: The house from 2026-10-11 until 2026-10-17; its certificate stays retained and verified,
+    and T-174's exact side is smaller.
+  superseded_by: pingyou-pr574-certificates-2026-10-13
+- n: 130
+  source_id: gupta-square-packing-refinements-2026-10-08
+  value: '11.9044830325157865'
+  reason: The house until 2026-10-17; its certificate stays retained and verified, and T-174's exact
+    side is smaller.
+  superseded_by: pingyou-pr574-certificates-2026-10-13
+- n: 131
+  source_id: squish-481-third-request-2026-10-09
+  value: '11.9496595880358604'
+  reason: The house from 2026-10-11 until 2026-10-17; its certificate stays retained and verified,
+    and T-174's exact side is smaller.
+  superseded_by: pingyou-pr574-certificates-2026-10-13
+- n: 132
+  source_id: evand-record-hunt3-2026-10-10
+  value: '11.985680198845808811522231964102'
+  reason: The house from 2026-10-11 until 2026-10-17; its certificate stays retained and verified,
+    and T-174's exact side is smaller.
+  superseded_by: pingyou-pr574-certificates-2026-10-13
+- n: 155
+  source_id: dostashev-records-2026-10-11
+  value: '12.9524254069584562'
+  reason: The house from 2026-10-11 until 2026-10-17; its certificate stays retained and verified,
+    and T-174's exact side is smaller.
+  superseded_by: pingyou-pr574-certificates-2026-10-13
+- n: 172
+  source_id: evand-square-packing-2026-10-05
+  value: '13.61898895689939842899969151892'
+  reason: The house until 2026-10-17; its certificate stays retained and verified, and T-174's exact
+    side is smaller.
+  superseded_by: pingyou-pr574-certificates-2026-10-13
+- n: 179
+  source_id: gupta-square-packing-refinements-2026-10-08
+  value: '13.8837954905108985'
+  reason: The house until 2026-10-17; its certificate stays retained and verified, and T-174's exact
+    side is smaller.
+  superseded_by: pingyou-pr574-certificates-2026-10-13
+- n: 180
+  source_id: couzo-451-exact-refinements
+  value: '13.9169935224778325'
+  reason: The house from 2026-10-11 until 2026-10-17; its certificate stays retained and verified,
+    and T-174's exact side is smaller.
+  superseded_by: pingyou-pr574-certificates-2026-10-13
+- n: 181
+  source_id: squish-500-fourth-request-2026-10-11
+  value: '13.9508195310229241'
+  reason: The house from 2026-10-12 until 2026-10-17; its certificate stays retained and verified,
+    and T-174's exact side is smaller.
+  superseded_by: pingyou-pr574-certificates-2026-10-13
+- n: 182
+  source_id: evand-square-packing-2026-10-05
+  value: '13.974090713121439007150130032772'
+  reason: The house until 2026-10-17; its certificate stays retained and verified, and T-174's exact
+    side is smaller.
+  superseded_by: pingyou-pr574-certificates-2026-10-13
+- n: 206
+  source_id: evand-square-packing-2026-10-05
+  value: '14.860158663391903236840250629824'
+  reason: The house until 2026-10-17; its certificate stays retained and verified, and T-174's exact
+    side is smaller.
+  superseded_by: pingyou-pr574-certificates-2026-10-13
+- n: 208
+  source_id: gupta-square-packing-refinements-2026-10-08
+  value: '14.9245187720293559'
+  reason: The house until 2026-10-17; its certificate stays retained and verified, and T-174's exact
+    side is smaller.
+  superseded_by: pingyou-pr574-certificates-2026-10-13
+- n: 209
+  source_id: couzo-certificates-2026-10-10
+  value: '14.9462232264464511'
+  reason: The house from 2026-10-11 until 2026-10-17; its certificate stays retained and verified,
+    and T-174's exact side is smaller.
+  superseded_by: pingyou-pr574-certificates-2026-10-13
+- n: 210
+  source_id: evand-square-packing-2026-10-05
+  value: '14.973001116587625741983018050468'
+  reason: The house until 2026-10-17; its certificate stays retained and verified, and T-174's exact
+    side is smaller.
+  superseded_by: pingyou-pr574-certificates-2026-10-13
+- n: 228
+  source_id: couzo-451-exact-refinements
+  value: '15.6046014757296743'
+  reason: The house from 2026-10-11 until 2026-10-17; its certificate stays retained and verified,
+    and T-174's exact side is smaller.
+  superseded_by: pingyou-pr574-certificates-2026-10-13
+- n: 238
+  source_id: squish-500-fourth-request-2026-10-11
+  value: '15.9241067853214947'
+  reason: The house from 2026-10-12 until 2026-10-17; its certificate stays retained and verified,
+    and T-174's exact side is smaller.
+  superseded_by: pingyou-pr574-certificates-2026-10-13
+- n: 239
+  source_id: squish-500-fourth-request-2026-10-11
+  value: '15.9484433273005000'
+  reason: The house from 2026-10-12 until 2026-10-17; its certificate stays retained and verified,
+    and T-174's exact side is smaller.
+  superseded_by: pingyou-pr574-certificates-2026-10-13
+- n: 240
+  source_id: evand-square-packing-2026-10-05
+  value: '15.969685337530780336056074320582'
+  reason: The house until 2026-10-17; its certificate stays retained and verified, and T-174's exact
+    side is smaller.
+  superseded_by: pingyou-pr574-certificates-2026-10-13
+- n: 261
+  source_id: pingyou-n261-refinement-2026-10-12
+  value: '16.6787798753429099'
+  reason: The house from 2026-10-15 until 2026-10-17; its certificate stays retained and verified,
+    and T-174's exact side is smaller.
+  superseded_by: pingyou-pr574-certificates-2026-10-13
+- n: 263
+  source_id: evand-regularized-2026-10-10
+  value: '16.7331660078993790'
+  reason: The house from 2026-10-11 until 2026-10-17; its certificate stays retained and verified,
+    and T-174's exact side is smaller.
+  superseded_by: pingyou-pr574-certificates-2026-10-13
+- n: 268
+  source_id: evand-square-packing-2026-10-05
+  value: '16.878814821006764724747121053018'
+  reason: The house until 2026-10-17; its certificate stays retained and verified, and T-174's exact
+    side is smaller.
+  superseded_by: pingyou-pr574-certificates-2026-10-13
+- n: 269
+  source_id: evand-regularized-2026-10-10
+  value: '16.9015135821891322'
+  reason: The house from 2026-10-11 until 2026-10-17; its certificate stays retained and verified,
+    and T-174's exact side is smaller.
+  superseded_by: pingyou-pr574-certificates-2026-10-13
+- n: 270
+  source_id: squish-500-fourth-request-2026-10-11
+  value: '16.9281969933290166'
+  reason: The house from 2026-10-12 until 2026-10-17; its certificate stays retained and verified,
+    and T-174's exact side is smaller.
+  superseded_by: pingyou-pr574-certificates-2026-10-13
+- n: 272
+  source_id: pingyou-n272-refinement-2026-10-12
+  value: '16.9655864748376707'
+  reason: The house from 2026-10-15 until 2026-10-17; its certificate stays retained and verified,
+    and T-174's exact side is smaller.
+  superseded_by: pingyou-pr574-certificates-2026-10-13
+- n: 273
+  source_id: evand-square-packing-2026-10-05
+  value: '16.983925962650404316108837346991'
+  reason: The house until 2026-10-17; its certificate stays retained and verified, and T-174's exact
+    side is smaller.
+  superseded_by: pingyou-pr574-certificates-2026-10-13
+- n: 297
+  source_id: evand-square-packing-2026-10-05
+  value: '17.74041728754380185115320576776'
+  reason: The house until 2026-10-17; its certificate stays retained and verified, and T-174's exact
+    side is smaller.
+  superseded_by: pingyou-pr574-certificates-2026-10-13
+- n: 305
+  source_id: couzo-certificates-2026-10-11-in-corpus
+  value: '17.9504664821377123'
+  reason: The house from 2026-10-12 until 2026-10-17; its certificate stays retained and verified,
+    and T-174's exact side is smaller.
+  superseded_by: pingyou-pr574-certificates-2026-10-13
+- n: 306
+  source_id: couzo-451-exact-refinements
+  value: '17.9634337174914258'
+  reason: The house from 2026-10-11 until 2026-10-17; its certificate stays retained and verified,
+    and T-174's exact side is smaller.
+  superseded_by: pingyou-pr574-certificates-2026-10-13
+- n: 307
+  source_id: squish-481-third-request-2026-10-09
+  value: '17.9808627840546911'
+  reason: The house from 2026-10-11 until 2026-10-17; its certificate stays retained and verified,
+    and T-174's exact side is smaller.
+  superseded_by: pingyou-pr574-certificates-2026-10-13
+- n: 308
+  source_id: evand-record-hunt3-2026-10-10
+  value: '17.998269879526255875387992744507'
+  reason: The house from 2026-10-11 until 2026-10-17; its certificate stays retained and verified,
+    and T-174's exact side is smaller.
+  superseded_by: pingyou-pr574-certificates-2026-10-13
 beyond_horizon_claims:
 - n: 327
   source_id: couzo-extended-range-reports-2026-10-08

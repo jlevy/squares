@@ -187,23 +187,21 @@ class Pending:
 #: request, and its algebraic ones at 70, 153 and 207, which RP-3 kept out, for the
 #: writer. There were 60 rational counts on 16 October 2026; the same day's adoption of
 #: T-186 to T-190 (#657) took ten of them below T-174 (129, 146, 156, 175, 176, 204, 232,
-#: 264, 271 and 303), which left 50. A pull request that validates a smaller packing
-#: adopts it or stages its counts here with the bead that adopts them and why
-#: (`STAGING_REASONS`); an adoption waits with its regularization runs, never apart from
-#: them (`default_drawings.deferral_problems`). The pull request that adopts a count takes
-#: it off. Issue 639's exact algebraic sides (T-193), validated at stage 4 on 16 October
-#: 2026 (#658), are the smallest at all sixteen of their counts: below T-174's rational
-#: sides at the twelve staged for it before, which leaves it 38 for the next pull
-#: request, and below T-186's houses at 175, 204, 232 and 302. All sixteen are algebraic,
-#: so they wait for the writer.
+#: 264, 271 and 303), which left 50. The adoption of 17 October 2026 (think-3mry)
+#: took 37 rational counts off. Issue 639's exact algebraic sides (T-193), validated at
+#: stage 4 on 16 October 2026 (#658), are smaller at twelve others: 88, 102, 123, 126,
+#: 199, 258, 259, 266, 267, 292, 295 and 301. They are staged for the writer, as are its
+#: four houses below T-186 at 175, 204, 232 and 302. At 236 Evan Daniel's issue 659
+#: reports a side 2.02e-3 below T-174's, whose import adopts it; T-174 stays staged there
+#: until then. A pull request that validates a smaller packing adopts it or stages its
+#: counts here with the bead that adopts them and why (`STAGING_REASONS`); an adoption
+#: waits with its regularization runs, never apart from them
+#: (`default_drawings.deferral_problems`). The pull request that adopts a count takes it
+#: off.
 PENDING_ADOPTION: dict[int, Pending] = {
     **{
         n: Pending(house="T-174", bead=ADOPTION_BEAD, why=NEXT_PULL_REQUEST)
-        for n in (
-            68, 84, 86, 103, 105, 108, 110, 127, 130, 131, 132, 155, 172, 179, 180, 181,
-            182, 206, 208, 209, 210, 228, 236, 238, 239, 240, 261, 263, 268, 269, 270,
-            272, 273, 297, 305, 306, 307, 308,
-        )
+        for n in (236,)
     },
     **{
         n: Pending(house="T-174", bead=WRITER_BEAD, why=NO_WRITER)

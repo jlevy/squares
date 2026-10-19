@@ -107,10 +107,22 @@ PAGE_BUDGET_EXCEPTIONS: dict[str, tuple[int, str]] = {
         ),
     ),
     "results.html": (
-        1_100_000,
+        1_250_000,
         (
-            "The complete registered-result table with prepared math measures 976,783 bytes "
-            "at 184 results, about 3.5 kB a row; it measured 843,037 at 146."
+            "The complete 212-result table with prepared math measures 1,141,207 bytes. "
+            "Each row links its full record; no record body is repeated in the table. "
+            "Three-run desktop/mobile, light/dark and no-JS checks pass: "
+            "CLS <=0.001, LCP <=576 ms, longest task <=153 ms and blocking <=123 ms. "
+            "The ceiling retains about 100 kB of headroom for registered results."
+        ),
+    ),
+    "result/t-174.html": (
+        350_000,
+        (
+            "The complete 68-case result and its 89-step history with prepared math "
+            "measure 305,917 bytes. Three-run desktop/mobile, light/dark and no-JS "
+            "checks pass: CLS <=0.001, LCP <=576 ms, longest task <=153 ms and "
+            "blocking <=123 ms."
         ),
     ),
     "result/t-180.html": (
