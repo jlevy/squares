@@ -5,7 +5,7 @@ title: "Codex PR #665 engineering reconciliation of reviewed repairs and T-174 h
 kind: task
 status: in_progress
 priority: 2
-version: 15
+version: 16
 delegate: codex-665-adoption-reconcile
 labels: []
 dependencies: []
@@ -18,10 +18,11 @@ child_order_hints:
   - is-01m59ve04fqftdq6tg8s4ymbdh
   - is-01m59w623z7p0ytxv0hs95b45g
   - is-01m59ym3qrj8cmx2gx1mf2pg2r
+  - is-01m5a004v9wvg5rsjmz1h8g4h5
 hold: null
 hold_until: null
 created_at: 2026-10-19T07:52:24.446Z
-updated_at: 2026-10-19T11:26:50.615Z
+updated_at: 2026-10-19T11:50:53.544Z
 started_at: 2026-10-19T07:52:32.599Z
 ---
 Engineering-only child; preserve original think-3mry owner user-eb-adopt-174. Exclusive checkout .worktrees/fix-665-adoption-20261018. Recover and commit reviewed README/test repairs; compare all 37 rational T-174 adopted sides against landed main T-195 n29 using exact fractions; prepare bounded local source reconciliation. Final records/release integration waits for both #679 and #671 on actual main; no publication, push, PR mutation, merge, rating/credit changes, or new result IDs in this slice.
