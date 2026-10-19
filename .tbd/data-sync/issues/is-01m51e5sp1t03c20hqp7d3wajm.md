@@ -3,10 +3,10 @@ type: is
 id: is-01m51e5sp1t03c20hqp7d3wajm
 title: "Import ofitzharding: complete Lean proof of s(19) optimality (#640)"
 kind: task
-status: in_progress
+status: open
 priority: 1
-version: 22
-delegate: lane-658
+version: 23
+delegate: null
 labels:
   - result-import
 dependencies:
@@ -19,7 +19,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-16T04:05:28.896Z
-updated_at: 2026-10-19T23:55:42.873Z
+updated_at: 2026-10-19T23:56:13.304Z
 started_at: 2026-10-16T04:05:36.664Z
 ---
 Stage 1 triage of jlevy/squares#640 (ofitzharding, Oscar Fitzharding, "Complete Lean proof of s(19) optimality: registration request", opened 2026-10-16T03:41:08Z, labelled `intake`, no comments when read at about 04:20Z). Intake pass 2026-10-16 (epic think-mdnn): nothing was built or run. Stage 2 is done on the pass's branch: the packet fitzharding-n19-lean-2026-10-16 (below).
