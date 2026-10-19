@@ -1078,3 +1078,40 @@ repositories:
       expressions, n = 3 to 6 scope, proof text, certificates and checkers are unchanged.
       No new result or evidence to import. This read covers only those two naming
       commits; the earlier Valid7 and n42 imports remain with think-0ayk and think-kjd7.
+  # Incremental intake of 19 October: source scope and import ownership, no replay.
+  - url: https://github.com/evand/square-packing
+    read_through: ddf09e382ab3c63675476503d51d1a405bb2f7e6
+    read_on: '2026-10-19'
+    bead: think-pf37
+    note: >-
+      Five commits past 5ca0dc3. 4b456fe reports the stronger filled L-shape deficiency
+      bound, owned by think-f8py; 13da782 reports the staircase/Ryu threshold, owned by
+      think-pf37. The other three package the proof route and update pages, viewer and
+      credit presentation. Commit messages and changed paths are retained in
+      packing/campaign/issue-intake/intake-20261019/evand-source-inventory.json.
+      Source-content review and theorem custody remain with those owners; no build,
+      replay, bound adoption or assurance change here.
+  - url: https://github.com/franciscouzo/square-packing
+    read_through: 7b6c87e129cf80b5ff9847b90b47fd30b4563c54
+    read_on: '2026-10-19'
+    bead: think-xu4d
+    note: >-
+      One commit past c6da0fc, reporting the 85 upper bounds in #678, owned by
+      think-xu4d. All commit-file pages retain 543 changed paths in
+      packing/campaign/issue-intake/intake-20261019/couzo-source-inventory.json.
+      This inventory is not whole-source custody or certificate replay. Exact-side,
+      report-order and classical-envelope comparison and seed/construction provenance
+      remain open. Earlier #672 stays with think-2vjc. No discovery-credit decision or
+      assurance change here.
+  - url: https://github.com/TheSnakeFang/squarepack-certs
+    read_through: 0e9be7961773aa78b879c4ee6ba584a67e2e5513
+    read_on: '2026-10-19'
+    bead: think-494l
+    note: >-
+      One commit past 078789a changes only README and adds the v0.8 note at
+      note/fang-2026-n2-n-1.md. #603 comment 6255103888 also announces the separate
+      public squarepack-lean project at 947bdae. Note and Lean review are owned by
+      think-494l under think-0esw. The note's mixed-step and announced Lean single-step
+      statements require separate binding checks; no new certificate in this commit
+      and no build, replay or assurance promotion here. Receipt:
+      packing/campaign/issue-intake/intake-20261019/fang-source-inventory.json.
