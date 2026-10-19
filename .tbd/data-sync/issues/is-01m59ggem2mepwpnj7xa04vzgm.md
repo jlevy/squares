@@ -5,7 +5,7 @@ title: "Review #680 n183 mathematics independently from retained source"
 kind: task
 status: in_progress
 priority: 2
-version: 3
+version: 4
 delegate: codex-680-math-review-20261019
 labels:
   - validation
@@ -15,7 +15,7 @@ parent_id: is-01m59few7wa6j6yrnw49hjap7r
 hold: null
 hold_until: null
 created_at: 2026-10-19T07:20:10.625Z
-updated_at: 2026-10-19T07:35:01.510Z
+updated_at: 2026-10-19T07:59:33.721Z
 started_at: 2026-10-19T07:22:37.005Z
 ---
 Independent mathematical review for #680's finite upper-bound claim, started at retained-source intake and kept separate from the replay lane.
@@ -42,3 +42,11 @@ M1 major, nonblocking for the upper bound: source's 27 numerical flat modes are 
 M2 minor: source parsers ignore trailing rows/tokens and trust n and side. Replay must independently bind n=183, exact side, complete rows, finite rationals and original file identity; raw exit zero is insufficient. M3/M4 notes: regularized endpoint feasibility establishes no no-expansion path or arrangement identity; priority requires separate catalogue/envelope evidence; preserve Evan Daniel after Francisco Couzo credit and the unlogged crossover mates. Recommend S3 for this single-case bound.
 
 Remaining: root/record lane must map review under docs/project/reviews/, attach to allocated result, disposition findings and reconcile confirmation/backlog fields. Replay and duplicate-square/outside-wall controls remain think-1hmn's unrun work. Keep this bead open until mapped review and required integration exist. Read-only scope prohibited independent checker runs in this slice; no local-minimum, priority, house or rung promotion was made. No public review, commit or push was published by this lane; only bead bookkeeping synchronized.
+
+Replay addendum, 2026-10-19: accepted the original certificate's finite upper bound after auditing the separate replay lane's complete native positive and duplicate/outside control results. Review artifact above now includes a separate addendum starting at line 393, exact margins, all receipt/raw-job hashes, code path and independence limits. I ran only maintained admission: primary Python 3.14.7 with explicit worktree packing plus packing/src PYTHONPATH, devtools.upper_bound_reports evand-n183-subgrid-2026-10-19 check --n 183, no --replay; exit 0, one certificate and three jobs admitted. No geometry rerun, upstream execution, new verifier or broad tests by this reviewer.
+
+Both routes check unit-square shape, all walls and all 16,653 unordered pairs. Native positive minimum wall 1/200000000000000000000; identical strictly positive exact SAT fraction retained in the review. Duplicate pair gap -1; translated-square wall margin negative; both controls rejected by both routes. Every full deciding input binds expected n183, exact rational side and all rows to the source through custody and strict adapter. All three raw jobs match their receipt cases. This discharges M2 for primary replay. Primary receipt SHA-256 ca671960f55d78c16a36bd5ac56a55b7c3b7ba406ecb517639f7801cb3a8ee37. Batch completed 34.87s wall, 32.38s user, 0.48s system, one worker, 100s per-job ceilings.
+
+Propose V3/C3 once actual result evidence is mapped and cited, with full coverage, controls and true program independence/authorship metadata. This is a recommendation only; no result, house, rung, registry or publication changed. Both maintained geometry routes share the parser, half-angle conversion, Fraction, runtime and SAT theorem; no two mathematical methods, clean room, separate model family or independent humans are inferred. M1 remains qualified to numerical modes of the 182-square force-bearing subsystem plus a free rattler. Regularized certificate, path/identity, local-minimum/rigidity, priority and missing crossover lineage remain outside this confirmation.
+
+The earlier note describing replay as unrun is now superseded for the primary certificate only. Keep think-glg8 open: record/coordinator lane must map the durable review to docs/project/reviews/ and the actual registered result, disposition M1-M4 and integrate the evidence/program metadata. The mathematical replay audit is complete; integration/adoption owners remain open. No extra geometry replay is requested.
