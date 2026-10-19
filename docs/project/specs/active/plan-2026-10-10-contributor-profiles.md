@@ -834,7 +834,8 @@ adopted lower bound remains `531/50`.
 The selected site edition remains proposed `v0.8.0`, following actual `v0.7.29`. The
 explainer inherits `v0.4.8` and its October 13 article revision; the methods survey
 keeps `v0.2.3`, and the posters keep `v0.6.3`. Fresh release dispositions compare the
-exact 25/53 input scopes with actual main.
+final 30/52 input scopes with actual main: five regenerated claim-link inputs enter the
+explainer scope, and the unchanged n108 case leaves the methods scope.
 The paper manuscripts, producers, methods figure inputs and explainer’s n11 citation
 entry were compared exactly; no baseline paper render or PDF comparison was performed.
 
