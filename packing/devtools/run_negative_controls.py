@@ -1549,7 +1549,22 @@ def root_files() -> tuple[Path, ...]:
 # Propose 219 MiB for this measured source surface, with unchanged selection and the
 # oversized pre-clone refusal. Three portable workers remain bounded at 657 MiB.
 # This allowance covers neither unlanded contributor-profile inputs nor future intakes.
-SNAPSHOT_MAX_BYTES = 219 * 1024 * 1024
+#
+# 2026-10-19, the 19 October intake (think-bjvs): checkpoint f6f4a8482, the records repair
+# and #678's exact replay (2c2c8032d) and T-218's n183 adoption (180d04ce4), merged at
+# 1f3ab0fcb. `--source-bytes` read 228,635,067 on main f3d5da7bd, 1,003,077 under 219 MiB;
+# 230,914,136 at the checkpoint, +2,279,069, of which the three fine-net Mac confirmations
+# (fde545a96) are about 1,743,668 and the n183 source custody (f57ede12c) 382,441;
+# 231,239,877 with the records repair and #678, +325,741, #678's report-order walk
+# (48dfa7b75) 208,931 of it, its 83 certificates' 8.1 MB staying out of workers;
+# 230,995,364 on the n183 branch, +81,228; and 231,325,227 merged with the integration's
+# fixes, 1,687,083 over. Per-commit figures sum each commit's change over the merged copy
+# list. Auditing the largest new tree as a prune, `benchmarks/measure-verifier/census-mixed`
+# (5,925,310 bytes copied), saves nothing: every file returns as a results dependency.
+# Raise to 221 MiB, the least whole MiB above the merged surface, with unchanged selection
+# and the oversized pre-clone refusal: about 0.4 MB of headroom, enough for this intake's
+# release cut and for no later intake. Three portable workers are bounded at 663 MiB.
+SNAPSHOT_MAX_BYTES = 221 * 1024 * 1024
 DEFAULT_CONTROL_TIMEOUT_SECONDS = 120.0
 TERMINATION_GRACE_SECONDS = 1.0
 # Directories that must be walked into rather than bulk-copied, because something
