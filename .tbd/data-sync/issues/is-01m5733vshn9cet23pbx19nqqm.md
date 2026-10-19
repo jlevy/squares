@@ -5,8 +5,8 @@ title: "Import evand: s(229) ≤ 15.650163254859: registration request (#674)"
 kind: task
 status: in_progress
 priority: 2
-version: 6
-delegate: claude-code@spud10.local
+version: 8
+delegate: lane-new
 labels:
   - result-import
 dependencies: []
@@ -17,7 +17,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-18T08:47:37.776Z
-updated_at: 2026-10-18T16:33:54.872Z
+updated_at: 2026-10-19T20:54:35.205Z
 started_at: 2026-10-18T12:48:51.614Z
 ---
 W1 intake 2026-10-18, parent think-xmxb. https://github.com/jlevy/squares/issues/674
@@ -49,3 +49,5 @@ Draft comment:
 Your opening report of 17 October 2026 states s(229) <= 15.650163254859. Your update of 18 October states s(229) <= 15.650161513896 and asks to use that smaller side instead. The update is the current request; both chronological reports are preserved in separate Stage 2 packets at [e0338c7becf95dbc7584b48d8868c0a1cd21079c](https://github.com/evand/square-packing/tree/e0338c7becf95dbc7584b48d8868c0a1cd21079c) and [00e68dfbe1d29ab5dbab1cddfb8f6ca19d5470db](https://github.com/evand/square-packing/tree/00e68dfbe1d29ab5dbab1cddfb8f6ca19d5470db).
 
 The retained lineage is Daniel after Couzo's packing, after de Winter's. Stage 3 registration, exact comparison, dedicated review and replay with controls remain pending. No geometric acceptance is claimed from source custody, and the update is an upper-bound claim.
+
+2026-10-19 20:54Z lane-new: taken over from the 19 October handoff (issue #684) by the coordinator's lane brief; delegate changed from the spud10.local agent. Working in worktree scratchpad lnew/wt, branch claude/intake-2026-10-19-evand-singles (first PR: #659, #664, #669, #673).

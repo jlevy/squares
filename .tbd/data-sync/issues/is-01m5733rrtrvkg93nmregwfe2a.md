@@ -5,8 +5,8 @@ title: "Import JoostdeWinter: s(n) < ⌈√n⌉ at 18 counts from n = 509 to 156
 kind: task
 status: in_progress
 priority: 2
-version: 3
-delegate: claude-code@spud10.local
+version: 5
+delegate: lane-new
 labels:
   - result-import
 dependencies: []
@@ -14,7 +14,7 @@ parent_id: is-01m572ssbx1x412zpvsw1sb6je
 hold: null
 hold_until: null
 created_at: 2026-10-18T08:47:34.680Z
-updated_at: 2026-10-18T13:04:33.946Z
+updated_at: 2026-10-19T20:54:08.323Z
 started_at: 2026-10-18T13:04:20.646Z
 ---
 W1 intake 2026-10-18, parent think-xmxb. https://github.com/jlevy/squares/issues/666
@@ -40,3 +40,5 @@ Draft comment:
 Your report of 17 October 2026 covers nineteen rational packing certificates beyond 324: s(464) <= 21.988813022694, and the eighteen listed counts from 509 to 1568 below their integer-grid sides. The intake records these claims against source [b3152f526f23bc3ae450e51b6e906841233086d1](https://github.com/JoostdeWinter/joostdewinter.github.io/tree/b3152f526f23bc3ae450e51b6e906841233086d1/square-packing-above-324).
 
 Stage 2 still needs a bounded source-custody plan for the factual inputs and digest-only material, plus comparison with earlier reports and classical constructions. Stage 3 registration remains pending. This intake has not replayed these certificates.
+
+2026-10-19 20:54Z lane-new: taken over from the 19 October handoff (issue #684) by the coordinator's lane brief; delegate changed from the spud10.local agent. Working in worktree scratchpad lnew/wt, branch claude/intake-2026-10-19-evand-singles (first PR: #659, #664, #669, #673).

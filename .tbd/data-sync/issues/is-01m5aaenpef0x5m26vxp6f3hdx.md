@@ -5,8 +5,8 @@ title: Reconcile accepted intake records with actual post665 main
 kind: task
 status: in_progress
 priority: 2
-version: 6
-delegate: claude-intake-delta-review-20261019
+version: 7
+delegate: lane-446
 labels: []
 dependencies: []
 parent_id: is-01m5a7j9cz28zsdky2pjspafq6
@@ -16,7 +16,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-19T14:53:35.309Z
-updated_at: 2026-10-19T17:36:21.810Z
+updated_at: 2026-10-19T20:35:25.575Z
 started_at: 2026-10-19T14:53:51.733Z
 ---
 
