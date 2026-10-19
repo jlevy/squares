@@ -3470,11 +3470,14 @@ issues:
       On 10 October the author reports a stronger n29 certificate, which awaits its own import. On 16
       October the author reports 21 more fine-net certificates, three of which (n = 37, 39 and 44) the
       record already holds from the source's repository as T-178, T-176 and T-177; the 18 new ones, at n
-      = 38 to 110, are registered as T-200 through T-217 in merged pull request 671. Only n108
-      (T-216) has completed its certificate checks and mathematical reviews, at V3/C3; the
-      other seventeen remain V0/C0 under think-f40c. The published n108 lower lanes are
-      531/50; no upper-bound house changed. The post-deployment follow-up of 19 October
-      records these states and requests the upstream control filename correction.
+      = 38 to 110, are registered as T-200 through T-217 in merged pull request 671. n108 (T-216)
+      completed its certificate checks and mathematical reviews at V3/C3 in that pull request,
+      and n68, n84 and n85 (T-205 to T-207) completed theirs at V3/C3 on 19 October, each
+      re-verified by sqverify-fast sharing the producer's crate apart from its declared-net
+      readers; their lower lanes are 853/100, 3769/400 and 379/40. The other fourteen remain
+      V0/C0 under think-f40c; the n86 capture has no check or control run. No upper-bound house
+      changed. The post-deployment follow-up of 19 October records the n108 state and requests
+      the upstream control filename correction.
     read_through: '2026-10-16T09:00:31Z'
     results:
     - key: fine-net-n19
