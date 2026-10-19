@@ -1,0 +1,50 @@
+{
+  "format": "external-source-declaration-v1",
+  "id": "evand-n155-explorer-2026-10-17",
+  "source_url": "https://github.com/evand/square-packing",
+  "source_ref": "59326b86291b76c39d843f3f156e8f25fa0f6e3f",
+  "source_commit": "59326b86291b76c39d843f3f156e8f25fa0f6e3f",
+  "retrieved_at_utc": "2026-10-18T12:43:43Z",
+  "git_scope": "Shallow sparse blobless fetch of the issue #669 pin. Retained the MIT licence, credits, format and packer READMEs, both standalone exact checkers, and the eight s155_ex2 candidate files. The packer chronological log, basin explorer and numerical exact solver are digest-only lineage pins; unrelated certificates, sites, bulk histories and solver dependencies are omitted and commit-pinned only. No source code was executed.",
+  "archived_dir": "source",
+  "license": "MIT, copyright (c) 2026 Evan Daniel (LICENSE retained). CREDITS.md states Claude (Anthropic) under human direction, no peer review; the source commit names Claude Opus 5.5 as co-author. Issue #669 credits Daniil Ostashev's T-149 packing as the search start.",
+  "claims": [
+    "Issue #669 reports s(155) <= 12.952260944651, the certificate's exact rational side 2590452188930112807053435932173/200000000000000000000000000000 = 12.952260944650564035267179660865 rounded upward at 12 decimal places. Both original and regularized certificates have this side; issue SHA-256 values a1a3b6e7c2ce4d7de79efc2e07fc0bf53616dc44b732a2849b4dc4d8f7e2c4cc and ab3c0b93aa205a907da5387cc119df11164c0a6d63b49b81332d7ce77910a897.",
+    "The author reports both standalone stdlib exact checkers accept both certificates. They share authorship and certificate format but use separating axes and polygon intersections, respectively. Acquisition retains their source and does not execute them or infer independent outside authorship.",
+    "The issue credits Daniil Ostashev's T-149 as the starting packing, then a chain of 18 basin-explorer moves. It reports a different local minimum, KKT/second-order and corner-corner MILP diagnostics at 80 digits, and a 17-angle-group regularized view; these are numerical evidence, not interval proofs or a claim of global optimality. Comparison files and numerical inputs are retained as source assertions."
+  ],
+  "scope": [
+    "LICENSE",
+    "CREDITS.md",
+    "README.md",
+    "search/exact/README.md",
+    "search/exact/verify_cert.py",
+    "search/exact/verify_cert2.py",
+    "search/packer/README.md",
+    "search/packer/PACKER.md",
+    "search/packer/explore.py",
+    "search/packer/candidates/s155_ex2.cert",
+    "search/packer/candidates/s155_ex2.exact.txt",
+    "search/packer/candidates/s155_ex2.input.txt",
+    "search/packer/candidates/s155_ex2.json",
+    "search/packer/candidates/s155_ex2_prior.json",
+    "search/packer/candidates/s155_ex2_regularized.cert",
+    "search/packer/candidates/s155_ex2_regularized.json",
+    "search/packer/candidates/s155_ex2_vs_prior.json",
+    "search/exact/exactsolve.py"
+  ],
+  "pinned_only": [
+    {
+      "match": "search/packer/PACKER.md",
+      "reason": "Chronological packer log, 388281 bytes, useful provenance but not required to replay the exact certificate."
+    },
+    {
+      "match": "search/packer/explore.py",
+      "reason": "Numerical basin explorer used for discovery; not required by either standalone exact checker."
+    },
+    {
+      "match": "search/exact/exactsolve.py",
+      "reason": "Numerical high-precision certificate producer; replay consumes the completed certificates without this solver or its dependencies."
+    }
+  ]
+}

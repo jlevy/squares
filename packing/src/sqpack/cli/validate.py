@@ -3040,6 +3040,7 @@ def _rust_exact_geometry(context: Context) -> str:
                 "clippy",
                 "--locked",
                 "--all-targets",
+                "--no-default-features",
                 "--features",
                 "experimental-normalized-mul",
                 "--",
@@ -3051,6 +3052,7 @@ def _rust_exact_geometry(context: Context) -> str:
                 "test",
                 "--locked",
                 "--all-targets",
+                "--no-default-features",
                 "--features",
                 "experimental-normalized-mul",
                 "--quiet",
@@ -3060,6 +3062,7 @@ def _rust_exact_geometry(context: Context) -> str:
                 "clippy",
                 "--locked",
                 "--all-targets",
+                "--no-default-features",
                 "--features",
                 "experimental-coprime-mul",
                 "--",
@@ -3071,10 +3074,33 @@ def _rust_exact_geometry(context: Context) -> str:
                 "test",
                 "--locked",
                 "--all-targets",
+                "--no-default-features",
                 "--features",
                 "experimental-coprime-mul",
                 "--quiet",
             ),
+            (
+                cargo,
+                "clippy",
+                "--locked",
+                "--all-targets",
+                "--no-default-features",
+                "--",
+                "-D",
+                "warnings",
+            ),
+            (cargo, "test", "--locked", "--all-targets", "--no-default-features", "--quiet"),
+            (
+                cargo,
+                "clippy",
+                "--locked",
+                "--all-targets",
+                "--all-features",
+                "--",
+                "-D",
+                "warnings",
+            ),
+            (cargo, "test", "--locked", "--all-targets", "--all-features", "--quiet"),
             (cargo, "doc", "--locked", "--no-deps", "--quiet"),
             (cargo, "build", "--locked", "--release", "--quiet"),
         ),
@@ -3574,10 +3600,15 @@ def _skills_mirrored(context: Context) -> str:
 
 
 def _synopsis(context: Context) -> str:
+    # Each dependent layer owns its immediate parent-to-child publication cut.
+    pull_request_base = context.environment.get("GITHUB_BASE_REF")
+    release_base = context.environment.get("PACKING_RELEASE_BASE_REF") or (
+        f"origin/{pull_request_base}" if pull_request_base else "origin/main"
+    )
     impact_baseline = (
         ("--base", "HEAD^1")
         if _git("rev-parse", "HEAD").strip() == _git("rev-parse", "origin/main").strip()
-        else ("--baseline-ref", "origin/main")
+        else ("--baseline-ref", release_base)
     )
     return _commands(
         context,

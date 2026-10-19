@@ -540,6 +540,21 @@ RESULTS: dict[str, Prose] = {
             "the work."
         ),
     ),
+    "T-195": Prose(
+        author="PingYou Ltd",
+        reported="in [pull request #622](https://github.com/jlevy/squares/pull/622)",
+        producer_route=False,
+        ai=(
+            "The author says all of its submissions are PingYou Ltd’s, assisted by the PY "
+            "agentic offering."
+        ),
+        routes=(
+            "The source ran both maintained routes itself on its corners witness, so on them "
+            "the replay reproduces its runs; the third route and the review’s clean-room "
+            "checker, which share no code with any check it ran, are independently "
+            "re-implemented."
+        ),
+    ),
 }
 
 XU = "Ryan Xu"
@@ -560,6 +575,19 @@ class Credit:
     found_by: tuple[str, ...]
     improved_by: tuple[str, ...]
     phrase: str
+    #: The year the packing was found, where its house's certificate is of a later year:
+    #: a tighter certificate of an earlier finder's packing leaves the packing with its
+    #: finder and its year (review A's A7 of #661). Unset, the house's own year.
+    found_year: int | None = None
+    #: Whether the house is the replaced reported lane's own packing, measured pose for
+    #: pose with no square turned (the result's `regularizations`), so the lane keeps
+    #: what the record knew of that packing, `PACKING_FACTS` (review C6 of #661).
+    same_packing: bool = False
+
+
+#: What a reported lane says of its packing rather than of its certificate, carried to a
+#: house that is the same packing (`Credit.same_packing`), and otherwise not known.
+PACKING_FACTS = ("analytically_optimized", "construction_method", "tilt_angles_deg")
 
 
 def _couzo(start: str) -> Credit:
@@ -582,6 +610,18 @@ def _regularized(finder: str, whose: str, *, via: str | None = None) -> Credit:
 #: tables of the reviews that recommended each house; a regularization leaves the packing
 #: with its finder (`T-146`'s `regularizations`).
 CREDITS: dict[int, Credit] = {
+    # PingYou Ltd's tighter certificate of the packing the Kingbird catalogue credits to
+    # Thomas Schadt, improved by David Ellsworth (T-195's regularization of T-009); padding
+    # only, as the source says. The packing is of 2025, as n-029.md's reported lane and the
+    # release asset's credits say; the certificate is of 2026.
+    29: Credit(
+        ("Thomas Schadt",),
+        ("David Ellsworth", PINGYOU),
+        "PingYou Ltd’s tighter certificate of Thomas Schadt’s packing, as David Ellsworth "
+        "improved it",
+        found_year=2025,
+        same_packing=True,
+    ),
     # T-174's regularization of T-118's packing, 22 squares moved beyond 1e-3, one to one;
     # that it is that packing is the source's statement (the 14 October review of PR 574).
     68: Credit(
@@ -1374,18 +1414,30 @@ def reported_bound(move: Move) -> dict[str, Any]:
     house, credit = move.house, CREDITS[move.n]
     bibliography = _bibliography()[house.source_key]
     origin = houses.source_for(move.n).origin(move.n)
+    replaced = move.packing["reported_upper_bound"]
+    known: dict[str, Any] = {
+        "analytically_optimized": None,
+        "construction_method": "unknown",
+        "tilt_angles_deg": None,
+    }
+    if credit.same_packing:
+        known = {field: replaced.get(field, known[field]) for field in PACKING_FACTS}
     return {
         "value": _value(house, _above(move)),
         "exact_form": houses.legacy.literal(move.side),
         "evidence": list(house.report_evidence),
         "algebraic_degree": 1,
         "minimal_polynomial": None,
-        "analytically_optimized": None,
+        "analytically_optimized": known["analytically_optimized"],
         "catalogue_rigid": "not-stated",
-        "construction_method": "unknown",
-        "tilt_angles_deg": None,
+        "construction_method": known["construction_method"],
+        "tilt_angles_deg": known["tilt_angles_deg"],
         "found_by": list(credit.found_by),
-        "found_year": date.fromisoformat(house.published).year,
+        "found_year": (
+            credit.found_year
+            if credit.found_year is not None
+            else date.fromisoformat(house.published).year
+        ),
         "improved_by": list(credit.improved_by),
         "catalogue_pictured": False,
         "source_key": house.source_key,
@@ -1427,10 +1479,17 @@ def history_note(move: Move) -> dict[str, Any]:
     claimed = [*(upper.get("found_by") or ()), *(upper.get("improved_by") or ())]
     since = held_since(move.packing)
     held = f"from {since} until" if since else "until"
+    earlier = f"{upper['value']} from {upper['source_key']}"
+    if _lanes_differ(move.packing):
+        results = ", ".join(_earlier(move.packing)) or "its verified evidence"
+        earlier = (
+            f"{_ceiling(move.packing)} from {results} (reported as {upper['value']} from "
+            f"{upper['source_key']})"
+        )
     return {
         "claim": (
-            f"Earlier house {upper['value']} from {upper['source_key']}, the case’s ceiling "
-            f"{held} {day_words(move.n)}; its certificate and replay remain retained."
+            f"Earlier house {earlier}, the case’s ceiling {held} {day_words(move.n)}; its "
+            "certificate and replay remain retained."
         ),
         "claimed_by": [RECORD_NAMES.get(str(name), str(name)) for name in claimed],
         "published": upper.get("source_date"),
@@ -1553,16 +1612,58 @@ def _finally_reviewed(result: str) -> bool:
     return any(r["path"] == FINAL_REVIEW for r in entry["reviews"])
 
 
+def _lanes_differ(packing: Mapping[str, Any]) -> bool:
+    """Whether the replaced record's reported and verified upper bounds are two numbers.
+
+    Where they are, the ceiling a house is measured from is the verified one, and the
+    reported one is said apart (review C3 of #661): at 29 the catalogue's print
+    5.93383346267692 beside T-155's exact side."""
+    reported = packing["reported_upper_bound"]["value"]
+    verified = packing["verified_upper_bound"]["value"]
+    return Decimal(str(reported)) != Decimal(str(verified))
+
+
+def _ceiling(packing: Mapping[str, Any]) -> str:
+    """The margin's verified baseline where the lanes differ, not its retained display."""
+    if _lanes_differ(packing):
+        return str(packing["verified_upper_bound"]["exact_form"])
+    return str(packing["reported_upper_bound"]["value"])
+
+
+def _reported_apart(move: Move) -> str:
+    """What the replaced reported bound says of the new side, where it is a number apart
+    from the verified ceiling: a print orders a side only beyond one unit of its last
+    place, so inside that unit it orders nothing (`check_source_coverage.print_order`)."""
+    if not _lanes_differ(move.packing):
+        return ""
+    upper = move.packing["reported_upper_bound"]
+    printed = Decimal(str(upper["value"]))
+    bound, side = Fraction(printed), Fraction(move.side)
+    unit = Fraction(Decimal(1).scaleb(int(printed.as_tuple().exponent)))
+    if side < bound:
+        relation = f"lies `{_sci(bound - side)}` above the new side"
+    elif side < bound + unit and printed != printed.to_integral_value():
+        relation = (
+            f"is a print `{_sci(side - bound)}` below the new side, within one unit of its "
+            "last place, so it does not order them"
+        )
+    else:
+        relation = f"lies `{_sci(side - bound)}` below the new side"
+    return (
+        f"; the reported upper bound it replaces, ${upper['value']}$ from "
+        f"{upper['source_key']}, {relation}"
+    )
+
+
 def opening(move: Move) -> str:
     n, house, credit = move.n, move.house, CREDITS[move.n]
-    upper = move.packing["reported_upper_bound"]
     return (
         f"**House adoption, {day_words(n)}.** {credit.phrase[0].upper()}{credit.phrase[1:]} "
         f"({house.result}) is now this case’s house: its exact certificate proves "
         f"$s({n}) \\le {shown(move.side, _above(move))}$, the reported and the verified "
         f"upper bound, `{_sci(move.selection.margin)}` below the ceiling the case held until "
-        f"then, ${upper['value']}$ from {_holder(move.packing)}, which stays retained as "
-        f"history ([the certificate](#{_anchor(move)}))."
+        f"then, ${_ceiling(move.packing)}$ from {_holder(move.packing)}, which stays retained "
+        f"as history{_reported_apart(move)} ([the certificate](#{_anchor(move)}))."
     )
 
 
@@ -1639,10 +1740,9 @@ def section(move: Move) -> str:
         for c in move.selection.candidates
         if c is not house and c.result not in earlier and c not in held
     ]
-    upper = move.packing["reported_upper_bound"]
     history = (
-        f"The house it replaces, ${upper['value']}$ from {_holder(move.packing)}, stays "
-        "retained with its own replay as history."
+        f"The house it replaces, ${_ceiling(move.packing)}$ from {_holder(move.packing)}, "
+        "stays retained with its own replay as history."
     )
     if others:
         listed = _join([f"{c.result} at ${display(c.side)}$" for c in others])
@@ -2458,15 +2558,16 @@ def _span(text: str, start: str, end: str) -> tuple[int, int]:
 
 def refreshed(move: Move, committed: str) -> str:
     """The committed record with what its last pass's writer writes now in the parts the
-    writer alone owns: the evidence roster, the dated paragraph and the certificate
-    section, and, outside `HAND_MARKED`, the rest of the body, which it marks as history.
+    writer alone owns: the evidence roster, priority notes, the dated paragraph and the
+    certificate section, and, outside `HAND_MARKED`, the rest of the body, marked as history.
     The rest, the verifier table and the front matter other tools refresh, stays as it
     is."""
     written = replayed_text(move)
     fence, front, rest = _split(committed)
-    evidence = _packing(_split(written)[1])["evidence"]
-    if _packing(front).get("evidence") != evidence:
-        front = _replace(front, "evidence", evidence)
+    packing = _packing(_split(written)[1])
+    for key in ("evidence", "priority_notes"):
+        if _packing(front).get(key) != packing.get(key):
+            front = _replace(front, key, packing[key])
     if move.n not in HAND_MARKED:
         rest = _with_history(rest, _split(written)[2])
     text = fence + front + rest

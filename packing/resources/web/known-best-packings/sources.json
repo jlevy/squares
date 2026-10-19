@@ -129,18 +129,19 @@
       "url": "https://kingbird.myphotos.cc/packing/square-28.svg"
     },
     {
-      "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
-      "kind": "kingbird-derived-facts",
-      "license_status": "no-express-reuse-terms-found",
+      "attribution": "PingYou Ltd, https://github.com/BuddenPing/squares/blob/31155575ce1e6b461f77bfc9f3e201adf101115b/n29-certificate/certificates/n029.cert.json at 31155575ce1e6b461f77bfc9f3e201adf101115b",
+      "kind": "packet-derived-facts",
+      "license_status": "no-licence-published",
       "listed_n": [
         29
       ],
       "n": 29,
+      "path": "resources/web/pingyou-pr622-certificate-2026-10-15/facts/n-029.yaml.gz",
       "raw_asset_retained": false,
-      "retention_policy": "metadata-and-derived-numerical-facts-only",
-      "retrieved": "2026-08-26",
+      "retention_policy": "Exact certificate retained as a derived fact, bound to the SHA-256 its packet pins upstream; no upstream byte is copied.",
+      "retrieved": "2026-10-16",
       "source_n": 29,
-      "url": "https://kingbird.myphotos.cc/packing/square-29.svg"
+      "url": "https://github.com/BuddenPing/squares/blob/31155575ce1e6b461f77bfc9f3e201adf101115b/n29-certificate/certificates/n029.cert.json"
     },
     {
       "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",

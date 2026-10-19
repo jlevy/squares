@@ -2,8 +2,8 @@
   "residue": {
     "by_source": {
       "exact-grid": 44,
-      "kingbird-derived-facts": 57,
-      "packet-derived-facts": 15
+      "kingbird-derived-facts": 56,
+      "packet-derived-facts": 16
     },
     "components": 116,
     "detail": [
@@ -123,7 +123,7 @@
         "is_the_whole_record": false,
         "n": 29,
         "size": 5,
-        "source": "kingbird-derived-facts",
+        "source": "packet-derived-facts",
         "tilted": false,
         "walls_touched": 2
       },
@@ -1116,28 +1116,28 @@
       "tilted_components": 0
     },
     "kingbird-derived-facts": {
-      "components": 324,
-      "records": 30,
+      "components": 311,
+      "records": 29,
       "shapes": {
-        "L": 27,
-        "bar": 71,
-        "other-polyomino": 57,
+        "L": 25,
+        "bar": 67,
+        "other-polyomino": 56,
         "rectangle": 8,
-        "singleton": 161
+        "singleton": 155
       },
-      "tilted_components": 190
+      "tilted_components": 181
     },
     "packet-derived-facts": {
-      "components": 143,
-      "records": 6,
+      "components": 156,
+      "records": 7,
       "shapes": {
-        "L": 4,
-        "bar": 32,
-        "other-polyomino": 15,
+        "L": 6,
+        "bar": 36,
+        "other-polyomino": 16,
         "rectangle": 2,
-        "singleton": 90
+        "singleton": 96
       },
-      "tilted_components": 102
+      "tilted_components": 111
     }
   },
   "subject": {

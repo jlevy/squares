@@ -308,6 +308,7 @@ def _sources() -> dict[str, Source]:
         packet_source("T-187", "evand-n146-2026-10-14"),
         packet_source("T-188", "couzo-verified-bounds-2026-10-14"),
         packet_source("T-190", "couzo-n237-2026-10-15"),
+        packet_source("T-195", "pingyou-pr622-certificate-2026-10-15"),
     ]
     found = {source.result: source for source in sources}
     # Two results may read one packet (T-181 and T-182 both read issue 586's), so the
@@ -330,8 +331,10 @@ def _sources() -> dict[str, Source]:
 #: 232, 237, 264, 271, 302, 303 and 304, and the pass of 17 October 2026, the house rule's
 #: adoption of PingYou Ltd's PR 574 (T-174), at 37 of its rational counts, 68, 84, 86, 103,
 #: 105, 108, 110, 127, 130 to 132, 155, 172, 179 to 182, 206, 208 to 210, 228, 238 to 240,
-#: 261, 263, 268 to 270, 272, 273, 297 and 305 to 308.
+#: 261, 263, 268 to 270, 272, 273, 297 and 305 to 308. The same day adopted PR 622's
+#: certificate (T-195) at 29.
 ADOPTED: dict[int, str] = {
+    29: "T-195",
     68: "T-174",
     70: "T-146",
     84: "T-174",
@@ -425,7 +428,9 @@ NUMBERS = tuple(sorted(ADOPTED))
 #: and T-171 and, at the 13 counts it first adopts (68, 110, 130, 172, 179, 182, 206, 208,
 #: 210, 240, 268, 273 and 297), from the case records' own. Twelve of its other rational
 #: counts are below it by issue 639's algebraic sides (T-193, #658), which wait for the
-#: writer, and 236 by Evan Daniel's issue 659, whose import adopts it.
+#: writer, and 236 by Evan Daniel's issue 659, whose import adopts it. The same day
+#: adopted PR 622's certificate (T-195) at 29 from T-155, the case's replay of the
+#: Kingbird catalogue's packing, which no pass had adopted before.
 #: A count a pass names keeps its place in the earlier passes' sets, which their archives
 #: hold; it was adopted on the latest day that names it.
 LATER_PASSES: dict[str, frozenset[int]] = {
@@ -457,6 +462,7 @@ LATER_PASSES: dict[str, frozenset[int]] = {
     ),
     "2026-10-17": frozenset(
         {
+            29,
             68,
             84,
             86,

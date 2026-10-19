@@ -90,6 +90,7 @@ def _build_variants(target_root: Path) -> tuple[Path, Path, dict[str, object]]:
             "--offline",
             "--locked",
             "--release",
+            "--no-default-features",
             "--features",
             feature,
         ]

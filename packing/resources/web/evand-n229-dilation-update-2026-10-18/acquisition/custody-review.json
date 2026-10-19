@@ -1,0 +1,65 @@
+{
+  "format": "source-custody-inspection-v1",
+  "inspected_at_utc": "2026-10-18T12:52:11Z",
+  "source_commit": "00e68dfbe1d29ab5dbab1cddfb8f6ca19d5470db",
+  "source_publication_utc": "2026-10-18T01:35:40Z",
+  "report_publication_utc": "2026-10-18T01:36:21Z",
+  "issue_url": "https://github.com/jlevy/squares/issues/674",
+  "update_url": "https://github.com/jlevy/squares/issues/674#issuecomment-6244298663",
+  "licence": "MIT, copyright (c) 2026 Evan Daniel",
+  "claim": {
+    "n": 229,
+    "exact_certificate_side": "7825080756947776580756939951343/500000000000000000000000000000",
+    "exact_decimal_side": "15.650161513895553161513879902686",
+    "reported_upward_bound": "15.650161513896",
+    "certificate_sha256": "1a35a7806b6cc01b232d5c634efdbe789c7df979cec6ab28d6ab283ac2b47e23",
+    "input_sha256": "7b2bf80771e8d96f11931e5080f18c0d623b3d4373b9693e4d338acbf4ffcf53",
+    "coordinate_row_count": 229
+  },
+  "chronology": {
+    "opening_pin": "e0338c7becf95dbc7584b48d8868c0a1cd21079c",
+    "updated_pin": "00e68dfbe1d29ab5dbab1cddfb8f6ca19d5470db",
+    "updated_report_supersedes_opening": true,
+    "common_dependencies_and_opening_inputs_git_diff_exit": 0
+  },
+  "credit": "Evan Daniel after Francisco Couzo #672 after Joost de Winter #668",
+  "ai_disclosure": "Source CREDITS.md states Claude (Anthropic) under human direction; pinned commit names Claude Opus5.5 as co-author.",
+  "inspected_script_imports": {
+    "search/exact/verify_cert.py": [
+      "fractions",
+      "sys"
+    ],
+    "search/exact/verify_cert2.py": [
+      "fractions",
+      "sys"
+    ],
+    "search/packer/dilate_cert.py": [
+      "argparse",
+      "fractions",
+      "math",
+      "sys"
+    ]
+  },
+  "source_reported_margins": "pair separation about `1.2e-12` and wall clearance about `6.0e-13`",
+  "per_claim_negative_control_receipt_retained": false,
+  "source_verifier_executed": false,
+  "source_producer_executed": false,
+  "stage4_review_performed": false,
+  "retained_file_count": 9,
+  "retained_logical_bytes": 84052,
+  "source_stored_bytes": 84052,
+  "pinned_only_count": 2,
+  "pinned_only_bytes": 46546,
+  "acquisition_check": {
+    "command": "python -m devtools.acquire_source evand-n229-dilation-update-2026-10-18 --check",
+    "exit_code": 0,
+    "stdout": "PACKET_MATCHES_ITS_CONTRACT",
+    "stderr": ""
+  },
+  "limitations": [
+    "Source acceptance and margins are author assertions, not reproduced here.",
+    "Dilation certifies upper-bound feasibility only; no optimality or local-minimum result.",
+    "Both source checkers share authorship and input format; no outside independence inferred.",
+    "Unrelated site, numerical/search and bulk artifacts omitted."
+  ]
+}

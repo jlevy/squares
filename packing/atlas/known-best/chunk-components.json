@@ -38428,8 +38428,8 @@
       "summary": {
         "by_source_kind": {
           "exact-grid": {"component_slide_dof":{"1":1,"10":6,"11":1,"12":7,"13":1,"14":8,"15":1,"16":9,"17":1,"18":10,"2":2,"3":1,"4":3,"5":1,"6":4,"7":1,"8":5,"9":1},"internal_slide_dof":741,"records":64,"structured_squares":3189,"topologies":{"contact-chain":2,"contact-patch":61},"total_squares":3190,"wall_seated_squares":1282,"within_six_chunks_and_three_free":64},
-          "kingbird-derived-facts": {"component_slide_dof":{"1":14,"10":7,"12":7,"14":1,"2":22,"3":17,"4":14,"5":6,"6":18,"7":9,"8":10,"9":6},"internal_slide_dof":668,"records":30,"structured_squares":1359,"topologies":{"contact-chain":40,"contact-patch":91},"total_squares":1413,"wall_seated_squares":621,"within_six_chunks_and_three_free":23},
-          "packet-derived-facts": {"component_slide_dof":{"1":1,"10":2,"11":2,"12":2,"13":2,"2":8,"3":1,"4":4,"5":1,"6":3,"7":2,"8":2,"9":2},"internal_slide_dof":199,"records":6,"structured_squares":420,"topologies":{"contact-chain":9,"contact-patch":22,"contact-tree":1},"total_squares":447,"wall_seated_squares":166,"within_six_chunks_and_three_free":4}
+          "kingbird-derived-facts": {"component_slide_dof":{"1":12,"10":7,"12":7,"14":1,"2":21,"3":15,"4":13,"5":6,"6":18,"7":9,"8":10,"9":6},"internal_slide_dof":654,"records":29,"structured_squares":1333,"topologies":{"contact-chain":36,"contact-patch":89},"total_squares":1384,"wall_seated_squares":606,"within_six_chunks_and_three_free":22},
+          "packet-derived-facts": {"component_slide_dof":{"1":3,"10":2,"11":2,"12":2,"13":2,"2":9,"3":3,"4":5,"5":1,"6":3,"7":2,"8":2,"9":2},"internal_slide_dof":213,"records":7,"structured_squares":446,"topologies":{"contact-chain":13,"contact-patch":24,"contact-tree":1},"total_squares":476,"wall_seated_squares":181,"within_six_chunks_and_three_free":5}
         },
         "component_slide_dof": {"1":16,"10":15,"11":3,"12":16,"13":3,"14":9,"15":1,"16":9,"17":1,"18":10,"2":32,"3":19,"4":21,"5":8,"6":25,"7":12,"8":17,"9":9},
         "internal_slide_dof": 1608,
@@ -49757,8 +49757,8 @@
       "summary": {
         "by_source_kind": {
           "exact-grid": {"component_slide_dof":{"1":1,"10":6,"11":1,"12":7,"13":1,"14":8,"15":1,"16":9,"17":1,"18":10,"2":2,"3":1,"4":3,"5":1,"6":4,"7":1,"8":5,"9":1},"internal_slide_dof":741,"records":64,"structured_squares":3189,"topologies":{"contact-chain":2,"contact-patch":61},"total_squares":3190,"wall_seated_squares":1282,"within_six_chunks_and_three_free":64},
-          "kingbird-derived-facts": {"component_slide_dof":{"1":14,"10":7,"12":7,"14":1,"2":22,"3":15,"4":16,"5":4,"6":18,"7":10,"8":10,"9":6},"internal_slide_dof":667,"records":30,"structured_squares":1359,"topologies":{"contact-chain":40,"contact-patch":90},"total_squares":1413,"wall_seated_squares":621,"within_six_chunks_and_three_free":23},
-          "packet-derived-facts": {"component_slide_dof":{"1":1,"10":1,"11":3,"13":3,"2":8,"3":2,"4":3,"6":4,"7":2,"8":2,"9":3},"internal_slide_dof":198,"records":6,"structured_squares":425,"topologies":{"contact-chain":9,"contact-patch":23},"total_squares":447,"wall_seated_squares":169,"within_six_chunks_and_three_free":4}
+          "kingbird-derived-facts": {"component_slide_dof":{"1":12,"10":7,"12":7,"14":1,"2":21,"3":13,"4":15,"5":4,"6":18,"7":10,"8":10,"9":6},"internal_slide_dof":653,"records":29,"structured_squares":1333,"topologies":{"contact-chain":36,"contact-patch":88},"total_squares":1384,"wall_seated_squares":606,"within_six_chunks_and_three_free":22},
+          "packet-derived-facts": {"component_slide_dof":{"1":3,"10":1,"11":3,"13":3,"2":9,"3":4,"4":4,"6":4,"7":2,"8":2,"9":3},"internal_slide_dof":212,"records":7,"structured_squares":451,"topologies":{"contact-chain":13,"contact-patch":25},"total_squares":476,"wall_seated_squares":184,"within_six_chunks_and_three_free":5}
         },
         "component_slide_dof": {"1":16,"10":14,"11":4,"12":14,"13":4,"14":9,"15":1,"16":9,"17":1,"18":10,"2":32,"3":18,"4":22,"5":5,"6":26,"7":13,"8":17,"9":10},
         "internal_slide_dof": 1606,

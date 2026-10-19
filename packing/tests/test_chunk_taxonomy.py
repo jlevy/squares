@@ -101,8 +101,8 @@ def test_the_residue_is_two_populations_and_nothing_between() -> None:
     assert residue["walls_touched"] == {"0": 2, "2": 70, "4": 44}
     assert residue["by_source"] == {
         "exact-grid": 44,
-        "kingbird-derived-facts": 57,
-        "packet-derived-facts": 15,
+        "kingbird-derived-facts": 56,
+        "packet-derived-facts": 16,
     }
     assert residue["tilted"] == 2
     assert residue["whole_record"] == 44
@@ -113,6 +113,7 @@ def test_the_residue_is_two_populations_and_nothing_between() -> None:
             assert item["walls_touched"] == 4, item
         elif item["source"] == "packet-derived-facts":
             assert (item["n"], item["size"], item["walls_touched"]) in {
+                (29, 5, 2),
                 (51, 5, 0),
                 (51, 10, 2),
                 (51, 18, 2),
@@ -147,8 +148,9 @@ def test_the_strata_are_not_three_samples_of_one_population() -> None:
     assert strata["exact-grid"]["components"] == 64  # one connected component per record
     assert strata["kingbird-derived-facts"]["tilted_components"] > 0
     assert "unitsquare-rendering" not in strata
-    assert strata["kingbird-derived-facts"]["records"] == 30
-    assert strata["packet-derived-facts"]["records"] == 6
+    # n = 29 moved from the catalogue to PR #622's packet (T-195) on 17 October 2026.
+    assert strata["kingbird-derived-facts"]["records"] == 29
+    assert strata["packet-derived-facts"]["records"] == 7
     assert strata["packet-derived-facts"]["tilted_components"] > 0
 
 

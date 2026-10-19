@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import os
+import select
 import signal
 import subprocess
 import sys
@@ -100,20 +101,59 @@ def test_exit_observed_after_blocking_sample_keeps_stop_reason(
 
 
 @pytest.mark.pool_heavy
-def test_timeout_kills_term_ignoring_group(tmp_path: Path) -> None:
-    receipt = run(
-        tmp_path,
-        "import signal,time; signal.signal(signal.SIGTERM,signal.SIG_IGN); "
-        "print('ready',flush=True); time.sleep(30)",
-        max_seconds=0.2,
+@pytest.mark.parametrize("startup_seconds", [0.0, 0.3])
+def test_timeout_kills_term_ignoring_group(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, startup_seconds: float
+) -> None:
+    command = [
+        sys.executable,
+        "-c",
+        (
+            "import signal,sys,time; time.sleep(float(sys.argv[1])); "
+            "signal.signal(signal.SIGTERM,signal.SIG_IGN); "
+            "print('ready',flush=True); time.sleep(30)"
+        ),
+        str(startup_seconds),
+    ]
+    child = subprocess.Popen(
+        command, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, start_new_session=True
     )
+    try:
+        assert child.stdout is not None
+        ready, _, _ = select.select([child.stdout], [], [], 5)
+        assert ready == [child.stdout]
+        assert child.stdout.readline() == b"ready\n"
+        # Interpreter startup can exceed the wall limit; give it an initialized group.
+        monkeypatch.setattr(
+            tool,
+            "subprocess",
+            SimpleNamespace(
+                Popen=Mock(return_value=child),
+                run=subprocess.run,
+                SubprocessError=subprocess.SubprocessError,
+            ),
+        )
+        receipt = tool.supervise(
+            command,
+            stdout=tmp_path / "stdout",
+            stderr=tmp_path / "stderr",
+            max_seconds=0.2,
+            max_memory_mib=4096,
+            sample_seconds=0.02,
+            cleanup_seconds=0.2,
+        )
+    finally:
+        if child.poll() is None:
+            os.killpg(child.pid, signal.SIGKILL)
+        child.wait(timeout=2)
+        if child.stdout is not None:
+            child.stdout.close()
     assert receipt["status"] == "INCOMPLETE"
     assert receipt["reason"] == "wall_limit"
     assert receipt["kill_elapsed_seconds"] is not None
     assert receipt["returncode"] == -signal.SIGKILL
     assert receipt["wall_seconds"] < 2
     assert receipt["cleanup_complete"]
-    assert "ready" in (tmp_path / "stdout").read_text()
 
 
 def test_current_rss_guard_and_unavailable_guard(tmp_path: Path) -> None:
