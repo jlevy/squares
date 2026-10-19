@@ -5717,7 +5717,7 @@ def test_change_scoped_banners_leave_json_stdout_one_document(
     )
     expected_names = ["unattributed", "site"]
     if mode == "push":
-        expected_names.append("reachable behavioral tests")
+        expected_names.extend(("added Git blob storage", "reachable behavioral tests"))
 
     status, stdout, stderr = _invoke(*arguments, "--list", "--format", "json")
     assert status == 0
