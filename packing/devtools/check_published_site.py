@@ -557,8 +557,15 @@ def changelog_checks(text: str) -> list[tuple[bool, str]]:
     problems: list[str] = []
     if markup.ids.get("changelog") != 1:
         problems.append("requires one changelog section")
-    links = {element.attrs.get("href") for element in markup.find(tag="a")}
-    for entry in document["entries"]:
+    anchors = markup.find(tag="a")
+    links = {element.attrs.get("href") for element in anchors}
+    entries = render_changelog.news_entries(document)
+    articles = [element.attrs.get("data-news-entry") for element in markup.find(tag="article")]
+    if sorted(item for item in articles if item is not None) != sorted(
+        entry["id"] for entry in entries
+    ):
+        problems.append("article roster differs from eligible News entries")
+    for entry in entries:
         if markup.ids.get(render_changelog.entry_anchor(entry["id"])) != 1:
             problems.append(f"missing or repeated entry {entry['id']}")
         targets = [
@@ -571,10 +578,21 @@ def changelog_checks(text: str) -> list[tuple[bool, str]]:
             if render_changelog.serialized_target(target, destination="site") not in links
         ]:
             problems.append(f"{entry['id']}: missing launch/PR links {missing}")
+    archived = render_changelog.archived_news_targets(document)
+    for anchor, target in archived.items():
+        matches = [element for element in anchors if element.attrs.get("id") == anchor]
+        if (
+            markup.ids.get(anchor) != 1
+            or len(matches) != 1
+            or matches[0].attrs.get("href") != target
+            or "data-news-target" not in matches[0].attrs
+        ):
+            problems.append(f"missing or incorrect archived entry target {anchor}")
     line = (
         f"news.html: changelog: {'; '.join(problems[:5])}"
         if problems
-        else f"news.html: all {len(document['entries'])} changelog entries and launch links"
+        else f"news.html: all {len(entries)} News entries and launch links; "
+        f"{len(archived)} archived bookmarks"
     )
     return [(not problems, line)]
 

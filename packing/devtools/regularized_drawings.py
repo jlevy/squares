@@ -179,6 +179,9 @@ UPPER_BOUND = "upper-bound"
 #: How an item names each of this project's modifications to Evan Daniel's regularizer.
 SAME_SIDE_RESOLVE = "same-side exact re-solve (devtools.regularize_same_side)"
 BOUND_RESOLVE = "exact re-solve at the verified upper bound (devtools.regularize_same_side)"
+#: The outputs of a driver run an index entry can draw: the same-side re-solve's
+#: (`same`), or his solve's own (`solved`) where that re-solve was refused or not tried.
+EVAND_OUTPUTS = frozenset({"same", "solved"})
 #: The retry rungs, by the name the driver records (`devtools.regularize_evand`). The
 #: stall-stop rung's one change is its replica patch, which the view's `method` names, so
 #: it has no words of its own (`SILENT_RUNGS`); any other rung is refused.
@@ -293,10 +296,22 @@ def at_bound(entry: Mapping[str, Any], bound: Mapping[str, Any]) -> bool:
     return view is not None and upper is not None and Fraction(str(view)) == upper
 
 
-def witness_source_key(entry: Mapping[str, Any], repo: Path = REPO) -> str | None:
+def witness_source_key(
+    entry: Mapping[str, Any],
+    repo: Path = REPO,
+    *,
+    source_keys: dict[Path, str | None] | None = None,
+) -> str | None:
     """The bibliography key the drawn entry's source witness names."""
-    document = load_yaml((repo / entry["source"]["witness"]).read_text(encoding="utf-8"))
-    return (document["witness"].get("source") or {}).get("key")
+    path = repo / entry["source"]["witness"]
+    key_path = path.resolve() if source_keys is not None else path
+    if source_keys is not None and key_path in source_keys:
+        return source_keys[key_path]
+    document = load_yaml(path.read_text(encoding="utf-8"))
+    key = (document["witness"].get("source") or {}).get("key")
+    if source_keys is not None:
+        source_keys[key_path] = key
+    return key
 
 
 def registering_holders(
@@ -438,9 +453,16 @@ def project_modifications(
     """This project's modifications to Evan Daniel's regularizer that made a drawn view,
     read from its index entry: the retry rungs its solve climbed, the vendored copy's
     patches its `method` names, and the exact re-solve that brought it to the witness's
-    side; for a grid-slack view, the port of his placement, which is this project's code,
-    and its re-solve. An empty list: his regularizer ran unmodified. None: the view is
-    this project's axis tool's, which is not his regularizer."""
+    side where that re-solve made the view (`run.output` is `same`); for a grid-slack
+    view, the port of his placement, which is this project's code, and its re-solve. An
+    empty list: his regularizer ran unmodified. None: the view is this project's axis
+    tool's, which is not his regularizer.
+
+    The re-solve is read from the run's output, not from the side relation: a solve the
+    re-solve refused can still sit at the witness's side (241 and 302, whose solves
+    closed to it), and his solve drawn unmodified is not credited with a re-solve that
+    did not run. An output the tool does not know is refused rather than read either
+    way."""
     generator = str(entry.get("generator"))
     kind = generator_kind(generator)
     if kind == "grid":
@@ -451,7 +473,13 @@ def project_modifications(
     found.extend(
         patch_words(str((entry.get("regularization") or {}).get("method") or ""), kinds)
     )
-    if relation(entry) == "same":
+    output = (entry.get("run") or {}).get("output")
+    if output not in EVAND_OUTPUTS:
+        raise RegularizedDrawingsError(
+            f"n={entry.get('n')}: run output {output!r} does not say whether the same-side "
+            f"re-solve made the view; expected one of {sorted(EVAND_OUTPUTS)}"
+        )
+    if output == "same":
         found.append(SAME_SIDE_RESOLVE)
     return found
 
@@ -735,9 +763,15 @@ class Drawn:
     modifications: list[str] | None
 
 
-def drawn_counts(index: Mapping[str, Any], repo: Path = REPO) -> list[Drawn]:
+def drawn_counts(
+    index: Mapping[str, Any],
+    repo: Path = REPO,
+    *,
+    register: Register | None = None,
+    source_keys: dict[Path, str | None] | None = None,
+) -> list[Drawn]:
     """Every count the layer draws regularized, with `of` resolved (see the module)."""
-    register = load_register()
+    register = load_register() if register is None else register
     results = register.results
     found: list[Drawn] = []
     for entry in sorted(index["entries"], key=lambda record: int(record["n"])):
@@ -755,7 +789,7 @@ def drawn_counts(index: Mapping[str, Any], repo: Path = REPO) -> list[Drawn]:
         resolved = packing_result(
             entry,
             results,
-            source_key=witness_source_key(entry, repo),
+            source_key=witness_source_key(entry, repo, source_keys=source_keys),
             bound_holders=holders,
             side_at_bound=exact,
         )
@@ -786,6 +820,8 @@ def source_regularizations(
     results: Sequence[Mapping[str, Any]],
     sources: Mapping[str, Any],
     repo: Path = REPO,
+    *,
+    source_keys: dict[Path, str | None] | None = None,
 ) -> dict[int, dict[str, Any]]:
     """The counts whose house is itself a regularization its source published: a
     register result's `regularizations` item by a source (`by` a bibliography key) whose
@@ -799,7 +835,7 @@ def source_regularizations(
             if by == PROJECT_REGULARIZER:
                 continue
             witness = {"source": {"witness": f"packing/witnesses/known-best/n-{n:03d}.yaml"}}
-            if witness_source_key(witness, repo) != by:
+            if witness_source_key(witness, repo, source_keys=source_keys) != by:
                 continue
             source = sources.get(by)
             credit = getattr(source, "credit", None) or ", ".join(
@@ -1040,6 +1076,7 @@ def case_note(
     items: Sequence[Mapping[str, Any]],
     certificates: Mapping[str, str] | None = None,
     implied: Mapping[str, Mapping[str, Any]] | None = None,
+    held: Mapping[str, str] | None = None,
 ) -> str:
     """The record's one paragraph: who regularized the drawing, with which modifications,
     and either that it is a pure regularization, proving no new bound, so no result, or
@@ -1049,14 +1086,30 @@ def case_note(
     it is registered there and which certificate proved it by monotonicity
     (`registered_words`, `implied` by the registering result's id); then this project's
     registered regularization of the count where the layer does not draw it, naming the
-    result; then who regularized the house, where its source did."""
+    result; then who regularized the house, where its source did.
+
+    Where the layer's view is not the count's default picture (`held`, by view path, from
+    `default_drawings.held_reasons`), the note opens by saying that the house drawing is
+    drawn as published, and why, and credits the view as the view's rather than the
+    drawing's: n = 176's note led with "Regularized by" while its page drew the raw house
+    (think-gvke)."""
     certificates = certificates or {}
     implied = implied or {}
+    held = held or {}
     sentences: list[str] = []
     for found in items:
         if found["by"] != PROJECT_REGULARIZER or "view" not in found:
             continue
-        sentences.append(credit_sentence(found))
+        credit = credit_sentence(found)
+        why = held.get(str(found["view"]))
+        if why is not None:
+            sentences.append(
+                "Drawn as published: the layer's regularized view does not improve on the "
+                f"packing as published ({why}), so the house drawing is drawn "
+                "(regularization policy, section 12)."
+            )
+            credit = f"The view was {credit[:1].lower()}{credit[1:]}"
+        sentences.append(credit)
         where = SIDE_WORDS[str(found["side"])]
         if found.get("registered_in"):
             words = registered_words(
@@ -1096,17 +1149,34 @@ def case_note(
 
 
 def case_fields(
-    index: Mapping[str, Any], repo: Path = REPO, drawn: Sequence[Drawn] | None = None
+    index: Mapping[str, Any],
+    repo: Path = REPO,
+    drawn: Sequence[Drawn] | None = None,
+    *,
+    register: Register | None = None,
+    source_keys: dict[Path, str | None] | None = None,
+    held: Mapping[str, str] | None = None,
 ) -> dict[int, dict[str, Any]]:
     """Each case record's `regularization` field, by count, for the records that carry
     one: the source's regularization of the house first, then this project's drawing,
     then this project's regularization a result registers where the layer does not draw
-    it (`registered_case_items`)."""
-    register = load_register()
-    by_source = source_regularizations(register.results, register.sources, repo)
+    it (`registered_case_items`). `held` gives, by view path, why a view is not its
+    count's default picture; by default the retained `default-drawings.json`'s reasons."""
+    if held is None:
+        from devtools.default_drawings import held_reasons  # noqa: PLC0415
+
+        held = held_reasons()
+    register = load_register() if register is None else register
+    by_source = source_regularizations(
+        register.results, register.sources, repo, source_keys=source_keys
+    )
     generators = index.get("generators") or {}
     projects: dict[int, dict[str, Any]] = {}
-    for count in drawn_counts(index, repo) if drawn is None else drawn:
+    for count in (
+        drawn_counts(index, repo, register=register, source_keys=source_keys)
+        if drawn is None
+        else drawn
+    ):
         registered_by = registered_record(count, register.results)
         projects[int(count.entry["n"])] = project_case_item(
             count,
@@ -1140,7 +1210,7 @@ def case_fields(
             found for found in (by_source.get(n), projects.get(n), registered.get(n)) if found
         ]
         here = {rid: ceiling for (rid, count), ceiling in implied.items() if count == n}
-        fields[n] = {"note": case_note(items, certificates, here), "items": items}
+        fields[n] = {"note": case_note(items, certificates, here, held), "items": items}
     return fields
 
 
@@ -1287,13 +1357,21 @@ def problems(
     text = RESULTS.read_text(encoding="utf-8") if register_text is None else register_text
     head, block = split(text)
     document = index_document() if index is None else index
-    drawn = drawn_counts(document)
+    # Reuse committed inputs within this check; edited text remains independent.
+    register = load_register()
+    source_keys: dict[Path, str | None] = {}
+    drawn = drawn_counts(document, register=register, source_keys=source_keys)
     items, unregistered = expected(document, drawn=drawn)
     results = (safe_load(head) or {}).get("results") or []
     solves = recorded_solves(drawn, results, document.get("runs") or [])
-    found_problems = registered_problems(head, document.get("generators") or {}, solves)
-    found_problems += first_certified_problems(load_register())
-    found_problems += case_problems(document, case_fields(document, drawn=drawn))
+    found_problems = registered_problems(
+        head, document.get("generators") or {}, solves, results=results
+    )
+    found_problems += first_certified_problems(register)
+    found_problems += case_problems(
+        document,
+        case_fields(document, drawn=drawn, register=register, source_keys=source_keys),
+    )
     return [*generated_block_problems(block, items, unregistered), *found_problems]
 
 
@@ -1322,18 +1400,23 @@ def registered_problems(
     head: str,
     generators: Mapping[str, Any],
     solves: Mapping[tuple[str, int], Mapping[str, Any]] | None = None,
+    *,
+    results: Sequence[Mapping[str, Any]] | None = None,
 ) -> list[str]:
     """Whether each registered result's own regularization (`by: project`) carries the
     `modifications` its `method` and `side` give, or the drawn entry of its very solve
-    where the layer draws it (`registered_modifications`, `recorded_solves`)."""
-    results = (safe_load(head) or {}).get("results") or []
+    where the layer draws it (`registered_modifications`, `recorded_solves`). A supplied
+    `results` sequence must be parsed from `head`."""
+    from_head: Sequence[Mapping[str, Any]] = (
+        ((safe_load(head) or {}).get("results") or []) if results is None else results
+    )
     solves = solves or {}
-    if with_registered_modifications(head, results, generators, solves) == head:
+    if with_registered_modifications(head, from_head, generators, solves) == head:
         return []
     owed = sorted(
         {
             str(result["id"])
-            for result in results
+            for result in from_head
             for record in result.get("regularizations") or []
             if record["by"] == PROJECT_REGULARIZER
             and (record.get("modifications"), record.get("modifications_unrecorded") or [])

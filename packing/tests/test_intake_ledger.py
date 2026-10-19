@@ -1,4 +1,4 @@
-"""The owner's report-order rule, on synthetic counts, and the committed 2026-10-14 ledger."""
+"""The owner's report-order rule, on synthetic counts and every retained intake ledger."""
 
 from __future__ import annotations
 
@@ -965,9 +965,32 @@ def test_a_lane_row_no_report_takes_is_refused() -> None:
     assert ledger.unclaimed_rows(taken) == []
 
 
-def test_render_check_passes_on_the_committed_ledger() -> None:
-    assert ledger.problems(ledger.load_yaml(ledger.DEFAULT_DIRECTORY / ledger.LEDGER)) == []
-    assert ledger.render(ledger.DEFAULT_DIRECTORY, check=True) == []
+@pytest.mark.parametrize(
+    "directory",
+    sorted(
+        path
+        for path in (ledger.ROOT / "campaign/issue-intake").glob("upper-bounds-*")
+        if path.is_dir()
+    ),
+    ids=lambda directory: directory.name,
+)
+def test_render_check_passes_on_each_retained_ledger(directory: Path) -> None:
+    assert ledger.problems(ledger.load_yaml(directory / ledger.LEDGER)) == []
+    assert ledger.render(directory, check=True) == []
+
+
+def test_16_october_ledger_records_issue_639s_sixteen_improvements() -> None:
+    # Issue #639's exact sides against PR #574's rationals and the record on main e2e018f3.
+    directory = ledger.ROOT / "campaign/issue-intake/upper-bounds-20261016"
+    verdicts = json.loads((directory / ledger.VERDICTS).read_text("utf-8"))
+    recorded = sorted(
+        count["n"]
+        for count in verdicts["counts"]
+        for step in count["steps"]
+        if step["report"] == "#639" and step["verdict"] == ledger.RECORDED
+    )
+    expected = "88 102 123 126 175 199 204 232 258 259 266 267 292 295 301 302"
+    assert recorded == [int(n) for n in expected.split()]
 
 
 def test_the_committed_ledger_decides_pr574_as_its_receipt_does() -> None:

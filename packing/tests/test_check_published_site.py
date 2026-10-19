@@ -2099,7 +2099,14 @@ def test_fetch_once_reports_a_server_that_stalls_its_answer_as_unreachable() -> 
 def test_check_requires_a_forwarder_at_every_address_a_page_used_to_have(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    """The full audit requests every historical address and accepts its forwarder."""
+    """A page that moved or was withdrawn is still served at its old address, as a
+    forwarder naming where a visit goes now (`render_overview.MOVED_PAGES`): the three
+    repository documents that left the site, the papers, which moved under `papers/`,
+    and the one page of every case record, whose records moved under `cases/`. A deploy
+    without one 404s every link written before the change. It fails when an old address
+    is gone, when the page there still is the old page, and when a forwarder leads
+    anywhere but where a visit should go, in any one of the five places it says where
+    that is."""
     moved = dict(render_overview.MOVED_PAGES)
     assert set(moved) == {
         "all-results.html",
@@ -2119,56 +2126,59 @@ def test_check_requires_a_forwarder_at_every_address_a_page_used_to_have(
     for old in moved:
         assert f"https://example.org/{old}" in requested, old
 
+    # Each address has its own verdict. Exercise all nine in each corruption batch,
+    # keeping the complete production check without rebuilding and checking every
+    # unrelated page once per address. Strict pairing rejects missing or extra failures.
+    missing = failures(monkeypatch, fake_site(pages, lost=tuple(f"/{old}" for old in moved)))
+    for old, failure in zip(moved, missing, strict=True):
+        assert failure.startswith(f"forwarder {old}: HTTP 404, says "), failure
+
+    # The page that was there before, still served in place of each forwarder.
+    stale_page = explainer_page()
+    stale = failures(monkeypatch, fake_site(pages | dict.fromkeys(moved, stale_page)))
+    for old, failure in zip(moved, stale, strict=True):
+        assert failure.startswith(f"forwarder {old}: HTTP 200, says "), failure
+        assert "'script': None" in failure, "an old page is not a forwarder"
+
+    wrong_pages: dict[str, dict[str, bytes]] = {}
+    for old, new in moved.items():
+        good = pages[old]
+        expected = check_published_site.forwarder_expected(old, new)
+        target, canonical = expected["script"], expected["canonical"]
+        file_target = expected["file"]
+        assert target is not None
+        assert canonical is not None
+        assert file_target is not None
+        elsewhere = (file_target + "-elsewhere").encode()
+        wrong = {
+            "canonical": good.replace(
+                b'rel="canonical" href="' + canonical.encode(),
+                b'rel="canonical" href="https://example.org/',
+            ),
+            "script": good.replace(b'data-moved-to="' + target.encode(), b'data-moved="'),
+            "file": good.replace(
+                b'data-file-moved-to="' + file_target.encode(), b'data-file-moved="'
+            ),
+            "refresh": good.replace(b"0; url=" + file_target.encode(), b"0; url=" + elsewhere),
+            "link": good.replace(b'<a href="' + file_target.encode(), b'<a href="' + elsewhere),
+        }
+        for place, body in wrong.items():
+            assert body != good, place
+            says = check_published_site.forwarder_says(body.decode())
+            assert {name for name in says if says[name] != expected[name]} == {place}
+            wrong_pages.setdefault(place, {})[old] = body
+
+    for place, overrides in wrong_pages.items():
+        wrong_failures = failures(monkeypatch, fake_site(pages | overrides))
+        for old, failure in zip(moved, wrong_failures, strict=True):
+            assert failure.startswith(f"forwarder {old}: HTTP 200, says "), (place, failure)
+
     # A page of the site is named relative to the old address, climbing out of its
     # directory; a page that left the site is named whole.
     says = check_published_site.forwarder_says(pages["n11-optimality/index.html"].decode())
     assert says["script"] == "../papers/n11-optimality-review.html"
     says = check_published_site.forwarder_says(pages["defects.html"].decode())
     assert says["script"] == says["canonical"] == f"{REPO_URL}/blob/{DEFAULT_BRANCH}/defects.md"
-
-
-@pytest.mark.parametrize(("old", "new"), render_overview.MOVED_PAGES)
-def test_check_refuses_missing_stale_or_misdirected_historical_forwarders(
-    monkeypatch: pytest.MonkeyPatch, old: str, new: str
-) -> None:
-    """Each old address retains the full audit's seven isolated failure controls."""
-    pages = site_pages()
-    # Match the whole old path without hiding another page with a shared suffix.
-    (failure,) = failures(monkeypatch, fake_site(pages, lost=(f"/{old}",)))
-    assert failure.startswith(f"forwarder {old}: HTTP 404, says "), failure
-
-    # The page that was there before, still served in place of its forwarder.
-    stale = {**pages, old: explainer_page()}
-    (failure,) = failures(monkeypatch, fake_site(stale))
-    assert failure.startswith(f"forwarder {old}: HTTP 200, says "), failure
-    assert "'script': None" in failure, "an old page is not a forwarder"
-
-    good = pages[old]
-    expected = check_published_site.forwarder_expected(old, new)
-    target, canonical = expected["script"], expected["canonical"]
-    file_target = expected["file"]
-    assert target is not None
-    assert canonical is not None
-    assert file_target is not None
-    elsewhere = (file_target + "-elsewhere").encode()
-    wrong = {
-        "canonical": good.replace(
-            b'rel="canonical" href="' + canonical.encode(),
-            b'rel="canonical" href="https://example.org/',
-        ),
-        "script": good.replace(b'data-moved-to="' + target.encode(), b'data-moved="'),
-        "file": good.replace(
-            b'data-file-moved-to="' + file_target.encode(), b'data-file-moved="'
-        ),
-        "refresh": good.replace(b"0; url=" + file_target.encode(), b"0; url=" + elsewhere),
-        "link": good.replace(b'<a href="' + file_target.encode(), b'<a href="' + elsewhere),
-    }
-    for place, body in wrong.items():
-        assert body != good, place
-        (failure,) = failures(monkeypatch, fake_site({**pages, old: body}))
-        assert failure.startswith(f"forwarder {old}: HTTP 200, says "), (place, failure)
-        says = check_published_site.forwarder_says(body.decode())
-        assert {name for name in says if says[name] != expected[name]} == {place}
 
 
 def test_check_requires_each_moved_file_at_its_old_address_with_the_same_bytes(

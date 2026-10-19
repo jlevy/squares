@@ -25,6 +25,8 @@ permissions:
 env:
   # Outside the checkout: receipts must not enter source scans or mutation snapshots.
   PACKING_VALIDATION_ARTIFACT_DIR: ${{ github.workspace }}-validation-artifacts
+  # Formal stacks can expose a synthetic runner base; use the PR's declared parent.
+  PACKING_RELEASE_BASE_REF: ${{ github.event_name == 'pull_request' && github.event.pull_request.base.sha || '' }}
 
 concurrency:
   # Keyed by event as well as ref, so a scheduled deep run and a push-to-main deep run --
@@ -42,9 +44,6 @@ concurrency:
 jobs:
   validate:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      actions: read
     defaults:
       run:
         working-directory: packing
@@ -70,25 +69,6 @@ jobs:
 
       - name: Synchronize the locked development environment
         run: uv sync --frozen --all-extras --group dev
-
-      - name: Record the tree this pull-request run validates
-        id: pull-request-tree
-        if: "github.event_name == 'pull_request'"
-        run: |
-          tree="$(git rev-parse 'HEAD^{tree}')"
-          mkdir -p "$RUNNER_TEMP/pull-request-tree"
-          printf '%s\n' "$tree" > "$RUNNER_TEMP/pull-request-tree/tree"
-          echo "tree=$tree" >> "$GITHUB_OUTPUT"
-
-      - name: Publish the validated tree id
-        if: "github.event_name == 'pull_request'"
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
-        with:
-          name: pull-request-tree-${{ steps.pull-request-tree.outputs.tree }}
-          path: ${{ runner.temp }}/pull-request-tree/tree
-          if-no-files-found: error
-          retention-days: 30
-          overwrite: true
 
       # The browser floor's tools. Node is on the runner already, but pinned here for the
       # same reason the Python version is: a floor that moves under you is not a floor. The
@@ -142,11 +122,10 @@ jobs:
       # build was made from byte-identical sources by the same compiler, so dating them
       # before it is true. A partial restore leaves the checkout's mtimes alone and cargo
       # rebuilds; backdating a changed file was measured to serve the old binary, which is
-      # why the `if:` below is not optional. Restore and save are separate because a
-      # verified main push can skip every validation-owned engine step. An automatic
-      # post-job save after that skip could bind a partially restored old target to the
-      # new exact key. The explicit build on a miss makes the exact-key claim true before
-      # any event can skip validation work; the later validation build is then a no-op.
+      # why the `if:` below is not optional. Restore and save are separate so a partial
+      # restore is rebuilt for the current source and compiler key before it can be saved.
+      # The explicit build on a miss establishes that match; the later validation build
+      # is then a no-op, and the cache is saved only after the gate succeeds.
       # The old key was `Cargo.lock` alone, so the one entry saved on 09-06 was never
       # replaced. `rustc -vV` also installs the pinned toolchain from
       # `rust-toolchain.toml` here rather than inside the gate's build.
@@ -411,10 +390,10 @@ jobs:
           uv run --frozen --all-extras --group dev
           packing-validate --checks --jobs 3 --inner-jobs 1
 
-      # Everything except the two isolated behavioural lanes below. The three selections
-      # partition the gate without paying for any step twice, and
-      # `test_the_post_merge_jobs_partition_the_gate` is what keeps them a partition when a
-      # step is added.
+      # The integration worker and its native siblings partition whole Steps without
+      # repeating them. The four quick shards run serially in integration-suites beside
+      # this remaining surface. `test_the_post_merge_jobs_partition_the_gate` holds the
+      # complete, disjoint selection whenever a Step is added.
       #
       # `--skip` is the only narrowing allowed here, and only because that test proves it
       # is still a partition. A *tier* flag on this command would be a different thing and
@@ -427,23 +406,15 @@ jobs:
       # 34183723509 completed it in 1069.84s.
       # The slow lane also gets its own runner: run 34177317419 timed it out at 1800s
       # while it shared the deferred job. This changes scheduling, not coverage.
-      - name: Find the pull-request run that already passed this tree
-        id: verified-tree
-        if: "github.event_name == 'push'"
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: >-
-          uv run --frozen --all-extras --group dev python -m devtools.verified_merge_tree
-          --sha "$GITHUB_SHA" --repository "$GITHUB_REPOSITORY"
-          --github-output "$GITHUB_OUTPUT"
-
       - name: Run the complete integration surface
         if: "github.event_name != 'pull_request'"
-        env:
-          PACKING_VALIDATE_TREE_VERIFIED_BY_RUN: ${{ steps.verified-tree.outputs.run }}
         run: >-
           uv run --frozen --all-extras --group dev
           packing-validate --skip "exhaustive exact behavioral tests"
+          --skip "fast behavioral tests, shard A"
+          --skip "fast behavioral tests, shard B"
+          --skip "fast behavioral tests, shard C"
+          --skip "fast behavioral tests, shard D"
           --skip "slow behavioral tests"
           --skip "single-square translation escape screen"
           --skip "threshold dilation-limit record, 1440 steps"
@@ -500,6 +471,83 @@ jobs:
         with:
           path: packing/n17_kernel_verify/target
           key: ${{ steps.n17-kernel-cache.outputs.cache-primary-key }}
+
+      - name: Preserve validation timings and partial logs
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: validation-timings-${{ github.job }}-${{ github.run_attempt }}
+          path: ${{ env.PACKING_VALIDATION_ARTIFACT_DIR }}
+          if-no-files-found: warn
+          retention-days: 30
+
+  integration-suites:
+    # Run 38744311408 spent 1177s in these four serial Steps and about 1124s in
+    # the remaining integration surface. One sibling preserves their process shape
+    # while paying one additional checkout/toolchain/browser setup, rather than four.
+    # This is scheduling evidence, not a measured wall for this new job. --only has
+    # no named-tier verdict; the existing child/CALL guards and post-merge wall remain.
+    if: "github.event_name != 'pull_request'"
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packing
+    steps:
+      - name: Check out the immutable tree
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+          submodules: true
+
+      - name: Install uv and Python 3.14
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          version: "0.12.8"
+          python-version: "3.14.7"
+          working-directory: packing
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+
+      - name: Synchronize the locked development environment
+        run: uv sync --frozen --all-extras --group dev
+
+      # Preserve the browser coverage that ran inside validate. The PR shard jobs
+      # remain unchanged; borrowing their smaller setup would introduce new skips here.
+      - name: Install Node
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+        with:
+          node-version: "24.18.0"
+          cache: "npm"
+          cache-dependency-path: package-lock.json
+
+      - name: Install the pinned browser toolchain
+        working-directory: .
+        run: npm ci --ignore-scripts
+
+      - name: Cache the Playwright browser for the complete post-merge gate
+        uses: actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809 # v4.2.4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-chromium-${{ hashFiles('packing/uv.lock') }}
+
+      - name: Install Chromium for the complete post-merge gate
+        run: >-
+          uv run --frozen --all-extras --group dev
+          python -m playwright install --with-deps --only-shell chromium
+
+      - name: Bind the receipt to the immutable tree
+        env:
+          VALIDATED_SHA: ${{ github.sha }}
+        run: |
+          test "$(git rev-parse HEAD)" = "$VALIDATED_SHA"
+          mkdir -p "$PACKING_VALIDATION_ARTIFACT_DIR"
+          printf '%s\n' "$VALIDATED_SHA" > "$PACKING_VALIDATION_ARTIFACT_DIR/tree-sha.txt"
+
+      - name: Run all four quick behavioral Steps serially
+        run: >-
+          uv run --frozen --all-extras --group dev
+          packing-validate --only "fast behavioral tests" --jobs 1 --inner-jobs 2
 
       - name: Preserve validation timings and partial logs
         if: always()
@@ -1422,6 +1470,22 @@ jobs:
             /packing/resources/web/couzo-certificates-2026-10-11/
             /packing/resources/web/dostashev-records-2026-10-12/
             /packing/resources/web/evand-n154-2026-10-12/
+            /packing/resources/web/mishapolk-exact-certificates-2026-10-12/
+            /packing/resources/web/couzo-certificates-2026-10-12/
+            /packing/resources/web/dostashev-compositions-2026-10-12/
+            /packing/resources/web/pingyou-n105-refinement-2026-10-12/
+            /packing/resources/web/pingyou-n146-refinement-2026-10-12/
+            /packing/resources/web/pingyou-n261-refinement-2026-10-12/
+            /packing/resources/web/pingyou-n272-refinement-2026-10-12/
+            /packing/resources/web/dostashev-merged-bands-2026-10-13/
+            /packing/resources/web/couzo-certificates-2026-10-13/
+            /packing/resources/web/pingyou-pr574-certificates-2026-10-13/
+            /packing/resources/web/mishapolk-records-2026-10-14/
+            /packing/resources/web/mishapolk-kkt-refinements-2026-10-14/
+            /packing/resources/web/evand-n146-2026-10-14/
+            /packing/resources/web/couzo-verified-bounds-2026-10-14/
+            /packing/resources/web/couzo-n237-2026-10-15/
+            /packing/resources/web/pingyou-pr622-certificate-2026-10-15/
             /packing/resources/papers/
             !/packing/resources/papers/*
             /packing/resources/papers/kingbird-square-29-provenance.svg
@@ -1772,6 +1836,7 @@ jobs:
     if: "!cancelled() && github.event_name != 'pull_request'"
     needs:
       - validate
+      - integration-suites
       - deferred-threshold-1440
       - deferred-atlas-grid
       - deferred-controls-finer
@@ -1790,6 +1855,7 @@ jobs:
       - name: Require every complete-checkpoint prerequisite
         env:
           VALIDATE_RESULT: ${{ needs.validate.result }}
+          INTEGRATION_SUITES_RESULT: ${{ needs.integration-suites.result }}
           THRESHOLD_1440_RESULT: ${{ needs.deferred-threshold-1440.result }}
           ATLAS_GRID_RESULT: ${{ needs.deferred-atlas-grid.result }}
           CONTROLS_FINER_RESULT: ${{ needs.deferred-controls-finer.result }}
@@ -1802,6 +1868,7 @@ jobs:
           REGULARIZED_VIEWS_RESULT: ${{ needs.regularized-views.result }}
         run: |
           test "$VALIDATE_RESULT" = "success"
+          test "$INTEGRATION_SUITES_RESULT" = "success"
           test "$THRESHOLD_1440_RESULT" = "success"
           test "$ATLAS_GRID_RESULT" = "success"
           test "$CONTROLS_FINER_RESULT" = "success"
@@ -1813,7 +1880,7 @@ jobs:
           test "$SCREEN_RESULT" = "success"
           test "$REGULARIZED_VIEWS_RESULT" = "success"
 
-      # Report the eleven prerequisite walls and their critical path after the verdict has
+      # Report the twelve prerequisite walls and their critical path after the verdict has
       # already been decided. Every reporting step continues on error: an API or setup
       # failure is not allowed to turn a successful complete checkpoint red, while the
       # register remains reporting-only under think-0atx until this topology is measured.
@@ -1991,6 +2058,7 @@ jobs:
     # name it, and the wall check treats it as `not_gating`, so a skip changes no verdict.
     if: "github.event_name != 'pull_request' || github.base_ref == 'main'"
     runs-on: macos-latest
+    timeout-minutes: 5
     defaults:
       run:
         working-directory: packing
@@ -2020,6 +2088,19 @@ jobs:
           uv run --frozen --all-extras --group dev python -c "import sqpack, sqpack.field, sqpack.verify,
           sqpack.witness, sqpack.promote.refine, sqpack.promote.contacts;
           print('sqpack imports on', __import__('platform').machine())"
+
+      - name: Native Darwin current memory and system SDK layout
+        timeout-minutes: 1
+        run: |
+          mkdir -p "$PACKING_VALIDATION_ARTIFACT_DIR"
+          uv run --frozen --all-extras --group dev python -m pytest -q -s \
+            tests/test_process_memory.py::test_live_memory_sample_is_positive \
+            tests/test_process_memory.py::test_released_allocation_does_not_leave_current_memory_above_guard \
+            tests/test_process_memory.py::test_darwin_current_memory_agrees_with_external_ps \
+            tests/test_process_memory.py::test_darwin_sdk_layout_and_signature \
+            --junitxml="$PACKING_VALIDATION_ARTIFACT_DIR/darwin-current-memory.xml"
+          uv run --frozen --all-extras --group dev python -m devtools.check_darwin_memory_results \
+            "$PACKING_VALIDATION_ARTIFACT_DIR/darwin-current-memory.xml"
 
       - name: Results a second architecture could disagree about
         # Exact predicates, the small-n exact models, and the golden basin maps

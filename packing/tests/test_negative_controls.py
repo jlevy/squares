@@ -117,14 +117,14 @@ def test_historical_validation_prunes_preserve_replay_inputs(
         ROOT / "campaign/agent-sessions/session-152-validation",
     )
     assert set(roots) <= PRUNE
+    # The pre-main-integration pair and `instrument-v1.py.txt` stopped returning on
+    # 2026-10-15: only `docs/` reviews link them, and no control follows a review's links
+    # (think-b6ir). `test_checkpoint_manifest.py` globs whatever pairs a tree holds.
     rescued = (
         "benchmarks/validation-efficiency/checkpoints/2026-09-06-integrated-fast.log",
         "benchmarks/validation-efficiency/checkpoints/2026-09-06-integrated-fast.manifest.json",
         "benchmarks/validation-efficiency/checkpoints/2026-09-06-integrated-fast.tar.gz",
-        "benchmarks/validation-efficiency/checkpoints/2026-09-06-pre-main-integration.manifest.json",
-        "benchmarks/validation-efficiency/checkpoints/2026-09-06-pre-main-integration.tar.gz",
         "benchmarks/validation-efficiency/checkpoints/VE-004-full-ed595fb6.tar.gz",
-        "benchmarks/validation-efficiency/runs/instrument-v1.py.txt",
         "campaign/agent-sessions/session-152-validation/pdf-d490-run-35784981711-reference.pdf",
         "campaign/agent-sessions/session-152-validation/pdf-d490-run-35784981711-replay.pdf",
         "campaign/agent-sessions/session-152-validation/pdf-d490-run-35784981711-report.txt",
@@ -134,9 +134,9 @@ def test_historical_validation_prunes_preserve_replay_inputs(
         source = ROOT / relative
         assert source.relative_to(controls.REPO) in copied_targets, relative
         assert (tree / HERE / relative).read_bytes() == source.read_bytes(), relative
-    # The normal legacy-manifest fixture test still has both its code and the two
-    # manifest/archive pairs it reads. The schema checker and current witness remain
-    # on the source surface too; the telemetry exclusion cannot hide their controls.
+    # The legacy-manifest fixture test still has its code and the manifest/archive pair a
+    # checked document links. The schema checker and current witness remain on the
+    # source surface too; the telemetry exclusion cannot hide their controls.
     for relative in (
         "devtools/checkpoint_manifest.py",
         "tests/test_checkpoint_manifest.py",
@@ -149,7 +149,9 @@ def test_historical_validation_prunes_preserve_replay_inputs(
     # preserve the cap breach and satisfy only the structural assertion above.
     for relative in (
         "benchmarks/validation-efficiency/runs/e865612fe81c4d96a7b3713b28191045.stdout.log",
+        "benchmarks/validation-efficiency/runs/instrument-v1.py.txt",
         "benchmarks/validation-efficiency/checkpoints/VE-004-control-1.tar.gz",
+        "benchmarks/validation-efficiency/checkpoints/2026-09-06-pre-main-integration.tar.gz",
         "campaign/agent-sessions/session-152-validation/validation-timings-exhaustive-1.zip",
     ):
         assert (ROOT / relative).is_file(), relative
@@ -256,7 +258,7 @@ def test_historical_site_snapshot_outputs_leave_workers_after_dependency_rescue(
         "devtools/regularize_axis_components.py",
     ):
         assert (tree / HERE / relative).read_bytes() == (ROOT / relative).read_bytes()
-    assert SNAPSHOT_MAX_BYTES == 216 * 1024 * 1024
+    assert SNAPSHOT_MAX_BYTES == 219 * 1024 * 1024
     assert snapshot_source_bytes() < SNAPSHOT_MAX_BYTES
 
 
@@ -488,6 +490,23 @@ def test_native_profile_real_child_failure_retains_profile_and_output(
         assert "usage:" not in report["stderr"]
     assert report["top_cumulative"]
     assert output.with_suffix(".prof").stat().st_size > 0
+
+
+@pytest.mark.parametrize("offset", [-1, 0, 1])
+def test_the_snapshot_byte_report_enforces_the_exact_capacity_boundary(
+    offset: int, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    measured = controls.SNAPSHOT_MAX_BYTES + offset
+    monkeypatch.setattr(controls, "snapshot_source_bytes", lambda: measured)
+    monkeypatch.setattr(controls, "snapshot_duplicate_copy_bytes", lambda: 0)
+    monkeypatch.setattr(
+        controls, "clone_tree", lambda _tree: pytest.fail("a byte report cloned a worker")
+    )
+    assert controls.main(["--source-bytes"]) == int(offset > 0)
+    report = json.loads(capsys.readouterr().out)
+    assert report["source_bytes"] == measured
+    assert report["cap_bytes"] == 219 * 1024 * 1024
+    assert report["headroom_bytes"] == -offset
 
 
 def test_oversized_snapshot_is_refused_before_cloning(
@@ -1155,7 +1174,8 @@ def test_ci_profile_copyback_follows_real_checked_links_and_result_registration(
     monkeypatch.setattr(controls, "ROOT_DOCUMENTS", (review.parent, readme, synopsis))
     monkeypatch.setattr(controls, "LINK_BACK", ())
     monkeypatch.setattr(controls, "root_files", lambda: ())
-    monkeypatch.setattr(controls, "_linked_documents", lambda: list(documents))
+    # The real `_linked_documents` decides which documents a worker link-checks: the
+    # campaign record, README and SYNOPSIS, never a review.
     expected = [] if rescue == "review" else [output]
     assert controls.snapshot_pruned_targets() == expected
     worker = tmp_path / "worker"
@@ -1360,8 +1380,8 @@ def test_retained_receipts_leave_workers_but_registered_and_linked_ones_return(
     No control reaches the five roots, as a mutation target or by naming one in a
     command. Every file under them is either absent from the worker or, when a checked
     document links it or the results register lists it, present byte for byte -- the two
-    census READMEs and the registered receipts among them. A folder a review links
-    arrives empty rather than missing, so the link scan still finds it.
+    census READMEs and the registered receipts among them. A folder only a review links
+    stays out since 2026-10-15: no control follows a review's links (think-b6ir).
     """
     tree, copied_targets = control_snapshot
     specification = safe_load((ROOT / "devtools/controls.yaml").read_text())
@@ -1393,13 +1413,12 @@ def test_retained_receipts_leave_workers_but_registered_and_linked_ones_return(
         relative = returned.relative_to(controls.REPO)
         assert relative in copied_targets
         assert (tree / relative).read_bytes() == returned.read_bytes()
-    for linked in (
+    for review_linked in (
         census / "review-2026-10-03-attack",
         ROOT / "witnesses/franciscouzo-2026-10-03",
     ):
-        landed = tree / linked.relative_to(controls.REPO)
-        assert landed.is_dir()
-        assert not any(landed.iterdir())
+        assert review_linked.is_dir()
+        assert not (tree / review_linked.relative_to(controls.REPO)).exists()
 
 
 def test_unread_worker_outputs_leave_workers_while_declared_files_return(
@@ -1438,13 +1457,13 @@ def test_unread_worker_outputs_leave_workers_while_declared_files_return(
         assert left, f"{packing_relative}: every file returns, so the entry prunes nothing"
 
     results = ROOT / "campaign/series/series-000-smoke-and-calibration/results"
-    for relative in (
-        "exp-249-n17-first-certified-sub-patterns/census.json",
-        "exp-246-n17-capacity-one-cover/audit/wall_lemma.py.txt",
-    ):
-        source = results / relative
-        assert source.relative_to(controls.REPO) in copied_targets
-        assert (tree / source.relative_to(controls.REPO)).read_bytes() == source.read_bytes()
+    census = results / "exp-249-n17-first-certified-sub-patterns/census.json"
+    assert census.relative_to(controls.REPO) in copied_targets
+    assert (tree / census.relative_to(controls.REPO)).read_bytes() == census.read_bytes()
+    # exp-246's wall-lemma audit returned only for a review's link until 2026-10-15.
+    review_linked = results / "exp-246-n17-capacity-one-cover/audit/wall_lemma.py.txt"
+    assert review_linked.is_file()
+    assert not (tree / review_linked.relative_to(controls.REPO)).exists()
     # exp-295 keeps its descriptor and metadata, as exp-297--314 do.
     for name in ("README.md", "descriptor.json", "mechanical-summary.json"):
         source = results / "exp-295-two-center-children" / name
@@ -1823,6 +1842,68 @@ def test_snapshot_audit_cli_never_clones_or_runs_a_control(
         controls.main([str(spec), "--prune-candidate", str(old)])
 
 
+def test_baseline_runs_each_command_unmutated_once_in_one_private_worker(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    """The record says what each checker printed before any mutation, path-neutrally."""
+    spec = tmp_path / "controls.yaml"
+    command = "cat probe.txt && pwd"
+    spec.write_text(
+        "controls:\n"
+        f"- {{name: first, file: probe.txt, replace: [kept, gone], run: '{command}',"
+        " expect: gone, timeout_seconds: 7}\n"
+        f"- {{name: second, file: probe.txt, replace: [kept, lost], run: '{command}',"
+        " expect: lost}\n"
+    )
+    trees: list[Path] = []
+
+    def clone(tree: Path) -> None:
+        trees.append(tree)
+        (tree / controls.HERE).mkdir(parents=True)
+        (tree / controls.HERE / "probe.txt").write_text("kept\n")
+
+    monkeypatch.setattr(controls, "clone_tree", clone)
+    monkeypatch.setattr(controls, "snapshot_source_bytes", lambda: 5)
+    record = tmp_path / "baseline.json"
+    assert controls.main([str(spec), "--baseline", str(record)]) == 0
+    assert len(trees) == 1
+    assert not trees[0].exists()
+    baseline = json.loads(record.read_text())
+    assert baseline["source_bytes"] == 5
+    [row] = baseline["commands"]
+    assert row["command"] == command
+    assert (row["returncode"], row["timed_out"], row["stderr"]) == (0, False, "")
+    assert row["stdout"] == f"kept\n<worker>/{controls.HERE.as_posix()}\n"
+    assert row["output_sha256"] == hashlib.sha256(f"{row['stdout']}\0".encode()).hexdigest()
+    assert command in capsys.readouterr().out
+
+    # Evidence is never overwritten, and nothing is cloned to find that out.
+    assert controls.main([str(spec), "--baseline", str(record)]) == 1
+    assert "refuses to overwrite" in capsys.readouterr().err
+    assert len(trees) == 1
+
+    # A checker no control runs can be named instead; its failure is recorded, not raised.
+    other = tmp_path / "other.json"
+    argv = [str(spec), "--baseline", str(other), "--baseline-command", "echo red >&2; exit 3"]
+    assert controls.main(argv) == 0
+    [row] = json.loads(other.read_text())["commands"]
+    assert (row["returncode"], row["stdout"], row["stderr"]) == (3, "", "red\n")
+    with pytest.raises(SystemExit, match="2"):
+        controls.main([str(spec), "--baseline-command", "true"])
+
+    # A run that fails leaves nothing that would refuse the next one (review A6 of #611).
+    def broken(_tree: Path) -> None:
+        raise OSError("clone failed")
+
+    monkeypatch.setattr(controls, "clone_tree", broken)
+    failed = tmp_path / "failed.json"
+    with pytest.raises(OSError, match="clone failed"):
+        controls.main([str(spec), "--baseline", str(failed)])
+    assert not failed.exists()
+
+
 def test_tiny_snapshot_prune_rescues_linked_and_registered_files_as_private_copies(
     snapshot_audit_fixture: tuple[Path, Path],
     tmp_path: Path,
@@ -1873,6 +1954,7 @@ def test_workflow_evidence_selection_keeps_only_existing_referenced_files(
         "[absent](.github/workflows/absent.yml)\n"
         "[escape](.github/workflows/escape.yml)\n"
     )
+    monkeypatch.setattr(controls, "REPO", tmp_path)
     monkeypatch.setattr(controls, "ROOT", tmp_path / "packing")
     monkeypatch.setattr(controls, "ROOT_DOCUMENTS", (document,))
     monkeypatch.setattr(controls, "LINKED_PRUNE_ROOTS", (workflows,))
@@ -1984,6 +2066,7 @@ def test_research_outputs_are_pruned_but_linked_evidence_still_counts(
     (output / "unreferenced-checkpoint.json").write_text("0" * 100_000)
     document = tmp_path / "SYNOPSIS.md"
     document.write_text("[required](packing/results/exp-268/required.json)\n")
+    monkeypatch.setattr(controls, "REPO", tmp_path)
     monkeypatch.setattr(controls, "ROOT", packing)
     monkeypatch.setattr(controls, "ROOT_DOCUMENTS", (document,))
     monkeypatch.setattr(controls, "PRUNE", frozenset({output}))
@@ -2020,6 +2103,7 @@ def test_session185_selected_output_prune_is_exact_and_keeps_declared_inputs(
     sibling_evidence.write_text('{"unique":true}\n')
     document = tmp_path / "SYNOPSIS.md"
     document.write_text(f"[required](packing/results/{name}/required.json)\n")
+    monkeypatch.setattr(controls, "REPO", tmp_path)
     monkeypatch.setattr(controls, "ROOT", packing)
     monkeypatch.setattr(controls, "ROOT_DOCUMENTS", (document,))
     monkeypatch.setattr(controls, "PRUNE", frozenset({output}))
@@ -2094,6 +2178,7 @@ def test_session186_regional_receipt_prune_is_exact_and_copyback_survives(
     descriptor.write_text('{"premise":true}\n')
     document = tmp_path / "SYNOPSIS.md"
     document.write_text(f"[declared input](packing/results/{output.name}/{name})\n")
+    monkeypatch.setattr(controls, "REPO", tmp_path)
     monkeypatch.setattr(controls, "ROOT", packing)
     monkeypatch.setattr(controls, "ROOT_DOCUMENTS", (document,))
     monkeypatch.setattr(controls, "PRUNE", frozenset({receipt}))
@@ -2169,6 +2254,7 @@ def test_session186_diagnostic_output_prune_preserves_declared_copyback(
     sibling.write_text("retained sibling\n")
     document = tmp_path / "SYNOPSIS.md"
     document.write_text(f"[declared input](packing/{relative})\n")
+    monkeypatch.setattr(controls, "REPO", tmp_path)
     monkeypatch.setattr(controls, "ROOT", packing)
     monkeypatch.setattr(controls, "ROOT_DOCUMENTS", (document,))
     monkeypatch.setattr(controls, "PRUNE", frozenset({receipt}))
@@ -2183,10 +2269,13 @@ def test_session186_diagnostic_output_prune_preserves_declared_copyback(
     )
 
 
-def test_operational_run_prune_preserves_the_reviewed_instrument_copyback() -> None:
+def test_operational_run_prune_copies_back_nothing_a_control_reads() -> None:
     root = ROOT / "benchmarks/validation-efficiency/runs"
     copied = [path for path in controls.snapshot_pruned_targets() if path.is_relative_to(root)]
-    assert copied == [root / "instrument-v1.py.txt"]
+    # `instrument-v1.py.txt` returned while every document's links were followed; only
+    # the 2026-09-06 validation-efficiency implementation review links it, and no control
+    # follows that review's links (think-b6ir).
+    assert copied == []
     # Primary CI's report-corpus test still reads the original receipts and JUnit;
     # pruning is solely a worker-copy rule, not deletion or a test exclusion.
     assert (root / "receipts.jsonl").is_file()
@@ -2199,13 +2288,13 @@ def test_checkpoint_archive_prune_preserves_all_declared_consumer_copyback() -> 
     copied = [
         path.name for path in controls.snapshot_pruned_targets() if path.is_relative_to(root)
     ]
+    # The pre-main-integration pair is linked only from two `docs/` reviews, whose links
+    # no control follows, so it left the copy-back with them (think-b6ir).
     assert copied == sorted(
         [
             "2026-09-06-integrated-fast.log",
             "2026-09-06-integrated-fast.manifest.json",
             "2026-09-06-integrated-fast.tar.gz",
-            "2026-09-06-pre-main-integration.manifest.json",
-            "2026-09-06-pre-main-integration.tar.gz",
             "VE-004-full-ed595fb6.tar.gz",
         ]
     )
@@ -2531,6 +2620,63 @@ def test_a_control_command_is_green_unmutated_in_a_worker(
     assert outcome.returncode == 0, output
 
 
+def test_gate_budgets_reads_its_wall_workflows_in_a_worker(
+    control_snapshot: tuple[Path, set[Path]],
+) -> None:
+    """The six `check_gate_budgets` controls run over a green checker, even under `CI`.
+
+    The worker owes the checker two things. Its wall workflows have been declared inputs
+    since 2026-10-15 (think-b6ir), not targets of a review's link. And it needs the bead
+    store: under `CI` the checker refuses an advisory bead it cannot confirm, so in a
+    hosted worker it exited 1 before any mutation and its six controls were scored over
+    a red checker (review A2 of #611). The worker borrows the source's store, so
+    wherever the source holds one the checker is green here under `CI`. A source with
+    no store gives no store to borrow, and only the workflows are held.
+    """
+    tree, _copied = control_snapshot
+    for workflow in controls.wall_workflows():
+        relative = workflow.relative_to(controls.REPO)
+        assert (tree / relative).read_bytes() == workflow.read_bytes(), relative
+    shallow = subprocess.run(
+        ["git", "-C", str(tree), "rev-parse", "--is-shallow-repository"],
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    assert shallow.stdout.strip() == "false"
+    # The store's refs are the only ones added, and `HEAD` stays unborn, so a checker
+    # that walks history from a ref still finds none in a worker (review A9 of #611).
+    head = subprocess.run(
+        ["git", "-C", str(tree), "rev-parse", "--verify", "--quiet", "HEAD"],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    assert head.returncode != 0, head.stdout
+    refs = subprocess.run(
+        ["git", "-C", str(tree), "for-each-ref", "--format=%(refname)"],
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout.split()
+    assert set(refs) == set(controls.source_bead_store_refs())
+    with tempfile.TemporaryDirectory(prefix="negctl-pycache-", dir=tree) as pycache:
+        environment = controls.control_environment(tree, Path(pycache))
+        environment["CI"] = "true"
+        outcome = run_control_command(
+            "python3 -m devtools.check_gate_budgets",
+            cwd=tree / HERE,
+            environment=environment,
+            timeout_seconds=controls.DEFAULT_CONTROL_TIMEOUT_SECONDS,
+        )
+    output = outcome.stdout + outcome.stderr
+    assert not outcome.timed_out
+    assert "Traceback" not in output, output
+    assert "has no readable jobs" not in output, output
+    if controls.source_bead_store_refs():
+        assert outcome.returncode == 0, output
+
+
 def test_the_root_files_reach_every_worker(control_snapshot: tuple[Path, set[Path]]) -> None:
     """Every file tracked at the repository root is in the worker, byte for byte."""
     tree, _copied = control_snapshot
@@ -2550,6 +2696,7 @@ def test_unmutated_results_checker_is_green_inside_a_worker(
     completed = subprocess.run(
         [sys.executable, "-m", "devtools.check_results"],
         cwd=tree / "packing",
+        env=controls.control_environment(tree, tree / "results-checker-pycache"),
         capture_output=True,
         text=True,
         check=False,
@@ -2586,7 +2733,13 @@ def test_synopsis_snapshot_is_clean_before_its_registered_mutation(
         for path in (tree / ".github/workflows").rglob("*")
         if path.is_file()
     }
-    assert copied_workflows == {
+    # The workflows a checked document links, and the wall workflows declared outright.
+    declared = {
+        path.relative_to(controls.REPO)
+        for path in COPY_SEPARATELY
+        if path.is_relative_to(controls.REPO / ".github/workflows")
+    }
+    assert copied_workflows == declared | {
         path for path in copied_targets if path.is_relative_to(".github/workflows")
     }
 
@@ -3449,6 +3602,7 @@ def test_duplicate_stdout_prune_preserves_canonical_and_declared_input(
     scientific.write_bytes(receipt.read_bytes())
     document = tmp_path / "SYNOPSIS.md"
     document.write_text(f"[declared input](packing/{relative}/{receipt.name})\n")
+    monkeypatch.setattr(controls, "REPO", tmp_path)
     monkeypatch.setattr(controls, "ROOT", packing)
     monkeypatch.setattr(controls, "ROOT_DOCUMENTS", (document,))
     monkeypatch.setattr(controls, "PRUNE", frozenset({receipt}))
@@ -3688,7 +3842,7 @@ def test_adopted_houses_survive_native_worker_boundaries(
     assert completed.returncode == 0, completed.stdout + completed.stderr
     report = json.loads(completed.stdout.strip().splitlines()[-1])
     assert report["houses"] == len(houses.NUMBERS)
-    assert len(report["refused"]) == 2 * len(houses.source_keys())
+    assert len(report["refused"]) == 2 * len(houses.sources())
     for source, original in originals.items():
         assert source.read_bytes() == original
         assert (tree / source.relative_to(controls.REPO)).read_bytes() == original

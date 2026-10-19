@@ -54,6 +54,9 @@ IDEAS = ROOT / "ideas.md"
 DEFECTS = PROJECT_ROOT / "defects.yaml"
 RESULTS = PROJECT_ROOT / "frontier" / "results.yaml"
 SESSION_SCHEMA = ROOT / "schemas/agent-session.schema.yaml"
+#: A relative Markdown link's target as `dead_links` reads it, fragment included. The
+#: negative-control copier is tested against this pattern, not a copy of it.
+LINK_TARGET = re.compile(r"\]\(([^)#][^)]*)\)")
 AGENDA_SCHEMA = ROOT / "schemas/agenda.schema.yaml"
 LOGBOOK_SCHEMA = ROOT / "schemas/research-loop-log-entry.schema.yaml"
 REQUIRED_LOGBOOK_SECTIONS = (
@@ -447,7 +450,7 @@ def dead_links() -> list[str]:
     """
     problems = []
     for path in sorted(ROOT.rglob("*.md")):
-        for target in re.findall(r"\]\(([^)#][^)]*)\)", path.read_text()):
+        for target in LINK_TARGET.findall(path.read_text()):
             if target.startswith(("http://", "https://", "mailto:")):
                 continue
             resolved = (path.parent / target.split("#")[0]).resolve()

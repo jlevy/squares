@@ -183,6 +183,11 @@ DECLARED_CONSUMERS = {
         "checks that fresh ceiling verification does not redate a historical construction "
         "or imply optimality; upper, lower and optimality contribution roles remain distinct"
     ),
+    "packing/tests/test_result_status.py": (
+        "uses a case's exact certified ceiling as the reported side of a synthetic tied "
+        "result, confirming that equality is no strict improvement; the ceiling is "
+        "never treated as s(n) or as an optimality claim"
+    ),
     "packing/tests/test_confirm_gupta_records.py": (
         "tests finite ceiling confirmation, retained prior lanes and complete custody; "
         "a feasibility certificate confers neither s(n) nor optimality"
@@ -423,6 +428,11 @@ DECLARED_CONSUMERS = {
     "packing/devtools/adopt_houses.py": (
         "moves the reported and verified ceilings together to an adopted exact feasible "
         "side and keeps the earlier ceiling as history; it never reads either as s(n)"
+    ),
+    "packing/tests/test_exact_sides.py": (
+        "reads a closed-form ceiling through regularize_evand.verified_bound, as "
+        "select_houses does, to hold it exactly beside the sides a house is chosen from; "
+        "it compares a ceiling, never s(n)"
     ),
     "packing/tests/test_house_adoption.py": (
         "checks each retained prior record's ceiling stood above its adopted house and "

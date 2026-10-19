@@ -1274,12 +1274,17 @@ def report_results() -> str:
 
 def overview_page() -> Page:
     """A short introduction, bounded previews, papers, and links to the full pages."""
-    from devtools import news_highlights, overview_data, overview_sections  # noqa: PLC0415
+    from devtools import (  # noqa: PLC0415
+        news_highlights,
+        overview_data,
+        overview_sections,
+        render_changelog,
+    )
 
     overview = overview_data.load()
     values = {
         "HERO": overview_sections.hero(),
-        "NEWS_PREVIEW": news_highlights.render(overview),
+        "NEWS_PREVIEW": news_highlights.render(render_changelog.load()),
         "ATLAS_GRID": overview_sections.atlas_preview(),
         "PAPER_CARDS": overview_sections.paper_cards(),
         "DOCUMENTATION_BLOCK": overview_sections.documentation_block(),
@@ -1349,7 +1354,7 @@ def atlas_page() -> Page:
 
 
 def news_page() -> Page:
-    """The complete retained contribution and launch history, grouped by day."""
+    """Public contribution and launch announcements, grouped by day."""
     from devtools import render_changelog  # noqa: PLC0415
 
     markdown = _template_markdown(
@@ -1365,7 +1370,7 @@ def news_page() -> Page:
             "with the retained contribution history."
         ),
         toc=False,
-        page_scripts=(NEWS_CARDS_SCRIPT, NEWS_FILTERS_SCRIPT),
+        page_scripts=(NEWS_CARDS_SCRIPT, NEWS_FILTERS_SCRIPT, NEWS_FORWARD_SCRIPT),
         rewrite_body=_case_links,
     )
 

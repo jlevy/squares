@@ -108,6 +108,7 @@ from devtools import squish_followup_packets as squish_update
 from devtools import squish_second_update_packets as squish_second
 from devtools import squish_upper_bound_packets as squish_first
 from devtools.retained_data import read_retained_bytes
+from sqpack.field import FieldElement
 from sqpack.witness import (
     WitnessError,
     validate_witness_document,
@@ -268,6 +269,11 @@ class House(TypedDict):
     - ``reported_rounding`` (optional): where the reported lane is another source's print
       and not the house's side, how it was rounded (`ROUNDINGS`); it is compared as a
       printed side. A catalogue print below a rational ceiling is such a lane.
+    - ``verified_exact_form`` (optional): where the case prints its verified lane at the
+      decimal it printed before, above the exact form it now states, the exact form as
+      the case states it. `register_regularized_bounds.printed_value` keeps such a print,
+      as T-155 left n = 29 (think-gzrw): the reader's side must then equal this fraction,
+      and the printed value need only be at or above it.
     """
 
     n: int
@@ -279,14 +285,17 @@ class House(TypedDict):
     verified_value: str
     evidence: list[str]
     reported_rounding: NotRequired[str]
+    verified_exact_form: NotRequired[str]
 
 
 class Pending(TypedDict):
     """Another report at the same count that no case record holds.
 
-    Either ``reader`` names the retained packet whose exact side it is, for a register
-    entry pending adoption, or ``printed`` is the side it prints, with ``rounding``
-    (`ROUNDINGS`).
+    One of three says what its side is: ``reader`` names the retained packet whose exact
+    rational side it is, for a register entry pending adoption; ``algebraic`` names the
+    import packet whose derived algebraic-number-field fact ``facts/alg-n-NNN.yaml`` states
+    it exactly, as PR #574's sides at 153, 207 and 302 are (`algebraic_side`); or
+    ``printed`` is the side it prints, with ``rounding`` (`ROUNDINGS`).
     """
 
     n: int
@@ -295,6 +304,7 @@ class Pending(TypedDict):
     holders: str
     result: NotRequired[str]
     reader: NotRequired[str]
+    algebraic: NotRequired[str]
     printed: NotRequired[str]
     rounding: NotRequired[str]
 
@@ -457,6 +467,10 @@ def load_declaration(packet: Path) -> Declaration:
             house.get("reported_rounding", "up") in ROUNDINGS,
             f"n={house['n']}: unknown reported rounding",
         )
+        _require(
+            _FRACTION.fullmatch(house.get("verified_exact_form", "1/1")),
+            f"n={house['n']}: a verified exact form is a fraction",
+        )
     labels = [(pending["n"], pending["report"]) for pending in declaration["pending"]]
     _require(len(labels) == len(set(labels)), "a pending report is named twice at one count")
     for pending in declaration["pending"]:
@@ -464,8 +478,15 @@ def load_declaration(packet: Path) -> Declaration:
         _require(pending["n"] in counts, f"{where}: a pending report at an undeclared count")
         if "reader" in pending:
             _require(
-                pending["reader"] in HOUSES and not {"printed", "rounding"} & set(pending),
-                f"{where}: a known reader, and no printed side beside it",
+                pending["reader"] in HOUSES
+                and not {"algebraic", "printed", "rounding"} & set(pending),
+                f"{where}: a known reader, and no printed side beside it, nor an algebraic one",
+            )
+        elif "algebraic" in pending:
+            _require(
+                _PACKET.fullmatch(pending["algebraic"])
+                and not {"printed", "rounding"} & set(pending),
+                f"{where}: an algebraic side names a dated packet, and no printed side",
             )
         else:
             _require(
@@ -1278,6 +1299,8 @@ HOUSES: dict[str, Callable[[int], Fraction]] = {
     "[Barnett refinements 2026-10-11]": _import("barnett-refinements-2026-10-11"),
     "[SQUISH fourth request 2026-10-11]": _import("squish-500-fourth-request-2026-10-11"),
     "[Couzo certificates 2026-10-11]": _import("couzo-certificates-2026-10-11"),
+    # T-185: the same release's 175, which issue 506 does not name, under its own key.
+    "[Couzo n175 2026-10-11]": _import("couzo-certificates-2026-10-11"),
     "[PingYou n302 certificate 2026-10-12]": _import("pingyou-n302-certificate-2026-10-12"),
     "[PingYou n153 refinement 2026-10-12]": _import("pingyou-n153-refinement-2026-10-12"),
     "[PingYou n207 refinement 2026-10-12]": _import("pingyou-n207-refinement-2026-10-12"),
@@ -1302,9 +1325,23 @@ HOUSES: dict[str, Callable[[int], Fraction]] = {
     "[PingYou PR 574 certificates 2026-10-13]": _import(
         "pingyou-pr574-certificates-2026-10-13"
     ),
+    "[Daniel n146 2026-10-14]": _import("evand-n146-2026-10-14"),
+    "[Mishapolk KKT refinements 2026-10-14]": _import("mishapolk-kkt-refinements-2026-10-14"),
+    "[Couzo verified bounds 2026-10-14]": _import("couzo-verified-bounds-2026-10-14"),
+    "[Couzo certificates 2026-10-14]": _import("couzo-certificates-2026-10-14"),
+    "[Couzo n237 2026-10-15]": _import("couzo-n237-2026-10-15"),
+    "[PingYou PR 622 certificate 2026-10-15]": _import("pingyou-pr622-certificate-2026-10-15"),
     # T-155: the side of the retained view of Evan Daniel's regularizer at each count.
     "[Daniel regularizer 2026-10-11]": regularized.view_side,
 }
+
+
+def import_packet(reader: str) -> Path | None:
+    """The import packet a house reader reads its sides from, or None for another reader."""
+    function = HOUSES.get(reader)
+    if isinstance(function, functools.partial) and function.func is import_side:
+        return packet_path(str(function.args[0]))
+    return None
 
 
 def house_side(reader: str, n: int) -> Fraction:
@@ -1313,6 +1350,111 @@ def house_side(reader: str, n: int) -> Fraction:
         return HOUSES[reader](n)
     except (OSError, ValueError, KeyError) as error:
         raise ReportError(f"n={n}: {reader} does not rebuild: {error}") from error
+
+
+def comparison_reader(declaration: Declaration) -> Callable[[str, int], Fraction]:
+    """Admit each imported packet's needed counts once, only for this comparison.
+
+    A house and several pending reports can read the same packet. Group their counts
+    before admitting it, so asking for one side does not admit every unrelated fact.
+    Keep the values local: the next comparison must see changed private packet bytes.
+    """
+    packets: dict[str, Path] = {}
+    needed: dict[Path, dict[int, str]] = {}
+    for reference in [*declaration["houses"], *declaration["pending"]]:
+        reader = reference.get("reader")
+        if reader is None or (packet := import_packet(reader)) is None:
+            continue
+        packets[reader] = packet
+        needed.setdefault(packet, {}).setdefault(reference["n"], reader)
+    sides: dict[Path, dict[int, Fraction]] = {}
+    for packet, counts in needed.items():
+        try:
+            sides[packet] = {
+                n: certificate.side for n, certificate in read_facts(packet, counts).items()
+            }
+        except (OSError, ValueError, KeyError) as error:
+            n, reader = next(iter(counts.items()))
+            raise ReportError(f"n={n}: {reader} does not rebuild: {error}") from error
+
+    def read_side(reader: str, n: int) -> Fraction:
+        if reader not in packets:
+            return house_side(reader, n)
+        try:
+            return sides[packets[reader]][n]
+        except KeyError as error:
+            raise ReportError(f"n={n}: {reader} does not rebuild: {error}") from error
+
+    return read_side
+
+
+#: The places an algebraic side's enclosure is first refined to, and the most it is refined
+#: to before a comparison is refused; the relation itself is decided by one exact sign.
+ALGEBRAIC_PLACES = (60, 4000)
+
+
+@functools.cache
+def _algebraic_witness(name: str, n: int) -> dict[str, Any]:
+    """The algebraic witness at ``n`` of import packet ``name``, admitted once.
+
+    `devtools.algebraic_witness_reports` admits it: that packet's custody check, then the
+    derived fact ``facts/alg-n-NNN.yaml`` held to the schema and to its own rebuild.
+    """
+    # That module imports this one, so it is imported where it is first used.
+    from devtools import algebraic_witness_reports as algebraic  # noqa: PLC0415
+
+    witnesses = algebraic.read_facts(packet_path(name), {n})
+    _require(n in witnesses, f"n={n}: {name} declares no algebraic witness at this count")
+    return witnesses[n]
+
+
+def algebraic_side(name: str, n: int) -> FieldElement | Fraction:
+    """The exact side of import packet ``name``'s algebraic witness at ``n``.
+
+    A `FieldElement` in a field built afresh from the witness, so that the refinement one
+    comparison makes never narrows the next one's starting enclosure; a Fraction where the
+    witness's side is rational.
+    """
+    from devtools import algebraic_witness_reports as algebraic  # noqa: PLC0415
+
+    value = algebraic.side_of(_algebraic_witness(name, n))
+    _require(isinstance(value, FieldElement | Fraction), f"n={n}: {name} states no exact side")
+    return value
+
+
+def algebraic_against(
+    value: FieldElement | Fraction, side: Fraction
+) -> tuple[str, Span, Fraction, Fraction]:
+    """The certificate's side against an exact algebraic side ``value``.
+
+    Returns the certificate's relation, decided by the exact sign of ``value - side``; an
+    enclosure of ``value``, the span it stands as among the other reports, refined until it
+    excludes the certificate's side; and rigorous bounds on ``value - side``, within one
+    part in a million of each other.
+    """
+    if isinstance(value, Fraction):
+        return relation(side, exact_span(value)), exact_span(value), value - side, value - side
+    sign = (value - side).sign()
+    if sign == 0:
+        return "equal", exact_span(side), Fraction(0), Fraction(0)
+    field = value.field
+    places, most = ALGEBRAIC_PLACES
+    while True:
+        field.refine_to(places)
+        low, high = field.enclose(value)
+        apart_low, apart_high = low - side, high - side
+        if (
+            apart_low * sign > 0
+            and apart_high * sign > 0
+            and (apart_high - apart_low) * 10**6 <= min(abs(apart_low), abs(apart_high))
+        ):
+            span = Span(low, high, open_low=False, open_high=False)
+            return ("below" if sign > 0 else "above"), span, apart_low, apart_high
+        if places >= most:
+            break
+        # Doubling, but the last refinement is to `most` itself, not short of it.
+        places = min(2 * places, most)
+    raise ReportError(f"the algebraic side does not separate from {side} at {most} places")
 
 
 # --------------------------------------------------------------------------- comparison
@@ -1396,6 +1538,7 @@ def _row(
     row: CertificateRow,
     certificate: legacy.Certificate,
     declaration: Declaration,
+    read_side: Callable[[str, int], Fraction],
 ) -> dict[str, Any]:
     n, side = row["n"], certificate.side
     houses = {house["n"]: house for house in declaration["houses"]}
@@ -1416,12 +1559,21 @@ def _row(
     candidates: list[tuple[str, Span]] = [(THIS, exact_span(side))]
     if n <= HORIZON:
         house = houses[n]
-        prior = house_side(house["reader"], n)
+        prior = read_side(house["reader"], n)
         printed_lane = "reported_rounding" in house
         lanes = ("verified_value",) if printed_lane else ("reported_value", "verified_value")
         for lane in lanes:
             shown = Fraction(Decimal(house[lane]))
             unit = Fraction(1, 10 ** len(house[lane].partition(".")[2]))
+            if lane == "verified_value" and "verified_exact_form" in house:
+                # The case keeps an earlier print above its exact form, which must be the
+                # house's side exactly.
+                _require(
+                    Fraction(house["verified_exact_form"]) == prior and shown >= prior,
+                    f"n={n}: the case's verified exact form is not its house's side, "
+                    "or its print is below it",
+                )
+                continue
             _require(
                 shown == prior or prior < shown <= prior + unit,
                 f"n={n}: the case's {lane} is not its house's side, exact or rounded up",
@@ -1445,17 +1597,28 @@ def _row(
         entry: dict[str, Any] = {
             key: value for key, value in report.items() if key not in {"n", "reader"}
         }
-        if "reader" in report:
-            value = house_side(report["reader"], n)
-            span = exact_span(value)
-            entry["exact_side"] = legacy.literal(value)
+        if "algebraic" in report:
+            exact = algebraic_side(report["algebraic"], n)
+            verdict, span, low, high = algebraic_against(exact, side)
+            entry["exact_side"] = (
+                exact.text() if isinstance(exact, FieldElement) else legacy.literal(exact)
+            )
+            entry["relation"] = verdict
+            # The other side less the certificate's: an enclosure's midpoint, with its bounds.
+            entry["difference"] = legacy.literal((low + high) / 2)
+            entry["difference_bounds"] = [legacy.literal(low), legacy.literal(high)]
         else:
-            printed, rounding = report.get("printed", ""), report.get("rounding", "")
-            value = Fraction(Decimal(printed))
-            span = printed_span(printed, rounding)
-        entry["relation"] = relation(side, span)
-        # The other side less the certificate's, exactly or at its printed value.
-        entry["difference"] = legacy.literal(value - side)
+            if "reader" in report:
+                value = read_side(report["reader"], n)
+                span = exact_span(value)
+                entry["exact_side"] = legacy.literal(value)
+            else:
+                printed, rounding = report.get("printed", ""), report.get("rounding", "")
+                value = Fraction(Decimal(printed))
+                span = printed_span(printed, rounding)
+            entry["relation"] = relation(side, span)
+            # The other side less the certificate's, exactly or at its printed value.
+            entry["difference"] = legacy.literal(value - side)
         others.append(entry)
         candidates.append((report["report"], span))
     result["pending"] = others
@@ -1470,8 +1633,10 @@ def compare(
     certificates = read_facts(packet) if certificates is None else certificates
     declaration = load_declaration(packet)
     source = acquisition(packet)
+    read_side = comparison_reader(declaration)
     rows = [
-        _row(row, certificates[row["n"]], declaration) for row in declaration["certificates"]
+        _row(row, certificates[row["n"]], declaration, read_side)
+        for row in declaration["certificates"]
     ]
     return {
         "format": CLAIMS_FORMAT,
@@ -1527,6 +1692,9 @@ def live_problems(packet: Path) -> list[str]:
             house["verified_value"],
             house["evidence"],
         ]
+        if "verified_exact_form" in house:
+            found.append(str(verified.get("exact_form")))
+            expected.append(house["verified_exact_form"])
         if found != expected:
             problems.append(f"n={n}: the case record reads {found}, not {expected}")
     register = safe_load((ROOT / "frontier/results.yaml").read_text(encoding="utf-8"))

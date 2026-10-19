@@ -1,0 +1,146 @@
+results.yaml:
+  id: T-NNN
+  kind: upper-bound
+  registered: '2026-10-14'
+  headline: A smaller packing of 146 squares from Evan Daniel's chain search, started from Ryan Xu's packing,
+    certified exactly
+  claim: 'One complete rational source certificate reports a finite upper-bound improvement at the exact
+    side it states: s(146) <= 12.583782190151860342292508597077. Complete native feasibility outcomes
+    are retained separately; the selected standing case is unchanged pending independent review and record
+    review.
+
+
+    The author reports that his two exact rational checkers, verify_cert.py (separating axes) and verify_cert2.py
+    (polygon intersection), accept the certificate and its regularized drawing. The side is the 80-digit
+    KKT point S* = 12.58378219015186034216... scaled by 1 + 1e-20 about the origin corner; the source
+    reports a local minimum strict modulo 59 exact flat motions, 69 corner-corner contacts with no corner-corner
+    MILP descent, and 13 rattlers, and measures it against #505''s packing as a different local minimum
+    that agrees to about 1e-7 except a cluster of 10 squares tilted near 42 degrees. Those are numerical
+    evidence, as the source says, not proofs. No source program ran here.
+
+
+    Credit Evan Daniel (https://github.com/evand/square-packing), whose chain search found the packing
+    in a time-travel test started from the public packings of 10 October, and credit Ryan Xu''s packing
+    of 146 (issue 432, T-125) as its start, as the author asks: two random large perturbations of it and
+    a re-polish, then one exact descent step. The author names Robert Barnett''s refinement (T-150, issue
+    505) as the record it improves and calls the result a different local minimum from it. The search,
+    the checks and the request were done with Claude (Claude Code), which Evan Daniel directed and reviewed.'
+  scope:
+    n_values:
+    - 146
+  verification: V0
+  confirmation: C0
+  significance:
+    score: 2
+    rationale: A smaller finite construction side at n = 146, 1.38e-08 below the case ceiling; no lower
+      bound or optimum.
+    scored: '2026-10-14'
+    by: think-rvv7 Evan Daniel import
+  novelty: previously-published
+  attribution:
+    source_keys:
+    - '[Daniel n146 2026-10-14]'
+    published: '2026-10-14'
+  evidence:
+  - E-evand-606-n146-report
+  artifacts:
+  - packing/resources/web/evand-n146-2026-10-14/README.md
+  - packing/resources/web/evand-n146-2026-10-14/acquisition/claims.json
+  - packing/resources/web/evand-n146-2026-10-14/source/search/packer/candidates/tt2_n146.cert
+  - packing/resources/web/evand-n146-2026-10-14/receipts/exact-certification.json.xz
+  - packing/devtools/upper_bound_reports.py
+  controls:
+  - packing/tests/test_upper_bound_reports.py
+  notes: 'A separate complete repository replay is retained for n = 146: 1 positive and 2 duplicate-square
+    and outside-container controls passed their required outcomes on both routes, 63510 pair decisions;
+    summed over the 3 jobs, the receipt records 21.14 route CPU seconds and 21.33 job wall seconds, the
+    longest job 7.24 seconds. Every positive clears every wall by at least 5.00e-21 and every pair by
+    at least 9.99e-21.
+
+
+    At n = 146 the certificate is below the case''s ceiling (Ryan Xu, improved by Robert Barnett, T-150)
+    by 1.38e-08; below T-101 (#375) (the Kingbird catalogue, verified by Evan Daniel''s exact ceiling)
+    by 1.71e-02; below T-125 (#432) (Ryan Xu) by 8.74e-08; below T-146 (no issue) (Evan Daniel) by 8.73e-08;
+    below T-168 (#566) (PingYou Ltd) by 1.38e-08; below T-174 (PR #574) (PingYou Ltd) by 1.38e-08; below
+    #593 (Mykhailo Polkovskyi (Mishapolk)) by 1.38e-08; smallest: this certificate.
+
+
+    The source''s own checkers were not run here. The two maintained routes, the sqpack rational witness
+    verifier and the independent rational corner checker, share certificate parsing, half-angle conversion,
+    Fraction arithmetic and the separating-axis method. No two independent methods, human oversight or
+    optimality is claimed.'
+  next_rung: 'Independently review the retained replay, then decide adoption at 146: the certificate is
+    below the case''s ceiling (T-150) by 1.38e-8 and below every report at 146, PR 574''s T-174 included.
+    Final exact-head CI remains required.'
+evidence.yaml:
+  id: E-evand-606-n146-report
+  claim: upper-bound
+  scope:
+    n_values:
+    - 146
+  assurance: reported
+  reported_method: exact-algebraic
+  performed_by: source-author
+  relationship_to_generator: same-implementation
+  origin: external
+  novelty: previously-published
+  source_key: '[Daniel n146 2026-10-14]'
+  certificate: packing/resources/web/evand-n146-2026-10-14/source/search/packer/candidates/
+  replay_status: not-attempted
+  verifiers: []
+  source_reviewed: '2026-10-14'
+  limitations: 'This atom records the source author''s report of 1 exact rational certificate at e006ce6.
+    A separate complete repository replay is retained for n = 146: 1 positive and 2 duplicate-square and
+    outside-container controls passed their required outcomes on both routes, 63510 pair decisions; summed
+    over the 3 jobs, the receipt records 21.14 route CPU seconds and 21.33 job wall seconds, the longest
+    job 7.24 seconds. Every positive clears every wall by at least 5.00e-21 and every pair by at least
+    9.99e-21. Independent review and confirmation remain pending. The source''s own checkers were not
+    run here. The two maintained routes, the sqpack rational witness verifier and the independent rational
+    corner checker, share certificate parsing, half-angle conversion, Fraction arithmetic and the separating-axis
+    method. No two independent methods, human oversight or optimality is claimed.'
+source-coverage.yaml:
+  sources:
+  - id: evand-n146-2026-10-14
+    title: Evan Daniel's n146 certificate at e006ce6, issue606
+    role: source-repository
+    url: https://github.com/evand/square-packing/tree/e006ce6230f2240457b083199755a3a5d287692c
+    local: resources/web/evand-n146-2026-10-14/
+    source_key: '[Daniel n146 2026-10-14]'
+    scope:
+      n_values:
+      - 146
+    reviewed: '2026-10-14'
+    source_date: '2026-10-14'
+    disposition: current-report
+    replay_disposition: case-specific
+    represented_by:
+    - frontier/results.yaml
+    - resources/web/evand-n146-2026-10-14/acquisition/claims.json
+    evidence:
+    - E-evand-606-n146-report
+    notes: The 1 complete certificate is retained as the source wrote them, admitted only where its exact
+      side equals, or rounds up to, the side its source prints. T-NNN records the in-horizon report. All
+      3 native jobs have full outcomes. No selected override or superseded claim is created at this source-only
+      stage; current cases and earlier source ownership remain unchanged.
+  beyond_horizon_claims: []
+bibliography.yaml:
+  key: '[Daniel n146 2026-10-14]'
+  authors:
+  - Daniel
+  year: 2026
+  venue: GitHub
+  dated: '2026-10-14'
+  lineage: builds-on-project
+  credit: Daniel after Xu
+  short_credit: Daniel after Xu
+  note: 'One complete exact certificate at e006ce6230f2240457b083199755a3a5d287692c, s(146) <= 12583782190151860342292508597077/10^30,
+    from a time-travel test of the author''s chain search started from the public packings of 10 October;
+    the author credits the start to Ryan Xu''s #432 packing and names Barnett''s #505 refinement as the
+    record it improves. A regularized drawing of the same packing at the same side, and the source''s
+    comparison with #505''s packing, are retained beside it. MIT-licensed certificates and solver reports
+    retained; Claude assistance disclosed. KKT and jamming statements are the author''s numerical evidence;
+    no local or global optimality claim.'
+resources/README.md: '**[Daniel n146 2026-10-14]**: Evan Daniel''s exact rational certificate for n =
+  146, pinned at `e006ce6230f2240457b083199755a3a5d287692c`, retained as the source wrote them; [packet](web/evand-n146-2026-10-14/README.md).
+  Both project exact routes accept the 1 replayed certificate and refuse both controls. T-NNN records
+  the in-horizon side at V0/C0, pending independent review and adoption.'

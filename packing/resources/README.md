@@ -563,6 +563,10 @@ key remain bound to the bytes they originally named.
 
 | Repository | Role in this record | Pinned record |
 | --- | --- | --- |
+| [evand/square-packing, n229 opening](https://github.com/evand/square-packing/tree/e0338c7becf95dbc7584b48d8868c0a1cd21079c/search/packer/candidates) | Daniel’s opening upper-bound report in #674, `15.650163254859`, preserving Daniel after Couzo #672 after de Winter #668 | **[Daniel n229 dilation 2026-10-17]**; [17 October packet](web/evand-n229-dilation-2026-10-17/README.md), MIT-licensed pin `e0338c7becf95dbc7584b48d8868c0a1cd21079c`; stage 3 reported registration [T-198](../frontier/RESULTS.md), V0/C0, pending adoption; both case upper lanes and houses unchanged |
+| [evand/square-packing, n229 update](https://github.com/evand/square-packing/tree/00e68dfbe1d29ab5dbab1cddfb8f6ca19d5470db/search/packer/candidates) | Daniel’s current requested upper bound in #674, `15.650161513896`, after its retained opening report and with the same lineage | **[Daniel n229 dilation update 2026-10-18]**; [18 October packet](web/evand-n229-dilation-update-2026-10-18/README.md), MIT-licensed pin `00e68dfbe1d29ab5dbab1cddfb8f6ca19d5470db`; stage 3 reported registration [T-199](../frontier/RESULTS.md), V0/C0, pending adoption; both case upper lanes and houses unchanged |
+| [JoostdeWinter/square-packing](https://github.com/JoostdeWinter/square-packing) | Joost de Winter’s reported upper bounds at 227, 229 and 260, issue #668; [T-196](../frontier/RESULTS.md), V0/C0, pending adoption with both case upper lanes and houses unchanged | **[de Winter upper bounds 2026-10-17]**; [17 October packet](web/de-winter-upper-bounds-227-229-260-2026-10-17/README.md), retained at MIT-licensed `9bf5d9be4d0ca13a1dbef7d7953032fe87d4e81d`; the three witness directories are unchanged from original claim pin `c95c4938f068ed44a1819ef973e770ec241aa567` |
+| [evand/square-packing, n155](https://github.com/evand/square-packing/tree/59326b86291b76c39d843f3f156e8f25fa0f6e3f/search/packer/candidates) | Evan Daniel’s reported upper bound at 155 and same-side display certificate, issue #669; [T-197](../frontier/RESULTS.md), V0/C0, pending adoption, with the Ostashev/Couzo metadata discrepancy preserved | **[Daniel n155 explorer 2026-10-17]**; [17 October packet](web/evand-n155-explorer-2026-10-17/README.md), MIT-licensed pin `59326b86291b76c39d843f3f156e8f25fa0f6e3f`; both case upper lanes and the house unchanged |
 | [Queuingtheorydotcom/11SquaresOptimal](https://github.com/Queuingtheorydotcom/11SquaresOptimal) | **Priority proof review:** claimed global optimality of Trump’s eleven-square packing; distinct from the `s(11) > 31/8` bound and wand125 row checks | **[Ahmed n11 optimality 2026]**, T-060; [29 September intake](web/n11-optimality-2026-09-29/README.md); pinned `f9e0de713a0949d1bc6a0fa6b59d96edf6c3d65c`; [GPT-6 Pro’s review evidence of 3 October](web/n11-optimality-gpt6-pro-review-2026-10-03/README.md) |
 | [Queuingtheorydotcom/11SquaresFormalized](https://github.com/Queuingtheorydotcom/11SquaresFormalized) | The Lean 4 formalization of `T-060`’s proof, `ElevenSquare.optimality`, announced on 6 October 2026: the source reports a full verification run and axiom audit, private and resumed from earlier receipts, trusting Lean’s compiler for 13,308 `native_decide` axioms | **[Ahmed 11SquaresFormalized 2026]**, T-060; [6 October packet](web/queuingtheorydotcom-n11-lean-2026-10-06/README.md), pinned `cdc746ed907d258057c283aeb6d077cb2c27e349`; [statement audit](../../docs/project/reviews/review-2026-10-06-n11-lean-formalization-statement-audit.md) |
 | [wand125/square-packing-tools](https://github.com/wand125/square-packing-tools) | MIT-licensed drivers for moving rectangle-density certificates in `n` and `L`, performance variants around Tokoharu’s solver, and the exact `general_pose_tree` checker | **[wand125 tools 2026]**; [29 September packet](web/wand125-tools-2026-09-29/README.md) |
@@ -580,7 +584,9 @@ key remain bound to the bytes they originally named.
 | [Kleddamag/17-squares-certified-bound](https://github.com/Kleddamag/17-squares-certified-bound) | The `n = 17` mixed-charge certificate line through `466001/100000` | **[Kleddamag n17 4.66001]**; [27 September packet](web/n17-kleddamag-466001-2026-09-27/README.md) |
 | [Kleddamag/the-seventeenth-square-candidate](https://github.com/Kleddamag/the-seventeenth-square-candidate) | Marc Leonard Overbeck’s verification edition of a candidate proof that `s(17) = L`, Bidwell’s side | **[Overbeck n17 candidate 2026]**; [12 October packet](web/kleddamag-n17-candidate-2026-10-12/README.md) |
 | [ofitzharding/sq17-lean](https://github.com/ofitzharding/sq17-lean) | Oscar Fitzharding’s Lean 4 proof that `s(17) = L`, `Sq17.square17_optimality`, announced on 13 October 2026: the source reports a clean rebuild of the theorem’s 4,951-module import closure, trusting Lean’s compiler for 13,343 `native_decide` facts | **[Fitzharding n17 Lean 2026]**; [13 October packet](web/fitzharding-n17-lean-2026-10-13/README.md), pinned `e6ee548090dc1dbf938ecf8590481de837a6a454` |
+| [ofitzharding/sq19](https://github.com/ofitzharding/sq19) | Oscar Fitzharding’s Lean 4 proof that `s(19) = 3 + 4√2/3`, `Sq19.square19_optimality`, announced on 16 October 2026: the source reports a kernel replay of the theorem’s 13,143-module import closure, trusting Lean’s compiler for 4,320 `native_decide` facts | **[Fitzharding n19 Lean 2026]**; [16 October packet](web/fitzharding-n19-lean-2026-10-16/README.md), pinned `34fb2b7bc39465db368c45cb48d4db58829d3051` |
 | [bengreff/s76-certificate](https://github.com/bengreff/s76-certificate) | Benjamin Greff’s mixed cover for `s(76) = 9`, decided by Evan Daniel’s `zmx2` and `zm_mixed.py`; issue #594 | **[bengreff s76 certificate 2026-10-14]**; [14 October packet](web/bengreff-s76-certificate-2026-10-14/README.md), pinned `1cb924fa2fb7e8e30d8ddeb9b5e0dfcfae4f9f1f` |
+| [bengreff/s95-certificate](https://github.com/bengreff/s95-certificate) | Benjamin Greff’s mixed cover for `s(95) = 10`, decided by Evan Daniel’s `zmx2` and `zm_mixed.py`; issue #610 | **[bengreff s95 certificate 2026-10-15]**; [15 October packet](web/bengreff-s95-certificate-2026-10-15/README.md), pinned `dd7297d06adc664268c65005369b895e4ded7547` |
 | [Guzhou0806/n17-square-packing](https://github.com/Guzhou0806/n17-square-packing) | Parent-angle and mixed-charge certificates for `n = 17`, including R068 and R071 | **[Guzhou0806 n17 R068]**; [28 September packet](web/n17-guzhou-r068-2026-09-28/README.md); **[Guzhou0806 n17 R071]**; [30 September packet](web/n17-guzhou-r071-2026-09-30/README.md), pinned `8c11f6962506940c5de67a9fa73b3d1e2e151196` |
 | [Guzhou0806/n40-square-packing](https://github.com/Guzhou0806/n40-square-packing) | The clipped-corner transfer `s(40) > 335427/50000` on wand125’s `rect_n40_L67` density, with its 401-direction nodal run and exact finite checks, and then the continuous-pose kernel `s(40) > 1340000/199529` on the same density, with its 43-slab interval cover, exact axis certificate and finite checks, and the same kernels’ `s(40) > 3359/500` on a new density of 685 rectangle orbits | **[Guzhou0806 n40 clipped corner 2026-10-10]**; [10 October packet](web/guzhou-n40-clipped-corner-2026-10-10/README.md), pinned `e5abeb4d078a5c5b35df6204dd9b93378e5a7880`; **[Guzhou0806 n40 continuous pose 2026-10-10]**; [10 October continuous-pose packet](web/guzhou-n40-continuous-pose-2026-10-10/README.md), pinned `71c97d07553d7d5ff5c5c82f0c9d1c75a150a4e3`; **[Guzhou0806 n40 new supports 2026-10-11]**; [11 October new-supports packet](web/guzhou-n40-new-supports-2026-10-11/README.md), pinned `6a65957e6c5c51cdf267917d882dab7f5b4928dd` |
 | [Mira-acc/17squares](https://github.com/Mira-acc/17squares) | Exact point and weighted certificates used in the `n = 17` lineage | **[n17 weighted certificates 2026-09-20]**; [20 September packet](web/n17-weighted-certificates-2026-09-20/README.md) |
@@ -949,6 +955,19 @@ whole-net control’s mutant at two directions each; at n39 the axis refusal fal
 the census’s rounding allowance.
 A complete replay and whole-net controls remain pending.
 
+**[wand125 fine-net lower bounds 2026-10-16]**: wand125’s 18 certificates of 16 October,
+`mixed_n38_L65775` to `mixed_n110_L1073`, report lower bounds at n = 38, 40, 41, 43 and
+51 on the 2,073-direction net and at n = 68, 84 to 86, 88 to 92 and 106 to 110 on the
+201-direction standard net, each above both lower lanes of its case; wand125 reports
+them in jlevy/squares#446. The
+[packet](web/wand125-fine-net-lower-bounds-2026-10-16/README.md) retains the
+directories’ MIT documents at revision `718887c` and, under OR-18, each release asset’s
+candidate, receipts and logs, with the maintained premise checks; the nested verifier
+archive is pinned by digest.
+T-200 to T-217 record these bounds.
+T-216 adopts n108 at V3/C3 after its complete replay and mathematical reviews; the other
+seventeen remain V0/C0, with census and whole-net controls owned by think-f40c.
+
 - **[Couzo exact refinements 2026-10-08]** — Francisco Couzo’s eight complete rational
   certificates and separate decimal context poses.
   T-128 is at V3/C3 on the
@@ -1250,8 +1269,15 @@ V3/C3 on the
 [review of 12 October](../../docs/project/reviews/review-2026-10-11-upper-bound-imports-506.md),
 and the cases at 304 and 305 hold them as the house since 12 October 2026. The nine
 sides beyond the case corpus are verified beyond-horizon rows that supersede the rows
-tracked at 338, 339, 344, 375, 376, 378 and 379; the four certificates the issue does
-not name, at 175, 308, 340 and 343, are registered nowhere.
+tracked at 338, 339, 344, 375, 376, 378 and 379. Of the four certificates the issue does
+not name, 175 has a key of its own, below; 308, 340 and 343 are registered nowhere.
+Claude assistance disclosed.
+
+**[Couzo n175 2026-10-11]**: Francisco Couzo’s exact rational certificate for n = 175 in
+the same release, which #506 does not name;
+[packet](web/couzo-certificates-2026-10-11/README.md).
+T-185 records it at V0/C0, at the author’s request of 14 October 2026, superseded by
+T-158; the source’s standing table says it was seeded from Ryan Xu.
 Claude assistance disclosed.
 
 ## Evan Daniel’s regularizer, vendored 11 October 2026
@@ -1316,6 +1342,30 @@ project “was developed with substantial assistance from Claude and Codex”.
 The author’s announcement of 13 October says it was “Built with @OpenAI Astra +
 @AnthropicAI Opus 5.5”. The author asked for its registration in issue #565 on 12
 October 2026, and the owner reported it on 13 October 2026.
+
+## Fitzharding’s Lean proof that s(19) = 3 + 4√2/3, 16 October 2026
+
+**[Fitzharding n19 Lean 2026]**: Oscar Fitzharding’s (GitHub and X ofitzharding) Lean 4
+proof `Sq19.square19_optimality (L : ℝ) : Feasible19 L ↔ 3 + 4 * Real.sqrt 2 / 3 ≤ L`:
+nineteen closed unit squares, freely translated and rotated with disjoint interiors, fit
+in an axis-aligned square of side $L$ exactly when $L$ is at least the side of Robert
+Wainwright’s 1979 packing, $3 + 4\sqrt{2}/3 \approx 4.885618$. It is pinned in
+[ofitzharding/sq19](https://github.com/ofitzharding/sq19) at
+`34fb2b7bc39465db368c45cb48d4db58829d3051`, the tag of its release `v1.0.0`, and
+retained whole. The release’s five archives of generated certificate modules
+(1,110,588,236 bytes) are pinned by size and SHA-256 and not retained;
+[packet](web/fitzharding-n19-lean-2026-10-16/README.md).
+MIT licence. Its axiom report lists 4,320 `native_decide` facts and the three standard
+axioms, and no `sorryAx`. The source reports a kernel replay of the import closure, and
+says a complete rebuild from source has not yet been run.
+Nothing here has built the proof.
+It builds on the author’s s(17) proof, **[Fitzharding n17 Lean 2026]**, whose checker
+modules it compiles from sq17-lean `v1.0.0`. It thanks this project and Manasseh Ahmed,
+and says it was “Developed with substantial assistance from Claude and Codex”.
+The author announced it on X at 2026-10-16T03:27:40Z
+(<https://x.com/ofitzharding/status/2110935681597874374>), retained in the packet, and
+asked for its registration in issue #640 at 03:41:08Z. T-194 records the claim at V0/C0,
+pending a mathematical review and a complete build.
 
 ## Daniil Ostashev’s and Rio Calle’s certificates, 12 October 2026
 
@@ -1529,6 +1579,140 @@ as the source wrote them; [packet](web/evand-fresh-compositions-2026-10-14/READM
 Both project exact routes accept all 3 replayed certificates and refuse all 6 controls.
 The n = 365, 370 and 460 sides lie beyond the case corpus and are tracked as
 beyond-horizon rows.
+
+## The Evening Intake of 14 October 2026
+
+The two packets of the evening intake lane, registered in report order on 15 October as
+T-186 and T-187, after Francisco Couzo’s 175 (T-185, above).
+
+**[Mishapolk KKT refinements 2026-10-14]**: Mykhailo Polkovskyi’s exact rational
+certificates for n = 129, 154, 156, 175, 176, 204, 232, 264, 271, 302, 303 and 304,
+pinned at `70a033f0ecfa9e643cd5fb5dbac190cb7f4ffb94`, kept as derived exact facts, no
+upstream byte retained; [packet](web/mishapolk-kkt-refinements-2026-10-14/README.md).
+Both project exact routes accept all 24 replayed certificates and refuse all 48
+controls. T-186 records the twelve in-horizon sides below every earlier report at their
+counts at V0/C0, each a measured refinement of the certificate it tightens, pending
+independent review and adoption; at the commit’s other twelve counts PR #574’s
+certificates are smaller, and they are not recorded.
+
+**[Daniel n146 2026-10-14]**: Evan Daniel’s exact rational certificate for n = 146,
+pinned at `e006ce6230f2240457b083199755a3a5d287692c`, retained as the source wrote it;
+[packet](web/evand-n146-2026-10-14/README.md).
+Both project exact routes accept the 1 replayed certificate and refuse both controls.
+T-187 records the side, a new packing below every report at 146, at V0/C0, pending
+independent review and adoption.
+Claude assistance disclosed.
+
+## The Intake of 15 October 2026
+
+The five packets of the 15 October intake, registered in report order as T-188 to T-192.
+A certificate published in a watched repository with no issue is a report from its first
+commit.
+
+**[Couzo verified bounds 2026-10-14]**: Francisco Couzo’s verified-bounds index, pinned
+at `487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d` and published with no issue: the exact
+rational certificate for n = 211, retained as the source wrote it, and 296 certificates
+beyond the case corpus, pinned by digest as bulk data and not retained;
+[packet](web/couzo-verified-bounds-2026-10-14/README.md).
+Both project exact routes accept the 211 certificate and refuse both controls.
+T-188 records the side, 9.29e-6 below issue 586’s, at V0/C0, pending independent review
+and adoption. 252 of the 296 are beyond-horizon rows of the source register, and the
+author’s later `4e4c8ce` index, not yet recorded (think-yfoo), is smaller at the 238 of
+them still current; 812 and 930 are not recorded, and the 42 above Göbel’s classical
+constructions wait on the owner’s answer on #613. The pinned files state nothing about
+AI assistance; the author’s issues of 13 and 14 October disclose OpenAI Codex and Claude
+Code assistance.
+
+**[Couzo certificates 2026-10-14]**: Francisco Couzo’s exact rational certificates for n
+= 237, 339, 342, 382, 409, 419, 450, 461, 542, 552, 599, 648, 649, 651, 703, 757, 804,
+812, 930, 931, 992, 993 and 994, pinned at `43ac7d29cfeb7b71ea1eb09939cb30b9f71850f2`,
+retained as the source wrote them;
+[packet](web/couzo-certificates-2026-10-14/README.md).
+Both project exact routes accept all 23 replayed certificates and refuse all 46
+controls. T-189 records the 237 side at V0/C0, pending independent review and adoption,
+and the 15 sides from 339 to 804 are beyond-horizon rows.
+The seven at 703, 812, 930, 931, 992, 993 and 994 are Kevin Fang’s composites byte for
+byte, which the issue credits to him; they tie his earlier rows and are not recorded as
+Couzo’s. OpenAI Codex and Claude Code assistance disclosed.
+
+**[Couzo n237 2026-10-15]**: Francisco Couzo’s exact rational certificate for n = 237,
+first committed with no issue and pinned at `58a783368d4b7e70bb800f0009ea9ca03e578739`,
+retained as the source wrote it; [packet](web/couzo-n237-2026-10-15/README.md).
+Both project exact routes accept the 1 replayed certificate and refuse both controls.
+T-190 records the side, 2.40e-11 below T-189, at V0/C0, pending independent review and
+adoption. The pinned files state nothing about AI assistance; #607, the day before,
+discloses OpenAI Codex and Claude Code assistance.
+
+**[bengreff s95 certificate 2026-10-15]**: Benjamin Greff’s (GitHub bengreff) mixed
+cover for $s(95) \ge 10$, hence $s(95) = 10$ with the $10 \times 10$ grid: 48,352 points
+and 11,438 segments of $[0,10]^2$ in Evan Daniel’s `mixed 1` format, total
+$3791753447/40000000 < 95$, exactly D4-invariant.
+It is pinned in [bengreff/s95-certificate](https://github.com/bengreff/s95-certificate)
+at `dd7297d06adc664268c65005369b895e4ded7547`, committed on 15 October 2026, and
+retained whole; [packet](web/bengreff-s95-certificate-2026-10-15/README.md).
+MIT licence. The source decides the covering statement with two of Daniel’s checkers
+pinned at evand/square-packing `b91d70b6`: `zmx2` on 9,981 of the 10,000 root cells of
+the D4 region and `zm_mixed.py` on the 304 cells that tile the other 19. Its Lean
+wrapper on Daniel’s `Sqpack` takes that statement as a hypothesis.
+Its README credits Evan Daniel for the method, the format, the checkers and the Lean
+library, and wand125 for the $s(59) = 8$ cover reused in the corners and the
+band-insertion construction, and says the search, LP and verification pipeline “were
+built and run with Claude (Anthropic) as an AI assistant” under the author’s direction.
+The author asked for its registration in issue #610 on 15 October 2026; T-191 records it
+at V0/C0.
+
+**[wand125 continuous n28 2026-10-15]**: Hiroaki Hosono’s (wand125’s) continuous-pose
+certificate for $s(28) > 1149/200 = 5.745$, pinned at
+`8530bafb03d48444f30f241fbc1f29f01cd7c96c` in
+[wand125/square-packing](https://github.com/wand125/square-packing) with no issue: 884
+rectangle orbits of mass $2799999/100000$, every square of side $499/500$ at every angle
+reported to capture mass at least 1, decided at the source by `sqverify_continuous` v4
+and by `contpose_check3` around Guzhou0806’s T-145 kernels;
+[packet](web/wand125-continuous-n28-2026-10-15/README.md).
+The directory’s MIT documents and `check2`’s source are retained, and the release asset
+is pinned by size and SHA-256 and kept outside Git.
+T-192 records the claim at V0/C0, after T-142, pending a complete replay and review.
+The source says parts of the work were produced with AI assistance under human
+direction.
+
+## The Intake of 16 October 2026
+
+**[Daniel exact current records 2026-10-16]**: Evan Daniel’s exact algebraic sides of
+the record’s best-known packings at 23 counts, each the one root of an integer
+polynomial of degree 2 to 41 in a rational interval, realised by an exact configuration
+over a number field, pinned at `7d1407a0b66c46e32cdbcbd5619586fe2bdd52a1` and asked for
+in issue #639. 19 of the 23 data files are retained as their upstream gzip and the four
+largest are pinned by size and SHA-256;
+[packet](web/evand-exact-cur-2026-10-16/README.md).
+The source’s `verify_exact.py`, read and run here from the retained copy, accepts all 23
+and refuses every mutated control.
+T-193 records the 16 counts the
+[16 October ledger](../campaign/issue-intake/upper-bounds-20261016/README.md) records,
+below every earlier report there, at V0/C0, pending review and adoption; at 51, 70, 153
+and 207 the side ties a side the record holds, and at 172, 263 and 297 PR #574’s
+rational certificates are smaller.
+Claude assistance disclosed.
+
+**[PingYou PR 622 certificate 2026-10-15]**: PingYou Ltd’s exact rational certificate
+for n = 29, a refinement of Thomas Schadt’s packing, improved by David Ellsworth, pinned
+at `31155575ce1e6b461f77bfc9f3e201adf101115b` with its release asset pinned by size and
+SHA-256, kept as a derived exact fact, no upstream byte retained;
+[packet](web/pingyou-pr622-certificate-2026-10-15/README.md).
+Both project exact routes accept it and refuse both controls, and the 16 October review
+accepted it for finite feasibility.
+T-195 records it at V3/C3, 1.57e-36 below T-155, by exception in the
+[per-count ledger](../campaign/issue-intake/upper-bounds-n29-20261016/README.md), on the
+owner’s standing house rule (PR #660), pending adoption.
+The author says its submissions are assisted by PingYou Ltd’s PY agentic offering.
+
+## T-174 Adoption Integration Diagnostic, 19 October 2026
+
+The
+[retained diagnostic packet](web/t174-adoption-integration-diagnostic-2026-10-19/README.md)
+keeps the exact source, JSON output, README and local review of the prospective 37-count
+T-174 adoption. It is an unregistered integration diagnostic cited by no evidence entry;
+it adds no result, rung or geometric replay.
+Its historical custody observation leaves the fresh 66-house custody gate open.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

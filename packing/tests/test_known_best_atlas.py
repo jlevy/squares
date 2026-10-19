@@ -89,8 +89,9 @@ from sqpack.yamlio import safe_load
 #: the second also moved n = 88. Complete evand and ry-xu packets now supersede
 #: earlier catalogue sources. These inventory counts follow the current corpus; the house
 #: adoption of 12 October 2026 moved n = 176 onto SQUISH's issue 500 packet (think-fvz4),
-#: and its pass for issue 528 moved n = 264 onto Daniil Ostashev's packet (think-cq95).
-GOLDEN_DERIVED_ABOVE_100: dict[str, int] = {"n=1..100": 0, "n=1..200": 22, "n=1..324": 47}
+#: and its pass for issue 528 moved n = 264 onto Daniil Ostashev's packet (think-cq95), and
+#: that of 15 October n = 204 onto his issue 562 packet (T-162).
+GOLDEN_DERIVED_ABOVE_100: dict[str, int] = {"n=1..100": 0, "n=1..200": 22, "n=1..324": 46}
 #: The cases whose retained upstream rendering is the UnitSquare release, per corpus.
 GOLDEN_UNITSQUARE: dict[str, set[int]] = {
     # 68, 103, 105, 110 and 131 moved onto Francisco Couzo's packet on 2026-09-29, and 69
@@ -101,24 +102,28 @@ GOLDEN_UNITSQUARE: dict[str, set[int]] = {
 }
 #: How the corpus splits by source kind at each corpus; a case switching kind fails here.
 GOLDEN_SOURCE_KINDS: dict[str, dict[str, int]] = {
+    # 29 moved from Kingbird to PR #622's packet (T-195) on 17 October 2026, the first
+    # adoption under the house rule (think-30n2).
     "n=1..100": {
         "exact-grid": 64,
-        "kingbird-derived-facts": 30,
-        "packet-derived-facts": 6,
+        "kingbird-derived-facts": 29,
+        "packet-derived-facts": 7,
     },
     # 176 moved from Kingbird to SQUISH's issue 500 packet on 12 October 2026 (think-fvz4).
     "n=1..200": {
         "exact-grid": 114,
-        "kingbird-derived-facts": 52,
-        "packet-derived-facts": 34,
+        "kingbird-derived-facts": 51,
+        "packet-derived-facts": 35,
     },
     # 232 (from Kingbird) and 308 (from the grid) moved to packet houses in the house
     # adoption of 11 October 2026, and 176 (from Kingbird) on 12 October (think-fvz4), as
-    # did 264 (from Kingbird) in the pass for issue 528 (think-cq95).
+    # did 264 (from Kingbird) in the pass for issue 528 (think-cq95), and 204 (from
+    # Kingbird) on 15 October, to Daniil Ostashev's issue 562 packet (T-162), and 29 (from
+    # Kingbird) on 17 October, to PR #622's packet (T-195).
     "n=1..324": {
         "exact-grid": 175,
-        "kingbird-derived-facts": 77,
-        "packet-derived-facts": 72,
+        "kingbird-derived-facts": 75,
+        "packet-derived-facts": 74,
     },
 }
 
@@ -239,7 +244,6 @@ def test_kingbird_sources_are_metadata_only_derived_facts() -> None:
         26,
         27,
         28,
-        29,
         37,
         38,
         39,
@@ -599,8 +603,11 @@ def test_known_best_atlas_covers_every_frontier_case() -> None:
         if n in sampled:
             _assert_witness_agrees_with_entry(entry, release_by_n)
 
+    # Until the adoption of 17 October 2026 n = 29's reported lane named the catalogue's
+    # witness, W-n029-kingbird, beside the atlas's; it now names the house's alone (T-195).
     n29_frontier = (ROOT / "frontier/n-029.md").read_text(encoding="utf-8")
-    assert "    - W-n029-kingbird\n" in n29_frontier
+    n29_case = safe_load(n29_frontier.split("---\n", 2)[1])["packing"]
+    assert n29_case["reported_upper_bound"]["witnesses"] == ["W-known-best-n029"]
 
 
 def _assert_witness_agrees_with_entry(entry: dict, release_by_n: dict) -> None:
@@ -1640,7 +1647,7 @@ def test_triangle_fast_label_check_requires_the_compact_caption() -> None:
     assert check(canvas, root) == [
         (
             "atlas/known-best/known-best-1-324.svg n=211 side-bound is "
-            "('s(211) ≤ 14.997961',); expected ('s(211) ≤ 14.99634',)"
+            "('s(211) ≤ 14.997961',); expected ('s(211) ≤ 14.99355',)"
         )
     ]
 
@@ -2147,9 +2154,20 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
     # and Barnett and draws no de Winter packing, from eight more sources; that of 12
     # October draws from SQUISH's and Couzo's 11 October releases (think-fvz4), and the
     # pass for issue 528 from Daniil Ostashev's 12 October release, and that for issue 552
-    # from Evan Daniel's n = 154 packet (think-cq95).
+    # from Evan Daniel's n = 154 packet (think-cq95). The pass of 15 October draws from
+    # ten more, Mishapolk's of 12 and 14 October, Ostashev's of 12 and 13 October, Couzo's
+    # of 12 and 13 October and PingYou Ltd's four refinements, and no longer from PingYou's
+    # n = 153 and 207 certificates, Evan Daniel's n = 154 packet or Robert Barnett's
+    # refinements: six sources more, and no new name. The adoption of 16 October
+    # (think-z7wn) draws from Mishapolk's KKT refinements and Couzo's verified bounds of 14
+    # October, Evan Daniel's n = 146 packet and Couzo's n = 237 packet, and no longer from
+    # Couzo's 12 October certificates, Mishapolk's 14 October records, Ostashev's 12
+    # October compositions and records and 13 October merged bands, or PingYou Ltd's
+    # n = 146 refinement: two sources fewer, and no new name.
+    # T-174's 37-count adoption consolidates ten source keys while retaining every
+    # construction credit. T-195 adds one source at n = 29.
     assert len(expected_names) == 26
-    assert len(expected_sources) == 22
+    assert len(expected_sources) == 17
     assert set(json.loads(credit_block.attrib["data-credited-names"])) == expected_names
     assert set(json.loads(credit_block.attrib["data-source-keys"])) == expected_sources
     assert credit_block.find("svg:text[@data-feature='packing-credits-heading']", SVG) is None
@@ -2178,16 +2196,16 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
         "Couzo",
         "Daniel",
         "Fang",
+        "Gupta",
         "Ostashev",
         "PingYou Ltd",
-        "Rehwaldt",
-        "Gupta",
-        "Barnett",
         "Xu",
+        "Barnett",
         "Chang",
         "DeVincentis",
         "hmbelvedere",
         "Mishapolk",
+        "Rehwaldt",
     ]
     assert all(body.count(name) == 1 for name in expected_names)
     assert "et al." not in body
@@ -2334,7 +2352,7 @@ def test_poster_accents_recent_contributions_independently_in_svg_and_pdf() -> N
         line = cards[211].find(f"svg:text[@data-feature='{feature}']", SVG)
         assert line is not None
         assert "".join(line.itertext()) == (
-            "s(211) ≤ 14.99634" if feature == "side-bound" else "s(211) ≥ 14.54457"
+            "s(211) ≤ 14.99355" if feature == "side-bound" else "s(211) ≥ 14.54457"
         )
         colored = [span for span in line if span.attrib.get("fill") == FIRST_PARTY_ACCENT_COLOR]
         assert len(colored) == 1
@@ -2407,7 +2425,7 @@ def test_primary_composite_routes_contributions_to_cards_and_legend(
     entries = {entry["n"]: entry for entry in record["entries"]}
     assert [
         n for n in canvas.spec.numbers if entries[n]["exactness"]["state"] == "numeric-only"
-    ] == [29, 55, 71]
+    ] == [55, 71]
     degrees = {
         n: entries[n]["exactness"]["degree"]
         for n in canvas.spec.numbers
@@ -2631,15 +2649,12 @@ def test_poster_legend_columns_align_left_and_end_with_the_recent_result_key(
     assert labels[1][-1][0].attrib["fill"] == "#000000"
     assert not root.findall(".//svg:polygon[@data-feature='legend-star']", SVG)
     description = known_best_builder.SUMMARY_PROSE[canvas.spec.stem][1]
-    assert all(
-        role in description
-        for role in (
-            "construction giving an upper bound",
-            "proof of a lower bound",
-            "optimality proof",
-        )
+    assert (
+        "Crimson marks the numeric value of a recent upper or lower bound since August 2026."
+        in description
     )
-    assert "since August 2026" in description
+    assert "Case numbers are gray" in description
+    assert "Optimality badges keep their usual styling." in description
     assert "star" not in description.lower()
     assert "common right edge" in description
     assert "eighteen physical lines" in description
@@ -2649,15 +2664,12 @@ def test_poster_legend_columns_align_left_and_end_with_the_recent_result_key(
     assert "Wrapped" not in description
     assert known_best_builder.POSTER_PROBLEM in description
     primary_description = known_best_builder.SUMMARY_PROSE["known-best-1-100"][1]
-    assert all(
-        role in primary_description
-        for role in (
-            "construction giving an upper bound",
-            "proof of a lower bound",
-            "optimality proof",
-        )
+    assert (
+        "Crimson marks the numeric value of a recent upper or lower bound since August 2026."
+        in primary_description
     )
-    assert "since August 2026" in primary_description
+    assert "Case numbers are gray" in primary_description
+    assert "Optimality badges keep their usual styling." in primary_description
     assert [Decimal(node.attrib["y"]) for node in labels[0]] == [
         canvas.legend_baseline + 72 * index for index in range(4)
     ]
@@ -3126,6 +3138,40 @@ def test_the_poster_badges_every_perfect_square_and_counts_them_in_its_legend() 
     assert solid_rigid == sorted([k * k for k in range(1, 19)] + [5, 11, 28, 40])
     assert set(solid_rigid) >= {121, 144, 169, 196, 225, 256, 289, 324}
 
+    # The retained poster predates T-174's adoption but includes T-195 at 29. The
+    # same-day archive also holds 29's prior record, so restore only T-174's roster.
+    from devtools import adopt_houses  # noqa: PLC0415
+
+    previous = adopt_houses.read_pass("2026-10-17")
+    t174_counts = {n for n, result in adopted_houses.ADOPTED.items() if result == "T-174"}
+    assert len(t174_counts) == 37
+    assert 29 not in t174_counts
+    cases = {n: build_bound_citations.load_case(n) for n in cards}
+    cases.update(
+        {n: safe_load(previous[n].split("---\n", 2)[1])["packing"] for n in t174_counts}
+    )
+    numeric_cases = {
+        n
+        for n, case in cases.items()
+        if not any(
+            case["reported_upper_bound"].get(field)
+            for field in ("exact_form", "minimal_polynomial", "algebraic_degree")
+        )
+    }
+    exact_cases = set(cards) - numeric_cases
+    # 29 is exact since its house moved to PR #622's rational certificate on 17 October.
+    assert (len(exact_cases), len(numeric_cases)) == (309, 15)
+    for evidence, expected in (
+        ("exact value known", exact_cases),
+        ("only known numerically", numeric_cases),
+    ):
+        depicted = {
+            n
+            for n, card in cards.items()
+            if card.find(f".//svg:rect[@data-evidence='{evidence}']", SVG) is not None
+        }
+        assert depicted == expected
+
     # The legend counts the poster's own 324 cases, not the corpus and not the figure's
     # hundred. Read the labels by their feature; the poster aligns them at the right
     # edge while the badge glyphs stay centred.
@@ -3137,11 +3183,12 @@ def test_the_poster_badges_every_perfect_square_and_counts_them_in_its_legend() 
     ]
     # The house adoption of 11 October 2026 gave nine cases known only numerically an
     # exact certificate, and its pass of 12 October three more, 181, 271 and 304, whose
-    # reported lanes stated no exact form (think-fvz4).
+    # reported lanes stated no exact form (think-fvz4); the adoption of 17 October gave
+    # 29 one, PR #622's rational certificate (T-195).
     assert labels == [
         "proved optimal (77 of 324)",
-        "exact value known (307 of 324)",
-        "only known numerically (17 of 324)",
+        "exact value known (309 of 324)",
+        "only known numerically (15 of 324)",
         "rigid (22 of 324)",
         "colors indicate distinct tilt angles",
         "shade indicates number of full-side contacts",
@@ -3158,8 +3205,8 @@ def test_the_poster_badges_every_perfect_square_and_counts_them_in_its_legend() 
         for node in figure_legend.findall(".//svg:text[@data-feature='legend-label']", SVG)
     ][:5] == [
         "proved optimal (45 of 100)",
-        "exact value known (97 of 100)",
-        "only known numerically (3 of 100)",
+        "exact value known (98 of 100)",
+        "only known numerically (2 of 100)",
         "rigid (14 of 100)",
         "colors indicate distinct tilt angles",
     ]

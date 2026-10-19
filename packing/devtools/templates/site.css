@@ -149,7 +149,7 @@ body {
   --site-wide-gutter: 0.5rem;
   /* The space under a page's title: to its subtitle and from the subtitle to the first
      paragraph, or straight to the first paragraph of a page that has no subtitle. */
-  --site-subtitle-space: 1.5rem;
+  --site-subtitle-space: 2rem;
   --site-subtitle-scale: 1.1;
   /* How much nearer the bar a page's opening picture sits than a title would: a drawing
      has no line spacing above its edge, so the same space reads larger. */
@@ -265,10 +265,10 @@ body {
 /* Main section titles share the homepage's breathing room on every web page. */
 @media screen {
   .kpress {
-    --site-title-space-above: 3.5rem;
-    --site-title-space-below: 2rem;
+    --site-title-space-above: 3.75rem;
+    --site-title-space-below: 2.5rem;
   }
-  .kpress :where(.site-page) h1,
+  .kpress :where(.site-page, .kpress-prose) h1,
   .kpress :is(h1, h2).site-title {
     margin-block: var(--site-title-space-above) var(--site-title-space-below);
   }
@@ -830,6 +830,7 @@ body {
   background: var(--kpress-doc-accent);
   color: var(--kpress-doc-bg);
   display: inline-flex;
+  font-family: var(--kpress-font-sans);
   font-size: calc(var(--site-font-size-note) * var(--paper-button-label-scale));
   font-weight: var(--site-font-weight-sans-medium);
   gap: 0.5rem;
@@ -880,7 +881,7 @@ body {
   text-align: center;
 }
 
-.kpress :is(.site-card, .site-popover, .site-case) .site-card-label {
+.kpress :is(.site-card, .site-popover, .site-case, .site-article-header) .site-card-label {
   color: var(--kpress-doc-muted);
   font-family: var(--kpress-font-sans);
   font-size: var(--kpress-caps-label-size, 0.8rem);
@@ -894,7 +895,8 @@ body {
    a headline of two or three lines reads as one block. A long closed form, such as a
    nested radical, scrolls inside its card rather than widening the page. */
 .kpress .site-card .site-card-value,
-.site-popover .site-popover-value {
+.site-popover .site-popover-value,
+.kpress .site-article-header > h3 {
   font-family: var(--kpress-font-sans);
   font-weight: var(--site-font-weight-sans-medium);
   line-height: var(--paper-heading-leading);
@@ -911,7 +913,8 @@ body {
 /* The tighter leading takes the room a looser line kept around the headline, so the
    headline carries it as margin: a little above, under the label, and more below, over
    the note. */
-.kpress .site-card .site-card-value {
+.kpress .site-card .site-card-value,
+.kpress .site-article-header > h3 {
   font-size: 1.15em;
   margin-block: 0.2rem 0.3rem;
   max-inline-size: 100%;
@@ -1206,11 +1209,12 @@ body {
   font-variant-caps: normal;
   letter-spacing: normal;
   text-transform: none;
-  background: color-mix(
+  --site-chip-fill: color-mix(
     in oklch,
     var(--kpress-doc-muted) var(--site-chip-tint),
     var(--kpress-doc-bg)
   );
+  background: var(--site-chip-fill);
   border-radius: 0;
   color: var(--kpress-doc-text);
   display: inline-block;
@@ -1241,7 +1245,7 @@ body {
   [data-news-topic="verification"]
 ) {
   --rung-chroma-boost: 0;
-  background: oklch(
+  --site-chip-fill: oklch(
     calc(var(--site-rung-base) + var(--rung-level) * var(--site-rung-step))
       calc(
         var(--site-rung-chroma-base) +
@@ -1277,7 +1281,7 @@ body {
   [data-status="incomplete"],
   [data-news-topic="lower-bound"]
 ) {
-  background: color-mix(
+  --site-chip-fill: color-mix(
     in oklab,
     var(--site-bound-lower) var(--site-chip-tint),
     var(--kpress-doc-bg)
@@ -1289,14 +1293,15 @@ body {
   [data-news-topic="upper-bound"],
   [data-news-topic="optimality"]
 ) {
-  background: color-mix(
+  --site-chip-fill: color-mix(
     in oklab,
     var(--site-bound-upper) var(--site-chip-tint),
     var(--kpress-doc-bg)
   );
 }
-.site-chip[data-news-topic="engineering"] {
-  background: color-mix(
+.site-chip[data-news-topic="engineering"],
+.site-chip[data-news-topic="project"] {
+  --site-chip-fill: color-mix(
     in oklab,
     var(--kpress-doc-accent) var(--site-chip-tint),
     var(--kpress-doc-bg)
@@ -1348,8 +1353,9 @@ body {
 .site-star {
   color: var(--site-new-result);
 }
-/* One boxed meter for every significance score: identical width and five larger
-   segments, with filled bars showing the level and outlined bars the remainder. */
+/* One boxed meter for every significance score: the label stays close to its bars,
+   centered together at a fixed width. Filled bars show the level; outlined bars the
+   remainder. */
 .site-significance {
   align-items: center;
   block-size: 1.45em;
@@ -1362,9 +1368,9 @@ body {
   font-size: var(--site-font-size-note);
   font-variant-numeric: tabular-nums;
   font-weight: var(--site-font-weight-sans-medium);
-  gap: 0.3em;
+  gap: 0.18em;
   inline-size: 5.5em;
-  justify-content: space-between;
+  justify-content: center;
   padding-inline: 0.28em;
   vertical-align: baseline;
   white-space: nowrap;
@@ -3483,24 +3489,34 @@ html[data-site-atlas-view="triangle"]
 .kpress .site-news-day.is-collapsed:hover .site-news-body::after {
   opacity: 1;
 }
-.kpress .site-news-date {
+.kpress .site-article-header {
+  font-size: var(--kpress-font-size-base);
+}
+.kpress .site-article-date {
   color: inherit;
   font-family: var(--kpress-font-sans);
   font-feature-settings: var(--kpress-font-features-sans);
   font-size: var(--site-font-size-sans-base);
   font-style: normal;
-  font-weight: var(--site-font-weight-sans-light);
+  font-weight: var(--site-font-weight-sans-medium);
   letter-spacing: normal;
   line-height: 1.45;
   margin: 0 0 0.6rem;
   text-align: start;
   text-transform: none;
 }
-.kpress .site-news-header > h3 {
-  margin-block: 0.6rem;
+.kpress .site-article-header > h3 {
+  color: inherit;
+  font-style: normal;
+  letter-spacing: normal;
   text-align: start;
+  text-transform: none;
 }
-.kpress .site-news-header > h3 :is(.kpress-math, .katex, .tex, math) {
+.kpress .site-article-header > h3 > a {
+  color: inherit;
+  font: inherit;
+}
+.kpress .site-article-header > h3 :is(.kpress-math, .katex, .tex, math) {
   letter-spacing: normal;
   text-transform: none;
 }
@@ -3572,10 +3588,29 @@ html[data-site-atlas-view="triangle"]
   min-inline-size: 0;
   padding: 0;
 }
-/* Placement only: compact choices and the Results count row own their shared
-   typography, colors, selected states and right alignment. */
+/* Compact choices and the Results count row own shared sizing and alignment. */
 .site-news-filters :is(.site-tabs, .site-table-tools) {
   margin: 0;
+}
+/* Joined topic controls retain the card chips' palette and casing. Selection adds
+   an inset mark so the subject color keeps the same meaning in either state. */
+.site-news-filters [aria-labelledby="news-topics-label"] button {
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+.site-news-filters .site-tabs button.site-chip {
+  background: var(--site-chip-fill);
+  color: var(--kpress-doc-text);
+  font-variant-caps: normal;
+  letter-spacing: normal;
+  margin: 0;
+  text-transform: none;
+}
+.site-news-filters .site-tabs button.site-chip[aria-pressed="true"] {
+  box-shadow: inset 0 -2px currentColor;
+}
+.site-news-filters .site-tabs button.site-chip:is(:hover, :focus-visible) {
+  text-decoration: underline;
 }
 
 /* The default first paint already shows S4/S5. Readers without scripting receive

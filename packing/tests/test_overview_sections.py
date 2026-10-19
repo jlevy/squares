@@ -15,6 +15,7 @@ import mpmath as mp
 import pytest
 
 from devtools import overview_data, overview_sections
+from sqpack import release
 
 
 @pytest.fixture(scope="module")
@@ -433,3 +434,36 @@ def test_side_reader_reports_invalid_decimal_pose_literals_as_witness_errors(
     # before the full reader's Fraction fallback. Its existing refusal is retained.
     with pytest.raises((WitnessError, ZeroDivisionError)):
         builder.frame_from_witness(witness)
+
+
+def test_reading_cards_keep_original_dates_when_a_new_edition_is_added(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setattr(
+        release,
+        "EXPLAINER_HISTORY",
+        (
+            release.PublicationHistoryEntry("v9.0.0", "January 1, 2030", "Later revision"),
+            *release.EXPLAINER_HISTORY,
+        ),
+    )
+    expected = {
+        "papers/n11-lower-bounds-explainer.html": "2026-09-05",
+        "papers/n11-threshold-bound-review.html": "2026-10-05",
+        "papers/n11-optimality-review.html": "2026-09-30",
+        "papers/square-packing-methods-survey.html": "2026-10-08",
+        "tutorial.html": "2026-10-01",
+        "tutorial-advanced.html": "2026-10-14",
+    }
+    cards = re.findall(
+        r'<a class="site-card site-card-link" href="([^"]+)"[^>]*>(.*?)</a>',
+        overview_sections.paper_cards(),
+        re.DOTALL,
+    )
+    assert len(cards) == len(expected)
+    for href, card in cards:
+        assert f'<time datetime="{expected[href]}">' in card
+        assert "2030" not in card
+        assert 'target="_blank"' not in card
+        assert card.index("site-card-label") < card.index("<h3>") < card.index("<time ")
+        assert card.index("</header>") < card.index("site-card-note")

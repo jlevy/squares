@@ -111,8 +111,9 @@ theorem implies at each count, and nothing about the certificate.
 ## The Calibration Replay
 
 On 14 October, after the intake, the validation lane `vcheap` (bead think-au7j) built
-`replay4d` and replayed the two smallest records, to price the complete replay on this
-host. The receipts are in [`receipts/calibration/`](receipts/calibration/runs.json), and
+`replay4d` and replayed the two records cheapest by the source’s CPU time, to price the
+complete replay on this host. The receipts are in
+[`receipts/calibration/`](receipts/calibration/runs.json), and
 [`devtools.audit_wand125_closed_form`](../../../devtools/audit_wand125_closed_form.py)
 `calibrate` binds them in [`calibration.json`](receipts/calibration/calibration.json).
 The host was four cores that other agents shared.

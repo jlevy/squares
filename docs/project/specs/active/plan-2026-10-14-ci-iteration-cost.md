@@ -1,32 +1,30 @@
 ---
-title: Predictable CI Feedback and Reusable Checkpoint Evidence
+title: Predictable CI Feedback and Measured Checkpoints
 description: Overnight delivery retrospective and a measured implementation plan for ordinary CI within three minutes
 author: Codex, independent Astra review and design
 date: 2026-10-14
 status: draft
 ---
-# Feature: Predictable CI Feedback and Reusable Checkpoint Evidence
+# Feature: Predictable CI Feedback and Measured Checkpoints
 
 **Date:** 2026-10-14
 
-**Status:** Local quick-test selection and this plan are being integrated in
-[PR599](https://github.com/jlevy/squares/pull/599). The remaining architecture is a
-draft for implementation review.
-Investigation and a systematic fix are authorized by the repository owner; no
-three-minute feedback result has been established.
+**Status:** Reconciled through the coordinating agent’s October 15 delivery snapshot.
+The three-minute objective remains open.
+This retained draft is for a focused plan PR; it does not carry the implementation or
+approval of legacy PR599.
 
 **Workflow entry:** `tbd shortcut new-plan-spec`, using `tbd template plan-spec`; W5
 efficiency work and the existing validation-efficiency campaign.
-**Tracking:** `think-kxmq`; local quick selection is `think-gg64`, and the trajectory
-timing follow-up is `think-dat0`. The coordinating agent owns bead updates and PR599
-integration.
+**Tracking:** `think-kxmq`, with the retrospective under `think-d4ub`. The coordinating
+agent owns bead updates and extraction of this draft into an isolated checkout.
 
 ## Overview
 
 Restore ordinary pull-request feedback to roughly three minutes and stop paying for a
 complete checkpoint after each small correction.
 Keep fast checks automatic, select expensive checks from their actual inputs, and
-require current or demonstrably reusable evidence for every merge obligation.
+require current, source-bound evidence for every merge obligation.
 Expensive tests still run; their cost and selection become explicit.
 
 The immediate problem is larger than a few tests crossing the 12-second CALL limit.
@@ -36,10 +34,6 @@ Rebalancing four shards cannot by itself restore the target.
 A second problem is repeated validation: the full dispatcher can serialize fast suites
 that already passed elsewhere, while the temporary strict workflow repeats ordinary CI
 to obtain browser and coverage guarantees that ordinary CI should supply.
-A later PR604 local push exposed a separate problem: broad heuristic selection included
-slow tests in the default local loop and ran them serially.
-After 700.49 seconds, the reachable test phase had printed only 13% progress and was
-explicitly interrupted.
 
 This plan extends the existing
 [validation-efficiency plan](plan-2026-09-06-validation-efficiency-and-checkpoints.md),
@@ -48,6 +42,203 @@ and retained validation tools.
 It does not introduce another scheduler, evidence framework, or permanent duplicate CI
 workflow. The required result is a smaller, correctly selected critical path with
 auditable coverage.
+
+## Current Delivery and Decisions
+
+This October 15 snapshot supplements the original overnight record below; it does not
+turn later successes into passing evidence for earlier failed gates.
+
+| Work | Observed outcome | Remaining obligation |
+| --- | --- | --- |
+| Product delivery | [PR617](https://github.com/jlevy/squares/pull/617) delivered live 0.7.5. [PR618](https://github.com/jlevy/squares/pull/618) merged as `fc2ceae7` with 43 green checks, including [Deep 38726327460](https://github.com/jlevy/squares/actions/runs/38726327460). [Main Packing 38730161853](https://github.com/jlevy/squares/actions/runs/38730161853) and [Pages 38730161845](https://github.com/jlevy/squares/actions/runs/38730161845) passed; 0.7.6 is live. | These are delivered releases and complete checkpoint results, not three-minute performance proof. The local gate took 430.55s. |
+| Closure delivery | [PR619](https://github.com/jlevy/squares/pull/619), head `3a00b004` on `fc2ceae7`, passed [ordinary Packing 38735580267](https://github.com/jlevy/squares/actions/runs/38735580267), [Pages 38735580297](https://github.com/jlevy/squares/actions/runs/38735580297) and [selected Deep 38735581202](https://github.com/jlevy/squares/actions/runs/38735581202). It merged as `31eaf6333c5d5b6b3d111241768cdd3d30982588` at 13:01:21 UTC on October 15. | [Main Pages 38739226771](https://github.com/jlevy/squares/actions/runs/38739226771) deployed successfully, but `verify-deployment` is in progress; [main Packing 38739227037](https://github.com/jlevy/squares/actions/runs/38739227037) is pending in this snapshot. The release claim remains withheld until verified deployment evidence is recorded. |
+| Legacy CI branch | PR599 retains the investigation and strict-gate failures. Later [strict run 38665027001](https://github.com/jlevy/squares/actions/runs/38665027001) still failed four shard walls and eight CALL ceilings. | Extract small independently reviewed changes; ordinary green runs do not waive a selected strict failure. This plan PR will not import the large legacy implementation. |
+| Upper-report checkpoint | The large producer/checker prototype was retired for disproportionate maintenance and recurring cost. The smaller same-workflow alternative remains unactivated. | A duplicate full-family job does not improve feedback. Any future activation must coincide with measured individual slow-operation placement and mandatory relevant-head coverage, while retaining fast negative guards. |
+| Deferred-worker reuse (`think-2fp7`) | The bounded regularized-views candidate reached 88 focused passing tests. D1 optional-proof handling, D2 lookup timeout and E2 retry-history controls were corrected. | **Retired on E1 source provenance.** Head-commit consistency was only a partial check. Available native metadata could not authoritatively bind an arbitrary PR workflow’s executed merge source after PR associations disappeared. No production change or hosted speedup is claimed. |
+| Live fast-proof safety (`think-3d1m`, F1) | Review found the same unauthenticated artifact-name boundary in the existing fast-proof verifier on main `fc2ceae7`. Removal of the automatic skip, old producer/lookup and dead code is in progress. | This is an active production safety fix. Main may repeat more fast work; assertions and ceilings stay intact, and no PR speedup is claimed. The retired candidate’s D/E findings are dispositions of unpublished work, not fixed production bugs. |
+| Witness optimization | VE017 remains paused after automatic approval review denied execution. | Direct human authorization and a coordinated uncontended lane are required before measurement resumes. The external volume had 77 MiB free; broad disk work is held, with no internal-disk fallback. |
+
+The closure’s broad local run took 729.90s and reported 10,930 passes, 49 skips, one
+xfail, two stale-expectation failures and Ruff findings.
+The two repaired cases passed in an isolated check in 1.86s. The identical-AST
+comparison concerned only the generator’s Unicode spelling, not the repaired test code.
+Neither observation makes the broad run pass or identifies its sole cause.
+Separate real paper pipeline defects were corrected: a command omitted `--update`, and a
+later PDF artifact had 23 pages against an unchanged 22-page limit.
+Compacting only the lower paper’s printed history gaps restored 22 pages with all text
+retained. Preserve those diagnoses separately from timing and stale-expectation
+observations.
+
+The duplicate regularized worker gives a bounded cost observation, not a reuse license.
+Logs and Git commit metadata establish that PR618’s actual merge checkout `d66a6410` and
+landed `fc2ceae7` shared tree `ead1cea5ba2e700ca6819f6bcef8b1bec8c9170e`. Their commands
+took 324s and 541s, but their actual Ubuntu image builds were `20261012.334.1` and
+`20261004.327.1`. The historical proof is refused.
+Even safe reuse would have saved command allocation while retaining checkout/install and
+leaving the longest slow lane on the critical path.
+Extending provenance machinery for that saving was rejected; the patch and review fixes
+remain research evidence only.
+
+The new observations are preserved in the retrospective JSON’s dated follow-up, with
+links to hosted runs and the retained candidate receipts.
+Workflow elapsed intervals, local gate walls, isolated test times and overlapping agent
+work remain distinct.
+There is still no reliable total for agent effort, billed compute or time attributable
+solely to storage.
+
+### October 15 checkpoint follow-up
+
+The earlier snapshot above remains a record of what was known at the time.
+PR619 subsequently passed both main workflows and the deployed-site audit, which checked
+4,460 expectations. Site 0.7.7, infographic 0.6.1 and lower-bounds paper 0.4.7 are live.
+
+PR620 head `cf9003e0` passed its ordinary Packing and Pages workflows and all three
+independent current-head reviews.
+The selected
+[full checkpoint 38744311408](https://github.com/jlevy/squares/actions/runs/38744311408)
+failed: all ten dedicated Linux workers and macOS passed, but the integration job took
+40m17s, including 2,301.62s in the validation command.
+Its four quick shards passed every functional assertion and failed seven strict
+12-second CALL limits.
+The three-minute objective is still open.
+
+The four shard Steps consumed 1,177.37s serially.
+The largest other Step was the site layout exercise at 283.35s. These are command
+measurements from this run, not a total for billed compute or agent effort.
+Native job fan-out could reduce the serial wait, but would not itself fix a single
+expensive test.
+
+The next correction is grouped by cause: `think-2equ` covers repeated register/report
+work, `think-n5ry` covers the drawing refusal and browser forwarding tests, and
+`think-e2z4` covers native scheduling and its recurring cost.
+Preserve the existing assertions, timing limits, negative controls and input isolation.
+Measure scoped fixes before selecting another complete checkpoint; do not repeat the
+whole run for each individual edit.
+
+The selected scheduling change adds one native `integration-suites` worker alongside the
+residual integration job.
+It runs the same four quick Steps serially, with the existing four-process loadfile
+recipe, two inner workers and 900-second subprocess deadlines.
+Its initial run retained the strict 12-second CALL guard; the later policy decision
+below changes that verdict.
+The complementary integration command skips exactly those four Steps; the native
+aggregate requires both owners.
+Ordinary pull-request setup and commands stay unchanged.
+
+This adds one history/submodule checkout, environment synchronization, Node/browser
+bootstrap and timing upload per complete checkpoint, with no extra test execution.
+Four separate workers would add three more setup cycles to save only about 53 seconds in
+the recorded shape: the residual work was about 1,124 seconds and the four shards about
+1,177 seconds. That is a scheduling projection, excluding setup and runner variation,
+rather than a measured speedup.
+The existing whole-checkpoint and full-tier ceilings stay unchanged.
+The selected `--only` command has no named-tier verdict, as opposed to the named
+ordinary PR suite commands; its worker and whole-checkpoint costs remain explicitly
+accounted for.
+
+Normal pytest failed-test retention recovered external scratch to about 733 MiB without
+manual deletion. The cleanup bead is closed; broad builds still need a space preflight.
+VE017 remains unexecuted pending direct human authorization.
+
+### October 15 second-checkpoint follow-up
+
+Head `15548357` groups the input-loading, drawing, forwarding and native-scheduling
+repairs. Independent senior and security reviews cleared all 28 changed paths.
+Its [ordinary Packing run](https://github.com/jlevy/squares/actions/runs/38756777827)
+then failed on one different report case: the Mishapolk register-plan test passed its
+assertions but took 47.56 seconds of CALL time, beyond the enforced 45-second PR guard.
+The other ordinary owners passed, including frontend and macOS. The
+[selected complete checkpoint](https://github.com/jlevy/squares/actions/runs/38756833833)
+was still running when this follow-up was recorded.
+These are matching-head observations, not a successful checkpoint or merge clearance.
+
+The coordinator also chose an unnecessarily conservative local pre-push allocation:
+effective Python CPUs 2, two outer jobs and one inner worker.
+All 67 prerequisite Steps passed, but the whole quick suite used one pytest worker and
+had reached only about 23% after 800.4 seconds.
+The coordinator interrupted it rather than repeating that allocation; the parent exited
+130 and its supervised child exited -15. The retained partial run is incomplete
+evidence, not a passing local gate.
+Future local selections must account for the effective pytest worker count as well as
+the outer scheduler settings.
+
+`think-2equ` tracks diagnosis of the newly exposed report cost.
+The assertions, admissions and timing limits remain unchanged while that diagnosis runs.
+The three-minute objective remains open; a source review cannot establish hosted runtime
+or complete test coverage.
+
+The completed checkpoint subsequently passed every dedicated worker and residual
+integration. Its four-suite owner failed six CALL limits: five complete report-admission
+cases and the forwarder refusal matrix.
+Actual JUnit comparison preserves every previous quick node and skip reason and adds 16
+passing regression cases; it establishes coverage for this scheduling change, not a
+successful gate.
+Residual integration took 1,054.30 command seconds, while the four suite
+Steps totaled 1,041.54 seconds on their separate owner.
+The longest owner was the slow lane at 1,665 job seconds, including setup.
+These observations are not a controlled speedup estimate.
+
+Five exact measured report nodes now use that existing slow lane, preserving their
+complete bodies and fast refusal tests.
+The forwarder test instead removes repeated work: eight complete production-check calls
+replace 64, retaining every old address and all 45 single-field corruption assertions.
+Its scoped local run passed six tests; the repaired call took 0.64 seconds in one
+observation.
+This grouped correction requires fresh ordinary CI and a complete checkpoint
+at its new reviewed head, including execution of all five moved nodes without skips.
+
+### October 15 third-checkpoint follow-up
+
+[Full run 38763716551](https://github.com/jlevy/squares/actions/runs/38763716551) at
+`43ee60f6f2f729384fdf91dc34ae58e05169aa03` failed its four-suite owner and aggregate.
+Residual integration, all ten dedicated Linux owners and macOS passed.
+The quick suite passed its functional assertions but reported eleven CALL costs from
+12.39 to 27.72 seconds.
+Its four Steps totaled 1,602.66 seconds, compared with 1,041.54 seconds at `15548357`;
+these are overlapping-workflow component sums, not workflow elapsed time or billed
+compute.
+
+The two artifacts share 18,198 successful JUnit nodes.
+Among 590 nodes previously taking one to three seconds, the median inclusive duration
+ratio was 1.636; among 172 previously taking three to twelve seconds, it was 1.622.
+These include setup and teardown.
+Unrelated modules and all four shards moved upward, so the comparison does not establish
+one new parser regression or its host cause.
+The atlas-addressability test is a separate outlier: 0.571 to 27.723 seconds.
+Its source can charge the first caller for loading all 324 witnesses and materializing
+complete drawing frames just to read their sides.
+Cold-cache attribution needs separate measurement; moving that work to setup would not
+remove it.
+
+The correction makes completed calls of at least 12 and less than 45 seconds advisory on
+hosted full/main and scheduled runs, as they already were on ordinary PRs.
+The 45-second hard backstop, 900-second child deadlines, full-tier and workflow wall
+policies remain unchanged.
+Local runs and explicit strict or budget-enforced runs retain 12-second enforcement.
+All tests and assertions remain selected; no additional slow markers or workers are
+introduced. This policy revision avoids treating one uncalibrated hosted reading as an
+attributable regression.
+It saves no test execution and does not establish the three-minute goal.
+The implementation uses the existing tracked advisory declaration, with a separate CALL
+scope, and focused refusal tests; it adds no timing service or evidence framework.
+Fresh matching-head validation remains required before merge.
+
+The final timing-policy and selection follow-up uses incremental evidence.
+The full `43ee60f6` run completed the unchanged scientific implementations: its
+slow-lane receipt has 241 passing tests and no skips, including all five moved report
+cases. Its aggregate remains failed because of the recorded CALL timing verdicts.
+That is not relabeled as a successful checkpoint.
+A separate strong review found no reason to repeat that complete scientific run solely
+for selection, reporting and timing-policy changes.
+
+The integrated head must pass ordinary CI, including the selector, attribution,
+gate-budget and validation-CLI controls.
+These cover hosted events, strict/local enforcement, malformed policy, functional
+failures and the 45-second backstop.
+Any scientific input, dependency or execution change introduced during integration
+requires its affected deeper checks.
+Required native post-merge coverage remains enabled; incremental evidence does not
+replace it or claim a fresh full-checkpoint pass.
 
 ## Goals
 
@@ -61,15 +252,13 @@ auditable coverage.
   Skips, missing results, and failed aggregate gates remain visible.
 - Make expensive checks automatic when their inputs change and available through
   explicit full checkpoints and the daily backstop.
-- Reuse successful unchanged-input evidence without misrepresenting it as fresh
-  execution or converting a failed run into a passing one.
+- Remove duplicate execution only where source identity and complete outcomes are
+  established. A source-provenance gap requires execution; it does not justify another
+  evidence framework by default.
 - Require every addition to account for its recurring CI cost before that cost becomes
   the next developer’s default wait.
 - Diagnose a deadline failure from retained progress and process evidence before
   launching another expensive attempt.
-- Make the default local push run the cheap floor and reachable quick behavior.
-  Report affected slow obligations separately, with deliberate execution and complete
-  coverage required before merge.
 
 ## Non-Goals
 
@@ -88,20 +277,18 @@ before merge; its cost must be stated when selected.
 
 ### Evidence and accounting
 
-The repository retains the compact
-[campaign retrospective](../../../../packing/benchmarks/validation-efficiency/retrospective-2026-10-14.json).
-The raw API records live outside Git in the maintainer’s closeout archive,
-`/Users/levy/wrk/github/squares/.codex/regularization-closeout-evidence-2026-10-13/`:
-
-- `ci-iteration-retrospective-2026-10-14.json`: GitHub metadata and job/step boundaries
-  for ten runs and eleven pull requests, plus the actual frontend timing artifact.
-- `ci-iteration-latest-38597483408.json`: the subsequent read of the completed strict
-  run.
-
-These are read-only API observations, not inferred billed cost.
-The same external archive holds the four-shard cost cohorts, JUnit receipts, runtime
-checkout bindings and independent reviews A–L; these raw files are not checkout
-dependencies.
+The investigation retained GitHub metadata and job/step boundaries for ten runs and
+eleven pull requests, plus the actual frontend timing artifact, in the
+[retrospective audit record](../../reports/ci-iteration-retrospective-2026-10-14.json).
+The subsequent completed
+[run 38597483408](https://github.com/jlevy/squares/actions/runs/38597483408) is also
+included in the chronology below.
+The original records came from read-only GitHub API calls; they contain raw observations
+rather than inferred billed cost.
+The JSON distinguishes the later coordinating-agent snapshot from those original API
+records. The coordinator also retained the four-shard cost cohorts, JUnit receipts,
+runtime checkout bindings, and independent reviews A–L in the same closeout evidence
+directory.
 
 The table below uses UTC and API workflow start/end intervals.
 Those intervals overlap; adding them would not measure user waiting time, billed runner
@@ -110,9 +297,11 @@ A workflow event’s head SHA is not necessarily its actual checkout: the normal
 artifact below identifies a merge checkout different from the event head.
 Reuse must verify runtime identity.
 
-Public run links make the observations independently inspectable while bulk logs stay
-outside Git. Workflow job metadata remains distinct from the runtime and JUnit evidence
-needed to accept a reused result.
+The linked audit record is retained with this plan under `docs/project/reports/`. It
+preserves the original API observations and labels the later delivery/status
+reconciliation separately.
+Bulk logs remain outside Git; the public run links make the hosted observations
+independently inspectable.
 
 ### Overnight chronology
 
@@ -128,7 +317,7 @@ needed to accept a reused result.
 | 10:47:29 onward | PR590 merged; [live verification 38552030866](https://github.com/jlevy/squares/actions/runs/38552030866) checked 4,182 published expectations. | The original site change was delivered while the later CI repair remained open. Status reporting should distinguish those facts. |
 | About 10:08 onward | The coordinator reports starting the PR599 follow-up before PR590 delivery completed; [PR599](https://github.com/jlevy/squares/pull/599) was created at 10:30:11. | The work overlapped. It is incorrect to add both blocks as consecutive delays. |
 | 11:18:06–11:52:32 | [Full run 38555598547](https://github.com/jlevy/squares/actions/runs/38555598547), head `472…`, took 34m26s and failed atlas/schema CALL ceilings. The integration command consumed 1,890s; the other eleven workers succeeded. | This exposed real cost defects, but also paid for broad independent work. |
-| 12:38:31–13:29:22 | [Full run 38565361504](https://github.com/jlevy/squares/actions/runs/38565361504), head `e709…`, took 50m51s. Four CALL ceilings failed at 14.13, 13.67, 12.51, and 13.42s. Functional JUnit failures/errors were zero; the integration gate reported 2,866.49s. | The failed result remains failed. Separately successful unchanged-input workers can support scoped evidence reuse. |
+| 12:38:31–13:29:22 | [Full run 38565361504](https://github.com/jlevy/squares/actions/runs/38565361504), head `e709…`, took 50m51s. Four CALL ceilings failed at 14.13, 13.67, 12.51, and 13.42s. Functional JUnit failures/errors were zero; the integration gate reported 2,866.49s. | The failed result remains failed. Successful worker observations remain useful evidence, but do not authorize reuse without source provenance. |
 | 14:25:34–14:42:21 | [Strict run 38580395126](https://github.com/jlevy/squares/actions/runs/38580395126), head `1c5…`, took 16m47s; one shard reached its 900s deadline, and new receipt/coverage/integrity defects also surfaced. | Building the new enforcement path introduced defects that required correction. The timeout’s cause was not recovered. |
 | 14:43:21–14:50:33 | [Strict run 38583046153](https://github.com/jlevy/squares/actions/runs/38583046153), head `54b3…`, took 7m12s. A collection test took 21.78s; A/B also failed old relative baselines. Four complete wall observations were 292.49/325.55/282.04/234.55s. | Valid cost observations from a failed gate; they are not passing performance proof. |
 | 15:12:50–15:29:31 | [Strict run 38587347972](https://github.com/jlevy/squares/actions/runs/38587347972), head `fecca…`, took 16m41s, failed three CALL ceilings, and lost shard D at 900s. | The second unrecovered deadline justified progress journals. Journaling itself did not fix its unknown cause. |
@@ -159,7 +348,7 @@ Preserve each with its boundary rather than reconcile them by assumption.
 | Default work grew beyond its architectural budget. | The measured `58b6…` quick cohort contains 17,903 cases in 765 measured modules; the inventory contains 788 modules. Existing historical shard assignments and timing records no longer described that workload. | Admit new default work by inclusive recurring cost, measure the actual assignment, and optimize or explicitly select expensive integration work. |
 | Ordinary and strict browser workloads differed. | On head `54b3…`, both collected 17,891 identities. Normal CI skipped 257, strict CI 47: 210 additional Chromium-dependent cases passed only in the strict cohort. | Put required browser capability and skip refusal into ordinary CI. Green must mean the declared workload executed. |
 | Successive broad checkpoints followed individual failures. | Two full PR599 runs paid 34m26s and 50m51s before the whole quick cost surface and its assignment were addressed together. | Freeze a batch scope, profile the complete expensive tail, and run focused equivalence checks before one new checkpoint. |
-| Full dispatch repeated fast integration work. | The full integration topology can run four quick suites serially; the observed `e709…` integration command spent 2,869s while eleven independent workers succeeded. Existing merge-tree reuse applies more narrowly than all checkpoint entry points. | Consume trustworthy existing fast partition evidence and run only invalidated obligations. Preserve a deliberate cold full mode. |
+| Full dispatch repeated fast integration work. | The full integration topology can run four quick suites serially; the observed `e709…` integration command spent 2,869s while eleven independent workers succeeded. The existing merge-tree skip later exposed a source-provenance defect (F1). | Remove the unsafe skip. Prefer native same-workflow prerequisite results and measured producer improvements; preserve deliberate cold full execution. |
 | New enforcement infrastructure had correctness bugs. | Review H found physical collection/JUnit identity mismatches, including parameter `::` handling, and a decimal-corner parsing defect. Review I confirmed their corrections. | Review collector and receipt semantics independently; use pytest’s actual identities and refusal controls before relying on a new gate. |
 | CALL-only diagnosis missed inclusive cost. | An eager fixture initially hid atlas production from a CALL timer. Browser state and page-generation work also appears in expensive setup phases. | Measure setup/call/teardown and subprocess work; preserve real state isolation while removing duplication. |
 | A deadline gave insufficient diagnosis. | The `1c5…` A and `fecca…` D timeouts lacked a complete cost report or a recoverable last executing node. | Flush lifecycle events and retain worker/process diagnostics before the deadline. Do not infer a cause or retry blindly. |
@@ -170,7 +359,7 @@ and decimal parser correction were substantive.
 The lesson is to preserve independent review while reducing redundant replay and manual
 narration, not to label every review as waste.
 
-### Where the current time goes
+### Where the original measured time went
 
 The four complete `58b6…` reports contain 4,388.119 seconds of summed pytest phase time.
 Four four-core jobs each launch four xdist workers: `outer jobs = 1` and
@@ -264,14 +453,22 @@ in the external archive above.
 This is remaining measurement work, not a production scheduler change in PR599 or a
 measured improvement.
 
-## Current Stabilization Batch
+## Legacy PR599 Stabilization Batch
+
+This section is PR599’s own stabilization record, retained when main `f3d5da7b` was
+integrated into the branch on October 19.
+[PR618](https://github.com/jlevy/squares/pull/618) had already carried its quick push
+default to main, and [PR620](https://github.com/jlevy/squares/pull/620) this plan; what
+follows is the branch’s remaining evidence, not a later checkpoint.
 
 News and Explanations are delivered: PR604 merged as `16ea3bd06`, and its main
 deployment passed 4,243 live expectations.
 The remaining work here is CI stabilization, not an unpublished News feature.
 Main608 subsequently integrated the reviewed intake and publication changes, bringing
 the site to 184 results and version 0.7.2. PR599 preserves those records, pins and paper
-histories and reserves site version 0.7.3 for the bundled code-font correction.
+histories. Its own v0.7.3 site reservation was dropped when main `f3d5da7b` was
+integrated on October 19, by which time main had published v0.7.3 through v0.7.31; the
+bundled code-font correction takes the site edition cut when the branch lands.
 Main609 adds the separate sampled-replay classification fix; final integration and
 validation must cover it.
 
@@ -336,12 +533,12 @@ the existing producer boundary, after stabilization.
 
 ### One coverage plan, existing execution surfaces
 
-Extend the existing validation plan to produce an executable list of obligations with a
-reason and cost estimate.
-Each obligation ends in one of four explicit states: executed successfully, reused from
-accepted evidence, failed, or unresolved.
-A required aggregate succeeds only when all required obligations are discharged.
-Missing or unexpectedly skipped work is unresolved.
+Use the existing validation selections and native workflow dependencies to state what
+must run and why. A required aggregate must consume every selected prerequisite; missing
+or unexpectedly skipped work cannot count as success.
+Do not implement a second obligation ledger or per-node evidence service.
+The retired prototypes showed that integrity machinery can cost more than the duplicate
+work it proposes to remove.
 
 Use the existing stable required context and workflow aggregation.
 Do not add another permanent whole-suite workflow.
@@ -351,16 +548,16 @@ equivalent coverage is demonstrated.
 
 | Surface | Selection | Evidence and budget |
 | --- | --- | --- |
-| Local edit and push | Existing cheap floor plus reachable quick behavior; unknown dependencies expand quick selection and retain all affected deeper obligations. | Print selection reasons, actual workers and deferred obligations. Local quick success is not complete merge evidence. |
+| Local edit and push | Existing cheap floor plus reachable changed behavior; unknown dependencies retain the current conservative fallback. | Immediate diagnostics. Local heuristic selection is not complete merge evidence. |
 | Ordinary PR feedback | All genuinely fast checks, cheap scientific/refusal contracts, required browser smoke coverage, and inexpensive affected behavior. | Existing 150s target and 180s operational ceiling; total workflow critical path includes setup. |
 | Affected expensive checks | Automatically selected when a declared consumer, input, fixture, toolchain, policy, or relevant test changes. | Explicit obligations with measured per-step ceilings; run beside ordinary feedback and block merge when required. |
-| Explicit checkpoint | Complete unresolved obligations, or a deliberately requested cold full run. | Print selected work and expected cost before launch. Evidence reuse is labeled. |
+| Explicit checkpoint | Complete the selected required work, or a deliberately requested cold full run. | Print selected work and expected cost before launch; retain native prerequisite outcomes. |
 | Scheduled backstop | Daily complete independent execution, including expensive controls and browser coverage. | Detect missing dependency contracts and timing drift. It does not replace current affected pre-merge proof. |
 
-This makes the existing rule “refresh invalidated checkpoint evidence” executable.
-It requires a policy clarification in `development.md`: a final checkpoint may be a
-verified union of successful current and unchanged-input results.
-It is not automatically a new invocation of every producer.
+Native same-workflow dependencies are the preferred boundary for required evidence and
+partial retries.
+Cross-run deferred reuse is not an accepted extension of current policy;
+the regularized-worker attempt was retired on provenance.
 OR-13 still requires every fast check on the automatic surface; expense alone does not
 authorize deferral. OR-17 requires explicit cost and selection for long work.
 
@@ -373,43 +570,10 @@ obligation in its selected lane.
 Deferral needs evidence that the required work remains expensive after reasonable
 duplication removal, not merely a large module total.
 
-### Keep the default local push bounded
+### Input contracts and evidence boundaries
 
-The PR599 implementation runs the reachable subset of `QUICK_TESTS`
-(`not exhaustive_exact and not slow`) alongside the existing cheap checks.
-`packing-validate --push --include-reachable-slow` explicitly includes selected slow
-tests. The standalone selector supports `--lane quick`, `--lane slow` and `--lane all`,
-with quick as the default.
-The normal/pool-heavy split remains within each selected lane; progress receipts carry
-the lane, actual marker and excluded categories.
-
-This local default is implemented; the broader obligation planner and evidence reuse
-below remain proposed.
-Every quick test still runs automatically in CI. No speedup or three-minute result is
-established: excluding slow tests alone cannot make an oversized quick workload cheap.
-
-Plan reachable slow tests as separate obligations.
-Execute them through a deliberately selected local deeper run or the required affected
-CI lane, with the reason, expected cost, actual worker topology and coverage destination
-printed before execution.
-A slow marker alone never discharges an obligation.
-Required affected slow tests must execute or qualify for accepted evidence reuse before
-merge; unexecuted work remains unresolved, even if the local quick run passes.
-Keep exhaustive coverage in its existing checkpoint contract.
-
-Preserve conservative selection for unknown inputs, parse failures, dynamic imports,
-repository walkers and global harness changes.
-Broaden both quick selection and the set of deeper obligations when dependency knowledge
-is incomplete; never reinterpret an unknown path as unrelated.
-Record each selection reason so the next broad selection can be diagnosed.
-Narrow a fallback only after an explicit input contract and mutation controls prove
-coverage. Do not raise time ceilings or suppress failed or incomplete results to
-accommodate the current behavior.
-
-### Input contracts and trustworthy reuse
-
-Begin at step or test-module granularity.
-Reuse is allowed only for a reviewed dependency contract covering:
+Begin selection at step or test-module granularity.
+A reviewed dependency contract must cover:
 
 - Production consumers and their transitive code imports.
 - Input files, directory/glob membership, and added, removed, or renamed entries.
@@ -427,19 +591,19 @@ Global selection/harness changes select all families.
 Start with a bounded, well-understood family and widen only after mutation tests prove
 invalidation.
 
-Extend `verified_merge_tree.py` and the current receipt checker rather than create a
-second evidence service.
-Accepted evidence must identify the trusted same-repository workflow, actual runtime
-checkout and source/base relationship, declared inputs, selected and observed node
-identities, toolchain/capabilities, and complete outcomes.
-Failed or expired artifacts, unknown schemas, missing nodes, unexpected skips, or
-untrusted provenance are refused.
-Use Git for repository identity and diffs; do not hardcode source commit/blob identities
-as correctness criteria or invent source checksum registries.
+Use existing pytest collection/outcome tools and native workflow success where they
+already establish the required facts.
+Same-repository labels, matching head metadata, and a successful aggregate do not by
+themselves bind an arbitrary executed merge tree.
+The existing fast-step artifact shortcut has the same live safety gap and is being
+removed under F1 (`think-3d1m`). It cannot serve as precedent for a new deferred
+capability.
+Reconsider cross-run reuse only with a bounded authoritative source proof and
+a measured benefit large enough to justify its maintenance.
+No new reusable-workflow, attestation service or generic provenance system is planned.
 
-A successful worker within a failed aggregate may remain valid semantic evidence if its
-actual inputs, harness, and outcome are independently verified.
-The failed aggregate remains failed.
+Failed, expired, incomplete or unexpectedly skipped evidence remains refused.
+Use Git for repository identity and diffs; do not invent source checksum registries.
 A complete pytest report from a performance-failed run may supply a cost observation; it
 is not passing gate evidence.
 Assignment or concurrency changes invalidate wall comparability even if they do not
@@ -459,6 +623,19 @@ and Node environment, or fail for missing capability.
 The observed 210 extra normal skips must disappear as unexplained omissions.
 The remaining known optional omissions stay enumerated as omissions, with reason and
 owner; they are never counted as passes.
+
+The complete `tests/test_site_forwarders.py` module belongs to the existing
+`site table layout in Chromium` owner.
+`SITE_LAYOUT_TESTS` assigns its 51 cases to that browser-equipped owner and excludes the
+module from the four generic quick shards.
+The owner first runs its remaining functional modules in parallel, then all 51 forwarder
+cases in a fresh serial pytest process, then the four native-frontier load-budget cases
+in their separate serial process.
+All three commands keep one shared deadline and require Chromium through
+`SQPACK_REQUIRE_CHROMIUM=1`; a missing browser fails rather than skips.
+Each command enables `faulthandler_timeout=60` for stack diagnostics while retaining
+pytest’s default `faulthandler_exit_on_timeout=False`. This adds no ordinary CI job or
+dependency; the combined Linux cost of the three phases remains to be measured.
 
 Use collected metadata/capabilities and the maintained family inventory to place tests,
 rather than hardcode a list of 210 historical identities.
@@ -506,9 +683,9 @@ Initial hypotheses, not established optimizations:
    Avoid loading unrelated application modules or plugins where their absence is part of
    a proved equivalent execution.
    Do not replace the real fresh process or worker failure with a mock.
-4. **Topology and receipts:** remove redundant fresh collection, reuse valid parallel
-   fast partition evidence in checkpoint entry points, and retain full history only
-   where the job’s provenance contract requires it.
+4. **Topology and receipts:** remove redundant fresh collection, consume native
+   same-workflow prerequisite results, and retain full history only where the job’s
+   provenance contract requires it.
    Keep pinned tool versions and validate cache keys; measure checkout and installation
    separately before proposing new runner infrastructure.
 5. **Within-shard scheduling:** the installed xdist loadfile scheduler inherits
@@ -538,9 +715,9 @@ Moving work into a fixture to escape a CALL ceiling is not an optimization.
 Retain the current CALL limits while adding inclusive measurements to placement and
 regression decisions.
 
-### Immediate stabilization bridge
+### Historical stabilization evidence
 
-The latest
+At the October 14 review,
 [strict run 38597483408](https://github.com/jlevy/squares/actions/runs/38597483408),
 head `08d23c06…`, completed with three further A-shard CALL failures: malformed coverage
 through the full schema gate (12.90s), deterministic audit output across two fresh CLI
@@ -559,12 +736,20 @@ If a bounded optimization cannot make a genuinely expensive integration control 
 quick, give that exact measured control a documented deeper placement and retain its
 complete assertions.
 
-Initially run any newly deferred small group on every PR in an existing suitable job; do
-not invent a special PR599 exemption.
-Before narrowing it to affected-input selection, implement and test its input contract.
-Fresh collection and JUnit must prove that every newly or changed deferred node actually
-ran, including both outcomes of the worker-failure parameter group.
-A new slow marker alone cannot discharge coverage.
+If activating the proposed native upper-report worker, establish its mandatory
+same-workflow owner and conservative input selection before moving the operation.
+Activate that new owner and placement atomically after a bounded trial; do not
+permanently duplicate an unchanged full family on every PR and call it a speed fix.
+An individually measured operation can instead use the existing slow behavioral lane,
+which already runs in complete, main and daily checkpoints.
+Preserve its complete assertions and fast negative guards, and record the exact node and
+measurement in the existing slow-marker registry.
+For PR620, the coordinator requires a successful matching-head complete checkpoint
+before merge and must inspect those exact nodes as executed, without skips.
+The optional Deep label is not a protected PR prerequisite.
+Reuse collection and outcome evidence from the actual execution; a second full
+collection needs its own cost justification.
+A slow marker alone cannot discharge coverage.
 
 A focused current-head deeper execution can prove these controls without a thirty-minute
 full replay. It cannot repair the failed strict run’s verdict or discharge a whole-shard
@@ -612,10 +797,8 @@ back to internal storage or launching a whole checkpoint.
 
 The coordinator creates small child beads under `think-kxmq`, links the existing
 browser-capability, timeout, and storage work, and gives each implementation owner a
-disjoint write set. This plan, the compact campaign record and the local quick-test
-selector are now being integrated in PR599. The remaining architecture and measured
-performance work stay separate implementation slices; integration does not mark them
-complete. The atlas-width delivery retains its own product and review record.
+disjoint write set. The source plan and changes live outside PR599 and the atlas-width
+branch until explicitly integrated.
 
 | Slice | Owned files and responsibility | Reviewable completion |
 | --- | --- | --- |
@@ -630,27 +813,62 @@ evidence refusal behavior, and whether cost moved rather than disappeared.
 Run focused component experiments beside delivery; avoid a full checkpoint for each
 local hypothesis.
 
-### Phase 2: Enforce selection, reuse, and the ordinary budget
+### Phase 2: Enforce measured selection and the ordinary budget
 
 One owner integrates planner and workflow changes after the component interfaces are
 agreed.
 
 | Component | Existing implementation to extend | Required behavior |
 | --- | --- | --- |
-| Obligation plan and local push | `packing/src/sqpack/cli/validate.py`, `packing/devtools/reachable_tests.py` and their existing tests | Default local cheap floor plus reachable quick behavior; explicit affected slow obligations, selection reasons and worker counts; conservative unknown-input expansion; no unresolved merge obligations hidden by local success. |
-| Evidence acceptance | `packing/devtools/verified_merge_tree.py` and the current receipt checker | Runtime checkout and capability verification, changed-test invalidation, trusted artifact custody, and separate semantic/cost evidence. |
+| Selection | `packing/src/sqpack/cli/validate.py` and existing path/dependency tools | Explicit family/input contracts and selection reasons; preserve conservative unknown-input fallback without a new ledger. |
+| Required evidence | Existing native job dependencies and pytest outcome tools | Same-workflow required coverage, complete outcomes and honest partial retries. Cross-run deferred reuse is retired. |
 | Negative controls | Existing control registry and runner | Derive affected control families from actual consumers; select all on unknown dependencies or global harness changes. |
 | CI integration | `.github/workflows/packing-validation.yml`, `deep-gate.yml`, and `enforced-quick.yml` | Ordinary browser coverage, one stable aggregate, selected expensive work, explicit checkpoint cost, removal of duplicate fan-out when safe. |
 | Publication | Existing Pages scope/producer graph and workflow | Reuse its established input contracts where valid; retain actual produced-asset checks and published-site verification. |
-| Policy and budgets | `development.md`, `operating-rules.md`, budget declarations, and existing wall-report tools | One documented tier model, inclusive cost admission, unchanged ceiling history, and executable evidence-union checkpoint semantics. |
+| Policy and budgets | `development.md`, `operating-rules.md`, budget declarations, and existing wall-report tools | One documented tier model, inclusive cost admission, unchanged ceiling history, and explicit checkpoint selection. |
 
-Run the proposed merge-obligation selector in shadow mode first, comparing its coverage
-with actual execution.
-The implemented local quick selector does not provide that reuse guarantee.
-Introduce reuse for one bounded family with complete invalidation controls.
-Expand only when unknown-input fallback and output equivalence are demonstrated.
-Planner failure selects conservative execution or fails the aggregate; it never creates
-a green empty plan.
+Trial one bounded selection against actual execution before changing automatic
+membership. Expand only after unknown-input fallback, complete coverage and inclusive
+cost are demonstrated.
+Selection failure runs the complete relevant family or fails the aggregate; it never
+creates a green empty selection.
+
+### Next bounded slices and their cost tests
+
+1. Complete the live F1 safety fix (`think-3d1m`): remove the automatic fast-proof skip,
+   its artifact producer/lookup and dead code.
+   Require actual execution through the existing gate.
+   Record any increased post-merge allocation without relaxing an assertion or ceiling;
+   this fix does not satisfy the PR feedback target.
+2. Complete main Packing and deployed-site verification for PR619’s merged
+   `31eaf6333c5d5b6b3d111241768cdd3d30982588`. Record verified publication evidence
+   before making the release claim.
+   This is delivery closeout, not acceptance of the three-minute objective.
+3. Extract this retrospective and plan in a focused PR under `think-d4ub`, leaving PR599
+   code and retired prototype sources out.
+   Keep the compact observations and public run links; retain bulk logs externally.
+4. Resume VE017 only after direct human authorization and sufficient external space.
+   First test semantic equivalence; then use predeclared uncontended paired measurements
+   with cold fixture production included.
+   A rejected or paused experiment is not a speedup.
+5. If measurements still justify upper-report placement, trial the existing native
+   same-workflow alternative.
+   Count scope calculation, checkout/install, collection, fixture setup, command,
+   artifacts, aggregate serialization and worker allocation.
+   Keep automatic membership unchanged until the mandatory owner and individually
+   measured placement change can activate together.
+
+Every addition must state its affected and unaffected invocation frequencies, source and
+test maintenance, inclusive worker allocation, and critical-path effect.
+The retired reuse patch illustrates the bar: about 213 net Python runtime lines, 477
+test lines, 37 workflow lines and four API reads still bought only a possible
+non-critical-path allocation saving, while leaving source provenance unresolved.
+The larger upper-report prototype also added a checker and repeated setup/collection.
+Neither is a deployment recommendation.
+Prefer removing repeated work inside an existing producer when the same assertions and
+isolation can be preserved.
+Accept a candidate only after its declared semantic and cost criteria pass; do not count
+a predicted reuse hit rate or move fixture cost outside the timer.
 
 ## Testing Strategy and Acceptance
 
@@ -661,17 +879,6 @@ a green empty plan.
   file, glob membership, lockfile, browser capability, policy, and test identity.
   Each must select the appropriate obligation.
   Unknown and deleted/renamed inputs must fail closed or expand selection.
-- For local push, compare collected node identities: quick execution and separately
-  required slow obligations must be disjoint and together cover the reachable
-  non-exhaustive selection.
-  Test mixed source/data changes, quick pool-heavy cases, unknown inputs, parse failures
-  and global harness changes; preserve the exhaustive checkpoint obligation.
-  Prove that ordinary CI still executes all quick cases and that missing slow evidence
-  blocks the required merge aggregate.
-- Reproduce the PR604 changed-path selection without running its entire workload.
-  Report per-reason file counts, selected quick/slow identities and actual concurrency.
-  Verify the new default on bounded semantic controls before one measured local run;
-  retain the interrupted observation as incomplete rather than a performance baseline.
 - Refuse forged, expired, failed, incomplete, wrong-runtime, wrong-root, unexpectedly
   skipped, or mismatched-collection evidence.
   Test classes and parameter text containing `::`; test worker collection failure
@@ -682,10 +889,11 @@ a green empty plan.
 - Validate each performance candidate against the original semantic assertions before
   timing. Use the existing campaign’s paired design; retain contrary results.
   No claim of confirmed improvement from a single successful hosted run.
-- Demonstrate that a docs-only correction reuses eligible unchanged consumer evidence, a
-  changed test executes currently, and a shared mathematical or browser input
-  invalidates all affected families.
-  A failed sibling must not be relabeled by a reused successful worker.
+- Demonstrate that a changed test executes currently and a shared mathematical or
+  browser input selects all affected families.
+  A failed sibling remains failed.
+  Require authoritative executed-source binding before proposing any new cross-run
+  reuse.
 - Capture at least twenty naturally occurring comparable ordinary PR runs for median and
   operational p95 reporting; with twenty observations, report the nearest-rank p95 and
   the sample count. Preserve queue, setup, gate, and artifact timings separately while
@@ -710,7 +918,7 @@ Use a source freeze for each validation batch.
 Reuse reviewed unchanged source coverage across deltas and refresh affected reviews.
 Generate a single evidence index rather than repeatedly copying timings into several
 manual records. Before launching an expensive checkpoint, show the selected obligations,
-invalidation reasons, expected cost, and available reused evidence; this satisfies the
+invalidation reasons, expected cost, and native prerequisite results; this satisfies the
 existing selection rule without another approval ceremony.
 
 Roll back a faulty selector to conservative complete-family execution while retaining
@@ -723,8 +931,8 @@ proves equivalent execution and evidence acceptance on the same relevant inputs.
 - Which browser fixture sub-operations dominate the two largest setup phases, and how
   much is safely shareable immutable production?
   The recorded phase totals do not answer that yet.
-- Which three initial families have sufficiently explicit inputs to justify reuse first?
-  Select from measured cost and dependency clarity, not only apparent runtime.
+- Which single measured operation can be improved or selected more cheaply using the
+  existing surfaces? A new job, collector or provenance layer needs its own cost case.
 - How much of observed startup can be removed without weakening provenance, pinned
   toolchain availability, or required browser capability?
 - What caused the two unrecovered 900-second deadlines?
@@ -732,6 +940,141 @@ proves equivalent execution and evidence acceptance on the same relevant inputs.
 - Which existing optional browser/PDF/native omissions are intentional product
   boundaries, and which need a capability-equipped selected lane?
   Keep each disposition explicit.
+
+### October 15 News Selection Follow-up
+
+The News backfill exposed two causes of unnecessary local validation work.
+Its two YAML files had no declared owner, so the push selector chose all 67
+prerequisites. The Markdown PR template also matched the blanket `.github/`
+suite-configuration rule and selected every quick test file.
+The local run was interrupted after about five minutes as external scratch reached 32
+MiB free.
+This is incomplete validation, not a performance baseline or a successful gate.
+
+Bead `think-k178` assigns the exact News files to the existing schema and synopsis
+validators through `Step.known_inputs`. Those validators remain unconditional; the new
+field records ownership without pretending their dependencies are fully enumerated.
+Unknown files still select the full offered tier.
+The PR-template exception is exact; actual and unknown workflow changes remain
+conservative. Selection controls cover both files, unknown neighbors, literal path
+matching, owner inclusion and restricted step universes.
+The existing attribution report uses the same ownership declarations.
+
+This change adds no validation job or deadline.
+Its controls require hosted validation while local disk-heavy work is paused.
+A measured reduction in iteration time remains to be established on the existing
+validation surface.
+
+### October 15 Native-Lane Timeout Follow-up
+
+[PR #623](https://github.com/jlevy/squares/pull/623) delivered the News reader
+corrections at merge `6e73ef1c`. Its required PR checks passed, and the production
+deployment audit passed all 4,480 checks.
+The separate
+[main Packing run](https://github.com/jlevy/squares/actions/runs/38797565375) failed two
+command deadlines:
+
+| Lane | Deadline | Retained evidence | Missing evidence |
+| --- | --- | --- | --- |
+| Slow tests | 1,800s | 240 passing markers; no completed JUnit | Unfinished test and phase |
+| Quick shard C | 900s | 5,403 passing markers and 11 skips; no completed JUnit or file-cost record | Unfinished test and phase |
+
+These are actual timeouts, not advisory timing reports or established assertion
+failures. The other eleven native owners passed.
+Preserve the failed run and keep the successful publication distinct from its incomplete
+deeper validation.
+
+The previous successful slow run completed 241 cases in 1,216.044s. Its largest case,
+`test_known_best_composite_contains_every_case_and_square`, took 732.593s and rebuilt
+all 324 witnesses and drawings through a two-worker pool.
+That unchanged atlas path does not execute the new News renderer or shared site CSS. It
+is a diagnostic candidate, not the identified unfinished case or proof that runner
+variance caused either timeout.
+
+Bead `think-yops` owns diagnosis.
+[PR #629](https://github.com/jlevy/squares/pull/629) added the existing flushed progress
+writer to native quick and slow commands, recording test starts and completed setup,
+call and teardown phases.
+Its source, run and effective pytest worker identities bind each external journal to its
+command; the default reachable-test event stream remains unchanged.
+Focused interruption controls demonstrate that the last completed phase survives
+cancellation. Its end-to-end writing and artifact cost remains unmeasured.
+
+The first instrumented
+[main run 38808495711](https://github.com/jlevy/squares/actions/runs/38808495711), at
+`22a67ce4`, failed after 35m23s. Its
+[integration-suites job](https://github.com/jlevy/squares/actions/runs/38808495711/job/116675434032)
+again reached the actual 900-second shard-C command deadline, reporting a 901-second
+wall after cleanup. The unfinished node was
+`tests/test_site_forwarders.py::test_the_deployed_site_check_follows_the_same_forwarders`.
+Its setup completed at 21:33:09.122387 UTC; no call, teardown or node completion was
+recorded before termination at 21:45:13 UTC. The other three workers finished
+successfully by 21:36:18 UTC. Twelve other native owners passed, including all 241 slow
+cases in 1,638.238s. The aggregate remains failed.
+
+The forwarder module had no entry in `SITE_LAYOUT_TESTS`, so ordinary PR shards could
+skip its browser cases while main installed Chromium and executed them in shard C.
+Assign the complete module to the existing required Chromium owner and exclude it from
+the generic shards through the shared tuple.
+Add 60-second pytest stack dumps to both existing site-layout commands, retaining
+`faulthandler_exit_on_timeout=False`, their shared deadline, worker policy and
+assertions. These diagnostics do not add a command, job or dependency.
+
+A serial macOS reproduction passed that node in 25.68s and all 51 module cases in
+54.79s. These are single command-wall observations from a different platform, not Linux
+cost measurements or a speedup estimate.
+The corrected ownership’s recurring Linux cost and critical-path effect remain unknown.
+The journal identifies an unfinished call but does not establish why it blocked.
+Both original failures in run 38797565375 remain unexplained; a clean later run cannot
+supply their missing diagnosis.
+
+### October 15 Required-Browser Failure and Diagnostic Gap
+
+The first required-browser run of [PR #634](https://github.com/jlevy/squares/pull/634),
+[Packing 38819302541](https://github.com/jlevy/squares/actions/runs/38819302541), failed
+at head `7f5c351e`, tested as clean merge tree `693b953a`. The functional browser
+command reached its enforced 900-second deadline in 901.001s; the serial load checks
+never started. Partial output includes an anonymous failed-test marker.
+No completed functional JUnit or browser worker journals survived, so neither all 51
+forwarder outcomes nor that failed assertion is established.
+The stack dump shows Playwright’s dispatcher waiting; it does not identify the suspended
+browser API or prove a lifecycle defect.
+
+The missing journals have a separate confirmed cause: native progress was enabled only
+for the quick and slow `-m` expressions.
+The custom browser command selects through `-k`, so moving ownership lost the earlier
+node-level evidence.
+Bead `think-fr1c` extends the existing writer to these commands, preserving their actual
+selection metadata, and retains failed-phase details before interruption.
+
+Use a dispatch-only browser diagnostic to obtain wire request/reply evidence for the
+known node under 120 seconds, followed by its containing module under 180 seconds only
+if needed.
+Reuse native process cleanup and external artifacts; these observations do not
+replace required CI. No diagnostic job runs on an ordinary PR or push, and no test
+assertion, worker cap or enforced deadline is relaxed.
+
+The completed lower browser owner took 470.024s; the failed upper owner took 901.004s.
+Both exceed the existing 165-second advisory target.
+These different selections on separate runners are not a controlled performance ratio.
+`think-ht59` remains open; its advisory cost policy does not excuse an enforced timeout.
+Keep this stack unmerged until the actual failure is resolved and matching-head required
+checks pass.
+
+The bounded Linux observations both passed at diagnostic source `ad14ac6c`: the exact
+node executed once without skips in 25.871s, and all 51 module cases executed without
+skips in 77.874s. Every setup, call and teardown completed.
+These observations do not explain the parallel owner’s failure.
+
+Select fresh-process isolation for the required owner: run the remaining functional
+modules with their existing parallel allocation, then all 51 forwarder cases in a serial
+pytest process, then the four existing serial load-budget cases.
+One monotonic 900-second deadline spans all three commands.
+The collection control proves their pairwise disjoint union equals the original
+selection. This costs another pytest startup and serial execution of the module; the
+standalone observation supports the choice without predicting a combined runtime.
+Matching-head required CI must establish whether the owner now completes.
+Keep the original Playwright cause in `think-yops` and the broader cost work open.
 
 ## References
 
@@ -741,7 +1084,7 @@ proves equivalent execution and evidence acceptance on the same relevant inputs.
   [existing efficiency plan](plan-2026-09-06-validation-efficiency-and-checkpoints.md).
 - [Validation-efficiency campaign](../../../../packing/benchmarks/validation-efficiency/README.md),
   the retained home for hypotheses, measurement design, and results.
-- [Site-changelog closeout plan](plan-2026-10-13-site-changelog.md) and
+- [Site-changelog delivery (PR590)](https://github.com/jlevy/squares/pull/590) and
   [PR599](https://github.com/jlevy/squares/pull/599), including independent reviews H–L
   and run-specific evidence.
 - [Review K](https://github.com/jlevy/squares/pull/599#pullrequestreview-5520950386) and

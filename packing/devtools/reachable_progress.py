@@ -19,7 +19,6 @@ import pytest
 ARTIFACT_STEM = "PACKING_REACHABLE_TEST_ARTIFACT_STEM"
 RUN_ID = "PACKING_REACHABLE_TEST_RUN_ID"
 SOURCE_COMMIT = "PACKING_REACHABLE_TEST_SOURCE_COMMIT"
-WORKERS = "PACKING_REACHABLE_TEST_WORKERS"
 SCHEMA = "reachable-progress-v1"
 
 
@@ -50,6 +49,7 @@ class ProgressWriter:
         target.parent.mkdir(parents=True, exist_ok=True)
         self.stream: TextIO = target.open("x", encoding="utf-8")
         self.outcomes: dict[str, str] = {}
+        self.phases = os.environ.pop("PACKING_REACHABLE_TEST_PHASES", "") == "1"
         self._emit("session_start", "")
 
     def _emit(
@@ -59,6 +59,8 @@ class ProgressWriter:
         *,
         outcome: str | None = None,
         exit_status: int | None = None,
+        phase: str | None = None,
+        longrepr: str | None = None,
     ) -> None:
         row: dict[str, str | int] = {
             "schema": SCHEMA,
@@ -80,6 +82,10 @@ class ProgressWriter:
             row["outcome"] = outcome
         if exit_status is not None:
             row["exit_status"] = exit_status
+        if phase is not None:
+            row["phase"] = phase
+        if longrepr is not None:
+            row["longrepr"] = longrepr
         self.stream.write(json.dumps(row, sort_keys=True) + "\n")
         self.stream.flush()
 
@@ -90,7 +96,18 @@ class ProgressWriter:
 
     def pytest_runtest_logreport(self, report: pytest.TestReport) -> None:
         nodeid = report.nodeid
+        if self.phases:
+            self._emit("phase_finish", nodeid, phase=report.when, outcome=report.outcome)
         if report.failed:
+            # JUnit is finalized at session end. A later hung test must not erase this
+            # failure's identity or traceback when the command's process group is killed.
+            self._emit(
+                "failure",
+                nodeid,
+                phase=report.when,
+                outcome=report.outcome,
+                longrepr=report.longreprtext,
+            )
             self.outcomes[nodeid] = "failed"
         elif report.skipped and self.outcomes.get(nodeid) != "failed":
             self.outcomes[nodeid] = "skipped"
@@ -115,15 +132,10 @@ def pytest_configure(config: pytest.Config) -> None:
         raise pytest.UsageError(f"{ARTIFACT_STEM} must be absolute")
     run_id = os.environ.get(RUN_ID, "")
     source_commit = os.environ.get(SOURCE_COMMIT, "")
-    workers_value = os.environ.get(WORKERS, "")
     if not run_id or re.fullmatch(r"[0-9a-f]{40}", source_commit) is None:
         raise pytest.UsageError("reachable progress needs a run id and 40-hex source commit")
-    try:
-        workers = int(workers_value)
-    except ValueError as error:
-        raise pytest.UsageError("reachable progress needs its worker count") from error
-    if workers < 1:
-        raise pytest.UsageError("reachable progress worker count must be positive")
+    # xdist's worker input includes PYTEST_ADDOPTS and any effective worker cap.
+    workers = int(worker_input["workercount"]) if worker_input is not None else 1
     config.pluginmanager.register(
         ProgressWriter(
             stem,

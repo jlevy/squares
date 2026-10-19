@@ -42,6 +42,8 @@
 @media print {
   .cert-figure[data-cert="{{DEFAULT_SLUG}}"][hidden] { display: block !important; }
   .cert-figure:not([data-cert="{{DEFAULT_SLUG}}"]) { display: none !important; }
+  /* Keep the edition history compact without changing manuscript or footnote spacing. */
+  .cert-page #version-history + ul > li + li { margin-block-start: 0; }
 }
 </style>
 </head>

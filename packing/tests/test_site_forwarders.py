@@ -126,11 +126,14 @@ def _arrives(
             lambda route: route.fulfill(status=200, content_type="text/html", body=STAND_IN),
         )
         page = context.new_page()
-        page.goto(address, wait_until="load")
+        # Arrival needs the destination document, not all of its assets.
+        page.goto(address, wait_until="commit")
         # A page that never arrives is left where it is, and the caller compares.
         with contextlib.suppress(sync_api.TimeoutError):
-            page.wait_for_url(expected, timeout=5000)
+            page.wait_for_url(expected, wait_until="commit", timeout=5000)
         if atlas:
+            # Parse every row before the conditional fragment-visibility check.
+            page.wait_for_load_state("domcontentloaded")
             assert page.locator("h1#the-atlas-of-square-packings").text_content() == (
                 "The Atlas of Square Packings"
             )

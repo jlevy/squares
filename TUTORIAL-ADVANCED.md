@@ -1,5 +1,9 @@
 # Advanced Tutorial: Square Packing, Search, and Proof
 
+- Human oversight: [**Joshua Levy**](https://x.com/ojoshe)
+- Agents: **Opus 5**, **Fable 5**, **Fable 5.1**, **Opus 5.5**, and **GPT-6 Astra**
+- First published October 14, 2026 · Last revised October 15, 2026
+
 A packing certificate answers whether a specified arrangement fits.
 An optimality proof must also exclude every smaller arrangement, including ones no
 search has found.
@@ -277,10 +281,9 @@ it has not converged to a local optimum of the full problem.** Watching it flatt
 concluding “wrong basin” is exactly what the *right* basin looks like when the residual
 is angular.
 
-An agent built a fixed-angle probe, called it “the quench”, and **retracted a correct
-finding** when it stalled ([D-029](defects.md)). On one $n = 10$ start: the annealer
-output and the fixed-angle solve agree to every digit at $+5.6440 \times 10^{-4}$, and
-the full quench with its angle half reaches $+4.4409 \times 10^{-16}$.
+On one $n = 10$ start, the annealer output and the fixed-angle solve agree to every
+digit at $+5.6440 \times 10^{-4}$, while the full quench with its angle half reaches
+$+4.4409 \times 10^{-16}$ ([D-029](defects.md)).
 
 The renderer guide retains the
 [shared-scale Göbel source-return diagnostic](packing/atlas/rendering/README.md#n--10-numerical-comparison):
@@ -360,20 +363,17 @@ has Jacobian nullity one at zero but local dimension zero.
 **Raw contact counts cannot supply even the linearized rank**—contacts may be dependent,
 one contact description may encode several scalar conditions, and angles and cells may
 change along a motion.
-Subtracting contacts from variables is not a rigidity calculation, and the project has a
-logged defect for having done it.
+Subtracting contacts from variables is not a rigidity calculation.
 
-### The generalized lesson, learned twice
+<a id="the-generalized-lesson-learned-twice"></a>
 
-- **First version.** Whatever defines a basin must be independent of the *search’s* own
-  knobs. A quench that merged nearby angles would make “basin” depend on a merge
-  tolerance.
-- **Second version.** It must also be independent of the *representation’s* knobs, and
-  must not presume a structure—discreteness—that the mathematics does not supply.
+### Terminal components and their representation
 
-Both have the same cause as Trap 1: the representation fixes more than the mathematics
-does. The first lesson was documented; the same argument implied the second, but it was
-not documented.
+A mathematical terminal component is independent of the search’s tolerances and the
+representation’s coordinate keys.
+A quench that merges nearby angles depends on its merge tolerance; a coordinate key can
+split a continuous family into distinct entries.
+Neither choice establishes the component’s identity.
 
 ### The corner
 
@@ -1033,24 +1033,22 @@ of the complete T-026 claim, including the threshold count, finite decision, dil
 and endpoint inference, is retained; rung 4 on either axis also needs a second
 adversarial review by a distinct reviewer and a retained human oversight record, and
 rung 5 formal verification reviewed by human experts, so until those records exist the
-result stays at `V3/C3` (the older grades in historical records use the ladder then in
-force). These labels describe the retained evidence and confirmation; the mathematical
-claim is the proved lower bound above.
+result stays at `V3/C3`. These labels describe the retained evidence and confirmation;
+the mathematical claim is the proved lower bound above.
 
 The detailed lesson below starts with the simpler point-only T-018 certificate;
-[the standalone v0.4.6 explainer](https://jlevy.github.io/squares/papers/n11-lower-bounds-explainer.html#proof-of-the-new-lower-bound)
+[the standalone explainer](https://jlevy.github.io/squares/papers/n11-lower-bounds-explainer.html#proof-of-the-new-lower-bound)
 uses it as a visual worked example, then gives the threshold-counting and dilation proof
-of T-025 and T-026. The numerical $3.81$ result is not a premise of T-026. Keeping the
-T-018 proof in full also gives readers an assurance bridge: its short standard-library
-checker exposes the shared geometry and counting mechanism end to end.
+of T-025 and T-026. The numerical $3.81$ result is not a premise of T-026. T-018’s short
+standard-library checker exposes the shared geometry and counting mechanism end to end.
 That point-certificate checker does not verify the threshold certificates.
 The explainer is Part I of a series on $n = 11$, read in order:
 [Part II](https://jlevy.github.io/squares/papers/n11-threshold-bound-review.html)
 reviews Overbeck’s certified bound $s(11) > 31/8$ (T-037), and
 [Part III](https://jlevy.github.io/squares/papers/n11-optimality-review.html) reviews
 the proof that Trump’s packing is optimal (T-060). The linked T-025 and T-026 claim
-documents each embed the new standard-library threshold verifier and the exact
-certificate bytes it checks; T-026 also embeds and re-derives its dilation record.
+documents each embed the standard-library threshold verifier and the exact certificate
+bytes it checks; T-026 also embeds and re-derives its dilation record.
 
 Two different quantities get called a gap in this subject, and this document keeps them
 apart. The **bound gap** is the distance between the best upper and lower bounds, the
@@ -1403,8 +1401,8 @@ To follow $n = 11$ past this tutorial’s scope, read the synopsis’s
 [`n = 11`, End to End](SYNOPSIS.md#n--11-end-to-end).
 That section is a dated account of the case before T-060 settled it.
 It covers the ceilings these certificate languages reach, the external certificate that
-held the verified lower bound before T-060, and why no counting certificate can prove
-$s(11)$ equal to Trump’s side.
+held the verified lower bound before T-060, and why the strict-core counting
+certificates studied there cannot prove $s(11)$ equal to Trump’s side.
 
 ## 7. Global Optimality by Exclusion and Capture
 
@@ -1427,8 +1425,7 @@ The strict-core counting certificates developed above prove $s(n) \ge L$ below t
 side.
 Their strict shrink and budget mechanism cannot reach that side, for the reason the
 synopsis’s [`n = 11` account](SYNOPSIS.md#n--11-end-to-end) gives.
-Proving that a known packing is optimal needs an argument of a different shape, in three
-parts.
+The exclusion-and-capture route to proving optimality has three parts.
 
 - **The local half.** Nothing near the known packing is smaller: every packing whose
   coordinates lie within an explicit radius of it, in a sense the theorem makes precise,
@@ -1739,7 +1736,7 @@ the same distinctions.
 | The exact optimal configuration spaces at [`n = 3`](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-014-h-032-n3-optimal-moduli.md) and [`n = 4`](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-015-h-032-n4-optimal-moduli.md) | verified (`exact-algebraic`) | Only those two moduli spaces are classified here; the optimal side values at $n = 5$ and $n = 6$ are proved, but their optimal configuration spaces are not classified here. The labelled and unlabelled $n = 3$ pieces agree with published computations; the rotation exclusion and full quotients are established here, with no novelty claim |
 | In the retained early campaign, the same floating-point LP refiner takes the tested proved-control starts to the analytic optima (residuals $\approx10^{-15}$) and leaves the tested $n = 11$ starts $6 \times 10^{-2}$ short | numerically checked (`numerical-f64`) | The solver floor is about $10^{-11}$ in the side, so read smaller residuals as “at the floor”; and it does not establish *why* the $n = 11$ starts are far away |
 
-### What the newer results add
+### Result claims and confirmation
 
 T-060 establishes the eleven-square value at `V3/C3`. **T-112** reads its equality case
 to conclude uniqueness up to the container’s eight symmetries and relabeling, at
@@ -1761,9 +1758,8 @@ The [Lean packet](packing/resources/web/fitzharding-n17-lean-2026-10-13/README.m
 [candidate packet](packing/resources/web/kleddamag-n17-candidate-2026-10-12/README.md)
 keep those boundaries explicit.
 
-Beyond these central cases, the admitted record contains new construction and
-lower-bound results.
-**T-157** gives Guzhou0806’s strict $s(40)>3359/500=6.718$ at `V3/C3`, with the
+Beyond these central cases, the admitted record contains construction and lower-bound
+results. **T-157** gives Guzhou0806’s strict $s(40)>3359/500=6.718$ at `V3/C3`, with the
 continuous cover reproduced using the producer’s kernels.
 **T-158** gives Daniil Ostashev’s exact upper-bound constructions for 175, 232 and 264
 squares at `V3/C3`, checked by repository implementations.
@@ -1818,8 +1814,8 @@ Exact solves elsewhere, including the regularizer, have their own scope.
 **6. Whether endpoint results reproduce across machines.** Endpoint identity depends on
 floating-point behaviour in a degenerate linear program, and the same seed can reach a
 different endpoint under a different toolchain.
-This is why portable mathematical predicates and provenance-bound characterization are
-being separated into different surfaces.
+Reproducibility checks therefore need to distinguish portable mathematical predicates
+from endpoint measurements tied to a particular toolchain.
 
 **7. Confirming the two reports that $s(17)$ is Bidwell’s side.** Two source packets
 were published on 12 October 2026, by separate routes: Marc Leonard Overbeck’s candidate
@@ -2125,10 +2121,7 @@ An optional system is used only to rederive one constant.
   tolerance is the origin of the floor discussed in [§8](#8-results-and-open-questions).
 - **The screening annealer is compiled**, for the reasons in
   [§3](#3-exact-arithmetic-and-reconstruction)’s cost table.
-- **The early pipeline’s proposed extensions** included a compiled bignum backend and
-  dedicated elimination machinery.
-  The current capability inventory is in the synopsis.
-- **Proof-assistant developments now exist outside this project.** The retained
+- **External proof-assistant developments.** The retained
   [eleven-square Lean packet](packing/resources/web/queuingtheorydotcom-n11-lean-2026-10-06/README.md)
   and
   [seventeen-square Lean packet](packing/resources/web/fitzharding-n17-lean-2026-10-13/README.md)

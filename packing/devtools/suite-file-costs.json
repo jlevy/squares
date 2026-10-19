@@ -191,6 +191,7 @@
     "packing/tests/test_contact_isomorph_free_burnside.py": 4.513,
     "packing/tests/test_contact_realization.py": 0.027,
     "packing/tests/test_contact_scaffold_atlas.py": 0.002,
+    "packing/tests/test_continuous_pose_followup.py": 0.026,
     "packing/tests/test_control_anchors.py": 0.059,
     "packing/tests/test_core_shrink.py": 0.443,
     "packing/tests/test_corner_ownership_audit.py": 0.221,
@@ -727,13 +728,18 @@
     "packing/tests/test_upper_bound_intervals.py": 3.824,
     "packing/tests/test_upper_bound_packets.py": 13.323,
     "packing/tests/test_upper_bound_reports.py": 70.559,
+    "packing/tests/test_upper_bound_reports_487b058.py": 1.605,
     "packing/tests/test_upper_bound_reports_488_489.py": 2.284,
+    "packing/tests/test_upper_bound_reports_4e4c8ce.py": 22.425,
     "packing/tests/test_upper_bound_reports_500.py": 9.313,
     "packing/tests/test_upper_bound_reports_503_504.py": 2.739,
     "packing/tests/test_upper_bound_reports_528_529.py": 0.551,
     "packing/tests/test_upper_bound_reports_552.py": 3.914,
     "packing/tests/test_upper_bound_reports_562_575_584_596.py": 10.468,
     "packing/tests/test_upper_bound_reports_574.py": 79.845,
+    "packing/tests/test_upper_bound_reports_606_70a033f.py": 26.528,
+    "packing/tests/test_upper_bound_reports_607.py": 19.846,
+    "packing/tests/test_upper_bound_reports_622.py": 0.963,
     "packing/tests/test_upper_bound_reports_fang_direct.py": 3.716,
     "packing/tests/test_upper_bound_reports_pingyou_1012.py": 19.389,
     "packing/tests/test_upper_bound_reports_regularized.py": 4.675,
@@ -790,5 +796,78 @@
     154.0,
     154.0,
     131.0
+  ],
+  "local_admissions": [
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_upper_bound_reports_606_70a033f.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/intake-1014b-606-70a033f-2026-10-15.json",
+          "provenance": {},
+          "tests": 13
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_upper_bound_reports_607.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/intake-607-2026-10-15.json",
+          "provenance": {},
+          "tests": 9
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_upper_bound_reports_487b058.py",
+        "packing/tests/test_upper_bound_reports_4e4c8ce.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/reads-1015-2026-10-15.json",
+          "provenance": {},
+          "tests": 9
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_continuous_pose_followup.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/continuous-pose-followup-2026-10-15.json",
+          "provenance": {},
+          "tests": 28
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_upper_bound_reports_622.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/pingyou-pr622-2026-10-16.json",
+          "provenance": {},
+          "tests": 7
+        }
+      ]
+    }
   ]
 }

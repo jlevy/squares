@@ -2673,9 +2673,17 @@ def redraft(
         # record carries its reported lane, `devtools.apply_closed_form` replays it as the
         # last layer, after any house adoption, which composes from the existing record
         # (review C2 of #602). A fresh draft leaves it to that tool.
-        return closed_form.replay(n, drafted) if closed_form.carried(existing) else drafted
+        drafted = closed_form.replay(n, drafted) if closed_form.carried(existing) else drafted
+        # A held result's note (`adopt_houses.held_note`), where the record carries one, is
+        # laid over last, as the closed form is: it names the held certificate below the
+        # case and cites its evidence (reviews A and B of PR 614).
+        from devtools import adopt_houses  # noqa: PLC0415
+
+        if adopt_houses.carries_held_note(existing):
+            drafted = adopt_houses.held_note(n, drafted)
     except ValueError as error:
         raise GenerationError(str(error)) from error
+    return drafted
 
 
 def _rigidity_block(text: str) -> str | None:

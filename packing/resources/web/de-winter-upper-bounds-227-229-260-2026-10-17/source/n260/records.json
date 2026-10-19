@@ -1,0 +1,30 @@
+{
+  "date": "2026-10-17",
+  "credit_handle": "JoostdeWinter",
+  "claim": "improved feasible upper bounds against the website-listed values",
+  "baseline_repository": "https://github.com/jlevy/squares",
+  "baseline_commit": "804eff369193b698d497a9c06847059eb9de0470",
+  "search_status": "stopped",
+  "records": [
+    {
+      "n": 260,
+      "utc": "2026-10-17T09:59:54.987687+00:00",
+      "source": "campaign_discrete_surgery/candidate_young_refine_260.json",
+      "numerical_side": 16.6457787865656,
+      "certified_side_float": 16.64577880418138,
+      "certified_side_exact": "16645778804181379786535601/1000000000000000000000000",
+      "previous_bound": 16.65685424949238,
+      "improvement": 0.011075445311000213,
+      "public_baseline_url": "https://jlevy.github.io/squares/cases/260.html",
+      "scope": "improves website-listed bound",
+      "source_sha256": "7f67e5bc110f0fd6617df55e4051ed2d2d454a3ae699deb004bd532cc976585e",
+      "witness": "verification/n260_side16.645778786566_7f67e5bc11_rational.json",
+      "results": "verification/n260_side16.645778786566_7f67e5bc11_result.json",
+      "validators_passed": 2,
+      "decimal_upper_bound": "16.645778804182",
+      "exact_file": "n260_exact.json",
+      "numeric_file": "n260_record.json",
+      "exact_sha256": "56ddfa73d992f52baee9ebc16a2c1bffed221e740f46dd7cd4ba456db93e2b9c"
+    }
+  ]
+}

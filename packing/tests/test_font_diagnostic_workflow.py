@@ -1,4 +1,4 @@
-"""The manual font-delivery diagnostic qualifies nothing and stays out of every gate.
+"""Manual browser diagnostics qualify nothing and stay out of every gate.
 
 `.github/workflows/font-diagnostic.yml` observes the n11 threshold paper's first screen
 while its web fonts are held. It used to be a dispatch mode of `pages.yml`, where a
@@ -6,9 +6,9 @@ dispatch was a Certificate page run: it joined `certificate-page-<ref>`, so on `
 could replace a pending push run and lose that push's deploy, and
 `devtools.rerun_starved` counted it as a newer run superseding a starved pull-request
 run at the same commit (review B's B2, review A's A2 on PR 468). These tests hold the
-separation, and the bounds of the one job.
+separation, the unchanged font protocol, and the bounded forwarder modes.
 
-The job runs code from a pinned revision, so what reaches it is pinned too: both
+The font job runs code from a pinned revision, so what reaches it is pinned too: both
 checkouts drop their credentials, and no expression but the workspace path reaches a
 shell (B1). The pinned checkout keeps a literal copy of the paths the pinned renderer's
 own job kept, not the live job's list (B5), and the tool's repository imports are the
@@ -95,16 +95,64 @@ def tool_helpers() -> list[str]:
     return sorted(files)
 
 
-def test_the_diagnostic_is_dispatch_only_with_no_inputs_and_one_read_only_job() -> None:
+def test_the_diagnostic_is_dispatch_only_with_disjoint_read_only_modes() -> None:
     document = workflow(DIAGNOSTIC)
-    # No input at all: nothing a dispatcher types reaches a condition or a shell.
-    assert document["on"] == {"workflow_dispatch": None}
+    assert set(document["on"]) == {"workflow_dispatch"}
+    (mode,) = document["on"]["workflow_dispatch"]["inputs"]
+    assert mode == "mode"
+    selection = document["on"]["workflow_dispatch"]["inputs"][mode]
+    assert selection["type"] == "choice"
+    assert selection["default"] == "font"
+    assert selection["options"] == ["font", "forwarder-node", "forwarder-module"]
     assert document["permissions"] == {"contents": "read"}
-    assert list(document["jobs"]) == [JOB]
+    assert list(document["jobs"]) == [JOB, "forwarder-diagnostic"]
     job = document["jobs"][JOB]
-    assert "if" not in job
+    assert job["if"] == "inputs.mode == 'font'"
+    forwarders = document["jobs"]["forwarder-diagnostic"]
+    assert forwarders["if"] == (
+        "inputs.mode == 'forwarder-node' || inputs.mode == 'forwarder-module'"
+    )
     assert "needs" not in job
     assert job["permissions"] == {"contents": "read"}
+    assert "needs" not in forwarders
+    assert forwarders["permissions"] == {"contents": "read"}
+
+
+def test_forwarder_mode_uses_dispatched_source_without_shell_input_interpolation() -> None:
+    job = workflow(DIAGNOSTIC)["jobs"]["forwarder-diagnostic"]
+    assert job["runs-on"] == "ubuntu-latest"
+    assert job["timeout-minutes"] == 8
+    (checkout,) = checkouts(job)
+    assert checkout["with"]["ref"] == "${{ github.sha }}"
+    assert checkout["with"]["submodules"] is True
+    assert checkout["with"]["persist-credentials"] is False
+    assert "sparse-checkout" not in checkout["with"]
+    assert job["env"]["BROWSER_DIAGNOSTIC_MODE"] == "${{ inputs.mode }}"
+    assert job["env"]["BROWSER_DIAGNOSTIC_ARTIFACTS"] == (
+        "${{ github.workspace }}-browser-diagnostics"
+    )
+    commands = [step["run"] for step in job["steps"] if "run" in step]
+    assert all("${{" not in command for command in commands)
+    (observation,) = [
+        command for command in commands if "devtools.browser_diagnostic" in command
+    ]
+    assert '--mode "$BROWSER_DIAGNOSTIC_MODE"' in observation
+    assert '--artifacts "$BROWSER_DIAGNOSTIC_ARTIFACTS"' in observation
+    assert any(
+        "playwright install --with-deps --only-shell chromium" in command
+        for command in commands
+    )
+    assert all(
+        "npm " not in command and "packing-validate" not in command for command in commands
+    )
+    for step in job["steps"]:
+        if "uses" in step:
+            assert re.fullmatch(r"[\w.-]+/[\w.-]+@[0-9a-f]{40}", step["uses"])
+            assert "setup-node" not in step["uses"]
+    (upload,) = [step for step in job["steps"] if "upload-artifact@" in step.get("uses", "")]
+    assert upload["if"] == "always()"
+    assert upload["with"]["path"] == "${{ env.BROWSER_DIAGNOSTIC_ARTIFACTS }}"
+    assert upload["with"]["if-no-files-found"] == "error"
 
 
 def test_a_dispatch_shares_no_concurrency_group_with_any_other_workflow() -> None:

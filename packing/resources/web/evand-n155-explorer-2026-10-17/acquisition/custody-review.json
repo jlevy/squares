@@ -1,0 +1,67 @@
+{
+  "format": "source-custody-inspection-v1",
+  "inspected_at_utc": "2026-10-18T12:45:02Z",
+  "source_commit": "59326b86291b76c39d843f3f156e8f25fa0f6e3f",
+  "source_publication_utc": "2026-10-17T14:48:34Z",
+  "issue_created_at_utc": "2026-10-17T14:49:46Z",
+  "licence": "MIT, copyright (c) 2026 Evan Daniel",
+  "claim": {
+    "n": 155,
+    "exact_certificate_side": "2590452188930112807053435932173/200000000000000000000000000000",
+    "decimal_exact": "12.952260944650564035267179660865",
+    "reported_upper_bound": "12.952260944651",
+    "numerical_side_is_different": true
+  },
+  "certificates": [
+    {
+      "path": "source/search/packer/candidates/s155_ex2.cert",
+      "sha256": "a1a3b6e7c2ce4d7de79efc2e07fc0bf53616dc44b732a2849b4dc4d8f7e2c4cc",
+      "declared_n": 155,
+      "declared_side": "2590452188930112807053435932173/200000000000000000000000000000",
+      "coordinate_row_count": 155
+    },
+    {
+      "path": "source/search/packer/candidates/s155_ex2_regularized.cert",
+      "sha256": "ab3c0b93aa205a907da5387cc119df11164c0a6d63b49b81332d7ce77910a897",
+      "declared_n": 155,
+      "declared_side": "2590452188930112807053435932173/200000000000000000000000000000",
+      "coordinate_row_count": 155
+    }
+  ],
+  "inspected_checker_imports": {
+    "verify_cert.py": [
+      "fractions",
+      "sys"
+    ],
+    "verify_cert2.py": [
+      "fractions",
+      "sys"
+    ]
+  },
+  "source_verifier_executed": false,
+  "stage4_review_performed": false,
+  "retained_file_count": 15,
+  "retained_logical_bytes": 186330,
+  "source_stored_bytes": 186330,
+  "pinned_only_count": 3,
+  "pinned_only_bytes": 498347,
+  "source_attribution_discrepancy": {
+    "authoritative_issue_start": "Daniil Ostashev T-149",
+    "prior_report_start": "Daniil Ostashev",
+    "regularized_json_by": [
+      "Francisco Couzo"
+    ],
+    "disposition": "Preserved unchanged; resolve before using regularized metadata for attribution. No authors contacted."
+  },
+  "acquisition_check": {
+    "command": "python -m devtools.acquire_source evand-n155-explorer-2026-10-17 --check",
+    "exit_code": 0,
+    "stdout": "PACKET_MATCHES_ITS_CONTRACT",
+    "stderr": ""
+  },
+  "limitations": [
+    "Source numerical KKT/local-minimum and regularization outcomes are retained assertions, not replayed.",
+    "The source two exact checkers share author and format; no outside independence inferred.",
+    "Full numerical/discovery dependency closure and unrelated bulk data omitted."
+  ]
+}

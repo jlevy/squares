@@ -16,8 +16,9 @@ and outside-container controls, each held to the certificate by
 `evand_arrangement_reports.validate_job`. `private_input_paths` names exactly those files;
 the negative controls copy them into every private worker (`COPY_SEPARATELY`), so a house
 check that runs there reads its own inputs, never a link back into the primary checkout.
-`T-128`'s packet carries its own reader and its custody was closed at its import;
-`T-130`'s derived facts are read the way its own module reads them, one count at a time.
+Every house's packet is read through its declaration (`packet_source`): the adoption of
+17 October 2026 moved the last counts of `T-128` and `T-130`, whose packets carried
+readers of their own, to `T-174`.
 
 **No geometry runs in a check.** `check_houses` admits the inputs and compares the
 retained witness with the one they rebuild; `build_witness`, which writes a house, also
@@ -28,6 +29,15 @@ Usage, from ``packing/`` with the project interpreter::
 
     python -m devtools.upper_bound_houses check [--n N ...]
     python -m devtools.upper_bound_houses inputs
+    python -m devtools.upper_bound_houses sizes [--n N ...]
+
+**Sizes.** `sizes` measures the witnesses an adoption would write, before it writes them:
+each staged count's (`select_houses.PENDING_ADOPTION`) house rebuilt as this module
+builds one, in bytes in a checkout and as Git stores the blob, beside the witness it
+replaces, with the set's totals and its largest. That is OR-18's unit, the sum of the
+blobs a clone downloads (`stored_size`), by which the house rule decides whether a house's
+witnesses go into Git or a hosted data release (packing/campaign/result-import.md, "The
+House Rule"; review C9 of #660).
 """
 
 from __future__ import annotations
@@ -37,29 +47,27 @@ import copy
 import hashlib
 import json
 import sys
+import zlib
 from collections.abc import Callable, Mapping, Sequence
 from dataclasses import dataclass
 from fractions import Fraction
 from functools import cache
 from pathlib import Path, PurePosixPath
-from typing import Any, cast
+from typing import Any, NamedTuple, cast
 
-from devtools import couzo_followup_reports as couzo_460
-from devtools import couzo_refinement_reports as couzo_451
 from devtools import evand_arrangement_reports as kernel
 from devtools import retained_data
 from devtools import squish_second_update_house_links as house
 from devtools import upper_bound_reports as reports
 from devtools.retained_data import read_retained_bytes
-from sqpack.witness import WitnessError, validate_witness_document, witness_envelope
-from sqpack.yamlio import load_yaml, safe_load
+from sqpack.witness import witness_document
+from sqpack.yamlio import safe_load
 
 legacy = reports.legacy
 ROOT = reports.ROOT
 REPO = reports.REPO
 WITNESSES = ROOT / "witnesses/known-best"
 ADOPTED_ON = "2026-10-11"
-COUZO = "Francisco Couzo"
 NO_LICENCE = "no-licence-published"
 
 
@@ -287,149 +295,26 @@ def packet_source(result: str, name: str) -> Source:
     )
 
 
-# --------------------------------------------------------------------- T-128 and T-130
-
-
-@cache
-def _couzo_451() -> dict[int, legacy.Certificate]:
-    """All eight originals, each held to the digest its acquisition roster pins."""
-    return couzo_451.read_facts()
-
-
-def _couzo_451_jobs(_n: int, certificate: legacy.Certificate) -> Mapping[str, Any]:
-    return _validated_jobs(
-        receipt_cases(couzo_451.receipt_path(), couzo_451.RECEIPT_FORMAT),
-        certificate,
-        witness_prefix=couzo_451.WITNESS_PREFIX,
-        claim_limitations=couzo_451.CLAIM_LIMITATIONS,
-    )
-
-
-def _couzo_451_origin(n: int) -> Origin:
-    path = couzo_451.source_pins()[n]["certificate"]["path"]
-    # The packet's fact container keeps each certificate's upstream text whole, as
-    # ry-xu's does: the entry the url names is the upstream file, byte for byte.
-    return Origin(
-        key=couzo_451.SOURCE_KEY,
-        path=couzo_451.fact_path(),
-        url=f"{couzo_451.SOURCE}/blob/{couzo_451.REVISION}/{path}",
-        revision=couzo_451.REVISION,
-        retrieved="2026-10-08",
-        author=COUZO,
-        licence_status=NO_LICENCE,
-        raw_asset_retained=True,
-        retention_policy=RAW_RETENTION,
-    )
-
-
-def _couzo_460_case(n: int) -> Mapping[str, Any]:
-    source = couzo_460.read_record(couzo_460.sources_path())
-    rows = [row for row in source["cases"] if type(row) is dict and row.get("n") == n]
-    _require(len(rows) == 1, f"n={n}: T-130 acquisition holds no row at this count")
-    return rows[0]
-
-
-def _couzo_460_certificate(n: int) -> legacy.Certificate:
-    """One derived fact, rebuilt to the pinned certificate bytes its acquisition records.
-
-    The checks are `couzo_followup_reports.read_facts`'s for one count: the witness is
-    valid, rebuilds itself, and renders exactly the certificate whose size and digest the
-    acquisition row records; its exact side is the row's.
-    """
-    row = _couzo_460_case(n)
-    path = couzo_460.fact_path(n)
-    couzo_460.ensure_private(path)
-    raw = path.read_bytes()
-    _require(len(raw) <= couzo_460.MAX_SOURCE_BYTES, f"n={n}: derived fact exceeds its ceiling")
-    try:
-        document = load_yaml(raw.decode("utf-8"))
-        witness = validate_witness_document(
-            document, path=path, fallback_schema=ROOT / "witnesses/witness.schema.yaml"
-        )
-    except (UnicodeDecodeError, ValueError, WitnessError) as error:
-        raise HouseError(
-            f"n={n}: T-130 derived fact is not a valid witness: {error}"
-        ) from error
-    certificate = couzo_460.certificate_from_fact(n, witness)
-    text = couzo_460.render(certificate).encode()
-    _require(
-        document == witness_envelope(couzo_460.fact(certificate), schema=couzo_460.SCHEMA)
-        and row["derived_fact"] == f"facts/n-{n:03d}.yaml"
-        and row["size"] == len(text)
-        and row["sha256"] == hashlib.sha256(text).hexdigest()
-        and row["side"] == legacy.literal(certificate.side),
-        f"n={n}: T-130 derived fact does not rebuild its pinned certificate",
-    )
-    return certificate
-
-
-def _couzo_460_jobs(_n: int, certificate: legacy.Certificate) -> Mapping[str, Any]:
-    return _validated_jobs(
-        receipt_cases(couzo_460.receipt_path(), couzo_460.RECEIPT_FORMAT),
-        certificate,
-        witness_prefix=couzo_460.WITNESS_PREFIX,
-        claim_limitations=couzo_460.CLAIM_LIMITATIONS,
-    )
-
-
-def _couzo_460_origin(n: int) -> Origin:
-    return Origin(
-        key=couzo_460.SOURCE_KEY,
-        path=couzo_460.fact_path(n),
-        url=f"{couzo_460.SOURCE}/blob/{couzo_460.REVISION}/{couzo_460.certificate_path(n)}",
-        revision=couzo_460.REVISION,
-        retrieved=couzo_460.RETRIEVED,
-        author=COUZO,
-        licence_status=NO_LICENCE,
-        raw_asset_retained=False,
-        retention_policy=DERIVED_RETENTION,
-    )
-
-
 def _sources() -> dict[str, Source]:
     sources = [
-        Source(
-            result="T-128",
-            key=couzo_451.SOURCE_KEY,
-            packet=couzo_451.PACKET,
-            certificate=lambda n: _couzo_451()[n],
-            jobs=_couzo_451_jobs,
-            origin=_couzo_451_origin,
-            inputs=lambda _numbers: couzo_451.private_input_paths(),
-            witness_prefix=couzo_451.WITNESS_PREFIX,
-            claim_limitations=couzo_451.CLAIM_LIMITATIONS,
-        ),
-        Source(
-            result="T-130",
-            key=couzo_460.SOURCE_KEY,
-            packet=couzo_460.PACKET,
-            certificate=_couzo_460_certificate,
-            jobs=_couzo_460_jobs,
-            origin=_couzo_460_origin,
-            inputs=lambda numbers: (
-                couzo_460.sources_path(),
-                *(couzo_460.fact_path(n) for n in numbers),
-                couzo_460.receipt_path(),
-            ),
-            witness_prefix=couzo_460.WITNESS_PREFIX,
-            claim_limitations=couzo_460.CLAIM_LIMITATIONS,
-        ),
         packet_source("T-134", "couzo-exact-certificates-2026-10-09"),
         packet_source("T-136", "squish-481-third-request-2026-10-09"),
         packet_source("T-139", "evand-trio126-2026-10-09"),
-        packet_source("T-140", "couzo-certificates-2026-10-10"),
-        packet_source("T-141", "evand-record-hunt3-2026-10-10"),
         packet_source("T-146", "evand-regularized-2026-10-10"),
-        packet_source("T-147", "pingyou-n207-certificate-2026-10-11"),
-        packet_source("T-148", "pingyou-n153-certificate-2026-10-11"),
-        packet_source("T-149", "dostashev-records-2026-10-11"),
-        packet_source("T-150", "barnett-refinements-2026-10-11"),
-        packet_source("T-151", "squish-500-fourth-request-2026-10-11"),
-        packet_source("T-152", "couzo-certificates-2026-10-11"),
-        packet_source("T-158", "dostashev-records-2026-10-12"),
-        packet_source("T-160", "evand-n154-2026-10-12"),
+        packet_source("T-173", "mishapolk-exact-certificates-2026-10-12"),
+        packet_source("T-174", "pingyou-pr574-certificates-2026-10-13"),
+        packet_source("T-182", "couzo-certificates-2026-10-13"),
+        packet_source("T-186", "mishapolk-kkt-refinements-2026-10-14"),
+        packet_source("T-187", "evand-n146-2026-10-14"),
+        packet_source("T-188", "couzo-verified-bounds-2026-10-14"),
+        packet_source("T-190", "couzo-n237-2026-10-15"),
+        packet_source("T-195", "pingyou-pr622-certificate-2026-10-15"),
     ]
-    return {source.key: source for source in sources}
+    found = {source.result: source for source in sources}
+    # Two results may read one packet (T-181 and T-182 both read issue 586's), so the
+    # sources are keyed by result, not by source key.
+    _require(len(found) == len(sources), "one house source per result")
+    return found
 
 
 #: The house this adoption gave each count, by the register result whose certificate it is.
@@ -437,58 +322,84 @@ def _sources() -> dict[str, Source]:
 #: holds every case record named here to it, so an adoption that moves a count again
 #: changes or removes its row in the same change, as the second pass of that day did at
 #: 146, 153, 155 and 207, the third, for issues 500 and 506, at 270 and 305, the
-#: fourth, for issue 528, at 175 and 232, and the fifth, for issue 552, at 154.
+#: fourth, for issue 528, at 175 and 232, the fifth, for issue 552, at 154, and the
+#: pass of 15 October 2026, for issues 573, 575, 583, 586 and 593, at 153, 154, 207,
+#: 211, 237, 241, 302 and 304, and, for the next candidates where PR 574's (T-174) were
+#: held for the owner (the hold the house rule lifted, `select_houses.LIFTED`), at 105,
+#: 129, 146, 156, 176, 204, 261, 271, 272 and 303, and the pass of 16 October 2026, for
+#: the 16 October review of issues 506 to 607, at 129, 146, 154, 156, 175, 176, 204, 211,
+#: 232, 237, 264, 271, 302, 303 and 304, and the pass of 17 October 2026, the house rule's
+#: adoption of PingYou Ltd's PR 574 (T-174), at 37 of its rational counts, 68, 84, 86, 103,
+#: 105, 108, 110, 127, 130 to 132, 155, 172, 179 to 182, 206, 208 to 210, 228, 238 to 240,
+#: 261, 263, 268 to 270, 272, 273, 297 and 305 to 308. The same day adopted PR 622's
+#: certificate (T-195) at 29.
 ADOPTED: dict[int, str] = {
+    29: "T-195",
+    68: "T-174",
     70: "T-146",
-    84: "T-130",
-    86: "T-130",
+    84: "T-174",
+    86: "T-174",
     102: "T-146",
-    103: "T-146",
-    105: "T-130",
-    108: "T-128",
+    103: "T-174",
+    105: "T-174",
+    108: "T-174",
+    110: "T-174",
     123: "T-146",
     126: "T-139",
-    127: "T-128",
-    129: "T-146",
-    131: "T-136",
-    132: "T-141",
-    146: "T-150",
-    153: "T-148",
-    154: "T-160",
-    155: "T-149",
-    156: "T-149",
-    175: "T-158",
-    176: "T-151",
-    180: "T-128",
-    181: "T-151",
-    207: "T-147",
-    209: "T-140",
-    211: "T-149",
-    228: "T-128",
-    232: "T-158",
+    127: "T-174",
+    129: "T-186",
+    130: "T-174",
+    131: "T-174",
+    132: "T-174",
+    146: "T-187",
+    153: "T-173",
+    154: "T-186",
+    155: "T-174",
+    156: "T-186",
+    172: "T-174",
+    175: "T-186",
+    176: "T-186",
+    179: "T-174",
+    180: "T-174",
+    181: "T-174",
+    182: "T-174",
+    204: "T-186",
+    206: "T-174",
+    207: "T-173",
+    208: "T-174",
+    209: "T-174",
+    210: "T-174",
+    211: "T-188",
+    228: "T-174",
+    232: "T-186",
     236: "T-146",
-    237: "T-140",
-    238: "T-151",
-    239: "T-151",
+    237: "T-190",
+    238: "T-174",
+    239: "T-174",
+    240: "T-174",
+    241: "T-182",
     258: "T-146",
     259: "T-136",
-    261: "T-150",
-    263: "T-146",
-    264: "T-158",
+    261: "T-174",
+    263: "T-174",
+    264: "T-186",
     267: "T-134",
-    269: "T-146",
-    270: "T-151",
-    271: "T-151",
-    272: "T-151",
+    268: "T-174",
+    269: "T-174",
+    270: "T-174",
+    271: "T-186",
+    272: "T-174",
+    273: "T-174",
     292: "T-146",
     295: "T-146",
-    302: "T-146",
-    303: "T-146",
-    304: "T-152",
-    305: "T-152",
-    306: "T-128",
-    307: "T-136",
-    308: "T-141",
+    297: "T-174",
+    302: "T-186",
+    303: "T-186",
+    304: "T-186",
+    305: "T-174",
+    306: "T-174",
+    307: "T-174",
+    308: "T-174",
 }
 NUMBERS = tuple(sorted(ADOPTED))
 #: The counts a later pass adopted, by the day it did; every other count of `ADOPTED` was
@@ -496,29 +407,121 @@ NUMBERS = tuple(sorted(ADOPTED))
 #: (T-151, T-152), the second of them reviewed that day, moving 270 and 305 from T-140,
 #: issue 528 (T-158), reviewed that day, moving 175 from T-140 and 232 from T-136, and
 #: issue 552 (T-160), reviewed that day, moving 154 from T-136, which the first pass of
-#: 11 October had adopted there.
+#: 11 October had adopted there. The pass of 15 October 2026 adopted the 14 October
+#: reviews of issues 573, 575, 583, 586 and 593: issue 573 (T-173) at 153 and 207 from
+#: PingYou Ltd's T-148 and T-147, issue 586 (T-182) at 154 from T-160, at 211 from T-149
+#: and at 241, first adopted here, from Evan Daniel's exact optimum (T-098), issue 593
+#: (T-183) at 237 from T-140, issue 583's 302 (T-181) from T-146, and issue 575 (T-175)
+#: at 304 from T-152. The same day, once a hold skipped only the held entry (reviews A
+#: and B of PR 614), it adopted the next candidates where PR 574's (T-174) are held:
+#: issue 562 (T-162) at 129 and 303 from T-146 and at 204, first adopted here, from the
+#: Kingbird catalogue; issue 561 (T-161) at 156 from T-149 and at 271 from T-151; T-165
+#: at 176 from T-151; and PingYou Ltd's re-solves (T-168 to T-171) at 146 and 261 from
+#: T-150, at 105 from T-130 and at 272 from T-151. The pass of 16 October 2026 adopted the
+#: 16 October review of issues 506 to 607: Mykhailo Polkovskyi's KKT refinements (T-186)
+#: at 129, 204 and 303 from T-162, at 154 from T-182, at 156 and 271 from T-161, at 175,
+#: 232 and 264 from T-158, at 176 from T-165, at 302 from T-181 and at 304 from T-175;
+#: issue 606 (T-187) at 146 from T-168; Francisco Couzo's 211 (T-188) from T-182; and his
+#: 237 of 15 October (T-190) from T-183. The pass of 17 October 2026, the first under the
+#: owner's house rule, adopted PR 574 (T-174) at 37 of its rational counts, from the
+#: houses of T-128, T-130, T-136, T-140, T-141, T-146, T-149, T-151, T-152, T-169, T-170
+#: and T-171 and, at the 13 counts it first adopts (68, 110, 130, 172, 179, 182, 206, 208,
+#: 210, 240, 268, 273 and 297), from the case records' own. Twelve of its other rational
+#: counts are below it by issue 639's algebraic sides (T-193, #658), which wait for the
+#: writer, and 236 by Evan Daniel's issue 659, whose import adopts it. The same day
+#: adopted PR 622's certificate (T-195) at 29 from T-155, the case's replay of the
+#: Kingbird catalogue's packing, which no pass had adopted before.
+#: A count a pass names keeps its place in the earlier passes' sets, which their archives
+#: hold; it was adopted on the latest day that names it.
 LATER_PASSES: dict[str, frozenset[int]] = {
     "2026-10-12": frozenset({154, 175, 176, 181, 232, 238, 239, 264, 270, 271, 272, 304, 305}),
+    "2026-10-15": frozenset(
+        {
+            105,
+            129,
+            146,
+            153,
+            154,
+            156,
+            176,
+            204,
+            207,
+            211,
+            237,
+            241,
+            261,
+            271,
+            272,
+            302,
+            303,
+            304,
+        }
+    ),
+    "2026-10-16": frozenset(
+        {129, 146, 154, 156, 175, 176, 204, 211, 232, 237, 264, 271, 302, 303, 304}
+    ),
+    "2026-10-17": frozenset(
+        {
+            29,
+            68,
+            84,
+            86,
+            103,
+            105,
+            108,
+            110,
+            127,
+            130,
+            131,
+            132,
+            155,
+            172,
+            179,
+            180,
+            181,
+            182,
+            206,
+            208,
+            209,
+            210,
+            228,
+            238,
+            239,
+            240,
+            261,
+            263,
+            268,
+            269,
+            270,
+            272,
+            273,
+            297,
+            305,
+            306,
+            307,
+            308,
+        }
+    ),
 }
 
 
 def adopted_on(n: int) -> str:
     """The day the count's house was adopted, as an ISO date."""
     _require(type(n) is int and n in ADOPTED, f"n={n}: not a count this adoption houses")
-    return next((day for day, counts in LATER_PASSES.items() if n in counts), ADOPTED_ON)
+    return max((day for day, counts in LATER_PASSES.items() if n in counts), default=ADOPTED_ON)
 
 
 @cache
 def sources() -> dict[str, Source]:
-    """Each adopted result's source, by source key, built once."""
+    """Each adopted result's source, by result, built once."""
     return _sources()
 
 
 def source_for(n: int) -> Source:
     _require(type(n) is int and n in ADOPTED, f"n={n}: not a count this adoption houses")
-    found = [source for source in sources().values() if source.result == ADOPTED[n]]
-    _require(len(found) == 1, f"n={n}: {ADOPTED[n]} has no house source")
-    return found[0]
+    found = sources().get(ADOPTED[n])
+    _require(found is not None, f"n={n}: {ADOPTED[n]} has no house source")
+    return cast("Source", found)
 
 
 def source_keys() -> frozenset[str]:
@@ -527,6 +530,11 @@ def source_keys() -> frozenset[str]:
 
 def numbers_for(key: str) -> tuple[int, ...]:
     return tuple(n for n in NUMBERS if source_for(n).key == key)
+
+
+def numbers_of(result: str) -> tuple[int, ...]:
+    """The counts one adopted result houses."""
+    return tuple(n for n in NUMBERS if ADOPTED[n] == result)
 
 
 def house_path(n: int) -> Path:
@@ -540,7 +548,11 @@ def certificate(n: int) -> legacy.Certificate:
 
 def expected_house(n: int) -> dict[str, Any]:
     """The count's house: its certificate as a witness, with its full native result."""
-    source = source_for(n)
+    return _house_witness(n, source_for(n))
+
+
+def _house_witness(n: int, source: Source) -> dict[str, Any]:
+    """The witness `source` makes the house at `n`: its certificate, with its native result."""
     exact = source.certificate(n)
     positive = source.jobs(n, exact)["positive"]
     witness = kernel.to_witness(
@@ -582,6 +594,109 @@ def build_witness(n: int) -> dict[str, Any]:
 
 def side(n: int) -> Fraction:
     return certificate(n).side
+
+
+#: The schema reference a house witness carries, as the atlas writes the file.
+WITNESS_SCHEMA_REFERENCE = "../witness.schema.yaml"
+
+
+def stored_size(data: bytes) -> int:
+    """The bytes Git keeps for a file: its blob object, the header ``blob <size>`` and a NUL
+    then the content, compressed by zlib at its default level, as Git compresses an object
+    in a pack (`core.compression`) before any delta. A loose object, as `git hash-object -w`
+    first writes it, is compressed at Git's default loose level, a little larger."""
+    return len(zlib.compress(b"blob %d\x00" % len(data) + data, zlib.Z_DEFAULT_COMPRESSION))
+
+
+class Sizes(NamedTuple):
+    """One staged count's witness, as the adoption would write it and as it is now."""
+
+    n: int
+    house: str
+    checkout: int
+    stored: int
+    now_checkout: int
+    now_stored: int
+
+
+def staged_sizes(numbers: Sequence[int] | None = None) -> tuple[list[Sizes], list[str]]:
+    """The witness each staged count's adoption would write, measured, and the counts it
+    cannot build: an algebraic house, which no writer here takes yet (think-ot5c)."""
+    from devtools import select_houses  # noqa: PLC0415
+
+    staged = select_houses.PENDING_ADOPTION
+    selected = sorted(staged) if numbers is None else list(numbers)
+    _require(
+        all(n in staged for n in selected),
+        "only counts staged in select_houses.PENDING_ADOPTION are measured",
+    )
+    # Only the staged results are read: `select_houses --check` holds each staging to the
+    # selection, and this measures what the staged house's adoption would write.
+    names = {staged[n].house for n in selected}
+    results = [entry for entry in select_houses.load_results() if str(entry["id"]) in names]
+    found = select_houses.candidates(results, select_houses.load_evidence())
+    measured: list[Sizes] = []
+    skipped: list[str] = []
+    for n in selected:
+        house = next((c for c in found.get(n, ()) if c.result == staged[n].house), None)
+        _require(house is not None, f"n={n}: {staged[n].house} is no candidate there")
+        assert house is not None
+        packet = reports.import_packet(house.source_key)
+        if house.algebraic or packet is None:
+            skipped.append(f"n={n}: {house.result}'s side is algebraic; no writer takes it yet")
+            continue
+        witness = _house_witness(n, packet_source(house.result, packet.name))
+        data = witness_document(witness, schema=WITNESS_SCHEMA_REFERENCE).encode("utf-8")
+        current = (WITNESSES / f"n-{n:03d}.yaml").read_bytes()
+        measured.append(
+            Sizes(
+                n,
+                house.result,
+                len(data),
+                stored_size(data),
+                len(current),
+                stored_size(current),
+            )
+        )
+    return measured, skipped
+
+
+def _megabytes(size: int) -> str:
+    return f"{size / 1e6:.2f} MB"
+
+
+def print_sizes(numbers: Sequence[int] | None = None) -> int:
+    measured, skipped = staged_sizes(numbers)
+    heading = ("n", "house", "checkout", "stored", "now", "now stored")
+    print("{:>4}  {:6}  {:>10}  {:>9}  {:>9}  {:>10}".format(*heading))
+    for row in measured:
+        print(
+            f"{row.n:>4}  {row.house:6}  {row.checkout:>10}  {row.stored:>9}  "
+            f"{row.now_checkout:>9}  {row.now_stored:>10}"
+        )
+    for line in skipped:
+        print(f"skipped {line}")
+    if not measured:
+        return 0
+    checkout = sum(row.checkout for row in measured)
+    stored = sum(row.stored for row in measured)
+    now_checkout = sum(row.now_checkout for row in measured)
+    now_stored = sum(row.now_stored for row in measured)
+    largest = max(measured, key=lambda row: row.checkout)
+    # History keeps every blob: the witnesses replaced stay in it, so an adoption adds its
+    # new blobs' whole size to what a clone downloads, and the tree's difference is only
+    # what a checkout grows by (review D3 of #660).
+    print(
+        f"{len(measured)} witness{'' if len(measured) == 1 else 'es'}: "
+        f"{_megabytes(checkout)} in a checkout and "
+        f"{_megabytes(stored)} as Git stores them, which history keeps, the replaced "
+        f"witnesses staying in it; in the tree they replace {_megabytes(now_checkout)} and "
+        f"{_megabytes(now_stored)}, so a checkout grows by "
+        f"{_megabytes(checkout - now_checkout)} and the tree's blobs by "
+        f"{_megabytes(stored - now_stored)}; the largest, n = "
+        f"{largest.n}, {_megabytes(largest.checkout)} and {_megabytes(largest.stored)}"
+    )
+    return 0
 
 
 def check_houses(numbers: Sequence[int] | None = None) -> None:
@@ -650,14 +765,15 @@ def linked_house_problem(path: str, *, repository: Path) -> str | None:
 #: Where the custody run's receipt is kept: one record for every adopted packet.
 CUSTODY_RECEIPT = ROOT / "devtools/house-custody-2026-10-11.json"
 CUSTODY_FORMAT = "AdoptedHouseCustody/v1"
-#: The worker's deadline: it admits all 50 houses and refuses 32 mutations, two for each
-#: of the sixteen packets.
+#: The worker's deadline: it admits all 65 houses and refuses 22 mutations, two for each
+#: of the eleven results (28.36 s in the worker on 17 October 2026, on a shared host at a
+#: load average of about five; 48.95 s for 52 houses on 16 October at about ten).
 CUSTODY_TIMEOUT = 120
 
 
 def clear_caches() -> None:
     """Forget every input read, so a check reads the files as they are now."""
-    for function in (_declaration, _record, _manifest, receipt_cases, _couzo_451, sources):
+    for function in (_declaration, _record, _manifest, receipt_cases, sources):
         function.cache_clear()
 
 
@@ -679,39 +795,14 @@ def _mutants(n: int) -> list[tuple[str, Path, Callable[[bytes], bytes]]]:
         kernel.save_xz(path, record)
         return path.read_bytes()
 
-    def original(_raw: bytes) -> bytes:
-        """T-128's facts hold each original certificate's text, bound to its digest."""
-        path = couzo_451.fact_path()
-        value = kernel.read_xz(path)
-        row = next(row for row in value["cases"] if row["n"] == n)
-        row["source_certificate"] += "\n"
-        kernel.save_xz(path, value)
-        return path.read_bytes()
-
-    def side(raw: bytes) -> bytes:
-        """T-130's derived fact parses to the same witness with any trailing byte added."""
-        text = raw.decode("utf-8")
-        return text.replace("  side: ", "  side: 1", 1).encode("utf-8")
-
-    if source.result == "T-128":
-        certificate, mutate = couzo_451.fact_path(), original
-    elif source.result == "T-130":
-        certificate, mutate = couzo_460.fact_path(n), side
-    else:
-        certificate, mutate = _stored(source.packet, n), lambda raw: raw + b"\n"
     return [
         ("outside-control verdict", receipt_of(n), verdict),
-        ("certificate bytes", certificate, mutate),
+        ("certificate bytes", _stored(source.packet, n), lambda raw: raw + b"\n"),
     ]
 
 
 def receipt_of(n: int) -> Path:
-    source = source_for(n)
-    if source.result == "T-128":
-        return couzo_451.receipt_path()
-    if source.result == "T-130":
-        return couzo_460.receipt_path()
-    return _receipt(source.packet, n)
+    return _receipt(source_for(n).packet, n)
 
 
 def worker_custody() -> dict[str, Any]:
@@ -728,7 +819,7 @@ def worker_custody() -> dict[str, Any]:
         _require(path.is_file() and not path.is_symlink(), f"{path}: not an ordinary file")
     check_houses()
     refused = []
-    for n in sorted({min(numbers_for(key)) for key in source_keys()}):
+    for n in sorted({min(numbers_of(result)) for result in sources()}):
         for name, path, mutate in _mutants(n):
             original = path.read_bytes()
             try:
@@ -832,6 +923,11 @@ def main(argv: Sequence[str] | None = None) -> int:
     check = sub.add_parser("check", help="hold each retained house to its inputs")
     check.add_argument("--n", type=int, nargs="+", help="only these counts")
     sub.add_parser("inputs", help="print every private input and its size")
+    sizes = sub.add_parser(
+        "sizes",
+        help="measure the witnesses the staged adoptions would write, as Git stores them",
+    )
+    sizes.add_argument("--n", type=int, nargs="+", help="only these staged counts")
     sub.add_parser(
         "custody", help="run the custody check in a private worker; keep its receipt"
     )
@@ -849,6 +945,8 @@ def main(argv: Sequence[str] | None = None) -> int:
     if arguments.command == "worker-custody":
         print(json.dumps(worker_custody()))
         return 0
+    if arguments.command == "sizes":
+        return print_sizes(arguments.n)
     if arguments.command == "inputs":
         paths = private_input_paths()
         for path in paths:

@@ -1,0 +1,141 @@
+# Register plan for Francisco Couzo's s(175) certificate at 337078c, which issue #506's
+# release holds and the issue does not name. Written on 2026-10-14 at main 9b32da04d by the
+# 14 October evening intake lane (think-mq0k, branch claude/wizardly-meitner-wqn4x3-intake-1014b)
+# for the records pull request that registers it. Nothing here is a record: it is the shape
+# `devtools.upper_bound_reports register-plan` prints, written by hand because this packet's
+# declaration requests the eleven counts the issue names and not 175, and the certificate is
+# not re-retained. Every value is read from this packet's claim record and receipt, from
+# dostashev-records-2026-10-12/acquisition/claims.json (T-158 against this certificate), and
+# from review/compare_lineage.py in mishapolk-kkt-refinements-2026-10-14 (the lineage).
+#
+# Why now: on 2026-10-14T16:38:36Z Francisco Couzo answered on #506
+# (https://github.com/jlevy/squares/issues/506#issuecomment-6173333473): "Hi @jlevy, sure,
+# import it". Under the owner's per-count rule the certificate, first committed in f311f08
+# at 2026-10-11T03:39:54Z, was decidably below every earlier report at 175 when published, so
+# it is recorded; Daniil Ostashev's #528 (T-158, the case's house since 12 October) is
+# 2.94e-03 below it, so the entry is superseded from registration.
+results.yaml:
+  id: T-NNN
+  kind: upper-bound
+  registered: '2026-10-14'
+  headline: >-
+    A tighter packing of 175 squares from Francisco Couzo, published with no issue and
+    superseded by Daniil Ostashev's composition
+  claim: >-
+    One complete rational source certificate reports a finite upper-bound improvement at the
+    exact side it states: s(175) <= 13.7671190241983642888907662905. Complete native
+    feasibility outcomes are retained separately; the selected standing case is unchanged.
+
+
+    It is certificates/n175.cert at 337078c, first committed in f311f08 at
+    2026-10-11T03:39:54Z, which issue 506's release holds and the issue does not name; the
+    author asked for it to be imported on issue 506 on 14 October 2026. When it was published
+    it was below the case's ceiling, Ryan Xu's packing (T-125), by 1.78e-03, and below every
+    other report at 175: T-140 (issue 488) by 1.70e-06, and T-130, T-138 and the issue-476
+    certificate by 3.61e-05. Daniil Ostashev's issue 528 composition (T-158), the case's house
+    since 12 October 2026, is 2.94e-03 below it, so the entry is superseded.
+
+
+    Credit Francisco Couzo (https://github.com/franciscouzo/square-packing). Measured here,
+    it is the arrangement of his T-140 certificate, itself a refinement of Ryan Xu's packing,
+    moved: every centre within 0.011 of T-140's and 137 of 175 within 1e-3. The issue 506
+    release states that the search code and the request were written with Claude (Claude
+    Code), directed and reviewed by the author.
+  scope:
+    n_values:
+    - 175
+  verification: V0
+  confirmation: C0
+  significance:
+    score: 1
+    rationale: A smaller finite construction side at n = 175 when published, 1.70e-06 below
+      T-140; superseded at registration by T-158, 2.94e-03 below it; no lower bound or optimum.
+    scored: '2026-10-14'
+    by: think-9fjl Francisco Couzo import (draft)
+  novelty: previously-published
+  attribution:
+    source_keys:
+    - '[Couzo certificates 2026-10-11]'
+    published: '2026-10-11'
+  evidence:
+  - E-couzo-506-n175-report
+  artifacts:
+  - packing/resources/web/couzo-certificates-2026-10-11/README.md
+  - packing/resources/web/couzo-certificates-2026-10-11/acquisition/claims.json
+  - packing/resources/web/couzo-certificates-2026-10-11/source/certificates/n175.cert
+  - packing/devtools/upper_bound_reports.py
+  controls:
+  - packing/tests/test_upper_bound_reports.py
+  notes: >-
+    The packet's complete repository replay covers n = 175 with its two controls: the
+    positive passed and the duplicate-square and outside-container controls were refused on
+    both maintained routes, 91,350 pair decisions, decided twice on 11 October 2026; the
+    positive clears every wall by 1/(2*10^20) and every pair by just under 1e-20. The 12
+    October review (docs/project/reviews/review-2026-10-11-upper-bound-imports-506.md, RY-10)
+    decided it again on the third route in scratch, with six controls, and that decision is
+    not retained. The receipt is receipts/exact-certification.json.xz in
+    couzo-certificates-2026-10-11, shared with T-152.
+
+
+    At n = 175 the certificate is above the case's ceiling (Daniil Ostashev, T-158) by
+    2.94e-03, as dostashev-records-2026-10-12's claim record measures exactly; it is below
+    T-140 (#488) by 1.70e-06, T-130 (#460), T-138 (#470) and the #476 certificate by 3.61e-05
+    and T-125 (#432) by 1.78e-03. Later reports at 175, PingYou Ltd's PR 574 (T-174) and
+    Mykhailo Polkovskyi's 70a033f, refine T-158's packing.
+
+
+    The source's own checkers were not run here. The two maintained routes, the sqpack
+    rational witness verifier and the independent rational corner checker, share certificate
+    parsing, half-angle conversion, Fraction arithmetic and the separating-axis method. No two
+    independent methods, human oversight or optimality is claimed.
+
+
+    The per-count rule of 14 October takes the reports at 175 in the order they reached this
+    repository: this certificate, published 2026-10-11T03:39:54Z, was decidably below every
+    earlier report and is recorded; issue 528 (T-158), reported 2026-10-12, is decidably
+    below it and supersedes it.
+  next_rung: >-
+    None for the bound, which T-158 supersedes at 175. A retained third-route decision
+    (devtools.check_half_angle_area roster line for #506's 175) and the review mapping would
+    let the rungs rise to the replay already retained. Final exact-head CI remains required.
+  regularizations:
+  - n: 175
+    of: T-140
+    by: '[Couzo certificates 2026-10-11]'
+    method: further refinement of the author's own T-140 certificate of Ryan Xu's packing
+    side: solved
+    identity:
+      basis: measured
+evidence.yaml:
+  id: E-couzo-506-n175-report
+  claim: upper-bound
+  scope:
+    n_values:
+    - 175
+  assurance: reported
+  reported_method: exact-algebraic
+  performed_by: source-author
+  relationship_to_generator: same-implementation
+  origin: external
+  novelty: previously-published
+  source_key: '[Couzo certificates 2026-10-11]'
+  certificate: packing/resources/web/couzo-certificates-2026-10-11/source/certificates/
+  replay_status: not-attempted
+  verifiers: []
+  source_reviewed: '2026-10-14'
+  limitations: >-
+    This atom records the source author's certificate at 175 at 337078c, which issue 506 does
+    not name and its author asked on 14 October 2026 to import. The packet's complete
+    repository replay of it, 3 jobs on both maintained routes, is retained in
+    receipts/exact-certification.json.xz and shared with E-couzo-506-exact-feasibility; that
+    entry's scope does not include 175. Independent review and confirmation remain pending.
+    The source's own checkers were not run here.
+source-coverage.yaml:
+  note: >-
+    No new source row: couzo-certificates-2026-10-11 is the source. Its scope gains 175, its
+    represented_by gains the new T-NNN, and its notes stop saying 175 is not registered.
+result-requests.yaml:
+  note: >-
+    Issue 506's unnamed-175-308-340-343 claim: 175 moves from not_registered to the new
+    T-NNN, citing the author's comment of 2026-10-14T16:38:36Z; 308, 340 and 343 stay as
+    they are. The comment is read, so read_through moves to it. think-9fjl owns the import.

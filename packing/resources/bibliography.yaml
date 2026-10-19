@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:Bibliography/v1
   schema: bibliography.schema.yaml
   status: enforced
-last_reviewed: '2026-10-13'
+last_reviewed: '2026-10-18'
 # The citation fields a generator needs, keyed by the source keys the frontier records
 # use. The Markdown tables in README.md stay the human index; this file holds only what
 # a line of citation text is built from, for the keys something cites.
@@ -1880,6 +1880,25 @@ sources:
       full check2 premises accepted at all three. Native capture, controls and adoption pending.
       The nested verifier adapts this project's sqverify_fast, so a maintained replay is not
       another independent implementation.
+  - key: '[wand125 fine-net lower bounds 2026-10-16]'
+    authors: [wand125]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-16'
+    credit: wand125 after Tokoharu and Levy
+    lineage: builds-on-project
+    note: >-
+      The 18 fine-net measure lower-bound reports that wand125/square-packing added on
+      2026-10-16, one commit each from 02c5595f26e8cf1f6be89080fdd66a9a5d6d364f (n = 38) to
+      718887cfaa8727cc75108c5924fa1330df4fa098 (n = 110), the packet's pin, at n = 38, 40, 41,
+      43 and 51 on the 2,073-direction net and n = 68, 84 to 86, 88 to 92 and 106 to 110 on the
+      201-direction standard net, and reported in jlevy/squares#446. Their data are in release
+      square-lower-bounds-v1; each asset's candidate, receipts and logs are retained under
+      OR-18, the nested verifier archive is pinned by digest, and the directories' MIT
+      documents are retained. Maintained measure, declared-net and full check2 premises
+      accepted at all 18. Native capture, controls and adoption pending under think-f40c. The
+      nested verifier adapts this project's sqverify_fast, so a maintained replay is not
+      another independent implementation.
   - key: '[wand125 linear n145 2026-10-13]'
     authors: [wand125]
     year: 2026
@@ -2081,6 +2100,24 @@ sources:
       source checks with Squares Project (Levy) verification code; this project lineage is
       not independent. The certificates are retained as factual data; the unlicensed prose
       is hash-pinned. Claude assistance disclosed. No optimizer, local or global claim.
+  - key: '[Couzo n175 2026-10-11]'
+    authors: [Couzo]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-11'
+    lineage: builds-on-project
+    credit: Couzo after Xu, Daniel, Ellsworth, Levy
+    short_credit: Couzo after Xu et al.
+    note: >-
+      The release's certificate at 175 at 337078ca3e05153aceb099237b175cf64af5748a, first
+      committed on 11 October 2026, which issue 506 does not name and its author asked on 14
+      October to import: an exact optimum from Daniel's exact contact solver that the
+      source's standing table says was seeded from Xu, and that refines the author's own
+      issue-488 certificate (T-140), itself refined from Xu's packing with Daniel's fq and
+      Ellsworth's refine_packing. The source checks with Squares Project (Levy) verification
+      code; this project lineage is not independent. Retained in the
+      couzo-certificates-2026-10-11 packet as factual data. Claude assistance disclosed. No
+      optimizer, local or global claim.
   - key: '[Daniel regularizer 2026-10-11]'
     authors: [Daniel]
     year: 2026
@@ -2595,6 +2632,290 @@ sources:
       was written with AI assistance (OpenAI Codex) and reviewed by the author, the commit names Claude
       as co-author, and issue #600 names Claude and Codex for the search, the certificates and
       both checkers. MIT. Dated by the pin.
+  - key: '[Mishapolk KKT refinements 2026-10-14]'
+    authors: [Polkovskyi]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-14'
+    lineage: credits-project
+    credit: Polkovskyi after Ostashev, Couzo, PingYou Ltd, Levy
+    short_credit: Polkovskyi after Ostashev et al.
+    note: >-
+      Twenty-four exact certificates at 70a033f0ecfa9e643cd5fb5dbac190cb7f4ffb94, each
+      re-solving a certificate reported at its count to a KKT endpoint; twelve are below
+      every earlier report, at 129, 154, 156, 175, 176, 204, 232, 264, 271, 302, 303 and
+      304. No licence: derived exact facts only, no upstream byte retained. census.json
+      credits ten re-cut counts to 'Antigravity'; issue 593 discloses Gemini assistance. No
+      local or global optimality claim.
+  - key: '[Daniel n146 2026-10-14]'
+    authors: [Daniel]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-14'
+    lineage: independent
+    credit: Daniel after Xu
+    note: >-
+      One complete exact certificate at e006ce6230f2240457b083199755a3a5d287692c, s(146) <=
+      12583782190151860342292508597077/10^30, from a time-travel test of the author's chain
+      search started from the public packings of 10 October; the author credits the start to
+      Ryan Xu's #432 packing and names Barnett's #505 refinement as the record it improves.
+      A regularized drawing of the same packing at the same side, and the source's
+      comparison with #505's packing, are retained beside it. MIT-licensed certificates and
+      solver reports retained; Claude assistance disclosed. KKT and jamming statements are
+      the author's numerical evidence; no local or global optimality claim.
+  - key: '[Couzo verified bounds 2026-10-14]'
+    authors: [Couzo]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-14'
+    lineage: builds-on-project
+    credit: Couzo after Ostashev, Daniel, Levy
+    short_credit: Couzo after Ostashev et al.
+    note: >-
+      The author's verified-bounds index at 487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d,
+      first committed on 14 October 2026 with no issue: one exact certificate inside the
+      case corpus, s(211) <= 7496774813149710519467765230441/5e29, the author's
+      refinement of Daniil Ostashev's arrangement of issue 575 ("seeded from Daniil
+      Ostashev"), retained as factual data; 296 certificates beyond the corpus (339, 370, 378 to
+      382, 403 to 991), pinned by digest as bulk data and compared from their exact
+      header sides, of which the source register records 252. The unlicensed prose and
+      index are hash-pinned; they state nothing about AI assistance, and the author's
+      issues of 13 and 14 October disclose OpenAI Codex and Claude Code assistance. No
+      optimizer, local or global claim is replayed.
+  - key: '[Couzo certificates 2026-10-14]'
+    authors: [Couzo]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-14'
+    lineage: builds-on-project
+    credit: Couzo after Polkovskyi, Fang, Daniel, Ellsworth, Levy
+    short_credit: Couzo after Polkovskyi et al.
+    note: >-
+      Twenty-three complete exact certificates at
+      43ac7d29cfeb7b71ea1eb09939cb30b9f71850f2, issue 607: a refinement at 237 of
+      Mykhailo Polkovskyi's issue-593 certificate, 13 campaign bounds and two precision
+      refinements beyond the case corpus, and seven of Kevin Fang's Section 5
+      composites, byte for byte the certificates his table lists, which the author
+      replayed and credits to Fang. The source checks with Squares Project (Levy)
+      verification code and Evan Daniel's checker; this project lineage is not
+      independent. The certificates are retained as factual data; the unlicensed prose
+      is hash-pinned. OpenAI Codex assistance disclosed. No optimizer, local or global
+      claim.
+  - key: '[Couzo n237 2026-10-15]'
+    authors: [Couzo]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-15'
+    lineage: builds-on-project
+    credit: Couzo after Polkovskyi, Chaoweeraprasit, Daniel, Levy
+    short_credit: Couzo after Polkovskyi et al.
+    note: >-
+      One complete exact certificate at 58a783368d4b7e70bb800f0009ea9ca03e578739, first
+      committed in 4e4c8ce with no issue: s(237) <=
+      7951301819129798440089572127137/5e29, the author's exact refinement of Mykhailo
+      Polkovskyi's issue-593 certificate, from which its metadata says his fq search was
+      seeded. Retained as factual data; the unlicensed prose and the author's index are
+      hash-pinned. No optimizer, local or global claim is replayed. The pinned files
+      state nothing about AI assistance; issue 607 of the day before discloses OpenAI
+      Codex assistance.
+  - key: '[bengreff s95 certificate 2026-10-15]'
+    authors: [Greff]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-15'
+    credit: Greff after Daniel, wand125
+    lineage: independent
+    note: >-
+      bengreff/s95-certificate at dd7297d06adc664268c65005369b895e4ded7547
+      (2026-10-15T01:16:20Z), Benjamin Greff's mixed cover for s(95) >= 10, hence s(95)
+      = 10 with the 10 x 10 grid: 48,352 points and 11,438 segments in Evan Daniel's
+      mixed 1 format, total 3791753447/40000000 < 95, first committed in 06da947 at
+      2026-10-15T01:10:26Z, decided by Daniel's zmx2 and zm_mixed.py pinned at
+      evand/square-packing b91d70b6, with a Lean wrapper on Daniel's Sqpack at 1718a58
+      that takes the covering statement as a hypothesis. Registration was requested in
+      jlevy/squares#610. The README credits Evan Daniel for the method at margin zero,
+      the mixed format, the checkers and the Lean library, and wand125 for the s(59) = 8
+      cover reused for the corners and the band-insertion construction; it names the
+      author's own s(76) certificate as the previous case, and does not mention this
+      project except that the issue cites the record's n-095.md for the standing bound.
+      AI assistance, README.md: "Benjamin Greff directed the work. The search, LP and
+      verification pipeline were built and run with Claude (Anthropic) as an AI
+      assistant." The issue adds that Claude, working as an agent in Claude Code, built
+      and ran the LP search, the GPU solver, the export, the verification script, the
+      coverage checks, the Lean wrapper and the replay, and drafted the write-up; both
+      commits carry a Co-Authored-By trailer naming Claude Opus 5.5. MIT licence.
+      Retained whole in web/bengreff-s95-certificate-2026-10-15/. Dated by that
+      revision, 2026-10-15 UTC.
+  - key: '[wand125 continuous n28 2026-10-15]'
+    authors: [Hosono]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-15'
+    credit: Hosono after Guzhou0806, Tokoharu, Levy
+    lineage: builds-on-project
+    note: >-
+      wand125's (Hiroaki Hosono's) continuous-pose certificate for s(28) > 1149/200 =
+      5.745, pinned at 8530bafb (15 October 2026, wand125/square-packing): 884 rectangle
+      orbits of mass 2799999/100000 on [0, 573351/100000]^2, every square of side
+      499/500 at every angle reported to capture mass at least 1, decided at the source
+      by sqverify_continuous v4 and by contpose_check3 around Guzhou0806's T-145
+      kernels; no issue reports it. The directory's MIT documents and check2's source
+      are retained, and the 912,977-byte release asset is pinned by size and SHA-256 and
+      not retained. The source credits Hiroaki Hosono (GitHub: wand125), and its
+      problems/square-lower-bounds/README.md says: "Parts of this work were produced
+      with AI assistance under human direction."
+  - key: '[Daniel exact current records 2026-10-16]'
+    authors: [Daniel]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-16'
+    lineage: builds-on-project
+    credit: Daniel after Xu, Chaoweeraprasit, Ostashev, Couzo, PingYou Ltd, Gupta, Polkovskyi, Levy
+    short_credit: Daniel after Xu et al.
+    note: >-
+      Exact algebraic forms of the record's best-known packings at 23 counts at
+      7d1407a0b66c46e32cdbcbd5619586fe2bdd52a1 (search/exact/cur/, issue 639): each side
+      the one root of an integer polynomial of degree 2 to 41 in a rational interval,
+      realised by an exact configuration over a number field and accepted by the author's
+      standard-library verify_exact.py. The packings are their finders', as the issue says,
+      read from this project's register; the 16 counts the report-order ledger records are
+      Xu's, Chaoweeraprasit's, Ostashev's, Couzo's and PingYou Ltd's packings, as Gupta,
+      Polkovskyi and PingYou Ltd refined them, and Daniel's own at 266. MIT-licensed; 19
+      data files retained as their upstream gzip and the four largest pinned by size and
+      SHA-256. The issue says the solver, checkers and batch were written and run with
+      Claude (Anthropic) under the author's direction. Polynomial irreducibility is the
+      source's assertion; no local or global optimality claim.
+  - key: '[Fitzharding n19 Lean 2026]'
+    authors: [Fitzharding]
+    year: 2026
+    venue: GitHub
+    short_venue: Web
+    dated: '2026-10-16'
+    credit: Fitzharding after Levy, Ahmed
+    lineage: credits-project
+    note: >-
+      A Lean 4 proof, Sq19.square19_optimality, that nineteen unit squares pack in a square
+      of side L exactly when 3 + 4 * Real.sqrt 2 / 3 <= L, the side of Robert Wainwright's
+      1979 packing: ofitzharding/sq19 at 34fb2b7bc39465db368c45cb48d4db58829d3051
+      (committed 2026-10-16T03:20:12Z, the tag of release v1.0.0), retained whole, with
+      the release's five archives of generated certificate modules (1,110,588,236 bytes)
+      pinned by size and SHA-256, in web/fitzharding-n19-lean-2026-10-16/. CITATION.cff and
+      LICENSE name the author Oscar Fitzharding, who publishes on GitHub and X as
+      ofitzharding. README.md: "Builds on the s(17) formalization", "Thanks to everyone
+      involved with the Squares Project, especially Manasseh Ahmed", and "Developed with
+      substantial assistance from Claude and Codex." The source trusts Lean's compiler,
+      native evaluator and C toolchain for 4,320 native_decide facts, reports a kernel
+      replay of the theorem's 13,143-module import closure, and says a complete rebuild from
+      source has not yet been run. MIT licence. Fitzharding announced it on X on 16 October
+      2026 at 03:27:40Z (https://x.com/ofitzharding/status/2110935681597874374): "lol
+      here's a lean proof of the optimal packing for 19 squares"; the post is retained in
+      the packet's receipts/announcement/. Issue #640 on this repository, opened by the
+      author at 03:41:08Z to ask for the registration, credits Wainwright's construction,
+      says it "extends the method and checker code of the s(17) Lean proof (#565)", thanks
+      the Squares Project and Manasseh Ahmed, and says "Development used Claude and Codex
+      assistance."
+  - key: '[PingYou PR 622 certificate 2026-10-15]'
+    authors: [PingYou Ltd]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-15'
+    lineage: builds-on-project
+    credit: PingYou Ltd after Schadt, Ellsworth, Daniel, Levy
+    short_credit: PingYou Ltd after Schadt et al.
+    note: >-
+      Pull request jlevy/squares#622 at 31155575ce1e6b461f77bfc9f3e201adf101115b
+      (BuddenPing/squares): a submission packet and a HostedData manifest pinning the
+      release data/pingyou-n29-certificate-2026-10-15-v1 of
+      BuddenPing/square-packing-certificates (pingyou-n29-certificate-2026-10-15.zip,
+      430,075 bytes, SHA-256 0dc9bcd1cf5f2806a4d2e0c4c1c07e4903d91bbea611b8b938bda770b9782537),
+      which holds one complete exact rational certificate at n = 29: a refinement of Thomas
+      Schadt's packing, improved by David Ellsworth, made with Evan Daniel's tools and data
+      and checked by the source with Squares Project (Levy) verification code. Derived exact
+      facts only; no upstream byte is retained. No new nominal construction, local or global
+      optimality claim. The author says its submissions are assisted by the PY agentic
+      offering.
+  - key: '[de Winter upper bounds 2026-10-17]'
+    authors: [de Winter]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-17'
+    lineage: builds-on-project
+    credit: de Winter after Levy
+    note: >-
+      Joost de Winter's issue 668 reports three rational upper-bound certificates at
+      227, 229 and 260, first published at c95c4938f068ed44a1819ef973e770ec241aa567 on
+      17 October 2026. The retained MIT-licensed successor
+      9bf5d9be4d0ca13a1dbef7d7953032fe87d4e81d changes only LICENSE and root README
+      text; the three witness directories are unchanged. Source records, exact witnesses,
+      three standalone Fraction checkers and source audit receipts are retained in
+      web/de-winter-upper-bounds-227-229-260-2026-10-17/. The issue credits the public
+      jlevy/squares catalogue as the search start and preserves its prior-packing credits.
+      It discloses Codex agents under the author's direction and subsequent Claude
+      replay. Stage 3 registers these claims as T-196 in packing/frontier/results.yaml,
+      V0/C0 and pending adoption. The separately completed mathematical review and
+      source replay with controls await descendant integration; this entry adopts no
+      confirmation, and both case upper lanes and houses remain unchanged.
+  - key: '[Daniel n155 explorer 2026-10-17]'
+    authors: [Daniel]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-17'
+    lineage: builds-on-project
+    credit: Daniel after Ostashev, Levy
+    note: >-
+      Evan Daniel's issue 669 reports s(155) <= 12.952260944651, rounded upward from
+      the exact rational certificate side, first published at the retained MIT-licensed
+      pin 59326b86291b76c39d843f3f156e8f25fa0f6e3f on 17 October 2026. The original
+      and same-side regularized certificates, both standalone exact checkers and the
+      numerical reports are retained in web/evand-n155-explorer-2026-10-17/. The issue
+      explicitly credits Daniil Ostashev's T-149 packing as the search start; the
+      regularized JSON instead carries by: [Francisco Couzo]. That discrepancy remains
+      unresolved, with both source statements preserved. Claude assistance is disclosed;
+      the KKT and local-minimum diagnostics are numerical source assertions. This entry
+      records T-197 in packing/frontier/results.yaml at V0/C0, pending adoption.
+      Separate returned mathematical review and completed source replay/controls await
+      descendant integration; both case upper lanes and the house remain unchanged.
+  - key: '[Daniel n229 dilation 2026-10-17]'
+    authors: [Daniel]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-17'
+    lineage: builds-on-project
+    credit: Daniel after Couzo, de Winter, Levy
+    note: >-
+      Evan Daniel's opening report in issue 674 gives s(229) <= 15.650163254859,
+      rounded upward from the retained exact rational certificate at MIT-licensed
+      e0338c7becf95dbc7584b48d8868c0a1cd21079c, first published on 17 October 2026.
+      The packet web/evand-n229-dilation-2026-10-17/ retains the certificate, binary64
+      input, two standalone exact checkers, dilation producer, licence and credits.
+      The issue credits Francisco Couzo's 672 packing after Joost de Winter's 668.
+      The later author update asks to replace this side; both chronological claims are
+      retained, with the update the current request. Claude assistance is disclosed.
+      Stage 3 records T-198 in packing/frontier/results.yaml at V0/C0, pending adoption,
+      preserving this chronological report before T-199. Separate returned mathematical
+      review and completed source replay/controls await descendant integration; both
+      case upper lanes and the house remain unchanged.
+  - key: '[Daniel n229 dilation update 2026-10-18]'
+    authors: [Daniel]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-18'
+    lineage: builds-on-project
+    credit: Daniel after Couzo, de Winter, Levy
+    note: >-
+      Evan Daniel's update to issue 674 gives s(229) <= 15.650161513896, rounded upward
+      from the retained exact rational certificate at MIT-licensed
+      00e68dfbe1d29ab5dbab1cddfb8f6ca19d5470db, first published on 18 October 2026.
+      The packet web/evand-n229-dilation-update-2026-10-18/ retains the updated inputs
+      and standalone checker dependencies and binds the unchanged opening inputs to
+      their earlier packet. This is the current request, after the opening bound of
+      15.650163254859; both retain Daniel after Couzo's 672 after de Winter's 668.
+      The update's introductory words say lower bound, but its table and certificate
+      state an upper bound only. Claude assistance is disclosed. Source custody gives
+      no geometric verdict by itself. Stage 3 records T-199 in packing/frontier/results.yaml
+      at V0/C0, the latest registered n229 report pending adoption. Separate returned
+      mathematical review and completed source replay/controls await descendant
+      integration; both case upper lanes and the house remain unchanged.
 credited_names:
   Benjamin Greff: Greff
   Hiroaki Hosono: Hosono
@@ -2606,6 +2927,7 @@ credited_names:
   Nate Chaoweeraprasit (itsnaka): Chaoweeraprasit
   Siddharth Gupta: Gupta
   Ryan Xu: Xu
+  Ryan Xu (ry-xu): Xu
   Seth Rehwaldt: Rehwaldt
   Nate Chaoweeraprasit: Chaoweeraprasit
   Allen Chang: Chang

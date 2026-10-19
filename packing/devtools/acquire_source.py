@@ -725,7 +725,18 @@ def check(packet: Path, root: Path) -> list[str]:
             expected_originals = {
                 path for entry in record["sources"] for path in entry.get("original_gzip", [])
             }
-            if {row.stored for row in original_rows} != expected_originals:
+            # Rows outside the archived directory are another retention's, such as the
+            # release members `devtools.fine_net_followup retain` keeps beside it, which
+            # its `check-retained` re-derives; `check_packet` above binds every row.
+            archived = {
+                PurePosixPath(entry["archived_path"]).name for entry in record["sources"]
+            }
+            own = {
+                row.stored
+                for row in original_rows
+                if PurePosixPath(row.stored).parts[0] in archived
+            }
+            if own != expected_originals:
                 problems.append("Original Gzip Files table differs from declared original_gzip")
         else:
             problems.append("the packet has no README.md")

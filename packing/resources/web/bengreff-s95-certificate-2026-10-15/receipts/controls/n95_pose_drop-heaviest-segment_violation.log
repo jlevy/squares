@@ -1,0 +1,6 @@
+# command: /home/user/squares/.claude/worktrees/agent-a33e48ec7ed2cb8d8/packing/.venv/bin/python3 -I -u /tmp/claude-0/-home-user-squares/387dc0a2-0a91-51c6-bf71-f69e33945398/scratchpad/i610/zmcheck/zm_mixed.py pose /tmp/claude-0/-home-user-squares/387dc0a2-0a91-51c6-bf71-f69e33945398/scratchpad/i610/mut/s95_drop-heaviest-segment.txt --cx 500001/1000000 --cy 4500001/1000000 --u 1/5000000
+# cwd: scratch checker dir: zm_mixed.py ee3e2915, mixed_cover.py bb89de15, zeromargin.py 640fe453 (retained evand packets); cover 7e04ae86fa6520721c251dc3ddbdcf2cd7112430bd9d87de70968c733f36b544, the drop-heaviest-segment mutation, at zmx2's lowest float-min in root x5 y45
+# python3: the project interpreter, Python 3.14.7, run with -I
+# host: 4 cores; load 4.47 4.22 3.71; started 2026-10-15T01:39:55Z
+pose cx=500001/1000000 cy=4500001/1000000 u=1/5000000 (theta 0.000022918 deg), admissible True: EXACT mu(Q) = 705154582512651979634980657/833333333333300000000000000 = 0.846185499015 (*** < 1 ***)
+# finished 2026-10-15T01:39:56Z; exit 0; wall 0.908 s; CPU 0.9 s (user 0.856 + sys 0.048); load 4.47 4.22 3.71

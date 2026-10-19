@@ -197,6 +197,25 @@ def test_the_section_tabs_stand_under_the_bars_rule(
         assert first["top"] - tabs["bottom"] == pytest.approx(below * REM, abs=0.05), where
 
 
+def test_inline_visuals_choices_are_not_header_tabs(browser: Any) -> None:
+    """A chooser inside the reading column does not constrain the title above it."""
+    page = browser.new_page(viewport={"width": 1280, "height": 900})
+    try:
+        page.set_content(
+            '<header class="kpress-site-header"><nav class="site-nav">Site</nav></header>'
+            '<article class="kpress-long-text"><h1>Explanations</h1>'
+            '<h2>Visuals</h2><nav class="site-tabs" aria-label="Visuals">'
+            '<a aria-current="page" href="#film">Film</a>'
+            '<a href="#workbench">Workbench</a></nav></article>'
+        )
+        found = page.evaluate(HEADER)
+    finally:
+        page.close()
+    assert found["tabs"] is None
+    assert found["type"]["tab"] is None
+    assert tabs_problems(found) == []
+
+
 def test_tabs_over_the_rule_are_caught(
     browser: Any, section_pages: dict[str, tuple[Path, str, float]]
 ) -> None:
@@ -208,6 +227,10 @@ def test_tabs_over_the_rule_are_caught(
         )
         try:
             page.goto(path.as_uri(), wait_until="load")
+            if name != "workbench/":
+                # ResizeObserver can add site-headroom after load; the workbench
+                # fixture deliberately has no program.
+                page.locator("header.site-headroom").wait_for(state="attached")
             page.add_style_tag(content=RULE_UNDER_THE_TABS)
             problems = tabs_problems(page.evaluate(HEADER))
         finally:
