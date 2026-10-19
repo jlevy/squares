@@ -219,13 +219,17 @@ def test_a_run_that_takes_its_counts_off_the_allowlist_no_longer_defers_to_its_b
 
 def test_a_staged_house_adoption_keeps_its_bead_open() -> None:
     """Each count `select_houses.PENDING_ADOPTION` stages names the bead that adopts it,
-    and the gate reads them: closing the bead while a count is staged is a dead deferral
-    (result-import.md, "The House Rule")."""
+    and each correction an adoption waits for (`CORRECTIONS_OWED`, review B1 of #658)
+    names the bead that makes it, and the gate reads them: closing the bead while a count
+    is staged or a correction owed is a dead deferral (result-import.md, "The House
+    Rule")."""
     from devtools import select_houses  # noqa: PLC0415
 
     named = check_bead_tree.adoption_deferrals()
     assert named == select_houses.deferrals()
-    assert len(named) == len(select_houses.PENDING_ADOPTION)
+    assert len(named) == len(select_houses.PENDING_ADOPTION) + len(
+        select_houses.CORRECTIONS_OWED
+    )
     lanes = sorted({alias for _where, alias in named})
     assert lanes
     beads = [_bead(f"is-01{alias[6:]}", "open", alias) for alias in lanes]
