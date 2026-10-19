@@ -1592,7 +1592,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         reason=(
             "Reviewed October 19, 2026 for the 19 October intake (think-bjvs): "
             "render_n11_optimality_review, run with source-link revision f3d70f9e4 from "
-            "main 14fd9e27f's tree and from this branch's d2ae6e7f6, writes byte-identical "
+            "main 028bc72ec's tree and from this branch's 0bafa50d0, writes byte-identical "
             "HTML and Markdown. The register changes T-205, T-206 and T-207 and adds "
             "T-218, all outside the n11 ladder rows T-010 to T-061 the paper draws, which "
             "LADDER_DIGEST holds. The changed house-adoption, negative-control and report "
@@ -1618,7 +1618,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         reason=(
             "Reviewed October 19, 2026 for the 19 October intake (think-bjvs): "
             "render_n11_threshold_bound_review, run with source-link revision f3d70f9e4 "
-            "from main 14fd9e27f's tree and from this branch's d2ae6e7f6, writes "
+            "from main 028bc72ec's tree and from this branch's 0bafa50d0, writes "
             "byte-identical HTML and Markdown. The register changes T-205, T-206 and "
             "T-207 and adds T-218, outside the n11 ladder and the T-060 row its gap "
             "caption reads. The changed house-adoption, negative-control and report tools "
@@ -1647,7 +1647,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         reason=(
             "Reviewed October 19, 2026 for the 19 October intake (think-bjvs): "
             "render_packing_methods, run with source-link revision f3d70f9e4 from main "
-            "14fd9e27f's tree and from this branch's d2ae6e7f6, writes byte-identical HTML "
+            "028bc72ec's tree and from this branch's 0bafa50d0, writes byte-identical HTML "
             "and Markdown. The intake requests, source coverage, results register and the "
             "n84 case record are citation targets whose presence the producer checks; "
             "their bodies are not inlined, and its n84 row types the upper bounds, not "
