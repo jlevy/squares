@@ -5,7 +5,7 @@ title: "Merge the n = 17 stack (#560, #571, #577) and later landings of main int
 kind: task
 status: in_progress
 priority: 2
-version: 30
+version: 31
 spec_path: docs/project/specs/active/plan-2026-10-10-contributor-profiles.md
 delegate: profiles-final-merge
 labels: []
@@ -22,11 +22,21 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-13T17:20:02.981Z
-updated_at: 2026-10-19T08:12:20.683Z
+updated_at: 2026-10-19T08:36:13.585Z
 started_at: 2026-10-13T17:20:09.838Z
 ---
 Watch origin/main and merge it into the profiles branch, keeping both the Overbeck and Hosono renames, reconciling the census and regenerating views. Stack merged in 37b1c8bf7.
 
 ## Notes
 
-2026-10-19 review/integration: all source work is isolated at /Volumes/spud-ext1/worktrees/squares-profiles-review-20261018, branch codex/profiles-upstream-review-20261018. Original checkout /Users/levy/.codex/worktrees/1116/squares remains clean at e1f921bf0; main checkout belongs to another active agent and was not changed. Integrated385 upstream commits through2891494ee;14 original conflicts resolved, followed by two clean small merges. Pushed34fd06feaeaa374511d9c9423ca62cb7d65291bd to draftPR578. Independent Astra architecture/design review and final patch review found defects that were fixed: source-specific identity authorization, overlapping spans, native-panel request race, bounded evidence snapshot, T174 HTML size/link audit, parser callback signature and n29 historical writer replay. Source records/numeric preservation comparisons and50screenshot/25navigation checks are retained. Latestfocused checks:89result/preview tests,6writer tests(all53adopted contracts),35release-impact tests, browserfloor341Node tests. Original local broad gate did not complete; timing diagnostics remain open underthink-j13b. Final standardCI39220334742/Pages39220334772 and fullcheckpoint39220360885 are running at34fd06fea; superseded full39218248533 canceled after8passes, not a fullpass. Next entry: resolve any finalCI failures, publish prepared ReviewB and ReviewA dispositions, close fixed childbeads, update this handoff and sync. DraftPR not merged/deployed. Remaining population underthink-m7il:354unresolved spans,146PDFs awaiting fullcredit inspection. Previewhttp://127.0.0.1:8792/profiles/index.html opened in defaultbrowser. Durable evidence /Volumes/spud-ext1/agent-evidence/squares-profiles-review-20261019/; prepared ReviewB/PRbody in external task scratch tmp. No data repin needed for final tool-only fixes.
+2026-10-19 continuation: all source work is isolated in /Volumes/spud-ext1/worktrees/squares-profiles-review-20261018 on codex/profiles-upstream-review-20261018. The original checkout remains unchanged at e1f921bf0; another agent owns the main checkout.
+
+Pushed b76a24fd29bdab28b5c946adeff88313fd28eb47 to draft PR #578. Integrated 391 upstream commits through e952755bc, resolving 14 initial conflicted files and three later conflicts. Both parents' release histories survive; proposed site v0.8.0 follows v0.7.28. Data pin remains 0adba2aa6 because the latest incoming changes do not touch DATA_PATHS.
+
+Independent Astra architecture and design reviews identified and reviewed fixes for source-specific identity authorization, overlapping spans, a native-panel request race, snapshot capacity, T-174 HTML size/link auditing, a parser callback signature, historical adoption replay, and complete release-decision scopes. Review B is published at https://github.com/jlevy/squares/pull/578#pullrequestreview-5568711596. Prepared Review C covers the latest upstream integration at the current head; publish it with final receipts.
+
+Validation retained: 89 result/preview tests; six writer tests covering all 53 adoption contracts; 95 release/URL tests; 42 verifier-integration tests; browser floor including 341 Node tests; 50 screenshot contexts and 25 navigation checks. The exact post-commit release gate against e952755bc passes. The current standard validation job passes. Remaining standard CI is run 39222982076, Pages is 39222982024, and the full checkpoint is 39223503977. Superseded checkpoint attempts were canceled and are not complete passes.
+
+Next entry: wait for these exact-head checks, fix any failures, publish Review C and Review A dispositions, close the fixed child beads, update this handoff and sync. Do not merge or deploy the draft PR. Local broad validation did not complete; retain the unexplained timing failures under think-j13b. Historical population remains think-m7il: 354 unresolved spans and 146 PDFs awaiting full-credit inspection.
+
+Latest local preview was rebuilt from b76a24fd2 and opened in the default browser at http://127.0.0.1:8792/profiles/index.html. Its data-edition stamp is v0.8.0-0adba2. Durable review, design, timing and build evidence is in /Volumes/spud-ext1/agent-evidence/squares-profiles-review-20261019/. Prepared PR body and Review C are in the external task scratch tmp directory.
