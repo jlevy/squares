@@ -43,7 +43,20 @@ PAPERS = tuple(
         (
             {"GITHUB_BASE_REF": "parent-branch", "PACKING_RELEASE_BASE_REF": "local"},
             False,
-            ("--baseline-ref", "origin/parent-branch"),
+            ("--baseline-ref", "local"),
+        ),
+        (
+            {
+                "GITHUB_BASE_REF": "main",
+                "PACKING_RELEASE_BASE_REF": "a87de0cf735af2f84ce3ffaceb6d4d619bc64d80",
+            },
+            False,
+            ("--baseline-ref", "a87de0cf735af2f84ce3ffaceb6d4d619bc64d80"),
+        ),
+        (
+            {"GITHUB_BASE_REF": "main", "PACKING_RELEASE_BASE_REF": ""},
+            False,
+            ("--baseline-ref", "origin/main"),
         ),
         (
             {"GITHUB_BASE_REF": "parent-branch", "PACKING_RELEASE_BASE_REF": "local"},
@@ -88,6 +101,17 @@ def test_synopsis_selects_release_parent_without_moving_changelog_baseline(
         "--check",
         "--baseline-ref",
         "origin/main",
+    )
+
+
+def test_hosted_workflow_pins_release_base_to_pull_request_event_commit() -> None:
+    workflow = yaml.safe_load(
+        (validate.REPOSITORY_ROOT / ".github/workflows/packing-validation.yml").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert workflow["env"]["PACKING_RELEASE_BASE_REF"] == (
+        "${{ github.event_name == 'pull_request' && github.event.pull_request.base.sha || '' }}"
     )
 
 

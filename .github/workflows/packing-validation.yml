@@ -25,6 +25,8 @@ permissions:
 env:
   # Outside the checkout: receipts must not enter source scans or mutation snapshots.
   PACKING_VALIDATION_ARTIFACT_DIR: ${{ github.workspace }}-validation-artifacts
+  # Formal stacks can expose a synthetic runner base; use the PR's declared parent.
+  PACKING_RELEASE_BASE_REF: ${{ github.event_name == 'pull_request' && github.event.pull_request.base.sha || '' }}
 
 concurrency:
   # Keyed by event as well as ref, so a scheduled deep run and a push-to-main deep run --

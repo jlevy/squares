@@ -3576,10 +3576,8 @@ def _skills_mirrored(context: Context) -> str:
 def _synopsis(context: Context) -> str:
     # Each dependent layer owns its immediate parent-to-child publication cut.
     pull_request_base = context.environment.get("GITHUB_BASE_REF")
-    release_base = (
-        f"origin/{pull_request_base}"
-        if pull_request_base
-        else context.environment.get("PACKING_RELEASE_BASE_REF") or "origin/main"
+    release_base = context.environment.get("PACKING_RELEASE_BASE_REF") or (
+        f"origin/{pull_request_base}" if pull_request_base else "origin/main"
     )
     impact_baseline = (
         ("--base", "HEAD^1")
