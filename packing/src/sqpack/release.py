@@ -1482,7 +1482,14 @@ class ReleaseNoPublicChange(NamedTuple):
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
     ReleaseNoPublicChange(
         components=("paper:n11-lower-bounds-explainer",),
-        paths=("packing/frontier/results.yaml",),
+        paths=(
+            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
+            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
+            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
+            "packing/frontier/results.yaml",
+        ),
         outputs=(
             "papers/n11-lower-bounds-explainer.html",
             "papers/n11-lower-bounds-explainer.md",
@@ -1494,11 +1501,13 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "n85 lower-bound entries and last_reviewed. The explainer reads the register "
             "for its count of 217 results and of apparently or confirmed novel ones, "
             "both unchanged since the three stay previously-published, and its Figure 2 "
-            "totals from the unchanged atlas composite record. Rendering its HTML and "
-            "Markdown at the base and candidate record trees gave identical Markdown and "
-            "HTML that differs only in the position of one empty style attribute that "
-            "the browser math preparation serializes; the PDF prints that HTML. Retain "
-            "v0.4.8; no PDF redraw or byte identity of the PDF is claimed."
+            "totals from the unchanged atlas composite record. The site v0.7.33 cut "
+            "regenerated the five claim and card documents, which change only their "
+            "source-link commit and are linked from the paper, not inlined. Rendering "
+            "its HTML and Markdown at the base and candidate record trees gave identical "
+            "Markdown and HTML that differs only in the position of one empty style "
+            "attribute that the browser math preparation serializes; the PDF prints that "
+            "HTML. Retain v0.4.8; no PDF redraw or byte identity of the PDF is claimed."
         ),
     ),
     ReleaseNoPublicChange(
