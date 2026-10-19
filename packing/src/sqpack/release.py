@@ -1463,6 +1463,21 @@ class ReleaseNoPublicChange(NamedTuple):
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
     ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=("packing/campaign/result-requests.yaml",),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "Issue #538's request record marks its trajectory-timing ask done by #685 and "
+            "moves the unattributed Animate play message onto think-8vsk. Rendered at "
+            "cc058a45 with and without that change: all 42 files the survey's renderer "
+            "writes are byte-identical, and its PDF prints from that HTML, so it keeps "
+            "v0.2.3."
+        ),
+    ),
+    ReleaseNoPublicChange(
         components=(
             "paper:n11-lower-bounds-explainer",
             "paper:n11-optimality-review",
