@@ -5,7 +5,7 @@ title: "Import Mishapolk 70a033f (no issue): 12 KKT refinements below best now a
 kind: task
 status: in_progress
 priority: 1
-version: 7
+version: 8
 delegate: claude-code@vm
 labels:
   - result-import
@@ -16,7 +16,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-14T16:43:19.409Z
-updated_at: 2026-10-15T06:22:55.365Z
+updated_at: 2026-10-16T12:39:39.268Z
 started_at: 2026-10-14T23:04:32.077Z
 ---
 Mishapolk/square-packing-records 70a033f (2026-10-14T16:11:31Z), 7 commits past #593's pin 46f638c. No issue reports it. Commit message: 'Refine 14 contested certificates to ultra-precision KKT endpoints'. census.json credits 14 counts to Mykhailo Polkovskyi and 10 re-cut counts to 'Antigravity'.
@@ -56,3 +56,5 @@ Owner decided 2026-10-14: counts from first commit. It enters in report order at
 **Coordinator decisions, 2026-10-15 (relayed to this lane):** no credit for "Antigravity" (none of its counts is recorded); the measured refinement mapping (compare_lineage) is accepted as precedent, and the records PR states its basis as measured; the #593 acknowledgement goes out after the records PR merges, with the T-id, as drafted. A records lane takes branch claude/wizardly-meitner-wqn4x3-intake-1014b (head ddc7197d8) from here.
 
 **2026-10-15, registered and answered.** #612 (records-1015) merged into main at c4c690a3e: **T-186**, V0/C0, S1, recorded at 129, 154, 156, 175, 176, 204, 232, 264, 271, 302, 303 and 304 as regularizations (of T-174 at nine, T-182 at 154, T-181 at 302, T-175 at 304, basis measured), credit "Polkovskyi after Ostashev, Couzo, PingYou Ltd, Levy", evidence E-mishapolk-70a033f-certificate-report; not recorded at 153, 155, 181, 207, 209, 267, 270, 272, 305-308 (T-174 smaller). Pages run 38688821657 deployed c4c690a3e at 06:06Z (deployment 7085238377); `check_published_site --commit c4c690a3e60e613ec6c063d4f27c5f627e734ea5 --no-browser`: 4426 of 4426 checks passed. result/t-186.html reads S1 V0 C0, recorded. Relations re-derived from the packet's claim record: smallest at exactly the twelve, nearest margins 1.25e-94 (176) to 1.79e-19 (302, 304); T-174 smaller by 1.29e-39 at 153, 1.49e-99 at 207, 1.30e-23 to 1.80e-23 at the other ten. Acknowledgement posted on #593 (no issue of its own), without the 'Antigravity' question per the coordinator's decision: https://github.com/jlevy/squares/issues/593#issuecomment-6185872048 (id 6185872048, 06:21:25Z), recorded in scratchpad records-1016-replies.md (#593's request entry has no result mapping T-186; the records lane adds one or records the reply under ties-211-241). Validation think-j7f1 closed. Still open: owns T-186's next rung (independent review of the retained replay, then adoption at the twelve counts).
+
+2026-10-16 12:40Z user-eb-records-185-190: DRAFT reply for #593 (not posted; post after PR #657 merges, on the owner's word):  @Mishapolk, the twelve KKT refinements of `70a033f` (T-186) were accepted for finite feasibility by the independent review of 16 October; T-186 is now V3/C3 (S1). On 16 October the cases at 129, 154, 156, 175, 176, 204, 232, 264, 271, 302, 303 and 304 adopted them as their houses, each credited to you as a refinement of the packing it tightens, after that packing's finders (Daniil Ostashev, PingYou Ltd, Francisco Couzo, Evan Daniel and Nate Chaoweeraprasit, by count). Each re-housed count's drawing was regularized again on your witness: on your witnesses, Evan Daniel's regularizer draws the views at 129, 175 and 204 and grid-slack's at 154 and 156; 176 keeps the axis tool's view (no strong view improves on it); 232, 264, 271, 302, 303 and 304 are pending their selection (think-r3cl).

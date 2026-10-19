@@ -5,7 +5,7 @@ title: "Import Francisco Couzo: 14 campaign upper bounds (237, and 13 beyond 324
 kind: task
 status: in_progress
 priority: 1
-version: 9
+version: 10
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-14T23:35:08.750Z
-updated_at: 2026-10-16T00:36:12.376Z
+updated_at: 2026-10-16T12:39:43.465Z
 started_at: 2026-10-14T23:35:12.236Z
 ---
 Francisco Couzo (@franciscouzo) reports, in jlevy/squares#607 (filed 2026-10-14T23:18:36Z), 21 finite upper bounds plus two precision refinements, certificates at franciscouzo/square-packing 43ac7d29cfeb7b71ea1eb09939cb30b9f71850f2 submissions/2026-10-14/certificates/ (first committed 2026-10-14T19:15:09Z), comparison index upper_bounds.json at 487b05809099d8f7d006aaeb6bfc1ebe95cb8d0d. Stages 1, 2 and the stage 4 replay in the 14 October evening intake lane (branch claude/wizardly-meitner-wqn4x3-intake-607); no register, case, request, coverage, bibliography, resources README or intake-watch record edited. Registration waits for a records PR.
@@ -77,3 +77,5 @@ Registered as T-189 (V0/C0, draft S2) at 237, with 15 beyond-horizon rows (339, 
 2026-10-16 coordinator: per #627 (616/A4), this bead owns the review and adoption of T-189 and T-190 (T-189's next rung already weighs T-190); T-190's review moves here from think-7j8o.
 
 2026-10-16 coordinator (#627 review C, C3): when T-188 is reviewed, cite the seed's sha256 7d35edaa..., equal to the SHA-256 of T-175's retained dostashev-merged-bands-2026-10-13/source/records/n0211.sqcert, so the #575 credit rests on matching bytes.
+
+2026-10-16 12:40Z user-eb-records-185-190: DRAFT replies (not posted; after PR #657 merges). #607:  @franciscouzo, the independent review of 16 October accepted, for finite feasibility only: - #607's 237 (T-189, V3/C3, S3); its fifteen beyond-horizon rows rest on the import lane's replays and were not reviewed; - the 211 of `487b058` (T-188, V3/C3, S2), now the house at 211: a further arrangement of Daniil Ostashev's #575 design, five squares moving more than a tenth, so it is recorded with no regularization item; - the 237 of `4e4c8ce` (T-190, V3/C3, S2), now the house at 237, 2.40e-11 below #607's, which stays recorded as history. Two questions from the review: `certificates/n211.json` at `487b058` labels its seed issue #501, but the seed file is byte for byte Ostashev's #575 `records/n0211.sqcert`: is #575 the seed you meant? And should the `4e4c8ce` 237 be recorded after #607's, as now, or in its place? Regularization on the new witnesses: at 211 every view of both generators goes to the owner's review, so the axis tool's view is drawn for now; at 237 the selection is pending (think-r3cl).   || #506 (its answer bead think-9fjl is closed, so drafted here):  @franciscouzo, an update on the 175 of your #506 release (first committed in `f311f08`, held at `337078c`), registered as T-185. The independent stage 4 review of 16 October (docs/project/reviews/review-2026-10-16-upper-bound-imports-506-607.md) accepted it for finite feasibility only: the three retained jobs at 175 reproduced on both of this repository's maintained exact routes, and a third exact route agreed. T-185 is now V3/C3, S2 (a refinement of your #488 packing at 175, no square moving more than 0.012). Confirmed, re-implemented: one maintained route is the sqpack verifier you report running, so the independence rests on the independent rational corner checker. The bound stays superseded at 175, now by Mykhailo Polkovskyi's T-186, the case's house since 16 October. The record no longer calls your #488 packing a refinement of Ryan Xu's: measured pose by pose, it started from Xu's packing and does not pair with it one to one.

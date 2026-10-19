@@ -3,9 +3,9 @@ type: is
 id: is-01m4yrbj9wxd8hw5jndkmxa0fj
 title: "Watch reads 2026-10-15: bengreff 0699398, BuddenPing 318ab94 and squares e96e9ea, evand 1038892, wand125 afdcaac, TheSnakeFang 078789a, franciscouzo b85dee2/487b058/4e4c8ce/58a7833, for intake-watch.yaml"
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 7
+version: 10
 delegate: user-eb-intake-residue
 labels:
   - result-import
@@ -14,8 +14,12 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-15T03:05:40.412Z
-updated_at: 2026-10-16T05:13:53.892Z
+updated_at: 2026-10-16T05:47:05.300Z
 started_at: 2026-10-15T03:06:07.321Z
+closed_at: 2026-10-16T05:36:21.646Z
+close_reason: "Its reads are on main (intake-watch.yaml at e2e018f32, via #627 in stack #632); no record names it as a deferral."
+resolution: null
+duplicate_of: null
 ---
 The 15 October reads lane (think-mq0k, branch claude/wizardly-meitner-wqn4x3-reads-1015) read the watched heads the 02:30Z sweep at main 6964362b5 listed, by blobless clones, and re-read every head with git ls-remote at about 03:10Z (all unchanged). This bead holds the intake-watch.yaml reads the next records PR writes (this lane edits no record), and the read-only triage of the heads with nothing to import.
 
@@ -60,3 +64,8 @@ So 318ab94 publishes nothing new, and its sides are above the smallest report at
 All reads written to packing/campaign/intake-watch.yaml: bengreff s76 06993982 (think-osvq), BuddenPing square-packing-certificates 318ab94 and squares e96e9ea, evand 1038892, TheSnakeFang 078789a, franciscouzo b85dee2 (nothing to import; the paths the 02:30Z and 05:30Z sweeps flagged), 487b058 (packet pins it; out-of-scope paths hold nothing) and 58a7833 (think-yfoo), and wand125 through b57e667 (covers afdcaac). Close at merge.
 
 2026-10-16 ~05:25Z, overnight coordinator user-eb (epic think-hg5s): ownership transferred to user-eb-intake-residue (bead think-mu5v) from claude-code@vm (last update 2026-10-15T09:15:52.197Z), because the sweep of 05:08Z reports this bead's blocker resolved and the owner asked tonight for the intake to continue. The lane resumes the work, closes the bead if it is done, or rewrites blocked_on.
+
+2026-10-16 ~06:00Z user-eb-intake-residue (lane A, think-mu5v): resumed after the sweep of 05:08Z read #575, #596 and #586 (all closed 16 October) as this bead's waits. The work is done: every read this bead held is on main e2e018f32 in packing/campaign/intake-watch.yaml (bengreff/s76-certificate 0699398 with think-osvq; BuddenPing/square-packing-certificates 318ab94; BuddenPing/squares e96e9ea; evand 1038892; TheSnakeFang 078789a; franciscouzo b85dee2, 487b058 and 58a7833 with think-yfoo; wand125 through b57e667, which covers afdcaac), carried to main by #627 (which superseded #616) in stack #632. No record names this bead as a deferral (only a YAML comment in intake-watch.yaml). Closing.
+blocked_on: none
+
+Correction (user-eb-intake-residue, 2026-10-16T05:47Z by date -u): the '~06:xxZ' times in this lane's notes of 16 October are about an hour late; they were written between 05:30Z and 05:47Z. The site pages were read at about 05:35Z. No condition changes: every last reply named is still more than a day old.

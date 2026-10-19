@@ -5,7 +5,7 @@ title: "Import wand125: the closed-form lower bound s(N) >= a(N) for every non-s
 kind: task
 status: in_progress
 priority: 1
-version: 10
+version: 11
 delegate: serene-hopper
 labels:
   - result-import
@@ -18,7 +18,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-14T09:14:32.462Z
-updated_at: 2026-10-14T17:22:38.926Z
+updated_at: 2026-10-18T08:51:44.401Z
 started_at: 2026-10-14T09:14:41.667Z
 ---
 Found by the 2026-10-14 watch survey (think-fxs7): wand125/square-packing problems/closed-form (eb0fd19, 2026-10-13T09:36Z): s(N) >= a(N) for every non-square N >= 49, with a Rust replay checker; gives s(k^2-1), s(k^2-2), s(k^2-3) = k for k >= 8 without Nagamochi's lemma. The survey's own evaluation of a(N) from intervals.json (50-digit decimals, not the author's checker) beats the reported lower bound at 156 counts (104-116, 125-139, 148-164, 173-191, 201-220, 230-251, 261-284, 294-319) and the verified lower bound at 189. Stages 1-2, a priced replay of the author's checker, and a mathematical review of the theorem.
@@ -80,3 +80,5 @@ Coordination: the stages 1-3 imports of #521-#596 are held by the 2026-10-14 lan
 ## Validation backlog (2026-10-14, owner's cap: hold anything > 40 CPU-h)
 
 Validation beads: think-au7j, the replay4d build and calibration on the two smallest records (~1 CPU-h, runnable); think-4wgw, the 1c661b7 later revision's source hashes and structure digest (<0.1 CPU-h, runnable); think-wu73, the complete replay of 136 records (4,294 CPU-h by the source, HELD; depends on think-au7j; a proposed subset is one interval, e.g. interval 24 at 18.32 CPU-h). The whole backlog is think-lh7d.
+
+2026-10-18 W1 intake (think-xmxb): PR667 A9 notification: wand125/square-packing 3dbb4b5 (read through fbc5fc4ca042843481ec6cd3686153cfc7cd72a2) adds closed-form Lean layerA, conditional on34 LocalCovers intervals. Finite layerB not proved there. New evidence for T-180, not complete confirmation. Retain and map this source; no rebuild here.

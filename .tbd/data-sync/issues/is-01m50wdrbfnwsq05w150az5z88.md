@@ -5,7 +5,7 @@ title: "Regularization audit and repair: find every unregularized drawing (e.g. 
 kind: epic
 status: open
 priority: 1
-version: 19
+version: 25
 labels:
   - regularization
 dependencies: []
@@ -27,8 +27,13 @@ child_order_hints:
   - is-01m519myr0379ay5npb670sfat
   - is-01m51ah8z1rrf0ax7pbsfg7qpq
   - is-01m51hy396vnjkxe4726egs8x5
+  - is-01m51pj9kng0mjpdpsw877d6v4
+  - is-01m51wa1heq5bfskfrqyyeyjd7
+  - is-01m5279qrmrrbgygjevvr1ppcq
+  - is-01m529gqcg7xfzs5bn921bmvhz
+  - is-01m52d2s55c771k2jw7ek4sm4w
 created_at: 2026-10-15T22:55:15.306Z
-updated_at: 2026-10-16T05:17:39.002Z
+updated_at: 2026-10-16T13:41:38.777Z
 ---
 Owner, 2026-10-15 ~22:40Z: 'fully review to what degree regularization has been done. Right now, for example, number 176 looks highly unregularized. How did that happen, and what's necessary to regularize everything again? Let's map that out, make sure it's part of the standard intake process, and run it for all the ones where it's necessary. The records should make it evident which things are regularized, and if not, we should fix the record-keeping process as well. Create beads for all of this work.' Sequenced after the 15 October intake PRs merge (owner: 'After that').
 
@@ -50,3 +55,5 @@ NEXT after those: think-kpm3 (153, 154, 207, 211, 237, 241, 302, 304) and think-
 OWNER DECISIONS: think-l3oo lists all 11 (incl. #574/T-174 which would re-house 35 counts — hold until regularization runs or allowlist with beads; #570; #557/#565; #624; case labels n-59/n-76/n-95/n-19; #557's n-18 label).
 
 GOTCHAS: (1) site edition race — other sessions cut editions too; cut last, merge immediately on green. (2) bead-tree gate reads origin/tbd-sync: close child beads before parents or every PR's CI fails. (3) release-impact: any result-requests.yaml change needs the methods-survey no-change entry backed by a byte-identical render at link revision = main sha (helper: scratchpad render/survey_render.sh; re-create if lost). (4) #538 animate-view >400 ms timing flake: re-run once with a one-line PR comment. (5) shared 4-core host: --push tier exceeds wall caps; rely on hosted CI plus --records and focused tests. (6) gh needs NO_PROXY for github hosts; Python 3.14 via uv run --frozen from packing/; tbd via npm get-tbd@0.10.0.
+
+2026-10-16 ~13:45Z HANDOFF from the overnight coordinator user-eb: the full handoff (merge order, per-PR state, owner decisions 12-28, open beads) is in think-hg5s's notes. Nothing is merged; nothing was posted to issues except the new tracking issue #643. Regularization: #641 -> #650 (intake step; fix think-cmj7 first); stack #644 -> #653 -> #654 -> #656 -> #657; PENDING_ALLOWED is empty through #656; #657's adoption re-allowlists 7-8 counts under think-r3cl and needs the owner's word at 176 (think-l3oo 27).
