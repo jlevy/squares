@@ -88,6 +88,14 @@ class PublicationHistoryEntry(NamedTuple):
 #: for each deployment's commit, what the page it built stated.
 PUBLICATION_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.7.35",
+        first_published="October 20, 2026",
+        result_scope=(
+            "Register Evan Daniel's sub-grid n183 certificate (T-218), adopt it as the "
+            "n183 house and draw its regularized view."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.7.34",
         first_published="October 19, 2026",
         result_scope=(
@@ -471,7 +479,7 @@ PUBLICATION_STATUS = ""
 INFOGRAPHIC_HISTORY = (
     PublicationHistoryEntry(
         version="v0.6.4",
-        first_published="October 19, 2026",
+        first_published="October 20, 2026",
         result_scope=(
             "Redraw both atlas posters with Evan Daniel's n183 packing (T-218), which "
             "takes 183 off the 14 x 14 grid."
@@ -1003,6 +1011,16 @@ class ReleaseImpactDecision(NamedTuple):
 # No impact is invented retrospectively for the published baseline editions.
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
     ReleaseImpactDecision(
+        component="site",
+        previous_version="v0.7.34",
+        version="v0.7.35",
+        impact="patch",
+        reason=(
+            "Register Evan Daniel's sub-grid n183 certificate (T-218), adopt it as the "
+            "n183 house and draw its regularized view."
+        ),
+    ),
+    ReleaseImpactDecision(
         component="infographics",
         previous_version="v0.6.3",
         version="v0.6.4",
@@ -1518,6 +1536,59 @@ class ReleaseNoPublicChange(NamedTuple):
 
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
+    ReleaseNoPublicChange(
+        components=("paper:n11-optimality-review", "paper:n11-threshold-bound-review"),
+        paths=(
+            "packing/devtools/adopt_houses.py",
+            "packing/devtools/upper_bound_houses.py",
+            "packing/devtools/upper_bound_reports.py",
+            "packing/frontier/results.yaml",
+        ),
+        outputs=(
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-optimality-review.pdf",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/n11-threshold-bound-review.pdf",
+        ),
+        reason=(
+            "For PR687 (T-218 at n = 183) against main 926cd764, source review of both "
+            "reviews' HTML, Markdown and PDF producers: each reads results.yaml only "
+            "through paper_figures.ladder_records, which selects the n11 ladder rungs "
+            "LADDER_RUNGS names and holds them to LADDER_DIGEST; T-218 is an added "
+            "n183 entry outside that ladder, and no ladder row changes. The house reader, "
+            "house writer and house-source changes are not called by these producers. "
+            "Manuscripts, figures and publication metadata are unchanged. Retain v0.1.7 "
+            "and v0.1.0; no render, PDF redraw or artifact byte identity is claimed."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/devtools/adopt_houses.py",
+            "packing/devtools/upper_bound_houses.py",
+            "packing/devtools/upper_bound_reports.py",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+            "papers/square-packing-methods-survey.pdf",
+        ),
+        reason=(
+            "For PR687 (T-218 at n = 183) against main 926cd764, source review of the "
+            "survey's HTML, Markdown and PDF producers: result requests, source coverage "
+            "and results are citation targets whose existence the producer checks; "
+            "their bodies are not inlined, and every cited path remains present. The "
+            "added #680 request, n183 coverage entry and T-218 entry are not cited by the "
+            "survey. The house reader, writer and source changes do not enter its "
+            "output. Manuscript, renderer and publication metadata are unchanged. Retain "
+            "v0.2.3; no render, PDF redraw or artifact byte identity is claimed."
+        ),
+    ),
     ReleaseNoPublicChange(
         components=("paper:n11-lower-bounds-explainer",),
         paths=(
@@ -4562,7 +4633,7 @@ def validate_release_impacts(
 #: fresh render, so a link naming the build commit would fail their drift check forever. It is
 #: in no version string. It moves when the claim documents are regenerated for an edition. It
 #: must be a commit on `main`; the site's own links name `main` itself (`devtools.repo_links`).
-PUBLICATION_REVISION = "44cb20e9"
+PUBLICATION_REVISION = "9c39168e"
 
 
 def data_pathspec() -> tuple[str, ...]:
