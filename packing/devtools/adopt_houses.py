@@ -70,12 +70,17 @@ Usage, from ``packing/`` with the project interpreter::
     python -m devtools.adopt_houses             # write
     python -m devtools.adopt_houses --dry-run   # list what would move
     python -m devtools.adopt_houses --check     # hold every adopted case to its house
-    python -m devtools.adopt_houses --refresh   # what each record's writer writes now
+    python -m devtools.adopt_houses --refresh   # full replay, refusing later lower layers
+    python -m devtools.adopt_houses --refresh-openings  # only the current dated paragraph
 
 ``--refresh`` brings every adopted record's evidence roster, dated paragraph and
 certificate section to what its last pass's writer writes now, from the record that pass
-read, and every held count's note to the lifted holds; nothing another tool writes moves.
+read, and every held count's note to the lifted holds. It refuses a record whose lower
+lanes have changed since that pass, before writing any record: reconciling those later
+writers' evidence and prose needs an explicit merge rather than a historical replay.
 A record changes this way when the register gains a confirmed certificate at its count.
+For an opening-only wording correction, ``--refresh-openings`` leaves all other bytes
+alone, including evidence and prose a later lower-bound writer has added.
 
 **A later pass.** A later import adopted the same way needs:
 
@@ -1624,7 +1629,11 @@ def _lanes_differ(packing: Mapping[str, Any]) -> bool:
 
 
 def _ceiling(packing: Mapping[str, Any]) -> str:
-    """The margin's verified baseline where the lanes differ, not its retained display."""
+    """The earlier ceiling to quote: the exact verified side when its displays differ.
+
+    Otherwise retain the shared display. The exact certificate margin is stated
+    separately, since neither outward display need equal its certificate's side.
+    """
     if _lanes_differ(packing):
         return str(packing["verified_upper_bound"]["exact_form"])
     return str(packing["reported_upper_bound"]["value"])
@@ -1657,12 +1666,20 @@ def _reported_apart(move: Move) -> str:
 
 def opening(move: Move) -> str:
     n, house, credit = move.n, move.house, CREDITS[move.n]
+    earlier = (
+        "The earlier exact ceiling, "
+        if _lanes_differ(move.packing)
+        else "The earlier ceiling, displayed outward as "
+    )
     return (
         f"**House adoption, {day_words(n)}.** {credit.phrase[0].upper()}{credit.phrase[1:]} "
         f"({house.result}) is now this case’s house: its exact certificate proves "
         f"$s({n}) \\le {shown(move.side, _above(move))}$, the reported and the verified "
-        f"upper bound, `{_sci(move.selection.margin)}` below the ceiling the case held until "
-        f"then, ${_ceiling(move.packing)}$ from {_holder(move.packing)}, which stays retained "
+        "upper bound, rounded outward from its exact side. The exact certificate side "
+        "improves the previous verified exact side "
+        f"by about `{_sci(move.selection.margin)}`. {earlier}"
+        f"${_ceiling(move.packing)}$ from {_holder(move.packing)}, applied until this "
+        "adoption and stays retained "
         f"as history{_reported_apart(move)} ([the certificate](#{_anchor(move)}))."
     )
 
@@ -2556,6 +2573,15 @@ def _span(text: str, start: str, end: str) -> tuple[int, int]:
     return found, text.index(end, found)
 
 
+def refreshed_opening(move: Move, committed: str) -> str:
+    """Replace only this pass's dated opening; preserve every other writer's bytes."""
+    start, end = _span(committed, f"\n**House adoption, {day_words(move.n)}.**", "\n\n")
+    paragraph = "\n" + opening(move)
+    if _flat(committed[start:end]) == _flat(paragraph):
+        return committed
+    return committed[:start] + paragraph + committed[end:]
+
+
 def refreshed(move: Move, committed: str) -> str:
     """The committed record with what its last pass's writer writes now in the parts the
     writer alone owns: the evidence roster, priority notes, the dated paragraph and the
@@ -2565,6 +2591,16 @@ def refreshed(move: Move, committed: str) -> str:
     written = replayed_text(move)
     fence, front, rest = _split(committed)
     packing = _packing(_split(written)[1])
+    current = _packing(front)
+    if any(
+        current.get(key) != packing.get(key)
+        for key in ("reported_lower_bound", "verified_lower_bound")
+    ):
+        raise AdoptionError(
+            f"n={move.n}: full refresh refuses a later lower-bound layer; "
+            "use --refresh-openings for an opening-only correction, or reconcile "
+            "the later writer's evidence and prose explicitly"
+        )
     for key in ("evidence", "priority_notes"):
         if _packing(front).get(key) != packing.get(key):
             front = _replace(front, key, packing[key])
@@ -2603,26 +2639,33 @@ def _with_history(committed: str, written: str) -> str:
     return VERIFIER_TABLE.sub(lambda _match: table.group(), written, count=1)
 
 
-def refresh(*, write: bool) -> list[int]:
+def refresh(*, write: bool, openings_only: bool = False) -> list[int]:
     """Every record whose writer-owned text, or held note, differs from what the writer
     writes now, by count; written where `write`. Whitespace is the formatter's."""
     changed = []
+    updates: list[tuple[Path, str]] = []
     for move in replay_plan():
         path = select_houses.case_path(move.n)
         committed = path.read_text(encoding="utf-8")
-        text = refreshed(move, committed)
+        text = (
+            refreshed_opening(move, committed) if openings_only else refreshed(move, committed)
+        )
         if _flat(text) != _flat(committed):
             changed.append(move.n)
-            if write:
-                _write(path, text)
-    for n in held_counts():
-        path = select_houses.case_path(n)
-        committed = path.read_text(encoding="utf-8")
-        text = held_note(n, committed)
-        if _flat(text) != _flat(committed):
-            changed.append(n)
-            if write:
-                _write(path, text)
+            updates.append((path, text))
+    if not openings_only:
+        for n in held_counts():
+            path = select_houses.case_path(n)
+            committed = path.read_text(encoding="utf-8")
+            text = held_note(n, committed)
+            if _flat(text) != _flat(committed):
+                changed.append(n)
+                updates.append((path, text))
+    # Plan every record before the first write: a refused later layer must leave the
+    # whole batch intact, including earlier records with legitimate pending changes.
+    if write:
+        for path, text in updates:
+            _write(path, text)
     return sorted(changed)
 
 
@@ -2950,9 +2993,18 @@ def main(argv: Sequence[str] | None = None) -> int:
     mode.add_argument(
         "--refresh", action="store_true", help="write what each record's writer writes now"
     )
+    mode.add_argument(
+        "--refresh-openings",
+        action="store_true",
+        help="refresh only current adoption paragraphs, retaining all other writers' bytes",
+    )
     arguments = parser.parse_args(argv)
-    if arguments.refresh:
-        changed = refresh(write=True)
+    if arguments.refresh or arguments.refresh_openings:
+        try:
+            changed = refresh(write=True, openings_only=arguments.refresh_openings)
+        except AdoptionError as error:
+            print(f"FAIL {error}")
+            return 1
         print(f"refreshed {len(changed)} records: {', '.join(map(str, changed)) or 'none'}")
         return 0
     if arguments.check:

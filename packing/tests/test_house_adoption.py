@@ -1534,6 +1534,126 @@ def test_a_house_that_is_the_replaced_packing_keeps_what_the_record_knew_of_it(
     assert adopt.reported_bound(other)["construction_method"] == "unknown"
 
 
+@pytest.mark.parametrize(
+    ("n", "printed", "prior_exact", "expected_margin"),
+    [
+        (
+            84,
+            "9.6979347990149214",
+            Fraction(9697934799014921307163820128651, 10**30),
+            "9.70e-20",
+        ),
+        (
+            105,
+            "10.78930378374815884",
+            Fraction(
+                "107893037837481588309268366600396176597362187114244213328843657546629045"
+                "97598593330008796151"
+            )
+            / 10**90,
+            "1.08e-79",
+        ),
+    ],
+)
+def test_equal_prior_displays_keep_the_exact_margin_separate_from_the_display_gap(
+    replayed: list[adopt.Move],
+    n: int,
+    printed: str,
+    prior_exact: Fraction,
+    expected_margin: str,
+) -> None:
+    """Equal reported/verified prints still round away from the old exact certificate.
+
+    At 84 and 105 the display gap is much larger than the genuine improvement (C1 of
+    #665), so neither the new outward display nor the old print is its exact endpoint.
+    """
+    move = next(move for move in replayed if move.n == n)
+    reported = move.packing["reported_upper_bound"]
+    verified = move.packing["verified_upper_bound"]
+    assert reported["value"] == verified["value"] == printed
+    assert Fraction(str(reported["exact_form"])) == prior_exact
+    assert Fraction(str(verified["exact_form"])) == prior_exact
+    assert Fraction(printed) != prior_exact
+    margin = prior_exact - move.side
+    assert margin == move.selection.margin > 0
+    rounded = Decimal(expected_margin)
+    last_place = Fraction(Decimal(1).scaleb(int(rounded.as_tuple().exponent)))
+    assert abs(Fraction(rounded) - margin) <= last_place / 2
+    assert abs(Fraction(printed) - move.side - Fraction(rounded)) > last_place
+    assert Fraction(str(adopt.reported_bound(move)["value"])) >= move.side
+    opening = _flat(adopt.opening(move))
+    assert "upper bound, rounded outward from its exact side." in opening
+    assert (
+        "The exact certificate side improves the previous verified exact side "
+        f"by about `{expected_margin}`."
+    ) in opening
+    assert f"The earlier ceiling, displayed outward as ${printed}$ from" in opening
+    assert f"`{expected_margin}` below the ceiling" not in opening
+
+
+def test_an_opening_only_refresh_keeps_later_lower_bound_evidence_and_prose(
+    replayed: list[adopt.Move], tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """The T216 lower adoption at 108 survives an upper-layer wording correction."""
+    move = next(move for move in replayed if move.n == 108)
+    committed = select.case_path(108).read_text(encoding="utf-8")
+    marker = f"**House adoption, {adopt.day_words(108)}.**"
+    old_before, old_after = committed.split(marker, 1)
+    path = tmp_path / "n-108.md"
+    path.write_text(old_before + marker + " Stale opening.\n\n" + old_after.split("\n\n", 1)[1])
+    monkeypatch.setattr(adopt, "replay_plan", lambda: [move])
+    monkeypatch.setattr(select, "case_path", lambda _n: path)
+    assert adopt.main(["--refresh-openings"]) == 0
+    refreshed = path.read_text()
+    assert _front(refreshed) == _front(committed)
+    new_before, new_after = refreshed.split(marker, 1)
+    assert new_before == old_before
+    assert new_after.split("\n\n", 1)[1] == old_after.split("\n\n", 1)[1]
+    assert _flat(marker + new_after.split("\n\n", 1)[0]) == _flat(adopt.opening(move))
+    _n108_later_lower_projection(
+        _front(refreshed), _front(adopt.replayed_text(move)), _body(refreshed)
+    )
+    assert adopt.refreshed_opening(move, refreshed) == refreshed
+
+
+def test_a_full_refresh_refuses_a_later_lower_layer_before_writing_any_record(
+    replayed: list[adopt.Move], tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """An earlier pending opening cannot publish before n108's ownership check fails."""
+    moves = [move for move in replayed if move.n in (29, 108)]
+    assert [move.n for move in moves] == [29, 108]
+    originals = {}
+    for move in moves:
+        text = select.case_path(move.n).read_text(encoding="utf-8")
+        if move.n == 29:
+            marker = f"**House adoption, {adopt.day_words(29)}.**"
+            before, after = text.split(marker, 1)
+            text = before + marker + " Stale opening.\n\n" + after.split("\n\n", 1)[1]
+        path = tmp_path / f"n-{move.n:03d}.md"
+        path.write_text(text)
+        originals[path] = path.read_bytes()
+    monkeypatch.setattr(adopt, "replay_plan", lambda: moves)
+    monkeypatch.setattr(select, "case_path", lambda n: tmp_path / f"n-{n:03d}.md")
+    assert adopt.main(["--refresh"]) == 1
+    assert {path: path.read_bytes() for path in originals} == originals
+
+
+def test_an_opening_refresh_keeps_the_following_old_bound_explicitly_historical(
+    replayed: list[adopt.Move], tmp_path: Path
+) -> None:
+    """The earlier SQUISH upper at 258 remains history under the current house."""
+    from devtools.check_case_prose import check_case_file  # noqa: PLC0415
+
+    move = next(move for move in replayed if move.n == 258)
+    committed = select.case_path(258).read_text(encoding="utf-8")
+    path = tmp_path / "n-258.md"
+    path.write_text(adopt.refreshed_opening(move, committed))
+    assert "applied until this adoption and stays retained as history" in _flat(
+        path.read_text()
+    )
+    assert check_case_file(path) == []
+
+
 def test_where_the_replaced_lanes_differ_the_margin_is_read_from_the_verified_ceiling(
     replayed: list[adopt.Move],
 ) -> None:
@@ -1587,17 +1707,19 @@ def test_where_the_replaced_lanes_differ_the_margin_is_read_from_the_verified_ce
         margin = verified - move.side
         assert margin == move.selection.margin > 0
         opening = _flat(adopt.opening(move))
-        baseline = re.search(
-            r"below the ceiling the case held until then, \$([^$]+)\$ from", opening
-        )
+        baseline = re.search(r"The earlier exact ceiling, \$([^$]+)\$ from", opening)
         assert baseline is not None
         assert Fraction(baseline.group(1)) == verified
-        stated_margin = re.search(r"`([^`]+)` below the ceiling", opening)
+        stated_margin = re.search(
+            r"exact certificate side improves the previous verified exact side "
+            r"by about `([^`]+)`",
+            opening,
+        )
         assert stated_margin is not None
         rounded_margin = Decimal(stated_margin.group(1))
         last_place = Decimal(1).scaleb(int(rounded_margin.as_tuple().exponent))
         assert abs(Fraction(rounded_margin) - margin) <= Fraction(last_place) / 2
-        assert f"below the ceiling the case held until then, ${printed}$" not in opening
+        assert f"The earlier exact ceiling, ${printed}$ from" not in opening
         assert (
             f"the reported upper bound it replaces, ${printed}$ from {source}, {relation}"
         ) in opening
@@ -1631,7 +1753,7 @@ def test_where_the_replaced_lanes_differ_the_margin_is_read_from_the_verified_ce
                 stale[:a] + stale[a:b].replace(str(verified), str(bound["value"])) + stale[b:]
             )
         assert adopt.refreshed(move, stale) == normalized
-    # Numeric agreement, including differently padded displays, keeps the reported print.
+    # Numeric agreement keeps the shared print; the margin still uses exact sides.
     for move in replayed:
         reported_number = Decimal(str(move.packing["reported_upper_bound"]["value"]))
         verified_number = Decimal(str(move.packing["verified_upper_bound"]["value"]))

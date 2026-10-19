@@ -1563,6 +1563,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "packing/devtools/run_negative_controls.py",
             "packing/devtools/select_houses.py",
             "packing/devtools/upper_bound_houses.py",
+            "packing/frontier/n-029.md",
             "packing/frontier/n-084.md",
             "packing/frontier/n-086.md",
             "packing/frontier/n-103.md",
@@ -1592,7 +1593,9 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "including the n29 and n51 SVGs, Casson n106 source and retained SQUISH n108 "
             "facts. Changed case records, result requests, source coverage and results "
             "are citation targets whose existence the producer checks; their bodies are "
-            "not inlined. All cited paths remain present at both revisions. The "
+            "not inlined. All cited paths remain present at both revisions. The C1 "
+            "margin wording also changes the n29 citation target's current opening, "
+            "with every other byte and its T195 metadata retained. The "
             "manuscript, renderer and own publication metadata are unchanged. "
             "House-selection, regularization, result-page and control changes do not "
             "enter its output. Retain v0.2.3; no search, PDF redraw or artifact byte "
