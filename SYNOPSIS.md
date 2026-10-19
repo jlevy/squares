@@ -820,6 +820,7 @@ case or experiment separately.
 | [Fibonacci Torus Confirmation Checks](packing/cases/fibonacci_torus/README.md) | component scope and use | record | retained | — |
 | [Regularized Views Registered as Verified Upper Bounds](packing/cases/regularized_bounds/README.md) | component scope and use | record | retained | — |
 | [Regularization Runs for n = 29 on PR #622’s Witness (think-30n2)](packing/cases/regularized_drawings/think-30n2-2026-10-16/README.md) | source retention and archive policy | record | retained | — |
+| [Regularization Runs for 155, 229, 236 and 271 After the 19 October Adoption (think-ip1p)](packing/cases/regularized_drawings/think-ip1p-2026-10-19/README.md) | source retention and archive policy | record | retained | — |
 | [Issue 422 Exact Feasibility Review](docs/project/reviews/review-2026-10-07-squish-second-update-mathematics.md) | dated review record | record | retained | — |
 | [Second SQUISH Update: Complete Semantic Binding Review](docs/project/reviews/review-2026-10-07-squish-second-update-semantic-binding.md) | dated review record | record | retained | — |
 | [Mathematical review of the SQUISH October 7 follow-up](docs/project/reviews/review-2026-10-07-squish-update-mathematics.md) | dated review record | record | retained | — |

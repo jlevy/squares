@@ -390,9 +390,9 @@ _README_3MRY = (
 #: packing/cases/regularized_drawings/think-ip1p-2026-10-19/.
 _RUNIP1P = (
     ("evand-regularize", "evand-regularize-adopt-2026-10-19-n155-271-evand"),
-    ("regularize_grid_slack/1", "grid-slack-adopt-2026-10-19-n155-271-grid-0.5"),
-    ("regularize_grid_slack/1", "grid-slack-adopt-2026-10-19-n155-271-grid-1"),
-    ("regularize_grid_slack/1", "grid-slack-adopt-2026-10-19-n155-271-grid-5"),
+    ("regularize_grid_slack/1", "grid-slack-adopt-2026-10-19-n155-271-grid-deg05"),
+    ("regularize_grid_slack/1", "grid-slack-adopt-2026-10-19-n155-271-grid-deg1"),
+    ("regularize_grid_slack/1", "grid-slack-adopt-2026-10-19-n155-271-grid-deg5"),
 )
 _README_IP1P = (
     "packing/cases/regularized_drawings/think-ip1p-2026-10-19/README.md, the selection of 19 "

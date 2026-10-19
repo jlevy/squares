@@ -539,8 +539,8 @@ houses: 155 to T-197, 229 to T-199, 236 to T-218 and 271 to T-219, $4.46 \times 
 to $6.69 \times 10^{-3}$ below the earlier ones.
 Both generators ran on all four, Evan Daniel’s regularizer
 (`evand-regularize-adopt-2026-10-19-n155-271-evand`, 1,199 CPU-seconds) and grid-slack
-at 0.5, 1 and 5 degrees (`grid-slack-adopt-2026-10-19-n155-271-grid-0.5`, `-grid-1` and
-`-grid-5`, 2,758 CPU-seconds).
+at 0.5, 1 and 5 degrees (`grid-slack-adopt-2026-10-19-n155-271-grid-deg05`, `-grid-deg1`
+and `-grid-deg5`, 2,758 CPU-seconds).
 The selection draws grid-slack’s half-degree view at 155 and his same-side views at 236
 and 271. At 229 his driver draws no view, and grid-slack’s views, better than the axis
 tool’s on every goal, go to the owner’s review at row 7 (two squares’ contact counts

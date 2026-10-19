@@ -19,12 +19,12 @@ other lanes at load averages of 15 to 30:
 
 ```sh
 python -m devtools.regularize_evand run --run-dir $RUNS/adopt-2026-10-19-n155-271-evand --n 155 229 236 271 --workers 1
-python -m devtools.regularize_grid_slack --n 155 229 236 271 --run-dir $RUNS/adopt-2026-10-19-n155-271-grid-0.5
-python -m devtools.regularize_grid_slack --n 155 229 236 271 --run-dir $RUNS/adopt-2026-10-19-n155-271-grid-1 --near-axis-degrees 1
-python -m devtools.regularize_grid_slack --n 155 229 236 271 --run-dir $RUNS/adopt-2026-10-19-n155-271-grid-5 --near-axis-degrees 5
+python -m devtools.regularize_grid_slack --n 155 229 236 271 --run-dir $RUNS/adopt-2026-10-19-n155-271-grid-deg05
+python -m devtools.regularize_grid_slack --n 155 229 236 271 --run-dir $RUNS/adopt-2026-10-19-n155-271-grid-deg1 --near-axis-degrees 1
+python -m devtools.regularize_grid_slack --n 155 229 236 271 --run-dir $RUNS/adopt-2026-10-19-n155-271-grid-deg5 --near-axis-degrees 5
 python -m devtools.regularize_select --evand-run $RUNS/adopt-2026-10-19-n155-271-evand \
-  --grid-run $RUNS/adopt-2026-10-19-n155-271-grid-0.5 $RUNS/adopt-2026-10-19-n155-271-grid-1 \
-  $RUNS/adopt-2026-10-19-n155-271-grid-5 --workers 2 \
+  --grid-run $RUNS/adopt-2026-10-19-n155-271-grid-deg05 $RUNS/adopt-2026-10-19-n155-271-grid-deg1 \
+  $RUNS/adopt-2026-10-19-n155-271-grid-deg5 --workers 2 \
   --output $RUNS/adopt-2026-10-19-n155-271-selection.json \
   --markdown $RUNS/adopt-2026-10-19-n155-271-selection.md
 ```
@@ -35,6 +35,11 @@ took 29 minutes of wall at two workers.
 Then the `layer` commands the selection printed admitted the chosen views, and
 `render_regularized_atlas --update`, `default_drawings --update`, `regularized_drawings`
 and `render_results --update` recorded them.
+The grid-slack runs ran in directories named `-grid-0.5`, `-grid-1` and `-grid-5`, the
+names the selection report still prints.
+A run’s id takes no dot, so they are kept as `-grid-deg05`, `-grid-deg1` and
+`-grid-deg5`, and the 155 view was laid again from the renamed half-degree run; only its
+run id changed.
 
 ## What They Decided
 
@@ -58,8 +63,9 @@ that review.
 
 - `adopt-2026-10-19-n155-271-evand/`: the driver’s `receipt.json` and each count’s
   `report.json.gz`.
-- `adopt-2026-10-19-n155-271-grid-{0.5,1,5}/`: each run’s block, `run.json`, built by
-  `regularize_grid_slack.run_block` from its reports, and each count’s `report.json.gz`.
+- `adopt-2026-10-19-n155-271-grid-{deg05,deg1,deg5}/`: each run’s block, `run.json`,
+  built by `regularize_grid_slack.run_block` from its reports, and each count’s
+  `report.json.gz`.
 - `selection-adopt-2026-10-19-n155-271.json.gz` and `.md`: the selection’s report and
   table.
 - `review-229/`: grid-slack’s 0.5-degree drawing at 229, for the owner’s review.
