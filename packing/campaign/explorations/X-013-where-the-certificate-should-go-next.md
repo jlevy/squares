@@ -42,7 +42,7 @@ exploration:
   - packing/campaign/agendas/agenda-018-ten-hour-continuation-ladders-theorems-and-wave-two.md
   - packing/campaign/agendas/agenda-019-efficiency-first-retarget-and-deep-strategy.md
   - packing/campaign/ledger.md
-  - docs/project/handoff-2026-09-04-block-close.md
+  - docs/project/handoffs/handoff-2026-09-04-block-close.md
   - packing/src/sqpack/fractional/certificate.py
   - packing/devtools/render_certificate_reach.py
   - packing/cases/n11_fractional_certificate/certificate.json

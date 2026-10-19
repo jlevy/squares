@@ -52,6 +52,7 @@ none, and deliberately does not read the "Optimized by" sentence the hand pass r
 from __future__ import annotations
 
 import argparse
+import copy
 import functools
 import math
 import re
@@ -65,7 +66,7 @@ from typing import Any
 import pytest
 import yaml
 
-from devtools import source_supersession, validate_schemas
+from devtools import adopt_houses, source_supersession, validate_schemas
 from devtools import squish_followup_packets as update
 from devtools import squish_second_update_packets as second
 from devtools.apply_upper_bound_packets import PREVIOUS_HEADING, earlier_reports, normalized
@@ -115,6 +116,7 @@ from devtools.generate_frontier_case import (
     write_record,
 )
 from sqpack.assurance import check_case_semantics
+from sqpack.witness import witness_document
 from sqpack.yamlio import safe_load
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
@@ -148,6 +150,10 @@ NOT_REPRODUCED = {
     "packing.rigidity": (
         "left null on purpose: the translation-escape screen and the rigidity assessment "
         "write this field later in the promotion path"
+    ),
+    "packing.regularization": (
+        "never drafted: devtools.regularized_drawings writes it from the regularized "
+        "layer's index, and its own check holds it there"
     ),
 }
 #: Cases whose prose is bespoke rather than templated, and why.
@@ -219,6 +225,11 @@ def _pre_ryxu_records() -> dict[int, dict[str, Any]]:
     if gupta.HISTORY.exists():
         for row in gupta.read_history():
             rows.setdefault(row["n"], row)
+    # The records the house adoption of 11 October 2026 moved, as they stood before it.
+    # The earliest retained state wins, and this archive keeps no house: one is rebuilt
+    # from its own packet where a test needs it (think-fvz4).
+    for n, text in adopt_houses.read_history().items():
+        rows.setdefault(n, {"n": n, "frontier": text})
     return rows
 
 
@@ -237,13 +248,21 @@ def _before_ryxu(n: int, monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> str
     historical_coverage = tmp_path / "historical-source-selection.yaml"
     historical_coverage.write_text(yaml.safe_dump(coverage, sort_keys=False))
     monkeypatch.setattr(source_supersession, "COVERAGE", historical_coverage)
-    if n == 105:
+    if n in (105, 292):
         from devtools import refinement_house_links as houses  # noqa: PLC0415
 
         custody = tmp_path / "historical-refinement"
         custody.mkdir()
-        house_path = custody / "n-105.yaml"
-        house_path.write_text(history[n]["house"])
+        house_path = custody / f"n-{n:03d}.yaml"
+        if "house" in history[n]:
+            house_path.write_text(history[n]["house"])
+        else:
+            rows = houses.house.shared.roster(
+                houses.house.shared.read_xz_receipt(houses.METADATA), houses.NUMBERS
+            )
+            witness = houses.packets.to_witness(houses.source(n), n)
+            witness.update(copy.deepcopy(rows[n]["metadata"]))
+            house_path.write_text(witness_document(witness, schema="../witness.schema.yaml"))
         metadata = custody / houses.METADATA.name
         metadata.write_bytes(houses.METADATA.read_bytes())
         monkeypatch.setattr(houses, "REPO", tmp_path)
@@ -520,11 +539,14 @@ def test_regenerates_a_hand_written_record_field_by_field(n: int) -> None:
         if verdict != "reproduced":
             print(f"  {verdict}: {path}")
     assert failures == [], "\n".join(failures)
-    # The allowlists are not a place to hide a growing set of exceptions: exactly one
-    # front-matter block is left for a later step, and it is `rigidity`.
+    # The allowlists are not a place to hide a growing set of exceptions: exactly two
+    # front-matter blocks are left for a later step, `rigidity` and the generated
+    # `regularization` note of a count the regularized layer draws.
     unreproduced = [path for path, verdict in verdicts.items() if verdict == "not reproduced"]
     assert unreproduced, "the rigidity block should be reported, not silently absent"
-    assert all(path.startswith("packing.rigidity") for path in unreproduced), unreproduced
+    assert all(
+        path.startswith(("packing.rigidity", "packing.regularization")) for path in unreproduced
+    ), unreproduced
 
 
 @pytest.mark.parametrize("n", [68, 105, 292])
@@ -588,7 +610,8 @@ def test_the_whole_record_is_byte_identical_apart_from_the_allowlist(n: int) -> 
     if n in BODY_NOT_REPRODUCED:
         return
     # Drop the rigidity block from the committed record and the `rigidity: null` line
-    # from the generated one; nothing else may differ. The generator's own `--check`
+    # from the generated one, and the committed record's generated regularization note;
+    # nothing else may differ. The generator's own `--check`
     # makes exactly this allowance, and uses this function to make it.
     stripped = without_rigidity(committed)
     assert without_rigidity(generated) == stripped

@@ -1,0 +1,2 @@
+n=237 couzo-certificates-2026-10-14 vs mishapolk-records-2026-10-14: side diff -1.014e-04; best symmetry 1: max centre distance 3.314e-02; within 1e-6: 1, 1e-3: 195, 0.1: 237 of 237; tangents moved > 1e-6: n/a
+n=237 couzo-certificates-2026-10-14 vs couzo-certificates-2026-10-10: side diff -3.460e-04; best symmetry 1: max centre distance 2.127e-01; within 1e-6: 0, 1e-3: 127, 0.1: 230 of 237; tangents moved > 1e-6: n/a

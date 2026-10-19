@@ -832,7 +832,7 @@ decisions that changed the plan above:
   reviewed, confirmed or incomplete), the filter bar’s Standing select is a Status
   select, and *superseded* stays as its own mark and its own checkbox.
   The proposal, the status of every result and the choices left to the owner are in
-  [the result-status plan](plan-2026-10-01-result-status.md) (`think-d04u`,
+  [the result-status plan](../done/plan-2026-10-01-result-status.md) (`think-d04u`,
   `think-ai94`).
 - **One record per case, at an address of its own** (2026-10-02 and 03, `think-t21m`).
   Each case has a record file a reader can share, `cases/11.html`, which the record page

@@ -40,6 +40,9 @@ from devtools import reachable_tests
 def test_walker_evidence_discards_comments_but_keeps_executable_inputs(
     tmp_path: Path, source: str, *, expected: bool
 ) -> None:
+    # Failed-only tmp retention may reuse a passed case's directory. Production scans
+    # one static tree, but each parameter here writes new source at the same path.
+    reachable_tests._walker_evidence.cache_clear()  # noqa: SLF001
     test = tmp_path / "test_walker.py"
     test.write_text(source, encoding="utf-8")
     assert reachable_tests._walker_evidence(test) is expected  # noqa: SLF001

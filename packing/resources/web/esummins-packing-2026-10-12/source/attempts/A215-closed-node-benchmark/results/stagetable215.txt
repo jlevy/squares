@@ -1,0 +1,10 @@
+stage                            prof_k5_16_i  prof_k5_16_i
+TOTAL (s)                                39.9          35.0
+coarse fixed point                   10.4 26.1%      10.1 28.8%
+  ... normalise (page)               10.7 26.7%      10.3 29.6%
+option table (build_options)         20.8 52.2%      22.1 63.1%
+  ... ROLE-REACH                      3.8  9.6%       5.2 14.9%
+MBox.rebuild (K') [outer]             7.0 17.6%       7.2 20.7%
+  ... pieces_poly                     6.6 16.5%       6.7 19.3%
+  ... polycore.build                  6.2 15.5%       6.3 18.0%
+_clip_rect_obstacle [outer]           4.3 10.7%       3.6 10.4%

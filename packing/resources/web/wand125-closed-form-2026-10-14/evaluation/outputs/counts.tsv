@@ -1,0 +1,265 @@
+n	k	interval	form	a_floor_15	reported_lb	reported_lb_kind	reported_lb_source	rel_reported_lb	verified_lb	verified_lb_evidence	rel_verified_lb	verified_ub	rel_verified_ub	reported_ub	rel_reported_ub	case_status
+50	7	4	root	7.126165352923825	7.4	counting	[wand125 point and mixed bounds 2026-09-28]	<	7.4	E-n050-wand125-mixed-740-source-replay	<	7.57142857142858	<	7.57142857142857	<	open
+51	7	6	root	7.258665168771065	7.47	counting	[wand125 mixed bounds 2026-10-04]	<	7.47	E-n051-wand125-mixed-747-sqverify-fast-replay	<	7.6903559372884918	<	7.6903559372884918	<	open
+52	7	6	root	7.368766539474442	7.55	counting	[wand125 mixed bounds 2026-10-03]	<	7.55	E-n052-wand125-mixed-755-sqverify-fast-replay	<	7.70710678118654752440084436210485	<	7.70710678118654	<	open
+53	7	10	cap k + d1	7.420000000000000	7.6275	counting	[wand125 mixed bounds evening 2026-10-04]	<	7.6275	E-n053-wand125-mixed-76275-sqverify-fast-replay	<	7.82287565553230	<	7.82287565553229	<	open
+54	7	22	root	7.477825168321169	7.685	counting	[wand125 mixed bounds evening 2026-10-04]	<	7.685	E-n054-wand125-mixed-7685-sqverify-fast-replay	<	7.84666719284349	<	7.84666719284348	<	open
+55	7	27	root	7.582405163038562	7.728	counting	[wand125 mixed bounds 2026-10-03]	<	7.728	E-n055-wand125-mixed-7728-sqverify-fast-replay	<	7.94577100750392	<	7.94577100750391	<	open
+56	7	29	root	7.646996135665670	7.8025	counting	[wand125 mixed bounds 2026-10-04]	<	7.8025	E-n056-wand125-mixed-78025-sqverify-fast-replay	<	8	<	8.0	<	open
+57	7	32	root	7.735135244288539	7.8725	counting	[wand125 mixed bounds 2026-10-04]	<	7.8725	E-n057-wand125-mixed-78725-sqverify-fast-replay	<	8	<	8.0	<	open
+58	7	32	cap k + d1	7.800000000000000	7.935	counting	[wand125 mixed bounds evening 2026-10-04]	<	7.935	E-n058-wand125-mixed-7935-sqverify-fast-replay	<	8	<	8.0	<	open
+59	7	33	root	7.866037831402066	8	counting	[wand125 exact covers 2026-10-01]	<	8	E-n059-wand125-mixed-cover-zmx2-replay	<	8	<	8.0	<	proved
+60	7	33	root	7.950750013338217	8	counting	[evand square-packing 2026-10-01]	<	8	E-n060-evand-mixed-cover-zmx2-replay	<	8	<	8.0	<	proved
+61	7	34	cap k + d1	8.000000000000000	8	monotonicity	[evand square-packing 2026-10-01]	=	8	E-n060-evand-mixed-cover-zmx2-replay	=	8	=	8.0	=	proved
+62	7	34	cap k + d1	8.000000000000000	8	nagamochi	[Nagamochi 2005]	=	8	E-chelokot-square-minus-two-lean	=	8	=	8.0	=	proved
+63	7	34	cap k + d1	8.000000000000000	8	nagamochi	[Nagamochi 2005]	=	8	E-karakus-strip-lower E-karakus-strip-measure-interval	=	8	=	8.0	=	proved
+65	8	3	root	8.102316135573189	8.35	counting	[wand125 mixed bounds 2026-10-01]	<	8.35	E-n065-wand125-mixed-835-source-replay	<	8.53553390593273762200422181052425	<	8.53553390593273	<	open
+66	8	6	root	8.211312646606120	8.43	counting	[wand125 mixed bounds finer net 2026-10-05]	<	8.43	E-n066-wand125-mixed-843-sqverify-fast-replay	<	8.65685424949238019520675489683879	<	8.65685424949238	<	open
+67	8	6	root	8.302479495254855	8.48	counting	[wand125 mixed bounds 2026-10-05]	<	8.48	E-n067-wand125-mixed-848-sqverify-fast-replay	<	8.70710678118654752440084436210485	<	8.70710678118654	<	open
+68	8	7	root	8.393637908630056	8.51	counting	[wand125 rectangle bounds 2026-10-01]	<	8.51	E-wand125-rectangle-2026-10-01-source-replay	<	8.79879523721828390257668096702139408352101903022787926324037	<	8.79879523721828390257668096702139408352101903022787926324037	<	open
+69	8	11	root	8.421890093808379	8.62	counting	[wand125 mixed bounds 2026-10-04]	<	8.62	E-n069-wand125-mixed-862-sqverify-fast-replay	<	8.82719465572974	<	8.82719465572973	<	open
+70	8	23	root	8.480487874373570	8.6575	counting	[wand125 mixed bounds evening 2026-10-04]	<	8.6575	E-n070-wand125-mixed-86575-sqverify-fast-replay	<	8.8809603715555796	<	8.8809603715555796	<	open
+71	8	27	root	8.568564648510960	8.721	counting	[wand125 mixed bounds evening 2026-10-04]	<	8.721	E-n071-wand125-mixed-8721-sqverify-fast-replay	<	8.94407155757032	<	8.94407155757031	<	open
+72	8	29	root	8.625600124256828	8.76	counting	[wand125 mixed bounds 2026-10-04]	<	8.76	E-n072-wand125-mixed-876-sqverify-fast-replay	<	9	<	9.0	<	open
+73	8	32	root	8.700413401270763	8.813	counting	[wand125 mixed bounds evening 2026-10-04]	<	8.813	E-n073-wand125-mixed-8813-sqverify-fast-replay	<	9	<	9.0	<	open
+74	8	32	root	8.774035715427555	8.8675	counting	[wand125 mixed bounds 2026-10-03]	<	8.8675	E-n074-wand125-mixed-88675-sqverify-fast-replay	<	9	<	9.0	<	open
+75	8	33	root	8.812470266011852	8.94	counting	[wand125 mixed bounds 2026-10-04]	<	8.94	E-n075-wand125-mixed-894-sqverify-fast-replay	<	9	<	9.0	<	open
+76	8	33	root	8.885538177412752	8.965	counting	[wand125 mixed bounds evening 2026-10-04]	<	8.965	E-n076-wand125-mixed-8965-sqverify-fast-replay	<	9	<	9.0	<	open
+77	8	33	root	8.957838138379263	9	counting	[wand125 exact covers 2026-10-01]	<	9	E-n077-wand125-mixed-cover-zmx2-replay	<	9	<	9.0	<	proved
+78	8	34	cap k + d1	9.000000000000000	9	counting	[evand square-packing 2026-10-01]	=	9	E-n077-wand125-mixed-cover-zmx2-replay	=	9	=	9.0	=	proved
+79	8	34	cap k + d1	9.000000000000000	9	nagamochi	[Nagamochi 2005]	=	9	E-chelokot-square-minus-two-lean	=	9	=	9.0	=	proved
+80	8	34	cap k + d1	9.000000000000000	9	nagamochi	[Nagamochi 2005]	=	9	E-karakus-strip-lower E-karakus-strip-measure-interval	=	9	=	9.0	=	proved
+82	9	3	root	9.084905394813773	9.32	counting	[wand125 linear n82 2026-10-02]	<	9.32	E-n082-wand125-linear-932-source-replay	<	9.53553390593273762200422181052425	<	9.53553390593273	<	open
+83	9	5	root	9.167031146392139	9.37	counting	[wand125 mixed bounds afternoon 2026-10-02]	<	9.37	E-n083-wand125-mixed-937-source-replay E-n083-wand125-mixed-937-sqverify-fast-replay	<	9.63475764863109	<	9.63475764863108	<	open
+84	9	6	root	9.255992747615630	9.411	counting	[wand125 mixed bounds 2026-10-05]	<	9.411	E-n084-wand125-mixed-9411-sqverify-fast-replay	<	9.6979347990149214	<	9.6979347990149214	<	open
+85	9	6	root	9.332657770834547	9.46	counting	[wand125 mixed bounds afternoon 2026-10-02]	<	9.46	E-n085-wand125-mixed-946-source-replay E-n085-wand125-mixed-946-sqverify-fast-replay	<	9.74264068711928514640506617262909	<	9.74264068711928	<	open
+86	9	7	cap k + d1	9.400000000000000	9.503	counting	[wand125 mixed bounds 2026-10-04]	<	9.503	E-n086-wand125-mixed-9503-sqverify-fast-replay	<	9.8205354074967423	<	9.8205354074967423	<	open
+87	9	13	root	9.430219350460223	9.58	counting	[wand125 mixed bounds evening 2026-10-04]	<	9.58	E-n087-wand125-mixed-958-sqverify-fast-replay	<	9.83881526994827	<	9.83881526994826	<	open
+88	9	23	root	9.482474593778512	9.62	counting	[wand125 mixed bounds evening 2026-10-04]	<	9.62	E-n088-wand125-mixed-962-sqverify-fast-replay	<	9.8824510304812469	<	9.8824510304812469	<	open
+89	9	27	root	9.558687934082677	9.65	counting	[wand125 mixed bounds 2026-10-03]	<	9.65	E-n089-wand125-mixed-965-sqverify-fast-replay	<	9.94974746830583267080591053473394	<	9.94974746830583	<	open
+90	9	28	root	9.608267535030190	9.73	counting	[wand125 mixed bounds evening 2026-10-04]	<	9.73	E-n090-wand125-mixed-973-sqverify-fast-replay	<	10	<	10.0	<	open
+91	9	30	root	9.673650995987939	9.7625	counting	[wand125 mixed bounds evening 2026-10-04]	<	9.7625	E-n091-wand125-mixed-97625-sqverify-fast-replay	<	10	<	10.0	<	open
+92	9	32	root	9.738951006585042	9.77	counting	[wand125 mixed bounds 2026-10-03]	<	9.77	E-n092-wand125-mixed-977-sqverify-fast-replay	<	10	<	10.0	<	open
+93	9	32	cap k + d1	9.800000000000000	9.88	counting	[wand125 mixed bounds 2026-10-04]	<	9.88	E-n093-wand125-mixed-988-sqverify-fast-replay	<	10	<	10.0	<	open
+94	9	33	root	9.836455933431970	9.95	counting	[wand125 mixed bounds evening 2026-10-04]	<	9.95	E-n094-wand125-mixed-995-sqverify-fast-replay	<	10	<	10.0	<	open
+95	9	33	root	9.900051376441133	9.965	counting	[wand125 mixed bounds 2026-10-04]	<	9.965	E-n095-wand125-mixed-9965-sqverify-fast-replay	<	10	<	10.0	<	open
+96	9	33	root	9.963138561464937	10	counting	[evand square-packing 2026-10-03]	<	9.97	E-n096-wand125-mixed-997-sqverify-fast-replay	<	10	<	10.0	<	open
+97	9	34	cap k + d1	10.000000000000000	10	counting	[evand square-packing 2026-10-01]	=	10	E-k2m3-evand-valid7-qx2-replay E-k2m3-evand-bentz-lean-build	=	10	=	10.0	=	proved
+98	9	34	cap k + d1	10.000000000000000	10	nagamochi	[Nagamochi 2005]	=	10	E-chelokot-square-minus-two-lean	=	10	=	10.0	=	proved
+99	9	34	cap k + d1	10.000000000000000	10	nagamochi	[Nagamochi 2005]	=	10	E-karakus-strip-lower E-karakus-strip-measure-interval	=	10	=	10.0	=	proved
+101	10	3	root	10.072531613729465	10.28	counting	[wand125 linear certificates 2026-10-02]	<	10.28	E-n101-wand125-linear-1028-source-replay	<	10.53553390593274	<	10.53553390593273	<	open
+102	10	4	root	10.143640925822392	10.28	monotonicity	[wand125 linear certificates 2026-10-02]	<	10.28	E-n101-wand125-linear-1028-source-replay	<	10.6058286964315784	<	10.6058286964315784	<	open
+103	10	6	root	10.221706795964920	10.28	monotonicity	[wand125 linear certificates 2026-10-02]	<	10.28	E-n101-wand125-linear-1028-source-replay	<	10.6792320473613065	<	10.6792320473613065	<	open
+104	10	6	root	10.288527854902856	10.28	monotonicity	[wand125 linear certificates 2026-10-02]	>	10.28	E-n101-wand125-linear-1028-source-replay	>	10.70710678118655	<	10.70710678118654	<	open
+105	10	6	root	10.354760059211635	10.28	monotonicity	[wand125 linear certificates 2026-10-02]	>	10.28	E-n101-wand125-linear-1028-source-replay	>	10.7893037837481589	<	10.7893037837481589	<	open
+106	10	8	root	10.403976649170868	10.32737905308	nagamochi	[Nagamochi 2005]	>	10.3107084351	E-karakus-strip-lower E-karakus-strip-measure-interval	>	10.822908044132847555194436943331	<	10.822908044132847555194436943331	<	open
+107	10	14	root	10.436790394042294	10.38083151964	nagamochi	[Nagamochi 2005]	>	10.3615414616	E-karakus-strip-lower E-karakus-strip-measure-interval	>	10.84666719284349	<	10.84666719284348	<	open
+108	10	23	root	10.484093855851092	10.43398113205	nagamochi	[Nagamochi 2005]	>	10.4121138007	E-karakus-strip-lower E-karakus-strip-measure-interval	>	10.9048210123203565	<	10.9048210123203565	<	open
+109	10	27	root	10.551290369783276	10.4868329805	nagamochi	[Nagamochi 2005]	>	10.4624294225	E-karakus-strip-lower E-karakus-strip-measure-interval	>	10.94974746830584	<	10.94974746830583	<	open
+110	10	27	cap k + d1	10.600000000000000	10.53939201416	nagamochi	[Nagamochi 2005]	>	10.5124921972	E-karakus-strip-lower E-karakus-strip-measure-interval	>	10.996783396631591639612746267957	<	10.996783396631591639612746267957	<	open
+111	10	30	root	10.654002473631688	10.59166304662	nagamochi	[Nagamochi 2005]	>	10.5623058987	E-karakus-strip-lower E-karakus-strip-measure-interval	>	11	<	11.0	<	open
+112	10	32	root	10.711734195583848	10.64365076099	nagamochi	[Nagamochi 2005]	>	10.611874208	E-karakus-strip-lower E-karakus-strip-measure-interval	>	11	<	11.0	<	open
+113	10	32	root	10.768588840688457	10.69535971483	nagamochi	[Nagamochi 2005]	>	10.6612007164	E-karakus-strip-lower E-karakus-strip-measure-interval	>	11	<	11.0	<	open
+114	10	32	cap k + d1	10.800000000000000	10.7467943448	nagamochi	[Nagamochi 2005]	>	10.7102889283	E-karakus-strip-lower E-karakus-strip-measure-interval	>	11	<	11.0	<	open
+115	10	33	root	10.854957122979241	10.79795897113	nagamochi	[Nagamochi 2005]	>	10.7591422643	E-karakus-strip-lower E-karakus-strip-measure-interval	>	11	<	11.0	<	open
+116	10	33	root	10.911282048961570	10.84885780179	nagamochi	[Nagamochi 2005]	>	10.807764064	E-karakus-strip-lower E-karakus-strip-measure-interval	>	11	<	11.0	<	open
+117	10	33	root	10.967252955908287	11	counting	[evand square-packing 2026-10-03]	<	10.8561575886	E-karakus-strip-lower E-karakus-strip-measure-interval	>	11	<	11.0	<	open
+118	10	34	cap k + d1	11.000000000000000	11	counting	[evand square-packing 2026-10-01]	=	11	E-k2m3-evand-valid7-qx2-replay E-k2m3-evand-bentz-lean-build	=	11	=	11.0	=	proved
+119	10	34	cap k + d1	11.000000000000000	11	nagamochi	[Nagamochi 2005]	=	11	E-chelokot-square-minus-two-lean	=	11	=	11.0	=	proved
+120	10	34	cap k + d1	11.000000000000000	11	nagamochi	[Nagamochi 2005]	=	11	E-karakus-strip-lower E-karakus-strip-measure-interval	=	11	=	11.0	=	proved
+122	11	3	root	11.063292990652752	11.22928087555	unavoidable-points	[Friedman DS7]	<	11.0475115548	E-karakus-strip-lower E-karakus-strip-measure-interval	>	11.53553390593274	<	11.53553390593273	<	open
+123	11	4	root	11.125578550958613	11.22928087555	monotonicity	[Friedman DS7]	<	11.0948100502	E-karakus-strip-lower E-karakus-strip-measure-interval	>	11.5913781454976982	<	11.5913781454976982	<	open
+124	11	5	root	11.187785572436690	11.22928087555	monotonicity	[Friedman DS7]	<	11.1418983268	E-karakus-strip-lower E-karakus-strip-measure-interval	>	11.65685424949239	<	11.65685424949238	<	open
+125	11	6	root	11.254579836930519	11.22928087555	monotonicity	[Friedman DS7]	>	11.1887791632	E-karakus-strip-lower E-karakus-strip-measure-interval	>	11.70710678118655	<	11.70710678118654	<	open
+126	11	6	root	11.313323850997974	11.24695076595	nagamochi	[Nagamochi 2005]	>	11.2354552767	E-karakus-strip-lower E-karakus-strip-measure-interval	>	11.7426406871192852	<	11.7426406871192852	<	open
+127	11	6	root	11.371666575347155	11.29563014098	nagamochi	[Nagamochi 2005]	>	11.2819293264	E-karakus-strip-lower E-karakus-strip-measure-interval	>	11.8108787875891799	<	11.8108787875891799	<	open
+128	11	10	root	11.410198096219834	11.34408043278	nagamochi	[Nagamochi 2005]	>	11.3282039138	E-karakus-strip-lower E-karakus-strip-measure-interval	>	11.82509196821369	<	11.82509196821368	<	open
+129	11	15	root	11.442206611833467	11.39230484541	nagamochi	[Nagamochi 2005]	>	11.3742815854	E-karakus-strip-lower E-karakus-strip-measure-interval	>	11.8720298490811800	<	11.8720298490811800	<	open
+130	11	24	root	11.485540560656512	11.44030650891	nagamochi	[Nagamochi 2005]	>	11.4201648339	E-karakus-strip-lower E-karakus-strip-measure-interval	>	11.9044830325157865	<	11.9044830325157865	<	open
+131	11	27	root	11.545544735188575	11.4880884817	nagamochi	[Nagamochi 2005]	>	11.4658560997	E-karakus-strip-lower E-karakus-strip-measure-interval	>	11.9496595880358604	<	11.9496595880358604	<	open
+132	11	27	cap k + d1	11.600000000000000	11.53565375285	nagamochi	[Nagamochi 2005]	>	11.5113577727	E-karakus-strip-lower E-karakus-strip-measure-interval	>	11.9856801988458089	<	11.985680198845808811522231964102	<	open
+133	11	29	root	11.638087664064484	11.58300524425	nagamochi	[Nagamochi 2005]	>	11.5566721937	E-karakus-strip-lower E-karakus-strip-measure-interval	>	12	<	12.0	<	open
+134	11	31	root	11.689565283522903	11.63014581273	nagamochi	[Nagamochi 2005]	>	11.6018016555	E-karakus-strip-lower E-karakus-strip-measure-interval	>	12	<	12.0	<	open
+135	11	32	root	11.741207221524213	11.67707825203	nagamochi	[Nagamochi 2005]	>	11.6467484048	E-karakus-strip-lower E-karakus-strip-measure-interval	>	12	<	12.0	<	open
+136	11	32	root	11.792119270580817	11.72380529476	nagamochi	[Nagamochi 2005]	>	11.6915146427	E-karakus-strip-lower E-karakus-strip-measure-interval	>	12	<	12.0	<	open
+137	11	33	root	11.818850665594020	11.77032961426	nagamochi	[Nagamochi 2005]	>	11.7361025271	E-karakus-strip-lower E-karakus-strip-measure-interval	>	12	<	12.0	<	open
+138	11	33	root	11.869672935882783	11.81665382639	nagamochi	[Nagamochi 2005]	>	11.7805141726	E-karakus-strip-lower E-karakus-strip-measure-interval	>	12	<	12.0	<	open
+139	11	33	root	11.920234683432368	11.8627804912	nagamochi	[Nagamochi 2005]	>	11.8247516529	E-karakus-strip-lower E-karakus-strip-measure-interval	>	12	<	12.0	<	open
+140	11	33	root	11.970539874073792	12	counting	[evand square-packing 2026-10-03]	<	11.8688170009	E-karakus-strip-lower E-karakus-strip-measure-interval	>	12	<	12.0	<	open
+141	11	34	cap k + d1	12.000000000000000	12	counting	[evand square-packing 2026-10-01]	=	12	E-k2m3-evand-valid7-qx2-replay E-k2m3-evand-bentz-lean-build	=	12	=	12.0	=	proved
+142	11	34	cap k + d1	12.000000000000000	12	nagamochi	[Nagamochi 2005]	=	12	E-chelokot-square-minus-two-lean	=	12	=	12.0	=	proved
+143	11	34	cap k + d1	12.000000000000000	12	nagamochi	[Nagamochi 2005]	=	12	E-karakus-strip-lower E-karakus-strip-measure-interval	=	12	=	12.0	=	proved
+145	12	3	root	12.056135347199931	12.21386694779	unavoidable-points	[Friedman DS7]	<	12.0433963806	E-karakus-strip-lower E-karakus-strip-measure-interval	>	12.53553390593274	<	12.53553390593273	<	open
+146	12	3	root	12.112522118312793	12.21386694779	monotonicity	[Friedman DS7]	<	12.0866302262	E-karakus-strip-lower E-karakus-strip-measure-interval	>	12.5837822039510463	<	12.5837822039510463	<	open
+147	12	5	root	12.166909448352166	12.21386694779	monotonicity	[Friedman DS7]	<	12.1297033496	E-karakus-strip-lower E-karakus-strip-measure-interval	>	12.65685424949239	<	12.65685424949238	<	open
+148	12	6	root	12.227693347911063	12.21386694779	monotonicity	[Friedman DS7]	>	12.1726175299	E-karakus-strip-lower E-karakus-strip-measure-interval	>	12.65685424949239	<	12.65685424949238	<	open
+149	12	6	root	12.280426986747428	12.22497216032	nagamochi	[Nagamochi 2005]	>	12.2153745138	E-karakus-strip-lower E-karakus-strip-measure-interval	>	12.70710678118655	<	12.70710678118654	<	open
+150	12	6	root	12.332869760395431	12.26942766958	nagamochi	[Nagamochi 2005]	>	12.2579760163	E-karakus-strip-lower E-karakus-strip-measure-interval	>	12.77817459305203	<	12.77817459305202	<	open
+151	12	7	root	12.385316995022649	12.31370849898	nagamochi	[Nagamochi 2005]	>	12.3004237212	E-karakus-strip-lower E-karakus-strip-measure-interval	>	12.82287565553230	<	12.82287565553229	<	open
+152	12	10	root	12.415704589400421	12.3578166916	nagamochi	[Nagamochi 2005]	>	12.3427192823	E-karakus-strip-lower E-karakus-strip-measure-interval	>	12.830718800976609954993823643412	<	12.830718800976609954993823643412	<	open
+153	12	16	root	12.446832330892889	12.40175425099	nagamochi	[Nagamochi 2005]	>	12.384864324	E-karakus-strip-lower E-karakus-strip-measure-interval	>	12.8700138504070441	<	12.8700138504070441	<	open
+154	12	24	root	12.486669250021968	12.44552314225	nagamochi	[Nagamochi 2005]	>	12.4268604418	E-karakus-strip-lower E-karakus-strip-measure-interval	>	12.9230702023011408	<	12.9230702023011408	<	open
+155	12	27	root	12.540954306468783	12.48912529307	nagamochi	[Nagamochi 2005]	>	12.4687092035	E-karakus-strip-lower E-karakus-strip-measure-interval	>	12.9524254069584562	<	12.9524254069584562	<	open
+156	12	27	root	12.591233265143578	12.53256259467	nagamochi	[Nagamochi 2005]	>	12.5104121494	E-karakus-strip-lower E-karakus-strip-measure-interval	>	12.9791726136444261	<	12.9791726136444261	<	open
+157	12	29	root	12.625379072825314	12.57583690279	nagamochi	[Nagamochi 2005]	>	12.5519707931	E-karakus-strip-lower E-karakus-strip-measure-interval	>	13	<	13.0	<	open
+158	12	30	root	12.671719261728602	12.61895003862	nagamochi	[Nagamochi 2005]	>	12.5933866224	E-karakus-strip-lower E-karakus-strip-measure-interval	>	13	<	13.0	<	open
+159	12	32	root	12.718840536313777	12.66190378969	nagamochi	[Nagamochi 2005]	>	12.6346610995	E-karakus-strip-lower E-karakus-strip-measure-interval	>	13	<	13.0	<	open
+160	12	32	root	12.765153164156925	12.70469991071	nagamochi	[Nagamochi 2005]	>	12.6757956618	E-karakus-strip-lower E-karakus-strip-measure-interval	>	13	<	13.0	<	open
+161	12	32	cap k + d1	12.800000000000000	12.74734012447	nagamochi	[Nagamochi 2005]	>	12.7167917228	E-karakus-strip-lower E-karakus-strip-measure-interval	>	13	<	13.0	<	open
+162	12	33	root	12.835590944726155	12.78982612255	nagamochi	[Nagamochi 2005]	>	12.7576506721	E-karakus-strip-lower E-karakus-strip-measure-interval	>	13	<	13.0	<	open
+163	12	33	root	12.881662973236002	12.83215956619	nagamochi	[Nagamochi 2005]	>	12.7983738762	E-karakus-strip-lower E-karakus-strip-measure-interval	>	13	<	13.0	<	open
+164	12	33	root	12.927540649712385	12.87434208703	nagamochi	[Nagamochi 2005]	>	12.8389626792	E-karakus-strip-lower E-karakus-strip-measure-interval	>	13	<	13.0	<	open
+165	12	33	root	12.973226413185510	13	counting	[evand square-packing 2026-10-03]	<	12.8794184031	E-karakus-strip-lower E-karakus-strip-measure-interval	>	13	<	13.0	<	open
+166	12	34	cap k + d1	13.000000000000000	13	counting	[evand square-packing 2026-10-01]	=	13	E-k2m3-evand-valid7-qx2-replay E-k2m3-evand-bentz-lean-build	=	13	=	13.0	=	proved
+167	12	34	cap k + d1	13.000000000000000	13	nagamochi	[Nagamochi 2005]	=	13	E-chelokot-square-minus-two-lean	=	13	=	13.0	=	proved
+168	12	34	cap k + d1	13.000000000000000	13	nagamochi	[Nagamochi 2005]	=	13	E-karakus-strip-lower E-karakus-strip-measure-interval	=	13	=	13.0	=	proved
+170	13	3	root	13.050428378694057	13.20012261982	unavoidable-points	[Friedman DS7]	<	13.0399362039	E-karakus-strip-lower E-karakus-strip-measure-interval	>	13.53553390593274	<	13.53553390593273	<	open
+171	13	3	root	13.101144563036848	13.20012261982	monotonicity	[Friedman DS7]	<	13.0797456254	E-karakus-strip-lower E-karakus-strip-measure-interval	>	13.57142857142858	<	13.57142857142857	<	open
+172	13	4	root	13.150572916227490	13.20012261982	monotonicity	[Friedman DS7]	<	13.1194294641	E-karakus-strip-lower E-karakus-strip-measure-interval	>	13.61898895689939842899969151892	<	13.61898895689939842899969151892	<	open
+173	13	6	root	13.205892716979600	13.20012261982	monotonicity	[Friedman DS7]	>	13.1589889011	E-karakus-strip-lower E-karakus-strip-measure-interval	>	13.65685424949239	<	13.65685424949238	<	open
+174	13	6	root	13.253705963717882	13.20655561573	nagamochi	[Nagamochi 2005]	>	13.1984250992	E-karakus-strip-lower E-karakus-strip-measure-interval	>	13.70710678118655	<	13.70710678118654	<	open
+175	13	6	root	13.301302084963725	13.24744871391	nagamochi	[Nagamochi 2005]	>	13.2377392028	E-karakus-strip-lower E-karakus-strip-measure-interval	>	13.7671207246923133	<	13.7671207246923133	<	open
+176	13	6	root	13.348684012099631	13.28820572744	nagamochi	[Nagamochi 2005]	>	13.2769323391	E-karakus-strip-lower E-karakus-strip-measure-interval	>	13.8128562532770564	<	13.8128562532770564	<	open
+177	13	7	root	13.396830029161137	13.32882800593	nagamochi	[Nagamochi 2005]	>	13.3160056179	E-karakus-strip-lower E-karakus-strip-measure-interval	>	13.822979734169448600231882896281	<	13.822979734169448600231882896281	<	open
+178	13	10	cap k + d1	13.420000000000000	13.36931687685	nagamochi	[Nagamochi 2005]	>	13.3549601321	E-karakus-strip-lower E-karakus-strip-measure-interval	>	13.84666719284349	<	13.84666719284348	<	open
+179	13	17	root	13.450789442560079	13.40967364599	nagamochi	[Nagamochi 2005]	>	13.3937969582	E-karakus-strip-lower E-karakus-strip-measure-interval	>	13.8837954905108985	<	13.8837954905108985	<	open
+180	13	24	root	13.487634416240439	13.44989959798	nagamochi	[Nagamochi 2005]	>	13.4325171563	E-karakus-strip-lower E-karakus-strip-measure-interval	>	13.9169935224778325	<	13.9169935224778325	<	open
+181	13	27	root	13.537203054229343	13.48999599679	nagamochi	[Nagamochi 2005]	>	13.471121771	E-karakus-strip-lower E-karakus-strip-measure-interval	>	13.9508195310229241	<	13.9508195310229241	<	open
+182	13	27	root	13.582913235247782	13.52996408614	nagamochi	[Nagamochi 2005]	>	13.5096118312	E-karakus-strip-lower E-karakus-strip-measure-interval	>	13.974090713121439007150130032772	<	13.974090713121439007150130032772	<	open
+183	13	28	root	13.613833531794956	13.56980508997	nagamochi	[Nagamochi 2005]	>	13.5479883506	E-karakus-strip-lower E-karakus-strip-measure-interval	>	14	<	14.0	<	open
+184	13	30	root	13.657214114623185	13.60952021291	nagamochi	[Nagamochi 2005]	>	13.5862523283	E-karakus-strip-lower E-karakus-strip-measure-interval	>	14	<	14.0	<	open
+185	13	32	root	13.700237553483878	13.64911064067	nagamochi	[Nagamochi 2005]	>	13.6244047484	E-karakus-strip-lower E-karakus-strip-measure-interval	>	14	<	14.0	<	open
+186	13	32	root	13.742698009704946	13.68857754044	nagamochi	[Nagamochi 2005]	>	13.662446581	E-karakus-strip-lower E-karakus-strip-measure-interval	>	14	<	14.0	<	open
+187	13	32	root	13.785006185483284	13.72792206135	nagamochi	[Nagamochi 2005]	>	13.7003787824	E-karakus-strip-lower E-karakus-strip-measure-interval	>	14	<	14.0	<	open
+188	13	33	root	13.807187944438919	13.7671453348	nagamochi	[Nagamochi 2005]	>	13.7382022948	E-karakus-strip-lower E-karakus-strip-measure-interval	>	14	<	14.0	<	open
+189	13	33	root	13.849480973127428	13.80624847486	nagamochi	[Nagamochi 2005]	>	13.7759180473	E-karakus-strip-lower E-karakus-strip-measure-interval	>	14	<	14.0	<	open
+190	13	33	root	13.891623509311890	13.84523257866	nagamochi	[Nagamochi 2005]	>	13.8135269556	E-karakus-strip-lower E-karakus-strip-measure-interval	>	14	<	14.0	<	open
+191	13	33	root	13.933617148155555	13.88409872672	nagamochi	[Nagamochi 2005]	>	13.8510299228	E-karakus-strip-lower E-karakus-strip-measure-interval	>	14	<	14.0	<	open
+192	13	33	root	13.975463456839035	14	counting	[evand square-packing 2026-10-03]	<	13.8884278389	E-karakus-strip-lower E-karakus-strip-measure-interval	>	14	<	14.0	<	open
+193	13	34	cap k + d1	14.000000000000000	14	counting	[evand square-packing 2026-10-01]	=	14	E-k2m3-evand-valid7-qx2-replay E-k2m3-evand-bentz-lean-build	=	14	=	14.0	=	proved
+194	13	34	cap k + d1	14.000000000000000	14	nagamochi	[Nagamochi 2005]	=	14	E-chelokot-square-minus-two-lean	=	14	=	14.0	=	proved
+195	13	34	cap k + d1	14.000000000000000	14	nagamochi	[Nagamochi 2005]	=	14	E-karakus-strip-lower E-karakus-strip-measure-interval	=	14	=	14.0	=	proved
+197	14	2	root	14.047062401760400	14.18776486123	unavoidable-points	[Friedman DS7]	<	14.0369863706	E-karakus-strip-lower E-karakus-strip-measure-interval	>	14.53553390593274	<	14.53553390593273	<	open
+198	14	3	root	14.091847756693411	14.18776486123	monotonicity	[Friedman DS7]	<	14.0738719604	E-karakus-strip-lower E-karakus-strip-measure-interval	>	14.57142857142858	<	14.57142857142857	<	open
+199	14	4	root	14.136836502822947	14.18776486123	monotonicity	[Friedman DS7]	<	14.1106575888	E-karakus-strip-lower E-karakus-strip-measure-interval	>	14.6175721735928069	<	14.6175721735928069	<	open
+200	14	5	root	14.182027331680598	14.18776486123	monotonicity	[Friedman DS7]	<	14.1473440639	E-karakus-strip-lower E-karakus-strip-measure-interval	>	14.65685424949239	<	14.65685424949238	<	open
+201	14	6	root	14.231587259828437	14.19090595827	nagamochi	[Nagamochi 2005]	>	14.1839321834	E-karakus-strip-lower E-karakus-strip-measure-interval	>	14.70710678118655	<	14.70710678118654	<	open
+202	14	6	root	14.275137791094952	14.22875655532	nagamochi	[Nagamochi 2005]	>	14.220422734	E-karakus-strip-lower E-karakus-strip-measure-interval	>	14.72792206135786	<	14.72792206135785	<	open
+203	14	6	root	14.318524055731197	14.26649916142	nagamochi	[Nagamochi 2005]	>	14.2568164921	E-karakus-strip-lower E-karakus-strip-measure-interval	>	14.77817459305203	<	14.77817459305202	<	open
+204	14	6	root	14.361747898606600	14.30413469565	nagamochi	[Nagamochi 2005]	>	14.2931142241	E-karakus-strip-lower E-karakus-strip-measure-interval	>	14.82287565553230	<	14.82287565553229	<	open
+205	14	7	cap k + d1	14.400000000000000	14.34166406412	nagamochi	[Nagamochi 2005]	>	14.3293166859	E-karakus-strip-lower E-karakus-strip-measure-interval	>	14.82445114612409	<	14.82445114612408	<	open
+206	14	10	cap k + d1	14.420000000000000	14.37908816025	nagamochi	[Nagamochi 2005]	>	14.3654246238	E-karakus-strip-lower E-karakus-strip-measure-interval	>	14.860158663391903236840250629824	<	14.860158663391903236840250629824	<	open
+207	14	17	root	14.454083022965484	14.41640786499	nagamochi	[Nagamochi 2005]	>	14.4014387744	E-karakus-strip-lower E-karakus-strip-measure-interval	>	14.8809603730436757	<	14.8809603730436757	<	open
+208	14	24	root	14.488469208388579	14.45362404707	nagamochi	[Nagamochi 2005]	>	14.4373598647	E-karakus-strip-lower E-karakus-strip-measure-interval	>	14.9245187720293559	<	14.9245187720293559	<	open
+209	14	27	root	14.534080438075709	14.49073756323	nagamochi	[Nagamochi 2005]	>	14.4731886124	E-karakus-strip-lower E-karakus-strip-measure-interval	>	14.9462232264464511	<	14.9462232264464511	<	open
+210	14	27	root	14.575979455846816	14.52774925846	nagamochi	[Nagamochi 2005]	>	14.5089257261	E-karakus-strip-lower E-karakus-strip-measure-interval	>	14.973001116587625741983018050468	<	14.973001116587625741983018050468	<	open
+211	14	28	root	14.605092697086963	14.56465996625	nagamochi	[Nagamochi 2005]	>	14.5445719051	E-karakus-strip-lower E-karakus-strip-measure-interval	>	14.9963367213363157	<	14.9963367213363157	<	open
+212	14	29	root	14.644746653722570	14.60147050873	nagamochi	[Nagamochi 2005]	>	14.5801278403	E-karakus-strip-lower E-karakus-strip-measure-interval	>	15	<	15.0	<	open
+213	14	31	root	14.684204541319840	14.63818169698	nagamochi	[Nagamochi 2005]	>	14.6155942134	E-karakus-strip-lower E-karakus-strip-measure-interval	>	15	<	15.0	<	open
+214	14	32	root	14.723718549163610	14.67479433117	nagamochi	[Nagamochi 2005]	>	14.650971698	E-karakus-strip-lower E-karakus-strip-measure-interval	>	15	<	15.0	<	open
+215	14	32	root	14.762788837693069	14.7113092008	nagamochi	[Nagamochi 2005]	>	14.6862609591	E-karakus-strip-lower E-karakus-strip-measure-interval	>	15	<	15.0	<	open
+216	14	32	cap k + d1	14.800000000000000	14.74772708486	nagamochi	[Nagamochi 2005]	>	14.7214626533	E-karakus-strip-lower E-karakus-strip-measure-interval	>	15	<	15.0	<	open
+217	14	33	root	14.822241202431379	14.78404875209	nagamochi	[Nagamochi 2005]	>	14.7565774293	E-karakus-strip-lower E-karakus-strip-measure-interval	>	15	<	15.0	<	open
+218	14	33	root	14.861195169727402	14.82027496108	nagamochi	[Nagamochi 2005]	>	14.7916059279	E-karakus-strip-lower E-karakus-strip-measure-interval	>	15	<	15.0	<	open
+219	14	33	root	14.900031453804376	14.85640646055	nagamochi	[Nagamochi 2005]	>	14.8265487818	E-karakus-strip-lower E-karakus-strip-measure-interval	>	15	<	15.0	<	open
+220	14	33	root	14.938751114854028	14.89244398944	nagamochi	[Nagamochi 2005]	>	14.8614066163	E-karakus-strip-lower E-karakus-strip-measure-interval	>	15	<	15.0	<	open
+221	14	33	root	14.977355197244520	15	counting	[evand square-packing 2026-10-03]	<	14.8961800488	E-karakus-strip-lower E-karakus-strip-measure-interval	>	15	<	15.0	<	open
+222	14	34	cap k + d1	15.000000000000000	15	counting	[evand square-packing 2026-10-01]	=	15	E-k2m3-evand-valid7-qx2-replay E-k2m3-evand-bentz-lean-build	=	15	=	15.0	=	proved
+223	14	34	cap k + d1	15.000000000000000	15	nagamochi	[Nagamochi 2005]	=	15	E-chelokot-square-minus-two-lean	=	15	=	15.0	=	proved
+224	14	34	cap k + d1	15.000000000000000	15	nagamochi	[Nagamochi 2005]	=	15	E-karakus-strip-lower E-karakus-strip-measure-interval	=	15	=	15.0	=	proved
+226	15	2	root	15.042986307116221	15.17657384178	unavoidable-points	[Friedman DS7]	<	15.0344418537	E-karakus-strip-lower E-karakus-strip-measure-interval	>	15.53553390593274	<	15.53553390593273	<	open
+227	15	3	root	15.084110588575466	15.17657384178	monotonicity	[Friedman DS7]	<	15.0688022843	E-karakus-strip-lower E-karakus-strip-measure-interval	>	15.57106781186548	<	15.57106781186547	<	open
+228	15	4	root	15.125384786163291	15.17657384178	monotonicity	[Friedman DS7]	<	15.1030818665	E-karakus-strip-lower E-karakus-strip-measure-interval	>	15.6046014757296743	<	15.6046014757296743	<	open
+229	15	5	root	15.166848675765904	15.17657384178	monotonicity	[Friedman DS7]	<	15.1372811683	E-karakus-strip-lower E-karakus-strip-measure-interval	>	15.65685424949239	<	15.65685424949238	<	open
+230	15	6	root	15.212985634623918	15.17744687875	nagamochi	[Nagamochi 2005]	>	15.1714007511	E-karakus-strip-lower E-karakus-strip-measure-interval	>	15.68292682926830	<	15.68292682926829	<	open
+231	15	6	root	15.253112105086321	15.21267040355	nagamochi	[Nagamochi 2005]	>	15.2054411698	E-karakus-strip-lower E-karakus-strip-measure-interval	>	15.70710678118655	<	15.70710678118654	<	open
+232	15	6	root	15.293109978103125	15.24780684877	nagamochi	[Nagamochi 2005]	>	15.2394029729	E-karakus-strip-lower E-karakus-strip-measure-interval	>	15.7674283499418417	<	15.7674283499418417	<	open
+233	15	6	root	15.332980482194826	15.28285685708	nagamochi	[Nagamochi 2005]	>	15.2732867026	E-karakus-strip-lower E-karakus-strip-measure-interval	>	15.77817459305203	<	15.77817459305202	<	open
+234	15	6	root	15.372724826445056	15.31782106327	nagamochi	[Nagamochi 2005]	>	15.3070928949	E-karakus-strip-lower E-karakus-strip-measure-interval	>	15.82287565553230	<	15.82287565553229	<	open
+235	15	8	root	15.402946369162371	15.3527000944	nagamochi	[Nagamochi 2005]	>	15.3408220796	E-karakus-strip-lower E-karakus-strip-measure-interval	>	15.82660563342857	<	15.82660563342856	<	open
+236	15	11	root	15.424737428424020	15.38749456993	nagamochi	[Nagamochi 2005]	>	15.3744747806	E-karakus-strip-lower E-karakus-strip-measure-interval	>	15.8639557471592675	<	15.8639557471592675	<	open
+237	15	18	root	15.457090953095929	15.42220510185	nagamochi	[Nagamochi 2005]	>	15.4080515158	E-karakus-strip-lower E-karakus-strip-measure-interval	>	15.9029496076778317	<	15.9029496076778317	<	open
+238	15	24	root	15.489198379918905	15.4568322948	nagamochi	[Nagamochi 2005]	>	15.4415527974	E-karakus-strip-lower E-karakus-strip-measure-interval	>	15.9241067853214947	<	15.9241067853214947	<	open
+239	15	27	root	15.531440832262968	15.49137674618	nagamochi	[Nagamochi 2005]	>	15.4749791318	E-karakus-strip-lower E-karakus-strip-measure-interval	>	15.9484433273005000	<	15.9484433273005000	<	open
+240	15	27	root	15.570112982433339	15.52583904633	nagamochi	[Nagamochi 2005]	>	15.5083310198	E-karakus-strip-lower E-karakus-strip-measure-interval	>	15.969685337530780336056074320582	<	15.969685337530780336056074320582	<	open
+241	15	27	cap k + d1	15.600000000000000	15.56021977856	nagamochi	[Nagamochi 2005]	>	15.5416089564	E-karakus-strip-lower E-karakus-strip-measure-interval	>	15.988132439524990848590591447359	<	15.988132439524990848590591447359	<	open
+242	15	29	root	15.634313327513366	15.59451951932	nagamochi	[Nagamochi 2005]	>	15.5748134316	E-karakus-strip-lower E-karakus-strip-measure-interval	>	16	<	16.0	<	open
+243	15	30	root	15.670624458211314	15.62873883832	nagamochi	[Nagamochi 2005]	>	15.6079449297	E-karakus-strip-lower E-karakus-strip-measure-interval	>	16	<	16.0	<	open
+244	15	32	root	15.707471492804420	15.66287829861	nagamochi	[Nagamochi 2005]	>	15.6410039297	E-karakus-strip-lower E-karakus-strip-measure-interval	>	16	<	16.0	<	open
+245	15	32	root	15.743756466907107	15.69693845669	nagamochi	[Nagamochi 2005]	>	15.6739909054	E-karakus-strip-lower E-karakus-strip-measure-interval	>	16	<	16.0	<	open
+246	15	32	root	15.779946271037001	15.73091986265	nagamochi	[Nagamochi 2005]	>	15.7069063257	E-karakus-strip-lower E-karakus-strip-measure-interval	>	16	<	16.0	<	open
+247	15	32	cap k + d1	15.800000000000000	15.76482306023	nagamochi	[Nagamochi 2005]	>	15.7397506541	E-karakus-strip-lower E-karakus-strip-measure-interval	>	16	<	16.0	<	open
+248	15	33	root	15.835101199142438	15.79864858694	nagamochi	[Nagamochi 2005]	>	15.7725243493	E-karakus-strip-lower E-karakus-strip-measure-interval	>	16	<	16.0	<	open
+249	15	33	root	15.871209841738410	15.83239697419	nagamochi	[Nagamochi 2005]	>	15.805227865	E-karakus-strip-lower E-karakus-strip-measure-interval	>	16	<	16.0	<	open
+250	15	33	root	15.907224691530605	15.86606874731	nagamochi	[Nagamochi 2005]	>	15.8378616501	E-karakus-strip-lower E-karakus-strip-measure-interval	>	16	<	16.0	<	open
+251	15	33	root	15.943146475629237	15.89966442575	nagamochi	[Nagamochi 2005]	>	15.8704261489	E-karakus-strip-lower E-karakus-strip-measure-interval	>	16	<	16.0	<	open
+252	15	33	root	15.978975911798161	16	counting	[evand square-packing 2026-10-03]	<	15.9029218007	E-karakus-strip-lower E-karakus-strip-measure-interval	>	16	<	16.0	<	open
+253	15	34	cap k + d1	16.000000000000000	16	counting	[evand square-packing 2026-10-01]	=	16	E-k2m3-evand-valid7-qx2-replay E-k2m3-evand-bentz-lean-build	=	16	=	16.0	=	proved
+254	15	34	cap k + d1	16.000000000000000	16	nagamochi	[Nagamochi 2005]	=	16	E-chelokot-square-minus-two-lean	=	16	=	16.0	=	proved
+255	15	34	cap k + d1	16.000000000000000	16	nagamochi	[Nagamochi 2005]	=	16	E-karakus-strip-lower E-karakus-strip-measure-interval	=	16	=	16.0	=	proved
+257	16	2	root	16.039558973884293	16.16637581635	unavoidable-points	[Friedman DS7]	<	16.032224567	E-karakus-strip-lower E-karakus-strip-measure-interval	>	16.53553390593274	<	16.53553390593273	<	open
+258	16	3	root	16.077572060107406	16.16637581635	monotonicity	[Friedman DS7]	<	16.0643824162	E-karakus-strip-lower E-karakus-strip-measure-interval	>	16.5634480021337894	<	16.5634480021337894	<	open
+259	16	3	root	16.116391991961622	16.16637581635	monotonicity	[Friedman DS7]	<	16.0964739604	E-karakus-strip-lower E-karakus-strip-measure-interval	>	16.5913781454976982	<	16.5913781454976982	<	open
+260	16	4	root	16.154295357745647	16.16637581635	monotonicity	[Friedman DS7]	<	16.128499608	E-karakus-strip-lower E-karakus-strip-measure-interval	>	16.65685424949239	<	16.65685424949238	<	open
+261	16	5	root	16.192480533769752	16.16637581635	monotonicity	[Friedman DS7]	>	16.1604597633	E-karakus-strip-lower E-karakus-strip-measure-interval	>	16.6787798753432078	<	16.6787798753432078	<	open
+262	16	6	root	16.234323076190945	16.19868415357	nagamochi	[Nagamochi 2005]	>	16.1923548264	E-karakus-strip-lower E-karakus-strip-measure-interval	>	16.70710678118655	<	16.70710678118654	<	open
+263	16	6	root	16.271413902714271	16.23154621172	nagamochi	[Nagamochi 2005]	>	16.2241851935	E-karakus-strip-lower E-karakus-strip-measure-interval	>	16.7331660078993790	<	16.7331660078993790	<	open
+264	16	6	root	16.308403094438469	16.26433752247	nagamochi	[Nagamochi 2005]	>	16.2559512565	E-karakus-strip-lower E-karakus-strip-measure-interval	>	16.77817459305203	<	16.77817459305202	<	open
+265	16	6	root	16.345291482299678	16.29705854077	nagamochi	[Nagamochi 2005]	>	16.2876534038	E-karakus-strip-lower E-karakus-strip-measure-interval	>	16.77817459305203	<	16.77817459305202	<	open
+266	16	7	root	16.382131212207268	16.32970971675	nagamochi	[Nagamochi 2005]	>	16.3192920195	E-karakus-strip-lower E-karakus-strip-measure-interval	>	16.8230287507564760	<	16.823028750756475970708783711254	<	open
+267	16	9	root	16.407686788822282	16.36229149573	nagamochi	[Nagamochi 2005]	>	16.3508674841	E-karakus-strip-lower E-karakus-strip-measure-interval	>	16.8388152699482623	<	16.8388152699482623	<	open
+268	16	12	root	16.429141319661638	16.39480431834	nagamochi	[Nagamochi 2005]	>	16.3823801742	E-karakus-strip-lower E-karakus-strip-measure-interval	>	16.878814821006764724747121053018	<	16.878814821006764724747121053018	<	open
+269	16	18	root	16.459628197098524	16.42724862054	nagamochi	[Nagamochi 2005]	>	16.4138304628	E-karakus-strip-lower E-karakus-strip-measure-interval	>	16.9015135821891322	<	16.9015135821891322	<	open
+270	16	24	root	16.489840789077164	16.45962483374	nagamochi	[Nagamochi 2005]	>	16.4452187191	E-karakus-strip-lower E-karakus-strip-measure-interval	>	16.9281969933290166	<	16.9281969933290166	<	open
+271	16	27	root	16.529180322362952	16.49193338482	nagamochi	[Nagamochi 2005]	>	16.4765453086	E-karakus-strip-lower E-karakus-strip-measure-interval	>	16.9491166878150100	<	16.9491166878150100	<	open
+272	16	27	root	16.565085529013318	16.52417469626	nagamochi	[Nagamochi 2005]	>	16.5078105935	E-karakus-strip-lower E-karakus-strip-measure-interval	>	16.9655864748376712	<	16.9655864748376712	<	open
+273	16	27	cap k + d1	16.600000000000000	16.5563491861	nagamochi	[Nagamochi 2005]	>	16.5390149323	E-karakus-strip-lower E-karakus-strip-measure-interval	>	16.983925962650404316108837346991	<	16.983925962650404316108837346991	<	open
+274	16	29	root	16.625277029495400	16.58845726811	nagamochi	[Nagamochi 2005]	>	16.5701586799	E-karakus-strip-lower E-karakus-strip-measure-interval	>	17	<	17.0	<	open
+275	16	30	root	16.659126011673762	16.62049935181	nagamochi	[Nagamochi 2005]	>	16.6012421881	E-karakus-strip-lower E-karakus-strip-measure-interval	>	17	<	17.0	<	open
+276	16	31	root	16.693085992352219	16.65247584249	nagamochi	[Nagamochi 2005]	>	16.6322658049	E-karakus-strip-lower E-karakus-strip-measure-interval	>	17	<	17.0	<	open
+277	16	32	root	16.727274976705504	16.68438714135	nagamochi	[Nagamochi 2005]	>	16.6632298752	E-karakus-strip-lower E-karakus-strip-measure-interval	>	17	<	17.0	<	open
+278	16	32	root	16.761062496734438	16.7162336455	nagamochi	[Nagamochi 2005]	>	16.6941347407	E-karakus-strip-lower E-karakus-strip-measure-interval	>	17	<	17.0	<	open
+279	16	32	root	16.794773136432746	16.74801574802	nagamochi	[Nagamochi 2005]	>	16.7249807395	E-karakus-strip-lower E-karakus-strip-measure-interval	>	17	<	17.0	<	open
+280	16	33	root	16.812486331465475	16.77973383805	nagamochi	[Nagamochi 2005]	>	16.755768207	E-karakus-strip-lower E-karakus-strip-measure-interval	>	17	<	17.0	<	open
+281	16	33	root	16.846217020014590	16.81138830084	nagamochi	[Nagamochi 2005]	>	16.7864974749	E-karakus-strip-lower E-karakus-strip-measure-interval	>	17	<	17.0	<	open
+282	16	33	root	16.879871214648781	16.84297951775	nagamochi	[Nagamochi 2005]	>	16.817168872	E-karakus-strip-lower E-karakus-strip-measure-interval	>	17	<	17.0	<	open
+283	16	33	root	16.913449433434668	16.87450786638	nagamochi	[Nagamochi 2005]	>	16.8477827242	E-karakus-strip-lower E-karakus-strip-measure-interval	>	17	<	17.0	<	open
+284	16	33	root	16.946952188617339	16.90597372058	nagamochi	[Nagamochi 2005]	>	16.8783393541	E-karakus-strip-lower E-karakus-strip-measure-interval	>	17	<	17.0	<	open
+285	16	33	root	16.980379986711514	17	counting	[evand square-packing 2026-10-03]	<	16.9088390814	E-karakus-strip-lower E-karakus-strip-measure-interval	>	17	<	17.0	<	open
+286	16	34	cap k + d1	17.000000000000000	17	counting	[evand square-packing 2026-10-01]	=	17	E-k2m3-evand-valid7-qx2-replay E-k2m3-evand-bentz-lean-build	=	17	=	17.0	=	proved
+287	16	34	cap k + d1	17.000000000000000	17	nagamochi	[Nagamochi 2005]	=	17	E-chelokot-square-minus-two-lean	=	17	=	17.0	=	proved
+288	16	34	cap k + d1	17.000000000000000	17	nagamochi	[Nagamochi 2005]	=	17	E-karakus-strip-lower E-karakus-strip-measure-interval	=	17	=	17.0	=	proved
+290	17	2	root	17.036637126435894	17.15703136722	unavoidable-points	[Friedman DS7]	<	17.0302752548	E-karakus-strip-lower E-karakus-strip-measure-interval	>	17.53553390593274	<	17.53553390593273	<	open
+291	17	3	root	17.071974330764374	17.15703136722	monotonicity	[Friedman DS7]	<	17.0604951616	E-karakus-strip-lower E-karakus-strip-measure-interval	>	17.53553390593274	<	17.53553390593273	<	open
+292	17	3	root	17.108015576684660	17.15703136722	monotonicity	[Friedman DS7]	<	17.090660023	E-karakus-strip-lower E-karakus-strip-measure-interval	>	17.5913781454976982	<	17.5913781454976982	<	open
+293	17	4	root	17.143247948841722	17.15703136722	monotonicity	[Friedman DS7]	<	17.1207701385	E-karakus-strip-lower E-karakus-strip-measure-interval	>	17.63414634146342	<	17.63414634146341	<	open
+294	17	5	root	17.178735352753090	17.15703136722	monotonicity	[Friedman DS7]	>	17.1508258053	E-karakus-strip-lower E-karakus-strip-measure-interval	>	17.65685424949239	<	17.65685424949238	<	open
+295	17	6	root	17.218111176930066	17.18641405623	nagamochi	[Nagamochi 2005]	>	17.1808273176	E-karakus-strip-lower E-karakus-strip-measure-interval	>	17.7042327907360304	<	17.7042327907360304	<	open
+296	17	6	root	17.252682269701265	17.21727474022	nagamochi	[Nagamochi 2005]	>	17.210774967	E-karakus-strip-lower E-karakus-strip-measure-interval	>	17.70710678118655	<	17.70710678118654	<	open
+297	17	6	root	17.287171021464262	17.24807680927	nagamochi	[Nagamochi 2005]	>	17.2406690427	E-karakus-strip-lower E-karakus-strip-measure-interval	>	17.74041728754380185115320576776	<	17.74041728754380185115320576776	<	open
+298	17	6	root	17.321578017787744	17.27882059609	nagamochi	[Nagamochi 2005]	>	17.2705098312	E-karakus-strip-lower E-karakus-strip-measure-interval	>	17.77817459305203	<	17.77817459305202	<	open
+299	17	6	root	17.355903837332667	17.3095064303	nagamochi	[Nagamochi 2005]	>	17.3002976164	E-karakus-strip-lower E-karakus-strip-measure-interval	>	17.82287565553230	<	17.82287565553229	<	open
+300	17	7	root	17.390576697508452	17.34013463836	nagamochi	[Nagamochi 2005]	>	17.3300326797	E-karakus-strip-lower E-karakus-strip-measure-interval	>	17.82412338847855	<	17.82412338847854	<	open
+301	17	10	root	17.412019670884319	17.37070554374	nagamochi	[Nagamochi 2005]	>	17.3597153	E-karakus-strip-lower E-karakus-strip-measure-interval	>	17.846667192843489783121781262887	<	17.846667192843489783121781262887	<	open
+302	17	13	root	17.433426084942247	17.40121946685	nagamochi	[Nagamochi 2005]	>	17.389345754	E-karakus-strip-lower E-karakus-strip-measure-interval	>	17.8720298490811800	<	17.8720298490811800	<	open
+303	17	19	root	17.461986185132785	17.43167672515	nagamochi	[Nagamochi 2005]	>	17.4189243156	E-karakus-strip-lower E-karakus-strip-measure-interval	>	17.9130654627385324	<	17.9130654627385324	<	open
+304	17	25	root	17.490382985636778	17.46207763315	nagamochi	[Nagamochi 2005]	>	17.4484512566	E-karakus-strip-lower E-karakus-strip-measure-interval	>	17.9295659468485010	<	17.9295659468485010	<	open
+305	17	27	root	17.527222781924715	17.49242250247	nagamochi	[Nagamochi 2005]	>	17.4779268463	E-karakus-strip-lower E-karakus-strip-measure-interval	>	17.9504664821377123	<	17.9504664821377123	<	open
+306	17	27	root	17.560729456133125	17.52271164185	nagamochi	[Nagamochi 2005]	>	17.5073513516	E-karakus-strip-lower E-karakus-strip-measure-interval	>	17.9634337174914258	<	17.9634337174914258	<	open
+307	17	27	root	17.594161147004160	17.55294535724	nagamochi	[Nagamochi 2005]	>	17.5367250374	E-karakus-strip-lower E-karakus-strip-measure-interval	>	17.9808627840546911	<	17.9808627840546911	<	open
+308	17	28	root	17.616620106628016	17.58312395177	nagamochi	[Nagamochi 2005]	>	17.5660481658	E-karakus-strip-lower E-karakus-strip-measure-interval	>	17.9982698795262559	<	17.998269879526255875387992744507	<	open
+309	17	29	root	17.648887511296242	17.61324772583	nagamochi	[Nagamochi 2005]	>	17.5953209972	E-karakus-strip-lower E-karakus-strip-measure-interval	>	18	<	18.0	<	open
+310	17	31	root	17.680876728473060	17.64331697709	nagamochi	[Nagamochi 2005]	>	17.6245437895	E-karakus-strip-lower E-karakus-strip-measure-interval	>	18	<	18.0	<	open
+311	17	32	root	17.712867017469740	17.67333200053	nagamochi	[Nagamochi 2005]	>	17.6537167984	E-karakus-strip-lower E-karakus-strip-measure-interval	>	18	<	18.0	<	open
+312	17	32	root	17.744546870277065	17.70329308849	nagamochi	[Nagamochi 2005]	>	17.6828402774	E-karakus-strip-lower E-karakus-strip-measure-interval	>	18	<	18.0	<	open
+313	17	32	root	17.776163325208956	17.73320053068	nagamochi	[Nagamochi 2005]	>	17.711914478	E-karakus-strip-lower E-karakus-strip-measure-interval	>	18	<	18.0	<	open
+314	17	32	cap k + d1	17.800000000000000	17.76305461424	nagamochi	[Nagamochi 2005]	>	17.7409396495	E-karakus-strip-lower E-karakus-strip-measure-interval	>	18	<	18.0	<	open
+315	17	33	root	17.824345007956664	17.79285562374	nagamochi	[Nagamochi 2005]	>	17.7699160391	E-karakus-strip-lower E-karakus-strip-measure-interval	>	18	<	18.0	<	open
+316	17	33	root	17.855922468917948	17.82260384126	nagamochi	[Nagamochi 2005]	>	17.798843892	E-karakus-strip-lower E-karakus-strip-measure-interval	>	18	<	18.0	<	open
+317	17	33	root	17.887437143525557	17.85229954635	nagamochi	[Nagamochi 2005]	>	17.8277234511	E-karakus-strip-lower E-karakus-strip-measure-interval	>	18	<	18.0	<	open
+318	17	33	root	17.918889404816406	17.88194301613	nagamochi	[Nagamochi 2005]	>	17.8565549577	E-karakus-strip-lower E-karakus-strip-measure-interval	>	18	<	18.0	<	open
+319	17	33	root	17.950279622148055	17.91153452528	nagamochi	[Nagamochi 2005]	>	17.8853386507	E-karakus-strip-lower E-karakus-strip-measure-interval	>	18	<	18.0	<	open
+320	17	33	root	17.981608161249325	18	counting	[evand square-packing 2026-10-03]	<	17.9140747672	E-karakus-strip-lower E-karakus-strip-measure-interval	>	18	<	18.0	<	open
+321	17	34	cap k + d1	18.000000000000000	18	counting	[evand square-packing 2026-10-01]	=	18	E-k2m3-evand-valid7-qx2-replay E-k2m3-evand-bentz-lean-build	=	18	=	18.0	=	proved
+322	17	34	cap k + d1	18.000000000000000	18	nagamochi	[Nagamochi 2005]	=	18	E-chelokot-square-minus-two-lean	=	18	=	18.0	=	proved
+323	17	34	cap k + d1	18.000000000000000	18	nagamochi	[Nagamochi 2005]	=	18	E-karakus-strip-lower E-karakus-strip-measure-interval	=	18	=	18.0	=	proved

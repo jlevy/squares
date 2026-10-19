@@ -1,0 +1,96 @@
+{
+  "format": "external-source-declaration-v1",
+  "id": "dostashev-square-packing",
+  "source_url": "https://github.com/dostashev/square-packing",
+  "source_ref": "main",
+  "source_commit": "fe43a64ecf2581cdbd11830e8a5be0989746c5d3",
+  "retrieved_at_utc": "2026-10-14T06:54Z",
+  "git_scope": "Full clone of main, checked out at fe43a64ecf2581cdbd11830e8a5be0989746c5d3, the commit issue #562 names with the SHA-256 of its six files. The head has since moved to b909e1b74cda50906e12b4373e010ddee39e47e4 (issue #575), which rewrote the 129, 204 and 303 files in canonical form at the same exact sides; this packet keeps the bytes the issue names. Against c3d17ab08bd5db65dc5ffe69e41f7b2ff0c2fc49, the issue-501 pin, the commit adds records/n0129, n0175, n0176, n0204, n0232, n0264 and n0303 and changes README.md. The README, the licence and the 129, 176, 204 and 303 files are retained; the 175, 232 and 264 files, issue #528's, are pinned by digest only; every other file is unchanged since c3d17ab and is pinned by digest against the copy the issue-501 packet retains. No source program was executed.",
+  "archived_dir": "source",
+  "license": "MIT (LICENSE, Copyright (c) 2026 Daniil Ostashev, added in c6893aa24ec2b2822ef42ab695c828de1ccb9015); the README says it covers the verification code and the record packings and certificates. The retained files are byte-identical with the licence beside them. Issue #562 credits Daniil Ostashev with the three packings, names the sources of their pieces, and states AI assistance: an AI-assisted research loop the author drives with his own ideas, in which AI agents wrote and ran the search, composition and verification code, and an agent's check of the rectangle library against the register found 129.",
+  "claims": [
+    "Issue #562 reports s(129) <= 11.87001385040446434457885353928463864242, s(204) <= 14.80866323438695656647099008094596479529 and s(303) <= 17.90995829106990798159574108139873608005, certified and rounded up; each records/n0NNN.sqcert gives the exact side, dilated by 1 + 1e-60 from the 60-digit optimum of its contact topology, and the README at the pin prints the same sides rounded up to 15 places.",
+    "The issue says 204 and 303 are new arrangements, compositions of two copies of a new rectangle packing in opposite corners plus aligned squares: 44 unit squares in an (h + 3) x h rectangle with h = 5.80866323438695656632... for 204, and 62 unit squares in an (h + 6) x h rectangle with h = 5.90995829106990798142... for 303, both found by a GPU soft-to-rigid search after Yohei Nakajima's idea, started from corner staircases. 129 is a cut-out of a 163-square (h + 3) x h rectangle cut from the s(302) house (Nate Chaoweeraprasit's packing, Evan Daniel's regularization) and re-optimised; its aligned blocks are laid out like Ryan Xu's s(129), with its tilted squares in a different band.",
+    "The README at the pin also prints s(176) <= 13.808663234386957, a composition of issue 528's 38-square piece with the 44-square piece; the issue does not ask for it, since Francisco Couzo has improved it from this packing, and issue #575 later reports a smaller 176 of the author's own.",
+    "The author reports that its own C++ checker (sqverify) accepts all three in GMP rational arithmetic and that a separate 80-digit mpmath cross-check accepts them; each side is reported as the exact first-order optimum of its contact topology with nonnegative KKT multipliers. These are author reports; no optimality is claimed."
+  ],
+  "scope": [
+    "CMakeLists.txt",
+    "LICENSE",
+    "README.md",
+    "pyproject.toml",
+    "records",
+    "tools",
+    "verify",
+    "verify_all.sh"
+  ],
+  "pinned_only": [
+    {
+      "match": "records/n0155.*",
+      "reason": "Unchanged since c3d17ab: byte-identical to the issue-501 packet's copy, so pinned by digest here and compared with that copy.",
+      "identical_to": "packing/resources/web/dostashev-records-2026-10-11/source/records"
+    },
+    {
+      "match": "records/n0156.*",
+      "reason": "Unchanged since c3d17ab: byte-identical to the issue-501 packet's copy, so pinned by digest here and compared with that copy.",
+      "identical_to": "packing/resources/web/dostashev-records-2026-10-11/source/records"
+    },
+    {
+      "match": "records/n0211.*",
+      "reason": "Unchanged since c3d17ab: byte-identical to the issue-501 packet's copy, so pinned by digest here and compared with that copy.",
+      "identical_to": "packing/resources/web/dostashev-records-2026-10-11/source/records"
+    },
+    {
+      "match": "records/n0175.*",
+      "reason": "Issue 528's certificate, unchanged since a8db6ff941fc93d1d68d4d7aed90bb2a18a3a41f; that import (think-em0b) retains it, so it is pinned by digest only here."
+    },
+    {
+      "match": "records/n0232.*",
+      "reason": "Issue 528's certificate, unchanged since a8db6ff941fc93d1d68d4d7aed90bb2a18a3a41f; that import (think-em0b) retains it, so it is pinned by digest only here."
+    },
+    {
+      "match": "records/n0264.*",
+      "reason": "Issue 528's certificate, unchanged since a8db6ff941fc93d1d68d4d7aed90bb2a18a3a41f; that import (think-em0b) retains it, so it is pinned by digest only here."
+    },
+    {
+      "match": "tools/*",
+      "reason": "The author's mpmath cross-check and packing reader, unchanged since c3d17ab: byte-identical to the issue-501 packet's copy, pinned by digest and compared with it. Not run.",
+      "identical_to": "packing/resources/web/dostashev-records-2026-10-11/source/tools"
+    },
+    {
+      "match": "verify/src/*",
+      "reason": "The author's C++ GMP checker, unchanged since c3d17ab: byte-identical to the issue-501 packet's copy, pinned by digest and compared with it. Not built or run.",
+      "identical_to": "packing/resources/web/dostashev-records-2026-10-11/source/verify/src"
+    },
+    {
+      "match": "verify/tests/data/*",
+      "reason": "The checker's test data, unchanged since c3d17ab: byte-identical to the issue-501 packet's copy, pinned by digest and compared with it.",
+      "identical_to": "packing/resources/web/dostashev-records-2026-10-11/source/verify/tests/data"
+    },
+    {
+      "match": "verify/tests/*",
+      "reason": "The checker's tests, unchanged since c3d17ab: byte-identical to the issue-501 packet's copy, pinned by digest and compared with it. Not run.",
+      "identical_to": "packing/resources/web/dostashev-records-2026-10-11/source/verify/tests"
+    },
+    {
+      "match": "verify/CMakeLists.txt",
+      "reason": "Unchanged since c3d17ab: byte-identical to the issue-501 packet's copy, pinned by digest and compared with it.",
+      "identical_to": "packing/resources/web/dostashev-records-2026-10-11/source/verify/CMakeLists.txt"
+    },
+    {
+      "match": "CMakeLists.txt",
+      "reason": "Unchanged since c3d17ab: byte-identical to the issue-501 packet's copy, pinned by digest and compared with it.",
+      "identical_to": "packing/resources/web/dostashev-records-2026-10-11/source/CMakeLists.txt"
+    },
+    {
+      "match": "pyproject.toml",
+      "reason": "Unchanged since c3d17ab: byte-identical to the issue-501 packet's copy, pinned by digest and compared with it.",
+      "identical_to": "packing/resources/web/dostashev-records-2026-10-11/source/pyproject.toml"
+    },
+    {
+      "match": "verify_all.sh",
+      "reason": "The author's driver, unchanged since c3d17ab: byte-identical to the issue-501 packet's copy, pinned by digest and compared with it. Not run.",
+      "identical_to": "packing/resources/web/dostashev-records-2026-10-11/source/verify_all.sh"
+    }
+  ]
+}

@@ -521,13 +521,14 @@ The boundary is enforced, never curated.
 A hand-maintained list of slow tests rots exactly the way the 499-second docstring
 rotted; the split has to be something the gate computes and can refuse.
 
-## General principles
+## General Principles
 
-`OR-1` through `OR-13` say how a particular thing is done here.
-The three below are different in kind: they are the standing principles those procedures
-answer to, and when a procedure and a principle disagree it is the procedure that is
-wrong. They are stated separately so that a future agent inheriting a rule it finds
-pointless has somewhere to check what the rule was for.
+`OR-1` through `OR-13`, and `OR-19` after the principles, say how a particular thing is
+done here.
+The principles below govern those procedures; when a procedure and a principle
+disagree, it is the procedure that is wrong.
+They are stated separately so that a future agent inheriting a rule it finds pointless
+has somewhere to check what the rule was for.
 
 ### OR-14: A development cycle is never artificially slow
 
@@ -815,6 +816,27 @@ Decide this before the data is committed: once a blob is in a branch’s history
 it means rewriting that history or rebuilding the branch, and every commit cited by hash
 in the records goes stale.
 
+**Sizes are counted as Git stores them.** A file’s size is its blob’s, compressed as Git
+packs it, and a set’s is the sum of its blobs: that is what a clone downloads and what
+history keeps for good.
+The unit is the project’s, written on 16 October 2026 with the house rule the owner set
+that day, under which a house’s witnesses go into Git or a hosted data release by this
+rule ([The House Rule](packing/campaign/result-import.md#the-house-rule)); the owner set
+that rule, not the unit.
+A dump that is already compressed costs about its own size; a text format that
+compresses well costs a fraction of its checkout bytes.
+`python -m devtools.upper_bound_houses sizes`, from `packing/`, measures the witnesses a
+staged adoption would write, as Git stores them and in a checkout.
+On 17 October 2026 T-174’s 50 staged rational houses come to 19.25 MB in a checkout and
+2.84 MB as Git stores them, all of which history keeps, since the witnesses they replace
+stay in it; the tree’s blobs grow by only 1.97 MB. The largest is 0.99 MB and 0.22 MB,
+so they go into Git; counted in checkout bytes, the set would be near the tens of
+megabytes this rule sends to a hosted release.
+A hosted object is read through its manifest: a tool calls `sqpack.hosted_data.require`,
+which returns the object’s local path or raises `HostedDataMissingError` naming the
+command that fetches it, and nothing reads a hosted object by a path the repository
+commits.
+
 **No program depends on Git history to produce its answer.** Code finds its inputs by
 repository-relative path or through a manifest, so data can move, be re-laid out, or
 leave the repository without the code changing.
@@ -828,6 +850,13 @@ Do not:
 
 Recording a commit or blob id beside a result is fine as provenance.
 Refusing to run because one changed is the defect.
+A gate may compare a change with its base branch: it reads the base’s copy of a record
+at the merge base of `origin/main` and `HEAD`, and asks Git which files the change
+alters. The release-impact check, the changelog, the requests record, the bead tree and
+the regularization state gate do so.
+That is the project’s practice, not an exception to the first rule: the base is no
+recorded revision, nothing is pinned, the same path is read on both sides, and a gate
+that cannot find its base fails closed and names the remedy.
 When a check needs to know that an input is the one a verdict was computed from, it
 compares a semantic identity the input carries, such as a design name and version, or it
 recomputes the verdict.
@@ -841,6 +870,72 @@ In the same branch, a local-theorem replay pinned another file’s blob id.
 The branch’s own integrity-ceremony edit changed that file, and from then on every
 mathematical check passed while the replay reported failure.
 Include this rule when briefing subagents that retain data or write verifiers.
+
+## OR-19: Confirm one bead owner before work; sync at session start, after commits, and at handoff or end
+
+Squares coordinates concurrent agents across worktrees and hosts.
+These requirements are this project’s coordination policy; they are not a requirement
+for lightweight tbd use in other projects.
+A read-only question or lookup needs no new bead.
+
+- **Start with current state.** Run `tbd sync` before selecting or assigning work, then
+  read the current handoff and the relevant beads.
+  `tbd prime` loads instructions; it does not refresh remote bead state.
+  Search for existing work before creating a bead, and track each independently
+  delegated deliverable separately.
+- **Confirm ownership before execution.** Use a unique acting name per agent instance
+  with `tbd start <id> --as <name> --json`: the harness, the role and an instance id,
+  such as `claude-reconcile-lane-1-0vpobe`, or the id `tbd whoami --ensure-id` keeps.
+  Inspect `claimed` and `skipped`: an exit code of zero can mean the claim was refused.
+  Proceed only after a successful claim, or a verified continuation of that same agent’s
+  claim. The tracker owner syncs the accepted claim (the coordinator, for delegated work;
+  see the next item), and the agent re-reads the bead before editing.
+  An accountable `assignee` does not replace the acting `delegate`.
+- **Dispatch disjoint work.** Every brief names the bead, acting agent, write scope,
+  completion evidence, and tracker owner.
+  For delegated work the coordinator claims: it runs
+  `tbd start <id> --as <worker name> --json` on each assigned bead, confirms `claimed`,
+  syncs, and puts the result in the brief.
+  The worker claims only beads it creates itself, under its own acting name.
+  The coordinator owns shared bead updates and sync for its sub-agents.
+  That reverses tbd’s own default, under which an agent syncs its own bead updates
+  unless its brief reserves sync, so every brief here says that sync is reserved.
+  A worker acknowledges its assignment in the first line of its report, reports results
+  against that bead, and does not sync unless its brief says so.
+  Independent sessions claim and sync their own work.
+  Across separate clones, allocate overlapping work through one coordinator: tbd’s local
+  claim check and Git sync are not a distributed lock.
+- **Checkpoint after each commit.** The tracker owner (the coordinator for delegated
+  work, or the independent session owner) updates the affected beads with progress and
+  validation still pending, then runs `tbd sync`. For delegated work the coordinator
+  cannot see each worker commit as it lands, so its checkpoint is each worker report.
+  Do not wait for CI to finish before publishing progress, and do not close work whose
+  acceptance checks remain pending.
+- **Transfer ownership explicitly.** Before handoff, record remaining work, blockers,
+  branch and evidence, and the intended recipient.
+  The outgoing owner stops work; the coordinator or outgoing owner updates the delegate
+  and syncs. The recipient refreshes state, verifies its assignment, and acknowledges
+  before continuing. Never overwrite a live owner merely because a bead looks old.
+  A tracker audit owns its own review bead and does not claim the implementation work it
+  reviews.
+- **Finish with an accurate record.** Close completed beads with evidence, keep
+  unfinished work actionable, and sync before handoff or session end.
+  Verify sync succeeded.
+  If it fails, preserve the updates and report the failure; do not represent a local
+  claim or handoff as published.
+  A read-only review needs no code commit or PR.
+
+The 2026-10-10 audit (`think-qpm4`) found 55 of 197 pre-existing in-progress beads
+without a delegate; other beads used harness-and-host identities that could be shared by
+concurrent agents. The installed tbd v0.10.0 claim command also returns success when it
+skips another agent’s claim.
+These are ownership and visibility gaps; the snapshot does not establish which tasks, if
+any, were executed twice.
+The cost the rule answers is on record in `think-05y8`: on 2026-09-16 two Codex threads
+worked in one PR worktree at once, each read the other’s uncommitted edits as
+corruption, and the surviving pre-push gate certified a reverted cap.
+Whether claim and checkpoint discipline is enough is measured, not assumed: the
+ten-slice sample under `think-kc9d` runs at the next `OR-12` efficiency block.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

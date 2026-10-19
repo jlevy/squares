@@ -301,16 +301,17 @@ def test_the_page_says_once_what_the_tag_means_and_links_the_corrected_result(
 UNREAD_PROOF_CASES = (5, 6, 10, 22)
 #: The cases whose reported lower bound is a value of Green's DS7 Theorem 9, whose
 #: illustrated argument leaves a unit square empty (`devtools.check_green_ds7`), above
-#: the verified floor.
+#: the verified floor. Thirty on 2026-10-06; on 2026-10-14 wand125's closed form (T-180)
+#: took the reported lane at 173, 261 and 294.
 GREEN_THEOREM_9 = frozenset(
     {
         *range(122, 126),
         *range(145, 149),
-        *range(170, 174),
+        *range(170, 173),
         *range(197, 201),
         *range(226, 230),
-        *range(257, 262),
-        *range(290, 295),
+        *range(257, 261),
+        *range(290, 294),
     }
 )
 
@@ -367,13 +368,10 @@ def test_a_reported_bound_on_a_proof_found_defective_says_so(rows, cases) -> Non
             if defect:
                 flagged[n] = label
     assert set(flagged.values()) == {"Reported lower"}
-    assert set(flagged) >= GREEN_THEOREM_9
-    nagamochi = set(flagged) - GREEN_THEOREM_9
-    assert all(
-        cases[n]["reported_lower_bound"]["evidence"] == ["E-nagamochi-lower"] for n in nagamochi
-    )
-    # 149 of Nagamochi's values, all at n = 106 to 319, and Green's 30, on 2026-10-06.
-    assert (len(nagamochi), min(nagamochi), max(nagamochi)) == (149, 106, 319)
+    # 149 of Nagamochi's values, all at n = 106 to 319, and Green's 30 were flagged on
+    # 2026-10-06. Since 2026-10-14 the closed form (T-180) holds every reported lane
+    # Nagamochi's defective value did, and Green's 27 remain.
+    assert set(flagged) == GREEN_THEOREM_9
     assert not {13, 23, 46} & set(flagged)
 
 
@@ -388,7 +386,10 @@ def test_status_names_each_verified_lane_and_marks_a_reported_defect(cases) -> N
     assert tables.verification_origins(cases[106], evidence) == (
         "upper: replayed here; lower: external proof (read here), audited here"
     )
-    assert "reported lower: defect recorded" in tables.case_disposition(cases[106], evidence)
+    # At 106 the reported lane is the closed form's since 2026-10-14 (T-180); at 123 it is
+    # still Green's DS7 value, whose argument is found defective.
+    assert "defect recorded" not in tables.case_disposition(cases[106], evidence)
+    assert "reported lower: defect recorded" in tables.case_disposition(cases[123], evidence)
     assert "defect recorded" not in tables.case_disposition(cases[23], evidence)
     status = tables.STATUS.read_text(encoding="utf-8")
     assert "| upper: replayed here; lower: external proof (not read here) |" in status

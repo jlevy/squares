@@ -1,0 +1,25 @@
+{
+ "argv": [
+  "axis",
+  "axis-input.txt"
+ ],
+ "binary_sha256": "19288b2f9bcb1cfa86a0bde9db1e1fbb79d43dc8044bc7243af8f6ad405899af",
+ "cpu_seconds": 5.171,
+ "exit_code": 0,
+ "input_sha256": "10dd46b06f14144619bf9de03151c43215e43e34f7e60df440f4e27d6a594396",
+ "kind": "continuous-pose-replay-axis/v1",
+ "loadavg_after": [
+  7.59,
+  5.81,
+  5.19
+ ],
+ "loadavg_before": [
+  7.56,
+  5.78,
+  5.17
+ ],
+ "started_utc": "2026-10-12T06:48:36+00:00",
+ "stderr": "",
+ "stdout": "{\"status\":\"AXIS_COVERAGE_PROVED\",\"x_nodes\":3293,\"y_nodes\":3293,\"minimum_numerator\":\"1001486431423867090847280653\",\"scale\":\"1000000000000000000000000000\",\"minimizer_x_integer\":3490012394,\"minimizer_y_integer\":6201340682,\"direct_sum_matches\":true,\"evaluation_abs_bound\":\"627444222088298915573283512797161984\"}\n",
+ "wall_seconds": 6.978
+}

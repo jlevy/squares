@@ -10,7 +10,7 @@ changed.
 80bcdbb0819504354e1278c37f211dd8cc2158fb, as reconciled in the
 [synopsis](../../../SYNOPSIS.md#research-program-status-and-roadmap).
 The
-[active strategy plan](../specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md)
+[active strategy plan](../specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md)
 and
 [agenda 036](../../../packing/campaign/agendas/agenda-036-n11-strategy-reset-roadmap.md)
 own subsequent execution choices.

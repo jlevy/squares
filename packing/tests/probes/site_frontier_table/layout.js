@@ -11,7 +11,7 @@
 // side by side: `thumb` is the drawing's cell, with the drawing's size and whether
 // anything else is in the cell, and `n` is the number's own text, with its weight.
 // Null where the page has no such table.
-async (/** @type {{rows: string[]}} */ { rows }) => {
+async (/** @type {{rows: string[], drawings: Record<string, string>}} */ { rows, drawings }) => {
   const table = document.querySelector(".site-frontier table.site-table");
   if (!(table instanceof HTMLTableElement)) {
     return null;
@@ -19,7 +19,7 @@ async (/** @type {{rows: string[]}} */ { rows }) => {
   for (const id of rows) {
     const row = document.getElementById(id);
     const image = row?.querySelector(".site-thumb img");
-    const expected = `atlas/house/${id}.svg`;
+    const expected = drawings[id];
     if (!(image instanceof HTMLImageElement) || image.getAttribute("src") !== expected) {
       throw new Error(`missing or mismatched drawing for ${id}`);
     }

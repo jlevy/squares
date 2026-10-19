@@ -45,9 +45,9 @@
   };
   const nav = document.querySelector(".site-nav");
   const header = document.querySelector(".kpress-site-header");
-  // The section tabs are the strip that is a `nav` of links; the homepage's atlas has
-  // the same strip as a tablist of buttons over its tiles, which is not a header.
-  const tabs = document.querySelector("nav.site-tabs");
+  // Section navigation belongs to the header; a page can also carry an inline
+  // Visuals chooser or an atlas tablist inside its reading column.
+  const tabs = header?.querySelector("nav.site-tabs") ?? null;
   /** @param {Element | null} el */
   const ruled = (el) =>
     el !== null && Number.parseFloat(getComputedStyle(el).borderBottomWidth) > 0;
@@ -93,15 +93,22 @@
   probe.remove();
   const links = [...document.querySelectorAll(".site-nav a[data-page]")];
   const lines = new Set(links.map((link) => Math.round(link.getBoundingClientRect().top)));
-  const nameText = document.querySelector(".site-nav .site-name-text");
+  const nameText = [...document.querySelectorAll(".site-nav .site-name-text")].find(
+    (label) => label.getClientRects().length > 0,
+  );
   return {
     nav: nav && box(nav),
     type: {
       body: size(document.querySelector(".kpress-long-text > p:not([class])")),
       name: size(document.querySelector(".site-nav .site-name")),
-      name_shown: nameText !== null && nameText.getClientRects().length > 0,
+      name_shown: nameText !== undefined,
+      name_label: nameText?.textContent ?? null,
       link: size(links[0] ?? null),
-      tab: size(document.querySelector("nav.site-tabs a")),
+      tab: size(tabs?.querySelector("a") ?? null),
+      tab_scale:
+        Number.parseFloat(
+          getComputedStyle(document.documentElement).getPropertyValue("--paper-button-label-scale"),
+        ) || 1,
       links_rows: lines.size,
       overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
       scale,

@@ -25,6 +25,14 @@ mark: '(?i)(?<![a-z])(?:sha\d*s?|(?:hex)?digests?|blake2[bs]?|md5|checksum|hashe
 # file holds no site is refused, so the list cannot outlive the code. The letters cite
 # the audit's inventory.
 allowlist:
+  - path: packing/campaign/issue-intake/upper-bounds-20261016/review/exact_sides.py
+    kind: download
+    boundary: >-
+      The four exact forms of issue 639 (n = 204, 263, 267 and 297) that the
+      evand-exact-cur-2026-10-16 packet pins by size and SHA-256 and keeps outside Git
+      (OR-18), fetched from evand/square-packing at 7d1407a into a scratch directory;
+      each is held to the packet manifest's digest before it is parsed. The 19 retained
+      forms are read from Git and compared with nothing.
   - path: packing/devtools/couzo_refinement_reports.py
     kind: download
     boundary: >-
@@ -102,13 +110,41 @@ allowlist:
   - path: packing/devtools/check_half_angle_area.py
     kind: download
     boundary: >-
-      `decide-imports --upstream` reads certificates and a summary table that #481
-      and #483 publish without a licence and that their packets therefore keep
-      outside Git, fetched from the source repository at the pinned commit into a
-      directory the reviewer names. Each file's SHA-256 is held against the value
-      the packet's acquisition record pinned at import, before the third route's own
-      reader holds it to the retained derived fact. The digest decides no geometry
-      and names no file this repository wrote.
+      `decide-imports --upstream` reads the files a packet pins without retaining:
+      the certificates, tables, witnesses and decimal poses that a source publishes
+      without a licence, which its packet therefore keeps outside Git, fetched from
+      the source repository at the pinned commit into a directory the reviewer
+      names. Each file's SHA-256
+      is held against the value the packet's acquisition record pinned at import,
+      before the third route's own reader holds it to the retained derived fact.
+      The digest decides no geometry and names no file this repository wrote.
+  - path: packing/devtools/upper_bound_houses.py
+    kind: download
+    boundary: >-
+      The houses adopted on 11 October 2026 are rebuilt in every private worker from
+      one retained certificate of another party per count, without the packet's whole
+      acquire_source check, whose inputs a worker does not carry. Each retained file's
+      SHA-256 is held against the value its packet's subtree manifest pinned at import,
+      and T-130's derived fact against the size and digest its acquisition row records
+      for the rendered certificate. The digest decides no geometry and names no file
+      this repository wrote.
+  - path: packing/devtools/check_vendored_evand.py
+    kind: download
+    boundary: >-
+      vendor/evand-regularize is Evan Daniel's code downloaded from
+      evand/square-packing and copied at a pinned commit. Offline, each file is held
+      against the SHA-256 its manifest records for the upstream blob at that commit,
+      catching an accidental unrecorded edit, drop or addition; a change that edits
+      the manifest too passes it. `--upstream` re-derives the expected value from the
+      upstream repository, without trusting this one: it requires one of upstream's
+      branches or tags to hold the pin, so a pull request's head GitHub serves by id
+      is refused, then fetches the pin's trees and compares Git blob ids, modes and
+      the tree, catching a silent fork the credit and pin would misdescribe, or a
+      manifest a re-pin left stale. It needs the network, so it is run by hand at a
+      re-pin and by whoever reviews a change to the vendored directory; no gate runs
+      it yet (think-vwlm). Nothing else reads these digests: no tool refuses to run
+      the generator on a mismatch, and the exact checkers, not the generator, decide
+      every result.
   - path: packing/devtools/n17_shared_centre_lp.py
     kind: generated-artifact
     boundary: >-
@@ -229,10 +265,10 @@ allowlist:
     boundary: A cold saved-check receipt identifies the generated seed and node consumed by the diagnostic; these runtime objects are not named by a Git revision.
   - path: packing/src/sqpack/fractional/parent_core.py
     kind: download
-    boundary: Kleddamag's n11 release, read against the digest the review pinned (H1).
+    boundary: Overbeck's n11 release, read against the digest the review pinned (H1).
   - path: packing/devtools/audit_kleddamag_n11.py
     kind: download
-    boundary: Kleddamag's certificate and source manifest against their pinned values (H1).
+    boundary: Overbeck's certificate and source manifest against their pinned values (H1).
   - path: packing/src/sqpack/research/unitsquare_precision.py
     kind: download
     boundary: A Kingbird SVG fetched by URL and held against its pinned digest (H2).
@@ -244,6 +280,15 @@ allowlist:
       and when reading their complete copied source bytes. Internal exact inputs
       and all native verdict fields are compared structurally; these source
       digests neither decide geometry nor bind results to internal code hashes.
+  - path: packing/devtools/upper_bound_reports.py
+    kind: download
+    boundary: >-
+      A release asset of another author's repository, outside Git, is admitted only at
+      the size and SHA-256 that a manifest in the pinned source checkout lists for it (PR
+      #574's v2 release), and a member read from the admitted archive only at the digest
+      the packet's declaration names. Both values come from the source, pinned at
+      retention; no digest names a file this repository wrote, decides geometry or pins
+      code.
   - path: packing/devtools/evand_exact_certificates.py
     kind: download
     boundary: Evan Daniel's exact certificates and checker sources at 13ee36e against the digests the packet pinned at retention, and the controls derived from them against their receipts' digests (#375).
@@ -264,6 +309,9 @@ allowlist:
   - path: packing/devtools/fine_net_followup.py
     kind: download
     boundary: wand125's fine-net release assets kept outside Git against the size and digest the packet pins, and their sealed inner bundles against the source's own files-sha256.json (#446).
+  - path: packing/devtools/continuous_pose_followup.py
+    kind: download
+    boundary: wand125's continuous-pose release asset kept outside Git against the size and digest the packet pins, its sealed inner bundle against the source's files-sha256.json, check2's kernel inputs regenerated here against the digests its manifests name, and each program's source digest by the rule the source states for it.
   - path: packing/devtools/audit_n11_lean.py
     kind: download
     boundary: 11SquaresFormalized's final audit, downloaded from the source, against the digest the packet's manifest pinned at retention and the uncompressed digest the source's summary.json states.
@@ -282,6 +330,21 @@ allowlist:
   - path: packing/devtools/audit_wand125_tools.py
     kind: download
     boundary: wand125's published input digests against the regenerated input (H3).
+  - path: packing/devtools/audit_wand125_closed_form.py
+    kind: download
+    boundary: >-
+      wand125's closed form: replay4d's printed source hash and the structure receipt's
+      validate_family digest, as the source states them at 9a28a84 and 1c661b7, against
+      their recomputation from the pinned upstream files, which is the claim under test
+      (think-4wgw); and the downloaded closed-form-v1 records and families against the
+      digests intervals.json publishes, and the source's replay receipt joined to them by
+      record digest (think-au7j). Packet custody is acquire_source --check's.
+  - path: packing/devtools/decide_undecided_comparisons.py
+    kind: download
+    boundary: >-
+      PR #574's n = 17 v2 certificate, taken from the downloaded release archive, against
+      the certificate digest the pull request's claims.json names before its side is
+      read (think-abjj).
   - path: packing/devtools/audit_tokoharu_density.py
     kind: download
     boundary: Tokoharu's density packet against its file manifest (H4).
@@ -306,6 +369,36 @@ allowlist:
       source, input and binary it says it ran, and the CI run's binary digests, which a
       build here from the retained source must reproduce. The replay's own receipts are
       compared whole, field by field; no run is refused on a digest.
+  - path: packing/devtools/audit_n40_new_supports.py
+    kind: download
+    boundary: >-
+      Guzhou0806's #485 release of 11 October: the density's digest as the release's
+      SOURCES.md and SHA256SUMS state it, held against the retained candidate; the
+      original pool's digest the release pins, held against the copy the 2026-10-01
+      packet retains; the two kernel-input digests both downloaded receipts name, held
+      against the inputs derived here from the retained density; each downloaded
+      receipt's slab and axis records against the digests it states for them and the
+      source, input and binary it says it ran; the CI run's two binaries, its pose
+      binary the one T-145's CI receipt and T-145's replay build with the CI compiler
+      record, and its axis binary the one a build here with the CI compiler must
+      reproduce; the shared kernel files against T-145's packet manifest, and their
+      retained bytes against this packet's. The checks after the orbit facts are
+      audit_continuous_pose's, made of this release. Every finite value and the axis
+      stage's output are recomputed and compared whole. One run is refused on a digest:
+      the crate's decision, unless the input digest the axis stage's record and the
+      crate's own premises state is that of the input derived here from the retained
+      candidate, itself held to the release's digest, so a crate decision on another
+      density of the same counts and mass fails. The expected digest is computed on
+      every run by this repository's serializer (audit_continuous_pose.crate_input), not
+      supplied by the release, so a change to that serialization refuses the retained
+      crate decision until run-axis is run again: about 3 s, with g++ and a cargo build
+      of the reviewed crate source. The complete replay (run-replay, judged by
+      check-replay through audit_continuous_pose's judge with this release's contract)
+      holds its builds to the CI run's two binary digests on the CI compiler, its slab,
+      axis and dual outputs whole against both downloaded receipts, its crate runs to the
+      axis stage's recorded decision and to the 401-direction values its own first run
+      pinned, and the scratch tree its dual programs run in to the packet manifest;
+      no replay run is refused on a digest the release supplies.
   - path: packing/devtools/audit_evand_mixed_covers.py
     kind: download
     boundary: Evan D's run headers against the retained upstream files (H7).
@@ -353,6 +446,15 @@ allowlist:
     boundary: >-
       Release assets of bulk data hosted outside Git (OR-18), each downloaded and held
       against the SHA-256 its committed manifest names; from main's PR 349.
+  - path: packing/cases/asymptotic/fang_excess_inventory.py
+    kind: external-checkout
+    boundary: >-
+      `--freeze-headers` reads Kevin Fang's squarepack-certs checked out at 078789a and
+      holds each of the 76 inventory certificates' bytes to the SHA-256 the packet's
+      manifest pinned when the packet was acquired, before taking its header into the
+      frozen list, catching a checkout at another revision or a locally altered file.
+      Checking the list reads headers only; no digest names a file this repository
+      wrote, decides geometry or pins code.
   - path: packing/devtools/check_general_pose_tree_census.py
     kind: external-checkout
     boundary: The general_pose_tree checker, another repository passed by --checker (C3).

@@ -1,0 +1,80 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-10-14T04:47Z",
+  "git_scope": "Full clone of the sixteen-commit repository, head 318ab94 at retrieval, checked out at the pin issue #567 names since its update of 2026-10-12T23:45Z. The scope is the seven n261 paths the pinned commit changed, which 8f96ceb first published with the certificate the update supersedes; the tree's README.md and SHA256SUMS index them only from the head 318ab94, outside the scope. Every n261 file has the same blob at the head. Under derived-only custody none is copied. No source program was executed.",
+  "sources": [
+    {
+      "id": "buddenping-square-packing-certificates",
+      "source_url": "https://github.com/BuddenPing/square-packing-certificates",
+      "source_ref": "main",
+      "source_commit": "e70342d149f9363b32ef6043ecfa8d0e0c4b51aa",
+      "committed_utc": "2026-10-12T23:44:55Z",
+      "git_tree": "a0f46cf386775680fedcda2beaa1f0afda8e5115",
+      "archived_path": "packing/resources/web/pingyou-n261-refinement-2026-10-12/source",
+      "subtree_manifest": "packing/resources/web/pingyou-n261-refinement-2026-10-12/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "n261-README.txt",
+        "n261-SHA256SUMS",
+        "n261-native-replay.json",
+        "n261-squares-project.zip",
+        "n261-verification.json",
+        "n261.cert.json",
+        "pingyou-n261-rational.yaml"
+      ],
+      "subtree_file_count": 7,
+      "subtree_total_bytes": 9188522,
+      "retained_file_count": 0,
+      "retained_total_bytes": 0,
+      "compressed": [],
+      "pinned_only": [
+        {
+          "path": "n261-README.txt",
+          "bytes": 3634,
+          "sha256": "6b2aa9dfe12fc1d83dba25ae0279a9212721ad3dc0c34df9ea9b9b4c94d857f7",
+          "reason": "Author prose stating the claim, the method, the credit and the replay commands, quoted in this packet's README. No licence: pinned by digest only."
+        },
+        {
+          "path": "n261-SHA256SUMS",
+          "bytes": 12420,
+          "sha256": "9841ca1f34d5ce614e9d05d0ade0c18d7b931f9725ca9a5a0b4b843f09dd6fee",
+          "reason": "The source's digest list for the n261 release files, each equal to the digest this manifest records. Pinned by digest only."
+        },
+        {
+          "path": "n261-native-replay.json",
+          "bytes": 5403,
+          "sha256": "14707c852e14af81b27a1e66d1757576ca7544397d3d6cfcacdea0bc9b19d6e5",
+          "reason": "The author's receipt of this repository's two exact checkers run on the release's witness at 074ac28, an author report. Pinned by digest only."
+        },
+        {
+          "path": "n261-squares-project.zip",
+          "bytes": 3238321,
+          "sha256": "d340c92e6e5b108e57982b1dda6872812ddedcc100655d814e342e4780589165",
+          "reason": "The source's complete package of 109 files: the certificate and witness again, the method, the inherited contact system, the separation word and its support rows, solver states, Evan Daniel's contact solver with its licence, the prior witnesses, exact checkers, receipts, and the sources and licences of this repository's two checkers at 074ac28. No licence for the source's own files: pinned by digest only; no program in it was executed."
+        },
+        {
+          "path": "n261-verification.json",
+          "bytes": 9283,
+          "sha256": "23358072906b7edf6b42168b44788679b40a16ef88a34a87bbccafd7ac979d69",
+          "reason": "The author's receipt of its own exact checks, an author report. Pinned by digest only."
+        },
+        {
+          "path": "n261.cert.json",
+          "bytes": 1076936,
+          "sha256": "f850cb35c31e018d5f6fdde90940f3d55ad36ecdb88341b805af47639c7e16c2",
+          "reason": "The exact rational certificate: n, s_exact and 261 [x, y, t] rows of rational strings, centres in [0, S]^2 and t = tan(theta/2), and a provenance record naming machine-local paths and the method. No licence, so derived-only custody: an importer reads it from a checkout at this pin and must match this digest."
+        },
+        {
+          "path": "pingyou-n261-rational.yaml",
+          "bytes": 4842525,
+          "sha256": "211ce191271e4815c80b0efcb83b141f5e7b1593db1274927ec1b34bb06d83e7",
+          "reason": "The source's rational corners Witness/v2 of the same packing, in JSON syntax. No licence: pinned by digest only; derive reads it from the same checkout and holds it to the certificate's poses and side."
+        }
+      ],
+      "license": "No licence file in the pinned tree, and GitHub detects none. The release READMEs say that upstream software and schema licences are retained beside the files they cover and that no new licence is asserted for third-party material; nothing grants one for the source's own files. Derived-only custody under the known-best retention policy: no upstream byte is retained, every file is bound here by SHA-256 and at the pin by its Git blob, and no redistribution permission or licence determination is asserted. The source asks that PingYou Ltd be credited with this further refinement, Ryan Xu with the original layout, Robert Barnett with the preceding refinement, and Evan Daniel with the contact-solver source.",
+      "claims": [
+        "Issue #567, as updated at 2026-10-12T23:45Z, reports s(261) <= 16.6787798753429098149372205115301919485639, rounded up from the exact rational side of n261.cert.json, whose denominator has 913 digits: a coupled-contact realization of Robert Barnett's refinement of Ryan Xu's packing, made feasible by an exact common centre and host separation repair, then a centre refinement within the complete fixed-frame support-inequality system, exact rational repair and cropping; the bound includes both repairs. It is about 2.0196044479e-13 below the author's first n261 certificate at 8f96ceb, which it supersedes.",
+        "The source reports that its exact separating-axis and rational polygon checks accept all 261 squares, every wall and all 33,930 pairs, that all 34,974 declared support inequalities hold, and that this repository's sqpack exact_verify and check_rational_witness_independent at 074ac28 accept its native Witness/v2. These are author reports; no local or global optimality is claimed."
+      ]
+    }
+  ]
+}

@@ -17,7 +17,7 @@ hosted CI.
 | Prior finding | Resolution at `147ceff6` |
 | --- | --- |
 | Ideas index treated the literal parent mass as unmeasured | `packing/campaign/ideas.md:552–554` now gives exp-159’s $N=4000015$, says T2 C/S target charges remain unrun, and says X-030 registers no additional target or bound. These match the retained exp-159 receipt, H-160 `instrument_ready: false`, exp-158 `results: []`, and X-030 `proposes: []`. |
-| Plan promised verified native usage and scientific runtime for every stacked PR | `docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md:629–632` now requires only evidence verified for each layer, with exclusions and unattributed usage explicit. This accommodates H-161’s 0.16-second target receipt without inventing branch-only native usage, and the T2 task-time lower bound without inventing a charge run. |
+| Plan promised verified native usage and scientific runtime for every stacked PR | `docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md:629–632` now requires only evidence verified for each layer, with exclusions and unattributed usage explicit. This accommodates H-161’s 0.16-second target receipt without inventing branch-only native usage, and the T2 task-time lower bound without inventing a charge run. |
 | Historical parent-union review used present tense for unmeasured mass | `docs/project/reviews/review-2026-09-13-bc303-parent-union-math.md:10` now ties the uncomputed status to that review’s T1 cutoff. It no longer conflicts with the later H-161 result. |
 
 ## Status and Boundaries

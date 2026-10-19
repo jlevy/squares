@@ -1,0 +1,7 @@
+# command: cargo +1.86.0 build --locked --release -j 2 -p replay4d
+# cwd: problems/closed-form/checker/ of a scratch restore of the build-1c661b7 packet tree
+# python3: not used by this command
+# host: 4 cores; load 3.28 2.95 3.62; started 2026-10-14T17:36:07Z
+   Compiling replay4d v0.1.1 (/tmp/claude-0/-home-user-squares/b631c4e5-343e-524d-b3e3-75217093489f/scratchpad/vcheap/build-1c661b7/problems/closed-form/checker/replay4d)
+    Finished `release` profile [optimized] target(s) in 13.51s
+# finished 2026-10-14T17:36:20Z; exit 0; wall 13.538 s; CPU 13.3 s (user 13.009 + sys 0.327); load 3.08 2.92 3.60

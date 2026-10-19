@@ -123,13 +123,13 @@ body {
      text, so the bar reads as the table's tools and not as its content. */
   --site-font-size-control: calc(var(--site-font-size-sans-base) * 0.8);
   --site-support-color: var(--kpress-doc-muted);
-  --site-wide: calc(var(--kpress-measure) + 24rem);
-  /* How far a block may bleed past the wide track (the atlas grid, and a data table
-     above `--site-table-bleed-from`): paper-design.md, Wide bleed. */
-  --site-bleed-max: 140rem;
+  /* The wide track is forty times the shared type base plus 24rem, 1104px at 18px.
+     It is independent of the prose measure so tables and card grids retain their room
+     when reading lines change (paper-design.md, Wide bleed). */
+  --site-wide: calc(var(--kpress-font-size-base) * 40 + 24rem);
   --site-table-bleed-from: 80rem;
-  /* A table stops at 100rem, short of the atlas's cap: past it, its columns only spread
-     apart and a row gets harder to follow. */
+  /* A table stops at 100rem: past it, its columns only spread apart and a row gets
+     harder to follow. */
   --site-table-max: 100rem;
   /* The tables of results hold eight columns since 2026-10-04 (`think-46fw`; nine from
      2026-10-03, `think-m3m4`), and on a very wide window they bleed further than the
@@ -149,7 +149,7 @@ body {
   --site-wide-gutter: 0.5rem;
   /* The space under a page's title: to its subtitle and from the subtitle to the first
      paragraph, or straight to the first paragraph of a page that has no subtitle. */
-  --site-subtitle-space: 1.5rem;
+  --site-subtitle-space: 2rem;
   --site-subtitle-scale: 1.1;
   /* How much nearer the bar a page's opening picture sits than a title would: a drawing
      has no line spacing above its edge, so the same space reads larger. */
@@ -172,7 +172,7 @@ body {
 /* Capped at 100% as kpress caps its column: beside a TOC the column is a grid item with
    auto margins, sized to its min-content, so a wide code block or table would otherwise
    push it past a phone's viewport instead of scrolling inside it. The text fills the
-   column, as the explainer's does: its lines run the measure plus both insets, 800px at
+   column, as the explainer's does: its lines run the measure plus both insets, 710px at
    a desktop, and on a phone the page margin alone keeps them off the screen's edge. */
 .site-page {
   margin-inline: auto;
@@ -233,6 +233,11 @@ body {
    column's own top padding is that token, and its first block, a hero or a document's
    title, brings no margin of its own. */
 @media screen {
+  /* Wide blocks use the page container's width. Keep their outer clip at that
+     width too; the layout and text wrappers retain the reading-column cap. */
+  .kpress-page-main > .kpress-doc:has(.site-page) {
+    max-width: none;
+  }
   .kpress-page-main > .kpress-doc > .kpress-doc-layout > .kpress-long-text {
     padding-block-start: var(--site-page-top);
   }
@@ -260,10 +265,10 @@ body {
 /* Main section titles share the homepage's breathing room on every web page. */
 @media screen {
   .kpress {
-    --site-title-space-above: 3.5rem;
-    --site-title-space-below: 2rem;
+    --site-title-space-above: 3.75rem;
+    --site-title-space-below: 2.5rem;
   }
-  .kpress :where(.site-page) h1,
+  .kpress :where(.site-page, .kpress-prose) h1,
   .kpress :is(h1, h2).site-title {
     margin-block: var(--site-title-space-above) var(--site-title-space-below);
   }
@@ -522,7 +527,9 @@ body {
   mask: var(--site-arrow) center / contain no-repeat;
   rotate: var(--site-arrow-turn);
   scale: var(--site-arrow-flip) 1;
-  transition: translate var(--site-hover-duration) var(--site-hover-easing);
+  transition:
+    translate var(--site-hover-duration) var(--site-hover-easing),
+    rotate var(--site-hover-duration) var(--site-hover-easing);
   vertical-align: -0.125em;
 }
 .kpress
@@ -823,6 +830,7 @@ body {
   background: var(--kpress-doc-accent);
   color: var(--kpress-doc-bg);
   display: inline-flex;
+  font-family: var(--kpress-font-sans);
   font-size: calc(var(--site-font-size-note) * var(--paper-button-label-scale));
   font-weight: var(--site-font-weight-sans-medium);
   gap: 0.5rem;
@@ -873,7 +881,7 @@ body {
   text-align: center;
 }
 
-.kpress :is(.site-card, .site-popover, .site-case) .site-card-label {
+.kpress :is(.site-card, .site-popover, .site-case, .site-article-header) .site-card-label {
   color: var(--kpress-doc-muted);
   font-family: var(--kpress-font-sans);
   font-size: var(--kpress-caps-label-size, 0.8rem);
@@ -887,7 +895,8 @@ body {
    a headline of two or three lines reads as one block. A long closed form, such as a
    nested radical, scrolls inside its card rather than widening the page. */
 .kpress .site-card .site-card-value,
-.site-popover .site-popover-value {
+.site-popover .site-popover-value,
+.kpress .site-article-header > h3 {
   font-family: var(--kpress-font-sans);
   font-weight: var(--site-font-weight-sans-medium);
   line-height: var(--paper-heading-leading);
@@ -904,7 +913,8 @@ body {
 /* The tighter leading takes the room a looser line kept around the headline, so the
    headline carries it as margin: a little above, under the label, and more below, over
    the note. */
-.kpress .site-card .site-card-value {
+.kpress .site-card .site-card-value,
+.kpress .site-article-header > h3 {
   font-size: 1.15em;
   margin-block: 0.2rem 0.3rem;
   max-inline-size: 100%;
@@ -1196,11 +1206,15 @@ body {
    the text light. A plain chip is a neutral tint; a status chip takes its status's
    fill (below). A rung chip adds `site-rung-fill`. */
 .site-chip {
-  background: color-mix(
+  font-variant-caps: normal;
+  letter-spacing: normal;
+  text-transform: none;
+  --site-chip-fill: color-mix(
     in oklch,
     var(--kpress-doc-muted) var(--site-chip-tint),
     var(--kpress-doc-bg)
   );
+  background: var(--site-chip-fill);
   border-radius: 0;
   color: var(--kpress-doc-text);
   display: inline-block;
@@ -1224,9 +1238,14 @@ body {
    `confirmed` is the green of the confirmation rungs, at C3's strength, and its
    `reviewed` the verification rungs' blue. Bound kinds use the bound colours, recorded is yellow, and
    superseded standings keep the plain gray chip. `devtools.rung_scale` measures these fills too. */
-.site-chip:is([data-case-status], [data-status="confirmed"], [data-status="reviewed"]) {
+.site-chip:is(
+  [data-case-status],
+  [data-status="confirmed"],
+  [data-status="reviewed"],
+  [data-news-topic="verification"]
+) {
   --rung-chroma-boost: 0;
-  background: oklch(
+  --site-chip-fill: oklch(
     calc(var(--site-rung-base) + var(--rung-level) * var(--site-rung-step))
       calc(
         var(--site-rung-chroma-base) +
@@ -1241,7 +1260,8 @@ body {
   --rung-hue: 158;
   --rung-level: 3;
 }
-.site-chip[data-status="reviewed"] {
+.site-chip[data-status="reviewed"],
+.site-chip[data-news-topic="verification"] {
   --rung-hue: 250;
   --rung-level: 2;
 }
@@ -1256,17 +1276,34 @@ body {
 }
 
 /* Bound chips share the plotted bound hues, diluted into the current page background. */
-.site-chip:is([data-kind="lower-bound"], [data-status="incomplete"]) {
-  background: color-mix(
+.site-chip:is(
+  [data-kind="lower-bound"],
+  [data-status="incomplete"],
+  [data-news-topic="lower-bound"]
+) {
+  --site-chip-fill: color-mix(
     in oklab,
     var(--site-bound-lower) var(--site-chip-tint),
     var(--kpress-doc-bg)
   );
 }
-.site-chip:is([data-kind="upper-bound"], [data-kind="optimality"]) {
-  background: color-mix(
+.site-chip:is(
+  [data-kind="upper-bound"],
+  [data-kind="optimality"],
+  [data-news-topic="upper-bound"],
+  [data-news-topic="optimality"]
+) {
+  --site-chip-fill: color-mix(
     in oklab,
     var(--site-bound-upper) var(--site-chip-tint),
+    var(--kpress-doc-bg)
+  );
+}
+.site-chip[data-news-topic="engineering"],
+.site-chip[data-news-topic="project"] {
+  --site-chip-fill: color-mix(
+    in oklab,
+    var(--kpress-doc-accent) var(--site-chip-tint),
     var(--kpress-doc-bg)
   );
 }
@@ -1316,34 +1353,44 @@ body {
 .site-star {
   color: var(--site-new-result);
 }
-/* A significance rung is its letter and level in the significance teal, medium weight,
-   then as many short bars in the same ink as its level, one to five, so a column of them
-   reads as a meter: no chip, since significance asks a different question from the
-   verification and confirmation chips beside it. The bars sit at the label's middle, a
-   line apart, and never wrap away from it. */
+/* One boxed meter for every significance score: the label stays close to its bars,
+   centered together at a fixed width. Filled bars show the level; outlined bars the
+   remainder. */
 .site-significance {
   align-items: center;
+  block-size: 1.45em;
+  border: 1px solid currentColor;
+  box-sizing: border-box;
   color: var(--site-significance);
   display: inline-flex;
+  flex-shrink: 0;
   font-family: var(--kpress-font-sans);
+  font-size: var(--site-font-size-note);
   font-variant-numeric: tabular-nums;
   font-weight: var(--site-font-weight-sans-medium);
-  gap: 0.2em;
+  gap: 0.18em;
+  inline-size: 5.5em;
+  justify-content: center;
+  padding-inline: 0.28em;
   vertical-align: baseline;
   white-space: nowrap;
 }
 .site-significance-bars {
   display: inline-flex;
-  gap: 0.08em;
+  gap: 0.12em;
 }
 .site-significance-bar {
-  background: currentcolor;
-  block-size: 0.26em;
-  border-radius: 0.06em;
-  inline-size: 0.36em;
+  background: transparent;
+  block-size: 0.6em;
+  border: 1px solid currentColor;
+  box-sizing: border-box;
+  inline-size: 0.5em;
+}
+.site-significance-bar[data-filled="true"] {
+  background: currentColor;
 }
 @media (forced-colors: active) {
-  .site-significance-bar {
+  .site-significance-bar[data-filled="true"] {
     background: CanvasText;
   }
 }
@@ -1451,15 +1498,8 @@ body {
 .site-rung-legend .site-significance + .site-significance {
   margin-inline-start: 0.3rem;
 }
-/* Significance is the second column, narrow but prominent: its mark on one line, and a
-   new result's star after the bars, where it stood after the result's text until
-   2026-10-03 (`think-m3m4`). The column is as wide as its widest mark, KPress's 6rem
-   floor given up as the cases' is: S5's and a star, 77.4px. The mark was trimmed to
-   that the same day (`think-r3rd`), its bars 0.36em wide and 0.2em after its label
-   (`.site-significance`, above), the cell's padding 0.2rem and the star's margin below,
-   from 90.4px, which set the nine columns' floors 7.8px past the 1200 a 1280-pixel
-   window gives the table; now they leave it 2. The padding went from 0.3rem to 0.2rem
-   when two results' tenth evidence links widened the details column by 6.3px. */
+/* The significance column holds the shared fixed-width meter and an optional
+   new-result star. The result's text takes the remaining table width. */
 .site-results .site-col-s {
   white-space: nowrap;
 }
@@ -1937,7 +1977,7 @@ body {
   --site-ladders-line: calc(var(--site-font-size-note) * var(--site-ladders-leading));
   /* The rail holds a chip and nothing else, so it is the chip's own width. */
   --site-ladders-rail: 2.25rem;
-  --site-ladders-significance-rail: 3.75rem;
+  --site-ladders-significance-rail: 6.25rem;
   --site-ladders-gap: 0.75rem;
   /* The narrowest a description is ever set: `SHORT_MEANING_LINE` characters a line. */
   --site-ladders-meaning-min: 13.5rem;
@@ -2009,12 +2049,8 @@ body {
   min-inline-size: var(--site-ladders-rail);
   text-align: center;
 }
-/* Significance's rungs are marks, not chips (`significance_mark`): its column's rail is
-   as wide as the widest, S5 and its five bars (58.8 pixels at the note size), so every description in it starts on one
-   line, as the chips' do. A mark stands as tall as a chip, the chip's line height and
-   margin, so a rung of it is as tall as any other where it stands on a line of its own
-   over its description, and its letters are level with its description's first line
-   where it stands beside it. */
+/* The shared fixed-width meter needs its own wider rail. It keeps the chip's
+   height so a row still lines up across all three dimensions. */
 .site-ladders-cell[data-ladder="S"] {
   --site-ladders-rail: var(--site-ladders-significance-rail);
 }
@@ -2028,16 +2064,9 @@ body {
   block-size: calc(2 * var(--site-ladders-line));
   grid-area: meaning;
 }
-/* A rung with room, 18rem (the widest rail, significance's, the gap and the least
-   description): the chip in its rail and the description beside it, its first line
-   level with the chip's letters, which the chip's own margin sets down. Every cell
-   turns at that one width, so a row's rungs stay one height; at 16.5rem, the chips'
-   rail's, a significance description was set 21.6 pixels short of its least and took
-   a third line (2026-10-03). The rail is at least its width and never narrower than
-   what stands in it: S5's mark, 58.8 pixels in the page's face, ran 1.2 past a 3.6rem
-   rail, and a wider face (65 pixels in the fallback, more in some system faces) ran it
-   into its description (the owner, 2026-10-05). */
-@container (inline-size >= 18rem) {
+/* Rail + gap + the minimum two-line description: 6.25 + 0.75 + 13.5rem.
+   Every cell turns together; max-content also protects a reader's enlarged meter. */
+@container (inline-size >= 20.5rem) {
   .site-ladders-rung {
     align-items: start;
     grid-template-areas: "chip meaning";
@@ -2080,9 +2109,9 @@ body {
 }
 
 /* The atlas grid: every case's known-best packing in a square cell, numbered beneath.
-   It bleeds past the wide track as the window grows, up to 140rem, and its cells keep a
-   size that reads, so the row holds more cases the wider the screen: at Medium, four on
-   a phone, ten at 1280 pixels, sixteen at 1920 and twenty at 2560. A cell washes on hover
+   It fills the page container less its edge gutters at every window width, and its
+   cells keep a size that reads, so the row holds more cases the wider the screen: at
+   Medium, four on a phone, ten at 1280 pixels and sixteen at 1920. A cell washes on hover
    like a card and opens the case popover (Case records, below). The wash is the cell's
    background,
    behind the drawing, and it is all that changes: every line keeps the page's ink. */
@@ -2093,7 +2122,7 @@ body:has([data-atlas-preview]) {
   overflow-anchor: none;
 }
 .site-page .site-atlas-grid {
-  --site-wide: var(--site-bleed-max);
+  --site-wide: var(--site-wide-room);
   --site-atlas-toggle-space: 1.2rem;
   /* Both views share the grid's readable cell minimum and gap. The script reads
      these tokens in rem or px; complete Triangle rows pan at that cell width. The size's
@@ -2142,7 +2171,7 @@ html[data-site-atlas-size="large"]
     --site-atlas-scale: 1;
   }
 }
-/* Layout, Size and Scale use the shared small chooser strip. Each line is
+/* Layout, Size, Scale and Drawings use the shared small chooser strip. Each line is
    centered over the tiles, with the compact two-column key centered beneath it;
    on a narrow block the controls wrap beneath one another. */
 .site-atlas-grid .site-atlas-controls {
@@ -2154,11 +2183,13 @@ html[data-site-atlas-size="large"]
 }
 .site-atlas-grid .site-atlas-views,
 .site-atlas-grid .site-atlas-sizes,
+.site-atlas-grid .site-atlas-drawings,
 .site-atlas-grid .site-atlas-scales {
   margin: 0;
 }
 .site-atlas-grid .site-atlas-views[hidden],
 .site-atlas-grid .site-atlas-sizes[hidden],
+.site-atlas-grid .site-atlas-drawings[hidden],
 .site-atlas-grid .site-atlas-scales[hidden],
 .site-atlas-grid .site-atlas-legend[hidden] {
   display: none;
@@ -2535,7 +2566,7 @@ html[data-site-atlas-view="triangle"] .site-atlas-grid:where([data-atlas-grid]) 
   line-height: 1.15;
   margin-block-start: calc(var(--site-atlas-tile) * 0.04);
 }
-/* Perfect-square endpoints use the text color and bold weight. */
+/* Perfect-square endpoints use bold weight while keeping the same gray number ink. */
 html:not([data-site-atlas-view="grid"])
   .site-atlas-grid:where([data-atlas-grid]):where([data-atlas-view="triangle"])
   [data-atlas-square]
@@ -2544,7 +2575,6 @@ html[data-site-atlas-view="triangle"]
   .site-atlas-grid:where([data-atlas-grid])
   [data-atlas-square]
   .site-atlas-n {
-  color: var(--kpress-doc-text);
   font-weight: var(--site-font-weight-sans-bold);
 }
 /* The grid shows n = 1 to 100 until its button, centred under it, places the rest. The
@@ -2787,36 +2817,34 @@ html[data-site-atlas-view="triangle"]
   inline-size: 3px;
   inset-block-start: -0.4rem;
 }
-/* An equality displays the packing value. A recent proof accents O independently;
-   historical exact values retain the ordinary text ink. */
+/* An equality displays the packing value; historical exact values retain ordinary
+   text ink. Status badges and their labels keep their usual neutral ink. */
 .site-atlas-pop .is-exact-value:not(.is-new-result),
 .site-atlas-pop .is-exact-value:not(.is-new-result) .katex {
   color: var(--kpress-doc-text);
 }
-/* Recent construction, proof and optimality contributions share the new-result ink.
-   Historical upper packings retain their role colour when only optimality is new. */
+/* Only a changed numerical bound takes the new-result ink. Historical upper packings
+   retain their role colour when only optimality is new. */
 .kpress .site-page .is-new-result,
 .kpress .site-page .is-new-result .katex {
   color: var(--site-new-result);
-}
-.kpress .site-atlas-badge[data-recent="true"] {
-  border-color: var(--site-new-result);
-  color: var(--site-new-result);
-}
-.kpress .site-atlas-badge[data-recent="true"][data-style="solid"] {
-  background: var(--site-new-result);
-  color: var(--kpress-doc-bg);
 }
 /* ---------- Case records ----------
    One record per case, in its own file at `cases/11.html`, shown by the record page
    (`cases/`, overview/case-page.js) and by the one case popover every page that links
    cases carries (overview/case-popover.js). A record opens with its visual summary,
    the drawing and bound facts together, followed by the detailed record. */
+:root {
+  /* Resolve the canonical shell's measure and foundation insets here, before a
+     fetched record inherits another page's band-specific inset. Both readers use
+     this cap, with enough room for two 17rem bound cards and their gap. */
+  --site-case-max: min(48rem, calc(var(--kpress-measure) + 2 * var(--kpress-column-inset)));
+}
 .site-case {
   container-type: inline-size;
   inline-size: 100%;
   margin-inline: auto;
-  max-inline-size: 48rem;
+  max-inline-size: var(--site-case-max);
   min-inline-size: 0;
 }
 .site-case-reader {
@@ -3060,6 +3088,26 @@ html[data-site-atlas-view="triangle"]
   margin-block-start: 0.5rem;
   text-align: center;
 }
+/* A case drawn by default from its regularized view keeps the house drawing one click
+   away, as published (regularization policy, section 12): a disclosure under the figure,
+   whose drawing is a figure of the same kind. */
+.site-case-published {
+  font-family: var(--kpress-font-sans);
+  font-size: var(--site-font-size-note);
+  font-weight: var(--site-font-weight-sans-light);
+  text-align: center;
+}
+/* As specific as the case's own `details` rule, which would otherwise set its margin. */
+.kpress .site-case details.site-case-published {
+  margin-block: 0.25rem 0.75rem;
+}
+.site-case-published > summary {
+  color: var(--site-support-color);
+  cursor: pointer;
+}
+.site-case-published > .site-case-figure {
+  margin-block-start: 0.5rem;
+}
 /* One panel a bound, as many abreast as fit. A panel is never narrower than its text
    needs: 17rem holds a line of the note face and the longest of the usual evidence
    names whole (25 characters of the mono face in its chip), so nothing in a panel is
@@ -3069,7 +3117,7 @@ html[data-site-atlas-view="triangle"]
   gap: 1rem;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr));
 }
-/* The case's 48rem measure fits at most two columns. A final unpaired panel keeps
+/* The case's measure, at most 48rem, fits at most two columns. A final unpaired panel keeps
    the same width as its neighbours and centres on the row when both columns fit. */
 @container (min-width: 35rem) {
   .site-case-bounds > :last-child:nth-child(odd) {
@@ -3331,6 +3379,11 @@ html[data-site-atlas-view="triangle"]
   padding-inline-start: 0.15rem;
   transition: transform var(--site-hover-duration) var(--site-hover-easing);
 }
+.site-film-play-icon::before {
+  border-block: 0.7rem solid transparent;
+  border-inline-start: 1.1rem solid currentColor;
+  content: "";
+}
 .site-film-play:is(:hover, :focus-visible) .site-film-play-icon {
   transform: scale(1.08);
 }
@@ -3364,4 +3417,206 @@ html[data-site-atlas-view="triangle"]
   justify-content: space-between;
   gap: 1rem;
   margin-block-start: 2rem;
+}
+
+/* News is operational content: sans text, with one quiet frame for each entry. */
+.kpress .site-news {
+  --site-news-hover-tint: 7%;
+  font-family: var(--kpress-font-sans);
+  font-size: var(--site-font-size-sans-base);
+  font-weight: var(--site-font-weight-sans-light);
+  line-height: var(--kpress-line-height-normal);
+}
+.kpress .site-news-day {
+  border: 1px solid var(--kpress-doc-border);
+  margin-block: 1.25rem;
+  padding: 0.9rem 1rem;
+  transition: var(--site-hover-transition);
+}
+.kpress .site-news-day[data-news-enhanced] {
+  cursor: pointer;
+}
+.kpress .site-news-day[data-news-enhanced]:hover {
+  background: color-mix(
+    in oklch,
+    var(--kpress-doc-accent) var(--site-news-hover-tint),
+    transparent
+  );
+}
+.kpress .site-news-footer {
+  display: flex;
+  margin-block-start: 0.4rem;
+}
+.kpress .site-news-footer:has([hidden]) {
+  display: none;
+}
+.kpress .site-news-expand {
+  background: none;
+  border: 0;
+  color: var(--kpress-doc-accent);
+  cursor: pointer;
+  font: inherit;
+  padding: 0.2rem;
+}
+.kpress .site-news-body {
+  overflow: hidden;
+  position: relative;
+  transition: max-block-size var(--site-hover-duration) var(--site-hover-easing);
+}
+.kpress .site-news-body::before,
+.kpress .site-news-body::after {
+  block-size: 1.25lh;
+  content: "";
+  inset-block-end: 0;
+  inset-inline: 0;
+  mask-image: linear-gradient(transparent, currentColor);
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  transition: opacity var(--site-hover-duration) var(--site-hover-easing);
+}
+.kpress .site-news-body::before {
+  background: var(--kpress-doc-bg);
+}
+.kpress .site-news-body::after {
+  background: color-mix(
+    in oklch,
+    var(--kpress-doc-accent) var(--site-news-hover-tint),
+    transparent
+  );
+}
+.kpress .site-news-day.is-collapsed .site-news-body::before,
+.kpress .site-news-day.is-collapsed:hover .site-news-body::after {
+  opacity: 1;
+}
+.kpress .site-article-header {
+  font-size: var(--kpress-font-size-base);
+}
+.kpress .site-article-date {
+  color: inherit;
+  font-family: var(--kpress-font-sans);
+  font-feature-settings: var(--kpress-font-features-sans);
+  font-size: var(--site-font-size-sans-base);
+  font-style: normal;
+  font-weight: var(--site-font-weight-sans-medium);
+  letter-spacing: normal;
+  line-height: 1.45;
+  margin: 0 0 0.6rem;
+  text-align: start;
+  text-transform: none;
+}
+.kpress .site-article-header > h3 {
+  color: inherit;
+  font-style: normal;
+  letter-spacing: normal;
+  text-align: start;
+  text-transform: none;
+}
+.kpress .site-article-header > h3 > a {
+  color: inherit;
+  font: inherit;
+}
+.kpress .site-article-header > h3 :is(.kpress-math, .katex, .tex, math) {
+  letter-spacing: normal;
+  text-transform: none;
+}
+/* One metadata row on the archive and homepage: topics wrap on the left while
+   the shared significance meter keeps its fixed width at the right. */
+.kpress .site-news-metadata {
+  align-items: baseline;
+  display: flex;
+  gap: 0.6rem;
+  margin-block-end: 0.5rem;
+}
+.kpress .site-news-significance {
+  flex: none;
+  margin: 0;
+  margin-inline-start: auto;
+}
+.kpress .site-news-topics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin: 0;
+  min-inline-size: 0;
+}
+/* News topics keep the Results chip's fill, corners and leading at a smaller scale. */
+.kpress .site-news-topics .site-chip {
+  font-size: calc(var(--site-font-size-note) * 0.85);
+  margin-block: calc(0.15rem * 0.85);
+  padding-inline: calc(0.35rem * 0.85);
+}
+.kpress .site-news-item + .site-news-item {
+  border-block-start: 1px solid var(--kpress-doc-border);
+  margin-block-start: 1.25rem;
+  padding-block-start: 0.5rem;
+}
+.kpress .site-news-item > :last-child {
+  margin-block-end: 0;
+}
+.site-news-legacy-anchor {
+  block-size: 0;
+  display: block;
+  inline-size: 0;
+  overflow: hidden;
+}
+
+/* Disclosure controls sit at the horizontal center of their content, across cards
+   and Atlas previews. Navigation actions keep their own layout roles. */
+.kpress :is(.site-news-footer, .site-atlas-toggle-row) {
+  justify-content: center;
+}
+.kpress .site-news-filters {
+  font-weight: var(--site-font-weight-sans-light);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.9rem;
+  font-family: var(--kpress-font-sans);
+  font-size: var(--site-font-size-note);
+  margin-block: 1rem;
+}
+.kpress .site-news-filters[hidden] {
+  display: none;
+}
+.site-news-filters > .site-table-tools {
+  flex-basis: 100%;
+}
+.site-news-filters fieldset {
+  border: 0;
+  max-inline-size: 100%;
+  margin: 0;
+  min-inline-size: 0;
+  padding: 0;
+}
+/* Compact choices and the Results count row own shared sizing and alignment. */
+.site-news-filters :is(.site-tabs, .site-table-tools) {
+  margin: 0;
+}
+/* Joined topic controls retain the card chips' palette and casing. Selection adds
+   an inset mark so the subject color keeps the same meaning in either state. */
+.site-news-filters [aria-labelledby="news-topics-label"] button {
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+.site-news-filters .site-tabs button.site-chip {
+  background: var(--site-chip-fill);
+  color: var(--kpress-doc-text);
+  font-variant-caps: normal;
+  letter-spacing: normal;
+  margin: 0;
+  text-transform: none;
+}
+.site-news-filters .site-tabs button.site-chip[aria-pressed="true"] {
+  box-shadow: inset 0 -2px currentColor;
+}
+.site-news-filters .site-tabs button.site-chip:is(:hover, :focus-visible) {
+  text-decoration: underline;
+}
+
+/* The default first paint already shows S4/S5. Readers without scripting receive
+   the complete archive, as the Results table's progressive filters do. */
+@media (scripting: none) {
+  .kpress .site-news-day[hidden] {
+    display: block;
+  }
 }

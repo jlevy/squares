@@ -20,6 +20,8 @@ from fractions import Fraction
 from pathlib import Path
 from typing import Any
 
+import pytest
+
 from devtools import audit_continuous_pose as audit
 from devtools.audit_continuous_pose import CLAIM, Facts
 
@@ -262,3 +264,71 @@ def test_a_control_that_was_accepted_is_refused(tmp_path: Path) -> None:
     report = audit.replay_report(folder)
     failed = {check["name"] for check in report["checks"] if not check["held"]}
     assert failed == {f"control {name}"}
+
+
+# --------------------------------------------------------------------------- the runner
+# A slab stage stopped from outside loses only the slabs in flight: each row is written as
+# it finishes, and a later run in the same directory keeps a row that names the same
+# binary, input and arguments, with that row's own timing.
+
+
+def _fake_kernel(path: Path) -> None:
+    path.write_text(
+        '#!/bin/sh\necho \'{"status":"verified","nodes":3,"leaves":2,"angle_splits":1,'
+        '"lower_bound":"0.9999","pl":\'"$1"\',"ph":\'"$2"\',"den":\'"$3"\'}\'\n'
+    )
+    path.chmod(0o755)
+
+
+def test_a_stopped_slab_stage_keeps_its_finished_rows(
+    tmp_path: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    layout = audit.Layout(tmp_path)
+    layout.build.mkdir()
+    layout.pose.mkdir()
+    layout.logs.mkdir()
+    _fake_kernel(layout.binary("pose"))
+    claim = dataclasses.replace(CLAIM, endpoints=(1, 500, 10000))
+    inputs = {"pose": "0" * 64, "axis": "1" * 64}
+    first = audit.run_slabs(layout, inputs, 1, claim)
+    assert [row["index"] for row in first] == [0, 1]
+    assert sorted(p.name for p in (tmp_path / "slab-rows").iterdir()) == [
+        "slab-000.json",
+        "slab-001.json",
+    ]
+    # A second run keeps both rows, timing included.
+    (tmp_path / "slab-rows/slab-001.json").unlink()
+    again = audit.run_slabs(layout, inputs, 1, claim)
+    assert again[0] == first[0]
+    assert again[1]["argv"] == first[1]["argv"]
+    assert again[1] is not first[1]
+    out = capsys.readouterr().out
+    assert "slab 0: kept from an earlier run, exit 0" in out
+    assert "slab 1: exit 0" in out
+    # Another binary, input or argument list reruns the slab rather than keeping the row.
+    (layout.binary("pose")).write_bytes(layout.binary("pose").read_bytes() + b"\n")
+    rerun = audit.run_slabs(layout, inputs, 1, claim)
+    assert rerun[0]["binary_sha256"] != first[0]["binary_sha256"]
+    assert "kept" not in capsys.readouterr().out
+    other = audit.run_slabs(layout, {**inputs, "pose": "2" * 64}, 1, claim)
+    assert other[0]["input_sha256"] == "2" * 64
+    assert "kept" not in capsys.readouterr().out
+
+
+def test_a_killed_slab_or_a_torn_row_is_run_again(tmp_path: Path) -> None:
+    """A row whose kernel did not exit 0, or that does not read as JSON, is not kept."""
+    layout = audit.Layout(tmp_path)
+    layout.build.mkdir()
+    layout.pose.mkdir()
+    layout.logs.mkdir()
+    _fake_kernel(layout.binary("pose"))
+    claim = dataclasses.replace(CLAIM, endpoints=(1, 500, 10000))
+    inputs = {"pose": "0" * 64, "axis": "1" * 64}
+    first = audit.run_slabs(layout, inputs, 1, claim)
+    killed = tmp_path / "slab-rows/slab-000.json"
+    killed.write_text(json.dumps({**first[0], "exit_code": -9}), encoding="utf-8")
+    (tmp_path / "slab-rows/slab-001.json").write_text('{"index": 1, "argv"', encoding="utf-8")
+    again = audit.run_slabs(layout, inputs, 1, claim)
+    assert [row["exit_code"] for row in again] == [0, 0]
+    assert json.loads(killed.read_text(encoding="utf-8"))["exit_code"] == 0
+    assert not list((tmp_path / "slab-rows").glob("*.partial"))

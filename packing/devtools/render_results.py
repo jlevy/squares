@@ -25,7 +25,9 @@ rests on now, the results its cases' bounds rest on instead, both derived from t
 records; for a result of another kind, the later results its entry declares imply it
 (`superseded_by`), and `superseded in part` where they imply only some of it.
 Under the tables, each result whose certificate regularizes packings other results hold
-lists its `regularizations`, one sentence a count (`result_credit.regularization_sentence`).
+lists its `regularizations`, one sentence a count (`result_credit.regularization_sentence`),
+and the register's `regularized_drawings`, this project's own regularizations of the
+packings the atlas draws regularized, follow in the same sentences.
 The closing list gives each result's next action, its `next_rung`, and under it each of
 its `unfinished_confirmations` with the rung it would reach and its estimated cost.
 
@@ -194,7 +196,16 @@ def regularizations(results: list[dict], sources: Mapping[str, Mapping[str, Any]
             f"packing keeps its finder{APOSTROPHE}s credit through it, and the regularizer "
             "is credited with the arrangement. That a regularization is still the same "
             f"packing is the source{APOSTROPHE}s claim unless it was measured here "
-            "([`epistemics.md`](../../epistemics.md#results-by-others))."
+            "([`epistemics.md`](../../epistemics.md#results-by-others)). Where this "
+            f"project{APOSTROPHE}s own regularization was made with Evan Daniel{APOSTROPHE}s "
+            f"regularizer, its line names this project{APOSTROPHE}s modifications to it as "
+            "far as the item establishes them. An item records no solve, so where the "
+            f"atlas{APOSTROPHE}s regularized layer draws that very solve the item takes its "
+            f"retry rungs from the layer{APOSTROPHE}s index, and elsewhere whether the solve "
+            "climbed a retry rung is said to be not recorded. Where an earlier result"
+            f"{APOSTROPHE}s certificate first stated the item{APOSTROPHE}s exact side, its "
+            "line names that result: the item registers the side exactly and proves no new "
+            "bound."
         ),
         "",
     ]
@@ -202,6 +213,55 @@ def regularizations(results: list[dict], sources: Mapping[str, Mapping[str, Any]
         items = record["regularizations"]
         lines.append(f"- **{record['id']}** — {len(items)} counts:")
         lines.extend(f"  - {regularization_sentence(item, sources)}" for item in items)
+    lines.append("")
+    return lines
+
+
+def regularized_drawings(
+    drawings: Mapping[str, Any] | None, sources: Mapping[str, Mapping[str, Any]]
+) -> list[str]:
+    """The section listing this project's own regularizations of registered packings,
+    one item a count the atlas draws regularized, then the drawn counts whose packing no
+    registered result holds; none where the register carries none."""
+    if not drawings or not (drawings.get("items") or drawings.get("unregistered")):
+        return []
+    items = drawings.get("items") or []
+    lines = [
+        "## Regularized Drawings",
+        "",
+        (
+            f"The atlas draws these counts from views this project regularized at the side "
+            f"the record already states ([the regularization policy]"
+            f"(../../docs/project/policies/regularization-policy.md)): each "
+            f"is a regularization of the packing a registered result holds, which keeps "
+            f"its finder{APOSTROPHE}s credit, and changes no side, frontier value or rung. "
+            f"Each identity was measured here; the layer{APOSTROPHE}s index "
+            "([`index.json`](../atlas/known-best/regularized/index.json)) retains the "
+            "measurements and the view. Where Evan Daniel"
+            f"{APOSTROPHE}s regularizer or the grid-slack port of his placement made a view, "
+            f"its line names this project{APOSTROPHE}s modifications to it, or says it ran "
+            f"unmodified, and each count{APOSTROPHE}s case record carries the same credit in "
+            "its `regularization` note. A pure regularization, one that proves no new "
+            "bound, is never a result; one whose exact side proves a new upper bound is "
+            "registered as a result and listed under that result above."
+        ),
+        "",
+    ]
+    lines.extend(f"- {regularization_sentence(item, sources)}" for item in items)
+    unregistered = drawings.get("unregistered") or []
+    if unregistered:
+        counts = ", ".join(str(row["n"]) for row in unregistered)
+        lines.extend(
+            [
+                "",
+                (
+                    f"The atlas also draws {len(unregistered)} regularized "
+                    f"{'count' if len(unregistered) == 1 else 'counts'} whose packing no "
+                    f"registered result holds, so their record stays in the layer{APOSTROPHE}s "
+                    f"index alone: n = {counts}."
+                ),
+            ]
+        )
     lines.append("")
     return lines
 
@@ -295,6 +355,7 @@ def render() -> str:
             )
             lines.append("")
     lines.extend(regularizations(results, sources))
+    lines.extend(regularized_drawings(register.get("regularized_drawings"), sources))
     lines.extend(verification_code(results, evidence))
     lines.append("## Next actions")
     lines.append("")

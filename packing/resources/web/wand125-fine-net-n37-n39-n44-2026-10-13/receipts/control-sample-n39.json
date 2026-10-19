@@ -1,0 +1,49 @@
+{
+  "kind": "fine-net-followup-control-sample/v1",
+  "candidate_sha256": "f54b2a7a8c8114a6e9e0eb3173a6933c326204ac1ca540c9f5c8a508e8d66639",
+  "candidate_digest": "3b464f3f124b529c28f32a14b8087564f2163a956264373381ade988c0849cfc",
+  "n": 39,
+  "L": "533/80",
+  "mutation": {"factor":"99/100"},
+  "mutant_total_mass": "386099901/10000000",
+  "directions": [0,1804],
+  "rows": [
+    {"r":0,"returncode":1,"verdict":"refused","method":"axis-vertex-sweep","nodes":null,"min_certified_lower_bound":0.9920712485323058,"process_cpu_seconds":1.218482,"wall_seconds":1.2792685300000812,"refusal":{"r":0,"verdict":"refused","method":"axis-vertex-sweep","pose":["2811937607608141/625000000000000","493/80"],"coverage_refusal":true,"crate_exact_below_threshold":null,"in_domain":true,"capture":"1465001438681172652387557346786270985624182204708915487310729487282352432242552218464500648574582390745865664409632975194672781979364521983223226099274608424236441121684238879981521491/1476709902622014394848972561846717206465870929545943483503364589664885942235233916905899946891029766893214906105943136960519369224553440572782468337046477817363709883168666043584000000","capture_below_1":true,"crate_lower_bound":0.9920712485323058,"captures_agree":false,"original_at_least_1":true},"refusal_counts":false,"stderr_tail":""},
+    {
+      "r": 1804,
+      "returncode": 1,
+      "verdict": "counterexample-candidate",
+      "method": "interval-branch-and-bound",
+      "nodes": 2614,
+      "min_certified_lower_bound": null,
+      "process_cpu_seconds": 0.78239,
+      "wall_seconds": 0.9645525450000605,
+      "refusal": {
+        "r": 1804,
+        "verdict": "counterexample-candidate",
+        "method": "interval-branch-and-bound",
+        "pose": [3.4462523320081586,3.3722990409744256],
+        "coverage_refusal": true,
+        "crate_exact_below_threshold": true,
+        "in_domain": true,
+        "capture": "65242812342848509382600229682160973558411093330570265123207210406725063983539950167502881366044382071780671804438233827500030348466870483808220477568116665850188360913484306866104786069914039321706491450034485385837306030589415752223023405195275387527325573821125345387636905504367886017747543186433296557099568187759164205628594769741395681703826805782683426400574370809972349540637906252891114525777833058484570342591601985999578766637593/65242812352840763896295274488212919239180067313195191433488745240743002470262922286804457839831608202028702258191540749871684640635857468672312994424383186358585606218230806203129839163607752725048053937993693340155010528208438960416223056584107077354457460916725790072293187159871732689073660696246623257336468949308870082728470061885558459139103156004620676391305961120476860070594142930154386168176124201975939072000000000000000000000000",
+        "capture_below_1": true,
+        "crate_lower_bound": null,
+        "captures_agree": true,
+        "original_at_least_1": true
+      },
+      "refusal_counts": true,
+      "stderr_tail": ""
+    }
+  ],
+  "build": {"profile":"release","rustc":"rustc 1.98.0 (88d9e12ae 2026-08-18)","source_sha256":"d97758bbc9639edc70b8bd7dc83106d4e8d1be034bacb3e88f8c539b88091c88","target":"x86_64-unknown-linux-gnu"},
+  "binary_sha256": "567a0fd58f7ae4e981580f2a90bed5c92ac44fa8f3ebb442b166e93043c15ed4",
+  "threads_per_direction": 1,
+  "workers": 1,
+  "wall_seconds": 2.252999814999839,
+  "process_cpu_seconds": 2.000872,
+  "host": {"cpu_count":4,"machine":"x86_64","load_before":6.53662109375,"load_after":6.3330078125},
+  "ran_at": "2026-10-14T09:33:17Z",
+  "status": "CONTROL_SAMPLE_REFUSAL_NOT_COUNTED",
+  "scope": "A diagnostic of the whole-net control's 99/100 mutant at the directions it ran, each refusal judged by the census's own refusal_record and refusal_held; it is no control receipt and says nothing of the other directions."
+}

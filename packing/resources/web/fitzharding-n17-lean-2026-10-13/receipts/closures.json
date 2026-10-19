@@ -1,0 +1,154 @@
+{
+  "format": "sq17-lean-closures-v1",
+  "archive": {
+    "name": "certificates/generated-sources.tar.gz",
+    "bytes": 718897665,
+    "sha256": "5e0f823f9853b18509f2001e94dab9fea200eaa88bef2dd0b9200c97bd16f029",
+    "matches_manifest": true,
+    "unsafe_members": []
+  },
+  "theorem_closure_modules": 4951,
+  "closures": {
+    "Sq17Lean.PackingStatement": {
+      "modules": 241,
+      "by_archive": {
+        "certificates/generated-sources.tar.gz": 22,
+        "tree": 219
+      },
+      "archived_modules": [
+        "Sq17Lean.CaptureTerminalBoundsData",
+        "Sq17Lean.CaptureTerminalRowsData00",
+        "Sq17Lean.CaptureTerminalRowsData01",
+        "Sq17Lean.CaptureTerminalRowsData02",
+        "Sq17Lean.CaptureTerminalRowsData03",
+        "Sq17Lean.CaptureTerminalRowsData04",
+        "Sq17Lean.CaptureTerminalRowsData05",
+        "Sq17Lean.CaptureTerminalRowsData06",
+        "Sq17Lean.CaptureTerminalRowsData07",
+        "Sq17Lean.CaptureTerminalRowsData08",
+        "Sq17Lean.CaptureTerminalRowsData09",
+        "Sq17Lean.CaptureTerminalRowsData10",
+        "Sq17Lean.CaptureTerminalRowsData11",
+        "Sq17Lean.CaptureTerminalRowsData12",
+        "Sq17Lean.CaptureTerminalRowsData13",
+        "Sq17Lean.CaptureTerminalRowsData14",
+        "Sq17Lean.CaptureTerminalRowsData15",
+        "Sq17Lean.CaptureTerminalRowsData16",
+        "Sq17Lean.EndpointStrictGaps",
+        "Sq17Lean.LocalRigidityMatrixData",
+        "Sq17Lean.LocalRigidityWeightData",
+        "Sq17Lean.LocalSliderUnwanted"
+      ],
+      "read": true,
+      "mismatched": [],
+      "tokens_in_code": {
+        "sorry": 0,
+        "admit": 0,
+        "axiom_decl": 0,
+        "native_decide": 0,
+        "decide_native": 0,
+        "ofReduceBool": 0,
+        "trustCompiler": 0,
+        "implemented_by": 0,
+        "extern": 0,
+        "unsafe": 0,
+        "skipKernelTC": 0,
+        "exit": 0,
+        "eval": 0,
+        "run_cmd": 0,
+        "env_mod": 0,
+        "initialize": 0,
+        "notation": 0,
+        "macro": 1,
+        "elab_attribute": 0,
+        "export": 0,
+        "open_renaming": 0,
+        "instance": 1,
+        "import_Lean": 0,
+        "opaque": 0,
+        "csimp": 0
+      },
+      "native_decide_outside_code": [
+        "Sq17Lean/InteriorCellCapacity.lean:134"
+      ]
+    },
+    "Sq17Lean.EndpointPacking": {
+      "modules": 18,
+      "by_archive": {
+        "certificates/generated-sources.tar.gz": 1,
+        "tree": 17
+      },
+      "archived_modules": [
+        "Sq17Lean.EndpointStrictGaps"
+      ],
+      "read": true,
+      "mismatched": [],
+      "tokens_in_code": {
+        "sorry": 0,
+        "admit": 0,
+        "axiom_decl": 0,
+        "native_decide": 0,
+        "decide_native": 0,
+        "ofReduceBool": 0,
+        "trustCompiler": 0,
+        "implemented_by": 0,
+        "extern": 0,
+        "unsafe": 0,
+        "skipKernelTC": 0,
+        "exit": 0,
+        "eval": 0,
+        "run_cmd": 0,
+        "env_mod": 0,
+        "initialize": 0,
+        "notation": 0,
+        "macro": 1,
+        "elab_attribute": 0,
+        "export": 0,
+        "open_renaming": 0,
+        "instance": 0,
+        "import_Lean": 0,
+        "opaque": 0,
+        "csimp": 0
+      },
+      "native_decide_outside_code": []
+    },
+    "Sq17Lean.EndpointGeometry": {
+      "modules": 6,
+      "by_archive": {
+        "tree": 6
+      },
+      "archived_modules": [],
+      "read": true,
+      "mismatched": [],
+      "tokens_in_code": {
+        "sorry": 0,
+        "admit": 0,
+        "axiom_decl": 0,
+        "native_decide": 0,
+        "decide_native": 0,
+        "ofReduceBool": 0,
+        "trustCompiler": 0,
+        "implemented_by": 0,
+        "extern": 0,
+        "unsafe": 0,
+        "skipKernelTC": 0,
+        "exit": 0,
+        "eval": 0,
+        "run_cmd": 0,
+        "env_mod": 0,
+        "initialize": 0,
+        "notation": 0,
+        "macro": 0,
+        "elab_attribute": 0,
+        "export": 0,
+        "open_renaming": 0,
+        "instance": 0,
+        "import_Lean": 0,
+        "opaque": 0,
+        "csimp": 0
+      },
+      "native_decide_outside_code": []
+    }
+  },
+  "endpoint_packing_within_statement": true
+}

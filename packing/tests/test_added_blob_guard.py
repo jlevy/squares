@@ -369,6 +369,27 @@ def test_metadata_capture_kills_and_reaps_on_excess_or_timeout(
     )
 
 
+def test_metadata_capture_feeds_batch_input_while_draining_output(
+    repo: tuple[Path, str], monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """C1: cat-file must drain output before its input fits in the pipe."""
+    path, _ = repo
+    identifier = git(path, "rev-parse", "HEAD:seed.txt").encode("ascii")
+    requests = (identifier + b"\n") * 4096
+    expected = (identifier + b" blob 4\nseed\n") * 4096
+    monkeypatch.setattr(tool, "MAX_METADATA_BYTES", len(expected))
+    assert (
+        tool._git(  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+            path,
+            "cat-file",
+            "--batch",
+            deadline=time.monotonic() + tool.MAX_SECONDS,
+            data=requests,
+        )
+        == expected
+    )
+
+
 def test_exact_byte_boundaries_and_one_byte_excess() -> None:
     first = tool.Blob("a", 8, ("one",))
     second = tool.Blob("b", 8, ("two",))
@@ -566,5 +587,5 @@ def test_pr_gate_uses_full_history_and_actual_base_head() -> None:
     assert steps.index(gate) < next(
         index
         for index, step in enumerate(steps)
-        if step.get("name") == "Record the tree this pull-request run validates"
+        if step.get("name") == "Run the required pull-request checks"
     )

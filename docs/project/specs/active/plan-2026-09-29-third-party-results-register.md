@@ -4,7 +4,9 @@
 
 **Author:** Claude (agent), for the repository owner
 
-**Status:** Implemented on the stacked results-register branch; tracked by `think-z9wy`
+**Status:** Active. The register for others’ results is on main (68903d852, 2026-09-29);
+follow-ups remain open under think-z9wy (10 of 14 children, among them think-5xr9 and
+think-nvbq).
 
 **Workflow:** W7 pipeline improvement, following the W8 refresh of Session 161
 

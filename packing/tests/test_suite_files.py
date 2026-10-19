@@ -469,7 +469,9 @@ def test_explicit_unknown_owners_keep_unknown_costs_and_recorded_weights_take_pr
     names = tuple(suite_files.UNKNOWN_FOUR_SHARD_OWNERS)
     unknown = RecordedCosts(shards=4, seconds={})
     assert [suite_files.shard_of(n, unknown) for n in names] == [3, 1, 3, 1, 3, 2] + [2] * 5 + [
-        3
+        3,
+        1,
+        1,
     ]
     assert suite_files.shard_totals(unknown) == [0, 0, 0, 0]
     assert sum(row[1] for row in suite_files.unrecorded_by_shard(unknown, names)) == len(names)

@@ -443,7 +443,6 @@ def film_facts_html(fact: dict[str, Any]) -> str:
             glyph,
             style,
             text,
-            "is-new-result" if text == "optimal" and flags.optimal else "",
             recent=text == "optimal" and flags.optimal,
         )
         for glyph, style, text in fact["badges"]
@@ -467,7 +466,7 @@ def film_facts_html(fact: dict[str, Any]) -> str:
         )
         cites.append(
             f'<p class="site-atlas-pop-cite"><span '
-            f'class="site-atlas-pop-which {contribution_class(int(fact["n"]), which)}">'
+            f'class="site-atlas-pop-which is-{which}">'
             f"{which}</span>{_esc(line['text'])}{corrects}{note}</p>"
         )
     citation = (
@@ -689,8 +688,9 @@ def head(result: Result, cases: Sequence[int]) -> str:
     headline are the popover's own, above the body (`overview_sections.result_row`).
     In the details under the claim, the next rung is followed by the confirmations the
     entry lists as not yet run, each with its rung and cost
-    (`result_status.unfinished_sentence`), and by the packings its certificate
-    regularizes, one sentence a count (`Result.regularizations`)."""
+    (`result_status.unfinished_sentence`), by the packings its certificate
+    regularizes, one sentence a count (`Result.regularizations`), and by the counts the
+    atlas draws its packing regularized (`Result.drawings`)."""
     from devtools.overview_sections import (  # noqa: PLC0415
         date_cell,
         novelty_labels,
@@ -723,6 +723,7 @@ def head(result: Result, cases: Sequence[int]) -> str:
             ),
         ),
         ("Regularizations", "\n".join(result.regularizations)),
+        ("Regularized drawings", "\n".join(result.drawings)),
     ]
     rows = "".join(
         f"<dt>{label}</dt><dd>{prose_html(text)}</dd>" for label, text in more if text

@@ -1,0 +1,241 @@
+{
+ "schema": "k3-receipt/v1",
+ "receipt": "upper-bound-and-root-isolation",
+ "issue": "https://github.com/jlevy/squares/issues/557",
+ "source": "https://github.com/Kleddamag/the-seventeenth-square-candidate",
+ "source_pin": "653b9589d",
+ "lane": "K3 (independent checks of #557's computations)",
+ "machine": "Linux x86_64, 4 cores shared with other lanes; CPython 3.14.7 (project), CPython 3.12.3 + numpy 2.0.2 + numba 0.60.0 + SymPy 1.14.0 (isolated scratch venv for the author's code), Node.js v22.22.0",
+ "retention": "no upstream bytes; digests, verdict lines, derived numbers and walls only",
+ "inputs": {
+  "upper-packing-certificate.json": "24e296f5995abc9424e2d8d39ea0a8e44953b919430a04f006fa84c56fef45f7",
+  "STATEMENT.md": "dd73365b0681f0efb00e351f89a1dcb1f80a8e758d44563b1e5e81f851521870",
+  "independent/endpoint_enclosure/own_endpoint_enclosure.py": "11b0a7fbdbe6fdaf77714ef0e64705c9a23ad59888a2595d31dda97f1c35fac2",
+  "note": "upper-packing-certificate.json is byte-identical to packing/resources/web/n17-kleddamag-certified-bound-2026-09-21/kleddamag-17-squares-certified-bound/upper-packing-certificate.json (same SHA-256) already in the record"
+ },
+ "k3_scripts_sha256": {
+  "run.py": "6820771bf7f72956dcad056de96db972e48d08ec4623ae0d5c83901b4a0aad84",
+  "k3_root_isolation.py": "ce3c7d7c6c8592d7d474aefe026558caef76ad857bdd18f05ecb53202b49c3fe"
+ },
+ "runs": {
+  "upper-import": {
+   "command": [
+    ".venv/bin/python3",
+    "-m",
+    "devtools.import_half_angle_witness",
+    "<edition>/upper-packing-certificate.json",
+    "--expected-n",
+    "17",
+    "--expected-side",
+    "4675530093604551/1000000000000000",
+    "--output",
+    "<k3-scratch>/work/n17-upper-witness.yaml"
+   ],
+   "exit": 0,
+   "wall_seconds": 1.128,
+   "cpu_user_seconds": 1.019,
+   "stdout_sha256": "7ef34407996b4e077247ca1f67531d0f9f39494840bf42196d5f1a26e45dff2c",
+   "stdout_tail": [
+    "IMPORTED: 17 exact unit squares at side 4675530093604551/1000000000000000"
+   ]
+  },
+  "upper-sqpack-verify": {
+   "command": [
+    ".venv/bin/python3",
+    "-m",
+    "sqpack.cli.witness",
+    "verify",
+    "<k3-scratch>/work/n17-upper-witness.yaml",
+    "--json"
+   ],
+   "exit": 0,
+   "wall_seconds": 1.286,
+   "cpu_user_seconds": 1.118,
+   "stdout_sha256": "eea920a1d0cace7f8aa69c41f719794e5d9ce71711b5134f61e041c19d0c13c7",
+   "stdout_tail": [
+    "  \"n\": 17,",
+    "  \"operation\": \"verify\",",
+    "  \"pairs_tested\": 136,",
+    "  \"side\": \"4675530093604551/1000000000000000\",",
+    "  \"verification_passed\": true",
+    "}"
+   ]
+  },
+  "upper-independent": {
+   "command": [
+    ".venv/bin/python3",
+    "-m",
+    "devtools.check_rational_witness_independent",
+    "<k3-scratch>/work/n17-upper-witness.yaml"
+   ],
+   "exit": 0,
+   "wall_seconds": 0.257,
+   "cpu_user_seconds": 0.247,
+   "stdout_sha256": "c2b65b2acda59a8f58f6400c20e952635bba91f82ff1fe357fea8e8a9dd7abf2",
+   "stdout_tail": [
+    "VERIFIED: 17 squares, 136 pairs",
+    "  exact side: 4675530093604551/1000000000000000",
+    "  minimum pair gap: 11700381402346018397396603692656000048540842316927035182270108078168254684949702006696707847894821096011922335817920554225990272628848248480733842616741012041711209/1131075780686193171911761361652477918759603928501579404920052108407564562864725600888530091327468303685014429999687747641000000000000000000000000000000000000000000000000000000000000"
+   ]
+  },
+  "record-h255-root-check": {
+   "command": [
+    ".venv/bin/python3",
+    "-m",
+    "devtools.check_n17_root_certificate",
+    "--source",
+    "<edition>/upper-packing-certificate.json",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-237-n17-polynomial-root/run-001/certificate.json"
+   ],
+   "exit": 0,
+   "wall_seconds": 0.129,
+   "cpu_user_seconds": 0.101,
+   "stdout_sha256": "f6f2dc98c86d6b60c7ab110b25bed604263df19833e66f05f20c07eeebc27242",
+   "stdout_tail": [
+    "<large JSON; verification_passed / criterion_passed true; see stdout_sha256>"
+   ]
+  },
+  "record-h256-endpoint-feasibility": {
+   "command": [
+    ".venv/bin/python3",
+    "-m",
+    "devtools.check_n17_endpoint_feasibility",
+    "--source",
+    "<edition>/upper-packing-certificate.json",
+    "campaign/series/series-000-smoke-and-calibration/results/exp-237-n17-polynomial-root/run-001/certificate.json"
+   ],
+   "exit": 0,
+   "wall_seconds": 40.54,
+   "cpu_user_seconds": 39.034,
+   "stdout_sha256": "cebf4dfda1a8fd665883cb632c858b230a5c4457760030c5bda348006253d702",
+   "stdout_tail": [
+    "<large JSON; verification_passed / criterion_passed true; see stdout_sha256>"
+   ]
+  },
+  "k3-root-isolation-v2": {
+   "command": [
+    "<repo>/packing/.venv/bin/python3",
+    "-I",
+    "<k3-scratch>/scripts/k3_root_isolation.py",
+    "<edition>/STATEMENT.md",
+    "<repo>/packing/campaign/series/series-000-smoke-and-calibration/results/exp-237-n17-polynomial-root/run-001/certificate.json",
+    "<repo>/packing/frontier/n-017.md"
+   ],
+   "exit": 0,
+   "wall_seconds": 1.514,
+   "cpu_user_seconds": 1.374,
+   "stdout_sha256": "5dfa66712e8ac7923dbb14d81f557655c4f5b05520afb286e844c6836d2404a5",
+   "stdout_tail": [
+    "  \"divides_lifted_catalogue\": true,",
+    "  \"catalogue_irreducible_over_Q\": true",
+    " },",
+    " \"control_perturbed_F_passed\": false,",
+    " \"result\": \"PROVED\"",
+    "}"
+   ]
+  },
+  "author-own-endpoint-enclosure": {
+   "command": [
+    "<k3-scratch>/venv312/bin/python",
+    "-I",
+    "-B",
+    "<edition>/independent/endpoint_enclosure/own_endpoint_enclosure.py"
+   ],
+   "exit": 0,
+   "wall_seconds": 0.364,
+   "cpu_user_seconds": 0.333,
+   "stdout_sha256": "6007f487174af622b1184f0d5522a757d35578dd6b3e546df8ee9f410c0679a7",
+   "stdout_tail": [
+    "     [info] W equals my interval-arithmetic image of t0 +/- 10^-50 up to 10^-69 outward rounding: True",
+    "     [info] P equals my interval-arithmetic image of t0 +/- 10^-55 up to 10^-78 outward rounding: True",
+    "     [info] exact range of L over t0 +/- 10^-55 has width 2.467735e-55 (interval arithmetic overestimates it)",
+    "",
+    "RESULT: PROVED  unique root in the statement box; root in X*; L strictly inside the packet and gate",
+    "        tight intervals; L > 4, L < R < C < U, R - L - 2 eps > 0."
+   ]
+  },
+  "author-own-endpoint-enclosure-control": {
+   "command": [
+    "<k3-scratch>/venv312/bin/python",
+    "-I",
+    "-B",
+    "<edition>/independent/endpoint_enclosure/own_endpoint_enclosure.py",
+    "--control"
+   ],
+   "exit": 1,
+   "wall_seconds": 0.436,
+   "cpu_user_seconds": 0.419,
+   "stdout_sha256": "1f50e54f6f78d3bfa9ec98878f07376de0a94869e263a807c522400db0e6a4b9",
+   "stdout_tail": [
+    "   - (c) R - L - eps > 0   (P087 as written)",
+    "   - (c) R - L - 2 eps > 0 (stronger)",
+    "   - my t* interval lies inside the author's (so they intersect)",
+    "   - my b* interval lies inside the author's (so they intersect)",
+    "   - my L interval lies inside the author's new_L_interval",
+    "   - my L interval is inside W"
+   ]
+  }
+ },
+ "root_isolation_k3": {
+  "t0": "362043893314323383453621978739944164218293243036741520638379/1000000000000000000000000000000000000000000000000000000000000",
+  "b0": "330948674722739910429808533282915634174672003999685385633441/1000000000000000000000000000000000000000000000000000000000000",
+  "radius": "1/10^12",
+  "matches_record_exp237": {
+   "F": true,
+   "G": true,
+   "midpoint": true,
+   "radius": true
+  },
+  "krawczyk_statement_box": {
+   "passed": true,
+   "relative_margin": 0.9999999999347465
+  },
+  "krawczyk_refined_box": {
+   "radius": "1/10^45",
+   "inside_statement_box": true,
+   "passed": true,
+   "relative_margin": 1.0,
+   "t_mid_60": "0.36204389331432341"
+  },
+  "denominator_positive": true,
+  "L_enclosure_width": 1.2335476974813072e-88,
+  "L_40_digits": "4.67553009360455095163411127048314664876714386",
+  "statement_bounds_hold": true,
+  "record_ceiling_ge_L": true,
+  "record_ceiling_minus_L_lower": 1.0358337035875123e-22,
+  "witness_side_minus_L_lower": 4.8365888729516855e-17,
+  "witness_side_gt_L": true,
+  "resultant": {
+   "degree": 28,
+   "squarefree_degree": 23,
+   "real_roots_in_t_range": 1,
+   "nonzero_at_endpoints": true
+  },
+  "catalogue_identity": {
+   "catalogue_degree": 18,
+   "t_factors_with_root_in_box": [
+    18
+   ],
+   "min_poly_t_degree": 18,
+   "divides_lifted_catalogue": true,
+   "catalogue_irreducible_over_Q": true
+  },
+  "control_perturbed_F_passed": false,
+  "result": "PROVED"
+ },
+ "author_independent_enclosure": {
+  "ok_lines": 39,
+  "fail_lines": 0,
+  "L_60_digits": "4.675530093604550951634111270483146648767143855015879695416889",
+  "result_line": "RESULT: PROVED  unique root in the statement box; root in X*; L strictly inside the packet and gate",
+  "control_result_line": "RESULT: NOT PROVED.  Failed checks (16):"
+ },
+ "conclusions": [
+  "The rational packing (side R = 4675530093604551/10^15) is a valid packing of 17 unit squares by both of this repository's exact routes (sqpack verify and the independent rational witness checker): s(17) <= R.",
+  "R exceeds L by about 4.8366e-17, so this packing alone does not attain L.",
+  "K3's own Krawczyk test (exact rationals, SymPy only for parsing and the resultant cross-check) proves exactly one zero of (F, G) in the statement's box; L lies in the statement's 20-place interval; the denominator is positive.",
+  "The statement's F, G, t0, b0 and radius equal the record's exp-237 H255 chart data, so L is the side of the record's certified endpoint packing (E-n017-certified-endpoint), whose H255/H256 checkers were replayed here against the new source copy; its 34-place ceiling 4.6755300936045509516342148538535054 exceeds L by about 1.04e-22.",
+  "L is a root of the degree-18 catalogue polynomial in n-017.md (exact divisibility test), matching E-n017-catalogue-polynomial-identity.",
+  "The author's own_endpoint_enclosure.py agrees with K3's enclosure (60 digits printed; K3's 45 digits agree); its control fails as designed."
+ ]
+}

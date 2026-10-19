@@ -1,0 +1,75 @@
+{
+  "format": "external-source-declaration-v1",
+  "id": "itsnaka-squish-certs",
+  "source_url": "https://github.com/itsnaka/squish-certs",
+  "source_ref": "main",
+  "source_commit": "aeacc6c124df339074f7370e1e010bb6e8c1b5ca",
+  "retrieved_at_utc": "2026-10-11T20:34Z",
+  "git_scope": "Full clone checked out at the pin for issue #500. The scope is the paths the pinned commit changed: the root README.md and the whole squish-submission-2026-10-11 directory, 67 files bound to their Git blobs. Under derived-only custody none is copied. The earlier submission directories are unchanged at this pin and belong to the packets that pinned them. The head when read, 56fa71f949234b63534772b3f3b4f1320fbf2afd, changes only the root README.md, to link issue #500, so no claim depends on it. No source program was executed.",
+  "archived_dir": "source",
+  "license": "No licence file in the pinned tree, and neither README states reuse terms. Derived-only custody under the known-best retention policy, as for the earlier SQUISH packets: no upstream byte is retained, every file is bound here by SHA-256 and at the pin by its Git blob, and no redistribution permission or licence determination is asserted. The source credits Nate Chaoweeraprasit, using SQUISH, and the packings its pieces came from, and discloses Claude Opus 5.5 assistance under his direction.",
+  "claims": [
+    "Issue #500 reports exact rational certificates, one per count, for nine packings at n = 176, 181, 238, 239, 270, 271, 272, 304 and 305, found by SQUISH's Mondrian composition; at 238 and 239 they are smaller packings than SQUISH's #401 packings as refined by Siddharth Gupta, and at 270 and 305 than SQUISH's #481 packings. Each is squish-submission-2026-10-11/nNNN/nNNN.cert.json with box [0, S]^2 and exact side s_exact; summary.csv repeats each exact fraction.",
+    "s(176) <= 305005022674381157367132529416905207296020948646520876053762749858683599318120744/22081242074898135703849455266036121393870562834861102970956326327326447327968587, which rounds up to 13.8128562532770564.",
+    "s(181) <= 249935253501271447722872166122379040683260708184410574609224560771762048914945913/17915453134884420632048333509167003378124582375369499899268894615896769573805255, which rounds up to 13.9508195310229241.",
+    "s(238) <= 516829548917904437965878091074886828293320996185960477809932175908043454736320288/32455795222015655007007970530566514770773816146192500722754413705465356352461141, which rounds up to 15.9241067853214947.",
+    "s(239) <= 957883664741088666359826291012097714608415772761965190010564315177693226164065987/60061263979374471914223634546066156202761470614164034734590750736057272204798672, which rounds up to 15.9484433273005000.",
+    "s(270) <= 761203984658924994781689956746506132479479002945859948235062760911587068049389066/44966630820689093059794938239713705461989197412012889888820554168494459778549053, which rounds up to 16.9281969933290166.",
+    "s(271) <= 226641509159806817533826968807522186618590497703207479506050881660303454046913630/13371877327550822127276902291903146156943895843133007855104572641371568124309293, which rounds up to 16.9491166878150100.",
+    "s(272) <= 1114257766245565718930315998681473968716597475579279287292886911189991499936935381/65677527145799837468063782221943718992249135546143429464936478230690701220023471, which rounds up to 16.9655864748376712.",
+    "s(304) <= 510485576549308947359639122176771480874060688471611521000826585202734096682803420/28471575075230807279259985772792709540176911602103069986239820873572704667056489, which rounds up to 17.9296570421708801.",
+    "s(305) <= 176574386584524522718242075735181894343653439251445905894414633471908824717084407/9836714596766635588546138051753839920746733217534271639970138607199828771763358, which rounds up to 17.9505448539256365.",
+    "The five certificates in sources/ (two of n = 154, and n = 240, 272 and 305, rounding up to 12.9292934240939391, 12.9305839972855079, 15.9739500348208213, 16.9655871623998319 and 17.9508590931679247) are earlier unfiled SQUISH packings that pieces were taken from; the source does not offer them as records. The 272 is the filed 272 before its squeeze, and the 305 the one the filed 305 supersedes.",
+    "The source reports that SQUISH's exact Fraction checker and David Ellsworth's check_packing.py at epsilon 1e-50 accept all nine and the sources/ certificates, that each certificate was drawn from a 60-digit contact solution with clearance 1e-32, that an hour of nearby search and a deep squeeze moved none by more than 7e-07, and that no KKT, interval, local-optimality, closed-form or optimality evidence is given. These are author reports."
+  ],
+  "scope": [
+    "README.md",
+    "squish-submission-2026-10-11"
+  ],
+  "pinned_only": [
+    {
+      "match": "README.md",
+      "reason": "The repository README: the roster of current SQUISH packings and what each request changed. Author prose; no licence; pinned by digest only."
+    },
+    {
+      "match": "squish-submission-2026-10-11/README.md",
+      "reason": "The request's README: claims, contents, method, pieces and what is not done, quoted in this packet's README. Author prose; no licence; pinned by digest only."
+    },
+    {
+      "match": "squish-submission-2026-10-11/summary.csv",
+      "reason": "The request's table: each side to 40 digits and as an exact fraction, the comparison bound and its source, and the pieces each packing was composed from. No licence; pinned by digest only."
+    },
+    {
+      "match": "squish-submission-2026-10-11/n*/n*.cert.json",
+      "reason": "The exact rational certificate: s_exact and one [x, y, t] triple per square, rational centres in [0, S]^2 and rational half-angle tangents t. No licence in the tree, so derived-only custody: an importer reads it from a checkout at this pin and must match this digest."
+    },
+    {
+      "match": "squish-submission-2026-10-11/sources/*.cert.json",
+      "reason": "An earlier unfiled SQUISH certificate that pieces were taken from, in the same format; not offered as a record. No licence in the tree; pinned by digest only."
+    },
+    {
+      "match": "squish-submission-2026-10-11/n*/n*.cert.txt",
+      "reason": "The same packing at 50 digits in David Ellsworth's text format, box centred at the origin, rounded outward from the certificate: the input of the author's check_packing.py run. Context, not the certificate; no licence; pinned by digest only."
+    },
+    {
+      "match": "squish-submission-2026-10-11/n*/n*.cert50.txt",
+      "reason": "The 50-digit text the drawing is made from; context, not the certificate. No licence; pinned by digest only."
+    },
+    {
+      "match": "squish-submission-2026-10-11/sources/*.cert.txt",
+      "reason": "The 50-digit text export of an earlier unfiled certificate. No licence; pinned by digest only."
+    },
+    {
+      "match": "squish-submission-2026-10-11/n*/check_packing_output.txt",
+      "reason": "The author's run of check_packing.py on the 50-digit text, an author report. No licence; pinned by digest only."
+    },
+    {
+      "match": "squish-submission-2026-10-11/n*/n*.svg",
+      "reason": "A drawing of the packing. No licence; pinned by digest only."
+    },
+    {
+      "match": "squish-submission-2026-10-11/n*/n*_vs_record.png",
+      "reason": "A raster comparison with the record packing. No licence; pinned by digest only."
+    }
+  ]
+}

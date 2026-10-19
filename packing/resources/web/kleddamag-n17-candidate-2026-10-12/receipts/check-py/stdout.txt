@@ -1,0 +1,64 @@
+edition root: /tmp/claude-0/-home-user-squares/387dc0a2-0a91-51c6-bf71-f69e33945398/scratchpad/k17/src/repo
+L0 PASS    python                     Python 3.12.3 (3.9 or newer is needed)
+L0 INFO    platform                   this machine: Linux-6.18.44-fc-v114-x86_64-with-glibc2.39, CPython 3.12.3. The project ran this check on one platform only: macOS 27.0.1 (Darwin 27.0.0, arm64), CPython 3.9.6, Node.js v25.6.1, SymPy 1.14.0. Other platforms are untested.
+L0 PASS    self-test                  the comparison of two outputs keeps a line "123  unresolved constraints" and leaves out only the 17 listed resource lines
+L0 PASS    node                       Node.js v22.22.0 found (levels 0 to 2 do not run it; a full recomputation needs it)
+L0 PASS    sympy                      SymPy 1.14.0 found (the version this edition was tested with)
+L0 PASS    edition-root               /tmp/claude-0/-home-user-squares/387dc0a2-0a91-51c6-bf71-f69e33945398/scratchpad/k17/src/repo
+L0 PASS    root-name                  the folder name 'repo' occurs once in the path of the edition
+L1 INFO    expected                   this edition has 7118 listed files and 22013 pins in 12 index files; both numbers are fixed in check.py and any other number fails. What level 1 does not catch: see the head of check.py and CHECK.md
+L1 PASS    file-list                  7118 files listed, 7118 present, none missing, none unlisted, no symbolic link, letter case exact
+L1 PASS    file-count                 MANIFEST.sha256 lists the 7118 files fixed in check.py
+L1 PASS    file-hash                  7118 files have the listed sha256
+L1 PASS    large-files                12 large files listed: 12 present with the listed sha256 and size, 0 not present (not a failure; see LARGE_FILES.tsv)
+L1 PASS    path-neutral-table         the 94 files that PATH_NEUTRAL.tsv lists and the 68 that the producers' PATH_NEUTRAL.tsv lists have the SHA-256 that these tables give for them now (the values before the substitution are not tested here)
+L1 PASS    pins                       22013 pins in 12 index files, every one resolves to a file of this edition with the pinned sha256 (69 of them to a large file by its listed hash): PART2_SHA256SUMS 6754; PART2_MANIFEST.json 6753; PUBLIC_ARTIFACT_ROOTS.json 26; PUBLIC_INPUTS.tsv 6748; EDITION.json 3; CURRENT_BINDINGS.json 1; OBLIGATIONS.json 1288; LABELS.tsv 278; CAPTURE_AUDIT_INPUTS.json 101; REVIEW_HASHES.json 29; RECORD_HASHES.json 20; LARGE_FILES.tsv 12
+L1 PASS    pin-counts                 the pin counts are the ones fixed in check.py
+L1 PASS    rest-digest                344 listed files that no pin and no fixed hash covers have the digest fixed in check.py
+L1 PASS    fixed-hashes               65 files have the sha256 fixed in check.py, among them the 26 root files that PUBLIC_ARTIFACT_ROOTS.json names, that list, and the producers' manifest and checksum list
+L1 PASS    proof-copy                 PROOF.md at the top level has the bytes of the proof text research/finishing-threshold-goal-20261007/current-author-20261012t/fifth-order-20261010/public-edition-round2-20261011/revision-v7/PROOF.md (sha256 0d4c408d1e38a8d8...)
+L1 PASS    bindings                   EDITION_BINDINGS.json agrees with check.py and with the files (2 bindings, 26 root files, the file and pin counts)
+L1 INFO    time                       level 1 took 28 s
+L2 PASS    endpoint_upper             PUBLIC CHECK endpoint_upper: PASS [SymPy 1.14.0] [status PASS_INDEPENDENT_EXACT_S_STAR_17_SQUARE_FEASIBILITY] [read exactly the 5 files that the producers' stored replay read] (296.5 s)
+L2 PASS    partition                  PUBLIC CHECK partition: PASS [status PASS_EXACT_GUARD_PARTITION_ON_ALL_SIGN_ATOMS] [read exactly the 2 files that the producers' stored replay read] (0.4 s)
+L2 PASS    admission                  PUBLIC CHECK admission: PASS [read exactly the 112 files that the producers' stored replay read] (0.5 s)
+L2 PASS    selector                   PUBLIC CHECK selector: PASS [read exactly the 132 files that the producers' stored replay read] (1.2 s)
+L2 PASS    graph                      PUBLIC CHECK graph: PASS [read exactly the 3 files that the producers' stored replay read] (0.1 s)
+L2 PASS    capacity                   PUBLIC CHECK capacity: PASS [status PASS_EXACT_CAPACITY_CURRENT_ESCAPES_FRAME_INCLUSION_AND_DERIVED_GATE] [read exactly the 21 files that the producers' stored replay read] (0.2 s)
+L2 PASS    frame                      PUBLIC CHECK frame: PASS [status PASS_FIXED_FRAME_WALL_ENDS_AND_T2_ENTRY] [read exactly the 17 files that the producers' stored replay read] (0.1 s)
+L2 PASS    wall_triggers              PUBLIC CHECK wall_triggers: PASS [status PASS_ALL_29_WALL_TRIGGER_LITERALS] [read exactly the 31 files that the producers' stored replay read] (0.1 s)
+L2 PASS    loose_identities           PUBLIC CHECK loose_identities: PASS [read exactly the 9 files that the producers' stored replay read] (0.1 s)
+L2 PASS    provenance                 PUBLIC CHECK provenance: PASS [status PASS_ALL_98_NEW_CAPTURE_RECORDS_AND_EXACT_MINIMUM_DECISIONS] [read exactly the 5211 files that the producers' stored replay read] (268.7 s)
+L2 PASS    bc_composition             PUBLIC CHECK bc_composition: PASS [read exactly the 66 files that the producers' stored replay read; 2 large from _large/] (0.5 s)
+L2 PASS    bd_binding                 PUBLIC CHECK bd_binding: PASS [read exactly the 30 files that the producers' stored replay read] (0.1 s)
+L2 PASS    bfbe_pins                  PUBLIC CHECK bfbe_pins: PASS [status PASS_PUBLIC_BINDINGS] [read exactly the 645 files that the producers' stored replay read; 12 large from _large/] (21.4 s)
+L2 PASS    finite_1                   PUBLIC CHECK finite_1: PASS [status PASS_EXACT_FINITE_PARTIAL_CONTRACTION_TARGET_NOT_REACHED, as the producers' file of expected statuses gives it] [read exactly the 29 files that the producers' stored replay read] (5.7 s)
+L2 PASS    finite_2                   PUBLIC CHECK finite_2: PASS [status PASS_EXACT_FINITE_PARTIAL_CONTRACTION_TARGET_NOT_REACHED, as the producers' file of expected statuses gives it] [read exactly the 56 files that the producers' stored replay read] (14.1 s)
+L2 PASS    finite_3                   PUBLIC CHECK finite_3: PASS [status PASS_EXACT_FINITE_COMPLETED_PREFIX_PARTIAL_ROUND_EXCLUDED_TARGET_NOT_REACHED, as the producers' file of expected statuses gives it] [read exactly the 63 files that the producers' stored replay read] (13.5 s)
+L2 PASS    finite_4                   PUBLIC CHECK finite_4: PASS [status PASS_EXACT_FINITE_ENTRY_TO_ACCEPTED_RATIONAL_THEOREM] [read exactly the 63 files that the producers' stored replay read] (4.5 s)
+L2 PASS    finite_join                PUBLIC CHECK finite_join: PASS [read exactly the 17 files that the producers' stored replay read] (0.1 s)
+L2 PASS    normalized_prefix          PUBLIC CHECK normalized_prefix: PASS [status ACCEPTED_STOPPED_PROPAGATION_INCONCLUSIVE, as the producers' file of expected statuses gives it] [read exactly the 333 files that the producers' stored replay read] (5.6 s)
+L2 PASS    normalized_finish          PUBLIC CHECK normalized_finish: PASS [status ACCEPTED_STRICT_NORMALIZED_STOPPED_CONTRACTION] [read exactly the 262 files that the producers' stored replay read] (4.1 s)
+L2 PASS    root_stops                 PUBLIC CHECK root_stops: PASS [read exactly the 9 files that the producers' stored replay read] (0.2 s)
+L2 PASS    root_stop_binding          PUBLIC CHECK root_stop_binding: PASS [status ACCEPTED_G20S_BROAD_ROOT_STOP_THEOREM] [read exactly the 70 files that the producers' stored replay read] (0.3 s)
+L2 PASS    entry_transfer             PUBLIC CHECK entry_transfer: PASS [read exactly the 4 files that the producers' stored replay read] (0.2 s)
+L2 PASS    entry_binding              PUBLIC CHECK entry_binding: PASS [status ACCEPTED_GUARDED_RAW_ENTRY_STOP_PRUNING] [read exactly the 41 files that the producers' stored replay read] (0.2 s)
+L2 PASS    small_entry                PUBLIC CHECK small_entry: PASS [status ACCEPTED_RATIONAL_SMALL_ENTRY_COROLLARY] [read exactly the 20 files that the producers' stored replay read] (0.1 s)
+L2 PASS    selection_binding          PUBLIC CHECK selection_binding: PASS [read exactly the 52 files that the producers' stored replay read] (0.2 s)
+L2 PASS    root_chart_transfer        PUBLIC CHECK root_chart_transfer: PASS [status PASS_INDEPENDENT_SOURCE_AND_CONDITIONAL_CONSTANT_ASSESSMENT] [read exactly the 28 files that the producers' stored replay read] (0.2 s)
+L2 PASS    analytic_gate              PUBLIC CHECK analytic_gate: PASS [status PASS_INDEPENDENT_COMPLETE_ROOT_ANALYTIC_GATE] [read exactly the 28 files that the producers' stored replay read] (0.6 s)
+L2 PASS    normalized_five_rounds     PUBLIC CHECK normalized_five_rounds: PASS [status ACCEPTED_FIVE_ROUND_OLD_WEIGHT_REUSE_INCONCLUSIVE, as the producers' file of expected statuses gives it] [read exactly the 40 files that the producers' stored replay read] (8.4 s)
+L2 PASS    normalized_sixth_round     PUBLIC CHECK normalized_sixth_round: PASS [status ACCEPTED_SIX_NORM_FACES_ELIMINATED_ONE_REMAINS, as the producers' file of expected statuses gives it] [read exactly the 39 files that the producers' stored replay read] (2.1 s)
+L2 PASS    endpoint_enclosure         PUBLIC CHECK endpoint_enclosure: PASS [status PASS_TIGHT_ENDPOINT_ENCLOSURE] [read exactly the 7 files that the producers' stored replay read] (0.1 s)
+L2 PASS    equivalence                status PASS_CURRENT_PUBLIC_BYTES_SCOPE_AND_READ_CLOSURE; output equal to the producers' stored output AUTHOR_SEAL_CHECK.out: claims 210, literal_statements 100, capture_statements 98, signed_restrictions 2, data_projections 11, fresh_checks 31, proof_label_rows 278, distinct_proof_labels 95, public_inputs 6748, reading_copy_tables 2, reading_copy_entries 49, auxiliary_current_pins 7582 (120.0 s)
+L2 PASS    comparison_records         records read: 98; slices bound: 1152 (3456 output files with SHA-256 and size); rows per checker reported identical: 1728000; COMPARISON RECORDS RESULT: PASS (98 statements, each IDENTICAL in its record; the stored side is not in this edition and is not tested) (9.0 s)
+L2 PASS    independent_endpoint       RESULT: PROVED; 39 checks ok; its control (one coefficient of F changed by 1) ends NOT PROVED with exit 1 (0.7 s)
+L2 PASS    trees_first_lines          26 stored checker outputs (13 trees, 2 checkers): first line PASS
+L2 PASS    trees_post_checks          13 stored post-check reports: last line RESULT: ACCEPTED
+L2 PASS    trees_sha256_all           SHA256_ALL.txt names the 71 expected files of the second execution, each once: 16 have the listed sha256; 55 are carried as substituted copies (the list names their sha256 before the substitution, PATH_NEUTRAL.tsv gives both values)
+L2 PASS    trees_certificates         26 pairs of machine reports name the certificate of this edition (the SHA-256 the producers' roster gives; the second checker the SHA-256 of the uncompressed stream that the first reports), this packing file and this specification
+L2 PASS    neutral_first_lines        26 stored checker outputs (13 trees, 2 checkers): first line PASS
+L2 PASS    neutral_post_checks        13 stored post-check reports: last line RESULT: ACCEPTED
+L2 PASS    neutral_equal              65 files of the third execution (26 outputs, 26 machine reports with every node, 13 post-check reports) equal the files of the second execution, apart from path prefixes, times and resource-usage lines
+L2 INFO    time                       level 2 took 781 s; outputs under _check_out/20261012T165503-26292
+CHECK RESULT: PASS (levels 0-2; 7118 files, 22013 pins, 41 checks); sha256 of MANIFEST.sha256: 9ecfa0db00fc9afaf98c6df8eeee920df8cb1e4737c88521ac3c64366ec7689e

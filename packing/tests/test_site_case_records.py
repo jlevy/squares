@@ -18,7 +18,7 @@ from typing import Any
 
 import pytest
 
-from devtools import render_case_pages, render_overview
+from devtools import render_case_pages, render_frontier_page, render_overview
 from devtools.preview_site import serve
 from sqpack.probes import probe
 from tests import site_browser, site_renders
@@ -64,6 +64,61 @@ def served(tmp_path_factory: pytest.TempPathFactory) -> Iterator[str]:
     finally:
         server.shutdown()
         server.server_close()
+
+
+def test_a_case_page_prints_its_regularization_note_and_nothing_without_one() -> None:
+    """The case page prints the record's generated `regularization` note
+    (`devtools.regularized_drawings`) as one labelled line: for a drawn count who
+    regularized the drawing, with its source's regularization of the house after it where
+    one exists, labelled a regularized drawing where the page draws the view (its default
+    picture, regularization policy section 12) and a regularization where the view ties
+    its house drawing and the page draws the house; for a count the layer does not draw
+    whose regularization a result registers, the credit to the Squares Project and the
+    result, and where an earlier certificate first stated that side, that certificate;
+    and nothing at all for a record without the field."""
+    cases = {case["n"]: case for case in render_frontier_page.frontier_cases()}
+    regularization = render_case_pages._regularization  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+
+    drawn = regularization(cases[152])
+    assert drawn.startswith(
+        '<div class="site-case-note"><span class="site-card-label">Regularized drawing</span>'
+    )
+    assert "Regularized by the Squares Project with Evan Daniel" in drawn
+    assert "retry rung force-kkt" in drawn
+    assert "a pure regularization, which proves no new bound, so not a result" in drawn
+
+    housed = regularization(cases[70])
+    drawn_here = 70 in render_frontier_page.drawn_regularized()
+    assert ("Regularized drawing" in housed) == drawn_here
+    assert ('<span class="site-card-label">Regularization</span>' in housed) != drawn_here
+    assert "The house is itself its source" in housed
+    # Where the view is held but not drawn, the note opens by saying the page draws the
+    # house and why, rather than "Regularized by" (n = 176, think-gvke), and says it once.
+    held = "does not improve on the packing as published"
+    assert (held in housed) != drawn_here
+    assert ("<p>Drawn as published: " in housed) != drawn_here
+    assert housed.count(held) <= 1
+    assert held not in drawn
+
+    registered = regularization(cases[53])
+    assert '<span class="site-card-label">Regularization</span>' in registered
+    assert "Regularized by the Squares Project" in registered
+    assert "not drawn here; its exact side is registered as T-155, the upper bound" in (
+        registered
+    )
+
+    # Where the side is that of Evan Daniel's earlier certificate, the page says so and
+    # claims no new bound (PR #585, review B1).
+    earlier = regularization(cases[28])
+    assert "Regularized by the Squares Project" in earlier
+    assert "registered in T-155, and the same side was first certified by Evan Daniel" in (
+        earlier
+    )
+    assert "(T-101), so it proves no new bound" in earlier
+    assert "the upper bound it proves" not in earlier
+
+    assert "regularization" not in cases[1]
+    assert regularization(cases[1]) == ""
 
 
 @pytest.fixture(scope="module")
@@ -465,7 +520,21 @@ def test_without_scripts_a_record_file_is_read_where_it_is(browser: Any, served:
         assert re.search(r'<article\b[^>]*\bdata-case="29"', response.text())
         assert page.url == f"{served}cases/29.html"
         _canonical_case(page, 29)
-        assert page.locator("article.site-case figure svg").count() == 1
+        assert page.locator("article.site-case .site-case-head > figure svg").count() == 1
+        # Where the default picture is the regularized view, the house drawing waits in a
+        # closed disclosure, as published (regularization policy, section 12).
+        published = page.locator("article.site-case details.site-case-published")
+        expected = int(29 in render_frontier_page.drawn_regularized())
+        assert published.count() == expected
+        if expected:
+            assert published.get_attribute("open") is None
+            assert published.locator("summary").inner_text() == "As published"
+            assert published.locator("figure svg").count() == 1
+            assert not published.locator("figure svg").is_visible()
+            published.locator("summary").click()
+            published.locator("figure svg").wait_for(state="visible")
+            assert published.get_attribute("open") is not None
+            assert "The packing as published" in published.locator("figcaption").inner_text()
 
 
 def _centered_case_bounds(layout: dict[str, Any]) -> None:
@@ -654,8 +723,13 @@ def test_case_summaries_keep_math_and_layout_when_fetched(
             direct_page.goto(f"{served}cases/{n}.html", wait_until="load")
             direct_page.locator(f'article.site-case[data-case="{n}"]').wait_for(state="visible")
             if n == 291 and width == 1280 and theme == "light":
+                desktop_drawing_width = direct_page.evaluate(LAYOUT)["drawingWidth"]
                 _case_bounds_at_the_two_column_boundary(direct_page)
                 direct_page.set_viewport_size({"width": width, "height": 900})
+                # The article can resize before its drawing leaves the narrow query.
+                site_browser.api().expect(
+                    direct_page.locator(".site-case-figure > svg")
+                ).to_have_css("width", f"{desktop_drawing_width:g}px")
             direct = direct_page.evaluate(LAYOUT)
             if n == 291:
                 direct_page.screenshot(path=tmp_path / f"n291-direct-{width}-{theme}.png")

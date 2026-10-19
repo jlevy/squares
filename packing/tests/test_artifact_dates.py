@@ -151,7 +151,7 @@ def test_the_optimality_papers_original_proof_is_the_day_the_register_gives() ->
 
 
 def test_the_threshold_reviews_original_proof_is_the_day_the_register_gives() -> None:
-    """Kleddamag published the proof Part II reviews on 22 September, as the register
+    """Overbeck published the proof Part II reviews on 22 September, as the register
     records T-037."""
     proof, review = artifact_dates.threshold_dates()
     assert proof == artifact_dates.long_date(artifact_dates.published("T-037"))

@@ -122,10 +122,11 @@ STATEMENTS: tuple[Statement, ...] = (
                 "[Kleddamag n17 4.66001]",
             }
         ),
-        anchor=re.compile(r"Kleddamag"),
+        # Overbeck's releases, published under his handle Kleddamag; the keys keep the handle.
+        anchor=re.compile(r"Overbeck"),
         sentence=(
-            "The source’s `AUTHORS.md` says Kleddamag directed the research and OpenAI Codex "
-            "carried it out."
+            "The source’s `AUTHORS.md` names Overbeck as Kleddamag and says he directed the "
+            "research and OpenAI Codex carried it out."
         ),
         marker="OpenAI Codex",
     ),
@@ -167,6 +168,19 @@ STATEMENTS: tuple[Statement, ...] = (
             "verification outputs, and preparation of the written materials.”"
         ),
         marker="AI assistance was used for most of",
+    ),
+    Statement(
+        # Neither pinned release states it; asked on the n207 issue which of its two
+        # accounts stands, the author answered there for both releases.
+        keys=frozenset(
+            {"[PingYou n207 certificate 2026-10-11]", "[PingYou n153 certificate 2026-10-11]"}
+        ),
+        anchor=re.compile(r"PingYou"),
+        sentence=(
+            "On jlevy/squares#503 the author wrote: “Both solutions were AI assisted by ‘PY’, "
+            "an unreleased agentic AI offering by PingYou Ltd.”"
+        ),
+        marker="AI assisted by",
     ),
 )
 

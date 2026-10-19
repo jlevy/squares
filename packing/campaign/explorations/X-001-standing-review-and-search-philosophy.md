@@ -20,7 +20,7 @@ exploration:
   - docs/project/research/research-2026-08-23-search-philosophy-and-landscape-cartography.md
   - docs/project/research/research-2026-08-22-infrastructure-for-packing-exploration.md
   - docs/project/research/research-2026-08-22-lean-for-packing-proofs-and-validation.md
-  - docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
+  - docs/project/specs/paused/plan-2026-08-22-minimal-packing-toolkit.md
   proposes: [H-001, H-002, H-003, H-004, H-005, H-006, H-007, H-008, H-009, H-010, H-011, H-012, H-013, H-014, H-015, H-021, H-022, H-023, H-024]
 ---
 # X-001 — the idea source this campaign’s registry was mined from

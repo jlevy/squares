@@ -1,7 +1,9 @@
 """The exact certificates of the catalogue's packings at n = 69, 83 and 87 (T-088, T-089).
 
 Since 2026-10-06 Evan Daniel's exact certificates of the same packings (T-101) hold those
-counts' verified upper lanes, a layer `devtools.apply_exact_ceilings` writes over this one.
+counts' verified upper lanes, a layer `devtools.apply_exact_ceilings` writes over this one;
+since 2026-10-12, where a regularized view's exact side lies below that, the layer
+`devtools.register_regularized_bounds` (T-155) writes over both.
 """
 
 from __future__ import annotations
@@ -11,6 +13,7 @@ from fractions import Fraction
 
 from devtools import apply_exact_ceilings as exact_ceilings
 from devtools import catalogue_upper_bounds as catalogue
+from devtools import register_regularized_bounds as regularized
 from devtools import upper_bound_packets as packets
 from devtools.apply_upper_bound_packets import normalized
 from sqpack.assurance import bounds_agree_at_declared_precision
@@ -59,7 +62,8 @@ def test_both_negative_controls_are_refused_by_both_checkers() -> None:
 def test_each_receipts_verified_value_trails_the_printed_side_and_was_superseded() -> None:
     """Each certificate's verified value trails the printed side, at all three; since
     2026-10-06 Evan Daniel's exact certificate of the same packing (T-101) holds the
-    verified lane below it, and the record keeps the reported side these receipts print."""
+    verified lane below it, or since 2026-10-12 a regularized view below that (T-155), and
+    the record keeps the reported side these receipts print."""
     for n, row in catalogue.certification().items():
         text = (catalogue.ROOT / "frontier" / f"n-{n:03d}.md").read_text(encoding="utf-8")
         case = safe_load(text.split("---\n")[1])["packing"]
@@ -70,18 +74,24 @@ def test_each_receipts_verified_value_trails_the_printed_side_and_was_superseded
         assert Fraction(case["verified_upper_bound"]["exact_form"]) < Fraction(
             row["exact_form"]
         ), n
-        assert case["verified_upper_bound"]["evidence"] == [
-            exact_ceilings.EXACT_REPLAY,
-            exact_ceilings.SOURCE_REPLAY,
-        ], n
+        # T-155's view lies exactly at T-101's side at all three, so the lane cites T-101's
+        # replays, which prove that side, and T-155's decision after them.
+        later = (
+            regularized.verified_block(regularized.committed()[n])["evidence"]
+            if n in regularized.committed()
+            else [exact_ceilings.EXACT_REPLAY, exact_ceilings.SOURCE_REPLAY]
+        )
+        assert case["verified_upper_bound"]["evidence"] == later, n
 
 
 def test_apply_case_writes_each_committed_records_upper_lane_and_blockers() -> None:
-    """Applied to a committed record with the later layer on top, as the generator applies
+    """Applied to a committed record with the later layers on top, as the generator applies
     them, the adoption step changes nothing in it."""
     for n in catalogue.RESULTS:
         text = (catalogue.ROOT / "frontier" / f"n-{n:03d}.md").read_text(encoding="utf-8")
-        applied = exact_ceilings.apply_case(n, catalogue.apply_case(n, text))
+        applied = regularized.apply_case(
+            n, exact_ceilings.apply_case(n, catalogue.apply_case(n, text))
+        )
         assert safe_load(applied.split("---\n")[1]) == safe_load(text.split("---\n")[1]), n
         assert normalized(applied.split("---\n", 2)[2]) == normalized(
             text.split("---\n", 2)[2]

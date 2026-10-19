@@ -1,0 +1,55 @@
+{
+  "format": "external-source-declaration-v1",
+  "id": "riocalle-my-repo",
+  "source_url": "https://github.com/riocalle/my-repo",
+  "source_ref": "main",
+  "source_commit": "831368623f2d4dcef2e9434fd85c3e154083c97d",
+  "retrieved_at_utc": "2026-10-12T08:03Z",
+  "git_scope": "Full clone of the one-commit repository, checked out at the pin issue #529 names, its head. All eleven files of the tree are in the scope and bound to their Git blobs; under derived-only custody none is copied. verify_exact.py was read and then run once from a scratch directory outside this repository, on the pinned layout; no other source program was executed.",
+  "archived_dir": "source",
+  "license": "No licence file in the pinned tree, and its README states no reuse terms. Derived-only custody under the known-best retention policy: no upstream byte is retained, every file is bound here by SHA-256 and at the pin by its Git blob, and no redistribution permission or licence determination is asserted. The issue and README credit Rio Calle (University of New Hampshire) with the arrangement, credit ry-xu with finding the design and width first, and state that Claude wrote and ran the search, finishing, refinement and checking code under the author's direction.",
+  "claims": [
+    "Issue #529 reports s(102) <= 10.605828696455852 from the layout n102_s10.605828696455852.txt: decimal centres in [0, s]^2 and rotations in radians, 18 significant digits, with JSON and SVG copies. The author states minimum gaps of 1.9e-12 between squares and 2.0e-12 to the walls, from a 60-digit decimal check (verify_exact.py), and an exact rational-interval certificate from a private engine that is not published.",
+    "The README says the packing shares ry-xu's design (T-125) and width, is a different arrangement in which 40 of the 102 squares coincide with ry-xu's turned by a half turn, and was found independently about ten hours after ry-xu's publication; solved to the bottom of its valley it reaches s = 10.605828696431638, an author report that is not certified here.",
+    "earlier/ holds the author's previous layout at s = 10.605828708, first reported in Davidebyzero/packing_squares_in_squares__tools issue 6 on 2026-10-08; it is above the record's ceilings and asks for no work."
+  ],
+  "scope": [
+    "README.md",
+    "earlier",
+    "n102_s10.605828696455852.json",
+    "n102_s10.605828696455852.png",
+    "n102_s10.605828696455852.txt",
+    "n102_s10.605828696455852_submission.svg",
+    "verify_exact.py"
+  ],
+  "pinned_only": [
+    {
+      "match": "n102_s10.605828696455852.txt",
+      "reason": "The layout the issue reports: centres and radian rotations as decimals. No licence in the tree, so derived-only custody: the importer reads it from a checkout at this pin, holds it to this digest and keeps the exact certificate it derives as facts/n-102.yaml."
+    },
+    {
+      "match": "n102_s10.605828696455852.json",
+      "reason": "The same layout as JSON, the same binary64 values in the same order. No licence: pinned by digest only."
+    },
+    {
+      "match": "n102_s10.605828696455852_submission.svg",
+      "reason": "The same layout as an SVG drawing, each square's centre and angle as data attributes. No licence: pinned by digest only."
+    },
+    {
+      "match": "n102_s10.605828696455852.png",
+      "reason": "The author's drawing of the layout. No licence: pinned by digest only."
+    },
+    {
+      "match": "verify_exact.py",
+      "reason": "The author's 60-digit decimal separating-axis checker, written with Claude; it rounds, so it is no exact check. No licence: pinned by digest only, read, and run once outside the repository."
+    },
+    {
+      "match": "earlier/*",
+      "reason": "The author's earlier layout at s = 10.605828708 with its drawings, above the record's ceilings. No licence: pinned by digest only."
+    },
+    {
+      "match": "README.md",
+      "reason": "Author prose stating the claim, its history and credit, quoted in this packet's README. No licence: pinned by digest only."
+    }
+  ]
+}

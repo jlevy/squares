@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Found by Robert Wainwright between Novemeber 1979 and March 1980.
+    Independently rediscovered by many other Scientific American readers within the same timeframe:
+        Robert Ammann, Joseph Crowther, Paul Engler, Gerald Gough, Hugh Everett, David Hobby, Richard Holzsayer, David Kitchens, Milos Konopasek, Evert Stenlund, and Douglas Stoll
+            Source: {Fractal Music, Hypercards and More...: Mathematical Recreations from Scientific American Magazine}, by Martin Gardner (1991)
+            Source: Correspondence from Evert Stenlund to Martin Gardner, early 1980
+                Source: Private communication from Evert Stenlund to David Ellsworth, December 18, 2024
+-->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" [
+    <!ENTITY s  "4.88561808316412673173558496561"> <!-- 3 + Sqrt[2]*4/3 -->
+]>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 &s; &s;" style="fill:#B2B2B2; stroke:black; stroke-width:0.0019" id="svg">
+    <script xlink:href="svgDisp.js"/>
+    <defs>
+        <rect width="&s;" height="&s;" id="outer"/>
+    </defs>
+    <use xlink:href="#outer" style="fill:white; stroke:none"/>
+    <g>
+        <path style="stroke:none" d="M2,0 V1 H1 V2 H0 V0"/>
+        <path style=  "fill:none" d="M2,0 V1 H0
+                                     M1,0 V2 H0"/>
+        <g transform="translate(&s; &s;) scale(-1 -1)">
+            <path style="stroke:none" d="M3,0 V1 H2 V2 H1 V3 H0 V0"/>
+            <path style=  "fill:none" d="M3,0 V1 H0
+                                         M2,0 V2 H0
+                                         M1,0 V3 H0"/>
+        </g>
+    </g>
+    <g id="side1">
+        <g transform="translate(&s;) scale(-1 1)">
+            <rect style="stroke:none" width="1" height="1"/>
+            <path style=  "fill:none" d="M1,0 V1 H0"/>
+        </g>
+        <g transform="translate(&s;) scale(.5) translate(&s; &s;) scale(2) translate(-3 -1) rotate(135)">
+            <g id="two">
+                <rect width="1" height="2"/>
+                <path style="fill:none" d="M0,1 L1,1"/>
+            </g>
+            <use xlink:href="#two" transform="translate(1 -2) rotate(-45) translate(-&s; &s;) translate(3.5 -3.5) rotate(45)"/>
+        </g>
+    </g>
+    <use xlink:href="#side1" transform="scale(1 -1) rotate(-90)"/>
+    <use xlink:href="#outer" style="fill:none"/>
+</svg>

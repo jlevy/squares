@@ -44,14 +44,14 @@ def page(tmp_path_factory: pytest.TempPathFactory) -> str:
         return read_inline_page(out / "index.html")
 
 
-def test_the_page_carries_the_shared_nav_with_visualize_current(page: str) -> None:
-    nav = render_overview.nav_html("visualize", root="../")
+def test_the_page_carries_the_shared_nav_with_explanations_current(page: str) -> None:
+    nav = render_overview.nav_html("explanations", root="../")
     assert page.count(nav) == 1
     assert page.count('class="site-nav"') == 1
     current = re.findall(r'<a data-page="(\w+)"[^>]* aria-current="page"', page)
-    assert current == ["visualize"]
-    visualize = '<a data-page="visualize" aria-current="page" href="../visualize.html">'
-    assert f"{visualize}Visualize</a>" in page
+    assert current == ["explanations"]
+    explanations = '<a data-page="explanations" aria-current="page" href="../papers.html">'
+    assert f"{explanations}Explanations</a>" in page
 
 
 def test_the_page_carries_the_sites_head_at_the_address_it_is_served_at(page: str) -> None:
@@ -78,33 +78,34 @@ def test_the_page_carries_the_sites_head_at_the_address_it_is_served_at(page: st
         build_site.with_head("<html><head></head><body></body></html>")
 
 
-def test_the_bar_has_one_papers_entry_reaching_the_site_root(page: str) -> None:
-    """The bar is the site's partial, so the workbench carries its Papers entry, which
+def test_the_bar_has_one_explanations_entry_reaching_the_site_root(page: str) -> None:
+    """The bar is the site's partial, so the workbench carries its Explanations entry, which
     stands for the explainer and the tutorial, and no entry for either of them."""
     entries = re.findall(r'<a data-page="(\w+)"[^>]* href="([^"]+)">([^<]+)</a>', page)
     assert [key for key, _, _ in entries] == [
         "overview",
+        "news",
         "atlas",
         "results",
-        "papers",
-        "visualize",
+        "explanations",
         "about",
         "github",
     ]
-    assert ("papers", "../papers.html", "Papers") in entries
+    assert ("news", "../news.html", "News") in entries
+    assert ("explanations", "../papers.html", "Explanations") in entries
     assert ("atlas", "../atlas.html", "Atlas") in entries
     assert ("about", "../about.html", "About") in entries
 
 
-def test_the_page_is_the_workbench_tab_of_the_visualize_section(page: str) -> None:
-    """The workbench carries the Visualize section's tabs under the bar with its own tab
+def test_the_page_is_the_workbench_tab_of_the_explanations_section(page: str) -> None:
+    """The workbench carries the Explanations section's tabs under the bar with its own tab
     current, so an existing `workbench/` link lands on the Workbench tab beside the Film."""
     tabs = render_overview.visualize_tabs("workbench", root="../")
     assert page.count(tabs) == 1
     assert page.count('class="site-tabs"') == 1
     current = re.findall(r'<a data-tab="(\w+)" aria-current="page" href="([^"]+)"', page)
     assert current == [("workbench", "../workbench/")]
-    assert '<a data-tab="film" href="../visualize.html">Film</a>' in page
+    assert '<a data-tab="film" href="../papers.html#visuals">Film</a>' in page
     # In the header after the bar, where a kpress page of the section also puts it.
     body = page.split("<body>", 1)[1]
     bar_end = body.index("</nav>", body.index('class="site-nav"'))

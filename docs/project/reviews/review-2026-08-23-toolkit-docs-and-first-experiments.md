@@ -15,7 +15,7 @@ branch (PR #4) —
 [the infrastructure synthesis](../research/research-2026-08-22-infrastructure-for-packing-exploration.md),
 [the Lean study](../research/research-2026-08-22-lean-for-packing-proofs-and-validation.md),
 and
-[the minimal-toolkit plan spec](../specs/active/plan-2026-08-22-minimal-packing-toolkit.md)
+[the minimal-toolkit plan spec](../specs/paused/plan-2026-08-22-minimal-packing-toolkit.md)
 — against the four prior reports and the corpus, from a theory-first standpoint: not “is
 this correct” but “what would a senior researcher say is *missing*, and what should the
 first experiments actually be.”
@@ -539,7 +539,7 @@ evidence base per that document’s methodology note.
   — the strategy layer behind H-11–H-15 and S6.
 - [Infrastructure for Square-Packing Exploration](../research/research-2026-08-22-infrastructure-for-packing-exploration.md)
 - [Lean for Square-Packing Proofs and Validation](../research/research-2026-08-22-lean-for-packing-proofs-and-validation.md)
-- [Minimal packing toolkit plan spec](../specs/active/plan-2026-08-22-minimal-packing-toolkit.md)
+- [Minimal packing toolkit plan spec](../specs/paused/plan-2026-08-22-minimal-packing-toolkit.md)
 - [Packing 11 Unit Squares in a Square](../research/research-2026-08-22-packing-11-unit-squares.md)
   — the Stromquist two-stage structure (R-5), the transversal/fractional-certificate
   thread (H-6), the strategy catalogues.

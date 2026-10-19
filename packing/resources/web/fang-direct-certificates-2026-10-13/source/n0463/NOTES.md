@@ -1,0 +1,1 @@
+n = 463 = 22^2 - 22 + 1, S = 21.986880406196935 (rounded up; exact value in the certificate), built from a parametric two-wedge seed (eight lines per wedge, built from line lengths and angles, not from an earlier packing; see the note, Section 6); replaces an earlier grown certificate with side 21.996141, found 2026-10-10, not analytically optimised.

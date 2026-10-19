@@ -1,0 +1,8 @@
+{
+  "binary_sha256": "a3a82b57456d98f6f0a8ca03d5974b7624db6d393fa6d9e679d8b3a4719ffd1d",
+  "exit_code": 0,
+  "input_sha256": "10dd46b06f14144619bf9de03151c43215e43e34f7e60df440f4e27d6a594396",
+  "source_sha256": "f5bc3f60065aaea3d14ffb8465865750fca22cf8bbc6bd8739b5120200b6277d",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout": "{\"status\":\"AXIS_COVERAGE_PROVED\",\"x_nodes\":3293,\"y_nodes\":3293,\"minimum_numerator\":\"1001486431423867090847280653\",\"scale\":\"1000000000000000000000000000\",\"minimizer_x_integer\":3490012394,\"minimizer_y_integer\":6201340682,\"direct_sum_matches\":true,\"evaluation_abs_bound\":\"627444222088298915573283512797161984\"}\n"
+}

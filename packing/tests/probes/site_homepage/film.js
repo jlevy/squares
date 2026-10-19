@@ -39,6 +39,8 @@ async (options) => {
     film.dispatchEvent(new Event("ended"));
   }
   const overlay = document.querySelector(".site-film-play");
+  const icon = overlay?.querySelector(".site-film-play-icon");
+  const arrow = icon ? getComputedStyle(icon, "::before") : null;
   const box = film.getBoundingClientRect();
   const frame = article.getBoundingClientRect();
   const rem = Number.parseFloat(getComputedStyle(document.documentElement).fontSize);
@@ -57,6 +59,15 @@ async (options) => {
     controls: film.controls,
     overlay_visible: overlay instanceof HTMLButtonElement && !overlay.hidden,
     overlay_label: overlay?.getAttribute("aria-label"),
+    play_icon: arrow
+      ? {
+          content: arrow.content,
+          width: Number.parseFloat(arrow.borderInlineStartWidth),
+          half_height: Number.parseFloat(arrow.borderBlockStartWidth),
+          color: arrow.borderInlineStartColor,
+          text: icon?.textContent,
+        }
+      : null,
     mock_play_calls: Number(film.dataset.siteMockPlays ?? 0),
     mock_pause_calls: Number(film.dataset.siteMockPauses ?? 0),
     inline: film.playsInline,

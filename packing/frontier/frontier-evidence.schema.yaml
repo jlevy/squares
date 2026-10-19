@@ -80,6 +80,78 @@ $defs:
               type: array
               uniqueItems: true
               items: {type: string, pattern: '^E-[a-z0-9-]+$'}
+  independence:
+    type: object
+    additionalProperties: false
+    description: >-
+      The structured independence record of a run (epistemics.md, The Independence
+      Record): its coverage, and, where no deciding program's registry entry carries
+      them, what the authors read, whether the program is clean-room, the producer's
+      components it shares, who wrote it and whether that authorship overlaps the
+      producer's, with the meanings verifiers.schema.yaml gives them. Required, with its
+      coverage, on an independent-implementation entry recorded from 14 October 2026; a
+      sample derives no rung (devtools.check_results).
+    required: [coverage]
+    dependentRequired:
+      read: [clean_room, shares, written_by, overlaps_producer]
+      clean_room: [read]
+      shares: [read]
+      written_by: [read]
+      overlaps_producer: [read]
+    properties:
+      coverage:
+        type: object
+        additionalProperties: false
+        required: [extent, unit]
+        description: >-
+          How much of the unit the run decided. full -- every instance of the unit.
+          sample -- checked of the unit's of instances, and nothing about the others.
+        properties:
+          extent: {enum: [full, sample]}
+          unit: {type: string, minLength: 1}
+          checked: {type: integer, minimum: 0}
+          of: {type: integer, minimum: 1}
+        allOf:
+          - if: {properties: {extent: {const: sample}}}
+            then: {required: [checked, of], properties: {checked: {minimum: 1}}}
+      read:
+        type: array
+        minItems: 1
+        uniqueItems: true
+        items:
+          enum: [mathematics, proof-text, specification, certificate-format, producer-code, producer-output, earlier-review]
+      clean_room: {type: boolean}
+      shares:
+        type: array
+        uniqueItems: true
+        items: {type: string, minLength: 1}
+      written_by:
+        type: array
+        minItems: 1
+        items:
+          type: object
+          additionalProperties: false
+          required: [kind]
+          properties:
+            kind: {enum: [person, ai]}
+            name: {type: string, minLength: 1}
+            system: {type: string, minLength: 1}
+            setting: {type: string, minLength: 1}
+          allOf:
+            - if: {properties: {kind: {const: person}}}
+              then: {required: [name]}
+            - if: {properties: {kind: {const: ai}}}
+              then: {required: [system]}
+      overlaps_producer:
+        type: object
+        additionalProperties: false
+        required: [extent, separate_prompt, separate_code, note]
+        properties:
+          extent: {enum: [none, system-family, people, unknown]}
+          separate_prompt: {type: [boolean, "null"]}
+          separate_code: {type: boolean}
+          note: {type: string, minLength: 1}
+      note: {type: string, minLength: 1}
   evidence:
     type: object
     additionalProperties: false
@@ -145,6 +217,8 @@ $defs:
           what the verifying program's authors read and used, where the program's own
           registry entry names none. devtools.verifier_registry requires one of the two
           on every independent-implementation entry not grandfathered by name.
+      independence:
+        $ref: '#/$defs/independence'
       origin:
         enum: [external, independently-external, replayed-here, audited-here]
       # Whose result this is, separate from assurance and origin. The values differ

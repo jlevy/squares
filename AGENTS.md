@@ -49,6 +49,15 @@ Recorded 2026-10-03.
 <!-- END TBD POLICY GRANTS -->
 <!-- END TBD INTEGRATION -->
 
+In this repository, confirm a claim before editing: run
+`tbd start <id> --as <unique-agent-name> --json` and read `claimed` and `skipped`, since
+a skipped claim also exits zero.
+A delegated worker follows its brief instead: by default the coordinator claims the
+assigned beads under the worker’s name and runs `tbd sync`, which reverses tbd’s default
+for sync.
+[OR-19](operating-rules.md#or-19-confirm-one-bead-owner-before-work-sync-at-session-start-after-commits-and-at-handoff-or-end)
+covers delegated work, handoffs and tracker audits.
+
 ## Operating Rules
 
 Generated from [`operating-rules.md`](operating-rules.md), which carries the evidence
@@ -81,6 +90,8 @@ for each rule. Edit there, not here.
   purpose.
 - **OR-18:** Keep bulk data out of Git, and never bind code or verdicts to a Git commit
   or blob.
+- **OR-19:** Confirm one bead owner before work; sync at session start, after commits,
+  and at handoff or end.
 <!-- END OPERATING RULES SUMMARY -->
 
 ## Build & Test
@@ -148,7 +159,8 @@ Ruff and BasedPyright run at zero findings over every tracked Python file, the
 hand-written skill assets at the repository root included; `print` is allowed only in
 the tools (`devtools`, `cases`, `tests`, `benchmarks`, the console scripts, the retained
 video spikes under `packing/atlas/known-best/video/spikes/`, whose generators and
-browser checks report by printing, and the workbench command modules under
+browser checks report by printing, an intake pass’s retained review programs under
+`packing/campaign/issue-intake/`, and the workbench command modules under
 `packages/workbench/tools/`), and the two standalone verifiers under
 `packing/cases/n11_fractional_certificate/` run on any CPython 3.12 or later by design.
 Python, Rust, and research validation are documented in
@@ -281,7 +293,8 @@ The repository is split by audience rather than by topic.
 [`README.md`](README.md) as the front door, then [`TUTORIAL.md`](TUTORIAL.md),
 [`SYNOPSIS.md`](SYNOPSIS.md), [`conventions.md`](conventions.md),
 [`development.md`](development.md), the generated [`defects.md`](defects.md), and
-`docs/project/` for reports, reviews, specs and postmortems.
+`docs/project/`, one directory per kind: guides, handoffs, postmortems, research,
+reviews and specs.
 
 **[`packing/`](packing/) holds the general library, data, and research record**: the
 `sqpack` package and its tests, the developer tools, the Rust search engine, the
@@ -321,6 +334,11 @@ packing, live in [jlevy/thinking](https://github.com/jlevy/thinking).
   summary above is the whole of what belongs here.
 - **Archived source material is never edited to look tidy.** Where a transcription
   reconstructs damaged text, it is flagged inline and counted in the archive README.
+- **Pull requests merge with a merge commit**, and squash only for a stated reason:
+  [development.md → Merging a Pull Request](development.md#merging-a-pull-request).
+- **Issues and pull requests carry labels from one set**, such as `intake` and the case
+  labels `n-11`, `n-17` and `n-18`:
+  [development.md → Issue and Pull-Request Labels](development.md#issue-and-pull-request-labels).
 
 <!-- BEGIN FLOWMARK INTEGRATION format=f03 surface=agents-md -->
 ## flowmark

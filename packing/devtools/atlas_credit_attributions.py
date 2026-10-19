@@ -122,10 +122,16 @@ def parse(document: Mapping[str, Any]) -> CreditAttributions:
                     "Optimality proofs due to",
                     {"theorem-author", "direct-prerequisite-proof-author"},
                 ),
-                ("formalization contributions by", {"formalization-proof-contributor"}),
+                # One print clause for both roles (the owner, 14 October 2026: "put
+                # formalization and verification infrastructure into a single thing for
+                # formalization"). The curated input keeps the two roles apart, and the
+                # metadata carries them as recorded.
                 (
-                    "verification infrastructure and execution by",
-                    {"verification-infrastructure-or-execution"},
+                    "formalization by",
+                    {
+                        "formalization-proof-contributor",
+                        "verification-infrastructure-or-execution",
+                    },
                 ),
             ),
         ),

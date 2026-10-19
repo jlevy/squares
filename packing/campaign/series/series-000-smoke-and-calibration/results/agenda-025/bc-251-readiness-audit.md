@@ -74,7 +74,7 @@ its exact scale factor is $1525/1524$.
 ## Assumptions Outside PR 100
 
 - Use the
-  [continuation addendum’s scalar command](../../../../../../docs/project/handoff-2026-09-06-post-381-t2-t10-continuation.md#scalar-6116-launch),
+  [continuation addendum’s scalar command](../../../../../../docs/project/handoffs/handoff-2026-09-06-post-381-t2-t10-continuation.md#scalar-6116-launch),
   which includes `--stop-on-covering-below-n`. The older command in Agenda 025 omits
   that flag. Do not silently drop the safe crossing when restoring readiness.
 - A row-converged LP value is a numerical proposal.

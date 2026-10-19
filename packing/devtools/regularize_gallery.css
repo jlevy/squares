@@ -1,0 +1,454 @@
+/*
+ * The regularization review gallery's stylesheet, inlined into the page by
+ * devtools/regularize_gallery.py. The page has no script.
+ *
+ * Layout: a review sheet. A masthead and a summary ledger of every count, then one plate
+ * per count: its drawings side by side at one scale, the measurements under them, and
+ * the run's record. Drawings keep the house palette on white paper in both themes; only
+ * the sheet around them follows the viewer's theme.
+ */
+
+:root {
+  --bg: #f3f5f2;
+  --surface: #ffffff;
+  --fg: #19221f;
+  --muted: #56625c;
+  --rule: #d5dbd5;
+  --strong-rule: #19221f;
+  --accent: #1b6654;
+  --figure-bg: #e6eae5;
+  --mark: #c2185b;
+  --mark-halo: #ffffff;
+  --flag: #8a4600;
+  --admit-bg: #d9eedf;
+  --admit-fg: #14572f;
+  --review-bg: #f8e9c4;
+  --review-fg: #6b4300;
+  --alternate-bg: #e9e0f6;
+  --alternate-fg: #523181;
+  --refuse-bg: #f6dad6;
+  --refuse-fg: #882015;
+  --candidate-bg: #d8e6f7;
+  --candidate-fg: #1a4a82;
+  --unchanged-bg: #e3e7e3;
+  --unchanged-fg: #46504b;
+  --font-body: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-display: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+  --font-data:
+    ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  --gutter: 16px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #131715;
+    --surface: #1b201e;
+    --fg: #e2e7e3;
+    --muted: #9aa69f;
+    --rule: #2f3733;
+    --strong-rule: #c9d1cc;
+    --accent: #72cdb3;
+    --figure-bg: #262c29;
+    --mark: #c2185b;
+    --mark-halo: #ffffff;
+    --flag: #f0b45f;
+    --admit-bg: #1c3a28;
+    --admit-fg: #93e0b0;
+    --review-bg: #3c2e0f;
+    --review-fg: #f3c86c;
+    --alternate-bg: #2e2440;
+    --alternate-fg: #cbb3f1;
+    --refuse-bg: #41201c;
+    --refuse-fg: #f4a59c;
+    --candidate-bg: #1a2d44;
+    --candidate-fg: #9fc6f5;
+    --unchanged-bg: #29302c;
+    --unchanged-fg: #bac3be;
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg: #131715;
+  --surface: #1b201e;
+  --fg: #e2e7e3;
+  --muted: #9aa69f;
+  --rule: #2f3733;
+  --strong-rule: #c9d1cc;
+  --accent: #72cdb3;
+  --figure-bg: #262c29;
+  --mark: #c2185b;
+  --mark-halo: #ffffff;
+  --flag: #f0b45f;
+  --admit-bg: #1c3a28;
+  --admit-fg: #93e0b0;
+  --review-bg: #3c2e0f;
+  --review-fg: #f3c86c;
+  --alternate-bg: #2e2440;
+  --alternate-fg: #cbb3f1;
+  --refuse-bg: #41201c;
+  --refuse-fg: #f4a59c;
+  --candidate-bg: #1a2d44;
+  --candidate-fg: #9fc6f5;
+  --unchanged-bg: #29302c;
+  --unchanged-fg: #bac3be;
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.page {
+  box-sizing: border-box;
+  max-width: 1280px;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+  padding-block: 28px 56px;
+  display: grid;
+  gap: 40px;
+}
+
+.page *,
+.page *::before,
+.page *::after {
+  box-sizing: border-box;
+}
+
+h1,
+h2 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.15;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+.masthead {
+  display: grid;
+  gap: 14px;
+  min-width: 0;
+}
+
+.eyebrow {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.lede {
+  margin: 0;
+  max-width: 70ch;
+}
+
+a {
+  color: var(--accent);
+}
+
+a:focus-visible,
+summary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+code {
+  font-family: var(--font-data);
+  font-size: 0.875em;
+}
+
+.muted,
+.sub {
+  color: var(--muted);
+}
+
+.sub {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.flag {
+  color: var(--flag);
+  font-weight: 600;
+}
+
+.run-facts,
+.facts {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  gap: 6px 16px;
+  margin: 0;
+  font-size: 0.875rem;
+}
+
+.run-facts dt,
+.facts dt {
+  color: var(--muted);
+}
+
+.run-facts dd,
+.facts dd {
+  margin: 0;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 20px;
+  color: var(--muted);
+  font-size: 0.8125rem;
+}
+
+.swatch-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.swatch-label {
+  font-family: var(--font-data);
+}
+
+.swatches {
+  display: block;
+  flex: none;
+}
+
+.section-title {
+  margin-bottom: 10px;
+  font-size: 1.25rem;
+}
+
+.table-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+table {
+  border-collapse: collapse;
+  font-size: 0.875rem;
+  font-variant-numeric: tabular-nums;
+}
+
+th,
+td {
+  padding: 6px 14px 6px 0;
+  border-bottom: 1px solid var(--rule);
+  text-align: left;
+  vertical-align: top;
+  white-space: nowrap;
+}
+
+thead th {
+  color: var(--muted);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+tbody th {
+  font-weight: 600;
+}
+
+.num {
+  text-align: right;
+}
+
+.measures td {
+  white-space: normal;
+  min-width: 11rem;
+}
+
+.measures tbody th {
+  white-space: normal;
+  min-width: 8.5rem;
+  max-width: 13rem;
+}
+
+.count {
+  display: grid;
+  gap: 18px;
+  padding-top: 22px;
+  border-top: 2px solid var(--strong-rule);
+  min-width: 0;
+}
+
+.count-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px 16px;
+}
+
+.count-head h2 {
+  font-size: 1.75rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.reason {
+  flex-basis: 100%;
+  margin: 0;
+  max-width: 80ch;
+  color: var(--muted);
+}
+
+.chip {
+  display: inline-block;
+  padding: 1px 10px;
+  border-radius: 999px;
+  background: var(--unchanged-bg);
+  color: var(--unchanged-fg);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.chip-admit {
+  background: var(--admit-bg);
+  color: var(--admit-fg);
+}
+
+.chip-review {
+  background: var(--review-bg);
+  color: var(--review-fg);
+}
+
+.chip-alternate {
+  background: var(--alternate-bg);
+  color: var(--alternate-fg);
+}
+
+.chip-refuse {
+  background: var(--refuse-bg);
+  color: var(--refuse-fg);
+}
+
+.chip-candidate {
+  background: var(--candidate-bg);
+  color: var(--candidate-fg);
+}
+
+.panels {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
+  gap: 16px;
+}
+
+.panel {
+  display: grid;
+  align-content: start;
+  gap: 8px;
+  margin: 0;
+  padding: 10px;
+  min-width: 0;
+  border-radius: 4px;
+  background: var(--figure-bg);
+}
+
+.drawing {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+}
+
+.drawing .mark-halo,
+.swatches .mark-halo {
+  fill: none;
+  stroke: var(--mark-halo);
+  stroke-width: 5px;
+  vector-effect: non-scaling-stroke;
+}
+
+.drawing .mark,
+.swatches .mark {
+  fill: none;
+  stroke: var(--mark);
+  stroke-width: 2.5px;
+  vector-effect: non-scaling-stroke;
+}
+
+.panel figcaption {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+  font-size: 0.8125rem;
+  overflow-wrap: anywhere;
+}
+
+.panel .role {
+  font-weight: 600;
+}
+
+.missing {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  max-width: 100%;
+  padding: 16px;
+  border: 1px dashed var(--rule);
+  background: var(--surface);
+}
+
+.error {
+  margin: 0;
+  color: var(--refuse-fg);
+}
+
+.hist {
+  display: inline-grid;
+  grid-template-columns: repeat(5, 4ch);
+  column-gap: 1ch;
+  font-family: var(--font-data);
+  text-align: right;
+}
+
+details summary {
+  color: var(--accent);
+  cursor: pointer;
+}
+
+details[open] summary {
+  margin-bottom: 8px;
+}
+
+.colophon {
+  padding-top: 16px;
+  border-top: 1px solid var(--rule);
+  color: var(--muted);
+  font-size: 0.8125rem;
+}
+
+@media (max-width: 560px) {
+  h1 {
+    font-size: 1.6rem;
+  }
+
+  .run-facts,
+  .facts {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2px;
+  }
+
+  .run-facts dd,
+  .facts dd {
+    margin-bottom: 8px;
+  }
+}

@@ -83,6 +83,8 @@ def test_retained_thresholds_include_the_noninteger_n211_before_the_grid_suffix(
     manifest = Path(__file__).resolve().parents[1] / "atlas/known-best/manifest.json"
     entries = json.loads(manifest.read_text())["atlas"]["entries"]
     found = grid_transitions(entries)
+    # The last threshold is 309 since the house adoption of 11 October 2026 (think-fvz4):
+    # T-141's tilted n = 308 replaced the grid there, as de Winter's n = 211 did at 211.
     assert [item.first_grid_n for item in found] == [
         1,
         2,
@@ -101,10 +103,12 @@ def test_retained_thresholds_include_the_noninteger_n211_before_the_grid_suffix(
         212,
         242,
         274,
-        308,
+        309,
     ]
     assert entries[210]["source"]["kind"] == "packet-derived-facts"
     assert found[14] == GridTransition(15, 212)
+    assert entries[307]["source"]["kind"] == "packet-derived-facts"
+    assert found[17] == GridTransition(18, 309)
 
 
 def test_grid_transitions_expose_explicit_complete_segments_including_empty_prefixes() -> None:

@@ -2346,9 +2346,11 @@ def adopt_upper_bound_packet(n: int, text: str) -> str:
     `devtools.catalogue_upper_bounds` moves the verified upper lane and its blocker the
     same way, and leaves the body, whose intake prose is the record's own. Then, at the 48
     counts whose packing Evan Daniel solved to its exact optimum (T-098),
-    `devtools.apply_exact_optima` moves both upper lanes to the certified side; last, at
+    `devtools.apply_exact_optima` moves both upper lanes to the certified side; then, at
     the 77 counts where his other certificates lower the verified ceiling (T-101),
-    `devtools.apply_exact_ceilings` moves the verified upper lane.
+    `devtools.apply_exact_ceilings` moves the verified upper lane; last, at the counts
+    where a regularized view's exact side lies below that ceiling (T-155),
+    `devtools.register_regularized_bounds` moves it onto that side.
     """
     intake, plans, earlier = _upper_bound_packets()
     plan = plans.get(n)
@@ -2356,6 +2358,9 @@ def adopt_upper_bound_packet(n: int, text: str) -> str:
     adopted = _catalogue_certificates().apply_case(n, adopted)
     adopted = importlib.import_module("devtools.apply_exact_optima").apply_case(n, adopted)
     adopted = importlib.import_module("devtools.apply_exact_ceilings").apply_case(n, adopted)
+    adopted = importlib.import_module("devtools.register_regularized_bounds").apply_case(
+        n, adopted
+    )
     if adopted == text:
         return text
     # The intake moves the verified upper bound's evidence, so the record's
@@ -2470,21 +2475,29 @@ def _existing_dates(path: Path, review_date: str, retrieved_date: str) -> tuple[
     return str(payload.get("source_reviewed") or review_date), str(retrieved)
 
 
+#: The front-matter blocks other tools write after this one, which a draft never carries.
+LATER_BLOCKS = ("  rigidity:", "  regularization:")
+
+
 def without_rigidity(text: str) -> str:
-    """One record's text with its `packing.rigidity` block removed.
+    """One record's text with its `packing.rigidity` block, and its generated
+    `packing.regularization` block, removed.
 
     The generator writes `rigidity: null` and the promotion path replaces it: the
     translation-escape screen and `devtools/assess_frontier_rigidity.py` run after this
     tool and re-serialise the block at their own YAML width, so a promoted record can
-    never be byte-identical to a fresh draft of itself in that one field. `--check`
-    therefore compares everything except it. This is the same allowance the golden test
-    already makes -- `NOT_REPRODUCED` names `packing.rigidity` and nothing else -- and
-    without it every promoted record would report as drift and the check would find none.
+    never be byte-identical to a fresh draft of itself in that one field. The
+    `regularization` note is `devtools.regularized_drawings`'s, written from the
+    regularized layer's index and checked there. `--check` therefore compares everything
+    except the two. This is the same allowance the golden test already makes --
+    `NOT_REPRODUCED` names `packing.rigidity` and `packing.regularization` and nothing
+    else -- and without it every promoted record would report as drift and the check would
+    find none.
     """
     kept: list[str] = []
     dropping = False
     for line in text.splitlines(keepends=True):
-        if line.startswith("  rigidity:"):
+        if line.startswith(LATER_BLOCKS):
             dropping = True
             continue
         if dropping:
@@ -2627,9 +2640,10 @@ def redraft(
 ) -> str:
     """Draft `n` again as the register holds it: its lower-bound promotion and its intake.
 
-    The two things a later step adds to a record and a fresh draft does not know about,
-    the reviewed lower-bound promotion and a certified packet's intake, are carried from
-    the existing record, so the result differs from it only where the inputs moved.
+    The things a later step adds to a record and a fresh draft does not know about, the
+    reviewed lower-bound promotion, a certified packet's intake and the closed form's
+    reported lane, are carried from the existing record, so the result differs from it
+    only where the inputs moved.
     """
     generated = generate_record(
         n,
@@ -2652,10 +2666,24 @@ def redraft(
         )
     from devtools.source_supersession import adopt_selected_report  # noqa: PLC0415
 
+    closed_form = importlib.import_module("devtools.apply_closed_form")
     try:
-        return adopt_selected_report(n, existing, adopt_upper_bound_packet(n, generated))
+        drafted = adopt_selected_report(n, existing, adopt_upper_bound_packet(n, generated))
+        # Hiroaki Hosono's closed form (T-180) is the third such step: where the existing
+        # record carries its reported lane, `devtools.apply_closed_form` replays it as the
+        # last layer, after any house adoption, which composes from the existing record
+        # (review C2 of #602). A fresh draft leaves it to that tool.
+        drafted = closed_form.replay(n, drafted) if closed_form.carried(existing) else drafted
+        # A held result's note (`adopt_houses.held_note`), where the record carries one, is
+        # laid over last, as the closed form is: it names the held certificate below the
+        # case and cites its evidence (reviews A and B of PR 614).
+        from devtools import adopt_houses  # noqa: PLC0415
+
+        if adopt_houses.carries_held_note(existing):
+            drafted = adopt_houses.held_note(n, drafted)
     except ValueError as error:
         raise GenerationError(str(error)) from error
+    return drafted
 
 
 def _rigidity_block(text: str) -> str | None:

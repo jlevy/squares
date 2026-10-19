@@ -1,0 +1,48 @@
+probe-flat-stall-stop: a replica patch to Evan Daniel's search/exact/exactsolve.py at the
+pin vendor/evand-regularize/vendored.yaml records (think-ux1v). devtools.regularize_evand
+applies it to a copy of search/exact in its scratch replica, never to vendor/, and only on
+the retry ladder's rung for a solve that ran out of time; vendor/evand-regularize/README.md
+(Local Changes) says why, and devtools.check_vendored_evand checks that it still applies
+to the pinned bytes.
+
+probe_flat, the realization test of the zero modes, runs Gauss-Newton per mode and sign
+until the residual is below 10^-(dps-20) or for 40 iterations. Redundant contacts that
+meet tangentially floor the residual near 1e-39, as upstream's own comment anticipates,
+so the 1e-60 stop is never reached: at n = 290 every one of 78 modes spent all 80
+least-squares solves, about 30 s a mode, and the solve ran out of 1,800 s. The patch also
+stops once the residual is below 1e-34 and fell less than tenfold in the last step. The
+acceptance test (residual < 1e-30, correction < 1e3 t^2, |dS| < 1e-30) is unchanged, the
+probe works on copies of the point, and neither the KKT point nor the certificate depends
+on it: at n = 18 both are byte-identical with and without the patch, and at n = 290 the
+solve certifies in 222 s at upstream's published S'.
+
+--- a/search/exact/exactsolve.py
++++ b/search/exact/exactsolve.py
+@@ -1,4 +1,6 @@
+ #!/usr/bin/env python3
++# Patched in devtools.regularize_evand's scratch replica, never in vendor/: the replica patch
++# probe-flat-stall-stop (think-ux1v); see vendor/evand-regularize/README.md, Local Changes.
+ """Exact-contact solver: approximate jammed packing of n unit squares  ->  nearby exact KKT point (high precision),
+ numerical optimality checks, and an exact rational certificate of s(n) <= S'.
+ 
+@@ -598,13 +600,19 @@
+                 if v != 3 * P.n:
+                     Q.add(v, mpf(float(sg * t * dv)))
+             start = [Q.get(v) for v in V]
+-            nr = None
++            nr, prev = None, None
+             for it in range(40):
+                 C, Sn = Q.trig()
+                 g = [eval_contact(c, Q.X, Q.Y, C, Sn, Q.S, H, order=1)[0] for c in A]
+                 nr = max(abs(x) for x in g)
+                 if nr < mpf(10) ** (-(mp.dps - 20)):
+                     break
++                # probe-flat-stall-stop: redundant contacts meeting tangentially floor the residual near 1e-39, so
++                # the stop above is never reached and every sign of every mode spent all 40 iterations.  Stop once
++                # the residual is below 1e-34 and fell less than tenfold in the last step; the test below is unchanged.
++                if prev is not None and nr < mpf('1e-34') and nr > prev / 10:
++                    break
++                prev = nr
+                 J, _ = jacobian(Q, A)
+                 dz, *_ = np.linalg.lstsq(J[:, V], -np.array([float(x) for x in g]), rcond=1e-10)
+                 for v, dv in zip(V, dz):

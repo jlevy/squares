@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    First found by Walter Trump (of Nürnberg, Germany) in 1979.
+        Source: {Fractal Music, Hypercards and More...: Mathematical Recreations from Scientific American Magazine}, by Martin Gardner (1991)
+        Source: Packing Unit Squares in Squares: A Survey and New Results, by Erich Friedman, Versions 1 (March 6, 1998) and later: https://www.combinatorics.org/ojs/index.php/eljc/article/view/DS7/versions and https://erich-friedman.github.io/papers/squares/squares.html
+    Independently rediscovered by many others, including Mats Gustafsson and Magnus Thulin in 1980
+        Source: Hans Berlin, "Problem Ronden", {Ronden} (April 1980, September 1980, December 1980) (a periodical distributed by KabiVitrum, a pharmaceutical company in Stockholm, Sweden)
+            Have not yet been able to directly read this source. –David Ellsworth
+        Source: Martin Gardner, "Mathematical Games", {Scientific American} (Novemeber 1980)
+        Source: Packing Unit Squares in Squares: A Survey and New Results, by Erich Friedman, Versions 1 (March 6, 1998) and later: https://www.combinatorics.org/ojs/index.php/eljc/article/view/DS7/versions and https://erich-friedman.github.io/papers/squares/squares.html
+    History of its exact polynomial root solution
+        First done by Thierry Gensane and Philippe Ryckelynck before May 19, 2004
+            Source: https://doi.org/10.1007/s00454-004-1129-z (Page 10 out of 13)
+            The side length was not published in reduced root form, however. Only the cosine of one of the angles (offset by 45°) was,
+                with a formula in terms of that root given for "2/s" (not "s" itself, even though the formula is presented as one for "s").
+                Their method, "eliminating with a system of 14 equations", seems to have been overcomplicated (as demonstrated below, it can be done with 2 equations).
+                Nevertheless, it gives the correct answer, although RootReduce[] takes a long time (almost 13 minutes on my machine):
+                    N[2/(4*z/(2*Sqrt[2] + 5*z - Sin[ArcCos[z]])) /. z -> Root[80*#^8 - 128*Sqrt[2]*#^7 - 32*#^6 + 144*Sqrt[2]*#^5 + 72 #^4 - 112*Sqrt[2]*#^3 + 40*#^2 - 12*Sqrt[2]*# - 7, 2], 33]
+        Done by David Ellsworth on June 4, 2023. Subsequently confirmed independently by Boris Alexeev on the same day (about 13 hours later), using a very different solution method.
+
+    Is one of the very few rigid packings.
+
+    RootReduce[Solve[{RotationTransform[-a][-{s -  1, 1    } + {1, 1}][[2]] - r1 + v1 == 1,
+                      RotationTransform[-a][ {x0 + 1, s - 1} - {1, 1}][[2]] + r1 + v2 == 1}, {s, a}][[2]]]
+    RootReduce[Solve[{(s-2)*Cos[a]+(s-3)*Sin[a] == 2,
+                      Cos[a]+(s-1+(s-2)*Cot[a])*Csc[a]-Cot[a]*(3+2*Cot[a])-Sin[a]-(2-(s-2)*Sin[a])*Tan[a] == 1}, {s, a}][[2]]]
+    s = Root[-6865 + 12420*# - 6754*#^2 - 496*#^3 + 1923*#^4 - 842*#^5 + 178*#^6 - 20*#^7 + #^8, 2]
+    a = ArcSec[Root[5 - 12*# + 8*#^2 + 2*#^3 - #^4 - 2*#^7 + #^8, 1]]
+
+    (* "s" in terms of "a" *)
+    s = FullSimplify[Solve[(s-2)*Cos[a]+(s-3)*Sin[a] == 2, s][[1, 1, 2]]]
+    s = 2 + (2 + Sin[a])/(Cos[a] + Sin[a])
+-->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" [
+    <!ENTITY s  "3.87708359002281417730789706010096">
+    <!ENTITY a  "40.1819372903297164652303423680606">
+    <!ENTITY x0 "2.03255831434961478706261630031475"> <!-- 1+2*Sec[a]-(s-2)*Tan[a] -->        <!-- Solve[RotationTransform[-a][{x0, s - 1} - {1, 1}][[1]] == 2, x0][[1,1,2]] -->
+    <!ENTITY r1 ".329908598887370278746514124701845"> <!-- 1-(s-3)*Cos[a] -->
+    <!ENTITY u1 ".024874535025596953980475509175010"> <!-- ((1+r1)*Cos[a]-1)*Csc[a] -->       <!-- -({1, 1} + RotationTransform[a][{0, -r1 - 1}])[[2]]/Sin[a] -->
+    <!ENTITY v1 ".118782607549453467521102077399075"> <!-- Cos[a]-Sin[a] -->                  <!-- RotationTransform[-a][{1, 1}][[2]] -->
+    <!ENTITY v2 ".547441432087314221163298461396782"> <!-- (s-1)*Csc[a]-r1-(3+u1)*Cot[a] -->  <!-- (s - ({1, 1} + RotationTransform[a][{3 + u1, 0}])[[1]])/Sin[a] - r1 -->
+]>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 &s; &s;" style="fill:#B2B2B2; stroke:black; stroke-width:0.0013" id="svg">
+    <script xlink:href="svgDisp.js"/>
+    <defs>
+        <rect width="&s;" height="&s;" id="outer"/>
+        <rect width="1" height="1" id="one"/>
+    </defs>
+    <use xlink:href="#outer" style="fill:white; stroke:none"/>
+    <g transform="translate(0 &s;) rotate(-90)">
+        <g id="one">
+            <rect style="stroke:none" width="1" height="1"/>
+            <path style=  "fill:none" d="M1,0 V1 H0"/>
+        </g>
+        <g transform="translate(&s;) scale(-1 1)">
+            <path style="stroke:none" d="M1,0 V1 H0 V0"/>
+            <path style=  "fill:none" d="M1,0 V1 H0"/>
+        </g>
+        <g transform="translate(&x0; &s;)">
+            <rect style="stroke:none" y="-1" width="1" height="1"/>
+            <path style=  "fill:none" d="M0,0 V-1 H1 V0"/>
+        </g>
+        <g transform="translate(0 &s;)">
+            <path style="stroke:none" d="M2,0 V-1 H1 V-2 H0 V0"/>
+            <path style=  "fill:none" d="M2,0 V-1 H0
+                                         M1,0 V-2 H0"/>
+        </g>
+        <g transform="translate(1 1) rotate(&a;) translate(0 -&r1;)">
+            <use xlink:href="#one"/>
+            <use xlink:href="#one" transform="translate(&u1; -1   )"/>
+            <use xlink:href="#one" transform="translate(1     &v1;)"/>
+            <use xlink:href="#one" transform="translate(&u1;  &v1;) translate(1 -1)"/>
+            <use xlink:href="#one" transform="translate(&u1; -&v2;) translate(2   )"/>
+        </g>
+    </g>
+    <use xlink:href="#outer" style="fill:none"/>
+</svg>

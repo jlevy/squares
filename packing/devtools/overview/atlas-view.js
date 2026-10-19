@@ -370,10 +370,21 @@
    * @param {SiteAtlasParts} parts
    * @returns {SiteAtlasViews}
    */
-  function mount({ block, cells, tabs, sizes, scales = null, scoped = false, beforeArrange }) {
+  function mount({
+    block,
+    cells,
+    tabs,
+    sizes,
+    scales = null,
+    drawings = null,
+    scoped = false,
+    beforeArrange,
+    onDrawingChange,
+  }) {
     const buttons = tabs === null ? [] : tabsOf(tabs);
     const sizeButtons = sizes === null ? [] : tabsOf(sizes);
     const scaleButtons = scales === null ? [] : tabsOf(scales);
+    const drawingButtons = drawings === null ? [] : tabsOf(drawings);
     /** @type {Record<number, number>} */
     const starts = {};
     for (const tile of cells.querySelectorAll("[data-atlas-grid-from]")) {
@@ -631,6 +642,16 @@
       Promise.allSettled(batch.map((animation) => animation.finished)).then(done, done);
     };
 
+    const labelPanel = () => {
+      cells.setAttribute(
+        "aria-labelledby",
+        [...buttons, ...drawingButtons]
+          .filter((tab) => tab.getAttribute("aria-selected") === "true")
+          .map((tab) => tab.id)
+          .join(" "),
+      );
+    };
+
     /** @param {AtlasView} current */
     const mark = (current) => {
       block.dataset.atlasView = current;
@@ -641,10 +662,8 @@
         const on = tab.dataset.atlasTab === current;
         tab.setAttribute("aria-selected", String(on));
         tab.tabIndex = on ? 0 : -1;
-        if (on) {
-          cells.setAttribute("aria-labelledby", tab.id);
-        }
       }
+      labelPanel();
     };
 
     /** @param {AtlasSize} current */
@@ -716,6 +735,53 @@
       }
     };
 
+    /** Switch the existing images, including the hidden suffix, without persisting a mode.
+     * @param {"regularized" | "original"} next */
+    const selectDrawing = (next) => {
+      if (next === block.dataset.atlasDrawing) {
+        return;
+      }
+      change(() => {
+        block.dataset.atlasDrawing = next;
+        for (const image of cells.querySelectorAll("img[data-atlas-original-src]")) {
+          const tile = image.closest(".site-atlas-cell");
+          if (!(image instanceof HTMLImageElement) || !(tile instanceof HTMLElement)) {
+            continue;
+          }
+          const original = next === "original";
+          const source = original
+            ? image.dataset.atlasOriginalSrc
+            : image.dataset.atlasRegularizedSrc;
+          const side = original
+            ? image.dataset.atlasOriginalSide
+            : image.dataset.atlasRegularizedSide;
+          const credit = original
+            ? image.dataset.atlasOriginalCredit
+            : image.dataset.atlasRegularizedCredit;
+          if (!source || !side || !credit) {
+            continue;
+          }
+          image.src = source;
+          image.alt = `${original ? "Original" : "Regularized"} packing of ${tile.dataset.atlasN} unit squares`;
+          image.title = credit;
+          delete image.dataset.atlasImageState;
+          tile.dataset.atlasSide = side;
+          tile.style.setProperty("--site-atlas-side", side);
+          tile.toggleAttribute(
+            "data-atlas-row-smaller",
+            Number(side) < row(Number(tile.dataset.atlasN)),
+          );
+        }
+        for (const tab of drawingButtons) {
+          const on = tab.dataset.atlasDrawingTab === next;
+          tab.setAttribute("aria-selected", String(on));
+          tab.tabIndex = on ? 0 : -1;
+        }
+        labelPanel();
+      });
+      onDrawingChange?.();
+    };
+
     if (tabs !== null) {
       cells.id = tabs.dataset.atlasPanel ?? "";
       cells.setAttribute("role", "tabpanel");
@@ -743,6 +809,12 @@
 
     if (scales !== null) {
       wire(scales, (tab) => selectScale(asScale(tab.dataset.atlasScaleTab)));
+    }
+    if (drawings !== null) {
+      wire(drawings, (tab) =>
+        selectDrawing(tab.dataset.atlasDrawingTab === "original" ? "original" : "regularized"),
+      );
+      drawings.hidden = false;
     }
 
     // The tiles a line holds follow the block's width. A resize is settled on the next

@@ -1,0 +1,359 @@
+{
+  "format": "external-source-declaration-v1",
+  "id": "franciscouzo-square-packing",
+  "source_url": "https://github.com/franciscouzo/square-packing",
+  "source_ref": "45966700cf15d3f42e064fd6da51fcb9a5def2be",
+  "source_commit": "45966700cf15d3f42e064fd6da51fcb9a5def2be",
+  "retrieved_at_utc": "2026-10-14T11:20Z",
+  "git_scope": "Full clone; the certificates directory and the root README at 4596670, the commit issue #583 pins (2026-10-13T13:53:57Z). Its certificates at 154, 211, 241, 339, 379, 380 and 382 are the ones #583 reports, and its 154 is the certificate issue #570 names by SHA-256 (5335cb3b...) at 1b31bc90, a commit GitHub no longer serves; b85dee2, the issue-586 pin, replaced all seven, so they are retained here as factual data. Every other certificate of the commit is pinned by digest: 64 byte-identical to copies other packets retain (302, 375, 376 and 381 among them, which couzo-certificates-2026-10-13 retains unchanged at b85dee2), and 344 and 378, intermediate certificates no report names. The rest of the tree, including the decimal pose files, drawings and search programs, is pinned by the commit and was not retained or executed.",
+  "archived_dir": "source",
+  "license": "No licence file or reuse terms at the pin: the tree has no LICENSE, and neither README.md nor certificates/README.md states terms. The seven certificates are retained as factual data under the owner decision of 2026-10-09 recorded in resources/web/known-best-packings/README.md (Retained Factual Data); prose is hash-pinned and not copied.",
+  "claims": [
+    "Issue #583 reports s(211) <= 14.993558914123, s(241) <= 15.987117095169 and s(302) <= 17.870013850405 in the case corpus, and s(339) <= 18.927383638495, s(379) <= 19.953531531603, s(380) <= 19.973553606628, s(381) <= 19.974977397657 and s(382) <= 19.988600568289 beyond it, each its certificate's exact side rounded up to 12 places; its 302 and 381 are unchanged at b85dee2 and retained by couzo-certificates-2026-10-13.",
+    "Issue #583 also reports s(154) <= 12.922499814643, the certificate issue #570 reported on 12 October by its SHA-256.",
+    "Issue #570 reports s(379) <= 19.953542593650 by a certificate (SHA-256 ac463682...) in no reachable commit of the source; it is not retained.",
+    "The checker statements are the author's; no optimality claim is made."
+  ],
+  "scope": [
+    "README.md",
+    "certificates"
+  ],
+  "pinned_only": [
+    {
+      "match": "**/README.md",
+      "reason": "No repository-wide licence found for original prose. Hash-pinned, not copied or executed."
+    },
+    {
+      "match": "certificates/*.json",
+      "reason": "The source's per-certificate metadata: hashes, exact bound and seed credit as prose; pinned for provenance, as no claim rests on it."
+    },
+    {
+      "match": "certificates/n105.cert",
+      "reason": "Byte-identical to the certificate the couzo-exact-certificates-2026-10-09 packet retains, so pinned by digest here and compared with that copy.",
+      "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n105.cert"
+    },
+    {
+      "match": "certificates/n106.cert",
+      "reason": "Byte-identical to the certificate the couzo-exact-certificates-2026-10-09 packet retains, so pinned by digest here and compared with that copy.",
+      "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n106.cert"
+    },
+    {
+      "match": "certificates/n108.cert",
+      "reason": "Byte-identical to the certificate the couzo-exact-certificates-2026-10-09 packet retains, so pinned by digest here and compared with that copy.",
+      "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n108.cert"
+    },
+    {
+      "match": "certificates/n110.cert",
+      "reason": "Byte-identical to the certificate the couzo-exact-certificates-2026-10-09 packet retains, so pinned by digest here and compared with that copy.",
+      "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n110.cert"
+    },
+    {
+      "match": "certificates/n127.cert",
+      "reason": "Byte-identical to the certificate the couzo-exact-certificates-2026-10-09 packet retains, so pinned by digest here and compared with that copy.",
+      "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n127.cert"
+    },
+    {
+      "match": "certificates/n131.cert",
+      "reason": "Byte-identical to the certificate the couzo-exact-certificates-2026-10-09 packet retains, so pinned by digest here and compared with that copy.",
+      "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n131.cert"
+    },
+    {
+      "match": "certificates/n132.cert",
+      "reason": "Byte-identical to the certificate the couzo-certificates-2026-10-10 packet retains, so pinned by digest here and compared with that copy.",
+      "identical_to": "packing/resources/web/couzo-certificates-2026-10-10/source/certificates/n132.cert"
+    },
+    {
+      "match": "certificates/n152.cert",
+      "reason": "Byte-identical to the certificate the couzo-exact-certificates-2026-10-09 packet retains, so pinned by digest here and compared with that copy.",
+      "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n152.cert"
+    },
+    {
+      "match": "certificates/n155.cert",
+      "reason": "Byte-identical to the certificate the couzo-exact-certificates-2026-10-09 packet retains, so pinned by digest here and compared with that copy.",
+      "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n155.cert"
+    },
+    {
+      "match": "certificates/n156.cert",
+      "reason": "Byte-identical to the certificate the couzo-certificates-2026-10-12 packet retains, so pinned by digest here and compared with that copy.",
+      "identical_to": "packing/resources/web/couzo-certificates-2026-10-12/source/certificates/n156.cert"
+    },
+    {
+      "match": "certificates/n172.cert",
+      "reason": "Byte-identical to the certificate the couzo-exact-certificates-2026-10-09 packet retains, so pinned by digest here and compared with that copy.",
+      "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n172.cert"
+    },
+    {
+      "match": "certificates/n175.cert",
+      "reason": "Byte-identical to the certificate the couzo-certificates-2026-10-11 packet retains, so pinned by digest here and compared with that copy.",
+      "identical_to": "packing/resources/web/couzo-certificates-2026-10-11/source/certificates/n175.cert"
+    },
+    {
+      "match": "certificates/n176.cert",
+      "reason": "Byte-identical to the certificate the couzo-certificates-2026-10-13 packet retains, so pinned by digest here and compared with that copy.",
+      "identical_to": "packing/resources/web/couzo-certificates-2026-10-13/source/certificates/n176.cert"
+    },
+    {
+      "match": "certificates/n177.cert",
+      "reason": "Byte-identical to the certificate the couzo-exact-certificates-2026-10-09 packet retains, so pinned by digest here and compared with that copy.",
+      "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n177.cert"
+    },
+    {
+      "match": "certificates/n180.cert",
+      "reason": "Byte-identical to the certificate the couzo-exact-certificates-2026-10-09 packet retains, so pinned by digest here and compared with that copy.",
+      "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n180.cert"
+    },
+    {
+      "match": "certificates/n181.cert",
+      "reason": "Byte-identical to the certificate the couzo-exact-certificates-2026-10-09 packet retains, so pinned by digest here and compared with that copy.",
+      "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n181.cert"
+    },
+    {
+      "match": "certificates/n182.cert",
+      "reason": "Byte-identical to the certificate the couzo-exact-certificates-2026-10-09 packet retains, so pinned by digest here and compared with that copy.",
+      "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n182.cert"
+    },
+    {
+      "match": "certificates/n206.cert",
+      "reason": "Byte-identical to the certificate the couzo-exact-certificates-2026-10-09 packet retains, so pinned by digest here and compared with that copy.",
+      "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n206.cert"
+    },
+    {
+      "match": "certificates/n208.cert",
+      "reason": "Byte-identical to the certificate the couzo-exact-certificates-2026-10-09 packet retains, so pinned by digest here and compared with that copy.",
+      "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n208.cert"
+    },
+    {
+      "match": "certificates/n209.cert",
+      "reason": "Byte-identical to the certificate the couzo-certificates-2026-10-10 packet retains, so pinned by digest here and compared with that copy.",
+      "identical_to": "packing/resources/web/couzo-certificates-2026-10-10/source/certificates/n209.cert"
+    },
+    {
+      "match": "certificates/n210.cert",
+      "reason": "Byte-identical to the certificate the couzo-exact-certificates-2026-10-09 packet retains, so pinned by digest here and compared with that copy.",
+      "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n210.cert"
+    },
+    {
+      "match": "certificates/n228.cert",
+      "reason": "Byte-identical to the certificate the couzo-exact-certificates-2026-10-09 packet retains, so pinned by digest here and compared with that copy.",
+      "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n228.cert"
+    },
+    {
+      "match": "certificates/n237.cert",
+      "reason": "Byte-identical to the certificate the couzo-certificates-2026-10-12 packet retains, so pinned by digest here and compared with that copy.",
+      "identical_to": "packing/resources/web/couzo-certificates-2026-10-12/source/certificates/n237.cert"
+    },
+    {
+      "match": "certificates/n240.cert",
+      "reason": "Byte-identical to the certificate the couzo-exact-certificates-2026-10-09 packet retains, so pinned by digest here and compared with that copy.",
+      "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n240.cert"
+    },
+    {
+      "match": "certificates/n259.cert",
+      "reason": "Byte-identical to the certificate the couzo-exact-certificates-2026-10-09 packet retains, so pinned by digest here and compared with that copy.",
+      "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n259.cert"
+    },
+    {
+      "match": "certificates/n263.cert",
+      "reason": "Byte-identical to the certificate the couzo-exact-certificates-2026-10-09 packet retains, so pinned by digest here and compared with that copy.",
+      "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n263.cert"
+    },
+    {
+      "match": "certificates/n267.cert",
+      "reason": "Byte-identical to the certificate the couzo-exact-certificates-2026-10-09 packet retains, so pinned by digest here and compared with that copy.",
+      "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n267.cert"
+    },
+    {
+      "match": "certificates/n268.cert",
+      "reason": "Byte-identical to the certificate the couzo-exact-certificates-2026-10-09 packet retains, so pinned by digest here and compared with that copy.",
+      "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n268.cert"
+    },
+    {
+      "match": "certificates/n269.cert",
+      "reason": "Byte-identical to the certificate the couzo-exact-certificates-2026-10-09 packet retains, so pinned by digest here and compared with that copy.",
+      "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n269.cert"
+    },
+    {
+      "match": "certificates/n270.cert",
+      "reason": "Byte-identical to the certificate the couzo-certificates-2026-10-10 packet retains, so pinned by digest here and compared with that copy.",
+      "identical_to": "packing/resources/web/couzo-certificates-2026-10-10/source/certificates/n270.cert"
+    },
+    {
+      "match": "certificates/n271.cert",
+      "reason": "Byte-identical to the certificate the couzo-certificates-2026-10-12 packet retains, so pinned by digest here and compared with that copy.",
+      "identical_to": "packing/resources/web/couzo-certificates-2026-10-12/source/certificates/n271.cert"
+    },
+    {
+      "match": "certificates/n273.cert",
+      "reason": "Byte-identical to the certificate the couzo-exact-certificates-2026-10-09 packet retains, so pinned by digest here and compared with that copy.",
+      "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n273.cert"
+    },
+    {
+      "match": "certificates/n292.cert",
+      "reason": "Byte-identical to the certificate the couzo-exact-certificates-2026-10-09 packet retains, so pinned by digest here and compared with that copy.",
+      "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n292.cert"
+    },
+    {
+      "match": "certificates/n297.cert",
+      "reason": "Byte-identical to the certificate the couzo-exact-certificates-2026-10-09 packet retains, so pinned by digest here and compared with that copy.",
+      "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n297.cert"
+    },
+    {
+      "match": "certificates/n301.cert",
+      "reason": "Byte-identical to the certificate the couzo-exact-certificates-2026-10-09 packet retains, so pinned by digest here and compared with that copy.",
+      "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n301.cert"
+    },
+    {
+      "match": "certificates/n302.cert",
+      "reason": "Byte-identical to the certificate the couzo-certificates-2026-10-13 packet retains, so pinned by digest here and compared with that copy.",
+      "identical_to": "packing/resources/web/couzo-certificates-2026-10-13/source/certificates/n302.cert"
+    },
+    {
+      "match": "certificates/n303.cert",
+      "reason": "Byte-identical to the certificate the couzo-certificates-2026-10-10 packet retains, so pinned by digest here and compared with that copy.",
+      "identical_to": "packing/resources/web/couzo-certificates-2026-10-10/source/certificates/n303.cert"
+    },
+    {
+      "match": "certificates/n304.cert",
+      "reason": "Byte-identical to the certificate the couzo-certificates-2026-10-11 packet retains, so pinned by digest here and compared with that copy.",
+      "identical_to": "packing/resources/web/couzo-certificates-2026-10-11/source/certificates/n304.cert"
+    },
+    {
+      "match": "certificates/n305.cert",
+      "reason": "Byte-identical to the certificate the couzo-certificates-2026-10-11 packet retains, so pinned by digest here and compared with that copy.",
+      "identical_to": "packing/resources/web/couzo-certificates-2026-10-11/source/certificates/n305.cert"
+    },
+    {
+      "match": "certificates/n306.cert",
+      "reason": "Byte-identical to the certificate the couzo-exact-certificates-2026-10-09 packet retains, so pinned by digest here and compared with that copy.",
+      "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n306.cert"
+    },
+    {
+      "match": "certificates/n307.cert",
+      "reason": "Byte-identical to the certificate the couzo-exact-certificates-2026-10-09 packet retains, so pinned by digest here and compared with that copy.",
+      "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n307.cert"
+    },
+    {
+      "match": "certificates/n308.cert",
+      "reason": "Byte-identical to the certificate the couzo-certificates-2026-10-11 packet retains, so pinned by digest here and compared with that copy.",
+      "identical_to": "packing/resources/web/couzo-certificates-2026-10-11/source/certificates/n308.cert"
+    },
+    {
+      "match": "certificates/n327.cert",
+      "reason": "Byte-identical to the certificate the couzo-exact-certificates-2026-10-09 packet retains, so pinned by digest here and compared with that copy.",
+      "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n327.cert"
+    },
+    {
+      "match": "certificates/n332.cert",
+      "reason": "Byte-identical to the certificate the couzo-exact-certificates-2026-10-09 packet retains, so pinned by digest here and compared with that copy.",
+      "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n332.cert"
+    },
+    {
+      "match": "certificates/n335.cert",
+      "reason": "Byte-identical to the certificate the couzo-exact-certificates-2026-10-09 packet retains, so pinned by digest here and compared with that copy.",
+      "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n335.cert"
+    },
+    {
+      "match": "certificates/n336.cert",
+      "reason": "Byte-identical to the certificate the couzo-exact-certificates-2026-10-09 packet retains, so pinned by digest here and compared with that copy.",
+      "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n336.cert"
+    },
+    {
+      "match": "certificates/n337.cert",
+      "reason": "Byte-identical to the certificate the couzo-exact-certificates-2026-10-09 packet retains, so pinned by digest here and compared with that copy.",
+      "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n337.cert"
+    },
+    {
+      "match": "certificates/n338.cert",
+      "reason": "Byte-identical to the certificate the couzo-certificates-2026-10-12 packet retains, so pinned by digest here and compared with that copy.",
+      "identical_to": "packing/resources/web/couzo-certificates-2026-10-12/source/certificates/n338.cert"
+    },
+    {
+      "match": "certificates/n340.cert",
+      "reason": "Byte-identical to the certificate the couzo-certificates-2026-10-11 packet retains, so pinned by digest here and compared with that copy.",
+      "identical_to": "packing/resources/web/couzo-certificates-2026-10-11/source/certificates/n340.cert"
+    },
+    {
+      "match": "certificates/n341.cert",
+      "reason": "Byte-identical to the certificate the couzo-exact-certificates-2026-10-09 packet retains, so pinned by digest here and compared with that copy.",
+      "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n341.cert"
+    },
+    {
+      "match": "certificates/n342.cert",
+      "reason": "Byte-identical to the certificate the couzo-exact-certificates-2026-10-09 packet retains, so pinned by digest here and compared with that copy.",
+      "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n342.cert"
+    },
+    {
+      "match": "certificates/n343.cert",
+      "reason": "Byte-identical to the certificate the couzo-certificates-2026-10-11 packet retains, so pinned by digest here and compared with that copy.",
+      "identical_to": "packing/resources/web/couzo-certificates-2026-10-11/source/certificates/n343.cert"
+    },
+    {
+      "match": "certificates/n344.cert",
+      "reason": "An intermediate certificate no issue or report names, replaced at b85dee2 by the certificate the couzo-certificates-2026-10-13 packet retains; pinned by digest only."
+    },
+    {
+      "match": "certificates/n364.cert",
+      "reason": "Byte-identical to the certificate the couzo-exact-certificates-2026-10-09 packet retains, so pinned by digest here and compared with that copy.",
+      "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n364.cert"
+    },
+    {
+      "match": "certificates/n369.cert",
+      "reason": "Byte-identical to the certificate the couzo-exact-certificates-2026-10-09 packet retains, so pinned by digest here and compared with that copy.",
+      "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n369.cert"
+    },
+    {
+      "match": "certificates/n372.cert",
+      "reason": "Byte-identical to the certificate the couzo-exact-certificates-2026-10-09 packet retains, so pinned by digest here and compared with that copy.",
+      "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n372.cert"
+    },
+    {
+      "match": "certificates/n373.cert",
+      "reason": "Byte-identical to the certificate the couzo-exact-certificates-2026-10-09 packet retains, so pinned by digest here and compared with that copy.",
+      "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n373.cert"
+    },
+    {
+      "match": "certificates/n374.cert",
+      "reason": "Byte-identical to the certificate the couzo-exact-certificates-2026-10-09 packet retains, so pinned by digest here and compared with that copy.",
+      "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n374.cert"
+    },
+    {
+      "match": "certificates/n375.cert",
+      "reason": "Byte-identical to the certificate the couzo-certificates-2026-10-13 packet retains, so pinned by digest here and compared with that copy.",
+      "identical_to": "packing/resources/web/couzo-certificates-2026-10-13/source/certificates/n375.cert"
+    },
+    {
+      "match": "certificates/n376.cert",
+      "reason": "Byte-identical to the certificate the couzo-certificates-2026-10-13 packet retains, so pinned by digest here and compared with that copy.",
+      "identical_to": "packing/resources/web/couzo-certificates-2026-10-13/source/certificates/n376.cert"
+    },
+    {
+      "match": "certificates/n377.cert",
+      "reason": "Byte-identical to the certificate the couzo-exact-certificates-2026-10-09 packet retains, so pinned by digest here and compared with that copy.",
+      "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n377.cert"
+    },
+    {
+      "match": "certificates/n378.cert",
+      "reason": "An intermediate certificate no issue or report names, replaced at b85dee2 by the certificate the couzo-certificates-2026-10-13 packet retains; pinned by digest only."
+    },
+    {
+      "match": "certificates/n381.cert",
+      "reason": "Byte-identical to the certificate the couzo-certificates-2026-10-13 packet retains, so pinned by digest here and compared with that copy.",
+      "identical_to": "packing/resources/web/couzo-certificates-2026-10-13/source/certificates/n381.cert"
+    },
+    {
+      "match": "certificates/n68.cert",
+      "reason": "Byte-identical to the certificate the couzo-exact-certificates-2026-10-09 packet retains, so pinned by digest here and compared with that copy.",
+      "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n68.cert"
+    },
+    {
+      "match": "certificates/n84.cert",
+      "reason": "Byte-identical to the certificate the couzo-exact-certificates-2026-10-09 packet retains, so pinned by digest here and compared with that copy.",
+      "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n84.cert"
+    },
+    {
+      "match": "certificates/n86.cert",
+      "reason": "Byte-identical to the certificate the couzo-exact-certificates-2026-10-09 packet retains, so pinned by digest here and compared with that copy.",
+      "identical_to": "packing/resources/web/couzo-exact-certificates-2026-10-09/source/certificates/n86.cert"
+    }
+  ]
+}

@@ -249,6 +249,7 @@ OPENED = ":popover-open, details[open]"
 DEFAULT_PAGES = (
     render_overview.paper_path(render_overview.N11_LOWER_BOUNDS_EXPLAINER),
     "tutorial.html",
+    "tutorial-advanced.html",
     "synopsis.html",
     "epistemics.html",
     "readme.html",
@@ -1231,7 +1232,8 @@ def _role_rules(entry: dict[str, Any]) -> dict[str, tuple[float | None, float | 
         "colophon": (sans * tokens["--paper-colophon-scale"], regular),
         "nav name": (sans, bold),
         "nav link": (note, medium),
-        "section tab": (note, medium),
+        "section tab": (note * tokens["--paper-button-label-scale"], medium),
+        "compact chooser": (tokens.get("--site-chooser-small-size"), medium),
     }
 
 

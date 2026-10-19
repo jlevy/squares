@@ -25,23 +25,25 @@ second implementation agrees.
 
 ## The Short Version
 
-- **110** programs: **40** external and **70** first-party; **80** decide claims and **30** check premises.
-- **441** of **503** evidence entries name the programs that verified them: 235 reproduced with the producer’s code, 179 independently re-implemented, 17 re-implemented, sharing the producer’s components, 10 no relation: a proof, a derivation or a report.
+- **162** programs: **50** external and **112** first-party; **112** decide claims and **50** check premises.
+- **514** of **614** evidence entries name the programs that verified them: 255 reproduced with the producer’s code, 230 independently re-implemented, 18 re-implemented, sharing the producer’s components, 11 no relation: a proof, a derivation or a report.
 
 ## Programs
 
 | id | program | author | provenance | role | evidence | results |
 | --- | --- | --- | --- | --- | ---: | ---: |
+| [`V-evand-verify-exact`](#v-evand-verify-exact) | verify_exact.py | Evan Daniel | external | decides | 0 | 0 |
+| [`V-evand-639-replay-driver`](#v-evand-639-replay-driver) | replay_verify_exact.py | Squares Project (Levy) | first-party | premises | 0 | 0 |
 | [`V-tokoharu-verify-cpp`](#v-tokoharu-verify-cpp) | verify.cpp | Tokoharu | external | decides | 13 | 7 |
 | [`V-wand125-mixed-rotated-verify-cpp`](#v-wand125-mixed-rotated-verify-cpp) | mixed_rotated_verify.cpp | wand125 | external | decides | 89 | 14 |
 | [`V-wand125-verify-mixed-full-proof-py`](#v-wand125-verify-mixed-full-proof-py) | verify_mixed_full_proof.py | wand125 | external | decides | 66 | 11 |
-| [`V-wand125-sqverify-proof-net`](#v-wand125-sqverify-proof-net) | sqverify-proof-net | wand125, adapting this repository's sqverify_fast | external | decides | 12 | 12 |
-| [`V-wand125-unified-linear-verify-cpp`](#v-wand125-unified-linear-verify-cpp) | unified_linear_verify.cpp | wand125 | external | decides | 7 | 4 |
+| [`V-wand125-sqverify-proof-net`](#v-wand125-sqverify-proof-net) | sqverify-proof-net | wand125, adapting this repository's sqverify_fast | external | decides | 15 | 15 |
+| [`V-wand125-unified-linear-verify-cpp`](#v-wand125-unified-linear-verify-cpp) | unified_linear_verify.cpp | wand125 | external | decides | 8 | 5 |
 | [`V-wand125-verify-portable-py`](#v-wand125-verify-portable-py) | verify_portable.py | wand125 | external | decides | 2 | 1 |
 | [`V-wand125-check-with-sqpack`](#v-wand125-check-with-sqpack) | check_with_sqpack.py | wand125 | external | decides | 5 | 1 |
 | [`V-wand125-valid7-checker`](#v-wand125-valid7-checker) | valid7-independent-check (Tier A, Tier B and the record checker) | wand125 | external | decides | 2 | 2 |
-| [`V-evand-zmx2`](#v-evand-zmx2) | zmx2 | Evan Daniel | external | decides | 19 | 9 |
-| [`V-evand-zm-mixed-py`](#v-evand-zm-mixed-py) | zm_mixed.py | Evan Daniel | external | decides | 6 | 6 |
+| [`V-evand-zmx2`](#v-evand-zmx2) | zmx2 | Evan Daniel | external | decides | 23 | 11 |
+| [`V-evand-zm-mixed-py`](#v-evand-zm-mixed-py) | zm_mixed.py | Evan Daniel | external | decides | 10 | 8 |
 | [`V-evand-zeromargin-py`](#v-evand-zeromargin-py) | zeromargin.py | Evan Daniel | external | decides | 4 | 2 |
 | [`V-evand-angle-net-verify`](#v-evand-angle-net-verify) | verify (the angle-net arrangement sweep) | Evan Daniel | external | decides | 10 | 5 |
 | [`V-evand-xcheck-py`](#v-evand-xcheck-py) | xcheck.py | Evan Daniel | external | decides | 4 | 2 |
@@ -51,15 +53,15 @@ second implementation agrees.
 | [`V-evand-verify-cert2-py`](#v-evand-verify-cert2-py) | verify_cert2.py (s12/search/exact/) | Evan Daniel | external | decides | 4 | 2 |
 | [`V-evand-lean`](#v-evand-lean) | The source's Lean development (lean/) | Evan Daniel | external | decides | 8 | 5 |
 | [`V-chelokot-lean`](#v-chelokot-lean) | The source's Lean development (formal/) | chelokot | external | decides | 1 | 1 |
-| [`V-kleddamag-n11-verify`](#v-kleddamag-n11-verify) | verify.py | Kleddamag | external | decides | 4 | 2 |
-| [`V-kleddamag-n17-verify`](#v-kleddamag-n17-verify) | verify.py | Kleddamag | external | decides | 11 | 6 |
+| [`V-kleddamag-n11-verify`](#v-kleddamag-n11-verify) | verify.py | Overbeck | external | decides | 5 | 2 |
+| [`V-kleddamag-n17-verify`](#v-kleddamag-n17-verify) | verify.py | Overbeck | external | decides | 11 | 6 |
 | [`V-wang-li-n11-verify`](#v-wang-li-n11-verify) | verify.py of the Zenodo release | Wang and Li | external | decides | 2 | 1 |
 | [`V-guzhou-r012-verify-py`](#v-guzhou-r012-verify-py) | certificates/R012/verify.py | Guzhou0806 | external | decides | 1 | 1 |
 | [`V-guzhou-r052-verify-py`](#v-guzhou-r052-verify-py) | certificates/R052/verify.py | Guzhou0806 | external | decides | 2 | 1 |
 | [`V-guzhou-n17-verify-cpp`](#v-guzhou-n17-verify-cpp) | verify.cpp | Guzhou0806 | external | decides | 5 | 3 |
 | [`V-guzhou-n40-finite-py`](#v-guzhou-n40-finite-py) | verifier/run.py | Guzhou0806 | external | decides | 1 | 1 |
-| [`V-guzhou-n40-continuous-pose`](#v-guzhou-n40-continuous-pose) | verifier/continuous_pose.cpp | Guzhou0806 | external | decides | 2 | 1 |
-| [`V-guzhou-n40-axis-integer-grid`](#v-guzhou-n40-axis-integer-grid) | verifier/axis_integer_grid.cpp | Guzhou0806 | external | decides | 2 | 1 |
+| [`V-guzhou-n40-continuous-pose`](#v-guzhou-n40-continuous-pose) | verifier/continuous_pose.cpp | Guzhou0806 | external | decides | 4 | 2 |
+| [`V-guzhou-n40-axis-integer-grid`](#v-guzhou-n40-axis-integer-grid) | verifier/axis_integer_grid.cpp | Guzhou0806 | external | decides | 5 | 2 |
 | [`V-burns-n17-verify-py`](#v-burns-n17-verify-py) | verify-n17-lower-bound-4_4811.py | Burns | external | decides | 1 | 0 |
 | [`V-massaccesi-n17-verify-py`](#v-massaccesi-n17-verify-py) | verify-n17-lower-bound-4_5058.py | Massaccesi | external | decides | 1 | 2 |
 | [`V-mira-17squares-point-checker`](#v-mira-17squares-point-checker) | verify_certificate.py | Mira | external | decides | 1 | 0 |
@@ -70,10 +72,14 @@ second implementation agrees.
 | [`V-squarepacker-indep-check-cpp`](#v-squarepacker-indep-check-cpp) | indep_check.cpp | squarepacker | external | decides | 4 | 2 |
 | [`V-schadt-n29-check-py`](#v-schadt-n29-check-py) | check.py | Schadt | external | decides | 1 | 0 |
 | [`V-anabologyco-n17-checker`](#v-anabologyco-n17-checker) | scripts/check_certificate.py and its event pipeline | anabologyco-maker | external | decides | 1 | 0 |
-| [`V-check-basic-bounds`](#v-check-basic-bounds) | devtools.check_basic_bounds | Squares Project (Levy) | first-party | decides | 3 | 14 |
+| [`V-overbeck-n17-check-py`](#v-overbeck-n17-check-py) | check.py | Overbeck | external | decides | 2 | 1 |
+| [`V-overbeck-n17-capture-checkers`](#v-overbeck-n17-capture-checkers) | recompute_slice.py | Overbeck | external | decides | 2 | 1 |
+| [`V-overbeck-n17-tree-checkers`](#v-overbeck-n17-tree-checkers) | wxcheck_v30.py and wxcheck2_v30.js | Overbeck | external | decides | 2 | 1 |
+| [`V-fitzharding-n17-lean`](#v-fitzharding-n17-lean) | The sq17-lean Lean 4 development (Sq17Lean) | Fitzharding | external | decides | 1 | 1 |
+| [`V-check-basic-bounds`](#v-check-basic-bounds) | devtools.check_basic_bounds | Squares Project (Levy) | first-party | decides | 3 | 16 |
 | [`V-optimal-moduli`](#v-optimal-moduli) | cases.small_n.optimal_moduli | Squares Project (Levy) | first-party | decides | 1 | 0 |
-| [`V-sqpack-verify`](#v-sqpack-verify) | sqpack.verify | Squares Project (Levy) | first-party | decides | 35 | 25 |
-| [`V-check-rational-witness-independent`](#v-check-rational-witness-independent) | devtools.check_rational_witness_independent | Squares Project (Levy) | first-party | decides | 30 | 28 |
+| [`V-sqpack-verify`](#v-sqpack-verify) | sqpack.verify | Squares Project (Levy) | first-party | decides | 71 | 60 |
+| [`V-check-rational-witness-independent`](#v-check-rational-witness-independent) | devtools.check_rational_witness_independent | Squares Project (Levy) | first-party | decides | 65 | 63 |
 | [`V-check-nagamochi-lemma1-counterexample`](#v-check-nagamochi-lemma1-counterexample) | devtools.check_nagamochi_lemma1_counterexample | Squares Project (Levy) | first-party | decides | 1 | 1 |
 | [`V-check-karakus-strip-measure`](#v-check-karakus-strip-measure) | devtools.check_karakus_strip_measure | Squares Project (Levy) | first-party | decides | 1 | 2 |
 | [`V-upper-bound-promotion`](#v-upper-bound-promotion) | devtools.upper_bound_packets | Squares Project (Levy) | first-party | decides | 6 | 5 |
@@ -107,21 +113,44 @@ second implementation agrees.
 | [`V-n17-catalogue-polynomial`](#v-n17-catalogue-polynomial) | devtools.check_n17_catalogue_polynomial | Squares Project (Levy) | first-party | decides | 1 | 0 |
 | [`V-n11-optimality-checkers`](#v-n11-optimality-checkers) | The devtools.check_n11_optimality | Squares Project (Levy) | first-party | decides | 2 | 2 |
 | [`V-audit-clipped-corner-transfer`](#v-audit-clipped-corner-transfer) | devtools.audit_clipped_corner_transfer | Squares Project (Levy) | first-party | decides | 2 | 1 |
-| [`V-audit-continuous-pose`](#v-audit-continuous-pose) | devtools.audit_continuous_pose | Squares Project (Levy) | first-party | decides | 3 | 1 |
-| [`V-check-half-angle-area`](#v-check-half-angle-area) | devtools.check_half_angle_area | Squares Project (Levy) | first-party | decides | 12 | 12 |
-| [`V-evand-exact-certificates`](#v-evand-exact-certificates) | devtools.evand_exact_certificates | Squares Project (Levy) | first-party | premises | 16 | 14 |
+| [`V-audit-continuous-pose`](#v-audit-continuous-pose) | devtools.audit_continuous_pose | Squares Project (Levy) | first-party | decides | 5 | 2 |
+| [`V-audit-n40-new-supports`](#v-audit-n40-new-supports) | devtools.audit_n40_new_supports | Squares Project (Levy) | first-party | decides | 3 | 1 |
+| [`V-check-half-angle-area`](#v-check-half-angle-area) | devtools.check_half_angle_area | Squares Project (Levy) | first-party | decides | 37 | 38 |
+| [`V-k3-n17-capture-row-checker`](#v-k3-n17-capture-row-checker) | k3_capture_row.py | Squares Project (Levy) | first-party | decides | 1 | 0 |
+| [`V-k3-n17-root-isolation`](#v-k3-n17-root-isolation) | k3_root_isolation.py | Squares Project (Levy) | first-party | decides | 1 | 0 |
+| [`V-sq17-review2-trace-checker`](#v-sq17-review2-trace-checker) | hpfast.py | Squares Project (Levy) | first-party | decides | 1 | 0 |
+| [`V-sq17-review2-census`](#v-sq17-review2-census) | census_check.py | Squares Project (Levy) | first-party | decides | 1 | 0 |
+| [`V-sq17-review2-cell-geometry`](#v-sq17-review2-cell-geometry) | geometry_checks.py | Squares Project (Levy) | first-party | decides | 1 | 0 |
+| [`V-sq17-review2-rigidity-dual`](#v-sq17-review2-rigidity-dual) | rigidity_dual_check.py | Squares Project (Levy) | first-party | decides | 1 | 0 |
+| [`V-sq17-review2-endpoint-frames`](#v-sq17-review2-endpoint-frames) | endpoint_check.py | Squares Project (Levy) | first-party | decides | 1 | 0 |
+| [`V-overbeck-review3-root-isolation`](#v-overbeck-review3-root-isolation) | root_isolation.py | Squares Project (Levy) | first-party | decides | 1 | 0 |
+| [`V-overbeck-review3-upper-at-l`](#v-overbeck-review3-upper-at-l) | upper_at_L_check.py | Squares Project (Levy) | first-party | decides | 1 | 0 |
+| [`V-overbeck-review3-literal-checks`](#v-overbeck-review3-literal-checks) | literal_checks.py | Squares Project (Levy) | first-party | decides | 1 | 0 |
+| [`V-overbeck-review3-admission`](#v-overbeck-review3-admission) | admission_check.py | Squares Project (Levy) | first-party | decides | 1 | 0 |
+| [`V-overbeck-review3-handovers`](#v-overbeck-review3-handovers) | handover_check.py | Squares Project (Levy) | first-party | decides | 1 | 0 |
+| [`V-overbeck-review3-jq-tree-checker`](#v-overbeck-review3-jq-tree-checker) | jq_leaf_check.py | Squares Project (Levy) | first-party | decides | 1 | 0 |
+| [`V-overbeck-review2-krawczyk-root`](#v-overbeck-review2-krawczyk-root) | geom.py | Squares Project (Levy) | first-party | decides | 1 | 0 |
+| [`V-overbeck-review2-groebner-identities`](#v-overbeck-review2-groebner-identities) | identities.py | Squares Project (Levy) | first-party | decides | 1 | 0 |
+| [`V-overbeck-review2-row-builder`](#v-overbeck-review2-row-builder) | rows.py | Squares Project (Levy) | first-party | decides | 1 | 0 |
+| [`V-overbeck-review2-duality-bounds`](#v-overbeck-review2-duality-bounds) | replay.py | Squares Project (Levy) | first-party | decides | 1 | 0 |
+| [`V-overbeck-review3-seed-packing`](#v-overbeck-review3-seed-packing) | seed_packing_check.py | Squares Project (Levy) | first-party | premises | 1 | 0 |
+| [`V-overbeck-review3-spec-lemmas`](#v-overbeck-review3-spec-lemmas) | spec_lemmas_numeric.py | Squares Project (Levy) | first-party | premises | 1 | 0 |
+| [`V-overbeck-review3-parallel-rows`](#v-overbeck-review3-parallel-rows) | parallel_row_check.py | Squares Project (Levy) | first-party | premises | 0 | 0 |
+| [`V-evand-exact-certificates`](#v-evand-exact-certificates) | devtools.evand_exact_certificates | Squares Project (Levy) | first-party | premises | 49 | 47 |
 | [`V-check-n11-final-composition`](#v-check-n11-final-composition) | devtools.check_n11_final_composition | Squares Project (Levy) | first-party | premises | 2 | 2 |
 | [`V-audit-n11-lean`](#v-audit-n11-lean) | devtools.audit_n11_lean | Squares Project (Levy) | first-party | premises | 2 | 1 |
+| [`V-fitzharding-n17-source-manifest`](#v-fitzharding-n17-source-manifest) | check_source_manifest.py | Squares Project (Levy) | first-party | premises | 1 | 1 |
+| [`V-fitzharding-n17-premise-comparisons`](#v-fitzharding-n17-premise-comparisons) | compare_endpoint.py | Squares Project (Levy) | first-party | premises | 1 | 1 |
 | [`V-audit-n17-endpoint-receipt`](#v-audit-n17-endpoint-receipt) | devtools.audit_n17_endpoint_receipt | Squares Project (Levy) | first-party | premises | 1 | 1 |
 | [`V-audit-tokoharu-density`](#v-audit-tokoharu-density) | devtools.audit_tokoharu_density | Squares Project (Levy) | first-party | premises | 1 | 1 |
 | [`V-audit-wand125-rectangles`](#v-audit-wand125-rectangles) | devtools.audit_wand125_rectangles | Squares Project (Levy) | first-party | premises | 4 | 4 |
 | [`V-audit-wand125-point-and-mixed`](#v-audit-wand125-point-and-mixed) | devtools.audit_wand125_point_and_mixed | Squares Project (Levy) | first-party | premises | 17 | 7 |
 | [`V-audit-wand125-declared-net`](#v-audit-wand125-declared-net) | devtools.audit_wand125_declared_net | Squares Project (Levy) | first-party | premises | 2 | 2 |
 | [`V-audit-wand125-linear`](#v-audit-wand125-linear) | devtools.audit_wand125_linear | Squares Project (Levy) | first-party | premises | 3 | 3 |
-| [`V-sqverify-fast`](#v-sqverify-fast) | sqverify-fast | Squares Project (Levy) | first-party | decides | 110 | 22 |
+| [`V-sqverify-fast`](#v-sqverify-fast) | sqverify-fast | Squares Project (Levy) | first-party | decides | 111 | 23 |
 | [`V-replay-chelokot-lean`](#v-replay-chelokot-lean) | devtools.replay_chelokot_lean | Squares Project (Levy) | first-party | premises | 1 | 1 |
-| [`V-replay-evand-zmx2`](#v-replay-evand-zmx2) | devtools.replay_evand_zmx2 | Squares Project (Levy) | first-party | premises | 5 | 5 |
-| [`V-audit-evand-mixed-covers`](#v-audit-evand-mixed-covers) | devtools.audit_evand_mixed_covers | Squares Project (Levy) | first-party | premises | 9 | 8 |
+| [`V-replay-evand-zmx2`](#v-replay-evand-zmx2) | devtools.replay_evand_zmx2 | Squares Project (Levy) | first-party | premises | 7 | 7 |
+| [`V-audit-evand-mixed-covers`](#v-audit-evand-mixed-covers) | devtools.audit_evand_mixed_covers | Squares Project (Levy) | first-party | premises | 11 | 10 |
 | [`V-audit-s12-reweighted`](#v-audit-s12-reweighted) | devtools.audit_s12_reweighted | Squares Project (Levy) | first-party | premises | 1 | 1 |
 | [`V-audit-s12-v11`](#v-audit-s12-v11) | devtools.audit_s12_v11_certificate | Squares Project (Levy) | first-party | premises | 1 | 1 |
 | [`V-compare-evand-s32-sweep`](#v-compare-evand-s32-sweep) | devtools.compare_evand_s32_sweep | Squares Project (Levy) | first-party | premises | 1 | 1 |
@@ -134,16 +163,63 @@ second implementation agrees.
 | [`V-squish-upper-bound-packets`](#v-squish-upper-bound-packets) | devtools.squish_upper_bound_packets | Squares Project (Levy) | first-party | premises | 2 | 2 |
 | [`V-squish-followup-packets`](#v-squish-followup-packets) | devtools.squish_followup_packets | Squares Project (Levy) | first-party | premises | 1 | 1 |
 | [`V-squish-second-update-confirmation`](#v-squish-second-update-confirmation) | devtools.squish_second_update_confirmation | Squares Project (Levy) | first-party | premises | 1 | 1 |
-| [`V-evand-arrangement-receipts`](#v-evand-arrangement-receipts) | devtools.evand_arrangement_reports | Squares Project (Levy) | first-party | premises | 13 | 13 |
-| [`V-upper-bound-reports`](#v-upper-bound-reports) | devtools.upper_bound_reports | Squares Project (Levy) | first-party | premises | 9 | 9 |
+| [`V-evand-arrangement-receipts`](#v-evand-arrangement-receipts) | devtools.evand_arrangement_reports | Squares Project (Levy) | first-party | premises | 46 | 46 |
+| [`V-algebraic-witness-reports`](#v-algebraic-witness-reports) | devtools.algebraic_witness_reports | Squares Project (Levy) | first-party | premises | 1 | 1 |
+| [`V-upper-bound-reports`](#v-upper-bound-reports) | devtools.upper_bound_reports | Squares Project (Levy) | first-party | premises | 42 | 42 |
 | [`V-rehwaldt-n68-verify`](#v-rehwaldt-n68-verify) | verify.py | Seth Rehwaldt | external | decides | 1 | 1 |
 | [`V-rehwaldt-n68-independent-support-check`](#v-rehwaldt-n68-independent-support-check) | independent_support_check.py | Seth Rehwaldt | external | decides | 1 | 1 |
 | [`V-refinement-custody`](#v-refinement-custody) | devtools.refinement_custody | Squares Project (Levy) | first-party | premises | 2 | 2 |
 | [`V-ryxu-undilated-n51-independent`](#v-ryxu-undilated-n51-independent) | devtools.ryxu_radical_n51.independent | Squares Project (Levy) | first-party | decides | 1 | 1 |
 | [`V-ryxu-complete-custody`](#v-ryxu-complete-custody) | devtools.ryxu_house_links | Squares Project (Levy) | first-party | premises | 2 | 2 |
 | [`V-gupta-complete-custody`](#v-gupta-complete-custody) | devtools.gupta_house_links | Squares Project (Levy) | first-party | premises | 1 | 1 |
+| [`V-register-regularized-bounds`](#v-register-regularized-bounds) | devtools.register_regularized_bounds | Squares Project (Levy) | first-party | premises | 2 | 2 |
+| [`V-wand125-lb-review-fine-net-premises`](#v-wand125-lb-review-fine-net-premises) | check_candidate.py | Squares Project (Levy) | first-party | premises | 0 | 0 |
+| [`V-wand125-lb-review-fine-net-exact-capture`](#v-wand125-lb-review-fine-net-exact-capture) | fine_net_exact.capture | Squares Project (Levy) | first-party | decides | 0 | 0 |
+| [`V-wand125-lb-review-axis-sweep-emulation`](#v-wand125-lb-review-axis-sweep-emulation) | sweep_emulation.py | Squares Project (Levy) | first-party | premises | 0 | 0 |
+| [`V-wand125-lb-review-linear-premises`](#v-wand125-lb-review-linear-premises) | check_linear_candidate.py | Squares Project (Levy) | first-party | premises | 0 | 0 |
+| [`V-wand125-lb-review-linear-exact-capture`](#v-wand125-lb-review-linear-exact-capture) | linear_exact.capture | Squares Project (Levy) | first-party | decides | 0 | 0 |
+| [`V-fang-review-exact-checker`](#v-fang-review-exact-checker) | rectangle_check.py | Squares Project (Levy) | first-party | decides | 0 | 0 |
+| [`V-fang-review-glue-rebuild`](#v-fang-review-glue-rebuild) | glue_rebuild.py | Squares Project (Levy) | first-party | decides | 0 | 0 |
+| [`V-fang-review-excess-arithmetic`](#v-fang-review-excess-arithmetic) | excess_arithmetic.py | Squares Project (Levy) | first-party | decides | 0 | 0 |
+| [`V-fang-review-receipt-summary`](#v-fang-review-receipt-summary) | receipt_summary.py | Squares Project (Levy) | first-party | premises | 0 | 0 |
+| [`V-wand125-replay4d`](#v-wand125-replay4d) | replay4d | wand125 | external | decides | 2 | 1 |
+| [`V-wand125-closed-form-structure`](#v-wand125-closed-form-structure) | structure/validate_family.py | wand125 | external | premises | 0 | 0 |
+| [`V-closed-form-evaluation`](#v-closed-form-evaluation) | closed_form_bounds.py | Squares Project (Levy) | first-party | premises | 0 | 0 |
+| [`V-closed-form-review-a-by-definition`](#v-closed-form-review-a-by-definition) | review/a_of_n_by_definition.py | Squares Project (Levy) | first-party | premises | 0 | 0 |
+| [`V-closed-form-review-record-consistency`](#v-closed-form-review-record-consistency) | review/record_consistency.py | Squares Project (Levy) | first-party | premises | 0 | 0 |
+| [`V-closed-form-review-localization`](#v-closed-form-review-localization) | review/localization_checks.py | Squares Project (Levy) | first-party | premises | 0 | 0 |
+| [`V-closed-form-review-replay-receipt`](#v-closed-form-review-replay-receipt) | review/replay_receipt_pieces.py | Squares Project (Levy) | first-party | premises | 0 | 0 |
+| [`V-closed-form-review-family-probe`](#v-closed-form-review-family-probe) | review/family_probe.py | Squares Project (Levy) | first-party | premises | 0 | 0 |
+| [`V-wand125-cfcheck`](#v-wand125-cfcheck) | cfcheck (indep-checker) | wand125 | external | decides | 2 | 1 |
+| [`V-wand125-sqverify-continuous`](#v-wand125-sqverify-continuous) | sqverify-fast --continuous | wand125, adapting this repository's sqverify_fast | external | decides | 1 | 1 |
+| [`V-wand125-contpose-check3`](#v-wand125-contpose-check3) | contpose_check3 v1.2 | wand125 (the driver, written to a specification for Codex), around Guzhou0806's kernels | external | decides | 1 | 1 |
+| [`V-continuous-pose-followup`](#v-continuous-pose-followup) | devtools.continuous_pose_followup | Squares Project (Levy) | first-party | premises | 0 | 0 |
 
 ## By Program
+
+### `V-evand-verify-exact`
+
+**verify_exact.py** · Evan Daniel · external · decides · Python · exact-algebraic
+
+The source's standard-library checker of an exact configuration over a number field Q[t]/f: every touching inequality an identity mod f, every other one by rational interval arithmetic at the root of f, each pair separated by a side line or by circumscribed discs, and the side the unique root of p in its interval.
+
+- Source: [`packing/resources/web/evand-exact-and-local-reports-2026-10-12/source/search/exact/verify_exact.py`](../../packing/resources/web/evand-exact-and-local-reports-2026-10-12/source/search/exact/verify_exact.py)
+- Versions run: SHA-256 `a0f38ca87c13…`, revision `7d1407a0b66c` (byte-identical at ad86d42, the revision whose packet retains the copy that ran)
+- Note: Run unchanged from the retained copy on issue 639's 23 exact forms, each in its own python -I process (receipts/replay-verify-exact.json in the evand-exact-cur-2026-10-16 packet). The replay's evidence entry is added at T-193's stage 4 exit, after the review lane think-7qxm.
+
+No evidence entry names it yet.
+
+### `V-evand-639-replay-driver`
+
+**replay_verify_exact.py** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
+
+Runs the source's verify_exact.py on each of issue 639's 23 exact forms and on four mutated controls at each retained form, holds the four pinned-only forms to the packet's manifest, and factors each polynomial over the integers with SymPy.
+
+- Source: [`packing/resources/web/evand-exact-cur-2026-10-16/review/replay_verify_exact.py`](../../packing/resources/web/evand-exact-cur-2026-10-16/review/replay_verify_exact.py)
+- Versions run: this repository's commits, which Git holds
+- Note: It decides nothing about a packing: the checker it runs does. Its irreducibility check is a premise of the stated algebraic degree, not of the bound.
+
+No evidence entry names it yet.
 
 ### `V-tokoharu-verify-cpp`
 
@@ -155,21 +231,21 @@ Decides a rectangle-density covering certificate over every net direction by out
 - Versions run: SHA-256 `a75140df1b48…` (verify.cpp); SHA-256 `7bce246763ca…` (run_verify.py; of `run_verify.py`)
 - Note: wand125's density and rectangle certificates ship byte-identical copies of both files, so a replay of a wand125 rectangle certificate runs the code its producer verified it with.
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-wand125-rectangle-report` | the source’s own run | producer’s code | T-046 |
-| `E-wand125-rectangle-monotone-report` | audited here | no code | - |
-| `E-wand125-rectangle-source-replay` | replayed here | producer’s code | T-045 |
-| `E-wand125-rectangle-2026-09-28-report` | the source’s own run | producer’s code | T-046 |
-| `E-wand125-rectangle-2026-09-28-monotone-report` | audited here | no code | T-046 |
-| `E-wand125-rectangle-2026-09-28-source-replay` | replayed here | producer’s code | T-070 |
-| `E-wand125-rectangle-2026-10-01-report` | the source’s own run | producer’s code | T-068 |
-| `E-wand125-rectangle-2026-10-01-source-replay` | replayed here | producer’s code | T-074 |
-| `E-wand125-rectangle-2026-10-02-report` | the source’s own run | producer’s code | T-077 |
-| `E-wand125-rectangle-2026-10-02-source-replay` | replayed here | producer’s code | T-077 |
-| `E-tokoharu-density-report` | the source’s own run | producer’s code | T-047 |
-| `E-tokoharu-density-monotone-report` | audited here | no code | T-047 |
-| `E-tokoharu-density-source-replay` | replayed here | producer’s code | T-047 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-wand125-rectangle-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-046 |
+| `E-wand125-rectangle-monotone-report` | audited here | no code | not recorded | - |
+| `E-wand125-rectangle-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-045 |
+| `E-wand125-rectangle-2026-09-28-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-046 |
+| `E-wand125-rectangle-2026-09-28-monotone-report` | audited here | no code | not recorded | T-046 |
+| `E-wand125-rectangle-2026-09-28-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-070 |
+| `E-wand125-rectangle-2026-10-01-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-068 |
+| `E-wand125-rectangle-2026-10-01-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-074 |
+| `E-wand125-rectangle-2026-10-02-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-077 |
+| `E-wand125-rectangle-2026-10-02-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-077 |
+| `E-tokoharu-density-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-047 |
+| `E-tokoharu-density-monotone-report` | audited here | no code | not recorded | T-047 |
+| `E-tokoharu-density-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-047 |
 
 ### `V-wand125-mixed-rotated-verify-cpp`
 
@@ -180,97 +256,97 @@ Decides a mixed point-and-rectangle certificate at each direction of the certifi
 - Source: [`packing/resources/web/wand125-point-and-mixed-2026-09-28/square-packing-bounds/certificates/mixed_n50_L740/code/mixed_rotated_verify.cpp`](../../packing/resources/web/wand125-point-and-mixed-2026-09-28/square-packing-bounds/certificates/mixed_n50_L740/code/mixed_rotated_verify.cpp)
 - Versions run: SHA-256 `89b674a6feab…`; revision `7975030a` (the n = 76 bundle's tarball, fetched by Git and pinned by its own SHA-256); revision `43050edc` (the n = 18 bundle's tarball on a declared net, fetched by Git and pinned by its own SHA-256); revision `2fad66e0` (the n = 29 bundle's tarball on a declared net; and, from the retained n = 50 code, cpp-sample's runs at sampled nodes of check2 candidates, which ship no C++ record, each the producer's own code re-run, never an independent confirmation (receipts/<name>/cpp-sample/ in the 6 October check2 packet))
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-n050-wand125-mixed-740-report` | the source’s own run | producer’s code | T-048 |
-| `E-n050-wand125-mixed-740-source-replay` | replayed here | producer’s code | T-048 |
-| `E-n037-wand125-mixed-644-report` | the source’s own run | producer’s code | T-069 |
-| `E-n037-wand125-mixed-644-source-replay` | replayed here | producer’s code | T-069 |
-| `E-n065-wand125-mixed-835-report` | the source’s own run | producer’s code | T-069 |
-| `E-n065-wand125-mixed-835-source-replay` | replayed here | producer’s code | T-069 |
-| `E-n066-wand125-mixed-842-report` | the source’s own run | producer’s code | T-069 |
-| `E-n066-wand125-mixed-842-source-replay` | replayed here | producer’s code | T-069 |
-| `E-n090-wand125-mixed-960-report` | the source’s own run | producer’s code | T-069 |
-| `E-n090-wand125-mixed-960-source-replay` | replayed here | producer’s code | T-069 |
-| `E-n092-wand125-mixed-969-report` | the source’s own run | producer’s code | T-069 |
-| `E-n092-wand125-mixed-969-source-replay` | replayed here | producer’s code | T-069 |
-| `E-n084-wand125-mixed-940-report` | the source’s own run | producer’s code | T-071 |
-| `E-n084-wand125-mixed-940-source-replay` | replayed here | producer’s code | T-071 |
-| `E-n085-wand125-mixed-942-report` | the source’s own run | producer’s code | T-071 |
-| `E-n085-wand125-mixed-942-source-replay` | replayed here | producer’s code | T-071 |
-| `E-n076-wand125-mixed-894-report` | the source’s own run | producer’s code | T-072 |
-| `E-n076-wand125-mixed-894-source-replay` | replayed here | producer’s code | T-072 |
-| `E-n083-wand125-mixed-937-report` | the source’s own run | producer’s code | T-075 |
-| `E-n083-wand125-mixed-937-source-replay` | replayed here | producer’s code | T-075 |
-| `E-n085-wand125-mixed-946-report` | the source’s own run | producer’s code | T-075 |
-| `E-n085-wand125-mixed-946-source-replay` | replayed here | producer’s code | T-075 |
-| `E-n087-wand125-mixed-948-report` | the source’s own run | producer’s code | T-075 |
-| `E-n087-wand125-mixed-948-source-replay` | replayed here | producer’s code | T-075 |
-| `E-n091-wand125-mixed-970-report` | the source’s own run | producer’s code | T-075 |
-| `E-n091-wand125-mixed-970-source-replay` | replayed here | producer’s code | T-075 |
-| `E-n092-wand125-mixed-975-report` | the source’s own run | producer’s code | T-075 |
-| `E-n092-wand125-mixed-975-source-replay` | replayed here | producer’s code | T-075 |
-| `E-n096-wand125-mixed-996-report` | the source’s own run | producer’s code | T-075 |
-| `E-n096-wand125-mixed-996-source-replay` | replayed here | producer’s code | T-075 |
-| `E-n051-wand125-mixed-746-report` | the source’s own run | producer’s code | T-082 |
-| `E-n052-wand125-mixed-755-report` | the source’s own run | producer’s code | T-082 |
-| `E-n055-wand125-mixed-7728-report` | the source’s own run | producer’s code | T-082 |
-| `E-n058-wand125-mixed-7905-report` | the source’s own run | producer’s code | T-082 |
-| `E-n069-wand125-mixed-8612-report` | the source’s own run | producer’s code | T-082 |
-| `E-n070-wand125-mixed-86475-report` | the source’s own run | producer’s code | T-082 |
-| `E-n071-wand125-mixed-8705-report` | the source’s own run | producer’s code | T-082 |
-| `E-n073-wand125-mixed-8809-report` | the source’s own run | producer’s code | T-082 |
-| `E-n074-wand125-mixed-88675-report` | the source’s own run | producer’s code | T-082 |
-| `E-n075-wand125-mixed-892-report` | the source’s own run | producer’s code | T-082 |
-| `E-n076-wand125-mixed-896-report` | the source’s own run | producer’s code | T-082 |
-| `E-n086-wand125-mixed-950-report` | the source’s own run | producer’s code | T-082 |
-| `E-n087-wand125-mixed-955-report` | the source’s own run | producer’s code | T-082 |
-| `E-n088-wand125-mixed-960-report` | the source’s own run | producer’s code | T-082 |
-| `E-n089-wand125-mixed-965-report` | the source’s own run | producer’s code | T-082 |
-| `E-n090-wand125-mixed-9725-report` | the source’s own run | producer’s code | T-082 |
-| `E-n091-wand125-mixed-975-report` | the source’s own run | producer’s code | T-082 |
-| `E-n092-wand125-mixed-977-report` | the source’s own run | producer’s code | T-082 |
-| `E-n093-wand125-mixed-986-report` | the source’s own run | producer’s code | T-082 |
-| `E-n094-wand125-mixed-992-report` | the source’s own run | producer’s code | T-082 |
-| `E-n095-wand125-mixed-996-report` | the source’s own run | producer’s code | T-082 |
-| `E-n096-wand125-mixed-997-report` | the source’s own run | producer’s code | T-082 |
-| `E-n042-wand125-mixed-68475-report` | the source’s own run | producer’s code | T-090 |
-| `E-n043-wand125-mixed-69075-report` | the source’s own run | producer’s code | T-090 |
-| `E-n044-wand125-mixed-69725-report` | the source’s own run | producer’s code | T-090 |
-| `E-n051-wand125-mixed-747-report` | the source’s own run | producer’s code | T-090 |
-| `E-n056-wand125-mixed-78025-report` | the source’s own run | producer’s code | T-090 |
-| `E-n057-wand125-mixed-78725-report` | the source’s own run | producer’s code | T-090 |
-| `E-n067-wand125-mixed-8475-report` | the source’s own run | producer’s code | T-090 |
-| `E-n069-wand125-mixed-862-report` | the source’s own run | producer’s code | T-090 |
-| `E-n072-wand125-mixed-876-report` | the source’s own run | producer’s code | T-090 |
-| `E-n075-wand125-mixed-894-report` | the source’s own run | producer’s code | T-090 |
-| `E-n084-wand125-mixed-94075-report` | the source’s own run | producer’s code | T-090 |
-| `E-n086-wand125-mixed-9503-report` | the source’s own run | producer’s code | T-090 |
-| `E-n088-wand125-mixed-96125-report` | the source’s own run | producer’s code | T-090 |
-| `E-n093-wand125-mixed-988-report` | the source’s own run | producer’s code | T-090 |
-| `E-n094-wand125-mixed-994-report` | the source’s own run | producer’s code | T-090 |
-| `E-n095-wand125-mixed-9965-report` | the source’s own run | producer’s code | T-090 |
-| `E-n053-wand125-mixed-76275-report` | the source’s own run | producer’s code | T-091 |
-| `E-n054-wand125-mixed-7685-report` | the source’s own run | producer’s code | T-091 |
-| `E-n058-wand125-mixed-7935-report` | the source’s own run | producer’s code | T-091 |
-| `E-n070-wand125-mixed-86575-report` | the source’s own run | producer’s code | T-091 |
-| `E-n071-wand125-mixed-8721-report` | the source’s own run | producer’s code | T-091 |
-| `E-n073-wand125-mixed-8813-report` | the source’s own run | producer’s code | T-091 |
-| `E-n076-wand125-mixed-8965-report` | the source’s own run | producer’s code | T-091 |
-| `E-n087-wand125-mixed-958-report` | the source’s own run | producer’s code | T-091 |
-| `E-n088-wand125-mixed-962-report` | the source’s own run | producer’s code | T-091 |
-| `E-n090-wand125-mixed-973-report` | the source’s own run | producer’s code | T-091 |
-| `E-n091-wand125-mixed-97625-report` | the source’s own run | producer’s code | T-091 |
-| `E-n094-wand125-mixed-995-report` | the source’s own run | producer’s code | T-091 |
-| `E-n067-wand125-mixed-848-report` | the source’s own run | producer’s code | T-094 |
-| `E-n084-wand125-mixed-9411-report` | the source’s own run | producer’s code | T-094 |
-| `E-n066-wand125-mixed-843-report` | the source’s own run | producer’s code | T-097 |
-| `E-n018-wand125-mixed-470-report` | the source’s own run | producer’s code | T-096 |
-| `E-n018-wand125-mixed-470-source-replay` | replayed here | producer’s code | T-096 |
-| `E-n018-wand125-mixed-4704-report` | the source’s own run | producer’s code | T-099 |
-| `E-n019-wand125-mixed-48229-report` | the source’s own run | producer’s code | T-100 |
-| `E-n018-wand125-mixed-4704-source-replay` | replayed here | producer’s code | T-099 |
-| `E-n029-wand125-mixed-581-report` | the source’s own run | producer’s code | T-108 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n050-wand125-mixed-740-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-048 |
+| `E-n050-wand125-mixed-740-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-048 |
+| `E-n037-wand125-mixed-644-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-069 |
+| `E-n037-wand125-mixed-644-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-069 |
+| `E-n065-wand125-mixed-835-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-069 |
+| `E-n065-wand125-mixed-835-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-069 |
+| `E-n066-wand125-mixed-842-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-069 |
+| `E-n066-wand125-mixed-842-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-069 |
+| `E-n090-wand125-mixed-960-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-069 |
+| `E-n090-wand125-mixed-960-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-069 |
+| `E-n092-wand125-mixed-969-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-069 |
+| `E-n092-wand125-mixed-969-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-069 |
+| `E-n084-wand125-mixed-940-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-071 |
+| `E-n084-wand125-mixed-940-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-071 |
+| `E-n085-wand125-mixed-942-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-071 |
+| `E-n085-wand125-mixed-942-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-071 |
+| `E-n076-wand125-mixed-894-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-072 |
+| `E-n076-wand125-mixed-894-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-072 |
+| `E-n083-wand125-mixed-937-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-075 |
+| `E-n083-wand125-mixed-937-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-075 |
+| `E-n085-wand125-mixed-946-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-075 |
+| `E-n085-wand125-mixed-946-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-075 |
+| `E-n087-wand125-mixed-948-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-075 |
+| `E-n087-wand125-mixed-948-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-075 |
+| `E-n091-wand125-mixed-970-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-075 |
+| `E-n091-wand125-mixed-970-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-075 |
+| `E-n092-wand125-mixed-975-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-075 |
+| `E-n092-wand125-mixed-975-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-075 |
+| `E-n096-wand125-mixed-996-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-075 |
+| `E-n096-wand125-mixed-996-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-075 |
+| `E-n051-wand125-mixed-746-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-082 |
+| `E-n052-wand125-mixed-755-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-082 |
+| `E-n055-wand125-mixed-7728-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-082 |
+| `E-n058-wand125-mixed-7905-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-082 |
+| `E-n069-wand125-mixed-8612-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-082 |
+| `E-n070-wand125-mixed-86475-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-082 |
+| `E-n071-wand125-mixed-8705-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-082 |
+| `E-n073-wand125-mixed-8809-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-082 |
+| `E-n074-wand125-mixed-88675-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-082 |
+| `E-n075-wand125-mixed-892-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-082 |
+| `E-n076-wand125-mixed-896-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-082 |
+| `E-n086-wand125-mixed-950-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-082 |
+| `E-n087-wand125-mixed-955-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-082 |
+| `E-n088-wand125-mixed-960-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-082 |
+| `E-n089-wand125-mixed-965-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-082 |
+| `E-n090-wand125-mixed-9725-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-082 |
+| `E-n091-wand125-mixed-975-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-082 |
+| `E-n092-wand125-mixed-977-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-082 |
+| `E-n093-wand125-mixed-986-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-082 |
+| `E-n094-wand125-mixed-992-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-082 |
+| `E-n095-wand125-mixed-996-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-082 |
+| `E-n096-wand125-mixed-997-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-082 |
+| `E-n042-wand125-mixed-68475-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-090 |
+| `E-n043-wand125-mixed-69075-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-090 |
+| `E-n044-wand125-mixed-69725-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-090 |
+| `E-n051-wand125-mixed-747-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-090 |
+| `E-n056-wand125-mixed-78025-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-090 |
+| `E-n057-wand125-mixed-78725-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-090 |
+| `E-n067-wand125-mixed-8475-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-090 |
+| `E-n069-wand125-mixed-862-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-090 |
+| `E-n072-wand125-mixed-876-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-090 |
+| `E-n075-wand125-mixed-894-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-090 |
+| `E-n084-wand125-mixed-94075-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-090 |
+| `E-n086-wand125-mixed-9503-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-090 |
+| `E-n088-wand125-mixed-96125-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-090 |
+| `E-n093-wand125-mixed-988-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-090 |
+| `E-n094-wand125-mixed-994-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-090 |
+| `E-n095-wand125-mixed-9965-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-090 |
+| `E-n053-wand125-mixed-76275-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-091 |
+| `E-n054-wand125-mixed-7685-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-091 |
+| `E-n058-wand125-mixed-7935-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-091 |
+| `E-n070-wand125-mixed-86575-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-091 |
+| `E-n071-wand125-mixed-8721-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-091 |
+| `E-n073-wand125-mixed-8813-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-091 |
+| `E-n076-wand125-mixed-8965-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-091 |
+| `E-n087-wand125-mixed-958-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-091 |
+| `E-n088-wand125-mixed-962-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-091 |
+| `E-n090-wand125-mixed-973-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-091 |
+| `E-n091-wand125-mixed-97625-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-091 |
+| `E-n094-wand125-mixed-995-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-091 |
+| `E-n067-wand125-mixed-848-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-094 |
+| `E-n084-wand125-mixed-9411-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-094 |
+| `E-n066-wand125-mixed-843-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-097 |
+| `E-n018-wand125-mixed-470-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-096 |
+| `E-n018-wand125-mixed-470-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-096 |
+| `E-n018-wand125-mixed-4704-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-099 |
+| `E-n019-wand125-mixed-48229-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-100 |
+| `E-n018-wand125-mixed-4704-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-099 |
+| `E-n029-wand125-mixed-581-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-108 |
 
 ### `V-wand125-verify-mixed-full-proof-py`
 
@@ -282,74 +358,74 @@ The source's driver for a complete mixed-certificate proof: it runs mixed_rotate
 - Versions run: SHA-256 `2719e482cfdd…`; SHA-256 `477d613fc0e2…` (mixed_n18_L4704's copy: one line differs, its check on --workers allowing 16 where the first allows 3; of `verify_mixed_full_proof.py`)
 - Note: Retained and reviewed. E-n018-wand125-mixed-470-source-replay runs it end to end, as the n = 18 bundle's README says, and mixed_n19_L48229's bundle ships the same copy. mixed_n18_L4704's bundle ships the second version, retained beside its certificate; the 6 October review read both and found the one change bears on no check.
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-n050-wand125-mixed-740-source-replay` | replayed here | producer’s code | T-048 |
-| `E-n083-wand125-mixed-937-report` | the source’s own run | producer’s code | T-075 |
-| `E-n085-wand125-mixed-946-report` | the source’s own run | producer’s code | T-075 |
-| `E-n087-wand125-mixed-948-report` | the source’s own run | producer’s code | T-075 |
-| `E-n091-wand125-mixed-970-report` | the source’s own run | producer’s code | T-075 |
-| `E-n092-wand125-mixed-975-report` | the source’s own run | producer’s code | T-075 |
-| `E-n096-wand125-mixed-996-report` | the source’s own run | producer’s code | T-075 |
-| `E-n051-wand125-mixed-746-report` | the source’s own run | producer’s code | T-082 |
-| `E-n052-wand125-mixed-755-report` | the source’s own run | producer’s code | T-082 |
-| `E-n055-wand125-mixed-7728-report` | the source’s own run | producer’s code | T-082 |
-| `E-n058-wand125-mixed-7905-report` | the source’s own run | producer’s code | T-082 |
-| `E-n069-wand125-mixed-8612-report` | the source’s own run | producer’s code | T-082 |
-| `E-n070-wand125-mixed-86475-report` | the source’s own run | producer’s code | T-082 |
-| `E-n071-wand125-mixed-8705-report` | the source’s own run | producer’s code | T-082 |
-| `E-n073-wand125-mixed-8809-report` | the source’s own run | producer’s code | T-082 |
-| `E-n074-wand125-mixed-88675-report` | the source’s own run | producer’s code | T-082 |
-| `E-n075-wand125-mixed-892-report` | the source’s own run | producer’s code | T-082 |
-| `E-n076-wand125-mixed-896-report` | the source’s own run | producer’s code | T-082 |
-| `E-n086-wand125-mixed-950-report` | the source’s own run | producer’s code | T-082 |
-| `E-n087-wand125-mixed-955-report` | the source’s own run | producer’s code | T-082 |
-| `E-n088-wand125-mixed-960-report` | the source’s own run | producer’s code | T-082 |
-| `E-n089-wand125-mixed-965-report` | the source’s own run | producer’s code | T-082 |
-| `E-n090-wand125-mixed-9725-report` | the source’s own run | producer’s code | T-082 |
-| `E-n091-wand125-mixed-975-report` | the source’s own run | producer’s code | T-082 |
-| `E-n092-wand125-mixed-977-report` | the source’s own run | producer’s code | T-082 |
-| `E-n093-wand125-mixed-986-report` | the source’s own run | producer’s code | T-082 |
-| `E-n094-wand125-mixed-992-report` | the source’s own run | producer’s code | T-082 |
-| `E-n095-wand125-mixed-996-report` | the source’s own run | producer’s code | T-082 |
-| `E-n096-wand125-mixed-997-report` | the source’s own run | producer’s code | T-082 |
-| `E-n042-wand125-mixed-68475-report` | the source’s own run | producer’s code | T-090 |
-| `E-n043-wand125-mixed-69075-report` | the source’s own run | producer’s code | T-090 |
-| `E-n044-wand125-mixed-69725-report` | the source’s own run | producer’s code | T-090 |
-| `E-n051-wand125-mixed-747-report` | the source’s own run | producer’s code | T-090 |
-| `E-n056-wand125-mixed-78025-report` | the source’s own run | producer’s code | T-090 |
-| `E-n057-wand125-mixed-78725-report` | the source’s own run | producer’s code | T-090 |
-| `E-n067-wand125-mixed-8475-report` | the source’s own run | producer’s code | T-090 |
-| `E-n069-wand125-mixed-862-report` | the source’s own run | producer’s code | T-090 |
-| `E-n072-wand125-mixed-876-report` | the source’s own run | producer’s code | T-090 |
-| `E-n075-wand125-mixed-894-report` | the source’s own run | producer’s code | T-090 |
-| `E-n084-wand125-mixed-94075-report` | the source’s own run | producer’s code | T-090 |
-| `E-n086-wand125-mixed-9503-report` | the source’s own run | producer’s code | T-090 |
-| `E-n088-wand125-mixed-96125-report` | the source’s own run | producer’s code | T-090 |
-| `E-n093-wand125-mixed-988-report` | the source’s own run | producer’s code | T-090 |
-| `E-n094-wand125-mixed-994-report` | the source’s own run | producer’s code | T-090 |
-| `E-n095-wand125-mixed-9965-report` | the source’s own run | producer’s code | T-090 |
-| `E-n053-wand125-mixed-76275-report` | the source’s own run | producer’s code | T-091 |
-| `E-n054-wand125-mixed-7685-report` | the source’s own run | producer’s code | T-091 |
-| `E-n058-wand125-mixed-7935-report` | the source’s own run | producer’s code | T-091 |
-| `E-n070-wand125-mixed-86575-report` | the source’s own run | producer’s code | T-091 |
-| `E-n071-wand125-mixed-8721-report` | the source’s own run | producer’s code | T-091 |
-| `E-n073-wand125-mixed-8813-report` | the source’s own run | producer’s code | T-091 |
-| `E-n076-wand125-mixed-8965-report` | the source’s own run | producer’s code | T-091 |
-| `E-n087-wand125-mixed-958-report` | the source’s own run | producer’s code | T-091 |
-| `E-n088-wand125-mixed-962-report` | the source’s own run | producer’s code | T-091 |
-| `E-n090-wand125-mixed-973-report` | the source’s own run | producer’s code | T-091 |
-| `E-n091-wand125-mixed-97625-report` | the source’s own run | producer’s code | T-091 |
-| `E-n094-wand125-mixed-995-report` | the source’s own run | producer’s code | T-091 |
-| `E-n067-wand125-mixed-848-report` | the source’s own run | producer’s code | T-094 |
-| `E-n084-wand125-mixed-9411-report` | the source’s own run | producer’s code | T-094 |
-| `E-n066-wand125-mixed-843-report` | the source’s own run | producer’s code | T-097 |
-| `E-n018-wand125-mixed-470-report` | the source’s own run | producer’s code | T-096 |
-| `E-n018-wand125-mixed-470-source-replay` | replayed here | producer’s code | T-096 |
-| `E-n018-wand125-mixed-4704-report` | the source’s own run | producer’s code | T-099 |
-| `E-n019-wand125-mixed-48229-report` | the source’s own run | producer’s code | T-100 |
-| `E-n018-wand125-mixed-4704-source-replay` | replayed here | producer’s code | T-099 |
-| `E-n029-wand125-mixed-581-report` | the source’s own run | producer’s code | T-108 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n050-wand125-mixed-740-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-048 |
+| `E-n083-wand125-mixed-937-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-075 |
+| `E-n085-wand125-mixed-946-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-075 |
+| `E-n087-wand125-mixed-948-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-075 |
+| `E-n091-wand125-mixed-970-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-075 |
+| `E-n092-wand125-mixed-975-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-075 |
+| `E-n096-wand125-mixed-996-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-075 |
+| `E-n051-wand125-mixed-746-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-082 |
+| `E-n052-wand125-mixed-755-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-082 |
+| `E-n055-wand125-mixed-7728-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-082 |
+| `E-n058-wand125-mixed-7905-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-082 |
+| `E-n069-wand125-mixed-8612-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-082 |
+| `E-n070-wand125-mixed-86475-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-082 |
+| `E-n071-wand125-mixed-8705-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-082 |
+| `E-n073-wand125-mixed-8809-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-082 |
+| `E-n074-wand125-mixed-88675-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-082 |
+| `E-n075-wand125-mixed-892-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-082 |
+| `E-n076-wand125-mixed-896-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-082 |
+| `E-n086-wand125-mixed-950-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-082 |
+| `E-n087-wand125-mixed-955-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-082 |
+| `E-n088-wand125-mixed-960-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-082 |
+| `E-n089-wand125-mixed-965-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-082 |
+| `E-n090-wand125-mixed-9725-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-082 |
+| `E-n091-wand125-mixed-975-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-082 |
+| `E-n092-wand125-mixed-977-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-082 |
+| `E-n093-wand125-mixed-986-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-082 |
+| `E-n094-wand125-mixed-992-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-082 |
+| `E-n095-wand125-mixed-996-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-082 |
+| `E-n096-wand125-mixed-997-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-082 |
+| `E-n042-wand125-mixed-68475-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-090 |
+| `E-n043-wand125-mixed-69075-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-090 |
+| `E-n044-wand125-mixed-69725-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-090 |
+| `E-n051-wand125-mixed-747-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-090 |
+| `E-n056-wand125-mixed-78025-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-090 |
+| `E-n057-wand125-mixed-78725-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-090 |
+| `E-n067-wand125-mixed-8475-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-090 |
+| `E-n069-wand125-mixed-862-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-090 |
+| `E-n072-wand125-mixed-876-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-090 |
+| `E-n075-wand125-mixed-894-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-090 |
+| `E-n084-wand125-mixed-94075-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-090 |
+| `E-n086-wand125-mixed-9503-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-090 |
+| `E-n088-wand125-mixed-96125-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-090 |
+| `E-n093-wand125-mixed-988-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-090 |
+| `E-n094-wand125-mixed-994-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-090 |
+| `E-n095-wand125-mixed-9965-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-090 |
+| `E-n053-wand125-mixed-76275-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-091 |
+| `E-n054-wand125-mixed-7685-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-091 |
+| `E-n058-wand125-mixed-7935-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-091 |
+| `E-n070-wand125-mixed-86575-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-091 |
+| `E-n071-wand125-mixed-8721-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-091 |
+| `E-n073-wand125-mixed-8813-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-091 |
+| `E-n076-wand125-mixed-8965-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-091 |
+| `E-n087-wand125-mixed-958-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-091 |
+| `E-n088-wand125-mixed-962-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-091 |
+| `E-n090-wand125-mixed-973-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-091 |
+| `E-n091-wand125-mixed-97625-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-091 |
+| `E-n094-wand125-mixed-995-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-091 |
+| `E-n067-wand125-mixed-848-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-094 |
+| `E-n084-wand125-mixed-9411-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-094 |
+| `E-n066-wand125-mixed-843-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-097 |
+| `E-n018-wand125-mixed-470-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-096 |
+| `E-n018-wand125-mixed-470-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-096 |
+| `E-n018-wand125-mixed-4704-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-099 |
+| `E-n019-wand125-mixed-48229-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-100 |
+| `E-n018-wand125-mixed-4704-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-099 |
+| `E-n029-wand125-mixed-581-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-108 |
 
 ### `V-wand125-sqverify-proof-net`
 
@@ -361,20 +437,23 @@ The source's copy of this repository's sqverify_fast with one change, reading a 
 - Versions run: SHA-256 `a4069c4b55a4…` (fine_net_check.sh, the same in all nine check2 bundles); revision `fe12e036c` (the crate's commit on the source's branch wand125/sqverify-proof-net, which this repository does not hold; its git archive, sqverify-proof-net-fe12e036c.tar.gz, SHA-256 e495f9bf14dc5ca20d8890aa0601183b8b955b94580c4e99ddffa64254371e81, is pinned by the 6 October check2 packet's acquisition record, and its build reports source_sha256 ab6e33e164dbc5c32b40349ba55981b58e630b5eef59534196a69d259404fd7c)
 - Note: The crate itself is pinned and neither retained nor opened, so that no copy of it sits beside sqverify_fast, whose own declared-net change was written apart from it (packing/sqverify_fast/INDEPENDENCE.md, Declared Nets). Its SOUNDNESS.md and INDEPENDENCE.md are this repository's files of 3 October by their digests. A replay here by V-sqverify-fast re-implements its check sharing the producer's components, the sqverify_fast crate, all of it but the declared-net reader, not independently; the producer adapted this repository's code, not the reverse, so the replay is much closer to a reproduction than the label alone says.
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-n018-wand125-mixed-4705-report` | the source’s own run | producer’s code | T-102 |
-| `E-n019-wand125-mixed-4825-report` | the source’s own run | producer’s code | T-103 |
-| `E-n020-wand125-mixed-4905-report` | the source’s own run | producer’s code | T-104 |
-| `E-n026-wand125-mixed-5545-report` | the source’s own run | producer’s code | T-105 |
-| `E-n027-wand125-mixed-56435-report` | the source’s own run | producer’s code | T-106 |
-| `E-n028-wand125-mixed-5735-report` | the source’s own run | producer’s code | T-107 |
-| `E-n030-wand125-mixed-58835-report` | the source’s own run | producer’s code | T-109 |
-| `E-n039-wand125-mixed-665-report` | the source’s own run | producer’s code | T-110 |
-| `E-n041-wand125-mixed-6775-report` | the source’s own run | producer’s code | T-111 |
-| `E-wand125-fine-net-n29-582-followup-report` | the source’s own run | producer’s code | T-132 |
-| `E-wand125-fine-net-n28-57425-report` | the source’s own run | producer’s code | T-142 |
-| `E-wand125-fine-net-n30-58925-report` | the source’s own run | producer’s code | T-143 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n018-wand125-mixed-4705-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-102 |
+| `E-n019-wand125-mixed-4825-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-103 |
+| `E-n020-wand125-mixed-4905-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-104 |
+| `E-n026-wand125-mixed-5545-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-105 |
+| `E-n027-wand125-mixed-56435-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-106 |
+| `E-n028-wand125-mixed-5735-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-107 |
+| `E-n030-wand125-mixed-58835-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-109 |
+| `E-n039-wand125-mixed-665-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-110 |
+| `E-n041-wand125-mixed-6775-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-111 |
+| `E-wand125-fine-net-n29-582-followup-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-132 |
+| `E-wand125-fine-net-n28-57425-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-142 |
+| `E-wand125-fine-net-n30-58925-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-143 |
+| `E-wand125-fine-net-n39-66625-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-176 |
+| `E-wand125-fine-net-n44-69975-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-177 |
+| `E-wand125-fine-net-n37-64975-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-178 |
 
 ### `V-wand125-unified-linear-verify-cpp`
 
@@ -386,15 +465,16 @@ Decides a linear (segment) certificate at every net direction, the axis directio
 - Versions run: SHA-256 `0249726ab1e6…`
 - Note: Its n = 101 replay receipts are retained; no evidence entry records the replay yet.
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-n083-wand125-linear-935-report` | the source’s own run | producer’s code | T-073 |
-| `E-n083-wand125-linear-935-source-replay` | replayed here | producer’s code | T-073 |
-| `E-n101-wand125-linear-1028-report` | the source’s own run | producer’s code | T-073, T-080 |
-| `E-n101-wand125-linear-1028-source-replay` | replayed here | producer’s code | T-080 |
-| `E-n082-wand125-linear-932-report` | the source’s own run | producer’s code | T-076 |
-| `E-n082-wand125-linear-932-source-replay` | replayed here | producer’s code | T-076 |
-| `E-wand125-linear-n122-1126-report` | the source’s own run | producer’s code | T-144 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n083-wand125-linear-935-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-073 |
+| `E-n083-wand125-linear-935-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-073 |
+| `E-n101-wand125-linear-1028-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-073, T-080 |
+| `E-n101-wand125-linear-1028-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-073, T-080 |
+| `E-n082-wand125-linear-932-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-076 |
+| `E-n082-wand125-linear-932-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-076 |
+| `E-wand125-linear-n122-1126-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-144 |
+| `E-wand125-linear-n145-1224-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-179 |
 
 ### `V-wand125-verify-portable-py`
 
@@ -406,10 +486,10 @@ The source's portable exact checker for its point-only n = 21 cover bundle.
 - Versions run: SHA-256 `2cea95ceac93…`
 - Note: Retained; no confirming entry runs it yet.
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-n021-wand125-point-endpoint-report` | the source’s own run | producer’s code | T-055 |
-| `E-n021-wand125-point-endpoint-source-replay` | replayed here | producer’s code | T-055 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n021-wand125-point-endpoint-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-055 |
+| `E-n021-wand125-point-endpoint-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-055 |
 
 ### `V-wand125-check-with-sqpack`
 
@@ -421,13 +501,13 @@ wand125's adapter that expands its point certificates' direction rule and hands 
 - Versions run: SHA-256 `f64fe22eddfd…`; revision `1398e42f17f2`
 - Note: The producer verified its point certificates with this adapter and this repository's verifier, so a replay of them is a replay of the producer's code even though most of that code is first-party (V-sqpack-fractional-exact).
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-wand125-point-source-replay` | replayed here | producer’s code | T-044 |
-| `E-wand125-n052-derived-lower` | audited here | producer’s code | T-044 |
-| `E-wand125-point-bounds-report` | the source’s own run | producer’s code | T-044 |
-| `E-wand125-point-monotone-report` | audited here | no code | T-044 |
-| `E-wand125-n068-derived-lower` | audited here | producer’s code | T-044 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-wand125-point-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-044 |
+| `E-wand125-n052-derived-lower` | audited here | reproduced with the producer’s code | not recorded | T-044 |
+| `E-wand125-point-bounds-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-044 |
+| `E-wand125-point-monotone-report` | audited here | no code | not recorded | T-044 |
+| `E-wand125-n068-derived-lower` | audited here | reproduced with the producer’s code | not recorded | T-044 |
 
 ### `V-wand125-valid7-checker`
 
@@ -440,10 +520,10 @@ Decides Valid7 for Evan Daniel's k = 7 cover: every closed unit square in [0,7]^
 - What its authors read and used: [`packing/resources/web/wand125-valid7-independent-check-2026-10-02/valid7-independent-check/READ_LOG.md`](../../packing/resources/web/wand125-valid7-independent-check-2026-10-02/valid7-independent-check/READ_LOG.md)
 - Note: Its read log says Daniel's checker qx2_zm.py and his lemma write-ups were not read; the two share the statement, the cover and its format specification.
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-k2m3-wand125-valid7-independent` | replayed here | independent | T-064 |
-| `E-k2m4-wand125-validtilt9-report` | reported by a third party, not replayed here | independent | T-081 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-k2m3-wand125-valid7-independent` | replayed here | independently re-implemented | not recorded | T-064 |
+| `E-k2m4-wand125-validtilt9-report` | reported by a third party, not replayed here | independently re-implemented | not recorded | T-081 |
 
 ### `V-evand-zmx2`
 
@@ -455,27 +535,31 @@ Decides a zero-margin point-and-segment cover by branch and bound over centre an
 - Versions run: SHA-256 `6b7f0f79466b…` (the 2026-09-28 packet's post-audit parser, which made the shipped records and which wand125's verify.sh pins); SHA-256 `92a4cfe87b4e…`, revision `e4af291cf527` (the --sym-atoms version, for the unreduced s(32) sweep; of `zmx2.rs`); SHA-256 `e2bb84e9e059…`, revision `b8157df7a7c7` (the version that accepts a side that is not a multiple of 1/10, with which the source checked its s(20) point cover at side 2443/500; unchanged at 7ff3b211 and not run here; of `zmx2.rs`)
 - Note: wand125 verified its own covers with zmx2 as well, so a zmx2 replay of a wand125 cover is a replay of the producer's code.
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-n060-evand-mixed-cover-report` | the source’s own run | producer’s code | T-062, T-063 |
-| `E-n061-wand125-point-cover-evand-replay-report` | reported by a third party, not replayed here | independent | T-063 |
-| `E-n061-wand125-point-cover-zmx2-replay` | replayed here | producer’s code | T-063 |
-| `E-n060-evand-mixed-cover-zmx2-replay` | replayed here | producer’s code | T-062, T-063 |
-| `E-n045-wand125-point-cover-report` | the source’s own run | producer’s code | T-054 |
-| `E-n045-wand125-point-cover-source-replay` | replayed here | producer’s code | T-054 |
-| `E-n059-wand125-mixed-cover-report` | the source’s own run | producer’s code | T-066 |
-| `E-n059-wand125-mixed-cover-zmx2-replay` | replayed here | producer’s code | T-066 |
-| `E-n077-wand125-mixed-cover-report` | the source’s own run | producer’s code | T-067 |
-| `E-n077-wand125-mixed-cover-zmx2-replay` | replayed here | producer’s code | T-067 |
-| `E-n032-evand-zmx2-full-sym-report` | the source’s own run | producer’s code | T-051 |
-| `E-n032-evand-closed-cover-zmx2-replay` | replayed here | producer’s code | T-051 |
-| `E-n032-evand-zmx2-full-sym-replay` | replayed here | producer’s code | T-051 |
-| `E-n013-evand-casefree-cover-zmx2-replay` | replayed here | producer’s code | T-006 |
-| `E-n021-evand-mixed-cover-report` | the source’s own run | producer’s code | T-052 |
-| `E-n021-evand-mixed-cover-zmx2-replay` | replayed here | producer’s code | T-052 |
-| `E-n045-evand-mixed-cover-report` | the source’s own run | producer’s code | T-053 |
-| `E-n045-evand-mixed-cover-zmx2-replay` | replayed here | producer’s code | T-053 |
-| `E-n020-evand-point-cover-4886-report` | the source’s own run | producer’s code | - |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n060-evand-mixed-cover-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-062, T-063 |
+| `E-n061-wand125-point-cover-evand-replay-report` | reported by a third party, not replayed here | independently re-implemented | not recorded | T-063 |
+| `E-n061-wand125-point-cover-zmx2-replay` | replayed here | reproduced with the producer’s code | not recorded | T-063 |
+| `E-n060-evand-mixed-cover-zmx2-replay` | replayed here | reproduced with the producer’s code | not recorded | T-062, T-063 |
+| `E-n045-wand125-point-cover-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-054 |
+| `E-n045-wand125-point-cover-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-054 |
+| `E-n059-wand125-mixed-cover-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-066 |
+| `E-n059-wand125-mixed-cover-zmx2-replay` | replayed here | reproduced with the producer’s code | not recorded | T-066 |
+| `E-n077-wand125-mixed-cover-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-067 |
+| `E-n077-wand125-mixed-cover-zmx2-replay` | replayed here | reproduced with the producer’s code | not recorded | T-067 |
+| `E-n032-evand-zmx2-full-sym-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-051 |
+| `E-n032-evand-closed-cover-zmx2-replay` | replayed here | reproduced with the producer’s code | not recorded | T-051 |
+| `E-n032-evand-zmx2-full-sym-replay` | replayed here | reproduced with the producer’s code | not recorded | T-051 |
+| `E-n013-evand-casefree-cover-zmx2-replay` | replayed here | reproduced with the producer’s code | not recorded | T-006 |
+| `E-n021-evand-mixed-cover-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-052 |
+| `E-n021-evand-mixed-cover-zmx2-replay` | replayed here | reproduced with the producer’s code | not recorded | T-052 |
+| `E-n045-evand-mixed-cover-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-053 |
+| `E-n045-evand-mixed-cover-zmx2-replay` | replayed here | reproduced with the producer’s code | not recorded | T-053 |
+| `E-n020-evand-point-cover-4886-report` | the source’s own run | reproduced with the producer’s code | not recorded | - |
+| `E-bengreff-594-cover-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-184 |
+| `E-bengreff-594-cover-replay` | replayed here | reproduced with the producer’s code | full, 8,100 of 8,100: root cells of the D4 region, centres in [0, 9/2]^2 and u in [0, 1/2]: 8,096 decided by zmx2 and the other 4 by zm_mixed.py over the 64 sub-roots that tile them | T-184 |
+| `E-bengreff-610-cover-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-191 |
+| `E-bengreff-610-cover-replay` | replayed here | reproduced with the producer’s code | full, 10,000 of 10,000: root cells of the D4 region, centres in [0, 5]^2 and u in [0, 1/2]: 9,981 decided by zmx2 and the other 19 by zm_mixed.py over the 304 sub-roots that tile them | T-191 |
 
 ### `V-evand-zm-mixed-py`
 
@@ -483,18 +567,22 @@ Decides a zero-margin point-and-segment cover by branch and bound over centre an
 
 The source's exact mixed point-and-segment cover checker, the predecessor zmx2 was checked against.
 
-- Source: [`packing/resources/web/evand-square-packing-2026-09-28/square-packing/s12/search/zm_mixed.py`](../../packing/resources/web/evand-square-packing-2026-09-28/square-packing/s12/search/zm_mixed.py)
-- Versions run: SHA-256 `ee3e2915349b…`
-- Note: Retained; its shipped run records are re-summarised by the source's verify.sh, but no confirming entry runs the checker itself yet.
+- Source: [`packing/resources/web/evand-square-packing-2026-09-28/square-packing/s12/search/zm_mixed.py`](../../packing/resources/web/evand-square-packing-2026-09-28/square-packing/s12/search/zm_mixed.py), [`packing/resources/web/evand-square-packing-2026-09-28/square-packing/s12/search/mixed_cover.py`](../../packing/resources/web/evand-square-packing-2026-09-28/square-packing/s12/search/mixed_cover.py)
+- Versions run: SHA-256 `ee3e2915349b…`; SHA-256 `bb89de15ecf5…` (mixed_cover.py, which zm_mixed.py imports; of `mixed_cover.py`); SHA-256 `640fe453c1a3…` (zeromargin.py, which zm_mixed.py imports (V-evand-zeromargin-py's program); of `zeromargin.py`)
+- Note: Benjamin Greff verified his s(76) and s(95) covers with it, on the sub-roots of the D4 roots zmx2 leaves, at the three digests his verify.sh pins, so its runs there (devtools.replay_evand_zmx2 zm-mixed) replay the producer's code. No other confirming entry runs it.
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-n060-evand-mixed-cover-report` | the source’s own run | producer’s code | T-062, T-063 |
-| `E-n059-wand125-mixed-cover-report` | the source’s own run | producer’s code | T-066 |
-| `E-n077-wand125-mixed-cover-report` | the source’s own run | producer’s code | T-067 |
-| `E-n021-evand-mixed-cover-report` | the source’s own run | producer’s code | T-052 |
-| `E-n045-evand-mixed-cover-report` | the source’s own run | producer’s code | T-053 |
-| `E-n020-evand-point-cover-4886-report` | the source’s own run | producer’s code | - |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n060-evand-mixed-cover-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-062, T-063 |
+| `E-n059-wand125-mixed-cover-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-066 |
+| `E-n077-wand125-mixed-cover-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-067 |
+| `E-n021-evand-mixed-cover-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-052 |
+| `E-n045-evand-mixed-cover-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-053 |
+| `E-n020-evand-point-cover-4886-report` | the source’s own run | reproduced with the producer’s code | not recorded | - |
+| `E-bengreff-594-cover-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-184 |
+| `E-bengreff-594-cover-replay` | replayed here | reproduced with the producer’s code | full, 8,100 of 8,100: root cells of the D4 region, centres in [0, 9/2]^2 and u in [0, 1/2]: 8,096 decided by zmx2 and the other 4 by zm_mixed.py over the 64 sub-roots that tile them | T-184 |
+| `E-bengreff-610-cover-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-191 |
+| `E-bengreff-610-cover-replay` | replayed here | reproduced with the producer’s code | full, 10,000 of 10,000: root cells of the D4 region, centres in [0, 5]^2 and u in [0, 1/2]: 9,981 decided by zmx2 and the other 19 by zm_mixed.py over the 304 sub-roots that tile them | T-191 |
 
 ### `V-evand-zeromargin-py`
 
@@ -505,12 +593,12 @@ The source's exhaustive exact point-cover checker over the D4 region's root boxe
 - Source: [`packing/resources/web/evand-square-packing-2026-09-26/square-packing/s12/search/zeromargin.py`](../../packing/resources/web/evand-square-packing-2026-09-26/square-packing/s12/search/zeromargin.py), [`packing/resources/web/evand-square-packing-2026-09-26/square-packing/s12/search/zm_d4_sweep.py`](../../packing/resources/web/evand-square-packing-2026-09-26/square-packing/s12/search/zm_d4_sweep.py)
 - Versions run: SHA-256 `640fe453c1a3…` (zeromargin.py); SHA-256 `cc7fa8c70f7a…` (zm_d4_sweep.py; of `zm_d4_sweep.py`)
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-n061-wand125-point-cover-evand-replay-report` | reported by a third party, not replayed here | independent | T-063 |
-| `E-n032-evand-closed-cover-report` | the source’s own run | producer’s code | T-051 |
-| `E-n032-evand-closed-cover-source-run` | replayed here | producer’s code | T-051 |
-| `E-n013-evand-casefree-cover-report` | the source’s own run | producer’s code | - |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n061-wand125-point-cover-evand-replay-report` | reported by a third party, not replayed here | independently re-implemented | not recorded | T-063 |
+| `E-n032-evand-closed-cover-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-051 |
+| `E-n032-evand-closed-cover-source-run` | replayed here | reproduced with the producer’s code | not recorded | T-051 |
+| `E-n013-evand-casefree-cover-report` | the source’s own run | reproduced with the producer’s code | not recorded | - |
 
 ### `V-evand-angle-net-verify`
 
@@ -521,18 +609,18 @@ Decides a positive-margin weighted point cover over an angle net by an exact arr
 - Source: [`packing/resources/web/evand-square-packing-2026-09-26/square-packing/s12/verify/src/main.rs`](../../packing/resources/web/evand-square-packing-2026-09-26/square-packing/s12/verify/src/main.rs)
 - Versions run: SHA-256 `226ef3f12099…`
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-n012-evand-15680-3951-report` | the source’s own run | producer’s code | T-049 |
-| `E-n012-evand-15680-3951-source-replay` | replayed here | producer’s code | T-049 |
-| `E-n012-squarepacker-31360-7901-report` | the source’s own run | producer’s code | T-078 |
-| `E-n012-squarepacker-31360-7901-source-replay` | replayed here | producer’s code | T-078 |
-| `E-n012-levy-15680000-3949423-generator` | audited here | producer’s code | T-079 |
-| `E-n012-levy-15680000-3949423-source-replay` | replayed here | producer’s code | T-079 |
-| `E-n012-squarepacker-7943-2000-report` | the source’s own run | producer’s code | T-095 |
-| `E-n012-squarepacker-7943-2000-source-replay` | replayed here | producer’s code | T-095 |
-| `E-n021-evand-5000-1001-report` | the source’s own run | producer’s code | T-050 |
-| `E-n021-evand-5000-1001-source-replay` | replayed here | producer’s code | T-050 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n012-evand-15680-3951-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-049 |
+| `E-n012-evand-15680-3951-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-049 |
+| `E-n012-squarepacker-31360-7901-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-078 |
+| `E-n012-squarepacker-31360-7901-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-078 |
+| `E-n012-levy-15680000-3949423-generator` | audited here | reproduced with the producer’s code | not recorded | T-079 |
+| `E-n012-levy-15680000-3949423-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-079 |
+| `E-n012-squarepacker-7943-2000-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-095 |
+| `E-n012-squarepacker-7943-2000-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-095 |
+| `E-n021-evand-5000-1001-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-050 |
+| `E-n021-evand-5000-1001-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-050 |
 
 ### `V-evand-xcheck-py`
 
@@ -543,12 +631,12 @@ The source's separately written exact Python re-check of the angle-net bins.
 - Source: [`packing/resources/web/evand-square-packing-2026-09-26/square-packing/s12/xcheck.py`](../../packing/resources/web/evand-square-packing-2026-09-26/square-packing/s12/xcheck.py)
 - Versions run: SHA-256 `e18d79a82719…`
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-n012-evand-15680-3951-report` | the source’s own run | producer’s code | T-049 |
-| `E-n012-evand-15680-3951-source-replay` | replayed here | producer’s code | T-049 |
-| `E-n021-evand-5000-1001-report` | the source’s own run | producer’s code | T-050 |
-| `E-n021-evand-5000-1001-source-replay` | replayed here | producer’s code | T-050 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n012-evand-15680-3951-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-049 |
+| `E-n012-evand-15680-3951-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-049 |
+| `E-n021-evand-5000-1001-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-050 |
+| `E-n021-evand-5000-1001-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-050 |
 
 ### `V-evand-zmcheck`
 
@@ -559,11 +647,11 @@ The source's separately written Rust point-cover checker, over the full domain o
 - Source: [`packing/resources/web/evand-square-packing-2026-09-26/square-packing/s12/verify2/src/main.rs`](../../packing/resources/web/evand-square-packing-2026-09-26/square-packing/s12/verify2/src/main.rs)
 - Versions run: SHA-256 `94b7d83ecf6a…`
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-n061-wand125-point-cover-evand-replay-report` | reported by a third party, not replayed here | independent | T-063 |
-| `E-n032-evand-closed-cover-report` | the source’s own run | producer’s code | T-051 |
-| `E-n013-evand-casefree-cover-report` | the source’s own run | producer’s code | - |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n061-wand125-point-cover-evand-replay-report` | reported by a third party, not replayed here | independently re-implemented | not recorded | T-063 |
+| `E-n032-evand-closed-cover-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-051 |
+| `E-n013-evand-casefree-cover-report` | the source’s own run | reproduced with the producer’s code | not recorded | - |
 
 ### `V-evand-qx2-zm-py`
 
@@ -574,12 +662,12 @@ The source's exact-rational checker of Valid7, the finite statement its k^2 - 3 
 - Source: [`packing/resources/web/evand-square-packing-2026-10-01/source/s12/search/qx2_zm.py`](../../packing/resources/web/evand-square-packing-2026-10-01/source/s12/search/qx2_zm.py)
 - Versions run: SHA-256 `6294052a37ce…`
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-k2m3-evand-family-report` | the source’s own run | producer’s code | T-064 |
-| `E-k2m3-evand-valid7-qx2-replay` | replayed here | producer’s code | T-064 |
-| `E-k2m4-evand-family-report` | the source’s own run | producer’s code | T-081 |
-| `E-k2m4-evand-validtilt9-qx2-report` | the source’s own run | producer’s code | T-081 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-k2m3-evand-family-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-064 |
+| `E-k2m3-evand-valid7-qx2-replay` | replayed here | reproduced with the producer’s code | not recorded | T-064 |
+| `E-k2m4-evand-family-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-081 |
+| `E-k2m4-evand-validtilt9-qx2-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-081 |
 
 ### `V-evand-verify-cert-py`
 
@@ -590,12 +678,12 @@ The source's exact checker of its rational packing certificates, in Fraction ari
 - Source: [`packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/verify_cert.py`](../../packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/verify_cert.py)
 - Versions run: SHA-256 `3299ca0c0f02…`
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-evand-exact-optima-2026-10-05-report` | the source’s own run | producer’s code | T-098 |
-| `E-evand-exact-optima-2026-10-05-source-replay` | replayed here | producer’s code | T-098 |
-| `E-evand-exact-ceilings-2026-10-05-report` | the source’s own run | producer’s code | T-101 |
-| `E-evand-exact-ceilings-2026-10-05-source-replay` | replayed here | producer’s code | T-101 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-evand-exact-optima-2026-10-05-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-098 |
+| `E-evand-exact-optima-2026-10-05-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-098 |
+| `E-evand-exact-ceilings-2026-10-05-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-101 |
+| `E-evand-exact-ceilings-2026-10-05-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-101 |
 
 ### `V-evand-verify-cert2-py`
 
@@ -606,12 +694,12 @@ The source's second exact checker of the same certificates, written to share no 
 - Source: [`packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/verify_cert2.py`](../../packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/verify_cert2.py)
 - Versions run: SHA-256 `55140a35d95d…`
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-evand-exact-optima-2026-10-05-report` | the source’s own run | producer’s code | T-098 |
-| `E-evand-exact-optima-2026-10-05-source-replay` | replayed here | producer’s code | T-098 |
-| `E-evand-exact-ceilings-2026-10-05-report` | the source’s own run | producer’s code | T-101 |
-| `E-evand-exact-ceilings-2026-10-05-source-replay` | replayed here | producer’s code | T-101 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-evand-exact-optima-2026-10-05-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-098 |
+| `E-evand-exact-optima-2026-10-05-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-098 |
+| `E-evand-exact-ceilings-2026-10-05-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-101 |
+| `E-evand-exact-ceilings-2026-10-05-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-101 |
 
 ### `V-evand-lean`
 
@@ -622,16 +710,16 @@ Kernel-checks a value of s(n) from a checker-cover hypothesis: for s(13) = 4 the
 - Source: [`packing/resources/web/evand-square-packing-2026-09-26/square-packing/s12/lean`](../../packing/resources/web/evand-square-packing-2026-09-26/square-packing/s12/lean), [`packing/resources/web/evand-square-packing-2026-10-01/source/s12/lean`](../../packing/resources/web/evand-square-packing-2026-10-01/source/s12/lean), [`packing/resources/web/evand-square-packing-2026-10-03/square-packing/s12/lean`](../../packing/resources/web/evand-square-packing-2026-10-03/square-packing/s12/lean)
 - Versions run: revision `6aa82ba457e9` (the s(13) build here, Lean 4.33.1 with Mathlib's official cache); revision `08e8a5faa54c` (the k^2 - 3 reduction as retained, not built here); revision `2eb15455a6f1` (the k^2 - 4 reduction (ValidSplit9.lean), built here on 3 October 2026, Lean 4.33.1 with Mathlib's official cache)
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-k2m3-evand-family-report` | the source’s own run | producer’s code | T-064 |
-| `E-k2m3-evand-bentz-lean-build` | replayed here | producer’s code | T-064 |
-| `E-n032-evand-closed-cover-report` | the source’s own run | producer’s code | T-051 |
-| `E-n013-evand-casefree-cover-lean-kernel` | replayed here | producer’s code | T-006 |
-| `E-n021-evand-mixed-cover-report` | the source’s own run | producer’s code | T-052 |
-| `E-k2m4-evand-family-report` | the source’s own run | producer’s code | T-081 |
-| `E-k2m4-evand-lean-report` | the source’s own run | producer’s code | T-081 |
-| `E-k2m4-evand-bentz4-lean-build` | replayed here | producer’s code | T-081 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-k2m3-evand-family-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-064 |
+| `E-k2m3-evand-bentz-lean-build` | replayed here | reproduced with the producer’s code | not recorded | T-064 |
+| `E-n032-evand-closed-cover-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-051 |
+| `E-n013-evand-casefree-cover-lean-kernel` | replayed here | reproduced with the producer’s code | not recorded | T-006 |
+| `E-n021-evand-mixed-cover-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-052 |
+| `E-k2m4-evand-family-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-081 |
+| `E-k2m4-evand-lean-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-081 |
+| `E-k2m4-evand-bentz4-lean-build` | replayed here | reproduced with the producer’s code | not recorded | T-081 |
 
 ### `V-chelokot-lean`
 
@@ -643,49 +731,50 @@ Kernel-checks Records.NearSquare.squareMinusTwo_isMinimumSide, s(n^2 - 2) = n fo
 - Versions run: revision `753079eb37d8` (the build here, with Mathlib's official cache)
 - Note: The development is pinned by digest in the packet README and not retained; the replay clones it at the pinned commit, and the receipt records the build and the axioms.
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-chelokot-square-minus-two-lean` | replayed here | producer’s code | T-086 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-chelokot-square-minus-two-lean` | replayed here | reproduced with the producer’s code | not recorded | T-086 |
 
 ### `V-kleddamag-n11-verify`
 
-**verify.py, its Python checker and its JavaScript BigInt secondary checker** · Kleddamag · external · decides · Python, JavaScript · exact-algebraic
+**verify.py, its Python checker and its JavaScript BigInt secondary checker** · Overbeck · external · decides · Python, JavaScript · exact-algebraic
 
 Decides a weighted threshold certificate for n = 11 by two event-cell sweeps over every parent interval, each covering every interval and agreeing on every minimum.
 
 - Source: [`packing/resources/web/external-square-certificates-2026-09-22/kleddamag-11/verify.py`](../../packing/resources/web/external-square-certificates-2026-09-22/kleddamag-11/verify.py), [`packing/resources/web/wang-li-n11-2026-09-29/replay/kleddamag-verify-wang-li.py`](../../packing/resources/web/wang-li-n11-2026-09-29/replay/kleddamag-verify-wang-li.py)
 - Versions run: SHA-256 `aff03057c841…`, revision `6a733f339395` (v1.0.2); SHA-256 `fbd452d62481…` (the launcher adapted here in three lines to Wang and Li's certificate; of `kleddamag-verify-wang-li.py`)
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-n011-kleddamag-3875-source-replay` | replayed here | producer’s code | T-037 |
-| `E-n011-kleddamag-3875-report` | the source’s own run | producer’s code | T-037 |
-| `E-n011-wang-li-report` | the source’s own run | producer’s code | T-061 |
-| `E-n011-wang-li-source-replay` | replayed here | producer’s code | T-061 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n011-kleddamag-3875-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-037 |
+| `E-n011-kleddamag-3875-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-037 |
+| `E-n011-wang-li-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-061 |
+| `E-n011-wang-li-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-061 |
+| `E-n011-kleddamag-3875-esummins-replay-report` | reported by a third party, not replayed here | reproduced with the producer’s code | not recorded | T-037 |
 
 ### `V-kleddamag-n17-verify`
 
-**verify.py, its Python checker and its Node BigInt checker** · Kleddamag · external · decides · Python, JavaScript · exact-algebraic
+**verify.py, its Python checker and its Node BigInt checker** · Overbeck · external · decides · Python, JavaScript · exact-algebraic
 
 Decides an n = 17 certified-bound charge certificate by a Python sweep and a JavaScript BigInt sweep run together, each covering every interval and agreeing on every minimum and cell count.
 
 - Source: [`packing/resources/web/n17-kleddamag-certified-bound-2026-09-21/kleddamag-17-squares-certified-bound/verify.py`](../../packing/resources/web/n17-kleddamag-certified-bound-2026-09-21/kleddamag-17-squares-certified-bound/verify.py), [`packing/resources/web/n17-kleddamag-4640020-2026-09-26/kleddamag-17-squares-certified-bound/bounds/4.640020/verify.py`](../../packing/resources/web/n17-kleddamag-4640020-2026-09-26/kleddamag-17-squares-certified-bound/bounds/4.640020/verify.py), [`packing/resources/web/n17-kleddamag-466001-2026-09-27/kleddamag-17-squares-certified-bound/bounds/4.66001/verify.py`](../../packing/resources/web/n17-kleddamag-466001-2026-09-27/kleddamag-17-squares-certified-bound/bounds/4.66001/verify.py)
 - Versions run: SHA-256 `d620178d047a…` (v1.0.0, 461300/99853); SHA-256 `6a027666c393…` (4.640020; of `verify.py`); SHA-256 `2885bb142a31…` (4.66001; of `verify.py`); SHA-256 `c22091862df6…` (the Node BigInt checker of 4.66001, which Guzhou0806's R067 to R071 bundle byte for byte; of `verify_global_variable.js`)
-- Note: Guzhou0806's paired n = 17 launchers run Kleddamag's Node BigInt checker beside their own C++.
+- Note: Guzhou0806's paired n = 17 launchers run Overbeck's Node BigInt checker beside their own C++.
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-n017-kleddamag-461300-99853-report` | the source’s own run | producer’s code | T-038 |
-| `E-n017-kleddamag-461300-99853-source-replay` | replayed here | producer’s code | T-038 |
-| `E-n017-kleddamag-466001-report` | the source’s own run | producer’s code | T-041 |
-| `E-n017-kleddamag-466001-source-replay` | replayed here | producer’s code | T-041 |
-| `E-n017-guzhou-r068-report` | the source’s own run | producer’s code | T-043 |
-| `E-n017-guzhou-r068-source-replay` | replayed here | producer’s code | T-043 |
-| `E-n017-guzhou-r067-source-replay` | replayed here | producer’s code | T-042 |
-| `E-n017-guzhou-r071-report` | the source’s own run | producer’s code | T-093 |
-| `E-n017-guzhou-r071-source-replay` | replayed here | producer’s code | T-093 |
-| `E-n017-kleddamag-4640020-report` | the source’s own run | producer’s code | T-040 |
-| `E-n017-kleddamag-4640020-source-replay` | replayed here | producer’s code | T-040 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n017-kleddamag-461300-99853-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-038 |
+| `E-n017-kleddamag-461300-99853-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-038 |
+| `E-n017-kleddamag-466001-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-041 |
+| `E-n017-kleddamag-466001-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-041 |
+| `E-n017-guzhou-r068-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-043 |
+| `E-n017-guzhou-r068-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-043 |
+| `E-n017-guzhou-r067-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-042 |
+| `E-n017-guzhou-r071-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-093 |
+| `E-n017-guzhou-r071-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-093 |
+| `E-n017-kleddamag-4640020-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-040 |
+| `E-n017-kleddamag-4640020-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-040 |
 
 ### `V-wang-li-n11-verify`
 
@@ -696,10 +785,10 @@ The authors' full replay of their improved n = 11 certificate: a primary event-c
 - Source: [`packing/resources/web/wang-li-n11-2026-09-29/n11_wang_li_zenodo_release_2026-09-29_stage10_doi_23038546-1.zip`](../../packing/resources/web/wang-li-n11-2026-09-29/n11_wang_li_zenodo_release_2026-09-29_stage10_doi_23038546-1.zip)
 - Versions run: SHA-256 `80381e22ab35…` (the release archive, Zenodo 23038546 v1.0.0)
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-n011-wang-li-report` | the source’s own run | producer’s code | T-061 |
-| `E-n011-wang-li-source-replay` | replayed here | producer’s code | T-061 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n011-wang-li-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-061 |
+| `E-n011-wang-li-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-061 |
 
 ### `V-guzhou-r012-verify-py`
 
@@ -710,9 +799,9 @@ The source's pure-Python exact checker of its R012 weighted catalogue certificat
 - Source: [`packing/resources/web/n17-weighted-certificates-2026-09-20/guzhou0806-n17-square-packing/certificates/R012/verify.py`](../../packing/resources/web/n17-weighted-certificates-2026-09-20/guzhou0806-n17-square-packing/certificates/R012/verify.py)
 - Versions run: SHA-256 `c85c9d8f90c6…`, revision `931a0dfd6430`
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-n017-guzhou-r012-source-replay` | replayed here | producer’s code | T-032 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n017-guzhou-r012-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-032 |
 
 ### `V-guzhou-r052-verify-py`
 
@@ -723,27 +812,27 @@ The source's checkers of its R052 charge certificate, a Python sweep and a BigIn
 - Source: [`packing/resources/web/n17-guzhou-r052-2026-09-25/n17-square-packing/certificates/R052/verify.py`](../../packing/resources/web/n17-guzhou-r052-2026-09-25/n17-square-packing/certificates/R052/verify.py)
 - Versions run: SHA-256 `1ed3da8237a6…`
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-n017-guzhou-r052-report` | the source’s own run | producer’s code | T-039 |
-| `E-n017-guzhou-r052-source-replay` | replayed here | producer’s code | T-039 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n017-guzhou-r052-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-039 |
+| `E-n017-guzhou-r052-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-039 |
 
 ### `V-guzhou-n17-verify-cpp`
 
 **verify.cpp, run by the paired launcher replay.js** · Guzhou0806 · external · decides · C++, JavaScript · exact-algebraic
 
-The source's C++ exclusion checker, run interval by interval beside Kleddamag's Node BigInt checker by the paired launcher, which requires both to pass.
+The source's C++ exclusion checker, run interval by interval beside Overbeck's Node BigInt checker by the paired launcher, which requires both to pass.
 
 - Source: [`packing/resources/web/n17-guzhou-r068-2026-09-28/n17-square-packing/certificates/R068-C010/upstream/cpp/verify.cpp`](../../packing/resources/web/n17-guzhou-r068-2026-09-28/n17-square-packing/certificates/R068-C010/upstream/cpp/verify.cpp), [`packing/resources/web/n17-guzhou-r068-2026-09-28/n17-square-packing/certificates/R067-4.66018/src/verify.cpp`](../../packing/resources/web/n17-guzhou-r068-2026-09-28/n17-square-packing/certificates/R067-4.66018/src/verify.cpp), [`packing/resources/web/n17-guzhou-r071-2026-09-30/n17-square-packing/certificates/R071-C029/run_public.js`](../../packing/resources/web/n17-guzhou-r071-2026-09-30/n17-square-packing/certificates/R071-C029/run_public.js)
 - Versions run: SHA-256 `3ba09554cef0…`, revision `815b1626` (identical bytes for R067 and R068); SHA-256 `3ba09554cef0…`, revision `8c11f6962506` (R071's project/base/upstream/cpp/verify.cpp, pinned in the R071 packet as byte-identical to R068's); SHA-256 `1125e5969fe0…` (the paired launcher replay.js, the same bytes in R067 to R071; of `replay.js`); SHA-256 `45f6ef8e5b5e…`, revision `8c11f6962506` (R071's public launcher, which checks the package, builds verify.cpp and runs replay.js at two partitions; of `run_public.js`)
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-n017-guzhou-r068-report` | the source’s own run | producer’s code | T-043 |
-| `E-n017-guzhou-r068-source-replay` | replayed here | producer’s code | T-043 |
-| `E-n017-guzhou-r067-source-replay` | replayed here | producer’s code | T-042 |
-| `E-n017-guzhou-r071-report` | the source’s own run | producer’s code | T-093 |
-| `E-n017-guzhou-r071-source-replay` | replayed here | producer’s code | T-093 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n017-guzhou-r068-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-043 |
+| `E-n017-guzhou-r068-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-043 |
+| `E-n017-guzhou-r067-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-042 |
+| `E-n017-guzhou-r071-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-093 |
+| `E-n017-guzhou-r071-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-093 |
 
 ### `V-guzhou-n40-finite-py`
 
@@ -755,9 +844,9 @@ The release's own verification of s(40) > 335427/50000: run.py derives the 401-d
 - Versions run: SHA-256 `6046849f25be…`, revision `e5abeb4d078a` (finite.py); SHA-256 `4efa0d97dfb0…`, revision `e5abeb4d078a` (run.py; of `run.py`)
 - Note: Read in full by the 10 October 2026 review of the release (docs/project/reviews/review-2026-10-10-guzhou-n40-clipped-corner-bound.md) and not run here. Its nodal step is this repository's own sqverify-fast, vendored byte for byte from ef79288a4 (crate source digest d97758bb...), so a replay here with V-sqverify-fast reproduces the release's nodal verification with the producer's code; the finite steps were decided again here by V-audit-clipped-corner-transfer, written without opening finite.py.
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-n040-guzhou-clipped-corner-report` | the source’s own run | producer’s code | T-133 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n040-guzhou-clipped-corner-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-133 |
 
 ### `V-guzhou-n40-continuous-pose`
 
@@ -766,13 +855,15 @@ The release's own verification of s(40) > 335427/50000: run.py derives the 401-d
 Decides, for one closed slab [PL/DEN, PH/DEN] of the half-angle tangent t = tan(theta/2), that every square of side B in [0, L]^2 at every angle of the slab and every legal centre captures at least TN/TD of a rectangle density, by depth-first interval branch and bound over the normalised centre and the angle together: outward-rounded binary64 intervals, whole-box containment and exclusion by projection on the square's normals, a concave-section trapezoid bound on each rectangle's clipped area at the box's centre, and translation-derivative bounds that extend it over the box. It exits 0 with "verified" only when the stack empties, and 3 with "unresolved" at the node budget or a half-width below 2^-40.
 
 - Source: [`packing/resources/web/guzhou-n40-continuous-pose-2026-10-10/source/verifier/continuous_pose.cpp`](../../packing/resources/web/guzhou-n40-continuous-pose-2026-10-10/source/verifier/continuous_pose.cpp)
-- Versions run: SHA-256 `da06206b8e83…`, revision `71c97d07553d` (Built here with g++ 13.3.0 -O3 -std=c++17 -fno-fast-math -ffp-contract=off from the tree's directory into 69bc9e64..., the CI run's binary.)
+- Versions run: SHA-256 `da06206b8e83…`, revision `71c97d07553d` (Built here with g++ 13.3.0 -O3 -std=c++17 -fno-fast-math -ffp-contract=off from the tree's directory into 69bc9e64..., the CI run's binary.); SHA-256 `da06206b8e83…`, revision `6a65957e6c5c` (The same bytes at the 11 October pin; built here with g++ 13.3.0 into 69bc9e64..., the CI run's binary, and replayed on all 43 slabs for s(40) > 3359/500.; of `continuous_pose.cpp`)
 - Note: Read line by line by the 10 October 2026 review of the release (docs/project/reviews/review-2026-10-10-guzhou-n40-continuous-pose-bound.md), which re-derived its lemmas; replayed here in full on all 43 slabs. Its source says its translation derivatives follow Tokoharu and its concave sections the Squares Project, and that its lineage is not wholly independent; it shares no code with sqverify-fast.
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-n040-guzhou-continuous-pose-report` | the source’s own run | producer’s code | T-145 |
-| `E-n040-guzhou-continuous-pose-kernel-replay` | replayed here | producer’s code | T-145 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n040-guzhou-continuous-pose-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-145 |
+| `E-n040-guzhou-continuous-pose-kernel-replay` | replayed here | reproduced with the producer’s code | not recorded | T-145 |
+| `E-n040-guzhou-new-supports-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-157 |
+| `E-n040-guzhou-new-supports-kernel-replay` | replayed here | reproduced with the producer’s code | full, 44 of 44: the near-axis statement by the release's axis kernel and the continuous cover of all 43 slabs of t in [10^-6, 83/200] by its continuous-pose kernel, both rebuilt from the retained source and run on inputs regenerated here | T-157 |
 
 ### `V-guzhou-n40-axis-integer-grid`
 
@@ -781,13 +872,16 @@ Decides, for one closed slab [PL/DEN, PH/DEN] of the half-angle tangent t = tan(
 Decides that every horizontal square of side A in the northeast quadrant of [0, l]^2 captures at least TN/TD of an integer rectangle density, by writing each rectangle as sixteen signed hinge products, accumulating coefficient prefix sums on the grid of breakpoints and evaluating every vertex in signed 128-bit integers within a guarded bound; it reconciles the minimiser by a direct sum and exits 0 with AXIS_COVERAGE_PROVED or 2 with AXIS_TEST_REFUSED.
 
 - Source: [`packing/resources/web/guzhou-n40-continuous-pose-2026-10-10/source/verifier/axis_integer_grid.cpp`](../../packing/resources/web/guzhou-n40-continuous-pose-2026-10-10/source/verifier/axis_integer_grid.cpp)
-- Versions run: SHA-256 `f5bc3f60065a…`, revision `71c97d07553d` (Built here with g++ 13.3.0 -O2 -std=c++17 into cccecb9a..., the CI run's binary.)
+- Versions run: SHA-256 `f5bc3f60065a…`, revision `71c97d07553d` (Built here with g++ 13.3.0 -O2 -std=c++17 into cccecb9a..., the CI run's binary.); SHA-256 `f5bc3f60065a…`, revision `6a65957e6c5c` (The same bytes at the 11 October pin, built with g++ 13.3.0 -O3 -std=c++17 -fno-fast-math -ffp-contract=off into 19288b2f..., the CI run's binary, for the axis certificate at side 249329659/250000000.; of `axis_integer_grid.cpp`)
 - Note: Read by the 10 October 2026 review, which re-derived the bilinear-cell lemma, the hinge expansion and the int128 bounds; replayed here. Its minimum was evaluated again at the minimiser by devtools.audit_continuous_pose, and the axis statement decided again on the original density by sqverify-fast's axis-vertex sweep.
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-n040-guzhou-continuous-pose-report` | the source’s own run | producer’s code | T-145 |
-| `E-n040-guzhou-continuous-pose-kernel-replay` | replayed here | producer’s code | T-145 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n040-guzhou-continuous-pose-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-145 |
+| `E-n040-guzhou-continuous-pose-kernel-replay` | replayed here | reproduced with the producer’s code | not recorded | T-145 |
+| `E-n040-guzhou-new-supports-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-157 |
+| `E-n040-guzhou-new-supports-kernel-replay` | replayed here | reproduced with the producer’s code | full, 44 of 44: the near-axis statement by the release's axis kernel and the continuous cover of all 43 slabs of t in [10^-6, 83/200] by its continuous-pose kernel, both rebuilt from the retained source and run on inputs regenerated here | T-157 |
+| `E-n040-guzhou-new-supports-crate-axis` | audited here | independently re-implemented after reading the producer’s code | full: the near-axis statement at side 249329659/250000000, decided by sqverify-fast's exact axis-vertex sweep on the density itself over all 10,929,636 vertices, with the 401-direction necessary condition at side 3350/3359 over all 401 directions | T-157 |
 
 ### `V-burns-n17-verify-py`
 
@@ -798,9 +892,9 @@ Burns's exact-rational verifier of his 268-atom n = 17 certificate at 181 direct
 - Source: [`packing/resources/web/n17-lower-bounds-2026/burns-verify-n17-lower-bound-4_4811.py`](../../packing/resources/web/n17-lower-bounds-2026/burns-verify-n17-lower-bound-4_4811.py)
 - Versions run: SHA-256 `6d83c28634d4…`
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-n017-burns-source-replay` | replayed here | producer’s code | - |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n017-burns-source-replay` | replayed here | reproduced with the producer’s code | not recorded | - |
 
 ### `V-massaccesi-n17-verify-py`
 
@@ -811,9 +905,9 @@ Burns's verifier as modified by Massaccesi, deciding the 168-atom certificate at
 - Source: [`packing/resources/web/n17-lower-bounds-2026/massaccesi-verify-n17-lower-bound-4_5058.py`](../../packing/resources/web/n17-lower-bounds-2026/massaccesi-verify-n17-lower-bound-4_5058.py)
 - Versions run: SHA-256 `04531a54da9a…`
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-n017-massaccesi-source-replay` | replayed here | producer’s code | T-015, T-016 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n017-massaccesi-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-015, T-016 |
 
 ### `V-mira-17squares-point-checker`
 
@@ -824,9 +918,9 @@ Mira's pure-Python integer checker of a point-and-triangle pose-space subdivisio
 - Source: [`packing/resources/web/n17-github-certificates-2026/mira-17squares/certificates/lower_bound_4p468292/verify_certificate.py`](../../packing/resources/web/n17-github-certificates-2026/mira-17squares/certificates/lower_bound_4p468292/verify_certificate.py)
 - Versions run: SHA-256 `bfd186864c77…`, revision `0872d3ac9a95`
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-n017-mira-point-certificate-replay` | replayed here | producer’s code | - |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n017-mira-point-certificate-replay` | replayed here | reproduced with the producer’s code | not recorded | - |
 
 ### `V-stanislavfort-17squares-point-checker`
 
@@ -837,9 +931,9 @@ Fort's pure-Python integer checker of a point-only pose-space subdivision certif
 - Source: [`packing/resources/web/n17-github-certificates-2026/stanislavfort-17squares/certificates/lower_bound_4p456575/verify_certificate.py`](../../packing/resources/web/n17-github-certificates-2026/stanislavfort-17squares/certificates/lower_bound_4p456575/verify_certificate.py)
 - Versions run: SHA-256 `750da425ee20…`, revision `853f7ee61e7d`
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-n017-fort-point-certificate-replay` | replayed here | producer’s code | - |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n017-fort-point-certificate-replay` | replayed here | reproduced with the producer’s code | not recorded | - |
 
 ### `V-queuingtheory-n11-verify`
 
@@ -850,9 +944,9 @@ The publisher's advertised replay of its n = 11 optimality proof, binding every 
 - Source: [`packing/resources/web/n11-optimality-2026-09-29/source/VERIFY.py`](../../packing/resources/web/n11-optimality-2026-09-29/source/VERIFY.py)
 - Versions run: SHA-256 `14ce28b3cbeb…`, revision `f9e0de713a09`
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-n011-global-optimality-report` | the source’s own run | no code | T-060 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n011-global-optimality-report` | the source’s own run | no code | not recorded | T-060 |
 
 ### `V-queuingtheory-n11-lean`
 
@@ -864,25 +958,25 @@ Proves ElevenSquare.optimality, s(11) = T, in Lean 4.34.1 with Mathlib d13f23b7:
 - Versions run: revision `cdc746ed907d` (the integrated commit; its Lean trees and pins are 11SquaresEvolving 1bf942a7's, which passed run 37414883750 at the source; not built here in full)
 - Note: Only the statement files, the 18-module closure of ElevenSquare.Foundations, the three modules at the top of the lower bound's assembly and the runner are retained; the other modules, 7,920 in all, are pinned by the commit and by the SHA-256 of each in the run's final audit.
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-n011-lean-formalization-report` | the source’s own run | producer’s code | T-060 |
-| `E-n011-lean-statement-closure-build` | replayed here | producer’s code | - |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n011-lean-formalization-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-060 |
+| `E-n011-lean-statement-closure-build` | replayed here | reproduced with the producer’s code | not recorded | - |
 
 ### `V-wand125-tools`
 
 **The wand125 tools repository's transfer/l_cap.py and general_pose_tree** · wand125 · external · decides · Python, Rust · exact-algebraic
 
-The source's ceiling transfer for the fixed B = 9977/10000 and its general pose tree, which reports exact per-row minima for Kleddamag's n = 11 certificate.
+The source's ceiling transfer for the fixed B = 9977/10000 and its general pose tree, which reports exact per-row minima for Overbeck's n = 11 certificate.
 
 - Source: [`packing/resources/web/wand125-tools-2026-09-29/upstream.tar.gz`](../../packing/resources/web/wand125-tools-2026-09-29/upstream.tar.gz)
 - Versions run: SHA-256 `6223f8c0ba26…` (the retained upstream tarball)
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-wand125-tools-ceiling-report` | a published proof | no code | T-058 |
-| `E-wand125-tools-n11-row-report` | the source’s own run | independent | T-059 |
-| `E-wand125-tools-n11-row-replay` | replayed here | producer’s code | T-059 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-wand125-tools-ceiling-report` | a published proof | no code | not recorded | T-058 |
+| `E-wand125-tools-n11-row-report` | the source’s own run | independently re-implemented | not recorded | T-059 |
+| `E-wand125-tools-n11-row-replay` | replayed here | reproduced with the producer’s code | not recorded | T-059 |
 
 ### `V-squarepacker-indep-check-cpp`
 
@@ -893,12 +987,12 @@ The source's own checker of its scaled n = 12 point certificate, an angle-net sw
 - Source: [`packing/resources/web/squarepacker-s12-lower-bound-2026-10-02/s12-lower-bound/tools/indep_check.cpp`](../../packing/resources/web/squarepacker-s12-lower-bound-2026-10-02/s12-lower-bound/tools/indep_check.cpp)
 - Versions run: SHA-256 `21527e8d8621…`
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-n012-squarepacker-31360-7901-report` | the source’s own run | producer’s code | T-078 |
-| `E-n012-squarepacker-31360-7901-source-replay` | replayed here | producer’s code | T-078 |
-| `E-n012-squarepacker-7943-2000-report` | the source’s own run | producer’s code | T-095 |
-| `E-n012-squarepacker-7943-2000-source-replay` | replayed here | producer’s code | T-095 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n012-squarepacker-31360-7901-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-078 |
+| `E-n012-squarepacker-31360-7901-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-078 |
+| `E-n012-squarepacker-7943-2000-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-095 |
+| `E-n012-squarepacker-7943-2000-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-095 |
 
 ### `V-schadt-n29-check-py`
 
@@ -909,9 +1003,9 @@ The source's checker of its n = 29 packing, which accepts an epsilon overlap and
 - Source: [`packing/resources/web/schadt-s29-2025/check.py`](../../packing/resources/web/schadt-s29-2025/check.py)
 - Versions run: SHA-256 `7d77d0e8ac4c…`
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-n029-schadt-report` | the source’s own run | producer’s code | - |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n029-schadt-report` | the source’s own run | reproduced with the producer’s code | not recorded | - |
 
 ### `V-anabologyco-n17-checker`
 
@@ -922,9 +1016,68 @@ The source's checker of its 560-atom weighted fractional certificate for n = 17.
 - Source: [`packing/resources/web/n17-github-certificates-2026/anabologyco-square17-lower-bound/scripts/check_certificate.py`](../../packing/resources/web/n17-github-certificates-2026/anabologyco-square17-lower-bound/scripts/check_certificate.py)
 - Versions run: SHA-256 `6d523f7bfae0…`, revision `396da6f7c112`
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-n017-anabologyco-weighted-certificate` | the source’s own run | no code | - |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n017-anabologyco-weighted-certificate` | the source’s own run | no code | not recorded | - |
+
+### `V-overbeck-n17-check-py`
+
+**check.py, the edition's one checking command, with the producers' runner and the 31 public check scripts it runs, check_equivalence.py, check_comparison_records.py and the independent reader's own_endpoint_enclosure.py** · Overbeck · external · decides · Python · exact-algebraic
+
+Decides the structural claim of a candidate n = 17 optimality edition: every file, large file and pin has its digest, the 31 cheap public checks reproduce their recorded outcomes, every stored capture row's decision follows from its recorded numbers, and the stored tree outputs pass. It recomputes no capture row and no tree certificate, so it decides no bound.
+
+- Source: [`packing/resources/web/kleddamag-n17-candidate-2026-10-12/acquisition/upstream-subtree.sha256`](../../packing/resources/web/kleddamag-n17-candidate-2026-10-12/acquisition/upstream-subtree.sha256)
+- Versions run: SHA-256 `c17240b51898…`, revision `653b9589d0f8` (check.py of the verification edition, version 1 (candidate), as the release notes of large-files-v1 give it)
+- Note: Pinned only and never retained: the edition grants no licence for reuse, so the packet keeps the digests of check.py and of every file it runs (MANIFEST.sha256) and no upstream byte. Its levels 0 to 2 do not run Node.js. The source says AI systems (Codex, Claude) wrote it under Marc Leonard Overbeck's direction.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n017-overbeck-optimality-candidate-report` | the source’s own run | no code | not recorded | T-153 |
+| `E-n017-overbeck-candidate-check-py-replay` | replayed here | reproduced with the producer’s code | not recorded | - |
+
+### `V-overbeck-n17-capture-checkers`
+
+**recompute_slice.py, which recomputes chosen rows of one capture statement with the producers' Python checker exact_classes.py (with exact_general.py, exact_restricted.py, integer_sweep.py and boolean_rule.py) and their Node checker verify_classes_wb.js, and compares both with the stored rows** · Overbeck · external · decides · Python, JavaScript · exact-algebraic
+
+Decides, for the rows it is given of one of the 98 capture statements of the candidate n = 17 proof, the per-level minimum charge of every cell in both checkers, and that both agree with each other and with the stored row.
+
+- Source: [`packing/resources/web/kleddamag-n17-candidate-2026-10-12/acquisition/upstream-subtree.sha256`](../../packing/resources/web/kleddamag-n17-candidate-2026-10-12/acquisition/upstream-subtree.sha256)
+- Versions run: SHA-256 `d6d887911d48…`, revision `653b9589d0f8` (recompute_slice.py); SHA-256 `802dc62aa4f2…`, revision `653b9589d0f8` (exact_classes.py, the Python capture checker); SHA-256 `7f6b234768f8…`, revision `653b9589d0f8` (verify_classes_wb.js, the Node capture checker)
+- Note: Pinned only and never retained, for the reason V-overbeck-n17-check-py gives; the packet's manifest pins every source file named above. The source says both checkers were written by sessions of one AI system from one specification.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n017-overbeck-optimality-candidate-report` | the source’s own run | no code | not recorded | T-153 |
+| `E-n017-overbeck-capture-sample-replay` | replayed here | reproduced with the producer’s code | sample, 34 of 1,728,000: capture rows per checker, no statement whole | - |
+
+### `V-overbeck-n17-tree-checkers`
+
+**wxcheck_v30.py and wxcheck2_v30.js, the two frozen v3.0 checkers of SPEC_v3.0.md, with the post-check h_report30.py** · Overbeck · external · decides · Python, JavaScript · exact-algebraic
+
+Decides a tree certificate of the candidate n = 17 proof against SPEC_v3.0.md in both checkers; the post-check accepts it only when the root node equals the named region and an EMPTY conclusion has no terminal leaf.
+
+- Source: [`packing/resources/web/kleddamag-n17-candidate-2026-10-12/acquisition/upstream-subtree.sha256`](../../packing/resources/web/kleddamag-n17-candidate-2026-10-12/acquisition/upstream-subtree.sha256)
+- Versions run: SHA-256 `cf8db52bfa1c…`, revision `653b9589d0f8` (wxcheck_v30.py); SHA-256 `97210adf74a3…`, revision `653b9589d0f8` (wxcheck2_v30.js); SHA-256 `0314aa1f8f74…`, revision `653b9589d0f8` (h_report30.py)
+- Note: Pinned only and never retained, for the reason V-overbeck-n17-check-py gives. The source says both checkers were written by sessions of one AI system from one specification.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n017-overbeck-optimality-candidate-report` | the source’s own run | no code | not recorded | T-153 |
+| `E-n017-overbeck-tree-sample-replay` | replayed here | reproduced with the producer’s code | sample, 3 of 13: tree certificates | - |
+
+### `V-fitzharding-n17-lean`
+
+**The sq17-lean Lean 4 development (Sq17Lean), built by lake at its pinned toolchain, with scripts/unpack.py authenticating and extracting the three release archives against manifest.json and scripts/reproduce.py compiling the five checker modules to native libraries, building the theorem's import closure and printing its axioms** · Fitzharding · external · decides · Lean 4, Python · proof-assistant-checked
+
+Proves Sq17.square17_optimality, s(17) = L, in Lean 4.34.1 with Mathlib v4.34.1 at d13f23b7: the geometry, the endpoint root, the checkers' soundness and the assembly kernel-checked, and 13,343 finite certificate facts decided by native_decide through five checker modules compiled to native code. The driver accepts a build only on REPRODUCTION_ACCEPTED Sq17Lean.Square17Optimality with the axiom report.
+
+- Source: [`packing/resources/web/fitzharding-n17-lean-2026-10-13/sq17-lean/Sq17Lean/Square17Optimality.lean`](../../packing/resources/web/fitzharding-n17-lean-2026-10-13/sq17-lean/Sq17Lean/Square17Optimality.lean), [`packing/resources/web/fitzharding-n17-lean-2026-10-13/sq17-lean/scripts/reproduce.py`](../../packing/resources/web/fitzharding-n17-lean-2026-10-13/sq17-lean/scripts/reproduce.py), [`packing/resources/web/fitzharding-n17-lean-2026-10-13/sq17-lean/scripts/unpack.py`](../../packing/resources/web/fitzharding-n17-lean-2026-10-13/sq17-lean/scripts/unpack.py)
+- Versions run: revision `e6ee548090dc` (the pinned head, whose proof files are release v1.0.0's at 0a7167efa8dcae7fa73855890630fb7e2de550ed (the two later commits change only CITATION.cff), with the three release archives pinned by SHA-256 in the packet; the source reports a clean build of it, not built here)
+- Note: Only the theorem file, the nine files whose definitions its statements use, the two control modules, the two data files the packet's comparisons read (ExactCellCoverData.lean and RepresentativeCaseData.lean), the build pins, manifest.json, the two scripts and verification/ are retained; the other 1,201 tree modules and the 3,738 archived modules are pinned by the commit, by manifest.json's SHA-256 of each, and by the archives' SHA-256. The README says the project "was developed with substantial assistance from Claude and Codex".
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n017-fitzharding-lean-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-154 |
 
 ### `V-check-basic-bounds`
 
@@ -935,11 +1088,11 @@ Derives and checks the elementary bounds exactly: the grid upper bound, the area
 - Source: [`packing/devtools/check_basic_bounds.py`](../../packing/devtools/check_basic_bounds.py)
 - Versions run: this repository's commits, which Git holds
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-basic-grid-upper` | replayed here | independent | T-008, T-051, T-052, T-053, T-054, T-055, T-062, T-063, T-064, T-066, T-067, T-081, T-084, T-086 |
-| `E-basic-area-lower` | replayed here | independent | - |
-| `E-n012-monotonicity-lower` | replayed here | independent | - |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-basic-grid-upper` | replayed here | independently re-implemented | not recorded | T-008, T-051, T-052, T-053, T-054, T-055, T-062, T-063, T-064, T-066, T-067, T-081, T-084, T-086, T-184, T-191 |
+| `E-basic-area-lower` | replayed here | independently re-implemented | not recorded | - |
+| `E-n012-monotonicity-lower` | replayed here | independently re-implemented | not recorded | - |
 
 ### `V-optimal-moduli`
 
@@ -950,9 +1103,9 @@ Replays the exact optimal moduli for n = 2 to 4 and the side-2 lower bound.
 - Source: [`packing/cases/small_n/optimal_moduli.py`](../../packing/cases/small_n/optimal_moduli.py)
 - Versions run: this repository's commits, which Git holds
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-side2-center-lower` | replayed here | producer’s code | - |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-side2-center-lower` | replayed here | reproduced with the producer’s code | not recorded | - |
 
 ### `V-sqpack-verify`
 
@@ -964,43 +1117,79 @@ Decides a packing pair by pair and wall by wall: by exact sign in a number field
 - Versions run: this repository's commits, which Git holds
 - Note: The constructions it decides for others were published as figures and coordinates without verification code, so it was written from the geometry.
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-n005-gobel-upper` | replayed here | independent | - |
-| `E-n010-gobel-upper` | replayed here | independent | - |
-| `E-n040-gobel-upper` | replayed here | independent | - |
-| `E-gobel-family-upper` | replayed here | independent | - |
-| `E-gobel-strip-upper` | replayed here | independent | - |
-| `E-lifted-q2-upper` | replayed here | independent | - |
-| `E-lifted-q7-upper` | replayed here | independent | - |
-| `E-gobel-offcentre-upper` | replayed here | independent | - |
-| `E-n082-gobel-l-upper` | replayed here | independent | - |
-| `E-n011-trump-upper` | replayed here | independent | T-011 |
-| `E-n029-schadt-numerical` | replayed here | independent | - |
-| `E-n029-interval-certified-upper` | replayed here | independent | T-009 |
-| `E-evand-exact-optima-2026-10-05-exact-replay` | replayed here | independent | T-098 |
-| `E-evand-exact-ceilings-2026-10-05-exact-replay` | replayed here | independent | T-101 |
-| `E-squish-ten-packings-2026-10-07-exact-replay` | replayed here | independent | T-113 |
-| `E-squish-n153-2026-10-07-exact-replay` | replayed here | independent | T-114 |
-| `E-squish-update-2026-10-07-exact-replay` | replayed here | independent | T-115 |
-| `E-squish-second-update-2026-10-07-exact-replay` | replayed here | independent | T-116 |
-| `E-evand-399-exact-feasibility` | audited here | independent | T-119 |
-| `E-rehwaldt-couzo-refinements-2026-10-07-exact-replay` | replayed here | independent | T-117 |
-| `E-ryxu-432-rational-feasibility` | replayed here | independent | T-125 |
-| `E-ryxu-432-radical-n51-feasibility` | replayed here | independent | T-126 |
-| `E-gupta-438-exact-feasibility` | replayed here | independent | T-127 |
-| `E-couzo-451-exact-feasibility` | replayed here | independent | T-128 |
-| `E-couzo-460-followup-exact-feasibility` | replayed here | independent | T-130 |
-| `E-evand-465-record-hunt-exact-feasibility` | replayed here | independent | T-128, T-131 |
-| `E-couzo-476-exact-feasibility` | replayed here | independent | T-134 |
-| `E-fang-484-exact-feasibility` | replayed here | independent | T-135 |
-| `E-squish-481-exact-feasibility` | replayed here | independent | T-136 |
-| `E-deleeuw-483-exact-feasibility` | replayed here | independent | T-137 |
-| `E-mishapolk-470-exact-feasibility` | replayed here | independent | T-138 |
-| `E-evand-trio126-exact-feasibility` | replayed here | independent | T-139 |
-| `E-couzo-488-exact-feasibility` | replayed here | independent | T-140 |
-| `E-evand-489-exact-feasibility` | replayed here | independent | T-141 |
-| `E-evand-regularized-exact-feasibility` | replayed here | independent | T-146 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n005-gobel-upper` | replayed here | independently re-implemented | not recorded | - |
+| `E-n010-gobel-upper` | replayed here | independently re-implemented | not recorded | - |
+| `E-n040-gobel-upper` | replayed here | independently re-implemented | not recorded | - |
+| `E-gobel-family-upper` | replayed here | independently re-implemented | not recorded | - |
+| `E-gobel-strip-upper` | replayed here | independently re-implemented | not recorded | - |
+| `E-lifted-q2-upper` | replayed here | independently re-implemented | not recorded | - |
+| `E-lifted-q7-upper` | replayed here | independently re-implemented | not recorded | - |
+| `E-gobel-offcentre-upper` | replayed here | independently re-implemented | not recorded | - |
+| `E-n082-gobel-l-upper` | replayed here | independently re-implemented | not recorded | - |
+| `E-n011-trump-upper` | replayed here | independently re-implemented | not recorded | T-011 |
+| `E-n029-schadt-numerical` | replayed here | independently re-implemented | not recorded | - |
+| `E-n029-interval-certified-upper` | replayed here | independently re-implemented | not recorded | T-009 |
+| `E-evand-exact-optima-2026-10-05-exact-replay` | replayed here | independently re-implemented | not recorded | T-098 |
+| `E-evand-exact-ceilings-2026-10-05-exact-replay` | replayed here | independently re-implemented | not recorded | T-101 |
+| `E-squish-ten-packings-2026-10-07-exact-replay` | replayed here | independently re-implemented | not recorded | T-113 |
+| `E-squish-n153-2026-10-07-exact-replay` | replayed here | independently re-implemented | not recorded | T-114 |
+| `E-squish-update-2026-10-07-exact-replay` | replayed here | independently re-implemented | not recorded | T-115 |
+| `E-squish-second-update-2026-10-07-exact-replay` | replayed here | independently re-implemented | not recorded | T-116 |
+| `E-evand-399-exact-feasibility` | audited here | independently re-implemented | not recorded | T-119 |
+| `E-rehwaldt-couzo-refinements-2026-10-07-exact-replay` | replayed here | independently re-implemented | not recorded | T-117 |
+| `E-ryxu-432-rational-feasibility` | replayed here | independently re-implemented | not recorded | T-125 |
+| `E-ryxu-432-radical-n51-feasibility` | replayed here | independently re-implemented | not recorded | T-126 |
+| `E-gupta-438-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-127 |
+| `E-couzo-451-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-128 |
+| `E-couzo-460-followup-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-130 |
+| `E-evand-465-record-hunt-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-128, T-131 |
+| `E-couzo-476-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-134 |
+| `E-fang-484-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-135 |
+| `E-squish-481-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-136 |
+| `E-deleeuw-483-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-137 |
+| `E-mishapolk-470-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-138 |
+| `E-evand-trio126-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-139 |
+| `E-couzo-488-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-140 |
+| `E-evand-489-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-141 |
+| `E-evand-regularized-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-146 |
+| `E-pingyou-503-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-147 |
+| `E-pingyou-504-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-148 |
+| `E-ostashev-501-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-149 |
+| `E-barnett-505-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-150 |
+| `E-squish-500-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-151 |
+| `E-couzo-506-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-152 |
+| `E-regularized-bounds-2026-10-12-exact-decision` | replayed here | reproduced with the producer’s code | full, 59 of 59: retained rational packing views, every wall and every pair decided by both maintained checkers: 1,051,241 pair decisions per checker, with the 177 negative-control decisions on the 59 views retained separately | T-155, T-156 |
+| `E-regularized-bounds-2026-10-13-grid-slack-exact-decision` | replayed here | reproduced with the producer’s code | full, 1 of 1: the retained rational packing view at n = 290, every wall and all 41,905 pairs decided by both maintained checkers; the three negative-control decisions on two distinct mutants are retained separately | T-156 |
+| `E-ostashev-528-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 3 of 3: the three complete certificates at n = 175, 232 and 264, every wall and every pair decided by both maintained routes and again by the third route; the six kernel controls and the third route's controls are retained separately | T-158 |
+| `E-calle-529-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 1 of 1: the certificate derived here from Rio Calle's layout of 102 squares, every wall and every pair decided by both maintained routes and again by the third route, which also derived it again from the layout at the pin | T-159 |
+| `E-evand-552-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 1 of 1: the complete certificate at n = 154, every wall and every pair decided by both maintained routes and again by the third route; the two kernel controls and the third route's controls are retained separately | T-160 |
+| `E-couzo-561-exact-feasibility` | replayed here | independently re-implemented | full, 4 of 4: the four certificates at n = 156, 176, 237, 271 that T-161 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-161 |
+| `E-ostashev-562-exact-feasibility` | replayed here | independently re-implemented | full, 3 of 3: the three certificates at n = 129, 204, 303 that T-162 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-162 |
+| `E-pingyou-564-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 302 that T-164 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-164 |
+| `E-couzo-586-exact-feasibility` | replayed here | independently re-implemented | full, 4 of 4: the four certificates at n = 154, 176, 211 and 241 that T-165 and T-182 cite, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-165, T-182 |
+| `E-couzo-586-n302-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 302 that T-181 cites, issue 583's certificate as issue 586's packet retains it byte for byte, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-181 |
+| `E-pingyou-504-refinement-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 153 that T-166 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-166 |
+| `E-pingyou-503-refinement-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 207 that T-167 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-167 |
+| `E-pingyou-566-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 146 that T-168 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-168 |
+| `E-pingyou-567-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 261 that T-169 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-169 |
+| `E-pingyou-568-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 105 that T-170 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-170 |
+| `E-pingyou-569-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 272 that T-171 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-171 |
+| `E-couzo-583-exact-feasibility` | replayed here | independently re-implemented | full, 3 of 3: the three certificates at n = 154, 211, 241 that T-172 and T-181 cite, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-172, T-181 |
+| `E-mishapolk-573-exact-feasibility` | replayed here | independently re-implemented | full, 2 of 2: both certificates at n = 153, 207 that T-173 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-173 |
+| `E-pingyou-574-exact-feasibility` | replayed here | independently re-implemented | full, 64 of 64: the 64 rational certificates the entry cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-174 |
+| `E-pingyou-574-algebraic-feasibility` | replayed here | independently re-implemented | full, 4 of 4: the four algebraic certificates at n = 70, 153, 207 and 302, every unit-square identity, wall and pair decided over the witness's field on the one route, with its two controls each | T-174 |
+| `E-ostashev-575-exact-feasibility` | replayed here | independently re-implemented | full, 3 of 3: the three certificates at n = 211, 241, 304 that T-175 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-175 |
+| `E-fang-excess-theorem-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 6 of 6: the six retained inventory certificates at 211, 241, 273, 307, 308 and 932, every wall and every pair decided by both maintained routes; the twelve kernel controls are retained separately | T-163 |
+| `E-mishapolk-593-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 237 that T-183 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-183 |
+| `E-fang-direct-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 14 of 14: the complete certificates at 380, 381, 382, 421, 422, 463, 464, 507, 508, 553, 601, 651, 758 and 814, every wall and every pair decided by both maintained routes; the 28 kernel controls are retained separately | - |
+| `E-couzo-506-n175-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 175 that T-185 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-185 |
+| `E-mishapolk-70a033f-exact-feasibility` | replayed here | independently re-implemented | full, 12 of 12: the twelve derived certificates at n = 129, 154, 156, 175, 176, 204, 232, 264, 271, 302, 303 and 304 that T-186 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipts | T-186 |
+| `E-evand-606-n146-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 146 that T-187 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-187 |
+| `E-couzo-487b058-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 211 that T-188 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-188 |
+| `E-couzo-607-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 237 that T-189 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipts | T-189 |
+| `E-couzo-4e4c8ce-n237-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 237 that T-190 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-190 |
 
 ### `V-check-rational-witness-independent`
 
@@ -1013,38 +1202,73 @@ Decides a rational-corner witness pair by pair and wall by wall in Fraction arit
 - What its authors read and used: [`packing/devtools/check_rational_witness_independent.py`](../../packing/devtools/check_rational_witness_independent.py)
 - Note: Its module statement says it shares no geometry or verification code with sqpack.witness or sqpack.verify.
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-n017-kleddamag-rational-upper` | replayed here | independent | T-065 |
-| `E-n029-schadt-rational-upper` | replayed here | independent | - |
-| `E-franciscouzo-2026-09-27-exact-replay` | replayed here | independent | T-056 |
-| `E-franciscouzo-2026-10-03-exact-replay` | replayed here | independent | T-092 |
-| `E-n211-de-winter-exact-replay` | replayed here | independent | T-057 |
-| `E-n069-ellsworth-2026-09-exact-replay` | replayed here | independent | T-088 |
-| `E-n083-chang-2026-09-exact-replay` | replayed here | independent | T-089 |
-| `E-n087-chang-2026-09-exact-replay` | replayed here | independent | T-089 |
-| `E-evand-exact-optima-2026-10-05-exact-replay` | replayed here | independent | T-098 |
-| `E-evand-exact-ceilings-2026-10-05-exact-replay` | replayed here | independent | T-101 |
-| `E-squish-ten-packings-2026-10-07-exact-replay` | replayed here | independent | T-113 |
-| `E-squish-n153-2026-10-07-exact-replay` | replayed here | independent | T-114 |
-| `E-squish-update-2026-10-07-exact-replay` | replayed here | independent | T-115 |
-| `E-squish-second-update-2026-10-07-exact-replay` | replayed here | independent | T-116 |
-| `E-evand-399-exact-feasibility` | audited here | independent | T-119 |
-| `E-rehwaldt-couzo-refinements-2026-10-07-exact-replay` | replayed here | independent | T-117 |
-| `E-ryxu-432-rational-feasibility` | replayed here | independent | T-125 |
-| `E-gupta-438-exact-feasibility` | replayed here | independent | T-127 |
-| `E-couzo-451-exact-feasibility` | replayed here | independent | T-128 |
-| `E-couzo-460-followup-exact-feasibility` | replayed here | independent | T-130 |
-| `E-evand-465-record-hunt-exact-feasibility` | replayed here | independent | T-128, T-131 |
-| `E-couzo-476-exact-feasibility` | replayed here | independent | T-134 |
-| `E-fang-484-exact-feasibility` | replayed here | independent | T-135 |
-| `E-squish-481-exact-feasibility` | replayed here | independent | T-136 |
-| `E-deleeuw-483-exact-feasibility` | replayed here | independent | T-137 |
-| `E-mishapolk-470-exact-feasibility` | replayed here | independent | T-138 |
-| `E-evand-trio126-exact-feasibility` | replayed here | independent | T-139 |
-| `E-couzo-488-exact-feasibility` | replayed here | independent | T-140 |
-| `E-evand-489-exact-feasibility` | replayed here | independent | T-141 |
-| `E-evand-regularized-exact-feasibility` | replayed here | independent | T-146 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n017-kleddamag-rational-upper` | replayed here | independently re-implemented | not recorded | T-065 |
+| `E-n029-schadt-rational-upper` | replayed here | independently re-implemented | not recorded | - |
+| `E-franciscouzo-2026-09-27-exact-replay` | replayed here | independently re-implemented | not recorded | T-056 |
+| `E-franciscouzo-2026-10-03-exact-replay` | replayed here | independently re-implemented | not recorded | T-092 |
+| `E-n211-de-winter-exact-replay` | replayed here | independently re-implemented | not recorded | T-057 |
+| `E-n069-ellsworth-2026-09-exact-replay` | replayed here | independently re-implemented | not recorded | T-088 |
+| `E-n083-chang-2026-09-exact-replay` | replayed here | independently re-implemented | not recorded | T-089 |
+| `E-n087-chang-2026-09-exact-replay` | replayed here | independently re-implemented | not recorded | T-089 |
+| `E-evand-exact-optima-2026-10-05-exact-replay` | replayed here | independently re-implemented | not recorded | T-098 |
+| `E-evand-exact-ceilings-2026-10-05-exact-replay` | replayed here | independently re-implemented | not recorded | T-101 |
+| `E-squish-ten-packings-2026-10-07-exact-replay` | replayed here | independently re-implemented | not recorded | T-113 |
+| `E-squish-n153-2026-10-07-exact-replay` | replayed here | independently re-implemented | not recorded | T-114 |
+| `E-squish-update-2026-10-07-exact-replay` | replayed here | independently re-implemented | not recorded | T-115 |
+| `E-squish-second-update-2026-10-07-exact-replay` | replayed here | independently re-implemented | not recorded | T-116 |
+| `E-evand-399-exact-feasibility` | audited here | independently re-implemented | not recorded | T-119 |
+| `E-rehwaldt-couzo-refinements-2026-10-07-exact-replay` | replayed here | independently re-implemented | not recorded | T-117 |
+| `E-ryxu-432-rational-feasibility` | replayed here | independently re-implemented | not recorded | T-125 |
+| `E-gupta-438-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-127 |
+| `E-couzo-451-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-128 |
+| `E-couzo-460-followup-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-130 |
+| `E-evand-465-record-hunt-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-128, T-131 |
+| `E-couzo-476-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-134 |
+| `E-fang-484-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-135 |
+| `E-squish-481-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-136 |
+| `E-deleeuw-483-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-137 |
+| `E-mishapolk-470-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-138 |
+| `E-evand-trio126-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-139 |
+| `E-couzo-488-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-140 |
+| `E-evand-489-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-141 |
+| `E-evand-regularized-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-146 |
+| `E-pingyou-503-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-147 |
+| `E-pingyou-504-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-148 |
+| `E-ostashev-501-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-149 |
+| `E-barnett-505-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-150 |
+| `E-squish-500-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-151 |
+| `E-couzo-506-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-152 |
+| `E-regularized-bounds-2026-10-12-exact-decision` | replayed here | reproduced with the producer’s code | full, 59 of 59: retained rational packing views, every wall and every pair decided by both maintained checkers: 1,051,241 pair decisions per checker, with the 177 negative-control decisions on the 59 views retained separately | T-155, T-156 |
+| `E-regularized-bounds-2026-10-13-grid-slack-exact-decision` | replayed here | reproduced with the producer’s code | full, 1 of 1: the retained rational packing view at n = 290, every wall and all 41,905 pairs decided by both maintained checkers; the three negative-control decisions on two distinct mutants are retained separately | T-156 |
+| `E-ostashev-528-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 3 of 3: the three complete certificates at n = 175, 232 and 264, every wall and every pair decided by both maintained routes and again by the third route; the six kernel controls and the third route's controls are retained separately | T-158 |
+| `E-calle-529-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 1 of 1: the certificate derived here from Rio Calle's layout of 102 squares, every wall and every pair decided by both maintained routes and again by the third route, which also derived it again from the layout at the pin | T-159 |
+| `E-evand-552-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 1 of 1: the complete certificate at n = 154, every wall and every pair decided by both maintained routes and again by the third route; the two kernel controls and the third route's controls are retained separately | T-160 |
+| `E-couzo-561-exact-feasibility` | replayed here | independently re-implemented | full, 4 of 4: the four certificates at n = 156, 176, 237, 271 that T-161 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-161 |
+| `E-ostashev-562-exact-feasibility` | replayed here | independently re-implemented | full, 3 of 3: the three certificates at n = 129, 204, 303 that T-162 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-162 |
+| `E-pingyou-564-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 302 that T-164 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-164 |
+| `E-couzo-586-exact-feasibility` | replayed here | independently re-implemented | full, 4 of 4: the four certificates at n = 154, 176, 211 and 241 that T-165 and T-182 cite, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-165, T-182 |
+| `E-couzo-586-n302-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 302 that T-181 cites, issue 583's certificate as issue 586's packet retains it byte for byte, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-181 |
+| `E-pingyou-504-refinement-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 153 that T-166 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-166 |
+| `E-pingyou-503-refinement-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 207 that T-167 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-167 |
+| `E-pingyou-566-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 146 that T-168 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-168 |
+| `E-pingyou-567-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 261 that T-169 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-169 |
+| `E-pingyou-568-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 105 that T-170 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-170 |
+| `E-pingyou-569-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 272 that T-171 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-171 |
+| `E-couzo-583-exact-feasibility` | replayed here | independently re-implemented | full, 3 of 3: the three certificates at n = 154, 211, 241 that T-172 and T-181 cite, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-172, T-181 |
+| `E-mishapolk-573-exact-feasibility` | replayed here | independently re-implemented | full, 2 of 2: both certificates at n = 153, 207 that T-173 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-173 |
+| `E-pingyou-574-exact-feasibility` | replayed here | independently re-implemented | full, 64 of 64: the 64 rational certificates the entry cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-174 |
+| `E-ostashev-575-exact-feasibility` | replayed here | independently re-implemented | full, 3 of 3: the three certificates at n = 211, 241, 304 that T-175 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-175 |
+| `E-fang-excess-theorem-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 6 of 6: the six retained inventory certificates at 211, 241, 273, 307, 308 and 932, every wall and every pair decided by both maintained routes; the twelve kernel controls are retained separately | T-163 |
+| `E-mishapolk-593-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 237 that T-183 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-183 |
+| `E-fang-direct-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 14 of 14: the complete certificates at 380, 381, 382, 421, 422, 463, 464, 507, 508, 553, 601, 651, 758 and 814, every wall and every pair decided by both maintained routes; the 28 kernel controls are retained separately | - |
+| `E-couzo-506-n175-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 175 that T-185 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-185 |
+| `E-mishapolk-70a033f-exact-feasibility` | replayed here | independently re-implemented | full, 12 of 12: the twelve derived certificates at n = 129, 154, 156, 175, 176, 204, 232, 264, 271, 302, 303 and 304 that T-186 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipts | T-186 |
+| `E-evand-606-n146-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 146 that T-187 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-187 |
+| `E-couzo-487b058-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 211 that T-188 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-188 |
+| `E-couzo-607-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 237 that T-189 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipts | T-189 |
+| `E-couzo-4e4c8ce-n237-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 237 that T-190 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-190 |
 
 ### `V-check-nagamochi-lemma1-counterexample`
 
@@ -1057,9 +1281,9 @@ Scores Karakuş's squares K_t and chelokot's square against Nagamochi 2005's mea
 - What its authors read and used: [`docs/project/reviews/review-2026-10-02-nagamochi-lemma1-karakus.md`](../../docs/project/reviews/review-2026-10-02-nagamochi-lemma1-karakus.md)
 - Note: The review's table of sources records what its authors read; the tool recomputes both counterexamples from their printed coordinates, and chelokot's Python checker was not run.
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-nagamochi-lemma1-counterexample` | replayed here | independent | T-085 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-nagamochi-lemma1-counterexample` | replayed here | independently re-implemented | not recorded | T-085 |
 
 ### `V-check-karakus-strip-measure`
 
@@ -1072,9 +1296,9 @@ Decides Karakuş 2026's Proposition 5.1, that the strip measure gives the interi
 - What its authors read and used: [`packing/devtools/check_karakus_strip_measure.py`](../../packing/devtools/check_karakus_strip_measure.py)
 - Note: Its module statement says it was written from the paper's Section 5 and nothing else; the source publishes no code. It imports no other checker of this repository; its test compares it with the polygon scorer of devtools.check_nagamochi_lemma1_counterexample.
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-karakus-strip-measure-interval` | audited here | independent | T-083, T-084 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-karakus-strip-measure-interval` | audited here | independently re-implemented | not recorded | T-083, T-084 |
 
 ### `V-upper-bound-promotion`
 
@@ -1085,14 +1309,14 @@ Rounds a source's decimal pose to rationals and decides every pair and wall exac
 - Source: [`packing/devtools/upper_bound_packets.py`](../../packing/devtools/upper_bound_packets.py), [`packing/devtools/catalogue_upper_bounds.py`](../../packing/devtools/catalogue_upper_bounds.py)
 - Versions run: this repository's commits, which Git holds
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-franciscouzo-2026-09-27-exact-replay` | replayed here | independent | T-056 |
-| `E-franciscouzo-2026-10-03-exact-replay` | replayed here | independent | T-092 |
-| `E-n211-de-winter-exact-replay` | replayed here | independent | T-057 |
-| `E-n069-ellsworth-2026-09-exact-replay` | replayed here | independent | T-088 |
-| `E-n083-chang-2026-09-exact-replay` | replayed here | independent | T-089 |
-| `E-n087-chang-2026-09-exact-replay` | replayed here | independent | T-089 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-franciscouzo-2026-09-27-exact-replay` | replayed here | independently re-implemented | not recorded | T-056 |
+| `E-franciscouzo-2026-10-03-exact-replay` | replayed here | independently re-implemented | not recorded | T-092 |
+| `E-n211-de-winter-exact-replay` | replayed here | independently re-implemented | not recorded | T-057 |
+| `E-n069-ellsworth-2026-09-exact-replay` | replayed here | independently re-implemented | not recorded | T-088 |
+| `E-n083-chang-2026-09-exact-replay` | replayed here | independently re-implemented | not recorded | T-089 |
+| `E-n087-chang-2026-09-exact-replay` | replayed here | independently re-implemented | not recorded | T-089 |
 
 ### `V-upper-bound-intervals`
 
@@ -1105,11 +1329,11 @@ Decides a source's printed pose as printed, by outward-rounded decimal interval 
 - What its authors read and used: [`packing/devtools/upper_bound_intervals.py`](../../packing/devtools/upper_bound_intervals.py)
 - Note: Its module statement lists the three things it shares with the exact route (the retained facts, the packet tool's source and acquisition records, and the exact receipt read only to compare values), none of them geometry; packing/tests/test_upper_bound_intervals.py holds its imports to those.
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-franciscouzo-2026-09-27-interval-replay` | replayed here | independent | T-056 |
-| `E-franciscouzo-2026-10-03-interval-replay` | replayed here | independent | T-092 |
-| `E-n211-de-winter-interval-replay` | replayed here | independent | T-057 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-franciscouzo-2026-09-27-interval-replay` | replayed here | independently re-implemented | not recorded | T-056 |
+| `E-franciscouzo-2026-10-03-interval-replay` | replayed here | independently re-implemented | not recorded | T-092 |
+| `E-n211-de-winter-interval-replay` | replayed here | independently re-implemented | not recorded | T-057 |
 
 ### `V-sqpack-cover`
 
@@ -1121,12 +1345,12 @@ Certifies a point set unavoidable for unit squares in a container, cell by cell 
 - Versions run: this repository's commits, which Git holds
 - Note: Bentz's and Stromquist's arguments are published proofs with no verification code.
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-n011-repaired-lower` | replayed here | producer’s code | T-010 |
-| `E-bentz46-theorem8-audit` | audited here | independent | T-004, T-008 |
-| `E-bentz13-figure2-audit` | audited here | independent | T-005, T-006 |
-| `E-green17-sixteen-point-lower` | replayed here | producer’s code | T-001, T-002, T-003 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n011-repaired-lower` | replayed here | reproduced with the producer’s code | not recorded | T-010 |
+| `E-bentz46-theorem8-audit` | audited here | independently re-implemented | not recorded | T-004, T-008 |
+| `E-bentz13-figure2-audit` | audited here | independently re-implemented | not recorded | T-005, T-006 |
+| `E-green17-sixteen-point-lower` | replayed here | reproduced with the producer’s code | not recorded | T-001, T-002, T-003 |
 
 ### `V-green17-interval-audit`
 
@@ -1139,9 +1363,9 @@ Decides the sixteen-point set's unavoidability by branch and bound over the full
 - What its authors read and used: [`packing/cases/green17/interval_audit.py`](../../packing/cases/green17/interval_audit.py)
 - Note: It shares the point data with the cell certificate and nothing else.
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-green17-interval-audit` | replayed here | independent | T-001, T-002, T-003 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-green17-interval-audit` | replayed here | independently re-implemented | not recorded | T-001, T-002, T-003 |
 
 ### `V-kingbird29-verify-svg`
 
@@ -1152,10 +1376,10 @@ Reads Kingbird's n = 29 figure and checks its packing at a declared precision an
 - Source: [`packing/cases/kingbird29/verify_svg.py`](../../packing/cases/kingbird29/verify_svg.py)
 - Versions run: this repository's commits, which Git holds
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-n029-kingbird-numerical` | replayed here | independent | - |
-| `E-n029-orientation-classes` | replayed here | independent | - |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n029-kingbird-numerical` | replayed here | independently re-implemented | not recorded | - |
+| `E-n029-orientation-classes` | replayed here | independently re-implemented | not recorded | - |
 
 ### `V-screen-translation-escape`
 
@@ -1166,9 +1390,9 @@ Finds a feasible translation of one square in a retained configuration, which ce
 - Source: [`packing/devtools/screen_translation_escape.py`](../../packing/devtools/screen_translation_escape.py)
 - Versions run: this repository's commits, which Git holds
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-translation-escape-not-rigid` | replayed here | producer’s code | - |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-translation-escape-not-rigid` | replayed here | reproduced with the producer’s code | not recorded | - |
 
 ### `V-assess-n5-rigidity`
 
@@ -1179,10 +1403,10 @@ Decides the first- and second-order motions of Göbel's n = 5 pose exactly over 
 - Source: [`packing/devtools/assess_n5_rigidity.py`](../../packing/devtools/assess_n5_rigidity.py)
 - Versions run: this repository's commits, which Git holds
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-n005-second-order-rigidity` | replayed here | producer’s code | T-012, T-014 |
-| `E-n005-fixed-side-local-rigidity` | audited here | producer’s code | T-014 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n005-second-order-rigidity` | replayed here | reproduced with the producer’s code | not recorded | T-012, T-014 |
+| `E-n005-fixed-side-local-rigidity` | audited here | reproduced with the producer’s code | not recorded | T-014 |
 
 ### `V-assess-n40-rigidity`
 
@@ -1193,9 +1417,9 @@ Decides the first-order flexes of Göbel's n = 40 pose and refuses each at secon
 - Source: [`packing/devtools/assess_n40_rigidity.py`](../../packing/devtools/assess_n40_rigidity.py)
 - Versions run: this repository's commits, which Git holds
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-n040-first-order-flexibility` | replayed here | producer’s code | T-013 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n040-first-order-flexibility` | replayed here | reproduced with the producer’s code | not recorded | T-013 |
 
 ### `V-rectangle-ceiling`
 
@@ -1206,22 +1430,22 @@ Decides each rectangle-density ceiling certificate's containment and pairwise di
 - Source: [`packing/src/sqpack/rectangle_ceiling.py`](../../packing/src/sqpack/rectangle_ceiling.py), [`packing/devtools/certify_rectangle_ceiling.py`](../../packing/devtools/certify_rectangle_ceiling.py)
 - Versions run: this repository's commits, which Git holds
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-wand125-tools-ceiling-certificates` | audited here | independent | T-058 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-wand125-tools-ceiling-certificates` | audited here | independently re-implemented | not recorded | T-058 |
 
 ### `V-check-general-pose-tree-census`
 
 **devtools.check_general_pose_tree_census** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
 
-Runs the pinned general pose tree on every row of Kleddamag's n = 11 certificate, binds the inputs, requires row-minimum equality and re-evaluates each witness exactly.
+Runs the pinned general pose tree on every row of Overbeck's n = 11 certificate, binds the inputs, requires row-minimum equality and re-evaluates each witness exactly.
 
 - Source: [`packing/devtools/check_general_pose_tree_census.py`](../../packing/devtools/check_general_pose_tree_census.py)
 - Versions run: this repository's commits, which Git holds
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-wand125-tools-n11-row-replay` | replayed here | producer’s code | T-059 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-wand125-tools-n11-row-replay` | replayed here | reproduced with the producer’s code | not recorded | T-059 |
 
 ### `V-assess-frontier-rigidity`
 
@@ -1232,9 +1456,9 @@ Decides rigidity for the perfect square tilings among the frontier cases.
 - Source: [`packing/devtools/assess_frontier_rigidity.py`](../../packing/devtools/assess_frontier_rigidity.py)
 - Versions run: this repository's commits, which Git holds
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-perfect-square-tiling-rigid` | replayed here | no code | - |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-perfect-square-tiling-rigid` | replayed here | no code | not recorded | - |
 
 ### `V-trump11-tangent-cones`
 
@@ -1245,9 +1469,9 @@ Decides every branchwise linearized cone at Trump's exact n = 11 pose.
 - Source: [`packing/cases/trump11/tangent_cones.py`](../../packing/cases/trump11/tangent_cones.py)
 - Versions run: this repository's commits, which Git holds
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-n011-trump-local-rigidity` | replayed here | producer’s code | - |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n011-trump-local-rigidity` | replayed here | reproduced with the producer’s code | not recorded | - |
 
 ### `V-trump11-isolation-radius`
 
@@ -1258,9 +1482,9 @@ Recomputes the BC-199 isolation radius of Trump's n = 11 pose and every computed
 - Source: [`packing/cases/trump11/isolation_radius.py`](../../packing/cases/trump11/isolation_radius.py)
 - Versions run: this repository's commits, which Git holds
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-n011-trump-isolation-radius` | replayed here | producer’s code | T-036 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n011-trump-isolation-radius` | replayed here | reproduced with the producer’s code | not recorded | T-036 |
 
 ### `V-trump11-fixed-angle-tree-check`
 
@@ -1271,9 +1495,9 @@ Reads the closed rung-0 fixed-angle cell tree and decides every leaf's certifica
 - Source: [`packing/cases/trump11/fixed_angle_tree_check.py`](../../packing/cases/trump11/fixed_angle_tree_check.py)
 - Versions run: this repository's commits, which Git holds
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-n011-h236-rung0-reduction` | replayed here | independent | T-035, T-036 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n011-h236-rung0-reduction` | replayed here | independently re-implemented | not recorded | T-035, T-036 |
 
 ### `V-review-trump-local-theorem`
 
@@ -1286,9 +1510,9 @@ Re-decides the local theorem's branch rows and its isolation radius inputs, refu
 - What its authors read and used: [`packing/devtools/review_trump_local_theorem.py`](../../packing/devtools/review_trump_local_theorem.py)
 - Note: Written source-distinct from the radius generator cases.trump11.isolation_radius.
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-n011-trump-local-theorem-first-clause` | audited here | independent | T-036 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n011-trump-local-theorem-first-clause` | audited here | independently re-implemented | not recorded | T-036 |
 
 ### `V-sqpack-fractional-exact`
 
@@ -1300,28 +1524,28 @@ Decides a weighted point certificate's five conditions in exact rational arithme
 - Versions run: this repository's commits, which Git holds
 - Note: It predates the certificates others built from this project's method, and Mira's ATTRIBUTION.md says her checker was newly written and not copied from it.
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-wand125-point-source-replay` | replayed here | producer’s code | T-044 |
-| `E-wand125-n052-derived-lower` | audited here | producer’s code | T-044 |
-| `E-wand125-point-bounds-report` | the source’s own run | producer’s code | T-044 |
-| `E-wand125-point-monotone-report` | audited here | no code | T-044 |
-| `E-n017-burns-control-decision` | replayed here | independent | - |
-| `E-n017-mira-4613-exact-replay` | replayed here | independent | T-032 |
-| `E-n012-fractional-certificate` | audited here | producer’s code | T-017 |
-| `E-n011-fractional-certificate` | audited here | producer’s code | T-018, T-022 |
-| `E-n011-fractional-net1440-certificate` | audited here | producer’s code | T-024 |
-| `E-n011-fractional-net720-certificate` | audited here | producer’s code | T-024 |
-| `E-n017-fractional-certificate` | audited here | producer’s code | T-019 |
-| `E-n018-fractional-certificate` | audited here | producer’s code | T-027 |
-| `E-n018-t028-fractional-certificate` | audited here | producer’s code | T-028 |
-| `E-n018-t029-fractional-certificate` | audited here | producer’s code | T-029 |
-| `E-n018-t030-fractional-certificate` | audited here | producer’s code | T-030 |
-| `E-n020-fractional-certificate-97-20` | audited here | producer’s code | T-021 |
-| `E-n020-fractional-certificate` | audited here | producer’s code | T-020 |
-| `E-n021-fractional-certificate-122-25` | audited here | producer’s code | T-034 |
-| `E-n011-corner-class-96-25-exact-decision` | audited here | producer’s code | T-031 |
-| `E-wand125-n068-derived-lower` | audited here | producer’s code | T-044 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-wand125-point-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-044 |
+| `E-wand125-n052-derived-lower` | audited here | reproduced with the producer’s code | not recorded | T-044 |
+| `E-wand125-point-bounds-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-044 |
+| `E-wand125-point-monotone-report` | audited here | no code | not recorded | T-044 |
+| `E-n017-burns-control-decision` | replayed here | independently re-implemented | not recorded | - |
+| `E-n017-mira-4613-exact-replay` | replayed here | independently re-implemented | not recorded | T-032 |
+| `E-n012-fractional-certificate` | audited here | reproduced with the producer’s code | not recorded | T-017 |
+| `E-n011-fractional-certificate` | audited here | reproduced with the producer’s code | not recorded | T-018, T-022 |
+| `E-n011-fractional-net1440-certificate` | audited here | reproduced with the producer’s code | not recorded | T-024 |
+| `E-n011-fractional-net720-certificate` | audited here | reproduced with the producer’s code | not recorded | T-024 |
+| `E-n017-fractional-certificate` | audited here | reproduced with the producer’s code | not recorded | T-019 |
+| `E-n018-fractional-certificate` | audited here | reproduced with the producer’s code | not recorded | T-027 |
+| `E-n018-t028-fractional-certificate` | audited here | reproduced with the producer’s code | not recorded | T-028 |
+| `E-n018-t029-fractional-certificate` | audited here | reproduced with the producer’s code | not recorded | T-029 |
+| `E-n018-t030-fractional-certificate` | audited here | reproduced with the producer’s code | not recorded | T-030 |
+| `E-n020-fractional-certificate-97-20` | audited here | reproduced with the producer’s code | not recorded | T-021 |
+| `E-n020-fractional-certificate` | audited here | reproduced with the producer’s code | not recorded | T-020 |
+| `E-n021-fractional-certificate-122-25` | audited here | reproduced with the producer’s code | not recorded | T-034 |
+| `E-n011-corner-class-96-25-exact-decision` | audited here | reproduced with the producer’s code | not recorded | T-031 |
+| `E-wand125-n068-derived-lower` | audited here | reproduced with the producer’s code | not recorded | T-044 |
 
 ### `V-sqpack-fractional-interval`
 
@@ -1333,13 +1557,13 @@ Decides Condition 5 of a weighted certificate by outward-rounded interval branch
 - Versions run: this repository's commits, which Git holds
 - Note: It shares the certificate loader and the closed-form Conditions 1 to 4 with the exact sweep and no part of how Condition 5 is decided.
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-n017-mira-4613-interval-decision` | replayed here | independent | T-032 |
-| `E-n017-guzhou-r012-interval-decision` | audited here | independent | T-032 |
-| `E-n011-fractional-net1440-interval-decision` | audited here | shared components | T-024 |
-| `E-fractional-interval-decision` | audited here | shared components | T-017, T-018, T-019, T-020, T-021, T-022, T-027, T-028, T-029, T-030, T-034 |
-| `E-n011-corner-class-96-25-interval-decision` | audited here | shared components | T-031 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n017-mira-4613-interval-decision` | replayed here | independently re-implemented | not recorded | T-032 |
+| `E-n017-guzhou-r012-interval-decision` | audited here | independently re-implemented | not recorded | T-032 |
+| `E-n011-fractional-net1440-interval-decision` | audited here | re-implemented, sharing named components | not recorded | T-024 |
+| `E-fractional-interval-decision` | audited here | re-implemented, sharing named components | not recorded | T-017, T-018, T-019, T-020, T-021, T-022, T-027, T-028, T-029, T-030, T-034 |
+| `E-n011-corner-class-96-25-interval-decision` | audited here | re-implemented, sharing named components | not recorded | T-031 |
 
 ### `V-sqpack-threshold-exact`
 
@@ -1350,12 +1574,12 @@ Decides a threshold certificate's conditions, Condition 5' by the exact event-ce
 - Source: [`packing/src/sqpack/fractional/threshold.py`](../../packing/src/sqpack/fractional/threshold.py), [`packing/devtools/decide_threshold_certificate.py`](../../packing/devtools/decide_threshold_certificate.py)
 - Versions run: this repository's commits, which Git holds
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-n011-threshold-certificate` | audited here | producer’s code | T-025 |
-| `E-n011-threshold-net1440-certificate` | audited here | producer’s code | T-026, T-033 |
-| `E-n011-threshold-net720-certificate` | audited here | producer’s code | T-026 |
-| `E-n011-threshold-net2880-certificate` | audited here | producer’s code | T-033 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n011-threshold-certificate` | audited here | reproduced with the producer’s code | not recorded | T-025 |
+| `E-n011-threshold-net1440-certificate` | audited here | reproduced with the producer’s code | not recorded | T-026, T-033 |
+| `E-n011-threshold-net720-certificate` | audited here | reproduced with the producer’s code | not recorded | T-026 |
+| `E-n011-threshold-net2880-certificate` | audited here | reproduced with the producer’s code | not recorded | T-033 |
 
 ### `V-sqpack-threshold-interval`
 
@@ -1366,11 +1590,11 @@ Decides Condition 5' by interval branch and bound, a threshold atom counting onl
 - Source: [`packing/src/sqpack/fractional/threshold_interval.py`](../../packing/src/sqpack/fractional/threshold_interval.py)
 - Versions run: this repository's commits, which Git holds
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-n011-threshold-interval-decision` | audited here | shared components | T-025 |
-| `E-n011-threshold-net1440-interval-decision` | audited here | shared components | T-026 |
-| `E-n011-threshold-net2880-interval-decision` | audited here | shared components | T-033 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n011-threshold-interval-decision` | audited here | re-implemented, sharing named components | not recorded | T-025 |
+| `E-n011-threshold-net1440-interval-decision` | audited here | re-implemented, sharing named components | not recorded | T-026 |
+| `E-n011-threshold-net2880-interval-decision` | audited here | re-implemented, sharing named components | not recorded | T-033 |
 
 ### `V-dilation-corollary`
 
@@ -1381,14 +1605,14 @@ Re-decides a certificate's conditions and derives the exact sharpened containmen
 - Source: [`packing/devtools/dilation_corollary.py`](../../packing/devtools/dilation_corollary.py)
 - Versions run: this repository's commits, which Git holds
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-n011-fractional-dilation-limit` | audited here | producer’s code | T-022 |
-| `E-n011-fractional-net1440-dilation-limit` | audited here | producer’s code | T-024 |
-| `E-n011-fractional-net720-dilation-limit` | audited here | producer’s code | T-024 |
-| `E-n011-threshold-net1440-dilation-limit` | audited here | producer’s code | T-026, T-033 |
-| `E-n011-threshold-net720-dilation-limit` | audited here | producer’s code | T-026 |
-| `E-n011-threshold-net2880-dilation-limit` | audited here | producer’s code | T-033 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n011-fractional-dilation-limit` | audited here | reproduced with the producer’s code | not recorded | T-022 |
+| `E-n011-fractional-net1440-dilation-limit` | audited here | reproduced with the producer’s code | not recorded | T-024 |
+| `E-n011-fractional-net720-dilation-limit` | audited here | reproduced with the producer’s code | not recorded | T-024 |
+| `E-n011-threshold-net1440-dilation-limit` | audited here | reproduced with the producer’s code | not recorded | T-026, T-033 |
+| `E-n011-threshold-net720-dilation-limit` | audited here | reproduced with the producer’s code | not recorded | T-026 |
+| `E-n011-threshold-net2880-dilation-limit` | audited here | reproduced with the producer’s code | not recorded | T-033 |
 
 ### `V-n12-independent-verifier`
 
@@ -1401,9 +1625,9 @@ A second exact decision of a weighted certificate's five conditions, in an integ
 - What its authors read and used: [`packing/cases/n12_fractional_certificate/independent_verify.py`](../../packing/cases/n12_fractional_certificate/independent_verify.py)
 - Note: A clean-room verifier: written from the theorem statement alone by a reviewer given the certificate files and denied the project's implementation.
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-n012-independent-verifier` | audited here | independent | - |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n012-independent-verifier` | audited here | independently re-implemented | not recorded | - |
 
 ### `V-n17-weighted-instrument`
 
@@ -1416,9 +1640,9 @@ Evaluates a hash-pinned n = 17 certificate at every direction by two accumulatio
 - What its authors read and used: [`packing/cases/n17_weighted_certificate`](../../packing/cases/n17_weighted_certificate)
 - Note: It extracts the certificate's data from the source's script and runs none of its code.
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-n017-massaccesi-h052-agreement` | replayed here | independent | T-015, T-016 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n017-massaccesi-h052-agreement` | replayed here | independently re-implemented | not recorded | T-015, T-016 |
 
 ### `V-sqpack-parent-core-native`
 
@@ -1429,14 +1653,14 @@ Decides a threshold charge certificate's rows by direct closed-box interval cove
 - Source: [`packing/src/sqpack/fractional/parent_core_interval.py`](../../packing/src/sqpack/fractional/parent_core_interval.py), [`packing/devtools/verify_kleddamag_n11_native.py`](../../packing/devtools/verify_kleddamag_n11_native.py), [`packing/devtools/verify_n11_parent_core_native.py`](../../packing/devtools/verify_n11_parent_core_native.py), [`packing/devtools/verify_evand_angle_net_native.py`](../../packing/devtools/verify_evand_angle_net_native.py)
 - Versions run: this repository's commits, which Git holds
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-n011-kleddamag-3875-native-parent-core` | audited here | independent | T-037 |
-| `E-n011-wang-li-native-parent-core` | replayed here | independent | T-061 |
-| `E-n012-evand-15680-3951-native-parent-core` | audited here | independent | T-049 |
-| `E-n012-squarepacker-31360-7901-native-parent-core` | audited here | independent | T-078 |
-| `E-n012-levy-15680000-3949423-native-parent-core` | audited here | independent | T-079 |
-| `E-n012-squarepacker-7943-2000-native-parent-core` | audited here | independent | T-095 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n011-kleddamag-3875-native-parent-core` | audited here | independently re-implemented | not recorded | T-037 |
+| `E-n011-wang-li-native-parent-core` | replayed here | independently re-implemented | not recorded | T-061 |
+| `E-n012-evand-15680-3951-native-parent-core` | audited here | independently re-implemented | not recorded | T-049 |
+| `E-n012-squarepacker-31360-7901-native-parent-core` | audited here | independently re-implemented | not recorded | T-078 |
+| `E-n012-levy-15680000-3949423-native-parent-core` | audited here | independently re-implemented | not recorded | T-079 |
+| `E-n012-squarepacker-7943-2000-native-parent-core` | audited here | independently re-implemented | not recorded | T-095 |
 
 ### `V-replay-owner-footprint-cover`
 
@@ -1447,9 +1671,9 @@ Replays the four-owner footprint cover's finite-net residual cover by an exact s
 - Source: [`packing/devtools/replay_owner_footprint_cover.py`](../../packing/devtools/replay_owner_footprint_cover.py)
 - Versions run: this repository's commits, which Git holds
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-n011-five-dot-full-net` | replayed here | producer’s code | T-023 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n011-five-dot-full-net` | replayed here | reproduced with the producer’s code | not recorded | T-023 |
 
 ### `V-five-dot-independent-union`
 
@@ -1462,9 +1686,9 @@ Generates the net again and decides the five-dot coverage by exact convex inters
 - What its authors read and used: [`packing/cases/n11_five_dot_cover/independent_union.py`](../../packing/cases/n11_five_dot_cover/independent_union.py)
 - Note: It imports no production residual-domain or event-grid geometry.
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-n011-five-dot-independent-union` | replayed here | independent | T-023 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n011-five-dot-independent-union` | replayed here | independently re-implemented | not recorded | T-023 |
 
 ### `V-wall-owner-footprints`
 
@@ -1475,9 +1699,9 @@ Constructs and compares the wall-owner footprints of the bottom-left classes exa
 - Source: [`packing/devtools/wall_owner_footprints.py`](../../packing/devtools/wall_owner_footprints.py)
 - Versions run: this repository's commits, which Git holds
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-n011-wall-owner-footprints` | replayed here | producer’s code | - |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n011-wall-owner-footprints` | replayed here | reproduced with the producer’s code | not recorded | - |
 
 ### `V-wall-owner-containment`
 
@@ -1488,9 +1712,9 @@ Tests component containment between the retained wall-owner and five-dot certifi
 - Source: [`packing/devtools/wall_owner_containment.py`](../../packing/devtools/wall_owner_containment.py)
 - Versions run: this repository's commits, which Git holds
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-n011-wall-owner-containment` | replayed here | producer’s code | - |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n011-wall-owner-containment` | replayed here | reproduced with the producer’s code | not recorded | - |
 
 ### `V-n17-endpoint-checkers`
 
@@ -1501,9 +1725,9 @@ Prove the n = 17 contact-chart root exists and is unique in its box, and certify
 - Source: [`packing/devtools/check_n17_root_certificate.py`](../../packing/devtools/check_n17_root_certificate.py), [`packing/devtools/check_n17_endpoint_feasibility.py`](../../packing/devtools/check_n17_endpoint_feasibility.py)
 - Versions run: this repository's commits, which Git holds
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-n017-certified-endpoint` | audited here | independent | T-065 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n017-certified-endpoint` | audited here | independently re-implemented | not recorded | T-065 |
 
 ### `V-n17-catalogue-polynomial`
 
@@ -1514,9 +1738,9 @@ Eliminate the n = 17 chart variables by exact resultants, factor over Q, isolate
 - Source: [`packing/devtools/check_n17_catalogue_polynomial.py`](../../packing/devtools/check_n17_catalogue_polynomial.py)
 - Versions run: this repository's commits, which Git holds
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-n017-catalogue-polynomial-identity` | audited here | producer’s code | - |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n017-catalogue-polynomial-identity` | audited here | reproduced with the producer’s code | not recorded | - |
 
 ### `V-n11-optimality-checkers`
 
@@ -1528,10 +1752,10 @@ Consume the published n = 11 optimality proposals component by component and dec
 - Versions run: this repository's commits, which Git holds
 - Note: Independent first-party consumers of the published proposals, not independent implementations of every primitive: they share this repository's exact clipping, closed-cover and collision kernels, which the source bundles too.
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-n011-global-optimality-independent` | audited here | shared components | T-060 |
-| `E-n011-optimum-uniqueness` | audited here | shared components | T-112 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n011-global-optimality-independent` | audited here | re-implemented, sharing named components | not recorded | T-060 |
+| `E-n011-optimum-uniqueness` | audited here | re-implemented, sharing named components | not recorded | T-112 |
 
 ### `V-audit-clipped-corner-transfer`
 
@@ -1544,10 +1768,10 @@ Decides in exact rationals the finite steps of Guzhou0806's clipped-corner trans
 - What its authors read and used: [`packing/devtools/audit_clipped_corner_transfer.py`](../../packing/devtools/audit_clipped_corner_transfer.py)
 - Note: Its module docstring is its read log: written on 2026-10-10 from the review of the release and its scratch measurements, reading the release's parameters and receipts as data and never opening verifier/finite.py, verifier/run.py, verifier/prepare.py, verifier/release.py, tests/test_finite.py or PROOF.md. It shares with finite.py the definition of the density, its D4 expansion and the transfer's formulas, and no code.
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-n040-guzhou-clipped-corner-sqverify-fast-replay` | replayed here | producer’s code | T-133 |
-| `E-n040-guzhou-clipped-corner-finite-audit` | audited here | independent | T-133 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n040-guzhou-clipped-corner-sqverify-fast-replay` | replayed here | reproduced with the producer’s code | not recorded | T-133 |
+| `E-n040-guzhou-clipped-corner-finite-audit` | audited here | independently re-implemented | not recorded | T-133 |
 
 ### `V-audit-continuous-pose`
 
@@ -1558,39 +1782,400 @@ Decides in exact rationals the finite steps of Guzhou0806's continuous-pose boun
 - Source: [`packing/devtools/audit_continuous_pose.py`](../../packing/devtools/audit_continuous_pose.py), [`packing/tests/test_audit_continuous_pose.py`](../../packing/tests/test_audit_continuous_pose.py)
 - Versions run: this repository's commits, which Git holds
 - What its authors read and used: [`packing/devtools/audit_continuous_pose.py`](../../packing/devtools/audit_continuous_pose.py)
-- Note: Its module docstring is its read log: written on 2026-10-10 from the review of the release and its scratch measurements, reading the release's parameters and receipts as data, both kernels and harnesses and run.py in full, and never opening exact.py, audit.py, tests/oracle.py, tests/test_kernel.py, tests/test_admission.py or PROOF.md while it was written; exact.py was read afterwards, to run control G on it, and nothing in the finite part changed. It shares with exact.py the definition of the density, its D4 expansion, the kernels' input order, the enclosure rule and the inward rounding, and no code.
+- Note: Its module docstring is its read log: written on 2026-10-10 from the review of the release and its scratch measurements, reading the release's parameters and receipts as data, both kernels and harnesses and run.py in full, and never opening exact.py, audit.py, tests/oracle.py, tests/test_kernel.py, tests/test_admission.py or PROOF.md while it was written; exact.py was read afterwards, to run control G on it, and nothing in the finite part changed. It shares with exact.py the definition of the density, its D4 expansion, the kernels' input order, the enclosure rule and the inward rounding, and no code. Since 12 October its Release and Replay records parametrise its finite checks, runner and judge, and devtools.audit_n40_new_supports judges the 11 October release through them.
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-n040-guzhou-continuous-pose-kernel-replay` | replayed here | producer’s code | T-145 |
-| `E-n040-guzhou-continuous-pose-finite-audit` | audited here | independent | T-145 |
-| `E-n040-guzhou-continuous-pose-crate-axis` | audited here | independent | T-145 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n040-guzhou-continuous-pose-kernel-replay` | replayed here | reproduced with the producer’s code | not recorded | T-145 |
+| `E-n040-guzhou-continuous-pose-finite-audit` | audited here | independently re-implemented | not recorded | T-145 |
+| `E-n040-guzhou-continuous-pose-crate-axis` | audited here | independently re-implemented | not recorded | T-145 |
+| `E-n040-guzhou-new-supports-kernel-replay` | replayed here | reproduced with the producer’s code | full, 44 of 44: the near-axis statement by the release's axis kernel and the continuous cover of all 43 slabs of t in [10^-6, 83/200] by its continuous-pose kernel, both rebuilt from the retained source and run on inputs regenerated here | T-157 |
+| `E-n040-guzhou-new-supports-finite-audit` | audited here | independently re-implemented after reading the producer’s code | full: every finite step of the claim: the density's orbit facts, its D4 expansion, both kernel inputs' identity and enclosures, the dominated measure, the scalar chain and every value of both release receipts | T-157 |
+
+### `V-audit-n40-new-supports`
+
+**devtools.audit_n40_new_supports** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
+
+Decides the finite steps of Guzhou0806's s(40) > 3359/500 in exact rationals on the retained density and pool (the orbit facts, both kernel inputs' identity and enclosures, the dominated measure, the scalar chain, and every value of both release receipts), refuses seven finite controls, prices and drives the complete replay of both kernels through audit_continuous_pose's runner and judge with this release's contract, runs the release's dual programs, and decides the near-axis statement a second way through sqverify-fast.
+
+- Source: [`packing/devtools/audit_n40_new_supports.py`](../../packing/devtools/audit_n40_new_supports.py), [`packing/tests/test_audit_n40_new_supports.py`](../../packing/tests/test_audit_n40_new_supports.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`packing/devtools/audit_n40_new_supports.py`](../../packing/devtools/audit_n40_new_supports.py)
+- Independence: its authors read mathematics, proof-text, specification, certificate-format, producer-code, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (lane E of the 2026-10-11 intake pass (think-tln9); the stage 4 lane of 12 October, at the highest reasoning effort, added the replay, check-replay and duals stages; tiers not retained here), with its own prompt and code; authorship in common with the producer’s: unknown, Its docstring is the read log: the release's README, SOURCES, VERIFICATION, REPRODUCIBILITY, OBSTRUCTION and PROOF, the parameters, the runner's diff against T-145's pin, and the receipts and densities as data; not exact.py, audit.py, the obstruction programs or the tests, though exact.py was searched afterwards for the one string control G mutates. It reuses devtools.audit_continuous_pose's input builders and finite checks, whose authors read T-145's kernels. Guzhou0806's release states AI assistance without naming the system.
+- Note: Written on 11 October 2026 without opening the release's exact.py, audit.py, obstruction programs or tests (its docstring is the read log); on 12 October exact.py was searched for the one string control G mutates, and the replay, check-replay and duals stages were added. Its finite checks after the orbit facts are audit_continuous_pose's, made of this release through its Release record; the replay runs through the same module's Replay record.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n040-guzhou-new-supports-kernel-replay` | replayed here | reproduced with the producer’s code | full, 44 of 44: the near-axis statement by the release's axis kernel and the continuous cover of all 43 slabs of t in [10^-6, 83/200] by its continuous-pose kernel, both rebuilt from the retained source and run on inputs regenerated here | T-157 |
+| `E-n040-guzhou-new-supports-finite-audit` | audited here | independently re-implemented after reading the producer’s code | full: every finite step of the claim: the density's orbit facts, its D4 expansion, both kernel inputs' identity and enclosures, the dominated measure, the scalar chain and every value of both release receipts | T-157 |
+| `E-n040-guzhou-new-supports-crate-axis` | audited here | independently re-implemented after reading the producer’s code | full: the near-axis statement at side 249329659/250000000, decided by sqverify-fast's exact axis-vertex sweep on the density itself over all 10,929,636 vertices, with the 401-direction necessary condition at side 3350/3359 over all 401 directions | T-157 |
 
 ### `V-check-half-angle-area`
 
 **devtools.check_half_angle_area** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
 
-Decides a rational centre and half-angle certificate, or a rational centre-basis witness, in Fraction arithmetic: every rotation on the unit circle, containment in the closed box by each square's half-extent with no corner formed, and disjoint interiors by the circumscribed-disc rule, else by the exact area of one square clipped by the other's four closed half-planes. It reads Evan Daniel's text format, SQUISH's JSON, the centred JSON of issue 483 and derived facts with readers of its own, runs six controls per certificate (two gross, and side and pair each at exact contact and 10^-40 or 10^-30 past it), and holds every side, pose, margin and claimed side to the maintained routes' retained inputs and the record. For issue 470 it also derives each witness again from its pinned decimal pose file, with its own parser, dilation and half-angle floor in decimal arithmetic, and measures each arrangement against the packing it would be credited to, which decides nothing. Its replay-t128 command drives the kernel's own two-route replay of T-128's receipt.
+Decides a rational centre and half-angle certificate, or a rational centre-basis witness, in Fraction arithmetic: every rotation on the unit circle, containment in the closed box by each square's half-extent with no corner formed, and disjoint interiors by the circumscribed-disc rule, else by the exact area of one square clipped by the other's four closed half-planes. It reads Evan Daniel's text format, SQUISH's JSON, the centred JSON of issue 483, PingYou Ltd's JSON, Daniil Ostashev's sqcert files, Rio Calle's decimal layouts, rational corners witnesses and derived facts with readers of its own, runs six controls per certificate (two gross, and side and pair each at exact contact and 10^-40 or 10^-30 past it), and holds every side, pose, margin and claimed side to the maintained routes' retained inputs and the record. For issues 470 and 529 it also derives each witness again from its pinned decimal pose or layout file, with its own parser, dilation and half-angle floor in decimal arithmetic, and measures each arrangement against the packing it would be credited to, which decides nothing. Its replay-t128 command drives the kernel's own two-route replay of T-128's receipt.
 
 - Source: [`packing/devtools/check_half_angle_area.py`](../../packing/devtools/check_half_angle_area.py), [`packing/tests/test_check_half_angle_area.py`](../../packing/tests/test_check_half_angle_area.py)
 - Versions run: this repository's commits, which Git holds
 - What its authors read and used: [`packing/devtools/check_half_angle_area.py`](../../packing/devtools/check_half_angle_area.py)
-- Note: Written on 2026-10-10 by the review lane of T-128, T-130 and T-131 from the certificate formats and plane geometry, and extended the same day by the review lanes of issues 476, 481, 483 and 484 and of issue 470 and Evan Daniel's n = 126 certificate; the review lane of issues 488 and 489 ran it as retained, on the ten certificates their entries cite and, by a driver of its functions, the four the two commits hold that no entry cites. The review lane of Evan Daniel's regularized record lists ran it as retained, with its regularized roster and --upstream at the pin, on the fifteen certificates T-146 cites; it measures each against the packing T-146's regularizations name, read from the register. Its author had read both maintained routes, their parser and the importer's adapters before writing it, so it is not clean-room; it imports none of their parsing or deciding code and shares Fraction with every exact checker here. It is a second pair-deciding procedure within one method, exact-algebraic, not a second method.
+- Note: Written on 2026-10-10 by the review lane of T-128, T-130 and T-131 from the certificate formats and plane geometry, and extended the same day by the review lanes of issues 476, 481, 483 and 484 and of issue 470 and Evan Daniel's n = 126 certificate; the review lane of issues 488 and 489 ran it as retained, on the ten certificates their entries cite and, by a driver of its functions, the four the two commits hold that no entry cites. The review lane of Evan Daniel's regularized record lists ran it as retained, with its regularized roster and --upstream at the pin, on the fifteen certificates T-146 cites; it measures each against the packing T-146's regularizations name, read from the register. The review lane of issues 503 and 504 (docs/project/reviews/review-2026-10-11-upper-bound-imports-503-504.md) extended it on 2026-10-11 with readers of PingYou Ltd's JSON and of corners witnesses, --upstream checks that hold a fact to its pinned same-packing witness, and patch_lineage, which counts a parent packing's squares that reappear in a certificate under a box symmetry and translation and decides nothing; it ran it on the two certificates T-147 and T-148 cite. The review lane of issues 505 and 501 (docs/project/reviews/review-2026-10-11-upper-bound-imports-505-501.md) added a reader of the sqcert format, an --upstream reader of Evan Daniel's format for derived facts, a check of each retained certificate's side against its README's print at the pin, and credit readers for T-146, T-128 and T-098, and ran it on the five certificates T-149 and T-150 cite. The review lane of issue 500 (docs/project/reviews/review-2026-10-11-upper-bound-imports-500.md) added its roster, a reader of T-128's retained certificates and a widened nearness for patch_lineage, and ran it on the nine certificates T-151 cites; the review lane of issue 506 (docs/project/reviews/review-2026-10-11-upper-bound-imports-506.md) ran it through a roster entry and credit keys that read another import's certificate, with no change to any decision, on the eleven certificates T-152 and its beyond-horizon rows cite. The review lane of issues 528 and 529 (docs/project/reviews/review-2026-10-12-upper-bound-imports-528-529.md) added a reader of Rio Calle's decimal layout, with exact decimal literals and a half-angle floor for radians by Taylor series in decimal arithmetic, a derivation of his certificate from the layout, and the roster's credit and lineage measurements, and ran it on the four certificates T-158 and T-159 cite. The import and review lanes of issue 552 (docs/project/reviews/review-2026-10-12-upper-bound-import-552.md) gave it that import's roster line with its credit and lineage keys, and ran it on the certificate T-160 cites. The review lane of the 14 October intake (docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md and docs/project/reviews/review-2026-10-14-upper-bound-imports-574.md) gave it the fourteen imports of issues 561 to 593 and PR 574 as its roster, a reader of issue 593's JSON census print, the registered entries' claims in place of generated plans, credit readers for the packings those entries name, the release-asset member reader and centre-basis witness of PR 574, and unmoved, which finds the placement that keeps most squares within 1e-9 and decides nothing; it ran it on the 28 certificates T-161, T-162, T-164 to T-173, T-175 and T-181 to T-183 cite and on T-174's 64 rational certificates, writing receipts/third-route-2026-10-14.json.xz in each packet. For their numbers it lifts Python's integer-text limit, which reading them needs, for its own numbers only (RP-7 of the review of PR 574). Its author had read both maintained routes, their parser and the importer's adapters before writing it, so it is not clean-room; it imports none of their parsing or deciding code and shares Fraction with every exact checker here. It is a second pair-deciding procedure within one method, exact-algebraic, not a second method.
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-couzo-451-exact-feasibility` | replayed here | independent | T-128 |
-| `E-couzo-460-followup-exact-feasibility` | replayed here | independent | T-130 |
-| `E-evand-465-record-hunt-exact-feasibility` | replayed here | independent | T-128, T-131 |
-| `E-couzo-476-exact-feasibility` | replayed here | independent | T-134 |
-| `E-fang-484-exact-feasibility` | replayed here | independent | T-135 |
-| `E-squish-481-exact-feasibility` | replayed here | independent | T-136 |
-| `E-deleeuw-483-exact-feasibility` | replayed here | independent | T-137 |
-| `E-mishapolk-470-exact-feasibility` | replayed here | independent | T-138 |
-| `E-evand-trio126-exact-feasibility` | replayed here | independent | T-139 |
-| `E-couzo-488-exact-feasibility` | replayed here | independent | T-140 |
-| `E-evand-489-exact-feasibility` | replayed here | independent | T-141 |
-| `E-evand-regularized-exact-feasibility` | replayed here | independent | T-146 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-couzo-451-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-128 |
+| `E-couzo-460-followup-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-130 |
+| `E-evand-465-record-hunt-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-128, T-131 |
+| `E-couzo-476-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-134 |
+| `E-fang-484-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-135 |
+| `E-squish-481-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-136 |
+| `E-deleeuw-483-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-137 |
+| `E-mishapolk-470-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-138 |
+| `E-evand-trio126-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-139 |
+| `E-couzo-488-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-140 |
+| `E-evand-489-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-141 |
+| `E-evand-regularized-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-146 |
+| `E-pingyou-503-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-147 |
+| `E-pingyou-504-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-148 |
+| `E-ostashev-501-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-149 |
+| `E-barnett-505-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-150 |
+| `E-squish-500-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-151 |
+| `E-couzo-506-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-152 |
+| `E-ostashev-528-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 3 of 3: the three complete certificates at n = 175, 232 and 264, every wall and every pair decided by both maintained routes and again by the third route; the six kernel controls and the third route's controls are retained separately | T-158 |
+| `E-calle-529-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 1 of 1: the certificate derived here from Rio Calle's layout of 102 squares, every wall and every pair decided by both maintained routes and again by the third route, which also derived it again from the layout at the pin | T-159 |
+| `E-evand-552-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 1 of 1: the complete certificate at n = 154, every wall and every pair decided by both maintained routes and again by the third route; the two kernel controls and the third route's controls are retained separately | T-160 |
+| `E-couzo-561-exact-feasibility` | replayed here | independently re-implemented | full, 4 of 4: the four certificates at n = 156, 176, 237, 271 that T-161 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-161 |
+| `E-ostashev-562-exact-feasibility` | replayed here | independently re-implemented | full, 3 of 3: the three certificates at n = 129, 204, 303 that T-162 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-162 |
+| `E-pingyou-564-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 302 that T-164 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-164 |
+| `E-couzo-586-exact-feasibility` | replayed here | independently re-implemented | full, 4 of 4: the four certificates at n = 154, 176, 211 and 241 that T-165 and T-182 cite, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-165, T-182 |
+| `E-couzo-586-n302-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 302 that T-181 cites, issue 583's certificate as issue 586's packet retains it byte for byte, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-181 |
+| `E-pingyou-504-refinement-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 153 that T-166 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-166 |
+| `E-pingyou-503-refinement-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 207 that T-167 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-167 |
+| `E-pingyou-566-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 146 that T-168 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-168 |
+| `E-pingyou-567-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 261 that T-169 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-169 |
+| `E-pingyou-568-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 105 that T-170 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-170 |
+| `E-pingyou-569-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 272 that T-171 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-171 |
+| `E-couzo-583-exact-feasibility` | replayed here | independently re-implemented | full, 3 of 3: the three certificates at n = 154, 211, 241 that T-172 and T-181 cite, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-172, T-181 |
+| `E-mishapolk-573-exact-feasibility` | replayed here | independently re-implemented | full, 2 of 2: both certificates at n = 153, 207 that T-173 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-173 |
+| `E-pingyou-574-exact-feasibility` | replayed here | independently re-implemented | full, 64 of 64: the 64 rational certificates the entry cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-174 |
+| `E-ostashev-575-exact-feasibility` | replayed here | independently re-implemented | full, 3 of 3: the three certificates at n = 211, 241, 304 that T-175 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-175 |
+| `E-mishapolk-593-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 237 that T-183 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-183 |
+
+### `V-k3-n17-capture-row-checker`
+
+**k3_capture_row.py, with compare_independent.py** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
+
+Decides chosen rows of one fixed-symmetry capture statement of the candidate n = 17 proof in Fraction arithmetic, on its own cell arrangement: every cell's charge against its class level, the per-level minima, and the whole certificate's budget, strict inequality and row chain; the comparison holds each minimum to the stored Python and Node rows.
+
+- Source: [`packing/resources/web/kleddamag-n17-candidate-2026-10-12/receipts-here/programs/k3_capture_row.py`](../../packing/resources/web/kleddamag-n17-candidate-2026-10-12/receipts-here/programs/k3_capture_row.py), [`packing/resources/web/kleddamag-n17-candidate-2026-10-12/receipts-here/programs/compare_independent.py`](../../packing/resources/web/kleddamag-n17-candidate-2026-10-12/receipts-here/programs/compare_independent.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`packing/resources/web/kleddamag-n17-candidate-2026-10-12/receipts-here/programs/k3_capture_row.py`](../../packing/resources/web/kleddamag-n17-candidate-2026-10-12/receipts-here/programs/k3_capture_row.py)
+- Note: Lane K3 of the #557 intake wrote it on 12 October 2026 from the edition's CLASS_ROW_LEMMA.md, PROOF.md section 3 and RESTRICTED_CHECKER.md, without reading the producers' sweep code; its module statement says so and that it imports none of it. Pure Python, about 17 times the producers' CPU per row.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n017-overbeck-capture-independent-sample` | replayed here | independently re-implemented, clean-room | sample, 34 of 1,728,000: capture rows, no statement whole | - |
+
+### `V-k3-n17-root-isolation`
+
+**k3_root_isolation.py** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
+
+Decides, from STATEMENT.md of the candidate n = 17 proof, that F and G have exactly one common zero in the stated box (a Krawczyk test in rational intervals, and a Sturm count of the resultant), encloses L, compares the chart with exp-237 and tests that L is a root of n-017's degree-18 polynomial; a perturbed F must fail.
+
+- Source: [`packing/resources/web/kleddamag-n17-candidate-2026-10-12/receipts-here/programs/k3_root_isolation.py`](../../packing/resources/web/kleddamag-n17-candidate-2026-10-12/receipts-here/programs/k3_root_isolation.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`packing/resources/web/kleddamag-n17-candidate-2026-10-12/receipts-here/programs/k3_root_isolation.py`](../../packing/resources/web/kleddamag-n17-candidate-2026-10-12/receipts-here/programs/k3_root_isolation.py)
+- Note: Lane K3 of the #557 intake wrote it on 12 October 2026 without reading the author's endpoint programs, as its module statement says. SymPy parses the polynomials and computes the resultant; every decision is Fraction arithmetic.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n017-overbeck-statement-root-independent` | replayed here | independently re-implemented | not recorded | - |
+
+### `V-sq17-review2-trace-checker`
+
+**hpfast.py, with its drivers fast_replay.py, chunk_replay.py, table_check.py and summary_check.py** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
+
+Re-evaluates native_decide facts of Fitzharding's Lean proof of s(17) = L in exact integers and fractions: excludes on a branch-tree node, runToCheck on a chunk of the neighbour chain or the capture, freshCheck 44 on a chunk table, and summaryCheck on the terminal capture state, by a Python transcription of the definitions of HalfPlaneFast, CaptureRunFast, CaptureTableFast and CaptureSummaryFast.
+
+- Source: [`packing/resources/web/fitzharding-n17-lean-2026-10-13/review-2/programs/hpfast.py`](../../packing/resources/web/fitzharding-n17-lean-2026-10-13/review-2/programs/hpfast.py), [`packing/resources/web/fitzharding-n17-lean-2026-10-13/review-2/programs/fast_replay.py`](../../packing/resources/web/fitzharding-n17-lean-2026-10-13/review-2/programs/fast_replay.py), [`packing/resources/web/fitzharding-n17-lean-2026-10-13/review-2/programs/chunk_replay.py`](../../packing/resources/web/fitzharding-n17-lean-2026-10-13/review-2/programs/chunk_replay.py), [`packing/resources/web/fitzharding-n17-lean-2026-10-13/review-2/programs/table_check.py`](../../packing/resources/web/fitzharding-n17-lean-2026-10-13/review-2/programs/table_check.py), [`packing/resources/web/fitzharding-n17-lean-2026-10-13/review-2/programs/summary_check.py`](../../packing/resources/web/fitzharding-n17-lean-2026-10-13/review-2/programs/summary_check.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-10-13-fitzharding-n17-mathematical-correctness.md`](../../docs/project/reviews/review-2026-10-13-fitzharding-n17-mathematical-correctness.md)
+- Independence: its authors read proof-text, certificate-format, producer-code, producer-output; it shares HalfPlaneFast, CaptureRunFast, CaptureTableFast, CaptureSummaryFast; written by Claude (Anthropic) (the mathematical-correctness review lane of the sq17-lean intake, tbd-strong-max tier, reasoning max), with its own prompt; authorship in common with the producer’s: system-family, The source's README says it was developed with substantial assistance from Claude and Codex. These programs were written by a Claude agent prompted separately from the source and from the first review lane, in files of their own that transcribe the four producer definitions named above.
+- Note: The second review of the Lean proof wrote it on 13 October 2026 and ran it on ten of the 13,343 native_decide facts, with three controls refused. Kept as run in the packet's review-2/, with the output each run printed.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n017-fitzharding-native-facts-review2` | replayed here | re-implemented, sharing named components | sample, 10 of 13,343: native_decide facts of the theorem's axiom report: excludes on one node of the three branch trees (T1528's Node3, 14,851 steps), runToCheck on 6 of the 273 chunk runs (Neighbour329 chunks 0000, 0050 and 0107 of 108; CaptureOpen chunks 0000, 0080 and 0164 of 165), freshCheck 44 on two capture tables, and summaryCheck on the terminal capture state over all 17 x 1,024 rows | - |
+
+### `V-sq17-review2-census`
+
+**census_check.py** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
+
+Rebuilds, for Fitzharding's Lean proof of s(17) = L, the D4 action on the 24 cells from their vertices, counts the orbits of 7-subsets by Burnside and by enumeration, and checks the 43,593 representatives, the 346,104 census rows, the 35 patterns, the 2,781 full rosters, the classifier that routes every representative, and the rosters of the four neighbour cases and the capture case.
+
+- Source: [`packing/resources/web/fitzharding-n17-lean-2026-10-13/review-2/programs/census_check.py`](../../packing/resources/web/fitzharding-n17-lean-2026-10-13/review-2/programs/census_check.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-10-13-fitzharding-n17-mathematical-correctness.md`](../../docs/project/reviews/review-2026-10-13-fitzharding-n17-mathematical-correctness.md)
+- Independence: its authors read mathematics, proof-text, certificate-format, producer-code; it shares none of the producer’s code; written by Claude (Anthropic) (the mathematical-correctness review lane of the sq17-lean intake, tbd-strong-max tier, reasoning max), with its own prompt and code; authorship in common with the producer’s: system-family, The source's README says it was developed with Claude and Codex. Written by a Claude agent prompted separately, in a file of its own that imports none of the source.
+- Note: Kept in the Lean packet's review-2/, with its output, as it ran but for one line written another way at retention, with the same behaviour, so that the repository's check on JavaScript in Python strings passes (the folder's README).
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n017-fitzharding-census-review2` | replayed here | independently re-implemented after reading the producer’s code | full: the census and the classifier: the D4 tables, the 43,593 representatives, the 346,104 rows in 338 chunks, the 35 patterns, the 2,781 full rosters, every representative's routing, and the rosters of the four neighbour cases and the capture case | - |
+
+### `V-sq17-review2-cell-geometry`
+
+**geometry_checks.py** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic, numerical-f64
+
+For Fitzharding's Lean proof of s(17) = L: decides exactly that the eight interior cells have squared diameter at most 29377/31250; samples the cover of the centre box by the 24 cells at grid points, random points and every vertex; and searches at random, in floating point, for two separable squares in each wall-cell class.
+
+- Source: [`packing/resources/web/fitzharding-n17-lean-2026-10-13/review-2/programs/geometry_checks.py`](../../packing/resources/web/fitzharding-n17-lean-2026-10-13/review-2/programs/geometry_checks.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-10-13-fitzharding-n17-mathematical-correctness.md`](../../docs/project/reviews/review-2026-10-13-fitzharding-n17-mathematical-correctness.md)
+- Independence: its authors read mathematics, proof-text, certificate-format, producer-code; it shares none of the producer’s code; written by Claude (Anthropic) (the mathematical-correctness review lane of the sq17-lean intake, tbd-strong-max tier, reasoning max), with its own prompt and code; authorship in common with the producer’s: system-family, The source's README says it was developed with Claude and Codex. Written by a Claude agent prompted separately, in a file of its own.
+- Note: Kept in the Lean packet's review-2/, with its output, as it ran but for one line written another way at retention, with the same behaviour, so that the repository's check on JavaScript in Python strings passes (the folder's README).
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n017-fitzharding-cell-geometry-review2` | replayed here | independently re-implemented after reading the producer’s code | sample, 8 of 24: cells whose capacity of one centre is decided: the eight interior cells, by exact squared diameter; the cover of the box by the 24 cells was only sampled, at 401 x 401 grid points, 20,000 random points and every vertex, and the sixteen wall cells' capacity only searched at random in floating point | - |
+
+### `V-sq17-review2-rigidity-dual`
+
+**rigidity_dual_check.py** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
+
+Re-implements, with exact fractions, the affine weight check and the sparse residual check of the 93-box local-rigidity dual certificate of Fitzharding's Lean proof of s(17) = L, the cover of the slider box by the 93 boxes for every one of the 90 signed directions, and the final inequality q/4 + 6e5 q^2 < q at q = 1e-7, from the 430 coefficient intervals as given.
+
+- Source: [`packing/resources/web/fitzharding-n17-lean-2026-10-13/review-2/programs/rigidity_dual_check.py`](../../packing/resources/web/fitzharding-n17-lean-2026-10-13/review-2/programs/rigidity_dual_check.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-10-13-fitzharding-n17-mathematical-correctness.md`](../../docs/project/reviews/review-2026-10-13-fitzharding-n17-mathematical-correctness.md)
+- Independence: its authors read mathematics, proof-text, certificate-format, producer-code; it shares none of the producer’s code; written by Claude (Anthropic) (the mathematical-correctness review lane of the sq17-lean intake, tbd-strong-max tier, reasoning max), with its own prompt and code; authorship in common with the producer’s: system-family, The source's README says it was developed with Claude and Codex. Written by a Claude agent prompted separately, in a file of its own.
+- Note: Kept as run in the Lean packet's review-2/, with its output.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n017-fitzharding-rigidity-dual-review2` | replayed here | independently re-implemented after reading the producer’s code | full: the local-rigidity dual certificate: the 93 affine weight certificates over the 90 signed coordinate directions, their residual budgets and masses, and the cover of the slider box | - |
+
+### `V-sq17-review2-endpoint-frames`
+
+**endpoint_check.py** · Squares Project (Levy) · first-party · decides · Python · numerical-multiprecision
+
+Solves the two endpoint polynomials of Fitzharding's Lean proof of s(17) = L by Newton's method at 80 digits from a crude start, compares the root with the declared midpoint, computes the side, and computes the margins by which the two frames' Lower and Upper conditions hold.
+
+- Source: [`packing/resources/web/fitzharding-n17-lean-2026-10-13/review-2/programs/endpoint_check.py`](../../packing/resources/web/fitzharding-n17-lean-2026-10-13/review-2/programs/endpoint_check.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-10-13-fitzharding-n17-mathematical-correctness.md`](../../docs/project/reviews/review-2026-10-13-fitzharding-n17-mathematical-correctness.md)
+- Independence: its authors read mathematics, proof-text, producer-code; it shares none of the producer’s code; written by Claude (Anthropic) (the mathematical-correctness review lane of the sq17-lean intake, tbd-strong-max tier, reasoning max), with its own prompt and code; authorship in common with the producer’s: system-family, The source's README says it was developed with Claude and Codex. Written by a Claude agent prompted separately, in a file of its own; mpmath does the arithmetic.
+- Note: Kept as run in the Lean packet's review-2/, with its output. A numerical cross-check: V-fitzharding-n17-premise-comparisons decides the endpoint exactly.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n017-fitzharding-endpoint-frames-review2` | replayed here | independently re-implemented after reading the producer’s code | full: the endpoint's root and side, and the Lower and Upper margins of the ordinary and neighbour frames | - |
+
+### `V-overbeck-review3-root-isolation`
+
+**root_isolation.py, with root_box.py** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
+
+Decides, for Overbeck's candidate proof of s(17) = L, that F and G have exactly one common zero in the statement's isolating rectangle, by an exact Krawczyk test in rational intervals with a hand-derived Jacobian, and encloses L to ninety places by five refinements with outward rounding; root_box.py gives the enclosure to the other checks.
+
+- Source: [`packing/resources/web/kleddamag-n17-candidate-2026-10-12/review-3/programs/root_isolation.py`](../../packing/resources/web/kleddamag-n17-candidate-2026-10-12/review-3/programs/root_isolation.py), [`packing/resources/web/kleddamag-n17-candidate-2026-10-12/review-3/programs/root_box.py`](../../packing/resources/web/kleddamag-n17-candidate-2026-10-12/review-3/programs/root_box.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-10-13-overbeck-n17-mathematical-correctness.md`](../../docs/project/reviews/review-2026-10-13-overbeck-n17-mathematical-correctness.md)
+- Independence: its authors read mathematics, proof-text, earlier-review; it shares none of the producer’s code; written by Claude (Anthropic) (the mathematical-correctness review lane of the), with its own prompt and code; authorship in common with the producer’s: system-family, The edition's README says its mathematics, engines, checkers and text were produced by Codex (OpenAI) and Claude (Anthropic). Written by a Claude agent prompted separately from the edition and from the earlier review lanes, in files of its own that import none of the edition.
+- Note: Kept as run in the Overbeck packet's review-3/; the lane kept no output of it.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n017-overbeck-endpoint-review3` | replayed here | independently re-implemented, clean-room | full: the statement's isolating rectangle, its unique common zero of F and G, and L to ninety places | - |
+
+### `V-overbeck-review3-upper-at-l`
+
+**upper_at_L_check.py, with root_box.py** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
+
+Decides that the seventeen squares of the candidate's UPPER_FORMULAS.md, at the algebraic root of F and G, lie in [0, L]^2 with pairwise disjoint interiors: strict facts by interval arithmetic over root_box.py's enclosure, each wall contact and tangency by reducing its numerator to zero modulo a lex Groebner basis of (F, G), with its denominator bounded away from zero.
+
+- Source: [`packing/resources/web/kleddamag-n17-candidate-2026-10-12/review-3/programs/upper_at_L_check.py`](../../packing/resources/web/kleddamag-n17-candidate-2026-10-12/review-3/programs/upper_at_L_check.py), [`packing/resources/web/kleddamag-n17-candidate-2026-10-12/review-3/programs/root_box.py`](../../packing/resources/web/kleddamag-n17-candidate-2026-10-12/review-3/programs/root_box.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-10-13-overbeck-n17-mathematical-correctness.md`](../../docs/project/reviews/review-2026-10-13-overbeck-n17-mathematical-correctness.md)
+- Independence: its authors read mathematics, proof-text, producer-code, earlier-review; it shares none of the producer’s code; written by Claude (Anthropic) (the mathematical-correctness review lane of the), with its own prompt and code; authorship in common with the producer’s: system-family, The edition was produced by Codex and Claude. Written by a Claude agent prompted separately, in a file of its own; SymPy computes the Groebner basis.
+- Note: Kept in the Overbeck packet's review-3/ as rerun after the review's section 10 in P014's counting convention, with that run's log.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n017-overbeck-upper-construction-review3` | replayed here | independently re-implemented after reading the producer’s code | full, 204 of 204: the upper construction at side L: its 68 wall clearances and 136 pairs, with the 36 contacts, 15 walls and 21 pairs, proved by ideal membership modulo F and G | - |
+
+### `V-overbeck-review3-literal-checks`
+
+**literal_checks.py, with geom_util.py** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
+
+Decides exactly the literal geometric facts of sections 3 to 6 of the candidate's proof text over its 98 capture class files, 192 printed literal checks at 83 sites (the frame assignment, the KEY_W slot, the wall triggers, the loose and coarse capacities, the C7/C8 transfer and the C12 unions), and re-decides the case partition with a decision function of its own against the source's thirteen predicates.
+
+- Source: [`packing/resources/web/kleddamag-n17-candidate-2026-10-12/review-3/programs/literal_checks.py`](../../packing/resources/web/kleddamag-n17-candidate-2026-10-12/review-3/programs/literal_checks.py), [`packing/resources/web/kleddamag-n17-candidate-2026-10-12/review-3/programs/geom_util.py`](../../packing/resources/web/kleddamag-n17-candidate-2026-10-12/review-3/programs/geom_util.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-10-13-overbeck-n17-mathematical-correctness.md`](../../docs/project/reviews/review-2026-10-13-overbeck-n17-mathematical-correctness.md)
+- Independence: its authors read proof-text, certificate-format, producer-code, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the mathematical-correctness review lane of the), with its own prompt and code; authorship in common with the producer’s: system-family, The edition was produced by Codex and Claude. Written by a Claude agent prompted separately, in files of their own that import none of the edition.
+- Note: Kept in the Overbeck packet's review-3/; the lane kept no output of it.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n017-overbeck-literal-checks-review3` | replayed here | independently re-implemented after reading the producer’s code | full, 193 of 193: the literal geometric facts of the proof text's sections 3 to 6 over the 98 capture class files and the case partition: 192 printed literal checks at 83 sites, plus one partition check on all 15,000 product atoms | - |
+
+### `V-overbeck-review3-admission`
+
+**admission_check.py, with geom_util.py and root_box.py** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
+
+Decides the root admission of the candidate proof of s(17) = L in a chart of its own over its own enclosure of L: for each of the eleven roots, every one of the seventeen labels' target regions lies in the root box and its directions in the root arcs, the clipped target regions have diameter below one and are pairwise disjoint, and the eleven parent profiles are distinct.
+
+- Source: [`packing/resources/web/kleddamag-n17-candidate-2026-10-12/review-3/programs/admission_check.py`](../../packing/resources/web/kleddamag-n17-candidate-2026-10-12/review-3/programs/admission_check.py), [`packing/resources/web/kleddamag-n17-candidate-2026-10-12/review-3/programs/geom_util.py`](../../packing/resources/web/kleddamag-n17-candidate-2026-10-12/review-3/programs/geom_util.py), [`packing/resources/web/kleddamag-n17-candidate-2026-10-12/review-3/programs/root_box.py`](../../packing/resources/web/kleddamag-n17-candidate-2026-10-12/review-3/programs/root_box.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-10-13-overbeck-n17-mathematical-correctness.md`](../../docs/project/reviews/review-2026-10-13-overbeck-n17-mathematical-correctness.md)
+- Independence: its authors read proof-text, certificate-format, producer-code; it shares none of the producer’s code; written by Claude (Anthropic) (the mathematical-correctness review lane of the), with its own prompt and code; authorship in common with the producer’s: system-family, The edition was produced by Codex and Claude. Written by a Claude agent prompted separately, in files of its own.
+- Note: Kept in the Overbeck packet's review-3/; the lane kept no output of it.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n017-overbeck-admission-review3` | replayed here | independently re-implemented after reading the producer’s code | full, 187 of 187: the admission of the 11 roots, 17 labels each, and the distinctness of their parent profiles | - |
+
+### `V-overbeck-review3-handovers`
+
+**handover_check.py** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
+
+Decides the three hand-overs of the candidate's rigidity step (P092 to P095): the JG terminal equals the G20S window, the G20S tube cut by xi_(2,1) <= 0 lies in the HW window, and the HW tube with the same cut lies in the sixteen-square entry; and that without the cut neither inclusion holds.
+
+- Source: [`packing/resources/web/kleddamag-n17-candidate-2026-10-12/review-3/programs/handover_check.py`](../../packing/resources/web/kleddamag-n17-candidate-2026-10-12/review-3/programs/handover_check.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-10-13-overbeck-n17-mathematical-correctness.md`](../../docs/project/reviews/review-2026-10-13-overbeck-n17-mathematical-correctness.md)
+- Independence: its authors read proof-text, specification, certificate-format, producer-code, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the mathematical-correctness review lane of the), with its own prompt and code; authorship in common with the producer’s: system-family, The edition was produced by Codex and Claude. Written by a Claude agent prompted separately, in a file of its own.
+- Note: Kept in the Overbeck packet's review-3/; the lane kept no output of it.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n017-overbeck-handovers-review3` | replayed here | independently re-implemented after reading the producer’s code | full, 3 of 3: the three hand-overs of the rigidity step, P092 to P095, between the regions stated in EXPECT_G20S.json, EXPECT_HW.json and JG_exact_v2.json | - |
+
+### `V-overbeck-review3-jq-tree-checker`
+
+**jq_leaf_check.py** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
+
+Decides the candidate's one-node tree certificate JQ (schema wx-cert-3) by the rules of SPEC_v3.0.md with exact rationals: the root conditions with the window's centres, the start store, every opt and ind declaration's precondition, the term rules, the centred remainder rule and the acceptance of the zero step, then compares its lower bound with the author's stored report. It implements no splits, cuts, stored relative arcs or terminal test, so it decides one-node trees only.
+
+- Source: [`packing/resources/web/kleddamag-n17-candidate-2026-10-12/review-3/programs/jq_leaf_check.py`](../../packing/resources/web/kleddamag-n17-candidate-2026-10-12/review-3/programs/jq_leaf_check.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-10-13-overbeck-n17-mathematical-correctness.md`](../../docs/project/reviews/review-2026-10-13-overbeck-n17-mathematical-correctness.md)
+- Independence: its authors read specification, certificate-format, producer-code, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the mathematical-correctness review lane of the), with its own prompt and code; authorship in common with the producer’s: system-family, The edition's two tree checkers were written by sessions of one AI system from one specification (its KNOWN_ISSUES.md); this checker was written by a Claude agent prompted separately, in a file of its own that imports none of the edition.
+- Note: Kept as run in the Overbeck packet's review-3/, with its log.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n017-overbeck-jq-tree-review3` | replayed here | independently re-implemented after reading the producer’s code | sample, 1 of 13: tree certificates of the candidate's step 4, JQ decided in full by a checker that handles one-node trees only | - |
+
+### `V-overbeck-review2-krawczyk-root`
+
+**geom.py** · Squares Project (Levy) · first-party · decides · Python · interval-certified
+
+Transcribes the exact-root layout of Overbeck's candidate proof of s(17) = L from STATEMENT.md and UPPER_FORMULAS.md, finds the root of F and G by Newton's method at 160 digits, and proves it unique in the boxes of radius 1e-12 and 1e-100 about the Newton point by a Krawczyk test in mpmath interval arithmetic with outward rounding.
+
+- Source: [`packing/resources/web/kleddamag-n17-candidate-2026-10-12/review-2/programs/geom.py`](../../packing/resources/web/kleddamag-n17-candidate-2026-10-12/review-2/programs/geom.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-10-13-overbeck-n17-candidate-second.md`](../../docs/project/reviews/review-2026-10-13-overbeck-n17-candidate-second.md)
+- Independence: its authors read mathematics, proof-text, specification, certificate-format, producer-code, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the second adversarial review lane of the), with its own prompt and code; authorship in common with the producer’s: system-family, The edition was produced by Codex and Claude. Written by a Claude agent prompted separately from the edition and from the first review lane, in files of its own that import none of the edition.
+- Note: Retained as run in the Overbeck packet's review-2/, whose RESULTS.txt is the output of run.sh.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n017-overbeck-gate-review2` | replayed here | independently re-implemented after reading the producer’s code | full: the normalized 52-row gate of G20S_PHYSICAL (PROOF.md P110): the 152 separating options, the 52 base-gap identities, the 52 geometric rows of each of the five stored stopped models, and the chain from B6 through the five stopped rounds, taking the stop cuts as premises stated by PROOF.md P096 | - |
+
+### `V-overbeck-review2-groebner-identities`
+
+**identities.py, with audit.py** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic, interval-certified
+
+For the normalized 52-row gate of Overbeck's candidate proof (G20S_PHYSICAL): audits the 152 separating options of the 19 retained pairs at root scale in interval arithmetic (audit.py), then shows that each of the 52 base-gap numerators lies in the ideal of F and G by reduction modulo a lex Groebner basis (SymPy), that every denominator is nonzero at the root, and that every slider coefficient vanishes identically.
+
+- Source: [`packing/resources/web/kleddamag-n17-candidate-2026-10-12/review-2/programs/identities.py`](../../packing/resources/web/kleddamag-n17-candidate-2026-10-12/review-2/programs/identities.py), [`packing/resources/web/kleddamag-n17-candidate-2026-10-12/review-2/programs/audit.py`](../../packing/resources/web/kleddamag-n17-candidate-2026-10-12/review-2/programs/audit.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-10-13-overbeck-n17-candidate-second.md`](../../docs/project/reviews/review-2026-10-13-overbeck-n17-candidate-second.md)
+- Independence: its authors read mathematics, proof-text, specification, certificate-format, producer-code, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the second adversarial review lane of the), with its own prompt and code; authorship in common with the producer’s: system-family, The edition was produced by Codex and Claude. Written by a Claude agent prompted separately, in files of its own; SymPy and mpmath do the algebra and the intervals.
+- Note: Retained as run in the Overbeck packet's review-2/.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n017-overbeck-gate-review2` | replayed here | independently re-implemented after reading the producer’s code | full: the normalized 52-row gate of G20S_PHYSICAL (PROOF.md P110): the 152 separating options, the 52 base-gap identities, the 52 geometric rows of each of the five stored stopped models, and the chain from B6 through the five stopped rounds, taking the stop cuts as premises stated by PROOF.md P096 | - |
+
+### `V-overbeck-review2-row-builder`
+
+**rows.py, with check_rows.py** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
+
+Builds the 52 geometric rows of the normalized gate of Overbeck's candidate proof from first principles, with its own remainders, coefficient enclosures and rounding grid (rows.py), and decides in exact rationals that every geometric row of the producer's five stored stopped models is implied, on that round's incoming box, by its own necessary inequality, the 192 product rows being the McCormick rows of the box (check_rows.py).
+
+- Source: [`packing/resources/web/kleddamag-n17-candidate-2026-10-12/review-2/programs/rows.py`](../../packing/resources/web/kleddamag-n17-candidate-2026-10-12/review-2/programs/rows.py), [`packing/resources/web/kleddamag-n17-candidate-2026-10-12/review-2/programs/check_rows.py`](../../packing/resources/web/kleddamag-n17-candidate-2026-10-12/review-2/programs/check_rows.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-10-13-overbeck-n17-candidate-second.md`](../../docs/project/reviews/review-2026-10-13-overbeck-n17-candidate-second.md)
+- Independence: its authors read mathematics, proof-text, specification, certificate-format, producer-code, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the second adversarial review lane of the), with its own prompt and code; authorship in common with the producer’s: system-family, The edition was produced by Codex and Claude. Written by a Claude agent prompted separately, in files of its own.
+- Note: Retained as run in the Overbeck packet's review-2/.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n017-overbeck-gate-review2` | replayed here | independently re-implemented after reading the producer’s code | full: the normalized 52-row gate of G20S_PHYSICAL (PROOF.md P110): the 152 separating options, the 52 base-gap identities, the 52 geometric rows of each of the five stored stopped models, and the chain from B6 through the five stopped rounds, taking the stop cuts as premises stated by PROOF.md P096 | - |
+
+### `V-overbeck-review2-duality-bounds`
+
+**replay.py** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
+
+Replays the normalized contraction chain of Overbeck's candidate proof by exact weak duality: on the producer's five stored stopped models, every one of the 460 stored bounds and every outgoing box, to the stated ratio 159201934153319/200000000000000; and on rows.py's rows alone, the six B6 steps, the stop cuts and the five stopped rounds, to a final 45-core ratio of 0.792020707575807.
+
+- Source: [`packing/resources/web/kleddamag-n17-candidate-2026-10-12/review-2/programs/replay.py`](../../packing/resources/web/kleddamag-n17-candidate-2026-10-12/review-2/programs/replay.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-10-13-overbeck-n17-candidate-second.md`](../../docs/project/reviews/review-2026-10-13-overbeck-n17-candidate-second.md)
+- Independence: its authors read mathematics, proof-text, specification, certificate-format, producer-code, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the second adversarial review lane of the), with its own prompt and code; authorship in common with the producer’s: system-family, The edition was produced by Codex and Claude. Written by a Claude agent prompted separately, in a file of its own.
+- Note: Retained as run in the Overbeck packet's review-2/.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n017-overbeck-gate-review2` | replayed here | independently re-implemented after reading the producer’s code | full: the normalized 52-row gate of G20S_PHYSICAL (PROOF.md P110): the 152 separating options, the 52 base-gap identities, the 52 geometric rows of each of the five stored stopped models, and the chain from B6 through the five stopped rounds, taking the stop cuts as premises stated by PROOF.md P096 | - |
+
+### `V-overbeck-review3-seed-packing`
+
+**seed_packing_check.py** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
+
+Checks exactly that the candidate's rational seed upper-packing-certificate.json, the reference file every tree certificate names, is a packing of seventeen unit squares at its side R: 68 wall conditions and 136 pair separations by the eight-axis test.
+
+- Source: [`packing/resources/web/kleddamag-n17-candidate-2026-10-12/review-3/programs/seed_packing_check.py`](../../packing/resources/web/kleddamag-n17-candidate-2026-10-12/review-3/programs/seed_packing_check.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-10-13-overbeck-n17-mathematical-correctness.md`](../../docs/project/reviews/review-2026-10-13-overbeck-n17-mathematical-correctness.md)
+- Independence: its authors read mathematics, certificate-format; it shares none of the producer’s code; written by Claude (Anthropic) (the mathematical-correctness review lane of the), with its own prompt and code; authorship in common with the producer’s: system-family, The edition was produced by Codex and Claude. Written by a Claude agent prompted separately, in a file of its own.
+- Note: Kept in the Overbeck packet's review-3/; the lane kept no output of it.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n017-overbeck-jq-tree-review3` | replayed here | independently re-implemented after reading the producer’s code | sample, 1 of 13: tree certificates of the candidate's step 4, JQ decided in full by a checker that handles one-node trees only | - |
+
+### `V-overbeck-review3-spec-lemmas`
+
+**spec_lemmas_numeric.py** · Squares Project (Levy) · first-party · checks premises · Python · numerical-f64
+
+Tests every lemma of the candidate's tree-checker specification SPEC_v3.0.md (sections 4.1 to 4.8, 5 and 8) on seeded random floating-point instances: a guard against misreading a sign or a convention, not a proof.
+
+- Source: [`packing/resources/web/kleddamag-n17-candidate-2026-10-12/review-3/programs/spec_lemmas_numeric.py`](../../packing/resources/web/kleddamag-n17-candidate-2026-10-12/review-3/programs/spec_lemmas_numeric.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-10-13-overbeck-n17-mathematical-correctness.md`](../../docs/project/reviews/review-2026-10-13-overbeck-n17-mathematical-correctness.md)
+- Independence: its authors read mathematics, specification, producer-code; it shares none of the producer’s code; written by Claude (Anthropic) (the mathematical-correctness review lane of the), with its own prompt and code; authorship in common with the producer’s: system-family, The edition was produced by Codex and Claude. Written by a Claude agent prompted separately, in a file of its own.
+- Note: Kept in the Overbeck packet's review-3/; the lane kept no output of it.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n017-overbeck-jq-tree-review3` | replayed here | independently re-implemented after reading the producer’s code | sample, 1 of 13: tree certificates of the candidate's step 4, JQ decided in full by a checker that handles one-node trees only | - |
+
+### `V-overbeck-review3-parallel-rows`
+
+**parallel_row_check.py** · Squares Project (Levy) · first-party · checks premises · Python · numerical-f64
+
+Tests the parallel-pair row derivation of the candidate's proof text (P100 to P106) on 28,326 seeded random floating-point instances of two unit squares with a common reference side; it decides nothing, and no evidence entry names it.
+
+- Source: [`packing/resources/web/kleddamag-n17-candidate-2026-10-12/review-3/programs/parallel_row_check.py`](../../packing/resources/web/kleddamag-n17-candidate-2026-10-12/review-3/programs/parallel_row_check.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-10-13-overbeck-n17-mathematical-correctness.md`](../../docs/project/reviews/review-2026-10-13-overbeck-n17-mathematical-correctness.md)
+- Independence: its authors read mathematics, proof-text, earlier-review; it shares none of the producer’s code; written by Claude (Anthropic) (the mathematical-correctness review lane of the), with its own prompt and code; authorship in common with the producer’s: system-family, The edition was produced by Codex and Claude. Written by a Claude agent prompted separately, in a file of its own.
+- Note: Kept in the Overbeck packet's review-3/; the lane kept no output of it.
+
+No evidence entry names it yet.
 
 ### `V-evand-exact-certificates`
 
@@ -1603,24 +2188,57 @@ Reads Evan Daniel's rational certificates, refusing anything the format does not
 - What its authors read and used: [`packing/devtools/evand_exact_certificates.py`](../../packing/devtools/evand_exact_certificates.py)
 - Note: Written from the certificate format the source's README states and from the geometry. Its author read the source's verify_cert.py and verify_cert2.py before writing it, to check that the conversion means what they mean, and imports or copies none of their code; it runs them only as separate processes.
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-evand-exact-optima-2026-10-05-exact-replay` | replayed here | independent | T-098 |
-| `E-evand-exact-optima-2026-10-05-source-replay` | replayed here | producer’s code | T-098 |
-| `E-evand-exact-ceilings-2026-10-05-exact-replay` | replayed here | independent | T-101 |
-| `E-evand-exact-ceilings-2026-10-05-source-replay` | replayed here | producer’s code | T-101 |
-| `E-couzo-451-exact-feasibility` | replayed here | independent | T-128 |
-| `E-couzo-460-followup-exact-feasibility` | replayed here | independent | T-130 |
-| `E-evand-465-record-hunt-exact-feasibility` | replayed here | independent | T-128, T-131 |
-| `E-couzo-476-exact-feasibility` | replayed here | independent | T-134 |
-| `E-fang-484-exact-feasibility` | replayed here | independent | T-135 |
-| `E-squish-481-exact-feasibility` | replayed here | independent | T-136 |
-| `E-deleeuw-483-exact-feasibility` | replayed here | independent | T-137 |
-| `E-mishapolk-470-exact-feasibility` | replayed here | independent | T-138 |
-| `E-evand-trio126-exact-feasibility` | replayed here | independent | T-139 |
-| `E-couzo-488-exact-feasibility` | replayed here | independent | T-140 |
-| `E-evand-489-exact-feasibility` | replayed here | independent | T-141 |
-| `E-evand-regularized-exact-feasibility` | replayed here | independent | T-146 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-evand-exact-optima-2026-10-05-exact-replay` | replayed here | independently re-implemented | not recorded | T-098 |
+| `E-evand-exact-optima-2026-10-05-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-098 |
+| `E-evand-exact-ceilings-2026-10-05-exact-replay` | replayed here | independently re-implemented | not recorded | T-101 |
+| `E-evand-exact-ceilings-2026-10-05-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-101 |
+| `E-couzo-451-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-128 |
+| `E-couzo-460-followup-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-130 |
+| `E-evand-465-record-hunt-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-128, T-131 |
+| `E-couzo-476-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-134 |
+| `E-fang-484-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-135 |
+| `E-squish-481-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-136 |
+| `E-deleeuw-483-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-137 |
+| `E-mishapolk-470-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-138 |
+| `E-evand-trio126-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-139 |
+| `E-couzo-488-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-140 |
+| `E-evand-489-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-141 |
+| `E-evand-regularized-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-146 |
+| `E-pingyou-503-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-147 |
+| `E-pingyou-504-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-148 |
+| `E-ostashev-501-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-149 |
+| `E-barnett-505-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-150 |
+| `E-squish-500-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-151 |
+| `E-couzo-506-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-152 |
+| `E-ostashev-528-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 3 of 3: the three complete certificates at n = 175, 232 and 264, every wall and every pair decided by both maintained routes and again by the third route; the six kernel controls and the third route's controls are retained separately | T-158 |
+| `E-calle-529-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 1 of 1: the certificate derived here from Rio Calle's layout of 102 squares, every wall and every pair decided by both maintained routes and again by the third route, which also derived it again from the layout at the pin | T-159 |
+| `E-evand-552-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 1 of 1: the complete certificate at n = 154, every wall and every pair decided by both maintained routes and again by the third route; the two kernel controls and the third route's controls are retained separately | T-160 |
+| `E-couzo-561-exact-feasibility` | replayed here | independently re-implemented | full, 4 of 4: the four certificates at n = 156, 176, 237, 271 that T-161 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-161 |
+| `E-ostashev-562-exact-feasibility` | replayed here | independently re-implemented | full, 3 of 3: the three certificates at n = 129, 204, 303 that T-162 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-162 |
+| `E-pingyou-564-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 302 that T-164 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-164 |
+| `E-couzo-586-exact-feasibility` | replayed here | independently re-implemented | full, 4 of 4: the four certificates at n = 154, 176, 211 and 241 that T-165 and T-182 cite, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-165, T-182 |
+| `E-couzo-586-n302-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 302 that T-181 cites, issue 583's certificate as issue 586's packet retains it byte for byte, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-181 |
+| `E-pingyou-504-refinement-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 153 that T-166 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-166 |
+| `E-pingyou-503-refinement-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 207 that T-167 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-167 |
+| `E-pingyou-566-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 146 that T-168 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-168 |
+| `E-pingyou-567-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 261 that T-169 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-169 |
+| `E-pingyou-568-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 105 that T-170 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-170 |
+| `E-pingyou-569-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 272 that T-171 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-171 |
+| `E-couzo-583-exact-feasibility` | replayed here | independently re-implemented | full, 3 of 3: the three certificates at n = 154, 211, 241 that T-172 and T-181 cite, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-172, T-181 |
+| `E-mishapolk-573-exact-feasibility` | replayed here | independently re-implemented | full, 2 of 2: both certificates at n = 153, 207 that T-173 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-173 |
+| `E-pingyou-574-exact-feasibility` | replayed here | independently re-implemented | full, 64 of 64: the 64 rational certificates the entry cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-174 |
+| `E-ostashev-575-exact-feasibility` | replayed here | independently re-implemented | full, 3 of 3: the three certificates at n = 211, 241, 304 that T-175 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-175 |
+| `E-fang-excess-theorem-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 6 of 6: the six retained inventory certificates at 211, 241, 273, 307, 308 and 932, every wall and every pair decided by both maintained routes; the twelve kernel controls are retained separately | T-163 |
+| `E-mishapolk-593-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 237 that T-183 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-183 |
+| `E-fang-direct-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 14 of 14: the complete certificates at 380, 381, 382, 421, 422, 463, 464, 507, 508, 553, 601, 651, 758 and 814, every wall and every pair decided by both maintained routes; the 28 kernel controls are retained separately | - |
+| `E-couzo-506-n175-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 175 that T-185 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-185 |
+| `E-mishapolk-70a033f-exact-feasibility` | replayed here | independently re-implemented | full, 12 of 12: the twelve derived certificates at n = 129, 154, 156, 175, 176, 204, 232, 264, 271, 302, 303 and 304 that T-186 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipts | T-186 |
+| `E-evand-606-n146-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 146 that T-187 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-187 |
+| `E-couzo-487b058-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 211 that T-188 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-188 |
+| `E-couzo-607-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 237 that T-189 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipts | T-189 |
+| `E-couzo-4e4c8ce-n237-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 237 that T-190 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-190 |
 
 ### `V-check-n11-final-composition`
 
@@ -1631,10 +2249,10 @@ Reconciles the n = 11 component receipts' reviewed bindings; it reruns no geomet
 - Source: [`packing/devtools/check_n11_final_composition.py`](../../packing/devtools/check_n11_final_composition.py)
 - Versions run: this repository's commits, which Git holds
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-n011-global-optimality-independent` | audited here | shared components | T-060 |
-| `E-n011-optimum-uniqueness` | audited here | shared components | T-112 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n011-global-optimality-independent` | audited here | re-implemented, sharing named components | not recorded | T-060 |
+| `E-n011-optimum-uniqueness` | audited here | re-implemented, sharing named components | not recorded | T-112 |
 
 ### `V-audit-n11-lean`
 
@@ -1645,10 +2263,37 @@ Stages the statement closure of the 11SquaresFormalized proof from retained byte
 - Source: [`packing/devtools/audit_n11_lean.py`](../../packing/devtools/audit_n11_lean.py), [`packing/resources/web/queuingtheorydotcom-n11-lean-2026-10-06/receipts/lean/AuditN11Statement.lean`](../../packing/resources/web/queuingtheorydotcom-n11-lean-2026-10-06/receipts/lean/AuditN11Statement.lean)
 - Versions run: this repository's commits, which Git holds
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-n011-lean-formalization-report` | the source’s own run | producer’s code | T-060 |
-| `E-n011-lean-statement-closure-build` | replayed here | producer’s code | - |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n011-lean-formalization-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-060 |
+| `E-n011-lean-statement-closure-build` | replayed here | reproduced with the producer’s code | not recorded | - |
+
+### `V-fitzharding-n17-source-manifest`
+
+**check_source_manifest.py, the sq17-lean packet's consistency check** · Squares Project (Levy) · first-party · checks premises · Python · proof-assistant-checked
+
+Reads the sq17-lean packet and a checkout of its pin as data: holds every tree module and root file to the size and SHA-256 manifest.json gives, lists for each archive the member count manifest.json records beside the modules it assigns to that archive (it opens no archive), holds the axiom report of Sq17.square17_optimality to the three standard axioms and 13,343 native_decide facts with no other axiom and no sorryAx, and the axiom and control logs to the digests of the source's receipt. It builds nothing and decides no bound.
+
+- Source: [`packing/resources/web/fitzharding-n17-lean-2026-10-13/receipts/programs/check_source_manifest.py`](../../packing/resources/web/fitzharding-n17-lean-2026-10-13/receipts/programs/check_source_manifest.py)
+- Versions run: this repository's commits, which Git holds
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n017-fitzharding-lean-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-154 |
+
+### `V-fitzharding-n17-premise-comparisons`
+
+**compare_endpoint.py, compare_cover.py and check_closures.py, the sq17-lean packet's comparisons with this project's n = 17 data** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
+
+Reads sq17-lean's Lean files as text and compares them exactly with this project's records: the endpoint's polynomials, midpoint, radius and side map with exp-237's certificate and H-255's formulas, the Lean's contraction certificate recomputed and the side to 60 places; the 24 cells with UNIQUE_24 (exp-247) and the 35 patterns, up to the cover's symmetry, with the admitted entries of the certified sub-pattern ledger; and, on a checkout of the pin and the release archive generated-sources.tar.gz, each module of the statement's and the upper bound's import closures, held to manifest.json's size and SHA-256, for native_decide and the other tokens devtools.audit_n11_lean counts. It runs nothing from the source and decides no bound.
+
+- Source: [`packing/resources/web/fitzharding-n17-lean-2026-10-13/receipts/programs/compare_endpoint.py`](../../packing/resources/web/fitzharding-n17-lean-2026-10-13/receipts/programs/compare_endpoint.py), [`packing/resources/web/fitzharding-n17-lean-2026-10-13/receipts/programs/compare_cover.py`](../../packing/resources/web/fitzharding-n17-lean-2026-10-13/receipts/programs/compare_cover.py), [`packing/resources/web/fitzharding-n17-lean-2026-10-13/receipts/programs/check_closures.py`](../../packing/resources/web/fitzharding-n17-lean-2026-10-13/receipts/programs/check_closures.py)
+- Versions run: this repository's commits, which Git holds
+- Note: Retained on 13 October 2026, after review A of PR #588, from the scratch programs of the adversarial review (docs/project/reviews/review-2026-10-13-fitzharding-n17-lean.md, section 10), whose outputs it reproduces; the outputs are the packet's receipts/endpoint-comparison.json, cover-comparison.json and closures.json.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n017-fitzharding-lean-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-154 |
 
 ### `V-audit-n17-endpoint-receipt`
 
@@ -1659,9 +2304,9 @@ Audits the n = 17 endpoint receipt and reconstructs every interval record, impor
 - Source: [`packing/devtools/audit_n17_endpoint_receipt.py`](../../packing/devtools/audit_n17_endpoint_receipt.py)
 - Versions run: this repository's commits, which Git holds
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-n017-certified-endpoint` | audited here | independent | T-065 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n017-certified-endpoint` | audited here | independently re-implemented | not recorded | T-065 |
 
 ### `V-audit-tokoharu-density`
 
@@ -1672,9 +2317,9 @@ The exact preflight and replay driver for density certificates: it regenerates e
 - Source: [`packing/devtools/audit_tokoharu_density.py`](../../packing/devtools/audit_tokoharu_density.py)
 - Versions run: this repository's commits, which Git holds
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-tokoharu-density-source-replay` | replayed here | producer’s code | T-047 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-tokoharu-density-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-047 |
 
 ### `V-audit-wand125-rectangles`
 
@@ -1685,12 +2330,12 @@ The exact preflight and replay driver for wand125's rectangle certificates: inpu
 - Source: [`packing/devtools/audit_wand125_rectangles.py`](../../packing/devtools/audit_wand125_rectangles.py)
 - Versions run: this repository's commits, which Git holds
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-wand125-rectangle-source-replay` | replayed here | producer’s code | T-045 |
-| `E-wand125-rectangle-2026-09-28-source-replay` | replayed here | producer’s code | T-070 |
-| `E-wand125-rectangle-2026-10-01-source-replay` | replayed here | producer’s code | T-074 |
-| `E-wand125-rectangle-2026-10-02-source-replay` | replayed here | producer’s code | T-077 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-wand125-rectangle-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-045 |
+| `E-wand125-rectangle-2026-09-28-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-070 |
+| `E-wand125-rectangle-2026-10-01-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-074 |
+| `E-wand125-rectangle-2026-10-02-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-077 |
 
 ### `V-audit-wand125-point-and-mixed`
 
@@ -1701,25 +2346,25 @@ Fetches, pins and binds wand125's point and mixed bundles, checks their exact pr
 - Source: [`packing/devtools/audit_wand125_point_and_mixed.py`](../../packing/devtools/audit_wand125_point_and_mixed.py)
 - Versions run: this repository's commits, which Git holds
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-n045-wand125-point-cover-source-replay` | replayed here | producer’s code | T-054 |
-| `E-n021-wand125-point-endpoint-source-replay` | replayed here | producer’s code | T-055 |
-| `E-n050-wand125-mixed-740-source-replay` | replayed here | producer’s code | T-048 |
-| `E-n037-wand125-mixed-644-source-replay` | replayed here | producer’s code | T-069 |
-| `E-n065-wand125-mixed-835-source-replay` | replayed here | producer’s code | T-069 |
-| `E-n066-wand125-mixed-842-source-replay` | replayed here | producer’s code | T-069 |
-| `E-n090-wand125-mixed-960-source-replay` | replayed here | producer’s code | T-069 |
-| `E-n092-wand125-mixed-969-source-replay` | replayed here | producer’s code | T-069 |
-| `E-n084-wand125-mixed-940-source-replay` | replayed here | producer’s code | T-071 |
-| `E-n085-wand125-mixed-942-source-replay` | replayed here | producer’s code | T-071 |
-| `E-n076-wand125-mixed-894-source-replay` | replayed here | producer’s code | T-072 |
-| `E-n083-wand125-mixed-937-source-replay` | replayed here | producer’s code | T-075 |
-| `E-n085-wand125-mixed-946-source-replay` | replayed here | producer’s code | T-075 |
-| `E-n087-wand125-mixed-948-source-replay` | replayed here | producer’s code | T-075 |
-| `E-n091-wand125-mixed-970-source-replay` | replayed here | producer’s code | T-075 |
-| `E-n092-wand125-mixed-975-source-replay` | replayed here | producer’s code | T-075 |
-| `E-n096-wand125-mixed-996-source-replay` | replayed here | producer’s code | T-075 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n045-wand125-point-cover-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-054 |
+| `E-n021-wand125-point-endpoint-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-055 |
+| `E-n050-wand125-mixed-740-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-048 |
+| `E-n037-wand125-mixed-644-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-069 |
+| `E-n065-wand125-mixed-835-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-069 |
+| `E-n066-wand125-mixed-842-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-069 |
+| `E-n090-wand125-mixed-960-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-069 |
+| `E-n092-wand125-mixed-969-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-069 |
+| `E-n084-wand125-mixed-940-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-071 |
+| `E-n085-wand125-mixed-942-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-071 |
+| `E-n076-wand125-mixed-894-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-072 |
+| `E-n083-wand125-mixed-937-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-075 |
+| `E-n085-wand125-mixed-946-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-075 |
+| `E-n087-wand125-mixed-948-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-075 |
+| `E-n091-wand125-mixed-970-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-075 |
+| `E-n092-wand125-mixed-975-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-075 |
+| `E-n096-wand125-mixed-996-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-075 |
 
 ### `V-audit-wand125-declared-net`
 
@@ -1730,10 +2375,10 @@ Checks the exact premises of wand125's mixed certificates on a declared net, lem
 - Source: [`packing/devtools/audit_wand125_declared_net.py`](../../packing/devtools/audit_wand125_declared_net.py)
 - Versions run: this repository's commits, which Git holds
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-n018-wand125-mixed-470-source-replay` | replayed here | producer’s code | T-096 |
-| `E-n018-wand125-mixed-4704-source-replay` | replayed here | producer’s code | T-099 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n018-wand125-mixed-470-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-096 |
+| `E-n018-wand125-mixed-4704-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-099 |
 
 ### `V-audit-wand125-linear`
 
@@ -1744,11 +2389,11 @@ The audit, replay driver and controls for wand125's linear certificates.
 - Source: [`packing/devtools/audit_wand125_linear.py`](../../packing/devtools/audit_wand125_linear.py)
 - Versions run: this repository's commits, which Git holds
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-n083-wand125-linear-935-source-replay` | replayed here | producer’s code | T-073 |
-| `E-n101-wand125-linear-1028-source-replay` | replayed here | producer’s code | T-080 |
-| `E-n082-wand125-linear-932-source-replay` | replayed here | producer’s code | T-076 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n083-wand125-linear-935-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-073 |
+| `E-n101-wand125-linear-1028-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-073, T-080 |
+| `E-n082-wand125-linear-932-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-076 |
 
 ### `V-sqverify-fast`
 
@@ -1761,118 +2406,119 @@ Decides a measure-capture lower-bound certificate of format T, M or L on the 201
 - What its authors read and used: [`packing/sqverify_fast/independence-record.yaml`](../../packing/sqverify_fast/independence-record.yaml)
 - Note: A clean-room verifier, written from the mathematics without opening the authors' checkers (packing/sqverify_fast/INDEPENDENCE.md), its lemmas proved in packing/sqverify_fast/SOUNDNESS.md, and accepted at 4ddf37d9c by the two adversarial reviews of 3 October 2026, of its soundness and of its testing and independence. Its declared-net change (f007d7afd and 910b6b12c, source_sha256 d97758bb...) was accepted by the soundness review of 6 October 2026 (docs/project/reviews/review-2026-10-06-sqverify-fast-declared-net-soundness.md), for a declared net once the control's exact evaluator read that net (its DR-1), which the same day's re-check confirmed. Its format T metadata-net path, by which a format T file's certificate block sets D and angle_count, has no review of its own: lemma N0 is stated for every net admission accepts, and the review of 10 October 2026 of Guzhou0806's s(40) bound (docs/project/reviews/review-2026-10-10-guzhou-n40-clipped-corner-bound.md, its GN-6) read the admission path and every use of the admitted step and found the admitted net used wherever the net enters; admission refuses a metadata net that stops short of pi/4 (control D there). Since 0b5a62ca5 the census driver and the control evaluator read such a net as admission does (that review's GN-5), and no census case holds one yet. Its census drives the binary, keeps every direction's receipt and puts negative controls on a certificate: for format M the original and a near-threshold mutant at its least-bound direction, and since the review of 6 October of FC-1's fix (docs/project/reviews/review-2026-10-06-sqverify-fast-census-control-fc1.md) the 99/100 mutant at every direction of the net, with check_sqverify_fast's exact evaluator and mutation helpers; for format T the original and both mutants at the least-bound leaf centre of least exact capture, evaluated by sqpack.rectangle_density, which was written before the crate and which its authors read (the format T route review of 6 October 2026, docs/project/reviews/review-2026-10-06-sqverify-fast-format-t-route.md). None of these decides coverage. tests/test_sqverify_fast_census.py admits a census row as evidence only for a build of a reviewed source.
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-n019-wand125-rect-48175-sqverify-fast-replay` | replayed here | independent | T-068 |
-| `E-n020-wand125-rect-48975-sqverify-fast-replay` | replayed here | independent | T-068 |
-| `E-n026-wand125-rect-55325-sqverify-fast-replay` | replayed here | independent | T-068 |
-| `E-n027-wand125-rect-5635-sqverify-fast-replay` | replayed here | independent | T-068 |
-| `E-n028-wand125-rect-57225-sqverify-fast-replay` | replayed here | independent | T-068 |
-| `E-n029-wand125-rect-57975-sqverify-fast-replay` | replayed here | independent | T-068 |
-| `E-n030-wand125-rect-5875-sqverify-fast-replay` | replayed here | independent | T-068 |
-| `E-n031-wand125-rect-59525-sqverify-fast-replay` | replayed here | independent | T-068 |
-| `E-n038-wand125-rect-6545-sqverify-fast-replay` | replayed here | independent | T-068 |
-| `E-n039-wand125-rect-6635-sqverify-fast-replay` | replayed here | independent | T-068 |
-| `E-n040-wand125-rect-67-sqverify-fast-replay` | replayed here | independent | T-068 |
-| `E-n041-wand125-rect-676-sqverify-fast-replay` | replayed here | independent | T-068 |
-| `E-n042-wand125-rect-6815-sqverify-fast-replay` | replayed here | independent | T-068 |
-| `E-n043-wand125-rect-68875-sqverify-fast-replay` | replayed here | independent | T-068 |
-| `E-n044-wand125-rect-69425-sqverify-fast-replay` | replayed here | independent | T-068 |
-| `E-n053-wand125-rect-76075-sqverify-fast-replay` | replayed here | independent | T-068 |
-| `E-n054-wand125-rect-76725-sqverify-fast-replay` | replayed here | independent | T-068 |
-| `E-n055-wand125-rect-77125-sqverify-fast-replay` | replayed here | independent | T-068 |
-| `E-n056-wand125-rect-77825-sqverify-fast-replay` | replayed here | independent | T-068 |
-| `E-n066-wand125-rect-8385-sqverify-fast-replay` | replayed here | independent | T-068 |
-| `E-n068-wand125-rect-851-sqverify-fast-replay` | replayed here | independent | T-068 |
-| `E-n069-wand125-rect-8585-sqverify-fast-replay` | replayed here | independent | T-068 |
-| `E-n070-wand125-rect-8625-sqverify-fast-replay` | replayed here | independent | T-068 |
-| `E-n074-wand125-rect-88475-sqverify-fast-replay` | replayed here | independent | T-068 |
-| `E-n075-wand125-rect-89-sqverify-fast-replay` | replayed here | independent | T-068 |
-| `E-n076-wand125-rect-8925-sqverify-fast-replay` | replayed here | independent | T-068 |
-| `E-n086-wand125-rect-9365-sqverify-fast-replay` | replayed here | independent | T-068 |
-| `E-n087-wand125-rect-941-sqverify-fast-replay` | replayed here | independent | T-068 |
-| `E-n088-wand125-rect-94775-sqverify-fast-replay` | replayed here | independent | T-068 |
-| `E-n089-wand125-rect-9565-sqverify-fast-replay` | replayed here | independent | T-068 |
-| `E-n090-wand125-rect-95775-sqverify-fast-replay` | replayed here | independent | T-068 |
-| `E-n093-wand125-rect-97225-sqverify-fast-replay` | replayed here | independent | T-068 |
-| `E-n094-wand125-rect-9805-sqverify-fast-replay` | replayed here | independent | T-068 |
-| `E-n095-wand125-rect-98518-sqverify-fast-replay` | replayed here | independent | T-068 |
-| `E-n020-wand125-rect-49-sqverify-fast-replay` | replayed here | independent | T-077 |
-| `E-n042-wand125-rect-68275-sqverify-fast-replay` | replayed here | independent | T-077 |
-| `E-n070-wand125-rect-86275-sqverify-fast-replay` | replayed here | independent | T-077 |
-| `E-n067-wand125-mixed-848-sqverify-fast-replay` | replayed here | independent | T-094 |
-| `E-n084-wand125-mixed-9411-sqverify-fast-replay` | replayed here | independent | T-094 |
-| `E-n066-wand125-mixed-843-sqverify-fast-replay` | replayed here | independent | T-097 |
-| `E-n053-wand125-mixed-76275-sqverify-fast-replay` | replayed here | independent | T-091 |
-| `E-n054-wand125-mixed-7685-sqverify-fast-replay` | replayed here | independent | T-091 |
-| `E-n058-wand125-mixed-7935-sqverify-fast-replay` | replayed here | independent | T-091 |
-| `E-n070-wand125-mixed-86575-sqverify-fast-replay` | replayed here | independent | T-091 |
-| `E-n071-wand125-mixed-8721-sqverify-fast-replay` | replayed here | independent | T-091 |
-| `E-n073-wand125-mixed-8813-sqverify-fast-replay` | replayed here | independent | T-091 |
-| `E-n076-wand125-mixed-8965-sqverify-fast-replay` | replayed here | independent | T-091 |
-| `E-n087-wand125-mixed-958-sqverify-fast-replay` | replayed here | independent | T-091 |
-| `E-n088-wand125-mixed-962-sqverify-fast-replay` | replayed here | independent | T-091 |
-| `E-n090-wand125-mixed-973-sqverify-fast-replay` | replayed here | independent | T-091 |
-| `E-n091-wand125-mixed-97625-sqverify-fast-replay` | replayed here | independent | T-091 |
-| `E-n094-wand125-mixed-995-sqverify-fast-replay` | replayed here | independent | T-091 |
-| `E-n083-wand125-mixed-937-sqverify-fast-replay` | replayed here | independent | T-075 |
-| `E-n085-wand125-mixed-946-sqverify-fast-replay` | replayed here | independent | T-075 |
-| `E-n087-wand125-mixed-948-sqverify-fast-replay` | replayed here | independent | T-075 |
-| `E-n091-wand125-mixed-970-sqverify-fast-replay` | replayed here | independent | T-075 |
-| `E-n092-wand125-mixed-975-sqverify-fast-replay` | replayed here | independent | T-075 |
-| `E-n096-wand125-mixed-996-sqverify-fast-replay` | replayed here | independent | T-075 |
-| `E-n042-wand125-mixed-68475-sqverify-fast-replay` | replayed here | independent | T-090 |
-| `E-n043-wand125-mixed-69075-sqverify-fast-replay` | replayed here | independent | T-090 |
-| `E-n044-wand125-mixed-69725-sqverify-fast-replay` | replayed here | independent | T-090 |
-| `E-n051-wand125-mixed-747-sqverify-fast-replay` | replayed here | independent | T-090 |
-| `E-n056-wand125-mixed-78025-sqverify-fast-replay` | replayed here | independent | T-090 |
-| `E-n057-wand125-mixed-78725-sqverify-fast-replay` | replayed here | independent | T-090 |
-| `E-n067-wand125-mixed-8475-sqverify-fast-replay` | replayed here | independent | T-090 |
-| `E-n069-wand125-mixed-862-sqverify-fast-replay` | replayed here | independent | T-090 |
-| `E-n072-wand125-mixed-876-sqverify-fast-replay` | replayed here | independent | T-090 |
-| `E-n075-wand125-mixed-894-sqverify-fast-replay` | replayed here | independent | T-090 |
-| `E-n084-wand125-mixed-94075-sqverify-fast-replay` | replayed here | independent | T-090 |
-| `E-n086-wand125-mixed-9503-sqverify-fast-replay` | replayed here | independent | T-090 |
-| `E-n088-wand125-mixed-96125-sqverify-fast-replay` | replayed here | independent | T-090 |
-| `E-n093-wand125-mixed-988-sqverify-fast-replay` | replayed here | independent | T-090 |
-| `E-n094-wand125-mixed-994-sqverify-fast-replay` | replayed here | independent | T-090 |
-| `E-n095-wand125-mixed-9965-sqverify-fast-replay` | replayed here | independent | T-090 |
-| `E-n051-wand125-mixed-746-sqverify-fast-replay` | replayed here | independent | T-082 |
-| `E-n052-wand125-mixed-755-sqverify-fast-replay` | replayed here | independent | T-082 |
-| `E-n055-wand125-mixed-7728-sqverify-fast-replay` | replayed here | independent | T-082 |
-| `E-n058-wand125-mixed-7905-sqverify-fast-replay` | replayed here | independent | T-082 |
-| `E-n069-wand125-mixed-8612-sqverify-fast-replay` | replayed here | independent | T-082 |
-| `E-n070-wand125-mixed-86475-sqverify-fast-replay` | replayed here | independent | T-082 |
-| `E-n071-wand125-mixed-8705-sqverify-fast-replay` | replayed here | independent | T-082 |
-| `E-n073-wand125-mixed-8809-sqverify-fast-replay` | replayed here | independent | T-082 |
-| `E-n074-wand125-mixed-88675-sqverify-fast-replay` | replayed here | independent | T-082 |
-| `E-n075-wand125-mixed-892-sqverify-fast-replay` | replayed here | independent | T-082 |
-| `E-n076-wand125-mixed-896-sqverify-fast-replay` | replayed here | independent | T-082 |
-| `E-n086-wand125-mixed-950-sqverify-fast-replay` | replayed here | independent | T-082 |
-| `E-n087-wand125-mixed-955-sqverify-fast-replay` | replayed here | independent | T-082 |
-| `E-n088-wand125-mixed-960-sqverify-fast-replay` | replayed here | independent | T-082 |
-| `E-n089-wand125-mixed-965-sqverify-fast-replay` | replayed here | independent | T-082 |
-| `E-n090-wand125-mixed-9725-sqverify-fast-replay` | replayed here | independent | T-082 |
-| `E-n091-wand125-mixed-975-sqverify-fast-replay` | replayed here | independent | T-082 |
-| `E-n092-wand125-mixed-977-sqverify-fast-replay` | replayed here | independent | T-082 |
-| `E-n093-wand125-mixed-986-sqverify-fast-replay` | replayed here | independent | T-082 |
-| `E-n094-wand125-mixed-992-sqverify-fast-replay` | replayed here | independent | T-082 |
-| `E-n095-wand125-mixed-996-sqverify-fast-replay` | replayed here | independent | T-082 |
-| `E-n096-wand125-mixed-997-sqverify-fast-replay` | replayed here | independent | T-082 |
-| `E-n018-wand125-mixed-4704-sqverify-fast-replay` | replayed here | independent | T-099 |
-| `E-n019-wand125-mixed-48229-sqverify-fast-replay` | replayed here | independent | T-100 |
-| `E-n018-wand125-mixed-4705-sqverify-fast-replay` | replayed here | shared components | T-102 |
-| `E-n019-wand125-mixed-4825-sqverify-fast-replay` | replayed here | shared components | T-103 |
-| `E-n020-wand125-mixed-4905-sqverify-fast-replay` | replayed here | shared components | T-104 |
-| `E-n026-wand125-mixed-5545-sqverify-fast-replay` | replayed here | shared components | T-105 |
-| `E-n027-wand125-mixed-56435-sqverify-fast-replay` | replayed here | shared components | T-106 |
-| `E-n028-wand125-mixed-5735-sqverify-fast-replay` | replayed here | shared components | T-107 |
-| `E-n029-wand125-mixed-581-sqverify-fast-replay` | replayed here | independent | T-108 |
-| `E-n030-wand125-mixed-58835-sqverify-fast-replay` | replayed here | shared components | T-109 |
-| `E-n039-wand125-mixed-665-sqverify-fast-replay` | replayed here | shared components | T-110 |
-| `E-n041-wand125-mixed-6775-sqverify-fast-replay` | replayed here | shared components | T-111 |
-| `E-n040-guzhou-clipped-corner-sqverify-fast-replay` | replayed here | producer’s code | T-133 |
-| `E-n040-guzhou-continuous-pose-crate-axis` | audited here | independent | T-145 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n019-wand125-rect-48175-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-068 |
+| `E-n020-wand125-rect-48975-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-068 |
+| `E-n026-wand125-rect-55325-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-068 |
+| `E-n027-wand125-rect-5635-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-068 |
+| `E-n028-wand125-rect-57225-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-068 |
+| `E-n029-wand125-rect-57975-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-068 |
+| `E-n030-wand125-rect-5875-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-068 |
+| `E-n031-wand125-rect-59525-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-068 |
+| `E-n038-wand125-rect-6545-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-068 |
+| `E-n039-wand125-rect-6635-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-068 |
+| `E-n040-wand125-rect-67-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-068 |
+| `E-n041-wand125-rect-676-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-068 |
+| `E-n042-wand125-rect-6815-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-068 |
+| `E-n043-wand125-rect-68875-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-068 |
+| `E-n044-wand125-rect-69425-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-068 |
+| `E-n053-wand125-rect-76075-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-068 |
+| `E-n054-wand125-rect-76725-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-068 |
+| `E-n055-wand125-rect-77125-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-068 |
+| `E-n056-wand125-rect-77825-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-068 |
+| `E-n066-wand125-rect-8385-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-068 |
+| `E-n068-wand125-rect-851-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-068 |
+| `E-n069-wand125-rect-8585-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-068 |
+| `E-n070-wand125-rect-8625-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-068 |
+| `E-n074-wand125-rect-88475-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-068 |
+| `E-n075-wand125-rect-89-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-068 |
+| `E-n076-wand125-rect-8925-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-068 |
+| `E-n086-wand125-rect-9365-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-068 |
+| `E-n087-wand125-rect-941-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-068 |
+| `E-n088-wand125-rect-94775-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-068 |
+| `E-n089-wand125-rect-9565-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-068 |
+| `E-n090-wand125-rect-95775-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-068 |
+| `E-n093-wand125-rect-97225-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-068 |
+| `E-n094-wand125-rect-9805-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-068 |
+| `E-n095-wand125-rect-98518-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-068 |
+| `E-n020-wand125-rect-49-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-077 |
+| `E-n042-wand125-rect-68275-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-077 |
+| `E-n070-wand125-rect-86275-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-077 |
+| `E-n067-wand125-mixed-848-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-094 |
+| `E-n084-wand125-mixed-9411-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-094 |
+| `E-n066-wand125-mixed-843-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-097 |
+| `E-n053-wand125-mixed-76275-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-091 |
+| `E-n054-wand125-mixed-7685-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-091 |
+| `E-n058-wand125-mixed-7935-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-091 |
+| `E-n070-wand125-mixed-86575-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-091 |
+| `E-n071-wand125-mixed-8721-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-091 |
+| `E-n073-wand125-mixed-8813-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-091 |
+| `E-n076-wand125-mixed-8965-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-091 |
+| `E-n087-wand125-mixed-958-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-091 |
+| `E-n088-wand125-mixed-962-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-091 |
+| `E-n090-wand125-mixed-973-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-091 |
+| `E-n091-wand125-mixed-97625-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-091 |
+| `E-n094-wand125-mixed-995-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-091 |
+| `E-n083-wand125-mixed-937-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-075 |
+| `E-n085-wand125-mixed-946-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-075 |
+| `E-n087-wand125-mixed-948-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-075 |
+| `E-n091-wand125-mixed-970-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-075 |
+| `E-n092-wand125-mixed-975-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-075 |
+| `E-n096-wand125-mixed-996-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-075 |
+| `E-n042-wand125-mixed-68475-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-090 |
+| `E-n043-wand125-mixed-69075-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-090 |
+| `E-n044-wand125-mixed-69725-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-090 |
+| `E-n051-wand125-mixed-747-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-090 |
+| `E-n056-wand125-mixed-78025-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-090 |
+| `E-n057-wand125-mixed-78725-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-090 |
+| `E-n067-wand125-mixed-8475-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-090 |
+| `E-n069-wand125-mixed-862-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-090 |
+| `E-n072-wand125-mixed-876-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-090 |
+| `E-n075-wand125-mixed-894-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-090 |
+| `E-n084-wand125-mixed-94075-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-090 |
+| `E-n086-wand125-mixed-9503-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-090 |
+| `E-n088-wand125-mixed-96125-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-090 |
+| `E-n093-wand125-mixed-988-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-090 |
+| `E-n094-wand125-mixed-994-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-090 |
+| `E-n095-wand125-mixed-9965-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-090 |
+| `E-n051-wand125-mixed-746-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-082 |
+| `E-n052-wand125-mixed-755-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-082 |
+| `E-n055-wand125-mixed-7728-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-082 |
+| `E-n058-wand125-mixed-7905-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-082 |
+| `E-n069-wand125-mixed-8612-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-082 |
+| `E-n070-wand125-mixed-86475-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-082 |
+| `E-n071-wand125-mixed-8705-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-082 |
+| `E-n073-wand125-mixed-8809-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-082 |
+| `E-n074-wand125-mixed-88675-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-082 |
+| `E-n075-wand125-mixed-892-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-082 |
+| `E-n076-wand125-mixed-896-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-082 |
+| `E-n086-wand125-mixed-950-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-082 |
+| `E-n087-wand125-mixed-955-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-082 |
+| `E-n088-wand125-mixed-960-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-082 |
+| `E-n089-wand125-mixed-965-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-082 |
+| `E-n090-wand125-mixed-9725-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-082 |
+| `E-n091-wand125-mixed-975-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-082 |
+| `E-n092-wand125-mixed-977-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-082 |
+| `E-n093-wand125-mixed-986-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-082 |
+| `E-n094-wand125-mixed-992-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-082 |
+| `E-n095-wand125-mixed-996-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-082 |
+| `E-n096-wand125-mixed-997-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-082 |
+| `E-n018-wand125-mixed-4704-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-099 |
+| `E-n019-wand125-mixed-48229-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-100 |
+| `E-n018-wand125-mixed-4705-sqverify-fast-replay` | replayed here | re-implemented, sharing named components | not recorded | T-102 |
+| `E-n019-wand125-mixed-4825-sqverify-fast-replay` | replayed here | re-implemented, sharing named components | not recorded | T-103 |
+| `E-n020-wand125-mixed-4905-sqverify-fast-replay` | replayed here | re-implemented, sharing named components | not recorded | T-104 |
+| `E-n026-wand125-mixed-5545-sqverify-fast-replay` | replayed here | re-implemented, sharing named components | not recorded | T-105 |
+| `E-n027-wand125-mixed-56435-sqverify-fast-replay` | replayed here | re-implemented, sharing named components | not recorded | T-106 |
+| `E-n028-wand125-mixed-5735-sqverify-fast-replay` | replayed here | re-implemented, sharing named components | not recorded | T-107 |
+| `E-n029-wand125-mixed-581-sqverify-fast-replay` | replayed here | independently re-implemented | not recorded | T-108 |
+| `E-n030-wand125-mixed-58835-sqverify-fast-replay` | replayed here | re-implemented, sharing named components | not recorded | T-109 |
+| `E-n039-wand125-mixed-665-sqverify-fast-replay` | replayed here | re-implemented, sharing named components | not recorded | T-110 |
+| `E-n041-wand125-mixed-6775-sqverify-fast-replay` | replayed here | re-implemented, sharing named components | not recorded | T-111 |
+| `E-n040-guzhou-clipped-corner-sqverify-fast-replay` | replayed here | reproduced with the producer’s code | not recorded | T-133 |
+| `E-n040-guzhou-continuous-pose-crate-axis` | audited here | independently re-implemented | not recorded | T-145 |
+| `E-n040-guzhou-new-supports-crate-axis` | audited here | independently re-implemented after reading the producer’s code | full: the near-axis statement at side 249329659/250000000, decided by sqverify-fast's exact axis-vertex sweep on the density itself over all 10,929,636 vertices, with the 401-direction necessary condition at side 3350/3359 over all 401 directions | T-157 |
 
 ### `V-replay-chelokot-lean`
 
@@ -1883,47 +2529,51 @@ Clones chelokot's archive at the pinned commit, checks the toolchain, manifest, 
 - Source: [`packing/devtools/replay_chelokot_lean.py`](../../packing/devtools/replay_chelokot_lean.py)
 - Versions run: this repository's commits, which Git holds
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-chelokot-square-minus-two-lean` | replayed here | producer’s code | T-086 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-chelokot-square-minus-two-lean` | replayed here | reproduced with the producer’s code | not recorded | T-086 |
 
 ### `V-replay-evand-zmx2`
 
 **devtools.replay_evand_zmx2** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
 
-Builds zmx2 from the retained bytes, refuses any input whose SHA-256 is not the record's, and runs it and its controls.
+Builds zmx2 from the retained bytes, refuses any input whose SHA-256 is not the record's, and runs it and its controls; for a split cover it also stages zm_mixed.py and the files it imports, digests checked, and runs it on the source's sub-roots.
 
 - Source: [`packing/devtools/replay_evand_zmx2.py`](../../packing/devtools/replay_evand_zmx2.py)
 - Versions run: this repository's commits, which Git holds
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-n061-wand125-point-cover-zmx2-replay` | replayed here | producer’s code | T-063 |
-| `E-n060-evand-mixed-cover-zmx2-replay` | replayed here | producer’s code | T-062, T-063 |
-| `E-n059-wand125-mixed-cover-zmx2-replay` | replayed here | producer’s code | T-066 |
-| `E-n077-wand125-mixed-cover-zmx2-replay` | replayed here | producer’s code | T-067 |
-| `E-n032-evand-zmx2-full-sym-replay` | replayed here | producer’s code | T-051 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n061-wand125-point-cover-zmx2-replay` | replayed here | reproduced with the producer’s code | not recorded | T-063 |
+| `E-n060-evand-mixed-cover-zmx2-replay` | replayed here | reproduced with the producer’s code | not recorded | T-062, T-063 |
+| `E-n059-wand125-mixed-cover-zmx2-replay` | replayed here | reproduced with the producer’s code | not recorded | T-066 |
+| `E-n077-wand125-mixed-cover-zmx2-replay` | replayed here | reproduced with the producer’s code | not recorded | T-067 |
+| `E-n032-evand-zmx2-full-sym-replay` | replayed here | reproduced with the producer’s code | not recorded | T-051 |
+| `E-bengreff-594-cover-replay` | replayed here | reproduced with the producer’s code | full, 8,100 of 8,100: root cells of the D4 region, centres in [0, 9/2]^2 and u in [0, 1/2]: 8,096 decided by zmx2 and the other 4 by zm_mixed.py over the 64 sub-roots that tile them | T-184 |
+| `E-bengreff-610-cover-replay` | replayed here | reproduced with the producer’s code | full, 10,000 of 10,000: root cells of the D4 region, centres in [0, 5]^2 and u in [0, 1/2]: 9,981 decided by zmx2 and the other 19 by zm_mixed.py over the 304 sub-roots that tile them | T-191 |
 
 ### `V-audit-evand-mixed-covers`
 
 **devtools.audit_evand_mixed_covers** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
 
-Parses zmx2 root logs with its own code, requires every root once with none uncertified, compares them with the source's records and re-derives the cover's exact total and D4 invariance.
+Parses zmx2 root logs with its own code, requires every root once with none uncertified, compares them with the source's records and re-derives the cover's exact total and D4 invariance; for a split cover it reads the zmx2 log and zm_mixed.py's sub-root records as one decision, every root zmx2 leaves tiled by certified sub-roots at the pinned digests and settings.
 
 - Source: [`packing/devtools/audit_evand_mixed_covers.py`](../../packing/devtools/audit_evand_mixed_covers.py)
 - Versions run: this repository's commits, which Git holds
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-n061-wand125-point-cover-zmx2-replay` | replayed here | producer’s code | T-063 |
-| `E-n060-evand-mixed-cover-zmx2-replay` | replayed here | producer’s code | T-062, T-063 |
-| `E-n059-wand125-mixed-cover-zmx2-replay` | replayed here | producer’s code | T-066 |
-| `E-n077-wand125-mixed-cover-zmx2-replay` | replayed here | producer’s code | T-067 |
-| `E-n032-evand-closed-cover-zmx2-replay` | replayed here | producer’s code | T-051 |
-| `E-n032-evand-zmx2-full-sym-replay` | replayed here | producer’s code | T-051 |
-| `E-n013-evand-casefree-cover-zmx2-replay` | replayed here | producer’s code | T-006 |
-| `E-n021-evand-mixed-cover-zmx2-replay` | replayed here | producer’s code | T-052 |
-| `E-n045-evand-mixed-cover-zmx2-replay` | replayed here | producer’s code | T-053 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n061-wand125-point-cover-zmx2-replay` | replayed here | reproduced with the producer’s code | not recorded | T-063 |
+| `E-n060-evand-mixed-cover-zmx2-replay` | replayed here | reproduced with the producer’s code | not recorded | T-062, T-063 |
+| `E-n059-wand125-mixed-cover-zmx2-replay` | replayed here | reproduced with the producer’s code | not recorded | T-066 |
+| `E-n077-wand125-mixed-cover-zmx2-replay` | replayed here | reproduced with the producer’s code | not recorded | T-067 |
+| `E-n032-evand-closed-cover-zmx2-replay` | replayed here | reproduced with the producer’s code | not recorded | T-051 |
+| `E-n032-evand-zmx2-full-sym-replay` | replayed here | reproduced with the producer’s code | not recorded | T-051 |
+| `E-n013-evand-casefree-cover-zmx2-replay` | replayed here | reproduced with the producer’s code | not recorded | T-006 |
+| `E-n021-evand-mixed-cover-zmx2-replay` | replayed here | reproduced with the producer’s code | not recorded | T-052 |
+| `E-n045-evand-mixed-cover-zmx2-replay` | replayed here | reproduced with the producer’s code | not recorded | T-053 |
+| `E-bengreff-594-cover-replay` | replayed here | reproduced with the producer’s code | full, 8,100 of 8,100: root cells of the D4 region, centres in [0, 9/2]^2 and u in [0, 1/2]: 8,096 decided by zmx2 and the other 4 by zm_mixed.py over the 64 sub-roots that tile them | T-184 |
+| `E-bengreff-610-cover-replay` | replayed here | reproduced with the producer’s code | full, 10,000 of 10,000: root cells of the D4 region, centres in [0, 5]^2 and u in [0, 1/2]: 9,981 decided by zmx2 and the other 19 by zm_mixed.py over the 304 sub-roots that tile them | T-191 |
 
 ### `V-audit-s12-reweighted`
 
@@ -1936,9 +2586,9 @@ Decides everything the re-weighted s(12) certificate rests on but coverage, in i
 - What its authors read and used: [`packing/devtools/audit_s12_reweighted.py`](../../packing/devtools/audit_s12_reweighted.py)
 - Note: Its module statement says it shares no code with the tools that made the certificate.
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-n012-levy-15680000-3949423-audit` | audited here | no code | T-079 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n012-levy-15680000-3949423-audit` | audited here | no code | not recorded | T-079 |
 
 ### `V-audit-s12-v11`
 
@@ -1950,9 +2600,9 @@ Decides everything squarepacker's v1.1 s(12) certificate rests on but coverage, 
 - Versions run: this repository's commits, which Git holds
 - Note: It shares only the file reader and the D4 test with devtools.audit_s12_rescaled_certificate, and nothing with the source's tools.
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-n012-squarepacker-7943-2000-audit` | audited here | no code | T-095 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n012-squarepacker-7943-2000-audit` | audited here | no code | not recorded | T-095 |
 
 ### `V-compare-evand-s32-sweep`
 
@@ -1963,9 +2613,9 @@ Compares a fresh zeromargin.py sweep's root records with the source's shipped on
 - Source: [`packing/devtools/compare_evand_s32_sweep.py`](../../packing/devtools/compare_evand_s32_sweep.py)
 - Versions run: this repository's commits, which Git holds
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-n032-evand-closed-cover-source-run` | replayed here | producer’s code | T-051 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n032-evand-closed-cover-source-run` | replayed here | reproduced with the producer’s code | not recorded | T-051 |
 
 ### `V-audit-guzhou-r068`
 
@@ -1976,10 +2626,10 @@ Compares a fresh paired-launcher run's C++ and Node ledgers with the published o
 - Source: [`packing/devtools/audit_guzhou_r068.py`](../../packing/devtools/audit_guzhou_r068.py)
 - Versions run: this repository's commits, which Git holds
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-n017-guzhou-r068-source-replay` | replayed here | producer’s code | T-043 |
-| `E-n017-guzhou-r067-source-replay` | replayed here | producer’s code | T-042 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n017-guzhou-r068-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-043 |
+| `E-n017-guzhou-r067-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-042 |
 
 ### `V-audit-guzhou-r071`
 
@@ -1990,9 +2640,9 @@ Holds Guzhou0806's R070 and R071 certificates to R068's charge, R070's published
 - Source: [`packing/devtools/audit_guzhou_r071.py`](../../packing/devtools/audit_guzhou_r071.py)
 - Versions run: this repository's commits, which Git holds
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-n017-guzhou-r071-source-replay` | replayed here | producer’s code | T-093 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n017-guzhou-r071-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-093 |
 
 ### `V-replay-guzhou-r071`
 
@@ -2003,9 +2653,9 @@ Stages R071's package from the retained bytes, refusing any byte whose SHA-256 i
 - Source: [`packing/devtools/replay_guzhou_r071.py`](../../packing/devtools/replay_guzhou_r071.py)
 - Versions run: this repository's commits, which Git holds
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-n017-guzhou-r071-source-replay` | replayed here | producer’s code | T-093 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-n017-guzhou-r071-source-replay` | replayed here | reproduced with the producer’s code | not recorded | T-093 |
 
 ### `V-audit-valid7-independent`
 
@@ -2016,9 +2666,9 @@ Checks what the Valid7 checker's verify.sh leaves out: the records are the relea
 - Source: [`packing/devtools/audit_valid7_independent.py`](../../packing/devtools/audit_valid7_independent.py)
 - Versions run: this repository's commits, which Git holds
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-k2m3-wand125-valid7-independent` | replayed here | independent | T-064 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-k2m3-wand125-valid7-independent` | replayed here | independently re-implemented | not recorded | T-064 |
 
 ### `V-audit-validtilt9-independent`
 
@@ -2029,9 +2679,9 @@ Checks what wand125's verify_tilt9.sh leaves out of the ValidTilt9 run: the reco
 - Source: [`packing/devtools/audit_validtilt9_independent.py`](../../packing/devtools/audit_validtilt9_independent.py)
 - Versions run: this repository's commits, which Git holds
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-k2m4-wand125-validtilt9-report` | reported by a third party, not replayed here | independent | T-081 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-k2m4-wand125-validtilt9-report` | reported by a third party, not replayed here | independently re-implemented | not recorded | T-081 |
 
 ### `V-probe-valid7-fixes`
 
@@ -2042,9 +2692,9 @@ Runs the 2 October review's demonstrations of D-1, D-2 and D-3 against each reta
 - Source: [`packing/devtools/probe_valid7_fixes.py`](../../packing/devtools/probe_valid7_fixes.py)
 - Versions run: this repository's commits, which Git holds
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-k2m3-wand125-valid7-independent` | replayed here | independent | T-064 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-k2m3-wand125-valid7-independent` | replayed here | independently re-implemented | not recorded | T-064 |
 
 ### `V-squish-upper-bound-packets`
 
@@ -2057,10 +2707,10 @@ Admits the bounded complete SQUISH source roster, converts rational half-angle f
 - What its authors read and used: [`docs/project/reviews/review-2026-10-06-squish-upper-bound-packings.md`](../../docs/project/reviews/review-2026-10-06-squish-upper-bound-packings.md)
 - Note: Written from the published rational certificate format and the geometry. No SQUISH producer executable is retained or run. The native exact_verify and independent rational-corner checker decide feasibility; the wrapper checks their inputs, recorded results and provenance. The two first-party routes share the converted witness, YAML and Python rational arithmetic, not geometry code.
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-squish-ten-packings-2026-10-07-exact-replay` | replayed here | independent | T-113 |
-| `E-squish-n153-2026-10-07-exact-replay` | replayed here | independent | T-114 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-squish-ten-packings-2026-10-07-exact-replay` | replayed here | independently re-implemented | not recorded | T-113 |
+| `E-squish-n153-2026-10-07-exact-replay` | replayed here | independently re-implemented | not recorded | T-114 |
 
 ### `V-squish-followup-packets`
 
@@ -2073,9 +2723,9 @@ Admits the pinned update source and complete reviewed replay, binds revision-spe
 - What its authors read and used: [`docs/project/reviews/review-2026-10-07-squish-update-semantic-binding.md`](../../docs/project/reviews/review-2026-10-07-squish-update-semantic-binding.md)
 - Note: The wrapper shares strict admission and rational half-angle conversion with the original packet while keeping a distinct revision namespace. No SQUISH producer executable is run. The native exact_verify and independently written rational-corner checker decide geometry; both share input corners and Python rational arithmetic. Bounded XZ decoding and witness metadata checks are premises, not additional geometric deciders.
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-squish-update-2026-10-07-exact-replay` | replayed here | independent | T-115 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-squish-update-2026-10-07-exact-replay` | replayed here | independently re-implemented | not recorded | T-115 |
 
 ### `V-squish-second-update-confirmation`
 
@@ -2088,9 +2738,9 @@ Admits the complete immutable second-update roster, all historical full replay i
 - What its authors read and used: [`docs/project/reviews/review-2026-10-07-squish-second-update-semantic-binding.md`](../../docs/project/reviews/review-2026-10-07-squish-second-update-semantic-binding.md)
 - Note: This wrapper checks premises and receipt applicability; sqpack exact_verify and the independent rational-corner checker decide geometry. Their shared SAT theorem, Fraction, YAML and source-to-corner conversion are disclosed. Earlier packet constants, evidence and review scopes remain unchanged.
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-squish-second-update-2026-10-07-exact-replay` | replayed here | independent | T-116 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-squish-second-update-2026-10-07-exact-replay` | replayed here | independently re-implemented | not recorded | T-116 |
 
 ### `V-evand-arrangement-receipts`
 
@@ -2101,43 +2751,123 @@ Binds all three complete source certificates and all nine full deciding inputs/n
 - Source: [`packing/devtools/evand_arrangement_reports.py`](../../packing/devtools/evand_arrangement_reports.py)
 - Versions run: this repository's commits, which Git holds
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-evand-399-exact-feasibility` | audited here | independent | T-119 |
-| `E-couzo-451-exact-feasibility` | replayed here | independent | T-128 |
-| `E-couzo-460-followup-exact-feasibility` | replayed here | independent | T-130 |
-| `E-evand-465-record-hunt-exact-feasibility` | replayed here | independent | T-128, T-131 |
-| `E-couzo-476-exact-feasibility` | replayed here | independent | T-134 |
-| `E-fang-484-exact-feasibility` | replayed here | independent | T-135 |
-| `E-squish-481-exact-feasibility` | replayed here | independent | T-136 |
-| `E-deleeuw-483-exact-feasibility` | replayed here | independent | T-137 |
-| `E-mishapolk-470-exact-feasibility` | replayed here | independent | T-138 |
-| `E-evand-trio126-exact-feasibility` | replayed here | independent | T-139 |
-| `E-couzo-488-exact-feasibility` | replayed here | independent | T-140 |
-| `E-evand-489-exact-feasibility` | replayed here | independent | T-141 |
-| `E-evand-regularized-exact-feasibility` | replayed here | independent | T-146 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-evand-399-exact-feasibility` | audited here | independently re-implemented | not recorded | T-119 |
+| `E-couzo-451-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-128 |
+| `E-couzo-460-followup-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-130 |
+| `E-evand-465-record-hunt-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-128, T-131 |
+| `E-couzo-476-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-134 |
+| `E-fang-484-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-135 |
+| `E-squish-481-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-136 |
+| `E-deleeuw-483-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-137 |
+| `E-mishapolk-470-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-138 |
+| `E-evand-trio126-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-139 |
+| `E-couzo-488-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-140 |
+| `E-evand-489-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-141 |
+| `E-evand-regularized-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-146 |
+| `E-pingyou-503-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-147 |
+| `E-pingyou-504-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-148 |
+| `E-ostashev-501-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-149 |
+| `E-barnett-505-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-150 |
+| `E-squish-500-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-151 |
+| `E-couzo-506-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-152 |
+| `E-ostashev-528-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 3 of 3: the three complete certificates at n = 175, 232 and 264, every wall and every pair decided by both maintained routes and again by the third route; the six kernel controls and the third route's controls are retained separately | T-158 |
+| `E-calle-529-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 1 of 1: the certificate derived here from Rio Calle's layout of 102 squares, every wall and every pair decided by both maintained routes and again by the third route, which also derived it again from the layout at the pin | T-159 |
+| `E-evand-552-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 1 of 1: the complete certificate at n = 154, every wall and every pair decided by both maintained routes and again by the third route; the two kernel controls and the third route's controls are retained separately | T-160 |
+| `E-couzo-561-exact-feasibility` | replayed here | independently re-implemented | full, 4 of 4: the four certificates at n = 156, 176, 237, 271 that T-161 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-161 |
+| `E-ostashev-562-exact-feasibility` | replayed here | independently re-implemented | full, 3 of 3: the three certificates at n = 129, 204, 303 that T-162 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-162 |
+| `E-pingyou-564-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 302 that T-164 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-164 |
+| `E-couzo-586-exact-feasibility` | replayed here | independently re-implemented | full, 4 of 4: the four certificates at n = 154, 176, 211 and 241 that T-165 and T-182 cite, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-165, T-182 |
+| `E-couzo-586-n302-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 302 that T-181 cites, issue 583's certificate as issue 586's packet retains it byte for byte, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-181 |
+| `E-pingyou-504-refinement-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 153 that T-166 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-166 |
+| `E-pingyou-503-refinement-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 207 that T-167 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-167 |
+| `E-pingyou-566-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 146 that T-168 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-168 |
+| `E-pingyou-567-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 261 that T-169 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-169 |
+| `E-pingyou-568-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 105 that T-170 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-170 |
+| `E-pingyou-569-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 272 that T-171 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-171 |
+| `E-couzo-583-exact-feasibility` | replayed here | independently re-implemented | full, 3 of 3: the three certificates at n = 154, 211, 241 that T-172 and T-181 cite, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-172, T-181 |
+| `E-mishapolk-573-exact-feasibility` | replayed here | independently re-implemented | full, 2 of 2: both certificates at n = 153, 207 that T-173 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-173 |
+| `E-pingyou-574-exact-feasibility` | replayed here | independently re-implemented | full, 64 of 64: the 64 rational certificates the entry cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-174 |
+| `E-ostashev-575-exact-feasibility` | replayed here | independently re-implemented | full, 3 of 3: the three certificates at n = 211, 241, 304 that T-175 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-175 |
+| `E-fang-excess-theorem-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 6 of 6: the six retained inventory certificates at 211, 241, 273, 307, 308 and 932, every wall and every pair decided by both maintained routes; the twelve kernel controls are retained separately | T-163 |
+| `E-mishapolk-593-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 237 that T-183 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-183 |
+| `E-fang-direct-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 14 of 14: the complete certificates at 380, 381, 382, 421, 422, 463, 464, 507, 508, 553, 601, 651, 758 and 814, every wall and every pair decided by both maintained routes; the 28 kernel controls are retained separately | - |
+| `E-couzo-506-n175-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 175 that T-185 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-185 |
+| `E-mishapolk-70a033f-exact-feasibility` | replayed here | independently re-implemented | full, 12 of 12: the twelve derived certificates at n = 129, 154, 156, 175, 176, 204, 232, 264, 271, 302, 303 and 304 that T-186 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipts | T-186 |
+| `E-evand-606-n146-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 146 that T-187 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-187 |
+| `E-couzo-487b058-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 211 that T-188 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-188 |
+| `E-couzo-607-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 237 that T-189 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipts | T-189 |
+| `E-couzo-4e4c8ce-n237-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 237 that T-190 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-190 |
+
+### `V-algebraic-witness-reports`
+
+**devtools.algebraic_witness_reports** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
+
+Imports a packet's algebraic-number-field witnesses from its declaration: derives each witness from its release asset through the manifest the packet pins, holds it to the witness schema, its count and its declared field degree, rebuilds the frozen algebraic claim record against the case records and pending reports, and drives sqpack's exact witness verifier, one route, on a positive and its duplicate-square and outside-container controls per count, writing one receipt per count. It decides no geometry itself.
+
+- Source: [`packing/devtools/algebraic_witness_reports.py`](../../packing/devtools/algebraic_witness_reports.py), [`packing/tests/test_upper_bound_reports_574.py`](../../packing/tests/test_upper_bound_reports_574.py)
+- Versions run: this repository's commits, which Git holds
+- Note: Written by the import lane of PR 574 on 14 October 2026 for the pull request's algebraic supplement. sqpack.witness.exact_verify decides, over each witness's field; no second route over a number field exists here, and every receipt it writes says so. The review of PR 574 (docs/project/reviews/review-2026-10-14-upper-bound-imports-574.md) ran its compare and check --replay and found every job equal to its retained row (RP-3).
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-pingyou-574-algebraic-feasibility` | replayed here | independently re-implemented | full, 4 of 4: the four algebraic certificates at n = 70, 153, 207 and 302, every unit-square identity, wall and pair decided over the witness's field on the one route, with its two controls each | T-174 |
 
 ### `V-upper-bound-reports`
 
 **devtools.upper_bound_reports** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
 
-Imports a report of rational upper-bound certificates by another author from its packet's declaration: admits custody through acquire_source, reads each retained file or derived fact by its declared adapter (Evan Daniel's text format, SQUISH's JSON, centred JSON, decimal poses by a declared dilation), admits each side only where it equals or rounds up to its print, rebuilds the frozen claim comparison and the register plan, and drives the arrangement kernel's two exact routes and two controls per count. It decides no geometry itself.
+Imports a report of rational upper-bound certificates by another author from its packet's declaration: admits custody through acquire_source, reads each retained file or derived fact by its declared adapter (Evan Daniel's text format, SQUISH's JSON, centred JSON, PingYou Ltd's JSON, Daniil Ostashev's sqcert files, Rio Calle's decimal layouts, rational corners witnesses, decimal poses by a declared dilation), holds a derived fact to any file its row names as the same packing, admits each side only where it equals or rounds up to its print, rebuilds the frozen claim comparison and the register plan, and drives the arrangement kernel's two exact routes and two controls per count. It decides no geometry itself.
 
 - Source: [`packing/devtools/upper_bound_reports.py`](../../packing/devtools/upper_bound_reports.py), [`packing/devtools/evand_arrangement_reports.py`](../../packing/devtools/evand_arrangement_reports.py), [`packing/tests/test_upper_bound_reports.py`](../../packing/tests/test_upper_bound_reports.py)
 - Versions run: this repository's commits, which Git holds
-- Note: Written for the 2026-10-10 intake pass's upper-bound imports from the formats the sources state. sqpack.verify and the independent rational corner checker decide; the 10 October reviews of issues 476, 481, 483 and 484, of issue 470 and of issues 488 and 489, and the 11 October review of Evan Daniel's regularized record lists (docs/project/reviews/review-2026-10-10-evand-regularized-certificates.md), read it in full; for issues 488 and 489, its HOUSES readers of the issue-481, issue-484, issue-488 and issue-489 packets are the exact readers that review proposed (RL-2). For issue 470 its decimal_dilation adapter generates the exact witnesses from the source's decimal poses, so there this repository is the witness's generator.
+- Note: Written for the 2026-10-10 intake pass's upper-bound imports from the formats the sources state. sqpack.verify and the independent rational corner checker decide; the 10 October reviews of issues 476, 481, 483 and 484, of issue 470 and of issues 488 and 489, and the 11 October review of Evan Daniel's regularized record lists (docs/project/reviews/review-2026-10-10-evand-regularized-certificates.md), read it in full; for issues 488 and 489, its HOUSES readers of the issue-481, issue-484, issue-488 and issue-489 packets are the exact readers that review proposed (RL-2). For issue 470 its decimal_dilation adapter generates the exact witnesses from the source's decimal poses, so there this repository is the witness's generator. The import lane of issues 503 and 504 added the pingyou-json and witness-corners adapters and the same-packing comparison in derive, and the 11 October review of those issues (docs/project/reviews/review-2026-10-11-upper-bound-imports-503-504.md) read them in full. The import lane of issues 505 and 501 added the sqcert adapter, which the 11 October review of those issues (docs/project/reviews/review-2026-10-11-upper-bound-imports-505-501.md) read in full. The import lanes of issues 500 and 506 added HOUSES readers of their packets, which the reviews of issue 500 (docs/project/reviews/review-2026-10-11-upper-bound-imports-500.md) and of issue 506 (docs/project/reviews/review-2026-10-11-upper-bound-imports-506.md) read in full; the second refroze issue 506's claim record against the first's exact sides. The import lane of issues 528 and 529 added the calle-txt adapter, which floors each half-angle tangent of a radian layout by an outward-rounded interval enclosure, and HOUSES readers of both packets; the 12 October review of those issues (docs/project/reviews/review-2026-10-12-upper-bound-imports-528-529.md) read them in full. The import lane of issue 552 added a HOUSES reader of its packet, which the 12 October review of that issue (docs/project/reviews/review-2026-10-12-upper-bound-import-552.md) read.
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-couzo-476-exact-feasibility` | replayed here | independent | T-134 |
-| `E-fang-484-exact-feasibility` | replayed here | independent | T-135 |
-| `E-squish-481-exact-feasibility` | replayed here | independent | T-136 |
-| `E-deleeuw-483-exact-feasibility` | replayed here | independent | T-137 |
-| `E-mishapolk-470-exact-feasibility` | replayed here | independent | T-138 |
-| `E-evand-trio126-exact-feasibility` | replayed here | independent | T-139 |
-| `E-couzo-488-exact-feasibility` | replayed here | independent | T-140 |
-| `E-evand-489-exact-feasibility` | replayed here | independent | T-141 |
-| `E-evand-regularized-exact-feasibility` | replayed here | independent | T-146 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-couzo-476-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-134 |
+| `E-fang-484-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-135 |
+| `E-squish-481-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-136 |
+| `E-deleeuw-483-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-137 |
+| `E-mishapolk-470-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-138 |
+| `E-evand-trio126-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-139 |
+| `E-couzo-488-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-140 |
+| `E-evand-489-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-141 |
+| `E-evand-regularized-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-146 |
+| `E-pingyou-503-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-147 |
+| `E-pingyou-504-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-148 |
+| `E-ostashev-501-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-149 |
+| `E-barnett-505-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-150 |
+| `E-squish-500-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-151 |
+| `E-couzo-506-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-152 |
+| `E-ostashev-528-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 3 of 3: the three complete certificates at n = 175, 232 and 264, every wall and every pair decided by both maintained routes and again by the third route; the six kernel controls and the third route's controls are retained separately | T-158 |
+| `E-calle-529-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 1 of 1: the certificate derived here from Rio Calle's layout of 102 squares, every wall and every pair decided by both maintained routes and again by the third route, which also derived it again from the layout at the pin | T-159 |
+| `E-evand-552-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 1 of 1: the complete certificate at n = 154, every wall and every pair decided by both maintained routes and again by the third route; the two kernel controls and the third route's controls are retained separately | T-160 |
+| `E-couzo-561-exact-feasibility` | replayed here | independently re-implemented | full, 4 of 4: the four certificates at n = 156, 176, 237, 271 that T-161 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-161 |
+| `E-ostashev-562-exact-feasibility` | replayed here | independently re-implemented | full, 3 of 3: the three certificates at n = 129, 204, 303 that T-162 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-162 |
+| `E-pingyou-564-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 302 that T-164 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-164 |
+| `E-couzo-586-exact-feasibility` | replayed here | independently re-implemented | full, 4 of 4: the four certificates at n = 154, 176, 211 and 241 that T-165 and T-182 cite, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-165, T-182 |
+| `E-couzo-586-n302-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 302 that T-181 cites, issue 583's certificate as issue 586's packet retains it byte for byte, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-181 |
+| `E-pingyou-504-refinement-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 153 that T-166 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-166 |
+| `E-pingyou-503-refinement-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 207 that T-167 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-167 |
+| `E-pingyou-566-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 146 that T-168 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-168 |
+| `E-pingyou-567-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 261 that T-169 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-169 |
+| `E-pingyou-568-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 105 that T-170 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-170 |
+| `E-pingyou-569-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 272 that T-171 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-171 |
+| `E-couzo-583-exact-feasibility` | replayed here | independently re-implemented | full, 3 of 3: the three certificates at n = 154, 211, 241 that T-172 and T-181 cite, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-172, T-181 |
+| `E-mishapolk-573-exact-feasibility` | replayed here | independently re-implemented | full, 2 of 2: both certificates at n = 153, 207 that T-173 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-173 |
+| `E-pingyou-574-exact-feasibility` | replayed here | independently re-implemented | full, 64 of 64: the 64 rational certificates the entry cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-174 |
+| `E-ostashev-575-exact-feasibility` | replayed here | independently re-implemented | full, 3 of 3: the three certificates at n = 211, 241, 304 that T-175 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-175 |
+| `E-fang-excess-theorem-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 6 of 6: the six retained inventory certificates at 211, 241, 273, 307, 308 and 932, every wall and every pair decided by both maintained routes; the twelve kernel controls are retained separately | T-163 |
+| `E-mishapolk-593-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 237 that T-183 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | T-183 |
+| `E-fang-direct-exact-feasibility` | replayed here | independently re-implemented after reading the producer’s code | full, 14 of 14: the complete certificates at 380, 381, 382, 421, 422, 463, 464, 507, 508, 553, 601, 651, 758 and 814, every wall and every pair decided by both maintained routes; the 28 kernel controls are retained separately | - |
+| `E-couzo-506-n175-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 175 that T-185 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-185 |
+| `E-mishapolk-70a033f-exact-feasibility` | replayed here | independently re-implemented | full, 12 of 12: the twelve derived certificates at n = 129, 154, 156, 175, 176, 204, 232, 264, 271, 302, 303 and 304 that T-186 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipts | T-186 |
+| `E-evand-606-n146-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 146 that T-187 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-187 |
+| `E-couzo-487b058-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 211 that T-188 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-188 |
+| `E-couzo-607-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 237 that T-189 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipts | T-189 |
+| `E-couzo-4e4c8ce-n237-exact-feasibility` | replayed here | independently re-implemented | full, 1 of 1: the certificate at n = 237 that T-190 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | T-190 |
 
 ### `V-rehwaldt-n68-verify`
 
@@ -2149,9 +2879,9 @@ Decides all 68 rational unit squares, containment and 2278 unordered pairs.
 - Versions run: SHA-256 `911b98223346…` (fded686668e29258dad2eb29d0482fa3fd51bd6b)
 - Note: Producer code reproduced here with Python Fraction and the rational half-angle map. The two programs use the same SAT theorem and arithmetic; their distinct code does not establish independence from the source producer. Analytic root and dual programs are outside this replay.
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-rehwaldt-n68-refinement-2026-10-07-exact-replay` | replayed here | producer’s code | T-118 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-rehwaldt-n68-refinement-2026-10-07-exact-replay` | replayed here | reproduced with the producer’s code | not recorded | T-118 |
 
 ### `V-rehwaldt-n68-independent-support-check`
 
@@ -2163,9 +2893,9 @@ Decides all 68 rational unit squares, containment and 2278 unordered pairs.
 - Versions run: SHA-256 `48e1ae336855…` (fded686668e29258dad2eb29d0482fa3fd51bd6b)
 - Note: Producer code reproduced here with Python Fraction and the rational half-angle map. The two programs use the same SAT theorem and arithmetic; their distinct code does not establish independence from the source producer. Analytic root and dual programs are outside this replay.
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-rehwaldt-n68-refinement-2026-10-07-exact-replay` | replayed here | producer’s code | T-118 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-rehwaldt-n68-refinement-2026-10-07-exact-replay` | replayed here | reproduced with the producer’s code | not recorded | T-118 |
 
 ### `V-refinement-custody`
 
@@ -2177,10 +2907,10 @@ Admits all 13 complete actual input/result jobs, immutable source conversion, pr
 - Versions run: this repository's commits, which Git holds
 - Note: Offline admission reconciles retained executions and runs no geometric predicate.
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-rehwaldt-couzo-refinements-2026-10-07-exact-replay` | replayed here | independent | T-117 |
-| `E-rehwaldt-n68-refinement-2026-10-07-exact-replay` | replayed here | producer’s code | T-118 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-rehwaldt-couzo-refinements-2026-10-07-exact-replay` | replayed here | independently re-implemented | not recorded | T-117 |
+| `E-rehwaldt-n68-refinement-2026-10-07-exact-replay` | replayed here | reproduced with the producer’s code | not recorded | T-118 |
 
 ### `V-ryxu-undilated-n51-independent`
 
@@ -2192,9 +2922,9 @@ Decides all 51 undilated coefficient poses in Q(sqrt2), unit-square identities, 
 - Versions run: this repository's commits, which Git holds
 - Note: Rational-pair scalar order and direct axis/diamond corners are distinct from native number-field materialization and geometry. The reviewed source input is shared. Complete positive, duplicate and outside outcomes are retained; 119 touching and 1156 strict pairs are observed, while the source's 191-touching-pair assertion remains unconfirmed.
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-ryxu-432-radical-n51-feasibility` | replayed here | independent | T-126 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-ryxu-432-radical-n51-feasibility` | replayed here | independently re-implemented | not recorded | T-126 |
 
 ### `V-ryxu-complete-custody`
 
@@ -2206,10 +2936,10 @@ Admits complete pinned source facts, all 75 rational and three radical actual in
 - Versions run: this repository's commits, which Git holds
 - Note: Admission reconciles retained executions and private-worker scientific inputs. It executes no geometric predicate and does not itself confer a confirmation rung.
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-ryxu-432-rational-feasibility` | replayed here | independent | T-125 |
-| `E-ryxu-432-radical-n51-feasibility` | replayed here | independent | T-126 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-ryxu-432-rational-feasibility` | replayed here | independently re-implemented | not recorded | T-125 |
+| `E-ryxu-432-radical-n51-feasibility` | replayed here | independently re-implemented | not recorded | T-126 |
 
 ### `V-gupta-complete-custody`
 
@@ -2221,9 +2951,313 @@ Admits all seventeen pinned originals and comparators, all 51 complete actual in
 - Versions run: this repository's commits, which Git holds
 - Note: Reconciles retained executions and ordinary private scientific inputs. No geometric predicate runs and admission alone confers no confirmation rung.
 
-| evidence | run | code | results |
-| --- | --- | --- | --- |
-| `E-gupta-438-exact-feasibility` | replayed here | independent | T-127 |
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-gupta-438-exact-feasibility` | replayed here | independently re-implemented | not recorded | T-127 |
+
+### `V-register-regularized-bounds`
+
+**devtools.register_regularized_bounds** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
+
+Selects the regularized views whose exact side lies below the case's verified upper bound from the regularization runs' reports, retains each view as the run wrote it, measures its identity against the witness's exact frame, hands each view to sqpack.witness.exact_verify and devtools.check_rational_witness_independent, which decide it, makes the negative controls, and writes the case records' verified upper lane.
+
+- Source: [`packing/devtools/register_regularized_bounds.py`](../../packing/devtools/register_regularized_bounds.py)
+- Versions run: this repository's commits, which Git holds
+- Note: Reads the views and the receipts; decides nothing itself. The two programs it hands each view to are the ones the run that made the views decided them with, so its replay is a reproduction with the producer's code.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-regularized-bounds-2026-10-12-exact-decision` | replayed here | reproduced with the producer’s code | full, 59 of 59: retained rational packing views, every wall and every pair decided by both maintained checkers: 1,051,241 pair decisions per checker, with the 177 negative-control decisions on the 59 views retained separately | T-155, T-156 |
+| `E-regularized-bounds-2026-10-13-grid-slack-exact-decision` | replayed here | reproduced with the producer’s code | full, 1 of 1: the retained rational packing view at n = 290, every wall and all 41,905 pairs decided by both maintained checkers; the three negative-control decisions on two distinct mutants are retained separately | T-156 |
+
+### `V-wand125-lb-review-fine-net-premises`
+
+**check_candidate.py, check_source_logs.py and nested_crate.py** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
+
+Recomputes, apart from the crate and the tools, every exact premise of a check2 candidate on its declared net (the measure and its mass, lemma N0's premises and the last bin, the per-bin domains, lemma F3's caps, the semantic digest), reads the source's run and control logs and receipts against the candidate, and ties the nested verifier archive to its build digest and, file by file, to reviewed source.
+
+- Source: [`packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/review/programs/fine_net_exact.py`](../../packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/review/programs/fine_net_exact.py), [`packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/review/programs/check_candidate.py`](../../packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/review/programs/check_candidate.py), [`packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/review/programs/check_source_logs.py`](../../packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/review/programs/check_source_logs.py), [`packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/review/programs/nested_crate.py`](../../packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/review/programs/nested_crate.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-10-14-wand125-fine-net-and-linear-lower-bounds.md`](../../docs/project/reviews/review-2026-10-14-wand125-fine-net-and-linear-lower-bounds.md)
+- Independence: its authors read mathematics, specification, certificate-format, producer-code, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the stage-4 mathematical review lane of the wand125-lb import (think-u0av), strong tier, max reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, The source's commits name Claude as co-author. Written by a Claude agent prompted separately from the source and from the intake lane, in files of their own that import nothing from the crate, the tools or the source.
+
+No evidence entry names it yet.
+
+### `V-wand125-lb-review-fine-net-exact-capture`
+
+**fine_net_exact.capture, driven by check_source_logs.py and sample_directions.py** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
+
+The exact mass a closed core at a given centre and net angle captures from a format M measure on a declared net, by Sutherland-Hodgman clipping of the rotated core against each D4 image in fractions. Decides the capture at the poses it evaluates: the source's control witnesses, the tightest leaf centres of the source's runs, and the leaves and witnesses of the reviewed sqverify-fast at the directions sample_directions.py runs. It agrees with the crate's exact witnesses digit for digit at 99 oblique poses.
+
+- Source: [`packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/review/programs/fine_net_exact.py`](../../packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/review/programs/fine_net_exact.py), [`packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/review/programs/check_source_logs.py`](../../packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/review/programs/check_source_logs.py), [`packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/review/programs/sample_directions.py`](../../packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/review/programs/sample_directions.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-10-14-wand125-fine-net-and-linear-lower-bounds.md`](../../docs/project/reviews/review-2026-10-14-wand125-fine-net-and-linear-lower-bounds.md)
+- Independence: its authors read mathematics, specification, certificate-format, producer-code, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the stage-4 mathematical review lane of the wand125-lb import (think-u0av), strong tier, max reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, As above.
+
+No evidence entry names it yet.
+
+### `V-wand125-lb-review-axis-sweep-emulation`
+
+**sweep_emulation.py** · Squares Project (Levy) · first-party · checks premises · Python · numerical-f64, exact-algebraic
+
+A transcription of sqverify-fast's axis vertex sweep and directed rounding into Python floats, walked at one column, which reproduces the crate's certified bound to the last digit and reports the enclosure the crate does not: a diagnostic of the census control's axis tolerance. It decides nothing.
+
+- Source: [`packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/review/programs/sweep_emulation.py`](../../packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/review/programs/sweep_emulation.py), [`packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/review/programs/fine_net_exact.py`](../../packing/resources/web/wand125-fine-net-n37-n39-n44-2026-10-13/review/programs/fine_net_exact.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-10-14-wand125-fine-net-and-linear-lower-bounds.md`](../../docs/project/reviews/review-2026-10-14-wand125-fine-net-and-linear-lower-bounds.md)
+- Independence: its authors read mathematics, producer-code, producer-output; it shares axis::verify_axis, interval::Iv; written by Claude (Anthropic) (the stage-4 mathematical review lane of the wand125-lb import (think-u0av), strong tier, max reasoning), with its own prompt; authorship in common with the producer’s: system-family, Transcribed from the crate's Rust by eye, not imported, so its code is the crate's sweep in another language; the crate is this repository's, which the producer adapted.
+
+No evidence entry names it yet.
+
+### `V-wand125-lb-review-linear-premises`
+
+**check_linear_candidate.py, check_linear_records.py and check_inputs_sample.py** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
+
+Recomputes, apart from the tools, every exact premise of a linear certificate (the measure, its mass, its D4 invariance, the digest, the net, the centre domains), the arithmetic of its scope against the closed forms and the case records, its 201 records and the digests its documents state, and a sample of the proof bundle's inputs against the exact images.
+
+- Source: [`packing/resources/web/wand125-linear-n145-2026-10-13/review/programs/linear_exact.py`](../../packing/resources/web/wand125-linear-n145-2026-10-13/review/programs/linear_exact.py), [`packing/resources/web/wand125-linear-n145-2026-10-13/review/programs/check_linear_candidate.py`](../../packing/resources/web/wand125-linear-n145-2026-10-13/review/programs/check_linear_candidate.py), [`packing/resources/web/wand125-linear-n145-2026-10-13/review/programs/check_linear_records.py`](../../packing/resources/web/wand125-linear-n145-2026-10-13/review/programs/check_linear_records.py), [`packing/resources/web/wand125-linear-n145-2026-10-13/review/programs/check_inputs_sample.py`](../../packing/resources/web/wand125-linear-n145-2026-10-13/review/programs/check_inputs_sample.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-10-14-wand125-fine-net-and-linear-lower-bounds.md`](../../docs/project/reviews/review-2026-10-14-wand125-fine-net-and-linear-lower-bounds.md)
+- Independence: its authors read mathematics, certificate-format, producer-code, producer-output, earlier-review; it shares none of the producer’s code; written by Claude (Anthropic) (the stage-4 mathematical review lane of the wand125-lb import (think-u0av), strong tier, max reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, As above.
+
+No evidence entry names it yet.
+
+### `V-wand125-lb-review-linear-exact-capture`
+
+**linear_exact.capture, driven by point_checks.py** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
+
+The exact mass a closed core captures from a point, segment and rectangle measure at a given centre and net angle, in fractions. Decides only the fifteen captures point_checks.py evaluated, which are no evidence of the claim.
+
+- Source: [`packing/resources/web/wand125-linear-n145-2026-10-13/review/programs/linear_exact.py`](../../packing/resources/web/wand125-linear-n145-2026-10-13/review/programs/linear_exact.py), [`packing/resources/web/wand125-linear-n145-2026-10-13/review/programs/point_checks.py`](../../packing/resources/web/wand125-linear-n145-2026-10-13/review/programs/point_checks.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-10-14-wand125-fine-net-and-linear-lower-bounds.md`](../../docs/project/reviews/review-2026-10-14-wand125-fine-net-and-linear-lower-bounds.md)
+- Independence: its authors read mathematics, certificate-format, producer-code, earlier-review; it shares none of the producer’s code; written by Claude (Anthropic) (the stage-4 mathematical review lane of the wand125-lb import (think-u0av), strong tier, max reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, As above.
+
+No evidence entry names it yet.
+
+### `V-fang-review-exact-checker`
+
+**rectangle_check.py, with its module squares_exact.py** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
+
+Decides a square or rectangle certificate in Evan Daniel's text format strict-valid in both dimensions in Fraction arithmetic: every corner strictly inside the open box and every pair strictly separated along an edge normal, pairs with centres farther than sqrt 2 apart decided by the exact distance test within a grid of cells of side 2, or every pair by the axis test with --all-pairs; reports the exact squeeze, least wall clearance and least pair gap, and refuses the duplicate-square and outside-container controls.
+
+- Source: [`packing/resources/web/fang-excess-theorem-2026-10-13/review/programs/rectangle_check.py`](../../packing/resources/web/fang-excess-theorem-2026-10-13/review/programs/rectangle_check.py), [`packing/resources/web/fang-excess-theorem-2026-10-13/review/programs/squares_exact.py`](../../packing/resources/web/fang-excess-theorem-2026-10-13/review/programs/squares_exact.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-10-14-fang-excess-theorem-and-direct-certificates.md`](../../docs/project/reviews/review-2026-10-14-fang-excess-theorem-and-direct-certificates.md)
+- Independence: its authors read mathematics, specification, certificate-format, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the mathematical review lane of the fang-theorem intake, strong tier, max reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, The source states that its search, verifier and bundle were written with Claude (Anthropic). This program was written by a Claude agent prompted separately, in files of its own, from the README's statement of the certificate convention and the separating-axis theorem; the source's checkers verify.py, tools/rectcheck.py and verify_cert.py were not read.
+- Note: The mathematical review of 14 October 2026 wrote it and ran it on the six rectangles, the 25 square pieces, the 76 inventory certificates (six retained, 70 rebuilt byte-identical to the pinned files) and the fourteen direct certificates, all strict-valid, with the all-pairs route agreeing on R, R', 932 and 380 and the two controls refused. Kept as run in the packet's review/, with every output.
+
+No evidence entry names it yet.
+
+### `V-fang-review-glue-rebuild`
+
+**glue_rebuild.py, with squares_exact.py** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
+
+Rebuilds each certificate of Fang's theorem inventory from the retained pieces by its chain, as the Lemma 3 composite at the common squeeze 1/10000 scaled once by 1 + d0/(2(n - d0)), and decides whether its bytes are the shipped file's by the SHA-256 the frozen header list and the tables record, and by the bytes where the file is retained.
+
+- Source: [`packing/resources/web/fang-excess-theorem-2026-10-13/review/programs/glue_rebuild.py`](../../packing/resources/web/fang-excess-theorem-2026-10-13/review/programs/glue_rebuild.py), [`packing/resources/web/fang-excess-theorem-2026-10-13/review/programs/squares_exact.py`](../../packing/resources/web/fang-excess-theorem-2026-10-13/review/programs/squares_exact.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-10-14-fang-excess-theorem-and-direct-certificates.md`](../../docs/project/reviews/review-2026-10-14-fang-excess-theorem-and-direct-certificates.md)
+- Independence: its authors read mathematics, producer-code, certificate-format, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the mathematical review lane of the fang-theorem intake, strong tier, max reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, Written after reading tools/glue.py, the producer's construction, in code of its own that copies none of it; instantiate_theorem.py, which built the inventory, is private and was not read. The source states Claude assistance.
+- Note: The mathematical review of 14 October 2026 wrote and ran it; the rebuilt files are not kept (OR-18) and are written again in two seconds.
+
+No evidence entry names it yet.
+
+### `V-fang-review-excess-arithmetic`
+
+**excess_arithmetic.py** · Squares Project (Levy) · first-party · decides · Python · exact-algebraic
+
+Decides the arithmetic of Theorem 2 from its definition: F(n) and its maximiser with the base in 15..30 for n = 15..2000, every row of inventory.tsv and best.tsv with its chain recounted from the pieces' counts and boxes, and the deficiency comparison with Ryu's and Arslanov, Mustafin and Shangitbayev's bounds.
+
+- Source: [`packing/resources/web/fang-excess-theorem-2026-10-13/review/programs/excess_arithmetic.py`](../../packing/resources/web/fang-excess-theorem-2026-10-13/review/programs/excess_arithmetic.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-10-14-fang-excess-theorem-and-direct-certificates.md`](../../docs/project/reviews/review-2026-10-14-fang-excess-theorem-and-direct-certificates.md)
+- Independence: its authors read mathematics, specification, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the mathematical review lane of the fang-theorem intake, strong tier, max reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, Written from the README's definition of F(n) and the tables, read as data; it shares nothing with cases/asymptotic/fang_excess_inventory.py either, which was read only after its results were in hand.
+- Note: The mathematical review of 14 October 2026 wrote and ran it; output kept in the packet's review/outputs/.
+
+No evidence entry names it yet.
+
+### `V-fang-review-receipt-summary`
+
+**receipt_summary.py, with squares_exact.py; pieces_digests.py** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
+
+Reads an upper-bound packet's exact replay receipt and claims record and holds them to the retained certificates: each job's input, verdicts, least margins and controls, the summed statistics, and every claim comparison recomputed from the exact sides; pieces_digests.py says which files the PIECES.md digests identify.
+
+- Source: [`packing/resources/web/fang-excess-theorem-2026-10-13/review/programs/receipt_summary.py`](../../packing/resources/web/fang-excess-theorem-2026-10-13/review/programs/receipt_summary.py), [`packing/resources/web/fang-excess-theorem-2026-10-13/review/programs/pieces_digests.py`](../../packing/resources/web/fang-excess-theorem-2026-10-13/review/programs/pieces_digests.py), [`packing/resources/web/fang-excess-theorem-2026-10-13/review/programs/squares_exact.py`](../../packing/resources/web/fang-excess-theorem-2026-10-13/review/programs/squares_exact.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`docs/project/reviews/review-2026-10-14-fang-excess-theorem-and-direct-certificates.md`](../../docs/project/reviews/review-2026-10-14-fang-excess-theorem-and-direct-certificates.md)
+- Independence: its authors read certificate-format, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the mathematical review lane of the fang-theorem intake, strong tier, max reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, Reads this repository's receipts and claims records and the retained certificates; decides no geometry. The source states Claude assistance.
+- Note: The mathematical review of 14 October 2026 wrote and ran it on the theorem and the direct-certificates packets; both receipts and both claims records held.
+
+No evidence entry names it yet.
+
+### `V-wand125-replay4d`
+
+**replay4d, with seam4d_core, driven by checker/replay_all.py** · wand125 · external · decides · Rust, Python · exact-algebraic
+
+Decides one region record of the closed-form certificate: that its roots are exactly the product grid of the region, its leaves tile each root by midpoint bisection, and each leaf passes its named exact test (EMPTY, CORE, B3D, EDGE, EX/EY, B3U, B3T, the nine CORE1 kinds, B4U) against the family.
+
+- Source: [`packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/replay4d/src/main.rs`](../../packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/replay4d/src/main.rs), [`packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/seam4d_core/src/lib.rs`](../../packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/seam4d_core/src/lib.rs), [`packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/seam4d_core/src/replay.rs`](../../packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/seam4d_core/src/replay.rs), [`packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/seam4d_core/src/b3d.rs`](../../packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/seam4d_core/src/b3d.rs), [`packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/seam4d_core/src/b3d_sort.rs`](../../packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/seam4d_core/src/b3d_sort.rs), [`packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/seam4d_core/src/fast.rs`](../../packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/seam4d_core/src/fast.rs), [`packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/replay_all.py`](../../packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/checker/replay_all.py)
+- Versions run: SHA-256 `92002e0e8924…` (replay4d's printed source hash of the published crates; the source's full replay ran 306ad4b5..., which differs in comments only, as the source says. It does not cover b3d_sort.rs. Built here as the binary d52b8d88...); SHA-256 `f8cafeab078e…` (replay4d 0.1.1 (wand125/square-packing 1c661b7), its printed source hash, which from this version also covers seam4d_core/src/b3d_sort.rs; the only other change is that each result records env.B3_PLAIN_RF. Recomputed here (wand125-closed-form-source-hash-2026-10-14/receipts/source-hashes.json). Built here as the binary fb84677b...; of `main.rs`)
+- Note: Built here on 14 October 2026 with rustc 1.86.0 and the locked Cargo.lock, from the retained crates (0.1.0, binary d52b8d88...) and the 1c661b7 revision's (0.1.1, binary fb84677b...); each passed its 28 tests and printed the source hash its packet recomputes. 0.1.0 replayed two records of the 136 and refused a truncated record and a relabelled leaf (wand125-closed-form-2026-10-14/receipts/calibration/). The source says seam4d_core is the code its search tools use to evaluate leaves, so a replay with it is the producer's own code re-run.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-wand125-closed-form-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-180 |
+| `E-wand125-closed-form-replay4d-sample` | replayed here | reproduced with the producer’s code | sample, 2 of 136: region records of the closed-form certificate | T-180 |
+
+### `V-wand125-closed-form-structure`
+
+**structure/validate_family.py, run by structure/structure_all.py** · wand125 · external · checks premises · Python · exact-algebraic
+
+Checks each family's format and nonnegativity, the wall profile on the 1/5 grid with mass 9/5 per period, the corner separation, the saving at both ends against the certified line and delta/2, the total mass and C4 invariance for k = 7, 8, 9, agreement with the local model on [0, 24/5]^2, the reduction of k >= 10 by wall shifts, the right-side family, and the region bounds.
+
+- Source: [`packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/structure/validate_family.py`](../../packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/structure/validate_family.py), [`packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/structure/structure_all.py`](../../packing/resources/web/wand125-closed-form-2026-10-14/square-packing/problems/closed-form/structure/structure_all.py)
+- Versions run: SHA-256 `22e55f17f29a…` (validate_family.py as published and as run here); SHA-256 `7e32c71d6e9b…` (structure_all.py; of `structure_all.py`)
+- Note: Run here unchanged on 14 October 2026 (receipts/structure-check/). The source's receipt named validate_family.py at fdd61866..., never published; at 1c661b7 it names the published 22e55f17... with the same results.
+
+No evidence entry names it yet.
+
+### `V-closed-form-evaluation`
+
+**closed_form_bounds.py** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
+
+Decides, from the retained intervals.json, what the closed-form theorem implies at each count 49 to 324 by two routes, the closed form and the theorem's inequality, and compares the value exactly with every case bound.
+
+- Source: [`packing/resources/web/wand125-closed-form-2026-10-14/evaluation/closed_form_bounds.py`](../../packing/resources/web/wand125-closed-form-2026-10-14/evaluation/closed_form_bounds.py)
+- Versions run: SHA-256 `1a430c0925d5…`
+- What its authors read and used: [`packing/resources/web/wand125-closed-form-2026-10-14/evaluation/README.md`](../../packing/resources/web/wand125-closed-form-2026-10-14/evaluation/README.md)
+- Independence: its authors read mathematics, proof-text, producer-code; it shares none of the producer’s code; written by Claude (Anthropic) (the intake lane wand125-cf of the 14 October intake, tbd-moderate tier), with its own prompt and code; authorship in common with the producer’s: system-family, The source's commit names Claude as co-author. Written by a Claude agent in a file of its own that imports none of the source; its authors had read a_of_n.py, README.md and SPEC.md first.
+- Note: It decides nothing about the measure certificate.
+
+No evidence entry names it yet.
+
+### `V-closed-form-review-a-by-definition`
+
+**review/a_of_n_by_definition.py** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
+
+Encloses a(N) from the supremum of SPEC.md section 1.1 alone, by exact bisection on each interval and exact separation of the candidates, at every non-square count to 3600, and decides the interval facts the corollaries use; compares the 30-place values of the source's a_of_n.py and of the intake evaluation.
+
+- Source: [`packing/resources/web/wand125-closed-form-2026-10-14/review/a_of_n_by_definition.py`](../../packing/resources/web/wand125-closed-form-2026-10-14/review/a_of_n_by_definition.py)
+- Versions run: SHA-256 `6e7ed56592d1…`
+- What its authors read and used: [`packing/resources/web/wand125-closed-form-2026-10-14/review/README.md`](../../packing/resources/web/wand125-closed-form-2026-10-14/review/README.md)
+- Independence: its authors read mathematics, proof-text, specification, certificate-format, producer-code, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the mathematical review lane of the wand125-cf import (think-tsox), strong tier, max reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, The source's commit names Claude as co-author. Written by a Claude agent in a lane prompted separately from the source and from the intake lane, in a file of its own that imports none of the source; its author had read SPEC.md, README.md, a_of_n.py and the checker first.
+- Note: It decides what the theorem implies at a count and nothing about the certificate.
+
+No evidence entry names it yet.
+
+### `V-closed-form-review-record-consistency`
+
+**review/record_consistency.py** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
+
+Compares the enclosures of a(N) with the four lanes of the case records n = 49..324 and with the known values at m^2 - 1, -2, -3 and -4: a lower bound above a recorded upper bound, or above a known value, would refute the claim.
+
+- Source: [`packing/resources/web/wand125-closed-form-2026-10-14/review/record_consistency.py`](../../packing/resources/web/wand125-closed-form-2026-10-14/review/record_consistency.py)
+- Versions run: SHA-256 `a0fc92993452…`
+- What its authors read and used: [`packing/resources/web/wand125-closed-form-2026-10-14/review/README.md`](../../packing/resources/web/wand125-closed-form-2026-10-14/review/README.md)
+- Independence: its authors read mathematics, proof-text, specification, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the mathematical review lane of the wand125-cf import (think-tsox), strong tier, max reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, As above; it reads the case records through PyYAML and the enclosures of the first program.
+- Note: A consistency check that can refute and cannot establish.
+
+No evidence entry names it yet.
+
+### `V-closed-form-review-localization`
+
+**review/localization_checks.py** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
+
+Decides exactly the 29 numerical inequalities that SPEC.md sections 2.3, 4.1 and 5.1 assert in prose and no program of the source checks: corner and edge reach for k >= 7, the periodic-shift ranges, the window containment of the checked regions, the coverage of [0, 3.8 + delta] x [0, 3.8] by the four regions, the quarter-turn condition on the u-range, the half-width bound, the window premise and the slopes.
+
+- Source: [`packing/resources/web/wand125-closed-form-2026-10-14/review/localization_checks.py`](../../packing/resources/web/wand125-closed-form-2026-10-14/review/localization_checks.py)
+- Versions run: SHA-256 `b3bbe6413b6e…`
+- What its authors read and used: [`packing/resources/web/wand125-closed-form-2026-10-14/review/README.md`](../../packing/resources/web/wand125-closed-form-2026-10-14/review/README.md)
+- Independence: its authors read mathematics, proof-text, specification; it shares none of the producer’s code; written by Claude (Anthropic) (the mathematical review lane of the wand125-cf import (think-tsox), strong tier, max reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, As above; the inequalities are the specification's, decided from its constants.
+- Note: These are premises of the proof that the structure check leaves to the specification.
+
+No evidence entry names it yet.
+
+### `V-closed-form-review-replay-receipt`
+
+**review/replay_receipt_pieces.py** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
+
+Checks the source's replay receipt against itself and the published files: the 158 pieces of the 25 cut records tile their regions, root counts and line-hash sums add up, run and CPU-hour totals add up, and every record and family digest chains to intervals.json through families.json and the published-build receipt.
+
+- Source: [`packing/resources/web/wand125-closed-form-2026-10-14/review/replay_receipt_pieces.py`](../../packing/resources/web/wand125-closed-form-2026-10-14/review/replay_receipt_pieces.py)
+- Versions run: SHA-256 `3da9b960c45e…`
+- What its authors read and used: [`packing/resources/web/wand125-closed-form-2026-10-14/review/README.md`](../../packing/resources/web/wand125-closed-form-2026-10-14/review/README.md)
+- Independence: its authors read specification, certificate-format, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the mathematical review lane of the wand125-cf import (think-tsox), strong tier, max reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, As above.
+- Note: A receipt is the author's statement; this decides only that it is consistent and names the published files.
+
+No evidence entry names it yet.
+
+### `V-closed-form-review-family-probe`
+
+**review/family_probe.py** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
+
+For one released interval: re-derives the family's structure and savings from SPEC.md with code of its own, builds the global measure for several k and delta and decides the mass identity, the support and the window identity, re-decides the product grid and the tiling of the four region records by volume and pairwise disjointness, and computes the mass of the global measure on closed unit squares exactly at random, delicate and descent-found poses, which must be at least 1.
+
+- Source: [`packing/resources/web/wand125-closed-form-2026-10-14/review/family_probe.py`](../../packing/resources/web/wand125-closed-form-2026-10-14/review/family_probe.py)
+- Versions run: SHA-256 `bb7a9d1df6d9…`
+- What its authors read and used: [`packing/resources/web/wand125-closed-form-2026-10-14/review/README.md`](../../packing/resources/web/wand125-closed-form-2026-10-14/review/README.md)
+- Independence: its authors read mathematics, proof-text, specification, certificate-format, producer-code, producer-output; it shares none of the producer’s code; written by Claude (Anthropic) (the mathematical review lane of the wand125-cf import (think-tsox), strong tier, max reasoning), with its own prompt and code; authorship in common with the producer’s: system-family, As above. Its author read validate_family.py and the checker before writing it, and ran validate_family.py once on one family to compare decompositions while fixing a clipping bug of its own; the structure and savings code is written from SPEC.md sections 2.1 and 3.2 and shares no line with the source.
+- Note: A sample: it ran to completion on interval 20 of 34, with 1,345 poses, and its runs on intervals 7 and 34 were stopped before a receipt was written. It decides the structure of interval 20's two families and the grids of its four records fully, the tiling of its top record fully and of the other three on 200 roots each, and the claim itself only at the poses it visited.
+
+No evidence entry names it yet.
+
+### `V-wand125-cfcheck`
+
+**cfcheck (indep-checker), its coverage, family, region and interval commands** · wand125 · external · decides · Rust · exact-algebraic
+
+Decides one interval of the closed-form certificate from SPEC.md: the input digests against SHA256SUMS and intervals.json; both families' structure (the wall period of mass 9/5, the reversal identities, the saving at both ends against the stored saving and the certified line, global against local agreement at k = 7, 8, 9, the right-side family); the region bounds; the product grid and 90-degree cover of each record's roots; the bisection tiling of every root; the published counts; and every leaf by its named exact test (EMPTY, CORE, B3D, EDGE, EX/EY, B3U, B3T, the nine CORE1 kinds, B4U), with no fallback between tests. Its coverage command checks that the 34 intervals partition (0, 1].
+
+- Source: [`packing/resources/web/wand125-closed-form-cfcheck-2026-10-14/square-packing/problems/closed-form/indep-checker/src`](../../packing/resources/web/wand125-closed-form-cfcheck-2026-10-14/square-packing/problems/closed-form/indep-checker/src), [`packing/resources/web/wand125-closed-form-cfcheck-2026-10-14/square-packing/problems/closed-form/indep-checker/Cargo.toml`](../../packing/resources/web/wand125-closed-form-cfcheck-2026-10-14/square-packing/problems/closed-form/indep-checker/Cargo.toml), [`packing/resources/web/wand125-closed-form-cfcheck-2026-10-14/square-packing/problems/closed-form/indep-checker/Cargo.lock`](../../packing/resources/web/wand125-closed-form-cfcheck-2026-10-14/square-packing/problems/closed-form/indep-checker/Cargo.lock)
+- Versions run: revision `746e2c5ac7a7` (The commit that adds it. The source's production build used rustc 1.99.0; the build here used rustc 1.97.0 with the locked crates, and its release binary had SHA-256 c5a163d48d10155dbe6d319a8a8cae8cab3feb9278c6fb7116c2d0396e686484.)
+- What its authors read and used: [`packing/resources/web/wand125-closed-form-cfcheck-2026-10-14/README.md`](../../packing/resources/web/wand125-closed-form-cfcheck-2026-10-14/README.md)
+- Independence: its authors read proof-text, specification, certificate-format, producer-output; it shares none of the producer’s code; written by Hiroaki Hosono (wand125); Codex (OpenAI) (named by the checker's README, "written with AI assistance (OpenAI Codex), reviewed by the author"; role, tier and reasoning setting not stated); Claude (Anthropic) (named co-author of the commit that adds it; its role is not stated), with its own code; authorship in common with the producer’s: people, The person who reviewed it, Hiroaki Hosono, wrote the producer's code, and issue #600 says the search, the certificates and both checkers were produced with Claude and Codex, so the authorship overlaps in the person and in both system families. clean_room is the source's statement ("which were not read"), which the code is consistent with and which cannot be checked here. The code shares no file, line, comment, local crate or arithmetic kernel with replay4d or seam4d_core (comparison/outputs/shared-code.json); its structural overlap, 8 to 23 times that of unrelated exact checkers, traces to procedures SPEC.md states step by step. SPEC.md is the producer's description of its own checker's procedures: cfcheck reads it as the specification and follows its names and constants, and reads the producer's published counts and five a(N) values of its README table as outputs to compare.
+- Note: Its relationship to the producer's code is independent-implementation. Its trust boundary is SPEC.md's procedures: an error in replay4d's code is one it can expose, and an error in a procedure SPEC.md prescribes is one it cannot. Not reviewed here for soundness; the mathematical review of 14 October 2026 read replay4d and SPEC.md, not cfcheck.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-wand125-closed-form-cfcheck-report` | the source’s own run | independently re-implemented, clean-room | sample, 8 of 136: region records of the closed-form certificate | T-180 |
+| `E-wand125-closed-form-cfcheck-sample` | replayed here | independently re-implemented, clean-room | sample, 2,909 of 187,183,108: leaves of the closed-form certificate | T-180 |
+
+### `V-wand125-sqverify-continuous`
+
+**sqverify-fast --continuous, the source's sqverify_continuous v4** · wand125, adapting this repository's sqverify_fast · external · decides · Rust · interval-certified, exact-algebraic
+
+The source's copy of this repository's sqverify_fast with a continuous-angle mode (src/slab.rs): for a format M candidate, a core side B and a threshold tau, it covers t = tan(theta/2) over [10^-7, 83/200] in 86 root ranges by outward-rounded binary64 branch and bound over (u, v, t), with concave-section bounds and translation derivatives, and the band [0, 10^-7] by the crate's exact axis sweep at a side A with A W(10^-7) <= B, and checks n tau > M exactly.
+
+- Source: [`packing/resources/web/wand125-continuous-n28-2026-10-15/square-packing/problems/square-lower-bounds/certificates/continuous_n28_L5745/bundle.json`](../../packing/resources/web/wand125-continuous-n28-2026-10-15/square-packing/problems/square-lower-bounds/certificates/continuous_n28_L5745/bundle.json)
+- Versions run: revision `d4a19815e2b0` (tools/sqverify_continuous at d4a1981, byte for byte the asset's check1/src/sqverify_continuous_v4.tgz (113,578 bytes, SHA-256 720869758013ac3cc86343f0603817ee36298be7696e40bb1d164a511f383a08), whose build reports source_sha256 619b3c00bd918b329b4141c24ee30b027af7f88b86bcf2886e3c18855a61c7f5; built here with rustc 1.98.0 (cargo build --release --locked) into 31936c4dcfac398b729990f51820fd5a5b70e23a2e809b71de1ca5864e6de618. Neither retained nor yet reviewed (think-xzob, #533).)
+- Note: It keeps this repository's interval.rs, exact.rs, axis.rs, oracle.rs and rotated.rs byte for byte; its certificate.rs is the source's proof_net admission. Its author read Guzhou0806's kernel before writing the mode, so it is independent code, not an independent method (think-xzob).
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-wand125-continuous-n28-5745-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-192 |
+
+### `V-wand125-contpose-check3`
+
+**contpose_check3 v1.2, check.py and generator.py around kernel/continuous_pose.cpp and kernel/axis_integer_grid.cpp** · wand125 (the driver, written to a specification for Codex), around Guzhou0806's kernels · external · decides · Python, C++ · interval-certified, exact-algebraic
+
+Regenerates the T-145 kernels' two inputs from a rectangle candidate (D4 expansion, outward binary64 enclosure; the axis measure rounded inward and down, at a density scale lowered by powers of ten until its guards hold), runs the integer axis kernel and the continuous-pose kernel on T-145's 43 slabs, and accepts only when every slab is verified with nodes = 2 leaves - 1, the axis minimum is at least tau, and the exact counting, geometry, angle and near-axis premises hold.
+
+- Source: [`packing/resources/web/wand125-continuous-n28-2026-10-15/square-packing/problems/square-lower-bounds/certificates/continuous_n28_L5745/check2/src/check.py`](../../packing/resources/web/wand125-continuous-n28-2026-10-15/square-packing/problems/square-lower-bounds/certificates/continuous_n28_L5745/check2/src/check.py), [`packing/resources/web/wand125-continuous-n28-2026-10-15/square-packing/problems/square-lower-bounds/certificates/continuous_n28_L5745/check2/src/generator.py`](../../packing/resources/web/wand125-continuous-n28-2026-10-15/square-packing/problems/square-lower-bounds/certificates/continuous_n28_L5745/check2/src/generator.py), [`packing/resources/web/wand125-continuous-n28-2026-10-15/square-packing/problems/square-lower-bounds/certificates/continuous_n28_L5745/check2/src/kernel/continuous_pose.cpp`](../../packing/resources/web/wand125-continuous-n28-2026-10-15/square-packing/problems/square-lower-bounds/certificates/continuous_n28_L5745/check2/src/kernel/continuous_pose.cpp), [`packing/resources/web/wand125-continuous-n28-2026-10-15/square-packing/problems/square-lower-bounds/certificates/continuous_n28_L5745/check2/src/kernel/axis_integer_grid.cpp`](../../packing/resources/web/wand125-continuous-n28-2026-10-15/square-packing/problems/square-lower-bounds/certificates/continuous_n28_L5745/check2/src/kernel/axis_integer_grid.cpp)
+- Versions run: SHA-256 `f3629c29d682…`, revision `8530bafb03d4` (The source digest by VERSION.json's rule. Built here with g++ 13.3.0 and check.py's flags into the binaries its receipt names, continuous_pose c028f0e34356a14af08d2309e64eed8c7b90f638731db39c7ccb19ba88276191 and axis_integer_grid 3d144a459b8a8f267ba3c3447023ee8db649ed5e7c6cd49ce97ac194a3422055.)
+- Note: Its kernels differ from the reviewed T-145 copies (V-guzhou-n40-continuous-pose, V-guzhou-n40-axis-integer-grid) exactly as its CHANGES.md prints: caps (rectangles, side, the axis grid from 15,000,000 to 90,000,000 vertices, the threshold denominator) and an echo of the input digest and arguments; no arithmetic changed.
+
+| evidence | run | code | coverage | results |
+| --- | --- | --- | --- | --- |
+| `E-wand125-continuous-n28-5745-report` | the source’s own run | reproduced with the producer’s code | not recorded | T-192 |
+
+### `V-continuous-pose-followup`
+
+**devtools.continuous_pose_followup** · Squares Project (Levy) · first-party · checks premises · Python · exact-algebraic
+
+Decides in exact rationals a continuous-pose certificate's premises and custody from its pinned release asset: the candidate's mass and rows, the scalar chain, each program's near-axis side and margin, both check2 kernel inputs regenerated against the digests the source names, the control's scaling, and both programs' logs against their summaries; and drives a diagnostic sample of roots, slabs and axis patches judged against the source's logs. It decides no coverage.
+
+- Source: [`packing/devtools/continuous_pose_followup.py`](../../packing/devtools/continuous_pose_followup.py), [`packing/tests/test_continuous_pose_followup.py`](../../packing/tests/test_continuous_pose_followup.py)
+- Versions run: this repository's commits, which Git holds
+- What its authors read and used: [`packing/devtools/continuous_pose_followup.py`](../../packing/devtools/continuous_pose_followup.py)
+
+No evidence entry names it yet.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

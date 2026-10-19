@@ -5,7 +5,7 @@ local validation is complete, with commit, push, and hosted CI still required fo
 landing.**
 
 Continue through the
-[`post-T+2 handoff`](../../../../../../docs/project/handoff-2026-09-06-post-381-t2-commissioning.md).
+[`post-T+2 handoff`](../../../../../../docs/project/handoffs/handoff-2026-09-06-post-381-t2-commissioning.md).
 
 The first commissioning block ended at active minute 120 with every authorized process
 terminal, every research output frozen, and 1,320 active portfolio minutes remaining.

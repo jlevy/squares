@@ -30,6 +30,7 @@ from devtools import (
     result_overview,
     result_status,
     site_assets,
+    site_topics,
     site_urls,
 )
 from devtools.check_results import scope_values
@@ -192,7 +193,7 @@ def test_the_results_table_has_its_own_page_and_the_overview_points_to_it(
     assert '<h1 id="every-result">' in results
     assert not ROW.findall(page)
     assert 'id="every-result"' not in page
-    recent = page.split('id="recent-results"', 1)[1].split('<h2 id="papers"', 1)[0]
+    recent = page.split('id="recent-results"', 1)[1].split('<h2 id="report-your-results"', 1)[0]
     # The actions lead to the ratings account and complete table.
     attributes = overview_sections.all_results_link_attributes(site_renders.overview())
     assert (
@@ -266,13 +267,13 @@ def test_the_page_fetches_only_the_shared_assets(page: str) -> None:
             render_overview.assert_fetches_only_assets("index.html", moved)
 
 
-def test_the_bar_leads_with_case_11_beside_the_name(page: str) -> None:
-    """The bar's home link carries case 11, the tab's icon, in the bar's own ink."""
+def test_the_bar_leads_with_the_full_and_compact_names(page: str) -> None:
+    """One home link carries both responsive labels with a stable accessible name."""
     link = page.split('<a class="site-name"', 1)[1].split("</a>", 1)[0]
-    assert '<svg class="site-logo" ' in link
-    assert 'aria-hidden="true"' in link.split("<svg", 1)[1].split(">", 1)[0]
-    assert '<span class="site-name-text">Square Packing</span>' in link
-    assert render_overview.site_logo() in link
+    assert '<span class="site-name-text site-name-full">The Squares Project</span>' in link
+    assert '<span class="site-name-text site-name-short">Squares</span>' in link
+    assert 'aria-label="The Squares Project home"' in link
+    assert "<svg" not in link
 
 
 def test_the_site_icons_have_stable_same_origin_addresses(page: str) -> None:
@@ -359,13 +360,17 @@ def test_the_homepage_sections_run_in_the_requested_order(page: str, atlas_page:
     assert '<h1 id="the-problem"' in page
     assert re.findall(r'<h2 id="([^"]+)"', page) == [
         "the-atlas-of-square-packings",
+        "news",
         "recent-results",
+        "report-your-results",
         "papers",
     ]
     assert re.findall(r'<h[12] id="([^"]+)" class="site-title"', page) == [
         "the-problem",
         "the-atlas-of-square-packings",
+        "news",
         "recent-results",
+        "report-your-results",
         "papers",
         "visuals",
         "squares-project-documentation",
@@ -386,7 +391,18 @@ def test_the_homepage_sections_run_in_the_requested_order(page: str, atlas_page:
     assert len(re.findall(r'data-atlas-n="\d+"', atlas_page)) == 324
     assert '<div class="site-atlas-rest" data-atlas-rest hidden>' in page
     assert page.count("data-atlas-toggle data-homepage-atlas-toggle") == 1
-    assert re.search(r"<h[3-6]\b", page) is None
+    headings = re.findall(r"<h[3-6]\b.*?</h[3-6]>", page, re.DOTALL)
+    news = page.split('id="news"', 1)[1].split('<h2 id="recent-results"', 1)[0]
+    article_headers = re.findall(
+        r'<header class="site-article-header[^"]*">(.*?)</header>', page, re.DOTALL
+    )
+    assert headings == [
+        heading
+        for header in article_headers
+        for heading in re.findall(r"<h3\b.*?</h3>", header, re.DOTALL)
+    ]
+    assert len(re.findall(r"<h3\b.*?</h3>", news, re.DOTALL)) == 3
+    assert len(headings) == 9  # Three News items, four papers and two tutorials.
     assert '<h1 id="more-resources" class="site-title">More Resources' in page
     assert "site-resource-links" not in page
 
@@ -407,9 +423,9 @@ def test_papers_groups_every_reading_and_the_resources_keep_detail_reachable(
     assert cards == [paper.href for paper in overview_sections.PAPERS] + [
         overview_sections.PDF_CARD_SPECS[1][0]
     ]
-    assert [(href, tag, card_text(body)) for href, tag, body in _page_cards(paper_section)] == [
-        (href, tag, card_text(body)) for href, tag, body in _page_cards(papers)
-    ]
+    assert {href: (tag, card_text(body)) for href, tag, body in _page_cards(paper_section)} == {
+        href: (tag, card_text(body)) for href, tag, body in _page_cards(papers)
+    }
     assert 'target="_blank"' not in paper_section
     assert "popover" not in section
     assert 'class="site-homepage-media"' in media_section
@@ -442,7 +458,7 @@ def test_home_and_about_share_the_documentation_introduction_and_cards(
     )
     home_section = page.split(heading, 1)[1].split('<h1 id="more-resources"', 1)[0]
     about_section = about.split(heading, 1)[1].split(
-        "<!-- This document follows common-doc-guidelines.md.", 1
+        '<p><a class="site-news-legacy-anchor"', 1
     )[0]
     home_block, action_row = home_section.rsplit('<p class="site-action-row site-more">', 1)
     assert re.findall(r"<p>(.*?)</p>", home_block, re.DOTALL) == re.findall(
@@ -542,8 +558,11 @@ def test_the_homepage_film_is_a_native_player_started_by_the_reader(page: str) -
 
 
 def _page_cards(page: str) -> list[tuple[str, str, str]]:
-    """A page's first card section: each card's address, opening tag, and body."""
-    frame = page.split('<div class="site-cards-frame', 1)[1].split("</div></div>", 1)[0]
+    """Reading cards, including Explanations' separate Tutorial and Papers sections."""
+    if '<h1 id="explanations"' in page:
+        frame = page.split('<h2 id="tutorial"', 1)[1].split('<h2 id="pdfs"', 1)[0]
+    else:
+        frame = page.split('<div class="site-cards-frame', 1)[1].split("</div></div>", 1)[0]
     cards = re.findall(
         r'<a class="site-card site-card-link" href="([^"]+)"([^>]*)>(.*?)</a>', frame, re.DOTALL
     )
@@ -554,15 +573,16 @@ def _page_cards(page: str) -> list[tuple[str, str, str]]:
 def _page_card_parts(page: str, href: str) -> tuple[str, str]:
     """A page card's value and note, including the Papers page's first card section."""
     (body,) = [body for address, _, body in _page_cards(page) if address == href]
-    value, note = body.split('class="site-card-value">', 1)[1].split(
-        '<span class="site-card-note">'
-    )
+    heading = re.search(r"<h3[^>]*>(.*?)</h3>", body, re.DOTALL)
+    value = heading.group(1) if heading else body.split('class="site-card-value">', 1)[1]
+    value = value.split('<span class="site-card-note">', 1)[0]
+    note = body.split('<span class="site-card-note">', 1)[1]
     return value, note
 
 
 def test_each_page_card_is_a_plain_link_to_its_page(about: str, papers: str) -> None:
-    """Papers holds the three papers and Tutorial once each as full-page links.
-    Their titles and richer descriptions are preserved. About holds the project story
+    """Explanations holds four standalone papers and both tutorials once each.
+    Their titles and descriptions are preserved. About holds the project story
     and documents; survey and workbench cards do not belong to these pages."""
     cards = _page_cards(papers)
     entries = overview_sections.PAPERS
@@ -572,6 +592,7 @@ def test_each_page_card_is_a_plain_link_to_its_page(about: str, papers: str) -> 
         "papers/n11-optimality-review.html",
         "papers/square-packing-methods-survey.html",
         "tutorial.html",
+        "tutorial-advanced.html",
     ]
     assert [paper.label for paper in entries] == [
         "Part I",
@@ -579,6 +600,7 @@ def test_each_page_card_is_a_plain_link_to_its_page(about: str, papers: str) -> 
         "Part III",
         "Methods tutorial",
         "Tutorial",
+        "Advanced tutorial",
     ]
     assert overview_sections.OPTIMALITY is entries[2]
     note = entries[2].description
@@ -598,7 +620,8 @@ def test_each_page_card_is_a_plain_link_to_its_page(about: str, papers: str) -> 
             )
             is None
         )
-    for (href, tag, body), paper in zip(cards, entries, strict=True):
+    displayed_entries = (*entries[-2:], *entries[:-2])
+    for (href, tag, body), paper in zip(cards, displayed_entries, strict=True):
         assert href in render_overview.SITE_PAGES, href
         assert tag == f' data-go="page" data-card-size="{paper.size}"', href
         assert "popovertarget" not in tag, href
@@ -807,7 +830,8 @@ def test_the_atlas_is_rendered_as_small_triangle_under_its_view_tabs(
     assert block == [
         (
             'data-atlas-view="triangle" data-atlas-size="small" '
-            'data-atlas-scale="row" data-atlas-first="100" data-atlas-grid'
+            'data-atlas-scale="row" data-atlas-drawing="regularized" '
+            'data-atlas-first="100" data-atlas-grid'
         )
     ]
     tabs = overview_sections.atlas_view_tabs()
@@ -894,7 +918,8 @@ def test_the_atlas_marks_each_perfect_square_and_nothing_else_on_a_tile(
         212,
         242,
         274,
-        308,
+        # 308 left the grid for a packet house on 11 October 2026 (think-fvz4).
+        309,
     ]
     first = re.search(
         r'<a\b[^>]* data-atlas-n="1"[^>]* style="([^"]+)"', _atlas_template(atlas_page, "first")
@@ -982,6 +1007,7 @@ def test_the_atlas_offers_three_sizes_under_tabs_beside_the_views(
     controls = (
         '<div class="site-atlas-controls" data-atlas-controls>'
         f"{overview_sections.atlas_view_tabs()}{tabs}{overview_sections.atlas_scale_tabs()}"
+        f"{overview_sections.atlas_drawing_tabs()}"
         f"{overview_sections.atlas_legend()}"
     )
     assert atlas_page.count(controls) == 1
@@ -1017,13 +1043,14 @@ def test_the_atlas_offers_three_sizes_under_tabs_beside_the_views(
 
 
 def test_one_tile_a_case_is_drawn_from_its_regularized_view_where_it_has_one() -> None:
-    """Each case with a regularized view has one tile, drawn from that view: the
-    regularized rendering reduced by `packing_svg`, the code that reduces a house
-    rendering, so it differs from the house drawing only where the view moved a square
-    or changed a square's shade. At tile resolution, subpixel moves can round to the
-    same drawing. The website shows the selected drawing without layer labels or
-    badges. Every other case is drawn from its house rendering. Read from the generator's own
-    markup, before the page's renderer normalizes it."""
+    """Each case whose default picture is its regularized view (regularization policy,
+    section 12) has one tile, drawn from that view: the regularized rendering reduced by
+    `packing_svg`, the code that reduces a house rendering, so it differs from the house
+    drawing only where the view moved a square or changed a square's shade. At tile
+    resolution, subpixel moves can round to the same drawing. The website shows the
+    selected drawing without layer labels or badges. Every other case is drawn from its
+    house rendering. Read from the generator's own markup, before the page's renderer
+    normalizes it."""
     from devtools import render_frontier_page as frontier  # noqa: PLC0415
 
     page = overview_sections.atlas_grid()
@@ -1043,7 +1070,14 @@ def test_one_tile_a_case_is_drawn_from_its_regularized_view_where_it_has_one() -
         assert bool(reference) == (" data-atlas-row-smaller" in open_tag), n
         assert number == f'<span class="site-atlas-n">{n}</span>', n
         is_regularized = n in regularized
-        assert drawing == frontier.drawing_img(n, regularized=is_regularized, size=400)
+        assert f'src="{frontier.drawing_path(n, regularized=is_regularized)}"' in drawing
+        mode = "Regularized" if is_regularized else "Original"
+        assert f'alt="{mode} packing of {n} unit squares"' in drawing
+        assert 'loading="lazy"' in drawing
+        assert ("data-atlas-original-src=" in drawing) is is_regularized
+        if is_regularized:
+            assert f'data-atlas-original-src="{frontier.drawing_path(n)}"' in drawing
+            assert "Regularized by the Squares Project" in html.unescape(drawing)
         assert "regularized" not in open_tag
         assert "site-atlas-layer-mark" not in number
         assert 'width="400" height="400"' in drawing
@@ -1058,26 +1092,14 @@ def test_one_tile_a_case_is_drawn_from_its_regularized_view_where_it_has_one() -
             n, units=overview_sections.ATLAS_UNITS, root=frontier.REGULARIZED_RENDERINGS
         ) == frontier.packing_svg(n, units=overview_sections.ATLAS_UNITS):
             identical_thumbnails.add(n)
-    # The exact #432 houses and n155's 337 sub-picometre snaps have unchanged
-    # tile-scale shades; 400-unit rounding hides moves visible in the full SVG.
-    assert identical_thumbnails == {
-        129,
-        131,
-        261,
-        70,
-        103,
-        295,
-        105,
-        267,
-        108,
-        155,
-        146,
-        84,
-        86,
-        123,
-        126,
-        127,
-    }
+    # Since the house adoption of 11 October 2026 (think-fvz4), the houses that are
+    # already display-regularized packings (T-146) and Robert Barnett's precision
+    # refinement of Ryan Xu's packing at 261 (T-150) had unchanged tile-scale shades under
+    # their views: 70, 103, 236, 258, 261, 263, 269, 295 and 303, where 400-unit rounding
+    # hid moves visible in the full SVG. Each of those views ties its exact house on every
+    # goal of the improvement rule, so since 13 October 2026 none is a default picture
+    # (policy, sections 11 and 12), and every view the atlas draws changes its tile.
+    assert identical_thumbnails == set()
     assert "data-atlas-layer" not in tiles
 
 
@@ -1232,6 +1254,7 @@ def test_the_sizes_scale_a_tile_by_one_token_in_either_view() -> None:
         css,
         ".site-atlas-grid .site-atlas-views[hidden],\n"
         ".site-atlas-grid .site-atlas-sizes[hidden],\n"
+        ".site-atlas-grid .site-atlas-drawings[hidden],\n"
         ".site-atlas-grid .site-atlas-scales[hidden],\n"
         ".site-atlas-grid .site-atlas-legend[hidden]",
     )
@@ -1240,18 +1263,21 @@ def test_the_sizes_scale_a_tile_by_one_token_in_either_view() -> None:
 def test_the_regularized_set_is_the_layer_index_and_refuses_a_stale_drawing(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    """The cases are the ones the layer's index lists as regularized, never a list kept
-    here, so a view the layer gains joins the atlas at the next render. A drawing the
-    index does not ask for, or one it asks for that is missing, refuses the page; so
-    does an index that labels its drawings with another word than the badge's."""
+    """The cases are the ones the layer's index lists as regularized whose view is the
+    default picture (`default_drawings`), never a list kept here, so a view the layer
+    gains joins the atlas at the next render once it improves on its house drawing. A
+    drawing the index does not ask for, or one it asks for that is missing, refuses the
+    page; so does an index that labels its drawings with another word than the badge's."""
     import json  # noqa: PLC0415
 
     from devtools import render_frontier_page as frontier  # noqa: PLC0415
 
     index = _regularized_index()
     listed = tuple(entry["n"] for entry in index["entries"] if entry["status"] == "regularized")
-    assert overview_sections.atlas_regularized() == listed
-    assert listed, "the atlas has no regularized view to offer"
+    drawn = tuple(n for n in listed if n in frontier.drawn_regularized())
+    assert overview_sections.atlas_regularized() == drawn
+    assert drawn, "the atlas has no regularized view to offer"
+    assert set(drawn) <= set(listed)
     drawings = tmp_path / "rendering"
     drawings.mkdir()
     for n in listed[:2]:
@@ -1264,7 +1290,7 @@ def test_the_regularized_set_is_the_layer_index_and_refuses_a_stale_drawing(
         overview_sections.atlas_regularized()
     for n in listed[2:]:
         (drawings / f"n-{n:03d}.svg").write_text("", encoding="utf-8")
-    assert overview_sections.atlas_regularized() == listed
+    assert overview_sections.atlas_regularized() == drawn
     (drawings / "n-001.svg").write_text("", encoding="utf-8")
     with pytest.raises(SystemExit, match=r"unexpected \[1\]"):
         overview_sections.atlas_regularized()
@@ -1281,19 +1307,22 @@ def test_the_view_tabs_are_the_section_tabs_strip() -> None:
     line, and hides it while it is `hidden`."""
     nav = render_overview.SITE_NAV_CSS.read_text(encoding="utf-8")
     for selector in (
-        'nav.site-tabs a,\n.site-tabs [role="tab"] {',
-        'nav.site-tabs a + a,\n.site-tabs [role="tab"] + [role="tab"] {',
+        'nav.site-tabs a,\n.site-tabs :is([role="tab"], button) {',
+        (
+            "nav.site-tabs a + a,\n"
+            '.site-tabs :is([role="tab"], button) + :is([role="tab"], button) {'
+        ),
         (
             "nav.site-tabs a:is(:hover, :focus-visible),\n"
-            '.site-tabs [role="tab"]:is(:hover, :focus-visible) {'
+            '.site-tabs :is([role="tab"], button):is(:hover, :focus-visible) {'
         ),
         (
             'nav.site-tabs a[aria-current="page"],\n'
-            '.site-tabs [role="tab"][aria-selected="true"] {'
+            '.site-tabs :is([role="tab"][aria-selected="true"], button[aria-pressed="true"]) {'
         ),
     ):
         assert selector in nav, selector
-    button = _rule(nav, '.site-tabs [role="tab"]')
+    button = _rule(nav, '.site-tabs :is([role="tab"], button)')
     for declaration in (
         "background: none;",
         "border: 0;",
@@ -1306,6 +1335,7 @@ def test_the_view_tabs_are_the_section_tabs_strip() -> None:
         css,
         ".site-atlas-grid .site-atlas-views,\n"
         ".site-atlas-grid .site-atlas-sizes,\n"
+        ".site-atlas-grid .site-atlas-drawings,\n"
         ".site-atlas-grid .site-atlas-scales",
     )
     assert "line-height: var(--site-chooser-small-leading);" in _rule(
@@ -1315,6 +1345,7 @@ def test_the_view_tabs_are_the_section_tabs_strip() -> None:
     hidden = (
         ".site-atlas-grid .site-atlas-views[hidden],\n"
         ".site-atlas-grid .site-atlas-sizes[hidden],\n"
+        ".site-atlas-grid .site-atlas-drawings[hidden],\n"
         ".site-atlas-grid .site-atlas-scales[hidden],\n"
         ".site-atlas-grid .site-atlas-legend[hidden]"
     )
@@ -1440,7 +1471,7 @@ def test_a_cases_visual_summary_carries_what_the_film_shows() -> None:
     assert eleven["open"] == []
     assert eleven["record"] == "n-011"
     assert eleven["cite"]["lower"] == {
-        "text": "Ahmed after Levy, Kleddamag 2026, GitHub",
+        "text": "Ahmed after Levy, Overbeck 2026, GitHub",
         "corrects": None,
         "note": "(confirmed T-060)",
     }
@@ -1659,7 +1690,7 @@ def test_each_card_size_is_a_column_of_its_own_grid() -> None:
 #: the note and a direct card's address.
 _CARD_ELEMENT = re.compile(
     r'<(button|a|div)\b[^>]*class="site-card[ "][^>]*data-card-size="([^"]*)"[^>]*>'
-    r'.*?<span class="site-card-value">(.*?)</(?:button|a)>',
+    r'.*?(?:<span class="site-card-value">|<h3[^>]*>)(.*?)</(?:button|a)>',
     re.DOTALL,
 )
 
@@ -1669,10 +1700,10 @@ def _card_sections(page: str, about: str, papers: str) -> dict[str, list[tuple[s
     about_frames = about.split('<div class="site-cards-frame')[1:]
     paper_frames = papers.split('<div class="site-cards-frame')[1:]
     assert len(about_frames) == 1
-    assert len(paper_frames) == 2
+    assert len(paper_frames) == 3
     projects = page.split('id="other-square-packing-projects"', 1)[1]
     frames = [*paper_frames, projects, about_frames[0]]
-    names = ("papers", "atlas", "projects", "documents")
+    names = ("tutorial", "papers", "atlas", "projects", "documents")
     assert len(frames) == len(names)
     return {
         name: [(size, text) for _, size, text in _CARD_ELEMENT.findall(frame)]
@@ -1690,12 +1721,17 @@ def test_every_card_names_one_of_three_sizes(page: str, about: str, papers: str)
         re.findall(r'<(?:button|a|div)\b[^>]*class="site-card[ "]', about + papers + projects)
     ), "a card with no size"
     assert [len(cards) for cards in sections.values()] == [
-        len(overview_sections.PAPERS),
+        2,
+        len(overview_sections.PAPERS) - 2,
         len(overview_sections.PDF_CARD_SPECS),
         len(overview_sections.project_urls()),
         len(overview_sections.DOCUMENTS),
     ]
-    declared_sizes = {"papers": "large", **overview_sections.SECTION_CARD_SIZES}
+    declared_sizes = {
+        "tutorial": "large",
+        "papers": "large",
+        **overview_sections.SECTION_CARD_SIZES,
+    }
     for name, cards in sections.items():
         declared = declared_sizes[name]
         assert {size for size, _ in cards} == {declared}, name
@@ -1729,9 +1765,26 @@ def test_each_sections_size_is_what_its_typical_card_asks_for(
 ) -> None:
     """A section's declared size follows its median card's text length. For an even
     count the median is the mean of the two middle lengths; a changed description
-    crossing a size threshold requires the section's size to be declared again."""
-    declared_sizes = {"papers": "large", **overview_sections.SECTION_CARD_SIZES}
+    crossing a size threshold requires the section's size to be declared again.
+    The prominent Tutorial section deliberately retains the papers' large reading
+    cards even though both introductory descriptions are brief."""
+    declared_sizes = {
+        "tutorial": "large",
+        "papers": "large",
+        **overview_sections.SECTION_CARD_SIZES,
+    }
     for name, cards in _card_sections(page, about, papers).items():
+        if name == "tutorial":
+            assert len(cards) == 2
+            assert {size for size, _ in cards} == {"large"}
+            section = papers.split('<h2 id="tutorial"', 1)[1].split('<h2 id="papers"', 1)[0]
+            assert [
+                href for href, _, _ in _page_cards(papers) if f'href="{href}"' in section
+            ] == [
+                "tutorial.html",
+                "tutorial-advanced.html",
+            ]
+            continue
         lengths = sorted(len(overview_sections.reading_text(text)) for _, text in cards)
         middle = len(lengths) // 2
         typical = (
@@ -1798,9 +1851,10 @@ _LADDER_CELL_RE = re.compile(
     r'data-rung="(?P<scale>[VC])" data-level="(?P<level>\d)">(?P<label>[VC]\d)</span>'
     r'|<span class="site-significance" data-level="(?P<s_level>\d)" role="img" '
     r'aria-label="Significance S(?P=s_level) of 5" title="(?P<s_title>[^"]*)">'
-    r'<span class="site-significance-label" aria-hidden="true">(?P<s_label>S\d)</span>'
+    r'<span aria-hidden="true">(?P<s_label>S\d)</span>'
     r'<span class="site-significance-bars" aria-hidden="true">'
-    r'(?P<bars>(?:<span class="site-significance-bar"></span>)*)</span></span>)'
+    r'(?P<bars>(?:<span class="site-significance-bar" '
+    r'data-filled="(?:true|false)"></span>)*)</span></span>)'
     r'<span class="site-ladders-meaning">(?P<meaning>[^<]*)</span></div>)?</div>'
 )
 
@@ -1808,7 +1862,7 @@ _LADDER_CELL_RE = re.compile(
 class _LADDER_CELL:  # noqa: N801
     """The ladder diagram's cells, a chip's (V and C) and a significance mark's (S) read
     alike: `ladder`, `label`, `scale`, `level`, `title` and `meaning`, and for a mark
-    the bars it draws, one per level."""
+    five segments, filled up to the level."""
 
     @staticmethod
     def finditer(text: str) -> list[dict[str, str | None]]:
@@ -1816,8 +1870,11 @@ class _LADDER_CELL:  # noqa: N801
         for match in _LADDER_CELL_RE.finditer(text):
             cell = match.groupdict()
             if cell["s_label"]:
-                bars = (cell["bars"] or "").count("site-significance-bar")
-                assert bars == int(cell["s_level"] or 0), cell
+                bars = cell["bars"] or ""
+                assert (
+                    bars.count("site-significance-bar") == overview_sections.SIGNIFICANCE_TOP
+                ), cell
+                assert bars.count('data-filled="true"') == int(cell["s_level"] or 0), cell
                 cell |= {
                     "label": cell["s_label"],
                     "scale": "S",
@@ -1844,47 +1901,18 @@ def _ladders(results: str) -> str:
     return section.split('<div class="site-ladders-frame site-wide">', 1)[1].split("<p", 1)[0]
 
 
-def _legend(served: str) -> str:
-    """The legend under a page's table of results (`rung_legend`)."""
-    match = re.search(
-        r'<(?P<tag>a|div)\b[^>]*class="[^"]*\bsite-rung-legend\b[^"]*"'
-        r"[^>]*>.*?</(?P=tag)>",
-        served,
-        re.DOTALL,
-    )
-    assert match is not None
-    return match[0]
-
-
-def test_a_table_of_results_has_a_legend_of_every_rungs_mark_under_it(
+def test_a_table_of_results_uses_the_ladder_documentation_without_a_bottom_legend(
     page: str, results: str
 ) -> None:
-    """The complete table retains every titled rung, without an obsolete recency key;
-    the homepage links the account through actions instead of repeating its legend."""
+    """Results retains its complete ladder account and table without a second legend."""
     assert not hasattr(overview_sections, "rung_key")
+    assert not hasattr(overview_sections, "rung_legend")
     assert "site-rung-legend" not in page
-    meanings = overview_sections.rung_meanings()
-    expected = [
-        f"{scale}{level}"
-        for scale in "SVC"
-        for level, _ in sorted(overview_sections.rubric_levels()[scale])
-    ]
-    legend = _legend(results)
-    assert results.count(legend) == 1
-    at = results.index(legend)
+    assert "site-rung-legend" not in results
+    assert 'id="verification-ladders"' in results
     assert results.index('<div class="site-table-tools') < results.index(
         '<table class="kpress-table site-table site-results"'
     )
-    assert re.search(r"</table>(?:</div>)+$", results[:at]) is not None
-    assert legend.count("<p>") == 3
-    assert RUNG_CHIP.findall(legend) == expected
-    for label in expected:
-        assert f'title="{html.escape(meanings[label], quote=True)}"' in legend, label
-    assert legend.startswith('<div class="site-rung-legend"')
-    assert '<a href="#verification-ladders">What each rung means</a>' in legend
-    assert "is-new-result" not in legend
-    assert overview_sections.NEW_RESULT not in _seen(legend)
-    assert "site-star" not in legend
     assert "site-ladders-key" not in page
 
 
@@ -2554,28 +2582,32 @@ def test_the_nav_links_only_to_served_pages() -> None:
 #: The bar's entries, in order: each one's key, where it leads and its label.
 NAV_ENTRIES = [
     ("overview", "./", "Overview"),
+    ("news", "news.html", "News"),
     ("atlas", "atlas.html", "Atlas"),
     ("results", "results.html", "Results"),
-    ("papers", "papers.html", "Papers"),
-    ("visualize", "visualize.html", "Visualize"),
+    ("explanations", "papers.html", "Explanations"),
     ("about", "about.html", "About"),
     ("github", "https://github.com/jlevy/squares", "GitHub"),
 ]
-#: The pages the bar's Papers entry is current on, of those this renderer owns; the
+#: The pages the bar's Explanations entry is current on, of those this renderer owns; the
 #: explainer, the third, is rendered by its own module and held there
 #: (`test_n11_lower_bounds_explainer`).
-PAPERS_SECTION = {"papers.html", "tutorial.html"}
+PAPERS_SECTION = {"papers.html", "tutorial.html", "tutorial-advanced.html", "visualize.html"}
 
 
-def test_the_nav_has_one_papers_entry_for_the_explainer_and_the_tutorial() -> None:
-    """The explainer and the tutorial have no entry of their own: Papers leads to the page
-    that holds them both, and neither old key can be marked current."""
+def test_the_nav_has_one_explanations_entry_for_the_papers_and_film() -> None:
+    """Papers, the film and the tutorial share one top-level Explanations destination.
+    The former papers key remains an alias for callers rendering legacy pages."""
     nav = render_overview.nav_html("papers")
     entries = re.findall(
         r'<a data-page="(\w+)"(?: aria-current="page")? href="([^"]+)">([^<]+)</a>', nav
     )
     assert entries == NAV_ENTRIES
-    assert '<a data-page="papers" aria-current="page" href="papers.html">Papers</a>' in nav
+    assert (
+        '<a data-page="explanations" aria-current="page" href="papers.html">Explanations</a>'
+        in nav
+    )
+    assert nav == render_overview.nav_html("explanations")
     assert "papers.html" in render_overview.SITE_PAGES
     assert "papers.html" in render_overview.PAGES
     for gone in ("explainer", "tutorial"):
@@ -2584,14 +2616,14 @@ def test_the_nav_has_one_papers_entry_for_the_explainer_and_the_tutorial() -> No
 
 
 @pytest.mark.parametrize("name", sorted(render_overview.PAGES))
-def test_papers_is_current_on_the_papers_page_and_the_tutorial_alone(
+def test_explanations_is_current_on_its_papers_tutorial_and_film_pages(
     name: str, rendered: Callable[[str], str]
 ) -> None:
-    """Papers is the current entry on `papers.html` and on the tutorial, which keeps its
-    own address, and on no other page this renderer owns."""
+    """Explanations is current on its papers, tutorial and film destinations, which
+    retain their addresses, and on no other page this renderer owns."""
     current = re.findall(r'<a data-page="(\w+)" aria-current="page"', rendered(name))
     assert len(current) == 1
-    assert (current == ["papers"]) is (name in PAPERS_SECTION), current
+    assert (current == ["explanations"]) is (name in PAPERS_SECTION), current
     assert set(render_overview.PAGES) >= PAPERS_SECTION
 
 
@@ -2823,36 +2855,47 @@ def test_every_site_page_carries_the_same_bar(
     else:
         # A page in a directory of its own, the case records', reaches the root from it.
         page, root = rendered(name), "../" * name.count("/")
-    partial = (
-        render_overview.SITE_NAV.read_text(encoding="utf-8")
-        .replace("{{ROOT}}", "")
-        .replace("{{LOGO}}", render_overview.site_logo())
-    )
+    partial = render_overview.SITE_NAV.read_text(encoding="utf-8").replace("{{ROOT}}", "")
     assert _the_bar(page, root=root) == SITE_NAV_BLOCK.findall(partial)[0]
 
 
-def test_the_visualize_section_is_marked_current_on_both_its_pages(
+def test_the_explanations_section_and_its_shared_tabs_are_marked_current(
     rendered: Callable[[str], str],
 ) -> None:
-    """The bar's Visualize entry leads to the film and is current on the film's page and
-    on the workbench, which share one tab bar with their own tab current."""
+    """Explanations has a prominent tutorial and a bottom Visuals switch."""
     nav = render_overview.nav_html("overview")
-    assert '<a data-page="visualize" href="visualize.html">Visualize</a>' in nav
-    assert "Visualizer" not in nav
-    film = rendered("visualize.html")
-    for page, root, tab in ((film, "", "film"), (_workbench_page(), "../", "workbench")):
-        assert re.findall(r'<a data-page="(\w+)" aria-current="page"', page) == ["visualize"]
+    assert '<a data-page="explanations" href="papers.html">Explanations</a>' in nav
+    page = rendered("papers.html")
+    article = papers_article(page)
+    assert [
+        article.index(f'id="{section}"')
+        for section in ("tutorial", "papers", "pdfs", "visuals")
+    ] == sorted(
+        article.index(f'id="{section}"')
+        for section in ("tutorial", "papers", "pdfs", "visuals")
+    )
+    tabs = render_overview.visualize_tabs("film")
+    assert article.index('id="visuals"') < article.index(tabs) < article.index("<video ")
+    assert "data-autoplay" not in article
+    header = page.split('class="kpress-site-header"', 1)[1].split("</header>", 1)[0]
+    assert 'class="site-tabs"' not in header
+    for page, root, tab in (
+        (rendered("visualize.html"), "", "film"),
+        (_workbench_page(), "../", "workbench"),
+    ):
+        assert re.findall(r'<a data-page="(\w+)" aria-current="page"', page) == ["explanations"]
         tabs = render_overview.visualize_tabs(tab, root=root)
         assert page.count('class="site-tabs"') == 1
         assert tabs in page
+        assert 'aria-label="Visuals"' in tabs
+        assert re.findall(r'data-tab="(\w+)"', tabs) == ["film", "workbench"]
         assert re.findall(r'<a data-tab="(\w+)" aria-current="page"', tabs) == [tab]
-        # In the header slot, directly after the bar, on both pages alike: the bar's
-        # stylesheet draws the rule between the two (the next test).
+        assert f'href="{root}papers.html#visuals"' in tabs
         header = page.split('class="kpress-site-header"', 1)[1].split("</header>", 1)[0]
         assert header.index('class="site-nav"') < header.index(tabs)
         assert re.search(r'</nav>\s*<nav class="site-tabs"', header)
     with pytest.raises(SystemExit):
-        render_overview.visualize_tabs("stills")
+        render_overview.visualize_tabs("papers")
 
 
 def test_the_bars_type_is_set_from_the_papers_scale() -> None:
@@ -2886,21 +2929,18 @@ def test_the_bars_type_is_set_from_the_papers_scale() -> None:
 
 
 def test_the_bars_name_is_aligned_by_its_text() -> None:
-    """The bar aligns its items by their baselines, and the name's row, a mark and the
-    text, takes its baseline from the text, not from the mark that leads it, so the name
-    stands on the links' baseline at any size of either. Every item is set on one line,
+    """The bar aligns its labels by their text baselines. Every item is set on one line,
     a length, so the larger name is no taller than a link. `test_site_wide_blocks`
     measures the baselines in a browser."""
     css = render_overview.SITE_NAV_CSS.read_text(encoding="utf-8")
     inner = css[css.index("\n.site-nav-inner {") :]
     assert "  align-items: baseline;\n" in inner[: inner.index("}")]
-    assert ".site-nav .site-name-text {\n  align-self: baseline;\n}" in css
     assert "  --site-nav-line: calc(var(--site-nav-font-size) * 1.43);\n" in css
     links = css[css.index("\n.site-nav a {") :]
     assert "  line-height: var(--site-nav-line);\n" in links[: links.index("}")]
-    name = css[css.index("\n.site-nav .site-name {\n  align-items: center;") :]
+    name = css[css.index("\n.site-nav .site-name {") :]
     name = name[: name.index("}")]
-    assert "display: inline-flex;" in name
+    assert "white-space: nowrap;" in name
     for nudge in ("translate", "position: relative", "margin-block", "vertical-align"):
         assert nudge not in name, nudge
 
@@ -2983,7 +3023,7 @@ def test_the_film_starts_on_a_visit_to_its_page_and_nowhere_else(
         if name != "visualize.html":
             # The page as it is served, with every program it links.
             other = served(name)
-            if name == "index.html":
+            if name in {"index.html", "papers.html"}:
                 assert (
                     site_renders.html(name).count(_asset_tag(render_overview.FILM_SCRIPT, name))
                     == 1
@@ -3135,13 +3175,16 @@ def test_every_small_label_is_one_chip(name: str, rendered: Callable[[str], str]
 #: A rung as the site draws it, its label the one group: a V or C chip, or the
 #: significance mark, S1 to S5 with its bars (`overview_sections.significance_mark`).
 RUNG_CHIP = re.compile(
-    r'<span class="(?:site-chip site-rung-fill"(?: title="[^"]*")? data-rung="[VC]" '
-    r'data-level="\d'
-    r'|site-significance" data-level="\d" role="img" aria-label="[^"]*"(?: title="[^"]*")?>'
-    r'<span class="site-significance-label" aria-hidden="true)">([SVC]\d)</span>'
+    r'(?:<span class="site-chip site-rung-fill"(?: title="[^"]*")? data-rung="[VC]" '
+    r'data-level="\d">'
+    r'|<span class="site-significance" data-level="\d" role="img" '
+    r'aria-label="[^"]*"(?: title="[^"]*")?><span aria-hidden="true">)'
+    r"([SVC]\d)</span>"
     r'(?:<span class="site-significance-bars" aria-hidden="true">'
-    r'(?:<span class="site-significance-bar"></span>)*</span></span>)?'
+    r'(?:<span class="site-significance-bar" '
+    r'data-filled="(?:true|false)"></span>)*</span></span>)?'
 )
+
 #: The order the site lists a result's rungs in: significance first (think-ucon).
 RUNG_ORDER = "SVC"
 
@@ -3187,11 +3230,6 @@ def test_every_page_lists_significance_first(
     before them (`test_each_results_row_shows_its_rungs_significance_first`). No run
     repeats a scale or puts a later one first."""
     shown = case_pages[name] if name.startswith("cases/") else rendered(name)
-    # The legend under a table of results lists every mark of a ladder in a row, by
-    # design, and is no result's rungs
-    # (`test_a_table_of_results_has_a_legend_of_every_rungs_mark_under_it`).
-    if "site-rung-legend" in shown:
-        shown = shown.replace(_legend(shown), "")
     runs = [run for run in _rung_runs(shown) if len(run) > 1]
     if name.startswith("cases/"):
         assert any(len(run) == len(RUNG_ORDER) for run in runs), name
@@ -3404,8 +3442,14 @@ def test_every_result_shows_its_status_and_its_place_on_the_frontier(
     shown = overview_sections.supersession_marks(before)
     assert f"{t082} (reported)" in shown
     assert html.unescape(re.sub(r"<[^>]+>", "", shown)) == reported.words()
-    for second in ("T-054", "T-055"):
-        assert by_id[second].record["kind"] == "simplification"
+    # A second proof says so by its kind, a simplification or, since the owner's decision
+    # of 13 October 2026, a formalization (T-154), and draws no standing chip.
+    for second, kind in (
+        ("T-054", "simplification"),
+        ("T-055", "simplification"),
+        ("T-154", "formalization"),
+    ):
+        assert by_id[second].record["kind"] == kind, second
         assert "second certificate" not in _row(results, second), second
     for other in render_recent_results.STANDINGS:
         assert "data-tone" not in overview_sections.standing_chip(other), other
@@ -3529,7 +3573,7 @@ def test_every_result_shows_its_kind(
     for result in overview.results:
         kind = result.record["kind"]
         chip = overview_sections.kind_chip(result)
-        label = check_results.kind_label(kind)
+        label = overview_sections.topic_label(kind)
         assert chip == f'<span class="site-chip" data-kind="{kind}">{label}</span>'
         assert "data-tone" not in chip
         marks = overview_sections.status_marks(result)
@@ -3575,8 +3619,9 @@ def test_every_result_shows_its_kind(
     assert html.unescape(re.sub(r"<[^>]+>", "", marks)) == in_part.words()
     from devtools import result_overview  # noqa: PLC0415
 
-    assert ">restricted optimality</span>" in result_overview.result_popover_html(
-        t036, overview
+    assert (
+        f">{site_topics.topic_label(t036.record['kind'])}</span>"
+        in result_overview.result_popover_html(t036, overview)
     )
 
 
@@ -3625,7 +3670,9 @@ def test_recent_results_is_one_table_not_cards_or_a_list(
     result pages; status links name superseding results. Rows contain no lists or
     cards. Its only popovers are its rows' own. What a row's popover
     holds is the popover's own business, so the section is read without them."""
-    section = page.split('id="recent-results"', 1)[1].split('<h2 id="papers"', 1)[0]
+    section = page.split('id="recent-results"', 1)[1].split('<h2 id="report-your-results"', 1)[
+        0
+    ]
     recent = _recent_table(page)
     assert recent in section
     assert set(re.findall(r'<div class="(site-popover(?: [^"]*)?)"', section)) == {
@@ -3684,7 +3731,9 @@ def test_the_recent_table_contains_the_advertised_static_subset(
     expected = _recent_entries(overview)
     assert listed == [result.id.lower() for result in expected]
     assert 0 < len(listed) < len(overview.results)
-    section = page.split('id="recent-results"', 1)[1].split('<h2 id="papers"', 1)[0]
+    section = page.split('id="recent-results"', 1)[1].split('<h2 id="report-your-results"', 1)[
+        0
+    ]
     assert "data-filter=" not in section
     assert 'href="results.html#all-results" data-all-results' in section
     assert "site-recent-scope" not in section
@@ -3881,7 +3930,8 @@ def _template_paragraphs(section: str) -> list[str]:
     return [" ".join(part.split()) for part in prose.split("\n\n") if part.strip()]
 
 
-#: README's `project-intro` block, the owner's words of 2026-10-03 (`think-8lyq`): the
+#: README's `project-intro` block, from the owner's 2026-10-03 text (`think-8lyq`),
+#: with wording reviewed on 2026-10-11. It retains the
 #: question after a colon, the lower bound glossed as a size below which no packing can
 #: exist, and an example of each bound at $n = 29$, the case's current bounds as the
 #: record reports them (the owner, 2026-10-03: "make the examples current"), each
@@ -3899,8 +3949,8 @@ PROBLEM_STATEMENT = (
         "smallest square is written $s(n)$."
     ),
     (
-        "The question of the value of $s(n)$ is simple, but the answer is an open problem "
-        "for most $n$. In many cases, $s(n)$ is known only to lie between an upper bound "
+        "The value of $s(n)$ remains unknown for most $n$. In many cases, $s(n)$ is known "
+        "only to lie between an upper bound "
         "(the size of the enclosing square for the tightest packing ever discovered, such "
         "as $s(29) \\le 5.934$) and a lower bound (a size below which it is proved that no "
         "packing can exist, such as the reported $s(29) \\ge 5.81$)."
@@ -3950,7 +4000,9 @@ def test_the_overview_opens_with_the_owners_two_paragraphs(page: str) -> None:
 def test_recent_major_results_opens_with_preview_then_verification_and_results_actions(
     page: str,
 ) -> None:
-    section = page.split('id="recent-results"', 1)[1].split('<h2 id="papers"', 1)[0]
+    section = page.split('id="recent-results"', 1)[1].split('<h2 id="report-your-results"', 1)[
+        0
+    ]
     assert '<h2 id="recent-results" class="site-title">Recent Major Results</h2>' in page
     assert _recent_prose(page) == ""
     assert "Recent progress, with each result linked to its complete record." not in page
@@ -3976,36 +4028,15 @@ def test_recent_preview_headlines_link_to_their_canonical_result_pages(page: str
         assert f'<a href="result/{result_id}.html">' in headline
 
 
-#: The site's own statement, the owner's words of 2026-10-03 (`think-a7oa`), with the
-#: name the owner left blank filled with the source's handle, Queuingtheorydotcom
-#: (T-060 is credited to Ahmed in the register),
-#: the project's start put as the record has it (its explorations obtained the lower
-#: bounds, from 2026-08-31, after it began on 2026-08-22), and one phrase narrowed to
-#: what the register holds: the project tabulates every known new result and verifies
-#: the proofs behind them, without claiming every one is checked, since some registered
-#: results are recorded and not yet replayed here. The sentence after that proof
-#: is the owner's of the same day (`think-nlyc`): the top-line results by others, Evan
-#: Daniel's family T-064 and his exact values T-052, T-051 and T-053, in a sentence of
-#: their own because the bibliography files them as independent of this project, and
-#: without a significance score, since they are S4 and only n = 11's results are S5.
+#: About's narrative paragraphs and the shared result invitation. The contribution
+#: list is checked separately, with every credit and verification qualification.
 SITE_STATEMENT = (
     (
         "Work on the square packing problem has exploded in the summer of 2026 thanks to "
-        "AI-powered research efforts. This Squares Project was begun by Joshua Levy in "
-        "August 2026 with some initial explorations that obtained new lower bounds for "
-        "$n = 11, 17, 18, 19, 20$ and other low values."
+        "AI-powered research efforts."
     ),
-    (
-        "Now several others have obtained results building on this work, including "
-        "Kleddamag\N{RIGHT SINGLE QUOTATION MARK}s certified lower bound of 31/8 and a "
-        "landmark new proof by Queuingtheorydotcom of the optimality of the famous case "
-        "of 11 squares."
-    ),
-    (
-        "Separately, Evan Daniel has proved the optimality of a whole infinite family, "
-        "$s(k^2 - 3) = k$ for every $k \\ge 6$, along with exact values at 21, 32 and 45 "
-        "squares."
-    ),
+    "Contributions include:",
+    "Other new results are tabulated on the Results page.",
     (
         "This project now independently tabulates all known new results and does "
         "AI-assisted verification of the proofs and certificates behind them, to "
@@ -4014,44 +4045,84 @@ SITE_STATEMENT = (
     ),
     (
         "If you have new results or know of newer results, please file an issue to "
-        "report them, and we will gladly incorporate them and cite your work."
+        "report them, including what name you wish to be used for credits. Agents will "
+        "validate, tabulate, and cite your work once it is a confirmed record."
     ),
     "We also have a group chat. Contact ojoshe if you wish to join.",
 )
 
 
+def test_the_invitation_to_report_results_is_one_text_on_about_and_the_homepage(
+    page: str, about: str
+) -> None:
+    """About and the overview carry the same invitation, after the overview's recent
+    results, ending in a Report a Result button that opens the repository's result
+    form directly."""
+    about_section = about.split('id="report-your-results"', 1)[1].split("<h1", 1)[0]
+    home_section = page.split('id="report-your-results"', 1)[1].split("<h2", 1)[0]
+    about_body = about_section.split("</h1>", 1)[1].split("<!--", 1)[0].strip()
+    home_body = home_section.split("</h2>", 1)[1].strip()
+    assert about_body == home_body
+    button = re.search(
+        rf'<a class="site-action" href="{re.escape(render_overview.NEW_ISSUE_URL)}"'
+        r"[^>]*>Report a Result",
+        home_body,
+    )
+    assert button is not None
+    assert "what name you wish to be used for credits" in _rendered_text(home_body)
+    assert page.index('id="recent-results"') < page.index('id="report-your-results"')
+    assert page.index('id="report-your-results"') < page.index('id="papers"')
+
+
 def test_the_sites_own_statement_follows_readmes_introduction(about: str, results: str) -> None:
-    """About keeps three contributor bullets with linked names and independent credit.
+    """About keeps the credited highlights and qualifies the two unverified reports.
     Every named result keeps its source, attribution, and verification claims; the
     contribution invitation retains the owner's two paragraphs."""
     own = about.split("</h1>", 1)[1].split('<h1 id="squares-project-documentation"', 1)[0]
     narrative, contribution = own.split(
-        '<h1 id="contribute-your-results" class="site-title">Contribute Your Results!</h1>',
+        '<h1 id="report-your-results" class="site-title">Report Your Results!'
+        '<a id="contribute-your-results"></a></h1>',
         1,
     )
-    assert len(re.findall(r"<p>", narrative)) == 3
+    assert len(re.findall(r"<p>", narrative)) == 4
     assert len(re.findall(r"<p>", contribution)) == 2
     items = re.findall(r"<li>(.*?)</li>", narrative, re.DOTALL)
-    assert len(items) == 3
+    assert len(items) == 6
     narrative_paragraphs = re.findall(r"<p>(.*?)</p>", narrative, re.DOTALL)
-    assert _rendered_text(narrative_paragraphs[0]) == _markdown_text(SITE_STATEMENT[0])
-    assert _rendered_text(narrative_paragraphs[-1]) == _markdown_text(SITE_STATEMENT[3])
+    assert [_rendered_text(paragraph) for paragraph in narrative_paragraphs] == [
+        _markdown_text(text) for text in SITE_STATEMENT[:4]
+    ]
     assert [_rendered_text(item) for item in items] == [
-        "Kleddamag\u2019s certified lower bound of 31/8 for eleven squares.",
+        _markdown_text(
+            "Joshua Levy began the Squares Project in August 2026 with new lower bounds "
+            "for $n = 11, 17, 18, 19, 20$ and other low values."
+        ),
+        _markdown_text(
+            "Marc Leonard Overbeck\u2019s certified lower bound of $31/8$ for eleven squares."
+        ),
         "Mannaseh Ahmed\u2019s proof of optimality for eleven squares.",
         _markdown_text(
             "Independently, Evan Daniel has proved the optimality of an infinite family, "
             r"$s(k^2 - 3) = k$ for every $k \ge 6$, along with exact values at "
-            "21, 32 and 45 squares."
+            "21, 32, 45 and 60 squares."
+        ),
+        (
+            "Marc Leonard Overbeck\u2019s candidate proof for seventeen squares, "
+            "reported and unverified here (V0/C1)."
+        ),
+        (
+            "Oscar Fitzharding\u2019s Lean proof report for seventeen squares, "
+            "also unverified here (V0/C1)."
         ),
     ]
     text = _rendered_text(narrative)
     for claim in (
         "Work on the square packing problem has exploded",
         "Joshua Levy",
-        "Kleddamag",
+        "Marc Leonard Overbeck",
         "Mannaseh Ahmed",
         "Evan Daniel",
+        "Oscar Fitzharding",
         "Independently",
         "AI-assisted verification",
     ):
@@ -4059,20 +4130,31 @@ def test_the_sites_own_statement_follows_readmes_introduction(about: str, result
     founder = '<a href="https://x.com/ojoshe" target="_blank" rel="noopener noreferrer">'
     for address, label in (
         ("https://x.com/ojoshe", "Joshua Levy"),
-        ("https://x.com/kleddamag", "Kleddamag"),
+        ("https://x.com/kleddamag", "Marc Leonard Overbeck"),
         ("https://x.com/ManassehA06", "Mannaseh Ahmed"),
         ("https://x.com/evanbd", "Evan Daniel"),
         ("papers/n11-lower-bounds-explainer.html", "new lower bounds"),
-        ("papers/n11-threshold-bound-review.html", "certified lower bound of 31/8"),
+        ("papers/n11-threshold-bound-review.html", "certified lower bound of $31/8$"),
         ("papers/n11-optimality-review.html", "proof of optimality"),
         ("cases/11.html", "eleven squares"),
         ("results.html#t-064", "an infinite family"),
         ("results.html#verification-ladders", "AI-assisted verification"),
-        *((f"cases/{n}.html", str(n)) for n in (21, 32, 45)),
+        ("results.html", "Results page"),
+        (
+            "news.html#changelog-entry-overbeck-n17-candidate-proof",
+            "candidate proof for seventeen squares",
+        ),
+        (
+            "news.html#changelog-entry-fitzharding-n17-reported-proof",
+            "Lean proof report for seventeen squares",
+        ),
+        *((f"cases/{n}.html", str(n)) for n in (21, 32, 45, 60)),
     ):
-        assert re.search(
-            rf'<a href="{re.escape(address)}"[^>]*>{re.escape(label)}</a>', narrative
-        ), address
+        linked = re.search(
+            rf'<a href="{re.escape(address)}"[^>]*>(.*?)</a>', narrative, re.DOTALL
+        )
+        assert linked is not None, address
+        assert _rendered_text(linked[1]) == _markdown_text(label), address
     paragraphs = re.findall(r"<p>(.*?)</p>", contribution, re.DOTALL)
     assert [_rendered_text(paragraph) for paragraph in paragraphs] == [
         _markdown_text(text) for text in SITE_STATEMENT[-2:]
@@ -4083,9 +4165,9 @@ def test_the_sites_own_statement_follows_readmes_introduction(about: str, result
     groups = dict(OTHERS)
     assert by_id["T-060"].credit.startswith("Ahmed after Levy")
     assert by_id["T-060"].group == groups["builds-on-project"]
-    assert by_id["T-037"].credit.startswith("Kleddamag")
+    assert by_id["T-037"].credit.startswith("Overbeck")
     assert by_id["T-037"].group == groups["builds-on-project"]
-    exact = {"T-064": None, "T-052": [21], "T-051": [32], "T-053": [45]}
+    exact = {"T-064": None, "T-052": [21], "T-051": [32], "T-053": [45], "T-062": [60]}
     for result, n_values in exact.items():
         record = by_id[result].record
         assert by_id[result].credit.startswith("Daniel"), result
@@ -4100,7 +4182,9 @@ def test_the_sites_own_statement_follows_readmes_introduction(about: str, result
         assert score not in " ".join(SITE_STATEMENT), score
     assert "all proofs" not in " ".join(SITE_STATEMENT)
     assert 'id="verification-ladders"' not in about
-    assert render_overview.NEW_ISSUE_URL == "https://github.com/jlevy/squares/issues/new"
+    assert render_overview.NEW_ISSUE_URL == (
+        "https://github.com/jlevy/squares/issues/new?template=result-registration.md"
+    )
     assert re.search(
         rf'<a href="{re.escape(render_overview.NEW_ISSUE_URL)}"[^>]*>file an issue</a>',
         paragraphs[0],
@@ -4125,11 +4209,14 @@ def test_the_full_project_statement_lives_on_about_and_the_card_keeps_its_anchor
     assert about.count(heading) == 1
     assert re.findall(r'<h1\b[^>]*\bid="([^"]+)"', about) == [
         "the-squares-project",
-        "contribute-your-results",
+        "report-your-results",
         "squares-project-documentation",
     ]
     assert all('class="site-title"' in tag for tag in re.findall(r"<h1\b[^>]*>", about))
     assert re.search(r"<h2\b", about) is None
+    assert 'id="changelog" href="news.html#changelog" data-news-target' in about
+    assert "data-news-entry=" not in about
+    assert '<a id="news"></a>' in about
     following = about.split(heading, 1)[1].lstrip()
     assert following.startswith("<p>Work on the square packing problem")
     assert "Work on the square packing problem has exploded" not in page
@@ -4160,10 +4247,7 @@ def test_the_project_is_named_the_squares_project_wherever_it_is_named(
     # README's page is named for the file in its tab, since the project's name follows
     # it there as it does every page's name, and the overview's title is that name alone.
     assert "<title>README · The Squares Project</title>" in rendered("readme.html")
-    assert (
-        "<title>Square Packing: Bounds, Results and Best Packings · The Squares Project</title>"
-        in page
-    )
+    assert "<title>The Squares Project</title>" in page
     labels = [label for _, label, _ in overview_sections.DOCUMENTS]
     assert labels[0] == "The Squares Project"
     for name in (
@@ -4277,6 +4361,7 @@ def test_the_papers_page_holds_one_large_card_for_each_paper(
         "papers/n11-optimality-review.html",
         "papers/square-packing-methods-survey.html",
         "tutorial.html",
+        "tutorial-advanced.html",
     ]
     assert [paper.label for paper in paper_specs] == [
         "Part I",
@@ -4284,18 +4369,20 @@ def test_the_papers_page_holds_one_large_card_for_each_paper(
         "Part III",
         "Methods tutorial",
         "Tutorial",
+        "Advanced tutorial",
     ]
-    assert [paper.href for paper in paper_specs[:-1]] == [
+    assert [paper.href for paper in paper_specs[:-2]] == [
         render_overview.paper_path(record.slug) for record in render_overview.PAPERS
     ]
     assert {paper.size for paper in paper_specs} == {"large"}
     paper_hrefs = {paper.href for paper in paper_specs}
     cards = [card for card in _page_cards(page) if card[0] in paper_hrefs]
-    assert [href for href, _, _ in cards] == [paper.href for paper in paper_specs]
+    displayed_papers = (*paper_specs[-2:], *paper_specs[:-2])
+    assert [href for href, _, _ in cards] == [paper.href for paper in displayed_papers]
     assert len(re.findall(r'class="site-card[ "]', page)) == (
         len(overview_sections.PAPERS) + len(overview_sections.PDF_CARD_SPECS)
     )
-    for (href, tag, body), paper in zip(cards, paper_specs, strict=True):
+    for (href, tag, body), paper in zip(cards, displayed_papers, strict=True):
         assert href in render_overview.SITE_PAGES, href
         assert tag == ' data-go="page" data-card-size="large"', href
         assert f'<span class="site-card-label">{paper.label}</span>' in body, href
@@ -4331,16 +4418,16 @@ def test_a_papers_card_holds_no_link_so_the_introduction_links_what_it_names(
     assert explainer.href == overview_sections.LOWER_BOUNDS_PAPER
     assert overview_sections.THRESHOLD_REVIEW is overview_sections.PAPERS[1]
     article = papers_article(papers)
-    introduction, cards = article.split('<div class="site-cards-frame', 1)
+    paper_section = article.split('<h2 id="papers"', 1)[1]
+    introduction, cards = paper_section.split('<div class="site-cards-frame', 1)
     assert re.findall(r'<a\b[^>]*href="([^"]+)"[^>]*>([^<]+)</a>', introduction) == [
         (overview_sections.LOWER_BOUNDS_PAPER, "Part I"),
         (overview_sections.THRESHOLD_BOUND_PAPER, "Part II"),
-        ("https://x.com/kleddamag", "Kleddamag"),
+        ("https://x.com/kleddamag", "Marc Leonard Overbeck"),
         ("results.html#t-037", "T-037"),
         (overview_sections.OPTIMALITY_PAPER, "Part III"),
         ("https://x.com/ManassehA06", "Mannaseh Ahmed"),
         ("results.html#t-060", "T-060"),
-        ("tutorial.html", "square-packing tutorial"),
         ("papers/square-packing-methods-survey.html", "How Record Square Packings Are Found"),
     ]
     for body in re.findall(r"<a\b[^>]*>(.*?)</a>", cards, re.DOTALL):
@@ -4348,8 +4435,8 @@ def test_a_papers_card_holds_no_link_so_the_introduction_links_what_it_names(
 
 
 def test_the_papers_page_says_what_each_paper_is(papers: str) -> None:
-    """The explainer keeps its series description; Tutorial keeps its fuller opening,
-    whom it is for and what it covers, rather than its former short reading note."""
+    """The two tutorial cards distinguish the beginner's introduction from the
+    technical companion, with both in the prominent Tutorial section."""
     explainer = overview_sections.LOWER_BOUNDS_PAPER
     value, note = _page_card_parts(papers, explainer)
     assert card_text(value) == EXPLAINER_TITLE
@@ -4357,20 +4444,25 @@ def test_the_papers_page_says_what_each_paper_is(papers: str) -> None:
 
     value, note = _page_card_parts(papers, "tutorial.html")
     assert card_text(value) == "Square Packing from First Principles"
-    opening = (overview_data.REPO / "TUTORIAL.md").read_text(encoding="utf-8")
-    opening = " ".join(opening.split("## Contents", 1)[0].split())
-    assert "Square Packing from First Principles" in opening
-    assert "anyone new to the problem" in card_text(note)
-    for phrase in (
-        "what the objects are",
-        "why the approach is shaped the way it is",
-        "what the research has and has not established",
-        "linear programming",
-        "is first needed",
-    ):
-        assert phrase in card_text(note), phrase
-        assert phrase in opening, phrase
-    assert {explainer, "tutorial.html"} <= {href for href, _, _ in _page_cards(papers)}
+    assert card_text(note) == (
+        "The problem, bounds, small examples, and how to read a packing result."
+    )
+    value, note = _page_card_parts(papers, "tutorial-advanced.html")
+    assert card_text(value) == "Square Packing, Search, and Proof"
+    assert card_text(note) == (
+        "Linear programs, exact certificates, search, regularization, "
+        "and global optimality proofs."
+    )
+    tutorial_section = papers.split('<h2 id="tutorial"', 1)[1].split('<h2 id="papers"', 1)[0]
+    assert [href for href, _, _ in _page_cards(papers)][:2] == [
+        "tutorial.html",
+        "tutorial-advanced.html",
+    ]
+    for href in ("tutorial.html", "tutorial-advanced.html"):
+        assert f'href="{href}"' in tutorial_section
+    assert {explainer, "tutorial.html", "tutorial-advanced.html"} <= {
+        href for href, _, _ in _page_cards(papers)
+    }
 
 
 def test_the_optimality_papers_card_says_what_t060s_rungs_allow(
@@ -4387,7 +4479,11 @@ def test_the_optimality_papers_card_says_what_t060s_rungs_allow(
     assert paper.href in render_overview.SITE_PAGES
     assert paper.title == renderer.TITLE
     assert paper.title == "A Review of the Optimality Proof of the Trump Packing of 11 Squares"
-    assert _page_cards(papers)[2][0] == paper.href
+    section = papers.split('<h2 id="papers"', 1)[1].split('<h2 id="pdfs"', 1)[0]
+    assert re.findall(r'<a class="site-card site-card-link" href="([^"]+)"', section) == [
+        item.href for item in overview_sections.PAPERS if item.href.startswith("papers/")
+    ]
+    assert paper.href in section
     value, note = _page_card_parts(papers, paper.href)
     assert card_text(value) == paper.title
     text = card_text(note)
@@ -4413,7 +4509,7 @@ def test_the_papers_page_introduces_the_papers_within_t060s_rungs(
 
     article = papers_article(papers)
     text = card_text(article)
-    assert re.search(r"<h1\b[^>]*>Papers</h1>", article)
+    assert re.search(r"<h1\b[^>]*>Explanations</h1>", article)
     assert '<a href="results.html#t-060">T-060</a>' in article
     assert f'<a href="{overview_sections.OPTIMALITY_PAPER}">Part III</a>' in article
     assert "machine-checked proof" in text
@@ -4684,7 +4780,7 @@ def test_a_recent_result_keeps_neutral_dates_and_its_significance_marks(
     assert overview_sections.new_result_label(by_id["T-060"], overview).endswith("n = 11")
     assert "site-star" not in table + recent + page + results
     assert "Red indicates a recent result." not in _rendered_text(results)
-    assert '<span class="is-new-result">new result</span>' not in _legend(results)
+    assert '<span class="is-new-result">new result</span>' not in results
     assert "site-rung-legend" not in page
     assert "\u00a0" not in table + recent
 
@@ -4799,8 +4895,9 @@ def test_card_headlines_take_the_page_titles_sans_face_and_weight() -> None:
         css.index(".site-hero h1,\n.kpress :where(.site-page) h1,\n.kpress .site-title {") :
     ]
     headline = css[
-        css.index(".kpress .site-card .site-card-value,\n.site-popover .site-popover-value {") :
+        css.index(".kpress .site-card .site-card-value,\n.site-popover .site-popover-value,") :
     ]
+    assert ".kpress .site-article-header > h3 {" in headline[: headline.index("}")]
     for rule in (title[: title.index("}")], headline[: headline.index("}")]):
         assert "font-family: var(--kpress-font-sans);" in rule
         assert "font-weight: var(--site-font-weight-sans-medium);" in rule
@@ -4824,7 +4921,7 @@ def test_every_heading_and_headline_shares_one_leading() -> None:
     assert text.count("var(--paper-heading-leading)") == 1
     css = render_overview.SITE_CSS.read_text(encoding="utf-8")
     for selector in (
-        ".kpress .site-card .site-card-value,\n.site-popover .site-popover-value {",
+        ".kpress .site-card .site-card-value,\n.site-popover .site-popover-value,",
         ".kpress .site-case-title,\n.kpress .site-popover .site-case-title {",
         ".kpress .site-hero .subtitle {",
         ".kpress .site-ladders .site-ladders-name {",
@@ -4910,16 +5007,18 @@ def test_a_page_title_stands_one_space_above_what_follows_it() -> None:
     that has none, a document's own `h1` among them, on screen. A hero title with a
     subtitle hands the space to the subtitle."""
     css = render_overview.SITE_CSS.read_text(encoding="utf-8")
-    assert css.count("--site-subtitle-space: 1.5rem;") == 1
+    assert css.count("--site-subtitle-space: 2rem;") == 1
     assert "  margin-block: var(--site-subtitle-space);\n" in css
     assert (
-        ".kpress :where(.site-page) h1,\n"
+        ".kpress :where(.site-page, .kpress-prose) h1,\n"
         "  .kpress :is(h1, h2).site-title {\n"
         "    margin-block: var(--site-title-space-above) var(--site-title-space-below);\n  }"
     ) in css
     paper = EXPLAINER_STYLE.read_text(encoding="utf-8")
     assert "  .cert-page .hero .credits {\n    margin-block-start: 2.25rem;\n  }\n}" in paper
-    assert "  margin-block: 2rem 2.2rem;\n" in paper
+    assert "  margin-block: 2rem 2.2rem;\n" in render_overview.PAPER_TYPE_CSS.read_text(
+        encoding="utf-8"
+    )
 
 
 def test_a_tables_filter_bar_is_set_a_step_under_its_tables_text() -> None:
@@ -5012,26 +5111,23 @@ def test_every_table_stands_one_shared_space_from_the_text_around_it() -> None:
 
 
 def test_the_icon_frame_is_one_pixel_at_icon_size() -> None:
-    """The logo and the favicon draw case 11's container as one whole pixel at the size
-    each is shown, with its outer edge on the drawing's edge: (200 + w) / px = w."""
+    """The favicon draws case 11's container as one whole pixel at its display size,
+    with its outer edge on the drawing's edge: (200 + w) / px = w."""
     from devtools.render_frontier_page import packing_svg  # noqa: PLC0415
 
-    for px in (render_overview.SITE_LOGO_PX, render_overview.FAVICON_PX):
-        svg = packing_svg(11, units=200, frame_px=px)
-        view = re.search(r'viewBox="([^"]+)"', svg)
-        stroke = re.search(r'<rect [^>]*stroke-width="([\d.]+)"', svg)
-        assert view is not None
-        assert stroke is not None
-        box = [float(v) for v in view.group(1).split()]
-        width = float(stroke.group(1))
-        assert box[2] / px == pytest.approx(width, abs=1e-3)
-        assert box[0] == pytest.approx(-width / 2, abs=1e-3)
-        assert 'shape-rendering="crispEdges"' in svg
-        lines = re.search(r'<g stroke="[^"]+" stroke-width="([\d.]+)"', svg)
-        assert lines is not None
-        assert float(lines.group(1)) == pytest.approx(width / 2, abs=1e-3)
-    assert "block-size: 18px;" in render_overview.SITE_NAV_CSS.read_text(encoding="utf-8")
-    assert render_overview.SITE_LOGO_PX == 18
+    svg = packing_svg(11, units=200, frame_px=render_overview.FAVICON_PX)
+    view = re.search(r'viewBox="([^"]+)"', svg)
+    stroke = re.search(r'<rect [^>]*stroke-width="([\d.]+)"', svg)
+    assert view is not None
+    assert stroke is not None
+    box = [float(v) for v in view.group(1).split()]
+    width = float(stroke.group(1))
+    assert box[2] / render_overview.FAVICON_PX == pytest.approx(width, abs=1e-3)
+    assert box[0] == pytest.approx(-width / 2, abs=1e-3)
+    assert 'shape-rendering="crispEdges"' in svg
+    lines = re.search(r'<g stroke="[^"]+" stroke-width="([\d.]+)"', svg)
+    assert lines is not None
+    assert float(lines.group(1)) == pytest.approx(width / 2, abs=1e-3)
 
 
 def test_page_subtitles_share_one_size() -> None:
@@ -5212,8 +5308,19 @@ def test_the_icon_set_is_one_drawing_in_the_stylesheet() -> None:
     assert "--site-arrow" not in nav
     for content in re.findall(r"content:\s*([^;]+);", css):
         assert not ARROW_CHARACTERS.search(content), content
-    for mask in re.findall(r"mask(?:-image)?:\s*([^;]+);", css):
-        assert re.match(r"var\(--site-arrow(?:-sort|-double|-download)?\)", mask), mask
+    # The News disclosure's fade masks content, not an icon. Own that exception by
+    # its exact selector and gradient so any other mask still has to use the icon set.
+    fade_selector = ".kpress .site-news-body::before, .kpress .site-news-body::after"
+    fades = 0
+    rules = re.findall(r"([^{}]+)\{([^{}]*)\}", re.sub(r"/\*.*?\*/", "", css, flags=re.DOTALL))
+    for selector, declarations in rules:
+        for mask in re.findall(r"mask(?:-image)?:\s*([^;]+);", declarations):
+            if " ".join(selector.split()) == fade_selector:
+                assert mask == "linear-gradient(transparent, currentColor)"
+                fades += 1
+            else:
+                assert re.match(r"var\(--site-arrow(?:-sort|-double|-download)?\)", mask), mask
+    assert fades == 1
     # The double chevron is the arrow's head twice, in the arrow's own box and stroke.
     head = "stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'"
     double = re.search(r"--site-arrow-double: url\(\"([^\"]+)\"\);", css)
@@ -5312,8 +5419,9 @@ def _rule(css: str, selector: str) -> str:
 def test_no_site_text_breaks_inside_a_word() -> None:
     """KPress's `overflow-wrap: break-word` cuts a run only when it is longer than a whole
     line. `anywhere` also lets a column shrink to one character, so the site puts it on
-    long runs by nature: exact decimals, repository paths and displayed card URLs,
-    and nowhere else; and no sheet breaks words with `word-break` or hyphenates them."""
+    long runs by nature: exact decimals, repository paths, displayed card URLs and
+    publication-credit addresses; no sheet breaks words with `word-break` or hyphenates
+    them."""
     sheets = {
         sheet.name: re.sub(r"/\*.*?\*/", "", sheet.read_text(encoding="utf-8"), flags=re.DOTALL)
         for sheet in (
@@ -5330,6 +5438,7 @@ def test_no_site_text_breaks_inside_a_word() -> None:
         if "overflow-wrap: anywhere" in body
     }
     assert anywhere == {
+        ("paper-type.css", ".credits a"),
         ("site.css", ".site-case-decimal"),
         ("site.css", ".kpress .site-card .site-card-url"),
         ("site-result.css", ".site-result-links code"),
@@ -5416,14 +5525,11 @@ TABLE_BLEED = ".site-page .site-wide:is(.site-table-wrap, :has(> .site-table-wra
 
 def test_data_tables_bleed_like_the_atlas_only_above_1280_pixels() -> None:
     """A data table's wide track is one rule on shared tokens. It stops at its own
-    maximum, short of the atlas grid's, and its growth term is zero at or below
+    maximum, and its growth term is zero at or below
     `--site-table-bleed-from` (80rem), so a table at 1280 pixels or narrower keeps the
     plain wide track."""
     css = render_overview.SITE_CSS.read_text(encoding="utf-8")
-    assert "--site-bleed-max: 140rem;" in css
     assert "--site-table-bleed-from: 80rem;" in css
-    grid = css[css.index(".site-page .site-atlas-grid {") :]
-    assert "--site-wide: var(--site-bleed-max);" in grid[: grid.index("}")]
     rule = css[css.index(TABLE_BLEED) :]
     rule = rule[: rule.index("\n}")]
     assert "--site-table-max: 100rem;" in css
@@ -5793,8 +5899,10 @@ def test_result_preview_keeps_claim_scope_and_links_with_full_context_in_fragmen
 #: The native homepage SVG preview and inert compressed expansion payload measured
 #: 1,172,468 bytes on 10 October 2026; the retained startup budget is 1,300,000 bytes.
 #: Merged with that layout on 11 October, the results page measured 843,037 bytes at
-#: 146 results, and its ceiling keeps about a hundred kilobytes above that.
-PAGE_CEILINGS = {"index.html": 1_300_000, render_overview.RESULTS_PAGE: 950_000}
+#: 146 results, and its ceiling keeps about a hundred kilobytes above that. The intake of
+#: 14 October took the register to 184 results and the page to 976,783 bytes, about 3.5 kB
+#: a row; the ceiling moves to 1,100,000 to keep that margin.
+PAGE_CEILINGS = {"index.html": 1_300_000, render_overview.RESULTS_PAGE: 1_100_000}
 
 
 def test_no_page_carries_a_result_overview(
@@ -6179,18 +6287,23 @@ def test_the_filter_bar_is_one_helpers_and_reads_the_whole_register(
     assert set(re.findall(r'<option value="([^"]+)"', statuses[1])) == {
         result.status for result in overview.results
     }
-    # Kind offers the kinds the register holds, in the rubric's order and words.
+    # Kind offers the kinds the register holds, in the rubric's order and words: since 13
+    # October 2026 formalization (T-154), straight after simplification.
     kinds = re.search(r'<label>Kind <select data-filter="kind">(.*?)</select>', full)
     assert kinds
     held = {result.record["kind"] for result in overview.results}
-    assert re.findall(r'<option value="([^"]*)"[^>]*>([^<]*)</option>', kinds[1]) == [
+    offered = re.findall(r'<option value="([^"]*)"[^>]*>([^<]*)</option>', kinds[1])
+    assert offered == [
         ("", "All"),
         *(
-            (kind, check_results.kind_label(kind))
+            (kind, overview_sections.topic_label(kind))
             for kind in check_results.KINDS
             if kind in held
         ),
     ]
+    values = [value for value, _ in offered]
+    assert ("formalization", "Formalization") in offered
+    assert values.index("formalization") == values.index("simplification") + 1
     assert f' min="1" max="{max(overview.cases)}" ' in full
     assert 'data-bound="age" min="0" placeholder="any"> days</label>' in full
     assert 'data-bound="age" min="0" placeholder="any" value="180"> days</label>' in part
@@ -6446,8 +6559,12 @@ def test_reviewed_paper_titles_are_used_across_the_site(
         for slug, title in reviewed.items():
             value, _ = _page_card_parts(page, render_overview.paper_path(slug))
             assert card_text(value) == title, (name, slug)
-        value, _ = _page_card_parts(page, "tutorial.html")
-        assert card_text(value) == "Square Packing from First Principles"
+        for href, title in (
+            ("tutorial.html", "Square Packing from First Principles"),
+            ("tutorial-advanced.html", "Square Packing, Search, and Proof"),
+        ):
+            value, _ = _page_card_parts(page, href)
+            assert card_text(value) == title
 
 
 def test_paper_title_check_rejects_card_front_series_and_source_drift(
@@ -6529,6 +6646,7 @@ def test_reviewed_external_paper_titles_check_authored_references(tmp_path: Path
     sources = (
         render_overview.TEMPLATES / "n11-lower-bounds-explainer-article.md",
         render_overview.REPO / "TUTORIAL.md",
+        render_overview.REPO / "TUTORIAL-ADVANCED.md",
         render_overview.REPO / "SYNOPSIS.md",
     )
     assert render_overview.paper_title_problems(sources=sources) == []
@@ -6907,3 +7025,15 @@ def test_atlas_scale_refuses_an_invalid_exact_root_declaration(
                 overview_sections.atlas_enclosing_sides()
     finally:
         overview_sections.atlas_enclosing_sides.cache_clear()
+
+
+def test_significance_is_one_box_with_five_filled_or_empty_segments() -> None:
+    for level in range(overview_sections.SIGNIFICANCE_TOP + 1):
+        mark = overview_sections.significance_mark(level, "Importance, not assurance.")
+        assert f'aria-label="Significance S{level} of 5"' in mark
+        assert 'title="Importance, not assurance."' in mark
+        assert mark.count('class="site-significance-bar"') == 5
+        assert mark.count('data-filled="true"') == level
+        assert mark.count('data-filled="false"') == 5 - level
+    with pytest.raises(ValueError, match="zero and five"):
+        overview_sections.significance_mark(6)

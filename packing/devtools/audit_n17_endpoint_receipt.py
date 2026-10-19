@@ -36,7 +36,7 @@ SOURCE = (
     "packing/resources/web/n17-kleddamag-certified-bound-2026-09-21/"
     "kleddamag-17-squares-certified-bound/upper-packing-certificate.json"
 )
-# A real boundary (OR-16): SOURCE is Kleddamag's downloaded certified-bound release, and
+# A real boundary (OR-16): SOURCE is Overbeck's downloaded certified-bound release, and
 # this is the digest its review pinned, so a retained copy that is not upstream's bytes
 # is refused. It is not a check of a file this repository wrote.
 SOURCE_SHA = "24e296f5995abc9424e2d8d39ea0a8e44953b919430a04f006fa84c56fef45f7"

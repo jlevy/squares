@@ -179,7 +179,7 @@ The structured historical gate verdict above is corrected in place because tools
 it as evidence.
 
 This is a W7 `pipeline-improvement` block on
-[`think-zvr3`](../../../docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md),
+[`think-zvr3`](../../../docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md),
 the root blocker of `think-yc80`, `think-zoik` and `think-45xk`, and the prerequisite
 for the second-ranked continuation in
 [X-027](../explorations/X-027-stromquist-fractional-and-structural-strategy.md).

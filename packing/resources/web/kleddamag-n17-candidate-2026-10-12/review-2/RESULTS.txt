@@ -1,0 +1,208 @@
+python 3.14.7 sympy 1.14.0 mpmath 1.3.0
+edition at 653b9589d0f8a152f01adc56b1d48ba53d49abc3 502e27fba825790bf99bf42ae297b38adfe1646b
+
+$ python3 -I -B programs/geom.py
+t* = 0.3620438933143233834536219787399441642182932430367415206383793764384829
+b* = 0.3309486747227399104298085332829156341746720039996853856334414852905212
+|F|,|G| at Newton point: 1.1114e-162 1.1114e-162
+Krawczyk radius 1.0e-100 inside: True
+Krawczyk radius 1.0e-12 inside: True
+L = 4.675530093604550951634111270483146648767
+distance of Newton point from (t0,b0): 3.7644e-61 4.8529e-61
+
+$ python3 -I -B programs/cmp_file.py programs CLONE/upper-packing-certificate.json
+Sref - L = 4.83659e-17
+1 dx 5.17224e-18 dy 5.17224e-18 v.d 5.17224e-18
+2 dx 4.31937e-17 dy 5.17224e-18 v.d 5.17224e-18
+3 dx 1.55167e-17 dy 5.17224e-18 v.d 5.17224e-18
+4 dx 0.03708 dy 5.17224e-18 v.d 5.17224e-18
+5 dx 5.17224e-18 dy 1.55167e-17 v.d 1.55167e-17
+6 dx 4.31937e-17 dy 1.55167e-17 v.d 1.55167e-17
+7 dx 5.17224e-18 dy 4.31937e-17 v.d 4.31937e-17
+8 dx 4.31937e-17 dy 4.31937e-17 v.d 4.31937e-17
+9 dx 7.2846e-18 dy 2.79735e-17 v.d 1.68266e-17
+10 dx 1.48551e-17 dy 3.50475e-17 v.d 1.74146e-17
+11 dx 1.61036e-17 dy 2.18572e-17 v.d 6.48216e-18
+12 dx 2.36741e-17 dy 2.89312e-17 v.d 7.07013e-18
+13 dx -0.0151963 dy 0.018236 v.d 0.0237377
+14 dx 3.1314e-17 dy 2.18323e-17 v.d -3.27434e-18
+15 dx 2.42818e-17 dy 4.31937e-17 v.d 4.31937e-17
+16 dx 3.35686e-17 dy 3.48867e-17 v.d 4.80246e-17
+17 dx 4.31937e-17 dy 2.70349e-17 v.d 2.70349e-17
+T/3 = 0.023737743195405208832  T/(3s) = 0.037080015589658191494
+
+$ python3 -I -B programs/audit.py WORK/audit.json
+retained options: 27  excluded: 125
+(1, 3) [(1, 0, 1), (3, 0, 1)]
+(1, 5) [(1, 1, 1), (5, 1, 1)]
+(2, 6) [(2, 1, 1), (6, 1, 1)]
+(3, 13) [(13, 0, 1)]
+(5, 9) [(5, 1, 1)]
+(5, 11) [(11, 0, 1)]
+(6, 14) [(14, 1, 1)]
+(7, 10) [(10, 1, -1)]
+(8, 16) [(16, 1, -1)]
+(9, 10) [(9, 0, 1), (10, 0, 1)]
+(10, 12) [(10, 1, -1), (12, 1, -1)]
+(10, 15) [(10, 0, 1)]
+(11, 12) [(11, 0, 1), (12, 0, 1)]
+(12, 14) [(12, 1, -1), (14, 1, -1)]
+(12, 16) [(12, 0, 1)]
+(13, 14) [(13, 0, 1), (14, 0, 1)]
+(14, 17) [(14, 0, 1)]
+(15, 16) [(16, 0, 1)]
+(16, 17) [(16, 0, 1)]
+largest excluded upper bound: -0.018394130199031734 (5, 11, 5, 0, 1)
+
+$ python3 -I -B programs/identities.py G/full-gate/producer/gate-receipt.json WORK/audit.json
+Groebner basis of <F,G>: 3 elements; degrees [22, 22, 23]
+52 base-gap identities in <F,G>, denominators nonzero at the root, slider coefficients identically 0: 52
+tau = 0 identically for (1,3), (1,5), (2,6)
+
+$ python3 -I -B programs/check_rows.py G/full-gate/producer/gate-receipt.json WORK/audit.json G/full-stopped-propagation/continuation/prefix/round-01 G/full-stopped-propagation/continuation/prefix/round-02 G/full-stopped-propagation/continuation/prefix/round-03 G/full-stopped-propagation/continuation/round-04 G/full-stopped-propagation/continuation/round-05
+G/full-stopped-propagation/continuation/prefix/round-01 rows 245 all 52 geometric rows implied by my derivation; max |coef diff| = 4.735413396175414e-16 ; 192 product rows implied by McCormick
+G/full-stopped-propagation/continuation/prefix/round-02 rows 245 all 52 geometric rows implied by my derivation; max |coef diff| = 4.735413396175414e-16 ; 192 product rows implied by McCormick
+G/full-stopped-propagation/continuation/prefix/round-03 rows 245 all 52 geometric rows implied by my derivation; max |coef diff| = 4.735413396175414e-16 ; 192 product rows implied by McCormick
+G/full-stopped-propagation/continuation/round-04 rows 245 all 52 geometric rows implied by my derivation; max |coef diff| = 4.735413396175414e-16 ; 192 product rows implied by McCormick
+G/full-stopped-propagation/continuation/round-05 rows 245 all 52 geometric rows implied by my derivation; max |coef diff| = 4.735413396175414e-16 ; 192 product rows implied by McCormick
+smallest implication margin: 1.2338425760914558e-15 ('G/full-stopped-propagation/continuation/round-05', 'parallel:1:3:-1', -5.5426841e-08, 5.542683976615742e-08)
+
+$ python3 -I -B programs/replay.py G/full-gate/producer/gate-receipt.json WORK/audit.json G/full-stopped-propagation/continuation/inputs/accepted-six-step-prefix.json G/full-stopped-propagation/continuation
+mode A round-01 ratio 1.0 
+mode A round-02 ratio 1.0 
+mode A round-03 ratio 1.0 
+mode A round-04 ratio 1.0 
+mode A round-05 ratio 0.796009670766595 159201934153319/200000000000000
+mode A final ratio (exact): 159201934153319/200000000000000
+mode B B6 step 1 ratio 1.0
+mode B B6 step 2 ratio 1.0
+mode B B6 step 3 ratio 1.0
+mode B B6 step 4 ratio 1.0
+mode B B6 step 5 ratio 1.0
+mode B B6 step 6 ratio 1.0
+mode B: my B6 vs producer B6: coordinates where mine is looser: 0 max excess 0.0
+mode B round-01 ratio 1.0
+mode B round-02 ratio 1.0
+mode B round-03 ratio 1.0
+mode B round-04 ratio 1.0
+mode B round-05 ratio 0.792020707575807
+mode B final ratio: 0.792020707575807 strict
+
+$ python3 -I -B programs/stops.py
+pair (9, 11) D < 1.2314267162186991 dr < 2.4118060914240327 retained options [(9, 1, -1), (11, 1, -1)]
+pair (11, 13) D < 1.2801582458098064 dr < 2.0 retained options [(11, 1, -1), (13, 1, -1)]
+c+s < 1.408404311315035  < 141/100: True
+|c(1-s)| < 0.27642676682037987  < 277/1000: True
+|c-s| < 0.12805192645650296  < 129/1000: True
+b >= -0.0003374964  >= -17/50000: True
+b+z <= 0.02376362319540521  <= 3/125: True
+z <= 0.02410362319540521  <= 1/40: True
+N(9,11) >= 0.949717999999  N(11,13) >= 0.7487377431934052
+
+$ python3 -I -B programs/stops_eps.py 501 100000
+pair (9, 11) D < 1.2314267162186991 dr < 2.4118060914240327 retained options [(9, 1, -1), (11, 1, -1)]
+pair (11, 13) D < 1.2801582458098064 dr < 2.0 retained options [(11, 1, -1), (13, 1, -1)]
+c+s < 1.408404311315035  < 141/100: True
+|c(1-s)| < 0.27642676682037987  < 277/1000: True
+|c-s| < 0.12805192645650296  < 129/1000: True
+b >= -0.008512361241  >= -17/50000: False
+b+z <= 0.024434233395405208  <= 3/125: False
+z <= 0.024774233395405208  <= 1/40: True
+N(9,11) >= 0.942935899999  N(11,13) >= 0.7487377431934052
+
+$ python3 -I -B programs/stops_cuts.py
+c+s < 141/100, |c(1-s)| < 277/1000, |c-s| < 129/1000 at the root: True
+eps = 1/5000, against the root-scale cuts of stop-proof.md
+  pair (9, 11) retained options [(9, 1, -1), (11, 1, -1)] ; only the two -v options: True
+  pair (11, 13) retained options [(11, 1, -1), (13, 1, -1)] ; only the two -v options: True
+  b     >= -0.0003374964  against -17/50000: True  (margin 2.5036e-06)
+  b + z <= 0.0237636232  against 3/125: True  (margin 2.3638e-04)
+  z     <= 0.0241011196  against 1/40: True  (margin 8.9888e-04)
+  N(9,11) >= 0.949717999999, N(11,13) >= 0.748737743193, both positive: True
+eps = 501/100000, against the raw cuts of PROOF.md P096
+  pair (9, 11) retained options [(9, 1, -1), (11, 1, -1)] ; only the two -v options: True
+  pair (11, 13) retained options [(11, 1, -1), (13, 1, -1)] ; only the two -v options: True
+  b     >= -0.0085123612  against -213/25000: True  (margin 7.6388e-06)
+  b + z <= 0.0244342334  against 49/2000: True  (margin 6.5767e-05)
+  z     <= 0.0329465946  against 33/1000: True  (margin 5.3405e-05)
+  N(9,11) >= 0.942935899999, N(11,13) >= 0.748737743193, both positive: True
+all six stated cuts follow, with only the two -v options retained at both radii: True
+
+$ python3 -I -B programs/audit_entry.py
+finite entry: retained 27 excluded 125
+largest excluded upper bound -0.0004247936811688864 (5, 11, 5, 0, 1)
+{(1, 3): [(1, 0, 1), (3, 0, 1)], (1, 5): [(1, 1, 1), (5, 1, 1)], (2, 6): [(2, 1, 1), (6, 1, 1)], (3, 13): [(13, 0, 1)], (5, 9): [(5, 1, 1)], (5, 11): [(11, 0, 1)], (6, 14): [(14, 1, 1)], (7, 10): [(10, 1, -1)], (8, 16): [(16, 1, -1)], (9, 10): [(9, 0, 1), (10, 0, 1)], (10, 12): [(10, 1, -1), (12, 1, -1)], (10, 15): [(10, 0, 1)], (11, 12): [(11, 0, 1), (12, 0, 1)], (12, 14): [(12, 1, -1), (14, 1, -1)], (12, 16): [(12, 0, 1)], (13, 14): [(13, 0, 1), (14, 0, 1)], (14, 17): [(14, 0, 1)], (15, 16): [(16, 0, 1)], (16, 17): [(16, 0, 1)]}
+
+$ python3 -I -B programs/upper.py
+pairs: strict 115 zero-to-1e-90 21 overlapping 0
+walls: strict 53 zero-to-1e-90 15 outside 0
+least pair best-gap upper end 0.0 pair (1, 3)
+
+$ python3 -I -B programs/coarse.py
+k3 roots in [0,1]: 0  min over endpoints/critical points ~ 0.0050433798113292022801
+k15 roots in [0,1]: 0  min over endpoints/critical points ~ 0.0051927548038390825457
+
+$ python3 -I -B programs/profiles.py CLONE
+JQ labels 17 ; largest clipped squared diameter 0.463497 (label 3) ; pairs not strictly separated: []
+JPWS labels 17 ; largest clipped squared diameter 0.463497 (label 3) ; pairs not strictly separated: []
+JPW13 labels 17 ; largest clipped squared diameter 0.332827 (label 13) ; pairs not strictly separated: []
+JG labels 17 ; largest clipped squared diameter 0.439548 (label 9) ; pairs not strictly separated: []
+JPA labels 17 ; largest clipped squared diameter 0.439548 (label 9) ; pairs not strictly separated: []
+JPG3m labels 17 ; largest clipped squared diameter 0.439548 (label 9) ; pairs not strictly separated: []
+JPG3p labels 17 ; largest clipped squared diameter 0.439548 (label 9) ; pairs not strictly separated: []
+JPG17m labels 17 ; largest clipped squared diameter 0.439548 (label 9) ; pairs not strictly separated: []
+JPG17p labels 17 ; largest clipped squared diameter 0.439548 (label 9) ; pairs not strictly separated: []
+JPG15m labels 17 ; largest clipped squared diameter 0.439548 (label 9) ; pairs not strictly separated: []
+JPG15p labels 17 ; largest clipped squared diameter 0.439548 (label 9) ; pairs not strictly separated: []
+
+$ python3 -I -B programs/admission.py CLONE
+JQ      smallest box margin 4.319e-17 (label 2); failures: none
+JPWS    smallest box margin 4.319e-17 (label 2); failures: none
+JPW13   smallest box margin 4.319e-17 (label 2); failures: none
+JG      smallest box margin 4.319e-17 (label 2); failures: none
+JPA     smallest box margin 4.319e-17 (label 2); failures: none
+JPG3m   smallest box margin 4.319e-17 (label 2); failures: none
+JPG3p   smallest box margin 4.319e-17 (label 2); failures: none
+JPG17m  smallest box margin 4.319e-17 (label 2); failures: none
+JPG17p  smallest box margin 4.319e-17 (label 2); failures: none
+JPG15m  smallest box margin 4.319e-17 (label 2); failures: none
+JPG15p  smallest box margin 4.319e-17 (label 2); failures: none
+
+$ python3 -I -B programs/budgets.py CLONE/research/finishing-threshold-goal-20261007/clean-rerun-20261011/current-build-0122/capture/statements
+statements 98 ; budgets differing from budget_units: []
+smallest surpluses (units): [(0.5, 'FRAME_1114'), (1.0, 'CLASS_PSS_L02_T15'), (1.0, 'CLASS_PS_L06_T17_ENDm_H4T4')] ; largest: [(23.0, 'Q_13')]
+relative surplus range: 2.92e-11 to 1.00e-09
+all strict: True
+
+$ python3 -I -B programs/frame0917.py CLONE/research/finishing-threshold-goal-20261007/clean-rerun-20261011/current-build-0122/capture/statements/FRAME_0917
+rows 9000 ; re-decided mismatches or failures: 0 ; tightest class margin (units): 217326.25
+python/node rows identical: 9000 of 9000
+
+$ python3 -I -B programs/jq_struct.py CLONE/local-research/claude-20261002/cloud/analysis/part3_exact/certs/JQ_v1/jQTw.n0.JQ.cert.jsonl.gz CLONE/research/window-extension-20261008/bigbox/join/JQ_exact_v1.json
+header keys ['S_floor', 'Sref', 'labels', 'packing_sha256', 'root', 'schema', 'terminal', 'window'] schema wx-cert-3 labels 17 S_floor 4675530093604551/1000000000000000 root jQTw.n0.JQ.leaf
+nodes 1
+node keys ['S', 'arc', 'assume', 'box', 'close', 'forms', 'id', 'parent', 'rounds'] id jQTw.n0.JQ.leaf parent None S ['4675530093604551/1000000000000000', '4675530093604551/1000000000000000'] assume [] close {'kind': 'infeasible'}
+rounds 1
+declarations 36 Counter({'ind': 33, 'opt': 3})
+steps 1
+step form 0 sense lo value 3455339/552809052 True terms 48209
+negative multipliers 0
+   7416 ('box', 'ind', 'sq')
+   7416 ('arc', 'ind', 'sq')
+   4367 ('ind', 'sq')
+   3708 ('ind', 'opt', 'sq')
+   3296 ('arc', 'box', 'ind')
+   3296 ('box', 'ind', 'opt')
+   3296 ('arc', 'ind', 'opt')
+   2312 ('wall', 'wall')
+   1648 ('box', 'box', 'ind')
+   1648 ('arc', 'arc', 'ind')
+   1632 ('sq', 'wall')
+   1088 ('box', 'wall')
+   1088 ('arc', 'wall')
+   1030 ('ind', 'opt', 'opt')
+   816 ('wall',)
+root box equal to region True root arc equal True S equal True
+qforms 26781 custom forms 0
+window == region window box True
+label 4 root box [['-23933/500000', '10667/200000'], ['-1/1000000', '24983/500000']] arc {'c': ['1', '0'], 'lo': ['82802391/117197609', '-82940000/117197609'], 'hi': ['82802391/117197609', '82940000/117197609']}

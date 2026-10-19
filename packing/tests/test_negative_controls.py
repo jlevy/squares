@@ -117,14 +117,14 @@ def test_historical_validation_prunes_preserve_replay_inputs(
         ROOT / "campaign/agent-sessions/session-152-validation",
     )
     assert set(roots) <= PRUNE
+    # The pre-main-integration pair and `instrument-v1.py.txt` stopped returning on
+    # 2026-10-15: only `docs/` reviews link them, and no control follows a review's links
+    # (think-b6ir). `test_checkpoint_manifest.py` globs whatever pairs a tree holds.
     rescued = (
         "benchmarks/validation-efficiency/checkpoints/2026-09-06-integrated-fast.log",
         "benchmarks/validation-efficiency/checkpoints/2026-09-06-integrated-fast.manifest.json",
         "benchmarks/validation-efficiency/checkpoints/2026-09-06-integrated-fast.tar.gz",
-        "benchmarks/validation-efficiency/checkpoints/2026-09-06-pre-main-integration.manifest.json",
-        "benchmarks/validation-efficiency/checkpoints/2026-09-06-pre-main-integration.tar.gz",
         "benchmarks/validation-efficiency/checkpoints/VE-004-full-ed595fb6.tar.gz",
-        "benchmarks/validation-efficiency/runs/instrument-v1.py.txt",
         "campaign/agent-sessions/session-152-validation/pdf-d490-run-35784981711-reference.pdf",
         "campaign/agent-sessions/session-152-validation/pdf-d490-run-35784981711-replay.pdf",
         "campaign/agent-sessions/session-152-validation/pdf-d490-run-35784981711-report.txt",
@@ -134,9 +134,9 @@ def test_historical_validation_prunes_preserve_replay_inputs(
         source = ROOT / relative
         assert source.relative_to(controls.REPO) in copied_targets, relative
         assert (tree / HERE / relative).read_bytes() == source.read_bytes(), relative
-    # The normal legacy-manifest fixture test still has both its code and the two
-    # manifest/archive pairs it reads. The schema checker and current witness remain
-    # on the source surface too; the telemetry exclusion cannot hide their controls.
+    # The legacy-manifest fixture test still has its code and the manifest/archive pair a
+    # checked document links. The schema checker and current witness remain on the
+    # source surface too; the telemetry exclusion cannot hide their controls.
     for relative in (
         "devtools/checkpoint_manifest.py",
         "tests/test_checkpoint_manifest.py",
@@ -149,7 +149,9 @@ def test_historical_validation_prunes_preserve_replay_inputs(
     # preserve the cap breach and satisfy only the structural assertion above.
     for relative in (
         "benchmarks/validation-efficiency/runs/e865612fe81c4d96a7b3713b28191045.stdout.log",
+        "benchmarks/validation-efficiency/runs/instrument-v1.py.txt",
         "benchmarks/validation-efficiency/checkpoints/VE-004-control-1.tar.gz",
+        "benchmarks/validation-efficiency/checkpoints/2026-09-06-pre-main-integration.tar.gz",
         "campaign/agent-sessions/session-152-validation/validation-timings-exhaustive-1.zip",
     ):
         assert (ROOT / relative).is_file(), relative
@@ -187,6 +189,14 @@ def test_historical_push_logs_leave_workers_but_keep_scientific_consumers(
     ):
         source = ROOT / relative
         assert (tree / HERE / relative).read_bytes() == source.read_bytes(), relative
+        if Path(relative) in controls.HOUSE_LINK_LEAVES:
+            # n263's leaf is T-146's house since the adoption of 11 October 2026
+            # (think-fvz4), and `upper_bound_houses` links every adopted leaf back: the
+            # worker reads the checkout's own file, which its index does not track.
+            assert (tree / HERE / relative).is_symlink(), relative
+            assert (tree / HERE / relative).resolve() == source.resolve(), relative
+            assert tree / HERE / relative not in (tracked_files(tree, "packing") or [])
+            continue
         assert tree / HERE / relative in (tracked_files(tree, "packing") or []), relative
         if relative.endswith(".log.gz"):
             assert read_retained_bytes(tree / HERE / relative) == read_retained_bytes(source)
@@ -253,7 +263,7 @@ def test_historical_site_snapshot_outputs_leave_workers_after_dependency_rescue(
         "devtools/regularize_axis_components.py",
     ):
         assert (tree / HERE / relative).read_bytes() == (ROOT / relative).read_bytes()
-    assert SNAPSHOT_MAX_BYTES == 200 * 1024 * 1024
+    assert SNAPSHOT_MAX_BYTES == 216 * 1024 * 1024
     assert snapshot_source_bytes() < SNAPSHOT_MAX_BYTES
 
 
@@ -838,7 +848,7 @@ def test_retired_transition_statistics_are_not_a_mutation_worker_input(
     for retained in (
         ROOT / "campaign/agent-sessions/session-153-native-full.json",
         ROOT / "campaign/agent-sessions/session-153-native-full.rows.jsonl",
-        source.with_name("NOTES.md"),
+        source.with_name("notes.md"),
     ):
         assert (
             tree / retained.relative_to(controls.REPO)
@@ -1256,8 +1266,8 @@ def test_retained_receipts_leave_workers_but_registered_and_linked_ones_return(
     No control reaches the five roots, as a mutation target or by naming one in a
     command. Every file under them is either absent from the worker or, when a checked
     document links it or the results register lists it, present byte for byte -- the two
-    census READMEs and the registered receipts among them. A folder a review links
-    arrives empty rather than missing, so the link scan still finds it.
+    census READMEs and the registered receipts among them. A folder only a review links
+    stays out since 2026-10-15: no control follows a review's links (think-b6ir).
     """
     tree, copied_targets = control_snapshot
     specification = safe_load((ROOT / "devtools/controls.yaml").read_text())
@@ -1289,13 +1299,12 @@ def test_retained_receipts_leave_workers_but_registered_and_linked_ones_return(
         relative = returned.relative_to(controls.REPO)
         assert relative in copied_targets
         assert (tree / relative).read_bytes() == returned.read_bytes()
-    for linked in (
+    for review_linked in (
         census / "review-2026-10-03-attack",
         ROOT / "witnesses/franciscouzo-2026-10-03",
     ):
-        landed = tree / linked.relative_to(controls.REPO)
-        assert landed.is_dir()
-        assert not any(landed.iterdir())
+        assert review_linked.is_dir()
+        assert not (tree / review_linked.relative_to(controls.REPO)).exists()
 
 
 def test_unread_worker_outputs_leave_workers_while_declared_files_return(
@@ -1334,14 +1343,13 @@ def test_unread_worker_outputs_leave_workers_while_declared_files_return(
         assert left, f"{packing_relative}: every file returns, so the entry prunes nothing"
 
     results = ROOT / "campaign/series/series-000-smoke-and-calibration/results"
-    for relative in (
-        "exp-249-n17-first-certified-sub-patterns/census.json",
-        "exp-246-n17-capacity-one-cover/audit/wall_lemma.py.txt",
-        "chelokot-lean-replay/receipt.json",
-    ):
-        source = results / relative
-        assert source.relative_to(controls.REPO) in copied_targets
-        assert (tree / source.relative_to(controls.REPO)).read_bytes() == source.read_bytes()
+    census = results / "exp-249-n17-first-certified-sub-patterns/census.json"
+    assert census.relative_to(controls.REPO) in copied_targets
+    assert (tree / census.relative_to(controls.REPO)).read_bytes() == census.read_bytes()
+    # exp-246's wall-lemma audit returned only for a review's link until 2026-10-15.
+    review_linked = results / "exp-246-n17-capacity-one-cover/audit/wall_lemma.py.txt"
+    assert review_linked.is_file()
+    assert not (tree / review_linked.relative_to(controls.REPO)).exists()
     # exp-295 keeps its descriptor and metadata, as exp-297--314 do.
     for name in ("README.md", "descriptor.json", "mechanical-summary.json"):
         source = results / "exp-295-two-center-children" / name
@@ -1720,6 +1728,68 @@ def test_snapshot_audit_cli_never_clones_or_runs_a_control(
         controls.main([str(spec), "--prune-candidate", str(old)])
 
 
+def test_baseline_runs_each_command_unmutated_once_in_one_private_worker(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    """The record says what each checker printed before any mutation, path-neutrally."""
+    spec = tmp_path / "controls.yaml"
+    command = "cat probe.txt && pwd"
+    spec.write_text(
+        "controls:\n"
+        f"- {{name: first, file: probe.txt, replace: [kept, gone], run: '{command}',"
+        " expect: gone, timeout_seconds: 7}\n"
+        f"- {{name: second, file: probe.txt, replace: [kept, lost], run: '{command}',"
+        " expect: lost}\n"
+    )
+    trees: list[Path] = []
+
+    def clone(tree: Path) -> None:
+        trees.append(tree)
+        (tree / controls.HERE).mkdir(parents=True)
+        (tree / controls.HERE / "probe.txt").write_text("kept\n")
+
+    monkeypatch.setattr(controls, "clone_tree", clone)
+    monkeypatch.setattr(controls, "snapshot_source_bytes", lambda: 5)
+    record = tmp_path / "baseline.json"
+    assert controls.main([str(spec), "--baseline", str(record)]) == 0
+    assert len(trees) == 1
+    assert not trees[0].exists()
+    baseline = json.loads(record.read_text())
+    assert baseline["source_bytes"] == 5
+    [row] = baseline["commands"]
+    assert row["command"] == command
+    assert (row["returncode"], row["timed_out"], row["stderr"]) == (0, False, "")
+    assert row["stdout"] == f"kept\n<worker>/{controls.HERE.as_posix()}\n"
+    assert row["output_sha256"] == hashlib.sha256(f"{row['stdout']}\0".encode()).hexdigest()
+    assert command in capsys.readouterr().out
+
+    # Evidence is never overwritten, and nothing is cloned to find that out.
+    assert controls.main([str(spec), "--baseline", str(record)]) == 1
+    assert "refuses to overwrite" in capsys.readouterr().err
+    assert len(trees) == 1
+
+    # A checker no control runs can be named instead; its failure is recorded, not raised.
+    other = tmp_path / "other.json"
+    argv = [str(spec), "--baseline", str(other), "--baseline-command", "echo red >&2; exit 3"]
+    assert controls.main(argv) == 0
+    [row] = json.loads(other.read_text())["commands"]
+    assert (row["returncode"], row["stdout"], row["stderr"]) == (3, "", "red\n")
+    with pytest.raises(SystemExit, match="2"):
+        controls.main([str(spec), "--baseline-command", "true"])
+
+    # A run that fails leaves nothing that would refuse the next one (review A6 of #611).
+    def broken(_tree: Path) -> None:
+        raise OSError("clone failed")
+
+    monkeypatch.setattr(controls, "clone_tree", broken)
+    failed = tmp_path / "failed.json"
+    with pytest.raises(OSError, match="clone failed"):
+        controls.main([str(spec), "--baseline", str(failed)])
+    assert not failed.exists()
+
+
 def test_tiny_snapshot_prune_rescues_linked_and_registered_files_as_private_copies(
     snapshot_audit_fixture: tuple[Path, Path],
     tmp_path: Path,
@@ -1770,6 +1840,7 @@ def test_workflow_evidence_selection_keeps_only_existing_referenced_files(
         "[absent](.github/workflows/absent.yml)\n"
         "[escape](.github/workflows/escape.yml)\n"
     )
+    monkeypatch.setattr(controls, "REPO", tmp_path)
     monkeypatch.setattr(controls, "ROOT", tmp_path / "packing")
     monkeypatch.setattr(controls, "ROOT_DOCUMENTS", (document,))
     monkeypatch.setattr(controls, "LINKED_PRUNE_ROOTS", (workflows,))
@@ -1881,6 +1952,7 @@ def test_research_outputs_are_pruned_but_linked_evidence_still_counts(
     (output / "unreferenced-checkpoint.json").write_text("0" * 100_000)
     document = tmp_path / "SYNOPSIS.md"
     document.write_text("[required](packing/results/exp-268/required.json)\n")
+    monkeypatch.setattr(controls, "REPO", tmp_path)
     monkeypatch.setattr(controls, "ROOT", packing)
     monkeypatch.setattr(controls, "ROOT_DOCUMENTS", (document,))
     monkeypatch.setattr(controls, "PRUNE", frozenset({output}))
@@ -1917,6 +1989,7 @@ def test_session185_selected_output_prune_is_exact_and_keeps_declared_inputs(
     sibling_evidence.write_text('{"unique":true}\n')
     document = tmp_path / "SYNOPSIS.md"
     document.write_text(f"[required](packing/results/{name}/required.json)\n")
+    monkeypatch.setattr(controls, "REPO", tmp_path)
     monkeypatch.setattr(controls, "ROOT", packing)
     monkeypatch.setattr(controls, "ROOT_DOCUMENTS", (document,))
     monkeypatch.setattr(controls, "PRUNE", frozenset({output}))
@@ -1991,6 +2064,7 @@ def test_session186_regional_receipt_prune_is_exact_and_copyback_survives(
     descriptor.write_text('{"premise":true}\n')
     document = tmp_path / "SYNOPSIS.md"
     document.write_text(f"[declared input](packing/results/{output.name}/{name})\n")
+    monkeypatch.setattr(controls, "REPO", tmp_path)
     monkeypatch.setattr(controls, "ROOT", packing)
     monkeypatch.setattr(controls, "ROOT_DOCUMENTS", (document,))
     monkeypatch.setattr(controls, "PRUNE", frozenset({receipt}))
@@ -2066,6 +2140,7 @@ def test_session186_diagnostic_output_prune_preserves_declared_copyback(
     sibling.write_text("retained sibling\n")
     document = tmp_path / "SYNOPSIS.md"
     document.write_text(f"[declared input](packing/{relative})\n")
+    monkeypatch.setattr(controls, "REPO", tmp_path)
     monkeypatch.setattr(controls, "ROOT", packing)
     monkeypatch.setattr(controls, "ROOT_DOCUMENTS", (document,))
     monkeypatch.setattr(controls, "PRUNE", frozenset({receipt}))
@@ -2080,10 +2155,13 @@ def test_session186_diagnostic_output_prune_preserves_declared_copyback(
     )
 
 
-def test_operational_run_prune_preserves_the_reviewed_instrument_copyback() -> None:
+def test_operational_run_prune_copies_back_nothing_a_control_reads() -> None:
     root = ROOT / "benchmarks/validation-efficiency/runs"
     copied = [path for path in controls.snapshot_pruned_targets() if path.is_relative_to(root)]
-    assert copied == [root / "instrument-v1.py.txt"]
+    # `instrument-v1.py.txt` returned while every document's links were followed; only
+    # the 2026-09-06 validation-efficiency implementation review links it, and no control
+    # follows that review's links (think-b6ir).
+    assert copied == []
     # Primary CI's report-corpus test still reads the original receipts and JUnit;
     # pruning is solely a worker-copy rule, not deletion or a test exclusion.
     assert (root / "receipts.jsonl").is_file()
@@ -2096,13 +2174,13 @@ def test_checkpoint_archive_prune_preserves_all_declared_consumer_copyback() -> 
     copied = [
         path.name for path in controls.snapshot_pruned_targets() if path.is_relative_to(root)
     ]
+    # The pre-main-integration pair is linked only from two `docs/` reviews, whose links
+    # no control follows, so it left the copy-back with them (think-b6ir).
     assert copied == sorted(
         [
             "2026-09-06-integrated-fast.log",
             "2026-09-06-integrated-fast.manifest.json",
             "2026-09-06-integrated-fast.tar.gz",
-            "2026-09-06-pre-main-integration.manifest.json",
-            "2026-09-06-pre-main-integration.tar.gz",
             "VE-004-full-ed595fb6.tar.gz",
         ]
     )
@@ -2153,6 +2231,7 @@ def test_a_worker_snapshot_can_be_asked_what_this_repository_tracks(
     from devtools import squish_followup_packets as packet  # noqa: PLC0415
     from devtools import squish_second_update_confirmation as second  # noqa: PLC0415
     from devtools import squish_second_update_house_links as house  # noqa: PLC0415
+    from devtools import upper_bound_houses as adopted  # noqa: PLC0415
 
     tree, _copied = control_snapshot
     listed = tracked_files(tree, ".")
@@ -2190,6 +2269,10 @@ def test_a_worker_snapshot_can_be_asked_what_this_repository_tracks(
     )
     linked_proofs.update(
         path.relative_to(controls.REPO).as_posix() for path in gupta.snapshot_house_links()
+    )
+    # The houses adopted on 11 October 2026 (think-fvz4) are linked back like the others.
+    linked_proofs.update(
+        path.relative_to(controls.REPO).as_posix() for path in adopted.snapshot_house_links()
     )
     for relative in linked_proofs:
         assert (tree / relative).is_file()
@@ -2423,6 +2506,63 @@ def test_a_control_command_is_green_unmutated_in_a_worker(
     assert outcome.returncode == 0, output
 
 
+def test_gate_budgets_reads_its_wall_workflows_in_a_worker(
+    control_snapshot: tuple[Path, set[Path]],
+) -> None:
+    """The six `check_gate_budgets` controls run over a green checker, even under `CI`.
+
+    The worker owes the checker two things. Its wall workflows have been declared inputs
+    since 2026-10-15 (think-b6ir), not targets of a review's link. And it needs the bead
+    store: under `CI` the checker refuses an advisory bead it cannot confirm, so in a
+    hosted worker it exited 1 before any mutation and its six controls were scored over
+    a red checker (review A2 of #611). The worker borrows the source's store, so
+    wherever the source holds one the checker is green here under `CI`. A source with
+    no store gives no store to borrow, and only the workflows are held.
+    """
+    tree, _copied = control_snapshot
+    for workflow in controls.wall_workflows():
+        relative = workflow.relative_to(controls.REPO)
+        assert (tree / relative).read_bytes() == workflow.read_bytes(), relative
+    shallow = subprocess.run(
+        ["git", "-C", str(tree), "rev-parse", "--is-shallow-repository"],
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    assert shallow.stdout.strip() == "false"
+    # The store's refs are the only ones added, and `HEAD` stays unborn, so a checker
+    # that walks history from a ref still finds none in a worker (review A9 of #611).
+    head = subprocess.run(
+        ["git", "-C", str(tree), "rev-parse", "--verify", "--quiet", "HEAD"],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    assert head.returncode != 0, head.stdout
+    refs = subprocess.run(
+        ["git", "-C", str(tree), "for-each-ref", "--format=%(refname)"],
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout.split()
+    assert set(refs) == set(controls.source_bead_store_refs())
+    with tempfile.TemporaryDirectory(prefix="negctl-pycache-", dir=tree) as pycache:
+        environment = controls.control_environment(tree, Path(pycache))
+        environment["CI"] = "true"
+        outcome = run_control_command(
+            "python3 -m devtools.check_gate_budgets",
+            cwd=tree / HERE,
+            environment=environment,
+            timeout_seconds=controls.DEFAULT_CONTROL_TIMEOUT_SECONDS,
+        )
+    output = outcome.stdout + outcome.stderr
+    assert not outcome.timed_out
+    assert "Traceback" not in output, output
+    assert "has no readable jobs" not in output, output
+    if controls.source_bead_store_refs():
+        assert outcome.returncode == 0, output
+
+
 def test_the_root_files_reach_every_worker(control_snapshot: tuple[Path, set[Path]]) -> None:
     """Every file tracked at the repository root is in the worker, byte for byte."""
     tree, _copied = control_snapshot
@@ -2442,6 +2582,7 @@ def test_unmutated_results_checker_is_green_inside_a_worker(
     completed = subprocess.run(
         [sys.executable, "-m", "devtools.check_results"],
         cwd=tree / "packing",
+        env=controls.control_environment(tree, tree / "results-checker-pycache"),
         capture_output=True,
         text=True,
         check=False,
@@ -2478,7 +2619,13 @@ def test_synopsis_snapshot_is_clean_before_its_registered_mutation(
         for path in (tree / ".github/workflows").rglob("*")
         if path.is_file()
     }
-    assert copied_workflows == {
+    # The workflows a checked document links, and the wall workflows declared outright.
+    declared = {
+        path.relative_to(controls.REPO)
+        for path in COPY_SEPARATELY
+        if path.is_relative_to(controls.REPO / ".github/workflows")
+    }
+    assert copied_workflows == declared | {
         path for path in copied_targets if path.is_relative_to(".github/workflows")
     }
 
@@ -2682,6 +2829,52 @@ packet.original.exact_verify = packet.original.independent.check = forbidden
     assert baseline.returncode == 0, baseline.stdout + baseline.stderr
 
 
+#: The second SQUISH packet's displaced houses, as a worker program admits them: the
+#: ry-xu and Gupta houses from their retained history, and since the house adoption of
+#: 11 October 2026 (think-fvz4) the earlier houses at 263 and 302 rebuilt from the
+#: packet's private inputs. Both worker programs below run it, so the copies cannot
+#: drift. It expects `packet` and `house` bound, and leaves `house.house_path` as it
+#: found it.
+_SECOND_SQUISH_HISTORICAL_HOUSES = """
+from devtools.register_ryxu_reports import read_history
+from devtools import register_gupta_reports as gupta
+historical = {row['n']: row['house'] for row in read_history()}
+if gupta.HISTORY.exists():
+    for row in gupta.read_history():
+        historical.setdefault(row['n'], row['house'])
+    try:
+        house.check_houses([88])
+    except packet.original.PacketError as error:
+        assert 'full geometry or private metadata custody mismatch' in str(error)
+    else:
+        raise AssertionError('new Gupta geometry was accepted against historical #422 inputs')
+# Since the house adoption of 11 October 2026 (think-fvz4) later sources own the leaves at
+# 263 and 302, and that adoption retained case text rather than houses. Admission stays
+# scoped to this packet: rebuild each earlier house from its private inputs, without
+# reading the newer pose.
+from devtools import upper_bound_houses as adopted
+from sqpack.witness import witness_document
+metadata = house.admitted_metadata(packet.admit_certification())
+for n in packet.NUMBERS:
+    if n in adopted.ADOPTED and n not in historical:
+        witness = packet.original.to_witness(packet.read_fact(n))
+        witness.update(metadata[n]['metadata'])
+        historical[n] = witness_document(witness, schema='../witness.schema.yaml')
+historical_paths = {}
+for n in packet.NUMBERS:
+    if n in historical:
+        path = packet.PACKET / 'receipts' / f'worker-historical-n{n:03d}.yaml'
+        path.write_text(historical[n])
+        historical_paths[n] = path
+current_house_path = house.house_path
+house.house_path = lambda n: historical_paths.get(n, current_house_path(n))
+assert tuple(house.check_houses()) == packet.NUMBERS
+for path in historical_paths.values():
+    path.unlink()
+house.house_path = current_house_path
+"""
+
+
 @pytest.mark.slow
 def test_second_squish_complete_replay_survives_native_worker_boundaries(
     control_snapshot: tuple[Path, set[Path]],
@@ -2697,9 +2890,14 @@ def test_second_squish_complete_replay_survives_native_worker_boundaries(
     listed = tracked_files(tree, ".")
     assert listed is not None, "the actual worker has no private index"
     tracked = {path.relative_to(tree) for path in listed}
-    private_n263 = house.house_path(263).relative_to(controls.REPO)
-    assert private_n263 in tracked
-    assert not (tree / private_n263).is_symlink()
+    # This packet links eight leaves and kept n263's private. Since the house adoption of
+    # 11 October 2026 (think-fvz4) T-146 holds that leaf, and `upper_bound_houses` links
+    # it back like every adopted house.
+    adopted_n263 = house.house_path(263).relative_to(controls.REPO)
+    assert house.house_path(263) not in house.snapshot_house_links()
+    assert adopted_n263.relative_to(HERE) in controls.HOUSE_LINK_LEAVES
+    assert adopted_n263 not in tracked
+    assert (tree / adopted_n263).resolve() == house.house_path(263).resolve()
     for n in house.LINK_NUMBERS:
         relative = house.house_path(n).relative_to(controls.REPO)
         assert (tree / relative).is_symlink()
@@ -2710,7 +2908,8 @@ def test_second_squish_complete_replay_survives_native_worker_boundaries(
         target = tree / source.relative_to(controls.REPO)
         assert not target.is_symlink()
         assert target.read_bytes() == source.read_bytes()
-    baseline_program = """
+    baseline_program = (
+        """
 from devtools import build_known_best_atlas as atlas
 from devtools import check_results
 from devtools import squish_second_update_confirmation as packet
@@ -2729,30 +2928,9 @@ except packet.original.PacketError as error:
     assert 'full geometry or private metadata custody mismatch' in str(error)
 else:
     raise AssertionError('new n108 geometry was accepted against historical #422 inputs')
-from devtools.register_ryxu_reports import read_history
-from devtools import register_gupta_reports as gupta
-historical = {row['n']: row['house'] for row in read_history()}
-if gupta.HISTORY.exists():
-    for row in gupta.read_history():
-        historical.setdefault(row['n'], row['house'])
-    try:
-        house.check_houses([88])
-    except packet.original.PacketError as error:
-        assert 'full geometry or private metadata custody mismatch' in str(error)
-    else:
-        raise AssertionError('new Gupta geometry was accepted against historical #422 inputs')
-historical_paths = {}
-for n in packet.NUMBERS:
-    if n in historical:
-        path = packet.PACKET / 'receipts' / f'worker-historical-n{n:03d}.yaml'
-        path.write_text(historical[n])
-        historical_paths[n] = path
-current_house_path = house.house_path
-house.house_path = lambda n: historical_paths.get(n, current_house_path(n))
-assert tuple(house.check_houses()) == packet.NUMBERS
-for path in historical_paths.values():
-    path.unlink()
-house.house_path = current_house_path
+"""
+        + _SECOND_SQUISH_HISTORICAL_HOUSES
+        + """
 for path in (house.house_path(88), house.house_path(263), packet.certificate_path(88)):
     relative = path.relative_to(packet.REPO).as_posix()
     assert check_results.repository_file_problem(relative) is None
@@ -2767,6 +2945,7 @@ for producer in (atlas.update, lambda: atlas.update_selected([88])):
 print('all 27 complete inputs admitted; all nine original houses admitted from '
       'current or full retained history; current selected owner reads and output guards passed')
 """
+    )
     baseline_program = (
         "from collections.abc import Callable\n"
         "from types import ModuleType\nfrom typing import Any\n"
@@ -3034,30 +3213,9 @@ except packet.original.PacketError as error:
     assert 'full geometry or private metadata custody mismatch' in str(error)
 else:
     raise AssertionError('new n108 geometry was accepted against historical #422 inputs')
-from devtools.register_ryxu_reports import read_history
-from devtools import register_gupta_reports as gupta
-historical = {row['n']: row['house'] for row in read_history()}
-if gupta.HISTORY.exists():
-    for row in gupta.read_history():
-        historical.setdefault(row['n'], row['house'])
-    try:
-        house.check_houses([88])
-    except packet.original.PacketError as error:
-        assert 'full geometry or private metadata custody mismatch' in str(error)
-    else:
-        raise AssertionError('new Gupta geometry was accepted against historical #422 inputs')
-historical_paths = {}
-for n in packet.NUMBERS:
-    if n in historical:
-        path = packet.PACKET / 'receipts' / f'worker-historical-n{n:03d}.yaml'
-        path.write_text(historical[n])
-        historical_paths[n] = path
-current_house_path = house.house_path
-house.house_path = lambda n: historical_paths.get(n, current_house_path(n))
-assert tuple(house.check_houses()) == packet.NUMBERS
-for path in historical_paths.values():
-    path.unlink()
-house.house_path = current_house_path
+"""
+            + _SECOND_SQUISH_HISTORICAL_HOUSES
+            + """
 print('all nine original houses admitted from current or full retained history')
 """,
             id="house-reads",
@@ -3170,16 +3328,30 @@ from devtools import build_known_best_atlas as atlas
 from devtools import check_results
 from devtools import gupta_house_links as house
 from devtools import register_gupta_reports as register
+from devtools import upper_bound_houses as adopted
 reports = house.reports
 def forbidden(*args, **kwargs):
     raise AssertionError('custody admission must not call a geometric decider')
 reports.kernel.run_case = reports.run_child = forbidden
 reports.legacy.exact_verify = reports.legacy.independent.check_squares = forbidden
-assert tuple(reports.check_certification()) == reports.NUMBERS
-assert sum(len(c.poses) for c in reports.read_facts().values()) == 3017
+positives = reports.check_certification()
+assert tuple(positives) == reports.NUMBERS
+facts = reports.read_facts()
+assert sum(len(c.poses) for c in facts.values()) == 3017
 assert len(register.read_history()) == 14
-house.check_houses()
-for relative in (house.house_path(88), house.house_path(239)):
+# Since the house adoption of 11 October 2026 (think-fvz4) later sources hold some of the
+# fourteen leaves. Custody still covers every case: the leaves Gupta holds are read and
+# compared whole, and each house a later source replaced is rebuilt from the private
+# inputs, without reading the newer pose.
+held = [n for n in house.NUMBERS if n not in adopted.ADOPTED]
+replaced = [n for n in house.NUMBERS if n in adopted.ADOPTED]
+assert held and replaced
+house.check_houses(held)
+for n in replaced:
+    rebuilt = house.expected_house(facts[n], positives[n])
+    assert rebuilt['id'] == f'W-known-best-n{n:03d}'
+    assert house.shared.bounded_house(house.house_path(n)) != rebuilt
+for relative in (house.house_path(held[0]), house.house_path(held[-1])):
     name = relative.relative_to(house.REPO).as_posix()
     assert check_results.repository_file_problem(name) is None
 for kind in ('native-verdict', 'complete-input', 'original', 'comparator'):
@@ -3201,17 +3373,17 @@ for kind in ('native-verdict', 'complete-input', 'original', 'comparator'):
     try:
         reports.save_xz(target, value)
         try:
-            house.check_houses()
+            house.check_houses(held)
         except reports.kernel.ReportError:
             pass
         else:
             raise AssertionError('private deciding input mutant was admitted: ' + kind)
     finally:
         target.write_bytes(original)
-    house.check_houses()
+    house.check_houses(held)
     assert target.read_bytes() == original
-producers = (atlas.update, lambda: atlas.update_selected([88]),
-             lambda: atlas.update_selected([239]))
+producers = (atlas.update, lambda: atlas.update_selected([held[0]]),
+             lambda: atlas.update_selected([held[-1]]))
 for producer in producers:
     try:
         producer()
@@ -3316,6 +3488,7 @@ def test_duplicate_stdout_prune_preserves_canonical_and_declared_input(
     scientific.write_bytes(receipt.read_bytes())
     document = tmp_path / "SYNOPSIS.md"
     document.write_text(f"[declared input](packing/{relative}/{receipt.name})\n")
+    monkeypatch.setattr(controls, "REPO", tmp_path)
     monkeypatch.setattr(controls, "ROOT", packing)
     monkeypatch.setattr(controls, "ROOT_DOCUMENTS", (document,))
     monkeypatch.setattr(controls, "PRUNE", frozenset({receipt}))
@@ -3515,6 +3688,47 @@ def test_couzo_complete_sources_survive_native_worker_boundaries(
     )
     assert completed.returncode == 0, completed.stdout + completed.stderr
     assert "all8 sources/1340poses/24jobs/three private inputs admitted" in completed.stdout
+    for source, original in originals.items():
+        assert source.read_bytes() == original
+        assert (tree / source.relative_to(controls.REPO)).read_bytes() == original
+    assert snapshot_source_bytes() <= SNAPSHOT_MAX_BYTES
+
+
+@pytest.mark.slow
+def test_adopted_houses_survive_native_worker_boundaries(
+    control_snapshot: tuple[Path, set[Path]],
+) -> None:
+    """Every adopted house rebuilds in a worker from ordinary private inputs alone.
+
+    The worker refuses a late verdict and a late certificate mutation of one count of each
+    adopted packet and restores both; no geometric decider runs (`upper_bound_houses`).
+    """
+    from devtools import upper_bound_houses as houses  # noqa: PLC0415
+
+    tree, _copied = control_snapshot
+    inputs = houses.private_input_paths()
+    assert set(inputs) <= set(controls.COPY_SEPARATELY)
+    originals = {path: path.read_bytes() for path in inputs}
+    for source, original in originals.items():
+        target = tree / source.relative_to(controls.REPO)
+        assert target.is_file()
+        assert not target.is_symlink()
+        assert target.read_bytes() == original
+    for n in houses.NUMBERS:
+        assert (tree / houses.house_path(n).relative_to(controls.REPO)).exists()
+    completed = subprocess.run(
+        [sys.executable, "-m", "devtools.upper_bound_houses", "worker-custody"],
+        cwd=tree / HERE,
+        env=controls.control_environment(tree, tree / "house-custody-pycache"),
+        capture_output=True,
+        text=True,
+        check=False,
+        timeout=houses.CUSTODY_TIMEOUT,
+    )
+    assert completed.returncode == 0, completed.stdout + completed.stderr
+    report = json.loads(completed.stdout.strip().splitlines()[-1])
+    assert report["houses"] == len(houses.NUMBERS)
+    assert len(report["refused"]) == 2 * len(houses.sources())
     for source, original in originals.items():
         assert source.read_bytes() == original
         assert (tree / source.relative_to(controls.REPO)).read_bytes() == original

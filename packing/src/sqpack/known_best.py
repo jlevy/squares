@@ -606,7 +606,7 @@ KNOWN_BEST_COMPOSITES = (
         # The three byte-budget levers, each measured before it was chosen and all of
         # them reported by `build_known_best_atlas --report`. At 52,650 squares the
         # house encoding costs about 24 MB, which is not a file to commit. See
-        # the "two composites" section of `atlas/known-best/FIGURE-PLAYBOOK.md` for the
+        # the "two composites" section of `atlas/known-best/figure-playbook.md` for the
         # measurement each of these bought and why the per-n renderings keep all three.
         square_data_attributes=False,
         square_stroke_shared=True,

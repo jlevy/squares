@@ -16,15 +16,16 @@ from sqpack.witness import witness_document
 
 @pytest.fixture
 def private_packet(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Path:
-    retained = tmp_path / packet.PACKET.relative_to(packet.REPO)
-    proofs = tmp_path / packet.WITNESSES.relative_to(packet.REPO)
+    repo = tmp_path / "repo"
+    retained = repo / packet.PACKET.relative_to(packet.REPO)
+    proofs = repo / packet.WITNESSES.relative_to(packet.REPO)
     shutil.copytree(packet.PACKET, retained)
     shutil.copytree(packet.WITNESSES, proofs)
-    prior = tmp_path / packet.original.PACKET.relative_to(packet.REPO)
+    prior = repo / packet.original.PACKET.relative_to(packet.REPO)
     shutil.copytree(packet.original.PACKET / "facts", prior / "facts")
-    monkeypatch.setattr(packet.original, "REPO", tmp_path)
+    monkeypatch.setattr(packet.original, "REPO", repo)
     monkeypatch.setattr(packet.original, "PACKET", prior)
-    monkeypatch.setattr(packet, "REPO", tmp_path)
+    monkeypatch.setattr(packet, "REPO", repo)
     monkeypatch.setattr(packet, "PACKET", retained)
     monkeypatch.setattr(packet, "WITNESSES", proofs)
     return retained

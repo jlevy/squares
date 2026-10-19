@@ -1,0 +1,74 @@
+{
+  "schema": "packing.squares:TestFileCosts/2",
+  "shard": null,
+  "provenance": {},
+  "exit_status": 0,
+  "tests": 87,
+  "seconds": 6.264,
+  "files": [
+    {
+      "file": "packing/tests/test_fang_excess_theorem.py",
+      "tests": 18,
+      "seconds": 1.756
+    },
+    {
+      "file": "packing/tests/test_intake_ledger.py",
+      "tests": 51,
+      "seconds": 0.389
+    },
+    {
+      "file": "packing/tests/test_upper_bound_reports_562_575_584_596.py",
+      "tests": 9,
+      "seconds": 1.525
+    },
+    {
+      "file": "packing/tests/test_upper_bound_reports_fang_direct.py",
+      "tests": 9,
+      "seconds": 2.594
+    }
+  ],
+  "module_scope": {
+    "requested_files": [
+      "packing/tests/test_fang_excess_theorem.py",
+      "packing/tests/test_intake_ledger.py",
+      "packing/tests/test_upper_bound_reports_fang_direct.py",
+      "packing/tests/test_upper_bound_reports_562_575_584_596.py"
+    ],
+    "keyword": "",
+    "markexpr": "",
+    "collection_patterns": {
+      "python_files": [
+        "test_*.py"
+      ],
+      "python_classes": [
+        "Test"
+      ],
+      "python_functions": [
+        "test"
+      ]
+    },
+    "collection_overrides": [],
+    "collection_controls": {
+      "ignore": [],
+      "ignore_glob": [],
+      "deselect": [],
+      "confcutdir": null,
+      "noconftest": false,
+      "pyargs": false,
+      "keepduplicates": false,
+      "lf": false,
+      "stepwise": false,
+      "stepwise_skip": false,
+      "setuponly": false,
+      "setupplan": false,
+      "collectonly": false
+    },
+    "collected_tests": {
+      "packing/tests/test_fang_excess_theorem.py": 18,
+      "packing/tests/test_intake_ledger.py": 51,
+      "packing/tests/test_upper_bound_reports_562_575_584_596.py": 9,
+      "packing/tests/test_upper_bound_reports_fang_direct.py": 9
+    },
+    "deselected_tests": 0
+  }
+}

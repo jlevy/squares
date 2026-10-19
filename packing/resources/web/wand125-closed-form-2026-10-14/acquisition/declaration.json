@@ -1,0 +1,39 @@
+{
+  "format": "external-source-declaration-v1",
+  "id": "wand125-closed-form",
+  "source_url": "https://github.com/wand125/square-packing",
+  "source_ref": "refs/heads/main",
+  "source_commit": "9a28a84bd55dc124bfa2919bb6c4fb504dda3149",
+  "retrieved_at_utc": "2026-10-14T09:29:10Z",
+  "git_scope": "Blobless clone of main, sparse-checked out at its head 9a28a84 (committed 2026-10-14T09:27:10Z). problems/closed-form/ was added in eb0fd1938fcabf9b81b638f9d6b6db7f80b8985a (2026-10-13T09:36:19Z) and no later commit changes it; the later commits add the site's write-up and table of the bound (7432824 to c470527), change other site pages, and add a result on squares in a right isosceles triangle (77d3fc5), which is not about s(n). The scope is the claim folder, the root LICENSE.md, README.md and INDEX.json, and the site write-up's English text and table. The 35 release assets of closed-form-v1 stay with the author, pinned by the retained ASSET.json. No source program was executed at acquisition.",
+  "archived_dir": "square-packing",
+  "license": "MIT for problems/closed-form/ (its LICENSE, Copyright (c) 2026 wand125); checker/seam4d_core/src/b3d_sort.rs is a port of CPython's list sort and keeps the Python Software Foundation licence beside it in CPYTHON_SORT_LICENSE. The root LICENSE.md says the repository has no single licence and that each folder keeps its own; the root README.md, INDEX.json and the site/ files fall under no licence the tree states, so they are pinned by digest only. The folder README credits Hiroaki Hosono (wand125) and names no method it builds on; the commit names Claude Opus 5.5 as co-author, and the folder's prose states nothing about AI assistance.",
+  "claims": [
+    "Theorem (README.md, SPEC.md section 1.1): for every non-square integer N >= 49, with k = floor(sqrt(N)), s(N) >= a(N) = k + sup{delta in (0, 1] : (k + delta)^2 - 4 S*(delta) < N}, where S*(delta) is the largest certified saving alpha_i delta + beta_i over the 34 intervals I_i of intervals.json that contain delta; in closed form a(N) = max{min(2 alpha_i + sqrt(4 alpha_i^2 + N + 4 beta_i - 4 alpha_i k), k + d1_i) : 2 alpha_i + sqrt(...) > k + d0_i}.",
+    "The certificate: for each interval a family of line segments defines, for every k >= 7, a C4-symmetric measure on [0, k + delta]^2 of total mass (k + delta)^2 - 4 S(delta) with mass at least 1 on every closed unit square; 136 records (four regions per interval, 187,183,108 leaves) were replayed by replay4d and accepted (4,294 CPU-hours), all 68 families pass structure/validate_family.py, and the published build replayed the eight records of intervals 1 and 34 again.",
+    "Corollaries (README.md, SPEC.md section 1.1): a(N) = F(N) = k + 1 at N = (k + 1)^2 - 1 and (k + 1)^2 - 2 and a(N) > F(N) at every other non-square N >= 49, F being Nagamochi's 1 + sqrt(N - 2k + 1) capped at k + 1; a(N) exceeds Karakus's 1/2 + sqrt(N - k + 1/4) except at N = (k + 1)^2 - 1; and, because S*(1) > 3/4, s(n^2 - 1) = s(n^2 - 2) = s(n^2 - 3) = n for n >= 8 without Nagamochi's lemma. The source says these values are not new.",
+    "The site write-up (site/src/content/papers/closed-form/en.mdx) adds that for N <= 3600 the bound exceeds the best known lower bound at 3,239 non-square N, equals it at 159 and is below it at 100, by its own table (site/public/data/papers/closed-form-table.csv); it determines s(N) only at (k + 1)^2 - 1, -2 and -3."
+  ],
+  "scope": [
+    "INDEX.json",
+    "LICENSE.md",
+    "README.md",
+    "problems/closed-form",
+    "site/public/data/papers/closed-form-table.csv",
+    "site/src/content/papers/closed-form/en.mdx"
+  ],
+  "pinned_only": [
+    {
+      "match": "README.md",
+      "reason": "The repository's front page, with its layout table and credit line, quoted in this packet's README. No licence the tree states covers the root files, so it is pinned by digest only."
+    },
+    {
+      "match": "INDEX.json",
+      "reason": "The repository's machine-readable index, whose closed-form-v1:intervals entry restates the claim and the check commands. No licence the tree states covers it: pinned by digest only."
+    },
+    {
+      "match": "site/**",
+      "reason": "The site write-up of the bound and its table of a(N) for N <= 3600 beside the author's choice of known bounds. site/ has no licence file and the root LICENSE.md names none for it, so derived-only custody: a reader takes it from a checkout at this pin and matches this digest."
+    }
+  ]
+}

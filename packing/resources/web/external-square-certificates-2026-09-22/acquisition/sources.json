@@ -209,6 +209,20 @@
       "media_path": "packing/resources/web/external-square-certificates-2026-09-22/acquisition/x-tokoharu-media.webp",
       "media_bytes": 68780,
       "media_sha256": "57f992ea575960a379f009198f3d9d0a58bb8942ffaa4bd46a15e5ceea213275"
+    },
+    {
+      "path": "packing/resources/web/external-square-certificates-2026-09-22/acquisition/tweet-2102358756591907112.json",
+      "bytes": 2391,
+      "sha256": "a811512d55199a09ecf04e652c2f8368a31852c6fcde53994f7049db6a33febc",
+      "retrieved_utc": "2026-10-13T17:52:09Z",
+      "format": "X syndication endpoint JSON of post 2102358756591907112, created 2026-09-22T11:26:02Z"
+    },
+    {
+      "path": "packing/resources/web/external-square-certificates-2026-09-22/acquisition/tweet-2102358760471564308.json",
+      "bytes": 5111,
+      "sha256": "d7bb950469b1667ddf1b783900cf67a3295f2a26fa6fcae9cd62b97ee2c0ef99",
+      "retrieved_utc": "2026-10-13T17:52:11Z",
+      "format": "X syndication endpoint JSON of post 2102358760471564308, created 2026-09-22T11:26:03Z"
     }
   ]
 }

@@ -1,0 +1,82 @@
+# command: sh resources/web/bengreff-s76-certificate-2026-10-14/receipts/programs/triage_checks.sh /home/user/squares/.claude/worktrees/agent-a1f00b5caa2265822/packing
+# cwd: packing/ of the review-594 worktree at aeef99ef0 with the packet staged
+# python3: packing/.venv/bin/python3 (Python 3.14.7), each program run with -I
+# host: 4 cores; load 13.07 15.22 12.54; started 2026-10-14T05:48:31Z
+== interpreter
+Python 3.14.7
+== cover digests (s(76) cover; wand125's s(59) cover)
+b6a1214b99f00e5dd136d74c8d87bccd178df38a1063b2c7be90517eb2b862b2  s76_cover_v5.txt
+6f4d2b64f9a88ae49546f05fa28752382f9ebfa8b7f8b6e6c6f1a8e693177e19  n59_mixed_cover_8.txt
+== the source's tools/check_total.py
+points 41633, segments 9744, coordinate unit 1/8000, weight unit 1/400000000
+total mass = 3788361049/50000000 = 75.767220980
+OK: all weights >= 0, all atoms in [0,9]^2, total < 76
+== devtools.audit_evand_mixed_covers.audit_cover, compared with receipts/n76_cover_audit.json
+audit equals the retained receipt
+== the Lean data against the cover
+lean pts 41633 (distinct 41633), cover locations 41633; equal: True
+lean segs 9744 (distinct 9744), cover segments 9744; equal: True
+lean total 3788361049/50000000 = 75.767220980; below 76: True
+S76Cover: D=8000 S=4096 Mq=72000 R=4294967296 W=400000000; centre upper limit 9/2; u upper limit 1/2
+consistent with cover: D True, W True, Mq = 9D True
+== the corner [0, 5/2)^2 against wand125's s(59) cover
+cut 5/2: s59 corner points 1140 mass 0.945518910; s76 corner points 1140 mass 0.945518910; identical 1140
+segments: s59 452 mass 4.044127740; s76 452 mass 4.044127740; identical 452
+points only in s59 0, only in s76 0, same place other mass 0
+== wall segments, and the stripped cover the wall control ran
+segments 9744, on walls 16, wall mass 1/25000000 = 0.000000040
+by wall: {'x0': '0.000000010', 'xs': '0.000000010', 'y0': '0.000000010', 'ys': '0.000000010'}
+total 3788361049/50000000 = 75.767220980; stripped total 3788361047/50000000 = 75.767220940
+a253ed85d044a72ca0e773c6ca651bcd1766a76bbc65c8875f0e2cab1e87c2d3  s76_nowall.txt
+== the two mutations the zmx2 controls ran
+drop-heaviest-point drops the 8 point rows at the 8 D4 images of (11920, 14960)/8000, carrying 2514512/400000000 each removed 157157/3125000 rows 8 sha256 519125d33f7895aca714c783add4a79ef21ee59b52349c4f1115aa18a876c984
+drop-heaviest-segment drops the 8 segment rows at the 8 D4 images of (7840, 32000)-(8000, 32000)/8000, carrying 44176716/400000000 each removed 11044179/12500000 rows 8 sha256 5a904a4807d1fe1b209554c5d69ba7c837c942849e06f884c8e1624422b5f2e1
+== zmx2: the replay against the source's records
+headers equal: True ['# zmx2 cert hash=96e61ce6a0aa2545 mode=d4 atoms=grid depth=40 node_cap=20000000 kappa=1.5 K=30 region=x0-44,y0-44,bins0-3']
+roots shipped 8100, replay 8100, identical census 8100
+shipped boxes/cert/empty/uncert: [14672104, 7268720, 71364, 18] max depth 40
+replay  boxes/cert/empty/uncert: [14672104, 7268720, 71364, 18] max depth 40
+roots with uncertified or capped boxes, shipped: ['22/10,23/10,44/10,45/10,3/8,4/8', '42/10,43/10,43/10,44/10,3/8,4/8', '43/10,44/10,42/10,43/10,2/8,3/8', '44/10,45/10,22/10,23/10,2/8,3/8']
+same in replay: True ; equal to failing_roots.txt: True
+   22/10,23/10,44/10,45/10,3/8,4/8 uncert 2 boxes 24205 maxdepth 40
+   42/10,43/10,43/10,44/10,3/8,4/8 uncert 4 boxes 10813 maxdepth 40
+   43/10,44/10,42/10,43/10,2/8,3/8 uncert 6 boxes 15319 maxdepth 40
+   44/10,45/10,22/10,23/10,2/8,3/8 uncert 6 boxes 26429 maxdepth 40
+UNCERT boxes shipped 18 replay 18 identical sets: True
+== zm_mixed.py: the replay against the source's records
+files source 64 replay 64; headers equal (input path aside) 64; roots and census equal 64
+== zm_mixed.py records read with exact fractions: the source's, then the replay's
+{
+ "record_files": 64,
+ "failing_roots": 4,
+ "boxes": 4950,
+ "max_depth": 15,
+ "cpu_s": 1358.7,
+ "problems": []
+}
+{
+ "record_files": 64,
+ "failing_roots": 4,
+ "boxes": 4950,
+ "max_depth": 15,
+ "cpu_s": 1032.7,
+ "problems": []
+}
+== the source's tools/check_coverage.py on the replay's own logs
+zmx2: 8100 roots tile [0,9/2]^2 x [0,1/2]; 4 have uncertified boxes
+zm_mixed: 64 certified roots tile the 4 remaining zmx2 roots exactly
+OK: the D4 fundamental region is certified (zmx2 or zm_mixed on every cell)
+== the wall control's census against the replay's, root for root
+headers equal: False ['# zmx2 cert hash=96e61ce6a0aa2545 mode=d4 atoms=grid depth=40 node_cap=20000000 kappa=1.5 K=30 region=x0-44,y0-44,bins0-3']
+roots shipped 8100, replay 8100, identical census 8100
+shipped boxes/cert/empty/uncert: [14672104, 7268720, 71364, 18] max depth 40
+replay  boxes/cert/empty/uncert: [14672104, 7268720, 71364, 18] max depth 40
+roots with uncertified or capped boxes, shipped: ['22/10,23/10,44/10,45/10,3/8,4/8', '42/10,43/10,43/10,44/10,3/8,4/8', '43/10,44/10,42/10,43/10,2/8,3/8', '44/10,45/10,22/10,23/10,2/8,3/8']
+same in replay: True ; equal to failing_roots.txt: True
+   22/10,23/10,44/10,45/10,3/8,4/8 uncert 2 boxes 24205 maxdepth 40
+   42/10,43/10,43/10,44/10,3/8,4/8 uncert 4 boxes 10813 maxdepth 40
+   43/10,44/10,42/10,43/10,2/8,3/8 uncert 6 boxes 15319 maxdepth 40
+   44/10,45/10,22/10,23/10,2/8,3/8 uncert 6 boxes 26429 maxdepth 40
+UNCERT boxes shipped 18 replay 18 identical sets: True
+== done
+# finished 2026-10-14T05:48:37Z; exit 0; wall 6.929 s; CPU 3.0 s (user 2.658 + sys 0.324); load 13.58 15.26 12.58

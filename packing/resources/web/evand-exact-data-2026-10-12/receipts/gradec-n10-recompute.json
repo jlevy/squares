@@ -1,0 +1,53 @@
+{
+  "format": "evand-gradec-recompute-v1",
+  "ran_at_utc": "2026-10-12T14:47Z",
+  "bead": "think-7scz",
+  "count": 10,
+  "purpose": "Recompute one grade-C certificate from the committed exact form and the published contacts file, as the author did, and compare it with the certificate the release publishes.",
+  "program": {
+    "path": "search/exact/gradec.py",
+    "commit": "31523f87316bdfda00f5459dd9077928e264f133",
+    "git_blob": "93374b5a4296bfb6d99dd29aa574febcd356e273",
+    "sha256": "61dcf21c2c051d3957e6092f115caa63b831e3b726204846cd785bd624f60a79",
+    "imports": [
+      {"path": "search/exact/localmin.py", "git_blob": "5a9460ea6c3661db50787292e2ba418a40bf8904", "sha256": "5c74bc9e046f74cc48fa345ab568ab0a02982030463d3c55dec16cb839183d39"},
+      {"path": "search/exact/verify_exact.py", "git_blob": "28bf54710e05e92c1788e57014425217ba1a4692", "sha256": "a0f38ca87c13c7e1b1d6ca99d69adea47df6008a645e3b4dbb79e8e0af35bab4"},
+      {"path": "search/exact/geom.py", "git_blob": "8ba5ae9c15cdb6afe1fc7850760e1f39acbbb63f", "sha256": "e2cd11d9578a8008d21f3117b90fc2a648fa5a718f4a68e37dc24c9f79e8a696"}
+    ],
+    "read_before_running": true,
+    "relationship_to_generator": "same-implementation",
+    "where": "Copied, with the three modules, to a directory outside the repository; the inputs sat in a separate directory, and the program wrote only its output beside them."
+  },
+  "environment": {
+    "python": "CPython 3.13.16, the version env.sh asks nix for (python313); nix was not used",
+    "packages": {"numpy": "2.4.2", "scipy": "1.17.0", "mpmath": "1.3.0", "sympy": "1.14.0", "python-flint": "0.9.0"},
+    "packages_source": "the versions env.sh pins, installed with uv into a fresh virtual environment",
+    "threads": "OPENBLAS_NUM_THREADS=1, OMP_NUM_THREADS=1, as env.sh sets",
+    "options": "none: GRADEC_DROPZERO and GRADEC_MUTATE unset, as the release's n = 10 run"
+  },
+  "inputs": [
+    {"name": "n-10.minpoly.json", "from": "search/exact/minpoly/data/n-10.minpoly.json.gz at 31523f8, unzipped", "git_blob_of_gzip": "1b8b87ba186f28adf4e8a1a0e335bd527ca64c43", "sha256_of_gzip": "efe6d26daf56f866a3d8b7bfc245a94074e4786b8c3e5150b18738ca349be438", "sha256": "0a1465ee5a69f2faa7f81121a1e6426e20e694ef9f105e12c998fc929cee23f8", "bytes": 2795, "retained": "source/search/exact/minpoly/data/n-10.minpoly.json.gz"},
+    {"name": "n-10.contacts.json", "from": "gradec-233.tar.zst, member gradec-233/certs/n-10.contacts.json", "sha256": "9100dffae05fb77ffc3a57022daaa3d9f5e9dc7912915c02040fccf30751ad42", "bytes": 1666, "listed_in_archive_sha256sums": true, "retained": "acquisition/release/gradec-233.tar.zst"}
+  ],
+  "output": {
+    "name": "n-10.gradec.json",
+    "sha256": "ffc0c1ee41b0c2037ab241806215b0df9d2a0111893256fa2a2116e3df02208f",
+    "bytes": 1017,
+    "published": "gradec-233.tar.zst, member gradec-233/certs/n-10.gradec.json",
+    "published_sha256": "ffc0c1ee41b0c2037ab241806215b0df9d2a0111893256fa2a2116e3df02208f",
+    "byte_identical": true,
+    "valid": true
+  },
+  "log": [
+    "n-10: 36 rows (16 side-end, 0 dropped corner-corner, 0 dropped beyond a side end), 8 load-bearing squares, 25 variables",
+    "  (1) rows tight exactly; interior projection margin 0.2929; 8 side-end pairs exactly at side ends",
+    "  rank L0 21, dim null 4, dim F 2 (moving squares [8, 9])",
+    "  (2) 2 affine null vectors w_j(phi) (S-components 0) + F span null L0; identities exact (0.0 s)",
+    "  (2) exact multipliers lambda* at z*: min 0.0625 (all proved > 0)",
+    "  (3) reduced Hessian on W (dim 2) positive definite: leading minors ['0.08839', '0.007812']",
+    "  => grade C certificate VALID: local minimum, strict modulo the 2-dim flat family (6 s)"
+  ],
+  "log_against_release": "Every line equals the release's logs/n-10.log but the input path and the build time, which the release prints as 0 s.",
+  "timing": {"real_seconds": 9.2, "user_seconds": 2.466, "sys_seconds": 0.197, "machine": "four cores shared with other lanes, load average about 13 to 17"},
+  "limitations": "One count of 233, run with the source's own checker (same-implementation): it shows the published certificate is what gradec.py computes from the published inputs, not that Theorem C or gradec.py is sound. Not run: the other 232 VALID counts, the GRADEC_DROPZERO runs at 230 and 261, and the 17 counts that timed out."
+}

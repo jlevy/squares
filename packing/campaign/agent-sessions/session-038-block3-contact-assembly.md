@@ -246,7 +246,7 @@ session:
 
 Block 3 of [agenda-006](../agendas/agenda-006-overnight-research-blocks.md), advancing
 `BC-043` under
-[plan-2026-08-28-promotion-pipeline-implementation](../../../docs/project/specs/active/plan-2026-08-28-promotion-pipeline-implementation.md).
+[plan-2026-08-28-promotion-pipeline-implementation](../../../docs/project/specs/paused/plan-2026-08-28-promotion-pipeline-implementation.md).
 
 ## What was missing
 

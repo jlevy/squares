@@ -517,7 +517,7 @@ Settings changes and other open PRs remain separately attributable work.
   [gate budgets](../../../../packing/devtools/gate-budgets.yaml), and
   [implementation](../../../../packing/src/sqpack/cli/validate.py).
 - [Operating rules](../../../../operating-rules.md), especially OR-12 through OR-15.
-- [Gate validation speed](plan-2026-08-29-gate-validation-speed.md) and
+- [Gate validation speed](../done/plan-2026-08-29-gate-validation-speed.md) and
   [research-loop efficiency infrastructure](plan-2026-08-25-research-loop-efficiency-infrastructure.md).
 - [Agenda 023](../../../../packing/campaign/agendas/agenda-023-efficiency-block-the-gate-itself.md).
 - [Session records](../../../../packing/campaign/agent-sessions/README.md) and

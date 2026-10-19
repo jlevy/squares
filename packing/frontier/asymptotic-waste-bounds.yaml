@@ -23,7 +23,8 @@ open_problem: >
   2026 preprint that is also unrefereed, as 8 ceil(sqrt(k-4)) - 1 for every k >= 6,
   20.668 k^{2/5} + 0.623 from k = 1.6*10^7 and O(k^{3/8}) with explicit constants from
   k = 2.48*10^12 (deficiency_upper_bounds), so the exponent of c*(k) is reported to lie
-  in [1/3, 3/8].
+  in [1/3, 3/8]. For 15 <= k <= 78 a third report, Kevin Fang's of 13 October 2026, is
+  smaller still: k - 1 - F(k), with F(k) about 2(k - 15)/21.
 
 upper_bounds:
   - bound: O(x^{7/11})
@@ -343,6 +344,42 @@ lower_bounds:
 
 deficiency_upper_bounds:
   - bound: >-
+      REPORTED: c*(k) <= k - 1 - F(k) for every integer k >= 15 (Theorem 2), in particular
+      c*(k) <= k - 2 (Theorem 1), where c*(k) = max{c : s(k^2-c) = k}. Theorem 1 packs
+      n^2 - n + 1 unit squares in a square of side less than n for every n >= 15, by an
+      induction from a base case at n = 15 through Lemma 3 and a scaling lemma; Theorem 2
+      packs n^2 - n + F(n).
+    exponent: 1
+    side_condition: >-
+      Integer sides approached from below, k >= 15.
+    authors: [Kevin Fang]
+    year: 2026
+    source_key: '[Fang excess theorem 2026-10-13]'
+    local: web/fang-excess-theorem-2026-10-13/source/README.md
+    retrieved: true
+    confidence: verified_against_primary
+    kernel: k, at integer sides approached from below
+    constant: >-
+      1, less F(k) = 1 + max{p + 2q : 16p + 21q <= k - 15}, about 2(k - 15)/21, so the
+      bound reads about (19/21)k.
+    corollary: >-
+      REPORTED: smaller than Ryu's Theorem 1.4 (next row) for 15 <= k <= 78 and at k = 86,
+      tied at 79 and 87, larger at 80-85 and from 88; smaller than Arslanov, Mustafin and
+      Shangitbayev's k - 1 for every k >= 15. It equals the atlas's best-known values at
+      k = 15, 16 and 17.
+    complementary_case: >-
+      Ryu's O(sqrt k) and smaller-exponent rows are smaller from k = 88; this row is the
+      smaller one only in the window the corollary names.
+    note: >-
+      Kevin Fang, TheSnakeFang/squarepack-certs at 078789a, no issue, registered as T-163.
+      The finite bounds at 211, 241, 273, 307 and 308 were replayed here on both maintained
+      exact routes (E-fang-excess-theorem-exact-feasibility); the induction and Lemma 3 were
+      read in the review of 14 October
+      (docs/project/reviews/review-2026-10-14-fang-excess-theorem-and-direct-certificates.md),
+      which found no blocking defect. Not refereed; the source states that the search, the
+      verifier and the bundle were written and run with Claude (Anthropic), directed and
+      reviewed by Kevin Fang.
+  - bound: >-
       REPORTED: c*(k) <= 8 ceil(sqrt(k-4)) - 1 < 8 sqrt(k-4) + 7 for every integer
       k >= 6 (Theorem 1.4), where c*(k) = max{c : s(k^2-c) = k}. It comes from an
       explicit L-shaped packing of N(k,b) = (k-b)^2 + b(R(k) + R(k-b)) unit squares in a
@@ -370,7 +407,8 @@ deficiency_upper_bounds:
       is at least k - 1), which improves Arslanov, Mustafin and Shangitbayev's
       c*(k) <= k - 1 (stated in their paper for n >= 12) there; c*(k) = O(sqrt k) with an
       explicit constant for every k >= 6. It is consistent with every best-known
-      value the atlas holds and weaker than them for k <= 18 (review, section 2).
+      value the atlas holds and weaker than them for k <= 18 (review, section 2). Kevin
+      Fang's Theorem 1 (previous row) gives c*(k) <= k - 2 at every k >= 15.
     complementary_case: >-
       Roth and Vaughan's bound concerns W(x) away from integers and tends to 0 as
       x -> k^-; it neither implies nor contradicts this row.
@@ -551,6 +589,7 @@ relevance_to_small_n: >
   None. The bounds on W(x) are asymptotic statements with unspecified or astronomically
   weak constants -- Roth and Vaughan's Vinogradov relation leaves its absolute constant
   implicit -- describing behaviour as x -> infinity; the deficiency bounds are explicit
-  from k = 6 but weaker than every atlas value for k <= 18 (deficiency_upper_bounds).
+  from k = 6 but weaker than every atlas value for k <= 18 (deficiency_upper_bounds),
+  except Kevin Fang's k - 1 - F(k), which equals the atlas at k = 15, 16 and 17.
   They carry no information at x ~ 3.88. The small-case and asymptotic branches share an origin and a moral
   (tilting helps) but are methodologically disjoint.

@@ -1,0 +1,50 @@
+{
+  "format": "external-source-declaration-v1",
+  "id": "wand125-square-packing",
+  "source_url": "https://github.com/wand125/square-packing",
+  "source_ref": "refs/heads/main",
+  "source_commit": "22f06b31a9295c8185be5d30a1a7b19982b16847",
+  "retrieved_at_utc": "2026-10-14T09:22Z",
+  "git_scope": "A blobless clone of the single public branch with its history, sparsely checked out at this commit: the certificate directory it adds, the same Git tree through the head 9a28a84 read on 2026-10-14, and the enclosing licence. Every file under that directory is digested; the rest of the tree is pinned by the commit. The candidate, the per-angle certificate and the proof bundle are an asset of release square-lower-bounds-v1, outside Git, and the packet README pins it by size and SHA-256.",
+  "archived_dir": "square-packing",
+  "license": "MIT, Copyright (c) 2026 wand125 (problems/square-lower-bounds/LICENSE)",
+  "claims": [
+    "s(145) >= 306/25 = 12.24, and by its mass s(N) >= 306/25 for every N >= 145 (problems/square-lower-bounds/certificates/mixed_n145_L1224)"
+  ],
+  "scope": [
+    "problems/square-lower-bounds/LICENSE",
+    "problems/square-lower-bounds/certificates/mixed_n145_L1224"
+  ],
+  "pinned_only": [
+    {
+      "match": "problems/square-lower-bounds/LICENSE",
+      "reason": "retained byte-identical by the FN-1 input bindings packet",
+      "identical_to": "packing/resources/web/wand125-fn1-input-bindings-2026-10-07/square-packing-bounds/LICENSE"
+    },
+    {
+      "match": "problems/square-lower-bounds/certificates/mixed_n145_L1224/code/endpoint_cells.py",
+      "reason": "byte-identical to the mixed_n50_L740/code/ file of the same name, retained by the 2026-09-28 packet",
+      "identical_to": "packing/resources/web/wand125-point-and-mixed-2026-09-28/square-packing-bounds/certificates/mixed_n50_L740/code"
+    },
+    {
+      "match": "problems/square-lower-bounds/certificates/mixed_n145_L1224/code/mixed_*",
+      "reason": "byte-identical to the mixed_n50_L740/code/ file of the same name, retained by the 2026-09-28 packet",
+      "identical_to": "packing/resources/web/wand125-point-and-mixed-2026-09-28/square-packing-bounds/certificates/mixed_n50_L740/code"
+    },
+    {
+      "match": "problems/square-lower-bounds/certificates/mixed_n145_L1224/code/score.py",
+      "reason": "byte-identical to the mixed_n50_L740/code/ file of the same name, retained by the 2026-09-28 packet",
+      "identical_to": "packing/resources/web/wand125-point-and-mixed-2026-09-28/square-packing-bounds/certificates/mixed_n50_L740/code"
+    },
+    {
+      "match": "problems/square-lower-bounds/certificates/mixed_n145_L1224/code/*",
+      "reason": "byte-identical to the mixed_n101_L1028/code/ file of the same name, retained by the 2026-10-02 linear packet",
+      "identical_to": "packing/resources/web/wand125-linear-certificates-2026-10-02/square-packing-bounds/certificates/mixed_n101_L1028/code"
+    },
+    {
+      "match": "problems/square-lower-bounds/certificates/mixed_n145_L1224/requirements.txt",
+      "reason": "byte-identical to mixed_n101_L1028/requirements.txt, retained by the 2026-10-02 linear packet",
+      "identical_to": "packing/resources/web/wand125-linear-certificates-2026-10-02/square-packing-bounds/certificates/mixed_n101_L1028/requirements.txt"
+    }
+  ]
+}

@@ -18,6 +18,7 @@ from pathlib import Path
 from typing import Any
 
 import pytest
+import test_check_requests as requests_tests
 
 from devtools import capture_kingbird_catalogue as capture_tool
 from devtools import check_requests
@@ -345,6 +346,90 @@ def test_github_differences_each_need_an_owner_and_a_failure_is_not_checked() ->
     assert failed.unchecked == ["GitHub issues: `gh api` failed: gh: not found"]
     skipped = sweep.github_section(record, offline=True, compare_github=refused)
     assert skipped.unchecked == ["GitHub issues: skipped by --offline"]
+
+
+def test_a_report_without_the_intake_label_needs_action_and_names_the_command() -> None:
+    """The pass adds the label under the `github-workflows` grant, so the step is the
+    command, and without the grant the issue is listed for the owner. A new issue's step
+    gives the label by stage 0's criterion. A comment edited after `read_through` on the
+    same issue keeps its own step: read it."""
+    record = {"repository": "jlevy/squares"}
+    differences = [
+        "#529 reports an item for intake without the `intake` label",
+        "#529: unread comment URL (x, 2026-10-01T00:00:00Z, edited 2026-10-02T00:00:00Z)",
+        "#530 is not in the record: New result",
+    ]
+    section = sweep.github_section(record, offline=False, compare_github=lambda _: differences)
+    assert [i.state for i in section.items] == [sweep.NEEDS_OWNER] * 3
+    assert section.items[0].step == (
+        "add the label under the github-workflows grant "
+        "(gh issue edit 529 --add-label intake); "
+        "without the grant, list the issue for the owner"
+    )
+    assert section.items[1].step.startswith("read it:")
+    assert section.items[2].step.endswith(
+        "if it reports a new item for intake (a result, a counterexample or a method), "
+        "give it the `intake` label, and mark an entry of another kind intake: true"
+    )
+    assert sweep.needing_action([section]) == section.items
+
+
+def test_each_kind_of_difference_the_comparison_reports_gets_its_own_step() -> None:
+    """The sweep chooses a step by matching `check_requests`'s wording, and a difference
+    that matches nothing falls through to "reconcile". These are the comparison's own
+    differences on a small fixture, one of each kind, so a message reworded in
+    `check_requests` and in its tests fails here instead of reaching a pass with the
+    wrong step."""
+    issue, reply, comment = requests_tests.issue, requests_tests.reply, requests_tests.comment
+    recorded = requests_tests.record(
+        issue(
+            replies=[reply(1, "2026-10-01"), reply(9, "2026-10-01")],
+            read_through="2026-10-01T12:00:00Z",
+        ),
+        issue(number=8, kind="other", intake=True, state="closed", closed="2026-10-03"),
+        issue(number=6),
+    )
+    live: dict[str, Any] = {
+        "repos/owner/repo/issues?state=all&per_page=100": [
+            {"number": 7, "state": "open", "title": "A request", "labels": []},
+            {"number": 8, "state": "open", "title": "A method", "labels": []},
+            {"number": 20, "state": "open", "title": "New", "labels": [requests_tests.INTAKE]},
+        ],
+        "repos/owner/repo/issues/7/comments?per_page=100": [
+            comment(1, "owner", "2026-10-01T10:00:00Z"),
+            comment(2, "owner", "2026-10-02T10:00:00Z"),
+            comment(4, "someone", "2026-10-02T12:00:00Z"),
+            comment(5, "someone", "2026-09-30T12:00:00Z", updated="2026-10-02T09:00:00Z"),
+        ],
+        "repos/owner/repo/issues/8/comments?per_page=100": [],
+    }
+    section = sweep.github_section(
+        recorded,
+        offline=False,
+        compare_github=lambda r: check_requests.compare_github(r, live.__getitem__),
+    )
+    reconcile = "reconcile result-requests.yaml with the issue"
+    label = "add the label under the github-workflows grant (gh issue edit {} --add-label"
+    expected = [
+        ("#20", "enter it in result-requests.yaml with triage: pending"),
+        ("#7", label.format(7)),
+        ("#7:", "record the reply under the issue's replies"),
+        ("#7:", "read it: map any result it reports"),
+        ("#7:", "read it: map any result it reports"),
+        ("#7:", reconcile),
+        ("#8", reconcile),
+        ("#8", label.format(8)),
+        ("#6", reconcile),
+    ]
+    assert [item.what.split(" ", 1)[0] for item in section.items] == [n for n, _ in expected]
+    for item, (_, step) in zip(section.items, expected, strict=True):
+        assert item.step.startswith(step), (item.what, item.step)
+        assert item.state == sweep.NEEDS_OWNER
+    assert [item.what for item in section.items if item.step == reconcile] == [
+        f"#7: recorded reply not on the issue: {requests_tests.URL.format(9)}",
+        "#8 is open there and closed here",
+        "#6 is in the record and not on owner/repo",
+    ]
 
 
 def test_a_blocker_is_read_only_from_a_sentence_that_says_something_waits() -> None:
@@ -779,3 +864,333 @@ def test_the_capture_command_reports_a_failed_transcription_and_exits_1(
     assert capture_tool.main(["--html", str(page), "--out", str(out)]) == 1
     assert "capture failed:" in capsys.readouterr().err
     assert not out.exists()
+
+
+# -- Regularization owed --------------------------------------------------------------
+
+
+def _deferral_beads(state: str = "in_progress") -> dict[str, str]:
+    """Every bead the committed lists defer regularization to, in one state."""
+    from devtools import default_drawings as defaults  # noqa: PLC0415
+
+    return {alias: state for _where, alias in defaults.deferrals()}
+
+
+def _drawings(tmp_path: Path, n: int, state: str) -> Path:
+    """The committed default-drawings record with count `n` put in `state`."""
+    from devtools import default_drawings as defaults  # noqa: PLC0415
+
+    record = json.loads(defaults.RECORD.read_text(encoding="utf-8"))
+    for row in record["states"]:
+        if row["n"] == n:
+            row["state"] = state
+    path = tmp_path / "default-drawings.json"
+    path.write_text(defaults.text(record), encoding="utf-8")
+    return path
+
+
+def _corrected(monkeypatch: pytest.MonkeyPatch, n: int) -> None:
+    """Declare count `n`'s deferral a corrected witness's, at the record's own witness: since
+    the house rule, the only deferral the list may add (`default_drawings.CORRECTED`)."""
+    from devtools import default_drawings as defaults  # noqa: PLC0415
+
+    record = json.loads(defaults.RECORD.read_text(encoding="utf-8"))
+    witness = next(row["witness"] for row in record["states"] if row["n"] == n)
+    fix = defaults.Correction(
+        witness["source"], witness.get("path"), "an-earlier-revision", witness["side"]
+    )
+    monkeypatch.setitem(defaults.CORRECTED, n, fix)
+
+
+def _first(state: str) -> int:
+    from devtools import default_drawings as defaults  # noqa: PLC0415
+
+    record = json.loads(defaults.RECORD.read_text(encoding="utf-8"))
+    found = next((row["n"] for row in record["states"] if row["state"] == state), None)
+    if found is None:
+        pytest.skip(f"the data holds no {state} count")
+    return int(found)
+
+
+def test_every_pending_count_is_owned_by_the_bead_its_allowlist_entry_names(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """think-9qm5: the owner made regularizing every new house part of the standard
+    intake, so the sweep lists each count whose drawing is pending regularization with the
+    bead that owns its runs, a corrected witness's count a test allowed among them, and
+    each decision that still owes runs and each exemption with theirs. While those beads
+    are open nothing needs action; a bead that closes leaves its counts needing an owner."""
+    from devtools import default_drawings as defaults  # noqa: PLC0415
+
+    n = _first(defaults.REGULAR_AS_PUBLISHED)
+    record = _drawings(tmp_path, n, defaults.PENDING)
+    _corrected(monkeypatch, n)
+    allowed = {**defaults.PENDING_ALLOWED, n: "think-aaaa: re-housed by a test adoption"}
+    states = {**_deferral_beads(), "think-aaaa": "open"}
+    section = sweep.regularization_section(_beads(**states), record=record, allowed=allowed)
+    assert section.title == "Regularization owed"
+    assert all(item.state == sweep.OWNED for item in section.items)
+    pending = [item for item in section.items if " pending: " in item.what]
+    assert sorted(int(item.what.split()[2]) for item in pending) == sorted(allowed)
+    added = next(item for item in pending if item.what.startswith(f"n = {n} "))
+    assert (added.what, added.bead, added.bead_state) == (
+        f"n = {n} pending: re-housed by a test adoption",
+        "think-aaaa",
+        "open",
+    )
+    assert "When a Witness Changes" in added.step
+    for count, entry in defaults.PENDING_ALLOWED.items():
+        (item,) = [found for found in pending if found.what.startswith(f"n = {count} ")]
+        assert entry.startswith(f"{item.bead}: "), count
+    owing = {count for count, held in defaults.SETTLED.items() if held.owed}
+    decided = [item for item in section.items if " decided no better " in item.what]
+    assert len(decided) <= len(owing)
+    assert all(item.bead == "think-0ut1" for item in decided if "#518" in item.what)
+    assert section.notes[0].startswith("Regularization states of 324 counts: ")
+    # One count is pending once the live list is empty, as it is from #654 up.
+    counts = "pending count" if len(allowed) == 1 else "pending counts"
+    assert (
+        f"Owed: {len(allowed)} {counts}, {len(allowed)} of them in PENDING_ALLOWED"
+        in (section.notes[0])
+    )
+
+    closed = sweep.regularization_section(
+        _beads(**{**states, "think-aaaa": "closed"}), record=record, allowed=allowed
+    )
+    orphaned = [item for item in closed.items if item.state == sweep.NEEDS_OWNER]
+    assert [(item.what, item.bead, item.bead_state) for item in orphaned] == [
+        (added.what, "think-aaaa", "closed")
+    ]
+    assert sweep.needing_action([closed]) == orphaned
+
+
+def test_each_decision_and_exemption_is_owned_by_the_bead_it_names() -> None:
+    """Review A2 of #650: the sweep exists to catch a bead that closes while it still owns
+    a count. Each decision whose `SETTLED` entry still owes runs or an outcome, and each
+    exemption, is listed once with the bead its entry names (`owed` first, the exemption's
+    evidence anywhere, as `default_drawings.deferrals` reads them), owned while that bead
+    is open; closing those beads leaves exactly their items needing an owner."""
+    from devtools import default_drawings as defaults  # noqa: PLC0415
+
+    rows = {
+        row["n"]: row
+        for row in json.loads(defaults.RECORD.read_text(encoding="utf-8"))["states"]
+    }
+    owes: dict[int, str] = {}
+    exempt: dict[int, str] = {}
+    what: dict[int, str] = {}
+    for n, held in defaults.SETTLED.items():
+        if held.owed and rows[n]["state"] == defaults.DECIDED:
+            bead = defaults.BEAD.match(held.owed)
+            assert bead is not None, n
+            owes[n] = bead[0]
+            owed = held.owed[bead.end() :].lstrip(":; ").strip()
+            what[n] = f"n = {n} decided no better on its witness, still owed: {owed}"
+        if held.state == defaults.EXEMPT and rows[n]["state"] == defaults.EXEMPT:
+            bead = defaults.BEAD.search(held.evidence)
+            assert bead is not None, n
+            exempt[n] = bead[0]
+            what[n] = f"n = {n} exempt: {held.outcome}"
+    if not owes or not exempt:
+        pytest.skip("the data holds no decision that owes runs, or no exemption")
+    states = _deferral_beads()
+
+    def listed(section: sweep.Section, words: str) -> dict[int, sweep.Item]:
+        found = [item for item in section.items if words in item.what]
+        by_n = {int(item.what.split()[2]): item for item in found}
+        assert len(by_n) == len(found), words
+        return by_n
+
+    section = sweep.regularization_section(_beads(**states))
+    decided = listed(section, " decided no better on its witness, still owed: ")
+    exempted = listed(section, " exempt: ")
+    assert {n: item.bead for n, item in decided.items()} == owes
+    assert {n: item.bead for n, item in exempted.items()} == exempt
+    for n, item in [*decided.items(), *exempted.items()]:
+        assert (item.what, item.state, item.bead_state) == (what[n], sweep.OWNED, "in_progress")
+    assert sweep.needing_action([section]) == []
+
+    closing = {*owes.values(), *exempt.values()}
+    assert not closing & {
+        found[0]
+        for entry in defaults.PENDING_ALLOWED.values()
+        if (found := defaults.BEAD.match(entry))
+    }
+    closed = sweep.regularization_section(
+        _beads(**{**states, **dict.fromkeys(closing, "closed")})
+    )
+    orphaned = sweep.needing_action([closed])
+    assert sorted(item.what for item in orphaned) == sorted(
+        item.what for item in [*decided.values(), *exempted.values()]
+    )
+    assert {item.bead_state for item in orphaned} == {"closed"}
+
+
+def test_an_allowlist_entry_naming_a_bead_the_store_lacks_needs_an_owner(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Review A2 of #650: an entry whose bead the store does not have owns nothing. Where
+    the live list is empty, as from #654 up, a regular count is made pending for it, as a
+    corrected witness's: since the house rule, the only deferral the list may add."""
+    from devtools import default_drawings as defaults  # noqa: PLC0415
+
+    record = defaults.RECORD
+    if defaults.PENDING_ALLOWED:
+        n = min(defaults.PENDING_ALLOWED)
+    else:
+        n = _first(defaults.REGULAR_AS_PUBLISHED)
+        record = _drawings(tmp_path, n, defaults.PENDING)
+        _corrected(monkeypatch, n)
+    allowed = {**defaults.PENDING_ALLOWED, n: "think-zzzz: a corrected witness in a test"}
+    states = _deferral_beads()
+    assert "think-zzzz" not in states
+    section = sweep.regularization_section(_beads(**states), record=record, allowed=allowed)
+    action = sweep.needing_action([section])
+    assert [(item.what, item.state, item.bead, item.bead_state) for item in action] == [
+        (
+            f"n = {n} pending: a corrected witness in a test",
+            sweep.NEEDS_OWNER,
+            "think-zzzz",
+            "no such bead",
+        )
+    ]
+
+
+@pytest.mark.parametrize("broken", ["record", "index"])
+def test_an_unreadable_record_or_index_needs_action_and_does_not_stop_the_sweep(
+    tmp_path: Path, broken: str
+) -> None:
+    """Review A4 of #650: a malformed `default-drawings.json` raised `JSONDecodeError`, and
+    a missing index `FileNotFoundError`, and `make intake` ended in a traceback with no
+    other section shown. Each is now not checked, and needs action."""
+    from devtools import default_drawings as defaults  # noqa: PLC0415
+
+    record, index = defaults.RECORD, defaults.INDEX
+    if broken == "record":
+        record = tmp_path / "default-drawings.json"
+        record.write_text('{"contract": ', encoding="utf-8")
+    else:
+        index = tmp_path / "missing-index.json"
+    section = sweep.regularization_section(
+        _beads(**_deferral_beads()), record=record, index=index
+    )
+    error = "JSONDecodeError" if broken == "record" else "FileNotFoundError"
+    (unchecked,) = section.unchecked
+    assert unchecked.startswith(
+        "regularization: packing/atlas/known-best/default-drawings.json or the layer's "
+        f"index could not be read ({error}: "
+    )
+    (item,) = sweep.needing_action([section])
+    assert item.what.startswith(
+        f"the regularization record or the layer's index could not be read: {error}: "
+    )
+    assert section.items == [item]
+    assert "default_drawings --check" in item.step
+
+
+@pytest.mark.parametrize("error", [KeyError("bead"), TypeError("not a bead")])
+def test_a_fault_past_the_two_reads_raises_rather_than_reading_as_a_broken_record(
+    monkeypatch: pytest.MonkeyPatch, error: Exception
+) -> None:
+    """Review B1 of #650: the A4 guard wrapped the whole section, so a fault in sorting the
+    record into items, such as a bead store that raises, read as "the record or the
+    layer's index could not be read", and its step sent the reader to two checks that
+    pass. Only the record's read and the gate's are guarded now; the fault raises."""
+
+    def faulty(_self: sweep.Beads, _alias: str) -> str:
+        raise error
+
+    monkeypatch.setattr(sweep.Beads, "state", faulty)
+    with pytest.raises(type(error)) as raised:
+        sweep.regularization_section(_beads(**_deferral_beads()))
+    assert raised.value is error
+
+
+def test_a_pending_count_no_list_names_needs_action_once(tmp_path: Path) -> None:
+    """A count a change made pending without allowing it is what the records tier fails
+    on; the sweep lists it once, as needing action, not again as the gate's problem."""
+    from devtools import default_drawings as defaults  # noqa: PLC0415
+
+    n = _first(defaults.REGULAR_AS_PUBLISHED)
+    record = _drawings(tmp_path, n, defaults.PENDING)
+    section = sweep.regularization_section(_beads(**_deferral_beads()), record=record)
+    action = sweep.needing_action([section])
+    assert [item.what.split(":")[0] for item in action] == [
+        f"n = {n} is pending and PENDING_ALLOWED does not name it"
+    ]
+    assert "allow it with the open bead that owns the runs" in action[0].step
+    # It names `CORRECTED`, which the state gate holds every entry to (review C6 of #660).
+    assert "name the witness it replaced in default_drawings.CORRECTED" in action[0].step
+    # It points to the house rule rather than restate it (review A14 of #660).
+    assert action[0].step.endswith('(result-import.md, "The House Rule")')
+
+
+def test_anything_else_the_state_gate_fails_on_needs_action(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """A listed count that is no longer pending: the list must come down in the change that
+    decided it, and a pass that leaves it there has not finished."""
+    from devtools import default_drawings as defaults  # noqa: PLC0415
+
+    n = _first(defaults.REGULARIZED_STATE)
+    _corrected(monkeypatch, n)
+    allowed = {**defaults.PENDING_ALLOWED, n: "think-aaaa: a test"}
+    section = sweep.regularization_section(
+        _beads(**_deferral_beads(), **{"think-aaaa": "open"}),
+        record=defaults.RECORD,
+        allowed=allowed,
+    )
+    assert [item.what for item in sweep.needing_action([section])] == [
+        (
+            "the regularization-state gate fails: "
+            f"n={n}: PENDING_ALLOWED names it, but it is regularized; take it off the list"
+        )
+    ]
+
+
+def test_a_missing_record_is_not_checked(tmp_path: Path) -> None:
+    section = sweep.regularization_section(None, record=tmp_path / "missing.json")
+    assert section.items == []
+    assert section.unchecked == [
+        "regularization: packing/atlas/known-best/default-drawings.json is missing"
+    ]
+
+
+def test_a_record_of_another_contract_needs_action_and_does_not_stop_the_sweep(
+    tmp_path: Path,
+) -> None:
+    record = tmp_path / "default-drawings.json"
+    record.write_text(json.dumps({"contract": "something/v1", "states": []}), encoding="utf-8")
+    section = sweep.regularization_section(None, record=record)
+    assert [item.what for item in sweep.needing_action([section])] == [
+        (
+            "the regularization-state gate fails: packing/atlas/known-best/"
+            "default-drawings.json is not a packing.squares:DefaultDrawings/v2 record"
+        )
+    ]
+    assert section.notes[0].startswith("Regularization states of 0 counts. Owed: 0 pending")
+
+
+def test_the_sweep_reports_regularization_with_the_record_side_queues() -> None:
+    """The section is part of every sweep, `--offline` and `--json` included, beside the
+    queues it follows; with no bead store its items are owned but unconfirmed."""
+
+    def network(*_: object) -> Any:
+        pytest.fail("--offline made a network call")
+
+    sections = sweep.sweep(
+        today=TODAY,
+        offline=True,
+        capture=None,
+        beads=None,
+        compare_github=network,
+        heads=network,
+        history=network,
+        fetch=network,
+    )
+    titles = [section.title for section in sections]
+    assert titles.index("Regularization owed") == titles.index("Record-side queues") + 1
+    (section,) = [section for section in sections if section.title == "Regularization owed"]
+    assert section.items
+    assert {item.bead_state for item in section.items} == {"unconfirmed: no bead store"}
+    assert "## Regularization owed" in sweep.markdown(sections, TODAY)

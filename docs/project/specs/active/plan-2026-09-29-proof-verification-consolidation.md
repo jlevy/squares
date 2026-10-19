@@ -1,7 +1,10 @@
 # Proof Verification Consolidation and Independent n11 Completion
 
 **Date:** 2026-09-29\
-**Status:** Reviewed; implementation pending\
+**Status:** Active. T-060 and its verification were integrated in PR #246 on 2026-09-30,
+with lossless evidence compression and shared kernels; packaging, efficiency and
+evidence-storage work remains under think-7nkq (nine checklist items, fourteen open
+beads).\
 **Workflow:** W7 pipeline improvement supporting W2 proof confirmation, with measured W5
 work\
 **Owners:** coordinator; Sol implementation; Astra at max reasoning for mathematical
@@ -320,7 +323,7 @@ The user additionally requires reproduction and audit of wand125’s verificatio
 then independent verification at least as fast and effective.
 **think-om8z** owns this work; **think-0jps** owns the reusable comparison tool.
 The
-[process map](../../verification-tooling.md#wand125-verification-process-and-independent-equivalence)
+[process map](../../guides/verification-tooling.md#wand125-verification-process-and-independent-equivalence)
 separates source acquisition, proposals, exact admission, continuous coverage, complete
 angle census, packing deduction and receipt publication.
 
@@ -487,7 +490,7 @@ first-party proof later succeeds.
 - [PR #246 and size audit](https://github.com/jlevy/squares/pull/246#issuecomment-5904217093)
 - [Proof review](../../reviews/review-2026-09-29-n11-optimality.md)
 - [Census/capture contract](../../reviews/review-2026-09-29-n11-optimality-census-contract.md)
-- [Tooling overview](../../verification-tooling.md)
+- [Tooling overview](../../guides/verification-tooling.md)
 - [Session 164](../../../../packing/campaign/agent-sessions/session-164-upstream-merge-and-certification.md)
 - [Validation tiers](../../../../development.md#validation-tiers)
 

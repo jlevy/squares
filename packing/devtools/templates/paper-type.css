@@ -111,13 +111,12 @@
   }
 }
 
-/* The reading measure: forty of the base, which at 18px is the same 720px KPress's
-   default of forty-five gives at 16px, so the larger type keeps the column's width.
+/* The reading measure: thirty-five of the base, 630px at 18px before column insets.
    Declared on the scopes KPress declares its own on, so it wins there. */
 :root,
 .kpress,
 .kpress-page-main {
-  --kpress-measure: calc(var(--kpress-font-size-base) * 40);
+  --kpress-measure: calc(var(--kpress-font-size-base) * 35);
 }
 
 /* Section headings at 1.2 of the prose at every width. KPress steps its h2 up to 1.4
@@ -271,4 +270,56 @@ a.site-popover-action,
       "Source Sans 3 Variable", "Site Sans Arial", system-ui, -apple-system, BlinkMacSystemFont,
       "Segoe UI", sans-serif;
   }
+}
+
+/* Publication credits shared by explainer papers and tutorials. */
+.centred {
+  text-align: center;
+}
+/* Publication credits are one component across papers and tutorials: one role a
+   line, names in bold, addresses as plain links, the version plain. The grid is one
+   column the width of the page, and an address in it may break anywhere: as a grid's
+   automatic column the credits were as wide as the optimality paper's source address,
+   wider than a phone's column, so every credit centred on a column wider than the page
+   and was cut at its edge. */
+.credits {
+  display: grid;
+  font-family: var(--kpress-font-sans);
+  font-feature-settings: var(--kpress-font-features-sans);
+  font-size: var(--kpress-font-size-normal);
+  gap: 0.2rem;
+  grid-template-columns: minmax(0, 1fr);
+  line-height: 1.45;
+  margin-block: 2rem 2.2rem;
+}
+.credits a {
+  overflow-wrap: anywhere;
+}
+.credits strong {
+  font-weight: var(--kpress-font-weight-sans-bold);
+}
+/* A paper that explains someone else's work credits its source first, by name and
+   address; a line's space then sets the paper's own credits apart from it, and another
+   sets the dates apart below. A paper with no source begins at its own credits, with no
+   space above them. A paper in a series ends with the series strip, which part it is
+   and the other parts by title, a line's space under the dates. */
+.credits .credits-source + .credits-own,
+.credits .publication-date,
+.credits .publication-date + .series {
+  margin-block-start: 1lh;
+}
+
+ul.credits {
+  font-weight: var(--kpress-font-weight-sans-regular);
+  list-style: none;
+  padding-inline-start: 0;
+}
+ul.credits > li {
+  margin: 0;
+}
+.kpress ul.credits > li::before {
+  content: none;
+}
+ul.credits > .publication-date {
+  margin-block-start: 1lh;
 }

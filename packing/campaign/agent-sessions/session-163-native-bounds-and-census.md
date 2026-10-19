@@ -74,7 +74,7 @@ session:
     evidence:
     - packing/campaign/agent-sessions/session-163-push-interrupted.log
     - docs/project/reviews/review-2026-09-29-rectangle-corner-bound.md
-    - docs/project/verification-tooling.md
+    - docs/project/guides/verification-tooling.md
     stop_reason: External scratch disappearance interrupted validation. Original phase deadline elapsed
       before recovery and remains unchanged.
     next_action: Restart bounded validation after verifying the restored external volume; do not claim
@@ -405,7 +405,7 @@ session:
     - docs/project/reviews/review-2026-09-29-rectangle-corner-bound.md
     files:
     - SYNOPSIS.md
-    - docs/project/verification-tooling.md
+    - docs/project/guides/verification-tooling.md
     - packing/frontier/results.yaml
     - docs/project/reviews/review-2026-09-29-rectangle-corner-bound.md
     checks: []
@@ -491,7 +491,7 @@ session:
   outputs:
   - docs/project/specs/active/plan-2026-09-29-native-rectangle-verification.md
   - docs/project/reviews/review-2026-09-29-rectangle-corner-bound.md
-  - docs/project/verification-tooling.md
+  - docs/project/guides/verification-tooling.md
   - packing/devtools/check_general_pose_tree_census.py
   - packing/devtools/compare_rectangle_density_bounds.py
   - packing/resources/web/wand125-tools-2026-09-29/receipts/native-n11-bound-comparison.json

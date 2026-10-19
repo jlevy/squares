@@ -21,7 +21,7 @@ starting geometry and its accepted review are
 and the
 [independent geometry review](../reviews/review-2026-09-13-bc303-t2-geometry.md).
 The
-[active n11 plan](../specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md)
+[active n11 plan](../specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md)
 and
 [selection theorem analysis](research-2026-09-12-n11-selection-routing-first-principles.md)
 keep local helper tests separate from selection over actual eleven-parent packings.

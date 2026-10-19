@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Render the site's own pages: the overview, the frontier atlas and the tutorial.
+"""Render the site's own pages: the overview, the frontier atlas and the tutorials.
 
 The published site used to have one top-level page, the n = 11 explainer. This renderer
 adds the front door and the pages around it, as the plan in
@@ -27,7 +27,7 @@ adds the front door and the pages around it, as the plan in
 - a forwarder at each address a page used to have (`MOVED_PAGES`), the papers' old
   addresses among them, so an old link still arrives, query and fragment kept
   (`forwarder_pages`);
-- `tutorial.html`, the tutorial rendered as a page;
+- `tutorial.html` and `tutorial-advanced.html`, the two tutorials as reader pages;
 - a forwarder at each address a page used to have (`MOVED_PAGES`), so an old link still
   arrives, query and fragment kept (`forwarder_pages`);
 - `visualize.html`, the Visualize section's first tab: the n = 1 to 324 film at full
@@ -84,17 +84,22 @@ PAPER_TYPE_CSS = TEMPLATES / "paper-type.css"
 OVERVIEW_ARTICLE = TEMPLATES / "overview-article.md"
 ATLAS_ARTICLE = TEMPLATES / "atlas-article.md"
 ABOUT_ARTICLE = TEMPLATES / "about-article.md"
+NEWS_ARTICLE = TEMPLATES / "news-article.md"
+#: The invitation to report results, with its button: About's and the overview's alike.
+REPORT_RESULTS = TEMPLATES / "report-results.md"
 RESULTS_ARTICLE = TEMPLATES / "all-results-article.md"
 VISUALIZE_ARTICLE = TEMPLATES / "visualize-article.md"
 PAPERS_ARTICLE = TEMPLATES / "papers-article.md"
 BROWSER = PACKING / "devtools" / "overview"
 FORWARD_SCRIPT = BROWSER / "forward.js"
+NEWS_CARDS_SCRIPT = BROWSER / "news-cards.js"
+NEWS_FORWARD_SCRIPT = BROWSER / "news-forward.js"
+NEWS_FILTERS_SCRIPT = BROWSER / "news-filters.js"
 TABLE_SCRIPT = BROWSER / "table.js"
 MATH_SCRIPT = BROWSER / "math.js"
 POPOVER_SCRIPT = BROWSER / "popover.js"
 ROW_POPOVER_SCRIPT = BROWSER / "row-popover.js"
-#: The atlas's two views and three sizes of tile, and the move between layouts. The
-#: drawing tabs' own script, `atlas-layer.js`, went with them on 2026-10-04 (think-k8x9).
+#: Atlas layout, size, scale and page-local Regularized/Original drawing controls.
 ATLAS_VIEW_SCRIPT = BROWSER / "atlas-view.js"
 ATLAS_GRID_SCRIPT = BROWSER / "atlas-grid.js"
 EMBED_SCRIPT = BROWSER / "embed.js"
@@ -129,11 +134,12 @@ OUTPUT = PACKING / "site"
 #: canonical URL and every address in a link preview is built from it (`canonical_url`,
 #: `head_tags`), and `render_n11_lower_bounds_explainer.SITE_URL` is this constant.
 SITE_URL = "https://jlevy.github.io/squares/"
-SITE_NAME = "Square Packing"
-#: The project's formal name (the owner, 2026-10-01). The name in the bar stays the
-#: shorter `SITE_NAME`; a page's title and its link preview carry the formal name
-#: (`page_title`, `head_tags`; think-3w07).
+#: The project's formal name (the owner, 2026-10-01). A page's title and its link
+#: preview carry it (`page_title`, `head_tags`; think-3w07), and since 2026-10-11 the
+#: bar's name in `site-nav.html` does too: the owner renamed the site from "Square
+#: Packing".
 PROJECT_NAME = "The Squares Project"
+SITE_NAME = PROJECT_NAME
 #: What stands between a page's own name and the project's in `<title>`.
 TITLE_SEPARATOR = " \u00b7 "
 #: The picture a shared link to any page of the site shows: the homepage's hero, the
@@ -155,8 +161,8 @@ DESCRIPTION_LIMIT = 160
 FLOWMARK_URL = "https://github.com/jlevy/flowmark"
 KPRESS_URL = "https://github.com/jlevy/kpress"
 #: Where a reader reports a result the site does not have yet: a new issue on the
-#: repository, which the overview's own statement links.
-NEW_ISSUE_URL = f"{repo_links.REPO_URL}/issues/new"
+#: repository, opened on its result-report form, which asks the name to credit.
+NEW_ISSUE_URL = f"{repo_links.REPO_URL}/issues/new?template=result-registration.md"
 OVERVIEW_DESCRIPTION = (
     "Packing unit squares in the smallest square: the problem, every current result, "
     "and how each one is verified."
@@ -170,8 +176,8 @@ ATLAS_DESCRIPTION = (
     "squares, with drawings, case records and the complete Frontier Survey."
 )
 PAPERS_DESCRIPTION = (
-    "Square packing from first principles, how record packings are found and verified, "
-    "and a three-part n = 11 series on lower bounds and optimality."
+    "Tutorials, papers and PDFs on square packing, with films and an interactive "
+    "workbench for exploring the problem and its proofs."
 )
 VISUALIZE_DESCRIPTION = (
     "The best packings known of n unit squares, n = 1 to 324, built one square at a "
@@ -195,10 +201,10 @@ def film_release_date() -> str:
     return f"{day.day} {day:%B}"
 
 
-#: The Visualize section's tabs, each its own page: its key, where it is served from the
-#: site's root, and its label. The film is the section's first tab and the bar's target.
+#: The Explanations section reuses the existing papers, film and workbench addresses.
+#: Each tab names its key, its address from the site root, and its label.
 VISUALIZE_TABS: tuple[tuple[str, str, str], ...] = (
-    ("film", "visualize.html", "Film"),
+    ("film", "papers.html#visuals", "Film"),
     ("workbench", "workbench/", "Workbench"),
 )
 FRONTIER_DESCRIPTION = (
@@ -254,8 +260,8 @@ class PaperRecord(NamedTuple):
 #: The site's papers, in reading order: the one list a new paper is entered in. They are
 #: the n = 11 series, read I, II, III, followed by standalone papers. Only records
 #: with a part number belong to that series (the plan of 2026-10-05,
-#: `docs/project/specs/active/plan-2026-10-05-n11-explainer-series.md`): the project's
-#: own lower bounds, the review of Kleddamag's s(11) > 31/8, and the review of the
+#: `docs/project/specs/done/plan-2026-10-05-n11-explainer-series.md`): the project's
+#: own lower bounds, the review of Overbeck's s(11) > 31/8, and the review of the
 #: optimality proof. The standalone methods tutorial follows the series and explains
 #: how record configurations are found and verified. `SITE_PAGES`, the cards
 #: (`overview_sections.PAPERS`), each paper's
@@ -406,12 +412,14 @@ def paper_path(slug: str, suffix: str = ".html") -> str:
 #: writes it. The navigation bar links only to these, and tests hold it to that.
 SITE_PAGES: tuple[str, ...] = (
     "index.html",
+    "news.html",
     "atlas.html",
     "about.html",
     RESULTS_PAGE,
     "papers.html",
     *(paper_path(paper.slug) for paper in PAPERS),
     "tutorial.html",
+    "tutorial-advanced.html",
     "visualize.html",
     "workbench/index.html",
     *DOCUMENT_PAGES,
@@ -471,8 +479,16 @@ FORWARDER = TEMPLATES / "site-forwarder.html"
 #: vendored kpress and the locked environment are inputs, as they are the explainer's.
 RENDER_INPUTS: tuple[Path, ...] = (
     Path(__file__).resolve(),
+    PACKING / "site-changelog.yaml",
+    PACKING / "site-changelog.schema.yaml",
+    PACKING / "devtools/render_changelog.py",
+    PACKING / "devtools/news_highlights.py",
     PACKING / "devtools/build_known_best_atlas.py",
     PACKING / "devtools/atlas_print_font.py",
+    PACKING / "devtools/default_drawings.py",
+    PACKING / "devtools/improvement_rule.py",
+    PACKING / "devtools/pictured_source.py",
+    PACKING / "devtools/evand_exact_certificates.py",
     PACKING / "devtools/fonts/atlas-print",
     SITE_CSS,
     PACKING / "devtools/templates/site-math.css",
@@ -487,6 +503,8 @@ RENDER_INPUTS: tuple[Path, ...] = (
     OVERVIEW_ARTICLE,
     ATLAS_ARTICLE,
     ABOUT_ARTICLE,
+    NEWS_ARTICLE,
+    REPORT_RESULTS,
     RESULTS_ARTICLE,
     VISUALIZE_ARTICLE,
     PAPERS_ARTICLE,
@@ -507,6 +525,7 @@ RENDER_INPUTS: tuple[Path, ...] = (
     PACKING / "atlas" / "known-best" / "regularized" / "index.json",
     PACKING / "atlas" / "known-best" / "regularized" / "rendering",
     REPO / repo_links.TUTORIAL,
+    REPO / repo_links.TUTORIAL_ADVANCED,
     REPO / repo_links.README,
     REPO / repo_links.SYNOPSIS,
     REPO / repo_links.CONVENTIONS,
@@ -735,6 +754,7 @@ def inputs() -> tuple[Path, ...]:
     """
     from devtools import overview_data  # noqa: PLC0415
     from devtools import render_n11_lower_bounds_explainer as explainer  # noqa: PLC0415
+    from devtools.evand_exact_certificates import COMPARISON_RECEIPT  # noqa: PLC0415
     from devtools.render_case_pages import CASES_INPUTS  # noqa: PLC0415
     from devtools.render_frontier_page import FRONTIER_INPUTS  # noqa: PLC0415
 
@@ -745,6 +765,7 @@ def inputs() -> tuple[Path, ...]:
                 BROWSER / "favicon-48.png",
                 BROWSER / "apple-touch-icon.png",
                 *overview_data.INPUTS,
+                COMPARISON_RECEIPT,
                 *FRONTIER_INPUTS,
                 *CASES_INPUTS,
                 *explainer.COMPOSITE_ASSETS,
@@ -772,12 +793,20 @@ def page_assets(*, styles: Sequence[Path] = ()) -> tuple[str, str]:
     pages prepare mathematics during the build and do not load that runtime.
     """
     from devtools import site_assets  # noqa: PLC0415
+    from devtools.render_n11_lower_bounds_explainer import (  # noqa: PLC0415
+        code_symbol_face_css,
+        kpress_static,
+    )
 
     bundle = site_assets.shared()
+    code_symbols = bundle.assets.stylesheet(
+        "code-symbols.css", code_symbol_face_css(kpress_static(), bundle.assets.face)
+    )
     own = (PAPER_TYPE_CSS, SITE_NAV_CSS, SITE_CSS, SITE_RESULT_CSS, *styles)
     head = "\n".join(
         [
             bundle.head(_FROM_ROOT),
+            site_assets.stylesheet_tag(code_symbols, _FROM_ROOT),
             *(
                 site_assets.stylesheet_tag(bundle.assets.stylesheet_file(path), _FROM_ROOT)
                 for path in own
@@ -808,7 +837,9 @@ def assert_fetches_only_assets(name: str, page: str) -> None:
 def nav_html(current: str, *, root: str = "") -> str:
     """The navigation bar, with the current page marked."""
     nav = SITE_NAV.read_text(encoding="utf-8")
-    nav = nav.replace("{{ROOT}}", root).replace("{{LOGO}}", site_logo())
+    nav = nav.replace("{{ROOT}}", root)
+    # Existing paper renderers and film callers share the Explanations destination.
+    current = {"papers": "explanations", "visualize": "explanations"}.get(current, current)
     marker = f'data-page="{current}"'
     if marker not in nav:
         raise SystemExit(f"site-nav.html has no entry for {current!r}")
@@ -881,7 +912,7 @@ def nav_shell(current: str, *, root: str, tabs: str = "") -> NavShell:
 
 
 def visualize_tabs(current: str, *, root: str = "") -> str:
-    """The Visualize section's tab bar, with the current tab marked.
+    """The Explanations section's tab bar, with the current tab marked.
 
     Each tab is a real link to its own page, so the bar needs no script and a tab can be
     opened, bookmarked and shared. Its look is `.site-tabs` in `site-nav.css`, the one
@@ -890,30 +921,18 @@ def visualize_tabs(current: str, *, root: str = "") -> str:
     the bar, not the slot, carries the rule on a page that has them.
     """
     if current not in {key for key, _, _ in VISUALIZE_TABS}:
-        raise SystemExit(f"the Visualize section has no tab {current!r}")
+        raise SystemExit(f"the Explanations section has no tab {current!r}")
     links = "".join(
         f'<a data-tab="{key}"{' aria-current="page"' if key == current else ""} '
         f'href="{root}{href}">{html.escape(label)}</a>'
         for key, href, label in VISUALIZE_TABS
     )
-    return f'<nav class="site-tabs" aria-label="Visualize">{links}</nav>'
+    return f'<nav class="site-tabs" aria-label="Visuals">{links}</nav>'
 
 
-#: The logo's size in the bar and the icon's in a tab, in CSS pixels: whole pixels, so
-#: each drawing's one-pixel frame (`packing_svg(frame_px=)`) lands on the pixel grid.
-#: `site-nav.css` sets the logo to the same size.
-SITE_LOGO_PX = 18
+#: The icon's size in a tab, in CSS pixels: whole pixels, so its one-pixel frame
+#: (`packing_svg(frame_px=)`) lands on the pixel grid.
 FAVICON_PX = 16
-
-
-@cache
-def site_logo() -> str:
-    """The site's mark beside its name in the bar: case 11, the drawing the tab's icon
-    is, in the bar's own ink so it turns over with the theme."""
-    from devtools.render_frontier_page import packing_svg  # noqa: PLC0415
-
-    svg = packing_svg(11, units=200, frame_px=SITE_LOGO_PX)
-    return svg.replace("<svg ", '<svg class="site-logo" ', 1)
 
 
 @cache
@@ -1242,19 +1261,37 @@ def _template_markdown(path: Path, values: dict[str, str]) -> str:
     )
 
 
+def report_results() -> str:
+    """The invitation to report a result, its two paragraphs and its button, as About
+    and the overview both carry it under a heading of their own."""
+    from devtools import overview_sections  # noqa: PLC0415
+
+    return _template_markdown(
+        REPORT_RESULTS,
+        {"NEW_ISSUE_URL": NEW_ISSUE_URL, "ARROW_RIGHT": overview_sections.arrow_icon("right")},
+    )
+
+
 def overview_page() -> Page:
     """A short introduction, bounded previews, papers, and links to the full pages."""
-    from devtools import overview_data, overview_sections  # noqa: PLC0415
+    from devtools import (  # noqa: PLC0415
+        news_highlights,
+        overview_data,
+        overview_sections,
+        render_changelog,
+    )
 
     overview = overview_data.load()
     values = {
         "HERO": overview_sections.hero(),
+        "NEWS_PREVIEW": news_highlights.render(render_changelog.load()),
         "ATLAS_GRID": overview_sections.atlas_preview(),
         "PAPER_CARDS": overview_sections.paper_cards(),
         "DOCUMENTATION_BLOCK": overview_sections.documentation_block(),
         "PDF_CARDS": overview_sections.homepage_pdf_card(),
         "VIDEO_PLAYER": overview_sections.homepage_video(FILM_URL),
         "RECENT": overview_sections.recent_table(overview),
+        "REPORT_RESULTS": report_results(),
         "RESULTS_LINK_ATTRIBUTES": overview_sections.all_results_link_attributes(overview),
         "OTHER_PROJECTS": overview_sections.other_project_cards(overview),
         "ARROW_RIGHT": overview_sections.arrow_icon("right"),
@@ -1266,12 +1303,13 @@ def overview_page() -> Page:
         markdown,
         name="index.html",
         current="overview",
-        title="Square Packing: Bounds, Results and Best Packings",
+        title=PROJECT_NAME,
         description=OVERVIEW_DESCRIPTION,
         toc=False,
         rewrite_body=_case_links,
         page_styles=(HOMEPAGE_CSS,),
         page_scripts=(
+            NEWS_CARDS_SCRIPT,
             FILM_SCRIPT,
             FORWARD_SCRIPT,
             TABLE_SCRIPT,
@@ -1315,15 +1353,40 @@ def atlas_page() -> Page:
     )
 
 
+def news_page() -> Page:
+    """Public contribution and launch announcements, grouped by day."""
+    from devtools import render_changelog  # noqa: PLC0415
+
+    markdown = _template_markdown(
+        NEWS_ARTICLE, {"NEWS": render_changelog.render_news(render_changelog.load())}
+    )
+    return kpress_page(
+        markdown,
+        name="news.html",
+        current="news",
+        title="News",
+        description=(
+            "Project news: newly launched results, papers, downloads and site features, "
+            "with the retained contribution history."
+        ),
+        toc=False,
+        page_scripts=(NEWS_CARDS_SCRIPT, NEWS_FILTERS_SCRIPT, NEWS_FORWARD_SCRIPT),
+        rewrite_body=_case_links,
+    )
+
+
 def about_page() -> Page:
     """The project narrative, approach, attribution, and supporting resources."""
-    from devtools import overview_sections  # noqa: PLC0415
+    from devtools import overview_sections, render_changelog  # noqa: PLC0415
 
     markdown = _template_markdown(
         ABOUT_ARTICLE,
         {
-            "NEW_ISSUE_URL": NEW_ISSUE_URL,
+            "REPORT_RESULTS": report_results(),
             "DOCUMENTATION_BLOCK": overview_sections.documentation_block(),
+            "NEWS_LEGACY_ANCHORS": render_changelog.legacy_news_anchors(
+                render_changelog.load()
+            ),
         },
     )
     return kpress_page(
@@ -1338,7 +1401,7 @@ def about_page() -> Page:
         ),
         toc=False,
         rewrite_body=_case_links,
-        page_scripts=(POPOVER_SCRIPT,),
+        page_scripts=(POPOVER_SCRIPT, NEWS_FORWARD_SCRIPT),
     )
 
 
@@ -1375,8 +1438,18 @@ def papers_page() -> Page:
     series are the cards' own addresses, filled from the one constant each."""
     from devtools import overview_sections  # noqa: PLC0415
 
+    tutorials = tuple(
+        paper
+        for paper in overview_sections.PAPERS
+        if paper.href in {"tutorial.html", "tutorial-advanced.html"}
+    )
     values = {
-        "PAPER_CARDS": overview_sections.paper_cards(),
+        "TUTORIAL_CARDS": overview_sections.paper_cards(papers=tutorials),
+        "PAPER_CARDS": overview_sections.paper_cards(
+            papers=tuple(paper for paper in overview_sections.PAPERS if paper not in tutorials)
+        ),
+        "VISUAL_TABS": visualize_tabs("film"),
+        "FILM": film_markdown(inline=True),
         "PDF_CARDS": overview_sections.pdf_cards(),
         "PDF_NOTE": overview_sections.pdf_note(),
         "LOWER_BOUNDS_PAPER": overview_sections.LOWER_BOUNDS_PAPER,
@@ -1391,10 +1464,11 @@ def papers_page() -> Page:
     return kpress_page(
         markdown,
         name="papers.html",
-        current="papers",
-        title="Papers",
+        current="explanations",
+        title="Explanations",
         description=PAPERS_DESCRIPTION,
         toc=False,
+        page_scripts=(FILM_SCRIPT,),
     )
 
 
@@ -1466,13 +1540,8 @@ def case_records() -> list[Page]:
     return build()
 
 
-def visualize_page() -> Page:
-    """The Visualize section's first tab: the film of the ascent at full size.
-
-    The film starts when the page is visited: its markup mutes it and marks it
-    `data-autoplay`, and `overview/film.js` starts it unless the reader asks for reduced
-    motion or the page is framed in a popover. No other page carries that script, so no
-    other film on the site starts unasked."""
+def film_markdown(*, inline: bool = False) -> str:
+    """The shared film and its evidence note; inline readers choose when to play."""
     values = {
         "FILM_URL": FILM_URL,
         "SHORT_FILM_URL": SHORT_FILM_URL,
@@ -1483,10 +1552,26 @@ def visualize_page() -> Page:
     markdown = fill(
         VISUALIZE_ARTICLE.read_text(encoding="utf-8"), values, where=VISUALIZE_ARTICLE.name
     )
+    if inline:
+        heading = '<h1 class="site-visually-hidden" id="visualize">Visualize</h1>'
+        if not markdown.startswith(heading):
+            raise ValueError("the film template no longer starts with its page heading")
+        markdown = markdown.removeprefix(heading).replace(" data-autoplay", "", 1)
+    return markdown
+
+
+def visualize_page() -> Page:
+    """The Visualize section's first tab: the film of the ascent at full size.
+
+    The film starts when the page is visited: its markup mutes it and marks it
+    `data-autoplay`, and `overview/film.js` starts it unless the reader asks for reduced
+    motion or the page is framed in a popover. No other page carries that script, so no
+    other film on the site starts unasked."""
+    markdown = film_markdown()
     return kpress_page(
         markdown,
         name="visualize.html",
-        current="visualize",
+        current="explanations",
         title="Visualize",
         description=VISUALIZE_DESCRIPTION,
         toc=False,
@@ -1507,11 +1592,13 @@ def _document_page(name: str) -> Callable[[], Page]:
 #: The pages this renderer owns, by served name.
 PAGES: dict[str, Callable[[], Page]] = {
     "index.html": overview_page,
+    "news.html": news_page,
     "atlas.html": atlas_page,
     "about.html": about_page,
     RESULTS_PAGE: results_page,
     "papers.html": papers_page,
     "tutorial.html": tutorial_page,
+    "tutorial-advanced.html": _document_page("tutorial-advanced.html"),
     "visualize.html": visualize_page,
     **{name: _document_page(name) for name in DOCUMENT_PAGES},
 }

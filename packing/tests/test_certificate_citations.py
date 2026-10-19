@@ -14,11 +14,14 @@ from pathlib import Path
 
 import pytest
 
+from devtools import upper_bound_reports
 from devtools.check_certificate_citations import (
     CASES,
     DEFERRAL_DAYS,
     FRONTIER,
+    HORIZON,
     UndeclaredError,
+    beyond_horizon_evidence,
     cited_certificates,
     declared_sizes,
     deferred,
@@ -180,6 +183,44 @@ def test_a_method_limit_result_cannot_stand_in_for_a_bound() -> None:
 
     assert identifier not in method_limit_evidence(evidence)
     assert identifier in orphaned_evidence(evidence)
+
+
+def test_the_horizon_is_the_import_tools_horizon() -> None:
+    assert HORIZON == upper_bound_reports.HORIZON
+
+
+def test_the_source_register_stands_in_only_past_the_horizon() -> None:
+    """Kevin Fang's direct certificates at 380, 381 and 382 have no case record to cite
+    them; the source that lists their replay and its rows at those counts do."""
+    evidence = evidence_by_id()
+    cited = beyond_horizon_evidence(evidence)
+
+    assert "E-fang-direct-exact-feasibility" in cited
+    assert "E-fang-direct-exact-feasibility" not in orphaned_evidence(evidence)
+    # Fang's theorem replay reaches 211 to 308, inside the corpus: its cases cite it.
+    assert "E-fang-excess-theorem-exact-feasibility" not in cited
+
+
+def test_a_count_inside_the_horizon_takes_the_exception_away() -> None:
+    """Widen the direct replay's scope to one in-horizon count and it is an orphan again."""
+    evidence = dict(evidence_by_id())
+    identifier = "E-fang-direct-exact-feasibility"
+    evidence[identifier] = {**evidence[identifier], "scope": {"n_values": [300, 380]}}
+
+    assert identifier not in beyond_horizon_evidence(evidence)
+    assert identifier in orphaned_evidence(evidence)
+
+
+def test_a_count_with_no_row_of_its_source_takes_the_exception_away() -> None:
+    """Every count needs a row of a source that lists the evidence."""
+    coverage = {
+        "sources": [{"id": "s", "evidence": ["E-x"]}],
+        "beyond_horizon_claims": [{"n": 400, "source_id": "s"}, {"n": 401, "source_id": "t"}],
+    }
+    evidence = {"E-x": {"scope": {"n_values": [400]}}, "E-y": {"scope": {"n_values": [400]}}}
+    assert beyond_horizon_evidence(evidence, coverage) == {"E-x"}
+    evidence["E-x"] = {"scope": {"n_values": [400, 401]}}
+    assert beyond_horizon_evidence(evidence, coverage) == set()
 
 
 def test_evidence_refs_are_found_wherever_the_schema_puts_them() -> None:

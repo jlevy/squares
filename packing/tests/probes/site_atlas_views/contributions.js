@@ -28,6 +28,7 @@
     colors: {
       recent: tokenColor("--site-new-result"),
       upper: tokenColor("--site-bound-upper"),
+      lower: tokenColor("--site-bound-lower"),
       dark: tokenColor("--kpress-doc-muted"),
       neutral: tokenColor("--kpress-doc-text"),
     },
@@ -35,7 +36,14 @@
     lower_gap_label: summary.querySelector(".site-atlas-gap-values .is-lower")?.textContent,
     lower_bound_label: summary.querySelector(".site-atlas-pop-bound .is-lower mn")?.textContent,
     lower_citation: color(".site-atlas-pop-which.is-lower"),
+    bound_prefix: color(".site-atlas-pop-bound > :not(.is-lower):not(.is-upper)"),
+    lower_value: color(".site-atlas-pop-bound .is-lower"),
     equality_upper: color(".site-atlas-pop-bound .is-exact-value"),
+    number_colors: [
+      ...new Set(
+        [...page.querySelectorAll(".site-atlas-n")].map((number) => getComputedStyle(number).color),
+      ),
+    ],
     badges: [...summary.querySelectorAll(".site-atlas-badge")].map((badge) => ({
       glyph: badge.textContent?.trim(),
       style: badge.getAttribute("data-style"),

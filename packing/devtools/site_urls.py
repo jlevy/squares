@@ -92,6 +92,13 @@ PAGE_BUDGET_EXCEPTIONS: dict[str, tuple[int, str]] = {
         400_000,
         "Complete broad scope history and prepared exact bounds measure 304,237 bytes.",
     ),
+    "result/t-155.html": (
+        400_000,
+        (
+            "Fifty-nine counts' exact regularized sides, their regularizations and "
+            "prepared math measure 303,829 bytes."
+        ),
+    ),
     "atlas.html": (
         1_000_000,
         (
@@ -100,15 +107,25 @@ PAGE_BUDGET_EXCEPTIONS: dict[str, tuple[int, str]] = {
         ),
     ),
     "results.html": (
-        950_000,
+        1_100_000,
         (
-            "The complete registered-result table with prepared math measures 843,037 bytes "
-            "at 146 results."
+            "The complete registered-result table with prepared math measures 976,783 bytes "
+            "at 184 results, about 3.5 kB a row; it measured 843,037 at 146."
         ),
     ),
-    "tutorial.html": (
+    "result/t-180.html": (
+        400_000,
+        (
+            "The closed form's result, its scope of 264 counts and prepared math measure "
+            "341,524 bytes."
+        ),
+    ),
+    "tutorial-advanced.html": (
         800_000,
-        "The complete authored tutorial and prepared formulas measure 742,713 bytes.",
+        (
+            "The advanced tutorial retains the original technical derivations and reference "
+            "tables; the complete authored text and prepared formulas measure 771,603 bytes."
+        ),
     ),
     "papers/n11-lower-bounds-explainer.html": (
         1_500_000,

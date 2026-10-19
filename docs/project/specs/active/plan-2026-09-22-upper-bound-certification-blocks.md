@@ -648,9 +648,9 @@ integrates them.
   `think-3nc4`, `think-tow1` and `think-09q8`
 - [X-009](../../../../packing/campaign/explorations/X-009-where-a-new-packing-is-reachable.md),
   which sequenced recognition first
-- [Interval certification](plan-2026-08-28-interval-certification.md) and
-  [promotion pipeline](plan-2026-08-28-promotion-pipeline-implementation.md), the
-  instruments group R’s exact route and group C need
+- [Interval certification](../done/plan-2026-08-28-interval-certification.md) and
+  [promotion pipeline](../paused/plan-2026-08-28-promotion-pipeline-implementation.md),
+  the instruments group R’s exact route and group C need
 - [Atlas expansion to 324](plan-2026-09-07-atlas-expansion-to-324.md), which generated
   the records above 100
 - Commit `65af39faf`, the precedent block

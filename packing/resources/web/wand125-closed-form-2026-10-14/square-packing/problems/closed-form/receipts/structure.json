@@ -1,0 +1,553 @@
+{
+ "schema": "closed-form-structure/v1",
+ "tool": "structure/validate_family.py via structure/structure_all.py",
+ "validate_family_sha256": "fdd61866ca180e4373062f440cb8c61a626a2b71a411b63f5df46443d12a16a0",
+ "intervals": 34,
+ "all_ok": true,
+ "results": [
+  {
+   "index": 1,
+   "interval": "(0, 1/50]",
+   "checks": {
+    "family.json sha256": true,
+    "family_right.json sha256": true,
+    "validate_family": true,
+    "family interval": true,
+    "certified line = line through S_d0, S_d1": true,
+    "region bounds": true,
+    "regions use family/family_right": true
+   },
+   "validate_family_checks": 20,
+   "validate_family_failed": [],
+   "ok": true
+  },
+  {
+   "index": 2,
+   "interval": "[1/50, 1/20]",
+   "checks": {
+    "family.json sha256": true,
+    "family_right.json sha256": true,
+    "validate_family": true,
+    "family interval": true,
+    "certified line = line through S_d0, S_d1": true,
+    "region bounds": true,
+    "regions use family/family_right": true
+   },
+   "validate_family_checks": 20,
+   "validate_family_failed": [],
+   "ok": true
+  },
+  {
+   "index": 3,
+   "interval": "[1/20, 3/25]",
+   "checks": {
+    "family.json sha256": true,
+    "family_right.json sha256": true,
+    "validate_family": true,
+    "family interval": true,
+    "certified line = line through S_d0, S_d1": true,
+    "region bounds": true,
+    "regions use family/family_right": true
+   },
+   "validate_family_checks": 20,
+   "validate_family_failed": [],
+   "ok": true
+  },
+  {
+   "index": 4,
+   "interval": "[3/25, 4/25]",
+   "checks": {
+    "family.json sha256": true,
+    "family_right.json sha256": true,
+    "validate_family": true,
+    "family interval": true,
+    "certified line = line through S_d0, S_d1": true,
+    "region bounds": true,
+    "regions use family/family_right": true
+   },
+   "validate_family_checks": 20,
+   "validate_family_failed": [],
+   "ok": true
+  },
+  {
+   "index": 5,
+   "interval": "[4/25, 1/5]",
+   "checks": {
+    "family.json sha256": true,
+    "family_right.json sha256": true,
+    "validate_family": true,
+    "family interval": true,
+    "certified line = line through S_d0, S_d1": true,
+    "region bounds": true,
+    "regions use family/family_right": true
+   },
+   "validate_family_checks": 20,
+   "validate_family_failed": [],
+   "ok": true
+  },
+  {
+   "index": 6,
+   "interval": "[1/5, 19/50]",
+   "checks": {
+    "family.json sha256": true,
+    "family_right.json sha256": true,
+    "validate_family": true,
+    "family interval": true,
+    "certified line = line through S_d0, S_d1": true,
+    "region bounds": true,
+    "regions use family/family_right": true
+   },
+   "validate_family_checks": 20,
+   "validate_family_failed": [],
+   "ok": true
+  },
+  {
+   "index": 7,
+   "interval": "[19/50, 2/5]",
+   "checks": {
+    "family.json sha256": true,
+    "family_right.json sha256": true,
+    "validate_family": true,
+    "family interval": true,
+    "certified line = line through S_d0, S_d1": true,
+    "region bounds": true,
+    "regions use family/family_right": true
+   },
+   "validate_family_checks": 20,
+   "validate_family_failed": [],
+   "ok": true
+  },
+  {
+   "index": 8,
+   "interval": "(2/5, 81/200]",
+   "checks": {
+    "family.json sha256": true,
+    "family_right.json sha256": true,
+    "validate_family": true,
+    "family interval": true,
+    "certified line = line through S_d0, S_d1": true,
+    "region bounds": true,
+    "regions use family/family_right": true
+   },
+   "validate_family_checks": 20,
+   "validate_family_failed": [],
+   "ok": true
+  },
+  {
+   "index": 9,
+   "interval": "[81/200, 41/100]",
+   "checks": {
+    "family.json sha256": true,
+    "family_right.json sha256": true,
+    "validate_family": true,
+    "family interval": true,
+    "certified line = line through S_d0, S_d1": true,
+    "region bounds": true,
+    "regions use family/family_right": true
+   },
+   "validate_family_checks": 20,
+   "validate_family_failed": [],
+   "ok": true
+  },
+  {
+   "index": 10,
+   "interval": "[41/100, 21/50]",
+   "checks": {
+    "family.json sha256": true,
+    "family_right.json sha256": true,
+    "validate_family": true,
+    "family interval": true,
+    "certified line = line through S_d0, S_d1": true,
+    "region bounds": true,
+    "regions use family/family_right": true
+   },
+   "validate_family_checks": 20,
+   "validate_family_failed": [],
+   "ok": true
+  },
+  {
+   "index": 11,
+   "interval": "[21/50, 17/40]",
+   "checks": {
+    "family.json sha256": true,
+    "family_right.json sha256": true,
+    "validate_family": true,
+    "family interval": true,
+    "certified line = line through S_d0, S_d1": true,
+    "region bounds": true,
+    "regions use family/family_right": true
+   },
+   "validate_family_checks": 20,
+   "validate_family_failed": [],
+   "ok": true
+  },
+  {
+   "index": 12,
+   "interval": "[17/40, 43/100]",
+   "checks": {
+    "family.json sha256": true,
+    "family_right.json sha256": true,
+    "validate_family": true,
+    "family interval": true,
+    "certified line = line through S_d0, S_d1": true,
+    "region bounds": true,
+    "regions use family/family_right": true
+   },
+   "validate_family_checks": 20,
+   "validate_family_failed": [],
+   "ok": true
+  },
+  {
+   "index": 13,
+   "interval": "[43/100, 87/200]",
+   "checks": {
+    "family.json sha256": true,
+    "family_right.json sha256": true,
+    "validate_family": true,
+    "family interval": true,
+    "certified line = line through S_d0, S_d1": true,
+    "region bounds": true,
+    "regions use family/family_right": true
+   },
+   "validate_family_checks": 20,
+   "validate_family_failed": [],
+   "ok": true
+  },
+  {
+   "index": 14,
+   "interval": "[87/200, 11/25]",
+   "checks": {
+    "family.json sha256": true,
+    "family_right.json sha256": true,
+    "validate_family": true,
+    "family interval": true,
+    "certified line = line through S_d0, S_d1": true,
+    "region bounds": true,
+    "regions use family/family_right": true
+   },
+   "validate_family_checks": 20,
+   "validate_family_failed": [],
+   "ok": true
+  },
+  {
+   "index": 15,
+   "interval": "[11/25, 89/200]",
+   "checks": {
+    "family.json sha256": true,
+    "family_right.json sha256": true,
+    "validate_family": true,
+    "family interval": true,
+    "certified line = line through S_d0, S_d1": true,
+    "region bounds": true,
+    "regions use family/family_right": true
+   },
+   "validate_family_checks": 20,
+   "validate_family_failed": [],
+   "ok": true
+  },
+  {
+   "index": 16,
+   "interval": "[89/200, 9/20]",
+   "checks": {
+    "family.json sha256": true,
+    "family_right.json sha256": true,
+    "validate_family": true,
+    "family interval": true,
+    "certified line = line through S_d0, S_d1": true,
+    "region bounds": true,
+    "regions use family/family_right": true
+   },
+   "validate_family_checks": 20,
+   "validate_family_failed": [],
+   "ok": true
+  },
+  {
+   "index": 17,
+   "interval": "[9/20, 91/200]",
+   "checks": {
+    "family.json sha256": true,
+    "family_right.json sha256": true,
+    "validate_family": true,
+    "family interval": true,
+    "certified line = line through S_d0, S_d1": true,
+    "region bounds": true,
+    "regions use family/family_right": true
+   },
+   "validate_family_checks": 20,
+   "validate_family_failed": [],
+   "ok": true
+  },
+  {
+   "index": 18,
+   "interval": "[91/200, 23/50]",
+   "checks": {
+    "family.json sha256": true,
+    "family_right.json sha256": true,
+    "validate_family": true,
+    "family interval": true,
+    "certified line = line through S_d0, S_d1": true,
+    "region bounds": true,
+    "regions use family/family_right": true
+   },
+   "validate_family_checks": 20,
+   "validate_family_failed": [],
+   "ok": true
+  },
+  {
+   "index": 19,
+   "interval": "[23/50, 93/200]",
+   "checks": {
+    "family.json sha256": true,
+    "family_right.json sha256": true,
+    "validate_family": true,
+    "family interval": true,
+    "certified line = line through S_d0, S_d1": true,
+    "region bounds": true,
+    "regions use family/family_right": true
+   },
+   "validate_family_checks": 20,
+   "validate_family_failed": [],
+   "ok": true
+  },
+  {
+   "index": 20,
+   "interval": "[93/200, 47/100]",
+   "checks": {
+    "family.json sha256": true,
+    "family_right.json sha256": true,
+    "validate_family": true,
+    "family interval": true,
+    "certified line = line through S_d0, S_d1": true,
+    "region bounds": true,
+    "regions use family/family_right": true
+   },
+   "validate_family_checks": 20,
+   "validate_family_failed": [],
+   "ok": true
+  },
+  {
+   "index": 21,
+   "interval": "[47/100, 19/40]",
+   "checks": {
+    "family.json sha256": true,
+    "family_right.json sha256": true,
+    "validate_family": true,
+    "family interval": true,
+    "certified line = line through S_d0, S_d1": true,
+    "region bounds": true,
+    "regions use family/family_right": true
+   },
+   "validate_family_checks": 20,
+   "validate_family_failed": [],
+   "ok": true
+  },
+  {
+   "index": 22,
+   "interval": "[19/40, 12/25]",
+   "checks": {
+    "family.json sha256": true,
+    "family_right.json sha256": true,
+    "validate_family": true,
+    "family interval": true,
+    "certified line = line through S_d0, S_d1": true,
+    "region bounds": true,
+    "regions use family/family_right": true
+   },
+   "validate_family_checks": 20,
+   "validate_family_failed": [],
+   "ok": true
+  },
+  {
+   "index": 23,
+   "interval": "[12/25, 97/200]",
+   "checks": {
+    "family.json sha256": true,
+    "family_right.json sha256": true,
+    "validate_family": true,
+    "family interval": true,
+    "certified line = line through S_d0, S_d1": true,
+    "region bounds": true,
+    "regions use family/family_right": true
+   },
+   "validate_family_checks": 20,
+   "validate_family_failed": [],
+   "ok": true
+  },
+  {
+   "index": 24,
+   "interval": "[97/200, 49/100]",
+   "checks": {
+    "family.json sha256": true,
+    "family_right.json sha256": true,
+    "validate_family": true,
+    "family interval": true,
+    "certified line = line through S_d0, S_d1": true,
+    "region bounds": true,
+    "regions use family/family_right": true
+   },
+   "validate_family_checks": 20,
+   "validate_family_failed": [],
+   "ok": true
+  },
+  {
+   "index": 25,
+   "interval": "[49/100, 99/200]",
+   "checks": {
+    "family.json sha256": true,
+    "family_right.json sha256": true,
+    "validate_family": true,
+    "family interval": true,
+    "certified line = line through S_d0, S_d1": true,
+    "region bounds": true,
+    "regions use family/family_right": true
+   },
+   "validate_family_checks": 20,
+   "validate_family_failed": [],
+   "ok": true
+  },
+  {
+   "index": 26,
+   "interval": "[99/200, 1/2]",
+   "checks": {
+    "family.json sha256": true,
+    "family_right.json sha256": true,
+    "validate_family": true,
+    "family interval": true,
+    "certified line = line through S_d0, S_d1": true,
+    "region bounds": true,
+    "regions use family/family_right": true
+   },
+   "validate_family_checks": 20,
+   "validate_family_failed": [],
+   "ok": true
+  },
+  {
+   "index": 27,
+   "interval": "[1/2, 3/5]",
+   "checks": {
+    "family.json sha256": true,
+    "family_right.json sha256": true,
+    "validate_family": true,
+    "family interval": true,
+    "certified line = line through S_d0, S_d1": true,
+    "region bounds": true,
+    "regions use family/family_right": true
+   },
+   "validate_family_checks": 20,
+   "validate_family_failed": [],
+   "ok": true
+  },
+  {
+   "index": 28,
+   "interval": "[3/5, 5/8]",
+   "checks": {
+    "family.json sha256": true,
+    "family_right.json sha256": true,
+    "validate_family": true,
+    "family interval": true,
+    "certified line = line through S_d0, S_d1": true,
+    "region bounds": true,
+    "regions use family/family_right": true
+   },
+   "validate_family_checks": 20,
+   "validate_family_failed": [],
+   "ok": true
+  },
+  {
+   "index": 29,
+   "interval": "[5/8, 13/20]",
+   "checks": {
+    "family.json sha256": true,
+    "family_right.json sha256": true,
+    "validate_family": true,
+    "family interval": true,
+    "certified line = line through S_d0, S_d1": true,
+    "region bounds": true,
+    "regions use family/family_right": true
+   },
+   "validate_family_checks": 20,
+   "validate_family_failed": [],
+   "ok": true
+  },
+  {
+   "index": 30,
+   "interval": "[13/20, 27/40]",
+   "checks": {
+    "family.json sha256": true,
+    "family_right.json sha256": true,
+    "validate_family": true,
+    "family interval": true,
+    "certified line = line through S_d0, S_d1": true,
+    "region bounds": true,
+    "regions use family/family_right": true
+   },
+   "validate_family_checks": 20,
+   "validate_family_failed": [],
+   "ok": true
+  },
+  {
+   "index": 31,
+   "interval": "[27/40, 7/10]",
+   "checks": {
+    "family.json sha256": true,
+    "family_right.json sha256": true,
+    "validate_family": true,
+    "family interval": true,
+    "certified line = line through S_d0, S_d1": true,
+    "region bounds": true,
+    "regions use family/family_right": true
+   },
+   "validate_family_checks": 20,
+   "validate_family_failed": [],
+   "ok": true
+  },
+  {
+   "index": 32,
+   "interval": "[7/10, 4/5]",
+   "checks": {
+    "family.json sha256": true,
+    "family_right.json sha256": true,
+    "validate_family": true,
+    "family interval": true,
+    "certified line = line through S_d0, S_d1": true,
+    "region bounds": true,
+    "regions use family/family_right": true
+   },
+   "validate_family_checks": 20,
+   "validate_family_failed": [],
+   "ok": true
+  },
+  {
+   "index": 33,
+   "interval": "[4/5, 99/100]",
+   "checks": {
+    "family.json sha256": true,
+    "family_right.json sha256": true,
+    "validate_family": true,
+    "family interval": true,
+    "certified line = line through S_d0, S_d1": true,
+    "region bounds": true,
+    "regions use family/family_right": true
+   },
+   "validate_family_checks": 20,
+   "validate_family_failed": [],
+   "ok": true
+  },
+  {
+   "index": 34,
+   "interval": "(99/100, 1]",
+   "checks": {
+    "family.json sha256": true,
+    "family_right.json sha256": true,
+    "validate_family": true,
+    "family interval": true,
+    "certified line = line through S_d0, S_d1": true,
+    "region bounds": true,
+    "regions use family/family_right": true
+   },
+   "validate_family_checks": 20,
+   "validate_family_failed": [],
+   "ok": true
+  }
+ ]
+}

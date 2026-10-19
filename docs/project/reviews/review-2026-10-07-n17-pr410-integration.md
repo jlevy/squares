@@ -29,7 +29,7 @@ two-hull owner-list custody concern.
 The
 [Session186 W3 strategy](../research/research-2026-10-07-n17-session-186-w3-strategy.md#global-completion-obligations-and-structural-alternatives)
 retains the ordinary-container/hull-16 limitation; the
-[continuation plan](../specs/active/plan-2026-10-07-n17-six-hour-continuation.md) keeps
+[continuation plan](../specs/done/plan-2026-10-07-n17-six-hour-continuation.md) keeps
 verifier compatibility separate from #367’s producer branching and #358/#413 certificate
 admission. These are appropriate distinctions at the current head.
 

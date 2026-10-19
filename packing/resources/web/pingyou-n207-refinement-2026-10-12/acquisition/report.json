@@ -1,0 +1,47 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "https://github.com/jlevy/squares/issues/503#issuecomment-6133755143",
+  "author": "PingYou Ltd",
+  "source_key": "[PingYou n207 refinement 2026-10-12]",
+  "report_evidence": "E-pingyou-503-refinement-report",
+  "receipt_format": "pingyou-503-refinement-exact-replay-v1",
+  "witness_prefix": "W-pingyou-503-refined-n",
+  "claim_limitations": "Complete 1041863 rational centre/half-angle certificate converted exactly from a checkout at the pin whose bytes have the digests the packet records, and equal there to the source's own corners Witness/v2; no upstream byte is retained. Finite construction feasibility only; no local minimum, rigidity, novelty, priority or global optimality claim.",
+  "read_on": "2026-10-14",
+  "read_at_main": "aeef99ef0ef27ace054434094118a6ac355da384",
+  "certificates": [
+    {"n": 207, "path": "n207.cert.json", "format": "pingyou-json", "offered": "3720240092889639048018577779/250000000000000000000000000", "first_committed": "2026-10-12T22:24:32Z", "same_packing": [{"path": "pingyou-n207-rational.yaml", "format": "witness-corners"}], "fact": "facts/n-207.yaml"}
+  ],
+  "requested": [207],
+  "replayed": [207],
+  "houses": [
+    {"n": 207, "reader": "[PingYou n207 certificate 2026-10-11]", "source_key": "[PingYou n207 certificate 2026-10-11]", "holders": "PingYou Ltd", "result": "T-147", "reported_value": "14.8809603730436757", "verified_value": "14.8809603730436757", "evidence": ["E-pingyou-503-exact-feasibility"]}
+  ],
+  "pending": [
+    {"n": 207, "report": "T-098 (#375)", "url": "https://github.com/jlevy/squares/issues/375", "holders": "Francisco Couzo, improved by Evan Daniel", "result": "T-098", "reader": "[evand exact optima 2026-10-05]"},
+    {"n": 207, "report": "T-116 (#422)", "url": "https://github.com/jlevy/squares/issues/422", "holders": "Nate Chaoweeraprasit", "result": "T-116", "reader": "[SQUISH second update 2026-10-07]"},
+    {"n": 207, "report": "T-127 (#438)", "url": "https://github.com/jlevy/squares/issues/438", "holders": "Nate Chaoweeraprasit (itsnaka), improved by Siddharth Gupta", "result": "T-127", "reader": "[Gupta rational refinements 2026-10-08]"},
+    {"n": 207, "report": "T-136 (#481)", "url": "https://github.com/jlevy/squares/issues/481", "holders": "Nate Chaoweeraprasit", "result": "T-136", "reader": "[SQUISH third request 2026-10-09]"},
+    {"n": 207, "report": "#573", "url": "https://github.com/jlevy/squares/issues/573", "holders": "Mykhailo Polkovskyi (Mishapolk)", "reader": "[Mishapolk exact certificates 2026-10-12]"},
+    {"n": 207, "report": "#593", "url": "https://github.com/jlevy/squares/issues/593", "holders": "Mykhailo Polkovskyi (Mishapolk)", "reader": "[Mishapolk records 2026-10-14]"},
+    {"n": 207, "report": "PR #574", "url": "https://github.com/jlevy/squares/pull/574", "holders": "PingYou Ltd", "printed": "14.8809603715555795946966915749233641589945", "rounding": "unstated"}
+  ],
+  "register": {
+    "title": "PingYou Ltd's refined n207 certificate at 1041863, issue503",
+    "headline": "A tighter rational realization of PingYou Ltd's packing of 207 squares",
+    "significance": 2,
+    "source_checks": "The author reports that three exact checkers, its own rational polygon-projection checker and Evan Daniel's unchanged verify_cert.py and verify_cert2.py, accept all 207 squares, 828 wall conditions and 21,321 pairs; that its package replays the recorded rational construction and owner lineage and checks the lossless conversion to its corners Witness/v2; and that this repository's sqpack exact_verify and check_rational_witness_independent, unchanged at 074ac28, accept that witness. Those statements are the author's; no source program ran here.",
+    "credit": "Credit PingYou Ltd (https://github.com/BuddenPing/square-packing-certificates) with the n207 assembly and this refinement of its certificate, as the source asks: two differently placed patches of Ryan Xu's n70 construction (ry-xu, issue 432), taken from Evan Daniel's exact n70 certificate, with upright grids of 42 and 36 squares. The source names SQUISH's n207 (issue 481) only as its earlier comparison. The pinned source makes no statement about AI assistance; the author's statement on issue 503 of 12 October, 'Both solutions were AI assisted by \"PY\", an unreleased agentic AI offering by PingYou Ltd.', covers the n207 assembly.",
+    "next_rung": "Independently review the retained replay, then decide whether it replaces T-147 at 207, which it improves by 1.49e-9: Mishapolk's #573 and #593 print smaller sides, and the author's own PR #574 states smaller ones still, so adoption waits on their imports. Final exact-head CI remains required.",
+    "bead": "think-z8aj",
+    "bibliography": {
+      "authors": [
+        "PingYou Ltd"
+      ],
+      "lineage": "builds-on-project",
+      "credit": "PingYou Ltd after Xu, Daniel, Levy",
+      "short_credit": "PingYou Ltd after Xu et al.",
+      "note": "One complete exact certificate at 10418630bfb00853a539ad7ad9908b2d746147c0, a new rational approximation to the frame of the n207 assembly T-147 registers, with its guard reduced to 1 + 2e-13. The source checks with Squares Project (Levy) verification code and supplies a corners Witness/v2. Derived exact facts only; no upstream byte is retained. No local or global optimality claim."
+    }
+  }
+}

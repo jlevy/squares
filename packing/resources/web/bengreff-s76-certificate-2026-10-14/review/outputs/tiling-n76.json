@@ -1,0 +1,98 @@
+{
+ "n": 76,
+ "checker": "/home/user/squares/.claude/worktrees/review-76-95/packing/resources/web/bengreff-s76-certificate-2026-10-14/s76-certificate/tools/check_coverage.py",
+ "checker_sha256": "6fc6c109aeaf29ea71f32c77d81862062e9f47d2034be030f8d0ef0d120e376a",
+ "controls": [
+  {
+   "control": "published",
+   "what": "the source records unchanged",
+   "check_coverage_exit": 0,
+   "check_coverage_last_line": "OK: the D4 fundamental region is certified (zmx2 or zm_mixed on every cell)",
+   "this_program_every_cell_decided": true,
+   "this_program_problems": []
+  },
+  {
+   "control": "one-record-removed",
+   "what": "record j000.jsonl removed",
+   "check_coverage_exit": 1,
+   "check_coverage_last_line": "AssertionError: zmx2 root (Fraction(11, 5), Fraction(23, 10), Fraction(22, 5), Fraction(9, 2), Fraction(3, 8), Fraction(1, 2)) not tiled by certified zm_mixed r",
+   "this_program_every_cell_decided": false,
+   "this_program_problems": []
+  },
+  {
+   "control": "cell-shifted-1/40",
+   "what": "j000.jsonl: root shifted by +1/40 in x (header region with it)",
+   "check_coverage_exit": 0,
+   "check_coverage_last_line": "OK: the D4 fundamental region is certified (zmx2 or zm_mixed on every cell)",
+   "this_program_every_cell_decided": false,
+   "this_program_problems": [
+    "j000.jsonl: not an aligned 1/20 x 1/20 x 1/32 cell"
+   ]
+  },
+  {
+   "control": "other-settings",
+   "what": "j000.jsonl: header says cert_mode false, depth 6",
+   "check_coverage_exit": 0,
+   "check_coverage_last_line": "OK: the D4 fundamental region is certified (zmx2 or zm_mixed on every cell)",
+   "this_program_every_cell_decided": false,
+   "this_program_problems": [
+    "j000.jsonl: settings differ: {'mode': 'D4', 'depth': 6, 'pitch': '1/20', 'ubins': 16, 'chain': True, 'chain_from': 0, 'theta_bias': 4, 'clip': True, 'lemma_T': True, 'lemma_L': True, 'split': True, 'cert_mode': False, 'tprime': False, 'split_maxchain': 400, 'reach': '442/625'}"
+   ]
+  },
+  {
+   "control": "other-checker-digest",
+   "what": "j000.jsonl: header names another zm_mixed.py",
+   "check_coverage_exit": 0,
+   "check_coverage_last_line": "OK: the D4 fundamental region is certified (zmx2 or zm_mixed on every cell)",
+   "this_program_every_cell_decided": false,
+   "this_program_problems": [
+    "j000.jsonl: digests differ"
+   ]
+  },
+  {
+   "control": "header-removed",
+   "what": "j000.jsonl: header line removed",
+   "check_coverage_exit": 0,
+   "check_coverage_last_line": "OK: the D4 fundamental region is certified (zmx2 or zm_mixed on every cell)",
+   "this_program_every_cell_decided": false,
+   "this_program_problems": [
+    "j000.jsonl: no header"
+   ]
+  },
+  {
+   "control": "other-cover-digest",
+   "what": "j000.jsonl: header names another cover",
+   "check_coverage_exit": 1,
+   "check_coverage_last_line": "AssertionError: /tmp/claude-0/-home-user/497b954f-f1d7-5565-9258-beec4cbe400c/scratchpad/laneF/tiling-work/k2m5-tiling-javsekec/other-cover-digest/j000.jsonl: r",
+   "this_program_every_cell_decided": false,
+   "this_program_problems": [
+    "j000.jsonl: digests differ"
+   ]
+  },
+  {
+   "control": "zmx2-log-of-another-cover",
+   "what": "zmx2 log header names another cover (FNV-1a hash)",
+   "check_coverage_exit": 0,
+   "check_coverage_last_line": "OK: the D4 fundamental region is certified (zmx2 or zm_mixed on every cell)",
+   "this_program_every_cell_decided": false,
+   "this_program_problems": [
+    "zmx2 log header: not this cover or not the D4 settings"
+   ]
+  },
+  {
+   "control": "zmx2-root-missing",
+   "what": "one certified ROOT line removed from the zmx2 log",
+   "check_coverage_exit": 1,
+   "check_coverage_last_line": "AssertionError: zmx2 roots do not tile the D4 region",
+   "this_program_every_cell_decided": false,
+   "this_program_problems": []
+  }
+ ],
+ "ok": true,
+ "wall_s": 6.9,
+ "program": {
+  "name": "k2m5_review.py",
+  "sha256": "4fa7ed605b14893893dba03cde8054ab47360963e03514b0a554820813e1e848",
+  "python": "3.14.7"
+ }
+}

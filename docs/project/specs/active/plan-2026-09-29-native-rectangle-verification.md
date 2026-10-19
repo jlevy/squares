@@ -1,5 +1,11 @@
 # Native Rectangle Verification and wand125 Tools Intake
 
+**Status:** Active. The verifier golden tests and Rust gate review (think-v4dn,
+think-k8hl) and PR integration (think-sewp) are done; the native rectangle verifier
+(think-bmf3) and the ceiling/admission findings (think-xgjo) remain open under
+think-8cps. The pose-tree replay (think-190a) was retired on 2026-10-13: it was evidence
+toward s(11), which T-060 settles.
+
 The rectangle-density intake independently checks exact inputs and theorem premises, but
 delegates complete coverage to Tokoharu’s `verify.cpp`. This work adds a native
 implementation with a different geometric decision procedure and records the new wand125
@@ -7,8 +13,8 @@ tools without promoting unverified claims.
 
 Parent bead: **think-8cps**. The
 [mathematical intake review](../../reviews/review-2026-09-29-wand125-tools-mathematics.md)
-owns source findings; the [tooling overview](../../verification-tooling.md) owns the
-inventory of available checks and gaps.
+owns source findings; the [tooling overview](../../guides/verification-tooling.md) owns
+the inventory of available checks and gaps.
 
 ## Blocks and Ownership
 

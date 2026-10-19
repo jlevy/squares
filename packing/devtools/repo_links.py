@@ -50,6 +50,7 @@ DEFAULT_BRANCH = "main"
 # and its page's source share.
 README = "README.md"
 TUTORIAL = "TUTORIAL.md"
+TUTORIAL_ADVANCED = "TUTORIAL-ADVANCED.md"
 SYNOPSIS = "SYNOPSIS.md"
 CONVENTIONS = "conventions.md"
 DEVELOPMENT = "development.md"
@@ -62,6 +63,7 @@ EPISTEMICS = "epistemics.md"
 RESULTS = "packing/frontier/RESULTS.md"
 STATUS = "packing/frontier/STATUS.md"
 DEFECTS = "defects.md"
+CHANGELOG = "CHANGELOG.md"
 
 Kind = Literal["blob", "tree", "raw"]
 

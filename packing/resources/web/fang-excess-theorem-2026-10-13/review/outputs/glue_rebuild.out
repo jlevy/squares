@@ -1,0 +1,78 @@
+theorem/n015_F1.cert: chain n-211: 211 squares at side 299999/20000; digest MATCHES frozen list; bytes EQUAL the retained file
+theorem/n016_F1.cert: chain n-241: 241 squares at side 319999/20000; digest MATCHES frozen list; bytes EQUAL the retained file
+theorem/n017_F1.cert: chain n-273: 273 squares at side 339999/20000; digest MATCHES frozen list; bytes EQUAL the retained file
+theorem/n018_F1.cert: chain n0308[307]: 307 squares at side 359999/20000; digest MATCHES frozen list; bytes EQUAL the retained file
+theorem/n019_F1.cert: chain n0343: 343 squares at side 379999/20000; digest MATCHES frozen list
+theorem/n020_F1.cert: chain n0381: 381 squares at side 399999/20000; digest MATCHES frozen list
+theorem/n021_F1.cert: chain n0421: 421 squares at side 419999/20000; digest MATCHES frozen list
+theorem/n022_F1.cert: chain n0463: 463 squares at side 439999/20000; digest MATCHES frozen list
+theorem/n023_F1.cert: chain n0507: 507 squares at side 459999/20000; digest MATCHES frozen list
+theorem/n024_F1.cert: chain n0553: 553 squares at side 479999/20000; digest MATCHES frozen list
+theorem/n025_F1.cert: chain n0601: 601 squares at side 499999/20000; digest MATCHES frozen list
+theorem/n026_F1.cert: chain n0651: 651 squares at side 519999/20000; digest MATCHES frozen list
+theorem/n027_F1.cert: chain n-110 + R: 703 squares at side 539999/20000; digest MATCHES frozen list
+theorem/n028_F1.cert: chain n-132 + R: 757 squares at side 559999/20000; digest MATCHES frozen list
+theorem/n029_F1.cert: chain n-156 + R: 813 squares at side 579999/20000; digest MATCHES frozen list
+theorem/n030_F1.cert: chain n-182 + R: 871 squares at side 599999/20000; digest MATCHES frozen list
+theorem/n031_F2.cert: chain n-211 + R: 932 squares at side 619999/20000; digest MATCHES frozen list; bytes EQUAL the retained file
+theorem/n032_F2.cert: chain n-241 + R: 994 squares at side 639999/20000; digest MATCHES frozen list
+theorem/n033_F2.cert: chain n-273 + R: 1058 squares at side 659999/20000; digest MATCHES frozen list
+theorem/n034_F2.cert: chain n0308[307] + R: 1124 squares at side 679999/20000; digest MATCHES frozen list
+theorem/n035_F2.cert: chain n0343 + R: 1192 squares at side 699999/20000; digest MATCHES frozen list
+theorem/n036_F3.cert: chain n-211 + R': 1263 squares at side 719999/20000; digest MATCHES frozen list
+theorem/n037_F3.cert: chain n-241 + R': 1335 squares at side 739999/20000; digest MATCHES frozen list
+theorem/n038_F3.cert: chain n-273 + R': 1409 squares at side 759999/20000; digest MATCHES frozen list
+theorem/n039_F3.cert: chain n0308[307] + R': 1485 squares at side 779999/20000; digest MATCHES frozen list
+theorem/n040_F3.cert: chain n0343 + R': 1563 squares at side 799999/20000; digest MATCHES frozen list
+theorem/n041_F3.cert: chain n0381 + R': 1643 squares at side 819999/20000; digest MATCHES frozen list
+theorem/n042_F3.cert: chain n0421 + R': 1725 squares at side 839999/20000; digest MATCHES frozen list
+theorem/n043_F3.cert: chain n0463 + R': 1809 squares at side 859999/20000; digest MATCHES frozen list
+theorem/n044_F3.cert: chain n0507 + R': 1895 squares at side 879999/20000; digest MATCHES frozen list
+theorem/n045_F3.cert: chain n0553 + R': 1983 squares at side 899999/20000; digest MATCHES frozen list
+theorem/n046_F3.cert: chain n0601 + R': 2073 squares at side 919999/20000; digest MATCHES frozen list
+theorem/n047_F3.cert: chain n0651 + R': 2165 squares at side 939999/20000; digest MATCHES frozen list
+theorem/n048_F3.cert: chain n-110 + R + R': 2259 squares at side 959999/20000; digest MATCHES frozen list
+theorem/n049_F3.cert: chain n-132 + R + R': 2355 squares at side 979999/20000; digest MATCHES frozen list
+theorem/n050_F3.cert: chain n-156 + R + R': 2453 squares at side 999999/20000; digest MATCHES frozen list
+theorem/n051_F3.cert: chain n-182 + R + R': 2553 squares at side 1019999/20000; digest MATCHES frozen list
+theorem/n052_F4.cert: chain n-211 + R' + R: 2656 squares at side 1039999/20000; digest MATCHES frozen list
+theorem/n053_F4.cert: chain n-241 + R' + R: 2760 squares at side 1059999/20000; digest MATCHES frozen list
+theorem/n054_F4.cert: chain n-273 + R' + R: 2866 squares at side 1079999/20000; digest MATCHES frozen list
+theorem/n055_F4.cert: chain n0308[307] + R' + R: 2974 squares at side 1099999/20000; digest MATCHES frozen list
+theorem/n056_F4.cert: chain n0343 + R' + R: 3084 squares at side 1119999/20000; digest MATCHES frozen list
+theorem/n057_F5.cert: chain n-211 + R' + R': 3197 squares at side 1139999/20000; digest MATCHES frozen list
+theorem/n058_F5.cert: chain n-241 + R' + R': 3311 squares at side 1159999/20000; digest MATCHES frozen list
+theorem/n059_F5.cert: chain n-273 + R' + R': 3427 squares at side 1179999/20000; digest MATCHES frozen list
+theorem/n060_F5.cert: chain n0308[307] + R' + R': 3545 squares at side 1199999/20000; digest MATCHES frozen list
+theorem/n061_F5.cert: chain n0343 + R' + R': 3665 squares at side 1219999/20000; digest MATCHES frozen list
+theorem/n062_F5.cert: chain n0381 + R' + R': 3787 squares at side 1239999/20000; digest MATCHES frozen list
+theorem/n063_F5.cert: chain n0421 + R' + R': 3911 squares at side 1259999/20000; digest MATCHES frozen list
+theorem/n064_F5.cert: chain n0463 + R' + R': 4037 squares at side 1279999/20000; digest MATCHES frozen list
+theorem/best/n018_j2.cert: chain n0308: 308 squares at side 359999/20000; digest MATCHES frozen list; bytes EQUAL the retained file
+theorem/best/n019_j2.cert: chain n0344: 344 squares at side 379999/20000; digest MATCHES frozen list
+theorem/best/n020_j2.cert: chain n0382: 382 squares at side 399999/20000; digest MATCHES frozen list
+theorem/best/n021_j2.cert: chain n0422: 422 squares at side 419999/20000; digest MATCHES frozen list
+theorem/best/n022_j2.cert: chain n0464: 464 squares at side 439999/20000; digest MATCHES frozen list
+theorem/best/n023_j2.cert: chain n0508: 508 squares at side 459999/20000; digest MATCHES frozen list
+theorem/best/n028_j2.cert: chain n0758: 758 squares at side 559999/20000; digest MATCHES frozen list
+theorem/best/n029_j2.cert: chain n0814: 814 squares at side 579999/20000; digest MATCHES frozen list
+theorem/best/n034_j3.cert: chain n0308 + R: 1125 squares at side 679999/20000; digest MATCHES frozen list
+theorem/best/n035_j3.cert: chain n0344 + R: 1193 squares at side 699999/20000; digest MATCHES frozen list
+theorem/best/n039_j4.cert: chain n0308 + R': 1486 squares at side 779999/20000; digest MATCHES frozen list
+theorem/best/n040_j4.cert: chain n0344 + R': 1564 squares at side 799999/20000; digest MATCHES frozen list
+theorem/best/n041_j4.cert: chain n0382 + R': 1644 squares at side 819999/20000; digest MATCHES frozen list
+theorem/best/n042_j4.cert: chain R'+R': 1726 squares at side 839999/20000; digest MATCHES frozen list
+theorem/best/n043_j4.cert: chain n0464 + R': 1810 squares at side 859999/20000; digest MATCHES frozen list
+theorem/best/n044_j4.cert: chain n0508 + R': 1896 squares at side 879999/20000; digest MATCHES frozen list
+theorem/best/n049_j4.cert: chain n0758 + R': 2356 squares at side 979999/20000; digest MATCHES frozen list
+theorem/best/n050_j4.cert: chain n0814 + R': 2454 squares at side 999999/20000; digest MATCHES frozen list
+theorem/best/n051_j4.cert: chain n0344 + R + R: 2554 squares at side 1019999/20000; digest MATCHES frozen list
+theorem/best/n055_j5.cert: chain n0308 + R' + R: 2975 squares at side 1099999/20000; digest MATCHES frozen list
+theorem/best/n056_j5.cert: chain n0344 + R' + R: 3085 squares at side 1119999/20000; digest MATCHES frozen list
+theorem/best/n060_j6.cert: chain n0308 + R' + R': 3546 squares at side 1199999/20000; digest MATCHES frozen list
+theorem/best/n061_j6.cert: chain n0344 + R' + R': 3666 squares at side 1219999/20000; digest MATCHES frozen list
+theorem/best/n062_j6.cert: chain n0382 + R' + R': 3788 squares at side 1239999/20000; digest MATCHES frozen list
+theorem/best/n063_j6.cert: chain R'+R' + R': 3912 squares at side 1259999/20000; digest MATCHES frozen list
+theorem/best/n064_j6.cert: chain n0464 + R' + R': 4038 squares at side 1279999/20000; digest MATCHES frozen list
+76 of 76 rebuilt certificates have the digest the frozen list records; 6 equal a retained file byte for byte; 76 have the digest their table row states
+GLUE_REBUILD_HOLDS

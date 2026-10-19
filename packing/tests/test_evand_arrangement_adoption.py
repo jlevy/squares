@@ -20,6 +20,7 @@ from devtools import evand_arrangement_houses as houses
 from devtools import evand_arrangement_reports as reports
 from devtools import register_evand_arrangements as adoption
 from devtools import run_negative_controls as controls
+from devtools import upper_bound_houses as adopted
 from sqpack.witness import witness_document
 from sqpack.yamlio import safe_load
 from tests.test_negative_controls import index_fixture_source
@@ -35,14 +36,30 @@ def private(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> Path:
         target = tree / path.relative_to(SOURCE)
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(path, target)
+    retained = tmp_path / "historical-houses"
+    retained.mkdir()
     for n in reports.NUMBERS:
         target = tree / houses.house_path(n).relative_to(SOURCE)
         target.parent.mkdir(parents=True, exist_ok=True)
-        target.symlink_to(houses.house_path(n))
+        if n not in adopted.ADOPTED:
+            target.symlink_to(houses.house_path(n))
+            continue
+        # Since the house adoption of 11 October 2026 a later source owns this atlas leaf
+        # (think-fvz4). Admission stays scoped to this packet: rebuild the earlier house
+        # from its private inputs, without reading the newer pose.
+        earlier = retained / target.name
+        witness = houses.expected_house(reports.read_fact(n), reports.check_certification()[n])
+        earlier.write_text(witness_document(witness, schema="../witness.schema.yaml"))
+        target.symlink_to(earlier)
     monkeypatch.setattr(reports, "REPO", tree)
     monkeypatch.setattr(reports, "PACKET", packet)
     monkeypatch.setattr(houses, "REPO", tree)
     return tree
+
+
+def drawn() -> list[int]:
+    """The counts whose live atlas leaf is still this packet's house."""
+    return [n for n in reports.NUMBERS if n not in adopted.ADOPTED]
 
 
 @pytest.mark.parametrize("n", reports.NUMBERS)
@@ -265,7 +282,10 @@ def test_production_clone_copies_every_scientific_input_and_admits_exact_links(
         [
             sys.executable,
             "-c",
-            "from devtools.evand_arrangement_houses import check_houses; check_houses()",
+            (
+                "from devtools.evand_arrangement_houses import check_houses; "
+                f"check_houses({drawn()!r})"
+            ),
         ],
         cwd=tree / controls.HERE,
         env=env,
@@ -304,7 +324,10 @@ def test_production_clone_copies_every_scientific_input_and_admits_exact_links(
         [
             sys.executable,
             "-c",
-            "from devtools.evand_arrangement_houses import check_houses; check_houses()",
+            (
+                "from devtools.evand_arrangement_houses import check_houses; "
+                f"check_houses({drawn()!r})"
+            ),
         ],
         cwd=tree / controls.HERE,
         env=env,

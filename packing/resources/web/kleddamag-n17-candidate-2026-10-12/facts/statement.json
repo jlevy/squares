@@ -1,0 +1,295 @@
+{
+  "schema": "k17-statement-facts/v1",
+  "derived_by": "lane K1 of jlevy/squares#557, from the edition at 653b9589d0f8a152f01adc56b1d48ba53d49abc3",
+  "statement": {
+    "from": {
+      "path": "STATEMENT.md",
+      "sha256": "dd73365b0681f0efb00e351f89a1dcb1f80a8e758d44563b1e5e81f851521870"
+    },
+    "t0": "362043893314323383453621978739944164218293243036741520638379/1000000000000000000000000000000000000000000000000000000000000",
+    "b0": "330948674722739910429808533282915634174672003999685385633441/1000000000000000000000000000000000000000000000000000000000000",
+    "isolating_rectangle_radius": "1/1000000000000",
+    "F_terms_t_b_coefficient": [
+      [
+        0,
+        1,
+        "1"
+      ],
+      [
+        1,
+        0,
+        "1"
+      ],
+      [
+        1,
+        1,
+        "-1"
+      ],
+      [
+        1,
+        2,
+        "-3"
+      ],
+      [
+        2,
+        0,
+        "-3"
+      ],
+      [
+        2,
+        2,
+        "1"
+      ],
+      [
+        3,
+        0,
+        "-1"
+      ],
+      [
+        3,
+        2,
+        "-1"
+      ],
+      [
+        4,
+        0,
+        "-1"
+      ],
+      [
+        4,
+        1,
+        "-1"
+      ],
+      [
+        4,
+        2,
+        "-1"
+      ],
+      [
+        5,
+        1,
+        "1"
+      ]
+    ],
+    "G_terms_t_b_coefficient": [
+      [
+        0,
+        1,
+        "-1"
+      ],
+      [
+        0,
+        2,
+        "4"
+      ],
+      [
+        0,
+        3,
+        "-1"
+      ],
+      [
+        1,
+        1,
+        "3"
+      ],
+      [
+        1,
+        2,
+        "-2"
+      ],
+      [
+        1,
+        3,
+        "-5"
+      ],
+      [
+        1,
+        4,
+        "2"
+      ],
+      [
+        2,
+        1,
+        "-4"
+      ],
+      [
+        2,
+        2,
+        "-2"
+      ],
+      [
+        2,
+        3,
+        "4"
+      ],
+      [
+        2,
+        4,
+        "2"
+      ],
+      [
+        3,
+        0,
+        "-2"
+      ],
+      [
+        3,
+        2,
+        "2"
+      ],
+      [
+        4,
+        0,
+        "-2"
+      ],
+      [
+        4,
+        1,
+        "1"
+      ],
+      [
+        4,
+        2,
+        "-2"
+      ],
+      [
+        4,
+        3,
+        "1"
+      ],
+      [
+        5,
+        1,
+        "1"
+      ],
+      [
+        5,
+        3,
+        "1"
+      ]
+    ],
+    "side_map": "L = (6 + 4 t*)/(1 + 2 t* - t*^2)",
+    "L_enclosure_open": [
+      "4.67553009360455095163",
+      "4.67553009360455095164"
+    ],
+    "claim": "a packing of seventeen unit squares exists at side L, and a packing at side S >= 0 implies L <= S; uniqueness not claimed"
+  },
+  "obligations": {
+    "from": {
+      "path": "research/finishing-threshold-goal-20261007/current-author-20261012t/fifth-order-20261010/public-edition-round2-20261011/OBLIGATIONS.json",
+      "sha256": "1f05982ff81edd331c601fc4cd8db3fc2c499501ef10a21b53b61b748f2d9453"
+    },
+    "total": 210,
+    "by_kind": {
+      "base capture or physical transfer": 50,
+      "mathematical premise": 15,
+      "selected branch implication": 84,
+      "selected strict budget": 49,
+      "slab capture": 1,
+      "whole local root": 11
+    },
+    "premises": [
+      "ALGEBRAIC_ENDPOINT",
+      "UPPER",
+      "ENDPOINT",
+      "CHARGE_SEMANTICS",
+      "FRAME_ASSIGNMENT",
+      "C7_C8_TRANSFER",
+      "WALL_PARTITION",
+      "ROOT_ADMISSION",
+      "SELECTOR_LOGIC",
+      "LOCAL_CHECKER_SOUNDNESS",
+      "LOCAL_CERTIFICATE_IMPORT",
+      "G20S_PHYSICAL",
+      "WALL_CONTRADICTION",
+      "KEY_W_ELIMINATION",
+      "COARSE_LOOSE_CAPACITY"
+    ],
+    "local_roots": [
+      "LOCAL_JQ",
+      "LOCAL_JG",
+      "LOCAL_JPA",
+      "LOCAL_JPWS",
+      "LOCAL_JPW13",
+      "LOCAL_JPG3m",
+      "LOCAL_JPG3p",
+      "LOCAL_JPG17m",
+      "LOCAL_JPG17p",
+      "LOCAL_JPG15m",
+      "LOCAL_JPG15p"
+    ],
+    "algebraic_endpoint_constants": {
+      "R": "4675530093604551/10^15",
+      "C": "4675531/10^6",
+      "U": "1169/250"
+    },
+    "rigidity_contraction_ratio": "159201934153319/200000000000000"
+  },
+  "capture": {
+    "from": {
+      "path": "research/finishing-threshold-goal-20261007/clean-rerun-20261011/current-build-0122/capture/checker_sources/PLAN_MANIFEST.json",
+      "sha256": "bc8324cfa721889725f63bd1e2a31cd522e35bee257187154758639e642bd7d6"
+    },
+    "statements": 98,
+    "rows_per_checker": 1728000,
+    "slices_per_checker": 1152,
+    "statements_by_row_count": {
+      "9000": 4,
+      "18000": 94
+    },
+    "checkers": [
+      "python exact_classes.py",
+      "node verify_classes.js (file verify_classes_wb.js)"
+    ],
+    "container_side_C": "4675531/10^6"
+  },
+  "trees": {
+    "from": {
+      "path": "local-research/claude-20261002/results/rerun_trees_20261011/results.tsv",
+      "sha256": "d9129310f575aeacfee27fb900529555b81d6a5050bc0b6a11cb929d391576b3"
+    },
+    "count": 13,
+    "names": [
+      "G20S",
+      "HW",
+      "JG",
+      "JPA_v5",
+      "JPG15m_v5",
+      "JPG15p_v5",
+      "JPG17m_v5",
+      "JPG17p_v5",
+      "JPG3m_v5",
+      "JPG3p_v5",
+      "JPW13",
+      "JPWS_v4",
+      "JQ"
+    ],
+    "checkers": {
+      "C1": {
+        "file": "checker/wxcheck_v30.py",
+        "sha256": "cf8db52bfa1cc565d8610bf13b279d1b5da2f84c91ce2854d15a3b0a88cd096c"
+      },
+      "C2": {
+        "file": "checker2/wxcheck2_v30.js",
+        "sha256": "97210adf74a3ebed7cde021a3cb1ff6ea6380d8d2d55540a2a2a1cb17dc27542"
+      },
+      "SPEC": {
+        "file": "SPEC_v3.0.md",
+        "sha256": "0a6dfc2ae10ed6f30a21ebe357a6e73dd7355223c521cc67a3f2bdab9549aba0"
+      },
+      "frozen_on": "2026-10-09 03:15"
+    },
+    "frozen_record": {
+      "path": "research/window-extension-20261008/acceptance/FROZEN_30.json",
+      "sha256": "6d65a0705c039bbf2f48acabb7f12275871af6b7b8fa308c0671ea6518b30803"
+    }
+  },
+  "five_steps": [
+    "upper bound: the known packing at side L, 68 wall and 136 pair conditions, exact",
+    "capture: 98 weighted counting certificates at side at most C, leaving 11 cases",
+    "admission: each case in one of 11 explicit root regions",
+    "local trees: 13 tree certificates; ten regions hold no packing below L, the eleventh only packings in a tube around the known packing",
+    "rigidity: a finite exact stage of 17 rounds and a contraction of ratio below 1 contradict a side below L"
+  ]
+}

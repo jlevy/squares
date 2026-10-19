@@ -7,14 +7,15 @@ from __future__ import annotations
 
 import functools
 import gzip
+import hashlib
 import json
 import os
 import shutil
 import subprocess
-from collections.abc import Callable, Mapping
+from collections.abc import Callable, Collection, Mapping
 from fractions import Fraction
 from pathlib import Path
-from typing import Any
+from typing import Any, cast
 
 import pytest
 
@@ -30,14 +31,96 @@ TRIO126 = "evand-trio126-2026-10-09"
 PACKETS = (COUZO, FANG, TRIO126)
 SQUISH_481 = "squish-481-third-request-2026-10-09"
 DELEEUW = "ebdeleeuw-n70-refinement-2026-10-10"
-DERIVED = (SQUISH_481, DELEEUW)
+#: Issues #503 and #504, PingYou Ltd's certificates at 207 and 153.
+PINGYOU_503 = "pingyou-n207-certificate-2026-10-11"
+PINGYOU_504 = "pingyou-n153-certificate-2026-10-11"
+DERIVED = (SQUISH_481, DELEEUW, PINGYOU_503, PINGYOU_504)
 MISHAPOLK = "mishapolk-decimal-poses-2026-10-09"
 #: Issues #488 and #489, two retained Evan Daniel format releases of the same afternoon.
 COUZO_488 = "couzo-certificates-2026-10-10"
 HUNT3 = "evand-record-hunt3-2026-10-10"
 #: Evan Daniel's regularized record lists: fifteen upstream gzip certificates, no issue.
 REGULARIZED = "evand-regularized-2026-10-10"
-EVERY = (*PACKETS, *DERIVED, MISHAPOLK, COUZO_488, HUNT3, REGULARIZED)
+#: Issue #505, Robert Barnett's refinements kept as derived facts, and issue #501, Daniil
+#: Ostashev's sqcert records retained under their MIT licence.
+BARNETT = "barnett-refinements-2026-10-11"
+OSTASHEV = "dostashev-records-2026-10-11"
+#: Issue #500, SQUISH's fourth request, kept as derived facts; #506 is smaller at 304 and 305.
+SQUISH_500 = "squish-500-fourth-request-2026-10-11"
+#: Issue #506: Couzo's next release, two counts in the corpus and nine beyond it.
+COUZO_506 = "couzo-certificates-2026-10-11"
+#: Issue #567: PingYou Ltd's n261, whose squares touch the box and each other exactly.
+PINGYOU_261 = "pingyou-n261-refinement-2026-10-12"
+#: PingYou Ltd's releases of 12 October (#564, #566 to #569, and the refinements posted on
+#: #503 and #504), one derived-only packet each; ``test_upper_bound_reports_pingyou_1012``.
+PINGYOU_1012 = (
+    "pingyou-n302-certificate-2026-10-12",
+    "pingyou-n153-refinement-2026-10-12",
+    "pingyou-n207-refinement-2026-10-12",
+    "pingyou-n146-refinement-2026-10-12",
+    PINGYOU_261,
+    "pingyou-n105-refinement-2026-10-12",
+    "pingyou-n272-refinement-2026-10-12",
+)
+#: Issue #561 at 0fa0e0d, and issues #583 and #586 at b85dee2, which also holds five
+#: certificates no issue names: Couzo's releases of 12 and 13 October.
+COUZO_561 = "couzo-certificates-2026-10-12"
+COUZO_586 = "couzo-certificates-2026-10-13"
+#: Issues #573 and #593: Mishapolk's 19 certificates at 336bdf5 and 73 at 46f638c, kept as
+#: derived facts; #593's sides are admitted at its census's exact fractions.
+MISHAPOLK_573 = "mishapolk-exact-certificates-2026-10-12"
+MISHAPOLK_593 = "mishapolk-records-2026-10-14"
+#: Issues #562 and #575, Daniil Ostashev's next two releases, and #584 and #596, Evan
+#: Daniel's compositions, every count of which lies beyond the corpus.
+OSTASHEV_562 = "dostashev-compositions-2026-10-12"
+OSTASHEV_575 = "dostashev-merged-bands-2026-10-13"
+EVAND_584 = "evand-compositions-2026-10-13"
+EVAND_596 = "evand-fresh-compositions-2026-10-14"
+#: The packets that request nothing inside the corpus, so plan no register entry.
+BEYOND_ONLY = (EVAND_584, EVAND_596)
+#: Issue #528, Ostashev's three compositions in sqcert, and issue #529, Rio Calle's n = 102
+#: layout, whose exact certificate is derived here (`test_upper_bound_reports_528_529`).
+OSTASHEV_528 = "dostashev-records-2026-10-12"
+CALLE = "riocalle-n102-2026-10-12"
+#: Issue #552, Evan Daniel's s(154) in his own text format (`test_upper_bound_reports_552`).
+DANIEL_552 = "evand-n154-2026-10-12"
+#: Issue #583's seven certificates at 4596670 that #586 replaced at b85dee2, and #570's
+#: 154 by its digest, retained by the records lane of 14 October.
+COUZO_583 = "couzo-issue583-2026-10-13"
+#: Issue #606, Evan Daniel's s(146), and Mykhailo Polkovskyi's 70a033f, which no issue
+#: reports, kept as derived facts: the evening intake of 14 October
+#: (`test_upper_bound_reports_606_70a033f`).
+DANIEL_606 = "evand-n146-2026-10-14"
+MISHAPOLK_70A = "mishapolk-kkt-refinements-2026-10-14"
+#: How a declaration cites a beyond-horizon row of the source register.
+COVERAGE_URL = "packing/frontier/source-coverage.yaml"
+EVERY = (
+    *PACKETS,
+    *DERIVED,
+    MISHAPOLK,
+    COUZO_488,
+    HUNT3,
+    REGULARIZED,
+    BARNETT,
+    OSTASHEV,
+    SQUISH_500,
+    COUZO_506,
+    *PINGYOU_1012,
+    COUZO_561,
+    COUZO_586,
+    MISHAPOLK_573,
+    MISHAPOLK_593,
+    OSTASHEV_562,
+    OSTASHEV_575,
+    EVAND_584,
+    EVAND_596,
+    OSTASHEV_528,
+    CALLE,
+    DANIEL_552,
+    COUZO_583,
+    DANIEL_606,
+    MISHAPOLK_70A,
+)
 
 
 def _packet(name: str) -> Path:
@@ -179,15 +262,20 @@ def test_the_declaration_refuses_what_it_does_not_describe(
         reports.load_declaration(packet)
 
 
-def test_the_declaration_refuses_to_request_nothing_inside_the_horizon(
+def test_a_declaration_may_request_only_counts_beyond_the_horizon(
     private: Callable[[str], Path], monkeypatch: pytest.MonkeyPatch
 ) -> None:
+    """#584 requests three counts above 324, so its declaration names no house at all."""
     packet = private(COUZO)
-    monkeypatch.setattr(
-        reports, "HORIZON", min(_json(packet / reports.DECLARATION)["requested"]) - 1
-    )
-    with pytest.raises(kernel.ReportError, match="at least one count at or below"):
+    path = packet / reports.DECLARATION
+    value = _json(path)
+    monkeypatch.setattr(reports, "HORIZON", value["certificates"][0]["n"] - 1)
+    with pytest.raises(kernel.ReportError, match="in-horizon counts"):
         reports.load_declaration(packet)
+    value["houses"] = []
+    _write_json(path, value)
+    assert reports.load_declaration(packet)["houses"] == []
+    assert reports.load_declaration(private(EVAND_584))["houses"] == []
 
 
 @pytest.mark.parametrize(
@@ -288,6 +376,53 @@ def test_a_new_adapter_needs_only_its_entry_and_receives_its_declared_options(
     assert certificate.side == 6
 
 
+#: Daniil Ostashev's sqcert (#501): its labelled header lines, then Evan Daniel's rows.
+SQCERT = b"# sqcert v1\n# claimed_s: 2.9\n# delta: 1e-60\nn 2\ns 3\n# x y t\n1 1 0\n2 2 1/3\n"
+
+
+def test_the_sqcert_adapter_reads_the_packing_evand_cert_reads() -> None:
+    expected = legacy.parse(EVAND.decode(), expected_n=2)
+    assert reports.parse_certificate(SQCERT, 2, "sqcert") == expected
+    # Its comments are labels: a changed claimed side changes nothing that is read.
+    relabelled = SQCERT.replace(b"claimed_s: 2.9", b"claimed_s: 1")
+    assert reports.parse_certificate(relabelled, 2, "sqcert") == expected
+    assert reports.parse_certificate(SQCERT.replace(b"\n", b"\r\n"), 2, "sqcert") == expected
+
+
+@pytest.mark.parametrize(
+    ("raw", "message"),
+    [
+        (SQCERT.replace(b"n 2\ns 3\n", b"s 3\nn 2\n"), "first data line"),
+        (SQCERT.replace(b"n 2\n", b"n 3\n"), "first data line"),
+        (SQCERT.replace(b"n 2\n", b"n 02\n"), "first data line"),
+        (SQCERT.replace(b"n 2\n", b"2 3\n"), "first data line"),
+        (SQCERT.replace(b"s 3\n", b"s 3 4\n"), "second data line"),
+        (SQCERT.replace(b"s 3\n", b"side 3\n"), "second data line"),
+        (SQCERT.replace(b"s 3\n", b"s 3.0\n"), "rational"),
+        (SQCERT.replace(b"s 3\n", b"s 0\n"), "positive"),
+        (SQCERT.replace(b"2 2 1/3", b"2 2 1e-1"), "rational"),
+        (SQCERT.replace(b"2 2 1/3", b"2.0 2 1/3"), "rational"),
+        (SQCERT.replace(b"2 2 1/3", b"2 2 1/0"), "rational"),
+        (SQCERT.replace(b"2 2 1/3", b"2 2 +1/3"), "rational"),
+        (SQCERT.replace(b"2 2 1/3", b"2 2"), "not `x y t`"),
+        (SQCERT + b"0 0 0\n", "3 squares for n = 2"),
+        (SQCERT.replace(b"2 2 1/3\n", b""), "1 squares for n = 2"),
+        (b"# only comments\n", "first data line"),
+        (b"\xff\xfe", "UTF-8"),
+    ],
+)
+def test_the_sqcert_adapter_refuses_what_its_format_does_not_state(
+    raw: bytes, message: str
+) -> None:
+    with pytest.raises(reports.ReportError, match=message):
+        reports.parse_certificate(raw, 2, "sqcert")
+
+
+def test_the_sqcert_adapter_reads_no_options() -> None:
+    with pytest.raises(reports.ReportError, match="reads no options"):
+        reports.parse_certificate(SQCERT, 2, "sqcert", {"dilation": "1"})
+
+
 # --------------------------------------------------------------------------- decimal poses
 
 #: Ellsworth's text: a side, then centres and degrees in the box centred at the origin.
@@ -372,7 +507,7 @@ def test_a_half_turn_has_no_half_angle_tangent(degrees: int) -> None:
         ({**DILATED, "dilation": "1.5"}, "positive integer or p/q"),
         ({**DILATED, "dilation": "-2"}, "positive integer or p/q"),
         ({**DILATED, "dilation": "3/0"}, "positive integer or p/q"),
-        ({**DILATED, "dilation": "1" * 1025}, "positive integer or p/q"),
+        ({**DILATED, "dilation": "1" * (reports.MAX_LITERAL_CHARS + 1)}, "integer or p/q"),
         ({**DILATED, "dilation": "1/2"}, "below 1"),
         ({**DILATED, "half_angle_places": "29"}, "integer from 30 to 100"),
         ({**DILATED, "half_angle_places": "101"}, "integer from 30 to 100"),
@@ -447,6 +582,100 @@ def test_admission_refuses_a_print_that_is_no_plain_decimal() -> None:
 # --------------------------------------------------------------------------- comparison
 
 
+def test_comparisons_admit_only_needed_imports_once_per_packet_and_refresh_next_time(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """House and pending aliases share a private read, never another comparison's truth."""
+    name = "synthetic-comparison-2026-10-15"
+    for reader in ("first", "alias"):
+        monkeypatch.setitem(
+            reports.HOUSES, reader, functools.partial(reports.import_side, name)
+        )
+    declaration = cast(
+        "reports.Declaration",
+        {
+            "houses": [{"n": 2, "reader": "first"}, {"n": 3, "reader": "first"}],
+            "pending": [{"n": 2, "reader": "alias"}, {"n": 4, "reader": "grid"}],
+        },
+    )
+    calls: list[tuple[Path, frozenset[int]]] = []
+    side = Fraction(3)
+
+    def facts(
+        packet: Path, numbers: Collection[int] | None = None
+    ) -> dict[int, legacy.Certificate]:
+        assert numbers is not None
+        calls.append((packet, frozenset(numbers)))
+        return {n: legacy.Certificate(n, side, ()) for n in numbers}
+
+    monkeypatch.setattr(reports, "read_facts", facts)
+    first_packet = reports.packet_path(name)
+    first = reports.comparison_reader(declaration)
+    assert first("first", 2) == first("alias", 2) == first("first", 3) == 3
+    assert first("grid", 4) == 2
+    assert calls == [(first_packet, frozenset({2, 3}))]
+
+    # The same packet path can change between calls; the next comparison must reread it.
+    side = Fraction(4)
+    second = reports.comparison_reader(declaration)
+    assert second("first", 2) == second("alias", 2) == 4
+    assert first("first", 2) == 3
+    assert calls == [(first_packet, frozenset({2, 3}))] * 2
+
+    # The same reader name under another repository must resolve to that private packet.
+    monkeypatch.setattr(reports, "WEB", tmp_path / "other-repository")
+    third = reports.comparison_reader(declaration)
+    assert third("first", 3) == 4
+    assert calls[-1] == (reports.packet_path(name), frozenset({2, 3}))
+    assert calls[-1][0] != first_packet
+
+
+def test_comparison_rereads_a_changed_private_fact_at_the_same_path(
+    private: Callable[[str], Path],
+) -> None:
+    packet = private(DELEEUW)
+    reader = "[Deleeuw n70 refinement 2026-10-10]"
+    declaration = cast(
+        "reports.Declaration", {"houses": [{"n": 70, "reader": reader}], "pending": []}
+    )
+    before = reports.comparison_reader(declaration)(reader, 70)
+    assert before > 0
+    fact = packet / "facts/n-070.yaml.gz"
+    original = fact.read_bytes()
+    document = reports.load_yaml(gzip.decompress(original).decode("utf-8"))
+    document["witness"]["squares"][0]["basis"][0] = "2"
+    fact.write_bytes(gzip.compress(json.dumps(document).encode(), mtime=0))
+    with pytest.raises(reports.ReportError):
+        reports.comparison_reader(declaration)(reader, 70)
+    fact.write_bytes(original)
+    assert reports.comparison_reader(declaration)(reader, 70) == before
+
+
+@pytest.mark.parametrize("fault", ["custody", "missing-count"])
+def test_comparison_import_failures_remain_report_errors(
+    monkeypatch: pytest.MonkeyPatch, fault: str
+) -> None:
+    name = "synthetic-comparison-2026-10-15"
+    monkeypatch.setitem(reports.HOUSES, "first", functools.partial(reports.import_side, name))
+    declaration = cast(
+        "reports.Declaration", {"houses": [{"n": 2, "reader": "first"}], "pending": []}
+    )
+
+    def facts(
+        packet: Path, numbers: Collection[int] | None = None
+    ) -> dict[int, legacy.Certificate]:
+        assert packet == reports.packet_path(name)
+        assert set(numbers or ()) == {2}
+        if fault == "custody":
+            raise reports.ReportError("packet custody: changed retained bytes")
+        return {}
+
+    monkeypatch.setattr(reports, "read_facts", facts)
+    detail = "packet custody: changed retained bytes" if fault == "custody" else "2"
+    with pytest.raises(reports.ReportError, match=f"n=2: first does not rebuild: {detail}"):
+        reports.comparison_reader(declaration)("first", 2)
+
+
 def test_a_printed_side_stands_for_the_numbers_its_rounding_allows() -> None:
     up = reports.printed_span("1.25", "up")
     assert (up.low, up.high, up.open_low, up.open_high) == (
@@ -461,6 +690,27 @@ def test_a_printed_side_stands_for_the_numbers_its_rounding_allows() -> None:
     assert reports.relation(Fraction(124, 100), either) == "undecided"
     assert reports.relation(Fraction(127, 100), either) == "above"
     assert reports.relation(Fraction(5, 4), reports.exact_span(Fraction(5, 4))) == "equal"
+
+
+def test_a_binary64_print_stands_for_every_side_its_double_may_render() -> None:
+    """#593 prints each side as '%.16f' of its double, which the last places do not fix.
+
+    Its 271 print lies 1.2e-15 from the exact side of its own certificate (and of Couzo's
+    #561 certificate, the same side), more than a unit at 16 places, so an unstated
+    rounding excludes the side the print renders; the binary64 span holds it.
+    """
+    side = Fraction(16948992356451205603226618436627, 10**30)
+    printed = "16.9489923564512068"
+    assert f"{float(side):.16f}" == printed
+    assert reports.relation(side, reports.printed_span(printed, "unstated")) == "below"
+    span = reports.printed_span(printed, "binary64")
+    assert span.low < side < span.high
+    assert reports.relation(side, span) == "undecided"
+    # The span is one ulp of the double and one printed unit either side of the print.
+    slack = Fraction(2**-48) + Fraction(1, 10**16)
+    assert (span.low, span.high) == (Fraction(printed) - slack, Fraction(printed) + slack)
+    # A side further away than that is still decided.
+    assert reports.relation(side - Fraction(1, 10**14), span) == "below"
 
 
 def test_smallest_names_one_report_only_when_it_is_decidably_below_every_other() -> None:
@@ -597,6 +847,146 @@ def test_the_beyond_horizon_record_is_what_the_coverage_check_reparses() -> None
     assert claims == {343: "18.994903529220497", 344: "18.995489275430816"}
 
 
+def test_the_506_claims_hold_each_count_against_its_case_or_tracked_row() -> None:
+    rows = _rows(COUZO_506)
+    requested = [n for n, row in rows.items() if row["requested"]]
+    assert requested == [304, 305, 338, 339, 344, 375, 376, 378, 379, 380, 381]
+    assert all(rows[n]["smallest"] == reports.THIS for n in requested)
+    assert [rows[n]["case"]["result"] for n in (304, 305)] == ["T-098", "T-098"]
+    # Issue #500's exact sides, the Mondrian packings both start from, are read from its
+    # own packet, not from the issue's 15-digit prints, which are those sides cut.
+    for n in (304, 305):
+        (squish,) = [other for other in rows[n]["pending"] if other["report"] == "#500"]
+        assert squish["relation"] == "below"
+        assert "printed" not in squish
+        assert Fraction(squish["exact_side"]) == reports.house_side(
+            "[SQUISH fourth request 2026-10-11]", n
+        )
+    assert Fraction(rows[304]["pending"][-1]["difference"]) > Fraction(9109, 10**8)
+    assert Fraction(rows[305]["pending"][-1]["difference"]) > Fraction(7837, 10**8)
+    # Beyond the corpus, each requested count is below the row the register tracked there
+    # when the issue was read, and 380 and 381 had none.
+    tracked = {
+        n: [other["relation"] for other in rows[n]["pending"] if other["url"] == COVERAGE_URL]
+        for n in requested[2:]
+    }
+    assert all(rows[n]["case"] is None for n in tracked)
+    assert {n for n, relations in tracked.items() if relations == ["below"]} == {
+        338,
+        339,
+        344,
+        375,
+        376,
+        378,
+        379,
+    }
+    assert tracked[380] == tracked[381] == []
+    # The four the issue does not name: 175 and 340 are the smallest known, 308 and 343 not.
+    assert [n for n, row in rows.items() if not row["requested"]] == [175, 308, 340, 343]
+    assert {n: rows[n]["smallest"] for n in (175, 308, 340, 343)} == {
+        175: reports.THIS,
+        308: "T-141 (#489)",
+        340: reports.THIS,
+        343: "evand-record-hunt3-2026-10-10",
+    }
+    claims = coverage_check.load_claims(_packet(COUZO_506) / reports.BEYOND)
+    assert sorted(claims) == requested[2:]
+    assert claims[344] == "18.994353244944"
+    # A later import reads these sides exactly, by the packet's source key.
+    assert reports.house_side("[Couzo certificates 2026-10-11]", 304) == Fraction(
+        8964782973424250487190982671787, 5 * 10**29
+    )
+
+
+def test_the_561_claims_name_each_smaller_or_undecided_report() -> None:
+    rows = _rows(COUZO_561)
+    assert all(row["requested"] for row in rows.values())
+    assert all(rows[n]["case"]["relation"] == "below" for n in (156, 176, 237, 271))
+    assert [rows[n]["case"]["result"] for n in (156, 176, 237, 271)] == [
+        "T-149",
+        "T-151",
+        "T-140",
+        "T-151",
+    ]
+    # Ostashev's #575 and Mishapolk's #593 are 1.18e-2 smaller at 176, and #593 2.43e-4
+    # smaller at 237. At 156 and 271 #593 states this certificate's own exact side, and
+    # PingYou's #574 states it with its side about one part in 1e20 smaller, as it states
+    # #575's at 176; read at the exact sides this record retains, #574 is smallest at all
+    # three (review A1 of #602).
+    assert rows[237]["smallest"] == "#593"
+    for n in (156, 176, 271):
+        assert rows[n]["smallest"] == "PR #574"
+        (pingyou,) = [other for other in rows[n]["pending"] if other["report"] == "PR #574"]
+        assert pingyou["relation"] == "above"
+    for n in (156, 271):
+        (mishapolk,) = [other for other in rows[n]["pending"] if other["report"] == "#593"]
+        assert mishapolk["relation"] == "equal"
+    for n in (156, 237, 271):
+        side = Fraction(rows[n]["exact_side"])
+        (pingyou,) = [other for other in rows[n]["pending"] if other["report"] == "PR #574"]
+        reduction = (side - Fraction(pingyou["exact_side"])) / side
+        assert Fraction(99, 10**22) < reduction < Fraction(101, 10**22)
+    # Beyond the corpus each is below the row tracked from #506; issue 586's rows and #584's
+    # at 375, the source register's current ones, are below it except at 338.
+    for n in (338, 344, 375, 376, 378):
+        tracked = [other for other in rows[n]["pending"] if other["url"] == COVERAGE_URL]
+        assert [other["relation"] for other in tracked] == (
+            ["below"] if n == 338 else ["below", "above"]
+        )
+    assert rows[375]["smallest"] == "evand-compositions-2026-10-13"
+    claims = coverage_check.load_claims(_packet(COUZO_561) / reports.BEYOND)
+    assert sorted(claims) == [338, 344, 375, 376, 378]
+
+
+def test_the_586_claims_are_smallest_at_every_requested_count_but_the_two_ties() -> None:
+    rows = _rows(COUZO_586)
+    # The issues name nine; the ledger of 14 October records the other five as reports of
+    # their own, publications of 93570ef, 4596670 and b85dee2, so the records lane added
+    # them to the requested counts (their printed_in stays the certificates README).
+    named = [154, 211, 241, 302, 339, 379, 380, 381, 382]
+    published = [176, 344, 375, 376, 378]
+    assert [n for n, row in rows.items() if row["requested"]] == sorted(named + published)
+    requested = named
+    assert [rows[n]["printed_in"] for n in (302, 381)] == [
+        "https://github.com/jlevy/squares/issues/583"
+    ] * 2
+    smallest = {n: rows[n].get("smallest") for n in requested}
+    assert smallest == {**dict.fromkeys(requested, reports.THIS), 211: None, 241: None}
+    for n in (211, 241):
+        assert rows[n]["tied"] == [reports.THIS, "#593"]
+    # #586 replaces #583 below its print at every count it names again, and #570's 154 is
+    # #583's certificate.
+    for n in (154, 211, 241, 339, 379, 380, 382):
+        (earlier,) = [other for other in rows[n]["pending"] if other["report"] == "#583"]
+        assert earlier["relation"] == "below"
+    # PingYou's #574 tightenings of the case ceilings at 211 and 241, and its 302, are larger.
+    for n in (211, 241, 302):
+        (pingyou,) = [other for other in rows[n]["pending"] if other["report"] == "PR #574"]
+        assert pingyou["relation"] == "below"
+    # mstrmg's #582 and Kevin Fang's 078789a certificate are larger at 381.
+    assert {other["report"]: other["relation"] for other in rows[381]["pending"]} == {
+        "couzo-certificates-2026-10-11": "below",
+        "#582": "below",
+        "fang-direct-certificates-2026-10-13": "below",
+    }
+    # The five no issue names are each below #561's certificate at the count, read exactly.
+    unnamed = [n for n in rows if rows[n]["printed_in"].endswith("/certificates/README.md")]
+    assert unnamed == published
+    for n in unnamed:
+        (earlier,) = [other for other in rows[n]["pending"] if other["report"] == "#561"]
+        assert earlier["relation"] == "below"
+        assert Fraction(earlier["exact_side"]) == reports.house_side(
+            "[Couzo certificates 2026-10-12]", n
+        )
+    assert rows[176]["smallest"] == "PR #574"
+    assert rows[375]["smallest"] == "evand-compositions-2026-10-13"
+    claims = coverage_check.load_claims(_packet(COUZO_586) / reports.BEYOND)
+    assert sorted(claims) == [339, 344, 375, 376, 378, 379, 380, 381, 382]
+    assert reports.house_side("[Couzo certificates 2026-10-13]", 381) == Fraction(
+        19974977397656713743580918961689, 10**30
+    )
+
+
 @pytest.mark.parametrize(
     "mutation", ["house-side", "pending-relation", "dropped-row", "beyond-removed"]
 )
@@ -693,14 +1083,20 @@ def test_the_receipt_admits_every_job_on_both_routes(name: str) -> None:
     for margins in reports.margins(positives).values():
         for field in ("containment_clearance", "best_pair_gap"):
             assert margins[f"exact_verify_{field}"] == margins[f"independent_{field}"]
-        assert Fraction(margins["exact_verify_best_pair_gap"]) > 0
+        assert Fraction(margins["exact_verify_best_pair_gap"]) >= 0
         assert Fraction(margins["exact_verify_containment_clearance"]) >= 0
-    # SQUISH's squares touch the box; every other source's clear it.
+    # SQUISH's and #567's squares touch the box; every other source's clear it.
     walls = {
         Fraction(m["exact_verify_containment_clearance"])
         for m in reports.margins(positives).values()
     }
-    assert (walls == {0}) is (name == SQUISH_481)
+    assert (walls == {0}) is (name in {SQUISH_481, SQUISH_500, PINGYOU_261})
+    # Only #567's squares touch each other, an exact contact the kernel admits; every other
+    # source's pairs clear.
+    gaps = {
+        Fraction(m["exact_verify_best_pair_gap"]) for m in reports.margins(positives).values()
+    }
+    assert (0 in gaps) is (name == PINGYOU_261)
 
 
 def _jobs_from_receipt(packet: Path, directory: Path) -> None:
@@ -849,7 +1245,35 @@ def test_the_driver_refuses_duplicate_keys_and_incomplete_rows(
 # --------------------------------------------------------------------------- register plan
 
 
-@pytest.mark.parametrize("name", EVERY)
+def test_every_import_reader_is_the_packet_whose_source_key_names_it() -> None:
+    """A reader under the wrong key would fail only when a later packet used it (B9)."""
+    readers = {
+        key: reader
+        for key, reader in reports.HOUSES.items()
+        if isinstance(reader, functools.partial) and reader.func is reports.import_side
+    }
+    assert len(readers) >= 35
+    #: T-185's 175 is the 11 October release's certificate under a key of its own, read
+    #: from that release's packet.
+    shared = {"[Couzo n175 2026-10-11]": "[Couzo certificates 2026-10-11]"}
+    for key, reader in readers.items():
+        packet = reports.packet_path(reader.args[0])
+        assert reports.load_declaration(packet)["source_key"] == shared.get(key, key)
+
+
+# Full run 38756833833 measured these two complete plan/independent-claim reads at
+# 23.91s and 14.92s CALL; the fresh local #593 read took 18.18s. Only those cases move
+# to the existing slow lane. Every other packet and the refusal controls remain quick.
+@pytest.mark.parametrize(
+    "name",
+    [
+        pytest.param(name, marks=pytest.mark.slow)
+        if name in {MISHAPOLK_593, MISHAPOLK_70A}
+        else name
+        for name in EVERY
+        if name not in BEYOND_ONLY
+    ],
+)
 def test_the_register_plan_states_each_bound_as_check_standing_reads_it(name: str) -> None:
     plan = reports.register_plan(_packet(name))
     result = plan["results.yaml"]
@@ -870,6 +1294,25 @@ def test_the_register_plan_states_each_bound_as_check_standing_reads_it(name: st
         SQUISH_481: "2026-10-09",
         MISHAPOLK: "2026-10-09",
         TRIO126: "2026-10-09",
+        PINGYOU_503: "2026-10-11",
+        PINGYOU_504: "2026-10-11",
+        BARNETT: "2026-10-11",
+        OSTASHEV: "2026-10-11",
+        SQUISH_500: "2026-10-11",
+        COUZO_506: "2026-10-11",
+        **dict.fromkeys(PINGYOU_1012, "2026-10-12"),
+        COUZO_561: "2026-10-12",
+        COUZO_586: "2026-10-13",
+        MISHAPOLK_573: "2026-10-12",
+        MISHAPOLK_593: "2026-10-14",
+        OSTASHEV_562: "2026-10-12",
+        OSTASHEV_575: "2026-10-13",
+        OSTASHEV_528: "2026-10-12",
+        CALLE: "2026-10-12",
+        DANIEL_552: "2026-10-12",
+        COUZO_583: "2026-10-13",
+        DANIEL_606: "2026-10-14",
+        MISHAPOLK_70A: "2026-10-14",
     }
     assert result["attribution"]["published"] == published.get(name, "2026-10-10")
     evidence = plan["evidence.yaml"]
@@ -1043,7 +1486,7 @@ def test_a_derived_fact_that_names_other_bytes_is_refused(derived: tuple[Path, P
         reports.read_facts(packet)
 
 
-def test_a_derived_fact_names_its_file_and_admits_no_second_format(
+def test_a_derived_fact_is_named_by_its_count(
     private: Callable[[str], Path],
 ) -> None:
     packet = private(DELEEUW)
@@ -1141,3 +1584,163 @@ def test_the_decimal_claims_find_the_ceiling_smallest_only_at_103_and_258() -> N
         302: "#481",
         303: "#481",
     }
+
+
+# --------------------------------------------------------------------------- 11 October packets
+
+#: Ryan Xu's printed side at 261 (#432); his certificate dilates its centres by 1 + 10^-12.
+RYXU_261 = Fraction(83393899377, 5 * 10**9)
+#: Issue #501's sides, the README's at 41019fb, before c3d17ab replaced all three files.
+ISSUE_501 = {155: "12.952425406986414", 156: "12.979172613722533", 211: "14.996336737028043"}
+
+
+def test_the_barnett_pins_are_the_certificates_the_issue_and_its_attachment_name() -> None:
+    record = _json(_packet(BARNETT) / reports.acquire_source.RECORD)
+    pinned = {item["path"]: item["sha256"] for item in record["sources"][0]["pinned_only"]}
+    assert pinned["certificates/n146.cert"] == (
+        "77b5524f387472a8e5996e319d05735e2a6a0046c24e7043995549bf3945fa3d"
+    )
+    assert pinned["certificates/n261.cert"] == (
+        "9141f7eb86ae23388d349efd810992727f16ca09bc9d0d1a5b94cd5e2a3f0019"
+    )
+
+
+def test_the_barnett_certificates_are_smallest_only_at_the_two_requested_counts() -> None:
+    rows = _rows(BARNETT)
+    assert [n for n, row in rows.items() if row["requested"]] == [146, 261]
+    assert [n for n, row in rows.items() if row["smallest"] == reports.THIS] == [146, 261]
+    # Every certificate of the release is below its case's ceiling, and each of the five
+    # the README marks superseded is above a pending entry at its count.
+    assert all(row["case"]["relation"] == "below" for row in rows.values())
+    assert {n: row["smallest"] for n, row in rows.items() if not row["requested"]} == {
+        70: "T-146 (no issue)",
+        103: "T-146 (no issue)",
+        123: "T-146 (no issue)",
+        237: "T-140 (#488)",
+        295: "T-146 (no issue)",
+    }
+
+
+def test_the_barnett_146_side_is_below_the_regularized_certificate_by_7e8() -> None:
+    row = _rows(BARNETT)[146]
+    (regularized,) = row["pending"]
+    assert (regularized["result"], regularized["relation"]) == ("T-146", "below")
+    margin = Fraction(regularized["exact_side"]) - Fraction(row["exact_side"])
+    assert Fraction(7, 10**8) < margin < Fraction(8, 10**8)
+    assert Fraction(row["case"]["difference"]) > margin
+
+
+def test_the_barnett_261_side_is_below_ryan_xus_side_and_not_only_his_dilation() -> None:
+    row = _rows(BARNETT)[261]
+    ceiling = Fraction(row["case"]["exact_side"])
+    assert ceiling == RYXU_261 * (1 + Fraction(1, 10**12))
+    side = Fraction(row["exact_side"])
+    # The ceiling's dilation is 1.67e-11; the certificate is below the undilated side too.
+    assert side < RYXU_261 < ceiling
+    assert Fraction(5, 10**11) < RYXU_261 - side < Fraction(6, 10**11)
+    assert row["pending"] == []
+
+
+def test_the_ostashev_certificates_are_below_the_issue_sides_and_smallest_everywhere() -> None:
+    rows = _rows(OSTASHEV)
+    assert list(rows) == list(ISSUE_501)
+    for n, row in rows.items():
+        assert (row["smallest"], row["case"]["relation"]) == (reports.THIS, "below")
+        # The issue's s(n) <= v follows from the smaller side retained at c3d17ab.
+        assert Fraction(row["exact_side"]) < Fraction(ISSUE_501[n])
+    (couzo,) = rows[155]["pending"]
+    assert (couzo["result"], couzo["relation"]) == ("T-128", "below")
+
+
+def test_each_ostashev_side_is_its_labelled_optimum_dilated_by_1e60() -> None:
+    packet = _packet(OSTASHEV)
+    source = reports.REPO / reports.acquisition(packet)["archived_path"]
+    for n, certificate in reports.read_facts(packet).items():
+        text = (source / f"records/n{n:04d}.sqcert").read_text(encoding="utf-8")
+        (claimed,) = [
+            line.split()[-1] for line in text.splitlines() if line.startswith("# claimed_s:")
+        ]
+        assert certificate.side == Fraction(claimed) * (1 + Fraction(1, 10**60))
+
+
+# --------------------------------------------------------------------------- 14 October packets
+
+#: Issue #593's 16-place prints at four counts: binary64 values, not rounded-up sides.
+ISSUE_593_PRINTS = {
+    129: "11.8700138504044652",
+    207: "14.8809603715580003",
+    237: "15.9027050578663669",
+    308: "17.9982698795262550",
+}
+
+
+def _manifest(name: str) -> dict[str, str]:
+    """A packet's upstream manifest: the SHA-256 of each pinned or retained path."""
+    path = _packet(name) / reports.acquire_source.MANIFEST
+    rows = (line.split(None, 1) for line in path.read_text(encoding="utf-8").splitlines())
+    return {where.removeprefix("./"): digest for digest, where in rows}
+
+
+def test_the_593_prints_are_refused_and_each_census_fraction_is_admitted() -> None:
+    packet = _packet(MISHAPOLK_593)
+    declaration = reports.load_declaration(packet)
+    certificates = reports.read_facts(packet)
+    assert [row["n"] for row in declaration["certificates"]] == list(certificates)
+    # 51's case ceiling is Ryan Xu's radical side, which no house reader states.
+    assert 51 not in certificates
+    assert len(certificates) == 72
+    for row in declaration["certificates"]:
+        assert certificates[row["n"]].side == Fraction(row["offered"])
+        assert row.get("printed_in", "").endswith("/certificates/census.json")
+    for n, printed in ISSUE_593_PRINTS.items():
+        with pytest.raises(reports.ReportError, match="does not round up"):
+            reports.admit(certificates[n], printed)
+
+
+# Complete 72-certificate and competing-house claim rebuild: 12.76s CALL in full
+# run 38756833833. Its exact comparisons stay intact in the existing slow lane.
+@pytest.mark.slow
+def test_the_593_release_is_smallest_only_at_237_and_ties_couzo_at_211_and_241() -> None:
+    rows = _rows(MISHAPOLK_593)
+    relations: dict[str, int] = {}
+    for row in rows.values():
+        relation = row["case"]["relation"]
+        relations[relation] = relations.get(relation, 0) + 1
+    # Three cases moved below these sides since the read: 175, 232 and 264 hold Daniil
+    # Ostashev's issue-528 houses (T-158).
+    assert relations == {"above": 18, "equal": 40, "below": 14}
+    assert [n for n, row in rows.items() if row["smallest"] == reports.THIS] == [237]
+    for n in (211, 241):
+        assert rows[n]["tied"] == [reports.THIS, "#586"]
+    # At 129, 176, 204, 303 and 304 Ostashev's earlier sides are below by under 1e-30.
+    earlier = {129: "#562", 176: "#575", 204: "#562", 303: "#562", 304: "#575"}
+    for n, report in earlier.items():
+        (ostashev,) = [item for item in rows[n]["pending"] if item["report"] == report]
+        assert ostashev["relation"] == "above"
+        assert 0 < -Fraction(ostashev["difference"]) < Fraction(1, 10**30)
+
+
+def test_thirteen_593_files_are_certificates_already_retained_from_others() -> None:
+    mine = _manifest(MISHAPOLK_593)
+    couzo = {**_manifest(COUZO), **_manifest(COUZO_488), **_manifest(COUZO_506)}
+    for n in (105, 108, 127, 209, 267, 305, 306):
+        assert mine[f"certificates/n{n}.cert"] == couzo[f"certificates/n{n}.cert"]
+    certificates = _packet(REGULARIZED) / "source/search/regularize/lists/certs"
+    for n in (70, 102, 123, 269, 292, 295):
+        raw = gzip.decompress((certificates / f"n-{n:03d}.cert.gz").read_bytes())
+        assert mine[f"certificates/n{n}.cert"] == hashlib.sha256(raw).hexdigest()
+
+
+def test_the_573_release_is_nowhere_smallest_and_shares_four_files_with_593() -> None:
+    rows = _rows(MISHAPOLK_573)
+    assert [n for n, row in rows.items() if row["requested"]] == [103, 153, 207, 209, 258, 270]
+    assert all(row["smallest"] != reports.THIS for row in rows.values())
+    # At 154 and 175 the cases have since taken Evan Daniel's and Daniil Ostashev's houses
+    # (T-160, T-158), which are smaller.
+    below = [n for n, row in rows.items() if row["case"]["relation"] == "below"]
+    assert below == [153, 207]
+    early, late = _manifest(MISHAPOLK_573), _manifest(MISHAPOLK_593)
+    for n in (103, 153, 207, 258):
+        assert early[f"certificates/square-{n}.cert"] == late[f"certificates/n{n}.cert"]
+    for n in (209, 270):
+        assert early[f"certificates/square-{n}.cert"] != late[f"certificates/n{n}.cert"]

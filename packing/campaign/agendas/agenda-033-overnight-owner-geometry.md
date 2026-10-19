@@ -246,7 +246,7 @@ agenda:
     program: n11-structure-and-conditional-dots
     artifacts:
     - packing/campaign/hypotheses/H-135-paired-full-support-pricing.md
-    - docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+    - docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
     outcomes:
     - scope: Was H135 selected and run during agenda033?
       classification: never-opened
@@ -254,7 +254,7 @@ agenda:
         the unchanged scientific question without reusing exp134 or its output path.
       evidence:
       - packing/campaign/hypotheses/H-135-paired-full-support-pricing.md
-      - docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+      - docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
       disposition: defer-dependency
       follow_up: think-lkvd
   - id: BC-322
@@ -446,7 +446,7 @@ physical packing, some valid owner selection must have an excluded residual fami
 The retained experiments do not prove that statement.
 H135 also remained unrun.
 Both questions now have fresh, bounded allocations in
-[the daytime plan](../../../docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md).
+[the daytime plan](../../../docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md).
 No old target, output path, or expired clock transfers as a new measurement.
 
 <!-- This document follows common-doc-guidelines.md.

@@ -39,8 +39,20 @@
   const rows = [...cells.querySelectorAll(".site-atlas-row")].filter(
     (row) => row.getClientRects().length > 0,
   );
+  const viewport = block.closest(".kpress-viewport");
+  if (!(viewport instanceof HTMLElement)) {
+    return null;
+  }
+  const viewportStyle = getComputedStyle(viewport);
+  const viewportLeft = viewport.getBoundingClientRect().left + viewport.clientLeft;
+  const blockStyle = getComputedStyle(block);
   const cellsStyle = getComputedStyle(cells);
   const rootSize = Number.parseFloat(getComputedStyle(document.documentElement).fontSize);
+  const gutter = blockStyle.getPropertyValue("--site-wide-gutter").trim();
+  const gutterPx = Number.parseFloat(gutter) * (gutter.endsWith("rem") ? rootSize : 1);
+  const availableLeft = viewportLeft + Number.parseFloat(viewportStyle.paddingLeft) + gutterPx;
+  const availableRight =
+    viewportLeft + viewport.clientWidth - Number.parseFloat(viewportStyle.paddingRight) - gutterPx;
   const referenceGap = cellsStyle.getPropertyValue("--site-atlas-reference-gap").trim();
   const referenceGapPx =
     Number.parseFloat(referenceGap) * (referenceGap.endsWith("rem") ? rootSize : 1);
@@ -127,6 +139,11 @@
     reference_gap_px: referenceGapPx,
     row_gap_px: Number.parseFloat(cellsStyle.rowGap),
     block: box(block),
+    available: {
+      left: round(availableLeft),
+      right: round(availableRight),
+      width: round(availableRight - availableLeft),
+    },
     panel: {
       id: cells.id,
       role: cells.getAttribute("role"),

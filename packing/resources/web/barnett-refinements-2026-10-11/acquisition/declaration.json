@@ -1,0 +1,35 @@
+{
+  "format": "external-source-declaration-v1",
+  "id": "robertbarnett-square-packing-research",
+  "source_url": "https://github.com/RobertBarnettProjects/square-packing-research",
+  "source_ref": "2573ff51c4b160c952bbb2d1c399e7430d9f9ae2",
+  "source_commit": "2573ff51c4b160c952bbb2d1c399e7430d9f9ae2",
+  "retrieved_at_utc": "2026-10-11T20:35Z",
+  "git_scope": "Full clone, checked out at the commit issue #505 pins; main had moved to 52cf1cc7ba006731ef76818267216c87bb63281e, which adds diagrams and moves the historical certificates into superseded/ and leaves certificates/n146.cert and certificates/n261.cert byte-identical. All eleven files of the pinned tree are in the scope and bound to their Git blobs; under derived-only custody none is copied. No source program was executed.",
+  "archived_dir": "source",
+  "license": "No licence file in the pinned tree, and its README states no reuse terms. Derived-only custody under the known-best retention policy: no upstream byte is retained, every file is bound here by SHA-256 and at the pin by its Git blob, and no redistribution permission or licence determination is asserted. The source credits Ryan Xu with both layouts (and Evan Daniel's regularization at 146 in the comparison) and Robert Barnett with the refinements, and discloses OpenAI Codex assistance.",
+  "claims": [
+    "Issue #505 reports the exact rational certificates s(146) <= 116279649124311595126849961042493265136092670741573762928668277775998122712863472766532671969348798419026610394581005669/9240437194455113887096299456817024243377978045957194209468060456305894240222303442118770000000000000000000000000000000 (rounded up, 12.583782203951046204) and s(261) <= 281511998443714605777671262552678001053511713995864784318453182156213791529093472577894719178723409384395264262601/16878452773388004800535351238155816857400040173477095354881922318666694517637251382500000000000000000000000000000 (rounded up, 16.678779875343207747), local refinements of Ryan Xu's packings by sequential linear programming and exact rational contraction.",
+    "The README at the pin also lists s(2043) <= 2284784566027863/50000000000000, a refinement of David Ellsworth's packing as improved by Grigoriy Dyachkov, beyond the case corpus, and five historical certificates at 70, 103, 123, 237 and 295 that it marks superseded and excludes from the request.",
+    "The source reports that each certificate passes two exact checkers written in the same assisted project and Evan Daniel's verify_cert.py and verify_cert2.py at 268af529546176a25224ea3b2c7d29cef8d9e911, and that David Ellsworth's check_packing.py accepts 140-digit exports at tolerance 1e-90. These are author reports; no global or local optimality is claimed."
+  ],
+  "scope": [
+    "README.md",
+    "certificates",
+    "results"
+  ],
+  "pinned_only": [
+    {
+      "match": "certificates/*.cert",
+      "reason": "An exact rational certificate in Evan Daniel's format: the header n S, then x y t per square with centres in [0, S]^2 and rational half-angle tangents t. No licence in the tree, so derived-only custody: an importer reads it from a checkout at this pin and must match this digest."
+    },
+    {
+      "match": "results/*.json",
+      "reason": "The source's result metadata: exact sides, comparisons, check receipts and timings, an author report. No licence: pinned by digest only."
+    },
+    {
+      "match": "README.md",
+      "reason": "Author prose stating the claims, method, credit and AI assistance, quoted in this packet's README. No licence: pinned by digest only."
+    }
+  ]
+}

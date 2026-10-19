@@ -41,6 +41,21 @@ def preserve_selected_case(n: int, text: str, source_ids: Collection[str]) -> bo
     return case["reported_upper_bound"]["source_key"] == source["source_key"]
 
 
+def verified_lane_held_by_later_layer(
+    upper: Mapping[str, Any], own_evidence: Collection[str], own_bound: Mapping[str, Any]
+) -> bool:
+    """Whether a later layer holds a case's verified upper lane, so an earlier layer
+    applied to the record must leave the lane alone: the lane cites evidence that is not
+    the earlier layer's own, and its bound lies below `own_bound`, the one the earlier layer
+    would write. The earlier layers ask this with their own evidence ids rather than
+    naming any later layer, so a later registration needs no change to them, and none of
+    them, run on its own, writes its ceiling back over a lower one."""
+    from devtools.apply_exact_ceilings import bound_value  # noqa: PLC0415 -- heavy import
+
+    foreign = set(upper.get("evidence") or []) - set(own_evidence)
+    return bool(foreign) and bound_value(upper) < bound_value(own_bound)
+
+
 def _adopt_selected_update(n: int, existing: str, generated: str) -> str:
     """Rebuild the selected update while retaining the earlier certified lane."""
     from devtools import render_case_verifiers  # noqa: PLC0415
@@ -256,7 +271,17 @@ def adopt_selected_report(n: int, existing: str, generated: str) -> str:
     resources, evidence and blockers belong to the intake and remain editorial additions;
     ordinary lower lanes and their prose come from the generator. Rigidity is promoted
     afterwards by its existing owner. This is publication adaptation, not certification.
+    A case at a house adopted on 11 October 2026 is `adopt_houses.adopt_case`'s.
     """
+    from devtools import adopt_houses  # noqa: PLC0415
+
+    if adopt_houses.holds(n, existing):
+        return adopt_houses.adopt_case(n, existing, generated)
+    return _adopt_source_report(n, existing, generated)
+
+
+def _adopt_source_report(n: int, existing: str, generated: str) -> str:
+    """The selected report of a source imported before the adoption of 11 October 2026."""
     from devtools import confirm_refinement_records as refinement  # noqa: PLC0415
     from devtools import evand_arrangement_reports as evand  # noqa: PLC0415
     from devtools import register_evand_arrangements as evand_adoption  # noqa: PLC0415

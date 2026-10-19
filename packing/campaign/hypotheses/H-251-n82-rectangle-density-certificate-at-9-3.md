@@ -47,7 +47,7 @@ hypothesis:
   registered: '2026-09-27'
   notes: >-
     From the 2026-09-27 planning block
-    (docs/project/specs/active/plan-2026-09-27-after-4640020-overnight.md). wand125's
+    (docs/project/specs/archive/plan-2026-09-27-after-4640020-overnight.md). wand125's
     rectangle certificates stop at n = 78, so n = 82..97 stay at Nagamochi's closed forms
     1 + sqrt(n - 17), against reported packings from 9.5355 to 10; the gap at n = 82 is
     0.47. A certificate at 9.3 lifts n = 82..85; one at 9.5 would lift n = 82..89. X-039

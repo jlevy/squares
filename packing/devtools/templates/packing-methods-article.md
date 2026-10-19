@@ -802,35 +802,45 @@ the stated finite feasibility checks.
 They are not two independent mathematical methods, nor a replay of the authors’
 optimizers.
 
-### Replayed certificates and pending adoption
+### Replayed certificates and house adoption
 
 A successful geometry replay and a change to the standing register are separate events.
 Couzo’s eight exact refinements and five follow-up refinements have complete passing
-positive and negative-control replays, while T-128 and T-130 remain reported entries
-pending confirming integration and preservation of displaced source houses.
-The follow-up refines Xu’s $n=84,86,105,175$ witnesses and Daniel’s $n=270$ witness; its
-safe $n=105$ ceiling is $10.7893037837481589$, below the selected value in the table.
-That smaller certificate is useful evidence about refinement even before standing
-adoption
+positive and negative-control replays and reached V3/C3 as T-128 and T-130 on the review
+of 10 October. The follow-up refines Xu’s $n=84,86,105,175$ witnesses and Daniel’s
+$n=270$ witness; its safe $n=105$ ceiling is $10.7893037837481589$
 ([eight-case packet](../../resources/web/couzo-exact-refinements-2026-10-08/README.md);
 [five-case packet](../../resources/web/couzo-followup-refinements-2026-10-08/README.md)).
 
 Daniel’s 9 October $n=132,155$ certificates have complete feasibility replays.
 Both positive jobs passed both rational geometry implementations, which also rejected
 all four duplicate-square and outside-container controls.
-The $n=132$ certificate has safe sixteen-place ceiling $11.9870993322450633$, about
-$4.23\times10^{-3}$ below the selected bound.
-It is recorded as T-131, with independent review and standing-bound adoption pending
+The $n=132$ certificate, T-131, has safe sixteen-place ceiling $11.9870993322450633$;
+later certificates are smaller still
 ([record-hunt packet](../../resources/web/evand-record-hunt-2026-10-09/README.md);
 [results register](../../frontier/results.yaml)).
 
-The $n=155$ certificate has exactly the side of Couzo’s pending T-128 certificate, with
-safe ceiling $12.9524989440140074$. The two share 152 of 155 exact poses.
+The $n=155$ certificate has exactly the side of Couzo’s T-128 certificate, with safe
+ceiling $12.9524989440140074$. The two share 152 of 155 exact poses.
 The producer labels the three differing squares as free or having flat motion; a
 connecting motion and equivalence of their local minima have not been verified.
-Daniel’s certificate supplies equal-bound evidence to T-128, whose adoption remains
-pending
+Daniel’s certificate supplies equal-bound evidence to T-128
 ([exact comparison](../../resources/web/evand-record-hunt-2026-10-09/acquisition/claims.json)).
+
+On 11 and 12 October 2026 the case records adopted, at 50 counts, the smallest confirmed
+and reviewed exact side the register held: the reported and verified upper bounds moved
+together to it, each earlier certificate stayed as history, and each drawing moved to
+the adopted geometry.
+Couzo’s refinements hold 84, 86, 105, 108, 127, 180, 228, 267 and 306, two more counts
+through his 10 October certificates and 304 and 305 through his 11 October refinements
+of SQUISH’s packings there, SQUISH’s packings ten counts, seven of them Mondrian
+compositions of its 11 October release, Daniel’s regularizations of Xu’s and SQUISH’s
+packings thirteen, Daniel’s reconstruction of Xu’s arrangement 126, Daniel’s own
+packings 132 and 154, the second from his size-chaining explorer, his move of Fang’s
+construction 308, PingYou Ltd’s constructions from Xu’s n = 70 packing 153 and 207,
+Daniil Ostashev’s packings 155, 156 and 211 and his compositions with a 38-square
+rectangle 175, 232 and 264, and Robert Barnett’s refinements of Xu’s packings 146 and
+261 ([results register](../../frontier/results.yaml)).
 
 Pending source claims need their own scope.
 Daniel’s retained $n=105,130,292$ supplement, T-129, is an unreplayed historical source

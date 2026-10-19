@@ -1,0 +1,24 @@
+perm table equals geometric D4 action on the 24 cells: True
+comp/inv tables consistent with perm: True
+RepTree nodes: 43593  distinct hole-sets: 43593
+RepTree part definitions: 511
+BST keys strictly increasing in-order (find is sound): True  count 43593
+D4 orbits of 7-subsets computed here: 43593
+representatives hit distinct orbits: True  all orbits represented: True
+Burnside sum/8 = 43593.0
+rows parsed: 346104
+rows: 7 distinct holes each: True  tags strictly increasing: True  each maps to its representative: True  rows = all C(24,7): True
+chunk files: 338
+patterns: 35  all nodup: True
+full rosters: 2781  keys 0..2780: True  all 17 distinct cells: True  distinct rosters: 2781
+certificate definitions: 511
+certificate tree mirrors RepTree, assignments: 43593
+pattern-covered representatives: 40812  full representatives: 2781  violations: 0  distinct full indices used: 2781  = all 2781: True
+neighbour indices 209,1158,1161,1193 and capture 204 rosters:
+   209 (0, 1, 2, 3, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 18, 19, 20)
+   1158 (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 18, 19, 20, 21)
+   1161 (0, 1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 18, 19, 20, 21)
+   1193 (0, 1, 2, 3, 4, 5, 6, 7, 9, 11, 12, 13, 14, 18, 19, 20, 21)
+   204 (0, 1, 2, 3, 5, 6, 7, 8, 10, 11, 12, 13, 14, 15, 18, 19, 20)
+pattern indices used: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34]  count 35
+exit 0

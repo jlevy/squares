@@ -1,0 +1,6 @@
+# command: /tmp/claude-0/-home-user-squares/387dc0a2-0a91-51c6-bf71-f69e33945398/scratchpad/i610/zmx2work/6b7f0f79/verify2/target/release/zmx2 d4 /tmp/claude-0/-home-user-squares/387dc0a2-0a91-51c6-bf71-f69e33945398/scratchpad/i610/data/s95_cover_v2.txt
+# cwd: scratch: zmx2.rs 6b7f0f79466bf25c9a85f8fe2f3866de734935f0521ea188136818c2fb5b3fed built from retained bytes (binary sha256 cba78a9eb5a30e7baf7901b2745fc7cf65b027e54bfc945cfddf53b53abf8525); cover 8b2d2152867585c82920bc90c6c3ec2a2458ef2ba57311ccd7dd436d1344cb7c
+# python3: not used by this command
+# host: 4 cores; load 2.97 2.65 3.12; started 2026-10-15T01:33:28Z
+D4: measure invariant under x->s-x and x<->y (exact)
+# finished 2026-10-15T01:33:28Z; exit 0; wall 0.050 s; CPU 0.0 s (user 0.035 + sys 0.012); load 2.97 2.65 3.12

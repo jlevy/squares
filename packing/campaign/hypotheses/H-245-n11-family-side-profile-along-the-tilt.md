@@ -42,7 +42,7 @@ hypothesis:
   registered: '2026-09-25'
   notes: >-
     The unrun half of H-239 for the one-parameter family, from the Session 159 n11
-    assessment (docs/project/specs/active/plan-2026-09-25-after-r052-planning.md).
+    assessment (docs/project/specs/archive/plan-2026-09-25-after-r052-planning.md).
     Values already known from exp-228: f(41.56 degrees) <= 3.8867 and
     f(45 degrees) <= 3.8856, against U = 3.877084.
 ---

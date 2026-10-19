@@ -48,7 +48,7 @@ hypothesis:
   registered: '2026-09-25'
   notes: >-
     R052's lesson carried to rung 1, from the Session 159 n11 assessment
-    (docs/project/specs/active/plan-2026-09-25-after-r052-planning.md). Stromquist's
+    (docs/project/specs/archive/plan-2026-09-25-after-r052-planning.md). Stromquist's
     fixed-orientation counting is tight at 3.8856 > U and exp-131's class counts decide
     exactly at 3877084/10^6; against it, exp-064 measured the shrink alone at 0.0089 of
     side, and the Session 159 probe of the existing class certificate refuted no one-degree

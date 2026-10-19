@@ -1,0 +1,197 @@
+{
+ "schema": "closed-form-review-family-probe/v1",
+ "program": "review/family_probe.py",
+ "program_sha256": "bb7a9d1df6d971964752e673230f088755792edced0dff7f6c571974863398b6",
+ "interval": 20,
+ "d0": "93/200",
+ "d1": "47/100",
+ "family_sha256": "d5c172749d19d06ffca459ebf1c4df894b067d21e35b35047d27604654c1cf95",
+ "family_right_sha256": "cd8eb7e5ba4637ca33ad734d40ac30c555ef5844ba540c38d5f31cba14948cb3",
+ "seed": 20261014,
+ "format": {
+  "problems": [],
+  "right_side_is_T_row_for_row": true
+ },
+ "structure": {
+  "checks": {
+   "bottom wall period mass 9/5": true,
+   "period reflection symmetric": true,
+   "period lines on the 1/5 grid": true,
+   "six other bottom periods equal the period": true,
+   "six other left-wall periods equal the transposed reflected period": true,
+   "T corner remainder nonnegative, vertical lines on x = 2 within y in [0, 2]": true,
+   "F corner remainder nonnegative inside [0, 2 + d0] x [0, 2]": true,
+   "recomputed S(d0), S(d1) equal the stored S_d0, S_d1": true,
+   "certified line equals S at both ends": true,
+   "S above delta/2 at both ends": true
+  },
+  "notes": {
+   "m_v": "291863538125445252945126393986055747807367297279845358574833742490031101886299695053249946433034880944649315045204250569447802163671357878452332743586387450316241600721421618131206313257096982214233774457272842958752710218621876471564672754460570557/281518054148126034279369815908341258887306517869113569768619813500042627751043046517595890108038192778548106425194327616886476121583415312290753602368843025129101604259096276960673759737648455031657209247347615571508164015579189073579956524428480000",
+   "S_d0": "0.4801855183756238",
+   "S_d1": "0.47919140389062376"
+  }
+ },
+ "global": {
+  "k=7 delta=93/200": {
+   "total mass identity": true,
+   "support inside the container": true,
+   "global equals local on [0, 24/5]^2": true,
+   "segments": 884
+  },
+  "k=7 delta=187/400": {
+   "total mass identity": true,
+   "support inside the container": true,
+   "global equals local on [0, 24/5]^2": true,
+   "segments": 884
+  },
+  "k=7 delta=18749/40000": {
+   "total mass identity": true,
+   "support inside the container": true,
+   "global equals local on [0, 24/5]^2": true,
+   "segments": 884
+  },
+  "k=7 delta=47/100": {
+   "total mass identity": true,
+   "support inside the container": true,
+   "global equals local on [0, 24/5]^2": true,
+   "segments": 884
+  },
+  "k=8 delta=93/200": {
+   "total mass identity": true,
+   "support inside the container": true,
+   "global equals local on [0, 24/5]^2": true,
+   "segments": 1028
+  },
+  "k=8 delta=187/400": {
+   "total mass identity": true,
+   "support inside the container": true,
+   "global equals local on [0, 24/5]^2": true,
+   "segments": 1028
+  },
+  "k=8 delta=18749/40000": {
+   "total mass identity": true,
+   "support inside the container": true,
+   "global equals local on [0, 24/5]^2": true,
+   "segments": 1028
+  },
+  "k=8 delta=47/100": {
+   "total mass identity": true,
+   "support inside the container": true,
+   "global equals local on [0, 24/5]^2": true,
+   "segments": 1028
+  },
+  "k=11 delta=93/200": {
+   "total mass identity": true,
+   "support inside the container": true,
+   "global equals local on [0, 24/5]^2": true,
+   "segments": 1460
+  },
+  "k=11 delta=187/400": {
+   "total mass identity": true,
+   "support inside the container": true,
+   "global equals local on [0, 24/5]^2": true,
+   "segments": 1460
+  },
+  "k=11 delta=18749/40000": {
+   "total mass identity": true,
+   "support inside the container": true,
+   "global equals local on [0, 24/5]^2": true,
+   "segments": 1460
+  },
+  "k=11 delta=47/100": {
+   "total mass identity": true,
+   "support inside the container": true,
+   "global equals local on [0, 24/5]^2": true,
+   "segments": 1460
+  }
+ },
+ "records": {
+  "straddle": {
+   "file": "straddle.rec",
+   "sha256_matches": true,
+   "problems": [],
+   "roots": 10584,
+   "leaves": 298442,
+   "roots_match_intervals_json": true,
+   "leaves_match_intervals_json": true,
+   "leaf_kinds_match_intervals_json": true,
+   "axis_pieces": [
+    14,
+    28,
+    27,
+    1
+   ],
+   "tiling_disjointness_checked_roots": 200,
+   "ok": true
+  },
+  "left": {
+   "file": "left.rec",
+   "sha256_matches": true,
+   "problems": [],
+   "roots": 17442,
+   "leaves": 307389,
+   "roots_match_intervals_json": true,
+   "leaves_match_intervals_json": true,
+   "leaf_kinds_match_intervals_json": true,
+   "axis_pieces": [
+    17,
+    38,
+    27,
+    1
+   ],
+   "tiling_disjointness_checked_roots": 200,
+   "ok": true
+  },
+  "top": {
+   "file": "top.rec",
+   "sha256_matches": true,
+   "problems": [],
+   "roots": 4158,
+   "leaves": 31859,
+   "roots_match_intervals_json": true,
+   "leaves_match_intervals_json": true,
+   "leaf_kinds_match_intervals_json": true,
+   "axis_pieces": [
+    14,
+    11,
+    27,
+    1
+   ],
+   "tiling_disjointness_checked_roots": 4158,
+   "ok": true
+  },
+  "right": {
+   "file": "right.rec",
+   "sha256_matches": true,
+   "problems": [],
+   "roots": 13338,
+   "leaves": 194542,
+   "roots_match_intervals_json": true,
+   "leaves_match_intervals_json": true,
+   "leaf_kinds_match_intervals_json": true,
+   "axis_pieces": [
+    13,
+    38,
+    27,
+    1
+   ],
+   "tiling_disjointness_checked_roots": 200,
+   "ok": true
+  }
+ },
+ "poses": {
+  "violations": [],
+  "local_mismatch": [],
+  "right_above_global": [],
+  "poses_checked": 1345,
+  "minimum_mass": {
+   "value": 1.0,
+   "exact": "1",
+   "at": "k=7 delta=93/200 z=(50363968719/17520260000, 10389583455797/3504052000000) u=431/2048 [random]"
+  },
+  "local_compared": 679,
+  "right_compared": 348
+ },
+ "ok": true,
+ "seconds": 174.0
+}

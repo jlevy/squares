@@ -9,6 +9,7 @@ it (`templates/paper-design.md`, Color, The Rung Scale).
 
 from __future__ import annotations
 
+import re
 from itertools import pairwise
 
 import pytest
@@ -219,8 +220,9 @@ def test_the_status_chips_take_fills_from_the_scale() -> None:
                 (confirmed[fill.theme].lightness, confirmed[fill.theme].chroma)
             )
     css = render_overview.SITE_CSS.read_text(encoding="utf-8")
-    start = css.index(".site-chip:is([data-case-status]")
-    rules = css[start : css.index("\n/*", start)]
+    shared_rule = re.search(r"\.site-chip:is\(\s*\[data-case-status\][^{]*\{([^}]+)\}", css)
+    assert shared_rule is not None
+    rules = shared_rule.group(1)
     assert rules.count("oklch(") == 1
     assert "#" not in rules
     assert 'data-tone="accent"' not in css

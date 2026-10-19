@@ -363,7 +363,7 @@ finding.
 An Astra review at max thinking found no new flaw in the reviewed continuum-coverage
 argument at this pin.
 The
-[process map](../verification-tooling.md#wand125-verification-process-and-independent-equivalence)
+[process map](../guides/verification-tooling.md#wand125-verification-process-and-independent-equivalence)
 separates exact admission, interval geometry, translation-domain subdivision, the
 201-direction net, strict packing budget and artifact publication.
 Its arithmetic dependencies include binary64 interval operations, the rounding mode, and

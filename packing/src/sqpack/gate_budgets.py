@@ -44,7 +44,9 @@ tracker owns replacing uncontrolled runner walls with attributable measurements.
 399s frontend run with all 408 tests and four HTTP budgets passing was being called a
 hang solely because it exceeded twice a 165s cost ceiling. A finished run's wall cannot
 establish that it hung. Actual subprocess deadlines and the retained per-test guard
-bound hangs; main, scheduled and explicit `--enforce-budget` runs keep cost enforcement.
+bound unfinished commands. Main and scheduled tier walls keep cost enforcement.
+The per-test scope may separately report CALL cost on every hosted event, retaining
+its hard backstop; local, strict and explicit `--enforce-budget` calls stay strict.
 
 A tier that has never been read at its reference shape may say so instead of leaving its
 record empty without comment. `pending_measurement` names the bead that owns the first
@@ -214,7 +216,7 @@ class Advisory:
 
 @dataclass(frozen=True)
 class CeilingAdvisory:
-    """Completed-run cost advisory on pull requests, retaining the per-test guard.
+    """PR tier-wall advisory with a separately declared hosted CALL scope.
 
     Subprocess deadlines detect commands that fail to finish. A finished tier's wall
     remains cost evidence regardless of its ratio to the recorded ceiling.
@@ -222,6 +224,8 @@ class CeilingAdvisory:
 
     advisory: Advisory
     per_test_hang_seconds: float
+    per_test_scope: Literal["pull_request", "hosted"] = "pull_request"
+    """CALL findings only; tier-wall advisory remains limited to pull requests."""
 
 
 @dataclass(frozen=True)
@@ -240,9 +244,8 @@ class Policy:
     #: Set when the register declares the drift and stale rules advisory on hosted
     #: pull-request runs; None is enforcing. The ceiling is outside this.
     pull_request_relative_rules: Advisory | None = None
-    #: Set when the register declares the ceiling, and the per-test call-wall rule,
-    #: advisory on hosted pull-request runs, retaining command/per-test guards; None
-    #: is enforcing.
+    #: PR tier-wall advisory with separately scoped CALL reporting, retaining
+    #: command/per-test guards; None is enforcing.
     pull_request_ceiling: CeilingAdvisory | None = None
 
 
@@ -575,8 +578,11 @@ def _ceiling_rule_from(raw: object) -> CeilingAdvisory | None:
         | {"enforcement": entry.get("enforcement", "enforcing")}
     )
     per_test = entry.get("per_test_hang_seconds")
+    scope = entry.get("per_test_scope", "pull_request")
+    if scope not in ("pull_request", "hosted"):
+        raise BudgetError(f"{where}.per_test_scope must be pull_request or hosted")
     if relaxed is None:
-        if per_test is not None:
+        if per_test is not None or scope != "pull_request":
             raise BudgetError(
                 f"{where} is enforcing and still declares a hang detector; remove "
                 "per_test_hang_seconds when enforcement returns"
@@ -594,6 +600,7 @@ def _ceiling_rule_from(raw: object) -> CeilingAdvisory | None:
             ),
         ),
         per_test_hang_seconds=per_test_seconds,
+        per_test_scope=scope,
     )
 
 

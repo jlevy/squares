@@ -232,8 +232,8 @@ def test_the_atlas_grid_and_the_frontier_table_open_the_same_record(
     popover: the atlas grid's cells and the frontier table's `n` are links marked
     `data-case`, and a frontier row names its record for the popover to open. A case
     drawn from its regularized view, the atlas's one tile for it since the House and
-    Regularized tabs went (think-k8x9), links the same record, whose drawing is the
-    house one."""
+    Regularized tabs went (think-k8x9), links the same record, which draws the same view
+    and keeps the house drawing as published."""
     grid = overview_sections.atlas_grid()
     assert "<template data-atlas-regularized>" not in grid
     link = r'href="cases/(\d+)\.html" data-case="(\d+)" data-atlas-n="(\d+)"'
@@ -338,6 +338,77 @@ def test_a_case_diagram_precedes_its_count_and_ordered_status_row() -> None:
     assert "data-case-index" not in markup
 
 
+def test_a_regularized_default_draws_its_view_and_keeps_the_house_as_published() -> None:
+    """Regularization policy, section 12 (the owner, 13 October 2026): a case whose
+    default picture is its regularized view draws the view first, its caption carrying
+    the regularization's credit line, and keeps the house drawing one click away in a
+    disclosure named "As published", with its source's credit. A case whose view ties its
+    house drawing, and a case with no view, draw the house drawing alone."""
+    from devtools import default_drawings  # noqa: PLC0415
+
+    cases = {case["n"]: case for case in frontier_page.frontier_cases()}
+    record = default_drawings.drawn_views()
+    drawn = sorted(frontier_page.drawn_regularized())
+    kept = sorted(set(record) - set(drawn))
+    plain = next(n for n in sorted(cases) if n not in record)
+    n = drawn[0]
+    head = render_case_pages.record_head(cases[n], first=1, last=324).split("</header>")[0]
+    view = frontier_page.packing_svg(n, units=1000, root=frontier_page.REGULARIZED_RENDERINGS)
+    house = frontier_page.packing_svg(n, units=1000)
+    assert view != house
+    figure = head.index('<figure class="site-case-figure">')
+    disclosure = head.index('<details class="site-case-published"><summary>As published')
+    assert figure < head.index(view) < disclosure < head.index(house)
+    assert disclosure < head.index('class="site-case-title"')
+    assert html.escape(default_drawings.credit_line(n)) in head[:disclosure]
+    published = head[disclosure:]
+    assert '<figure class="site-case-figure site-case-published-figure">' in published
+    assert "The packing as published, " in published
+    upper = cases[n]["reported_upper_bound"]
+    assert frontier_page.credit(upper.get("found_by"), upper.get("found_year")) in published
+    assert published.count("<svg ") == 1
+    for other in [*kept[:1], plain]:
+        head = render_case_pages.record_head(cases[other], first=1, last=324)
+        head = head.split("</header>")[0]
+        assert frontier_page.packing_svg(other, units=1000) in head, other
+        assert "site-case-published" not in head, other
+        assert "Regularized by" not in head, other
+    if kept:
+        data = render_case_pages.record_head(cases[kept[0]], first=1, last=324)
+        assert '<span class="site-card-label">Regularized drawing</span>' not in data
+
+
+def test_as_published_credits_the_source_of_the_drawn_packing() -> None:
+    """The house drawing kept "as published" is credited to the source whose packing it
+    pictures, the rule the atlas builder reads the witness by
+    (`devtools.pictured_source`), not to the source of the side: where an exact optimum
+    of a packing reports the side, the packing is its finder's (review B1 of #591, at 14
+    counts). A record that names no finder is credited to its source
+    alone, with no empty credit before it (B3)."""
+    from devtools.build_bound_citations import load_case  # noqa: PLC0415
+    from devtools.pictured_source import (  # noqa: PLC0415
+        EXACT_OPTIMA_SOURCE_KEY,
+        pictured_source_key,
+    )
+
+    drawn = sorted(frontier_page.drawn_regularized())
+    uppers = {n: load_case(n)["reported_upper_bound"] for n in drawn}
+    solved = [n for n in drawn if uppers[n].get("source_key") == EXACT_OPTIMA_SOURCE_KEY]
+    if not solved:
+        pytest.skip("no drawn default reports its side from the exact optima")
+    n = solved[0]
+    caption = render_case_pages.as_published(n)
+    pictured = pictured_source_key(n, EXACT_OPTIMA_SOURCE_KEY)
+    assert pictured != EXACT_OPTIMA_SOURCE_KEY
+    assert f'<span class="site-credit">{html.escape(pictured)}</span>' in caption
+    assert html.escape(EXACT_OPTIMA_SOURCE_KEY) not in caption
+    unfound = [n for n in drawn if not uppers[n].get("found_by")]
+    if unfound:
+        caption = render_case_pages.as_published(unfound[0])
+        assert '<figcaption>The packing as published <span class="site-credit">' in caption
+        assert ",  " not in caption
+
+
 def test_the_old_case_directory_retains_known_counts_in_its_forwarder(
     page: str, numbers: list[int]
 ) -> None:
@@ -379,7 +450,13 @@ def test_every_record_opens_with_its_visual_summary(
             record.index('<div class="site-case-prose"'),
         ]
         assert order == sorted(order), n
-        assert record.count('<figure class="site-case-figure') == 1, n
+        # The default picture, and for a case drawn from its regularized view the house
+        # drawing as published, in a disclosure after it (`test_a_regularized_default_...`).
+        published = n in frontier_page.drawn_regularized()
+        figures = record.count('<figure class="site-case-figure')
+        assert figures - record.count("site-case-published-figure") == 1, n
+        assert record.count('<details class="site-case-published">') == published, n
+        assert figures == 1 + published, n
         assert 'class="site-case-interval" data-math-face="serif"' in record, n
         assert 'class="site-atlas-pop-bound" data-math-face="serif"' in record, n
         assert "<svg " in record, n
@@ -472,11 +549,20 @@ def test_case_291_typesets_the_general_bound_and_retains_the_exact_ceiling(
     assert "sqrt(" not in formula[1]
     assert "&gt;=" not in formula[1]
     assert "<msqrt>" in formula[1]
-    assert "<mn>876776695296637</mn>" in record
-    assert "<mn>50000000000000</mn>" in record
+    # Since T-155 the ceiling is the regularized certificate's exact side, a fraction too
+    # long for the bound's panel (`render_case_pages.bound_tex`), which prints its decimal;
+    # the record's prose typesets the side itself.
+    assert 'id="the-verified-upper-bound-is-a-ceiling"' in record
+    assert "<mn>17.53553390593273762200422181052425</mn>" in record
     assert "17.53553390593274" in record
     assert "Trevor Green" in record
     assert "Source-reported only; no verification promotion." in record
+    # n = 290 took the same exact side on 13 October 2026 (T-156); n = 150 still holds
+    # Evan Daniel's certificate side rounded up (T-101), short enough to set as a fraction.
+    assert "<mn>17.53553390593273762200422181052425</mn>" in _record(records, 290)
+    earlier = _record(records, 150)
+    assert "<mn>1277817459305203</mn>" in earlier
+    assert "<mn>100000000000000</mn>" in earlier
 
 
 def test_case_11_carries_its_polynomial_results_verification_and_links(

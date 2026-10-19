@@ -1,0 +1,12 @@
+Environment of the clean replay (sh verify.sh <dir> 4, 2026-10-13; EXIT 0, 9 min 13 s wall)
+
+host      Intel Core i7-14700K, Linux 5.15.167.4-microsoft-standard-WSL2 (Ubuntu 22.04)
+rustc     1.99.0 (b940084d7 2026-09-28)
+cargo     1.99.0 (5f94df478 2026-08-27)
+zmx2      built by verify.sh from evand/square-packing@b91d70b6ed314624c1434b628a9c7bf9a132c743
+          (cargo build --release --bin zmx2); binary sha256
+          8b4dfd1e8c8b0f3e48c6c18f6af1168c868fe1582428706830acb399a11c321b
+python    3.11.17, numpy 2.4.6
+
+Control: changing one weight of the cover by 1/(4*10^8) (line 40) makes `zmx2 d4` refuse it with
+"ERROR: --d4: cover is not D4-invariant: ..." and exit status 2, which stops verify.sh (set -e).

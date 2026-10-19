@@ -1,0 +1,3 @@
+n=443 W=21.990560384076 H=20.990560384076 ceilW-W=9.440e-03 ceilH-H=9.440e-03
+min wall margin 2.711e-20  min pair margin 4.314e-20  overlapping pairs 0
+STRICT VALID

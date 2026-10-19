@@ -1,6 +1,6 @@
 """The reader documents as site pages, with every link made to work off GitHub.
 
-The tutorial is one of the papers the navigation's Papers entry leads to (`papers.html`)
+The tutorial is one of the papers the navigation's Explanations entry leads to (`papers.html`)
 and marks current; the README, `epistemics.md`, the synopsis and the two reference
 documents are pages the navigation does not list, reached from the overview's cards,
 whose popovers frame them. Each is written to be read on GitHub, where a relative link
@@ -54,11 +54,12 @@ from itertools import pairwise
 from pathlib import Path
 from urllib.parse import quote, unquote
 
-from devtools import render_overview, repo_links
+from devtools import render_changelog, render_overview, repo_links
 from devtools.render_overview import REPO, Page
 from devtools.repo_links import RepositoryTree, repo_url, repository_tree
 
 TUTORIAL = REPO / repo_links.TUTORIAL
+TUTORIAL_ADVANCED = REPO / repo_links.TUTORIAL_ADVANCED
 README = REPO / repo_links.README
 
 
@@ -129,7 +130,7 @@ def _document(path: str, name: str, title: str, description: str) -> SiteDocumen
 
 
 DOCUMENTS: tuple[SiteDocument, ...] = (
-    # A paper, so the bar's Papers entry is current on it, as on the explainer.
+    # A paper, so the bar's Explanations entry is current on it, as on the explainer.
     SiteDocument(
         TUTORIAL,
         "tutorial.html",
@@ -137,6 +138,15 @@ DOCUMENTS: tuple[SiteDocument, ...] = (
         "Tutorial",
         "A guided walk through square packing: the problem, the bounds and how each "
         "result here is checked.",
+        "article",
+    ),
+    SiteDocument(
+        TUTORIAL_ADVANCED,
+        "tutorial-advanced.html",
+        "papers",
+        "Advanced Tutorial",
+        "Square packing methods: linear programs, exact certificates, search, "
+        "regularization, and global optimality proofs.",
         "article",
     ),
     # The overview's document cards, in their order (`render_overview.DOCUMENT_PAGES`).
@@ -188,6 +198,7 @@ _BY_SOURCE = {doc.source.relative_to(REPO).as_posix(): doc for doc in DOCUMENTS}
 RECORD_PAGES: dict[str, str] = {
     repo_links.RESULTS: render_overview.RESULTS_PAGE,
     repo_links.STATUS: "atlas.html",
+    repo_links.CHANGELOG: "news.html#changelog",
 }
 #: Where every case's record is served, one address per case (`render_case_pages`).
 CASES_DIR = "cases"
@@ -207,6 +218,19 @@ _MANUAL_CONTENTS = re.compile(
     r"^## Contents\n\n(?:[ \t]*(?:\d+\.|[-*])[ \t]+\[[^\]]+\]\(#[^)]+\)[ \t]*\n)+\n?",
     re.MULTILINE,
 )
+
+
+# A GitHub alert's marker, `> [!IMPORTANT]`, alone on the first line of a quote.
+_ALERT_MARKER = re.compile(
+    r"^>[ \t]*\[!(?:NOTE|TIP|IMPORTANT|WARNING|CAUTION)\][ \t]*\n", re.MULTILINE
+)
+
+
+def without_alert_markers(markdown: str) -> str:
+    """The document with each GitHub alert's marker line dropped. GitHub draws the quote
+    under it as a callout box; kpress has no such syntax and would print the marker, so
+    on the site the alert is the plain quote that follows it."""
+    return _ALERT_MARKER.sub("", markdown)
 
 
 def without_manual_contents(markdown: str) -> str:
@@ -277,6 +301,14 @@ def rewrite_link(url: str, *, tag: str, context: LinkContext, report: LinkReport
     document = _BY_SOURCE.get(path)
     if path in context.aliases:
         link = context.aliases[path]
+        if path == repo_links.CHANGELOG:
+            landing, _, default_anchor = link.partition("#")
+            chosen_anchor = anchor or default_anchor
+            if anchor and anchor != "changelog" and not anchor.startswith("changelog-"):
+                chosen_anchor = render_changelog.entry_anchor(anchor)
+            link = landing + (f"#{chosen_anchor}" if chosen_anchor else "")
+            if chosen_anchor:
+                report.anchors.append((landing, unquote(chosen_anchor), url))
     elif document is not None:
         if anchor:
             report.anchors.append((document.name, unquote(anchor), url))
@@ -390,6 +422,27 @@ def element_ids(page: str) -> frozenset[str]:
     )
 
 
+def tutorial_front(page: str) -> str:
+    """Present the source's credit list with the shared publication component."""
+    pattern = re.compile(
+        r"(?P<title><h1\b[^>]*>.*?</h1>)\s*<ul>\s*"
+        r"<li>(?P<oversight>Human oversight:.*?)</li>\s*"
+        r"<li>(?P<agents>Agents:.*?)</li>\s*"
+        r"<li>(?P<dates>First published .*?)</li>\s*</ul>",
+        re.DOTALL,
+    )
+    match = pattern.search(page)
+    if match is None:
+        raise ValueError("tutorial needs its oversight, agent and publication-date credits")
+    front = (
+        f'<header class="centred">{match["title"]}<ul class="credits">'
+        f'<li class="credits-own">{match["oversight"]}</li>'
+        f"<li>{match['agents']}</li>"
+        f'<li class="publication-date">{match["dates"]}</li></ul></header>'
+    )
+    return page[: match.start()] + front + page[match.end() :]
+
+
 def render_document(
     document: SiteDocument, *, tree: RepositoryTree, report: LinkReport
 ) -> Page:
@@ -403,7 +456,9 @@ def render_document(
         aliases=record_aliases(tree),
     )
     return render_overview.kpress_page(
-        without_manual_contents(document.source.read_text(encoding="utf-8")),
+        without_alert_markers(
+            without_manual_contents(document.source.read_text(encoding="utf-8"))
+        ),
         name=document.name,
         current=document.current,
         title=document.title,
@@ -419,13 +474,23 @@ def render_document(
         toc=False if document.name == "synopsis.html" else "auto",
         trust_mode="sanitized",
         strict_anchors=True,
-        rewrite_body=lambda page: rewrite_article(page, context=context, report=report),
+        rewrite_body=lambda page: rewrite_article(
+            tutorial_front(page) if document.source in (TUTORIAL, TUTORIAL_ADVANCED) else page,
+            context=context,
+            report=report,
+        ),
     )
 
 
 def unresolved(pages: dict[str, Page], report: LinkReport) -> list[str]:
     """Every link the render could not resolve, missing files and anchors together."""
     ids = {name: element_ids(page.html) for name, page in pages.items()}
+    # Reader documents are also rendered on their own. News is a record landing,
+    # so validate its anchors against the actual page even in that partial build.
+    if "news.html" not in ids and any(
+        name == "news.html" for name, _anchor, _url in report.anchors
+    ):
+        ids["news.html"] = element_ids(render_overview.news_page().html)
     problems = [f"no such path in the tree: {url}" for url in report.missing]
     problems += [
         f"no heading #{anchor} in {name}: {url}"

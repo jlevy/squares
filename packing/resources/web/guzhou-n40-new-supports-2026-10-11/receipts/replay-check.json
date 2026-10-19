@@ -1,0 +1,367 @@
+{
+ "binaries": {
+  "axis": "19288b2f9bcb1cfa86a0bde9db1e1fbb79d43dc8044bc7243af8f6ad405899af",
+  "pose": "69bc9e6485102d3636db5377884ba6304f749be94d6ca913d82d80108f1ed4ab",
+  "rounding": "81f15ab01acc6b83da063f0bc824cdf75452611467437e12b0a04f0bdb08be37"
+ },
+ "checks": [
+  {
+   "detail": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+   "held": true,
+   "name": "builds: the release's flags, exit 0"
+  },
+  {
+   "detail": "pose 69bc9e6485102d3636db5377884ba6304f749be94d6ca913d82d80108f1ed4ab, axis 19288b2f9bcb1cfa86a0bde9db1e1fbb79d43dc8044bc7243af8f6ad405899af",
+   "held": true,
+   "name": "builds: the CI run's binaries, on its compiler"
+  },
+  {
+   "detail": "AXIS_COVERAGE_PROVED, 6.978 s",
+   "held": true,
+   "name": "axis run: exit 0"
+  },
+  {
+   "detail": "minimum 1001486431423867090847280653",
+   "held": true,
+   "name": "axis run: every field equals the local receipt's"
+  },
+  {
+   "detail": "minimum 1001486431423867090847280653",
+   "held": true,
+   "name": "axis run: every field equals the ci receipt's"
+  },
+  {
+   "detail": "43 runs",
+   "held": true,
+   "name": "slabs: 43 runs with the contract's arguments"
+  },
+  {
+   "detail": "43 of 43",
+   "held": true,
+   "name": "slabs: every one verified, exit 0"
+  },
+  {
+   "detail": "each slab",
+   "held": true,
+   "name": "slabs: every cover closes, nodes = 2 leaves - 1"
+  },
+  {
+   "detail": "60500889 nodes, 30250466 leaves, 13812428 angle splits",
+   "held": true,
+   "name": "slabs: the totals"
+  },
+  {
+   "detail": "9005397816695287/9007199254740992 = 0.9998000002004223 at slab 40",
+   "held": true,
+   "name": "slabs: the least leaf bound"
+  },
+  {
+   "detail": "43 of 43",
+   "held": true,
+   "name": "slabs: every non-timing field equals the local receipt's"
+  },
+  {
+   "detail": "43 of 43",
+   "held": true,
+   "name": "slabs: every non-timing field equals the ci receipt's"
+  },
+  {
+   "detail": "exit 3, unresolved, 83 nodes",
+   "held": true,
+   "name": "control A-synthetic-negative"
+  },
+  {
+   "detail": "exit 0, verified, 117 nodes",
+   "held": true,
+   "name": "control A-synthetic-positive"
+  },
+  {
+   "detail": "exit 3, unresolved, 1 nodes",
+   "held": true,
+   "name": "control A-limited-budget"
+  },
+  {
+   "detail": "exit 3, unresolved, 92 nodes, least capture 0.999799999",
+   "held": true,
+   "name": "control B-uniform-1-500"
+  },
+  {
+   "detail": "exit 3, unresolved, 87 nodes, least capture 0.999799999",
+   "held": true,
+   "name": "control B-uniform-100000-110000"
+  },
+  {
+   "detail": "exit 3, unresolved, 89 nodes, least capture 0.999799999",
+   "held": true,
+   "name": "control B-uniform-410000-415000"
+  },
+  {
+   "detail": "exit 3, unresolved, 129952 nodes, least capture 0.999799999",
+   "held": true,
+   "name": "control C-cut-top-1-500-h2000"
+  },
+  {
+   "detail": "exit 3, unresolved, 9950 nodes, least capture 0.999799999",
+   "held": true,
+   "name": "control C-cut-right-1-500-h2000"
+  },
+  {
+   "detail": "exit 3, unresolved, 408281 nodes, least capture 0.999799999",
+   "held": true,
+   "name": "control C-cut-top-1-500-h10000"
+  },
+  {
+   "detail": "exit 3, unresolved, 26488 nodes, least capture 0.999799999",
+   "held": true,
+   "name": "control C-cut-right-1-500-h10000"
+  },
+  {
+   "detail": "exit 3, unresolved, 2439 nodes, least capture 0.999799999",
+   "held": true,
+   "name": "control C-cut-top-500-10000-h100"
+  },
+  {
+   "detail": "exit 3, unresolved, 868 nodes, least capture 0.999799999",
+   "held": true,
+   "name": "control C-cut-right-500-10000-h100"
+  },
+  {
+   "detail": "exit 3, unresolved, 18664 nodes, least capture 0.999799999",
+   "held": true,
+   "name": "control C-cut-top-500-10000-h1000"
+  },
+  {
+   "detail": "exit 3, unresolved, 6987 nodes, least capture 0.999799999",
+   "held": true,
+   "name": "control C-cut-right-500-10000-h1000"
+  },
+  {
+   "detail": "exit 3, unresolved, 827 nodes, least capture 0.999799999",
+   "held": true,
+   "name": "control C-cut-top-10000-20000-h50"
+  },
+  {
+   "detail": "exit 3, unresolved, 687 nodes, least capture 0.999799999",
+   "held": true,
+   "name": "control C-cut-right-10000-20000-h50"
+  },
+  {
+   "detail": "exit 3, unresolved, 141851 nodes, least capture 0.999799999",
+   "held": true,
+   "name": "control C-cut-top-200000-210000-h20"
+  },
+  {
+   "detail": "exit 3, unresolved, 141729 nodes, least capture 0.999799999",
+   "held": true,
+   "name": "control C-cut-right-200000-210000-h20"
+  },
+  {
+   "detail": "exit 3, unresolved, 1500001 nodes, least capture 0.999799999",
+   "held": true,
+   "name": "control C-cut-top-410000-415000-h20"
+  },
+  {
+   "detail": "exit 3, unresolved, 1500002 nodes, least capture 0.999799999",
+   "held": true,
+   "name": "control C-cut-right-410000-415000-h20"
+  },
+  {
+   "detail": "exit 0, verified, 141053 nodes, least capture 0.99989998",
+   "held": true,
+   "name": "control E-cut-top-1-500-h2000"
+  },
+  {
+   "detail": "exit 0, verified, 40949 nodes, least capture 0.99989998",
+   "held": true,
+   "name": "control E-cut-right-1-500-h2000"
+  },
+  {
+   "detail": "exit 0, verified, 251857 nodes, least capture 0.99989998",
+   "held": true,
+   "name": "control E-cut-top-1-500-h10000"
+  },
+  {
+   "detail": "exit 0, verified, 116089 nodes, least capture 0.99989998",
+   "held": true,
+   "name": "control E-cut-right-1-500-h10000"
+  },
+  {
+   "detail": "exit 0, verified, 4781 nodes, least capture 0.99989998",
+   "held": true,
+   "name": "control E-cut-top-500-10000-h100"
+  },
+  {
+   "detail": "exit 0, verified, 2567 nodes, least capture 0.99989998",
+   "held": true,
+   "name": "control E-cut-right-500-10000-h100"
+  },
+  {
+   "detail": "exit 0, verified, 45279 nodes, least capture 0.99989998",
+   "held": true,
+   "name": "control E-cut-top-500-10000-h1000"
+  },
+  {
+   "detail": "exit 0, verified, 33439 nodes, least capture 0.99989998",
+   "held": true,
+   "name": "control E-cut-right-500-10000-h1000"
+  },
+  {
+   "detail": "exit 0, verified, 1609 nodes, least capture 0.99989998",
+   "held": true,
+   "name": "control E-cut-top-10000-20000-h50"
+  },
+  {
+   "detail": "exit 0, verified, 1721 nodes, least capture 0.99989998",
+   "held": true,
+   "name": "control E-cut-right-10000-20000-h50"
+  },
+  {
+   "detail": "exit 0, verified, 26105 nodes, least capture 0.99989998",
+   "held": true,
+   "name": "control E-cut-top-200000-210000-h20"
+  },
+  {
+   "detail": "exit 0, verified, 27107 nodes, least capture 0.99989998",
+   "held": true,
+   "name": "control E-cut-right-200000-210000-h20"
+  },
+  {
+   "detail": "exit 0, verified, 18887 nodes, least capture 0.99989998",
+   "held": true,
+   "name": "control E-cut-top-410000-415000-h20"
+  },
+  {
+   "detail": "exit 0, verified, 18697 nodes, least capture 0.99989998",
+   "held": true,
+   "name": "control E-cut-right-410000-415000-h20"
+  },
+  {
+   "detail": "exit 3, unresolved, 183868 nodes, least capture 0.999799999",
+   "held": true,
+   "name": "control D-gap-1-500"
+  },
+  {
+   "detail": "exit 3, unresolved, 1500001 nodes, least capture 0.999799999",
+   "held": true,
+   "name": "control D-gap-500-10000"
+  },
+  {
+   "detail": "exit 3, unresolved, 1500002 nodes, least capture 0.999799999",
+   "held": true,
+   "name": "control D-gap-100000-110000"
+  },
+  {
+   "detail": "exit 3, unresolved, 1500001 nodes, least capture 0.999799999",
+   "held": true,
+   "name": "control D-gap-300000-310000"
+  },
+  {
+   "detail": "exit 3, unresolved, 1500002 nodes, least capture 0.999799999",
+   "held": true,
+   "name": "control D-gap-400000-410000"
+  },
+  {
+   "detail": "exit 0, verified, 140819 nodes, least capture 1.0001357024",
+   "held": true,
+   "name": "control E-gap-400000-410000"
+  },
+  {
+   "detail": "exit 0",
+   "held": true,
+   "name": "control F-ieee-neighbors"
+  },
+  {
+   "detail": "exit -6",
+   "held": true,
+   "name": "control F-wrong-rounding"
+  },
+  {
+   "detail": "exit -6",
+   "held": true,
+   "name": "control F-ftz"
+  },
+  {
+   "detail": "exit 1",
+   "held": true,
+   "name": "control F-reject-ndebug"
+  },
+  {
+   "detail": "exit 1",
+   "held": true,
+   "name": "control F-reject-fastmath"
+  },
+  {
+   "detail": "tau 1/2: exit 0, AXIS_COVERAGE_PROVED",
+   "held": true,
+   "name": "control H-tau-1-2"
+  },
+  {
+   "detail": "tau 62593/62500: exit 2, AXIS_TEST_REFUSED",
+   "held": true,
+   "name": "control H-above"
+  },
+  {
+   "detail": "tau 500743/500000: exit 0, AXIS_COVERAGE_PROVED",
+   "held": true,
+   "name": "control H-below"
+  },
+  {
+   "detail": "exit 0",
+   "held": true,
+   "name": "control G-release-unchanged: exact.py's scalar block is the receipts'"
+  },
+  {
+   "detail": "exit 4, NEAR_AXIS_CONTAINMENT",
+   "held": true,
+   "name": "control G-release-axis-side: exact.py refuses NEAR_AXIS_CONTAINMENT"
+  },
+  {
+   "detail": "d97758bbc9639edc70b8bd7dc83106d4e8d1be034bacb3e88f8c539b88091c88 (910b6b12c)",
+   "held": true,
+   "name": "crate: reviewed source for a declared net, the binary embeds it"
+  },
+  {
+   "detail": "verified, 10929636 vertices, least 1.0016868361671276 at ['3490012394923077/1000000000000000', '3100670341/500000000']",
+   "held": true,
+   "name": "crate: the axis at side A by the exact vertex sweep"
+  },
+  {
+   "detail": "VERIFIED, 401 directions, 35375590 boxes, least 1.000000000310131 at r = 398",
+   "held": true,
+   "name": "crate: the 401-direction necessary condition at side B"
+  },
+  {
+   "detail": "35 files",
+   "held": true,
+   "name": "duals: the retained tree at its upstream paths, every file the manifest's"
+  },
+  {
+   "detail": "EXACT_DUAL_CODE_DISTINCT_CHECKED, 702.984 s",
+   "held": true,
+   "name": "duals: the release's obstruction entry point, exit 0"
+  },
+  {
+   "detail": "column 201, slack 66062736801751370160",
+   "held": true,
+   "name": "duals: every non-timing field equals the local receipt's"
+  },
+  {
+   "detail": "column 201, slack 66062736801751370160",
+   "held": true,
+   "name": "duals: every non-timing field equals the ci receipt's"
+  },
+  {
+   "detail": "d5ecc193a842c21e86281c7facdc4f92a70cec92a28f5f7e002ed5d3a77cf51c",
+   "held": true,
+   "name": "duals: with the CI run's compiler, the CI run's dual binary"
+  }
+ ],
+ "compiler": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0",
+ "crate_binary_sha256": "567a0fd58f7ae4e981580f2a90bed5c92ac44fa8f3ebb442b166e93043c15ed4",
+ "kind": "n40-new-supports-replay-check/v1",
+ "slab_cpu_seconds": 5242.6,
+ "slab_first_start_utc": "2026-10-12T08:50:38+00:00",
+ "slab_stage_wall_seconds": 12629,
+ "slab_wall_seconds_sum": 24741.5,
+ "status": "REPLAY_HOLDS"
+}

@@ -105,9 +105,9 @@ The current attributions are supported by
 
 ## From Helper Arguments to Reusable Proof Components
 
-The [mathematical review](../stromquist-helper-arguments-math-review.md) derives the
-conditional weighted counting lemma and maps it to existing eleven-square work.
-It separates three components: geometry constrains which marks can lie together, a
+The [mathematical review](../reviews/review-2026-09-07-stromquist-helper-arguments.md)
+derives the conditional weighted counting lemma and maps it to existing eleven-square
+work. It separates three components: geometry constrains which marks can lie together, a
 finite allocation calculation keeps all possible cases, and a final cover supplies a
 counting contradiction.
 The new code makes the middle and final arithmetic components reusable.

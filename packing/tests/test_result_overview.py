@@ -113,7 +113,7 @@ def test_the_head_states_the_result_as_the_site_does(
     # Significance is its mark, the others chips (`think-m3m4`).
     places = [
         head.index(
-            f'<span class="site-significance-label" aria-hidden="true">{rung}</span>'
+            f'<span aria-hidden="true">{rung}</span>'
             if rung[0] == "S"
             else f'data-rung="{rung[0]}" data-level="{rung[1:]}">{rung}</span>'
         )
@@ -564,11 +564,12 @@ def test_a_result_that_is_no_bound_is_not_set_back_in_its_chain(
 
 def test_a_chain_names_only_the_successors_on_its_own_cases(bodies: dict[str, str]) -> None:
     """T-019 is about n = 17 to 19 and superseded on each; on n = 17's chain its step
-    names only the result on that case that supersedes it now, T-093, which replaced
-    T-043 on 2026-10-05 (think-6zg1), not those that supersede it at n = 18 or 19."""
+    names only the results on that case that supersede it now, T-093, which replaced
+    T-043 on 2026-10-05 (think-6zg1), and since 2026-10-12 T-153, which holds the
+    reported lower bound there, not those that supersede it at n = 18 or 19."""
     step = bodies["T-043"].split('data-step="t-019"', 1)[1].split("</li>", 1)[0]
     chips = step.split('<p class="site-result-step-chips">', 1)[1].split("</p>", 1)[0]
-    assert re.findall(r'href="results\.html#(t-\d+)"', chips) == ["t-093"]
+    assert re.findall(r'href="results\.html#(t-\d+)"', chips) == ["t-093", "t-153"]
 
 
 @pytest.mark.parametrize("result_id", [SETTLED, EARLIER, BROAD])
@@ -902,9 +903,17 @@ def test_complete_result_batch_loads_the_address_registry_once(
     """Multiple real documents share one validated address registry per render pass."""
     rows = site_urls.load_registry()
     results = [_result(overview, result_id) for result_id in ("T-110", "T-116")]
+    # The two pages' links are still checked against the whole site: since the house
+    # adoption of 11 October 2026 T-116 links the results that hold its former houses.
+    check = result_overview.check_links
+
+    def check_whole(result_id: str, body: str, _batch: overview_data.Overview) -> None:
+        check(result_id, body, overview)
+
     with (
         patch.object(overview_data, "load", return_value=replace(overview, results=results)),
         patch.object(site_urls, "load_registry", return_value=rows) as loaded,
+        patch.object(result_overview, "check_links", check_whole),
     ):
         pages = render_overview.result_fragments()
     assert loaded.call_count == 1
@@ -983,6 +992,7 @@ def test_recent_upper_lower_and_optimal_marks_follow_independent_contributions()
         "title": "optimal",
     }
     assert badges.count('data-recent="true"') == 1
+    assert "is-new-result" not in result_overview.film_facts_html(facts[11])
     assert 'class="is-upper is-exact-value"' in result_overview.film_bound(facts[11])
     assert "is-new-result" not in result_overview.film_bound(facts[11])
     assert 'class="is-upper" style=' in result_overview.gap_bar(facts[11])
@@ -1003,3 +1013,22 @@ def test_an_exact_value_uses_its_own_recent_upper_contribution(
     bound = result_overview.film_bound(facts[1])
     assert 'class="is-upper is-new-result is-exact-value"' in bound
     assert "is-optimal" not in bound
+
+
+def test_the_head_lists_the_counts_the_atlas_draws_its_packing_regularized(
+    overview: overview_data.Overview, bodies: dict[str, str]
+) -> None:
+    """A result whose packing the atlas draws from a view this project regularized lists
+    the register's `regularized_drawings` naming it, after its own regularizations: at
+    n = 68 the axis tool redrew Seth Rehwaldt's refinement (T-118). A result whose packing
+    is drawn as retained has no such row."""
+    result = _result(overview, "T-118")
+    assert result.drawings
+    assert result.drawings[0].startswith(
+        "n = 68: a regularization of T-118\u2019s packing by Levy"
+    )
+    head = bodies["T-118"].split("</header>", 1)[0]
+    value = result_overview.prose_html("\n".join(result.drawings))
+    assert f"<dt>Regularized drawings</dt><dd>{value}</dd>" in head
+    assert not _result(overview, "T-101").drawings
+    assert "<dt>Regularized drawings</dt>" not in bodies["T-101"]

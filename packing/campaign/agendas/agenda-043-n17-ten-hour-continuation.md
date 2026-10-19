@@ -34,7 +34,7 @@ agenda:
     - review-planning-oversight
     program: n17-optimality
     artifacts:
-    - docs/project/specs/active/plan-2026-10-06-n17-ten-hour-session.md
+    - docs/project/specs/done/plan-2026-10-06-n17-ten-hour-session.md
     - docs/project/reviews/review-2026-10-07-n17-session-184-progress.md
     - docs/project/research/research-2026-10-07-n17-w3-capacity-and-route-selection.md
     parallel_group: n17-ten-hour
@@ -70,7 +70,7 @@ agenda:
     - insight-iteration
     program: n17-optimality
     artifacts:
-    - docs/project/specs/active/plan-2026-10-06-n17-ten-hour-session.md
+    - docs/project/specs/done/plan-2026-10-06-n17-ten-hour-session.md
     - docs/project/research/research-2026-10-07-n17-proof-interfaces-and-lp-contract.md
     - docs/project/reviews/review-2026-10-07-n17-session-184-progress.md
     - docs/project/research/research-2026-10-07-n17-w3-capacity-and-route-selection.md
@@ -116,7 +116,7 @@ agenda:
     - pipeline-improvement
     program: n17-optimality
     artifacts:
-    - docs/project/specs/active/plan-2026-10-06-n17-ten-hour-session.md
+    - docs/project/specs/done/plan-2026-10-06-n17-ten-hour-session.md
     - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-271-h282-tail-a-standing-admission.md
     - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-274-h287-current-tail-replication.md
     parallel_group: n17-ten-hour
@@ -152,7 +152,7 @@ agenda:
     - insight-iteration
     program: n17-optimality
     artifacts:
-    - docs/project/specs/active/plan-2026-10-06-n17-ten-hour-session.md
+    - docs/project/specs/done/plan-2026-10-06-n17-ten-hour-session.md
     - docs/project/research/research-2026-10-07-n17-proof-interfaces-and-lp-contract.md
     - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-260-h277-widened-lp-reconnaissance.md
     - docs/project/research/research-2026-10-07-n17-w3-capacity-and-route-selection.md
@@ -198,7 +198,7 @@ agenda:
     - pipeline-improvement
     program: n17-optimality
     artifacts:
-    - docs/project/specs/active/plan-2026-10-06-n17-ten-hour-session.md
+    - docs/project/specs/done/plan-2026-10-06-n17-ten-hour-session.md
     - docs/project/reviews/review-2026-10-07-n17-hull-pull.md
     - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-276-h289-numeric-cap-first-round.md
     parallel_group: n17-ten-hour
@@ -233,7 +233,7 @@ agenda:
     - research-loop
     program: n17-optimality
     artifacts:
-    - docs/project/specs/active/plan-2026-10-06-n17-ten-hour-session.md
+    - docs/project/specs/done/plan-2026-10-06-n17-ten-hour-session.md
     - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-268-h281-n11-first-round-relaunch.md
     - docs/project/research/research-2026-10-07-n17-proof-interfaces-and-lp-contract.md
     - docs/project/research/research-2026-10-07-n17-w3-capacity-and-route-selection.md
@@ -276,7 +276,7 @@ agenda:
     - factual-review
     program: n17-optimality
     artifacts:
-    - docs/project/specs/active/plan-2026-10-06-n17-ten-hour-session.md
+    - docs/project/specs/done/plan-2026-10-06-n17-ten-hour-session.md
     - docs/project/reviews/review-2026-10-07-n17-session-184-progress.md
     parallel_group: n17-ten-hour
     note: Held BC423/426 full passes remain unadmitted pending required ownercontrol ruling; source
@@ -311,7 +311,7 @@ agenda:
     - research-loop
     program: n17-optimality
     artifacts:
-    - docs/project/specs/active/plan-2026-10-06-n17-ten-hour-session.md
+    - docs/project/specs/done/plan-2026-10-06-n17-ten-hour-session.md
     - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-271-h282-tail-a-standing-admission.md
     - packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-274-h287-current-tail-replication.md
     parallel_group: n17-ten-hour
@@ -346,7 +346,7 @@ agenda:
     - pipeline-improvement
     program: n17-optimality
     artifacts:
-    - docs/project/specs/active/plan-2026-10-06-n17-ten-hour-session.md
+    - docs/project/specs/done/plan-2026-10-06-n17-ten-hour-session.md
     - docs/project/reviews/review-2026-10-07-n17-session-184-progress.md
     parallel_group: n17-ten-hour
     note: Older200objects/2135600454B remain unavailable. New13native localobjects/6manifests retained,
@@ -379,7 +379,7 @@ agenda:
     - efficiency-loop
     program: n17-optimality
     artifacts:
-    - docs/project/specs/active/plan-2026-10-06-n17-ten-hour-session.md
+    - docs/project/specs/done/plan-2026-10-06-n17-ten-hour-session.md
     - packing/campaign/agent-sessions/session-184-n17-proof-contracts-and-instruments.md
     - docs/project/reviews/review-2026-10-07-n17-session-184-progress.md
     - docs/project/research/research-2026-10-07-n17-w3-capacity-and-route-selection.md
@@ -408,7 +408,7 @@ agenda:
 # n17 Ten-Hour Continuation
 
 Read the
-[launch plan](../../../docs/project/specs/active/plan-2026-10-06-n17-ten-hour-session.md)
+[launch plan](../../../docs/project/specs/done/plan-2026-10-06-n17-ten-hour-session.md)
 for clocks, model ownership, resource guards and refusal rules.
 
 <!-- This document follows common-doc-guidelines.md.

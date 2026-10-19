@@ -241,7 +241,7 @@ session:
       capture continuation unresumable, three instruments needing tool changes, and
       flag certification the cheapest direct census progress.
     evidence:
-    - docs/project/specs/active/plan-2026-10-05-n17-overnight.md
+    - docs/project/specs/done/plan-2026-10-05-n17-overnight.md
     files: []
     checks:
     - The review re-ran the certified census at 451154f60 and the seed-182 draw (strata only).
@@ -271,7 +271,7 @@ session:
     - packing/campaign/agendas/agenda-042-overnight-n11-settlement-and-low-n-angles.md
     - packing/campaign/explorations/X048-session-182-overnight/kernel-targets.txt
     - packing/campaign/agent-sessions/session-182-n17-overnight-lanes.md
-    - docs/project/specs/active/plan-2026-10-05-n17-overnight.md
+    - docs/project/specs/done/plan-2026-10-05-n17-overnight.md
     checks:
     - packing-validate --records before every push, and the census and negative-control test files on the admissions.
     uncertainty: >-
@@ -424,7 +424,7 @@ session:
   - packing/campaign/hypotheses/H-264-n17-geometric-exclusion-cost-per-leaf.md
   - packing/campaign/agendas/agenda-042-overnight-n11-settlement-and-low-n-angles.md
   - packing/campaign/explorations/X048-session-182-overnight/kernel-targets.txt
-  - docs/project/specs/active/plan-2026-10-05-n17-overnight.md
+  - docs/project/specs/done/plan-2026-10-05-n17-overnight.md
   checks:
   - >-
     census_n17_certified at the session checkout (451154f60 plus the registration's
@@ -475,7 +475,7 @@ session:
 # Session 182: n17 Overnight Lanes
 
 This session executes the
-[n17 overnight plan](../../../docs/project/specs/active/plan-2026-10-05-n17-overnight.md)
+[n17 overnight plan](../../../docs/project/specs/done/plan-2026-10-05-n17-overnight.md)
 under BC-418 (`think-tmz6`). It opened with a W10 phase, the declared entry point, which
 rewrote [H-264](../hypotheses/H-264-n17-geometric-exclusion-cost-per-leaf.md) in place
 and registered the night’s cells in

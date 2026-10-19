@@ -39,7 +39,7 @@ its particular Erdős #106 counterexample are not verified.
 No global lower bound or unrestricted capture theorem is claimed by these tools.
 
 The checks were authored and run under the
-[research plan](../../../docs/project/specs/active/plan-2026-10-07-fibonacci-torus.md).
+[research plan](../../../docs/project/specs/done/plan-2026-10-07-fibonacci-torus.md).
 Algebra and geometry had separate authors; the algebra reviewer subsequently checked the
 geometry and synthesis.
 The source reviewer independently replayed the periodic examples.

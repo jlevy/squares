@@ -46,7 +46,7 @@ hypothesis:
   registered: '2026-09-27'
   notes: >-
     From the 2026-09-27 planning block
-    (docs/project/specs/active/plan-2026-09-27-after-4640020-overnight.md). n = 50 is
+    (docs/project/specs/archive/plan-2026-09-27-after-4640020-overnight.md). n = 50 is
     the one case in 46..61 wand125's rectangle certificates leave at Nagamochi's
     closed form, 1 + sqrt(37) = 7.083 against the reported 7.571; the n = 51 certificate
     at 7.43 has mass 50.99 and does not cover it. X-039 listed 50..61 among the ranges

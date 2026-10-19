@@ -1,0 +1,42 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "https://github.com/jlevy/squares/issues/504",
+  "author": "PingYou Ltd",
+  "source_key": "[PingYou n153 certificate 2026-10-11]",
+  "report_evidence": "E-pingyou-504-certificate-report",
+  "receipt_format": "pingyou-504-exact-replay-v1",
+  "witness_prefix": "W-pingyou-504-n",
+  "claim_limitations": "Complete bc328a7 rational centre/half-angle certificate converted exactly from a checkout at the pin whose bytes have the digests the packet records, and equal there to the source's own corners Witness/v2; no upstream byte is retained. Finite construction feasibility only; no feasibility of the undilated contact solution, local minimum, rigidity, novelty, priority or global optimality claim.",
+  "read_on": "2026-10-11",
+  "read_at_main": "3a5a91a90f997a65da52c42000769c1e6b6c3eae",
+  "certificates": [
+    {"n": 153, "path": "n153.cert.json", "format": "pingyou-json", "offered": "6435006925203522001385040447/500000000000000000000000000", "first_committed": "2026-10-11T10:39:06Z", "same_packing": [{"path": "pingyou-n153-rational.yaml", "format": "witness-corners"}], "fact": "facts/n-153.yaml"}
+  ],
+  "requested": [153],
+  "replayed": [153],
+  "houses": [
+    {"n": 153, "reader": "[Gupta rational refinements 2026-10-08]", "source_key": "[Gupta rational refinements 2026-10-08]", "holders": "Nate Chaoweeraprasit (itsnaka), improved by Siddharth Gupta", "result": "T-127", "reported_value": "12.8796793733293146", "verified_value": "12.8796793733293146", "evidence": ["E-gupta-438-exact-feasibility"]}
+  ],
+  "pending": [
+    {"n": 153, "report": "T-136 (#481)", "url": "https://github.com/jlevy/squares/issues/481", "holders": "Nate Chaoweeraprasit", "result": "T-136", "reader": "[SQUISH third request 2026-10-09]"},
+    {"n": 153, "report": "T-146 (regularized lists)", "url": "https://github.com/evand/square-packing/tree/ea1a2f23678a13bd1d252f9f4c95ca5dd2ffd2b7/search/regularize", "holders": "Evan Daniel, regularizing Nate Chaoweeraprasit's packing", "result": "T-146", "reader": "[Daniel regularized lists 2026-10-10]"}
+  ],
+  "register": {
+    "title": "PingYou Ltd's n153 certificate at bc328a7, issue504",
+    "headline": "A packing of 153 squares from Ryan Xu's packing of 70, its contacts reclosed at a new angle",
+    "significance": 3,
+    "source_checks": "The author reports that three exact Fraction checkers of its own, by vertex projections, by centre and support-radius separating axes and by rational polygon clipping, accept all 11,628 pairs and every wall; that its reconstruction script rebuilds the certificate exactly from an explicit rational construction table and recomputes the guard dilation; that a SymPy script checks the symbolic identity behind the chosen angle and isolates the root of u^7-9u^6+3u^5-u^4-u^3+u^2-3u+1; and that this repository's sqpack exact_verify and check_rational_witness_independent, unchanged at 5b0eb012, accept its corners Witness/v2. The construction table comes from an exploratory selection and a floating-point solve that the release does not repeat. Those statements are the author's; no source program ran here.",
+    "credit": "Credit PingYou Ltd (https://github.com/BuddenPing/square-packing-certificates) with the n153 construction, as the source asks: Ryan Xu's n70 construction (ry-xu, issue 432) and its reflection, composed by the boundary-patch approach of the source's n207 (issue 503) with a different choice of surviving squares and contacts, reclosed at a new angle, 121 upright squares and tilted populations of 17 and 15. The n70 geometry comes from Evan Daniel's exact n70 certificate (https://github.com/evand/square-packing, the regularized n-070 certificate T-146 retains), which the source credits to him for its exact retention. The source credits the previous n153 packing to Nate Chaoweeraprasit (SQUISH, issue 481) and its refined exact certificate to Evan Daniel (T-146), as comparisons, and claims neither the n70 packing nor patch composition in general. The source makes no statement about AI assistance.",
+    "next_rung": "Independently review the retained replay, then record source-specific adoption of the n153 side, below the ceiling T-127 holds by 9.67e-3 and below Evan Daniel's T-146 and SQUISH's T-136 by 2.02e-3, with confirming evidence. Final exact-head CI remains required.",
+    "bead": "think-4znu",
+    "bibliography": {
+      "authors": [
+        "PingYou Ltd"
+      ],
+      "lineage": "builds-on-project",
+      "credit": "PingYou Ltd after Xu, Daniel, Levy",
+      "short_credit": "PingYou Ltd after Xu et al.",
+      "note": "One complete exact certificate at bc328a7d727aedd0eabebd6ea80285f572b65d2d composing Xu's n70 construction, taken from Daniel's exact n70 certificate, with its reflection and an upright completion, its contacts reclosed at an angle from a degree-seven equation, centres and container dilated by 1 + 2e-13. The source checks with Squares Project (Levy) verification code and supplies a corners Witness/v2. Derived exact facts only; no upstream byte is retained. No local or global optimality claim."
+    }
+  }
+}

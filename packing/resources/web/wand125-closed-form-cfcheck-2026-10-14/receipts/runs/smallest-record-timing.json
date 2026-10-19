@@ -1,0 +1,133 @@
+{
+ "schema": "cfcheck-run/v1",
+ "label": "smallest-record-timing",
+ "binary_sha256": "c5a163d48d10155dbe6d319a8a8cae8cab3feb9278c6fb7116c2d0396e686484",
+ "toolchain": {
+  "rustc": "rustc 1.97.0 (2d8144b78 2026-07-07)",
+  "cargo": "cargo 1.97.0 (c980f4866 2026-06-30)"
+ },
+ "command": [
+  "cfcheck",
+  "region",
+  "assets/interval_0_0.02/family.json",
+  "assets/interval_0_0.02/top.rec",
+  "--bounds",
+  "167/100",
+  "253/100",
+  "272/100",
+  "38/10",
+  "--threads",
+  "2",
+  "--chunk-leaves",
+  "1",
+  "--max-leaves-per-kind",
+  "200"
+ ],
+ "cwd": "the run directory: intervals.json and assets/<asset>/ unpacked from the release",
+ "started": "2026-10-14T11:45:52Z",
+ "finished": "2026-10-14T11:48:26Z",
+ "wall_seconds": 154.153,
+ "cpu_seconds": {
+  "user": 245.629,
+  "system": 0.195
+ },
+ "max_rss_kib": 83524,
+ "host": {
+  "cpus": 4,
+  "load_average_before": [
+   1.08,
+   1.62,
+   2.85
+  ],
+  "load_average_after": [
+   2.48,
+   2.03,
+   2.82
+  ],
+  "platform": "Linux-6.18.44-fc-v114-x86_64-with-glibc2.39"
+ },
+ "exit_code": 0,
+ "verdict": "CFCHECK PARTIAL",
+ "stderr_tail": "",
+ "report": "smallest-record-timing.report.json",
+ "report_sha256": "e0b3ea4c700cd485fdfa156ecdb3f941bb6d87a7ac0f2e9ab9c60c382e00cba2",
+ "sample": {
+  "interval": 1,
+  "region": "top",
+  "note": "interval 1 top.rec, the smallest record of intervals 1 and 34: the first 200 leaves of each of its eight kinds, in record order, with the record's domain, tiling and counts checked in full"
+ },
+ "summary": {
+  "ok": true,
+  "command": "region",
+  "partial": true,
+  "incomplete": false,
+  "roots": 2673,
+  "leaves": 171634,
+  "resumed_roots": 0,
+  "seconds": 154.141614972,
+  "leaf_kinds": {
+   "B3D": 4314,
+   "B3T:x": 10,
+   "B3U:x": 13802,
+   "CORE": 32048,
+   "CORE1:P": 110,
+   "CORE1:Tx": 1352,
+   "CORE1:x": 118173,
+   "EDGE": 1825
+  },
+  "checked_leaf_kinds": {
+   "B3D": 200,
+   "B3T:x": 10,
+   "B3U:x": 200,
+   "CORE": 200,
+   "CORE1:P": 110,
+   "CORE1:Tx": 200,
+   "CORE1:x": 200,
+   "EDGE": 200
+  },
+  "refusal_count": 0,
+  "refusals": [],
+  "interruptions": 0,
+  "regions": {
+   "region": {
+    "checked_roots": 2673,
+    "accepted_roots": 68,
+    "resumed_roots": 0
+   }
+  },
+  "leaf_timing": {
+   "B3D": {
+    "leaves": 200,
+    "seconds": 69.43068134899997
+   },
+   "B3T:x": {
+    "leaves": 10,
+    "seconds": 67.478055345
+   },
+   "B3U:x": {
+    "leaves": 200,
+    "seconds": 48.170362018999974
+   },
+   "CORE": {
+    "leaves": 200,
+    "seconds": 0.38927625599999993
+   },
+   "CORE1:P": {
+    "leaves": 110,
+    "seconds": 10.144631229
+   },
+   "CORE1:Tx": {
+    "leaves": 200,
+    "seconds": 27.857644242000006
+   },
+   "CORE1:x": {
+    "leaves": 200,
+    "seconds": 24.268566266999994
+   },
+   "EDGE": {
+    "leaves": 200,
+    "seconds": 0.007735004999999999
+   }
+  }
+ }
+}
