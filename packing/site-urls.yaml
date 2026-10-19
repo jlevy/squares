@@ -3498,7 +3498,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-17'
   status: live
 - path: cases/107.html
   canonical: cases/107.html
@@ -3506,7 +3506,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-17'
   status: live
 - path: cases/108.html
   canonical: cases/108.html
@@ -3514,7 +3514,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-18'
   status: live
 - path: cases/109.html
   canonical: cases/109.html
@@ -3538,7 +3538,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-17'
   status: live
 - path: cases/111.html
   canonical: cases/111.html
@@ -5482,7 +5482,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-03'
+  lastmod: '2026-10-17'
   status: live
 - path: cases/39.html
   canonical: cases/39.html
@@ -5506,7 +5506,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-12'
+  lastmod: '2026-10-17'
   status: live
 - path: cases/41.html
   canonical: cases/41.html
@@ -5514,7 +5514,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-12'
+  lastmod: '2026-10-17'
   status: live
 - path: cases/42.html
   canonical: cases/42.html
@@ -5530,7 +5530,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-07'
+  lastmod: '2026-10-17'
   status: live
 - path: cases/44.html
   canonical: cases/44.html
@@ -5602,7 +5602,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-17'
   status: live
 - path: cases/52.html
   canonical: cases/52.html
@@ -5746,7 +5746,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-17'
   status: live
 - path: cases/69.html
   canonical: cases/69.html
@@ -5890,7 +5890,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-17'
   status: live
 - path: cases/85.html
   canonical: cases/85.html
@@ -5898,7 +5898,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-17'
   status: live
 - path: cases/86.html
   canonical: cases/86.html
@@ -5906,7 +5906,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-17'
   status: live
 - path: cases/87.html
   canonical: cases/87.html
@@ -5922,7 +5922,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-16'
+  lastmod: '2026-10-17'
   status: live
 - path: cases/89.html
   canonical: cases/89.html
@@ -5930,7 +5930,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-17'
   status: live
 - path: cases/9.html
   canonical: cases/9.html
@@ -5946,7 +5946,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-17'
   status: live
 - path: cases/91.html
   canonical: cases/91.html
@@ -5954,7 +5954,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-17'
   status: live
 - path: cases/92.html
   canonical: cases/92.html
@@ -5962,7 +5962,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-14'
+  lastmod: '2026-10-17'
   status: live
 - path: cases/93.html
   canonical: cases/93.html
@@ -6227,7 +6227,7 @@ urls:
   generator: devtools.render_n11_lower_bounds_explainer:main
   producer: paper:n11-lower-bounds-explainer
   first_published: '2026-09-05'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-13'
   status: live
 - path: papers/n11-lower-bounds-explainer.md
   canonical: papers/n11-lower-bounds-explainer.md
@@ -6235,7 +6235,7 @@ urls:
   generator: devtools.render_n11_lower_bounds_explainer:main
   producer: paper:n11-lower-bounds-explainer
   first_published: '2026-09-05'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-13'
   status: live
 - path: papers/n11-lower-bounds-explainer.pdf
   canonical: papers/n11-lower-bounds-explainer.pdf
@@ -6243,7 +6243,7 @@ urls:
   generator: devtools.render_n11_lower_bounds_explainer:main
   producer: paper:n11-lower-bounds-explainer
   first_published: '2026-09-05'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-13'
   status: live
 - path: papers/n11-optimality-review.html
   canonical: papers/n11-optimality-review.html
