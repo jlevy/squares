@@ -1,0 +1,580 @@
+{
+ "certificates": {
+  "#669 n155": {
+   "packet": "evand-n155-explorer-2026-10-17",
+   "n": 155,
+   "path": "search/packer/candidates/s155_ex2.cert",
+   "sha256": "a1a3b6e7c2ce4d7de79efc2e07fc0bf53616dc44b732a2849b4dc4d8f7e2c4cc",
+   "equals_fetched_upstream": true,
+   "header_comments": [
+    "# exact certificate: unit squares, centre (x, y), rotation (c, s) = ((1-t^2)/(1+t^2), 2t/(1+t^2)); check with verify_cert.py"
+   ],
+   "side": "2590452188930112807053435932173/200000000000000000000000000000",
+   "passed": true,
+   "pairs": 11935,
+   "disc_rule_pairs": 11360,
+   "measured_pairs": 575,
+   "contacts": 0,
+   "least_wall_clearance": "1/200000000000000000000",
+   "least_wall_clearance_decimal": "5.000e-21",
+   "least_far_wall_clearance": "500000000067177/100000000000000000000000000000000000",
+   "least_distance_squared": "6779905218327695680716582138062615784145193644451181084087161264778097244381069980917917757788418263494548288010907626258003675036126382067047738598615802691946196041601/67799052183277063594320232881018907061716672143060184530819883439889206115780877149256285799449895432895474977246699088486403789795714161610000000000000000000000000000000000000000000000000000000000000000000000",
+   "least_distance_decimal": "1.000e-20",
+   "closest_pair": [
+    43,
+    44
+   ],
+   "positive_cpu_seconds": 2.49,
+   "equals_receipt_input": true,
+   "exact_verify_wall_equal": true,
+   "exact_verify_best_pair_gap": "1.000e-20",
+   "exact_verify_distance_at_least_gap": true,
+   "independent_wall_equal": true,
+   "independent_best_pair_gap": "1.000e-20",
+   "independent_distance_at_least_gap": true,
+   "claim": {
+    "entry": "T-197",
+    "equal": true
+   },
+   "printed": {
+    "value": "12.952260944651",
+    "rounded_up_equal": true
+   },
+   "rounded_up_16": "12.9522609446505641",
+   "controls": {
+    "duplicate square": {
+     "required": "refused",
+     "passed": false,
+     "overlaps": [
+      [
+       0,
+       1
+      ]
+     ],
+     "at_required_outcome": true
+    },
+    "square moved by S + 2": {
+     "required": "refused",
+     "passed": false,
+     "outside": [
+      0
+     ],
+     "at_required_outcome": true
+    },
+    "side at far-wall contact": {
+     "required": "accepted",
+     "passed": true,
+     "wall": "0",
+     "at_required_outcome": true
+    },
+    "side 1e-40 past contact": {
+     "required": "refused",
+     "passed": false,
+     "outside": [
+      75,
+      76,
+      77,
+      78,
+      79,
+      80,
+      81,
+      82,
+      83,
+      84,
+      85,
+      86,
+      87,
+      88,
+      98,
+      107,
+      115,
+      123,
+      130,
+      137,
+      144,
+      150,
+      152
+     ],
+     "at_required_outcome": true
+    },
+    "closest pair into contact": {
+     "required": "accepted",
+     "pair": [
+      43,
+      44
+     ],
+     "verdict": "contact",
+     "passed": true,
+     "at_required_outcome": true
+    },
+    "closest pair 1e-30 past contact": {
+     "required": "refused",
+     "passed": false,
+     "overlaps": [
+      [
+       43,
+       44
+      ]
+     ],
+     "at_required_outcome": true
+    }
+   },
+   "wall_seconds": 59.46
+  },
+  "#674 n229 opening": {
+   "packet": "evand-n229-dilation-2026-10-17",
+   "n": 229,
+   "path": "search/packer/candidates/s229.cert",
+   "sha256": "0366e8178e37d7c5b4baf002d35f4c1088b4e20ab8f90283d418f634c8af204d",
+   "equals_fetched_upstream": true,
+   "header_comments": [
+    "# dilation certificate (dilate_cert.py, delta 1e-12) of s229.input.txt; check with verify_cert.py"
+   ],
+   "side": "7825081627429265081627421439843/500000000000000000000000000000",
+   "passed": true,
+   "pairs": 26106,
+   "disc_rule_pairs": 25255,
+   "measured_pairs": 851,
+   "contacts": 0,
+   "least_wall_clearance": "50100000000000099/100000000000000000000000000000",
+   "least_wall_clearance_decimal": "5.010e-13",
+   "least_far_wall_clearance": "501000000000001992000000000000502000000000001991/1000000000000000000000000000001000000000000000000000000000000",
+   "least_distance_squared": "12304929150690310593562329580113152029195250860251167948789396487432308570472829731780053150761/12313256864218497745438653489993527614837717933649391298907640625000000000000000000000000000000000000000000000000000000",
+   "least_distance_decimal": "9.997e-13",
+   "closest_pair": [
+    193,
+    199
+   ],
+   "positive_cpu_seconds": 3.56,
+   "equals_receipt_input": true,
+   "exact_verify_wall_equal": true,
+   "exact_verify_best_pair_gap": "9.997e-13",
+   "exact_verify_distance_at_least_gap": true,
+   "independent_wall_equal": true,
+   "independent_best_pair_gap": "9.997e-13",
+   "independent_distance_at_least_gap": true,
+   "claim": {
+    "entry": "T-198",
+    "equal": true
+   },
+   "printed": {
+    "value": "15.650163254859",
+    "rounded_up_equal": true
+   },
+   "rounded_up_16": "15.6501632548585302",
+   "controls": {
+    "duplicate square": {
+     "required": "refused",
+     "passed": false,
+     "overlaps": [
+      [
+       0,
+       1
+      ]
+     ],
+     "at_required_outcome": true
+    },
+    "square moved by S + 2": {
+     "required": "refused",
+     "passed": false,
+     "outside": [
+      0
+     ],
+     "at_required_outcome": true
+    },
+    "side at far-wall contact": {
+     "required": "accepted",
+     "passed": true,
+     "wall": "0",
+     "at_required_outcome": true
+    },
+    "side 1e-40 past contact": {
+     "required": "refused",
+     "passed": false,
+     "outside": [
+      13,
+      120,
+      203
+     ],
+     "at_required_outcome": true
+    },
+    "closest pair into contact": {
+     "required": "accepted",
+     "pair": [
+      193,
+      199
+     ],
+     "verdict": "contact",
+     "passed": true,
+     "at_required_outcome": true
+    },
+    "closest pair 1e-30 past contact": {
+     "required": "refused",
+     "passed": false,
+     "overlaps": [
+      [
+       193,
+       199
+      ]
+     ],
+     "at_required_outcome": true
+    }
+   },
+   "wall_seconds": 88.35
+  },
+  "#674 n229 update": {
+   "packet": "evand-n229-dilation-update-2026-10-18",
+   "n": 229,
+   "path": "search/packer/candidates/s229_v2.cert",
+   "sha256": "1a35a7806b6cc01b232d5c634efdbe789c7df979cec6ab28d6ab283ac2b47e23",
+   "equals_fetched_upstream": true,
+   "header_comments": [
+    "# dilation certificate (dilate_cert.py, delta 1e-12) of s229_v2.input.txt; check with verify_cert.py"
+   ],
+   "side": "7825080756947776580756939951343/500000000000000000000000000000",
+   "passed": true,
+   "pairs": 26106,
+   "disc_rule_pairs": 25256,
+   "measured_pairs": 850,
+   "contacts": 0,
+   "least_wall_clearance": "1201000000000200780999999999798619000000000100991/1999999999999998000000000000001000000000000000000000000000000",
+   "least_wall_clearance_decimal": "6.005e-13",
+   "least_far_wall_clearance": "1201000000000200780999999999798619000000000100991/1999999999999998000000000000001000000000000000000000000000000",
+   "least_distance_squared": "5779909799499702641504181215711710940316908415712766804477539228242940472860718172221480544906001/3999999999999992000000000000007999999999999996000000000000001000000000000000000000000000000000000000000000000000000000000",
+   "least_distance_decimal": "1.202e-12",
+   "closest_pair": [
+    13,
+    86
+   ],
+   "positive_cpu_seconds": 3.34,
+   "equals_receipt_input": true,
+   "exact_verify_wall_equal": true,
+   "exact_verify_best_pair_gap": "1.202e-12",
+   "exact_verify_distance_at_least_gap": true,
+   "independent_wall_equal": true,
+   "independent_best_pair_gap": "1.202e-12",
+   "independent_distance_at_least_gap": true,
+   "claim": {
+    "entry": "T-199",
+    "equal": true
+   },
+   "printed": {
+    "value": "15.650161513896",
+    "rounded_up_equal": true
+   },
+   "rounded_up_16": "15.6501615138955532",
+   "controls": {
+    "duplicate square": {
+     "required": "refused",
+     "passed": false,
+     "overlaps": [
+      [
+       0,
+       1
+      ]
+     ],
+     "at_required_outcome": true
+    },
+    "square moved by S + 2": {
+     "required": "refused",
+     "passed": false,
+     "outside": [
+      0
+     ],
+     "at_required_outcome": true
+    },
+    "side at far-wall contact": {
+     "required": "accepted",
+     "passed": true,
+     "wall": "0",
+     "at_required_outcome": true
+    },
+    "side 1e-40 past contact": {
+     "required": "refused",
+     "passed": false,
+     "outside": [
+      64
+     ],
+     "at_required_outcome": true
+    },
+    "closest pair into contact": {
+     "required": "accepted",
+     "pair": [
+      13,
+      86
+     ],
+     "verdict": "contact",
+     "passed": true,
+     "at_required_outcome": true
+    },
+    "closest pair 1e-30 past contact": {
+     "required": "refused",
+     "passed": false,
+     "overlaps": [
+      [
+       13,
+       86
+      ]
+     ],
+     "at_required_outcome": true
+    }
+   },
+   "wall_seconds": 65.96
+  },
+  "#659 n236": {
+   "packet": "evand-n236-2026-10-16",
+   "n": 236,
+   "path": "search/packer/candidates/s236_bm3c.cert",
+   "sha256": "21dbf6792bec64b06ab5fc1d6ac56a17432f971431100fdbe63e92d23bc091c9",
+   "equals_fetched_upstream": true,
+   "header_comments": [
+    "# exact certificate: unit squares, centre (x, y), rotation (c, s) = ((1-t^2)/(1+t^2), 2t/(1+t^2)); check with verify_cert.py"
+   ],
+   "side": "7930967195303679308621899285697/500000000000000000000000000000",
+   "passed": true,
+   "pairs": 27730,
+   "disc_rule_pairs": 26879,
+   "measured_pairs": 851,
+   "contacts": 0,
+   "least_wall_clearance": "1/200000000000000000000",
+   "least_wall_clearance_decimal": "5.000e-21",
+   "least_far_wall_clearance": "500000000036807/100000000000000000000000000000000000",
+   "least_distance_squared": "12472590874600792463011574466634414621415852694721311881715189448578285071684105047257006231921028066577804102451048506227462091370854803055750936991406670553531638161/124725908746008101361511413716628850385505600629178747450756362986970851545558005587455191630484335236025089345330832192094156056379587100625000000000000000000000000000000000000000000000000000000000000000000",
+   "least_distance_decimal": "1.000e-20",
+   "closest_pair": [
+    39,
+    41
+   ],
+   "positive_cpu_seconds": 2.74,
+   "equals_receipt_input": true,
+   "exact_verify_wall_equal": true,
+   "exact_verify_best_pair_gap": "1.000e-20",
+   "exact_verify_distance_at_least_gap": true,
+   "independent_wall_equal": true,
+   "independent_best_pair_gap": "1.000e-20",
+   "independent_distance_at_least_gap": true,
+   "claim": {
+    "entry": "T-218",
+    "equal": true
+   },
+   "printed": {
+    "value": "15.861934390608",
+    "rounded_up_equal": true
+   },
+   "rounded_up_16": "15.8619343906073587",
+   "controls": {
+    "duplicate square": {
+     "required": "refused",
+     "passed": false,
+     "overlaps": [
+      [
+       0,
+       1
+      ]
+     ],
+     "at_required_outcome": true
+    },
+    "square moved by S + 2": {
+     "required": "refused",
+     "passed": false,
+     "outside": [
+      0
+     ],
+     "at_required_outcome": true
+    },
+    "side at far-wall contact": {
+     "required": "accepted",
+     "passed": true,
+     "wall": "0",
+     "at_required_outcome": true
+    },
+    "side 1e-40 past contact": {
+     "required": "refused",
+     "passed": false,
+     "outside": [
+      52,
+      58,
+      59,
+      62,
+      67,
+      69,
+      82,
+      85,
+      104,
+      106,
+      109,
+      126,
+      137,
+      142,
+      144,
+      145,
+      158,
+      174,
+      177,
+      187,
+      190,
+      202,
+      210,
+      231,
+      235
+     ],
+     "at_required_outcome": true
+    },
+    "closest pair into contact": {
+     "required": "accepted",
+     "pair": [
+      39,
+      41
+     ],
+     "verdict": "contact",
+     "passed": true,
+     "at_required_outcome": true
+    },
+    "closest pair 1e-30 past contact": {
+     "required": "refused",
+     "passed": false,
+     "overlaps": [
+      [
+       39,
+       41
+      ]
+     ],
+     "at_required_outcome": true
+    }
+   },
+   "wall_seconds": 47.82
+  },
+  "#664 n271": {
+   "packet": "evand-n271-2026-10-17",
+   "n": 271,
+   "path": "search/packer/candidates/s271_ex1.cert",
+   "sha256": "48abf7ca68909c42e0aaa5215d4d578f4cdba29d6188775012ae24636e02d680",
+   "equals_fetched_upstream": true,
+   "header_comments": [
+    "# exact certificate: unit squares, centre (x, y), rotation (c, s) = ((1-t^2)/(1+t^2), 2t/(1+t^2)); check with verify_cert.py"
+   ],
+   "side": "16948947733713657510723401112423/1000000000000000000000000000000",
+   "passed": true,
+   "pairs": 36585,
+   "disc_rule_pairs": 35567,
+   "measured_pairs": 1018,
+   "contacts": 0,
+   "least_wall_clearance": "1/200000000000000000000",
+   "least_wall_clearance_decimal": "5.000e-21",
+   "least_far_wall_clearance": "500000000011599/100000000000000000000000000000000000",
+   "least_distance_squared": "6793812446365799388532705585070184452632441158299366592347580372627211442257806841189904029385564008918658404793440196674030202039714038169001231422346989318748886102249/67938124463658112967152712479655277087470165664358112749677057026930873120260283192940776438203000266539308200258380834963968534382996659210000000000000000000000000000000000000000000000000000000000000000000000",
+   "least_distance_decimal": "1.000e-20",
+   "closest_pair": [
+    231,
+    237
+   ],
+   "positive_cpu_seconds": 3.75,
+   "equals_receipt_input": true,
+   "exact_verify_wall_equal": true,
+   "exact_verify_best_pair_gap": "1.000e-20",
+   "exact_verify_distance_at_least_gap": true,
+   "independent_wall_equal": true,
+   "independent_best_pair_gap": "1.000e-20",
+   "independent_distance_at_least_gap": true,
+   "claim": {
+    "entry": "T-219",
+    "equal": true
+   },
+   "printed": {
+    "value": "16.948947733714",
+    "rounded_up_equal": true
+   },
+   "rounded_up_16": "16.9489477337136576",
+   "controls": {
+    "duplicate square": {
+     "required": "refused",
+     "passed": false,
+     "overlaps": [
+      [
+       0,
+       1
+      ]
+     ],
+     "at_required_outcome": true
+    },
+    "square moved by S + 2": {
+     "required": "refused",
+     "passed": false,
+     "outside": [
+      0
+     ],
+     "at_required_outcome": true
+    },
+    "side at far-wall contact": {
+     "required": "accepted",
+     "passed": true,
+     "wall": "0",
+     "at_required_outcome": true
+    },
+    "side 1e-40 past contact": {
+     "required": "refused",
+     "passed": false,
+     "outside": [
+      1,
+      2,
+      3,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63,
+      64,
+      65,
+      66,
+      67,
+      68,
+      69,
+      82,
+      94,
+      105,
+      116,
+      127,
+      138,
+      148,
+      158,
+      166,
+      171,
+      174,
+      176,
+      177
+     ],
+     "at_required_outcome": true
+    },
+    "closest pair into contact": {
+     "required": "accepted",
+     "pair": [
+      231,
+      237
+     ],
+     "verdict": "contact",
+     "passed": true,
+     "at_required_outcome": true
+    },
+    "closest pair 1e-30 past contact": {
+     "required": "refused",
+     "passed": false,
+     "overlaps": [
+      [
+       231,
+       237
+      ]
+     ],
+     "at_required_outcome": true
+    }
+   },
+   "wall_seconds": 76.54
+  }
+ },
+ "problems": [],
+ "started_utc": "2026-10-19T21:35:59Z",
+ "finished_utc": "2026-10-19T21:41:37Z",
+ "python": "3.14.7"
+}

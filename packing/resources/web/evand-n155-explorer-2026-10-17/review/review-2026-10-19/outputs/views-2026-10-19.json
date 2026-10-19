@@ -1,0 +1,32 @@
+{
+ "#669 n155": {
+  "passed": true,
+  "same_side_as_certificate": true,
+  "pairs": 11935,
+  "measured_pairs": 573,
+  "contacts": 0,
+  "least_wall_clearance": "5.000e-21",
+  "least_distance": "1.000e-20",
+  "wall_seconds": 10.45
+ },
+ "#659 n236": {
+  "passed": true,
+  "same_side_as_certificate": true,
+  "pairs": 27730,
+  "measured_pairs": 851,
+  "contacts": 0,
+  "least_wall_clearance": "5.000e-21",
+  "least_distance": "1.000e-20",
+  "wall_seconds": 11.66
+ },
+ "#664 n271": {
+  "passed": true,
+  "same_side_as_certificate": true,
+  "pairs": 36585,
+  "measured_pairs": 1019,
+  "contacts": 0,
+  "least_wall_clearance": "5.000e-21",
+  "least_distance": "1.000e-20",
+  "wall_seconds": 18.1
+ }
+}

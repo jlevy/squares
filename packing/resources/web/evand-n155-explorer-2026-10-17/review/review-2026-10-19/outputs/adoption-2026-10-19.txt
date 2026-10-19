@@ -1,0 +1,22 @@
+n = 155
+  12.9522609446505641  +0.000e+00  T-197 (#669) [exact]
+  12.9524254069584562  +1.645e-04  case ceiling, T-174 (Daniil Ostashev, improved by PingYou Ltd) [exact]
+  12.9524254069584562  +1.645e-04  T-149 (#501) (Daniil Ostashev) [exact]
+n = 229
+  15.6501615138955532  +0.000e+00  T-199 (#674 update) [exact]
+  15.6501632548585302  +1.741e-06  T-198 (#674 opening) [exact]
+  15.6501747402730000  +1.323e-05  #672 (Francisco Couzo), print only [print, rounded up]
+  15.6501747569490000  +1.324e-05  T-196 (#668) (Joost de Winter), print only [print, rounded up]
+  15.6568542494923802  +6.693e-03  case ceiling, T-155 (the Kingbird catalogue, verified by T-155's exact ceiling) [exact]
+n = 236
+  15.8619343906073587  +0.000e+00  T-218 (#659, provisional number) [exact]
+  15.8639557471592675  +2.021e-03  T-174 (PR #574) (PingYou Ltd) [exact]
+  15.8639557471592675  +2.021e-03  case ceiling, T-146 (Nate Chaoweeraprasit (itsnaka), improved by Evan Daniel) [exact]
+  15.8639557471592678  +2.021e-03  T-136 (#481) (Nate Chaoweeraprasit (itsnaka)) [exact]
+n = 271
+  16.9489477337136576  +0.000e+00  T-219 (#664, provisional number) [exact]
+  16.9489923564512057  +4.462e-05  case ceiling, T-186 (Nate Chaoweeraprasit (itsnaka), improved by Francisco Couzo, PingYou Ltd, Mishapolk) [exact]
+  16.9489923564512057  +4.462e-05  T-174 (PR #574) (PingYou Ltd) [exact]
+  16.9489923564512057  +4.462e-05  T-161 (#561) (Francisco Couzo) [exact]
+  16.9491166878150100  +1.690e-04  T-151 (#500) (Nate Chaoweeraprasit (itsnaka)) [exact]
+problems: none
