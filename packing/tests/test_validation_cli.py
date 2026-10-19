@@ -5393,6 +5393,23 @@ def test_exact_rust_geometry_is_fast_and_runs_the_differential_oracle(
     assert any(command[:3] == ("cargo", "clippy", "--locked") for command in calls)
     assert ("cargo", "test", "--locked", "--all-targets", "--quiet") in calls
     assert ("cargo", "build", "--locked", "--release", "--quiet") in calls
+    for selection in (
+        ("--no-default-features",),
+        ("--no-default-features", "--features", "experimental-normalized-mul"),
+        ("--no-default-features", "--features", "experimental-coprime-mul"),
+        ("--all-features",),
+    ):
+        assert ("cargo", "test", "--locked", "--all-targets", *selection, "--quiet") in calls
+        assert (
+            "cargo",
+            "clippy",
+            "--locked",
+            "--all-targets",
+            *selection,
+            "--",
+            "-D",
+            "warnings",
+        ) in calls
     assert calls[-1][-1] == "/scratch/exact-target/release/sqverify-exact"
 
 

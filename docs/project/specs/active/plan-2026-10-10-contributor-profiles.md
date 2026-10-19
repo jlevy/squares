@@ -810,6 +810,14 @@ explainer and 53 for the methods survey.
 The writer repair reproduces historical wording already retained in the case record, so
 this added input is source-reviewed without claiming a new render or PDF comparison.
 
+The next merge incorporates main `e952755bc` (PR #679), retaining published site edition
+`v0.7.28` and making the profiles edition `v0.8.0` its minor successor.
+It preserves all 27 profiles, the 25/53 reviewed no-change scopes and both revision
+pins; the incoming Rust changes touch no data paths.
+The merged URL reference validates with 1,068 rows, and 95 focused release/URL tests
+pass. The explicit `--base e952755bc` release-impact check passes; the normal
+`--baseline-ref e952755bc` check must run after the merge commit updates the merge base.
+
 Review and validation receipts for this integration are recorded on PR #578 and
 `think-5bao`. The historical PDF census and profiles without sufficient identity
 evidence remain Phase 4 work under `think-m7il`.

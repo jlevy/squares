@@ -1,0 +1,393 @@
+{
+  "assessment": {
+    "analytic_invocation_wall_seconds": {
+      "default_median": 0.7453048710000019,
+      "default_over_reference_median": 0.862289319238754,
+      "default_range": [
+        0.743024762000001,
+        0.7503531069999987
+      ],
+      "paired_default_over_reference": [
+        0.8617681491000114,
+        0.8619254456528934,
+        0.862289319238754
+      ],
+      "reference_median": 0.864332718,
+      "reference_range": [
+        0.8620522410000007,
+        0.8707134369999991
+      ]
+    },
+    "analytic_rust_child_cpu_seconds": {
+      "default_median": 0.405132,
+      "default_over_reference_median": 0.7773270962765693,
+      "default_range": [
+        0.40347,
+        0.408227
+      ],
+      "paired_default_over_reference": [
+        0.778426317535744,
+        0.7795045575910262,
+        0.7773270962765693
+      ],
+      "reference_median": 0.5211859999999999,
+      "reference_range": [
+        0.517598,
+        0.524426
+      ]
+    },
+    "external_invocation_wall_seconds": {
+      "default_median": 5.195643677000003,
+      "default_over_reference_median": 0.853602722451552,
+      "default_range": [
+        5.161995221000005,
+        5.227063118000004
+      ],
+      "paired_default_over_reference": [
+        0.8557168775354701,
+        0.8353563529829008,
+        0.8480745501145925
+      ],
+      "reference_median": 6.086723413999998,
+      "reference_range": [
+        6.071685406,
+        6.257285408000001
+      ]
+    },
+    "external_rust_child_cpu_seconds": {
+      "default_median": 4.911765,
+      "default_over_reference_median": 0.8475624339320047,
+      "default_range": [
+        4.877964,
+        4.942065
+      ],
+      "paired_default_over_reference": [
+        0.8508190911320731,
+        0.8300499316670633,
+        0.8417298141243927
+      ],
+      "reference_median": 5.795166,
+      "reference_range": [
+        5.772984,
+        5.953937000000001
+      ]
+    },
+    "material_bounded_verifier_improvement": true
+  },
+  "binary_sha256": {
+    "default": "7dc9a14ab04bc990979400a0cdef9069c10c4799dcde652a758c2685344e9b7b",
+    "reference": "01e3c1756303ea2c4830c43c2e07f9b1806f1d9ac312eca55cc5d8ca2c0bf91a"
+  },
+  "builds": {
+    "default": {
+      "arm": "default",
+      "binary_sha256": "7dc9a14ab04bc990979400a0cdef9069c10c4799dcde652a758c2685344e9b7b",
+      "cargo_encoded_rustflags": "",
+      "cargo_version": "cargo 1.98.0 (797e8a9bc 2026-08-05)",
+      "ceiling_seconds": 90,
+      "command": [
+        "cargo",
+        "build",
+        "--offline",
+        "--locked",
+        "--release"
+      ],
+      "cwd": "<repository>/packing/sqverify_exact",
+      "default_features": true,
+      "rustc_version": "rustc 1.98.0 (88d9e12ae 2026-08-18)\nbinary: rustc\ncommit-hash: 88d9e12ae178fab0fb5cc050a94da85685d449ea\ncommit-date: 2026-08-18\nhost: x86_64-unknown-linux-gnu\nrelease: 1.98.0\nLLVM version: 22.1.8",
+      "rustflags": "",
+      "scratch_paths": {
+        "CARGO_TARGET_DIR": "<scratch>/verifier-arms/default",
+        "TMPDIR": "<workspace-tools>/tmp",
+        "UV_CACHE_DIR": "<workspace-tools>/cache/uv"
+      },
+      "scratch_policy": "linux-absolute-writable-outside-repository",
+      "source_sha256": {
+        "<repository>/packing/benchmarks/bench_rectangle_rust_verifier_ab.py": "99950005a4fcb4027d54acf306255b4ed42e043c8435545949d5fd8c3fc32258",
+        "<repository>/packing/benchmarks/bench_rectangle_verifier_parity.py": "a31a41c0d87126883bc28e6ad68e96b2571c8a944b5d012afa05200b2a11c2f6",
+        "<repository>/packing/resources/web/external-square-certificates-2026-09-22/tokoharu-density/certificates/cert_n11_L381/certified_candidate.json": "8e3339eefb2fad81868f51e3f72cbc8487b40b66f9d8fbc711c1dbd5e5edeff4",
+        "<repository>/packing/resources/web/wand125-tools-2026-09-29/native-analytic-control.json": "bfd6e4dea67a048321836c69c9c9fe782687ffc512ccb1afc43249212ba5f01e",
+        "<repository>/packing/sqverify_exact/Cargo.lock": "162843d820f1919f80b37f565a4871a163fa6932a44123543bb47d2fe95aa3b9",
+        "<repository>/packing/sqverify_exact/Cargo.toml": "14a03ffbfe1250cc72a1a3f81573b3e4ca9329ec93a076569fd6a5e1b1387402",
+        "<repository>/packing/sqverify_exact/rust-toolchain.toml": "495c69d1db93f25f53e3d0d2d40d812313366cc368de317871c2ace6c6ffafa4",
+        "<repository>/packing/sqverify_exact/src/lib.rs": "5e80bf9128e7c419140a59d6dd98aaba25a5d116d5ad79363d086f961dfdc74f",
+        "<repository>/packing/sqverify_exact/src/main.rs": "fd45fbf50871c9380dad4614354c40a868da258c2c70d54aa5c80662abd53243",
+        "<repository>/packing/src/sqpack/rectangle_density.py": "1cc7ae158856a443fe9c51be2e9b9b04f4d7dc40fe663bfbd7337cb6fe7e1c7c",
+        "<repository>/packing/src/sqpack/rust_rectangle_geometry.py": "89e87300cc57419542382e2acc06a49e76645f718251610ca5c028b12589fd45"
+      },
+      "target_dir": "<scratch>/verifier-arms/default",
+      "wall_seconds": 7.724559566999998
+    },
+    "reference": {
+      "arm": "reference",
+      "binary_sha256": "01e3c1756303ea2c4830c43c2e07f9b1806f1d9ac312eca55cc5d8ca2c0bf91a",
+      "cargo_encoded_rustflags": "",
+      "cargo_version": "cargo 1.98.0 (797e8a9bc 2026-08-05)",
+      "ceiling_seconds": 90,
+      "command": [
+        "cargo",
+        "build",
+        "--offline",
+        "--locked",
+        "--release",
+        "--no-default-features"
+      ],
+      "cwd": "<repository>/packing/sqverify_exact",
+      "default_features": false,
+      "rustc_version": "rustc 1.98.0 (88d9e12ae 2026-08-18)\nbinary: rustc\ncommit-hash: 88d9e12ae178fab0fb5cc050a94da85685d449ea\ncommit-date: 2026-08-18\nhost: x86_64-unknown-linux-gnu\nrelease: 1.98.0\nLLVM version: 22.1.8",
+      "rustflags": "",
+      "scratch_paths": {
+        "CARGO_TARGET_DIR": "<scratch>/verifier-arms/reference",
+        "TMPDIR": "<workspace-tools>/tmp",
+        "UV_CACHE_DIR": "<workspace-tools>/cache/uv"
+      },
+      "scratch_policy": "linux-absolute-writable-outside-repository",
+      "source_sha256": {
+        "<repository>/packing/benchmarks/bench_rectangle_rust_verifier_ab.py": "99950005a4fcb4027d54acf306255b4ed42e043c8435545949d5fd8c3fc32258",
+        "<repository>/packing/benchmarks/bench_rectangle_verifier_parity.py": "a31a41c0d87126883bc28e6ad68e96b2571c8a944b5d012afa05200b2a11c2f6",
+        "<repository>/packing/resources/web/external-square-certificates-2026-09-22/tokoharu-density/certificates/cert_n11_L381/certified_candidate.json": "8e3339eefb2fad81868f51e3f72cbc8487b40b66f9d8fbc711c1dbd5e5edeff4",
+        "<repository>/packing/resources/web/wand125-tools-2026-09-29/native-analytic-control.json": "bfd6e4dea67a048321836c69c9c9fe782687ffc512ccb1afc43249212ba5f01e",
+        "<repository>/packing/sqverify_exact/Cargo.lock": "162843d820f1919f80b37f565a4871a163fa6932a44123543bb47d2fe95aa3b9",
+        "<repository>/packing/sqverify_exact/Cargo.toml": "14a03ffbfe1250cc72a1a3f81573b3e4ca9329ec93a076569fd6a5e1b1387402",
+        "<repository>/packing/sqverify_exact/rust-toolchain.toml": "495c69d1db93f25f53e3d0d2d40d812313366cc368de317871c2ace6c6ffafa4",
+        "<repository>/packing/sqverify_exact/src/lib.rs": "5e80bf9128e7c419140a59d6dd98aaba25a5d116d5ad79363d086f961dfdc74f",
+        "<repository>/packing/sqverify_exact/src/main.rs": "fd45fbf50871c9380dad4614354c40a868da258c2c70d54aa5c80662abd53243",
+        "<repository>/packing/src/sqpack/rectangle_density.py": "1cc7ae158856a443fe9c51be2e9b9b04f4d7dc40fe663bfbd7337cb6fe7e1c7c",
+        "<repository>/packing/src/sqpack/rust_rectangle_geometry.py": "89e87300cc57419542382e2acc06a49e76645f718251610ca5c028b12589fd45"
+      },
+      "target_dir": "<scratch>/verifier-arms/reference",
+      "wall_seconds": 8.284137051
+    }
+  },
+  "created_utc": "2026-10-19T00:49:32.213543+00:00",
+  "observations": [
+    {
+      "arm": "reference",
+      "coordinator_cpu_seconds": 0.27920718499999997,
+      "dataset": "analytic",
+      "invocation_wall_seconds": 0.8707134369999991,
+      "nodes": 1781,
+      "normalized_report_sha256": "bd878de9d1f469c749015aea091e96eceb98d8820db3fdc47f3e6562948117c8",
+      "order": [
+        "reference",
+        "default"
+      ],
+      "pair": 0,
+      "rust_child_cpu_seconds": 0.524426,
+      "status": "VERIFIED",
+      "verification_wall_seconds": 0.8153900950000015
+    },
+    {
+      "arm": "default",
+      "coordinator_cpu_seconds": 0.274843383,
+      "dataset": "analytic",
+      "invocation_wall_seconds": 0.7503531069999987,
+      "nodes": 1781,
+      "normalized_report_sha256": "bd878de9d1f469c749015aea091e96eceb98d8820db3fdc47f3e6562948117c8",
+      "order": [
+        "reference",
+        "default"
+      ],
+      "pair": 0,
+      "rust_child_cpu_seconds": 0.408227,
+      "status": "VERIFIED",
+      "verification_wall_seconds": 0.6945593309999971
+    },
+    {
+      "arm": "default",
+      "coordinator_cpu_seconds": 0.273842553,
+      "dataset": "analytic",
+      "invocation_wall_seconds": 0.743024762000001,
+      "nodes": 1781,
+      "normalized_report_sha256": "bd878de9d1f469c749015aea091e96eceb98d8820db3fdc47f3e6562948117c8",
+      "order": [
+        "default",
+        "reference"
+      ],
+      "pair": 1,
+      "rust_child_cpu_seconds": 0.40347,
+      "status": "VERIFIED",
+      "verification_wall_seconds": 0.6882241090000001
+    },
+    {
+      "arm": "reference",
+      "coordinator_cpu_seconds": 0.27799279,
+      "dataset": "analytic",
+      "invocation_wall_seconds": 0.8620522410000007,
+      "nodes": 1781,
+      "normalized_report_sha256": "bd878de9d1f469c749015aea091e96eceb98d8820db3fdc47f3e6562948117c8",
+      "order": [
+        "default",
+        "reference"
+      ],
+      "pair": 1,
+      "rust_child_cpu_seconds": 0.517598,
+      "status": "VERIFIED",
+      "verification_wall_seconds": 0.8075870579999993
+    },
+    {
+      "arm": "reference",
+      "coordinator_cpu_seconds": 0.277175921,
+      "dataset": "analytic",
+      "invocation_wall_seconds": 0.864332718,
+      "nodes": 1781,
+      "normalized_report_sha256": "bd878de9d1f469c749015aea091e96eceb98d8820db3fdc47f3e6562948117c8",
+      "order": [
+        "reference",
+        "default"
+      ],
+      "pair": 2,
+      "rust_child_cpu_seconds": 0.5211859999999999,
+      "status": "VERIFIED",
+      "verification_wall_seconds": 0.8095016229999992
+    },
+    {
+      "arm": "default",
+      "coordinator_cpu_seconds": 0.27363534700000003,
+      "dataset": "analytic",
+      "invocation_wall_seconds": 0.7453048710000019,
+      "nodes": 1781,
+      "normalized_report_sha256": "bd878de9d1f469c749015aea091e96eceb98d8820db3fdc47f3e6562948117c8",
+      "order": [
+        "reference",
+        "default"
+      ],
+      "pair": 2,
+      "rust_child_cpu_seconds": 0.405132,
+      "status": "VERIFIED",
+      "verification_wall_seconds": 0.690629358999999
+    },
+    {
+      "arm": "reference",
+      "coordinator_cpu_seconds": 0.226659919,
+      "dataset": "external",
+      "invocation_wall_seconds": 6.071685406,
+      "nodes": 1000,
+      "normalized_report_sha256": "68123cb6992b9971c370c1fd677985a1c6c5f31c74390e53c47303d5a5d49105",
+      "order": [
+        "reference",
+        "default"
+      ],
+      "pair": 0,
+      "rust_child_cpu_seconds": 5.772984,
+      "status": "INCONCLUSIVE",
+      "verification_wall_seconds": 6.009863030000002
+    },
+    {
+      "arm": "default",
+      "coordinator_cpu_seconds": 0.21147293500000003,
+      "dataset": "external",
+      "invocation_wall_seconds": 5.195643677000003,
+      "nodes": 1000,
+      "normalized_report_sha256": "68123cb6992b9971c370c1fd677985a1c6c5f31c74390e53c47303d5a5d49105",
+      "order": [
+        "reference",
+        "default"
+      ],
+      "pair": 0,
+      "rust_child_cpu_seconds": 4.911765,
+      "status": "INCONCLUSIVE",
+      "verification_wall_seconds": 5.134545274000004
+    },
+    {
+      "arm": "default",
+      "coordinator_cpu_seconds": 0.21482963400000002,
+      "dataset": "external",
+      "invocation_wall_seconds": 5.227063118000004,
+      "nodes": 1000,
+      "normalized_report_sha256": "68123cb6992b9971c370c1fd677985a1c6c5f31c74390e53c47303d5a5d49105",
+      "order": [
+        "default",
+        "reference"
+      ],
+      "pair": 1,
+      "rust_child_cpu_seconds": 4.942065,
+      "status": "INCONCLUSIVE",
+      "verification_wall_seconds": 5.165414272
+    },
+    {
+      "arm": "reference",
+      "coordinator_cpu_seconds": 0.23288198300000001,
+      "dataset": "external",
+      "invocation_wall_seconds": 6.257285408000001,
+      "nodes": 1000,
+      "normalized_report_sha256": "68123cb6992b9971c370c1fd677985a1c6c5f31c74390e53c47303d5a5d49105",
+      "order": [
+        "default",
+        "reference"
+      ],
+      "pair": 1,
+      "rust_child_cpu_seconds": 5.953937000000001,
+      "status": "INCONCLUSIVE",
+      "verification_wall_seconds": 6.196499049000003
+    },
+    {
+      "arm": "reference",
+      "coordinator_cpu_seconds": 0.22047896100000003,
+      "dataset": "external",
+      "invocation_wall_seconds": 6.086723413999998,
+      "nodes": 1000,
+      "normalized_report_sha256": "68123cb6992b9971c370c1fd677985a1c6c5f31c74390e53c47303d5a5d49105",
+      "order": [
+        "reference",
+        "default"
+      ],
+      "pair": 2,
+      "rust_child_cpu_seconds": 5.795166,
+      "status": "INCONCLUSIVE",
+      "verification_wall_seconds": 6.024102900999999
+    },
+    {
+      "arm": "default",
+      "coordinator_cpu_seconds": 0.213285529,
+      "dataset": "external",
+      "invocation_wall_seconds": 5.161995221000005,
+      "nodes": 1000,
+      "normalized_report_sha256": "68123cb6992b9971c370c1fd677985a1c6c5f31c74390e53c47303d5a5d49105",
+      "order": [
+        "reference",
+        "default"
+      ],
+      "pair": 2,
+      "rust_child_cpu_seconds": 4.877964,
+      "status": "INCONCLUSIVE",
+      "verification_wall_seconds": 5.100358733
+    }
+  ],
+  "path_redaction": "Only local absolute path prefixes are replaced by <repository>, <scratch> and <workspace-tools>; executed Cargo argv, timestamps, source/binary/input/report digests and all observations are unchanged.",
+  "python_executable": "<repository>/packing/.venv/bin/python",
+  "python_version": "3.14.7 (main, Sep 29 2026, 15:01:40) [Clang 22.1.3 ]",
+  "scope": "Exploratory three-pair comparison of a complete analytic control and capped external angle only; the latter remains INCONCLUSIVE. Invocation wall includes Python startup/admission/serialization and resident Rust startup/shutdown. Child CPU measures the Rust subprocess; coordinator CPU excludes it. This is no full certificate or proof claim.",
+  "scratch_paths": {
+    "output": "<scratch>/verifier-ab.json",
+    "target_root": "<scratch>/verifier-arms"
+  },
+  "settings": {
+    "analytic": "all 201 angles, 10000 nodes/angle, depth 20, threshold 1",
+    "arms": {
+      "default": "production default features",
+      "reference": "original Rust expressions, --no-default-features"
+    },
+    "bound_mode": "common-core",
+    "external": "angle 1, 1000 nodes, depth 20, threshold 1, pending retained",
+    "internal_seconds": 30,
+    "pairs": 3,
+    "per_build_ceiling_seconds": 90,
+    "per_invocation_ceiling_seconds": 40,
+    "total_ceiling_seconds": 300
+  },
+  "source_sha256": {
+    "<repository>/packing/benchmarks/bench_rectangle_rust_verifier_ab.py": "99950005a4fcb4027d54acf306255b4ed42e043c8435545949d5fd8c3fc32258",
+    "<repository>/packing/benchmarks/bench_rectangle_verifier_parity.py": "a31a41c0d87126883bc28e6ad68e96b2571c8a944b5d012afa05200b2a11c2f6",
+    "<repository>/packing/resources/web/external-square-certificates-2026-09-22/tokoharu-density/certificates/cert_n11_L381/certified_candidate.json": "8e3339eefb2fad81868f51e3f72cbc8487b40b66f9d8fbc711c1dbd5e5edeff4",
+    "<repository>/packing/resources/web/wand125-tools-2026-09-29/native-analytic-control.json": "bfd6e4dea67a048321836c69c9c9fe782687ffc512ccb1afc43249212ba5f01e",
+    "<repository>/packing/sqverify_exact/Cargo.lock": "162843d820f1919f80b37f565a4871a163fa6932a44123543bb47d2fe95aa3b9",
+    "<repository>/packing/sqverify_exact/Cargo.toml": "14a03ffbfe1250cc72a1a3f81573b3e4ca9329ec93a076569fd6a5e1b1387402",
+    "<repository>/packing/sqverify_exact/rust-toolchain.toml": "495c69d1db93f25f53e3d0d2d40d812313366cc368de317871c2ace6c6ffafa4",
+    "<repository>/packing/sqverify_exact/src/lib.rs": "5e80bf9128e7c419140a59d6dd98aaba25a5d116d5ad79363d086f961dfdc74f",
+    "<repository>/packing/sqverify_exact/src/main.rs": "fd45fbf50871c9380dad4614354c40a868da258c2c70d54aa5c80662abd53243",
+    "<repository>/packing/src/sqpack/rectangle_density.py": "1cc7ae158856a443fe9c51be2e9b9b04f4d7dc40fe663bfbd7337cb6fe7e1c7c",
+    "<repository>/packing/src/sqpack/rust_rectangle_geometry.py": "89e87300cc57419542382e2acc06a49e76645f718251610ca5c028b12589fd45"
+  },
+  "status": "MATCHED_BOUNDED_VERIFIER_DIAGNOSTIC_ONLY"
+}
