@@ -1,0 +1,1792 @@
+{
+  "classification": "Engineering diagnostic only: data preservation and exact rational comparison; no replay, no geometric decision, no rung change.",
+  "revisions": {
+    "head": "7d47153fb579373cc69488d1e9c1c1f560ddd585",
+    "base": "3d34e828fddbe3b3a91172cc48b1ff07ba8d3b07",
+    "preintegration": "ab9f09e4d79d8b07d16c3ee3906fe748f147617d"
+  },
+  "failures": [],
+  "case_count": 324,
+  "adoption_counts": [
+    68,
+    84,
+    86,
+    103,
+    105,
+    108,
+    110,
+    127,
+    130,
+    131,
+    132,
+    155,
+    172,
+    179,
+    180,
+    181,
+    182,
+    206,
+    208,
+    209,
+    210,
+    228,
+    238,
+    239,
+    240,
+    261,
+    263,
+    268,
+    269,
+    270,
+    272,
+    273,
+    297,
+    305,
+    306,
+    307,
+    308
+  ],
+  "adoption_checks": [
+    {
+      "n": 68,
+      "reported_upper_bound_preintegration_equal": true,
+      "reported_upper_bound_comparison_basis": "reported_upper_bound",
+      "reported_upper_bound_strict_improvement": true,
+      "reported_upper_bound_safe_display": true,
+      "verified_upper_bound_preintegration_equal": true,
+      "verified_upper_bound_comparison_basis": "verified_upper_bound",
+      "verified_upper_bound_strict_improvement": true,
+      "verified_upper_bound_safe_display": true,
+      "equal_exact_upper_lanes": true,
+      "reported_lower_bound_base_equal": true,
+      "verified_lower_bound_base_equal": true,
+      "base_priority_retained": true,
+      "prior_priority_retained": true,
+      "base_evidence_retained": true,
+      "prior_evidence_retained": true
+    },
+    {
+      "n": 84,
+      "reported_upper_bound_preintegration_equal": true,
+      "reported_upper_bound_comparison_basis": "reported_upper_bound",
+      "reported_upper_bound_strict_improvement": true,
+      "reported_upper_bound_safe_display": true,
+      "verified_upper_bound_preintegration_equal": true,
+      "verified_upper_bound_comparison_basis": "verified_upper_bound",
+      "verified_upper_bound_strict_improvement": true,
+      "verified_upper_bound_safe_display": true,
+      "equal_exact_upper_lanes": true,
+      "reported_lower_bound_base_equal": true,
+      "verified_lower_bound_base_equal": true,
+      "base_priority_retained": true,
+      "prior_priority_retained": true,
+      "base_evidence_retained": true,
+      "prior_evidence_retained": true
+    },
+    {
+      "n": 86,
+      "reported_upper_bound_preintegration_equal": true,
+      "reported_upper_bound_comparison_basis": "reported_upper_bound",
+      "reported_upper_bound_strict_improvement": true,
+      "reported_upper_bound_safe_display": true,
+      "verified_upper_bound_preintegration_equal": true,
+      "verified_upper_bound_comparison_basis": "verified_upper_bound",
+      "verified_upper_bound_strict_improvement": true,
+      "verified_upper_bound_safe_display": true,
+      "equal_exact_upper_lanes": true,
+      "reported_lower_bound_base_equal": true,
+      "verified_lower_bound_base_equal": true,
+      "base_priority_retained": true,
+      "prior_priority_retained": true,
+      "base_evidence_retained": true,
+      "prior_evidence_retained": true
+    },
+    {
+      "n": 103,
+      "reported_upper_bound_preintegration_equal": true,
+      "reported_upper_bound_comparison_basis": "reported_upper_bound",
+      "reported_upper_bound_strict_improvement": true,
+      "reported_upper_bound_safe_display": true,
+      "verified_upper_bound_preintegration_equal": true,
+      "verified_upper_bound_comparison_basis": "verified_upper_bound",
+      "verified_upper_bound_strict_improvement": true,
+      "verified_upper_bound_safe_display": true,
+      "equal_exact_upper_lanes": true,
+      "reported_lower_bound_base_equal": true,
+      "verified_lower_bound_base_equal": true,
+      "base_priority_retained": true,
+      "prior_priority_retained": true,
+      "base_evidence_retained": true,
+      "prior_evidence_retained": true
+    },
+    {
+      "n": 105,
+      "reported_upper_bound_preintegration_equal": true,
+      "reported_upper_bound_comparison_basis": "reported_upper_bound",
+      "reported_upper_bound_strict_improvement": true,
+      "reported_upper_bound_safe_display": true,
+      "verified_upper_bound_preintegration_equal": true,
+      "verified_upper_bound_comparison_basis": "verified_upper_bound",
+      "verified_upper_bound_strict_improvement": true,
+      "verified_upper_bound_safe_display": true,
+      "equal_exact_upper_lanes": true,
+      "reported_lower_bound_base_equal": true,
+      "verified_lower_bound_base_equal": true,
+      "base_priority_retained": true,
+      "prior_priority_retained": true,
+      "base_evidence_retained": true,
+      "prior_evidence_retained": true
+    },
+    {
+      "n": 108,
+      "reported_upper_bound_preintegration_equal": true,
+      "reported_upper_bound_comparison_basis": "reported_upper_bound",
+      "reported_upper_bound_strict_improvement": true,
+      "reported_upper_bound_safe_display": true,
+      "verified_upper_bound_preintegration_equal": true,
+      "verified_upper_bound_comparison_basis": "verified_upper_bound",
+      "verified_upper_bound_strict_improvement": true,
+      "verified_upper_bound_safe_display": true,
+      "equal_exact_upper_lanes": true,
+      "reported_lower_bound_base_equal": true,
+      "verified_lower_bound_base_equal": true,
+      "base_priority_retained": true,
+      "prior_priority_retained": true,
+      "base_evidence_retained": true,
+      "prior_evidence_retained": true
+    },
+    {
+      "n": 110,
+      "reported_upper_bound_preintegration_equal": true,
+      "reported_upper_bound_comparison_basis": "verified_upper_bound (reported lane has no exact form)",
+      "reported_upper_bound_strict_improvement": true,
+      "reported_upper_bound_safe_display": true,
+      "verified_upper_bound_preintegration_equal": true,
+      "verified_upper_bound_comparison_basis": "verified_upper_bound",
+      "verified_upper_bound_strict_improvement": true,
+      "verified_upper_bound_safe_display": true,
+      "equal_exact_upper_lanes": true,
+      "reported_lower_bound_base_equal": true,
+      "verified_lower_bound_base_equal": true,
+      "base_priority_retained": true,
+      "prior_priority_retained": true,
+      "base_evidence_retained": true,
+      "prior_evidence_retained": true
+    },
+    {
+      "n": 127,
+      "reported_upper_bound_preintegration_equal": true,
+      "reported_upper_bound_comparison_basis": "reported_upper_bound",
+      "reported_upper_bound_strict_improvement": true,
+      "reported_upper_bound_safe_display": true,
+      "verified_upper_bound_preintegration_equal": true,
+      "verified_upper_bound_comparison_basis": "verified_upper_bound",
+      "verified_upper_bound_strict_improvement": true,
+      "verified_upper_bound_safe_display": true,
+      "equal_exact_upper_lanes": true,
+      "reported_lower_bound_base_equal": true,
+      "verified_lower_bound_base_equal": true,
+      "base_priority_retained": true,
+      "prior_priority_retained": true,
+      "base_evidence_retained": true,
+      "prior_evidence_retained": true
+    },
+    {
+      "n": 130,
+      "reported_upper_bound_preintegration_equal": true,
+      "reported_upper_bound_comparison_basis": "reported_upper_bound",
+      "reported_upper_bound_strict_improvement": true,
+      "reported_upper_bound_safe_display": true,
+      "verified_upper_bound_preintegration_equal": true,
+      "verified_upper_bound_comparison_basis": "verified_upper_bound",
+      "verified_upper_bound_strict_improvement": true,
+      "verified_upper_bound_safe_display": true,
+      "equal_exact_upper_lanes": true,
+      "reported_lower_bound_base_equal": true,
+      "verified_lower_bound_base_equal": true,
+      "base_priority_retained": true,
+      "prior_priority_retained": true,
+      "base_evidence_retained": true,
+      "prior_evidence_retained": true
+    },
+    {
+      "n": 131,
+      "reported_upper_bound_preintegration_equal": true,
+      "reported_upper_bound_comparison_basis": "reported_upper_bound",
+      "reported_upper_bound_strict_improvement": true,
+      "reported_upper_bound_safe_display": true,
+      "verified_upper_bound_preintegration_equal": true,
+      "verified_upper_bound_comparison_basis": "verified_upper_bound",
+      "verified_upper_bound_strict_improvement": true,
+      "verified_upper_bound_safe_display": true,
+      "equal_exact_upper_lanes": true,
+      "reported_lower_bound_base_equal": true,
+      "verified_lower_bound_base_equal": true,
+      "base_priority_retained": true,
+      "prior_priority_retained": true,
+      "base_evidence_retained": true,
+      "prior_evidence_retained": true
+    },
+    {
+      "n": 132,
+      "reported_upper_bound_preintegration_equal": true,
+      "reported_upper_bound_comparison_basis": "reported_upper_bound",
+      "reported_upper_bound_strict_improvement": true,
+      "reported_upper_bound_safe_display": true,
+      "verified_upper_bound_preintegration_equal": true,
+      "verified_upper_bound_comparison_basis": "verified_upper_bound",
+      "verified_upper_bound_strict_improvement": true,
+      "verified_upper_bound_safe_display": true,
+      "equal_exact_upper_lanes": true,
+      "reported_lower_bound_base_equal": true,
+      "verified_lower_bound_base_equal": true,
+      "base_priority_retained": true,
+      "prior_priority_retained": true,
+      "base_evidence_retained": true,
+      "prior_evidence_retained": true
+    },
+    {
+      "n": 155,
+      "reported_upper_bound_preintegration_equal": true,
+      "reported_upper_bound_comparison_basis": "reported_upper_bound",
+      "reported_upper_bound_strict_improvement": true,
+      "reported_upper_bound_safe_display": true,
+      "verified_upper_bound_preintegration_equal": true,
+      "verified_upper_bound_comparison_basis": "verified_upper_bound",
+      "verified_upper_bound_strict_improvement": true,
+      "verified_upper_bound_safe_display": true,
+      "equal_exact_upper_lanes": true,
+      "reported_lower_bound_base_equal": true,
+      "verified_lower_bound_base_equal": true,
+      "base_priority_retained": true,
+      "prior_priority_retained": true,
+      "base_evidence_retained": true,
+      "prior_evidence_retained": true
+    },
+    {
+      "n": 172,
+      "reported_upper_bound_preintegration_equal": true,
+      "reported_upper_bound_comparison_basis": "verified_upper_bound (reported lane has no exact form)",
+      "reported_upper_bound_strict_improvement": true,
+      "reported_upper_bound_safe_display": true,
+      "verified_upper_bound_preintegration_equal": true,
+      "verified_upper_bound_comparison_basis": "verified_upper_bound",
+      "verified_upper_bound_strict_improvement": true,
+      "verified_upper_bound_safe_display": true,
+      "equal_exact_upper_lanes": true,
+      "reported_lower_bound_base_equal": true,
+      "verified_lower_bound_base_equal": true,
+      "base_priority_retained": true,
+      "prior_priority_retained": true,
+      "base_evidence_retained": true,
+      "prior_evidence_retained": true
+    },
+    {
+      "n": 179,
+      "reported_upper_bound_preintegration_equal": true,
+      "reported_upper_bound_comparison_basis": "reported_upper_bound",
+      "reported_upper_bound_strict_improvement": true,
+      "reported_upper_bound_safe_display": true,
+      "verified_upper_bound_preintegration_equal": true,
+      "verified_upper_bound_comparison_basis": "verified_upper_bound",
+      "verified_upper_bound_strict_improvement": true,
+      "verified_upper_bound_safe_display": true,
+      "equal_exact_upper_lanes": true,
+      "reported_lower_bound_base_equal": true,
+      "verified_lower_bound_base_equal": true,
+      "base_priority_retained": true,
+      "prior_priority_retained": true,
+      "base_evidence_retained": true,
+      "prior_evidence_retained": true
+    },
+    {
+      "n": 180,
+      "reported_upper_bound_preintegration_equal": true,
+      "reported_upper_bound_comparison_basis": "reported_upper_bound",
+      "reported_upper_bound_strict_improvement": true,
+      "reported_upper_bound_safe_display": true,
+      "verified_upper_bound_preintegration_equal": true,
+      "verified_upper_bound_comparison_basis": "verified_upper_bound",
+      "verified_upper_bound_strict_improvement": true,
+      "verified_upper_bound_safe_display": true,
+      "equal_exact_upper_lanes": true,
+      "reported_lower_bound_base_equal": true,
+      "verified_lower_bound_base_equal": true,
+      "base_priority_retained": true,
+      "prior_priority_retained": true,
+      "base_evidence_retained": true,
+      "prior_evidence_retained": true
+    },
+    {
+      "n": 181,
+      "reported_upper_bound_preintegration_equal": true,
+      "reported_upper_bound_comparison_basis": "reported_upper_bound",
+      "reported_upper_bound_strict_improvement": true,
+      "reported_upper_bound_safe_display": true,
+      "verified_upper_bound_preintegration_equal": true,
+      "verified_upper_bound_comparison_basis": "verified_upper_bound",
+      "verified_upper_bound_strict_improvement": true,
+      "verified_upper_bound_safe_display": true,
+      "equal_exact_upper_lanes": true,
+      "reported_lower_bound_base_equal": true,
+      "verified_lower_bound_base_equal": true,
+      "base_priority_retained": true,
+      "prior_priority_retained": true,
+      "base_evidence_retained": true,
+      "prior_evidence_retained": true
+    },
+    {
+      "n": 182,
+      "reported_upper_bound_preintegration_equal": true,
+      "reported_upper_bound_comparison_basis": "verified_upper_bound (reported lane has no exact form)",
+      "reported_upper_bound_strict_improvement": true,
+      "reported_upper_bound_safe_display": true,
+      "verified_upper_bound_preintegration_equal": true,
+      "verified_upper_bound_comparison_basis": "verified_upper_bound",
+      "verified_upper_bound_strict_improvement": true,
+      "verified_upper_bound_safe_display": true,
+      "equal_exact_upper_lanes": true,
+      "reported_lower_bound_base_equal": true,
+      "verified_lower_bound_base_equal": true,
+      "base_priority_retained": true,
+      "prior_priority_retained": true,
+      "base_evidence_retained": true,
+      "prior_evidence_retained": true
+    },
+    {
+      "n": 206,
+      "reported_upper_bound_preintegration_equal": true,
+      "reported_upper_bound_comparison_basis": "verified_upper_bound (reported lane has no exact form)",
+      "reported_upper_bound_strict_improvement": true,
+      "reported_upper_bound_safe_display": true,
+      "verified_upper_bound_preintegration_equal": true,
+      "verified_upper_bound_comparison_basis": "verified_upper_bound",
+      "verified_upper_bound_strict_improvement": true,
+      "verified_upper_bound_safe_display": true,
+      "equal_exact_upper_lanes": true,
+      "reported_lower_bound_base_equal": true,
+      "verified_lower_bound_base_equal": true,
+      "base_priority_retained": true,
+      "prior_priority_retained": true,
+      "base_evidence_retained": true,
+      "prior_evidence_retained": true
+    },
+    {
+      "n": 208,
+      "reported_upper_bound_preintegration_equal": true,
+      "reported_upper_bound_comparison_basis": "reported_upper_bound",
+      "reported_upper_bound_strict_improvement": true,
+      "reported_upper_bound_safe_display": true,
+      "verified_upper_bound_preintegration_equal": true,
+      "verified_upper_bound_comparison_basis": "verified_upper_bound",
+      "verified_upper_bound_strict_improvement": true,
+      "verified_upper_bound_safe_display": true,
+      "equal_exact_upper_lanes": true,
+      "reported_lower_bound_base_equal": true,
+      "verified_lower_bound_base_equal": true,
+      "base_priority_retained": true,
+      "prior_priority_retained": true,
+      "base_evidence_retained": true,
+      "prior_evidence_retained": true
+    },
+    {
+      "n": 209,
+      "reported_upper_bound_preintegration_equal": true,
+      "reported_upper_bound_comparison_basis": "reported_upper_bound",
+      "reported_upper_bound_strict_improvement": true,
+      "reported_upper_bound_safe_display": true,
+      "verified_upper_bound_preintegration_equal": true,
+      "verified_upper_bound_comparison_basis": "verified_upper_bound",
+      "verified_upper_bound_strict_improvement": true,
+      "verified_upper_bound_safe_display": true,
+      "equal_exact_upper_lanes": true,
+      "reported_lower_bound_base_equal": true,
+      "verified_lower_bound_base_equal": true,
+      "base_priority_retained": true,
+      "prior_priority_retained": true,
+      "base_evidence_retained": true,
+      "prior_evidence_retained": true
+    },
+    {
+      "n": 210,
+      "reported_upper_bound_preintegration_equal": true,
+      "reported_upper_bound_comparison_basis": "verified_upper_bound (reported lane has no exact form)",
+      "reported_upper_bound_strict_improvement": true,
+      "reported_upper_bound_safe_display": true,
+      "verified_upper_bound_preintegration_equal": true,
+      "verified_upper_bound_comparison_basis": "verified_upper_bound",
+      "verified_upper_bound_strict_improvement": true,
+      "verified_upper_bound_safe_display": true,
+      "equal_exact_upper_lanes": true,
+      "reported_lower_bound_base_equal": true,
+      "verified_lower_bound_base_equal": true,
+      "base_priority_retained": true,
+      "prior_priority_retained": true,
+      "base_evidence_retained": true,
+      "prior_evidence_retained": true
+    },
+    {
+      "n": 228,
+      "reported_upper_bound_preintegration_equal": true,
+      "reported_upper_bound_comparison_basis": "reported_upper_bound",
+      "reported_upper_bound_strict_improvement": true,
+      "reported_upper_bound_safe_display": true,
+      "verified_upper_bound_preintegration_equal": true,
+      "verified_upper_bound_comparison_basis": "verified_upper_bound",
+      "verified_upper_bound_strict_improvement": true,
+      "verified_upper_bound_safe_display": true,
+      "equal_exact_upper_lanes": true,
+      "reported_lower_bound_base_equal": true,
+      "verified_lower_bound_base_equal": true,
+      "base_priority_retained": true,
+      "prior_priority_retained": true,
+      "base_evidence_retained": true,
+      "prior_evidence_retained": true
+    },
+    {
+      "n": 238,
+      "reported_upper_bound_preintegration_equal": true,
+      "reported_upper_bound_comparison_basis": "reported_upper_bound",
+      "reported_upper_bound_strict_improvement": true,
+      "reported_upper_bound_safe_display": true,
+      "verified_upper_bound_preintegration_equal": true,
+      "verified_upper_bound_comparison_basis": "verified_upper_bound",
+      "verified_upper_bound_strict_improvement": true,
+      "verified_upper_bound_safe_display": true,
+      "equal_exact_upper_lanes": true,
+      "reported_lower_bound_base_equal": true,
+      "verified_lower_bound_base_equal": true,
+      "base_priority_retained": true,
+      "prior_priority_retained": true,
+      "base_evidence_retained": true,
+      "prior_evidence_retained": true
+    },
+    {
+      "n": 239,
+      "reported_upper_bound_preintegration_equal": true,
+      "reported_upper_bound_comparison_basis": "reported_upper_bound",
+      "reported_upper_bound_strict_improvement": true,
+      "reported_upper_bound_safe_display": true,
+      "verified_upper_bound_preintegration_equal": true,
+      "verified_upper_bound_comparison_basis": "verified_upper_bound",
+      "verified_upper_bound_strict_improvement": true,
+      "verified_upper_bound_safe_display": true,
+      "equal_exact_upper_lanes": true,
+      "reported_lower_bound_base_equal": true,
+      "verified_lower_bound_base_equal": true,
+      "base_priority_retained": true,
+      "prior_priority_retained": true,
+      "base_evidence_retained": true,
+      "prior_evidence_retained": true
+    },
+    {
+      "n": 240,
+      "reported_upper_bound_preintegration_equal": true,
+      "reported_upper_bound_comparison_basis": "verified_upper_bound (reported lane has no exact form)",
+      "reported_upper_bound_strict_improvement": true,
+      "reported_upper_bound_safe_display": true,
+      "verified_upper_bound_preintegration_equal": true,
+      "verified_upper_bound_comparison_basis": "verified_upper_bound",
+      "verified_upper_bound_strict_improvement": true,
+      "verified_upper_bound_safe_display": true,
+      "equal_exact_upper_lanes": true,
+      "reported_lower_bound_base_equal": true,
+      "verified_lower_bound_base_equal": true,
+      "base_priority_retained": true,
+      "prior_priority_retained": true,
+      "base_evidence_retained": true,
+      "prior_evidence_retained": true
+    },
+    {
+      "n": 261,
+      "reported_upper_bound_preintegration_equal": true,
+      "reported_upper_bound_comparison_basis": "reported_upper_bound",
+      "reported_upper_bound_strict_improvement": true,
+      "reported_upper_bound_safe_display": true,
+      "verified_upper_bound_preintegration_equal": true,
+      "verified_upper_bound_comparison_basis": "verified_upper_bound",
+      "verified_upper_bound_strict_improvement": true,
+      "verified_upper_bound_safe_display": true,
+      "equal_exact_upper_lanes": true,
+      "reported_lower_bound_base_equal": true,
+      "verified_lower_bound_base_equal": true,
+      "base_priority_retained": true,
+      "prior_priority_retained": true,
+      "base_evidence_retained": true,
+      "prior_evidence_retained": true
+    },
+    {
+      "n": 263,
+      "reported_upper_bound_preintegration_equal": true,
+      "reported_upper_bound_comparison_basis": "reported_upper_bound",
+      "reported_upper_bound_strict_improvement": true,
+      "reported_upper_bound_safe_display": true,
+      "verified_upper_bound_preintegration_equal": true,
+      "verified_upper_bound_comparison_basis": "verified_upper_bound",
+      "verified_upper_bound_strict_improvement": true,
+      "verified_upper_bound_safe_display": true,
+      "equal_exact_upper_lanes": true,
+      "reported_lower_bound_base_equal": true,
+      "verified_lower_bound_base_equal": true,
+      "base_priority_retained": true,
+      "prior_priority_retained": true,
+      "base_evidence_retained": true,
+      "prior_evidence_retained": true
+    },
+    {
+      "n": 268,
+      "reported_upper_bound_preintegration_equal": true,
+      "reported_upper_bound_comparison_basis": "verified_upper_bound (reported lane has no exact form)",
+      "reported_upper_bound_strict_improvement": true,
+      "reported_upper_bound_safe_display": true,
+      "verified_upper_bound_preintegration_equal": true,
+      "verified_upper_bound_comparison_basis": "verified_upper_bound",
+      "verified_upper_bound_strict_improvement": true,
+      "verified_upper_bound_safe_display": true,
+      "equal_exact_upper_lanes": true,
+      "reported_lower_bound_base_equal": true,
+      "verified_lower_bound_base_equal": true,
+      "base_priority_retained": true,
+      "prior_priority_retained": true,
+      "base_evidence_retained": true,
+      "prior_evidence_retained": true
+    },
+    {
+      "n": 269,
+      "reported_upper_bound_preintegration_equal": true,
+      "reported_upper_bound_comparison_basis": "reported_upper_bound",
+      "reported_upper_bound_strict_improvement": true,
+      "reported_upper_bound_safe_display": true,
+      "verified_upper_bound_preintegration_equal": true,
+      "verified_upper_bound_comparison_basis": "verified_upper_bound",
+      "verified_upper_bound_strict_improvement": true,
+      "verified_upper_bound_safe_display": true,
+      "equal_exact_upper_lanes": true,
+      "reported_lower_bound_base_equal": true,
+      "verified_lower_bound_base_equal": true,
+      "base_priority_retained": true,
+      "prior_priority_retained": true,
+      "base_evidence_retained": true,
+      "prior_evidence_retained": true
+    },
+    {
+      "n": 270,
+      "reported_upper_bound_preintegration_equal": true,
+      "reported_upper_bound_comparison_basis": "reported_upper_bound",
+      "reported_upper_bound_strict_improvement": true,
+      "reported_upper_bound_safe_display": true,
+      "verified_upper_bound_preintegration_equal": true,
+      "verified_upper_bound_comparison_basis": "verified_upper_bound",
+      "verified_upper_bound_strict_improvement": true,
+      "verified_upper_bound_safe_display": true,
+      "equal_exact_upper_lanes": true,
+      "reported_lower_bound_base_equal": true,
+      "verified_lower_bound_base_equal": true,
+      "base_priority_retained": true,
+      "prior_priority_retained": true,
+      "base_evidence_retained": true,
+      "prior_evidence_retained": true
+    },
+    {
+      "n": 272,
+      "reported_upper_bound_preintegration_equal": true,
+      "reported_upper_bound_comparison_basis": "reported_upper_bound",
+      "reported_upper_bound_strict_improvement": true,
+      "reported_upper_bound_safe_display": true,
+      "verified_upper_bound_preintegration_equal": true,
+      "verified_upper_bound_comparison_basis": "verified_upper_bound",
+      "verified_upper_bound_strict_improvement": true,
+      "verified_upper_bound_safe_display": true,
+      "equal_exact_upper_lanes": true,
+      "reported_lower_bound_base_equal": true,
+      "verified_lower_bound_base_equal": true,
+      "base_priority_retained": true,
+      "prior_priority_retained": true,
+      "base_evidence_retained": true,
+      "prior_evidence_retained": true
+    },
+    {
+      "n": 273,
+      "reported_upper_bound_preintegration_equal": true,
+      "reported_upper_bound_comparison_basis": "verified_upper_bound (reported lane has no exact form)",
+      "reported_upper_bound_strict_improvement": true,
+      "reported_upper_bound_safe_display": true,
+      "verified_upper_bound_preintegration_equal": true,
+      "verified_upper_bound_comparison_basis": "verified_upper_bound",
+      "verified_upper_bound_strict_improvement": true,
+      "verified_upper_bound_safe_display": true,
+      "equal_exact_upper_lanes": true,
+      "reported_lower_bound_base_equal": true,
+      "verified_lower_bound_base_equal": true,
+      "base_priority_retained": true,
+      "prior_priority_retained": true,
+      "base_evidence_retained": true,
+      "prior_evidence_retained": true
+    },
+    {
+      "n": 297,
+      "reported_upper_bound_preintegration_equal": true,
+      "reported_upper_bound_comparison_basis": "verified_upper_bound (reported lane has no exact form)",
+      "reported_upper_bound_strict_improvement": true,
+      "reported_upper_bound_safe_display": true,
+      "verified_upper_bound_preintegration_equal": true,
+      "verified_upper_bound_comparison_basis": "verified_upper_bound",
+      "verified_upper_bound_strict_improvement": true,
+      "verified_upper_bound_safe_display": true,
+      "equal_exact_upper_lanes": true,
+      "reported_lower_bound_base_equal": true,
+      "verified_lower_bound_base_equal": true,
+      "base_priority_retained": true,
+      "prior_priority_retained": true,
+      "base_evidence_retained": true,
+      "prior_evidence_retained": true
+    },
+    {
+      "n": 305,
+      "reported_upper_bound_preintegration_equal": true,
+      "reported_upper_bound_comparison_basis": "reported_upper_bound",
+      "reported_upper_bound_strict_improvement": true,
+      "reported_upper_bound_safe_display": true,
+      "verified_upper_bound_preintegration_equal": true,
+      "verified_upper_bound_comparison_basis": "verified_upper_bound",
+      "verified_upper_bound_strict_improvement": true,
+      "verified_upper_bound_safe_display": true,
+      "equal_exact_upper_lanes": true,
+      "reported_lower_bound_base_equal": true,
+      "verified_lower_bound_base_equal": true,
+      "base_priority_retained": true,
+      "prior_priority_retained": true,
+      "base_evidence_retained": true,
+      "prior_evidence_retained": true
+    },
+    {
+      "n": 306,
+      "reported_upper_bound_preintegration_equal": true,
+      "reported_upper_bound_comparison_basis": "reported_upper_bound",
+      "reported_upper_bound_strict_improvement": true,
+      "reported_upper_bound_safe_display": true,
+      "verified_upper_bound_preintegration_equal": true,
+      "verified_upper_bound_comparison_basis": "verified_upper_bound",
+      "verified_upper_bound_strict_improvement": true,
+      "verified_upper_bound_safe_display": true,
+      "equal_exact_upper_lanes": true,
+      "reported_lower_bound_base_equal": true,
+      "verified_lower_bound_base_equal": true,
+      "base_priority_retained": true,
+      "prior_priority_retained": true,
+      "base_evidence_retained": true,
+      "prior_evidence_retained": true
+    },
+    {
+      "n": 307,
+      "reported_upper_bound_preintegration_equal": true,
+      "reported_upper_bound_comparison_basis": "reported_upper_bound",
+      "reported_upper_bound_strict_improvement": true,
+      "reported_upper_bound_safe_display": true,
+      "verified_upper_bound_preintegration_equal": true,
+      "verified_upper_bound_comparison_basis": "verified_upper_bound",
+      "verified_upper_bound_strict_improvement": true,
+      "verified_upper_bound_safe_display": true,
+      "equal_exact_upper_lanes": true,
+      "reported_lower_bound_base_equal": true,
+      "verified_lower_bound_base_equal": true,
+      "base_priority_retained": true,
+      "prior_priority_retained": true,
+      "base_evidence_retained": true,
+      "prior_evidence_retained": true
+    },
+    {
+      "n": 308,
+      "reported_upper_bound_preintegration_equal": true,
+      "reported_upper_bound_comparison_basis": "reported_upper_bound",
+      "reported_upper_bound_strict_improvement": true,
+      "reported_upper_bound_safe_display": true,
+      "verified_upper_bound_preintegration_equal": true,
+      "verified_upper_bound_comparison_basis": "verified_upper_bound",
+      "verified_upper_bound_strict_improvement": true,
+      "verified_upper_bound_safe_display": true,
+      "equal_exact_upper_lanes": true,
+      "reported_lower_bound_base_equal": true,
+      "verified_lower_bound_base_equal": true,
+      "base_priority_retained": true,
+      "prior_priority_retained": true,
+      "base_evidence_retained": true,
+      "prior_evidence_retained": true
+    }
+  ],
+  "all_lower_lanes_equal_base": true,
+  "nonadopted_metadata_changes": [],
+  "result_counts": {
+    "head": 217,
+    "base": 217,
+    "preintegration": 194
+  },
+  "new_671_ids": [
+    "T-200",
+    "T-201",
+    "T-202",
+    "T-203",
+    "T-204",
+    "T-205",
+    "T-206",
+    "T-207",
+    "T-208",
+    "T-209",
+    "T-210",
+    "T-211",
+    "T-212",
+    "T-213",
+    "T-214",
+    "T-215",
+    "T-216",
+    "T-217"
+  ],
+  "new_671_changed": [],
+  "changed_results": {
+    "T-169": {
+      "claim": {
+        "base": "One complete rational source certificate reports a finite upper-bound improvement at the exact side it states: s(261) <= 60221701896183155925623822067552396531186006689382586124901485272245038570679102391768853738640845762968885190194646113914622817225143520151264873514153447594856784993916447668795594139686908064452561271291314933291180992874044736240078222111748672780052136222253269408041817329591669640100566654264077488796569417423990746316944258046820136508658141713282417630107002587683964892225712832132809051198459587754731837534654563549531425572967566922458827712106584551155379606891894276892745499879038466854033251780879739643554702103280446489851484546104056691503474152741213554587705922412237998514260452502621555989906039903465080299767718489292438151410266412241443553912996153501809246611773602786410917605511496451072010703261644140260354724734077108181090405074464644068238476104240402870056122000746777426989961280021283237882422984517186879213359668962009071281220892663202830388800939868731631999073946444449/3610677900079007969706765943565336768719447884288352204035356284560922367257758833639504829783888314773470186559856651703840826986312510315164755650194437807425149383349412670053592606596086384850274071672011088362441130659512400319497229936794767986753014863986710537052753629434552337631447921268887522107208292732259544414433641519431486273344988404799773016119041232200157601295450248940554312915607588240758183597134737218881654441888759199840243417937275746123252418387728815666095108047599852739142587192176714235571601282650194803742120186930924408146376687967975698205674166080147009184200896016800571473933793928015380986107693008261921638483793126847396768411768614291571832645828780798475334365381997818684448262987968974484285109167302223926052090540071153696848666844652463042625831311185308825340533519645238451116030713985979718105294854931486199059291092660241441782826348588921333492299220000000.\nAll three retained jobs, the positive with its duplicate-square and outside-container controls, were decided again here on 14 October 2026 by both maintained exact routes and equal their retained rows. A third exact route, half-extent containment and exact intersection area, decided the certificate with six controls each and held the derived fact to the pinned file it is derived from, fetched at the pin. No route here is the source's code; the source's runs of this repository's two maintained routes on its corners witnesses are its own and decide nothing here, so the replay is independently re-implemented. The 14 October review found no blocking defect.\nThe author reports that its exact separating-axis checker and a separate rational polygon-intersection checker accept all 261 squares, every wall and all 33,930 pairs, that every one of the 34,974 declared support inequalities holds, with duplicate and outside controls refused and the conversion to its corners Witness/v2 lossless; and that this repository's sqpack exact_verify and check_rational_witness_independent, run unchanged, accept that witness. Those statements are the author's; no source program ran here.\nCredit PingYou Ltd (https://github.com/BuddenPing/square-packing-certificates) with this further refinement, as the source asks, of Robert Barnett's refinement (T-150, issue 505) of Ryan Xu's packing of 261 (ry-xu, issue 432); the source credits Evan Daniel with the contact-solver source. The pinned source makes no statement about AI assistance.\nMeasured pose by pose by that review, it is Robert Barnett's packing (T-150) re-solved, no square moved beyond 2e-06; squares touch the box and the closest pair touches, which the closed box allows. At 261 PR 574's certificate (T-174) is smaller, by 1.99e-21, and the house rule of 16 October 2026, which lifted the hold of 15 October, makes T-174 the house there, its adoption staged under think-3mry (devtools.select_houses.PENDING_ADOPTION). Until that adoption lands this entry holds the case, the smallest certificate there that the hold left in; it moves to T-174 when it lands.",
+        "head": "One complete rational source certificate reports a finite upper-bound improvement at the exact side it states: s(261) <= 60221701896183155925623822067552396531186006689382586124901485272245038570679102391768853738640845762968885190194646113914622817225143520151264873514153447594856784993916447668795594139686908064452561271291314933291180992874044736240078222111748672780052136222253269408041817329591669640100566654264077488796569417423990746316944258046820136508658141713282417630107002587683964892225712832132809051198459587754731837534654563549531425572967566922458827712106584551155379606891894276892745499879038466854033251780879739643554702103280446489851484546104056691503474152741213554587705922412237998514260452502621555989906039903465080299767718489292438151410266412241443553912996153501809246611773602786410917605511496451072010703261644140260354724734077108181090405074464644068238476104240402870056122000746777426989961280021283237882422984517186879213359668962009071281220892663202830388800939868731631999073946444449/3610677900079007969706765943565336768719447884288352204035356284560922367257758833639504829783888314773470186559856651703840826986312510315164755650194437807425149383349412670053592606596086384850274071672011088362441130659512400319497229936794767986753014863986710537052753629434552337631447921268887522107208292732259544414433641519431486273344988404799773016119041232200157601295450248940554312915607588240758183597134737218881654441888759199840243417937275746123252418387728815666095108047599852739142587192176714235571601282650194803742120186930924408146376687967975698205674166080147009184200896016800571473933793928015380986107693008261921638483793126847396768411768614291571832645828780798475334365381997818684448262987968974484285109167302223926052090540071153696848666844652463042625831311185308825340533519645238451116030713985979718105294854931486199059291092660241441782826348588921333492299220000000.\nAll three retained jobs, the positive with its duplicate-square and outside-container controls, were decided again here on 14 October 2026 by both maintained exact routes and equal their retained rows. A third exact route, half-extent containment and exact intersection area, decided the certificate with six controls each and held the derived fact to the pinned file it is derived from, fetched at the pin. No route here is the source's code; the source's runs of this repository's two maintained routes on its corners witnesses are its own and decide nothing here, so the replay is independently re-implemented. The 14 October review found no blocking defect.\nThe author reports that its exact separating-axis checker and a separate rational polygon-intersection checker accept all 261 squares, every wall and all 33,930 pairs, that every one of the 34,974 declared support inequalities holds, with duplicate and outside controls refused and the conversion to its corners Witness/v2 lossless; and that this repository's sqpack exact_verify and check_rational_witness_independent, run unchanged, accept that witness. Those statements are the author's; no source program ran here.\nCredit PingYou Ltd (https://github.com/BuddenPing/square-packing-certificates) with this further refinement, as the source asks, of Robert Barnett's refinement (T-150, issue 505) of Ryan Xu's packing of 261 (ry-xu, issue 432); the source credits Evan Daniel with the contact-solver source. The pinned source makes no statement about AI assistance.\nMeasured pose by pose by that review, it is Robert Barnett's packing (T-150) re-solved, no square moved beyond 2e-06; squares touch the box and the closest pair touches, which the closed box allows. At 261 PR 574's certificate (T-174) is smaller, by 1.99e-21, and the house rule of 16 October 2026, which lifted the hold of 15 October, made T-174 the house there, and the adoption of 17 October 2026 (think-3mry) moved the case to it. This entry held the case until then, the smallest certificate there that the hold left in."
+      }
+    },
+    "T-170": {
+      "claim": {
+        "base": "One complete rational source certificate reports a finite upper-bound improvement at the exact side it states: s(105) <= 10789303783748158830926836660039617659736218711424421332884365754662904597598593330008796151/1000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000.\nAll three retained jobs, the positive with its duplicate-square and outside-container controls, were decided again here on 14 October 2026 by both maintained exact routes and equal their retained rows. A third exact route, half-extent containment and exact intersection area, decided the certificate with six controls each and held the derived fact to the pinned file it is derived from, fetched at the pin. No route here is the source's code; the source's runs of this repository's two maintained routes on its corners witnesses are its own and decide nothing here, so the replay is independently re-implemented. The 14 October review found no blocking defect.\nThe author reports that exact separating-axis and rational polygon-intersection implementations accept all 105 squares, 420 wall conditions and 5,460 pairs, with duplicate and outside controls refused and the conversion to its corners Witness/v2 lossless; that an inverse-dilation control reproduces the source's side and its 97 nonfree rows; and that this repository's sqpack exact_verify and check_rational_witness_independent, run unchanged, accept that witness. Those statements are the author's; no source program ran here.\nCredit PingYou Ltd (https://github.com/BuddenPing/square-packing-certificates) with this contact refinement, as the source asks, of Francisco Couzo's refinement (T-130) of Ryan Xu's layout (ry-xu, issue 432), with Evan Daniel's exact contact solver. The issue states: 'Computation, checking and submission preparation were AI-assisted; the requested attribution is as stated above.' The pinned source makes no statement about AI assistance.\nMeasured pose by pose by that review, it is Francisco Couzo's packing (T-130) at less padding, no square moved beyond 2e-19. At 105 PR 574's certificate (T-174) is smaller, by 1.08e-79, and the house rule of 16 October 2026, which lifted the hold of 15 October, makes T-174 the house there, its adoption staged under think-3mry (devtools.select_houses.PENDING_ADOPTION). Until that adoption lands this entry holds the case, the smallest certificate there that the hold left in; it moves to T-174 when it lands.",
+        "head": "One complete rational source certificate reports a finite upper-bound improvement at the exact side it states: s(105) <= 10789303783748158830926836660039617659736218711424421332884365754662904597598593330008796151/1000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000.\nAll three retained jobs, the positive with its duplicate-square and outside-container controls, were decided again here on 14 October 2026 by both maintained exact routes and equal their retained rows. A third exact route, half-extent containment and exact intersection area, decided the certificate with six controls each and held the derived fact to the pinned file it is derived from, fetched at the pin. No route here is the source's code; the source's runs of this repository's two maintained routes on its corners witnesses are its own and decide nothing here, so the replay is independently re-implemented. The 14 October review found no blocking defect.\nThe author reports that exact separating-axis and rational polygon-intersection implementations accept all 105 squares, 420 wall conditions and 5,460 pairs, with duplicate and outside controls refused and the conversion to its corners Witness/v2 lossless; that an inverse-dilation control reproduces the source's side and its 97 nonfree rows; and that this repository's sqpack exact_verify and check_rational_witness_independent, run unchanged, accept that witness. Those statements are the author's; no source program ran here.\nCredit PingYou Ltd (https://github.com/BuddenPing/square-packing-certificates) with this contact refinement, as the source asks, of Francisco Couzo's refinement (T-130) of Ryan Xu's layout (ry-xu, issue 432), with Evan Daniel's exact contact solver. The issue states: 'Computation, checking and submission preparation were AI-assisted; the requested attribution is as stated above.' The pinned source makes no statement about AI assistance.\nMeasured pose by pose by that review, it is Francisco Couzo's packing (T-130) at less padding, no square moved beyond 2e-19. At 105 PR 574's certificate (T-174) is smaller, by 1.08e-79, and the house rule of 16 October 2026, which lifted the hold of 15 October, made T-174 the house there, and the adoption of 17 October 2026 (think-3mry) moved the case to it. This entry held the case until then, the smallest certificate there that the hold left in."
+      }
+    },
+    "T-171": {
+      "claim": {
+        "base": "One complete rational source certificate reports a finite upper-bound improvement at the exact side it states: s(272) <= 1696558647483767063575600703342204556962987576825904423514291493830293022275118026464939778830359993334240647227/100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000.\nAll three retained jobs, the positive with its duplicate-square and outside-container controls, were decided again here on 14 October 2026 by both maintained exact routes and equal their retained rows. A third exact route, half-extent containment and exact intersection area, decided the certificate with six controls each and held the derived fact to the pinned file it is derived from, fetched at the pin. No route here is the source's code; the source's runs of this repository's two maintained routes on its corners witnesses are its own and decide nothing here, so the replay is independently re-implemented. The 14 October review found no blocking defect.\nThe author reports that exact separating-axis and rational polygon-intersection implementations accept all 272 squares, 1,088 wall conditions and 36,856 pairs, for the new witness, the prior certificate and a pre-stationarity projection, with duplicate and outside controls refused and the conversion to its corners Witness/v2 lossless; and that this repository's sqpack exact_verify and check_rational_witness_independent, run unchanged, accept that witness. Those statements are the author's; no source program ran here.\nCredit PingYou Ltd (https://github.com/BuddenPing/square-packing-certificates) with this contact refinement, as the source asks, of Nate Chaoweeraprasit's SQUISH n272 (T-151, issue 500), whose components the source names as SQUISH's s(240) and the former Kingbird s(182) catalogue construction, with Evan Daniel's exact contact solver. The issue states: 'Computation, checking and submission preparation were AI-assisted; the requested attribution is as stated above.' The pinned source makes no statement about AI assistance.\nMeasured pose by pose by that review, it is Nate Chaoweeraprasit's SQUISH packing (T-151) re-solved, no square moved beyond 2e-07. At 272 PR 574's certificate (T-174) is smaller, by 1.70e-99, and the house rule of 16 October 2026, which lifted the hold of 15 October, makes T-174 the house there, its adoption staged under think-3mry (devtools.select_houses.PENDING_ADOPTION). Until that adoption lands this entry holds the case, the smallest certificate there that the hold left in; it moves to T-174 when it lands.",
+        "head": "One complete rational source certificate reports a finite upper-bound improvement at the exact side it states: s(272) <= 1696558647483767063575600703342204556962987576825904423514291493830293022275118026464939778830359993334240647227/100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000.\nAll three retained jobs, the positive with its duplicate-square and outside-container controls, were decided again here on 14 October 2026 by both maintained exact routes and equal their retained rows. A third exact route, half-extent containment and exact intersection area, decided the certificate with six controls each and held the derived fact to the pinned file it is derived from, fetched at the pin. No route here is the source's code; the source's runs of this repository's two maintained routes on its corners witnesses are its own and decide nothing here, so the replay is independently re-implemented. The 14 October review found no blocking defect.\nThe author reports that exact separating-axis and rational polygon-intersection implementations accept all 272 squares, 1,088 wall conditions and 36,856 pairs, for the new witness, the prior certificate and a pre-stationarity projection, with duplicate and outside controls refused and the conversion to its corners Witness/v2 lossless; and that this repository's sqpack exact_verify and check_rational_witness_independent, run unchanged, accept that witness. Those statements are the author's; no source program ran here.\nCredit PingYou Ltd (https://github.com/BuddenPing/square-packing-certificates) with this contact refinement, as the source asks, of Nate Chaoweeraprasit's SQUISH n272 (T-151, issue 500), whose components the source names as SQUISH's s(240) and the former Kingbird s(182) catalogue construction, with Evan Daniel's exact contact solver. The issue states: 'Computation, checking and submission preparation were AI-assisted; the requested attribution is as stated above.' The pinned source makes no statement about AI assistance.\nMeasured pose by pose by that review, it is Nate Chaoweeraprasit's SQUISH packing (T-151) re-solved, no square moved beyond 2e-07. At 272 PR 574's certificate (T-174) is smaller, by 1.70e-99, and the house rule of 16 October 2026, which lifted the hold of 15 October, made T-174 the house there, and the adoption of 17 October 2026 (think-3mry) moved the case to it. This entry held the case until then, the smallest certificate there that the hold left in."
+      }
+    },
+    "T-174": {
+      "claim": {
+        "base": "PingYou Ltd's pull request 574 reports finite upper-bound improvements at 68 counts: sixty-four complete rational source certificates, at 68, 84, 86, 88, 102, 103, 105, 108, 110, 123, 126, 127, 129, 130, 131, 132, 146, 155, 156, 172, 175, 176, 179, 180, 181, 182, 199, 204, 206, 208, 209, 210, 211, 228, 232, 236, 237, 238, 239, 240, 241, 258, 259, 261, 263, 264, 266, 267, 268, 269, 270, 271, 272, 273, 292, 295, 297, 301, 303, 304, 305, 306, 307 and 308, and algebraic ones at 70, 153, 207 and 302. Each rational side is a fraction whose numerator runs to 92 to 1,787 digits; the packet's claims record (acquisition/claims.json in pingyou-pr574-certificates-2026-10-13) states each exactly, and the notes compare each with its case and the earlier reports.\nIts algebraic supplement states s(70) <= 8.880960371555579594696691574923…, s(153) <= 12.870013850404464344460153400780…, s(207) <= 14.880960371555579594696691574923… and s(302) <= 17.870275382555059669572692573398…, roots of integer polynomials of degree 5, 7, 5 and 3, as exact witnesses over their fields.\nThe author reports that a standard-library exact checker of its own, by separating axes and by rational polygon clipping, accepts all 147 v2 certificates and their pre-batch comparators with 2,678,449 unordered pairs per checker, rejects duplicate-square and outside-container controls, and that this repository's packing-witness verify and check_rational_witness_independent, run unchanged, accept every native corners Witness/v2 of the v2 release; and, for the supplement, that its checker isolates each declared real root by rational Sturm counts and accepts the 60 exact certificates with 917,302 pairs, and that the native verifier accepts their native witnesses. Those statements are the author's; no source program ran here.\nHere both maintained exact routes decided all 64 rational certificates with their two controls each, and sqpack's exact witness verifier decided the four algebraic ones over their fields; no second route over a number field exists here. The third exact route decided the 64 rational certificates again with six controls each, and no route here is the source's code; the source's runs of this repository's two maintained routes are its own and decide nothing here, so the replay is independently re-implemented. The 14 October review of the pull request found no blocking defect.\nCredit PingYou Ltd (https://github.com/BuddenPing/square-packing-certificates) with the certificate refinements, as the submission asks: smaller padding, an exact common-centre crop or an exact re-solve of each packing's own contacts. The packings are others': the submission names per count the original construction authors and preceding refiners it starts from, among them Erich Friedman's and David Ellsworth's catalogue constructions as Evan Daniel's exact certificates and regularized lists state them, Ryan Xu, Robert Barnett, Francisco Couzo, Daniil Ostashev, Nate Chaoweeraprasit (SQUISH), Siddharth Gupta, Kevin Fang and Mykhailo Polkovskyi (Mishapolk), and it says that padding reduction does not transfer authorship of an existing packing.\nThe pull request names at each count but 176 the registered packing whose certificate it tightens; at 176 it states Daniil Ostashev's packing of issue 575, which the record registers at no count there, every square within 9.6e-13 of his and the side 1.4e-19 below his certificate. Measured pose by pose by the 14 October review, the certificate is the named packing with no square moved beyond 1e-03 at 27 of those counts, pairs with it one to one with squares moved beyond 1e-03 at 33, and at 199, 292 and 303 pairs with it, or with any registered packing there, nowhere one to one; each count's regularizations item records which. At 199 the poses are those issue 593 states later.\nThe source makes no statement about AI assistance in this pull request; for its #503 and #504 certificates the author said on 12 October 2026 that they were AI assisted by 'PY', an unreleased agentic AI offering by PingYou Ltd.\nThe per-count ledger of 14 October (jlevy/squares#601) records it at these 68 counts, each below every earlier report there, and at no other: at 59 counts it ties or trails an earlier report, and at 21 the printed precision did not decide it.\nSeventeen of those 21 are now decided exactly, by devtools.decide_undecided_comparisons. At 14 counts the pull request's side is above the standing one: the case records' reported lanes at 17, 28, 37, 39, 41, 69, 87, 128, 205, 235 and 300, and the entries pending adoption at 106, 152 and 177, T-121, T-122 and T-123. At 54, 107 and 178 it equals the reported lane. It is recorded at none of the 17. At 29, 55, 71 and 83 the comparison stays undecided, because the record holds only a print of the standing side.\nThe 14 October review recommends this entry as the house at the 60 rational counts where it was then the smallest exact side. On 15 October 2026 the coordinator of the 14 October intake held those houses for the owner (devtools.select_houses.LIFTED keeps the hold's words): their witnesses would add about 18.5 MB to a checkout and their custody inputs about 5.8 MB to every worker's snapshot. The owner's house rule of 16 October 2026 lifted the hold: size is met by OR-18's means, never by holding a house, and the houses are staged for adoption (devtools.select_houses.PENDING_ADOPTION).\nThe hold skipped this entry only: at 105, 129, 146, 156, 176, 204, 261, 271, 272 and 303 the next certificate below the case that a replay here decided and a review accepted held it from that day (T-170, T-162, T-168, T-161, T-165, T-162, T-169, T-161, T-171, T-162), this entry being smaller by 1.7e-99 to 1.18e-02, and at the other 50 counts the cases kept their houses. The adoption of 16 October 2026 (PR #657) then took ten of the 60 below this entry, 146 to T-187 and 129, 156, 175, 176, 204, 232, 264, 271 and 303 to T-186. The other 50 move to this entry when the staged adoption lands, under think-3mry.\nAt 70, 153 and 207 the algebraic certificates are the smallest sides known but rest on one route; the rule of 15 October left them out for the owner (RP-3), and the house rule of 16 October 2026 adopts them, staged under think-ot5c until the writer takes an algebraic side; meanwhile the case at 70 keeps its house and Mykhailo Polkovskyi's issue 573 (T-173) holds 153 and 207. At 211, 237, 241, 302 and 304 smaller certificates hold the cases (T-188, T-190, T-182, T-186, T-186).",
+        "head": "PingYou Ltd's pull request 574 reports finite upper-bound improvements at 68 counts: sixty-four complete rational source certificates, at 68, 84, 86, 88, 102, 103, 105, 108, 110, 123, 126, 127, 129, 130, 131, 132, 146, 155, 156, 172, 175, 176, 179, 180, 181, 182, 199, 204, 206, 208, 209, 210, 211, 228, 232, 236, 237, 238, 239, 240, 241, 258, 259, 261, 263, 264, 266, 267, 268, 269, 270, 271, 272, 273, 292, 295, 297, 301, 303, 304, 305, 306, 307 and 308, and algebraic ones at 70, 153, 207 and 302. Each rational side is a fraction whose numerator runs to 92 to 1,787 digits; the packet's claims record (acquisition/claims.json in pingyou-pr574-certificates-2026-10-13) states each exactly, and the notes compare each with its case and the earlier reports.\nIts algebraic supplement states s(70) <= 8.880960371555579594696691574923…, s(153) <= 12.870013850404464344460153400780…, s(207) <= 14.880960371555579594696691574923… and s(302) <= 17.870275382555059669572692573398…, roots of integer polynomials of degree 5, 7, 5 and 3, as exact witnesses over their fields.\nThe author reports that a standard-library exact checker of its own, by separating axes and by rational polygon clipping, accepts all 147 v2 certificates and their pre-batch comparators with 2,678,449 unordered pairs per checker, rejects duplicate-square and outside-container controls, and that this repository's packing-witness verify and check_rational_witness_independent, run unchanged, accept every native corners Witness/v2 of the v2 release; and, for the supplement, that its checker isolates each declared real root by rational Sturm counts and accepts the 60 exact certificates with 917,302 pairs, and that the native verifier accepts their native witnesses. Those statements are the author's; no source program ran here.\nHere both maintained exact routes decided all 64 rational certificates with their two controls each, and sqpack's exact witness verifier decided the four algebraic ones over their fields; no second route over a number field exists here. The third exact route decided the 64 rational certificates again with six controls each, and no route here is the source's code; the source's runs of this repository's two maintained routes are its own and decide nothing here, so the replay is independently re-implemented. The 14 October review of the pull request found no blocking defect.\nCredit PingYou Ltd (https://github.com/BuddenPing/square-packing-certificates) with the certificate refinements, as the submission asks: smaller padding, an exact common-centre crop or an exact re-solve of each packing's own contacts. The packings are others': the submission names per count the original construction authors and preceding refiners it starts from, among them Erich Friedman's and David Ellsworth's catalogue constructions as Evan Daniel's exact certificates and regularized lists state them, Ryan Xu, Robert Barnett, Francisco Couzo, Daniil Ostashev, Nate Chaoweeraprasit (SQUISH), Siddharth Gupta, Kevin Fang and Mykhailo Polkovskyi (Mishapolk), and it says that padding reduction does not transfer authorship of an existing packing.\nThe pull request names at each count but 176 the registered packing whose certificate it tightens; at 176 it states Daniil Ostashev's packing of issue 575, which the record registers at no count there, every square within 9.6e-13 of his and the side 1.4e-19 below his certificate. Measured pose by pose by the 14 October review, the certificate is the named packing with no square moved beyond 1e-03 at 27 of those counts, pairs with it one to one with squares moved beyond 1e-03 at 33, and at 199, 292 and 303 pairs with it, or with any registered packing there, nowhere one to one; each count's regularizations item records which. At 199 the poses are those issue 593 states later.\nThe source makes no statement about AI assistance in this pull request; for its #503 and #504 certificates the author said on 12 October 2026 that they were AI assisted by 'PY', an unreleased agentic AI offering by PingYou Ltd.\nThe per-count ledger of 14 October (jlevy/squares#601) records it at these 68 counts, each below every earlier report there, and at no other: at 59 counts it ties or trails an earlier report, and at 21 the printed precision did not decide it.\nSeventeen of those 21 are now decided exactly, by devtools.decide_undecided_comparisons. At 14 counts the pull request's side is above the standing one: the case records' reported lanes at 17, 28, 37, 39, 41, 69, 87, 128, 205, 235 and 300, and the entries pending adoption at 106, 152 and 177, T-121, T-122 and T-123. At 54, 107 and 178 it equals the reported lane. It is recorded at none of the 17. At 29, 55, 71 and 83 the comparison stays undecided, because the record holds only a print of the standing side.\nThe 14 October review recommends this entry as the house at the 60 rational counts where it was then the smallest exact side. On 15 October 2026 the coordinator of the 14 October intake held those houses for the owner (devtools.select_houses.LIFTED keeps the hold's words): their witnesses would add about 18.5 MB to a checkout and their custody inputs about 5.8 MB to every worker's snapshot. The owner's house rule of 16 October 2026 lifted the hold: size is met by OR-18's means, never by holding a house, and the houses were staged for adoption (devtools.select_houses.PENDING_ADOPTION).\nThe hold skipped this entry only: at 105, 129, 146, 156, 176, 204, 261, 271, 272 and 303 the next certificate below the case that a replay here decided and a review accepted held it from that day (T-170, T-162, T-168, T-161, T-165, T-162, T-169, T-161, T-171, T-162), this entry being smaller by 1.7e-99 to 1.18e-02, and at the other 50 counts the cases kept their houses. The adoption of 16 October 2026 (PR #657) then took ten of the 60 below this entry, 146 to T-187 and 129, 156, 175, 176, 204, 232, 264, 271 and 303 to T-186.\nThe adoption of 17 October 2026 (think-3mry), the first under the house rule, moved 37 of the other 50 to this entry and regularized each in the same pull request. At twelve of the thirteen left, 88, 102, 123, 126, 199, 258, 259, 266, 267, 292, 295 and 301, issue 639's algebraic sides (T-193) are smaller, staged for the writer, and at 236 Evan Daniel's issue 659 reports a side 2.02e-3 below this entry's, whose import adopts it.\nAt 70, 153 and 207 the algebraic certificates are the smallest sides known but rest on one route; the rule of 15 October left them out for the owner (RP-3), and the house rule of 16 October 2026 adopts them, staged under think-ot5c until the writer takes an algebraic side; meanwhile the case at 70 keeps its house and Mykhailo Polkovskyi's issue 573 (T-173) holds 153 and 207. At 211, 237, 241, 302 and 304 smaller certificates hold the cases (T-188, T-190, T-182, T-186, T-186)."
+      },
+      "next_rung": {
+        "base": "V4 and C4 need a second accepted adversarial review by a distinct reviewer and a retained human oversight record; one AI review, of 14 October, is retained. The house rule of 16 October 2026 makes it the house at its 53 smallest counts, staged for adoption (devtools.select_houses.PENDING_ADOPTION): the 50 rational ones under think-3mry, the next candidate holding the case meanwhile at three of them (105, 261 and 272), and the algebraic ones at 70, 153 and 207 under think-ot5c. It was the smallest at 63 counts until the adoption of 16 October 2026 (PR #657) took ten of them below it, with T-186 and T-187.",
+        "head": "V4 and C4 need a second accepted adversarial review by a distinct reviewer and a retained human oversight record; one AI review, of 14 October, is retained. The house rule of 16 October 2026 made it the house at its 53 smallest counts: the adoption of 17 October 2026 (think-3mry) moved 37 rational ones to it, issue 639's algebraic sides (T-193) are smaller at twelve others and Evan Daniel's issue 659 at 236, and the algebraic ones at 70, 153 and 207 wait under think-ot5c, staged for adoption (devtools.select_houses.PENDING_ADOPTION) until the writer takes an algebraic side. It was the smallest at 63 counts until the adoption of 16 October 2026 (PR #657) took ten of them below it, with T-186 and T-187."
+      }
+    }
+  },
+  "archives": {
+    "counts": {
+      "head": 38,
+      "base": 1,
+      "preintegration": 37
+    },
+    "parent_entries_preserved": {
+      "base": true,
+      "preintegration": true
+    }
+  },
+  "retained_files": {
+    "packing/witnesses/known-best/n-{n:03d}.yaml": {
+      "compared": 37,
+      "changed": []
+    },
+    "packing/atlas/known-best/regularized/n-{n:03d}-regularized.yaml.gz": {
+      "compared": 37,
+      "changed": []
+    }
+  },
+  "n29": {
+    "case_metadata_equal": true,
+    "packing/witnesses/known-best/n-029.yaml": true,
+    "packing/atlas/known-best/regularized/n-029-regularized.yaml.gz": true,
+    "packing/atlas/known-best/rendering/n-029.svg": true,
+    "packing/atlas/known-best/regularized/rendering/n-029.svg": true,
+    "reported_upper_bound": {
+      "value": "5.9338334626769292",
+      "exact_form": "24534865107674036688168549876397025785476132874112370099771467927504056975875987776681455985875024244254213572886097261458084288767455559197653938689488649902066228662684853391396663327014033932373723477506069710425226218750526706135891585179797517343019488443339867249715360890013756666854628979176900944993305442261602772842180838440053667420917480395180220066666602334511722453879594972998191138612834034189666510059905050426568116428378640731543810807747891542284864038369907643508459843509205620695587608368557533498173488519528447981793482358600152308521631459565592767014183052501199151931076562879250106887616015278050875978119717926899218680011808702390993996536195830670260972350387443818823426662369027496193945575599138014543670320983369783863929251334778825936608589267984001537304179324158789246196108802236193481133294548709295335474346256527544613659984746868470460857727484675678537346741164019856884567986913934704956927321686209550808604138457927403334411832210594036476801938126308790969489032002021963023705206483679471872149687890566611443899435653214191799667499764111469459385033095127931344323459448933275284125181277683793104256050531452804725334403790564783668180540557925744070464684545649032408833632838438910661813484030778674222303675402958374138153085439248296679730701126691111630742632653637849625799540379878830607499958400806445626950768552900180049729020839822237918053913692758374445410695986201178837254745307861725778970345267181802138568964810374228407899464496680162178116797606104631259924089248154437042373925033307272942769766239315424518195846205980008361535060213644205099149816040655058140387176369175347126651923289738983179736034453072062298517733929444973959326041866213931560671058617171889088120835739271365353588567878531477697526577302776627625153488856099874787185474253160414731224686151501675402728352580934099397733963238715051627968686911414459275184683424784163644191544707377182384601048542578683951517983159198963572073487749781532348390081793066311053790977197895164959450212581707715858563399258411304003599006319077167663800875019623826094756719222309800908141246359094069406089611981416987407570927946930756422932236652442311952880289753229889653917790471125660627044950535988555435869596551538259114765832766790488411832484772360835487671284213135964427186102124863000233796141278872662965770217771690365276248657719966519254396208/4134741101514774825128795556716042227961798785923906182461358460239918424782567413226407211403203065887739199609118084844533471798679416900735032687473222139680760065590940944078234018015370334443128772607933060444000826617769429646882194583220599963273124225726071777932738764595777987721482365783510337019481236506878836287721256689347799807863951388092667648197563925993938390556531505228608954855292930046726399665713751905730833652017210190663827825661322365063724262883246743380492604927786523721825931831886303155063551654710154578169238652367383102078792000130468658641539801741146889224943442810013209072949461457217339392927864030591169892883726839884880594167460487749243589056331690253699842043479578088884954988951340936860924955322743194977380476502898903410854524818203652027795198144692092594657450033887027432586825094110442844464606853681664319033486389387445736214034648895232429305200383123921501470838824817050243022153810427067912956942772219391824845560443747547400843195049198930533146285574982530233459642803642285852596410633979360461440217163898024968451883257550199336829150031495720132797637319132645987063404501212699321705824766887053681261752487880911742084111713948715586118826460029866243412955813075255128613682606937176468037935097555448704569843358216916775243025949351743902174698612665846213152609786378184952030306093106808751354257494437791937397557320503668105995208209305535886191424772995183160168155795973488716123209693421756294653489941963987963470670675939442599780713172144359901210230692152439814696253554319377531586894873990381499235730768339867996867328907448233810242342899234366597370788054658934954410215490093061628299835361415650502735274254384722944822121189889481733221480599225541033150521791602097236911676058943766150551365114305649138572343660857535228979083917905543053139843750484912743933307704134563365828870127440166022411140550453711645377040805715862280799298958039516958431092020836360669755785671136319313346695819974050474113917337370449084604146353831484738751871298385136659525010746969348827942534339711929337559777205045248731333573416596885461197747132145825993130411956264953672744857178743458111168300805276706096833515134514702136577188472029912623847531283031692405241550695989903352952233750694266905747073315282264735651376143483435574343954773982361734961798348911999812513553974602740493739669761924137585813615",
+      "evidence": [
+        "E-pingyou-622-certificate-report"
+      ],
+      "algebraic_degree": 1,
+      "minimal_polynomial": null,
+      "analytically_optimized": true,
+      "catalogue_rigid": "not-stated",
+      "construction_method": "simulated-annealing",
+      "tilt_angles_deg": [
+        0,
+        25.258655308351408,
+        20.80012676269961,
+        -17.50626847573237,
+        24.96258798943772,
+        24.308358401346904
+      ],
+      "found_by": [
+        "Thomas Schadt"
+      ],
+      "found_year": 2025,
+      "improved_by": [
+        "David Ellsworth",
+        "PingYou Ltd"
+      ],
+      "catalogue_pictured": false,
+      "source_key": "[PingYou PR 622 certificate 2026-10-15]",
+      "source_date": "2026-10-15",
+      "retrieved_date": "2026-10-16",
+      "witnesses": [
+        "W-known-best-n029"
+      ]
+    }
+  },
+  "indexes": {
+    "packing/atlas/known-best/regularized/index.json": {
+      "keys": [
+        "softschema",
+        "contract",
+        "generated_by",
+        "label",
+        "policy",
+        "policy_document",
+        "credit",
+        "digests",
+        "generators",
+        "runs",
+        "totals",
+        "entries"
+      ],
+      "count": 324,
+      "adopted_entry_changes_from_prior": [],
+      "n29_equal_base": true
+    },
+    "packing/atlas/known-best/manifest.json": {
+      "keys": [
+        "atlas",
+        "softschema"
+      ],
+      "count": 324,
+      "adopted_entry_changes_from_prior": [],
+      "n29_equal_base": true
+    },
+    "packing/atlas/known-best/bound-citations.json": {
+      "keys": [
+        "citations",
+        "softschema"
+      ],
+      "count": 324,
+      "adopted_entry_changes_from_prior": [
+        108
+      ],
+      "n29_equal_base": true
+    }
+  },
+  "custody": {
+    "head": {
+      "outcome": "PASS",
+      "houses": {
+        "68": "T-174",
+        "70": "T-146",
+        "84": "T-174",
+        "86": "T-174",
+        "102": "T-146",
+        "103": "T-174",
+        "105": "T-174",
+        "108": "T-174",
+        "110": "T-174",
+        "123": "T-146",
+        "126": "T-139",
+        "127": "T-174",
+        "129": "T-186",
+        "130": "T-174",
+        "131": "T-174",
+        "132": "T-174",
+        "146": "T-187",
+        "153": "T-173",
+        "154": "T-186",
+        "155": "T-174",
+        "156": "T-186",
+        "172": "T-174",
+        "175": "T-186",
+        "176": "T-186",
+        "179": "T-174",
+        "180": "T-174",
+        "181": "T-174",
+        "182": "T-174",
+        "204": "T-186",
+        "206": "T-174",
+        "207": "T-173",
+        "208": "T-174",
+        "209": "T-174",
+        "210": "T-174",
+        "211": "T-188",
+        "228": "T-174",
+        "232": "T-186",
+        "236": "T-146",
+        "237": "T-190",
+        "238": "T-174",
+        "239": "T-174",
+        "240": "T-174",
+        "241": "T-182",
+        "258": "T-146",
+        "259": "T-136",
+        "261": "T-174",
+        "263": "T-174",
+        "264": "T-186",
+        "267": "T-134",
+        "268": "T-174",
+        "269": "T-174",
+        "270": "T-174",
+        "271": "T-186",
+        "272": "T-174",
+        "273": "T-174",
+        "292": "T-146",
+        "295": "T-146",
+        "297": "T-174",
+        "302": "T-186",
+        "303": "T-186",
+        "304": "T-186",
+        "305": "T-174",
+        "306": "T-174",
+        "307": "T-174",
+        "308": "T-174"
+      },
+      "setup_seconds": 19.95,
+      "call_seconds": 14.04,
+      "snapshot_source_bytes": 223474057,
+      "fresh_geometric_deciders": false
+    },
+    "base": {
+      "outcome": "PASS",
+      "houses": {
+        "29": "T-195",
+        "70": "T-146",
+        "84": "T-130",
+        "86": "T-130",
+        "102": "T-146",
+        "103": "T-146",
+        "105": "T-170",
+        "108": "T-128",
+        "123": "T-146",
+        "126": "T-139",
+        "127": "T-128",
+        "129": "T-186",
+        "131": "T-136",
+        "132": "T-141",
+        "146": "T-187",
+        "153": "T-173",
+        "154": "T-186",
+        "155": "T-149",
+        "156": "T-186",
+        "175": "T-186",
+        "176": "T-186",
+        "180": "T-128",
+        "181": "T-151",
+        "204": "T-186",
+        "207": "T-173",
+        "209": "T-140",
+        "211": "T-188",
+        "228": "T-128",
+        "232": "T-186",
+        "236": "T-146",
+        "237": "T-190",
+        "238": "T-151",
+        "239": "T-151",
+        "241": "T-182",
+        "258": "T-146",
+        "259": "T-136",
+        "261": "T-169",
+        "263": "T-146",
+        "264": "T-186",
+        "267": "T-134",
+        "269": "T-146",
+        "270": "T-151",
+        "271": "T-186",
+        "272": "T-171",
+        "292": "T-146",
+        "295": "T-146",
+        "302": "T-186",
+        "303": "T-186",
+        "304": "T-186",
+        "305": "T-152",
+        "306": "T-128",
+        "307": "T-136",
+        "308": "T-141"
+      },
+      "setup_seconds": 13.41,
+      "call_seconds": 25.23,
+      "snapshot_source_bytes": 219977807,
+      "fresh_geometric_deciders": false
+    },
+    "preintegration": {
+      "outcome": "PASS",
+      "houses": {
+        "68": "T-174",
+        "70": "T-146",
+        "84": "T-174",
+        "86": "T-174",
+        "102": "T-146",
+        "103": "T-174",
+        "105": "T-174",
+        "108": "T-174",
+        "110": "T-174",
+        "123": "T-146",
+        "126": "T-139",
+        "127": "T-174",
+        "129": "T-186",
+        "130": "T-174",
+        "131": "T-174",
+        "132": "T-174",
+        "146": "T-187",
+        "153": "T-173",
+        "154": "T-186",
+        "155": "T-174",
+        "156": "T-186",
+        "172": "T-174",
+        "175": "T-186",
+        "176": "T-186",
+        "179": "T-174",
+        "180": "T-174",
+        "181": "T-174",
+        "182": "T-174",
+        "204": "T-186",
+        "206": "T-174",
+        "207": "T-173",
+        "208": "T-174",
+        "209": "T-174",
+        "210": "T-174",
+        "211": "T-188",
+        "228": "T-174",
+        "232": "T-186",
+        "236": "T-146",
+        "237": "T-190",
+        "238": "T-174",
+        "239": "T-174",
+        "240": "T-174",
+        "241": "T-182",
+        "258": "T-146",
+        "259": "T-136",
+        "261": "T-174",
+        "263": "T-174",
+        "264": "T-186",
+        "267": "T-134",
+        "268": "T-174",
+        "269": "T-174",
+        "270": "T-174",
+        "271": "T-186",
+        "272": "T-174",
+        "273": "T-174",
+        "292": "T-146",
+        "295": "T-146",
+        "297": "T-174",
+        "302": "T-186",
+        "303": "T-186",
+        "304": "T-186",
+        "305": "T-174",
+        "306": "T-174",
+        "307": "T-174",
+        "308": "T-174"
+      },
+      "setup_seconds": 19.95,
+      "call_seconds": 14.04,
+      "snapshot_source_bytes": 223474057,
+      "fresh_geometric_deciders": false
+    },
+    "head_equals_preintegration": true,
+    "missing_current_adoptions": [
+      29
+    ]
+  },
+  "adopted_house_count": 66,
+  "drawing_states": {
+    "68": "decided-no-better",
+    "84": "decided-no-better",
+    "86": "decided-no-better",
+    "103": "regular-as-published",
+    "105": "regularized",
+    "108": "decided-no-better",
+    "110": "decided-no-better",
+    "127": "decided-no-better",
+    "130": "decided-no-better",
+    "131": "regularized",
+    "132": "decided-no-better",
+    "155": "decided-no-better",
+    "172": "regularized",
+    "179": "decided-no-better",
+    "180": "decided-no-better",
+    "181": "regularized",
+    "182": "decided-no-better",
+    "206": "regularized",
+    "208": "decided-no-better",
+    "209": "decided-no-better",
+    "210": "decided-no-better",
+    "228": "decided-no-better",
+    "238": "regularized",
+    "239": "regularized",
+    "240": "decided-no-better",
+    "261": "regularized",
+    "263": "decided-no-better",
+    "268": "decided-no-better",
+    "269": "decided-no-better",
+    "270": "regularized",
+    "272": "decided-no-better",
+    "273": "decided-no-better",
+    "297": "decided-no-better",
+    "305": "regularized",
+    "306": "decided-no-better",
+    "307": "regularized",
+    "308": "decided-no-better"
+  },
+  "retained_tree_identity": {
+    "packing/frontier/evidence.yaml": true,
+    "packing/frontier/verifiers.yaml": true,
+    "packing/resources/web/pingyou-pr574-certificates-2026-10-13": true,
+    "packing/cases/regularized_drawings/think-3mry-2026-10-17": true
+  },
+  "selected_results": {
+    "T-174": {
+      "headline": "Tighter certificates at 68 counts from PingYou Ltd, of others' packings and its own",
+      "scope": {
+        "n_values": [
+          68,
+          70,
+          84,
+          86,
+          88,
+          102,
+          103,
+          105,
+          108,
+          110,
+          123,
+          126,
+          127,
+          129,
+          130,
+          131,
+          132,
+          146,
+          153,
+          155,
+          156,
+          172,
+          175,
+          176,
+          179,
+          180,
+          181,
+          182,
+          199,
+          204,
+          206,
+          207,
+          208,
+          209,
+          210,
+          211,
+          228,
+          232,
+          236,
+          237,
+          238,
+          239,
+          240,
+          241,
+          258,
+          259,
+          261,
+          263,
+          264,
+          266,
+          267,
+          268,
+          269,
+          270,
+          271,
+          272,
+          273,
+          292,
+          295,
+          297,
+          301,
+          302,
+          303,
+          304,
+          305,
+          306,
+          307,
+          308
+        ]
+      },
+      "verification": "V3",
+      "confirmation": "C3",
+      "significance": {
+        "score": 1,
+        "rationale": "Tighter certificates of packings the record credits to others, by padding or an exact re-solve, 1e-99 to 1e-19 below the case ceilings at most counts, as T-155; the 1.70e-02 drop below the case at 176 belongs to Daniil Ostashev's packing of issue 575; a citable detail of each case that moves no theorem; no lower bound or optimum.",
+        "scored": "2026-10-14",
+        "by": "the 14 October review of PR 574 (docs/project/reviews/review-2026-10-14-upper-bound-imports-574.md), confirming the draft of think-9v2k PingYou Ltd import"
+      },
+      "attribution": {
+        "source_keys": [
+          "[PingYou PR 574 certificates 2026-10-13]"
+        ],
+        "published": "2026-10-13"
+      },
+      "evidence": [
+        "E-pingyou-574-certificate-report",
+        "E-pingyou-574-algebraic-report",
+        "E-pingyou-574-exact-feasibility",
+        "E-pingyou-574-algebraic-feasibility"
+      ],
+      "reviews": [
+        {
+          "path": "docs/project/reviews/review-2026-10-14-upper-bound-imports-574.md",
+          "kind": "adversarial",
+          "reviewer": "AI agent (Claude, strong sub-agent tier), the stage 4 review lane (W2) of the 2026-10-14 intake, prompted separately from the PR 574 import lane, with no shared context beyond its committed packet, entry and pull request",
+          "reviewer_kind": "ai",
+          "relation": "project",
+          "date": "2026-10-14",
+          "scope": "Finite feasibility of PR 574's 64 rational and four algebraic certificates: the frozen claim records rebuilt, the 64 rational receipts admitted after the import lane's two complete replays, the four algebraic counts' 12 jobs decided again on their one route, the 64 rational certificates decided by the third exact route with its sharp controls, every pinned file and the four release assets fetched and held to their sizes and digests, each rational fact read again from its release-asset member, and each count measured pose by pose against the packing its regularizations item names.",
+          "verdict": "accepted",
+          "covers": [
+            "T-174"
+          ]
+        }
+      ]
+    },
+    "T-195": {
+      "headline": "A tighter rational certificate of Schadt and Ellsworth's 29-square packing, `1.57e-36` below T-155",
+      "scope": {
+        "n_values": [
+          29
+        ]
+      },
+      "verification": "V3",
+      "confirmation": "C3",
+      "significance": {
+        "score": 1,
+        "rationale": "A padding refinement 1.57e-36 below the case ceiling, of a packing the record already holds, as T-155's and T-174's are; no lower bound or optimum.",
+        "scored": "2026-10-16",
+        "by": "the 16 October review (docs/project/reviews/review-2026-10-16-pingyou-n29.md), confirming the draft of think-30n2 PingYou Ltd import"
+      },
+      "attribution": {
+        "source_keys": [
+          "[PingYou PR 622 certificate 2026-10-15]"
+        ],
+        "published": "2026-10-15"
+      },
+      "evidence": [
+        "E-pingyou-622-certificate-report",
+        "E-pingyou-622-exact-feasibility"
+      ],
+      "reviews": [
+        {
+          "path": "docs/project/reviews/review-2026-10-16-pingyou-n29.md",
+          "kind": "adversarial",
+          "reviewer": "AI agent (Claude, strong sub-agent tier, max reasoning), the stage 4 review lane (W2) of the 2026-10-16 intake (think-2jzy), prompted separately from the import and replay lane, with no shared context beyond its committed packet, register entry and pull request",
+          "reviewer_kind": "ai",
+          "relation": "project",
+          "date": "2026-10-16",
+          "scope": "Finite feasibility at n = 29 of PR 622's certificate: decided again from the release asset by a clean-room exact checker with four controls, the replay's three retained jobs decided again, the third exact route run with its six controls, the derived fact held to the certificate by two readers that share no code, the margins against T-155, PR 574's row and Evan Daniel's certificate recomputed, the identity measured against T-009's witness, and the report order and credit read.",
+          "verdict": "accepted",
+          "covers": [
+            "T-195"
+          ]
+        }
+      ]
+    },
+    "T-200": {
+      "headline": "Mixed rectangle-measure lower bound `s(38) ≥ 2631/400` reported, on a 2,073-direction declared net",
+      "scope": {
+        "n_values": [
+          38
+        ]
+      },
+      "verification": "V0",
+      "confirmation": "C0",
+      "significance": {
+        "score": 3,
+        "rationale": "Scored as a claim: if a complete replay passes, it is the strongest lower bound on record at n = 38, 13/400 above the reported lane, by the certificate kind and declared net of T-132, T-142 and T-143, with no new technique, at S3 as T-176 to T-178 are.",
+        "scored": "2026-10-17",
+        "by": "the triage of the 17 October intake pass (think-f40c), confirmed by the registering lane; the stage 4 review confirms or changes it"
+      },
+      "attribution": {
+        "source_keys": [
+          "[wand125 fine-net lower bounds 2026-10-16]"
+        ],
+        "published": "2026-10-16"
+      },
+      "evidence": [
+        "E-wand125-fine-net-n38-65775-report"
+      ],
+      "reviews": null
+    },
+    "T-201": {
+      "headline": "Mixed rectangle-measure lower bound `s(40) ≥ 1347/200` reported, on a 2,073-direction declared net",
+      "scope": {
+        "n_values": [
+          40
+        ]
+      },
+      "verification": "V0",
+      "confirmation": "C0",
+      "significance": {
+        "score": 3,
+        "rationale": "Scored as a claim: if a complete replay passes, it is the strongest lower bound on record at n = 40, 17/1000 above the reported lane, by the certificate kind and declared net of T-132, T-142 and T-143, with no new technique, at S3 as T-176 to T-178 are.",
+        "scored": "2026-10-17",
+        "by": "the triage of the 17 October intake pass (think-f40c), confirmed by the registering lane; the stage 4 review confirms or changes it"
+      },
+      "attribution": {
+        "source_keys": [
+          "[wand125 fine-net lower bounds 2026-10-16]"
+        ],
+        "published": "2026-10-16"
+      },
+      "evidence": [
+        "E-wand125-fine-net-n40-6735-report"
+      ],
+      "reviews": null
+    },
+    "T-202": {
+      "headline": "Mixed rectangle-measure lower bound `s(41) ≥ 2721/400` reported, on a 2,073-direction declared net",
+      "scope": {
+        "n_values": [
+          41
+        ]
+      },
+      "verification": "V0",
+      "confirmation": "C0",
+      "significance": {
+        "score": 3,
+        "rationale": "Scored as a claim: if a complete replay passes, it is the strongest lower bound on record at n = 41, 11/400 above the reported lane, by the certificate kind and declared net of T-132, T-142 and T-143, with no new technique, at S3 as T-176 to T-178 are.",
+        "scored": "2026-10-17",
+        "by": "the triage of the 17 October intake pass (think-f40c), confirmed by the registering lane; the stage 4 review confirms or changes it"
+      },
+      "attribution": {
+        "source_keys": [
+          "[wand125 fine-net lower bounds 2026-10-16]"
+        ],
+        "published": "2026-10-16"
+      },
+      "evidence": [
+        "E-wand125-fine-net-n41-68025-report"
+      ],
+      "reviews": null
+    },
+    "T-203": {
+      "headline": "Mixed rectangle-measure lower bound `s(43) ≥ 2777/400` reported, on a 2,073-direction declared net",
+      "scope": {
+        "n_values": [
+          43
+        ]
+      },
+      "verification": "V0",
+      "confirmation": "C0",
+      "significance": {
+        "score": 3,
+        "rationale": "Scored as a claim: if a complete replay passes, it is the strongest lower bound on record at n = 43, 7/200 above the reported lane, by the certificate kind and declared net of T-132, T-142 and T-143, with no new technique, at S3 as T-176 to T-178 are.",
+        "scored": "2026-10-17",
+        "by": "the triage of the 17 October intake pass (think-f40c), confirmed by the registering lane; the stage 4 review confirms or changes it"
+      },
+      "attribution": {
+        "source_keys": [
+          "[wand125 fine-net lower bounds 2026-10-16]"
+        ],
+        "published": "2026-10-16"
+      },
+      "evidence": [
+        "E-wand125-fine-net-n43-69425-report"
+      ],
+      "reviews": null
+    },
+    "T-204": {
+      "headline": "Mixed rectangle-measure lower bound `s(51) ≥ 3011/400` reported, on a 2,073-direction declared net",
+      "scope": {
+        "n_values": [
+          51
+        ]
+      },
+      "verification": "V0",
+      "confirmation": "C0",
+      "significance": {
+        "score": 3,
+        "rationale": "Scored as a claim: if a complete replay passes, it is the strongest lower bound on record at n = 51, 23/400 above the reported lane, by the certificate kind and declared net of T-132, T-142 and T-143, with no new technique, at S3 as T-176 to T-178 are.",
+        "scored": "2026-10-17",
+        "by": "the triage of the 17 October intake pass (think-f40c), confirmed by the registering lane; the stage 4 review confirms or changes it"
+      },
+      "attribution": {
+        "source_keys": [
+          "[wand125 fine-net lower bounds 2026-10-16]"
+        ],
+        "published": "2026-10-16"
+      },
+      "evidence": [
+        "E-wand125-fine-net-n51-75275-report"
+      ],
+      "reviews": null
+    },
+    "T-205": {
+      "headline": "Mixed rectangle-measure lower bound `s(68) ≥ 853/100` reported, on the 201-direction net",
+      "scope": {
+        "n_values": [
+          68
+        ]
+      },
+      "verification": "V0",
+      "confirmation": "C0",
+      "significance": {
+        "score": 3,
+        "rationale": "Scored as a claim: if a complete replay passes, it is the strongest lower bound on record at n = 68, 1/50 above the reported lane, by the certificate kind and standard net of T-082, T-090 and T-091, with no new technique, at S3 as T-176 to T-178 are.",
+        "scored": "2026-10-17",
+        "by": "the triage of the 17 October intake pass (think-f40c), confirmed by the registering lane; the stage 4 review confirms or changes it"
+      },
+      "attribution": {
+        "source_keys": [
+          "[wand125 fine-net lower bounds 2026-10-16]"
+        ],
+        "published": "2026-10-16"
+      },
+      "evidence": [
+        "E-wand125-fine-net-n68-853-report"
+      ],
+      "reviews": null
+    },
+    "T-206": {
+      "headline": "Mixed rectangle-measure lower bound `s(84) ≥ 3769/400` reported, on the 201-direction net",
+      "scope": {
+        "n_values": [
+          84
+        ]
+      },
+      "verification": "V0",
+      "confirmation": "C0",
+      "significance": {
+        "score": 3,
+        "rationale": "Scored as a claim: if a complete replay passes, it is the strongest lower bound on record at n = 84, 23/2000 above the reported lane, by the certificate kind and standard net of T-082, T-090 and T-091, with no new technique, at S3 as T-176 to T-178 are.",
+        "scored": "2026-10-17",
+        "by": "the triage of the 17 October intake pass (think-f40c), confirmed by the registering lane; the stage 4 review confirms or changes it"
+      },
+      "attribution": {
+        "source_keys": [
+          "[wand125 fine-net lower bounds 2026-10-16]"
+        ],
+        "published": "2026-10-16"
+      },
+      "evidence": [
+        "E-wand125-fine-net-n84-94225-report"
+      ],
+      "reviews": null
+    },
+    "T-207": {
+      "headline": "Mixed rectangle-measure lower bound `s(85) ≥ 379/40` reported, on the 201-direction net",
+      "scope": {
+        "n_values": [
+          85
+        ]
+      },
+      "verification": "V0",
+      "confirmation": "C0",
+      "significance": {
+        "score": 3,
+        "rationale": "Scored as a claim: if a complete replay passes, it is the strongest lower bound on record at n = 85, 3/200 above the reported lane, by the certificate kind and standard net of T-082, T-090 and T-091, with no new technique, at S3 as T-176 to T-178 are.",
+        "scored": "2026-10-17",
+        "by": "the triage of the 17 October intake pass (think-f40c), confirmed by the registering lane; the stage 4 review confirms or changes it"
+      },
+      "attribution": {
+        "source_keys": [
+          "[wand125 fine-net lower bounds 2026-10-16]"
+        ],
+        "published": "2026-10-16"
+      },
+      "evidence": [
+        "E-wand125-fine-net-n85-9475-report"
+      ],
+      "reviews": null
+    },
+    "T-208": {
+      "headline": "Mixed rectangle-measure lower bound `s(86) ≥ 3811/400` reported, on the 201-direction net",
+      "scope": {
+        "n_values": [
+          86
+        ]
+      },
+      "verification": "V0",
+      "confirmation": "C0",
+      "significance": {
+        "score": 3,
+        "rationale": "Scored as a claim: if a complete replay passes, it is the strongest lower bound on record at n = 86, 49/2000 above the reported lane, by the certificate kind and standard net of T-082, T-090 and T-091, with no new technique, at S3 as T-176 to T-178 are.",
+        "scored": "2026-10-17",
+        "by": "the triage of the 17 October intake pass (think-f40c), confirmed by the registering lane; the stage 4 review confirms or changes it"
+      },
+      "attribution": {
+        "source_keys": [
+          "[wand125 fine-net lower bounds 2026-10-16]"
+        ],
+        "published": "2026-10-16"
+      },
+      "evidence": [
+        "E-wand125-fine-net-n86-95275-report"
+      ],
+      "reviews": null
+    },
+    "T-209": {
+      "headline": "Mixed rectangle-measure lower bound `s(88) ≥ 3853/400` reported, on the 201-direction net",
+      "scope": {
+        "n_values": [
+          88
+        ]
+      },
+      "verification": "V0",
+      "confirmation": "C0",
+      "significance": {
+        "score": 3,
+        "rationale": "Scored as a claim: if a complete replay passes, it is the strongest lower bound on record at n = 88, 1/80 above the reported lane, by the certificate kind and standard net of T-082, T-090 and T-091, with no new technique, at S3 as T-176 to T-178 are.",
+        "scored": "2026-10-17",
+        "by": "the triage of the 17 October intake pass (think-f40c), confirmed by the registering lane; the stage 4 review confirms or changes it"
+      },
+      "attribution": {
+        "source_keys": [
+          "[wand125 fine-net lower bounds 2026-10-16]"
+        ],
+        "published": "2026-10-16"
+      },
+      "evidence": [
+        "E-wand125-fine-net-n88-96325-report"
+      ],
+      "reviews": null
+    },
+    "T-210": {
+      "headline": "Mixed rectangle-measure lower bound `s(89) ≥ 1937/200` reported, on the 201-direction net",
+      "scope": {
+        "n_values": [
+          89
+        ]
+      },
+      "verification": "V0",
+      "confirmation": "C0",
+      "significance": {
+        "score": 3,
+        "rationale": "Scored as a claim: if a complete replay passes, it is the strongest lower bound on record at n = 89, 7/200 above the reported lane, by the certificate kind and standard net of T-082, T-090 and T-091, with no new technique, at S3 as T-176 to T-178 are.",
+        "scored": "2026-10-17",
+        "by": "the triage of the 17 October intake pass (think-f40c), confirmed by the registering lane; the stage 4 review confirms or changes it"
+      },
+      "attribution": {
+        "source_keys": [
+          "[wand125 fine-net lower bounds 2026-10-16]"
+        ],
+        "published": "2026-10-16"
+      },
+      "evidence": [
+        "E-wand125-fine-net-n89-9685-report"
+      ],
+      "reviews": null
+    },
+    "T-211": {
+      "headline": "Mixed rectangle-measure lower bound `s(91) ≥ 783/80` reported, on the 201-direction net",
+      "scope": {
+        "n_values": [
+          91
+        ]
+      },
+      "verification": "V0",
+      "confirmation": "C0",
+      "significance": {
+        "score": 3,
+        "rationale": "Scored as a claim: if a complete replay passes, it is the strongest lower bound on record at n = 91, 1/40 above the reported lane, by the certificate kind and standard net of T-082, T-090 and T-091, with no new technique, at S3 as T-176 to T-178 are.",
+        "scored": "2026-10-17",
+        "by": "the triage of the 17 October intake pass (think-f40c), confirmed by the registering lane; the stage 4 review confirms or changes it"
+      },
+      "attribution": {
+        "source_keys": [
+          "[wand125 fine-net lower bounds 2026-10-16]"
+        ],
+        "published": "2026-10-16"
+      },
+      "evidence": [
+        "E-wand125-fine-net-n91-97875-report"
+      ],
+      "reviews": null
+    },
+    "T-212": {
+      "headline": "Mixed rectangle-measure lower bound `s(90) ≥ 489/50` reported, on the 201-direction net",
+      "scope": {
+        "n_values": [
+          90
+        ]
+      },
+      "verification": "V0",
+      "confirmation": "C0",
+      "significance": {
+        "score": 3,
+        "rationale": "Scored as a claim: if a complete replay passes, it is the strongest lower bound on record at n = 90, 1/20 above the reported lane, by the certificate kind and standard net of T-082, T-090 and T-091, with no new technique, at S3 as T-176 to T-178 are.",
+        "scored": "2026-10-17",
+        "by": "the triage of the 17 October intake pass (think-f40c), confirmed by the registering lane; the stage 4 review confirms or changes it"
+      },
+      "attribution": {
+        "source_keys": [
+          "[wand125 fine-net lower bounds 2026-10-16]"
+        ],
+        "published": "2026-10-16"
+      },
+      "evidence": [
+        "E-wand125-fine-net-n90-978-report"
+      ],
+      "reviews": null
+    },
+    "T-213": {
+      "headline": "Mixed rectangle-measure lower bound `s(92) ≥ 493/50` reported, on the 201-direction net",
+      "scope": {
+        "n_values": [
+          92
+        ]
+      },
+      "verification": "V0",
+      "confirmation": "C0",
+      "significance": {
+        "score": 3,
+        "rationale": "Scored as a claim: if a complete replay passes, it is the strongest lower bound on record at n = 92, 9/100 above the reported lane, by the certificate kind and standard net of T-082, T-090 and T-091, with no new technique, at S3 as T-176 to T-178 are.",
+        "scored": "2026-10-17",
+        "by": "the triage of the 17 October intake pass (think-f40c), confirmed by the registering lane; the stage 4 review confirms or changes it"
+      },
+      "attribution": {
+        "source_keys": [
+          "[wand125 fine-net lower bounds 2026-10-16]"
+        ],
+        "published": "2026-10-16"
+      },
+      "evidence": [
+        "E-wand125-fine-net-n92-986-report"
+      ],
+      "reviews": null
+    },
+    "T-214": {
+      "headline": "Mixed rectangle-measure lower bound `s(106) ≥ 10503/1000` reported, on the 201-direction net",
+      "scope": {
+        "n_values": [
+          106
+        ]
+      },
+      "verification": "V0",
+      "confirmation": "C0",
+      "significance": {
+        "score": 3,
+        "rationale": "Scored as a claim: if a complete replay passes, it is the strongest lower bound on record at n = 106, 0.0990 above the reported lane, by the certificate kind and standard net of T-082, T-090 and T-091, with no new technique, at S3 as T-176 to T-178 are.",
+        "scored": "2026-10-17",
+        "by": "the triage of the 17 October intake pass (think-f40c), confirmed by the registering lane; the stage 4 review confirms or changes it"
+      },
+      "attribution": {
+        "source_keys": [
+          "[wand125 fine-net lower bounds 2026-10-16]"
+        ],
+        "published": "2026-10-16"
+      },
+      "evidence": [
+        "E-wand125-fine-net-n106-10503-report"
+      ],
+      "reviews": null
+    },
+    "T-215": {
+      "headline": "Mixed rectangle-measure lower bound `s(107) ≥ 529/50` reported, on the 201-direction net",
+      "scope": {
+        "n_values": [
+          107
+        ]
+      },
+      "verification": "V0",
+      "confirmation": "C0",
+      "significance": {
+        "score": 3,
+        "rationale": "Scored as a claim: if a complete replay passes, it is the strongest lower bound on record at n = 107, 0.1432 above the reported lane, by the certificate kind and standard net of T-082, T-090 and T-091, with no new technique, at S3 as T-176 to T-178 are.",
+        "scored": "2026-10-17",
+        "by": "the triage of the 17 October intake pass (think-f40c), confirmed by the registering lane; the stage 4 review confirms or changes it"
+      },
+      "attribution": {
+        "source_keys": [
+          "[wand125 fine-net lower bounds 2026-10-16]"
+        ],
+        "published": "2026-10-16"
+      },
+      "evidence": [
+        "E-wand125-fine-net-n107-1058-report"
+      ],
+      "reviews": null
+    },
+    "T-216": {
+      "headline": "Mixed rectangle-measure lower bound `s(108) ≥ 531/50` verified, on the 201-direction net",
+      "scope": {
+        "n_values": [
+          108
+        ]
+      },
+      "verification": "V3",
+      "confirmation": "C3",
+      "significance": {
+        "score": 3,
+        "rationale": "The strongest verified and reported lower bound on record at n = 108, 0.1359 above the previous reported lane and 0.2079 above the verified lane, by the certificate kind and standard net of T-082, T-090 and T-091, with no new technique, at S3 as T-176 to T-178 are.",
+        "scored": "2026-10-18",
+        "by": "docs/project/reviews/review-2026-10-18-wand125-n108-certificate-mathematics.md; Review B confirms the registering lane's S3. Review C accepts the bounded mathematics and does not assess significance."
+      },
+      "attribution": {
+        "source_keys": [
+          "[wand125 fine-net lower bounds 2026-10-16]"
+        ],
+        "published": "2026-10-16"
+      },
+      "evidence": [
+        "E-wand125-fine-net-n108-1062-report",
+        "E-wand125-fine-net-n108-1062-sqverify-fast-replay",
+        "E-n108-review-max-premises",
+        "E-n108-review-max-captures"
+      ],
+      "reviews": [
+        {
+          "path": "docs/project/reviews/review-2026-10-18-wand125-n108-certificate-mathematics.md",
+          "kind": "adversarial",
+          "reviewer": "Codex (OpenAI), Astra family, strong tier at xhigh reasoning; separately prompted mathematical lane",
+          "reviewer_kind": "ai",
+          "relation": "project",
+          "date": "2026-10-18",
+          "scope": "The n108 certificate's implication, exact premises, retained complete native census and controls, and all 201 independently recomputed saved refusal-point captures. No fresh native replay; other 17 certificates outside scope. This review ran at xhigh, not maximum reasoning.",
+          "verdict": "accepted",
+          "covers": [
+            "T-216"
+          ]
+        },
+        {
+          "path": "docs/project/reviews/review-2026-10-18-n108-fine-net-mathematics-max.md",
+          "kind": "adversarial",
+          "reviewer": "Codex (OpenAI), strongest tier at maximum reasoning; source-distinct separately prompted mathematical lane",
+          "reviewer_kind": "ai",
+          "relation": "project",
+          "date": "2026-10-18",
+          "scope": "The n108 implication, exact mass, D4 expansion, net and centre-domain premises, retained complete replay identities and index sets, and five exact poses (four native control witnesses and the source axis) with analytic geometry controls. Findings were sealed before reading the earlier n108 review. No fresh native replay; other 17 certificates outside scope.",
+          "verdict": "accepted",
+          "covers": [
+            "T-216"
+          ]
+        }
+      ]
+    },
+    "T-217": {
+      "headline": "Mixed rectangle-measure lower bound `s(110) ≥ 1073/100` reported, on the 201-direction net",
+      "scope": {
+        "n_values": [
+          110
+        ]
+      },
+      "verification": "V0",
+      "confirmation": "C0",
+      "significance": {
+        "score": 3,
+        "rationale": "Scored as a claim: if a complete replay passes, it is the strongest lower bound on record at n = 110, 0.1300 above the reported lane, by the certificate kind and standard net of T-082, T-090 and T-091, with no new technique, at S3 as T-176 to T-178 are.",
+        "scored": "2026-10-17",
+        "by": "the triage of the 17 October intake pass (think-f40c), confirmed by the registering lane; the stage 4 review confirms or changes it"
+      },
+      "attribution": {
+        "source_keys": [
+          "[wand125 fine-net lower bounds 2026-10-16]"
+        ],
+        "published": "2026-10-16"
+      },
+      "evidence": [
+        "E-wand125-fine-net-n110-1073-report"
+      ],
+      "reviews": null
+    }
+  }
+}

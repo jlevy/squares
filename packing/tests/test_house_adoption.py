@@ -979,6 +979,33 @@ def test_the_staged_adoptions_name_their_beads_and_reasons() -> None:
     assert not adopted & set(select.PENDING_ADOPTION)
 
 
+def test_the_retained_integration_diagnostic_keeps_its_executed_bytes() -> None:
+    """The archived reviewer program is parsed, never imported or rerun as assurance."""
+    packet = houses.ROOT / "resources/web/t174-adoption-integration-diagnostic-2026-10-19"
+    receipt = json.loads((packet / "retention.json").read_text())
+    assert receipt["format"] == "retained-integration-diagnostic-v1"
+    assert receipt["cited_by"] == []
+    assert receipt["rerun_on_retention"] is False
+    assert {row["path"] for row in receipt["files"]} == {
+        "665-prospective-audit.py",
+        "665-prospective-audit.json",
+        "665-prospective-audit-README.md",
+        "665-prospective-final-review.md",
+    }
+    for row in receipt["files"]:
+        raw = (packet / row["path"]).read_bytes()
+        assert len(raw) == row["bytes"]
+        assert hashlib.sha256(raw).hexdigest() == row["sha256"]
+    source = packet / "665-prospective-audit.py"
+    compile(source.read_bytes(), str(source), "exec", dont_inherit=True)
+    assert json.loads((packet / "665-prospective-audit.json").read_text())["failures"] == []
+    for register in ("evidence.yaml", "verifiers.yaml"):
+        assert (
+            packet.relative_to(houses.REPO).as_posix()
+            not in (houses.ROOT / "frontier" / register).read_text()
+        )
+
+
 def test_check_judges_the_whole_register_and_refuses_since() -> None:
     """Review A9 of #660: narrowed to entries registered since a day, `--check` judged the
     staged counts without the entries they were staged for and advised unstaging all 63."""
@@ -1469,44 +1496,78 @@ def test_a_house_that_is_the_replaced_packing_keeps_what_the_record_knew_of_it(
 def test_where_the_replaced_lanes_differ_the_margin_is_read_from_the_verified_ceiling(
     replayed: list[adopt.Move],
 ) -> None:
-    """At 29 the replaced record's reported bound was the catalogue's print and its
-    verified bound T-155's exact side. Its retained display differs from that side, so
-    the opening, section and history note must use the exact form for the margin's
-    baseline (reviews C3 and D1 of #661). The catalogue print orders nothing."""
-    at29 = next(move for move in replayed if move.n == 29)
-    bound = at29.packing["verified_upper_bound"]
-    verified = Fraction(str(bound["exact_form"]))
-    printed = str(at29.packing["reported_upper_bound"]["value"])
-    assert Fraction(str(bound["value"])) != verified
-    margin = verified - at29.side
-    assert margin == at29.selection.margin > 0
-    opening = _flat(adopt.opening(at29))
-    baseline = re.search(
-        r"below the ceiling the case held until then, \$([^$]+)\$ from", opening
-    )
-    assert baseline is not None
-    assert Fraction(baseline.group(1)) == verified
-    stated_margin = re.search(r"`([^`]+)` below the ceiling", opening)
-    assert stated_margin is not None
-    rounded_margin = Decimal(stated_margin.group(1))
-    last_place = Decimal(1).scaleb(int(rounded_margin.as_tuple().exponent))
-    assert abs(Fraction(rounded_margin) - margin) <= Fraction(last_place) / 2
-    assert f"below the ceiling the case held until then, ${printed}$" not in opening
-    assert (
-        f"the reported upper bound it replaces, ${printed}$ from [Kingbird], is a print "
-        "`9.19e-15` below the new side, within one unit of its last place, so it does not "
-        "order them"
-    ) in opening
-    assert f"The house it replaces, ${verified}$ from" in _flat(adopt.section(at29))
-    note = adopt.history_note(at29)["claim"]
-    assert note.startswith(f"Earlier house {verified} from T-155 (reported as {printed} from")
-    written = adopt.replayed_text(at29)
-    stale = written.replace(str(verified), str(bound["value"]))
-    assert adopt.refreshed(at29, stale) == written
+    """The replaced displays differ at 29 and 132. Their opening, section and history
+    note use the exact verified baseline (reviews C3 and D1 of #661; M2/M3 of #665).
+    At 29 the catalogue print orders nothing; at 132 the reported exact side agrees
+    with the verified side, but its display differs from the verified display."""
+    differing = {
+        29: (
+            Fraction(
+                "296691673133846459484473030817600957/50000000000000000000000000000000000"
+            ),
+            "5.93383346267692",
+            "5.93383346267692918974379895098",
+            "T-155",
+            "[Kingbird]",
+            (
+                "is a print `9.19e-15` below the new side, within one unit of its last place, "
+                "so it does not order them"
+            ),
+        ),
+        132: (
+            Fraction("5992840099422904405761115982051/500000000000000000000000000000"),
+            "11.985680198845808811522231964102",
+            "11.9856801988458089",
+            "T-141",
+            "[Daniel record hunt 3 2026-10-10]",
+            "lies `1.20e-19` above the new side",
+        ),
+    }
+    for n, (expected, printed, verified_display, result, source, relation) in differing.items():
+        move = next(move for move in replayed if move.n == n)
+        bound = move.packing["verified_upper_bound"]
+        reported = move.packing["reported_upper_bound"]
+        verified = Fraction(str(bound["exact_form"]))
+        assert verified == expected
+        assert reported["value"] == printed
+        assert bound["value"] == verified_display
+        assert adopt._lanes_differ(move.packing)  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+        if n == 132:
+            assert Fraction(str(reported["exact_form"])) == expected
+        assert Fraction(str(bound["value"])) != verified
+        margin = verified - move.side
+        assert margin == move.selection.margin > 0
+        opening = _flat(adopt.opening(move))
+        baseline = re.search(
+            r"below the ceiling the case held until then, \$([^$]+)\$ from", opening
+        )
+        assert baseline is not None
+        assert Fraction(baseline.group(1)) == verified
+        stated_margin = re.search(r"`([^`]+)` below the ceiling", opening)
+        assert stated_margin is not None
+        rounded_margin = Decimal(stated_margin.group(1))
+        last_place = Decimal(1).scaleb(int(rounded_margin.as_tuple().exponent))
+        assert abs(Fraction(rounded_margin) - margin) <= Fraction(last_place) / 2
+        assert f"below the ceiling the case held until then, ${printed}$" not in opening
+        assert (
+            f"the reported upper bound it replaces, ${printed}$ from {source}, {relation}"
+        ) in opening
+        assert f"The house it replaces, ${verified}$ from" in _flat(adopt.section(move))
+        note = adopt.history_note(move)["claim"]
+        assert note.startswith(
+            f"Earlier house {verified} from {result} (reported as {printed} from"
+        )
+        written = adopt.replayed_text(move)
+        stale = written.replace(str(verified), str(bound["value"]))
+        assert adopt.refreshed(move, stale) == written
     # Lanes that agree as numbers keep the reported print, as at 308, '18.0' beside '18'.
     for move in replayed:
-        if move.n != 29:
+        reported_number = Decimal(str(move.packing["reported_upper_bound"]["value"]))
+        verified_number = Decimal(str(move.packing["verified_upper_bound"]["value"]))
+        if reported_number == verified_number:
             assert not adopt._lanes_differ(move.packing), move.n  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+        else:
+            assert move.n in differing
 
 
 def test_the_coverage_of_a_count_adopted_again_names_the_new_house_throughout(
