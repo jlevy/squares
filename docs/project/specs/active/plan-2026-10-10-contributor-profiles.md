@@ -794,6 +794,15 @@ tests. It does not remove evidence to fit the old limit.
 published result articles, preserving parsed content, links and foreign XML. Final test
 outcomes and the browser timing disposition belong in the PR receipts.
 
+The standard hosted run at `2c071e59d` found two failures: n = 29’s adoption-history
+replay and the preview watcher callback’s type check.
+Under `think-isve`, the adoption writer now reproduces the retained record’s historical
+wording from its prior state.
+Six focused tests pass, including the replay contracts for all 53 adopted records.
+No case records, evidence or identity joins changed, so no data repin is needed.
+The callback type fix also passes focused BasedPyright.
+Both repairs are queued for final hosted CI; that run remains required for acceptance.
+
 Review and validation receipts for this integration are recorded on PR #578 and
 `think-5bao`. The historical PDF census and profiles without sufficient identity
 evidence remain Phase 4 work under `think-m7il`.

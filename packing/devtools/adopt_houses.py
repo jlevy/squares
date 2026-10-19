@@ -1786,12 +1786,35 @@ def _regularized_certificate(move: Move, text: str) -> str:
     )
 
 
+def _n29_history(text: str) -> str:
+    """The numerical solve and Schadt's rational ceiling as historical evidence."""
+    earlier = (
+        "**This does not move any bound.** A high-precision root is not a certificate: "
+        "no outward-rounded interval and no exact algebraic form is produced, so "
+        "`verified_upper_bound` remains the Schadt rational and the `5.23e-5` gap to "
+        "the reported record stands."
+    )
+    historical = (
+        "**This solve did not move a bound.** A high-precision root is not a certificate: "
+        "no outward-rounded interval and no exact algebraic form is produced, so at "
+        "the time of the 28 August measurement, `verified_upper_bound` remained the "
+        "Schadt rational and the `5.23e-5` gap to the reported record stood. "
+        "The later interval and exact regularized certificates above superseded that ceiling."
+    )
+    text = re.sub(_spaced(earlier), historical, text)
+    return re.sub(
+        _spaced("This proves the formal upper bound shown above."),
+        "This proved the earlier Schadt rational ceiling.",
+        text,
+    )
+
+
 def historical(move: Move, text: str) -> str:
     """The body's own statements of the earlier house, marked as history.
 
     `check_case_prose` holds every `s(n) <= x` a body writes to the front matter unless
-    its sentence says it is historical. Five kinds of prose state the earlier house, and
-    each says now that it held until this adoption:
+    its sentence says it is historical. Six kinds of prose refer to earlier bounds and
+    are marked as history:
 
     - the opening "Open." sentence the generator writes, of the best known packing;
     - the exact-optimum sections that `T-098` wrote, in two fixed sentences;
@@ -1801,7 +1824,9 @@ def historical(move: Move, text: str) -> str:
     - the regularized certificate's prose that `T-155` wrote at T-101's side
       (`register_regularized_bounds`): its dated paragraph and its section;
     - a house an earlier pass of this adoption adopted, in its dated paragraph and its
-      section.
+      section;
+    - the n = 29 numerical solve and Schadt-certificate statements, which describe a
+      ceiling the later interval and exact certificates superseded.
 
     Prose in no fixed form, which no tool here wrote, is not rewritten; `check_case_prose`
     refuses a record that still states it as the bound. The first pass marked such prose
@@ -1825,6 +1850,8 @@ def historical(move: Move, text: str) -> str:
     )
     text = _earlier_ceiling(move, text)
     text = _regularized_certificate(move, text)
+    if n == 29:
+        text = _n29_history(text)
     text = held_history(text)
     # The records are wrapped, so a sentence may break at any space; whitespace is
     # matched as such and the reflow is the formatter's.

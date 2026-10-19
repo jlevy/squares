@@ -1193,6 +1193,32 @@ def _body(text: str) -> str:
     return body
 
 
+def test_n29_numerical_and_schadt_ceiling_claims_replay_as_idempotent_history(
+    replayed: list[adopt.Move],
+) -> None:
+    move = next(move for move in replayed if move.n == 29)
+    current = select.case_path(29).read_text(encoding="utf-8")
+    heading = "\n## Six Numerically Checked Orientation Classes"
+    stale = (
+        move.text[
+            move.text.index("**This does not move any bound.**") : move.text.index(heading)
+        ].strip()
+        + "\n\nThis proves the formal upper bound shown above."
+    )
+    expected = (
+        current[
+            current.index("**This solve did not move a bound.**") : current.index(heading)
+        ].strip()
+        + "\n\nThis proved the earlier Schadt rational ceiling."
+    )
+    other = next(move for move in replayed if move.n != 29)
+    for original in (stale, "\n".join(stale.split())):
+        written = adopt.historical(move, original)
+        assert _flat(written) == _flat(expected)
+        assert adopt.historical(move, written) == written
+        assert adopt.historical(other, original) == original
+
+
 def test_the_writer_rebuilds_every_adopted_record_from_its_prior_state(
     replayed: list[adopt.Move],
 ) -> None:
@@ -1208,6 +1234,7 @@ def test_the_writer_rebuilds_every_adopted_record_from_its_prior_state(
     `source_reviewed` no earlier.
     """
     assert [move.n for move in replayed] == sorted(houses.ADOPTED)
+    body_mismatches = []
     for move in replayed:
         assert move.house.result == houses.ADOPTED[move.n]
         committed = select.case_path(move.n).read_text(encoding="utf-8")
@@ -1223,8 +1250,9 @@ def test_the_writer_rebuilds_every_adopted_record_from_its_prior_state(
         body = _flat(committed.split("---\n", 2)[2])
         assert _flat(adopt.opening(move)) in body, f"n={move.n}: opening paragraph"
         assert _flat(adopt.section(move)) in body, f"n={move.n}: certificate section"
-        if move.n not in adopt.HAND_MARKED:
-            assert _body(committed) == _body(written), f"n={move.n}: the body as history"
+        if move.n not in adopt.HAND_MARKED and _body(committed) != _body(written):
+            body_mismatches.append(move.n)
+    assert not body_mismatches, f"the body as history differs at n={body_mismatches}"
 
 
 #: A synthetic later pass, its review and its source: n = 84 adopted again after T-130.
