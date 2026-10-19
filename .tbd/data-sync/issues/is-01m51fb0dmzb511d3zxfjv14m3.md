@@ -3,9 +3,9 @@ type: is
 id: is-01m51fb0dmzb511d3zxfjv14m3
 title: "Review: mathematical correctness of Fitzharding's s(19) Lean proof (#640), strongest tier, after stage 2, for sharing with the author"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 15
+version: 16
 delegate: lane-658
 labels: []
 dependencies: []
@@ -13,8 +13,12 @@ parent_id: is-01m51e5sp1t03c20hqp7d3wajm
 hold: null
 hold_until: null
 created_at: 2026-10-16T04:25:48.211Z
-updated_at: 2026-10-19T20:37:03.451Z
+updated_at: 2026-10-19T22:43:25.757Z
 started_at: 2026-10-16T09:57:24.915Z
+closed_at: 2026-10-19T22:43:25.757Z
+close_reason: "The s(19) Lean proof review (docs/project/reviews/review-2026-10-16-fitzharding-n19-lean.md, PR #655) is mapped on main by PR #658 (merged 926cd764a): external_review on E-n019-fitzharding-lean-report, an accepted adversarial item in T-194's reviews, seven V-sq19-review-* programs and six evidence entries; check_results derives T-194 V0/C1. The author questions stay drafted in think-a4x3 for the owner's word; the build stays with think-nqnl."
+resolution: null
+duplicate_of: null
 ---
 Stage 4's review lane for #640 (think-a4x3): a mathematical-correctness review of Oscar Fitzharding's Lean proof that s(19) = 3 + 4 sqrt 2 / 3 (ofitzharding/sq19 at 34fb2b7bc39465db368c45cb48d4db58829d3051, tag v1.0.0), as campaign/result-import.md stage 4 ("Who reviews, and when") requires for every proof an import registers, and as T-154's two reviews did for his s(17) proof.
 
