@@ -2463,6 +2463,7 @@ html[data-site-atlas-scale="row"]
    a 0.01ms transition of every property, under which the triangle was laid out for one
    frame with the grid's gaps, 1344 pixels wide at 1280, before it settled. A tile keeps
    its own transition, which is the wash alone. */
+.site-page .site-atlas-grid,
 .site-atlas-cells,
 .site-atlas-row,
 .site-atlas-segment,

@@ -279,6 +279,13 @@ SITE_LAYOUT_TESTS = (
     "tests/test_site_atlas_views.py",
     SITE_FORWARDER_TEST,
 )
+#: The serial forwarders run with Playwright's raw wire log and API log on, so that an
+#: unanswered lifecycle RPC survives a deadline kill. A passing run prints about 2.6 MB
+#: and 103,000 lines of it: on PR #685 that took the frontend job log from 397 KB to
+#: 6.0 MB. The artifact log keeps every byte; the step reports at most this many trailing
+#: bytes of it (characters, when output is piped), which hold pytest's summary and the last
+#: RPCs before any hang.
+SITE_FORWARDER_OUTPUT_TAIL = 64 * 1024
 #: The four HTTP load/no-JS cases measure browser timing without competing browser
 #: workers from the functional layout command. Their assertions and budgets stay shared
 #: with the production checker; this changes allocation, not the measured contract.
@@ -954,6 +961,40 @@ def _timeout_output(error: subprocess.TimeoutExpired) -> str:
     return output or ""
 
 
+def _command_output(stdout: str | None, output_path: Path | None, tail: int | None) -> str:
+    """What a command printed, as its step reports it.
+
+    With `tail`, only the last `tail` bytes of an artifact log, or characters of piped
+    output, are kept, from a line boundary, under a line saying what was cut and where all
+    of it is. An artifact log is read from its end, so the gate never holds the rest in
+    memory. Without `tail`, all of it.
+    """
+    if tail is None:
+        if output_path is None:
+            return (stdout or "").rstrip()
+        return output_path.read_text(encoding="utf-8", errors="replace").rstrip()
+    if output_path is None:
+        text = stdout or ""
+        total, unit = len(text), "characters"
+        if total <= tail:
+            return text.rstrip()
+        text = text[total - tail :]
+        where = "set PACKING_VALIDATION_ARTIFACT_DIR to keep all of it"
+    else:
+        with output_path.open("rb") as stream:
+            total, unit = stream.seek(0, os.SEEK_END), "bytes"
+            stream.seek(max(0, total - tail))
+            raw = stream.read()
+        # The same newline translation `read_text` applies.
+        text = raw.decode("utf-8", errors="replace").replace("\r\n", "\n").replace("\r", "\n")
+        if total <= tail:
+            return text.rstrip()
+        where = f"the complete output is {output_path}"
+    _cut, newline, rest = text.partition("\n")
+    kept = rest if newline else text
+    return f"[output cut to its last {tail} of {total} {unit}; {where}]\n{kept.rstrip()}"
+
+
 def _stop_process_group(process: subprocess.Popen[str]) -> str:
     """Stop one POSIX group and reap its parent.
 
@@ -1093,17 +1134,27 @@ def _run(
     timeout_seconds: float | None = None,
     extra_environment: Mapping[str, str] | None = None,
     pytest_progress: tuple[str, str] | None = None,
+    output_tail: int | None = None,
 ) -> str:
     """Run `command` as a step's subprocess; `extra_environment` is laid over the gate's
     environment for this command alone. `pytest_progress` names the lane and exclusions
-    of an explicitly selected pytest command that has no quick/slow marker expression."""
+    of an explicitly selected pytest command that has no quick/slow marker expression.
+    `output_tail` bounds what the step reports to that many trailing bytes of the artifact
+    log, or characters of piped output; the artifact log, where there is one, still keeps
+    everything."""
     if pytest_progress is not None and list(command[1:3]) != ["-m", "pytest"]:
         raise StepFailureError("pytest progress requires a native pytest command")
     if extra_environment:
         context = replace(context, environment={**context.environment, **extra_environment})
     directory = _artifact_directory(context)
     if directory is None:
-        return _run_command(context, command, cwd=cwd, timeout_seconds=timeout_seconds)
+        return _run_command(
+            context,
+            command,
+            cwd=cwd,
+            timeout_seconds=timeout_seconds,
+            output_tail=output_tail,
+        )
     stem = directory / f"command-{uuid.uuid4().hex}"
     log_path = stem.with_suffix(".log")
     arguments = list(command)
@@ -1203,6 +1254,7 @@ def _run(
                 timeout_seconds=timeout_seconds,
                 output_stream=stream,
                 output_path=log_path,
+                output_tail=output_tail,
             )
     except BaseException as error:
         if isinstance(error, StepTimeoutError):
@@ -1237,6 +1289,7 @@ def _run_command(
     timeout_seconds: float | None = None,
     output_stream: TextIO | None = None,
     output_path: Path | None = None,
+    output_tail: int | None = None,
 ) -> str:
     effective_timeout = (
         context.timeout_seconds
@@ -1274,9 +1327,7 @@ def _run_command(
     try:
         stdout, _ = process.communicate(timeout=effective_timeout)
     except subprocess.TimeoutExpired:
-        output = _stop_process_group(process).rstrip()
-        if output_path is not None:
-            output = output_path.read_text(encoding="utf-8", errors="replace").rstrip()
+        output = _command_output(_stop_process_group(process), output_path, output_tail)
         rendered = " ".join(command)
         detail = f"command timed out after {effective_timeout:g} seconds: {rendered}"
         if output:
@@ -1287,9 +1338,7 @@ def _run_command(
         raise
     finally:
         context.processes.discard(process.pid)
-    output = (stdout or "").rstrip()
-    if output_path is not None:
-        output = output_path.read_text(encoding="utf-8", errors="replace").rstrip()
+    output = _command_output(stdout, output_path, output_tail)
     if process.returncode:
         rendered = " ".join(command)
         detail = f"command exited {process.returncode}: {rendered}"
@@ -2104,7 +2153,7 @@ def _site_layout_tests(context: Context) -> str:
             "-k",
             f"not {SITE_LOAD_BUDGET_TEST.rpartition('::')[-1]}",
         ),
-        (*common, "-n", "0", SITE_FORWARDER_TEST),
+        (*common, "-n", "0", "-s", SITE_FORWARDER_TEST),
         (*common, "-n", "0", SITE_LOAD_BUDGET_TEST),
     )
     outputs: list[str] = []
@@ -2118,6 +2167,12 @@ def _site_layout_tests(context: Context) -> str:
         ),
         strict=True,
     ):
+        environment = {REQUIRE_CHROMIUM: "1"}
+        tail = None
+        if progress[0] == "browser-forwarders":
+            # Retain unanswered lifecycle RPCs even if the shared deadline kills pytest.
+            environment.update({"DEBUGP": "1", "DEBUG": "pw:api"})
+            tail = SITE_FORWARDER_OUTPUT_TAIL
         try:
             remaining = deadline - time.monotonic()
             if remaining <= 0:
@@ -2130,8 +2185,9 @@ def _site_layout_tests(context: Context) -> str:
                     context,
                     command,
                     timeout_seconds=remaining,
-                    extra_environment={REQUIRE_CHROMIUM: "1"},
+                    extra_environment=environment,
                     pytest_progress=progress,
+                    output_tail=tail,
                 )
             )
         except StepFailureError as error:

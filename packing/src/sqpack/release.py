@@ -88,6 +88,14 @@ class PublicationHistoryEntry(NamedTuple):
 #: for each deployment's commit, what the page it built stated.
 PUBLICATION_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.7.32",
+        first_published="October 19, 2026",
+        result_scope=(
+            "Keep Atlas grids at the available width under reduced motion during viewport "
+            "changes."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.7.31",
         first_published="October 19, 2026",
         result_scope=(
@@ -971,6 +979,16 @@ class ReleaseImpactDecision(NamedTuple):
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
     ReleaseImpactDecision(
         component="site",
+        previous_version="v0.7.31",
+        version="v0.7.32",
+        impact="patch",
+        reason=(
+            "Keep Atlas grids at the available width under reduced motion during viewport "
+            "changes."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="site",
         previous_version="v0.7.30",
         version="v0.7.31",
         impact="patch",
@@ -1483,6 +1501,70 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "Source review finds no manuscript, figure, credit, content date or "
             "print-style change in these paper exports. This is not a rendered "
             "byte-equality claim; the site alone takes a patch edition."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer",),
+        paths=("packing/src/sqpack/cli/validate.py",),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-lower-bounds-explainer.pdf",
+        ),
+        reason=(
+            "Reviewed October 19, 2026 against main f3d5da7b: the explainer's "
+            "RENDER_INPUTS includes the entire sqpack tree, but its HTML, Markdown "
+            "and PDF producer import closure excludes the validation CLI. This "
+            "file changes only _site_layout_tests to disable pytest capture and "
+            "enable existing Playwright wire/API logging for serial forwarders, "
+            "and lets _run report a bounded tail of that command's output. "
+            "Paper producers neither call that runner nor consume its logs. "
+            "Manuscripts, scientific inputs, figures, paper metadata and the "
+            "pre-cut publication link revision are unchanged; the five claim/card "
+            "documents remain current. The article's last change remains October "
+            "13, 2026, matching EXPLAINER_REVISED. Retain explainer v0.4.8 and the "
+            "prepared site v0.7.32. This is a source-reviewed disposition, with "
+            "no paper render, PDF redraw or output-byte comparison claimed."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
+            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
+            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
+            "packing/devtools/probes/measure_atlas_views/layout.js",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-lower-bounds-explainer.pdf",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+            "papers/square-packing-methods-survey.pdf",
+        ),
+        reason=(
+            "For the Atlas CSS repair against landed main f3d5da7b, review of all "
+            "four HTML, Markdown and PDF producers finds no consumed content change. "
+            "Their shells use KPress, paper-type, site-nav and paper-publication "
+            "styles plus their own paper styles; none includes site.css or its "
+            "site-atlas-grid rule. The layout probe is read by measure_atlas_views "
+            "and browser tests, not by those producers; its broad probe declaration "
+            "is a conservative candidate for the explainer and methods survey. "
+            "The paused animation clock belongs only to the browser test. The five "
+            "claim documents change only source-link revisions for site v0.7.32 "
+            "and remain linked rather than inlined into papers; the README changes "
+            "only its site edition sentence. Manuscripts, scientific inputs, "
+            "figures and paper metadata are unchanged. Retain explainer v0.4.8 and "
+            "methods survey v0.2.3. The optimality and threshold reviews have no "
+            "changed candidate inputs and retain v0.1.7 and v0.1.0. This is a source-reviewed "
+            "disposition; no paper render, PDF redraw or artifact byte identity "
+            "is claimed."
         ),
     ),
     ReleaseNoPublicChange(
@@ -4301,7 +4383,7 @@ def validate_release_impacts(
 #: fresh render, so a link naming the build commit would fail their drift check forever. It is
 #: in no version string. It moves when the claim documents are regenerated for an edition. It
 #: must be a commit on `main`; the site's own links name `main` itself (`devtools.repo_links`).
-PUBLICATION_REVISION = "d29aa141"
+PUBLICATION_REVISION = "b23abea0"
 
 
 def data_pathspec() -> tuple[str, ...]:
