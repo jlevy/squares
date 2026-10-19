@@ -3,6 +3,11 @@
 Real rendered pages and their assets are served through request routes in memory, so
 the fixture writes no site output. One desktop and one mobile session exercise the
 keyboard, canonical Atlas tiles, shared triangle animation and a case link.
+
+Set `SQPACK_NEWS_SCREENSHOT_DIR` to a directory to keep review screenshots of the News
+surfaces these tests drive: the first visible card at each width (`news-card-WIDTH.png`)
+and the filter controls in each theme (`news-chooser-SCHEME-WIDTH.png`). Nothing reads
+them; a pull request that changes the News presentation attaches them for review.
 """
 
 from __future__ import annotations
@@ -41,6 +46,9 @@ DOWNLOAD_ACTION = probe(PROBES, "site_homepage/download_action")
 NEWS = probe(PROBES, "site_homepage/news")
 NEWS_SETTLED = probe(PROBES, "site_homepage/news-settled")
 NEWS_FILTERS = probe(PROBES, "site_homepage/news-filters")
+TOOLTIP_WATCH = probe(PROBES, "site_homepage/tooltip-watch")
+TOOLTIP_CLEAR = probe(PROBES, "site_homepage/tooltip-clear")
+SCROLL_FILTERS = probe(PROBES, "site_homepage/scroll-filters")
 ORIGIN = "http://homepage.test/"
 TOGGLE = "[data-homepage-atlas-toggle]"
 CELLS = "#homepage-atlas-cells"
@@ -918,8 +926,12 @@ def test_news_cards_expand_only_on_press_and_legacy_bookmarks_forward(
         sync_api.expect(title_link).to_have_attribute("href", f"news.html#{anchor}")
         title_link.click()
         page.wait_for_url(f"{ORIGIN}news.html#{anchor}")
-        page.locator('[data-news-all="scores"]').click()
+        page.locator('button[data-news-score="3"]').click()
         news = page.evaluate(NEWS)
+        if screenshot_dir := os.environ.get("SQPACK_NEWS_SCREENSHOT_DIR"):
+            page.locator("[data-news-day]:visible").first.screenshot(
+                path=str(Path(screenshot_dir) / f"news-card-{width}.png")
+            )
         document = render_changelog.load()
         entries = render_changelog.news_entries(document)
         assert len(news["entries"]) == len(entries)
@@ -947,6 +959,10 @@ def test_news_cards_expand_only_on_press_and_legacy_bookmarks_forward(
                 assert day["title_before_date"]
                 assert day["date_before_topics"]
                 assert day["metadata_after_date"]
+                for gap in ("title_date_gap", "date_metadata_gap", "metadata_body_gap"):
+                    assert 0 <= day[gap] <= 7, (day["id"], gap, day[gap])
+                if day["paragraph_gap"] is not None:
+                    assert 4 <= day["paragraph_gap"] <= 12
                 assert day["meter_count"] == 1
                 assert day["meter_label"].startswith("Significance S")
                 assert day["meter_tooltip"]
@@ -984,10 +1000,14 @@ def test_news_cards_expand_only_on_press_and_legacy_bookmarks_forward(
         entry_id = card.locator("[data-news-entry]").get_attribute("data-news-entry")
         entry = next(item for item in entries if item["id"] == entry_id)
         assert meaning is not None
-        assert (
-            overview_sections.rung_meanings()[f"S{entry['significance']['score']}"] in meaning
-        )
-        assert entry["significance"]["rationale"] in meaning
+        score = entry["significance"]["score"]
+        # A News post's level is described by the rubric that scored it, not the results
+        # ladder, and without the post's own rationale (`think-yznf`).
+        news_level = render_changelog.news_significance_meanings()[score]
+        assert meaning == f"Significance S{score}: {news_level}."
+        assert news_level != overview_sections.rung_meanings()[f"S{score}"]
+        assert len(meaning) <= 120
+        assert entry["significance"]["rationale"] not in meaning
         tooltip = page.locator(".site-rating-tooltip.kpress-tooltip-visible")
         for interaction in ("hover", "focus", "press"):
             page.mouse.move(0, 0)
@@ -1197,11 +1217,109 @@ def test_news_facets_history_bookmarks_and_shared_meters(
             matches = sum(topic in entry.get("topics", []) for entry in scored)
             assert tally["tally"] == f" ({matches})"
             assert tally["name"] == f"{tally['label']} ({matches})"
-        assert seen["all_topics_tally"] == f" ({len(scored)})"
-        assert seen["all_topics_name"] == f"All topics ({len(scored)})"
+        assert seen["all_buttons"] == 0
+        assert len(seen["resets"]) == 1
+        assert seen["resets"][0]["label"] == "Reset filters"
+        assert seen["resets"][0]["appearance"]["border-top-width"] == "0px"
+        assert seen["resets"][0]["appearance"]["border-bottom-width"] == "0px"
+        for score, meaning in seen["score_tooltips"].items():
+            description = render_changelog.news_significance_tooltip(int(score))
+            assert meaning == f"Significance S{score}: {description}"
         assert parse_qs(urlsplit(page.url).query)["reader"] == ["kept"]
         assert seen["overflow"] == 0
         return seen
+
+    def pressed_under_pointer(button: Any, topic: str, scheme: str) -> None:
+        """A press on a topic shows at once, with the pointer still on it: pale turns
+        full and full turns pale, or on a touch screen gray turns full and back. The
+        selected state carries a visible check against its fill, so selection never
+        rests on hue alone, and holding the check's place keeps the button where it was
+        (`think-slt2`)."""
+        choice = {
+            "chooser": '[aria-labelledby="news-topics-label"]',
+            "choice": f'[data-news-topic="{topic}"]',
+        }
+        page.mouse.move(0, 0)
+        button.hover()
+        box = button.bounding_box()
+        states = [page.evaluate(NEWS_FILTERS, choice)["chooser"]]
+        for _ in range(2):
+            button.tap() if width == 390 else button.click()
+            states.append(page.evaluate(NEWS_FILTERS, choice)["chooser"])
+            assert button.bounding_box() == box, (scheme, topic)
+        fills = [state["appearance"]["background-color"] for state in states]
+        assert fills[0] != fills[1] != fills[2], (scheme, topic, fills)
+        assert fills[0] == fills[2], (scheme, topic, fills)
+        for state in states:
+            pressed = state["pressed"] == "true"
+            assert state["check_visible"] is pressed, (scheme, topic, state["pressed"])
+            if pressed:
+                assert (
+                    state["appearance"]["background-color"]
+                    == (state["chip"]["background-color"])
+                ), (scheme, topic)
+                assert state["check_contrast"] >= 4.5, (scheme, topic, state["check_contrast"])
+            elif width == 390:
+                assert (
+                    state["appearance"]["background-color"]
+                    == (state["neutral"]["background-color"])
+                ), (scheme, topic)
+
+    def score_explanations_leave_the_filters_free() -> None:
+        """An S button's explanation never lies over a filter control or the shown
+        site header's links: hovered or focused, it opens above the filters and below
+        the header, or below the filters where there is no room between, or the phone's
+        bottom bar holds it, so the next click reaches the control under the pointer. A
+        mouse press explains nothing, not even for a frame, and leaves the toggle to the
+        button."""
+        tooltip = page.locator(".site-rating-tooltip.kpress-tooltip-visible")
+        for score in (3, 4, 5):
+            button = page.locator(f'button[data-news-score="{score}"]')
+            page.mouse.move(0, 0)
+            page.evaluate(TOOLTIP_WATCH, {"watch": True})
+            for _ in range(2):
+                button.click()
+            assert page.evaluate(TOOLTIP_WATCH) is False, score
+            page.keyboard.press("Escape")
+            page.locator("h1").first.click()
+            page.keyboard.press("Tab")
+            button.focus()
+            sync_api.expect(tooltip).to_be_visible()
+            clear = page.evaluate(TOOLTIP_CLEAR)
+            assert clear["covers"] == clear["covers_header"] == [], ("focus", score, clear)
+            page.keyboard.press("Escape")
+            topics = page.locator("button[data-news-topic]").all()
+            for topic in topics if width == 1280 else topics[:1]:
+                page.mouse.move(0, 0)
+                button.hover()
+                sync_api.expect(tooltip).to_be_visible()
+                clear = page.evaluate(TOOLTIP_CLEAR)
+                assert clear["covers"] == clear["covers_header"] == [], ("hover", score, clear)
+                box = topic.bounding_box()
+                assert box is not None
+                pressed = topic.get_attribute("aria-pressed")
+                page.mouse.click(box["x"] + box["width"] / 2, box["y"] + box["height"] / 2)
+                assert topic.get_attribute("aria-pressed") != pressed, (score, clear)
+                topic.click()
+                assert topic.get_attribute("aria-pressed") == pressed
+        if width != 1280:
+            return
+        # Scrolled down and then back up, the header shows, and with the filters 120 px
+        # from the window's top the only room above them is over the header's links.
+        for offset in (-300, -100, 50, 100, 120):
+            page.evaluate(SCROLL_FILTERS, offset)
+            page.wait_for_timeout(100)
+        for score in (3, 4, 5):
+            page.mouse.move(0, 0)
+            page.keyboard.press("Escape")
+            page.locator(f'button[data-news-score="{score}"]').hover()
+            sync_api.expect(tooltip).to_be_visible()
+            clear = page.evaluate(TOOLTIP_CLEAR)
+            assert clear["header_bottom"] > 0, ("the header must show", clear)
+            assert clear["covers"] == clear["covers_header"] == [], ("band", score, clear)
+        page.mouse.move(0, 0)
+        page.keyboard.press("Escape")
+        page.evaluate(SCROLL_FILTERS, 10_000)
 
     def shared_chooser_contract() -> None:
         for scheme in ("light", "dark"):
@@ -1237,6 +1355,9 @@ def test_news_facets_history_bookmarks_and_shared_meters(
                 for selection, choice in (("selected", chosen), ("unselected", other)):
                     control = page.locator(group).locator(choice).first
                     for interaction in ("normal", "hover", "focus"):
+                        # A score's explanation opens above the filters, over the
+                        # heading: dismiss it before the heading takes focus back.
+                        page.keyboard.press("Escape")
                         page.locator("h1").first.click()
                         page.mouse.move(0, 0)
                         if interaction == "hover":
@@ -1250,10 +1371,16 @@ def test_news_facets_history_bookmarks_and_shared_meters(
                         assert sample is not None
                         if interaction == "focus":
                             assert sample["focus_visible"]
+                            if name == "scores":
+                                assert control.get_attribute("role") is None
+                                score = int(control.get_attribute("data-news-score") or 0)
+                                level = render_changelog.news_significance_tooltip(score)
+                                sync_api.expect(
+                                    page.locator(".site-rating-tooltip.kpress-tooltip-visible")
+                                ).to_have_text(f"Significance S{score}: {level}")
                         if name == "topics":
                             assert sample["label"] == sample["chip_label"]
                             for property_name in (
-                                "background-color",
                                 "color",
                                 "text-transform",
                                 "font-variant-caps",
@@ -1268,6 +1395,21 @@ def test_news_facets_history_bookmarks_and_shared_meters(
                                     interaction,
                                     property_name,
                                 )
+                            fill = sample["appearance"]["background-color"]
+                            # Only an unselected topic under a hovering pointer turns
+                            # pale; a touch screen has no hover (`think-slt2`).
+                            pale = interaction == "hover" and selection == "unselected"
+                            if pale and width != 390:
+                                assert fill != sample["chip"]["background-color"]
+                                assert fill != sample["neutral"]["background-color"]
+                                if scheme == "light":
+                                    assert sample["brightness"] > sample["chip_brightness"]
+                                else:
+                                    assert sample["brightness"] < sample["chip_brightness"]
+                            elif selection == "selected":
+                                assert fill == sample["chip"]["background-color"]
+                            else:
+                                assert fill == sample["neutral"]["background-color"]
                         samples[selection, interaction] = {
                             key: sample[key]
                             for key in ("appearance", "border", "gap", "height")
@@ -1282,6 +1424,7 @@ def test_news_facets_history_bookmarks_and_shared_meters(
                 "letter-spacing",
                 "box-shadow",
                 "outline-color",
+                "text-decoration-line",
             }
             for key, topic in appearances["topics"].items():
                 home = appearances["home"][key]
@@ -1299,8 +1442,11 @@ def test_news_facets_history_bookmarks_and_shared_meters(
                 if key[1] == "focus":
                     assert topic["appearance"]["outline-style"] != "none"
                     assert topic["appearance"]["outline-width"] != "0px"
-                assert (topic["appearance"]["box-shadow"] != "none") == (key[0] == "selected")
-                assert topic["border"] == home["border"] == "1px"
+                assert topic["appearance"]["box-shadow"] == "none"
+                assert topic["appearance"]["text-decoration-line"] == "none"
+                assert topic["border"] == home["border"] == "0px"
+                assert topic["appearance"]["border-top-width"] == "1px"
+                assert topic["appearance"]["border-right-width"] == "1px"
                 assert topic["gap"] == home["gap"] == "normal"
                 assert topic["height"] == pytest.approx(home["height"], abs=0.1)
             topic_group = page.locator('[aria-labelledby="news-topics-label"]')
@@ -1316,7 +1462,7 @@ def test_news_facets_history_bookmarks_and_shared_meters(
                 assert group_box["y"] <= box["y"]
                 assert box["y"] + box["height"] <= group_box["y"] + group_box["height"]
                 sync_api.expect(button).to_have_css("white-space", "nowrap")
-                sync_api.expect(button).to_have_css("border-right-width", "0px")
+                sync_api.expect(button).to_have_css("border-right-width", "1px")
                 if topic := button.get_attribute("data-news-topic"):
                     sample = page.evaluate(
                         NEWS_FILTERS,
@@ -1326,16 +1472,19 @@ def test_news_facets_history_bookmarks_and_shared_meters(
                         },
                     )["chooser"]
                     assert sample["label"] == sample["chip_label"]
-                    assert (
-                        sample["appearance"]["background-color"]
-                        == sample["chip"]["background-color"]
-                    )
+                    pressed_under_pointer(button, topic, scheme)
             if width == 390:
                 assert len(rows) > 1
             request.node.user_properties.append(
                 (f"chooser-{scheme}", str(appearances["home"]["selected", "normal"]))
             )
             seen = state()
+            if screenshot_dir := os.environ.get("SQPACK_NEWS_SCREENSHOT_DIR"):
+                page.locator(".site-news-filters").screenshot(
+                    path=str(Path(screenshot_dir) / f"news-chooser-{scheme}-{width}.png")
+                )
+            palette = seen["topic_palette"]
+            assert len(set(palette.values())) == len(palette)
             assert seen["groups"] == [
                 {"name": "Significance", "hidden_legend": True, "tabs": 0},
                 {"name": "Topics", "hidden_legend": True, "tabs": 0},
@@ -1357,7 +1506,10 @@ def test_news_facets_history_bookmarks_and_shared_meters(
                 != appearances["home"]["selected", "normal"]["appearance"]["font-size"]
             ), "the contract must reject a page-specific chooser override"
             page.goto(f"{ORIGIN}results.html", wait_until="load")
-            results_count = state()["count_style"]
+            results_state = state()
+            results_count = results_state["count_style"]
+            for topic in set(palette) & set(results_state["topic_palette"]):
+                assert palette[topic] == results_state["topic_palette"][topic]
             for key in ("font-family", "font-size", "font-weight", "line-height", "color"):
                 assert news_count[key] == results_count[key], (scheme, key)
         page.emulate_media(color_scheme="light")
@@ -1365,6 +1517,7 @@ def test_news_facets_history_bookmarks_and_shared_meters(
     try:
         shared_chooser_contract()
         page.goto(f"{ORIGIN}news.html?reader=kept", wait_until="load")
+        score_explanations_leave_the_filters_free()
         seen = check({4, 5})
         assert seen["scores"] == ["4", "5"]
         used_topics = {topic for entry in entries for topic in entry.get("topics", [])}
@@ -1380,6 +1533,11 @@ def test_news_facets_history_bookmarks_and_shared_meters(
         page.locator('button[data-news-score="3"]').focus()
         page.keyboard.press("Space")
         check({3, 4, 5})
+        # A press is the button's own action, so its explanation steps aside rather than
+        # cover the topic filters that follow it.
+        sync_api.expect(
+            page.locator(".site-rating-tooltip.kpress-tooltip-visible")
+        ).to_have_count(0)
         for topic in used_topics:
             if topic != "optimality":
                 page.locator(f'button[data-news-topic="{topic}"]').click()
@@ -1388,12 +1546,20 @@ def test_news_facets_history_bookmarks_and_shared_meters(
         check({3, 4, 5}, {"optimality", "verification"})
         page.locator("[data-news-reset]").click()
         check({4, 5})
+        for topic in used_topics:
+            page.locator(f'button[data-news-topic="{topic}"]').click()
+        check({4, 5}, set())
+        assert parse_qs(urlsplit(page.url).query)["news-topics"] == ["none"]
+        page.locator("[data-news-reset]").click()
+        check({4, 5})
+        assert "news-topics" not in parse_qs(urlsplit(page.url).query)
         for score in (4, 5):
             button = page.locator(f'button[data-news-score="{score}"]')
             button.tap() if width == 390 else button.click()
         check(set())
         assert parse_qs(urlsplit(page.url).query)["news-s"] == ["none"]
-        page.locator('[data-news-all="scores"]').click()
+        for score in (3, 4, 5):
+            page.locator(f'button[data-news-score="{score}"]').click()
         check({3, 4, 5})
         page.locator("[data-news-reset]").click()
         check({4, 5})
@@ -1432,25 +1598,6 @@ def test_news_facets_history_bookmarks_and_shared_meters(
         page.goto(f"{ORIGIN}news.html?reader=kept#%E0%A4%A", wait_until="load")
         check({4, 5})
         assert errors == [], "a malformed bookmark must not break either enhancement"
-        specimens = "".join(
-            overview_sections.significance_mark(level, "Importance only.")
-            for level in range(overview_sections.SIGNIFICANCE_TOP + 1)
-        )
-        samples = page.evaluate(NEWS_FILTERS, {"meters": specimens})["samples"]
-        assert len(samples) == 6
-        assert (
-            max(item["width"] for item in samples) - min(item["width"] for item in samples)
-            <= 0.1
-        )
-        for item in samples:
-            assert item["filled"] == item["level"]
-            assert item["border"] == 1
-            assert len(item["bars"]) == 5
-            for bar in item["bars"]:
-                assert bar["border"] == 1
-                assert bar["height"] > 0.5 * item["font"]
-                assert bar["width"] > 0.4 * item["font"]
-                assert (bar["fill"] == "rgba(0, 0, 0, 0)") is (not bar["filled"])
         static = browser.new_page(
             viewport={"width": width, "height": 900}, java_script_enabled=False
         )
@@ -1465,5 +1612,55 @@ def test_news_facets_history_bookmarks_and_shared_meters(
             )
         finally:
             static.close()
+    finally:
+        page.close()
+
+
+@pytest.mark.parametrize("width", WIDTHS)
+def test_significance_meter_spacing_rejects_oversized_boxes(
+    browser: Any, payloads: dict[str, bytes], width: int
+) -> None:
+    page = browser.new_page(viewport={"width": width, "height": 900}, reduced_motion="reduce")
+    _serve(page, payloads)
+    try:
+        page.goto(f"{ORIGIN}news.html", wait_until="load")
+        specimens = "".join(
+            overview_sections.significance_mark(level, "Importance only.")
+            for level in range(overview_sections.SIGNIFICANCE_TOP + 1)
+        )
+        samples = page.evaluate(NEWS_FILTERS, {"meters": specimens})["samples"]
+        assert len(samples) == 6
+        assert (
+            max(item["width"] for item in samples) - min(item["width"] for item in samples)
+            <= 0.1
+        )
+        for item in samples:
+            assert item["filled"] == item["level"]
+            assert item["border"] == 1
+            assert item["border_color"] == item["color"]
+            assert item["side_space"] <= 0.7 * item["font"]
+            assert item["fits"], item
+            assert item["side_space"] >= 2 * (item["border"] + item["padding"]) - 0.5, item
+            assert len(item["bars"]) == 5
+            for bar in item["bars"]:
+                assert bar["border"] == 1
+                assert bar["height"] > 0.5 * item["font"]
+                assert bar["width"] > 0.4 * item["font"]
+                assert (bar["fill"] == "rgba(0, 0, 0, 0)") is (not bar["filled"])
+        oversized = page.evaluate(NEWS_FILTERS, {"meters": specimens, "meterSize": "7em"})[
+            "samples"
+        ]
+        assert all(item["side_space"] > 0.7 * item["font"] for item in oversized), (
+            "the spacing probe must reject excessive meter whitespace",
+            oversized,
+        )
+        crowded = page.evaluate(NEWS_FILTERS, {"meters": specimens, "meterSize": "3.6em"})[
+            "samples"
+        ]
+        assert all(
+            not item["fits"]
+            or item["side_space"] < 2 * (item["border"] + item["padding"]) - 0.5
+            for item in crowded
+        ), ("the spacing probe must reject a meter its label and bars overflow", crowded)
     finally:
         page.close()
