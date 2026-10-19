@@ -2,11 +2,12 @@
 
 from __future__ import annotations
 
+import os
 import signal
 import subprocess
 import sys
 import time
-from collections.abc import Sequence
+from collections.abc import Iterator, Sequence
 from pathlib import Path
 from typing import Any, cast
 
@@ -47,6 +48,14 @@ def add(repo: Path, name: str, data: bytes) -> None:
     git(repo, "add", "--", name)
 
 
+@pytest.fixture(autouse=True)
+def isolated_git_environment(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Inherited Git settings can override cwd for fixture writes and guard reads."""
+    for name in tuple(os.environ):
+        if name.startswith("GIT_"):
+            monkeypatch.delenv(name)
+
+
 @pytest.fixture
 def repo(tmp_path: Path) -> tuple[Path, str]:
     path = tmp_path / "storage repo"
@@ -54,6 +63,58 @@ def repo(tmp_path: Path) -> tuple[Path, str]:
     git(path, "init", "-qb", "main")
     add(path, "seed.txt", b"seed")
     return path, commit(path)
+
+
+@pytest.fixture(scope="class", params=["index", "repository"])
+def foreign_git_environment(
+    request: pytest.FixtureRequest, tmp_path_factory: pytest.TempPathFactory
+) -> Iterator[tuple[Path, bytes, str]]:
+    """Inject before function fixtures, with sentinel setup safe from caller redirects."""
+    with pytest.MonkeyPatch.context() as environment:
+        for name in tuple(os.environ):
+            if name.startswith("GIT_"):
+                environment.delenv(name)
+        sentinel = tmp_path_factory.mktemp("foreign-git")
+        git(sentinel, "init", "-qb", "main")
+        git(sentinel, "commit", "-qm", "sentinel", "--allow-empty")
+        git(sentinel, "read-tree", "--empty")
+        index = (sentinel / ".git/index").read_bytes()
+        refs = git(sentinel, "show-ref", "--head")
+        # A redirected add can succeed, so the test detects mutation rather than setup failure.
+        (sentinel / "seed.txt").write_bytes(b"foreign seed")
+        if cast("str", request.param) == "index":
+            environment.setenv("GIT_INDEX_FILE", str(sentinel / ".git/index"))
+        else:
+            environment.setenv("GIT_DIR", str(sentinel / ".git"))
+            environment.setenv("GIT_WORK_TREE", str(sentinel))
+        yield sentinel, index, refs
+
+
+class TestGitEnvironmentIsolation:
+    def test_fixture_and_guard_leave_foreign_index_and_refs_unchanged(
+        self, foreign_git_environment: tuple[Path, bytes, str], repo: tuple[Path, str]
+    ) -> None:
+        """F1: real fixture initialization, writes and guard reads stay in the fixture."""
+        sentinel, index, refs = foreign_git_environment
+        path, base = repo
+        assert (sentinel / ".git/index").read_bytes() == index
+        assert git(sentinel, "show-ref", "--head") == refs
+        assert (path / ".git/index").is_file()
+        assert git(path, "ls-files") == "seed.txt"
+        assert git(path, "rev-parse", "HEAD") == base
+        add(path, "own.txt", b"ok")
+        staged = tool.inventory(path, base, staged=True)
+        assert [(blob.size, blob.paths) for blob in staged] == [(2, ("own.txt",))]
+        head = commit(path)
+        assert head != base
+        assert git(path, "rev-list", f"{base}..HEAD") == head
+        assert git(path, "ls-files") == "own.txt\nseed.txt"
+        assert [(blob.size, blob.paths) for blob in tool.inventory(path, base)] == [
+            (2, ("own.txt",))
+        ]
+        assert (sentinel / ".git/index").read_bytes() == index
+        assert git(sentinel, "show-ref", "--head") == refs
+        assert git(sentinel, "write-tree") == git(sentinel, "rev-parse", "HEAD^{tree}")
 
 
 def test_stack_uses_actual_lower_branch_not_main(repo: tuple[Path, str]) -> None:
