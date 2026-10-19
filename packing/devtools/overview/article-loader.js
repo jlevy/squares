@@ -92,6 +92,7 @@
       }
     }
     await loadMathStyles(parsed.content, responseUrl);
+    article.remove();
     return { article, responseUrl };
   };
 

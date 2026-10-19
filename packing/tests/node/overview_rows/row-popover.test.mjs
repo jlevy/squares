@@ -45,6 +45,9 @@ const COMPOUND = /^([a-z][a-z0-9]*)?((?:\[[^\]]+\]|\.[a-z-]+|:popover-open)*)$/;
  *   network, so every fetch is refused
  */
 function page(protocol = "https:") {
+  /** @type {{ shell: StandInElement, article: StandInElement }[]} */
+  const parsedArticles = [];
+
   class StandInElement {
     /**
      * @param {string} tag
@@ -172,6 +175,9 @@ function page(protocol = "https:") {
             : [],
         ),
       ]);
+      const article = this.content.querySelector("article");
+      assert.ok(article);
+      parsedArticles.push({ shell: this.content, article });
     }
 
     /** @param {StandInElement | null} fragment whose children become this element's */
@@ -518,6 +524,7 @@ function page(protocol = "https:") {
     caseLink,
     casePopover,
     requests,
+    parsedArticles,
     typeset,
     settled,
   };
@@ -916,14 +923,26 @@ void test("consumer mutations do not alter the cached pristine article", async (
   assert.equal(requests.length, 1);
 });
 
-void test("cached canonical headings stay pristine and each clone names its dialog", async () => {
-  const { fire, fetched, served, requests, settled } = page();
+void test("cached articles detach from response shells and give each clone scoped headings", async () => {
+  const { document, fire, fetched, served, requests, parsedArticles, settled } = page();
   served.set(
     "result/t-004.html",
-    '<article class="site-result" data-result-overview="t-004"><h1 id="t-004">Result</h1></article>',
+    '<link data-site-math-styles href="../assets/css/site-math-cache.css"><article class="site-result" data-result-overview="t-004"><h1 id="t-004">Result</h1></article>',
   );
   fire(fetched.text, "click");
   await settled();
+  const cached = parsedArticles[0];
+  assert.ok(cached);
+  assert.equal(cached.article.parentElement, cached.shell, "styles are read before detaching");
+  const stylesheet = document.head.children[0];
+  assert.ok(stylesheet);
+  assert.equal(stylesheet.href, "https://example.test/squares/assets/css/site-math-cache.css");
+  fire(stylesheet, "load");
+  await settled();
+  assert.equal(cached.article.parentElement, null, "the cache retains no response shell");
+  assert.equal(cached.shell.querySelector("article"), null);
+  assert.notEqual(fetched.body.children[0], cached.article);
+  assert.equal(cached.article.querySelector("h1")?.id, "t-004");
   const title = fetched.body.querySelector("h1");
   assert.ok(title);
   assert.ok(!title.hasAttribute("hidden"));
@@ -942,4 +961,5 @@ void test("cached canonical headings stay pristine and each clone names its dial
   assert.ok(!freshTitle.hasAttribute("hidden"));
   assert.equal(fetched.popover.getAttribute("aria-labelledby"), freshTitle.id);
   assert.equal(requests.length, 1);
+  assert.equal(parsedArticles.length, 1);
 });
