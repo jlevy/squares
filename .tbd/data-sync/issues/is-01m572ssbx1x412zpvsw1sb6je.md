@@ -5,7 +5,7 @@ title: "W1/W2: review all open PRs and reconcile interrupted October intake"
 kind: task
 status: in_progress
 priority: 1
-version: 27
+version: 28
 delegate: claude-code@spud10.local
 labels: []
 dependencies: []
@@ -30,10 +30,11 @@ child_order_hints:
   - is-01m575zy2gr4kpky57z3mqhxjv
   - is-01m578snhcmb9xf25bnb3atvy8
   - is-01m580jcwqncaqmsjw88qv7p8z
+  - is-01m58r5901xpf3e6vy8wwh9mrh
 hold: null
 hold_until: null
 created_at: 2026-10-18T08:42:07.601Z
-updated_at: 2026-10-18T17:22:22.688Z
+updated_at: 2026-10-19T00:14:38.592Z
 started_at: 2026-10-18T08:43:11.587Z
 closed_at: null
 close_reason: null
