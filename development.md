@@ -2458,8 +2458,8 @@ is the rule; this is how to follow it.
   still fails. The total is the sum over every distinct blob version new to history,
   which is what the merge commit keeps: a version the head deleted or reverted, each
   edit of one path and a grandfathered path’s rewrites all count, and identical copies
-  count once. A blob the base already stores, such as a copy of a base file, is held to
-  the per-blob ceiling but adds nothing to the total, and so does a mode-only change.
+  count once. A blob in the base’s tree, such as a copy of a base file, is held to the
+  per-blob ceiling but adds nothing to the total, and so does a mode-only change.
   A path already over 5 MiB at the base is grandfathered from the per-blob ceiling until
   `think-xeav` moves it to hosted data; a new path, a copy or an edited rename is not.
   A Git LFS pointer is refused, since the repository does not use LFS. `--help` has the

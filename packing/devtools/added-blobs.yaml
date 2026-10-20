@@ -24,7 +24,7 @@
 # 69.64 MiB, #249 at 53.72, #262 at 53.15 and #248 at 49.57, and each of them regenerated
 # the atlas posters six to ten times (36.6 to 56.1 MiB of that under
 # packing/atlas/known-best). The largest passing total is #580's 45.65 MiB. The last 40
-# merges, #625 to #696, all pass, at most #676's 25.00 MiB. Whether the total should
+# merges, back to #630, all pass, at most #676's 25.00 MiB. Whether the total should
 # refuse those four is the owner's decision on #406.
 #
 # Re-measure before changing either, from `packing/`:
