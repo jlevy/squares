@@ -13156,7 +13156,7 @@ issues:
       regularized by both strong generators in the same pull request. The drawn view is this
       project''s run of Evan Daniel''s regularizer at the same side; the source''s own regularized
       certificate is retained and not executed.'
-    read_through: '2026-10-20T17:43:20Z'
+    read_through: '2026-10-20T01:39:41Z'
     results:
     - key: n183
       claim: s(183) <= 13999580178736252502081470897571/1000000000000000000000000000000 = 13.999580178736252502081470897571,
@@ -13197,12 +13197,6 @@ issues:
         id: T-220
         verification: V3
         confirmation: C3
-        status: confirmed
-      - result: n183
-        id: E-evand-680-n183-report
-        status: reviewed
-      - result: n183
-        id: E-evand-680-n183-primary-exact-feasibility
         status: confirmed
       corrects:
       - https://github.com/jlevy/squares/issues/680#issuecomment-6268897692
