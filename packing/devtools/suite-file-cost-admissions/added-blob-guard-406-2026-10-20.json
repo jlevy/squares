@@ -3,13 +3,13 @@
   "shard": null,
   "provenance": {},
   "exit_status": 0,
-  "tests": 58,
-  "seconds": 12.744,
+  "tests": 80,
+  "seconds": 13.498,
   "files": [
     {
       "file": "packing/tests/test_added_blob_guard.py",
-      "tests": 58,
-      "seconds": 12.744
+      "tests": 80,
+      "seconds": 13.498
     }
   ],
   "module_scope": {
@@ -46,7 +46,7 @@
       "collectonly": false
     },
     "collected_tests": {
-      "packing/tests/test_added_blob_guard.py": 58
+      "packing/tests/test_added_blob_guard.py": 80
     },
     "deselected_tests": 0
   }
