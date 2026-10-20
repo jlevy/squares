@@ -29730,9 +29730,9 @@ results:
     significance:
       score: 3
       rationale: >-
-        A continuation of #561's arrangement to a new local minimum 4.46e-05 below the
-        case, as T-119's new arrangements and T-130's refinements are; above T-188's
-        9.29e-06 (S2).
+        A continuation of #561's arrangement to a packing the source calls a different
+        local minimum, 4.46e-05 below the case, as T-119's new arrangements and T-130's
+        refinements are; above T-188's 9.29e-06 (S2).
       scored: '2026-10-19'
       by: >-
         the 19 October review
