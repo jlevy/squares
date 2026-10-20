@@ -1573,6 +1573,60 @@ class ReleaseNoPublicChange(NamedTuple):
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
     ReleaseNoPublicChange(
+        components=("site",),
+        paths=("packing/devtools/check_rational_witness_independent.py",),
+        outputs=("atlas.html", "index.html", "results.html"),
+        reason=(
+            "Reviewed October 20, 2026 against main ded4727b (think-uomm): check_squares now "
+            "takes each square's intervals on its own two edge normals once rather than once "
+            "per pair, and builds the same eight exact Fraction gaps in the same order, so "
+            "every pair gap and verdict it returns is unchanged. "
+            "test_rational_witness_independent_contract holds it to the old pair_gap, kept "
+            "verbatim, by Fraction equality on adversarial cases and retained views, and "
+            "regularize_axis_components --verify-atlas passed with it, re-deriving the "
+            "regularized index (which records the checker's verdict and pair count) and every "
+            "retained view byte-identical. The checker is a candidate input only as a member "
+            "of the site builders' import closure; no retained record changes, and the atlas, "
+            "home and results pages draw those records. This is a measured disposition of the "
+            "checker's outputs; no site rebuild byte comparison is claimed."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=("packing/devtools/check_rational_witness_independent.py",),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-lower-bounds-explainer.pdf",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-optimality-review.pdf",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/n11-threshold-bound-review.pdf",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+            "papers/square-packing-methods-survey.pdf",
+        ),
+        reason=(
+            "Reviewed October 20, 2026 against main ded4727b (think-uomm): the independent "
+            "checker computes each square's own-axis intervals once and returns the same "
+            "exact gaps and verdicts, held to its old pair_gap verbatim by "
+            "test_rational_witness_independent_contract and confirmed by a passing "
+            "regularize_axis_components --verify-atlas, which requires the regularized index "
+            "and views byte-identical. The checker is a candidate input only as a member of "
+            "the paper builders' import closure; manuscripts, figures, scientific inputs, "
+            "retained records and paper metadata are unchanged, and every paper keeps its "
+            "edition. This is a measured disposition of the checker's outputs; no paper "
+            "render or PDF redraw is claimed."
+        ),
+    ),
+    ReleaseNoPublicChange(
         components=("paper:n11-lower-bounds-explainer",),
         paths=(
             "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
