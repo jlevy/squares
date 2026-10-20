@@ -88,6 +88,14 @@ class PublicationHistoryEntry(NamedTuple):
 #: for each deployment's commit, what the page it built stated.
 PUBLICATION_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.8.7",
+        first_published="October 20, 2026",
+        result_scope=(
+            "The synopsis defines the house best packing, and the conventions write house "
+            "only as a modifier."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.8.6",
         first_published="October 20, 2026",
         result_scope=(
@@ -1095,6 +1103,16 @@ class ReleaseImpactDecision(NamedTuple):
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
     ReleaseImpactDecision(
         component="site",
+        previous_version="v0.8.6",
+        version="v0.8.7",
+        impact="patch",
+        reason=(
+            "The synopsis defines the house best packing, and the conventions write house "
+            "only as a modifier."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="site",
         previous_version="v0.8.5",
         version="v0.8.6",
         impact="patch",
@@ -1736,12 +1754,12 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "papers/n11-lower-bounds-explainer.md",
         ),
         reason=(
-            "The site v0.8.6 cut for the house best packing terminology (think-9v1i) "
+            "The site v0.8.7 cut for the house best packing terminology (think-9v1i) "
             "regenerated the five claim documents, and each of the 22 changed lines differs "
-            "from main only in its source-link revision, efd41b91 to 12ef5b93. The "
-            "explainer links those documents rather than inlining them, so its HTML and "
-            "Markdown are unchanged by them and it keeps v0.4.10. This is a source-reviewed "
-            "disposition, as #695's was for v0.8.2."
+            "from main 99cfcc8a only in its source-link revision, e6b9d98c to 9cd35d1e. "
+            "The explainer links those documents rather than inlining them, so its HTML "
+            "and Markdown are unchanged by them and it keeps v0.4.11. This is a "
+            "source-reviewed disposition, as #695's was for v0.8.2."
         ),
     ),
     ReleaseNoPublicChange(
@@ -1752,10 +1770,10 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "papers/square-packing-methods-survey.md",
         ),
         reason=(
-            "Reviewed October 20, 2026 against main f8d54772 (think-9v1i): the frontier "
+            "Reviewed October 20, 2026 against main 99cfcc8a (think-9v1i): the frontier "
             "README's two house-rule passages now name the house best packing and link "
             "the synopsis's definition, and nothing else in it changes. Rendered with "
-            "render_packing_methods at link revision f8d54772, once from this branch's "
+            "render_packing_methods at link revision 99cfcc8a, once from this branch's "
             "tree and once with main's copy of frontier/README.md: all 42 files it writes "
             "are byte-identical, and its PDF prints from that HTML and was not rebuilt. "
             "The survey keeps v0.2.3."
@@ -5504,7 +5522,7 @@ def validate_release_impacts(
 #: fresh render, so a link naming the build commit would fail their drift check forever. It is
 #: in no version string. It moves when the claim documents are regenerated for an edition. It
 #: must be a commit on `main`; the site's own links name `main` itself (`devtools.repo_links`).
-PUBLICATION_REVISION = "e6b9d98c"
+PUBLICATION_REVISION = "9cd35d1e"
 
 
 def data_pathspec() -> tuple[str, ...]:
