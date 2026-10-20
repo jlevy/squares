@@ -1527,8 +1527,8 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         ),
         reason=(
             "Rendered at link revision 028bc72e (main, with #658 and #646), once with main's "
-            "requests record and once with this branch's, render_packing_methods writes "
-            "42 files, byte-identical between the two. The PDF prints from that HTML. "
+            "requests record and once with this branch's, the 42 files "
+            "render_packing_methods writes are byte-identical. The PDF prints from that HTML. "
             "The record gains the #639 final reply and the #640 import reply of "
             "19 October 2026 and closes #639, which the survey does not read, so it "
             "keeps v0.2.3."
