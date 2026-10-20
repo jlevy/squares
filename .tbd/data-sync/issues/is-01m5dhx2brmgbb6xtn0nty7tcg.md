@@ -5,14 +5,14 @@ title: "Docs: 'house' only as a modifier ('house best packing'), never a bare no
 kind: task
 status: in_progress
 priority: 2
-version: 2
+version: 3
 delegate: c-lane-house-term
 labels: []
 dependencies: []
 hold: null
 hold_until: null
 created_at: 2026-10-20T21:01:30.358Z
-updated_at: 2026-10-20T21:01:35.252Z
+updated_at: 2026-10-20T21:02:52.227Z
 started_at: 2026-10-20T21:01:35.252Z
 ---
-Owner, 2026-10-20: 'house' should not be a noun; 'house best packing' is fine; 'algebraic' is fine in its math sense. Rewrite living docs and generated prose so 'house' appears only as a modifier (the case's house best packing; house best packings with algebraic sides; 'changes the house best packing at 37 counts' rather than 're-houses'). Define 'house best packing' in SYNOPSIS terminology and add a conventions.md section 5 rule against bare-noun 'house' and coined compounds. Dated records (reviews, handoffs, postmortems, agent sessions, archived resources) are not retrofitted. Code identifiers (select_houses, PENDING_ADOPTION, upper_bound_houses) stay; a glossary line maps them.
+Owner, 2026-10-20: 'house' should not be a noun; 'house best packing' (the project's own chosen packing, as used for graphics) is fine; 'algebraic' is fine in its math sense. Then narrowed: 'don't make a major rewrite of too many lines of code, keep it focused but define terms and consolidate as best we can'. Scope: define 'house best packing' in SYNOPSIS terminology (with the code-identifier mapping), add a conventions.md section 5 rule, consolidate the house rule's explanations onto result-import.md with short forms elsewhere, and fix bare-noun uses only in definitional passages and reader-facing headlines. No renderer or generated-page sweep, no code renames.
