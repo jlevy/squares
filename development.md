@@ -1088,14 +1088,17 @@ A test session leaves behind only what someone needs to inspect a failure.
   ends unless a test failed while it was open.
   A plain `tmp_path_factory.mktemp` holds its disk until the session ends.
 - A session killed before its exit (a validation deadline, a cancelled gate, an agent’s
-  command timeout, a restarted machine) used to keep its whole tree for three days,
-  because pytest honours a dead session’s `.lock` that long.
-  The plugin records each session’s PID and PID namespace beside its lock, and the next
-  session releases the locks of recorded sessions that have exited, so pytest’s own
-  retention prunes them.
-  Anything it cannot attribute to an exited process in its own PID namespace keeps its
-  lock: a session given `--basetemp`, an xdist worker’s directory, or a container
-  sharing the same `/tmp`.
+  command timeout) used to keep its whole tree for three days, because pytest honours a
+  dead session’s `.lock` that long.
+  On Linux the plugin records each session’s PID, kernel boot and PID namespace beside
+  its lock as pytest makes the directory, and the next session releases the lock of
+  every recorded session that has exited.
+  Releasing only unlocks the tree: pytest’s retention deletes it once two newer sessions
+  are retained, so at most two failed or killed trees remain.
+  Anything the plugin cannot attribute to an exited process in its own boot and PID
+  namespace keeps its lock for pytest’s three days: a session from before a restart,
+  from a container or machine sharing the directory, or from any host other than Linux;
+  a session given `--basetemp`; and an xdist worker’s directory.
 
 Measured on 20 October 2026 over the quick lane (about 19,200 tests on two xdist workers
 on a shared four-CPU host, with a fresh `TMPDIR` sampled every five seconds): on main,
@@ -1107,15 +1110,20 @@ MiB when five load-sensitive tests failed).
 The peak fell to 347 MiB, almost all of it the negative controls’ worker snapshot, and
 the wall did not change measurably (2,795 s before, 2,755 s after).
 
-To see what a run writes, point `TMPDIR` at a fresh directory and summarize the report:
+To see what a run writes, point `TMPDIR` at a fresh directory and summarize the report.
+From `packing/`, this is the measured run:
 
 ```shell
 run="$(mktemp -d)" && mkdir "$run/tmp"
-TMPDIR="$run/tmp" uv run --frozen --all-extras --group dev pytest -q -n 2 \
-  -m "not exhaustive_exact and not slow" \
-  --tmp-usage "$run/usage.jsonl" --tmp-usage-root "$run/tmp"
+TMPDIR="$run/tmp" uv run --frozen --all-extras --group dev pytest -q \
+  tests ../packages/workbench/tests --ignore=tests/test_browser_floor_contract.py \
+  -m "not exhaustive_exact and not slow" -n 2 --dist=loadfile \
+  --tmp-usage "$run/usage.jsonl" --tmp-usage-root "$run/tmp" --tmp-usage-interval 5
 uv run --frozen --all-extras --group dev python -m devtools.pytest_tmp summarize "$run/usage.jsonl"
 ```
+
+The quick lane’s `--dist=loadfile` matters to the peak: under plain `--dist load` a
+module-scoped tree can be built on both workers at once.
 
 ### What each tier costs, and where its ceiling lives
 

@@ -11,23 +11,25 @@ and writes the session's PID to a `.lock` file inside it, removing the lock at e
 Every later session prunes the numbered directories beyond the newest
 `tmp_path_retention_count`, but skips any whose lock is younger than three days. A
 session that never reaches its exit -- SIGTERM from a validation deadline or a cancelled
-gate, SIGKILL, an agent's command timeout, a restarted machine -- leaves its lock behind,
-so its whole tree outlives every later session for three days. On 2026-10-16 that left
-about 11 GB in `/tmp/pytest-of-root` across 19 numbered directories, with `pytest-3`
-still present beside `pytest-132`.
+gate, SIGKILL, an agent's command timeout -- leaves its lock behind, so its whole tree
+outlives every later session for three days. On 2026-10-16 that left about 11 GB in
+`/tmp/pytest-of-root` across 19 numbered directories, with `pytest-3` still present
+beside `pytest-132`.
 
-So a session that uses the shared numbered root (not an xdist worker, not one given
-`--basetemp`) writes an owner record, `.lock-owner`, beside its lock once pytest has made
-the directory -- as an xdist controller configures its workers, or after the test phase
-that first used it: its PID and its PID namespace. At the start of each such session,
-`release_dead_locks` removes the lock of every `pytest-N` whose owner record names the
-lock's PID, names this process's PID namespace, and whose process no longer exists.
-pytest's own retention at that session's exit then treats those directories as finished
-sessions: the ones beyond the newest `tmp_path_retention_count` are deleted, the rest
-are kept. Anything in doubt keeps its lock and waits for pytest's three days: a live or
-unreadable PID, a lock or record that is absent or half-written, a session from another
-PID namespace (a container sharing the same `/tmp`, where the PID means another
-process), or one that predates this plugin. A reused PID errs the same way.
+So on Linux a session that uses the shared numbered root (not an xdist worker, not one
+given `--basetemp`) writes an owner record, `.lock-owner`, beside its lock as soon as
+pytest makes the directory: its PID and its PID scope, the kernel boot and PID namespace
+in which that PID names it. At the start of each such session, `release_dead_locks`
+removes the lock of every `pytest-N` whose owner record names the lock's PID and this
+process's PID scope, and whose process no longer exists. That only releases the
+directory: pytest's own retention at the session's exit deletes it once it is beyond the
+newest `tmp_path_retention_count` numbered directories, so at most that many failed or
+killed sessions stay. Anything in doubt keeps its lock and waits for pytest's three days:
+a live, unreadable or out-of-range PID, a lock or record that is absent or half-written,
+a session from another boot (a restarted machine) or another PID namespace (a container
+or machine sharing the same directory, where the PID means another process), one that
+predates this plugin, any session off Linux, and a root that is not a directory private
+to this user. A reused PID errs the same way.
 
 pytest deletes a directory by locking it with the deleting process's PID, renaming it to
 `garbage-<uuid>` and removing the tree; a deleter killed part-way leaves that garbage and
@@ -63,6 +65,7 @@ import sys
 import tempfile
 import threading
 import time
+import uuid
 from collections import defaultdict
 from collections.abc import Callable, Iterator, Sequence
 from contextlib import contextmanager, suppress
@@ -73,11 +76,14 @@ from typing import Any
 import pytest
 
 SCHEMA = "pytest-tmp-usage-v1"
-OWNER_SCHEMA = "pytest-tmp-owner-v1"
+OWNER_SCHEMA = "pytest-tmp-owner-v2"
 NUMBERED_PREFIX = "pytest-"
 GARBAGE_PREFIX = "garbage-"
 LOCK_NAME = ".lock"
 OWNER_NAME = ".lock-owner"
+#: More digits than any PID: Linux's `pid_max` is at most 2**22, seven digits.
+MAX_PID_DIGITS = 10
+MAX_OWNER_BYTES = 4096
 DEFAULT_INTERVAL_SECONDS = 2.0
 PEAK_OWNERS = 20
 
@@ -95,29 +101,31 @@ def numbered_root() -> Path:
     return temproot.resolve() / f"pytest-of-{user}"
 
 
-def pid_namespace() -> str | None:
-    """Where this process's PIDs name processes: its PID namespace on Linux.
+def pid_scope() -> str | None:
+    """The kernel boot and PID namespace in which this process's PIDs name processes.
 
-    Elsewhere on POSIX a PID names the same process machine-wide. None when the namespace
-    cannot be read, and then no numbered directory's lock is ever released.
+    A namespace's inode is unique only within one running kernel -- the initial PID
+    namespace has the same inode on every Linux machine -- so the boot ID comes with it.
+    None off Linux, or when either cannot be read, and then no numbered directory's lock
+    is ever released.
     """
-    if os.name != "posix":
-        return None  # os.kill(pid, 0) terminates the process on Windows
-    if sys.platform.startswith("linux"):
-        try:
-            return f"linux {Path('/proc/self/ns/pid').readlink()}"
-        except OSError:
-            return None
-    return sys.platform
+    if not sys.platform.startswith("linux"):
+        return None
+    try:
+        boot = Path("/proc/sys/kernel/random/boot_id").read_text(encoding="ascii").strip()
+        namespace = Path("/proc/self/ns/pid").readlink()
+    except OSError, UnicodeDecodeError:
+        return None
+    return f"linux boot {boot} {namespace}" if boot else None
 
 
-def owner_record(pid: int, namespace: str) -> dict[str, object]:
-    return {"schema": OWNER_SCHEMA, "pid": pid, "pid_namespace": namespace}
+def owner_record(pid: int, scope: str) -> dict[str, object]:
+    return {"schema": OWNER_SCHEMA, "pid": pid, "pid_scope": scope}
 
 
-def write_owner(directory: Path, namespace: str) -> None:
+def write_owner(directory: Path, scope: str) -> None:
     """Record this process as the owner of the numbered directory pytest just made."""
-    text = json.dumps(owner_record(os.getpid(), namespace), sort_keys=True)
+    text = json.dumps(owner_record(os.getpid(), scope), sort_keys=True)
     with suppress(OSError):
         (directory / OWNER_NAME).write_text(text, encoding="ascii")
 
@@ -128,38 +136,105 @@ def process_exists(pid: int) -> bool:
         os.kill(pid, 0)
     except ProcessLookupError:
         return False
-    except OSError:
-        return True  # EPERM: alive and someone else's
+    except OSError, OverflowError:
+        return True  # EPERM: alive and someone else's; OverflowError: not a PID at all
     return True
 
 
-def _lock_pid(directory: Path) -> int | None:
+def _private_root(root: Path) -> bool:
+    """Whether `root` is a real directory that only this user can enter, as pytest makes it.
+
+    pytest refuses a symlinked or foreign root only when it first makes a directory, which
+    is after this plugin has run, so the plugin checks for itself.
+    """
     try:
-        text = (directory / LOCK_NAME).read_text(encoding="ascii")
+        status = os.lstat(root)
+    except OSError:
+        return False
+    return (
+        stat.S_ISDIR(status.st_mode)
+        and status.st_uid == os.getuid()
+        and stat.S_IMODE(status.st_mode) & 0o077 == 0
+    )
+
+
+def _read_small(name: str, directory: int, limit: int) -> str | None:
+    """A regular file's ASCII text, read inside the open `directory`, or None for any doubt."""
+    try:
+        descriptor = os.open(name, os.O_RDONLY | os.O_NOFOLLOW, dir_fd=directory)
+    except OSError:
+        return None
+    try:
+        status = os.fstat(descriptor)
+        if not stat.S_ISREG(status.st_mode) or status.st_size > limit:
+            return None
+        return os.read(descriptor, limit).decode("ascii")
     except OSError, UnicodeDecodeError:
         return None
-    if not text.isdecimal():
+    finally:
+        os.close(descriptor)
+
+
+def _lock_pid(directory: int, name: str = LOCK_NAME) -> int | None:
+    """The PID a lock names, or None for any doubt."""
+    text = _read_small(name, directory, MAX_PID_DIGITS)
+    if text is None or not text.isdecimal():
         return None  # absent or half-written: its owner may be creating it now
     pid = int(text)
     return pid if pid > 0 else None
 
 
-def _owned_by(directory: Path, pid: int, namespace: str) -> bool:
-    try:
-        record = json.loads((directory / OWNER_NAME).read_text(encoding="ascii"))
-    except OSError, ValueError:
+def _owned_by(directory: int, pid: int, scope: str) -> bool:
+    text = _read_small(OWNER_NAME, directory, MAX_OWNER_BYTES)
+    if text is None:
         return False
-    return record == owner_record(pid, namespace)
+    try:
+        record = json.loads(text)
+    except ValueError:
+        return False
+    return record == owner_record(pid, scope)
 
 
-def release_dead_locks(root: Path, namespace: str | None) -> list[Path]:
+def _release(directory: int, *, garbage: bool, scope: str | None) -> bool:
+    pid = _lock_pid(directory)
+    if pid is None or pid == os.getpid() or process_exists(pid):
+        return False
+    if not garbage and (scope is None or not _owned_by(directory, pid, scope)):
+        return False
+    # The directory stays open from the checks to the unlink, so every step acts on the
+    # directory that was checked even if it is renamed meanwhile: a session that reuses
+    # its number makes a new directory, whose lock is never touched here. Inside this
+    # directory, a deleter may have locked it again since the read; so the lock is first
+    # taken aside by an atomic rename, and removed only if it still names the dead PID.
+    # Otherwise it goes back, unless a newer lock already stands in its place.
+    claimed = f"{LOCK_NAME}-releasing-{os.getpid()}-{uuid.uuid4().hex}"
+    try:
+        os.rename(LOCK_NAME, claimed, src_dir_fd=directory, dst_dir_fd=directory)
+    except OSError:
+        return False
+    released = _lock_pid(directory, claimed) == pid
+    if not released:
+        with suppress(OSError):
+            os.link(
+                claimed,
+                LOCK_NAME,
+                src_dir_fd=directory,
+                dst_dir_fd=directory,
+                follow_symlinks=False,
+            )
+    with suppress(OSError):
+        os.unlink(claimed, dir_fd=directory)
+    return released
+
+
+def release_dead_locks(root: Path, scope: str | None) -> list[Path]:
     """Remove the lock of every numbered or garbage directory whose owner has exited.
 
-    `namespace` is this process's `pid_namespace()`. Returns the directories released;
-    pytest's own retention deletes them later.
+    `scope` is this process's `pid_scope()`. Returns the directories released; pytest's
+    own retention deletes them later.
     """
-    if os.name != "posix":
-        return []
+    if os.name != "posix" or not _private_root(root):
+        return []  # os.kill(pid, 0) terminates the process on Windows
     try:
         entries = sorted(root.iterdir())
     except OSError:
@@ -167,53 +242,49 @@ def release_dead_locks(root: Path, namespace: str | None) -> list[Path]:
     released: list[Path] = []
     for entry in entries:
         garbage = entry.name.startswith(GARBAGE_PREFIX)
-        if not garbage and not entry.name.startswith(NUMBERED_PREFIX):
+        if not garbage and (scope is None or not entry.name.startswith(NUMBERED_PREFIX)):
             continue
-        if entry.is_symlink() or not entry.is_dir():
-            continue  # `pytest-current` is a symlink to the newest session
-        pid = _lock_pid(entry)
-        if pid is None or pid == os.getpid() or process_exists(pid):
+        try:
+            # Never through a symlink: `pytest-current` is one, and any other is planted.
+            directory = os.open(entry, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW)
+        except OSError:
             continue
-        if not garbage and (namespace is None or not _owned_by(entry, pid, namespace)):
-            continue
-        # Between the read above and this unlink another pytest may have deleted the
-        # directory, or released it and locked it to delete it; either way the tree is a
-        # dead session's, and the worst outcome is two processes removing it at once.
-        with suppress(OSError):
-            (entry / LOCK_NAME).unlink()
-            released.append(entry)
+        try:
+            if _release(directory, garbage=garbage, scope=scope):
+                released.append(entry)
+        finally:
+            os.close(directory)
     return released
 
 
 class SessionOwner:
-    """Write the owner record into this session's numbered directory once pytest makes it.
+    """`TempPathFactory.getbasetemp`, writing the owner record when it makes the directory.
 
-    pytest makes the directory on first use: in a serial session while some test sets up
-    or runs, in an xdist controller just before it configures each worker.
+    It takes the instance attribute's place, which `mktemp`, the `tmp_path` fixtures and
+    xdist's controller all call, so the record exists from the moment the lock does.
     """
 
-    def __init__(self, config: pytest.Config, namespace: str) -> None:
-        self.config = config
-        self.namespace = namespace
+    def __init__(self, factory: pytest.TempPathFactory, scope: str) -> None:
+        self.getbasetemp = factory.getbasetemp
+        self.scope = scope
         self.written = False
 
-    def record(self) -> None:
-        if self.written:
-            return
-        basetemp = _session_basetemp(self.config)
-        if basetemp is None:
-            return
-        self.written = True
-        write_owner(basetemp, self.namespace)
+    def __call__(self) -> Path:
+        basetemp = self.getbasetemp()
+        if not self.written:
+            self.written = True
+            write_owner(basetemp, self.scope)
+        return basetemp
 
-    @pytest.hookimpl(optionalhook=True)
-    def pytest_configure_node(self, node: object) -> None:
-        del node
-        self.record()
 
-    def pytest_runtest_logreport(self, report: pytest.TestReport) -> None:
-        del report
-        self.record()
+def _record_the_owner(config: pytest.Config, scope: str) -> None:
+    factory = getattr(config, "_tmp_path_factory", None)
+    if not isinstance(factory, pytest.TempPathFactory):
+        return
+    owner = SessionOwner(factory, scope)
+    vars(factory)["getbasetemp"] = owner
+    if _session_basetemp(config) is not None:
+        owner()  # another plugin made it during configure
 
 
 # -- measurement -----------------------------------------------------------------------
@@ -479,13 +550,15 @@ def pytest_addoption(parser: pytest.Parser) -> None:
     )
 
 
+@pytest.hookimpl(trylast=True)
 def pytest_configure(config: pytest.Config) -> None:
+    # trylast: pytest's own tmpdir plugin attaches the TempPathFactory in its configure.
     worker = hasattr(config, "workerinput")
     if not worker and config.getoption("basetemp") is None:
-        namespace = pid_namespace()
-        release_dead_locks(numbered_root(), namespace)
-        if namespace is not None:
-            config.pluginmanager.register(SessionOwner(config, namespace), "tmp-owner")
+        scope = pid_scope()
+        release_dead_locks(numbered_root(), scope)
+        if scope is not None:
+            _record_the_owner(config, scope)
     report = config.getoption("tmp_usage")
     if report is not None:
         interval = config.getoption("tmp_usage_interval")
