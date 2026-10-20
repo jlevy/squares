@@ -30180,12 +30180,14 @@ results:
       the family of Kevin Fang's #484 and Daniel's #489, mirrored, and says it is not a
       refinement of #489 and descends from neither. Measured here pose by pose, the
       packing is another arrangement of the two-wedge design the case's earlier house
-      holds, found from #481's 307 as the source describes. The author reports that his
-      two exact checkers accept the certificate and its 29-group regularized view at the
-      same side, and a KKT local minimum strict modulo 47 exact flat motions, with 242
-      corner-corner contacts, no corner-corner MILP descent, 5 rattlers and 102 tilted
-      squares; those are numerical evidence at 80 digits, not proofs. The source's credits
-      say the work was done with Claude (Anthropic) under Evan Daniel's direction.
+      holds, found from #481's 307 as the source describes.
+
+      The author reports that his two exact checkers accept the certificate and its
+      29-group regularized view at the same side, and a KKT local minimum strict modulo 47
+      exact flat motions, with 242 corner-corner contacts, no corner-corner MILP descent, 5
+      rattlers and 102 tilted squares; those are numerical evidence at 80 digits, not
+      proofs. The source's credits say the work was done with Claude (Anthropic) under
+      Evan Daniel's direction.
     scope: {n_values: [308]}
     verification: V3
     confirmation: C3
@@ -30240,12 +30242,14 @@ results:
       0.01 degrees and no tilt group shared exactly; against T-174, which refines it, 13
       squares move beyond a tenth and 295 stay within, and against #484's packing (T-135)
       12 and 296. Under the identity 263 of the 307 squares of #481's packing (T-136) lie
-      within a tenth of this one. The record keeps the word refinement for a pairing in
-      which no square moves beyond a tenth, so this is not a refinement of #489's packing,
-      as the issue says, but another arrangement of the two-wedge design that #484, #489
-      and #481's 307 share; that it was found from #481's 307 is the source's account,
-      which the measurement does not contradict. It lists no regularization. The source's
-      own matching against #489 prints 0.706 where the certificates measure 0.708.
+      within a tenth of this one.
+
+      The record keeps the word refinement for a pairing in which no square moves beyond a
+      tenth, so this is not a refinement of #489's packing, as the issue says, but another
+      arrangement of the two-wedge design that #484, #489 and #481's 307 share; that it was
+      found from #481's 307 is the source's account, which the measurement does not
+      contradict. It lists no regularization. The source's own matching against #489
+      prints 0.706 where the certificates measure 0.708.
 
       The source's own checkers were not run here. The two maintained routes share
       certificate parsing, half-angle conversion, Fraction arithmetic and the
@@ -30305,12 +30309,14 @@ results:
       KKT point from #586's in the same family. Measured here pose by pose, the packing is
       #586's arrangement continued, three squares beyond a tenth; Ostashev's packing is not
       near it by pose, so his credit as the search's start rests on the source's account of
-      the search, and Couzo's on the measured arrangement. The author reports that his two
-      exact checkers accept the certificate and its 10-group regularized view at the same
-      side, and a KKT point that his second-order test leaves inconclusive, with 58
-      corner-corner contacts, no corner-corner MILP descent, 9 rattlers and 38 tilted
-      squares; those are numerical evidence at 80 digits, not proofs. The source's credits
-      say the work was done with Claude (Anthropic) under Evan Daniel's direction.
+      the search, and Couzo's on the measured arrangement.
+
+      The author reports that his two exact checkers accept the certificate and its
+      10-group regularized view at the same side, and a KKT point that his second-order
+      test leaves inconclusive, with 58 corner-corner contacts, no corner-corner MILP
+      descent, 9 rattlers and 38 tilted squares; those are numerical evidence at 80 digits,
+      not proofs. The source's credits say the work was done with Claude (Anthropic) under
+      Evan Daniel's direction.
     scope: {n_values: [154]}
     verification: V3
     confirmation: C3
@@ -30366,8 +30372,9 @@ results:
       tenth, with 32 squares turned beyond 0.01 degrees; the band of ten squares at
       26.5322 degrees sits where #586's eleven are, at 26.530. Against #583's (T-172) and
       #552's (T-160) packings 20 squares move beyond a tenth. Under the identity only 94 of
-      the 156 squares of Ostashev's packing (T-149) lie within a tenth of this one. The
-      record keeps the word refinement for a pairing in which no square moves beyond a
+      the 156 squares of Ostashev's packing (T-149) lie within a tenth of this one.
+
+      The record keeps the word refinement for a pairing in which no square moves beyond a
       tenth, so this is #586's arrangement continued, as T-219's 271 continues #561's; it
       lists no regularization. Couzo's credit rests on that measured arrangement;
       Ostashev's, as the start of the chained search, rests on the source's account of the
