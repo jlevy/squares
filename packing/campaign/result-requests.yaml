@@ -13990,3 +13990,112 @@ issues:
       jobs, a positive and two controls at each count, about 7.5 CPU-hours, the longest job about
       184 seconds. verify_public.py did not run. The acknowledgement posts after the pull request
       that carries this triage merges.
+  - number: 689
+    title: 's(308) ≤ 17.997149121271: registration request'
+    author: evand
+    opened: '2026-10-19'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Evan Daniel reports s(308) <= 17.997149121271, the exact rational side
+      3599429824254181747030632150463/(2 x 10^29) of evand/square-packing bc0708f,
+      search/packer/candidates/s308_d308.cert, rounded up at 12 places, with a regularized view at
+      the same side; a new arrangement found by inserting one square into Nate Chaoweeraprasit's
+      #481 s(307) packing, which the source says neither refines nor descends from #484 or #489.
+      Retained on 20 October 2026 in evand-n308-2026-10-19, replayed on this repository's two exact
+      routes, registered as T-221, reviewed by the 20 October stage 4 review, which measured it as
+      another arrangement of the two-wedge design, and raised to V3/C3; the case at 308 adopted it
+      as its house, 1.12e-3 below T-174, and its drawing was regularized in the same pull request.
+      Claude assistance disclosed.
+    read_through: '2026-10-19T22:44:19Z'
+    results:
+    - key: n308
+      claim: >-
+        s(308) <= 3599429824254181747030632150463/200000000000000000000000000000 =
+        17.997149121270908735153160752315, the side of s308_d308.cert (SHA-256 6a9c0331...), by a
+        packing the source calls a new arrangement, not a refinement of #489.
+      source: body
+      bead: think-h8jm
+      register:
+      - T-221
+      evidence:
+      - E-evand-689-n308-report
+      - E-evand-689-n308-exact-feasibility
+    asks:
+    - what: >-
+        Credit Nate Chaoweeraprasit's (itsnaka's) s(307) packing of #481, the register's witness at
+        307, as the ultimate start of the packing at 308.
+      state: done
+      bead: think-h8jm
+      note: >-
+        The adoption of 20 October 2026 credits the case at 308 to Evan Daniel's arrangement of
+        Kevin Fang's two-wedge design in a search started from Nate Chaoweeraprasit's n = 307
+        packing, with Daniel as the finder in the structured fields; T-221's claim and its
+        bibliography key (Daniel after Chaoweeraprasit) name the start too. Fang stays named in
+        the credit sentence, as the earlier house's named him, and out of the structured fields;
+        whether he belongs there, for this house as for the earlier one, is the owner's decision
+        under think-a95t.
+    beads:
+    - think-h8jm
+    answer_bead: think-h8jm
+    replies: []
+    close_when: >-
+      The certificate is registered on main and replayed here, the stage 4 review has been mapped,
+      the case at 308 has adopted it and regularized its drawing with the requested credit, and the
+      author has been told the id, rungs and adoption.
+  - number: 694
+    title: 's(154) ≤ 12.921100940762: registration request'
+    author: evand
+    opened: '2026-10-20'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Evan Daniel reports s(154) <= 12.921100940762, the exact rational side
+      1615137617595210068732072760947/(1.25 x 10^29) = 12.921100940761680549856582087576 of
+      evand/square-packing 1d2bb82, search/packer/candidates/s154_sw.cert, rounded up at 12 places,
+      with a regularized view at the same side; a different KKT point in the family of Francisco
+      Couzo's #586 packing, found from Daniil Ostashev's s(156) packing. Retained on 20 October
+      2026 in evand-n154-sweep-2026-10-20, replayed on this repository's two exact routes,
+      registered as T-222, reviewed by the 20 October stage 4 review, which measured it as #586's
+      arrangement continued, and raised to V3/C3; the case at 154 adopted it as its house, 1.06e-4
+      below T-186, and its drawing was regularized in the same pull request. Claude assistance
+      disclosed.
+    read_through: '2026-10-20T03:56:43Z'
+    results:
+    - key: n154
+      claim: >-
+        s(154) <= 1615137617595210068732072760947/125000000000000000000000000000 =
+        12.921100940761680549856582087576, the side of s154_sw.cert (SHA-256 c2242dcd...), by a
+        packing the source calls a different KKT point from #586's, in its family.
+      source: body
+      bead: think-115j
+      register:
+      - T-222
+      evidence:
+      - E-evand-694-n154-report
+      - E-evand-694-n154-exact-feasibility
+    asks:
+    - what: >-
+        Credit Francisco Couzo's #586 arrangement, itself continued from Evan Daniel's #552, and
+        Daniil Ostashev's s(156) packing, the register's witness at 156, as the starts of the packing
+        at 154.
+      state: done
+      bead: think-115j
+      note: >-
+        The adoption of 20 October 2026 credits the case at 154 to Evan Daniel's continuation of
+        Francisco Couzo's further arrangement of Daniel's n = 154 packing in a search the source
+        started from Daniil Ostashev's n = 156 packing: Daniel as finder and Couzo as improver in
+        the structured fields, Ostashev in the credit sentence. The 20 October review measured the
+        packing as #586's arrangement continued, so Couzo's credit rests on that measurement and
+        Ostashev's on the source's account of the search, as T-222's claim and the bibliography
+        say.
+    beads:
+    - think-115j
+    answer_bead: think-115j
+    replies: []
+    close_when: >-
+      The certificate is registered on main and replayed here, the stage 4 review has been mapped,
+      the case at 154 has adopted it and regularized its drawing with the requested credit, and the
+      author has been told the id, rungs and adoption.

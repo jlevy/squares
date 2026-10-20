@@ -198,8 +198,9 @@ def test_the_records_of_the_lifted_hold_keep_their_next_candidates_until_adopted
     held_counts = {n for n, s in recorded.items() if s.held}
     assert set(NEXT_CANDIDATES) < held_counts
     # 50 until the adoption of 19 October 2026 moved 155 and 236 to Evan Daniel's
-    # certificates (T-197, T-218), below T-174's, so the hold decides neither.
-    assert len(held_counts) == 48
+    # certificates (T-197, T-218), below T-174's, so the hold decides neither; 47 since
+    # the adoption of 20 October 2026 moved 308 to his issue-689 certificate (T-221).
+    assert len(held_counts) == 47
     previous_t174 = {n for n in previous if houses.ADOPTED[n] == "T-174"}
     assert held_counts | {70, 153, 207} | set(T193_BELOW_T186) == (
         set(select.PENDING_ADOPTION) | previous_t174
@@ -207,6 +208,7 @@ def test_the_records_of_the_lifted_hold_keep_their_next_candidates_until_adopted
     assert {n: houses.ADOPTED[n] for n in previous if n not in previous_t174} == {
         29: "T-195",
         155: "T-197",
+        308: "T-221",
     }
 
 
@@ -1256,8 +1258,9 @@ def test_the_staged_adoptions_name_their_beads_and_reasons() -> None:
     reason. T-174's rational houses wait for the adoption's bead and the next pull request,
     and its algebraic ones, and T-193's (#658), for the writer's bead and the writer.
     The adoption of 17 October 2026 (think-3mry) took 37 rational counts off; twelve
-    others are staged for T-193, and the adoption of 19 October 2026 took 236 to issue
-    659's certificate and 155 to issue 669's."""
+    others are staged for T-193, the adoption of 19 October 2026 took 236 to issue 659's
+    certificate and 155 to issue 669's, and the adoption of 20 October 2026 took 308 to
+    issue 689's."""
     for n, pending in select.PENDING_ADOPTION.items():
         assert pending.why in select.STAGING_REASONS, n
         algebraic = n in (70, 153, 207) or pending.house == "T-193"
@@ -1271,7 +1274,7 @@ def test_the_staged_adoptions_name_their_beads_and_reasons() -> None:
     assert adopted == {
         n for n in houses.LATER_PASSES["2026-10-17"] if houses.ADOPTED[n] == "T-174"
     }
-    assert len(adopted) == 36
+    assert len(adopted) == 35
     assert not adopted & set(select.PENDING_ADOPTION)
 
 
@@ -1322,16 +1325,32 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
     assert "29" not in historical["houses"]
     # The houses as the 17 October passes left them: the adoption of 19 October 2026 moved
     # 155, 236 and 271 to Evan Daniel's certificates and first adopted 229 and 183 (T-220,
-    # think-jh4w), after this receipt was retained.
-    nineteenth = {155: "T-197", 183: "T-220", 229: "T-199", 236: "T-218", 271: "T-219"}
-    before = {**houses.ADOPTED, 155: "T-174", 236: "T-146", 271: "T-186"}
+    # think-jh4w), and the adoption of 20 October 2026 moved 154 and 308 to his issue-694
+    # and issue-689 certificates (T-222, T-221), after this receipt was retained.
+    later = {
+        155: "T-197",
+        183: "T-220",
+        229: "T-199",
+        236: "T-218",
+        271: "T-219",
+        154: "T-222",
+        308: "T-221",
+    }
+    before = {
+        **houses.ADOPTED,
+        154: "T-186",
+        155: "T-174",
+        236: "T-146",
+        271: "T-186",
+        308: "T-174",
+    }
     del before[229]
     del before[183]
     assert "183" not in historical["houses"]
-    assert {n: houses.ADOPTED[n] for n in nineteenth} == nineteenth
+    assert {n: houses.ADOPTED[n] for n in later} == later
     assert historical["houses"] == {str(n): result for n, result in before.items() if n != 29}
     assert {int(n) for n, result in historical["houses"].items() if result == "T-174"} == (
-        set(houses.numbers_of("T-174")) | {155}
+        set(houses.numbers_of("T-174")) | {155, 308}
     )
 
 
@@ -2106,10 +2125,12 @@ def test_an_opening_refresh_keeps_the_following_old_bound_explicitly_historical(
 def test_where_the_replaced_lanes_differ_the_margin_is_read_from_the_verified_ceiling(
     replayed: list[adopt.Move],
 ) -> None:
-    """The replaced displays differ at 29, 132, 229 and 308. Their opening, section and history
+    """The replaced displays differ at 29, 132 and 229. Their opening, section and history
     note use the exact verified baseline (reviews C3 and D1 of #661; M2/M3 of #665).
-    At 29 the catalogue print orders nothing; at 132 and 308 the reported exact side
-    agrees with the verified side, but its display differs from the verified display."""
+    At 29 the catalogue print orders nothing; at 132 the reported exact side agrees with
+    the verified side, but its display differs from the verified display. 308's did too
+    when T-174 replaced T-141 on 17 October 2026; the adoption of 20 October 2026 replays
+    it from T-174's record, whose two lanes agree."""
     differing = {
         29: (
             Fraction(
@@ -2132,14 +2153,6 @@ def test_where_the_replaced_lanes_differ_the_margin_is_read_from_the_verified_ce
             "[Daniel record hunt 3 2026-10-10]",
             "lies `1.20e-19` above the new side",
         ),
-        308: (
-            Fraction("17998269879526255875387992744507/1000000000000000000000000000000"),
-            "17.998269879526255875387992744507",
-            "17.9982698795262559",
-            "T-141",
-            "[Daniel record hunt 3 2026-10-10]",
-            "lies `1.80e-19` above the new side",
-        ),
         # The first adoption at 229 (19 October 2026): the catalogue's print of
         # 10 + 4 sqrt(2) above T-155's exact ceiling, both well above the new side.
         229: (
@@ -2160,7 +2173,7 @@ def test_where_the_replaced_lanes_differ_the_margin_is_read_from_the_verified_ce
         assert reported["value"] == printed
         assert bound["value"] == verified_display
         assert adopt._lanes_differ(move.packing)  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
-        if n in (132, 308):
+        if n == 132:
             assert Fraction(str(reported["exact_form"])) == expected
         assert Fraction(str(bound["value"])) != verified
         margin = verified - move.side

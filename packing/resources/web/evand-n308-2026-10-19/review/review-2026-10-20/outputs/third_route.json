@@ -1,0 +1,132 @@
+{
+ "resources/web/evand-n308-2026-10-19/source/search/packer/candidates/s308_d308.cert": {
+  "accepted": true,
+  "n": 308,
+  "side": "3599429824254181747030632150463/200000000000000000000000000000",
+  "wall_clearance": "1/200000000000000000000",
+  "wall_clearance_float": "5.0000e-21",
+  "wall_square": 0,
+  "least_squared_distance": "10791788882442386426221608098112950302255943774556256217906919533675382765834432444707632486194362756046272260232323527068378068525670540661441645026346928761222081/107917888824424039494013580781676355802546380260755233685289103364075453522041851953852818288548005895985451149803203431739914594156928400000000000000000000000000000000000000000000000000000000000000000000",
+  "least_distance_float": "1.0000e-20",
+  "closest_pair": [
+   23,
+   24
+  ],
+  "pairs_total": 47278,
+  "pairs_decided_exactly": 1189,
+  "pairs_by_discs": 46089,
+  "contacts": 0,
+  "controls": {
+   "duplicate_square_refused": {
+    "accepted": false,
+    "reason": "squares 0 and 1 overlap",
+    "required": "refused"
+   },
+   "square_outside_refused": {
+    "accepted": false,
+    "reason": "square 0 leaves the closed box",
+    "required": "refused"
+   },
+   "far_wall_contact_accepted": {
+    "accepted": true,
+    "wall_clearance": "0",
+    "least_squared_distance": "10791788882442386426221608098112950302255943774556256217906919533675382765834432444707632486194362756046272260232323527068378068525670540661441645026346928761222081/107917888824424039494013580781676355802546380260755233685289103364075453522041851953852818288548005895985451149803203431739914594156928400000000000000000000000000000000000000000000000000000000000000000000",
+    "contacts": 0,
+    "required": "accepted",
+    "side": "899857456063545436757408037615748901/50000000000000000000000000000000000"
+   },
+   "past_far_wall_refused": {
+    "accepted": false,
+    "reason": "square 74 leaves the closed box",
+    "required": "refused"
+   },
+   "closest_pair_contact_accepted": {
+    "accepted": true,
+    "wall_clearance": "1/200000000000000000000",
+    "least_squared_distance": "0",
+    "contacts": 1,
+    "required": "accepted with one contact",
+    "pair": [
+     23,
+     24
+    ]
+   },
+   "closest_pair_overlap_refused": {
+    "accepted": false,
+    "reason": "squares 23 and 24 overlap",
+    "required": "refused",
+    "pair": [
+     23,
+     24
+    ]
+   }
+  },
+  "controls_at_required_outcome": 6,
+  "seconds": 7.3
+ },
+ "resources/web/evand-n154-sweep-2026-10-20/source/search/packer/candidates/s154_sw.cert": {
+  "accepted": true,
+  "n": 154,
+  "side": "1615137617595210068732072760947/125000000000000000000000000000",
+  "wall_clearance": "1/200000000000000000000",
+  "wall_clearance_float": "5.0000e-21",
+  "wall_square": 39,
+  "least_squared_distance": "31098846094720234523491187381881709808360510253706436767917224684494601874396628984361251902065883805743287075093727126422174512705719826091141628089073424180060096581441/310988460947202948872464705304256245755653169492386577100059548338313355881103490344326469684293271933949284619412232356735514085860265306402500000000000000000000000000000000000000000000000000000000000000000000",
+  "least_distance_float": "1.0000e-20",
+  "closest_pair": [
+   11,
+   12
+  ],
+  "pairs_total": 11781,
+  "pairs_decided_exactly": 552,
+  "pairs_by_discs": 11229,
+  "contacts": 0,
+  "controls": {
+   "duplicate_square_refused": {
+    "accepted": false,
+    "reason": "squares 0 and 1 overlap",
+    "required": "refused"
+   },
+   "square_outside_refused": {
+    "accepted": false,
+    "reason": "square 0 leaves the closed box",
+    "required": "refused"
+   },
+   "far_wall_contact_accepted": {
+    "accepted": true,
+    "wall_clearance": "0",
+    "least_squared_distance": "31098846094720234523491187381881709808360510253706436767917224684494601874396628984361251902065883805743287075093727126422174512705719826091141628089073424180060096581441/310988460947202948872464705304256245755653169492386577100059548338313355881103490344326469684293271933949284619412232356735514085860265306402500000000000000000000000000000000000000000000000000000000000000000000",
+    "contacts": 0,
+    "required": "accepted",
+    "side": "1292110094076168054985158208757579759/100000000000000000000000000000000000"
+   },
+   "past_far_wall_refused": {
+    "accepted": false,
+    "reason": "square 39 leaves the closed box",
+    "required": "refused"
+   },
+   "closest_pair_contact_accepted": {
+    "accepted": true,
+    "wall_clearance": "1/200000000000000000000",
+    "least_squared_distance": "0",
+    "contacts": 1,
+    "required": "accepted with one contact",
+    "pair": [
+     11,
+     12
+    ]
+   },
+   "closest_pair_overlap_refused": {
+    "accepted": false,
+    "reason": "squares 11 and 12 overlap",
+    "required": "refused",
+    "pair": [
+     11,
+     12
+    ]
+   }
+  },
+  "controls_at_required_outcome": 6,
+  "seconds": 3.0
+ }
+}
