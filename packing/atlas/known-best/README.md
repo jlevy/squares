@@ -577,6 +577,35 @@ in think-kpm3’s layout, with `selection-n183.json` and `selection-n183.md`. Af
 the index draws 94 views: 36 by the axis tool, 38 by Evan Daniel’s regularizer and 20 by
 the grid-slack generator’s version 1.
 
+On 20 October 2026 the adoption of Joost de Winter’s certificates of issue 668 (T-196,
+think-qdcc) moved 227 and 260 from the Kingbird catalogue’s packings to house best
+packings $7.27 \times 10^{-3}$ and $1.11 \times 10^{-2}$ below them.
+At 227 the grid-slack view of the earlier witness lapsed; at 260 the earlier house
+drawing was regular as published, and the axis tool refuses the new witness’s. Both
+generators then ran on both counts, on a shared host at a load average of about
+thirteen: Evan Daniel’s regularizer (`evand-regularize-adopt-2026-10-20-n227-260-evand`,
+about 1,015 CPU-seconds by its receipt, 536 seconds of wall at two workers) and
+grid-slack at 0.5, 1 and 5 degrees (`grid-slack-adopt-2026-10-20-n227-260-grid-0.5`,
+`-grid-1` and `-grid-5`, 30, 29 and 31 seconds, the per-count seconds their reports
+record); the selection took 139 seconds of wall at two workers.
+Every same-side view is admitted at row 10 at the witness’s own side, and the selection
+draws his same-side view at both counts.
+At 227 it has no uneven and no near-axis square, 5 angle classes and hues and 676 / 684
+house and stage sides, against the new house drawing’s 4 uneven and 3 near-axis squares,
+11 classes and 650 / 678 sides, and grid-slack’s 8 classes and 674 / 680 sides; it is
+worse than the lapsed view of the catalogue’s packing (2 classes, 809 sides), which by
+the house rule is no reason to keep the larger packing.
+At 260 it has no light and no uneven square against the house drawing’s 3 and 20, and
+778 sides against 754 and grid-slack’s 774. His driver’s solved views at both counts are
+below the new sides, by $1.66 \times
+10^{-8}$ and $1.81 \times 10^{-8}$: register candidates (policy row 3), listed in the
+selection and not admitted here.
+The evidence is retained in
+[`cases/regularized_drawings/think-qdcc-2026-10-20/`](../../cases/regularized_drawings/think-qdcc-2026-10-20/),
+with `selection-n227-n260.json` and `selection-n227-n260.md`. After both the index draws
+95 views: 36 by the axis tool, 40 by Evan Daniel’s regularizer and 19 by the grid-slack
+generator’s version 1.
+
 ### The default picture
 
 On 13 October 2026 the owner made the regularized view the default picture, with the
