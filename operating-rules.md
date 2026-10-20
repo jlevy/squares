@@ -827,11 +827,11 @@ rule, not the unit. A dump that is already compressed costs about its own size; 
 format that compresses well costs a fraction of its checkout bytes.
 `python -m devtools.upper_bound_houses sizes`, from `packing/`, measures the witnesses a
 staged adoption would write, as Git stores them and in a checkout.
-On 17 October 2026 the witnesses of T-174’s 50 staged adoptions, all at rational sides,
-come to 19.25 MB in a checkout and 2.84 MB as Git stores them, all of which history
-keeps, since the witnesses they replace stay in it; the tree’s blobs grow by only 1.97
-MB. The largest is 0.99 MB and 0.22 MB, so they go into Git; counted in checkout bytes,
-the set would be near the tens of megabytes this rule sends to a hosted release.
+On 17 October 2026 the witnesses of T-174’s 50 staged adoptions at rational sides come
+to 19.25 MB in a checkout and 2.84 MB as Git stores them, all of which history keeps,
+since the witnesses they replace stay in it; the tree’s blobs grow by only 1.97 MB. The
+largest is 0.99 MB and 0.22 MB, so they go into Git; counted in checkout bytes, the set
+would be near the tens of megabytes this rule sends to a hosted release.
 A hosted object is read through its manifest: a tool calls `sqpack.hosted_data.require`,
 which returns the object’s local path or raises `HostedDataMissingError` naming the
 command that fetches it, and nothing reads a hosted object by a path the repository
