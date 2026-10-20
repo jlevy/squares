@@ -1142,15 +1142,16 @@ def _catalogue_source_plan(
 def clear_build_caches() -> None:
     """Drop the memoized source plans and built cases.
 
-    Only source_plans() needs clearing. It reads the module-level source roots,
-    so a caller that repoints one -- the negative controls do, to corrupt a
-    retained SVG on purpose -- would otherwise read or leave a plan set built
-    against the other root. _build_case() is keyed on the plan itself, which
+    source_plans() reads the module-level source roots, so a caller that repoints
+    one -- the negative controls do, to corrupt a retained SVG on purpose -- would
+    otherwise read or leave a plan set built against the other root. _BUILT is keyed
+    on worker count and n, and _expected_outputs on worker count; neither is keyed
+    on the plan, so both are cleared with it. _build_case() is keyed on the plan itself, which
     carries the source path and its declared digest, so a corrupted source is a
     different key and cannot collide with the real one.
     """
     source_plans.cache_clear()
-    _built_corpus.cache_clear()
+    _BUILT.clear()
     _expected_outputs.cache_clear()
     _regularized_tiles.cache_clear()
 
@@ -3977,14 +3978,31 @@ def _composite_record(canvas: CompositeCanvas) -> dict:
     return record
 
 
-@cache
-def _built_corpus(workers: int) -> tuple[BuiltCase, ...]:
-    """Every case, built once for a worker count.
+#: Every case built in this process, by worker count and `n`. `clear_build_caches` empties
+#: it with the other memos.
+_BUILT: dict[tuple[int, int], BuiltCase] = {}
 
-    The data layer and the composite comparison both read it, and each would otherwise
-    pay the whole corpus build, which is nearly all of this module's cost.
+
+def _built(numbers: Sequence[int], workers: int) -> tuple[BuiltCase, ...]:
+    """The named cases, each built at most once per worker count, in the order named.
+
+    The data layer and the composite comparison both read built cases, and each would
+    otherwise pay for its own build. Memoizing case by case rather than corpus by corpus
+    lets a composite be drawn from its own cases alone: the `n = 1..100` poster's cases
+    were 43 of the 2,880 seconds the 324 cases took to build on 2026-10-19 (four workers,
+    a loaded four-cpu host, before that day's economy in `sqpack.witness._margin_summary`),
+    because the adopted houses' exact replays sit above n = 100. The whole `--check`
+    builds the corpus first, so its composites are drawn from the memo.
     """
-    return tuple(built_cases(CORPUS.numbers, workers))
+    missing = [n for n in numbers if (workers, n) not in _BUILT]
+    for item in built_cases(missing, workers):
+        _BUILT[workers, item.frontier.n] = item
+    return tuple(_BUILT[workers, n] for n in numbers)
+
+
+def _built_corpus(workers: int) -> tuple[BuiltCase, ...]:
+    """Every case, built once for a worker count."""
+    return _built(CORPUS.numbers, workers)
 
 
 @cache
@@ -4018,14 +4036,16 @@ def _cards(built: Sequence[BuiltCase], canvas: CompositeCanvas) -> list[BuiltCas
 def expected_composite(
     canvas: CompositeCanvas, identity: CompositeIdentity, workers: int = 1
 ) -> str:
-    """One composite as a rebuild of the whole corpus draws it, under `identity`.
+    """One composite drawn from freshly built cases, under `identity`.
 
     This is the expensive drawing, from cases re-derived from their sources, and it is
     what the whole `--check` compares a retained composite with. `workers` is as
-    `expected_outputs` has it, and the corpus build is shared with it.
+    `expected_outputs` has it, and the case builds are shared with it: only the cases the
+    composite draws are built, and none that `expected_outputs` has built already.
     """
+    wanted = set(canvas.spec.numbers)
     return render_known_best_summary_svg(
-        _cards(_built_corpus(workers), canvas), canvas, identity
+        list(_built([n for n in CORPUS.numbers if n in wanted], workers)), canvas, identity
     )
 
 
@@ -4549,9 +4569,24 @@ def update_composites() -> None:
     )
 
 
+def _composite_write_problems(outputs: Mapping[Path, str]) -> list[str]:
+    """One problem for each composite the data layer would write.
+
+    The composites are not part of the data layer `--update` writes: they are drawn
+    apart, under the record of the data each was drawn from, and redrawn on demand.
+    """
+    return [
+        f"the data layer would write the composite {_relative(canvas.svg_path)}"
+        for canvas in COMPOSITES
+        if canvas.svg_path in outputs
+    ]
+
+
 def check(workers: int = 1) -> None:
     outputs, manifest = expected_outputs(workers)
-    problems = []
+    # Held here, where the whole data layer is built anyway, rather than by building it
+    # again.
+    problems = _composite_write_problems(outputs)
     for path, expected in sorted(outputs.items(), key=lambda item: item[0].as_posix()):
         if not path.is_file():
             problems.append(f"missing {_relative(path)}")
