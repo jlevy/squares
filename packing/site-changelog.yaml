@@ -27,9 +27,9 @@ entries:
     details: |-
       - This project’s two maintained exact routes checked the original certificate, and
         both refused its duplicate-square and outside-container controls. They
-        re-implement the geometry independently of the source’s code, though they share
-        parsing, half-angle conversion and the separating-axis theorem. A separately
-        prompted mathematical review accepted the bound.
+        re-implement the geometry independently of the source’s code, though the two share
+        parsing, half-angle conversion and the separating-axis theorem with each other. A
+        separately prompted mathematical review accepted the bound.
       - The case draws a regularized view made here with Daniel’s regularizer at the same
         side. It is a drawing, not a second bound. The source’s own regularized
         certificate and its two checkers did not run here.
