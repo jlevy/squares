@@ -97,7 +97,8 @@ def _rendering_entry(directory: Path) -> dict[str, Any]:
 #: adoption of 16 October 2026 (think-z7wn) moved it at its fifteen: 176 joined. The
 #: adoption of 17 October 2026 (think-3mry) moved it at its 37: 86, 132 and 181 joined,
 #: and 110, 130, 179, 180, 210, 239 and 268 left (the shorter lists, which had not taken
-#: 176 in, are the same list cut at their corpora).
+#: 176 in, are the same list cut at their corpora). The adoption of 19 October 2026
+#: moved it at its four: 229 joined, the dilation of a binary64 packing.
 #: Re-screening the adopted
 #: counts with the screen's own `--update --n` rebuilds the retained screen byte for byte.
 GOLDEN_UNSTABLE = {
@@ -143,6 +144,7 @@ GOLDEN_UNSTABLE = {
         204,
         206,
         207,
+        229,
         232,
         241,
         259,

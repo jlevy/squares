@@ -78,8 +78,8 @@
         "Daniel"
       ],
       "lineage": "builds-on-project",
-      "credit": "Daniel after Couzo, Chaoweeraprasit",
-      "short_credit": "Daniel after Couzo, Chaoweeraprasit",
+      "credit": "Daniel after Couzo, Chaoweeraprasit, Levy",
+      "short_credit": "Daniel after Couzo, Chaoweeraprasit, Levy",
       "note": "One complete exact certificate at 757b40bc6c5f681033ff1572177d408afbf26dfe, s(271) <= 16948947733713657510723401112423/10^30, found by the author's basin explorer from the register's witness for 271; the issue calls it a refinement of Francisco Couzo's #561 packing, itself a refinement of Nate Chaoweeraprasit's SQUISH packing, and a different local minimum. A same-side regularized view and the source's comparison with #561 are retained beside it. MIT-licensed; Claude assistance disclosed. KKT and local-minimum statements are the author's numerical evidence; no local or global optimality claim."
     }
   }

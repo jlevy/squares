@@ -2923,7 +2923,7 @@ sources:
     venue: GitHub
     dated: '2026-10-16'
     lineage: builds-on-project
-    credit: Daniel after Chaoweeraprasit
+    credit: Daniel after Chaoweeraprasit, Levy
     note: 'One complete exact certificate at 5ad00693899ef50ccf6502f0346187cc422cc914, s(236) <= 7930967195303679308621899285697/(5*10^29),
       found by the author''s basin explorer from a rebuild of itsnaka''s #481 composition; the issue credits
       that composition for the construction. A same-side regularized view and the source''s comparison with
@@ -2936,7 +2936,7 @@ sources:
     venue: GitHub
     dated: '2026-10-17'
     lineage: builds-on-project
-    credit: Daniel after Couzo, Chaoweeraprasit
+    credit: Daniel after Couzo, Chaoweeraprasit, Levy
     note: 'One complete exact certificate at 757b40bc6c5f681033ff1572177d408afbf26dfe, s(271) <= 16948947733713657510723401112423/10^30,
       found by the author''s basin explorer from the register''s witness for 271; the issue calls it a refinement
       of Francisco Couzo''s #561 packing, itself a refinement of Nate Chaoweeraprasit''s SQUISH packing,

@@ -70,8 +70,8 @@
         "Daniel"
       ],
       "lineage": "builds-on-project",
-      "credit": "Daniel after Chaoweeraprasit",
-      "short_credit": "Daniel after Chaoweeraprasit",
+      "credit": "Daniel after Chaoweeraprasit, Levy",
+      "short_credit": "Daniel after Chaoweeraprasit, Levy",
       "note": "One complete exact certificate at 5ad00693899ef50ccf6502f0346187cc422cc914, s(236) <= 7930967195303679308621899285697/(5*10^29), found by the author's basin explorer from a rebuild of itsnaka's #481 composition; the issue credits that composition for the construction. A same-side regularized view and the source's comparison with #481 are retained beside it. MIT-licensed; Claude assistance disclosed. KKT and local-minimum statements are the author's numerical evidence; no local or global optimality claim."
     }
   }

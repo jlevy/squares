@@ -154,11 +154,13 @@ SCREEN_EXCLUDED: dict[str, tuple[str, ...]] = {
 #: October 2026 the eighteen counts it moved, 105, 129, 146, 153, 154, 156, 176, 204, 207,
 #: 211, 237, 241, 261, 271, 272, 302, 303 and 304, and the pass of 16 October 2026 the
 #: fifteen it moved, 129, 146, 154, 156, 175, 176, 204, 211, 232, 237, 264, 271, 302, 303
-#: and 304, and the pass of 17 October 2026 the 37 it moved to T-174 (think-3mry).
+#: and 304, and the pass of 17 October 2026 the 37 it moved to T-174 (think-3mry), and
+#: the pass of 19 October 2026 the four it moved to Evan Daniel's certificates, 155, 229,
+#: 236 and 271.
 SCREEN_FINDINGS: dict[str, tuple[int, int, int, int]] = {
     "n=1..100": (28, 112, 86, 577),
-    "n=1..200": (65, 429, 182, 2055),
-    "n=1..324": (121, 1184, 302, 4979),
+    "n=1..200": (66, 433, 182, 2080),
+    "n=1..324": (123, 1291, 302, 5216),
 }
 UNDETERMINED_BY_MISS = (28,)
 #: The cases the two sampled sweeps re-derive on every pull request, computed here from
