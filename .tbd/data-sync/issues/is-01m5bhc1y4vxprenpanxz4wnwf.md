@@ -5,7 +5,7 @@ title: "Bound pytest temporary output: failed-only retention, reclaim killed ses
 kind: bug
 status: in_progress
 priority: 1
-version: 8
+version: 9
 spec_path: docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md
 delegate: lane-pytest-tmp
 labels:
@@ -15,7 +15,7 @@ parent_id: is-01m0rrgqj3esjc4jx1fr3qy1ht
 hold: null
 hold_until: null
 created_at: 2026-10-20T02:13:44.003Z
-updated_at: 2026-10-20T06:18:12.855Z
+updated_at: 2026-10-20T06:29:12.465Z
 started_at: 2026-10-20T02:13:48.451Z
 ---
 Owner request 2026-10-20: 'fix the ongoing issue with filling up file systems with pytest junk? Either outputs should be smaller and/or cleaned up automatically'. On the remote host /tmp/pytest-of-root reached ~11 GB across ~19 basetemp dirs from runs on 15-16 Oct (pytest-N dirs 0.5-1.6 GB; pytest-132 had 1,325 entries and pytest-3 still existed with 450), filling the 39 GB root filesystem twice. pytest keeps 3 numbered sessions by default (policy 'all', whole trees) and treats a session's .lock as stale only after three days, so a session killed by SIGTERM/SIGKILL (validation deadline or cancel, agent command timeout) keeps its whole tree for three days: pytest-3 surviving 129 later sessions shows that. Fix: failed-only retention with an explicit count in packing's pytest config; reclaim numbered/garbage dirs whose lock names a dead process; measure per-test tmp_path bytes with a reusable tool and shrink the top writers where the test does not weaken; tests and a development.md note. Related: think-y3pe (fresh per-run external TMPDIR on the owner's host).
@@ -33,3 +33,5 @@ Owner request 2026-10-20: 'fix the ongoing issue with filling up file systems wi
 2026-10-20 05:50Z after (branch c6d82b2c7, same command): left 243,347,456 B allocated (232 MiB) because five load-sensitive tests failed (same failures as baseline); a passing run leaves nothing. Peak 346.7 MiB at 322 s (negative-controls snapshot). Wall 2,755 s. Tests' tmp_path at teardown 1,664 MiB (was 2,310). Merged main a5acd570 (99208e210), cut site v0.8.1 (28d4ab249) with the explainer link-revision disposal. --edit passes (373 s); --push running. Review requested via coordinator.
 
 2026-10-20 06:35Z: Review A (id 5581265345) at 28d4ab249: A1-A6 fixed in 2a8a5f691 (boot+namespace scope, Linux only; long locks in doubt; private-root and O_NOFOLLOW dir-fd checks; rename-reverify unlink; record written by getbasetemp; docs wording and command); A7 declined with reasons. Dispositions: https://github.com/jlevy/squares/pull/695#issuecomment-6284737935. Follow-up think-652x (macOS). --edit passes at 2a8a5f691; --push at 28d4ab249 timed out at 1800 s (71% of the quick lane, shared host). Round B requested.
+
+2026-10-20: main 4b8aec9a6 took site v0.8.1 (#688). Merged main at 5998d0c3d (main's claim docs and release history; dropped this branch's v0.8.1 cut and explainer record), re-cut site v0.8.2 at 3d39c2032 with a new explainer link-revision record (a7fb8f2e -> 5998d0c3). check_release_impact, release_pin --check, test_pytest_tmp (18), --edit (377 s) pass. Pushed 3d39c2032; PR MERGEABLE; hosted CI started.
