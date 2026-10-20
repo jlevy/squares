@@ -30253,9 +30253,10 @@ results:
 
       V3 and C3 rest on the 20 October review and the replay it reproduced
       (E-evand-689-n308-exact-feasibility). The case at 308 adopted this certificate as
-      its house on 20 October 2026, from T-174, which stays retained as history. Whether
-      Kevin Fang's construction belongs in the structured credit at 308 is the owner's
-      open decision (think-a95t).
+      its house on 20 October 2026, from T-174, which stays retained as history, and both
+      strong generators decided the new witness in the same pull request: grid-slack's
+      half-degree view is drawn. Whether Kevin Fang's construction belongs in the
+      structured credit at 308 is the owner's open decision (think-a95t).
     next_rung: >-
       None for the bound. V4 and C4 need a second accepted adversarial review by a
       distinct reviewer and a retained human oversight record; one AI review, of 20
@@ -30378,7 +30379,9 @@ results:
 
       V3 and C3 rest on the 20 October review and the replay it reproduced
       (E-evand-694-n154-exact-feasibility). The case at 154 adopted this certificate as
-      its house on 20 October 2026, from T-186, which stays retained as history.
+      its house on 20 October 2026, from T-186, which stays retained as history, and both
+      strong generators decided the new witness in the same pull request: Evan Daniel's
+      same-side view is drawn.
     next_rung: >-
       None for the bound. V4 and C4 need a second accepted adversarial review by a
       distinct reviewer and a retained human oversight record; one AI review, of 20
@@ -30841,18 +30844,19 @@ regularized_drawings:
         max_turn_deg: 2.16769
       view: packing/atlas/known-best/regularized/n-153-regularized.yaml.gz
     - n: 154
-      of: T-186
+      of: T-222
       by: project
-      method: "regularize_grid_slack/1: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
-      modifications: ["port of his coincidence placement (regularize_grid_slack/1) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
+      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
+      changes: {straightened: 4, re_angled: 5}
       identity:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 30
-        max_move: 0.09175291
-        max_turn_deg: 3.49196
+        moved: 47
+        max_move: 0.07793035
+        max_turn_deg: 0.851377
       view: packing/atlas/known-best/regularized/n-154-regularized.yaml.gz
     - n: 155
       of: T-197
@@ -31644,15 +31648,16 @@ regularized_drawings:
         max_turn_deg: 0.0
       view: packing/atlas/known-best/regularized/n-307-regularized.yaml.gz
     - n: 308
-      of: T-174
+      of: T-221
       by: project
-      method: regularize_axis_components/2
+      method: "regularize_grid_slack/1: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      modifications: ["port of his coincidence placement (regularize_grid_slack/1) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
       identity:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 6
-        max_move: 0.3325576
+        moved: 33
+        max_move: 0.3128276
         max_turn_deg: 0.0
       view: packing/atlas/known-best/regularized/n-308-regularized.yaml.gz

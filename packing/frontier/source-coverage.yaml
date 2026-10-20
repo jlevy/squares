@@ -6857,11 +6857,11 @@ selected_overrides:
   reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
     here and an accepted review, adopted on 2026-10-15 (T-173).
 - n: 154
-  source_id: mishapolk-kkt-refinements-2026-10-14
-  value: '12.92120657713263105'
-  evidence: E-mishapolk-70a033f-certificate-report
+  source_id: evand-n154-sweep-2026-10-20
+  value: '12.9211009407616806'
+  evidence: E-evand-694-n154-report
   reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-16 (T-186).
+    here and an accepted review, adopted on 2026-10-20 (T-222).
 - n: 155
   source_id: evand-n155-explorer-2026-10-17
   value: '12.9522609446505641'
@@ -7169,11 +7169,11 @@ selected_overrides:
   reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
     here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 308
-  source_id: pingyou-pr574-certificates-2026-10-13
-  value: '17.9982698795262558753'
-  evidence: E-pingyou-574-certificate-report
+  source_id: evand-n308-2026-10-19
+  value: '17.9971491212709088'
+  evidence: E-evand-689-n308-report
   reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-17 (T-174).
+    here and an accepted review, adopted on 2026-10-20 (T-221).
 superseded_reports:
 - n: 123
   source_id: evand-square-packing-2026-10-05
@@ -7222,7 +7222,7 @@ superseded_reports:
   value: '12.9282936576777577'
   reason: The newer SQUISH update reports a smaller exact rational side; earlier source geometry and
     verification remain retained.
-  superseded_by: mishapolk-kkt-refinements-2026-10-14
+  superseded_by: evand-n154-sweep-2026-10-20
 - n: 155
   source_id: squish-ten-packings-2026-10-07
   value: '12.9536770693532733'
@@ -7607,12 +7607,12 @@ superseded_reports:
 - n: 154
   source_id: casson-square-packing-2026
   value: '12.93166403111078111'
-  superseded_by: mishapolk-kkt-refinements-2026-10-14
+  superseded_by: evand-n154-sweep-2026-10-20
   reason: The SQUISH reported new packing is smaller than this retained earlier claim.
 - n: 154
   source_id: franciscouzo-square-packing-2026
   value: '12.931663721169976'
-  superseded_by: mishapolk-kkt-refinements-2026-10-14
+  superseded_by: evand-n154-sweep-2026-10-20
   reason: The SQUISH reported new packing is smaller than this retained earlier claim.
 - n: 155
   source_id: casson-square-packing-2026
@@ -8392,7 +8392,7 @@ superseded_reports:
 - n: 154
   source_id: evand-square-packing-2026-10-05
   value: '12.931663721166847019324363825319'
-  superseded_by: mishapolk-kkt-refinements-2026-10-14
+  superseded_by: evand-n154-sweep-2026-10-20
   reason: The SQUISH reported new packing is smaller than this retained earlier claim.
 - n: 155
   source_id: evand-square-packing-2026-10-05
@@ -8618,7 +8618,7 @@ superseded_reports:
 - n: 154
   source_id: squish-update-2026-10-07
   value: '12.9265622458535390'
-  superseded_by: mishapolk-kkt-refinements-2026-10-14
+  superseded_by: evand-n154-sweep-2026-10-20
   reason: Complete Gupta source certificate is strictly smaller.
 - n: 179
   source_id: squish-second-update-2026-10-07
@@ -8782,9 +8782,9 @@ superseded_reports:
 - n: 154
   source_id: gupta-square-packing-refinements-2026-10-08
   value: '12.9265622458523470'
-  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-186's exact
+  reason: The house until 2026-10-11; its certificate stays retained and verified, and T-222's exact
     side is smaller.
-  superseded_by: mishapolk-kkt-refinements-2026-10-14
+  superseded_by: evand-n154-sweep-2026-10-20
 - n: 155
   source_id: squish-update-2026-10-07
   value: '12.9525032026045129'
@@ -8975,8 +8975,8 @@ superseded_reports:
   source_id: squish-481-third-request-2026-10-09
   value: '12.9230702023011408'
   reason: The house from 2026-10-11 until 2026-10-12; its certificate stays retained and verified,
-    and T-186's exact side is smaller.
-  superseded_by: mishapolk-kkt-refinements-2026-10-14
+    and T-222's exact side is smaller.
+  superseded_by: evand-n154-sweep-2026-10-20
 - n: 175
   source_id: couzo-certificates-2026-10-10
   value: '13.7671207246923133'
@@ -8999,8 +8999,8 @@ superseded_reports:
   source_id: evand-n154-2026-10-12
   value: '12.9225664019340596'
   reason: The house from 2026-10-12 until 2026-10-15; its certificate stays retained and verified,
-    and T-186's exact side is smaller.
-  superseded_by: mishapolk-kkt-refinements-2026-10-14
+    and T-222's exact side is smaller.
+  superseded_by: evand-n154-sweep-2026-10-20
 - n: 207
   source_id: pingyou-n207-certificate-2026-10-11
   value: '14.8809603730436757'
@@ -9107,8 +9107,8 @@ superseded_reports:
   source_id: couzo-certificates-2026-10-13-in-corpus
   value: '12.9212065771326311'
   reason: The house from 2026-10-15 until 2026-10-16; its certificate stays retained and verified,
-    and T-186's exact side is smaller.
-  superseded_by: mishapolk-kkt-refinements-2026-10-14
+    and T-222's exact side is smaller.
+  superseded_by: evand-n154-sweep-2026-10-20
 - n: 156
   source_id: couzo-certificates-2026-10-12-in-corpus
   value: '12.9791658538342765'
@@ -9401,8 +9401,8 @@ superseded_reports:
   source_id: evand-record-hunt3-2026-10-10
   value: '17.998269879526255875387992744507'
   reason: The house from 2026-10-11 until 2026-10-17; its certificate stays retained and verified,
-    and T-174's exact side is smaller.
-  superseded_by: pingyou-pr574-certificates-2026-10-13
+    and T-221's exact side is smaller.
+  superseded_by: evand-n308-2026-10-19
 - n: 155
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '12.95242540695845614'
@@ -9421,6 +9421,18 @@ superseded_reports:
   reason: The house from 2026-10-16 until 2026-10-19; its certificate stays retained and verified,
     and T-219's exact side is smaller.
   superseded_by: evand-n271-2026-10-17
+- n: 154
+  source_id: mishapolk-kkt-refinements-2026-10-14
+  value: '12.92120657713263105'
+  reason: The house from 2026-10-16 until 2026-10-20; its certificate stays retained and verified,
+    and T-222's exact side is smaller.
+  superseded_by: evand-n154-sweep-2026-10-20
+- n: 308
+  source_id: pingyou-pr574-certificates-2026-10-13
+  value: '17.9982698795262558753'
+  reason: The house from 2026-10-17 until 2026-10-20; its certificate stays retained and verified,
+    and T-221's exact side is smaller.
+  superseded_by: evand-n308-2026-10-19
 beyond_horizon_claims:
 - n: 327
   source_id: couzo-extended-range-reports-2026-10-08

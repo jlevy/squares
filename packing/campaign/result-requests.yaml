@@ -13204,9 +13204,11 @@ issues:
       search/packer/candidates/s308_d308.cert, rounded up at 12 places, with a regularized view at
       the same side; a new arrangement found by inserting one square into Nate Chaoweeraprasit's
       #481 s(307) packing, which the source says neither refines nor descends from #484 or #489.
-      Retained on 20 October 2026 in evand-n308-2026-10-19, certified on this repository's two
-      exact routes with both controls, and registered as T-221 at V0/C0, 1.12e-3 below the case at
-      308 (T-174); the stage 4 review and adoption follow. Claude assistance disclosed.
+      Retained on 20 October 2026 in evand-n308-2026-10-19, replayed on this repository's two exact
+      routes, registered as T-221, reviewed by the 20 October stage 4 review, which measured it as
+      another arrangement of the two-wedge design, and raised to V3/C3; the case at 308 adopted it
+      as its house, 1.12e-3 below T-174, and its drawing was regularized in the same pull request.
+      Claude assistance disclosed.
     read_through: '2026-10-19T22:44:19Z'
     results:
     - key: n308
@@ -13220,19 +13222,21 @@ issues:
       - T-221
       evidence:
       - E-evand-689-n308-report
+      - E-evand-689-n308-exact-feasibility
     asks:
     - what: >-
         Credit Nate Chaoweeraprasit's (itsnaka's) s(307) packing of #481, the register's witness at
         307, as the ultimate start of the packing at 308.
-      state: queued
+      state: done
       bead: think-h8jm
       note: >-
-        T-221's claim, its bibliography key (Daniel after Chaoweeraprasit) and the case record's
-        pending-adoption paragraph already name it. The case's credit fields move when the house
-        does, after the stage 4 review; until then the case keeps T-174's credit. The present
-        house's credit, which leaves Kevin Fang out of the structured fields after #673, is the
-        owner's decision under think-a95t; this packing names neither Fang nor #489 in its
-        lineage.
+        The adoption of 20 October 2026 credits the case at 308 to Evan Daniel's arrangement of
+        Kevin Fang's two-wedge design in a search started from Nate Chaoweeraprasit's n = 307
+        packing, with Daniel as the finder in the structured fields; T-221's claim and its
+        bibliography key (Daniel after Chaoweeraprasit) name the start too. Fang stays named in
+        the credit sentence, as the earlier house's named him, and out of the structured fields;
+        whether he belongs there, for this house as for the earlier one, is the owner's decision
+        under think-a95t.
     beads:
     - think-h8jm
     answer_bead: think-h8jm
@@ -13254,9 +13258,11 @@ issues:
       evand/square-packing 1d2bb82, search/packer/candidates/s154_sw.cert, rounded up at 12 places,
       with a regularized view at the same side; a different KKT point in the family of Francisco
       Couzo's #586 packing, found from Daniil Ostashev's s(156) packing. Retained on 20 October
-      2026 in evand-n154-sweep-2026-10-20, certified on this repository's two exact routes with
-      both controls, and registered as T-222 at V0/C0, 1.06e-4 below the case at 154 (T-186); the
-      stage 4 review and adoption follow. Claude assistance disclosed.
+      2026 in evand-n154-sweep-2026-10-20, replayed on this repository's two exact routes,
+      registered as T-222, reviewed by the 20 October stage 4 review, which measured it as #586's
+      arrangement continued, and raised to V3/C3; the case at 154 adopted it as its house, 1.06e-4
+      below T-186, and its drawing was regularized in the same pull request. Claude assistance
+      disclosed.
     read_through: '2026-10-20T03:56:43Z'
     results:
     - key: n154
@@ -13270,17 +13276,22 @@ issues:
       - T-222
       evidence:
       - E-evand-694-n154-report
+      - E-evand-694-n154-exact-feasibility
     asks:
     - what: >-
         Credit Francisco Couzo's #586 arrangement, itself continued from Evan Daniel's #552, and
         Daniil Ostashev's s(156) packing, the register's witness at 156, as the starts of the packing
         at 154.
-      state: queued
+      state: done
       bead: think-115j
       note: >-
-        T-222's claim and its bibliography key (Daniel after Couzo, Ostashev) already name both.
-        The case record at 154 is the adoption writer's, so its credit fields and prose move when
-        the house does, after the stage 4 review; until then the case keeps T-186's credit.
+        The adoption of 20 October 2026 credits the case at 154 to Evan Daniel's continuation of
+        Francisco Couzo's further arrangement of Daniel's n = 154 packing in a search the source
+        started from Daniil Ostashev's n = 156 packing: Daniel as finder and Couzo as improver in
+        the structured fields, Ostashev in the credit sentence. The 20 October review measured the
+        packing as #586's arrangement continued, so Couzo's credit rests on that measurement and
+        Ostashev's on the source's account of the search, as T-222's claim and the bibliography
+        say.
     beads:
     - think-115j
     answer_bead: think-115j
