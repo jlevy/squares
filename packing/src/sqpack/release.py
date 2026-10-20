@@ -1555,6 +1555,22 @@ class ReleaseNoPublicChange(NamedTuple):
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
     ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=("packing/campaign/result-requests.yaml",),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "Rendered at link revision a5acd570 (main, with #514 and #693), once with main's "
+            "requests record and once with this branch's, the 42 files "
+            "render_packing_methods writes are byte-identical. The PDF prints from that HTML. "
+            "The record gains the #639 final reply and the #640 import reply of "
+            "19 October 2026 and closes #639, which the survey does not read, so it "
+            "keeps v0.2.3."
+        ),
+    ),
+    ReleaseNoPublicChange(
         components=("site",),
         paths=(
             "packing/devtools/build_known_best_atlas.py",

@@ -9595,7 +9595,8 @@ issues:
       exact configuration): registration request'
     author: evand
     opened: '2026-10-16'
-    state: open
+    state: closed
+    closed: '2026-10-19'
     kind: result-report
     triage: done
     summary: >-
@@ -9653,13 +9654,31 @@ issues:
       not_registered: >-
         Weaker than an earlier report: #574's rational certificates at these counts (T-174), which three
         exact routes here decided, are below S* by 1.18e-62, 9.23e-63 and 6.62e-63, so S* is not the
-        least side of those packings. The acknowledgement drafted in think-phyb asks the author why.
+        least side of those packings. The final reply of 19 October asks the author why.
       queued: false
     beads:
     - think-phyb
     - think-g59l
     answer_bead: think-phyb
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/639#issuecomment-6278993243
+      date: '2026-10-19'
+      by: jlevy
+      kind: final
+      reported:
+      - result: exact-sides-below-record
+        id: T-193
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: exact-sides-below-record
+        id: E-evand-639-verify-exact-replay
+        status: confirmed
+      - result: exact-sides-below-record
+        id: E-evand-639-exact-sides-report
+      - result: exact-side-51
+      - result: exact-sides-574-algebraic
+      - result: exact-sides-above-574
     close_when: >-
       The recorded counts are registered on main, the author has been told what was registered and why
       51, 70, 153, 207, 172, 263 and 297 were not, and the replay is either run or owned by its bead,
@@ -9669,8 +9688,9 @@ issues:
       case records also name improvers (Gupta, Polkovskyi, Couzo and Daniel), whom the registered entry
       credits before Daniel's exact form, as a refinement. At 207 the source reports that its re-solve of
       the record's witness did not verify one pair and that the committed form comes from a copy that
-      ties it; T-173's rational certificate there was decided by three exact routes here, and the
-      acknowledgement asks what the re-solve shows. The source also lists 52 counts still without an
+      ties it; T-173's rational certificate there was decided by three exact routes here. The drafts in
+      think-phyb asked what the re-solve shows, but the final reply of 19 October dropped the question,
+      so whether to ask it as a follow-up is still open. The source also lists 52 counts still without an
       exact form, and s(29), whose polynomial #545 reports; neither is a claim.
   - number: 640
     title: 'Complete Lean proof of s(19) optimality: registration request'
@@ -9731,7 +9751,37 @@ issues:
     - think-nqnl
     - think-xik9
     answer_bead: think-a4x3
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/640#issuecomment-6278993930
+      date: '2026-10-19'
+      by: jlevy
+      kind: import
+      reported:
+      - result: n19-optimality-lean
+        id: T-194
+        verification: V0
+        confirmation: C1
+        status: reviewed
+      - result: n19-optimality-lean
+        id: E-n019-fitzharding-lean-report
+      - result: n19-optimality-lean
+        id: E-n019-fitzharding-endpoint-review
+        status: confirmed
+      - result: n19-optimality-lean
+        id: E-n019-fitzharding-cover-census-review
+        status: confirmed
+      - result: n19-optimality-lean
+        id: E-n019-fitzharding-region-review
+        status: confirmed
+      - result: n19-optimality-lean
+        id: E-n019-fitzharding-capture-link-review
+        status: confirmed
+      - result: n19-optimality-lean
+        id: E-n019-fitzharding-endgame-review
+        status: confirmed
+      - result: n19-optimality-lean
+        id: E-n019-fitzharding-archives-review
+        status: confirmed
     close_when: >-
       The result is registered on main and linked from the n = 19 case page, the author has been told
       what was registered and has the mathematical review, and the full build has either passed, here or
