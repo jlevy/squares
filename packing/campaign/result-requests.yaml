@@ -13147,7 +13147,8 @@ issues:
     title: 's(183) ≤ 13.999580178737: registration request (first 183 below the grid)'
     author: evand
     opened: '2026-10-19'
-    state: open
+    state: closed
+    closed: '2026-10-20'
     kind: result-report
     triage: done
     summary: 'Evan Daniel''s original n183 certificate is registered as T-220, confirmed by a complete
@@ -13155,7 +13156,7 @@ issues:
       regularized by both strong generators in the same pull request. The drawn view is this
       project''s run of Evan Daniel''s regularizer at the same side; the source''s own regularized
       certificate is retained and not executed.'
-    read_through: '2026-10-20T01:39:41Z'
+    read_through: '2026-10-20T17:43:20Z'
     results:
     - key: n183
       claim: s(183) <= 13999580178736252502081470897571/1000000000000000000000000000000 = 13.999580178736252502081470897571,
@@ -13177,6 +13178,34 @@ issues:
       kind: follow-up
       reported:
       - result: n183
+      outdated:
+      - 'Registration is prepared for the next intake records PR, has not landed on main or been
+        deployed, and its result number is provisional; since #687 merged on 20 October it is on main
+        and on the published site as T-220, at V3/C3, confirmed'
+      - 'The regularized drawing and the adoption into the standing case remain a separate owned
+        follow-up (think-jh4w); since #687 merged on 20 October, T-220 is the house at 183, adopted on
+        19 October in the same change, and the site draws its regularized view'
+      - 'Both retained exact verification routes accepted its rational geometry: the two routes were
+        this repository''s sqpack.verify and devtools.check_rational_witness_independent, and the
+        source''s verify_cert.py and verify_cert2.py, though retained in the packet, did not run here'
+    - url: https://github.com/jlevy/squares/issues/680#issuecomment-6297284604
+      date: '2026-10-20'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n183
+        id: T-220
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: n183
+        id: E-evand-680-n183-report
+        status: reviewed
+      - result: n183
+        id: E-evand-680-n183-primary-exact-feasibility
+        status: confirmed
+      corrects:
+      - https://github.com/jlevy/squares/issues/680#issuecomment-6268897692
     close_when: The reported claim has a reviewed disposition on main, replay and mathematical review
       have explicit owners, any adopted house is regularized in the adoption change, and a reply checked
       against main and the deployed site reports the resulting state.
@@ -13190,4 +13219,10 @@ issues:
       provisional. It names no T-220 and makes no published-registration claim; house adoption and
       regularized endpoint remain separate. Exact posted bodies are retained in packing/campaign/issue-intake/intake-followup-20261019/issue-680-replies.json.
       Evan Daniel''s comment of 2026-10-20T01:39:41Z thanks Joost de Winter for his 19 October note and
-      says how the search was found; it states no new claim, certificate or correction.'
+      says how the search was found; it states no new claim, certificate or correction. The final reply
+      of 20 October (issuecomment-6297284604), posted after #687 merged, reports T-220 at V3/C3, confirmed,
+      on main and on the published site, the house at 183 with its regularized view, the credit Daniel
+      after Couzo, and the KKT, flat-motion and local-minimum statements as unregistered source evidence;
+      it says that the 19 October reply''s two routes were this repository''s, that the source''s two
+      checkers and its regularized certificate did not run here, and that nothing asked for is queued.
+      The issue closed with it at 2026-10-20T17:43:20Z.'
