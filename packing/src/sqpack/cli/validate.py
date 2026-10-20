@@ -158,11 +158,13 @@ SCREEN_EXCLUDED: dict[str, tuple[str, ...]] = {
 #: the pass of 19 October 2026 the five it moved to Evan Daniel's certificates: 155, 229,
 #: 236 and 271, and 183 (T-220, think-jh4w), whose new witness has one strictly
 #: separating square, index 11, the one the source calls its rattler, and 28 that
-#: translate, against the grid's 14.
+#: translate, against the grid's 14, and the pass of 20 October 2026 the two it moved to
+#: Francisco Couzo's issue-678 certificates (T-223): 204, 39 separating and 76 translating
+#: squares against T-186's 15 and 46, and 260, 17 and 53 against T-155's 14 and 32.
 SCREEN_FINDINGS: dict[str, tuple[int, int, int, int]] = {
     "n=1..100": (28, 112, 86, 577),
     "n=1..200": (67, 434, 182, 2094),
-    "n=1..324": (124, 1292, 302, 5230),
+    "n=1..324": (124, 1319, 302, 5281),
 }
 UNDETERMINED_BY_MISS = (28,)
 #: The cases the two sampled sweeps re-derive on every pull request, computed here from

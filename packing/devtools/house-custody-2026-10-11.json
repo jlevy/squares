@@ -5,13 +5,13 @@
   "command": "python -m devtools.upper_bound_houses custody",
   "runtime": "CPython 3.14.7",
   "host": "vm",
-  "setup_seconds": 14.25,
-  "call_seconds": 24.0,
+  "setup_seconds": 11.99,
+  "call_seconds": 32.08,
   "child_timeout_seconds": 120,
   "snapshot_cap_bytes": 232783872,
-  "snapshot_source_bytes": 231807134,
+  "snapshot_source_bytes": 232676945,
   "fresh_geometric_deciders": false,
-  "houses": {"29":"T-195","68":"T-174","70":"T-146","84":"T-174","86":"T-174","102":"T-146","103":"T-174","105":"T-174","108":"T-174","110":"T-174","123":"T-146","126":"T-139","127":"T-174","129":"T-186","130":"T-174","131":"T-174","132":"T-174","146":"T-187","153":"T-173","154":"T-186","155":"T-197","156":"T-186","172":"T-174","175":"T-186","176":"T-186","179":"T-174","180":"T-174","181":"T-174","182":"T-174","183":"T-220","204":"T-186","206":"T-174","207":"T-173","208":"T-174","209":"T-174","210":"T-174","211":"T-188","228":"T-174","229":"T-199","232":"T-186","236":"T-218","237":"T-190","238":"T-174","239":"T-174","240":"T-174","241":"T-182","258":"T-146","259":"T-136","261":"T-174","263":"T-174","264":"T-186","267":"T-134","268":"T-174","269":"T-174","270":"T-174","271":"T-219","272":"T-174","273":"T-174","292":"T-146","295":"T-146","297":"T-174","302":"T-186","303":"T-186","304":"T-186","305":"T-174","306":"T-174","307":"T-174","308":"T-174"},
+  "houses": {"29":"T-195","68":"T-174","70":"T-146","84":"T-174","86":"T-174","102":"T-146","103":"T-174","105":"T-174","108":"T-174","110":"T-174","123":"T-146","126":"T-139","127":"T-174","129":"T-186","130":"T-174","131":"T-174","132":"T-174","146":"T-187","153":"T-173","154":"T-186","155":"T-197","156":"T-186","172":"T-174","175":"T-186","176":"T-186","179":"T-174","180":"T-174","181":"T-174","182":"T-174","183":"T-220","204":"T-223","206":"T-174","207":"T-173","208":"T-174","209":"T-174","210":"T-174","211":"T-188","228":"T-174","229":"T-199","232":"T-186","236":"T-218","237":"T-190","238":"T-174","239":"T-174","240":"T-174","241":"T-182","258":"T-146","259":"T-136","260":"T-223","261":"T-174","263":"T-174","264":"T-186","267":"T-134","268":"T-174","269":"T-174","270":"T-174","271":"T-219","272":"T-174","273":"T-174","292":"T-146","295":"T-146","297":"T-174","302":"T-186","303":"T-186","304":"T-186","305":"T-174","306":"T-174","307":"T-174","308":"T-174"},
   "inputs": [
     {"path":"packing/resources/web/couzo-exact-certificates-2026-10-09/acquisition/report.json","bytes":49302,"sha256":"6735177e5ddb0889a750ddae56170633a4e18edc3cdcc0d315b0bbef934a7da8"},
     {"path":"packing/resources/web/couzo-exact-certificates-2026-10-09/acquisition/sources.json","bytes":24094,"sha256":"95cf78c879d9ca1b9da6d2c85df58e191e2f69b446bbf0e07254c4eda2f030d7"},
@@ -128,7 +128,6 @@
     {"path":"packing/resources/web/mishapolk-kkt-refinements-2026-10-14/facts/n-156.yaml.gz","bytes":10435,"sha256":"15dd2eaf25a515b39c14940cbf8085fffc6aff3300c74858258cdd4578541c5a"},
     {"path":"packing/resources/web/mishapolk-kkt-refinements-2026-10-14/facts/n-175.yaml.gz","bytes":10707,"sha256":"26bec998dc4917bb7f814a7c0bf4a8cb3c250737e8753272693e2fff62b25bec"},
     {"path":"packing/resources/web/mishapolk-kkt-refinements-2026-10-14/facts/n-176.yaml.gz","bytes":21134,"sha256":"0f41080eb995bd9618e32c156335e9ac602513b2bd1d283b873767754facb1a7"},
-    {"path":"packing/resources/web/mishapolk-kkt-refinements-2026-10-14/facts/n-204.yaml.gz","bytes":16125,"sha256":"45f00c00e5ab09c7ae336ed741749e3b8f8a3de7a7f2e05f330a5b9bc94a1d6a"},
     {"path":"packing/resources/web/mishapolk-kkt-refinements-2026-10-14/facts/n-232.yaml.gz","bytes":29342,"sha256":"16532e2fc2770e82e89d980ed5f83e78ad67ebb18cf12829d3ba2f8b9248c444"},
     {"path":"packing/resources/web/mishapolk-kkt-refinements-2026-10-14/facts/n-264.yaml.gz","bytes":20905,"sha256":"7c0c3225e84e3568cdd384e04131633b44e2b35849c0ebf8ea2f753c09a56145"},
     {"path":"packing/resources/web/mishapolk-kkt-refinements-2026-10-14/facts/n-302.yaml.gz","bytes":18987,"sha256":"fa7a247d45c70a2a8809b32d895ccdd727e986ed63e3b9719ff55896a603fc16"},
@@ -139,7 +138,6 @@
     {"path":"packing/resources/web/mishapolk-kkt-refinements-2026-10-14/receipts/exact-certification-n156.json.xz","bytes":6084,"sha256":"5396432190f62cdfc3ebc58746419e02b1e573e45e483aa9495a8060f2dbf556"},
     {"path":"packing/resources/web/mishapolk-kkt-refinements-2026-10-14/receipts/exact-certification-n175.json.xz","bytes":5124,"sha256":"4ea97975fbae8e3e64f5662cb8e48954977b3a89b439fb4635494b09c986fa7b"},
     {"path":"packing/resources/web/mishapolk-kkt-refinements-2026-10-14/receipts/exact-certification-n176.json.xz","bytes":11120,"sha256":"1bf47ede65ac8385ce877e1887c22d96ed6fdfe236029296c2651c68fbb68d2e"},
-    {"path":"packing/resources/web/mishapolk-kkt-refinements-2026-10-14/receipts/exact-certification-n204.json.xz","bytes":8020,"sha256":"d9b5f3dcaae01937c479cdbe4dac2de1a1109ca19e0198449e3350e44c009665"},
     {"path":"packing/resources/web/mishapolk-kkt-refinements-2026-10-14/receipts/exact-certification-n232.json.xz","bytes":11768,"sha256":"4447157d0c4d3a50ed2769d55091f913bf8d25c7458456bd6bb489a44c6d741d"},
     {"path":"packing/resources/web/mishapolk-kkt-refinements-2026-10-14/receipts/exact-certification-n264.json.xz","bytes":12356,"sha256":"eef8a6932aa0f8de478dd319d5a49e2c876d0ba3f2344fa8effb9e41c5163894"},
     {"path":"packing/resources/web/mishapolk-kkt-refinements-2026-10-14/receipts/exact-certification-n302.json.xz","bytes":8848,"sha256":"70bf1bcf426435672b670ebb9f3fb2d88693e86e8290f37775fa8751d55727ee"},
@@ -188,11 +186,16 @@
     {"path":"packing/resources/web/evand-n183-subgrid-2026-10-19/acquisition/sources.json","bytes":5721,"sha256":"3c35c616a8b5cc7ba2a2e70666d091e40d179f8d244ec6b6fa1c2f80f69ff54d"},
     {"path":"packing/resources/web/evand-n183-subgrid-2026-10-19/acquisition/upstream-subtree.sha256","bytes":1808,"sha256":"d7ecc2989393f1c5c9877bd28eecbcdf2c51fe5a4bfc3b0864bec0c9151245a5"},
     {"path":"packing/resources/web/evand-n183-subgrid-2026-10-19/source/search/packer/candidates/s183_h183b.cert","bytes":31438,"sha256":"279e70d1c7fb0bc181e3e9d313e7350b672d85e223296f252b92f2916d6e5df5"},
-    {"path":"packing/resources/web/evand-n183-subgrid-2026-10-19/receipts/exact-certification.json.xz","bytes":4664,"sha256":"ca671960f55d78c16a36bd5ac56a55b7c3b7ba406ecb517639f7801cb3a8ee37"}
+    {"path":"packing/resources/web/evand-n183-subgrid-2026-10-19/receipts/exact-certification.json.xz","bytes":4664,"sha256":"ca671960f55d78c16a36bd5ac56a55b7c3b7ba406ecb517639f7801cb3a8ee37"},
+    {"path":"packing/resources/web/couzo-issue678-2026-10-18/acquisition/sources.json","bytes":11538,"sha256":"05bbfc0872efef653855ebd5b5abb58bd3a1c88ffe32143a76a2d10e5e5e73b5"},
+    {"path":"packing/resources/web/couzo-issue678-2026-10-18/acquisition/upstream-subtree.sha256","bytes":8808,"sha256":"af37890ed70295de81b509dc5aaaf75bb25298c06b742e0ad44694f0f113873d"},
+    {"path":"packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n204.cert","bytes":21387,"sha256":"e05b904d940a944323a0937cf3844f89f6893700bde121a4f4e07b0f76c5c469"},
+    {"path":"packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n260.cert","bytes":28284,"sha256":"635dbf25a2550f22e4259a850da1ad02f2762527a367d90193458fa644d12908"},
+    {"path":"packing/resources/web/couzo-issue678-2026-10-18/receipts/house-jobs.json.xz","bytes":16152,"sha256":"1f0133461ef2dd822517441606535b3055af48f2d674502257c9b968aecf07b3"}
   ],
   "mutations_refused_and_restored": [
-    "T-195 n=29: outside-control verdict","T-195 n=29: certificate bytes","T-174 n=68: outside-control verdict","T-174 n=68: certificate bytes","T-146 n=70: outside-control verdict","T-146 n=70: certificate bytes","T-139 n=126: outside-control verdict","T-139 n=126: certificate bytes","T-186 n=129: outside-control verdict","T-186 n=129: certificate bytes","T-187 n=146: outside-control verdict","T-187 n=146: certificate bytes","T-173 n=153: outside-control verdict","T-173 n=153: certificate bytes","T-197 n=155: outside-control verdict","T-197 n=155: certificate bytes","T-220 n=183: outside-control verdict","T-220 n=183: certificate bytes","T-188 n=211: outside-control verdict","T-188 n=211: certificate bytes","T-199 n=229: outside-control verdict","T-199 n=229: certificate bytes","T-218 n=236: outside-control verdict","T-218 n=236: certificate bytes","T-190 n=237: outside-control verdict","T-190 n=237: certificate bytes","T-182 n=241: outside-control verdict",
-    "T-182 n=241: certificate bytes","T-136 n=259: outside-control verdict","T-136 n=259: certificate bytes","T-134 n=267: outside-control verdict","T-134 n=267: certificate bytes","T-219 n=271: outside-control verdict","T-219 n=271: certificate bytes"
+    "T-195 n=29: outside-control verdict","T-195 n=29: certificate bytes","T-174 n=68: outside-control verdict","T-174 n=68: certificate bytes","T-146 n=70: outside-control verdict","T-146 n=70: certificate bytes","T-139 n=126: outside-control verdict","T-139 n=126: certificate bytes","T-186 n=129: outside-control verdict","T-186 n=129: certificate bytes","T-187 n=146: outside-control verdict","T-187 n=146: certificate bytes","T-173 n=153: outside-control verdict","T-173 n=153: certificate bytes","T-197 n=155: outside-control verdict","T-197 n=155: certificate bytes","T-220 n=183: outside-control verdict","T-220 n=183: certificate bytes","T-223 n=204: outside-control verdict","T-223 n=204: certificate bytes","T-188 n=211: outside-control verdict","T-188 n=211: certificate bytes","T-199 n=229: outside-control verdict","T-199 n=229: certificate bytes","T-218 n=236: outside-control verdict","T-218 n=236: certificate bytes","T-190 n=237: outside-control verdict",
+    "T-190 n=237: certificate bytes","T-182 n=241: outside-control verdict","T-182 n=241: certificate bytes","T-136 n=259: outside-control verdict","T-136 n=259: certificate bytes","T-134 n=267: outside-control verdict","T-134 n=267: certificate bytes","T-219 n=271: outside-control verdict","T-219 n=271: certificate bytes"
   ],
   "original_inputs_byte_equal": true,
   "restored_worker_inputs_byte_equal": true

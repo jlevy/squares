@@ -94,6 +94,7 @@ from strif import atomic_output_file
 
 from devtools import acquire_source, retained_data
 from devtools import check_source_coverage as coverage_check
+from devtools import couzo_678_replay as couzo_678
 from devtools import couzo_followup_reports as couzo_followup
 from devtools import couzo_refinement_reports as couzo_451
 from devtools import decimal_pose_margins as decimal_poses
@@ -1339,6 +1340,9 @@ HOUSES: dict[str, Callable[[int], Fraction]] = {
         "evand-n229-dilation-update-2026-10-18"
     ),
     "[Daniel n183 subgrid 2026-10-19]": _import("evand-n183-subgrid-2026-10-19"),
+    # T-223: issue 678's packet has no import declaration; its replay module reads its two
+    # counts of the case corpus, each certificate held to the digest its manifest pins.
+    "[Couzo issue 678 2026-10-18]": lambda n: couzo_678.house_certificate(n).side,
     # T-155: the side of the retained view of Evan Daniel's regularizer at each count.
     "[Daniel regularizer 2026-10-11]": regularized.view_side,
 }

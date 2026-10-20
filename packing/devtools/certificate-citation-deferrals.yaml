@@ -10,82 +10,59 @@
 # outlive what it defers.
 deferrals:
   - evidence: E-wand125-closed-form-cfcheck-sample
-    results: [T-180]
+    results:
+    - T-180
     bead: think-3n1x
     blocked_on: think-tsox
     recorded: '2026-10-14'
-    reason: >-
-      cfcheck's sample replay decides 2,909 leaves of the closed form's intervals 1 and 34
-      and no count: a sample sets no rung, and the 33 counts those intervals carry are
-      proved by T-064, T-084 and T-086, whose case records the generator drafts. A case
-      record cites it once a complete replay moves the closed form's verified lane.
+    reason: 'cfcheck''s sample replay decides 2,909 leaves of the closed form''s intervals 1 and 34
+      and no count: a sample sets no rung, and the 33 counts those intervals carry are proved by T-064,
+      T-084 and T-086, whose case records the generator drafts. A case record cites it once a complete
+      replay moves the closed form''s verified lane.'
   - evidence: E-wand125-closed-form-replay4d-sample
-    results: [T-180]
+    results:
+    - T-180
     bead: think-tsox
     blocked_on: think-wu73
     recorded: '2026-10-14'
-    reason: >-
-      replay4d's calibration replays 2 of the closed form's 136 records, intervals 26 and 14
-      top, and no count: a sample sets no rung. A case record cites it once a complete
-      replay moves the closed form's verified lane, which think-wu73 holds over the owner's
-      40 CPU-hour cap.
+    reason: 'replay4d''s calibration replays 2 of the closed form''s 136 records, intervals 26 and 14
+      top, and no count: a sample sets no rung. A case record cites it once a complete replay moves
+      the closed form''s verified lane, which think-wu73 holds over the owner''s 40 CPU-hour cap.'
   - evidence: E-pingyou-574-algebraic-feasibility
-    results: [T-174]
+    results:
+    - T-174
     bead: think-ot5c
     blocked_on: think-ot5c
     recorded: '2026-10-16'
-    reason: >-
-      PR 574's algebraic certificates at 70, 153, 207 and 302 are replayed on one route,
-      sqpack's exact witness verifier over each field, which is what stage 4 asks. At 70,
-      153 and 207 they are the smallest sides known, and the house rule of 16 October 2026
-      makes them the houses there, which ended RP-3's wait for the owner. Their adoption is
-      staged in select_houses.PENDING_ADOPTION under think-ot5c, until adopt_houses can
-      write an algebraic side; at 302 the certificate is above the case. A case record
-      cites the evidence once a house adopts one.
-  - evidence: E-evand-639-verify-exact-replay
-    results: [T-193]
-    bead: think-ot5c
-    blocked_on: think-ot5c
-    recorded: '2026-10-16'
-    reason: >-
-      Issue 639's exact algebraic sides at sixteen counts are replayed on one route, the
-      source's own verify_exact.py over each number field, which is what stage 4 asks, and
-      reviewed at stage 4 with no blocking defect
-      (docs/project/reviews/review-2026-10-16-evand-exact-sides-639.md). They are the
-      smallest sides known at all sixteen, and the house rule of 16 October 2026 makes them
-      the houses there. Their adoption is staged in select_houses.PENDING_ADOPTION under
-      think-ot5c, until adopt_houses can write an algebraic side, and an adopted house's
-      record is rebuilt by its writer (tests/test_house_adoption.py), so its evidence list
-      takes no hand edit. A case record cites the evidence once a house adopts one.
+    reason: PR 574's algebraic certificates at 70, 153, 207 and 302 are replayed on one route, sqpack's
+      exact witness verifier over each field, which is what stage 4 asks. At 70, 153 and 207 they are
+      the smallest sides known, and the house rule of 16 October 2026 makes them the houses there, which
+      ended RP-3's wait for the owner. Their adoption is staged in select_houses.PENDING_ADOPTION under
+      think-ot5c, until adopt_houses can write an algebraic side; at 302 the certificate is above the
+      case. A case record cites the evidence once a house adopts one.
   - evidence: E-bengreff-594-cover-replay
-    results: [T-184]
+    results:
+    - T-184
     bead: think-ccjt
-    blocked_on: >-
-      zm_mixed.py's refusals of two mutated s(76) covers, held by a test, at a depth limit
-      the owner accepts (owner question 16 of think-l3oo, finding F8 of
-      docs/project/reviews/review-2026-10-16-greff-k2m5-mixed-covers-76-95.md)
+    blocked_on: zm_mixed.py's refusals of two mutated s(76) covers, held by a test, at a depth limit
+      the owner accepts (owner question 16 of think-l3oo, finding F8 of docs/project/reviews/review-2026-10-16-greff-k2m5-mixed-covers-76-95.md)
     recorded: '2026-10-16'
-    reason: >-
-      The register entry is at V3/C1: the 16 October review found no blocking defect in
-      the s(76) cover or in the zmx2 and zm_mixed.py composite, and the confirmation waits
-      on stage 4's control rule for zm_mixed.py. Adopting the value puts s(76) in the
-      case's verified lane as proved. zm_mixed.py has refused one mutated cover, the
-      review's 199/200 mutant at a depth limit of 12, which counts only if the owner
-      accepts that limit; a second refusal is owed either way. The case record at 76 cites
-      the evidence once both are held.
+    reason: 'The register entry is at V3/C1: the 16 October review found no blocking defect in the s(76)
+      cover or in the zmx2 and zm_mixed.py composite, and the confirmation waits on stage 4''s control
+      rule for zm_mixed.py. Adopting the value puts s(76) in the case''s verified lane as proved. zm_mixed.py
+      has refused one mutated cover, the review''s 199/200 mutant at a depth limit of 12, which counts
+      only if the owner accepts that limit; a second refusal is owed either way. The case record at
+      76 cites the evidence once both are held.'
   - evidence: E-bengreff-610-cover-replay
-    results: [T-191]
+    results:
+    - T-191
     bead: think-ccjt
-    blocked_on: >-
-      zm_mixed.py's refusals of two mutated s(95) covers, run and held by a test, at a
-      depth limit the owner accepts (finding F8 of
-      docs/project/reviews/review-2026-10-16-greff-k2m5-mixed-covers-76-95.md); none has
-      run, so both are owed whatever owner question 16 of think-l3oo answers
+    blocked_on: zm_mixed.py's refusals of two mutated s(95) covers, run and held by a test, at a depth
+      limit the owner accepts (finding F8 of docs/project/reviews/review-2026-10-16-greff-k2m5-mixed-covers-76-95.md);
+      none has run, so both are owed whatever owner question 16 of think-l3oo answers
     recorded: '2026-10-16'
-    reason: >-
-      The register entry is at V3/C1: the 16 October review found no blocking defect in
-      the s(95) cover or in the zmx2 and zm_mixed.py composite, and the confirmation waits
-      on stage 4's control rule for zm_mixed.py. Adopting the value puts s(95) in the
-      case's verified lane as proved. No zm_mixed.py refusal of a mutated s(95) cover has
-      run, so two are owed whatever the owner rules on the depth limit. The case record at
-      95 cites the evidence once both are held.
+    reason: 'The register entry is at V3/C1: the 16 October review found no blocking defect in the s(95)
+      cover or in the zmx2 and zm_mixed.py composite, and the confirmation waits on stage 4''s control
+      rule for zm_mixed.py. Adopting the value puts s(95) in the case''s verified lane as proved. No
+      zm_mixed.py refusal of a mutated s(95) cover has run, so two are owed whatever the owner rules
+      on the depth limit. The case record at 95 cites the evidence once both are held.'

@@ -91,8 +91,9 @@ from sqpack.yamlio import safe_load
 #: adoption of 12 October 2026 moved n = 176 onto SQUISH's issue 500 packet (think-fvz4),
 #: and its pass for issue 528 moved n = 264 onto Daniil Ostashev's packet (think-cq95), and
 #: that of 15 October n = 204 onto his issue 562 packet (T-162), and that of 19 October
-#: n = 229 onto Evan Daniel's issue 674 packet (T-199).
-GOLDEN_DERIVED_ABOVE_100: dict[str, int] = {"n=1..100": 0, "n=1..200": 22, "n=1..324": 45}
+#: n = 229 onto Evan Daniel's issue 674 packet (T-199), and that of 20 October n = 260 onto
+#: Francisco Couzo's issue 678 packet (T-223).
+GOLDEN_DERIVED_ABOVE_100: dict[str, int] = {"n=1..100": 0, "n=1..200": 22, "n=1..324": 44}
 #: The cases whose retained upstream rendering is the UnitSquare release, per corpus.
 GOLDEN_UNITSQUARE: dict[str, set[int]] = {
     # 68, 103, 105, 110 and 131 moved onto Francisco Couzo's packet on 2026-09-29, and 69
@@ -123,11 +124,12 @@ GOLDEN_SOURCE_KINDS: dict[str, dict[str, int]] = {
     # Kingbird) on 15 October, to Daniil Ostashev's issue 562 packet (T-162), and 29 (from
     # Kingbird) on 17 October, to PR #622's packet (T-195), and on 19 October 183 (from the
     # grid), to Evan Daniel's issue 680 packet (T-220, think-jh4w), and 229 (from
-    # Kingbird), to his issue 674 packet (T-199).
+    # Kingbird), to his issue 674 packet (T-199), and on 20 October 260 (from Kingbird), to
+    # Francisco Couzo's issue 678 packet (T-223, think-xu4d).
     "n=1..324": {
         "exact-grid": 174,
-        "kingbird-derived-facts": 74,
-        "packet-derived-facts": 76,
+        "kingbird-derived-facts": 73,
+        "packet-derived-facts": 77,
     },
 }
 
@@ -2162,8 +2164,10 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
     assert len(expected_names) == 25
     # The adoption of 19 October draws from five more, Evan Daniel's packets at 155, 183
     # (T-220, think-jh4w), 229, 236 and 271, with no new name, and every source it
-    # re-housed still holds another count.
-    assert len(expected_sources) == 22
+    # re-housed still holds another count. The adoption of 20 October draws from one more,
+    # Francisco Couzo's issue 678 packet at 204 and 260 (T-223), with no new name: the
+    # sources it re-housed, Mishapolk's KKT refinements and the catalogue, hold other counts.
+    assert len(expected_sources) == 23
     assert set(json.loads(credit_block.attrib["data-credited-names"])) == expected_names
     assert set(json.loads(credit_block.attrib["data-source-keys"])) == expected_sources
     assert credit_block.find("svg:text[@data-feature='packing-credits-heading']", SVG) is None

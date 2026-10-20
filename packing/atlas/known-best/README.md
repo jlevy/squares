@@ -577,6 +577,25 @@ in think-kpm3’s layout, with `selection-n183.json` and `selection-n183.md`. Af
 the index draws 94 views: 36 by the axis tool, 38 by Evan Daniel’s regularizer and 20 by
 the grid-slack generator’s version 1.
 
+On 20 October 2026 the adoption of Francisco Couzo’s issue-678 certificates (T-223,
+think-xu4d) moved two house best packings: 204 from T-186, $2.04 \times 10^{-5}$ below
+it, and 260, first adopted, from the catalogue’s packing, $1.11 \times 10^{-2}$ below
+T-155’s exact ceiling.
+Both generators ran on both, Evan Daniel’s regularizer
+(`evand-regularize-adopt-2026-10-20-n204-260-evand`, 222 CPU-seconds) and grid-slack at
+0.5, 1 and 5 degrees (`grid-slack-adopt-2026-10-20-n204-260-grid-deg05`, `-grid-deg1`
+and `-grid-deg5`, 173 CPU-seconds).
+The selection draws grid-slack’s half-degree view at 204, where his view of the earlier
+witness lapsed. At 260 every strong view goes to the owner’s review at row 7 (some
+squares’ contact counts fall while no total does), so 260 is decided no better on the
+axis tool’s view until a review record admits one (think-fltj).
+At both counts his solved view lies below the witness’s side, by $1.39 \times 10^{-9}$
+and $2.51 \times 10^{-11}$: register candidates for the owner, not drawn.
+The evidence is retained in
+[`cases/regularized_drawings/think-xu4d-2026-10-20/`](../../cases/regularized_drawings/think-xu4d-2026-10-20/README.md).
+After it the index draws 95 views: 37 by the axis tool, 37 by Evan Daniel’s regularizer
+and 21 by the grid-slack generator’s version 1.
+
 ### The default picture
 
 On 13 October 2026 the owner made the regularized view the default picture, with the
