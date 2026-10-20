@@ -9,6 +9,35 @@ The authoritative record is [site-changelog.yaml](packing/site-changelog.yaml).
 
 ## Changelog
 
+<a id="changelog-date-2026-10-20"></a>
+
+### 2026-10-20
+
+<a id="changelog-entry-daniel-one-eighty-three-below-the-grid"></a>
+
+#### Daniel’s Packing of 183 Squares Below Side 14
+
+Significance S3: T-220 is an S3 finite case result, the first packing of 183 squares below the side-14 grid, from an established certificate kind and replay route. It brings no new technique and claims no optimality.
+
+Daniel packs 183 unit squares in a square of side
+$13999580178736252502081470897571/10^{30} < 14$, about $4.20 \times 10^{-4}$ below
+the trivial $14 \times 14$ grid. It is the first packing of 183 squares below side 14
+in this register. T-220 is confirmed at V3/C3 and is now the house at 183.
+
+- This project’s two maintained exact routes checked the original certificate, and
+  both refused its duplicate-square and outside-container controls. They
+  re-implement the geometry independently of the source’s code, though they share
+  parsing, half-angle conversion and the separating-axis theorem. A separately
+  prompted mathematical review accepted the bound.
+- The case draws a regularized view made here with Daniel’s regularizer at the same
+  side. It is a drawing, not a second bound. The source’s own regularized
+  certificate and its two checkers did not run here.
+- Credit Daniel, after Couzo’s 182-square packing. The source’s KKT, flat-motion
+  and local-minimum statements are numerical evidence that was not checked here, and
+  no optimality, rigidity or priority is claimed.
+
+PRs and supporting records: [\#687](https://github.com/jlevy/squares/pull/687) · [The case record at 183](packing/frontier/n-183.md) · [Retained certificate and verification limits](packing/resources/web/evand-n183-subgrid-2026-10-19/README.md) · [Mathematical review of 19 October](docs/project/reviews/review-2026-10-19-evand-n183-subgrid.md) · [Daniel’s registration request](https://github.com/jlevy/squares/issues/680).
+
 <a id="changelog-date-2026-10-16"></a>
 
 ### 2026-10-16
