@@ -91,8 +91,9 @@ PUBLICATION_HISTORY = (
         version="v0.8.6",
         first_published="October 20, 2026",
         result_scope=(
-            "Register Francisco Couzo's reported n204 and n260 certificates (T-223) at "
-            "V0/C0, pending review and adoption, and his 83 beyond-horizon rows."
+            "Register Francisco Couzo's n204 and n260 certificates (T-223), confirmed at "
+            "V3/C3 by their stage 4 review and adopted as both cases' house best packings, "
+            "with the strong generators' drawings, and his 83 beyond-horizon rows."
         ),
     ),
     PublicationHistoryEntry(
@@ -1097,8 +1098,9 @@ RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
         version="v0.8.6",
         impact="patch",
         reason=(
-            "Register Francisco Couzo's reported n204 and n260 certificates (T-223) at "
-            "V0/C0, pending review and adoption, and his 83 beyond-horizon rows."
+            "Register Francisco Couzo's n204 and n260 certificates (T-223), confirmed at "
+            "V3/C3 by their stage 4 review and adopted as both cases' house best packings, "
+            "with the strong generators' drawings, and his 83 beyond-horizon rows."
         ),
     ),
     ReleaseImpactDecision(
@@ -1720,7 +1722,15 @@ class ReleaseNoPublicChange(NamedTuple):
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
     ReleaseNoPublicChange(
         components=("paper:n11-optimality-review", "paper:n11-threshold-bound-review"),
-        paths=("packing/frontier/results.yaml",),
+        paths=(
+            "packing/devtools/adopt_houses.py",
+            "packing/devtools/couzo_678_replay.py",
+            "packing/devtools/default_drawings.py",
+            "packing/devtools/select_houses.py",
+            "packing/devtools/upper_bound_houses.py",
+            "packing/devtools/upper_bound_reports.py",
+            "packing/frontier/results.yaml",
+        ),
         outputs=(
             "papers/n11-optimality-review.html",
             "papers/n11-optimality-review.md",
@@ -1730,23 +1740,32 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "papers/n11-threshold-bound-review.pdf",
         ),
         reason=(
-            "For issue 678's registration (T-223 at n = 204 and 260) against main "
-            "f8d54772: both reviews read results.yaml only through "
-            "paper_figures.ladder_records, which selects the n11 ladder rungs LADDER_RUNGS "
-            "names and holds them to LADDER_DIGEST; T-223 is an added entry outside that "
-            "ladder, and no ladder row changes. Rendered at link revision f5349276, once "
-            "from this branch's tree and once with main's copies of the three changed "
-            "inputs (results.yaml, result-requests.yaml and source-coverage.yaml): "
-            "render_n11_optimality_review, render_n11_threshold_bound_review and "
-            "render_packing_methods leave the 50 files of the site tree byte-identical "
-            "between the trees. No PDF was printed; each prints from that HTML. Retain "
-            "v0.1.7 and v0.1.0."
+            "For issue 678's registration, stage 4 and house best packing adoption (T-223 "
+            "at n = 204 and 260, V3/C3) against main f8d54772: both reviews read "
+            "results.yaml only through paper_figures.ladder_records, which selects the n11 "
+            "ladder rungs LADDER_RUNGS names and holds them to LADDER_DIGEST; T-223 is an "
+            "entry outside that ladder, and no ladder row changes. The adoption's tools "
+            "(adopt_houses, default_drawings, select_houses, upper_bound_houses and "
+            "upper_bound_reports, which now imports couzo_678_replay) are declared through "
+            "the import graph and write no paper text. Rendered at link revision 90b3e263, "
+            "once from this branch's tree and once with main's copies of the eight changed "
+            "inputs main has (couzo_678_replay.py is new and is read only by this branch's "
+            "upper_bound_reports): render_n11_optimality_review, "
+            "render_n11_threshold_bound_review and render_packing_methods leave the 50 "
+            "files of the site tree byte-identical between the trees. No PDF was printed; "
+            "each prints from that HTML. Retain v0.1.7 and v0.1.0."
         ),
     ),
     ReleaseNoPublicChange(
         components=("paper:square-packing-methods-survey",),
         paths=(
             "packing/campaign/result-requests.yaml",
+            "packing/devtools/adopt_houses.py",
+            "packing/devtools/couzo_678_replay.py",
+            "packing/devtools/default_drawings.py",
+            "packing/devtools/select_houses.py",
+            "packing/devtools/upper_bound_houses.py",
+            "packing/devtools/upper_bound_reports.py",
             "packing/frontier/results.yaml",
             "packing/frontier/source-coverage.yaml",
         ),
@@ -1756,18 +1775,20 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "papers/square-packing-methods-survey.pdf",
         ),
         reason=(
-            "For issue 678's registration (T-223 at n = 204 and 260) against main "
-            "f8d54772: result requests, source coverage and results are citation targets "
-            "whose existence the producer checks, not inlined text, and every cited path "
-            "exists at both revisions; the #678 and #686 request changes, the "
-            "couzo-issue678-2026-10-18 coverage source with its 83 beyond-horizon rows "
-            "and the 60 rows it supersedes, and T-223 are not cited by the survey. "
-            "Rendered at link revision f5349276, once from this branch's tree and once "
-            "with main's copies of the three changed inputs (results.yaml, "
-            "result-requests.yaml and source-coverage.yaml): render_n11_optimality_review, "
-            "render_n11_threshold_bound_review and render_packing_methods leave the 50 "
-            "files of the site tree byte-identical between the trees. No PDF was printed; "
-            "it prints from that HTML. Retain v0.2.3."
+            "For issue 678's registration, stage 4 and house best packing adoption (T-223 "
+            "at n = 204 and 260, V3/C3) against main f8d54772: result requests, source "
+            "coverage and results are citation targets whose existence the producer checks, "
+            "not inlined text, and every cited path exists at both revisions; the #678 and "
+            "#686 request changes, the couzo-issue678-2026-10-18 coverage sources with the "
+            "83 beyond-horizon rows, the 60 rows they supersede and the two in-corpus "
+            "overrides, and T-223 are not cited by the survey, and the adoption's tools are "
+            "declared through the import graph and write no survey text. Rendered at link "
+            "revision 90b3e263, once from this branch's tree and once with main's copies of "
+            "the eight changed inputs main has (couzo_678_replay.py is new and is read only "
+            "by this branch's upper_bound_reports): render_n11_optimality_review, "
+            "render_n11_threshold_bound_review and render_packing_methods leave the 50 files "
+            "of the site tree byte-identical between the trees. No PDF was printed; it "
+            "prints from that HTML. Retain v0.2.3."
         ),
     ),
     ReleaseNoPublicChange(
