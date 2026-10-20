@@ -4386,7 +4386,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-16'
+  lastmod: '2026-10-20'
   status: live
 - path: cases/205.html
   canonical: cases/205.html
@@ -4882,7 +4882,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-18'
+  lastmod: '2026-10-20'
   status: live
 - path: cases/261.html
   canonical: cases/261.html
@@ -17137,6 +17137,36 @@ urls:
     - packing/campaign/issue-intake/intake-followup-20261019/n183-evidence-integration.yaml
     - packing/resources/web/evand-n183-subgrid-2026-10-19/receipts/exact-certification.json.xz
     - packing/resources/web/evand-n183-subgrid-2026-10-19/receipts/certify-execution-provenance.json
+- path: result/t-223.html
+  canonical: result/t-223.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-20'
+  lastmod: '2026-10-20'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 204
+      - 260
+    established: null
+    attribution:
+      source_keys:
+      - '[Couzo issue 678 2026-10-18]'
+      published: '2026-10-18'
+    builds_on: null
+    evidence:
+    - E-couzo-678-certificate-report
+    artifacts:
+    - packing/resources/web/couzo-issue678-2026-10-18/README.md
+    - packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n204.cert
+    - packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n260.cert
+    - packing/resources/web/couzo-issue678-2026-10-18/receipts/filtered-exact-replay.json
+    - packing/resources/web/couzo-issue678-2026-10-18/receipts/exhaustive-sample.json
+    - packing/campaign/issue-intake/upper-bounds-20261019/README.md
+    - packing/devtools/couzo_678_replay.py
 - path: results.html
   canonical: results.html
   kind: page

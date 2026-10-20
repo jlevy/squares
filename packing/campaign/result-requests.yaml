@@ -12507,612 +12507,721 @@ issues:
     opened: '2026-10-18'
     state: open
     kind: result-report
-    triage: pending
+    triage: done
     summary: >-
       Francisco Couzo reports 85 improved upper bounds at 204 to 998, opened
       2026-10-18T23:23:19Z, following issue 675, from source commit
       7b6c87e129cf80b5ff9847b90b47fd30b4563c54. Each printed side is rounded upward;
-      the exact rational certificate side is authoritative. Comparisons and source verification
-      receipts remain author assertions pending intake under think-xu4d.
-    read_through: '2026-10-19T00:31:50Z'
+      the exact rational certificate side is authoritative. Imported on 20 October 2026: the
+      83 certificates are retained in the couzo-issue678-2026-10-18 packet, whose filtered
+      exact replay decided all 85 rows on two routes with every control refused, and the 19
+      October ledger records every row in report order. T-223 registers 204 and 260 at
+      V0/C0, pending adoption; the 83 beyond the corpus are dated beyond-horizon rows.
+    read_through: '2026-10-19T15:31:25Z'
     results:
     - key: n204
       claim: s(204) <= 14.808642841982, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      register:
+      - T-223
+      evidence:
+      - E-couzo-678-certificate-report
     - key: n260
       claim: s(260) <= 16.645753250545, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      register:
+      - T-223
+      evidence:
+      - E-couzo-678-certificate-report
     - key: n330
       claim: s(330) <= 18.692697855726, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
     - key: n343
       claim: s(343) <= 18.978232204823, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
     - key: n418
       claim: s(418) <= 20.942828529884, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
     - key: n420
       claim: s(420) <= 20.974164562587, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
     - key: n421
       claim: s(421) <= 20.981525640927, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
     - key: n422
       claim: s(422) <= 20.983607201006, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
     - key: n455
       claim: s(455) <= 21.882183551471, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
     - key: n456
       claim: s(456) <= 21.882183551471, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
     - key: n458
       claim: s(458) <= 21.903778442820, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
     - key: n459
       claim: s(459) <= 21.942365250364, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
     - key: n461
       claim: s(461) <= 21.971318847922, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
     - key: n462
       claim: s(462) <= 21.974888792980, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
     - key: n463
       claim: s(463) <= 21.983603993953, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
     - key: n464
       claim: s(464) <= 21.987753655547, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
     - key: n497
       claim: s(497) <= 22.823104027272, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
     - key: n499
       claim: s(499) <= 22.882183551471, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
     - key: n501
       claim: s(501) <= 22.903778442820, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
     - key: n502
       claim: s(502) <= 22.942219237446, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
     - key: n505
       claim: s(505) <= 22.971592368271, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
     - key: n507
       claim: s(507) <= 22.973697163680, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
     - key: n545
       claim: s(545) <= 23.889010439304, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Less one square, the retained n546.cert packs 545
+        at its exact header side, which rounds up to this print, and both project exact routes accept
+        that packing (receipts/filtered-exact-replay.json); the 19 October ledger records it in report
+        order.'
+      queued: false
     - key: n546
       claim: s(546) <= 23.889010439304, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
     - key: n548
       claim: s(548) <= 23.956345132949, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
     - key: n549
       claim: s(549) <= 23.956345132949, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
     - key: n553
       claim: s(553) <= 23.980727660940, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
     - key: n554
       claim: s(554) <= 23.993524047733, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
     - key: n555
       claim: s(555) <= 23.993580713561, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
     - key: n592
       claim: s(592) <= 24.888988759404, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
     - key: n593
       claim: s(593) <= 24.888988761769, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
     - key: n597
       claim: s(597) <= 24.961502766154, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
     - key: n598
       claim: s(598) <= 24.961502766154, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
     - key: n600
       claim: s(600) <= 24.980727660940, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
     - key: n601
       claim: s(601) <= 24.987983019378, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
     - key: n602
       claim: s(602) <= 24.993580713561, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
     - key: n641
       claim: s(641) <= 25.881306220594, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Less one square, the retained n642.cert packs 641
+        at its exact header side, which rounds up to this print, and both project exact routes accept
+        that packing (receipts/filtered-exact-replay.json); the 19 October ledger records it in report
+        order.'
+      queued: false
     - key: n642
       claim: s(642) <= 25.881306220594, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
     - key: n650
       claim: s(650) <= 25.982275449119, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
     - key: n652
       claim: s(652) <= 25.994256214773, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
     - key: n653
       claim: s(653) <= 25.994414202392, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
     - key: n654
       claim: s(654) <= 25.995888235804, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
     - key: n693
       claim: s(693) <= 26.881306218365, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
     - key: n700
       claim: s(700) <= 26.972679052192, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
     - key: n701
       claim: s(701) <= 26.975549413717, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
     - key: n703
       claim: s(703) <= 26.987459573204, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
     - key: n704
       claim: s(704) <= 26.994256369878, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
     - key: n705
       claim: s(705) <= 26.994256369878, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
     - key: n706
       claim: s(706) <= 26.998542133963, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
     - key: n749
       claim: s(749) <= 27.911194713730, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
     - key: n751
       claim: s(751) <= 27.932448900769, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
     - key: n752
       claim: s(752) <= 27.932449886404, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
     - key: n753
       claim: s(753) <= 27.932449886404, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
     - key: n754
       claim: s(754) <= 27.937423317053, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
     - key: n755
       claim: s(755) <= 27.951504031492, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
     - key: n760
       claim: s(760) <= 27.995022162160, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
     - key: n804
       claim: s(804) <= 28.909246527138, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
     - key: n805
       claim: s(805) <= 28.909665866810, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
     - key: n806
       claim: s(806) <= 28.919759255285, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
     - key: n808
       claim: s(808) <= 28.932449886404, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
     - key: n815
       claim: s(815) <= 28.995022162160, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
     - key: n863
       claim: s(863) <= 29.916419307447, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
     - key: n865
       claim: s(865) <= 29.932449886402, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
     - key: n867
       claim: s(867) <= 29.949688481977, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
     - key: n868
       claim: s(868) <= 29.977390686090, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
     - key: n870
       claim: s(870) <= 29.985424855417, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
     - key: n872
       claim: s(872) <= 29.995022162160, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
     - key: n873
       claim: s(873) <= 29.996375057644, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
     - key: n874
       claim: s(874) <= 29.996375057644, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
     - key: n919
       claim: s(919) <= 30.844931419278, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
     - key: n924
       claim: s(924) <= 30.932449886402, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
     - key: n926
       claim: s(926) <= 30.945612117331, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
     - key: n927
       claim: s(927) <= 30.975475685281, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
     - key: n928
       claim: s(928) <= 30.975475685281, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
     - key: n930
       claim: s(930) <= 30.981535303483, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
     - key: n933
       claim: s(933) <= 30.994238714880, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
     - key: n934
       claim: s(934) <= 30.995302140806, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
     - key: n984
       claim: s(984) <= 31.914115712696, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
     - key: n987
       claim: s(987) <= 31.944662519483, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
     - key: n989
       claim: s(989) <= 31.975475685281, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
     - key: n990
       claim: s(990) <= 31.977918827720, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
     - key: n991
       claim: s(991) <= 31.981485095638, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
     - key: n992
       claim: s(992) <= 31.984796372085, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
     - key: n994
       claim: s(994) <= 31.993645614627, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
-      bead: think-xu4d
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
     - key: n998
       claim: s(998) <= 31.998301106112, rounded upward; exact certificate side is authoritative.
       source: body
-      not_registered: Stage 1 inventory retained. Full report-order comparison, pinned source custody and
-        priced validation remain on the import bead; no claim is registered by this audit.
-      queued: true
+      not_registered: 'Beyond the n <= 324 corpus: a dated row of the couzo-issue678-2026-10-18 source,
+        below every earlier report at its count. Its retained certificate''s exact header side rounds
+        up to this print, and both project exact routes accept the packing with every control refused
+        (receipts/filtered-exact-replay.json); the 19 October ledger records it in report order.'
+      queued: false
+    asks:
+    - what: Review the promised source-pin, hash-kind and certificate-credit correction when the author
+        links it (https://github.com/jlevy/squares/issues/678#issuecomment-6269517369).
+      state: queued
       bead: think-xu4d
+      note: The author's comment identifies the exact n260 seed bytes and promises a follow-up that refreshes
+        the evand pin, labels each external hash as gzip or decompressed, and adds Evan Daniel's certificate
+        credit; franciscouzo/square-packing still ends at 7b6c87e, so it is not yet pushed. Our correction
+        https://github.com/jlevy/squares/issues/678#issuecomment-6270970266 asked for the link. Coordinate
+        the follow-up with think-pvav for issue 675.
+    - what: Review the author's n260 float-conversion, search-chain, packing-identity and analytic-optimum
+        assertions (https://github.com/jlevy/squares/issues/678#issuecomment-6269517369) separately from
+        seed custody.
+      state: queued
+      bead: think-xu4d
+      note: The comment reports that its importer's float conversion of the 14a9af8 seed reproduces the seed's
+        SHA-256, a three-job search chain to the n260 certificate, 240 of 260 squares coinciding with
+        de Winter's df90e58d packing after a 180-degree rotation, and that the seed is the analytic optimum
+        of that packing. These remain source-reported assertions; neither the custody check nor the public
+        acknowledgement establishes geometry, identity, conversion correctness or an optimum.
     beads:
     - think-xu4d
+    - think-fpnd
     answer_bead: think-xu4d
     replies:
     - url: https://github.com/jlevy/squares/issues/678#issuecomment-6257122870
@@ -13138,11 +13247,35 @@ issues:
     notes: >-
       Issue body retained in packing/campaign/issue-intake/intake-20261019/issue-678.json.
       This is a distinct chronological submission from issues 672 and 675; their claims and
-      dispositions remain separate. The n260 predecessor seed provenance remains unresolved
-      and must be preserved through custody and attribution review. Author-reported verification
-      receipts are not local replays. The n545 and n641 witnesses require deletion of one surplus
-      square from n546 and n642 respectively. No register entry, adopted upper bound, house
-      choice or confirmation rung changes in this Stage 1 inventory; Stage 4 adoption is separate.
+      dispositions remain separate. Author clarification
+      https://github.com/jlevy/squares/issues/678#issuecomment-6269517369 identifies the n260
+      predecessor seed at evand/square-packing 14a9af8be4a8b8a8328c3eb6b486a2e553380193,
+      search/regularize/lists/certs/n-260.cert.gz. Our retained custody check confirms 4,112 gzip
+      bytes with SHA-256 e90993b1c0f625d1d6c2d1ea3b5f391bfe6d98f5bc387a10863434bb9db4934e,
+      38,184 decompressed bytes with SHA-256
+      34b203dd126640c533f2ab88b5af8d593db8bf60a8f3d3527defd9cac85c6d40, and header
+      260 4161444696515435316429350771309/250000000000000000000000000000.
+      The custody receipt and original gzip are retained beside the body as
+      issue-678-n260-seed-custody.json and issue-678-n260-seed-14a9af8.cert.gz;
+      issue-678-comments.json retains all three comments through the public correction
+      https://github.com/jlevy/squares/issues/678#issuecomment-6270970266. This resolves
+      immutable-source and hash-kind custody only. The author's construction credit to Joost de
+      Winter (issue 668) and exact-form certificate credit to Evan Daniel remain source-reported,
+      distinct from identity or analytic-optimum verification. T-196 already merged through PR
+      676 as the earlier submission; no later seed or refinement rewrites it. Author-reported
+      verification receipts are not local replays. The n545 and n641 witnesses delete one
+      surplus square from n546 and n642 respectively. On 2026-10-19 (think-xu4d) the 83 linked
+      certificates, 8,107,636 bytes as the packet's README lists them path by path with each
+      SHA-256, were retained with the source's MIT-licensed checker in
+      resources/web/couzo-issue678-2026-10-18 at 7b6c87e, and all 85 rows were decided there
+      exactly by devtools.couzo_678_replay, with five controls per certificate. On 2026-10-20
+      campaign/issue-intake/upper-bounds-20261019 walked them in report order against the
+      record at main d588ad987 and issues 666, 670, 672 and 675, recording all 85; T-223
+      registered 204 and 260 at V0/C0, pending adoption, and the couzo-issue678-2026-10-18
+      source took the 83 beyond the corpus as dated rows, superseding the rows that stood at 60
+      of those counts. The mapped mathematical review, the replay's evidence entries and the
+      adoption at 204 and 260 are stage 4 work on think-xu4d; the full-kernel all-pairs replay
+      is held on think-fpnd. Coordinate with think-pvav for issue 675.
   - number: 680
     title: 's(183) ≤ 13.999580178737: registration request (first 183 below the grid)'
     author: evand
