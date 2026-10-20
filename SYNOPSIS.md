@@ -684,6 +684,7 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [Review: de Winter’s Exact Upper Bounds at 227, 229 and 260 (Issue #668, T-196)](docs/project/reviews/review-2026-10-20-de-winter-668-upper-bounds.md) | dated review record | record | retained | — |
 | [Review: Evan Daniel’s Upper-Bound Imports of 19 and 20 October (#689, #694)](docs/project/reviews/review-2026-10-20-upper-bound-imports-689-694.md) | dated review record | record | retained | — |
 | [Review: Evan Daniel’s Upper-Bound Imports of 16 to 18 October (#659, #664, #669, #674)](docs/project/reviews/review-2026-10-19-upper-bound-imports-659-664-669-674.md) | dated review record | record | retained | — |
 | [Completed n68 Fine-Net Certificate: Mathematical Review](docs/project/reviews/review-2026-10-19-n68-fine-net-mathematics.md) | dated review record | record | retained | — |
