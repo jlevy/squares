@@ -1603,6 +1603,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "packing/campaign/result-requests.yaml",
             "packing/devtools/adopt_houses.py",
             "packing/devtools/default_drawings.py",
+            "packing/devtools/run_negative_controls.py",
             "packing/devtools/select_houses.py",
             "packing/devtools/upper_bound_houses.py",
             "packing/devtools/upper_bound_reports.py",
@@ -1624,15 +1625,16 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "T-218 and T-219, raises T-197 to T-199 to V3/C3, adopts Evan Daniel's "
             "certificates as the houses at 155, 229, 236 and 271 with their house "
             "readers, drawings and case records, corrects the credit at 146 and 308, and "
-            "maps the five requests. Rendered at link revision 028bc72e (main, site "
-            "v0.7.35), once from main's tree and from this branch's at ecb4b31d, after "
-            "its merge of main and the explainer's v0.4.9 cut, and again at 4610c915, "
-            "after the records-tier fixes, render_packing_methods, "
+            "maps the five requests; one unread review drawing leaves the worker "
+            "snapshot (run_negative_controls). Rendered at link revision 028bc72e (main, "
+            "site v0.7.35), once from main's tree and from this branch's at ecb4b31d, "
+            "after its merge of main and the explainer's v0.4.9 cut, again at 4610c915, "
+            "after the records-tier fixes, and at a8222aad, after the CI follow-ups and "
+            "its merge of main b16ddeb0 (#691), render_packing_methods, "
             "render_n11_optimality_review and render_n11_threshold_bound_review write 50 "
             "files, byte-identical between the trees. No PDF was printed; each prints "
-            "from that HTML. The three papers "
-            "keep v0.1.7, v0.1.0 and v0.2.3; the explainer, whose register count moves "
-            "to 219, takes v0.4.9."
+            "from that HTML. The three papers keep v0.1.7, v0.1.0 and v0.2.3; the "
+            "explainer, whose register count moves to 219, takes v0.4.9."
         ),
     ),
     ReleaseNoPublicChange(
