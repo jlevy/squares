@@ -3116,6 +3116,14 @@ urls:
   first_published: '2026-10-07'
   lastmod: '2026-10-20'
   status: live
+- path: atlas/regularized/n-260.svg
+  canonical: atlas/regularized/n-260.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-20'
+  status: live
 - path: atlas/regularized/n-261.svg
   canonical: atlas/regularized/n-261.svg
   kind: asset-file
@@ -4586,7 +4594,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-18'
+  lastmod: '2026-10-20'
   status: live
 - path: cases/228.html
   canonical: cases/228.html
@@ -4882,7 +4890,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-18'
+  lastmod: '2026-10-20'
   status: live
 - path: cases/261.html
   canonical: cases/261.html
@@ -16240,13 +16248,16 @@ urls:
     - packing/resources/web/de-winter-upper-bounds-227-229-260-2026-10-17/source/n260/n260_exact.json.gz
     - packing/resources/web/de-winter-upper-bounds-227-229-260-2026-10-17/acquisition/claims.json
     - packing/resources/web/de-winter-upper-bounds-227-229-260-2026-10-17/receipts/exact-certification.json.xz
+    - packing/resources/web/de-winter-upper-bounds-227-229-260-2026-10-17/review/review-2026-10-20/README.md
     - packing/campaign/issue-intake/upper-bounds-20261018/README.md
+    - docs/project/reviews/review-2026-10-20-de-winter-668-upper-bounds.md
   amendments:
   - date: '2026-10-20'
-    reason: 'The retained replay is integrated: the result rises to V3/C3 and cites its confirming
-      evidence (E-de-winter-668-upper-exact-feasibility), with the frozen comparison and the receipt
-      among its artifacts; no stage 4 review is retained yet and no case adopts it, and the bound,
-      scope and attribution are unchanged.'
+    reason: 'The retained replay is integrated and the 20 October review accepts it: the result rises
+      to V3/C3 and cites its confirming evidence (E-de-winter-668-upper-exact-feasibility), with the
+      frozen comparison, the receipt, the review and its retained programs among its artifacts, and
+      the cases at 227 and 260 adopt it as their house best packings; the bound, scope and attribution
+      are unchanged.'
     previous:
       kind: upper-bound
       scope:
