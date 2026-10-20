@@ -3,9 +3,9 @@ type: is
 id: is-01m5aaenpef0x5m26vxp6f3hdx
 title: Reconcile accepted intake records with actual post665 main
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 10
+version: 11
 delegate: c-lane-688
 labels: []
 dependencies: []
@@ -16,8 +16,12 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-19T14:53:35.309Z
-updated_at: 2026-10-20T02:06:44.700Z
+updated_at: 2026-10-20T06:12:53.303Z
 started_at: 2026-10-19T14:53:51.733Z
+closed_at: 2026-10-20T06:12:53.303Z
+close_reason: "Landed by #688 (merged 476049de1, 2026-10-20): T-205 to T-207 at V3/C3 with Reviews A, B and follow-up C dispositioned; deferred checkpoint 39375597193 green; site v0.8.1."
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes
