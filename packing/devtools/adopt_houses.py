@@ -691,6 +691,51 @@ RESULTS: dict[str, Prose] = {
         ),
         squares="a rational centre and the cosine and sine of its rotation",
     ),
+    "T-221": Prose(
+        author="Evan Daniel",
+        reported="on [jlevy/squares#689](https://github.com/jlevy/squares/issues/689)",
+        producer_route=False,
+        ai=(
+            "The source’s credits say its work was done with Claude (Anthropic) under human "
+            "direction, and the commit that publishes the certificate names Claude Opus 5.5 "
+            "as co-author and says Evan Daniel approved it."
+        ),
+        lineage=(
+            "The author’s chained explorer inserted one square into Nate Chaoweeraprasit’s "
+            "n = 307 packing of #481, the register’s witness for 307, and his basin explorer "
+            "descended from there to this packing; the issue asks that the 307 packing be "
+            "credited as the ultimate start, and says the packing neither refines nor "
+            "descends from Kevin Fang’s #484 or Daniel’s #489. Measured here square by "
+            "square, the best assignment against #489’s packing under a quarter turn moves 15 "
+            "squares beyond a tenth, at most 0.708, and keeps 293 within one, and 263 of the "
+            "307 squares of #481’s packing lie within a tenth of this one: another "
+            "arrangement of the two-wedge design that #484, #489 and #481’s 307 share, found "
+            "from #481’s 307 by the source’s account (T-221)."
+        ),
+    ),
+    "T-222": Prose(
+        author="Evan Daniel",
+        reported="on [jlevy/squares#694](https://github.com/jlevy/squares/issues/694)",
+        producer_route=False,
+        ai=(
+            "The source’s credits say its work was done with Claude (Anthropic) under human "
+            "direction, and the commit that publishes the certificate names Claude Opus 5.5 "
+            "as co-author and says Evan Daniel approved it."
+        ),
+        lineage=(
+            "The author’s chained explorer removed two squares from Daniil Ostashev’s n = 156 "
+            "packing, the register’s witness for 156, and crossovers against close relatives "
+            "of Francisco Couzo’s #586 packing and a later restart of his basin explorer "
+            "reached this packing; the issue asks that #586’s arrangement, itself continued "
+            "from Daniel’s #552, and Ostashev’s packing be credited as its starts, and calls "
+            "it a different KKT point in #586’s family. Measured here square by square, it "
+            "pairs one to one with #586’s packing under a quarter turn, three squares beyond "
+            "a tenth, at most 0.204: Couzo’s arrangement continued, not a refinement in this "
+            "record’s sense, as at 271 (T-222). Ostashev’s packing lies within a tenth of it "
+            "at only 94 of its 156 squares, so his credit as the start rests on the source’s "
+            "account of the search, and Couzo’s on the measured arrangement."
+        ),
+    ),
 }
 
 XU = "Ryan Xu"
@@ -873,13 +918,17 @@ CREDITS: dict[int, Credit] = {
         "Mykhailo Polkovskyi’s arrangement of PingYou Ltd’s n = 153 design, after Ryan "
         "Xu’s n = 70 packing and Evan Daniel’s exact certificate of it",
     ),
-    # T-182's packing re-solved (T-186's regularization of T-182), after Evan Daniel's
-    # issue-552 arrangement (RT-4 of the 16 October review).
+    # Evan Daniel's continuation of issue 586's arrangement, three squares beyond a tenth
+    # (the 20 October review), which Couzo continued from Daniel's issue-552 packing; issue
+    # 694 credits #586's arrangement and Ostashev's n = 156 packing as its starts, and only
+    # the first is near it by pose, so Ostashev is named as the source's account of the
+    # search. T-186's re-solve of T-182, the earlier house, is not its start.
     154: Credit(
         (DANIEL,),
-        (COUZO, POLKOVSKYI),
-        "Mykhailo Polkovskyi’s refinement of Francisco Couzo’s further arrangement of Evan "
-        "Daniel’s n = 154 packing",
+        (COUZO,),
+        "Evan Daniel’s continuation of Francisco Couzo’s further arrangement of Daniel’s "
+        "n = 154 packing in a search the source started from Daniil Ostashev’s n = 156 "
+        "packing",
     ),
     # T-174's regularization of T-149's packing, 3 squares moved beyond 1e-3, one to one;
     # that it is that packing is the source's statement (the 14 October review of PR 574).
@@ -1224,13 +1273,16 @@ CREDITS: dict[int, Credit] = {
     ),
     # T-174's regularization of T-141's packing, 25 squares moved beyond 1e-3, one to one;
     # that it is that packing is the source's statement (the 14 October review of PR 574).
-    # Issue 673 corrects T-141's credit: Kevin Fang's construction is what Daniel's search
-    # was based on, and the finder of the packing posted is Daniel (19 October 2026).
+    # Issue 689's packing, another arrangement of the two-wedge design (15 squares beyond a
+    # tenth of #489's, the 20 October review), found from issue 481's n = 307 packing, which
+    # the issue credits as the ultimate start. Fang is named in the sentence as the design's
+    # author, as the earlier house's credit named him, and not in the structured fields,
+    # which is the owner's open decision under think-a95t (RW-1 of that review).
     308: Credit(
         (DANIEL,),
-        (PINGYOU,),
-        "PingYou Ltd’s refinement of Evan Daniel’s packing based on Kevin Fang’s two-wedge "
-        "construction",
+        (),
+        "Evan Daniel’s arrangement of Kevin Fang’s two-wedge design in a search started from "
+        "Nate Chaoweeraprasit’s n = 307 packing",
     ),
 }
 

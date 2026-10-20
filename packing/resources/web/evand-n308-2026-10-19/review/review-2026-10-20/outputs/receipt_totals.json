@@ -1,0 +1,118 @@
+{
+ "evand-n308-2026-10-19": {
+  "format": "evand-689-exact-replay-v1",
+  "jobs": [
+   {
+    "control": "positive",
+    "n": 308,
+    "outcome": {
+     "exact_verify": "accepted",
+     "independent": "accepted"
+    },
+    "wall": 12.41,
+    "cpu": {
+     "exact_verify": 7.6,
+     "independent": 4.58
+    }
+   },
+   {
+    "control": "duplicate-square-overlap",
+    "n": 308,
+    "outcome": {
+     "exact_verify": "refused: [[\"overlap\", \"squares 0 and 1 overlap\"]]",
+     "independent": "refused: [\"1 overlapping pairs; worst exact gap -1\"]"
+    },
+    "wall": 11.82,
+    "cpu": {
+     "exact_verify": 7.04,
+     "independent": 4.58
+    }
+   },
+   {
+    "control": "square-translated-outside-container",
+    "n": 308,
+    "outcome": {
+     "exact_verify": "refused: [[\"container\", \"square 0 violates x<=s\"], [\"container\", \"square 0 violates x<=s\"], [\"conta",
+     "independent": "refused: [\"container penetration -320636754919700980000706315133491937/1000000000000000000000000000"
+    },
+    "wall": 11.98,
+    "cpu": {
+     "exact_verify": 7.13,
+     "independent": 4.72
+    }
+   }
+  ],
+  "pair_decisions": 283668,
+  "route_cpu_seconds": 35.66,
+  "job_wall_seconds": 36.22,
+  "longest_job_wall": 12.41,
+  "margins": {
+   "exact_verify": {
+    "containment_clearance": "1/200000000000000000000",
+    "best_pair_gap": "3285085825734601172966610273384414642794111101752255234158986179463675191405897759/328508582573460384004757551141833435561712152051739488852498884197780000000000000000000000000000000000"
+   },
+   "independent": {
+    "containment_clearance": "1/200000000000000000000",
+    "best_pair_gap": "3285085825734601172966610273384414642794111101752255234158986179463675191405897759/328508582573460384004757551141833435561712152051739488852498884197780000000000000000000000000000000000"
+   }
+  }
+ },
+ "evand-n154-sweep-2026-10-20": {
+  "format": "evand-694-exact-replay-v1",
+  "jobs": [
+   {
+    "control": "positive",
+    "n": 154,
+    "outcome": {
+     "exact_verify": "accepted",
+     "independent": "accepted"
+    },
+    "wall": 3.14,
+    "cpu": {
+     "exact_verify": 1.99,
+     "independent": 1.11
+    }
+   },
+   {
+    "control": "duplicate-square-overlap",
+    "n": 154,
+    "outcome": {
+     "exact_verify": "refused: [[\"overlap\", \"squares 0 and 1 overlap\"]]",
+     "independent": "refused: [\"1 overlapping pairs; worst exact gap -1\"]"
+    },
+    "wall": 3.03,
+    "cpu": {
+     "exact_verify": 1.89,
+     "independent": 1.09
+    }
+   },
+   {
+    "control": "square-translated-outside-container",
+    "n": 154,
+    "outcome": {
+     "exact_verify": "refused: [[\"container\", \"square 0 violates x<=s\"], [\"container\", \"square 0 violates x<=s\"], [\"conta",
+     "independent": "refused: [\"container penetration -95275633082470661763636569284572009717727481346813553554867178525"
+    },
+    "wall": 2.86,
+    "cpu": {
+     "exact_verify": 1.73,
+     "independent": 1.09
+    }
+   }
+  ],
+  "pair_decisions": 70686,
+  "route_cpu_seconds": 8.9,
+  "job_wall_seconds": 9.03,
+  "longest_job_wall": 3.14,
+  "margins": {
+   "exact_verify": {
+    "containment_clearance": "1/200000000000000000000",
+    "best_pair_gap": "5576633939458482559391189503411998493563926970970224396093389065907373020976667055521/557663393945848797159467447970217447179326305576865173293689719458158450000000000000000000000000000000000"
+   },
+   "independent": {
+    "containment_clearance": "1/200000000000000000000",
+    "best_pair_gap": "5576633939458482559391189503411998493563926970970224396093389065907373020976667055521/557663393945848797159467447970217447179326305576865173293689719458158450000000000000000000000000000000000"
+   }
+  }
+ }
+}

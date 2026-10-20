@@ -102,6 +102,10 @@ DANIEL_674 = "evand-n229-dilation-2026-10-17"
 DANIEL_674_UPDATE = "evand-n229-dilation-update-2026-10-18"
 DANIEL_659 = "evand-n236-2026-10-16"
 DANIEL_664 = "evand-n271-2026-10-17"
+#: Evan Daniel's issues #689 and #694, retained under MIT by the evand lane of 20 October
+#: (`test_upper_bound_reports_689_694`).
+DANIEL_689 = "evand-n308-2026-10-19"
+DANIEL_694 = "evand-n154-sweep-2026-10-20"
 #: Joost de Winter's issue #668, retained under MIT, read by the centre-basis JSON adapter
 #: (`test_upper_bound_reports_668`).
 DE_WINTER_668 = "de-winter-upper-bounds-227-229-260-2026-10-17"
@@ -139,6 +143,8 @@ EVERY = (
     DANIEL_674_UPDATE,
     DANIEL_659,
     DANIEL_664,
+    DANIEL_689,
+    DANIEL_694,
     DE_WINTER_668,
 )
 
@@ -1391,6 +1397,8 @@ def test_the_register_plan_states_each_bound_as_check_standing_reads_it(name: st
         DANIEL_674_UPDATE: "2026-10-18",
         DANIEL_659: "2026-10-16",
         DANIEL_664: "2026-10-17",
+        DANIEL_689: "2026-10-19",
+        DANIEL_694: "2026-10-20",
         DE_WINTER_668: "2026-10-17",
     }
     assert result["attribution"]["published"] == published.get(name, "2026-10-10")

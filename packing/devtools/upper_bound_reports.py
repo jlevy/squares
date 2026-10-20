@@ -1379,6 +1379,8 @@ HOUSES: dict[str, Callable[[int], Fraction]] = {
         "evand-n229-dilation-update-2026-10-18"
     ),
     "[Daniel n183 subgrid 2026-10-19]": _import("evand-n183-subgrid-2026-10-19"),
+    "[Daniel n308 2026-10-19]": _import("evand-n308-2026-10-19"),
+    "[Daniel n154 sweep 2026-10-20]": _import("evand-n154-sweep-2026-10-20"),
     "[de Winter upper bounds 2026-10-17]": _import(
         "de-winter-upper-bounds-227-229-260-2026-10-17"
     ),

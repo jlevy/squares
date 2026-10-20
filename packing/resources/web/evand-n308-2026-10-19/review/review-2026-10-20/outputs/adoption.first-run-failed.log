@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/tmp/claude-0/-home-user-squares/4d60ed7e-c8f7-58a7-a1b1-aeee5c887ef3/scratchpad/wt-699/packing/resources/web/evand-n308-2026-10-19/review/review-2026-10-20/programs/adoption_1020.py", line 175, in <module>
+    sys.exit(main(sys.argv[1:]))
+             ~~~~^^^^^^^^^^^^^^
+  File "/tmp/claude-0/-home-user-squares/4d60ed7e-c8f7-58a7-a1b1-aeee5c887ef3/scratchpad/wt-699/packing/resources/web/evand-n308-2026-10-19/review/review-2026-10-20/programs/adoption_1020.py", line 113, in main
+    ceiling = case_ceiling(n)
+  File "/tmp/claude-0/-home-user-squares/4d60ed7e-c8f7-58a7-a1b1-aeee5c887ef3/scratchpad/wt-699/packing/resources/web/evand-n308-2026-10-19/review/review-2026-10-20/programs/adoption_1020.py", line 92, in case_ceiling
+    assert block, n
+           ^^^^^
+AssertionError: 308

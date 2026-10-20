@@ -499,7 +499,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | cases/151.html | cases/151.html | record | overview | 2026-10-03 | 2026-10-14 | live |
 | cases/152.html | cases/152.html | record | overview | 2026-10-03 | 2026-10-14 | live |
 | cases/153.html | cases/153.html | record | overview | 2026-10-03 | 2026-10-15 | live |
-| cases/154.html | cases/154.html | record | overview | 2026-10-03 | 2026-10-16 | live |
+| cases/154.html | cases/154.html | record | overview | 2026-10-03 | 2026-10-20 | live |
 | cases/155.html | cases/155.html | record | overview | 2026-10-03 | 2026-10-19 | live |
 | cases/156.html | cases/156.html | record | overview | 2026-10-03 | 2026-10-16 | live |
 | cases/157.html | cases/157.html | record | overview | 2026-10-03 | 2026-10-14 | live |
@@ -670,7 +670,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | cases/305.html | cases/305.html | record | overview | 2026-10-03 | 2026-10-17 | live |
 | cases/306.html | cases/306.html | record | overview | 2026-10-03 | 2026-10-17 | live |
 | cases/307.html | cases/307.html | record | overview | 2026-10-03 | 2026-10-17 | live |
-| cases/308.html | cases/308.html | record | overview | 2026-10-03 | 2026-10-17 | live |
+| cases/308.html | cases/308.html | record | overview | 2026-10-03 | 2026-10-20 | live |
 | cases/309.html | cases/309.html | record | overview | 2026-10-03 | 2026-10-14 | live |
 | cases/31.html | cases/31.html | record | overview | 2026-10-03 | 2026-10-07 | live |
 | cases/310.html | cases/310.html | record | overview | 2026-10-03 | 2026-10-14 | live |
@@ -1018,6 +1018,8 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | result/t-218.html | result/t-218.html | result | overview | 2026-10-19 | 2026-10-19 | live |
 | result/t-219.html | result/t-219.html | result | overview | 2026-10-19 | 2026-10-19 | live |
 | result/t-220.html | result/t-220.html | result | overview | 2026-10-19 | 2026-10-19 | live |
+| result/t-221.html | result/t-221.html | result | overview | 2026-10-20 | 2026-10-20 | live |
+| result/t-222.html | result/t-222.html | result | overview | 2026-10-20 | 2026-10-20 | live |
 | results.html | results.html | page | overview | 2026-09-29 | 2026-10-20 | live |
 | sitemap.xml | sitemap.xml | site-file | overview | 2026-10-07 | 2026-10-20 | live |
 | social-card.png | social-card.png | asset-file | overview | 2026-09-29 | 2026-10-20 | live |

@@ -1,0 +1,66 @@
+{
+ "evand-n308-2026-10-19": {
+  "pin": "bc0708fc75c84cffd241e1901c71fbdd120542a3",
+  "problems": [],
+  "tree": "e5c826d0c667fef3abbff3820d5c91b800c25d7a",
+  "committed": "2026-10-19T16:41:02-06:00",
+  "committed_utc": "2026-10-19T22:41:02Z",
+  "head": "1d2bb82035af4b7eb4658488543e46b67d1099ca",
+  "pin_is_ancestor_of_head": true,
+  "manifest_lines": 20,
+  "manifest_bytes": 906877,
+  "retained_files": 13,
+  "retained_bytes": 309168,
+  "pinned_only": 7,
+  "identical_copies_checked": 4,
+  "issue_digests_checked": 2,
+  "history": {
+   "search/packer/candidates/s308_d308.cert": {
+    "commits_touching": [
+     "bc0708fc75c84cffd241e1901c71fbdd120542a3"
+    ],
+    "head_holds_pinned_blob": true,
+    "blob": "a8781bd8a09c24a8fd2b9823a31bd5f0bc511ed1"
+   },
+   "search/packer/candidates/s308_d308_regularized.cert": {
+    "commits_touching": [
+     "bc0708fc75c84cffd241e1901c71fbdd120542a3"
+    ],
+    "head_holds_pinned_blob": true,
+    "blob": "745dbc4864a9dde1b6c64d4a4f076cbdd276e132"
+   }
+  }
+ },
+ "evand-n154-sweep-2026-10-20": {
+  "pin": "1d2bb82035af4b7eb4658488543e46b67d1099ca",
+  "problems": [],
+  "tree": "0eeb61451d9bece767cac0962118d25513b740bf",
+  "committed": "2026-10-19T21:54:48-06:00",
+  "committed_utc": "2026-10-20T03:54:48Z",
+  "head": "1d2bb82035af4b7eb4658488543e46b67d1099ca",
+  "pin_is_ancestor_of_head": true,
+  "manifest_lines": 21,
+  "manifest_bytes": 766052,
+  "retained_files": 13,
+  "retained_bytes": 164990,
+  "pinned_only": 8,
+  "identical_copies_checked": 4,
+  "issue_digests_checked": 2,
+  "history": {
+   "search/packer/candidates/s154_sw.cert": {
+    "commits_touching": [
+     "1d2bb82035af4b7eb4658488543e46b67d1099ca"
+    ],
+    "head_holds_pinned_blob": true,
+    "blob": "2ac12453c6cb54c8247d096d82326ab62602e1af"
+   },
+   "search/packer/candidates/s154_sw_regularized.cert": {
+    "commits_touching": [
+     "1d2bb82035af4b7eb4658488543e46b67d1099ca"
+    ],
+    "head_holds_pinned_blob": true,
+    "blob": "73174fe992d5bc7eb3c2ec9522643d8002c8cdaf"
+   }
+  }
+ }
+}

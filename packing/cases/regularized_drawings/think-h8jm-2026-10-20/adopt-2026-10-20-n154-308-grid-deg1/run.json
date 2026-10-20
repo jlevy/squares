@@ -1,9 +1,10 @@
 {
-  "id": "grid-slack-adopt-2026-10-20-n227-260-grid-1",
+  "id": "grid-slack-adopt-2026-10-20-n154-308-grid-deg1",
   "generator": "regularize_grid_slack/1",
   "finished": "2026-10-20",
   "parameters": {"near_axis_degrees":1.0,"trust":0.45,"time_limit":120.0,"stage_margin":0.0099},
   "counts": 2,
   "decisions": {"admit":2},
-  "cost": {"cpu_seconds":29.1,"wall_seconds":29.1,"workers":1,"note":"per-count seconds the reports record, summed; no receipt of the run's own"}
+  "cost": {"cpu_seconds":187.24,"wall_seconds":187.24,"workers":1,"note":"per-count seconds the reports record, summed; no receipt of the run's own"}
 }
+

@@ -1,5 +1,5 @@
 {
-  "id": "grid-slack-adopt-2026-10-20-n227-260-grid-0.5",
+  "id": "grid-slack-adopt-2026-10-20-n227-260-grid-deg05",
   "generator": "regularize_grid_slack/1",
   "finished": "2026-10-20",
   "parameters": {"near_axis_degrees":0.5,"trust":0.45,"time_limit":120.0,"stage_margin":0.0099},

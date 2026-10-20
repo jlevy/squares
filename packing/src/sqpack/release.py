@@ -91,9 +91,9 @@ PUBLICATION_HISTORY = (
         version="v0.8.6",
         first_published="October 20, 2026",
         result_scope=(
-            "Raise Joost de Winter's T-196 (#668) at 227, 229 and 260 to V3/C3 on the "
-            "integrated exact replay and its stage 4 review, and adopt it as the house best "
-            "packing at 227 and 260 with Evan Daniel's regularized views."
+            "Register, confirm and adopt Evan Daniel's n308 and n154 certificates (T-221, "
+            "T-222): raised to V3/C3 by the 20 October review, adopted as the house best "
+            "packings at 308 and 154, and regularized."
         ),
     ),
     PublicationHistoryEntry(
@@ -632,7 +632,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "9f985508d8ac61f862d23429107848d6cf5d66e9"
+DATA_REVISION = "3317b915b4c9340a3a7aead79dbb74593d1ec044"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -728,6 +728,14 @@ FIRST_PUBLISHED = PUBLICATION_HISTORY[-1].first_published
 #:                                            on October 1 and 2, so the substantive
 #:                                            day is the one recorded
 EXPLAINER_HISTORY = (
+    PublicationHistoryEntry(
+        version="v0.4.11",
+        first_published="October 20, 2026",
+        result_scope=(
+            "Update the registered result count after the n308 and n154 registrations "
+            "(T-221, T-222)."
+        ),
+    ),
     PublicationHistoryEntry(
         version="v0.4.10",
         first_published="October 20, 2026",
@@ -1091,9 +1099,9 @@ RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
         version="v0.8.6",
         impact="patch",
         reason=(
-            "Raise Joost de Winter's T-196 (#668) at 227, 229 and 260 to V3/C3 on the "
-            "integrated exact replay and its stage 4 review, and adopt it as the house best "
-            "packing at 227 and 260 with Evan Daniel's regularized views."
+            "Register, confirm and adopt Evan Daniel's n308 and n154 certificates (T-221, "
+            "T-222): raised to V3/C3 by the 20 October review, adopted as the house best "
+            "packings at 308 and 154, and regularized."
         ),
     ),
     ReleaseImpactDecision(
@@ -1104,6 +1112,16 @@ RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
         reason=(
             "Announce Evan Daniel's sub-grid n183 packing (T-220) in News and list the 20 "
             "October report-order ledger in the synopsis."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="paper:n11-lower-bounds-explainer",
+        previous_version="v0.4.10",
+        version="v0.4.11",
+        impact="patch",
+        reason=(
+            "Update the registered result count after the n308 and n154 registrations "
+            "(T-221, T-222)."
         ),
     ),
     ReleaseImpactDecision(
@@ -1820,6 +1838,81 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "render_n11_lower_bounds_explainer write 68 files, byte-identical between the "
             "trees. No PDF was printed; each prints from that HTML. "
             "Retain v0.2.3."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:n11-optimality-review", "paper:n11-threshold-bound-review"),
+        paths=(
+            "packing/devtools/adopt_houses.py",
+            "packing/devtools/default_drawings.py",
+            "packing/devtools/upper_bound_houses.py",
+            "packing/devtools/upper_bound_reports.py",
+            "packing/frontier/results.yaml",
+        ),
+        outputs=(
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-optimality-review.pdf",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/n11-threshold-bound-review.pdf",
+        ),
+        reason=(
+            "For the evand lane of 20 October (T-221 at n = 308, T-222 at n = 154, both "
+            "raised to V3/C3 and adopted as houses) against main d588ad98: both reviews "
+            "read results.yaml only through paper_figures.ladder_records, which selects the "
+            "n11 ladder rungs LADDER_RUNGS names and holds them to LADDER_DIGEST; T-221 and "
+            "T-222 are added entries outside that ladder, and no ladder row changes. "
+            "upper_bound_reports.py gains only two house readers, adopt_houses.py and "
+            "upper_bound_houses.py only the 20 October pass's prose, credits and houses at "
+            "154 and 308, and default_drawings.py loses only 308's settlement, none of "
+            "which these producers call. Rendered at link revision 5ee03750, at the "
+            "adoption's head febe2913, once from this branch's tree and once with main's "
+            "copies of the eight changed inputs the three papers read (adopt_houses.py, "
+            "default_drawings.py, upper_bound_houses.py, upper_bound_reports.py, "
+            "results.yaml, result-requests.yaml, source-coverage.yaml and n-154.md): "
+            "render_n11_optimality_review, render_n11_threshold_bound_review and "
+            "render_packing_methods write 50 byte-identical files on both trees, and none "
+            "of them names T-221, T-222, #689, #694 or either packet. No PDF was printed; "
+            "each prints from that HTML. Retain v0.1.7 and v0.1.0."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/devtools/adopt_houses.py",
+            "packing/devtools/default_drawings.py",
+            "packing/devtools/upper_bound_houses.py",
+            "packing/devtools/upper_bound_reports.py",
+            "packing/frontier/n-154.md",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+            "papers/square-packing-methods-survey.pdf",
+        ),
+        reason=(
+            "For the evand lane of 20 October (T-221 at n = 308, T-222 at n = 154, both "
+            "raised to V3/C3 and adopted as houses) against main d588ad98: result requests, "
+            "source coverage, the n = 154 case record and results are citation targets "
+            "whose existence the producer checks, not inlined text, and every cited path "
+            "exists at both revisions; the #689 and #694 requests, the coverage entries "
+            "and T-221 and T-222 are not cited by the survey, and the adoption's rewrite of "
+            "n-154.md enters none of its text. The two house readers upper_bound_reports.py "
+            "gains, the 20 October pass's prose, credits and houses in adopt_houses.py and "
+            "upper_bound_houses.py, and 308's settlement leaving default_drawings.py do not "
+            "enter its output. Rendered at link revision 5ee03750, at the adoption's head "
+            "febe2913, once from this branch's tree and once with main's copies of the "
+            "eight changed inputs the three papers read (adopt_houses.py, "
+            "default_drawings.py, upper_bound_houses.py, upper_bound_reports.py, "
+            "results.yaml, result-requests.yaml, source-coverage.yaml and n-154.md): "
+            "render_n11_optimality_review, render_n11_threshold_bound_review and "
+            "render_packing_methods write 50 byte-identical files on both trees, and none "
+            "of them names T-221, T-222, #689, #694 or either packet. No PDF was printed; "
+            "it prints from that HTML. Retain v0.2.3."
         ),
     ),
     ReleaseNoPublicChange(
@@ -5490,7 +5583,7 @@ def validate_release_impacts(
 #: fresh render, so a link naming the build commit would fail their drift check forever. It is
 #: in no version string. It moves when the claim documents are regenerated for an edition. It
 #: must be a commit on `main`; the site's own links name `main` itself (`devtools.repo_links`).
-PUBLICATION_REVISION = "a93534c1"
+PUBLICATION_REVISION = "e6b9d98c"
 
 
 def data_pathspec() -> tuple[str, ...]:
