@@ -3,13 +3,15 @@
 `devtools.couzo_678_replay` decides Francisco Couzo's 85 claimed upper bounds from the
 83 certificates the ``couzo-issue678-2026-10-18`` packet retains. These tests hold the
 smallest certificate, n = 204, to the outcomes the receipt records: both exact routes
-accept it, and both refuse each of its five mutants. They hold the pair filter to its
-lemma, that no pair whose centres are closer than sqrt 2 is skipped, and the committed
+accept it, and both refuse each of its six mutants. They hold the near-contact mutant to
+its edge, the pair accepted in exact contact and refused 10^-30 past it, the pair filter to
+its lemma, that no pair whose centres are closer than sqrt 2 is skipped, and the committed
 receipts to the issue's table and the packet's manifest.
 """
 
 from __future__ import annotations
 
+from dataclasses import replace
 from fractions import Fraction
 from pathlib import Path
 
@@ -53,6 +55,40 @@ def test_n204_is_verified_and_every_control_is_refused() -> None:
     for control in row["controls"]:
         assert control["refused_by_sqpack"], control["control"]
         assert control["refused_by_independent"], control["control"]
+
+
+def test_the_near_contact_control_is_refused_at_the_least_gap_scale() -> None:
+    """RF-2 of the 20 October review: the overlap controls were gross, gap -1 and centres
+    within 7e-9, while the least gaps are 1e-11 to 1e-13. At 204 the near-contact pair is
+    the receipt's least-gap pair, 5.56e-11 apart. Translated by the exact vector between its
+    closest points it touches, and both routes accept it with that one contact; pushed
+    10^-30 of its centre distance further, both refuse it on that pair, and on nothing
+    else, at a depth no tolerance above 10^-29 would see."""
+    cert = replay.certificate(replay.claims()[N204], replay.manifest())
+    left, right, (dx, dy), squared = replay.near_contact_translation(cert)
+    assert (left + 1, right + 1) == (115, 124)
+    assert Fraction(1, 10**22) < squared < Fraction(1, 10**20)
+    first, second = cert.poses[left], cert.poses[right]
+    poses = list(cert.poses)
+    poses[right] = replace(
+        second,
+        x=second.x + dx - replay.PAIR_PUSH * (first.x - second.x),
+        y=second.y + dy - replay.PAIR_PUSH * (first.y - second.y),
+    )
+    touching = replay.decide(replay.geometry(replace(cert, poses=tuple(poses))))
+    assert touching["passed"]
+    assert touching["sqpack"]["touching_pairs"] == 1
+    assert touching["independent"]["least_pair_gap"] == "0"
+    assert touching["independent"]["least_pair"] == [115, 124]
+    pushed = replay.decide(replay.control_geometry(cert, "near-contact-overlap"))
+    assert not pushed["sqpack"]["passed"]
+    assert not pushed["independent"]["passed"]
+    assert pushed["sqpack"]["failures"] == ["squares 115 and 124 overlap"]
+    [failure] = pushed["independent"]["failures"]
+    assert failure.startswith("1 overlapping pairs; worst -")
+    assert failure.endswith(" at 115, 124")
+    depth = -Fraction(failure.split("worst ")[1].split(" at ")[0])
+    assert Fraction(1, 10**31) < depth < Fraction(1, 10**29)
 
 
 def test_a_deletion_row_is_its_parent_less_one_square() -> None:
