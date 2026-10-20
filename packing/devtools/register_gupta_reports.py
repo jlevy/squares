@@ -400,6 +400,7 @@ def register() -> None:
                 "id": RESULT,
                 "kind": "upper-bound",
                 "registered": DAY,
+                "landed": DAY,
                 "headline": "Fourteen rational refinements, seventeen complete source cases",
                 "claim": "Seventeen complete rational source certificates are retained, "
                 "three withdrawals; fourteen offer strictly smaller exact construction sides "

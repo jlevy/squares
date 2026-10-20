@@ -7100,6 +7100,11 @@ issues:
       by: jlevy
       kind: follow-up
       reported: []
+    - url: https://github.com/jlevy/squares/issues/538#issuecomment-6279239104
+      date: '2026-10-19'
+      by: jlevy
+      kind: follow-up
+      reported: []
     close_when: The play message is attributed to load or to a regression; the timing check landed
       in #685.
   - number: 539
