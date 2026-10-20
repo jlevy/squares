@@ -225,6 +225,12 @@ HISTORICAL_SNAPSHOT_OUTPUTS = frozenset(
 # chelokot-lean-replay left on 2026-10-12: the register already bound its receipt, and
 # the Lean-backed rungs review of 2026-10-11 links its build log, so both of its files
 # return and the entry pruned nothing.
+# 2026-10-20, the adoption of 19 October at 155, 229, 236 and 271 (#692): grid-slack's
+# half-degree drawing at 229, kept beside its run evidence for the owner's row-7 review
+# (243,033 bytes), took the snapshot to 229,685,143 bytes, 46,999 over the unchanged cap.
+# `--audit-snapshot --prune-candidate` finds no registered mention and no inline or result
+# rescue: people open it from the run README, and no control reads it. Left out, with this
+# note, the snapshot measures 229,442,770 bytes, 195,374 under the cap.
 UNREAD_WORKER_OUTPUTS = frozenset(
     {
         *(
@@ -248,6 +254,8 @@ UNREAD_WORKER_OUTPUTS = frozenset(
         ROOT / "benchmarks/measure-verifier/results",
         ROOT / "atlas/prospective/source-coverage-101-324.svg",
         ROOT / "atlas/rendering/free-quench-n1-trace.json",
+        ROOT / "cases/regularized_drawings/think-ip1p-2026-10-19/review-229"
+        "/grid-slack-adopt-2026-10-19-n155-271-grid-deg05.svg",
     }
 )
 PRUNE = frozenset(

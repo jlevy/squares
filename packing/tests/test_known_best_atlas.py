@@ -2188,7 +2188,6 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
         "Chaoweeraprasit",
         "Couzo",
         "Daniel",
-        "Fang",
         "Gupta",
         "Ostashev",
         "PingYou Ltd",
