@@ -18,6 +18,7 @@ from sqpack.yamlio import safe_load
 
 Point = tuple[Fraction, Fraction]
 Square = list[Point]
+Projection = tuple[Point, tuple[Fraction, Fraction]]
 
 
 def parse(path: Path) -> tuple[list[Square], Fraction]:
@@ -113,10 +114,7 @@ def interval(square: Square, axis: Point) -> tuple[Fraction, Fraction]:
     return min(values), max(values)
 
 
-Projection = tuple[Point, tuple[Fraction, Fraction]]
-
-
-def own_intervals(square: Square) -> list[Projection]:
+def _own_intervals(square: Square) -> list[Projection]:
     """Each of a square's two edge normals, with the square's own interval on it.
 
     Half of every pair's projections depend on one square alone, so `check_squares`
@@ -129,8 +127,11 @@ def own_intervals(square: Square) -> list[Projection]:
 def _separation(
     left: Square, right: Square, left_own: list[Projection], right_own: list[Projection]
 ) -> Fraction:
-    """`pair_gap` from the two squares' `own_intervals`: the same eight gaps, so the
-    same exact maximum."""
+    """The pair's gap as `pair_gap` defines it, from the two squares' `_own_intervals`.
+
+    It computes the same gaps in the same order as projecting all eight intervals afresh,
+    so it returns the same exact maximum.
+    """
     gaps: list[Fraction] = []
     for axis, (left_min, left_max) in left_own:
         right_min, right_max = interval(right, axis)
@@ -142,7 +143,9 @@ def _separation(
 
 
 def pair_gap(left: Square, right: Square) -> Fraction:
-    return _separation(left, right, own_intervals(left), own_intervals(right))
+    """The largest separating gap over the pair's four edge normals; negative exactly when
+    the interiors overlap."""
+    return _separation(left, right, _own_intervals(left), _own_intervals(right))
 
 
 def check(path: Path) -> dict[str, Any]:
@@ -170,7 +173,7 @@ def check_squares(squares: list[Square], side: Fraction) -> dict[str, Any]:
     ]
     if min(containment) < 0:
         failures.append(f"container penetration {min(containment)}")
-    own = [own_intervals(square) for square in squares]
+    own = [_own_intervals(square) for square in squares]
     pair_gaps = [
         _separation(squares[left], squares[right], own[left], own[right])
         for left, right in itertools.combinations(range(len(squares)), 2)

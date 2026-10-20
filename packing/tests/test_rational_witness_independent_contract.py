@@ -117,12 +117,14 @@ def test_non_contract_and_non_rational_corners_reject(tmp_path: Path) -> None:
 
 
 # think-uomm: `check_squares` takes each square's projections onto its own two axes once
-# per square instead of once per pair. What follows holds that route to the decision as it
-# stood before, exactly over Q, on adversarial squares and on the retained atlas views.
+# per square instead of once per pair. What follows holds that route to `pair_gap`'s direct
+# definition, exactly over Q, on adversarial squares and on the retained atlas views, and
+# pins the count of projections it saves.
 
 
-def _pair_gap_before(left: Square, right: Square) -> Fraction:
-    """`pair_gap` before think-uomm, verbatim: all eight intervals projected afresh."""
+def _pair_gap_direct(left: Square, right: Square) -> Fraction:
+    """`pair_gap`'s direct definition, verbatim from `ded4727b`: all eight intervals
+    projected afresh."""
     gaps: list[Fraction] = []
     for axis in (*axes(left), *axes(right)):
         left_min, left_max = interval(left, axis)
@@ -155,14 +157,16 @@ def _decide(
     return verdict, gaps
 
 
-def _assert_decided_as_before(squares: list[Square], side: Fraction) -> list[Fraction]:
+def _assert_decided_as_the_direct_definition(
+    squares: list[Square], side: Fraction
+) -> list[Fraction]:
     """Every pair gap `check_squares` decides from its cached projections equals the gap
     with every projection taken afresh, as a `Fraction`, and so does `pair_gap`'s; the
     whole verdict is the one the fresh gaps give. Returns the gaps."""
     shipped = independent._separation  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
     cached_verdict, cached = _decide(squares, side, shipped)
     fresh_verdict, fresh = _decide(
-        squares, side, lambda left, right, *_own: _pair_gap_before(left, right)
+        squares, side, lambda left, right, *_own: _pair_gap_direct(left, right)
     )
     assert cached == fresh
     assert all(type(gap) is Fraction for gap in cached)
@@ -268,9 +272,9 @@ def _adversarial_cases() -> dict[str, tuple[list[Square], Fraction]]:
 
 
 @pytest.mark.parametrize("name", sorted(_adversarial_cases()))
-def test_adversarial_pairs_decide_as_before(name: str) -> None:
+def test_adversarial_pairs_decide_as_the_direct_definition(name: str) -> None:
     squares, side = _adversarial_cases()[name]
-    gaps = _assert_decided_as_before(squares, side)
+    gaps = _assert_decided_as_the_direct_definition(squares, side)
     reversed_gaps = [
         pair_gap(right, left) for left, right in itertools.combinations(squares, 2)
     ]
@@ -284,7 +288,7 @@ def test_adversarial_cases_reach_every_edge_of_the_decision() -> None:
     contact; `square_failures` is what refuses it."""
     cases = _adversarial_cases()
     gaps = {
-        name: [_pair_gap_before(*pair) for pair in itertools.combinations(squares, 2)]
+        name: [_pair_gap_direct(*pair) for pair in itertools.combinations(squares, 2)]
         for name, (squares, _side) in cases.items()
     }
     touching = [name for name, found in gaps.items() if found == [0]]
@@ -329,7 +333,7 @@ def test_adversarial_cases_reach_every_edge_of_the_decision() -> None:
     assert verdicts["one square"]["minimum_best_pair_gap"] == "2"
 
 
-def test_random_tilted_squares_decide_as_before() -> None:
+def test_random_tilted_squares_decide_as_the_direct_definition() -> None:
     """Two dozen unit squares at random rational centres and four exact rotations, so
     tilted pairs overlap, touch and clear one another at once."""
     rng = random.Random(20261020)
@@ -346,10 +350,32 @@ def test_random_tilted_squares_decide_as_before() -> None:
                 for a, b in ((half, half), (-half, half), (-half, -half), (half, -half))
             ]
         )
-    gaps = _assert_decided_as_before(squares, Fraction(6))
+    gaps = _assert_decided_as_the_direct_definition(squares, Fraction(6))
     assert any(gap < 0 for gap in gaps), "the sample must hold an overlapping pair"
     assert any(gap == 0 for gap in gaps), "and a touching pair"
     assert any(gap > 0 for gap in gaps), "and a clear one"
+
+
+@pytest.mark.parametrize("n", [3, 4, 12, 30])
+def test_check_squares_projects_each_square_on_its_own_axes_once(n: int) -> None:
+    """The saving itself. `check_squares` projects each square onto its own two normals
+    once and each pair onto the other square's normals, so it calls `interval`
+    `2n + 4 comb(n, 2)` times. Separating every pair with `pair_gap` would call it
+    `8 comb(n, 2)` times and decide the same values, so only this count tells them apart."""
+    squares = [_square((Fraction(index), Fraction(0))) for index in range(n)]
+    calls = 0
+
+    def counted(square: Square, axis: Point) -> tuple[Fraction, Fraction]:
+        nonlocal calls
+        calls += 1
+        return interval(square, axis)
+
+    with pytest.MonkeyPatch.context() as patch:
+        patch.setattr(independent, "interval", counted)
+        verdict = check_squares(squares, Fraction(n))
+    assert verdict["verification_passed"]
+    assert verdict["pairs_tested"] == math.comb(n, 2)
+    assert calls == 2 * n + 4 * math.comb(n, 2)
 
 
 def _atlas_view(n: int) -> tuple[Fraction, list[Square]]:
@@ -360,18 +386,19 @@ def _atlas_view(n: int) -> tuple[Fraction, list[Square]]:
 
 
 @pytest.mark.parametrize("n", [18, 26, 37])
-def test_retained_atlas_views_decide_as_before(n: int) -> None:
+def test_retained_atlas_views_decide_as_the_direct_definition(n: int) -> None:
     """Whole retained views, rotated over Q with denominators of 170 to 490 digits."""
     side, squares = _atlas_view(n)
-    gaps = _assert_decided_as_before(squares, side)
+    gaps = _assert_decided_as_the_direct_definition(squares, side)
     assert check_squares(squares, side)["verification_passed"]
     assert min(gaps) >= 0
 
 
-def test_widest_retained_rationals_decide_as_before() -> None:
+def test_widest_retained_rationals_decide_as_the_direct_definition() -> None:
     """n=29's view carries the layer's widest rationals, denominators near 4,000 digits,
     which is where the projections cost what think-uomm saves; its first square and the
-    four whose exact centres lie nearest it are decided as before."""
+    four whose exact centres lie nearest it are decided as the direct definition decides
+    them."""
     side, squares = _atlas_view(29)
 
     def centre(square: Square) -> Point:
@@ -386,5 +413,5 @@ def test_widest_retained_rationals_decide_as_before() -> None:
         return (x - ox) ** 2 + (y - oy) ** 2
 
     nearest = sorted(squares, key=distance)[:5]
-    gaps = _assert_decided_as_before(nearest, side)
+    gaps = _assert_decided_as_the_direct_definition(nearest, side)
     assert min(gaps) >= 0
