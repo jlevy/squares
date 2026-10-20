@@ -21,7 +21,7 @@ softschema:
   status: enforced
 repository: jlevy/squares
 owner: jlevy
-last_reviewed: '2026-10-19'
+last_reviewed: '2026-10-20'
 issues:
   - number: 420
     title: 'Lean proofs that 178 best-known packings are local minima (n ≤ 324): registration request'
@@ -3789,6 +3789,192 @@ issues:
         verification: V0
         confirmation: C0
         status: recorded
+    - url: https://github.com/jlevy/squares/issues/446#issuecomment-6285175046
+      date: '2026-10-20'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: fine-net-18-1016
+        id: T-205
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: fine-net-18-1016
+        id: T-206
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: fine-net-18-1016
+        id: T-207
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: fine-net-18-1016
+        id: T-216
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: fine-net-18-1016
+        id: T-200
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: fine-net-18-1016
+        id: T-201
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: fine-net-18-1016
+        id: T-202
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: fine-net-18-1016
+        id: T-203
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: fine-net-18-1016
+        id: T-204
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: fine-net-18-1016
+        id: T-208
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: fine-net-18-1016
+        id: T-209
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: fine-net-18-1016
+        id: T-210
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: fine-net-18-1016
+        id: T-211
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: fine-net-18-1016
+        id: T-212
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: fine-net-18-1016
+        id: T-213
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: fine-net-18-1016
+        id: T-214
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: fine-net-18-1016
+        id: T-215
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: fine-net-18-1016
+        id: T-217
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: fine-net-n37-n39-n44-1016
+        id: T-178
+        verification: V0
+        confirmation: C1
+        status: reviewed
+      - result: fine-net-n37-n39-n44-1016
+        id: T-176
+        verification: V0
+        confirmation: C1
+        status: reviewed
+      - result: fine-net-n37-n39-n44-1016
+        id: T-177
+        verification: V0
+        confirmation: C1
+        status: reviewed
+      - result: fine-net-n29-582-followup
+        id: T-132
+      - result: fine-net-n27-5655-followup
+      - result: fine-net-n19
+      - result: fine-net-n20
+      - result: fine-net-n26
+      - result: fine-net-n27
+      - result: fine-net-n28
+      - result: fine-net-n29
+      - result: fine-net-n31
+      - result: fine-net-18-1016
+        id: E-wand125-fine-net-n68-853-report
+        status: reviewed
+      - result: fine-net-18-1016
+        id: E-wand125-fine-net-n84-94225-report
+        status: reviewed
+      - result: fine-net-18-1016
+        id: E-wand125-fine-net-n85-9475-report
+        status: reviewed
+      - result: fine-net-18-1016
+        id: E-wand125-fine-net-n108-1062-report
+        status: reviewed
+      - result: fine-net-18-1016
+        id: E-wand125-fine-net-n38-65775-report
+        status: recorded
+      - result: fine-net-18-1016
+        id: E-wand125-fine-net-n40-6735-report
+        status: recorded
+      - result: fine-net-18-1016
+        id: E-wand125-fine-net-n41-68025-report
+        status: recorded
+      - result: fine-net-18-1016
+        id: E-wand125-fine-net-n43-69425-report
+        status: recorded
+      - result: fine-net-18-1016
+        id: E-wand125-fine-net-n51-75275-report
+        status: recorded
+      - result: fine-net-18-1016
+        id: E-wand125-fine-net-n86-95275-report
+        status: recorded
+      - result: fine-net-18-1016
+        id: E-wand125-fine-net-n88-96325-report
+        status: recorded
+      - result: fine-net-18-1016
+        id: E-wand125-fine-net-n89-9685-report
+        status: recorded
+      - result: fine-net-18-1016
+        id: E-wand125-fine-net-n90-978-report
+        status: recorded
+      - result: fine-net-18-1016
+        id: E-wand125-fine-net-n91-97875-report
+        status: recorded
+      - result: fine-net-18-1016
+        id: E-wand125-fine-net-n92-986-report
+        status: recorded
+      - result: fine-net-18-1016
+        id: E-wand125-fine-net-n106-10503-report
+        status: recorded
+      - result: fine-net-18-1016
+        id: E-wand125-fine-net-n107-1058-report
+        status: recorded
+      - result: fine-net-18-1016
+        id: E-wand125-fine-net-n110-1073-report
+        status: recorded
+      - result: fine-net-18-1016
+        id: E-wand125-fine-net-n68-853-sqverify-fast-replay
+        status: confirmed
+      - result: fine-net-18-1016
+        id: E-wand125-fine-net-n84-94225-sqverify-fast-replay
+        status: confirmed
+      - result: fine-net-18-1016
+        id: E-wand125-fine-net-n85-9475-sqverify-fast-replay
+        status: confirmed
+      - result: fine-net-18-1016
+        id: E-wand125-fine-net-n108-1062-sqverify-fast-replay
+        status: confirmed
     close_when: Accurate source-only disposition reaches main and the remaining independent native/review
       obligations have explicit dispositions. Source-byte custody alone does not close this request.
   - number: 451
@@ -6180,6 +6366,31 @@ issues:
       - result: nine-beyond-horizon
       corrects:
       - https://github.com/jlevy/squares/issues/506#issuecomment-6130063939
+      outdated:
+      - 'Mykhailo Polkovskyi''s certificate (T-186) is not adopted at 304; since the adoption of 16
+        October, which merged with #657, T-186 is the house at 304, 1.79e-19 below T-175'
+      - 'at 305 T-152 is still the house; since the adoption of 17 October, which merged with #665,
+        PingYou Ltd''s PR #574 certificate (T-174) is the house at 305, 1.80e-19 below T-152'
+    - url: https://github.com/jlevy/squares/issues/506#issuecomment-6285175304
+      date: '2026-10-20'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n175
+        id: T-185
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: n175
+        id: E-couzo-506-n175-report
+        status: reviewed
+      - result: n304-n305-exact-optima
+        id: T-152
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      corrects:
+      - https://github.com/jlevy/squares/issues/506#issuecomment-6206057024
     close_when: The import and its disposition, including the beyond-horizon counts, are on main,
       the house adoption at 304 and 305 has landed or is owned, and the owner has posted the
       resulting state; the four unnamed certificates are imports of their own, and optimality is
@@ -7176,6 +7387,11 @@ issues:
     replies:
     - url: https://github.com/jlevy/squares/issues/537#issuecomment-6200837751
       date: '2026-10-15'
+      by: jlevy
+      kind: follow-up
+      reported: []
+    - url: https://github.com/jlevy/squares/issues/537#issuecomment-6261556635
+      date: '2026-10-19'
       by: jlevy
       kind: follow-up
       reported: []
@@ -8367,6 +8583,13 @@ issues:
       evidence:
       - E-pingyou-574-certificate-report
       - E-pingyou-574-algebraic-report
+    asks:
+    - what: Complete and record the disposition of the full 148-count submission and the pull request.
+      state: queued
+      bead: think-9v2k
+      note: The existing intake owner retains the supplement and per-count decisions. Accepted certificates,
+        ties, superseded reports and reasoned non-imports remain distinct; unimported does not by itself
+        require a new replay. The algebraic house writer is separately tracked under think-ot5c.
     beads:
     - think-9v2k
     answer_bead: think-9v2k
@@ -8393,6 +8616,15 @@ issues:
       - result: pr574-certificates
         id: E-pingyou-574-algebraic-report
         status: recorded
+    - url: https://github.com/jlevy/squares/issues/574#issuecomment-6270041615
+      date: '2026-10-19'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: pr574-certificates
+        id: T-174
+        verification: V3
+        confirmation: C3
     close_when: The import and its disposition are on main, the owner has decided the pull request and
       posted the resulting state with T-174's id, and the review and second route that would confirm
       T-174 are owned by its bead; optimality is outside this request.
@@ -8403,16 +8635,23 @@ issues:
       decided 17 of the 21 undecided comparisons exactly (result-import.md, Report-Order Verdict
       Comments); the comment as recorded is the edited one.
 
-      The reply `--report` lists as due (T-174 at V3/C3 and its two evidence entries reviewed, where
-      the follow-up of 14 October stated V0/C0 and recorded) waits for the owner, who decides the
-      pull request and, by `close_when`, posts the resulting state; T-174's adoption is no longer
-      the owner's: the house rule of 16 October 2026 makes it the house at 41 counts, the adoption
-      of 17 October 2026 (think-3mry) moved 37 rational ones to it, and the algebraic 70, 153 and
-      207 wait under think-ot5c for the writer. T-193's smaller sides are staged at twelve
-      others under think-ot5c; at 236 Evan Daniel's issue 659 reports a smaller side, whose
-      import adopts it, with T-174 still staged under think-3mry until then. It goes out on the owner's instruction,
-      from think-9v2k, and a pass that finds it due does not post it before then (PR #637's review,
-      A4).
+      The owner's requested follow-up of 19 October (issuecomment-6270041615) gives T-174 at V3/C3
+      and acknowledges the 37 rational houses PR #665 adopted from it, after the merged site passed
+      all 4,705 deployed-site checks: eleven regularized, 25 decided with no better regularization
+      and n103 retained as published. It accepts neither the complete 148-count submission nor the
+      pull request; the queued ask keeps a draft from proposing closure while think-9v2k holds the
+      supplement, the per-count dispositions and the pull-request decision. It states T-174's rungs
+      but not its status ("recorded at V3/C3", never "confirmed"), and it names neither evidence
+      entry, so `--report` still lists as due, against the follow-up of 14 October, which stated
+      recorded for all three, T-174's confirmed status and the two entries' reviewed status (PR
+      #696's review, A1). The think-9v2k reply carries all three; it goes out with the owner's
+      pull-request disposition, and a pass that finds it due does not post it before then (PR #637's
+      review, A4). T-174's adoption is no longer the owner's: the house rule of 16 October 2026
+      makes it the house at 41 counts, the adoption of 17 October 2026 (think-3mry) moved 37
+      rational ones to it, and the algebraic 70, 153 and 207 wait under think-ot5c for the writer.
+      T-193's smaller sides are staged at twelve others under think-ot5c; at 236 Evan Daniel's issue
+      659 reports a smaller side, whose import adopts it, with T-174 still staged under think-3mry
+      until then.
   - number: 575
     title: 's(176) ≤ 13.795872318437, s(211) ≤ 14.993694186584, s(241) ≤ 15.987134249051, s(304) ≤ 17.929427758076:
       registration request'
@@ -8887,6 +9126,15 @@ issues:
       - T-186
       evidence:
       - E-mishapolk-70a033f-certificate-report
+    asks:
+    - what: 'The owner decides whether the record credits Mykhailo Polkovskyi jointly with #586
+        (Francisco Couzo) at 211 and 241, as his comment of 14 October asks, citing his earlier commit
+        8bb41af (https://github.com/jlevy/squares/issues/593#issuecomment-6172128988).'
+      state: queued
+      bead: think-2ep3
+      note: 'The reply of 16 October listed the request as still with the owner and kept the issue open
+        for it, and the follow-up of 20 October repeats both. T-182 records the question as RQ-1. At
+        211 T-188 is the house since 16 October; at 241 the tied #586 certificate (T-182) still is.'
     beads:
     - think-2ep3
     answer_bead: think-2ep3
@@ -8968,6 +9216,33 @@ issues:
         status: recorded
       corrects:
       - https://github.com/jlevy/squares/issues/593#issuecomment-6179772564
+      outdated:
+      - neither of Francisco Couzo's certificates at 237 (T-189, T-190) is adopted before a review, so
+        T-183 stays the house; since the adoption of 16 October his 4e4c8ce certificate (T-190) is the
+        house at 237, 1.01e-4 below T-183, which is retained as history
+      - 'T-186 waits for a review and then a decision on adoption at the twelve counts; since the
+        adoption of 16 October, which merged with #657, T-186 is the house at all twelve'
+    - url: https://github.com/jlevy/squares/issues/593#issuecomment-6285175560
+      date: '2026-10-20'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: kkt-refinements-70a033f
+        id: T-186
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: kkt-refinements-70a033f
+        id: E-mishapolk-70a033f-certificate-report
+        status: reviewed
+      - result: n237
+        id: T-183
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: ties-211-241
+      corrects:
+      - https://github.com/jlevy/squares/issues/593#issuecomment-6206056451
     close_when: The import and its disposition are on main, the owner has posted the resulting state with
       each recorded count's id, and the review and replay that would confirm each V0 entry are owned by
       its bead; optimality is outside this request. The author has said which name the record should carry.
@@ -9037,6 +9312,20 @@ issues:
         verification: V0
         confirmation: C0
         status: recorded
+      - result: second-route
+    - url: https://github.com/jlevy/squares/issues/594#issuecomment-6285175806
+      date: '2026-10-20'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: s76-equals-9
+        id: T-184
+        verification: V3
+        confirmation: C1
+        status: reviewed
+      - result: s76-equals-9
+        id: E-bengreff-594-cover-report
+        status: reviewed
       - result: second-route
     close_when: The import and its disposition are on main, the owner has posted the resulting state with
       each recorded count's id, and the review and replay that would confirm each V0 entry are owned by
@@ -9216,7 +9505,7 @@ issues:
       squarepack-certs 0e9be7961773aa78b879c4ee6ba584a67e2e5513 and public squarepack-lean at
       947bdae. These source assertions await statement, axiom and replay review under think-494l;
       T-163 remains V2/C1, and Stage 4 adoption is separate.
-    read_through: '2026-10-18T21:02:13Z'
+    read_through: '2026-10-19T03:30:28Z'
     results:
     - key: excess-theorem
       claim: 's(n^2 - n + 1) < n for every n >= 15, and s(n^2 - n + F(n)) < n with F(n) = 1 + max{p + 2q
@@ -9241,6 +9530,21 @@ issues:
         T-163 retains V2/C1 and the existing finite-witness disposition.
       queued: true
       bead: think-494l
+    - key: note-v09-doi-2026-10-19
+      claim: Fang announces note v0.9, dated 18 October, archived as DOI 10.5281/zenodo.23463481 with
+        PDF and LaTeX under CC BY; he states it is the same text as note/fang-2026-n2-n-1.md in
+        TheSnakeFang/squarepack-certs at 6e265256061b7c8b4be7e690008fa59c12ca5ae7. That note, in its
+        Formal verification paragraph and its [FanL26] reference, scopes the unchanged Lean pin
+        947bdae to Theorem 1 and the maximum of the two unmixed bounds of Theorem 2; the mixed-step
+        form of Theorem 2 is not formalised.
+      source: https://github.com/jlevy/squares/issues/603#issuecomment-6259031488
+      not_registered: Publication and statement update to the existing theorem, queued with the existing
+        note and Lean review owner. DOI assets and statement binding remain to be retained and reviewed;
+        no new theorem entry, replay, or rung promotion. T-163 remains V2/C1. For the binding review,
+        the README at the same commit claims more than the note does, "Lean 4 formalisation of
+        Theorems 1 and 2" with no scope; the note's scope is the one to bind.
+      queued: true
+      bead: think-494l
     beads:
     - think-494l
     - think-0esw
@@ -9262,6 +9566,32 @@ issues:
       - result: excess-theorem
         id: E-fang-excess-theorem-exact-feasibility
         status: confirmed
+    - url: https://github.com/jlevy/squares/issues/603#issuecomment-6257671390
+      date: '2026-10-19'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: excess-theorem
+        id: T-163
+        verification: V2
+        confirmation: C1
+      - result: note-v08-lean-2026-10-18
+    - url: https://github.com/jlevy/squares/issues/603#issuecomment-6268897002
+      date: '2026-10-19'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: excess-theorem
+        id: T-163
+        verification: V2
+        confirmation: C1
+      - result: note-v09-doi-2026-10-19
+      - result: note-v08-lean-2026-10-18
+    - url: https://github.com/jlevy/squares/issues/603#issuecomment-6271101249
+      date: '2026-10-19'
+      by: jlevy
+      kind: other
+      reported: []
     close_when: The import and its disposition are on main, the owner has posted the resulting state with
       the entry's id, and the review and replay that would raise its rungs are owned by its bead; optimality
       is outside this request.
@@ -9302,7 +9632,8 @@ issues:
     title: 's(146) ≤ 12.583782190152: registration request'
     author: evand
     opened: '2026-10-14'
-    state: open
+    state: closed
+    closed: '2026-10-20'
     kind: result-report
     triage: done
     summary: Evan Daniel reports s(146) <= 12.583782190152, the exact rational side
@@ -9345,6 +9676,20 @@ issues:
       - result: n146
         id: E-evand-606-n146-report
         status: recorded
+      - result: distinct-local-minimum
+    - url: https://github.com/jlevy/squares/issues/606#issuecomment-6285175984
+      date: '2026-10-20'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n146
+        id: T-187
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: n146
+        id: E-evand-606-n146-report
+        status: reviewed
       - result: distinct-local-minimum
     close_when: The import and its disposition are on main, the owner has posted the resulting state with
       the entry's id, and the review and replay that would confirm the V0 entry are owned by its bead;
@@ -9410,6 +9755,29 @@ issues:
         status: recorded
       - result: fifteen-beyond-horizon
       - result: fang-composites
+      outdated:
+      - T-183 (#593) is the house at 237 and stays the house until a review decides adoption; since
+        the adoption of 16 October the 4e4c8ce certificate (T-190) is the house at 237, 2.40e-11 below
+        T-189, and T-183 is retained as history
+      - 'the #586 certificate (T-182) is the house at 211; since the adoption of 16 October the 487b058
+        certificate (T-188) is the house there, 9.29e-6 below T-182'
+    - url: https://github.com/jlevy/squares/issues/607#issuecomment-6285176205
+      date: '2026-10-20'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n237
+        id: T-189
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: n237
+        id: E-couzo-607-certificate-report
+        status: reviewed
+      - result: fifteen-beyond-horizon
+      - result: fang-composites
+      corrects:
+      - https://github.com/jlevy/squares/issues/607#issuecomment-6206051473
     close_when: The import and its disposition are on main, the owner has posted the resulting state with
       each recorded count's id, the composites are with Fang's import, and the review and replay that would
       confirm the V0 entry are owned by its bead; optimality is outside this request.
@@ -9451,6 +9819,19 @@ issues:
       - result: s95-equals-10
         id: E-bengreff-610-cover-report
         status: recorded
+    - url: https://github.com/jlevy/squares/issues/610#issuecomment-6285176428
+      date: '2026-10-20'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: s95-equals-10
+        id: T-191
+        verification: V3
+        confirmation: C1
+        status: reviewed
+      - result: s95-equals-10
+        id: E-bengreff-610-cover-report
+        status: reviewed
     close_when: The import and its disposition are on main, the owner has posted the resulting state with
       each recorded count's id, and the review and replay that would confirm the V0 entry are owned by its
       bead; optimality is outside this request.
@@ -9502,7 +9883,8 @@ issues:
     title: 'data: submit a tighter exact N29 packing certificate'
     author: BuddenPing
     opened: '2026-10-15'
-    state: open
+    state: closed
+    closed: '2026-10-19'
     kind: result-report
     triage: done
     summary: >-
@@ -9517,9 +9899,9 @@ issues:
       controls, reviewed the same day (accepted, finite feasibility, no blocking defect) and registered
       as T-195 at V3/C3, a regularization of the packing it tightens. The per-count ledger records it
       by exception on the owner's standing house rule (PR #660, think-sa5r). Its adoption at 29 and
-      regularization decision are complete on the import branch, dated 17 October 2026. Stage 7
-      waits for the import to merge, the published site to agree and the final reply to be posted
-      under think-30n2; #622 stays open pending those steps and the owner's pull-request disposition.
+      regularization decision landed through #661 in the merged #661/#676 stack at d167d4b86
+      on 19 October. Deployment and live verification passed; the final reply reported adoption
+      and V3/C3, and the source pull request closed as incorporated at 06:50:12Z that day.
     read_through: '2026-10-16T03:40:22Z'
     results:
     - key: n29-certificate
@@ -9541,6 +9923,30 @@ issues:
       kind: acknowledgement
       reported:
       - result: n29-certificate
+    - url: https://github.com/jlevy/squares/issues/622#issuecomment-6261406058
+      date: '2026-10-19'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n29-certificate
+        id: T-195
+        verification: V3
+        confirmation: C3
+        status: confirmed
+    - url: https://github.com/jlevy/squares/issues/622#issuecomment-6261882344
+      date: '2026-10-19'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n29-certificate
+        id: T-195
+        verification: V3
+        confirmation: C3
+      - result: n29-certificate
+        id: E-pingyou-622-certificate-report
+      - result: n29-certificate
+        id: E-pingyou-622-exact-feasibility
+        status: confirmed
     close_when: The import and its disposition are on main, the owner has decided the pull request and
       posted the resulting state, and any replay that would confirm a recorded entry is owned by its bead;
       optimality is outside this request.
@@ -11638,7 +12044,91 @@ issues:
     beads:
     - think-pvav
     answer_bead: think-pvav
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/675#issuecomment-6261560418
+      date: '2026-10-19'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n204
+      - result: n419
+      - result: n421
+      - result: n422
+      - result: n458
+      - result: n459
+      - result: n460
+      - result: n461
+      - result: n462
+      - result: n463
+      - result: n464
+      - result: n502
+      - result: n545
+      - result: n546
+      - result: n547
+      - result: n548
+      - result: n549
+      - result: n554
+      - result: n592
+      - result: n593
+      - result: n598
+      - result: n602
+      - result: n603
+      - result: n641
+      - result: n642
+      - result: n650
+      - result: n652
+      - result: n654
+      - result: n693
+      - result: n700
+      - result: n701
+      - result: n705
+      - result: n706
+      - result: n753
+      - result: n755
+      - result: n756
+      - result: n758
+      - result: n759
+      - result: n760
+      - result: n804
+      - result: n805
+      - result: n806
+      - result: n807
+      - result: n809
+      - result: n811
+      - result: n812
+      - result: n813
+      - result: n814
+      - result: n816
+      - result: n817
+      - result: n863
+      - result: n864
+      - result: n865
+      - result: n867
+      - result: n868
+      - result: n869
+      - result: n870
+      - result: n872
+      - result: n873
+      - result: n874
+      - result: n919
+      - result: n923
+      - result: n924
+      - result: n927
+      - result: n928
+      - result: n930
+      - result: n931
+      - result: n932
+      - result: n933
+      - result: n989
+      - result: n990
+      - result: n991
+      - result: n992
+      - result: n993
+      - result: n994
+      - result: n995
+      - result: n996
+      - result: n997
+      - result: n998
     close_when: Every claim or correction has a reviewed disposition on main, pending validation has a priced
       owner, any changed house is regularized in its adoption, and the author has received a reply verified
       against main and the deployed site.
@@ -12255,7 +12745,24 @@ issues:
     beads:
     - think-xu4d
     answer_bead: think-xu4d
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/678#issuecomment-6257122870
+      date: '2026-10-19'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: n260
+      outdated:
+      - Called e90993b1c0f625d1d6c2d1ea3b5f391bfe6d98f5bc387a10863434bb9db4934e a decompressed hash;
+        it hashes the gzip bytes.
+    - url: https://github.com/jlevy/squares/issues/678#issuecomment-6270970266
+      date: '2026-10-19'
+      by: jlevy
+      kind: correction
+      reported:
+      - result: n260
+      corrects:
+      - https://github.com/jlevy/squares/issues/678#issuecomment-6257122870
     close_when: Every claim or correction has a reviewed disposition on main, pending validation has a priced
       owner, any changed house is regularized in its adoption, and the author has received a reply verified
       against main and the deployed site.
