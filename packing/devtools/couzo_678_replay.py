@@ -87,6 +87,7 @@ from devtools import check_rational_witness_independent as independent
 from devtools import evand_arrangement_reports as kernel
 from devtools import evand_exact_certificates as legacy
 from devtools.retained_data import read_retained_bytes
+from devtools.upper_bound_reports import BEYOND_FORMAT, DISPLAY_PLACES, HORIZON
 from sqpack.retained_json import dumps as retained_dumps
 from sqpack.verify import check_unit_squares, separated
 from sqpack.witness import materialize_exact_witness
@@ -107,17 +108,15 @@ GOEBEL_PROGRAM = ROOT / (
     "resources/web/couzo-verified-bounds-2026-10-14/review/goebel_beyond_horizon.py"
 )
 GOEBEL_FORMAT = "couzo-678-goebel-comparison-v1"
+#: The beyond-horizon record. Its format, the corpus ``HORIZON`` and the 16 places its
+#: ``ceiling`` rounds up to are ``upper_bound_reports``', which writes every such record.
+#: ``check_source_coverage.load_claims`` reads its ``results`` by shape and does not
+#: check the format; ``check`` holds the committed file to its rebuild.
 BEYOND = PACKET / "acquisition/beyond-horizon-claims.json"
-#: The format ``check_source_coverage.load_claims`` reads a beyond-horizon record in.
-BEYOND_FORMAT = "upper-bound-beyond-horizon-claims-v1"
 ISSUE_URL = "https://github.com/jlevy/squares/issues/678"
 SOURCE_URL = "https://github.com/franciscouzo/square-packing"
 #: The pin's commit time, when every certificate the issue links was first committed.
 COMMITTED = "2026-10-18T23:19:02Z"
-#: The last count of the case corpus; a row above it is a beyond-horizon row.
-HORIZON = 324
-#: The places the record's ``ceiling`` rounds each exact side up to.
-CEILING_PLACES = 16
 PIN = "7b6c87e129cf80b5ff9847b90b47fd30b4563c54"
 ROWS = 85
 CERTIFICATES = 83
@@ -806,7 +805,7 @@ def beyond_horizon_claims() -> dict[str, Any]:
                 "n": row.n,
                 "offered_side": row.printed,
                 "exact_side": legacy.literal(side),
-                "ceiling": legacy.ceiling_decimal(side, CEILING_PLACES),
+                "ceiling": legacy.ceiling_decimal(side, DISPLAY_PLACES),
                 "certificate": row.path,
                 "deleted": row.deleted,
                 "first_committed": COMMITTED,
