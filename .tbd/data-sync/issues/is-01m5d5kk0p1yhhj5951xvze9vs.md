@@ -5,13 +5,13 @@ title: "Import Evan Daniel: s(154) <= 12.921100940762 (#694)"
 kind: task
 status: open
 priority: 1
-version: 3
+version: 4
 labels:
   - result-import
 dependencies: []
 parent_id: is-01m5c0fwsxga70rszkjy1zbp2f
 created_at: 2026-10-20T17:26:36.822Z
-updated_at: 2026-10-20T18:49:15.381Z
+updated_at: 2026-10-20T23:37:45.036Z
 ---
 Stage 1 to 3 import of jlevy/squares#694 (Evan Daniel, filed 2026-10-20T03:56:43Z), lane c-lane-evand-2 under think-eizi.
 
@@ -30,3 +30,6 @@ Stage 1 to 3 import of jlevy/squares#694 (Evan Daniel, filed 2026-10-20T03:56:43
 
 2026-10-20 (c-lane-evand-2): stages 1 to 3 done on claude/intake-2026-10-20-evand-308-154, draft PR https://github.com/jlevy/squares/pull/699 (head 34d72a95a; data commits 277bcd50a and the suite-a fix 938e5f573; hosted Packing validation run 39476391860 green). Packet packing/resources/web/evand-n154-sweep-2026-10-20 at 1d2bb82; digests match the issue. Both maintained exact routes accept the positive and refuse both controls (receipt retained). Registered as T-222, V0/C0, 1.05636370950500e-4 below T-186 at 154. n-154.md has no note: it is the adoption writer's (not HAND_MARKED), so the stage 4 adoption writes its prose. Credit ask queued on this bead until adoption. Reply draft: scratchpad/replies-new/694.md (post after merge; asks about dgen.py and the regularized view's "by" field).
 Next: stage 4 mathematical review (coordinator, with Fable), then V3/C3, adoption at 154 and regularization of the new house in the stage 4 PR.
+
+
+2026-10-20 23:40Z coordinator (review B1 of #699). Stage 7 reply to #694, drafted in replies-new/694.fixed.md, owes the same three questions as think-h8jm: (1) A4: the views' 'by' field, with no reading stated (RW-4: drop 'The record reads the field as your regularizer's, not as a credit'); (2) binary64 rows; (3) KKT precision and second-order statements.

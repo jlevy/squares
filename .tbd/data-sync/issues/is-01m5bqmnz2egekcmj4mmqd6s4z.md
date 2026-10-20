@@ -5,13 +5,13 @@ title: "Owner decision on the #673 credit consequences: Kevin Fang's structured 
 kind: task
 status: open
 priority: 2
-version: 2
+version: 3
 labels:
   - result-import
   - owner-decision
 dependencies: []
 created_at: 2026-10-20T04:03:18.113Z
-updated_at: 2026-10-20T17:09:56.360Z
+updated_at: 2026-10-20T23:37:46.276Z
 ---
 Owner decisions the #673 credit correction raises in PR #692 (review A3, senior; review B1, correctness). PR #692 follows epistemics.md's rule that the source says who did what: at 146 and 308 Evan Daniel becomes the finder, as the author's #673 asks, and at 236 the issue's credit of #481 for the construction is read as "based on", so Daniel is also the finder there.
 
@@ -27,3 +27,6 @@ Done when the owner chooses. Under (b), the change lands in its own PR. Under (a
 ## Notes
 
 2026-10-20 (coordinator): #692 (012dcf9e5) shipped the default: Fang is in no structured credit field and leaves the posters' credited-names list at 308; Chaoweeraprasit's finder change at 236 kept as #692 landed it. #673 closed with final reply 6294849401 stating that outcome (recorded by #698). Left open for the owner to confirm or reverse; reversing needs a records PR and a follow-up on #673.
+
+
+2026-10-20 23:40Z coordinator (review B of #699). T-221 (#689, Evan Daniel's 308, adopted as the house best packing at 308 by #699) is now the count's result: its credit sentence names 'Kevin Fang's two-wedge design' and the structured credit names Daniel only, the same split main made for T-174. Fact for the decision: #481's 307 packing (T-136, published 9 October), from which T-221 was found, already shares that two-wedge design, a day before Fang's #484 (10 October).
