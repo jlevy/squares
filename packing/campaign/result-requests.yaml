@@ -13200,6 +13200,17 @@ issues:
         status: confirmed
       corrects:
       - https://github.com/jlevy/squares/issues/680#issuecomment-6268897692
+    - url: https://github.com/jlevy/squares/issues/680#issuecomment-6300872327
+      date: '2026-10-20'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n183
+        id: E-evand-680-n183-report
+        status: reviewed
+      - result: n183
+        id: E-evand-680-n183-primary-exact-feasibility
+        status: confirmed
     close_when: The reported claim has a reviewed disposition on main, replay and mathematical review
       have explicit owners, any adopted house is regularized in the adoption change, and a reply checked
       against main and the deployed site reports the resulting state.
@@ -13219,7 +13230,9 @@ issues:
       after Couzo, and the KKT, flat-motion and local-minimum statements as unregistered source evidence;
       it says that the 19 October reply''s two routes were this repository''s, that the source''s two
       checkers and its regularized certificate did not run here, and that nothing asked for is queued.
-      The issue closed with it at 2026-10-20T17:43:20Z.'
+      The issue closed with it at 2026-10-20T17:43:20Z. The 20 October follow-up (issuecomment-6300872327)
+      names the evidence that reply described: E-evand-680-n183-report, reviewed, and
+      E-evand-680-n183-primary-exact-feasibility, confirmed.'
   - number: 686
     title: '100 certified larger-count square packings (328–998): registration request'
     author: gfppoy
