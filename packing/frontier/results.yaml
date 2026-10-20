@@ -30205,8 +30205,6 @@ results:
       - packing/resources/web/couzo-issue678-2026-10-18/README.md
       - packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n204.cert
       - packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n260.cert
-      - packing/resources/web/couzo-issue678-2026-10-18/receipts/filtered-exact-replay.json
-      - packing/resources/web/couzo-issue678-2026-10-18/receipts/exhaustive-sample.json
       - packing/campaign/issue-intake/upper-bounds-20261019/README.md
       - packing/devtools/couzo_678_replay.py
     controls:
