@@ -16,7 +16,7 @@ import subprocess
 import sys
 import time
 import zlib
-from collections.abc import Iterator, Mapping, Sequence
+from collections.abc import Callable, Iterator, Mapping, Sequence
 from pathlib import Path
 from typing import Any, cast
 
@@ -847,6 +847,46 @@ def test_metadata_capture_feeds_batch_input_while_draining_output(
     )
 
 
+def test_a_streamed_content_read_runs_to_the_check_deadline(
+    repo: tuple[Path, str], monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """J3 of #406: only a metadata query is cut at MAX_QUERY_SECONDS.
+
+    A content read's cost is the content it compresses, which MAX_CONTENT_BYTES bounds, so
+    it runs to the check's own deadline; a long read is then rejected rather than refused.
+    """
+    path, _ = repo
+    identifier = git(path, "rev-parse", "HEAD:seed.txt").encode("ascii")
+    given: list[float] = []
+    capture = tool._capture_git  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+
+    def record(
+        child: subprocess.Popen[bytes],
+        *,
+        deadline: float,
+        data: bytes | None,
+        sink: Callable[[bytes], None] | None = None,
+    ) -> tuple[bytes, bytes]:
+        given.append(deadline)
+        return capture(child, deadline=deadline, data=data, sink=sink)
+
+    monkeypatch.setattr(tool, "_capture_git", record)
+    deadline = time.monotonic() + tool.MAX_QUERY_SECONDS + 600
+    streamed = bytearray()
+    for sink in (streamed.extend, None):
+        tool._git(  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+            path,
+            "cat-file",
+            "--batch",
+            deadline=deadline,
+            data=identifier + b"\n",
+            sink=sink,
+        )
+    assert bytes(streamed) == identifier + b" blob 4\nseed\n"
+    assert given[0] == deadline
+    assert given[1] <= time.monotonic() + tool.MAX_QUERY_SECONDS < deadline
+
+
 @pytest.mark.parametrize(
     "data",
     [b"", b"x", noise(70_000), b"register: entry\n" * 20_000, noise(3000) * 40],
@@ -1127,6 +1167,43 @@ def test_census_replays_merges_with_their_verdicts(
         "SUMMARY: 1 of 2 merges rejected, 0 of them by the total alone; 0 guard refusals; "
         f"largest passing total 0.00 MiB ({passed[:9]} #8)"
     ) in output
+
+
+def test_census_gives_each_replay_a_deadline_of_its_own(
+    repo: tuple[Path, str], monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """J3 of #406: each replay has a pull request's deadline, not what the census has left.
+
+    One deadline over the whole census would refuse every replay after the first 30 s, and
+    the census over all of main's merges takes minutes.
+    """
+    path, _ = repo
+    for number in (1, 2, 3):
+        git(path, "checkout", "-qb", f"pr-{number}")
+        add(path, f"pr-{number}.txt", b"%d" % number)
+        commit(path)
+        git(path, "checkout", "-q", "main")
+        merge(path, f"pr-{number}", number)
+    issued: list[float] = []
+    given: list[float] = []
+    fresh = tool._deadline  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+    inventory = tool.inventory
+
+    def issue() -> float:
+        issued.append(fresh())
+        return issued[-1]
+
+    def record(*arguments: Any, deadline: float, **options: Any) -> list[tool.Blob]:
+        given.append(deadline)
+        return inventory(*arguments, deadline=deadline, **options)
+
+    monkeypatch.setattr(tool, "_deadline", issue)
+    monkeypatch.setattr(tool, "inventory", record)
+    rows = tool.census(path, "main", 5, ceilings=tool.Ceilings(per_blob=PER, total=1024))
+    assert [row.refusal for row in rows] == ["", "", ""]
+    # One for the census's own queries, then one for each replay.
+    assert len(issued) == len(rows) + 1
+    assert given == issued[1:]
 
 
 def test_census_cli_uses_the_policy_and_reports(
