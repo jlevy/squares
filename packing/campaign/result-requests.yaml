@@ -10216,14 +10216,13 @@ issues:
     summary: >-
       Evan Daniel reports s(236) <= 15.861934390608, the exact rational side
       7930967195303679308621899285697/(5 x 10^29) of evand/square-packing 5ad0069,
-      search/packer/candidates/s236_bm3c.cert, rounded up at 12 places, accepted by his two
-      standard-library exact checkers; a different local minimum from itsnaka's #481 composition, found
-      by his basin explorer from a rebuild of it, with a 6-group regularized view at the same side.
-      Triaged on 17 October 2026: 2.02e-3 below both case lanes (T-146's regularized list of #481's
-      packing) and below T-174, pending adoption there, and the latest report at 236, so the
-      report-order rule records it. Not yet retained; its replay on this repository's two exact routes
-      prices at about a CPU-minute. Once validated it moves the house at 236, whose drawing is then
-      regularized. Claude assistance disclosed.
+      search/packer/candidates/s236_bm3c.cert, rounded up at 12 places; a different local minimum
+      from itsnaka's #481 composition, found by his basin explorer from a rebuild of it, with a
+      6-group regularized view at the same side. Retained on 19 October 2026 in
+      evand-n236-2026-10-16, replayed on this repository's two exact routes, registered as T-218,
+      reviewed by the 19 October stage 4 review and raised to V3/C3; the case at 236 adopted it as
+      its house, taking 236 off T-174's staged adoption, and its drawing was regularized in the same
+      pull request. Claude assistance disclosed.
     read_through: '2026-10-16T14:05:14Z'
     results:
     - key: n236
@@ -10232,24 +10231,24 @@ issues:
         15.861934390607358617243798571394, the side of s236_bm3c.cert (SHA-256 21dbf679...), by a packing
         the source calls a different local minimum from #481's.
       source: body
-      not_registered: >-
-        Triage only (think-6wtz). Stage 2 retains the certificate, its regularized view and both source
-        checkers at 5ad0069; stage 3 records it in report order, below every standing or staged side at
-        236 by approximately 2.0213565519e-3. It is a new packing continuing itsnaka's #481 arrangement
-        (T-136), credited after it as the issue asks.
-      queued: true
-      bead: think-6wtz
+      register:
+      - T-218
     beads:
     - think-6wtz
     answer_bead: think-6wtz
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/659#issuecomment-6261557007
+      date: '2026-10-19'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n236
     close_when: >-
       The certificate is registered on main and replayed here, the case at 236 has adopted it and
       regularized its drawing, and the author has been told the id, rungs and adoption.
     notes: >-
-      236 is one of T-174's 50 counts staged for adoption under think-3mry. If this certificate is
-      validated before that adoption lands, the house selection takes 236 to it, and the T-174 adoption
-      leaves 236 out rather than adopt and regularize a house that would lapse.
+      Credit follows the issue and issue 673's reading of it: Evan Daniel found the packing, from a
+      rebuild of itsnaka's #481 composition, which the issue credits for the construction.
   - number: 664
     title: 's(271) ≤ 16.948947733714: registration request'
     author: evand
@@ -10260,14 +10259,13 @@ issues:
     summary: >-
       Evan Daniel reports s(271) <= 16.948947733714, the exact rational side
       16948947733713657510723401112423/10^30 of evand/square-packing 757b40b,
-      search/packer/candidates/s271_ex1.cert, rounded up at 12 places, accepted by his two
-      standard-library exact checkers; a refinement of Francisco Couzo's #561 packing found by one
-      tilt-swap move of his basin explorer from the register's witness, with a 21-group regularized view
-      at the same side. Triaged on 17 October 2026: 4.46e-5 below both case lanes (T-186, Mishapolk's
-      refinement of #561) and the latest report at 271, so the report-order rule records it. Not yet
-      retained; its replay on this repository's two exact routes prices at about a CPU-minute. Once
-      validated it moves the house at 271, whose drawing is then regularized. Claude assistance
-      disclosed.
+      search/packer/candidates/s271_ex1.cert, rounded up at 12 places; found by one tilt-swap move
+      of his basin explorer from the register's witness, which the issue calls a refinement of
+      Francisco Couzo's #561 packing, with a 21-group regularized view at the same side. Retained on
+      19 October 2026 in evand-n271-2026-10-17, replayed on this repository's two exact routes,
+      registered as T-219, reviewed by the 19 October stage 4 review and raised to V3/C3; the case
+      at 271 adopted it as its house and its drawing was regularized in the same pull request.
+      Claude assistance disclosed.
     read_through: '2026-10-17T04:30:51Z'
     results:
     - key: n271
@@ -10276,25 +10274,26 @@ issues:
         16.948947733713657510723401112423, the side of s271_ex1.cert (SHA-256 48abf7ca...), which the
         source calls a refinement of #561's packing.
       source: body
-      not_registered: >-
-        Triage only (think-8o5j). Stage 2 retains the certificate, its regularized view and both source
-        checkers at 757b40b; stage 3 records it in report order, below both case lanes at 271 by
-        approximately 4.4622737548e-5, credited after Couzo's #561 and Chaoweeraprasit's #500 packings as the
-        issue asks.
-      queued: true
-      bead: think-8o5j
+      register:
+      - T-219
     beads:
     - think-8o5j
     answer_bead: think-8o5j
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/664#issuecomment-6261557347
+      date: '2026-10-19'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n271
     close_when: >-
       The certificate is registered on main and replayed here, the case at 271 has adopted it and
       regularized its drawing, and the author has been told the id, rungs and adoption.
     notes: >-
-      The source calls it a refinement of #561's packing, which the register would credit as a
-      regularization of Couzo's packing, and also a distinct local minimum, with one fewer
-      load-bearing tilted square than #561 and 59 squares moved by more than 1e-4. Which it is for
-      credit is put to the owner and the author with the triage (think-8o5j).
+      The source calls the packing a refinement of #561's, not a new construction, and also a
+      different local minimum; the case credits it as the issue asks, to Nate Chaoweeraprasit's
+      SQUISH packing improved by Francisco Couzo and Evan Daniel. Under issue 673's rule a different
+      local minimum would make Daniel the finder; the reply asks him which he means.
   - number: 666
     title: 's(n) < ⌈√n⌉ at 18 counts from n = 509 to 1568, and s(464) ≤ 21.98881: registration request'
     author: JoostdeWinter
@@ -10443,7 +10442,31 @@ issues:
     beads:
     - think-3m10
     answer_bead: think-3m10
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/666#issuecomment-6261557725
+      date: '2026-10-19'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n464
+      - result: n509
+      - result: n555
+      - result: n603
+      - result: n654
+      - result: n706
+      - result: n760
+      - result: n817
+      - result: n875
+      - result: n935
+      - result: n998
+      - result: n1061
+      - result: n1128
+      - result: n1196
+      - result: n1266
+      - result: n1339
+      - result: n1413
+      - result: n1489
+      - result: n1568
     close_when: Every claim or correction has a reviewed disposition on main, pending validation has a priced
       owner, any changed house is regularized in its adoption, and the author has received a reply verified
       against main and the deployed site.
@@ -10480,7 +10503,27 @@ issues:
     beads:
       - think-qdcc
     answer_bead: think-qdcc
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/668#issuecomment-6261558114
+      date: '2026-10-19'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n227
+        id: T-196
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: n229
+        id: T-196
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: n260
+        id: T-196
+        verification: V0
+        confirmation: C0
+        status: recorded
     close_when: Every claim or correction has a reviewed disposition on main, pending validation has a priced
       owner, any changed house is regularized in its adoption, and the author has received a reply verified
       against main and the deployed site.
@@ -10505,9 +10548,13 @@ issues:
     state: open
     kind: result-report
     triage: done
-    summary: Evan Daniel reports an exact rational certificate at 155 from 59326b8, with a regularized view
-      at the same side. The source claims a different local minimum from Ostashev T-149, credits that packing
-      as its start, and discloses same-author exact checkers and numerical local-minimum diagnostics.
+    summary: >-
+      Evan Daniel reports s(155) <= 12.952260944651 from the exact rational certificate at 59326b8,
+      with a regularized view at the same side, a different local minimum from Daniil Ostashev's
+      T-149 found by his basin explorer from it. Registered as T-197 on 18 October; replayed on this
+      repository's two exact routes, reviewed by the 19 October stage 4 review and raised to V3/C3
+      on 19 October 2026; the case at 155 adopted it as its house and its drawing was regularized in
+      the same pull request.
     read_through: '2026-10-17T14:49:46Z'
     results:
       - key: n155
@@ -10519,21 +10566,29 @@ issues:
     beads:
       - think-n1ga
     answer_bead: think-n1ga
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/669#issuecomment-6261558471
+      date: '2026-10-19'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n155
+        id: T-197
+        verification: V0
+        confirmation: C0
+        status: recorded
     close_when: Every claim or correction has a reviewed disposition on main, pending validation has a priced
       owner, any changed house is regularized in its adoption, and the author has received a reply verified
       against main and the deployed site.
-    notes: 'Stage 2 packet: packing/resources/web/evand-n155-explorer-2026-10-17/README.md, retained at
-      MIT-licensed 59326b86291b76c39d843f3f156e8f25fa0f6e3f; the claim date remains 2026-10-17. No source
-      checker or mathematical review ran during acquisition. PR661 keeps T-195. Each later PR takes the
-      next available IDs only after updating from main, in actual merge order; PR671''s entries are provisional,
-      and no ordering between PR671 and this intake branch is assumed. The issue and s155_ex2_prior.json
-      credit Daniil Ostashev''s T-149 as the search start, while s155_ex2_regularized.json says by: [Francisco
-      Couzo]. Both statements are preserved; resolve the discrepancy before using that field as attribution
-      evidence. The same-side display certificate is not a second bound; numerical local-minimum diagnostics
-      remain source assertions. Stage 3 joins every chronological claim to the register on the #661-dependent
-      intake branch, at V0/C0. IDs remain provisional until actual main merge order; no reply is posted.
-      Separate mathematical review and source-replay owners retain Stage 4 integration and any adoption. Both case upper lanes and house choices stay unchanged pending Stage 4 adoption. The separately completed source replays and mathematical reviews await descendant integration; no confirmation receipt or rung is adopted here.'
+    notes: >-
+      Stage 2 packet: packing/resources/web/evand-n155-explorer-2026-10-17/README.md, retained at
+      MIT-licensed 59326b86291b76c39d843f3f156e8f25fa0f6e3f; the claim date remains 2026-10-17. The
+      issue and s155_ex2_prior.json credit Daniil Ostashev's T-149 as the search start, while
+      s155_ex2_regularized.json says by: [Francisco Couzo], as the same field of Daniel's 236 and
+      271 views does; the record follows the issue. Under issue 673's reading the start is what the
+      search was based on, so the case at 155 names Evan Daniel as the finder. The same-side display
+      certificate is not a second bound; numerical local-minimum diagnostics remain source
+      assertions.
   - number: 670
     title: '204-993: registration request'
     author: franciscouzo
@@ -11060,7 +11115,85 @@ issues:
     beads:
     - think-f28n
     answer_bead: think-f28n
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/670#issuecomment-6261558818
+      date: '2026-10-19'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n204
+      - result: n330
+      - result: n339
+      - result: n364
+      - result: n370
+      - result: n378
+      - result: n379
+      - result: n382
+      - result: n403
+      - result: n417
+      - result: n418
+      - result: n419
+      - result: n421
+      - result: n422
+      - result: n444
+      - result: n452
+      - result: n458
+      - result: n459
+      - result: n460
+      - result: n461
+      - result: n462
+      - result: n463
+      - result: n501
+      - result: n503
+      - result: n505
+      - result: n536
+      - result: n546
+      - result: n548
+      - result: n551
+      - result: n553
+      - result: n598
+      - result: n600
+      - result: n647
+      - result: n650
+      - result: n651
+      - result: n700
+      - result: n701
+      - result: n702
+      - result: n703
+      - result: n749
+      - result: n753
+      - result: n754
+      - result: n756
+      - result: n757
+      - result: n758
+      - result: n804
+      - result: n805
+      - result: n806
+      - result: n809
+      - result: n811
+      - result: n812
+      - result: n813
+      - result: n863
+      - result: n866
+      - result: n867
+      - result: n868
+      - result: n869
+      - result: n870
+      - result: n871
+      - result: n922
+      - result: n925
+      - result: n926
+      - result: n927
+      - result: n928
+      - result: n929
+      - result: n930
+      - result: n931
+      - result: n987
+      - result: n989
+      - result: n990
+      - result: n991
+      - result: n992
+      - result: n993
     close_when: Every claim or correction has a reviewed disposition on main, pending validation has a priced
       owner, any changed house is regularized in its adoption, and the author has received a reply verified
       against main and the deployed site.
@@ -11401,7 +11534,58 @@ issues:
     beads:
     - think-2vjc
     answer_bead: think-2vjc
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/672#issuecomment-6261559222
+      date: '2026-10-19'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n227
+      - result: n229
+      - result: n330
+      - result: n461
+      - result: n507
+      - result: n652
+      - result: n653
+      - result: n704
+      - result: n749
+      - result: n750
+      - result: n753
+      - result: n755
+      - result: n756
+      - result: n757
+      - result: n758
+      - result: n759
+      - result: n804
+      - result: n805
+      - result: n811
+      - result: n812
+      - result: n813
+      - result: n814
+      - result: n815
+      - result: n816
+      - result: n817
+      - result: n864
+      - result: n865
+      - result: n868
+      - result: n869
+      - result: n871
+      - result: n872
+      - result: n873
+      - result: n874
+      - result: n923
+      - result: n924
+      - result: n929
+      - result: n930
+      - result: n932
+      - result: n933
+      - result: n934
+      - result: n935
+      - result: n990
+      - result: n991
+      - result: n994
+      - result: n995
+      - result: n996
     close_when: Every claim or correction has a reviewed disposition on main, pending validation has a priced
       owner, any changed house is regularized in its adoption, and the author has received a reply verified
       against main and the deployed site.
@@ -11413,26 +11597,40 @@ issues:
     opened: '2026-10-17'
     state: open
     kind: correction
-    triage: pending
-    summary: 'Evan Daniel asks to change found_by at 146 and 308 to his name, retaining Xu #432 and Fang
-      #484 as the starts. He distinguishes new local minima from refinements and cites a Lean path-soundness
-      theorem and numerical path tests. This audit records the request without deciding project credit policy.'
+    triage: done
+    summary: >-
+      Evan Daniel asks to change found_by at 146 and 308 to his name, with Ryan Xu's #432 and Kevin
+      Fang's #484 named as what his searches were based on: his requests in #606 and #489 to credit
+      them for the start or the construction meant "based on". He also states the rule he now uses
+      (same local minimum: refinement; otherwise the later poster is the finder) and names eleven
+      other counts as examples he does not ask to change. Applied on 19 October 2026 under the
+      project's credit rule that the source says who did what: the case records at 146 and 308 name
+      Evan Daniel as finder; the credit lines are unchanged and his general rule is not adopted as
+      project policy.
     read_through: '2026-10-17T22:31:41Z'
     results: []
     beads:
     - think-gzvu
     answer_bead: think-gzvu
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/673#issuecomment-6261559625
+      date: '2026-10-19'
+      by: jlevy
+      kind: follow-up
+      reported: []
     close_when: Every claim or correction has a reviewed disposition on main, pending validation has a priced
       owner, any changed house is regularized in its adoption, and the author has received a reply verified
       against main and the deployed site.
     asks:
     - what: Review requested found_by corrections at 146 and 308 and determine how existing credit policy
         applies to the author clarification.
-      state: queued
-      bead: think-gzvu
-      note: Other counts in the issue are examples, not requested changes. The author proposed a rule; it
-        is not an adopted project rule.
+      state: done
+      note: >-
+        Applied on 19 October 2026: the case records at 146 (T-187's house) and 308 (T-174's house,
+        refining T-141's packing) name Evan Daniel as finder, from searches based on Xu's and Fang's
+        packings, as the source's corrected attribution says (epistemics.md, Parallel Projects and
+        Their Credit). Other counts in the issue are examples, not requested changes. The author's
+        proposed rule is not an adopted project rule.
   - number: 674
     title: 's(229) ≤ 15.650163254859: registration request'
     author: evand
@@ -11440,9 +11638,13 @@ issues:
     state: open
     kind: result-report
     triage: done
-    summary: 'Evan Daniel reports a dilation certificate at 229 (e0338c7), then a smaller certificate at
-      00e68df and asks to use the latter instead. Both reports are retained in order; the update certifies
-      only an upper bound and credits Couzo #672 after de Winter #668.'
+    summary: >-
+      Evan Daniel reports a dilation certificate at 229 (e0338c7), then a smaller certificate at
+      00e68df and asks to use the latter instead. Both are registered in order (T-198, T-199),
+      replayed on this repository's two exact routes, reviewed by the 19 October stage 4 review and
+      raised to V3/C3 on 19 October 2026; the case at 229 adopted the update (T-199) as its house,
+      the first adoption at 229, and its drawing was regularized in the same pull request. Each
+      certifies only an upper bound and credits Couzo #672 after de Winter #668 as the start.
     read_through: '2026-10-18T01:36:21Z'
     results:
       - key: n229
@@ -11461,7 +11663,22 @@ issues:
     beads:
       - think-5ij2
     answer_bead: think-5ij2
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/674#issuecomment-6261560037
+      date: '2026-10-19'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n229
+        id: T-198
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: n229-update
+        id: T-199
+        verification: V0
+        confirmation: C0
+        status: recorded
     close_when: Every claim or correction has a reviewed disposition on main, pending validation has a priced
       owner, any changed house is regularized in its adoption, and the author has received a reply verified
       against main and the deployed site.

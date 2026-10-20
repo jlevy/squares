@@ -1,0 +1,56 @@
+{
+  "format": "external-source-declaration-v1",
+  "id": "evand-n271-2026-10-17",
+  "source_url": "https://github.com/evand/square-packing",
+  "source_ref": "757b40bc6c5f681033ff1572177d408afbf26dfe",
+  "source_commit": "757b40bc6c5f681033ff1572177d408afbf26dfe",
+  "retrieved_at_utc": "2026-10-19T20:50Z",
+  "git_scope": "Blobless fetch of the issue #664 pin 757b40b, the commit that adds the eight s271_ex1 files under search/packer/candidates/. All eight are retained: the certificate the claim rests on (s271_ex1.cert), its 80-digit KKT point, the binary64 input it was solved from, the solver's report, the prior-record summary, the same-side regularized view with its report, and the source's comparison with #561's packing; with the licence, credits and the format and packer READMEs. The two source checkers are pinned by digest against the identical copies the n155 packet retains, and the packer log, basin explorer and exact solver by digest only. The rest of the tree is pinned by the commit and was not retained or executed.",
+  "archived_dir": "source",
+  "license": "MIT, copyright (c) 2026 Evan Daniel (LICENSE retained). CREDITS.md states Claude (Anthropic) under human direction, no peer review; the pinned commit names Claude Opus 5.5 as co-author and says the submission was approved by Evan Daniel. Issue #664 asks credit for Francisco Couzo's #561 packing and Nate Chaoweeraprasit's SQUISH packing it refines.",
+  "claims": [
+    "Issue #664 reports s(271) <= 16.948947733714, the exact rational side 16948947733713657510723401112423/1000000000000000000000000000000 of search/packer/candidates/s271_ex1.cert rounded up at 12 places, 4.46e-5 below Francisco Couzo's #561 (16.948992356451); it prints the SHA-256 of s271_ex1.cert and of s271_ex1_regularized.cert, the same packing at the same side regularized for display with 21 angle groups.",
+    "The issue calls it a refinement of the #561 packing, not a new construction, and a different local minimum: its load-bearing tilt angles match #561's group for group within 0.12 degrees, except that four squares near 31.7 to 32.0 degrees in #561 are three here; KKT, strict modulo 54 exact flat motions against #561's 56, no corner-corner MILP descent, 116 + 1488 contact equations, 259 corner-corner contacts and 4 rattlers; matched over the eight symmetries, 59 load-bearing squares move by more than 1e-4 and 2 by more than 1e-2. These are numerical evidence at 80 digits, as the issue says, not interval proofs.",
+    "The issue says the basin explorer (search/packer/explore.py) started from the register's witness for 271 as one of 52 counts in a test run, and the improvement came 90 seconds in from one move that swaps the tilt angles of two neighbouring squares, then a re-polish; exactsolve.py certified the point.",
+    "The author's two standard-library exact checkers, verify_cert.py (separating axes) and verify_cert2.py (polygon intersection), are reported to accept both files; they share an author and the certificate format. No closed form, interval proof of local optimality or optimality is claimed."
+  ],
+  "scope": [
+    "LICENSE",
+    "CREDITS.md",
+    "README.md",
+    "search/exact/README.md",
+    "search/exact/verify_cert.py",
+    "search/exact/verify_cert2.py",
+    "search/exact/exactsolve.py",
+    "search/packer/README.md",
+    "search/packer/PACKER.md",
+    "search/packer/explore.py",
+    "search/packer/candidates/s271_ex1.cert",
+    "search/packer/candidates/s271_ex1.exact.txt",
+    "search/packer/candidates/s271_ex1.input.txt",
+    "search/packer/candidates/s271_ex1.json",
+    "search/packer/candidates/s271_ex1_prior.json",
+    "search/packer/candidates/s271_ex1_regularized.cert",
+    "search/packer/candidates/s271_ex1_regularized.json",
+    "search/packer/candidates/s271_ex1_vs_prior.json"
+  ],
+  "pinned_only": [
+    {
+      "match": "search/exact/verify_cert*.py",
+      "reason": "The source's two standalone exact checkers, byte-identical to the copies the n155 packet retains at 59326b8; never executed by this acquisition.",
+      "identical_to": "packing/resources/web/evand-n155-explorer-2026-10-17/source/search/exact"
+    },
+    {
+      "match": "search/packer/PACKER.md",
+      "reason": "The packer's chronological working log, which records the explorer test run that found the packing; pinned for provenance."
+    },
+    {
+      "match": "search/packer/explore.py",
+      "reason": "Numerical basin explorer used for discovery; not required by either standalone exact checker."
+    },
+    {
+      "match": "search/exact/exactsolve.py",
+      "reason": "Numerical high-precision certificate producer; a replay consumes the completed certificate without this solver or its dependencies."
+    }
+  ]
+}

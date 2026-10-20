@@ -114,6 +114,44 @@ outcome. The check establishes the manifest, file bytes and declaration contract
 A later replay and dedicated review must separately establish any geometric verdict or
 evidential upgrade.
 
+## Exact Replay
+
+Added on 19 October 2026 for the stage 4 replay (think-8kx2, think-0lu6), with the import
+declaration [acquisition/report.json](acquisition/report.json) that
+`devtools.upper_bound_reports` reads.
+The certificate goes through the maintained two-route kernel of
+`devtools.evand_arrangement_reports`: `sqpack`’s exact witness verifier and the
+independent rational corner checker, each deciding every wall and every pair over
+$\mathbb{Q}$ after an exact half-angle conversion.
+The count ran a positive job, a duplicate-square control and an outside-container
+control, each in its own child process, on one worker.
+The positive passes both routes, and both routes refuse both controls.
+Every positive clears every wall by at least $5.00 \times 10^{-21}$ and every pair by at least
+$9.99 \times 10^{-21}$.
+The 3 jobs made 71,610 pair decisions in 43.29 route CPU seconds and 86.75 job wall
+seconds, summed; the longest job took 29.99 seconds.
+[receipts/exact-certification.json.xz](receipts/exact-certification.json.xz) keeps every
+deciding input and both routes’ complete outputs.
+The two routes share certificate parsing, the half-angle conversion, Python’s rational
+arithmetic and the separating-axis method, so they are two implementations of one
+method. Neither is the author’s code, and the source’s own checkers were not run.
+
+[acquisition/claims.json](acquisition/claims.json) freezes the certificate against the
+record at `main` `14fd9e27f` (19 October 2026), each side rebuilt from its own retained
+packet or read from its print:
+
+| Report at 155 | Holder | This certificate is below it by |
+| --- | --- | --- |
+| `T-174`, the case ceiling | Daniil Ostashev, improved by PingYou Ltd | $1.64 \times 10^{-4}$ |
+| `T-149` (#501) | Daniil Ostashev | $1.64 \times 10^{-4}$ |
+
+From `packing/`:
+
+```sh
+uv run --frozen --all-extras --group dev python -m devtools.upper_bound_reports evand-n155-explorer-2026-10-17 check-claims
+uv run --frozen --all-extras --group dev python -m devtools.upper_bound_reports evand-n155-explorer-2026-10-17 check --replay
+```
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

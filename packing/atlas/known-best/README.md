@@ -534,6 +534,25 @@ for the 35 and `selection-adopt174-c.json.gz` and `selection-adopt174-c.md` for 
 261\. After it the index draws 92 views: 36 by the axis tool, 36 by Evan Daniel’s
 regularizer and 20 by the grid-slack generator’s version 1.
 
+On 19 October 2026 the adoption of Evan Daniel’s certificates (think-ip1p) moved four
+houses: 155 to T-197, 229 to T-199, 236 to T-218 and 271 to T-219, $4.46 \times 10^{-5}$
+to $6.69 \times 10^{-3}$ below the earlier ones.
+Both generators ran on all four, Evan Daniel’s regularizer
+(`evand-regularize-adopt-2026-10-19-n155-271-evand`, 1,199 CPU-seconds) and grid-slack
+at 0.5, 1 and 5 degrees (`grid-slack-adopt-2026-10-19-n155-271-grid-deg05`, `-grid-deg1`
+and `-grid-deg5`, 2,758 CPU-seconds).
+The selection draws grid-slack’s half-degree view at 155 and his same-side views at 236
+and 271. At 229 his driver draws no view, and grid-slack’s views, better than the axis
+tool’s on every goal, go to the owner’s review at row 7 (two squares’ contact counts
+fall while no total does), so 229 is decided no better on the axis tool’s view until a
+review record admits one; the catalogue’s packing it replaces was regular as published.
+At 271 the view drawn now has two more uneven squares than the strong view of the
+earlier house; by the house rule that is no reason to keep the larger house.
+The evidence is retained in
+[`cases/regularized_drawings/think-ip1p-2026-10-19/`](../../cases/regularized_drawings/think-ip1p-2026-10-19/README.md).
+After it the index draws 93 views: 36 by the axis tool, 37 by Evan Daniel’s regularizer
+and 20 by the grid-slack generator’s version 1.
+
 ### The default picture
 
 On 13 October 2026 the owner made the regularized view the default picture, with the

@@ -95,6 +95,13 @@ MISHAPOLK_70A = "mishapolk-kkt-refinements-2026-10-14"
 #: PR #622, PingYou Ltd's N29 certificate in a release asset, kept as a derived fact: the
 #: evening intake of 16 October (`test_upper_bound_reports_622`).
 PINGYOU_622 = "pingyou-pr622-certificate-2026-10-15"
+#: Evan Daniel's issues #669, #674 (opening and update), #659 and #664, retained under MIT
+#: by the evand lane of 19 October (`test_upper_bound_reports_659_664_669_674`).
+DANIEL_669 = "evand-n155-explorer-2026-10-17"
+DANIEL_674 = "evand-n229-dilation-2026-10-17"
+DANIEL_674_UPDATE = "evand-n229-dilation-update-2026-10-18"
+DANIEL_659 = "evand-n236-2026-10-16"
+DANIEL_664 = "evand-n271-2026-10-17"
 #: How a declaration cites a beyond-horizon row of the source register.
 COVERAGE_URL = "packing/frontier/source-coverage.yaml"
 EVERY = (
@@ -124,6 +131,11 @@ EVERY = (
     DANIEL_606,
     MISHAPOLK_70A,
     PINGYOU_622,
+    DANIEL_669,
+    DANIEL_674,
+    DANIEL_674_UPDATE,
+    DANIEL_659,
+    DANIEL_664,
 )
 
 
@@ -1318,6 +1330,11 @@ def test_the_register_plan_states_each_bound_as_check_standing_reads_it(name: st
         DANIEL_606: "2026-10-14",
         MISHAPOLK_70A: "2026-10-14",
         PINGYOU_622: "2026-10-15",
+        DANIEL_669: "2026-10-17",
+        DANIEL_674: "2026-10-17",
+        DANIEL_674_UPDATE: "2026-10-18",
+        DANIEL_659: "2026-10-16",
+        DANIEL_664: "2026-10-17",
     }
     assert result["attribution"]["published"] == published.get(name, "2026-10-10")
     evidence = plan["evidence.yaml"]

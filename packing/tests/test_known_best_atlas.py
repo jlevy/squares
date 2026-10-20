@@ -90,8 +90,9 @@ from sqpack.yamlio import safe_load
 #: earlier catalogue sources. These inventory counts follow the current corpus; the house
 #: adoption of 12 October 2026 moved n = 176 onto SQUISH's issue 500 packet (think-fvz4),
 #: and its pass for issue 528 moved n = 264 onto Daniil Ostashev's packet (think-cq95), and
-#: that of 15 October n = 204 onto his issue 562 packet (T-162).
-GOLDEN_DERIVED_ABOVE_100: dict[str, int] = {"n=1..100": 0, "n=1..200": 22, "n=1..324": 46}
+#: that of 15 October n = 204 onto his issue 562 packet (T-162), and that of 19 October
+#: n = 229 onto Evan Daniel's issue 674 packet (T-199).
+GOLDEN_DERIVED_ABOVE_100: dict[str, int] = {"n=1..100": 0, "n=1..200": 22, "n=1..324": 45}
 #: The cases whose retained upstream rendering is the UnitSquare release, per corpus.
 GOLDEN_UNITSQUARE: dict[str, set[int]] = {
     # 68, 103, 105, 110 and 131 moved onto Francisco Couzo's packet on 2026-09-29, and 69
@@ -119,11 +120,12 @@ GOLDEN_SOURCE_KINDS: dict[str, dict[str, int]] = {
     # adoption of 11 October 2026, and 176 (from Kingbird) on 12 October (think-fvz4), as
     # did 264 (from Kingbird) in the pass for issue 528 (think-cq95), and 204 (from
     # Kingbird) on 15 October, to Daniil Ostashev's issue 562 packet (T-162), and 29 (from
-    # Kingbird) on 17 October, to PR #622's packet (T-195).
+    # Kingbird) on 17 October, to PR #622's packet (T-195), and 229 (from Kingbird) on 19
+    # October, to Evan Daniel's issue 674 packet (T-199).
     "n=1..324": {
         "exact-grid": 175,
-        "kingbird-derived-facts": 75,
-        "packet-derived-facts": 74,
+        "kingbird-derived-facts": 74,
+        "packet-derived-facts": 75,
     },
 }
 
@@ -2152,8 +2154,13 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
     # n = 146 refinement: two sources fewer, and no new name.
     # T-174's 37-count adoption consolidates ten source keys while retaining every
     # construction credit. T-195 adds one source at n = 29.
-    assert len(expected_names) == 26
-    assert len(expected_sources) == 17
+    # On 19 October 2026 the #673 correction made Evan Daniel 308's finder, as his
+    # source asks; Kevin Fang's two-wedge construction, which no other count credits,
+    # is named in that case's credit sentence and leaves this list.
+    assert len(expected_names) == 25
+    # The adoption of 19 October draws from four more, Evan Daniel's packets at 155, 229,
+    # 236 and 271, and every source it re-housed still holds another count.
+    assert len(expected_sources) == 21
     assert set(json.loads(credit_block.attrib["data-credited-names"])) == expected_names
     assert set(json.loads(credit_block.attrib["data-source-keys"])) == expected_sources
     assert credit_block.find("svg:text[@data-feature='packing-credits-heading']", SVG) is None
@@ -2181,7 +2188,6 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
         "Chaoweeraprasit",
         "Couzo",
         "Daniel",
-        "Fang",
         "Gupta",
         "Ostashev",
         "PingYou Ltd",
@@ -3128,10 +3134,14 @@ def test_the_poster_badges_every_perfect_square_and_counts_them_in_its_legend() 
     # same-day archive also holds 29's prior record, so restore only T-174's roster.
     from devtools import adopt_houses  # noqa: PLC0415
 
+    # The roster is the pass's own: 155 has since moved on to T-197 (19 October 2026), and
+    # the poster still draws its record from before both passes.
     previous = adopt_houses.read_pass("2026-10-17")
-    t174_counts = {n for n, result in adopted_houses.ADOPTED.items() if result == "T-174"}
+    t174_counts = set(previous) - {29}
     assert len(t174_counts) == 37
-    assert 29 not in t174_counts
+    assert {
+        n for n, result in adopted_houses.ADOPTED.items() if result == "T-174"
+    } == t174_counts - {155}
     cases = {n: build_bound_citations.load_case(n) for n in cards}
     cases.update(
         {n: safe_load(previous[n].split("---\n", 2)[1])["packing"] for n in t174_counts}
@@ -4352,9 +4362,10 @@ def test_print_information_shares_content_style_and_measured_block_gaps(data_dat
         for block in blocks
     ]
     assert credit_text[0] == credit_text[1]
+    # 25 since the #673 correction of 19 October 2026 (see the credits test above).
     assert (
         len(credit_text[0].removeprefix("Best packings due to ").removesuffix(".").split(", "))
-        == 26
+        == 25
     )
 
 

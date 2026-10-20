@@ -193,17 +193,13 @@ class Pending:
 #: stage 4 on 16 October 2026 (#658), are smaller at twelve others: 88, 102, 123, 126,
 #: 199, 258, 259, 266, 267, 292, 295 and 301. They are staged for the writer, as are its
 #: four houses below T-186 at 175, 204, 232 and 302. At 236 Evan Daniel's issue 659
-#: reports a side 2.02e-3 below T-174's, whose import adopts it; T-174 stays staged there
-#: until then. A pull request that validates a smaller packing adopts it or stages its
-#: counts here with the bead that adopts them and why (`STAGING_REASONS`); an adoption
-#: waits with its regularization runs, never apart from them
-#: (`default_drawings.deferral_problems`). The pull request that adopts a count takes it
-#: off.
+#: reports a side 2.02e-3 below T-174's; the adoption of 19 October 2026 took 236 to it
+#: (T-218), which left T-174 no rational count staged. A pull request that validates a
+#: smaller packing adopts it or stages its counts here with the bead that adopts them and
+#: why (`STAGING_REASONS`); an adoption waits with its regularization runs, never apart
+#: from them (`default_drawings.deferral_problems`). The pull request that adopts a count
+#: takes it off.
 PENDING_ADOPTION: dict[int, Pending] = {
-    **{
-        n: Pending(house="T-174", bead=ADOPTION_BEAD, why=NEXT_PULL_REQUEST)
-        for n in (236,)
-    },
     **{
         n: Pending(house="T-174", bead=WRITER_BEAD, why=NO_WRITER)
         for n in (70, 153, 207)

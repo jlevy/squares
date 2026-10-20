@@ -112,9 +112,11 @@ MOVED_AGAIN = {
     156: ("T-186", "T-161"),
     176: ("T-186", "T-165"),
     204: ("T-186", "T-162"),
-    271: ("T-186", "T-161"),
     303: ("T-186", "T-162"),
 }
+#: The count of `MOVED_AGAIN` that a later pass moved once more: the adoption of 19 October
+#: 2026 took 271 from T-186 to Evan Daniel's issue-664 certificate (T-219).
+MOVED_LATER = {271: ("T-219", "2026-10-19")}
 
 #: Issue 639's exact algebraic sides (T-193), the smallest at all sixteen of its counts
 #: since its stage 4 exit (#658), each staged for the writer: below T-174's held sides at
@@ -149,12 +151,17 @@ def test_the_records_of_the_lifted_hold_keep_their_next_candidates_until_adopted
             assert adopt._holder(earlier).endswith(f"({before})")  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
     held_counts = {n for n, s in recorded.items() if s.held}
     assert set(NEXT_CANDIDATES) < held_counts
-    assert len(held_counts) == 50
+    # 50 until the adoption of 19 October 2026 moved 155 and 236 to Evan Daniel's
+    # certificates (T-197, T-218), below T-174's, so the hold decides neither.
+    assert len(held_counts) == 48
     previous_t174 = {n for n in previous if houses.ADOPTED[n] == "T-174"}
     assert held_counts | {70, 153, 207} | set(T193_BELOW_T186) == (
         set(select.PENDING_ADOPTION) | previous_t174
     )
-    assert {n: houses.ADOPTED[n] for n in previous if n not in previous_t174} == {29: "T-195"}
+    assert {n: houses.ADOPTED[n] for n in previous if n not in previous_t174} == {
+        29: "T-195",
+        155: "T-197",
+    }
 
 
 def test_a_house_below_the_held_entry_leaves_the_hold_deciding_nothing(
@@ -170,6 +177,10 @@ def test_a_house_below_the_held_entry_leaves_the_hold_deciding_nothing(
         held = [c for c in selections[n].candidates if c.result == "T-174"]
         assert all(c.side > houses.side(n) for c in held)
         assert adopt._holder(_front(latest[n])).endswith(f"({before})")  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+    for n, (result, day) in MOVED_LATER.items():
+        assert houses.ADOPTED[n] == result
+        assert houses.adopted_on(n) == day
+        assert not selections[n].held
 
 
 def test_regularizations_leave_the_packing_with_its_finder(
@@ -177,7 +188,7 @@ def test_regularizations_leave_the_packing_with_its_finder(
 ) -> None:
     houses_at = {
         n: next(c for c in selections[n].candidates if c.result == houses.ADOPTED[n])
-        for n in (70, 103, 211, 236, 241)
+        for n in (70, 103, 211, 241, 292)
     }
     # T-188's 211 is another arrangement of Ostashev's design, no refinement (RT-1 of the
     # 16 October review), so it regularizes nothing.
@@ -185,10 +196,10 @@ def test_regularizations_leave_the_packing_with_its_finder(
         70: "T-125",
         103: "T-146",
         211: None,
-        236: "T-136",
         241: "T-181",
+        292: "T-136",
     }
-    assert adopt.CREDITS[236].found_by == (adopt.SQUISH,)
+    assert adopt.CREDITS[292].found_by == (adopt.SQUISH,)
     assert adopt.CREDITS[70].found_by == (adopt.XU,)
     assert adopt.CREDITS[103].improved_by == ("Mishapolk", adopt.DANIEL, "PingYou Ltd")
 
@@ -981,8 +992,11 @@ def test_a_held_count_restaged_for_a_smaller_house_names_it_and_becomes_history(
         "to T-193’s side, below T-174’s, once the writer takes an algebraic side."
     )
     assert adopt._keeps_until(88, "T-174", "its house") == sentence  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
-    assert adopt._keeps_until(236, "T-174", "its house") == (  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
-        "The case keeps its house until T-174’s adoption, staged under think-3mry, moves it "
+    # A count staged for its own held house names that house's adoption: 70, under the
+    # writer's bead, since the adoption of 19 October 2026 took 236, the last rational
+    # count staged for T-174, to issue 659's certificate (T-218).
+    assert adopt._keeps_until(70, "T-174", "its house") == (  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+        "The case keeps its house until T-174’s adoption, staged under think-ot5c, moves it "
         "to T-174’s side."
     )
     tail = sentence.split(" until ", 1)[1]
@@ -1196,7 +1210,8 @@ def test_the_staged_adoptions_name_their_beads_and_reasons() -> None:
     reason. T-174's rational houses wait for the adoption's bead and the next pull request,
     and its algebraic ones, and T-193's (#658), for the writer's bead and the writer.
     The adoption of 17 October 2026 (think-3mry) took 37 rational counts off; twelve
-    others are staged for T-193 and 236 awaits issue 659's import."""
+    others are staged for T-193, and the adoption of 19 October 2026 took 236 to issue
+    659's certificate and 155 to issue 669's."""
     for n, pending in select.PENDING_ADOPTION.items():
         assert pending.why in select.STAGING_REASONS, n
         algebraic = n in (70, 153, 207) or pending.house == "T-193"
@@ -1210,7 +1225,7 @@ def test_the_staged_adoptions_name_their_beads_and_reasons() -> None:
     assert adopted == {
         n for n in houses.LATER_PASSES["2026-10-17"] if houses.ADOPTED[n] == "T-174"
     }
-    assert len(adopted) == 37
+    assert len(adopted) == 36
     assert not adopted & set(select.PENDING_ADOPTION)
 
 
@@ -1259,11 +1274,16 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
     assert historical["outcome"] == "PASS"
     assert len(historical["houses"]) == 65
     assert "29" not in historical["houses"]
-    assert historical["houses"] == {
-        str(n): result for n, result in houses.ADOPTED.items() if n != 29
-    }
+    # The houses as the 17 October passes left them: the adoption of 19 October 2026 moved
+    # 155, 236 and 271 to Evan Daniel's certificates and first adopted 229, after this
+    # receipt was retained.
+    nineteenth = {155: "T-197", 229: "T-199", 236: "T-218", 271: "T-219"}
+    before = {**houses.ADOPTED, 155: "T-174", 236: "T-146", 271: "T-186"}
+    del before[229]
+    assert {n: houses.ADOPTED[n] for n in nineteenth} == nineteenth
+    assert historical["houses"] == {str(n): result for n, result in before.items() if n != 29}
     assert {int(n) for n, result in historical["houses"].items() if result == "T-174"} == (
-        set(houses.numbers_of("T-174"))
+        set(houses.numbers_of("T-174")) | {155}
     )
 
 
@@ -1954,6 +1974,71 @@ def test_a_full_refresh_refuses_a_later_lower_layer_before_writing_any_record(
     assert {path: path.read_bytes() for path in originals} == originals
 
 
+def test_a_refresh_limited_to_named_counts_leaves_the_others_unread(
+    replayed: list[adopt.Move], tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """`--refresh --n` writes the named records and does not replay n108's later layer,
+    which the full refresh refuses (review A1 of #692)."""
+    moves = [move for move in replayed if move.n in (29, 108)]
+    marker = f"**House adoption, {adopt.day_words(29)}.**"
+    paths = {}
+    for move in moves:
+        text = select.case_path(move.n).read_text(encoding="utf-8")
+        if move.n == 29:
+            before, after = text.split(marker, 1)
+            text = before + marker + " Stale opening.\n\n" + after.split("\n\n", 1)[1]
+        paths[move.n] = tmp_path / f"n-{move.n:03d}.md"
+        paths[move.n].write_text(text)
+    untouched = paths[108].read_bytes()
+    monkeypatch.setattr(adopt, "replay_plan", lambda: moves)
+    monkeypatch.setattr(adopt, "held_counts", lambda: [108])
+    monkeypatch.setattr(select, "case_path", lambda n: tmp_path / f"n-{n:03d}.md")
+    assert adopt.main(["--refresh", "--n", "29"]) == 0
+    assert "Stale opening." not in paths[29].read_text()
+    assert _flat(adopt.opening(moves[0])) in _flat(paths[29].read_text())
+    assert paths[108].read_bytes() == untouched
+    with pytest.raises(SystemExit):
+        adopt.main(["--check", "--n", "29"])
+
+
+def test_an_adoption_marks_a_registration_pending_adoption_as_history() -> None:
+    """The intake of 18 October 2026 wrote a fixed-form "pending adoption" paragraph for
+    each report it registered at V0/C0; the adoption that moves the house marks it, and a
+    sentence after it naming a report pending adoption, as history (review A1 of #692).
+    155 is marked by hand (`HAND_MARKED`); 229 is the writer's, and so are 227 and 260,
+    whose de Winter reports are still pending."""
+    stale = (
+        "Reported certificate pending adoption",
+        "This V0/C0 registration leaves both case upper lanes",
+        "Rigidity and arrangement notes below describe that retained house.",
+    )
+    history = (
+        "Its V0/C0 registration left both case upper lanes, the house witness and its "
+        "drawing unchanged until the house adoption of 19 October 2026, and until then the "
+        "rigidity and arrangement notes below described that retained house."
+    )
+    for n, reported in ((155, "2026-10-17"), (229, "2026-10-18")):
+        body = _flat(select.case_path(n).read_text(encoding="utf-8").split("---\n", 2)[2])
+        assert not [words for words in stale if words in body], n
+        opening = f"**Reported certificate, {reported}.** Evan Daniel reported a {n}-square"
+        assert opening in body, n
+        assert history in body, n
+    body229 = _flat(select.case_path(229).read_text(encoding="utf-8"))
+    assert "the latest registered report, pending adoption until 19 October 2026." in body229
+    # The T-155 view's dated paragraph off T-101's side is history from the same pass.
+    assert (
+        "the verified upper bound until 19 October 2026 (T-155), which the record printed as "
+        "$15.65685424949239$." in body229
+    )
+    assert "which the record still prints" not in body229
+    for n in (227, 260):
+        committed = select.case_path(n).read_text(encoding="utf-8")
+        marked = _flat(adopt.pending_history(committed, "3 November 2026"))
+        assert not [words for words in stale if words in marked], n
+        assert f"Joost de Winter reported a {n}-square certificate" in marked, n
+        assert "until the house adoption of 3 November 2026" in marked, n
+
+
 def test_an_opening_refresh_keeps_the_following_old_bound_explicitly_historical(
     replayed: list[adopt.Move], tmp_path: Path
 ) -> None:
@@ -1973,7 +2058,7 @@ def test_an_opening_refresh_keeps_the_following_old_bound_explicitly_historical(
 def test_where_the_replaced_lanes_differ_the_margin_is_read_from_the_verified_ceiling(
     replayed: list[adopt.Move],
 ) -> None:
-    """The replaced displays differ at 29, 132 and 308. Their opening, section and history
+    """The replaced displays differ at 29, 132, 229 and 308. Their opening, section and history
     note use the exact verified baseline (reviews C3 and D1 of #661; M2/M3 of #665).
     At 29 the catalogue print orders nothing; at 132 and 308 the reported exact side
     agrees with the verified side, but its display differs from the verified display."""
@@ -2006,6 +2091,16 @@ def test_where_the_replaced_lanes_differ_the_margin_is_read_from_the_verified_ce
             "T-141",
             "[Daniel record hunt 3 2026-10-10]",
             "lies `1.80e-19` above the new side",
+        ),
+        # The first adoption at 229 (19 October 2026): the catalogue's print of
+        # 10 + 4 sqrt(2) above T-155's exact ceiling, both well above the new side.
+        229: (
+            Fraction("391421356237309504880168872421/25000000000000000000000000000"),
+            "15.65685424949238",
+            "15.65685424949239",
+            "T-155",
+            "[Kingbird]",
+            "lies `6.69e-03` above the new side",
         ),
     }
     for n, (expected, printed, verified_display, result, source, relation) in differing.items():

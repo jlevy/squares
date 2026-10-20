@@ -1,0 +1,56 @@
+{
+  "format": "external-source-declaration-v1",
+  "id": "evand-n236-2026-10-16",
+  "source_url": "https://github.com/evand/square-packing",
+  "source_ref": "5ad00693899ef50ccf6502f0346187cc422cc914",
+  "source_commit": "5ad00693899ef50ccf6502f0346187cc422cc914",
+  "retrieved_at_utc": "2026-10-19T20:50Z",
+  "git_scope": "Blobless fetch of the issue #659 pin 5ad0069, the commit that adds the eight s236_bm3c files under search/packer/candidates/. All eight are retained: the certificate the claim rests on (s236_bm3c.cert), its 80-digit KKT point, the binary64 input it was solved from, the solver's report, the prior-record summary, the same-side regularized view with its report, and the source's comparison with #481's packing; with the licence, credits and the format and packer READMEs. The two source checkers are pinned by digest against the identical copies the n155 packet retains, and the packer log, basin explorer and exact solver by digest only. The rest of the tree is pinned by the commit and was not retained or executed.",
+  "archived_dir": "source",
+  "license": "MIT, copyright (c) 2026 Evan Daniel (LICENSE retained). CREDITS.md states Claude (Anthropic) under human direction, no peer review; the pinned commit names Claude Opus 5.5 as co-author and says the commit and post were approved by Evan Daniel. Issue #659 asks credit for itsnaka's SQUISH 'Mondrian composition' (#481) for the construction.",
+  "claims": [
+    "Issue #659 reports s(236) <= 15.861934390608, the exact rational side 7930967195303679308621899285697/500000000000000000000000000000 = 15.861934390607358617243798571394 of search/packer/candidates/s236_bm3c.cert rounded up at 12 places, 2.02e-3 below itsnaka's SQUISH #481 (15.863955747159); it prints the SHA-256 of s236_bm3c.cert and of s236_bm3c_regularized.cert, the same packing at the same side regularized for display with 6 angle groups.",
+    "The issue calls the packing a different local minimum from #481's: KKT, strict modulo 92 exact flat motions against #481's 111, no corner-corner MILP descent, 102 + 1057 contact equations, 114 corner-corner contacts, 18 rattlers and 40 tilted squares (29 load-bearing); matched over the eight symmetries, 209 load-bearing squares move by more than 1e-4 and 20 by more than 1e-2, and no tilt angle is shared. These are numerical evidence at 80 digits, as the issue says, not interval proofs.",
+    "The issue says the packing came from a replication test of #481: #481's s(236) composition rebuilt from Kingbird's s(152)_r2 corner piece and the register's s(88) (itsnaka, #422) in a box of side s(88) + 6, then the basin explorer (fixed-side perturbation and re-polish, 45 minutes on one core) descended below #481, and exactsolve.py certified the point; run on 15 October, noticed below the register on 16 October.",
+    "The author's two standard-library exact checkers, verify_cert.py (separating axes) and verify_cert2.py (polygon intersection), are reported to accept both files; they share an author and the certificate format. No closed form, interval proof of local optimality or optimality is claimed."
+  ],
+  "scope": [
+    "LICENSE",
+    "CREDITS.md",
+    "README.md",
+    "search/exact/README.md",
+    "search/exact/verify_cert.py",
+    "search/exact/verify_cert2.py",
+    "search/exact/exactsolve.py",
+    "search/packer/README.md",
+    "search/packer/PACKER.md",
+    "search/packer/explore.py",
+    "search/packer/candidates/s236_bm3c.cert",
+    "search/packer/candidates/s236_bm3c.exact.txt",
+    "search/packer/candidates/s236_bm3c.input.txt",
+    "search/packer/candidates/s236_bm3c.json",
+    "search/packer/candidates/s236_bm3c_prior.json",
+    "search/packer/candidates/s236_bm3c_regularized.cert",
+    "search/packer/candidates/s236_bm3c_regularized.json",
+    "search/packer/candidates/s236_bm3c_vs_prior.json"
+  ],
+  "pinned_only": [
+    {
+      "match": "search/exact/verify_cert*.py",
+      "reason": "The source's two standalone exact checkers, byte-identical to the copies the n155 packet retains at 59326b8; never executed by this acquisition.",
+      "identical_to": "packing/resources/web/evand-n155-explorer-2026-10-17/source/search/exact"
+    },
+    {
+      "match": "search/packer/PACKER.md",
+      "reason": "The packer's chronological working log, which records the replication run that found the packing; pinned for provenance."
+    },
+    {
+      "match": "search/packer/explore.py",
+      "reason": "Numerical basin explorer used for discovery; not required by either standalone exact checker."
+    },
+    {
+      "match": "search/exact/exactsolve.py",
+      "reason": "Numerical high-precision certificate producer; a replay consumes the completed certificate without this solver or its dependencies."
+    }
+  ]
+}
