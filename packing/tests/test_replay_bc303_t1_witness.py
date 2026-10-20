@@ -115,11 +115,30 @@ def test_retained_implementation_revision_must_name_the_executing_reader() -> No
         replay.encode_record(record, REPO)
 
 
-def test_cross_checkout_and_dirty_executing_reader_are_refused(tmp_path: Path) -> None:
-    checkout = tmp_path / "input-checkout"
+def _sparse_input_checkout(checkout: Path) -> Path:
+    """A shared clone holding only what the replay reads: its sources and the reader.
+
+    The refusals below turn on the reader's path and bytes and on the eighteen sources.
+    A full checkout wrote about 660 MiB and 6,500 files per run for nothing else.
+    """
     subprocess.run(
-        ("git", "clone", "--shared", "--quiet", str(REPO), str(checkout)), check=True
+        ("git", "clone", "--shared", "--quiet", "--no-checkout", str(REPO), str(checkout)),
+        check=True,
     )
+    paths = (
+        "packing/devtools/__init__.py",
+        replay.READER_PATH,
+        *(source.path for source in replay.SOURCES),
+    )
+    git = ("git", "-C", str(checkout))
+    patterns = (f"/{path}" for path in paths)
+    subprocess.run((*git, "sparse-checkout", "set", "--no-cone", *patterns), check=True)
+    subprocess.run((*git, "checkout", "--quiet"), check=True)
+    return checkout
+
+
+def test_cross_checkout_and_dirty_executing_reader_are_refused(tmp_path: Path) -> None:
+    checkout = _sparse_input_checkout(tmp_path / "input-checkout")
 
     with pytest.raises(replay.T1ReplayError, match=r"executing T1 reader.*path"):
         replay.replay(checkout)

@@ -24,6 +24,7 @@ from typing import cast
 
 import pytest
 
+from devtools import pytest_tmp
 from devtools import read_fixed_core_calibration_profile as reader
 
 REPOSITORY = Path(__file__).resolve().parents[2]
@@ -657,9 +658,15 @@ def _share_pure_reader_lookups() -> Iterator[None]:
 
 
 @pytest.fixture(scope="module")
-def profile(tmp_path_factory: pytest.TempPathFactory) -> tuple[Path, dict[str, object]]:
-    output = tmp_path_factory.mktemp("source-distinct-profile") / "profile-1"
-    return output, _build_profile(output)
+def profile(
+    request: pytest.FixtureRequest, tmp_path_factory: pytest.TempPathFactory
+) -> Iterator[tuple[Path, dict[str, object]]]:
+    # About 57 MiB, given back when the module ends.
+    with pytest_tmp.scoped_tmp_path(
+        request, tmp_path_factory, "source-distinct-profile"
+    ) as root:
+        output = root / "profile-1"
+        yield output, _build_profile(output)
 
 
 def _read(
