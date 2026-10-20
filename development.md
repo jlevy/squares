@@ -1097,6 +1097,16 @@ A test session leaves behind only what someone needs to inspect a failure.
   lock: a session given `--basetemp`, an xdist worker’s directory, or a container
   sharing the same `/tmp`.
 
+Measured on 20 October 2026 over the quick lane (about 19,200 tests on two xdist workers
+on a shared four-CPU host, with a fresh `TMPDIR` sampled every five seconds): on main,
+one run left 3.0 GiB in 133,846 files, stock pytest keeps three runs’ worth, and the run
+peaked at 3.5 GiB, 1.4 GiB of it one test’s full clone of the repository.
+With these settings and that test moved to a sparse checkout, a passing run leaves
+nothing and a failing one leaves only its failed tests and session-scoped fixtures (232
+MiB when five load-sensitive tests failed).
+The peak fell to 347 MiB, almost all of it the negative controls’ worker snapshot, and
+the wall did not change measurably (2,795 s before, 2,755 s after).
+
 To see what a run writes, point `TMPDIR` at a fresh directory and summarize the report:
 
 ```shell
