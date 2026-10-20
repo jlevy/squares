@@ -3,9 +3,9 @@ type: is
 id: is-01m59khvbyx370mcm1z4t18tyy
 title: "Codex: diagnose recurrent serial deployed-forwarder wait at main289"
 kind: bug
-status: open
+status: closed
 priority: 1
-version: 9
+version: 10
 spec_path: docs/project/specs/active/plan-2026-10-14-ci-iteration-cost.md
 assignee: codex-forwarder-hang-diagnosis-20261019
 delegate: claude-forwarder-fix-20261020
@@ -17,8 +17,12 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-19T08:13:22.174Z
-updated_at: 2026-10-20T02:03:58.294Z
+updated_at: 2026-10-20T05:48:11.391Z
 started_at: 2026-10-19T08:13:31.974Z
+closed_at: 2026-10-20T05:48:11.391Z
+close_reason: "Fixed by #693 (merged a5acd5708): forwarder_arrivals opens a context per visit and closes it in a finally; the hang was Page.close on a page in a shared context mid-navigation (captured at check_published_site.py:1483, run 39345866613). Verified: main Packing validation 39373931375 green at a5acd57, and check_published_site --commit a5acd57 passes 4708/4708 against the live site including all 27 forwarder checks."
+resolution: null
+duplicate_of: null
 ---
 Bounded read-only diagnosis by Codex /root/forwarder_hang_diagnosis. Main 2891494ee6b097aef023fcf5cbf43fd623768dbf full run39216687680 timed out at18 serial forwarder cases, matching PR679c78 run39191999508 active deployed-forwarder call. Trace pinned test/server/Playwright lifecycle and retained progress; preserve selections/assertions/caps. Own artifact .codex/intake-resume-20261019/forwarder-hang-diagnosis.json. No source edits, checkout, browser run, full rerun, commit, or source push authorized in this slice. Parent and other agents retain ownership.
 
