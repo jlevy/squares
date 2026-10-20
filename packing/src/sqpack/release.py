@@ -1655,6 +1655,22 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "papers/square-packing-methods-survey.md",
         ),
         reason=(
+            "Rendered at link revision 4b8aec9a (main, with #690), once with main's "
+            "requests record and once with this branch's, the 42 files "
+            "render_packing_methods writes are byte-identical. The PDF prints from that HTML. "
+            "The record gains the reply records of 19 and 20 October 2026 on thirteen "
+            "issues, closes #606 and #622 and queues two asks, which the survey does not "
+            "read, so it keeps v0.2.3."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=("packing/campaign/result-requests.yaml",),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
             "Rendered at link revision a5acd570 (main, with #514 and #693), once with main's "
             "requests record and once with this branch's, the 42 files "
             "render_packing_methods writes are byte-identical. The PDF prints from that HTML. "
