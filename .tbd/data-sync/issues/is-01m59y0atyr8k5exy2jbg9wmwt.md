@@ -3,9 +3,9 @@ type: is
 id: is-01m59y0atyr8k5exy2jbg9wmwt
 title: Adopt T-218 at n183 and regularize it in the next intake PR
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 8
+version: 9
 delegate: c-lane-687
 labels:
   - result-import
@@ -16,8 +16,12 @@ parent_id: is-01m59few7wa6j6yrnw49hjap7r
 hold: null
 hold_until: null
 created_at: 2026-10-19T11:16:02.525Z
-updated_at: 2026-10-20T02:06:45.107Z
+updated_at: 2026-10-20T17:15:46.497Z
 started_at: 2026-10-19T16:47:23.660Z
+closed_at: 2026-10-20T17:15:46.497Z
+close_reason: "Done in #687 (merged d588ad987, 2026-10-20): n183 registered as T-220 (renumbered after #692 took T-218/T-219), adopted as the house and regularized; Fable round-2 review B approved; deferred checkpoint 39459276932 green; site v0.8.4."
+resolution: null
+duplicate_of: null
 ---
 Adopt T-218's original n183 rational certificate in the next intake pull request and finish both maintained strong-generator regularizations in that same pull request. Owner: codex-n183-house-adoption-20261019. This open obligation supplies select_houses.PENDING_ADOPTION n183; the registration slice does not move a house or run a generator. Credit Daniel after Couzo, with Levy acknowledged only for register seed data.
 
