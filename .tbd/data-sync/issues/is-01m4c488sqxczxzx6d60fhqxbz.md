@@ -3,9 +3,9 @@ type: is
 id: is-01m4c488sqxczxzx6d60fhqxbz
 title: Intake issue399 three new upper bounds with retained complete witnesses
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 7
+version: 8
 delegate: codex@spud10
 labels: []
 dependencies: []
@@ -13,10 +13,10 @@ parent_id: is-01m4bxdtbvasjn91jwhz448s7b
 hold: null
 hold_until: null
 created_at: 2026-10-07T21:28:01.079Z
-updated_at: 2026-10-09T19:14:03.261Z
+updated_at: 2026-10-12T23:39:20.877Z
 started_at: 2026-10-08T00:15:49.381Z
-closed_at: null
-close_reason: null
+closed_at: 2026-10-12T23:39:20.877Z
+close_reason: "Completed: issue 399's three packings registered as T-119 at V3/C3 with exact checks, controls and accepted review; reply ledger on main (d3860c97a); issue closed 2026-10-09."
 resolution: null
 duplicate_of: null
 ---

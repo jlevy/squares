@@ -3,9 +3,9 @@ type: is
 id: is-01m4aftvdk20axnjwwzj597h32
 title: "W2: review n11 optimality paper v0.1.6 for Guzhou"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 3
+version: 4
 spec_path: docs/project/reviews/review-2026-10-07-n11-optimality-paper-guzhou.md
 delegate: guzhou-astra-review
 labels:
@@ -16,8 +16,12 @@ parent_id: is-01m3qw8b5q2xgjp85cxx24134c
 hold: null
 hold_until: null
 created_at: 2026-10-07T06:11:55.442Z
-updated_at: 2026-10-07T06:25:46.454Z
+updated_at: 2026-10-12T23:39:15.015Z
 started_at: 2026-10-07T06:12:08.429Z
+closed_at: 2026-10-12T23:39:15.014Z
+close_reason: "Completed: n11 paper v0.1.6 review and corrections merged in PR #412 (2026-10-07)."
+resolution: null
+duplicate_of: null
 ---
 Workflow W2 factual-review.
 Audit the complete v0.1.6 article at ef79288a498b5469e6b944f7b150d83aeeab5f94 and its

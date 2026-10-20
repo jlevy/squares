@@ -5,8 +5,8 @@ title: Source-distinct review of the integrated calibration repair
 kind: task
 status: closed
 priority: 1
-version: 5
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+version: 7
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 delegate: Astra Max source-distinct calibration correction review; root integration
 labels:
   - n11
@@ -17,7 +17,7 @@ dependencies:
     target: is-01m2app5e71qnp9z5vfp9vppbp
 parent_id: is-01m2app5e71qnp9z5vfp9vppbp
 created_at: 2026-09-12T14:52:14.272Z
-updated_at: 2026-09-12T15:49:31.014Z
+updated_at: 2026-10-13T00:56:56.872Z
 closed_at: 2026-09-12T15:49:31.013Z
 close_reason: Source-distinct review completed with retained refusal report; five concrete successor defects remain separately tracked under CAL-2 through CAL-6.
 resolution: null

@@ -5,13 +5,13 @@ title: "Gate: sqsearch is built after the checks that need it, so the soundness 
 kind: bug
 status: closed
 priority: 0
-version: 4
-spec_path: docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
+version: 6
+spec_path: docs/project/specs/paused/plan-2026-08-22-minimal-packing-toolkit.md
 labels: []
 dependencies: []
 parent_id: is-01m0pqfp4rm5r4fy7ys6t03h0w
 created_at: 2026-08-23T07:13:54.680Z
-updated_at: 2026-10-10T22:46:56.961Z
+updated_at: 2026-10-12T23:49:57.131Z
 closed_at: 2026-08-23T07:28:18.235Z
 close_reason: "Fixed on claude/thinking-scratchpad-research-p1wkfg (PR #13): engine build hoisted so the soundness perimeter covers 22 configurations instead of 0; skips accounted with --strict; pytest false-green config dropped; needs_review now leads the ledger; skills-check wired into test.sh."
 resolution: null

@@ -5,7 +5,7 @@ title: "n17 outstanding-issue followthrough: mathematical disposition and first 
 kind: task
 status: in_progress
 priority: 1
-version: 16
+version: 18
 spec_path: docs/project/reviews/review-2026-10-06-n17-w3-consolidation.md
 delegate: claude-code@spud10.local
 labels:
@@ -23,10 +23,10 @@ child_order_hints:
   - is-01m4ebta3tmf345dnnpjxye49x
   - is-01m4eq9mdaejkedd1b09qqn09p
   - is-01m4evm6rm5ay11r282w7qe5k6
-hold: null
+hold: paused
 hold_until: null
 created_at: 2026-10-08T16:06:03.560Z
-updated_at: 2026-10-09T07:55:17.847Z
+updated_at: 2026-10-13T00:55:43.505Z
 started_at: 2026-10-08T16:06:44.055Z
 ---
 Continue existing n17 issue integration without duplicating lanes. Next mathematical deliverable: think-dvcs, implementing and reviewing the bounded shared-centre numerical proposal and exact reconstruction path, controls and prospective registration before one frozen first-eight pilot. No target run has occurred. think-geid remains conditional and already depends on think-dvcs. #413 reconciliation covers 33 rows: two reported unmodified FULL, two parallel node-check/fast, eighteen fast-only and eleven computed. All 35 contributor classes including #358 remain unadmitted; none touches the first eight and only row 23 touches the hard tail. Parallel source qualification remains think-0m0x; all-PR coordination is think-70h9. The older cap-approval/CI passages in Notes are historical. Issues #400/#445 now record complete supporting checkpoints. Keep global coverage, capture, local premises, custody/admission and #419 geometry/Lean binding open. #362/T-093 and the bracket remain unchanged. https://github.com/jlevy/squares/issues/405
@@ -52,3 +52,5 @@ Disk audit: initial bounded selected targets and fresh21:00 task tmp fdu >=1GiB 
 2026-10-08 publication complete: tracker405 durable description updated and exact readback verified; dated final-source-review comment https://github.com/jlevy/squares/issues/405#issuecomment-6069228392 published once and verified. Full prospective Astra next-pilot review is captured at https://github.com/jlevy/squares/pull/461#issuecomment-6069203070 with exact readback/footer1. Keep frozen first8 order; per-process geometry cache; one phase-I call/state, at most one reconstruction; prospective5HiGHSseconds/10000iterations allocations under unchanged existing guards. Solver-limit states incomplete; nonzero phase-level resource abort stops fresh verification and saved local candidates remain unaccepted. No target calls occurred. PR461 current091f75d585aa64721929e643ffc1b4272042214a mergeability PASS; Packing/Pages absent in latest snapshot, ordinary qualification pending and192MiB cap unchanged. The current primary source checkout/ecb and unique untracked prefix object remain preserved. No new bound/T/admission.
 
 October 9 handoff reconciliation: the current Description supersedes stale source/CI/224MiB approval next-action wording in historical Notes. All actual execution receipts and historical failures remain retained. Main3213 is unchanged; no source edits, target computations, CI dispatches, merges or draft promotions occurred in this pass. Status and dependency map: https://github.com/jlevy/squares/issues/405 . Original complete source handoff: https://github.com/jlevy/squares/pull/404#issuecomment-6075532731 . Supporting issue updates: https://github.com/jlevy/squares/issues/400#issuecomment-6076664631 and https://github.com/jlevy/squares/issues/445#issuecomment-6076662312 .
+
+2026-10-13 owner decision: suspended pending Overbeck's proof that s(17) = L (#557; registered as T-153 by #560, credited by #571), which likely subsumes new s(17) research. Resumes only if the owner lifts the suspension, for example if T-153's replays and reviews find a gap or the candidate is withdrawn. n17 outstanding-issue follow-through: mathematical disposition and integration slices for this project's n17 route; new s(17) research. Its child think-p9mb (site CI) stays live.

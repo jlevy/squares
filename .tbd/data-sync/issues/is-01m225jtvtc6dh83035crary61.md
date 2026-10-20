@@ -3,9 +3,9 @@ type: is
 id: is-01m225jtvtc6dh83035crary61
 title: Move the solver choice into the strategy group, and make timing and phasing Animate-only
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 3
+version: 4
 spec_path: packing/campaign/explorations/X-025-hunting-by-hand-and-the-move-set-threads.md
 labels:
   - packing
@@ -14,7 +14,11 @@ dependencies:
     target: is-01m225ps2ejkzyjc45g0xj6kyh
 parent_id: is-01m225hw89vjsga1wnegrwnq5a
 created_at: 2026-09-09T04:07:27.865Z
-updated_at: 2026-09-09T04:09:45.064Z
+updated_at: 2026-10-13T00:54:42.321Z
+closed_at: 2026-10-13T00:54:42.321Z
+close_reason: "Completed: the solver choice is in the strategy group and the tween is withdrawn from Pack (revision 14, packages/workbench/src/application.js). The Animate-only timing composition remains with think-8cti."
+resolution: null
+duplicate_of: null
 ---
 In flight in the v2-transitions prototype as of 2026-09-08.
 

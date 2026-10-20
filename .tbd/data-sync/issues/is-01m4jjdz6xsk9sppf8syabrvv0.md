@@ -5,8 +5,8 @@ title: Coordinate X-052 eight-hour proof block and conditional replanning
 kind: task
 status: open
 priority: 1
-version: 15
-spec_path: docs/project/specs/active/plan-2026-10-10-n17-eight-hour-proof-block.md
+version: 18
+spec_path: docs/project/specs/future/plan-2026-10-10-n17-eight-hour-proof-block.md
 delegate: null
 labels: []
 dependencies: []
@@ -17,10 +17,10 @@ child_order_hints:
   - is-01m4jjeh659fsrjcc9dm277f5s
   - is-01m4jjerd07kwe9axsyrj6bwqr
   - is-01m4jjeymvgqegpfq806sa3x3a
-hold: null
+hold: paused
 hold_until: null
 created_at: 2026-10-10T09:31:14.516Z
-updated_at: 2026-10-10T18:29:10.504Z
+updated_at: 2026-10-13T00:55:52.053Z
 started_at: 2026-10-10T09:36:17.032Z
 ---
 Launch only on execution instruction. Own agenda046, actual eight-hour session clocks, resource guards, disjoint worker claims, checkpoint dispositions, integration and block handoff. The prospective three-block session plan considers two further eight-hour blocks, each requiring evidence-based W10 replanning and a fresh complete session record. Preserve BC418 think-tmz6 ownership; this PR launches no block.
@@ -28,3 +28,5 @@ Launch only on execution instruction. Own agenda046, actual eight-hour session c
 ## Notes
 
 Owner priority: mathematical distance toward complete proof. At kickoff run two Astra mathematical authors for BC-456/457 and BC-460 plus one shared latest Sol engineer; fresh independent review rotates slots. Plan 80/5/15 proof/repeated confirmation/integration separately for CPU and summed worker-agent effort; combined comparator/H-348 support cap60 worker-agent minutes. First soundness, replay and admission stay proof work. Prepared only; no execution authorization in this documentation PR.
+
+2026-10-13 owner decision: suspended pending Overbeck's proof that s(17) = L (#557; registered as T-153 by #560, credited by #571), which likely subsumes new s(17) research. Resumes only if the owner lifts the suspension, for example if T-153's replays and reviews find a gap or the candidate is withdrawn. Coordinates the X-052 n17 eight-hour proof block (agenda-046, already paused, never launched); new s(17) research.

@@ -5,8 +5,8 @@ title: "W3: transfer recent optimality methods to n17 and low-n targets"
 kind: epic
 status: in_progress
 priority: 1
-version: 52
-spec_path: docs/project/specs/active/plan-2026-10-01-post-optimality-w3-session.md
+version: 54
+spec_path: docs/project/reviews/review-2026-10-06-n17-w3-consolidation.md
 labels: []
 dependencies: []
 child_order_hints:
@@ -59,10 +59,12 @@ child_order_hints:
   - is-01m3xkd6zmq1jqwtn628h2k7zy
   - is-01m3xkdzns8897qhpm3jpmzytx
 created_at: 2026-10-01T08:38:55.840Z
-updated_at: 2026-10-02T06:04:40.504Z
+updated_at: 2026-10-13T00:55:26.817Z
 ---
 Plan and execute a fresh W3 session using T-060 n11 global capture and exact endpoint methods, T-052 n21 mixed measures, recent n17 certificates, and current upper-bound assurance. Prioritize n17; preserve separate exploration, preregistration, execution and W2 acceptance. Planning is on codex/w3-post-optimality-transfer stacked over PR261. No new proof claimed by planning.
 
 ## Notes
 
 OvernightSession165 scientific outcome:7acceptedn17rounds H253-257,H259,H260, exactphysicalendpoint andattainedconditionalminimum; global/unrestrictedlocaloptimality stillopen. Completecover161100756states,closedD4quotient20155518orbits,nonegeometricallyexcluded. H258stoppedafterthreepreparationfailures. n12finite-rowgraphlemma reviewed. Safeatlasstamp-only path passed17.41s with no324geometryrebuild. Nextresearchthink-11ma; W5think-n7xf andthink-am9e are supporting. Scientific/exporthead4f312e21e allscheduledCIpass; finalrecordonlycloseout inprogress.
+
+2026-10-13 owner decision: n = 17 research under this epic is suspended pending Overbeck's proof (#560, #571): think-tmz6, think-11ma, think-1s3i, think-am9e and think-x4a6 are held paused. The epic stays live for its non-n17 children (think-e7xa, think-e8qx, think-kqi1, think-q5tt, think-2z60, think-n7xf).

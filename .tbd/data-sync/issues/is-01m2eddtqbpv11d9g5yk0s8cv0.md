@@ -5,8 +5,8 @@ title: Close the post-merge n11 research and publication checkpoint
 kind: task
 status: closed
 priority: 1
-version: 13
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+version: 14
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - n11
   - pr
@@ -21,7 +21,7 @@ child_order_hints:
   - is-01m2etzktsakvvpah673qa5nes
   - is-01m2evbgakwhyytm7h5m8y0mst
 created_at: 2026-09-13T22:15:25.672Z
-updated_at: 2026-10-06T08:41:49.709Z
+updated_at: 2026-10-13T00:55:37.863Z
 closed_at: 2026-10-06T08:41:49.708Z
 close_reason: "Finished checkpoint wrapper: the 2026-09-14 post-merge n11 checkpoint is over. The stack it reconciled is on main (2f8865b6, 620e4731, 80bcdbb0), and s(11) is settled: T-060 (V3/C3) proves s(11) = T = 3.8770835..., packing/frontier/RESULTS.md on origin/main eb43ffe9a marks every earlier n11 lower bound 'superseded by T-060', and packing/campaign/ideas.md Orientation records n11 as settled with its older route premises historical. Children: cost beads closed as obsolete; think-2cdv and think-iyf8 (unresolved local-gate investigations) moved to think-r1yl."
 resolution: null

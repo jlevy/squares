@@ -5,12 +5,12 @@ title: Capture baseline forces tween and anneal 3, so a cut video has no shake
 kind: bug
 status: closed
 priority: 1
-version: 2
-spec_path: docs/project/specs/active/plan-2026-09-21-video-delivery-profiles.md
+version: 3
+spec_path: docs/project/specs/done/plan-2026-09-21-video-delivery-profiles.md
 labels: []
 dependencies: []
 created_at: 2026-09-21T17:56:43.809Z
-updated_at: 2026-09-21T18:13:15.846Z
+updated_at: 2026-10-12T23:51:18.669Z
 closed_at: 2026-09-21T18:13:15.844Z
 close_reason: Capture reads style and anneal back from the page; n=49..51 under physics at shake 9 lands on all three records.
 resolution: null

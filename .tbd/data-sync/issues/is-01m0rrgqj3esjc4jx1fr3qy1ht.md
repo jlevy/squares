@@ -5,7 +5,7 @@ title: "Engineering: make packing research code clear, safe, and scalable"
 kind: epic
 status: open
 priority: 1
-version: 38
+version: 41
 spec_path: docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md
 labels:
   - engineering-maturity
@@ -35,8 +35,11 @@ child_order_hints:
   - is-01m0vj13yefxcxhhew81ewfpvq
   - is-01m0vpakbh6fy8p18cxsmtydgd
   - is-01m2evs21mvxf79h8jhnne4src
+  - is-01m5bhc1y4vxprenpanxz4wnwf
+  - is-01m5bqma4efj7297bmf3ryk0vc
+  - is-01m5bygy6vhxv37z4hwz55p1sv
 created_at: 2026-08-24T02:10:15.746Z
-updated_at: 2026-10-10T22:56:47.808Z
+updated_at: 2026-10-20T06:03:35.514Z
 ---
 Umbrella for the packing engineering-maturity plan: classify code by reuse and consequence, separate shared foundations from stable research-loop tools and retained case code, establish a refactor-safety harness, standardize on Python 3.14, improve CLI and documentation quality, migrate substantial shell orchestration to Python, and optimize measured research-loop bottlenecks without burdening one-off experiments.
 

@@ -5,20 +5,18 @@ title: "Import wand125: 34 rectangle-density lower bounds raised since T-046 (#2
 kind: task
 status: closed
 priority: 2
-version: 15
+version: 16
 spec_path: docs/project/specs/active/plan-2026-10-01-result-import-first-application.md
 delegate: claude-code@vm
 labels:
   - packing
   - result-import
-dependencies:
-  - type: blocks
-    target: is-01m3yrzkz80qd1wv5sjr0kkkv0
+dependencies: []
 parent_id: is-01m3yrdxte02c7bnygkke34ct4
 hold: null
 hold_until: null
 created_at: 2026-10-01T23:55:45.056Z
-updated_at: 2026-10-06T17:02:03.095Z
+updated_at: 2026-10-15T19:58:57.602Z
 started_at: 2026-10-05T03:21:48.223Z
 closed_at: 2026-10-06T17:02:03.095Z
 close_reason: "Done and on main via #382 (d087422ed); reply posted 2026-10-06 and recorded"

@@ -5,12 +5,12 @@ title: "W2: review PR 44 and revise constructive-enumeration roadmap"
 kind: task
 status: closed
 priority: 1
-version: 5
-spec_path: docs/project/specs/active/plan-2026-08-26-overnight-constructive-enumeration.md
+version: 6
+spec_path: docs/project/specs/done/plan-2026-08-26-overnight-constructive-enumeration.md
 labels: []
 dependencies: []
 created_at: 2026-08-26T08:30:22.752Z
-updated_at: 2026-10-10T23:00:56.790Z
+updated_at: 2026-10-12T23:51:09.309Z
 closed_at: 2026-08-26T10:48:18.559Z
 close_reason: "PR #44 received a durable accept/revise/defer/reject review; the roadmap, hypotheses, agendas, cross-agenda handoff, 1-100 known-best atlas, source adapters, house renderings, chunk/contact censuses, schemas, and validation integration are reconciled. Checkpoint 4061234 is pushed and draft PR #45 is open. Fast validation passes 15 selected steps and 136 tests; the dedicated full-tier atlas step passes."
 resolution: null

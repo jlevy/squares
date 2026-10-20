@@ -5,8 +5,8 @@ title: Run the post-roll-up n11 route-selection block
 kind: task
 status: closed
 priority: 1
-version: 31
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+version: 32
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - n11
   - planning
@@ -15,7 +15,7 @@ dependencies:
     target: is-01m24tw6gbrcrtf2msvtckq7xs
 parent_id: is-01m2exznj4k1zyz1rczby8ch2k
 created_at: 2026-09-14T20:44:17.583Z
-updated_at: 2026-09-15T00:38:14.552Z
+updated_at: 2026-10-13T00:55:35.738Z
 closed_at: 2026-09-15T00:22:39.332Z
 close_reason: "BC-346 completed: PR #173 source 1b2c911c passed GitHub Actions run 34912062104 attempt 2; W5 think-1ydi is the sole next entry and no scientific target ran."
 resolution: null

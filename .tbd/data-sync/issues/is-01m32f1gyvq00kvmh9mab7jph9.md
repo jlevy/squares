@@ -5,12 +5,13 @@ title: C4 needs a first-party decision that does not inherit the reachable-cell 
 kind: task
 status: open
 priority: 1
-version: 1
+version: 3
 labels: []
 dependencies: []
 parent_id: is-01m32dttakchrezsyqkyew4jet
+hold: paused
 created_at: 2026-09-21T17:08:28.247Z
-updated_at: 2026-09-21T17:08:28.247Z
+updated_at: 2026-10-13T00:55:32.548Z
 ---
 From the Fable proof review (verdict: admissible; V4; C3 on replay; C4 blocked).
 
@@ -19,3 +20,7 @@ Both Kleddamag checkers are implementations of ONE method: the same event / lazy
 So agreement of the two replays is evidence against implementation slips, not against a shared method error. epistemics.md is literal: two independently written implementations of the same method derive C3, not C4.
 
 For C4: decide the 7853 obligations with our interval branch-and-bound (threshold_interval) extended with per-row parent-centre envelopes and per-row (t, B). The threshold-atom support already exists from T-025. This is the same condition the handoff already set for T-031.
+
+## Notes
+
+2026-10-13 owner decision: suspended pending Overbeck's proof that s(17) = L (#557; registered as T-153 by #560, credited by #571), which likely subsumes new s(17) research. Resumes only if the owner lifts the suspension, for example if T-153's replays and reviews find a gap or the candidate is withdrawn. First-party C4 decision for T-038 (s(17) > 461300/99853); verification work on an n17 lower bound that T-153 would subsume.

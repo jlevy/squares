@@ -5,8 +5,8 @@ title: "Land sibling PR #157 on main after the stack merge"
 kind: task
 status: closed
 priority: 1
-version: 3
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+version: 4
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - n11
   - pr
@@ -14,7 +14,7 @@ labels:
 dependencies: []
 parent_id: is-01m2etr75jfh3t3ry7kj1ccqrb
 created_at: 2026-09-14T02:09:45.451Z
-updated_at: 2026-09-14T04:27:42.154Z
+updated_at: 2026-10-13T00:58:48.811Z
 closed_at: 2026-09-14T04:27:42.153Z
 close_reason: "PR #157 merged into main at 620e4731 after the stack merge (2f8865b6); the full checkpoint covered the combined tree, and main^{tree} equals checkpoint tree ab823fe4. SYNOPSIS next-entry reconciliation moved to think-uqa4."
 resolution: null

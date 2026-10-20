@@ -3,9 +3,9 @@ type: is
 id: is-01m4mnf1x05bnecj64r7kahj18
 title: "PR #496: address new reviews and merge verified cleanup"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 3
+version: 4
 spec_path: docs/project/specs/active/plan-2026-10-10-website-development-loop.md
 delegate: codex@spud10
 labels: []
@@ -14,8 +14,12 @@ parent_id: is-01m4ke1dkg5m43rszjm49ar77r
 hold: null
 hold_until: null
 created_at: 2026-10-11T05:02:44.639Z
-updated_at: 2026-10-11T05:06:54.981Z
+updated_at: 2026-10-12T23:39:21.893Z
 started_at: 2026-10-11T05:02:57.100Z
+closed_at: 2026-10-12T23:39:21.893Z
+close_reason: "Completed: PR #496 merged 2026-10-11 (8aba95081); its new reviews were fixed or deferred in PR #507."
+resolution: null
+duplicate_of: null
 ---
 
 ## Notes

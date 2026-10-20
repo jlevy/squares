@@ -5,15 +5,15 @@ title: "Overnight chunk 1: stock-instrument determinations at n=13, n=17, n=26 (
 kind: task
 status: closed
 priority: 1
-version: 6
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+version: 7
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - research
   - n17
 dependencies: []
 parent_id: is-01m2exznj4k1zyz1rczby8ch2k
 created_at: 2026-09-20T06:59:49.673Z
-updated_at: 2026-09-20T12:50:40.757Z
+updated_at: 2026-10-13T00:55:35.738Z
 closed_at: 2026-09-20T12:50:40.757Z
 close_reason: Closed by the overnight loop closeout in Sessions 144 and 145; dispositions on agenda-040
 resolution: null

@@ -5,8 +5,8 @@ title: "Session 182 lane A: H-264 per-state price on the seed-182 draw (BC-419)"
 kind: task
 status: closed
 priority: 1
-version: 4
-spec_path: docs/project/specs/active/plan-2026-10-05-n17-overnight.md
+version: 5
+spec_path: docs/project/specs/done/plan-2026-10-05-n17-overnight.md
 delegate: claude-code@vm
 labels: []
 dependencies: []
@@ -14,7 +14,7 @@ parent_id: is-01m3xkd6zmq1jqwtn628h2k7zy
 hold: null
 hold_until: null
 created_at: 2026-10-05T08:19:36.661Z
-updated_at: 2026-10-06T08:03:58.933Z
+updated_at: 2026-10-12T23:51:48.377Z
 started_at: 2026-10-05T08:20:02.127Z
 closed_at: 2026-10-06T08:03:58.932Z
 close_reason: "H-264 accepted (exp-252, W2 confirmed with corrections) and BC-428/H-275 accepted (exp-257); exp-257's W2 corrections applied in 782655c6c on #379. exp-257 stopped on its clock and resumes at u31, tracked separately."

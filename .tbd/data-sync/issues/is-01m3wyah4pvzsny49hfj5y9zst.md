@@ -5,17 +5,15 @@ title: "Import wand125: mixed rectangle-measure certificates at n = 37, 65, 66, 
 kind: task
 status: closed
 priority: 2
-version: 10
+version: 11
 spec_path: docs/project/specs/active/plan-2026-10-01-result-import-first-application.md
 labels:
   - packing
   - result-import
-dependencies:
-  - type: blocks
-    target: is-01m3yrzkz80qd1wv5sjr0kkkv0
+dependencies: []
 parent_id: is-01m3yrdxte02c7bnygkke34ct4
 created_at: 2026-10-01T23:55:47.217Z
-updated_at: 2026-10-03T22:47:14.588Z
+updated_at: 2026-10-15T19:58:57.612Z
 closed_at: 2026-10-03T22:47:14.588Z
 close_reason: T-069 V3/C3 on main.
 resolution: null

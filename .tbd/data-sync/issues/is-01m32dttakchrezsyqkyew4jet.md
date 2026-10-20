@@ -5,7 +5,7 @@ title: Decide registration of s(17) > 461300/99853 and reconcile it with PR 211
 kind: task
 status: open
 priority: 1
-version: 6
+version: 7
 delegate: claude-code@vm
 labels: []
 dependencies: []
@@ -16,7 +16,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-09-21T16:47:19.891Z
-updated_at: 2026-10-05T05:40:47.011Z
+updated_at: 2026-10-13T00:55:38.530Z
 started_at: 2026-10-05T05:34:33.010Z
 closed_at: null
 close_reason: null
@@ -32,3 +32,5 @@ If not admitted: retain as an unadjudicated external source, move no bound, and 
 ## Notes
 
 Reopened: Reopened 2026-10-05: closing it left open children under a closed parent, which devtools.check_bead_tree refuses. The parent's own work is adopted (see the close reason), but its open children need their own disposition before it closes.
+
+2026-10-13 owner decision: this bead's decision is done (T-038 registered 2026-09-29); it stays open only as the parent of think-4lye (credit wording, live) and think-e56m (C4 decision, held paused pending Overbeck's proof, #560, #571). Close it when both resolve.

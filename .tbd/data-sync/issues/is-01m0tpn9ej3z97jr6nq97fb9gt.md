@@ -5,8 +5,8 @@ title: Classify complete first-order cones around the n=5 exact sheet
 kind: task
 status: closed
 priority: 0
-version: 12
-spec_path: explorations/packing/campaign/agendas/agenda-001-basin-confidence-ladder.md
+version: 13
+spec_path: packing/campaign/agendas/agenda-001-basin-confidence-ladder.md
 delegate: unknown@spud10.local
 labels:
   - packing
@@ -21,7 +21,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-08-24T20:16:16.849Z
-updated_at: 2026-08-24T21:23:55.263Z
+updated_at: 2026-10-12T23:40:00.247Z
 started_at: 2026-08-24T20:16:21.613Z
 closed_at: 2026-08-24T21:23:55.262Z
 close_reason: "Exp-035 completes the bounded first-order slice under the frozen criterion: six exact owner-axis matrices cover A/interior/B, both tied support rows are retained, one exact non-sheet direction satisfies every active row, all seven controls reject, and generation/replay pass. Nonlinear realization is deliberately unresolved and split to think-imav; H-023 and parent think-1q3g remain open."

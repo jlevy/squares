@@ -5,8 +5,8 @@ title: Preregister H-162 floor-normalized BC303 T2 analysis before exp-158
 kind: task
 status: closed
 priority: 1
-version: 13
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+version: 15
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 refs:
   - kind: pr
     url: https://github.com/jlevy/squares/pull/167
@@ -24,7 +24,7 @@ parent_id: is-01m2b4ywxym84rgf3b254v4jw6
 hold: null
 hold_until: null
 created_at: 2026-09-14T00:31:14.609Z
-updated_at: 2026-10-06T08:40:35.861Z
+updated_at: 2026-10-13T00:58:28.180Z
 closed_at: 2026-10-06T08:40:35.861Z
 close_reason: "Done: H-162 and exp-160 were registered by PR #167, merged into main at 80bcdbb0 on 2026-09-14 (packing/campaign/hypotheses/H-162-bc303-floor-normalized-t2-filter.md and exp-160 are on origin/main). Its 'paused' hold (the owner's 2026-09-14 BC329/heavy-computation hold, think-zwlf) was cleared to close it: the hold's premise, a small n11 gain, no longer exists."
 resolution: null

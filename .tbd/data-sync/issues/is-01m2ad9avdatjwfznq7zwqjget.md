@@ -5,8 +5,8 @@ title: Validate and publish the reconciled PR149 head
 kind: task
 status: closed
 priority: 1
-version: 16
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+version: 18
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 delegate: root integration lane
 labels: []
 dependencies:
@@ -18,7 +18,7 @@ parent_id: is-01m26rygs7f0s76v147x0px4cd
 child_order_hints:
   - is-01m2ar91msd279bq940mkybctf
 created_at: 2026-09-12T08:56:00.620Z
-updated_at: 2026-09-12T15:52:10.618Z
+updated_at: 2026-10-13T00:56:32.141Z
 closed_at: 2026-09-12T15:51:57.603Z
 close_reason: "PR #149 exact head 4d00ab68 passed focused, unrestricted pre-push, unrestricted full checkpoint, and all hosted checks; its body records all valid and invalid costs and the PR is mergeable over PR #148."
 resolution: null

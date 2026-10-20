@@ -5,8 +5,8 @@ title: "Phase 4: strategy proposers (Python)"
 kind: epic
 status: open
 priority: 2
-version: 18
-spec_path: docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
+version: 19
+spec_path: docs/project/specs/paused/plan-2026-08-22-minimal-packing-toolkit.md
 labels: []
 dependencies: []
 child_order_hints:
@@ -16,6 +16,6 @@ child_order_hints:
   - is-01m0p4avpk6bbz5w8czbs2krk5
   - is-01m0p4aw0c9kfz2v3tmx6t07j6
 created_at: 2026-08-23T01:39:01.791Z
-updated_at: 2026-10-10T22:47:58.256Z
+updated_at: 2026-10-12T23:52:16.973Z
 ---
 Epic. Each is small once the spine exists, each corresponds to a registered hypothesis with a kill criterion already written, and each is written in Python at full speed because they are all quench-dominated. Adding one must touch no spine code.

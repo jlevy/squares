@@ -5,8 +5,8 @@ title: Test the complete one-corner BC303 surplus inequality
 kind: task
 status: closed
 priority: 1
-version: 8
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+version: 9
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 delegate: Astra Max mathematics; Sol implementation only after mathematical preregistration
 labels:
   - n11
@@ -17,7 +17,7 @@ parent_id: is-01m2agbyn3sd63v0j87jer8vz0
 child_order_hints:
   - is-01m2b8wag8sa0p3mna22wmr3c6
 created_at: 2026-09-12T09:49:51.810Z
-updated_at: 2026-10-06T08:38:30.194Z
+updated_at: 2026-10-13T00:56:32.738Z
 closed_at: 2026-10-06T08:38:30.194Z
 close_reason: "Done: the one-corner BC303 surplus inequality was decided. H-159 is refuted by exp-157 (SYNOPSIS ledger table on origin/main), published by PR #161 'reject literal BC303 T1 local surplus inequality', merged 2026-09-14."
 resolution: null

@@ -5,8 +5,8 @@ title: "H-041: certify a repaired Stromquist Theorem 2 point set"
 kind: task
 status: closed
 priority: 1
-version: 9
-spec_path: docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
+version: 11
+spec_path: docs/project/specs/paused/plan-2026-08-22-minimal-packing-toolkit.md
 labels: []
 dependencies: []
 parent_id: is-01m0p4bxnqxb8dsv2rnqgyp0w8
@@ -15,7 +15,7 @@ child_order_hints:
   - is-01m0sy3cf8rxrbcdq99vkrav4q
   - is-01m0sy3hy65kzwwpyb7m3r66tx
 created_at: 2026-08-24T11:34:24.317Z
-updated_at: 2026-10-10T22:47:44.653Z
+updated_at: 2026-10-12T23:51:03.464Z
 closed_at: 2026-08-24T14:34:23.305Z
 close_reason: "Exp-017 confirms H-041 exactly: the source-distinct G'=(79/100,37/20) repair passes the complete Figure 13 localization, A-triple, 26-face repaired Figure 14 cover, and 3+9 capacity chain; generation/replay are retained, 13 mutations pass, and the 29-step strict/deep gate is green. The result proves s(11) >= 2 + 4/sqrt(5) here without validating Stromquist's printed proof or closing the Trump gap."
 resolution: null

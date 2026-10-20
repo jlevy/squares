@@ -5,8 +5,8 @@ title: Validate the proposed n17 three-variable endpoint contact chart
 kind: task
 status: closed
 priority: 1
-version: 4
-spec_path: docs/project/specs/active/plan-2026-10-01-post-optimality-w3-session.md
+version: 5
+spec_path: docs/project/reviews/review-2026-10-06-n17-w3-consolidation.md
 delegate: claude-code@spud10.local
 labels: []
 dependencies: []
@@ -14,7 +14,7 @@ parent_id: is-01m3v9vq36ykk2jdzce75req44
 hold: null
 hold_until: null
 created_at: 2026-10-01T10:50:18.489Z
-updated_at: 2026-10-01T11:31:35.352Z
+updated_at: 2026-10-12T23:40:14.524Z
 started_at: 2026-10-01T11:01:07.866Z
 closed_at: 2026-10-01T11:31:35.351Z
 close_reason: "H254/exp236 independently accepted: all458 exact fidelity comparisons pass at frozen74480b0a0, with full roster/source/commit audit and7 synthetic controls. Two Astra max reviewers also derived and checked the slack-contact conditional box minimum and two-polynomial reduction. This closes chart-fidelity review only; think-bj81 owns exact root and endpoint/slider feasibility, while capture remains open."

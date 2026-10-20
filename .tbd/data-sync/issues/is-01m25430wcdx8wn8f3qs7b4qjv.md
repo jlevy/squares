@@ -5,13 +5,13 @@ title: Integrate the parent-domain CLI and admit one source-bound comparison
 kind: task
 status: closed
 priority: 1
-version: 8
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+version: 9
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels: []
 dependencies: []
 parent_id: is-01m24tw1hadnzxyw7rdvp3vmms
 created_at: 2026-09-10T07:39:04.459Z
-updated_at: 2026-09-10T20:24:25.420Z
+updated_at: 2026-10-13T00:56:13.775Z
 closed_at: 2026-09-10T20:24:25.417Z
 close_reason: "The target-free parent-domain source adapter, binder, production runner, closed schema, deadlines, atomic partials, independent readback, and adversarial controls are committed at cc98c774 and published on PR #150. Independent Astra Max admission passed all 56 parent tests plus Ruff and BasedPyright; the broader pre-push and fast gates pass. No exp151 scientific target ran. Prospective target registration and the one allowed comparison remain with parent bead think-fx2y / BC326."
 resolution: null

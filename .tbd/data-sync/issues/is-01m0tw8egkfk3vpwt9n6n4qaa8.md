@@ -5,8 +5,8 @@ title: Refresh negative-control aggregates after D-197
 kind: bug
 status: closed
 priority: 1
-version: 3
-spec_path: explorations/packing/campaign/agendas/agenda-001-basin-confidence-ladder.md
+version: 4
+spec_path: packing/campaign/agendas/agenda-001-basin-confidence-ladder.md
 labels:
   - packing
   - testing
@@ -14,7 +14,7 @@ labels:
 dependencies: []
 parent_id: is-01m0tn3kqe19evm1r40wgnpb61
 created_at: 2026-08-24T21:54:07.494Z
-updated_at: 2026-08-24T21:55:44.305Z
+updated_at: 2026-10-12T23:40:00.247Z
 closed_at: 2026-08-24T21:55:44.304Z
 close_reason: D-198 is recorded as a D-187 recurrence. The defect-count and gate-detector anchors now target the final 198-defect and 9-of-198 aggregates, and all 37 negative controls fire in a bounded focused rerun.
 resolution: null

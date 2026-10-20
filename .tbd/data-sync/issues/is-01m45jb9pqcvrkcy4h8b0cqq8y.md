@@ -5,8 +5,8 @@ title: "Session 182 lane D: classify lane-K kernel stalls (loss- or consistency-
 kind: task
 status: closed
 priority: 2
-version: 3
-spec_path: docs/project/specs/active/plan-2026-10-05-n17-overnight.md
+version: 4
+spec_path: docs/project/specs/done/plan-2026-10-05-n17-overnight.md
 delegate: claude-code@vm
 labels: []
 dependencies: []
@@ -14,7 +14,7 @@ parent_id: is-01m3xkd6zmq1jqwtn628h2k7zy
 hold: null
 hold_until: null
 created_at: 2026-10-05T08:19:39.351Z
-updated_at: 2026-10-05T14:58:23.894Z
+updated_at: 2026-10-12T23:52:32.588Z
 started_at: 2026-10-05T08:20:04.417Z
 closed_at: 2026-10-05T14:58:23.894Z
 close_reason: "Lane D filed: the stall classification and its receipts in 5f67ff8fb, the last two stalls in b6e52010b, on the session-182 branch (PR #365). K-k2 loss-limited, four wall-crowd stalls, three consistency-limited; BC-423 and BC-424 test its readings; all diagnosed nodes deleted after its receipts named them."

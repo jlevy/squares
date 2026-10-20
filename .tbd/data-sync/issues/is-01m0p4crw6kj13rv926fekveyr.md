@@ -5,13 +5,13 @@ title: Build the unattended runner and rehearse it
 kind: task
 status: closed
 priority: 1
-version: 5
-spec_path: docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
+version: 7
+spec_path: docs/project/specs/paused/plan-2026-08-22-minimal-packing-toolkit.md
 labels: []
 dependencies: []
 parent_id: is-01m0p4cr8nk338kqtbksaf63f9
 created_at: 2026-08-23T01:40:05.637Z
-updated_at: 2026-10-10T22:47:37.739Z
+updated_at: 2026-10-12T23:50:55.734Z
 closed_at: 2026-08-23T08:10:05.596Z
 close_reason: "Built on claude/thinking-scratchpad-research-p1wkfg (PR #13) as campaign/runner.py: status/preflight/claim/execute/record/release/run, state on disk between steps, the accepting verdict structurally unreachable, and a generated session report. Driven end to end for exp-011 (H-020 at n=17)."
 resolution: null

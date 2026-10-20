@@ -5,8 +5,8 @@ title: Deep mathematical audit of significant-progress routes for n=11 and small
 kind: task
 status: closed
 priority: 1
-version: 3
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+version: 4
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 delegate: Astra Max
 labels:
   - n11
@@ -17,7 +17,7 @@ dependencies:
     target: is-01m2gtknsgp4pb350pdwshx3ek
 parent_id: is-01m2exznj4k1zyz1rczby8ch2k
 created_at: 2026-09-14T21:11:42.344Z
-updated_at: 2026-09-14T23:01:50.859Z
+updated_at: 2026-10-13T00:55:35.738Z
 closed_at: 2026-09-14T23:01:50.857Z
 close_reason: BC-347 Astra Max mathematical audit certified by the full fast gate at fa6363b6c2b4c7d7449807c04166e9df94bc7b35; the ten candidate cells, evidence boundaries, priorities, discriminators, and separate F1/F2 ownership are durable. No scientific target ran.
 resolution: null

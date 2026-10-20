@@ -5,8 +5,8 @@ title: "canonicalize: two-level basin identity"
 kind: task
 status: closed
 priority: 1
-version: 7
-spec_path: docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
+version: 9
+spec_path: docs/project/specs/paused/plan-2026-08-22-minimal-packing-toolkit.md
 labels: []
 dependencies:
   - type: blocks
@@ -15,7 +15,7 @@ dependencies:
     target: is-01m0p49t5hw127hm2yfvxynanf
 parent_id: is-01m0p49s01h862tq6wp0dd085c
 created_at: 2026-08-23T01:38:28.041Z
-updated_at: 2026-10-10T22:47:27.270Z
+updated_at: 2026-10-12T23:50:43.346Z
 closed_at: 2026-08-23T16:20:34.121Z
 close_reason: "Built as sqpack/canonical.py on claude/packing-overnight-strategy-queue (PR #14): two-level identity — a D4- and relabel-invariant quantized geometric key, plus a contact-graph certificate canonical up to isomorphism by individualization-refinement, with angle class and wall-contact node attributes. Six checks in tools/canonical_check.py, wired into test.sh, and four negative controls watching them fail. One control caught the check reusing d4_images to test itself; the symmetry transforms are now written independently."
 resolution: null

@@ -5,15 +5,15 @@ title: "N11 overnight 2026-09-17: deep review, creative route slate, planned blo
 kind: task
 status: closed
 priority: 1
-version: 4
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+version: 5
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - n11
   - research
 dependencies: []
 parent_id: is-01m2exznj4k1zyz1rczby8ch2k
 created_at: 2026-09-17T06:58:45.462Z
-updated_at: 2026-09-18T01:19:31.854Z
+updated_at: 2026-10-13T00:55:35.738Z
 closed_at: 2026-09-18T01:19:31.854Z
 close_reason: "PR #193 merged to main as 4ad98e90. Session 138, agenda-037, and X-037 are on the default branch. Selected next is think-qqzs (BC-357)."
 resolution: null

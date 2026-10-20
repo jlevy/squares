@@ -5,8 +5,8 @@ title: Reconcile the active plan with the completed explainer PR stack
 kind: bug
 status: closed
 priority: 2
-version: 5
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+version: 6
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 delegate: root documentation integration
 labels:
   - n11
@@ -16,7 +16,7 @@ dependencies:
     target: is-01m2azx1g37ta3zfnwtet3ns27
 parent_id: is-01m2azx1g37ta3zfnwtet3ns27
 created_at: 2026-09-12T15:54:34.258Z
-updated_at: 2026-09-12T16:05:46.409Z
+updated_at: 2026-10-13T00:58:58.413Z
 closed_at: 2026-09-12T16:05:46.409Z
 close_reason: "Reviewed n11 evidence corrections and stack-status reconciliation are published on PR #156 at f1e397cd; edit validation and every hosted check pass, with no BC329 target run."
 resolution: null

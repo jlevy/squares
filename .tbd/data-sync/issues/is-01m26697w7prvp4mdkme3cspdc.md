@@ -5,8 +5,8 @@ title: Admit weighted five-site threshold atoms exactly
 kind: task
 status: closed
 priority: 1
-version: 10
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+version: 12
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - n11
   - research-tooling
@@ -22,7 +22,7 @@ child_order_hints:
   - is-01m2bmgbj85wn7meq5afgrwmej
   - is-01m2bmgc6v2dx391qsg393hw2m
 created_at: 2026-09-10T17:36:39.814Z
-updated_at: 2026-10-06T08:38:28.964Z
+updated_at: 2026-10-13T00:56:23.676Z
 closed_at: 2026-10-06T08:38:28.947Z
 close_reason: "Superseded by T-060: s(11) equals Trump's side, registered 2026-09-29 at V3/C3 and on main since PR #246 (merged 2026-09-30). This n = 11 lower-bound certificate work has no target left; the owner's 2026-09-14 strategy reset had already paused it, and the post-optimality plan (plan-2026-10-01) uses n = 11 only as a control. Stages 1-2 landed in PR #157 (merged 2026-09-14); stages 3-4 (think-8c9e, think-kj5u) are closed with it."
 resolution: canceled

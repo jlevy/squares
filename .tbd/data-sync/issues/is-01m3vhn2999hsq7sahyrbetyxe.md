@@ -5,13 +5,13 @@ title: Make half-angle witness exports resolve their declared schema without fal
 kind: bug
 status: closed
 priority: 1
-version: 2
-spec_path: docs/project/specs/active/plan-2026-10-01-post-optimality-w3-session.md
+version: 3
+spec_path: docs/project/reviews/review-2026-10-06-n17-w3-consolidation.md
 labels: []
 dependencies: []
 parent_id: is-01m3v9vq36ykk2jdzce75req44
 created_at: 2026-10-01T10:55:06.535Z
-updated_at: 2026-10-01T11:01:06.822Z
+updated_at: 2026-10-12T23:40:14.524Z
 closed_at: 2026-10-01T11:01:06.809Z
 close_reason: D511 export path fixed with no-fallback schema regression; 14 combined importer/parser tests pass. Raw exp235 preserved, separate portable copy validates and has exactly equal witness payload. Pushed1c90d7af4.
 resolution: null

@@ -5,13 +5,13 @@ title: Reconcile sqsearch with the sqpack-core architecture
 kind: task
 status: closed
 priority: 3
-version: 6
-spec_path: docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
+version: 8
+spec_path: docs/project/specs/paused/plan-2026-08-22-minimal-packing-toolkit.md
 labels: []
 dependencies: []
 parent_id: is-01m0p4cr8nk338kqtbksaf63f9
 created_at: 2026-08-23T01:40:05.935Z
-updated_at: 2026-10-10T22:48:25.411Z
+updated_at: 2026-10-12T23:52:44.273Z
 closed_at: 2026-10-06T08:45:50.649Z
 close_reason: "Done: the bead itself records the decision as RESOLVED by measurement and written into the toolkit plan (docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md, 'Stack and boundaries'); the one open sub-decision belongs to Phase 5, think-u83z."
 resolution: null

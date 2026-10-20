@@ -5,7 +5,7 @@ title: "n17: implement and preregister the first eight-state shared-centre exact
 kind: task
 status: in_progress
 priority: 1
-version: 8
+version: 10
 spec_path: docs/project/research/research-2026-10-07-n17-shared-centre-lp-readiness.md
 delegate: claude-code@spud10.local
 labels:
@@ -14,10 +14,10 @@ dependencies:
   - type: blocks
     target: is-01m4f83jp2jw7m4pbb1ecn963z
 parent_id: is-01m3xkd6zmq1jqwtn628h2k7zy
-hold: null
+hold: paused
 hold_until: null
 created_at: 2026-10-08T05:39:20.323Z
-updated_at: 2026-10-09T10:55:25.853Z
+updated_at: 2026-10-13T00:55:32.216Z
 started_at: 2026-10-08T19:15:43.156Z
 ---
 Implement and prospectively register the frozen first-eight shared-centre exact LP pilot, following docs/project/research/research-2026-10-07-n17-shared-centre-lp-readiness.md on PR461. The guarded endpoint adapter and its separately registered exact positive control are implemented and verified; the numerical producer, bounded exact candidate reconstruction, first-eight pilot and fresh target replay remain open. Preserve original closed cells, all136pairs, free34centrevariables, exact row identities, frozen resource guards and canonical first8 order. Accept exact primal relaxation survival or exact Farkas contradiction only after independent fresh checking; ordinary exclusion admission/composition remains separate. Historical source/result and current qualification are in Notes.
@@ -61,3 +61,5 @@ Astra reviewed final source/actual316 custody and the next exact seam: support1.
 
 
 2026-10-09T10:55Z 2026-10-09 W2 review on #473 (pullrequestreview-5469083247) shows exact centre vectors in each first-eight state's own cells, pairwise >= 1, accepted by the repo's build_model+check_primal: the pilot's outcome is known (8 exact relaxation survivors, no Farkas certificate possible), and all 95 distance-2 orbits likewise. Recommend retiring this pilot as answered (or a single registered confirmation run), redirecting to X-051 H-325 cap scan. Owner decision.
+
+2026-10-13 owner decision: suspended pending Overbeck's proof that s(17) = L (#557; registered as T-153 by #560, credited by #571), which likely subsumes new s(17) research. Resumes only if the owner lifts the suspension, for example if T-153's replays and reviews find a gap or the candidate is withdrawn. First eight-state shared-centre exact LP pilot for n17; new s(17) research.

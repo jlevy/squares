@@ -1,0 +1,29 @@
+entity_id: is-01m4kwdbnpyegmq64y1swnqs95
+timestamp: 2026-10-11T20:06:25.836Z
+field: description
+lost_value: "\"Several browser tools call playwright's chromium.launch() with no
+  executable override, so in a container whose installed Chromium build differs from the
+  pinned Playwright's (2026-10-10 remote session: /opt/pw-browsers holds
+  chromium_headless_shell-1194, Playwright 1.62.0 wants -1234) they cannot run locally.
+  check_published_site's two launches honour SQPACK_CHROMIUM since #398.\\n\\nSites
+  still ignoring it on main 8aba95081 (from #398's review A3):\\n-
+  packing/devtools/check_motion_lab_pages.py:315 (blocks the fast tier's 'workbench
+  browser behaviour in Chromium' step locally; found by lane L28 of the 2026-10-10
+  intake pass)\\n- packing/devtools/render_n11_optimality_review.py:553\\n-
+  packing/devtools/render_n11_threshold_bound_review.py:602\\n-
+  packages/workbench/tools/workbench_tools/cadence.py:584 (launch(headless=True))\\n-
+  packages/workbench/tools/workbench_tools/capture_stills.py:329, 352, 380, 434\\n-
+  packages/workbench/tools/workbench_tools/capture_video.py:435, 484, 822\\n-
+  packages/workbench/tools/workbench_tools/check_revision6.py:31\\n\\nSettle the name
+  first: the workbench package reads both SQPACK_CHROMIUM (smoke_capture.py,
+  benchmark.py, check_candidate.py) and SQUARES_BROWSER_EXECUTABLE (arrival_frames.py,
+  check_accessibility.py, check_animate_view.py, check_animation_editor.py and others).
+  Standardise on one, route the sites above through preview_site.launch_chromium or the
+  same override, and test that each honours it.\""
+winner_source: local
+loser_source: remote
+context:
+  local_version: 3
+  remote_version: 2
+  local_updated_at: 2026-10-11T07:19:51.529Z
+  remote_updated_at: 2026-10-11T07:17:49.081Z

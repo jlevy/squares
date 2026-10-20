@@ -5,8 +5,8 @@ title: Bind BC329 evidence commit directly to execution revision in run sheet
 kind: bug
 status: closed
 priority: 1
-version: 4
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+version: 6
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 delegate: codex@spud10.local
 labels:
   - n11
@@ -16,7 +16,7 @@ parent_id: is-01m2e4b5m0xrgxkzqcrxmbb5q0
 hold: null
 hold_until: null
 created_at: 2026-09-13T19:49:30.525Z
-updated_at: 2026-09-13T19:58:58.669Z
+updated_at: 2026-10-13T00:58:10.491Z
 started_at: 2026-09-13T19:49:58.728Z
 closed_at: 2026-09-13T19:58:58.668Z
 close_reason: PR156 commit 9c56e901 retains the maintained five-step verifier run sheet, direct evidence-commit parent checks, refusal and acceptance reports, and the exact formatted sheet blob 29517a3f accepted by independent Sol high rereview. Records and edit tiers pass. Operational integrated-head review, remote equality, positive profiles, and evidence admission remain under think-pp3j.

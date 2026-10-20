@@ -5,8 +5,8 @@ title: Classify the remaining n5 non-sheet tangent directions
 kind: task
 status: closed
 priority: 0
-version: 6
-spec_path: explorations/packing/campaign/agendas/agenda-001-basin-confidence-ladder.md
+version: 7
+spec_path: packing/campaign/agendas/agenda-001-basin-confidence-ladder.md
 labels:
   - packing
   - basin-cartography
@@ -16,7 +16,7 @@ parent_id: is-01m0tn3kqe19evm1r40wgnpb61
 child_order_hints:
   - is-01m0vyht9k2p9mahn03w8c1kbx
 created_at: 2026-08-24T21:49:54.788Z
-updated_at: 2026-08-25T08:26:54.461Z
+updated_at: 2026-10-12T23:40:00.247Z
 closed_at: 2026-08-25T08:26:54.460Z
 close_reason: "Completed: exp-037 accepted from clean engine commit b8d0104. Exact generation/replay, all six source matrices, complete owner-equal V-representations, 8/6/8 quotient ray counts, both derived face vectors, all ten controls, focused small-n validation, and an independent exact audit pass. H-023 remains open for nonlinear and component questions."
 resolution: null

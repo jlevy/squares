@@ -5,14 +5,14 @@ title: Investigate historical interval-certificate byte drift in two three-owner
 kind: bug
 status: open
 priority: 2
-version: 1
-spec_path: docs/project/specs/active/plan-2026-10-06-n17-ten-hour-session.md
+version: 3
+spec_path: packing/campaign/agendas/agenda-045-n17-mathematics-and-efficiency.md
 delegate: sol-overnight-engineering
 labels: []
 dependencies: []
 parent_id: is-01m4bj7tj2ydjh2v673ga1mw8j
 created_at: 2026-10-07T16:33:16.124Z
-updated_at: 2026-10-07T16:33:16.124Z
+updated_at: 2026-10-12T23:40:16.868Z
 ---
 Two historical chunk-byte pins fail on the Mac at source800bba6388a1611ad8466aa6d93ebd3f0978b66a, while both fresh candidates independently pass FULL exact certificate verification. Keep the literal pins unchanged until historical byte equivalence and the cause of changed proposal bytes are established; semantic validity is a separate obligation.
 

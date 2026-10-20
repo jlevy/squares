@@ -5,8 +5,8 @@ title: Publish the reviewed post-T1 strategy map and parent-union lemma in the r
 kind: task
 status: closed
 priority: 1
-version: 9
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+version: 10
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - n11
   - docs
@@ -15,7 +15,7 @@ dependencies:
   - type: blocks
     target: is-01m2eddtqbpv11d9g5yk0s8cv0
 created_at: 2026-09-13T21:06:59.021Z
-updated_at: 2026-09-14T00:27:45.843Z
+updated_at: 2026-10-13T00:58:19.273Z
 closed_at: 2026-09-14T00:27:45.842Z
 close_reason: "PR #165 ready for review at exact head 93c5e217 on #164 be477f20; hosted required CI green (validate 3m27s, suite 3m34s, geometry, sweeps, macOS portability, packing-required, merges-into-main). Cost-first body updated with final CI. X030 is a scoped strategy/documentation milestone; no target or new bound."
 resolution: null

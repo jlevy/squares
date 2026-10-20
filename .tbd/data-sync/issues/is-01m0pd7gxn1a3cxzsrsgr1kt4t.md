@@ -5,13 +5,13 @@ title: Schema permits one round to name many hypotheses under one verdict
 kind: bug
 status: closed
 priority: 1
-version: 4
-spec_path: docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
+version: 5
+spec_path: docs/project/specs/paused/plan-2026-08-22-minimal-packing-toolkit.md
 labels: []
 dependencies: []
 parent_id: is-01m0pdh5bj67ca8vk7ct53g5qt
 created_at: 2026-08-23T04:14:30.815Z
-updated_at: 2026-10-10T22:47:38.572Z
+updated_at: 2026-10-12T23:50:56.393Z
 closed_at: 2026-08-23T04:42:02.195Z
 close_reason: Schema caps hypotheses at one per round; negative-controlled in tools/controls.yaml.
 ---

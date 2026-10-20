@@ -5,13 +5,14 @@ title: "Compiled exact kernel checker in Rust (lane X1): row cover sweep and col
 kind: task
 status: in_progress
 priority: 1
-version: 4
+version: 6
 spec_path: docs/project/reviews/review-2026-10-02-n17-cost-reduction-performance.md
 labels: []
 dependencies: []
 parent_id: is-01m3xkd6zmq1jqwtn628h2k7zy
+hold: paused
 created_at: 2026-10-03T01:19:45.250Z
-updated_at: 2026-10-08T05:46:45.581Z
+updated_at: 2026-10-13T00:55:51.152Z
 ---
 Owner directive 2026-10-03: pursue primitive tool speedups aggressively and upgrade tooling. Rank 5 of the performance review (estimated 5-10x on the checker's integer parts). Standalone crate and harness in a separate worktree; bar is identical verdicts and counts on W7 and N1 row by row plus refusal of corrupted certificates. Integration as check_n17_subpattern --cover rust after F2's gmpy2 port. Started 2026-10-03 01:15 UTC.
 
@@ -30,3 +31,5 @@ Session186 actual update: exact-Y ABBA exp298 interrupted738.166s/6validreplays,
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->
+
+2026-10-13 owner decision: suspended pending Overbeck's proof that s(17) = L (#557; registered as T-153 by #560, credited by #571), which likely subsumes new s(17) research. Resumes only if the owner lifts the suspension, for example if T-153's replays and reviews find a gap or the candidate is withdrawn. Compiled Rust exact kernel checker for n17 (lane X1): an instrument built for the n = 17 proof.

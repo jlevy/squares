@@ -3,9 +3,9 @@ type: is
 id: is-01m4f83jp2jw7m4pbb1ecn963z
 title: Prepare exact weighted-vertex screen and conditional n17 SOS pilot
 kind: task
-status: open
+status: closed
 priority: 3
-version: 4
+version: 5
 delegate: claude-code@spud10.local
 labels:
   - n-17
@@ -13,8 +13,12 @@ dependencies: []
 hold: null
 hold_until: null
 created_at: 2026-10-09T02:33:04.961Z
-updated_at: 2026-10-09T10:55:27.979Z
+updated_at: 2026-10-13T00:54:41.309Z
 started_at: 2026-10-09T03:28:53.760Z
+closed_at: 2026-10-13T00:54:41.309Z
+close_reason: "Completed with a negative answer: X-051 §3.2 and the #473 W2 review show no weighted-vertex or SOS certificate exists for any of the 2,024 cell triples (PR #473, merged at 6a0499ba4). Closed under the owner's n = 17 suspension of 2026-10-13 rather than held."
+resolution: null
+duplicate_of: null
 ---
 Conditional successor to the first-eight shared-centre LP; no target has run. Use the PR454 exact-SOS strategy and the extended PR464 source assessment at docs/project/reviews/review-2026-10-08-n17-global-optimization-and-sos.md. Preserve the existing think-dvcs dependency.
 

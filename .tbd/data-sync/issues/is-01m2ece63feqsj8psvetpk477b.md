@@ -5,8 +5,8 @@ title: Make the BC303 T2 adversarial reference complete over feasible strata
 kind: bug
 status: closed
 priority: 1
-version: 4
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+version: 5
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - n11
   - bc303
@@ -15,7 +15,7 @@ dependencies:
     target: is-01m2e9etf82fvg7xz4xg6dn4zc
 parent_id: is-01m2e6e4j1ee5nre22gp7fyyrc
 created_at: 2026-09-13T21:58:08.750Z
-updated_at: 2026-09-13T22:17:06.648Z
+updated_at: 2026-10-13T00:58:23.517Z
 closed_at: 2026-09-13T22:17:06.648Z
 close_reason: Repairs committed at 0f20fdcdd5bac7e0734b29cd0b0efef4ffea3699 with 20 target-free focused controls passing and edit tier 45/74 selected steps passing; fresh independent admission think-ncn8 remains open before exp-158
 resolution: null

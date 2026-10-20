@@ -5,13 +5,13 @@ title: "F6d: reject finite phase clocks whose aggregate overflows to infinity"
 kind: bug
 status: closed
 priority: 1
-version: 4
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+version: 5
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels: []
 dependencies: []
 parent_id: is-01m2e19ncq107301gs2q7rg8b6
 created_at: 2026-09-13T19:02:28.081Z
-updated_at: 2026-09-13T19:25:54.711Z
+updated_at: 2026-10-13T00:58:04.054Z
 closed_at: 2026-09-13T19:25:54.694Z
 close_reason: Finite phase-sum and derived schedule overflow now refuse at integrated reader source a5701e73. Independent exact-head review accepted F6/F7 at that source blob after 23 full real-binder controls and 111 maintained reader tests; later PR-head integration remains tracked separately under think-n4gh. No positive profile or BC329 target.
 resolution: null

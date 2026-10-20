@@ -1,11 +1,11 @@
 ---
 type: is
 id: is-01m4mdbq6bhkv71fxeeckawsbt
-title: "Regularize every packing n = 1..324 with the adapted process, as a pull request stacked on PR #487"
+title: "Regularize every packing n = 1..324 with the adapted process, in pull requests after the #497 plan"
 kind: task
 status: in_progress
 priority: 1
-version: 7
+version: 21
 labels:
   - regularization
 dependencies:
@@ -15,9 +15,11 @@ dependencies:
     target: is-01m4kbxmtaqt87tdw33cs19ah8
   - type: blocks
     target: is-01m4kbxna1xdmjd8nkka3wax60
+  - type: blocks
+    target: is-01m4pfc1r22b6vh9n4dyv23sg2
 parent_id: is-01m4mdb1j4atn6yvmtcf93eqmt
 created_at: 2026-10-11T02:41:06.762Z
-updated_at: 2026-10-11T18:41:52.441Z
+updated_at: 2026-10-13T00:13:27.178Z
 ---
 Owner request 2026-10-11 (epic think-cdud, item 4): adapt evand's search/regularize process as think-kl2v's assessment recommends and run it over every packing the record holds, n = 1..324, so the atlas and case drawings are clean and regular. A separate process, so a separate pull request stacked on PR #487 (gh stack; github-stacked-prs is granted), begun once the 2026-10-10 imports are in good shape; the owner checks it. Obligations: every regularized view exactly feasible at its stated side and verified over Q; no side, frontier value or evidence tier changed by a drawing; each regularization recorded with its typed credit and identity basis (the register's regularizations field for results, and the atlas layer's contract per the atlas bead); drawings labelled regularized; the existing gates (regularized atlas views match their index, re-derive exactly, drawings match their index) kept green and extended to the new process. Record the run cost in the bead. The wand125 confirmation runs (think-r333, think-i85v, think-nd7g) wait for this.
 
@@ -33,3 +35,19 @@ Owner request 2026-10-11 (epic think-cdud, item 4): adapt evand's search/regular
 Upstream pin: evand/square-packing 675a5eaa (search/regularize and search/exact byte-identical to the assessed 060c1a1 except posted_cert.py and 16 raw posted certificates).
 Layout: #497 (claude/regularization-2026-10-11) = docs layer: review A fixes (think-t4q5), regularization policy (think-7f9y), effort scope. Stacked PR on claude/gifted-bell-57e62o = implementation: vendor/evand-regularize at 675a5ea (think-csds), devtools.regularize_evand driver = slices 1-2 (think-up3h), devtools.regularize_same_side exact re-solve = slice 3 (think-7hmc), spikes at n = 5, 10, 11, 17, 26, 37, 51, 70, 101, 129, 146, 200, 261, 292, 324 with a before/after gallery and the effort scope (think-ubr0).
 Then: owner answers (Q3 first) with the spike gallery as evidence; slice 4 (record) and slice 5 (drawings and gates) and the full n = 1..324 run with manual review per the policy.
+
+2026-10-11, owner: land in pieces and review quality across a few n before drawings change. Stack: (1) #497 assessment + policy; (2) #509 vendor at 675a5ea (claude/gifted-bell-57e62o); (3) tools: driver + same-side re-solve + gallery, no record/drawing change, reviewed with the spike gallery; (4) pilot: n = 10, 26, 70, 101, 129, 146, 200, 324 admitted after owner review, review records, gates; (5+) batches 1-108, 109-216, 217-324 each with gallery and review records. Outside the stack: #510 documentation-organization plan (think-xfuz); register-result import after owner question 3.
+
+2026-10-11: layer 3 open as jlevy/squares#515 (claude/regularize-tools, base claude/gifted-bell-57e62o / #509): driver, exact same-side re-solve (Fable max review: no blocker/high; findings fixed), gallery tool, spikes at 15 counts. Snapshot headroom restored by pruning the new tools from control workers (strace-proven over 174 controls), 205,238 bytes under the 200 MiB cap: thin. Waiting on the owner's gallery review (https://claude.ai/artifact/5PriKHaABeT1ZG5bZ6u87g) and question 3; then layer 4 (pilot).
+
+2026-10-12: owner decisions answered (think-pn0e) and applied on #497/#511. Full run of n = 1..324 (conservative, 4 workers, largest first) started 2026-10-11 ~22:50 UTC in the session scratchpad; 67/324 at 00:56 UTC. After it finishes: reclassify under the amended table, write a preview layer into a scratch tree for the owner (homepage and atlas), then batch admission PRs once think-k35c (index contract) and think-cb34 sequencing allow.
+
+2026-10-12: two overlaps found. (1) PR #515 (claude/regularize-tools, session_014Y3kYUK2wqLWoA4rqK1Wng, no longer reachable) duplicates #511's layer 3 on the same base; unreconciled, waiting on the owner's call; a read-only comparison is under way. (2) PR #518 changes 42 witnesses (see think-cb34); every one of the 42 has been run in the full run against the old witness, so those counts are re-run after #518 merges, before any admission there (policy section 5: a changed witness lapses review).
+
+2026-10-12 later: (1) #515 comparison: ported its rotation tolerance (sine 1e-9) into #511 (f0371b68d); re-run of 34 counts: 102, 103, 146 now admitted at s_W, six admitted views moved bound -> same, 123 to review; run now 35 admitted (29 same, 6 bound), 14 review, 3 refused, 26 held, 18 no view, 228 no change. #515 can close as superseded on the owner's word. (2) No-view study ($SP/noview-report.md in session_017JNnKDwL74rnktr9s8BdjP's scratchpad): 7 of 18 recover. Automated in #511 (cbb659401): solve failed -> --dps 100 (18 admitted); noise-level not jammed -> --force-kkt with a 1e-10 polish guard (152, 269 to review, row 6). Owner decisions open: relaxed gate for a converged solve whose certificate upstream refused (258, 302: held row 3; 302 groups 36->5, light 240->81); sub-packing solve for wedged force-free squares (150, held row 3); a recorded local patch stopping upstream's probe_flat at its floor (290, 222 s instead of >2,700 s); naming the solve's own turns so row 6 judges only the regularizer's (152, 269); 303 is an upstream conservative merge_determined -> refine precision defect to report upstream. Eight rational slack witnesses (84, 86, 105, 108, 127, 131, 175, 261) need new witnesses (#518).
+
+2026-10-12 ~07:00 UTC, overnight plan (owner: "run autonomously end-to-end overnight to make sure that we have regularized versions of everything by the time we're done and everything is PR'd and ready to merge"; "all versions that are regularized are properly captured in our frontier records"). Stack #498: main <- #497 <- #509 <- #511 <- #530 <- new layers. Lanes (session_017JNnKDwL74rnktr9s8BdjP): (A) the multi-generator index contract (think-k35c), the frontier record of the project's regularizations as a register result's `regularizations` items, the admission writer and the admission batch, outside #518's 42 counts (branch claude/busy-pascal-vgiccb-record); (B) grid-slack over every count with a per-count choice rule, 0.5 deg default, 5 deg runs for comparison (on #530's branch); (C) no-view rungs 3 (relaxed gate) and 5a (recorded probe stall-stop patch), 4 if clean (branch claude/busy-pascal-vgiccb-noview, into #511); (D) batch registration of row-3 views below U per the import runbook (think-omqv; branch claude/busy-pascal-vgiccb-register). Coordinator: #518 re-run with the current driver (runs/adopt518-v2), merges, validation, pushes, PRs, CI, policy record of overnight decisions, research doc, morning summary. #515 closed as superseded (ported pieces listed on it). Merging stays with the owner (github-merge: confirm-session). #518's 42 counts: a follow-up admission once #518 lands.
+
+2026-10-12 (morning): all four lanes integrated and pushed. #511 (ladder rungs 3, 5a; 258/290/302 recovered), #530 (grid pass over all 324; 72/72 views), #548 (v2 record, 24 admitted), #549 (T-151 + 21 admitted). The layer draws 87 views (43 axis, 37 Evan Daniel, 7 grid), 182 unchanged, 55 kept with reasons. #511/#530/#548 green; #549 red only on the T-151 id gap until #516 reaches main. Remaining: owner decisions (policy section 10, review queue, 5-degree threshold), #518's 42 counts (think-cb34), the four unregistered packings 18/26/66/85.
+
+2026-10-12 14:20 UTC: #516 merged; main (4a4910524) merged up the whole stack as rehearsed. #497 f112953de, #509 e07cb4792, #511 fceb37e19, #530 125ff214b, #548 15dcb6774, #549 10af661c6 — all green, mergeable, marked ready for review. Merging waits on the owner (confirm-session). Next: #518, then its 42 counts (think-cb34).

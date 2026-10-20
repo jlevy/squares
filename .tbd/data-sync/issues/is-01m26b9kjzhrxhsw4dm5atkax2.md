@@ -5,15 +5,15 @@ title: "Explainer v0.4.0: add two-entry version history"
 kind: task
 status: closed
 priority: 1
-version: 5
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+version: 6
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - explainer
   - documentation
 dependencies: []
 parent_id: is-01m25zrj5np9ywft00t8j8neaz
 created_at: 2026-09-10T19:04:14.683Z
-updated_at: 2026-09-12T13:37:18.738Z
+updated_at: 2026-10-13T00:56:25.795Z
 closed_at: 2026-09-10T19:51:53.159Z
 close_reason: "PR #148 commit 35484ebd publishes the v0.4.0 explainer and exactly two source-derived history entries. v0.4.0 was first labeled September 10, 2026 at 35484ebd; v0.3.0 was first labeled September 8, 2026 at ce3b1ab5606307ed5cb6780da09c1b5f233ab2e1 and is identified as the 3.81-result edition. One release-history source drives all rendered forms, focused tests cover the labels and dates, and the 135-test local documentation block plus rendering gates pass. Stacked hosted readiness remains separately owned by think-0zc1."
 resolution: null

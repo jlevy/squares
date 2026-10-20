@@ -5,15 +5,15 @@ title: Measure the next due n=11 validation-efficiency checkpoint
 kind: task
 status: closed
 priority: 1
-version: 12
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+version: 13
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels: []
 dependencies:
   - type: blocks
     target: is-01m2h4xzkgqqhsy4tf19gys41f
 parent_id: is-01m24sm7wm3s5eh8ke6vze7mw1
 created_at: 2026-09-10T04:58:03.658Z
-updated_at: 2026-09-15T01:40:08.237Z
+updated_at: 2026-10-13T00:55:37.863Z
 closed_at: 2026-09-15T01:40:08.236Z
 close_reason: "BC-340/Session 131 accepted VE-005: the branch-cost rollup now parses its corpus once per invocation behind an exactly-once load guard and digest-preserving output checks. Three alternating local pairs reduced median wall time 47.72s to 2.31s; PR 174 run 34917841115 passed the exact-source checks tier in 106.38s against the unchanged 195s ceiling. No scientific target ran; BC-353 owns the next route selection."
 resolution: null

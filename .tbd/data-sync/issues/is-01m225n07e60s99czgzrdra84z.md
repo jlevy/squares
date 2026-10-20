@@ -3,16 +3,20 @@ type: is
 id: is-01m225n07e60s99czgzrdra84z
 title: "Settle the mark stroke is none test needle: stale check or real regression"
 kind: bug
-status: open
+status: closed
 priority: 2
-version: 1
+version: 2
 spec_path: packing/campaign/explorations/X-025-hunting-by-hand-and-the-move-set-threads.md
 labels:
   - packing
 dependencies: []
 parent_id: is-01m225hw89vjsga1wnegrwnq5a
 created_at: 2026-09-09T04:08:38.893Z
-updated_at: 2026-09-09T04:08:38.893Z
+updated_at: 2026-10-13T00:54:42.006Z
+closed_at: 2026-10-13T00:54:42.006Z
+close_reason: Duplicate of think-tn0j, which owns the checker's stale needles. think-i52z's twin think-7vlx was closed on the same grounds on 2026-10-06. Consolidated per the owner's decision of 2026-10-13.
+resolution: duplicate
+duplicate_of: is-01m298nrfg4gwvw04jtpypb6b5
 ---
 Known defect in the v2-transitions prototype, deferred deliberately since revision 11.
 

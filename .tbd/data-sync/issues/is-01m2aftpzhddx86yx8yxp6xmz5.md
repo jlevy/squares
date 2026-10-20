@@ -5,8 +5,8 @@ title: Select the first post-publication n=11 research slice from first principl
 kind: task
 status: closed
 priority: 1
-version: 3
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+version: 4
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 delegate: Astra Max strategy review; root disposition
 labels:
   - n11
@@ -14,7 +14,7 @@ labels:
 dependencies: []
 parent_id: is-01m24sm7wm3s5eh8ke6vze7mw1
 created_at: 2026-09-12T09:40:27.239Z
-updated_at: 2026-09-12T09:51:51.368Z
+updated_at: 2026-10-13T00:55:37.863Z
 closed_at: 2026-09-12T09:51:51.368Z
 close_reason: Completed the first-principles evidence reconstruction and selected one prospective 60-120 minute BC329 slice with exact hypothesis, control, admission, acceptance, stop and artifact rules. Recorded the publication source-lock blocker and created six target-specific alternative-strategy beads without promoting any finite negative into a method-wide conclusion.
 resolution: null

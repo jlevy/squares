@@ -5,8 +5,8 @@ title: Use literal Git pathspecs for BC329 result-directory exclusions
 kind: bug
 status: closed
 priority: 1
-version: 6
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+version: 7
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - n11
   - tooling
@@ -17,7 +17,7 @@ dependencies:
     target: is-01m2app5e71qnp9z5vfp9vppbp
 parent_id: is-01m2as8hsq3d7dxy1z185zxeah
 created_at: 2026-09-12T13:56:02.468Z
-updated_at: 2026-09-12T15:11:12.827Z
+updated_at: 2026-10-13T00:56:45.043Z
 closed_at: 2026-09-12T15:11:12.826Z
 close_reason: "Repair commit 1a5a8565 passed source-distinct reproduction at each stated boundary: literal Git pathspec and tracked-output overlap are fail closed; the post-Popen deadline uses recomputed remaining time and kills a late process group; real SIGTERM and launch-window SIGHUP kill and reap workers before signal redelivery. The 98-test focused suite, Ruff, BasedPyright, edit tier, and diff check passed. Adjacent findings remain separately blocked; no BC329 target ran."
 resolution: null

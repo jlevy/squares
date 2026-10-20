@@ -5,15 +5,15 @@ title: "N11 BC327 stage 4: paired instrument and exact common manifests"
 kind: task
 status: closed
 priority: 1
-version: 2
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+version: 3
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - n11
   - research-tooling
 dependencies: []
 parent_id: is-01m26697w7prvp4mdkme3cspdc
 created_at: 2026-09-12T20:21:25.850Z
-updated_at: 2026-10-06T08:38:24.601Z
+updated_at: 2026-10-13T00:57:14.341Z
 closed_at: 2026-10-06T08:38:24.601Z
 close_reason: "Superseded by T-060: s(11) equals Trump's side, registered 2026-09-29 at V3/C3 and on main since PR #246 (merged 2026-09-30). This n = 11 lower-bound certificate work has no target left; the owner's 2026-09-14 strategy reset had already paused it, and the post-optimality plan (plan-2026-10-01) uses n = 11 only as a control."
 resolution: canceled

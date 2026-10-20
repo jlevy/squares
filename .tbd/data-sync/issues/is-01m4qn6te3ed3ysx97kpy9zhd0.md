@@ -1,0 +1,52 @@
+---
+type: is
+id: is-01m4qn6te3ed3ysx97kpy9zhd0
+title: "Import Evan Daniel: degree-7213 minimal polynomial of the s(29) record side, polynomial unpublished (#545)"
+kind: task
+status: in_progress
+priority: 3
+version: 5
+delegate: claude-code@vm
+labels:
+  - result-import
+dependencies: []
+parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
+hold: null
+hold_until: null
+created_at: 2026-10-12T08:55:58.146Z
+updated_at: 2026-10-17T00:24:02.954Z
+started_at: 2026-10-12T14:33:40.570Z
+---
+Found in lane W's read of evand/square-packing for the 2026-10-12 intake (think-mq0k); nothing on GitHub asked, so the record says: a watched-repository read, not an issue.
+
+**Pin.** evand/square-packing ad86d42d0f743076d735036702ba04a41ce24a8c (2026-10-12T04:39:01Z). The claim is 169a827 (2026-10-11T23:01:11Z), "exact: s(29) minimal polynomial (degree 7213) by homotopy continuation"; 7ea600b (2026-10-12T04:24:53Z) adds a pickup section. Retained: packing/resources/web/evand-exact-and-local-reports-2026-10-12/ (branch intake-watch-1012), source/search/exact/homotopy/ (N29.md and every script).
+
+**Claim (N29.md).** The side of the source's s(29) record configuration, sigma = 5.93383346267692918968946061635201913843383418107788697463882591508025..., is a root of an irreducible integer polynomial p of degree 7213 (leading coefficient 325 digits, height 5074 digits), hence its minimal polynomial. Found by homotopy continuation on five consistency polynomials in the class angles t1..t5 (44,448 polyhedral paths, 7,209 regular roots; 4 more near the singular S = 5 grid recovered from a K = 4 lattice). Status the source gives: irreducibility (irred.py, degree patterns modulo 12 primes near 2^61), a Krawczyk box of radius 1e-50 around the eliminated system's zero (krawczyk.py) and the link sigma = S(t*) (link.py) rigorous; parametrization numerical; F_k(tau) = 0, Sn(tau) = x Sd(tau) and the full 152-row contact system Monte Carlo (verify_mod.py, 50 primes; contacts_mod.py, 21 primes). Not checked by the source: non-overlap at the exact point. Not published: p (work/n29_poly_q4.json, 27 MB, gitignored), the parametrization and the roots.
+
+**Map (stage 1 table).** An exact value the record does not hold. n-029.md holds reported 5.93383346267692 (Kingbird; Thomas Schadt, improved by David Ellsworth) and verified 296691673133846459487189947549/50000000000000000000000000000 = 5.93383346267692918974379895098 (E-n029-interval-certified-upper), and says no minimal polynomial is known "in the literature or here" (algebraic_degree: null). sigma is below the verified rational by 5.43e-20, as an enclosure's outward endpoint must be. It is not a bound below the ceiling: the source does not decide the packing at sigma. No pending report at n = 29 is an upper bound (#446/T-132 and think-r333 are lower bounds). Nobody else holds an exact form.
+
+**Recommended record shape (records lane decides).** The T-120..T-123 shape ("Reported s(n) <= alpha_n with a degree-d exact side form") states a bound at alpha, which this source does not claim. Recommended instead: a reported evidence entry E-n029-evand-minpoly-7213-report (role: exact-form report, scope n = 29, artifacts the packet's README and N29.md), the case's reported lane algebraic_degree: 7213 cited to it with minimal_polynomial: null (unpublished), and a paragraph in n-029.md "The analytic characterization" replacing "no minimal polynomial anywhere". If a T-entry is wanted, draft: kind upper-bound; headline "Reported degree-7213 minimal polynomial of the s(29) record side (polynomial unpublished)"; claim "Evan Daniel reports that the side of the s(29) record configuration is a root of an irreducible integer polynomial of degree 7213, sigma = 5.933833462676929189689460616352..., by homotopy continuation, with irreducibility, a Krawczyk enclosure and the root link rated rigorous and two identity checks Monte Carlo. The polynomial is not published, and the source does not check the packing at sigma, so the entry states no bound below the verified 5.93383346267692918974379895098."; V0, C0; significance 2 ("an exact algebraic degree for a known configuration's side, unpublished, no new bound"); novelty previously-published (the source's commit); attribution.published 2026-10-11 (UTC date of 169a827); source key to be defined ([Daniel exact and local reports 2026-10-12]); next_rung "Obtain the polynomial and parametrization from the author, then re-run irreducibility, the Krawczyk enclosure and the link here, and decide the packing at sigma"; unfinished_confirmations: the publication and re-check, rung C3, bead this one, estimated_cost below.
+
+**Priced validation.** Nothing decidable from what is published. (1) Ask the author to publish p, the parametrization and the Krawczyk box (about 27 MB plus 5 parametrization files; his backup is 861 MB). (2) Then, re-running the retained scripts: irreducibility by distinct-degree factorization of a degree-7213 polynomial modulo 12 primes (FLINT; minutes per prime), the link at about 38,000 digits (minutes), Krawczyk on five polynomials of total degree at most 26 (minutes), the identity checks modulo 71 primes (contacts_mod about 18 s per prime): about 1 to 3 CPU-hours, unmeasured, by the source's own code (same-implementation). (3) An independent route (PARI or FLINT irreducibility, arb root isolation and an exact non-overlap decision at sigma over the Krawczyk box) is a W7 slice, a few agent-hours plus the same compute. (4) A W2 review of the elimination from the 152-row contact system to the five F_k. Nothing here was run.
+
+**Credit.** Evan Daniel, MIT; CREDITS.md: produced by Claude (Anthropic) under human direction; 169a827 is co-authored by Claude Opus 5.5. The configuration is Thomas Schadt's improved by David Ellsworth.
+
+**Draft acknowledgement** (no issue to post on; for the owner if an issue is opened): "Thank you for the s(29) minimal polynomial (evand/square-packing 169a827). We retained N29.md and its scripts at ad86d42. The polynomial itself is not in the repository; could you publish work/n29_poly_q4.json, the parametrization and the Krawczyk box, so that the irreducibility, the enclosure and the link can be re-run here? We will also check the packing at the exact side, which N29.md leaves open."
+
+## Notes
+
+GitHub issue: https://github.com/jlevy/squares/issues/545 (opened 2026-10-12 by the coordinator to track this watched-repository read).
+
+**2026-10-12 update: the data is published** (issue comment https://github.com/jlevy/squares/issues/545#issuecomment-6126076974, 14:15:44Z). Release exact-data-2026-10-12 of evand/square-packing, tagged at 31523f87316bdfda00f5459dd9077928e264f133 (lightweight tag; published 14:14:15Z; not marked immutable). Asset s29-minpoly.tar.zst: 87,237,962 bytes, SHA-256 708e1b8b45894667f90a0d18b55bb35ed6079b84d33f9656976fd5cfa6f3729c, verified against the download, the release SHA256SUMS, GitHub's digest and the comment. 21 members, 201,735,244 bytes unpacked; every member streamed and matched the archive's SHA256SUMS (nothing unpacked to disk but three small files). Nothing under search/exact/ or tasks/ changed between ad86d42 and 31523f8.
+
+**Retained** (branch intake-552, packet packing/resources/web/evand-exact-data-2026-10-12/, sibling of evand-exact-and-local-reports-2026-10-12): the archive pinned by digest only (OR-18) with every member's size and digest in acquisition/release.json; unpacked and retained: the archive README (five replay commands), its SHA256SUMS and n29_krawczyk.json (tstar to radius 1e-50; S_mid 5.933833462676929189689460616352019138433834181077886974638..., S_rad 1.07e-48).
+
+**Measured here from n29_poly_q4.json** (SHA-256 0cba5ea250da54d67741803e86f1e46a2010f60fbf6b85be34fe69640e28ee5e, 27,866,169 bytes): 7,214 coefficients, degree 7,213, leading coefficient positive with 325 digits, height 5,074 digits, constant term 4,566 digits; file metadata: 165 real roots, irreducible_by_patterns true, no possible factor degree. Irreducibility, enclosure, link and identities NOT checked here.
+
+**Not run (price).** The source's five-step replay (irred.py 12 primes; krawczyk.py; link.py with PREC=220000; verify_mod.py 50 primes ~2 min/prime; contacts_mod.py 21 primes ~18 s/prime): about 2.5 CPU-hours by the author's measure, almost all verify_mod.py; same-implementation; python-flint 0.9.0 + mpmath 1.3.0 under env.sh; two steps Monte Carlo; non-overlap at the exact point checked by none. Needs an owner budget. An independent route (PARI/FLINT irreducibility, arb isolation, exact non-overlap at sigma over the Krawczyk box) remains a W7 slice of a few agent-hours plus similar compute. The 7,209 refined roots (1.8 GB) are not published and not needed for the identities.
+
+**Record shape.** Unchanged recommendation (evidence entry + algebraic_degree: 7213, minimal_polynomial pointing at the pinned asset, paragraph in n-029.md); the polynomial now has a retained pin.
+
+**Draft reply (not posted).** "Thank you for publishing exact-data-2026-10-12. Both archives match their digests; we keep the s(29) archive pinned by digest (it is too large for the repository) with its README and Krawczyk box, and read from the polynomial its degree 7,213 and the coefficient sizes you state. The replay you price at about 2.5 CPU-hours waits for a budget; we will report it, and the non-overlap check at the exact point, when it runs."
+
+From #661's stage 4 review (A8, think-2jzy): T-009's 1e-44 Krawczyk box may be a cheaper route to deciding #622/T-195 and #574's N29 against the Kingbird print at 29. The review found S inside T-009's box, which shows the print 5.93383346267692 is a truncation (S is 0.919 of a unit above it).

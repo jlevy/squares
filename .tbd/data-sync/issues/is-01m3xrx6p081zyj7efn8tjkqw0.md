@@ -5,16 +5,14 @@ title: "Import wand125: linear point/segment certificates s(101) >= 257/25 and s
 kind: task
 status: closed
 priority: 2
-version: 7
+version: 8
 labels:
   - result-import
   - packing
-dependencies:
-  - type: blocks
-    target: is-01m3yrzkz80qd1wv5sjr0kkkv0
+dependencies: []
 parent_id: is-01m3yrdxte02c7bnygkke34ct4
 created_at: 2026-10-02T07:40:22.080Z
-updated_at: 2026-10-03T22:39:34.811Z
+updated_at: 2026-10-15T19:58:57.621Z
 closed_at: 2026-10-03T22:39:34.810Z
 close_reason: "T-073 n83 V3/C3 (e79ca3ac7) and T-080 n101-105 V3/C3 on main via #327 (9927035b6)."
 resolution: null

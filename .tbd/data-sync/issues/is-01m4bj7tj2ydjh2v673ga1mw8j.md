@@ -5,8 +5,8 @@ title: "Session184: complete owed full current-source checkpoint certification"
 kind: task
 status: open
 priority: 1
-version: 7
-spec_path: docs/project/specs/active/plan-2026-10-06-n17-ten-hour-session.md
+version: 8
+spec_path: packing/campaign/agendas/agenda-045-n17-mathematics-and-efficiency.md
 delegate: claude-code@spud10.local
 labels: []
 dependencies: []
@@ -17,7 +17,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-07T16:13:12.125Z
-updated_at: 2026-10-08T05:53:48.697Z
+updated_at: 2026-10-12T23:40:09.140Z
 started_at: 2026-10-07T16:40:33.112Z
 ---
 Complete the owed FULL current-source Session184 research checkpoint after final records/source freeze. Preserve the actual isolated ordinary101-step run at predecessor969588d09, its exact selection, failures/skips and source coverage; no whole final-source PASS may be inferred from it. The original negative-control step had37 false failures because PACKING_PROJECT_ROOT leaked into private snapshots; clean262d4a447 scoped unchanged37 reconciliation fired all37 and passed112.6144s, but this repairs only that documented selection.

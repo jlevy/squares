@@ -3,15 +3,19 @@ type: is
 id: is-01m4c4ghx1nmqv2q398jy5572g
 title: "n17: independently review global contact normalization and complete angle-chart coverage"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 3
+version: 4
 spec_path: docs/project/research/research-2026-10-07-n17-full-square-partner-coupling.md
 labels: []
 dependencies: []
 parent_id: is-01m3xkd6zmq1jqwtn628h2k7zy
 created_at: 2026-10-07T21:32:32.543Z
-updated_at: 2026-10-08T05:38:02.765Z
+updated_at: 2026-10-12T23:39:30.050Z
+closed_at: 2026-10-12T23:39:30.050Z
+close_reason: "Completed (bounded negative): BC-453 retired the contact-normalization discriminator (303 rank filter: all 95 survive; 304/308 miss); no follow-up."
+resolution: null
+duplicate_of: null
 ---
 Review the sole-Astra hand-derived global contact-normalization argument in
 `docs/project/research/research-2026-10-07-n17-full-square-partner-coupling.md`.

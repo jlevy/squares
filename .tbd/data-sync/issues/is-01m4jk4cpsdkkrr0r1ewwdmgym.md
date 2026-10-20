@@ -3,9 +3,9 @@ type: is
 id: is-01m4jk4cpsdkkrr0r1ewwdmgym
 title: "Record #472 in result-requests.yaml: twelve n17 kernel certificates admitted by exp-317 (#475) (#472)"
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 3
+version: 4
 delegate: claude-code@vm
 labels:
   - result-import
@@ -14,8 +14,12 @@ parent_id: is-01m4jk37jkzx9bzdws5jj72qg7
 hold: null
 hold_until: null
 created_at: 2026-10-10T09:43:29.241Z
-updated_at: 2026-10-10T10:15:23.966Z
+updated_at: 2026-10-12T23:39:00.885Z
 started_at: 2026-10-10T09:49:25.052Z
+closed_at: 2026-10-12T23:39:00.885Z
+close_reason: "Completed: #472 recorded in result-requests.yaml as closed (check_requests: 2/2 settled, no reply due)."
+resolution: null
+duplicate_of: null
 ---
 Issue https://github.com/jlevy/squares/issues/472, closed. Its twelve kernel certificates were admitted to certified-sub-patterns.yaml by exp-317 through PR #475 (merge 0f16c033a). The sweep lists it as not in the record: enter it with its admitted state, the replies it has, and state closed.
 

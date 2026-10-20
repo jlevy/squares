@@ -5,8 +5,8 @@ title: "N11 strategy reset: significant bound improvements or a much simpler pro
 kind: epic
 status: open
 priority: 1
-version: 39
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+version: 41
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - n11
   - strategy
@@ -43,10 +43,12 @@ child_order_hints:
   - is-01m2zvnp1r4sysep9ea9x7d1r0
   - is-01m2zwcmn7tjafn5217040xp61
 created_at: 2026-09-14T03:04:47.426Z
-updated_at: 2026-10-06T08:33:04.642Z
+updated_at: 2026-10-13T00:55:36.106Z
 ---
 Owner direction, 2026-09-14: stop heavy computer-assisted work aimed at microscopic lower-bound gains. Prefer routes capable of a material n=11 bound improvement, a substantially simpler proof of s(11) >= 3.82, or a transferable technique that could resolve another small n. BC-339/think-uqa4 owns the checked roll-up, BC-347/think-oj12 owns the completed Astra Max audit, and BC-346/think-9y7p selected the due BC-340/think-1ydi W5 checkpoint. No scientific route is authorized before W5 closes and the fresh post-W5 W10 under think-d3h5 selects one.
 
 ## Notes
 
 Current controller, 2026-09-15: PR 176 merged the post-W5 Route A selection at a9de8a705d785e5b7b6ac46f28c11b6f5a45d7c6. BC-354/think-0t5y then completed its no-target admission decision in PR 177 and parked the current Route A representation: the complete 80-stratum negative-root producer, shared-variable conditional gate, rows-complete matched exact baseline, and independent replay remain absent. No target ran and no physical root closed. BC-343/think-a1e8 is the sole next entry, beginning with a separate no-target Route S admission PR that freezes T-025/T-026, the at-most-23 orbit ceiling or another predeclared metric, one template family, controls, and verdict rules. BC-341/think-9y6q is paused pending a future W10 and the named Route A prerequisites.
+
+2026-10-13 owner decision: s(11) is settled by T-060. The n = 11 bound and simpler-proof aims of this epic are obsolete. Live parts: think-mmd5 (n = 12, H-228), think-bxu1 (column-generation checkpoint corner-clip bug) and think-qqzs (kept open as Session 138's certification_pending owner). Close the epic when those close or move. Plan archived to docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md.

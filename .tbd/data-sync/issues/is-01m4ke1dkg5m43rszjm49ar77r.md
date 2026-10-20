@@ -5,7 +5,7 @@ title: Review and repair the website development and CI critical path
 kind: feature
 status: in_progress
 priority: 1
-version: 22
+version: 31
 spec_path: docs/project/specs/active/plan-2026-10-10-website-development-loop.md
 delegate: codex@spud10
 labels:
@@ -26,10 +26,17 @@ child_order_hints:
   - is-01m4mngke1wmp1amv4qga74qxs
   - is-01m4mngm3k2dev0vsbttjajv0t
   - is-01m4mngn8hjwfgm9gkqj1956hp
+  - is-01m4mth1gzbfvd0qzhfbexx891
+  - is-01m4mth2bckpankmyhdmrwm42v
+  - is-01m4mth36y8c6m269nh0wpk3g6
+  - is-01m4mth3pwc0w7mabt4qym2t90
+  - is-01m4p4ak9phhze3ap0akmxv5ez
+  - is-01m4ph7dfnsqweryt753f6rrcq
+  - is-01m58ne5xzkwtbp2bjcsk30a8y
 hold: null
 hold_until: null
 created_at: 2026-10-10T17:33:43.407Z
-updated_at: 2026-10-11T05:03:37.232Z
+updated_at: 2026-10-18T23:27:04.638Z
 started_at: 2026-10-10T17:35:10.785Z
 ---
 User requests a systematic review of why routine website iteration consumed hours, followed by development-process or CI fixes. Delegate independent analysis of workflow/CI architecture and reachable-test over-selection; coordinator rolls up evidence and implements the smallest justified changes. Capture command wall, repeated work, scope/coverage and failure classification; preserve scientific contracts and assert equivalence before performance claims. Current website PR462 remains separately tracked under think-o2jd; do not close on a report alone.
@@ -65,3 +72,13 @@ The overview separately failed Atlas 1280/light startup at 302ms against the unc
 Merged-deployment observation (PR462,6038af33): independent Astra read-only audit identifies515 sequential non-asset registry GETs plus a serial GitHub HEAD phase in packing/devtools/check_published_site.py. Source already records a14m47s audit dominated by the latter. HTTP cache keys preserve fragments, so separate #L anchors request the same network resource repeatedly. Results print only after the audit completes; current elapsed time does not attribute a phase or prove a hang.
 
 Selected next hypothesis: defragment transport/cache keys while preserving queries, original diagnostics, retries, all registry rows and all semantic/browser checks. Prove different anchors share one transport request and distinct queries remain separate. Add maintained phase and slow-request timing; measure before claiming a speedup. Forwarder load-vs-commit waiting is a secondary hypothesis. No source change or duplicate live audit was made during this diagnosis.
+
+2026-10-16 operational recovery and cost readback: formal stack635 (News633 and CI634) merged as3685616df5d92de94b9f7081233c8c357bbc3e67. Its exact-main Packing38839566286 passed every applicable native owner in30m01s; all four integration shards passed and the slow lane passed241 cases with zero skips. Required browser ownership executed all51 forwarders with complete setup/call/teardown journals and zero skips. Pages38839566396 deployed that revision and passed4517/4517 live checks. Operational recovery is established; the original parallel/browser timeout cause remains unproven. Do not close the causal question or explain it as runner variance.
+
+Follow-up News PR638 at4e983d2cb9868247f3130b93975b932f42b1b74f passed exact-head Packing38843354043 and Pages38843354058. Both new homepage cases passed at1280px and390px, with all51 forwarders passing without skips. The frontend job took694s; its592.206s site step comprised474.533s parallel functional work,77.386s fresh serial forwarders and40.273s load checks. The165s advisory target and broader three-minute goal remain unmet. No limits, worker allocation or assertions were relaxed. PR638 merged as4e8c8987f97a2edfab0e02f4bf4e51fb11b92aa3; exact-main Pages38844993807 deployed and passed4519/4519 checks with zero retries. Its native checkpoint38844993715 is still in progress without failures at this note; integration has passed.
+
+Independent Astra retrospective addendum is retained in .codex/regularization-closeout-evidence-2026-10-13/pr638-home-news-parity-20261016/retrospective-addendum.md, alongside source/review and live-UI receipts. Existing worker journals identify110.495s homepage and103.269s atlas fixture setup intervals, without proving removable duplication. The next measured slice remains existing think-nqnx under the broad program owner; think-z9lx retains selection-cost diagnosis. No new experiment or held assurance work was run. Keep these cost and causal trackers open; completed UI beads think-e70v, think-1rry and think-yhsw are closed after deployment. Final main results will be linked in the PR638 closeout and durable receipt index.
+
+2026-10-16 final PR638 checkpoint: exact merged main 4e8c8987f97a2edfab0e02f4bf4e51fb11b92aa3 passed Packing run 38844993715, all 14 applicable jobs, in 29m11s. Integration A–D and full validation passed. Actual slow JUnit reports 241 cases with zero skips, failures or errors (1633.257s JUnit; command wall 1634.003s). Both new 1280px/390px homepage cases and all 51 forwarders passed again on this merged source. Exact-main Pages run 38844993807 also passed, including the 4519/4519 live audit with zero retries. No rerun was used for this closeout.
+
+The final evidence and original artifacts are retained in .codex/regularization-closeout-evidence-2026-10-13/pr638-main-4e8c8987-20261016/final-success-receipt.json. Root independently verified workflow success, raw slow JUnit, required browser counts, published PR body and final comment. PR closeout: https://github.com/jlevy/squares/pull/638#issuecomment-6207677381. These successful observations establish operational recovery; they do not identify the original timeout cause or meet the three-minute target. Keep this tracker and the existing broader CI program open for the remaining measured work.

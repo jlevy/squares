@@ -5,15 +5,16 @@ title: "M7 calibration: close the n=6 point bracket at 299/100 and build an n-pa
 kind: task
 status: in_progress
 priority: 2
-version: 5
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+version: 9
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - n11
   - research
 dependencies: []
 parent_id: is-01m2exznj4k1zyz1rczby8ch2k
+hold: paused
 created_at: 2026-09-17T12:05:48.708Z
-updated_at: 2026-09-20T05:43:06.020Z
+updated_at: 2026-10-13T00:55:45.661Z
 ---
 From the 2026-09-17 overnight M7 lane (think-4woh; X-037). The n=11 fractional point-certificate producer runs at other n without code changes.
 
@@ -24,3 +25,5 @@ G1, G2, G3, and G5 are on main (PRs 196 and 197). Remaining on this bead: close 
 ## Notes
 
 Owner-requested continuation order: complete the PR 199–202 landing-readiness block think-n3fl, then the small correctness and efficiency pipeline block think-177v, before resuming H-216 research. The dependency on think-177v records this preparation; H-216 remains the next scientific target and its registered acceptance criteria are unchanged. This planning update starts no research run and does not reopen the closed Session 142 record.
+
+2026-10-13 owner decision: s(11) is settled by T-060. H-216 and G4 were calibration for an n = 11 lower-bound route and will not resume. The bead stays open only as Session 138's certification_pending owner. Close it once that session is certified or its record names another owner. Plan archived to docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md.

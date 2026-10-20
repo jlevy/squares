@@ -5,13 +5,13 @@ title: Independently review n17 endpoint identities and complete geometry covera
 kind: task
 status: closed
 priority: 0
-version: 5
-spec_path: docs/project/specs/active/plan-2026-10-01-post-optimality-w3-session.md
+version: 6
+spec_path: docs/project/specs/done/plan-2026-10-01-post-optimality-w3-session.md
 labels: []
 dependencies: []
 parent_id: is-01m3vkftza0gk08jwefckcgfmr
 created_at: 2026-10-01T12:03:15.801Z
-updated_at: 2026-10-01T12:44:32.962Z
+updated_at: 2026-10-12T23:50:16.519Z
 closed_at: 2026-10-01T12:44:32.961Z
 close_reason: null
 resolution: null

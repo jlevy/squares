@@ -5,8 +5,8 @@ title: Publish independently accepted BC303 T1 reader as a separate stacked PR
 kind: task
 status: closed
 priority: 1
-version: 11
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+version: 12
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - n11
   - pr
@@ -18,7 +18,7 @@ dependencies:
     target: is-01m2edr5vf9vba530c9ntyd3t1
 parent_id: is-01m2b8watk22ejr9s0zhgrdd17
 created_at: 2026-09-13T18:12:16.695Z
-updated_at: 2026-09-14T00:26:36.474Z
+updated_at: 2026-10-13T00:57:39.956Z
 closed_at: 2026-09-14T00:26:36.473Z
 close_reason: "PR #161 ready at ac6f39b8 on #156 2f8925b2. Exact --push 46/74, 1,412 tests; hosted CI green. Cost-first body contains disjoint T1-only native lower-bound snapshot and one exp157 literal negative; no T2/global claim."
 resolution: null

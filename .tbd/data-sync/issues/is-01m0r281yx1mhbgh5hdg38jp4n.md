@@ -5,8 +5,8 @@ title: "Atlas: the fields deferred from the minimum viable store"
 kind: task
 status: open
 priority: 2
-version: 6
-spec_path: docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
+version: 8
+spec_path: docs/project/specs/paused/plan-2026-08-22-minimal-packing-toolkit.md
 labels:
   - focus-efficiency
 dependencies:
@@ -14,7 +14,7 @@ dependencies:
     target: is-01m0r7sk41gsj2yjh80tx6324h
 parent_id: is-01m0p49s01h862tq6wp0dd085c
 created_at: 2026-08-23T19:41:02.813Z
-updated_at: 2026-10-10T22:48:09.146Z
+updated_at: 2026-10-12T23:52:26.276Z
 ---
 Fields deferred from the minimum viable basin observation store: algebraic reconstruction evidence, symmetry stabilizer, and neighbour or transition observations with merge-delta and provenance. Algebraic degree can guide reconstruction but cannot by itself distinguish a genuine optimum from a non-converged, non-isolated, duplicated or unstable endpoint. Symmetry is cheap; neighbour claims require a declared perturbation/continuation protocol and independent validity.
 

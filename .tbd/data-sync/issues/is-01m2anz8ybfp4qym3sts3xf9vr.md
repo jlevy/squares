@@ -5,8 +5,8 @@ title: Make BC329 raw and exact schedulers bounded and completion-aware
 kind: bug
 status: closed
 priority: 1
-version: 7
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+version: 9
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 delegate: root implementation
 labels:
   - n11
@@ -20,7 +20,7 @@ dependencies:
     target: is-01m2aj2e56r62h83avk7kexvhb
 parent_id: is-01m26c1jahzgfckegz7fp9wcq7
 created_at: 2026-09-12T11:27:48.158Z
-updated_at: 2026-09-12T16:11:31.518Z
+updated_at: 2026-10-13T00:56:36.597Z
 closed_at: 2026-09-12T16:11:31.518Z
 close_reason: Implemented, integrated, independently reviewed, and published on the clean PR 156 stack by f1e397cd. Their remaining follow-up risks are separately tracked under calibration, parent preflight, partial-direction integration, and admission beads; no BC329 scientific target ran.
 resolution: null

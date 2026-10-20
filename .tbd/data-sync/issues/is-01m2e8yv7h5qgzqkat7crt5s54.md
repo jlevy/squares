@@ -5,8 +5,8 @@ title: Measure the literal BC303 T1 parent mass and four-corner nonextension thr
 kind: task
 status: closed
 priority: 1
-version: 8
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+version: 9
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 delegate: Sol exact reader after Astra review
 labels:
   - n11
@@ -19,7 +19,7 @@ dependencies:
 child_order_hints:
   - is-01m2e9f07c012h4mb9ddddvkcf
 created_at: 2026-09-13T20:57:20.367Z
-updated_at: 2026-09-13T22:18:37.342Z
+updated_at: 2026-10-13T00:58:15.179Z
 closed_at: 2026-09-13T22:18:37.341Z
 close_reason: Exact preregistered Q0 target and independent audit reject H-161 resource cutoff; retained at 73f5f693 with records/edit gates passing.
 resolution: null

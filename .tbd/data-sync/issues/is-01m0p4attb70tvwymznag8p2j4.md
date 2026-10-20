@@ -5,12 +5,12 @@ title: delta-continuation proposer (H-013)
 kind: task
 status: open
 priority: 1
-version: 3
-spec_path: docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
+version: 4
+spec_path: docs/project/specs/paused/plan-2026-08-22-minimal-packing-toolkit.md
 labels: []
 dependencies: []
 parent_id: is-01m0p4ath0k0w56dkyy7ryerwp
 created_at: 2026-08-23T01:39:02.090Z
-updated_at: 2026-10-10T22:47:29.802Z
+updated_at: 2026-10-12T23:50:46.477Z
 ---
 Inflate the container to side s*+delta, walk delta down with a re-quench at every step. Rare-event search becomes path-following plus event detection. Pays twice: the merge-delta between basins is the atlas's barrier scale. Test n=10 first (does continuation reach the proved optimum from generic inflated starts), then n=11 arrival rate in Trump's cell versus direct sampling at equal pair-tests. Kill: at n=10 no better than direct sampling - retired as a discovery tool, kept as a landscape probe.

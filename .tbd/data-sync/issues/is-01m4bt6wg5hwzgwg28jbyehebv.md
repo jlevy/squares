@@ -5,8 +5,8 @@ title: Coordinate Session185 four-hour n17 coupling and replay continuation
 kind: task
 status: closed
 priority: 1
-version: 5
-spec_path: docs/project/specs/active/plan-2026-10-07-n17-four-hour-continuation.md
+version: 6
+spec_path: docs/project/specs/done/plan-2026-10-07-n17-four-hour-continuation.md
 delegate: claude-code@spud10.local
 labels: []
 dependencies: []
@@ -14,7 +14,7 @@ parent_id: is-01m3xkd6zmq1jqwtn628h2k7zy
 hold: null
 hold_until: null
 created_at: 2026-10-07T18:32:29.941Z
-updated_at: 2026-10-07T22:07:43.502Z
+updated_at: 2026-10-12T23:51:56.206Z
 started_at: 2026-10-07T18:33:18.418Z
 closed_at: 2026-10-07T22:07:43.501Z
 close_reason: Bounded Session185 deliverables and agenda dispositions captured on PR404; global proof, regional lift98mg, optimizationui2y, normalizationnvkf and certification7hy3 remain open.

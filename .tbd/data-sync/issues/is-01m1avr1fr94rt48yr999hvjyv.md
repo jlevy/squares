@@ -5,13 +5,13 @@ title: Non-smooth angle search generalised past one dimension (successor to H-00
 kind: task
 status: open
 priority: 1
-version: 3
-spec_path: docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
+version: 5
+spec_path: docs/project/specs/paused/plan-2026-08-22-minimal-packing-toolkit.md
 labels: []
 dependencies: []
 parent_id: is-01m0p49s01h862tq6wp0dd085c
 created_at: 2026-08-31T02:53:00.791Z
-updated_at: 2026-10-10T22:47:47.833Z
+updated_at: 2026-10-12T23:51:17.371Z
 ---
 exp-006 names this as 'the successor to H-002 and the spine's real angle half'. Nothing tracks it yet: think-imot (the LP-in-cell loop) is closed, think-vbk5 is the exploration problem, and think-opzu is H-001's angle-class proposer.
 

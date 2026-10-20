@@ -3,9 +3,9 @@ type: is
 id: is-01m225jsnny9dz3vjf9jadxy27
 title: Show Pack at rest with all n squares, and put restart beside play
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 3
+version: 4
 spec_path: packing/campaign/explorations/X-025-hunting-by-hand-and-the-move-set-threads.md
 labels:
   - packing
@@ -14,7 +14,11 @@ dependencies:
     target: is-01m225ps2ejkzyjc45g0xj6kyh
 parent_id: is-01m225hw89vjsga1wnegrwnq5a
 created_at: 2026-09-09T04:07:26.644Z
-updated_at: 2026-09-09T04:09:45.058Z
+updated_at: 2026-10-13T00:54:46.182Z
+closed_at: 2026-10-13T00:54:46.182Z
+close_reason: "Completed: Pack at rest and restart beside play are delivered in the workbench (packages/workbench/src/application.js). Package wiring remains with think-8cti, restart semantics with think-rdee."
+resolution: null
+duplicate_of: null
 ---
 In flight in the v2-transitions prototype as of 2026-09-08.
 

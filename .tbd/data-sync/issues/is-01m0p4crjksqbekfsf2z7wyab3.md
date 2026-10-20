@@ -5,13 +5,13 @@ title: Codify the rest of the hypothesis register as artifacts
 kind: task
 status: closed
 priority: 0
-version: 5
-spec_path: docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
+version: 7
+spec_path: docs/project/specs/paused/plan-2026-08-22-minimal-packing-toolkit.md
 labels: []
 dependencies: []
 parent_id: is-01m0p4cr8nk338kqtbksaf63f9
 created_at: 2026-08-23T01:40:05.330Z
-updated_at: 2026-10-10T22:46:50.889Z
+updated_at: 2026-10-12T23:49:54.678Z
 closed_at: 2026-08-24T01:14:27.891Z
 close_reason: "Completed: H-003 through H-010 and H-013 through H-015 are enforced registry artifacts with criteria, readiness, budgets and kill rules; reservations are removed; ideas, X-001, ledger and synopsis reconcile. H-001 was split from new H-024, and H-021 through H-023 carry newly formalized measurement/local-geometry gaps."
 resolution: null

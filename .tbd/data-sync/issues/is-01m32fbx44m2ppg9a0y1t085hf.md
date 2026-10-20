@@ -5,8 +5,8 @@ title: Cut the full-ascent video, n = 1..324, and a 1..100 social excerpt
 kind: task
 status: closed
 priority: 2
-version: 5
-spec_path: docs/project/specs/active/plan-2026-09-21-video-delivery-profiles.md
+version: 6
+spec_path: docs/project/specs/done/plan-2026-09-21-video-delivery-profiles.md
 labels: []
 dependencies: []
 parent_id: is-01m1z68hzazv9yjs9k7cddmf82
@@ -14,7 +14,7 @@ child_order_hints:
   - is-01m32g304kea12cznwatefa8cc
   - is-01m32g30j5v17f8289ww4zwra3
 created_at: 2026-09-21T17:14:08.387Z
-updated_at: 2026-09-21T19:55:58.422Z
+updated_at: 2026-10-12T23:52:27.317Z
 closed_at: 2026-09-21T19:55:58.421Z
 close_reason: End-to-end video cutting works and is validated. Superseded in part by the delivery-profile plan.
 resolution: null

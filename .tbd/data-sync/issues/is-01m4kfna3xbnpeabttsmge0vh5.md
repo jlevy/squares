@@ -5,8 +5,8 @@ title: Prioritize mathematical distance in X-052 and three eight-hour block plan
 kind: task
 status: closed
 priority: 2
-version: 6
-spec_path: docs/project/specs/active/plan-2026-10-10-n17-three-block-session.md
+version: 7
+spec_path: docs/project/specs/future/plan-2026-10-10-n17-three-block-session.md
 delegate: codex@spud10
 labels: []
 dependencies: []
@@ -14,7 +14,7 @@ parent_id: is-01m3xkd6zmq1jqwtn628h2k7zy
 hold: null
 hold_until: null
 created_at: 2026-10-10T18:02:03.749Z
-updated_at: 2026-10-10T19:05:18.513Z
+updated_at: 2026-10-13T00:59:20.900Z
 started_at: 2026-10-10T18:03:54.172Z
 closed_at: 2026-10-10T19:05:18.485Z
 close_reason: null

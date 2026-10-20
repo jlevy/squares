@@ -5,7 +5,7 @@ title: "n17 capture route: reconcile pilot2 falsifier and select controlled succ
 kind: task
 status: in_progress
 priority: 1
-version: 10
+version: 12
 spec_path: docs/project/reviews/review-2026-10-06-n17-w3-consolidation.md
 delegate: claude-code@vm
 labels: []
@@ -14,10 +14,10 @@ parent_id: is-01m3xkd6zmq1jqwtn628h2k7zy
 child_order_hints:
   - is-01m45ncp7p0yab6vmn2x4358d2
   - is-01m4agrv4m0a14g3qcqvnvktsw
-hold: null
+hold: paused
 hold_until: null
 created_at: 2026-10-02T20:50:53.101Z
-updated_at: 2026-10-07T06:28:18.196Z
+updated_at: 2026-10-13T00:55:33.799Z
 started_at: 2026-10-03T22:35:10.737Z
 ---
 Session 168. Pilot 1 (cea300a4) met the capture falsifier (position g=1.000), but review-2026-10-02-n17-capture-after-pilot.md (3f90fc2d) finds it producer-limited by the 24 live-row cap. Pilot 2: max-live 128/256, all live rows bisected to 2^-22, end-angle core, hull cap 48, per-side bounds, widest-row/extent ratio, n11 case-438 contraction control. Falsifier: 3 rounds with widest row < 1/20 of extent and no two-sided extent falling 10%. In-flight uncommitted edits to packing/devtools/pilot_n17_capture.py and its test; runs and receipts in the session scratchpad lanes/c1/p2. Next: integrate receipts into X048-session-168-pilots, record per-round g, decide the capture route.
@@ -31,3 +31,5 @@ Session 168. Pilot 1 (cea300a4) met the capture falsifier (position g=1.000), bu
 2026-10-04 02:28 UTC: the after-pilot review's falsifier is MET (1525d4e03). The run with rows by need (256; side-N2 576, side-W2 416, side-N0 320; resumed from round 13) had every owner under a tenth at round 14 and under a twentieth at round 15. Rounds 15-17 were fine and flat (largest ratio 0.0499; least g 0.988). The pilot stopped with outcome "falsified", and devtools.score_n17_capture agrees. No two-sided position extent moved off the 1/1024 box in 17 rounds. Lane R9 (independent review) is testing other producer limits (hull cap 48, core, partner pruning; a --hull-limit 0 resume from the round-16 checkpoint) and whether the box is already inside U′'s first-order feasible set, before the architecture verdict is adopted. The uniform 576-row run continues as a cross-check.
 
 2026-10-05 (PR 347 status survey). Receipt capture-pilot2-box1024-need/receipt.json records outcome: falsified. Lane R9's review has no record on any ref. Open a dedicated R9 bead, or name its deliverable file here.
+
+2026-10-13 owner decision: suspended pending Overbeck's proof that s(17) = L (#557; registered as T-153 by #560, credited by #571), which likely subsumes new s(17) research. Resumes only if the owner lifts the suspension, for example if T-153's replays and reviews find a gap or the candidate is withdrawn. n17 capture route: pilot 2 was falsified (receipt capture-pilot2-box1024-need); the remaining scope, selecting a successor, is new s(17) research.

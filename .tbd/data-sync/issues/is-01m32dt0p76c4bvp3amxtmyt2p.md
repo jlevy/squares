@@ -5,7 +5,7 @@ title: "Research block (W1): the Kleddamag n=17 certified bound 461300/99853"
 kind: epic
 status: open
 priority: 1
-version: 11
+version: 12
 delegate: claude-code@vm
 labels: []
 dependencies: []
@@ -20,7 +20,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-09-21T16:46:53.639Z
-updated_at: 2026-10-05T05:40:47.002Z
+updated_at: 2026-10-13T00:55:52.978Z
 started_at: 2026-10-05T05:34:33.023Z
 closed_at: null
 close_reason: null
@@ -49,3 +49,5 @@ Not yet adjudicated. No bound moves until the proof review and the replay both r
 ## Notes
 
 Reopened: Reopened 2026-10-05: closing it left open children under a closed parent, which devtools.check_bead_tree refuses. The parent's own work is adopted (see the close reason), but its open children need their own disposition before it closes.
+
+2026-10-13 owner decision: the n17 research left here is suspended pending Overbeck's proof (#560, #571): think-vpyj and think-e56m are held paused. think-9ll1, think-0rnb and think-7qto are proposed closed completed (artifact retained in packing/resources/web/n17-kleddamag-certified-bound-2026-09-21, T-038 registered). Close this epic when think-haqw's children resolve.

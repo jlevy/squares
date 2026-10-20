@@ -3,14 +3,18 @@ type: is
 id: is-01m4ag8920s4qjs1w1vzm1fjxd
 title: "n17: specify composed proof interfaces and branch/cap coverage obligations"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 4
+version: 5
 spec_path: docs/project/reviews/review-2026-10-06-n17-w3-consolidation.md
 labels: []
 dependencies: []
 parent_id: is-01m3xkd6zmq1jqwtn628h2k7zy
 created_at: 2026-10-07T06:19:15.391Z
-updated_at: 2026-10-07T07:11:07.308Z
+updated_at: 2026-10-12T23:39:00.317Z
+closed_at: 2026-10-12T23:39:00.317Z
+close_reason: "BC-431 complete: the composed proof-interface obligations are documented in docs/project/research/research-2026-10-07-n17-proof-interfaces-and-lp-contract.md (agenda-043 outcome retire-success)."
+resolution: null
+duplicate_of: null
 ---
 Write an obligation table joining centred embedding, closed state and D4 semantics, all-child parent coverage, exclusion caps, exact-root enclosure, near-endpoint handling, capture output frame, slider box and local radius. Cite existing checkers and identify every unproved arrow. Output interfaces, not a global theorem.

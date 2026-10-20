@@ -5,12 +5,12 @@ title: Billiard/inflation proposer
 kind: task
 status: open
 priority: 3
-version: 4
-spec_path: docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
+version: 6
+spec_path: docs/project/specs/paused/plan-2026-08-22-minimal-packing-toolkit.md
 labels: []
 dependencies: []
 parent_id: is-01m0p4ath0k0w56dkyy7ryerwp
 created_at: 2026-08-23T01:39:03.307Z
-updated_at: 2026-10-10T22:48:23.037Z
+updated_at: 2026-10-12T23:52:41.655Z
 ---
 The method that produced the n=29,37 records (Gensane-Ryckelynck). Grow squares to a jammed state, perturb, repeat. Delta-continuation is its principled cousin, so build that first and compare.

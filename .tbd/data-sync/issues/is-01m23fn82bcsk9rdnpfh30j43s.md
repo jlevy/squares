@@ -5,11 +5,11 @@ title: "Fix D-489: corner-dual salvage screen refuses any mass-n source"
 kind: bug
 status: open
 priority: 2
-version: 2
+version: 3
 labels: []
 dependencies: []
 created_at: 2026-09-09T16:22:47.115Z
-updated_at: 2026-09-10T04:15:00.467Z
+updated_at: 2026-10-13T00:55:46.589Z
 ---
 D-489. `devtools/screen_corner_dual_salvage.py:_source_receipt` requires the source
 family's `verify_ceiling` receipt to carry `failures == ["K3 total weight at least n"]`
@@ -59,3 +59,5 @@ Register entry: D-489 in `packing/defects.yaml`.
 ## Notes
 
 PR139 final review corrected the D489 inference and annotated exp137/138 without changing their exact negative verdicts. Guard repair remains a prerequisite before CLI reuse on mass-eleven sources. Admission must preserve all geometry/net/symmetry/depth conditions and reject unrelated failures; blindly accepting any failure list is not authorized by deletion inheritance. Larger source mass alone need not yield a larger survivor after geometry changes. No new target run in finalization.
+
+2026-10-13 owner decision: s(11) is settled by T-060. Do not re-run exp-137/138 on the mass-eleven family: that n = 11 lower-bound measurement is obsolete. The live part is the D-489 admission-predicate fix with its regression test and source-total reporting.

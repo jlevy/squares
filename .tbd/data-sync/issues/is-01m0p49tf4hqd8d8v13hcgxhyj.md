@@ -5,8 +5,8 @@ title: "meter: pair-tests as the budget currency"
 kind: task
 status: open
 priority: 2
-version: 9
-spec_path: docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
+version: 11
+spec_path: docs/project/specs/paused/plan-2026-08-22-minimal-packing-toolkit.md
 labels: []
 dependencies:
   - type: blocks
@@ -15,7 +15,7 @@ parent_id: is-01m0p49s01h862tq6wp0dd085c
 child_order_hints:
   - is-01m0wa24fag1y7x34bs3qs6s76
 created_at: 2026-08-23T01:38:28.964Z
-updated_at: 2026-10-10T22:47:57.578Z
+updated_at: 2026-10-12T23:52:16.332Z
 ---
 Review R-10. Thread a pair-test counter through the pipeline and have sqsearch emit it. Switch budgets, saturation thresholds and every proposer comparison to pair-tests (tiers S/M/L = 1e9/1e11/1e13); report wall clock alongside as a courtesy. Necessary as soon as proposers with different move semantics are compared. Update campaign/README.md's metric vector and accept rule to match.
 

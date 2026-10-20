@@ -5,15 +5,15 @@ title: "Overnight chunk: convex corner-clip domain predicate and the n=11 octago
 kind: task
 status: closed
 priority: 1
-version: 6
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+version: 7
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - research
   - n11
 dependencies: []
 parent_id: is-01m2exznj4k1zyz1rczby8ch2k
 created_at: 2026-09-20T06:59:52.124Z
-updated_at: 2026-09-20T12:50:42.872Z
+updated_at: 2026-10-13T00:55:35.738Z
 closed_at: 2026-09-20T12:50:42.871Z
 close_reason: Closed by the overnight loop closeout in Sessions 144 and 145; dispositions on agenda-040
 resolution: null

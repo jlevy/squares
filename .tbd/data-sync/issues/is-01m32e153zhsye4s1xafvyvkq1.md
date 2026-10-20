@@ -3,14 +3,18 @@ type: is
 id: is-01m32e153zhsye4s1xafvyvkq1
 title: "attic/ is gitignored: nothing is retained until copied under packing/resources/web/"
 kind: task
-status: open
+status: closed
 priority: 2
-version: 1
+version: 2
 labels: []
 dependencies: []
 parent_id: is-01m32dt0p76c4bvp3amxtmyt2p
 created_at: 2026-09-21T16:50:47.551Z
-updated_at: 2026-09-21T16:50:47.551Z
+updated_at: 2026-10-13T00:54:38.011Z
+closed_at: 2026-10-13T00:54:38.011Z
+close_reason: "Completed: the artifact is retained under packing/resources/web/ with both retention limits stated in its README (8163b6b55)."
+resolution: null
+duplicate_of: null
 ---
 .gitignore:33 excludes attic/. The Kleddamag clone at attic/17-squares-certified-bound is invisible to git and to every gate, and will not survive this container.
 

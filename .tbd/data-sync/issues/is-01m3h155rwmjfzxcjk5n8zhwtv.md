@@ -5,8 +5,8 @@ title: "BC-392: planning block after s(17) > 4.640020 - the overnight queue"
 kind: task
 status: closed
 priority: 0
-version: 3
-spec_path: docs/project/specs/active/plan-2026-09-27-after-4640020-overnight.md
+version: 4
+spec_path: docs/project/specs/archive/plan-2026-09-27-after-4640020-overnight.md
 delegate: claude-code@vm
 labels:
   - agenda-042
@@ -14,7 +14,7 @@ dependencies: []
 hold: null
 hold_until: null
 created_at: 2026-09-27T08:54:24.283Z
-updated_at: 2026-10-05T05:35:29.792Z
+updated_at: 2026-10-12T23:50:12.333Z
 started_at: 2026-10-05T05:34:32.990Z
 closed_at: 2026-10-05T05:35:29.792Z
 close_reason: BC-392 is complete in packing/campaign/ledger.md, and its plan docs/project/specs/active/plan-2026-09-27-after-4640020-overnight.md exists.

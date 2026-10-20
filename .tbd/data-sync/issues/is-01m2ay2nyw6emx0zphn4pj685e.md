@@ -5,8 +5,8 @@ title: Keep PR156 runner-stack usage current through merge
 kind: task
 status: closed
 priority: 1
-version: 13
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+version: 15
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 delegate: root accounting lane
 labels:
   - n11
@@ -20,7 +20,7 @@ dependencies:
     target: is-01m2ett207c0f76hc55gp435wz
 parent_id: is-01m26c1jahzgfckegz7fp9wcq7
 created_at: 2026-09-12T13:49:28.411Z
-updated_at: 2026-10-06T08:36:09.728Z
+updated_at: 2026-10-13T00:56:44.725Z
 closed_at: 2026-10-06T08:36:09.728Z
 close_reason: "Done: PR #156 (merged 2026-09-14) leads its body with 'What this branch cost', native subtotal through 2026-09-13 22:29 UTC and the unrun-target row, which is this bead's re-scoped ask (the #156 cost section through merge)."
 resolution: null

@@ -5,14 +5,14 @@ title: Basin-entry summary omitted emitted pair-test work
 kind: bug
 status: closed
 priority: 1
-version: 3
-spec_path: docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
+version: 4
+spec_path: docs/project/specs/paused/plan-2026-08-22-minimal-packing-toolkit.md
 delegate: codex-root
 labels: []
 dependencies: []
 parent_id: is-01m0pqg2mnmsmv8250d0rw25kb
 created_at: 2026-08-25T10:33:29.478Z
-updated_at: 2026-10-10T22:47:44.983Z
+updated_at: 2026-10-12T23:51:05.613Z
 closed_at: 2026-08-25T10:52:13.445Z
 close_reason: Fixed and regression-checked in pushed checkpoint a9330d6; the 99.08-second normal gate passes all 31 steps and 62 mutation controls.
 resolution: null

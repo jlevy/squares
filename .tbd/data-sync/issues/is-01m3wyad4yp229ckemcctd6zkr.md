@@ -5,17 +5,15 @@ title: "Import wand125: s(77) = 9 (#279)"
 kind: task
 status: closed
 priority: 1
-version: 10
+version: 11
 spec_path: docs/project/specs/active/plan-2026-10-01-result-import-first-application.md
 labels:
   - packing
   - result-import
-dependencies:
-  - type: blocks
-    target: is-01m3yrzkz80qd1wv5sjr0kkkv0
+dependencies: []
 parent_id: is-01m3yrdxte02c7bnygkke34ct4
 created_at: 2026-10-01T23:55:43.131Z
-updated_at: 2026-10-04T06:33:58.867Z
+updated_at: 2026-10-15T19:58:57.574Z
 closed_at: 2026-10-04T06:33:58.867Z
 close_reason: "Done on origin/main e5a48b310: T-067 s(77)=9 (and s(78)=9) V3/C3 (E-n077-wand125-mixed-cover-zmx2-replay, --pair-points d4/full receipts and controls); PR #298 merged. #279 replied and closed 2026-10-03T18:48Z. zm_mixed second method is think-mx3k's, beyond V3/C3."
 resolution: null

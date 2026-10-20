@@ -5,8 +5,8 @@ title: Return the verified-upper-bound corpus check to the fast lane
 kind: bug
 status: closed
 priority: 1
-version: 8
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+version: 9
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - ci
 dependencies:
@@ -14,7 +14,7 @@ dependencies:
     target: is-01m2ad9avdatjwfznq7zwqjget
 parent_id: is-01m2ad9avdatjwfznq7zwqjget
 created_at: 2026-09-12T12:08:05.528Z
-updated_at: 2026-09-12T15:52:10.315Z
+updated_at: 2026-10-13T00:56:42.674Z
 closed_at: 2026-09-12T15:51:57.594Z
 close_reason: "PR #149 exact head 4d00ab68 passed focused, unrestricted pre-push, unrestricted full checkpoint, and all hosted checks; its body records all valid and invalid costs and the PR is mergeable over PR #148."
 resolution: null

@@ -5,7 +5,7 @@ title: "Check out evand/square-packing in full into attic/ and examine search/re
 kind: task
 status: closed
 priority: 1
-version: 7
+version: 8
 labels:
   - regularization
 dependencies:
@@ -13,7 +13,7 @@ dependencies:
     target: is-01m4mdbq6bhkv71fxeeckawsbt
 parent_id: is-01m4mdb1j4atn6yvmtcf93eqmt
 created_at: 2026-10-11T02:40:57.526Z
-updated_at: 2026-10-11T18:41:51.848Z
+updated_at: 2026-10-11T20:06:24.218Z
 ---
 Owner request 2026-10-11 (epic think-cdud, item 4): clone https://github.com/evand/square-packing in full into attic/evand-square-packing (tbd shortcut checkout-third-party-repo; read-only), at main's head, and record the commit. Examine search/regularize (https://github.com/evand/square-packing/tree/main/search/regularize) and what it calls (exactsolve, the path test samepacking.py, reg.py, atlas.py, verify_cert.py and verify_cert2.py, the lists and REGULARIZE.md): inputs, the LP translation, symmetry and coincident-face imposition, angle grouping, the conservative and fewest variants, the level classification and its path test, the exact certificate it writes, its dependencies and licence (MIT at ea1a2f2), and its run cost per count. Compare with this project's regularize_axis_components/2 (devtools/regularize_axis_components.py, atlas/known-best/regularized/): what each guarantees (same side, exact verification, non-regression), what each refuses, and which drawings each would change. Output: a written assessment in docs/project/ (research brief or review) with a recommended adaptation plan for the stacked regularization PR, the soundness obligations the adaptation must meet (exact feasibility at the stated side; same-packing identity basis recorded in the register's regularizations field), and the open owner questions.
 

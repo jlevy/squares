@@ -5,8 +5,8 @@ title: Diagnose and repair PR156 exact-head required-suite failure
 kind: bug
 status: closed
 priority: 1
-version: 5
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+version: 7
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - n11
   - ci
@@ -15,7 +15,7 @@ dependencies:
     target: is-01m2e0e4ct972w6eapcr8c3xjz
 parent_id: is-01m2e0e4ct972w6eapcr8c3xjz
 created_at: 2026-09-13T21:13:24.640Z
-updated_at: 2026-09-13T23:14:59.745Z
+updated_at: 2026-10-13T00:58:21.335Z
 closed_at: 2026-09-13T23:14:59.743Z
 close_reason: Measured eight full-read adversarial nodes, moved them to the declared slow lane without changing the 275-second suite budget, and published timing patch 2f8925b2. Final hosted PR156 required suite, packing aggregate and all current-head checks passed (suite job 4m27s); the older 9c 436.36s budget failure is remediated. Local macOS process-group gate portability remains separately tracked as think-hsq6.
 resolution: null

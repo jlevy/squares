@@ -5,8 +5,8 @@ title: Quantify Trump's isolation radius and minimal rigidity supports
 kind: task
 status: open
 priority: 2
-version: 11
-spec_path: explorations/packing/campaign/hypotheses/H-022-trump-local-geometry.md
+version: 12
+spec_path: packing/campaign/hypotheses/H-022-trump-local-geometry.md
 delegate: codex-root
 labels:
   - packing
@@ -22,7 +22,7 @@ child_order_hints:
   - is-01m0wbd5gxv2nf80fmz816wptv
   - is-01m0wbd5hmx4q8gc0b4y3dps14
 created_at: 2026-08-24T09:02:06.804Z
-updated_at: 2026-08-25T11:39:48.159Z
+updated_at: 2026-10-12T23:40:43.201Z
 ---
 Exp-013 proves qualitative local isolation and strict local side optimality by exact zero-cone certificates plus a finite-branch subsequence lemma. Extract the next quantitative structure: (1) a certified explicit neighborhood radius in a declared pose norm and open angle chart over which the active finite-branch argument remains valid; (2) inclusion-minimal wall/contact row subsets or positive-stress supports that still force each cone to zero; (3) the interval of container-side perturbations over which those supports persist. Retain exact/interval certificates and timings. Do not generalize to global optimality; a different distant contact class remains outside scope.
 

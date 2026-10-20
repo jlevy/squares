@@ -5,8 +5,8 @@ title: Bind calibration worker settings to the seeded receipt and readback
 kind: bug
 status: closed
 priority: 1
-version: 7
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+version: 9
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 delegate: Sol xhigh implementation or source-distinct review; root integration
 labels:
   - n11
@@ -16,7 +16,7 @@ dependencies:
     target: is-01m2app5e71qnp9z5vfp9vppbp
 parent_id: is-01m2app5e71qnp9z5vfp9vppbp
 created_at: 2026-09-12T14:49:52.898Z
-updated_at: 2026-09-12T15:49:30.708Z
+updated_at: 2026-10-13T00:56:54.557Z
 closed_at: 2026-09-12T15:49:30.708Z
 close_reason: Source-distinct integrated review at d924a4bf accepted the original CAL-1 terminal-route repair and CAL-7 invocation-identity repair; retained review records exact scope and no scientific target ran.
 resolution: null

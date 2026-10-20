@@ -3,9 +3,9 @@ type: is
 id: is-01m45f4dj0p0t4bsxjnxcz5whv
 title: "Address PR #350 Review B (round 1): n17 branch-and-bound native kernel (wand125)"
 kind: chore
-status: open
+status: closed
 priority: 2
-version: 7
+version: 8
 spec_path: docs/project/reviews/review-2026-10-06-n17-w3-consolidation.md
 labels: []
 dependencies: []
@@ -17,6 +17,10 @@ child_order_hints:
   - is-01m45f4ngca78jxmqx0n5c05vq
   - is-01m45f4qcm18091q74s6ppxme0
 created_at: 2026-10-05T07:23:28.191Z
-updated_at: 2026-10-07T06:23:10.673Z
+updated_at: 2026-10-13T00:54:41.692Z
+closed_at: 2026-10-13T00:54:41.691Z
+close_reason: "Completed: PR #350 merged on 2026-10-06 and every Review B finding child is closed."
+resolution: null
+duplicate_of: null
 ---
 Review B (senior, round 1) on jlevy/squares#350 (wand125 / Hiroaki Hosono, optional native kernel for the n17 sub-pattern branch and bound; leaf on #347, not in stack 357), pinned to head 9179aab7d: https://github.com/jlevy/squares/pull/350#pullrequestreview-5411026984. Verdict: code sound and well tested; not ready to merge until B1 and B2 are settled and CI is green. Findings, one child each: B1 (High) based on a feature branch but in no formal stack; B2 (Medium) body asserts a comparison the author retracted; B3 (Medium) body lacks the repository's PR sections and Validation predates the rebase; B4 (Low) certificate-run claim broader than the code; B5 (Low) inconsistent fallback conditions. CI: think-umlx (latest run 37275173288 cancelled). The code is wand125's; body and code fixes need the contributor or an authorized maintainer commit. Closes when every child is closed and the dispositions reply is posted.

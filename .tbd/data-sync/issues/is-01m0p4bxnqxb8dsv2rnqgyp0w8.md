@@ -5,8 +5,8 @@ title: "H-010: reproduce the Stromquist falsifier triple"
 kind: task
 status: closed
 priority: 1
-version: 17
-spec_path: docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
+version: 18
+spec_path: docs/project/specs/paused/plan-2026-08-22-minimal-packing-toolkit.md
 labels: []
 dependencies: []
 parent_id: is-01m0p4bxca8pjaj4v9jwww1kvg
@@ -20,7 +20,7 @@ child_order_hints:
   - is-01m0srsphtekzmgp8vrs05v8n5
   - is-01m0srspsyjecv6bdatrx8r5bx
 created_at: 2026-08-23T01:39:37.782Z
-updated_at: 2026-10-10T22:47:36.085Z
+updated_at: 2026-10-12T23:50:53.709Z
 closed_at: 2026-10-06T08:26:25.561Z
 close_reason: "Done: exp-016 terminally rejected H-010's printed Figure 14 set (bead's own close reason, 2026-08-27). The repair is registered as T-010, and its remaining children are now closed."
 resolution: null

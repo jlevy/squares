@@ -3,14 +3,18 @@ type: is
 id: is-01m3q3346jb4mfsg5c35w99eyw
 title: Replay and reconcile all 12028 T-059 rows
 kind: task
-status: open
+status: closed
 priority: 2
-version: 6
+version: 7
 labels: []
 dependencies: []
 parent_id: is-01m3yrzkz80qd1wv5sjr0kkkv0
 created_at: 2026-09-29T17:23:40.881Z
-updated_at: 2026-10-02T17:01:22.247Z
+updated_at: 2026-10-12T23:38:30.622Z
+closed_at: 2026-10-12T23:38:30.614Z
+close_reason: "Delivered: complete T-059 row census, 12,028 of 12,028 rows equal (COMPLETE_ROW_EQUALITY), T-059 raised to V3/C3; merged to main by 48a840593 on 2026-10-02."
+resolution: null
+duplicate_of: null
 ---
 After strict receipt admission and measured cost estimate, replay all row minima and witnesses with exact unique 0..12027 census. Preserve incomplete output honestly and do not equate this with the separate global counting proof.
 

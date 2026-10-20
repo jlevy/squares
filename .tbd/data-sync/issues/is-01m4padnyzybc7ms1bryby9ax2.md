@@ -1,0 +1,51 @@
+---
+type: is
+id: is-01m4padnyzybc7ms1bryby9ax2
+title: "Import Robert Barnett: s(146) and s(261), refinements of Ryan Xu's packings (#505)"
+kind: task
+status: closed
+priority: 1
+version: 5
+delegate: claude-code@vm
+labels:
+  - result-import
+dependencies: []
+parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
+hold: null
+hold_until: null
+created_at: 2026-10-11T20:28:14.174Z
+updated_at: 2026-10-12T23:39:14.436Z
+started_at: 2026-10-11T20:28:26.363Z
+closed_at: 2026-10-12T23:39:14.436Z
+close_reason: "Completed: Barnett #505 imported, replayed, reviewed (review-2026-10-11-upper-bound-imports-505-501.md), registered as T-150 V3/C3 and adopted by PR #518 (merged 2026-10-12); final reply posted and issue closed."
+resolution: null
+duplicate_of: null
+---
+https://github.com/jlevy/squares/issues/505 (2026-10-11T14:24Z). RobertBarnettProjects/square-packing-research 2573ff51c4b160c952bbb2d1c399e7430d9f9ae2 certificates/n146.cert, n261.cert (Evan Daniel's format), and the issue's attachment square-packing-results.zip. 146 below T-146's regularized n146 by 7.35e-8; 261 below ry-xu #432 by 5.68e-11. Stages 1-4 replay through devtools.upper_bound_reports.
+
+## Notes
+
+2026-10-11 lane D (intake W1 stages 1, 2 and the stage 4 replay; worktree branch worktree-agent-aea6e45c2fb8e7a4d, base main 3a5a91a90, commit 835dd7004 with both packets, the sqcert adapter and tests; not pushed). Register plans: scratchpad laneD/register-plan-barnett.yaml and register-plan-dostashev.yaml, printed by upper_bound_reports register-plan; no shared record edited.
+
+PIN: RobertBarnettProjects/square-packing-research 2573ff51c4b160c952bbb2d1c399e7430d9f9ae2 (tree 07451888, committed 2026-10-11T13:52:00Z), the issue's pin, read 20:35Z. main is now 52cf1cc (14:44:32Z): fa1322a, 9947091 and 52cf1cc add diagrams, move the historical certificates into superseded/ and add earlier 10 October refinements there (70, 103, 123, 129, 146, 295); certificates/n146.cert and n261.cert are byte-identical at the head (blobs 720b63b7, 71fe0491). No licence file at the pin or the head: derived-only custody, as Deleeuw's packet. Issue attachment square-packing-results.zip fetched (37,787 bytes, SHA-256 49aaa81c... as stated): n146.cert and n261.cert byte-identical to the pin, plus results/submission.json (947d314b...), the pin's results/review-2026-10-11.json filtered to the two counts; read, not retained.
+PACKET: packing/resources/web/barnett-refinements-2026-10-11 (11 files pinned only, 502,546 bytes; 7 derived facts facts/n-NNN.yaml.gz written by upper_bound_reports derive --checkout at the pin; acquire_source --check passes). Format: Evan Daniel's (evand-cert adapter); no new adapter needed.
+
+CLAIMS IN THE RELEASE (README at the pin): current 146 and 261 (the issue's) and 2043 (beyond the corpus, refinement of Ellsworth/Dyachkov's packing; not requested, not compared: the record's beyond-horizon rows reach 379); historical, marked superseded and excluded from the request: 70, 103, 123, 237, 295. All seven in-horizon certificates are declared, compared and replayed; requested = 146, 261.
+
+CLAIM MAP (acquisition/claims.json, exact, read at main 3a5a91a90; houses and pending sides rebuilt from their own packets):
+- 146: exact side 116279649124311595126849961042493265136092670741573762928668277775998122712863472766532671969348798419026610394581005669/9240437194455113887096299456817024243377978045957194209468060456305894240222303442118770000000000000000000000000000000 (12.58378220395104620346...). Below the case ceiling (Ryan Xu T-125, 5033512911005033512911/4e20) by 7.356154e-08; below T-146 (Evan Daniel's regularization, 6291891138707538440974154877957/5e29) by 7.346403e-08, the issue's figure. Smallest. A genuine improvement, about 5,800 times the 1.26e-11 dilation in Ryan Xu's ceiling; not a rounded-display effect.
+- 261: exact side 281511998443714605777671262552678001053511713995864784318453182156213791529093472577894719178723409384395264262601/16878452773388004800535351238155816857400040173477095354881922318666694517637251382500000000000000000000000000000 (16.67877987534320774670...). Below the case ceiling (T-125, 83393899377083393899377/5e21 = Ryan Xu's printed 16.6787798754 dilated by exactly 1 + 1e-12, a 1.67e-11 padding) by 7.347103e-11, and below the undilated 16.6787798754 by 5.68e-11 (the issue's figure). No pending entry at 261 (T-146's 261 side is above the case and not registered). Smallest. Below the exact ceiling and below everything #432 prints, so not only padding removal; the margin is under one unit of #432's tenth decimal, so whether it beats Ryan Xu's unpadded numerical optimum (never published exactly) is not decidable from the record.
+- Historical (not requested): each below its case ceiling (70 by 4.01e-11, 103 by 1.53e-11, 123 by 6.79e-11, 237 by 5.33e-06, 295 by 5.63e-10) and above a pending entry: T-146 smallest at 70, 103, 123, 295 (T-137 and T-138 also below at 70 and 103); T-140 smallest at 237 (T-134 #476 only 1.98e-10 below Barnett's 237, which was committed 2026-10-09T12:49Z, before #476). No action: they stay in the packet, as the author asks.
+Other 2026-10-11 issues (#500, #501, #503, #504, #506) share no count. T-138 (#470) has no 146/261.
+ARRANGEMENT DIAGNOSTIC (not retained, decides nothing; devtools.check_half_angle_area.arrangement_gap called unchanged from a scratch driver on the derived facts): 261 against Ryan Xu's certificate matches square for square at the identity symmetry, largest centre move 9.15e-06, largest orientation sine 2.44e-06, none moved beyond 1e-3: Ryan Xu's packing, slightly moved. 146 against Ryan Xu's certificate matches at the identity, largest move 5.02e-02 (51 squares beyond 1e-3, 31 beyond 1e-2, none beyond 0.1; 24 turned by a sine above 1e-6, at most 2.09e-02); against T-146's regularized view largest move 0.122 (3 beyond 0.1). So 146 lies nearer Ryan Xu's certificate than Evan Daniel's view, and moves more than a precision refinement. The third-route review lane owns the recorded measurement (CREDITED_READERS has no entry for #505).
+Register action (stage 1 table): a bound the record does not hold, one new upper-bound entry at 146 and 261 (not a simplification: both sides are strictly below every held value). Credit as a refinement of a credited packing: Ryan Xu keeps the packing (T-125), Robert Barnett credited for the refinement and certificates, Evan Daniel's regularization (T-146) named at 146 as the source does; as T-137 did for #483. Proposed bibliography: lineage credits-project, credit "Barnett after Xu, Daniel" (Daniel for the regularization compared and the checkers used; the source does not say it builds on this project's method). OpenAI Codex assistance disclosed (solver, certificate/checker code, source review, preparation).
+
+PRICE: no checker beyond the importer (Evan Daniel's format, evand-cert adapter; the source prices its four checks at 0.86 s and 1.66 s). Measured: certify 21 jobs in about 23 min wall on one worker at load 9-25.
+REPLAY (stage 4, receipts/exact-certification.json.xz): certify --workers 1, 21:04:58-21:28:15Z (23 min 17 s): all 7 positives pass both routes, all 14 controls refused, routes agree on every margin. 146: least wall 3.93e-14, least pair gap 1.21e-16; 261: 4.69e-14 and 1.21e-16 (both match the author's receipts); historical five 9.39e-12 to 1.20e-11. 21 jobs, 786,102 pair decisions, 530.82 route CPU s, 1,329.06 job wall s, longest 224.09 s (295 duplicate control, under load). check --replay (serial) 21:39:13-22:06:28Z, 27 min 15 s, exit 0: "7 certificates and 21 jobs admitted", every fresh row equal to the retained one apart from timing. 2043 not run: extrapolated from the n = 70 per-pair rate, about 33 CPU min per job and about 1.7 CPU-hours for its three jobs (over the 30-minute single-job limit; not measured), and it needs a derived fact first; owner's call whether a count beyond the tracked rows is wanted at all. Neither the author's checkers nor Evan Daniel's verify_cert.py/verify_cert2.py ran here; third route not run (separate review lane).
+VALIDATION: tests/test_upper_bound_reports.py 183 passed; ruff and basedpyright clean on the touched files; packing-validate --records 49 of 49 named steps passed with the files staged (293.9 s at load ~25); acquire_source --check passes.
+REGISTER-PLAN: printed, nothing shared edited. Its notes call the five historical certificates "each an import of its own"; the author excludes them from the request and each is beaten by a pending entry, so the records lane should say they stay in the packet and are no import of their own.
+ATTACHMENT AND CUSTODY OPEN POINT: the zip is not retained (no licence; non-Git source); its digest and contents are recorded in the packet README.
+
+## Draft acknowledgement (not posted; the owner posts it)
+
+Thank you, @RobertBarnettProjects. We pinned your repository at 2573ff51c4b160c952bbb2d1c399e7430d9f9ae2, the revision the issue names; certificates/n146.cert and certificates/n261.cert have the SHA-256 digests you list, and the two copies in square-packing-results.zip are byte-identical to them. The repository has no licence, so the record keeps digests and exact facts derived from the certificates rather than the files. Against the record and the other pending reports, both exact sides are the smallest known: at 146 by 7.35e-8 below Evan Daniel's regularized certificate of Ryan Xu's packing and 7.36e-8 below the case's ceiling, Ryan Xu's certificate; at 261 by 7.35e-11 below Ryan Xu's certificate, which is his printed 16.6787798754 dilated by 1 + 1e-12, and so by 5.68e-11 below that printed side. We also compared the five certificates your README marks superseded (70, 103, 123, 237, 295): each is below its case's ceiling and above a later pending certificate, and none will be registered unless you ask. The 2043 certificate lies beyond the cases the record covers. Next: both of this project's exact routes replay the certificates with controls, and an independent review reads the replay; your own checkers and Evan Daniel's are recorded as your report. Two questions for the credit: at 146, did the refinement start from Ryan Xu's certificate or from Evan Daniel's regularized one? And may the record name Evan Daniel's verify_cert.py and verify_cert2.py as the checkers you used?

@@ -5,8 +5,8 @@ title: Independently replay retained n17 rational upper witness
 kind: task
 status: closed
 priority: 1
-version: 5
-spec_path: docs/project/specs/active/plan-2026-10-01-post-optimality-w3-session.md
+version: 6
+spec_path: docs/project/reviews/review-2026-10-06-n17-w3-consolidation.md
 delegate: claude-code@spud10.local
 labels: []
 dependencies:
@@ -18,7 +18,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-01T10:37:15.344Z
-updated_at: 2026-10-01T10:54:29.193Z
+updated_at: 2026-10-12T23:40:14.524Z
 started_at: 2026-10-01T10:40:53.964Z
 closed_at: 2026-10-01T10:54:29.193Z
 close_reason: Session165 retained W3/W10 decision and accepted exp235/H253 after exact controlled replay and independent Astra max output review. D510 metadata contract fixed; 230 retained rational-corner witnesses unaffected. Frontier admission separately think-vdmf; next math think-j516.

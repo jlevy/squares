@@ -5,8 +5,8 @@ title: Reconcile the BC329 runner source lock with the published T-026 claim
 kind: bug
 status: closed
 priority: 1
-version: 7
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+version: 9
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - n11
   - tooling
@@ -19,7 +19,7 @@ dependencies:
     target: is-01m2anzgc2aqn6vzx29ps3rpn2
 parent_id: is-01m26c1jahzgfckegz7fp9wcq7
 created_at: 2026-09-12T09:46:48.180Z
-updated_at: 2026-09-12T16:11:31.508Z
+updated_at: 2026-10-13T00:56:32.442Z
 closed_at: 2026-09-12T16:11:31.507Z
 close_reason: Implemented, integrated, independently reviewed, and published on the clean PR 156 stack by f1e397cd. Their remaining follow-up risks are separately tracked under calibration, parent preflight, partial-direction integration, and admission beads; no BC329 scientific target ran.
 resolution: null

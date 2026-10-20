@@ -5,8 +5,8 @@ title: Audit McClenagan Section 3 inequality contradiction
 kind: bug
 status: closed
 priority: 1
-version: 5
-spec_path: explorations/packing/campaign/hypotheses/H-037-asymptotic-waste-exponent.md
+version: 6
+spec_path: packing/campaign/hypotheses/H-037-asymptotic-waste-exponent.md
 delegate: codex-root
 labels:
   - packing
@@ -18,7 +18,7 @@ child_order_hints:
   - is-01m0wgxb5qhfdj16gzap3m08cy
   - is-01m0whda395zbm3fnc98r7c849
 created_at: 2026-08-25T12:17:36.927Z
-updated_at: 2026-08-25T13:47:58.164Z
+updated_at: 2026-10-12T23:41:03.157Z
 closed_at: 2026-08-25T13:47:58.163Z
 close_reason: "Two independent audits repair the local Section 3 sign step: coordinates give d>d1+d2>DB=1 and exact equations give 0<theta'<theta. D-304 is fixed locally; the full theorem and H-035 finite transfer remain unaudited."
 resolution: null

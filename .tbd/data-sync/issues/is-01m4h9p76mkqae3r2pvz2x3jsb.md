@@ -3,9 +3,9 @@ type: is
 id: is-01m4h9p76mkqae3r2pvz2x3jsb
 title: Read evand/square-packing past ed01e0d (e059b1e, 268af52, 1718a58)
 kind: task
-status: in_progress
+status: closed
 priority: 3
-version: 4
+version: 5
 delegate: claude-code@vm
 labels:
   - result-import
@@ -13,8 +13,12 @@ dependencies: []
 hold: null
 hold_until: null
 created_at: 2026-10-09T21:39:13.236Z
-updated_at: 2026-10-10T14:51:11.741Z
+updated_at: 2026-10-12T23:39:24.516Z
 started_at: 2026-10-10T10:18:42.198Z
+closed_at: 2026-10-12T23:39:24.515Z
+close_reason: "Delivered: evand reads past ed01e0d recorded; T-139 registered at V3/C3 (22143847e) and adopted as n = 126's house (da8f50a36); intake-watch.yaml releases think-ilwc's hold."
+resolution: null
+duplicate_of: null
 ---
 e059b1e exactsolve slack-pair fix; 268af52 certificates of the Ryan Xu and SQUISH ph14/ph10 n = 126 packings reconstructed from a picture; 1718a58 site. Advance the evand intake-watch row with a dated note.
 

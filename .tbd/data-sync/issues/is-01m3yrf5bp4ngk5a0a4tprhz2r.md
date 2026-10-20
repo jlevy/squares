@@ -5,18 +5,16 @@ title: "T-046 leftovers: replay the 28 September rectangle certificates n = 51, 
 kind: task
 status: closed
 priority: 2
-version: 8
+version: 9
 delegate: claude-code@vm
 labels:
   - result-import
-dependencies:
-  - type: blocks
-    target: is-01m3yrzkz80qd1wv5sjr0kkkv0
+dependencies: []
 parent_id: is-01m3yrdxte02c7bnygkke34ct4
 hold: null
 hold_until: null
 created_at: 2026-10-02T16:51:56.405Z
-updated_at: 2026-10-06T15:55:39.727Z
+updated_at: 2026-10-15T19:58:57.629Z
 started_at: 2026-10-06T07:53:22.392Z
 closed_at: 2026-10-06T15:55:39.726Z
 close_reason: "Done: recorded by lane R5 (T-070, T-046 next_rung) / lane R3 (E-k2m4-evand-bentz4-lean-build) on 6 October, merged in #382"

@@ -5,8 +5,8 @@ title: Merge the n11 stack with a merge commit and close out main
 kind: task
 status: closed
 priority: 1
-version: 5
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+version: 6
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - n11
   - pr
@@ -16,7 +16,7 @@ dependencies:
     target: is-01m2ettwze138wbhg772ekt1d4
 parent_id: is-01m2etr75jfh3t3ry7kj1ccqrb
 created_at: 2026-09-14T02:09:32.127Z
-updated_at: 2026-09-14T06:22:58.380Z
+updated_at: 2026-10-13T00:58:46.978Z
 closed_at: 2026-09-14T06:22:58.379Z
 close_reason: "Stack merged at 2f8865b6 and #157 at 620e4731 on 2026-09-14; main tree equals checkpoint tree ab823fe4; main Packing validation 34805967105 and 34806011392 and Certificate page 34805967169 and 34806011400 all success; post-merge closeout section appended to all eight PR descriptions; #169 closed, merged branches deleted, #167 retargeted to main and green."
 resolution: null

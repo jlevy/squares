@@ -5,13 +5,13 @@ title: Integrate independently replayed n17 rational upper into frontier and sou
 kind: task
 status: closed
 priority: 1
-version: 3
-spec_path: docs/project/specs/active/plan-2026-10-01-post-optimality-w3-session.md
+version: 4
+spec_path: docs/project/reviews/review-2026-10-06-n17-w3-consolidation.md
 labels: []
 dependencies: []
 parent_id: is-01m3v9vq36ykk2jdzce75req44
 created_at: 2026-10-01T10:49:29.709Z
-updated_at: 2026-10-01T14:27:21.895Z
+updated_at: 2026-10-12T23:40:14.524Z
 closed_at: 2026-10-01T14:27:21.895Z
 close_reason: Accepted exact n17 endpoint evidence is admitted to frontier; H260 complete closed-assignment D4 census passes independent mathematical, code and full output review. Scientific scope complete in 0e5bfaa51; publication-stamp and final hosted CI tracked separately under think-zypq/think-je3v.
 resolution: null

@@ -5,15 +5,15 @@ title: "session-139 overnight: H-216, F1 reader, Route S exp-161"
 kind: task
 status: closed
 priority: 0
-version: 3
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+version: 4
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - n11
   - research
 dependencies: []
 parent_id: is-01m2exznj4k1zyz1rczby8ch2k
 created_at: 2026-09-18T05:34:53.998Z
-updated_at: 2026-09-18T18:22:38.516Z
+updated_at: 2026-10-13T00:55:35.738Z
 closed_at: 2026-09-18T18:22:38.516Z
 close_reason: session-139 stopped at 18:17:33Z; exp-161 encode-only timed out unresolved; T-027 retained; T-028 not landed
 resolution: null

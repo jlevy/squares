@@ -3,9 +3,9 @@ type: is
 id: is-01m225kg4dcxk61r0qzysnavwf
 title: Add a best-known start and a re-randomising random start with a visible seed
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 3
+version: 4
 spec_path: packing/campaign/explorations/X-025-hunting-by-hand-and-the-move-set-threads.md
 labels:
   - packing
@@ -14,7 +14,11 @@ dependencies:
     target: is-01m225psj2z0sx407k1ma5a4sp
 parent_id: is-01m225hw89vjsga1wnegrwnq5a
 created_at: 2026-09-09T04:07:49.644Z
-updated_at: 2026-09-09T04:09:44.650Z
+updated_at: 2026-10-13T00:54:42.674Z
+closed_at: 2026-10-13T00:54:42.674Z
+close_reason: "Duplicate of think-rdee: the package workbench owns the remaining best-known/re-randomising start work; the v2-transitions prototype page is retired. Consolidated per the owner's decision of 2026-10-13."
+resolution: duplicate
+duplicate_of: is-01m229amjwvykvfz1jhnjxdap9
 ---
 In flight in the v2-transitions prototype as of 2026-09-08.
 

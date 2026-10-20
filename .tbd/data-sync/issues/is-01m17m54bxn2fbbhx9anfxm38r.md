@@ -5,12 +5,12 @@ title: Benchmark and differential-test the schema validators
 kind: task
 status: closed
 priority: 0
-version: 2
-spec_path: docs/project/specs/active/plan-2026-08-29-gate-validation-speed.md
+version: 3
+spec_path: docs/project/specs/done/plan-2026-08-29-gate-validation-speed.md
 labels: []
 dependencies: []
 created_at: 2026-08-29T20:42:37.821Z
-updated_at: 2026-08-30T02:40:33.476Z
+updated_at: 2026-10-12T23:50:08.154Z
 closed_at: 2026-08-30T02:40:33.476Z
 close_reason: null
 resolution: null

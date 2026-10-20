@@ -5,14 +5,14 @@ title: Standardize time-sliced experiment-loop startup guidance
 kind: task
 status: closed
 priority: 2
-version: 6
-spec_path: docs/project/specs/active/plan-2026-08-26-overnight-constructive-enumeration.md
+version: 8
+spec_path: docs/project/specs/done/plan-2026-08-26-overnight-constructive-enumeration.md
 labels:
   - packing
 dependencies: []
 parent_id: is-01m0ypc5cd4z6ktb1vejj1td3n
 created_at: 2026-08-26T19:51:58.804Z
-updated_at: 2026-10-10T23:01:13.692Z
+updated_at: 2026-10-12T23:52:26.952Z
 closed_at: 2026-08-27T04:39:05.853Z
 close_reason: The standard startup guidance now requires a time-sliced plan, a roughly four-hour integration checkpoint by default, slices capped at 30 minutes with shorter phases encouraged, measured re-estimation, protected finalization, and independent sub-agent delegation. PR 45 is merged, so the parent hold is discharged.
 resolution: null

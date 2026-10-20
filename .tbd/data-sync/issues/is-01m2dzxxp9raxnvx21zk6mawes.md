@@ -5,8 +5,8 @@ title: "Run sheet: verify run-root bytes stay unchanged through retention"
 kind: task
 status: closed
 priority: 1
-version: 7
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+version: 8
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels:
   - n11
   - calibration
@@ -19,7 +19,7 @@ child_order_hints:
   - is-01m2e2tw14t5k03r87ssbpan0p
   - is-01m2e2zxfmfxgd5tb2zcbzn9rr
 created_at: 2026-09-13T18:19:32.936Z
-updated_at: 2026-09-14T02:25:12.192Z
+updated_at: 2026-10-13T00:57:45.876Z
 closed_at: 2026-09-14T02:25:12.192Z
 close_reason: Verifier blob cd17583c was accepted in docs/project/reviews/review-2026-09-13-n11-bc329-runset-verifier-r3-final.md (R2 refusals repaired, R3 ACCEPT, R4 staged-index control), is unchanged at 2f8925b2, and closed think-s4nx wired it into the run sheet. Evidence-commit OID and positive-run bytes are execution-time checks under think-pp3j.
 resolution: null

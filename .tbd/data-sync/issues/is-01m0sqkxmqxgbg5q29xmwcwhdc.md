@@ -5,13 +5,13 @@ title: Refresh active square-packing agenda after exact rounds 12 through 15
 kind: bug
 status: closed
 priority: 2
-version: 4
-spec_path: docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
+version: 6
+spec_path: docs/project/specs/paused/plan-2026-08-22-minimal-packing-toolkit.md
 labels: []
 dependencies: []
 parent_id: is-01m0p4bxnqxb8dsv2rnqgyp0w8
 created_at: 2026-08-24T11:13:46.134Z
-updated_at: 2026-10-10T22:48:10.350Z
+updated_at: 2026-10-12T23:52:26.607Z
 closed_at: 2026-08-24T11:28:42.619Z
 close_reason: Removed live cumulative effort totals from the campaign runbook in favor of the generated ledger; labeled active-plan metrics as a 2026-08-24 checkpoint; reconciled H-010 priority, synopsis round 15, 15 rounds/422 agent-minutes/24.0 wall-minutes, and the 40s strict/deep checkpoint. Schema, ledger, synopsis, README, Flowmark, count mutation, and diff checks pass.
 resolution: null

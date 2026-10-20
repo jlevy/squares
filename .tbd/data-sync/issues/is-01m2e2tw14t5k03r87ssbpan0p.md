@@ -5,13 +5,13 @@ title: "R3: snapshot must admit all coordinator-required top-level logs"
 kind: bug
 status: closed
 priority: 1
-version: 3
-spec_path: docs/project/specs/active/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
+version: 5
+spec_path: docs/project/specs/archive/plan-2026-09-10-n11-daytime-strategy-and-explainer.md
 labels: []
 dependencies: []
 parent_id: is-01m2dzxxp9raxnvx21zk6mawes
 created_at: 2026-09-13T19:10:18.646Z
-updated_at: 2026-09-13T19:32:08.530Z
+updated_at: 2026-10-13T00:58:05.888Z
 closed_at: 2026-09-13T19:32:08.517Z
 close_reason: "Integrated verifier repair 2ea77405 was independently accepted at exact verifier/test blobs: valid coordinator-shaped 22-file root passes, missing/extra files refuse, and status changes at check, digest, copy, and final boundaries refuse. Focused suite 15 passed. Actual positive-run bytes and evidence-commit OID remain separate operational gates; no profile/BC329 target ran."
 resolution: null
