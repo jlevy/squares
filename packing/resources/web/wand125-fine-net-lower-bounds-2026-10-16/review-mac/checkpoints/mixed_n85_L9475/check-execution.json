@@ -1,0 +1,34 @@
+{
+  "argv": [
+    "/usr/bin/time",
+    "-lp",
+    "-o",
+    "/Volumes/spud-ext1/agent-source/squares-fine-net-mac-haaq/first-subset/case-checkpoints/mixed_n85_L9475-20261019T130556-589663b9/check.time",
+    "/Users/levy/wrk/github/squares/packing/.venv/bin/python3",
+    "-m",
+    "devtools.sqverify_fast_census",
+    "--family",
+    "mixed",
+    "--binary",
+    "/Volumes/spud-ext1/agent-source/squares-fine-net-mac-haaq/sqverify-fast",
+    "--out",
+    "/Volumes/spud-ext1/agent-source/squares-fine-net-mac-haaq/first-subset",
+    "--only",
+    "mixed_n85_L9475",
+    "--packets",
+    "wand125-fine-net-lower-bounds-2026-10-16",
+    "--threads",
+    "2",
+    "--check"
+  ],
+  "finished_utc": "2026-10-19T13:17:57.524008+00:00",
+  "mode": "check",
+  "returncode": 0,
+  "started_utc": "2026-10-19T13:17:57.297610+00:00",
+  "timing": {
+    "cpu_seconds": 0.18,
+    "real": 0.19,
+    "sys": 0.02,
+    "user": 0.16
+  }
+}

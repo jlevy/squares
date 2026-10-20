@@ -194,8 +194,10 @@ hairline-bordered card per entry.
 Each card starts with an ordinary H3 in the theme’s text foreground, followed by the
 paper heading’s sans-base date.
 The next row holds smaller Results-style topic chips on the left and the fixed-width
-significance meter on the right, with its level and rationale available through the
-shared tooltip. The article follows.
+significance meter on the right, with the level’s short meaning in the News label rubric
+available through the shared tooltip.
+The source record retains the individual rationale.
+The article follows with compact, consistent title, date, tags and paragraph gaps.
 Homepage News and the archive share the component and CSS roles; topic chips retain
 shared fills, corners and leading at 85% of the note-size chip scale.
 Each card contains its actual article once, with about ten lines visible after the
@@ -210,7 +212,14 @@ Entry and legacy date fragments reveal the corresponding card.
 Topic chips and labels use the shared vocabulary defined below, preserving each
 registered result kind and its verification limits.
 Compact single-select and multi-select choosers share the homepage component, including
-typography, padding, selected states, hover and keyboard focus.
+typography, padding, hover transitions and visible keyboard focus.
+Each compact button owns its border so wrapped rows leave no frame around empty space.
+Topic controls use neutral gray when inactive, and their shared topic fill and a check
+when active, so selection does not rest on hue alone; an inactive control under a
+hovering pointer takes a paler topic fill, so each press shows at once.
+They have no underlines.
+Optimality, Project and Engineering have distinct violet, amber and orange fills shared
+across News and Results; bound and verification hues retain their meanings.
 News defaults to S4/S5 and all topics; its group names remain accessible without visible
 labels. The result count reuses the Results control row and aligns right immediately
 above the cards. The homepage highlights up to three newest eligible S5 News articles
@@ -536,7 +545,7 @@ The PR template points to that policy.
 
 The archive has keyboard- and touch-operable significance and topic toggles.
 S4/S5 and all topics are the defaults; choices within each facet combine with OR and the
-facets combine with AND. Each facet has an All action, and Reset restores the defaults.
+facets combine with AND. One unboxed Reset filters action restores the defaults.
 The visible count and empty state reflect the current selection.
 Namespaced query parameters preserve other URL state and Back/Forward; a bookmark to a
 filtered post adds the required choices before revealing and expanding it.
@@ -544,8 +553,12 @@ Without JavaScript all posts and complete articles stay visible.
 
 Every significance display uses the existing shared renderer: an S label and five larger
 filled/empty segments inside one fixed-width border box, using the Results ink, font
-size, tooltip and accessible naming.
-This applies to News, result tables, ladders, overviews and popovers.
+size and accessible naming.
+The compact box is 4.8em wide with 0.18em horizontal padding; its border matches the
+label’s ink. News chooser buttons and meters give each level’s short meaning from the
+label rubric above, its `Short` column, without adding the individual story’s rationale;
+result meters keep the significance ladder in `epistemics.md`. This applies to News,
+result tables, ladders, overviews and popovers.
 The ladder’s wider rail and derived breakpoint keep its two-line meanings clear of the
 meter. News and Atlas expansion footers share a centering rule.
 Filtered cards remeasure on revelation and width changes; the existing ten-line fade,

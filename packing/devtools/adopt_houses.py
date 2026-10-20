@@ -1377,7 +1377,9 @@ def plan(
     Each move carries its case record's text, read from the frontier unless `texts` holds
     the count, as a replay of the retained prior state passes it. A count staged in
     `select_houses.PENDING_ADOPTION` for the house the selection names is no move here
-    until its bead's pull request takes it off the list.
+    until its bead's pull request takes it off the list. A house whose regularization item
+    is owed a correction (`select_houses.CORRECTIONS_OWED`) is refused until the item is
+    corrected, so its uncorrected credit is never written (review B1 of #658).
     """
     selections = select_houses.select() if selections is None else selections
     moves = []
@@ -1390,6 +1392,14 @@ def plan(
             # Owed to the staged bead's pull request, which takes the count off the list
             # and then adopts it here.
             continue
+        if (owed := select_houses.owed_correction(n, house)) is not None:
+            # The credit this writes is the item's `of`, which a review measured to be
+            # wrong here: the adoption waits for the correction (review B1 of #658).
+            raise AdoptionError(
+                f"n={n}: {house.result}'s regularization item names {owed.named} as the "
+                f"packing it solves, which {owed.measured_in} measured to be {owed.measured}; "
+                f"correct the item first ({owed.bead}, select_houses.CORRECTIONS_OWED)"
+            )
         if house.algebraic:
             raise AdoptionError(
                 f"n={n}: the house is {house.result}'s algebraic side, and this writes a "
@@ -1770,6 +1780,18 @@ def section(move: Move) -> str:
     waiting = [
         *held_sentences(move.selection.held, move.side, below="this house", keeps="this house"),
         *algebraic_sentences(move.selection, move.side),
+        *staged_sentences(
+            move.n,
+            move.side,
+            named={c.result for c in move.selection.held}
+            | {
+                result
+                for result, key in move.selection.algebraic
+                if select_houses.algebraic_below(key, move.n, move.side)
+            },
+            below="this house",
+            keeps="this house",
+        ),
     ]
     if waiting:
         history += " " + " ".join(waiting)
@@ -1790,6 +1812,35 @@ def _staged(n: int, result: str) -> str:
     return f", staged under {staged.bead},"
 
 
+def _writer_clause(staged: select_houses.Pending) -> str:
+    """What a staged adoption that waits for the writer adds: when it can move the case."""
+    if staged.why == select_houses.NO_WRITER:
+        return ", once the writer takes an algebraic side"
+    return ""
+
+
+def _keeps_until(n: int, result: str, keeps: str) -> str:
+    """The sentence that says what the case keeps until an adoption moves it.
+
+    Where the count is staged for `result`, or for nothing, that is `result`'s adoption.
+    Where a packing validated since is smaller still and staged in its place, as T-193's
+    exact sides are below T-174's at twelve counts (#658), it is that packing's adoption,
+    under its own bead and, where it waits for the writer, once the writer takes it; the
+    held result is named as the side it passes, and `staged_sentences` describes the
+    staged house (review B3 of #658)."""
+    staged = select_houses.PENDING_ADOPTION.get(n)
+    if staged is not None and staged.house != result:
+        return (
+            f"The case keeps {keeps} until {staged.house}’s adoption, staged under "
+            f"{staged.bead}, moves it to {staged.house}’s side, below {result}’s"
+            f"{_writer_clause(staged)}."
+        )
+    return (
+        f"The case keeps {keeps} until {result}’s adoption{_staged(n, result)} moves it to "
+        f"{result}’s side."
+    )
+
+
 def held_sentences(
     held: Sequence[select_houses.Candidate], side: exact_sides.Side, *, below: str, keeps: str
 ) -> list[str]:
@@ -1805,9 +1856,7 @@ def held_sentences(
             f"`{_sci(exact_sides.lower_gap(side, candidate.side))}` below {below}, is "
             "confirmed here and accepted by "
             f"the [review of {reviewed}](../../{review}). {lifted_sentence(candidate.result)} "
-            f"The case keeps {keeps} until {candidate.result}’s adoption"
-            f"{_staged(candidate.n, candidate.result)} moves it to {candidate.result}’s "
-            "side."
+            + _keeps_until(candidate.n, candidate.result, keeps)
         )
     return sentences
 
@@ -1842,9 +1891,14 @@ def held_history(text: str) -> str:
         name = re.escape(result)
         since, until = _spaced(words(hold.since)), _spaced(words(hold.until))
         lifted = rf"until\s+the\s+owner’s\s+house\s+rule\s+of\s+{until}\s+lifted\s+the\s+hold"
+        # Either the held result's own adoption moves the case, or a smaller packing staged
+        # in its place does, below the held result's side (`_keeps_until`).
         keeps = (
-            rf"case\s+keeps\s+(?:this|its)\s+house\s+until\s+{name}’s\s+adoption"
+            rf"case\s+keeps\s+(?:this|its)\s+house\s+until\s+(?:{name}’s\s+adoption"
             rf"(?:,\s+staged\s+under\s+think-[a-z0-9]+,)?\s+moves\s+it\s+to\s+{name}’s\s+side\."
+            rf"|T-\d+’s\s+adoption,\s+staged\s+under\s+think-[a-z0-9]+,\s+moves\s+it\s+to\s+"
+            rf"T-\d+’s\s+side,\s+below\s+{name}’s"
+            rf"(?:,\s+once\s+the\s+writer\s+takes\s+an\s+algebraic\s+side)?\.)"
         )
         history = f". {lifted_sentence(result)}"
         # The rule of 15 October's: "..., but PR #574's houses are held for the owner:
@@ -1892,16 +1946,80 @@ def algebraic_sentences(selection: select_houses.Selection, side: Fraction) -> l
         _value, degree = select_houses.algebraic_side(key, selection.n)
         margin = select_houses.algebraic_margin(key, selection.n, side)
         review, reviewed = _review(result)
-        sentences.append(
+        opening = (
             f"{result}’s algebraic certificate at this count, a root of a degree-{degree} "
             f"integer polynomial `{_sci(margin)}` below this house, is decided here on one "
             "exact route. The rule of 15 October left it out for the owner (RP-3 of the "
             f"[review of {reviewed}](../../{review})), and the owner’s house rule of "
-            f"{words(select_houses.RULE_SET_ON)} adopts it: the case keeps this house until "
+            f"{words(select_houses.RULE_SET_ON)} "
+        )
+        staged = select_houses.PENDING_ADOPTION.get(selection.n)
+        if staged is not None and staged.house != result:
+            # A smaller packing is staged in its place (review B3 of #658).
+            sentences.append(
+                f"{opening}ended that wait. {_keeps_until(selection.n, result, 'this house')}"
+            )
+            continue
+        sentences.append(
+            f"{opening}adopts it: the case keeps this house until "
             f"its adoption{_staged(selection.n, result)} moves it to {result}’s side, once "
             "the writer takes an algebraic side."
         )
     return sentences
+
+
+def _staged_house(n: int) -> tuple[select_houses.Pending, select_houses.Candidate] | None:
+    """The adoption staged at `n` and its house's candidate there, if any."""
+    staged = select_houses.PENDING_ADOPTION.get(n)
+    if staged is None:
+        return None
+    entries = [e for e in select_houses.load_results() if e["id"] == staged.house]
+    found = select_houses.candidates(entries, select_houses.load_evidence()).get(n)
+    return (staged, found[0]) if found else None
+
+
+def staged_sentences(
+    n: int, side: exact_sides.Side, *, named: set[str], below: str, keeps: str
+) -> list[str]:
+    """What a record says of a smaller house staged at its count that its other sentences
+    do not describe: one validated after the pass that wrote the record, as T-193's exact
+    algebraic sides are below T-186's houses at 175, 204, 232 and 302 and below T-174's
+    held sides at twelve counts (#658).
+
+    `named` are the results the record's held and algebraic sentences describe. Where the
+    staged house is among them, nothing is added. Where they describe others, their
+    closing clause already says the case moves to the staged house (`_keeps_until`), so
+    this adds what the staged house is: its kind, its margin below `below` and the review
+    that accepted it (review B3 of #658). Where there are none, it says that and that the
+    case keeps `keeps` until the staged adoption moves it."""
+    found = _staged_house(n)
+    if found is None:
+        return []
+    staged, candidate = found
+    if staged.house in named or not candidate.side < side:
+        return []
+    review, reviewed = _review(staged.house)
+    kind = (
+        f"exact algebraic side at this count, a root of a degree-{candidate.side.degree} "
+        "integer polynomial"
+        if isinstance(candidate.side, exact_sides.Algebraic)
+        else "exact side at this count"
+    )
+    margin = _sci(exact_sides.lower_gap(side, candidate.side))
+    described = (
+        f"{staged.house}’s {kind} `{margin}` below {below}, is confirmed here and "
+        f"accepted by the [review of {reviewed}](../../{review})."
+    )
+    if named:
+        return [described]
+    return [
+        (
+            f"{described[:-1]}. The owner’s house rule "
+            f"of {words(select_houses.RULE_SET_ON)} adopts it: the case keeps {keeps} "
+            f"until its adoption, staged under {staged.bead}, moves it to {staged.house}’s "
+            f"side{_writer_clause(staged)}."
+        )
+    ]
 
 
 #: The results whose regularizations are for display, at the side the source reports as
@@ -2487,12 +2605,19 @@ def held_note(n: int, text: str) -> str:
     if held:
         since = min(select_houses.LIFTED[c.result].since for c in held)
         until = max(select_houses.LIFTED[c.result].until for c in held)
-        sentences = held_sentences(
-            held,
-            select_houses.parse_case(n, text).verified,
-            below="this case’s verified ceiling",
-            keeps="its house",
-        )
+        verified = select_houses.parse_case(n, text).verified
+        sentences = [
+            *held_sentences(
+                held, verified, below="this case’s verified ceiling", keeps="its house"
+            ),
+            *staged_sentences(
+                n,
+                verified,
+                named={c.result for c in held},
+                below="this case’s verified ceiling",
+                keeps="its house",
+            ),
+        ]
         written = f"{HELD_OPENING}{words(since)}; lifted {words(until)}.** " + " ".join(
             sentences
         )

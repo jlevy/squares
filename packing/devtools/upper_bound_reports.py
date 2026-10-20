@@ -2364,6 +2364,7 @@ def register_plan(packet: Path) -> dict[str, Any]:
         "id": "T-NNN",
         "kind": "upper-bound",
         "registered": declaration["read_on"],
+        "landed": declaration["read_on"],
         "headline": register["headline"],
         "claim": claim,
         "scope": {"n_values": [row["n"] for row in inside]},

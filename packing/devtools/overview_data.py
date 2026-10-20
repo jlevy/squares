@@ -456,6 +456,7 @@ def _records(
         for label, path in (
             ("source", proof.get("source")),
             ("review", proof.get("audit_record")),
+            ("source build receipt", entry.get("build_receipt")),
         ):
             if path and path not in seen and (resolved := _repo_path(path)) is not None:
                 seen.add(path)

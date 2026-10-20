@@ -4563,13 +4563,15 @@ sources:
     prints. T-174 records the in-horizon report, at V3/C3 since the 14 October review
     (docs/project/reviews/review-2026-10-14-upper-bound-imports-574.md) reproduced the
     replay and decided the cited certificates again by the third route. All 117 native jobs
-    have full outcomes. The house rule of 16 October 2026 made T-174 the house at the 53
-    counts where it was smallest, which ended the hold of 15 October and RP-3's wait: the
+    have full outcomes. The house rule of 16 October 2026 makes T-174 the house at the 41
+    counts where it is smallest, which ended the hold of 15 October and RP-3's wait: the
     adoption of 17 October 2026 (think-3mry) moved 37 rational counts to it, the selected
-    overrides below. Issue 639's algebraic sides (T-193, PR #658) are smaller at twelve
-    others and Evan Daniel's issue 659 at 236; those and the algebraic certificates at 70,
-    153 and 207 are staged in devtools.select_houses.PENDING_ADOPTION. It was the smallest
-    at 63 counts until the adoption of 16 October 2026 (PR #657) took ten of them below it.
+    overrides below. At 236 Evan Daniel's issue 659 reports a smaller side, whose import
+    adopts it; T-174 stays staged there under think-3mry. The algebraic certificates at
+    70, 153 and 207 wait under think-ot5c. These four counts are staged in
+    devtools.select_houses.PENDING_ADOPTION. It was the smallest at 63 counts until the
+    adoption of 16 October 2026 (PR #657) took ten of them below it and T-193's exact
+    sides (PR #658), staged under think-ot5c, twelve more.
 - id: dostashev-merged-bands-2026-10-13
   title: Daniil Ostashev's merged-band and relaxed-composition packings at b909e1b, issue575
   role: source-repository

@@ -4646,6 +4646,7 @@ def test_the_site_layout_step_requires_a_chromium_and_runs_all_its_files(
             *common,
             "-n",
             "0",
+            "-s",
             "tests/test_site_forwarders.py",
         ),
         (
@@ -4655,9 +4656,160 @@ def test_the_site_layout_step_requires_a_chromium_and_runs_all_its_files(
             validate.SITE_LOAD_BUDGET_TEST,
         ),
     ]
-    assert environments == [{validate.REQUIRE_CHROMIUM: "1"}] * 3
+    assert environments == [
+        {validate.REQUIRE_CHROMIUM: "1"},
+        {validate.REQUIRE_CHROMIUM: "1", "DEBUGP": "1", "DEBUG": "pw:api"},
+        {validate.REQUIRE_CHROMIUM: "1"},
+    ]
     assert output == "command 1 passed\ncommand 2 passed\ncommand 3 passed"
     assert validate.REQUIRE_CHROMIUM == site_browser.REQUIRED
+
+
+def test_site_forwarder_diagnostics_do_not_leak_to_other_commands_or_the_parent(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Override caller debug settings only while the serial forwarders run."""
+    monkeypatch.setenv("DEBUGP", "caller-wire")
+    monkeypatch.setenv("DEBUG", "caller-api")
+    parent_environment = {"KEPT": "1", "DEBUGP": "caller-wire", "DEBUG": "caller-api"}
+    seen: list[dict[str, str]] = []
+
+    def capture(context: validate.Context, *_args: Any, **_options: Any) -> str:
+        seen.append(dict(context.environment))
+        return "passed"
+
+    monkeypatch.setattr(validate, "_run_command", capture)
+    monkeypatch.setattr(validate, "_artifact_directory", lambda _context: None)
+    monkeypatch.setattr(validate, "_pytest_workers", lambda _jobs: 2)
+    context = validate.Context(
+        deep=False,
+        strict=False,
+        jobs=1,
+        inner_jobs=1,
+        environment=parent_environment,
+    )
+    validate._site_layout_tests(context)
+    validate._run(context, ("next-command",))
+    chromium_environment = {**parent_environment, validate.REQUIRE_CHROMIUM: "1"}
+    assert seen == [
+        chromium_environment,
+        {**chromium_environment, "DEBUGP": "1", "DEBUG": "pw:api"},
+        chromium_environment,
+        parent_environment,
+    ]
+    assert context.environment == {"KEPT": "1", "DEBUGP": "caller-wire", "DEBUG": "caller-api"}
+    assert os.environ["DEBUGP"] == "caller-wire"
+    assert os.environ["DEBUG"] == "caller-api"
+
+
+def test_only_the_wire_logged_forwarders_report_a_bounded_tail(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """The forwarders' wire log stays in their artifact log, not in the step's report."""
+    tails: list[object] = []
+
+    def capture(_context: validate.Context, _command: Sequence[str], **options: Any) -> str:
+        tails.append(options.get("output_tail"))
+        return "passed"
+
+    monkeypatch.setattr(validate, "_run", capture)
+    monkeypatch.setattr(validate, "_pytest_workers", lambda _jobs: 2)
+    context = validate.Context(
+        deep=False, strict=False, jobs=1, inner_jobs=1, environment=os.environ.copy()
+    )
+    validate._site_layout_tests(context)
+    assert tails == [None, validate.SITE_FORWARDER_OUTPUT_TAIL, None]
+
+
+#: A command that prints 5,000 ten-byte lines, 50,000 bytes in all.
+_LOUD = "for index in range(5000): print(f'line {index:04d}')"
+
+
+@pytest.mark.parametrize("output", ["artifact-log", "pipe"])
+def test_a_tailed_command_reports_its_last_lines_and_says_where_the_rest_is(
+    tmp_path: Path, output: str
+) -> None:
+    """A passing PR #685 forwarder run printed 2.6 MB of wire log into the job log; with a
+    tail the step keeps whole trailing lines, and the artifact log keeps all of them."""
+    artifacts = tmp_path / "artifacts"
+    environment = {
+        key: value
+        for key, value in os.environ.items()
+        if key != "PACKING_VALIDATION_ARTIFACT_DIR"
+    }
+    kept = output == "artifact-log"
+    if kept:
+        environment["PACKING_VALIDATION_ARTIFACT_DIR"] = str(artifacts)
+    context = validate.Context(
+        deep=False, strict=False, jobs=1, inner_jobs=1, environment=environment
+    )
+    command = (sys.executable, "-c", _LOUD)
+    note, *lines = validate._run(context, command, cwd=tmp_path, output_tail=1000).splitlines()
+    assert lines[-1] == "line 4999"
+    assert all(re.fullmatch(r"line \d{4}", line) for line in lines)
+    assert 90 <= len(lines) <= 100
+    assert note.startswith("[output cut to its last 1000 of 50000 ")
+    if kept:
+        (log,) = artifacts.glob("*.log")
+        assert note.endswith(f"the complete output is {log}]")
+        assert log.read_text().splitlines() == [f"line {index:04d}" for index in range(5000)]
+    else:
+        assert "set PACKING_VALIDATION_ARTIFACT_DIR" in note
+    assert validate._run(context, command, cwd=tmp_path).splitlines()[0] == "line 0000"
+    assert validate._run(context, command, cwd=tmp_path, output_tail=50_000).startswith(
+        "line 0000\n"
+    )
+
+
+def test_a_tailed_command_that_times_out_reports_where_it_stopped(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """The hang the wire log is kept for ends in a deadline kill: the report carries the
+    last lines before it, and the artifact log every line."""
+    artifacts = tmp_path / "artifacts"
+    ready = tmp_path / "ready"
+    script = "\n".join(
+        (
+            "import pathlib, time",
+            _LOUD,
+            "print('unanswered', flush=True)",
+            f"pathlib.Path({str(ready)!r}).write_text('ready')",
+            "time.sleep(30)",
+        )
+    )
+    context = validate.Context(
+        deep=False,
+        strict=False,
+        jobs=1,
+        inner_jobs=1,
+        environment={**os.environ, "PACKING_VALIDATION_ARTIFACT_DIR": str(artifacts)},
+    )
+    real_popen = subprocess.Popen
+
+    def start_when_ready(*args: Any, **kwargs: Any) -> subprocess.Popen[str]:
+        """Start the 0.25s deadline once the child has printed everything."""
+        process = real_popen(*args, **kwargs)
+        deadline = time.monotonic() + 10
+        while not ready.exists() and process.poll() is None and time.monotonic() < deadline:
+            Event().wait(0.01)
+        return process
+
+    with monkeypatch.context() as patch:
+        patch.setattr(validate.subprocess, "Popen", start_when_ready)
+        with pytest.raises(validate.StepTimeoutError) as captured:
+            validate._run(
+                context,
+                (sys.executable, "-c", script),
+                cwd=tmp_path,
+                timeout_seconds=0.25,
+                output_tail=1000,
+            )
+    message = str(captured.value)
+    assert message.startswith("command timed out after 0.25 seconds")
+    assert message.endswith("line 4999\nunanswered")
+    assert len(message) < 1000 + 1000
+    (log,) = artifacts.glob("*.log")
+    assert log.read_text().startswith("line 0000\n")
 
 
 def test_site_layout_commands_partition_the_original_collection(

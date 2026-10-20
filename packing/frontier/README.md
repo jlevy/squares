@@ -272,6 +272,13 @@ The process relies on these rules of the records:
   register’s coverage gate reads.
   Disagreement is preserved as a conflict or a typed blocker; the source’s claim is
   never edited to match a checker.
+- **A formal source build is separate evidence.** An inspected, retained complete
+  producer build can support V under
+  [the formal-proof rule](../../epistemics.md#reported-formal-proofs-and-source-builds),
+  recorded with `origin: external` and the producer’s passing status.
+  Keep its build and axiom receipts, scoped statement audit, full coverage and trust
+  assumptions. A later independent replay has its own confirming entry; source execution
+  alone does not establish C3 or change the case’s verified bounds here.
 - **The register entry is made when the result is imported**, at its derived rung, with
   a `kind`, a `headline`, `attribution` and a `next_rung` naming the replay and review
   it waits on. Its date is `attribution.published`; `established` is this project’s own

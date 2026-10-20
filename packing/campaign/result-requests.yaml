@@ -21,7 +21,7 @@ softschema:
   status: enforced
 repository: jlevy/squares
 owner: jlevy
-last_reviewed: '2026-10-18'
+last_reviewed: '2026-10-19'
 issues:
   - number: 420
     title: 'Lean proofs that 178 best-known packings are local minima (n ≤ 324): registration request'
@@ -3470,7 +3470,15 @@ issues:
       On 10 October the author reports a stronger n29 certificate, which awaits its own import. On 16
       October the author reports 21 more fine-net certificates, three of which (n = 37, 39 and 44) the
       record already holds from the source's repository as T-178, T-176 and T-177; the 18 new ones, at n
-      = 38 to 110, are each above both lower lanes at their count, and think-f40c imports them.
+      = 38 to 110, are registered as T-200 through T-217 in merged pull request 671. n108 (T-216)
+      completed its certificate checks and mathematical reviews at V3/C3 in that pull request,
+      and n68, n84 and n85 (T-205 to T-207) completed theirs at V3/C3 on 19 October, each
+      re-verified by sqverify-fast, which shares components with the producer's checker
+      (wand125's adaptation of this repository's crate) apart from the declared-net readers;
+      their lower lanes are 853/100, 3769/400 and 379/40. The other fourteen remain
+      V0/C0 under think-f40c; the n86 capture has no check or control run. No upper-bound house
+      changed. The post-deployment follow-up of 19 October records the n108 state and requests
+      the upstream control filename correction.
     read_through: '2026-10-16T09:00:31Z'
     results:
     - key: fine-net-n19
@@ -3586,16 +3594,21 @@ issues:
       - E-wand125-fine-net-n108-1062-report
       - E-wand125-fine-net-n110-1073-report
       - E-wand125-fine-net-n108-1062-sqverify-fast-replay
+      - E-wand125-fine-net-n68-853-sqverify-fast-replay
+      - E-wand125-fine-net-n84-94225-sqverify-fast-replay
+      - E-wand125-fine-net-n85-9475-sqverify-fast-replay
     asks:
     - what: Complete the maintained census, whole-net controls and certificate-specific mathematical
-        review for the other 17 fine-net lower bounds of 16 October before adopting their case lanes.
+        review for the other 14 fine-net lower bounds of 16 October before adopting their case lanes.
       state: queued
       bead: think-f40c
       note: >-
-        n108 is adopted at 531/50 after its retained complete native replay and two accepted
-        mathematical reviews; confirmation shares the producer's verifier components. The other
-        17 remain V0/C0. The former batch-1 plan is a continuation queue, not evidence that its
-        remaining native runs are active or complete.
+        n108 is adopted at 531/50, and n68, n84 and n85 at 853/100, 3769/400 and 379/40, each
+        after its retained complete native replay, whole-net controls and accepted mathematical
+        reviews; confirmation shares the producer's verifier components. The other 14 remain
+        V0/C0; the n86 capture finished but its check and control never ran. The former batch-1
+        plan is a continuation queue, not evidence that its remaining native runs are active or
+        complete.
     - what: Replay and review the n29 candidate at 291/50 over all 2073 directions with whole-net
         controls and restored positives, from a candidate retained where the census reads it.
       state: queued
@@ -3659,6 +3672,122 @@ issues:
         status: recorded
       - result: fine-net-n29-582-followup
         id: E-wand125-fine-net-n29-582-followup-report
+        status: recorded
+    - url: https://github.com/jlevy/squares/issues/446#issuecomment-6261561709
+      date: '2026-10-19'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: fine-net-n37-n39-n44-1016
+        id: T-176
+        verification: V0
+        confirmation: C1
+        status: reviewed
+      - result: fine-net-n37-n39-n44-1016
+        id: T-177
+        verification: V0
+        confirmation: C1
+        status: reviewed
+      - result: fine-net-n37-n39-n44-1016
+        id: T-178
+        verification: V0
+        confirmation: C1
+        status: reviewed
+      - result: fine-net-18-1016
+    - url: https://github.com/jlevy/squares/issues/446#issuecomment-6265360813
+      date: '2026-10-19'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: fine-net-18-1016
+        id: T-200
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: fine-net-18-1016
+        id: T-201
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: fine-net-18-1016
+        id: T-202
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: fine-net-18-1016
+        id: T-203
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: fine-net-18-1016
+        id: T-204
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: fine-net-18-1016
+        id: T-205
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: fine-net-18-1016
+        id: T-206
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: fine-net-18-1016
+        id: T-207
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: fine-net-18-1016
+        id: T-208
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: fine-net-18-1016
+        id: T-209
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: fine-net-18-1016
+        id: T-210
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: fine-net-18-1016
+        id: T-211
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: fine-net-18-1016
+        id: T-212
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: fine-net-18-1016
+        id: T-213
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: fine-net-18-1016
+        id: T-214
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: fine-net-18-1016
+        id: T-215
+        verification: V0
+        confirmation: C0
+        status: recorded
+      - result: fine-net-18-1016
+        id: T-216
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: fine-net-18-1016
+        id: T-217
+        verification: V0
+        confirmation: C0
         status: recorded
     close_when: Accurate source-only disposition reaches main and the remaining independent native/review
       obligations have explicit dispositions. Source-byte custody alone does not close this request.
@@ -7073,21 +7202,40 @@ issues:
     read_through: '2026-10-12T07:51:08Z'
     results: []
     asks:
-    - what: Compare the best of three timings with 400 ms, keep both ceilings, and attribute the play
-        message to load or to a regression.
+    - what: Compare the best of three timings with 400 ms and keep both ceilings.
+      state: done
+      note: >-
+        Landed in #685 (02b644c6f, merged at 14fd9e27f): the Animate view contract builds each
+        of the six trajectories three times through measurePhysics, past the trajectory cache,
+        compares the fastest with 400 ms and one build's bytes with 4 MB, both ceilings
+        unchanged, and af12aca78 requires the three builds to agree in bytes. #685's hosted
+        check_frontend passed at af12aca78 (Packing run 39312783060, frontend job
+        118266427235: the dearest trajectory 223 ms at its fastest of three builds)
+        (think-1bm2).
+    - what: Attribute the Animate view play message to load or to a regression.
       state: queued
-      bead: think-1bm2
+      note: >-
+        Neither #685 nor earlier work attributed `play did not carry on from step to step: the
+        stage showed n = [5, 6]`, and no third occurrence is recorded. Narrowed onto its own
+        bead.
+      bead: think-8vsk
     beads:
     - think-1bm2
-    answer_bead: think-1bm2
+    - think-8vsk
+    answer_bead: think-8vsk
     replies:
     - url: https://github.com/jlevy/squares/issues/538#issuecomment-6200838139
       date: '2026-10-15'
       by: jlevy
       kind: follow-up
       reported: []
-    close_when: The check compares the best of three timings with 400 ms, both ceilings are
-      unchanged, the play message is attributed, and check_frontend passes.
+    - url: https://github.com/jlevy/squares/issues/538#issuecomment-6279239104
+      date: '2026-10-19'
+      by: jlevy
+      kind: follow-up
+      reported: []
+    close_when: The play message is attributed to load or to a regression; the timing check landed
+      in #685.
   - number: 539
     title: 'check_scroll_restoration: wait for the reload''s own navigation'
     author: jlevy
@@ -8258,10 +8406,11 @@ issues:
       The reply `--report` lists as due (T-174 at V3/C3 and its two evidence entries reviewed, where
       the follow-up of 14 October stated V0/C0 and recorded) waits for the owner, who decides the
       pull request and, by `close_when`, posts the resulting state; T-174's adoption is no longer
-      the owner's: the house rule of 16 October 2026 made it the house at 53 counts, the adoption of
-      17 October 2026 (think-3mry) moved 37 rational ones to it, and the algebraic 70, 153 and 207
-      wait for the writer, as do twelve where issue 639's sides (T-193) are smaller; at 236 Evan
-      Daniel's issue 659 is smaller. It goes out on the owner's instruction,
+      the owner's: the house rule of 16 October 2026 makes it the house at 41 counts, the adoption
+      of 17 October 2026 (think-3mry) moved 37 rational ones to it, and the algebraic 70, 153 and
+      207 wait under think-ot5c for the writer. T-193's smaller sides are staged at twelve
+      others under think-ot5c; at 236 Evan Daniel's issue 659 reports a smaller side, whose
+      import adopts it, with T-174 still staged under think-3mry until then. It goes out on the owner's instruction,
       from think-9v2k, and a pass that finds it due does not post it before then (PR #637's review,
       A4).
   - number: 575
@@ -9446,7 +9595,8 @@ issues:
       exact configuration): registration request'
     author: evand
     opened: '2026-10-16'
-    state: open
+    state: closed
+    closed: '2026-10-19'
     kind: result-report
     triage: done
     summary: >-
@@ -9461,7 +9611,11 @@ issues:
       #574's rational certificates are
       smaller, by about 1e-62. Retained on 16 October in the evand-exact-cur-2026-10-16 packet; the 16
       October report-order ledger (campaign/issue-intake/upper-bounds-20261016) agrees with the triage at
-      every count, and T-193 registers the 16 recorded counts. Claude assistance disclosed.
+      every count, and T-193 registers the 16 recorded counts. The source's verify_exact.py, replayed here
+      on all 23 forms with controls, and the stage 4 review of 16 October, which found no blocking defect
+      and one major credit-route finding (RE-1), take T-193 to V3/C3 at all sixteen counts, where the
+      house rule of 16 October 2026 makes its sides the houses, staged under think-ot5c until the
+      writer takes an algebraic side. Claude assistance disclosed.
     read_through: '2026-10-16T03:37:13Z'
     results:
     - key: exact-sides-below-record
@@ -9475,6 +9629,7 @@ issues:
       - T-193
       evidence:
       - E-evand-639-exact-sides-report
+      - E-evand-639-verify-exact-replay
     - key: exact-side-51
       claim: s(51) <= (16 + 5√2)/3, the root of 9x^2 - 96x + 206.
       source: body
@@ -9499,13 +9654,31 @@ issues:
       not_registered: >-
         Weaker than an earlier report: #574's rational certificates at these counts (T-174), which three
         exact routes here decided, are below S* by 1.18e-62, 9.23e-63 and 6.62e-63, so S* is not the
-        least side of those packings. The acknowledgement drafted in think-phyb asks the author why.
+        least side of those packings. The final reply of 19 October asks the author why.
       queued: false
     beads:
     - think-phyb
     - think-g59l
     answer_bead: think-phyb
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/639#issuecomment-6278993243
+      date: '2026-10-19'
+      by: jlevy
+      kind: final
+      reported:
+      - result: exact-sides-below-record
+        id: T-193
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: exact-sides-below-record
+        id: E-evand-639-verify-exact-replay
+        status: confirmed
+      - result: exact-sides-below-record
+        id: E-evand-639-exact-sides-report
+      - result: exact-side-51
+      - result: exact-sides-574-algebraic
+      - result: exact-sides-above-574
     close_when: >-
       The recorded counts are registered on main, the author has been told what was registered and why
       51, 70, 153, 207, 172, 263 and 297 were not, and the replay is either run or owned by its bead,
@@ -9515,8 +9688,9 @@ issues:
       case records also name improvers (Gupta, Polkovskyi, Couzo and Daniel), whom the registered entry
       credits before Daniel's exact form, as a refinement. At 207 the source reports that its re-solve of
       the record's witness did not verify one pair and that the committed form comes from a copy that
-      ties it; T-173's rational certificate there was decided by three exact routes here, and the
-      acknowledgement asks what the re-solve shows. The source also lists 52 counts still without an
+      ties it; T-173's rational certificate there was decided by three exact routes here. The drafts in
+      think-phyb asked what the re-solve shows, but the final reply of 19 October dropped the question,
+      so whether to ask it as a follow-up is still open. The source also lists 52 counts still without an
       exact form, and s(29), whose polynomial #545 reports; neither is a claim.
   - number: 640
     title: 'Complete Lean proof of s(19) optimality: registration request'
@@ -9538,8 +9712,11 @@ issues:
       announcement as X returned it, is retained in the fitzharding-n19-lean-2026-10-16 packet. A full
       rebuild, several hours on 64 cores by the source's account, is above the pass's cap and held for the
       owner. Registered on 16 October 2026 as T-194, an optimality result at V0/C0, with its bibliography
-      key and a link from the n = 19 case page; its mathematical review (think-o40t) is the next step.
-      Claude and Codex assistance disclosed.
+      key and a link from the n = 19 case page. Its mathematical review of 16 October (think-o40t) found
+      no blocking or major defect, three minor findings and four notes, and re-established with programs of
+      its own the property each of the 2,328 native facts in the Git tree certifies; mapped the same day,
+      T-194 stands at V0/C1, its programs registered and their runs on n-019's case record. Claude and
+      Codex assistance disclosed.
     read_through: '2026-10-16T03:41:08Z'
     results:
     - key: n19-optimality-lean
@@ -9555,6 +9732,12 @@ issues:
       - T-194
       evidence:
       - E-n019-fitzharding-lean-report
+      - E-n019-fitzharding-endpoint-review
+      - E-n019-fitzharding-cover-census-review
+      - E-n019-fitzharding-region-review
+      - E-n019-fitzharding-capture-link-review
+      - E-n019-fitzharding-endgame-review
+      - E-n019-fitzharding-archives-review
     asks:
     - what: Link the proof from the n = 19 case page.
       state: done
@@ -9568,7 +9751,37 @@ issues:
     - think-nqnl
     - think-xik9
     answer_bead: think-a4x3
-    replies: []
+    replies:
+    - url: https://github.com/jlevy/squares/issues/640#issuecomment-6278993930
+      date: '2026-10-19'
+      by: jlevy
+      kind: import
+      reported:
+      - result: n19-optimality-lean
+        id: T-194
+        verification: V0
+        confirmation: C1
+        status: reviewed
+      - result: n19-optimality-lean
+        id: E-n019-fitzharding-lean-report
+      - result: n19-optimality-lean
+        id: E-n019-fitzharding-endpoint-review
+        status: confirmed
+      - result: n19-optimality-lean
+        id: E-n019-fitzharding-cover-census-review
+        status: confirmed
+      - result: n19-optimality-lean
+        id: E-n019-fitzharding-region-review
+        status: confirmed
+      - result: n19-optimality-lean
+        id: E-n019-fitzharding-capture-link-review
+        status: confirmed
+      - result: n19-optimality-lean
+        id: E-n019-fitzharding-endgame-review
+        status: confirmed
+      - result: n19-optimality-lean
+        id: E-n019-fitzharding-archives-review
+        status: confirmed
     close_when: >-
       The result is registered on main and linked from the n = 19 case page, the author has been told
       what was registered and has the mathematical review, and the full build has either passed, here or

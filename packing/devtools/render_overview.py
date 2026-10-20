@@ -110,6 +110,9 @@ THEME_SCRIPT = BROWSER / "theme.js"
 HEADROOM_SCRIPT = BROWSER / "headroom.js"
 TOOLTIP_SCRIPT = BROWSER / "rating-tooltips.js"
 HOMEPAGE_CSS = BROWSER / "homepage.css"
+#: The results page's own styles: its overview above the table, the last seven days'
+#: registrations and the weekly rollup before them (think-2z22).
+RESULTS_CSS = BROWSER / "results.css"
 #: The frame the site's flattened kpress client modules are placed in.
 KPRESS_CLIENT_FRAME = BROWSER / "kpress-client.js"
 #: kpress's client modules a site page carries, in dependency order: the contents rail's
@@ -482,6 +485,9 @@ RENDER_INPUTS: tuple[Path, ...] = (
     PACKING / "site-changelog.yaml",
     PACKING / "site-changelog.schema.yaml",
     PACKING / "devtools/render_changelog.py",
+    # The News label rubric, whose `Short` column a News meter and the archive's S
+    # buttons quote (`render_changelog.news_significance_meanings`).
+    PACKING / "campaign" / "result-import.md",
     PACKING / "devtools/news_highlights.py",
     PACKING / "devtools/build_known_best_atlas.py",
     PACKING / "devtools/atlas_print_font.py",
@@ -1412,6 +1418,27 @@ def results_page() -> Page:
     overview = overview_data.load()
     values = {
         "EPISTEMICS_URL": "epistemics.html",
+        # The overview above the table, from the same register (think-2z22): the last
+        # seven days' arrivals, a block a day, then the weekly S3+ rollup before them. The
+        # heading's link names the section's own first day, so it lists the section's
+        # results on any day (#514's review A, finding A3); the last day's counts from
+        # the reader's.
+        "RECENT_ADDED": overview_sections.recent_added(overview),
+        "ADDED_LINK": overview_sections.added_link(
+            f"added-since={overview_sections.added_since(overview).isoformat()}"
+        ),
+        "ADDED_LAST_DAY": overview_sections.added_link("added-age=1"),
+        "ADDED_DAYS": overview_sections.ADDED_DAYS_WORD[overview_sections.ADDED_DAYS],
+        "ADDED_DAYS_TITLE": overview_sections.ADDED_DAYS_WORD[
+            overview_sections.ADDED_DAYS
+        ].capitalize(),
+        "ADDED_SPAN": overview_sections.span_label(
+            overview_sections.added_since(overview), overview_sections.added_reference(overview)
+        ),
+        "ADDED_FIRST": overview_sections.day_label(overview_sections.added_since(overview)),
+        "RECENT_ROLLUP": overview_sections.recent_rollup(overview),
+        "ROLLUP_FLOOR": f"S{overview_sections.ROLLUP_FLOOR}",
+        "ROLLUP_WEEKS": overview_sections.ROLLUP_WEEKS_WORD[overview_sections.ROLLUP_WEEKS],
         "RESULTS_TABLE": overview_sections.results_table(overview),
         "STATUS_COUNTS": overview_sections.status_counts(overview),
         # The rating ladders, the homepage's Verification Ladders until 2026-10-02.
@@ -1427,6 +1454,7 @@ def results_page() -> Page:
         title=RESULTS_META.name,
         description=RESULTS_META.description,
         toc=False,
+        page_styles=(RESULTS_CSS,),
         page_scripts=(TABLE_SCRIPT, POPOVER_SCRIPT, ROW_POPOVER_SCRIPT),
     )
 

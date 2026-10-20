@@ -1034,6 +1034,8 @@ def links_section(result: Result, overview: Overview, cases: Sequence[int]) -> s
             ("certificate", entry.get("certificate")),
             ("proof", proof.get("source")),
             ("audit", proof.get("audit_record")),
+            ("source build receipt", entry.get("build_receipt")),
+            ("axioms", entry.get("axioms_receipt")),
         ):
             resolved = _resolve(path) if isinstance(path, str) else None
             if resolved is not None:

@@ -54,6 +54,13 @@ from typing import Any
 from jsonschema_rs import Draft202012Validator
 
 from devtools import result_status, verifier_registry
+from sqpack.assurance import (
+    HERE_ORIGINS,
+    claim_support_level,
+    confirming_execution,
+    external_formal_build_problems,
+    undischarged,
+)
 from sqpack.yamlio import load_yaml, safe_load
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -86,9 +93,9 @@ INTAKE_LABEL = "intake"
 #: author: checkable and machine-replayed (`V3`, `C3`). Below it the result is still being
 #: validated, whatever its status word says.
 CONFIRMED_RANK = 3
-#: Evidence origins that count as confirmation (epistemics.md, Confirmation).
-CONFIRMING_ORIGINS = frozenset({"audited-here", "replayed-here", "independently-external"})
 THIRD_PARTY = "independently-external"
+#: How an evidence entry whose premise is not confirmed here begins its `why`.
+IMPLICATION = "an implication"
 OPTIMALITY = "optimality"
 UPPER_BOUND = "upper-bound"
 
@@ -201,6 +208,9 @@ def _rank(rung: object) -> int:
 RELATION_PHRASES = {
     "same-implementation": "reproduced {where} with the author's own checker",
     "independent-implementation": "re-verified {where} by an independent implementation",
+    "shared-components": (
+        "re-verified {where} using a checker that shares components with the generator"
+    ),
     "generator": "reproduced {where} by the program that produced it",
 }
 
@@ -245,19 +255,48 @@ def verifier_phrase(entry: Mapped, verifiers: Mapping[str, str] | None = None) -
     return template.format(where=where) + named
 
 
-def confirmation_phrase(cited: Iterable[str], register: Register, kind: str = "") -> str:
+def confirms(entry: Mapped, evidence_by_id: Mapping[str, Mapped]) -> bool:
+    """Whether an entry's run confirms its claim, as `devtools.check_results` derives C:
+    execution beyond the producer by the actor its origin names, admitted if it is a
+    formal build run elsewhere, with every premise it takes confirmed too, among
+    `evidence_by_id` (epistemics.md, Confirmation)."""
+    return (
+        confirming_execution(entry)
+        and not external_formal_build_problems(entry)
+        and bool(claim_support_level(entry, evidence_by_id, lambda _: 1, confirming=True))
+    )
+
+
+def confirmation_phrase(
+    cited: Iterable[str],
+    register: Register,
+    kind: str = "",
+    *,
+    scope: Mapping[str, Mapped] | None = None,
+) -> str:
     """How a confirmed result was re-verified, one phrase for each confirming entry.
 
     An exact value takes its confirmation from its lower half (epistemics.md, Scope and
     Composition), so the upper half's entry, most often the grid's, is not described: an
     author told that their lower bound was "re-verified by an independent implementation"
     because the grid was would be told something false.
+
+    `scope` is the evidence the caller judged confirmation in, so a conditional entry's
+    premises are read where its state was decided: a result's own cited entries by
+    default, as `devtools.check_results` derives C, or the whole register for an
+    evidence entry named on its own.
     """
+    cited = list(cited)
+    by_id = (
+        scope
+        if scope is not None
+        else {ref: register.evidence[ref] for ref in cited if ref in register.evidence}
+    )
     phrases: list[str] = []
     missing: list[str] = []
     for ref in cited:
         entry = register.evidence.get(ref)
-        if not entry or entry.get("origin") not in CONFIRMING_ORIGINS:
+        if not entry or not confirms(entry, by_id):
             continue
         if kind == OPTIMALITY and entry.get("claim") == UPPER_BOUND:
             continue
@@ -314,12 +353,26 @@ def _evidence_entry(ident: str, register: Register) -> Entry:
         return Entry(ident, rungs, DEFECT, result_status.INCOMPLETE, "its replay failed", "")
     read = review.get("state") == "informally-verified"
     status = result_status.REVIEWED if read else result_status.RECORDED
-    if entry.get("replay_status") == "passed" and entry.get("origin") in CONFIRMING_ORIGINS:
+    if (
+        entry.get("replay_status") == "passed"
+        and confirming_execution(entry)
+        and not external_formal_build_problems(entry)
+    ):
         if verifier_registry.sampled(entry):
             # A sample decides only what it ran and is never called confirmed
             # (epistemics.md, The Independence Ladder).
             return Entry(ident, rungs, OPEN, status, _sample_phrase(entry), "")
-        how = confirmation_phrase([ident], register)
+        if hypotheses := undischarged(entry, register.evidence, confirming=True):
+            # An implication confirms its implication only: until each premise is
+            # confirmed it does not confirm the claim (sqpack.assurance).
+            premises = (
+                f"premise {hypotheses[0]} is"
+                if len(hypotheses) == 1
+                else f"premises {' and '.join(hypotheses)} are"
+            )
+            why = f"{IMPLICATION} whose {premises} not confirmed here"
+            return Entry(ident, rungs, OPEN, status, why, "")
+        how = confirmation_phrase([ident], register, scope=register.evidence)
         return Entry(ident, rungs, CONFIRMED, result_status.CONFIRMED, "", how)
     return Entry(ident, rungs, OPEN, status, "", "")
 
@@ -974,15 +1027,21 @@ def _run_here(record: Mapped | None, register: Register) -> str:
     `C0` says that nothing is counted toward confirmation, not that nothing ran: a
     complete replay can be retained beside the report entry while it waits for review,
     as T-128's, T-130's and T-131's were. So these words follow the evidence rather than
-    the rung: each cited entry whose replay passed, and the `receipts/` directories among
-    the entry's artifacts, where a packet keeps the record of each run here.
+    the rung: each cited entry this repository ran whose replay passed, and the
+    `receipts/` directories among the entry's artifacts, where a packet keeps the record
+    of each run here. A passing status alone is not work done here: the producer's own
+    run and a third party's retained run pass too (`sqpack.assurance.verified_here`).
     """
     if not record:
         return ""
     passed = [
         ref
         for ref in record.get("evidence") or ()
-        if (register.evidence.get(ref) or {}).get("replay_status") == "passed"
+        if (run := register.evidence.get(ref))
+        and run.get("replay_status") == "passed"
+        and run.get("origin") in HERE_ORIGINS
+        and confirming_execution(run)
+        and not external_formal_build_problems(run)
     ]
     marker = "/receipts/"
     receipts = dict.fromkeys(
@@ -1000,6 +1059,21 @@ def _run_here(record: Mapped | None, register: Register) -> str:
     return " and ".join(parts)
 
 
+def _plain_evidence(entry: Entry) -> str:
+    """An open evidence entry's state: an implication, a sample, or neither."""
+    if entry.why.startswith(IMPLICATION):
+        return (
+            f"recorded as evidence ({entry.rungs}): {entry.why}, so it confirms the "
+            "implication and not its conclusion"
+        )
+    if entry.why:
+        return (
+            f"recorded as evidence ({entry.rungs}): {entry.why}, which decides those "
+            "and confirms nothing beyond them"
+        )
+    return f"recorded as evidence ({entry.rungs}); not yet confirmed here"
+
+
 def _plain(entry: Entry, record: Mapped | None, register: Register) -> str:
     """An entry's state in words an author can read without the ladder beside them."""
     if entry.state == CONFIRMED:
@@ -1010,12 +1084,7 @@ def _plain(entry: Entry, record: Mapped | None, register: Register) -> str:
     if entry.state == DEFECT:
         return f"a defect is recorded against it: {entry.why}"
     if not entry.id.startswith("T-"):
-        if entry.why:
-            return (
-                f"recorded as evidence ({entry.rungs}): {entry.why}, which decides those "
-                "and confirms nothing beyond them"
-            )
-        return f"recorded as evidence ({entry.rungs}); not yet confirmed here"
+        return _plain_evidence(entry)
     ran = _run_here(record, register) if entry.status == result_status.RECORDED else ""
     words = {
         result_status.RECORDED: "registered as reported"

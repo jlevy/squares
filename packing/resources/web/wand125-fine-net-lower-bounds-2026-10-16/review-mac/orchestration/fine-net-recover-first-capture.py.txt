@@ -1,0 +1,125 @@
+"""Recover an authentic orphaned capture, then continue the reviewed serial runner."""
+import fcntl
+import hashlib
+import importlib.util
+import json
+import os
+from pathlib import Path
+import shutil
+import signal
+import subprocess
+import time
+
+ROOT = Path('/Volumes/spud-ext1/agent-source/squares-fine-net-mac-haaq')
+OUT = ROOT / 'first-subset'
+OPS = OUT / 'orchestration'
+SCRIPT = OPS / 'fine-net-first-subset-run.py'
+ACCEPTANCE = OPS / 'coordinator-acceptance.json'
+HANDOFF = json.loads((OPS / 'execution-handoff.json').read_text())
+gate = json.loads(ACCEPTANCE.read_text())
+assert hashlib.sha256(SCRIPT.read_bytes()).hexdigest() == gate['orchestration_sha256']
+spec = importlib.util.spec_from_file_location('reviewed_subset', SCRIPT)
+batch = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(batch)
+
+
+def process_command(pid):
+    p = subprocess.run(['/bin/ps', '-p', str(pid), '-o', 'command='], capture_output=True, text=True)
+    return p.stdout.strip() if p.returncode == 0 else None
+
+
+def interrupted(signum, frame):
+    raise KeyboardInterrupt(f'signal {signum}')
+
+
+signal.signal(signal.SIGTERM, interrupted)
+signal.signal(signal.SIGINT, interrupted)
+
+
+def recover():
+    batch.save(OPS / 'recovery-supervisor-identity.json', {
+        'pid': os.getpid(), 'ppid': os.getppid(), 'pgid': os.getpgrp(),
+        'started_utc': batch.utc(), 'script': str(Path(__file__).resolve()),
+        'purpose': 'Adopt existing capture, retain its real exit-observation limit, then serially continue',
+    })
+    cases = batch.admit()
+    case = batch.selected(cases, 'mixed_n68_L853', 68, 201)
+    attempt = Path(HANDOFF['first_attempt'])
+    initial = batch.load(attempt / 'capture-execution.json')
+    wrapper_pid = 51164
+    expected = f'/usr/bin/time -lp -o {attempt}/capture.time '
+    assert process_command(HANDOFF['runner_pid']) is None, 'Old supervisor still exists'
+    with (OUT / '.executor.lock').open('a') as lock:
+        fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        receipt = batch.load(OUT / 'current-execution.json')
+        assert receipt['certificate'] == case.certificate and receipt['status'] == 'RUNNING'
+        receipt['supervisor_recovery'] = {
+            'reason': 'Original agent exec group ended; separately sessioned capture survived',
+            'resumed_utc': batch.utc(), 'orphan_capture_wrapper_pid': wrapper_pid,
+            'duplicate_capture_started': False,
+        }
+        batch.save(OUT / 'current-execution.json', receipt)
+        print(json.dumps({'event': 'adopting_existing_capture', 'pid': wrapper_pid}), flush=True)
+        try:
+            while (command := process_command(wrapper_pid)) is not None:
+                assert command.startswith(expected), 'PID no longer identifies this capture'
+                batch.require(batch.process_tree_cpu(wrapper_pid) < batch.PER_CASE_CPU_CAP,
+                              'capture CPU cap reached')
+                time.sleep(10)
+            row, summary = batch.capture_checked(case, 201)
+            timing = batch.timing_read(attempt / 'capture.time')
+            initial.update({
+                'finished_utc_observed': batch.utc(), 'returncode': None,
+                'returncode_note': 'Outer CLI exit unobserved after supervisor loss; native exit 0 is retained in the verified census row',
+                'native_returncode': row['returncode'], 'timing': timing,
+                'recovered_complete_capture': True,
+            })
+            batch.save(attempt / 'capture-execution.json', initial)
+            receipt['commands'] = [initial]
+            spent = timing['cpu_seconds']
+            batch.require(spent < batch.PER_CASE_CPU_CAP, 'capture exceeded CPU cap')
+            for mode in ('check', 'control'):
+                step = batch.command(case, mode, attempt, spent)
+                receipt['commands'].append(step)
+                spent += step['timing']['cpu_seconds']
+                if mode == 'check':
+                    batch.require('1 of 1 retained certificates VERIFIED' in
+                                  (attempt / 'check.stdout.log').read_text(), 'check selection')
+                else:
+                    controls = batch.control_checked(case, 201, row)
+                batch.save(OUT / 'current-execution.json', receipt)
+            batch.historical_unchanged()
+            for source in (OUT / 'census.json', OUT / batch.PACKET / f'{case.certificate}.jsonl.gz',
+                           OUT / batch.PACKET / f'{case.certificate}.control.json'):
+                shutil.copyfile(source, attempt / source.name)
+            receipt.update(status='COMPLETE', finished_utc=batch.utc(), cpu_seconds=spent,
+                           wall_seconds=sum(s['timing']['real'] for s in receipt['commands']),
+                           capture_native_process_cpu_seconds=row['cpu_seconds'],
+                           native_summary_direction_cpu_value=summary['direction_cpu_seconds'],
+                           control_refusals=len(controls['runs'][1]['sweep']['refused']),
+                           checkpoint=str(attempt), historical_n108_unchanged=True)
+            batch.save(attempt / 'execution.json', receipt)
+            batch.save(OUT / f'{case.certificate}.execution.json', receipt)
+            batch.save(OUT / 'current-execution.json', receipt)
+            print(json.dumps({'event': 'recovered_case_complete', 'certificate': case.certificate,
+                              'cpu_seconds': spent, 'checkpoint': str(attempt)}), flush=True)
+        except BaseException as error:
+            command = process_command(wrapper_pid)
+            if command is not None and command.startswith(expected):
+                os.killpg(wrapper_pid, signal.SIGTERM)
+                for _ in range(3):
+                    if process_command(wrapper_pid) is None:
+                        break
+                    time.sleep(10)
+                command = process_command(wrapper_pid)
+                if command is not None and command.startswith(expected):
+                    os.killpg(wrapper_pid, signal.SIGKILL)
+            receipt.update(status='STOPPED', stopped_utc=batch.utc(), error=repr(error))
+            batch.save(OUT / 'current-execution.json', receipt)
+            batch.save(attempt / 'recovery-stopped.json', receipt)
+            raise
+    batch.run(ACCEPTANCE)
+
+
+if __name__ == '__main__':
+    recover()

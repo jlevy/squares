@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:FrontierEvidenceSet/v1
   schema: frontier-evidence.schema.yaml
   status: enforced
-last_reviewed: '2026-10-18'
+last_reviewed: '2026-10-19'
 evidence:
   - id: E-n017-kleddamag-rational-upper
     claim: upper-bound
@@ -12091,6 +12091,7 @@ evidence:
       SquarePacking.s13_eq_4, which must print [propext, Classical.choice, Quot.sound].
       About 1 h 45 min and up to 9.5 GB here with LEAN_NUM_THREADS=1.
     replay_status: passed
+    axioms_receipt: packing/resources/web/evand-square-packing-2026-09-28/receipts/lean/axioms_s13.log
     verifiers: [V-evand-lean]
     proof:
       source: packing/resources/web/evand-square-packing-2026-09-28/square-packing/s12/lean/LADDER.md
@@ -31955,6 +31956,80 @@ evidence:
       the statement's definition of L and its identity with the record, not the lower half.
     source_reviewed: '2026-10-12'
 
+  - id: E-n017-fitzharding-lean-source-build
+    claim: exact-value
+    scope: {n_values: [17]}
+    assurance: verified
+    method: proof-assistant-checked
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Fitzharding n17 Lean 2026]'
+    certificate: packing/resources/web/fitzharding-n17-lean-2026-10-13/sq17-lean/Sq17Lean/Square17Optimality.lean
+    build_receipt: packing/resources/web/fitzharding-n17-lean-2026-10-13/sq17-lean/verification/clean-build-receipt.json
+    axioms_receipt: packing/resources/web/fitzharding-n17-lean-2026-10-13/sq17-lean/verification/Square17Optimality.log.gz
+    replay: >-
+      Producer execution recorded in the retained v1.0.0 clean-build receipt, at Lean
+      4.34.1 and Mathlib d13f23b7: obtain the three source archives listed by
+      manifest.json from the public v1.0.0 release, lake exe cache get, python3
+      scripts/unpack.py, then python3 scripts/reproduce.py build. The script checks
+      archive/member bindings, compiles the native checker libraries and builds the
+      4,951-module theorem closure; its terminal acceptance is
+      REPRODUCTION_ACCEPTED Sq17Lean.Square17Optimality. The producer's retained
+      receipt records CLEAN_SOURCE_BUILD_ACCEPTED and binds the final axiom log.
+      Nothing here executed this command or independently authenticated the source run.
+    replay_status: passed
+    verifiers: [V-fitzharding-n17-lean]
+    independence:
+      coverage:
+        extent: full
+        unit: the source's 4,951-module import closure of Sq17.square17_optimality
+      note: Full coverage is the inspected producer receipt's scope; no confirming run here.
+    proof:
+      source: packing/resources/web/fitzharding-n17-lean-2026-10-13/sq17-lean/Sq17Lean/Square17Optimality.lean
+      theorem: >-
+        Sq17.square17_optimality (L : ℝ) : Sq17.HalfPlaneAssembly.PlainPacking L ↔
+        Sq17.EndpointGeometry.side ≤ L.
+      scope: >-
+        Seventeen independently translated and rotated closed unit squares in [0,L]^2
+        with disjoint interiors fit exactly when side <= L; attainment is included.
+        No uniqueness of the optimal configuration is asserted.
+      pinpoints: >-
+        Square17Optimality.lean:16-19; PackingStatement.lean:7-35;
+        EndpointGeometry.lean:11-17; EndpointRoot.lean:10-17; the retained source's
+        verification/clean-build-receipt.json and verification/Square17Optimality.log.gz;
+        the packet's receipts/source-consistency.json and receipts/endpoint-comparison.json.
+      assumptions:
+        - Lean 4.34.1's kernel, Mathlib d13f23b7, the compiler, native runtime, C toolchain and compiled checker libraries are sound. The axiom receipt lists propext, Classical.choice, Quot.sound and 13,343 native_decide facts, with no sorryAx; this is not kernel-only computation.
+        - The source's complete clean-build receipt truthfully records its execution; review of the retained receipt and final axiom log is not an independent observation or reproduction of that execution.
+        - The reviewed definitions elaborate as stated in the producer's full environment; this project has not elaborated the theorem or its statement closure.
+      audit_record: docs/project/reviews/review-2026-10-15-fitzharding-n17-source-build-admission.md
+    external_review:
+      state: informally-verified
+      date: '2026-10-15'
+      reviewed_by: Codex, strong tier, xhigh reasoning, formal-proof rubric audit
+      note: >-
+        Inspected the retained source build receipt, final axiom log and source-consistency
+        receipt against the theorem and the two 13 October mathematical reviews.
+        The source records all 4,951 closure modules rebuilt without project prebuilts,
+        no unexpected axioms and the bound final log. Its proof and complete source
+        archives are publicly recoverable at the pinned release. Admitted as source
+        verification only; no Lean build or independent formal confirmation performed here.
+    limitations: >-
+      Source certification, admitted on 15 October 2026 under epistemics.md's distinction
+      between V and C. The original report remains E-n017-fitzharding-lean-report.
+      The source receipt lacks per-module logs, timing and machine specifications, and
+      the record has not downloaded two of the three source archives. Those provenance
+      limits remain; the inspected final receipt and log support V3, not a claim of
+      independent execution. The two accepting AI reviews supply no human oversight or
+      expert attestation. The ten native facts checked independently are a sample only.
+      The source relies on native compilation for finite checks; its geometrical
+      soundness proofs, mathematical scope and source execution remain subject to that
+      stated trust boundary and the cited reviews' qualifications. This entry changes
+      neither the case's verified bounds nor its confirmation level.
+    source_reviewed: '2026-10-15'
+
   - id: E-n017-fitzharding-lean-report
     claim: exact-value
     scope: {n_values: [17]}
@@ -37640,6 +37715,33 @@ evidence:
     replay_status: not-attempted
     verifiers: []
     source_reviewed: '2026-10-16'
+    external_review:
+      state: informally-verified
+      date: '2026-10-16'
+      reviewed_by: >-
+        an AI agent (Claude, strong sub-agent tier, max reasoning), the stage 4 review lane
+        of the #639 import (bead think-7qxm, acting name user-eb-review-193), prompted
+        separately from the import, records and addressing lanes and sharing no context
+        with them beyond their committed packet, register entry and ledger
+      note: >-
+        docs/project/reviews/review-2026-10-16-evand-exact-sides-639.md read
+        verify_exact.py line by line and states the five hypotheses under which its VALID
+        proves that the file's squares are a packing of n unit squares in the square of side
+        S*, the one root of p in its interval; the replay ran under all five. It
+        re-checked custody (a blobless clone at 7d1407a, every manifest digest, the 30
+        retained files byte-identical), reproduced three replay runs equal to the receipt
+        (126, 266 and 267), and with a check of its own sharing no code with the checker
+        (mpmath interval arithmetic at 1,400 bits and SymPy identities in Q[t]/f) decided all
+        21 forms a packing, with as many contact identities as the checker at every count,
+        and refused its 63 controls; every p and f is irreducible and squarefree at all 23,
+        every claim cut is correct, and every S* lies below every standing side at its
+        count. Verdict accepted at all sixteen counts, for finite feasibility only: no
+        blocking finding; one major (RE-1, at nine counts the form is the case's house, not
+        the T-174 or T-186 certificate its regularization item names, a credit route that
+        leaves the bound unchanged), four minor (RE-2 the old driver's irreducibility test,
+        fixed in the refreshed receipt; RE-3 and RE-4 the claim's margin and credit
+        wording; RE-9 its own programs not registered) and four notes. No lower bound,
+        optimum, rigidity, novelty or priority follows.
     limitations: >-
       This atom records the source author's report, at evand/square-packing 7d1407a
       (issue 639), of exact configurations over number fields at 23 counts, of which the
@@ -37652,6 +37754,59 @@ evidence:
       interval. At 204, 263, 267 and 297 the data files are pinned by size and SHA-256 and
       not retained (OR-18). The source asserts each polynomial irreducible and no program of
       it checks that. No local or global optimality, rigidity or uniqueness is claimed.
+  - id: E-evand-639-verify-exact-replay
+    claim: upper-bound
+    scope: {n_values: [88, 102, 123, 126, 175, 199, 204, 232, 258, 259, 266, 267, 292, 295, 301, 302]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: same-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Daniel exact current records 2026-10-16]'
+    certificate: packing/resources/web/evand-exact-cur-2026-10-16/source/search/exact/cur/data/
+    replay: >-
+      From packing/, with the four pinned-only forms (204, 263, 267, 297) fetched from
+      evand/square-packing at 7d1407a into DIR: .venv/bin/python3
+      resources/web/evand-exact-cur-2026-10-16/review/replay_verify_exact.py --pinned DIR
+      --scratch SCRATCH --workers 2. It runs the retained verify_exact.py on each form in
+      its own python -I process, which must print VALID with the statement the source's
+      data/verify.txt prints, and on each control, which must print NOT VERIFIED; the
+      receipt is receipts/replay-verify-exact.json in the packet.
+    replay_status: passed
+    verifiers: [V-evand-verify-exact, V-evand-639-replay-driver]
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the source's exact forms, one exact configuration a count: all 23 files of
+          search/exact/cur/data at 7d1407a, the 16 in scope among them, each decided whole
+    source_reviewed: '2026-10-16'
+    limitations: >-
+      The source's own checker, read first and run unchanged here on 16 October 2026 from
+      its retained copy under CPython 3.14.7 (the source runs python3), on all 23 of the
+      directory's exact forms, the 16 in scope among them: 23 VALID, each with the
+      statement data/verify.txt prints, in 1,426.5 CPU seconds over 2 processes on a
+      shared 4-core host, 263, 297 and 204 the slowest (568, 351 and 241 s). At each of the
+      19 retained forms four mutated controls were refused, 76 in all, in 58 CPU seconds:
+      a square moved 1e-6 through the wall it touches, the side raised by 1e-6 in the
+      field, the side's interval moved below its root, and a duplicate square; no control
+      moves a contact pair (the review's RE-8), the four pinned-only forms carry none, and
+      tests/test_evand_exact_cur.py holds two at n = 51. The receipt, refreshed after PR
+      651's review A by the fixed driver (driver SHA-256 f949158c...), 1,484.5 CPU seconds
+      in all, finds each of the 23 polynomials squarefree and one factor of multiplicity 1
+      over the integers by SymPy 1.14.0, so irreducible, the four pinned-only forms
+      included. This is reproduction with the producer's code, one route; the stage 4
+      review's own check is a second, independent decision of the same forms, kept in the
+      packet and not registered (RE-9). The checker does not check that a file lists
+      exactly n squares; review/exact_sides.py of the ledger does, at every count. The
+      replay also covers 51, 70, 153, 207, 172, 263 and 297, which T-193 does not record;
+      at 70, 153 and 207 it is a second exact route to T-174's algebraic sides, whose
+      adoption the house rule of 16 October 2026 stages under think-ot5c. The retained driver (SHA-256 1c1d6553...), which the replay command
+      runs, differs from the receipt's f949158c... only in its resume cache's key, which
+      PR 651's review B1 extended to the driver's digest and the interpreter's version
+      (b33ce8ffd); no run's input, control, verdict or factorization changed, and no
+      control was cached across the receipt's two invocations, so the receipt stands.
   - id: E-n019-fitzharding-lean-report
     claim: exact-value
     scope: {n_values: [19]}
@@ -37688,6 +37843,44 @@ evidence:
         - Lean 4.34.1's kernel and Mathlib v4.34.1 at d13f23b7 are sound, and so are Lean's compiler, the bundled C compiler and the compiled runtime routines the 4,320 native_decide facts are evaluated by
         - The build and the kernel replay passed as the source reports. Its receipts are the author's own; nothing here built or elaborated any module
         - The Sq17Lean modules of sq17-lean at 0a7167e, which the lakefile compiles in place as the half-plane checker, are sound; that tree differs from the e6ee548 the T-154 packet pins only by CITATION.cff
+      audit_record: docs/project/reviews/review-2026-10-16-fitzharding-n19-lean.md
+    external_review:
+      state: informally-verified
+      date: '2026-10-16'
+      reviewed_by: >-
+        an AI agent (Claude, strong sub-agent tier, max reasoning), the mathematical review
+        lane of the #640 import at stage 4 (bead think-o40t, acting name
+        user-eb-review-640), in a worktree of its own, reading the source as data, running
+        only code it wrote, and not reading the two reviews of the s(17) proof until its own
+        findings were written
+      note: >-
+        docs/project/reviews/review-2026-10-16-fitzharding-n19-lean.md read the source at
+        34fb2b7 (release v1.0.0). Statement and definitions: Feasible19 is the record's
+        problem at n = 19, closed unit squares with arbitrary rotations, touching allowed,
+        in an axis-aligned container, with no degenerate reading for L < 0; side19 is the
+        case's exact upper bound; and the bridge to sq17-lean's definitions is by
+        unfolding. Existence: the nineteen
+        squares of EndpointPacking.lean are decided a packing at that side in exact
+        Q(sqrt 2), and are this project's witness W-known-best-n019 in the same order. The
+        chain to the final theorem (a 25-cell cover with capacity one, the D4 orbit census,
+        the sub-pattern exclusions leaving seven survivors, four branch-tree exclusions,
+        three capture states confining the packing to the box H about Wainwright's
+        configuration, and the exact local endgame on H) was re-derived and leaves no case
+        uncovered and no hypothesis in the assembly. The trust boundary is the source's:
+        the kernel, and for 4,320 native_decide facts Lean's compiler and native evaluator,
+        the C toolchain and Lean core's compiled runtime. Programs written for the review
+        re-established the property each of the 2,328 native facts whose modules are in the
+        Git tree certifies (for the combinatorial facts the predicate itself), and scanned
+        the five release archives (digests equal to SHA256SUMS, no axiom, sorry or other
+        trust-widening construct); the 1,992 archived facts, the census pattern traces,
+        the capture runs and tables and the survivor trees, were not re-run, and for the
+        endgame and region facts a pass shows the certified property, not the native
+        evaluator's value. Verdict accepted: no blocking or
+        major defect, three minor findings (N19-1 the witness's ordering not credited, N19-2
+        generators and notes unpublished, N19-3 the kernel-replay receipt bound to an
+        unpublished build) and four notes. Nothing was built: that the modules compile, that
+        the kernel accepts them and that the native facts evaluate to true is the author's
+        report.
     limitations: >-
       The source reports the theorem, its axiom report (propext, Classical.choice,
       Quot.sound and 4,320 native_decide facts, no sorryAx) and a kernel replay of the
@@ -37696,12 +37889,247 @@ evidence:
       the proofs and takes the native facts as axioms; and says that a complete rebuild
       from source "takes several hours on 64 cores and has not yet been run". Nothing here
       observed or repeated a build: the full from-source build with the axiom check is
-      priced at about 190 to 380 CPU-hours and needs a machine of hundreds of GB, above
+      priced at about 190 to 420 CPU-hours, central about 290 (3 to 6 wall hours on 64
+      cores, about 190 to 380, and up to about 40 more for the optional kernel replay;
+      T-194's unfinished_confirmations), and needs a machine of hundreds of GB, above
       the pass's 40 CPU-hour cap and this host's 4 cores and 15 GB (think-nqnl, held). The
       triage of 16 October read the statement and its definitions without a build: the
       problem is the record's at n = 19 and the constant is the case's exact upper bound.
-      No mathematical review is on file yet (think-o40t), so the entry counts toward no
-      rung above C0.
+      The review of 16 October (external_review) read the proof without a build; it makes
+      the entry reviewed, which is C1, and nothing in it replaces the build that V3 and C3
+      need.
+    source_reviewed: '2026-10-16'
+
+  - id: E-n019-fitzharding-endpoint-review
+    claim: derived-structure
+    scope: {n_values: [19]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Fitzharding n19 Lean 2026]'
+    certificate: packing/resources/web/fitzharding-n19-lean-2026-10-16/review/README.md
+    replay: >-
+      From packing/, with P = resources/web/fitzharding-n19-lean-2026-10-16, run
+      .venv/bin/python3 -I $P/review/check_endpoint.py $P/sq19
+      witnesses/known-best/n-019.yaml. It must print what the review README's results
+      record: nineteen unit squares inside [0, 3 + 4√2/3]^2 with minimum clearance 0, all
+      171 pairs weakly separated by an edge normal with 31 touching on their best axis, the
+      witness's squares in the same order with largest difference 4.44e-16, PASS, and
+      exit 0.
+    replay_status: passed
+    verifiers: [V-sq19-review-endpoint]
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the existence half: the nineteen squares of EndpointPacking.lean, their unit
+          directions and containment, and the separation of all 171 pairs, in exact
+          Q(sqrt 2), and their order and values against W-known-best-n019
+    limitations: >-
+      Run here on 16 October 2026 by the stage 4 review of the Lean proof (think-o40t)
+      and again the same day by its records lane, with the same output, under Python
+      3.14.7 on the retained sources read as data. It decides that the squares the Lean
+      file names are a packing at side 3 + 4√2/3, which E-lifted-q2-upper already holds
+      for this case; it does not check the Lean proof of endpoint_packing or anything of
+      the impossibility half. It is case-record evidence and is not cited by T-194, since
+      it decides one part.
+    source_reviewed: '2026-10-16'
+
+  - id: E-n019-fitzharding-cover-census-review
+    claim: derived-structure
+    scope: {n_values: [19]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Fitzharding n19 Lean 2026]'
+    certificate: packing/resources/web/fitzharding-n19-lean-2026-10-16/review/README.md
+    replay: >-
+      From packing/, with P as in E-n019-fitzharding-endpoint-review, run
+      .venv/bin/python3 -I $P/review/check_cover_census.py $P/sq19. Every check must print
+      PASS: 177,100 sets with no miss, 22,475 orbits, the tree masks at census indices 1,
+      2, 5423 and 5453 and the capture masks at 3435, 3438 and 3442, 177,062 non-survivor
+      masks covered and no survivor image covered; and it must exit 0.
+    replay_status: passed
+    verifiers: [V-sq19-review-cover-census]
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the cover and the census: the 25 cells' tiling of the centre box, the symmetry
+          tables, the capacity data, the native facts Sq19.Cover.orbit_check,
+          Sq19.Assembly.CensusRoute.route_checked and captureIndex_checked as predicates,
+          the 38 survivor images, and the coverage of every non-survivor mask by the 269
+          certified patterns
+    limitations: >-
+      Run here on 16 October 2026 by the stage 4 review of the Lean proof and again the
+      same day by its records lane, with the same output, under Python 3.14.7, in exact
+      rational arithmetic on the retained sources read as data. For the three native facts
+      it decides the finite predicate the Boolean encodes. The coverage check reads each
+      pattern's roster from its name, P<hex> as the cells of mask 0x<hex>, which the review
+      asks the author to confirm (N19-6, question 4); the rosters themselves are in the
+      census archive, and the pattern traces that exclude them were not re-run. The Lean
+      proves the cell capacities and the census's completeness, which this does not
+      replace. Case-record evidence, not cited by T-194, since it decides parts.
+    source_reviewed: '2026-10-16'
+
+  - id: E-n019-fitzharding-region-review
+    claim: derived-structure
+    scope: {n_values: [19]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: shared-components
+    shared_components: [sqCheck, wallCheck]
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Fitzharding n19 Lean 2026]'
+    certificate: packing/resources/web/fitzharding-n19-lean-2026-10-16/review/README.md
+    replay: >-
+      From packing/, with P as in E-n019-fitzharding-endpoint-review, run
+      .venv/bin/python3 -I $P/review/check_region.py $P/sq19
+      witnesses/known-best/n-019.yaml. It must print PASS for all 76 target polygons
+      bounded and nonempty, for each of the nine Region facts, and for Wainwright's
+      configuration in H (minimum margin 6.98e-05), and exit 0.
+    replay_status: passed
+    verifiers: [V-sq19-review-region]
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the property the nine Sq19.Capture.Region native facts certify (sq_ok and wall_ok
+          of S3442, S3435 and S3438, and sq_ok, wall_ok and top_ok of S3435P0): each capture
+          target, moved by the frame shift, inside its box of Hull.prob; and Wainwright's
+          configuration in H
+    limitations: >-
+      Run here on 16 October 2026 by the stage 4 review of the Lean proof and again the
+      same day by its records lane, with the same output, under Python 3.14.7 in exact
+      rationals. It transcribes sqCheck and wallCheck and replaces only impliedOK by
+      vertex enumeration, so it is independent in evaluation, not in formulation. A pass
+      shows that the certified property holds, so a wrong native result among these nine
+      facts would not make the statement false; it shows nothing about whether the native
+      evaluator's true is the kernel's value. Case-record evidence, not cited by T-194.
+    source_reviewed: '2026-10-16'
+
+  - id: E-n019-fitzharding-capture-link-review
+    claim: derived-structure
+    scope: {n_values: [19]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Fitzharding n19 Lean 2026]'
+    certificate: packing/resources/web/fitzharding-n19-lean-2026-10-16/review/README.md
+    replay: >-
+      From packing/, with P as in E-n019-fitzharding-endpoint-review and W a scratch
+      directory outside the checkout, download sq19-generated-S3435, -S3438 and
+      -S3442.tar.xz from the v1.0.0 release, extract each state's Sq19Lean/Capture/S<k>/
+      directory and run .venv/bin/python3 -I $P/review/check_capture_link.py $P/sq19
+      $W/x-S<k> <k>, as the review README's Running Them gives. Each must print PASS for
+      cells_ok, mask_ok, width_checked and tile_checked with every file read matching its
+      listed digest, and exit 0.
+    replay_status: passed
+    verifiers: [V-sq19-review-capture-link]
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the twelve census-to-capture link facts, cells_ok, mask_ok, width_checked and
+          tile_checked of capture states S3435, S3438 and S3442, as predicates
+    limitations: >-
+      Run here on 16 October 2026 by the stage 4 review of the Lean proof under Python
+      3.14.7, on the states' data extracted from the release archives at their listed
+      digests; not re-run by the records lane, which kept no copy of the archives. The
+      facts are tree facts, 12 of the 21 capture facts in the Git tree; it decides the
+      predicates, not the capture propagation runs, tables or summaries, which are in the
+      archives and were not re-run. Case-record evidence, not cited by T-194.
+    source_reviewed: '2026-10-16'
+
+  - id: E-n019-fitzharding-endgame-review
+    claim: derived-structure
+    scope: {n_values: [19]}
+    assurance: verified
+    method: interval-certified
+    performed_by: repository
+    relationship_to_generator: shared-components
+    shared_components: [RowsH, RowsAH, PhiExpr, Combine, ReductionCases]
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Fitzharding n19 Lean 2026]'
+    certificate: packing/resources/web/fitzharding-n19-lean-2026-10-16/review/README.md
+    replay: >-
+      From packing/, with P as in E-n019-fitzharding-endpoint-review, run
+      .venv/bin/python3 -I $P/review/check_endgame.py $P/sq19 --cases all (about two and a
+      half minutes on one core). It must print 4,096 of 4,096 cases passing, with lower
+      bounds over H of 0.701147, 0.7009 and 0.999596 for the multipliers, 1.49126 for S1
+      and 0.0383454 for the slope, and exit 0.
+    replay_status: passed
+    verifiers: [V-sq19-review-endgame]
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the property the 2,304 Sq19.Endgame.Reduction.Shard*.case* native facts certify,
+          over all 4,096 sign and owner cases they and their reductions cover: on the whole
+          box H, the three Farkas multipliers nonnegative, S1 > 0, and the endpoint margin's
+          directional derivatives nonnegative
+    limitations: >-
+      Run here on 16 October 2026 by the stage 4 review of the Lean proof and again the
+      same day by its records lane, with the same output, under Python 3.14.7, with
+      fixed-point outward rounding at 2^-160, the quarter-turn values exact, bounds
+      |sin x - x| <= |x|^3/6 and 1 - x^2/2 <= cos x <= 1, and forward-mode slopes. It
+      transcribes the source's row definitions, so it is independent in evaluation, not in
+      formulation. A pass shows that the certified property holds, so a wrong native
+      result among these facts would not make the statement false; it shows nothing about
+      whether the native evaluator's true is the kernel's value of checkNat. The margin at
+      theta = 0 is zero to 1e-46, the packing's tightness; the axis-zero face, which the
+      source proves exactly, is not decided here by intervals. Its floating-point sample of
+      25,564 cone points decides nothing. Case-record evidence, not cited by T-194.
+    source_reviewed: '2026-10-16'
+
+  - id: E-n019-fitzharding-archives-review
+    claim: derived-structure
+    scope: {n_values: [19]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Fitzharding n19 Lean 2026]'
+    certificate: packing/resources/web/fitzharding-n19-lean-2026-10-16/review/README.md
+    replay: >-
+      From packing/, with P as in E-n019-fitzharding-endpoint-review and W a scratch
+      directory outside the checkout, download SHA256SUMS and the five v1.0.0 archives one
+      at a time and run $P/review/scan_archives.py on each, then $P/review/count_native.py
+      over the five scans, as the review README's Running Them gives. Every archive's
+      digest must equal SHA256SUMS and every member its listed digest, with none unlisted
+      and no forbidden construct, and the count must place 2,328 of the 4,320 logged
+      native facts in the Git tree, 1,992 in the archives and none nowhere.
+    replay_status: passed
+    verifiers: [V-sq19-review-archive-scan, V-sq19-review-native-count]
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the five release archives (S3438, S3442, S3435, census and survivors; 2,112
+          members, 10,155,114,248 bytes of source): digests, members and the keyword scan;
+          and the location of each of the 4,320 native facts of the axiom report
+    limitations: >-
+      Run here on 16 October 2026 by the stage 4 review of the Lean proof under Python
+      3.14.7, each archive downloaded to scratch, scanned and deleted; not re-run by the
+      records lane. A digest check and a keyword scan decide the archives' custody and the
+      absence of the listed trust-widening constructs, not any fact's truth; the count is
+      accounting. Six facts are in both places (the three State.lean files the archives
+      also carry, byte-identical), and 170 native theorems are built but not used by the
+      final theorem. Case-record evidence, not cited by T-194.
     source_reviewed: '2026-10-16'
   - id: E-pingyou-622-certificate-report
     claim: upper-bound
@@ -38098,17 +38526,30 @@ evidence:
     replay_status: not-attempted
     verifiers: [V-wand125-sqverify-proof-net]
     limitations: >-
-      The author reports 853/100 at all 201 directions of the net its candidate
-      declares (step 83/40000, core 9977/10000) by sqverify-proof-net, its copy of
-      this repository's sqverify_fast, at 14b4b0b, in jlevy/squares#446, in a check2
-      run (255.6 s at 12 threads) and a pre-publication run on a fresh machine (75 s).
-      Complete source-byte custody and the maintained mass, net and check2 premises
-      are accepted (receipts/premises-n68.json). The 32-direction 197/200 control
-      remains sampled. A complete capture, whole-net controls and a review that reads
-      this certificate remain pending under think-f40c, priced at about 0.84 to 0.96
-      CPU-hours. The shared crate establishes no independent implementation. No
-      standing bound or rating changes.
-    source_reviewed: '2026-10-17'
+      The source reports 853/100 at all 201 declared-net directions by sqverify-proof-net,
+      its adapted copy of this repository's crate, in its check2 and pre-publication runs.
+      Original source receipts, exact premises and candidate identities remain retained
+      unchanged. Its 32-direction 197/200 control remains sampled. The accepted maintained
+      native replay is separately registered as
+      E-wand125-fine-net-n68-853-sqverify-fast-replay;
+      docs/project/reviews/review-2026-10-19-n68-fine-net-mathematics.md accepts its
+      mathematical implication, premises, complete control partition and exact saved-point
+      checks. The producer and maintained replay share the crate apart from their
+      declared-net readers, so agreement is not independent full confirmation or a second
+      method. The source's checker was not executed here.
+    source_reviewed: '2026-10-19'
+    external_review:
+      state: informally-verified
+      date: '2026-10-19'
+      reviewed_by: >-
+        Codex (OpenAI), strongest tier at maximum reasoning; separately prompted certificate
+        mathematics lane
+      note: >-
+        docs/project/reviews/review-2026-10-19-n68-fine-net-mathematics.md accepts the exact
+        candidate implication, retained complete native computation and 197 independently
+        recomputed saved control refusals. The maintained replay is registered separately as
+        E-wand125-fine-net-n68-853-sqverify-fast-replay. The point audit supplies no
+        universal coverage proof or independent full implementation.
   - id: E-wand125-fine-net-n84-94225-report
     claim: lower-bound
     scope: {n_values: [84]}
@@ -38124,17 +38565,30 @@ evidence:
     replay_status: not-attempted
     verifiers: [V-wand125-sqverify-proof-net]
     limitations: >-
-      The author reports 3769/400 at all 201 directions of the net its candidate
-      declares (step 83/40000, core 9977/10000) by sqverify-proof-net, its copy of
-      this repository's sqverify_fast, at f28b5f3, in jlevy/squares#446, in a check2
-      run (328.4 s at 12 threads) and a pre-publication run on a fresh machine (121
-      s). Complete source-byte custody and the maintained mass, net and check2
-      premises are accepted (receipts/premises-n84.json). The 32-direction 197/200
-      control remains sampled. A complete capture, whole-net controls and a review
-      that reads this certificate remain pending under think-f40c, priced at about 1.5
-      to 1.72 CPU-hours. The shared crate establishes no independent implementation.
-      No standing bound or rating changes.
-    source_reviewed: '2026-10-17'
+      The source reports 3769/400 at all 201 declared-net directions by sqverify-proof-net,
+      its adapted copy of this repository's crate, in its check2 and pre-publication runs.
+      Original source receipts, exact premises and candidate identities remain retained
+      unchanged. Its 32-direction 197/200 control remains sampled. The accepted maintained
+      native replay is separately registered as
+      E-wand125-fine-net-n84-94225-sqverify-fast-replay;
+      docs/project/reviews/review-2026-10-19-n84-n85-fine-net-mathematics.md accepts its
+      mathematical implication, premises, complete control partition and exact saved-point
+      checks. The producer and maintained replay share the crate apart from their
+      declared-net readers, so agreement is not independent full confirmation or a second
+      method. The source's checker was not executed here.
+    source_reviewed: '2026-10-19'
+    external_review:
+      state: informally-verified
+      date: '2026-10-19'
+      reviewed_by: >-
+        Codex (OpenAI), strongest tier at maximum reasoning; separately prompted certificate
+        mathematics lane
+      note: >-
+        docs/project/reviews/review-2026-10-19-n84-n85-fine-net-mathematics.md accepts the
+        exact candidate implication, retained complete native computation and 201
+        independently recomputed saved control refusals. The maintained replay is registered
+        separately as E-wand125-fine-net-n84-94225-sqverify-fast-replay. The point audit
+        supplies no universal coverage proof or independent full implementation.
   - id: E-wand125-fine-net-n85-9475-report
     claim: lower-bound
     scope: {n_values: [85]}
@@ -38150,17 +38604,30 @@ evidence:
     replay_status: not-attempted
     verifiers: [V-wand125-sqverify-proof-net]
     limitations: >-
-      The author reports 379/40 at all 201 directions of the net its candidate
-      declares (step 83/40000, core 9977/10000) by sqverify-proof-net, its copy of
-      this repository's sqverify_fast, at fc2e96f, in jlevy/squares#446, in a check2
-      run (255.1 s at 12 threads) and a pre-publication run on a fresh machine (124
-      s). Complete source-byte custody and the maintained mass, net and check2
-      premises are accepted (receipts/premises-n85.json). The 32-direction 197/200
-      control remains sampled. A complete capture, whole-net controls and a review
-      that reads this certificate remain pending under think-f40c, priced at about
-      1.32 to 1.52 CPU-hours. The shared crate establishes no independent
-      implementation. No standing bound or rating changes.
-    source_reviewed: '2026-10-17'
+      The source reports 379/40 at all 201 declared-net directions by sqverify-proof-net,
+      its adapted copy of this repository's crate, in its check2 and pre-publication runs.
+      Original source receipts, exact premises and candidate identities remain retained
+      unchanged. Its 32-direction 197/200 control remains sampled. The accepted maintained
+      native replay is separately registered as
+      E-wand125-fine-net-n85-9475-sqverify-fast-replay;
+      docs/project/reviews/review-2026-10-19-n84-n85-fine-net-mathematics.md accepts its
+      mathematical implication, premises, complete control partition and exact saved-point
+      checks. The producer and maintained replay share the crate apart from their
+      declared-net readers, so agreement is not independent full confirmation or a second
+      method. The source's checker was not executed here.
+    source_reviewed: '2026-10-19'
+    external_review:
+      state: informally-verified
+      date: '2026-10-19'
+      reviewed_by: >-
+        Codex (OpenAI), strongest tier at maximum reasoning; separately prompted certificate
+        mathematics lane
+      note: >-
+        docs/project/reviews/review-2026-10-19-n84-n85-fine-net-mathematics.md accepts the
+        exact candidate implication, retained complete native computation and 201
+        independently recomputed saved control refusals. The maintained replay is registered
+        separately as E-wand125-fine-net-n85-9475-sqverify-fast-replay. The point audit
+        supplies no universal coverage proof or independent full implementation.
   - id: E-wand125-fine-net-n86-95275-report
     claim: lower-bound
     scope: {n_values: [86]}
@@ -38597,3 +39064,625 @@ evidence:
       2.47 to 2.83 CPU-hours. The shared crate establishes no independent
       implementation. No standing bound or rating changes.
     source_reviewed: '2026-10-17'
+  - id: E-wand125-fine-net-n68-853-sqverify-fast-replay
+    claim: lower-bound
+    scope: {n_values: [68]}
+    assurance: verified
+    method: interval-certified
+    performed_by: repository
+    relationship_to_generator: shared-components
+    shared_components:
+      - >-
+        The sqverify_fast crate, apart from the producer's declared-net reader;
+        sqverify-proof-net adapts this repository's crate.
+    independence:
+      coverage:
+        extent: full
+        unit: complete legal core-centre domains at every declared-net direction
+        checked: 201
+        of: 201
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+    certificate: >-
+      packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n68_L853/candidate.json.gz
+    replay: >-
+      The authentic mixed-family sqverify_fast_census invocation for mixed_n68_L853, at
+      threshold one and all 201 declared-net directions with two workers, is retained in
+      packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-2026-10-16/mixed_n68_L853.execution.json.
+      The selected native row is in
+      packing/benchmarks/measure-verifier/census-mixed/census.json; capture and control
+      receipts are its adjacent mixed_n68_L853.jsonl.gz and mixed_n68_L853.control.json.
+      Native exit 0, every direction verified and summary VERIFIED; whole-net control status
+      CONTROLS_REFUSED. The mapped certificate review
+      docs/project/reviews/review-2026-10-19-n68-fine-net-mathematics.md accepts the
+      retained capture, exact premises and saved-point audit. Platform qualification is
+      docs/project/reviews/review-2026-10-19-fine-net-mac-arithmetic.md. This records the
+      actual completed computation; records preparation did not rerun the native engine.
+      Historical commands, exact-audit source closure and PASS output are retained under
+      packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/. The census
+      driver as it ran is retained as
+      packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/orchestration/sqverify_fast_census.py.txt.
+    replay_status: passed
+    verifiers: [V-sqverify-fast]
+    proof:
+      source: packing/sqverify_fast/SOUNDNESS.md
+      theorem: >-
+        The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats M
+        and L, lemma D for format M's per-bin domain), applied to wand125's mixed_n68_L853:
+        no 68 unit squares pack in a square of side 853/100, so s(68) >= 853/100.
+      scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
+      pinpoints: >-
+        SOUNDNESS.md's theorem and lemmas, accepted with the crate by
+        docs/project/reviews/review-2026-10-03-sqverify-fast-soundness.md, and lemma N0 and
+        the declared-net change by
+        docs/project/reviews/review-2026-10-06-sqverify-fast-declared-net-soundness.md; the
+        certificate's mathematics read in
+        docs/project/reviews/review-2026-10-19-n68-fine-net-mathematics.md; the census route
+        accepted as a complete replay here in
+        docs/project/reviews/review-2026-10-05-wand125-october-5-and-independent-replays.md;
+        the census row, receipts and control receipt named in replay. Mac arithmetic and
+        execution qualification:
+        docs/project/reviews/review-2026-10-19-fine-net-mac-arithmetic.md; the exact-audit
+        read log and bounded coverage are
+        packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/README.md.
+      assumptions:
+        - >-
+          The density is nonnegative and exact, of total mass 6799999/100000 < 68, which
+          admission recomputes from the retained candidate.
+        - >-
+          Every angle and legal centre is covered by the net its candidate declares
+          (proof_net), lemma N0 of SOUNDNESS.md, of 201 half-angles of step 83/40000 at core
+          side 9977/10000 and format M's per-bin centre domains, which admission checks in
+          exact rationals.
+        - >-
+          Binary64 arithmetic has IEEE-754 semantics with directed rounding per operation,
+          as SOUNDNESS.md's Floating Point section uses it.
+        - >-
+          The candidate is the retained release file whose stored and decompressed
+          identities match the pinned acquisition manifest and the maintained exact-premises
+          receipt.
+      audit_record: docs/project/reviews/review-2026-10-19-n68-fine-net-mathematics.md
+    limitations: >-
+      sqverify-fast, this repository's maintained measure verifier, decided the retained
+      candidate mixed_n68_L853 at all 201 net directions on 2026-10-19. The receipts name
+      the stored gzip file's SHA-256 cbbf2808..., which decompresses to the SHA-256
+      3c5521d6... the packet's acquisition record pins (devtools.retained_data check ties
+      the two). Admission recomputed in exact rationals n = 68, L = 853/100, the total mass
+      6799999/100000 < 68, the core side 9977/10000 with B(1 + D/(1 - D^2/4)) < 1 and the
+      net its candidate declares (proof_net), of 201 half-angles of step 83/40000, with B(1
+      + D) = 399908091/400000000 < 1 and the last tangent 83/200 past tan(pi/8) and at most
+      1/2 (SOUNDNESS.md, lemma N0), from 726 rectangle rows (5,796 distinct images) and no
+      point or segment, and took format M's per-bin centre domain, at threshold 1. The axis
+      direction was decided by an exact-event vertex sweep over 23,941,449 vertices, least
+      certified capture 1.0085520385066322; the other 200 by interval branch and bound over
+      104,110,078 boxes, least certified lower bound 1.0000000000889968 at index 99; the
+      exact capture at the least-bound leaf's centre (index 99) is 1.0840255198. Every
+      direction verified, summary VERIFIED, native exit 0, 856 aggregate process CPU seconds
+      (wait4) at two threads and 437 seconds of wall time. Per-direction CPU is unavailable;
+      no zero CPU measurement is inferred from the native summary. The recorded load average
+      3.3 was measured at start. The companion records a recovered complete native capture;
+      the outer capture exit was unobserved (native exit 0). The execution companion records
+      346.81 aggregate control CPU seconds and 186.31 seconds of wall time for the complete
+      driver and children (/usr/bin/time). The execution companion is
+      packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-2026-10-16/mixed_n68_L853.execution.json.
+      The build is rustc 1.98.0 (88d9e12ae 2026-08-18), release, aarch64-apple-darwin,
+      source_sha256 d97758bb...: the crate source at 910b6b12c: the source of e020eb1e2
+      (7c49cf79...) with the declared net of format M (proof_net, SOUNDNESS.md lemma N0) and
+      its review fixes, a diff the soundness review
+      docs/project/reviews/review-2026-10-06-sqverify-fast-declared-net-soundness.md read in
+      full and accepted. The producer adapted this repository's crate as sqverify-proof-net;
+      the two share the sqverify_fast crate apart from their declared-net readers. This
+      replay is not an independent full implementation or a second method. The maintained
+      crate's declared-net reader was written without opening the producer's adapted source
+      (packing/sqverify_fast/INDEPENDENCE.md, Declared Nets). The theorem, net, core side,
+      per-bin domain and threshold are shared. Its node counts and bounds are its own, not
+      the certificate's records. Controls: the original verified again at index 99; every
+      mass scaled by 99/100 refused at 197 of the 201 net directions, each a coverage
+      refusal at a centre in the per-bin domain where the mutant's exact capture is below 1
+      (the crate's confirmed witness, or at the axis the vertex sweep's least vertex); the
+      mutant verified at the other 4, where by the verifier's own decision the original
+      captures at least 100/99; and every mass scaled by 0.9225 so that the exact capture at
+      the least-bound leaf's centre is at most 1 - 10^-6 refused (counterexample-candidate,
+      exact capture below 1 at the least-bound leaf's centre); each capture below 1 was
+      evaluated again by an exact evaluator written apart from the crate, and
+      tests/test_sqverify_fast_census.py holds the receipts. The source's own checker was
+      not run here on this certificate, and its tarball is pinned by digest and not
+      retained.
+    source_reviewed: '2026-10-19'
+  - id: E-n068-fine-net-review-premises
+    claim: derived-structure
+    scope: {n_values: [68]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: not-applicable
+    origin: audited-here
+    novelty: previously-published
+    source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+    certificate: >-
+      packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n68_L853/candidate.json.gz
+    replay: >-
+      The historical exact audit command, complete source/import closure and read log are
+      retained in
+      packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/README.md;
+      its authentic PASS is
+      packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/n68-certificate-math/audit-result.json.gz.
+      The registered run checks the exact candidate premises and complete receipt
+      inventories. Records preparation retained that completed run without rerunning it or
+      reconstructing an outer exit.
+    replay_status: passed
+    verifiers: [V-fine-net-mac-review-exact]
+    independence_record: >-
+      packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/README.md
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          exact mass, D4 expansion, core/net/domain premises and retained receipt
+          inventories of this candidate
+    limitations: >-
+      This standard-library audit is premise and saved-point evidence only. It does not
+      decide universal coverage between points and derives no lower-bound rung alone. Its
+      authors read maintained code and prior reviews, and the later two-case driver reuses
+      the retained n68 helpers; no clean-room claim is made. The deciding native replay
+      remains a re-implementation sharing named components with the producer. Historical
+      source-context comparisons describe the original audit and do not gate on current code
+      or a Git revision.
+    source_reviewed: '2026-10-19'
+  - id: E-n068-fine-net-review-captures
+    claim: derived-structure
+    scope: {n_values: [68]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: not-applicable
+    origin: audited-here
+    novelty: previously-published
+    source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+    certificate: >-
+      packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/n68-certificate-math/audit-result.json.gz
+    replay: >-
+      The historical exact audit command, complete source/import closure and read log are
+      retained in
+      packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/README.md;
+      its authentic PASS is
+      packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/n68-certificate-math/audit-result.json.gz.
+      The registered run checks all 197 saved native scaled-control refusal poses, the
+      selected positive centre and the near-threshold witness, with full rational
+      comparisons. Records preparation retained that completed run without rerunning it or
+      reconstructing an outer exit.
+    replay_status: passed
+    verifiers: [V-fine-net-mac-review-exact]
+    independence_record: >-
+      packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/README.md
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          saved native 99/100 refusal poses plus selected positive centre and near-threshold
+          witness; no whole direction domain
+        checked: 199
+        of: 199
+    limitations: >-
+      This standard-library audit is premise and saved-point evidence only. It does not
+      decide universal coverage between points and derives no lower-bound rung alone. Its
+      authors read maintained code and prior reviews, and the later two-case driver reuses
+      the retained n68 helpers; no clean-room claim is made. The deciding native replay
+      remains a re-implementation sharing named components with the producer. Historical
+      source-context comparisons describe the original audit and do not gate on current code
+      or a Git revision.
+    source_reviewed: '2026-10-19'
+  - id: E-wand125-fine-net-n84-94225-sqverify-fast-replay
+    claim: lower-bound
+    scope: {n_values: [84]}
+    assurance: verified
+    method: interval-certified
+    performed_by: repository
+    relationship_to_generator: shared-components
+    shared_components:
+      - >-
+        The sqverify_fast crate, apart from the producer's declared-net reader;
+        sqverify-proof-net adapts this repository's crate.
+    independence:
+      coverage:
+        extent: full
+        unit: complete legal core-centre domains at every declared-net direction
+        checked: 201
+        of: 201
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+    certificate: >-
+      packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n84_L94225/candidate.json.gz
+    replay: >-
+      The authentic mixed-family sqverify_fast_census invocation for mixed_n84_L94225, at
+      threshold one and all 201 declared-net directions with two workers, is retained in
+      packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-2026-10-16/mixed_n84_L94225.execution.json.
+      The selected native row is in
+      packing/benchmarks/measure-verifier/census-mixed/census.json; capture and control
+      receipts are its adjacent mixed_n84_L94225.jsonl.gz and mixed_n84_L94225.control.json.
+      Native exit 0, every direction verified and summary VERIFIED; whole-net control status
+      CONTROLS_REFUSED. The mapped certificate review
+      docs/project/reviews/review-2026-10-19-n84-n85-fine-net-mathematics.md accepts the
+      retained capture, exact premises and saved-point audit. Platform qualification is
+      docs/project/reviews/review-2026-10-19-fine-net-mac-arithmetic.md. This records the
+      actual completed computation; records preparation did not rerun the native engine.
+      Historical commands, exact-audit source closure and PASS output are retained under
+      packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/. The census
+      driver as it ran is retained as
+      packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/orchestration/sqverify_fast_census.py.txt.
+    replay_status: passed
+    verifiers: [V-sqverify-fast]
+    proof:
+      source: packing/sqverify_fast/SOUNDNESS.md
+      theorem: >-
+        The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats M
+        and L, lemma D for format M's per-bin domain), applied to wand125's
+        mixed_n84_L94225: no 84 unit squares pack in a square of side 3769/400, so s(84) >=
+        3769/400.
+      scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
+      pinpoints: >-
+        SOUNDNESS.md's theorem and lemmas, accepted with the crate by
+        docs/project/reviews/review-2026-10-03-sqverify-fast-soundness.md, and lemma N0 and
+        the declared-net change by
+        docs/project/reviews/review-2026-10-06-sqverify-fast-declared-net-soundness.md; the
+        certificate's mathematics read in
+        docs/project/reviews/review-2026-10-19-n84-n85-fine-net-mathematics.md; the census
+        route accepted as a complete replay here in
+        docs/project/reviews/review-2026-10-05-wand125-october-5-and-independent-replays.md;
+        the census row, receipts and control receipt named in replay. Mac arithmetic and
+        execution qualification:
+        docs/project/reviews/review-2026-10-19-fine-net-mac-arithmetic.md; the exact-audit
+        read log and bounded coverage are
+        packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/README.md.
+      assumptions:
+        - >-
+          The density is nonnegative and exact, of total mass 8399999/100000 < 84, which
+          admission recomputes from the retained candidate.
+        - >-
+          Every angle and legal centre is covered by the net its candidate declares
+          (proof_net), lemma N0 of SOUNDNESS.md, of 201 half-angles of step 83/40000 at core
+          side 9977/10000 and format M's per-bin centre domains, which admission checks in
+          exact rationals.
+        - >-
+          Binary64 arithmetic has IEEE-754 semantics with directed rounding per operation,
+          as SOUNDNESS.md's Floating Point section uses it.
+        - >-
+          The candidate is the retained release file whose stored and decompressed
+          identities match the pinned acquisition manifest and the maintained exact-premises
+          receipt.
+      audit_record: docs/project/reviews/review-2026-10-19-n84-n85-fine-net-mathematics.md
+    limitations: >-
+      sqverify-fast, this repository's maintained measure verifier, decided the retained
+      candidate mixed_n84_L94225 at all 201 net directions on 2026-10-19. The receipts name
+      the stored gzip file's SHA-256 762bdf4c..., which decompresses to the SHA-256
+      afcba2f9... the packet's acquisition record pins (devtools.retained_data check ties
+      the two). Admission recomputed in exact rationals n = 84, L = 3769/400, the total mass
+      8399999/100000 < 84, the core side 9977/10000 with B(1 + D/(1 - D^2/4)) < 1 and the
+      net its candidate declares (proof_net), of 201 half-angles of step 83/40000, with B(1
+      + D) = 399908091/400000000 < 1 and the last tangent 83/200 past tan(pi/8) and at most
+      1/2 (SOUNDNESS.md, lemma N0), from 815 rectangle rows (6,464 distinct images) and no
+      point or segment, and took format M's per-bin centre domain, at threshold 1. The axis
+      direction was decided by an exact-event vertex sweep over 30,382,144 vertices, least
+      certified capture 1.007987423006541; the other 200 by interval branch and bound over
+      136,054,170 boxes, least certified lower bound 1.000000000314376 at index 156; the
+      exact capture at the least-bound leaf's centre (index 156) is 1.0333501717. Every
+      direction verified, summary VERIFIED, native exit 0, 1,396 aggregate process CPU
+      seconds (wait4) at two threads and 710 seconds of wall time. Per-direction CPU is
+      unavailable; no zero CPU measurement is inferred from the native summary. The recorded
+      load average 6.0 was measured at start. The execution companion records 160.09
+      aggregate control CPU seconds and 90.92 seconds of wall time for the complete driver
+      and children (/usr/bin/time). The execution companion is
+      packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-2026-10-16/mixed_n84_L94225.execution.json.
+      The build is rustc 1.98.0 (88d9e12ae 2026-08-18), release, aarch64-apple-darwin,
+      source_sha256 d97758bb...: the crate source at 910b6b12c: the source of e020eb1e2
+      (7c49cf79...) with the declared net of format M (proof_net, SOUNDNESS.md lemma N0) and
+      its review fixes, a diff the soundness review
+      docs/project/reviews/review-2026-10-06-sqverify-fast-declared-net-soundness.md read in
+      full and accepted. The producer adapted this repository's crate as sqverify-proof-net;
+      the two share the sqverify_fast crate apart from their declared-net readers. This
+      replay is not an independent full implementation or a second method. The maintained
+      crate's declared-net reader was written without opening the producer's adapted source
+      (packing/sqverify_fast/INDEPENDENCE.md, Declared Nets). The theorem, net, core side,
+      per-bin domain and threshold are shared. Its node counts and bounds are its own, not
+      the certificate's records. Controls: the original verified again at index 156; every
+      mass scaled by 99/100 refused at 201 of the 201 net directions, each a coverage
+      refusal at a centre in the per-bin domain where the mutant's exact capture is below 1
+      (the crate's confirmed witness, or at the axis the vertex sweep's least vertex); and
+      every mass scaled by 0.9677 so that the exact capture at the least-bound leaf's centre
+      is at most 1 - 10^-6 refused (counterexample-candidate, exact capture below 1 at the
+      least-bound leaf's centre); each capture below 1 was evaluated again by an exact
+      evaluator written apart from the crate, and tests/test_sqverify_fast_census.py holds
+      the receipts. The source's own checker was not run here on this certificate, and its
+      tarball is pinned by digest and not retained.
+    source_reviewed: '2026-10-19'
+  - id: E-n084-fine-net-review-premises
+    claim: derived-structure
+    scope: {n_values: [84]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: not-applicable
+    origin: audited-here
+    novelty: previously-published
+    source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+    certificate: >-
+      packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n84_L94225/candidate.json.gz
+    replay: >-
+      The historical exact audit command, complete source/import closure and read log are
+      retained in
+      packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/README.md;
+      its authentic PASS is
+      packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/n84-n85-certificate-math/n84-audit-result.json.gz.
+      The registered run checks the exact candidate premises and complete receipt
+      inventories. Records preparation retained that completed run without rerunning it or
+      reconstructing an outer exit.
+    replay_status: passed
+    verifiers: [V-fine-net-mac-review-exact]
+    independence_record: >-
+      packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/README.md
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          exact mass, D4 expansion, core/net/domain premises and retained receipt
+          inventories of this candidate
+    limitations: >-
+      This standard-library audit is premise and saved-point evidence only. It does not
+      decide universal coverage between points and derives no lower-bound rung alone. Its
+      authors read maintained code and prior reviews, and the later two-case driver reuses
+      the retained n68 helpers; no clean-room claim is made. The deciding native replay
+      remains a re-implementation sharing named components with the producer. Historical
+      source-context comparisons describe the original audit and do not gate on current code
+      or a Git revision.
+    source_reviewed: '2026-10-19'
+  - id: E-n084-fine-net-review-captures
+    claim: derived-structure
+    scope: {n_values: [84]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: not-applicable
+    origin: audited-here
+    novelty: previously-published
+    source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+    certificate: >-
+      packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/n84-n85-certificate-math/n84-audit-result.json.gz
+    replay: >-
+      The historical exact audit command, complete source/import closure and read log are
+      retained in
+      packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/README.md;
+      its authentic PASS is
+      packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/n84-n85-certificate-math/n84-audit-result.json.gz.
+      The registered run checks all 201 saved native scaled-control refusal poses, the
+      selected positive centre and the near-threshold witness, with full rational
+      comparisons. Records preparation retained that completed run without rerunning it or
+      reconstructing an outer exit.
+    replay_status: passed
+    verifiers: [V-fine-net-mac-review-exact]
+    independence_record: >-
+      packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/README.md
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          saved native 99/100 refusal poses plus selected positive centre and near-threshold
+          witness; no whole direction domain
+        checked: 203
+        of: 203
+    limitations: >-
+      This standard-library audit is premise and saved-point evidence only. It does not
+      decide universal coverage between points and derives no lower-bound rung alone. Its
+      authors read maintained code and prior reviews, and the later two-case driver reuses
+      the retained n68 helpers; no clean-room claim is made. The deciding native replay
+      remains a re-implementation sharing named components with the producer. Historical
+      source-context comparisons describe the original audit and do not gate on current code
+      or a Git revision.
+    source_reviewed: '2026-10-19'
+  - id: E-wand125-fine-net-n85-9475-sqverify-fast-replay
+    claim: lower-bound
+    scope: {n_values: [85]}
+    assurance: verified
+    method: interval-certified
+    performed_by: repository
+    relationship_to_generator: shared-components
+    shared_components:
+      - >-
+        The sqverify_fast crate, apart from the producer's declared-net reader;
+        sqverify-proof-net adapts this repository's crate.
+    independence:
+      coverage:
+        extent: full
+        unit: complete legal core-centre domains at every declared-net direction
+        checked: 201
+        of: 201
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+    certificate: >-
+      packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n85_L9475/candidate.json.gz
+    replay: >-
+      The authentic mixed-family sqverify_fast_census invocation for mixed_n85_L9475, at
+      threshold one and all 201 declared-net directions with two workers, is retained in
+      packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-2026-10-16/mixed_n85_L9475.execution.json.
+      The selected native row is in
+      packing/benchmarks/measure-verifier/census-mixed/census.json; capture and control
+      receipts are its adjacent mixed_n85_L9475.jsonl.gz and mixed_n85_L9475.control.json.
+      Native exit 0, every direction verified and summary VERIFIED; whole-net control status
+      CONTROLS_REFUSED. The mapped certificate review
+      docs/project/reviews/review-2026-10-19-n84-n85-fine-net-mathematics.md accepts the
+      retained capture, exact premises and saved-point audit. Platform qualification is
+      docs/project/reviews/review-2026-10-19-fine-net-mac-arithmetic.md. This records the
+      actual completed computation; records preparation did not rerun the native engine.
+      Historical commands, exact-audit source closure and PASS output are retained under
+      packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/. The census
+      driver as it ran is retained as
+      packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/orchestration/sqverify_fast_census.py.txt.
+    replay_status: passed
+    verifiers: [V-sqverify-fast]
+    proof:
+      source: packing/sqverify_fast/SOUNDNESS.md
+      theorem: >-
+        The net-and-shrink measure-capture obstruction of SOUNDNESS.md (The Claim; Formats M
+        and L, lemma D for format M's per-bin domain), applied to wand125's mixed_n85_L9475:
+        no 85 unit squares pack in a square of side 379/40, so s(85) >= 379/40.
+      scope: Unrestricted square packing with disjoint interiors and arbitrary rotations.
+      pinpoints: >-
+        SOUNDNESS.md's theorem and lemmas, accepted with the crate by
+        docs/project/reviews/review-2026-10-03-sqverify-fast-soundness.md, and lemma N0 and
+        the declared-net change by
+        docs/project/reviews/review-2026-10-06-sqverify-fast-declared-net-soundness.md; the
+        certificate's mathematics read in
+        docs/project/reviews/review-2026-10-19-n84-n85-fine-net-mathematics.md; the census
+        route accepted as a complete replay here in
+        docs/project/reviews/review-2026-10-05-wand125-october-5-and-independent-replays.md;
+        the census row, receipts and control receipt named in replay. Mac arithmetic and
+        execution qualification:
+        docs/project/reviews/review-2026-10-19-fine-net-mac-arithmetic.md; the exact-audit
+        read log and bounded coverage are
+        packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/README.md.
+      assumptions:
+        - >-
+          The density is nonnegative and exact, of total mass 8499999/100000 < 85, which
+          admission recomputes from the retained candidate.
+        - >-
+          Every angle and legal centre is covered by the net its candidate declares
+          (proof_net), lemma N0 of SOUNDNESS.md, of 201 half-angles of step 83/40000 at core
+          side 9977/10000 and format M's per-bin centre domains, which admission checks in
+          exact rationals.
+        - >-
+          Binary64 arithmetic has IEEE-754 semantics with directed rounding per operation,
+          as SOUNDNESS.md's Floating Point section uses it.
+        - >-
+          The candidate is the retained release file whose stored and decompressed
+          identities match the pinned acquisition manifest and the maintained exact-premises
+          receipt.
+      audit_record: docs/project/reviews/review-2026-10-19-n84-n85-fine-net-mathematics.md
+    limitations: >-
+      sqverify-fast, this repository's maintained measure verifier, decided the retained
+      candidate mixed_n85_L9475 at all 201 net directions on 2026-10-19. The receipts name
+      the stored gzip file's SHA-256 18d5a9e6..., which decompresses to the SHA-256
+      313710d6... the packet's acquisition record pins (devtools.retained_data check ties
+      the two). Admission recomputed in exact rationals n = 85, L = 379/40, the total mass
+      8499999/100000 < 85, the core side 9977/10000 with B(1 + D/(1 - D^2/4)) < 1 and the
+      net its candidate declares (proof_net), of 201 half-angles of step 83/40000, with B(1
+      + D) = 399908091/400000000 < 1 and the last tangent 83/200 past tan(pi/8) and at most
+      1/2 (SOUNDNESS.md, lemma N0), from 838 rectangle rows (6,672 distinct images) and no
+      point or segment, and took format M's per-bin centre domain, at threshold 1. The axis
+      direction was decided by an exact-event vertex sweep over 30,935,844 vertices, least
+      certified capture 1.0082420618552077; the other 200 by interval branch and bound over
+      126,895,910 boxes, least certified lower bound 1.000000000004128 at index 185; the
+      exact capture at the least-bound leaf's centre (index 185) is 1.0280525946. Every
+      direction verified, summary VERIFIED, native exit 0, 1,414 aggregate process CPU
+      seconds (wait4) at two threads and 720 seconds of wall time. Per-direction CPU is
+      unavailable; no zero CPU measurement is inferred from the native summary. The recorded
+      load average 7.9 was measured at start. The execution companion records 108.41
+      aggregate control CPU seconds and 65.75 seconds of wall time for the complete driver
+      and children (/usr/bin/time). The execution companion is
+      packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-2026-10-16/mixed_n85_L9475.execution.json.
+      The build is rustc 1.98.0 (88d9e12ae 2026-08-18), release, aarch64-apple-darwin,
+      source_sha256 d97758bb...: the crate source at 910b6b12c: the source of e020eb1e2
+      (7c49cf79...) with the declared net of format M (proof_net, SOUNDNESS.md lemma N0) and
+      its review fixes, a diff the soundness review
+      docs/project/reviews/review-2026-10-06-sqverify-fast-declared-net-soundness.md read in
+      full and accepted. The producer adapted this repository's crate as sqverify-proof-net;
+      the two share the sqverify_fast crate apart from their declared-net readers. This
+      replay is not an independent full implementation or a second method. The maintained
+      crate's declared-net reader was written without opening the producer's adapted source
+      (packing/sqverify_fast/INDEPENDENCE.md, Declared Nets). The theorem, net, core side,
+      per-bin domain and threshold are shared. Its node counts and bounds are its own, not
+      the certificate's records. Controls: the original verified again at index 185; every
+      mass scaled by 99/100 refused at 201 of the 201 net directions, each a coverage
+      refusal at a centre in the per-bin domain where the mutant's exact capture is below 1
+      (the crate's confirmed witness, or at the axis the vertex sweep's least vertex); and
+      every mass scaled by 0.9727 so that the exact capture at the least-bound leaf's centre
+      is at most 1 - 10^-6 refused (counterexample-candidate, exact capture below 1 at the
+      least-bound leaf's centre); each capture below 1 was evaluated again by an exact
+      evaluator written apart from the crate, and tests/test_sqverify_fast_census.py holds
+      the receipts. The source's own checker was not run here on this certificate, and its
+      tarball is pinned by digest and not retained.
+    source_reviewed: '2026-10-19'
+  - id: E-n085-fine-net-review-premises
+    claim: derived-structure
+    scope: {n_values: [85]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: not-applicable
+    origin: audited-here
+    novelty: previously-published
+    source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+    certificate: >-
+      packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n85_L9475/candidate.json.gz
+    replay: >-
+      The historical exact audit command, complete source/import closure and read log are
+      retained in
+      packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/README.md;
+      its authentic PASS is
+      packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/n84-n85-certificate-math/n85-audit-result.json.gz.
+      The registered run checks the exact candidate premises and complete receipt
+      inventories. Records preparation retained that completed run without rerunning it or
+      reconstructing an outer exit.
+    replay_status: passed
+    verifiers: [V-fine-net-mac-review-exact]
+    independence_record: >-
+      packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/README.md
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          exact mass, D4 expansion, core/net/domain premises and retained receipt
+          inventories of this candidate
+    limitations: >-
+      This standard-library audit is premise and saved-point evidence only. It does not
+      decide universal coverage between points and derives no lower-bound rung alone. Its
+      authors read maintained code and prior reviews, and the later two-case driver reuses
+      the retained n68 helpers; no clean-room claim is made. The deciding native replay
+      remains a re-implementation sharing named components with the producer. Historical
+      source-context comparisons describe the original audit and do not gate on current code
+      or a Git revision.
+    source_reviewed: '2026-10-19'
+  - id: E-n085-fine-net-review-captures
+    claim: derived-structure
+    scope: {n_values: [85]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: not-applicable
+    origin: audited-here
+    novelty: previously-published
+    source_key: '[wand125 fine-net lower bounds 2026-10-16]'
+    certificate: >-
+      packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/n84-n85-certificate-math/n85-audit-result.json.gz
+    replay: >-
+      The historical exact audit command, complete source/import closure and read log are
+      retained in
+      packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/README.md;
+      its authentic PASS is
+      packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/n84-n85-certificate-math/n85-audit-result.json.gz.
+      The registered run checks all 201 saved native scaled-control refusal poses, the
+      selected positive centre and the near-threshold witness, with full rational
+      comparisons. Records preparation retained that completed run without rerunning it or
+      reconstructing an outer exit.
+    replay_status: passed
+    verifiers: [V-fine-net-mac-review-exact]
+    independence_record: >-
+      packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/README.md
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          saved native 99/100 refusal poses plus selected positive centre and near-threshold
+          witness; no whole direction domain
+        checked: 203
+        of: 203
+    limitations: >-
+      This standard-library audit is premise and saved-point evidence only. It does not
+      decide universal coverage between points and derives no lower-bound rung alone. Its
+      authors read maintained code and prior reviews, and the later two-case driver reuses
+      the retained n68 helpers; no clean-room claim is made. The deciding native replay
+      remains a re-implementation sharing named components with the producer. Historical
+      source-context comparisons describe the original audit and do not gate on current code
+      or a Git revision.
+    source_reviewed: '2026-10-19'

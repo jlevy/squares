@@ -61,8 +61,12 @@ PAGE_BUDGET_EXCEPTIONS: dict[str, tuple[int, str]] = {
         "Complete n=11 proof/certificate record and prepared bounds measure 416,870 bytes.",
     ),
     "cases/17.html": (
-        500_000,
-        "Complete n=17 proof/certificate record and prepared bounds measure 443,761 bytes.",
+        550_000,
+        (
+            "Complete n=17 proof/certificate record and prepared bounds measure 501,977 "
+            "bytes on 16 October 2026 with T-154's source-build evidence, 499,855 on main "
+            "at 26d8bb335. The ceiling leaves room for the open n=17 intakes."
+        ),
     ),
     "cases/18.html": (
         350_000,
@@ -109,11 +113,20 @@ PAGE_BUDGET_EXCEPTIONS: dict[str, tuple[int, str]] = {
     "results.html": (
         1_250_000,
         (
-            "The complete 212-result table with prepared math measures 1,141,207 bytes. "
-            "Each row links its full record; no record body is repeated in the table. "
-            "Three-run desktop/mobile, light/dark and no-JS checks pass: "
+            "The complete 212-result table with prepared math measured 1,141,207 bytes "
+            "on 18 October 2026, with no section above it. Each row links its full "
+            "record; no record body is repeated in the table. Three-run "
+            "desktop/mobile, light/dark and no-JS checks of that table-only page pass: "
             "CLS <=0.001, LCP <=576 ms, longest task <=153 ms and blocking <=123 ms. "
-            "The ceiling retains about 100 kB of headroom for registered results."
+            "The seven days' arrivals and the weekly rollup above the table (#514) "
+            "cost 45,886 bytes at 217 results, 1,157,668 without them and 1,203,554 "
+            "with them, which halves the headroom from 92,332 to 46,446 bytes: about 9 "
+            "results at today's 90th-percentile row and seven-day entry, so "
+            "`test_overview` holds the page through 225. No timing has been measured "
+            "on the page with the sections. `think-v1qe` owns that measurement and the "
+            "runway: the intake that passes 225 re-measures the page, its "
+            "timing included, and either lightens the table or moves the ceiling as a "
+            "measured choice."
         ),
     ),
     "result/t-174.html": (

@@ -12,12 +12,27 @@ For the endgame and region facts a pass shows the certified property holds, not 
 native evaluator’s `true` is the kernel’s value (the review’s Independent Checks, “What a
 pass shows”).
 
-**Not yet registered.** At this revision no entry in
-[`verifiers.yaml`](../../../../frontier/verifiers.yaml) or
-[`evidence.yaml`](../../../../frontier/evidence.yaml) cites these programs, so no
-evidence entry rests on them yet. The records lane of the #640 import registers them,
-with their independence records and evidence entries (`think-a4x3`), and then updates
-this paragraph.
+**Registered.** Each program is a first-party entry in
+[`verifiers.yaml`](../../../../frontier/verifiers.yaml), with its independence record,
+and each run is an evidence entry in
+[`evidence.yaml`](../../../../frontier/evidence.yaml) with its coverage, cited by the
+case record [`n-019.md`](../../../../frontier/n-019.md) and not by `T-194`, since each
+decides a part and none builds the proof:
+
+| Program | Verifier | Evidence entry | Coverage |
+| --- | --- | --- | --- |
+| `check_endpoint.py` | `V-sq19-review-endpoint` | `E-n019-fitzharding-endpoint-review` | full: the existence half |
+| `check_cover_census.py` | `V-sq19-review-cover-census` | `E-n019-fitzharding-cover-census-review` | full: the cover and the census |
+| `check_region.py` | `V-sq19-review-region` | `E-n019-fitzharding-region-review` | full: the nine region facts’ property |
+| `check_capture_link.py` | `V-sq19-review-capture-link` | `E-n019-fitzharding-capture-link-review` | full: the twelve link facts |
+| `check_endgame.py` | `V-sq19-review-endgame` | `E-n019-fitzharding-endgame-review` | full: the endgame facts’ property, 4,096 cases |
+| `scan_archives.py` | `V-sq19-review-archive-scan` | `E-n019-fitzharding-archives-review` | full: the five archives’ custody |
+| `count_native.py` | `V-sq19-review-native-count` | `E-n019-fitzharding-archives-review` | full: where the 4,320 facts are proved |
+
+The review itself is recorded as the `external_review` of `T-194`’s report entry,
+`E-n019-fitzharding-lean-report`, which takes `T-194` to `C1`.
+On 16 October the records lane re-ran the four programs that need only the packet and
+got the same output.
 
 ## What Each Decides
 

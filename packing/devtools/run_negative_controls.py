@@ -1549,7 +1549,18 @@ def root_files() -> tuple[Path, ...]:
 # Propose 219 MiB for this measured source surface, with unchanged selection and the
 # oversized pre-clone refusal. Three portable workers remain bounded at 657 MiB.
 # This allowance covers neither unlanded contributor-profile inputs nor future intakes.
-SNAPSHOT_MAX_BYTES = 219 * 1024 * 1024
+#
+# 2026-10-19, the #446 landing of T-205 to T-207 (think-2w1f), taken alone from the
+# 19 October handoff checkpoint f6f4a8482: `--source-bytes` read 228,914,908 on main
+# 926cd764a, 723,236 under 219 MiB, and 230,713,367 on this branch, +1,798,459 and
+# 1,075,223 over. Nearly all of it is the three fine-net Mac confirmations' captures,
+# controls and audit receipts (about 1,743,668 bytes of fde545a96 measured over the
+# checkpoint's copy list), which `check_results` needs as results dependencies; the rest
+# is the reporting code, tests and regenerated views. Raise to 221 MiB, the least whole
+# MiB above this surface, with unchanged selection and the oversized pre-clone refusal:
+# about 1 MB of headroom. It is measured for this change alone; the n183 and #678
+# records measure their own surface. Three portable workers are bounded at 663 MiB.
+SNAPSHOT_MAX_BYTES = 221 * 1024 * 1024
 DEFAULT_CONTROL_TIMEOUT_SECONDS = 120.0
 TERMINATION_GRACE_SECONDS = 1.0
 # Directories that must be walked into rather than bulk-copied, because something

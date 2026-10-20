@@ -1060,15 +1060,24 @@ def timing_transport_physics(session: Session) -> str:
         f"restart did not go to the start of the range's first step: {restarted}",
     )
 
+    # Each trajectory is built three times from scratch and judged on its fastest build (#538):
+    # one slow build on a loaded hosted runner is the runner's load, not the trajectory's cost.
+    # The probe builds past the cache, which would hand a repeat the first build's time. The
+    # bytes are the trajectory's own, the same on every build, so one build's count is judged.
     built = []
     for n in (11, 100, 324):
         at = pair_index(session, n)
         for style in ("physics", "bodies"):
-            cost = session.look("physics/build", index=at, style=style)
-            built.append((n, style, cost["ms"], cost["bytes"]))
+            costs = [session.look("physics/build", index=at, style=style) for _ in range(3)]
+            sizes = {cost["bytes"] for cost in costs}
+            session.require(
+                len(sizes) == 1, f"three builds of n = {n}, {style} differ in bytes: {sizes}"
+            )
+            built.append((n, style, min(cost["ms"] for cost in costs), costs[0]["bytes"]))
     slow = [row for row in built if not (row[2] < 400.0 and row[3] < 4_000_000)]
     session.require(
-        len(built) == 6 and slow == [], f"a trajectory costs over 400 ms or 4 MB: {slow}"
+        len(built) == 6 and slow == [],
+        f"a trajectory costs over 400 ms at its fastest of three builds, or 4 MB: {slow}",
     )
 
     settled = []
@@ -1094,7 +1103,8 @@ def timing_transport_physics(session: Session) -> str:
     restore(session, found, "timing_transport_physics")
     slowest = max(row[2] for row in built)
     return (
-        f"progress, restart and the settled side hold; the dearest trajectory {slowest:.0f} ms"
+        f"progress, restart and the settled side hold; the dearest trajectory {slowest:.0f} ms "
+        "at its fastest of three builds"
     )
 
 

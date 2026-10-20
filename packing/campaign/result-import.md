@@ -115,6 +115,19 @@ post it. The owner may post instead.
 Under the same grant it adds the `intake` label, and a case label where one applies; it
 edits nothing else on an issue without the owner’s word.
 
+**The day a result lands.** Every register entry carries `landed`, the UTC day it
+reached `main` and the site, which the results page’s Added in the Last Seven Days and
+its Added filters read; the schema requires it.
+A lane writes it with each new entry, as the day it registers it
+([stage 3](#stage-3-record)). When the owner gives the word to merge, the branch’s last
+two commits re-date the branch’s new entries to the merge day and re-pin
+([stage 5](#stage-5-publish), Before merge).
+A forgotten re-date leaves that pull request’s entries a day or two early and turns
+nothing red. The sweep after a merge runs `python -m devtools.stamp_landed --audit` from
+`packing/`, which compares every entry on `main` with `main`’s first-parent history and
+gates nothing; `--audit --apply` writes its corrections, which ride the next records
+pull request.
+
 ### The Prompt
 
 A session asked to run the intake takes this as its instruction:
@@ -492,12 +505,26 @@ credit.
 
 Record the claim as reported, by the frontier README’s rules: a reported evidence entry,
 a coverage entry that cites it, the reported lane of each case it improves, and a
-register entry with its ratings and `next_rung`. Six rules are the process’s own:
+register entry with its ratings and `next_rung`.
+
+For a formal proof, also inspect the producer’s execution evidence under
+[epistemics.md → Reported Formal Proofs and Source Builds](../../epistemics.md#reported-formal-proofs-and-source-builds).
+When a complete source build qualifies, keep the literal reported entry and add a
+separate external source-build entry.
+It can raise V at intake; its passing status describes the producer’s run and cannot
+raise C beyond a qualifying read.
+An announcement, source scan, private run summary with unresolved build coverage, or
+partial build does not qualify as complete execution.
+
+The seven record rules are:
 
 - **`attribution.published` is the claim’s date, not the pin’s:** the date the source
   gives for it, or the UTC date of the first commit that contains the certificate; for
   an entry over several certificates, the last of those dates.
 - **The entry’s `scope` is covered** by the scopes of the evidence it cites.
+- **`landed` is written with the entry**, after `registered` and as the same day.
+  The schema requires it, and the merge step re-dates it to the day the entry reaches
+  `main` ([stage 5](#stage-5-publish)).
 - **The claim states each bound it reports**, in a form `devtools.check_standing` reads:
   `s(n) <= v` for an upper bound, `s(n) >= v` for a lower bound and the same with `=`
   for an exact value, where $v$ is the value the source certifies, written as a fraction
@@ -921,13 +948,18 @@ Most supporting work belongs at S1 or S2; choose a higher score only when the de
 contribution meets its anchor.
 Being public alone does not make a change noteworthy.
 
-| Label | Delivered contribution | Examples |
-| --- | --- | --- |
-| `S1` | Bookkeeping, internal documentation, planning or formatting only | Session closeout, a roadmap, changelog synchronization, prose reflow |
-| `S2` | A routine fix or refactor, custody or attribution work, modest UI refinement, ordinary maintenance or supporting prototype | Refreshing a source packet, correcting credit, adjusting spacing, preparing a vendor import or an internal prototype |
-| `S3` | A distinct noteworthy new result, substantive public explanation, verification or policy, key tooling, or meaningful artifact delivery | A new S3 result, a substantive proof explanation, a reproducible verification tool, a useful new paper or certificate delivery |
-| `S4` | A major delivered capability or site restructure, or a substantial new result | A complete regularization capability, a major site reorganization, a new S4 result |
-| `S5` | A landmark mathematical contribution or major resolution | A new S5 result establishing an important previously open case |
+| Label | Delivered contribution | Short | Examples |
+| --- | --- | --- | --- |
+| `S1` | Bookkeeping, internal documentation, planning or formatting only | Minor housekeeping or internal documentation | Session closeout, a roadmap, changelog synchronization, prose reflow |
+| `S2` | A routine fix or refactor, custody or attribution work, modest UI refinement, ordinary maintenance or supporting prototype | Routine engineering, maintenance or internal reliability | Refreshing a source packet, correcting credit, adjusting spacing, preparing a vendor import or an internal prototype |
+| `S3` | A distinct noteworthy new result, substantive public explanation, verification or policy, key tooling, or meaningful artifact delivery | Distinct noteworthy result, explanation, verification, policy or key usable tooling | A new S3 result, a substantive proof explanation, a reproducible verification tool, a useful new paper or certificate delivery |
+| `S4` | A major delivered capability or site restructure, or a substantial new result | Substantial result or major public project capability | A complete regularization capability, a major site reorganization, a new S4 result |
+| `S5` | A landmark mathematical contribution or major resolution | Landmark mathematical advance or major resolution | A new S5 result establishing an important previously open case |
+
+The Short column is each label’s description on GitHub.
+It is also what a News meter and the archive’s S buttons say a level means
+(`render_changelog.news_significance_meanings`); a result’s meter keeps the result
+ladder in `epistemics.md`.
 
 A new registered result and its announcement inherit that result’s actual S score.
 An incidental reference to a result does not raise the PR’s score.
@@ -1004,6 +1036,15 @@ Preserve the source’s decimal print as a quote and the earlier certificate as 
 when a tighter reported packing supersedes it.
 Inspect representative desktop and mobile views for cropped drawings, missing source
 credit or unreadable labels.
+
+Last, once the owner has given the word, re-date the branch’s new register entries to
+the merge day.
+The branch’s last two commits are the stamp, `uv run --frozen --all-extras
+--group dev python -m devtools.stamp_landed --apply` from `packing/`, which sets
+`landed` on every entry `origin/main` lacks to today in UTC, and its re-pin, `python -m
+devtools.release_pin --update`. If `main` moves, or the merge slips past midnight UTC,
+run both again after the re-merge: the stamp re-dates the same entries.
+`landed` is the day of the stamp, so the stamp is the last step before the merge.
 
 Synchronize the owning beads to the native `tbd-sync` branch before clearing fallback
 outbox exports.

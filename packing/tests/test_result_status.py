@@ -587,6 +587,7 @@ def test_a_bound_better_than_its_cases_hold_is_pending_adoption_not_superseded()
             "claim": "upper-bound",
             "scope": {"n_values": [152]},
             "origin": "replayed-here",
+            "performed_by": "repository",
             "method": "exact-algebraic",
             "certificate": "a synthetic n152 upper-bound certificate",
             "replay": "a synthetic complete replay",

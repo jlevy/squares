@@ -5,6 +5,7 @@ the case records, the coverage register and each pass's prior state."""
 from __future__ import annotations
 
 import dataclasses
+import gzip
 import hashlib
 import json
 import re
@@ -115,6 +116,12 @@ MOVED_AGAIN = {
     303: ("T-186", "T-162"),
 }
 
+#: Issue 639's exact algebraic sides (T-193), the smallest at all sixteen of its counts
+#: since its stage 4 exit (#658), each staged for the writer: below T-174's held sides at
+#: twelve, which think-3mry held before, and below the T-186 houses #657 adopted at four.
+T193_COUNTS = (88, 102, 123, 126, 175, 199, 204, 232, 258, 259, 266, 267, 292, 295, 301, 302)
+T193_BELOW_T186 = (175, 204, 232, 302)
+
 
 def test_the_records_of_the_lifted_hold_keep_their_next_candidates_until_adopted(
     selections: dict[int, select.Selection],
@@ -144,7 +151,9 @@ def test_the_records_of_the_lifted_hold_keep_their_next_candidates_until_adopted
     assert set(NEXT_CANDIDATES) < held_counts
     assert len(held_counts) == 50
     previous_t174 = {n for n in previous if houses.ADOPTED[n] == "T-174"}
-    assert held_counts | {70, 153, 207} == (set(select.PENDING_ADOPTION) | previous_t174)
+    assert held_counts | {70, 153, 207} | set(T193_BELOW_T186) == (
+        set(select.PENDING_ADOPTION) | previous_t174
+    )
     assert {n: houses.ADOPTED[n] for n in previous if n not in previous_t174} == {29: "T-195"}
 
 
@@ -224,10 +233,18 @@ def _confirmed_entry() -> tuple[dict[str, Any], dict[str, Any]]:
             "claim": "upper-bound",
             "assurance": "verified",
             "origin": "replayed-here",
+            "performed_by": "repository",
             "replay_status": "passed",
         }
     }
     return entry, evidence
+
+
+def test_only_a_run_beyond_the_producer_confirms_a_house() -> None:
+    entry, evidence = _confirmed_entry()
+    assert select.confirming(entry, evidence, 7) == ("E-test-replay",)
+    producer = {**evidence["E-test-replay"], "performed_by": "source-author"}
+    assert select.confirming(entry, {"E-test-replay": producer}, 7) == ()
 
 
 def test_a_case_keeps_its_own_house_where_nothing_is_below(
@@ -440,6 +457,8 @@ def test_a_staged_count_passes_the_check_and_a_stale_or_unstaged_one_fails(
     assert [c.result for c in selected[7].candidates] == ["T-900", "T-901"]
     staged = {7: select.Pending(house="T-900", bead="think-test", why=select.NEXT_PULL_REQUEST)}
     monkeypatch.setattr(select, "PENDING_ADOPTION", staged)
+    # A synthetic register owes no correction (`CORRECTIONS_OWED`, review B1 of #658).
+    monkeypatch.setattr(select, "CORRECTIONS_OWED", {})
     assert select.check(selected) == []
     assert select.row(selected[7])["staged"] == "think-test"
     assert "staged (next pull request): think-test" in select.table(selected, everything=False)
@@ -651,13 +670,16 @@ def test_a_moved_house_keeps_its_lifted_hold_as_history() -> None:
         # The records are wrapped, so a sentence may break at any space.
         wrapped = text.replace(" until ", "\nuntil ").replace(" the hold", "\nthe hold")
         assert _flat(adopt.held_history(wrapped)) == history, text[:60]
-    # The ten counts #657 moved below T-174 keep it so, and a staged count waits.
+    # The ten counts #657 moved below T-174 keep it so, and a staged count waits; three of
+    # them (175, 204 and 232) wait for T-193, below #657's houses there (#658).
     for n in (129, 146, 156, 175, 176, 204, 232, 264, 271, 303):
         text = _flat(select.case_path(n).read_text(encoding="utf-8"))
         assert _flat(adopt.lifted_sentence("T-174")) in text, n
         assert "until T-174’s adoption" not in text, n
-        assert n not in select.PENDING_ADOPTION, n
-    # The 50 counts adopted on 17 October 2026 keep the hold's note as history, without
+        staged = select.PENDING_ADOPTION.get(n)
+        assert (staged is None) == (n not in T193_BELOW_T186), n
+        assert staged is None or staged.house == "T-193", n
+    # The 37 counts adopted on 17 October 2026 keep the hold's note as history, without
     # the clause that the case keeps its house.
     text = _flat(select.case_path(68).read_text(encoding="utf-8"))
     assert _flat(adopt.lifted_sentence("T-174")) in text
@@ -845,6 +867,7 @@ def test_check_lists_the_unread_and_fails_on_one_pending_adoption(
 
     monkeypatch.setattr(select, "select", selecting)
     monkeypatch.setattr(select, "PENDING_ADOPTION", {})
+    monkeypatch.setattr(select, "CORRECTIONS_OWED", {})
     monkeypatch.setattr(select, "unread_pending", lambda _unread: {})
     monkeypatch.setattr(select, "unread_unordered", lambda _unread: {})
     assert select.main(["--check"]) == 0
@@ -900,6 +923,215 @@ def _below(ceiling: select.exact_sides.Side) -> select.exact_sides.Side:
     return select.exact_sides.algebraic(
         [1, -2 * r, r * r - Fraction(2, 10**18)], (r, r + Fraction(2, 10**9))
     )
+
+
+def test_t193_is_read_exactly_and_staged_as_the_house_at_all_sixteen_counts(
+    selections: dict[int, select.Selection],
+) -> None:
+    """Review A of #658 (A2 to A5): T-193 was kept off the gate by a citation deferral,
+    which the house rule allows no more. Its source now has a reader, so T-193 is a
+    candidate, read exactly at each count to the 40 places its claim prints, the smallest
+    at all sixteen, and staged for the writer, which cannot write an algebraic side yet."""
+    key = "[Daniel exact current records 2026-10-16]"
+    assert select.ALGEBRAIC_READERS[key] is select.evand_exact_side
+    entry = next(entry for entry in select.load_results() if entry["id"] == "T-193")
+    assert tuple(sorted(entry["scope"]["n_values"])) == T193_COUNTS
+    printed = dict(
+        re.findall(r"s\((\d+)\) <= (?:[^,]*? = )?(\d+\.\d{40})…", _flat(entry["claim"]))
+    )
+    assert sorted(int(n) for n in printed) == list(T193_COUNTS)
+    unread: list[str] = []
+    select.select(unread=unread)
+    assert "T-193" not in unread
+    for n in T193_COUNTS:
+        side = select.evand_exact_side(n)
+        assert isinstance(side, select.exact_sides.Algebraic), n
+        cut = Fraction(printed[str(n)])
+        assert cut < side < cut + Fraction(1, 10**40), n
+        house = selections[n].house
+        assert house is not None, n
+        assert house.result == "T-193", n
+        assert house.side == side, n
+        assert select.PENDING_ADOPTION[n] == select.Pending(
+            house="T-193", bead=select.WRITER_BEAD, why=select.NO_WRITER
+        ), n
+
+
+def test_the_t193_reader_refuses_a_count_it_does_not_state_or_an_interval_off_the_source(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """The reader holds each tabulated interval inside the source's own and refuses a count
+    the table does not state, as a reader defect `--check` names, never a side."""
+    with pytest.raises(select.exact_sides.ExactSideError, match="no exact side"):
+        select.evand_exact_side(5)
+    row = dict(select._evand_exact_rows()[126])  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+    low, high = (Fraction(end) for end in row["source_interval"])
+    row["interval"] = [str(low - 1), str(high)]
+    monkeypatch.setattr(select, "_evand_exact_rows", lambda: {9126: row})
+    with pytest.raises(select.exact_sides.ExactSideError, match="not within the source's"):
+        select.evand_exact_side(9126)
+
+
+def test_a_held_count_restaged_for_a_smaller_house_names_it_and_becomes_history() -> None:
+    """At the twelve counts where T-193 is below T-174's held side, the held sentence names
+    the staged house, its bead and the side it passes, and a later pass's move turns it into
+    history like every other held sentence (`adopt_houses.held_history`)."""
+    sentence = (
+        "The case keeps its house until T-193’s adoption, staged under think-ot5c, moves it "
+        "to T-193’s side, below T-174’s, once the writer takes an algebraic side."
+    )
+    assert adopt._keeps_until(88, "T-174", "its house") == sentence  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+    assert adopt._keeps_until(236, "T-174", "its house") == (  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+        "The case keeps its house until T-174’s adoption, staged under think-3mry, moves it "
+        "to T-174’s side."
+    )
+    tail = sentence.split(" until ", 1)[1]
+    for n in sorted(set(T193_COUNTS) - set(T193_BELOW_T186)):
+        assert tail in _flat(select.case_path(n).read_text(encoding="utf-8")), n
+    lead = "T-174 at $1$, `1e-19` below this house, is confirmed here"
+    history = f"{lead}. {adopt.lifted_sentence('T-174')}"
+    wrapped = f"{history} {sentence.replace('its house', 'this house')}".replace(
+        " until ", "\nuntil "
+    )
+    assert _flat(adopt.held_history(wrapped)) == history
+
+
+def test_every_staged_count_names_its_house_and_bead_in_its_record() -> None:
+    """Every count staged for adoption says so in its record, with the house and the bead
+    it waits under, and, where it waits for the writer, that it moves the case once the
+    writer takes an algebraic side: the held and algebraic sentences of #660, and the
+    sentences for a smaller house validated after the pass that wrote the record
+    (`adopt_houses.staged_sentences`, #658). At all sixteen of T-193's counts the record
+    also says what T-193 is and which review accepted it (review B3 of #658)."""
+    for n, pending in select.PENDING_ADOPTION.items():
+        text = _flat(select.case_path(n).read_text(encoding="utf-8"))
+        assert f"staged under {pending.bead}," in text, n
+        assert f"moves it to {pending.house}’s side" in text, n
+        if pending.why == select.NO_WRITER:
+            assert "once the writer takes an algebraic side." in text, n
+    review = "../../docs/project/reviews/review-2026-10-16-evand-exact-sides-639.md"
+    for n in T193_COUNTS:
+        text = _flat(select.case_path(n).read_text(encoding="utf-8"))
+        assert "T-193’s exact algebraic side at this count, a root of a degree-" in text, n
+        assert f"accepted by the [review of 16 October 2026]({review})" in text, n
+
+
+def test_an_algebraic_sentence_at_a_count_restaged_for_a_smaller_house_names_it(
+    recorded: dict[int, select.Selection], monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Review B3 of #658: `algebraic_sentences` closed with its own result's adoption even
+    where a smaller house is staged in its place. No count reaches that today; with 70
+    staged for another house, the sentence names that house's adoption and its bead."""
+    staged = select.Pending(house="T-900", bead="think-test", why=select.NO_WRITER)
+    monkeypatch.setitem(select.PENDING_ADOPTION, 70, staged)
+    (sentence,) = adopt.algebraic_sentences(recorded[70], houses.side(70))
+    assert sentence.startswith("T-174’s algebraic certificate at this count")
+    assert "house rule of 16 October 2026 ended that wait." in sentence
+    assert sentence.endswith(
+        "The case keeps this house until T-900’s adoption, staged under think-test, moves "
+        "it to T-900’s side, below T-174’s, once the writer takes an algebraic side."
+    )
+
+
+def test_t193s_adoption_waits_for_re1s_correction_at_nine_counts(
+    selections: dict[int, select.Selection],
+) -> None:
+    """Review B1 of #658: at nine counts T-193's regularization item names T-174 or T-186
+    as the packing the form solves, which RE-1 of its stage 4 review measured to be the
+    case's own house. Each is recorded as a correction owed, under think-8ido, which
+    `bead tree` holds open while it stands, and it holds the register as it is: the item
+    still names the refuted `of` and the house is still T-193."""
+    measured = {
+        88: "T-127", 126: "T-139", 175: "T-158", 199: "T-127", 204: "T-162", 232: "T-158",
+        266: "T-119", 292: "T-146", 301: "T-098",
+    }  # fmt: skip
+    assert {n: owed.measured for n, owed in select.CORRECTIONS_OWED.items()} == measured
+    for n, owed in select.CORRECTIONS_OWED.items():
+        house = selections[n].house
+        assert house is not None, n
+        assert (house.result, house.regularizes) == ("T-193", owed.named), n
+        assert owed.named in {"T-174", "T-186"}, n
+        assert (owed.bead, owed.measured_in) == ("think-8ido", select.REVIEW_639), n
+        assert select.owed_correction(n, house) == owed, n
+        assert (f"select_houses.CORRECTIONS_OWED n={n} (T-193 of {owed.named})", owed.bead) in (
+            select.deferrals()
+        ), n
+    assert select.correction_problems(selections) == []
+
+
+def test_the_writer_never_writes_the_uncorrected_of(
+    selections: dict[int, select.Selection], monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Review B1 of #658: the writer takes a house's credit from its regularization item,
+    so it must refuse T-193 where the item names the refuted `of`, even once the pull
+    request that adopts T-193 has taken its counts off `PENDING_ADOPTION`. This fails if
+    the writer would write the uncorrected `of` at any of the nine counts; where the item
+    stands (102) the writer's only refusal is its algebraic one, and once the item is
+    corrected the correction no longer refuses and `--check` asks for its removal."""
+    monkeypatch.setattr(
+        select,
+        "PENDING_ADOPTION",
+        {n: p for n, p in select.PENDING_ADOPTION.items() if p.house != "T-193"},
+    )
+    for n, owed in select.CORRECTIONS_OWED.items():
+        with pytest.raises(adopt.AdoptionError, match=f"names {owed.named} .*think-8ido"):
+            adopt.plan({n: selections[n]})
+    with pytest.raises(adopt.AdoptionError, match="algebraic side"):
+        adopt.plan({102: selections[102]})
+    house = selections[88].house
+    assert house is not None
+    corrected = dataclasses.replace(
+        selections[88], house=dataclasses.replace(house, regularizes="T-127")
+    )
+    assert select.owed_correction(88, corrected.house) is None  # pyright: ignore[reportArgumentType]
+    with pytest.raises(adopt.AdoptionError, match="algebraic side"):
+        adopt.plan({88: corrected})
+    problems = select.correction_problems({**selections, 88: corrected})
+    assert problems == [
+        (
+            "FAIL: n=88: T-193's regularization item names T-127, not T-174, so the "
+            "correction think-8ido owed has landed; take it off CORRECTIONS_OWED"
+        )
+    ]
+
+
+def test_t193s_exact_sides_table_is_the_retained_packets() -> None:
+    """Review B2 of #658: T-193's reader takes its sides from the intake's table, which no
+    gate held to the packet. Every T-193 row is the packet's own: at the fourteen counts
+    the packet retains, the file's digest, polynomial and isolating interval; at the two it
+    pins by digest only (204 and 267), the manifest's digest."""
+    packet = select.ROOT / "resources/web/evand-exact-cur-2026-10-16"
+    manifest = {
+        path.removeprefix("./"): digest
+        for digest, path in (
+            line.split(maxsplit=1)
+            for line in (packet / "acquisition/upstream-subtree.sha256")
+            .read_text(encoding="utf-8")
+            .splitlines()
+            if line.strip()
+        )
+    }
+    rows = json.loads(select.EVAND_EXACT_SIDES.read_text(encoding="utf-8"))["rows"]
+    retained = []
+    for row in (row for row in rows if row["n"] in T193_COUNTS):
+        name = f"search/exact/cur/data/n-{row['n']}.minpoly.json.gz"
+        assert row["sha256"] == manifest[name], row["n"]
+        path = packet / "source" / name
+        if not path.is_file():
+            assert row["n"] in (204, 267), row["n"]
+            continue
+        retained.append(row["n"])
+        data = path.read_bytes()
+        assert hashlib.sha256(data).hexdigest() == row["sha256"], row["n"]
+        side = json.loads(gzip.decompress(data))["S"]
+        assert [int(c) for c in side["poly"]] == [
+            int(c) for c in row["polynomial_low_to_high"]
+        ], row["n"]
+        assert [Fraction(end) for end in side["interval"]] == [
+            Fraction(end) for end in row["source_interval"]
+        ], row["n"]
+        assert row["degree"] == len(side["poly"]) - 1, row["n"]
+    assert len(retained) == 14
 
 
 def test_a_reader_makes_an_unread_source_a_candidate_and_the_writer_waits_for_it(
@@ -962,12 +1194,12 @@ def test_a_rational_house_staged_for_the_writer_fails_the_check(
 def test_the_staged_adoptions_name_their_beads_and_reasons() -> None:
     """Review A1 of #660: the staged adoption sat under the policy lane's own bead, with no
     reason. T-174's rational houses wait for the adoption's bead and the next pull request,
-    and its algebraic ones for the writer's bead and the writer. The adoption of 17 October
-    2026 (think-3mry) took 37 rational counts off; twelve it leaves are T-193's once #658
-    lands, and 236 is issue 659's once its import lands."""
+    and its algebraic ones, and T-193's (#658), for the writer's bead and the writer.
+    The adoption of 17 October 2026 (think-3mry) took 37 rational counts off; twelve
+    others are staged for T-193 and 236 awaits issue 659's import."""
     for n, pending in select.PENDING_ADOPTION.items():
         assert pending.why in select.STAGING_REASONS, n
-        algebraic = n in (70, 153, 207)
+        algebraic = n in (70, 153, 207) or pending.house == "T-193"
         assert (pending.bead, pending.why) == (
             (select.WRITER_BEAD, select.NO_WRITER)
             if algebraic
@@ -1350,6 +1582,87 @@ def _n108_later_lower_projection(held: dict[str, Any], wrote: dict[str, Any], bo
     return _flat(body)
 
 
+#: The fine-net lower validations of 19 October 2026 at two T-174 houses: each count's
+#: result, candidate, lower bound, its review, the bound it replaced, and the one phrase
+#: of the earlier house paragraph the validation moved into the past tense.
+FINE_NET_LOWER_19_OCTOBER: dict[int, tuple[str, str, str, str, str, str, str]] = {
+    68: (
+        "T-205",
+        "mixed_n68_L853",
+        "853/100",
+        "8.53",
+        "n68-fine-net-mathematics",
+        "851/100",
+        "the strongest verified lower bound",
+    ),
+    84: (
+        "T-206",
+        "mixed_n84_L94225",
+        "3769/400",
+        "9.4225",
+        "n84-n85-fine-net-mathematics",
+        "9411/1000",
+        "and the verified lower bound",
+    ),
+}
+
+
+def _fine_net_lower_projection(
+    n: int, held: dict[str, Any], wrote: dict[str, Any], body: str
+) -> str:
+    """Check a 19 October fine-net lower validation, then compare the house layer below it.
+
+    T-205 and T-206 raised both lower lanes at 68 and 84 after the T-174 adoption of 17
+    October wrote those records, as n108's fine-net bound did on 18 October; the writer
+    owns neither lane, so the validation is checked exactly and projected out.
+    """
+    result, candidate, exact, value, review, earlier, phrase = FINE_NET_LOWER_19_OCTOBER[n]
+    tag = candidate.removeprefix("mixed_").replace("_L", "-").lower()
+    assert held["source_reviewed"] == "2026-10-19"
+    assert held["reported_lower_bound"]["exact_form"] == exact
+    assert held["verified_lower_bound"] == {
+        "value": value,
+        "exact_form": exact,
+        "evidence": [f"E-wand125-fine-net-{tag}-sqverify-fast-replay"],
+    }
+    assert held["evidence"] == [
+        f"E-wand125-fine-net-{tag}-report",
+        f"E-wand125-fine-net-{tag}-sqverify-fast-replay",
+        f"E-n{n:03d}-fine-net-review-premises",
+        f"E-n{n:03d}-fine-net-review-captures",
+        *wrote["evidence"],
+    ]
+    assert held["resources"] == [
+        {
+            "key": "[wand125 fine-net lower bounds 2026-10-16]",
+            "role": "lower-bound-proof",
+            "local": "web/wand125-fine-net-lower-bounds-2026-10-16",
+            "url": "https://github.com/wand125/square-packing",
+            "retrieved": True,
+        },
+        *wrote["resources"],
+    ]
+    for key in ("source_reviewed", "evidence", "resources"):
+        held[key] = wrote[key]
+    intro = (
+        f"**Fine-net validation, 19 October 2026 ({result}).** The retained candidate "
+        f"`{candidate}` raises both lower lanes from ${earlier}$ to ${exact}$. The complete "
+        "201-direction maintained native replay and [mathematical "
+        f"review](../../docs/project/reviews/review-2026-10-19-{review}.md) confirm it by a "
+        "re-implementation sharing components with the producer’s checker, wand125’s "
+        "adaptation of this repository’s `sqverify_fast` crate, apart from the declared-net "
+        "readers. The exact audits check premises and saved poses only. The original 18 source "
+        "reports and historical native receipts remain retained."
+    )
+    words = _flat(intro)
+    assert body.count(words) == 1, f"n={n}: fine-net introduction"
+    body = body.replace(words, "", 1)
+    # The one historical adjustment that accompanies each validation.
+    current, prior = f"{phrase} then was", f"{phrase} is"
+    assert body.count(current) == 1, f"n={n}: {current}"
+    return _flat(body.replace(current, prior, 1))
+
+
 def test_the_writer_rebuilds_every_adopted_record_from_its_prior_state(
     replayed: list[adopt.Move],
 ) -> None:
@@ -1362,8 +1675,9 @@ def test_the_writer_rebuilds_every_adopted_record_from_its_prior_state(
     record the earlier pass left (`adopt_houses.before_last_pass`). A writer that ran
     after the adoption is replayed after it: `apply_closed_form`, of 14 October 2026,
     raises the reported lower lane, adds its evidence, resource and paragraph, and moves
-    `source_reviewed` no earlier. The later n108 fine-net lower adoption is checked
-    explicitly and projected out before this historical upper-layer comparison.
+    `source_reviewed` no earlier. The later fine-net lower adoptions, n108's of 18 October
+    and n68's and n84's of 19 October, are checked explicitly and projected out before
+    this historical upper-layer comparison.
     """
     assert [move.n for move in replayed] == sorted(houses.ADOPTED)
     for move in replayed:
@@ -1377,6 +1691,8 @@ def test_the_writer_rebuilds_every_adopted_record_from_its_prior_state(
         historical_body = _body(committed)
         if move.n == 108:
             historical_body = _n108_later_lower_projection(held, wrote, historical_body)
+        elif move.n in FINE_NET_LOWER_19_OCTOBER:
+            historical_body = _fine_net_lower_projection(move.n, held, wrote, historical_body)
         for key in OWNED:
             assert held.get(key) == wrote.get(key), f"n={move.n}: packing.{key}"
         body = _flat(committed.split("---\n", 2)[2])

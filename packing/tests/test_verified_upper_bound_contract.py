@@ -179,6 +179,11 @@ DECLARED_CONSUMERS = {
         "reports, without redating the reported construction; a ceiling alone never "
         "establishes s(n), and recent optimality also requires proved case status"
     ),
+    "packing/tests/test_source_formal_verification.py": (
+        "copies n = 17's verified ceiling into a promoted lower lane only to show that a "
+        "producer's own Lean build cannot carry the case to proved; the ceiling is read as "
+        "a ceiling, never as s(n)"
+    ),
     "packing/tests/test_recent_contributions.py": (
         "checks that fresh ceiling verification does not redate a historical construction "
         "or imply optimality; upper, lower and optimality contribution roles remain distinct"
