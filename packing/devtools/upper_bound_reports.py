@@ -772,6 +772,12 @@ def center_basis_json(raw: bytes, n: int, options: Mapping[str, str]) -> legacy.
     and its basis ``(c, s)``, every number a rational string. A pose is the centre and
     ``t = s / (1 + c)``, and the basis must be exactly the rotation that ``t`` gives, which
     holds only where ``c^2 + s^2 = 1``. JSON numbers are refused, so no float is read.
+
+    The basis ``(-1, 0)``, a turn by pi, has no finite half-angle tangent, and is refused
+    rather than read: it is on the unit circle and draws the same square as ``(1, 0)``, so
+    a certificate that states it is refused although it is valid, and none of #668's does
+    (RF-3 of the 20 October review). The refusal fails closed; reading it as ``(1, 0)``
+    would be the change that admits such a certificate.
     """
     _no_options(options, "center-basis-json")
     value = _json(raw)
