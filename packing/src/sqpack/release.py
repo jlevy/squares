@@ -88,6 +88,15 @@ class PublicationHistoryEntry(NamedTuple):
 #: for each deployment's commit, what the page it built stated.
 PUBLICATION_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.8.3",
+        first_published="October 20, 2026",
+        result_scope=(
+            "Register Evan Daniel's n236 and n271 packings (T-218, T-219), raise T-197 to "
+            "T-199 to V3/C3, adopt his certificates as the houses at 155, 229, 236 and "
+            "271, and correct the credit at 146 and 308."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.8.2",
         first_published="October 20, 2026",
         result_scope=(
@@ -1035,6 +1044,17 @@ class ReleaseImpactDecision(NamedTuple):
 # No impact is invented retrospectively for the published baseline editions.
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
     ReleaseImpactDecision(
+        component="site",
+        previous_version="v0.8.2",
+        version="v0.8.3",
+        impact="patch",
+        reason=(
+            "Register Evan Daniel's n236 and n271 packings (T-218, T-219), raise T-197 to "
+            "T-199 to V3/C3, adopt his certificates as the houses at 155, 229, 236 and "
+            "271, and correct the credit at 146 and 308."
+        ),
+    ),
+    ReleaseImpactDecision(
         component="paper:n11-lower-bounds-explainer",
         previous_version="v0.4.8",
         version="v0.4.9",
@@ -1759,9 +1779,13 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "after the records-tier fixes, and at a8222aad, after the CI follow-ups and "
             "its merge of main b16ddeb0 (#691), render_packing_methods, "
             "render_n11_optimality_review and render_n11_threshold_bound_review write 50 "
-            "files, byte-identical between the trees. No PDF was printed; each prints "
-            "from that HTML. The three papers keep v0.1.7, v0.1.0 and v0.2.3; the "
-            "explainer, whose register count moves to 219, takes v0.4.9."
+            "files, byte-identical between the trees. Rendered again at link revision "
+            "4b8aec9a, once from main's tree there (site v0.8.1, after #514, #693, #688 "
+            "and #690) and once from this branch's at 2e480fa4, after its merges of main "
+            "476049de and 4b8aec9a and the landed stamp, the same three write 50 files, "
+            "byte-identical between the trees. No PDF was printed; each prints from that "
+            "HTML. The three papers keep v0.1.7, v0.1.0 and v0.2.3; the explainer, whose "
+            "register count moves to 219, takes v0.4.9."
         ),
     ),
     ReleaseNoPublicChange(
@@ -5063,7 +5087,7 @@ def validate_release_impacts(
 #: fresh render, so a link naming the build commit would fail their drift check forever. It is
 #: in no version string. It moves when the claim documents are regenerated for an edition. It
 #: must be a commit on `main`; the site's own links name `main` itself (`devtools.repo_links`).
-PUBLICATION_REVISION = "5998d0c3"
+PUBLICATION_REVISION = "bf1b483a"
 
 
 def data_pathspec() -> tuple[str, ...]:
