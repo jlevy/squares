@@ -1637,7 +1637,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "both unchanged since the three stay previously-published. The composite "
             "figure record and bound citations change only the n68, n84 and n85 lower "
             "displays and citations; Figure 2's totals and the n11 citation the paper "
-            "reads are unchanged. The site v0.7.36 cut regenerated the five claim and "
+            "reads are unchanged. The site v0.8.1 cut regenerated the five claim and "
             "card documents, which change only their source-link commit and are linked "
             "from the paper, not inlined. run_negative_controls.py changes only the "
             "snapshot cap and its comment and is not a paper producer. Its Markdown "

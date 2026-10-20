@@ -370,11 +370,12 @@ def _view_rows(view: str) -> set[str]:
 
 
 def test_the_committed_census_views_carry_every_census_row() -> None:
-    """The generated views fall behind `census.json` only by failing here.
+    """The generated views carry every `census.json` row and its verified count.
 
     #671 and #688 added census rows without regenerating the views (Review A of #688,
     A1). The views are formatted after rendering, so this compares their rows and
-    their verified counts with the registers rather than their bytes.
+    their verified counts with the registers rather than their bytes; a stale row's
+    contents still pass (Review C of #688, C3).
     """
     root = census.CENSUS_ROOT
     names: set[str] = set()

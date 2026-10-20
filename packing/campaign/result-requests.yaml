@@ -3473,8 +3473,9 @@ issues:
       = 38 to 110, are registered as T-200 through T-217 in merged pull request 671. n108 (T-216)
       completed its certificate checks and mathematical reviews at V3/C3 in that pull request,
       and n68, n84 and n85 (T-205 to T-207) completed theirs at V3/C3 on 19 October, each
-      re-verified by sqverify-fast sharing the producer's crate apart from its declared-net
-      readers; their lower lanes are 853/100, 3769/400 and 379/40. The other fourteen remain
+      re-verified by sqverify-fast, which shares components with the producer's checker
+      (wand125's adaptation of this repository's crate) apart from the declared-net readers;
+      their lower lanes are 853/100, 3769/400 and 379/40. The other fourteen remain
       V0/C0 under think-f40c; the n86 capture has no check or control run. No upper-bound house
       changed. The post-deployment follow-up of 19 October records the n108 state and requests
       the upstream control filename correction.

@@ -76,7 +76,8 @@ The unlicensed adapted source archive was neither opened, executed nor retained 
 The small `records-preparation-check.json` records source-byte retention, selected
 receipt/point-fraction bindings, unchanged historical records, mapped links and derived
 rungs at the 19 October preparation, before integration. It supplies no new geometric
-acceptance.
+acceptance. It counted 73 retained files, including the interim acknowledgement record
+later removed from `retention.json`, which now lists 72.
 
 ## Historical Reproduction and Independence
 
