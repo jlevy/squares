@@ -21,7 +21,7 @@ softschema:
   status: enforced
 repository: jlevy/squares
 owner: jlevy
-last_reviewed: '2026-10-19'
+last_reviewed: '2026-10-20'
 issues:
   - number: 420
     title: 'Lean proofs that 178 best-known packings are local minima (n ≤ 324): registration request'
@@ -8572,7 +8572,7 @@ issues:
       left undecided, devtools.decide_undecided_comparisons decided 17 exactly, none below the
       standing side, and 29, 55, 71 and 83 stay undecided. Whether to merge the pull request is
       the owner's call.
-    read_through: '2026-10-19T14:47:23Z'
+    read_through: '2026-10-13T00:13:11Z'
     results:
     - key: pr574-certificates
       claim: Finite upper-bound improvements at the 68 counts the 14 October ledger records, by 64
@@ -8625,7 +8625,6 @@ issues:
         id: T-174
         verification: V3
         confirmation: C3
-        status: confirmed
     close_when: The import and its disposition are on main, the owner has decided the pull request and
       posted the resulting state with T-174's id, and the review and second route that would confirm
       T-174 are owned by its bead; optimality is outside this request.
@@ -8641,16 +8640,18 @@ issues:
       all 4,705 deployed-site checks: eleven regularized, 25 decided with no better regularization
       and n103 retained as published. It accepts neither the complete 148-count submission nor the
       pull request; the queued ask keeps a draft from proposing closure while think-9v2k holds the
-      supplement, the per-count dispositions and the pull-request decision. It names neither
-      evidence entry, so `--report` still lists their reviewed status as due against the follow-up
-      of 14 October, which stated recorded; that reply goes out with the owner's pull-request
-      disposition from think-9v2k, and a pass that finds it due does not post it before then (PR
-      #637's review, A4). T-174's adoption is no longer the owner's: the house rule of 16 October
-      2026 makes it the house at 41 counts, the adoption of 17 October 2026 (think-3mry) moved 37
+      supplement, the per-count dispositions and the pull-request decision. It states T-174's rungs
+      but not its status ("recorded at V3/C3", never "confirmed"), and it names neither evidence
+      entry, so `--report` still lists as due, against the follow-up of 14 October, which stated
+      recorded for all three, T-174's confirmed status and the two entries' reviewed status (PR
+      #696's review, A1). The think-9v2k reply carries all three; it goes out with the owner's
+      pull-request disposition, and a pass that finds it due does not post it before then (PR #637's
+      review, A4). T-174's adoption is no longer the owner's: the house rule of 16 October 2026
+      makes it the house at 41 counts, the adoption of 17 October 2026 (think-3mry) moved 37
       rational ones to it, and the algebraic 70, 153 and 207 wait under think-ot5c for the writer.
-      T-193's smaller sides are staged at twelve others under think-ot5c; at 236 Evan Daniel's
-      issue 659 reports a smaller side, whose import adopts it, with T-174 still staged under
-      think-3mry until then.
+      T-193's smaller sides are staged at twelve others under think-ot5c; at 236 Evan Daniel's issue
+      659 reports a smaller side, whose import adopts it, with T-174 still staged under think-3mry
+      until then.
   - number: 575
     title: 's(176) ≤ 13.795872318437, s(211) ≤ 14.993694186584, s(241) ≤ 15.987134249051, s(304) ≤ 17.929427758076:
       registration request'
@@ -9126,8 +9127,9 @@ issues:
       evidence:
       - E-mishapolk-70a033f-certificate-report
     asks:
-    - what: The owner decides whether the record credits Mykhailo Polkovskyi jointly with Francisco
-        Couzo at 211 and 241, as his comment of 14 October asks, citing his earlier commit 8bb41af.
+    - what: 'The owner decides whether the record credits Mykhailo Polkovskyi jointly with #586
+        (Francisco Couzo) at 211 and 241, as his comment of 14 October asks, citing his earlier commit
+        8bb41af (https://github.com/jlevy/squares/issues/593#issuecomment-6172128988).'
       state: queued
       bead: think-2ep3
       note: 'The reply of 16 October listed the request as still with the owner and kept the issue open
@@ -9218,6 +9220,8 @@ issues:
       - neither of Francisco Couzo's certificates at 237 (T-189, T-190) is adopted before a review, so
         T-183 stays the house; since the adoption of 16 October his 4e4c8ce certificate (T-190) is the
         house at 237, 1.01e-4 below T-183, which is retained as history
+      - 'T-186 waits for a review and then a decision on adoption at the twelve counts; since the
+        adoption of 16 October, which merged with #657, T-186 is the house at all twelve'
     - url: https://github.com/jlevy/squares/issues/593#issuecomment-6285175560
       date: '2026-10-20'
       by: jlevy
@@ -9501,7 +9505,7 @@ issues:
       squarepack-certs 0e9be7961773aa78b879c4ee6ba584a67e2e5513 and public squarepack-lean at
       947bdae. These source assertions await statement, axiom and replay review under think-494l;
       T-163 remains V2/C1, and Stage 4 adoption is separate.
-    read_through: '2026-10-19T13:53:59Z'
+    read_through: '2026-10-19T03:30:28Z'
     results:
     - key: excess-theorem
       claim: 's(n^2 - n + 1) < n for every n >= 15, and s(n^2 - n + F(n)) < n with F(n) = 1 + max{p + 2q
@@ -9528,13 +9532,17 @@ issues:
       bead: think-494l
     - key: note-v09-doi-2026-10-19
       claim: Fang announces note v0.9, dated 18 October, archived as DOI 10.5281/zenodo.23463481 with
-        PDF and LaTeX under CC BY; he states it is the same text as note/fang-2026-n2-n-1.md at 6e265256061b7c8b4be7e690008fa59c12ca5ae7.
-        The source README scopes the unchanged Lean pin 947bdae to Theorem 1 and the unmixed bounds
-        of Theorem 2.
+        PDF and LaTeX under CC BY; he states it is the same text as note/fang-2026-n2-n-1.md in
+        TheSnakeFang/squarepack-certs at 6e265256061b7c8b4be7e690008fa59c12ca5ae7. That note, in its
+        Formal verification paragraph and its [FanL26] reference, scopes the unchanged Lean pin
+        947bdae to Theorem 1 and the maximum of the two unmixed bounds of Theorem 2; the mixed-step
+        form of Theorem 2 is not formalised.
       source: https://github.com/jlevy/squares/issues/603#issuecomment-6259031488
       not_registered: Publication and statement update to the existing theorem, queued with the existing
         note and Lean review owner. DOI assets and statement binding remain to be retained and reviewed;
-        no new theorem entry, replay, or rung promotion. T-163 remains V2/C1.
+        no new theorem entry, replay, or rung promotion. T-163 remains V2/C1. For the binding review,
+        the README at the same commit claims more than the note does, "Lean 4 formalisation of
+        Theorems 1 and 2" with no scope; the note's scope is the one to bind.
       queued: true
       bead: think-494l
     beads:
@@ -9567,6 +9575,7 @@ issues:
         id: T-163
         verification: V2
         confirmation: C1
+      - result: note-v08-lean-2026-10-18
     - url: https://github.com/jlevy/squares/issues/603#issuecomment-6268897002
       date: '2026-10-19'
       by: jlevy
@@ -9576,7 +9585,6 @@ issues:
         id: T-163
         verification: V2
         confirmation: C1
-        status: reviewed
       - result: note-v09-doi-2026-10-19
       - result: note-v08-lean-2026-10-18
     - url: https://github.com/jlevy/squares/issues/603#issuecomment-6271101249
@@ -9894,7 +9902,7 @@ issues:
       regularization decision landed through #661 in the merged #661/#676 stack at d167d4b86
       on 19 October. Deployment and live verification passed; the final reply reported adoption
       and V3/C3, and the source pull request closed as incorporated at 06:50:12Z that day.
-    read_through: '2026-10-19T07:19:34Z'
+    read_through: '2026-10-16T03:40:22Z'
     results:
     - key: n29-certificate
       claim: s(29) <= the exact side of n29-certificate/certificates/n029.cert.json (SHA-256 a01428c5...),
