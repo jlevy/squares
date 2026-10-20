@@ -307,6 +307,8 @@ action for each are in [`frontier/RESULTS.md`](packing/frontier/RESULTS.md); the
 | [T-218](packing/frontier/RESULTS.md) | 236 | `V3` | `C3` | `S3` | `previously-published` | One complete rational source certificate reports a finite upper-bound improvement at the exact side it states: s(236) <= 15.861934390607358617243798571394. |
 | [T-219](packing/frontier/RESULTS.md) | 271 | `V3` | `C3` | `S3` | `previously-published` | One complete rational source certificate reports a finite upper-bound improvement at the exact side it states: s(271) <= 16.948947733713657510723401112423. |
 | [T-220](packing/frontier/RESULTS.md) | 183 | `V3` | `C3` | `S3` | `previously-published` | s(183) <= 13999580178736252502081470897571/1000000000000000000000000000000 = 13.999580178736252502081470897571 < 14, from the original rational certificate, printed safely upward as 13.999580178737. |
+| [T-221](packing/frontier/RESULTS.md) | 308 | `V3` | `C3` | `S3` | `previously-published` | One complete rational source certificate reports a finite upper-bound improvement at the exact side it states: s(308) <= 17.997149121270908735153160752315. |
+| [T-222](packing/frontier/RESULTS.md) | 154 | `V3` | `C3` | `S3` | `previously-published` | One complete rational source certificate reports a finite upper-bound improvement at the exact side it states: s(154) <= 12.921100940761680549856582087576. |
 | [T-036](packing/frontier/RESULTS.md) | 11 | `V3` | `C2` | `S3` | `apparently-novel` | Every packing of eleven unit squares in a square container, six at orientation 0 and five sharing one orientation modulo pi/2 with half-tangent in [91442076901/250000000000, 73154061521/200000000000] (an interval containing [t* - 10^-6, t* + 10^-6] for Trump’s exact half-tangent t*), has container side at least U = 3.877083590022814 …, the exact side of Trump’s packing, and a packing in the family has side exactly U only if it is a quarter-turn image of Trump’s pose with the squares relabelled within the two classes. |
 | [T-112](packing/frontier/RESULTS.md) | 11 | `V3` | `C2` | `S3` | `apparently-novel` | Every packing of eleven unit squares in a square of side T = 3.8770835900228141773…, the least side T-060 proves possible, is Walter Trump’s 1979 packing after one of the eight symmetries of the container and a relabelling of the squares. |
 | [T-007](packing/frontier/RESULTS.md) | 4-324 | `V0` | `C1` | `S3` | `previously-published` | For every integer 4 <= N <= 324, Nagamochi 2005, Theorem 2 gives s(N) >= min(ceil(sqrt(N)), sqrt(N - 2*floor(sqrt(N)) + 1) + 1). |
@@ -423,7 +425,7 @@ hypothesis status and summarizes experiment verdicts, and the
 | Explorations | 50 | 30 linked to proposed hypotheses; 20 uncodified |
 | Hypotheses | 283 | 74 confirmed; 48 refuted; 75 blocked; 24 unresolved; 20 open; 37 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
 | Experiments | 246 | 94 accepted; 53 rejected; 63 unresolved; 12 baseline; 18 blocked; 5 abandoned; 0 in progress; 1 exhausted |
-| Frontier results | 221 | 221 registered, 189 by others |
+| Frontier results | 223 | 223 registered, 191 by others |
 
 <!-- END CURRENT-RESEARCH-STATUS -->
 
@@ -683,6 +685,7 @@ case or experiment separately.
 
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
+| [Review: Evan Daniel’s Upper-Bound Imports of 19 and 20 October (#689, #694)](docs/project/reviews/review-2026-10-20-upper-bound-imports-689-694.md) | dated review record | record | retained | — |
 | [Review: Evan Daniel’s Upper-Bound Imports of 16 to 18 October (#659, #664, #669, #674)](docs/project/reviews/review-2026-10-19-upper-bound-imports-659-664-669-674.md) | dated review record | record | retained | — |
 | [Completed n68 Fine-Net Certificate: Mathematical Review](docs/project/reviews/review-2026-10-19-n68-fine-net-mathematics.md) | dated review record | record | retained | — |
 | [Fine-Net Mac Arithmetic and Capture Review](docs/project/reviews/review-2026-10-19-fine-net-mac-arithmetic.md) | dated review record | record | retained | — |

@@ -2162,8 +2162,10 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
     assert len(expected_names) == 25
     # The adoption of 19 October draws from five more, Evan Daniel's packets at 155, 183
     # (T-220, think-jh4w), 229, 236 and 271, with no new name, and every source it
-    # re-housed still holds another count.
-    assert len(expected_sources) == 22
+    # re-housed still holds another count. The adoption of 20 October draws from two
+    # more, his packets at 154 and 308 (T-222, T-221), with no new name: Mishapolk's KKT
+    # refinements and PingYou Ltd's PR 574 certificates still hold other counts.
+    assert len(expected_sources) == 24
     assert set(json.loads(credit_block.attrib["data-credited-names"])) == expected_names
     assert set(json.loads(credit_block.attrib["data-source-keys"])) == expected_sources
     assert credit_block.find("svg:text[@data-feature='packing-credits-heading']", SVG) is None

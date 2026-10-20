@@ -1,0 +1,93 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "https://github.com/jlevy/squares/issues/694",
+  "author": "Evan Daniel",
+  "source_key": "[Daniel n154 sweep 2026-10-20]",
+  "report_evidence": "E-evand-694-n154-report",
+  "receipt_format": "evand-694-exact-replay-v1",
+  "witness_prefix": "W-evand-694-n",
+  "claim_limitations": "Complete 1d2bb82 rational centre/half-angle certificate converted exactly from the retained source. Finite construction feasibility only; no KKT, local minimum, rigidity, novelty, priority or global optimality claim.",
+  "read_on": "2026-10-20",
+  "read_at_main": "d588ad987bd8de53361d087b8961a7f2bf157c41",
+  "certificates": [
+    {
+      "n": 154,
+      "path": "search/packer/candidates/s154_sw.cert",
+      "format": "evand-cert",
+      "offered": "12.921100940762",
+      "first_committed": "2026-10-20T03:54:48Z",
+      "same_packing": []
+    }
+  ],
+  "requested": [
+    154
+  ],
+  "replayed": [
+    154
+  ],
+  "houses": [
+    {
+      "n": 154,
+      "reader": "[Mishapolk KKT refinements 2026-10-14]",
+      "source_key": "[Mishapolk KKT refinements 2026-10-14]",
+      "holders": "Evan Daniel, improved by Francisco Couzo and Mishapolk",
+      "result": "T-186",
+      "reported_value": "12.92120657713263105",
+      "verified_value": "12.92120657713263105",
+      "evidence": [
+        "E-mishapolk-70a033f-exact-feasibility"
+      ]
+    }
+  ],
+  "pending": [
+    {
+      "n": 154,
+      "report": "T-182 (#586)",
+      "url": "https://github.com/jlevy/squares/issues/586",
+      "holders": "Francisco Couzo",
+      "result": "T-182",
+      "reader": "[Couzo certificates 2026-10-13]"
+    },
+    {
+      "n": 154,
+      "report": "T-172 (#583)",
+      "url": "https://github.com/jlevy/squares/issues/583",
+      "holders": "Francisco Couzo",
+      "result": "T-172",
+      "reader": "[Couzo issue-583 certificates 2026-10-13]"
+    },
+    {
+      "n": 154,
+      "report": "T-160 (#552)",
+      "url": "https://github.com/jlevy/squares/issues/552",
+      "holders": "Evan Daniel",
+      "result": "T-160",
+      "reader": "[Daniel n154 2026-10-12]"
+    },
+    {
+      "n": 154,
+      "report": "#593",
+      "url": "https://github.com/jlevy/squares/issues/593",
+      "holders": "Mykhailo Polkovskyi (Mishapolk)",
+      "reader": "[Mishapolk records 2026-10-14]"
+    }
+  ],
+  "register": {
+    "title": "Evan Daniel's n154 certificate at 1d2bb82, issue694",
+    "headline": "Daniel's smaller n154 packing, a new KKT point in Couzo's #586 family, certified exactly",
+    "significance": 3,
+    "source_checks": "The author reports that his two exact rational checkers, verify_cert.py (separating axes) and verify_cert2.py (polygon intersection), accept the certificate and its regularized view at the same side. The source reports a KKT point that it has not shown to be a strict local minimum (its second-order test is inconclusive), 58 corner-corner contacts with no corner-corner MILP descent, 9 rattlers and 38 tilted squares, and calls it a different KKT point from #586's in the same family: the matched contact graphs share 232 pairs, 61 are only here and 64 only in #586's, and a morph walk finds no path between the two up to 1e-2 above #586's side. Those are numerical evidence at 80 digits and a heuristic, as the source says, not proofs. No source program ran here.",
+    "credit": "Credit Evan Daniel (https://github.com/evand/square-packing), whose chained explorer removed two squares from the register's s(156) packing (Daniil Ostashev's) and, with crossovers against close relatives of Francisco Couzo's #586 packing, and a later restart of his basin explorer, reached this packing; the issue asks that #586's arrangement (itself continued from Daniel's #552) and Ostashev's s(156) packing be credited as its starts. The search, the checks and the request were done with Claude (Claude Code) under Evan Daniel's direction.",
+    "next_rung": "Independently review the retained replay, then adopt at 154.",
+    "bead": "think-115j",
+    "bibliography": {
+      "authors": [
+        "Daniel"
+      ],
+      "lineage": "builds-on-project",
+      "credit": "Daniel after Couzo, Ostashev, Levy",
+      "short_credit": "Daniel after Couzo, Ostashev, Levy",
+      "note": "One complete exact certificate at 1d2bb82035af4b7eb4658488543e46b67d1099ca, s(154) <= 1615137617595210068732072760947/(125*10^27), found by the author's chained and basin explorers from Ostashev's s(156) packing, crossed with relatives of Couzo's #586 packing; the issue asks that #586's arrangement and the s(156) packing be credited as its starts, and calls it a different KKT point from #586's in its family. A same-side regularized view and the source's comparison with #586 are retained beside it. MIT-licensed; Claude assistance disclosed. KKT statements are the author's numerical evidence; the source does not claim a strict local minimum, and no local or global optimality claim is made."
+    }
+  }
+}
