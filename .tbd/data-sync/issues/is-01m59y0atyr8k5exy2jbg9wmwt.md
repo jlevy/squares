@@ -5,8 +5,8 @@ title: Adopt T-218 at n183 and regularize it in the next intake PR
 kind: task
 status: in_progress
 priority: 2
-version: 7
-delegate: lane-680
+version: 8
+delegate: c-lane-687
 labels:
   - result-import
   - regularization
@@ -16,7 +16,7 @@ parent_id: is-01m59few7wa6j6yrnw49hjap7r
 hold: null
 hold_until: null
 created_at: 2026-10-19T11:16:02.525Z
-updated_at: 2026-10-19T23:37:38.324Z
+updated_at: 2026-10-20T02:06:45.107Z
 started_at: 2026-10-19T16:47:23.660Z
 ---
 Adopt T-218's original n183 rational certificate in the next intake pull request and finish both maintained strong-generator regularizations in that same pull request. Owner: codex-n183-house-adoption-20261019. This open obligation supplies select_houses.PENDING_ADOPTION n183; the registration slice does not move a house or run a generator. Credit Daniel after Couzo, with Levy acknowledged only for register seed data.

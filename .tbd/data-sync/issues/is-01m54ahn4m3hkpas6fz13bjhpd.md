@@ -5,8 +5,8 @@ title: "Import Evan Daniel: s(236) <= 15.861934390608, a new local minimum 2.02e
 kind: task
 status: in_progress
 priority: 1
-version: 11
-delegate: lane-new
+version: 12
+delegate: c-lane-692
 labels:
   - result-import
 dependencies: []
@@ -16,7 +16,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-17T06:59:46.452Z
-updated_at: 2026-10-20T00:53:58.357Z
+updated_at: 2026-10-20T02:06:42.689Z
 started_at: 2026-10-18T08:47:56.022Z
 ---
 Evan Daniel (@evand) reports s(236) <= 15.861934390608 on jlevy/squares#659 (filed 2026-10-16T14:05:14Z): the exact rational side 7930967195303679308621899285697/(5*10^29) = 15.861934390607358617243798571394 of evand/square-packing 5ad00693899ef50ccf6502f0346187cc422cc914 (committed 2026-10-16T14:03:49Z), search/packer/candidates/s236_bm3c.cert, rounded up at 12 places. Found by the 17 October intake pass (think-e2sz), lane W (user-eb-sweep-1017). Stage 1 triage below; stages 2 to 4 are this bead's, in an import lane the coordinator assigns.

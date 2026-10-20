@@ -5,8 +5,8 @@ title: Reconcile accepted intake records with actual post665 main
 kind: task
 status: in_progress
 priority: 2
-version: 9
-delegate: lane-446
+version: 10
+delegate: c-lane-688
 labels: []
 dependencies: []
 parent_id: is-01m5a7j9cz28zsdky2pjspafq6
@@ -16,7 +16,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-19T14:53:35.309Z
-updated_at: 2026-10-19T23:26:20.039Z
+updated_at: 2026-10-20T02:06:44.700Z
 started_at: 2026-10-19T14:53:51.733Z
 ---
 

@@ -5,8 +5,8 @@ title: Regularize 155, 229, 236 and 271 after the 19 October evand adoption (T-1
 kind: task
 status: in_progress
 priority: 2
-version: 4
-delegate: lane-new
+version: 5
+delegate: c-lane-692
 labels:
   - regularization
 dependencies: []
@@ -14,7 +14,7 @@ parent_id: is-01m54ahn4m3hkpas6fz13bjhpd
 hold: null
 hold_until: null
 created_at: 2026-10-19T21:28:33.428Z
-updated_at: 2026-10-20T00:54:12.469Z
+updated_at: 2026-10-20T02:06:45.936Z
 started_at: 2026-10-19T21:28:46.377Z
 ---
 Both strong generators (grid-slack at 0.5, 1 and 5 degrees; Evan Daniel's driver) and regularize_select on the four counts the 19 October adoption re-houses, in the adoption's PR (claude/intake-2026-10-19-evand-singles), per result-import.md 'Adopt a House, Then Regularize It'. Priced by adopt_houses at 20 to 100 CPU-minutes. Runs under scratchpad lnew/runs, retained evidence under packing/cases/regularized_drawings/<this bead>-2026-10-19/.
