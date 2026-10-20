@@ -1,0 +1,86 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "https://github.com/jlevy/squares/issues/664",
+  "author": "Evan Daniel",
+  "source_key": "[Daniel n271 2026-10-17]",
+  "report_evidence": "E-evand-664-n271-report",
+  "receipt_format": "evand-664-exact-replay-v1",
+  "witness_prefix": "W-evand-664-n",
+  "claim_limitations": "Complete 757b40b rational centre/half-angle certificate converted exactly from the retained source. Finite construction feasibility only; no KKT, local minimum, rigidity, novelty, priority or global optimality claim.",
+  "read_on": "2026-10-19",
+  "read_at_main": "14fd9e27f3e1e800c41b3d49280e4c7055ab6681",
+  "certificates": [
+    {
+      "n": 271,
+      "path": "search/packer/candidates/s271_ex1.cert",
+      "format": "evand-cert",
+      "offered": "16.948947733714",
+      "first_committed": "2026-10-17T04:29:03Z",
+      "same_packing": []
+    }
+  ],
+  "requested": [
+    271
+  ],
+  "replayed": [
+    271
+  ],
+  "houses": [
+    {
+      "n": 271,
+      "reader": "[Mishapolk KKT refinements 2026-10-14]",
+      "source_key": "[Mishapolk KKT refinements 2026-10-14]",
+      "holders": "Nate Chaoweeraprasit (itsnaka), improved by Francisco Couzo, PingYou Ltd, Mishapolk",
+      "result": "T-186",
+      "reported_value": "16.94899235645120561",
+      "verified_value": "16.94899235645120561",
+      "evidence": [
+        "E-mishapolk-70a033f-exact-feasibility"
+      ]
+    }
+  ],
+  "pending": [
+    {
+      "n": 271,
+      "report": "T-151 (#500)",
+      "url": "https://github.com/jlevy/squares/issues/500",
+      "holders": "Nate Chaoweeraprasit (itsnaka)",
+      "result": "T-151",
+      "reader": "[SQUISH fourth request 2026-10-11]"
+    },
+    {
+      "n": 271,
+      "report": "T-161 (#561)",
+      "url": "https://github.com/jlevy/squares/issues/561",
+      "holders": "Francisco Couzo",
+      "result": "T-161",
+      "reader": "[Couzo certificates 2026-10-12]"
+    },
+    {
+      "n": 271,
+      "report": "T-174 (PR #574)",
+      "url": "https://github.com/jlevy/squares/pull/574",
+      "holders": "PingYou Ltd",
+      "result": "T-174",
+      "reader": "[PingYou PR 574 certificates 2026-10-13]"
+    }
+  ],
+  "register": {
+    "title": "Evan Daniel's n271 certificate at 757b40b, issue664",
+    "headline": "A smaller packing of 271 squares from Evan Daniel's basin explorer, refining Couzo's packing, certified exactly",
+    "significance": 2,
+    "source_checks": "The author reports that his two exact rational checkers, verify_cert.py (separating axes) and verify_cert2.py (polygon intersection), accept the certificate and its 21-group regularized view at the same side. The source calls it a refinement of #561's packing and a different local minimum: its load-bearing tilt angles match #561's group for group within 0.12 degrees except that four squares near 31.7 to 32.0 degrees are three here; it reports a KKT local minimum strict modulo 54 exact flat motions, 259 corner-corner contacts with no corner-corner MILP descent and 4 rattlers. Those are numerical evidence at 80 digits, as the source says, not proofs. No source program ran here.",
+    "credit": "Credit Evan Daniel (https://github.com/evand/square-packing), whose basin explorer started from the register's witness for 271 and found this packing with one tilt-swap move and a re-polish, and credit Francisco Couzo's #561 packing and Nate Chaoweeraprasit's SQUISH packing (#500) it refines, as the issue asks. The search, the checks and the request were done with Claude (Claude Code) under Evan Daniel's direction.",
+    "next_rung": "Independently review the retained replay, then adopt at 271.",
+    "bead": "think-8o5j",
+    "bibliography": {
+      "authors": [
+        "Daniel"
+      ],
+      "lineage": "builds-on-project",
+      "credit": "Daniel after Couzo, Chaoweeraprasit, Levy",
+      "short_credit": "Daniel after Couzo, Chaoweeraprasit, Levy",
+      "note": "One complete exact certificate at 757b40bc6c5f681033ff1572177d408afbf26dfe, s(271) <= 16948947733713657510723401112423/10^30, found by the author's basin explorer from the register's witness for 271; the issue calls it a refinement of Francisco Couzo's #561 packing, itself a refinement of Nate Chaoweeraprasit's SQUISH packing, and a different local minimum. A same-side regularized view and the source's comparison with #561 are retained beside it. MIT-licensed; Claude assistance disclosed. KKT and local-minimum statements are the author's numerical evidence; no local or global optimality claim."
+    }
+  }
+}

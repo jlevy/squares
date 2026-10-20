@@ -1,0 +1,163 @@
+# Local evidence handoff, not a registry entry, reserved result ID or rung change.
+format: n183-evidence-integration-v1
+bead: think-arhu
+prepared_by: codex-680-evidence-integration-20261019
+prepared_on: '2026-10-19'
+status: reviewed-primary-evidence-awaiting-registration
+packet: packing/resources/web/evand-n183-subgrid-2026-10-19
+source_pin: 3a9948c781be668b1547cc2bf64a0d1e614f9bca
+claim:
+  n: 183
+  exact_side: 13999580178736252502081470897571/1000000000000000000000000000000
+  decimal_side: '13.999580178736252502081470897571'
+  safe_display_ceiling: '13.999580178737'
+  scope: Original rational certificate, finite feasibility only; exact side is below 14.
+  certificate: packing/resources/web/evand-n183-subgrid-2026-10-19/source/search/packer/candidates/s183_h183b.cert
+  certificate_sha256: 279e70d1c7fb0bc181e3e9d313e7350b672d85e223296f252b92f2916d6e5df5
+review:
+  path: docs/project/reviews/review-2026-10-19-evand-n183-subgrid.md
+  sha256: 6043c154990c386c28cb2fea0ae5e6e8743dce980efafbe4ff08c3efed5557da
+  retained_as: Byte-for-byte copy of the completed reviewer artifact, including its primary-replay addendum.
+  owner: think-glg8
+  reviewer: OpenAI Codex system family, strong tier, maximum reasoning
+  date: '2026-10-19'
+  verdict: accepted-primary-finite-upper-bound
+  execution: >-
+    The reviewer inspected source, complete native inputs/results, controls and maintained
+    admission; no upstream code or geometry rerun, new deciding program, numerical search,
+    build or environment installation. The admission command was check --n 183 without
+    --replay. The artifact preserves the earlier conditional static audit separately.
+  exposure: >-
+    Both source checkers, relevant generator sections, candidate reports, issue snapshot,
+    intake declaration and README; no earlier independent review of this result before
+    findings. The intake README's checker summary and limits were already visible.
+  significance_recommendation: S3, endorsing the existing draft score; independent of V/C and priority.
+  proposed_reported_external_review:
+    state: informally-verified
+    date: '2026-10-19'
+    reviewed_by: OpenAI Codex system family, strong tier, maximum reasoning; separately prompted mathematical reviewer
+    note: >-
+      docs/project/reviews/review-2026-10-19-evand-n183-subgrid.md accepts the original
+      finite upper bound on the retained native replay. No blocking mathematical defect;
+      M1 wording is qualified, M2 discharged for the primary route, M3/M4 retained as limits.
+replay:
+  owner: think-1hmn
+  batch: packing/campaign/issue-intake/intake-followup-20261019/n183-primary-replay.json
+  batch_sha256: 52506cddf8587a4d08e0fe79e398e8845421755c149d2a3278b94020b42f2a20
+  native_receipt: packing/resources/web/evand-n183-subgrid-2026-10-19/receipts/exact-certification.json.xz
+  native_receipt_sha256: ca671960f55d78c16a36bd5ac56a55b7c3b7ba406ecb517639f7801cb3a8ee37
+  execution_provenance: packing/resources/web/evand-n183-subgrid-2026-10-19/receipts/certify-execution-provenance.json
+  raw_jobs_and_log: /Volumes/spud-ext1/agent-source/squares-intake-followup-20261019/n183-primary-replay-01/
+  complete_coverage:
+    certificates: 1
+    squares_per_job: 183
+    pairs_per_route_per_job: 16653
+    jobs: 3
+    routes: 2
+    total_pair_decisions: 99918
+  outcomes: Both routes accept the original and reject the duplicate-square and outside-container controls.
+  wall_clearance: 1/200000000000000000000
+  pair_gap: >-
+    410634701261530154144724882523964107748445496442011038260368168329024992759793889459/41063470126153058863231934179550054728762808827746798831660799169182564000000000000000000000000000000000
+  gap_meaning: Exact positive separating-axis projection gap, not an exact shortest Euclidean distance.
+  process_seconds: {wall: 34.87, user: 32.38, system: 0.48}
+  certify_command_completed_at_utc: '2026-10-19T07:46:56.732Z'
+  batch_metadata_completed_at_utc: '2026-10-19T07:47:45.011658Z'
+  timestamp_note: Original command completion and subsequent batch-record timestamp are separate retained facts.
+  route_cpu_seconds: 30.55
+  job_wall_seconds: 31.27
+  longest_job_seconds: 10.79
+  workers: 1
+  job_timeout_seconds: 100
+  batch_ceiling_seconds: 360
+  historical_environment:
+    basis: Original completed command and the script output retained just before it, not today's settings.
+    cwd: /Users/levy/wrk/github/squares/.worktrees/confirm-422/packing
+    PYTHONPATH: /Users/levy/wrk/github/squares/.worktrees/confirm-422/packing/src:/Users/levy/wrk/github/squares/.worktrees/confirm-422/packing:/Users/levy/wrk/github/squares/.worktrees/confirm-422/packages/workbench/tools:/Users/levy/wrk/github/squares/.worktrees/confirm-422/vendor/kpress/src
+    interpreter: /Users/levy/wrk/github/squares/packing/.venv/bin/python3
+    python_version: 3.14.7
+    script: /Volumes/spud-ext1/agent-scratch/squares-intake-followup-20261019/intake-env.sh
+    inherited_environment: Not dumped; no historical PACKING_PROJECT_ROOT or expanded inherited PATH is inferred.
+    reviewer_admission: Separate command with packing:packing/src PYTHONPATH; not the certify environment.
+programs:
+  relationship_to_generator: independent-implementation
+  basis: >-
+    Pre-existing project geometry implementations, distinct from the producer's programs.
+    The conversion author's module read log discloses reading both producer checkers and
+    the stated certificate format, importing or copying none of their code. This is
+    implementation independence from the producer, not a clean room or human/model diversity.
+  clean_room: false
+  author_identity_limit: >-
+    Existing registry author is Squares Project (Levy). This integration did not recover
+    each program author's individual identity, model, reasoning setting or prompt separation;
+    no new written_by or producer-overlap claim is inferred. Preserve actual retained records
+    when the confirmation evidence is registered.
+  shared_between_routes:
+  - Strict certificate parser and rational half-angle conversion
+  - Python Fraction arithmetic and runtime
+  - Separating-axis theorem; two implementations are not two mathematical methods
+  sources_at_replay_revision:
+    revision: f57ede12ce64cd1c74336d380b607478361c34c3
+    comparison: git diff --exit-code against the integration checkout found no differences in these seven files.
+    entries:
+    - verifier: V-sqpack-verify
+      role: decides
+      source: packing/src/sqpack/witness.py
+      sha256: 6642aca5a6dacfb09f8bb4fb650182d744128e835ca41d50f43d8f4b849712eb
+    - verifier: V-sqpack-verify
+      role: decides
+      source: packing/src/sqpack/verify.py
+      sha256: 56bc5b9f690b054ba30e82547dea4aa9d0ccea0a2b1827fab28fcc4e98677337
+    - verifier: V-check-rational-witness-independent
+      role: decides
+      source: packing/devtools/check_rational_witness_independent.py
+      sha256: 89f8d8e2e071a3f7035083c9a8beb23e3bec175eb0762b2825a5b9f684c16975
+    - verifier: V-upper-bound-reports
+      role: premises
+      source: packing/devtools/upper_bound_reports.py
+      sha256: bc47273499dccbd59997bbdd4028176eb09621865b25854f511f9cf872ce1156
+    - verifier: V-evand-arrangement-receipts
+      role: premises
+      source: packing/devtools/evand_arrangement_reports.py
+      sha256: 8e2141bfa0b233173e442517035783f6598610398fe9896e9a9977d7383dcc17
+    - verifier: V-evand-exact-certificates
+      role: premises
+      source: packing/devtools/evand_exact_certificates.py
+      sha256: 52073811e61dba8bca0574a1e8cf99b91058fb70c17b38621baf07b5fb94cf3e
+    - verifier: null
+      role: premises
+      source: packing/devtools/acquire_source.py
+      sha256: f2badc973c8aa3c1bc90e4ebf89836ba7c0fa74fa7527e7be7dc205d48d701e4
+      registration_required: Custody is called by V-upper-bound-reports; add its source/version to that entry or register it separately before counting this confirmation.
+findings:
+  M1:
+    disposition: corrected-intake-wording
+    scope: >-
+      27 numerical candidate flat modes of the 182-square force-bearing subsystem;
+      the free rattler at source index 11 and its three coordinates are excluded.
+      No exact full-configuration local-optimality, rigidity or flat-family theorem.
+  M2:
+    disposition: discharged-primary-replay
+    basis: >-
+      Custody plus strict maintained evand-cert adapter binds expected n183, exact
+      submitted side and all 183 three-field rational rows. Native admission compares
+      every complete deciding input, pair count and outcome with the original or declared
+      control. Source-parser weaknesses remain relevant if source checkers run later.
+  M3:
+    disposition: retained-limit
+    scope: >-
+      Regularized endpoint unexecuted here; no same_packing declaration, path without
+      expansion, arrangement identity or strong-generator house regularization established.
+  M4:
+    disposition: retained-limit
+    scope: >-
+      Credit Evan Daniel after Francisco Couzo's n182 packing. Missing crossover mates
+      remain unlogged; geometry supplies neither lineage recovery nor public priority.
+registration_bindings_remaining:
+- Coordinator allocates the actual result ID in merge order and binds its request, scope and evidence.
+- Attach this mapped review to the reported atom's external_review and actual result's reviews; name the actual ID in the registration metadata without rewriting the retained reviewer artifact.
+- Register a separate confirming-origin primary replay atom with the retained receipt, full coverage, controls, deciding/premise verifier versions and actual independence metadata.
+- Represent custody admission in the verifier registry; do not omit acquire_source because it decides no geometry.
+- Re-derive earned V/C from the actual cited evidence. V3/C3 is proposed for the primary finite upper bound only; this local handoff changes no rating.
+- Reconcile unfinished_confirmations, backlog and existing owner beads after the bindings land. Primary geometry is already complete; optional regularized/source-checker runs are not prerequisites for this primary confirmation.
+- Keep case/house adoption, strong-generator regularization, release qualification and post-merge replies in their separately owned slices.

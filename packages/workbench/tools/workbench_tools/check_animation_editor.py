@@ -89,12 +89,15 @@ def check(page_path: Path, screenshots: Path | None = None) -> str:
 
         # The census, observed as the steps whose duration shrinks by the page's speed-up. A
         # simple step lies inside k^2 - k .. k^2 - 1 for k = ceil(sqrt(n + 1)), and that range
-        # holds 170 steps of the corpus; thirteen of them change the container, because their
-        # best packing is tilted, and play at full length. So 157 play sped up, and the page's
+        # holds 170 steps of the corpus; fourteen of them change the container, because their
+        # best packing is tilted, and play at full length. So 156 play sped up, and the page's
         # own count agrees. The twelfth is 211 -> 212 since the #227 intake: de Winter's tilted
         # n = 211 at side 14.998 replaced the 15 x 15 grid, so the grid resumes at 212. The
         # thirteenth is 308 -> 309 since the house adoption of 11 October 2026 (think-fvz4):
         # T-141's tilted n = 308 replaced the 18 x 18 grid's fill, so the grid resumes at 309.
+        # The fourteenth is 183 -> 184 since the adoption of 19 October 2026 (think-jh4w):
+        # Evan Daniel's tilted n = 183 (T-220) replaced the 14 x 14 grid's fill, so the grid
+        # resumes at 184.
         def grid_fill_range(n: int) -> bool:
             k = math.isqrt(n) + 1  # ceil(sqrt(n + 1))
             return k * k - k <= n <= k * k - 1
@@ -102,11 +105,11 @@ def check(page_path: Path, screenshots: Path | None = None) -> str:
         census = page.evaluate(probe("animate/sped-pairs"))
         sped = {row["n"] for row in census if row["sped"]}
         in_range = {row["n"] for row in census if grid_fill_range(row["n"])}
-        full_length = {110, 132, 156, 182, 210, 211, 240, 241, 272, 273, 306, 307, 308}
+        full_length = {110, 132, 156, 182, 183, 210, 211, 240, 241, 272, 273, 306, 307, 308}
         require(
-            call("continuous")["simplePairs"] == len(sped) == 157
+            call("continuous")["simplePairs"] == len(sped) == 156
             and sped == in_range - full_length,
-            f"the simple steps are not the 157 grid fills: page count "
+            f"the simple steps are not the 156 grid fills: page count "
             f"{call('continuous')['simplePairs']}, sped up {len(sped)}, outside the range "
             f"{sorted(sped - in_range)}, missing {sorted(in_range - full_length - sped)}",
         )
@@ -189,7 +192,7 @@ def check(page_path: Path, screenshots: Path | None = None) -> str:
             f"the grid fill does not play at 2x once asked: {at_two} s against {full[0]} s",
         )
         # The census measures something different now -- every grid fill is twice the length it
-        # was -- and still finds the same 157 steps, because it reads the page's factor rather
+        # was -- and still finds the same 156 steps, because it reads the page's factor rather
         # than assuming one. A census that assumed four would find none of them here.
         recensus = page.evaluate(probe("animate/sped-pairs"))
         require(

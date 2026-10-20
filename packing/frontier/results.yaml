@@ -15536,6 +15536,14 @@ results:
 
       The source's own checkers were not run here. No two independent methods, human
       oversight or optimality is claimed.
+
+      Issue 673 (17 October 2026) corrects the credit the author asked for in issue 489 at
+      308: crediting Kevin Fang for the construction meant that the search was based on
+      his packing, not that Fang found the packing posted, which is a different local
+      minimum (his packing polished, then seven search moves to a nearby basin). From 19
+      October 2026 the case record at 308, whose house T-174 refines this packing, names
+      Evan Daniel as the finder, based on Fang's two-wedge construction; the credit line,
+      Daniel after Fang and the rest, is unchanged.
     next_rung: >-
       V4 and C4 need a retained human oversight record: two accepted adversarial
       reviews by distinct AI reviewers are retained, the 10 October review and the 11 October
@@ -25915,6 +25923,13 @@ results:
       of regularized views, agreement to about 1e-7 outside a cluster of ten squares, is his
       and was not re-run; pose for pose the certificates differ by more than 1e-3 at 57
       squares.
+
+      Issue 673 (17 October 2026) corrects the credit the author asked for in issue 606:
+      crediting Ryan Xu's packing as the start meant that the search was based on it, not
+      that Xu found the packing posted, which is a different local minimum. From 19
+      October 2026 the case record at 146 names Evan Daniel as the finder, from a search
+      started from Xu's packing; the credit line, Daniel after Xu, is unchanged, and so is
+      the measured lineage above.
     next_rung: >-
       V4 and C4 need a second accepted adversarial review by a distinct reviewer and a
       retained human oversight record; one AI review, of 16 October, is retained.
@@ -27585,197 +27600,299 @@ results:
     kind: upper-bound
     registered: '2026-10-18'
     landed: '2026-10-19'
-    headline: Daniel reports a smaller n155 packing, started from Ostashev's packing
+    headline: >-
+      Daniel's smaller n155 packing, started from Ostashev's packing
     claim: >-
-      The source reports complete rational unit-square certificates at the exact sides stated: s(155) <=
+      One complete rational source certificate reports a finite upper-bound improvement at
+      the exact side it states: s(155) <=
       2590452188930112807053435932173/200000000000000000000000000000.
 
-      Issue 669 reports a different numerical local minimum found by Evan Daniel from Daniil Ostashev's
-      T-149 packing as the search start. Its original and regularized display certificates have the same
-      exact side and form one bound. The issue and prior JSON explicitly credit Ostashev; the regularized
-      JSON instead says by Francisco Couzo. Both metadata statements remain retained, and this entry follows
-      the explicit issue/prior attribution without treating the conflicting field as evidence. Numerical
-      KKT, local-minimum and basin claims remain the author's, with no optimality or identity proof adopted.
-    scope:
-      n_values:
-        - 155
-    verification: V0
-    confirmation: C0
+      The certificate and its duplicate-square and outside-container controls were decided
+      here on 19 October 2026 by both maintained exact routes, and the frozen comparison
+      rebuilt; no route here is the source's code, so the replay is independently
+      re-implemented. The 19 October review found no blocking defect.
+
+      Issue 669 reports a different numerical local minimum found by Evan Daniel's basin
+      explorer from Daniil Ostashev's T-149 packing, the register's witness for 155 when
+      the search ran, after a chain of 18 moves; no load-bearing tilt angle is shared with
+      T-149. Its original and same-side regularized display certificates state one bound.
+      KKT and local-minimum statements are the author's numerical evidence, not proofs.
+      The issue says the work was done with Claude (Claude Code) under Evan Daniel's
+      direction.
+    scope: {n_values: [155]}
+    verification: V3
+    confirmation: C3
     significance:
-      score: 2
-      rationale: A finite upper-bound improvement at one count in the retained report order, with source-claimed
-        search or dilation lineage; no lower bound or optimality claim. A draft S2 assessment for the separate
-        mathematical review.
-      scored: '2026-10-18'
-      by: think-1ayi October 18 intake registration draft; separate mathematical review confirms or changes
-        it
+      score: 3
+      rationale: >-
+        A new arrangement at 155, 1.64e-04 below the case and every report, found from
+        Ostashev's packing, as T-149, T-160 and T-183 are; no lower bound or optimum.
+      scored: '2026-10-19'
+      by: >-
+        the 19 October review
+        (docs/project/reviews/review-2026-10-19-upper-bound-imports-659-664-669-674.md),
+        raising the draft S2 of think-1ayi's October 18 intake registration
     novelty: previously-published
     attribution:
-      source_keys:
-        - '[Daniel n155 explorer 2026-10-17]'
+      source_keys: ['[Daniel n155 explorer 2026-10-17]']
       published: '2026-10-17'
-    evidence:
-      - E-evand-669-n155-report
+    evidence: [E-evand-669-n155-report, E-evand-669-n155-exact-feasibility]
     artifacts:
       - packing/resources/web/evand-n155-explorer-2026-10-17/README.md
       - packing/resources/web/evand-n155-explorer-2026-10-17/source/search/packer/candidates/s155_ex2.cert
       - packing/resources/web/evand-n155-explorer-2026-10-17/source/search/packer/candidates/s155_ex2_regularized.cert
-      - packing/campaign/issue-intake/upper-bounds-20261018/README.md
-    notes: |-
-      Source report only: no returned mathematical review or source-replay receipt is
-      incorporated. Both case upper lanes and the retained house remain unchanged pending Stage
-      4 adoption. The original and same-side regularized display certificates state one bound.
-      The packet preserves the Ostashev/Couzo metadata discrepancy; this entry follows the
-      explicit issue/prior attribution.
+      - docs/project/reviews/review-2026-10-19-upper-bound-imports-659-664-669-674.md
+    controls: [packing/tests/test_upper_bound_reports.py, packing/tests/test_upper_bound_reports_659_664_669_674.py]
+    notes: >-
+      A complete repository replay is retained for n = 155: 1 positive and 2
+      duplicate-square and outside-container controls passed their required outcomes on
+      both routes, 71610 pair decisions; summed over the 3 jobs, the receipt records 43.29
+      route CPU seconds and 86.75 job wall seconds, the longest job 29.99 seconds. Every
+      positive clears every wall by at least 5.00e-21 and every pair by at least 9.99e-21.
+      The receipt is receipts/exact-certification.json.xz in
+      evand-n155-explorer-2026-10-17.
 
-      The separate source-checker batch covering both n155 certificates and both n229 versions
-      has completed with geometric controls under think-8kx2 and think-0lu6. Its receipt and the
-      mapped review under think-s5u5 await descendant integration. Numerical local-minimum and
-      basin claims remain the author's; no identity or optimality proof is adopted.
-    next_rung: C1 needs the separate mapped mathematical review bound to this exact claim; C3 needs the
-      completed full retained source replay, adversarial controls and accepted review integrated in their
-      own descendant PRs. The replay and controls have completed separately under think-8kx2 and await integration.
-    unfinished_confirmations:
-      - what: Integrate the separate mapped mathematical review after binding actual result IDs; no review
-          is adopted by this registration.
-        rung: C1
-        link: think-s5u5
-      - what: Integrate the separately completed full retained source replay and geometric controls with
-          the accepted mapped mathematical review and exact claim binding in their own descendant PRs; this
-          registration adopts no confirmation.
-        rung: C3
-        link: think-8kx2
+      At n = 155 the certificate is below the case's ceiling (Daniil Ostashev, improved by
+      PingYou Ltd, T-174) by 1.64e-04 and below T-149 (#501) by 1.64e-04; it is the
+      smallest report at 155, and the 18 October ledger records it in report order.
+
+      Measured by the 19 October review, square by square: no symmetry of the box pairs
+      the certificate one to one with T-149's packing by nearest centres, and the best
+      one-to-one assignment moves 29 squares by more than a tenth, at most 0.737; its
+      tilts, 22.3 to 25.0 degrees with one at 7.8 and four at 33.6 to 34.8, share none of
+      T-149's, 25.0 to 32.7. It is a new arrangement found from Ostashev's packing, as the
+      issue says, and lists no regularization.
+
+      The three regularized views' reports, at 155, 236 and 271, each carry "by":
+      ["Francisco Couzo"]; read alike, that is the source regularizer's field, not a
+      credit, and the review asks the author (RV-7). This entry follows the issue and the
+      prior-record file, which credit Ostashev's packing as the start.
+
+      The source's own checkers were not run here. The two maintained routes share
+      certificate parsing, half-angle conversion, Fraction arithmetic and the
+      separating-axis method. No optimality, local minimum or human oversight is claimed.
+
+      V3 and C3 rest on the 19 October review and the replay it reproduced
+      (E-evand-669-n155-exact-feasibility). The case at 155 adopted this certificate as
+      its house on 19 October 2026.
+    next_rung: >-
+      None for the bound. V4 and C4 need a second accepted adversarial review by a
+      distinct reviewer and a retained human oversight record; one AI review, of 19
+      October, is retained.
+    reviews:
+      - path: docs/project/reviews/review-2026-10-19-upper-bound-imports-659-664-669-674.md
+        kind: adversarial
+        reviewer: >-
+          AI agent (Claude, strong sub-agent tier, max reasoning), the stage 4 review
+          lane (W2) of the 2026-10-19 intake, prompted separately from the import and
+          records lanes, with no shared context beyond their committed packets,
+          register entries and pull requests
+        reviewer_kind: ai
+        relation: project
+        date: '2026-10-19'
+        scope: >-
+          Finite feasibility of the five certificates T-197, T-198, T-199, T-218 and
+          T-219 cite: each retained receipt replayed on both maintained routes, each
+          frozen claim record rebuilt, a third exact route written for the review,
+          each pinned file fetched at its pin and held to its digest, each route's
+          trust boundary, and the credit each entry states measured pose by pose
+          against the packing it names.
+        verdict: accepted
+        covers: [T-197, T-198, T-199, T-218, T-219]
   - id: T-198
     kind: upper-bound
     registered: '2026-10-18'
     landed: '2026-10-19'
-    headline: Daniel's opening n229 dilation certificate, after Couzo and de Winter
+    headline: >-
+      Daniel's opening n229 dilation certificate, after Couzo and de Winter
     claim: >-
-      The source reports complete rational unit-square certificates at the exact sides stated: s(229) <=
+      One complete rational source certificate reports a finite upper-bound improvement at
+      the exact side it states: s(229) <=
       7825081627429265081627421439843/500000000000000000000000000000.
 
-      The opening report of issue 674, 17 October, remains a chronological finite upper bound even though
-      the author later asks to replace its certificate. Preserve the source-claimed lineage de Winter issue
-      668, Couzo issue 672, then Daniel's opening dilation and the next-day update. Couzo's intervening
-      claim remains Stage 1, owned by think-2vjc; it is not retained, replayed or registered
-      by this change. No regularizations.of is assigned because Couzo's antecedent is not registered; identity.basis may
-      remain source-claim until measured. The author's dilation description is attribution, not a measured identity or continuous-path
-      proof.
-    scope:
-      n_values:
-        - 229
-    verification: V0
-    confirmation: C0
+      The certificate and its duplicate-square and outside-container controls were decided
+      here on 19 October 2026 by both maintained exact routes, and the frozen comparison
+      rebuilt; no route here is the source's code, so the replay is independently
+      re-implemented. The 19 October review found no blocking defect.
+
+      Issue 674's opening report, 17 October, remains a chronological upper bound although
+      the author's update of 18 October (T-199) asks to replace it and is smaller. The
+      source states the certificate is a dilation of a binary64 packing by 1 + 10^-12 with
+      rational half-angle tangents, which certifies the upper bound only. The issue
+      credits Francisco Couzo's #672 packing, which refines Joost de Winter's #668, as the
+      start. The issue says the work was done with Claude (Claude Code) under Evan
+      Daniel's direction.
+    scope: {n_values: [229]}
+    verification: V3
+    confirmation: C3
     significance:
       score: 2
-      rationale: A finite upper-bound improvement at one count in the retained report order, with source-claimed
-        search or dilation lineage; no lower bound or optimality claim. A draft S2 assessment for the separate
-        mathematical review.
-      scored: '2026-10-18'
-      by: think-1ayi October 18 intake registration draft; separate mathematical review confirms or changes
-        it
+      rationale: >-
+        An arrangement of de Winter's tilted design 1.15e-05 below the smallest earlier
+        report, de Winter's T-196, superseded the next day by the author's update, as
+        T-188 is; the 6.69e-03 drop below the case is de Winter's.
+      scored: '2026-10-19'
+      by: >-
+        the 19 October review
+        (docs/project/reviews/review-2026-10-19-upper-bound-imports-659-664-669-674.md),
+        confirming the draft S2 of think-1ayi's October 18 intake registration
     novelty: previously-published
     attribution:
-      source_keys:
-        - '[Daniel n229 dilation 2026-10-17]'
+      source_keys: ['[Daniel n229 dilation 2026-10-17]']
       published: '2026-10-17'
-    evidence:
-      - E-evand-674-n229-opening-report
+    evidence: [E-evand-674-n229-opening-report, E-evand-674-n229-opening-exact-feasibility]
     artifacts:
       - packing/resources/web/evand-n229-dilation-2026-10-17/README.md
       - packing/resources/web/evand-n229-dilation-2026-10-17/source/search/packer/candidates/s229.cert
-      - packing/campaign/issue-intake/upper-bounds-20261018/README.md
-    notes: |-
-      This opening finite upper-bound report remains registered in chronological order even
-      though the author later requests the smaller update. Both case upper lanes and the
-      retained house remain unchanged pending adoption. The declared rungs use only the reported
-      evidence and incorporate no separate confirmation receipt.
+      - docs/project/reviews/review-2026-10-19-upper-bound-imports-659-664-669-674.md
+    controls: [packing/tests/test_upper_bound_reports.py, packing/tests/test_upper_bound_reports_659_664_669_674.py]
+    notes: >-
+      A complete repository replay is retained for n = 229: 1 positive and 2
+      duplicate-square and outside-container controls passed their required outcomes on
+      both routes, 156636 pair decisions; summed over the 3 jobs, the receipt records
+      92.75 route CPU seconds and 140.22 job wall seconds, the longest job 47.78 seconds.
+      Every positive clears every wall by at least 5.01e-13 and every pair by at least
+      9.99e-13, the dilation's margin. The receipt is receipts/exact-certification.json.xz
+      in evand-n229-dilation-2026-10-17.
 
-      Credit follows de Winter, Couzo's intervening report, then Daniel's opening dilation and
-      update. Couzo's antecedent remains an unregistered import under think-2vjc, so no
-      regularizations.of is assigned. The identity contract permits source-claim until measured;
-      the source's dilation description establishes no measured identity or continuous path.
+      At n = 229 the certificate is below the case's verified ceiling (the Kingbird
+      catalogue, verified by T-155's exact ceiling) by 6.69e-03, below T-196 (#668) and
+      #672 by 1.15e-05 at their prints; T-199, the author's update, is below it by
+      1.74e-06 and houses the count.
 
-      The separate full source-checker batch and controls have completed under think-8kx2 and
-      think-0lu6. Their receipt and the mapped review under think-s5u5 await integration in
-      descendant PRs.
-    next_rung: C1 needs the separate mapped mathematical review bound to this exact claim; C3 needs the
-      completed full retained source replay, adversarial controls and accepted review integrated in their
-      own descendant PRs. The replay and controls have completed separately under think-0lu6 and await integration.
-    unfinished_confirmations:
-      - what: Integrate the separate mapped mathematical review after binding actual result IDs; no review
-          is adopted by this registration.
-        rung: C1
-        link: think-s5u5
-      - what: Integrate the separately completed full retained source replay and geometric controls with
-          the accepted mapped mathematical review and exact claim binding in their own descendant PRs; this
-          registration adopts no confirmation.
-        rung: C3
-        link: think-0lu6
+      Measured by the 19 October review: the certificate is exactly the dilation its
+      header states, the input's printed side times 1 + delta rounded up at 30 places,
+      delta the double nearest 10^-12, and its least margins split exactly into the
+      input's own clearance and the dilation's share (RV-4). It does not pair one to one
+      with de Winter's T-196, though it carries its four tilt bands within 0.03 degrees
+      (RV-9). Couzo's #672, which the issue names as the start, is not retained or
+      registered, so the step from it is not measured and no regularizations.of is
+      assigned; the source's lineage is its claim. The source's own checkers were not run
+      here. No optimality, local minimum or human oversight is claimed.
+
+      V3 and C3 rest on the 19 October review and the replay it reproduced
+      (E-evand-674-n229-opening-exact-feasibility).
+    next_rung: >-
+      None for the bound, which T-199 supersedes at 229. V4 and C4 need a second accepted
+      adversarial review by a distinct reviewer and a retained human oversight record; one
+      AI review, of 19 October, is retained.
+    reviews:
+      - path: docs/project/reviews/review-2026-10-19-upper-bound-imports-659-664-669-674.md
+        kind: adversarial
+        reviewer: >-
+          AI agent (Claude, strong sub-agent tier, max reasoning), the stage 4 review
+          lane (W2) of the 2026-10-19 intake, prompted separately from the import and
+          records lanes, with no shared context beyond their committed packets,
+          register entries and pull requests
+        reviewer_kind: ai
+        relation: project
+        date: '2026-10-19'
+        scope: >-
+          Finite feasibility of the five certificates T-197, T-198, T-199, T-218 and
+          T-219 cite: each retained receipt replayed on both maintained routes, each
+          frozen claim record rebuilt, a third exact route written for the review,
+          each pinned file fetched at its pin and held to its digest, each route's
+          trust boundary, and the credit each entry states measured pose by pose
+          against the packing it names.
+        verdict: accepted
+        covers: [T-197, T-198, T-199, T-218, T-219]
   - id: T-199
     kind: upper-bound
     registered: '2026-10-18'
     landed: '2026-10-19'
-    headline: Daniel's smaller n229 update, replacing the opening certificate
+    headline: >-
+      Daniel's smaller n229 update, replacing the opening certificate
     claim: >-
-      The source reports complete rational unit-square certificates at the exact sides stated: s(229) <=
+      One complete rational source certificate reports a finite upper-bound improvement at
+      the exact side it states: s(229) <=
       7825080756947776580756939951343/500000000000000000000000000000.
 
-      The 18 October comment on issue 674 requests this smaller certificate in place of the opening value.
-      Both chronological claims remain registered, and this update is the latest registered report at
-      229, pending adoption. Credit Daniel after Couzo, de Winter and Levy. Couzo's issue 672 remains Stage 1 under think-2vjc;
-      no registered antecedent or measured identity is inferred. The source's dilation and regularization
-      lineage is retained as its claim; no regularizations.of or continuous-path proof is adopted.
-    scope:
-      n_values:
-        - 229
-    verification: V0
-    confirmation: C0
+      The certificate and its duplicate-square and outside-container controls were decided
+      here on 19 October 2026 by both maintained exact routes, and the frozen comparison
+      rebuilt; no route here is the source's code, so the replay is independently
+      re-implemented. The 19 October review found no blocking defect.
+
+      The 18 October comment on issue 674 asks that this smaller certificate be registered
+      in place of the opening value (T-198), which stays registered as the earlier report.
+      The source states it is a dilation of a binary64 packing by 1 + 10^-12 with rational
+      half-angle tangents, a nearby configuration of the opening packing with the same
+      tilted structure, and credits Francisco Couzo's #672 packing, which refines Joost de
+      Winter's #668, as the start. The issue says the work was done with Claude (Claude
+      Code) under Evan Daniel's direction.
+    scope: {n_values: [229]}
+    verification: V3
+    confirmation: C3
     significance:
       score: 2
-      rationale: A finite upper-bound improvement at one count in the retained report order, with source-claimed
-        search or dilation lineage; no lower bound or optimality claim. A draft S2 assessment for the separate
-        mathematical review.
-      scored: '2026-10-18'
-      by: think-1ayi October 18 intake registration draft; separate mathematical review confirms or changes
-        it
+      rationale: >-
+        The same arrangement family, 1.32e-05 below T-196 and 1.74e-06 below T-198; no
+        lower bound or optimum.
+      scored: '2026-10-19'
+      by: >-
+        the 19 October review
+        (docs/project/reviews/review-2026-10-19-upper-bound-imports-659-664-669-674.md),
+        confirming the draft S2 of think-1ayi's October 18 intake registration
     novelty: previously-published
     attribution:
-      source_keys:
-        - '[Daniel n229 dilation update 2026-10-18]'
+      source_keys: ['[Daniel n229 dilation update 2026-10-18]']
       published: '2026-10-18'
-    evidence:
-      - E-evand-674-n229-update-report
+    evidence: [E-evand-674-n229-update-report, E-evand-674-n229-update-exact-feasibility]
     artifacts:
       - packing/resources/web/evand-n229-dilation-update-2026-10-18/README.md
       - packing/resources/web/evand-n229-dilation-update-2026-10-18/source/search/packer/candidates/s229_v2.cert
-      - packing/campaign/issue-intake/upper-bounds-20261018/README.md
-    notes: |-
-      The update is the latest registered n229 report, pending adoption; the opening report
-      remains as its earlier chronological improvement. Both case upper lanes and the retained
-      house are unchanged. No separate mathematical review or source-replay receipt is
-      incorporated, and the declared rungs follow only the reported evidence.
+      - docs/project/reviews/review-2026-10-19-upper-bound-imports-659-664-669-674.md
+    controls: [packing/tests/test_upper_bound_reports.py, packing/tests/test_upper_bound_reports_659_664_669_674.py]
+    notes: >-
+      A complete repository replay is retained for n = 229: 1 positive and 2
+      duplicate-square and outside-container controls passed their required outcomes on
+      both routes, 156636 pair decisions; summed over the 3 jobs, the receipt records
+      88.93 route CPU seconds and 157.25 job wall seconds, the longest job 63.42 seconds.
+      Every positive clears every wall by at least 6.00e-13 and every pair by at least
+      1.20e-12, the dilation's margin. The receipt is receipts/exact-certification.json.xz
+      in evand-n229-dilation-update-2026-10-18.
 
-      Credit is Daniel after Couzo, de Winter and Levy. Couzo's intervening report remains an
-      unregistered import under think-2vjc, so no regularizations.of is assigned. Source-claimed
-      lineage is retained without a measured packing identity or continuous-path proof.
+      At n = 229 the certificate is below the case's verified ceiling (the Kingbird
+      catalogue, verified by T-155's exact ceiling) by 6.69e-03, below T-196 (#668) and
+      #672 by 1.32e-05 at their prints and below T-198 by 1.74e-06; it is the smallest
+      report at 229, the latest in report order.
 
-      The separate full source-checker batch and controls have completed under think-8kx2 and
-      think-0lu6. Their receipt and the mapped review under think-s5u5 await integration in
-      descendant PRs.
-    next_rung: C1 needs the separate mapped mathematical review bound to this exact claim; C3 needs the
-      completed full retained source replay, adversarial controls and accepted review integrated in their
-      own descendant PRs. The replay and controls have completed separately under think-0lu6 and await integration.
-    unfinished_confirmations:
-      - what: Integrate the separate mapped mathematical review after binding actual result IDs; no review
-          is adopted by this registration.
-        rung: C1
-        link: think-s5u5
-      - what: Integrate the separately completed full retained source replay and geometric controls with
-          the accepted mapped mathematical review and exact claim binding in their own descendant PRs; this
-          registration adopts no confirmation.
-        rung: C3
-        link: think-0lu6
+      Measured by the 19 October review: the certificate is exactly the dilation its
+      header states (delta the double nearest 10^-12, RV-4), and its least margins are the
+      input's own clearance, about 1.0e-13 at the walls and 2.0e-13 between squares, plus
+      the dilation's share (RV-5). It pairs one to one with the opening certificate, eight
+      squares moving beyond a tenth, at most 0.54, with the same four tilt bands; it does
+      not pair with de Winter's T-196 (RV-9). Couzo's #672 is not retained or registered,
+      so the step from it is not measured and no regularizations.of is assigned; the
+      source's lineage is its claim. The source's own checkers were not run here. No
+      optimality, local minimum or human oversight is claimed.
+
+      V3 and C3 rest on the 19 October review and the replay it reproduced
+      (E-evand-674-n229-update-exact-feasibility). The case at 229 adopted this
+      certificate as its house on 19 October 2026, the first adoption at 229.
+    next_rung: >-
+      None for the bound. V4 and C4 need a second accepted adversarial review by a
+      distinct reviewer and a retained human oversight record; one AI review, of 19
+      October, is retained.
+    reviews:
+      - path: docs/project/reviews/review-2026-10-19-upper-bound-imports-659-664-669-674.md
+        kind: adversarial
+        reviewer: >-
+          AI agent (Claude, strong sub-agent tier, max reasoning), the stage 4 review
+          lane (W2) of the 2026-10-19 intake, prompted separately from the import and
+          records lanes, with no shared context beyond their committed packets,
+          register entries and pull requests
+        reviewer_kind: ai
+        relation: project
+        date: '2026-10-19'
+        scope: >-
+          Finite feasibility of the five certificates T-197, T-198, T-199, T-218 and
+          T-219 cite: each retained receipt replayed on both maintained routes, each
+          frozen claim record rebuilt, a third exact route written for the review,
+          each pinned file fetched at its pin and held to its digest, each route's
+          trust boundary, and the credit each entry states measured pose by pose
+          against the packing it names.
+        verdict: accepted
+        covers: [T-197, T-198, T-199, T-218, T-219]
 
   - id: T-200
     kind: lower-bound
@@ -29749,6 +29866,297 @@ results:
       author runs are reported. The release asset's data members are retained in Git
       under OR-18; the adapted verifier archive inside it is pinned by digest and not
       opened.
+  - id: T-218
+    kind: upper-bound
+    registered: '2026-10-19'
+    landed: '2026-10-20'
+    headline: >-
+      Daniel's smaller n236 packing, after Chaoweeraprasit's composition, certified
+      exactly
+    claim: >-
+      One complete rational source certificate reports a finite upper-bound improvement at
+      the exact side it states: s(236) <= 15.861934390607358617243798571394.
+
+      The certificate and its duplicate-square and outside-container controls were decided
+      here on 19 October 2026 by both maintained exact routes, and the frozen comparison
+      rebuilt; no route here is the source's code, so the replay is independently
+      re-implemented. The 19 October review found no blocking defect.
+
+      Issue 659 reports a packing found by Evan Daniel's basin explorer from a rebuild of
+      Nate Chaoweeraprasit's (itsnaka's) SQUISH Mondrian composition of #481 (T-136),
+      built from Kingbird's s(152)_r2 corner piece and itsnaka's s(88) (#422), and asks
+      that the composition be credited for the construction; it calls the result a
+      different local minimum from #481's, with no tilt angle shared. The author reports
+      that his two exact checkers accept the certificate and its 6-group regularized view
+      at the same side, and a KKT local minimum strict modulo 92 exact flat motions; those
+      are numerical evidence, not proofs. The issue says the work was done with Claude
+      (Claude Code) under Evan Daniel's direction.
+    scope: {n_values: [236]}
+    verification: V3
+    confirmation: C3
+    significance:
+      score: 3
+      rationale: >-
+        Another arrangement of #481's design 2.02e-03 below the case, as T-160 at 154
+        and T-183 at 237 are; no lower bound or optimum.
+      scored: '2026-10-19'
+      by: >-
+        the 19 October review
+        (docs/project/reviews/review-2026-10-19-upper-bound-imports-659-664-669-674.md),
+        raising the draft S2 of think-6wtz Evan Daniel import
+    novelty: previously-published
+    attribution:
+      source_keys: ['[Daniel n236 2026-10-16]']
+      published: '2026-10-16'
+    evidence: [E-evand-659-n236-report, E-evand-659-n236-exact-feasibility]
+    artifacts:
+      - packing/resources/web/evand-n236-2026-10-16/README.md
+      - packing/resources/web/evand-n236-2026-10-16/acquisition/claims.json
+      - packing/resources/web/evand-n236-2026-10-16/source/search/packer/candidates/s236_bm3c.cert
+      - packing/devtools/upper_bound_reports.py
+      - docs/project/reviews/review-2026-10-19-upper-bound-imports-659-664-669-674.md
+    controls: [packing/tests/test_upper_bound_reports.py, packing/tests/test_upper_bound_reports_659_664_669_674.py]
+    notes: >-
+      A complete repository replay is retained for n = 236: 1 positive and 2
+      duplicate-square and outside-container controls passed their required outcomes on
+      both routes, 166380 pair decisions; summed over the 3 jobs, the receipt records
+      70.45 route CPU seconds and 104.2 job wall seconds, the longest job 45.11 seconds.
+      Every positive clears every wall by at least 5.00e-21 and every pair by at least
+      9.99e-21. The receipt is receipts/exact-certification.json.xz in
+      evand-n236-2026-10-16; it stays out of this entry's artifacts so that the workers'
+      snapshot stays under its cap.
+
+      At n = 236 the certificate is below the case's ceiling (Nate Chaoweeraprasit
+      (itsnaka), improved by Evan Daniel, T-146) by 2.02e-03, below T-136 (#481) by
+      2.02e-03 and below T-174 (PR #574), staged for adoption at 236 until this one, by
+      2.02e-03; it is the smallest report at 236, the latest in report order.
+
+      Measured by the 19 October review: against the regularized view of #481's packing
+      the case held (T-146), and T-174, the best one-to-one assignment, under a
+      reflection, moves 10 squares by more than a tenth, at most 0.747, and keeps 226
+      within a tenth; the main tilt band moves from 38.09 to 37.69 to 37.79 degrees. It is
+      another arrangement of #481's design, as the issue says, and lists no
+      regularization.
+
+      The source's own checkers were not run here. The two maintained routes share
+      certificate parsing, half-angle conversion, Fraction arithmetic and the
+      separating-axis method. No optimality, local minimum or human oversight is claimed.
+
+      V3 and C3 rest on the 19 October review and the replay it reproduced
+      (E-evand-659-n236-exact-feasibility). The case at 236 adopted this certificate as
+      its house on 19 October 2026, which takes 236 off T-174's staged adoption.
+    next_rung: >-
+      None for the bound. V4 and C4 need a second accepted adversarial review by a
+      distinct reviewer and a retained human oversight record; one AI review, of 19
+      October, is retained.
+    reviews:
+      - path: docs/project/reviews/review-2026-10-19-upper-bound-imports-659-664-669-674.md
+        kind: adversarial
+        reviewer: >-
+          AI agent (Claude, strong sub-agent tier, max reasoning), the stage 4 review
+          lane (W2) of the 2026-10-19 intake, prompted separately from the import and
+          records lanes, with no shared context beyond their committed packets,
+          register entries and pull requests
+        reviewer_kind: ai
+        relation: project
+        date: '2026-10-19'
+        scope: >-
+          Finite feasibility of the five certificates T-197, T-198, T-199, T-218 and
+          T-219 cite: each retained receipt replayed on both maintained routes, each
+          frozen claim record rebuilt, a third exact route written for the review,
+          each pinned file fetched at its pin and held to its digest, each route's
+          trust boundary, and the credit each entry states measured pose by pose
+          against the packing it names.
+        verdict: accepted
+        covers: [T-197, T-198, T-199, T-218, T-219]
+  - id: T-219
+    kind: upper-bound
+    registered: '2026-10-19'
+    landed: '2026-10-20'
+    headline: >-
+      Daniel's smaller n271 packing, continuing Couzo's arrangement, certified exactly
+    claim: >-
+      One complete rational source certificate reports a finite upper-bound improvement at
+      the exact side it states: s(271) <= 16.948947733713657510723401112423.
+
+      The certificate and its duplicate-square and outside-container controls were decided
+      here on 19 October 2026 by both maintained exact routes, and the frozen comparison
+      rebuilt; no route here is the source's code, so the replay is independently
+      re-implemented. The 19 October review found no blocking defect.
+
+      Issue 664 reports a packing found by Evan Daniel's basin explorer from the
+      register's witness for 271 with one tilt-swap move and a re-polish, calls it a
+      refinement of Francisco Couzo's #561 packing, not a new construction, and asks that
+      #561 and Nate Chaoweeraprasit's SQUISH packing it refines (#500) be credited; it
+      also calls it a different local minimum, its load-bearing tilt angles matching
+      #561's within 0.12 degrees except that four squares near 31.7 to 32.0 degrees are
+      three. The author reports that his two exact checkers accept the certificate and its
+      21-group regularized view at the same side; KKT and local-minimum statements are
+      numerical evidence, not proofs. The issue says the work was done with Claude (Claude
+      Code) under Evan Daniel's direction.
+    scope: {n_values: [271]}
+    verification: V3
+    confirmation: C3
+    significance:
+      score: 3
+      rationale: >-
+        A continuation of #561's arrangement to a packing the source calls a different
+        local minimum, 4.46e-05 below the case, as T-119's new arrangements and T-130's
+        refinements are; above T-188's 9.29e-06 (S2).
+      scored: '2026-10-19'
+      by: >-
+        the 19 October review
+        (docs/project/reviews/review-2026-10-19-upper-bound-imports-659-664-669-674.md),
+        raising the draft S2 of think-8o5j Evan Daniel import
+    novelty: previously-published
+    attribution:
+      source_keys: ['[Daniel n271 2026-10-17]']
+      published: '2026-10-17'
+    evidence: [E-evand-664-n271-report, E-evand-664-n271-exact-feasibility]
+    artifacts:
+      - packing/resources/web/evand-n271-2026-10-17/README.md
+      - packing/resources/web/evand-n271-2026-10-17/acquisition/claims.json
+      - packing/resources/web/evand-n271-2026-10-17/source/search/packer/candidates/s271_ex1.cert
+      - packing/devtools/upper_bound_reports.py
+      - docs/project/reviews/review-2026-10-19-upper-bound-imports-659-664-669-674.md
+    controls: [packing/tests/test_upper_bound_reports.py, packing/tests/test_upper_bound_reports_659_664_669_674.py]
+    notes: >-
+      A complete repository replay is retained for n = 271: 1 positive and 2
+      duplicate-square and outside-container controls passed their required outcomes on
+      both routes, 219510 pair decisions; summed over the 3 jobs, the receipt records
+      103.33 route CPU seconds and 119.55 job wall seconds, the longest job 45.41 seconds.
+      Every positive clears every wall by at least 5.00e-21 and every pair by at least
+      9.99e-21. The receipt is receipts/exact-certification.json.xz in
+      evand-n271-2026-10-17; it stays out of this entry's artifacts so that the workers'
+      snapshot stays under its cap.
+
+      At n = 271 the certificate is below the case's ceiling (Nate Chaoweeraprasit
+      (itsnaka), improved by Francisco Couzo, PingYou Ltd, Mishapolk, T-186) by 4.46e-05,
+      below T-161 (#561) and T-174 (PR #574) by 4.46e-05 and below T-151 (#500) by
+      1.69e-04; it is the smallest report at 271, the latest in report order.
+
+      Measured by the 19 October review: against T-161 (Couzo's #561), T-186 and T-174 the
+      certificate pairs one to one under the identity, three squares moving beyond a
+      tenth, at most 0.197, and 268 of 271 within a tenth; every tilt group matches within
+      0.12 degrees, one group a square short. The record keeps the word refinement for a
+      pairing in which no square moves beyond a tenth, so this is Couzo's arrangement
+      continued, as T-188's 211 was (RV-2); it lists no regularization. The credit is the
+      issue's either way: Daniel after Couzo after Chaoweeraprasit.
+
+      The source's own checkers were not run here. The two maintained routes share
+      certificate parsing, half-angle conversion, Fraction arithmetic and the
+      separating-axis method. No optimality, local minimum or human oversight is claimed.
+
+      V3 and C3 rest on the 19 October review and the replay it reproduced
+      (E-evand-664-n271-exact-feasibility). The case at 271 adopted this certificate as
+      its house on 19 October 2026.
+    next_rung: >-
+      None for the bound. V4 and C4 need a second accepted adversarial review by a
+      distinct reviewer and a retained human oversight record; one AI review, of 19
+      October, is retained.
+    reviews:
+      - path: docs/project/reviews/review-2026-10-19-upper-bound-imports-659-664-669-674.md
+        kind: adversarial
+        reviewer: >-
+          AI agent (Claude, strong sub-agent tier, max reasoning), the stage 4 review
+          lane (W2) of the 2026-10-19 intake, prompted separately from the import and
+          records lanes, with no shared context beyond their committed packets,
+          register entries and pull requests
+        reviewer_kind: ai
+        relation: project
+        date: '2026-10-19'
+        scope: >-
+          Finite feasibility of the five certificates T-197, T-198, T-199, T-218 and
+          T-219 cite: each retained receipt replayed on both maintained routes, each
+          frozen claim record rebuilt, a third exact route written for the review,
+          each pinned file fetched at its pin and held to its digest, each route's
+          trust boundary, and the credit each entry states measured pose by pose
+          against the packing it names.
+        verdict: accepted
+        covers: [T-197, T-198, T-199, T-218, T-219]
+
+  - id: T-220
+    kind: upper-bound
+    registered: '2026-10-19'
+    landed: '2026-10-20'
+    headline: Daniel's finite sub-grid upper bound for 183 squares, after Couzo's n182 packing
+    claim: s(183) <= 13999580178736252502081470897571/1000000000000000000000000000000 = 13.999580178736252502081470897571
+      < 14, from the original rational certificate, printed safely upward as 13.999580178737.
+      Independently re-verified here by the project's maintained exact geometry implementations
+      relative to the producer's code, with complete all-pair/wall coverage and duplicate-square/outside-container
+      controls. Credit Evan Daniel after Francisco Couzo's n182 packing, through an explorer
+      descendant, insertion, crossovers and refinement; crossover mates were not logged. The
+      regularized display file is retained source history, unexecuted here.
+    scope:
+      n_values:
+      - 183
+    verification: V3
+    confirmation: C3
+    significance:
+      score: 3
+      rationale: >-
+        A complete rational certificate gives a sub-grid packing at n183, about
+        4.20e-4 below the retained side-14 grid. Full exact primary replay and the
+        accepted independent mathematical review support this finite case result;
+        no optimality or public priority is claimed. The review endorses S3.
+      scored: '2026-10-19'
+      by: think-xp0o intake triage; endorsed by think-glg8 independent mathematical review
+    novelty: previously-published
+    attribution:
+      source_keys:
+      - '[Daniel n183 subgrid 2026-10-19]'
+      published: '2026-10-19'
+    evidence:
+    - E-evand-680-n183-report
+    - E-evand-680-n183-primary-exact-feasibility
+    artifacts:
+    - packing/resources/web/evand-n183-subgrid-2026-10-19/README.md
+    - packing/resources/web/evand-n183-subgrid-2026-10-19/source/search/packer/candidates/s183_h183b.cert
+    - packing/resources/web/evand-n183-subgrid-2026-10-19/source/search/packer/candidates/s183_h183b_regularized.cert
+    - packing/campaign/issue-intake/intake-followup-20261019/n183-ledger/README.md
+    - docs/project/reviews/review-2026-10-19-evand-n183-subgrid.md
+    - packing/campaign/issue-intake/intake-followup-20261019/n183-evidence-integration.yaml
+    - packing/resources/web/evand-n183-subgrid-2026-10-19/receipts/exact-certification.json.xz
+    - packing/resources/web/evand-n183-subgrid-2026-10-19/receipts/certify-execution-provenance.json
+    reviews:
+    - path: docs/project/reviews/review-2026-10-19-evand-n183-subgrid.md
+      kind: adversarial
+      reviewer: OpenAI Codex system family, strong tier, maximum reasoning; separately prompted
+        mathematical reviewer
+      reviewer_kind: ai
+      relation: project
+      date: '2026-10-19'
+      scope: Finite feasibility of the original 183-square rational certificate, soundness and
+        trust boundaries of the source and maintained routes, and read-only admission of the
+        completed primary replay. No geometry rerun by the reviewer.
+      verdict: accepted
+      covers:
+      - T-220
+    notes: |-
+      V3/C3 derive from the cited complete retained primary replay; the
+      accepted mathematical review read its receipts without rerunning geometry. The two maintained
+      routes share parser, half-angle conversion, Fraction/runtime and SAT theorem; implementation
+      independence from the producer does not establish a clean room or author/model diversity.
+      S3 is endorsed by the strong/max independent review.
+
+      Adopted at n183 on 2026-10-19 (think-jh4w): both case upper lanes and the house witness
+      now name the original certificate, and the trivial grid at 14 is retained as history. The
+      source's separate numerical S* is not the certificate side S'. Its 27 numerical candidate flat
+      modes concern only the 182-square force-bearing subsystem, excluding free rattler source
+      index 11. No full183 local-optimality, exact flat-family or rigidity theorem.
+
+      M2 claim binding is discharged for this primary replay; regularized endpoint/path/identity and
+      priority/missing-lineage claims are not confirmed. Both strong generators decided the new
+      witness in the adoption's pull request.
+    next_rung: Finite feasibility is confirmed by independently re-implemented project geometry,
+      with the common parser/conversion/Fraction/SAT/runtime limits disclosed. No additional
+      primary geometry run is required. The case house was adopted at n183 on 2026-10-19, and
+      both strong generators decided its witness in the same pull request. V4/C4 would require
+      the prescribed accepted distinct reviews and human oversight; regularized/source-checker
+      work is separate and optional for this bound.
+    controls:
+    - packing/tests/test_upper_bound_reports.py
+    - packing/resources/web/evand-n183-subgrid-2026-10-19/receipts/exact-certification.json.xz
 
 # Generated by python -m devtools.regularized_drawings from the regularized layer's
 # index (packing/atlas/known-best/regularized/index.json); do not edit by hand.
@@ -30200,17 +30608,18 @@ regularized_drawings:
         max_turn_deg: 3.49196
       view: packing/atlas/known-best/regularized/n-154-regularized.yaml.gz
     - n: 155
-      of: T-174
+      of: T-197
       by: project
-      method: regularize_axis_components/2
+      method: "regularize_grid_slack/1: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      modifications: ["port of his coincidence placement (regularize_grid_slack/1) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
       identity:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 1
-        max_move: 0.02890019
-        max_turn_deg: 0.0
+        moved: 14
+        max_move: 0.1258994
+        max_turn_deg: 0.00904477
       view: packing/atlas/known-best/regularized/n-155-regularized.yaml.gz
     - n: 156
       of: T-186
@@ -30365,6 +30774,21 @@ regularized_drawings:
         max_move: 9.207591e-95
         max_turn_deg: 0.0
       view: packing/atlas/known-best/regularized/n-182-regularized.yaml.gz
+    - n: 183
+      of: T-220
+      by: project
+      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
+      side: same
+      changes: {re_angled: 1}
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 24
+        max_move: 0.3578448
+        max_turn_deg: 6.23142
+      view: packing/atlas/known-best/regularized/n-183-regularized.yaml.gz
     - n: 198
       of: T-155
       by: project
@@ -30519,6 +30943,19 @@ regularized_drawings:
         max_move: 1.63314e-94
         max_turn_deg: 0.0
       view: packing/atlas/known-best/regularized/n-228-regularized.yaml.gz
+    - n: 229
+      of: T-199
+      by: project
+      method: regularize_axis_components/2
+      side: same
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 29
+        max_move: 0.2630848
+        max_turn_deg: 0.00533477
+      view: packing/atlas/known-best/regularized/n-229-regularized.yaml.gz
     - n: 230
       of: T-155
       by: project
@@ -30562,17 +30999,19 @@ regularized_drawings:
         max_turn_deg: 5.47587e-34
       view: packing/atlas/known-best/regularized/n-234-regularized.yaml.gz
     - n: 236
-      of: T-146
+      of: T-218
       by: project
-      method: regularize_axis_components/2
+      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
+      changes: {straightened: 7, re_angled: 8}
       identity:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 0
-        max_move: 1.350926e-19
-        max_turn_deg: 0.0
+        moved: 81
+        max_move: 0.04013216
+        max_turn_deg: 2.13886
       view: packing/atlas/known-best/regularized/n-236-regularized.yaml.gz
     - n: 237
       of: T-190
@@ -30767,18 +31206,19 @@ regularized_drawings:
         max_turn_deg: 0.0
       view: packing/atlas/known-best/regularized/n-270-regularized.yaml.gz
     - n: 271
-      of: T-186
+      of: T-219
       by: project
-      method: "regularize_grid_slack/1: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
-      modifications: ["port of his coincidence placement (regularize_grid_slack/1) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
+      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
+      changes: {straightened: 2, re_angled: 2}
       identity:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 15
-        max_move: 0.1055648
-        max_turn_deg: 0.0132529
+        moved: 19
+        max_move: 0.03393265
+        max_turn_deg: 0.143387
       view: packing/atlas/known-best/regularized/n-271-regularized.yaml.gz
     - n: 272
       of: T-174

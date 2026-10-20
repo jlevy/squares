@@ -1,0 +1,38 @@
+{
+  "format": "retained-execution-provenance-v1",
+  "bead": "think-arhu",
+  "recovered_on": "2026-10-19",
+  "historical_thread": "01a152fd-9276-75e2-a4b7-2950cb7462a3",
+  "source": "Two completed CommandExecution items in the original replay session; no current-environment inference and no rerun.",
+  "environment_script": {
+    "path": "/Volumes/spud-ext1/agent-scratch/squares-intake-followup-20261019/intake-env.sh",
+    "read_command_id": "exec-da0a7155-a67b-4dcb-ad64-107cbbac9113",
+    "read_completed_at_utc": "2026-10-19T07:44:19.761Z",
+    "snapshot": "export TMPDIR=/Volumes/spud-ext1/agent-scratch/squares-intake-followup-20261019/tmp\nexport CARGO_TARGET_DIR=/Volumes/spud-ext1/agent-scratch/squares-intake-followup-20261019/cargo\nexport UV_CACHE_DIR=/Volumes/spud-ext1/agent-scratch/squares-pr676-fix-20261018/uvcache\nexport PATH=/Users/levy/wrk/github/squares/packing/.venv/bin:/Users/levy/.local/bin:$PATH\nexport PYTHONPATH=/Users/levy/wrk/github/squares/.worktrees/confirm-422/packing/src:/Users/levy/wrk/github/squares/.worktrees/confirm-422/packing:/Users/levy/wrk/github/squares/.worktrees/confirm-422/packages/workbench/tools:/Users/levy/wrk/github/squares/.worktrees/confirm-422/vendor/kpress/src\nexport UV_PROJECT_ENVIRONMENT=/Users/levy/wrk/github/squares/packing/.venv\nexport UV_NO_SYNC=1\nexport PYTHONDONTWRITEBYTECODE=1\nexport PYTEST_ADDOPTS='-o tmp_path_retention_policy=failed -o tmp_path_retention_count=1'\nexport MAKEFLAGS='FLOWMARK=/Users/levy/.local/bin/flowmark'\n"
+  },
+  "certify": {
+    "command_id": "exec-3eb738ee-085a-4cc8-ad6a-5540678359f3",
+    "completed_at_utc": "2026-10-19T07:46:56.732Z",
+    "cwd": "/Users/levy/wrk/github/squares/.worktrees/confirm-422/packing",
+    "command": [
+      "/bin/bash",
+      "-c",
+      "source /Volumes/spud-ext1/agent-scratch/squares-intake-followup-20261019/intake-env.sh\n/usr/bin/time -p /Users/levy/wrk/github/squares/packing/.venv/bin/python3 -m devtools.upper_bound_reports evand-n183-subgrid-2026-10-19 certify --jobs-dir /Volumes/spud-ext1/agent-scratch/squares-intake-followup-20261019/n183-primary-jobs-01 --workers 1 --timeout 100 > /Volumes/spud-ext1/agent-scratch/squares-intake-followup-20261019/n183-primary-replay-01.log 2>&1"
+    ],
+    "status": "completed",
+    "exit_code": 0,
+    "command_duration": {
+      "secs": 35,
+      "nanos": 557733167
+    },
+    "captured_console_output": "",
+    "log": "/Volumes/spud-ext1/agent-source/squares-intake-followup-20261019/n183-primary-replay-01/run.log"
+  },
+  "limitations": [
+    "The snapshot is the script printed before the recorded command sourced it. No intervening script edit is recorded; the entire inherited process environment was not dumped.",
+    "PATH retains its inherited suffix as $PATH; its absolute final expansion is unknown.",
+    "PACKING_PROJECT_ROOT was not explicitly exported by this historical script; no value is inferred from later checks.",
+    "The reviewer admission-only PYTHONPATH (packing:packing/src) belongs to a different command and is not this certify environment.",
+    "This is a provenance extract. It decides no geometry and changes no original replay receipt or batch metadata."
+  ]
+}

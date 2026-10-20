@@ -397,6 +397,7 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
         "T-169",
         "T-170",
         "T-171",
+        "T-198",
     }
     # The house adoption of 11 October 2026 moved 42 case records to the smallest
     # confirmed and reviewed side the register held (think-fvz4): SQUISH's earlier packets
@@ -430,6 +431,8 @@ def test_superseded_is_marked_on_a_bound_and_where_a_later_result_is_declared() 
     # certificates (T-140), Evan Daniel's record hunt (T-141), Daniil Ostashev's records
     # (T-149), SQUISH's fourth request (T-151), Couzo's 11 October certificates (T-152) and
     # PingYou Ltd's own re-solves at 261, 105 and 272 (T-169 to T-171).
+    # The adoption of 19 October 2026 took 229 to Evan Daniel's update (T-199), which
+    # supersedes his opening certificate of the day before (T-198), its only count.
     for entry in ("T-128", "T-130"):
         assert view.position_marks(
             records.results[entry], view.standing(records.results[entry], records), records

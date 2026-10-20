@@ -382,6 +382,23 @@ _README_3MRY = (
     "selection of 17 October 2026 (think-3mry), beside the runs' receipts and reports"
 )
 
+#: Both generators on the four witnesses the adoption of 19 October 2026 moved to Evan
+#: Daniel's certificates (think-ip1p): his regularizer and grid-slack at 0.5, 1 and 5
+#: degrees on 155, 229, 236 and 271. The selection drew grid-slack's 0.5-degree view at 155
+#: and his same-side views at 236 and 271, and decided 229 (`SETTLED`). Their receipt,
+#: run blocks, reports and the selection's report are in
+#: packing/cases/regularized_drawings/think-ip1p-2026-10-19/.
+_RUNIP1P = (
+    ("evand-regularize", "evand-regularize-adopt-2026-10-19-n155-271-evand"),
+    ("regularize_grid_slack/1", "grid-slack-adopt-2026-10-19-n155-271-grid-deg05"),
+    ("regularize_grid_slack/1", "grid-slack-adopt-2026-10-19-n155-271-grid-deg1"),
+    ("regularize_grid_slack/1", "grid-slack-adopt-2026-10-19-n155-271-grid-deg5"),
+)
+_README_IP1P = (
+    "packing/cases/regularized_drawings/think-ip1p-2026-10-19/README.md, the selection of 19 "
+    "October 2026 (think-ip1p), beside the runs' receipt, blocks and reports"
+)
+
 #: The counts whose drawing is not regularized and not regular as published, settled on
 #: purpose: each named with the witness it was settled on, so a new witness makes the
 #: count `pending` again. Written from the evidence the audit of 15 October 2026 found
@@ -625,29 +642,6 @@ SETTLED: dict[int, Settled] = {
         "change), and grid-slack's views at 0.5, 1 and 5 degrees draw no change",
         _README_3MRY,
     ),
-    155: Settled(
-        DECIDED,
-        "[PingYou PR 574 certificates 2026-10-13]",
-        "resources/web/pingyou-pr574-certificates-2026-10-13/facts/n-155.yaml.gz",
-        "4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde",
-        "107434552949273736308445028287184223276402140533619507357061268656365195896906"
-        "500073853266814866975102998814571980754423690336844807607784468214782941847059"
-        "719540461901488437799066301082471518101227002034886465086601394218080642862998"
-        "421130058259592376062985436344993787603318371983760516536892178774524780489528"
-        "652802930486285904440225574000000000000000000000000000000000000000000000000000"
-        "00000000000000000000000000000000/829455098745880189345425808741729109605408187"
-        "065736252449702727067554598470991407360969200774304602316777128509626087082845"
-        "595567818845278943509923801049024235808018466983915192633623500755468524556872"
-        "118329911667406581374812326425561561846086973511865676966945130580368387456591"
-        "527097662121487058256205768083321304491112329898830175716333153560091840249845"
-        "413699290573961467946912008881810187454755078619027734962203851",
-        _RUN3MRY,
-        "Evan Daniel's solved view is held at row 4 (solved about 1e-19 above U), and "
-        "grid-slack's views at 0.5, 1 and 5 degrees, admitted at row 10, draw more "
-        "light and uneven squares than the axis tool's view, though fewer near-axis "
-        "squares, classes and hues",
-        _README_3MRY,
-    ),
     176: Settled(
         DECIDED,
         "[Mishapolk KKT refinements 2026-10-14]",
@@ -816,18 +810,24 @@ SETTLED: dict[int, Settled] = {
         "change), and grid-slack's views at 0.5, 1 and 5 degrees draw no change",
         _README_3MRY,
     ),
-    236: Settled(
+    229: Settled(
         DECIDED,
-        _DANIEL,
-        _daniel(236),
-        _DANIEL_REVISION,
-        "3172791149431853484523540541259/200000000000000000000000000000",
-        _LEFTOVERS,
-        "the house is Evan Daniel's own regularized list (T-146): his regularizer's view "
-        "draws one more angle class and hue (7 against the house's 6), as the view withdrawn "
-        "in bd82e3a54 did, grid-slack at 0.5, 1 and 5 degrees draws no change, and the axis "
-        "tool's view does not improve on the house",
-        _README_LEFTOVERS,
+        "[Daniel n229 dilation update 2026-10-18]",
+        "resources/web/evand-n229-dilation-update-2026-10-18/source/search/packer/candidates/"
+        "s229_v2.cert",
+        "00e68dfbe1d29ab5dbab1cddfb8f6ca19d5470db",
+        "7825080756947776580756939951343/500000000000000000000000000000",
+        _RUNIP1P,
+        "Evan Daniel's regularizer draws no view (its solve of the dilation certificate is not "
+        "jammed); grid-slack's views at 0.5, 1 and 5 degrees improve on the axis tool's view "
+        "on every goal, but two squares' contact counts fall while no total does, so the "
+        "selection sends each to the owner's review at row 7 and the axis tool's view stays "
+        "drawn until a review record admits one",
+        _README_IP1P,
+        # Review A2 of #692: the decision is the owner's, so the bead that records it stays
+        # open while this names it (`deferrals`).
+        "think-cyeo: the owner's row-7 review of grid-slack's views, admitted or declined "
+        "in a review record",
     ),
     237: Settled(
         DECIDED,

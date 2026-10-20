@@ -90,8 +90,9 @@ from sqpack.yamlio import safe_load
 #: earlier catalogue sources. These inventory counts follow the current corpus; the house
 #: adoption of 12 October 2026 moved n = 176 onto SQUISH's issue 500 packet (think-fvz4),
 #: and its pass for issue 528 moved n = 264 onto Daniil Ostashev's packet (think-cq95), and
-#: that of 15 October n = 204 onto his issue 562 packet (T-162).
-GOLDEN_DERIVED_ABOVE_100: dict[str, int] = {"n=1..100": 0, "n=1..200": 22, "n=1..324": 46}
+#: that of 15 October n = 204 onto his issue 562 packet (T-162), and that of 19 October
+#: n = 229 onto Evan Daniel's issue 674 packet (T-199).
+GOLDEN_DERIVED_ABOVE_100: dict[str, int] = {"n=1..100": 0, "n=1..200": 22, "n=1..324": 45}
 #: The cases whose retained upstream rendering is the UnitSquare release, per corpus.
 GOLDEN_UNITSQUARE: dict[str, set[int]] = {
     # 68, 103, 105, 110 and 131 moved onto Francisco Couzo's packet on 2026-09-29, and 69
@@ -109,21 +110,24 @@ GOLDEN_SOURCE_KINDS: dict[str, dict[str, int]] = {
         "kingbird-derived-facts": 29,
         "packet-derived-facts": 7,
     },
-    # 176 moved from Kingbird to SQUISH's issue 500 packet on 12 October 2026 (think-fvz4).
+    # 176 moved from Kingbird to SQUISH's issue 500 packet on 12 October 2026 (think-fvz4),
+    # and 183 from the grid to Evan Daniel's issue 680 packet on 19 October (T-220).
     "n=1..200": {
-        "exact-grid": 114,
+        "exact-grid": 113,
         "kingbird-derived-facts": 51,
-        "packet-derived-facts": 35,
+        "packet-derived-facts": 36,
     },
     # 232 (from Kingbird) and 308 (from the grid) moved to packet houses in the house
     # adoption of 11 October 2026, and 176 (from Kingbird) on 12 October (think-fvz4), as
     # did 264 (from Kingbird) in the pass for issue 528 (think-cq95), and 204 (from
     # Kingbird) on 15 October, to Daniil Ostashev's issue 562 packet (T-162), and 29 (from
-    # Kingbird) on 17 October, to PR #622's packet (T-195).
+    # Kingbird) on 17 October, to PR #622's packet (T-195), and on 19 October 183 (from the
+    # grid), to Evan Daniel's issue 680 packet (T-220, think-jh4w), and 229 (from
+    # Kingbird), to his issue 674 packet (T-199).
     "n=1..324": {
-        "exact-grid": 175,
-        "kingbird-derived-facts": 75,
-        "packet-derived-facts": 74,
+        "exact-grid": 174,
+        "kingbird-derived-facts": 74,
+        "packet-derived-facts": 76,
     },
 }
 
@@ -2152,8 +2156,14 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
     # n = 146 refinement: two sources fewer, and no new name.
     # T-174's 37-count adoption consolidates ten source keys while retaining every
     # construction credit. T-195 adds one source at n = 29.
-    assert len(expected_names) == 26
-    assert len(expected_sources) == 17
+    # On 19 October 2026 the #673 correction made Evan Daniel 308's finder, as his
+    # source asks; Kevin Fang's two-wedge construction, which no other count credits,
+    # is named in that case's credit sentence and leaves this list.
+    assert len(expected_names) == 25
+    # The adoption of 19 October draws from five more, Evan Daniel's packets at 155, 183
+    # (T-220, think-jh4w), 229, 236 and 271, with no new name, and every source it
+    # re-housed still holds another count.
+    assert len(expected_sources) == 22
     assert set(json.loads(credit_block.attrib["data-credited-names"])) == expected_names
     assert set(json.loads(credit_block.attrib["data-source-keys"])) == expected_sources
     assert credit_block.find("svg:text[@data-feature='packing-credits-heading']", SVG) is None
@@ -2181,7 +2191,6 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
         "Chaoweeraprasit",
         "Couzo",
         "Daniel",
-        "Fang",
         "Gupta",
         "Ostashev",
         "PingYou Ltd",
@@ -3124,18 +3133,10 @@ def test_the_poster_badges_every_perfect_square_and_counts_them_in_its_legend() 
     assert solid_rigid == sorted([k * k for k in range(1, 19)] + [5, 11, 28, 40])
     assert set(solid_rigid) >= {121, 144, 169, 196, 225, 256, 289, 324}
 
-    # The retained poster predates T-174's adoption but includes T-195 at 29. The
-    # same-day archive also holds 29's prior record, so restore only T-174's roster.
-    from devtools import adopt_houses  # noqa: PLC0415
-
-    previous = adopt_houses.read_pass("2026-10-17")
-    t174_counts = {n for n, result in adopted_houses.ADOPTED.items() if result == "T-174"}
-    assert len(t174_counts) == 37
-    assert 29 not in t174_counts
+    # The poster was redrawn at v0.6.4 after the merge with main of 20 October 2026 (T-220
+    # at 183, think-jh4w), from the current records: T-174's houses, T-195's at 29 and the
+    # 19 October houses at 155, 183, 229, 236 and 271 are drawn as adopted.
     cases = {n: build_bound_citations.load_case(n) for n in cards}
-    cases.update(
-        {n: safe_load(previous[n].split("---\n", 2)[1])["packing"] for n in t174_counts}
-    )
     numeric_cases = {
         n
         for n, case in cases.items()
@@ -3145,8 +3146,9 @@ def test_the_poster_badges_every_perfect_square_and_counts_them_in_its_legend() 
         )
     }
     exact_cases = set(cards) - numeric_cases
-    # 29 is exact since its house moved to PR #622's rational certificate on 17 October.
-    assert (len(exact_cases), len(numeric_cases)) == (309, 15)
+    # 29 is exact since its house moved to PR #622's rational certificate on 17 October,
+    # and nine more since T-174's rational houses were adopted the same day.
+    assert (len(exact_cases), len(numeric_cases)) == (318, 6)
     for evidence, expected in (
         ("exact value known", exact_cases),
         ("only known numerically", numeric_cases),
@@ -3170,11 +3172,12 @@ def test_the_poster_badges_every_perfect_square_and_counts_them_in_its_legend() 
     # The house adoption of 11 October 2026 gave nine cases known only numerically an
     # exact certificate, and its pass of 12 October three more, 181, 271 and 304, whose
     # reported lanes stated no exact form (think-fvz4); the adoption of 17 October gave
-    # 29 one, PR #622's rational certificate (T-195).
+    # 29 one, PR #622's rational certificate (T-195), and nine more through T-174's
+    # rational houses, drawn since the v0.6.4 redraw of 20 October.
     assert labels == [
         "proved optimal (77 of 324)",
-        "exact value known (309 of 324)",
-        "only known numerically (15 of 324)",
+        "exact value known (318 of 324)",
+        "only known numerically (6 of 324)",
         "rigid (22 of 324)",
         "colors indicate distinct tilt angles",
         "shade indicates number of full-side contacts",
@@ -4352,9 +4355,10 @@ def test_print_information_shares_content_style_and_measured_block_gaps(data_dat
         for block in blocks
     ]
     assert credit_text[0] == credit_text[1]
+    # 25 since the #673 correction of 19 October 2026 (see the credits test above).
     assert (
         len(credit_text[0].removeprefix("Best packings due to ").removesuffix(".").split(", "))
-        == 26
+        == 25
     )
 
 
