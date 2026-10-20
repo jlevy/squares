@@ -13940,7 +13940,7 @@ issues:
         Keep the source, seed and solver credits each case's provenance.json gives: credit a
         deletion, border, subset crop or refinement after the packing it comes from, since the 100
         are not independent structures, and keep one provenance for copies of the release posted
-        elsewhere.
+        elsewhere (the issue body's credit line and its Lineage and credit paragraph).
       state: queued
       bead: think-9vjn
       note: >-
@@ -13964,8 +13964,10 @@ issues:
       custody is a tool change or that facts route. The archive holds 100 certificates in Evan Daniel's
       n S / x y t format, each digest in its case's provenance.json, and each issue print rounds its
       certificate's exact header side up by less than 1e-15. comparisons.csv has eight more rows, at
-      229, 458, 501, 546, 547, 549, 555 and 653, marked include=False and without certificates; the
-      author withdrew them and they are not claims. The report-order comparison is
+      229, 458, 501, 546, 547, 549, 555 and 653, without certificates, and the issue does not offer
+      them. The archive excludes them (include=False): seven are above the pending reports it compares
+      them with, and 229 falls short of its own 1e-10 margin; they are not claims. The report-order
+      comparison is
       packing/campaign/issue-intake/upper-bounds-20261020/: every claim is recorded, below the
       beyond-horizon row at 68 counts and the grid at 32, and below #666, #670, #672, #675 and #678
       wherever they report the count. Publications in watched repositories are not in that ledger and
