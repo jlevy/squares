@@ -2840,8 +2840,13 @@ verifiers:
     versions:
     - sha256: 8e2141bfa0b233173e442517035783f6598610398fe9896e9a9977d7383dcc17
       path: packing/devtools/evand_arrangement_reports.py
-      note: The source the n183 primary batch ran, unchanged since; the retained seven-file
-        provenance identifies the historical run
+      note: The source the n183 primary batch ran; the retained seven-file provenance
+        identifies the historical run
+    - sha256: be329074444bd56e74b44ff5a10e9e15c3f83774e854f883c03ebeedf8d0bc89
+      path: packing/devtools/evand_arrangement_reports.py
+      note: The kernel with SHARP_CONTROLS, sharp_input and run_sharp added for review A
+        of PR 704 (RF-2), outside JOBS, so the full roster every receipt holds is
+        unchanged
 
   - id: V-algebraic-witness-reports
     program: devtools.algebraic_witness_reports
@@ -2942,6 +2947,10 @@ verifiers:
       note: The same driver merged with main d588ad987, which adds only the n183 HOUSES
         reader beside it, with the adapter's square fields typed for the type floor; it
         ran issue 668's check --replay again
+    - sha256: 044639ffbca7abbda7a77024ff8afd70ec0fb4f9316a3fbc7ada4f64a110442d
+      path: packing/devtools/upper_bound_reports.py
+      note: The same driver with center_basis_json's docstring saying the basis (-1, 0) is
+        refused (RF-3 of review A of PR 704); it decides nothing differently
 
   - id: V-rehwaldt-n68-verify
     program: verify.py
