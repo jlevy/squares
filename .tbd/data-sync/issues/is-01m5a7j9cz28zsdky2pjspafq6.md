@@ -5,7 +5,7 @@ title: Prepare accepted n68 n84 n85 fine-net stage-4 records and interim acknowl
 kind: task
 status: in_progress
 priority: 1
-version: 10
+version: 11
 delegate: lane-446
 labels: []
 dependencies: []
@@ -17,7 +17,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-19T14:03:08.063Z
-updated_at: 2026-10-19T22:41:49.588Z
+updated_at: 2026-10-20T00:48:52.744Z
 started_at: 2026-10-19T14:03:24.163Z
 ---
 Prepare only accepted n68 T-205 stage-4 evidence, retained exact capture/control/execution and reviewed audit source with mapped mathematics/platform reviews and independence records in existing confirm-422. Preserve all18 reported entries/candidates, historical T-216, n183 staging, native source/processes and other owners. Record posted interim acknowledgements for issues603/680 exactly. No historical regeneration, unaccepted n84/n85 promotion, heavy validation, native rerun, push, PR, release or final pins. Small unique retention under25MB, metadata generation, tiny semantic checks and local normal-hook commits only; final integration review and publication belong to root.
@@ -29,3 +29,5 @@ Frozen local records head fde545a96d358067120984c134b683de90636be9 on confirm-42
 2026-10-19 (lane-446, session_013djgnY): transferred by the 19 October handoff (#684) and coordinator brief. Landing only the #446 portion (n68/n84/n85, T-205..T-207) from codex/handoff-20261019/intake f6f4a8482 and claude/intake-records-green 764e7896a onto fresh main as branch claude/ecstatic-edison-8en33t-446-lower; n183/#680 (lane-680), #678 custody and #603/#680 acknowledgement records stay out. n86 not claimed (no check/control run).
 
 2026-10-19 22:50Z lane-446: draft PR #688 (branch claude/ecstatic-edison-8en33t-446-lower), head 8e1952f2a on main 926cd764a. Lands T-205..T-207 V3/C3 + #446 consumers (bound citations, composite figure, print credits, piercing survey), snapshot cap 219->221 MiB (measured for #446 alone), site v0.7.35, four paper no-change records. Review requested from coordinator; hosted CI running.
+
+2026-10-20 lane-446: PR #688 head 8ab384547 (base main b16ddeb0a) hosted CI 31/31 green; site v0.7.36 cut (v0.7.33-35 taken by #645/#658/#646; PR #687 also cut v0.7.36, second to merge re-cuts). Added since first push: #446 consumer fixes cherry-picked from claude/intake-2026-10-19 (6a6d235ee, bb2ab3f37, 5527dbb29), composite-figure lower displays, snapshot cap 219->221 MiB (measured: main 926cd764a 228,914,908 B; branch 230,713,367 B), suite-file cost admissions (test_sqverify_fast_census_reporting, test_release_components), #446 queued ask 17->14. Blocked only on review A (senior+correctness), requested from coordinator; not merged; Stage 7 #446 reply not yet posted.
