@@ -3116,6 +3116,14 @@ urls:
   first_published: '2026-10-07'
   lastmod: '2026-10-20'
   status: live
+- path: atlas/regularized/n-260.svg
+  canonical: atlas/regularized/n-260.svg
+  kind: asset-file
+  generator: devtools.render_overview:support_files
+  producer: overview
+  first_published: '2026-10-08'
+  lastmod: '2026-10-20'
+  status: live
 - path: atlas/regularized/n-261.svg
   canonical: atlas/regularized/n-261.svg
   kind: asset-file
@@ -17159,12 +17167,16 @@ urls:
     builds_on: null
     evidence:
     - E-couzo-678-certificate-report
+    - E-couzo-678-filtered-exact-feasibility
+    - E-couzo-678-source-checker-replay
+    - E-couzo-678-review-exact-feasibility
     artifacts:
     - packing/resources/web/couzo-issue678-2026-10-18/README.md
     - packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n204.cert
     - packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/n260.cert
     - packing/campaign/issue-intake/upper-bounds-20261019/README.md
     - packing/devtools/couzo_678_replay.py
+    - docs/project/reviews/review-2026-10-20-upper-bound-imports-678.md
 - path: results.html
   canonical: results.html
   kind: page

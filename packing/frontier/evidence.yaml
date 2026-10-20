@@ -40425,6 +40425,18 @@ evidence:
     certificate: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/
     replay_status: not-attempted
     verifiers: []
+    external_review:
+      state: informally-verified
+      date: '2026-10-20'
+      reviewed_by: >-
+        AI agent (Claude, strong tier, maximum reasoning), the stage 4 review lane of the 19
+        October intake (c-review-678-fable), prompted separately from the import lane
+      note: >-
+        docs/project/reviews/review-2026-10-20-upper-bound-imports-678.md accepted all 85
+        rows with findings, for finite feasibility only, with five non-blocking findings
+        (RF-1 to RF-5); the confirming entries at 204 and 260 are
+        E-couzo-678-filtered-exact-feasibility, E-couzo-678-source-checker-replay and
+        E-couzo-678-review-exact-feasibility.
     source_reviewed: '2026-10-19'
     limitations: >-
       This atom records the source author's report, issue 678, of 85 upper bounds for n =
@@ -40434,14 +40446,170 @@ evidence:
       (receipts/filtered-exact-replay.json, devtools.couzo_678_replay) decided all 85 rows
       on two routes, the sqpack.verify predicates and the independent rational corner
       checker's, over the 140,866 of 21,393,271 pairs whose centres are closer than sqrt 2,
-      an exactly justified filter, and every wall; all 415 controls were refused by both,
-      in 90.8 positive CPU seconds. The source's checker, run unchanged from its retained
-      copy, accepts all 85 and refuses all 332 controls it can state. That replay and the
-      19 October mathematical review on think-xu4d are not entered as confirming evidence
-      here: the mapped review and the replay's evidence entries are stage 4 work on
-      think-xu4d, and the full-kernel all-pairs replay is held on think-fpnd. The two
-      routes share certificate parsing, half-angle conversion, the pair filter and
-      Fraction arithmetic. The certificates at 204 and 260 are T-223's; the 83 beyond the
+      an exactly justified filter, and every wall; all 498 controls were refused by both,
+      in 80.5 positive CPU seconds. The source's checker, run unchanged from its retained
+      copy, accepts all 85 and refuses all 332 controls it can state. The 20 October review
+      accepted both; its confirming entries are named above, and the full-kernel all-pairs
+      replay of the 83 beyond the corpus is held on think-fpnd. The two routes share
+      certificate parsing, half-angle conversion, the pair filter and Fraction arithmetic. The certificates at 204 and 260 are T-223's; the 83 beyond the
       case corpus are dated rows of the couzo-issue678-2026-10-18 source. No arrangement
       identity, local minimum, optimum or credit statement of the source's manifest is
       established.
+  - id: E-couzo-678-filtered-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values:
+        - 204
+        - 260
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: shared-components
+    shared_components:
+      - >-
+        sqpack.verify's unit-shape and separating-axis predicates (check_unit_squares,
+        separated), the jlevy/squares corner verifier the source reports running
+      - >-
+        the certificate parser and half-angle map of devtools.evand_exact_certificates,
+        through which both routes read each certificate once, together
+      - the sqrt-2 centre filter of devtools.couzo_678_replay, which chooses both routes' pairs
+      - CPython's fractions.Fraction arithmetic
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Couzo issue 678 2026-10-18]'
+    certificate: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/
+    replay: >-
+      From packing/ with the project interpreter (Python 3.14.7), niced on a shared four-core
+      host: python -m devtools.couzo_678_replay filtered --pinned CHECKOUT --workers 2 wrote
+      receipts/filtered-exact-replay.json on 20 October 2026 with the near-contact control of
+      RF-2 (1,266.1 s of wall), and check --replay decides every row and control again
+      and holds each to its retained row, as the 20 October review reproduced it on the
+      receipt of 19 October. house-jobs ran the maintained all-pairs kernel's three jobs at 204
+      and 260 in 30.7 CPU seconds (receipts/house-jobs.json.xz), and check holds each
+      positive's least gap and wall clearance to the filtered decision's.
+    replay_status: passed
+    verifiers:
+      - V-couzo-678-replay
+      - V-sqpack-verify
+      - V-check-rational-witness-independent
+      - V-evand-exact-certificates
+      - V-evand-arrangement-receipts
+      - V-acquire-source
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the certificates at n = 204 and 260 that T-223 cites: every wall and every pair whose
+          centres are closer than sqrt 2 decided by both routes, the others excluded by the
+          filter's lemma, and every pair decided again by the all-pairs kernel; the receipt
+          decides all 85 rows of the issue
+        checked: 2
+        of: 2
+    independence_record: docs/project/reviews/review-2026-10-20-upper-bound-imports-678.md
+    external_review:
+      state: informally-verified
+      date: '2026-10-20'
+      reviewed_by: >-
+        AI agent (Claude, strong tier, maximum reasoning), the stage 4 review lane of the 19
+        October intake (c-review-678-fable), prompted separately from the import lane
+      note: >-
+        docs/project/reviews/review-2026-10-20-upper-bound-imports-678.md accepted the replay
+        with findings, for finite feasibility only: check --replay reproduced every row and
+        control of the 19 October receipt, and the review's own checker agreed with it at
+        every number they share. RF-1 to RF-5, none blocking; RF-2's near-contact control and
+        RF-5's retained programs are in this pass.
+    limitations: >-
+      Two exact routes that read each certificate once, together, through a shared parser,
+      half-angle map and pair filter, with Fraction arithmetic (RF-1): two implementations of
+      the unit-shape, pair and wall predicates, not two independent replays. At 204 the least
+      pair gap is 5.56e-11 and at 260 1.24e-12, and each certificate touches a wall. All 498
+      controls were refused by both routes, the near-contact pair 10^-30 of its centre
+      distance past exact contact among them. The all-pairs kernel ran at both counts; its
+      replay of the 83 certificates beyond the corpus is held (think-fpnd). Finite
+      feasibility only: no lower bound, optimum, local minimum, rigidity, novelty or human
+      oversight.
+    source_reviewed: '2026-10-20'
+  - id: E-couzo-678-source-checker-replay
+    claim: upper-bound
+    scope:
+      n_values:
+        - 204
+        - 260
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: same-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Couzo issue 678 2026-10-18]'
+    certificate: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/
+    replay: >-
+      From packing/: python -m devtools.couzo_678_replay source-checker --scratch SCRATCH ran
+      the source's verify_bound_certificate.py unchanged from its retained copy (SHA-256
+      1c8b89eb0de71bc751db57061a015b8ed8ffb354d38ce13bcf8201ce8c90e98b, read before it ran)
+      in a python -I child process on 19 October 2026, on the 85 packings and the 332 controls
+      the certificate format states (receipts/source-checker-replay.json); check holds the
+      receipt to the issue's rows, and the 20 October review reproduced it.
+    replay_status: passed
+    verifiers:
+      - V-couzo-verify-bound-certificate
+      - V-acquire-source
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the certificates at n = 204 and 260 that T-223 cites, each with its four controls;
+          the receipt holds all 85 rows
+        checked: 2
+        of: 2
+    independence_record: docs/project/reviews/review-2026-10-20-upper-bound-imports-678.md
+    limitations: >-
+      The producer's own checker re-run: it establishes reproducibility, not independence.
+      Its default contract is a closed container and disjoint interiors; its --strict verdict,
+      an open container and disjoint closed squares, is false at 62 of the 85 rows, the
+      contacts. The receipt's manifest field at 545 and 641 is the manifest's verdict on the
+      source's own n545.cert and n641.cert (RF-3). Finite feasibility only.
+    source_reviewed: '2026-10-20'
+  - id: E-couzo-678-review-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values:
+        - 204
+        - 260
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: shared-components
+    shared_components:
+      - CPython's fractions.Fraction arithmetic, which every route here and the source's checker use
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Couzo issue 678 2026-10-18]'
+    certificate: packing/resources/web/couzo-issue678-2026-10-18/source/certificates/best/
+    replay: >-
+      From packing/: .venv/bin/python3 -I
+      resources/web/couzo-issue678-2026-10-18/review/programs/review_678_check.py with the
+      packet's source directory, the issue body and the filtered receipt, --all-pairs 204 260
+      330 459 499 545 998 --workers 2, as the 20 October review ran it
+      (review/outputs/out-all.json): all 85 rows passed, every pair at 204 and 260 decided by
+      separating axes and every near pair again by exact clipping area, with no disagreement
+      with the filtered receipt, in 368.2 CPU seconds.
+    replay_status: passed
+    verifiers:
+      - V-couzo-678-review-check
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the certificates at n = 204 and 260 that T-223 cites, every wall and every pair; the
+          run decides all 85 rows of the issue
+        checked: 2
+        of: 2
+    independence_record: docs/project/reviews/review-2026-10-20-upper-bound-imports-678.md
+    limitations: >-
+      The review's own checker, with readers of its own and no code of the packet's routes or
+      the source's; it shares Fraction with them, and its author read every route before
+      writing it, so it is not clean-room. Its least clearances and gaps equal the
+      independent route's to every digit at 204 and 260. No controls of its own; the receipt's
+      are the packet's. Finite feasibility only.
+    source_reviewed: '2026-10-20'
