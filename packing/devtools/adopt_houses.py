@@ -72,6 +72,7 @@ Usage, from ``packing/`` with the project interpreter::
     python -m devtools.adopt_houses --check     # hold every adopted case to its house
     python -m devtools.adopt_houses --refresh   # full replay, refusing later lower layers
     python -m devtools.adopt_houses --refresh-openings  # only the current dated paragraph
+    python -m devtools.adopt_houses --refresh --n 155 229  # only those records
 
 ``--refresh`` brings every adopted record's evidence roster, dated paragraph and
 certificate section to what its last pass's writer writes now, from the record that pass
@@ -80,7 +81,9 @@ lanes have changed since that pass, before writing any record: reconciling those
 writers' evidence and prose needs an explicit merge rather than a historical replay.
 A record changes this way when the register gains a confirmed certificate at its count.
 For an opening-only wording correction, ``--refresh-openings`` leaves all other bytes
-alone, including evidence and prose a later lower-bound writer has added.
+alone, including evidence and prose a later lower-bound writer has added. ``--n`` limits
+either refresh to the records it names, so a writer change at a few counts is applied
+without replaying a record whose later layer the full refresh refuses.
 
 **A later pass.** A later import adopted the same way needs:
 
@@ -113,7 +116,7 @@ import argparse
 import json
 import re
 import sys
-from collections.abc import Mapping, Sequence
+from collections.abc import Collection, Mapping, Sequence
 from dataclasses import dataclass
 from datetime import UTC, date, datetime
 from decimal import Decimal
@@ -632,7 +635,10 @@ RESULTS: dict[str, Prose] = {
             "refinement of Francisco Couzo’s #561 packing of Nate Chaoweeraprasit’s SQUISH "
             "design and asks that both be credited. Measured here, it pairs one to one with "
             "#561’s packing, three squares beyond a tenth: Couzo’s arrangement continued, not "
-            "a refinement in this record’s sense (T-219)."
+            "a refinement in this record’s sense (T-219). The credit is the one the issue "
+            "asks for, so Nate Chaoweeraprasit stays the finder, with Couzo and Daniel after "
+            "him; at 236, whose issue asks that the composition it started from be credited "
+            "for the construction, Daniel is the finder."
         ),
     ),
 }
@@ -832,7 +838,7 @@ CREDITS: dict[int, Credit] = {
     155: Credit(
         (DANIEL,),
         (),
-        "Evan Daniel’s packing from a search started from Daniil Ostashev’s",
+        "Evan Daniel’s packing from a search started from Daniil Ostashev’s packing",
     ),
     # PR 574's padding of issue 561's continuation of Ostashev's packing, padded again
     # (T-186's regularization of T-174; RT-4).
@@ -965,7 +971,7 @@ CREDITS: dict[int, Credit] = {
         (DANIEL,),
         (),
         "Evan Daniel’s packing from a search started from Francisco Couzo’s refinement of "
-        "Joost de Winter’s",
+        "Joost de Winter’s packing",
     ),
     # PR 574's re-solve of issue 528's composition, re-solved again (T-186's
     # regularization of T-174).
@@ -2245,9 +2251,18 @@ def _regularized_certificate(move: Move, text: str) -> str:
     )
     if houses.adopted_on(n) < VIEW_SECTION_FROM:
         return text
-    # Where the view's section closes with the bound it proved as the verified lane, that
-    # sentence is history too, from the pass of 19 October 2026 on: n = 229 was the first
-    # count whose house moved off a T-155 view by more than the section's printed places.
+    # Where the view's dated paragraph and section state the bound it proved as the
+    # verified lane, both are history too, from the pass of 19 October 2026 on: n = 229
+    # was the first count whose house moved off a T-155 view by more than the section's
+    # printed places. The paragraph is the form `register_regularized_bounds` writes for a
+    # side not at T-101's (review A1 of #692).
+    text = re.sub(
+        rf"\b(it\s+proves\s+{bound}),\s+the\s+verified\s+upper\s+bound\s+\((T-\d+)\)"
+        r"(\s+rounded\s+up\s+at\s+\d+\s+places)?,\s+which\s+the\s+record\s+still\s+prints\s+as"
+        r"\s+(\$[0-9.]+\$)\.",
+        rf"\1, the verified upper bound until {until} (\2)\3, which the record printed as \4.",
+        text,
+    )
     return re.sub(
         rf"\bThat\s+proves\s+({bound}),\s+the\s+verified\s+upper\s+bound\s+\((T-\d+)\),\s+the"
         r"\s+exact\s+form\s+of\s+the\s+case’s\s+`verified_upper_bound`,\s+which\s+prints\s+it\s+as"
@@ -2259,11 +2274,58 @@ def _regularized_certificate(move: Move, text: str) -> str:
     )
 
 
+#: The dated paragraph the intake of 18 October 2026 wrote under a case's title for a
+#: report it registered at V0/C0 below the house (b783bcc0a), through the paragraphs that
+#: follow it up to the next dated one or heading.
+PENDING_REPORT = re.compile(
+    r"\*\*Reported\s+certificate\s+pending\s+adoption,\s+(\d{4}-\d{2}-\d{2})\.\*\*"
+    r"(?:(?!\n\n(?:\*\*|#)).)*",
+    re.DOTALL,
+)
+
+
+def pending_history(text: str, until: str) -> str:
+    """A registration's "pending adoption" paragraph, once a pass moves the house, as history.
+
+    The paragraph said the registration left both upper lanes, the house witness and its
+    drawing unchanged until review and adoption, and that the rigidity and arrangement
+    notes below described that house. An adoption at the count moves all of them, whichever
+    certificate it adopts, so the paragraph says what held until then, and a sentence after
+    it that calls a report pending adoption says until when (review A1 of #692: n = 155 and
+    229 adopted the very reports their paragraphs named, on 19 October 2026).
+    """
+
+    def past(match: re.Match[str]) -> str:
+        block = re.sub(
+            r"^\*\*Reported\s+certificate\s+pending\s+adoption,\s+",
+            "**Reported certificate, ",
+            match.group(),
+        )
+        block = re.sub(
+            r"\breports\s+a\s+(\d+)-square\s+certificate\b",
+            r"reported a \1-square certificate",
+            block,
+        )
+        block = re.sub(
+            r"\bThis\s+V0/C0\s+registration\s+leaves\s+both\s+case\s+upper\s+lanes,\s+the\s+house"
+            r"\s+witness\s+and\s+its\s+drawing\s+unchanged\s+until\s+separate\s+Stage\s+4\s+review"
+            r"\s+and\s+adoption\.\s+Rigidity\s+and\s+arrangement\s+notes\s+below\s+describe\s+that"
+            r"\s+retained\s+house\.",
+            f"Its V0/C0 registration left both case upper lanes, the house witness and its "
+            f"drawing unchanged until the house adoption of {until}, and until then the "
+            "rigidity and arrangement notes below described that retained house.",
+            block,
+        )
+        return re.sub(r"\bpending\s+adoption\.", f"pending adoption until {until}.", block)
+
+    return PENDING_REPORT.sub(past, text)
+
+
 def historical(move: Move, text: str) -> str:
     """The body's own statements of the earlier house, marked as history.
 
     `check_case_prose` holds every `s(n) <= x` a body writes to the front matter unless
-    its sentence says it is historical. Five kinds of prose state the earlier house, and
+    its sentence says it is historical. Six kinds of prose state the earlier house, and
     each says now that it held until this adoption:
 
     - the opening "Open." sentence the generator writes, of the best known packing;
@@ -2271,10 +2333,13 @@ def historical(move: Move, text: str) -> str:
     - the exact-ceiling prose that `T-101` wrote where a certified side rounded up trails
       the catalogue's print (`apply_exact_ceilings`): its dated paragraph, its ceiling
       section, now "The earlier verified ceiling", and its certificate section;
-    - the regularized certificate's prose that `T-155` wrote at T-101's side
-      (`register_regularized_bounds`): its dated paragraph and its section;
+    - the regularized certificate's prose that `T-155` wrote (`register_regularized_bounds`):
+      its dated paragraph and its section, at T-101's side and, from the pass of 19
+      October 2026 on, off it;
     - a house an earlier pass of this adoption adopted, in its dated paragraph and its
-      section.
+      section;
+    - the dated paragraph an intake wrote for a report it registered pending adoption,
+      which said the house stayed until review and adoption (`pending_history`).
 
     Prose in no fixed form, which no tool here wrote, is not rewritten; `check_case_prose`
     refuses a record that still states it as the bound. The first pass marked such prose
@@ -2299,6 +2364,7 @@ def historical(move: Move, text: str) -> str:
     text = _earlier_ceiling(move, text)
     text = _regularized_certificate(move, text)
     text = held_history(text)
+    text = pending_history(text, until)
     # The records are wrapped, so a sentence may break at any space; whitespace is
     # matched as such and the reflow is the formatter's.
     text = re.sub(
@@ -2882,12 +2948,20 @@ def _with_history(committed: str, written: str) -> str:
     return VERIFIER_TABLE.sub(lambda _match: table.group(), written, count=1)
 
 
-def refresh(*, write: bool, openings_only: bool = False) -> list[int]:
+def refresh(
+    *, write: bool, openings_only: bool = False, counts: Collection[int] | None = None
+) -> list[int]:
     """Every record whose writer-owned text, or held note, differs from what the writer
-    writes now, by count; written where `write`. Whitespace is the formatter's."""
+    writes now, by count; written where `write`. Whitespace is the formatter's.
+
+    `counts`, where given, limits the refresh to those records: a writer change at a few
+    counts is applied without replaying a count whose later lower layer the full refresh
+    refuses, as n = 108's fine-net lower bound is (review A1 of #692)."""
     changed = []
     updates: list[tuple[Path, str]] = []
     for move in replay_plan():
+        if counts is not None and move.n not in counts:
+            continue
         path = select_houses.case_path(move.n)
         committed = path.read_text(encoding="utf-8")
         text = (
@@ -2898,6 +2972,8 @@ def refresh(*, write: bool, openings_only: bool = False) -> list[int]:
             updates.append((path, text))
     if not openings_only:
         for n in held_counts():
+            if counts is not None and n not in counts:
+                continue
             path = select_houses.case_path(n)
             committed = path.read_text(encoding="utf-8")
             text = held_note(n, committed)
@@ -3241,10 +3317,23 @@ def main(argv: Sequence[str] | None = None) -> int:
         action="store_true",
         help="refresh only current adoption paragraphs, retaining all other writers' bytes",
     )
+    parser.add_argument(
+        "--n",
+        type=int,
+        nargs="+",
+        metavar="N",
+        help="with --refresh or --refresh-openings, refresh only these records",
+    )
     arguments = parser.parse_args(argv)
+    if arguments.n and not (arguments.refresh or arguments.refresh_openings):
+        parser.error("--n needs --refresh or --refresh-openings")
     if arguments.refresh or arguments.refresh_openings:
         try:
-            changed = refresh(write=True, openings_only=arguments.refresh_openings)
+            changed = refresh(
+                write=True,
+                openings_only=arguments.refresh_openings,
+                counts=frozenset(arguments.n) if arguments.n else None,
+            )
         except AdoptionError as error:
             print(f"FAIL {error}")
             return 1

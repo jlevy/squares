@@ -1890,6 +1890,71 @@ def test_a_full_refresh_refuses_a_later_lower_layer_before_writing_any_record(
     assert {path: path.read_bytes() for path in originals} == originals
 
 
+def test_a_refresh_limited_to_named_counts_leaves_the_others_unread(
+    replayed: list[adopt.Move], tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """`--refresh --n` writes the named records and does not replay n108's later layer,
+    which the full refresh refuses (review A1 of #692)."""
+    moves = [move for move in replayed if move.n in (29, 108)]
+    marker = f"**House adoption, {adopt.day_words(29)}.**"
+    paths = {}
+    for move in moves:
+        text = select.case_path(move.n).read_text(encoding="utf-8")
+        if move.n == 29:
+            before, after = text.split(marker, 1)
+            text = before + marker + " Stale opening.\n\n" + after.split("\n\n", 1)[1]
+        paths[move.n] = tmp_path / f"n-{move.n:03d}.md"
+        paths[move.n].write_text(text)
+    untouched = paths[108].read_bytes()
+    monkeypatch.setattr(adopt, "replay_plan", lambda: moves)
+    monkeypatch.setattr(adopt, "held_counts", lambda: [108])
+    monkeypatch.setattr(select, "case_path", lambda n: tmp_path / f"n-{n:03d}.md")
+    assert adopt.main(["--refresh", "--n", "29"]) == 0
+    assert "Stale opening." not in paths[29].read_text()
+    assert _flat(adopt.opening(moves[0])) in _flat(paths[29].read_text())
+    assert paths[108].read_bytes() == untouched
+    with pytest.raises(SystemExit):
+        adopt.main(["--check", "--n", "29"])
+
+
+def test_an_adoption_marks_a_registration_pending_adoption_as_history() -> None:
+    """The intake of 18 October 2026 wrote a fixed-form "pending adoption" paragraph for
+    each report it registered at V0/C0; the adoption that moves the house marks it, and a
+    sentence after it naming a report pending adoption, as history (review A1 of #692).
+    155 is marked by hand (`HAND_MARKED`); 229 is the writer's, and so are 227 and 260,
+    whose de Winter reports are still pending."""
+    stale = (
+        "Reported certificate pending adoption",
+        "This V0/C0 registration leaves both case upper lanes",
+        "Rigidity and arrangement notes below describe that retained house.",
+    )
+    history = (
+        "Its V0/C0 registration left both case upper lanes, the house witness and its "
+        "drawing unchanged until the house adoption of 19 October 2026, and until then the "
+        "rigidity and arrangement notes below described that retained house."
+    )
+    for n, reported in ((155, "2026-10-17"), (229, "2026-10-18")):
+        body = _flat(select.case_path(n).read_text(encoding="utf-8").split("---\n", 2)[2])
+        assert not [words for words in stale if words in body], n
+        opening = f"**Reported certificate, {reported}.** Evan Daniel reported a {n}-square"
+        assert opening in body, n
+        assert history in body, n
+    body229 = _flat(select.case_path(229).read_text(encoding="utf-8"))
+    assert "the latest registered report, pending adoption until 19 October 2026." in body229
+    # The T-155 view's dated paragraph off T-101's side is history from the same pass.
+    assert (
+        "the verified upper bound until 19 October 2026 (T-155), which the record printed as "
+        "$15.65685424949239$." in body229
+    )
+    assert "which the record still prints" not in body229
+    for n in (227, 260):
+        committed = select.case_path(n).read_text(encoding="utf-8")
+        marked = _flat(adopt.pending_history(committed, "3 November 2026"))
+        assert not [words for words in stale if words in marked], n
+        assert f"Joost de Winter reported a {n}-square certificate" in marked, n
+        assert "until the house adoption of 3 November 2026" in marked, n
+
+
 def test_an_opening_refresh_keeps_the_following_old_bound_explicitly_historical(
     replayed: list[adopt.Move], tmp_path: Path
 ) -> None:
