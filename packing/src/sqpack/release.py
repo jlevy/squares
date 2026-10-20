@@ -1703,6 +1703,28 @@ class ReleaseNoPublicChange(NamedTuple):
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
     ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer",),
+        paths=(
+            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
+            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
+            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+        ),
+        reason=(
+            "The site v0.8.6 cut for the house best packing terminology (think-9v1i) "
+            "regenerated the five claim documents, and each of the 22 changed lines differs "
+            "from main only in its source-link revision, efd41b91 to 12ef5b93. The "
+            "explainer links those documents rather than inlining them, so its HTML and "
+            "Markdown are unchanged by them and it keeps v0.4.10. This is a source-reviewed "
+            "disposition, as #695's was for v0.8.2."
+        ),
+    ),
+    ReleaseNoPublicChange(
         components=("paper:square-packing-methods-survey",),
         paths=("packing/frontier/README.md",),
         outputs=(
