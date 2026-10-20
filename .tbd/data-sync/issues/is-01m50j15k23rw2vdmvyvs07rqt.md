@@ -3,9 +3,9 @@ type: is
 id: is-01m50j15k23rw2vdmvyvs07rqt
 title: "Import pingyou: s(29) exact rational certificate, 1.57e-36 below T-155 and 7.32e-90 below #574's N29 (#622)"
 kind: task
-status: closed
+status: open
 priority: 2
-version: 27
+version: 28
 delegate: user-eb-intake-622
 labels:
   - result-import
@@ -18,10 +18,10 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-15T19:53:37.121Z
-updated_at: 2026-10-20T09:29:26.104Z
+updated_at: 2026-10-20T09:29:51.602Z
 started_at: 2026-10-15T23:31:02.497Z
-closed_at: 2026-10-20T09:29:26.103Z
-close_reason: "Done: s(29) imported via #661 (merged d167d4b86); #622 closed 2026-10-19 with its final reply 6261406058, recorded on main by #696 (ded4727bc)."
+closed_at: null
+close_reason: null
 resolution: null
 duplicate_of: null
 ---
