@@ -91,8 +91,8 @@ PUBLICATION_HISTORY = (
         version="v0.8.2",
         first_published="October 20, 2026",
         result_scope=(
-            "Document on the development page the storage guard that refuses bulk Git "
-            "blobs on every pull request and before each push."
+            "The development guide describes how test sessions keep their temporary "
+            "directories bounded."
         ),
     ),
     PublicationHistoryEntry(
@@ -1032,8 +1032,8 @@ RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
         version="v0.8.2",
         impact="patch",
         reason=(
-            "Document on the development page the storage guard that refuses bulk Git "
-            "blobs on every pull request and before each push."
+            "The development guide describes how test sessions keep their temporary "
+            "directories bounded."
         ),
     ),
     ReleaseImpactDecision(
@@ -1573,6 +1573,63 @@ class ReleaseNoPublicChange(NamedTuple):
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
     ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer",),
+        paths=(
+            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
+            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
+            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+        ),
+        reason=(
+            "PR #695's site v0.8.2 cut regenerated the five claim documents, and every "
+            "changed line differs from main only in its source-link revision, a7fb8f2e to "
+            "5998d0c3. The explainer links those documents rather than inlining them, so "
+            "its HTML and Markdown are unchanged by them and it keeps v0.4.8. This is a "
+            "source-reviewed disposition, as #514's was for v0.8.0."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("site",),
+        paths=("packing/pyproject.toml",),
+        outputs=("atlas.html", "index.html", "results.html"),
+        reason=(
+            "Reviewed October 20, 2026 against main b16ddeb0 (think-46yk): the only change "
+            "is to [tool.pytest.ini_options], which loads the devtools.pytest_tmp test plugin "
+            "and sets tmp_path_retention_policy and tmp_path_retention_count. Pytest reads "
+            "them; the site build reads none of them, and no dependency, version or build "
+            "setting changes, so no page's input changes. No site rebuild byte comparison "
+            "is claimed."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=("packing/pyproject.toml",),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-lower-bounds-explainer.pdf",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+            "papers/square-packing-methods-survey.pdf",
+        ),
+        reason=(
+            "Reviewed October 20, 2026 against main b16ddeb0 (think-46yk): the only change "
+            "is to [tool.pytest.ini_options], which loads the devtools.pytest_tmp test plugin "
+            "and sets tmp_path_retention_policy and tmp_path_retention_count. The paper "
+            "builds read none of them, and no dependency, version or build setting changes; "
+            "manuscripts, figures and paper metadata are unchanged and every paper keeps its "
+            "edition. No paper render or PDF redraw is claimed."
+        ),
+    ),
+    ReleaseNoPublicChange(
         components=("paper:square-packing-methods-survey",),
         paths=("packing/campaign/result-requests.yaml",),
         outputs=(
@@ -2065,31 +2122,6 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "byte identity. The changed development.md is published as "
             "development.html and is covered by this branch's site edition, not by "
             "this paper-only record."
-        ),
-    ),
-    ReleaseNoPublicChange(
-        components=("paper:n11-lower-bounds-explainer",),
-        paths=(
-            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
-            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
-            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
-            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
-            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
-        ),
-        outputs=(
-            "papers/n11-lower-bounds-explainer.html",
-            "papers/n11-lower-bounds-explainer.md",
-            "papers/n11-lower-bounds-explainer.pdf",
-        ),
-        reason=(
-            "PR406's site v0.8.2 cut regenerated the five claim documents at "
-            "PUBLICATION_REVISION 106bb33e, this branch's refresh of the explainer's "
-            "validator record, and every changed line differs from main 4b8aec9a6 only "
-            "in its source-link revision, a7fb8f2e to 106bb33e. The explainer links "
-            "those documents through repo_url rather than inlining them, so its HTML "
-            "and Markdown are unchanged by them, its PDF prints that HTML, and it keeps "
-            "v0.4.8. Source-compared, as #514's was for v0.8.0; no render of the claim "
-            "documents or the paper was taken."
         ),
     ),
     ReleaseNoPublicChange(
@@ -4991,7 +5023,7 @@ def validate_release_impacts(
 #: fresh render, so a link naming the build commit would fail their drift check forever. It is
 #: in no version string. It moves when the claim documents are regenerated for an edition. It
 #: must be a commit on `main`; the site's own links name `main` itself (`devtools.repo_links`).
-PUBLICATION_REVISION = "106bb33e"
+PUBLICATION_REVISION = "5998d0c3"
 
 
 def data_pathspec() -> tuple[str, ...]:

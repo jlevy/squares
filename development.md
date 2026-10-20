@@ -1075,6 +1075,59 @@ Process counters can charge a child’s setup to the call that reaps it and omit
 forkserver descendants; they cannot decide whether an individual test exceeds a CPU
 ceiling or establish complete CPU savings.
 
+### Temporary test directories
+
+A test session leaves behind only what someone needs to inspect a failure.
+`packing/pyproject.toml` sets `tmp_path_retention_policy = "failed"` and a
+`tmp_path_retention_count` of 2, and loads
+[`devtools.pytest_tmp`](packing/devtools/pytest_tmp.py) into every session:
+
+- A passing test’s `tmp_path` is removed when the test ends, and a session in which
+  every test passed removes its whole numbered directory at exit.
+- A module- or class-scoped fixture that builds a large tree yields it from
+  `pytest_tmp.scoped_tmp_path`, which removes the directory when the fixture’s scope
+  ends unless a test failed while it was open.
+  A plain `tmp_path_factory.mktemp` holds its disk until the session ends.
+- A session killed before its exit (a validation deadline, a cancelled gate, an agent’s
+  command timeout) used to keep its whole tree for three days, because pytest honours a
+  dead session’s `.lock` that long.
+  On Linux the plugin records each session’s PID, kernel boot and PID namespace beside
+  its lock as pytest makes the directory, and the next session releases the lock of
+  every recorded session that has exited.
+  Releasing only unlocks the tree: pytest’s retention deletes it once two newer sessions
+  are retained, so at most two failed or killed trees remain.
+  Anything the plugin cannot attribute to an exited process in its own boot and PID
+  namespace keeps its lock for pytest’s three days: a session from before a restart,
+  from a container or machine sharing the directory, or from any host other than Linux;
+  a session given `--basetemp`; and an xdist worker’s directory.
+  The boot ID names a kernel boot, so virtual machines restored from one memory snapshot
+  share it and must not share a temporary root.
+
+Measured on 20 October 2026 over the quick lane (about 19,200 tests on two xdist workers
+on a shared four-CPU host, with a fresh `TMPDIR` sampled every five seconds): on main,
+one run left 3.0 GiB in 133,846 files, stock pytest keeps three runs’ worth, and the run
+peaked at 3.5 GiB, 1.4 GiB of it one test’s full clone of the repository.
+With these settings and that test moved to a sparse checkout, a passing run leaves
+nothing and a failing one leaves only its failed tests and session-scoped fixtures (232
+MiB when five load-sensitive tests failed).
+The peak fell to 347 MiB, almost all of it the negative controls’ worker snapshot, and
+the wall did not change measurably (2,795 s before, 2,755 s after).
+
+To see what a run writes, point `TMPDIR` at a fresh directory and summarize the report.
+From `packing/`, this is the measured run:
+
+```shell
+run="$(mktemp -d)" && mkdir "$run/tmp"
+TMPDIR="$run/tmp" uv run --frozen --all-extras --group dev pytest -q \
+  tests ../packages/workbench/tests --ignore=tests/test_browser_floor_contract.py \
+  -m "not exhaustive_exact and not slow" -n 2 --dist=loadfile \
+  --tmp-usage "$run/usage.jsonl" --tmp-usage-root "$run/tmp" --tmp-usage-interval 5
+uv run --frozen --all-extras --group dev python -m devtools.pytest_tmp summarize "$run/usage.jsonl"
+```
+
+The quick lane’s `--dist=loadfile` matters to the peak: under plain `--dist load` a
+module-scoped tree can be built on both workers at once.
+
 ### What each tier costs, and where its ceiling lives
 
 [gate-budgets.yaml](packing/devtools/gate-budgets.yaml) declares each tier’s ceiling,
