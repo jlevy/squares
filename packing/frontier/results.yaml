@@ -29869,6 +29869,7 @@ results:
   - id: T-218
     kind: upper-bound
     registered: '2026-10-19'
+    landed: '2026-10-20'
     headline: >-
       Daniel's smaller n236 packing, after Chaoweeraprasit's composition, certified
       exactly
@@ -29971,6 +29972,7 @@ results:
   - id: T-219
     kind: upper-bound
     registered: '2026-10-19'
+    landed: '2026-10-20'
     headline: >-
       Daniel's smaller n271 packing, continuing Couzo's arrangement, certified exactly
     claim: >-
