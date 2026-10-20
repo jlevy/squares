@@ -10,9 +10,11 @@ The size is the blob object, the header ``blob <size>`` and a NUL then the conte
 compressed by zlib at its default level, as Git compresses an object in a pack
 (`core.compression`) before any delta. A loose object, as `git hash-object -w` first
 writes it, is compressed at Git's default loose level and comes out a little larger. The
-figure depends only on the content and the zlib build, which the pinned interpreter fixes.
-Git's own `%(objectsize:disk)` does not have that property, since it depends on how a
-clone happened to pack and delta its objects.
+figure depends only on the content and the zlib build. The interpreter build fixes the zlib
+build, since the pinned interpreter has zlib built in, and another build, such as zlib-ng,
+can change the figure. A golden test in `test_added_blob_guard` pins both forms to recorded
+figures, so it fails if the zlib build changes. Git's own `%(objectsize:disk)` does not
+have that property, since it depends on how a clone happened to pack and delta its objects.
 """
 
 from __future__ import annotations
@@ -36,7 +38,8 @@ class StoredSize:
     __slots__ = ("_compressor", "_total")
 
     def __init__(self, size: int) -> None:
-        self._compressor = zlib.compressobj(zlib.Z_DEFAULT_COMPRESSION)
+        # zlib.compress takes no memory level and uses 8, so it is stated here, not defaulted.
+        self._compressor = zlib.compressobj(zlib.Z_DEFAULT_COMPRESSION, memLevel=8)
         self._total = len(self._compressor.compress(b"blob %d\x00" % size))
 
     def update(self, chunk: bytes | memoryview) -> None:

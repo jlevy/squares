@@ -15,6 +15,7 @@ import signal
 import subprocess
 import sys
 import time
+import zlib
 from collections.abc import Iterator, Mapping, Sequence
 from pathlib import Path
 from typing import Any, cast
@@ -863,6 +864,69 @@ def test_streamed_stored_size_is_the_unit_however_the_content_is_split(data: byt
             position += step
         assert measure.result() == stored(data)
     assert stored(data) <= stored_size_bound(len(data))
+
+
+def mixed(size: int, seed: int) -> bytes:
+    """Register-like text interleaved with incompressible runs, cut to `size` bytes."""
+    draw = random.Random(seed)
+    parts: list[bytes] = []
+    length = 0
+    while length < size:
+        if draw.random() < 0.6:
+            part = b"".join(
+                b"- n: %d\n  side: %d\n" % (draw.randrange(10**6), draw.randrange(10**9))
+                for _ in range(draw.randrange(1, 400))
+            )
+        else:
+            part = draw.randbytes(draw.randrange(1, 3000))
+        parts.append(part)
+        length += len(part)
+    return b"".join(parts)[:size]
+
+
+# Recorded under the pinned interpreter's zlib 1.3.2. A memory level of 9 moves the three
+# largest noise and mixed figures, and zlib-ng 2.2.5 moves the repeated and mixed ones.
+GOLDEN_STORED = {
+    "empty": 15,
+    "noise-1": 16,
+    "noise-4096": 4117,
+    "noise-300000": 300_113,
+    "repeated-16384": 88,
+    "repeated-1048576": 2090,
+    "mixed-65536": 33_057,
+    "mixed-700000": 334_667,
+}
+
+
+def test_stored_size_is_pinned_to_recorded_figures() -> None:
+    """J2 of #406: the figure depends on the zlib build, so a changed build fails here.
+
+    Otherwise a different interpreter build, or a host whose zlib is zlib-ng, would move
+    verdicts near a ceiling without any test failing.
+    """
+    corpus = {
+        "empty": b"",
+        "noise-1": noise(1, seed=1),
+        "noise-4096": noise(4096, seed=2),
+        "noise-300000": noise(300_000, seed=3),
+        "repeated-16384": b"register: entry\n" * 1024,
+        "repeated-1048576": b"register: entry\n" * 65536,
+        "mixed-65536": mixed(65_536, seed=4),
+        "mixed-700000": mixed(700_000, seed=5),
+    }
+    streamed: dict[str, int] = {}
+    for name, data in corpus.items():
+        pieces = random.Random(len(data))
+        measure = StoredSize(len(data))
+        position = 0
+        while position < len(data):
+            step = pieces.randint(1, 70_000)
+            measure.update(memoryview(data)[position : position + step])
+            position += step
+        streamed[name] = measure.result()
+    build = f"zlib {zlib.ZLIB_RUNTIME_VERSION}"
+    assert {name: stored(data) for name, data in corpus.items()} == GOLDEN_STORED, build
+    assert streamed == GOLDEN_STORED, build
 
 
 def test_content_reader_streams_and_refuses_malformed_batch_output() -> None:
