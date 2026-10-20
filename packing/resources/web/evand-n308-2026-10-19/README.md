@@ -116,7 +116,13 @@ It asks that #481’s s(307) packing be credited as the ultimate start, and says
 packing is not a refinement of #489 and does not descend from #489 or from Kevin Fang’s
 #484: matched square by square over the eight symmetries of the box, 295 load-bearing
 squares move by more than $10^{-4}$ (at most 0.706), and no tilt angle is shared.
-That is the source’s statement; no identity or lineage is measured here.
+That is the source’s statement; the import measured no identity or lineage.
+The stage 4 review measured it pose by pose
+([review of 20 October](../../../../docs/project/reviews/review-2026-10-20-upper-bound-imports-689-694.md#credit-and-lineage)):
+under a quarter turn the best assignment against #489’s packing moves 15 squares beyond a
+tenth, at most 0.708, and keeps 293 within one, and 263 of #481’s 307 squares lie within
+a tenth of this packing, so it is another arrangement of the two-wedge design, not a
+refinement, found from #481’s 307 by the source’s account.
 
 ## What Is Not Established
 

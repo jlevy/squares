@@ -17158,12 +17158,15 @@ urls:
     builds_on: null
     evidence:
     - E-evand-689-n308-report
+    - E-evand-689-n308-exact-feasibility
     artifacts:
     - packing/resources/web/evand-n308-2026-10-19/README.md
     - packing/resources/web/evand-n308-2026-10-19/acquisition/claims.json
     - packing/resources/web/evand-n308-2026-10-19/source/search/packer/candidates/s308_d308.cert
     - packing/resources/web/evand-n308-2026-10-19/receipts/exact-certification.json.xz
     - packing/devtools/upper_bound_reports.py
+    - docs/project/reviews/review-2026-10-20-upper-bound-imports-689-694.md
+    - packing/resources/web/evand-n308-2026-10-19/review/review-2026-10-20/README.md
 - path: result/t-222.html
   canonical: result/t-222.html
   kind: result
@@ -17185,12 +17188,15 @@ urls:
     builds_on: null
     evidence:
     - E-evand-694-n154-report
+    - E-evand-694-n154-exact-feasibility
     artifacts:
     - packing/resources/web/evand-n154-sweep-2026-10-20/README.md
     - packing/resources/web/evand-n154-sweep-2026-10-20/acquisition/claims.json
     - packing/resources/web/evand-n154-sweep-2026-10-20/source/search/packer/candidates/s154_sw.cert
     - packing/resources/web/evand-n154-sweep-2026-10-20/receipts/exact-certification.json.xz
     - packing/devtools/upper_bound_reports.py
+    - docs/project/reviews/review-2026-10-20-upper-bound-imports-689-694.md
+    - packing/resources/web/evand-n308-2026-10-19/review/review-2026-10-20/README.md
 - path: results.html
   canonical: results.html
   kind: page

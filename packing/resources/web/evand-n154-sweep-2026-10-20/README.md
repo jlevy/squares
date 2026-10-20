@@ -126,7 +126,13 @@ eight symmetries of the box, the contact graphs share 232 pairs, with 61 only he
 64 only in #586’s, and a feasible-step morph walk finds no path between the two up to
 $10^{-2}$ above #586’s side, which the issue calls a heuristic. It keeps #586’s band of
 ten squares near 26.53° and its 38° to 44° group.
-That is the source’s statement; no identity or lineage is measured here.
+That is the source’s statement; the import measured no identity or lineage.
+The stage 4 review measured it pose by pose
+([review of 20 October](../../../../docs/project/reviews/review-2026-10-20-upper-bound-imports-689-694.md#credit-and-lineage)):
+against #586’s packing the pairing is one to one under a quarter turn and moves three
+squares beyond a tenth, at most 0.204, so it is #586’s arrangement continued, while
+Ostashev’s s(156) packing lies within a tenth of it at only 94 of its 156 squares, so
+that start is the source’s account of the search.
 
 ## What Is Not Established
 
