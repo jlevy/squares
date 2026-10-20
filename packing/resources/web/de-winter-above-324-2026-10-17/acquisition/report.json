@@ -1,0 +1,339 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "https://github.com/jlevy/squares/issues/666",
+  "author": "Joost de Winter",
+  "source_key": "[de Winter above 324 2026-10-17]",
+  "report_evidence": "E-de-winter-666-above-324-report",
+  "receipt_format": "de-winter-666-exact-replay-v1",
+  "witness_prefix": "W-de-winter-666-n",
+  "claim_limitations": "Complete 643dc9a (claim pin b3152f5) rational centre/half-angle certificates read exactly from the retained source. Finite construction feasibility only; no optimality, local minimum, rigidity, novelty, priority or global optimality claim.",
+  "read_on": "2026-10-20",
+  "read_at_main": "b16ddeb0adca5ecf9fabb3e550e50a4e661ca6f4",
+  "certificates": [
+    {
+      "n": 464,
+      "path": "square-packing-above-324/n0464.cert",
+      "format": "evand-cert",
+      "offered": "21.988813022694",
+      "first_committed": "2026-10-17T07:03:15Z",
+      "same_packing": []
+    },
+    {
+      "n": 509,
+      "path": "square-packing-above-324/n0509.cert",
+      "format": "evand-cert",
+      "offered": "22.994328036438",
+      "first_committed": "2026-10-17T07:03:15Z",
+      "same_packing": []
+    },
+    {
+      "n": 555,
+      "path": "square-packing-above-324/n0555.cert",
+      "format": "evand-cert",
+      "offered": "23.993653790591",
+      "first_committed": "2026-10-17T07:03:15Z",
+      "same_packing": []
+    },
+    {
+      "n": 603,
+      "path": "square-packing-above-324/n0603.cert",
+      "format": "evand-cert",
+      "offered": "24.995268064197",
+      "first_committed": "2026-10-17T07:03:15Z",
+      "same_packing": []
+    },
+    {
+      "n": 654,
+      "path": "square-packing-above-324/n0654.cert",
+      "format": "evand-cert",
+      "offered": "25.996103908965",
+      "first_committed": "2026-10-17T07:03:15Z",
+      "same_packing": []
+    },
+    {
+      "n": 706,
+      "path": "square-packing-above-324/n0706.cert",
+      "format": "evand-cert",
+      "offered": "26.998712100405",
+      "first_committed": "2026-10-17T07:03:15Z",
+      "same_packing": []
+    },
+    {
+      "n": 760,
+      "path": "square-packing-above-324/n0760.cert",
+      "format": "evand-cert",
+      "offered": "27.995949340329",
+      "first_committed": "2026-10-17T07:03:15Z",
+      "same_packing": []
+    },
+    {
+      "n": 817,
+      "path": "square-packing-above-324/n0817.cert",
+      "format": "evand-cert",
+      "offered": "28.998488480775",
+      "first_committed": "2026-10-17T07:03:15Z",
+      "same_packing": []
+    },
+    {
+      "n": 875,
+      "path": "square-packing-above-324/n0875.cert",
+      "format": "evand-cert",
+      "offered": "29.998783733108",
+      "first_committed": "2026-10-17T07:03:15Z",
+      "same_packing": []
+    },
+    {
+      "n": 935,
+      "path": "square-packing-above-324/n0935.cert",
+      "format": "evand-cert",
+      "offered": "30.995955854834",
+      "first_committed": "2026-10-17T07:03:15Z",
+      "same_packing": []
+    },
+    {
+      "n": 998,
+      "path": "square-packing-above-324/n0998.cert",
+      "format": "evand-cert",
+      "offered": "31.998349747355",
+      "first_committed": "2026-10-17T07:03:15Z",
+      "same_packing": []
+    },
+    {
+      "n": 1061,
+      "path": "square-packing-above-324/n1061.cert",
+      "format": "evand-cert",
+      "offered": "32.996048342114",
+      "first_committed": "2026-10-17T07:03:15Z",
+      "same_packing": []
+    },
+    {
+      "n": 1128,
+      "path": "square-packing-above-324/n1128.cert",
+      "format": "evand-cert",
+      "offered": "33.998294117981",
+      "first_committed": "2026-10-17T07:03:15Z",
+      "same_packing": []
+    },
+    {
+      "n": 1196,
+      "path": "square-packing-above-324/n1196.cert",
+      "format": "evand-cert",
+      "offered": "34.998294118334",
+      "first_committed": "2026-10-17T07:03:15Z",
+      "same_packing": []
+    },
+    {
+      "n": 1266,
+      "path": "square-packing-above-324/n1266.cert",
+      "format": "evand-cert",
+      "offered": "35.996046404219",
+      "first_committed": "2026-10-17T07:03:15Z",
+      "same_packing": []
+    },
+    {
+      "n": 1339,
+      "path": "square-packing-above-324/n1339.cert",
+      "format": "evand-cert",
+      "offered": "36.997865207179",
+      "first_committed": "2026-10-17T07:03:15Z",
+      "same_packing": []
+    },
+    {
+      "n": 1413,
+      "path": "square-packing-above-324/n1413.cert",
+      "format": "evand-cert",
+      "offered": "37.999463832123",
+      "first_committed": "2026-10-17T07:03:15Z",
+      "same_packing": []
+    },
+    {
+      "n": 1489,
+      "path": "square-packing-above-324/n1489.cert",
+      "format": "evand-cert",
+      "offered": "38.997600184483",
+      "first_committed": "2026-10-17T07:03:15Z",
+      "same_packing": []
+    },
+    {
+      "n": 1568,
+      "path": "square-packing-above-324/n1568.cert",
+      "format": "evand-cert",
+      "offered": "39.999336626159",
+      "first_committed": "2026-10-17T07:03:15Z",
+      "same_packing": []
+    }
+  ],
+  "requested": [
+    464,
+    509,
+    555,
+    603,
+    654,
+    706,
+    760,
+    817,
+    875,
+    935,
+    998,
+    1061,
+    1128,
+    1196,
+    1266,
+    1339,
+    1413,
+    1489,
+    1568
+  ],
+  "replayed": [
+    464
+  ],
+  "houses": [],
+  "pending": [
+    {
+      "n": 464,
+      "report": "couzo-verified-bounds-2026-10-14",
+      "url": "packing/frontier/source-coverage.yaml",
+      "holders": "Francisco Couzo",
+      "printed": "21.989992144499",
+      "rounding": "up"
+    },
+    {
+      "n": 464,
+      "report": "#675",
+      "url": "https://github.com/jlevy/squares/issues/675",
+      "holders": "Francisco Couzo",
+      "printed": "21.988035588879",
+      "rounding": "up"
+    },
+    {
+      "n": 464,
+      "report": "#678",
+      "url": "https://github.com/jlevy/squares/issues/678",
+      "holders": "Francisco Couzo",
+      "printed": "21.987753655547",
+      "rounding": "up"
+    },
+    {
+      "n": 555,
+      "report": "#678",
+      "url": "https://github.com/jlevy/squares/issues/678",
+      "holders": "Francisco Couzo",
+      "printed": "23.993580713561",
+      "rounding": "up"
+    },
+    {
+      "n": 603,
+      "report": "#675",
+      "url": "https://github.com/jlevy/squares/issues/675",
+      "holders": "Francisco Couzo",
+      "printed": "24.994263342387",
+      "rounding": "up"
+    },
+    {
+      "n": 654,
+      "report": "#675",
+      "url": "https://github.com/jlevy/squares/issues/675",
+      "holders": "Francisco Couzo",
+      "printed": "25.995905846673",
+      "rounding": "up"
+    },
+    {
+      "n": 654,
+      "report": "#678",
+      "url": "https://github.com/jlevy/squares/issues/678",
+      "holders": "Francisco Couzo",
+      "printed": "25.995888235804",
+      "rounding": "up"
+    },
+    {
+      "n": 706,
+      "report": "#675",
+      "url": "https://github.com/jlevy/squares/issues/675",
+      "holders": "Francisco Couzo",
+      "printed": "26.998639495676",
+      "rounding": "up"
+    },
+    {
+      "n": 706,
+      "report": "#678",
+      "url": "https://github.com/jlevy/squares/issues/678",
+      "holders": "Francisco Couzo",
+      "printed": "26.998542133963",
+      "rounding": "up"
+    },
+    {
+      "n": 760,
+      "report": "#675",
+      "url": "https://github.com/jlevy/squares/issues/675",
+      "holders": "Francisco Couzo",
+      "printed": "27.995946706541",
+      "rounding": "up"
+    },
+    {
+      "n": 760,
+      "report": "#678",
+      "url": "https://github.com/jlevy/squares/issues/678",
+      "holders": "Francisco Couzo",
+      "printed": "27.995022162160",
+      "rounding": "up"
+    },
+    {
+      "n": 817,
+      "report": "#672",
+      "url": "https://github.com/jlevy/squares/issues/672",
+      "holders": "Francisco Couzo",
+      "printed": "28.998352177961",
+      "rounding": "up"
+    },
+    {
+      "n": 817,
+      "report": "#675",
+      "url": "https://github.com/jlevy/squares/issues/675",
+      "holders": "Francisco Couzo",
+      "printed": "28.998234675372",
+      "rounding": "up"
+    },
+    {
+      "n": 935,
+      "report": "#672",
+      "url": "https://github.com/jlevy/squares/issues/672",
+      "holders": "Francisco Couzo",
+      "printed": "30.995336946282",
+      "rounding": "up"
+    },
+    {
+      "n": 998,
+      "report": "#675",
+      "url": "https://github.com/jlevy/squares/issues/675",
+      "holders": "Francisco Couzo",
+      "printed": "31.998301912120",
+      "rounding": "up"
+    },
+    {
+      "n": 998,
+      "report": "#678",
+      "url": "https://github.com/jlevy/squares/issues/678",
+      "holders": "Francisco Couzo",
+      "printed": "31.998301106112",
+      "rounding": "up"
+    }
+  ],
+  "register": {
+    "title": "Joost de Winter's nineteen packings beyond 324 at 643dc9a, issue666",
+    "headline": "Exact rational certificates at nineteen counts from 464 to 1568, beyond the case corpus, from Joost de Winter",
+    "significance": 2,
+    "source_checks": "The author reports that check.py (Python standard library, exact rationals) accepts all nineteen: every corner strictly inside the container and every pair with centres closer than sqrt(2) separated along an edge normal, least clearances 1e-35 to 2e-11; and that the decimal JSON poses pass the same test at 80 digits with the true cosine and sine of each printed angle. One author and the separating-axis method are shared. No source program ran here.",
+    "credit": "Credit Joost de Winter (https://github.com/JoostdeWinter/joostdewinter.github.io), with the staircase-rectangle and four-block method of Arslanov, Mustafin and Shangitbayev (Electron. J. Combin. 28(4), P4.22, 2021), as the source says; the source states the numerical search and refinement were performed with GPT-6 Astra under his direction and the certificates and checks were produced with Claude (Anthropic).",
+    "next_rung": "Independently review the retained replay; the beyond-horizon rows then cite its confirming evidence.",
+    "bead": "think-3m10",
+    "bibliography": {
+      "authors": [
+        "de Winter"
+      ],
+      "lineage": "credits-project",
+      "credit": "de Winter after Arslanov, Mustafin, Shangitbayev, Levy",
+      "short_credit": "de Winter after Arslanov et al.",
+      "note": "Nineteen exact rational certificates beyond n = 324 at 643dc9ad4d3dbd71a9a05558c7f6116b809ba930 (issue pin b3152f526f23bc3ae450e51b6e906841233086d1, the same folder tree), each below the record of 17 October 2026: at 464 below Couzo's certificate of 14 October 2026, and at the eighteen counts from 509 to 1568 below the integer grid. Retained in web/de-winter-above-324-2026-10-17/."
+    }
+  }
+}
