@@ -18,6 +18,7 @@ from sqpack.yamlio import safe_load
 
 Point = tuple[Fraction, Fraction]
 Square = list[Point]
+Projection = tuple[Point, tuple[Fraction, Fraction]]
 
 
 def parse(path: Path) -> tuple[list[Square], Fraction]:
@@ -113,13 +114,38 @@ def interval(square: Square, axis: Point) -> tuple[Fraction, Fraction]:
     return min(values), max(values)
 
 
-def pair_gap(left: Square, right: Square) -> Fraction:
+def _own_intervals(square: Square) -> list[Projection]:
+    """Each of a square's two edge normals, with the square's own interval on it.
+
+    Half of every pair's projections depend on one square alone, so `check_squares`
+    computes them once per square rather than once per pair (think-uomm): over large
+    rationals the dot products are nearly all of the decision's cost.
+    """
+    return [(axis, interval(square, axis)) for axis in axes(square)]
+
+
+def _separation(
+    left: Square, right: Square, left_own: list[Projection], right_own: list[Projection]
+) -> Fraction:
+    """The pair's gap as `pair_gap` defines it, from the two squares' `_own_intervals`.
+
+    It computes the same gaps in the same order as projecting all eight intervals afresh,
+    so it returns the same exact maximum.
+    """
     gaps: list[Fraction] = []
-    for axis in (*axes(left), *axes(right)):
-        left_min, left_max = interval(left, axis)
+    for axis, (left_min, left_max) in left_own:
         right_min, right_max = interval(right, axis)
         gaps.extend((right_min - left_max, left_min - right_max))
+    for axis, (right_min, right_max) in right_own:
+        left_min, left_max = interval(left, axis)
+        gaps.extend((right_min - left_max, left_min - right_max))
     return max(gaps)
+
+
+def pair_gap(left: Square, right: Square) -> Fraction:
+    """The largest separating gap over the pair's four edge normals; negative exactly when
+    the interiors overlap."""
+    return _separation(left, right, _own_intervals(left), _own_intervals(right))
 
 
 def check(path: Path) -> dict[str, Any]:
@@ -147,8 +173,9 @@ def check_squares(squares: list[Square], side: Fraction) -> dict[str, Any]:
     ]
     if min(containment) < 0:
         failures.append(f"container penetration {min(containment)}")
+    own = [_own_intervals(square) for square in squares]
     pair_gaps = [
-        pair_gap(squares[left], squares[right])
+        _separation(squares[left], squares[right], own[left], own[right])
         for left, right in itertools.combinations(range(len(squares)), 2)
     ]
     overlaps = [gap for gap in pair_gaps if gap < 0]

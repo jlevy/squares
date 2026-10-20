@@ -397,31 +397,81 @@ def _margin_summary(
         for x, y in square
         for clearance in (x, y, side - x, side - y)
     ]
-    pair_margins: list[Scalar] = []
+    # The pair margin is computed with two economies, and neither changes a returned
+    # value under any `sign`, which `test_margin_summary_matches_the_exhaustive_definition`
+    # holds against the definition written out in full.
+    #
+    # A square's edge axes, and its shadow on each of them, are the same for every pair it
+    # is in, so they are computed once per square rather than once per pair: half of a
+    # pair's eight projections are of a square onto its own axes.
+    #
+    # And a pair stops being measured once it cannot lower the running minimum. Its best
+    # gap only grows as more axes are read, because a gap replaces it only when `sign`
+    # says the gap is larger. So once `sign` puts the partial best above the minimum, it
+    # puts the final best there too (subtraction rounds monotonically, so this holds in
+    # binary64 and multiprecision as well), and the full loop would not have replaced the
+    # minimum with it. The pairs are read in the same order, so the minimum is the same
+    # element the full loop keeps.
+    #
+    # Over exact rationals this function was 23.5 of the 29.4 profiled seconds
+    # `exact_verify` took at n = 180 (2026-10-19), and the adopted houses' exact replays
+    # are most of the whole atlas rebuild.
+    axes = [edge_axes(square) for square in squares]
+    shadows = [
+        [project(square, axis, sign) for axis in square_axes]
+        for square, square_axes in zip(squares, axes, strict=True)
+    ]
+    minimum_pair_gap: Scalar | None = None
     for left_index, left in enumerate(squares):
-        for right in squares[left_index + 1 :]:
-            gaps: list[Scalar] = []
-            for axis in edge_axes(left) + edge_axes(right):
-                left_lo, left_hi = project(left, axis, sign)
-                right_lo, right_hi = project(right, axis, sign)
-                gaps.extend((right_lo - left_hi, left_lo - right_hi))
-            best_gap = gaps[0]
-            for gap in gaps[1:]:
-                if sign(gap - best_gap) > 0:
-                    best_gap = gap
-            pair_margins.append(best_gap)
+        for right_index in range(left_index + 1, len(squares)):
+            best_gap = _pair_best_gap(
+                (left, axes[left_index], shadows[left_index]),
+                (squares[right_index], axes[right_index], shadows[right_index]),
+                sign,
+                minimum_pair_gap,
+            )
+            if best_gap is not None and (
+                minimum_pair_gap is None or sign(best_gap - minimum_pair_gap) < 0
+            ):
+                minimum_pair_gap = best_gap
 
     minimum_containment = containment[0]
     for clearance in containment[1:]:
         if sign(clearance - minimum_containment) < 0:
             minimum_containment = clearance
-    minimum_pair_gap = side
-    if pair_margins:
-        minimum_pair_gap = pair_margins[0]
-        for gap in pair_margins[1:]:
-            if sign(gap - minimum_pair_gap) < 0:
-                minimum_pair_gap = gap
-    return minimum_containment, minimum_pair_gap
+    return minimum_containment, side if minimum_pair_gap is None else minimum_pair_gap
+
+
+def _pair_best_gap(
+    left: tuple[Square, list, list],
+    right: tuple[Square, list, list],
+    sign: Callable[[Scalar], int],
+    ceiling: Scalar | None,
+) -> Scalar | None:
+    """A pair's best separating gap, or `None` once it is certainly above `ceiling`.
+
+    Each side is a square, its two edge axes and its shadow on each of them. The gaps are
+    read in the order the definition lists them -- the left square's axes, then the right
+    square's, each as `right_lo - left_hi` then `left_lo - right_hi` -- and the best is
+    kept the way the definition keeps it, so a pair read to the end returns exactly the
+    definition's value.
+    """
+    left_square, left_axes, left_shadows = left
+    right_square, right_axes, right_shadows = right
+    best: Scalar | None = None
+    for index in range(4):
+        if index < 2:
+            left_lo, left_hi = left_shadows[index]
+            right_lo, right_hi = project(right_square, left_axes[index], sign)
+        else:
+            right_lo, right_hi = right_shadows[index - 2]
+            left_lo, left_hi = project(left_square, right_axes[index - 2], sign)
+        for gap in (right_lo - left_hi, left_lo - right_hi):
+            if best is None or sign(gap - best) > 0:
+                best = gap
+        if ceiling is not None and sign(best - ceiling) > 0:
+            return None
+    return best
 
 
 def _number(value: Scalar, digits: int = 40) -> str:

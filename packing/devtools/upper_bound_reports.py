@@ -1372,6 +1372,7 @@ HOUSES: dict[str, Callable[[int], Fraction]] = {
     "[Daniel n229 dilation update 2026-10-18]": _import(
         "evand-n229-dilation-update-2026-10-18"
     ),
+    "[Daniel n183 subgrid 2026-10-19]": _import("evand-n183-subgrid-2026-10-19"),
     "[de Winter upper bounds 2026-10-17]": _import(
         "de-winter-upper-bounds-227-229-260-2026-10-17"
     ),
@@ -2408,6 +2409,7 @@ def register_plan(packet: Path) -> dict[str, Any]:
         "id": "T-NNN",
         "kind": "upper-bound",
         "registered": declaration["read_on"],
+        "landed": declaration["read_on"],
         "headline": register["headline"],
         "claim": claim,
         "scope": {"n_values": [row["n"] for row in inside]},

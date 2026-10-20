@@ -300,9 +300,13 @@ action for each are in [`frontier/RESULTS.md`](packing/frontier/RESULTS.md); the
 | [T-183](packing/frontier/RESULTS.md) | 237 | `V3` | `C3` | `S3` | `previously-published` | One complete rational source certificate reports a finite upper-bound improvement at the exact side it states: s(237) <= 15.902705057866366799436476453482. |
 | [T-189](packing/frontier/RESULTS.md) | 237 | `V3` | `C3` | `S3` | `previously-published` | One complete rational source certificate reports a finite upper-bound improvement at the exact side it states: s(237) <= 12163897896660350527924222391/764899771970500000000000000. |
 | [T-197](packing/frontier/RESULTS.md) | 155 | `V3` | `C3` | `S3` | `previously-published` | One complete rational source certificate reports a finite upper-bound improvement at the exact side it states: s(155) <= 2590452188930112807053435932173/200000000000000000000000000000. |
+| [T-205](packing/frontier/RESULTS.md) | 68 | `V3` | `C3` | `S3` | `previously-published` | A rectangle measure of wand125/square-packing, published on 16 October 2026 and reported in jlevy/squares#446, proves s(68) >= 853/100 = 8.53. |
+| [T-206](packing/frontier/RESULTS.md) | 84 | `V3` | `C3` | `S3` | `previously-published` | A rectangle measure of wand125/square-packing, published on 16 October 2026 and reported in jlevy/squares#446, proves s(84) >= 3769/400 = 9.4225. |
+| [T-207](packing/frontier/RESULTS.md) | 85 | `V3` | `C3` | `S3` | `previously-published` | A rectangle measure of wand125/square-packing, published on 16 October 2026 and reported in jlevy/squares#446, proves s(85) >= 379/40 = 9.475. |
 | [T-216](packing/frontier/RESULTS.md) | 108 | `V3` | `C3` | `S3` | `previously-published` | A rectangle measure of wand125/square-packing, published on 16 October 2026 and reported in jlevy/squares#446, proves s(108) >= 531/50 = 10.62. |
 | [T-218](packing/frontier/RESULTS.md) | 236 | `V3` | `C3` | `S3` | `previously-published` | One complete rational source certificate reports a finite upper-bound improvement at the exact side it states: s(236) <= 15.861934390607358617243798571394. |
 | [T-219](packing/frontier/RESULTS.md) | 271 | `V3` | `C3` | `S3` | `previously-published` | One complete rational source certificate reports a finite upper-bound improvement at the exact side it states: s(271) <= 16.948947733713657510723401112423. |
+| [T-220](packing/frontier/RESULTS.md) | 183 | `V3` | `C3` | `S3` | `previously-published` | s(183) <= 13999580178736252502081470897571/1000000000000000000000000000000 = 13.999580178736252502081470897571 < 14, from the original rational certificate, printed safely upward as 13.999580178737. |
 | [T-036](packing/frontier/RESULTS.md) | 11 | `V3` | `C2` | `S3` | `apparently-novel` | Every packing of eleven unit squares in a square container, six at orientation 0 and five sharing one orientation modulo pi/2 with half-tangent in [91442076901/250000000000, 73154061521/200000000000] (an interval containing [t* - 10^-6, t* + 10^-6] for Trump’s exact half-tangent t*), has container side at least U = 3.877083590022814 …, the exact side of Trump’s packing, and a packing in the family has side exactly U only if it is a quarter-turn image of Trump’s pose with the squares relabelled within the two classes. |
 | [T-112](packing/frontier/RESULTS.md) | 11 | `V3` | `C2` | `S3` | `apparently-novel` | Every packing of eleven unit squares in a square of side T = 3.8770835900228141773…, the least side T-060 proves possible, is Walter Trump’s 1979 packing after one of the eight symmetries of the container and a relabelling of the squares. |
 | [T-007](packing/frontier/RESULTS.md) | 4-324 | `V0` | `C1` | `S3` | `previously-published` | For every integer 4 <= N <= 324, Nagamochi 2005, Theorem 2 gives s(N) >= min(ceil(sqrt(N)), sqrt(N - 2*floor(sqrt(N)) + 1) + 1). |
@@ -325,9 +329,6 @@ action for each are in [`frontier/RESULTS.md`](packing/frontier/RESULTS.md); the
 | [T-202](packing/frontier/RESULTS.md) | 41 | `V0` | `C0` | `S3` | `previously-published` | A rectangle measure of wand125/square-packing, published on 16 October 2026 and reported in jlevy/squares#446, is reported to prove s(41) >= 2721/400 = 6.8025. |
 | [T-203](packing/frontier/RESULTS.md) | 43 | `V0` | `C0` | `S3` | `previously-published` | A rectangle measure of wand125/square-packing, published on 16 October 2026 and reported in jlevy/squares#446, is reported to prove s(43) >= 2777/400 = 6.9425. |
 | [T-204](packing/frontier/RESULTS.md) | 51 | `V0` | `C0` | `S3` | `previously-published` | A rectangle measure of wand125/square-packing, published on 16 October 2026 and reported in jlevy/squares#446, is reported to prove s(51) >= 3011/400 = 7.5275. |
-| [T-205](packing/frontier/RESULTS.md) | 68 | `V0` | `C0` | `S3` | `previously-published` | A rectangle measure of wand125/square-packing, published on 16 October 2026 and reported in jlevy/squares#446, is reported to prove s(68) >= 853/100 = 8.53. |
-| [T-206](packing/frontier/RESULTS.md) | 84 | `V0` | `C0` | `S3` | `previously-published` | A rectangle measure of wand125/square-packing, published on 16 October 2026 and reported in jlevy/squares#446, is reported to prove s(84) >= 3769/400 = 9.4225. |
-| [T-207](packing/frontier/RESULTS.md) | 85 | `V0` | `C0` | `S3` | `previously-published` | A rectangle measure of wand125/square-packing, published on 16 October 2026 and reported in jlevy/squares#446, is reported to prove s(85) >= 379/40 = 9.475. |
 | [T-208](packing/frontier/RESULTS.md) | 86 | `V0` | `C0` | `S3` | `previously-published` | A rectangle measure of wand125/square-packing, published on 16 October 2026 and reported in jlevy/squares#446, is reported to prove s(86) >= 3811/400 = 9.5275. |
 | [T-209](packing/frontier/RESULTS.md) | 88 | `V0` | `C0` | `S3` | `previously-published` | A rectangle measure of wand125/square-packing, published on 16 October 2026 and reported in jlevy/squares#446, is reported to prove s(88) >= 3853/400 = 9.6325. |
 | [T-210](packing/frontier/RESULTS.md) | 89 | `V0` | `C0` | `S3` | `previously-published` | A rectangle measure of wand125/square-packing, published on 16 October 2026 and reported in jlevy/squares#446, is reported to prove s(89) >= 1937/200 = 9.685. |
@@ -421,7 +422,7 @@ hypothesis status and summarizes experiment verdicts, and the
 | Explorations | 50 | 30 linked to proposed hypotheses; 20 uncodified |
 | Hypotheses | 283 | 74 confirmed; 48 refuted; 75 blocked; 24 unresolved; 20 open; 37 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
 | Experiments | 246 | 94 accepted; 53 rejected; 63 unresolved; 12 baseline; 18 blocked; 5 abandoned; 0 in progress; 1 exhausted |
-| Frontier results | 219 | 219 registered, 187 by others |
+| Frontier results | 220 | 220 registered, 188 by others |
 
 <!-- END CURRENT-RESEARCH-STATUS -->
 
@@ -682,6 +683,9 @@ case or experiment separately.
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
 | [Review: Evan Daniel’s Upper-Bound Imports of 16 to 18 October (#659, #664, #669, #674)](docs/project/reviews/review-2026-10-19-upper-bound-imports-659-664-669-674.md) | dated review record | record | retained | — |
+| [Completed n68 Fine-Net Certificate: Mathematical Review](docs/project/reviews/review-2026-10-19-n68-fine-net-mathematics.md) | dated review record | record | retained | — |
+| [Fine-Net Mac Arithmetic and Capture Review](docs/project/reviews/review-2026-10-19-fine-net-mac-arithmetic.md) | dated review record | record | retained | — |
+| [Completed n84 and n85 Fine-Net Certificates: Mathematical Review](docs/project/reviews/review-2026-10-19-n84-n85-fine-net-mathematics.md) | dated review record | record | retained | — |
 | [Review: Evan Daniel’s Exact Algebraic Sides at Sixteen Counts (#639, T-193)](docs/project/reviews/review-2026-10-16-evand-exact-sides-639.md) | dated review record | record | retained | — |
 | [PR #665 Integration Diagnostic and Custody Retention](docs/project/reviews/review-2026-10-19-pr665-integration-diagnostic.md) | dated review record | record | retained | — |
 | [PR #671 Integration Review Diagnostic](docs/project/reviews/review-2026-10-19-pr671-integration-diagnostic.md) | dated review record | record | retained | — |
@@ -690,6 +694,9 @@ case or experiment separately.
 | [Open Work Review — 18 October 2026](docs/project/reviews/review-2026-10-18-open-work.md) | dated review record | record | retained | — |
 | [Intake Evidence, 18 October 2026](packing/campaign/issue-intake/intake-20261018/README.md) | source retention and archive policy | record | retained | — |
 | [Incremental Intake Evidence, 19 October 2026](packing/campaign/issue-intake/intake-20261019/README.md) | source retention and archive policy | record | retained | — |
+| [Intake Continuation, 19 October 2026: n183 (#680)](packing/campaign/issue-intake/intake-followup-20261019/README.md) | source retention and archive policy | record | retained | — |
+| [Upper-Bound Reports, Count by Count, in Report Order](packing/campaign/issue-intake/intake-followup-20261019/n183-ledger/README.md) | generated status view | generated | generated | — |
+| [n183 Claim Inputs](packing/campaign/issue-intake/intake-followup-20261019/n183-ledger/lane-claims/README.md) | source retention and archive policy | record | retained | — |
 | [Upper-Bound Reports, Count by Count, in Report Order](packing/campaign/issue-intake/upper-bounds-20261018/README.md) | generated status view | generated | generated | — |
 | [Lane Records for the 18 October Ledger](packing/campaign/issue-intake/upper-bounds-20261018/lane-claims/README.md) | source retention and archive policy | record | retained | — |
 | [Mathematical Review of the n = 108 Fine-Net Certificate](docs/project/reviews/review-2026-10-18-n108-fine-net-mathematics-max.md) | dated review record | record | retained | — |
@@ -835,6 +842,7 @@ case or experiment separately.
 | [Feature: A Static, Crawlable Site with a Registered URL Scheme](docs/project/specs/done/plan-2026-10-06-site-urls-seo-performance.md) | implementation plan | record | retained | — |
 | [Feature: Compact Homepage, Consistent Case Layouts, and Scroll-Aware Navigation](docs/project/specs/active/plan-2026-10-08-site-layout-and-navigation.md) | implementation plan | current | transient | — |
 | [Feature: A Shorter Website Development Loop](docs/project/specs/active/plan-2026-10-10-website-development-loop.md) | implementation plan | current | transient | — |
+| [Feature: Recent Results on the Results Page](docs/project/specs/active/plan-2026-10-11-results-recent-overview.md) | implementation plan | current | transient | — |
 | [Feature: One Documentation Layout Under `docs/project/`](docs/project/specs/active/plan-2026-10-11-documentation-organization.md) | implementation plan | current | transient | — |
 | [Proof Review: squarepacker’s k^2 - M(k) >= 0.033 log k](docs/project/reviews/review-2026-10-05-squarepacker-k2-minus-c.md) | dated review record | record | retained | — |
 | [Delta Proof Review: Ryu’s k² − M(k) Bound, Version 1.2](docs/project/reviews/review-2026-10-08-squarepacker-k2-minus-c-v12.md) | dated review record | record | retained | — |
@@ -1179,6 +1187,7 @@ case or experiment separately.
 | [Native n17 Branch-and-Bound Benchmark](packing/benchmarks/n17-bb-native/README.md) | component scope and use | supporting | maintained | — |
 | [Milestone A Census](packing/benchmarks/measure-verifier/census/README.md) | generated status view | generated | generated | — |
 | [Milestone B Census](packing/benchmarks/measure-verifier/census-mixed/README.md) | generated status view | generated | generated | — |
+| [Accepted Mac Checkpoints: n68, n84 and n85](packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-2026-10-16/README.md) | source retention and archive policy | record | retained | — |
 | [Census Summary](packing/benchmarks/measure-verifier/census-summary.md) | generated status view | generated | generated | — |
 | [Whole `rect_n32_L595`: c2 Against verify.cpp](packing/benchmarks/measure-verifier/experiments/exp-006-whole-certificate-n32.md) | research synthesis | record | retained | — |
 | [H-005: One Error Budget per Edge](packing/benchmarks/measure-verifier/experiments/exp-007-h005-error-budget.md) | research synthesis | record | retained | — |
@@ -1517,6 +1526,7 @@ case or experiment separately.
 | [Claim-Chain Review: Evan Daniel’s `s(k² − 4) = k` for Every `k ≥ 5`](docs/project/reviews/review-2026-10-03-evand-k2m4-claim-chain.md) | dated review record | record | retained | — |
 | [Evan Daniel’s Square Packing Atlas: Site Review and Import](docs/project/reviews/review-2026-10-05-evand-square-packing-atlas.md) | dated review record | record | retained | — |
 | [Mathematics Review: The Catalogue’s September 2026 Packings at `n = 69, 83, 87` (T-088, T-089)](docs/project/reviews/review-2026-10-05-kingbird-intake-n69-n83-n87.md) | dated review record | record | retained | — |
+| [Independent Mathematical Review of Issue #680](docs/project/reviews/review-2026-10-19-evand-n183-subgrid.md) | dated review record | record | retained | — |
 | [Density Solvers Compared: Tokoharu’s and wand125’s Rectangle-Density Tools Against This Repository’s Certificate Stack](docs/project/reviews/review-2026-09-28-density-solver-comparison.md) | dated review record | record | retained | — |
 | [Proof Review: Guzhou0806’s R067 and R068, `s(17) > 233009/50000` and `s(17) > 116511/25000`](docs/project/reviews/review-2026-09-28-n17-guzhou-r067-r068.md) | dated review record | record | retained | — |
 | [Proof Review: wand125’s Point-Only Certificates for `s(45) = 7` and `s(21) = 5`](docs/project/reviews/review-2026-09-28-wand125-point-only-s21-s45.md) | dated review record | record | retained | — |

@@ -1115,3 +1115,16 @@ repositories:
       statements require separate binding checks; no new certificate in this commit
       and no build, replay or assurance promotion here. Receipt:
       packing/campaign/issue-intake/intake-20261019/fang-source-inventory.json.
+  # Continuation after #676 merged: source reads do not replay any certificate.
+  - url: https://github.com/evand/square-packing
+    read_through: 3a9948c781be668b1547cc2bf64a0d1e614f9bca
+    read_on: '2026-10-19'
+    bead: think-xp0o
+    note: >-
+      Six commits past ddf09e3. Five add numerical rational-angle, symmetry and core/slack
+      experiments, reporting no new upper-bound record; their method notes were read as source
+      reports, without reproducing the measurements. The sixth reports the n183 certificate
+      in #680, owned by think-xp0o. Its two same-side certificates, numerical KKT claims and
+      Couzo n182 donor lineage remain distinct obligations; the second crossover parent is
+      unlogged. Inventory: packing/campaign/issue-intake/intake-followup-20261019/evand-source-inventory.json.
+      Earlier deficiency and staircase imports remain with think-f8py and think-pf37.

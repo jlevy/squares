@@ -392,6 +392,7 @@ verifiers:
       the others by disjoint circumscribed discs.
     source:
       - packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/verify_cert.py
+      - packing/resources/web/evand-n183-subgrid-2026-10-19/source/search/exact/verify_cert.py
     versions:
       - {sha256: 3299ca0c0f02f7c221deeea69a9a85b5a90db6bc410b20727fdff211c92bed52}
 
@@ -409,6 +410,7 @@ verifiers:
       open box, in Fraction arithmetic.
     source:
       - packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/verify_cert2.py
+      - packing/resources/web/evand-n183-subgrid-2026-10-19/source/search/exact/verify_cert2.py
     versions:
       - {sha256: 55140a35d95d9eaa64a14c3b044641efbcda94ebfc3b12b7dec9fa52692e31d3}
 
@@ -991,6 +993,16 @@ verifiers:
       The constructions it decides for others were published as figures and
       coordinates without verification code, so it was written from the geometry.
 
+    versions:
+    - sha256: 6642aca5a6dacfb09f8bb4fb650182d744128e835ca41d50f43d8f4b849712eb
+      path: packing/src/sqpack/witness.py
+      note: The source the n183 primary batch ran, unchanged since; the retained seven-file
+        provenance identifies the historical run
+    - sha256: 56bc5b9f690b054ba30e82547dea4aa9d0ccea0a2b1827fab28fcc4e98677337
+      path: packing/src/sqpack/verify.py
+      note: The source the n183 primary batch ran, unchanged since; the retained seven-file
+        provenance identifies the historical run
+
   - id: V-check-rational-witness-independent
     program: devtools.check_rational_witness_independent
     author: Squares Project (Levy)
@@ -1002,6 +1014,12 @@ verifiers:
     source: [packing/devtools/check_rational_witness_independent.py]
     independence_record: packing/devtools/check_rational_witness_independent.py
     note: Its module statement says it shares no geometry or verification code with sqpack.witness or sqpack.verify.
+
+    versions:
+    - sha256: 89f8d8e2e071a3f7035083c9a8beb23e3bec175eb0762b2825a5b9f684c16975
+      path: packing/devtools/check_rational_witness_independent.py
+      note: The source the n183 primary batch ran, unchanged since; the retained seven-file
+        provenance identifies the historical run
 
   - id: V-check-nagamochi-lemma1-counterexample
     program: devtools.check_nagamochi_lemma1_counterexample
@@ -2364,6 +2382,12 @@ verifiers:
       writing it, to check that the conversion means what they mean, and imports or
       copies none of their code; it runs them only as separate processes.
 
+    versions:
+    - sha256: 52073811e61dba8bca0574a1e8cf99b91058fb70c17b38621baf07b5fb94cf3e
+      path: packing/devtools/evand_exact_certificates.py
+      note: The source the n183 primary batch ran, unchanged since; the retained seven-file
+        provenance identifies the historical run
+
   - id: V-check-n11-final-composition
     program: devtools.check_n11_final_composition
     author: Squares Project (Levy)
@@ -2813,6 +2837,12 @@ verifiers:
     source:
     - packing/devtools/evand_arrangement_reports.py
 
+    versions:
+    - sha256: 8e2141bfa0b233173e442517035783f6598610398fe9896e9a9977d7383dcc17
+      path: packing/devtools/evand_arrangement_reports.py
+      note: The source the n183 primary batch ran, unchanged since; the retained seven-file
+        provenance identifies the historical run
+
   - id: V-algebraic-witness-reports
     program: devtools.algebraic_witness_reports
     author: Squares Project (Levy)
@@ -2888,6 +2918,16 @@ verifiers:
       full. The import lane of issue 552 added a HOUSES reader of its packet, which the
       12 October review of that issue
       (docs/project/reviews/review-2026-10-12-upper-bound-import-552.md) read.
+
+    versions:
+    - sha256: bc47273499dccbd59997bbdd4028176eb09621865b25854f511f9cf872ce1156
+      path: packing/devtools/upper_bound_reports.py
+      note: The source the n183 primary batch ran, as the retained seven-file provenance
+        records it
+    - sha256: e8bb87fa8acb5470bee92d9f77cb158a11bd780d6e5f8c38a12bf77870573a08
+      path: packing/devtools/upper_bound_reports.py
+      note: The current driver, which adds only the n183 packet to HOUSES, the reader that
+        receipt admission and house selection use; it decided no n183 geometry
 
   - id: V-rehwaldt-n68-verify
     program: verify.py
@@ -4058,6 +4098,88 @@ verifiers:
       native control poses and one of 32 source control poses, not five entire
       direction domains. The accepted bounded review is docs/project/reviews/review-2026-10-18-n108-fine-net-mathematics-max.md.
 
+  - id: V-fine-net-mac-review-exact
+    program: Historical fine-net Mac exact-checkpoint audits and analytical geometry controls
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: premises
+    summary: >-
+      Recomputes exact rectangle-measure premises and saved native positive/refusal witness
+      captures for the accepted n68,n84,n85 checkpoints; validates receipt inventories and
+      execution/timing bindings. Analytical geometry fixtures and negative in-memory receipt
+      mutations constrain the auditor. It decides no universal coverage or lower bound
+      alone.
+    source:
+      - >-
+        packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/n68-certificate-math/audit_checkpoint.py.txt
+      - >-
+        packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/n68-certificate-math/exact_geometry.py.txt
+      - >-
+        packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/n68-certificate-math/check_geometry.py.txt
+      - >-
+        packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/n84-n85-certificate-math/audit_checkpoint.py.txt
+    versions:
+      - sha256: e5ce398a0ff0a53ac745763bd37542d03fe0657e2d3197ac00291cc9ab9fa51f
+        path: >-
+          packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/n68-certificate-math/audit_checkpoint.py.txt
+        note: >-
+          Verbatim historical source actually executed by the accepted mathematical reviews;
+          preserved as text, not changed to fit the current source tree.
+      - sha256: 820a8d4f127432f66dfffca0f910dc74125905365bd4fd3c2a0baaa76d264b59
+        path: >-
+          packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/n68-certificate-math/exact_geometry.py.txt
+        note: >-
+          Verbatim historical source actually executed by the accepted mathematical reviews;
+          preserved as text, not changed to fit the current source tree.
+      - sha256: 341c67802544d5ac5f6c132e7664da465660c736e9ca516ca1fa222e3c8f4718
+        path: >-
+          packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/n68-certificate-math/check_geometry.py.txt
+        note: >-
+          Verbatim historical source actually executed by the accepted mathematical reviews;
+          preserved as text, not changed to fit the current source tree.
+      - sha256: 05a48f157987a92b1a021e56156c594c4b9ae993b82ec6ed4121c17b39e699b9
+        path: >-
+          packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/n84-n85-certificate-math/audit_checkpoint.py.txt
+        note: >-
+          Verbatim historical source actually executed by the accepted mathematical reviews;
+          preserved as text, not changed to fit the current source tree.
+    independence_record: >-
+      packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/README.md
+    independence:
+      read:
+        - mathematics
+        - proof-text
+        - specification
+        - certificate-format
+        - producer-code
+        - producer-output
+        - earlier-review
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Codex (OpenAI)
+          setting: >-
+            Separately prompted strongest-tier certificate mathematics lanes at maximum
+            reasoning; n84/n85 reuse the retained n68 helper and geometry source.
+      overlaps_producer:
+        extent: unknown
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The producer discloses AI assistance without identifying every authoring system.
+          These point-audit programs share no producer code, but their authors read
+          maintained code and earlier reviews. The two-case driver reuses the n68
+          helper/import closure; this is explicit reuse within the registered audit, not
+          another universal implementation.
+    note: >-
+      The original import closure, read logs, historical commands, failed diagnostic and
+      authentic PASS receipts are retained in review-mac/README.md. No audit was rerun
+      during records preparation; historical source-context comparisons are recorded
+      observations, not gates on current Git/source identity.
+
   - id: V-sq19-review-endpoint
     program: check_endpoint.py
     author: Squares Project (Levy)
@@ -4351,3 +4473,30 @@ verifiers:
       Written and run on 16 October 2026 by the review of the Lean proof over the five
       archive scans; kept in the packet's review/ with its README, which records what it
       printed.
+
+  - id: V-acquire-source
+    program: devtools.acquire_source
+    author: Squares Project (Levy)
+    provenance: first-party
+    language:
+    - Python
+    methods:
+    - exact-algebraic
+    role: premises
+    summary: Admits retained source custody, declared members and manifest bytes; decides no
+      packing geometry.
+    source:
+    - packing/devtools/acquire_source.py
+    - packing/resources/web/evand-n183-subgrid-2026-10-19/receipts/programs/acquire-source-replay-2026-10-19.py.txt
+    versions:
+    - sha256: f2badc973c8aa3c1bc90e4ebf89836ba7c0fa74fa7527e7be7dc205d48d701e4
+      path: packing/resources/web/evand-n183-subgrid-2026-10-19/receipts/programs/acquire-source-replay-2026-10-19.py.txt
+      note: Historical source actually used by the completed n183 primary batch; retained verbatim
+        from the run revision, never executed from this archive.
+    - sha256: a53cf8375a9122d3daa18f1997faa2281a8821ba2612a40d7b512d2f1861727f
+      path: packing/devtools/acquire_source.py
+      note: 'Inherited frozen #671 source for current admission-only checks; not relabeled as
+        the historical certify source.'
+    note: The upper-bound driver calls this custody premise before parsing. Historical command/environment
+      and actual source hash are retained in the n183 packet; no upstream or archived code is
+      executed by this registration.

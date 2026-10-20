@@ -13,7 +13,7 @@ import subprocess
 import sys
 import tempfile
 import time
-from collections.abc import Callable
+from collections.abc import Callable, Iterator
 from datetime import datetime, timedelta
 from pathlib import Path
 from types import ModuleType
@@ -21,6 +21,7 @@ from typing import Any
 
 import pytest
 
+from devtools import pytest_tmp
 from devtools import run_negative_controls as controls
 from devtools.check_readme import NO_INDEX
 from devtools.repo_scope import tracked_files
@@ -86,24 +87,30 @@ def index_fixture_source(repository: Path) -> None:
 
 
 @pytest.fixture(scope="module")
-def control_snapshot(tmp_path_factory: pytest.TempPathFactory) -> tuple[Path, set[Path]]:
-    """Reuse one real worker snapshot; each mutation restores its target in `finally`."""
-    tree = tmp_path_factory.mktemp("control-snapshot") / "snapshot"
-    retained: list[Path] = []
-    select = controls.snapshot_pruned_targets
+def control_snapshot(
+    request: pytest.FixtureRequest, tmp_path_factory: pytest.TempPathFactory
+) -> Iterator[tuple[Path, set[Path]]]:
+    """Reuse one real worker snapshot; each mutation restores its target in `finally`.
 
-    def capture_targets() -> list[Path]:
-        targets = select()
-        retained.extend(targets)
-        return targets
+    The snapshot and its index are about 345 MiB, given back when the module ends.
+    """
+    with pytest_tmp.scoped_tmp_path(request, tmp_path_factory, "control-snapshot") as root:
+        tree = root / "snapshot"
+        retained: list[Path] = []
+        select = controls.snapshot_pruned_targets
 
-    # Keep the copier's actual selection for the workflow assertion instead of walking
-    # and parsing every campaign document and results record a second time in the test.
-    with pytest.MonkeyPatch.context() as patch:
-        patch.setattr(controls, "snapshot_pruned_targets", capture_targets)
-        clone_tree(tree)
-    copied_targets = {path.relative_to(controls.REPO) for path in retained}
-    return tree, copied_targets
+        def capture_targets() -> list[Path]:
+            targets = select()
+            retained.extend(targets)
+            return targets
+
+        # Keep the copier's actual selection for the workflow assertion instead of walking
+        # and parsing every campaign document and results record a second time in the test.
+        with pytest.MonkeyPatch.context() as patch:
+            patch.setattr(controls, "snapshot_pruned_targets", capture_targets)
+            clone_tree(tree)
+        copied_targets = {path.relative_to(controls.REPO) for path in retained}
+        yield tree, copied_targets
 
 
 def test_historical_validation_prunes_preserve_replay_inputs(
@@ -263,7 +270,7 @@ def test_historical_site_snapshot_outputs_leave_workers_after_dependency_rescue(
         "devtools/regularize_axis_components.py",
     ):
         assert (tree / HERE / relative).read_bytes() == (ROOT / relative).read_bytes()
-    assert SNAPSHOT_MAX_BYTES == 219 * 1024 * 1024
+    assert SNAPSHOT_MAX_BYTES == 222 * 1024 * 1024
     assert snapshot_source_bytes() < SNAPSHOT_MAX_BYTES
 
 
@@ -510,7 +517,7 @@ def test_the_snapshot_byte_report_enforces_the_exact_capacity_boundary(
     assert controls.main(["--source-bytes"]) == int(offset > 0)
     report = json.loads(capsys.readouterr().out)
     assert report["source_bytes"] == measured
-    assert report["cap_bytes"] == 219 * 1024 * 1024
+    assert report["cap_bytes"] == 222 * 1024 * 1024
     assert report["headroom_bytes"] == -offset
 
 

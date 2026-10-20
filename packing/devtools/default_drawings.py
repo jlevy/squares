@@ -824,6 +824,10 @@ SETTLED: dict[int, Settled] = {
         "selection sends each to the owner's review at row 7 and the axis tool's view stays "
         "drawn until a review record admits one",
         _README_IP1P,
+        # Review A2 of #692: the decision is the owner's, so the bead that records it stays
+        # open while this names it (`deferrals`).
+        "think-cyeo: the owner's row-7 review of grid-slack's views, admitted or declined "
+        "in a review record",
     ),
     237: Settled(
         DECIDED,

@@ -10,6 +10,9 @@ scope: >
   current project documentation rules.
 documents:
   - {path: docs/project/reviews/review-2026-10-19-upper-bound-imports-659-664-669-674.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-19-n68-fine-net-mathematics.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-19-fine-net-mac-arithmetic.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-19-n84-n85-fine-net-mathematics.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-16-evand-exact-sides-639.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-19-pr665-integration-diagnostic.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-19-pr671-integration-diagnostic.md, role: review, authority: record, lifecycle: retained}
@@ -18,6 +21,9 @@ documents:
   - {path: docs/project/reviews/review-2026-10-18-open-work.md, role: review, authority: record, lifecycle: retained}
   - {path: packing/campaign/issue-intake/intake-20261018/README.md, role: source-index, authority: record, lifecycle: retained}
   - {path: packing/campaign/issue-intake/intake-20261019/README.md, role: source-index, authority: record, lifecycle: retained}
+  - {path: packing/campaign/issue-intake/intake-followup-20261019/README.md, role: source-index, authority: record, lifecycle: retained}
+  - {path: packing/campaign/issue-intake/intake-followup-20261019/n183-ledger/README.md, role: generated-view, authority: generated, lifecycle: generated}
+  - {path: packing/campaign/issue-intake/intake-followup-20261019/n183-ledger/lane-claims/README.md, role: source-index, authority: record, lifecycle: retained}
   - {path: packing/campaign/issue-intake/upper-bounds-20261018/README.md, role: generated-view, authority: generated, lifecycle: generated}
   - {path: packing/campaign/issue-intake/upper-bounds-20261018/lane-claims/README.md, role: source-index, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-18-n108-fine-net-mathematics-max.md, role: review, authority: record, lifecycle: retained}
@@ -163,6 +169,7 @@ documents:
   - {path: docs/project/specs/done/plan-2026-10-06-site-urls-seo-performance.md, role: plan, authority: record, lifecycle: retained}
   - {path: docs/project/specs/active/plan-2026-10-08-site-layout-and-navigation.md, role: plan, authority: current, lifecycle: transient}
   - {path: docs/project/specs/active/plan-2026-10-10-website-development-loop.md, role: plan, authority: current, lifecycle: transient}
+  - {path: docs/project/specs/active/plan-2026-10-11-results-recent-overview.md, role: plan, authority: current, lifecycle: transient}
   - {path: docs/project/specs/active/plan-2026-10-11-documentation-organization.md, role: plan, authority: current, lifecycle: transient}
   - {path: docs/project/reviews/review-2026-10-05-squarepacker-k2-minus-c.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-08-squarepacker-k2-minus-c-v12.md, role: review, authority: record, lifecycle: retained}
@@ -507,6 +514,7 @@ documents:
   - {path: packing/benchmarks/n17-bb-native/README.md, role: component-guide, authority: supporting, lifecycle: maintained}
   - {path: packing/benchmarks/measure-verifier/census/README.md, role: generated-view, authority: generated, lifecycle: generated}
   - {path: packing/benchmarks/measure-verifier/census-mixed/README.md, role: generated-view, authority: generated, lifecycle: generated}
+  - {path: packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-2026-10-16/README.md, role: source-index, authority: record, lifecycle: retained}
   - {path: packing/benchmarks/measure-verifier/census-summary.md, role: generated-view, authority: generated, lifecycle: generated}
   - {path: packing/benchmarks/measure-verifier/experiments/exp-006-whole-certificate-n32.md, role: research-report, authority: record, lifecycle: retained}
   - {path: packing/benchmarks/measure-verifier/experiments/exp-007-h005-error-budget.md, role: research-report, authority: record, lifecycle: retained}
@@ -1091,6 +1099,7 @@ documents:
   - {path: docs/project/reviews/review-2026-10-03-evand-k2m4-claim-chain.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-05-evand-square-packing-atlas.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-05-kingbird-intake-n69-n83-n87.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-19-evand-n183-subgrid.md, role: review, authority: record, lifecycle: retained}
   - path: docs/project/reviews/review-2026-09-28-density-solver-comparison.md
     role: review
     authority: record

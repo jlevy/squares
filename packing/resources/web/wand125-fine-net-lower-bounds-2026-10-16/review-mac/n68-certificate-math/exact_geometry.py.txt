@@ -1,0 +1,190 @@
+"""Reviewer's exact rectangle-measure calculations; standard library only.
+
+This reviewer read the maintained auditor and soundness exposition before writing this
+module. Geometry here starts with a rotated square and clips it against axis-aligned
+rectangles, the reverse of the maintained auditor. This is not a clean-room claim.
+"""
+from dataclasses import dataclass
+from fractions import Fraction as F
+import json
+import time
+
+
+class AuditError(ValueError):
+    pass
+
+
+def require(condition, message):
+    if not condition:
+        raise AuditError(message)
+
+
+def read_json(data):
+    def unique(pairs):
+        result = {}
+        for key, value in pairs:
+            require(key not in result, f'duplicate JSON key {key}')
+            result[key] = value
+        return result
+    def invalid(value):
+        raise AuditError(f'nonfinite JSON token {value}')
+    return json.loads(data, object_pairs_hook=unique, parse_constant=invalid)
+
+
+@dataclass
+class Measure:
+    n: int
+    side: F
+    core: F
+    step: F
+    count: int
+    mass: F
+    source_count: int
+    rectangles: dict
+
+    @property
+    def last_tangent(self):
+        return self.step * (self.count - 1)
+
+
+def rho(t):
+    return (1 + 2*t - t*t) / (2*(1+t*t))
+
+
+def candidate_measure(raw, n, side):
+    require(set(raw) == {'n','L','B','proof_net','total_mass','points','rectangles'}, 'candidate shape')
+    require(type(raw['n']) is int and raw['n'] == n and n > 0 and F(raw['L']) == side > 0, 'candidate case')
+    require(raw['points'] == [], 'candidate has points')
+    net = raw['proof_net']
+    require(set(net) == {'step','last'} and type(net['last']) is int, 'net shape')
+    core, step, count = F(raw['B']), F(net['step']), net['last'] + 1
+    end = step*(count-1)
+    require(0 < core < 1 and step > 0 and 2 <= count <= 2**16, 'net range')
+    require(end <= F(1,2) and end*end+2*end-1 > 0, 'net endpoint')
+    low = end-step/2
+    require(low*low+2*low-1 < 0, 'last bin misses folded range')
+    require(core*(1+step) < 1 and core*(1+step/(1-step*step/4)) < 1, 'strict core containment')
+    require(side <= 1000 and side*side >= 2*core*core and side > 2*rho(low), 'container premise')
+    require(len(raw['rectangles']) <= 10**6, 'too many source rows')
+    rectangles = {}
+    mass = F(0)
+    for row in raw['rectangles']:
+        require(set(row) == {'rectangle','mass'}, 'source row shape')
+        x0,y0,x1,y1 = map(F,row['rectangle'])
+        weight = F(row['mass'])
+        require(weight >= 0, 'negative mass')
+        mass += weight
+        if not weight:
+            continue
+        require(0 <= x0 < x1 <= side and 0 <= y0 < y1 <= side, 'source rectangle domain')
+        density = weight / (8*(x1-x0)*(y1-y0))
+        require(64*density <= 2**32, 'source density cap')
+        images = ((x0,x1,y0,y1), (side-x1,side-x0,y0,y1),
+                  (x0,x1,side-y1,side-y0), (side-x1,side-x0,side-y1,side-y0),
+                  (y0,y1,x0,x1), (side-y1,side-y0,x0,x1),
+                  (y0,y1,side-x1,side-x0), (side-y1,side-y0,side-x1,side-x0))
+        for image in images:
+            rectangles[image] = rectangles.get(image,F(0)) + density
+    require(0 < mass < n and mass == F(raw['total_mass']), 'total mass')
+    require(all(v <= 2**96 for v in rectangles.values()), 'expanded density cap')
+    integral = sum(((x1-x0)*(y1-y0)*d for (x0,x1,y0,y1),d in rectangles.items()),F(0))
+    require(integral == mass, 'expanded total mass')
+    return Measure(n,side,core,step,count,mass,len(raw['rectangles']),rectangles)
+
+
+def in_domain(measure, pose, index):
+    if type(index) is not int or not 0 <= index < measure.count or len(pose) != 2:
+        return False
+    upper = measure.side-rho(max(F(0),index*measure.step-measure.step/2))
+    return all(measure.side/2 <= F(v) <= upper for v in pose)
+
+
+def clipped(poly, axis, boundary, greater):
+    result = []
+    if not poly:
+        return result
+    for p,q in zip(poly,poly[1:]+poly[:1]):
+        p_in = p[axis] >= boundary if greater else p[axis] <= boundary
+        q_in = q[axis] >= boundary if greater else q[axis] <= boundary
+        if p_in:
+            result.append(p)
+        if p_in != q_in:
+            ratio = (boundary-p[axis])/(q[axis]-p[axis])
+            result.append((p[0]+ratio*(q[0]-p[0]),p[1]+ratio*(q[1]-p[1])))
+    return result
+
+
+def check_deadline(deadline):
+    require(time.monotonic() <= deadline, 'exact audit wall budget exceeded')
+
+
+def capture_at(measure, pose, index, deadline=float('inf')):
+    cx,cy = map(F,pose)
+    t = index*measure.step
+    cosine,sine = (1-t*t)/(1+t*t),2*t/(1+t*t)
+    h = measure.core/2
+    square = [(cx+cosine*x-sine*y, cy+sine*x+cosine*y)
+              for x,y in ((-h,-h),(h,-h),(h,h),(-h,h))]
+    left,right = min(p[0] for p in square),max(p[0] for p in square)
+    bottom,top = min(p[1] for p in square),max(p[1] for p in square)
+    total = F(0)
+    for (x0,x1,y0,y1),density in measure.rectangles.items():
+        check_deadline(deadline)
+        if x0 >= right or x1 <= left or y0 >= top or y1 <= bottom:
+            continue
+        polygon = square
+        for axis,boundary,greater in ((0,x0,True),(0,x1,False),(1,y0,True),(1,y1,False)):
+            polygon = clipped(polygon,axis,boundary,greater)
+        twice_area = abs(sum((p[0]*q[1]-p[1]*q[0]
+                            for p,q in zip(polygon,polygon[1:]+polygon[:1])),F(0)))
+        total += density*twice_area/2
+    return total
+
+
+def check_direction_log(rows,count):
+    require(len(rows) == count+1, 'capture row count')
+    indices = [r['r'] for r in rows[:-1]]
+    require(all(type(i) is int for i in indices) and sorted(indices) == list(range(count)), 'capture indices')
+    for row in rows[:-1]:
+        require(row['verdict'] == 'verified' and F(row['threshold']) == 1
+                and F(row['min_certified_lower_bound']) >= 1, 'capture direction verdict')
+    summary = rows[-1]
+    require(summary['directions'] == count and summary['status'] == 'VERIFIED'
+            and summary['refused_directions'] == [] and summary['fault_injected_at_box'] is None, 'capture summary')
+    return summary
+
+
+def check_bindings(measure,summary,entry,control,*,candidate_sha):
+    require(candidate_sha == entry['candidate_sha256'] == control['candidate_sha256']
+            == summary['premises']['input_sha256'], 'candidate digest binding')
+    require(entry['status'] == 'VERIFIED' and entry['returncode'] == 0
+            and entry['directions_verified'] == measure.count and entry['refused_directions'] == [], 'census completion')
+    require(entry['premises'] == summary['premises'] and F(entry['threshold']) == F(summary['threshold']) == 1, 'census summary binding')
+    p = summary['premises']
+    exact = {'B':measure.core,'D':measure.step,'L':measure.side,'mass_exact':measure.mass,
+             'mass_below_n':measure.n-measure.mass,'net_last_tangent':measure.last_tangent,
+             'shrink_bound':measure.core*(1+measure.step)}
+    require(all(F(p[key]) == value for key,value in exact.items()), 'exact premises')
+    fields = {'format':'M','centre_domain':'per-bin','net_origin':'proof_net',
+              'expanded_points':0,'expanded_segments':0,'expanded_rectangles':len(measure.rectangles),
+              'n':measure.n,'angle_count':measure.count,'source_rectangles':measure.source_count}
+    require(all(p[key] == value for key,value in fields.items()), 'structural premises')
+    require(summary['build'] == entry['build'] == control['build'], 'build binding')
+    require(control['n'] == measure.n and F(control['L']) == measure.side, 'control claim')
+
+
+def check_refusal(measure,row,factor,deadline):
+    require(in_domain(measure,row['pose'],row['r']), 'refusal outside quadrant domain')
+    require(all(row[key] is True for key in ('coverage_refusal','in_domain','capture_below_1',
+                                           'captures_agree','original_at_least_1')), 'refusal flags')
+    exact = capture_at(measure,row['pose'],row['r'],deadline)
+    require(exact >= 1 and factor*exact < 1 and factor*exact == F(row['capture']), 'refusal exact capture')
+    if row['r'] == 0:
+        require(row['verdict'] == 'refused' and row['method'] == 'axis-vertex-sweep', 'axis refusal')
+        lower = F(row['crate_lower_bound'])
+        require(lower <= factor*exact <= lower+F(1,10**9), 'axis bound slack')
+    else:
+        require(row['verdict'] == 'counterexample-candidate'
+                and row['method'] == 'interval-branch-and-bound'
+                and row['crate_exact_below_threshold'] is True, 'rotated refusal')
+    return exact

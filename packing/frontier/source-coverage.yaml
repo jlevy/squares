@@ -6240,6 +6240,35 @@ sources:
     3 native jobs have full outcomes. No selected override or superseded claim is created at this source-only
     stage; current cases and earlier source ownership remain unchanged.
 
+- id: evand-n183-subgrid-2026-10-19
+  title: Daniel's n183 sub-grid certificate, issue 680
+  role: source-repository
+  url: https://github.com/evand/square-packing/tree/3a9948c781be668b1547cc2bf64a0d1e614f9bca/search/packer/candidates
+  local: resources/web/evand-n183-subgrid-2026-10-19/
+  source_key: '[Daniel n183 subgrid 2026-10-19]'
+  scope:
+    n_values:
+    - 183
+  reviewed: '2026-10-19'
+  source_date: '2026-10-19'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/evand-n183-subgrid-2026-10-19/README.md
+  - campaign/issue-intake/intake-followup-20261019/README.md
+  evidence:
+  - E-evand-680-n183-report
+  - E-evand-680-n183-primary-exact-feasibility
+  notes: 'Original and regularized views report one exact n183 upper bound, 13.999580178736252502081470897571,
+    safely printed 13.999580178737. Original finite feasibility is independently re-verified
+    by the project''s two maintained implementations, full 183-row/all-wall/16653-pair coverage
+    per job with both geometric controls refused, and accepted separately prompted mathematical
+    review. No upstream program ran; regularized endpoint remains unexecuted, without identity/path
+    confirmation. Registered as T-220.
+    Daniel after Couzo n182 credit, unlogged crossover mates and numerical-only subsystem
+    modes remain explicit. Adopted on 2026-10-19 (think-jh4w): both case upper lanes and the
+    house witness name the original certificate, which the selected override records; the
+    trivial grid at 14 is retained as history.'
 - id: wand125-fine-net-n38-65775-2026-10-16
   title: Wand125 reported n38 fine-net lower bound (#446)
   role: source-repository
@@ -6847,6 +6876,12 @@ selected_overrides:
   evidence: E-pingyou-574-certificate-report
   reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
     here and an accepted review, adopted on 2026-10-17 (T-174).
+- n: 183
+  source_id: evand-n183-subgrid-2026-10-19
+  value: '13.9995801787362526'
+  evidence: E-evand-680-n183-report
+  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
+    here and an accepted review, adopted on 2026-10-19 (T-220).
 - n: 199
   source_id: gupta-square-packing-refinements-2026-10-08
   value: '14.6175721735928069'

@@ -72,6 +72,52 @@ def test_every_smaller_validated_packing_is_the_house_or_staged(
     )
 
 
+def test_n183_original_certificate_is_read_exactly_and_adopted_with_its_runs(
+    latest: dict[int, str],
+) -> None:
+    """The adoption of 19 October 2026 (think-jh4w) moved 183 from the trivial grid to
+    Evan Daniel's original certificate (T-220), took it off the staging list, and ran
+    both strong generators on its witness in the same pull request, deferring nothing."""
+    entry = next(row for row in select.load_results() if row["id"] == "T-220")
+    unread: list[str] = []
+    selected = select.select([entry], select.load_evidence(), unread=unread)
+    assert unread == []
+    assert set(selected) == {183}
+    selection = selected[183]
+    side = Fraction(13999580178736252502081470897571, 10**30)
+    assert selection.house is None
+    assert selection.case.verified == side < 14
+    assert [c.result for c in selection.candidates] == ["T-220"]
+    assert houses.ADOPTED[183] == "T-220"
+    assert houses.adopted_on(183) == "2026-10-19"
+    assert houses.side(183) == side
+    assert 183 not in select.PENDING_ADOPTION
+    assert 183 not in defaults.PENDING_ALLOWED
+    assert adopt.plan(selected) == []
+    # The record the adoption read is the grid's, and replaying the writer from it
+    # plans exactly this house.
+    before = _front(latest[183])
+    assert before["reported_upper_bound"]["exact_form"] == "14"
+    assert before["verified_upper_bound"]["exact_form"] == "14"
+    replayed = select.select(
+        [entry],
+        select.load_evidence(),
+        cases={183: select.parse_case(183, latest[183])},
+        recorded={183: "2026-10-19"},
+    )
+    house = replayed[183].house
+    assert house is not None
+    assert house.result == "T-220"
+    assert house.side == side
+    assert house.report_evidence == ("E-evand-680-n183-report",)
+    assert house.confirming_evidence == ("E-evand-680-n183-primary-exact-feasibility",)
+    # The credit stays Evan Daniel's, after Francisco Couzo's n = 182 packing.
+    packing = _front(select.case_path(183).read_text(encoding="utf-8"))
+    assert packing["reported_upper_bound"]["found_by"] == ["Evan Daniel"]
+    assert packing["reported_upper_bound"]["improved_by"] == []
+    assert packing["conjectured_optimum"] is None
+
+
 def test_every_adopted_case_holds_the_house_its_record_was_written_for(
     selections: dict[int, select.Selection], recorded: dict[int, select.Selection]
 ) -> None:
@@ -1275,11 +1321,13 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
     assert len(historical["houses"]) == 65
     assert "29" not in historical["houses"]
     # The houses as the 17 October passes left them: the adoption of 19 October 2026 moved
-    # 155, 236 and 271 to Evan Daniel's certificates and first adopted 229, after this
-    # receipt was retained.
-    nineteenth = {155: "T-197", 229: "T-199", 236: "T-218", 271: "T-219"}
+    # 155, 236 and 271 to Evan Daniel's certificates and first adopted 229 and 183 (T-220,
+    # think-jh4w), after this receipt was retained.
+    nineteenth = {155: "T-197", 183: "T-220", 229: "T-199", 236: "T-218", 271: "T-219"}
     before = {**houses.ADOPTED, 155: "T-174", 236: "T-146", 271: "T-186"}
     del before[229]
+    del before[183]
+    assert "183" not in historical["houses"]
     assert {n: houses.ADOPTED[n] for n in nineteenth} == nineteenth
     assert historical["houses"] == {str(n): result for n, result in before.items() if n != 29}
     assert {int(n) for n, result in historical["houses"].items() if result == "T-174"} == (
@@ -1602,6 +1650,87 @@ def _n108_later_lower_projection(held: dict[str, Any], wrote: dict[str, Any], bo
     return _flat(body)
 
 
+#: The fine-net lower validations of 19 October 2026 at two T-174 houses: each count's
+#: result, candidate, lower bound, its review, the bound it replaced, and the one phrase
+#: of the earlier house paragraph the validation moved into the past tense.
+FINE_NET_LOWER_19_OCTOBER: dict[int, tuple[str, str, str, str, str, str, str]] = {
+    68: (
+        "T-205",
+        "mixed_n68_L853",
+        "853/100",
+        "8.53",
+        "n68-fine-net-mathematics",
+        "851/100",
+        "the strongest verified lower bound",
+    ),
+    84: (
+        "T-206",
+        "mixed_n84_L94225",
+        "3769/400",
+        "9.4225",
+        "n84-n85-fine-net-mathematics",
+        "9411/1000",
+        "and the verified lower bound",
+    ),
+}
+
+
+def _fine_net_lower_projection(
+    n: int, held: dict[str, Any], wrote: dict[str, Any], body: str
+) -> str:
+    """Check a 19 October fine-net lower validation, then compare the house layer below it.
+
+    T-205 and T-206 raised both lower lanes at 68 and 84 after the T-174 adoption of 17
+    October wrote those records, as n108's fine-net bound did on 18 October; the writer
+    owns neither lane, so the validation is checked exactly and projected out.
+    """
+    result, candidate, exact, value, review, earlier, phrase = FINE_NET_LOWER_19_OCTOBER[n]
+    tag = candidate.removeprefix("mixed_").replace("_L", "-").lower()
+    assert held["source_reviewed"] == "2026-10-19"
+    assert held["reported_lower_bound"]["exact_form"] == exact
+    assert held["verified_lower_bound"] == {
+        "value": value,
+        "exact_form": exact,
+        "evidence": [f"E-wand125-fine-net-{tag}-sqverify-fast-replay"],
+    }
+    assert held["evidence"] == [
+        f"E-wand125-fine-net-{tag}-report",
+        f"E-wand125-fine-net-{tag}-sqverify-fast-replay",
+        f"E-n{n:03d}-fine-net-review-premises",
+        f"E-n{n:03d}-fine-net-review-captures",
+        *wrote["evidence"],
+    ]
+    assert held["resources"] == [
+        {
+            "key": "[wand125 fine-net lower bounds 2026-10-16]",
+            "role": "lower-bound-proof",
+            "local": "web/wand125-fine-net-lower-bounds-2026-10-16",
+            "url": "https://github.com/wand125/square-packing",
+            "retrieved": True,
+        },
+        *wrote["resources"],
+    ]
+    for key in ("source_reviewed", "evidence", "resources"):
+        held[key] = wrote[key]
+    intro = (
+        f"**Fine-net validation, 19 October 2026 ({result}).** The retained candidate "
+        f"`{candidate}` raises both lower lanes from ${earlier}$ to ${exact}$. The complete "
+        "201-direction maintained native replay and [mathematical "
+        f"review](../../docs/project/reviews/review-2026-10-19-{review}.md) confirm it by a "
+        "re-implementation sharing components with the producer’s checker, wand125’s "
+        "adaptation of this repository’s `sqverify_fast` crate, apart from the declared-net "
+        "readers. The exact audits check premises and saved poses only. The original 18 source "
+        "reports and historical native receipts remain retained."
+    )
+    words = _flat(intro)
+    assert body.count(words) == 1, f"n={n}: fine-net introduction"
+    body = body.replace(words, "", 1)
+    # The one historical adjustment that accompanies each validation.
+    current, prior = f"{phrase} then was", f"{phrase} is"
+    assert body.count(current) == 1, f"n={n}: {current}"
+    return _flat(body.replace(current, prior, 1))
+
+
 def test_the_writer_rebuilds_every_adopted_record_from_its_prior_state(
     replayed: list[adopt.Move],
 ) -> None:
@@ -1614,8 +1743,9 @@ def test_the_writer_rebuilds_every_adopted_record_from_its_prior_state(
     record the earlier pass left (`adopt_houses.before_last_pass`). A writer that ran
     after the adoption is replayed after it: `apply_closed_form`, of 14 October 2026,
     raises the reported lower lane, adds its evidence, resource and paragraph, and moves
-    `source_reviewed` no earlier. The later n108 fine-net lower adoption is checked
-    explicitly and projected out before this historical upper-layer comparison.
+    `source_reviewed` no earlier. The later fine-net lower adoptions, n108's of 18 October
+    and n68's and n84's of 19 October, are checked explicitly and projected out before
+    this historical upper-layer comparison.
     """
     assert [move.n for move in replayed] == sorted(houses.ADOPTED)
     for move in replayed:
@@ -1629,6 +1759,8 @@ def test_the_writer_rebuilds_every_adopted_record_from_its_prior_state(
         historical_body = _body(committed)
         if move.n == 108:
             historical_body = _n108_later_lower_projection(held, wrote, historical_body)
+        elif move.n in FINE_NET_LOWER_19_OCTOBER:
+            historical_body = _fine_net_lower_projection(move.n, held, wrote, historical_body)
         for key in OWNED:
             assert held.get(key) == wrote.get(key), f"n={move.n}: packing.{key}"
         body = _flat(committed.split("---\n", 2)[2])
@@ -1888,6 +2020,71 @@ def test_a_full_refresh_refuses_a_later_lower_layer_before_writing_any_record(
     monkeypatch.setattr(select, "case_path", lambda n: tmp_path / f"n-{n:03d}.md")
     assert adopt.main(["--refresh"]) == 1
     assert {path: path.read_bytes() for path in originals} == originals
+
+
+def test_a_refresh_limited_to_named_counts_leaves_the_others_unread(
+    replayed: list[adopt.Move], tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """`--refresh --n` writes the named records and does not replay n108's later layer,
+    which the full refresh refuses (review A1 of #692)."""
+    moves = [move for move in replayed if move.n in (29, 108)]
+    marker = f"**House adoption, {adopt.day_words(29)}.**"
+    paths = {}
+    for move in moves:
+        text = select.case_path(move.n).read_text(encoding="utf-8")
+        if move.n == 29:
+            before, after = text.split(marker, 1)
+            text = before + marker + " Stale opening.\n\n" + after.split("\n\n", 1)[1]
+        paths[move.n] = tmp_path / f"n-{move.n:03d}.md"
+        paths[move.n].write_text(text)
+    untouched = paths[108].read_bytes()
+    monkeypatch.setattr(adopt, "replay_plan", lambda: moves)
+    monkeypatch.setattr(adopt, "held_counts", lambda: [108])
+    monkeypatch.setattr(select, "case_path", lambda n: tmp_path / f"n-{n:03d}.md")
+    assert adopt.main(["--refresh", "--n", "29"]) == 0
+    assert "Stale opening." not in paths[29].read_text()
+    assert _flat(adopt.opening(moves[0])) in _flat(paths[29].read_text())
+    assert paths[108].read_bytes() == untouched
+    with pytest.raises(SystemExit):
+        adopt.main(["--check", "--n", "29"])
+
+
+def test_an_adoption_marks_a_registration_pending_adoption_as_history() -> None:
+    """The intake of 18 October 2026 wrote a fixed-form "pending adoption" paragraph for
+    each report it registered at V0/C0; the adoption that moves the house marks it, and a
+    sentence after it naming a report pending adoption, as history (review A1 of #692).
+    155 is marked by hand (`HAND_MARKED`); 229 is the writer's, and so are 227 and 260,
+    whose de Winter reports are still pending."""
+    stale = (
+        "Reported certificate pending adoption",
+        "This V0/C0 registration leaves both case upper lanes",
+        "Rigidity and arrangement notes below describe that retained house.",
+    )
+    history = (
+        "Its V0/C0 registration left both case upper lanes, the house witness and its "
+        "drawing unchanged until the house adoption of 19 October 2026, and until then the "
+        "rigidity and arrangement notes below described that retained house."
+    )
+    for n, reported in ((155, "2026-10-17"), (229, "2026-10-18")):
+        body = _flat(select.case_path(n).read_text(encoding="utf-8").split("---\n", 2)[2])
+        assert not [words for words in stale if words in body], n
+        opening = f"**Reported certificate, {reported}.** Evan Daniel reported a {n}-square"
+        assert opening in body, n
+        assert history in body, n
+    body229 = _flat(select.case_path(229).read_text(encoding="utf-8"))
+    assert "the latest registered report, pending adoption until 19 October 2026." in body229
+    # The T-155 view's dated paragraph off T-101's side is history from the same pass.
+    assert (
+        "the verified upper bound until 19 October 2026 (T-155), which the record printed as "
+        "$15.65685424949239$." in body229
+    )
+    assert "which the record still prints" not in body229
+    for n in (227, 260):
+        committed = select.case_path(n).read_text(encoding="utf-8")
+        marked = _flat(adopt.pending_history(committed, "3 November 2026"))
+        assert not [words for words in stale if words in marked], n
+        assert f"Joost de Winter reported a {n}-square certificate" in marked, n
+        assert "until the house adoption of 3 November 2026" in marked, n
 
 
 def test_an_opening_refresh_keeps_the_following_old_bound_explicitly_historical(
