@@ -2137,6 +2137,42 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         ),
     ),
     ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/devtools/git_storage.py",
+            "packing/devtools/upper_bound_houses.py",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "PR406 (review H1) moves stored_size, OR-18's size of a blob as Git stores "
+            "it, from upper_bound_houses into the new devtools.git_storage, so that the "
+            "added-blob guard shares it without importing the house tooling. The "
+            "function body is unchanged and upper_bound_houses imports it under the same "
+            "name; the module's other change is its docstring. The four papers reach "
+            "upper_bound_houses only through check_source_coverage (via site_urls and "
+            "render_overview) and build_known_best_atlas (via artifact_dates), and "
+            "neither calls stored_size, staged_sizes or print_sizes, which only the "
+            "module's own sizes command runs. Manuscripts, scientific inputs, figures "
+            "and paper metadata are unchanged, so the explainer keeps v0.4.8, the "
+            "optimality review v0.1.7, the threshold review v0.1.0 and the methods "
+            "survey v0.2.3. Source-reviewed; no render or byte identity is claimed."
+        ),
+    ),
+    ReleaseNoPublicChange(
         components=("paper:n11-lower-bounds-explainer",),
         paths=("packing/src/sqpack/cli/validate.py",),
         outputs=(

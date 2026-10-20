@@ -4,22 +4,31 @@
 # sees as one. The guard reads this file from the tree it checks; a missing or malformed
 # file refuses the check rather than falling back to a default.
 #
+# Both ceilings are in OR-18's unit, a blob as Git stores it: its object compressed by
+# zlib at the default level (`devtools.git_storage.stored_size`). A set is the sum of its
+# blobs.
+#
 # per_blob_bytes applies to every blob version a branch adds, deleted ones included; a
 # path already over it at the pull request's base is grandfathered. 5 MiB is OR-18's
 # "a retained binary or dump of more than a few megabytes".
 #
-# total_bytes applies to the larger of the historical largest-version-per-path charge
-# and the selected head/index retained-blob charge. Both deduplicate blob objects and
-# charge grandfathered paths only for growth above their base size.
-# 48 MiB is OR-18's "a set of them totalling tens of megabytes", sized on 2026-10-11 from
-# `--census 38` over the merges into main from #416 to #398: the largest routine merge,
-# #469 (403 commits), charged 37.07 MiB under the historical path-maximum rule, and
-# 48 MiB is that reading times 1.25 rounded up to a multiple of 8 MiB. That census refused
-# only #461, for exp-29x results of 6-34 MiB each, which is the case OR-18 names.
-# This historical census predates the retained-blob floor; remeasure its merge verdicts
-# before treating it as evidence for that floor.
+# total_bytes applies to the sum over every distinct blob version new to history, which
+# is what a merge commit keeps: versions the head deleted or reverted, each edit of one
+# path and a grandfathered path's rewrites all count, and an object counts once. 48 MiB
+# is OR-18's "a set of them totalling tens of megabytes".
+#
+# Both values were set on 2026-10-11 in checkout bytes and are unchanged. Measured again
+# on 2026-10-20 in this unit (review H of #406), `--census 411` over every first-parent
+# merge into main at ded4727bc refuses 11. Seven carry the bulk data OR-18 names: #461,
+# #329, #246, #125, #147, #89 and #48. Four are refused by the total alone, #474 at
+# 69.64 MiB, #249 at 53.72, #262 at 53.15 and #248 at 49.57, and each of them regenerated
+# the atlas posters six to ten times (36.6 to 56.1 MiB of that under
+# packing/atlas/known-best). The largest passing total is #580's 45.65 MiB. The last 40
+# merges, #625 to #696, all pass, at most #676's 25.00 MiB. Whether the total should
+# refuse those four is the owner's decision on #406.
 #
 # Re-measure before changing either, from `packing/`:
 #   uv run --frozen --all-extras --group dev python -m devtools.check_added_blobs --census 40
+# (all 411 merges took 308 s on a shared 4-CPU host).
 per_blob_bytes: 5242880 # 5 MiB
 total_bytes: 50331648 # 48 MiB

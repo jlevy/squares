@@ -228,7 +228,7 @@ alone is not full pre-merge evidence.
 | `--suite-d` | **CI, on every pull request**, in the `suite-d` job, concurrently | 1 of 109 | 335 s | 183.08 s, the geometric mean of 167 hosted readings on 2026-10-09, 90.60–288.47 s (3.18x), a point record; the 104.95 s first four-shard reading of 2026-10-01 stays as history |
 | `--sweeps` | **CI, on every pull request**, in the `sweeps` job, concurrently | 5 of 109 | 200 s | 101.51 s, the geometric mean of six 4-of-80 hosted readings (66.36–130.77 s, spread 1.97x); the 119.72 s seven-reading mean and PR 180’s 138.84 s predecessor remain in the register as history |
 | `--measure-verifier` | **CI, on every pull request**, in the `measure-verifier` job, concurrently | 3 of 109 | 90 s | 72.83 s, the geometric mean of ten hosted readings on 2026-10-11, 59.12–90.06 s (1.52x), the first cohort of the three-step tier (`think-th8p`); the native n17 branch-and-bound step joined it after a cold 52.83 s inside `--checks` |
-| *(workflow step)* | **CI, on every pull request**, in the `validate` job before `--checks`: the added-blob guard with the pull request’s own base and head SHA (`OR-18`); `--push` runs the same guard locally | 1, outside the registry | 30 s, the guard’s own protocol deadline | under 1 s hosted at `7f4114a` (run 37585354100); its `--census` replays one merge in 0.3–1.4 s locally |
+| *(workflow step)* | **CI, on every pull request**, in the `validate` job before `--checks`: the added-blob guard with the pull request’s own base and head SHA (`OR-18`); `--push` runs the same guard locally | 1, outside the registry | 30 s, the guard’s one deadline for the whole check, with `timeout-minutes: 1` on the step | locally on 2026-10-20, now that it compresses each new blob: 0.7 s for #406, 2.6 s for #665 (102 MiB of new content), 5.9 s for #580 (196 MiB) and 15.2 s for #461 (446 MiB, the largest merge into `main`); `--census 411` replays every merge in 308 s. Hosted, under 1 s at `7f4114a` (run 37585354100), before it read content |
 | *(no flag)* | Full checkpoint before final review and at block close; main, dispatch, and daily CI | 109 of 109 | 3600 s | integration, serial quick suites and ten deferred workers; new whole-wall measurement pending |
 
 Step counts describe the current 109-step registry, read from the validator’s canonical
@@ -2437,8 +2437,8 @@ The step `integrity ceremony never grows` runs it in the edit tier.
 is the rule; this is how to follow it.
 
 - **Size.** Before committing retained data, check what it adds:
-  `git diff --cached --stat`, or `git rev-list --objects origin/main..HEAD` piped to
-  `git cat-file --batch-check` for the whole branch.
+  `git diff --cached --stat` for the index, or the guard below for the whole branch,
+  which sizes each new blob as Git stores it.
   A binary or dump over a few megabytes, or data totalling tens of megabytes, is hosted
   outside the repository, for example as a release asset on `jlevy/squares`.
 - **The guard.** `devtools.check_added_blobs` enforces that rule.
@@ -2450,21 +2450,26 @@ is the rule; this is how to follow it.
   the branch for everything the base gained since.
   The two ceilings, 5 MiB per blob and 48 MiB in total, are data in
   [`added-blobs.yaml`](packing/devtools/added-blobs.yaml), sized by the tool’s own
-  `--census` replay of recent merges into `main`; re-measure with it before changing
-  one. Every blob version the branch adds is checked, so committing then deleting a dump
-  still fails. The total is the larger of the historical largest-version-per-path charge
-  and the charge for blobs retained at the selected head or index.
-  Both count each blob object once, so repeated edits of one path and identical copies
-  deduplicate, while distinct retained files count even after sharing an earlier
-  version. A grandfathered path contributes only growth above its base size to either
-  charge. A path already over 5 MiB at the base is grandfathered until `think-xeav` moves
-  it to hosted data; a new path, a copy or an edited rename is not.
+  `--census` replay of the merges into `main`; re-measure with it before changing one.
+  Both are in `OR-18`’s unit, a blob as Git stores it: the guard streams each new blob’s
+  content through zlib once (`devtools.git_storage`), so a text file is charged a
+  fraction of its checkout bytes and a compressed dump about its own size.
+  Every blob version the branch adds is checked, so committing then deleting a dump
+  still fails. The total is the sum over every distinct blob version new to history,
+  which is what the merge commit keeps: a version the head deleted or reverted, each
+  edit of one path and a grandfathered path’s rewrites all count, and identical copies
+  count once. A blob the base already stores, such as a copy of a base file, is held to
+  the per-blob ceiling but adds nothing to the total, and so does a mode-only change.
+  A path already over 5 MiB at the base is grandfathered from the per-blob ceiling until
+  `think-xeav` moves it to hosted data; a new path, a copy or an edited rename is not.
   A Git LFS pointer is refused, since the repository does not use LFS. `--help` has the
   rest. `GUARD_REFUSED` is never a pass, and its message names the remedy: fetch a
   missing base or a shallow clone’s history; after the base is force-pushed, recheck
-  once the pull request re-synchronizes; check a shorter range when one is too long for
-  the gate. Git IDs identify repository storage being sized here, not scientific input
-  identity or research verdicts.
+  once the pull request re-synchronizes; check a shorter range when one is too long or
+  too large for the gate, which reads at most 512 MiB of new blob content and gives the
+  whole check one 30-second deadline.
+  Git IDs identify repository storage being sized here, not scientific input identity or
+  research verdicts.
 - **Manifest.** The repository keeps a small committed manifest with the name, size,
   location, and SHA-256 of each hosted object.
   A tool that needs the bytes downloads them on request and checks them against the
