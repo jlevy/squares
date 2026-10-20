@@ -1,0 +1,344 @@
+"""Bounded saved-point review for the completed n84 and n85 Mac checkpoints.
+
+Reuse the inspected n68 rational geometry and small validation helpers, but do not
+invoke its case driver: these captures have observed outer exits and no verified
+scaled-control directions. No native executable or project implementation is run.
+"""
+from __future__ import annotations
+
+import argparse
+import copy
+import gzip
+import hashlib
+import json
+import math
+import re
+import signal
+import subprocess
+import sys
+import time
+import zlib
+from datetime import UTC, datetime
+from fractions import Fraction as F
+from pathlib import Path
+
+PREVIOUS_AUDITOR = Path(__file__).resolve().parent.parent / 'n68-certificate-math'
+sys.path.insert(0, str(PREVIOUS_AUDITOR))
+import audit_checkpoint as previous
+import exact_geometry as geometry
+
+require = geometry.require
+EXPECTED_HEAD = '461e20b939c7635e65fcb5491ec39399b2177045'
+EXPECTED_REFERENCE = '0ee05f4f3d0863f75c1036757839985e75655677'
+EXPECTED_SOURCE = 'd97758bbc9639edc70b8bd7dc83106d4e8d1be034bacb3e88f8c539b88091c88'
+EXPECTED_BINARY = 'e44f27eb8f3375d85c71e085fe7d04667d38f28c589beae267457573be4ae61d'
+
+
+def identity(path):
+    data = path.read_bytes()
+    return {'bytes': len(data), 'sha256': hashlib.sha256(data).hexdigest()}
+
+
+def checkpoint_identities(checkpoint):
+    return {path.name: identity(path) for path in sorted(checkpoint.iterdir()) if path.is_file()}
+
+
+def expired(signum, frame):
+    raise TimeoutError('30-second maximum wall ceiling reached; no acceptance produced')
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--tree', type=Path, required=True)
+    parser.add_argument('--checkpoint', type=Path, required=True)
+    parser.add_argument('--binary', type=Path, required=True)
+    parser.add_argument('--packet', required=True)
+    parser.add_argument('--certificate', required=True)
+    parser.add_argument('--n', type=int, required=True)
+    parser.add_argument('--side', type=F, required=True)
+    parser.add_argument('--reference-ref', required=True)
+    parser.add_argument('--seconds', type=float, default=30)
+    parser.add_argument('--output', type=Path, required=True)
+    args = parser.parse_args()
+    require(0 < args.seconds <= 30, 'wall limit must be at most 30 seconds')
+    require(args.reference_ref == EXPECTED_REFERENCE, 'reference commit')
+    require((args.certificate, args.n, args.side) in (
+        ('mixed_n84_L94225', 84, F(3769, 400)),
+        ('mixed_n85_L9475', 85, F(379, 40))), 'case outside this review')
+    require(args.packet == 'wand125-fine-net-lower-bounds-2026-10-16', 'packet')
+    require(not args.output.exists(), 'do not overwrite earlier audit evidence')
+    started = time.monotonic()
+    deadline = started + args.seconds
+    signal.signal(signal.SIGALRM, expired)
+    signal.setitimer(signal.ITIMER_REAL, args.seconds)
+
+    def git(*argv):
+        geometry.check_deadline(deadline)
+        return subprocess.run(['git', '-C', str(args.tree), *argv], check=True,
+                              capture_output=True, timeout=min(3, deadline-time.monotonic())).stdout
+
+    require(git('rev-parse', 'HEAD').decode().strip() == EXPECTED_HEAD, 'source HEAD')
+    before_files = checkpoint_identities(args.checkpoint)
+    candidate_relative = (Path('packing/resources/web') / args.packet /
+                          'release/certificates' / args.certificate / 'candidate.json.gz')
+    candidate_path = args.tree / candidate_relative
+    packed = candidate_path.read_bytes()
+    unzip = zlib.decompressobj(31)
+    data = unzip.decompress(packed) + unzip.flush()
+    require(unzip.eof and not unzip.unused_data and not unzip.unconsumed_tail,
+            'candidate must be one complete gzip member')
+    raw = geometry.read_json(data)
+    previous.exact_candidate_tokens(raw)
+    measure = geometry.candidate_measure(raw, args.n, args.side)
+    require(measure.count == 201, 'expected 201-node net')
+    candidate_sha = previous.sha(packed)
+    checkpoint = args.checkpoint
+    capture_path = checkpoint / f'{args.certificate}.jsonl.gz'
+    control_path = checkpoint / f'{args.certificate}.control.json'
+    rows = [geometry.read_json(line) for line in gzip.decompress(capture_path.read_bytes()).splitlines()]
+    summary = geometry.check_direction_log(rows, measure.count)
+    directions = rows[:-1]
+    require([row['r'] for row in directions] == list(range(measure.count)), 'capture row ordering')
+    selected = [entry for entry in previous.load(checkpoint/'census.json')['cases'].values()
+                if entry['packet'] == args.packet and entry['certificate'] == args.certificate]
+    require(len(selected) == 1, 'selected census case must be unique')
+    entry = selected[0]
+    control = previous.load(control_path)
+    execution = previous.load(checkpoint/'execution.json')
+    geometry.check_bindings(measure, summary, entry, control, candidate_sha=candidate_sha)
+    require(entry['n'] == args.n and F(entry['L']) == args.side and entry['stderr_tail'] == '',
+            'census claim and native stderr')
+    require(control['packet'] == args.packet and control['certificate'] == args.certificate,
+            'control identity')
+    require(summary['kind'] == 'sqverify-fast-summary/v1', 'summary kind')
+    require(entry['nodes'] == summary['nodes'] == sum(row.get('nodes', 0) for row in directions),
+            'total nodes')
+    minimum = min(F(row['min_certified_lower_bound']) for row in directions)
+    least = min((row for row in directions if row.get('least_bound_box') is not None),
+                key=lambda row: F(row['min_certified_lower_bound']))
+    require(minimum == F(entry['least_certified_bound']) == F(least['min_certified_lower_bound']),
+            'minimum certified bound')
+    index = control['index']
+    require(index == least['r'] == entry['least_bound_leaf_exact']['r'], 'selected direction')
+    centre = [least['least_bound_box'][axis] for axis in ('x', 'y')]
+    require(centre == entry['least_bound_leaf_exact']['centre'] == control['centre'], 'selected centre')
+    require(entry['least_bound_leaf_exact']['clears_threshold'] is True, 'positive flag')
+    require(directions[0]['method'] == 'axis-vertex-sweep', 'axis method')
+    require(entry['axis_vertices'] == directions[0]['vertices'] ==
+            directions[0]['x_events'] * directions[0]['y_events'], 'axis event product')
+    for row in directions:
+        require(math.isfinite(row['min_certified_lower_bound']) and
+                math.isfinite(row['seconds']) and row['seconds'] >= 0, 'finite row data')
+        if row['r'] > 0:
+            require(row['method'] == 'interval-branch-and-bound' and
+                    row['nodes'] == 2*row['leaves']-1 and row['audit_every'] == 1024,
+                    'complete binary tree and audit interval')
+    require(summary['threads'] == entry['threads'] == execution['threads'] == 2, 'worker ceiling')
+    require(math.isclose(sum(row['seconds'] for row in directions), summary['direction_seconds'],
+                         rel_tol=0, abs_tol=1e-8), 'sum of direction wall seconds')
+    require(entry['direction_cpu_seconds'] == {} and all('cpu_seconds' not in row for row in directions),
+            'Mac per-direction CPU absence')
+    require(summary['direction_cpu_seconds'] == 0 and
+            math.copysign(1, summary['direction_cpu_seconds']) < 0 and
+            execution['native_summary_cpu_bytes_preserved'] == 0 and
+            'unavailable' in execution['native_direction_cpu_total'], 'unavailable CPU annotation')
+    binary_identity = identity(args.binary)
+    require(binary_identity['sha256'] == EXPECTED_BINARY == entry['binary_sha256'] ==
+            control['binary_sha256'] == execution['binary_sha256'], 'qualified binary binding')
+    build = {'profile': 'release', 'rustc': 'rustc 1.98.0 (88d9e12ae 2026-08-18)',
+             'source_sha256': EXPECTED_SOURCE, 'target': 'aarch64-apple-darwin'}
+    require(summary['build'] == entry['build'] == control['build'] == execution['build'] == build,
+            'qualified build binding')
+    require(execution['candidate_sha256'] == candidate_sha and execution['n'] == args.n and
+            execution['certificate'] == args.certificate and execution['directions'] == measure.count and
+            execution['status'] == 'COMPLETE' and execution['checkpoint'] == str(checkpoint) and
+            execution['source_tree'] == str(args.tree), 'execution scope')
+    require(execution['capture_native_process_cpu_seconds'] == entry['cpu_seconds'] > 0,
+            'native wait4 CPU binding')
+
+    # Compare only the small reviewed source set and this candidate to Git objects.
+    crate = args.tree/'packing/sqverify_fast'
+    source_names = ['Cargo.toml', 'Cargo.lock', 'build.rs'] + sorted(
+        f'src/{path.name}' for path in (crate/'src').iterdir() if path.suffix == '.rs')
+    digest = hashlib.sha256()
+    compared = [Path('packing/sqverify_fast')/name for name in source_names]
+    compared += [Path('packing/devtools/sqverify_fast_census.py'),
+                 Path('packing/devtools/audit_fine_net_receipt.py'), candidate_relative]
+    for relative in compared:
+        require((args.tree/relative).read_bytes() == git('show', f'{args.reference_ref}:{relative}'),
+                f'source or candidate differs from pinned Git object: {relative}')
+    for name in source_names:
+        digest.update(name.encode()+b'\0'+(crate/name).read_bytes()+b'\0')
+    require(digest.hexdigest() == EXPECTED_SOURCE, 'source digest')
+
+    require(control['kind'] == 'sqverify-fast-control/v2' and
+            control['status'] == 'CONTROLS_REFUSED' and control['captures_agree'] is True,
+            'control acceptance')
+    original, scaled, near = control['runs']
+    require(original['name'] == 'original' and original['returncode'] == 0 and
+            original['verdict'] == 'verified' and original['stderr_tail'] == '' and
+            original['min_certified_lower_bound'] == least['min_certified_lower_bound'] and
+            original['nodes'] == least['nodes'], 'original selected-direction rerun')
+    require(scaled['name'] == 'scaled-99-100' and near['name'] == 'near-threshold', 'control order')
+    factor = F(scaled['mutation']['factor'])
+    require(factor == F(99, 100), 'control scale')
+    sweep = scaled['sweep']
+    previous.check_sweep(sweep, measure.count)
+    require(sweep['verified_directions'] == [] and
+            [row['r'] for row in sweep['refused']] == list(range(measure.count)) and
+            execution['control_refusals'] == measure.count, 'all 201 directions refused in these cases')
+    mutant = copy.deepcopy(raw)
+    for row in mutant['rectangles']:
+        row['mass'] = str(F(row['mass'])*factor)
+    mutant['total_mass'] = str(sum((F(row['mass']) for row in mutant['rectangles']), F(0)))
+    require(previous.sha(json.dumps(mutant).encode()) == sweep['mutant_input_sha256'], 'scaled mutant bytes')
+    print(json.dumps({'event':'bindings_passed', 'certificate':args.certificate,
+                      'directions':measure.count, 'refusals':len(sweep['refused'])}), flush=True)
+    exact_refusals = []
+    for row in sweep['refused']:
+        value = geometry.check_refusal(measure, row, factor, deadline)
+        exact_refusals.append({'r':row['r'], 'pose':row['pose'], 'original_capture':str(value),
+                               'scaled_capture':str(value*factor), 'exact_agreement':True})
+        if len(exact_refusals) % 40 == 0:
+            print(json.dumps({'event':'exact_refusals', 'completed':len(exact_refusals)}), flush=True)
+    require(geometry.in_domain(measure, centre, index), 'selected point domain')
+    positive = geometry.capture_at(measure, centre, index, deadline)
+    require(positive == F(entry['least_bound_leaf_exact']['exact_coverage']) ==
+            F(control['exact_capture_crate']) == F(control['exact_capture_independent']) and
+            positive >= minimum >= 1, 'positive exact agreement')
+    near_factor = F(near['mutation']['factor'])
+    require(near_factor == F(int((1-F(1,10**6))/positive*10**15),10**15), 'near-factor floor rule')
+    require(0 < near_factor < 1 and near['returncode'] == 1 and
+            near['verdict'] == 'counterexample-candidate' and near['exact_below_threshold'] is True and
+            near['stderr_tail'] == '' and near['witness']['exact_below_threshold'] is True,
+            'near coverage refusal')
+    near_pose = near['witness']['exact_pose']
+    require(geometry.in_domain(measure, near_pose, index), 'near point domain')
+    near_original = geometry.capture_at(measure, near_pose, index, deadline)
+    near_capture = near_factor*near_original
+    require(near_original >= 1 and near_capture < 1 and
+            near_capture == F(near['witness']['exact_coverage']) ==
+            F(near['mutation']['capture_at_witness']), 'near witness exact agreement')
+    require(near_factor*positive == F(near['mutation']['capture_at_centre']) <= 1-F(1,10**6),
+            'near selected-centre construction')
+    require(all(near['mutation'][key] is True for key in
+                ('witness_captures_agree','centre_in_domain','witness_in_domain')), 'near flags')
+
+    # n84 and n85 have observed successful outer exits, unlike recovered n68.
+    require([item['mode'] for item in execution['commands']] == ['capture','check','control'],
+            'three command receipts in order')
+    times = []
+    for mode in ('capture','check','control'):
+        command = previous.load(checkpoint/f'{mode}-execution.json')
+        require(command == next(item for item in execution['commands'] if item['mode'] == mode),
+                'command receipt binding')
+        require(command['returncode'] == 0 and not command.get('recovered_complete_capture', False),
+                'observed outer successful exit')
+        argv = command['argv']
+        for option, expected in (('--only',args.certificate),('--packets',args.packet),
+                                 ('--binary',str(args.binary)),('--threads','2')):
+            require(argv.count(option) == 1 and argv[argv.index(option)+1] == expected, 'command selection')
+        require(('--resume' if mode == 'capture' else '--'+mode) in argv, 'command mode')
+        require('--evidence' not in argv and '--report' not in argv, 'raw capture mode')
+        text = (checkpoint/f'{mode}.time').read_text()
+        timing = {key:F(re.search(rf'^{key}\s+([0-9.]+)$',text,re.M).group(1))
+                  for key in ('real','user','sys')}
+        timing['cpu_seconds'] = timing['user']+timing['sys']
+        require(all(math.isclose(float(value),command['timing'][key],rel_tol=0,abs_tol=1e-9)
+                    for key,value in timing.items()), 'timing receipt values')
+        require((checkpoint/f'{mode}.stderr.log').read_bytes() == b'', 'command stderr')
+        require(datetime.fromisoformat(command['finished_utc']) >=
+                datetime.fromisoformat(command['started_utc']), 'command timestamp ordering')
+        times.append({'mode':mode,'outer_exit':command['returncode'],
+                      **{key:str(value) for key,value in timing.items()}})
+    require('1 of 1 retained certificates VERIFIED' in (checkpoint/'check.stdout.log').read_text(),
+            'maintained check completion')
+    capture_stdout = (checkpoint/'capture.stdout.log').read_text()
+    require(args.certificate in capture_stdout and 'VERIFIED' in capture_stdout, 'capture completion')
+    control_stdout = (checkpoint/'control.stdout.log').read_text()
+    require(args.certificate in control_stdout and 'CONTROLS_REFUSED' in control_stdout and
+            '201 of 201' in control_stdout, 'control completion')
+    cpu = sum((F(item['cpu_seconds']) for item in times),F(0))
+    wall = sum((F(item['real']) for item in times),F(0))
+    require(math.isclose(float(cpu),execution['cpu_seconds'],rel_tol=0,abs_tol=1e-9) and
+            math.isclose(float(wall),execution['wall_seconds'],rel_tol=0,abs_tol=1e-9), 'aggregate totals')
+
+    # Probe real validation boundaries, using only in-memory damaged copies.
+    corrupt_log = copy.deepcopy(rows)
+    corrupt_log[1]['r'] = 0
+    corrupt_sweep = copy.deepcopy(sweep)
+    corrupt_sweep['refused'][1]['r'] = corrupt_sweep['refused'][0]['r']
+    corrupt_refusal = copy.deepcopy(sweep['refused'][0])
+    corrupt_refusal['capture'] = str(F(corrupt_refusal['capture'])+F(1,10**12))
+    negatives = [
+        previous.rejected(lambda:geometry.check_direction_log(corrupt_log,measure.count),
+                          'duplicate capture index'),
+        previous.rejected(lambda:previous.check_sweep(corrupt_sweep,measure.count),
+                          'duplicate/missing all-refused control index'),
+        previous.rejected(lambda:geometry.check_refusal(measure,corrupt_refusal,factor,deadline),
+                          'tampered exact refusal capture'),
+    ]
+    require(checkpoint_identities(checkpoint) == before_files, 'checkpoint changed during review')
+    originals = [F(row['original_capture']) for row in exact_refusals]
+    result = {
+        'kind':'fine-net-completed-certificate-mathematics-audit/v2', 'status':'PASS',
+        'completed_utc':datetime.now(UTC).isoformat(), 'python':sys.version,
+        'certificate':args.certificate, 'packet':args.packet, 'n':args.n, 'L':str(measure.side),
+        'claim_scope':'local mathematical acceptance within reviewed native interval trust boundary; no promotion',
+        'candidate':{'path':str(candidate_path),'gzip_sha256':candidate_sha,
+                     'decompressed_sha256':previous.sha(data),'gzip_bytes':len(packed),
+                     'decompressed_bytes':len(data),'single_gzip_member':True},
+        'source':{'tree':str(args.tree),'head':EXPECTED_HEAD,'reference_ref':args.reference_ref,
+                  'byte_equal_files':[str(path) for path in compared], 'source_sha256':EXPECTED_SOURCE,
+                  'binary':{'path':str(args.binary),**binary_identity},'build':build},
+        'checkpoint':str(checkpoint),'file_identities':before_files,'unchanged_at_finish':True,
+        'review_programs':{str(path):identity(path) for path in
+                           (Path(__file__),PREVIOUS_AUDITOR/'audit_checkpoint.py',
+                            PREVIOUS_AUDITOR/'exact_geometry.py',PREVIOUS_AUDITOR/'check_geometry.py')},
+        'premises':summary['premises'],
+        'exact_inequalities':{'shrink_gap':str(1-measure.core*(1+measure.step)),
+            'tangent_shrink_product':str(measure.core*(1+measure.step/(1-measure.step**2/4))),
+            'endpoint_polynomial':str(measure.last_tangent**2+2*measure.last_tangent-1),
+            'last_bin_start_polynomial':str((measure.last_tangent-measure.step/2)**2+
+                                           2*(measure.last_tangent-measure.step/2)-1),
+            'mass_gap':str(measure.n-measure.mass),'expanded_density_max':str(max(measure.rectangles.values()))},
+        'capture':{'directions':measure.count,'all_indices_once':True,'all_verified':True,
+            'minimum_certified_bound':str(minimum),'minimum_certified_bound_float':float(minimum),
+            'minimum_bound_index':index,'nodes':entry['nodes'],'axis_vertices':entry['axis_vertices'],
+            'axis_x_events':directions[0]['x_events'],'axis_y_events':directions[0]['y_events'],
+            'positive_centre':centre,'positive_capture':str(positive),'positive_capture_float':float(positive),
+            'native_capture_exit':entry['returncode'],'retained_native_universal_run':True,
+            'new_universal_run':False},
+        'controls':{'refusal_points_recomputed':len(exact_refusals),'verified_directions':sweep['verified_directions'],
+            'all_indices_once':True,'whole_net_factor':str(factor),'mutant_input_sha256':sweep['mutant_input_sha256'],
+            'whole_net_native_exit':sweep['returncode'],'original_native_exit':original['returncode'],
+            'near_native_exit':near['returncode'],
+            'original_capture_min':str(min(originals)),'original_capture_max':str(max(originals)),
+            'original_capture_min_float':float(min(originals)),'original_capture_max_float':float(max(originals)),
+            'scaled_capture_min_float':float(factor*min(originals)),
+            'scaled_capture_max_float':float(factor*max(originals)),
+            'closest_refusal_gap_exact':str(1-factor*max(originals)),
+            'near_factor':str(near_factor),'near_centre_capture':str(near_factor*positive),
+            'near_witness':near_pose,'near_witness_original_capture':str(near_original),
+            'near_witness_capture':str(near_capture),'near_witness_capture_float':float(near_capture),
+            'exact_refusals':exact_refusals},
+        'execution':{'outer_capture_exit':0,'check_exit':0,'control_exit':0,
+            'commands':times,'aggregate_cpu_seconds_exact':str(cpu),'aggregate_cpu_seconds':float(cpu),
+            'sum_command_wall_seconds_exact':str(wall),'sum_command_wall_seconds':float(wall),
+            'native_capture_cpu_seconds':entry['cpu_seconds'],
+            'per_direction_cpu':'unavailable on Mac; preserved native -0.0 is not measured zero'},
+        'negative_audits_rejected':negatives,'wall_ceiling_seconds':args.seconds,
+        'wall_seconds':round(time.monotonic()-started,3),
+    }
+    geometry.check_deadline(deadline)
+    args.output.write_text(json.dumps(result,indent=2)+'\n')
+    geometry.check_deadline(deadline)
+    print(json.dumps({'status':'PASS','certificate':args.certificate,'output':str(args.output),
+                      'wall_seconds':result['wall_seconds'],'refusals':len(exact_refusals),
+                      'positive_capture':float(positive),'near_witness_capture':float(near_capture),
+                      'negative_audits':len(negatives)}),flush=True)
+    signal.setitimer(signal.ITIMER_REAL,0)
+
+
+if __name__ == '__main__':
+    main()

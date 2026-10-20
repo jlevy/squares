@@ -1,0 +1,419 @@
+"""Bounded operational custody around the unchanged census CLI; no verifier changes."""
+
+from __future__ import annotations
+
+import argparse
+import copy
+import datetime as dt
+import fcntl
+import gzip
+import hashlib
+import json
+import os
+from pathlib import Path
+import re
+import shutil
+import signal
+import subprocess
+import sys
+import uuid
+from fractions import Fraction
+
+from devtools import sqverify_fast_census as census
+
+REPO = Path('/Users/levy/wrk/github/squares')
+TREE = REPO / '.worktrees/review-668-math-20261018'
+PRIMARY_PYTHON = REPO / 'packing/.venv/bin/python3'
+ROOT = Path('/Volumes/spud-ext1/agent-source/squares-fine-net-mac-haaq')
+OUT = ROOT / 'first-subset'
+BASELINE = ROOT / 'historical-baseline-0ee05'
+PACKET = 'wand125-fine-net-lower-bounds-2026-10-16'
+BINARY = ROOT / 'sqverify-fast'
+BINARY_SHA = 'e44f27eb8f3375d85c71e085fe7d04667d38f28c589beae267457573be4ae61d'
+SOURCE_SHA = 'd97758bbc9639edc70b8bd7dc83106d4e8d1be034bacb3e88f8c539b88091c88'
+BUILD = {
+    'profile': 'release',
+    'target': 'aarch64-apple-darwin',
+    'rustc': 'rustc 1.98.0 (88d9e12ae 2026-08-18)',
+    'source_sha256': SOURCE_SHA,
+}
+ROSTER = (
+    (68, 'mixed_n68_L853', 201),
+    (84, 'mixed_n84_L94225', 201),
+    (85, 'mixed_n85_L9475', 201),
+    (86, 'mixed_n86_L95275', 201),
+    (88, 'mixed_n88_L96325', 201),
+    (89, 'mixed_n89_L9685', 201),
+    (90, 'mixed_n90_L978', 201),
+    (91, 'mixed_n91_L97875', 201),
+    (92, 'mixed_n92_L986', 201),
+    (106, 'mixed_n106_L10503', 201),
+    (107, 'mixed_n107_L1058', 201),
+    (110, 'mixed_n110_L1073', 201),
+    (38, 'mixed_n38_L65775', 2073),
+)
+HISTORICAL = 'mixed_n108_L1062'
+PER_CASE_CPU_CAP = 40 * 3600
+
+
+def utc():
+    return dt.datetime.now(dt.UTC).isoformat()
+
+
+def require(condition, message):
+    if not condition:
+        raise RuntimeError(message)
+
+
+def load(path):
+    return json.loads(path.read_text())
+
+
+def sha(path):
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def save(path, value):
+    temporary = path.with_name(path.name + '.partial')
+    with temporary.open('x') as stream:
+        json.dump(value, stream, indent=2, sort_keys=True)
+        stream.write('\n')
+        stream.flush()
+        os.fsync(stream.fileno())
+    os.replace(temporary, path)
+
+
+def historical_unchanged():
+    seed = load(ROOT / 'seed-manifest.json')
+    for item in seed['files']:
+        original = BASELINE / item['path']
+        require(sha(original) == item['sha256'], f'baseline changed: {original}')
+        if item['path'] != 'census.json':
+            require((OUT / item['path']).read_bytes() == original.read_bytes(),
+                    f'historical n108 bytes changed: {item["path"]}')
+    current = load(OUT / 'census.json')['cases']
+    original = load(BASELINE / 'census.json')['cases']
+    require(current[HISTORICAL] == original[HISTORICAL], 'historical n108 row changed')
+    allowed = {name for _, name, _ in ROSTER}
+    require(set(current) - set(original) <= allowed, 'unexpected new census case')
+    for name, row in original.items():
+        if name not in allowed:
+            require(current.get(name) == row, f'out-of-scope census row changed: {name}')
+
+
+def admit():
+    require(sys.version_info[:3] == (3, 14, 7), 'use existing primary Python 3.14.7')
+    require(Path(census.__file__).resolve() == TREE / 'packing/devtools/sqverify_fast_census.py',
+            'wrong census driver imported')
+    for variable in ('TMPDIR', 'CARGO_TARGET_DIR', 'UV_CACHE_DIR'):
+        path = Path(os.environ[variable])
+        require(str(path).startswith('/Volumes/spud-ext1/agent-scratch/squares-fine-net-subset-q5tx/'),
+                f'{variable} is outside assigned lane')
+        require(path.is_dir() and os.access(path, os.W_OK), f'{variable} unavailable')
+    require(os.environ.get('UV_NO_SYNC') == '1', 'UV_NO_SYNC required')
+    require(os.environ.get('PYTHONDONTWRITEBYTECODE') == '1', 'bytecode must be off')
+    require(os.access(OUT, os.W_OK), 'external evidence output is not writable')
+    require(BINARY.stat().st_size == 849712 and sha(BINARY) == BINARY_SHA, 'binary custody mismatch')
+    build_receipt = load(ROOT / 'build-receipt.json')
+    require(build_receipt['binary_sha256'] == BINARY_SHA, 'build receipt binary mismatch')
+    audit = load(REPO / '.codex/intake-resume-20261019/fine-net-resume-evidence.json')
+    expected = {item['certificate']: item for item in audit['rows']}
+    cases = census.mixed_cases()
+    require(len(cases) == len(expected) == 18, 'expected exactly 18 discoverable candidates')
+    require({case.certificate for case in cases} == set(expected), 'candidate roster mismatch')
+    require(len(ROSTER) == 13 and sum(count for _, _, count in ROSTER) == 4485,
+            'first-subset launch scope mismatch')
+    for case in cases:
+        item = expected[case.certificate]
+        stored = case.candidate.read_bytes()
+        raw = gzip.decompress(stored)
+        require(case.packet == PACKET, 'unexpected packet')
+        require(len(stored) == item['stored_bytes'] and sha(case.candidate) == item['stored_sha256'],
+                f'candidate stored custody mismatch: {case.certificate}')
+        require(len(raw) == item['raw_bytes'] and hashlib.sha256(raw).hexdigest() == item['raw_sha256'],
+                f'candidate raw custody mismatch: {case.certificate}')
+        require(census.net_directions(case) == item['directions'], 'candidate net mismatch')
+    for n, name, count in ROSTER:
+        selected(cases, name, n, count)
+    historical_unchanged()
+    return cases
+
+
+def selected(cases, name, n, count):
+    matches = [case for case in cases if case.packet == PACKET and case.certificate == name]
+    require(len(matches) == 1, f'--only would not select exactly one case: {name}')
+    case = matches[0]
+    require(case.n == n and census.net_directions(case) == count, 'selected case identity mismatch')
+    return case
+
+
+def capture_checked(case, count, *, historical=False):
+    row = load(OUT / 'census.json')['cases'][case.certificate]
+    path = OUT / PACKET / f'{case.certificate}.jsonl.gz'
+    lines = [json.loads(line) for line in gzip.decompress(path.read_bytes()).splitlines() if line]
+    directions = [line for line in lines if 'r' in line]
+    summaries = [line for line in lines if line.get('kind') == 'sqverify-fast-summary/v1']
+    require(len(summaries) == 1 and len(lines) == count + 1, 'incomplete/extra saved capture rows')
+    summary = summaries[0]
+    require([line['r'] for line in directions] == list(range(count)), 'capture indices not exact')
+    require(all(line['verdict'] == 'verified' for line in directions), 'capture direction refused')
+    require(row['returncode'] == 0 and row['status'] == summary['status'] == 'VERIFIED',
+            'capture was not verified')
+    require(row['directions_verified'] == summary['directions'] == count, 'capture count mismatch')
+    require(row['refused_directions'] == summary['refused_directions'] == [], 'capture refusal list')
+    require(summary['fault_injected_at_box'] is None, 'fault-injected capture')
+    require(row['packet'] == PACKET and row['certificate'] == case.certificate and row['n'] == case.n,
+            'capture row identity mismatch')
+    require(Fraction(row['L']) == Fraction(case.side), 'capture side mismatch')
+    require(row['candidate_sha256'] == sha(case.candidate), 'capture candidate mismatch')
+    require(row['build'] == summary['build'], 'capture summary build mismatch')
+    if not historical:
+        require(row['build'] == BUILD and row['binary_sha256'] == BINARY_SHA, 'capture Mac build mismatch')
+    require(row['premises'] == summary['premises'], 'capture summary premises mismatch')
+    require(row['threads'] == summary['threads'] == 2, 'capture thread count mismatch')
+    require(row['nodes'] == summary['nodes'], 'capture node total mismatch')
+    require(all(Fraction(line['threshold']) == 1 for line in directions), 'direction threshold mismatch')
+    premises = row['premises']
+    raw = census.read_raw(case.candidate)
+    require(premises['format'] == 'M' and premises['centre_domain'] == 'per-bin', 'wrong domain')
+    require(premises['net_origin'] == 'proof_net' and premises['angle_count'] == count, 'wrong net')
+    require(premises['input_sha256'] == sha(case.candidate), 'premise input custody mismatch')
+    for key in ('n', 'L', 'B'):
+        require(Fraction(str(premises[key])) == Fraction(str(raw[key])), f'premise {key} mismatch')
+    require(Fraction(premises['D']) == census.net_step(raw), 'premise step mismatch')
+    require(Fraction(premises['mass_exact']) == Fraction(raw['total_mass']), 'premise mass mismatch')
+    require(Fraction(row['threshold']) == Fraction(summary['threshold']) == 1, 'threshold mismatch')
+    least = row['least_bound_leaf_exact']
+    least_row = min((line for line in directions if line.get('least_bound_box') is not None),
+                    key=lambda line: line['min_certified_lower_bound'])
+    require(least['r'] == least_row['r']
+            and least['centre'] == [least_row['least_bound_box']['x'], least_row['least_bound_box']['y']],
+            'least exact probe does not match saved least leaf')
+    require(least['clears_threshold'] is True and Fraction(least['exact_coverage']) >= 1,
+            'least leaf does not clear one')
+    x, y = map(Fraction, least['centre'])
+    require(census.mixed_exact(raw, x, y, int(least['r'])) == Fraction(least['exact_coverage']),
+            'least exact capture disagreement')
+    return row, summary
+
+
+def control_checked(case, count, row, *, historical=False):
+    receipt = load(OUT / PACKET / f'{case.certificate}.control.json')
+    require(receipt['kind'] == 'sqverify-fast-control/v2', 'wrong control kind')
+    require(receipt['status'] == 'CONTROLS_REFUSED' and receipt['captures_agree'] is True,
+            'controls did not hold')
+    for key in ('packet', 'certificate', 'n', 'L', 'candidate_sha256', 'binary_sha256', 'build'):
+        require(receipt[key] == row[key], f'control/capture {key} mismatch')
+    if not historical:
+        require(receipt['build'] == BUILD and receipt['binary_sha256'] == BINARY_SHA,
+                'control Mac build mismatch')
+    runs = receipt['runs']
+    require([run['name'] for run in runs] == ['original', 'scaled-99-100', 'near-threshold'],
+            'wrong control roster')
+    require(all(census.control_run_held(run) for run in runs), 'maintained control predicate failed')
+    sweep = runs[1]['sweep']
+    require(sweep['directions'] == sweep['net_directions'] == count, 'wrong control net size')
+    indices = sorted(sweep['verified_directions'] + [refusal['r'] for refusal in sweep['refused']])
+    require(indices == list(range(count)), 'saved control indices not exact')
+    raw = census.read_raw(case.candidate)
+    least = row['least_bound_leaf_exact']
+    require(receipt['index'] == least['r'] and receipt['centre'] == least['centre'], 'control centre mismatch')
+    exact = census.mixed_exact(raw, *map(Fraction, receipt['centre']), receipt['index'])
+    require(exact == Fraction(receipt['exact_capture_crate']) == Fraction(receipt['exact_capture_independent']),
+            'independent original capture mismatch')
+    factor = Fraction(runs[1]['mutation']['factor'])
+    require(factor == census.CONTROL_SCALE, 'wrong whole-net control factor')
+    mutant = json.dumps(census.mixed_mutant(raw, factor=factor)).encode()
+    require(sweep['mutant_input_sha256'] == hashlib.sha256(mutant).hexdigest(),
+            'whole-net mutant input custody mismatch')
+    for refusal in sweep['refused']:
+        require(census.refusal_held(refusal), 'maintained refusal predicate failed')
+        pose = refusal['pose']
+        require(census.in_domain(raw, refusal['r'], pose), 'saved refusal outside domain')
+        measured = factor * census.mixed_exact(raw, *map(Fraction, pose), refusal['r'])
+        require(measured == Fraction(refusal['capture']), 'independent saved refusal capture mismatch')
+    near = runs[2]
+    mutation = near['mutation']
+    near_factor = Fraction(mutation['factor'])
+    require(near_factor * exact == Fraction(mutation['capture_at_centre']), 'near centre capture mismatch')
+    witness = near['witness']
+    measured = near_factor * census.mixed_exact(raw, *map(Fraction, witness['exact_pose']), receipt['index'])
+    require(measured == Fraction(mutation['capture_at_witness']) == Fraction(witness['exact_coverage']),
+            'near witness exact capture mismatch')
+    require(mutation['centre_in_domain'] == census.in_domain(raw, receipt['index'], receipt['centre'])
+            and mutation['witness_in_domain'] == census.in_domain(raw, receipt['index'], witness['exact_pose']),
+            'near control domain flags disagree with maintained domain check')
+    return receipt
+
+
+def timing_read(path):
+    content = path.read_text()
+    values = {}
+    for key in ('real', 'user', 'sys'):
+        match = re.search(rf'(?m)^\s*{key}\s+([0-9.]+)\s*$', content)
+        require(match is not None, f'missing {key} in complete time output: {path}')
+        values[key] = float(match.group(1))
+    values['cpu_seconds'] = values['user'] + values['sys']
+    return values
+
+
+def process_tree_cpu(pid):
+    # A live cap guard only. The retained cost comes from complete /usr/bin/time output.
+    result = subprocess.run(['/bin/ps', '-axo', 'pid=,ppid=,time='], capture_output=True, text=True, check=True)
+    rows = [line.split() for line in result.stdout.splitlines()]
+    descendants = {pid}
+    while True:
+        added = {int(child) for child, parent, _ in rows if int(parent) in descendants}
+        if added <= descendants:
+            break
+        descendants |= added
+    total = 0.0
+    for child, _, cpu in rows:
+        if int(child) in descendants:
+            parts = cpu.split(':')
+            total += sum(float(value) * 60**i for i, value in enumerate(reversed(parts)))
+    return total
+
+
+def command(case, mode, attempt, spent):
+    selected(admit(), case.certificate, case.n, census.net_directions(case))
+    argv = [str(PRIMARY_PYTHON), '-m', 'devtools.sqverify_fast_census', '--family', 'mixed',
+            '--binary', str(BINARY), '--out', str(OUT), '--only', case.certificate,
+            '--packets', PACKET, '--threads', '2']
+    argv += ['--resume'] if mode == 'capture' else ['--' + mode]
+    time_path = attempt / f'{mode}.time'
+    full = ['/usr/bin/time', '-lp', '-o', str(time_path), *argv]
+    record = {'argv': full, 'started_utc': utc(), 'mode': mode}
+    save(attempt / f'{mode}-execution.json', record)
+    with (attempt / f'{mode}.stdout.log').open('xb') as stdout, (attempt / f'{mode}.stderr.log').open('xb') as stderr:
+        process = subprocess.Popen(full, cwd=TREE / 'packing', stdout=stdout, stderr=stderr, start_new_session=True)
+        try:
+            while process.poll() is None:
+                require(spent + process_tree_cpu(process.pid) < PER_CASE_CPU_CAP,
+                        'per-case 40 CPU-hour cap reached')
+                try:
+                    process.wait(timeout=10)
+                except subprocess.TimeoutExpired:
+                    pass
+        except BaseException:
+            if process.poll() is None:
+                os.killpg(process.pid, signal.SIGTERM)
+                try:
+                    process.wait(timeout=30)
+                except subprocess.TimeoutExpired:
+                    os.killpg(process.pid, signal.SIGKILL)
+                    process.wait()
+            raise
+    record.update(finished_utc=utc(), returncode=process.returncode, timing=timing_read(time_path))
+    save(attempt / f'{mode}-execution.json', record)
+    require(process.returncode == 0, f'{mode} CLI failed: {case.certificate}')
+    require(spent + record['timing']['cpu_seconds'] < PER_CASE_CPU_CAP, 'per-case CPU cap exceeded')
+    return record
+
+
+def self_check(cases):
+    historical = next(case for case in cases if case.certificate == HISTORICAL)
+    row, _ = capture_checked(historical, 201, historical=True)
+    receipt = control_checked(historical, 201, row, historical=True)
+    altered = copy.deepcopy(receipt['runs'][1]['sweep'])
+    altered['indices_complete'] = False
+    require(not census.sweep_held(altered), 'negative control-index check did not refuse')
+    altered = copy.deepcopy(receipt['runs'][1]['sweep'])
+    altered['refused'][0]['captures_agree'] = False
+    require(not census.sweep_held(altered), 'negative capture-agreement check did not refuse')
+    return {'historical_capture': 'complete and exact', 'historical_control': 'complete and exact',
+            'negative_incomplete_indices': 'refused', 'negative_capture_disagreement': 'refused'}
+
+
+def run(start_receipt):
+    gate = load(start_receipt)
+    require(gate.get('calibration_accepted') is True and gate.get('orchestration_accepted') is True,
+            'coordinator calibration/orchestration acceptance required')
+    require(gate.get('bead') == 'think-q5tx' and gate.get('binary_sha256') == BINARY_SHA,
+            'wrong start acceptance identity')
+    cases = admit()
+    self_check(cases)
+    checkpoints = OUT / 'case-checkpoints'
+    checkpoints.mkdir(exist_ok=True)
+    with (OUT / '.executor.lock').open('a') as lock:
+        fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        for n, name, count in ROSTER:
+            case = selected(admit(), name, n, count)
+            current = load(OUT / 'census.json')['cases'].get(name)
+            raw = OUT / PACKET / f'{name}.jsonl.gz'
+            control = OUT / PACKET / f'{name}.control.json'
+            completed = OUT / f'{name}.execution.json'
+            if current is not None or raw.exists() or control.exists() or completed.exists():
+                row, _ = capture_checked(case, count)
+                control_checked(case, count, row)
+                require(completed.is_file() and load(completed)['status'] == 'COMPLETE',
+                        f'pair exists without a completed execution checkpoint: {name}')
+                print(json.dumps({'event': 'skipped_complete_pair', 'certificate': name}), flush=True)
+                continue
+            attempt = checkpoints / f'{name}-{dt.datetime.now(dt.UTC):%Y%m%dT%H%M%S}-{uuid.uuid4().hex[:8]}'
+            attempt.mkdir()
+            receipt = {'kind': 'fine-net-first-subset-execution/v1', 'bead': 'think-q5tx',
+                       'certificate': name, 'n': n, 'directions': count, 'threads': 2,
+                       'started_utc': utc(), 'status': 'RUNNING', 'commands': [],
+                       'native_direction_cpu_total': 'unavailable on Mac; preserved native 0/-0 is not measured zero',
+                       'aggregate_timing': '/usr/bin/time -lp includes complete driver and children',
+                       'binary_sha256': BINARY_SHA, 'build': BUILD, 'candidate_sha256': sha(case.candidate),
+                       'source_tree': str(TREE), 'start_acceptance': str(start_receipt),
+                       'promotion': 'none; separate certificate mathematics and records reviews owed',
+                       'followup': 'think-dazj'}
+            save(OUT / 'current-execution.json', receipt)
+            print(json.dumps({'event': 'case_started', 'certificate': name, 'attempt': str(attempt)}), flush=True)
+            try:
+                spent = 0.0
+                for mode in ('capture', 'check', 'control'):
+                    step = command(case, mode, attempt, spent)
+                    receipt['commands'].append(step)
+                    spent += step['timing']['cpu_seconds']
+                    if mode == 'capture':
+                        row, summary = capture_checked(case, count)
+                    elif mode == 'check':
+                        require('1 of 1 retained certificates VERIFIED' in (attempt / 'check.stdout.log').read_text(),
+                                'maintained check did not verify exactly one case')
+                    else:
+                        controls = control_checked(case, count, row)
+                    save(OUT / 'current-execution.json', receipt)
+                historical_unchanged()
+                for source in (OUT / 'census.json', raw, control):
+                    shutil.copyfile(source, attempt / source.name)
+                receipt.update(status='COMPLETE', finished_utc=utc(), cpu_seconds=spent,
+                               wall_seconds=sum(step['timing']['real'] for step in receipt['commands']),
+                               capture_native_process_cpu_seconds=row['cpu_seconds'],
+                               native_summary_cpu_bytes_preserved=summary['direction_cpu_seconds'],
+                               control_refusals=len(controls['runs'][1]['sweep']['refused']),
+                               checkpoint=str(attempt), historical_n108_unchanged=True)
+                save(attempt / 'execution.json', receipt)
+                save(completed, receipt)
+                save(OUT / 'current-execution.json', receipt)
+                print(json.dumps({'event': 'case_complete', 'certificate': name, 'cpu_seconds': spent,
+                                  'wall_seconds': receipt['wall_seconds'], 'checkpoint': str(attempt)}), flush=True)
+            except BaseException as error:
+                receipt.update(status='STOPPED', stopped_utc=utc(), error=repr(error))
+                save(attempt / 'execution.json', receipt)
+                save(OUT / 'current-execution.json', receipt)
+                raise
+        historical_unchanged()
+        print(json.dumps({'event': 'subset_complete', 'new_cases': 13, 'capture_directions': 4485,
+                          'historical_n108_unchanged': True}), flush=True)
+
+
+if __name__ == '__main__':
+    def interrupted(signum, frame):
+        raise KeyboardInterrupt(f'execution interrupted by signal {signum}')
+
+    signal.signal(signal.SIGTERM, interrupted)
+    signal.signal(signal.SIGINT, interrupted)
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--run', type=Path, metavar='COORDINATOR_ACCEPTANCE_JSON')
+    options = parser.parse_args()
+    if options.run:
+        run(options.run)
+    else:
+        cases = admit()
+        print(json.dumps({'status': 'ADMITTED_NO_NATIVE_EXECUTION', 'self_check': self_check(cases),
+                          'roster': ROSTER, 'capture_directions': 4485, 'threads': 2,
+                          'binary_sha256': BINARY_SHA}, indent=2))

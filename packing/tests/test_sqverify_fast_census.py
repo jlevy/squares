@@ -985,8 +985,8 @@ def test_an_evidence_entry_states_its_threads_and_the_review_of_the_source_that_
         name: " ".join(record["proof"]["pinpoints"].split()) for name, record in texts.items()
     }
     assert entry["threads"] == 2
-    assert "CPU seconds at two threads and" in limitations["as run"]
-    assert "CPU seconds at one thread and" in limitations["main"]
+    assert "CPU seconds (wait4) at two threads and" in limitations["as run"]
+    assert "CPU seconds (wait4) at one thread and" in limitations["main"]
     assert "the crate source that ran" not in pinpoints["as run"]
     later = f"the crate source that ran, at 910b6b12c, by {census.DECLARED_NET_REVIEW}"
     assert later in pinpoints["main"]

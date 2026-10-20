@@ -9,6 +9,9 @@ scope: >
   excluded because its role and lifecycle come from resources/README.md rather than
   current project documentation rules.
 documents:
+  - {path: docs/project/reviews/review-2026-10-19-n68-fine-net-mathematics.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-19-fine-net-mac-arithmetic.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-19-n84-n85-fine-net-mathematics.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-16-evand-exact-sides-639.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-19-pr665-integration-diagnostic.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-19-pr671-integration-diagnostic.md, role: review, authority: record, lifecycle: retained}
@@ -506,6 +509,7 @@ documents:
   - {path: packing/benchmarks/n17-bb-native/README.md, role: component-guide, authority: supporting, lifecycle: maintained}
   - {path: packing/benchmarks/measure-verifier/census/README.md, role: generated-view, authority: generated, lifecycle: generated}
   - {path: packing/benchmarks/measure-verifier/census-mixed/README.md, role: generated-view, authority: generated, lifecycle: generated}
+  - {path: packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-2026-10-16/README.md, role: source-index, authority: record, lifecycle: retained}
   - {path: packing/benchmarks/measure-verifier/census-summary.md, role: generated-view, authority: generated, lifecycle: generated}
   - {path: packing/benchmarks/measure-verifier/experiments/exp-006-whole-certificate-n32.md, role: research-report, authority: record, lifecycle: retained}
   - {path: packing/benchmarks/measure-verifier/experiments/exp-007-h005-error-budget.md, role: research-report, authority: record, lifecycle: retained}
