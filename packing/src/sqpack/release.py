@@ -88,11 +88,11 @@ class PublicationHistoryEntry(NamedTuple):
 #: for each deployment's commit, what the page it built stated.
 PUBLICATION_HISTORY = (
     PublicationHistoryEntry(
-        version="v0.7.36",
+        version="v0.8.0",
         first_published="October 20, 2026",
         result_scope=(
-            "Confirm the n68, n84 and n85 fine-net lower bounds T-205 to T-207 at V3/C3 "
-            "from retained complete captures, whole-net controls and mapped reviews."
+            "Open the results page on what was added in the last seven days, day by day, "
+            "above the weekly rollup, with an Added filter on the table."
         ),
     ),
     PublicationHistoryEntry(
@@ -573,7 +573,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "f05be896ca80edee12ce35038de9bdc6186aa773"
+DATA_REVISION = "6c8e4fc0bf498578f1cc1e2536d6d5ac7eec1b15"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -1013,11 +1013,11 @@ RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
     ReleaseImpactDecision(
         component="site",
         previous_version="v0.7.35",
-        version="v0.7.36",
-        impact="patch",
+        version="v0.8.0",
+        impact="minor",
         reason=(
-            "Confirm the n68, n84 and n85 fine-net lower bounds T-205 to T-207 at V3/C3 "
-            "from retained complete captures, whole-net controls and mapped reviews."
+            "Open the results page on what was added in the last seven days, day by day, "
+            "above the weekly rollup, with an Added filter on the table."
         ),
     ),
     ReleaseImpactDecision(
@@ -1693,6 +1693,82 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "HTML and Markdown rendered at the base record tree and at the candidate "
             "head with the same source-link revision are byte-identical. Retain v0.2.3; "
             "no PDF redraw is claimed."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer",),
+        paths=(
+            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
+            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
+            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+        ),
+        reason=(
+            "PR #514's site v0.8.0 cut regenerated the five claim documents, and every "
+            "changed line differs from main only in its source-link revision, e00bfbe5 to "
+            "98845675. The explainer links those documents rather than inlining them, so "
+            "its HTML and Markdown are unchanged by them and it keeps v0.4.8. This is a "
+            "source-reviewed disposition, as #645's was for v0.7.33."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=("packing/campaign/result-requests.yaml",),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "Issue #538's request record gains its 19 October follow-up reply. Rendered "
+            "at 6c8e4fc0 with and without that reply: all 42 files the survey's renderer "
+            "writes are byte-identical, since the survey only links the request record, "
+            "and its PDF prints from that HTML, so it keeps v0.2.3."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/devtools/overview_sections.py",
+            "packing/devtools/register_evand_arrangements.py",
+            "packing/devtools/register_gupta_reports.py",
+            "packing/devtools/register_refinement_reports.py",
+            "packing/devtools/register_ryxu_reports.py",
+            "packing/devtools/render_overview.py",
+            "packing/devtools/site_urls.py",
+            "packing/devtools/upper_bound_reports.py",
+            "packing/frontier/results.yaml",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The results page's overview and its Added filter (#514) change only the "
+            "results page, the results table's rows and bar, the results page's byte "
+            "ceiling's reason, each register entry's new `landed` day, and the register "
+            "entries the import generators draft, which now write `landed`. Rendered at "
+            "6ff2017d, after the merge of main 14fd9e27, once from this branch's tree and "
+            "once with main's copies of its changed files: all 68 files the four papers' "
+            "renderers write are byte-identical, the explainer's HTML included (the order "
+            "of its empty style attribute on a math span can vary between two renders of "
+            "the same code). Each PDF prints from that HTML, so every paper keeps its "
+            "edition: v0.4.8, v0.1.7, v0.1.0 and v0.2.3."
         ),
     ),
     ReleaseNoPublicChange(
@@ -4816,7 +4892,7 @@ def validate_release_impacts(
 #: fresh render, so a link naming the build commit would fail their drift check forever. It is
 #: in no version string. It moves when the claim documents are regenerated for an edition. It
 #: must be a commit on `main`; the site's own links name `main` itself (`devtools.repo_links`).
-PUBLICATION_REVISION = "bf008e4b"
+PUBLICATION_REVISION = "98845675"
 
 
 def data_pathspec() -> tuple[str, ...]:

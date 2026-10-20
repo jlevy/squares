@@ -147,6 +147,7 @@ $defs:
       - id
       - kind
       - registered
+      - landed
       - headline
       - claim
       - scope
@@ -215,6 +216,19 @@ $defs:
           it was published (`attribution.published`). Entries registered before the
           field existed carry the author date of the commit that added them, backfilled
           once by `devtools.backfill_result_registration`.
+      landed:
+        type: string
+        pattern: '^\d{4}-\d{2}-\d{2}$'
+        description: >-
+          The UTC day the entry reached `main`, and with it the site: what the results
+          page's "Added in the Last Seven Days" and its Added filters call added. A lane
+          writes it with the entry, as the day it registers it, and the merge step
+          re-dates a records pull request's new entries to the day of its stamp
+          (`devtools.stamp_landed --apply`), which is the merge day when the stamp is the
+          last step before the merge. It is never earlier than `registered`, and usually
+          a day or two later. Entries on `main` before the field existed were dated once
+          from its first-parent history (`--backfill`), and `--audit` compares the record
+          with that history without gating anything.
       headline:
         type: string
         minLength: 1

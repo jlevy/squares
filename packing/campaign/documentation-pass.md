@@ -73,6 +73,8 @@ For each result, complete this sequence before declaring the change ready to lan
    `results.yaml`, as applicable, with the accepted claim, verification level,
    provenance, and retained receipts.
    Preserve earlier rungs and historical decisions.
+   A new register entry writes `landed` beside `registered`, as the same day; the schema
+   requires it, and step 6 re-dates it.
    A result by others is registered too, when the case record acts on it, by stage 3 of
    the [result import process](result-import.md); `check_results` fails while a recent
    case lower bound has no entry.
@@ -147,6 +149,17 @@ For each result, complete this sequence before declaring the change ready to lan
    Retain the checked source/base and name each publication surface as updated or
    checked current in the closeout.
    A stacked PR must publish the results present at its own layer.
+
+6. Last, when the owner gives the word to merge, re-date the change’s new register
+   entries to the day they reach `main`, the day the results page’s Added in the Last
+   Seven Days lists them under, and re-pin.
+   These are the branch’s last two commits, run again after any re-merge
+   ([result import, stage 5](result-import.md#stage-5-publish)):
+
+   ```shell
+   uv run --frozen --all-extras --group dev python -m devtools.stamp_landed --apply
+   uv run --frozen --all-extras --group dev python -m devtools.release_pin --update
+   ```
 
 The generated tables and README result-ID coverage catch an omitted or stale result;
 they do not prove the hand-written prose around them correct.

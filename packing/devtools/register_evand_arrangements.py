@@ -357,6 +357,7 @@ def register() -> None:
                 "id": RESULT,
                 "kind": "upper-bound",
                 "registered": DAY,
+                "landed": DAY,
                 "headline": (
                     "Three exact feasible upper bounds at n=266,270,272 from new "
                     "source arrangements"

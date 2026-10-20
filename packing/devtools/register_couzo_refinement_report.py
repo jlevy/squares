@@ -63,6 +63,7 @@ def rows() -> tuple[dict[str, Any], dict[str, Any], dict[str, Any], dict[str, An
         "id": RESULT,
         "kind": "upper-bound",
         "registered": DAY,
+        "landed": DAY,
         "headline": "Eight complete rational refinements from Francisco Couzo",
         "claim": (
             "Eight complete rational source certificates report finite upper-bound "
