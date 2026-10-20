@@ -1464,11 +1464,15 @@ def forwarder_arrivals(
     context of its own, never the page alone. Chromium can answer `Target.closeTarget` for
     a page that has just committed a forwarded navigation and leave it open, and
     Playwright's `Page.close` waits, with no timeout, for the page to detach; closing the
-    context disposes of it from the browser, and the call returns when that is done. The
-    forwarder test once passed a shared context, whose pages were closed alone, and main's
-    Packing validation run 39345866613 waited on one such close until its deadline
-    (think-3gfi). `prepare` is given each visit's context before its page opens, for a
-    caller's routes.
+    context disposes of it from the browser, and the call returns when that is done. That
+    is safe because `BrowserContext.close` waits only for the reply to
+    `Target.disposeBrowserContext`, which the pinned headless shell sends after destroying
+    the context's pages synchronously, with no renderer round trip. A full Chrome, as
+    `SQPACK_CHROMIUM` can name, disposes of a context by another path, not yet checked, so
+    a change to the browser pin rechecks this. The forwarder test once passed a shared
+    context, whose pages were closed alone, and main's Packing validation run 39345866613
+    waited on one such close until its deadline (think-3gfi). `prepare` is given each
+    visit's context before its page opens, for a caller's routes.
 
     Each visit waits up to twice `timeout`, so `before_visit` is called before each one:
     the audit's deadline check, which raises to stop the phase between visits rather than

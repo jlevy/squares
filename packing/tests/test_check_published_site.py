@@ -1171,6 +1171,26 @@ class FakeBrowser:
         self.closed = True
 
 
+REFUSED = "Target page, context or browser has been closed"
+
+
+class RefusingContext(FakeContext):
+    """A context of `RefusingBrowser`, in which Playwright cannot open a page."""
+
+    def new_page(self) -> NoReturn:
+        assert not self.closed
+        raise PlaywrightError(REFUSED)
+
+
+class RefusingBrowser(FakeBrowser):
+    """A `FakeBrowser` whose every context refuses its page."""
+
+    def new_context(self) -> FakeContext:
+        assert not self.closed
+        self.contexts.append(RefusingContext(self.clock))
+        return self.contexts[-1]
+
+
 def test_a_deadline_between_forwarder_visits_stops_before_the_next_and_keeps_the_arrivals() -> (
     None
 ):
@@ -1212,6 +1232,62 @@ def test_a_deadline_between_forwarder_visits_stops_before_the_next_and_keeps_the
     assert results == arrivals[:3]
     assert len(stopped.contexts) == 3
     assert all(context.closed for context in stopped.contexts)
+
+
+@pytest.mark.parametrize("raises", ["new_page", "prepare"])
+def test_a_forwarder_visit_that_never_opens_its_page_still_closes_its_context(
+    raises: str,
+) -> None:
+    """A visit's context is closed however the visit ends, not only after an arrival
+    (#693 A1): when `prepare` or the page's opening raises, `forwarder_arrivals` lets the
+    error through with no verdict for the visit, and the context it opened is closed."""
+    browser = RefusingBrowser([0.0]) if raises == "new_page" else FakeBrowser([0.0])
+
+    def prepare(_context: BrowserContext) -> None:
+        if raises == "prepare":
+            raise PlaywrightError(REFUSED)
+
+    results: list[tuple[bool, str]] = []
+    with pytest.raises(PlaywrightError, match=REFUSED):
+        check_published_site.forwarder_arrivals(
+            cast(Browser, browser),
+            "https://example.org/",
+            timeout=1,
+            prepare=prepare,
+            results=results,
+        )
+    assert results == []
+    (context,) = browser.contexts
+    assert context.closed
+    assert context.pages == []
+    assert not browser.closed
+
+
+def test_a_refused_forwarder_page_is_a_failed_verdict_with_its_context_and_browser_closed(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Through `forwarders_followed`, a page the browser refuses to open is the browser's
+    own error, so it is the phase's one failed verdict, and both the visit's context and
+    the browser are closed before it is reported (#693 A1)."""
+    launched: list[FakeBrowser] = []
+
+    class Chromium:
+        def launch(self, **_options: object) -> FakeBrowser:
+            launched.append(RefusingBrowser([0.0]))
+            return launched[-1]
+
+    @contextmanager
+    def driver() -> Iterator[SimpleNamespace]:
+        yield SimpleNamespace(chromium=Chromium())
+
+    monkeypatch.setattr(check_published_site, "sync_playwright", driver)
+    assert check_published_site.forwarders_followed("https://example.org/", timeout=1) == [
+        (False, f"the forwarders could not be visited: {REFUSED}")
+    ]
+    (browser,) = launched
+    (context,) = browser.contexts
+    assert context.closed
+    assert browser.closed
 
 
 def test_a_deadline_during_the_forwarder_visits_prints_the_arrivals_and_closes_the_browser(
