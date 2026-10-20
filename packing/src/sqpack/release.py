@@ -2150,26 +2150,32 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         outputs=(
             "papers/n11-lower-bounds-explainer.html",
             "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-lower-bounds-explainer.pdf",
             "papers/n11-optimality-review.html",
             "papers/n11-optimality-review.md",
             "papers/n11-threshold-bound-review.html",
             "papers/n11-threshold-bound-review.md",
             "papers/square-packing-methods-survey.html",
             "papers/square-packing-methods-survey.md",
+            "papers/square-packing-methods-survey.pdf",
         ),
         reason=(
             "PR406 (review H1) moves stored_size, OR-18's size of a blob as Git stores "
             "it, from upper_bound_houses into the new devtools.git_storage, so that the "
             "added-blob guard shares it without importing the house tooling. The "
             "function body is unchanged and upper_bound_houses imports it under the same "
-            "name; the module's other change is its docstring. The four papers reach "
-            "upper_bound_houses only through check_source_coverage (via site_urls and "
-            "render_overview) and build_known_best_atlas (via artifact_dates), and "
-            "neither calls stored_size, staged_sizes or print_sizes, which only the "
-            "module's own sizes command runs. Manuscripts, scientific inputs, figures "
-            "and paper metadata are unchanged, so the explainer keeps v0.4.8, the "
-            "optimality review v0.1.7, the threshold review v0.1.0 and the methods "
-            "survey v0.2.3. Source-reviewed; no render or byte identity is claimed."
+            "name; the module's other change is its docstring. Six modules in each "
+            "paper's producer import closure, the explainer's and the survey's PDF "
+            "producer included, import upper_bound_houses: adopt_houses, "
+            "build_known_best_atlas, check_results, check_source_coverage, "
+            "register_regularized_bounds and run_negative_controls (review J1). Every "
+            "one of them leaves stored_size, staged_sizes and print_sizes uncalled; only "
+            "the module's own sizes command runs them, and the rest of git_storage "
+            "serves only the added-blob guard, which no paper producer imports. "
+            "Manuscripts, scientific inputs, figures and paper metadata are unchanged, "
+            "so the explainer keeps v0.4.8, the optimality review v0.1.7, the threshold "
+            "review v0.1.0 and the methods survey v0.2.3. Source-reviewed; no render or "
+            "byte identity is claimed."
         ),
     ),
     ReleaseNoPublicChange(
