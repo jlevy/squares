@@ -1537,6 +1537,63 @@ class ReleaseNoPublicChange(NamedTuple):
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
     ReleaseNoPublicChange(
+        components=("site",),
+        paths=(
+            "packing/devtools/build_known_best_atlas.py",
+            "packing/src/sqpack/witness.py",
+        ),
+        outputs=("atlas.html", "index.html", "results.html"),
+        reason=(
+            "Reviewed October 19, 2026 against main 14fd9e27 (think-ev4k): _margin_summary "
+            "computes each square's axes and projections once and stops measuring a pair "
+            "once its partial best gap exceeds the running minimum, and the atlas builder "
+            "memoizes built cases and draws the composite test's poster from its own cases. "
+            "An interleaved A/B rebuild of all 324 cases produced byte-identical witness and "
+            "rendering text for 324 of 324, and build_known_best_atlas --check found every "
+            "retained witness, margins included, byte-equal to the rebuild. The atlas, home "
+            "and results pages draw those retained records, which do not change. This is a "
+            "measured disposition of the records; no site rebuild byte comparison is claimed."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/devtools/build_known_best_atlas.py",
+            "packing/src/sqpack/witness.py",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-lower-bounds-explainer.pdf",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-optimality-review.pdf",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/n11-threshold-bound-review.pdf",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+            "papers/square-packing-methods-survey.pdf",
+        ),
+        reason=(
+            "Reviewed October 19, 2026 against main 14fd9e27 (think-ev4k): the builder change "
+            "only memoizes built cases and lets the composite test build its poster's own "
+            "cases, and witness.py's margin summary returns the same values with less work "
+            "(held to the exhaustive definition by test_margin_summary_matches_the_exhaustive_"
+            "definition). The papers consume the retained atlas records it produces, and "
+            "build_known_best_atlas --check found every retained witness and rendering "
+            "byte-equal to the rebuild after the change; an interleaved A/B rebuild of all "
+            "324 cases was byte-identical. Manuscripts, figures, scientific inputs and paper "
+            "metadata are unchanged; every paper keeps its edition. This is a measured "
+            "disposition of the records; no paper render or PDF redraw is claimed."
+        ),
+    ),
+    ReleaseNoPublicChange(
         components=("paper:n11-lower-bounds-explainer",),
         paths=(
             "packing/atlas/known-best/bound-citations.json",
