@@ -3,9 +3,9 @@ type: is
 id: is-01m59few7wa6j6yrnw49hjap7r
 title: "Import Evan Daniel: s(183) below side 14 (#680)"
 kind: task
-status: closed
+status: open
 priority: 2
-version: 12
+version: 13
 delegate: lane-680
 labels:
   - result-import
@@ -19,10 +19,10 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-19T07:01:50.456Z
-updated_at: 2026-10-20T21:06:25.727Z
+updated_at: 2026-10-20T21:41:41.120Z
 started_at: 2026-10-19T07:02:24.366Z
-closed_at: 2026-10-20T21:06:25.727Z
-close_reason: "#680 answered and closed: T-220 at V3/C3 registered and adopted (#687), final reply 680#6297284604 and follow-up 680#6300872327, recorded on main by #700 (f8d547728)."
+closed_at: null
+close_reason: null
 resolution: null
 duplicate_of: null
 ---
