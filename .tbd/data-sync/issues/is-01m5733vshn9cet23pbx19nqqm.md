@@ -5,7 +5,7 @@ title: "Import evand: s(229) ≤ 15.650163254859: registration request (#674)"
 kind: task
 status: in_progress
 priority: 2
-version: 11
+version: 12
 delegate: lane-new
 labels:
   - result-import
@@ -17,7 +17,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-18T08:47:37.776Z
-updated_at: 2026-10-19T23:58:23.897Z
+updated_at: 2026-10-20T00:54:07.176Z
 started_at: 2026-10-18T12:48:51.614Z
 ---
 W1 intake 2026-10-18, parent think-xmxb. https://github.com/jlevy/squares/issues/674
@@ -57,3 +57,5 @@ The retained lineage is Daniel after Couzo's packing, after de Winter's. Stage 3
 2026-10-19 22:23Z lane-new: V3/C3 after the 19 October review (0466eb5aa); house adopted at the count (be6aa80aa, claude/intake-2026-10-19-evand-singles); regularization runs under think-ip1p finishing.
 
 2026-10-20 lane-new: PR #692 opened (head f76d57a40, base 028bc72ec) with records, adoption at 155/229/236/271, regularization (think-ip1p), explainer v0.4.9 and site v0.7.36. packing-validate --records passes 52 steps at the head; --push is running. Senior review requested via the coordinator. Stage 7 reply waits for the merge and check_published_site.
+
+2026-10-20 lane-new: PR #692 head e877e19ad. The first CI run at f76d57a40 found adoption follow-ups: sweeps checkout, censuses, translation screen, PR 574 claims, n-155 closed form, bibliography Levy suffix, test golden counts. They are fixed in 9b0c82d82 and a8222aad4. main b16ddeb0a (#691) is merged and the worker snapshot pruned of the 229 review SVG. v0.7.36 is re-cut last. --records passes 52/52.

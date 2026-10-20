@@ -5,7 +5,7 @@ title: "Resolve credit correction: evand: Credit correction request: s(146) and 
 kind: task
 status: in_progress
 priority: 2
-version: 8
+version: 9
 delegate: lane-new
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m572ssbx1x412zpvsw1sb6je
 hold: null
 hold_until: null
 created_at: 2026-10-18T08:47:37.317Z
-updated_at: 2026-10-19T23:58:26.993Z
+updated_at: 2026-10-20T00:54:09.897Z
 started_at: 2026-10-18T13:04:20.677Z
 ---
 W1 intake 2026-10-18, parent think-xmxb. https://github.com/jlevy/squares/issues/673
@@ -48,3 +48,5 @@ Stage 2 still needs the relevant lineage records and the scope of the path argum
 2026-10-19 22:23Z lane-new: committed in be6aa80aa (CREDITS 146/308, records refreshed through the writer, T-187/T-141 notes); result-requests #673 ask done.
 
 2026-10-20 lane-new: PR #692 opened (head f76d57a40, base 028bc72ec) with records, adoption at 155/229/236/271, regularization (think-ip1p), explainer v0.4.9 and site v0.7.36. packing-validate --records passes 52 steps at the head; --push is running. Senior review requested via the coordinator. Stage 7 reply waits for the merge and check_published_site.
+
+2026-10-20 lane-new: PR #692 head e877e19ad. The first CI run at f76d57a40 found adoption follow-ups: sweeps checkout, censuses, translation screen, PR 574 claims, n-155 closed form, bibliography Levy suffix, test golden counts. They are fixed in 9b0c82d82 and a8222aad4. main b16ddeb0a (#691) is merged and the worker snapshot pruned of the 229 review SVG. v0.7.36 is re-cut last. --records passes 52/52.

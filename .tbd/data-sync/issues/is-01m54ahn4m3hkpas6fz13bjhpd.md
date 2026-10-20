@@ -5,7 +5,7 @@ title: "Import Evan Daniel: s(236) <= 15.861934390608, a new local minimum 2.02e
 kind: task
 status: in_progress
 priority: 1
-version: 10
+version: 11
 delegate: lane-new
 labels:
   - result-import
@@ -16,7 +16,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-17T06:59:46.452Z
-updated_at: 2026-10-19T23:58:15.741Z
+updated_at: 2026-10-20T00:53:58.357Z
 started_at: 2026-10-18T08:47:56.022Z
 ---
 Evan Daniel (@evand) reports s(236) <= 15.861934390608 on jlevy/squares#659 (filed 2026-10-16T14:05:14Z): the exact rational side 7930967195303679308621899285697/(5*10^29) = 15.861934390607358617243798571394 of evand/square-packing 5ad00693899ef50ccf6502f0346187cc422cc914 (committed 2026-10-16T14:03:49Z), search/packer/candidates/s236_bm3c.cert, rounded up at 12 places. Found by the 17 October intake pass (think-e2sz), lane W (user-eb-sweep-1017). Stage 1 triage below; stages 2 to 4 are this bead's, in an import lane the coordinator assigns.
@@ -70,3 +70,5 @@ blocked_on: none
 2026-10-19 22:23Z lane-new: V3/C3 after the 19 October review (0466eb5aa); house adopted at the count (be6aa80aa, claude/intake-2026-10-19-evand-singles); regularization runs under think-ip1p finishing.
 
 2026-10-20 lane-new: PR #692 opened (head f76d57a40, base 028bc72ec) with records, adoption at 155/229/236/271, regularization (think-ip1p), explainer v0.4.9 and site v0.7.36. packing-validate --records passes 52 steps at the head; --push is running. Senior review requested via the coordinator. Stage 7 reply waits for the merge and check_published_site.
+
+2026-10-20 lane-new: PR #692 head e877e19ad. The first CI run at f76d57a40 found adoption follow-ups: sweeps checkout, censuses, translation screen, PR 574 claims, n-155 closed form, bibliography Levy suffix, test golden counts. They are fixed in 9b0c82d82 and a8222aad4. main b16ddeb0a (#691) is merged and the worker snapshot pruned of the 229 review SVG. v0.7.36 is re-cut last. --records passes 52/52.
