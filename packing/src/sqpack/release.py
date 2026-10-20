@@ -511,6 +511,15 @@ PUBLICATION_STATUS = ""
 #: Both retained 1-100 and 1-324 graphics, their PDFs and PNGs share this history.
 INFOGRAPHIC_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.6.4",
+        first_published="October 20, 2026",
+        result_scope=(
+            "Redraw both atlas posters with Evan Daniel's n183 packing (T-220), which "
+            "takes 183 off the 14 x 14 grid, and the houses of 19 October at 155, 229, "
+            "236 and 271."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.6.3",
         first_published="October 17, 2026",
         result_scope=(
@@ -1043,6 +1052,17 @@ class ReleaseImpactDecision(NamedTuple):
 # New component cuts append decisions here, newest first, alongside their own histories.
 # No impact is invented retrospectively for the published baseline editions.
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
+    ReleaseImpactDecision(
+        component="infographics",
+        previous_version="v0.6.3",
+        version="v0.6.4",
+        impact="patch",
+        reason=(
+            "Redraw both atlas posters with Evan Daniel's n183 packing (T-220), which "
+            "takes 183 off the 14 x 14 grid, and the houses of 19 October at 155, 229, "
+            "236 and 271."
+        ),
+    ),
     ReleaseImpactDecision(
         component="site",
         previous_version="v0.8.2",
