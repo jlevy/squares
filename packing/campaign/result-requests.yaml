@@ -9520,7 +9520,7 @@ issues:
       not_registered: >-
         Weaker than an earlier report: #574's rational certificates at these counts (T-174), which three
         exact routes here decided, are below S* by 1.18e-62, 9.23e-63 and 6.62e-63, so S* is not the
-        least side of those packings. The acknowledgement drafted in think-phyb asks the author why.
+        least side of those packings. The final reply of 19 October asks the author why.
       queued: false
     beads:
     - think-phyb
@@ -9554,8 +9554,9 @@ issues:
       case records also name improvers (Gupta, Polkovskyi, Couzo and Daniel), whom the registered entry
       credits before Daniel's exact form, as a refinement. At 207 the source reports that its re-solve of
       the record's witness did not verify one pair and that the committed form comes from a copy that
-      ties it; T-173's rational certificate there was decided by three exact routes here, and the
-      acknowledgement asks what the re-solve shows. The source also lists 52 counts still without an
+      ties it; T-173's rational certificate there was decided by three exact routes here. The drafts in
+      think-phyb asked what the re-solve shows, but the final reply of 19 October dropped the question,
+      so whether to ask it as a follow-up is still open. The source also lists 52 counts still without an
       exact form, and s(29), whose polynomial #545 reports; neither is a claim.
   - number: 640
     title: 'Complete Lean proof of s(19) optimality: registration request'
