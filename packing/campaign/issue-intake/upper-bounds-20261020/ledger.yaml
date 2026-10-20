@@ -1,0 +1,948 @@
+format: intake-ledger-v1
+read_at_main: d588ad987bd8de53361d087b8961a7f2bf157c41
+read_on: '2026-10-20'
+rule: If they are reported in order, then each one should be recorded as a result, as long
+  as each one is stronger than the last. If a stronger result is reported first, then the
+  other one should not be recorded since it is weaker after that, unless there is some key
+  reason it should be recorded.
+lanes: []
+reports:
+- report: '#666'
+  url: https://github.com/jlevy/squares/issues/666
+  kind: issue
+  holders: Joost de Winter
+  reported_at: '2026-10-17T07:06:07Z'
+  bead: think-3m10
+  claims:
+  - n: 464
+    printed: '21.988813022694'
+    rounding: up
+  - n: 603
+    printed: '24.995268064197'
+    rounding: up
+  - n: 654
+    printed: '25.996103908965'
+    rounding: up
+  - n: 706
+    printed: '26.998712100405'
+    rounding: up
+  - n: 760
+    printed: '27.995949340329'
+    rounding: up
+  - n: 817
+    printed: '28.998488480775'
+    rounding: up
+  - n: 875
+    printed: '29.998783733108'
+    rounding: up
+  - n: 935
+    printed: '30.995955854834'
+    rounding: up
+  - n: 998
+    printed: '31.998349747355'
+    rounding: up
+  note: Issue-table prints at the counts issue 686 claims, as an earlier report there; the
+    report's other counts are not read here, and the 18 October ledger compares them all.
+    A ledger verdict alone is not registration or feasibility verification.
+- report: '#670'
+  url: https://github.com/jlevy/squares/issues/670
+  kind: issue
+  holders: Francisco Couzo
+  reported_at: '2026-10-17T18:05:06Z'
+  bead: think-f28n
+  claims:
+  - n: 330
+    printed: '18.701641583454'
+    rounding: up
+  - n: 339
+    printed: '18.911307592083'
+    rounding: up
+  - n: 378
+    printed: '19.942505611659'
+    rounding: up
+  - n: 379
+    printed: '19.953014213942'
+    rounding: up
+  - n: 417
+    printed: '20.942505611684'
+    rounding: up
+  - n: 418
+    printed: '20.945240141353'
+    rounding: up
+  - n: 419
+    printed: '20.959713620588'
+    rounding: up
+  - n: 421
+    printed: '20.982817421775'
+    rounding: up
+  - n: 422
+    printed: '20.984021832955'
+    rounding: up
+  - n: 459
+    printed: '21.943735551416'
+    rounding: up
+  - n: 460
+    printed: '21.957651945776'
+    rounding: up
+  - n: 461
+    printed: '21.972483922352'
+    rounding: up
+  - n: 462
+    printed: '21.980759715480'
+    rounding: up
+  - n: 463
+    printed: '21.984021832955'
+    rounding: up
+  - n: 503
+    printed: '22.957558542542'
+    rounding: up
+  - n: 505
+    printed: '22.972317735354'
+    rounding: up
+  - n: 548
+    printed: '23.957558542543'
+    rounding: up
+  - n: 551
+    printed: '23.966898919633'
+    rounding: up
+  - n: 553
+    printed: '23.981588093282'
+    rounding: up
+  - n: 598
+    printed: '24.962916747309'
+    rounding: up
+  - n: 600
+    printed: '24.981585347399'
+    rounding: up
+  - n: 647
+    printed: '25.953248543199'
+    rounding: up
+  - n: 650
+    printed: '25.982429027496'
+    rounding: up
+  - n: 651
+    printed: '25.983790120159'
+    rounding: up
+  - n: 700
+    printed: '26.972996848621'
+    rounding: up
+  - n: 701
+    printed: '26.975561031531'
+    rounding: up
+  - n: 702
+    printed: '26.977494114977'
+    rounding: up
+  - n: 703
+    printed: '26.987493360751'
+    rounding: up
+  - n: 756
+    printed: '27.984237490911'
+    rounding: up
+  - n: 757
+    printed: '27.989936988207'
+    rounding: up
+  - n: 758
+    printed: '27.994980212536'
+    rounding: up
+  - n: 811
+    printed: '28.982472918533'
+    rounding: up
+  - n: 812
+    printed: '28.982472918533'
+    rounding: up
+  - n: 813
+    printed: '28.990394020145'
+    rounding: up
+  - n: 868
+    printed: '29.982204111182'
+    rounding: up
+  - n: 869
+    printed: '29.982472918533'
+    rounding: up
+  - n: 870
+    printed: '29.985969207342'
+    rounding: up
+  - n: 871
+    printed: '29.989329079687'
+    rounding: up
+  - n: 927
+    printed: '30.976993727283'
+    rounding: up
+  - n: 928
+    printed: '30.976993727283'
+    rounding: up
+  - n: 929
+    printed: '30.978848462737'
+    rounding: up
+  - n: 930
+    printed: '30.982052182975'
+    rounding: up
+  - n: 989
+    printed: '31.976993727283'
+    rounding: up
+  - n: 990
+    printed: '31.978848462737'
+    rounding: up
+  - n: 991
+    printed: '31.982052182975'
+    rounding: up
+  - n: 992
+    printed: '31.985130163599'
+    rounding: up
+  - n: 993
+    printed: '31.985130163599'
+    rounding: up
+  note: Issue-table prints at the counts issue 686 claims, as an earlier report there; the
+    report's other counts are not read here, and the 18 October ledger compares them all.
+    A ledger verdict alone is not registration or feasibility verification.
+- report: '#672'
+  url: https://github.com/jlevy/squares/issues/672
+  kind: issue
+  holders: Francisco Couzo
+  reported_at: '2026-10-17T20:48:34Z'
+  bead: think-2vjc
+  claims:
+  - n: 330
+    printed: '18.692698795114'
+    rounding: up
+  - n: 461
+    printed: '21.971645445094'
+    rounding: up
+  - n: 652
+    printed: '25.994469543497'
+    rounding: up
+  - n: 704
+    printed: '26.994469543497'
+    rounding: up
+  - n: 755
+    printed: '27.951635349895'
+    rounding: up
+  - n: 756
+    printed: '27.983489205831'
+    rounding: up
+  - n: 757
+    printed: '27.989936967966'
+    rounding: up
+  - n: 758
+    printed: '27.994973756311'
+    rounding: up
+  - n: 759
+    printed: '27.995946347749'
+    rounding: up
+  - n: 811
+    printed: '28.982462261975'
+    rounding: up
+  - n: 812
+    printed: '28.982462261975'
+    rounding: up
+  - n: 813
+    printed: '28.989935237439'
+    rounding: up
+  - n: 814
+    printed: '28.995946347758'
+    rounding: up
+  - n: 815
+    printed: '28.995946384109'
+    rounding: up
+  - n: 816
+    printed: '28.998352177961'
+    rounding: up
+  - n: 817
+    printed: '28.998352177961'
+    rounding: up
+  - n: 868
+    printed: '29.982119729132'
+    rounding: up
+  - n: 869
+    printed: '29.982462261984'
+    rounding: up
+  - n: 871
+    printed: '29.986798495028'
+    rounding: up
+  - n: 872
+    printed: '29.995946384118'
+    rounding: up
+  - n: 873
+    printed: '29.998242686046'
+    rounding: up
+  - n: 874
+    printed: '29.998242686046'
+    rounding: up
+  - n: 929
+    printed: '30.978235012084'
+    rounding: up
+  - n: 930
+    printed: '30.982010362324'
+    rounding: up
+  - n: 932
+    printed: '30.993904118222'
+    rounding: up
+  - n: 933
+    printed: '30.995336946282'
+    rounding: up
+  - n: 934
+    printed: '30.995336946282'
+    rounding: up
+  - n: 935
+    printed: '30.995336946282'
+    rounding: up
+  - n: 990
+    printed: '31.978235012084'
+    rounding: up
+  - n: 991
+    printed: '31.982010362324'
+    rounding: up
+  - n: 994
+    printed: '31.995336946282'
+    rounding: up
+  - n: 995
+    printed: '31.995336946282'
+    rounding: up
+  - n: 996
+    printed: '31.995336946282'
+    rounding: up
+  note: Issue-table prints at the counts issue 686 claims, as an earlier report there; the
+    report's other counts are not read here, and the 18 October ledger compares them all.
+    A ledger verdict alone is not registration or feasibility verification.
+- report: '#675'
+  url: https://github.com/jlevy/squares/issues/675
+  kind: issue
+  holders: Francisco Couzo
+  reported_at: '2026-10-18T06:02:11Z'
+  bead: think-pvav
+  claims:
+  - n: 419
+    printed: '20.959713421191'
+    rounding: up
+  - n: 421
+    printed: '20.982817268367'
+    rounding: up
+  - n: 422
+    printed: '20.983607310148'
+    rounding: up
+  - n: 459
+    printed: '21.942423483273'
+    rounding: up
+  - n: 460
+    printed: '21.957558542548'
+    rounding: up
+  - n: 461
+    printed: '21.971616092121'
+    rounding: up
+  - n: 462
+    printed: '21.980489088007'
+    rounding: up
+  - n: 463
+    printed: '21.983605908182'
+    rounding: up
+  - n: 464
+    printed: '21.988035588879'
+    rounding: up
+  - n: 502
+    printed: '22.942402035201'
+    rounding: up
+  - n: 548
+    printed: '23.957455469976'
+    rounding: up
+  - n: 554
+    printed: '23.993580713561'
+    rounding: up
+  - n: 598
+    printed: '24.962908839930'
+    rounding: up
+  - n: 602
+    printed: '24.993580715986'
+    rounding: up
+  - n: 603
+    printed: '24.994263342387'
+    rounding: up
+  - n: 650
+    printed: '25.982428402604'
+    rounding: up
+  - n: 652
+    printed: '25.994256215430'
+    rounding: up
+  - n: 654
+    printed: '25.995905846673'
+    rounding: up
+  - n: 700
+    printed: '26.972954520906'
+    rounding: up
+  - n: 701
+    printed: '26.975560060840'
+    rounding: up
+  - n: 705
+    printed: '26.995905846673'
+    rounding: up
+  - n: 706
+    printed: '26.998639495676'
+    rounding: up
+  - n: 755
+    printed: '27.951593396552'
+    rounding: up
+  - n: 756
+    printed: '27.982602664098'
+    rounding: up
+  - n: 758
+    printed: '27.993798579000'
+    rounding: up
+  - n: 759
+    printed: '27.993798579000'
+    rounding: up
+  - n: 760
+    printed: '27.995946706541'
+    rounding: up
+  - n: 811
+    printed: '28.981360068210'
+    rounding: up
+  - n: 812
+    printed: '28.981360068210'
+    rounding: up
+  - n: 813
+    printed: '28.989934397793'
+    rounding: up
+  - n: 814
+    printed: '28.993798579000'
+    rounding: up
+  - n: 816
+    printed: '28.998219025338'
+    rounding: up
+  - n: 817
+    printed: '28.998234675372'
+    rounding: up
+  - n: 868
+    printed: '29.981359990606'
+    rounding: up
+  - n: 869
+    printed: '29.981360065447'
+    rounding: up
+  - n: 870
+    printed: '29.985524292952'
+    rounding: up
+  - n: 872
+    printed: '29.995946381399'
+    rounding: up
+  - n: 873
+    printed: '29.998171180951'
+    rounding: up
+  - n: 874
+    printed: '29.998171180951'
+    rounding: up
+  - n: 927
+    printed: '30.976949083864'
+    rounding: up
+  - n: 928
+    printed: '30.976949083864'
+    rounding: up
+  - n: 930
+    printed: '30.981543197185'
+    rounding: up
+  - n: 932
+    printed: '30.993891653207'
+    rounding: up
+  - n: 933
+    printed: '30.995293256848'
+    rounding: up
+  - n: 989
+    printed: '31.976125363479'
+    rounding: up
+  - n: 990
+    printed: '31.978044872634'
+    rounding: up
+  - n: 991
+    printed: '31.981535631408'
+    rounding: up
+  - n: 992
+    printed: '31.984841090107'
+    rounding: up
+  - n: 993
+    printed: '31.984841090107'
+    rounding: up
+  - n: 994
+    printed: '31.993865896560'
+    rounding: up
+  - n: 995
+    printed: '31.994784549711'
+    rounding: up
+  - n: 996
+    printed: '31.994784549711'
+    rounding: up
+  - n: 997
+    printed: '31.998300669675'
+    rounding: up
+  - n: 998
+    printed: '31.998301912120'
+    rounding: up
+  note: Issue-table prints at the counts issue 686 claims, as an earlier report there; the
+    report's other counts are not read here, and the 18 October ledger compares them all.
+    A ledger verdict alone is not registration or feasibility verification.
+- report: '#678'
+  url: https://github.com/jlevy/squares/issues/678
+  kind: issue
+  holders: Francisco Couzo
+  reported_at: '2026-10-18T23:23:19Z'
+  bead: think-xu4d
+  claims:
+  - n: 330
+    printed: '18.692697855726'
+    rounding: up
+  - n: 418
+    printed: '20.942828529884'
+    rounding: up
+  - n: 420
+    printed: '20.974164562587'
+    rounding: up
+  - n: 421
+    printed: '20.981525640927'
+    rounding: up
+  - n: 422
+    printed: '20.983607201006'
+    rounding: up
+  - n: 459
+    printed: '21.942365250364'
+    rounding: up
+  - n: 461
+    printed: '21.971318847922'
+    rounding: up
+  - n: 462
+    printed: '21.974888792980'
+    rounding: up
+  - n: 463
+    printed: '21.983603993953'
+    rounding: up
+  - n: 464
+    printed: '21.987753655547'
+    rounding: up
+  - n: 502
+    printed: '22.942219237446'
+    rounding: up
+  - n: 505
+    printed: '22.971592368271'
+    rounding: up
+  - n: 548
+    printed: '23.956345132949'
+    rounding: up
+  - n: 553
+    printed: '23.980727660940'
+    rounding: up
+  - n: 554
+    printed: '23.993524047733'
+    rounding: up
+  - n: 597
+    printed: '24.961502766154'
+    rounding: up
+  - n: 598
+    printed: '24.961502766154'
+    rounding: up
+  - n: 600
+    printed: '24.980727660940'
+    rounding: up
+  - n: 601
+    printed: '24.987983019378'
+    rounding: up
+  - n: 602
+    printed: '24.993580713561'
+    rounding: up
+  - n: 650
+    printed: '25.982275449119'
+    rounding: up
+  - n: 652
+    printed: '25.994256214773'
+    rounding: up
+  - n: 654
+    printed: '25.995888235804'
+    rounding: up
+  - n: 700
+    printed: '26.972679052192'
+    rounding: up
+  - n: 701
+    printed: '26.975549413717'
+    rounding: up
+  - n: 703
+    printed: '26.987459573204'
+    rounding: up
+  - n: 704
+    printed: '26.994256369878'
+    rounding: up
+  - n: 705
+    printed: '26.994256369878'
+    rounding: up
+  - n: 706
+    printed: '26.998542133963'
+    rounding: up
+  - n: 755
+    printed: '27.951504031492'
+    rounding: up
+  - n: 760
+    printed: '27.995022162160'
+    rounding: up
+  - n: 815
+    printed: '28.995022162160'
+    rounding: up
+  - n: 868
+    printed: '29.977390686090'
+    rounding: up
+  - n: 870
+    printed: '29.985424855417'
+    rounding: up
+  - n: 872
+    printed: '29.995022162160'
+    rounding: up
+  - n: 873
+    printed: '29.996375057644'
+    rounding: up
+  - n: 874
+    printed: '29.996375057644'
+    rounding: up
+  - n: 927
+    printed: '30.975475685281'
+    rounding: up
+  - n: 928
+    printed: '30.975475685281'
+    rounding: up
+  - n: 930
+    printed: '30.981535303483'
+    rounding: up
+  - n: 933
+    printed: '30.994238714880'
+    rounding: up
+  - n: 934
+    printed: '30.995302140806'
+    rounding: up
+  - n: 989
+    printed: '31.975475685281'
+    rounding: up
+  - n: 990
+    printed: '31.977918827720'
+    rounding: up
+  - n: 991
+    printed: '31.981485095638'
+    rounding: up
+  - n: 992
+    printed: '31.984796372085'
+    rounding: up
+  - n: 994
+    printed: '31.993645614627'
+    rounding: up
+  - n: 998
+    printed: '31.998301106112'
+    rounding: up
+  note: Issue-table prints at the counts issue 686 claims, as an earlier report there; the
+    report's other counts are not read here, and their comparison stays with the import bead.
+    A ledger verdict alone is not registration or feasibility verification.
+- report: '#686'
+  url: https://github.com/jlevy/squares/issues/686
+  kind: issue
+  holders: Darius Muglich
+  reported_at: '2026-10-19T20:43:04Z'
+  bead: think-9vjn
+  claims:
+  - n: 328
+    printed: '18.614376892294788'
+    rounding: up
+  - n: 330
+    printed: '18.692672444467133'
+    rounding: up
+  - n: 339
+    printed: '18.907351471178022'
+    rounding: up
+  - n: 344
+    printed: '18.992727809365345'
+    rounding: up
+  - n: 365
+    printed: '19.614376892314402'
+    rounding: up
+  - n: 377
+    printed: '19.925471653974826'
+    rounding: up
+  - n: 378
+    printed: '19.942018855984576'
+    rounding: up
+  - n: 379
+    printed: '19.950889681503441'
+    rounding: up
+  - n: 380
+    printed: '19.961350023835208'
+    rounding: up
+  - n: 381
+    printed: '19.974739840483985'
+    rounding: up
+  - n: 404
+    printed: '20.614376892315402'
+    rounding: up
+  - n: 412
+    printed: '20.822995415461893'
+    rounding: up
+  - n: 417
+    printed: '20.934672165248002'
+    rounding: up
+  - n: 418
+    printed: '20.939184128264923'
+    rounding: up
+  - n: 419
+    printed: '20.957804836274712'
+    rounding: up
+  - n: 420
+    printed: '20.966588191190457'
+    rounding: up
+  - n: 421
+    printed: '20.976371064794590'
+    rounding: up
+  - n: 422
+    printed: '20.983575254585011'
+    rounding: up
+  - n: 453
+    printed: '21.822995415463173'
+    rounding: up
+  - n: 459
+    printed: '21.937227864889785'
+    rounding: up
+  - n: 460
+    printed: '21.950987687999201'
+    rounding: up
+  - n: 461
+    printed: '21.966193114436095'
+    rounding: up
+  - n: 462
+    printed: '21.966193114414129'
+    rounding: up
+  - n: 463
+    printed: '21.973675720477602'
+    rounding: up
+  - n: 464
+    printed: '21.986268532628047'
+    rounding: up
+  - n: 496
+    printed: '22.822875659409473'
+    rounding: up
+  - n: 502
+    printed: '22.934445598628207'
+    rounding: up
+  - n: 503
+    printed: '22.944667600407142'
+    rounding: up
+  - n: 504
+    printed: '22.962118925863563'
+    rounding: up
+  - n: 505
+    printed: '22.964253709989815'
+    rounding: up
+  - n: 506
+    printed: '22.972145072003643'
+    rounding: up
+  - n: 508
+    printed: '22.983309379055478'
+    rounding: up
+  - n: 548
+    printed: '23.944667600431087'
+    rounding: up
+  - n: 550
+    printed: '23.961058656835017'
+    rounding: up
+  - n: 551
+    printed: '23.965801641974269'
+    rounding: up
+  - n: 552
+    printed: '23.966628823345179'
+    rounding: up
+  - n: 553
+    printed: '23.979786600215760'
+    rounding: up
+  - n: 554
+    printed: '23.986315054037724'
+    rounding: up
+  - n: 595
+    printed: '24.944667600432087'
+    rounding: up
+  - n: 597
+    printed: '24.958141573307033'
+    rounding: up
+  - n: 598
+    printed: '24.958220677835095'
+    rounding: up
+  - n: 599
+    printed: '24.962832858735977'
+    rounding: up
+  - n: 600
+    printed: '24.979786600240740'
+    rounding: up
+  - n: 601
+    printed: '24.986315054062710'
+    rounding: up
+  - n: 602
+    printed: '24.990355569404721'
+    rounding: up
+  - n: 603
+    printed: '24.990355569379731'
+    rounding: up
+  - n: 647
+    printed: '25.949897942498915'
+    rounding: up
+  - n: 648
+    printed: '25.961052856924314'
+    rounding: up
+  - n: 649
+    printed: '25.974939166891586'
+    rounding: up
+  - n: 650
+    printed: '25.974939166865611'
+    rounding: up
+  - n: 651
+    printed: '25.982878838106428'
+    rounding: up
+  - n: 652
+    printed: '25.990355569405721'
+    rounding: up
+  - n: 654
+    printed: '25.994867334132237'
+    rounding: up
+  - n: 700
+    printed: '26.963730153903490'
+    rounding: up
+  - n: 701
+    printed: '26.971171145178352'
+    rounding: up
+  - n: 702
+    printed: '26.976692903975214'
+    rounding: up
+  - n: 703
+    printed: '26.981389201596016'
+    rounding: up
+  - n: 704
+    printed: '26.987139500916770'
+    rounding: up
+  - n: 705
+    printed: '26.990473400222588'
+    rounding: up
+  - n: 706
+    printed: '26.997919093469508'
+    rounding: up
+  - n: 755
+    printed: '27.951463061397879'
+    rounding: up
+  - n: 756
+    printed: '27.976914446491419'
+    rounding: up
+  - n: 757
+    printed: '27.976914446463442'
+    rounding: up
+  - n: 758
+    printed: '27.984283608420539'
+    rounding: up
+  - n: 759
+    printed: '27.988569233273449'
+    rounding: up
+  - n: 760
+    printed: '27.992923233306379'
+    rounding: up
+  - n: 810
+    printed: '28.951463061400412'
+    rounding: up
+  - n: 811
+    printed: '28.974848874209278'
+    rounding: up
+  - n: 812
+    printed: '28.976914446492419'
+    rounding: up
+  - n: 813
+    printed: '28.981594177184268'
+    rounding: up
+  - n: 814
+    printed: '28.981594177155286'
+    rounding: up
+  - n: 815
+    printed: '28.992923233335372'
+    rounding: up
+  - n: 816
+    printed: '28.995944538692246'
+    rounding: up
+  - n: 817
+    printed: '28.997492020606608'
+    rounding: up
+  - n: 868
+    printed: '29.974562439897217'
+    rounding: up
+  - n: 869
+    printed: '29.974936836673075'
+    rounding: up
+  - n: 870
+    printed: '29.981594177185268'
+    rounding: up
+  - n: 871
+    printed: '29.981594177185268'
+    rounding: up
+  - n: 872
+    printed: '29.992623086320206'
+    rounding: up
+  - n: 873
+    printed: '29.992623086290213'
+    rounding: up
+  - n: 874
+    printed: '29.992883399225609'
+    rounding: up
+  - n: 875
+    printed: '29.996974281851590'
+    rounding: up
+  - n: 927
+    printed: '30.969979227501660'
+    rounding: up
+  - n: 928
+    printed: '30.974936836704050'
+    rounding: up
+  - n: 929
+    printed: '30.975405698329704'
+    rounding: up
+  - n: 930
+    printed: '30.977403109932478'
+    rounding: up
+  - n: 932
+    printed: '30.992623086321206'
+    rounding: up
+  - n: 933
+    printed: '30.992883399256602'
+    rounding: up
+  - n: 934
+    printed: '30.994174058187146'
+    rounding: up
+  - n: 935
+    printed: '30.994174058156152'
+    rounding: up
+  - n: 989
+    printed: '31.974936836705050'
+    rounding: up
+  - n: 990
+    printed: '31.975405698332123'
+    rounding: up
+  - n: 991
+    printed: '31.977403109964455'
+    rounding: up
+  - n: 992
+    printed: '31.977815424176502'
+    rounding: up
+  - n: 993
+    printed: '31.983895593654374'
+    rounding: up
+  - n: 994
+    printed: '31.992883399257602'
+    rounding: up
+  - n: 995
+    printed: '31.994174058188146'
+    rounding: up
+  - n: 996
+    printed: '31.994174058188146'
+    rounding: up
+  - n: 997
+    printed: '31.996875920326034'
+    rounding: up
+  - n: 998
+    printed: '31.996875920294037'
+    rounding: up
+  note: Triage comparison of issue-table upper bounds, each rounding its certificate's exact
+    header side up by less than 1e-15 as triage read the attachment, against frozen current
+    records and the earlier reports at each count. Custody of the attached archive, the two-route
+    replay, the rows and the publications of watched repositories remain on the owner bead;
+    a ledger verdict alone is not registration or feasibility verification.
+exceptions: []
+key_reason_candidates: []
+other_items: []
+cross_check: []

@@ -91,9 +91,8 @@ PUBLICATION_HISTORY = (
         version="v0.8.5",
         first_published="October 20, 2026",
         result_scope=(
-            "Raise Joost de Winter's T-196 (#668) at 227, 229 and 260 to V3/C3 on the "
-            "integrated exact replay, with the cases' houses unchanged pending its stage "
-            "4 review."
+            "Announce Evan Daniel's sub-grid n183 packing (T-220) in News and list the 20 "
+            "October report-order ledger in the synopsis."
         ),
     ),
     PublicationHistoryEntry(
@@ -1083,9 +1082,8 @@ RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
         version="v0.8.5",
         impact="patch",
         reason=(
-            "Raise Joost de Winter's T-196 (#668) at 227, 229 and 260 to V3/C3 on the "
-            "integrated exact replay, with the cases' houses unchanged pending its stage "
-            "4 review."
+            "Announce Evan Daniel's sub-grid n183 packing (T-220) in News and list the 20 "
+            "October report-order ledger in the synopsis."
         ),
     ),
     ReleaseImpactDecision(
@@ -1960,6 +1958,44 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "builds read none of them, and no dependency, version or build setting changes; "
             "manuscripts, figures and paper metadata are unchanged and every paper keeps its "
             "edition. No paper render or PDF redraw is claimed."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer",),
+        paths=(
+            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
+            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
+            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+        ),
+        reason=(
+            "The site v0.8.5 cut for #680's News entry regenerated the five claim "
+            "documents, and every changed line differs from main only in its source-link "
+            "revision, 20d56718 to efd41b91. render_n11_lower_bounds_explainer, run once "
+            "with main's five documents and once with this branch's, writes 54 files that "
+            "are byte-identical. No PDF was printed; it prints from that HTML. The explainer "
+            "keeps v0.4.10."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=("packing/campaign/result-requests.yaml",),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "Rendered at link revision d588ad98 (main, with #687), once with main's "
+            "requests record and once with this branch's, the 42 files "
+            "render_packing_methods writes are byte-identical. The PDF prints from that HTML. "
+            "The record gains the final reply of 20 October 2026 on #680, which closes it, "
+            "and the triage entry for #686 with 100 queued beyond-horizon results and one "
+            "queued ask, which the survey does not read, so it keeps v0.2.3."
         ),
     ),
     ReleaseNoPublicChange(
@@ -5414,7 +5450,7 @@ def validate_release_impacts(
 #: fresh render, so a link naming the build commit would fail their drift check forever. It is
 #: in no version string. It moves when the claim documents are regenerated for an edition. It
 #: must be a commit on `main`; the site's own links name `main` itself (`devtools.repo_links`).
-PUBLICATION_REVISION = "c1a8be8b"
+PUBLICATION_REVISION = "efd41b91"
 
 
 def data_pathspec() -> tuple[str, ...]:
