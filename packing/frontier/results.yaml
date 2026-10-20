@@ -27538,8 +27538,9 @@ results:
       The three certificates and their duplicate-square and outside-container controls were
       decided here on 20 October 2026 by both maintained exact routes, and the frozen
       comparison rebuilt; no route here is the source's code, so the replay is independently
-      re-implemented. No stage 4 mathematical review is retained yet, so the cases at 227 and
-      260 do not adopt these certificates.
+      re-implemented. The 20 October review decided all three again on a third exact route of
+      its own, refused sharp controls 1e-30 past contact on both maintained routes, and found
+      no blocking defect.
 
       Issue 668 reports the three exact rational certificate sides on 17 October; the retained
       licensed successor changes only LICENSE and the root README. The ledger preserves this
@@ -27554,12 +27555,15 @@ results:
     confirmation: C3
     significance:
       score: 3
-      rationale: Three new source-reported packing improvements, including the movement at 260 from the
-        earlier catalogue construction; a draft S3 assessment for the separate mathematical review to confirm
-        or change.
-      scored: '2026-10-18'
-      by: think-1ayi October 18 intake registration draft; separate mathematical review confirms or changes
-        it
+      rationale: >-
+        Two case ceilings move, by 7.27e-03 at 227 and 1.11e-02 at 260, the first improvement at
+        260 below 11 + 4*sqrt(2), in a construction family that Couzo and Daniel improved
+        further within three days; no lower bound or optimum.
+      scored: '2026-10-20'
+      by: >-
+        the 20 October review
+        (docs/project/reviews/review-2026-10-20-de-winter-668-upper-bounds.md), confirming
+        the draft S3 of think-1ayi's October 18 intake registration
     novelty: previously-published
     attribution:
       source_keys:
@@ -27575,8 +27579,13 @@ results:
       - packing/resources/web/de-winter-upper-bounds-227-229-260-2026-10-17/source/n260/n260_exact.json.gz
       - packing/resources/web/de-winter-upper-bounds-227-229-260-2026-10-17/acquisition/claims.json
       - packing/resources/web/de-winter-upper-bounds-227-229-260-2026-10-17/receipts/exact-certification.json.xz
+      - packing/resources/web/de-winter-upper-bounds-227-229-260-2026-10-17/review/review-2026-10-20/README.md
       - packing/campaign/issue-intake/upper-bounds-20261018/README.md
-    controls: [packing/tests/test_upper_bound_reports.py, packing/tests/test_upper_bound_reports_668.py]
+      - docs/project/reviews/review-2026-10-20-de-winter-668-upper-bounds.md
+    controls:
+      - packing/tests/test_upper_bound_reports.py
+      - packing/tests/test_upper_bound_reports_668.py
+      - packing/tests/test_evand_arrangement_reports.py
     notes: |-
       A complete repository replay is retained for n = 227, 229 and 260: 3 positives and 6
       duplicate-square and outside-container controls passed their required outcomes on both
@@ -27585,27 +27594,59 @@ results:
       clears every wall by 1e-9 exactly and every pair by at least 1.002e-9. The receipt is
       receipts/exact-certification.json.xz in de-winter-upper-bounds-227-229-260-2026-10-17.
 
-      At n = 227 the certificate is below the case's ceiling (David Ellsworth, the Kingbird
-      catalogue, verified by T-155's exact ceiling) by 7.27e-03 and above Couzo's later #672
-      by 1.71e-04. At n = 229 it is above the case's ceiling (Evan Daniel, T-199) by 1.32e-05,
-      above Daniel's T-198 by 1.15e-05 and above Couzo's #672 by 1.67e-08. At n = 260 it is
-      below the case's ceiling (the Kingbird catalogue, T-155) by 1.11e-02 and above Couzo's
-      later #678 by 2.56e-05. Couzo's #672 and #678 are not registered yet, so T-196 is the
-      smallest registered side at 227 and 260, pending adoption; at 229 the case holds T-199.
+      The 20 October review decided the three certificates again on its own exact route
+      (unit circle, half-extent containment, every pair by separating axes and every pair
+      within sqrt(2) again by exact clipping area), equal to both maintained routes at every
+      number they share, and ran six mutants a count through the adapter and both routes at
+      227 and 260: the side lowered by exactly its clearance and the least-gap pair closed by
+      exactly its gap passed at exact contact, the same 1e-30 further was refused on both
+      routes, and a basis 1e-30 off the unit circle and a coordinate as a JSON number were
+      refused by the adapter. Its programs and outputs are in the packet's
+      review/review-2026-10-20/. The kernel's own sharp controls
+      (evand_arrangement_reports.SHARP_CONTROLS) are refused on both routes at 260 by
+      test_evand_arrangement_reports, in the deep surface.
+
+      At n = 227 the certificate is below the earlier verified ceiling (David Ellsworth, the
+      Kingbird catalogue, verified by T-155's exact ceiling) by 7.27e-03 and above Couzo's
+      later #672 by 1.71e-04. At n = 229 it is above the case's ceiling (Evan Daniel, T-199)
+      by 1.32e-05, above Daniel's T-198 by 1.15e-05 and above Couzo's #672 by 1.67e-08. At
+      n = 260 it is below the earlier verified ceiling (the Kingbird catalogue, T-155) by
+      1.11e-02 and above Couzo's later #678 by 2.56e-05.
 
       The source's own checkers were not run here. The two maintained routes, the sqpack
       rational witness verifier and the independent rational corner checker, share certificate
-      parsing, half-angle conversion, Fraction arithmetic and the separating-axis method. No
-      optimality, local minimum or human oversight is claimed.
+      parsing, half-angle conversion, Fraction arithmetic and the separating-axis method; the
+      review's route shares Fraction arithmetic and the format's meaning only. No optimality,
+      local minimum or human oversight is claimed.
 
-      V3 and C3 rest on the replay (E-de-winter-668-upper-exact-feasibility). No stage 4
-      mathematical review is retained, so the house rule's validation is not met and both
-      case upper lanes and the retained houses at 227 and 260 are unchanged.
+      V3 and C3 rest on the replay (E-de-winter-668-upper-exact-feasibility) and the 20
+      October review. The cases at 227 and 260 adopted these certificates as their house best
+      packings on 20 October 2026, with both strong regularizers' runs; at 229 the case keeps
+      T-199. A later validated certificate below T-196 at 227 or 260, such as Couzo's, replaces
+      it there under the house rule.
     next_rung: >-
-      The stage 4 mathematical review (think-455r), then adoption at 227 and 260 with both
-      strong regularizers' runs in the adopting pull request; T-199 is smaller at 229. V4 and
-      C4 need two accepted adversarial reviews by distinct reviewers and a retained human
-      oversight record.
+      None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
+      reviewer and a retained human oversight record; one AI review, of 20 October, is
+      retained.
+    reviews:
+      - path: docs/project/reviews/review-2026-10-20-de-winter-668-upper-bounds.md
+        kind: adversarial
+        reviewer: >-
+          AI agent (Claude, strong sub-agent tier, max reasoning), the stage 4 review lane
+          (W2) of the 2026-10-20 intake (think-455r), prompted separately from the replay
+          and records lanes, with no shared context beyond their committed packet, register
+          entries and pull request
+        reviewer_kind: ai
+        relation: project
+        date: '2026-10-20'
+        scope: >-
+          Finite feasibility of the three certificates T-196 cites: the retained receipt read
+          and admitted, the three certificates decided again on a third exact route written
+          for the review, six sharp mutants a count at 227 and 260 decided through the adapter
+          and both maintained routes, each route's trust boundary, and every side and margin
+          against the case ceilings and every report registered or pending at each count.
+        verdict: accepted
+        covers: [T-196]
   - id: T-197
     kind: upper-bound
     registered: '2026-10-18'
