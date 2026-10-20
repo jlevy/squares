@@ -18,7 +18,7 @@ from types import SimpleNamespace
 from typing import NoReturn, Self, cast
 
 import pytest
-from playwright.sync_api import Browser
+from playwright.sync_api import Browser, BrowserContext
 from playwright.sync_api import Error as PlaywrightError
 
 from devtools import (
@@ -1110,13 +1110,14 @@ def test_a_deadline_is_read_at_each_phase_boundary_before_a_browser_opens(
 
 
 class FakePage:
-    """A page of `FakeBrowser`: `goto` takes a minute of the clock and commits the start
-    address, `wait_for_url` commits the arrival, so every visit arrives."""
+    """A page of `FakeContext`: `goto` takes a minute of the clock and commits the start
+    address, `wait_for_url` commits the arrival, so every visit arrives. Closing it alone
+    fails: a page closed at its arrival's commit is still loading, and Chromium can
+    acknowledge that close and never carry it out, so a visit closes its context."""
 
     def __init__(self, clock: list[float]) -> None:
         self.clock = clock
         self.url = ""
-        self.closed = False
 
     def goto(self, url: str, *, wait_until: str, timeout: float) -> None:
         assert wait_until == "commit"
@@ -1129,12 +1130,13 @@ class FakePage:
         assert timeout > 0
         self.url = url
 
-    def close(self) -> None:
-        self.closed = True
+    def close(self) -> NoReturn:
+        pytest.fail("a forwarder visit closed its page rather than its context")
 
 
-class FakeBrowser:
-    """The pages it opened, each on the shared clock, and whether it was closed."""
+class FakeContext:
+    """One visit's context of `FakeBrowser`: the page it opened and whether it was
+    closed."""
 
     def __init__(self, clock: list[float]) -> None:
         self.clock = clock
@@ -1143,9 +1145,27 @@ class FakeBrowser:
 
     def new_page(self) -> FakePage:
         assert not self.closed
-        page = FakePage(self.clock)
-        self.pages.append(page)
-        return page
+        assert not self.pages, "a visit opens one page in its context"
+        self.pages.append(FakePage(self.clock))
+        return self.pages[-1]
+
+    def close(self) -> None:
+        self.closed = True
+
+
+class FakeBrowser:
+    """The contexts it opened, a visit each on the shared clock, and whether it was
+    closed."""
+
+    def __init__(self, clock: list[float]) -> None:
+        self.clock = clock
+        self.contexts: list[FakeContext] = []
+        self.closed = False
+
+    def new_context(self) -> FakeContext:
+        assert not self.closed
+        self.contexts.append(FakeContext(self.clock))
+        return self.contexts[-1]
 
     def close(self) -> None:
         self.closed = True
@@ -1157,20 +1177,32 @@ def test_a_deadline_between_forwarder_visits_stops_before_the_next_and_keeps_the
     """Each visit waits up to twice the timeout, so the boundary before the phase alone
     does not bound it (#507 A1): `before_visit` is read before every visit, what it
     raises leaves the arrivals already reached in the caller's list, and no page is
-    opened past it. With nothing to read, every moved page is visited and arrives."""
+    opened past it. With nothing to read, every moved page is visited and arrives, each in
+    a context of its own that `prepare` is given before the page opens and that is closed
+    after the visit."""
     site = "https://example.org/"
     clock = [0.0]
     browser = FakeBrowser(clock)
-    arrivals = check_published_site.forwarder_arrivals(cast(Browser, browser), site, timeout=1)
+    prepared: list[FakeContext] = []
+
+    def prepare(context: BrowserContext) -> None:
+        fake = cast(FakeContext, context)
+        assert not fake.pages
+        prepared.append(fake)
+
+    arrivals = check_published_site.forwarder_arrivals(
+        cast(Browser, browser), site, timeout=1, prepare=prepare
+    )
     assert [passed for passed, _ in arrivals] == [True] * len(render_overview.MOVED_PAGES)
-    assert len(browser.pages) == len(render_overview.MOVED_PAGES) > 3
-    assert all(page.closed for page in browser.pages)
+    assert len(browser.contexts) == len(render_overview.MOVED_PAGES) > 3
+    assert prepared == browser.contexts
+    assert all(context.closed and len(context.pages) == 1 for context in browser.contexts)
 
     stopped = FakeBrowser(clock)
     results: list[tuple[bool, str]] = []
 
     def before_visit() -> None:
-        if len(stopped.pages) == 3:
+        if len(stopped.contexts) == 3:
             raise check_published_site._DeadlineError("browser forwarders", 180.0)  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
 
     with pytest.raises(check_published_site._DeadlineError):  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
@@ -1178,8 +1210,8 @@ def test_a_deadline_between_forwarder_visits_stops_before_the_next_and_keeps_the
             cast(Browser, stopped), site, timeout=1, before_visit=before_visit, results=results
         )
     assert results == arrivals[:3]
-    assert len(stopped.pages) == 3
-    assert all(page.closed for page in stopped.pages)
+    assert len(stopped.contexts) == 3
+    assert all(context.closed for context in stopped.contexts)
 
 
 def test_a_deadline_during_the_forwarder_visits_prints_the_arrivals_and_closes_the_browser(
@@ -1234,8 +1266,8 @@ def test_a_deadline_during_the_forwarder_visits_prints_the_arrivals_and_closes_t
     )[:-1]
     # With no deadline every moved page is visited, in a browser that is then closed.
     (whole,) = launched
-    assert len(whole.pages) == len(render_overview.MOVED_PAGES) > 3
-    assert all(page.closed for page in whole.pages)
+    assert len(whole.contexts) == len(render_overview.MOVED_PAGES) > 3
+    assert all(context.closed for context in whole.contexts)
     assert whole.closed
     assert opened == ["workbench"]
     started = re.compile(r"audit \+(\d+)\.00s browser forwarders: start; .*")
@@ -1258,8 +1290,8 @@ def test_a_deadline_during_the_forwarder_visits_prints_the_arrivals_and_closes_t
         f"after {len(verdicts)} checks; remaining checks not run"
     )
     (stopped,) = launched
-    assert len(stopped.pages) == 3
-    assert all(page.closed for page in stopped.pages)
+    assert len(stopped.contexts) == 3
+    assert all(context.closed for context in stopped.contexts)
     assert stopped.closed
     assert opened == []
 
