@@ -723,8 +723,7 @@ EXPLAINER_HISTORY = (
         version="v0.4.11",
         first_published="October 20, 2026",
         result_scope=(
-            "Update the registered result count after the n204 and n260 registration "
-            "(T-223)."
+            "Update the registered result count after the n204 and n260 registration (T-223)."
         ),
     ),
     PublicationHistoryEntry(
@@ -1090,8 +1089,7 @@ RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
         version="v0.4.11",
         impact="patch",
         reason=(
-            "Update the registered result count after the n204 and n260 registration "
-            "(T-223)."
+            "Update the registered result count after the n204 and n260 registration (T-223)."
         ),
     ),
     ReleaseImpactDecision(
@@ -1702,6 +1700,58 @@ class ReleaseNoPublicChange(NamedTuple):
 
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
+    ReleaseNoPublicChange(
+        components=("paper:n11-optimality-review", "paper:n11-threshold-bound-review"),
+        paths=("packing/frontier/results.yaml",),
+        outputs=(
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-optimality-review.pdf",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/n11-threshold-bound-review.pdf",
+        ),
+        reason=(
+            "For issue 678's registration (T-223 at n = 204 and 260) against main "
+            "f8d54772: both reviews read results.yaml only through "
+            "paper_figures.ladder_records, which selects the n11 ladder rungs LADDER_RUNGS "
+            "names and holds them to LADDER_DIGEST; T-223 is an added entry outside that "
+            "ladder, and no ladder row changes. Rendered at link revision f5349276, once "
+            "from this branch's tree and once with main's copies of the three changed "
+            "inputs (results.yaml, result-requests.yaml and source-coverage.yaml): "
+            "render_n11_optimality_review, render_n11_threshold_bound_review and "
+            "render_packing_methods leave the 50 files of the site tree byte-identical "
+            "between the trees. No PDF was printed; each prints from that HTML. Retain "
+            "v0.1.7 and v0.1.0."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+            "papers/square-packing-methods-survey.pdf",
+        ),
+        reason=(
+            "For issue 678's registration (T-223 at n = 204 and 260) against main "
+            "f8d54772: result requests, source coverage and results are citation targets "
+            "whose existence the producer checks, not inlined text, and every cited path "
+            "exists at both revisions; the #678 and #686 request changes, the "
+            "couzo-issue678-2026-10-18 coverage source with its 83 beyond-horizon rows "
+            "and the 60 rows it supersedes, and T-223 are not cited by the survey. "
+            "Rendered at link revision f5349276, once from this branch's tree and once "
+            "with main's copies of the three changed inputs (results.yaml, "
+            "result-requests.yaml and source-coverage.yaml): render_n11_optimality_review, "
+            "render_n11_threshold_bound_review and render_packing_methods leave the 50 "
+            "files of the site tree byte-identical between the trees. No PDF was printed; "
+            "it prints from that HTML. Retain v0.2.3."
+        ),
+    ),
     ReleaseNoPublicChange(
         components=("paper:n11-optimality-review", "paper:n11-threshold-bound-review"),
         paths=(
