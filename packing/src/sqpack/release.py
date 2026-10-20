@@ -1544,7 +1544,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "papers/square-packing-methods-survey.md",
         ),
         reason=(
-            "Rendered at link revision 028bc72e (main, with #658 and #646), once with main's "
+            "Rendered at link revision a5acd570 (main, with #514 and #693), once with main's "
             "requests record and once with this branch's, the 42 files "
             "render_packing_methods writes are byte-identical. The PDF prints from that HTML. "
             "The record gains the #639 final reply and the #640 import reply of "
