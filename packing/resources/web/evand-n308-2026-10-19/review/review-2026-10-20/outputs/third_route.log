@@ -1,0 +1,2 @@
+resources/web/evand-n308-2026-10-19/source/search/packer/candidates/s308_d308.cert: n=308 side=17.997149121270908 wall=5.0000e-21 least=1.0000e-20 pair=[23, 24] exact=1189 discs=46089 controls_ok=6 7.3s
+resources/web/evand-n154-sweep-2026-10-20/source/search/packer/candidates/s154_sw.cert: n=154 side=12.921100940761681 wall=5.0000e-21 least=1.0000e-20 pair=[11, 12] exact=552 discs=11229 controls_ok=6 3.0s
