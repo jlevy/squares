@@ -1573,15 +1573,15 @@ def root_files() -> tuple[Path, ...]:
 #
 # 2026-10-20, the n183 registration and adoption (T-220, think-jh4w, #687), merged with
 # main 012dcf9e5: `--source-bytes` read 231,475,393 on that tree (#692's head, the same
-# tree, under review C of #692), 259,903 under 221 MiB, and 231,807,134 on this
-# branch, 331,741 more and 71,838 over. Priced against main's blobs of the
-# same paths, the growth is the n183 packet the results need as dependencies (93,723
-# bytes), the regularized-drawing runs and selection (63,566), the intake record
-# (57,772), the mapped review (35,229) and the register entries, case record, verifiers
-# and regenerated views (about 68,000). Raise to 222 MiB, the least whole MiB above this
-# surface, with unchanged selection and the oversized pre-clone refusal: 976,738
-# bytes of headroom. It is measured for this change alone. Three portable workers are
-# bounded at 666 MiB.
+# tree, under review C of #692), 259,903 under 221 MiB, and 231,811,269 on this
+# branch, 335,876 more and 75,973 over. Priced against main's blobs of
+# the same paths, 323,203 bytes of the growth are this change's: the n183 packet the
+# results need as dependencies (93,723), the regularized-drawing runs and selection
+# (63,566), the intake record (57,772), the mapped review (35,229), and the register
+# entries, case record, verifiers, regenerated views and release records (72,913).
+# Raise to 222 MiB, the least whole MiB above this surface, with unchanged selection and
+# the oversized pre-clone refusal: 972,603 bytes of headroom. It is measured
+# for this change alone. Three portable workers are bounded at 666 MiB.
 SNAPSHOT_MAX_BYTES = 222 * 1024 * 1024
 DEFAULT_CONTROL_TIMEOUT_SECONDS = 120.0
 TERMINATION_GRACE_SECONDS = 1.0
