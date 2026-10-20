@@ -3,9 +3,9 @@ type: is
 id: is-01m50j15k23rw2vdmvyvs07rqt
 title: "Import pingyou: s(29) exact rational certificate, 1.57e-36 below T-155 and 7.32e-90 below #574's N29 (#622)"
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 26
+version: 27
 delegate: user-eb-intake-622
 labels:
   - result-import
@@ -18,8 +18,12 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-15T19:53:37.121Z
-updated_at: 2026-10-17T09:15:13.148Z
+updated_at: 2026-10-20T09:29:26.104Z
 started_at: 2026-10-15T23:31:02.497Z
+closed_at: 2026-10-20T09:29:26.103Z
+close_reason: "Done: s(29) imported via #661 (merged d167d4b86); #622 closed 2026-10-19 with its final reply 6261406058, recorded on main by #696 (ded4727bc)."
+resolution: null
+duplicate_of: null
 ---
 Stage 1 triage of pull request jlevy/squares#622 (BuddenPing, PingYou Ltd, "data: submit a tighter exact N29 packing certificate", opened 2026-10-15T18:43:54Z, no comments or reviews when read at about 19:50Z). A result submitted as a pull request, treated as an intake report as #574 was (think-9v2k): never merged, approved, pushed to or commented on here. Lane D of the 2026-10-15 evening intake pass (think-wnsv, think-ykg6), read-only.
 
