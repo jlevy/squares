@@ -1520,6 +1520,42 @@ class ReleaseNoPublicChange(NamedTuple):
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
     ReleaseNoPublicChange(
         components=("site",),
+        paths=("packing/pyproject.toml",),
+        outputs=("atlas.html", "index.html", "results.html"),
+        reason=(
+            "Reviewed October 20, 2026 against main b16ddeb0 (think-46yk): the only change "
+            "is to [tool.pytest.ini_options], which loads the devtools.pytest_tmp test plugin "
+            "and sets tmp_path_retention_policy and tmp_path_retention_count. Pytest reads "
+            "them; the site build reads none of them, and no dependency, version or build "
+            "setting changes, so no page's input changes. No site rebuild byte comparison "
+            "is claimed."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=("packing/pyproject.toml",),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-lower-bounds-explainer.pdf",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+            "papers/square-packing-methods-survey.pdf",
+        ),
+        reason=(
+            "Reviewed October 20, 2026 against main b16ddeb0 (think-46yk): the only change "
+            "is to [tool.pytest.ini_options], which loads the devtools.pytest_tmp test plugin "
+            "and sets tmp_path_retention_policy and tmp_path_retention_count. The paper "
+            "builds read none of them, and no dependency, version or build setting changes; "
+            "manuscripts, figures and paper metadata are unchanged and every paper keeps its "
+            "edition. No paper render or PDF redraw is claimed."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("site",),
         paths=(
             "packing/devtools/build_known_best_atlas.py",
             "packing/src/sqpack/witness.py",

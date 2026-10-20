@@ -17,8 +17,9 @@ about 11 GB in `/tmp/pytest-of-root` across 19 numbered directories, with `pytes
 still present beside `pytest-132`.
 
 So a session that uses the shared numbered root (not an xdist worker, not one given
-`--basetemp`) writes an owner record, `.lock-owner`, beside its lock as soon as pytest
-creates the directory: its PID and its PID namespace. At the start of each such session,
+`--basetemp`) writes an owner record, `.lock-owner`, beside its lock once pytest has made
+the directory -- as an xdist controller configures its workers, or after the test phase
+that first used it: its PID and its PID namespace. At the start of each such session,
 `release_dead_locks` removes the lock of every `pytest-N` whose owner record names the
 lock's PID, names this process's PID namespace, and whose process no longer exists.
 pytest's own retention at that session's exit then treats those directories as finished

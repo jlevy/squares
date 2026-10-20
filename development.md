@@ -1074,6 +1074,39 @@ Process counters can charge a child’s setup to the call that reaps it and omit
 forkserver descendants; they cannot decide whether an individual test exceeds a CPU
 ceiling or establish complete CPU savings.
 
+### Temporary test directories
+
+A test session leaves behind only what someone needs to inspect a failure.
+`packing/pyproject.toml` sets `tmp_path_retention_policy = "failed"` and a
+`tmp_path_retention_count` of 2, and loads
+[`devtools.pytest_tmp`](packing/devtools/pytest_tmp.py) into every session:
+
+- A passing test’s `tmp_path` is removed when the test ends, and a session in which
+  every test passed removes its whole numbered directory at exit.
+- A module- or class-scoped fixture that builds a large tree yields it from
+  `pytest_tmp.scoped_tmp_path`, which removes the directory when the fixture’s scope
+  ends unless a test failed while it was open.
+  A plain `tmp_path_factory.mktemp` holds its disk until the session ends.
+- A session killed before its exit (a validation deadline, a cancelled gate, an agent’s
+  command timeout, a restarted machine) used to keep its whole tree for three days,
+  because pytest honours a dead session’s `.lock` that long.
+  The plugin records each session’s PID and PID namespace beside its lock, and the next
+  session releases the locks of recorded sessions that have exited, so pytest’s own
+  retention prunes them.
+  Anything it cannot attribute to an exited process in its own PID namespace keeps its
+  lock: a session given `--basetemp`, an xdist worker’s directory, or a container
+  sharing the same `/tmp`.
+
+To see what a run writes, point `TMPDIR` at a fresh directory and summarize the report:
+
+```shell
+run="$(mktemp -d)" && mkdir "$run/tmp"
+TMPDIR="$run/tmp" uv run --frozen --all-extras --group dev pytest -q -n 2 \
+  -m "not exhaustive_exact and not slow" \
+  --tmp-usage "$run/usage.jsonl" --tmp-usage-root "$run/tmp"
+uv run --frozen --all-extras --group dev python -m devtools.pytest_tmp summarize "$run/usage.jsonl"
+```
+
 ### What each tier costs, and where its ceiling lives
 
 [gate-budgets.yaml](packing/devtools/gate-budgets.yaml) declares each tier’s ceiling,
