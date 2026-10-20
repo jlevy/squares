@@ -783,14 +783,14 @@ def center_basis_json(raw: bytes, n: int, options: Mapping[str, str]) -> legacy.
     rows = []
     for index, square in enumerate(squares, start=1):
         where = f"n={n} square {index}"
+        fields: dict[str, Any] = square if type(square) is dict else {}
         _require(
-            type(square) is dict
-            and set(square) == {"center", "basis"}
-            and all(type(square[key]) is list and len(square[key]) == 2 for key in square),
+            set(fields) == {"center", "basis"}
+            and all(type(fields[key]) is list and len(fields[key]) == 2 for key in fields),
             f"{where}: not exactly a centre and a basis of two rationals each",
         )
-        x, y = (_literal(item, where) for item in square["center"])
-        c, s = (_literal(item, where) for item in square["basis"])
+        x, y = (_literal(item, where) for item in fields["center"])
+        c, s = (_literal(item, where) for item in fields["basis"])
         _require(c != -1, f"{where}: no finite half-angle")
         pose = legacy.Pose(x, y, s / (1 + c))
         _require(pose.basis == (c, s), f"{where}: the basis is no rotation")

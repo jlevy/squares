@@ -2937,10 +2937,11 @@ verifiers:
       path: packing/devtools/upper_bound_reports.py
       note: The driver that certified issue 668's three certificates on 20 October 2026, at
         7c801b596, adding the center-basis-json adapter
-    - sha256: 2c7b120ccede6d5b384f1d3075476f06acedbe71181950a80950be12e20f5c03
+    - sha256: 4272f93cb84af86a196aaf68df81544f623ff8c69be0e9ff687e6808bfe5d576
       path: packing/devtools/upper_bound_reports.py
       note: The same driver merged with main d588ad987, which adds only the n183 HOUSES
-        reader beside it; it ran issue 668's check --replay again
+        reader beside it, with the adapter's square fields typed for the type floor; it
+        ran issue 668's check --replay again
 
   - id: V-rehwaldt-n68-verify
     program: verify.py
