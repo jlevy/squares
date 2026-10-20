@@ -5,8 +5,8 @@ title: "Resolve credit correction: evand: Credit correction request: s(146) and 
 kind: task
 status: in_progress
 priority: 2
-version: 9
-delegate: lane-new
+version: 10
+delegate: c-lane-692
 labels:
   - result-import
 dependencies: []
@@ -14,7 +14,7 @@ parent_id: is-01m572ssbx1x412zpvsw1sb6je
 hold: null
 hold_until: null
 created_at: 2026-10-18T08:47:37.317Z
-updated_at: 2026-10-20T00:54:09.897Z
+updated_at: 2026-10-20T02:06:44.300Z
 started_at: 2026-10-18T13:04:20.677Z
 ---
 W1 intake 2026-10-18, parent think-xmxb. https://github.com/jlevy/squares/issues/673
