@@ -30078,6 +30078,7 @@ results:
   - id: T-220
     kind: upper-bound
     registered: '2026-10-19'
+    landed: '2026-10-20'
     headline: Daniel's finite sub-grid upper bound for 183 squares, after Couzo's n182 packing
     claim: s(183) <= 13999580178736252502081470897571/1000000000000000000000000000000 = 13.999580178736252502081470897571
       < 14, from the original rational certificate, printed safely upward as 13.999580178737.
