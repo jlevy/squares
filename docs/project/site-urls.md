@@ -384,6 +384,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | atlas/regularized/n-211.svg | atlas/regularized/n-211.svg | asset-file | overview | 2026-10-07 | 2026-10-20 | live |
 | atlas/regularized/n-227.svg | atlas/regularized/n-227.svg | asset-file | overview | 2026-10-08 | 2026-10-20 | live |
 | atlas/regularized/n-228.svg | atlas/regularized/n-228.svg | asset-file | overview | 2026-10-07 | 2026-10-20 | live |
+| atlas/regularized/n-229.svg | atlas/regularized/n-229.svg | asset-file | overview | 2026-10-08 | 2026-10-20 | live |
 | atlas/regularized/n-230.svg | atlas/regularized/n-230.svg | asset-file | overview | 2026-10-08 | 2026-10-20 | live |
 | atlas/regularized/n-232.svg | atlas/regularized/n-232.svg | asset-file | overview | 2026-10-08 | 2026-10-20 | live |
 | atlas/regularized/n-234.svg | atlas/regularized/n-234.svg | asset-file | overview | 2026-10-08 | 2026-10-20 | live |
@@ -498,7 +499,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | cases/152.html | cases/152.html | record | overview | 2026-10-03 | 2026-10-14 | live |
 | cases/153.html | cases/153.html | record | overview | 2026-10-03 | 2026-10-15 | live |
 | cases/154.html | cases/154.html | record | overview | 2026-10-03 | 2026-10-16 | live |
-| cases/155.html | cases/155.html | record | overview | 2026-10-03 | 2026-10-18 | live |
+| cases/155.html | cases/155.html | record | overview | 2026-10-03 | 2026-10-19 | live |
 | cases/156.html | cases/156.html | record | overview | 2026-10-03 | 2026-10-16 | live |
 | cases/157.html | cases/157.html | record | overview | 2026-10-03 | 2026-10-14 | live |
 | cases/158.html | cases/158.html | record | overview | 2026-10-03 | 2026-10-14 | live |
@@ -580,7 +581,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | cases/226.html | cases/226.html | record | overview | 2026-10-03 | 2026-10-14 | live |
 | cases/227.html | cases/227.html | record | overview | 2026-10-03 | 2026-10-18 | live |
 | cases/228.html | cases/228.html | record | overview | 2026-10-03 | 2026-10-17 | live |
-| cases/229.html | cases/229.html | record | overview | 2026-10-03 | 2026-10-18 | live |
+| cases/229.html | cases/229.html | record | overview | 2026-10-03 | 2026-10-19 | live |
 | cases/23.html | cases/23.html | record | overview | 2026-10-03 | 2026-10-07 | live |
 | cases/230.html | cases/230.html | record | overview | 2026-10-03 | 2026-10-14 | live |
 | cases/231.html | cases/231.html | record | overview | 2026-10-03 | 2026-10-14 | live |
@@ -588,7 +589,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | cases/233.html | cases/233.html | record | overview | 2026-10-03 | 2026-10-14 | live |
 | cases/234.html | cases/234.html | record | overview | 2026-10-03 | 2026-10-14 | live |
 | cases/235.html | cases/235.html | record | overview | 2026-10-03 | 2026-10-14 | live |
-| cases/236.html | cases/236.html | record | overview | 2026-10-03 | 2026-10-14 | live |
+| cases/236.html | cases/236.html | record | overview | 2026-10-03 | 2026-10-19 | live |
 | cases/237.html | cases/237.html | record | overview | 2026-10-03 | 2026-10-16 | live |
 | cases/238.html | cases/238.html | record | overview | 2026-10-03 | 2026-10-17 | live |
 | cases/239.html | cases/239.html | record | overview | 2026-10-03 | 2026-10-17 | live |
@@ -627,7 +628,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | cases/269.html | cases/269.html | record | overview | 2026-10-03 | 2026-10-17 | live |
 | cases/27.html | cases/27.html | record | overview | 2026-10-03 | 2026-10-06 | live |
 | cases/270.html | cases/270.html | record | overview | 2026-10-03 | 2026-10-17 | live |
-| cases/271.html | cases/271.html | record | overview | 2026-10-03 | 2026-10-16 | live |
+| cases/271.html | cases/271.html | record | overview | 2026-10-03 | 2026-10-19 | live |
 | cases/272.html | cases/272.html | record | overview | 2026-10-03 | 2026-10-17 | live |
 | cases/273.html | cases/273.html | record | overview | 2026-10-03 | 2026-10-17 | live |
 | cases/274.html | cases/274.html | record | overview | 2026-10-03 | 2026-10-14 | live |
@@ -725,7 +726,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | cases/65.html | cases/65.html | record | overview | 2026-10-03 | 2026-10-14 | live |
 | cases/66.html | cases/66.html | record | overview | 2026-10-03 | 2026-10-14 | live |
 | cases/67.html | cases/67.html | record | overview | 2026-10-03 | 2026-10-14 | live |
-| cases/68.html | cases/68.html | record | overview | 2026-10-03 | 2026-10-17 | live |
+| cases/68.html | cases/68.html | record | overview | 2026-10-03 | 2026-10-19 | live |
 | cases/69.html | cases/69.html | record | overview | 2026-10-03 | 2026-10-14 | live |
 | cases/7.html | cases/7.html | record | overview | 2026-10-03 | 2026-10-07 | live |
 | cases/70.html | cases/70.html | record | overview | 2026-10-03 | 2026-10-14 | live |
@@ -743,8 +744,8 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | cases/81.html | cases/81.html | record | overview | 2026-10-03 | 2026-10-07 | live |
 | cases/82.html | cases/82.html | record | overview | 2026-10-03 | 2026-10-14 | live |
 | cases/83.html | cases/83.html | record | overview | 2026-10-03 | 2026-10-14 | live |
-| cases/84.html | cases/84.html | record | overview | 2026-10-03 | 2026-10-17 | live |
-| cases/85.html | cases/85.html | record | overview | 2026-10-03 | 2026-10-17 | live |
+| cases/84.html | cases/84.html | record | overview | 2026-10-03 | 2026-10-19 | live |
+| cases/85.html | cases/85.html | record | overview | 2026-10-03 | 2026-10-19 | live |
 | cases/86.html | cases/86.html | record | overview | 2026-10-03 | 2026-10-17 | live |
 | cases/87.html | cases/87.html | record | overview | 2026-10-03 | 2026-10-14 | live |
 | cases/88.html | cases/88.html | record | overview | 2026-10-03 | 2026-10-17 | live |
@@ -992,17 +993,17 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | result/t-194.html | result/t-194.html | result | overview | 2026-10-16 | 2026-10-16 | live |
 | result/t-195.html | result/t-195.html | result | overview | 2026-10-16 | 2026-10-16 | live |
 | result/t-196.html | result/t-196.html | result | overview | 2026-10-18 | 2026-10-18 | live |
-| result/t-197.html | result/t-197.html | result | overview | 2026-10-18 | 2026-10-18 | live |
-| result/t-198.html | result/t-198.html | result | overview | 2026-10-18 | 2026-10-18 | live |
-| result/t-199.html | result/t-199.html | result | overview | 2026-10-18 | 2026-10-18 | live |
+| result/t-197.html | result/t-197.html | result | overview | 2026-10-18 | 2026-10-19 | live |
+| result/t-198.html | result/t-198.html | result | overview | 2026-10-18 | 2026-10-19 | live |
+| result/t-199.html | result/t-199.html | result | overview | 2026-10-18 | 2026-10-19 | live |
 | result/t-200.html | result/t-200.html | result | overview | 2026-10-17 | 2026-10-17 | live |
 | result/t-201.html | result/t-201.html | result | overview | 2026-10-17 | 2026-10-17 | live |
 | result/t-202.html | result/t-202.html | result | overview | 2026-10-17 | 2026-10-17 | live |
 | result/t-203.html | result/t-203.html | result | overview | 2026-10-17 | 2026-10-17 | live |
 | result/t-204.html | result/t-204.html | result | overview | 2026-10-17 | 2026-10-17 | live |
-| result/t-205.html | result/t-205.html | result | overview | 2026-10-17 | 2026-10-17 | live |
-| result/t-206.html | result/t-206.html | result | overview | 2026-10-17 | 2026-10-17 | live |
-| result/t-207.html | result/t-207.html | result | overview | 2026-10-17 | 2026-10-17 | live |
+| result/t-205.html | result/t-205.html | result | overview | 2026-10-17 | 2026-10-19 | live |
+| result/t-206.html | result/t-206.html | result | overview | 2026-10-17 | 2026-10-19 | live |
+| result/t-207.html | result/t-207.html | result | overview | 2026-10-17 | 2026-10-19 | live |
 | result/t-208.html | result/t-208.html | result | overview | 2026-10-17 | 2026-10-17 | live |
 | result/t-209.html | result/t-209.html | result | overview | 2026-10-17 | 2026-10-17 | live |
 | result/t-210.html | result/t-210.html | result | overview | 2026-10-17 | 2026-10-17 | live |
@@ -1014,6 +1015,8 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | result/t-216.html | result/t-216.html | result | overview | 2026-10-17 | 2026-10-18 | live |
 | result/t-217.html | result/t-217.html | result | overview | 2026-10-17 | 2026-10-17 | live |
 | result/t-218.html | result/t-218.html | result | overview | 2026-10-19 | 2026-10-19 | live |
+| result/t-219.html | result/t-219.html | result | overview | 2026-10-19 | 2026-10-19 | live |
+| result/t-220.html | result/t-220.html | result | overview | 2026-10-19 | 2026-10-19 | live |
 | results.html | results.html | page | overview | 2026-09-29 | 2026-10-20 | live |
 | sitemap.xml | sitemap.xml | site-file | overview | 2026-10-07 | 2026-10-20 | live |
 | social-card.png | social-card.png | asset-file | overview | 2026-09-29 | 2026-10-20 | live |
@@ -1079,7 +1082,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | result/t-155.html | 400,000 | Fifty-nine counts' exact regularized sides, their regularizations and prepared math measure 303,829 bytes. |
 | result/t-174.html | 350,000 | The complete 68-case result and its 89-step history with prepared math measure 305,917 bytes. Three-run desktop/mobile, light/dark and no-JS checks pass: CLS <=0.001, LCP <=576 ms, longest task <=153 ms and blocking <=123 ms. |
 | result/t-180.html | 400,000 | The closed form's result, its scope of 264 counts and prepared math measure 341,524 bytes. |
-| results.html | 1,250,000 | The complete 212-result table with prepared math measures 1,141,207 bytes. Each row links its full record; no record body is repeated in the table. Three-run desktop/mobile, light/dark and no-JS checks pass: CLS <=0.001, LCP <=576 ms, longest task <=153 ms and blocking <=123 ms. The ceiling retains about 100 kB of headroom for registered results. |
+| results.html | 1,250,000 | The complete 212-result table with prepared math measured 1,141,207 bytes on 18 October 2026, with no section above it. Each row links its full record; no record body is repeated in the table. Three-run desktop/mobile, light/dark and no-JS checks of that table-only page pass: CLS <=0.001, LCP <=576 ms, longest task <=153 ms and blocking <=123 ms. The seven days' arrivals and the weekly rollup above the table (#514) cost 45,886 bytes at 217 results, 1,157,668 without them and 1,203,554 with them, which halves the headroom from 92,332 to 46,446 bytes: about 9 results at today's 90th-percentile row and seven-day entry, so `test_overview` holds the page through 225. No timing has been measured on the page with the sections. `think-v1qe` owns that measurement and the runway: the intake that passes 225 re-measures the page, its timing included, and either lightens the table or moves the ceiling as a measured choice. |
 | tutorial-advanced.html | 800,000 | The advanced tutorial retains the original technical derivations and reference tables; the complete authored text and prepared formulas measure 771,603 bytes. |
 
 <!-- This document follows common-doc-guidelines.md.

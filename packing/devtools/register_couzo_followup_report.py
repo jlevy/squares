@@ -89,6 +89,7 @@ def rows() -> tuple[dict[str, Any], dict[str, Any], dict[str, Any], dict[str, An
         "id": RESULT,
         "kind": "upper-bound",
         "registered": DAY,
+        "landed": DAY,
         "headline": "Five follow-up rational refinements from Francisco Couzo",
         "claim": CLAIM,
         "scope": scope,

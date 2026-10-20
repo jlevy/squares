@@ -107,6 +107,47 @@ The [inspection receipt](acquisition/custody-review.json) records the command an
 outcome. The check establishes declaration, manifest and retained-byte consistency.
 Geometric replay, dedicated review, registration and any house adoption remain separate.
 
+## Exact Replay
+
+Added on 19 October 2026 for the stage 4 replay (think-8kx2, think-0lu6), with the import
+declaration [acquisition/report.json](acquisition/report.json) that
+`devtools.upper_bound_reports` reads.
+The certificate goes through the maintained two-route kernel of
+`devtools.evand_arrangement_reports`: `sqpack`’s exact witness verifier and the
+independent rational corner checker, each deciding every wall and every pair over
+$\mathbb{Q}$ after an exact half-angle conversion.
+The count ran a positive job, a duplicate-square control and an outside-container
+control, each in its own child process, on one worker.
+The positive passes both routes, and both routes refuse both controls.
+Every positive clears every wall by at least $6.00 \times 10^{-13}$ and every pair by at least
+$1.20 \times 10^{-12}$.
+The 3 jobs made 156,636 pair decisions in 88.93 route CPU seconds and 157.25 job wall
+seconds, summed; the longest job took 63.42 seconds.
+[receipts/exact-certification.json.xz](receipts/exact-certification.json.xz) keeps every
+deciding input and both routes’ complete outputs.
+The two routes share certificate parsing, the half-angle conversion, Python’s rational
+arithmetic and the separating-axis method, so they are two implementations of one
+method. Neither is the author’s code, and the source’s own checkers were not run.
+The clearances are the binary64 input’s own, about $1.0 \times 10^{-13}$ at the walls and $2.0 \times 10^{-13}$ between squares, plus the dilation’s $5 \times 10^{-13}$ and $10^{-12}$, as the [review of 19 October 2026](../../../../docs/project/reviews/review-2026-10-19-upper-bound-imports-659-664-669-674.md) measured them (RV-5); the source describes the dilation’s share alone.
+
+[acquisition/claims.json](acquisition/claims.json) freezes the certificate against the
+record at `main` `14fd9e27f` (19 October 2026), each side rebuilt from its own retained
+packet or read from its print:
+
+| Report at 229 | Holder | This certificate is below it by |
+| --- | --- | --- |
+| `T-155`, the case’s verified ceiling (the catalogue’s $10 + 4\sqrt{2}$ reported) | the Kingbird catalogue | $6.69 \times 10^{-3}$ |
+| `T-196` (#668), printed | Joost de Winter | $1.32 \times 10^{-5}$ |
+| #672, printed | Francisco Couzo | $1.32 \times 10^{-5}$ |
+| `T-198` (#674, the opening report) | Evan Daniel | $1.74 \times 10^{-6}$ |
+
+From `packing/`:
+
+```sh
+uv run --frozen --all-extras --group dev python -m devtools.upper_bound_reports evand-n229-dilation-update-2026-10-18 check-claims
+uv run --frozen --all-extras --group dev python -m devtools.upper_bound_reports evand-n229-dilation-update-2026-10-18 check --replay
+```
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

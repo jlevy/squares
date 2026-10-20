@@ -7,6 +7,7 @@ results:
   - id: T-001
     kind: lower-bound
     registered: '2026-08-31'
+    landed: '2026-09-01'
     headline: "`s(17) ≥ 4426213/1000000 = 4.426213`, from a sixteen-point unavoidable set"
     established: '2026-08-31'
     claim: >-
@@ -55,6 +56,7 @@ results:
   - id: T-002
     kind: lower-bound
     registered: '2026-08-31'
+    landed: '2026-09-01'
     headline: "`s(18) ≥ 4426213/1000000`, by monotonicity from T-001"
     established: '2026-08-31'
     claim: >-
@@ -103,6 +105,7 @@ results:
   - id: T-003
     kind: method-limit
     registered: '2026-08-31'
+    landed: '2026-09-01'
     headline: "The sixteen-point set's unavoidability ceiling lies in `[4426213/1000000, 4427/1000)`"
     established: '2026-08-31'
     claim: >-
@@ -154,6 +157,7 @@ results:
   - id: T-004
     kind: audit
     registered: '2026-08-31'
+    landed: '2026-09-01'
     headline: "Bentz 2010, Theorem 8 (`s(46) ≥ 7`) is correct as printed, machine-audited in full"
     claim: >-
       Bentz 2010, Theorem 8: the printed 45-point unavoidable-set argument for
@@ -197,6 +201,7 @@ results:
   - id: T-005
     kind: correction
     registered: '2026-08-31'
+    landed: '2026-09-01'
     headline: "Bentz 2010, Lemma 10 is false as printed and true as corrected to `(1.74, 1)`"
     established: '2026-08-31'
     claim: >-
@@ -241,6 +246,7 @@ results:
   - id: T-006
     kind: optimality
     registered: '2026-08-31'
+    landed: '2026-09-01'
     headline: "`s(13) = 4`"
     claim: >-
       s(13) = 4 (Bentz 2010, Theorem 9). Proved again, without cases, by Evan Daniel's
@@ -316,6 +322,7 @@ results:
   - id: T-007
     kind: lower-bound
     registered: '2026-08-31'
+    landed: '2026-09-01'
     headline: "`s(n) ≥ min(⌈√n⌉, √(n - 2⌊√n⌋ + 1) + 1)` for `4 ≤ n ≤ 324`"
     claim: >-
       For every integer 4 <= N <= 324, Nagamochi 2005, Theorem 2 gives
@@ -390,6 +397,7 @@ results:
   - id: T-008
     kind: optimality
     registered: '2026-08-31'
+    landed: '2026-09-01'
     headline: "`s(46) = 7`"
     claim: >-
       s(46) = 7: the lower half by T-004's audited unavoidable set, the upper
@@ -436,6 +444,7 @@ results:
   - id: T-009
     kind: upper-bound
     registered: '2026-08-31'
+    landed: '2026-09-01'
     headline: "`s(29) ≤ 5.93383346267692918974…`, by a Krawczyk interval certificate"
     established: '2026-08-29'
     claim: >-
@@ -483,6 +492,7 @@ results:
   - id: T-010
     kind: lower-bound
     registered: '2026-08-31'
+    landed: '2026-09-01'
     headline: "`s(11) ≥ 2 + 4/√5`, by a repair of Stromquist 2003's Figure 14 point set"
     established: '2026-08-24'
     claim: >-
@@ -531,6 +541,7 @@ results:
   - id: T-011
     kind: upper-bound
     registered: '2026-08-31'
+    landed: '2026-09-01'
     headline: "Trump's 1979 packing is exactly valid, so `s(11) ≤ 3.877083590022814…`"
     claim: >-
       Trump's 1979 packing is exactly valid: 11 unit squares in a square of
@@ -575,6 +586,7 @@ results:
   - id: T-012
     kind: rigidity
     registered: '2026-08-31'
+    landed: '2026-09-01'
     headline: "Goebel's `n = 5` packing is second-order rigid at fixed side"
     established: '2026-08-30'
     claim: >-
@@ -621,6 +633,7 @@ results:
   - id: T-013
     kind: rigidity
     registered: '2026-08-31'
+    landed: '2026-09-01'
     headline: "Goebel's `n = 40` packing: seven verified first-order flexes, each refused at second order"
     established: '2026-08-30'
     claim: >-
@@ -663,6 +676,7 @@ results:
   - id: T-014
     kind: rigidity
     registered: '2026-09-03'
+    landed: '2026-09-03'
     headline: "Goebel's `n = 5` optimum is rigid at fixed side: its pose is an isolated feasible point"
     established: '2026-09-03'
     claim: >-
@@ -769,6 +783,7 @@ results:
   - id: T-015
     kind: lower-bound
     registered: '2026-09-03'
+    landed: '2026-09-03'
     headline: "`s(17) ≥ 22529/5000 = 4.5058`"
     claim: >-
       s(17) >= 22529/5000 = 4.5058, by Massaccesi's 168-atom fractional unavoidable-set
@@ -846,6 +861,7 @@ results:
   - id: T-016
     kind: lower-bound
     registered: '2026-09-03'
+    landed: '2026-09-03'
     headline: "`s(n) ≥ 22529/5000` for `n = 18, 19`, by monotonicity from T-015"
     claim: >-
       s(18) >= 22529/5000 and s(19) >= 22529/5000, by monotonicity from T-015 (a
@@ -901,6 +917,7 @@ results:
   - id: T-017
     kind: lower-bound
     registered: '2026-09-04'
+    landed: '2026-09-05'
     headline: "`s(12) ≥ 99/25 = 3.96`"
     established: '2026-09-04'
     claim: >-
@@ -1047,6 +1064,7 @@ results:
   - id: T-018
     kind: lower-bound
     registered: '2026-09-04'
+    landed: '2026-09-05'
     headline: "`s(11) ≥ 381/100 = 3.81`"
     established: '2026-09-04'
     claim: >-
@@ -1198,6 +1216,7 @@ results:
   - id: T-019
     kind: lower-bound
     registered: '2026-09-04'
+    landed: '2026-09-05'
     headline: "`s(n) ≥ 459/100 = 4.59` for `n = 17, 18, 19`"
     established: '2026-09-04'
     claim: >-
@@ -1369,6 +1388,7 @@ results:
   - id: T-020
     kind: lower-bound
     registered: '2026-09-04'
+    landed: '2026-09-05'
     headline: "`s(n) ≥ 24/5 = 4.80` for `n = 19, 20, 21`"
     established: '2026-09-04'
     claim: >-
@@ -1508,6 +1528,7 @@ results:
   - id: T-021
     kind: lower-bound
     registered: '2026-09-05'
+    landed: '2026-09-05'
     headline: "`s(n) ≥ 97/20 = 4.85` for `n = 20, 21`"
     established: '2026-09-05'
     claim: >-
@@ -1616,6 +1637,7 @@ results:
   - id: T-022
     kind: lower-bound
     registered: '2026-09-06'
+    landed: '2026-09-06'
     headline: "`s(11) ≥ 38100√(8100042893309449)/899996306539 = 3.8100257…`"
     established: '2026-09-06'
     claim: >-
@@ -1698,6 +1720,7 @@ results:
   - id: T-023
     kind: case-exclusion
     registered: '2026-09-08'
+    landed: '2026-09-10'
     headline: "Conditional exclusion: no eleven-square packing in the four-owner branch at `q = 96/25`"
     established: '2026-09-08'
     claim: >-
@@ -1794,6 +1817,7 @@ results:
   - id: T-024
     kind: lower-bound
     registered: '2026-09-09'
+    landed: '2026-09-10'
     headline: "`s(11) ≥ 3175000√(518400042893309449)/598960960743657 = 3.8166095…`"
     established: '2026-09-09'
     claim: >-
@@ -1915,6 +1939,7 @@ results:
   - id: T-025
     kind: lower-bound
     registered: '2026-09-09'
+    landed: '2026-09-10'
     headline: "`s(11) ≥ 191/50 = 3.82`, by a threshold certificate"
     established: '2026-09-09'
     claim: >-
@@ -2024,6 +2049,7 @@ results:
   - id: T-026
     kind: lower-bound
     registered: '2026-09-09'
+    landed: '2026-09-10'
     headline: "`s(11) ≥ 955000√(518400042893309449)/179696714646249 = 3.8264474…`"
     established: '2026-09-09'
     claim: >-
@@ -2158,6 +2184,7 @@ results:
   - id: T-027
     kind: lower-bound
     registered: '2026-09-18'
+    landed: '2026-09-20'
     headline: "`s(18) ≥ 467/100 = 4.67`"
     established: '2026-09-18'
     claim: >-
@@ -2234,6 +2261,7 @@ results:
   - id: T-028
     kind: lower-bound
     registered: '2026-09-19'
+    landed: '2026-09-20'
     headline: "`s(18) ≥ 187/40 = 4.675`"
     established: '2026-09-19'
     claim: >-
@@ -2311,6 +2339,7 @@ results:
   - id: T-029
     kind: lower-bound
     registered: '2026-09-19'
+    landed: '2026-09-20'
     headline: "`s(18) ≥ 1871/400 = 4.6775`"
     established: '2026-09-19'
     claim: >-
@@ -2389,6 +2418,7 @@ results:
   - id: T-030
     kind: lower-bound
     registered: '2026-09-19'
+    landed: '2026-09-20'
     headline: "`s(18) ≥ 4679/1000 = 4.679`"
     established: '2026-09-19'
     claim: >-
@@ -2477,6 +2507,7 @@ results:
   - id: T-031
     kind: case-exclusion
     registered: '2026-09-20'
+    landed: '2026-09-21'
     headline: "The octagon corner class (threshold `1/2`) holds no eleven-square packing at side `96/25`"
     established: '2026-09-20'
     claim: >-
@@ -2617,6 +2648,7 @@ results:
   - id: T-032
     kind: lower-bound
     registered: '2026-09-21'
+    landed: '2026-09-21'
     headline: "`s(17) ≥ 461300/99999 = 4.61304613…`, and beneath it Mira's `s(17) ≥ 4613/1000`"
     claim: >-
       s(17) >= 461300/99999 = 4.61304613..., by Guzhou0806's R012 parent-angle certificate of
@@ -2738,6 +2770,7 @@ results:
   - id: T-033
     kind: lower-bound
     registered: '2026-09-22'
+    landed: '2026-09-23'
     headline: "`s(11) ≥ 955000√(2073600042893309449)/359341754646249 = 3.8269975…`"
     established: '2026-09-22'
     claim: >-
@@ -2896,6 +2929,7 @@ results:
   - id: T-034
     kind: lower-bound
     registered: '2026-09-23'
+    landed: '2026-09-25'
     headline: "`s(21) ≥ 122/25 = 4.88`"
     established: '2026-09-23'
     claim: >-
@@ -3015,6 +3049,7 @@ results:
   - id: T-035
     kind: case-exclusion
     registered: '2026-09-24'
+    landed: '2026-09-25'
     headline: "Six-plus-five packings near Trump's tilt with side `≤ U_hi` lie within `rho` of his pose"
     established: '2026-09-24'
     claim: >-
@@ -3110,6 +3145,7 @@ results:
   - id: T-036
     kind: restricted-optimality
     registered: '2026-09-24'
+    landed: '2026-09-25'
     headline: "Trump's pose is optimal among six-plus-five packings near its tilt, unique up to symmetry"
     established: '2026-09-24'
     claim: >-
@@ -3266,6 +3302,7 @@ results:
   - id: T-037
     kind: lower-bound
     registered: '2026-09-29'
+    landed: '2026-09-29'
     headline: "`s(11) > 31/8 = 3.875`"
     claim: >-
       s(11) > 31/8 = 3.875, by Marc Leonard Overbeck's 11-squares-certified-bound v1.0.2 release of 22
@@ -3371,6 +3408,7 @@ results:
   - id: T-038
     kind: lower-bound
     registered: '2026-09-29'
+    landed: '2026-09-29'
     headline: "`s(17) > 461300/99853 = 4.6197910929…`"
     claim: >-
       s(17) > 461300/99853 = 4.6197910929..., by Marc Leonard Overbeck's 17-squares-certified-bound v1.0.0
@@ -3449,6 +3487,7 @@ results:
   - id: T-039
     kind: lower-bound
     registered: '2026-09-29'
+    landed: '2026-09-29'
     headline: "`s(17) > 231001/50000 = 4.62002`"
     claim: >-
       s(17) > 231001/50000 = 4.62002, by Guzhou0806 / N17 project's R052 release of 25
@@ -3523,6 +3562,7 @@ results:
   - id: T-040
     kind: lower-bound
     registered: '2026-09-29'
+    landed: '2026-09-29'
     headline: "`s(17) > 232001/50000 = 4.64002`"
     claim: >-
       s(17) > 232001/50000 = 4.64002, by Marc Leonard Overbeck's 17-squares-certified-bound v1.1.0 release
@@ -3599,6 +3639,7 @@ results:
   - id: T-041
     kind: lower-bound
     registered: '2026-09-29'
+    landed: '2026-09-29'
     headline: "`s(17) > 466001/100000 = 4.66001`"
     claim: >-
       s(17) > 466001/100000 = 4.66001, by the bounds/4.66001/ package of Marc Leonard Overbeck's
@@ -3673,6 +3714,7 @@ results:
   - id: T-042
     kind: lower-bound
     registered: '2026-09-29'
+    landed: '2026-09-29'
     headline: "`s(17) > 233009/50000 = 4.66018`"
     claim: >-
       s(17) > 233009/50000 = 4.66018, by Guzhou0806 / N17 project's R067 release of 28
@@ -3740,6 +3782,7 @@ results:
   - id: T-043
     kind: lower-bound
     registered: '2026-09-29'
+    landed: '2026-09-29'
     headline: "`s(17) > 116511/25000 = 4.66044`"
     claim: >-
       s(17) > 116511/25000 = 4.66044, by Guzhou0806 / N17 project's R068 release of 28
@@ -3819,6 +3862,7 @@ results:
   - id: T-044
     kind: lower-bound
     registered: '2026-09-29'
+    landed: '2026-09-29'
     headline: "Weighted point lower bounds for ten counts in `n = 26…72`, plus seven from the same files"
     claim: >-
       Ten exact weighted point certificates in wand125/square-packing-bounds, of 22 September
@@ -3921,6 +3965,7 @@ results:
   - id: T-045
     kind: lower-bound
     registered: '2026-09-29'
+    landed: '2026-09-29'
     headline: "Rectangle-density lower bounds replayed at 15 counts in `n = 18…78`"
     claim: >-
       Twelve rectangle-density certificates in wand125/square-packing-bounds, added on 26 and
@@ -4021,6 +4066,7 @@ results:
   - id: T-046
     kind: lower-bound
     registered: '2026-09-29'
+    landed: '2026-09-29'
     headline: "Rectangle-density lower bounds reported for 48 counts in `n = 18…95`"
     claim: >-
       wand125/square-packing-bounds reports one standing rectangle-density certificate for
@@ -4142,6 +4188,7 @@ results:
   - id: T-047
     kind: lower-bound
     registered: '2026-09-29'
+    landed: '2026-09-29'
     headline: "`s(11) ≥ 381/100`; `s(n) ≥ 1377/250` for `n = 26…28`; `s(n) ≥ 571/100` for `n = 29…31`"
     claim: >-
       s(11) >= 381/100, s(26) >= 1377/250 and s(29) >= 571/100, by Tokoharu's
@@ -4224,6 +4271,7 @@ results:
   - id: T-048
     kind: lower-bound
     registered: '2026-09-29'
+    landed: '2026-09-29'
     headline: "`s(50) ≥ 37/5 = 7.4`"
     claim: >-
       s(50) >= 37/5 = 7.4, by wand125's mixed rectangle-density certificate of 28 September
@@ -4330,6 +4378,7 @@ results:
   - id: T-049
     kind: lower-bound
     registered: '2026-09-29'
+    landed: '2026-09-29'
     headline: "`s(12) ≥ 15680/3951 = 3.9686155…`"
     claim: >-
       s(12) >= 15680/3951 = 3.9686155..., by Evan Daniel's weighted point certificate,
@@ -4415,6 +4464,7 @@ results:
   - id: T-050
     kind: lower-bound
     registered: '2026-09-29'
+    landed: '2026-09-29'
     headline: "`s(21) ≥ 5000/1001 = 4.995004995…`"
     claim: >-
       s(21) >= 5000/1001 = 4.995004995..., by Evan Daniel's weighted point certificate of 23
@@ -4481,6 +4531,7 @@ results:
   - id: T-051
     kind: optimality
     registered: '2026-09-29'
+    landed: '2026-09-29'
     headline: "`s(32) = 6`"
     claim: >-
       s(32) = 6: the lower half by Evan Daniel's weighted closed cover of 26 September 2026,
@@ -4647,6 +4698,7 @@ results:
   - id: T-052
     kind: optimality
     registered: '2026-09-29'
+    landed: '2026-09-29'
     headline: "`s(21) = 5`, by a mixed cover of points and grid-line segments"
     claim: >-
       s(21) = 5: the lower half by Evan Daniel's mixed cover of 27 September 2026, the upper
@@ -4732,6 +4784,7 @@ results:
   - id: T-053
     kind: optimality
     registered: '2026-09-29'
+    landed: '2026-09-29'
     headline: "`s(45) = 7`, by a mixed cover of points and grid-line segments"
     claim: >-
       s(45) = 7: the lower half by Evan Daniel's mixed cover of 27 September 2026, the upper
@@ -4816,6 +4869,7 @@ results:
     kind: simplification
     proves_kind: optimality
     registered: '2026-09-29'
+    landed: '2026-09-29'
     headline: "`s(45) = 7` by a second, point-only route"
     claim: >-
       s(45) = 7 by a second, point-only route: the lower half by wand125's point-only measure
@@ -4891,6 +4945,7 @@ results:
     kind: simplification
     proves_kind: optimality
     registered: '2026-09-29'
+    landed: '2026-09-29'
     headline: "`s(21) = 5` by a point-only route"
     claim: >-
       s(21) = 5 by a second, point-only route: the lower half by wand125's point-only
@@ -4984,6 +5039,7 @@ results:
   - id: T-056
     kind: upper-bound
     registered: '2026-09-29'
+    landed: '2026-09-29'
     headline: "Smaller packings for 49 counts from `n = 68` to `307`, each certified two independent ways"
     claim: >-
       For each of 49 counts n from 68 to 307, s(n) is at most the verified upper bound its
@@ -5082,6 +5138,7 @@ results:
   - id: T-057
     kind: upper-bound
     registered: '2026-09-29'
+    landed: '2026-09-29'
     headline: "`s(211) ≤ 14.99796070496771500150 < 15`, the first packing of 211 squares below the grid on record"
     claim: >-
       s(211) <= 14.99796070496771500150 < 15, by Joost de Winter's packing of 16 September
@@ -5159,6 +5216,7 @@ results:
   - id: T-058
     kind: method-limit
     registered: '2026-09-29'
+    landed: '2026-09-30'
     headline: "Rectangle-certificate ceiling `α·UB(n)` proved for n = 1..100; `B·UB(n)` on 64 grid rows"
     claim: >-
       A rectangle-density certificate with core side B = 9977/10000 and the 201-direction
@@ -5231,6 +5289,7 @@ results:
   - id: T-059
     kind: audit
     registered: '2026-09-29'
+    landed: '2026-09-30'
     headline: "Reported equality of 12028 n11 row minima reproduced by a complete bound replay"
     claim: >-
       wand125/square-packing-tools reports that its exact general_pose_tree checker reproduces
@@ -5297,6 +5356,7 @@ results:
   - id: T-060
     kind: optimality
     registered: '2026-09-29'
+    landed: '2026-09-30'
     headline: "Trump's eleven-square packing is globally optimal"
     claim: >-
       `s(11) = T = (6u+4)/(1+2u−u²) = 3.8770835900228141773078970601…`, where `u` is the
@@ -5442,6 +5502,7 @@ results:
   - id: T-061
     kind: lower-bound
     registered: '2026-09-30'
+    landed: '2026-10-01'
     headline: "`s(11) > 3875000000/999999999 = 3.875000003875…`, 3.9e-9 above `31/8`"
     claim: >-
       s(11) > 3875000000/999999999 = 3.875000003875000003875..., by Ke Wang and Can Li's
@@ -5549,6 +5610,7 @@ results:
   - id: T-062
     kind: optimality
     registered: '2026-10-01'
+    landed: '2026-10-01'
     headline: "`s(60) = 8`, by a mixed cover of points and grid-line segments"
     claim: >-
       s(60) = 8: the lower half by Evan Daniel's mixed cover of 28 September 2026, the upper
@@ -5655,6 +5717,7 @@ results:
   - id: T-063
     kind: optimality
     registered: '2026-10-01'
+    landed: '2026-10-01'
     headline: "`s(61) = 8`, by monotonicity from T-062"
     claim: >-
       s(61) = 8, as a corollary of s(60) = 8 (T-062), which Evan Daniel published with it on
@@ -5757,6 +5820,7 @@ results:
   - id: T-064
     kind: optimality
     registered: '2026-10-01'
+    landed: '2026-10-01'
     headline: >-
       `s(k² − 3) = k` for every integer `k` from 6 up; `k = 6…18` are the cases held here
     claim: >-
@@ -5962,6 +6026,7 @@ results:
   - id: T-065
     kind: upper-bound
     registered: '2026-10-01'
+    landed: '2026-10-01'
     headline: "`s(17) ≤ 4.6755300936045509…`, Bidwell's packing certified exactly"
     claim: >-
       s(17) <= 4.6755300936045509516342148538535054: seventeen unit squares fit in a square
@@ -6049,6 +6114,7 @@ results:
   - id: T-066
     kind: optimality
     registered: '2026-10-01'
+    landed: '2026-10-03'
     headline: "`s(59) = 8`, by a mixed cover of points and grid-line segments"
     claim: >-
       s(59) = 8: the lower half by wand125's mixed cover of 1 October 2026, the upper half
@@ -6157,6 +6223,7 @@ results:
   - id: T-067
     kind: optimality
     registered: '2026-10-01'
+    landed: '2026-10-03'
     headline: "`s(77) = 9`, by a mixed cover extended from Daniel's `s(60)` cover"
     claim: >-
       s(77) = 9: the lower half by wand125's mixed cover of 1 October 2026, the upper half
@@ -6281,6 +6348,7 @@ results:
   - id: T-068
     kind: lower-bound
     registered: '2026-10-01'
+    landed: '2026-10-03'
     headline: "Rectangle-density lower bounds verified at 34 counts in `n = 19…95`"
     claim: >-
       Thirty-four rectangle-density certificates of wand125/square-packing-bounds, one at each
@@ -6478,6 +6546,7 @@ results:
   - id: T-069
     kind: lower-bound
     registered: '2026-10-01'
+    landed: '2026-10-03'
     headline: "Mixed rectangle-measure lower bounds replayed at `n = 37, 65, 66, 90, 92`"
     claim: >-
       Five rectangle densities of wand125/square-packing-bounds, checked at coverage one and
@@ -6586,6 +6655,7 @@ results:
   - id: T-070
     kind: lower-bound
     registered: '2026-10-02'
+    landed: '2026-10-03'
     headline: "Rectangle-density lower bounds replayed at 25 counts in `n = 29…95`"
     claim: >-
       Sixteen rectangle-density certificates in wand125/square-packing-bounds, added or
@@ -6708,6 +6778,7 @@ results:
   - id: T-071
     kind: lower-bound
     registered: '2026-10-02'
+    landed: '2026-10-03'
     headline: "Mixed rectangle-measure lower bounds replayed at `n = 84…87`"
     claim: >-
       Two rectangle densities of wand125/square-packing-bounds, checked at coverage one and
@@ -6813,6 +6884,7 @@ results:
   - id: T-072
     kind: lower-bound
     registered: '2026-10-02'
+    landed: '2026-10-03'
     headline: "Mixed rectangle-measure lower bound replayed at `n = 76`"
     claim: >-
       s(76) >= 447/50 = 8.94, by a rectangle density of wand125/square-packing-bounds
@@ -6908,6 +6980,7 @@ results:
   - id: T-073
     kind: lower-bound
     registered: '2026-10-02'
+    landed: '2026-10-03'
     headline: "Linear-measure lower bounds replayed at `n = 83` and `n = 101…105`"
     claim: >-
       Two measures of points, segments and rectangles that wand125/square-packing-bounds
@@ -7035,6 +7108,7 @@ results:
   - id: T-074
     kind: lower-bound
     registered: '2026-10-02'
+    landed: '2026-10-03'
     headline: "Rectangle-density lower bounds replayed at 31 counts in `n = 19…95`"
     claim: >-
       Twenty-nine rectangle-density certificates in wand125/square-packing-bounds, raised or
@@ -7139,6 +7213,7 @@ results:
   - id: T-075
     kind: lower-bound
     registered: '2026-10-03'
+    landed: '2026-10-03'
     headline: "Mixed rectangle-measure lower bounds replayed at nine counts in `n = 83…96`"
     claim: >-
       Six rectangle-density certificates that wand125/square-packing-bounds published on the
@@ -7296,6 +7371,7 @@ results:
   - id: T-076
     kind: lower-bound
     registered: '2026-10-03'
+    landed: '2026-10-03'
     headline: "Linear-measure lower bound replayed at `n = 82`"
     claim: >-
       A measure of points, segments and rectangles that wand125/square-packing-bounds
@@ -7391,6 +7467,7 @@ results:
   - id: T-077
     kind: lower-bound
     registered: '2026-10-03'
+    landed: '2026-10-03'
     headline: "Rectangle-density lower bounds replayed at `n = 20`, 42 and 70"
     claim: >-
       Three rectangle-density certificates in wand125/square-packing-bounds, raised on 2
@@ -7533,6 +7610,7 @@ results:
   - id: T-078
     kind: lower-bound
     registered: '2026-10-03'
+    landed: '2026-10-03'
     headline: "`s(12) ≥ 31360/7901 = 3.9691178…`, Daniel's certificate rescaled by `7902/7901`"
     claim: >-
       s(12) >= 31360/7901 = 3.96911783..., by squarepacker (Ryu Sungjoon) after Evan
@@ -7652,6 +7730,7 @@ results:
   - id: T-079
     kind: lower-bound
     registered: '2026-10-03'
+    landed: '2026-10-03'
     headline: "`s(12) ≥ 15680000/3949423 = 3.9702002…`, Daniel's points re-weighted"
     established: '2026-10-02'
     claim: >-
@@ -7767,6 +7846,7 @@ results:
   - id: T-080
     kind: lower-bound
     registered: '2026-10-03'
+    landed: '2026-10-03'
     headline: "Linear-measure lower bound replayed at `n = 101…105`"
     claim: >-
       A measure of points, segments and rectangles that wand125/square-packing-bounds
@@ -7858,6 +7938,7 @@ results:
   - id: T-081
     kind: optimality
     registered: '2026-10-03'
+    landed: '2026-10-03'
     headline: "`s(k² − 4) = k` for every integer `k` from 5 up; `k = 5…18` are the cases held here"
     claim: >-
       Evan Daniel's theorem s(k^2 - 4) = k for every integer k >= 5, published in his
@@ -8049,6 +8130,7 @@ results:
   - id: T-082
     kind: lower-bound
     registered: '2026-10-03'
+    landed: '2026-10-03'
     headline: "Mixed rectangle-measure lower bounds verified at 22 counts in `n = 51…96`"
     claim: >-
       Twenty-two rectangle densities of wand125/square-packing-bounds, checked at coverage
@@ -8296,6 +8378,7 @@ results:
   - id: T-083
     kind: lower-bound
     registered: '2026-10-02'
+    landed: '2026-10-04'
     headline: "`s(n) ≥ 1/2 + √(n − ⌊√n⌋ + 1/4)` for every nonsquare `8 ≤ n ≤ 324`"
     claim: >-
       For every nonsquare integer 8 <= N <= 324, Karakuş 2026, Corollary 6.2 gives
@@ -8383,6 +8466,7 @@ results:
   - id: T-084
     kind: optimality
     registered: '2026-10-02'
+    landed: '2026-10-04'
     headline: >-
       `s(k² − 1) = k` for every integer `k ≥ 3`; `k = 3…18` are the cases held here
     claim: >-
@@ -8483,6 +8567,7 @@ results:
   - id: T-085
     kind: correction
     registered: '2026-10-02'
+    landed: '2026-10-04'
     headline: "Nagamochi 2005, Lemma 1 is false for every container with `a > 3` and `b > 2`"
     claim: >-
       Lemma 1 of Nagamochi 2005 -- every square of side in (1, 1.01] inside [0,a] x [0,b]
@@ -8537,6 +8622,7 @@ results:
   - id: T-086
     kind: optimality
     registered: '2026-10-02'
+    landed: '2026-10-04'
     headline: >-
       `s(k² − 2) = k` for every integer `k ≥ 2`; `k = 3…18` are the cases held here
     claim: >-
@@ -8612,6 +8698,7 @@ results:
   - id: T-087
     kind: lower-bound
     registered: '2026-10-03'
+    landed: '2026-10-04'
     headline: "`s(37) ≥ 5√3/2 + 2√2 − 1` and `s(61) ≥ 7√3/2 + 2√2 − 1`, by optimal piercing"
     claim: >-
       Bašić and Slivková 2018, Theorem 7 with Proposition 8: no more than B(x) unit squares
@@ -8676,6 +8763,7 @@ results:
   - id: T-088
     kind: upper-bound
     registered: '2026-10-05'
+    landed: '2026-10-05'
     headline: "`s(69) ≤ 8.82719465572975`, Ellsworth's degree-38 packing, certified exactly from its picture"
     claim: >-
       s(69) <= 8.82719465572975, by David Ellsworth's packing of 69 unit squares, certified
@@ -8792,6 +8880,7 @@ results:
   - id: T-089
     kind: upper-bound
     registered: '2026-10-05'
+    landed: '2026-10-05'
     headline: "`s(83) ≤ 9.63475764863195` and `s(87) ≤ 9.83881526994915`, Chang's packings, certified exactly"
     claim: >-
       s(83) <= 9.63475764863195 and s(87) <= 9.83881526994915, by two packings by Allen
@@ -8917,6 +9006,7 @@ results:
   - id: T-090
     kind: lower-bound
     registered: '2026-10-05'
+    landed: '2026-10-05'
     headline: "Mixed rectangle-measure lower bounds verified at 17 counts in `n = 42…96`"
     claim: >-
       Sixteen rectangle densities of wand125/square-packing-bounds, checked at coverage one
@@ -9103,6 +9193,7 @@ results:
   - id: T-091
     kind: lower-bound
     registered: '2026-10-05'
+    landed: '2026-10-05'
     headline: "Mixed rectangle-measure lower bounds verified at 17 counts in `n = 53…95`"
     claim: >-
       Twelve rectangle densities of wand125/square-packing-bounds, checked at coverage one
@@ -9271,6 +9362,7 @@ results:
   - id: T-092
     kind: upper-bound
     registered: '2026-10-05'
+    landed: '2026-10-05'
     headline: "Smaller packings again at seven counts from `n = 208` to `306`, each certified two independent ways"
     claim: >-
       For seven counts, s(n) is at most the bound certified here from Francisco Couzo's
@@ -9378,6 +9470,7 @@ results:
   - id: T-093
     kind: lower-bound
     registered: '2026-10-05'
+    landed: '2026-10-05'
     headline: "`s(17) > 18641771/4000000 = 4.66044275`"
     claim: >-
       s(17) > 18641771/4000000 = 4.66044275, by Guzhou0806 / N17 project's R071 release of
@@ -9476,6 +9569,7 @@ results:
   - id: T-094
     kind: lower-bound
     registered: '2026-10-05'
+    landed: '2026-10-05'
     headline: "Mixed rectangle-measure lower bounds verified at `n = 67` and `84`"
     claim: >-
       Two rectangle densities of wand125/square-packing-bounds, checked at coverage one and
@@ -9581,6 +9675,7 @@ results:
   - id: T-095
     kind: lower-bound
     registered: '2026-10-05'
+    landed: '2026-10-06'
     headline: "`s(12) ≥ 7943/2000 = 3.9715`, Daniel's points dilated and re-weighted"
     claim: >-
       s(12) >= 7943/2000 = 3.9715, by squarepacker (Ryu Sungjoon) after Evan Daniel and this
@@ -9718,6 +9813,7 @@ results:
   - id: T-096
     kind: lower-bound
     registered: '2026-10-05'
+    landed: '2026-10-06'
     headline: "Mixed rectangle-measure lower bound replayed at `n = 18`, on a net the certificate declares"
     claim: >-
       A rectangle density of wand125/square-packing-bounds, checked at coverage one on a net
@@ -9823,6 +9919,7 @@ results:
   - id: T-097
     kind: lower-bound
     registered: '2026-10-05'
+    landed: '2026-10-06'
     headline: "Mixed rectangle-measure lower bound verified at `n = 66`"
     claim: >-
       A rectangle density of wand125/square-packing-bounds, checked at coverage one and
@@ -9941,6 +10038,7 @@ results:
   - id: T-098
     kind: upper-bound
     registered: '2026-10-05'
+    landed: '2026-10-06'
     headline: "Exact optima of 48 known-best packings: `s(n) ≤ S'`, `3.5e-13` to `5.0e-11` below each printed side"
     claim: >-
       For each of 48 counts n from 68 to 307, s(n) <= S', where S' is the side of an exact
@@ -10097,6 +10195,7 @@ results:
   - id: T-099
     kind: lower-bound
     registered: '2026-10-06'
+    landed: '2026-10-06'
     headline: "Mixed rectangle-measure lower bound verified at `n = 18`, on a finer declared net"
     claim: >-
       A rectangle density of wand125/square-packing-bounds, checked at coverage one on a net
@@ -10223,6 +10322,7 @@ results:
   - id: T-100
     kind: lower-bound
     registered: '2026-10-06'
+    landed: '2026-10-06'
     headline: "Mixed rectangle-measure lower bound verified at `n = 19`, past the best 18-square packing"
     claim: >-
       A rectangle density of wand125/square-packing-bounds, checked at coverage one on a net
@@ -10343,6 +10443,7 @@ results:
   - id: T-101
     kind: upper-bound
     registered: '2026-10-06'
+    landed: '2026-10-06'
     headline: "Exact certificates of 77 catalogue packings: `s(n) ≤ S'`, `1.2e-16` to `9.8e-15` above each side"
     claim: >-
       For each of 77 counts n from 28 to 300, s(n) <= S', where S' is the side of an exact
@@ -10547,6 +10648,7 @@ results:
   - id: T-102
     kind: lower-bound
     registered: '2026-10-06'
+    landed: '2026-10-06'
     headline: "Mixed rectangle-measure lower bound verified at `n = 18`, on the finest declared net yet"
     claim: >-
       A rectangle density of wand125/square-packing-bounds, checked at coverage one on a
@@ -10677,6 +10779,7 @@ results:
   - id: T-103
     kind: lower-bound
     registered: '2026-10-06'
+    landed: '2026-10-06'
     headline: "Mixed rectangle-measure lower bound verified at `n = 19`, on the finest declared net yet"
     claim: >-
       A rectangle density of wand125/square-packing-bounds, checked at coverage one on a
@@ -10807,6 +10910,7 @@ results:
   - id: T-104
     kind: lower-bound
     registered: '2026-10-06'
+    landed: '2026-10-06'
     headline: "Mixed rectangle-measure lower bound verified at `n = 20`, on a declared net"
     claim: >-
       A rectangle density of wand125/square-packing-bounds, checked at coverage one on a
@@ -10936,6 +11040,7 @@ results:
   - id: T-105
     kind: lower-bound
     registered: '2026-10-06'
+    landed: '2026-10-06'
     headline: "Mixed rectangle-measure lower bound verified at `n = 26`, on a declared net"
     claim: >-
       A rectangle density of wand125/square-packing-bounds, checked at coverage one on a
@@ -11066,6 +11171,7 @@ results:
   - id: T-106
     kind: lower-bound
     registered: '2026-10-06'
+    landed: '2026-10-06'
     headline: "Mixed rectangle-measure lower bound verified at `n = 27`, on a declared net"
     claim: >-
       A rectangle density of wand125/square-packing-bounds, checked at coverage one on a
@@ -11197,6 +11303,7 @@ results:
   - id: T-107
     kind: lower-bound
     registered: '2026-10-06'
+    landed: '2026-10-06'
     headline: "Mixed rectangle-measure lower bound verified at `n = 28`, on a declared net"
     claim: >-
       A rectangle density of wand125/square-packing-bounds, checked at coverage one on a
@@ -11326,6 +11433,7 @@ results:
   - id: T-108
     kind: lower-bound
     registered: '2026-10-06'
+    landed: '2026-10-06'
     headline: "Mixed rectangle-measure lower bound verified at `n = 29`, on a declared net"
     claim: >-
       A rectangle density of wand125/square-packing-bounds, checked at coverage one on a
@@ -11451,6 +11559,7 @@ results:
   - id: T-109
     kind: lower-bound
     registered: '2026-10-06'
+    landed: '2026-10-06'
     headline: "Mixed rectangle-measure lower bound verified at `n = 30`, on a declared net"
     claim: >-
       A rectangle density of wand125/square-packing-bounds, checked at coverage one on a
@@ -11582,6 +11691,7 @@ results:
   - id: T-110
     kind: lower-bound
     registered: '2026-10-06'
+    landed: '2026-10-06'
     headline: "Mixed rectangle-measure lower bound verified at `n = 39`, on a declared net"
     claim: >-
       A rectangle density of wand125/square-packing-bounds, checked at coverage one on a
@@ -11711,6 +11821,7 @@ results:
   - id: T-111
     kind: lower-bound
     registered: '2026-10-06'
+    landed: '2026-10-06'
     headline: "Mixed rectangle-measure lower bound verified at `n = 41`, on a declared net"
     claim: >-
       A rectangle density of wand125/square-packing-bounds, checked at coverage one on a
@@ -11840,6 +11951,7 @@ results:
   - id: T-112
     kind: uniqueness
     registered: '2026-10-06'
+    landed: '2026-10-06'
     headline: "Trump's packing is the only optimal packing of eleven squares, up to symmetry"
     established: '2026-10-06'
     claim: >-
@@ -11984,6 +12096,7 @@ results:
   - id: T-113
     kind: upper-bound
     registered: '2026-10-07'
+    landed: '2026-10-07'
     headline: "`s(n) ≤ S_n` at ten counts, n = 108 to 303, from new SQUISH rational packings"
     claim: |
       Nate Chaoweeraprasit (itsnaka), using SQUISH, establishes s(n) <= S_n for n = 108, 126, 129,
@@ -12116,6 +12229,7 @@ results:
   - id: T-114
     kind: upper-bound
     registered: '2026-10-07'
+    landed: '2026-10-07'
     headline: "`s(153) ≤ 7250614903299225/562949953421312`, from a SQUISH rational packing"
     claim: |
       Nate Chaoweeraprasit (itsnaka), using SQUISH, establishes s(153) <=
@@ -12229,6 +12343,7 @@ results:
   - id: T-115
     kind: upper-bound
     registered: '2026-10-07'
+    landed: '2026-10-07'
     headline: '`s(n) ≤ S_n` at twelve counts, from the SQUISH update’s new and smaller rational packings'
     claim: Nate Chaoweeraprasit (itsnaka), using SQUISH, establishes feasible rational packing upper
       bounds for n = 123, 126, 129, 154, 155, 179, 208, 237, 238, 239, 258, 263. Seven counts are
@@ -12353,6 +12468,7 @@ results:
   - id: T-116
     kind: upper-bound
     registered: '2026-10-07'
+    landed: '2026-10-08'
     headline: '`s(n) ≤ S_n` at nine counts, from the second SQUISH update’s new rational packings'
     claim: Nine unchanged rational SQUISH packings establish feasible upper bounds at n = 88, 108, 179,
       180, 199, 207, 236, 263 and 302. Both exact local routes accepted all nine and rejected both complete-roster
@@ -12494,6 +12610,7 @@ results:
   - id: T-117
     kind: upper-bound
     registered: '2026-10-07'
+    landed: '2026-10-09'
     headline: Exact rational ceiling refinements at n = 105, 292
     claim: Complete exact replay, independently re-implemented, confirms the finite rational upper-bound refinement at n = 105, 292.
       Only finite feasibility enters; no optimality claim is registered.
@@ -12552,6 +12669,7 @@ results:
   - id: T-118
     kind: upper-bound
     registered: '2026-10-07'
+    landed: '2026-10-09'
     headline: Exact rational ceiling refinements at n = 68
     claim: Complete exact replay, reproduced with the producer's code, confirms the finite rational upper-bound refinement at n = 68. Only
       finite feasibility enters; no optimality claim is registered.
@@ -12605,6 +12723,7 @@ results:
   - id: T-119
     kind: upper-bound
     registered: '2026-10-07'
+    landed: '2026-10-09'
     headline: Three exact feasible upper bounds at n=266,270,272 from new source arrangements
     claim: Complete rational packings establish s(266)<=16.8230287507564760, s(270)<=16.9378072284460292
       and s(272)<=16.9681101457696006. All displays are upward ceilings of exact rational sides; arrangement
@@ -12667,6 +12786,7 @@ results:
   - id: T-120
     kind: upper-bound
     registered: '2026-10-07'
+    landed: '2026-10-09'
     headline: Reported `s(102) ≤ alpha_102` with a degree-8 exact side form
     claim: >-
       Evan Daniel reports s(102) <= alpha_102, where alpha_102 is the feasible side of the source
@@ -12715,6 +12835,7 @@ results:
   - id: T-121
     kind: upper-bound
     registered: '2026-10-07'
+    landed: '2026-10-09'
     headline: Reported `s(106) ≤ alpha_106` with a degree-32 exact side form
     claim: >-
       Evan Daniel reports s(106) <= alpha_106, where alpha_106 is the feasible side of the source
@@ -12763,6 +12884,7 @@ results:
   - id: T-122
     kind: upper-bound
     registered: '2026-10-07'
+    landed: '2026-10-09'
     headline: Reported `s(152) ≤ alpha_152` with a degree-40 exact side form
     claim: >-
       Evan Daniel reports s(152) <= alpha_152, where alpha_152 is the feasible side of the source
@@ -12811,6 +12933,7 @@ results:
   - id: T-123
     kind: upper-bound
     registered: '2026-10-07'
+    landed: '2026-10-09'
     headline: Reported `s(177) ≤ alpha_177` with a degree-32 exact side form
     claim: >-
       Evan Daniel reports s(177) <= alpha_177, where alpha_177 is the feasible side of the source
@@ -12859,6 +12982,7 @@ results:
   - id: T-124
     kind: restricted-optimality
     registered: '2026-10-07'
+    landed: '2026-10-09'
     headline: Reported non-strict local minima for 178 source configurations
     claim: Evan Daniel reports that 178 configurations are non-strict local minima under the source
       matched-index perturbation convention. The retained catalogue names 176 integer-band cases and
@@ -13089,6 +13213,7 @@ results:
   - id: T-125
     kind: upper-bound
     registered: '2026-10-08'
+    landed: '2026-10-09'
     headline: Complete rational construction reports at 25 counts
     claim: Complete independently reviewed exact replay, independently re-implemented, confirms finite feasibility of all 25 rational source certificates. Superseded configurations retain their complete inputs and outcomes; no optimality
       or local-minimum theorem.
@@ -13182,6 +13307,7 @@ results:
   - id: T-126
     kind: upper-bound
     registered: '2026-10-08'
+    landed: '2026-10-09'
     headline: Undilated n51 construction over Q(sqrt2)
     claim: Complete independently reviewed exact replay, independently re-implemented, confirms the undilated 51-square construction ceiling s(51) <= (16+5sqrt(2))/3. This is finite feasibility, not equality with the optimum or
       the unconfirmed source contact count.
@@ -13235,6 +13361,7 @@ results:
   - id: T-127
     kind: upper-bound
     registered: '2026-10-08'
+    landed: '2026-10-09'
     headline: Fourteen rational refinements, seventeen complete source cases
     claim: Independently re-implemented exact verification confirms finite feasibility of all seventeen
       rational source certificates; fourteen strictly improve both prior finite upper lanes. Three withdrawn
@@ -13310,6 +13437,7 @@ results:
   - id: T-128
     kind: upper-bound
     registered: '2026-10-08'
+    landed: '2026-10-09'
     headline: Eight complete rational refinements from Couzo
     claim: >-
       Eight complete rational source certificates by Francisco Couzo, reported on
@@ -13469,6 +13597,7 @@ results:
   - id: T-129
     kind: upper-bound
     registered: '2026-10-08'
+    landed: '2026-10-09'
     headline: Three dated Daniel certificate reports with historical source custody
     claim: >-
       Complete author certificate reports at 105, 130 and 292 are retained with matching inputs and
@@ -13513,6 +13642,7 @@ results:
   - id: T-130
     kind: upper-bound
     registered: '2026-10-09'
+    landed: '2026-10-09'
     headline: Five follow-up rational refinements from Couzo
     claim: >-
       Five complete rational source certificates by Francisco Couzo, reported in a comment
@@ -13660,6 +13790,7 @@ results:
   - id: T-131
     kind: upper-bound
     registered: '2026-10-09'
+    landed: '2026-10-10'
     headline: "`s(132) ≤ 11.987099332245063…` from Daniel's record hunt"
     claim: >-
       One complete rational source certificate by Evan Daniel, reported on
@@ -13797,6 +13928,7 @@ results:
   - id: T-132
     kind: lower-bound
     registered: '2026-10-10'
+    landed: '2026-10-11'
     headline: "Mixed rectangle-measure lower bound `s(29) ≥ 291/50` reported, on a 2,073-direction declared net"
     claim: >-
       A rectangle measure of wand125/square-packing, published on 10 October 2026 and
@@ -13900,6 +14032,7 @@ results:
   - id: T-133
     kind: lower-bound
     registered: '2026-10-10'
+    landed: '2026-10-11'
     headline: "`s(40) > 335427/50000 = 6.70854`, by a clipped-corner transfer on a 401-direction net"
     claim: >-
       s(40) > 335427/50000 = 6.70854, by Guzhou0806, published on 10 October 2026 as
@@ -14068,6 +14201,7 @@ results:
   - id: T-134
     kind: upper-bound
     registered: '2026-10-10'
+    landed: '2026-10-11'
     headline: Six exact rational certificates from Couzo
     claim: >-
       Six complete rational source certificates by Francisco Couzo, reported on
@@ -14233,6 +14367,7 @@ results:
   - id: T-135
     kind: upper-bound
     registered: '2026-10-10'
+    landed: '2026-10-11'
     headline: A packing of 308 squares below the grid, from Fang
     claim: >-
       One complete rational source certificate by Kevin Fang, reported on
@@ -14381,6 +14516,7 @@ results:
   - id: T-136
     kind: upper-bound
     registered: '2026-10-10'
+    landed: '2026-10-11'
     headline: Seventeen exact rational packings from SQUISH's third request
     claim: >-
       Seventeen complete rational source certificates by Nate Chaoweeraprasit, using
@@ -14648,6 +14784,7 @@ results:
   - id: T-137
     kind: upper-bound
     registered: '2026-10-10'
+    landed: '2026-10-11'
     headline: An exact rational refinement of Xu's packing of 70 squares
     claim: >-
       One complete rational source certificate by Eric Deleeuw, reported on
@@ -14785,6 +14922,7 @@ results:
   - id: T-138
     kind: upper-bound
     registered: '2026-10-10'
+    landed: '2026-10-11'
     headline: Exact witnesses at Mishapolk's printed ceilings, the smallest known at 103 and 258 when registered
     claim: >-
       Exact rational witnesses derived here from Mishapolk's decimal centre-and-angle poses,
@@ -14975,6 +15113,7 @@ results:
   - id: T-139
     kind: upper-bound
     registered: '2026-10-10'
+    landed: '2026-10-11'
     headline: A more precise certificate of Xu's 126-square arrangement, from Daniel
     claim: >-
       One complete rational source certificate by Evan Daniel, published in his repository and
@@ -15113,6 +15252,7 @@ results:
   - id: T-140
     kind: upper-bound
     registered: '2026-10-10'
+    landed: '2026-10-11'
     headline: Six more exact rational certificates from Couzo
     claim: >-
       Six complete rational source certificates by Francisco Couzo, reported on
@@ -15283,6 +15423,7 @@ results:
   - id: T-141
     kind: upper-bound
     registered: '2026-10-10'
+    landed: '2026-10-11'
     headline: Exact rational certificates at 132 and 308 from Daniel's third record hunt
     claim: >-
       Two complete rational source certificates by Evan Daniel, reported on
@@ -15395,6 +15536,14 @@ results:
 
       The source's own checkers were not run here. No two independent methods, human
       oversight or optimality is claimed.
+
+      Issue 673 (17 October 2026) corrects the credit the author asked for in issue 489 at
+      308: crediting Kevin Fang for the construction meant that the search was based on
+      his packing, not that Fang found the packing posted, which is a different local
+      minimum (his packing polished, then seven search moves to a nearby basin). From 19
+      October 2026 the case record at 308, whose house T-174 refines this packing, names
+      Evan Daniel as the finder, based on Fang's two-wedge construction; the credit line,
+      Daniel after Fang and the rest, is unchanged.
     next_rung: >-
       V4 and C4 need a retained human oversight record: two accepted adversarial
       reviews by distinct AI reviewers are retained, the 10 October review and the 11 October
@@ -15438,6 +15587,7 @@ results:
   - id: T-142
     kind: lower-bound
     registered: '2026-10-10'
+    landed: '2026-10-11'
     headline: "Mixed rectangle-measure lower bound `s(28) ≥ 2297/400` reported, on a 2,073-direction declared net"
     claim: >-
       A rectangle measure of wand125/square-packing, published on 10 October 2026 and
@@ -15543,6 +15693,7 @@ results:
   - id: T-143
     kind: lower-bound
     registered: '2026-10-10'
+    landed: '2026-10-11'
     headline: "Mixed rectangle-measure lower bound `s(30) ≥ 2357/400` reported, on a 2,073-direction declared net"
     claim: >-
       A rectangle measure of wand125/square-packing, published on 10 October 2026 and
@@ -15647,6 +15798,7 @@ results:
   - id: T-144
     kind: lower-bound
     registered: '2026-10-10'
+    landed: '2026-10-11'
     headline: "Linear-measure lower bound `s(n) ≥ 563/50 = 11.26` for `n = 122…126`, reported"
     claim: >-
       A measure of points, segments and rectangles that wand125/square-packing published on
@@ -15753,6 +15905,7 @@ results:
   - id: T-145
     kind: lower-bound
     registered: '2026-10-10'
+    landed: '2026-10-11'
     headline: "`s(40) > 1340000/199529 = 6.7158157…`, by a continuous-pose interval kernel"
     claim: >-
       s(40) > 1340000/199529 = 6.715815746082023…, by Guzhou0806, published on 10 October 2026
@@ -15925,6 +16078,7 @@ results:
   - id: T-146
     kind: upper-bound
     registered: '2026-10-10'
+    landed: '2026-10-11'
     headline: Exact rational certificates at fifteen counts from Daniel's regularized record lists
     claim: >-
       Fifteen complete rational certificates from Evan Daniel's display-regularized record
@@ -16398,6 +16552,7 @@ results:
   - id: T-147
     kind: upper-bound
     registered: '2026-10-11'
+    landed: '2026-10-12'
     headline: A packing of 207 squares from two placed patches of Xu's packing of 70
     claim: >-
       One complete rational source certificate by PingYou Ltd, reported on
@@ -16551,6 +16706,7 @@ results:
   - id: T-148
     kind: upper-bound
     registered: '2026-10-11'
+    landed: '2026-10-12'
     headline: A packing of 153 squares built from Xu's packing of 70, its contacts reclosed at a new angle
     claim: >-
       One complete rational source certificate by PingYou Ltd, reported on
@@ -16725,6 +16881,7 @@ results:
   - id: T-149
     kind: upper-bound
     registered: '2026-10-11'
+    landed: '2026-10-12'
     headline: New packings of 155, 156 and 211 squares, each with an exact rational certificate
     claim: >-
       Three complete rational source certificates by Daniil Ostashev, reported on
@@ -16893,6 +17050,7 @@ results:
   - id: T-150
     kind: upper-bound
     registered: '2026-10-11'
+    landed: '2026-10-12'
     headline: Exact rational refinements of Xu's packings of 146 and 261 squares
     claim: >-
       Two complete rational source certificates by Robert Barnett, reported on
@@ -17051,6 +17209,7 @@ results:
   - id: T-151
     kind: upper-bound
     registered: '2026-10-12'
+    landed: '2026-10-12'
     headline: Nine exact rational packings from SQUISH's fourth request
     claim: >-
       Nine complete rational source certificates by Nate Chaoweeraprasit, using SQUISH,
@@ -17259,6 +17418,7 @@ results:
   - id: T-152
     kind: upper-bound
     registered: '2026-10-12'
+    landed: '2026-10-12'
     headline: Exact rational refinements of SQUISH's Mondrian packings of 304 and 305 squares
     claim: >-
       Two complete rational source certificates by Francisco Couzo, reported on
@@ -17460,6 +17620,7 @@ results:
   - id: T-153
     kind: optimality
     registered: '2026-10-12'
+    landed: '2026-10-13'
     headline: "Candidate proof that Bidwell's 1998 packing is optimal, `s(17) = 4.67553009360455…`"
     claim: >-
       Marc Leonard Overbeck (Kleddamag) claims, as a candidate proof, that `s(17) = L =
@@ -17783,6 +17944,7 @@ results:
     kind: formalization
     proves_kind: optimality
     registered: '2026-10-13'
+    landed: '2026-10-13'
     headline: "Fitzharding reports a Lean proof that `s(17) = 4.67553009360455…`"
     claim: >-
       Oscar Fitzharding reports a Lean 4 proof that John Bidwell's 1998 packing of seventeen
@@ -18103,6 +18265,7 @@ results:
   - id: T-155
     kind: upper-bound
     registered: '2026-10-12'
+    landed: '2026-10-14'
     headline: Exact regularized sides at 59 counts, `5.4e-20` to `9.9e-15` below the ceilings they replace
     established: '2026-10-12'
     claim: >-
@@ -19161,6 +19324,7 @@ results:
   - id: T-156
     kind: upper-bound
     registered: '2026-10-13'
+    landed: '2026-10-14'
     headline: "`s(290) ≤ 17.5355339059327376…`, by monotonicity from T-155, with its own exact certificate"
     established: '2026-10-13'
     claim: >-
@@ -19326,6 +19490,7 @@ results:
   - id: T-157
     kind: lower-bound
     registered: '2026-10-12'
+    landed: '2026-10-14'
     headline: "`s(40) > 3359/500 = 6.718`, by T-145's continuous-pose kernel on a density with 163 new supports"
     claim: >-
       s(40) > 3359/500 = 6.718, by Guzhou0806, published on 11 October 2026 as release
@@ -19489,6 +19654,7 @@ results:
   - id: T-158
     kind: upper-bound
     registered: '2026-10-12'
+    landed: '2026-10-14'
     headline: New packings of 175, 232 and 264 squares built on a new 38-square rectangle, each certified exactly
     claim: >-
       Three complete rational source certificates by Daniil Ostashev, reported on
@@ -19669,6 +19835,7 @@ results:
   - id: T-159
     kind: upper-bound
     registered: '2026-10-12'
+    landed: '2026-10-14'
     headline: Another arrangement of Xu's design for 102 squares, certified exactly from its decimal layout
     claim: >-
       An exact rational certificate derived here from Rio Calle's decimal layout of 102 unit
@@ -19817,6 +19984,7 @@ results:
   - id: T-160
     kind: upper-bound
     registered: '2026-10-12'
+    landed: '2026-10-14'
     headline: A smaller packing of 154 squares from Daniel's size-chaining explorer, certified exactly
     claim: >-
       One complete rational source certificate by Evan Daniel, reported on
@@ -19980,6 +20148,7 @@ results:
   - id: T-161
     kind: upper-bound
     registered: '2026-10-14'
+    landed: '2026-10-14'
     headline: Exact rational certificates at 156, 176, 237 and 271 from Couzo
     claim: >-
       Four complete rational source certificates report finite upper-bound improvements at
@@ -20185,6 +20354,7 @@ results:
   - id: T-162
     kind: upper-bound
     registered: '2026-10-14'
+    landed: '2026-10-14'
     headline: >-
       New packings of 129, 204 and 303 squares, a cut-out and two compositions, each
       certified exactly
@@ -20353,6 +20523,7 @@ results:
   - id: T-163
     kind: upper-bound
     registered: '2026-10-14'
+    landed: '2026-10-14'
     headline: >-
       s(n² − n + 1) < n for every n ≥ 15, and n² − n + F(n) squares below side n, from Kevin
       Fang
@@ -20489,6 +20660,7 @@ results:
   - id: T-164
     kind: upper-bound
     registered: '2026-10-14'
+    landed: '2026-10-14'
     headline: >-
       A packing of 302 squares from four boundary patches of Xu's packing of 70 and two
       upright banks
@@ -20626,6 +20798,7 @@ results:
   - id: T-165
     kind: upper-bound
     registered: '2026-10-14'
+    landed: '2026-10-14'
     headline: A tighter certificate at 176 from Couzo, published with no issue
     claim: >-
       One complete rational source certificate reports a finite upper-bound improvement at
@@ -20770,6 +20943,7 @@ results:
   - id: T-166
     kind: upper-bound
     registered: '2026-10-14'
+    landed: '2026-10-14'
     headline: A tighter rational realization of PingYou Ltd's packing of 153 squares
     claim: >-
       One complete rational source certificate reports a finite upper-bound improvement at
@@ -20914,6 +21088,7 @@ results:
   - id: T-167
     kind: upper-bound
     registered: '2026-10-14'
+    landed: '2026-10-14'
     headline: A tighter rational realization of PingYou Ltd's packing of 207 squares
     claim: >-
       One complete rational source certificate reports a finite upper-bound improvement at
@@ -21057,6 +21232,7 @@ results:
   - id: T-168
     kind: upper-bound
     registered: '2026-10-14'
+    landed: '2026-10-14'
     headline: >-
       A further exact refinement of Xu's packing of 146 squares, after Barnett's
     claim: >-
@@ -21199,6 +21375,7 @@ results:
   - id: T-169
     kind: upper-bound
     registered: '2026-10-14'
+    landed: '2026-10-14'
     headline: >-
       A further exact refinement of Xu's packing of 261 squares, after Barnett's
     claim: >-
@@ -21343,6 +21520,7 @@ results:
   - id: T-170
     kind: upper-bound
     registered: '2026-10-14'
+    landed: '2026-10-14'
     headline: >-
       An exact contact refinement of Xu's packing of 105 squares, after Couzo's
     claim: >-
@@ -21485,6 +21663,7 @@ results:
   - id: T-171
     kind: upper-bound
     registered: '2026-10-14'
+    landed: '2026-10-14'
     headline: An exact contact refinement of SQUISH's packing of 272 squares
     claim: >-
       One complete rational source certificate reports a finite upper-bound improvement at
@@ -21626,6 +21805,7 @@ results:
   - id: T-172
     kind: upper-bound
     registered: '2026-10-14'
+    landed: '2026-10-14'
     headline: >-
       A packing of 154 squares from Couzo, continuing Daniel's arrangement
     claim: >-
@@ -21757,6 +21937,7 @@ results:
   - id: T-173
     kind: upper-bound
     registered: '2026-10-14'
+    landed: '2026-10-14'
     headline: >-
       Mykhailo Polkovskyi's packings of 153 and 207 squares, each below the earlier
       refinements there
@@ -21911,6 +22092,7 @@ results:
   - id: T-174
     kind: upper-bound
     registered: '2026-10-14'
+    landed: '2026-10-14'
     headline: >-
       Tighter certificates at 68 counts from PingYou Ltd, of others' packings and its own
     claim: >-
@@ -23422,6 +23604,7 @@ results:
   - id: T-175
     kind: upper-bound
     registered: '2026-10-14'
+    landed: '2026-10-14'
     headline: >-
       New packings of 211, 241 and 304 squares, two with merged tilted bands, each certified
       exactly
@@ -23595,6 +23778,7 @@ results:
   - id: T-176
     kind: lower-bound
     registered: '2026-10-14'
+    landed: '2026-10-14'
     headline: >-
       Mixed rectangle-measure lower bound `s(39) ≥ 533/80` reported, on a 2,073-direction
       declared net
@@ -23733,6 +23917,7 @@ results:
   - id: T-177
     kind: lower-bound
     registered: '2026-10-14'
+    landed: '2026-10-14'
     headline: >-
       Mixed rectangle-measure lower bound `s(44) ≥ 2799/400` reported, on a 2,073-direction
       declared net
@@ -23868,6 +24053,7 @@ results:
   - id: T-178
     kind: lower-bound
     registered: '2026-10-14'
+    landed: '2026-10-14'
     headline: >-
       Mixed rectangle-measure lower bound `s(37) ≥ 2599/400` reported, on a 2,073-direction
       declared net
@@ -24002,6 +24188,7 @@ results:
   - id: T-179
     kind: lower-bound
     registered: '2026-10-14'
+    landed: '2026-10-14'
     headline: Linear-measure lower bound `s(n) ≥ 306/25 = 12.24` for `n = 145…149`, reported
     claim: >-
       A measure of points, segments and rectangles that wand125/square-packing published on
@@ -24137,6 +24324,7 @@ results:
   - id: T-180
     kind: lower-bound
     registered: '2026-10-14'
+    landed: '2026-10-14'
     headline: Closed-form lower bound `s(N) ≥ a(N)` for every non-square `N ≥ 49`, reported
     claim: >-
       For every non-square integer N >= 49, with k = floor(sqrt(N)), Hiroaki Hosono
@@ -24324,6 +24512,7 @@ results:
   - id: T-181
     kind: upper-bound
     registered: '2026-10-14'
+    landed: '2026-10-14'
     headline: Exact rational certificates at 211, 241 and 302 from Couzo
     claim: >-
       Three complete rational source certificates report finite upper-bound improvements at
@@ -24524,6 +24713,7 @@ results:
   - id: T-182
     kind: upper-bound
     registered: '2026-10-14'
+    landed: '2026-10-14'
     headline: Exact rational certificates at 154, 211 and 241 from Couzo
     claim: >-
       Three complete rational source certificates report finite upper-bound improvements at
@@ -24749,6 +24939,7 @@ results:
   - id: T-183
     kind: upper-bound
     registered: '2026-10-14'
+    landed: '2026-10-14'
     headline: >-
       Mykhailo Polkovskyi's certificate for 237 squares, the smallest known side there
       when registered
@@ -24906,6 +25097,7 @@ results:
   - id: T-184
     kind: optimality
     registered: '2026-10-14'
+    landed: '2026-10-14'
     headline: '`s(76) = 9`, by a mixed cover of points and grid-line segments'
     claim: >-
       Benjamin Greff reports s(76) = 9: the lower half by a mixed cover, the upper half by
@@ -25043,6 +25235,7 @@ results:
   - id: T-185
     kind: upper-bound
     registered: '2026-10-15'
+    landed: '2026-10-15'
     headline: >-
       A tighter packing of 175 squares from Couzo, superseded by Ostashev's
       composition
@@ -25186,6 +25379,7 @@ results:
   - id: T-186
     kind: upper-bound
     registered: '2026-10-15'
+    landed: '2026-10-15'
     headline: >-
       Exact certificates at twelve counts from Mykhailo Polkovskyi, tightening the smallest
       reported there
@@ -25616,6 +25810,7 @@ results:
   - id: T-187
     kind: upper-bound
     registered: '2026-10-15'
+    landed: '2026-10-15'
     headline: >-
       A smaller packing of 146 squares from Daniel's chain search, started from Xu's packing
     claim: >-
@@ -25728,6 +25923,13 @@ results:
       of regularized views, agreement to about 1e-7 outside a cluster of ten squares, is his
       and was not re-run; pose for pose the certificates differ by more than 1e-3 at 57
       squares.
+
+      Issue 673 (17 October 2026) corrects the credit the author asked for in issue 606:
+      crediting Ryan Xu's packing as the start meant that the search was based on it, not
+      that Xu found the packing posted, which is a different local minimum. From 19
+      October 2026 the case record at 146 names Evan Daniel as the finder, from a search
+      started from Xu's packing; the credit line, Daniel after Xu, is unchanged, and so is
+      the measured lineage above.
     next_rung: >-
       V4 and C4 need a second accepted adversarial review by a distinct reviewer and a
       retained human oversight record; one AI review, of 16 October, is retained.
@@ -25756,6 +25958,7 @@ results:
   - id: T-188
     kind: upper-bound
     registered: '2026-10-15'
+    landed: '2026-10-16'
     headline: >-
       A tighter exact certificate for 211 squares from Francisco Couzo, of Daniil
       Ostashev's arrangement
@@ -25922,6 +26125,7 @@ results:
   - id: T-189
     kind: upper-bound
     registered: '2026-10-15'
+    landed: '2026-10-16'
     headline: >-
       Francisco Couzo's refinement of Mykhailo Polkovskyi's 237, and fifteen
       beyond-horizon bounds
@@ -26202,6 +26406,7 @@ results:
   - id: T-190
     kind: upper-bound
     registered: '2026-10-15'
+    landed: '2026-10-16'
     headline: >-
       A tighter exact certificate for 237 squares from Francisco Couzo, below his
       issue-607 certificate
@@ -26363,6 +26568,7 @@ results:
   - id: T-191
     kind: optimality
     registered: '2026-10-15'
+    landed: '2026-10-16'
     headline: >-
       `s(95) = 10`, by a mixed cover of points and grid-line segments
     claim: >-
@@ -26502,6 +26708,7 @@ results:
   - id: T-192
     kind: lower-bound
     registered: '2026-10-15'
+    landed: '2026-10-16'
     headline: >-
       Continuous-pose lower bound `s(28) > 1149/200` reported, by two of the source's
       programs
@@ -26645,6 +26852,7 @@ results:
   - id: T-193
     kind: upper-bound
     registered: '2026-10-16'
+    landed: '2026-10-16'
     headline: >-
       Exact algebraic sides at sixteen counts from Evan Daniel, of packings the record credits
     claim: >-
@@ -26960,6 +27168,7 @@ results:
   - id: T-194
     kind: optimality
     registered: '2026-10-16'
+    landed: '2026-10-16'
     headline: "Fitzharding reports a Lean proof that Wainwright's packing is optimal, `s(19) = 3 + 4√2/3`"
     claim: >-
       Oscar Fitzharding reports a Lean 4 proof that Robert Wainwright's 1979 packing of
@@ -27157,6 +27366,7 @@ results:
   - id: T-195
     kind: upper-bound
     registered: '2026-10-16'
+    landed: '2026-10-19'
     headline: A tighter rational certificate of Schadt and Ellsworth's 29-square packing, `1.57e-36` below T-155
     claim: >-
       One complete rational source certificate reports a finite upper-bound improvement at
@@ -27316,6 +27526,7 @@ results:
   - id: T-196
     kind: upper-bound
     registered: '2026-10-18'
+    landed: '2026-10-19'
     headline: de Winter reports three smaller rational upper bounds at 227, 229 and 260
     claim: >-
       The source reports complete rational unit-square certificates at the exact sides stated: s(227) <=
@@ -27388,199 +27599,305 @@ results:
   - id: T-197
     kind: upper-bound
     registered: '2026-10-18'
-    headline: Daniel reports a smaller n155 packing, started from Ostashev's packing
+    landed: '2026-10-19'
+    headline: >-
+      Daniel's smaller n155 packing, started from Ostashev's packing
     claim: >-
-      The source reports complete rational unit-square certificates at the exact sides stated: s(155) <=
+      One complete rational source certificate reports a finite upper-bound improvement at
+      the exact side it states: s(155) <=
       2590452188930112807053435932173/200000000000000000000000000000.
 
-      Issue 669 reports a different numerical local minimum found by Evan Daniel from Daniil Ostashev's
-      T-149 packing as the search start. Its original and regularized display certificates have the same
-      exact side and form one bound. The issue and prior JSON explicitly credit Ostashev; the regularized
-      JSON instead says by Francisco Couzo. Both metadata statements remain retained, and this entry follows
-      the explicit issue/prior attribution without treating the conflicting field as evidence. Numerical
-      KKT, local-minimum and basin claims remain the author's, with no optimality or identity proof adopted.
-    scope:
-      n_values:
-        - 155
-    verification: V0
-    confirmation: C0
+      The certificate and its duplicate-square and outside-container controls were decided
+      here on 19 October 2026 by both maintained exact routes, and the frozen comparison
+      rebuilt; no route here is the source's code, so the replay is independently
+      re-implemented. The 19 October review found no blocking defect.
+
+      Issue 669 reports a different numerical local minimum found by Evan Daniel's basin
+      explorer from Daniil Ostashev's T-149 packing, the register's witness for 155 when
+      the search ran, after a chain of 18 moves; no load-bearing tilt angle is shared with
+      T-149. Its original and same-side regularized display certificates state one bound.
+      KKT and local-minimum statements are the author's numerical evidence, not proofs.
+      The issue says the work was done with Claude (Claude Code) under Evan Daniel's
+      direction.
+    scope: {n_values: [155]}
+    verification: V3
+    confirmation: C3
     significance:
-      score: 2
-      rationale: A finite upper-bound improvement at one count in the retained report order, with source-claimed
-        search or dilation lineage; no lower bound or optimality claim. A draft S2 assessment for the separate
-        mathematical review.
-      scored: '2026-10-18'
-      by: think-1ayi October 18 intake registration draft; separate mathematical review confirms or changes
-        it
+      score: 3
+      rationale: >-
+        A new arrangement at 155, 1.64e-04 below the case and every report, found from
+        Ostashev's packing, as T-149, T-160 and T-183 are; no lower bound or optimum.
+      scored: '2026-10-19'
+      by: >-
+        the 19 October review
+        (docs/project/reviews/review-2026-10-19-upper-bound-imports-659-664-669-674.md),
+        raising the draft S2 of think-1ayi's October 18 intake registration
     novelty: previously-published
     attribution:
-      source_keys:
-        - '[Daniel n155 explorer 2026-10-17]'
+      source_keys: ['[Daniel n155 explorer 2026-10-17]']
       published: '2026-10-17'
-    evidence:
-      - E-evand-669-n155-report
+    evidence: [E-evand-669-n155-report, E-evand-669-n155-exact-feasibility]
     artifacts:
       - packing/resources/web/evand-n155-explorer-2026-10-17/README.md
       - packing/resources/web/evand-n155-explorer-2026-10-17/source/search/packer/candidates/s155_ex2.cert
       - packing/resources/web/evand-n155-explorer-2026-10-17/source/search/packer/candidates/s155_ex2_regularized.cert
-      - packing/campaign/issue-intake/upper-bounds-20261018/README.md
-    notes: |-
-      Source report only: no returned mathematical review or source-replay receipt is
-      incorporated. Both case upper lanes and the retained house remain unchanged pending Stage
-      4 adoption. The original and same-side regularized display certificates state one bound.
-      The packet preserves the Ostashev/Couzo metadata discrepancy; this entry follows the
-      explicit issue/prior attribution.
+      - docs/project/reviews/review-2026-10-19-upper-bound-imports-659-664-669-674.md
+    controls: [packing/tests/test_upper_bound_reports.py, packing/tests/test_upper_bound_reports_659_664_669_674.py]
+    notes: >-
+      A complete repository replay is retained for n = 155: 1 positive and 2
+      duplicate-square and outside-container controls passed their required outcomes on
+      both routes, 71610 pair decisions; summed over the 3 jobs, the receipt records 43.29
+      route CPU seconds and 86.75 job wall seconds, the longest job 29.99 seconds. Every
+      positive clears every wall by at least 5.00e-21 and every pair by at least 9.99e-21.
+      The receipt is receipts/exact-certification.json.xz in
+      evand-n155-explorer-2026-10-17.
 
-      The separate source-checker batch covering both n155 certificates and both n229 versions
-      has completed with geometric controls under think-8kx2 and think-0lu6. Its receipt and the
-      mapped review under think-s5u5 await descendant integration. Numerical local-minimum and
-      basin claims remain the author's; no identity or optimality proof is adopted.
-    next_rung: C1 needs the separate mapped mathematical review bound to this exact claim; C3 needs the
-      completed full retained source replay, adversarial controls and accepted review integrated in their
-      own descendant PRs. The replay and controls have completed separately under think-8kx2 and await integration.
-    unfinished_confirmations:
-      - what: Integrate the separate mapped mathematical review after binding actual result IDs; no review
-          is adopted by this registration.
-        rung: C1
-        link: think-s5u5
-      - what: Integrate the separately completed full retained source replay and geometric controls with
-          the accepted mapped mathematical review and exact claim binding in their own descendant PRs; this
-          registration adopts no confirmation.
-        rung: C3
-        link: think-8kx2
+      At n = 155 the certificate is below the case's ceiling (Daniil Ostashev, improved by
+      PingYou Ltd, T-174) by 1.64e-04 and below T-149 (#501) by 1.64e-04; it is the
+      smallest report at 155, and the 18 October ledger records it in report order.
+
+      Measured by the 19 October review, square by square: no symmetry of the box pairs
+      the certificate one to one with T-149's packing by nearest centres, and the best
+      one-to-one assignment moves 29 squares by more than a tenth, at most 0.737; its
+      tilts, 22.3 to 25.0 degrees with one at 7.8 and four at 33.6 to 34.8, share none of
+      T-149's, 25.0 to 32.7. It is a new arrangement found from Ostashev's packing, as the
+      issue says, and lists no regularization.
+
+      The three regularized views' reports, at 155, 236 and 271, each carry "by":
+      ["Francisco Couzo"]; read alike, that is the source regularizer's field, not a
+      credit, and the review asks the author (RV-7). This entry follows the issue and the
+      prior-record file, which credit Ostashev's packing as the start.
+
+      The source's own checkers were not run here. The two maintained routes share
+      certificate parsing, half-angle conversion, Fraction arithmetic and the
+      separating-axis method. No optimality, local minimum or human oversight is claimed.
+
+      V3 and C3 rest on the 19 October review and the replay it reproduced
+      (E-evand-669-n155-exact-feasibility). The case at 155 adopted this certificate as
+      its house on 19 October 2026.
+    next_rung: >-
+      None for the bound. V4 and C4 need a second accepted adversarial review by a
+      distinct reviewer and a retained human oversight record; one AI review, of 19
+      October, is retained.
+    reviews:
+      - path: docs/project/reviews/review-2026-10-19-upper-bound-imports-659-664-669-674.md
+        kind: adversarial
+        reviewer: >-
+          AI agent (Claude, strong sub-agent tier, max reasoning), the stage 4 review
+          lane (W2) of the 2026-10-19 intake, prompted separately from the import and
+          records lanes, with no shared context beyond their committed packets,
+          register entries and pull requests
+        reviewer_kind: ai
+        relation: project
+        date: '2026-10-19'
+        scope: >-
+          Finite feasibility of the five certificates T-197, T-198, T-199, T-218 and
+          T-219 cite: each retained receipt replayed on both maintained routes, each
+          frozen claim record rebuilt, a third exact route written for the review,
+          each pinned file fetched at its pin and held to its digest, each route's
+          trust boundary, and the credit each entry states measured pose by pose
+          against the packing it names.
+        verdict: accepted
+        covers: [T-197, T-198, T-199, T-218, T-219]
   - id: T-198
     kind: upper-bound
     registered: '2026-10-18'
-    headline: Daniel's opening n229 dilation certificate, after Couzo and de Winter
+    landed: '2026-10-19'
+    headline: >-
+      Daniel's opening n229 dilation certificate, after Couzo and de Winter
     claim: >-
-      The source reports complete rational unit-square certificates at the exact sides stated: s(229) <=
+      One complete rational source certificate reports a finite upper-bound improvement at
+      the exact side it states: s(229) <=
       7825081627429265081627421439843/500000000000000000000000000000.
 
-      The opening report of issue 674, 17 October, remains a chronological finite upper bound even though
-      the author later asks to replace its certificate. Preserve the source-claimed lineage de Winter issue
-      668, Couzo issue 672, then Daniel's opening dilation and the next-day update. Couzo's intervening
-      claim remains Stage 1, owned by think-2vjc; it is not retained, replayed or registered
-      by this change. No regularizations.of is assigned because Couzo's antecedent is not registered; identity.basis may
-      remain source-claim until measured. The author's dilation description is attribution, not a measured identity or continuous-path
-      proof.
-    scope:
-      n_values:
-        - 229
-    verification: V0
-    confirmation: C0
+      The certificate and its duplicate-square and outside-container controls were decided
+      here on 19 October 2026 by both maintained exact routes, and the frozen comparison
+      rebuilt; no route here is the source's code, so the replay is independently
+      re-implemented. The 19 October review found no blocking defect.
+
+      Issue 674's opening report, 17 October, remains a chronological upper bound although
+      the author's update of 18 October (T-199) asks to replace it and is smaller. The
+      source states the certificate is a dilation of a binary64 packing by 1 + 10^-12 with
+      rational half-angle tangents, which certifies the upper bound only. The issue
+      credits Francisco Couzo's #672 packing, which refines Joost de Winter's #668, as the
+      start. The issue says the work was done with Claude (Claude Code) under Evan
+      Daniel's direction.
+    scope: {n_values: [229]}
+    verification: V3
+    confirmation: C3
     significance:
       score: 2
-      rationale: A finite upper-bound improvement at one count in the retained report order, with source-claimed
-        search or dilation lineage; no lower bound or optimality claim. A draft S2 assessment for the separate
-        mathematical review.
-      scored: '2026-10-18'
-      by: think-1ayi October 18 intake registration draft; separate mathematical review confirms or changes
-        it
+      rationale: >-
+        An arrangement of de Winter's tilted design 1.15e-05 below the smallest earlier
+        report, de Winter's T-196, superseded the next day by the author's update, as
+        T-188 is; the 6.69e-03 drop below the case is de Winter's.
+      scored: '2026-10-19'
+      by: >-
+        the 19 October review
+        (docs/project/reviews/review-2026-10-19-upper-bound-imports-659-664-669-674.md),
+        confirming the draft S2 of think-1ayi's October 18 intake registration
     novelty: previously-published
     attribution:
-      source_keys:
-        - '[Daniel n229 dilation 2026-10-17]'
+      source_keys: ['[Daniel n229 dilation 2026-10-17]']
       published: '2026-10-17'
-    evidence:
-      - E-evand-674-n229-opening-report
+    evidence: [E-evand-674-n229-opening-report, E-evand-674-n229-opening-exact-feasibility]
     artifacts:
       - packing/resources/web/evand-n229-dilation-2026-10-17/README.md
       - packing/resources/web/evand-n229-dilation-2026-10-17/source/search/packer/candidates/s229.cert
-      - packing/campaign/issue-intake/upper-bounds-20261018/README.md
-    notes: |-
-      This opening finite upper-bound report remains registered in chronological order even
-      though the author later requests the smaller update. Both case upper lanes and the
-      retained house remain unchanged pending adoption. The declared rungs use only the reported
-      evidence and incorporate no separate confirmation receipt.
+      - docs/project/reviews/review-2026-10-19-upper-bound-imports-659-664-669-674.md
+    controls: [packing/tests/test_upper_bound_reports.py, packing/tests/test_upper_bound_reports_659_664_669_674.py]
+    notes: >-
+      A complete repository replay is retained for n = 229: 1 positive and 2
+      duplicate-square and outside-container controls passed their required outcomes on
+      both routes, 156636 pair decisions; summed over the 3 jobs, the receipt records
+      92.75 route CPU seconds and 140.22 job wall seconds, the longest job 47.78 seconds.
+      Every positive clears every wall by at least 5.01e-13 and every pair by at least
+      9.99e-13, the dilation's margin. The receipt is receipts/exact-certification.json.xz
+      in evand-n229-dilation-2026-10-17.
 
-      Credit follows de Winter, Couzo's intervening report, then Daniel's opening dilation and
-      update. Couzo's antecedent remains an unregistered import under think-2vjc, so no
-      regularizations.of is assigned. The identity contract permits source-claim until measured;
-      the source's dilation description establishes no measured identity or continuous path.
+      At n = 229 the certificate is below the case's verified ceiling (the Kingbird
+      catalogue, verified by T-155's exact ceiling) by 6.69e-03, below T-196 (#668) and
+      #672 by 1.15e-05 at their prints; T-199, the author's update, is below it by
+      1.74e-06 and houses the count.
 
-      The separate full source-checker batch and controls have completed under think-8kx2 and
-      think-0lu6. Their receipt and the mapped review under think-s5u5 await integration in
-      descendant PRs.
-    next_rung: C1 needs the separate mapped mathematical review bound to this exact claim; C3 needs the
-      completed full retained source replay, adversarial controls and accepted review integrated in their
-      own descendant PRs. The replay and controls have completed separately under think-0lu6 and await integration.
-    unfinished_confirmations:
-      - what: Integrate the separate mapped mathematical review after binding actual result IDs; no review
-          is adopted by this registration.
-        rung: C1
-        link: think-s5u5
-      - what: Integrate the separately completed full retained source replay and geometric controls with
-          the accepted mapped mathematical review and exact claim binding in their own descendant PRs; this
-          registration adopts no confirmation.
-        rung: C3
-        link: think-0lu6
+      Measured by the 19 October review: the certificate is exactly the dilation its
+      header states, the input's printed side times 1 + delta rounded up at 30 places,
+      delta the double nearest 10^-12, and its least margins split exactly into the
+      input's own clearance and the dilation's share (RV-4). It does not pair one to one
+      with de Winter's T-196, though it carries its four tilt bands within 0.03 degrees
+      (RV-9). Couzo's #672, which the issue names as the start, is not retained or
+      registered, so the step from it is not measured and no regularizations.of is
+      assigned; the source's lineage is its claim. The source's own checkers were not run
+      here. No optimality, local minimum or human oversight is claimed.
+
+      V3 and C3 rest on the 19 October review and the replay it reproduced
+      (E-evand-674-n229-opening-exact-feasibility).
+    next_rung: >-
+      None for the bound, which T-199 supersedes at 229. V4 and C4 need a second accepted
+      adversarial review by a distinct reviewer and a retained human oversight record; one
+      AI review, of 19 October, is retained.
+    reviews:
+      - path: docs/project/reviews/review-2026-10-19-upper-bound-imports-659-664-669-674.md
+        kind: adversarial
+        reviewer: >-
+          AI agent (Claude, strong sub-agent tier, max reasoning), the stage 4 review
+          lane (W2) of the 2026-10-19 intake, prompted separately from the import and
+          records lanes, with no shared context beyond their committed packets,
+          register entries and pull requests
+        reviewer_kind: ai
+        relation: project
+        date: '2026-10-19'
+        scope: >-
+          Finite feasibility of the five certificates T-197, T-198, T-199, T-218 and
+          T-219 cite: each retained receipt replayed on both maintained routes, each
+          frozen claim record rebuilt, a third exact route written for the review,
+          each pinned file fetched at its pin and held to its digest, each route's
+          trust boundary, and the credit each entry states measured pose by pose
+          against the packing it names.
+        verdict: accepted
+        covers: [T-197, T-198, T-199, T-218, T-219]
   - id: T-199
     kind: upper-bound
     registered: '2026-10-18'
-    headline: Daniel's smaller n229 update, replacing the opening certificate
+    landed: '2026-10-19'
+    headline: >-
+      Daniel's smaller n229 update, replacing the opening certificate
     claim: >-
-      The source reports complete rational unit-square certificates at the exact sides stated: s(229) <=
+      One complete rational source certificate reports a finite upper-bound improvement at
+      the exact side it states: s(229) <=
       7825080756947776580756939951343/500000000000000000000000000000.
 
-      The 18 October comment on issue 674 requests this smaller certificate in place of the opening value.
-      Both chronological claims remain registered, and this update is the latest registered report at
-      229, pending adoption. Credit Daniel after Couzo, de Winter and Levy. Couzo's issue 672 remains Stage 1 under think-2vjc;
-      no registered antecedent or measured identity is inferred. The source's dilation and regularization
-      lineage is retained as its claim; no regularizations.of or continuous-path proof is adopted.
-    scope:
-      n_values:
-        - 229
-    verification: V0
-    confirmation: C0
+      The certificate and its duplicate-square and outside-container controls were decided
+      here on 19 October 2026 by both maintained exact routes, and the frozen comparison
+      rebuilt; no route here is the source's code, so the replay is independently
+      re-implemented. The 19 October review found no blocking defect.
+
+      The 18 October comment on issue 674 asks that this smaller certificate be registered
+      in place of the opening value (T-198), which stays registered as the earlier report.
+      The source states it is a dilation of a binary64 packing by 1 + 10^-12 with rational
+      half-angle tangents, a nearby configuration of the opening packing with the same
+      tilted structure, and credits Francisco Couzo's #672 packing, which refines Joost de
+      Winter's #668, as the start. The issue says the work was done with Claude (Claude
+      Code) under Evan Daniel's direction.
+    scope: {n_values: [229]}
+    verification: V3
+    confirmation: C3
     significance:
       score: 2
-      rationale: A finite upper-bound improvement at one count in the retained report order, with source-claimed
-        search or dilation lineage; no lower bound or optimality claim. A draft S2 assessment for the separate
-        mathematical review.
-      scored: '2026-10-18'
-      by: think-1ayi October 18 intake registration draft; separate mathematical review confirms or changes
-        it
+      rationale: >-
+        The same arrangement family, 1.32e-05 below T-196 and 1.74e-06 below T-198; no
+        lower bound or optimum.
+      scored: '2026-10-19'
+      by: >-
+        the 19 October review
+        (docs/project/reviews/review-2026-10-19-upper-bound-imports-659-664-669-674.md),
+        confirming the draft S2 of think-1ayi's October 18 intake registration
     novelty: previously-published
     attribution:
-      source_keys:
-        - '[Daniel n229 dilation update 2026-10-18]'
+      source_keys: ['[Daniel n229 dilation update 2026-10-18]']
       published: '2026-10-18'
-    evidence:
-      - E-evand-674-n229-update-report
+    evidence: [E-evand-674-n229-update-report, E-evand-674-n229-update-exact-feasibility]
     artifacts:
       - packing/resources/web/evand-n229-dilation-update-2026-10-18/README.md
       - packing/resources/web/evand-n229-dilation-update-2026-10-18/source/search/packer/candidates/s229_v2.cert
-      - packing/campaign/issue-intake/upper-bounds-20261018/README.md
-    notes: |-
-      The update is the latest registered n229 report, pending adoption; the opening report
-      remains as its earlier chronological improvement. Both case upper lanes and the retained
-      house are unchanged. No separate mathematical review or source-replay receipt is
-      incorporated, and the declared rungs follow only the reported evidence.
+      - docs/project/reviews/review-2026-10-19-upper-bound-imports-659-664-669-674.md
+    controls: [packing/tests/test_upper_bound_reports.py, packing/tests/test_upper_bound_reports_659_664_669_674.py]
+    notes: >-
+      A complete repository replay is retained for n = 229: 1 positive and 2
+      duplicate-square and outside-container controls passed their required outcomes on
+      both routes, 156636 pair decisions; summed over the 3 jobs, the receipt records
+      88.93 route CPU seconds and 157.25 job wall seconds, the longest job 63.42 seconds.
+      Every positive clears every wall by at least 6.00e-13 and every pair by at least
+      1.20e-12, the dilation's margin. The receipt is receipts/exact-certification.json.xz
+      in evand-n229-dilation-update-2026-10-18.
 
-      Credit is Daniel after Couzo, de Winter and Levy. Couzo's intervening report remains an
-      unregistered import under think-2vjc, so no regularizations.of is assigned. Source-claimed
-      lineage is retained without a measured packing identity or continuous-path proof.
+      At n = 229 the certificate is below the case's verified ceiling (the Kingbird
+      catalogue, verified by T-155's exact ceiling) by 6.69e-03, below T-196 (#668) and
+      #672 by 1.32e-05 at their prints and below T-198 by 1.74e-06; it is the smallest
+      report at 229, the latest in report order.
 
-      The separate full source-checker batch and controls have completed under think-8kx2 and
-      think-0lu6. Their receipt and the mapped review under think-s5u5 await integration in
-      descendant PRs.
-    next_rung: C1 needs the separate mapped mathematical review bound to this exact claim; C3 needs the
-      completed full retained source replay, adversarial controls and accepted review integrated in their
-      own descendant PRs. The replay and controls have completed separately under think-0lu6 and await integration.
-    unfinished_confirmations:
-      - what: Integrate the separate mapped mathematical review after binding actual result IDs; no review
-          is adopted by this registration.
-        rung: C1
-        link: think-s5u5
-      - what: Integrate the separately completed full retained source replay and geometric controls with
-          the accepted mapped mathematical review and exact claim binding in their own descendant PRs; this
-          registration adopts no confirmation.
-        rung: C3
-        link: think-0lu6
+      Measured by the 19 October review: the certificate is exactly the dilation its
+      header states (delta the double nearest 10^-12, RV-4), and its least margins are the
+      input's own clearance, about 1.0e-13 at the walls and 2.0e-13 between squares, plus
+      the dilation's share (RV-5). It pairs one to one with the opening certificate, eight
+      squares moving beyond a tenth, at most 0.54, with the same four tilt bands; it does
+      not pair with de Winter's T-196 (RV-9). Couzo's #672 is not retained or registered,
+      so the step from it is not measured and no regularizations.of is assigned; the
+      source's lineage is its claim. The source's own checkers were not run here. No
+      optimality, local minimum or human oversight is claimed.
+
+      V3 and C3 rest on the 19 October review and the replay it reproduced
+      (E-evand-674-n229-update-exact-feasibility). The case at 229 adopted this
+      certificate as its house on 19 October 2026, the first adoption at 229.
+    next_rung: >-
+      None for the bound. V4 and C4 need a second accepted adversarial review by a
+      distinct reviewer and a retained human oversight record; one AI review, of 19
+      October, is retained.
+    reviews:
+      - path: docs/project/reviews/review-2026-10-19-upper-bound-imports-659-664-669-674.md
+        kind: adversarial
+        reviewer: >-
+          AI agent (Claude, strong sub-agent tier, max reasoning), the stage 4 review
+          lane (W2) of the 2026-10-19 intake, prompted separately from the import and
+          records lanes, with no shared context beyond their committed packets,
+          register entries and pull requests
+        reviewer_kind: ai
+        relation: project
+        date: '2026-10-19'
+        scope: >-
+          Finite feasibility of the five certificates T-197, T-198, T-199, T-218 and
+          T-219 cite: each retained receipt replayed on both maintained routes, each
+          frozen claim record rebuilt, a third exact route written for the review,
+          each pinned file fetched at its pin and held to its digest, each route's
+          trust boundary, and the credit each entry states measured pose by pose
+          against the packing it names.
+        verdict: accepted
+        covers: [T-197, T-198, T-199, T-218, T-219]
 
   - id: T-200
     kind: lower-bound
     registered: '2026-10-17'
+    landed: '2026-10-19'
     headline: >-
       Mixed rectangle-measure lower bound `s(38) ≥ 2631/400` reported, on a
       2,073-direction declared net
@@ -27683,6 +28000,7 @@ results:
   - id: T-201
     kind: lower-bound
     registered: '2026-10-17'
+    landed: '2026-10-19'
     headline: >-
       Mixed rectangle-measure lower bound `s(40) ≥ 1347/200` reported, on a
       2,073-direction declared net
@@ -27785,6 +28103,7 @@ results:
   - id: T-202
     kind: lower-bound
     registered: '2026-10-17'
+    landed: '2026-10-19'
     headline: >-
       Mixed rectangle-measure lower bound `s(41) ≥ 2721/400` reported, on a
       2,073-direction declared net
@@ -27887,6 +28206,7 @@ results:
   - id: T-203
     kind: lower-bound
     registered: '2026-10-17'
+    landed: '2026-10-19'
     headline: >-
       Mixed rectangle-measure lower bound `s(43) ≥ 2777/400` reported, on a
       2,073-direction declared net
@@ -27989,6 +28309,7 @@ results:
   - id: T-204
     kind: lower-bound
     registered: '2026-10-17'
+    landed: '2026-10-19'
     headline: >-
       Mixed rectangle-measure lower bound `s(51) ≥ 3011/400` reported, on a
       2,073-direction declared net
@@ -28091,60 +28412,73 @@ results:
   - id: T-205
     kind: lower-bound
     registered: '2026-10-17'
+    landed: '2026-10-19'
     headline: >-
-      Mixed rectangle-measure lower bound `s(68) ≥ 853/100` reported, on the
+      Mixed rectangle-measure lower bound `s(68) ≥ 853/100` verified, on the
       201-direction net
     claim: >-
       A rectangle measure of wand125/square-packing, published on 16 October 2026 and
-      reported in jlevy/squares#446, is reported to prove s(68) >= 853/100 = 8.53.
+      reported in jlevy/squares#446, proves s(68) >= 853/100 = 8.53.
 
       The certificate, mixed_n68_L853, is a density of 726 uniform rectangles in D4
-      orbits, and no point mass, of total mass 6799999/100000, on the net its
-      candidate declares, the standard net of 201 half-angle tangents of step 83/40000
-      at core side 9977/10000. Since 9977/10000 (1 + 83/40000) = 399908091/400000000 <
-      1, and the last tangent 83/200 is past tan(pi/8), every unit square contains a
-      concentric core at a net angle strictly in its interior.
+      orbits, 5796 distinct rectangles after expansion, and no point or segment, of
+      total mass 6799999/100000 < 68. Its declared net has 201 half-angle tangents of
+      step 83/40000 at core side 9977/10000. The strict core extent
+      399908091/400000000 < 1 and the last tangent 83/200, past tan(pi/8), supply the
+      reviewed net-and-shrink implication.
 
-      The source reports every such core capturing mass at least one at all 201
-      directions, by sqverify-proof-net, its copy of this repository's sqverify_fast
-      changed to read the declared net, in two complete runs, and a control with every
-      mass scaled by 197/200 refused at 32 sampled directions.
+      The retained maintained sqverify-fast capture verifies all 201 directions at
+      threshold one, under the qualified Mac release build of Rust 1.98.0. Its
+      whole-net controls record 197 coverage refusals and verified mutant directions
+      46, 47, 48 and 49, and the near-threshold mutant is refused. The mathematical
+      review accepts the implication and independently recomputed the saved-point
+      captures. The outer capture exit was unobserved after supervisor loss; the
+      complete recovered native result exited 0, and the later check and control
+      outer commands exited 0.
 
-      The value is above 851/100 = 8.51, the reported (T-068) and verified (T-074)
-      lower bound at n = 68, by 1/50.
-
-      Here the maintained readers accepted its exact mass, declared-net and check2
-      premises from the retained release asset. No complete replay has run here, so
-      the value stands as reported.
+      This raises the verified and reported lower lanes from 851/100 to 853/100. The
+      bound is confirmed by a re-implementation sharing components with the
+      producer's checker, sqverify-proof-net, which is wand125's adaptation of this
+      repository's sqverify_fast crate: the two share the crate apart from their
+      declared-net readers. The exact audits check premises and saved poses, not
+      coverage between poses; no independent full implementation, second method,
+      proof-assistant check or optimality theorem is claimed.
 
       wand125 after Tokoharu and Levy,
       [square-packing](https://github.com/wand125/square-packing/tree/14b4b0badd79cd95f9456143b304d5d158cf2ac7/problems/square-lower-bounds/certificates/mixed_n68_L853).
       The source says parts of the work were produced with AI assistance under human
       direction.
     scope: {n_values: [68]}
-    verification: V0
-    confirmation: C0
+    verification: V3
+    confirmation: C3
     significance:
       score: 3
       rationale: >-
-        Scored as a claim: if a complete replay passes, it is the strongest lower
-        bound on record at n = 68, 1/50 above the reported lane, by the certificate
-        kind and standard net of T-082, T-090 and T-091, with no new technique, at
-        S3 as T-176 to T-178 are.
-      scored: '2026-10-17'
+        The strongest verified and reported lower bound on record at n = 68, 1/50
+        above the prior lanes, by the certificate kind and standard net of T-082,
+        T-090 and T-091, with no new technique, at S3 as T-176 to T-178 and T-216
+        are.
+      scored: '2026-10-19'
       by: >-
-        the triage of the 17 October intake pass (think-f40c), confirmed by the
-        registering lane; the stage 4 review confirms or changes it
+        Review B of jlevy/squares#688
+        (https://github.com/jlevy/squares/pull/688#issuecomment-6281894861, 20 October
+        2026) confirms the registering lane's S3 on the register's scale, by the
+        precedent of T-176 to T-178 and T-216.
+        docs/project/reviews/review-2026-10-19-n68-fine-net-mathematics.md accepts the
+        certificate and does not assess significance.
     novelty: previously-published
     attribution:
       source_keys: ['[wand125 fine-net lower bounds 2026-10-16]']
       published: '2026-10-16'
     composition: >-
-      One reported certificate on its reported entry. The source's check is a copy of
-      this repository's sqverify_fast crate with one change, so a sqverify-fast replay
-      here would be re-implemented sharing the producer's components, as T-104's is,
-      and no second implementation stands beside it.
-    evidence: [E-wand125-fine-net-n68-853-report]
+      One source certificate and one complete maintained native replay, C3. The replay
+      shares components with the producer's checker, wand125's adaptation of this
+      repository's sqverify_fast crate, apart from the declared-net readers. The
+      separate exact premise and saved-point audits the case record cites supply no
+      universal decision or higher rung.
+    evidence:
+      - E-wand125-fine-net-n68-853-report
+      - E-wand125-fine-net-n68-853-sqverify-fast-replay
     artifacts:
       - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/README.md
       - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/acquisition/sources.json
@@ -28155,98 +28489,116 @@ results:
         packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n68_L853/check2/receipt.json
       - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/receipts/premises-n68.json
       - packing/devtools/fine_net_followup.py
+      - docs/project/reviews/review-2026-10-19-n68-fine-net-mathematics.md
+      - docs/project/reviews/review-2026-10-19-fine-net-mac-arithmetic.md
+      - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/README.md
+      - >-
+        packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/n68-certificate-math/audit-result.json.gz
+      - packing/benchmarks/measure-verifier/census-mixed/census.json
+      - >-
+        packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-2026-10-16/mixed_n68_L853.jsonl.gz
+      - >-
+        packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-2026-10-16/mixed_n68_L853.execution.json
     next_rung: >-
-      C3 needs a complete sqverify-fast census at all 201 directions of the retained
-      candidate, with its whole-net control receipt (the 99/100 mutant at every
-      direction, FC-1) and a review that reads this certificate, by the checklist of
-      the 6 October declared-net soundness review. The census runs in think-f40c,
-      priced at about 0.84 to 0.96 CPU-hours from the source's receipt.
-    unfinished_confirmations:
-      - what: >-
-          a complete sqverify-fast census at all 201 directions of the retained
-          candidate, with its whole-net control receipt (the 99/100 mutant at
-          every direction, FC-1) and a review that reads this certificate, by the
-          checklist of the 6 October declared-net soundness review
-        rung: C3
-        link: think-f40c
-        estimated_cost:
-          cpu_hours: 0.84
-          cpu_hours_high: 0.96
-          basis: >-
-            Twice the source's direction CPU over the net (1,730 CPU-s,
-            check2/receipt.json in
-            packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n68_L853),
-            once for the capture and once for the whole-net controls, at this
-            host's ratio of 0.871 to the source (think-w76a's eight-direction
-            sample of 14 October); the upper end is the source's own CPU, twice
-            over the net.
-          priced: '2026-10-17'
+      V4 and C4 need the additional qualifying adversarial AI review and the explicit
+      human oversight the rung rules require. An independent full implementation
+      would add implementation diversity; premise and saved-point checks do not
+      supply it.
     notes: >-
-      V0 because the cited entry is the source's public claim: assurance reported,
-      replay not attempted. C0 because no review has read this certificate yet. The
-      case records' lanes are unchanged, so the entry is pending adoption at n = 68.
-      The pre-publication receipt is a second complete run of the same source on a
-      fresh machine (75 s), not the run the check2 receipt embeds, so two complete
-      author runs are reported. The release asset's data members are retained in Git
-      under OR-18; the adapted verifier archive inside it is pinned by digest and not
-      opened.
+      From the accepted complete Mac checkpoint and the mapped mathematical review,
+      with the build's actual aarch64-apple-darwin, Rust 1.98.0 release identity.
+      Native per-direction CPU is unavailable; the original zero-valued summaries and
+      raw bytes remain unchanged. Aggregate wait4 and command timing are separate.
+      The outer capture exit was unobserved after supervisor loss; the complete
+      recovered native result exited 0, and the later check and control outer
+      commands exited 0. The source reports, the candidates and the historical n108
+      records are preserved. The landing retains the authentic completed computations
+      and audit receipts; it did not rerun native code or the historical exact audit.
+    reviews:
+      - path: docs/project/reviews/review-2026-10-19-n68-fine-net-mathematics.md
+        kind: adversarial
+        reviewer: Codex (OpenAI), strongest tier at maximum reasoning; separately prompted certificate mathematics lane
+        reviewer_kind: ai
+        relation: project
+        date: '2026-10-19'
+        scope: >-
+          The exact candidate implication, qualified retained native capture, control
+          partition and all 197 saved refusal captures for mixed_n68_L853; no native
+          rerun, no universal point-audit claim.
+        verdict: accepted
+        covers: [T-205]
+    controls:
+      - >-
+        packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-2026-10-16/mixed_n68_L853.control.json
+      - packing/tests/test_sqverify_fast_census.py
   - id: T-206
     kind: lower-bound
     registered: '2026-10-17'
+    landed: '2026-10-19'
     headline: >-
-      Mixed rectangle-measure lower bound `s(84) ≥ 3769/400` reported, on the
+      Mixed rectangle-measure lower bound `s(84) ≥ 3769/400` verified, on the
       201-direction net
     claim: >-
       A rectangle measure of wand125/square-packing, published on 16 October 2026 and
-      reported in jlevy/squares#446, is reported to prove s(84) >= 3769/400 = 9.4225.
+      reported in jlevy/squares#446, proves s(84) >= 3769/400 = 9.4225.
 
       The certificate, mixed_n84_L94225, is a density of 815 uniform rectangles in D4
-      orbits, and no point mass, of total mass 8399999/100000, on the net its
-      candidate declares, the standard net of 201 half-angle tangents of step 83/40000
-      at core side 9977/10000. Since 9977/10000 (1 + 83/40000) = 399908091/400000000 <
-      1, and the last tangent 83/200 is past tan(pi/8), every unit square contains a
-      concentric core at a net angle strictly in its interior.
+      orbits, 6464 distinct rectangles after expansion, and no point or segment, of
+      total mass 8399999/100000 < 84. Its declared net has 201 half-angle tangents of
+      step 83/40000 at core side 9977/10000. The strict core extent
+      399908091/400000000 < 1 and the last tangent 83/200, past tan(pi/8), supply the
+      reviewed net-and-shrink implication.
 
-      The source reports every such core capturing mass at least one at all 201
-      directions, by sqverify-proof-net, its copy of this repository's sqverify_fast
-      changed to read the declared net, in two complete runs, and a control with every
-      mass scaled by 197/200 refused at 32 sampled directions.
+      The retained maintained sqverify-fast capture verifies all 201 directions at
+      threshold one, under the qualified Mac release build of Rust 1.98.0. Its
+      whole-net controls record 201 coverage refusals and no verified mutant
+      direction, and the near-threshold mutant is refused. The mathematical review
+      accepts the implication and independently recomputed the saved-point captures.
+      The outer capture, check and control commands all have observed exit 0.
 
-      The value is above T-094's 9411/1000 = 9.411, the verified and reported lower
-      bound at n = 84, by 23/2000.
-
-      Here the maintained readers accepted its exact mass, declared-net and check2
-      premises from the retained release asset. No complete replay has run here, so
-      the value stands as reported.
+      This raises the verified and reported lower lanes from 9411/1000 to 3769/400.
+      The bound is confirmed by a re-implementation sharing components with the
+      producer's checker, sqverify-proof-net, which is wand125's adaptation of this
+      repository's sqverify_fast crate: the two share the crate apart from their
+      declared-net readers. The exact audits check premises and saved poses, not
+      coverage between poses; no independent full implementation, second method,
+      proof-assistant check or optimality theorem is claimed.
 
       wand125 after Tokoharu and Levy,
       [square-packing](https://github.com/wand125/square-packing/tree/f28b5f3d0ebc500a761a02514c1ce5b9b9e203f1/problems/square-lower-bounds/certificates/mixed_n84_L94225).
       The source says parts of the work were produced with AI assistance under human
       direction.
     scope: {n_values: [84]}
-    verification: V0
-    confirmation: C0
+    verification: V3
+    confirmation: C3
     significance:
       score: 3
       rationale: >-
-        Scored as a claim: if a complete replay passes, it is the strongest lower
-        bound on record at n = 84, 23/2000 above the reported lane, by the
-        certificate kind and standard net of T-082, T-090 and T-091, with no new
-        technique, at S3 as T-176 to T-178 are.
-      scored: '2026-10-17'
+        The strongest verified and reported lower bound on record at n = 84, 23/2000
+        above the prior lanes, by the certificate kind and standard net of T-082,
+        T-090 and T-091, with no new technique, at S3 as T-176 to T-178 and T-216
+        are.
+      scored: '2026-10-19'
       by: >-
-        the triage of the 17 October intake pass (think-f40c), confirmed by the
-        registering lane; the stage 4 review confirms or changes it
+        Review B of jlevy/squares#688
+        (https://github.com/jlevy/squares/pull/688#issuecomment-6281894861, 20 October
+        2026) confirms the registering lane's S3 on the register's scale, by the
+        precedent of T-176 to T-178 and T-216.
+        docs/project/reviews/review-2026-10-19-n84-n85-fine-net-mathematics.md accepts
+        the certificate and does not assess significance.
     novelty: previously-published
     attribution:
       source_keys: ['[wand125 fine-net lower bounds 2026-10-16]']
       published: '2026-10-16'
     composition: >-
-      One reported certificate on its reported entry. The source's check is a copy of
-      this repository's sqverify_fast crate with one change, so a sqverify-fast replay
-      here would be re-implemented sharing the producer's components, as T-104's is,
-      and no second implementation stands beside it.
-    evidence: [E-wand125-fine-net-n84-94225-report]
+      One source certificate and one complete maintained native replay, C3. The replay
+      shares components with the producer's checker, wand125's adaptation of this
+      repository's sqverify_fast crate, apart from the declared-net readers. The
+      separate exact premise and saved-point audits the case record cites supply no
+      universal decision or higher rung.
+    evidence:
+      - E-wand125-fine-net-n84-94225-report
+      - E-wand125-fine-net-n84-94225-sqverify-fast-replay
     artifacts:
       - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/README.md
       - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/acquisition/sources.json
@@ -28257,98 +28609,115 @@ results:
         packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n84_L94225/check2/receipt.json
       - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/receipts/premises-n84.json
       - packing/devtools/fine_net_followup.py
+      - docs/project/reviews/review-2026-10-19-n84-n85-fine-net-mathematics.md
+      - docs/project/reviews/review-2026-10-19-fine-net-mac-arithmetic.md
+      - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/README.md
+      - >-
+        packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/n84-n85-certificate-math/n84-audit-result.json.gz
+      - packing/benchmarks/measure-verifier/census-mixed/census.json
+      - >-
+        packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-2026-10-16/mixed_n84_L94225.jsonl.gz
+      - >-
+        packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-2026-10-16/mixed_n84_L94225.execution.json
     next_rung: >-
-      C3 needs a complete sqverify-fast census at all 201 directions of the retained
-      candidate, with its whole-net control receipt (the 99/100 mutant at every
-      direction, FC-1) and a review that reads this certificate, by the checklist of
-      the 6 October declared-net soundness review. The census runs in think-f40c,
-      priced at about 1.5 to 1.72 CPU-hours from the source's receipt.
-    unfinished_confirmations:
-      - what: >-
-          a complete sqverify-fast census at all 201 directions of the retained
-          candidate, with its whole-net control receipt (the 99/100 mutant at
-          every direction, FC-1) and a review that reads this certificate, by the
-          checklist of the 6 October declared-net soundness review
-        rung: C3
-        link: think-f40c
-        estimated_cost:
-          cpu_hours: 1.5
-          cpu_hours_high: 1.72
-          basis: >-
-            Twice the source's direction CPU over the net (3,091 CPU-s,
-            check2/receipt.json in
-            packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n84_L94225),
-            once for the capture and once for the whole-net controls, at this
-            host's ratio of 0.871 to the source (think-w76a's eight-direction
-            sample of 14 October); the upper end is the source's own CPU, twice
-            over the net.
-          priced: '2026-10-17'
+      V4 and C4 need the additional qualifying adversarial AI review and the explicit
+      human oversight the rung rules require. An independent full implementation
+      would add implementation diversity; premise and saved-point checks do not
+      supply it.
     notes: >-
-      V0 because the cited entry is the source's public claim: assurance reported,
-      replay not attempted. C0 because no review has read this certificate yet. The
-      case records' lanes are unchanged, so the entry is pending adoption at n = 84.
-      The pre-publication receipt is a second complete run of the same source on a
-      fresh machine (121 s), not the run the check2 receipt embeds, so two complete
-      author runs are reported. The release asset's data members are retained in Git
-      under OR-18; the adapted verifier archive inside it is pinned by digest and not
-      opened.
+      From the accepted complete Mac checkpoint and the mapped mathematical review,
+      with the build's actual aarch64-apple-darwin, Rust 1.98.0 release identity.
+      Native per-direction CPU is unavailable; the original zero-valued summaries and
+      raw bytes remain unchanged. Aggregate wait4 and command timing are separate.
+      The outer capture, check and control commands all have observed exit 0. The
+      source reports, the candidates and the historical n108 records are preserved.
+      The landing retains the authentic completed computations and audit receipts; it
+      did not rerun native code or the historical exact audit.
+    reviews:
+      - path: docs/project/reviews/review-2026-10-19-n84-n85-fine-net-mathematics.md
+        kind: adversarial
+        reviewer: Codex (OpenAI), strongest tier at maximum reasoning; separately prompted certificate mathematics lane
+        reviewer_kind: ai
+        relation: project
+        date: '2026-10-19'
+        scope: >-
+          The exact candidate implication, qualified retained native capture, control
+          partition and all 201 saved refusal captures for mixed_n84_L94225; no native
+          rerun, no universal point-audit claim.
+        verdict: accepted
+        covers: [T-206, T-207]
+    controls:
+      - >-
+        packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-2026-10-16/mixed_n84_L94225.control.json
+      - packing/tests/test_sqverify_fast_census.py
   - id: T-207
     kind: lower-bound
     registered: '2026-10-17'
+    landed: '2026-10-19'
     headline: >-
-      Mixed rectangle-measure lower bound `s(85) ≥ 379/40` reported, on the
+      Mixed rectangle-measure lower bound `s(85) ≥ 379/40` verified, on the
       201-direction net
     claim: >-
       A rectangle measure of wand125/square-packing, published on 16 October 2026 and
-      reported in jlevy/squares#446, is reported to prove s(85) >= 379/40 = 9.475.
+      reported in jlevy/squares#446, proves s(85) >= 379/40 = 9.475.
 
       The certificate, mixed_n85_L9475, is a density of 838 uniform rectangles in D4
-      orbits, and no point mass, of total mass 8499999/100000, on the net its
-      candidate declares, the standard net of 201 half-angle tangents of step 83/40000
-      at core side 9977/10000. Since 9977/10000 (1 + 83/40000) = 399908091/400000000 <
-      1, and the last tangent 83/200 is past tan(pi/8), every unit square contains a
-      concentric core at a net angle strictly in its interior.
+      orbits, 6672 distinct rectangles after expansion, and no point or segment, of
+      total mass 8499999/100000 < 85. Its declared net has 201 half-angle tangents of
+      step 83/40000 at core side 9977/10000. The strict core extent
+      399908091/400000000 < 1 and the last tangent 83/200, past tan(pi/8), supply the
+      reviewed net-and-shrink implication.
 
-      The source reports every such core capturing mass at least one at all 201
-      directions, by sqverify-proof-net, its copy of this repository's sqverify_fast
-      changed to read the declared net, in two complete runs, and a control with every
-      mass scaled by 197/200 refused at 32 sampled directions.
+      The retained maintained sqverify-fast capture verifies all 201 directions at
+      threshold one, under the qualified Mac release build of Rust 1.98.0. Its
+      whole-net controls record 201 coverage refusals and no verified mutant
+      direction, and the near-threshold mutant is refused. The mathematical review
+      accepts the implication and independently recomputed the saved-point captures.
+      The outer capture, check and control commands all have observed exit 0.
 
-      The value is above T-075's 473/50 = 9.46, the verified and reported lower bound
-      at n = 85, by 3/200.
-
-      Here the maintained readers accepted its exact mass, declared-net and check2
-      premises from the retained release asset. No complete replay has run here, so
-      the value stands as reported.
+      This raises the verified and reported lower lanes from 473/50 to 379/40. The
+      bound is confirmed by a re-implementation sharing components with the
+      producer's checker, sqverify-proof-net, which is wand125's adaptation of this
+      repository's sqverify_fast crate: the two share the crate apart from their
+      declared-net readers. The exact audits check premises and saved poses, not
+      coverage between poses; no independent full implementation, second method,
+      proof-assistant check or optimality theorem is claimed.
 
       wand125 after Tokoharu and Levy,
       [square-packing](https://github.com/wand125/square-packing/tree/fc2e96f0a253e00fbc4263625f4fc34774d157a6/problems/square-lower-bounds/certificates/mixed_n85_L9475).
       The source says parts of the work were produced with AI assistance under human
       direction.
     scope: {n_values: [85]}
-    verification: V0
-    confirmation: C0
+    verification: V3
+    confirmation: C3
     significance:
       score: 3
       rationale: >-
-        Scored as a claim: if a complete replay passes, it is the strongest lower
-        bound on record at n = 85, 3/200 above the reported lane, by the certificate
-        kind and standard net of T-082, T-090 and T-091, with no new technique, at
-        S3 as T-176 to T-178 are.
-      scored: '2026-10-17'
+        The strongest verified and reported lower bound on record at n = 85, 3/200
+        above the prior lanes, by the certificate kind and standard net of T-082,
+        T-090 and T-091, with no new technique, at S3 as T-176 to T-178 and T-216
+        are.
+      scored: '2026-10-19'
       by: >-
-        the triage of the 17 October intake pass (think-f40c), confirmed by the
-        registering lane; the stage 4 review confirms or changes it
+        Review B of jlevy/squares#688
+        (https://github.com/jlevy/squares/pull/688#issuecomment-6281894861, 20 October
+        2026) confirms the registering lane's S3 on the register's scale, by the
+        precedent of T-176 to T-178 and T-216.
+        docs/project/reviews/review-2026-10-19-n84-n85-fine-net-mathematics.md accepts
+        the certificate and does not assess significance.
     novelty: previously-published
     attribution:
       source_keys: ['[wand125 fine-net lower bounds 2026-10-16]']
       published: '2026-10-16'
     composition: >-
-      One reported certificate on its reported entry. The source's check is a copy of
-      this repository's sqverify_fast crate with one change, so a sqverify-fast replay
-      here would be re-implemented sharing the producer's components, as T-104's is,
-      and no second implementation stands beside it.
-    evidence: [E-wand125-fine-net-n85-9475-report]
+      One source certificate and one complete maintained native replay, C3. The replay
+      shares components with the producer's checker, wand125's adaptation of this
+      repository's sqverify_fast crate, apart from the declared-net readers. The
+      separate exact premise and saved-point audits the case record cites supply no
+      universal decision or higher rung.
+    evidence:
+      - E-wand125-fine-net-n85-9475-report
+      - E-wand125-fine-net-n85-9475-sqverify-fast-replay
     artifacts:
       - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/README.md
       - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/acquisition/sources.json
@@ -28359,44 +28728,51 @@ results:
         packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n85_L9475/check2/receipt.json
       - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/receipts/premises-n85.json
       - packing/devtools/fine_net_followup.py
+      - docs/project/reviews/review-2026-10-19-n84-n85-fine-net-mathematics.md
+      - docs/project/reviews/review-2026-10-19-fine-net-mac-arithmetic.md
+      - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/README.md
+      - >-
+        packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/n84-n85-certificate-math/n85-audit-result.json.gz
+      - packing/benchmarks/measure-verifier/census-mixed/census.json
+      - >-
+        packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-2026-10-16/mixed_n85_L9475.jsonl.gz
+      - >-
+        packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-2026-10-16/mixed_n85_L9475.execution.json
     next_rung: >-
-      C3 needs a complete sqverify-fast census at all 201 directions of the retained
-      candidate, with its whole-net control receipt (the 99/100 mutant at every
-      direction, FC-1) and a review that reads this certificate, by the checklist of
-      the 6 October declared-net soundness review. The census runs in think-f40c,
-      priced at about 1.32 to 1.52 CPU-hours from the source's receipt.
-    unfinished_confirmations:
-      - what: >-
-          a complete sqverify-fast census at all 201 directions of the retained
-          candidate, with its whole-net control receipt (the 99/100 mutant at
-          every direction, FC-1) and a review that reads this certificate, by the
-          checklist of the 6 October declared-net soundness review
-        rung: C3
-        link: think-f40c
-        estimated_cost:
-          cpu_hours: 1.32
-          cpu_hours_high: 1.52
-          basis: >-
-            Twice the source's direction CPU over the net (2,733 CPU-s,
-            check2/receipt.json in
-            packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n85_L9475),
-            once for the capture and once for the whole-net controls, at this
-            host's ratio of 0.871 to the source (think-w76a's eight-direction
-            sample of 14 October); the upper end is the source's own CPU, twice
-            over the net.
-          priced: '2026-10-17'
+      V4 and C4 need the additional qualifying adversarial AI review and the explicit
+      human oversight the rung rules require. An independent full implementation
+      would add implementation diversity; premise and saved-point checks do not
+      supply it.
     notes: >-
-      V0 because the cited entry is the source's public claim: assurance reported,
-      replay not attempted. C0 because no review has read this certificate yet. The
-      case records' lanes are unchanged, so the entry is pending adoption at n = 85.
-      The pre-publication receipt is a second complete run of the same source on a
-      fresh machine (124 s), not the run the check2 receipt embeds, so two complete
-      author runs are reported. The release asset's data members are retained in Git
-      under OR-18; the adapted verifier archive inside it is pinned by digest and not
-      opened.
+      From the accepted complete Mac checkpoint and the mapped mathematical review,
+      with the build's actual aarch64-apple-darwin, Rust 1.98.0 release identity.
+      Native per-direction CPU is unavailable; the original zero-valued summaries and
+      raw bytes remain unchanged. Aggregate wait4 and command timing are separate.
+      The outer capture, check and control commands all have observed exit 0. The
+      source reports, the candidates and the historical n108 records are preserved.
+      The landing retains the authentic completed computations and audit receipts; it
+      did not rerun native code or the historical exact audit.
+    reviews:
+      - path: docs/project/reviews/review-2026-10-19-n84-n85-fine-net-mathematics.md
+        kind: adversarial
+        reviewer: Codex (OpenAI), strongest tier at maximum reasoning; separately prompted certificate mathematics lane
+        reviewer_kind: ai
+        relation: project
+        date: '2026-10-19'
+        scope: >-
+          The exact candidate implication, qualified retained native capture, control
+          partition and all 201 saved refusal captures for mixed_n85_L9475; no native
+          rerun, no universal point-audit claim.
+        verdict: accepted
+        covers: [T-206, T-207]
+    controls:
+      - >-
+        packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-2026-10-16/mixed_n85_L9475.control.json
+      - packing/tests/test_sqverify_fast_census.py
   - id: T-208
     kind: lower-bound
     registered: '2026-10-17'
+    landed: '2026-10-19'
     headline: >-
       Mixed rectangle-measure lower bound `s(86) ≥ 3811/400` reported, on the
       201-direction net
@@ -28499,6 +28875,7 @@ results:
   - id: T-209
     kind: lower-bound
     registered: '2026-10-17'
+    landed: '2026-10-19'
     headline: >-
       Mixed rectangle-measure lower bound `s(88) ≥ 3853/400` reported, on the
       201-direction net
@@ -28601,6 +28978,7 @@ results:
   - id: T-210
     kind: lower-bound
     registered: '2026-10-17'
+    landed: '2026-10-19'
     headline: >-
       Mixed rectangle-measure lower bound `s(89) ≥ 1937/200` reported, on the
       201-direction net
@@ -28703,6 +29081,7 @@ results:
   - id: T-211
     kind: lower-bound
     registered: '2026-10-17'
+    landed: '2026-10-19'
     headline: >-
       Mixed rectangle-measure lower bound `s(91) ≥ 783/80` reported, on the
       201-direction net
@@ -28805,6 +29184,7 @@ results:
   - id: T-212
     kind: lower-bound
     registered: '2026-10-17'
+    landed: '2026-10-19'
     headline: >-
       Mixed rectangle-measure lower bound `s(90) ≥ 489/50` reported, on the
       201-direction net
@@ -28910,6 +29290,7 @@ results:
   - id: T-213
     kind: lower-bound
     registered: '2026-10-17'
+    landed: '2026-10-19'
     headline: >-
       Mixed rectangle-measure lower bound `s(92) ≥ 493/50` reported, on the
       201-direction net
@@ -29015,6 +29396,7 @@ results:
   - id: T-214
     kind: lower-bound
     registered: '2026-10-17'
+    landed: '2026-10-19'
     headline: >-
       Mixed rectangle-measure lower bound `s(106) ≥ 10503/1000` reported, on the
       201-direction net
@@ -29123,6 +29505,7 @@ results:
   - id: T-215
     kind: lower-bound
     registered: '2026-10-17'
+    landed: '2026-10-19'
     headline: >-
       Mixed rectangle-measure lower bound `s(107) ≥ 529/50` reported, on the
       201-direction net
@@ -29230,6 +29613,7 @@ results:
   - id: T-216
     kind: lower-bound
     registered: '2026-10-17'
+    landed: '2026-10-19'
     headline: >-
       Mixed rectangle-measure lower bound `s(108) ≥ 531/50` verified, on the
       201-direction net
@@ -29377,6 +29761,7 @@ results:
   - id: T-217
     kind: lower-bound
     registered: '2026-10-17'
+    landed: '2026-10-19'
     headline: >-
       Mixed rectangle-measure lower bound `s(110) ≥ 1073/100` reported, on the
       201-direction net
@@ -29481,6 +29866,214 @@ results:
       author runs are reported. The release asset's data members are retained in Git
       under OR-18; the adapted verifier archive inside it is pinned by digest and not
       opened.
+  - id: T-218
+    kind: upper-bound
+    registered: '2026-10-19'
+    landed: '2026-10-20'
+    headline: >-
+      Daniel's smaller n236 packing, after Chaoweeraprasit's composition, certified
+      exactly
+    claim: >-
+      One complete rational source certificate reports a finite upper-bound improvement at
+      the exact side it states: s(236) <= 15.861934390607358617243798571394.
+
+      The certificate and its duplicate-square and outside-container controls were decided
+      here on 19 October 2026 by both maintained exact routes, and the frozen comparison
+      rebuilt; no route here is the source's code, so the replay is independently
+      re-implemented. The 19 October review found no blocking defect.
+
+      Issue 659 reports a packing found by Evan Daniel's basin explorer from a rebuild of
+      Nate Chaoweeraprasit's (itsnaka's) SQUISH Mondrian composition of #481 (T-136),
+      built from Kingbird's s(152)_r2 corner piece and itsnaka's s(88) (#422), and asks
+      that the composition be credited for the construction; it calls the result a
+      different local minimum from #481's, with no tilt angle shared. The author reports
+      that his two exact checkers accept the certificate and its 6-group regularized view
+      at the same side, and a KKT local minimum strict modulo 92 exact flat motions; those
+      are numerical evidence, not proofs. The issue says the work was done with Claude
+      (Claude Code) under Evan Daniel's direction.
+    scope: {n_values: [236]}
+    verification: V3
+    confirmation: C3
+    significance:
+      score: 3
+      rationale: >-
+        Another arrangement of #481's design 2.02e-03 below the case, as T-160 at 154
+        and T-183 at 237 are; no lower bound or optimum.
+      scored: '2026-10-19'
+      by: >-
+        the 19 October review
+        (docs/project/reviews/review-2026-10-19-upper-bound-imports-659-664-669-674.md),
+        raising the draft S2 of think-6wtz Evan Daniel import
+    novelty: previously-published
+    attribution:
+      source_keys: ['[Daniel n236 2026-10-16]']
+      published: '2026-10-16'
+    evidence: [E-evand-659-n236-report, E-evand-659-n236-exact-feasibility]
+    artifacts:
+      - packing/resources/web/evand-n236-2026-10-16/README.md
+      - packing/resources/web/evand-n236-2026-10-16/acquisition/claims.json
+      - packing/resources/web/evand-n236-2026-10-16/source/search/packer/candidates/s236_bm3c.cert
+      - packing/devtools/upper_bound_reports.py
+      - docs/project/reviews/review-2026-10-19-upper-bound-imports-659-664-669-674.md
+    controls: [packing/tests/test_upper_bound_reports.py, packing/tests/test_upper_bound_reports_659_664_669_674.py]
+    notes: >-
+      A complete repository replay is retained for n = 236: 1 positive and 2
+      duplicate-square and outside-container controls passed their required outcomes on
+      both routes, 166380 pair decisions; summed over the 3 jobs, the receipt records
+      70.45 route CPU seconds and 104.2 job wall seconds, the longest job 45.11 seconds.
+      Every positive clears every wall by at least 5.00e-21 and every pair by at least
+      9.99e-21. The receipt is receipts/exact-certification.json.xz in
+      evand-n236-2026-10-16; it stays out of this entry's artifacts so that the workers'
+      snapshot stays under its cap.
+
+      At n = 236 the certificate is below the case's ceiling (Nate Chaoweeraprasit
+      (itsnaka), improved by Evan Daniel, T-146) by 2.02e-03, below T-136 (#481) by
+      2.02e-03 and below T-174 (PR #574), staged for adoption at 236 until this one, by
+      2.02e-03; it is the smallest report at 236, the latest in report order.
+
+      Measured by the 19 October review: against the regularized view of #481's packing
+      the case held (T-146), and T-174, the best one-to-one assignment, under a
+      reflection, moves 10 squares by more than a tenth, at most 0.747, and keeps 226
+      within a tenth; the main tilt band moves from 38.09 to 37.69 to 37.79 degrees. It is
+      another arrangement of #481's design, as the issue says, and lists no
+      regularization.
+
+      The source's own checkers were not run here. The two maintained routes share
+      certificate parsing, half-angle conversion, Fraction arithmetic and the
+      separating-axis method. No optimality, local minimum or human oversight is claimed.
+
+      V3 and C3 rest on the 19 October review and the replay it reproduced
+      (E-evand-659-n236-exact-feasibility). The case at 236 adopted this certificate as
+      its house on 19 October 2026, which takes 236 off T-174's staged adoption.
+    next_rung: >-
+      None for the bound. V4 and C4 need a second accepted adversarial review by a
+      distinct reviewer and a retained human oversight record; one AI review, of 19
+      October, is retained.
+    reviews:
+      - path: docs/project/reviews/review-2026-10-19-upper-bound-imports-659-664-669-674.md
+        kind: adversarial
+        reviewer: >-
+          AI agent (Claude, strong sub-agent tier, max reasoning), the stage 4 review
+          lane (W2) of the 2026-10-19 intake, prompted separately from the import and
+          records lanes, with no shared context beyond their committed packets,
+          register entries and pull requests
+        reviewer_kind: ai
+        relation: project
+        date: '2026-10-19'
+        scope: >-
+          Finite feasibility of the five certificates T-197, T-198, T-199, T-218 and
+          T-219 cite: each retained receipt replayed on both maintained routes, each
+          frozen claim record rebuilt, a third exact route written for the review,
+          each pinned file fetched at its pin and held to its digest, each route's
+          trust boundary, and the credit each entry states measured pose by pose
+          against the packing it names.
+        verdict: accepted
+        covers: [T-197, T-198, T-199, T-218, T-219]
+  - id: T-219
+    kind: upper-bound
+    registered: '2026-10-19'
+    landed: '2026-10-20'
+    headline: >-
+      Daniel's smaller n271 packing, continuing Couzo's arrangement, certified exactly
+    claim: >-
+      One complete rational source certificate reports a finite upper-bound improvement at
+      the exact side it states: s(271) <= 16.948947733713657510723401112423.
+
+      The certificate and its duplicate-square and outside-container controls were decided
+      here on 19 October 2026 by both maintained exact routes, and the frozen comparison
+      rebuilt; no route here is the source's code, so the replay is independently
+      re-implemented. The 19 October review found no blocking defect.
+
+      Issue 664 reports a packing found by Evan Daniel's basin explorer from the
+      register's witness for 271 with one tilt-swap move and a re-polish, calls it a
+      refinement of Francisco Couzo's #561 packing, not a new construction, and asks that
+      #561 and Nate Chaoweeraprasit's SQUISH packing it refines (#500) be credited; it
+      also calls it a different local minimum, its load-bearing tilt angles matching
+      #561's within 0.12 degrees except that four squares near 31.7 to 32.0 degrees are
+      three. The author reports that his two exact checkers accept the certificate and its
+      21-group regularized view at the same side; KKT and local-minimum statements are
+      numerical evidence, not proofs. The issue says the work was done with Claude (Claude
+      Code) under Evan Daniel's direction.
+    scope: {n_values: [271]}
+    verification: V3
+    confirmation: C3
+    significance:
+      score: 3
+      rationale: >-
+        A continuation of #561's arrangement to a packing the source calls a different
+        local minimum, 4.46e-05 below the case, as T-119's new arrangements and T-130's
+        refinements are; above T-188's 9.29e-06 (S2).
+      scored: '2026-10-19'
+      by: >-
+        the 19 October review
+        (docs/project/reviews/review-2026-10-19-upper-bound-imports-659-664-669-674.md),
+        raising the draft S2 of think-8o5j Evan Daniel import
+    novelty: previously-published
+    attribution:
+      source_keys: ['[Daniel n271 2026-10-17]']
+      published: '2026-10-17'
+    evidence: [E-evand-664-n271-report, E-evand-664-n271-exact-feasibility]
+    artifacts:
+      - packing/resources/web/evand-n271-2026-10-17/README.md
+      - packing/resources/web/evand-n271-2026-10-17/acquisition/claims.json
+      - packing/resources/web/evand-n271-2026-10-17/source/search/packer/candidates/s271_ex1.cert
+      - packing/devtools/upper_bound_reports.py
+      - docs/project/reviews/review-2026-10-19-upper-bound-imports-659-664-669-674.md
+    controls: [packing/tests/test_upper_bound_reports.py, packing/tests/test_upper_bound_reports_659_664_669_674.py]
+    notes: >-
+      A complete repository replay is retained for n = 271: 1 positive and 2
+      duplicate-square and outside-container controls passed their required outcomes on
+      both routes, 219510 pair decisions; summed over the 3 jobs, the receipt records
+      103.33 route CPU seconds and 119.55 job wall seconds, the longest job 45.41 seconds.
+      Every positive clears every wall by at least 5.00e-21 and every pair by at least
+      9.99e-21. The receipt is receipts/exact-certification.json.xz in
+      evand-n271-2026-10-17; it stays out of this entry's artifacts so that the workers'
+      snapshot stays under its cap.
+
+      At n = 271 the certificate is below the case's ceiling (Nate Chaoweeraprasit
+      (itsnaka), improved by Francisco Couzo, PingYou Ltd, Mishapolk, T-186) by 4.46e-05,
+      below T-161 (#561) and T-174 (PR #574) by 4.46e-05 and below T-151 (#500) by
+      1.69e-04; it is the smallest report at 271, the latest in report order.
+
+      Measured by the 19 October review: against T-161 (Couzo's #561), T-186 and T-174 the
+      certificate pairs one to one under the identity, three squares moving beyond a
+      tenth, at most 0.197, and 268 of 271 within a tenth; every tilt group matches within
+      0.12 degrees, one group a square short. The record keeps the word refinement for a
+      pairing in which no square moves beyond a tenth, so this is Couzo's arrangement
+      continued, as T-188's 211 was (RV-2); it lists no regularization. The credit is the
+      issue's either way: Daniel after Couzo after Chaoweeraprasit.
+
+      The source's own checkers were not run here. The two maintained routes share
+      certificate parsing, half-angle conversion, Fraction arithmetic and the
+      separating-axis method. No optimality, local minimum or human oversight is claimed.
+
+      V3 and C3 rest on the 19 October review and the replay it reproduced
+      (E-evand-664-n271-exact-feasibility). The case at 271 adopted this certificate as
+      its house on 19 October 2026.
+    next_rung: >-
+      None for the bound. V4 and C4 need a second accepted adversarial review by a
+      distinct reviewer and a retained human oversight record; one AI review, of 19
+      October, is retained.
+    reviews:
+      - path: docs/project/reviews/review-2026-10-19-upper-bound-imports-659-664-669-674.md
+        kind: adversarial
+        reviewer: >-
+          AI agent (Claude, strong sub-agent tier, max reasoning), the stage 4 review
+          lane (W2) of the 2026-10-19 intake, prompted separately from the import and
+          records lanes, with no shared context beyond their committed packets,
+          register entries and pull requests
+        reviewer_kind: ai
+        relation: project
+        date: '2026-10-19'
+        scope: >-
+          Finite feasibility of the five certificates T-197, T-198, T-199, T-218 and
+          T-219 cite: each retained receipt replayed on both maintained routes, each
+          frozen claim record rebuilt, a third exact route written for the review,
+          each pinned file fetched at its pin and held to its digest, each route's
+          trust boundary, and the credit each entry states measured pose by pose
+          against the packing it names.
+        verdict: accepted
+        covers: [T-197, T-198, T-199, T-218, T-219]
 
   - id: T-220
     kind: upper-bound
@@ -30014,17 +30607,18 @@ regularized_drawings:
         max_turn_deg: 3.49196
       view: packing/atlas/known-best/regularized/n-154-regularized.yaml.gz
     - n: 155
-      of: T-174
+      of: T-197
       by: project
-      method: regularize_axis_components/2
+      method: "regularize_grid_slack/1: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
+      modifications: ["port of his coincidence placement (regularize_grid_slack/1) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
       identity:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 1
-        max_move: 0.02890019
-        max_turn_deg: 0.0
+        moved: 14
+        max_move: 0.1258994
+        max_turn_deg: 0.00904477
       view: packing/atlas/known-best/regularized/n-155-regularized.yaml.gz
     - n: 156
       of: T-186
@@ -30348,6 +30942,19 @@ regularized_drawings:
         max_move: 1.63314e-94
         max_turn_deg: 0.0
       view: packing/atlas/known-best/regularized/n-228-regularized.yaml.gz
+    - n: 229
+      of: T-199
+      by: project
+      method: regularize_axis_components/2
+      side: same
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 29
+        max_move: 0.2630848
+        max_turn_deg: 0.00533477
+      view: packing/atlas/known-best/regularized/n-229-regularized.yaml.gz
     - n: 230
       of: T-155
       by: project
@@ -30391,17 +30998,19 @@ regularized_drawings:
         max_turn_deg: 5.47587e-34
       view: packing/atlas/known-best/regularized/n-234-regularized.yaml.gz
     - n: 236
-      of: T-146
+      of: T-218
       by: project
-      method: regularize_axis_components/2
+      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
+      changes: {straightened: 7, re_angled: 8}
       identity:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 0
-        max_move: 1.350926e-19
-        max_turn_deg: 0.0
+        moved: 81
+        max_move: 0.04013216
+        max_turn_deg: 2.13886
       view: packing/atlas/known-best/regularized/n-236-regularized.yaml.gz
     - n: 237
       of: T-190
@@ -30596,18 +31205,19 @@ regularized_drawings:
         max_turn_deg: 0.0
       view: packing/atlas/known-best/regularized/n-270-regularized.yaml.gz
     - n: 271
-      of: T-186
+      of: T-219
       by: project
-      method: "regularize_grid_slack/1: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
-      modifications: ["port of his coincidence placement (regularize_grid_slack/1) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
+      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
+      changes: {straightened: 2, re_angled: 2}
       identity:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 15
-        max_move: 0.1055648
-        max_turn_deg: 0.0132529
+        moved: 19
+        max_move: 0.03393265
+        max_turn_deg: 0.143387
       view: packing/atlas/known-best/regularized/n-271-regularized.yaml.gz
     - n: 272
       of: T-174

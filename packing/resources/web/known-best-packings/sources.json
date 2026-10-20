@@ -970,19 +970,19 @@
       "url": "https://github.com/Mishapolk/square-packing-records/blob/70a033f0ecfa9e643cd5fb5dbac190cb7f4ffb94/certificates/n154.cert"
     },
     {
-      "attribution": "PingYou Ltd, https://github.com/BuddenPing/squares/blob/4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde/numerical-refinements/certificates/n155.cert.json at 4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde",
+      "attribution": "Evan Daniel, https://github.com/evand/square-packing/blob/59326b86291b76c39d843f3f156e8f25fa0f6e3f/search/packer/candidates/s155_ex2.cert at 59326b86291b76c39d843f3f156e8f25fa0f6e3f",
       "kind": "packet-derived-facts",
-      "license_status": "no-licence-published",
+      "license_status": "MIT",
       "listed_n": [
         155
       ],
       "n": 155,
-      "path": "resources/web/pingyou-pr574-certificates-2026-10-13/facts/n-155.yaml.gz",
-      "raw_asset_retained": false,
-      "retention_policy": "Exact certificate retained as a derived fact, bound to the SHA-256 its packet pins upstream; no upstream byte is copied.",
-      "retrieved": "2026-10-14",
+      "path": "resources/web/evand-n155-explorer-2026-10-17/source/search/packer/candidates/s155_ex2.cert",
+      "raw_asset_retained": true,
+      "retention_policy": "Complete source certificate retained losslessly and bound to the SHA-256 its packet pins upstream; no upstream program or prose is copied.",
+      "retrieved": "2026-10-18",
       "source_n": 155,
-      "url": "https://github.com/BuddenPing/squares/blob/4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde/numerical-refinements/certificates/n155.cert.json"
+      "url": "https://github.com/evand/square-packing/blob/59326b86291b76c39d843f3f156e8f25fa0f6e3f/search/packer/candidates/s155_ex2.cert"
     },
     {
       "attribution": "Mykhailo Polkovskyi, https://github.com/Mishapolk/square-packing-records/blob/70a033f0ecfa9e643cd5fb5dbac190cb7f4ffb94/certificates/n156.cert at 70a033f0ecfa9e643cd5fb5dbac190cb7f4ffb94",
@@ -1466,18 +1466,19 @@
       "url": "https://github.com/BuddenPing/squares/blob/4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde/numerical-refinements/certificates/n228.cert.json"
     },
     {
-      "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
-      "kind": "kingbird-derived-facts",
-      "license_status": "no-express-reuse-terms-found",
+      "attribution": "Evan Daniel, https://github.com/evand/square-packing/blob/00e68dfbe1d29ab5dbab1cddfb8f6ca19d5470db/search/packer/candidates/s229_v2.cert at 00e68dfbe1d29ab5dbab1cddfb8f6ca19d5470db",
+      "kind": "packet-derived-facts",
+      "license_status": "MIT",
       "listed_n": [
         229
       ],
       "n": 229,
-      "raw_asset_retained": false,
-      "retention_policy": "metadata-and-derived-numerical-facts-only",
-      "retrieved": "2026-08-26",
+      "path": "resources/web/evand-n229-dilation-update-2026-10-18/source/search/packer/candidates/s229_v2.cert",
+      "raw_asset_retained": true,
+      "retention_policy": "Complete source certificate retained losslessly and bound to the SHA-256 its packet pins upstream; no upstream program or prose is copied.",
+      "retrieved": "2026-10-18",
       "source_n": 229,
-      "url": "https://kingbird.myphotos.cc/packing/square-229.svg"
+      "url": "https://github.com/evand/square-packing/blob/00e68dfbe1d29ab5dbab1cddfb8f6ca19d5470db/search/packer/candidates/s229_v2.cert"
     },
     {
       "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
@@ -1566,19 +1567,19 @@
       "url": "https://kingbird.myphotos.cc/packing/square-235.svg"
     },
     {
-      "attribution": "Evan Daniel, https://github.com/evand/square-packing/blob/ea1a2f23678a13bd1d252f9f4c95ca5dd2ffd2b7/search/regularize/lists/certs/n-236.cert.gz at ea1a2f23678a13bd1d252f9f4c95ca5dd2ffd2b7",
+      "attribution": "Evan Daniel, https://github.com/evand/square-packing/blob/5ad00693899ef50ccf6502f0346187cc422cc914/search/packer/candidates/s236_bm3c.cert at 5ad00693899ef50ccf6502f0346187cc422cc914",
       "kind": "packet-derived-facts",
       "license_status": "MIT",
       "listed_n": [
         236
       ],
       "n": 236,
-      "path": "resources/web/evand-regularized-2026-10-10/source/search/regularize/lists/certs/n-236.cert.gz",
+      "path": "resources/web/evand-n236-2026-10-16/source/search/packer/candidates/s236_bm3c.cert",
       "raw_asset_retained": true,
       "retention_policy": "Complete source certificate retained losslessly and bound to the SHA-256 its packet pins upstream; no upstream program or prose is copied.",
-      "retrieved": "2026-10-10",
+      "retrieved": "2026-10-19",
       "source_n": 236,
-      "url": "https://github.com/evand/square-packing/blob/ea1a2f23678a13bd1d252f9f4c95ca5dd2ffd2b7/search/regularize/lists/certs/n-236.cert.gz"
+      "url": "https://github.com/evand/square-packing/blob/5ad00693899ef50ccf6502f0346187cc422cc914/search/packer/candidates/s236_bm3c.cert"
     },
     {
       "attribution": "Francisco Couzo, https://github.com/franciscouzo/square-packing/blob/58a783368d4b7e70bb800f0009ea9ca03e578739/certificates/n237.cert at 58a783368d4b7e70bb800f0009ea9ca03e578739",
@@ -1863,19 +1864,19 @@
       "url": "https://github.com/BuddenPing/squares/blob/4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde/numerical-refinements/certificates/n270.cert.json"
     },
     {
-      "attribution": "Mykhailo Polkovskyi, https://github.com/Mishapolk/square-packing-records/blob/70a033f0ecfa9e643cd5fb5dbac190cb7f4ffb94/certificates/n271.cert at 70a033f0ecfa9e643cd5fb5dbac190cb7f4ffb94",
+      "attribution": "Evan Daniel, https://github.com/evand/square-packing/blob/757b40bc6c5f681033ff1572177d408afbf26dfe/search/packer/candidates/s271_ex1.cert at 757b40bc6c5f681033ff1572177d408afbf26dfe",
       "kind": "packet-derived-facts",
-      "license_status": "no-licence-published",
+      "license_status": "MIT",
       "listed_n": [
         271
       ],
       "n": 271,
-      "path": "resources/web/mishapolk-kkt-refinements-2026-10-14/facts/n-271.yaml.gz",
-      "raw_asset_retained": false,
-      "retention_policy": "Exact certificate retained as a derived fact, bound to the SHA-256 its packet pins upstream; no upstream byte is copied.",
-      "retrieved": "2026-10-14",
+      "path": "resources/web/evand-n271-2026-10-17/source/search/packer/candidates/s271_ex1.cert",
+      "raw_asset_retained": true,
+      "retention_policy": "Complete source certificate retained losslessly and bound to the SHA-256 its packet pins upstream; no upstream program or prose is copied.",
+      "retrieved": "2026-10-19",
       "source_n": 271,
-      "url": "https://github.com/Mishapolk/square-packing-records/blob/70a033f0ecfa9e643cd5fb5dbac190cb7f4ffb94/certificates/n271.cert"
+      "url": "https://github.com/evand/square-packing/blob/757b40bc6c5f681033ff1572177d408afbf26dfe/search/packer/candidates/s271_ex1.cert"
     },
     {
       "attribution": "PingYou Ltd, https://github.com/BuddenPing/squares/blob/4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde/numerical-refinements/certificates/n272.cert.json at 4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde",

@@ -5900,13 +5900,32 @@ def test_result_preview_keeps_claim_scope_and_links_with_full_context_in_fragmen
 #: The native homepage SVG preview and inert compressed expansion payload measured
 #: 1,172,468 bytes on 10 October 2026; the retained startup budget is 1,300,000 bytes.
 #: Merged with that layout on 11 October, the results page measured 843,037 bytes at
-#: 146 results, and its ceiling keeps about a hundred kilobytes above that. The intake of
-#: 14 October took the register to 184 results and the page to 976,783 bytes, about 3.5 kB
-#: a row; the ceiling moves to 1,100,000 to keep that margin. The 18 October measurement
-#: at 212 results is 1,141,207 bytes, without repeating record bodies.
-#: Three-run desktop/mobile, light/dark and no-JS checks pass (CLS <=0.001, LCP <=576 ms,
-#: longest task <=153 ms, blocking <=123 ms); 1,250,000 keeps about 100 kB of headroom.
+#: 146 results, and its ceiling kept about a hundred kilobytes above that. With the seven
+#: days' arrivals and the weekly rollup above its table it measured 924,981 bytes at 160
+#: results on 14 October, about six results under that ceiling, while the 14 October
+#: intake registers about thirty (#514's review A, finding A2). That intake took the
+#: register to 184 results and the table alone to 976,783 bytes, about 3.5 kB a row
+#: (#602); with the two sections above it the page measured 1,046,291 bytes. The 18
+#: October measurement of the table alone at 212 results is 1,141,207 bytes, without
+#: repeating record bodies; three-run desktop/mobile, light/dark and no-JS checks pass
+#: (CLS <=0.001, LCP <=576 ms, longest task <=153 ms, blocking <=123 ms), and the ceiling
+#: moved to 1,250,000. Those timing figures are the table-only page's. At 217 results on
+#: 19 October, when #514 merged main, the page measured 1,157,668 bytes without #514's two
+#: sections and 1,203,554 with them: they cost 45,886 bytes and halve the headroom, from
+#: 92,332 to 46,446 bytes (#514's review D, finding D1). No timing has been measured on
+#: the page with the sections; `think-v1qe` owns that measurement and the runway. The
+#: ceiling holds the page through `RESULTS_ROOM_THROUGH` results
+#: (`test_the_results_page_has_room_through_its_room_count`).
 PAGE_CEILINGS = {"index.html": 1_300_000, render_overview.RESULTS_PAGE: 1_250_000}
+#: How many results the results page's ceiling was set to hold, each result past the
+#: register's count at what the table's 90th-percentile row costs now and an average
+#: entry of the seven days: 160 on 14 October and 40 more, then, at 1,250,000 bytes, 217
+#: on 19 October and 8 more (4,603 + 291 bytes each, about 9 results in the 46,446 bytes
+#: left). A fixed count, so the room does not slide up with every registration (#514's
+#: review B, finding B1). The intake that passes the count re-measures the page, its
+#: timing included, and either lightens the table or moves the ceiling as a measured
+#: choice (`think-v1qe`).
+RESULTS_ROOM_THROUGH = 225
 
 
 def test_no_page_carries_a_result_overview(
@@ -5939,6 +5958,33 @@ def test_no_page_carries_a_result_overview(
     assert render_overview.ROW_POPOVER_SCRIPT.read_text(encoding="utf-8").count(
         "data-row-pop-src"
     )
+
+
+def test_the_results_page_has_room_through_its_room_count(results: str) -> None:
+    """The results page stays under its ceiling through `RESULTS_ROOM_THROUGH` results,
+    each result past the register's count costing what the table's 90th-percentile row
+    costs now and an average entry of the seven days, so an import lane meets the ceiling
+    as a measured choice and not as a red build (#514's review A, finding A2). The room is
+    to a fixed count: it shrinks as results are registered, and the test fails only when
+    the page could not reach that count at today's cost (review B, finding B1)."""
+    table = results[results.index("site-table site-results") : results.index("</table>")]
+    found = re.findall(r'<tr id="t-\d+".*?</tr>', table, re.DOTALL)
+    rows = sorted(len(row.encode()) for row in found)
+    added = results[results.index('<div class="site-rollup site-added">') :]
+    added = added[: added.index("</details></div>")]
+    entries = re.findall(r"<li[ >].*?</li>", added, re.DOTALL)
+    row = rows[int(len(rows) * 0.9)]
+    entry = sum(len(item.encode()) for item in entries) // len(entries)
+    size = len(results.encode("utf-8"))
+    more = max(0, RESULTS_ROOM_THROUGH - len(found))
+    projected = size + more * (row + entry)
+    print(
+        f"results.html: {size:,} bytes at {len(found)} results + {more} x ({row:,} + "
+        f"{entry:,}) = {projected:,} / {PAGE_CEILINGS[render_overview.RESULTS_PAGE]:,}"
+    )
+    assert projected < PAGE_CEILINGS[render_overview.RESULTS_PAGE]
+    ceiling = site_urls.PAGE_BUDGET_EXCEPTIONS[render_overview.RESULTS_PAGE][0]
+    assert ceiling == PAGE_CEILINGS[render_overview.RESULTS_PAGE]
 
 
 def test_the_site_writes_each_result_overview_once_and_drops_a_withdrawn_one(
@@ -6179,10 +6225,16 @@ RESULT_FILTERS = [
     ("source", ""),
     ("n", "covers"),
     ("date", "age"),
-    # The two preset-only controls, out of the bar until a link sets them: the listed
-    # project a row is attributed to, and its significance exactly.
+    # The day the row reached the site, as an age like the date's (`?added-age=1`).
+    ("added", "age"),
+    # The four preset-only controls, out of the bar until a link sets them: the listed
+    # project a row is attributed to, its significance exactly, the one day it arrived
+    # (`?added=2026-10-12`, each day of the overview's seven) and the first day of a run
+    # (`?added-since=2026-10-06`, the seven days' heading).
     ("project", "has"),
     ("s", ""),
+    ("added", ""),
+    ("added", "since"),
 ]
 
 #: The bar's one checkbox, as `result_filters` writes it: its own label, after Status.
@@ -6239,8 +6291,8 @@ def test_both_tables_of_results_carry_the_identical_filter_set(page: str, result
         "source": "",
     }
     assert HIDE_SUPERSEDED.format(checked="") in bar
-    assert bar.count(" selected>") == bar.count("<select ") == 8
-    assert bar.count("<input ") == 3
+    assert bar.count(" selected>") == bar.count("<select ") == 9
+    assert bar.count("<input ") == 5
 
 
 def test_the_filter_bar_is_one_helpers_and_reads_the_whole_register(
@@ -6326,8 +6378,9 @@ def test_every_facet_a_result_row_carries_has_a_filter_and_every_filter_a_facet(
 ) -> None:
     """A row of either table carries the same facets, each from the register: whose
     result it is, its V, C and S levels, its kind, the listed projects it is attributed
-    to, its status, whether it is current, which is to say not superseded, its cases and
-    its date. The bar has a control for each and no control without one."""
+    to, its status, whether it is current, which is to say not superseded, its cases, its
+    date and the day the register took it in. The bar has a control for each and no
+    control without one."""
     filtered = {key for key, _ in RESULT_FILTERS}
     recent = _recent_table(page)
     listed = {r.id for r in _recent_entries(overview)}
@@ -6344,6 +6397,7 @@ def test_every_facet_a_result_row_carries_has_a_filter_and_every_filter_a_facet(
             "current": "false" if overview_sections.is_superseded(result) else "true",
             "n": overview_sections.result_cases(result),
             "date": overview_sections.first_day(result.dated[1]),
+            "added": str(record.get("landed") or record["registered"]),
         }
         assert set(expected) == filtered
         tags = [_row(results, result.id).split(">", 1)[0]]
@@ -6352,6 +6406,7 @@ def test_every_facet_a_result_row_carries_has_a_filter_and_every_filter_a_facet(
         for tag in tags:
             assert _facets(html.unescape(tag)) == expected, result.id
         assert re.fullmatch(r"\d{4}-\d{2}-\d{2}", expected["date"]), result.id
+        assert re.fullmatch(r"\d{4}-\d{2}-\d{2}", expected["added"]), result.id
         assert re.fullmatch(r"\d+(?:-\d+)?(?: \d+(?:-\d+)?)*", expected["n"]), result.id
 
 

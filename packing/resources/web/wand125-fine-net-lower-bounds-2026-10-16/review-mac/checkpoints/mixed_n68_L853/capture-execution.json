@@ -1,0 +1,37 @@
+{
+  "argv": [
+    "/usr/bin/time",
+    "-lp",
+    "-o",
+    "/Volumes/spud-ext1/agent-source/squares-fine-net-mac-haaq/first-subset/case-checkpoints/mixed_n68_L853-20261019T124003-1906fda3/capture.time",
+    "/Users/levy/wrk/github/squares/packing/.venv/bin/python3",
+    "-m",
+    "devtools.sqverify_fast_census",
+    "--family",
+    "mixed",
+    "--binary",
+    "/Volumes/spud-ext1/agent-source/squares-fine-net-mac-haaq/sqverify-fast",
+    "--out",
+    "/Volumes/spud-ext1/agent-source/squares-fine-net-mac-haaq/first-subset",
+    "--only",
+    "mixed_n68_L853",
+    "--packets",
+    "wand125-fine-net-lower-bounds-2026-10-16",
+    "--threads",
+    "2",
+    "--resume"
+  ],
+  "finished_utc_observed": "2026-10-19T12:48:48.630491+00:00",
+  "mode": "capture",
+  "native_returncode": 0,
+  "recovered_complete_capture": true,
+  "returncode": null,
+  "returncode_note": "Outer CLI exit unobserved after supervisor loss; native exit 0 is retained in the verified census row",
+  "started_utc": "2026-10-19T12:40:03.301081+00:00",
+  "timing": {
+    "cpu_seconds": 856.53,
+    "real": 438.0,
+    "sys": 1.98,
+    "user": 854.55
+  }
+}

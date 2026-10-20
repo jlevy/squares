@@ -208,6 +208,9 @@ def _rank(rung: object) -> int:
 RELATION_PHRASES = {
     "same-implementation": "reproduced {where} with the author's own checker",
     "independent-implementation": "re-verified {where} by an independent implementation",
+    "shared-components": (
+        "re-verified {where} using a checker that shares components with the generator"
+    ),
     "generator": "reproduced {where} by the program that produced it",
 }
 

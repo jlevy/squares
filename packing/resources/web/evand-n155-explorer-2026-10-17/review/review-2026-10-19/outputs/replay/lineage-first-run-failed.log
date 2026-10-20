@@ -1,0 +1,27 @@
+START 2026-10-19T21:49:31Z load=22.12 19.70 20.19 cmd: uv run --frozen --all-extras --group dev python -I /tmp/claude-0/-home-user-squares/b1f8ff4e-5e49-561e-aa0f-a76f1a5fe076/scratchpad/rv-evand/packing/resources/web/evand-n155-explorer-2026-10-17/review/review-2026-10-19/programs/lineage_1019.py --json resources/web/evand-n155-explorer-2026-10-17/review/review-2026-10-19/outputs/lineage-2026-10-19.json
+warning: The `UV_NATIVE_TLS` environment variable is deprecated and will be removed in a future release. Use `UV_SYSTEM_CERTS` instead.
+#669 n=155 vs T-149: side diff -1.644623e-04; nearest unmatched; unmoved {'symmetry': 7, 'within': {'1e-9': 15, '1e-6': 15, '1e-3': 82, '1e-2': 95, '1e-1': 125}, 'one_to_one': False}; assignment {'symmetry': 0, 'total_squared': '2.439381e+00', 'largest_move': '0.736738', 'moved_beyond': {'1e-4': 140, '1e-3': 73, '1e-2': 61, '1e-1': 29}, 'largest_turn_degrees': '41.66', 'turned_beyond_0.01_degree': 58}
+#669 n=155 vs T-174: side diff -1.644623e-04; nearest unmatched; unmoved {'symmetry': 7, 'within': {'1e-9': 15, '1e-6': 15, '1e-3': 84, '1e-2': 95, '1e-1': 125}, 'one_to_one': False}; assignment {'symmetry': 0, 'total_squared': '2.439184e+00', 'largest_move': '0.736738', 'moved_beyond': {'1e-4': 140, '1e-3': 71, '1e-2': 61, '1e-1': 29}, 'largest_turn_degrees': '41.66', 'turned_beyond_0.01_degree': 58}
+#674-update n=229 vs #674-opening: side diff -1.740963e-06; nearest k=0 moved {'1e-9': 228, '1e-6': 226, '1e-3': 94, '1e-2': 23, '1e-1': 8} largest 5.375065e-; unmoved {'symmetry': 0, 'within': {'1e-9': 1, '1e-6': 3, '1e-3': 135, '1e-2': 206, '1e-1': 221}, 'one_to_one': True}; assignment {'symmetry': 0, 'total_squared': '1.115666e+00', 'largest_move': '0.537507', 'moved_beyond': {'1e-4': 127, '1e-3': 94, '1e-2': 23, '1e-1': 8}, 'largest_turn_degrees': '26.05', 'turned_beyond_0.01_degree': 32}
+#674-opening n=229 vs T-196: side diff -1.150209e-05; nearest unmatched; unmoved {'symmetry': 6, 'within': {'1e-9': 0, '1e-6': 2, '1e-3': 5, '1e-2': 11, '1e-1': 24}, 'one_to_one': False}; assignment {'symmetry': 7, 'total_squared': '2.013373e+01', 'largest_move': '0.806831', 'moved_beyond': {'1e-4': 185, '1e-3': 154, '1e-2': 83, '1e-1': 77}, 'largest_turn_degrees': '38.26', 'turned_beyond_0.01_degree': 104}
+#674-update n=229 vs T-196: side diff -1.324305e-05; nearest unmatched; unmoved {'symmetry': 6, 'within': {'1e-9': 0, '1e-6': 1, '1e-3': 4, '1e-2': 10, '1e-1': 27}, 'one_to_one': False}; assignment {'symmetry': 7, 'total_squared': '2.137388e+01', 'largest_move': '0.872941', 'moved_beyond': {'1e-4': 197, '1e-3': 170, '1e-2': 88, '1e-1': 79}, 'largest_turn_degrees': '38.26', 'turned_beyond_0.01_degree': 93}
+#659 n=236 vs T-136: side diff -2.021357e-03; nearest unmatched; unmoved {'symmetry': 0, 'within': {'1e-9': 1, '1e-6': 1, '1e-3': 8, '1e-2': 158, '1e-1': 179}, 'one_to_one': False}; assignment {'symmetry': 5, 'total_squared': '2.542851e+00', 'largest_move': '0.744887', 'moved_beyond': {'1e-4': 236, '1e-3': 236, '1e-2': 57, '1e-1': 10}, 'largest_turn_degrees': '44.68', 'turned_beyond_0.01_degree': 48}
+#659 n=236 vs T-146: side diff -2.021357e-03; nearest unmatched; unmoved {'symmetry': 5, 'within': {'1e-9': 1, '1e-6': 1, '1e-3': 1, '1e-2': 185, '1e-1': 226}, 'one_to_one': False}; assignment {'symmetry': 5, 'total_squared': '2.537697e+00', 'largest_move': '0.746515', 'moved_beyond': {'1e-4': 235, '1e-3': 235, '1e-2': 51, '1e-1': 10}, 'largest_turn_degrees': '44.68', 'turned_beyond_0.01_degree': 45}
+#659 n=236 vs T-174: side diff -2.021357e-03; nearest unmatched; unmoved {'symmetry': 5, 'within': {'1e-9': 1, '1e-6': 1, '1e-3': 1, '1e-2': 185, '1e-1': 226}, 'one_to_one': False}; assignment {'symmetry': 5, 'total_squared': '2.537697e+00', 'largest_move': '0.746515', 'moved_beyond': {'1e-4': 235, '1e-3': 235, '1e-2': 51, '1e-1': 10}, 'largest_turn_degrees': '44.68', 'turned_beyond_0.01_degree': 45}
+Traceback (most recent call last):
+  File "/tmp/claude-0/-home-user-squares/b1f8ff4e-5e49-561e-aa0f-a76f1a5fe076/scratchpad/rv-evand/packing/resources/web/evand-n155-explorer-2026-10-17/review/review-2026-10-19/programs/lineage_1019.py", line 201, in <module>
+    raise SystemExit(main(sys.argv[1:]))
+                     ~~~~^^^^^^^^^^^^^^
+  File "/tmp/claude-0/-home-user-squares/b1f8ff4e-5e49-561e-aa0f-a76f1a5fe076/scratchpad/rv-evand/packing/resources/web/evand-n155-explorer-2026-10-17/review/review-2026-10-19/programs/lineage_1019.py", line 171, in main
+    other = reader(against, n)
+  File "/tmp/claude-0/-home-user-squares/b1f8ff4e-5e49-561e-aa0f-a76f1a5fe076/scratchpad/rv-evand/packing/resources/web/evand-n155-explorer-2026-10-17/review/review-2026-10-19/programs/lineage_1019.py", line 85, in reader
+    return area.import_packing(label)(n)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "/tmp/claude-0/-home-user-squares/b1f8ff4e-5e49-561e-aa0f-a76f1a5fe076/scratchpad/rv-evand/packing/devtools/check_half_angle_area.py", line 1659, in read
+    rows = [row for row in _admitted(issue)["certificates"] if row["n"] == n]
+                           ~~~~~~~~~^^^^^^^
+  File "/tmp/claude-0/-home-user-squares/b1f8ff4e-5e49-561e-aa0f-a76f1a5fe076/scratchpad/rv-evand/packing/devtools/check_half_angle_area.py", line 1617, in _admitted
+    packet = WEB / ALL_IMPORTS[issue]
+                   ~~~~~~~~~~~^^^^^^^
+KeyError: 'T-186'
+END 2026-10-19T21:50:49Z exit=1 wall=78.407926118s load=25.90 21.48 20.78

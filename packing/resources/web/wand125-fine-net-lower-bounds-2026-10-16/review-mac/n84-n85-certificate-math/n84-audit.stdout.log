@@ -1,0 +1,7 @@
+{"event": "bindings_passed", "certificate": "mixed_n84_L94225", "directions": 201, "refusals": 201}
+{"event": "exact_refusals", "completed": 40}
+{"event": "exact_refusals", "completed": 80}
+{"event": "exact_refusals", "completed": 120}
+{"event": "exact_refusals", "completed": 160}
+{"event": "exact_refusals", "completed": 200}
+{"status": "PASS", "certificate": "mixed_n84_L94225", "output": ".codex/intake-resume-20261019/n84-n85-certificate-math/n84-audit-result.json", "wall_seconds": 6.003, "refusals": 201, "positive_capture": 1.0333501717449913, "near_witness_capture": 0.9911738813643787, "negative_audits": 3}

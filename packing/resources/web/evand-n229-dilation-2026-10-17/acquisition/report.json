@@ -1,0 +1,80 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "https://github.com/jlevy/squares/issues/674",
+  "author": "Evan Daniel",
+  "source_key": "[Daniel n229 dilation 2026-10-17]",
+  "report_evidence": "E-evand-674-n229-opening-report",
+  "receipt_format": "evand-674-exact-replay-v1",
+  "witness_prefix": "W-evand-674-n",
+  "claim_limitations": "Complete e0338c7 rational centre/half-angle dilation certificate read exactly from the retained source. Finite construction feasibility only; no KKT, local minimum, rigidity, novelty, priority or global optimality claim.",
+  "read_on": "2026-10-19",
+  "read_at_main": "14fd9e27f3e1e800c41b3d49280e4c7055ab6681",
+  "certificates": [
+    {
+      "n": 229,
+      "path": "search/packer/candidates/s229.cert",
+      "format": "evand-cert",
+      "offered": "15.650163254859",
+      "first_committed": "2026-10-17T23:09:24Z",
+      "same_packing": []
+    }
+  ],
+  "requested": [
+    229
+  ],
+  "replayed": [
+    229
+  ],
+  "houses": [
+    {
+      "n": 229,
+      "reader": "[Daniel regularizer 2026-10-11]",
+      "source_key": "[Kingbird]",
+      "holders": "the Kingbird catalogue, verified by T-155's exact ceiling",
+      "result": "T-155",
+      "reported_value": "15.65685424949238",
+      "verified_value": "15.65685424949239",
+      "evidence": [
+        "E-regularized-bounds-2026-10-12-exact-decision"
+      ],
+      "reported_rounding": "unstated"
+    }
+  ],
+  "pending": [
+    {
+      "n": 229,
+      "report": "T-196 (#668)",
+      "url": "https://github.com/jlevy/squares/issues/668",
+      "holders": "Joost de Winter",
+      "result": "T-196",
+      "printed": "15.650174756949",
+      "rounding": "up"
+    },
+    {
+      "n": 229,
+      "report": "#672",
+      "url": "https://github.com/jlevy/squares/issues/672",
+      "holders": "Francisco Couzo",
+      "printed": "15.650174740273",
+      "rounding": "up"
+    }
+  ],
+  "register": {
+    "title": "Evan Daniel's opening n229 dilation certificate at e0338c7, issue674",
+    "headline": "Daniel's opening n229 dilation certificate, after Couzo and de Winter",
+    "significance": 2,
+    "source_checks": "The author reports that his two exact rational checkers, verify_cert.py and verify_cert2.py, accept the certificate, with least pair separation 1.0e-12 and least wall clearance 5.0e-13. The source states the certificate is a dilation of a binary64 packing (search/packer/dilate_cert.py): centres and box scaled by 1 + 10^-12, coordinates rounded to rationals and each angle to a rational half-angle tangent, so every square is exactly unit; it certifies the upper bound only. No source program ran here.",
+    "credit": "Credit Evan Daniel after Francisco Couzo's #672 packing, which refines Joost de Winter's #668, as the issue asks: the tilted structure is #672's and the upright part is rearranged. The work and the request were done with Claude (Claude Code) under Evan Daniel's direction.",
+    "next_rung": "Independently review the retained replay; the later update (T-199) is the smaller side at 229.",
+    "bead": "think-5ij2",
+    "bibliography": {
+      "authors": [
+        "Daniel"
+      ],
+      "lineage": "builds-on-project",
+      "credit": "Daniel after Couzo, de Winter, Levy",
+      "short_credit": "Daniel after Couzo, de Winter, Levy",
+      "note": "The existing bibliography key, unchanged by this import."
+    }
+  }
+}

@@ -1,0 +1,120 @@
+{
+  "built_utc": "2026-10-19T12:12:09.733946+00:00",
+  "bead": "think-haaq",
+  "trusted_main": "0ee05f4f3d0863f75c1036757839985e75655677",
+  "source_sha256": "d97758bbc9639edc70b8bd7dc83106d4e8d1be034bacb3e88f8c539b88091c88",
+  "binary_sha256": "e44f27eb8f3375d85c71e085fe7d04667d38f28c589beae267457573be4ae61d",
+  "binary_bytes": 849712,
+  "binary": "/Volumes/spud-ext1/agent-source/squares-fine-net-mac-haaq/sqverify-fast",
+  "target": "aarch64-apple-darwin",
+  "profile": "release",
+  "rustc": "rustc1.98.0(88d9e12ae2026-08-18)",
+  "command": "cargo+1.98.0 build --release --locked --offline --jobs2 (actual shell spaces in build invocation)",
+  "build_wall_reported_seconds": 18.2,
+  "tests": {
+    "lib": 13,
+    "adversarial": 17,
+    "declared_net": 8,
+    "failed": 0,
+    "ignored": 0
+  },
+  "source_files_checked": [
+    {
+      "path": "packing/sqverify_fast/Cargo.lock",
+      "bytes": 6976,
+      "sha256": "5c3206fa1eeabb23d52e93d76eec0d2c16820e6065ce02e8e13a7fa47693785c"
+    },
+    {
+      "path": "packing/sqverify_fast/Cargo.toml",
+      "bytes": 1508,
+      "sha256": "df5e6c24699f934dcabe1119273621ac332dfcd9c75dd0650acacfc827466665"
+    },
+    {
+      "path": "packing/sqverify_fast/INDEPENDENCE.md",
+      "bytes": 16988,
+      "sha256": "cb9a6427e6e5cbdc552d705e50526b48cad21e94297b52e3f662f0086022dc6e"
+    },
+    {
+      "path": "packing/sqverify_fast/README.md",
+      "bytes": 6064,
+      "sha256": "68d2e72216a24b4bd7dfe4d2afb26f7d74cec8f0a755cea6fc0fffd83fee55b2"
+    },
+    {
+      "path": "packing/sqverify_fast/SOUNDNESS.md",
+      "bytes": 38614,
+      "sha256": "7ddf174658d57fa17c506f693f86ab48b31fbc20db2476fe71eaaf42d5b3eeeb"
+    },
+    {
+      "path": "packing/sqverify_fast/build.rs",
+      "bytes": 1712,
+      "sha256": "1e238378117bc7716e50cdd4e3d0d3862e756e1ff863794b9b559ffe4b2743e6"
+    },
+    {
+      "path": "packing/sqverify_fast/clippy.toml",
+      "bytes": 58,
+      "sha256": "741d8b6cbd57d7b01ff8918083bbf313e281cce0dbdcb1ed669dc8cb84f44578"
+    },
+    {
+      "path": "packing/sqverify_fast/rust-toolchain.toml",
+      "bytes": 86,
+      "sha256": "495c69d1db93f25f53e3d0d2d40d812313366cc368de317871c2ace6c6ffafa4"
+    },
+    {
+      "path": "packing/sqverify_fast/src/axis.rs",
+      "bytes": 7198,
+      "sha256": "bf18bd9a0a82806bac6a3aa82df73349944eaa56a22ae5a9b67a67ab3d237e97"
+    },
+    {
+      "path": "packing/sqverify_fast/src/certificate.rs",
+      "bytes": 34387,
+      "sha256": "4bf5c5dc1e74dd97040360befbbb2b3e07438b4b3b11d7aa340bc2e20e2ea7d4"
+    },
+    {
+      "path": "packing/sqverify_fast/src/exact.rs",
+      "bytes": 8350,
+      "sha256": "b9d627b740c8a0c7ed069c1faac2563b9db72c03c10c9f88fb3c0234054f481a"
+    },
+    {
+      "path": "packing/sqverify_fast/src/interval.rs",
+      "bytes": 8484,
+      "sha256": "287da6570dfc1278e3ba6b4c09bfaca6409d16fba0713329bf0c4a5dcbfe5e56"
+    },
+    {
+      "path": "packing/sqverify_fast/src/lib.rs",
+      "bytes": 8028,
+      "sha256": "8a8f96380144511afc84734e667d1114bd2c1400623482d50d40eb394646aceb"
+    },
+    {
+      "path": "packing/sqverify_fast/src/main.rs",
+      "bytes": 11446,
+      "sha256": "e4a65d9570a5f91f41474a20c3c90e8804da568c11d32ca632da59605f5f84e8"
+    },
+    {
+      "path": "packing/sqverify_fast/src/oracle.rs",
+      "bytes": 5788,
+      "sha256": "3c993d66c6edb3a235a3e089a586bb4b42de02fb331fc519836b22cadb99c151"
+    },
+    {
+      "path": "packing/sqverify_fast/src/rotated.rs",
+      "bytes": 42225,
+      "sha256": "4bf878c4d0e8acaedcccedbfb52d8885e1ba2657876bad2048fe30e5f3c7ded3"
+    },
+    {
+      "path": "packing/sqverify_fast/src/rotated_tests.rs",
+      "bytes": 13241,
+      "sha256": "02472f4c41ab738bc029d7e88b66cdf3382bc1e5a74aa6a72f81573b292eec86"
+    },
+    {
+      "path": "packing/sqverify_fast/tests/adversarial.rs",
+      "bytes": 25201,
+      "sha256": "63039dc311fea68837399d0b428ff5d048ef27f392e87f91d11acaf3d393e3b0"
+    },
+    {
+      "path": "packing/sqverify_fast/tests/declared_net.rs",
+      "bytes": 10264,
+      "sha256": "556722cf73046d10d8e81b249b5a868440dbd924dbf2e5d2515e81384eb80e49"
+    }
+  ],
+  "native_capture_started": false,
+  "remaining": "Independent Astra Mac portability/custody/process review and route calibration. Historical n108 Linux evidence never replaced. Do not invoke --evidence: current prose hardcodes Linux; later fix tracked by this bead."
+}

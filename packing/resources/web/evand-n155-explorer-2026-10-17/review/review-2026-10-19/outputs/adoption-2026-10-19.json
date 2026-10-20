@@ -1,0 +1,115 @@
+{
+ "problems": [],
+ "counts": {
+  "155": [
+   {
+    "report": "T-197 (#669)",
+    "kind": "exact",
+    "side_up16": "12.9522609446505641",
+    "above_smallest": "0.000e+00"
+   },
+   {
+    "report": "case ceiling, T-174 (Daniil Ostashev, improved by PingYou Ltd)",
+    "kind": "exact",
+    "side_up16": "12.9524254069584562",
+    "above_smallest": "1.645e-04"
+   },
+   {
+    "report": "T-149 (#501) (Daniil Ostashev)",
+    "kind": "exact",
+    "side_up16": "12.9524254069584562",
+    "above_smallest": "1.645e-04"
+   }
+  ],
+  "229": [
+   {
+    "report": "T-199 (#674 update)",
+    "kind": "exact",
+    "side_up16": "15.6501615138955532",
+    "above_smallest": "0.000e+00"
+   },
+   {
+    "report": "T-198 (#674 opening)",
+    "kind": "exact",
+    "side_up16": "15.6501632548585302",
+    "above_smallest": "1.741e-06"
+   },
+   {
+    "report": "#672 (Francisco Couzo), print only",
+    "kind": "print, rounded up",
+    "side_up16": "15.6501747402730000",
+    "above_smallest": "1.323e-05"
+   },
+   {
+    "report": "T-196 (#668) (Joost de Winter), print only",
+    "kind": "print, rounded up",
+    "side_up16": "15.6501747569490000",
+    "above_smallest": "1.324e-05"
+   },
+   {
+    "report": "case ceiling, T-155 (the Kingbird catalogue, verified by T-155's exact ceiling)",
+    "kind": "exact",
+    "side_up16": "15.6568542494923802",
+    "above_smallest": "6.693e-03"
+   }
+  ],
+  "236": [
+   {
+    "report": "T-218 (#659, provisional number)",
+    "kind": "exact",
+    "side_up16": "15.8619343906073587",
+    "above_smallest": "0.000e+00"
+   },
+   {
+    "report": "T-174 (PR #574) (PingYou Ltd)",
+    "kind": "exact",
+    "side_up16": "15.8639557471592675",
+    "above_smallest": "2.021e-03"
+   },
+   {
+    "report": "case ceiling, T-146 (Nate Chaoweeraprasit (itsnaka), improved by Evan Daniel)",
+    "kind": "exact",
+    "side_up16": "15.8639557471592675",
+    "above_smallest": "2.021e-03"
+   },
+   {
+    "report": "T-136 (#481) (Nate Chaoweeraprasit (itsnaka))",
+    "kind": "exact",
+    "side_up16": "15.8639557471592678",
+    "above_smallest": "2.021e-03"
+   }
+  ],
+  "271": [
+   {
+    "report": "T-219 (#664, provisional number)",
+    "kind": "exact",
+    "side_up16": "16.9489477337136576",
+    "above_smallest": "0.000e+00"
+   },
+   {
+    "report": "case ceiling, T-186 (Nate Chaoweeraprasit (itsnaka), improved by Francisco Couzo, PingYou Ltd, Mishapolk)",
+    "kind": "exact",
+    "side_up16": "16.9489923564512057",
+    "above_smallest": "4.462e-05"
+   },
+   {
+    "report": "T-174 (PR #574) (PingYou Ltd)",
+    "kind": "exact",
+    "side_up16": "16.9489923564512057",
+    "above_smallest": "4.462e-05"
+   },
+   {
+    "report": "T-161 (#561) (Francisco Couzo)",
+    "kind": "exact",
+    "side_up16": "16.9489923564512057",
+    "above_smallest": "4.462e-05"
+   },
+   {
+    "report": "T-151 (#500) (Nate Chaoweeraprasit (itsnaka))",
+    "kind": "exact",
+    "side_up16": "16.9491166878150100",
+    "above_smallest": "1.690e-04"
+   }
+  ]
+ }
+}

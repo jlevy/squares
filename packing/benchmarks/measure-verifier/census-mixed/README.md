@@ -12,7 +12,12 @@ in this repository; where there are none, this census is the first complete chec
 least-bound direction.
 *Authors’ CPU* is the authors’ checker’s recorded CPU seconds on the directions this
 repository replayed; *ours, same directions* is `sqverify-fast`’s thread CPU on exactly
-those directions. CPU on a shared host whose load average is given.
+those directions. Per-direction CPU is unavailable unless every compared direction has a
+reading; the native summary’s zero does not supply missing readings.
+It is `-` where nothing was compared.
+*CPU s, all directions* is aggregate process CPU from `wait4` (user plus system),
+separate from the direction readings.
+Load is given only where recorded.
 *Control* is the status of the `--control` receipt on the certificate itself, where one
 is kept: the original verified again and a near-threshold mutant refused at its
 least-bound direction, and the 99/100 mutant refused at one direction at least, every
@@ -55,6 +60,7 @@ direction of the net run (v2), or at that direction alone (v1).
 | `mixed_n66_L843` | 66 | M | VERIFIED | 201 | 117,253,700 | 1.0000000006737138 | clears | 2104.9 | 6.3 | 0, 1, 24, 25, 100, 101, 147, 148, 156, 157, 199, 200 | 4,628 | 128.8 | 36x | CONTROLS_REFUSED |
 | `mixed_n67_L8475` | 67 | M | VERIFIED | 201 | 75,088,660 | 1.0000000006600718 | clears | 1299.0 | 8.8 | none: first complete check here | - | - | - | CONTROLS_REFUSED |
 | `mixed_n67_L848` | 67 | M | VERIFIED | 201 | 91,535,166 | 1.000000000605981 | clears | 1388.3 | 3.2 | none: first complete check here | - | - | - | CONTROLS_REFUSED |
+| `mixed_n68_L853` | 68 | M | VERIFIED | 201 | 104,110,078 | 1.0000000000889968 | clears | 855.9 | 3.3 | none: first complete check here | - | - | - | CONTROLS_REFUSED |
 | `mixed_n69_L8612` | 69 | M | VERIFIED | 201 | 87,975,724 | 1.0000000004388068 | clears | 1859.1 | 4.5 | none: first complete check here | - | - | - | CONTROLS_REFUSED |
 | `mixed_n69_L862` | 69 | M | VERIFIED | 201 | 92,221,320 | 1.000000000173938 | clears | 2198.3 | 4.7 | none: first complete check here | - | - | - | CONTROLS_REFUSED |
 | `mixed_n70_L86475` | 70 | M | VERIFIED | 201 | 87,628,026 | 1.0000000002290894 | clears | 1753.5 | 5.8 | none: first complete check here | - | - | - | CONTROLS_REFUSED |
@@ -76,8 +82,10 @@ direction of the net run (v2), or at that direction alone (v1).
 | `mixed_n84_L940` | 84 | M | VERIFIED | 201 | 95,206,764 | 1.0000000000038998 | clears | 1753.7 | 9.4 | all 201 | 44,229 | 1753.3 | 25x | - |
 | `mixed_n84_L94075` | 84 | M | VERIFIED | 201 | 83,220,602 | 1.0000000005252527 | clears | 1493.7 | 4.9 | none: first complete check here | - | - | - | CONTROLS_REFUSED |
 | `mixed_n84_L9411` | 84 | M | VERIFIED | 201 | 110,704,136 | 1.000000000102596 | clears | 1877.8 | 11.6 | none: first complete check here | - | - | - | CONTROLS_REFUSED |
+| `mixed_n84_L94225` | 84 | M | VERIFIED | 201 | 136,054,170 | 1.000000000314376 | clears | 1395.7 | 6.0 | none: first complete check here | - | - | - | CONTROLS_REFUSED |
 | `mixed_n85_L942` | 85 | M | VERIFIED | 201 | 89,192,514 | 1.0000000002558 | clears | 1595.6 | 2.8 | all 201 | 35,181 | 1595.2 | 22x | - |
 | `mixed_n85_L946` | 85 | M | VERIFIED | 201 | 72,746,810 | 1.000000000416021 | clears | 1549.7 | 1.9 | all 201 | 35,056 | 1549.4 | 23x | CONTROLS_REFUSED |
+| `mixed_n85_L9475` | 85 | M | VERIFIED | 201 | 126,895,910 | 1.000000000004128 | clears | 1414.0 | 7.9 | none: first complete check here | - | - | - | CONTROLS_REFUSED |
 | `mixed_n86_L950` | 86 | M | VERIFIED | 201 | 79,636,976 | 1.0000000005619347 | clears | 1366.1 | 4.6 | none: first complete check here | - | - | - | CONTROLS_REFUSED |
 | `mixed_n86_L9503` | 86 | M | VERIFIED | 201 | 82,400,840 | 1.00000000020883 | clears | 1457.9 | 9.9 | none: first complete check here | - | - | - | CONTROLS_REFUSED |
 | `mixed_n87_L948` | 87 | M | VERIFIED | 201 | 32,682,134 | 1.0000000000698703 | clears | 451.1 | 1.9 | all 201 | 9,585 | 450.9 | 21x | CONTROLS_REFUSED |
@@ -106,8 +114,9 @@ direction of the net run (v2), or at that direction alone (v1).
 | `mixed_n96_L996` | 96 | M | VERIFIED | 201 | 26,793,520 | 1.000000000121414 | clears | 456.4 | 2.1 | all 201 | 8,758 | 456.2 | 19x | CONTROLS_REFUSED |
 | `mixed_n96_L997` | 96 | M | VERIFIED | 201 | 59,643,606 | 1.0000000000057894 | clears | 978.8 | 11.0 | none: first complete check here | - | - | - | CONTROLS_REFUSED |
 | `mixed_n101_L1028` | 101 | L | VERIFIED | 201 | 53,145,987 | 1.000000000300333 | clears | 128.4 | 4.0 | all 201 | 27,669 | 128.0 | 216x | - |
+| `mixed_n108_L1062` | 108 | M | VERIFIED | 201 | 136,113,602 | 1.0000000001765084 | clears | 2086.8 | 9.5 | none: first complete check here | - | - | - | CONTROLS_REFUSED |
 
-86 of 86 certificates verified; 131244 CPU seconds in all.
+90 of 90 certificates verified; 136997 recorded aggregate process CPU seconds in all.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
