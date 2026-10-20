@@ -1705,6 +1705,9 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
     ReleaseNoPublicChange(
         components=("paper:n11-optimality-review", "paper:n11-threshold-bound-review"),
         paths=(
+            "packing/devtools/adopt_houses.py",
+            "packing/devtools/default_drawings.py",
+            "packing/devtools/upper_bound_houses.py",
             "packing/devtools/upper_bound_reports.py",
             "packing/frontier/results.yaml",
         ),
@@ -1717,17 +1720,22 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "papers/n11-threshold-bound-review.pdf",
         ),
         reason=(
-            "For the evand lane of 20 October (T-221 at n = 308, T-222 at n = 154) against "
-            "main d588ad98: both reviews read results.yaml only through "
-            "paper_figures.ladder_records, which selects the n11 ladder rungs LADDER_RUNGS "
-            "names and holds them to LADDER_DIGEST; T-221 and T-222 are added entries "
-            "outside that ladder, and no ladder row changes. upper_bound_reports.py gains "
-            "only two house readers, which these producers do not call. Rendered at link "
-            "revision 15b3a66a, once from this branch's tree and once with main's copies "
-            "of the four changed inputs (upper_bound_reports.py, results.yaml, "
-            "result-requests.yaml and source-coverage.yaml): render_n11_optimality_review, "
-            "render_n11_threshold_bound_review and render_packing_methods leave the 69 "
-            "files of the site tree byte-identical between the trees. No PDF was printed; "
+            "For the evand lane of 20 October (T-221 at n = 308, T-222 at n = 154, both "
+            "raised to V3/C3 and adopted as houses) against main d588ad98: both reviews "
+            "read results.yaml only through paper_figures.ladder_records, which selects the "
+            "n11 ladder rungs LADDER_RUNGS names and holds them to LADDER_DIGEST; T-221 and "
+            "T-222 are added entries outside that ladder, and no ladder row changes. "
+            "upper_bound_reports.py gains only two house readers, adopt_houses.py and "
+            "upper_bound_houses.py only the 20 October pass's prose, credits and houses at "
+            "154 and 308, and default_drawings.py loses only 308's settlement, none of "
+            "which these producers call. Rendered at link revision 5ee03750, at the "
+            "adoption's head febe2913, once from this branch's tree and once with main's "
+            "copies of the eight changed inputs the three papers read (adopt_houses.py, "
+            "default_drawings.py, upper_bound_houses.py, upper_bound_reports.py, "
+            "results.yaml, result-requests.yaml, source-coverage.yaml and n-154.md): "
+            "render_n11_optimality_review, render_n11_threshold_bound_review and "
+            "render_packing_methods write 50 byte-identical files on both trees, and none "
+            "of them names T-221, T-222, #689, #694 or either packet. No PDF was printed; "
             "each prints from that HTML. Retain v0.1.7 and v0.1.0."
         ),
     ),
@@ -1735,7 +1743,11 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         components=("paper:square-packing-methods-survey",),
         paths=(
             "packing/campaign/result-requests.yaml",
+            "packing/devtools/adopt_houses.py",
+            "packing/devtools/default_drawings.py",
+            "packing/devtools/upper_bound_houses.py",
             "packing/devtools/upper_bound_reports.py",
+            "packing/frontier/n-154.md",
             "packing/frontier/results.yaml",
             "packing/frontier/source-coverage.yaml",
         ),
@@ -1745,17 +1757,23 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "papers/square-packing-methods-survey.pdf",
         ),
         reason=(
-            "For the evand lane of 20 October (T-221 at n = 308, T-222 at n = 154) against "
-            "main d588ad98: result requests, source coverage and results are citation "
-            "targets whose existence the producer checks, not inlined text, and every "
-            "cited path exists at both revisions; the added #689 and #694 requests, the "
-            "two coverage entries and T-221 and T-222 are not cited by the survey. The two "
-            "house readers upper_bound_reports.py gains do not enter its output. Rendered "
-            "at link revision 15b3a66a, once from this branch's tree and once with main's "
-            "copies of the four changed inputs (upper_bound_reports.py, results.yaml, "
-            "result-requests.yaml and source-coverage.yaml): render_n11_optimality_review, "
-            "render_n11_threshold_bound_review and render_packing_methods leave the 69 "
-            "files of the site tree byte-identical between the trees. No PDF was printed; "
+            "For the evand lane of 20 October (T-221 at n = 308, T-222 at n = 154, both "
+            "raised to V3/C3 and adopted as houses) against main d588ad98: result requests, "
+            "source coverage, the n = 154 case record and results are citation targets "
+            "whose existence the producer checks, not inlined text, and every cited path "
+            "exists at both revisions; the #689 and #694 requests, the coverage entries "
+            "and T-221 and T-222 are not cited by the survey, and the adoption's rewrite of "
+            "n-154.md enters none of its text. The two house readers upper_bound_reports.py "
+            "gains, the 20 October pass's prose, credits and houses in adopt_houses.py and "
+            "upper_bound_houses.py, and 308's settlement leaving default_drawings.py do not "
+            "enter its output. Rendered at link revision 5ee03750, at the adoption's head "
+            "febe2913, once from this branch's tree and once with main's copies of the "
+            "eight changed inputs the three papers read (adopt_houses.py, "
+            "default_drawings.py, upper_bound_houses.py, upper_bound_reports.py, "
+            "results.yaml, result-requests.yaml, source-coverage.yaml and n-154.md): "
+            "render_n11_optimality_review, render_n11_threshold_bound_review and "
+            "render_packing_methods write 50 byte-identical files on both trees, and none "
+            "of them names T-221, T-222, #689, #694 or either packet. No PDF was printed; "
             "it prints from that HTML. Retain v0.2.3."
         ),
     ),
