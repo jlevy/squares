@@ -150,7 +150,7 @@ VERIFIER_TABLE = re.compile(
 #: Counts whose body a pass marked as history by hand, in prose no tool writes in a fixed
 #: form (`historical`): the first pass, on 11 October 2026, the SQUISH update sections at
 #: 155, 258, 263 and 302 and the grid prose at 308, and the pass of 19 October 2026 the
-#: intake's staging paragraph, grid sentence and packing section at 183 (T-218). Only
+#: intake's staging paragraph, grid sentence and packing section at 183 (T-220). Only
 #: their owned parts are the writer's.
 HAND_MARKED = frozenset({155, 183, 258, 263, 302, 308})
 
@@ -169,7 +169,7 @@ class Prose:
     #: here, where its review asked the record to say so (T-160's RD-1, RD-5 and RD-7).
     lineage: str = ""
     #: Whether `devtools.check_half_angle_area`, the third exact route, decided the
-    #: certificate too. T-218's replay ran the two maintained routes only, so its record
+    #: certificate too. T-220's replay ran the two maintained routes only, so its record
     #: says no third route decided it rather than that one did.
     third_route: bool = True
 
@@ -566,7 +566,7 @@ RESULTS: dict[str, Prose] = {
             "re-implemented."
         ),
     ),
-    "T-218": Prose(
+    "T-220": Prose(
         author="Evan Daniel",
         reported="on [jlevy/squares#680](https://github.com/jlevy/squares/issues/680)",
         producer_route=False,
@@ -844,7 +844,7 @@ CREDITS: dict[int, Credit] = {
     ),
     # Evan Daniel's packing from his basin explorer, which started from Francisco Couzo's
     # n = 182 packing as this register's witness held it; the crossover mates were not
-    # logged (issue 680, T-218). The register's seed is acknowledged in the bibliography's
+    # logged (issue 680, T-220). The register's seed is acknowledged in the bibliography's
     # credit only, as no packing of the project's is in the lineage.
     183: Credit(
         (DANIEL,),

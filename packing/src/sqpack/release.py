@@ -91,7 +91,7 @@ PUBLICATION_HISTORY = (
         version="v0.7.36",
         first_published="October 20, 2026",
         result_scope=(
-            "Register Evan Daniel's sub-grid n183 certificate (T-218), adopt it as the "
+            "Register Evan Daniel's sub-grid n183 certificate (T-220), adopt it as the "
             "n183 house and draw its regularized view."
         ),
     ),
@@ -489,7 +489,7 @@ INFOGRAPHIC_HISTORY = (
         version="v0.6.4",
         first_published="October 20, 2026",
         result_scope=(
-            "Redraw both atlas posters with Evan Daniel's n183 packing (T-218), which "
+            "Redraw both atlas posters with Evan Daniel's n183 packing (T-220), which "
             "takes 183 off the 14 x 14 grid."
         ),
     ),
@@ -1031,7 +1031,7 @@ RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
         version="v0.7.36",
         impact="patch",
         reason=(
-            "Register Evan Daniel's sub-grid n183 certificate (T-218), adopt it as the "
+            "Register Evan Daniel's sub-grid n183 certificate (T-220), adopt it as the "
             "n183 house and draw its regularized view."
         ),
     ),
@@ -1048,7 +1048,7 @@ RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
         version="v0.6.4",
         impact="patch",
         reason=(
-            "Redraw both atlas posters with Evan Daniel's n183 packing (T-218), which "
+            "Redraw both atlas posters with Evan Daniel's n183 packing (T-220), which "
             "takes 183 off the 14 x 14 grid."
         ),
     ),
@@ -1642,10 +1642,10 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "papers/n11-threshold-bound-review.pdf",
         ),
         reason=(
-            "For PR687 (T-218 at n = 183) against main 926cd764, source review of both "
+            "For PR687 (T-220 at n = 183) against main 926cd764, source review of both "
             "reviews' HTML, Markdown and PDF producers: each reads results.yaml only "
             "through paper_figures.ladder_records, which selects the n11 ladder rungs "
-            "LADDER_RUNGS names and holds them to LADDER_DIGEST; T-218 is an added "
+            "LADDER_RUNGS names and holds them to LADDER_DIGEST; T-220 is an added "
             "n183 entry outside that ladder, and no ladder row changes. The house reader, "
             "house writer and house-source changes are not called by these producers. "
             "Manuscripts, figures and publication metadata are unchanged. Retain v0.1.7 "
@@ -1668,11 +1668,11 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "papers/square-packing-methods-survey.pdf",
         ),
         reason=(
-            "For PR687 (T-218 at n = 183) against main 926cd764, source review of the "
+            "For PR687 (T-220 at n = 183) against main 926cd764, source review of the "
             "survey's HTML, Markdown and PDF producers: result requests, source coverage "
             "and results are citation targets whose existence the producer checks; "
             "their bodies are not inlined, and every cited path remains present. The "
-            "added #680 request, n183 coverage entry and T-218 entry are not cited by the "
+            "added #680 request, n183 coverage entry and T-220 entry are not cited by the "
             "survey. The house reader, writer and source changes do not enter its "
             "output. Manuscript, renderer and publication metadata are unchanged. Retain "
             "v0.2.3; no render, PDF redraw or artifact byte identity is claimed."

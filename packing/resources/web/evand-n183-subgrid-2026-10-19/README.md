@@ -169,7 +169,7 @@ families.
 
 The review proposed V3/C3 for the primary finite upper bound once the actual result
 cited registered confirming evidence and the complete deciding and premise metadata.
-The registration does so: [T-218](../../../frontier/RESULTS.md) cites the reported
+The registration does so: [T-220](../../../frontier/RESULTS.md) cites the reported
 evidence `E-evand-680-n183-report` and the confirming replay
 `E-evand-680-n183-primary-exact-feasibility`, at V3/C3, with S3 endorsed by the review.
 Regularized-certificate replay and source-checker execution remain separate optional

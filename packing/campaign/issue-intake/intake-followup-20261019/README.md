@@ -51,7 +51,7 @@ source claims.
 | --- | --- | --- |
 | Primary certificate replay, both maintained exact routes, duplicate-square and outside-container controls | **think-1hmn** | Complete: 34.87 s process wall, 30.55 route CPU-s, 99,918 pair decisions; [batch record](n183-primary-replay.json) and the packet’s native receipt |
 | Independent mathematical review, with a replay addendum | **think-glg8** | Accepted: [mapped review](../../../../docs/project/reviews/review-2026-10-19-evand-n183-subgrid.md); M1 and M2 dispositioned, M3 and M4 kept as limits |
-| Registration at stage 3 and stage 4 | **think-xp0o** | T-218, `V3`/`C3`/`S3`, citing the report and the confirming replay |
+| Registration at stage 3 and stage 4 | **think-xp0o** | T-220, `V3`/`C3`/`S3`, citing the report and the confirming replay |
 | House adoption and both strong generators | **think-jh4w** | Adopted at 183 on 19 October 2026 in the same pull request; both strong generators decided the new witness |
 
 The replay ran the maintained `devtools.upper_bound_reports` route on the original

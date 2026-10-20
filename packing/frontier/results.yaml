@@ -29482,7 +29482,7 @@ results:
       under OR-18; the adapted verifier archive inside it is pinned by digest and not
       opened.
 
-  - id: T-218
+  - id: T-220
     kind: upper-bound
     registered: '2026-10-19'
     headline: Daniel's finite sub-grid upper bound for 183 squares, after Couzo's n182 packing
@@ -29537,7 +29537,7 @@ results:
         completed primary replay. No geometry rerun by the reviewer.
       verdict: accepted
       covers:
-      - T-218
+      - T-220
     notes: |-
       V3/C3 derive from the cited complete retained primary replay; the
       accepted mathematical review read its receipts without rerunning geometry. The two maintained
@@ -30180,7 +30180,7 @@ regularized_drawings:
         max_turn_deg: 0.0
       view: packing/atlas/known-best/regularized/n-182-regularized.yaml.gz
     - n: 183
-      of: T-218
+      of: T-220
       by: project
       method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
       modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]

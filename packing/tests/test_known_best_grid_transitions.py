@@ -86,7 +86,7 @@ def test_retained_thresholds_include_the_noninteger_n211_before_the_grid_suffix(
     # The last threshold is 309 since the house adoption of 11 October 2026 (think-fvz4):
     # T-141's tilted n = 308 replaced the grid there, as de Winter's n = 211 did at 211.
     # Row 14's is 184 since the adoption of 19 October 2026 (think-jh4w): Evan Daniel's
-    # tilted n = 183 (T-218) replaced the 14 x 14 grid there.
+    # tilted n = 183 (T-220) replaced the 14 x 14 grid there.
     assert [item.first_grid_n for item in found] == [
         1,
         2,

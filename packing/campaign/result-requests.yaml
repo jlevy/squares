@@ -12090,7 +12090,7 @@ issues:
     state: open
     kind: result-report
     triage: done
-    summary: 'Evan Daniel''s original n183 certificate is registered as T-218, confirmed by a complete
+    summary: 'Evan Daniel''s original n183 certificate is registered as T-220, confirmed by a complete
       replay here and an accepted mathematical review, and adopted as the n183 house on 2026-10-19,
       regularized by both strong generators in the same pull request. The drawn view is this
       project''s run of Evan Daniel''s regularizer at the same side; the source''s own regularized
@@ -12103,7 +12103,7 @@ issues:
       source: body
       bead: think-xp0o
       register:
-      - T-218
+      - T-220
       evidence:
       - E-evand-680-n183-report
       - E-evand-680-n183-primary-exact-feasibility
@@ -12127,5 +12127,5 @@ issues:
       mathematical review support finite feasibility only. The regularized endpoint and the stronger numerical, lineage and
       priority claims remain source assertions. The 19 October posted interim reply reports completed local original-certificate
       replay and mathematical review, while registration is unlanded, undeployed and its result number
-      provisional. It names no T-218 and makes no published-registration claim; house adoption and
+      provisional. It names no T-220 and makes no published-registration claim; house adoption and
       regularized endpoint remain separate. Exact posted bodies are retained in packing/campaign/issue-intake/intake-followup-20261019/issue-680-replies.json.'

@@ -199,7 +199,7 @@ class Pending:
 #: waits with its regularization runs, never apart from them
 #: (`default_drawings.deferral_problems`). The pull request that adopts a count takes it
 #: off, as the adoption of 19 October 2026 (think-jh4w) took 183 off once it adopted
-#: Evan Daniel's original certificate there (T-218).
+#: Evan Daniel's original certificate there (T-220).
 PENDING_ADOPTION: dict[int, Pending] = {
     **{
         n: Pending(house="T-174", bead=ADOPTION_BEAD, why=NEXT_PULL_REQUEST)

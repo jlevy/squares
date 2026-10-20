@@ -110,7 +110,7 @@ GOLDEN_SOURCE_KINDS: dict[str, dict[str, int]] = {
         "packet-derived-facts": 7,
     },
     # 176 moved from Kingbird to SQUISH's issue 500 packet on 12 October 2026 (think-fvz4),
-    # and 183 from the grid to Evan Daniel's issue 680 packet on 19 October (T-218).
+    # and 183 from the grid to Evan Daniel's issue 680 packet on 19 October (T-220).
     "n=1..200": {
         "exact-grid": 113,
         "kingbird-derived-facts": 51,
@@ -121,7 +121,7 @@ GOLDEN_SOURCE_KINDS: dict[str, dict[str, int]] = {
     # did 264 (from Kingbird) in the pass for issue 528 (think-cq95), and 204 (from
     # Kingbird) on 15 October, to Daniil Ostashev's issue 562 packet (T-162), and 29 (from
     # Kingbird) on 17 October, to PR #622's packet (T-195), and 183 (from the grid) on 19
-    # October, to Evan Daniel's issue 680 packet (T-218, think-jh4w).
+    # October, to Evan Daniel's issue 680 packet (T-220, think-jh4w).
     "n=1..324": {
         "exact-grid": 174,
         "kingbird-derived-facts": 75,
@@ -2153,7 +2153,7 @@ def test_poster_packing_credits_name_every_retained_construction_author_and_sour
     # October compositions and records and 13 October merged bands, or PingYou Ltd's
     # n = 146 refinement: two sources fewer, and no new name.
     # T-174's 37-count adoption consolidates ten source keys while retaining every
-    # construction credit. T-195 adds one source at n = 29, and T-218 one at n = 183,
+    # construction credit. T-195 adds one source at n = 29, and T-220 one at n = 183,
     # Evan Daniel's issue 680 packet, with no new name.
     assert len(expected_names) == 26
     assert len(expected_sources) == 18
@@ -3127,7 +3127,7 @@ def test_the_poster_badges_every_perfect_square_and_counts_them_in_its_legend() 
     assert solid_rigid == sorted([k * k for k in range(1, 19)] + [5, 11, 28, 40])
     assert set(solid_rigid) >= {121, 144, 169, 196, 225, 256, 289, 324}
 
-    # The poster was redrawn at v0.6.4 on 19 October 2026 (T-218 at 183, think-jh4w), from
+    # The poster was redrawn at v0.6.4 on 19 October 2026 (T-220 at 183, think-jh4w), from
     # the current records: T-174's 37 houses and T-195's at 29 are drawn as adopted.
     cases = {n: build_bound_citations.load_case(n) for n in cards}
     numeric_cases = {

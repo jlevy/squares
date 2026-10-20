@@ -534,7 +534,7 @@ for the 35 and `selection-adopt174-c.json.gz` and `selection-adopt174-c.md` for 
 261\. After it the index draws 92 views: 36 by the axis tool, 36 by Evan Daniel’s
 regularizer and 20 by the grid-slack generator’s version 1.
 
-On 19 October 2026 the adoption of Evan Daniel’s original n183 certificate (T-218,
+On 19 October 2026 the adoption of Evan Daniel’s original n183 certificate (T-220,
 think-jh4w) moved 183 from the trivial $14 \times 14$ grid to a house
 $4.20 \times 10^{-4}$ below it, whose house drawing has 21 light, 51 uneven and no
 near-axis squares.

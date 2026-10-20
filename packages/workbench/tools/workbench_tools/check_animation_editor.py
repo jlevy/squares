@@ -96,7 +96,7 @@ def check(page_path: Path, screenshots: Path | None = None) -> str:
         # thirteenth is 308 -> 309 since the house adoption of 11 October 2026 (think-fvz4):
         # T-141's tilted n = 308 replaced the 18 x 18 grid's fill, so the grid resumes at 309.
         # The fourteenth is 183 -> 184 since the adoption of 19 October 2026 (think-jh4w):
-        # Evan Daniel's tilted n = 183 (T-218) replaced the 14 x 14 grid's fill, so the grid
+        # Evan Daniel's tilted n = 183 (T-220) replaced the 14 x 14 grid's fill, so the grid
         # resumes at 184.
         def grid_fill_range(n: int) -> bool:
             k = math.isqrt(n) + 1  # ceil(sqrt(n + 1))

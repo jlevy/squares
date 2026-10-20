@@ -76,9 +76,9 @@ def test_n183_original_certificate_is_read_exactly_and_adopted_with_its_runs(
     latest: dict[int, str],
 ) -> None:
     """The adoption of 19 October 2026 (think-jh4w) moved 183 from the trivial grid to
-    Evan Daniel's original certificate (T-218), took it off the staging list, and ran
+    Evan Daniel's original certificate (T-220), took it off the staging list, and ran
     both strong generators on its witness in the same pull request, deferring nothing."""
-    entry = next(row for row in select.load_results() if row["id"] == "T-218")
+    entry = next(row for row in select.load_results() if row["id"] == "T-220")
     unread: list[str] = []
     selected = select.select([entry], select.load_evidence(), unread=unread)
     assert unread == []
@@ -87,8 +87,8 @@ def test_n183_original_certificate_is_read_exactly_and_adopted_with_its_runs(
     side = Fraction(13999580178736252502081470897571, 10**30)
     assert selection.house is None
     assert selection.case.verified == side < 14
-    assert [c.result for c in selection.candidates] == ["T-218"]
-    assert houses.ADOPTED[183] == "T-218"
+    assert [c.result for c in selection.candidates] == ["T-220"]
+    assert houses.ADOPTED[183] == "T-220"
     assert houses.adopted_on(183) == "2026-10-19"
     assert houses.side(183) == side
     assert 183 not in select.PENDING_ADOPTION
@@ -107,7 +107,7 @@ def test_n183_original_certificate_is_read_exactly_and_adopted_with_its_runs(
     )
     house = replayed[183].house
     assert house is not None
-    assert house.result == "T-218"
+    assert house.result == "T-220"
     assert house.side == side
     assert house.report_evidence == ("E-evand-680-n183-report",)
     assert house.confirming_evidence == ("E-evand-680-n183-primary-exact-feasibility",)
@@ -1305,7 +1305,7 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
     assert historical["outcome"] == "PASS"
     assert len(historical["houses"]) == 65
     assert "29" not in historical["houses"]
-    # The historical receipt predates the adoption of 19 October 2026 at 183 (T-218).
+    # The historical receipt predates the adoption of 19 October 2026 at 183 (T-220).
     assert "183" not in historical["houses"]
     assert historical["houses"] == {
         str(n): result for n, result in houses.ADOPTED.items() if n not in (29, 183)

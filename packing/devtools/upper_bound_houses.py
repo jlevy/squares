@@ -309,7 +309,7 @@ def _sources() -> dict[str, Source]:
         packet_source("T-188", "couzo-verified-bounds-2026-10-14"),
         packet_source("T-190", "couzo-n237-2026-10-15"),
         packet_source("T-195", "pingyou-pr622-certificate-2026-10-15"),
-        packet_source("T-218", "evand-n183-subgrid-2026-10-19"),
+        packet_source("T-220", "evand-n183-subgrid-2026-10-19"),
     ]
     found = {source.result: source for source in sources}
     # Two results may read one packet (T-181 and T-182 both read issue 586's), so the
@@ -334,7 +334,7 @@ def _sources() -> dict[str, Source]:
 #: 105, 108, 110, 127, 130 to 132, 155, 172, 179 to 182, 206, 208 to 210, 228, 238 to 240,
 #: 261, 263, 268 to 270, 272, 273, 297 and 305 to 308. The same day adopted PR 622's
 #: certificate (T-195) at 29. The pass of 19 October 2026 adopted Evan Daniel's original
-#: certificate of issue 680 (T-218) at 183.
+#: certificate of issue 680 (T-220) at 183.
 ADOPTED: dict[int, str] = {
     29: "T-195",
     68: "T-174",
@@ -365,7 +365,7 @@ ADOPTED: dict[int, str] = {
     180: "T-174",
     181: "T-174",
     182: "T-174",
-    183: "T-218",
+    183: "T-220",
     204: "T-186",
     206: "T-174",
     207: "T-173",
@@ -434,7 +434,7 @@ NUMBERS = tuple(sorted(ADOPTED))
 #: writer, and 236 by Evan Daniel's issue 659, whose import adopts it. The same day
 #: adopted PR 622's certificate (T-195) at 29 from T-155, the case's replay of the
 #: Kingbird catalogue's packing, which no pass had adopted before. The pass of 19 October
-#: 2026 adopted Evan Daniel's original certificate of issue 680 (T-218) at 183 from the
+#: 2026 adopted Evan Daniel's original certificate of issue 680 (T-220) at 183 from the
 #: case's trivial 14 x 14 grid, which no pass had adopted before.
 #: A count a pass names keeps its place in the earlier passes' sets, which their archives
 #: hold; it was adopted on the latest day that names it.
