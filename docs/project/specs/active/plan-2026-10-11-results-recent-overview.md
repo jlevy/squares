@@ -1,6 +1,6 @@
 # Feature: Recent Results on the Results Page
 
-**Date:** 2026-10-11, revised 2026-10-12 and 2026-10-14 (three times)
+**Date:** 2026-10-11, revised 2026-10-12, 2026-10-14 (three times) and 2026-10-20
 
 **Author:** Claude, lane W of the 2026-10-11 intake pass, bead `think-2z22`
 
@@ -214,40 +214,55 @@ unchanged.
 
 ## Byte Cost
 
-Measured on the register at the merge with `main` (`37e6757ed`), 160 results:
+Measured on the register at 217 results, after the merge of `main` at `b16ddeb0a` on 19
+October (#514’s review D):
 
 | Measure | Bytes |
 | --- | ---: |
-| The seven days, 48 results over 7 to 14 October | 15,452 |
-| The weekly rollup, 68 results in the four weeks before | 10,439 |
-| Both sections | 25,891 |
+| The seven days, 71 results over 12 to 19 October | 22,157 |
+| The weekly rollup, 97 results in the four weeks before | 15,701 |
+| Both sections | 37,858 |
 | Ceiling for both (`tests/test_results_rollup.py`, `ROLLUP_BYTES`) | 48,000 |
-| `results.html` on this branch | 924,981 |
-| Page ceiling (`site_urls.PAGE_BUDGET_EXCEPTIONS`, `test_overview.PAGE_CEILINGS`) | 1,150,000 |
+| `results.html` on `main`, without the sections | 1,157,668 |
+| `results.html` on this branch | 1,203,554 |
+| Page ceiling (`site_urls.PAGE_BUDGET_EXCEPTIONS`, `test_overview.PAGE_CEILINGS`) | 1,250,000 |
 
-An entry of the seven days costs about 320 bytes: its id link, headline, cases, rungs
-and a linked credit.
-The weekly rollup costs about 30 bytes an id and 250 a line, as before.
-The busiest eight days so far, to 6 October, took in 76 results, about 24,300 bytes at
-that rate, so the sections’ ceiling of 48,000 is about 1.3 times the largest the record
-has given and 1.9 times the current size.
+The branch costs 45,886 bytes at 217 results, of which 37,858 are the two sections and
+5,208 the rows’ `data-added`. An entry of the seven days costs about 312 bytes with its
+share of the day’s heading: its id link, headline, cases, rungs and a linked credit.
+A line of the weekly rollup costs about 520 bytes with its ids.
+
+The sections are at 79% of their own ceiling.
+About 32 more arrivals in one seven-day window than this one holds would fail
+`test_the_overview_stays_brief`; single days have brought 30 (14 October) and 23 (19
+October). Past that ceiling the overview is becoming a second table, and the remedy is a
+shorter entry, not a higher number.
 
 The page’s ceiling was 950,000, set on 11 October at 146 results.
-At 160 results the page sat about 25,000 bytes under it, room for six more, while the 14
-October intake registers about thirty (#514’s review A, finding A2). A row of the table
-is most of a result’s cost: 3,447 bytes on average and 4,660 at the 90th percentile,
-against about 320 for its entry in the seven days, which only a recent result has.
-The new sections are 26 KB, about 3% of the page, so trimming them could not buy the
-room; the ceiling is raised to 1,150,000 instead, below the 2,000,000 hard limit every
-page is held to. `test_the_results_page_has_room_through_two_hundred_results` holds the
-page through a fixed count, `RESULTS_ROOM_THROUGH = 200`, 160 on 14 October and 40 more:
-each result past the register’s count costs the 90th-percentile row and an average
-entry, so on 14 October 924,981 + 40 × (4,660 + 281) = 1,122,621 bytes.
+At 160 results on 14 October the page, then 924,981 bytes, sat about 25,000 under it,
+while that day’s intake registered about thirty (#514’s review A, finding A2), and this
+branch raised it to 1,150,000. `main` re-selected it at 1,250,000 on 18 October, on
+three-run desktop/mobile, light/dark and no-JS checks of the table alone at 212 results
+and 1,141,207 bytes.
+That timing predates the two sections, and no timing has been measured on the page with
+them.
+
+At 217 results the branch halves the page’s headroom, from 92,332 bytes to 46,446. A row
+of the table is most of a result’s cost: 3,423 bytes on average and 4,603 at the 90th
+percentile, against an average of 291 for its entry in the seven days, which only a
+recent result has.
+`test_the_results_page_has_room_through_its_room_count` holds the page
+through a fixed count, `RESULTS_ROOM_THROUGH = 225`, 217 on 19 October and 8 more: each
+result past the register’s count costs the 90th-percentile row and an average entry, so
+1,203,554 + 8 × (4,603 + 291) = 1,242,706 bytes, and the room is about 9 results.
+The count was 200 on 14 October, under the 1,150,000 ceiling.
 The room shrinks as results are registered, and the test fails only when the page could
-not reach 200 at today’s cost; measured from the page alone it would have slid up with
-every registration and failed the next intake about 190 KB under the ceiling (#514’s
-review B, finding B1). At the average row the ceiling holds about 220 results.
-Past it, the remedy is a lighter table row, which every result pays for.
+not reach the count at today’s cost; measured from the page alone it would slide up with
+every registration (#514’s review B, finding B1). The intake that passes the count
+re-measures the page, its timing included, and either lightens the table or moves the
+ceiling as a measured choice (`think-v1qe`). The pending upper bounds of #675 and #678,
+up to about 85 and 79 rows, do not fit under 1,250,000 with or without this branch, so
+that choice comes with them at the latest.
 
 The filter adds `data-added` to each row (about 25 bytes), one option to Added on for
 each day something arrived, and the Added since control.
@@ -270,8 +285,8 @@ each day something arrived, and the Added since control.
   register and the line scan must agree on, and the live register read from the tree
   alone: every entry carries `landed`, none before its registration.
 - `tests/test_overview.py` and `tests/test_site_project_tallies.py` hold the bar’s
-  controls and every row’s facets, `added` included, and the page’s room through 200
-  results.
+  controls and every row’s facets, `added` included, and the page’s room through
+  `RESULTS_ROOM_THROUGH`, 225 results.
 - `tests/node/overview_table/` tests the `added-age`, `added` and `added-since` presets,
   their composition with Max age, the reader’s-day and UTC-day measurements, and the
   homepage link’s forwarding.
@@ -293,8 +308,12 @@ each day something arrived, and the Added since control.
   screenshots are the layout evidence (`think-w5eo`).
 - Contributor-profile links wait for PR #490 (`think-pose`).
 - No copy of the overview on the homepage (`think-d1ip`), and no feed.
-- The site’s release edition for this change is the owner’s to cut
-  (`check_release_impact` names `site`).
+- No timing measured on the results page with the two sections, and about 9 results of
+  room under its 1,250,000-byte ceiling, with the sections at 79% of their own: both
+  wait on `think-v1qe`, which owns the runway.
+- The site edition is cut on this branch as v0.8.0 (`78c37c335`), dated 20 October; if
+  the merge or its deployment slips past that UTC day, a follow-up corrects
+  `first_published`.
 
 ## References
 

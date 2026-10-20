@@ -85,8 +85,14 @@ DAY_LINK = re.compile(
 #: rate, and the four-week rollup has held 91 (11,605), so this is about 1.4 times the
 #: largest the record has given. Grouped by the day each result reached the site
 #: (`landed`), on the register at the merge with `main` on 14 October (`37e6757ed`), the
-#: two measure 25,891: 15,452 for the 48 results that arrived over 7-14 October and
-#: 10,439 for 68 in the weeks before, so the ceiling is 1.9 times that.
+#: two measured 25,891: 15,452 for the 48 results that arrived over 7-14 October and
+#: 10,439 for 68 in the weeks before. At 217 results on 19 October they measure 37,858,
+#: 79% of the ceiling: 22,157 for the 71 results that arrived over 12-19 October, about
+#: 312 bytes each, and 15,701 for 97 in the four weeks before. So a window holding about
+#: 32 more arrivals than that one fails this test, and single days have brought 30 (14
+#: October) and 23 (19 October). The page's own ceiling binds first, at about 9 results,
+#: but the intake that moves it (`think-v1qe`) may carry more than 32, and then meets this
+#: limit too (#514's review D, finding D3).
 #: Past it the overview is becoming a second table, and the remedy is a shorter entry,
 #: not a higher number: the page's own ceiling (`test_overview.PAGE_CEILINGS`) is shared
 #: with every row of the table.
