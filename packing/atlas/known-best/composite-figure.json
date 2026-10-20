@@ -1772,7 +1772,7 @@
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
         "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"9296812072643584234724477346638423535447122960279345716426597248026952628315180667853586707468720824894321429346719565979154112394972516303375222710855174456225157628403440320371616633286675274712674661175239707186174137008844970322355579194107487018099253642045085283732525025286559935/1056600571100771183749261187443033325390495084119727074531770304234311920295383017609296645477449604555608283511875119932868401074842185927030175152572735402624973730937773037226920838854442380447085914701328645860460427517009221703698952120142237130389011811364286948629355167571657144","minimal_polynomial":null,"state":"minimal-polynomial"},
-        "lower": {"correction":false,"display":"s(68) ≥ 8.510000","evidence":["E-wand125-rectangle-2026-10-01-source-replay"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"8.51"},
+        "lower": {"correction":false,"display":"s(68) ≥ 8.530000","evidence":["E-wand125-fine-net-n68-853-sqverify-fast-replay"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"8.53"},
         "n": 68,
         "optimality": {"provenance":"frontier","status":"open"},
         "rigidity": {
@@ -2195,7 +2195,7 @@
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
         "exactness": {"degree":1,"degree_provenance":"frontier","degree_recorded_upstream":true,"exact_form":"643848336672378144388330971905263096473299811191218206394905407404656989308393758025217071610231666737538564016203250451453535531735003610521318534480388660376021020379809831875350191184275109547523803708422931841876965601518064883643879798749343690306770736088274942389043353555402079/66390252153249964848490970128851986115452292249127039433602332899858427040521450875992257319377684357754397985211363615917122487043330833624519279861420299203763062813702520502655643439486627578101219474036231278819400620924130776903984784590846522947312025217853673052062616008141844","minimal_polynomial":null,"state":"minimal-polynomial"},
-        "lower": {"correction":false,"display":"s(84) ≥ 9.411000","evidence":["E-n084-wand125-mixed-9411-sqverify-fast-replay"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"9.411"},
+        "lower": {"correction":false,"display":"s(84) ≥ 9.422500","evidence":["E-wand125-fine-net-n84-94225-sqverify-fast-replay"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"9.4225"},
         "n": 84,
         "optimality": {"provenance":"frontier","status":"open"},
         "rigidity": {
@@ -2221,7 +2221,7 @@
       {
         "badges": [{"glyph":"=","meaning":"exact value known","style":"solid"}],
         "exactness": {"degree":2,"degree_provenance":"derived","degree_recorded_upstream":false,"exact_form":"(11/2) + 3 sqrt(2)","minimal_polynomial":"4*s**2 - 44*s + 49 = 0","state":"closed-form"},
-        "lower": {"correction":false,"display":"s(85) ≥ 9.460000","evidence":["E-n085-wand125-mixed-946-source-replay","E-n085-wand125-mixed-946-sqverify-fast-replay"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"9.46"},
+        "lower": {"correction":false,"display":"s(85) ≥ 9.475000","evidence":["E-wand125-fine-net-n85-9475-sqverify-fast-replay"],"first_proved_here":false,"provenance":"frontier","recent_result":true,"shown":true,"value":"9.475"},
         "n": 85,
         "optimality": {"provenance":"frontier","status":"open"},
         "rigidity": {

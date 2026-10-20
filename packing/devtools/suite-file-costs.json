@@ -540,6 +540,7 @@
     "packing/tests/test_regression_diagnostics.py": 0.012,
     "packing/tests/test_regularize_axis_components.py": 0.339,
     "packing/tests/test_release.py": 0.689,
+    "packing/tests/test_release_components.py": 0.01,
     "packing/tests/test_release_pin.py": 0.146,
     "packing/tests/test_render_angle_hue_registry.py": 0.006,
     "packing/tests/test_render_colors.py": 2.935,
@@ -651,6 +652,7 @@
     "packing/tests/test_squish_upper_bound_packets.py": 23.232,
     "packing/tests/test_squish_upper_bound_receipts.py": 3.216,
     "packing/tests/test_sqverify_fast_census.py": 9.778,
+    "packing/tests/test_sqverify_fast_census_reporting.py": 0.111,
     "packing/tests/test_stage_evand_bentz4_lean.py": 2.172,
     "packing/tests/test_stage_evand_bentz_lean.py": 1.239,
     "packing/tests/test_stamp_landed.py": 0.645,
@@ -965,6 +967,34 @@
           "report": "packing/devtools/suite-file-cost-admissions/formal-proof-rubric-645-2026-10-16.json",
           "provenance": {},
           "tests": 47
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_sqverify_fast_census_reporting.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/fine-net-reporting-446-2026-10-19.json",
+          "provenance": {},
+          "tests": 7
+        }
+      ]
+    },
+    {
+      "method": "successful-unsharded-unfiltered-whole-module-local-reports",
+      "aggregation": "per-file-geometric-mean",
+      "files": [
+        "packing/tests/test_release_components.py"
+      ],
+      "reports": [
+        {
+          "report": "packing/devtools/suite-file-cost-admissions/release-components-446-2026-10-19.json",
+          "provenance": {},
+          "tests": 6
         }
       ]
     }

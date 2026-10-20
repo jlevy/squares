@@ -1,15 +1,19 @@
 # Reported Fine-Net Lower Bounds at 18 Counts, 16 October
 
-Eighteen commits of 16 October to wand125/square-packing, one per certificate, add check2
-measure certificates at n = 38, 40, 41, 43, 51, 68, 84 to 86, 88 to 92 and 106 to 110.
-The author reports them in a comment on
+Eighteen commits of 16 October to wand125/square-packing, one per certificate, add
+check2 measure certificates at n = 38, 40, 41, 43, 51, 68, 84 to 86, 88 to 92 and 106 to
+110\. The author reports them in a comment on
 [jlevy/squares#446](https://github.com/jlevy/squares/issues/446#issuecomment-6210736972)
 (created 2026-10-16T07:49:56Z, edited 09:00:31Z), with three of 13 October that the
 record already holds (n = 37, 39 and 44: T-178, T-176 and T-177, from the
-[13 October packet](../wand125-fine-net-n37-n39-n44-2026-10-13/README.md)).
-Each bound was above both lower lanes of its case record at registration. The n108
-certificate now has an accepted retained native replay and certificate-specific reviews;
-its case adopts $531/50$. The other 17 remain reported at V0/C0 under
+[13 October packet](../wand125-fine-net-n37-n39-n44-2026-10-13/README.md)). Each bound
+was above both lower lanes of its case record at registration.
+The n108 certificate has an accepted retained native replay and certificate-specific
+reviews; its case adopts $531/50$. The accepted Mac checkpoints for n68, n84 and n85 are
+now retained with mapped mathematical reviews and prepared V3/C3 records, confirmed by
+re-implementation sharing the producer’s crate apart from the declared-net readers.
+Their exact audits decide premises and saved poses only.
+The other 14 remain reported at V0/C0 under
 [stage 4](../../../campaign/result-import.md#stage-4-validate).
 
 The five at n = 38 to 51 are on the 2,073-direction net of T-132, T-142 and T-143 (core
@@ -41,18 +45,19 @@ measure, checked like any other.
 | 108 | [`mixed_n108_L1062`](https://github.com/wand125/square-packing/tree/6af3c00991c937d40ac0fe867fe049b8e9f3bf2d/problems/square-lower-bounds/certificates/mixed_n108_L1062) | $s(108) \ge 531/50$ (lifted) | `6af3c00`, 2026-10-16T07:53:23Z | 356,853, `187c71b5…3522` | 823 | `5ce2449f…e1a9` | 201 of step 83/40000, core 9977/10000 |
 | 110 | [`mixed_n110_L1073`](https://github.com/wand125/square-packing/tree/718887cfaa8727cc75108c5924fa1330df4fa098/problems/square-lower-bounds/certificates/mixed_n110_L1073) | $s(110) \ge 1073/100$ (lifted) | `718887c`, 2026-10-16T07:53:40Z | 346,089, `3e4021e2…1212` | 872 | `53026439…05bb` | 201 of step 83/40000, core 9977/10000 |
 
-
 The packet is pinned at `718887cfaa8727cc75108c5924fa1330df4fa098`, the last of the 18
-commits, which holds all 18 directories. Each directory is the same Git tree from the
-commit that adds it through the repository's head when read, `aaed7d5` (2026-10-17), whose
-later commits change the cubes problem, a rectangle theorem, the closed-form layer and the
-site, and not these directories or their licence. Retrieved 2026-10-17T17:58Z.
+commits, which holds all 18 directories.
+Each directory is the same Git tree from the commit that adds it through the
+repository’s head when read, `aaed7d5` (2026-10-17), whose later commits change the
+cubes problem, a rectangle theorem, the closed-form layer and the site, and not these
+directories or their licence.
+Retrieved 2026-10-17T17:58Z.
 
 ## The Standing Bounds
 
-Each claim against the case record's lower lanes on `main` at `804eff369`. At 106 to 110
-the reported lane is wand125's closed form (T-180) and the verified lane Karakuş's strip
-bound; the bundles' own READMEs compare against the latter.
+Each claim against the case record’s lower lanes on `main` at `804eff369`. At 106 to 110
+the reported lane is wand125’s closed form (T-180) and the verified lane Karakuş’s strip
+bound; the bundles’ own READMEs compare against the latter.
 
 | n | Claim | Reported lower lane | Verified lower lane | Gain over the reported lane | Reported upper bound |
 | ---: | --- | --- | --- | --- | --- |
@@ -75,7 +80,8 @@ bound; the bundles' own READMEs compare against the latter.
 | 108 | $531/50 = 10.62$ | T-180: 10.484093855851… | T-083, T-084: 10.4121138007… ($1/2 + \sqrt{n - \lfloor\sqrt n\rfloor + 1/4}$) | 0.1359 | 10.904821… |
 | 110 | $1073/100 = 10.73$ | T-180: 10.600000000000… | T-083, T-084: 10.5124921972… ($1/2 + \sqrt{n - \lfloor\sqrt n\rfloor + 1/4}$) | $13/100$ | 10.996783… |
 
-No count is settled: the least gap to an upper bound is n = 43's $7 - 2777/400 = 23/400$.
+No count is settled: the least gap to an upper bound is n = 43’s
+$7 - 2777/400 = 23/400$.
 
 ## What Is Retained
 
@@ -86,20 +92,22 @@ alone.
   wrote them from its [declaration](acquisition/declaration.json): the
   [acquisition record](acquisition/sources.json) and the
   [subtree manifest](acquisition/upstream-subtree.sha256) give the size and SHA-256 of
-  all 199 files in scope, and `--check` re-derives them. Retained byte for byte under
+  all 199 files in scope, and `--check` re-derives them.
+  Retained byte for byte under
   [`square-packing/`](square-packing/problems/square-lower-bounds/certificates/): each
-  directory's `README.md`, `ASSET.json`, `bundle.json` and `files-sha256.json`, and the
-  six lifted certificates' own `provenance/search-notes.md`. Pinned by digest only, with
+  directory’s `README.md`, `ASSET.json`, `bundle.json` and `files-sha256.json`, and the
+  six lifted certificates’ own `provenance/search-notes.md`. Pinned by digest only, with
   their reasons in the record: the licence, the other twelve `search-notes.md`, and each
   `check2/src/` document, all byte-identical to copies earlier packets retain or, for
-  `SOUNDNESS.md` and `INDEPENDENCE.md`, this repository's own files of 3 October.
-- **The release assets' data.** Each directory's data is a tarball in release
-  `square-lower-bounds-v1`, which its `ASSET.json` names and says unpacks in place beside
-  the documents. `devtools.fine_net_followup retain` refused each asset unless its size
-  and SHA-256 were the pinned ones, unpacked it safely, and copied six of its eight
-  members to [`release/`](release/certificates/) at their own paths in the asset:
-  `candidate.json` (stored as deterministic gzip, by the archive's rule for data of more
-  than 1,000 lines), `check2/receipt.json`, `check2/control.json`, the run log
+  `SOUNDNESS.md` and `INDEPENDENCE.md`, this repository’s own files of 3 October.
+- **The release assets’ data.** Each directory’s data is a tarball in release
+  `square-lower-bounds-v1`, which its `ASSET.json` names and says unpacks in place
+  beside the documents.
+  `devtools.fine_net_followup retain` refused each asset unless its size and SHA-256
+  were the pinned ones, unpacked it safely, and copied six of its eight members to
+  [`release/`](release/certificates/) at their own paths in the asset: `candidate.json`
+  (stored as deterministic gzip, by the archive’s rule for data of more than 1,000
+  lines), `check2/receipt.json`, `check2/control.json`, the run log
   `check2/run.jsonl.gz` and the control log `check2/control-197_200.jsonl.gz` (both kept
   as published), and `verification/prepublication-receipt.json`. The
   [retention record](acquisition/release-assets.json) lists every member of every asset
@@ -108,42 +116,46 @@ alone.
 Two members of each asset are pinned by digest and not copied:
 
 - `check2/src/sqverify-proof-net-fe12e036c.tar.gz`, 69,540 bytes, SHA-256
-  `e495f9bf…71e81` in all 18: the source's adaptation of this repository's
-  `sqverify_fast`, the archive the 6 and 13 October packets pin by the same digest. It
-  carries no notice of its own, and it is kept out of this tree beside the crate whose
-  declared-net change was written apart from it
+  `e495f9bf…71e81` in all 18: the source’s adaptation of this repository’s
+  `sqverify_fast`, the archive the 6 and 13 October packets pin by the same digest.
+  It carries no notice of its own, and it is kept out of this tree beside the crate
+  whose declared-net change was written apart from it
   ([`sqverify_fast/INDEPENDENCE.md`](../../../sqverify_fast/INDEPENDENCE.md)). It was
   digested and not opened.
 - the sealed inner bundle `n*-check2-bundle.tar.gz` (179,240 to 347,318 bytes), whose
-  payloads repeat this directory's files; each premises receipt inventories its members.
+  payloads repeat this directory’s files; each premises receipt inventories its members.
 
-Under [`OR-18`](../../../../operating-rules.md#or-18-keep-bulk-data-out-of-git-and-never-bind-code-or-verdicts-to-a-git-commit-or-blob)
+Under
+[`OR-18`](../../../../operating-rules.md#or-18-keep-bulk-data-out-of-git-and-never-bind-code-or-verdicts-to-a-git-commit-or-blob)
 the retained set is small enough for Git: 2.38 MB in a checkout and about 2.3 MB as Git
-stores it, since the logs are compressed already. The largest file is n = 43's run log,
-0.18 MB.
+stores it, since the logs are compressed already.
+The largest file is n = 43’s run log, 0.18 MB.
 
 ## What Was Checked
 
-**Custody.** Each asset's size and SHA-256 equal its `ASSET.json` at the pin and its line
-of the release's `SHA256SUMS` (lines 447 to 464), downloaded on 2026-10-17. Each
+**Custody.** Each asset’s size and SHA-256 equal its `ASSET.json` at the pin and its
+line of the release’s `SHA256SUMS` (lines 447 to 464), downloaded on 2026-10-17. Each
 document has the Git blob its commit names.
 
 **Input premises.** `devtools.fine_net_followup premises` unpacked each asset beside the
-pinned documents and ran the maintained readers on the candidate (`receipts/premises-nN.json`).
-All 18 end `EXACT_PREMISES_HOLD`: lemma N0's premises and its last bin hold on the
-declared net, with $B(1 + D) = 25009997/25010000$ on the fine net and
-$399908091/400000000$ on the standard one; the mass is $n - 1/100000$ over positive rows
-only; one candidate digest appears throughout; and the full check2 reader holds every
-premise. Each sealed bundle holds 16 files and matches its `files-sha256.json`, and each
-directory's README differs from its sealed edition. No program of the source ran.
+pinned documents and ran the maintained readers on the candidate
+(`receipts/premises-nN.json`). All 18 end `EXACT_PREMISES_HOLD`: lemma N0’s premises and
+its last bin hold on the declared net, with $B(1 + D) = 25009997/25010000$ on the fine
+net and $399908091/400000000$ on the standard one; the mass is $n - 1/100000$ over
+positive rows only; one candidate digest appears throughout; and the full check2 reader
+holds every premise.
+Each sealed bundle holds 16 files and matches its `files-sha256.json`, and each
+directory’s README differs from its sealed edition.
+No program of the source ran.
 
-**Two reported complete runs each.** Each check2 receipt records the source's adapted
-crate (source digest `ab6e33e1…`, binary `ec04d332…`) verifying every direction, and each
-pre-publication receipt a second run of the same source on a fresh Ubuntu 24.04 machine,
-not the run the check2 receipt embeds. Each control scales every mass by $197/200$ at 32
-sampled directions and reports all 32 refused, 31 with an exact capture below the
-threshold. These are attributed author outcomes; a sampled control does not replace the
-whole-net controls the records lane requires.
+**Two reported complete runs each.** Each check2 receipt records the source’s adapted
+crate (source digest `ab6e33e1…`, binary `ec04d332…`) verifying every direction, and
+each pre-publication receipt a second run of the same source on a fresh Ubuntu 24.04
+machine, not the run the check2 receipt embeds.
+Each control scales every mass by $197/200$ at 32 sampled directions and reports all 32
+refused, 31 with an exact capture below the threshold.
+These are attributed author outcomes; a sampled control does not replace the whole-net
+controls the records lane requires.
 
 | n | check2 run: wall (s), threads | Direction CPU (s) | Nodes | Pre-publication run (s) | 197/200 control: refused, exact below 1 |
 | ---: | --- | ---: | ---: | ---: | --- |
@@ -169,27 +181,27 @@ whole-net controls the records lane requires.
 ## The Price of a Complete Replay
 
 The census route of the 6 October soundness review: `sqverify-fast` at every direction
-of the declared net, then the whole-net controls (the $99/100$ mutant at every direction,
-and the original and the near-threshold mutant at the least-bound direction), so about
-twice each source receipt's direction CPU. On this host's ratio of 0.871 to the source
-(think-w76a's eight-direction sample) that is 82.6 CPU-hours for all 18, and 94.9 if this
-host is no faster: 0.6 to 2.8 each at 68 to 110, 7.5 to 8.6 at 38, 11 to 13 at 40 and
-41, 13.8 to 15.9 at 51 and 21.7 to 25.0 at 43. Each is under the owner's 40 CPU-hour
-item cap, and the owner asked on 17 October for all 18 to run. The census reads each
-candidate from `release/`, and its receipts are kept under
+of the declared net, then the whole-net controls (the $99/100$ mutant at every
+direction, and the original and the near-threshold mutant at the least-bound direction),
+so about twice each source receipt’s direction CPU. On this host’s ratio of 0.871 to the
+source (think-w76a’s eight-direction sample) that is 82.6 CPU-hours for all 18, and 94.9
+if this host is no faster: 0.6 to 2.8 each at 68 to 110, 7.5 to 8.6 at 38, 11 to 13 at
+40 and 41, 13.8 to 15.9 at 51 and 21.7 to 25.0 at 43. Each is under the owner’s 40
+CPU-hour item cap, and the owner asked on 17 October for all 18 to run.
+The census reads each candidate from `release/`, and its receipts are kept under
 `benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-2026-10-16/`.
 
 ## Sources and Notices
 
 The nearest enclosing source notice, `problems/square-lower-bounds/LICENSE`, is MIT,
-Copyright 2026 wand125, byte-identical to the notice the FN-1 packet retains. Each
-`ASSET.json` places its tarball's data files in the directory it covers.
+Copyright 2026 wand125, byte-identical to the notice the FN-1 packet retains.
+Each `ASSET.json` places its tarball’s data files in the directory it covers.
 The nested verifier archive carries no notice of its own and is not retained.
 
 The source credits wand125 (Hiroaki Hosono), with code and formats credited to Evan
-Daniel, tokoharu and jlevy/squares; all 18 commits are authored by Hiroaki Hosono. The
-`problems/square-lower-bounds/README.md` says parts of the work were produced with AI
-assistance under human direction, and each commit names Claude Opus 5.5 as co-author.
+Daniel, tokoharu and jlevy/squares; all 18 commits are authored by Hiroaki Hosono.
+The `problems/square-lower-bounds/README.md` says parts of the work were produced with
+AI assistance under human direction, and each commit names Claude Opus 5.5 as co-author.
 
 ## Compressed Files
 
@@ -213,6 +225,9 @@ assistance under human direction, and each commit names Claude Opus 5.5 as co-au
 | `release/certificates/mixed_n90_L978/candidate.json.gz` | upstream | `f1286611356e705a7b5087b5d935dd4521842eb9` | `7c39766321cd0fceee7d5ae26292065a8e87d523ee57ca8fafae4597aa038da1` |
 | `release/certificates/mixed_n91_L97875/candidate.json.gz` | upstream | `85938a238dd17f6b68d5826e30ac8c2753a36d12` | `5a1bc0e828da11566391f19af733a531616db8c1cf3245685ad3a741f1e23f9d` |
 | `release/certificates/mixed_n92_L986/candidate.json.gz` | upstream | `c519c3c4eef5a86a881bdd9dad057fb2e16257d4` | `ef2edc690eadf1fff2779a309f726931c33e38ef007359a9567ebd3d3788b3b1` |
+| `review-mac/n68-certificate-math/audit-result.json.gz` | receipt | `930aa5b411581b27881851758b47ef5580934333` | `356589fe57947be6b20d4de4118c21206e37b0453e1215f79d804e7d943536b2` |
+| `review-mac/n84-n85-certificate-math/n84-audit-result.json.gz` | receipt | `5ffd458c2c28cffed04fae4c3a0bb5c92b7d0039` | `b47b36c0e4d85aea114315182ab494ea0bf8e0ac3ae9fb521eb5f55355365bce` |
+| `review-mac/n84-n85-certificate-math/n85-audit-result.json.gz` | receipt | `b68a7c764cdd7a4ffab16b5e5c7f7a6382990766` | `430f258400019efbf48e07117b53e5d35504d91834f17e73d5aa6e62a8a2924c` |
 
 ## Original Gzip Files
 
@@ -308,6 +323,29 @@ This affects discovery only.
 The archived README and its digest remain unchanged.
 The author question is whether the living bundle inventory can use the manifest’s
 `check2/control-197_200.jsonl.gz` filename; no author message has been sent.
+
+## Accepted n68, n84 and n85 Mac Checkpoints, 19 October
+
+The [retained audit and read log](review-mac/README.md) inventories every reviewer
+program, imported helper, PASS receipt, per-command timing file and historical source
+context. Only the three accepted census rows were merged into the existing census; the
+original eighteen reported entries and candidates and historical Linux n108 remain
+retained. The
+[packet’s census folder](../../../benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-2026-10-16/README.md)
+indexes their receipts, and the regenerated
+[Milestone B census](../../../benchmarks/measure-verifier/census-mixed/README.md) lists
+the three rows beside every other mixed certificate.
+
+The n68 capture’s outer exit remains unobserved after recovery, with native exit zero;
+its whole-net control has 197 refusals and four verified mutant directions, 46–49. Both
+n84 and n85 have observed zero outer capture, check and control exits and 201 whole-net
+refusals each. All three captures verify all 201 directions.
+Their authentic execution records preserve the distinct observations, actual Mac build,
+unavailable direction CPU and separate native-process and aggregate-command CPU
+measurements.
+
+The mapped mathematical reviews accept these exact checkpoints.
+This retention pass reran no native verifier or historical exact audit.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

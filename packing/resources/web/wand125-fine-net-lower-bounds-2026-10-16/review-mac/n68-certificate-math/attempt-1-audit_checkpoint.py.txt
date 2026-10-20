@@ -1,0 +1,291 @@
+"""Bounded exact audit of one retained rectangle-only fine-net checkpoint.
+
+Uses the maintained stdlib-only polygon integrator, never a native verifier. Accepts
+partial-refusal whole-net controls according to the maintained existential predicate;
+all other directions must be explicitly verified. Output is a local audit, not a rung.
+"""
+from __future__ import annotations
+
+import argparse
+import copy
+import gzip
+import hashlib
+import json
+import math
+import re
+import subprocess
+import sys
+import time
+import zlib
+from datetime import UTC, datetime
+from fractions import Fraction as F
+from pathlib import Path
+
+from devtools import audit_fine_net_receipt as audit
+
+require = audit.require
+
+
+def sha(data: bytes) -> str:
+    return hashlib.sha256(data).hexdigest()
+
+
+def load(path: Path):
+    return audit.read_json(path.read_bytes())
+
+
+def exact_candidate_tokens(value):
+    if isinstance(value, dict):
+        for child in value.values():
+            exact_candidate_tokens(child)
+    elif isinstance(value, list):
+        for child in value:
+            exact_candidate_tokens(child)
+    else:
+        require(type(value) in (int, str), 'candidate has a non-exact numeric token')
+
+
+def check_sweep(sweep, count):
+    refused = [row['r'] for row in sweep['refused']]
+    verified = sweep['verified_directions']
+    require(bool(refused), 'no refusal')
+    require(all(type(i) is int for i in refused + verified), 'noninteger index')
+    require(sorted(refused + verified) == list(range(count)), 'control index partition')
+    require(sweep['summary_refused_directions'] == refused, 'refusal list mismatch')
+    require(sweep['directions'] == sweep['net_directions'] == count, 'sweep size')
+    require(sweep['indices_complete'] is True and sweep['premises_agree'] is True, 'sweep flags')
+    require(sweep['returncode'] == 1 and sweep['summary_status'] == 'REFUSED', 'sweep verdict')
+    require(sweep['fault_injected_at_box'] is None and sweep['stderr_tail'] == '', 'sweep fault')
+
+
+def rejected(operation, name):
+    try:
+        operation()
+    except audit.AuditError:
+        return name
+    raise audit.AuditError(f'negative audit did not reject: {name}')
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--tree', type=Path, required=True)
+    parser.add_argument('--checkpoint', type=Path, required=True)
+    parser.add_argument('--binary', type=Path, required=True)
+    parser.add_argument('--packet', required=True)
+    parser.add_argument('--certificate', required=True)
+    parser.add_argument('--n', type=int, required=True)
+    parser.add_argument('--side', type=F, required=True)
+    parser.add_argument('--reference-ref', required=True)
+    parser.add_argument('--seconds', type=float, default=300)
+    parser.add_argument('--output', type=Path, required=True)
+    args = parser.parse_args()
+    started = time.monotonic()
+    deadline = started + args.seconds
+    require(0 < args.seconds <= 300, 'audit budget outside allowed range')
+    candidate_rel = (Path('packing/resources/web') / args.packet / 'release/certificates'
+                     / args.certificate / 'candidate.json.gz')
+    candidate = args.tree / candidate_rel
+    candidate_gzip = candidate.read_bytes()
+    unzip = zlib.decompressobj(31)
+    candidate_bytes = unzip.decompress(candidate_gzip) + unzip.flush()
+    require(unzip.eof and not unzip.unused_data and not unzip.unconsumed_tail,
+            'candidate gzip is incomplete or has trailing members/data')
+    raw = audit.read_json(candidate_bytes)
+    exact_candidate_tokens(raw)
+    measure = audit.candidate_measure(raw, args.n, args.side)
+    checkpoint = args.checkpoint
+    direction_path = checkpoint / f'{args.certificate}.jsonl.gz'
+    control_path = checkpoint / f'{args.certificate}.control.json'
+    rows = [audit.read_json(line) for line in gzip.decompress(direction_path.read_bytes()).splitlines()]
+    summary = audit.check_direction_log(rows, measure.count)
+    entries = [v for v in load(checkpoint / 'census.json')['cases'].values()
+               if v['packet'] == args.packet and v['certificate'] == args.certificate]
+    require(len(entries) == 1, 'selected census case is not unique')
+    entry = entries[0]
+    control = load(control_path)
+    execution = load(checkpoint / 'execution.json')
+    audit.check_bindings(measure, summary, entry, control, candidate_sha=sha(candidate_gzip))
+    require(entry['n'] == args.n and F(entry['L']) == args.side, 'census claim')
+    require(control['packet'] == args.packet and control['certificate'] == args.certificate,
+            'control identity')
+    require(summary['kind'] == 'sqverify-fast-summary/v1', 'summary kind')
+    directions = rows[:-1]
+    require(entry['nodes'] == summary['nodes'] == sum(r.get('nodes', 0) for r in directions), 'node total')
+    least = min((r for r in directions if r.get('least_bound_box') is not None),
+                key=lambda r: r['min_certified_lower_bound'])
+    minimum = min(F(r['min_certified_lower_bound']) for r in directions)
+    require(minimum == F(entry['least_certified_bound']) == F(least['min_certified_lower_bound']), 'min bound')
+    require(entry['least_bound_leaf_exact']['clears_threshold'] is True, 'leaf threshold flag')
+    require(least['r'] == entry['least_bound_leaf_exact']['r'] == control['index'], 'least index')
+    centre = [least['least_bound_box'][axis] for axis in ('x', 'y')]
+    require(centre == entry['least_bound_leaf_exact']['centre'] == control['centre'], 'least centre')
+    require(all(math.isfinite(float(v)) for r in directions for v in
+                [r['min_certified_lower_bound'], r['seconds']]), 'non-finite captured row')
+    require(directions[0]['method'] == 'axis-vertex-sweep', 'axis method')
+    require(entry['axis_vertices'] == directions[0]['vertices']
+            == directions[0]['x_events'] * directions[0]['y_events'], 'axis vertices')
+    for r in directions[1:]:
+        require(r['method'] == 'interval-branch-and-bound' and r['nodes'] == 2 * r['leaves'] - 1,
+                f'completed tree structure at {r["r"]}')
+    require(summary['threads'] == entry['threads'] == execution['threads'] == 2, 'thread ceiling')
+    require(entry['direction_cpu_seconds'] == {} and all('cpu_seconds' not in r for r in directions), 'unexpected direction CPU')
+    require(summary['direction_cpu_seconds'] == 0 and 'unavailable' in execution['native_direction_cpu_total'], 'CPU interpretation')
+    binary_sha = sha(args.binary.read_bytes())
+    require(binary_sha == entry['binary_sha256'] == control['binary_sha256'] == execution['binary_sha256'], 'binary binding')
+    require(execution['build'] == entry['build'], 'execution build')
+    require(execution['candidate_sha256'] == sha(candidate_gzip), 'execution candidate')
+    require(execution['n'] == args.n and execution['certificate'] == args.certificate
+            and execution['directions'] == measure.count and execution['status'] == 'COMPLETE', 'execution scope')
+
+    # Git compares source bytes; the independently built product uses its build digest.
+    crate = args.tree / 'packing/sqverify_fast'
+    source_names = ['Cargo.toml', 'Cargo.lock', 'build.rs'] + sorted(
+        f'src/{p.name}' for p in (crate / 'src').iterdir() if p.suffix == '.rs')
+    digest = hashlib.sha256()
+    compare_paths = [Path('packing/sqverify_fast') / name for name in source_names]
+    compare_paths += [Path('packing/devtools/sqverify_fast_census.py'),
+                      Path('packing/devtools/audit_fine_net_receipt.py'), candidate_rel]
+    for relative in compare_paths:
+        recorded = subprocess.run(['git', '-C', str(args.tree), 'show', f'{args.reference_ref}:{relative}'],
+                                  check=True, capture_output=True).stdout
+        require((args.tree / relative).read_bytes() == recorded, f'Git custody mismatch: {relative}')
+    for name in source_names:
+        digest.update(name.encode() + b'\0' + (crate / name).read_bytes() + b'\0')
+    require(digest.hexdigest() == summary['build']['source_sha256'], 'crate source identity')
+    require(summary['build'] == {'profile':'release', 'rustc':'rustc 1.98.0 (88d9e12ae 2026-08-18)',
+                                'source_sha256':digest.hexdigest(), 'target':'aarch64-apple-darwin'}, 'qualified Mac build')
+
+    require(control['kind'] == 'sqverify-fast-control/v2'
+            and control['status'] == 'CONTROLS_REFUSED' and control['captures_agree'] is True, 'control acceptance')
+    original, scaled, near = control['runs']
+    require(original['name'] == 'original' and original['returncode'] == 0
+            and original['verdict'] == 'verified', 'original control verdict')
+    require(original['min_certified_lower_bound'] == least['min_certified_lower_bound']
+            and original['nodes'] == least['nodes'], 'selected direction rerun differs')
+    require(scaled['name'] == 'scaled-99-100' and near['name'] == 'near-threshold', 'mutation order')
+    factor = F(scaled['mutation']['factor'])
+    require(factor == F(99, 100), 'whole-net factor')
+    sweep = scaled['sweep']
+    check_sweep(sweep, measure.count)
+    # Reconstruct exactly the independently reviewed writer's mutant serialization.
+    mutant = copy.deepcopy(raw)
+    for rectangle in mutant['rectangles']:
+        rectangle['mass'] = str(F(rectangle['mass']) * factor)
+    mutant['total_mass'] = str(sum((F(row['mass']) for row in mutant['rectangles']), F(0)))
+    require(sha(json.dumps(mutant).encode()) == sweep['mutant_input_sha256'], 'scaled mutant bytes')
+    print(json.dumps({'event':'bindings_passed', 'directions':measure.count,
+                      'refusal_points':len(sweep['refused'])}), flush=True)
+    values = []
+    for row in sweep['refused']:
+        exact = audit.check_refusal(measure, row, factor, deadline)
+        values.append({'r':row['r'], 'pose':row['pose'], 'original_capture':str(exact),
+                       'scaled_capture':str(exact * factor), 'exact_agreement':True})
+        if len(values) % 40 == 0:
+            print(json.dumps({'event':'exact_refusals', 'completed':len(values)}), flush=True)
+    index = control['index']
+    require(audit.in_domain(measure, centre, index), 'positive centre outside quadrant domain')
+    positive = audit.capture_at(measure, centre, index, deadline)
+    require(positive == F(entry['least_bound_leaf_exact']['exact_coverage'])
+            == F(control['exact_capture_crate']) == F(control['exact_capture_independent'])
+            and positive >= minimum >= 1, 'selected positive capture')
+    near_factor = F(near['mutation']['factor'])
+    require(near_factor == F(int((1-F(1,10**6)) / positive * 10**15), 10**15), 'near factor rule')
+    require(0 < near_factor < 1 and near['returncode'] == 1
+            and near['verdict'] == 'counterexample-candidate'
+            and near['exact_below_threshold'] is True, 'near verdict')
+    near_pose = near['witness']['exact_pose']
+    require(audit.in_domain(measure, near_pose, index), 'near witness outside quadrant domain')
+    near_original = audit.capture_at(measure, near_pose, index, deadline)
+    near_capture = near_original * near_factor
+    require(near_original >= 1 and near_capture < 1, 'near witness separation')
+    require(positive * near_factor == F(near['mutation']['capture_at_centre']) <= 1-F(1,10**6), 'near centre')
+    require(near_capture == F(near['witness']['exact_coverage'])
+            == F(near['mutation']['capture_at_witness']), 'near exact agreement')
+    require(all(near['mutation'][key] is True for key in
+                ('witness_captures_agree','centre_in_domain','witness_in_domain')), 'near flags')
+
+    times = []
+    for mode in ('capture', 'check', 'control'):
+        command = load(checkpoint / f'{mode}-execution.json')
+        require(command == next(item for item in execution['commands'] if item['mode'] == mode), 'command receipt binding')
+        text = (checkpoint / f'{mode}.time').read_text()
+        timing = {key: F(re.search(rf'^{key}\s+([0-9.]+)$', text, re.M).group(1))
+                  for key in ('real','user','sys')}
+        timing['cpu_seconds'] = timing['user'] + timing['sys']
+        require(all(math.isclose(float(value), command['timing'][key], rel_tol=0, abs_tol=1e-9)
+                    for key, value in timing.items()), 'timing receipt mismatch')
+        require((checkpoint / f'{mode}.stderr.log').read_bytes() == b'', 'command stderr')
+        require(command['argv'][command['argv'].index('--only')+1] == args.certificate, 'command selection')
+        require(command['argv'][command['argv'].index('--packets')+1] == args.packet, 'command packet')
+        require(command['argv'][command['argv'].index('--binary')+1] == str(args.binary), 'command binary')
+        require(command['returncode'] is None if mode == 'capture' else command['returncode'] == 0, 'exit semantics')
+        if mode == 'capture':
+            require(command['native_returncode'] == 0 and command['recovered_complete_capture'] is True, 'recovery witness')
+        times.append({'mode':mode, **{k:str(v) for k,v in timing.items()}})
+    require('1 of 1 retained certificates VERIFIED' in (checkpoint / 'check.stdout.log').read_text(), 'maintained check')
+    require('VERIFIED' in (checkpoint / 'capture.stdout.log').read_text(), 'capture completion line')
+    require('CONTROLS_REFUSED' in (checkpoint / 'control.stdout.log').read_text(), 'control completion line')
+    require(math.isclose(sum(float(t['cpu_seconds']) for t in times), execution['cpu_seconds'], abs_tol=1e-9), 'cost CPU total')
+    require(math.isclose(sum(float(t['real']) for t in times), execution['wall_seconds'], abs_tol=1e-9), 'cost wall total')
+    require(execution['supervisor_recovery']['duplicate_capture_started'] is False, 'duplicate capture declaration')
+
+    # These corruptions exercise different trust boundaries of the audit.
+    corrupt_log = copy.deepcopy(rows)
+    corrupt_log[1]['r'] = 0
+    corrupt_sweep = copy.deepcopy(sweep)
+    corrupt_sweep['verified_directions'][0] = 0
+    corrupt_refusal = copy.deepcopy(sweep['refused'][0])
+    corrupt_refusal['capture'] = str(F(corrupt_refusal['capture']) + F(1,10**12))
+    negatives = [rejected(lambda:audit.check_direction_log(corrupt_log, measure.count), 'duplicate capture index'),
+                 rejected(lambda:check_sweep(corrupt_sweep, measure.count), 'duplicate/missing control index'),
+                 rejected(lambda:audit.check_refusal(measure, corrupt_refusal, factor, deadline), 'tampered exact capture')]
+    audit.check_deadline(deadline)
+    originals = [F(item['original_capture']) for item in values]
+    result = {
+        'kind':'fine-net-completed-certificate-mathematics-audit/v1',
+        'status':'PASS', 'completed_utc':datetime.now(UTC).isoformat(), 'python':sys.version,
+        'certificate':args.certificate, 'packet':args.packet, 'n':args.n, 'L':str(measure.side),
+        'claim_scope':'local mathematics acceptance; no registry/rung/publication update',
+        'candidate':{'path':str(candidate), 'gzip_sha256':sha(candidate_gzip),
+                     'decompressed_sha256':sha(candidate_bytes), 'gzip_bytes':len(candidate_gzip),
+                     'decompressed_bytes':len(candidate_bytes), 'single_gzip_member':True},
+        'source_custody':{'reference_ref':args.reference_ref, 'byte_equal_files':len(compare_paths),
+                          'crate_source_sha256':digest.hexdigest(), 'binary_sha256':binary_sha,
+                          'build':summary['build'], 'current_source_tree':str(args.tree)},
+        'checkpoint':str(checkpoint),
+        'file_identities':{p.name:{'bytes':p.stat().st_size,'sha256':sha(p.read_bytes())}
+                           for p in sorted(checkpoint.iterdir()) if p.is_file()},
+        'premises':summary['premises'],
+        'exact_inequalities':{'shrink_gap':str(1-measure.core*(1+measure.step)),
+            'tangent_shrink_product':str(measure.core*(1+measure.step/(1-measure.step**2/4))),
+            'endpoint_polynomial':str(measure.last_tangent**2+2*measure.last_tangent-1),
+            'last_bin_start_polynomial':str((measure.last_tangent-measure.step/2)**2+2*(measure.last_tangent-measure.step/2)-1),
+            'mass_gap':str(measure.n-measure.mass), 'expanded_density_max':str(max(measure.rectangles.values()))},
+        'capture':{'directions':measure.count,'all_indices_once':True,'all_verified':True,
+                   'minimum_certified_bound':str(minimum),'minimum_certified_bound_float':float(minimum),
+                   'minimum_bound_index':index,'nodes':entry['nodes'],'axis_vertices':entry['axis_vertices'],
+                   'positive_centre':centre,'positive_capture':str(positive),'positive_capture_float':float(positive),
+                   'universal_replay':'retained native receipt reviewed; no new universal run'},
+        'controls':{'predicate':'complete net, at least one coverage refusal, every nonverified direction a valid refusal',
+                    'refusal_points_recomputed':len(values),'verified_directions':sweep['verified_directions'],
+                    'all_indices_once':True,'whole_net_factor':str(factor), 'mutant_input_sha256':sweep['mutant_input_sha256'],
+                    'original_capture_min':str(min(originals)), 'original_capture_max':str(max(originals)),
+                    'original_capture_min_float':float(min(originals)), 'original_capture_max_float':float(max(originals)),
+                    'scaled_capture_min_float':float(factor*min(originals)), 'scaled_capture_max_float':float(factor*max(originals)),
+                    'near_factor':str(near_factor),'near_centre_capture':str(positive*near_factor),
+                    'near_witness':near_pose,'near_witness_capture':str(near_capture),
+                    'near_witness_capture_float':float(near_capture), 'exact_refusals':values},
+        'recovery':{'capture_outer_exit':None,'native_exit':entry['returncode'],'check_exit':0,'control_exit':0,
+                    'duplicate_capture_started':False, 'timing':times,
+                    'aggregate_cpu_seconds':execution['cpu_seconds'],'sum_command_wall_seconds':execution['wall_seconds'],
+                    'native_cpu_seconds':entry['cpu_seconds'], 'direction_cpu':'unavailable; native zero preserved'},
+        'negative_audits_rejected':negatives,'wall_seconds':round(time.monotonic()-started,3),
+    }
+    args.output.write_text(json.dumps(result,indent=2)+'\n')
+    print(json.dumps({'status':'PASS','output':str(args.output),'wall_seconds':result['wall_seconds'],
+                      'refusals':len(values),'positive_capture':float(positive),
+                      'near_witness_capture':float(near_capture),'negative_audits':len(negatives)}),flush=True)
+
+
+if __name__ == '__main__':
+    main()

@@ -1,0 +1,27 @@
+   Compiling version_check v0.9.5
+   Compiling libc v0.2.189
+   Compiling generic-array v0.14.7
+   Compiling typenum v1.20.1
+   Compiling autocfg v1.5.1
+   Compiling num-traits v0.2.19
+   Compiling block-buffer v0.10.4
+   Compiling crypto-common v0.1.7
+   Compiling serde_core v1.0.229
+   Compiling digest v0.10.7
+   Compiling cpufeatures v0.2.17
+   Compiling cfg-if v1.0.5
+   Compiling zmij v1.0.23
+   Compiling crc32fast v1.5.2
+   Compiling sha2 v0.10.9
+   Compiling num-integer v0.1.47
+   Compiling serde_json v1.0.151
+   Compiling adler2 v2.0.1
+   Compiling serde v1.0.229
+   Compiling miniz_oxide v0.8.9
+   Compiling num-bigint v0.4.6
+   Compiling sqverify-fast v0.1.0 (/Users/levy/wrk/github/squares/.worktrees/review-668-math-20261018/packing/sqverify_fast)
+   Compiling itoa v1.0.18
+   Compiling memchr v2.8.3
+   Compiling num-rational v0.4.2
+   Compiling flate2 v1.1.2
+    Finished `release` profile [optimized] target(s) in 18.20s

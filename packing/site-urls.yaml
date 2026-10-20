@@ -5746,7 +5746,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-17'
+  lastmod: '2026-10-19'
   status: live
 - path: cases/69.html
   canonical: cases/69.html
@@ -5890,7 +5890,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-17'
+  lastmod: '2026-10-19'
   status: live
 - path: cases/85.html
   canonical: cases/85.html
@@ -5898,7 +5898,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-17'
+  lastmod: '2026-10-19'
   status: live
 - path: cases/86.html
   canonical: cases/86.html
@@ -16449,7 +16449,7 @@ urls:
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-17'
-  lastmod: '2026-10-17'
+  lastmod: '2026-10-19'
   status: live
   identity:
     kind: lower-bound
@@ -16464,6 +16464,7 @@ urls:
     builds_on: null
     evidence:
     - E-wand125-fine-net-n68-853-report
+    - E-wand125-fine-net-n68-853-sqverify-fast-replay
     artifacts:
     - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/README.md
     - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/acquisition/sources.json
@@ -16472,13 +16473,46 @@ urls:
     - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n68_L853/check2/receipt.json
     - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/receipts/premises-n68.json
     - packing/devtools/fine_net_followup.py
+    - docs/project/reviews/review-2026-10-19-n68-fine-net-mathematics.md
+    - docs/project/reviews/review-2026-10-19-fine-net-mac-arithmetic.md
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/README.md
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/n68-certificate-math/audit-result.json.gz
+    - packing/benchmarks/measure-verifier/census-mixed/census.json
+    - packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-2026-10-16/mixed_n68_L853.jsonl.gz
+    - packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-2026-10-16/mixed_n68_L853.execution.json
+  amendments:
+  - date: '2026-10-19'
+    reason: Adopt the n68 retained native replay after the certificate-specific mathematical review,
+      adding its separate replay evidence and the supporting census, exact-audit and review artifacts;
+      the lower-bound claim and source attribution retain their original identity.
+    previous:
+      kind: lower-bound
+      scope:
+        n_values:
+        - 68
+      established: null
+      attribution:
+        source_keys:
+        - '[wand125 fine-net lower bounds 2026-10-16]'
+        published: '2026-10-16'
+      builds_on: null
+      evidence:
+      - E-wand125-fine-net-n68-853-report
+      artifacts:
+      - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/README.md
+      - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/acquisition/sources.json
+      - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/acquisition/release-assets.json
+      - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n68_L853/candidate.json.gz
+      - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n68_L853/check2/receipt.json
+      - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/receipts/premises-n68.json
+      - packing/devtools/fine_net_followup.py
 - path: result/t-206.html
   canonical: result/t-206.html
   kind: result
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-17'
-  lastmod: '2026-10-17'
+  lastmod: '2026-10-19'
   status: live
   identity:
     kind: lower-bound
@@ -16493,6 +16527,7 @@ urls:
     builds_on: null
     evidence:
     - E-wand125-fine-net-n84-94225-report
+    - E-wand125-fine-net-n84-94225-sqverify-fast-replay
     artifacts:
     - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/README.md
     - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/acquisition/sources.json
@@ -16501,13 +16536,46 @@ urls:
     - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n84_L94225/check2/receipt.json
     - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/receipts/premises-n84.json
     - packing/devtools/fine_net_followup.py
+    - docs/project/reviews/review-2026-10-19-n84-n85-fine-net-mathematics.md
+    - docs/project/reviews/review-2026-10-19-fine-net-mac-arithmetic.md
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/README.md
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/n84-n85-certificate-math/n84-audit-result.json.gz
+    - packing/benchmarks/measure-verifier/census-mixed/census.json
+    - packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-2026-10-16/mixed_n84_L94225.jsonl.gz
+    - packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-2026-10-16/mixed_n84_L94225.execution.json
+  amendments:
+  - date: '2026-10-19'
+    reason: Adopt the n84 retained native replay after the certificate-specific mathematical review,
+      adding its separate replay evidence and the supporting census, exact-audit and review artifacts;
+      the lower-bound claim and source attribution retain their original identity.
+    previous:
+      kind: lower-bound
+      scope:
+        n_values:
+        - 84
+      established: null
+      attribution:
+        source_keys:
+        - '[wand125 fine-net lower bounds 2026-10-16]'
+        published: '2026-10-16'
+      builds_on: null
+      evidence:
+      - E-wand125-fine-net-n84-94225-report
+      artifacts:
+      - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/README.md
+      - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/acquisition/sources.json
+      - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/acquisition/release-assets.json
+      - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n84_L94225/candidate.json.gz
+      - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n84_L94225/check2/receipt.json
+      - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/receipts/premises-n84.json
+      - packing/devtools/fine_net_followup.py
 - path: result/t-207.html
   canonical: result/t-207.html
   kind: result
   generator: devtools.render_overview:result_fragments
   producer: overview
   first_published: '2026-10-17'
-  lastmod: '2026-10-17'
+  lastmod: '2026-10-19'
   status: live
   identity:
     kind: lower-bound
@@ -16522,6 +16590,7 @@ urls:
     builds_on: null
     evidence:
     - E-wand125-fine-net-n85-9475-report
+    - E-wand125-fine-net-n85-9475-sqverify-fast-replay
     artifacts:
     - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/README.md
     - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/acquisition/sources.json
@@ -16530,6 +16599,39 @@ urls:
     - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n85_L9475/check2/receipt.json
     - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/receipts/premises-n85.json
     - packing/devtools/fine_net_followup.py
+    - docs/project/reviews/review-2026-10-19-n84-n85-fine-net-mathematics.md
+    - docs/project/reviews/review-2026-10-19-fine-net-mac-arithmetic.md
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/README.md
+    - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/n84-n85-certificate-math/n85-audit-result.json.gz
+    - packing/benchmarks/measure-verifier/census-mixed/census.json
+    - packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-2026-10-16/mixed_n85_L9475.jsonl.gz
+    - packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-2026-10-16/mixed_n85_L9475.execution.json
+  amendments:
+  - date: '2026-10-19'
+    reason: Adopt the n85 retained native replay after the certificate-specific mathematical review,
+      adding its separate replay evidence and the supporting census, exact-audit and review artifacts;
+      the lower-bound claim and source attribution retain their original identity.
+    previous:
+      kind: lower-bound
+      scope:
+        n_values:
+        - 85
+      established: null
+      attribution:
+        source_keys:
+        - '[wand125 fine-net lower bounds 2026-10-16]'
+        published: '2026-10-16'
+      builds_on: null
+      evidence:
+      - E-wand125-fine-net-n85-9475-report
+      artifacts:
+      - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/README.md
+      - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/acquisition/sources.json
+      - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/acquisition/release-assets.json
+      - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n85_L9475/candidate.json.gz
+      - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n85_L9475/check2/receipt.json
+      - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/receipts/premises-n85.json
+      - packing/devtools/fine_net_followup.py
 - path: result/t-208.html
   canonical: result/t-208.html
   kind: result

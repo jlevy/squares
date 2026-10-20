@@ -11,226 +11,234 @@ exited zero, and the exact capture at the least-bound leaf’s centre cleared th
 threshold. *Authors’ replay here* is what this repository holds of a replay by the
 authors’ own checker; where it holds less than a complete replay, this census is the
 first complete check of the certificate here, which the last column says.
+CPU is aggregate native process CPU from `wait4`; direction CPU is summed only when
+every direction has a reading.
+Missing readings are unavailable, including native summaries that record zero because
+the platform supplies no direction CPU.
 
-| Certificate | Format | n | L | Verdict | CPU s | Least certified bound | Authors’ replay here | First complete check here |
-| --- | --- | ---: | --- | --- | ---: | --- | --- | --- |
-| `cert_n11_L381` | T | 11 | 381/100 | VERIFIED | 19.4 | 1.0001000043992454 | complete | no |
-| `mixed_n18_L470` | M | 18 | 47/10 | VERIFIED | 168.3 | 1.0000000000740676 | complete | no |
-| `mixed_n18_L4704` | M | 18 | 588/125 | VERIFIED | 701.7 | 1.000000001132137 | complete | no |
-| `mixed_n18_L4705` | M | 18 | 941/200 | VERIFIED | 2884.7 | 1.0000000000680034 | none | yes |
-| `rect_n18_L4695` | T | 18 | 939/200 | VERIFIED | 213.2 | 1.0001000024649946 | complete | no |
-| `mixed_n19_L48229` | M | 19 | 48229/10000 | VERIFIED | 512.1 | 1.000000000833015 | none | yes |
-| `mixed_n19_L4825` | M | 19 | 193/40 | VERIFIED | 2841.2 | 1.0000000001230112 | none | yes |
-| `rect_n19_L4815` | T | 19 | 963/200 | VERIFIED | 138.2 | 1.000100001265513 | complete | no |
-| `rect_n19_L48175` | T | 19 | 1927/400 | VERIFIED | 255.4 | 1.0001000003934286 | complete | no |
-| `mixed_n20_L4905` | M | 20 | 981/200 | VERIFIED | 1420.5 | 1.000000000154736 | none | yes |
-| `rect_n20_L4895` | T | 20 | 979/200 | VERIFIED | 103.7 | 1.0001000055866192 | complete | no |
-| `rect_n20_L48975` | T | 20 | 1959/400 | VERIFIED | 106.9 | 1.0001000001810014 | complete | no |
-| `rect_n20_L49` | T | 20 | 49/10 | VERIFIED | 214.1 | 1.0001000010273078 | complete | no |
-| `rect_n21_L4985` | T | 21 | 997/200 | VERIFIED | 254.0 | 1.0001000008057672 | none | yes |
-| `rect_n21_L49875` | T | 21 | 399/80 | VERIFIED | 349.1 | 1.0001000007714431 | none | yes |
-| `cert_n26_L5508` | T | 26 | 1377/250 | VERIFIED | 40.4 | 1.0001000057290834 | complete | no |
-| `mixed_n26_L5545` | M | 26 | 1109/200 | VERIFIED | 2235.6 | 1.0000000003495713 | none | yes |
-| `rect_n26_L553` | T | 26 | 553/100 | VERIFIED | 116.4 | 1.0001000010935819 | complete | no |
-| `rect_n26_L55325` | T | 26 | 2213/400 | VERIFIED | 129.9 | 1.0001000000788831 | complete | no |
-| `mixed_n27_L56435` | M | 27 | 11287/2000 | VERIFIED | 2824.1 | 1.0000000000168654 | none | yes |
-| `rect_n27_L56` | T | 27 | 28/5 | VERIFIED | 80.6 | 1.000100000125862 | complete | no |
-| `rect_n27_L5635` | T | 27 | 1127/200 | VERIFIED | 171.3 | 1.0001000006538547 | complete | no |
-| `mixed_n28_L5735` | M | 28 | 1147/200 | VERIFIED | 1540.9 | 1.0000000000381999 | none | yes |
-| `rect_n28_L5695` | T | 28 | 1139/200 | VERIFIED | 79.7 | 1.000100001727597 | none | yes |
-| `rect_n28_L572` | T | 28 | 143/25 | VERIFIED | 162.2 | 1.0001000011440067 | none | yes |
-| `rect_n28_L57225` | T | 28 | 2289/400 | VERIFIED | 203.6 | 1.0001000010341632 | complete | no |
-| `cert_n29_L571` | T | 29 | 571/100 | VERIFIED | 31.7 | 1.0001000124838866 | complete | no |
-| `mixed_n29_L581` | M | 29 | 581/100 | VERIFIED | 1632.3 | 1.0000000000094453 | none | yes |
-| `rect_n29_L5785` | T | 29 | 1157/200 | VERIFIED | 91.6 | 1.000100003150306 | none | yes |
-| `rect_n29_L579` | T | 29 | 579/100 | VERIFIED | 96.1 | 1.0001000015468269 | complete | no |
-| `rect_n29_L57975` | T | 29 | 2319/400 | VERIFIED | 170.9 | 1.0001000002454083 | complete | no |
-| `mixed_n30_L58835` | M | 30 | 11767/2000 | VERIFIED | 3890.8 | 1.0000000000570795 | none | yes |
-| `rect_n30_L5865` | T | 30 | 1173/200 | VERIFIED | 98.3 | 1.000100002112256 | complete | no |
-| `rect_n30_L5875` | T | 30 | 47/8 | VERIFIED | 252.4 | 1.0001000004862441 | complete | no |
-| `rect_n31_L592` | T | 31 | 148/25 | VERIFIED | 50.7 | 1.0001000019260526 | complete | no |
-| `rect_n31_L5935` | T | 31 | 1187/200 | VERIFIED | 113.1 | 1.000100001602695 | none | yes |
-| `rect_n31_L59525` | T | 31 | 2381/400 | VERIFIED | 167.4 | 1.0001000003283942 | complete | no |
-| `rect_n32_L595` | T | 32 | 119/20 | VERIFIED | 34.2 | 1.0001000045052235 | complete | no |
-| `mixed_n37_L644` | M | 37 | 161/25 | VERIFIED | 621.1 | 1.000000001365918 | complete | no |
-| `rect_n37_L64` | T | 37 | 32/5 | VERIFIED | 120.8 | 1.0001000010304752 | none | yes |
-| `rect_n37_L6425` | T | 37 | 257/40 | VERIFIED | 184.8 | 1.0001000008561982 | none | yes |
-| `rect_n38_L652` | T | 38 | 163/25 | VERIFIED | 123.6 | 1.0001000011311802 | none | yes |
-| `rect_n38_L654` | T | 38 | 327/50 | VERIFIED | 163.4 | 1.0001000009335435 | complete | no |
-| `rect_n38_L6545` | T | 38 | 1309/200 | VERIFIED | 195.5 | 1.0001000000846751 | complete | no |
-| `mixed_n39_L665` | M | 39 | 133/20 | VERIFIED | 3869.8 | 1.0000000001966394 | none | yes |
-| `rect_n39_L662` | T | 39 | 331/50 | VERIFIED | 127.0 | 1.0001000023739663 | none | yes |
-| `rect_n39_L663` | T | 39 | 663/100 | VERIFIED | 168.9 | 1.0001000005511531 | complete | no |
-| `rect_n39_L6635` | T | 39 | 1327/200 | VERIFIED | 246.0 | 1.0001000009846581 | complete | no |
-| `rect_n40_L6695` | T | 40 | 1339/200 | VERIFIED | 167.4 | 1.0001000001762095 | complete | no |
-| `rect_n40_L67` | T | 40 | 67/10 | VERIFIED | 197.4 | 1.0001000018843231 | complete | no |
-| `mixed_n41_L6775` | M | 41 | 271/40 | VERIFIED | 2135.3 | 1.0000000000604714 | none | yes |
-| `rect_n41_L6745` | T | 41 | 1349/200 | VERIFIED | 146.2 | 1.0001000001413833 | none | yes |
-| `rect_n41_L6755` | T | 41 | 1351/200 | VERIFIED | 169.3 | 1.0001000036794614 | complete | no |
-| `rect_n41_L676` | T | 41 | 169/25 | VERIFIED | 228.6 | 1.0001000009531718 | complete | no |
-| `mixed_n42_L68475` | M | 42 | 2739/400 | VERIFIED | 1671.9 | 1.0000000002195921 | none | yes |
-| `rect_n42_L676` | T | 42 | 169/25 | VERIFIED | 74.3 | 1.0001000107159737 | none | yes |
-| `rect_n42_L679` | T | 42 | 679/100 | VERIFIED | 138.3 | 1.000100006431074 | none | yes |
-| `rect_n42_L6815` | T | 42 | 1363/200 | VERIFIED | 198.5 | 1.0001000000390723 | complete | no |
-| `rect_n42_L68275` | T | 42 | 2731/400 | VERIFIED | 272.0 | 1.0001000002448244 | complete | no |
-| `mixed_n43_L69075` | M | 43 | 2763/400 | VERIFIED | 1597.6 | 1.0000000000794018 | none | yes |
-| `rect_n43_L6855` | T | 43 | 1371/200 | VERIFIED | 83.5 | 1.0001000011363825 | none | yes |
-| `rect_n43_L6865` | T | 43 | 1373/200 | VERIFIED | 102.4 | 1.0001000028518026 | none | yes |
-| `rect_n43_L68875` | T | 43 | 551/80 | VERIFIED | 226.4 | 1.0001000005477412 | complete | no |
-| `mixed_n44_L69725` | M | 44 | 2789/400 | VERIFIED | 1176.3 | 1.0000000003233136 | none | yes |
-| `rect_n44_L6925` | T | 44 | 277/40 | VERIFIED | 121.4 | 1.000100000052123 | none | yes |
-| `rect_n44_L6935` | T | 44 | 1387/200 | VERIFIED | 167.2 | 1.0001000005067233 | none | yes |
-| `rect_n44_L69425` | T | 44 | 2777/400 | VERIFIED | 211.0 | 1.0001000000736677 | complete | no |
-| `rect_n45_L6955` | T | 45 | 1391/200 | VERIFIED | 69.2 | 1.0001000029879474 | none | yes |
-| `mixed_n50_L7318` | M | 50 | 3659/500 | VERIFIED | 176.6 | 1.0000000022689954 | none | yes |
-| `mixed_n50_L735` | L | 50 | 147/20 | VERIFIED | 647.1 | 1.0000000002563805 | none | yes |
-| `mixed_n50_L740` | M | 50 | 37/5 | VERIFIED | 810.7 | 1.0000000004091405 | complete | no |
-| `mixed_n51_L746` | M | 51 | 373/50 | VERIFIED | 940.2 | 1.000000000282108 | none | yes |
-| `mixed_n51_L747` | M | 51 | 747/100 | VERIFIED | 1040.3 | 1.000000000916658 | none | yes |
-| `rect_n51_L743` | T | 51 | 743/100 | VERIFIED | 120.9 | 1.0001000031645793 | none | yes |
-| `rect_n51_L74425` | T | 51 | 2977/400 | VERIFIED | 182.3 | 1.0001000002568405 | complete | no |
-| `mixed_n52_L755` | M | 52 | 151/20 | VERIFIED | 1108.4 | 1.0000000001604281 | none | yes |
-| `rect_n52_L7505` | T | 52 | 1501/200 | VERIFIED | 130.0 | 1.0001000020793203 | none | yes |
-| `rect_n52_L7535` | T | 52 | 1507/200 | VERIFIED | 236.8 | 1.0001000012991306 | complete | no |
-| `mixed_n53_L76275` | M | 53 | 3051/400 | VERIFIED | 1352.4 | 1.0000000001795013 | none | yes |
-| `rect_n53_L758` | T | 53 | 379/50 | VERIFIED | 144.9 | 1.00010000038974 | none | yes |
-| `rect_n53_L7595` | T | 53 | 1519/200 | VERIFIED | 202.9 | 1.0001000005722172 | complete | no |
-| `rect_n53_L76075` | T | 53 | 3043/400 | VERIFIED | 257.9 | 1.0001000005003464 | complete | no |
-| `mixed_n54_L7685` | M | 54 | 1537/200 | VERIFIED | 1413.6 | 1.0000000007300995 | none | yes |
-| `rect_n54_L7665` | T | 54 | 1533/200 | VERIFIED | 199.6 | 1.0001000002090057 | none | yes |
-| `rect_n54_L76675` | T | 54 | 3067/400 | VERIFIED | 208.8 | 1.0001000000667002 | none | yes |
-| `rect_n54_L76725` | T | 54 | 3069/400 | VERIFIED | 241.7 | 1.0001000001245186 | complete | no |
-| `mixed_n55_L7728` | M | 55 | 966/125 | VERIFIED | 1023.1 | 1.0000000008205456 | none | yes |
-| `rect_n55_L77` | T | 55 | 77/10 | VERIFIED | 173.4 | 1.000100006776049 | none | yes |
-| `rect_n55_L771` | T | 55 | 771/100 | VERIFIED | 233.2 | 1.0001000020557316 | none | yes |
-| `rect_n55_L77125` | T | 55 | 617/80 | VERIFIED | 252.1 | 1.0001000002999096 | complete | no |
-| `mixed_n56_L78025` | M | 56 | 3121/400 | VERIFIED | 1596.9 | 1.0000000002764038 | none | yes |
-| `rect_n56_L776` | T | 56 | 194/25 | VERIFIED | 173.0 | 1.00010000166352 | none | yes |
-| `rect_n56_L777` | T | 56 | 777/100 | VERIFIED | 202.8 | 1.0001000017583521 | none | yes |
-| `rect_n56_L77825` | T | 56 | 3113/400 | VERIFIED | 254.6 | 1.0001000006761118 | complete | no |
-| `mixed_n57_L78725` | M | 57 | 3149/400 | VERIFIED | 1816.2 | 1.0000000000104121 | none | yes |
-| `rect_n57_L78` | T | 57 | 39/5 | VERIFIED | 139.6 | 1.0001000094859016 | none | yes |
-| `rect_n57_L7835` | T | 57 | 1567/200 | VERIFIED | 248.6 | 1.0001000003177027 | complete | no |
-| `mixed_n58_L7905` | M | 58 | 1581/200 | VERIFIED | 556.2 | 1.0000000004229204 | none | yes |
-| `mixed_n58_L7935` | M | 58 | 1587/200 | VERIFIED | 1916.9 | 1.0000000002574023 | none | yes |
-| `rect_n58_L788` | T | 58 | 197/25 | VERIFIED | 191.4 | 1.000100004157506 | none | yes |
-| `rect_n58_L789` | T | 58 | 789/100 | VERIFIED | 256.4 | 1.0001000032359766 | complete | no |
-| `rect_n59_L7905` | T | 59 | 1581/200 | VERIFIED | 162.3 | 1.0001000010464953 | none | yes |
-| `rect_n59_L792` | T | 59 | 198/25 | VERIFIED | 191.2 | 1.0001000019592972 | complete | no |
-| `rect_n59_L79325` | T | 59 | 3173/400 | VERIFIED | 238.9 | 1.0001000006839356 | none | yes |
-| `rect_n59_L79375` | T | 59 | 127/16 | VERIFIED | 320.8 | 1.000100002281957 | none | yes |
-| `rect_n60_L792` | T | 60 | 198/25 | VERIFIED | 116.1 | 1.000100001366674 | none | yes |
-| `rect_n60_L794` | T | 60 | 397/50 | VERIFIED | 191.9 | 1.0001000038080838 | none | yes |
-| `rect_n61_L796` | T | 61 | 199/25 | VERIFIED | 109.0 | 1.000100005068861 | complete | no |
-| `mixed_n65_L835` | M | 65 | 167/20 | VERIFIED | 1629.0 | 1.000000000539362 | complete | no |
-| `mixed_n66_L842` | M | 66 | 421/50 | VERIFIED | 1460.1 | 1.0000000000012201 | complete | no |
-| `mixed_n66_L843` | M | 66 | 843/100 | VERIFIED | 2104.9 | 1.0000000006737138 | partial (12 of 201) | yes |
-| `rect_n66_L8345` | T | 66 | 1669/200 | VERIFIED | 152.4 | 1.0001000034419847 | none | yes |
-| `rect_n66_L8375` | T | 66 | 67/8 | VERIFIED | 230.3 | 1.000100000263314 | none | yes |
-| `rect_n66_L8385` | T | 66 | 1677/200 | VERIFIED | 250.1 | 1.0001000001280729 | none | yes |
-| `mixed_n67_L8475` | M | 67 | 339/40 | VERIFIED | 1299.0 | 1.0000000006600718 | none | yes |
-| `mixed_n67_L848` | M | 67 | 212/25 | VERIFIED | 1388.3 | 1.000000000605981 | none | yes |
-| `rect_n67_L844` | T | 67 | 211/25 | VERIFIED | 219.8 | 1.0001000010838108 | none | yes |
-| `rect_n67_L8455` | T | 67 | 1691/200 | VERIFIED | 257.1 | 1.0001000007618854 | complete | no |
-| `rect_n68_L846` | T | 68 | 423/50 | VERIFIED | 166.2 | 1.000100000608853 | none | yes |
-| `rect_n68_L8495` | T | 68 | 1699/200 | VERIFIED | 235.7 | 1.0001000035563214 | none | yes |
-| `rect_n68_L851` | T | 68 | 851/100 | VERIFIED | 296.9 | 1.0001000031311404 | complete | no |
-| `mixed_n69_L8612` | M | 69 | 2153/250 | VERIFIED | 1859.1 | 1.0000000004388068 | none | yes |
-| `mixed_n69_L862` | M | 69 | 431/50 | VERIFIED | 2198.3 | 1.000000000173938 | none | yes |
-| `rect_n69_L8545` | T | 69 | 1709/200 | VERIFIED | 229.3 | 1.000100000179333 | none | yes |
-| `rect_n69_L8575` | T | 69 | 343/40 | VERIFIED | 307.7 | 1.0001000005653509 | complete | no |
-| `rect_n69_L8585` | T | 69 | 1717/200 | VERIFIED | 339.2 | 1.0001000000646423 | complete | no |
-| `mixed_n70_L86475` | M | 70 | 3459/400 | VERIFIED | 1753.5 | 1.0000000002290894 | none | yes |
-| `mixed_n70_L86575` | M | 70 | 3463/400 | VERIFIED | 1938.6 | 1.0000000000402047 | none | yes |
-| `rect_n70_L861` | T | 70 | 861/100 | VERIFIED | 229.7 | 1.000100002213263 | none | yes |
-| `rect_n70_L862` | T | 70 | 431/50 | VERIFIED | 266.2 | 1.0001000005601692 | none | yes |
-| `rect_n70_L8625` | T | 70 | 69/8 | VERIFIED | 290.4 | 1.0001000008439647 | complete | no |
-| `rect_n70_L86275` | T | 70 | 3451/400 | VERIFIED | 371.0 | 1.0001000000371736 | complete | no |
-| `mixed_n71_L8705` | M | 71 | 1741/200 | VERIFIED | 1678.5 | 1.0000000006115706 | none | yes |
-| `mixed_n71_L8721` | M | 71 | 8721/1000 | VERIFIED | 2098.9 | 1.0000000002314637 | none | yes |
-| `rect_n71_L8645` | T | 71 | 1729/200 | VERIFIED | 217.2 | 1.000100000419955 | none | yes |
-| `rect_n71_L8685` | T | 71 | 1737/200 | VERIFIED | 317.3 | 1.0001000016144455 | complete | no |
-| `mixed_n72_L876` | M | 72 | 219/25 | VERIFIED | 2259.5 | 1.000000000071343 | none | yes |
-| `rect_n72_L8705` | T | 72 | 1741/200 | VERIFIED | 241.1 | 1.0001000023832398 | none | yes |
-| `rect_n72_L874` | T | 72 | 437/50 | VERIFIED | 328.4 | 1.000100000114479 | complete | no |
-| `mixed_n73_L8809` | M | 73 | 8809/1000 | VERIFIED | 1820.2 | 1.0000000002704519 | none | yes |
-| `mixed_n73_L8813` | M | 73 | 8813/1000 | VERIFIED | 1874.7 | 1.0000000008042074 | none | yes |
-| `rect_n73_L874` | T | 73 | 437/50 | VERIFIED | 222.0 | 1.0001000112437228 | none | yes |
-| `rect_n73_L878` | T | 73 | 439/50 | VERIFIED | 312.8 | 1.000100002057731 | complete | no |
-| `mixed_n74_L88675` | M | 74 | 3547/400 | VERIFIED | 1741.0 | 1.0000000001923686 | none | yes |
-| `rect_n74_L8815` | T | 74 | 1763/200 | VERIFIED | 231.3 | 1.00010000035846 | none | yes |
-| `rect_n74_L884` | T | 74 | 221/25 | VERIFIED | 307.1 | 1.0001000014372012 | none | yes |
-| `rect_n74_L88475` | T | 74 | 3539/400 | VERIFIED | 333.9 | 1.0001000002730311 | complete | no |
-| `mixed_n75_L892` | M | 75 | 223/25 | VERIFIED | 715.9 | 1.0000000001483238 | none | yes |
-| `mixed_n75_L894` | M | 75 | 447/50 | VERIFIED | 2704.8 | 1.000000000005104 | none | yes |
-| `rect_n75_L889` | T | 75 | 889/100 | VERIFIED | 291.2 | 1.000100000092212 | complete | no |
-| `rect_n75_L89` | T | 75 | 89/10 | VERIFIED | 303.4 | 1.0001000012091874 | complete | no |
-| `mixed_n76_L894` | M | 76 | 447/50 | VERIFIED | 758.5 | 1.0000000029480338 | complete | no |
-| `mixed_n76_L896` | M | 76 | 224/25 | VERIFIED | 700.2 | 1.0000000001194138 | none | yes |
-| `mixed_n76_L8965` | M | 76 | 1793/200 | VERIFIED | 757.7 | 1.0000000001430744 | none | yes |
-| `rect_n76_L89` | T | 76 | 89/10 | VERIFIED | 203.5 | 1.0001000007372345 | none | yes |
-| `rect_n76_L892` | T | 76 | 223/25 | VERIFIED | 254.7 | 1.0001000032640825 | none | yes |
-| `rect_n76_L8925` | T | 76 | 357/40 | VERIFIED | 283.5 | 1.0001000015650008 | complete | no |
-| `rect_n77_L888` | T | 77 | 222/25 | VERIFIED | 136.8 | 1.0001000023750815 | none | yes |
-| `rect_n77_L891` | T | 77 | 891/100 | VERIFIED | 169.5 | 1.0001000012862522 | none | yes |
-| `rect_n77_L89325` | T | 77 | 3573/400 | VERIFIED | 235.1 | 1.0001000022464466 | none | yes |
-| `rect_n77_L894` | T | 77 | 447/50 | VERIFIED | 269.8 | 1.0001000029952136 | none | yes |
-| `rect_n78_L8955` | T | 78 | 1791/200 | VERIFIED | 271.1 | 1.0001000000494495 | complete | no |
-| `rect_n78_L8965` | T | 78 | 1793/200 | VERIFIED | 361.1 | 1.0001000003867002 | none | yes |
-| `mixed_n82_L932` | L | 82 | 233/25 | VERIFIED | 3387.6 | 1.0000000001085079 | complete | no |
-| `mixed_n83_L935` | L | 83 | 187/20 | VERIFIED | 3068.8 | 1.0000000006450585 | complete | no |
-| `mixed_n83_L937` | M | 83 | 937/100 | VERIFIED | 2054.5 | 1.0000000001148488 | complete | no |
-| `mixed_n84_L940` | M | 84 | 47/5 | VERIFIED | 1753.7 | 1.0000000000038998 | complete | no |
-| `mixed_n84_L94075` | M | 84 | 3763/400 | VERIFIED | 1493.7 | 1.0000000005252527 | none | yes |
-| `mixed_n84_L9411` | M | 84 | 9411/1000 | VERIFIED | 1877.8 | 1.000000000102596 | none | yes |
-| `mixed_n85_L942` | M | 85 | 471/50 | VERIFIED | 1595.6 | 1.0000000002558 | complete | no |
-| `mixed_n85_L946` | M | 85 | 473/50 | VERIFIED | 1549.7 | 1.000000000416021 | complete | no |
-| `mixed_n86_L950` | M | 86 | 19/2 | VERIFIED | 1366.1 | 1.0000000005619347 | none | yes |
-| `mixed_n86_L9503` | M | 86 | 9503/1000 | VERIFIED | 1457.9 | 1.00000000020883 | none | yes |
-| `rect_n86_L9355` | T | 86 | 1871/200 | VERIFIED | 213.3 | 1.0001000005089622 | complete | no |
-| `rect_n86_L9365` | T | 86 | 1873/200 | VERIFIED | 240.9 | 1.000100000512849 | none | yes |
-| `mixed_n87_L948` | M | 87 | 237/25 | VERIFIED | 451.1 | 1.0000000000698703 | complete | no |
-| `mixed_n87_L955` | M | 87 | 191/20 | VERIFIED | 1395.3 | 1.000000000093562 | none | yes |
-| `mixed_n87_L958` | M | 87 | 479/50 | VERIFIED | 1899.2 | 1.0000000002258154 | none | yes |
-| `rect_n87_L941` | T | 87 | 941/100 | VERIFIED | 252.6 | 1.0001000008254144 | none | yes |
-| `mixed_n88_L960` | M | 88 | 48/5 | VERIFIED | 1342.5 | 1.00000000024589 | none | yes |
-| `mixed_n88_L96125` | M | 88 | 769/80 | VERIFIED | 1787.6 | 1.000000000448649 | none | yes |
-| `mixed_n88_L962` | M | 88 | 481/50 | VERIFIED | 1648.3 | 1.000000001156332 | none | yes |
-| `rect_n88_L945` | T | 88 | 189/20 | VERIFIED | 233.5 | 1.0001000012079906 | none | yes |
-| `rect_n88_L94775` | T | 88 | 3791/400 | VERIFIED | 232.9 | 1.0001000051383455 | complete | no |
-| `mixed_n89_L965` | M | 89 | 193/20 | VERIFIED | 1532.8 | 1.0000000003462486 | none | yes |
-| `rect_n89_L955` | T | 89 | 191/20 | VERIFIED | 293.3 | 1.0001000092566568 | none | yes |
-| `rect_n89_L9565` | T | 89 | 1913/200 | VERIFIED | 299.7 | 1.000100000784854 | complete | no |
-| `mixed_n90_L960` | M | 90 | 48/5 | VERIFIED | 525.6 | 1.0000000000508447 | complete | no |
-| `mixed_n90_L9725` | M | 90 | 389/40 | VERIFIED | 2000.8 | 1.0000000001882379 | none | yes |
-| `mixed_n90_L973` | M | 90 | 973/100 | VERIFIED | 2087.6 | 1.000000000392674 | none | yes |
-| `rect_n90_L95775` | T | 90 | 3831/400 | VERIFIED | 243.9 | 1.0001000003477836 | none | yes |
-| `mixed_n91_L970` | M | 91 | 97/10 | VERIFIED | 418.2 | 1.0000000012160961 | complete | no |
-| `mixed_n91_L975` | M | 91 | 39/4 | VERIFIED | 2069.2 | 1.0000000001703604 | none | yes |
-| `mixed_n91_L97625` | M | 91 | 781/80 | VERIFIED | 1824.2 | 1.0000000003586995 | none | yes |
-| `rect_n91_L9645` | T | 91 | 1929/200 | VERIFIED | 274.6 | 1.000100000631634 | complete | no |
-| `rect_n91_L96475` | T | 91 | 3859/400 | VERIFIED | 322.9 | 1.0001000002583975 | none | yes |
-| `mixed_n92_L969` | M | 92 | 969/100 | VERIFIED | 580.7 | 1.0000000041386434 | complete | no |
-| `mixed_n92_L975` | M | 92 | 39/4 | VERIFIED | 443.0 | 1.0000000045215391 | complete | no |
-| `mixed_n92_L977` | M | 92 | 977/100 | VERIFIED | 550.7 | 1.0000000019666107 | none | yes |
-| `mixed_n93_L986` | M | 93 | 493/50 | VERIFIED | 1609.0 | 1.0000000005644345 | none | yes |
-| `mixed_n93_L988` | M | 93 | 247/25 | VERIFIED | 1316.7 | 1.0000000008842913 | none | yes |
-| `rect_n93_L97225` | T | 93 | 3889/400 | VERIFIED | 280.7 | 1.0001000022564717 | complete | no |
-| `rect_n93_L9735` | T | 93 | 1947/200 | VERIFIED | 337.4 | 1.0001000018920165 | none | yes |
-| `mixed_n94_L992` | M | 94 | 248/25 | VERIFIED | 1056.2 | 1.0000000001531857 | none | yes |
-| `mixed_n94_L994` | M | 94 | 497/50 | VERIFIED | 1912.1 | 1.0000000001238274 | none | yes |
-| `mixed_n94_L995` | M | 94 | 199/20 | VERIFIED | 2800.7 | 1.000000000302789 | none | yes |
-| `rect_n94_L9795` | T | 94 | 1959/200 | VERIFIED | 274.6 | 1.0001000000378433 | none | yes |
-| `rect_n94_L9805` | T | 94 | 1961/200 | VERIFIED | 283.9 | 1.0001000020831263 | complete | no |
-| `mixed_n95_L996` | M | 95 | 249/25 | VERIFIED | 906.8 | 1.0000000007947085 | none | yes |
-| `mixed_n95_L9965` | M | 95 | 1993/200 | VERIFIED | 1053.5 | 1.0000000013097659 | none | yes |
-| `rect_n95_L98418` | T | 95 | 49209/5000 | VERIFIED | 283.4 | 1.0001000007374712 | complete | no |
-| `rect_n95_L98518` | T | 95 | 49259/5000 | VERIFIED | 270.5 | 1.0001000049027422 | complete | no |
-| `mixed_n96_L996` | M | 96 | 249/25 | VERIFIED | 456.4 | 1.000000000121414 | complete | no |
-| `mixed_n96_L997` | M | 96 | 997/100 | VERIFIED | 978.8 | 1.0000000000057894 | none | yes |
-| `mixed_n101_L1028` | L | 101 | 257/25 | VERIFIED | 128.4 | 1.000000000300333 | complete | no |
+| Certificate | Format | n | L | Verdict | CPU s | Direction CPU s | Least certified bound | Authors’ replay here | First complete check here |
+| --- | --- | ---: | --- | --- | ---: | ---: | --- | --- | --- |
+| `cert_n11_L381` | T | 11 | 381/100 | VERIFIED | 19.4 | unavailable | 1.0001000043992454 | complete | no |
+| `mixed_n18_L470` | M | 18 | 47/10 | VERIFIED | 168.3 | 168.2 | 1.0000000000740676 | complete | no |
+| `mixed_n18_L4704` | M | 18 | 588/125 | VERIFIED | 701.7 | 701.6 | 1.000000001132137 | complete | no |
+| `mixed_n18_L4705` | M | 18 | 941/200 | VERIFIED | 2884.7 | 2884.3 | 1.0000000000680034 | none | yes |
+| `rect_n18_L4695` | T | 18 | 939/200 | VERIFIED | 213.2 | unavailable | 1.0001000024649946 | complete | no |
+| `mixed_n19_L48229` | M | 19 | 48229/10000 | VERIFIED | 512.1 | 511.9 | 1.000000000833015 | none | yes |
+| `mixed_n19_L4825` | M | 19 | 193/40 | VERIFIED | 2841.2 | 2840.9 | 1.0000000001230112 | none | yes |
+| `rect_n19_L4815` | T | 19 | 963/200 | VERIFIED | 138.2 | unavailable | 1.000100001265513 | complete | no |
+| `rect_n19_L48175` | T | 19 | 1927/400 | VERIFIED | 255.4 | 255.2 | 1.0001000003934286 | complete | no |
+| `mixed_n20_L4905` | M | 20 | 981/200 | VERIFIED | 1420.5 | 1420.2 | 1.000000000154736 | none | yes |
+| `rect_n20_L4895` | T | 20 | 979/200 | VERIFIED | 103.7 | unavailable | 1.0001000055866192 | complete | no |
+| `rect_n20_L48975` | T | 20 | 1959/400 | VERIFIED | 106.9 | 106.7 | 1.0001000001810014 | complete | no |
+| `rect_n20_L49` | T | 20 | 49/10 | VERIFIED | 214.1 | 213.9 | 1.0001000010273078 | complete | no |
+| `rect_n21_L4985` | T | 21 | 997/200 | VERIFIED | 254.0 | 253.9 | 1.0001000008057672 | none | yes |
+| `rect_n21_L49875` | T | 21 | 399/80 | VERIFIED | 349.1 | 349.0 | 1.0001000007714431 | none | yes |
+| `cert_n26_L5508` | T | 26 | 1377/250 | VERIFIED | 40.4 | unavailable | 1.0001000057290834 | complete | no |
+| `mixed_n26_L5545` | M | 26 | 1109/200 | VERIFIED | 2235.6 | 2235.3 | 1.0000000003495713 | none | yes |
+| `rect_n26_L553` | T | 26 | 553/100 | VERIFIED | 116.4 | unavailable | 1.0001000010935819 | complete | no |
+| `rect_n26_L55325` | T | 26 | 2213/400 | VERIFIED | 129.9 | 129.8 | 1.0001000000788831 | complete | no |
+| `mixed_n27_L56435` | M | 27 | 11287/2000 | VERIFIED | 2824.1 | 2823.9 | 1.0000000000168654 | none | yes |
+| `rect_n27_L56` | T | 27 | 28/5 | VERIFIED | 80.6 | unavailable | 1.000100000125862 | complete | no |
+| `rect_n27_L5635` | T | 27 | 1127/200 | VERIFIED | 171.3 | 171.2 | 1.0001000006538547 | complete | no |
+| `mixed_n28_L5735` | M | 28 | 1147/200 | VERIFIED | 1540.9 | 1540.6 | 1.0000000000381999 | none | yes |
+| `rect_n28_L5695` | T | 28 | 1139/200 | VERIFIED | 79.7 | 79.5 | 1.000100001727597 | none | yes |
+| `rect_n28_L572` | T | 28 | 143/25 | VERIFIED | 162.2 | 162.1 | 1.0001000011440067 | none | yes |
+| `rect_n28_L57225` | T | 28 | 2289/400 | VERIFIED | 203.6 | 203.4 | 1.0001000010341632 | complete | no |
+| `cert_n29_L571` | T | 29 | 571/100 | VERIFIED | 31.7 | unavailable | 1.0001000124838866 | complete | no |
+| `mixed_n29_L581` | M | 29 | 581/100 | VERIFIED | 1632.3 | 1632.1 | 1.0000000000094453 | none | yes |
+| `rect_n29_L5785` | T | 29 | 1157/200 | VERIFIED | 91.6 | 91.5 | 1.000100003150306 | none | yes |
+| `rect_n29_L579` | T | 29 | 579/100 | VERIFIED | 96.1 | unavailable | 1.0001000015468269 | complete | no |
+| `rect_n29_L57975` | T | 29 | 2319/400 | VERIFIED | 170.9 | 170.8 | 1.0001000002454083 | complete | no |
+| `mixed_n30_L58835` | M | 30 | 11767/2000 | VERIFIED | 3890.8 | 3890.6 | 1.0000000000570795 | none | yes |
+| `rect_n30_L5865` | T | 30 | 1173/200 | VERIFIED | 98.3 | unavailable | 1.000100002112256 | complete | no |
+| `rect_n30_L5875` | T | 30 | 47/8 | VERIFIED | 252.4 | 252.2 | 1.0001000004862441 | complete | no |
+| `rect_n31_L592` | T | 31 | 148/25 | VERIFIED | 50.7 | unavailable | 1.0001000019260526 | complete | no |
+| `rect_n31_L5935` | T | 31 | 1187/200 | VERIFIED | 113.1 | 113.0 | 1.000100001602695 | none | yes |
+| `rect_n31_L59525` | T | 31 | 2381/400 | VERIFIED | 167.4 | 167.3 | 1.0001000003283942 | complete | no |
+| `rect_n32_L595` | T | 32 | 119/20 | VERIFIED | 34.2 | unavailable | 1.0001000045052235 | complete | no |
+| `mixed_n37_L644` | M | 37 | 161/25 | VERIFIED | 621.1 | 620.9 | 1.000000001365918 | complete | no |
+| `rect_n37_L64` | T | 37 | 32/5 | VERIFIED | 120.8 | 120.6 | 1.0001000010304752 | none | yes |
+| `rect_n37_L6425` | T | 37 | 257/40 | VERIFIED | 184.8 | 184.6 | 1.0001000008561982 | none | yes |
+| `rect_n38_L652` | T | 38 | 163/25 | VERIFIED | 123.6 | 123.5 | 1.0001000011311802 | none | yes |
+| `rect_n38_L654` | T | 38 | 327/50 | VERIFIED | 163.4 | unavailable | 1.0001000009335435 | complete | no |
+| `rect_n38_L6545` | T | 38 | 1309/200 | VERIFIED | 195.5 | 195.3 | 1.0001000000846751 | complete | no |
+| `mixed_n39_L665` | M | 39 | 133/20 | VERIFIED | 3869.8 | 3869.4 | 1.0000000001966394 | none | yes |
+| `rect_n39_L662` | T | 39 | 331/50 | VERIFIED | 127.0 | 126.8 | 1.0001000023739663 | none | yes |
+| `rect_n39_L663` | T | 39 | 663/100 | VERIFIED | 168.9 | unavailable | 1.0001000005511531 | complete | no |
+| `rect_n39_L6635` | T | 39 | 1327/200 | VERIFIED | 246.0 | 245.7 | 1.0001000009846581 | complete | no |
+| `rect_n40_L6695` | T | 40 | 1339/200 | VERIFIED | 167.4 | unavailable | 1.0001000001762095 | complete | no |
+| `rect_n40_L67` | T | 40 | 67/10 | VERIFIED | 197.4 | 197.2 | 1.0001000018843231 | complete | no |
+| `mixed_n41_L6775` | M | 41 | 271/40 | VERIFIED | 2135.3 | 2135.1 | 1.0000000000604714 | none | yes |
+| `rect_n41_L6745` | T | 41 | 1349/200 | VERIFIED | 146.2 | 146.1 | 1.0001000001413833 | none | yes |
+| `rect_n41_L6755` | T | 41 | 1351/200 | VERIFIED | 169.3 | unavailable | 1.0001000036794614 | complete | no |
+| `rect_n41_L676` | T | 41 | 169/25 | VERIFIED | 228.6 | 228.3 | 1.0001000009531718 | complete | no |
+| `mixed_n42_L68475` | M | 42 | 2739/400 | VERIFIED | 1671.9 | 1671.7 | 1.0000000002195921 | none | yes |
+| `rect_n42_L676` | T | 42 | 169/25 | VERIFIED | 74.3 | 74.1 | 1.0001000107159737 | none | yes |
+| `rect_n42_L679` | T | 42 | 679/100 | VERIFIED | 138.3 | 138.1 | 1.000100006431074 | none | yes |
+| `rect_n42_L6815` | T | 42 | 1363/200 | VERIFIED | 198.5 | 198.3 | 1.0001000000390723 | complete | no |
+| `rect_n42_L68275` | T | 42 | 2731/400 | VERIFIED | 272.0 | 271.7 | 1.0001000002448244 | complete | no |
+| `mixed_n43_L69075` | M | 43 | 2763/400 | VERIFIED | 1597.6 | 1597.4 | 1.0000000000794018 | none | yes |
+| `rect_n43_L6855` | T | 43 | 1371/200 | VERIFIED | 83.5 | 83.4 | 1.0001000011363825 | none | yes |
+| `rect_n43_L6865` | T | 43 | 1373/200 | VERIFIED | 102.4 | 102.2 | 1.0001000028518026 | none | yes |
+| `rect_n43_L68875` | T | 43 | 551/80 | VERIFIED | 226.4 | 226.1 | 1.0001000005477412 | complete | no |
+| `mixed_n44_L69725` | M | 44 | 2789/400 | VERIFIED | 1176.3 | 1176.1 | 1.0000000003233136 | none | yes |
+| `rect_n44_L6925` | T | 44 | 277/40 | VERIFIED | 121.4 | 121.2 | 1.000100000052123 | none | yes |
+| `rect_n44_L6935` | T | 44 | 1387/200 | VERIFIED | 167.2 | 167.1 | 1.0001000005067233 | none | yes |
+| `rect_n44_L69425` | T | 44 | 2777/400 | VERIFIED | 211.0 | 210.8 | 1.0001000000736677 | complete | no |
+| `rect_n45_L6955` | T | 45 | 1391/200 | VERIFIED | 69.2 | 69.0 | 1.0001000029879474 | none | yes |
+| `mixed_n50_L7318` | M | 50 | 3659/500 | VERIFIED | 176.6 | 176.4 | 1.0000000022689954 | none | yes |
+| `mixed_n50_L735` | L | 50 | 147/20 | VERIFIED | 647.1 | 646.8 | 1.0000000002563805 | none | yes |
+| `mixed_n50_L740` | M | 50 | 37/5 | VERIFIED | 810.7 | 810.4 | 1.0000000004091405 | complete | no |
+| `mixed_n51_L746` | M | 51 | 373/50 | VERIFIED | 940.2 | 940.0 | 1.000000000282108 | none | yes |
+| `mixed_n51_L747` | M | 51 | 747/100 | VERIFIED | 1040.3 | 1040.0 | 1.000000000916658 | none | yes |
+| `rect_n51_L743` | T | 51 | 743/100 | VERIFIED | 120.9 | 120.8 | 1.0001000031645793 | none | yes |
+| `rect_n51_L74425` | T | 51 | 2977/400 | VERIFIED | 182.3 | 182.1 | 1.0001000002568405 | complete | no |
+| `mixed_n52_L755` | M | 52 | 151/20 | VERIFIED | 1108.4 | 1108.2 | 1.0000000001604281 | none | yes |
+| `rect_n52_L7505` | T | 52 | 1501/200 | VERIFIED | 130.0 | 129.8 | 1.0001000020793203 | none | yes |
+| `rect_n52_L7535` | T | 52 | 1507/200 | VERIFIED | 236.8 | unavailable | 1.0001000012991306 | complete | no |
+| `mixed_n53_L76275` | M | 53 | 3051/400 | VERIFIED | 1352.4 | 1352.2 | 1.0000000001795013 | none | yes |
+| `rect_n53_L758` | T | 53 | 379/50 | VERIFIED | 144.9 | 144.7 | 1.00010000038974 | none | yes |
+| `rect_n53_L7595` | T | 53 | 1519/200 | VERIFIED | 202.9 | unavailable | 1.0001000005722172 | complete | no |
+| `rect_n53_L76075` | T | 53 | 3043/400 | VERIFIED | 257.9 | 257.6 | 1.0001000005003464 | complete | no |
+| `mixed_n54_L7685` | M | 54 | 1537/200 | VERIFIED | 1413.6 | 1413.4 | 1.0000000007300995 | none | yes |
+| `rect_n54_L7665` | T | 54 | 1533/200 | VERIFIED | 199.6 | 199.4 | 1.0001000002090057 | none | yes |
+| `rect_n54_L76675` | T | 54 | 3067/400 | VERIFIED | 208.8 | 208.5 | 1.0001000000667002 | none | yes |
+| `rect_n54_L76725` | T | 54 | 3069/400 | VERIFIED | 241.7 | 241.4 | 1.0001000001245186 | complete | no |
+| `mixed_n55_L7728` | M | 55 | 966/125 | VERIFIED | 1023.1 | 1023.0 | 1.0000000008205456 | none | yes |
+| `rect_n55_L77` | T | 55 | 77/10 | VERIFIED | 173.4 | 173.2 | 1.000100006776049 | none | yes |
+| `rect_n55_L771` | T | 55 | 771/100 | VERIFIED | 233.2 | 233.0 | 1.0001000020557316 | none | yes |
+| `rect_n55_L77125` | T | 55 | 617/80 | VERIFIED | 252.1 | 251.8 | 1.0001000002999096 | complete | no |
+| `mixed_n56_L78025` | M | 56 | 3121/400 | VERIFIED | 1596.9 | 1596.7 | 1.0000000002764038 | none | yes |
+| `rect_n56_L776` | T | 56 | 194/25 | VERIFIED | 173.0 | 172.8 | 1.00010000166352 | none | yes |
+| `rect_n56_L777` | T | 56 | 777/100 | VERIFIED | 202.8 | 202.6 | 1.0001000017583521 | none | yes |
+| `rect_n56_L77825` | T | 56 | 3113/400 | VERIFIED | 254.6 | 254.3 | 1.0001000006761118 | complete | no |
+| `mixed_n57_L78725` | M | 57 | 3149/400 | VERIFIED | 1816.2 | 1815.9 | 1.0000000000104121 | none | yes |
+| `rect_n57_L78` | T | 57 | 39/5 | VERIFIED | 139.6 | 139.4 | 1.0001000094859016 | none | yes |
+| `rect_n57_L7835` | T | 57 | 1567/200 | VERIFIED | 248.6 | 248.4 | 1.0001000003177027 | complete | no |
+| `mixed_n58_L7905` | M | 58 | 1581/200 | VERIFIED | 556.2 | 556.1 | 1.0000000004229204 | none | yes |
+| `mixed_n58_L7935` | M | 58 | 1587/200 | VERIFIED | 1916.9 | 1916.7 | 1.0000000002574023 | none | yes |
+| `rect_n58_L788` | T | 58 | 197/25 | VERIFIED | 191.4 | 191.1 | 1.000100004157506 | none | yes |
+| `rect_n58_L789` | T | 58 | 789/100 | VERIFIED | 256.4 | 256.2 | 1.0001000032359766 | complete | no |
+| `rect_n59_L7905` | T | 59 | 1581/200 | VERIFIED | 162.3 | 162.1 | 1.0001000010464953 | none | yes |
+| `rect_n59_L792` | T | 59 | 198/25 | VERIFIED | 191.2 | unavailable | 1.0001000019592972 | complete | no |
+| `rect_n59_L79325` | T | 59 | 3173/400 | VERIFIED | 238.9 | 238.5 | 1.0001000006839356 | none | yes |
+| `rect_n59_L79375` | T | 59 | 127/16 | VERIFIED | 320.8 | 320.5 | 1.000100002281957 | none | yes |
+| `rect_n60_L792` | T | 60 | 198/25 | VERIFIED | 116.1 | 115.9 | 1.000100001366674 | none | yes |
+| `rect_n60_L794` | T | 60 | 397/50 | VERIFIED | 191.9 | 191.7 | 1.0001000038080838 | none | yes |
+| `rect_n61_L796` | T | 61 | 199/25 | VERIFIED | 109.0 | unavailable | 1.000100005068861 | complete | no |
+| `mixed_n65_L835` | M | 65 | 167/20 | VERIFIED | 1629.0 | 1628.5 | 1.000000000539362 | complete | no |
+| `mixed_n66_L842` | M | 66 | 421/50 | VERIFIED | 1460.1 | 1459.8 | 1.0000000000012201 | complete | no |
+| `mixed_n66_L843` | M | 66 | 843/100 | VERIFIED | 2104.9 | 2104.6 | 1.0000000006737138 | partial (12 of 201) | yes |
+| `rect_n66_L8345` | T | 66 | 1669/200 | VERIFIED | 152.4 | 152.1 | 1.0001000034419847 | none | yes |
+| `rect_n66_L8375` | T | 66 | 67/8 | VERIFIED | 230.3 | 230.0 | 1.000100000263314 | none | yes |
+| `rect_n66_L8385` | T | 66 | 1677/200 | VERIFIED | 250.1 | 249.8 | 1.0001000001280729 | none | yes |
+| `mixed_n67_L8475` | M | 67 | 339/40 | VERIFIED | 1299.0 | 1298.6 | 1.0000000006600718 | none | yes |
+| `mixed_n67_L848` | M | 67 | 212/25 | VERIFIED | 1388.3 | 1388.1 | 1.000000000605981 | none | yes |
+| `rect_n67_L844` | T | 67 | 211/25 | VERIFIED | 219.8 | 219.5 | 1.0001000010838108 | none | yes |
+| `rect_n67_L8455` | T | 67 | 1691/200 | VERIFIED | 257.1 | unavailable | 1.0001000007618854 | complete | no |
+| `mixed_n68_L853` | M | 68 | 853/100 | VERIFIED | 855.9 | unavailable | 1.0000000000889968 | none | yes |
+| `rect_n68_L846` | T | 68 | 423/50 | VERIFIED | 166.2 | 166.0 | 1.000100000608853 | none | yes |
+| `rect_n68_L8495` | T | 68 | 1699/200 | VERIFIED | 235.7 | 235.4 | 1.0001000035563214 | none | yes |
+| `rect_n68_L851` | T | 68 | 851/100 | VERIFIED | 296.9 | 296.5 | 1.0001000031311404 | complete | no |
+| `mixed_n69_L8612` | M | 69 | 2153/250 | VERIFIED | 1859.1 | 1858.9 | 1.0000000004388068 | none | yes |
+| `mixed_n69_L862` | M | 69 | 431/50 | VERIFIED | 2198.3 | 2198.0 | 1.000000000173938 | none | yes |
+| `rect_n69_L8545` | T | 69 | 1709/200 | VERIFIED | 229.3 | 229.0 | 1.000100000179333 | none | yes |
+| `rect_n69_L8575` | T | 69 | 343/40 | VERIFIED | 307.7 | unavailable | 1.0001000005653509 | complete | no |
+| `rect_n69_L8585` | T | 69 | 1717/200 | VERIFIED | 339.2 | 338.7 | 1.0001000000646423 | complete | no |
+| `mixed_n70_L86475` | M | 70 | 3459/400 | VERIFIED | 1753.5 | 1753.3 | 1.0000000002290894 | none | yes |
+| `mixed_n70_L86575` | M | 70 | 3463/400 | VERIFIED | 1938.6 | 1938.3 | 1.0000000000402047 | none | yes |
+| `rect_n70_L861` | T | 70 | 861/100 | VERIFIED | 229.7 | 229.5 | 1.000100002213263 | none | yes |
+| `rect_n70_L862` | T | 70 | 431/50 | VERIFIED | 266.2 | 265.9 | 1.0001000005601692 | none | yes |
+| `rect_n70_L8625` | T | 70 | 69/8 | VERIFIED | 290.4 | 290.1 | 1.0001000008439647 | complete | no |
+| `rect_n70_L86275` | T | 70 | 3451/400 | VERIFIED | 371.0 | 370.6 | 1.0001000000371736 | complete | no |
+| `mixed_n71_L8705` | M | 71 | 1741/200 | VERIFIED | 1678.5 | 1678.2 | 1.0000000006115706 | none | yes |
+| `mixed_n71_L8721` | M | 71 | 8721/1000 | VERIFIED | 2098.9 | 2098.6 | 1.0000000002314637 | none | yes |
+| `rect_n71_L8645` | T | 71 | 1729/200 | VERIFIED | 217.2 | 216.9 | 1.000100000419955 | none | yes |
+| `rect_n71_L8685` | T | 71 | 1737/200 | VERIFIED | 317.3 | unavailable | 1.0001000016144455 | complete | no |
+| `mixed_n72_L876` | M | 72 | 219/25 | VERIFIED | 2259.5 | 2259.2 | 1.000000000071343 | none | yes |
+| `rect_n72_L8705` | T | 72 | 1741/200 | VERIFIED | 241.1 | 240.8 | 1.0001000023832398 | none | yes |
+| `rect_n72_L874` | T | 72 | 437/50 | VERIFIED | 328.4 | 328.0 | 1.000100000114479 | complete | no |
+| `mixed_n73_L8809` | M | 73 | 8809/1000 | VERIFIED | 1820.2 | 1820.0 | 1.0000000002704519 | none | yes |
+| `mixed_n73_L8813` | M | 73 | 8813/1000 | VERIFIED | 1874.7 | 1874.4 | 1.0000000008042074 | none | yes |
+| `rect_n73_L874` | T | 73 | 437/50 | VERIFIED | 222.0 | 221.7 | 1.0001000112437228 | none | yes |
+| `rect_n73_L878` | T | 73 | 439/50 | VERIFIED | 312.8 | 312.4 | 1.000100002057731 | complete | no |
+| `mixed_n74_L88675` | M | 74 | 3547/400 | VERIFIED | 1741.0 | 1740.8 | 1.0000000001923686 | none | yes |
+| `rect_n74_L8815` | T | 74 | 1763/200 | VERIFIED | 231.3 | 231.0 | 1.00010000035846 | none | yes |
+| `rect_n74_L884` | T | 74 | 221/25 | VERIFIED | 307.1 | 306.8 | 1.0001000014372012 | none | yes |
+| `rect_n74_L88475` | T | 74 | 3539/400 | VERIFIED | 333.9 | 333.5 | 1.0001000002730311 | complete | no |
+| `mixed_n75_L892` | M | 75 | 223/25 | VERIFIED | 715.9 | 715.7 | 1.0000000001483238 | none | yes |
+| `mixed_n75_L894` | M | 75 | 447/50 | VERIFIED | 2704.8 | 2704.5 | 1.000000000005104 | none | yes |
+| `rect_n75_L889` | T | 75 | 889/100 | VERIFIED | 291.2 | unavailable | 1.000100000092212 | complete | no |
+| `rect_n75_L89` | T | 75 | 89/10 | VERIFIED | 303.4 | 303.0 | 1.0001000012091874 | complete | no |
+| `mixed_n76_L894` | M | 76 | 447/50 | VERIFIED | 758.5 | 758.3 | 1.0000000029480338 | complete | no |
+| `mixed_n76_L896` | M | 76 | 224/25 | VERIFIED | 700.2 | 700.1 | 1.0000000001194138 | none | yes |
+| `mixed_n76_L8965` | M | 76 | 1793/200 | VERIFIED | 757.7 | 757.5 | 1.0000000001430744 | none | yes |
+| `rect_n76_L89` | T | 76 | 89/10 | VERIFIED | 203.5 | 203.2 | 1.0001000007372345 | none | yes |
+| `rect_n76_L892` | T | 76 | 223/25 | VERIFIED | 254.7 | 254.4 | 1.0001000032640825 | none | yes |
+| `rect_n76_L8925` | T | 76 | 357/40 | VERIFIED | 283.5 | 283.2 | 1.0001000015650008 | complete | no |
+| `rect_n77_L888` | T | 77 | 222/25 | VERIFIED | 136.8 | 136.6 | 1.0001000023750815 | none | yes |
+| `rect_n77_L891` | T | 77 | 891/100 | VERIFIED | 169.5 | 169.2 | 1.0001000012862522 | none | yes |
+| `rect_n77_L89325` | T | 77 | 3573/400 | VERIFIED | 235.1 | 234.8 | 1.0001000022464466 | none | yes |
+| `rect_n77_L894` | T | 77 | 447/50 | VERIFIED | 269.8 | 269.4 | 1.0001000029952136 | none | yes |
+| `rect_n78_L8955` | T | 78 | 1791/200 | VERIFIED | 271.1 | unavailable | 1.0001000000494495 | complete | no |
+| `rect_n78_L8965` | T | 78 | 1793/200 | VERIFIED | 361.1 | 360.8 | 1.0001000003867002 | none | yes |
+| `mixed_n82_L932` | L | 82 | 233/25 | VERIFIED | 3387.6 | 3387.0 | 1.0000000001085079 | complete | no |
+| `mixed_n83_L935` | L | 83 | 187/20 | VERIFIED | 3068.8 | 3068.3 | 1.0000000006450585 | complete | no |
+| `mixed_n83_L937` | M | 83 | 937/100 | VERIFIED | 2054.5 | 2054.0 | 1.0000000001148488 | complete | no |
+| `mixed_n84_L940` | M | 84 | 47/5 | VERIFIED | 1753.7 | 1753.3 | 1.0000000000038998 | complete | no |
+| `mixed_n84_L94075` | M | 84 | 3763/400 | VERIFIED | 1493.7 | 1493.2 | 1.0000000005252527 | none | yes |
+| `mixed_n84_L9411` | M | 84 | 9411/1000 | VERIFIED | 1877.8 | 1877.5 | 1.000000000102596 | none | yes |
+| `mixed_n84_L94225` | M | 84 | 3769/400 | VERIFIED | 1395.7 | unavailable | 1.000000000314376 | none | yes |
+| `mixed_n85_L942` | M | 85 | 471/50 | VERIFIED | 1595.6 | 1595.2 | 1.0000000002558 | complete | no |
+| `mixed_n85_L946` | M | 85 | 473/50 | VERIFIED | 1549.7 | 1549.4 | 1.000000000416021 | complete | no |
+| `mixed_n85_L9475` | M | 85 | 379/40 | VERIFIED | 1414.0 | unavailable | 1.000000000004128 | none | yes |
+| `mixed_n86_L950` | M | 86 | 19/2 | VERIFIED | 1366.1 | 1365.8 | 1.0000000005619347 | none | yes |
+| `mixed_n86_L9503` | M | 86 | 9503/1000 | VERIFIED | 1457.9 | 1457.6 | 1.00000000020883 | none | yes |
+| `rect_n86_L9355` | T | 86 | 1871/200 | VERIFIED | 213.3 | unavailable | 1.0001000005089622 | complete | no |
+| `rect_n86_L9365` | T | 86 | 1873/200 | VERIFIED | 240.9 | 240.5 | 1.000100000512849 | none | yes |
+| `mixed_n87_L948` | M | 87 | 237/25 | VERIFIED | 451.1 | 450.9 | 1.0000000000698703 | complete | no |
+| `mixed_n87_L955` | M | 87 | 191/20 | VERIFIED | 1395.3 | 1395.1 | 1.000000000093562 | none | yes |
+| `mixed_n87_L958` | M | 87 | 479/50 | VERIFIED | 1899.2 | 1898.9 | 1.0000000002258154 | none | yes |
+| `rect_n87_L941` | T | 87 | 941/100 | VERIFIED | 252.6 | 252.3 | 1.0001000008254144 | none | yes |
+| `mixed_n88_L960` | M | 88 | 48/5 | VERIFIED | 1342.5 | 1342.3 | 1.00000000024589 | none | yes |
+| `mixed_n88_L96125` | M | 88 | 769/80 | VERIFIED | 1787.6 | 1787.3 | 1.000000000448649 | none | yes |
+| `mixed_n88_L962` | M | 88 | 481/50 | VERIFIED | 1648.3 | 1648.1 | 1.000000001156332 | none | yes |
+| `rect_n88_L945` | T | 88 | 189/20 | VERIFIED | 233.5 | 233.1 | 1.0001000012079906 | none | yes |
+| `rect_n88_L94775` | T | 88 | 3791/400 | VERIFIED | 232.9 | 232.5 | 1.0001000051383455 | complete | no |
+| `mixed_n89_L965` | M | 89 | 193/20 | VERIFIED | 1532.8 | 1532.7 | 1.0000000003462486 | none | yes |
+| `rect_n89_L955` | T | 89 | 191/20 | VERIFIED | 293.3 | 292.8 | 1.0001000092566568 | none | yes |
+| `rect_n89_L9565` | T | 89 | 1913/200 | VERIFIED | 299.7 | 299.1 | 1.000100000784854 | complete | no |
+| `mixed_n90_L960` | M | 90 | 48/5 | VERIFIED | 525.6 | 525.2 | 1.0000000000508447 | complete | no |
+| `mixed_n90_L9725` | M | 90 | 389/40 | VERIFIED | 2000.8 | 2000.5 | 1.0000000001882379 | none | yes |
+| `mixed_n90_L973` | M | 90 | 973/100 | VERIFIED | 2087.6 | 2087.3 | 1.000000000392674 | none | yes |
+| `rect_n90_L95775` | T | 90 | 3831/400 | VERIFIED | 243.9 | 243.5 | 1.0001000003477836 | none | yes |
+| `mixed_n91_L970` | M | 91 | 97/10 | VERIFIED | 418.2 | 418.0 | 1.0000000012160961 | complete | no |
+| `mixed_n91_L975` | M | 91 | 39/4 | VERIFIED | 2069.2 | 2068.9 | 1.0000000001703604 | none | yes |
+| `mixed_n91_L97625` | M | 91 | 781/80 | VERIFIED | 1824.2 | 1824.0 | 1.0000000003586995 | none | yes |
+| `rect_n91_L9645` | T | 91 | 1929/200 | VERIFIED | 274.6 | 274.2 | 1.000100000631634 | complete | no |
+| `rect_n91_L96475` | T | 91 | 3859/400 | VERIFIED | 322.9 | 322.3 | 1.0001000002583975 | none | yes |
+| `mixed_n92_L969` | M | 92 | 969/100 | VERIFIED | 580.7 | 580.3 | 1.0000000041386434 | complete | no |
+| `mixed_n92_L975` | M | 92 | 39/4 | VERIFIED | 443.0 | 442.8 | 1.0000000045215391 | complete | no |
+| `mixed_n92_L977` | M | 92 | 977/100 | VERIFIED | 550.7 | 550.6 | 1.0000000019666107 | none | yes |
+| `mixed_n93_L986` | M | 93 | 493/50 | VERIFIED | 1609.0 | 1608.8 | 1.0000000005644345 | none | yes |
+| `mixed_n93_L988` | M | 93 | 247/25 | VERIFIED | 1316.7 | 1316.4 | 1.0000000008842913 | none | yes |
+| `rect_n93_L97225` | T | 93 | 3889/400 | VERIFIED | 280.7 | 280.3 | 1.0001000022564717 | complete | no |
+| `rect_n93_L9735` | T | 93 | 1947/200 | VERIFIED | 337.4 | 336.8 | 1.0001000018920165 | none | yes |
+| `mixed_n94_L992` | M | 94 | 248/25 | VERIFIED | 1056.2 | 1056.0 | 1.0000000001531857 | none | yes |
+| `mixed_n94_L994` | M | 94 | 497/50 | VERIFIED | 1912.1 | 1911.8 | 1.0000000001238274 | none | yes |
+| `mixed_n94_L995` | M | 94 | 199/20 | VERIFIED | 2800.7 | 2800.3 | 1.000000000302789 | none | yes |
+| `rect_n94_L9795` | T | 94 | 1959/200 | VERIFIED | 274.6 | 274.2 | 1.0001000000378433 | none | yes |
+| `rect_n94_L9805` | T | 94 | 1961/200 | VERIFIED | 283.9 | 283.5 | 1.0001000020831263 | complete | no |
+| `mixed_n95_L996` | M | 95 | 249/25 | VERIFIED | 906.8 | 906.6 | 1.0000000007947085 | none | yes |
+| `mixed_n95_L9965` | M | 95 | 1993/200 | VERIFIED | 1053.5 | 1053.3 | 1.0000000013097659 | none | yes |
+| `rect_n95_L98418` | T | 95 | 49209/5000 | VERIFIED | 283.4 | unavailable | 1.0001000007374712 | complete | no |
+| `rect_n95_L98518` | T | 95 | 49259/5000 | VERIFIED | 270.5 | 270.1 | 1.0001000049027422 | complete | no |
+| `mixed_n96_L996` | M | 96 | 249/25 | VERIFIED | 456.4 | 456.2 | 1.000000000121414 | complete | no |
+| `mixed_n96_L997` | M | 96 | 997/100 | VERIFIED | 978.8 | 978.7 | 1.0000000000057894 | none | yes |
+| `mixed_n101_L1028` | L | 101 | 257/25 | VERIFIED | 128.4 | 128.0 | 1.000000000300333 | complete | no |
+| `mixed_n108_L1062` | M | 108 | 531/50 | VERIFIED | 2086.8 | 2086.5 | 1.0000000001765084 | none | yes |
 
-215 of 215 certificates verified; 129 of them are the first complete check of their
+219 of 219 certificates verified; 133 of them are the first complete check of their
 certificate in this repository.
 
 <!-- This document follows common-doc-guidelines.md.

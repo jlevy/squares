@@ -675,6 +675,23 @@ def test_closeable_needs_every_result_settled_triage_done_and_no_ask_queued() ->
             },
             "reproduced by a third party with the author's own checker",
         ),
+        (
+            {"relationship_to_generator": "shared-components", "verifiers": ["V-sqpack"]},
+            (
+                "re-verified here using a checker that shares components with the generator "
+                "(sqpack.fractional)"
+            ),
+        ),
+        (
+            {
+                "relationship_to_generator": "shared-components",
+                "origin": "independently-external",
+            },
+            (
+                "re-verified by a third party using a checker that shares components "
+                "with the generator"
+            ),
+        ),
         ({"relationship_to_generator": "unknown-historical"}, ""),
         ({}, ""),
     ],
@@ -737,6 +754,27 @@ def test_a_confirmation_without_the_relation_says_it_is_not_yet_recorded() -> No
         == "how it was re-verified is not yet recorded"
     )
     assert "not yet recorded" in check_requests.draft(issue(), bare, "owner/repo")
+
+
+def test_shared_components_are_disclosed_in_a_confirmed_reply() -> None:
+    shared = Register(
+        results=REGISTER.results,
+        evidence={
+            **REGISTER.evidence,
+            "E-replay": {
+                **REGISTER.evidence["E-replay"],
+                "relationship_to_generator": "shared-components",
+            },
+        },
+        verifiers=REGISTER.verifiers,
+    )
+    text = check_requests.draft(issue(), shared, "owner/repo")
+    assert (
+        "re-verified here using a checker that shares components with the generator (zmx2)"
+        in text
+    )
+    assert "not yet recorded" not in text
+    assert "by an independent implementation" not in text
 
 
 def test_the_draft_states_each_result_links_main_and_ends_in_the_footer() -> None:

@@ -1582,6 +1582,87 @@ def _n108_later_lower_projection(held: dict[str, Any], wrote: dict[str, Any], bo
     return _flat(body)
 
 
+#: The fine-net lower validations of 19 October 2026 at two T-174 houses: each count's
+#: result, candidate, lower bound, its review, the bound it replaced, and the one phrase
+#: of the earlier house paragraph the validation moved into the past tense.
+FINE_NET_LOWER_19_OCTOBER: dict[int, tuple[str, str, str, str, str, str, str]] = {
+    68: (
+        "T-205",
+        "mixed_n68_L853",
+        "853/100",
+        "8.53",
+        "n68-fine-net-mathematics",
+        "851/100",
+        "the strongest verified lower bound",
+    ),
+    84: (
+        "T-206",
+        "mixed_n84_L94225",
+        "3769/400",
+        "9.4225",
+        "n84-n85-fine-net-mathematics",
+        "9411/1000",
+        "and the verified lower bound",
+    ),
+}
+
+
+def _fine_net_lower_projection(
+    n: int, held: dict[str, Any], wrote: dict[str, Any], body: str
+) -> str:
+    """Check a 19 October fine-net lower validation, then compare the house layer below it.
+
+    T-205 and T-206 raised both lower lanes at 68 and 84 after the T-174 adoption of 17
+    October wrote those records, as n108's fine-net bound did on 18 October; the writer
+    owns neither lane, so the validation is checked exactly and projected out.
+    """
+    result, candidate, exact, value, review, earlier, phrase = FINE_NET_LOWER_19_OCTOBER[n]
+    tag = candidate.removeprefix("mixed_").replace("_L", "-").lower()
+    assert held["source_reviewed"] == "2026-10-19"
+    assert held["reported_lower_bound"]["exact_form"] == exact
+    assert held["verified_lower_bound"] == {
+        "value": value,
+        "exact_form": exact,
+        "evidence": [f"E-wand125-fine-net-{tag}-sqverify-fast-replay"],
+    }
+    assert held["evidence"] == [
+        f"E-wand125-fine-net-{tag}-report",
+        f"E-wand125-fine-net-{tag}-sqverify-fast-replay",
+        f"E-n{n:03d}-fine-net-review-premises",
+        f"E-n{n:03d}-fine-net-review-captures",
+        *wrote["evidence"],
+    ]
+    assert held["resources"] == [
+        {
+            "key": "[wand125 fine-net lower bounds 2026-10-16]",
+            "role": "lower-bound-proof",
+            "local": "web/wand125-fine-net-lower-bounds-2026-10-16",
+            "url": "https://github.com/wand125/square-packing",
+            "retrieved": True,
+        },
+        *wrote["resources"],
+    ]
+    for key in ("source_reviewed", "evidence", "resources"):
+        held[key] = wrote[key]
+    intro = (
+        f"**Fine-net validation, 19 October 2026 ({result}).** The retained candidate "
+        f"`{candidate}` raises both lower lanes from ${earlier}$ to ${exact}$. The complete "
+        "201-direction maintained native replay and [mathematical "
+        f"review](../../docs/project/reviews/review-2026-10-19-{review}.md) confirm it by a "
+        "re-implementation sharing components with the producer’s checker, wand125’s "
+        "adaptation of this repository’s `sqverify_fast` crate, apart from the declared-net "
+        "readers. The exact audits check premises and saved poses only. The original 18 source "
+        "reports and historical native receipts remain retained."
+    )
+    words = _flat(intro)
+    assert body.count(words) == 1, f"n={n}: fine-net introduction"
+    body = body.replace(words, "", 1)
+    # The one historical adjustment that accompanies each validation.
+    current, prior = f"{phrase} then was", f"{phrase} is"
+    assert body.count(current) == 1, f"n={n}: {current}"
+    return _flat(body.replace(current, prior, 1))
+
+
 def test_the_writer_rebuilds_every_adopted_record_from_its_prior_state(
     replayed: list[adopt.Move],
 ) -> None:
@@ -1594,8 +1675,9 @@ def test_the_writer_rebuilds_every_adopted_record_from_its_prior_state(
     record the earlier pass left (`adopt_houses.before_last_pass`). A writer that ran
     after the adoption is replayed after it: `apply_closed_form`, of 14 October 2026,
     raises the reported lower lane, adds its evidence, resource and paragraph, and moves
-    `source_reviewed` no earlier. The later n108 fine-net lower adoption is checked
-    explicitly and projected out before this historical upper-layer comparison.
+    `source_reviewed` no earlier. The later fine-net lower adoptions, n108's of 18 October
+    and n68's and n84's of 19 October, are checked explicitly and projected out before
+    this historical upper-layer comparison.
     """
     assert [move.n for move in replayed] == sorted(houses.ADOPTED)
     for move in replayed:
@@ -1609,6 +1691,8 @@ def test_the_writer_rebuilds_every_adopted_record_from_its_prior_state(
         historical_body = _body(committed)
         if move.n == 108:
             historical_body = _n108_later_lower_projection(held, wrote, historical_body)
+        elif move.n in FINE_NET_LOWER_19_OCTOBER:
+            historical_body = _fine_net_lower_projection(move.n, held, wrote, historical_body)
         for key in OWNED:
             assert held.get(key) == wrote.get(key), f"n={move.n}: packing.{key}"
         body = _flat(committed.split("---\n", 2)[2])

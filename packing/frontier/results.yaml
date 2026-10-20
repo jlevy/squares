@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:ResultsRegister/v1
   schema: results.schema.yaml
   status: enforced
-last_reviewed: '2026-10-18'
+last_reviewed: '2026-10-19'
 results:
   - id: T-001
     kind: lower-bound
@@ -28297,59 +28297,71 @@ results:
     registered: '2026-10-17'
     landed: '2026-10-19'
     headline: >-
-      Mixed rectangle-measure lower bound `s(68) ≥ 853/100` reported, on the
+      Mixed rectangle-measure lower bound `s(68) ≥ 853/100` verified, on the
       201-direction net
     claim: >-
       A rectangle measure of wand125/square-packing, published on 16 October 2026 and
-      reported in jlevy/squares#446, is reported to prove s(68) >= 853/100 = 8.53.
+      reported in jlevy/squares#446, proves s(68) >= 853/100 = 8.53.
 
       The certificate, mixed_n68_L853, is a density of 726 uniform rectangles in D4
-      orbits, and no point mass, of total mass 6799999/100000, on the net its
-      candidate declares, the standard net of 201 half-angle tangents of step 83/40000
-      at core side 9977/10000. Since 9977/10000 (1 + 83/40000) = 399908091/400000000 <
-      1, and the last tangent 83/200 is past tan(pi/8), every unit square contains a
-      concentric core at a net angle strictly in its interior.
+      orbits, 5796 distinct rectangles after expansion, and no point or segment, of
+      total mass 6799999/100000 < 68. Its declared net has 201 half-angle tangents of
+      step 83/40000 at core side 9977/10000. The strict core extent
+      399908091/400000000 < 1 and the last tangent 83/200, past tan(pi/8), supply the
+      reviewed net-and-shrink implication.
 
-      The source reports every such core capturing mass at least one at all 201
-      directions, by sqverify-proof-net, its copy of this repository's sqverify_fast
-      changed to read the declared net, in two complete runs, and a control with every
-      mass scaled by 197/200 refused at 32 sampled directions.
+      The retained maintained sqverify-fast capture verifies all 201 directions at
+      threshold one, under the qualified Mac release build of Rust 1.98.0. Its
+      whole-net controls record 197 coverage refusals and verified mutant directions
+      46, 47, 48 and 49, and the near-threshold mutant is refused. The mathematical
+      review accepts the implication and independently recomputed the saved-point
+      captures. The outer capture exit was unobserved after supervisor loss; the
+      complete recovered native result exited 0, and the later check and control
+      outer commands exited 0.
 
-      The value is above 851/100 = 8.51, the reported (T-068) and verified (T-074)
-      lower bound at n = 68, by 1/50.
-
-      Here the maintained readers accepted its exact mass, declared-net and check2
-      premises from the retained release asset. No complete replay has run here, so
-      the value stands as reported.
+      This raises the verified and reported lower lanes from 851/100 to 853/100. The
+      bound is confirmed by a re-implementation sharing components with the
+      producer's checker, sqverify-proof-net, which is wand125's adaptation of this
+      repository's sqverify_fast crate: the two share the crate apart from their
+      declared-net readers. The exact audits check premises and saved poses, not
+      coverage between poses; no independent full implementation, second method,
+      proof-assistant check or optimality theorem is claimed.
 
       wand125 after Tokoharu and Levy,
       [square-packing](https://github.com/wand125/square-packing/tree/14b4b0badd79cd95f9456143b304d5d158cf2ac7/problems/square-lower-bounds/certificates/mixed_n68_L853).
       The source says parts of the work were produced with AI assistance under human
       direction.
     scope: {n_values: [68]}
-    verification: V0
-    confirmation: C0
+    verification: V3
+    confirmation: C3
     significance:
       score: 3
       rationale: >-
-        Scored as a claim: if a complete replay passes, it is the strongest lower
-        bound on record at n = 68, 1/50 above the reported lane, by the certificate
-        kind and standard net of T-082, T-090 and T-091, with no new technique, at
-        S3 as T-176 to T-178 are.
-      scored: '2026-10-17'
+        The strongest verified and reported lower bound on record at n = 68, 1/50
+        above the prior lanes, by the certificate kind and standard net of T-082,
+        T-090 and T-091, with no new technique, at S3 as T-176 to T-178 and T-216
+        are.
+      scored: '2026-10-19'
       by: >-
-        the triage of the 17 October intake pass (think-f40c), confirmed by the
-        registering lane; the stage 4 review confirms or changes it
+        Review B of jlevy/squares#688
+        (https://github.com/jlevy/squares/pull/688#issuecomment-6281894861, 20 October
+        2026) confirms the registering lane's S3 on the register's scale, by the
+        precedent of T-176 to T-178 and T-216.
+        docs/project/reviews/review-2026-10-19-n68-fine-net-mathematics.md accepts the
+        certificate and does not assess significance.
     novelty: previously-published
     attribution:
       source_keys: ['[wand125 fine-net lower bounds 2026-10-16]']
       published: '2026-10-16'
     composition: >-
-      One reported certificate on its reported entry. The source's check is a copy of
-      this repository's sqverify_fast crate with one change, so a sqverify-fast replay
-      here would be re-implemented sharing the producer's components, as T-104's is,
-      and no second implementation stands beside it.
-    evidence: [E-wand125-fine-net-n68-853-report]
+      One source certificate and one complete maintained native replay, C3. The replay
+      shares components with the producer's checker, wand125's adaptation of this
+      repository's sqverify_fast crate, apart from the declared-net readers. The
+      separate exact premise and saved-point audits the case record cites supply no
+      universal decision or higher rung.
+    evidence:
+      - E-wand125-fine-net-n68-853-report
+      - E-wand125-fine-net-n68-853-sqverify-fast-replay
     artifacts:
       - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/README.md
       - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/acquisition/sources.json
@@ -28360,99 +28372,116 @@ results:
         packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n68_L853/check2/receipt.json
       - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/receipts/premises-n68.json
       - packing/devtools/fine_net_followup.py
+      - docs/project/reviews/review-2026-10-19-n68-fine-net-mathematics.md
+      - docs/project/reviews/review-2026-10-19-fine-net-mac-arithmetic.md
+      - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/README.md
+      - >-
+        packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/n68-certificate-math/audit-result.json.gz
+      - packing/benchmarks/measure-verifier/census-mixed/census.json
+      - >-
+        packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-2026-10-16/mixed_n68_L853.jsonl.gz
+      - >-
+        packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-2026-10-16/mixed_n68_L853.execution.json
     next_rung: >-
-      C3 needs a complete sqverify-fast census at all 201 directions of the retained
-      candidate, with its whole-net control receipt (the 99/100 mutant at every
-      direction, FC-1) and a review that reads this certificate, by the checklist of
-      the 6 October declared-net soundness review. The census runs in think-f40c,
-      priced at about 0.84 to 0.96 CPU-hours from the source's receipt.
-    unfinished_confirmations:
-      - what: >-
-          a complete sqverify-fast census at all 201 directions of the retained
-          candidate, with its whole-net control receipt (the 99/100 mutant at
-          every direction, FC-1) and a review that reads this certificate, by the
-          checklist of the 6 October declared-net soundness review
-        rung: C3
-        link: think-f40c
-        estimated_cost:
-          cpu_hours: 0.84
-          cpu_hours_high: 0.96
-          basis: >-
-            Twice the source's direction CPU over the net (1,730 CPU-s,
-            check2/receipt.json in
-            packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n68_L853),
-            once for the capture and once for the whole-net controls, at this
-            host's ratio of 0.871 to the source (think-w76a's eight-direction
-            sample of 14 October); the upper end is the source's own CPU, twice
-            over the net.
-          priced: '2026-10-17'
+      V4 and C4 need the additional qualifying adversarial AI review and the explicit
+      human oversight the rung rules require. An independent full implementation
+      would add implementation diversity; premise and saved-point checks do not
+      supply it.
     notes: >-
-      V0 because the cited entry is the source's public claim: assurance reported,
-      replay not attempted. C0 because no review has read this certificate yet. The
-      case records' lanes are unchanged, so the entry is pending adoption at n = 68.
-      The pre-publication receipt is a second complete run of the same source on a
-      fresh machine (75 s), not the run the check2 receipt embeds, so two complete
-      author runs are reported. The release asset's data members are retained in Git
-      under OR-18; the adapted verifier archive inside it is pinned by digest and not
-      opened.
+      From the accepted complete Mac checkpoint and the mapped mathematical review,
+      with the build's actual aarch64-apple-darwin, Rust 1.98.0 release identity.
+      Native per-direction CPU is unavailable; the original zero-valued summaries and
+      raw bytes remain unchanged. Aggregate wait4 and command timing are separate.
+      The outer capture exit was unobserved after supervisor loss; the complete
+      recovered native result exited 0, and the later check and control outer
+      commands exited 0. The source reports, the candidates and the historical n108
+      records are preserved. The landing retains the authentic completed computations
+      and audit receipts; it did not rerun native code or the historical exact audit.
+    reviews:
+      - path: docs/project/reviews/review-2026-10-19-n68-fine-net-mathematics.md
+        kind: adversarial
+        reviewer: Codex (OpenAI), strongest tier at maximum reasoning; separately prompted certificate mathematics lane
+        reviewer_kind: ai
+        relation: project
+        date: '2026-10-19'
+        scope: >-
+          The exact candidate implication, qualified retained native capture, control
+          partition and all 197 saved refusal captures for mixed_n68_L853; no native
+          rerun, no universal point-audit claim.
+        verdict: accepted
+        covers: [T-205]
+    controls:
+      - >-
+        packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-2026-10-16/mixed_n68_L853.control.json
+      - packing/tests/test_sqverify_fast_census.py
   - id: T-206
     kind: lower-bound
     registered: '2026-10-17'
     landed: '2026-10-19'
     headline: >-
-      Mixed rectangle-measure lower bound `s(84) ≥ 3769/400` reported, on the
+      Mixed rectangle-measure lower bound `s(84) ≥ 3769/400` verified, on the
       201-direction net
     claim: >-
       A rectangle measure of wand125/square-packing, published on 16 October 2026 and
-      reported in jlevy/squares#446, is reported to prove s(84) >= 3769/400 = 9.4225.
+      reported in jlevy/squares#446, proves s(84) >= 3769/400 = 9.4225.
 
       The certificate, mixed_n84_L94225, is a density of 815 uniform rectangles in D4
-      orbits, and no point mass, of total mass 8399999/100000, on the net its
-      candidate declares, the standard net of 201 half-angle tangents of step 83/40000
-      at core side 9977/10000. Since 9977/10000 (1 + 83/40000) = 399908091/400000000 <
-      1, and the last tangent 83/200 is past tan(pi/8), every unit square contains a
-      concentric core at a net angle strictly in its interior.
+      orbits, 6464 distinct rectangles after expansion, and no point or segment, of
+      total mass 8399999/100000 < 84. Its declared net has 201 half-angle tangents of
+      step 83/40000 at core side 9977/10000. The strict core extent
+      399908091/400000000 < 1 and the last tangent 83/200, past tan(pi/8), supply the
+      reviewed net-and-shrink implication.
 
-      The source reports every such core capturing mass at least one at all 201
-      directions, by sqverify-proof-net, its copy of this repository's sqverify_fast
-      changed to read the declared net, in two complete runs, and a control with every
-      mass scaled by 197/200 refused at 32 sampled directions.
+      The retained maintained sqverify-fast capture verifies all 201 directions at
+      threshold one, under the qualified Mac release build of Rust 1.98.0. Its
+      whole-net controls record 201 coverage refusals and no verified mutant
+      direction, and the near-threshold mutant is refused. The mathematical review
+      accepts the implication and independently recomputed the saved-point captures.
+      The outer capture, check and control commands all have observed exit 0.
 
-      The value is above T-094's 9411/1000 = 9.411, the verified and reported lower
-      bound at n = 84, by 23/2000.
-
-      Here the maintained readers accepted its exact mass, declared-net and check2
-      premises from the retained release asset. No complete replay has run here, so
-      the value stands as reported.
+      This raises the verified and reported lower lanes from 9411/1000 to 3769/400.
+      The bound is confirmed by a re-implementation sharing components with the
+      producer's checker, sqverify-proof-net, which is wand125's adaptation of this
+      repository's sqverify_fast crate: the two share the crate apart from their
+      declared-net readers. The exact audits check premises and saved poses, not
+      coverage between poses; no independent full implementation, second method,
+      proof-assistant check or optimality theorem is claimed.
 
       wand125 after Tokoharu and Levy,
       [square-packing](https://github.com/wand125/square-packing/tree/f28b5f3d0ebc500a761a02514c1ce5b9b9e203f1/problems/square-lower-bounds/certificates/mixed_n84_L94225).
       The source says parts of the work were produced with AI assistance under human
       direction.
     scope: {n_values: [84]}
-    verification: V0
-    confirmation: C0
+    verification: V3
+    confirmation: C3
     significance:
       score: 3
       rationale: >-
-        Scored as a claim: if a complete replay passes, it is the strongest lower
-        bound on record at n = 84, 23/2000 above the reported lane, by the
-        certificate kind and standard net of T-082, T-090 and T-091, with no new
-        technique, at S3 as T-176 to T-178 are.
-      scored: '2026-10-17'
+        The strongest verified and reported lower bound on record at n = 84, 23/2000
+        above the prior lanes, by the certificate kind and standard net of T-082,
+        T-090 and T-091, with no new technique, at S3 as T-176 to T-178 and T-216
+        are.
+      scored: '2026-10-19'
       by: >-
-        the triage of the 17 October intake pass (think-f40c), confirmed by the
-        registering lane; the stage 4 review confirms or changes it
+        Review B of jlevy/squares#688
+        (https://github.com/jlevy/squares/pull/688#issuecomment-6281894861, 20 October
+        2026) confirms the registering lane's S3 on the register's scale, by the
+        precedent of T-176 to T-178 and T-216.
+        docs/project/reviews/review-2026-10-19-n84-n85-fine-net-mathematics.md accepts
+        the certificate and does not assess significance.
     novelty: previously-published
     attribution:
       source_keys: ['[wand125 fine-net lower bounds 2026-10-16]']
       published: '2026-10-16'
     composition: >-
-      One reported certificate on its reported entry. The source's check is a copy of
-      this repository's sqverify_fast crate with one change, so a sqverify-fast replay
-      here would be re-implemented sharing the producer's components, as T-104's is,
-      and no second implementation stands beside it.
-    evidence: [E-wand125-fine-net-n84-94225-report]
+      One source certificate and one complete maintained native replay, C3. The replay
+      shares components with the producer's checker, wand125's adaptation of this
+      repository's sqverify_fast crate, apart from the declared-net readers. The
+      separate exact premise and saved-point audits the case record cites supply no
+      universal decision or higher rung.
+    evidence:
+      - E-wand125-fine-net-n84-94225-report
+      - E-wand125-fine-net-n84-94225-sqverify-fast-replay
     artifacts:
       - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/README.md
       - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/acquisition/sources.json
@@ -28463,99 +28492,115 @@ results:
         packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n84_L94225/check2/receipt.json
       - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/receipts/premises-n84.json
       - packing/devtools/fine_net_followup.py
+      - docs/project/reviews/review-2026-10-19-n84-n85-fine-net-mathematics.md
+      - docs/project/reviews/review-2026-10-19-fine-net-mac-arithmetic.md
+      - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/README.md
+      - >-
+        packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/n84-n85-certificate-math/n84-audit-result.json.gz
+      - packing/benchmarks/measure-verifier/census-mixed/census.json
+      - >-
+        packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-2026-10-16/mixed_n84_L94225.jsonl.gz
+      - >-
+        packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-2026-10-16/mixed_n84_L94225.execution.json
     next_rung: >-
-      C3 needs a complete sqverify-fast census at all 201 directions of the retained
-      candidate, with its whole-net control receipt (the 99/100 mutant at every
-      direction, FC-1) and a review that reads this certificate, by the checklist of
-      the 6 October declared-net soundness review. The census runs in think-f40c,
-      priced at about 1.5 to 1.72 CPU-hours from the source's receipt.
-    unfinished_confirmations:
-      - what: >-
-          a complete sqverify-fast census at all 201 directions of the retained
-          candidate, with its whole-net control receipt (the 99/100 mutant at
-          every direction, FC-1) and a review that reads this certificate, by the
-          checklist of the 6 October declared-net soundness review
-        rung: C3
-        link: think-f40c
-        estimated_cost:
-          cpu_hours: 1.5
-          cpu_hours_high: 1.72
-          basis: >-
-            Twice the source's direction CPU over the net (3,091 CPU-s,
-            check2/receipt.json in
-            packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n84_L94225),
-            once for the capture and once for the whole-net controls, at this
-            host's ratio of 0.871 to the source (think-w76a's eight-direction
-            sample of 14 October); the upper end is the source's own CPU, twice
-            over the net.
-          priced: '2026-10-17'
+      V4 and C4 need the additional qualifying adversarial AI review and the explicit
+      human oversight the rung rules require. An independent full implementation
+      would add implementation diversity; premise and saved-point checks do not
+      supply it.
     notes: >-
-      V0 because the cited entry is the source's public claim: assurance reported,
-      replay not attempted. C0 because no review has read this certificate yet. The
-      case records' lanes are unchanged, so the entry is pending adoption at n = 84.
-      The pre-publication receipt is a second complete run of the same source on a
-      fresh machine (121 s), not the run the check2 receipt embeds, so two complete
-      author runs are reported. The release asset's data members are retained in Git
-      under OR-18; the adapted verifier archive inside it is pinned by digest and not
-      opened.
+      From the accepted complete Mac checkpoint and the mapped mathematical review,
+      with the build's actual aarch64-apple-darwin, Rust 1.98.0 release identity.
+      Native per-direction CPU is unavailable; the original zero-valued summaries and
+      raw bytes remain unchanged. Aggregate wait4 and command timing are separate.
+      The outer capture, check and control commands all have observed exit 0. The
+      source reports, the candidates and the historical n108 records are preserved.
+      The landing retains the authentic completed computations and audit receipts; it
+      did not rerun native code or the historical exact audit.
+    reviews:
+      - path: docs/project/reviews/review-2026-10-19-n84-n85-fine-net-mathematics.md
+        kind: adversarial
+        reviewer: Codex (OpenAI), strongest tier at maximum reasoning; separately prompted certificate mathematics lane
+        reviewer_kind: ai
+        relation: project
+        date: '2026-10-19'
+        scope: >-
+          The exact candidate implication, qualified retained native capture, control
+          partition and all 201 saved refusal captures for mixed_n84_L94225; no native
+          rerun, no universal point-audit claim.
+        verdict: accepted
+        covers: [T-206, T-207]
+    controls:
+      - >-
+        packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-2026-10-16/mixed_n84_L94225.control.json
+      - packing/tests/test_sqverify_fast_census.py
   - id: T-207
     kind: lower-bound
     registered: '2026-10-17'
     landed: '2026-10-19'
     headline: >-
-      Mixed rectangle-measure lower bound `s(85) ≥ 379/40` reported, on the
+      Mixed rectangle-measure lower bound `s(85) ≥ 379/40` verified, on the
       201-direction net
     claim: >-
       A rectangle measure of wand125/square-packing, published on 16 October 2026 and
-      reported in jlevy/squares#446, is reported to prove s(85) >= 379/40 = 9.475.
+      reported in jlevy/squares#446, proves s(85) >= 379/40 = 9.475.
 
       The certificate, mixed_n85_L9475, is a density of 838 uniform rectangles in D4
-      orbits, and no point mass, of total mass 8499999/100000, on the net its
-      candidate declares, the standard net of 201 half-angle tangents of step 83/40000
-      at core side 9977/10000. Since 9977/10000 (1 + 83/40000) = 399908091/400000000 <
-      1, and the last tangent 83/200 is past tan(pi/8), every unit square contains a
-      concentric core at a net angle strictly in its interior.
+      orbits, 6672 distinct rectangles after expansion, and no point or segment, of
+      total mass 8499999/100000 < 85. Its declared net has 201 half-angle tangents of
+      step 83/40000 at core side 9977/10000. The strict core extent
+      399908091/400000000 < 1 and the last tangent 83/200, past tan(pi/8), supply the
+      reviewed net-and-shrink implication.
 
-      The source reports every such core capturing mass at least one at all 201
-      directions, by sqverify-proof-net, its copy of this repository's sqverify_fast
-      changed to read the declared net, in two complete runs, and a control with every
-      mass scaled by 197/200 refused at 32 sampled directions.
+      The retained maintained sqverify-fast capture verifies all 201 directions at
+      threshold one, under the qualified Mac release build of Rust 1.98.0. Its
+      whole-net controls record 201 coverage refusals and no verified mutant
+      direction, and the near-threshold mutant is refused. The mathematical review
+      accepts the implication and independently recomputed the saved-point captures.
+      The outer capture, check and control commands all have observed exit 0.
 
-      The value is above T-075's 473/50 = 9.46, the verified and reported lower bound
-      at n = 85, by 3/200.
-
-      Here the maintained readers accepted its exact mass, declared-net and check2
-      premises from the retained release asset. No complete replay has run here, so
-      the value stands as reported.
+      This raises the verified and reported lower lanes from 473/50 to 379/40. The
+      bound is confirmed by a re-implementation sharing components with the
+      producer's checker, sqverify-proof-net, which is wand125's adaptation of this
+      repository's sqverify_fast crate: the two share the crate apart from their
+      declared-net readers. The exact audits check premises and saved poses, not
+      coverage between poses; no independent full implementation, second method,
+      proof-assistant check or optimality theorem is claimed.
 
       wand125 after Tokoharu and Levy,
       [square-packing](https://github.com/wand125/square-packing/tree/fc2e96f0a253e00fbc4263625f4fc34774d157a6/problems/square-lower-bounds/certificates/mixed_n85_L9475).
       The source says parts of the work were produced with AI assistance under human
       direction.
     scope: {n_values: [85]}
-    verification: V0
-    confirmation: C0
+    verification: V3
+    confirmation: C3
     significance:
       score: 3
       rationale: >-
-        Scored as a claim: if a complete replay passes, it is the strongest lower
-        bound on record at n = 85, 3/200 above the reported lane, by the certificate
-        kind and standard net of T-082, T-090 and T-091, with no new technique, at
-        S3 as T-176 to T-178 are.
-      scored: '2026-10-17'
+        The strongest verified and reported lower bound on record at n = 85, 3/200
+        above the prior lanes, by the certificate kind and standard net of T-082,
+        T-090 and T-091, with no new technique, at S3 as T-176 to T-178 and T-216
+        are.
+      scored: '2026-10-19'
       by: >-
-        the triage of the 17 October intake pass (think-f40c), confirmed by the
-        registering lane; the stage 4 review confirms or changes it
+        Review B of jlevy/squares#688
+        (https://github.com/jlevy/squares/pull/688#issuecomment-6281894861, 20 October
+        2026) confirms the registering lane's S3 on the register's scale, by the
+        precedent of T-176 to T-178 and T-216.
+        docs/project/reviews/review-2026-10-19-n84-n85-fine-net-mathematics.md accepts
+        the certificate and does not assess significance.
     novelty: previously-published
     attribution:
       source_keys: ['[wand125 fine-net lower bounds 2026-10-16]']
       published: '2026-10-16'
     composition: >-
-      One reported certificate on its reported entry. The source's check is a copy of
-      this repository's sqverify_fast crate with one change, so a sqverify-fast replay
-      here would be re-implemented sharing the producer's components, as T-104's is,
-      and no second implementation stands beside it.
-    evidence: [E-wand125-fine-net-n85-9475-report]
+      One source certificate and one complete maintained native replay, C3. The replay
+      shares components with the producer's checker, wand125's adaptation of this
+      repository's sqverify_fast crate, apart from the declared-net readers. The
+      separate exact premise and saved-point audits the case record cites supply no
+      universal decision or higher rung.
+    evidence:
+      - E-wand125-fine-net-n85-9475-report
+      - E-wand125-fine-net-n85-9475-sqverify-fast-replay
     artifacts:
       - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/README.md
       - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/acquisition/sources.json
@@ -28566,41 +28611,47 @@ results:
         packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n85_L9475/check2/receipt.json
       - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/receipts/premises-n85.json
       - packing/devtools/fine_net_followup.py
+      - docs/project/reviews/review-2026-10-19-n84-n85-fine-net-mathematics.md
+      - docs/project/reviews/review-2026-10-19-fine-net-mac-arithmetic.md
+      - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/README.md
+      - >-
+        packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/n84-n85-certificate-math/n85-audit-result.json.gz
+      - packing/benchmarks/measure-verifier/census-mixed/census.json
+      - >-
+        packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-2026-10-16/mixed_n85_L9475.jsonl.gz
+      - >-
+        packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-2026-10-16/mixed_n85_L9475.execution.json
     next_rung: >-
-      C3 needs a complete sqverify-fast census at all 201 directions of the retained
-      candidate, with its whole-net control receipt (the 99/100 mutant at every
-      direction, FC-1) and a review that reads this certificate, by the checklist of
-      the 6 October declared-net soundness review. The census runs in think-f40c,
-      priced at about 1.32 to 1.52 CPU-hours from the source's receipt.
-    unfinished_confirmations:
-      - what: >-
-          a complete sqverify-fast census at all 201 directions of the retained
-          candidate, with its whole-net control receipt (the 99/100 mutant at
-          every direction, FC-1) and a review that reads this certificate, by the
-          checklist of the 6 October declared-net soundness review
-        rung: C3
-        link: think-f40c
-        estimated_cost:
-          cpu_hours: 1.32
-          cpu_hours_high: 1.52
-          basis: >-
-            Twice the source's direction CPU over the net (2,733 CPU-s,
-            check2/receipt.json in
-            packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/release/certificates/mixed_n85_L9475),
-            once for the capture and once for the whole-net controls, at this
-            host's ratio of 0.871 to the source (think-w76a's eight-direction
-            sample of 14 October); the upper end is the source's own CPU, twice
-            over the net.
-          priced: '2026-10-17'
+      V4 and C4 need the additional qualifying adversarial AI review and the explicit
+      human oversight the rung rules require. An independent full implementation
+      would add implementation diversity; premise and saved-point checks do not
+      supply it.
     notes: >-
-      V0 because the cited entry is the source's public claim: assurance reported,
-      replay not attempted. C0 because no review has read this certificate yet. The
-      case records' lanes are unchanged, so the entry is pending adoption at n = 85.
-      The pre-publication receipt is a second complete run of the same source on a
-      fresh machine (124 s), not the run the check2 receipt embeds, so two complete
-      author runs are reported. The release asset's data members are retained in Git
-      under OR-18; the adapted verifier archive inside it is pinned by digest and not
-      opened.
+      From the accepted complete Mac checkpoint and the mapped mathematical review,
+      with the build's actual aarch64-apple-darwin, Rust 1.98.0 release identity.
+      Native per-direction CPU is unavailable; the original zero-valued summaries and
+      raw bytes remain unchanged. Aggregate wait4 and command timing are separate.
+      The outer capture, check and control commands all have observed exit 0. The
+      source reports, the candidates and the historical n108 records are preserved.
+      The landing retains the authentic completed computations and audit receipts; it
+      did not rerun native code or the historical exact audit.
+    reviews:
+      - path: docs/project/reviews/review-2026-10-19-n84-n85-fine-net-mathematics.md
+        kind: adversarial
+        reviewer: Codex (OpenAI), strongest tier at maximum reasoning; separately prompted certificate mathematics lane
+        reviewer_kind: ai
+        relation: project
+        date: '2026-10-19'
+        scope: >-
+          The exact candidate implication, qualified retained native capture, control
+          partition and all 201 saved refusal captures for mixed_n85_L9475; no native
+          rerun, no universal point-audit claim.
+        verdict: accepted
+        covers: [T-206, T-207]
+    controls:
+      - >-
+        packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-2026-10-16/mixed_n85_L9475.control.json
+      - packing/tests/test_sqverify_fast_census.py
   - id: T-208
     kind: lower-bound
     registered: '2026-10-17'
