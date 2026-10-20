@@ -1670,6 +1670,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         components=("paper:n11-optimality-review", "paper:n11-threshold-bound-review"),
         paths=(
             "packing/devtools/adopt_houses.py",
+            "packing/devtools/run_negative_controls.py",
             "packing/devtools/upper_bound_houses.py",
             "packing/devtools/upper_bound_reports.py",
             "packing/frontier/results.yaml",
@@ -1683,14 +1684,20 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "papers/n11-threshold-bound-review.pdf",
         ),
         reason=(
-            "For PR687 (T-220 at n = 183) against main 926cd764, source review of both "
-            "reviews' HTML, Markdown and PDF producers: each reads results.yaml only "
-            "through paper_figures.ladder_records, which selects the n11 ladder rungs "
-            "LADDER_RUNGS names and holds them to LADDER_DIGEST; T-220 is an added "
-            "n183 entry outside that ladder, and no ladder row changes. The house reader, "
-            "house writer and house-source changes are not called by these producers. "
-            "Manuscripts, figures and publication metadata are unchanged. Retain v0.1.7 "
-            "and v0.1.0; no render, PDF redraw or artifact byte identity is claimed."
+            "For PR687 (T-220 at n = 183) against main 012dcf9e: both reviews read "
+            "results.yaml only through paper_figures.ladder_records, which selects the n11 "
+            "ladder rungs LADDER_RUNGS names and holds them to LADDER_DIGEST; T-220 is an "
+            "added n183 entry outside that ladder, and no ladder row changes. The house "
+            "reader, writer and source changes are not called by these producers, and "
+            "run_negative_controls.py changes only the snapshot cap and its comments. "
+            "Rendered at link revision af1987e9, this branch after its merge of main "
+            "012dcf9e (#692, site v0.8.3) and its edition cuts, once from this branch's "
+            "tree and once with main's copies of the seven changed inputs (adopt_houses, "
+            "run_negative_controls, upper_bound_houses and upper_bound_reports, "
+            "results.yaml, result-requests.yaml and source-coverage.yaml): "
+            "render_n11_optimality_review, render_n11_threshold_bound_review and "
+            "render_packing_methods write 50 files, byte-identical between the trees. No "
+            "PDF was printed; each prints from that HTML. Retain v0.1.7 and v0.1.0."
         ),
     ),
     ReleaseNoPublicChange(
@@ -1698,6 +1705,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         paths=(
             "packing/campaign/result-requests.yaml",
             "packing/devtools/adopt_houses.py",
+            "packing/devtools/run_negative_controls.py",
             "packing/devtools/upper_bound_houses.py",
             "packing/devtools/upper_bound_reports.py",
             "packing/frontier/results.yaml",
@@ -1709,14 +1717,20 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "papers/square-packing-methods-survey.pdf",
         ),
         reason=(
-            "For PR687 (T-220 at n = 183) against main 926cd764, source review of the "
-            "survey's HTML, Markdown and PDF producers: result requests, source coverage "
-            "and results are citation targets whose existence the producer checks; "
-            "their bodies are not inlined, and every cited path remains present. The "
+            "For PR687 (T-220 at n = 183) against main 012dcf9e: result requests, source "
+            "coverage and results are citation targets whose existence the producer "
+            "checks, not inlined text, and every cited path exists at both revisions; the "
             "added #680 request, n183 coverage entry and T-220 entry are not cited by the "
-            "survey. The house reader, writer and source changes do not enter its "
-            "output. Manuscript, renderer and publication metadata are unchanged. Retain "
-            "v0.2.3; no render, PDF redraw or artifact byte identity is claimed."
+            "survey. The house reader, writer and source changes do not enter its output, "
+            "and run_negative_controls.py changes only the snapshot cap and its comments. "
+            "Rendered at link revision af1987e9, this branch after its merge of main "
+            "012dcf9e (#692, site v0.8.3) and its edition cuts, once from this branch's "
+            "tree and once with main's copies of the seven changed inputs (adopt_houses, "
+            "run_negative_controls, upper_bound_houses and upper_bound_reports, "
+            "results.yaml, result-requests.yaml and source-coverage.yaml): "
+            "render_n11_optimality_review, render_n11_threshold_bound_review and "
+            "render_packing_methods write 50 files, byte-identical between the trees. No "
+            "PDF was printed; each prints from that HTML. Retain v0.2.3."
         ),
     ),
     ReleaseNoPublicChange(
