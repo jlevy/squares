@@ -3,9 +3,9 @@ type: is
 id: is-01m5733vb647dgxe7x8t65xtsr
 title: "Resolve credit correction: evand: Credit correction request: s(146) and s(308) found_by (#673)"
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 10
+version: 11
 delegate: c-lane-692
 labels:
   - result-import
@@ -14,8 +14,12 @@ parent_id: is-01m572ssbx1x412zpvsw1sb6je
 hold: null
 hold_until: null
 created_at: 2026-10-18T08:47:37.317Z
-updated_at: 2026-10-20T02:06:44.300Z
+updated_at: 2026-10-20T17:09:48.567Z
 started_at: 2026-10-18T13:04:20.677Z
+closed_at: 2026-10-20T17:09:48.567Z
+close_reason: "Done: #673's credit correction landed with #692 (012dcf9e5); final reply 673#6294849401 posted, issue closed 2026-10-20, recorded by #698 (40c84340a)."
+resolution: null
+duplicate_of: null
 ---
 W1 intake 2026-10-18, parent think-xmxb. https://github.com/jlevy/squares/issues/673
 Source pins in author report: 
