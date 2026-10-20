@@ -2038,13 +2038,15 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         reason=(
             "PR406 adds the Git-storage guard to the validation CLI push schedule "
             "and its status banner. The explainer declares the whole sqpack package, "
-            "but its HTML, Markdown and PDF entrypoints' source import closure does "
-            "not include cli/validate.py. The manuscript, certificate inputs, figures, "
-            "rendering helpers and paper release metadata are unchanged against main "
-            "0ee05f4f3, so the paper retains v0.4.8. This is a source-based producer "
-            "review; no paper export was rebuilt or compared for byte identity. The "
-            "changed development.md is published as development.html and needs its "
-            "own site successor decision; this paper-only scope does not cover it."
+            "but the import closure of its ten Python entrypoints, measured with "
+            "pages_scope.import_closure on main 4b8aec9a6 with this branch merged, is "
+            "132 files and holds no sqpack.cli module. The manuscript, certificate "
+            "inputs, figures, rendering helpers and paper release metadata are "
+            "unchanged against that main, so the paper retains v0.4.8. This is a "
+            "source-based producer review; no paper export was rebuilt or compared for "
+            "byte identity. The changed development.md is published as "
+            "development.html and is covered by this branch's site edition, not by "
+            "this paper-only record."
         ),
     ),
     ReleaseNoPublicChange(
