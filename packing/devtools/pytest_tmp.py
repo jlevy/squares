@@ -11,22 +11,28 @@ and writes the session's PID to a `.lock` file inside it, removing the lock at e
 Every later session prunes the numbered directories beyond the newest
 `tmp_path_retention_count`, but skips any whose lock is younger than three days. A
 session that never reaches its exit -- SIGTERM from a validation deadline or a cancelled
-gate, SIGKILL, an agent's command timeout -- leaves its lock behind, so its whole tree
-outlived every later session for three days. On 2026-10-16 that left about 11 GB in
-`/tmp/pytest-of-root` across 19 numbered directories, with `pytest-3` still present
-beside `pytest-132`. pytest's `cleanup_numbered_dir` also removes `garbage-*`
-directories, the trees a session was deleting when it died, under the same lock rule.
+gate, SIGKILL, an agent's command timeout, a restarted machine -- leaves its lock behind,
+so its whole tree outlives every later session for three days. On 2026-10-16 that left
+about 11 GB in `/tmp/pytest-of-root` across 19 numbered directories, with `pytest-3`
+still present beside `pytest-132`.
 
-At the start of each session that uses the shared numbered root (not an xdist worker,
-not one given `--basetemp`), `release_dead_locks` removes the lock of every `pytest-N`
-and `garbage-*` directory whose recorded process no longer exists. pytest's own
-retention at that session's exit then treats them as finished sessions: those beyond the
-newest `tmp_path_retention_count` are deleted, the rest are kept. A lock whose process
-still exists, whose PID is unreadable, or that is half-written is left alone. A PID is
-only meaningful in the PID namespace that wrote it, so this assumes the processes that
-share one temporary root also share one PID namespace -- true of one machine or one
-container, and not of containers that bind-mount the same `/tmp`. A reused PID errs the
-safe way: the directory waits for pytest's three days.
+So a session that uses the shared numbered root (not an xdist worker, not one given
+`--basetemp`) writes an owner record, `.lock-owner`, beside its lock as soon as pytest
+creates the directory: its PID and its PID namespace. At the start of each such session,
+`release_dead_locks` removes the lock of every `pytest-N` whose owner record names the
+lock's PID, names this process's PID namespace, and whose process no longer exists.
+pytest's own retention at that session's exit then treats those directories as finished
+sessions: the ones beyond the newest `tmp_path_retention_count` are deleted, the rest
+are kept. Anything in doubt keeps its lock and waits for pytest's three days: a live or
+unreadable PID, a lock or record that is absent or half-written, a session from another
+PID namespace (a container sharing the same `/tmp`, where the PID means another
+process), or one that predates this plugin. A reused PID errs the same way.
+
+pytest deletes a directory by locking it with the deleting process's PID, renaming it to
+`garbage-<uuid>` and removing the tree; a deleter killed part-way leaves that garbage and
+its lock behind, under the same three-day rule. A garbage directory's lock is released
+when its PID no longer exists here, with no owner record: nothing live is ever inside
+one, so the worst a misread PID can cause is two processes deleting the same dead tree.
 
 **Measurement.** `--tmp-usage PATH` appends JSON lines to `PATH`: one per test that used
 `tmp_path` (its allocated bytes and file count just before teardown removes it), one per
@@ -66,12 +72,13 @@ from typing import Any
 import pytest
 
 SCHEMA = "pytest-tmp-usage-v1"
+OWNER_SCHEMA = "pytest-tmp-owner-v1"
 NUMBERED_PREFIX = "pytest-"
 GARBAGE_PREFIX = "garbage-"
 LOCK_NAME = ".lock"
+OWNER_NAME = ".lock-owner"
 DEFAULT_INTERVAL_SECONDS = 2.0
 PEAK_OWNERS = 20
-BUDGET_OPTION = "tmp_path_budget_mib"
 
 
 # -- killed sessions -------------------------------------------------------------------
@@ -87,6 +94,33 @@ def numbered_root() -> Path:
     return temproot.resolve() / f"pytest-of-{user}"
 
 
+def pid_namespace() -> str | None:
+    """Where this process's PIDs name processes: its PID namespace on Linux.
+
+    Elsewhere on POSIX a PID names the same process machine-wide. None when the namespace
+    cannot be read, and then no numbered directory's lock is ever released.
+    """
+    if os.name != "posix":
+        return None  # os.kill(pid, 0) terminates the process on Windows
+    if sys.platform.startswith("linux"):
+        try:
+            return f"linux {Path('/proc/self/ns/pid').readlink()}"
+        except OSError:
+            return None
+    return sys.platform
+
+
+def owner_record(pid: int, namespace: str) -> dict[str, object]:
+    return {"schema": OWNER_SCHEMA, "pid": pid, "pid_namespace": namespace}
+
+
+def write_owner(directory: Path, namespace: str) -> None:
+    """Record this process as the owner of the numbered directory pytest just made."""
+    text = json.dumps(owner_record(os.getpid(), namespace), sort_keys=True)
+    with suppress(OSError):
+        (directory / OWNER_NAME).write_text(text, encoding="ascii")
+
+
 def process_exists(pid: int) -> bool:
     """Whether `pid` names a live process; any doubt answers yes."""
     try:
@@ -98,37 +132,87 @@ def process_exists(pid: int) -> bool:
     return True
 
 
-def release_dead_locks(root: Path) -> list[Path]:
+def _lock_pid(directory: Path) -> int | None:
+    try:
+        text = (directory / LOCK_NAME).read_text(encoding="ascii")
+    except OSError, UnicodeDecodeError:
+        return None
+    if not text.isdecimal():
+        return None  # absent or half-written: its owner may be creating it now
+    pid = int(text)
+    return pid if pid > 0 else None
+
+
+def _owned_by(directory: Path, pid: int, namespace: str) -> bool:
+    try:
+        record = json.loads((directory / OWNER_NAME).read_text(encoding="ascii"))
+    except OSError, ValueError:
+        return False
+    return record == owner_record(pid, namespace)
+
+
+def release_dead_locks(root: Path, namespace: str | None) -> list[Path]:
     """Remove the lock of every numbered or garbage directory whose owner has exited.
 
-    Returns the directories released. pytest's own retention deletes them later.
+    `namespace` is this process's `pid_namespace()`. Returns the directories released;
+    pytest's own retention deletes them later.
     """
     if os.name != "posix":
-        return []  # os.kill(pid, 0) terminates the process on Windows
+        return []
     try:
         entries = sorted(root.iterdir())
     except OSError:
         return []
     released: list[Path] = []
     for entry in entries:
-        if not entry.name.startswith((NUMBERED_PREFIX, GARBAGE_PREFIX)):
+        garbage = entry.name.startswith(GARBAGE_PREFIX)
+        if not garbage and not entry.name.startswith(NUMBERED_PREFIX):
             continue
         if entry.is_symlink() or not entry.is_dir():
             continue  # `pytest-current` is a symlink to the newest session
-        lock = entry / LOCK_NAME
-        try:
-            text = lock.read_text(encoding="ascii")
-        except OSError, UnicodeDecodeError:
+        pid = _lock_pid(entry)
+        if pid is None or pid == os.getpid() or process_exists(pid):
             continue
-        if not text.isdecimal():
-            continue  # absent or half-written: its owner may be creating it now
-        pid = int(text)
-        if pid <= 0 or pid == os.getpid() or process_exists(pid):
+        if not garbage and (namespace is None or not _owned_by(entry, pid, namespace)):
             continue
+        # Between the read above and this unlink another pytest may have deleted the
+        # directory, or released it and locked it to delete it; either way the tree is a
+        # dead session's, and the worst outcome is two processes removing it at once.
         with suppress(OSError):
-            lock.unlink()
+            (entry / LOCK_NAME).unlink()
             released.append(entry)
     return released
+
+
+class SessionOwner:
+    """Write the owner record into this session's numbered directory once pytest makes it.
+
+    pytest makes the directory on first use: in a serial session while some test sets up
+    or runs, in an xdist controller just before it configures each worker.
+    """
+
+    def __init__(self, config: pytest.Config, namespace: str) -> None:
+        self.config = config
+        self.namespace = namespace
+        self.written = False
+
+    def record(self) -> None:
+        if self.written:
+            return
+        basetemp = _session_basetemp(self.config)
+        if basetemp is None:
+            return
+        self.written = True
+        write_owner(basetemp, self.namespace)
+
+    @pytest.hookimpl(optionalhook=True)
+    def pytest_configure_node(self, node: object) -> None:
+        del node
+        self.record()
+
+    def pytest_runtest_logreport(self, report: pytest.TestReport) -> None:
+        del report
+        self.record()
 
 
 # -- measurement -----------------------------------------------------------------------
@@ -280,11 +364,26 @@ class UsageRecorder:
         line = _dumps({"schema": SCHEMA, "worker": self.worker, **row}, sort_keys=True)
         _write(self.descriptor, (line + "\n").encode())
 
-    def record_test(self, nodeid: str, path: Path, usage: Usage) -> None:
-        self.measured.add(str(path))
-        self._emit(
-            {"event": "test", "nodeid": nodeid, "bytes": usage.bytes, "files": usage.files}
-        )
+    @pytest.hookimpl(wrapper=True)
+    def pytest_runtest_teardown(
+        self, item: pytest.Item, nextitem: pytest.Item | None
+    ) -> Iterator[None]:
+        # Measured before the fixtures' own teardown removes a passing test's tmp_path.
+        del nextitem
+        funcargs: dict[str, object] = getattr(item, "funcargs", {})
+        path = funcargs.get("tmp_path")
+        if isinstance(path, Path):
+            usage = tree_usage(path)
+            self.measured.add(str(path))
+            self._emit(
+                {
+                    "event": "test",
+                    "nodeid": item.nodeid,
+                    "bytes": usage.bytes,
+                    "files": usage.files,
+                }
+            )
+        return (yield)
 
     @pytest.hookimpl(tryfirst=True)
     def pytest_sessionfinish(self, exitstatus: int | pytest.ExitCode) -> None:
@@ -327,37 +426,6 @@ class UsageRecorder:
         _close(self.descriptor)
 
 
-class TmpPathMonitor:
-    """Measure each test's `tmp_path` once, for the budget and for the report."""
-
-    def __init__(self, budget_bytes: int, recorder: UsageRecorder | None) -> None:
-        self.budget_bytes = budget_bytes
-        self.recorder = recorder
-
-    @pytest.hookimpl(wrapper=True)
-    def pytest_runtest_teardown(
-        self, item: pytest.Item, nextitem: pytest.Item | None
-    ) -> Iterator[None]:
-        # Measured before the fixtures' own teardown, which removes a passing test's
-        # tmp_path; judged after it, so a refusal never skips a finalizer.
-        del nextitem
-        funcargs: dict[str, object] = getattr(item, "funcargs", {})
-        path = funcargs.get("tmp_path")
-        usage = tree_usage(path) if isinstance(path, Path) else None
-        if self.recorder is not None and isinstance(path, Path) and usage is not None:
-            self.recorder.record_test(item.nodeid, path, usage)
-        result = yield
-        if usage is not None and 0 < self.budget_bytes < usage.bytes:
-            pytest.fail(
-                f"tmp_path held {_mib(usage.bytes)} in {usage.files:,} files at teardown, "
-                f"over the {_mib(self.budget_bytes)} `{BUDGET_OPTION}`: share a read-only "
-                "fixture, copy or check out only what the test reads, or write less "
-                "(development.md, Temporary test directories)",
-                pytrace=False,
-            )
-        return result
-
-
 # -- scoped directories ----------------------------------------------------------------
 
 
@@ -369,15 +437,16 @@ def scoped_tmp_path(
 
     pytest removes a `tmp_path_factory` directory only when the whole session ends, so a
     module-scoped fixture's tree occupies the disk for the rest of the session and, if
-    any test anywhere fails, survives it. Yield from this in the fixture instead: the
-    directory goes when the fixture's scope ends, unless a test failed while it was open
-    or the retention policy is `all`, mirroring what pytest does with a test's `tmp_path`.
+    any test anywhere fails, survives it. Yield from this in the fixture instead: under
+    the `failed` retention policy the directory goes when the fixture's scope ends unless
+    a test failed while it was open, which is the rule pytest applies to a test's
+    `tmp_path`.
     """
     failures = request.session.testsfailed
     directory = factory.mktemp(basename)
     yield directory
-    keep = request.config.getini("tmp_path_retention_policy") == "all"
-    if not keep and request.session.testsfailed == failures:
+    failed_only = request.config.getini("tmp_path_retention_policy") == "failed"
+    if failed_only and request.session.testsfailed == failures:
         shutil.rmtree(directory, ignore_errors=True)
 
 
@@ -385,11 +454,6 @@ def scoped_tmp_path(
 
 
 def pytest_addoption(parser: pytest.Parser) -> None:
-    parser.addini(
-        BUDGET_OPTION,
-        "fail a test whose tmp_path holds more than this many MiB at teardown; 0 disables",
-        default="0",
-    )
     group = parser.getgroup("tmp-usage", "temporary directory usage (devtools.pytest_tmp)")
     group.addoption(
         "--tmp-usage",
@@ -417,14 +481,10 @@ def pytest_addoption(parser: pytest.Parser) -> None:
 def pytest_configure(config: pytest.Config) -> None:
     worker = hasattr(config, "workerinput")
     if not worker and config.getoption("basetemp") is None:
-        release_dead_locks(numbered_root())
-    try:
-        budget = float(str(config.getini(BUDGET_OPTION)))
-    except ValueError as error:
-        raise pytest.UsageError(f"{BUDGET_OPTION} must be a number of MiB") from error
-    if budget < 0:
-        raise pytest.UsageError(f"{BUDGET_OPTION} must not be negative")
-    recorder: UsageRecorder | None = None
+        namespace = pid_namespace()
+        release_dead_locks(numbered_root(), namespace)
+        if namespace is not None:
+            config.pluginmanager.register(SessionOwner(config, namespace), "tmp-owner")
     report = config.getoption("tmp_usage")
     if report is not None:
         interval = config.getoption("tmp_usage_interval")
@@ -438,9 +498,6 @@ def pytest_configure(config: pytest.Config) -> None:
             interval,
         )
         config.pluginmanager.register(recorder, "tmp-usage-recorder")
-    if budget or recorder is not None:
-        monitor = TmpPathMonitor(int(budget * 2**20), recorder)
-        config.pluginmanager.register(monitor, "tmp-path-monitor")
 
 
 # -- report ----------------------------------------------------------------------------

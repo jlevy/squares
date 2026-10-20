@@ -25,13 +25,10 @@ def _project_pytest_options() -> dict[str, object]:
     return document["tool"]["pytest"]["ini_options"]
 
 
-def _write_suite(
-    directory: Path, source: str, *, policy: str, count: int, budget: str | None = None
-) -> Path:
+def _write_suite(directory: Path, source: str, *, policy: str, count: int) -> Path:
     directory.mkdir()
     (directory / "pytest.ini").write_text(
-        f"[pytest]\ntmp_path_retention_policy = {policy}\ntmp_path_retention_count = {count}\n"
-        + ("" if budget is None else f"{pytest_tmp.BUDGET_OPTION} = {budget}\n"),
+        f"[pytest]\ntmp_path_retention_policy = {policy}\ntmp_path_retention_count = {count}\n",
         encoding="utf-8",
     )
     (directory / "test_suite.py").write_text(source, encoding="utf-8")
@@ -39,7 +36,12 @@ def _write_suite(
 
 
 def _session(
-    suite: Path, temproot: Path, *, plugin: bool, extra: tuple[str, ...] = ()
+    suite: Path,
+    temproot: Path,
+    *,
+    plugin: bool,
+    extra: tuple[str, ...] = (),
+    xdist: bool = False,
 ) -> subprocess.CompletedProcess[str]:
     environment = {
         key: value
@@ -63,8 +65,7 @@ def _session(
             str(suite),
             "-p",
             "no:cacheprovider",
-            "-p",
-            "no:xdist",
+            *(() if xdist else ("-p", "no:xdist")),
             *(("-p", "devtools.pytest_tmp") if plugin else ()),
             *extra,
             str(suite),
@@ -91,7 +92,6 @@ def test_project_config_keeps_only_failures_and_loads_the_plugin() -> None:
     options = _project_pytest_options()
     assert options["tmp_path_retention_policy"] == "failed"
     assert int(str(options["tmp_path_retention_count"])) >= 1
-    assert float(str(options[pytest_tmp.BUDGET_OPTION])) > 0
     addopts = options["addopts"]
     assert isinstance(addopts, list)
     assert ["-p", "devtools.pytest_tmp"] in [addopts[i : i + 2] for i in range(len(addopts))]
@@ -126,7 +126,7 @@ def test_passing_session_leaves_nothing_and_a_failing_one_only_its_failure(
         path for path in temproot.glob("pytest-of-*/pytest-*") if not path.is_symlink()
     ]
     kept = sorted(entry.name for entry in session.iterdir() if not entry.is_symlink())
-    assert kept == ["test_maybe_True_0"]
+    assert kept == [pytest_tmp.OWNER_NAME, "test_maybe_True_0"]
 
 
 def test_a_killed_session_is_reclaimed_once_newer_sessions_retire_it(
@@ -152,8 +152,10 @@ def test_a_killed_session_is_reclaimed_once_newer_sessions_retire_it(
     killed = _session(suite, temproot, plugin=True)
     assert killed.returncode == -9
     assert _numbered(temproot) == ["pytest-0"]
-    [lock] = temproot.glob("pytest-of-*/pytest-0/.lock")
-    assert not pytest_tmp.process_exists(int(lock.read_text(encoding="ascii")))
+    [directory] = temproot.glob("pytest-of-*/pytest-0")
+    pid = int((directory / pytest_tmp.LOCK_NAME).read_text(encoding="ascii"))
+    assert not pytest_tmp.process_exists(pid)
+    assert _owner(directory) == pytest_tmp.owner_record(pid, _namespace())
 
     # Negative control: a newer retained session puts pytest-0 beyond the count, and
     # stock pytest still keeps it, honouring the dead process's lock for three days.
@@ -168,27 +170,40 @@ def test_a_killed_session_is_reclaimed_once_newer_sessions_retire_it(
     assert _numbered(temproot) == ["pytest-1"]
 
 
-def test_a_test_whose_tmp_path_outgrows_the_budget_errors_at_teardown(tmp_path: Path) -> None:
+def test_a_killed_xdist_controller_leaves_a_directory_the_next_session_can_release(
+    tmp_path: Path,
+) -> None:
+    # The validation lanes run under xdist, so a deadline kills a controller. Its
+    # numbered directory is made before any worker starts, and the record with it.
     suite = _write_suite(
         tmp_path / "suite",
-        "import pytest\n"
-        "@pytest.mark.parametrize('mib', [1, 3])\n"
-        "def test_writes(tmp_path, mib):\n"
-        "    (tmp_path / 'blob').write_bytes(bytes(mib << 20))\n",
+        "import os, signal\n"
+        "def test_kill_the_controller(tmp_path):\n"
+        "    (tmp_path / 'blob').write_bytes(bytes(1 << 20))\n"
+        "    os.kill(os.getppid(), signal.SIGKILL)\n",
         policy="failed",
         count=1,
-        budget="2",
     )
     temproot = tmp_path / "temproot"
     temproot.mkdir()
 
-    result = _session(suite, temproot, plugin=True, extra=("-rA",))
-    assert result.returncode == 1, result.stdout + result.stderr
-    assert "PASSED test_suite.py::test_writes[1]" in result.stdout
-    assert "ERROR test_suite.py::test_writes[3]" in result.stdout
-    assert "tmp_path held 3.0 MiB in 1 files at teardown, over the 2.0 MiB" in result.stdout
-    # The call passed, so failed-only retention still removed the oversized directory.
-    assert not list(temproot.glob("pytest-of-*/pytest-*/test_writes_3_0"))
+    killed = _session(suite, temproot, plugin=True, xdist=True, extra=("-n", "1"))
+    assert killed.returncode == -9, killed.stdout + killed.stderr
+    [directory] = temproot.glob("pytest-of-*/pytest-0")
+    assert (directory / "popen-gw0").is_dir()
+    pid = int((directory / pytest_tmp.LOCK_NAME).read_text(encoding="ascii"))
+    assert _owner(directory) == pytest_tmp.owner_record(pid, _namespace())
+    assert pytest_tmp.release_dead_locks(directory.parent, _namespace()) == [directory]
+
+
+def _namespace() -> str:
+    namespace = pytest_tmp.pid_namespace()
+    assert namespace is not None
+    return namespace
+
+
+def _owner(directory: Path) -> object:
+    return json.loads((directory / pytest_tmp.OWNER_NAME).read_text(encoding="ascii"))
 
 
 def _dead_pid() -> int:
@@ -197,20 +212,28 @@ def _dead_pid() -> int:
     return process.pid
 
 
-def _locked(root: Path, name: str, content: str | None) -> Path:
+def _locked(
+    root: Path, name: str, content: str | None, *, owner: dict[str, object] | None = None
+) -> Path:
     directory = root / name
     directory.mkdir(parents=True)
     if content is not None:
-        (directory / ".lock").write_text(content, encoding="ascii")
+        (directory / pytest_tmp.LOCK_NAME).write_text(content, encoding="ascii")
+    if owner is not None:
+        (directory / pytest_tmp.OWNER_NAME).write_text(json.dumps(owner), encoding="ascii")
     return directory
 
 
-def test_only_locks_naming_an_exited_process_are_released(tmp_path: Path) -> None:
+def test_only_locks_of_exited_owners_in_this_pid_namespace_are_released(
+    tmp_path: Path,
+) -> None:
+    here = _namespace()
     dead = _dead_pid()
     live = subprocess.Popen((sys.executable, "-c", "import time; time.sleep(60)"))
     try:
         released = {
-            _locked(tmp_path, "pytest-1", str(dead)),
+            _locked(tmp_path, "pytest-1", str(dead), owner=pytest_tmp.owner_record(dead, here)),
+            # A deleter killed part-way: nothing live is inside, so no record is needed.
             _locked(tmp_path, "garbage-1f2e", str(dead)),
         }
         kept = [
@@ -219,10 +242,32 @@ def test_only_locks_naming_an_exited_process_are_released(tmp_path: Path) -> Non
             _locked(tmp_path, "pytest-4", ""),  # half-written by a starting session
             _locked(tmp_path, "pytest-5", "not a pid"),
             _locked(tmp_path, "unrelated-6", str(dead)),
+            # A session from before the plugin, or one that died before pytest made the
+            # directory's record: its PID may mean a process in another namespace.
+            _locked(tmp_path, "pytest-7", str(dead)),
+            # A container sharing this temporary root, where the PID is another process.
+            _locked(
+                tmp_path,
+                "pytest-8",
+                str(dead),
+                owner=pytest_tmp.owner_record(dead, "linux pid:[1]"),
+            ),
+            # A record that does not describe this lock.
+            _locked(
+                tmp_path, "pytest-9", str(dead), owner=pytest_tmp.owner_record(dead + 1, here)
+            ),
+            _locked(tmp_path, "pytest-10", str(dead), owner={"pid": dead}),
+            _locked(
+                tmp_path,
+                "pytest-11",
+                str(live.pid),
+                owner=pytest_tmp.owner_record(live.pid, here),
+            ),
         ]
         (tmp_path / "pytest-current").symlink_to(tmp_path / "pytest-1")
 
-        assert set(pytest_tmp.release_dead_locks(tmp_path)) == released
+        assert set(pytest_tmp.release_dead_locks(tmp_path, here)) == released
+        assert pytest_tmp.release_dead_locks(tmp_path, None) == []
     finally:
         live.kill()
         live.wait()
@@ -231,14 +276,31 @@ def test_only_locks_naming_an_exited_process_are_released(tmp_path: Path) -> Non
     assert all(directory.is_dir() for directory in [*released, *kept])
 
 
+def test_without_a_pid_namespace_only_garbage_is_released(tmp_path: Path) -> None:
+    dead = _dead_pid()
+    numbered = _locked(
+        tmp_path, "pytest-1", str(dead), owner=pytest_tmp.owner_record(dead, _namespace())
+    )
+    garbage = _locked(tmp_path, "garbage-1f2e", str(dead))
+    assert pytest_tmp.release_dead_locks(tmp_path, None) == [garbage]
+    assert (numbered / ".lock").exists()
+
+
 def test_a_session_given_basetemp_leaves_the_shared_root_alone(tmp_path: Path) -> None:
     suite = _write_suite(tmp_path / "suite", "def test_ok(): pass\n", policy="failed", count=1)
     temproot = tmp_path / "temproot"
-    stale = _locked(temproot / pytest_tmp.numbered_root().name, "pytest-0", str(_dead_pid()))
+    dead = _dead_pid()
+    stale = _locked(
+        temproot / pytest_tmp.numbered_root().name,
+        "pytest-0",
+        str(dead),
+        owner=pytest_tmp.owner_record(dead, _namespace()),
+    )
 
     given = _session(suite, temproot, plugin=True, extra=("--basetemp", str(tmp_path / "bt")))
     assert given.returncode == 0, given.stdout + given.stderr
     assert (stale / ".lock").exists()
+    assert not (tmp_path / "bt" / pytest_tmp.OWNER_NAME).exists()
 
 
 _SCOPED = (
