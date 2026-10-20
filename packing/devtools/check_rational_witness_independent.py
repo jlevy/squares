@@ -113,13 +113,36 @@ def interval(square: Square, axis: Point) -> tuple[Fraction, Fraction]:
     return min(values), max(values)
 
 
-def pair_gap(left: Square, right: Square) -> Fraction:
+Projection = tuple[Point, tuple[Fraction, Fraction]]
+
+
+def own_intervals(square: Square) -> list[Projection]:
+    """Each of a square's two edge normals, with the square's own interval on it.
+
+    Half of every pair's projections depend on one square alone, so `check_squares`
+    computes them once per square rather than once per pair (think-uomm): over large
+    rationals the dot products are nearly all of the decision's cost.
+    """
+    return [(axis, interval(square, axis)) for axis in axes(square)]
+
+
+def _separation(
+    left: Square, right: Square, left_own: list[Projection], right_own: list[Projection]
+) -> Fraction:
+    """`pair_gap` from the two squares' `own_intervals`: the same eight gaps, so the
+    same exact maximum."""
     gaps: list[Fraction] = []
-    for axis in (*axes(left), *axes(right)):
-        left_min, left_max = interval(left, axis)
+    for axis, (left_min, left_max) in left_own:
         right_min, right_max = interval(right, axis)
         gaps.extend((right_min - left_max, left_min - right_max))
+    for axis, (right_min, right_max) in right_own:
+        left_min, left_max = interval(left, axis)
+        gaps.extend((right_min - left_max, left_min - right_max))
     return max(gaps)
+
+
+def pair_gap(left: Square, right: Square) -> Fraction:
+    return _separation(left, right, own_intervals(left), own_intervals(right))
 
 
 def check(path: Path) -> dict[str, Any]:
@@ -147,8 +170,9 @@ def check_squares(squares: list[Square], side: Fraction) -> dict[str, Any]:
     ]
     if min(containment) < 0:
         failures.append(f"container penetration {min(containment)}")
+    own = [own_intervals(square) for square in squares]
     pair_gaps = [
-        pair_gap(squares[left], squares[right])
+        _separation(squares[left], squares[right], own[left], own[right])
         for left, right in itertools.combinations(range(len(squares)), 2)
     ]
     overlaps = [gap for gap in pair_gaps if gap < 0]
