@@ -13379,7 +13379,7 @@ issues:
       refinements of other holders' packings, Francisco Couzo's most often. OpenAI Codex assistance
       disclosed. The 20 October triage finds every side below the record's start and below every
       earlier report at its count; custody, the replay and the rows are queued.
-    read_through: '2026-10-19T20:43:04Z'
+    read_through: '2026-10-20T21:38:52Z'
     results:
     - key: n328
       claim: s(328) <= 18.614376892294788, rounded upward; exact certificate side is authoritative.
@@ -14226,5 +14226,17 @@ issues:
       sqpack.verify and devtools.check_rational_witness_independent in scratch, with both controls
       refused at 328; nothing was retained and no row or rung rests on it. The full replay is 300
       jobs, a positive and two controls at each count, about 7.5 CPU-hours, the longest job about
-      184 seconds. verify_public.py did not run. The acknowledgement posts after the pull request
-      that carries this triage merges.
+      184 seconds. verify_public.py did not run. The acknowledgement of 20 October
+      (issuecomment-6301482971) names all 100 counts and asks for reuse terms. Darius Muglich's
+      reply (issuecomment-6302118274, 2026-10-20T21:38:52Z) states them: "I confirm that my
+      original contributions in the submitted archive (including certificates, coordinates,
+      derived SVGs, comparison tables, and documentation) are released under Creative Commons
+      Attribution 4.0 International (CC BY 4.0): https://creativecommons.org/licenses/by/4.0/";
+      "The Squares Project has my permission to retain and republish the archive to the extent
+      of my rights in it, independently verify the certificates, and incorporate the results and
+      derived illustrations into its public records."; and "Please credit Darius Muglich,
+      alongside the original construction, seed, and solver contributors identified in each
+      `provenance.json`. This licence does not override any third-party rights or licences."
+      Recording the terms changes neither custody nor how the attachment is pinned: whether the
+      archive is retained under them, and by which route, remain the owner's decisions on
+      think-9vjn.
