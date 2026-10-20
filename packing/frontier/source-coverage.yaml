@@ -6078,9 +6078,11 @@ sources:
     evand-record-hunt3-2026-10-10's at 343, which this source supersedes; the other
     23 counts held no row. Couzo's earlier reports at these counts, issues 670, 672
     and 675, are not yet recorded (think-f28n, think-2vjc, think-pvav); they enter as
-    superseded rows when they land. Kevin Fang's #686 rows, received later, beat several
-    of these (think-9vjn). No selected override or superseded claim is created at this
-    source-only stage; the case lanes and house best packings at 204 and 260 are unchanged.
+    superseded rows when they land. Darius Muglich's #686, received later, reports 48 of
+    these 83 counts, and the 20 October ledger (campaign/issue-intake/upper-bounds-20261020)
+    records each of the 48 below this source (think-9vjn). No selected override is created
+    at this source-only stage; the case lanes and house best packings at 204 and 260 are
+    unchanged.
   claims_record: resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
 - id: bengreff-s95-certificate-2026-10-15
   title: Benjamin Greff's mixed cover for s(95) = 10, issue610
