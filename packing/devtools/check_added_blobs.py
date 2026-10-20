@@ -3,30 +3,41 @@
 Git object IDs identify storage being measured here; they never identify scientific
 inputs or decide research verdicts. Existing unchanged base history is grandfathered.
 
-The two ceilings are data, in devtools/added-blobs.yaml, so changing one is a visible
-policy diff (OR-18). Against them the guard checks:
+Sizes are OR-18's: a blob counts as Git stores it, its object compressed by zlib at the
+default level (`devtools.git_storage`), and a set counts as the sum of its blobs. The two
+ceilings are data, in devtools/added-blobs.yaml, so changing one is a visible policy diff.
+Against them the guard checks:
 
-  per blob  every blob version newly reachable from HEAD and not from BASE, so
-            committing then deleting a dump still fails, plus tip or index additions
-            that reintroduce older base history. A path whose blob at BASE already
-            exceeds the per-blob ceiling is grandfathered: changing it is the status
-            quo, not added bulk data. A new path, a copy or an edited rename is not.
-  in total  the larger of two charges: each path's largest historical version, or
-            the blobs retained at the selected head/index. Each charge counts a blob
-            object once and a grandfathered path only for its growth. A text file
-            edited in twenty commits is charged once; distinct retained files still
-            count separately after sharing an earlier version.
+  per blob  every blob version new to history, plus tip or index additions that copy a
+            base blob or restore one from older base history. A path whose blob at
+            BASE is already over the per-blob ceiling is grandfathered: changing it is
+            the status quo, not added bulk data. A new path, a copy or an edited
+            rename is not.
+  in total  the sum over every distinct blob version new to history, which is what a
+            merge commit keeps: versions the head deleted or reverted, each version of
+            a path edited many times and a grandfathered path's rewrites all count. An
+            object counts once however many paths or commits carry it.
   LFS       a Git LFS pointer is refused: this repository does not use LFS, and a
             pointer would carry bulk data past the gate.
 
-Exact renames of current base files and gitlinks add nothing. Tip changes are read from
+A version is new to history when it is reachable from HEAD, or from the index, and not
+from BASE's tree or from the trees where the branch meets BASE's history: Git's own
+reading of a range's new objects (rev-list --objects-edge-aggressive). A blob restored
+verbatim from deeper in BASE's history is counted again, which errs toward refusing.
+Exact renames, mode-only changes and gitlinks add nothing. Tip changes are read from
 the merge base of BASE and HEAD, so a branch behind its base is not charged for the
 base's newer files.
 
+Sizing a version means compressing its content, so each checked blob is streamed through
+zlib once and never held whole, and one check reads at most MAX_CONTENT_BYTES of it. One
+deadline, MAX_SECONDS, bounds the whole check, parsing included, and each metadata query
+also has its own, MAX_QUERY_SECONDS.
+
 Exit 0 is PASS and 1 is REJECT_ADDED_STORAGE. Exit 2 is GUARD_REFUSED, never a pass: a
 base this clone lacks (fetch it; a force-pushed base clears when the pull request
-re-synchronizes), shallow history (fetch it), a range too long for the gate, malformed
-Git metadata, a failed query or an unreadable ceilings file.
+re-synchronizes), shallow history (fetch it), a range too long or too large for the gate,
+a check past its deadline, malformed Git metadata, a failed query or an unreadable
+ceilings file.
 
 --census N replays the gate over the last N first-parent merges into --census-ref,
 first parent as base and second as head, and prints each verdict with its reasons. That
@@ -46,19 +57,26 @@ import selectors
 import subprocess
 import sys
 import time
-from collections.abc import Iterable, Mapping, Sequence
-from dataclasses import dataclass, replace
+from collections.abc import Callable, Iterable, Iterator, Mapping, Sequence
+from dataclasses import KW_ONLY, dataclass, replace
 from pathlib import Path
+from typing import NamedTuple
 
 import yaml
 
+from devtools.git_storage import StoredSize, stored_size_bound
 from sqpack.yamlio import load_yaml
 
 POLICY = Path(__file__).with_name("added-blobs.yaml")
 MAX_METADATA_BYTES = 64 * 1024**2
 METADATA_READ_BYTES = 64 * 1024
+# Blob content one check reads and compresses. Every merge into main to 2026-10-20 is
+# under it, the largest being #461 at 446 MiB, which took 15 s on a shared 4-CPU host.
+MAX_CONTENT_BYTES = 512 * 1024**2
 MAX_SECONDS = 30
 MAX_QUERY_SECONDS = 10
+# How many parsed entries pass between deadline checks.
+DEADLINE_STRIDE = 4096
 # The LFS specification keeps pointers small; git-lfs never reads a larger blob as one.
 LFS_POINTER_BYTES = 1024
 LFS_POINTER_PREFIXES = (
@@ -66,7 +84,11 @@ LFS_POINTER_PREFIXES = (
     b"version https://hawser.github.com/spec/",
 )
 OBJECT_ID = re.compile(rb"[0-9a-f]{40}(?:[0-9a-f]{24})?")
+RAW_STATUS = re.compile(rb"[ADMT]|[RC][0-9]{1,3}")
+RAW_MODE = re.compile(rb"000000|100644|100755|120000|160000|040000")
 PULL_REQUEST_MERGE = re.compile(r"Merge pull request #([0-9]+)")
+# A `cat-file --batch` header is an object ID, a type and a size; anything longer is not one.
+MAX_HEADER_BYTES = 128
 
 
 class MetadataError(ValueError):
@@ -79,14 +101,15 @@ class GitExitError(MetadataError):
 
 @dataclass(frozen=True)
 class Ceilings:
-    """The byte ceilings `devtools/added-blobs.yaml` declares."""
+    """The byte ceilings `devtools/added-blobs.yaml` declares, as Git stores a blob."""
 
     per_blob: int
     total: int
 
 
-@dataclass(frozen=True)
-class Change:
+class Change(NamedTuple):
+    """One raw change; a tuple, since a long log builds hundreds of thousands."""
+
     before: bytes
     after: bytes
     status: bytes
@@ -96,12 +119,18 @@ class Change:
 
 @dataclass(frozen=True)
 class Blob:
+    """One checked blob version, sized as Git stores it (`stored`) and in a checkout."""
+
     object_id: str
-    size: int
+    stored: int
     paths: tuple[str, ...]
+    _: KW_ONLY
+    checkout: int
+    # New to history, so counted toward the total. False for a tip or index addition of a
+    # blob BASE's history already stores, a copy or a restored version, which is held to
+    # the per-blob ceiling only.
+    charged: bool = True
     lfs_pointer: bool = False
-    # Admission-relevant paths at the selected head/index, separate from history.
-    retained_paths: tuple[str, ...] = ()
 
 
 @dataclass(frozen=True)
@@ -119,6 +148,18 @@ class CensusRow:
 
 def _mib(value: float) -> str:
     return f"{value / 1024**2:.2f} MiB"
+
+
+def _deadline() -> float:
+    return time.monotonic() + MAX_SECONDS
+
+
+def _within(deadline: float) -> None:
+    """Refuse once the check has run past its one deadline."""
+    if time.monotonic() >= deadline:
+        raise MetadataError(
+            f"the check exceeded its {MAX_SECONDS}-second deadline: check a shorter range"
+        )
 
 
 def load_ceilings(path: Path | None = None) -> Ceilings:
@@ -140,9 +181,17 @@ def load_ceilings(path: Path | None = None) -> Ceilings:
 
 
 def _capture_git(
-    child: subprocess.Popen[bytes], *, deadline: float, data: bytes | None
+    child: subprocess.Popen[bytes],
+    *,
+    deadline: float,
+    data: bytes | None,
+    sink: Callable[[bytes], None] | None = None,
 ) -> tuple[bytes, bytes]:
-    """Drain both output pipes while feeding stdin, retaining at most each byte cap."""
+    """Drain both output pipes while feeding stdin, retaining at most each byte cap.
+
+    With a `sink`, standard output is handed to it chunk by chunk and nothing of it is
+    retained; the sink bounds what it accepts.
+    """
     assert child.stdout is not None
     assert child.stderr is not None
     stdout, stderr = child.stdout.fileno(), child.stderr.fileno()
@@ -169,12 +218,20 @@ def _capture_git(
             for key, _events in ready:
                 if key.fd in output:
                     buffer = output[key.fd]
+                    streamed = sink is not None and key.fd == stdout
                     # The extra byte detects excess without ever retaining excess output.
                     chunk = os.read(
-                        key.fd, min(METADATA_READ_BYTES, MAX_METADATA_BYTES + 1 - len(buffer))
+                        key.fd,
+                        METADATA_READ_BYTES
+                        if streamed
+                        else min(METADATA_READ_BYTES, MAX_METADATA_BYTES + 1 - len(buffer)),
                     )
                     if not chunk:
                         selector.unregister(key.fd)
+                        continue
+                    if streamed:
+                        assert sink is not None
+                        sink(chunk)
                         continue
                     if len(buffer) + len(chunk) > MAX_METADATA_BYTES:
                         raise MetadataError(
@@ -200,11 +257,22 @@ def _capture_git(
     return bytes(output[stdout]), bytes(output[stderr])
 
 
-def _git(repo: Path, *arguments: str, deadline: float, data: bytes | None = None) -> bytes:
-    remaining = deadline - time.monotonic()
-    if remaining <= 0:
-        raise MetadataError(f"Git metadata protocol exceeded {MAX_SECONDS} seconds")
-    query_deadline = min(deadline, time.monotonic() + MAX_QUERY_SECONDS)
+def _git(
+    repo: Path,
+    *arguments: str,
+    deadline: float,
+    data: bytes | None = None,
+    sink: Callable[[bytes], None] | None = None,
+) -> bytes:
+    """One Git query under the check's deadline and, unless it streams content, its own.
+
+    A streamed content read (`sink`) has no deadline of its own: its cost is the content
+    it compresses, which MAX_CONTENT_BYTES bounds, and the check's deadline still holds.
+    """
+    _within(deadline)
+    query_deadline = (
+        deadline if sink is not None else min(deadline, time.monotonic() + MAX_QUERY_SECONDS)
+    )
     environment = dict(os.environ)
     environment.update(
         GIT_NO_LAZY_FETCH="1", GIT_NO_REPLACE_OBJECTS="1", GIT_TERMINAL_PROMPT="0"
@@ -230,21 +298,23 @@ def _git(repo: Path, *arguments: str, deadline: float, data: bytes | None = None
             bufsize=0,
         ) as child:
             try:
-                stdout, stderr = _capture_git(child, deadline=query_deadline, data=data)
+                stdout, stderr = _capture_git(
+                    child, deadline=query_deadline, data=data, sink=sink
+                )
             finally:
                 if child.poll() is None:
                     child.kill()
                 child.wait()
     except subprocess.TimeoutExpired as error:
+        _within(deadline)
         raise MetadataError(
-            f"Git metadata query exceeded {MAX_QUERY_SECONDS} seconds"
+            f"one Git metadata query exceeded {MAX_QUERY_SECONDS} seconds"
         ) from error
     except OSError as error:
         raise MetadataError(f"Git metadata unavailable: {error}") from error
     if child.returncode:
         raise GitExitError(stderr[:300].decode("utf-8", errors="replace").strip())
-    if time.monotonic() >= deadline:
-        raise MetadataError(f"Git metadata protocol exceeded {MAX_SECONDS} seconds")
+    _within(deadline)
     return stdout
 
 
@@ -278,16 +348,19 @@ def _merge_base(repo: Path, start: str, end: str, deadline: float) -> str:
     return value.decode("ascii")
 
 
-def parse_changes(raw: bytes) -> list[Change]:
-    """Read raw -z grammar, preserving spaces, Unicode and newlines in paths."""
+def _changes(raw: bytes, deadline: float | None = None) -> Iterator[Change]:
+    """Read raw -z grammar lazily, preserving spaces, Unicode and newlines in paths.
+
+    Nothing but the current entry is built, so a long log costs its raw bytes and no
+    more, and the check's deadline is held while it is read.
+    """
     if raw and not raw.endswith(b"\0"):
         raise MetadataError("unterminated Git raw metadata")
-    fields = raw.split(b"\0")
-    changes = []
-    position = 0
-    while position < len(fields):
-        header = fields[position].lstrip(b"\n")
-        position += 1
+    position, size, parsed = 0, len(raw), 0
+    while position < size:
+        stop = raw.index(b"\0", position)
+        header = raw[position:stop].lstrip(b"\n")
+        position = stop + 1
         if not header:
             continue
         columns = header.split()
@@ -298,61 +371,180 @@ def parse_changes(raw: bytes) -> list[Change]:
             raise MetadataError("invalid object identifier in Git raw change")
         if status == b"U":
             raise MetadataError("unmerged index cannot be certified")
-        if not re.fullmatch(rb"[ADMT]|[RC][0-9]{1,3}", status):
+        if not RAW_STATUS.fullmatch(status):
             raise MetadataError("unknown Git raw change status")
         if status.startswith((b"R", b"C")) and int(status[1:]) > 100:
             raise MetadataError("invalid Git similarity score")
-        if any(
-            not re.fullmatch(rb"(?:000000|100644|100755|120000|160000|040000)", mode)
-            for mode in (columns[0][1:], columns[1])
-        ):
+        if any(not RAW_MODE.fullmatch(mode) for mode in (columns[0][1:], columns[1])):
             raise MetadataError("invalid Git raw file mode")
-        count = 2 if status.startswith((b"R", b"C")) else 1
-        if position + count > len(fields) or not all(fields[position : position + count]):
-            raise MetadataError("missing path in Git raw change")
-        path = os.fsdecode(fields[position + count - 1])
-        position += count
-        changes.append(Change(before, after, status, path, columns[1]))
-    return changes
+        name = b""
+        for _ in range(2 if status.startswith((b"R", b"C")) else 1):
+            stop = raw.index(b"\0", position) if position < size else position
+            if stop == position:
+                raise MetadataError("missing path in Git raw change")
+            name, position = raw[position:stop], stop + 1
+        parsed += 1
+        if deadline is not None and parsed % DEADLINE_STRIDE == 0:
+            _within(deadline)
+        yield Change(before, after, status, os.fsdecode(name), columns[1])
 
 
-def _lfs_pointers(repo: Path, identifiers: Sequence[str], deadline: float) -> set[str]:
-    """The identifiers, all of small blobs, whose content is a Git LFS pointer."""
-    output = _git(
+def parse_changes(raw: bytes) -> list[Change]:
+    """Read raw -z grammar, preserving spaces, Unicode and newlines in paths."""
+    return list(_changes(raw))
+
+
+def _null(identifier: bytes) -> bool:
+    return set(identifier) == {ord("0")}
+
+
+def _object_sizes(
+    repo: Path, identifiers: Sequence[bytes], deadline: float
+) -> dict[bytes, tuple[bytes, int]]:
+    """Each object's type and size in a checkout, in one `cat-file --batch-check`."""
+    metadata = _git(
+        repo,
+        "cat-file",
+        "--batch-check=%(objectname) %(objecttype) %(objectsize)",
+        deadline=deadline,
+        data=b"\n".join(identifiers) + b"\n",
+    ).splitlines()
+    if len(metadata) != len(identifiers):
+        raise MetadataError("object-size inventory is incomplete")
+    sizes: dict[bytes, tuple[bytes, int]] = {}
+    for parsed, (expected, line) in enumerate(zip(identifiers, metadata, strict=True)):
+        columns = line.split()
+        if len(columns) != 3 or columns[0] != expected or not columns[2].isdigit():
+            raise MetadataError("object-size metadata is missing or malformed")
+        if columns[1] not in (b"blob", b"tree", b"commit", b"tag"):
+            raise MetadataError("unknown Git object type")
+        sizes[expected] = (columns[1], int(columns[2]))
+        if parsed % DEADLINE_STRIDE == 0:
+            _within(deadline)
+    return sizes
+
+
+class _ContentReader:
+    """Reads `cat-file --batch` output as it arrives, holding one chunk at a time.
+
+    For each expected blob, in order, it records the size as Git stores it and whether the
+    content is a Git LFS pointer, and it refuses output that is missing, malformed,
+    truncated or longer than what was asked for.
+    """
+
+    def __init__(self, expected: Sequence[tuple[bytes, int]]) -> None:
+        self._expected = expected
+        self._index = 0
+        self._header = bytearray()
+        self._measure: StoredSize | None = None
+        self._remaining = 0
+        self._small = bytearray()
+        self._terminator = False
+        self.measured: dict[bytes, tuple[int, bool]] = {}
+
+    def feed(self, chunk: bytes) -> None:
+        view = memoryview(chunk)
+        while view:
+            if self._terminator:
+                if view[0] != ord("\n"):
+                    raise MetadataError("object content inventory is truncated")
+                view = view[1:]
+                self._finish_blob()
+            elif self._measure is None:
+                view = self._read_header(view)
+            else:
+                take = min(self._remaining, len(view))
+                piece = view[:take]
+                self._measure.update(piece)
+                if self._expected[self._index][1] <= LFS_POINTER_BYTES:
+                    self._small.extend(piece)
+                self._remaining -= take
+                view = view[take:]
+                self._terminator = self._remaining == 0
+
+    def _read_header(self, view: memoryview) -> memoryview:
+        if self._index >= len(self._expected):
+            raise MetadataError("object content inventory has unexpected trailing data")
+        end = bytes(view[: MAX_HEADER_BYTES + 1]).find(b"\n")
+        if end < 0:
+            self._header.extend(view)
+            if len(self._header) > MAX_HEADER_BYTES:
+                raise MetadataError("object content metadata is missing or malformed")
+            return view[len(view) :]
+        self._header.extend(view[:end])
+        identifier, size = self._expected[self._index]
+        if bytes(self._header).split() != [identifier, b"blob", b"%d" % size]:
+            raise MetadataError("object content metadata is missing or malformed")
+        self._header.clear()
+        self._measure = StoredSize(size)
+        self._remaining = size
+        self._terminator = size == 0
+        return view[end + 1 :]
+
+    def _finish_blob(self) -> None:
+        assert self._measure is not None
+        identifier, _size = self._expected[self._index]
+        self.measured[identifier] = (
+            self._measure.result(),
+            bytes(self._small).startswith(LFS_POINTER_PREFIXES),
+        )
+        self._measure, self._terminator = None, False
+        self._small.clear()
+        self._index += 1
+
+    def finish(self) -> dict[bytes, tuple[int, bool]]:
+        if self._index != len(self._expected) or self._header or self._measure is not None:
+            raise MetadataError("object content inventory is truncated")
+        return self.measured
+
+
+def _content_room(sizes: Mapping[bytes, int]) -> None:
+    """Refuse, before reading any, content past what one check compresses."""
+    volume = sum(sizes.values())
+    if volume > MAX_CONTENT_BYTES:
+        raise MetadataError(
+            f"sizing these blobs means compressing {_mib(volume)} of content, more than "
+            f"the {_mib(MAX_CONTENT_BYTES)} this gate reads: the range is too large for it "
+            "and nothing is missing to fetch, so check a shorter range"
+        )
+
+
+def _measure(
+    repo: Path, sizes: Mapping[bytes, int], deadline: float
+) -> dict[bytes, tuple[int, bool]]:
+    """Each blob's size as Git stores it and whether it is an LFS pointer.
+
+    The content is streamed through zlib, one chunk held at a time, and a request for more
+    than MAX_CONTENT_BYTES is refused before anything is read.
+    """
+    if not sizes:
+        return {}
+    _content_room(sizes)
+    identifiers = sorted(sizes)
+    reader = _ContentReader([(identifier, sizes[identifier]) for identifier in identifiers])
+    _git(
         repo,
         "cat-file",
         "--batch",
         deadline=deadline,
-        data="".join(f"{identifier}\n" for identifier in identifiers).encode("ascii"),
+        data=b"".join(identifier + b"\n" for identifier in identifiers),
+        sink=reader.feed,
     )
-    pointers: set[str] = set()
-    position = 0
-    for expected in identifiers:
-        header_end = output.find(b"\n", position)
-        columns = output[position:header_end].split() if header_end >= 0 else []
-        if (
-            len(columns) != 3
-            or columns[0] != expected.encode("ascii")
-            or columns[1] != b"blob"
-            or not columns[2].isdigit()
-        ):
-            raise MetadataError("object content metadata is missing or malformed")
-        start = header_end + 1
-        end = start + int(columns[2])
-        if output[end : end + 1] != b"\n":
-            raise MetadataError("object content inventory is truncated")
-        if output[start:end].startswith(LFS_POINTER_PREFIXES):
-            pointers.add(expected)
-        position = end + 1
-    if position != len(output):
-        raise MetadataError("object content inventory has unexpected trailing data")
-    return pointers
+    return reader.finish()
 
 
-def inventory(repo: Path, base: str, *, head: str = "HEAD", staged: bool = False) -> list[Blob]:
+def inventory(
+    repo: Path,
+    base: str,
+    *,
+    head: str = "HEAD",
+    staged: bool = False,
+    deadline: float | None = None,
+) -> list[Blob]:
+    """Every blob version the branch adds to history, and every tip or index addition."""
     if staged and head != "HEAD":
         raise MetadataError("staged mode uses the current HEAD/index")
-    deadline = time.monotonic() + MAX_SECONDS
+    deadline = _deadline() if deadline is None else deadline
     if (
         _git(repo, "rev-parse", "--is-shallow-repository", deadline=deadline).strip()
         != b"false"
@@ -364,13 +556,45 @@ def inventory(repo: Path, base: str, *, head: str = "HEAD", staged: bool = False
     # What the branch itself changed, which is what merging it brings in. Diffed against
     # BASE directly, a branch behind it is charged for reverting BASE's newer files.
     fork = _merge_base(repo, start, end, deadline)
-    objects = _git(
-        repo, "rev-list", "--objects", "--no-object-names", f"{start}..{end}", deadline=deadline
-    ).splitlines()
-    if any(not OBJECT_ID.fullmatch(value) for value in objects):
-        raise MetadataError("invalid object inventory")
-    paths: dict[bytes, set[str]] = {value: set() for value in objects}
-    history = parse_changes(
+    tip_arguments = ["diff", "--raw", "-z", "--no-abbrev", "--no-ext-diff", "-M100%"]
+    tip_arguments.extend(["--cached", fork] if staged else [fork, end])
+    tip: dict[bytes, set[str]] = {}
+    for change in _changes(_git(repo, *tip_arguments, "--", deadline=deadline), deadline):
+        # A gitlink, a deletion, a mode-only change or an exact rename adds no blob.
+        if change.mode == b"160000" or _null(change.after) or change.before == change.after:
+            continue
+        tip.setdefault(change.after, set()).add(change.path)
+    # New to history: reachable from HEAD, or the index's additions given on stdin, and
+    # from neither BASE's tree nor an edge's. Edge commits print with a leading "-".
+    new: set[bytes] = set()
+    for line in _git(
+        repo,
+        "rev-list",
+        "--objects",
+        "--objects-edge-aggressive",
+        "--no-object-names",
+        "--filter=object:type=blob",
+        "--stdin",
+        f"{start}..{end}",
+        deadline=deadline,
+        data=b"".join(identifier + b"\n" for identifier in sorted(tip)),
+    ).splitlines():
+        if not OBJECT_ID.fullmatch(line.removeprefix(b"-")):
+            raise MetadataError("invalid object inventory")
+        if not line.startswith(b"-"):
+            new.add(line)
+    identifiers = sorted(new | tip.keys())
+    if not identifiers:
+        _within(deadline)
+        return []
+    sizes = {
+        identifier: size
+        for identifier, (kind, size) in _object_sizes(repo, identifiers, deadline).items()
+        if kind == b"blob"
+    }
+    _content_room(sizes)
+    paths: dict[bytes, set[str]] = {}
+    for change in _changes(
         _git(
             repo,
             "log",
@@ -384,70 +608,49 @@ def inventory(repo: Path, base: str, *, head: str = "HEAD", staged: bool = False
             f"{start}..{end}",
             "--",
             deadline=deadline,
+        ),
+        deadline,
+    ):
+        if change.after in new and change.after in sizes:
+            paths.setdefault(change.after, set()).add(change.path)
+    for identifier, names in tip.items():
+        paths.setdefault(identifier, set()).update(names)
+    if any(not paths.get(identifier) for identifier in sizes):
+        raise MetadataError("new blob lacks its historical path inventory")
+    measured = _measure(repo, sizes, deadline)
+    blobs = [
+        Blob(
+            identifier.decode("ascii"),
+            measured[identifier][0],
+            tuple(sorted(paths[identifier])),
+            checkout=sizes[identifier],
+            charged=identifier in new,
+            lfs_pointer=measured[identifier][1],
         )
-    )
-    for change in history:
-        if change.after in paths:
-            paths[change.after].add(change.path)
-    retained: dict[bytes, set[str]] = {}
-    tip_arguments = ["diff", "--raw", "-z", "--no-abbrev", "--no-ext-diff", "-M100%"]
-    tip_arguments.extend(["--cached", fork] if staged else [fork, end])
-    for change in parse_changes(_git(repo, *tip_arguments, "--", deadline=deadline)):
-        if change.mode == b"160000" or set(change.after) == {ord("0")}:
-            continue
-        # An unchanged base blob moved to another path adds no blob or extra copy.
-        if (
-            change.status == b"R100"
-            and change.before == change.after
-            and change.after not in paths
-        ):
-            continue
-        paths.setdefault(change.after, set()).add(change.path)
-        retained.setdefault(change.after, set()).add(change.path)
-    if not paths:
-        return []
-    identifiers = sorted(paths)
-    metadata = _git(
-        repo,
-        "cat-file",
-        "--batch-check=%(objectname) %(objecttype) %(objectsize)",
-        deadline=deadline,
-        data=b"\n".join(identifiers) + b"\n",
-    ).splitlines()
-    if len(metadata) != len(identifiers):
-        raise MetadataError("object-size inventory is incomplete")
-    blobs = []
-    for expected, line in zip(identifiers, metadata, strict=True):
-        columns = line.split()
-        if len(columns) != 3 or columns[0] != expected or not columns[2].isdigit():
-            raise MetadataError("object-size metadata is missing or malformed")
-        kind = columns[1]
-        if kind not in (b"blob", b"tree", b"commit", b"tag"):
-            raise MetadataError("unknown Git object type")
-        if kind == b"blob":
-            if not paths[expected]:
-                raise MetadataError("new blob lacks its historical path inventory")
-            blobs.append(
-                Blob(
-                    expected.decode("ascii"),
-                    int(columns[2]),
-                    tuple(sorted(paths[expected])),
-                    retained_paths=tuple(sorted(retained.get(expected, ()))),
-                )
-            )
-    small = [blob.object_id for blob in blobs if blob.size <= LFS_POINTER_BYTES]
-    pointers = _lfs_pointers(repo, small, deadline) if small else set()
-    return [replace(blob, lfs_pointer=blob.object_id in pointers) for blob in blobs]
+        for identifier in sorted(sizes)
+    ]
+    _within(deadline)
+    return blobs
 
 
-def grandfathered(repo: Path, base: str, *, per_blob: int) -> dict[str, int]:
-    """Paths whose blob at `base` already exceeds `per_blob`, with that blob's size."""
-    deadline = time.monotonic() + MAX_SECONDS
+def grandfathered(
+    repo: Path,
+    base: str,
+    *,
+    per_blob: int,
+    paths: Iterable[str] | None = None,
+    deadline: float | None = None,
+) -> dict[str, int]:
+    """Paths whose blob at `base` is already over `per_blob` as Git stores it, with that size.
+
+    `paths` limits the answer to the paths a judgement asks about, so that only their base
+    blobs are read; without it every base blob that could be over the ceiling is.
+    """
+    deadline = _deadline() if deadline is None else deadline
     listing = _git(
         repo,
         "ls-tree",
         "-r",
-        "-l",
         "-z",
         "--full-tree",
         _commit(repo, base, deadline),
@@ -455,57 +658,64 @@ def grandfathered(repo: Path, base: str, *, per_blob: int) -> dict[str, int]:
     )
     if listing and not listing.endswith(b"\0"):
         raise MetadataError("unterminated Git tree listing")
-    sizes: dict[str, int] = {}
-    for entry in listing.split(b"\0")[:-1]:
-        header, tab, path = entry.partition(b"\t")
+    wanted = None if paths is None else set(paths)
+    found: dict[str, bytes] = {}
+    for parsed, entry in enumerate(listing.split(b"\0")[:-1]):
+        header, tab, name = entry.partition(b"\t")
         columns = header.split()
-        if not tab or not path or len(columns) != 4:
+        if not tab or not name or len(columns) != 3:
             raise MetadataError("malformed Git tree listing")
+        if parsed % DEADLINE_STRIDE == 0:
+            _within(deadline)
         if columns[1] != b"blob":
             continue
-        if not columns[3].isdigit():
-            raise MetadataError("malformed blob size in Git tree listing")
-        if int(columns[3]) > per_blob:
-            sizes[os.fsdecode(path)] = int(columns[3])
+        if not OBJECT_ID.fullmatch(columns[2]):
+            raise MetadataError("malformed object identifier in Git tree listing")
+        path = os.fsdecode(name)
+        if wanted is None or path in wanted:
+            found[path] = columns[2]
+    if not found:
+        _within(deadline)
+        return {}
+    # A blob whose bound is under the ceiling cannot be over it, so it is not read.
+    candidates = {
+        identifier: size
+        for identifier, (kind, size) in _object_sizes(
+            repo, sorted(set(found.values())), deadline
+        ).items()
+        if kind == b"blob" and stored_size_bound(size) > per_blob
+    }
+    measured = _measure(repo, candidates, deadline)
+    sizes = {
+        path: measured[identifier][0]
+        for path, identifier in sorted(found.items())
+        if identifier in measured and measured[identifier][0] > per_blob
+    }
+    _within(deadline)
     return sizes
 
 
 def _exempt(blob: Blob, per_blob: int, exempt: Mapping[str, int]) -> bool:
     """Over the per-blob ceiling only at paths already over it at the base."""
     return (
-        blob.size > per_blob and bool(blob.paths) and all(path in exempt for path in blob.paths)
+        blob.stored > per_blob
+        and bool(blob.paths)
+        and all(path in exempt for path in blob.paths)
     )
 
 
-def _charge_paths(versions: Iterable[tuple[str, Blob]], exempt: Mapping[str, int]) -> int:
-    charges: dict[str, int] = {}
-    for path, blob in versions:
-        amount = max(0, blob.size - exempt.get(path, 0))
-        charges[blob.object_id] = max(charges.get(blob.object_id, 0), amount)
-    return sum(charges.values())
+def _charged(blobs: Sequence[Blob]) -> dict[str, Blob]:
+    return {blob.object_id: blob for blob in blobs if blob.charged}
 
 
-def charged_bytes(blobs: Sequence[Blob], exempt: Mapping[str, int] | None = None) -> int:
-    """The larger historical path-maximum or retained head/index unique-blob charge.
+def charged_bytes(blobs: Sequence[Blob]) -> int:
+    """The total: every distinct blob version new to history, as Git stores it.
 
-    Both charges deduplicate objects and charge grandfathered paths only for growth.
-    Keeping the retained charge prevents a shared historical maximum from hiding
-    distinct files; keeping the historical charge bills deleted paths and edit churn.
+    That is what a merge commit keeps whatever the head retains, so a version the head
+    deleted or reverted, each edit of one path and a grandfathered path's rewrites all
+    count; the same object counts once.
     """
-    exempt = exempt or {}
-    largest: dict[str, Blob] = {}
-    for blob in blobs:
-        for path in blob.paths:
-            current = largest.get(path)
-            if current is None or (blob.size, blob.object_id) > (
-                current.size,
-                current.object_id,
-            ):
-                largest[path] = blob
-    return max(
-        _charge_paths(largest.items(), exempt),
-        _charge_paths(((path, blob) for blob in blobs for path in blob.retained_paths), exempt),
-    )
+    return sum(blob.stored for blob in _charged(blobs).values())
 
 
 def violations(
@@ -517,13 +727,18 @@ def violations(
 ) -> list[str]:
     if type(per_blob) is not int or type(total) is not int or min(per_blob, total) <= 0:
         raise MetadataError("byte ceilings must be positive integers")
-    if any(type(blob.size) is not int or blob.size < 0 for blob in blobs):
+    if any(
+        type(size) is not int or size < 0
+        for blob in blobs
+        for size in (blob.stored, blob.checkout)
+    ):
         raise MetadataError("blob byte sizes must be nonnegative integers")
     exempt = exempt or {}
     failures = [
-        f"{blob.size} bytes exceeds {per_blob}: {blob.paths!r} ({blob.object_id})"
+        f"{blob.stored} bytes exceeds {per_blob} as Git stores them: {blob.paths!r} "
+        f"({blob.object_id}, {blob.checkout} bytes in a checkout)"
         for blob in blobs
-        if blob.size > per_blob and not _exempt(blob, per_blob, exempt)
+        if blob.stored > per_blob and not _exempt(blob, per_blob, exempt)
     ]
     failures.extend(
         f"Git LFS pointer, and this repository does not use LFS: {blob.paths!r} "
@@ -531,32 +746,47 @@ def violations(
         for blob in blobs
         if blob.lfs_pointer
     )
-    amount = charged_bytes(blobs, exempt)
+    amount = charged_bytes(blobs)
     if amount > total:
-        failures.append(f"the aggregate charge totals {amount} bytes, exceeding {total}")
+        failures.append(
+            f"the {len(_charged(blobs))} blob versions new to history total {amount} bytes "
+            f"as Git stores them, exceeding {total}"
+        )
     return failures
 
 
 def judge(
-    repo: Path, base: str, blobs: Sequence[Blob], ceilings: Ceilings
+    repo: Path,
+    base: str,
+    blobs: Sequence[Blob],
+    ceilings: Ceilings,
+    *,
+    deadline: float | None = None,
 ) -> tuple[dict[str, int], list[str]]:
     """The failures, with the paths grandfathered at `base` exempted.
 
-    Grandfathering only ever removes a failure, so the base tree is listed only when
-    there is one for it to remove, and a branch that passes without it pays nothing.
+    Grandfathering only ever removes a per-blob failure, so the base tree is listed only
+    for a blob over that ceiling, and only that blob's paths are measured at the base.
     """
-    failures = violations(blobs, per_blob=ceilings.per_blob, total=ceilings.total)
-    if not failures:
-        return {}, failures
-    exempt = grandfathered(repo, base, per_blob=ceilings.per_blob)
-    return exempt, violations(
+    deadline = _deadline() if deadline is None else deadline
+    over = sorted(
+        {path for blob in blobs if blob.stored > ceilings.per_blob for path in blob.paths}
+    )
+    exempt = (
+        grandfathered(repo, base, per_blob=ceilings.per_blob, paths=over, deadline=deadline)
+        if over
+        else {}
+    )
+    failures = violations(
         blobs, per_blob=ceilings.per_blob, total=ceilings.total, exempt=exempt
     )
+    _within(deadline)
+    return exempt, failures
 
 
 def census(repo: Path, ref: str, count: int, *, ceilings: Ceilings) -> list[CensusRow]:
     """Replay the gate over the last `count` first-parent merges into `ref`."""
-    deadline = time.monotonic() + MAX_SECONDS
+    deadline = _deadline()
     merges = _git(
         repo,
         "rev-list",
@@ -571,13 +801,10 @@ def census(repo: Path, ref: str, count: int, *, ceilings: Ceilings) -> list[Cens
         if not OBJECT_ID.fullmatch(merge):
             raise MetadataError("invalid merge identifier")
         started = time.monotonic()
+        # Each replay is one check, with the deadline a pull request's check would have.
+        replay = _deadline()
         line = _git(
-            repo,
-            "log",
-            "-1",
-            "--format=%P%x00%s",
-            merge.decode("ascii"),
-            deadline=started + MAX_SECONDS,
+            repo, "log", "-1", "--format=%P%x00%s", merge.decode("ascii"), deadline=replay
         ).decode("utf-8", errors="replace")
         parents, _, subject = line.rstrip("\n").partition("\0")
         row = CensusRow(merge.decode("ascii"), subject)
@@ -586,8 +813,8 @@ def census(repo: Path, ref: str, count: int, *, ceilings: Ceilings) -> list[Cens
             continue
         first, second = parents.split()
         try:
-            blobs = inventory(repo, first, head=second)
-            exempt, failures = judge(repo, first, blobs, ceilings)
+            blobs = inventory(repo, first, head=second, deadline=replay)
+            exempt, failures = judge(repo, first, blobs, ceilings, deadline=replay)
         except MetadataError as error:
             rows.append(replace(row, refusal=str(error), seconds=time.monotonic() - started))
             continue
@@ -603,22 +830,31 @@ def census(repo: Path, ref: str, count: int, *, ceilings: Ceilings) -> list[Cens
     return rows
 
 
+def _label(row: CensusRow) -> str:
+    number = PULL_REQUEST_MERGE.match(row.subject)
+    return f"{row.merge[:9]} {'#' + number.group(1) if number else '(no PR)'}"
+
+
 def print_census(rows: Sequence[CensusRow], ref: str, ceilings: Ceilings) -> None:
     print(
         f"CENSUS: {len(rows)} first-parent merges into {ref}; ceilings "
-        f"{ceilings.per_blob}/blob and {ceilings.total} total"
+        f"{ceilings.per_blob}/blob and {ceilings.total} total, as Git stores them"
     )
     for row in rows:
-        number = PULL_REQUEST_MERGE.match(row.subject)
-        label = f"{row.merge[:9]} {'#' + number.group(1) if number else '(no PR)'}"
+        label = _label(row)
         if row.refusal:
             print(f"  {label} GUARD_REFUSED: {row.refusal}")
             continue
         exempt = dict(row.exempt)
-        largest = max(row.blobs, key=lambda blob: blob.size, default=None)
-        detail = f"{len(row.blobs)} blobs, {_mib(charged_bytes(row.blobs, exempt))} charged"
+        charged = _charged(row.blobs)
+        largest = max(row.blobs, key=lambda blob: blob.stored, default=None)
+        detail = (
+            f"{len(row.blobs)} blobs, {_mib(charged_bytes(row.blobs))} charged for "
+            f"{len(charged)} new versions "
+            f"({_mib(sum(blob.checkout for blob in charged.values()))} in a checkout)"
+        )
         if largest is not None:
-            detail += f", largest {_mib(largest.size)} {largest.paths[0]}"
+            detail += f", largest {_mib(largest.stored)} {largest.paths[0]}"
         grandfathered_blobs = sum(
             1 for blob in row.blobs if _exempt(blob, ceilings.per_blob, exempt)
         )
@@ -636,17 +872,25 @@ def print_census(rows: Sequence[CensusRow], ref: str, ceilings: Ceilings) -> Non
         if not any(
             blob.lfs_pointer
             or (
-                blob.size > ceilings.per_blob
+                blob.stored > ceilings.per_blob
                 and not _exempt(blob, ceilings.per_blob, dict(row.exempt))
             )
             for blob in row.blobs
         )
     )
     refused = sum(1 for row in rows if row.refusal)
+    passed = [row for row in rows if not row.refusal and not row.failures]
+    largest_pass = max(passed, key=lambda row: charged_bytes(row.blobs), default=None)
     print(
         f"SUMMARY: {len(rejected)} of {len(rows)} merges rejected, {aggregate_only} of them "
         f"by the total alone; {refused} guard refusals; "
-        f"{sum(row.seconds for row in rows):.1f} s"
+        + (
+            f"largest passing total {_mib(charged_bytes(largest_pass.blobs))} "
+            f"({_label(largest_pass)}); "
+            if largest_pass is not None
+            else ""
+        )
+        + f"{sum(row.seconds for row in rows):.1f} s"
     )
 
 
@@ -688,24 +932,32 @@ def main(argv: Sequence[str] | None = None) -> int:
             rows = census(Path.cwd(), args.census_ref, args.census, ceilings=ceilings)
             print_census(rows, args.census_ref, ceilings)
             return 0
-        blobs = inventory(Path.cwd(), args.base, head=args.head, staged=args.staged)
-        exempt, failures = judge(Path.cwd(), args.base, blobs, ceilings)
+        # One deadline for the whole check: inventory, grandfathering and the verdict.
+        deadline = _deadline()
+        blobs = inventory(
+            Path.cwd(), args.base, head=args.head, staged=args.staged, deadline=deadline
+        )
+        exempt, failures = judge(Path.cwd(), args.base, blobs, ceilings, deadline=deadline)
     except MetadataError as error:
         print(f"GUARD_REFUSED: {error}", file=sys.stderr)
         return 2
     for blob in blobs:
         if _exempt(blob, ceilings.per_blob, exempt):
             print(
-                f"GRANDFATHERED: {blob.size} bytes at {blob.paths!r} ({blob.object_id}); "
-                "each path was already over the per-blob ceiling at the base"
+                f"GRANDFATHERED: {blob.stored} bytes as Git stores them at {blob.paths!r} "
+                f"({blob.object_id}); each path was already over the per-blob ceiling at "
+                "the base"
             )
     if failures:
         for failure in failures:
             print(f"REJECT_ADDED_STORAGE: {failure}")
         return 1
+    charged = _charged(blobs)
     print(
-        f"PASS: {len(blobs)} unique checked blobs, {charged_bytes(blobs, exempt)} bytes "
-        f"charged; ceilings {ceilings.per_blob}/blob and {ceilings.total} total"
+        f"PASS: {len(blobs)} unique checked blobs, {charged_bytes(blobs)} bytes charged as "
+        f"Git stores them for {len(charged)} new versions "
+        f"({sum(blob.checkout for blob in charged.values())} bytes in a checkout); "
+        f"ceilings {ceilings.per_blob}/blob and {ceilings.total} total"
     )
     return 0
 
