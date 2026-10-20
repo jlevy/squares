@@ -13003,7 +13003,7 @@ issues:
       regularized by both strong generators in the same pull request. The drawn view is this
       project''s run of Evan Daniel''s regularizer at the same side; the source''s own regularized
       certificate is retained and not executed.'
-    read_through: '2026-10-19T13:54:01Z'
+    read_through: '2026-10-20T01:39:41Z'
     results:
     - key: n183
       claim: s(183) <= 13999580178736252502081470897571/1000000000000000000000000000000 = 13.999580178736252502081470897571,
@@ -13036,4 +13036,6 @@ issues:
       priority claims remain source assertions. The 19 October posted interim reply reports completed local original-certificate
       replay and mathematical review, while registration is unlanded, undeployed and its result number
       provisional. It names no T-220 and makes no published-registration claim; house adoption and
-      regularized endpoint remain separate. Exact posted bodies are retained in packing/campaign/issue-intake/intake-followup-20261019/issue-680-replies.json.'
+      regularized endpoint remain separate. Exact posted bodies are retained in packing/campaign/issue-intake/intake-followup-20261019/issue-680-replies.json.
+      Evan Daniel''s comment of 2026-10-20T01:39:41Z thanks Joost de Winter for his 19 October note and
+      says how the search was found; it states no new claim, certificate or correction.'
