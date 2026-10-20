@@ -1685,6 +1685,23 @@ class ReleaseNoPublicChange(NamedTuple):
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
     ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=("packing/frontier/README.md",),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "Reviewed October 20, 2026 against main f8d54772 (think-9v1i): the frontier "
+            "README's two house-rule passages now name the house best packing and link "
+            "the synopsis's definition, and nothing else in it changes. Rendered with "
+            "render_packing_methods at link revision f8d54772, once from this branch's "
+            "tree and once with main's copy of frontier/README.md: all 42 files it writes "
+            "are byte-identical, and its PDF prints from that HTML and was not rebuilt. "
+            "The survey keeps v0.2.3."
+        ),
+    ),
+    ReleaseNoPublicChange(
         components=("paper:n11-optimality-review", "paper:n11-threshold-bound-review"),
         paths=(
             "packing/devtools/adopt_houses.py",
