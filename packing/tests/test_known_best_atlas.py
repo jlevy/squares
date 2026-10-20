@@ -3173,7 +3173,7 @@ def test_the_poster_badges_every_perfect_square_and_counts_them_in_its_legend() 
     # exact certificate, and its pass of 12 October three more, 181, 271 and 304, whose
     # reported lanes stated no exact form (think-fvz4); the adoption of 17 October gave
     # 29 one, PR #622's rational certificate (T-195), and nine more through T-174's
-    # rational houses, drawn since the v0.6.4 redraw of 19 October.
+    # rational houses, drawn since the v0.6.4 redraw of 20 October.
     assert labels == [
         "proved optimal (77 of 324)",
         "exact value known (318 of 324)",
