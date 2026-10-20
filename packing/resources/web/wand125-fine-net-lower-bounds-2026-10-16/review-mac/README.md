@@ -75,8 +75,8 @@ The unlicensed adapted source archive was neither opened, executed nor retained 
 
 The small `records-preparation-check.json` records source-byte retention, selected
 receipt/point-fraction bindings, unchanged historical records, mapped links and derived
-rungs. It supplies no new geometric acceptance; required integration gates remain held
-for the coordinator.
+rungs at the 19 October preparation, before integration. It supplies no new geometric
+acceptance.
 
 ## Historical Reproduction and Independence
 

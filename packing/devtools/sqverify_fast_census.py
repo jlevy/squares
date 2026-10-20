@@ -2015,6 +2015,7 @@ def render_mixed_report(census: dict[str, Any], out: Path) -> str:
         "repository replayed; *ours, same directions* is `sqverify-fast`'s thread CPU on",
         "exactly those directions. Per-direction CPU is unavailable unless every compared",
         "direction has a reading; the native summary's zero does not supply missing readings.",
+        "It is `-` where nothing was compared.",
         "*CPU s, all directions* is aggregate process CPU from `wait4` (user plus system),",
         "separate from the direction readings. Load is given only where recorded.",
         "*Control* is the status of the `--control` receipt on the certificate itself, where",
@@ -2045,7 +2046,11 @@ def render_mixed_report(census: dict[str, Any], out: Path) -> str:
             if case is not None and len(replayed) == net_directions(case)
             else ", ".join(str(r) for r in replayed) or "none: first complete check here"
         )
-        if not reference.get("per_direction_cpu", True):
+        # Nothing is compared where no direction was replayed or the authors' replay kept
+        # no per-direction CPU: that cell is "-", and "unavailable" means a compared
+        # direction lacks our reading.
+        compared = bool(replayed) and reference.get("per_direction_cpu", True)
+        if not compared:
             ours = None
         least = entry.get("least_bound_leaf_exact") or {}
         cpu = recorded_seconds(entry.get("cpu_seconds"))
@@ -2065,7 +2070,7 @@ def render_mixed_report(census: dict[str, Any], out: Path) -> str:
             f"{load:.1f}" if load is not None else "unavailable",
             span,
             f"{authors:,.0f}" if authors > 0 else "-",
-            f"{ours:.1f}" if ours is not None else "unavailable",
+            f"{ours:.1f}" if ours is not None else ("unavailable" if compared else "-"),
             f"{authors / ours:,.0f}x" if ours is not None and ours > 0 and authors > 0 else "-",
             (control_status(case, out) or "-") if case is not None else "-",
         ]

@@ -335,3 +335,58 @@ def test_reports_and_summary_do_not_convert_missing_direction_cpu_to_zero(
     assert "| 100 | 2.5 | 40x |" in text
     entry["direction_cpu_seconds"].pop("2")
     assert "| unavailable | - |" in census.render_mixed_report(mixed, out)
+
+
+@pytest.mark.parametrize(
+    "reference",
+    [
+        {"directions": [], "cpu_seconds": 0, "per_direction_cpu": True},
+        {"directions": [1, 2], "cpu_seconds": 0, "per_direction_cpu": False},
+    ],
+    ids=["none-replayed", "no-author-direction-cpu"],
+)
+def test_the_mixed_report_marks_an_uncompared_cell_not_applicable(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    reference: dict[str, Any],
+) -> None:
+    """Where no direction was compared there is nothing unavailable: the cell is "-"."""
+    case, entry, out = retained_case(tmp_path, monkeypatch)
+    monkeypatch.setattr(census, "mixed_cases", lambda: [case])
+    monkeypatch.setattr(census, "mixed_reference", lambda _: reference)
+    entry["direction_cpu_seconds"] = {str(r): 1.25 for r in range(201)}
+    text = census.render_mixed_report({"cases": {case.certificate: entry}}, out)
+    (row,) = [line for line in text.splitlines() if line.startswith(f"| `{case.certificate}`")]
+    cells = [cell.strip() for cell in row.strip("|").split("|")]
+    assert cells[11:14] == ["-", "-", "-"]
+
+
+def _view_rows(view: str) -> set[str]:
+    return {
+        line.split("|")[1].strip().strip("`")
+        for line in view.splitlines()
+        if line.startswith("| `")
+    }
+
+
+def test_the_committed_census_views_carry_every_census_row() -> None:
+    """The generated views fall behind `census.json` only by failing here.
+
+    #671 and #688 added census rows without regenerating the views (Review A of #688,
+    A1). The views are formatted after rendering, so this compares their rows and
+    their verified counts with the registers rather than their bytes.
+    """
+    root = census.CENSUS_ROOT
+    names: set[str] = set()
+    for family in ("census", "census-mixed"):
+        register = json.loads((root / family / "census.json").read_text(encoding="utf-8"))
+        cases = register["cases"]
+        view = (root / family / "README.md").read_text(encoding="utf-8")
+        assert _view_rows(view) == set(cases), family
+        verified = sum(entry.get("status") == "VERIFIED" for entry in cases.values())
+        assert f"\n{verified} of {len(cases)} certificates verified;" in view, family
+        names |= set(cases)
+    summary = json.loads((root / "census-summary.json").read_text(encoding="utf-8"))
+    assert {row["certificate"] for row in summary["certificates"]} == names
+    view = (root / "census-summary.md").read_text(encoding="utf-8")
+    assert _view_rows(view) == names

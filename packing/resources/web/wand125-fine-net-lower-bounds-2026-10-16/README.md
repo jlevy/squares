@@ -331,8 +331,10 @@ program, imported helper, PASS receipt, per-command timing file and historical s
 context. Only the three accepted census rows were merged into the existing census; the
 original eighteen reported entries and candidates and historical Linux n108 remain
 retained. The
-[scoped current-packet report](../../../benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-2026-10-16/README.md)
-is generated from those three rows without regenerating historical reports.
+[packet’s census folder](../../../benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-2026-10-16/README.md)
+indexes their receipts, and the regenerated
+[Milestone B census](../../../benchmarks/measure-verifier/census-mixed/README.md) lists
+the three rows beside every other mixed certificate.
 
 The n68 capture’s outer exit remains unobserved after recovery, with native exit zero;
 its whole-net control has 197 refusals and four verified mutant directions, 46–49. Both
@@ -343,9 +345,7 @@ unavailable direction CPU and separate native-process and aggregate-command CPU
 measurements.
 
 The mapped mathematical reviews accept these exact checkpoints.
-The prepared records remain subject to the coordinator’s integration checks, final
-review and publication; this retention pass reran no native verifier or historical exact
-audit.
+This retention pass reran no native verifier or historical exact audit.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

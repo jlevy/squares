@@ -1,36 +1,28 @@
 # Accepted Mac Checkpoints: n68, n84 and n85
 
-Generated from exactly the three accepted rows by
-`devtools.sqverify_fast_census.render_mixed_report`; do not edit by hand.
-Other current-packet certificates and historical Linux n108 are outside this scoped
-view.
+This folder retains the native receipts of the 16 October 2026 fine-net packet’s
+certificates that this repository has decided completely.
+Three of them, `mixed_n68_L853` (T-205), `mixed_n84_L94225` (T-206) and
+`mixed_n85_L9475` (T-207), are the Mac checkpoints accepted on 19 October 2026. The
+fourth, `mixed_n108_L1062` (T-216), is the Linux replay of 18 October 2026. Their census
+rows are in [`census.json`](../census.json), and the [Milestone B census](../README.md),
+which `python -m devtools.sqverify_fast_census --family mixed --report` regenerates,
+shows them beside every other mixed certificate.
 
-Every retained certificate of formats M (rectangle rows, per-bin centre domain) and L
-(points, segments and rectangles, Tokoharu’s domain), verified by `sqverify-fast` at
-every direction of its net (201, unless the file declares its own) at the threshold the
-certificate declares, 1. *Replayed directions* are those the authors’ checker replayed
-in this repository; where there are none, this census is the first complete check here.
-*Exact leaf* is the exact rational capture at the centre of the least-bound leaf of the
-least-bound direction.
-*Authors’ CPU* is the authors’ checker’s recorded CPU seconds on the directions this
-repository replayed; *ours, same directions* is `sqverify-fast`’s thread CPU on exactly
-those directions. Per-direction CPU is unavailable unless every compared direction has a
-reading; the native summary’s zero does not supply missing readings.
-*CPU s, all directions* is aggregate process CPU from `wait4` (user plus system),
-separate from the direction readings.
-Load is given only where recorded.
-*Control* is the status of the `--control` receipt on the certificate itself, where one
-is kept: the original verified again and a near-threshold mutant refused at its
-least-bound direction, and the 99/100 mutant refused at one direction at least, every
-direction of the net run (v2), or at that direction alone (v1).
+For each certificate the folder keeps:
 
-| Certificate | n | Format | Status | Directions | Nodes | Least certified bound | Exact leaf | CPU s, all directions | Load | Replayed directions | Authors’ CPU s | Ours, same directions | Ratio | Control |
-| --- | ---: | --- | --- | ---: | ---: | --- | --- | ---: | ---: | --- | ---: | ---: | ---: | --- |
-| `mixed_n68_L853` | 68 | M | VERIFIED | 201 | 104,110,078 | 1.0000000000889968 | clears | 855.9 | 3.3 | none: first complete check here | - | unavailable | - | CONTROLS_REFUSED |
-| `mixed_n84_L94225` | 84 | M | VERIFIED | 201 | 136,054,170 | 1.000000000314376 | clears | 1395.7 | 6.0 | none: first complete check here | - | unavailable | - | CONTROLS_REFUSED |
-| `mixed_n85_L9475` | 85 | M | VERIFIED | 201 | 126,895,910 | 1.000000000004128 | clears | 1414.0 | 7.9 | none: first complete check here | - | unavailable | - | CONTROLS_REFUSED |
+- `CERT.jsonl.gz`, the capture: one row for each of the 201 directions of the net the
+  candidate declares, and a summary.
+- `CERT.control.json`, the whole-net control receipt (`sqverify-fast-control/v2`).
+- `CERT.execution.json`, for the three Mac checkpoints only: the checkpoint’s authentic
+  execution record of commands, exits and aggregate driver timing, which is separate
+  from the census row’s `wait4` CPU. The n68 record keeps the capture’s unobserved outer
+  exit beside the recovered native exit, zero.
 
-3 of 3 certificates verified; 3666 recorded aggregate process CPU seconds in all.
+The Mac checkpoints’ per-command logs and timing files, exact audits and platform
+evidence are in
+[`review-mac`](../../../../resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/README.md).
+This README is a hand-maintained index of the folder, not a generated view.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

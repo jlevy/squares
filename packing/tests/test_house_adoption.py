@@ -1625,12 +1625,11 @@ def _fine_net_lower_projection(
         "exact_form": exact,
         "evidence": [f"E-wand125-fine-net-{tag}-sqverify-fast-replay"],
     }
-    short = tag.split("-", 1)[0]
     assert held["evidence"] == [
         f"E-wand125-fine-net-{tag}-report",
         f"E-wand125-fine-net-{tag}-sqverify-fast-replay",
-        f"E-{short}-review-max-premises",
-        f"E-{short}-review-max-captures",
+        f"E-n{n:03d}-fine-net-review-premises",
+        f"E-n{n:03d}-fine-net-review-captures",
         *wrote["evidence"],
     ]
     assert held["resources"] == [
@@ -1648,10 +1647,11 @@ def _fine_net_lower_projection(
     intro = (
         f"**Fine-net validation, 19 October 2026 ({result}).** The retained candidate "
         f"`{candidate}` raises both lower lanes from ${earlier}$ to ${exact}$. The complete "
-        "201-direction maintained native replay and [maximum-reasoning mathematical "
-        f"review](../../docs/project/reviews/review-2026-10-19-{review}.md) confirm it by "
-        "re-implementation sharing the producer’s crate apart from declared-net readers. "
-        "The exact audits check premises and saved poses only. The original 18 source "
+        "201-direction maintained native replay and [mathematical "
+        f"review](../../docs/project/reviews/review-2026-10-19-{review}.md) confirm it by a "
+        "re-implementation sharing components with the producer’s checker, wand125’s "
+        "adaptation of this repository’s `sqverify_fast` crate, apart from the declared-net "
+        "readers. The exact audits check premises and saved poses only. The original 18 source "
         "reports and historical native receipts remain retained."
     )
     words = _flat(intro)
