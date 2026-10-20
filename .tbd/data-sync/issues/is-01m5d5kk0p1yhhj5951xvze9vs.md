@@ -5,13 +5,13 @@ title: "Import Evan Daniel: s(154) <= 12.921100940762 (#694)"
 kind: task
 status: open
 priority: 1
-version: 1
+version: 3
 labels:
   - result-import
 dependencies: []
 parent_id: is-01m5c0fwsxga70rszkjy1zbp2f
 created_at: 2026-10-20T17:26:36.822Z
-updated_at: 2026-10-20T17:26:36.822Z
+updated_at: 2026-10-20T18:49:15.381Z
 ---
 Stage 1 to 3 import of jlevy/squares#694 (Evan Daniel, filed 2026-10-20T03:56:43Z), lane c-lane-evand-2 under think-eizi.
 
@@ -25,3 +25,8 @@ Stage 1 to 3 import of jlevy/squares#694 (Evan Daniel, filed 2026-10-20T03:56:43
 ## Validation plan (priced)
 - Exact certification on the two maintained routes with the duplicate-square and outside-container controls, via devtools.upper_bound_reports certify: about 1 CPU-minute, run in this lane.
 - Stage 4 mathematical review (tbd-strong-max), run by the coordinator. Then V3/C3, adoption at 154 and regularization of the new house in the stage 4 pull request.
+
+## Notes
+
+2026-10-20 (c-lane-evand-2): stages 1 to 3 done on claude/intake-2026-10-20-evand-308-154, draft PR https://github.com/jlevy/squares/pull/699 (head 34d72a95a; data commits 277bcd50a and the suite-a fix 938e5f573; hosted Packing validation run 39476391860 green). Packet packing/resources/web/evand-n154-sweep-2026-10-20 at 1d2bb82; digests match the issue. Both maintained exact routes accept the positive and refuse both controls (receipt retained). Registered as T-222, V0/C0, 1.05636370950500e-4 below T-186 at 154. n-154.md has no note: it is the adoption writer's (not HAND_MARKED), so the stage 4 adoption writes its prose. Credit ask queued on this bead until adoption. Reply draft: scratchpad/replies-new/694.md (post after merge; asks about dgen.py and the regularized view's "by" field).
+Next: stage 4 mathematical review (coordinator, with Fable), then V3/C3, adoption at 154 and regularization of the new house in the stage 4 PR.

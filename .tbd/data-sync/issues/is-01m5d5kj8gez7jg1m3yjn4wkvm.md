@@ -5,13 +5,13 @@ title: "Import Evan Daniel: s(308) <= 17.997149121271 (#689)"
 kind: task
 status: open
 priority: 1
-version: 1
+version: 3
 labels:
   - result-import
 dependencies: []
 parent_id: is-01m5c0fwsxga70rszkjy1zbp2f
 created_at: 2026-10-20T17:26:36.048Z
-updated_at: 2026-10-20T17:26:36.048Z
+updated_at: 2026-10-20T18:49:14.920Z
 ---
 Stage 1 to 3 import of jlevy/squares#689 (Evan Daniel, filed 2026-10-19T22:44:19Z), lane c-lane-evand-2 under think-eizi.
 
@@ -26,3 +26,8 @@ Stage 1 to 3 import of jlevy/squares#689 (Evan Daniel, filed 2026-10-19T22:44:19
 ## Validation plan (priced)
 - Exact certification on the two maintained routes (sqpack.verify and devtools.check_rational_witness_independent) with the duplicate-square and outside-container controls, via devtools.upper_bound_reports certify: about 2 to 4 CPU-minutes, run in this lane.
 - Stage 4 mathematical review (tbd-strong-max), run by the coordinator after the records PR opens. Then V3/C3 from the replay evidence and the review, adoption at 308 and regularization of the new house (both strong generators, about 5 to 25 CPU-minutes) in the stage 4 pull request.
+
+## Notes
+
+2026-10-20 (c-lane-evand-2): stages 1 to 3 done on claude/intake-2026-10-20-evand-308-154, draft PR https://github.com/jlevy/squares/pull/699 (head 34d72a95a; data commits 277bcd50a and the suite-a fix 938e5f573; hosted Packing validation run 39476391860 green). Packet packing/resources/web/evand-n308-2026-10-19 at bc0708f; digests match the issue. Both maintained exact routes accept the positive and refuse both controls (receipt retained). Registered as T-221, V0/C0, 1.12075825534714e-3 below T-174 at 308. n-308.md carries the pending-adoption paragraph (308 is HAND_MARKED). Credit ask queued on this bead until adoption. Reply draft: scratchpad/replies-new/689.md (post after merge; asks the author about the missing search/packer/dgen.py).
+Next: stage 4 mathematical review (coordinator, with Fable), then V3/C3, adoption at 308 and regularization of the new house in the stage 4 PR. think-a95t (Fang's credit at 308) concerns the present house only.
