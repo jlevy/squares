@@ -106,6 +106,8 @@ def pid_scope() -> str | None:
 
     A namespace's inode is unique only within one running kernel -- the initial PID
     namespace has the same inode on every Linux machine -- so the boot ID comes with it.
+    The boot ID names a kernel boot, so virtual machines restored from one memory snapshot
+    share it, and the initial namespace's inode, and must not share a temporary root.
     None off Linux, or when either cannot be read, and then no numbered directory's lock
     is ever released.
     """
@@ -161,7 +163,9 @@ def _private_root(root: Path) -> bool:
 def _read_small(name: str, directory: int, limit: int) -> str | None:
     """A regular file's ASCII text, read inside the open `directory`, or None for any doubt."""
     try:
-        descriptor = os.open(name, os.O_RDONLY | os.O_NOFOLLOW, dir_fd=directory)
+        # O_NONBLOCK: opening a FIFO for reading would otherwise wait for a writer.
+        flags = os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK
+        descriptor = os.open(name, flags, dir_fd=directory)
     except OSError:
         return None
     try:

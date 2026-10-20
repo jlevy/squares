@@ -10,7 +10,9 @@ import json
 import os
 import subprocess
 import sys
+import threading
 import tomllib
+from contextlib import suppress
 from pathlib import Path
 
 import pytest
@@ -328,6 +330,39 @@ def test_only_locks_of_exited_owners_in_this_pid_scope_are_released(tmp_path: Pa
     assert all(not (directory / ".lock").exists() for directory in released)
     assert all((directory / ".lock").exists() for directory in kept)
     assert all(directory.is_dir() for directory in [*released, *kept])
+
+
+@LINUX
+def test_a_fifo_lock_or_record_is_kept_without_waiting_for_a_writer(tmp_path: Path) -> None:
+    # Opening a FIFO for reading blocks until a writer appears; a session must not hang
+    # in configure because one sits where a lock or a record should be.
+    dead = _dead_pid()
+    root = tmp_path / "root"
+    root.mkdir(mode=0o700)
+    fifos = [
+        root / "garbage-fifo" / pytest_tmp.LOCK_NAME,
+        root / "pytest-1" / pytest_tmp.LOCK_NAME,
+        _locked(root, "pytest-2", str(dead)) / pytest_tmp.OWNER_NAME,
+    ]
+    for fifo in fifos:
+        fifo.parent.mkdir(exist_ok=True)
+        os.mkfifo(fifo)
+    released: list[list[Path]] = []
+    worker = threading.Thread(
+        target=lambda: released.append(pytest_tmp.release_dead_locks(root, _scope())),
+        daemon=True,
+    )
+    worker.start()
+    worker.join(timeout=10)
+    try:
+        assert not worker.is_alive(), "release_dead_locks waited on a FIFO"
+    finally:
+        for fifo in fifos:  # a regression's blocked open returns once a writer opens
+            with suppress(OSError):
+                os.close(os.open(fifo, os.O_WRONLY | os.O_NONBLOCK))
+    assert released == [[]]
+    assert all(fifo.exists() for fifo in fifos)
+    assert (root / "pytest-2" / pytest_tmp.LOCK_NAME).exists()
 
 
 def test_an_out_of_range_pid_counts_as_alive() -> None:

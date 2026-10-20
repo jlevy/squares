@@ -1099,6 +1099,8 @@ A test session leaves behind only what someone needs to inspect a failure.
   namespace keeps its lock for pytest’s three days: a session from before a restart,
   from a container or machine sharing the directory, or from any host other than Linux;
   a session given `--basetemp`; and an xdist worker’s directory.
+  The boot ID names a kernel boot, so virtual machines restored from one memory snapshot
+  share it and must not share a temporary root.
 
 Measured on 20 October 2026 over the quick lane (about 19,200 tests on two xdist workers
 on a shared four-CPU host, with a fresh `TMPDIR` sampled every five seconds): on main,
