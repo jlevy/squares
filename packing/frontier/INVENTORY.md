@@ -8,8 +8,8 @@ ours, which rest on someone else's argument, and how far each has been checked.
 
 ## The short version
 
-- **665** evidence records. **384** are formal; **376** of those were established here. **10** are samples, counted separately.
-- **264** rest on an argument made elsewhere, of which **7** have been read by nobody here.
+- **667** evidence records. **385** are formal; **377** of those were established here. **10** are samples, counted separately.
+- **265** rest on an argument made elsewhere, of which **7** have been read by nobody here.
 - **1** formal record proves a theorem only under a hypothesis nothing here has replayed, and is verified as that implication alone: `E-k2m4-evand-bentz4-lean-build` (ValidTilt9).
 - **43** claim to be first established here. **14** make no novelty statement at all - not assessed, which is not the same as not novel.
 
@@ -155,9 +155,9 @@ results, it is a statement about what this repository has itself examined.
 | `E-n017-maciver-reported-lower` | 0 | lower-bound | reported | - | elsewhere | not-reviewed | previously-published | unknown | not recorded | *none held* |
 | `E-green26-reported-lower` | 0 | lower-bound | reported | - | - | defect-found | previously-published | unknown | not recorded | - |
 | `E-kingbird-upper-register` | 154 | upper-bound | reported | - | - | - | previously-published | producer’s code | not recorded | - |
-| `E-kingbird-grid-completeness` | 95 | upper-bound | reported | - | - | - | previously-published | producer’s code | not recorded | - |
+| `E-kingbird-grid-completeness` | 94 | upper-bound | reported | - | - | - | previously-published | producer’s code | not recorded | - |
 | `E-unitsquare-release1-report` | 0 | upper-bound | reported | - | - | - | previously-published | producer’s code | not recorded | *none held* |
-| `E-basic-grid-upper` | 175 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | common-knowledge | independent | not recorded | `V-check-basic-bounds` |
+| `E-basic-grid-upper` | 174 | upper-bound | verified | equalities and inequalities, no tolerance | here | - | common-knowledge | independent | not recorded | `V-check-basic-bounds` |
 | `E-basic-area-lower` | 18 | lower-bound | verified | equalities and inequalities, no tolerance | here | - | common-knowledge | independent | not recorded | `V-check-basic-bounds` |
 | `E-nagamochi-lower` | 26 | lower-bound | reported | - | elsewhere | defect-found | previously-published | no code | not recorded | - |
 | `E-karakus-strip-lower` | 202 | lower-bound | verified | whatever its theorem states | elsewhere | informally-verified | previously-published | no code | not recorded | - |
@@ -688,13 +688,15 @@ results, it is a statement about what this repository has itself examined.
 | `E-wand125-fine-net-n85-9475-sqverify-fast-replay` | 1 | lower-bound | verified | strict inequalities only | here | - | previously-published | shared components | full, 201 of 201: complete legal core-centre domains at every declared-net direction | `V-sqverify-fast` |
 | `E-n085-fine-net-review-premises` | 0 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | previously-published | not applicable | full: exact mass, D4 expansion, core/net/domain premises and retained receipt inventories of this candidate | `V-fine-net-mac-review-exact` |
 | `E-n085-fine-net-review-captures` | 0 | derived-structure | verified | equalities and inequalities, no tolerance | here | - | previously-published | not applicable | full, 203 of 203: saved native 99/100 refusal poses plus selected positive centre and near-threshold witness; no whole direction domain | `V-fine-net-mac-review-exact` |
+| `E-evand-680-n183-report` | 1 | upper-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | `V-evand-verify-cert-py`, `V-evand-verify-cert2-py` |
+| `E-evand-680-n183-primary-exact-feasibility` | 1 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | independent | full, 1 of 1: the original n183 rational certificate, all 183 squares, every wall and all 16653 unordered pairs in each of three jobs through both maintained routes; positive plus two sensitive invalid controls | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-upper-bound-reports`, `V-evand-arrangement-receipts`, `V-evand-exact-certificates`, `V-acquire-source` |
 
 ## What the register rests on
 
-- **assurance**: numerically-checked 5, reported 267, verified 393
-- **method**: exact-algebraic 203, interval-certified 173, numerical-multiprecision 5, proof-assistant-checked 6, proof-audited 4, published-proof 7, reported 267
-- **novelty**: apparently-novel 43, common-knowledge 4, not assessed 14, previously-published 604
-- **relationship to the producer's code**: generator 5, independent-implementation 240, not-applicable 31, same-implementation 359, shared-components 24, unknown-historical 6
+- **assurance**: numerically-checked 5, reported 268, verified 394
+- **method**: exact-algebraic 204, interval-certified 173, numerical-multiprecision 5, proof-assistant-checked 6, proof-audited 4, published-proof 7, reported 268
+- **novelty**: apparently-novel 43, common-knowledge 4, not assessed 14, previously-published 606
+- **relationship to the producer's code**: generator 5, independent-implementation 241, not-applicable 31, same-implementation 360, shared-components 24, unknown-historical 6
 
 The `cases` column is how many frontier records cite each piece of evidence, and it is the reason to read this table rather than count records. Ranked below are the *formal* records only: a `reported` record cited across the frontier may be a shared catalogue and is labelled as such, which is the register working rather than risk. The risk is a verified claim resting on an argument nobody has examined.
 
@@ -754,7 +756,7 @@ The `n` column is what each covers and `cases` is how many frontier records cite
 | --- | ---: | --- | --- |
 | `E-karakus-strip-lower` | 202 | elsewhere | informally-verified |
 | `E-karakus-strip-measure-interval` | 202 | here | - |
-| `E-basic-grid-upper` | 175 | here | - |
+| `E-basic-grid-upper` | 174 | here | - |
 | `E-regularized-bounds-2026-10-12-exact-decision` | 55 | here | - |
 | `E-pingyou-574-exact-feasibility` | 36 | here | informally-verified |
 

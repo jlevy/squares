@@ -1,0 +1,143 @@
+packing/frontier/n-185.md:13:  reported_upper_bound:
+packing/frontier/n-185.md-14-    value: '14.0'
+packing/frontier/n-185.md-15-    exact_form: '14'
+packing/frontier/n-185.md-16-    algebraic_degree: null
+packing/frontier/n-185.md-17-    minimal_polynomial: null
+--
+packing/frontier/n-185.md:34:  verified_upper_bound:
+packing/frontier/n-185.md-35-    value: '14'
+packing/frontier/n-185.md-36-    exact_form: '14'
+packing/frontier/n-185.md-37-    evidence:
+packing/frontier/n-185.md-38-    - E-basic-grid-upper
+--
+packing/frontier/n-192.md:13:  reported_upper_bound:
+packing/frontier/n-192.md-14-    value: '14.0'
+packing/frontier/n-192.md-15-    exact_form: '14'
+packing/frontier/n-192.md-16-    algebraic_degree: null
+packing/frontier/n-192.md-17-    minimal_polynomial: null
+--
+packing/frontier/n-192.md:34:  verified_upper_bound:
+packing/frontier/n-192.md-35-    value: '14'
+packing/frontier/n-192.md-36-    exact_form: '14'
+packing/frontier/n-192.md-37-    evidence:
+packing/frontier/n-192.md-38-    - E-basic-grid-upper
+--
+packing/frontier/n-189.md:13:  reported_upper_bound:
+packing/frontier/n-189.md-14-    value: '14.0'
+packing/frontier/n-189.md-15-    exact_form: '14'
+packing/frontier/n-189.md-16-    algebraic_degree: null
+packing/frontier/n-189.md-17-    minimal_polynomial: null
+--
+packing/frontier/n-189.md:34:  verified_upper_bound:
+packing/frontier/n-189.md-35-    value: '14'
+packing/frontier/n-189.md-36-    exact_form: '14'
+packing/frontier/n-189.md-37-    evidence:
+packing/frontier/n-189.md-38-    - E-basic-grid-upper
+--
+packing/frontier/n-187.md:13:  reported_upper_bound:
+packing/frontier/n-187.md-14-    value: '14.0'
+packing/frontier/n-187.md-15-    exact_form: '14'
+packing/frontier/n-187.md-16-    algebraic_degree: null
+packing/frontier/n-187.md-17-    minimal_polynomial: null
+--
+packing/frontier/n-187.md:34:  verified_upper_bound:
+packing/frontier/n-187.md-35-    value: '14'
+packing/frontier/n-187.md-36-    exact_form: '14'
+packing/frontier/n-187.md-37-    evidence:
+packing/frontier/n-187.md-38-    - E-basic-grid-upper
+--
+packing/frontier/n-184.md:13:  reported_upper_bound:
+packing/frontier/n-184.md-14-    value: '14.0'
+packing/frontier/n-184.md-15-    exact_form: '14'
+packing/frontier/n-184.md-16-    algebraic_degree: null
+packing/frontier/n-184.md-17-    minimal_polynomial: null
+--
+packing/frontier/n-184.md:34:  verified_upper_bound:
+packing/frontier/n-184.md-35-    value: '14'
+packing/frontier/n-184.md-36-    exact_form: '14'
+packing/frontier/n-184.md-37-    evidence:
+packing/frontier/n-184.md-38-    - E-basic-grid-upper
+--
+packing/frontier/n-193.md:13:  reported_upper_bound:
+packing/frontier/n-193.md-14-    value: '14.0'
+packing/frontier/n-193.md-15-    exact_form: '14'
+packing/frontier/n-193.md-16-    algebraic_degree: null
+packing/frontier/n-193.md-17-    minimal_polynomial: null
+--
+packing/frontier/n-193.md:34:  verified_upper_bound:
+packing/frontier/n-193.md-35-    value: '14'
+packing/frontier/n-193.md-36-    exact_form: '14'
+packing/frontier/n-193.md-37-    evidence:
+packing/frontier/n-193.md-38-    - E-basic-grid-upper
+--
+packing/frontier/n-194.md:13:  reported_upper_bound:
+packing/frontier/n-194.md-14-    value: '14.0'
+packing/frontier/n-194.md-15-    exact_form: '14'
+packing/frontier/n-194.md-16-    algebraic_degree: null
+packing/frontier/n-194.md-17-    minimal_polynomial: null
+--
+packing/frontier/n-194.md:34:  verified_upper_bound:
+packing/frontier/n-194.md-35-    value: '14'
+packing/frontier/n-194.md-36-    exact_form: '14'
+packing/frontier/n-194.md-37-    evidence:
+packing/frontier/n-194.md-38-    - E-basic-grid-upper
+--
+packing/frontier/n-195.md:13:  reported_upper_bound:
+packing/frontier/n-195.md-14-    value: '14.0'
+packing/frontier/n-195.md-15-    exact_form: '14'
+packing/frontier/n-195.md-16-    algebraic_degree: null
+packing/frontier/n-195.md-17-    minimal_polynomial: null
+--
+packing/frontier/n-195.md:34:  verified_upper_bound:
+packing/frontier/n-195.md-35-    value: '14'
+packing/frontier/n-195.md-36-    exact_form: '14'
+packing/frontier/n-195.md-37-    evidence:
+packing/frontier/n-195.md-38-    - E-basic-grid-upper
+--
+packing/frontier/n-186.md:13:  reported_upper_bound:
+packing/frontier/n-186.md-14-    value: '14.0'
+packing/frontier/n-186.md-15-    exact_form: '14'
+packing/frontier/n-186.md-16-    algebraic_degree: null
+packing/frontier/n-186.md-17-    minimal_polynomial: null
+--
+packing/frontier/n-186.md:34:  verified_upper_bound:
+packing/frontier/n-186.md-35-    value: '14'
+packing/frontier/n-186.md-36-    exact_form: '14'
+packing/frontier/n-186.md-37-    evidence:
+packing/frontier/n-186.md-38-    - E-basic-grid-upper
+--
+packing/frontier/n-191.md:13:  reported_upper_bound:
+packing/frontier/n-191.md-14-    value: '14.0'
+packing/frontier/n-191.md-15-    exact_form: '14'
+packing/frontier/n-191.md-16-    algebraic_degree: null
+packing/frontier/n-191.md-17-    minimal_polynomial: null
+--
+packing/frontier/n-191.md:34:  verified_upper_bound:
+packing/frontier/n-191.md-35-    value: '14'
+packing/frontier/n-191.md-36-    exact_form: '14'
+packing/frontier/n-191.md-37-    evidence:
+packing/frontier/n-191.md-38-    - E-basic-grid-upper
+--
+packing/frontier/n-190.md:13:  reported_upper_bound:
+packing/frontier/n-190.md-14-    value: '14.0'
+packing/frontier/n-190.md-15-    exact_form: '14'
+packing/frontier/n-190.md-16-    algebraic_degree: null
+packing/frontier/n-190.md-17-    minimal_polynomial: null
+--
+packing/frontier/n-190.md:34:  verified_upper_bound:
+packing/frontier/n-190.md-35-    value: '14'
+packing/frontier/n-190.md-36-    exact_form: '14'
+packing/frontier/n-190.md-37-    evidence:
+packing/frontier/n-190.md-38-    - E-basic-grid-upper
+--
+packing/frontier/n-188.md:13:  reported_upper_bound:
+packing/frontier/n-188.md-14-    value: '14.0'
+packing/frontier/n-188.md-15-    exact_form: '14'
+packing/frontier/n-188.md-16-    algebraic_degree: null
+packing/frontier/n-188.md-17-    minimal_polynomial: null
+--
+packing/frontier/n-188.md:34:  verified_upper_bound:
+packing/frontier/n-188.md-35-    value: '14'
+packing/frontier/n-188.md-36-    exact_form: '14'
+packing/frontier/n-188.md-37-    evidence:
+packing/frontier/n-188.md-38-    - E-basic-grid-upper

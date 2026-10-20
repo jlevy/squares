@@ -30075,6 +30075,89 @@ results:
         verdict: accepted
         covers: [T-197, T-198, T-199, T-218, T-219]
 
+  - id: T-220
+    kind: upper-bound
+    registered: '2026-10-19'
+    landed: '2026-10-20'
+    headline: Daniel's finite sub-grid upper bound for 183 squares, after Couzo's n182 packing
+    claim: s(183) <= 13999580178736252502081470897571/1000000000000000000000000000000 = 13.999580178736252502081470897571
+      < 14, from the original rational certificate, printed safely upward as 13.999580178737.
+      Independently re-verified here by the project's maintained exact geometry implementations
+      relative to the producer's code, with complete all-pair/wall coverage and duplicate-square/outside-container
+      controls. Credit Evan Daniel after Francisco Couzo's n182 packing, through an explorer
+      descendant, insertion, crossovers and refinement; crossover mates were not logged. The
+      regularized display file is retained source history, unexecuted here.
+    scope:
+      n_values:
+      - 183
+    verification: V3
+    confirmation: C3
+    significance:
+      score: 3
+      rationale: >-
+        A complete rational certificate gives a sub-grid packing at n183, about
+        4.20e-4 below the retained side-14 grid. Full exact primary replay and the
+        accepted independent mathematical review support this finite case result;
+        no optimality or public priority is claimed. The review endorses S3.
+      scored: '2026-10-19'
+      by: think-xp0o intake triage; endorsed by think-glg8 independent mathematical review
+    novelty: previously-published
+    attribution:
+      source_keys:
+      - '[Daniel n183 subgrid 2026-10-19]'
+      published: '2026-10-19'
+    evidence:
+    - E-evand-680-n183-report
+    - E-evand-680-n183-primary-exact-feasibility
+    artifacts:
+    - packing/resources/web/evand-n183-subgrid-2026-10-19/README.md
+    - packing/resources/web/evand-n183-subgrid-2026-10-19/source/search/packer/candidates/s183_h183b.cert
+    - packing/resources/web/evand-n183-subgrid-2026-10-19/source/search/packer/candidates/s183_h183b_regularized.cert
+    - packing/campaign/issue-intake/intake-followup-20261019/n183-ledger/README.md
+    - docs/project/reviews/review-2026-10-19-evand-n183-subgrid.md
+    - packing/campaign/issue-intake/intake-followup-20261019/n183-evidence-integration.yaml
+    - packing/resources/web/evand-n183-subgrid-2026-10-19/receipts/exact-certification.json.xz
+    - packing/resources/web/evand-n183-subgrid-2026-10-19/receipts/certify-execution-provenance.json
+    reviews:
+    - path: docs/project/reviews/review-2026-10-19-evand-n183-subgrid.md
+      kind: adversarial
+      reviewer: OpenAI Codex system family, strong tier, maximum reasoning; separately prompted
+        mathematical reviewer
+      reviewer_kind: ai
+      relation: project
+      date: '2026-10-19'
+      scope: Finite feasibility of the original 183-square rational certificate, soundness and
+        trust boundaries of the source and maintained routes, and read-only admission of the
+        completed primary replay. No geometry rerun by the reviewer.
+      verdict: accepted
+      covers:
+      - T-220
+    notes: |-
+      V3/C3 derive from the cited complete retained primary replay; the
+      accepted mathematical review read its receipts without rerunning geometry. The two maintained
+      routes share parser, half-angle conversion, Fraction/runtime and SAT theorem; implementation
+      independence from the producer does not establish a clean room or author/model diversity.
+      S3 is endorsed by the strong/max independent review.
+
+      Adopted at n183 on 2026-10-19 (think-jh4w): both case upper lanes and the house witness
+      now name the original certificate, and the trivial grid at 14 is retained as history. The
+      source's separate numerical S* is not the certificate side S'. Its 27 numerical candidate flat
+      modes concern only the 182-square force-bearing subsystem, excluding free rattler source
+      index 11. No full183 local-optimality, exact flat-family or rigidity theorem.
+
+      M2 claim binding is discharged for this primary replay; regularized endpoint/path/identity and
+      priority/missing-lineage claims are not confirmed. Both strong generators decided the new
+      witness in the adoption's pull request.
+    next_rung: Finite feasibility is confirmed by independently re-implemented project geometry,
+      with the common parser/conversion/Fraction/SAT/runtime limits disclosed. No additional
+      primary geometry run is required. The case house was adopted at n183 on 2026-10-19, and
+      both strong generators decided its witness in the same pull request. V4/C4 would require
+      the prescribed accepted distinct reviews and human oversight; regularized/source-checker
+      work is separate and optional for this bound.
+    controls:
+    - packing/tests/test_upper_bound_reports.py
+    - packing/resources/web/evand-n183-subgrid-2026-10-19/receipts/exact-certification.json.xz
+
 # Generated by python -m devtools.regularized_drawings from the regularized layer's
 # index (packing/atlas/known-best/regularized/index.json); do not edit by hand.
 regularized_drawings:
@@ -30691,6 +30774,21 @@ regularized_drawings:
         max_move: 9.207591e-95
         max_turn_deg: 0.0
       view: packing/atlas/known-best/regularized/n-182-regularized.yaml.gz
+    - n: 183
+      of: T-220
+      by: project
+      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
+      side: same
+      changes: {re_angled: 1}
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 24
+        max_move: 0.3578448
+        max_turn_deg: 6.23142
+      view: packing/atlas/known-best/regularized/n-183-regularized.yaml.gz
     - n: 198
       of: T-155
       by: project

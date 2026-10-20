@@ -88,6 +88,14 @@ class PublicationHistoryEntry(NamedTuple):
 #: for each deployment's commit, what the page it built stated.
 PUBLICATION_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.8.4",
+        first_published="October 20, 2026",
+        result_scope=(
+            "Register Evan Daniel's sub-grid n183 certificate (T-220), adopt it as the "
+            "n183 house and draw its regularized view."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.8.3",
         first_published="October 20, 2026",
         result_scope=(
@@ -511,6 +519,15 @@ PUBLICATION_STATUS = ""
 #: Both retained 1-100 and 1-324 graphics, their PDFs and PNGs share this history.
 INFOGRAPHIC_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.6.4",
+        first_published="October 20, 2026",
+        result_scope=(
+            "Redraw both atlas posters with Evan Daniel's n183 packing (T-220), which "
+            "takes 183 off the 14 x 14 grid, and the houses of 19 October at 155, 229, "
+            "236 and 271."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.6.3",
         first_published="October 17, 2026",
         result_scope=(
@@ -598,7 +615,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "fa8100100f7ed74f0ff6cad818262f0bd304b6f2"
+DATA_REVISION = "28102e1884e855e944af127b5c167f11b3e8d942"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -694,6 +711,14 @@ FIRST_PUBLISHED = PUBLICATION_HISTORY[-1].first_published
 #:                                            on October 1 and 2, so the substantive
 #:                                            day is the one recorded
 EXPLAINER_HISTORY = (
+    PublicationHistoryEntry(
+        version="v0.4.10",
+        first_published="October 20, 2026",
+        result_scope=(
+            "Update the registered result count after the n183 registration and adoption "
+            "(T-220)."
+        ),
+    ),
     PublicationHistoryEntry(
         version="v0.4.9",
         first_published="October 20, 2026",
@@ -1043,6 +1068,37 @@ class ReleaseImpactDecision(NamedTuple):
 # New component cuts append decisions here, newest first, alongside their own histories.
 # No impact is invented retrospectively for the published baseline editions.
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
+    ReleaseImpactDecision(
+        component="paper:n11-lower-bounds-explainer",
+        previous_version="v0.4.9",
+        version="v0.4.10",
+        impact="patch",
+        reason=(
+            "Update the registered result count after the n183 registration and adoption "
+            "(T-220)."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="site",
+        previous_version="v0.8.3",
+        version="v0.8.4",
+        impact="patch",
+        reason=(
+            "Register Evan Daniel's sub-grid n183 certificate (T-220), adopt it as the "
+            "n183 house and draw its regularized view."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="infographics",
+        previous_version="v0.6.3",
+        version="v0.6.4",
+        impact="patch",
+        reason=(
+            "Redraw both atlas posters with Evan Daniel's n183 packing (T-220), which "
+            "takes 183 off the 14 x 14 grid, and the houses of 19 October at 155, 229, "
+            "236 and 271."
+        ),
+    ),
     ReleaseImpactDecision(
         component="site",
         previous_version="v0.8.2",
@@ -1610,6 +1666,73 @@ class ReleaseNoPublicChange(NamedTuple):
 
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
+    ReleaseNoPublicChange(
+        components=("paper:n11-optimality-review", "paper:n11-threshold-bound-review"),
+        paths=(
+            "packing/devtools/adopt_houses.py",
+            "packing/devtools/run_negative_controls.py",
+            "packing/devtools/upper_bound_houses.py",
+            "packing/devtools/upper_bound_reports.py",
+            "packing/frontier/results.yaml",
+        ),
+        outputs=(
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-optimality-review.pdf",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/n11-threshold-bound-review.pdf",
+        ),
+        reason=(
+            "For PR687 (T-220 at n = 183) against main 012dcf9e: both reviews read "
+            "results.yaml only through paper_figures.ladder_records, which selects the n11 "
+            "ladder rungs LADDER_RUNGS names and holds them to LADDER_DIGEST; T-220 is an "
+            "added n183 entry outside that ladder, and no ladder row changes. The house "
+            "reader, writer and source changes are not called by these producers, and "
+            "run_negative_controls.py changes only the snapshot cap and its comments. "
+            "Rendered at link revision af1987e9, this branch after its merge of main "
+            "012dcf9e (#692, site v0.8.3) and its edition cuts, once from this branch's "
+            "tree and once with main's copies of the seven changed inputs (adopt_houses, "
+            "run_negative_controls, upper_bound_houses and upper_bound_reports, "
+            "results.yaml, result-requests.yaml and source-coverage.yaml): "
+            "render_n11_optimality_review, render_n11_threshold_bound_review and "
+            "render_packing_methods write 50 files, byte-identical between the trees. No "
+            "PDF was printed; each prints from that HTML. Retain v0.1.7 and v0.1.0."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/devtools/adopt_houses.py",
+            "packing/devtools/run_negative_controls.py",
+            "packing/devtools/upper_bound_houses.py",
+            "packing/devtools/upper_bound_reports.py",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+            "papers/square-packing-methods-survey.pdf",
+        ),
+        reason=(
+            "For PR687 (T-220 at n = 183) against main 012dcf9e: result requests, source "
+            "coverage and results are citation targets whose existence the producer "
+            "checks, not inlined text, and every cited path exists at both revisions; the "
+            "added #680 request, n183 coverage entry and T-220 entry are not cited by the "
+            "survey. The house reader, writer and source changes do not enter its output, "
+            "and run_negative_controls.py changes only the snapshot cap and its comments. "
+            "Rendered at link revision af1987e9, this branch after its merge of main "
+            "012dcf9e (#692, site v0.8.3) and its edition cuts, once from this branch's "
+            "tree and once with main's copies of the seven changed inputs (adopt_houses, "
+            "run_negative_controls, upper_bound_houses and upper_bound_reports, "
+            "results.yaml, result-requests.yaml and source-coverage.yaml): "
+            "render_n11_optimality_review, render_n11_threshold_bound_review and "
+            "render_packing_methods write 50 files, byte-identical between the trees. No "
+            "PDF was printed; each prints from that HTML. Retain v0.2.3."
+        ),
+    ),
     ReleaseNoPublicChange(
         components=("site",),
         paths=("packing/devtools/check_rational_witness_independent.py",),
@@ -5173,7 +5296,7 @@ def validate_release_impacts(
 #: fresh render, so a link naming the build commit would fail their drift check forever. It is
 #: in no version string. It moves when the claim documents are regenerated for an edition. It
 #: must be a commit on `main`; the site's own links name `main` itself (`devtools.repo_links`).
-PUBLICATION_REVISION = "bf1b483a"
+PUBLICATION_REVISION = "20d56718"
 
 
 def data_pathspec() -> tuple[str, ...]:

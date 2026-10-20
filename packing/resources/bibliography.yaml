@@ -2855,6 +2855,31 @@ sources:
       V0/C0 and pending adoption. The separately completed mathematical review and
       source replay with controls await descendant integration; this entry adopts no
       confirmation, and both case upper lanes and houses remain unchanged.
+  - key: '[Daniel n183 subgrid 2026-10-19]'
+    authors: [Daniel]
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-19'
+    lineage: builds-on-project
+    credit: Daniel after Couzo; register seed data from Levy
+    note: >-
+      Evan Daniel's issue 680 reports s(183) <= 13.999580178737, rounded upward from
+      the exact rational certificate side 13999580178736252502081470897571/10^30.
+      The MIT-licensed source pin 3a9948c781be668b1547cc2bf64a0d1e614f9bca first
+      publishes the certificate on 19 October UTC, 18 October in the author's local
+      date. Original and same-side regularized certificates, numerical metadata,
+      two standalone source checkers and producer source are retained in
+      web/evand-n183-subgrid-2026-10-19/. The issue credits Francisco Couzo's n182
+      packing as ultimate donor and discloses an unlogged crossover mate. CREDITS.md
+      and the commit disclose Claude assistance. Numerical KKT, local-minimum,
+      identity and first-public comparison statements remain source assertions.
+      Couzo remains the named ultimate packing donor. The separate Levy credit
+      records the issue's explicit use of this project's register witness as input
+      data, under the bibliography's builds-on-project policy; it identifies no
+      missing crossover parent or additional mathematical donor.
+      The original certificate is registered as T-220, confirmed by a complete replay
+      here and an accepted independent mathematical review, and adopted as the n183
+      house on 19 October 2026; no source checker ran here.
   - key: '[Daniel n155 explorer 2026-10-17]'
     authors: [Daniel]
     year: 2026

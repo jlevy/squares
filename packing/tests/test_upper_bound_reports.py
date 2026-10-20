@@ -188,6 +188,23 @@ def test_custody_admits_every_declared_certificate_at_its_printed_side(name: str
         assert legacy.ceiling_decimal(certificate.side, places) == row["offered"]
 
 
+def test_n183_house_reader_keeps_source_custody_and_original_certificate_scope(
+    private: Callable[[str], Path],
+) -> None:
+    packet = private("evand-n183-subgrid-2026-10-19")
+    reader = "[Daniel n183 subgrid 2026-10-19]"
+    assert reports.import_packet(reader) == packet
+    source = packet / "source/search/packer/candidates/s183_h183b.cert"
+    original = source.read_bytes()
+    source.write_bytes(original + b"\n")
+    with pytest.raises(reports.ReportError, match="packet custody"):
+        reports.house_side(reader, 183)
+    source.write_bytes(original)
+    assert reports.house_side(reader, 183) == Fraction(13999580178736252502081470897571, 10**30)
+    with pytest.raises(reports.ReportError, match="n=182"):
+        reports.house_side(reader, 182)
+
+
 def test_the_couzo_sides_are_the_exact_fractions_the_source_states() -> None:
     certificates = reports.read_facts(_packet(COUZO))
     assert certificates[132].side == Fraction(11986954193640392741450366579623, 10**30)

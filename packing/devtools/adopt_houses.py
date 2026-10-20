@@ -150,10 +150,12 @@ FRACTION_CHARS = 72
 VERIFIER_TABLE = re.compile(
     r"<!-- BEGIN verification code.*?<!-- END verification code -->", re.DOTALL
 )
-#: Counts whose body the first pass, on 11 October 2026, marked as history by hand, in
-#: prose no tool writes in a fixed form (`historical`): the SQUISH update sections at 155,
-#: 258, 263 and 302 and the grid prose at 308. Only their owned parts are the writer's.
-HAND_MARKED = frozenset({155, 258, 263, 302, 308})
+#: Counts whose body a pass marked as history by hand, in prose no tool writes in a fixed
+#: form (`historical`): the first pass, on 11 October 2026, the SQUISH update sections at
+#: 155, 258, 263 and 302 and the grid prose at 308, and the pass of 19 October 2026 the
+#: intake's staging paragraph, grid sentence and packing section at 183 (T-220). Only
+#: their owned parts are the writer's.
+HAND_MARKED = frozenset({155, 183, 258, 263, 302, 308})
 #: The first pass whose writer also marks the closing sentence of a T-155 view's section as
 #: history (`_regularized_certificate`); earlier passes' records read as they wrote them.
 VIEW_SECTION_FROM = "2026-10-19"
@@ -172,6 +174,10 @@ class Prose:
     #: What the source says of where the packing came from and what was measured of it
     #: here, where its review asked the record to say so (T-160's RD-1, RD-5 and RD-7).
     lineage: str = ""
+    #: Whether `devtools.check_half_angle_area`, the third exact route, decided the
+    #: certificate too. T-220's replay ran the two maintained routes only, so its record
+    #: says no third route decided it rather than that one did.
+    third_route: bool = True
 
 
 #: Each adopted result, as its register entry and its review describe it.
@@ -641,6 +647,28 @@ RESULTS: dict[str, Prose] = {
             "for the construction, Daniel is the finder."
         ),
     ),
+    "T-220": Prose(
+        author="Evan Daniel",
+        reported="on [jlevy/squares#680](https://github.com/jlevy/squares/issues/680)",
+        producer_route=False,
+        ai=(
+            "The source’s credits say its work was produced by Claude (Anthropic) under "
+            "human direction, and the commit that publishes the certificate names Claude "
+            "Opus 5.5 as co-author."
+        ),
+        lineage=(
+            "The author asks that the start be credited to Francisco Couzo’s n = 182 "
+            "packing, this register’s witness of the time, and it is: his basin explorer ran "
+            "17 moves at n = 182 from that witness to a packing that was no record, a square "
+            "was inserted into it, and a tilt-angle swap, two two-parent crossovers and "
+            "refinement led to this certificate. The crossovers’ second parents, other "
+            "packings of the same run, were not logged, so that lineage is the author’s "
+            "account and is not measured here. The source’s 27 numerical candidate flat "
+            "modes concern the 182-square force-bearing subsystem, excluding a free rattler, "
+            "and prove no local optimality."
+        ),
+        third_route=False,
+    ),
 }
 
 XU = "Ryan Xu"
@@ -902,6 +930,15 @@ CREDITS: dict[int, Credit] = {
         (COUZO,),
         (DANIEL, PINGYOU),
         "PingYou Ltd’s refinement of Evan Daniel’s exact optimum of Francisco Couzo’s packing",
+    ),
+    # Evan Daniel's packing from his basin explorer, which started from Francisco Couzo's
+    # n = 182 packing as this register's witness held it; the crossover mates were not
+    # logged (issue 680, T-220). The register's seed is acknowledged in the bibliography's
+    # credit only, as no packing of the project's is in the lineage.
+    183: Credit(
+        (DANIEL,),
+        (),
+        "Evan Daniel’s basin-explorer packing after Francisco Couzo’s n = 182 packing",
     ),
     # PR 574's re-solve of issue 562's packing, re-solved again (T-186's regularization of
     # T-174), two squares moved beyond 1e-3.
@@ -1833,6 +1870,12 @@ def section(move: Move) -> str:
         "re-implemented."
     )
     reviews = f"[review of {reviewed}](../../{review})"
+    third = (
+        ", and a third exact route, half-extent containment and exact intersection area, "
+        "decided it again"
+        if prose.third_route
+        else "; no third exact route has decided it"
+    )
     if _finally_reviewed(house.result):
         reviews = f"{reviews} and the [final review of 11 October 2026](../../{FINAL_REVIEW})"
     paragraphs = [
@@ -1847,8 +1890,7 @@ def section(move: Move) -> str:
         (
             "Both maintained exact routes decided it here, `sqpack`’s exact separating-axis "
             "verifier and the independent rational corner checker, with its duplicate-square "
-            "and outside-container controls, and a third exact route, half-extent containment "
-            f"and exact intersection area, decided it again. {routes} The {reviews} "
+            f"and outside-container controls{third}. {routes} The {reviews} "
             "accepted the replay for finite feasibility. "
             f"That proves $s({n}) \\le {ceiling}$, the verified upper bound: confirmed, "
             "independently re-implemented. It says nothing about "
@@ -2344,8 +2386,9 @@ def historical(move: Move, text: str) -> str:
     Prose in no fixed form, which no tool here wrote, is not rewritten; `check_case_prose`
     refuses a record that still states it as the bound. The first pass marked such prose
     by hand at five counts, the SQUISH update sections at 155, 258, 263 and 302 and the
-    grid prose at 308 (`HAND_MARKED`); every other word of an adopted body, the verifier
-    table apart, is what this writes from the record its last pass read.
+    grid prose at 308, and the pass of 19 October 2026 the intake's prose at 183
+    (`HAND_MARKED`); every other word of an adopted body, the verifier table apart, is
+    what this writes from the record its last pass read.
     """
     n, until = move.n, day_words(move.n)
     text = _named_prose(text)

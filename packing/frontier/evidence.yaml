@@ -40203,3 +40203,126 @@ evidence:
       source-context comparisons describe the original audit and do not gate on current code
       or a Git revision.
     source_reviewed: '2026-10-19'
+  - id: E-evand-680-n183-report
+    claim: upper-bound
+    scope:
+      n_values:
+      - 183
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Daniel n183 subgrid 2026-10-19]'
+    certificate: packing/resources/web/evand-n183-subgrid-2026-10-19/source/
+    replay_status: not-attempted
+    verifiers: [V-evand-verify-cert-py, V-evand-verify-cert2-py]
+    source_reviewed: '2026-10-19'
+    limitations: 'Issue 680 reports one n183 upper bound, exact side 13999580178736252502081470897571/1000000000000000000000000000000.
+      Original and regularized display certificates report one bound. The accepted separately
+      prompted mathematical review and separate E-evand-680-n183-primary-exact-feasibility confirm
+      only the original finite certificate by independently re-implemented project geometry.
+      No upstream checker ran. The regularized endpoint is unexecuted. Source numerical KKT/local-minimum
+      descriptions, regularization identity/path and public priority remain assertions. The
+      27 numerical candidate flat modes concern the 182-square force-bearing subsystem, excluding
+      rattler index 11. Credit Evan Daniel after Francisco Couzo''s n182 donor, preserving unlogged
+      crossover mates. Registered as T-220; the case house was adopted at n183 on 2026-10-19.'
+    external_review:
+      state: informally-verified
+      date: '2026-10-19'
+      reviewed_by: OpenAI Codex system family, strong tier, maximum reasoning; separately prompted
+        mathematical reviewer
+      note: docs/project/reviews/review-2026-10-19-evand-n183-subgrid.md accepts the original
+        finite upper bound on the retained native replay. No blocking mathematical defect; M1
+        wording is qualified, M2 discharged for the primary route, M3/M4 retained as limits.
+  - id: E-evand-680-n183-primary-exact-feasibility
+    claim: upper-bound
+    scope:
+      n_values:
+      - 183
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Daniel n183 subgrid 2026-10-19]'
+    certificate: packing/resources/web/evand-n183-subgrid-2026-10-19/source/search/packer/candidates/s183_h183b.cert
+    replay: 'Completed primary-only batch, not a new run in this registration slice: from /Users/levy/wrk/github/squares/.worktrees/confirm-422/packing
+      after sourcing the retained historical intake-env.sh, /Users/levy/wrk/github/squares/packing/.venv/bin/python3
+      -m devtools.upper_bound_reports evand-n183-subgrid-2026-10-19 certify --jobs-dir /Volumes/spud-ext1/agent-scratch/squares-intake-followup-20261019/n183-primary-jobs-01
+      --workers 1 --timeout 100, exit 0. Python 3.14.7; original source and exact side admitted
+      before deciding all 183 rows, every wall and 16653 pairs per route/job. Both maintained
+      routes accept the positive and refuse duplicate-square and outside-container controls:
+      3 jobs, 99918 pair decisions, 34.87 process wall seconds and 30.55 route CPU seconds,
+      no timeout or retry. The full historical command/cwd/PYTHONPATH is receipts/certify-execution-provenance.json;
+      native complete inputs/results/controls are receipts/exact-certification.json.xz in the
+      packet. The actual seven source versions and the retained historical custody source are
+      recorded by n183-evidence-integration.yaml and the named verifiers'' versions. Current
+      maintained check --n 183 without --replay admits those receipts and executes no geometry.'
+    replay_status: passed
+    verifiers:
+    - V-sqpack-verify
+    - V-check-rational-witness-independent
+    - V-upper-bound-reports
+    - V-evand-arrangement-receipts
+    - V-evand-exact-certificates
+    - V-acquire-source
+    independence:
+      coverage:
+        extent: full
+        unit: the original n183 rational certificate, all 183 squares, every wall and all 16653
+          unordered pairs in each of three jobs through both maintained routes; positive plus
+          two sensitive invalid controls
+        checked: 1
+        of: 1
+      read:
+      - mathematics
+      - specification
+      - certificate-format
+      - producer-code
+      clean_room: false
+      shares: []
+      written_by:
+      - kind: ai
+        system: Claude (Anthropic)
+        setting: The earlier project geometry and conversion lanes, as recorded for these same
+          maintained programs in E-evand-552-exact-feasibility and the conversion module read
+          log. Per-program individual identities, tiers and reasoning settings were not retained;
+          this integration authors no deciding code.
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: null
+        separate_code: true
+        note: Existing project evidence attributes the earlier deciding/conversion lanes to
+          Claude, and the producer discloses Claude assistance. Prompt separation for every
+          original author is not reconstructed here. The implementations import or copy none
+          of the producer's code; no human or model-family diversity is inferred.
+      note: The two maintained routes share strict parsing, rational half-angle conversion,
+        Fraction arithmetic, runtime and the separating-axis theorem. They provide two implementations,
+        not two mathematical methods. The conversion author's retained read log discloses reading
+        both producer checkers. shares refers to producer components; common first-party components
+        between routes are disclosed here.
+    independence_record: docs/project/reviews/review-2026-10-19-evand-n183-subgrid.md
+    external_review:
+      state: informally-verified
+      date: '2026-10-19'
+      reviewed_by: OpenAI Codex system family, strong tier, maximum reasoning; separately prompted
+        mathematical reviewer
+      note: docs/project/reviews/review-2026-10-19-evand-n183-subgrid.md accepts the original
+        finite upper bound on the retained native replay. No blocking mathematical defect; M1
+        wording is qualified, M2 discharged for the primary route, M3/M4 retained as limits.
+    source_reviewed: '2026-10-19'
+    limitations: 'Finite feasibility of the original rational certificate only: s(183) <= 13.999580178736252502081470897571
+      < 13.999580178737 < 14. No upstream program ran, no regularized endpoint replay or same_packing
+      assertion, no path/identity, local or global optimality, exact rigidity or flat family,
+      public priority or recovery of missing crossover lineage. M1''s numerical modes concern
+      182 force-bearing squares excluding rattler 11; M2 is discharged by strict expected-count/side/full-row
+      and complete-input custody admission. Positive exact wall clearance 1/200000000000000000000;
+      the native receipt retains the identical strictly positive rational SAT projection gap
+      for both routes, not an exact shortest Euclidean distance. Duplicate gap -1 and translated-square
+      wall margin negative in both routes. Historical acquire_source bytes are retained as nonexecuted
+      text because the inherited #671 version differs. The case lanes and house moved to this
+      certificate in the adoption of 2026-10-19, which ran both strong generators on its
+      witness.'

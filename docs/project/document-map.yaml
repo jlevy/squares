@@ -21,6 +21,9 @@ documents:
   - {path: docs/project/reviews/review-2026-10-18-open-work.md, role: review, authority: record, lifecycle: retained}
   - {path: packing/campaign/issue-intake/intake-20261018/README.md, role: source-index, authority: record, lifecycle: retained}
   - {path: packing/campaign/issue-intake/intake-20261019/README.md, role: source-index, authority: record, lifecycle: retained}
+  - {path: packing/campaign/issue-intake/intake-followup-20261019/README.md, role: source-index, authority: record, lifecycle: retained}
+  - {path: packing/campaign/issue-intake/intake-followup-20261019/n183-ledger/README.md, role: generated-view, authority: generated, lifecycle: generated}
+  - {path: packing/campaign/issue-intake/intake-followup-20261019/n183-ledger/lane-claims/README.md, role: source-index, authority: record, lifecycle: retained}
   - {path: packing/campaign/issue-intake/upper-bounds-20261018/README.md, role: generated-view, authority: generated, lifecycle: generated}
   - {path: packing/campaign/issue-intake/upper-bounds-20261018/lane-claims/README.md, role: source-index, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-18-n108-fine-net-mathematics-max.md, role: review, authority: record, lifecycle: retained}
@@ -1096,6 +1099,7 @@ documents:
   - {path: docs/project/reviews/review-2026-10-03-evand-k2m4-claim-chain.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-05-evand-square-packing-atlas.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-05-kingbird-intake-n69-n83-n87.md, role: review, authority: record, lifecycle: retained}
+  - {path: docs/project/reviews/review-2026-10-19-evand-n183-subgrid.md, role: review, authority: record, lifecycle: retained}
   - path: docs/project/reviews/review-2026-09-28-density-solver-comparison.md
     role: review
     authority: record
