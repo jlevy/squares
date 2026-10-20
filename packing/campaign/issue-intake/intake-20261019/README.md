@@ -11,7 +11,7 @@ catalogue: 0 counts differed and 0 were below the record.
 
 | Action | Evidence and owner | Remaining work |
 | --- | --- | --- |
-| [#678](https://github.com/jlevy/squares/issues/678) | `issue-678.json`: Couzo reports 85 improved upper bounds, counts 204–998, at `7b6c87e129cf80b5ff9847b90b47fd30b4563c54`; think-xu4d. | Retain exact witnesses, compare in report order against the classical envelope, and settle seed/construction provenance. [The provenance question](https://github.com/jlevy/squares/issues/678#issuecomment-6257122870) is posted; no author answer was available at this checkpoint. |
+| [#678](https://github.com/jlevy/squares/issues/678) | `issue-678.json`: Couzo reports 85 improved upper bounds, counts 204–998, at `7b6c87e129cf80b5ff9847b90b47fd30b4563c54`; think-xu4d. The three retained comments include the author’s seed clarification and our custody acknowledgement. | Retain the 83 new witnesses, compare in report order against the classical envelope, price exact replay and independent review, and review the promised source correction. Seed custody is established as described below; scientific assertions remain unverified. |
 | [#603 comment](https://github.com/jlevy/squares/issues/603#issuecomment-6255103888) | `603-comment.json`: Fang announces draft v0.8 and public Lean project at `947bdae`; think-494l under think-0esw. | Review the note and separate Lean source, bind statements and axioms, and price replay. [Acknowledgment](https://github.com/jlevy/squares/issues/603#issuecomment-6257671390) is posted. |
 | [evand head](https://github.com/evand/square-packing/commit/ddf09e382ab3c63675476503d51d1a405bb2f7e6) | `evand-source-inventory.json`: five commits after `5ca0dc3`. `4b456fe` reports the stronger filled L-shape bound, owned by think-f8py; `13da782` reports the staircase/Ryu bound, owned by think-pf37. | Source review and retained theorem evidence. The other three commits package the proof route and change pages, viewer and credit presentation. Mathematical authorship and formalization credits stay distinct. |
 | [Couzo head](https://github.com/franciscouzo/square-packing/commit/7b6c87e129cf80b5ff9847b90b47fd30b4563c54) | `couzo-source-inventory.json`: 543 paths from all commit-file pages; same report as #678, think-xu4d. | Whole-source custody and classification remain with the import owner. #672/think-2vjc is an earlier report and keeps its separate ownership. Manifest credit is source evidence; it does not decide project discovery credit. |
@@ -24,6 +24,26 @@ Source claims of exact replay or standard axioms remain author reports until the
 review records its evidence.
 Path inventories establish changed-file scope; they do not establish certificate
 validity or a complete source-content audit.
+
+The [retained #678 comments](issue-678-comments.json) extend the read-through to 19
+October at 15:31:25 UTC. The body is unchanged; its source issue capture was updated at
+14:22:50 UTC, before the separately retained acknowledgement.
+[The author](https://github.com/jlevy/squares/issues/678#issuecomment-6269517369)
+corrected the stale Evan source pin and identified `e90993…` as the gzip hash.
+The [custody receipt](issue-678-n260-seed-custody.json) binds the
+[original 4,112-byte gzip](issue-678-n260-seed-14a9af8.cert.gz) at Evan Daniel’s
+immutable `14a9af8be4a8b8a8328c3eb6b486a2e553380193` revision to its decompressed hash
+and exact header.
+[Our correction](https://github.com/jlevy/squares/issues/678#issuecomment-6270970266)
+acknowledges those byte bindings.
+Joost de Winter’s construction credit (#668) and Evan Daniel’s exact-form certificate
+credit remain distinct source reports.
+Float conversion, the intermediate search chain, packing identity, analytic optimality
+and feasibility of the 85 new bounds remain unreviewed.
+The promised pin/hash-kind/credit patch is not linked in this retained thread.
+T-196 remains the earlier submission already merged through #676; #675 stays separately
+owned by think-pvav.
+No new witness replay or result registration occurred.
 
 ## Manual Sources and Limits
 
