@@ -89,7 +89,7 @@ class PublicationHistoryEntry(NamedTuple):
 PUBLICATION_HISTORY = (
     PublicationHistoryEntry(
         version="v0.7.36",
-        first_published="October 19, 2026",
+        first_published="October 20, 2026",
         result_scope=(
             "Confirm the n68, n84 and n85 fine-net lower bounds T-205 to T-207 at V3/C3 "
             "from retained complete captures, whole-net controls and mapped reviews."
