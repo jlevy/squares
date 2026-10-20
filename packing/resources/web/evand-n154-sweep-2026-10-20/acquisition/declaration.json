@@ -1,0 +1,74 @@
+{
+  "format": "external-source-declaration-v1",
+  "id": "evand-n154-sweep-2026-10-20",
+  "source_url": "https://github.com/evand/square-packing",
+  "source_ref": "1d2bb82035af4b7eb4658488543e46b67d1099ca",
+  "source_commit": "1d2bb82035af4b7eb4658488543e46b67d1099ca",
+  "retrieved_at_utc": "2026-10-20T17:20Z",
+  "git_scope": "Blobless clone of evand/square-packing and a sparse checkout of the issue #694 pin 1d2bb82, the commit that adds the eight s154_sw files under search/packer/candidates/ and the comparison program search/packer/analysis/cmp154.py. All eight candidate files are retained: the certificate the claim rests on (s154_sw.cert), its 80-digit KKT point, the binary64 input it was solved from, the solver's report, the prior-record summary, the same-side regularized view with its report, and the source's comparison with #586's packing; with the licence, credits and the format and packer READMEs. The two source checkers, the exact solver and the basin explorer are pinned by digest against the identical copies the n183 packet retains, and the packer log, chained explorer, morph walk and comparison program by digest only. The rest of the tree is pinned by the commit and was not retained or executed.",
+  "archived_dir": "source",
+  "license": "MIT, copyright (c) 2026 Evan Daniel (LICENSE retained). CREDITS.md states Claude (Anthropic) under human direction, no peer review; the pinned commit names Claude Opus 5.5 as co-author and says the commit, push and post were approved by Evan Daniel. Issue #694 asks that Francisco Couzo's #586 arrangement and Daniil Ostashev's s(156) packing be credited as its starts.",
+  "claims": [
+    "Issue #694 reports s(154) <= 12.921100940762, the exact rational side of search/packer/candidates/s154_sw.cert, 12.921100940761680549856582087576, rounded up at 12 places, 1.06e-4 below the register's 12.921206577133 (Mishapolk's 14 October KKT refinement, the same side as Francisco Couzo's #586); it prints the SHA-256 of s154_sw.cert and of s154_sw_regularized.cert, the same packing at the same side regularized for display.",
+    "The issue reports a KKT point at 80 digits with exact side S* = 12.921100940761680549727..., not shown to be a strict local minimum: the second-order test finds one negative-curvature direction, blocked only to first order by weakly active contacts, so the status is inconclusive. It reports no corner-corner MILP descent, 75 wall and 644 square-square contact equations, 58 corner-corner contacts, 51 exact flat motions, 9 rattlers and 38 tilted squares (33 load-bearing) at 26.5 to 44.2 degrees. These are numerical evidence at 80 digits, as the issue says, not interval proofs.",
+    "The issue calls it a different KKT point from #586's, in its family: matched over the 8 box symmetries, the contact graphs share 232 pairs, with 61 only in this packing and 64 only in #586's; a feasible-step morph walk finds no path between the two up to 1e-2 above #586's side, which the issue calls a heuristic; it keeps #586's band of ten squares near 26.53 degrees and its 38 to 44 degree group.",
+    "The issue gives the lineage: on 14 October the chained explorer removed two squares from Daniil Ostashev's s(156) packing and reached a stored non-record 154 at 12.928447 through five explorer moves, three of them crossovers with descendants of the round's carried 154s, close relatives of #586; on 19 October a restart from that packing, 7.2e-3 above the record, reached 12.9211009408 in 771 s, twelve further 40-minute runs stayed at that side, and exactsolve.py certified it. It asks that #586's arrangement and the s(156) packing be credited as its starts.",
+    "The author's two standard-library exact checkers, verify_cert.py (separating axes) and verify_cert2.py (polygon intersection), are reported to accept both files; they share an author and the certificate format. No closed form, interval proof of local optimality or optimality is claimed."
+  ],
+  "scope": [
+    "LICENSE",
+    "CREDITS.md",
+    "README.md",
+    "search/exact/README.md",
+    "search/exact/verify_cert.py",
+    "search/exact/verify_cert2.py",
+    "search/exact/exactsolve.py",
+    "search/packer/README.md",
+    "search/packer/PACKER.md",
+    "search/packer/explore.py",
+    "search/packer/chain.py",
+    "search/packer/landscape/morph.py",
+    "search/packer/analysis/cmp154.py",
+    "search/packer/candidates/s154_sw.cert",
+    "search/packer/candidates/s154_sw.exact.txt",
+    "search/packer/candidates/s154_sw.input.txt",
+    "search/packer/candidates/s154_sw.json",
+    "search/packer/candidates/s154_sw_prior.json",
+    "search/packer/candidates/s154_sw_regularized.cert",
+    "search/packer/candidates/s154_sw_regularized.json",
+    "search/packer/candidates/s154_sw_vs_prior.json"
+  ],
+  "pinned_only": [
+    {
+      "match": "search/exact/verify_cert*.py",
+      "reason": "The source's two standalone exact checkers, byte-identical to the copies the n183 packet retains at 3a9948c; never executed by this acquisition.",
+      "identical_to": "packing/resources/web/evand-n183-subgrid-2026-10-19/source/search/exact"
+    },
+    {
+      "match": "search/exact/exactsolve.py",
+      "reason": "Numerical high-precision certificate producer, byte-identical to the copy the n183 packet retains at 3a9948c; a replay consumes the completed certificate without this solver or its dependencies.",
+      "identical_to": "packing/resources/web/evand-n183-subgrid-2026-10-19/source/search/exact"
+    },
+    {
+      "match": "search/packer/explore.py",
+      "reason": "Numerical basin explorer used for discovery, byte-identical to the copy the n183 packet retains at 3a9948c; not required by either standalone exact checker.",
+      "identical_to": "packing/resources/web/evand-n183-subgrid-2026-10-19/source/search/packer"
+    },
+    {
+      "match": "search/packer/PACKER.md",
+      "reason": "The packer's chronological working log, 447,273 bytes of general search history; pinned for provenance."
+    },
+    {
+      "match": "search/packer/chain.py",
+      "reason": "The chained explorer the issue names for the first lineage step; numerical discovery code, pinned for provenance and not executed."
+    },
+    {
+      "match": "search/packer/landscape/morph.py",
+      "reason": "The feasible-step morph walk the issue names; a numerical heuristic, pinned for provenance and not executed."
+    },
+    {
+      "match": "search/packer/analysis/cmp154.py",
+      "reason": "The source's comparison program for the contact-graph differences and expansion-barrier walks between #552, #583, #586 and this packing; numerical, pinned for provenance and not executed."
+    }
+  ]
+}

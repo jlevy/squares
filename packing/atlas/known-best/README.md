@@ -579,6 +579,37 @@ in think-kpm3’s layout, with `selection-n183.json` and `selection-n183.md`. Af
 the index draws 94 views: 36 by the axis tool, 38 by Evan Daniel’s regularizer and 20 by
 the grid-slack generator’s version 1.
 
+On 20 October 2026 the adoption of Evan Daniel’s certificates of #694 and #689
+(think-115j, think-h8jm) moved two houses: 154 to T-222, $1.06 \times 10^{-4}$ below
+T-186, and 308 to T-221, $1.12 \times 10^{-3}$ below T-174. The axis tool’s views of the
+new witnesses were drawn first, and both counts read pending.
+Both generators then ran on both, niced, on a shared four-core host: Evan Daniel’s
+regularizer (`evand-regularize-adopt-2026-10-20-n154-308-evand`, 275 CPU-seconds, 239
+seconds of wall at two workers) and grid-slack at 0.5, 1 and 5 degrees
+(`grid-slack-adopt-2026-10-20-n154-308-grid-deg05`, `-grid-deg1` and `-grid-deg5`, 186,
+187 and 142 seconds, the per-count seconds their reports record).
+The grid runs ran in directories named `-grid-0.5`, `-grid-1` and `-grid-5`, the names
+`adopt_houses` prints, and were renamed before the selection read them, since a run’s id
+takes no dot. The selection, 68 seconds of wall at two workers, admits a view at both
+counts at row 10, at the witness’s own side.
+At 154 it draws his same-side view: light / uneven / near-axis squares 5 / 12 / 0
+against the axis view’s 5 / 15 / 3, 10 angle classes and hues against 19, and 421 / 421
+house and stage sides against 394 / 408; it moves 60 squares, by at most 0.078. The
+strong view of the earlier house it replaces, grid-slack’s of T-186, had 9 uneven
+squares and 419 stage sides; by the house rule that is no reason to keep the larger
+house. At 308 his solved view goes to the owner’s review at row 7 (32 squares’ contact
+counts fall while no total does) and his same-side re-solve refuses the certificate’s
+literal as too large, so the selection draws grid-slack’s half-degree view, which ties
+the axis tool’s view on light, uneven and near-axis squares (9 / 20 / 0), classes (34)
+and hues (19) and adds house and stage sides, 770 / 840 against 750 / 834. The earlier
+house was decided no better on the axis tool’s view of T-174, and its settlement goes
+with the witness it was made on.
+The evidence is retained in
+[`cases/regularized_drawings/think-h8jm-2026-10-20/`](../../cases/regularized_drawings/think-h8jm-2026-10-20/)
+in think-kpm3’s layout, with `selection-adopt-2026-10-20-n154-308.json` and `.md`. After
+it the index draws 94 views: 35 by the axis tool, 39 by Evan Daniel’s regularizer and 20
+by the grid-slack generator’s version 1.
+
 ### The default picture
 
 On 13 October 2026 the owner made the regularized view the default picture, with the

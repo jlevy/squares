@@ -1,0 +1,115 @@
+{
+ "store_id": 291699,
+ "s": 12.921206577132631,
+ "sources": [
+  "pending:#570 (franciscouzo)",
+  "pending:#586 (Francisco Couzo)",
+  "pending:#624 (mstrmg)",
+  "register (Evan Daniel)",
+  "register (Evan Daniel)",
+  "run:runs/ex1/explore/n154/explore0 (ours)",
+  "run:runs/ex2/explore/n154/explore0 (ours)",
+  "run:runs/ex3/explore/n154/explore0 (ours)",
+  "run:runs/night1014/nh/r0057_n154 (ours)",
+  "run:runs/night1014/nh/r0472_n154 (ours)",
+  "run:runs/night1014/nh/r0478_n154 (ours)",
+  "run:runs/night1014/nh/r0484_n154 (ours)",
+  "run:runs/night1014/nh/r0490_n154 (ours)",
+  "run:runs/night1014/nh/r0496_n154 (ours)",
+  "run:runs/night1014/nh/r0502_n154 (ours)",
+  "run:runs/night1014/nh/r0508_n154 (ours)",
+  "run:runs/night1014/nh/r0514_n154 (ours)",
+  "run:runs/night1014/nh/r0520_n154 (ours)",
+  "run:runs/night1015/nh3/n154/explore0 (ours)",
+  "watch:franciscouzo/square-packing@23aff0c (lollipoll)",
+  "watch:franciscouzo/square-packing@43ac7d2 (Francisco Couzo)",
+  "watch:franciscouzo/square-packing@487b058 (Francisco Couzo)",
+  "watch:franciscouzo/square-packing@4e4c8ce (Francisco Couzo)",
+  "watch:franciscouzo/square-packing@58a7833 (Francisco Couzo)",
+  "watch:franciscouzo/square-packing@7b6c87e (lollipoll)",
+  "watch:franciscouzo/square-packing@af8cb79 (lollipoll)",
+  "watch:franciscouzo/square-packing@b85dee2 (Francisco Couzo)",
+  "watch:franciscouzo/square-packing@c6da0fc (lollipoll)",
+  "later copies of the same minimum: store ids [1044228]"
+ ],
+ "ok": true,
+ "S_exact": "12.921206577132631049942029272207100864812496564885263662723646355",
+ "S_cert": "12.921206577132631050071241337979",
+ "checkers": {
+  "verify_cert": {
+   "ok": true,
+   "line": "VALID: s(n) <= S"
+  },
+  "verify_cert2": {
+   "ok": true,
+   "line": "VALID: 154 closed unit squares pairwise disjoint inside the open box of side 12.92120657713263121 (342 close pairs checked)"
+  }
+ },
+ "optimality": {
+  "kkt": true,
+  "min_lambda": 1.97298728845441e-05,
+  "status": "local minimum of S, strict modulo 71 exact flat motions (PD on the rest of null(J_A)); the configuration is not isolated",
+  "flat_motions": 71,
+  "flat_realised": 71.0,
+  "flat_residual": 4.7068595707747986e-61,
+  "negative_eigs": 0,
+  "corner_corner": 102,
+  "vv_milp_dS": 0.0,
+  "rattlers": 10,
+  "min_pair": 9.999999999999989e-21,
+  "min_wall": 5e-21
+ },
+ "regularized": {
+  "ok": true,
+  "S_exact": "12.9212065771326310499420292722071008648124965648852636627236",
+  "S_cert": "12921206577132631050071241337979/1000000000000000000000000000000",
+  "groups": [
+   18,
+   8
+  ],
+  "level": 2,
+  "level_text": "same packing: traversable without expansion (angle moves path-checked; slides by construction)",
+  "checkers": {
+   "verify_cert": {
+    "ok": true,
+    "line": "VALID: s(n) <= S"
+   },
+   "verify_cert2": {
+    "ok": true,
+    "line": "VALID: 154 closed unit squares pairwise disjoint inside the open box of side 12.92120657713263121 (320 close pairs checked)"
+   }
+  }
+ },
+ "verdict": "distinct minimum",
+ "difference": {
+  "side_gap": 0.00010563637095017953,
+  "matching_distance_regularized": 0.05114623231004088,
+  "symmetry": 0,
+  "moved_gt_1e4": 35,
+  "moved_gt_1e2": 23,
+  "max_move": 0.4700073759537043,
+  "max_angle_change": 38.08397783567763,
+  "rattler_status_swaps": 7,
+  "shared_angles": [],
+  "ours_only_angles": [
+   "26.5322",
+   "28.7048",
+   "37.5148",
+   "37.9410",
+   "38.0848",
+   "39.4101",
+   "40.0668",
+   "42.6728",
+   "44.2256"
+  ],
+  "prior_only_angles": [
+   "26.5302",
+   "28.8527",
+   "37.9572",
+   "38.0840",
+   "40.6515",
+   "42.9296",
+   "44.4276"
+  ]
+ }
+}
