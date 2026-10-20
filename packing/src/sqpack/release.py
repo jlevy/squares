@@ -88,6 +88,14 @@ class PublicationHistoryEntry(NamedTuple):
 #: for each deployment's commit, what the page it built stated.
 PUBLICATION_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.8.6",
+        first_published="October 20, 2026",
+        result_scope=(
+            "Document on the development page the storage guard that refuses bulk Git "
+            "blobs on every pull request and before each push."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.8.5",
         first_published="October 20, 2026",
         result_scope=(
@@ -1076,6 +1084,16 @@ class ReleaseImpactDecision(NamedTuple):
 # New component cuts append decisions here, newest first, alongside their own histories.
 # No impact is invented retrospectively for the published baseline editions.
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
+    ReleaseImpactDecision(
+        component="site",
+        previous_version="v0.8.5",
+        version="v0.8.6",
+        impact="patch",
+        reason=(
+            "Document on the development page the storage guard that refuses bulk Git "
+            "blobs on every pull request and before each push."
+        ),
+    ),
     ReleaseImpactDecision(
         component="site",
         previous_version="v0.8.4",
@@ -2451,6 +2469,95 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "changed candidate inputs and retain v0.1.7 and v0.1.0. This is a source-reviewed "
             "disposition; no paper render, PDF redraw or artifact byte identity "
             "is claimed."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/devtools/git_storage.py",
+            "packing/devtools/upper_bound_houses.py",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-lower-bounds-explainer.pdf",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+            "papers/square-packing-methods-survey.pdf",
+        ),
+        reason=(
+            "PR406 (review H1) moves stored_size, OR-18's size of a blob as Git stores "
+            "it, from upper_bound_houses into the new devtools.git_storage, so that the "
+            "added-blob guard shares it without importing the house tooling. The "
+            "function body is unchanged and upper_bound_houses imports it under the same "
+            "name; the module's other change is its docstring. Six modules in each "
+            "paper's producer import closure, the explainer's and the survey's PDF "
+            "producer included, import upper_bound_houses: adopt_houses, "
+            "build_known_best_atlas, check_results, check_source_coverage, "
+            "register_regularized_bounds and run_negative_controls (review J1). Every "
+            "one of them leaves stored_size, staged_sizes and print_sizes uncalled; only "
+            "the module's own sizes command runs them, and the rest of git_storage "
+            "serves only the added-blob guard, which no paper producer imports. "
+            "Manuscripts, scientific inputs, figures and paper metadata are unchanged, "
+            "so the explainer keeps v0.4.10, the optimality review v0.1.7, the threshold "
+            "review v0.1.0 and the methods survey v0.2.3. Source-reviewed; no render or "
+            "byte identity is claimed."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer",),
+        paths=("packing/src/sqpack/cli/validate.py",),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-lower-bounds-explainer.pdf",
+        ),
+        reason=(
+            "PR406 adds the Git-storage guard to the validation CLI push schedule "
+            "and its status banner. The explainer declares the whole sqpack package, "
+            "but the import closure of its ten Python entrypoints, measured with "
+            "pages_scope.import_closure on main f8d547728 with this branch merged, is "
+            "133 files and holds no sqpack.cli module. The manuscript, certificate "
+            "inputs, figures, rendering helpers and paper release metadata are "
+            "unchanged against that main, so the paper retains v0.4.10. This is a "
+            "source-based producer review; no paper export was rebuilt or compared for "
+            "byte identity. The changed development.md is published as "
+            "development.html and is covered by this branch's site edition, not by "
+            "this paper-only record."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer",),
+        paths=(
+            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
+            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
+            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-lower-bounds-explainer.pdf",
+        ),
+        reason=(
+            "PR406's site v0.8.6 cut regenerated the five claim documents at "
+            "PUBLICATION_REVISION 28765d96, this branch's integration of main "
+            "f8d547728, and every changed line differs from that main only in its "
+            "source-link revision, efd41b91 to 28765d96. The explainer links those "
+            "documents through repo_url rather than inlining them, so its HTML and "
+            "Markdown are unchanged by them, its PDF prints that HTML, and it keeps "
+            "v0.4.10. Source-compared, as #695's was for v0.8.2; no render of the claim "
+            "documents or the paper was taken."
         ),
     ),
     ReleaseNoPublicChange(
@@ -5352,7 +5459,7 @@ def validate_release_impacts(
 #: fresh render, so a link naming the build commit would fail their drift check forever. It is
 #: in no version string. It moves when the claim documents are regenerated for an edition. It
 #: must be a commit on `main`; the site's own links name `main` itself (`devtools.repo_links`).
-PUBLICATION_REVISION = "efd41b91"
+PUBLICATION_REVISION = "28765d96"
 
 
 def data_pathspec() -> tuple[str, ...]:
