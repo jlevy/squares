@@ -10210,7 +10210,8 @@ issues:
     title: 's(236) ≤ 15.861934390608: registration request'
     author: evand
     opened: '2026-10-16'
-    state: open
+    state: closed
+    closed: '2026-10-20'
     kind: result-report
     triage: done
     summary: >-
@@ -10243,6 +10244,16 @@ issues:
       kind: follow-up
       reported:
       - result: n236
+    - url: https://github.com/jlevy/squares/issues/659#issuecomment-6294848229
+      date: '2026-10-20'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n236
+        id: T-218
+        verification: V3
+        confirmation: C3
+        status: confirmed
     close_when: >-
       The certificate is registered on main and replayed here, the case at 236 has adopted it and
       regularized its drawing, and the author has been told the id, rungs and adoption.
@@ -10276,6 +10287,18 @@ issues:
       source: body
       register:
       - T-219
+    asks:
+    - what: >-
+        The author says whether the reading he gave on issue 673 applies at 271, where this issue
+        calls the packing both a refinement of #561 and a different local minimum; under that reading
+        a different local minimum would make him the finder, and the credit at 271 would be taken up
+        again
+      state: queued
+      bead: think-8o5j
+      note: Asked in the follow-up of 20 October (issuecomment-6294848615), which keeps the issue open
+        for the answer and closes it with a final comment once the credit is settled or the author
+        leaves it as it is. Until then the case at 271 keeps the credit this issue asked for, Nate
+        Chaoweeraprasit (itsnaka) as finder with Francisco Couzo and Evan Daniel as improvers.
     beads:
     - think-8o5j
     answer_bead: think-8o5j
@@ -10286,6 +10309,16 @@ issues:
       kind: follow-up
       reported:
       - result: n271
+    - url: https://github.com/jlevy/squares/issues/664#issuecomment-6294848615
+      date: '2026-10-20'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n271
+        id: T-219
+        verification: V3
+        confirmation: C3
+        status: confirmed
     close_when: >-
       The certificate is registered on main and replayed here, the case at 271 has adopted it and
       regularized its drawing, and the author has been told the id, rungs and adoption.
@@ -10293,7 +10326,8 @@ issues:
       The source calls the packing a refinement of #561's, not a new construction, and also a
       different local minimum; the case credits it as the issue asks, to Nate Chaoweeraprasit's
       SQUISH packing improved by Francisco Couzo and Evan Daniel. Under issue 673's rule a different
-      local minimum would make Daniel the finder; the reply asks him which he means.
+      local minimum would make Daniel the finder; the follow-up of 20 October asks him which he
+      means, and the queued ask holds the issue open for his answer.
   - number: 666
     title: 's(n) < ⌈√n⌉ at 18 counts from n = 509 to 1568, and s(464) ≤ 21.98881: registration request'
     author: JoostdeWinter
@@ -10545,7 +10579,8 @@ issues:
     title: 's(155) ≤ 12.952260944651: registration request'
     author: evand
     opened: '2026-10-17'
-    state: open
+    state: closed
+    closed: '2026-10-20'
     kind: result-report
     triage: done
     summary: >-
@@ -10577,6 +10612,25 @@ issues:
         verification: V0
         confirmation: C0
         status: recorded
+      outdated:
+      - 'Your reported n = 155 upper bound is now registered on main as T-197, V0/C0; since #692
+        merged on 20 October, T-197 is at V3/C3, confirmed, and the house at 155'
+      - 'Separate mathematical review and source-checker replay with geometric controls await
+        reviewed integration; the confirmation #692 merged replayed the certificate on this
+        repository''s two exact routes, an independent re-implementation, and the source''s
+        verify_cert.py and verify_cert2.py did not run here'
+    - url: https://github.com/jlevy/squares/issues/669#issuecomment-6294848994
+      date: '2026-10-20'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n155
+        id: T-197
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      corrects:
+      - https://github.com/jlevy/squares/issues/669#issuecomment-6261558471
     close_when: Every claim or correction has a reviewed disposition on main, pending validation has a priced
       owner, any changed house is regularized in its adoption, and the author has received a reply verified
       against main and the deployed site.
@@ -11595,7 +11649,8 @@ issues:
     title: 'Credit correction request: s(146) and s(308) found_by'
     author: evand
     opened: '2026-10-17'
-    state: open
+    state: closed
+    closed: '2026-10-20'
     kind: correction
     triage: done
     summary: >-
@@ -11618,6 +11673,17 @@ issues:
       by: jlevy
       kind: follow-up
       reported: []
+      outdated:
+      - 'The credit decision is still queued; since #692 merged on 20 October it is decided: the
+        cases at 146 and 308 name Evan Daniel as finder, the credit lines are unchanged, and his
+        general rule is not adopted as project policy'
+    - url: https://github.com/jlevy/squares/issues/673#issuecomment-6294849401
+      date: '2026-10-20'
+      by: jlevy
+      kind: final
+      reported: []
+      corrects:
+      - https://github.com/jlevy/squares/issues/673#issuecomment-6261559625
     close_when: Every claim or correction has a reviewed disposition on main, pending validation has a priced
       owner, any changed house is regularized in its adoption, and the author has received a reply verified
       against main and the deployed site.
@@ -11635,7 +11701,8 @@ issues:
     title: 's(229) ≤ 15.650163254859: registration request'
     author: evand
     opened: '2026-10-17'
-    state: open
+    state: closed
+    closed: '2026-10-20'
     kind: result-report
     triage: done
     summary: >-
@@ -11679,6 +11746,30 @@ issues:
         verification: V0
         confirmation: C0
         status: recorded
+      outdated:
+      - 'T-198 for the opening certificate and T-199 for your smaller update, both V0/C0; since #692
+        merged on 20 October both are at V3/C3, confirmed, and T-199 is the house at 229'
+      - 'Separate mathematical review and source-checker replay with geometric controls await
+        reviewed integration; the confirmation #692 merged replayed both certificates on this
+        repository''s two exact routes, an independent re-implementation, and the source''s
+        verify_cert.py, verify_cert2.py and dilate_cert.py did not run here'
+    - url: https://github.com/jlevy/squares/issues/674#issuecomment-6294849771
+      date: '2026-10-20'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n229
+        id: T-198
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: n229-update
+        id: T-199
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      corrects:
+      - https://github.com/jlevy/squares/issues/674#issuecomment-6261560037
     close_when: Every claim or correction has a reviewed disposition on main, pending validation has a priced
       owner, any changed house is regularized in its adoption, and the author has received a reply verified
       against main and the deployed site.
@@ -11687,12 +11778,15 @@ issues:
       at MIT-licensed 00e68dfbe1d29ab5dbab1cddfb8f6ca19d5470db (published 2026-10-18). The opening and update
       remain separate chronological claims; 15.650161513896 is the current requested upper bound. Credit
       Daniel after Couzo''s 672 after de Winter''s 668. No source checker, geometric replay or mathematical
-      review ran during acquisition. PR661 keeps T-195. Each later PR takes the next available IDs only
-      after updating from main, in actual merge order; PR671''s entries are provisional, and no ordering
-      between PR671 and this intake branch is assumed. Stage 3 joins every chronological claim to the register
-      on the #661-dependent intake branch, at V0/C0. IDs remain provisional until actual main merge order;
-      no reply is posted. Separate mathematical review and source-replay owners retain Stage 4 integration
-      and any adoption. Both case upper lanes and house choices stay unchanged pending Stage 4 adoption. The separately completed source replays and mathematical reviews await descendant integration; no confirmation receipt or rung is adopted here.'
+      review ran during acquisition. Stage 3 registered both claims in order through #676, as T-198 and
+      T-199 at V0/C0, and the follow-up of 19 October reported them so. #692, merged on 20 October,
+      carried the stage 4 review of 19 October and the replay of both certificates on this repository''s
+      two exact routes, an independent re-implementation in which the source''s checkers did not run,
+      and raised both to V3/C3; the case at 229 adopted T-199 as its house, the first adoption at 229,
+      and draws the axis tool''s view of it while grid-slack''s half-degree view waits on the owner''s
+      review (think-cyeo). The final reply of 20 October reported both at V3/C3, confirmed, corrected
+      the earlier reply''s V0/C0 and source-checker statements, and closed the issue. Couzo''s #672,
+      the stated start, is not retained here; its import is think-2vjc.'
   - number: 675
     title: '204-998: registration request'
     author: franciscouzo
