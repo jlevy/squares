@@ -811,9 +811,9 @@ writer’s bead, think-ot5c, owns its counts.
 changes, or would change to a packing other than the one staged, and on a count staged
 for want of a writer that the writer can write, or the reverse.
 `default_drawings --check-state` fails while `PENDING_ALLOWED` defers the runs of a
-witness that is no longer its count’s house best packing, whichever import replaced it.
-Each entry is a corrected witness’s, and `default_drawings.CORRECTED` names the witness
-it replaced, by its source, path, revision and exact side.
+witness whose packing is no longer its count’s house best packing, whichever import
+replaced it. Each entry is a corrected witness’s, and `default_drawings.CORRECTED` names
+the witness it replaced, by its source, path, revision and exact side.
 The records tier holds that to the record of the commit the change is built on
 (`--check-state --base-ref origin/main`, which reads its merge base): the base’s witness
 at the count must be the one named, the record’s must have its source and exact side,
