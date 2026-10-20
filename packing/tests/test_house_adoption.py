@@ -1322,11 +1322,12 @@ def test_the_historical_custody_receipt_is_retained_separately_from_the_union() 
     assert "29" not in historical["houses"]
     # The houses as the 17 October passes left them: the adoption of 19 October 2026 moved
     # 155, 236 and 271 to Evan Daniel's certificates and first adopted 229 and 183 (T-220,
-    # think-jh4w), after this receipt was retained.
+    # think-jh4w), after this receipt was retained, and the adoption of 20 October 2026
+    # first adopted 227 and 260 (T-196).
     nineteenth = {155: "T-197", 183: "T-220", 229: "T-199", 236: "T-218", 271: "T-219"}
     before = {**houses.ADOPTED, 155: "T-174", 236: "T-146", 271: "T-186"}
-    del before[229]
-    del before[183]
+    for n in (183, 227, 229, 260):
+        del before[n]
     assert "183" not in historical["houses"]
     assert {n: houses.ADOPTED[n] for n in nineteenth} == nineteenth
     assert historical["houses"] == {str(n): result for n, result in before.items() if n != 29}
@@ -2054,7 +2055,8 @@ def test_an_adoption_marks_a_registration_pending_adoption_as_history() -> None:
     each report it registered at V0/C0; the adoption that moves the house marks it, and a
     sentence after it naming a report pending adoption, as history (review A1 of #692).
     155 is marked by hand (`HAND_MARKED`); 229 is the writer's, and so are 227 and 260,
-    whose de Winter reports are still pending."""
+    which the pass of 20 October 2026 adopted (T-196); the dated sentences after the
+    paragraph there, on the replay and Couzo's later reports, are in the past tense."""
     stale = (
         "Reported certificate pending adoption",
         "This V0/C0 registration leaves both case upper lanes",
@@ -2080,11 +2082,12 @@ def test_an_adoption_marks_a_registration_pending_adoption_as_history() -> None:
     )
     assert "which the record still prints" not in body229
     for n in (227, 260):
-        committed = select.case_path(n).read_text(encoding="utf-8")
-        marked = _flat(adopt.pending_history(committed, "3 November 2026"))
-        assert not [words for words in stale if words in marked], n
-        assert f"Joost de Winter reported a {n}-square certificate" in marked, n
-        assert "until the house adoption of 3 November 2026" in marked, n
+        body = _flat(select.case_path(n).read_text(encoding="utf-8").split("---\n", 2)[2])
+        assert not [words for words in stale if words in body], n
+        opening = f"**Reported certificate, 2026-10-17.** Joost de Winter reported a {n}-square"
+        assert opening in body, n
+        assert history.replace("19 October", "20 October") in body, n
+        assert "which raised T-196 to V3/C3" in body, n
 
 
 def test_an_opening_refresh_keeps_the_following_old_bound_explicitly_historical(
@@ -2106,8 +2109,9 @@ def test_an_opening_refresh_keeps_the_following_old_bound_explicitly_historical(
 def test_where_the_replaced_lanes_differ_the_margin_is_read_from_the_verified_ceiling(
     replayed: list[adopt.Move],
 ) -> None:
-    """The replaced displays differ at 29, 132, 229 and 308. Their opening, section and history
-    note use the exact verified baseline (reviews C3 and D1 of #661; M2/M3 of #665).
+    """The replaced displays differ at 29, 132, 227, 229, 260 and 308. Their opening, section
+    and history note use the exact verified baseline (reviews C3 and D1 of #661; M2/M3 of
+    #665).
     At 29 the catalogue print orders nothing; at 132 and 308 the reported exact side
     agrees with the verified side, but its display differs from the verified display."""
     differing = {
@@ -2149,6 +2153,24 @@ def test_where_the_replaced_lanes_differ_the_margin_is_read_from_the_verified_ce
             "T-155",
             "[Kingbird]",
             "lies `6.69e-03` above the new side",
+        ),
+        # The first adoptions at 227 and 260 (20 October 2026, T-196): the catalogue's
+        # prints of 17/2 + 5 sqrt(2) and 11 + 4 sqrt(2) above T-155's exact ceilings.
+        227: (
+            Fraction("19463834764831844055010554526310613/1250000000000000000000000000000000"),
+            "15.57106781186547",
+            "15.57106781186548",
+            "T-155",
+            "[Kingbird]",
+            "lies `7.27e-03` above the new side",
+        ),
+        260: (
+            Fraction("416421356237309504880168872421/25000000000000000000000000000"),
+            "16.65685424949238",
+            "16.65685424949239",
+            "T-155",
+            "[Kingbird]",
+            "lies `1.11e-02` above the new side",
         ),
     }
     for n, (expected, printed, verified_display, result, source, relation) in differing.items():

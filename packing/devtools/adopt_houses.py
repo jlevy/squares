@@ -178,6 +178,9 @@ class Prose:
     #: certificate too. T-220's replay ran the two maintained routes only, so its record
     #: says no third route decided it rather than that one did.
     third_route: bool = True
+    #: How the certificate states each square. T-196's states a rational centre and the
+    #: rotation's cosine and sine, which the adapter turns into a half-angle tangent.
+    squares: str = "a rational centre and the tangent of its half-angle"
 
 
 #: Each adopted result, as its register entry and its review describe it.
@@ -669,12 +672,32 @@ RESULTS: dict[str, Prose] = {
         ),
         third_route=False,
     ),
+    "T-196": Prose(
+        author="Joost de Winter",
+        reported="on [jlevy/squares#668](https://github.com/jlevy/squares/issues/668)",
+        producer_route=False,
+        ai=(
+            "The issue says the search, numerical optimization, rational certificates, "
+            "checkers and figures were made with OpenAI Codex agents under Joost de Winter’s "
+            "direction, and that Claude (Anthropic) replayed the checkers and prepared the "
+            "repository for publication."
+        ),
+        lineage=(
+            "The issue says the search started from this repository’s catalogue, whose "
+            "credits for the former packings apply, and built asymmetric Young-corner fills "
+            "around slipped tilted ribbons, then restored the supports and angles; the three "
+            "counts are one construction family, and the 229-square packing descends from the "
+            "260-square one. None of this lineage is measured here (T-196)."
+        ),
+        squares="a rational centre and the cosine and sine of its rotation",
+    ),
 }
 
 XU = "Ryan Xu"
 SQUISH = "Nate Chaoweeraprasit (itsnaka)"
 COUZO = "Francisco Couzo"
 DANIEL = "Evan Daniel"
+DE_WINTER = "Joost de Winter"
 PINGYOU = "PingYou Ltd"
 OSTASHEV = "Daniil Ostashev"
 BARNETT = "Robert Barnett"
@@ -994,6 +1017,9 @@ CREDITS: dict[int, Credit] = {
         (COUZO,),
         "Francisco Couzo’s further arrangement of Daniil Ostashev’s n = 211 design",
     ),
+    # Joost de Winter's packing of issue 668 (T-196), from a search the issue says started
+    # from this repository's catalogue; no identity with the catalogue's packing is measured.
+    227: Credit((DE_WINTER,), (), "Joost de Winter’s packing"),
     # T-174's regularization of T-128's packing, 46 squares moved beyond 1e-3, one to one;
     # that it is that packing is the source's statement (the 14 October review of PR 574).
     228: Credit(
@@ -1066,6 +1092,8 @@ CREDITS: dict[int, Credit] = {
     ),
     258: _regularized(SQUISH, "Nate Chaoweeraprasit’s SQUISH", via="Mishapolk"),
     259: Credit((SQUISH,), (), "Nate Chaoweeraprasit’s SQUISH packing"),
+    # Joost de Winter's packing of issue 668 (T-196), as at 227.
+    260: Credit((DE_WINTER,), (), "Joost de Winter’s packing"),
     # T-174's regularization of T-169's re-solve, measured one to one, no square moved
     # beyond 1e-12 (the 14 October review of PR 574).
     261: Credit(
@@ -1883,7 +1911,7 @@ def section(move: Move) -> str:
         (
             f"{credit.phrase[0].upper()}{credit.phrase[1:]}, reported {prose.reported}, "
             f"{side} ({house.result}). The certificate gives a rational side and, for each "
-            f"of the {n} unit squares, a rational centre and the tangent of its half-angle; "
+            f"of the {n} unit squares, {prose.squares}; "
             f"the [retained packet](../resources/web/{packet}/README.md) holds it with the "
             "complete native jobs that decided it."
         ),

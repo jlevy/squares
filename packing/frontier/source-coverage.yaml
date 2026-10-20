@@ -6105,11 +6105,10 @@ sources:
     Couzo's later #672 and #678 report smaller sides, not yet registered; at 229 Daniel's T-199 is
     the case. No arrangement identity, local minimum or optimum is established. All 3 certificates
     and their 6 controls were decided on both maintained exact routes on 20 October 2026
-    (E-de-winter-668-upper-exact-feasibility), and T-196 is at V3/C3. No stage 4 mathematical
-    review is retained yet (think-455r), so no selected override or superseded-report row
-    changes: the case's two upper lanes and retained house stay unchanged until adoption, which
-    follows an accepted review. The exact bounds are registered as pending adoption where they
-    improve the case.
+    (E-de-winter-668-upper-exact-feasibility), and T-196 is at V3/C3. The 20 October review
+    (docs/project/reviews/review-2026-10-20-de-winter-668-upper-bounds.md) accepted it, and the
+    cases at 227 and 260 adopted the certificates as their house best packings on 20 October
+    2026, which the selected overrides at those counts record; at 229 T-199 stays selected.
 - id: evand-n155-explorer-2026-10-17
   title: Daniel's n155 explorer certificate and same-side display, issue 669
   role: source-repository
@@ -6933,6 +6932,12 @@ selected_overrides:
   evidence: E-couzo-487b058-certificate-report
   reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
     here and an accepted review, adopted on 2026-10-16 (T-188).
+- n: 227
+  source_id: de-winter-upper-bounds-2026-10-17
+  value: '15.5637967036692680'
+  evidence: E-de-winter-668-upper-report
+  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
+    here and an accepted review, adopted on 2026-10-20 (T-196).
 - n: 228
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '15.60460147572967429'
@@ -6999,6 +7004,12 @@ selected_overrides:
   evidence: E-squish-481-certificate-report
   reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
     here and an accepted review, adopted on 2026-10-11 (T-136).
+- n: 260
+  source_id: de-winter-upper-bounds-2026-10-17
+  value: '16.6457788041813798'
+  evidence: E-de-winter-668-upper-report
+  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
+    here and an accepted review, adopted on 2026-10-20 (T-196).
 - n: 261
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '16.67877987534290982'
@@ -7842,7 +7853,7 @@ superseded_reports:
 - n: 227
   source_id: evand-square-packing-2026-10-05
   value: '15.571067811865475244164154299168'
-  superseded_by: kingbird-current
+  superseded_by: de-winter-upper-bounds-2026-10-17
   reason: Certifies the catalogue's packing at a side 5.2e-15 above the one it prints, which stays
     the report; since 2026-10-06 it is the verified upper bound, rounded up at the printed precision
     (T-101).
@@ -8019,7 +8030,7 @@ superseded_reports:
 - n: 260
   source_id: evand-square-packing-2026-10-05
   value: '16.656854249492380195373323439334'
-  superseded_by: kingbird-current
+  superseded_by: de-winter-upper-bounds-2026-10-17
   reason: Certifies the catalogue's packing at a side 2.0e-16 above the one it prints, which stays
     the report; since 2026-10-06 it is the verified upper bound, rounded up at the printed precision
     (T-101).
