@@ -6086,27 +6086,30 @@ sources:
     - 227
     - 229
     - 260
-  reviewed: '2026-10-18'
+  reviewed: '2026-10-20'
   source_date: '2026-10-17'
   disposition: current-report
   replay_disposition: case-specific
   represented_by:
   - frontier/results.yaml
   - resources/web/de-winter-upper-bounds-227-229-260-2026-10-17/README.md
+  - resources/web/de-winter-upper-bounds-227-229-260-2026-10-17/acquisition/claims.json
   - campaign/issue-intake/upper-bounds-20261018/README.md
   evidence:
   - E-de-winter-668-upper-report
+  - E-de-winter-668-upper-exact-feasibility
   notes: >-
     Issue 668 reports the three exact rational certificate sides from c95c4938 on 17 October; the
     retained licensed successor 9bf5d9be changes only LICENSE and the root README. The ledger preserves
-    this report before Couzo issue 672 and Daniel issue 674 at overlapping counts. At 227 Couzo has a
-    later smaller pending claim, owned by think-2vjc; at 229 the final retained Daniel update is the latest registered report.
-    No arrangement identity, local minimum or optimum is established. The separately owned mathematical
-    review (think-455r) and completed source replay with controls (think-8xr0) await their own dependent
-    PRs and are not adopted by this registration.
-    No selected override or superseded-report row changes: the case's two upper lanes
-    and retained house stay unchanged until Stage 4 adoption. The exact bounds are
-    registered as pending adoption where they improve the case, as Stage 3 permits.
+    this report before Couzo issue 672 and Daniel issue 674 at overlapping counts. At 227 and 260
+    Couzo's later #672 and #678 report smaller sides, not yet registered; at 229 Daniel's T-199 is
+    the case. No arrangement identity, local minimum or optimum is established. All 3 certificates
+    and their 6 controls were decided on both maintained exact routes on 20 October 2026
+    (E-de-winter-668-upper-exact-feasibility), and T-196 is at V3/C3. No stage 4 mathematical
+    review is retained yet (think-455r), so no selected override or superseded-report row
+    changes: the case's two upper lanes and retained house stay unchanged until adoption, which
+    follows an accepted review. The exact bounds are registered as pending adoption where they
+    improve the case.
 - id: evand-n155-explorer-2026-10-17
   title: Daniel's n155 explorer certificate and same-side display, issue 669
   role: source-repository

@@ -2881,7 +2881,8 @@ verifiers:
       packet's declaration: admits custody through acquire_source, reads each retained
       file or derived fact by its declared adapter (Evan Daniel's text format, SQUISH's
       JSON, centred JSON, PingYou Ltd's JSON, Daniil Ostashev's sqcert files, Rio Calle's
-      decimal layouts, rational corners witnesses, decimal poses by a declared dilation),
+      decimal layouts, rational corners witnesses, decimal poses by a declared dilation,
+      Joost de Winter's centre-basis JSON),
       holds a derived fact to any file its row names as the same packing, admits each side
       only where it equals or rounds up to its print, rebuilds the frozen claim comparison
       and the register plan, and drives the arrangement kernel's two exact routes and two
@@ -2917,7 +2918,11 @@ verifiers:
       (docs/project/reviews/review-2026-10-12-upper-bound-imports-528-529.md) read them in
       full. The import lane of issue 552 added a HOUSES reader of its packet, which the
       12 October review of that issue
-      (docs/project/reviews/review-2026-10-12-upper-bound-import-552.md) read.
+      (docs/project/reviews/review-2026-10-12-upper-bound-import-552.md) read. The import
+      lane of issue 668 added the center-basis-json adapter, which reads each square's
+      rational centre and basis and refuses a basis that is not exactly the rotation its
+      half-angle tangent gives, and a HOUSES reader of its packet; no stage 4 review has
+      read them yet (think-455r).
 
     versions:
     - sha256: bc47273499dccbd59997bbdd4028176eb09621865b25854f511f9cf872ce1156
@@ -2926,8 +2931,16 @@ verifiers:
         records it
     - sha256: e8bb87fa8acb5470bee92d9f77cb158a11bd780d6e5f8c38a12bf77870573a08
       path: packing/devtools/upper_bound_reports.py
-      note: The current driver, which adds only the n183 packet to HOUSES, the reader that
+      note: The driver of pull request 687, which adds only the n183 packet to HOUSES, the reader that
         receipt admission and house selection use; it decided no n183 geometry
+    - sha256: 6824c09ea3db501b62a68aa7ddb44066e36e464fff60aabfb4d11af0bb5832f4
+      path: packing/devtools/upper_bound_reports.py
+      note: The driver that certified issue 668's three certificates on 20 October 2026, at
+        7c801b596, adding the center-basis-json adapter
+    - sha256: 2c7b120ccede6d5b384f1d3075476f06acedbe71181950a80950be12e20f5c03
+      path: packing/devtools/upper_bound_reports.py
+      note: The same driver merged with main d588ad987, which adds only the n183 HOUSES
+        reader beside it; it ran issue 668's check --replay again
 
   - id: V-rehwaldt-n68-verify
     program: verify.py

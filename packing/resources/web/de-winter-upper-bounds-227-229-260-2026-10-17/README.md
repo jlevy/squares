@@ -128,6 +128,9 @@ seconds, summed; the longest job took 71.04 seconds.
 [receipts/exact-certification.json.xz](receipts/exact-certification.json.xz) keeps every
 deciding input and both routes’ complete outputs, and `check --replay` decided all nine
 jobs again and held each to its retained row.
+After the merge with `main` at `d588ad987` the same day, `check --replay` decided all nine
+again in 116 seconds of wall on one process, and `check-claims` rebuilt the frozen
+comparison equal.
 The two routes share certificate parsing, the half-angle conversion, Python’s rational
 arithmetic and the separating-axis method, so they are two implementations of one
 method. Neither is the author’s code, and the source’s three checkers were not run.
