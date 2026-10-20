@@ -859,25 +859,23 @@ def test_a_pool_worker_builds_the_same_bytes_as_this_process() -> None:
 def test_known_best_composite_contains_every_case_and_square() -> None:
     # Pooled rather than serial, and the count comes from the same policy every other
     # pool-backed step reads: `PACK_JOBS` where a gate has capped it, the machine where
-    # nothing has. This is the one test that pays the whole corpus build, and at
-    # `n=1..324` that is 691.19s serial against 348.15s at two workers -- the deep gate
-    # runs the slow lane at `--inner-jobs 2`, so this is what it costs there. The build is
-    # memoized on the worker count, so the serial memo the corrupted-source test above
-    # builds is untouched by this one.
+    # nothing has. The rebuild is of the poster's own hundred cases and no others. Until
+    # 2026-10-19 this test paid the whole corpus build, which grew with the adopted
+    # houses' exact replays above n = 100 until it alone took 1033 to 1373s of the
+    # deferred slow lane's wall (runs 39292263543, 39262635681, 39297968153) and held one
+    # xdist worker to its 1800s deadline. That the data layer `--update` writes leaves
+    # the composites out is held by the whole `--check`, which builds that layer anyway.
+    # The builds are memoized on the worker count and the case.
     workers = worker_count(known_best_builder.CORPUS.count)
-    outputs, _manifest = known_best_builder.expected_outputs(workers)
     composite_path = ATLAS / "known-best-1-100.svg"
     canvas = known_best_builder.PRIMARY_COMPOSITE
     assert canvas.svg_path == composite_path
 
-    # The composites are not part of the data layer `--update` writes: they are drawn
-    # apart, under the record of the data each was drawn from, and redrawn on demand.
-    assert not any(item.svg_path in outputs for item in known_best_builder.COMPOSITES)
     retained = composite_path.read_text(encoding="utf-8")
     identity = known_best_builder.retained_identity(retained)
     rebuilt = known_best_builder.expected_composite(canvas, identity, workers)
 
-    # A composite is drawn from the retained witnesses, which costs seconds where this
+    # A composite is drawn from the retained witnesses, which costs seconds where a
     # rebuild costs minutes. That is sound exactly when the two drawings are one, which
     # is held here for the figure and by `--check` for every witness it is drawn from.
     cards = known_best_builder.retained_cases(canvas.spec.numbers)
@@ -3498,6 +3496,31 @@ def test_only_the_bound_numeral_carries_the_new_result_accent() -> None:
         assert set(accented) == set(expected_accented)
         assert len(plain) == len(expected_plain)
         assert set(plain) == set(expected_plain)
+
+
+def test_check_refuses_a_data_layer_that_would_write_a_composite(monkeypatch) -> None:
+    """Negative control for check(): a composite among the data layer's outputs is refused."""
+    canvas = known_best_builder.COMPOSITES[0]
+    relative = known_best_builder._relative(canvas.svg_path)  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
+    manifest = {
+        "atlas": {
+            "range": known_best_builder.range_record(known_best_builder.CORPUS),
+            "entries": [],
+        }
+    }
+    monkeypatch.setattr(
+        known_best_builder,
+        "expected_outputs",
+        lambda _workers=1: ({canvas.svg_path: "<svg/>"}, manifest),
+    )
+    monkeypatch.setattr(
+        known_best_builder,
+        "composite_findings",
+        lambda *_args, **_kwargs: known_best_builder.CompositeFindings((), ()),
+    )
+    with pytest.raises(ValueError, match="known-best atlas drift") as refused:
+        known_best_builder.check()
+    assert f"the data layer would write the composite {relative}" in str(refused.value)
 
 
 def test_fast_composite_check_rejects_a_stale_bound_label(monkeypatch) -> None:

@@ -16,7 +16,12 @@
 //   <select data-filter="s" data-bound="min">     row's data-s at least the value
 //   <input type="number" data-filter="date" data-bound="age">
 //                                                 row's data-date, an ISO date, at most
-//                                                 that many days before the reader's day
+//                                                 that many days before the reader's day;
+//                                                 data-filter="added" holds data-added,
+//                                                 the day a row reached the site, the same
+//                                                 way (`?added-age=1`)
+//   <input type="date" data-filter="added" data-bound="since">
+//                                                 row's data-added on or after the value
 //   <input type="number" data-filter="n" data-bound="covers">
 //                                                 row's data-n, a list of numbers and
 //                                                 ranges ("27 28 31-32"), holds the value
@@ -36,10 +41,14 @@
 // The bar's `.site-count` shows how many rows remain. A link can open the table
 // filtered: each query parameter presets the control it names, `status=proved`,
 // `recent=true`, `n-max=100` for a bound, `n=11` for a `covers` control, `age=180`
-// for an age, or `project=evand-square-packing` for a `has` control, so a card can point
-// at a filtered view. A control marked `data-preset` is for such links alone: its label
-// is `hidden` in the HTML and shows only while the control filters, so a reader sees
-// what narrows the table and can set it back.
+// for the age of a row's date, `added-age=1` for the age of its arrival and
+// `added-since=2026-10-06` for its first day, or `project=evand-square-packing` for a
+// `has` control, so a card can point at a filtered view. A control marked
+// `data-preset` is for such links alone: its label is `hidden` in the HTML and shows
+// only while the control filters, so a reader sees what narrows the table and can set
+// it back. A preset value no option offers, such as a day nothing reached the site on,
+// is added to its select as a disabled option and applied, so the table shows none of
+// its rows and the bar names the value, rather than quietly showing every row.
 // The pure functions are published
 // on `globalThis.SiteTable` for the Node tests; nothing else leaves this file.
 
@@ -169,6 +178,16 @@
   }
 
   /**
+   * A day as an ISO date in UTC, the day the register's `landed` dates are written in,
+   * so an age of arrival counts whole UTC days wherever the reader is.
+   * @param {Date} now
+   * @returns {string}
+   */
+  function utcDay(now) {
+    return now.toISOString().slice(0, 10);
+  }
+
+  /**
    * The first day a row may be dated to be no older than `days` on `today`, both ISO
    * dates: 180 days on 2026-09-30 is 2026-04-03. Empty, which is no limit, when `days`
    * is not a number or reaches past the calendar.
@@ -188,14 +207,16 @@
 
   /**
    * The query parameter that presets a filter control: its key, with its bound if it
-   * is one end of a range, and `age` for an age, whatever it is the age of.
+   * is one end of a range or an age, `added-age` for how long ago a row was added; and
+   * `age` alone for the age of the date a row shows, Max age, which the links in use
+   * already carry.
    * @param {string} key
    * @param {string | null} bound
    * @returns {string}
    */
   function controlParam(key, bound) {
     if (bound === "age") {
-      return bound;
+      return key === "date" ? bound : `${key}-${bound}`;
     }
     return bound && bound !== "covers" && bound !== "has" ? `${key}-${bound}` : key;
   }
@@ -219,6 +240,31 @@
         control.checked = value === "true";
       } else if (control instanceof HTMLInputElement || control instanceof HTMLSelectElement) {
         control.value = value;
+        if (
+          control instanceof HTMLInputElement &&
+          control.value !== value &&
+          value !== "" &&
+          control.hasAttribute("data-preset")
+        ) {
+          // A date input empties a value it cannot read (`2026-10-6`); it is kept here and
+          // applied as matching no row, and dropped once the reader edits the control.
+          control.setAttribute("data-unmatched", value);
+          control.addEventListener("input", () => control.removeAttribute("data-unmatched"), {
+            once: true,
+          });
+        } else if (
+          control instanceof HTMLSelectElement &&
+          control.value !== value &&
+          value !== "" &&
+          control.hasAttribute("data-preset")
+        ) {
+          const missing = control.ownerDocument.createElement("option");
+          missing.value = value;
+          missing.textContent = value;
+          missing.disabled = true;
+          control.append(missing);
+          control.value = value;
+        }
       }
     }
   }
@@ -227,7 +273,7 @@
    * What each `data-bound` makes of its control.
    * @type {Readonly<Record<string, SiteTableFilter["kind"]>>}
    */
-  const BOUNDS = { min: "min", max: "max", covers: "covers", has: "has" };
+  const BOUNDS = { min: "min", max: "max", covers: "covers", has: "has", since: "since" };
 
   /**
    * Show each preset-only control's label while the control filters, and only then.
@@ -236,8 +282,11 @@
   function showPresets(tools) {
     for (const control of tools.querySelectorAll("[data-preset]")) {
       const label = control.closest("label");
-      if (label instanceof HTMLElement && control instanceof HTMLSelectElement) {
-        label.hidden = control.value === "";
+      if (
+        label instanceof HTMLElement &&
+        (control instanceof HTMLSelectElement || control instanceof HTMLInputElement)
+      ) {
+        label.hidden = control.value === "" && control.getAttribute("data-unmatched") === null;
       }
     }
   }
@@ -256,23 +305,30 @@
 
   /**
    * The filters a tools bar's controls currently express. An age becomes the day it
-   * reaches back to from `today`, so a row is held to a date and never to a clock.
+   * reaches back to from `today`, so a row is held to a date and never to a clock; an age
+   * of arrival (`data-filter="added"`) from `utcToday`, since the days a row arrived on
+   * are UTC days. A preset value a date input could not read matches no row.
    * @param {Element} tools
-   * @param {string} today an ISO date
+   * @param {string} today an ISO date, the reader's local day
+   * @param {string} [utcToday] an ISO date, the day in UTC
    * @returns {SiteTableFilter[]}
    */
-  function readFilters(tools, today) {
+  function readFilters(tools, today, utcToday = today) {
     /** @type {SiteTableFilter[]} */
     const filters = [];
     for (const control of tools.querySelectorAll("[data-filter]")) {
       const key = control.getAttribute("data-filter") ?? "";
       const bound = control.getAttribute("data-bound");
-      if (control instanceof HTMLSelectElement && !bound) {
+      const unmatched = control.getAttribute("data-unmatched");
+      if (control instanceof HTMLInputElement && unmatched !== null && control.value === "") {
+        filters.push({ key, kind: "equals", value: unmatched });
+      } else if (control instanceof HTMLSelectElement && !bound) {
         filters.push({ key, kind: "equals", value: control.value });
       } else if (control instanceof HTMLInputElement && control.type === "checkbox") {
         filters.push({ key, kind: "flag", value: control.checked ? "true" : "false" });
       } else if (control instanceof HTMLInputElement && bound === "age") {
-        filters.push({ key, kind: "since", value: ageCutoff(today, control.value) });
+        const day = key === "added" ? utcToday : today;
+        filters.push({ key, kind: "since", value: ageCutoff(day, control.value) });
       } else if (control instanceof HTMLInputElement || control instanceof HTMLSelectElement) {
         filters.push({ key, kind: BOUNDS[bound ?? ""] ?? "min", value: control.value });
       }
@@ -311,7 +367,8 @@
         return;
       }
       showPresets(tools);
-      const filters = readFilters(tools, localDay(new Date()));
+      const now = new Date();
+      const filters = readFilters(tools, localDay(now), utcDay(now));
       const target = fragmentTarget();
       const rows = Array.from(body.rows);
       const passes = rows.map(
@@ -423,6 +480,9 @@
               "c-max",
               "age",
               "age-max",
+              "added",
+              "added-age",
+              "added-since",
               "superseded",
               "current",
               "search",
@@ -455,6 +515,7 @@
     rowMatches,
     countText,
     localDay,
+    utcDay,
     ageCutoff,
     controlParam,
     init,

@@ -10,7 +10,7 @@ The clock is fixed at the register's reference date for deterministic age checks
 from __future__ import annotations
 
 from collections.abc import Callable, Iterator
-from datetime import datetime, time
+from datetime import datetime, time, timedelta
 from pathlib import Path
 from typing import Any
 from urllib.parse import parse_qs, urlsplit
@@ -321,6 +321,102 @@ def test_kind_shows_the_results_of_one_kind(
         page.goto(pages["results.html"].as_uri() + "?kind=optimality", wait_until="load")
         assert page.locator(KIND).input_value() == "optimality"
         assert sorted(state(page)["shown"]) == sorted(by_kind["optimality"])
+    finally:
+        page.close()
+
+
+def _arrived_since(overview: overview_data.Overview, days: int) -> list[str]:
+    """The ids of the results that reached the site at most `days` before the newest
+    arrival, which is the day the test sets the page's clock to, sorted."""
+    cutoff = overview_sections.age_cutoff(overview_sections.added_reference(overview), days)
+    return sorted(
+        result.id.lower()
+        for result in overview.results
+        if overview_sections.landed_day(result).isoformat() >= cutoff
+    )
+
+
+def test_the_added_filter_shows_what_reached_the_site(
+    browser: Any, pages: dict[str, Path], overview: overview_data.Overview
+) -> None:
+    """In Chromium, on the day the newest results reached the site: `?added-age=1` sets
+    Added within and shows exactly the results that arrived that day or the day before,
+    whatever the date their rows show or the day a lane registered them, and leaves Max
+    age empty (#514's review A, finding A1); the clock is noon, where the reader's day and
+    the UTC day an age of arrival counts in agree. The seven days' heading opens the table from
+    the section's first day, `?added-since=`, with Added since in the bar, on the results
+    the section lists (A3). The newest day's own link opens it on that day alone, with
+    Added on in the bar naming the day; and a day nothing arrived on is named there too
+    and shows no row, rather than every row (A5)."""
+    name = "results.html"
+    reference = overview_sections.added_reference(overview)
+    cutoff = overview_sections.age_cutoff(reference, 1)
+    last_day = _arrived_since(overview, 1)
+    assert 0 < len(last_day) < len(overview.results)
+    arrived = [result for result in overview.results if result.id.lower() in last_day]
+    # The filter reads arrival: some row of the last day shows a date before it, and some
+    # was registered before it, waiting for its pull request to merge.
+    assert any(overview_sections.first_day(result.dated[1]) < cutoff for result in arrived)
+    assert any(
+        overview_sections.registered_day(result).isoformat() < cutoff for result in arrived
+    )
+    added_age = '[data-filter="added"][data-bound="age"]'
+    added_since = '[data-filter="added"][data-bound="since"]'
+    added_on = 'select[data-filter="added"]'
+    page = browser.new_page(viewport={"width": 1280, "height": 900})
+    page.clock.set_fixed_time(datetime.combine(reference, time(12)))
+    try:
+        page.goto(pages[name].as_uri() + "?added-age=1", wait_until="load")
+        assert page.locator(added_age).input_value() == "1"
+        assert page.locator('[data-filter="date"][data-bound="age"]').input_value() == ""
+        found = state(page)
+        assert sorted(found["shown"]) == last_day
+        assert found["count"] == count(len(last_day), overview)
+
+        page.goto(pages[name].as_uri(), wait_until="load")
+        assert not page.locator(added_since).is_visible()
+        heading = page.get_by_role("heading", name="Added in the Last Seven Days")
+        with page.expect_navigation(url=arrival(pages[name]), wait_until="load"):
+            heading.get_by_role("link").click()
+        first = (reference - timedelta(days=overview_sections.ADDED_DAYS)).isoformat()
+        assert urlsplit(page.url).query == f"added-since={first}"
+        assert urlsplit(page.url).fragment == "all-results"
+        assert page.locator(added_since).is_visible()
+        assert page.locator(added_since).input_value() == first
+        listed = sorted(
+            (link.get_attribute("href") or "").removeprefix("#")
+            for link in page.locator(".site-added li > a:first-child").all()
+        )
+        found = state(page)
+        assert sorted(found["shown"]) == listed == _arrived_since(overview, 7)
+
+        page.goto(pages[name].as_uri(), wait_until="load")
+        newest = reference.isoformat()
+        day = page.locator(f'.site-added details[data-day="{newest}"]')
+        with page.expect_navigation(url=arrival(pages[name]), wait_until="load"):
+            day.locator("p a").click()
+        assert urlsplit(page.url).query == f"added={newest}"
+        found = state(page)
+        assert sorted(found["shown"]) == _arrived_since(overview, 0)
+        assert page.locator(added_on).is_visible()
+        assert page.locator(added_on).input_value() == newest
+        assert page.locator(added_age).input_value() == ""
+
+        empty = (reference + timedelta(days=1)).isoformat()
+        page.goto(pages[name].as_uri() + f"?added={empty}", wait_until="load")
+        found = state(page)
+        assert found["shown"] == []
+        assert found["count"] == count(0, overview)
+        assert page.locator(added_on).is_visible()
+        assert page.locator(added_on).input_value() == empty
+
+        # A day the date input cannot read is kept and shows no row, with Added since in
+        # the bar, as an unmatched select does (#514's review B, finding B5).
+        page.goto(pages[name].as_uri() + "?added-since=2026-10-6", wait_until="load")
+        found = state(page)
+        assert found["shown"] == []
+        assert found["count"] == count(0, overview)
+        assert page.locator(added_since).is_visible()
     finally:
         page.close()
 

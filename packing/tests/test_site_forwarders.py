@@ -301,43 +301,47 @@ def test_the_overview_sends_an_old_explainer_fragment_to_the_paper(
     assert _arrives(browser, stays, stays, scripts=True) == stays
 
 
-def test_the_deployed_site_check_follows_the_same_forwarders(
-    served: str, browser: Any, monkeypatch: pytest.MonkeyPatch
-) -> None:
-    """`check_published_site` visits each old address the way a deploy is checked, and
-    accepts a site this machine serves; it fails when a forwarder leads nowhere."""
-    context = browser.new_context()
+def _defect_log_stand_in(context: Any) -> None:
+    """The defect log on GitHub, answered by the stand-in in a visit's own context."""
     context.route(
         f"{REPO_URL}/**",
         lambda route: route.fulfill(status=200, content_type="text/html", body=STAND_IN),
     )
-    try:
-        followed = check_published_site.forwarder_arrivals(context, served, timeout=10)
-        assert [passed for passed, _ in followed] == [True] * len(render_overview.MOVED_PAGES)
-        lines = dict(
-            zip((old for old, _ in render_overview.MOVED_PAGES), followed, strict=True)
-        )
-        suffix = check_published_site.FORWARDED_SUFFIX
-        paper = f"{served}{LOWER_BOUNDS_PAPER}{suffix}"
-        line = lines["explainer.html"][1]
-        assert f"visiting {served}explainer.html{suffix} arrives at {paper!r}" in line
-        assert (
-            f"visiting {served}n11-optimality/{suffix} "
-            in lines["n11-optimality/index.html"][1]
-        )
-        assert f"arrives at {DEFECTS + suffix!r}" in lines["defects.html"][1]
-        assert check_published_site.fetch_once(f"{served}explainer.html")[0] == 200
 
-        monkeypatch.setattr(
-            render_overview,
-            "MOVED_PAGES",
-            (("explainer.html", "papers/not-a-paper.html"),),
-        )
-        ((passed, line),) = check_published_site.forwarder_arrivals(context, served, timeout=2)
-        assert not passed
-        assert "papers/not-a-paper.html" in line
-    finally:
-        context.close()
+
+def test_the_deployed_site_check_follows_the_same_forwarders(
+    served: str, browser: Any, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """`check_published_site` visits each old address the way a deploy is checked, in
+    the browser itself with a context of its own for each visit, and accepts a site this
+    machine serves; it fails when a forwarder leads nowhere. Every context it opened is
+    closed when it returns."""
+    open_contexts = len(browser.contexts)
+    followed = check_published_site.forwarder_arrivals(
+        browser, served, timeout=10, prepare=_defect_log_stand_in
+    )
+    assert [passed for passed, _ in followed] == [True] * len(render_overview.MOVED_PAGES)
+    assert len(browser.contexts) == open_contexts
+    lines = dict(zip((old for old, _ in render_overview.MOVED_PAGES), followed, strict=True))
+    suffix = check_published_site.FORWARDED_SUFFIX
+    paper = f"{served}{LOWER_BOUNDS_PAPER}{suffix}"
+    line = lines["explainer.html"][1]
+    assert f"visiting {served}explainer.html{suffix} arrives at {paper!r}" in line
+    assert f"visiting {served}n11-optimality/{suffix} " in lines["n11-optimality/index.html"][1]
+    assert f"arrives at {DEFECTS + suffix!r}" in lines["defects.html"][1]
+    assert check_published_site.fetch_once(f"{served}explainer.html")[0] == 200
+
+    monkeypatch.setattr(
+        render_overview,
+        "MOVED_PAGES",
+        (("explainer.html", "papers/not-a-paper.html"),),
+    )
+    ((passed, line),) = check_published_site.forwarder_arrivals(
+        browser, served, timeout=2, prepare=_defect_log_stand_in
+    )
+    assert not passed
+    assert "papers/not-a-paper.html" in line
+    assert len(browser.contexts) == open_contexts
 
 
 def test_deployed_forwarder_arrival_does_not_wait_for_destination_assets(
@@ -348,58 +352,60 @@ def test_deployed_forwarder_arrival_does_not_wait_for_destination_assets(
     source = next(
         page.html for page in site_renders.forwarders() if page.name == "explainer.html"
     )
-    context = browser.new_context()
     pending: list[Any] = []
     timed_out: list[str] = []
     sync_api = site_browser.api()
-    context.route(
-        f"{served}explainer.html*",
-        lambda route: route.fulfill(content_type="text/html", body=source),
-    )
 
     def hold_image(route: Any) -> None:
         pending.append(route)
 
-    context.route("**/held-image.png", hold_image)
-    context.route(
-        f"{served}{LOWER_BOUNDS_PAPER}*",
-        lambda route: route.fulfill(
-            content_type="text/html", body='<title>target</title><img src="held-image.png">'
-        ),
-    )
-    new_page = context.new_page
+    def prepare(context: Any) -> None:
+        """The visit's context serves the forwarder and a destination whose image never
+        arrives, and records each `goto` that times out."""
+        context.route(
+            f"{served}explainer.html*",
+            lambda route: route.fulfill(content_type="text/html", body=source),
+        )
+        context.route("**/held-image.png", hold_image)
+        context.route(
+            f"{served}{LOWER_BOUNDS_PAPER}*",
+            lambda route: route.fulfill(
+                content_type="text/html", body='<title>target</title><img src="held-image.png">'
+            ),
+        )
+        new_page = context.new_page
 
-    def observed_page() -> Any:
-        page = new_page()
-        goto = page.goto
+        def observed_page() -> Any:
+            page = new_page()
+            goto = page.goto
 
-        def observed_goto(url: str, **kwargs: Any) -> Any:
-            try:
-                return goto(url, **kwargs)
-            except sync_api.TimeoutError:
-                timed_out.append(url)
-                raise
+            def observed_goto(url: str, **kwargs: Any) -> Any:
+                try:
+                    return goto(url, **kwargs)
+                except sync_api.TimeoutError:
+                    timed_out.append(url)
+                    raise
 
-        monkeypatch.setattr(page, "goto", observed_goto)
-        return page
+            monkeypatch.setattr(page, "goto", observed_goto)
+            return page
 
-    monkeypatch.setattr(context, "new_page", observed_page)
+        monkeypatch.setattr(context, "new_page", observed_page)
+
     monkeypatch.setattr(
         render_overview, "MOVED_PAGES", (("explainer.html", LOWER_BOUNDS_PAPER),)
     )
-    try:
-        started = time.monotonic()
-        ((passed, line),) = check_published_site.forwarder_arrivals(context, served, timeout=2)
-        print(
-            f"forwarder arrival: {time.monotonic() - started:.3f}s, "
-            f"load timeouts={len(timed_out)}"
-        )
-        assert passed, line
-        assert repr(served + LOWER_BOUNDS_PAPER + check_published_site.FORWARDED_SUFFIX) in line
-        assert timed_out == []
-    finally:
-        context.unroute_all(behavior="ignoreErrors")
-        context.close()
+    open_contexts = len(browser.contexts)
+    started = time.monotonic()
+    ((passed, line),) = check_published_site.forwarder_arrivals(
+        browser, served, timeout=2, prepare=prepare
+    )
+    print(
+        f"forwarder arrival: {time.monotonic() - started:.3f}s, load timeouts={len(timed_out)}"
+    )
+    assert passed, line
+    assert repr(served + LOWER_BOUNDS_PAPER + check_published_site.FORWARDED_SUFFIX) in line
+    assert timed_out == []
+    assert len(browser.contexts) == open_contexts
 
 
 @pytest.mark.parametrize("scripts", [True, False])
