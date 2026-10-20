@@ -102,6 +102,9 @@ DANIEL_674 = "evand-n229-dilation-2026-10-17"
 DANIEL_674_UPDATE = "evand-n229-dilation-update-2026-10-18"
 DANIEL_659 = "evand-n236-2026-10-16"
 DANIEL_664 = "evand-n271-2026-10-17"
+#: Joost de Winter's issue #668, retained under MIT, read by the centre-basis JSON adapter
+#: (`test_upper_bound_reports_668`).
+DE_WINTER_668 = "de-winter-upper-bounds-227-229-260-2026-10-17"
 #: How a declaration cites a beyond-horizon row of the source register.
 COVERAGE_URL = "packing/frontier/source-coverage.yaml"
 EVERY = (
@@ -136,6 +139,7 @@ EVERY = (
     DANIEL_674_UPDATE,
     DANIEL_659,
     DANIEL_664,
+    DE_WINTER_668,
 )
 
 
@@ -329,17 +333,29 @@ CENTRED = {
     "dilation": "0",
 }
 
+#: Joost de Winter's centre-basis JSON (#668): the same packing, each tilt as its basis.
+CENTER_BASIS = {
+    "n": 2,
+    "side": "3",
+    "squares": [
+        {"center": ["1", "1"], "basis": ["1", "0"]},
+        {"center": ["2", "2"], "basis": ["4/5", "3/5"]},
+    ],
+}
+
 
 def _bytes(value: Mapping[str, Any]) -> bytes:
     return json.dumps(value).encode()
 
 
-def test_the_three_adapters_read_one_packing_alike() -> None:
+def test_the_adapters_read_one_packing_alike() -> None:
     expected = legacy.parse(EVAND.decode(), expected_n=2)
     assert reports.parse_certificate(EVAND, 2, "evand-cert") == expected
     assert reports.parse_certificate(_bytes(SQUISH), 2, "squish-json") == expected
     # The centred certificate's centres move by S/2 = 3/2, exactly.
     assert reports.parse_certificate(_bytes(CENTRED), 2, "centred-json") == expected
+    # The basis (4/5, 3/5) is the rotation whose half-angle tangent is 1/3.
+    assert reports.parse_certificate(_bytes(CENTER_BASIS), 2, "center-basis-json") == expected
 
 
 @pytest.mark.parametrize(
@@ -354,6 +370,29 @@ def test_the_three_adapters_read_one_packing_alike() -> None:
         ("centred-json", {**CENTRED, "origin": "centre"}, "not a centred"),
         ("centred-json", {**CENTRED, "squares": [{"x": "0", "y": "0"}] * 2}, "x, y and t"),
         ("centred-json", {**CENTRED, "side": "-3"}, "positive"),
+        ("center-basis-json", {**CENTER_BASIS, "extra": "x"}, "exactly n, side and squares"),
+        ("center-basis-json", {**CENTER_BASIS, "n": 3}, "count differs"),
+        ("center-basis-json", {**CENTER_BASIS, "side": 3}, "rational string"),
+        (
+            "center-basis-json",
+            {**CENTER_BASIS, "squares": [{"center": ["1", "1"], "basis": ["1", "1"]}] * 2},
+            "no rotation",
+        ),
+        (
+            "center-basis-json",
+            {**CENTER_BASIS, "squares": [{"center": [1, "1"], "basis": ["1", "0"]}] * 2},
+            "rational string",
+        ),
+        (
+            "center-basis-json",
+            {**CENTER_BASIS, "squares": [{"center": ["1", "1"], "basis": ["-1", "0"]}] * 2},
+            "no finite half-angle",
+        ),
+        (
+            "center-basis-json",
+            {**CENTER_BASIS, "squares": [{"center": ["1", "1", "0"], "basis": ["1", "0"]}] * 2},
+            "a centre and a basis",
+        ),
     ],
 )
 def test_the_json_adapters_refuse_what_their_formats_do_not_state(
@@ -1335,6 +1374,7 @@ def test_the_register_plan_states_each_bound_as_check_standing_reads_it(name: st
         DANIEL_674_UPDATE: "2026-10-18",
         DANIEL_659: "2026-10-16",
         DANIEL_664: "2026-10-17",
+        DE_WINTER_668: "2026-10-17",
     }
     assert result["attribution"]["published"] == published.get(name, "2026-10-10")
     evidence = plan["evidence.yaml"]
