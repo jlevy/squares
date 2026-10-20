@@ -1719,6 +1719,36 @@ class ReleaseNoPublicChange(NamedTuple):
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
     ReleaseNoPublicChange(
+        components=(
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=("packing/devtools/result_status.py",),
+        outputs=(
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-optimality-review.pdf",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/n11-threshold-bound-review.pdf",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+            "papers/square-packing-methods-survey.pdf",
+        ),
+        reason=(
+            "For PR #701's review A (finding A5): unfinished_sentence now adds its full "
+            "stop only where an unfinished confirmation's `what` lacks one, so RESULTS.md "
+            "and the result pages no longer print 'review.. Not priced.' for T-196 and "
+            "T-223. None of the three papers prints an unfinished confirmation. Rendered "
+            "at link revision 6051ebbe, once with this branch's result_status.py and once "
+            "with the 6051ebbe copy loaded in its place: render_n11_optimality_review, "
+            "render_n11_threshold_bound_review and render_packing_methods leave the 50 "
+            "files of the site tree byte-identical between the two. No PDF was printed; "
+            "each prints from that HTML. Retain v0.1.7, v0.1.0 and v0.2.3."
+        ),
+    ),
+    ReleaseNoPublicChange(
         components=("paper:n11-optimality-review", "paper:n11-threshold-bound-review"),
         paths=("packing/frontier/results.yaml",),
         outputs=(
