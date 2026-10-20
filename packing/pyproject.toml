@@ -375,7 +375,14 @@ reportUnannotatedClassAttribute = "none"
 testpaths = ["tests"]
 pythonpath = ["."]
 python_files = ["test_*.py"]
-addopts = ["--strict-config", "--strict-markers"]
+# `devtools.pytest_tmp` and the two retention settings bound what test sessions leave in
+# the temporary directory: a passing test's `tmp_path` goes when the test ends, a passing
+# session leaves nothing, and only the newest failed or killed sessions stay to inspect.
+# development.md, "Temporary test directories", has the measurements; the plugin's
+# docstring has the killed-session case it covers.
+addopts = ["--strict-config", "--strict-markers", "-p", "devtools.pytest_tmp"]
+tmp_path_retention_policy = "failed"
+tmp_path_retention_count = 2
 markers = [
   "exhaustive_exact: expensive exact-algebra tests retained by full and integration validation",
   "slow: measured above the pull-request surface's per-test ceiling; runs in the deep surface",
