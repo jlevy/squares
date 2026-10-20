@@ -28,6 +28,7 @@ interface SiteTableApi {
   ): boolean;
   countText(shown: number, total: number, noun: string): string;
   localDay(now: Date): string;
+  utcDay(now: Date): string;
   ageCutoff(today: string, days: string): string;
   controlParam(key: string, bound: string | null): string;
   init(): void;
