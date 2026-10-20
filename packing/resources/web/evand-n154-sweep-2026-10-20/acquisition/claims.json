@@ -1,0 +1,12 @@
+{
+  "format": "upper-bound-report-claims-v1",
+  "issue": "https://github.com/jlevy/squares/issues/694",
+  "source": "https://github.com/evand/square-packing",
+  "revision": "1d2bb82035af4b7eb4658488543e46b67d1099ca",
+  "read_on": "2026-10-20",
+  "read_at_main": "d588ad987bd8de53361d087b8961a7f2bf157c41",
+  "horizon": 324,
+  "results": [
+    {"n": 154, "certificate": "search/packer/candidates/s154_sw.cert", "format": "evand-cert", "requested": true, "replayed": true, "offered_side": "12.921100940762", "printed_in": "https://github.com/jlevy/squares/issues/694", "exact_side": "1615137617595210068732072760947/125000000000000000000000000000", "ceiling": "12.9211009407616806", "first_committed": "2026-10-20T03:54:48Z", "grid_side": "13", "case": {"source_key": "[Mishapolk KKT refinements 2026-10-14]", "holders": "Evan Daniel, improved by Francisco Couzo and Mishapolk", "result": "T-186", "reported_value": "12.92120657713263105", "verified_value": "12.92120657713263105", "evidence": ["E-mishapolk-70a033f-exact-feasibility"], "exact_side": "646060328856631552497101463610355043240689434277149/50000000000000000000000000000000000000000000000000", "relation": "below", "difference": "5281818547525004272359231555043240689434277149/50000000000000000000000000000000000000000000000000"}, "pending": [{"report": "T-182 (#586)", "url": "https://github.com/jlevy/squares/issues/586", "holders": "Francisco Couzo", "result": "T-182", "exact_side": "12921206577132631050071241337979/1000000000000000000000000000000", "relation": "below", "difference": "105636370950500214659250403/1000000000000000000000000000000"}, {"report": "T-172 (#583)", "url": "https://github.com/jlevy/squares/issues/583", "holders": "Francisco Couzo", "result": "T-172", "exact_side": "12922499814642397493692375652931/1000000000000000000000000000000", "relation": "below", "difference": "279774776143388767158713071/200000000000000000000000000000"}, {"report": "T-160 (#552)", "url": "https://github.com/jlevy/squares/issues/552", "holders": "Evan Daniel", "result": "T-160", "exact_side": "12922566401934059503377267965457/1000000000000000000000000000000", "relation": "below", "difference": "1465461172378953520685877881/1000000000000000000000000000000"}, {"report": "#593", "url": "https://github.com/jlevy/squares/issues/593", "holders": "Mykhailo Polkovskyi (Mishapolk)", "exact_side": "12922499814642397493692375652931/1000000000000000000000000000000", "relation": "below", "difference": "279774776143388767158713071/200000000000000000000000000000"}], "smallest": "this certificate"}
+  ]
+}

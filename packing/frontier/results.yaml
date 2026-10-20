@@ -2,7 +2,7 @@ softschema:
   contract: packing.squares:ResultsRegister/v1
   schema: results.schema.yaml
   status: enforced
-last_reviewed: '2026-10-19'
+last_reviewed: '2026-10-20'
 results:
   - id: T-001
     kind: lower-bound
@@ -30157,6 +30157,151 @@ results:
     controls:
     - packing/tests/test_upper_bound_reports.py
     - packing/resources/web/evand-n183-subgrid-2026-10-19/receipts/exact-certification.json.xz
+  - id: T-221
+    kind: upper-bound
+    registered: '2026-10-20'
+    landed: '2026-10-20'
+    headline: Daniel's smaller n308 packing, started from Chaoweeraprasit's 307 packing, certified exactly
+    claim: 'One complete rational source certificate reports a finite upper-bound improvement at the exact
+      side it states: s(308) <= 17.997149121270908735153160752315. Complete native feasibility outcomes
+      are retained separately; the selected standing case is unchanged pending independent review and record
+      review.
+
+
+      The author reports that his two exact rational checkers, verify_cert.py (separating axes) and verify_cert2.py
+      (polygon intersection), accept the certificate and its regularized view at the same side. The source
+      reports a KKT local minimum strict modulo 47 exact flat motions, 242 corner-corner contacts with no
+      corner-corner MILP descent, 5 rattlers and 102 tilted squares, in the family of #484 and #489 with
+      8 fewer tilted squares, and says it is not a refinement of #489: 295 load-bearing squares move by
+      more than 1e-4 under its matching and no tilt angle is shared. Those are numerical evidence at 80
+      digits, as the source says, not proofs. No source program ran here.
+
+
+      Credit Evan Daniel (https://github.com/evand/square-packing), whose chained explorer inserted one
+      square into the register''s s(307) packing, Nate Chaoweeraprasit''s (itsnaka''s) #481 packing (T-136),
+      and whose basin explorer descended from there to this packing; the issue asks that #481''s s(307)
+      packing be credited as the ultimate start, and says the packing does not descend from Kevin Fang''s
+      #484 or Daniel''s #489. The search, the checks and the request were done with Claude (Claude Code)
+      under Evan Daniel''s direction.'
+    scope:
+      n_values:
+      - 308
+    verification: V0
+    confirmation: C0
+    significance:
+      score: 3
+      rationale: A smaller finite construction side at n = 308, 1.12e-03 below the case ceiling and every
+        report there, by a packing the source reports as a new arrangement started from the n = 307
+        house rather than a refinement of the case's packing; no lower bound or optimum. Draft at
+        intake; the stage 4 review confirms or changes it.
+      scored: '2026-10-20'
+      by: think-h8jm Evan Daniel import
+    novelty: previously-published
+    attribution:
+      source_keys:
+      - '[Daniel n308 2026-10-19]'
+      published: '2026-10-19'
+    evidence:
+    - E-evand-689-n308-report
+    artifacts:
+    - packing/resources/web/evand-n308-2026-10-19/README.md
+    - packing/resources/web/evand-n308-2026-10-19/acquisition/claims.json
+    - packing/resources/web/evand-n308-2026-10-19/source/search/packer/candidates/s308_d308.cert
+    - packing/resources/web/evand-n308-2026-10-19/receipts/exact-certification.json.xz
+    - packing/devtools/upper_bound_reports.py
+    controls:
+    - packing/tests/test_upper_bound_reports.py
+    notes: 'A separate complete repository replay is retained for n = 308: 1 positive and 2 duplicate-square
+      and outside-container controls passed their required outcomes on both routes, 283668 pair decisions;
+      summed over the 3 jobs, the receipt records 35.66 route CPU seconds and 36.22 job wall seconds, the
+      longest job 12.41 seconds. Every positive clears every wall by at least 5.00e-21 and every pair by
+      at least 9.99e-21.
+
+
+      At n = 308 the certificate is below the case''s ceiling (Evan Daniel, improved by PingYou Ltd, T-174)
+      by 1.12e-03; below T-141 (#489) (Evan Daniel, on Kevin Fang''s two-wedge construction) by 1.12e-03;
+      below T-135 (#484) (Kevin Fang) by 2.16e-03; below #593 (Mykhailo Polkovskyi (Mishapolk)) by 1.12e-03;
+      smallest: this certificate.
+
+
+      The source''s own checkers were not run here. The two maintained routes, the sqpack rational witness
+      verifier and the independent rational corner checker, share certificate parsing, half-angle conversion,
+      Fraction arithmetic and the separating-axis method. No two independent methods, human oversight or
+      optimality is claimed.'
+    next_rung: Independently review the retained replay, then adopt at 308.
+  - id: T-222
+    kind: upper-bound
+    registered: '2026-10-20'
+    landed: '2026-10-20'
+    headline: 'Daniel''s smaller n154 packing, a new KKT point in Couzo''s #586 family, certified exactly'
+    claim: 'One complete rational source certificate reports a finite upper-bound improvement at the exact
+      side it states: s(154) <= 12.921100940761680549856582087576. Complete native feasibility outcomes
+      are retained separately; the selected standing case is unchanged pending independent review and record
+      review.
+
+
+      The author reports that his two exact rational checkers, verify_cert.py (separating axes) and verify_cert2.py
+      (polygon intersection), accept the certificate and its regularized view at the same side. The source
+      reports a KKT point that it has not shown to be a strict local minimum (its second-order test is
+      inconclusive), 58 corner-corner contacts with no corner-corner MILP descent, 9 rattlers and 38 tilted squares, and calls it a different KKT point from
+      #586''s in the same family: the matched contact graphs share 232 pairs, 61 are only here and 64 only
+      in #586''s, and a morph walk finds no path between the two up to 1e-2 above #586''s side. Those are
+      numerical evidence at 80 digits and a heuristic, as the source says, not proofs. No source program
+      ran here.
+
+
+      Credit Evan Daniel (https://github.com/evand/square-packing), whose chained explorer removed two squares
+      from the register''s s(156) packing (Daniil Ostashev''s) and, with crossovers against close relatives
+      of Francisco Couzo''s #586 packing, and a later restart of his basin explorer, reached this packing;
+      the issue asks that #586''s arrangement (itself continued from Daniel''s #552) and Ostashev''s s(156)
+      packing be credited as its starts. The search, the checks and the request were done with Claude (Claude
+      Code) under Evan Daniel''s direction.'
+    scope:
+      n_values:
+      - 154
+    verification: V0
+    confirmation: C0
+    significance:
+      score: 3
+      rationale: A smaller finite construction side at n = 154, 1.06e-04 below the case ceiling and every
+        report there, by a packing the source reports as a different KKT point in the family of
+        Couzo's packing of issue 586; no lower bound or optimum. Draft at intake; the stage 4 review
+        confirms or changes it.
+      scored: '2026-10-20'
+      by: think-115j Evan Daniel import
+    novelty: previously-published
+    attribution:
+      source_keys:
+      - '[Daniel n154 sweep 2026-10-20]'
+      published: '2026-10-20'
+    evidence:
+    - E-evand-694-n154-report
+    artifacts:
+    - packing/resources/web/evand-n154-sweep-2026-10-20/README.md
+    - packing/resources/web/evand-n154-sweep-2026-10-20/acquisition/claims.json
+    - packing/resources/web/evand-n154-sweep-2026-10-20/source/search/packer/candidates/s154_sw.cert
+    - packing/resources/web/evand-n154-sweep-2026-10-20/receipts/exact-certification.json.xz
+    - packing/devtools/upper_bound_reports.py
+    controls:
+    - packing/tests/test_upper_bound_reports.py
+    notes: 'A separate complete repository replay is retained for n = 154: 1 positive and 2 duplicate-square
+      and outside-container controls passed their required outcomes on both routes, 70686 pair decisions;
+      summed over the 3 jobs, the receipt records 8.9 route CPU seconds and 9.03 job wall seconds, the longest
+      job 3.14 seconds. Every positive clears every wall by at least 5.00e-21 and every pair by at least
+      9.99e-21.
+
+
+      At n = 154 the certificate is below the case''s ceiling (Evan Daniel, improved by Francisco Couzo
+      and Mishapolk, T-186) by 1.06e-04; below T-182 (#586) (Francisco Couzo) by 1.06e-04; below T-172 (#583)
+      (Francisco Couzo) by 1.40e-03; below T-160 (#552) (Evan Daniel) by 1.47e-03; below #593 (Mykhailo
+      Polkovskyi (Mishapolk)) by 1.40e-03; smallest: this certificate.
+
+
+      The source''s own checkers were not run here. The two maintained routes, the sqpack rational witness
+      verifier and the independent rational corner checker, share certificate parsing, half-angle conversion,
+      Fraction arithmetic and the separating-axis method. No two independent methods, human oversight or
+      optimality is claimed.'
+    next_rung: Independently review the retained replay, then adopt at 154.
 
 # Generated by python -m devtools.regularized_drawings from the regularized layer's
 # index (packing/atlas/known-best/regularized/index.json); do not edit by hand.
