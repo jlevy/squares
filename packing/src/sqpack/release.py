@@ -1687,6 +1687,104 @@ class ReleaseNoPublicChange(NamedTuple):
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
     ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer",),
+        paths=(
+            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
+            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
+            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
+            "packing/devtools/upper_bound_reports.py",
+            "packing/frontier/results.yaml",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-lower-bounds-explainer.pdf",
+        ),
+        reason=(
+            "For PR #668's stage 4 replay (T-196 to V3/C3) against main d588ad98: the "
+            "explainer reads results.yaml only for its count of entries and of novel ones, "
+            "and T-196 changes neither; the center-basis-json adapter and its HOUSES reader "
+            "are not called by it; the site v0.8.5 cut changes the five claim documents "
+            "only in their source-link revision, and the explainer links them rather than "
+            "inlining them. "
+            "Rendered at link revision 2a396583, this branch after its merge of main "
+            "d588ad98 (#687, site v0.8.4) and its site v0.8.5 cut, once from this "
+            "branch's tree and once from a scratch copy holding main's bytes of the nine "
+            "changed inputs (upper_bound_reports, results.yaml, result-requests.yaml, "
+            "source-coverage.yaml and the five claim documents): "
+            "render_n11_optimality_review, render_n11_threshold_bound_review, "
+            "render_packing_methods and render_n11_lower_bounds_explainer write 68 files, "
+            "byte-identical between the trees. No PDF was printed; each prints from "
+            "that HTML. "
+            "Retain v0.4.10."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:n11-optimality-review", "paper:n11-threshold-bound-review"),
+        paths=(
+            "packing/devtools/upper_bound_reports.py",
+            "packing/frontier/results.yaml",
+        ),
+        outputs=(
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-optimality-review.pdf",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/n11-threshold-bound-review.pdf",
+        ),
+        reason=(
+            "For PR #668's stage 4 replay (T-196 to V3/C3) against main d588ad98: both "
+            "reviews read results.yaml only through paper_figures.ladder_records, which "
+            "selects the n11 ladder rungs LADDER_RUNGS names; T-196 is outside that ladder "
+            "and no ladder row changes. The center-basis-json adapter and its HOUSES reader "
+            "are not called by these producers. "
+            "Rendered at link revision 2a396583, this branch after its merge of main "
+            "d588ad98 (#687, site v0.8.4) and its site v0.8.5 cut, once from this "
+            "branch's tree and once from a scratch copy holding main's bytes of the nine "
+            "changed inputs (upper_bound_reports, results.yaml, result-requests.yaml, "
+            "source-coverage.yaml and the five claim documents): "
+            "render_n11_optimality_review, render_n11_threshold_bound_review, "
+            "render_packing_methods and render_n11_lower_bounds_explainer write 68 files, "
+            "byte-identical between the trees. No PDF was printed; each prints from "
+            "that HTML. "
+            "Retain v0.1.7 and v0.1.0."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/devtools/upper_bound_reports.py",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+            "papers/square-packing-methods-survey.pdf",
+        ),
+        reason=(
+            "For PR #668's stage 4 replay (T-196 to V3/C3) against main d588ad98: result "
+            "requests, source coverage and results are citation targets whose existence the "
+            "producer checks, not inlined text, and every cited path exists at both "
+            "revisions; the #668 request, its coverage row and T-196 are not cited by the "
+            "survey, and the adapter does not enter its output. "
+            "Rendered at link revision 2a396583, this branch after its merge of main "
+            "d588ad98 (#687, site v0.8.4) and its site v0.8.5 cut, once from this "
+            "branch's tree and once from a scratch copy holding main's bytes of the nine "
+            "changed inputs (upper_bound_reports, results.yaml, result-requests.yaml, "
+            "source-coverage.yaml and the five claim documents): "
+            "render_n11_optimality_review, render_n11_threshold_bound_review, "
+            "render_packing_methods and render_n11_lower_bounds_explainer write 68 files, "
+            "byte-identical between the trees. No PDF was printed; each prints from "
+            "that HTML. "
+            "Retain v0.2.3."
+        ),
+    ),
+    ReleaseNoPublicChange(
         components=("paper:n11-optimality-review", "paper:n11-threshold-bound-review"),
         paths=(
             "packing/devtools/adopt_houses.py",
