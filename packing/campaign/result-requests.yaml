@@ -13280,7 +13280,8 @@ issues:
     title: 's(183) ≤ 13.999580178737: registration request (first 183 below the grid)'
     author: evand
     opened: '2026-10-19'
-    state: open
+    state: closed
+    closed: '2026-10-20'
     kind: result-report
     triage: done
     summary: 'Evan Daniel''s original n183 certificate is registered as T-220, confirmed by a complete
@@ -13310,6 +13311,39 @@ issues:
       kind: follow-up
       reported:
       - result: n183
+      outdated:
+      - 'Registration is prepared for the next intake records PR, has not landed on main or been
+        deployed, and its result number is provisional; since #687 merged on 20 October it is on main
+        and on the published site as T-220, at V3/C3, confirmed'
+      - 'The regularized drawing and the adoption into the standing case remain a separate owned
+        follow-up (think-jh4w); since #687 merged on 20 October, T-220 is the house at 183, adopted on
+        19 October in the same change, and the site draws its regularized view'
+      - 'Both retained exact verification routes accepted its rational geometry: the two routes were
+        this repository''s sqpack.verify and devtools.check_rational_witness_independent, and the
+        source''s verify_cert.py and verify_cert2.py, though retained in the packet, did not run here'
+    - url: https://github.com/jlevy/squares/issues/680#issuecomment-6297284604
+      date: '2026-10-20'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n183
+        id: T-220
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      corrects:
+      - https://github.com/jlevy/squares/issues/680#issuecomment-6268897692
+    - url: https://github.com/jlevy/squares/issues/680#issuecomment-6300872327
+      date: '2026-10-20'
+      by: jlevy
+      kind: follow-up
+      reported:
+      - result: n183
+        id: E-evand-680-n183-report
+        status: reviewed
+      - result: n183
+        id: E-evand-680-n183-primary-exact-feasibility
+        status: confirmed
     close_when: The reported claim has a reviewed disposition on main, replay and mathematical review
       have explicit owners, any adopted house is regularized in the adoption change, and a reply checked
       against main and the deployed site reports the resulting state.
@@ -13323,4 +13357,874 @@ issues:
       provisional. It names no T-220 and makes no published-registration claim; house adoption and
       regularized endpoint remain separate. Exact posted bodies are retained in packing/campaign/issue-intake/intake-followup-20261019/issue-680-replies.json.
       Evan Daniel''s comment of 2026-10-20T01:39:41Z thanks Joost de Winter for his 19 October note and
-      says how the search was found; it states no new claim, certificate or correction.'
+      says how the search was found; it states no new claim, certificate or correction. The final reply
+      of 20 October (issuecomment-6297284604), posted after #687 merged, reports T-220 at V3/C3, confirmed,
+      on main and on the published site, the house at 183 with its regularized view, the credit Daniel
+      after Couzo, and the KKT, flat-motion and local-minimum statements as unregistered source evidence;
+      it says that the 19 October reply''s two routes were this repository''s, that the source''s two
+      checkers and its regularized certificate did not run here, and that nothing asked for is queued.
+      The issue closed with it at 2026-10-20T17:43:20Z. The 20 October follow-up (issuecomment-6300872327)
+      names the evidence that reply described: E-evand-680-n183-report, reviewed, and
+      E-evand-680-n183-primary-exact-feasibility, confirmed.'
+  - number: 686
+    title: '100 certified larger-count square packings (328–998): registration request'
+    author: gfppoy
+    opened: '2026-10-19'
+    state: open
+    kind: result-report
+    triage: done
+    summary: Darius Muglich reports 100 exact rational upper-bound certificates beyond the case corpus,
+      at 328 to 998, in an archive attached to the issue with per-case provenance and comparisons. The
+      issue says they are not 100 independent structures; many are deletions, borders, crops or
+      refinements of other holders' packings, Francisco Couzo's most often. OpenAI Codex assistance
+      disclosed. The 20 October triage finds every side below the record's start and below every
+      earlier report at its count; custody, the replay and the rows are queued.
+    read_through: '2026-10-19T20:43:04Z'
+    results:
+    - key: n328
+      claim: s(328) <= 18.614376892294788, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n330
+      claim: s(330) <= 18.692672444467133, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n339
+      claim: s(339) <= 18.907351471178022, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n344
+      claim: s(344) <= 18.992727809365345, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n365
+      claim: s(365) <= 19.614376892314402, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n377
+      claim: s(377) <= 19.925471653974826, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n378
+      claim: s(378) <= 19.942018855984576, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n379
+      claim: s(379) <= 19.950889681503441, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n380
+      claim: s(380) <= 19.961350023835208, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n381
+      claim: s(381) <= 19.974739840483985, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n404
+      claim: s(404) <= 20.614376892315402, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n412
+      claim: s(412) <= 20.822995415461893, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n417
+      claim: s(417) <= 20.934672165248002, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n418
+      claim: s(418) <= 20.939184128264923, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n419
+      claim: s(419) <= 20.957804836274712, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n420
+      claim: s(420) <= 20.966588191190457, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n421
+      claim: s(421) <= 20.976371064794590, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n422
+      claim: s(422) <= 20.983575254585011, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n453
+      claim: s(453) <= 21.822995415463173, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n459
+      claim: s(459) <= 21.937227864889785, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n460
+      claim: s(460) <= 21.950987687999201, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n461
+      claim: s(461) <= 21.966193114436095, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n462
+      claim: s(462) <= 21.966193114414129, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n463
+      claim: s(463) <= 21.973675720477602, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n464
+      claim: s(464) <= 21.986268532628047, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n496
+      claim: s(496) <= 22.822875659409473, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n502
+      claim: s(502) <= 22.934445598628207, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n503
+      claim: s(503) <= 22.944667600407142, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n504
+      claim: s(504) <= 22.962118925863563, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n505
+      claim: s(505) <= 22.964253709989815, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n506
+      claim: s(506) <= 22.972145072003643, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n508
+      claim: s(508) <= 22.983309379055478, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n548
+      claim: s(548) <= 23.944667600431087, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n550
+      claim: s(550) <= 23.961058656835017, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n551
+      claim: s(551) <= 23.965801641974269, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n552
+      claim: s(552) <= 23.966628823345179, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n553
+      claim: s(553) <= 23.979786600215760, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n554
+      claim: s(554) <= 23.986315054037724, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n595
+      claim: s(595) <= 24.944667600432087, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n597
+      claim: s(597) <= 24.958141573307033, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n598
+      claim: s(598) <= 24.958220677835095, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n599
+      claim: s(599) <= 24.962832858735977, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n600
+      claim: s(600) <= 24.979786600240740, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n601
+      claim: s(601) <= 24.986315054062710, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n602
+      claim: s(602) <= 24.990355569404721, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n603
+      claim: s(603) <= 24.990355569379731, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n647
+      claim: s(647) <= 25.949897942498915, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n648
+      claim: s(648) <= 25.961052856924314, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n649
+      claim: s(649) <= 25.974939166891586, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n650
+      claim: s(650) <= 25.974939166865611, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n651
+      claim: s(651) <= 25.982878838106428, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n652
+      claim: s(652) <= 25.990355569405721, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n654
+      claim: s(654) <= 25.994867334132237, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n700
+      claim: s(700) <= 26.963730153903490, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n701
+      claim: s(701) <= 26.971171145178352, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n702
+      claim: s(702) <= 26.976692903975214, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n703
+      claim: s(703) <= 26.981389201596016, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n704
+      claim: s(704) <= 26.987139500916770, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n705
+      claim: s(705) <= 26.990473400222588, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n706
+      claim: s(706) <= 26.997919093469508, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n755
+      claim: s(755) <= 27.951463061397879, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n756
+      claim: s(756) <= 27.976914446491419, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n757
+      claim: s(757) <= 27.976914446463442, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n758
+      claim: s(758) <= 27.984283608420539, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n759
+      claim: s(759) <= 27.988569233273449, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n760
+      claim: s(760) <= 27.992923233306379, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n810
+      claim: s(810) <= 28.951463061400412, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n811
+      claim: s(811) <= 28.974848874209278, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n812
+      claim: s(812) <= 28.976914446492419, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n813
+      claim: s(813) <= 28.981594177184268, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n814
+      claim: s(814) <= 28.981594177155286, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n815
+      claim: s(815) <= 28.992923233335372, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n816
+      claim: s(816) <= 28.995944538692246, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n817
+      claim: s(817) <= 28.997492020606608, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n868
+      claim: s(868) <= 29.974562439897217, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n869
+      claim: s(869) <= 29.974936836673075, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n870
+      claim: s(870) <= 29.981594177185268, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n871
+      claim: s(871) <= 29.981594177185268, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n872
+      claim: s(872) <= 29.992623086320206, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n873
+      claim: s(873) <= 29.992623086290213, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n874
+      claim: s(874) <= 29.992883399225609, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n875
+      claim: s(875) <= 29.996974281851590, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n927
+      claim: s(927) <= 30.969979227501660, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n928
+      claim: s(928) <= 30.974936836704050, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n929
+      claim: s(929) <= 30.975405698329704, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n930
+      claim: s(930) <= 30.977403109932478, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n932
+      claim: s(932) <= 30.992623086321206, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n933
+      claim: s(933) <= 30.992883399256602, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n934
+      claim: s(934) <= 30.994174058187146, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n935
+      claim: s(935) <= 30.994174058156152, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n989
+      claim: s(989) <= 31.974936836705050, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n990
+      claim: s(990) <= 31.975405698332123, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n991
+      claim: s(991) <= 31.977403109964455, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n992
+      claim: s(992) <= 31.977815424176502, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n993
+      claim: s(993) <= 31.983895593654374, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n994
+      claim: s(994) <= 31.992883399257602, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n995
+      claim: s(995) <= 31.994174058188146, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n996
+      claim: s(996) <= 31.994174058188146, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n997
+      claim: s(997) <= 31.996875920326034, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    - key: n998
+      claim: s(998) <= 31.996875920294037, rounded upward; exact certificate side is authoritative.
+      source: body
+      not_registered: Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register
+        entry. Custody, the two-route replay and the row remain on the import bead.
+      queued: true
+      bead: think-9vjn
+    asks:
+    - what: >-
+        Keep the source, seed and solver credits each case's provenance.json gives: credit a
+        deletion, border, subset crop or refinement after the packing it comes from, since the 100
+        are not independent structures, and keep one provenance for copies of the release posted
+        elsewhere (the issue body's credit line and its Lineage and credit paragraph).
+      state: queued
+      bead: think-9vjn
+      note: >-
+        Taken up when the rows land, each row's credit following its case's provenance.json. About
+        47 cases name Couzo's certificates as parent or source. The archive says n = 810 refines
+        Couzo's certificates/best/n810.cert by 6.33e-8 and asks that it not be advertised as a new
+        structure.
+    beads:
+    - think-9vjn
+    answer_bead: think-9vjn
+    replies:
+    - url: https://github.com/jlevy/squares/issues/686#issuecomment-6301482971
+      date: '2026-10-20'
+      by: jlevy
+      kind: acknowledgement
+      reported:
+      - result: n328
+      - result: n330
+      - result: n339
+      - result: n344
+      - result: n365
+      - result: n377
+      - result: n378
+      - result: n379
+      - result: n380
+      - result: n381
+      - result: n404
+      - result: n412
+      - result: n417
+      - result: n418
+      - result: n419
+      - result: n420
+      - result: n421
+      - result: n422
+      - result: n453
+      - result: n459
+      - result: n460
+      - result: n461
+      - result: n462
+      - result: n463
+      - result: n464
+      - result: n496
+      - result: n502
+      - result: n503
+      - result: n504
+      - result: n505
+      - result: n506
+      - result: n508
+      - result: n548
+      - result: n550
+      - result: n551
+      - result: n552
+      - result: n553
+      - result: n554
+      - result: n595
+      - result: n597
+      - result: n598
+      - result: n599
+      - result: n600
+      - result: n601
+      - result: n602
+      - result: n603
+      - result: n647
+      - result: n648
+      - result: n649
+      - result: n650
+      - result: n651
+      - result: n652
+      - result: n654
+      - result: n700
+      - result: n701
+      - result: n702
+      - result: n703
+      - result: n704
+      - result: n705
+      - result: n706
+      - result: n755
+      - result: n756
+      - result: n757
+      - result: n758
+      - result: n759
+      - result: n760
+      - result: n810
+      - result: n811
+      - result: n812
+      - result: n813
+      - result: n814
+      - result: n815
+      - result: n816
+      - result: n817
+      - result: n868
+      - result: n869
+      - result: n870
+      - result: n871
+      - result: n872
+      - result: n873
+      - result: n874
+      - result: n875
+      - result: n927
+      - result: n928
+      - result: n929
+      - result: n930
+      - result: n932
+      - result: n933
+      - result: n934
+      - result: n935
+      - result: n989
+      - result: n990
+      - result: n991
+      - result: n992
+      - result: n993
+      - result: n994
+      - result: n995
+      - result: n996
+      - result: n997
+      - result: n998
+    close_when: The rows are on main and the owner has posted the resulting state; counts beyond the case
+      corpus take no register entry, and optimality is outside this request.
+    notes: >-
+      Triage of 20 October 2026 (think-9vjn). The evidence is the issue's attachment
+      01-squares-100-certificates-and-poses.zip: both attachment links serve the same 8,824,142 bytes,
+      with SHA-256 6b711d6e80c9828497ba09d44673ee490c00ccae51b80587ec591d940722a874 as the issue states.
+      No repository commit or DOI pins it, and it states no licence; the SQUISH #401 attachment, kept as
+      derived facts with its address and digest (squish-401-2026-10-07), is the one precedent, and the
+      owner is asked to confirm both points. devtools.acquire_source retains only Git checkouts, so
+      custody is a tool change or that facts route. The archive holds 100 certificates in Evan Daniel's
+      n S / x y t format, each digest in its case's provenance.json, and each issue print rounds its
+      certificate's exact header side up by less than 1e-15. comparisons.csv has eight more rows, at
+      229, 458, 501, 546, 547, 549, 555 and 653, without certificates, and the issue does not offer
+      them. The archive excludes them (include=False): seven are above the pending reports it compares
+      them with, and 229 falls short of its own 1e-10 margin; they are not claims. The report-order
+      comparison is
+      packing/campaign/issue-intake/upper-bounds-20261020/: every claim is recorded, below the
+      beyond-horizon row at 68 counts and the grid at 32, and below #666, #670, #672, #675 and #678
+      wherever they report the count. Publications in watched repositories are not in that ledger and
+      stay with the import bead. Triage replayed five certificates, 328, 381, 464, 810 and 998, on
+      sqpack.verify and devtools.check_rational_witness_independent in scratch, with both controls
+      refused at 328; nothing was retained and no row or rung rests on it. The full replay is 300
+      jobs, a positive and two controls at each count, about 7.5 CPU-hours, the longest job about
+      184 seconds. verify_public.py did not run. The acknowledgement posts after the pull request
+      that carries this triage merges.

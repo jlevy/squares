@@ -1,0 +1,11 @@
+{
+  "format": "intake-ledger-github-v1",
+  "items": [
+    {"report":"#666","kind":"issue","number":666,"url":"https://github.com/jlevy/squares/issues/666","author":"JoostdeWinter","created_at":"2026-10-17T07:06:07Z","state":"open","closed_at":null,"title":"s(n) < ⌈√n⌉ at 18 counts from n = 509 to 1568, and s(464) ≤ 21.98881: registration request"},
+    {"report":"#670","kind":"issue","number":670,"url":"https://github.com/jlevy/squares/issues/670","author":"franciscouzo","created_at":"2026-10-17T18:05:06Z","state":"open","closed_at":null,"title":"204-993: registration request"},
+    {"report":"#672","kind":"issue","number":672,"url":"https://github.com/jlevy/squares/issues/672","author":"franciscouzo","created_at":"2026-10-17T20:48:34Z","state":"open","closed_at":null,"title":"227, 229, 330-996: registration request"},
+    {"report":"#675","kind":"issue","number":675,"url":"https://github.com/jlevy/squares/issues/675","author":"franciscouzo","created_at":"2026-10-18T06:02:11Z","state":"open","closed_at":null,"title":"204-998: registration request"},
+    {"report":"#678","kind":"issue","number":678,"url":"https://github.com/jlevy/squares/issues/678","author":"franciscouzo","created_at":"2026-10-18T23:23:19Z","state":"open","closed_at":null,"title":"204-998: registration request"},
+    {"report":"#686","kind":"issue","number":686,"url":"https://github.com/jlevy/squares/issues/686","author":"gfppoy","created_at":"2026-10-19T20:43:04Z","state":"open","closed_at":null,"title":"100 certified larger-count square packings (328–998): registration request"}
+  ]
+}
