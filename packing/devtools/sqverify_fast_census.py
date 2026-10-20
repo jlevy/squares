@@ -90,6 +90,17 @@ crate `source_sha256` by `build.rs`'s rule and the review that accepted it, exit
 when none did, so a lane can check before it builds that a census run will be one of
 reviewed source.
 
+Evidence build descriptions use the retained compiler, profile and target; they infer
+no host hardware. Aggregate capture CPU is the census's `wait4` measurement, separate
+from optional direction CPU. Missing direction readings remain unavailable even when
+the native summary records zero. An optional `PACKET/CERTIFICATE.execution.json`
+beside the receipts retains the checkpoint's authentic execution record: when its
+candidate, binary and build match, the evidence entry names its aggregate control
+timing and any recovered capture whose outer exit was unobserved. Packet relationships
+are explicit: the fine-net and most check2 replays share this crate with the producer,
+apart from their declared-net readers. Check2's mixed_n29_L581 follows its published
+C++ records instead.
+
 From `packing/`:
 
     .venv/bin/python3 -m devtools.sqverify_fast_census --source-digest
@@ -111,6 +122,7 @@ import functools
 import gzip
 import hashlib
 import json
+import math
 import os
 import subprocess
 import sys
@@ -1187,6 +1199,214 @@ def thread_count(entry: dict[str, Any]) -> str:
     return f"{word} thread{'' if threads == 1 else 's'}"
 
 
+def recorded_seconds(value: Any) -> float | None:
+    """Missing or invalid timing is unavailable, never a measured zero."""
+    if isinstance(value, bool) or not isinstance(value, (int, float)):
+        return None
+    try:
+        seconds = float(value)
+    except OverflowError:
+        return None
+    return seconds if math.isfinite(seconds) and seconds >= 0 else None
+
+
+def direction_cpu(entry: dict[str, Any], indices: list[int] | None = None) -> float | None:
+    """Sum only complete direction readings; the native summary's Mac zero is not one."""
+    if indices is None:
+        indices = list(
+            range(int((entry.get("premises") or {}).get("angle_count") or STANDARD_DIRECTIONS))
+        )
+    readings = entry.get("direction_cpu_seconds") or {}
+    values = [recorded_seconds(readings.get(str(r))) for r in indices]
+    if not values or any(value is None for value in values):
+        return None
+    return sum(value for value in values if value is not None)
+
+
+def build_facts(entry: dict[str, Any]) -> str:
+    """Receipt build identity without inferring host hardware or execution platform."""
+    build = entry.get("build") or {}
+    fields = ("rustc", "profile", "target")
+    if not any(build.get(field) for field in fields):
+        return "compiler, profile and target not recorded"
+    return ", ".join(
+        str(build[field]) if build.get(field) else f"{label} not recorded"
+        for field, label in zip(fields, ("compiler", "profile", "target"), strict=True)
+    )
+
+
+def runtime_facts(entry: dict[str, Any]) -> str:
+    """Separate census wait4 aggregate CPU from optional native direction CPU."""
+    cpu = recorded_seconds(entry.get("cpu_seconds"))
+    aggregate = (
+        f"{cpu:,.0f} aggregate process CPU seconds (wait4)"
+        if cpu is not None
+        else "aggregate process CPU unavailable (wait4)"
+    )
+    wall = recorded_seconds(entry.get("wall_seconds"))
+    wall_text = (
+        f"{wall:,.0f} seconds of wall time" if wall is not None else "wall time unavailable"
+    )
+    per_direction = direction_cpu(entry)
+    direction_text = (
+        "Per-direction CPU is unavailable; no zero CPU measurement is inferred from "
+        "the native summary. "
+        if per_direction is None
+        else f"{per_direction:,.1f} summed per-direction CPU seconds. "
+    )
+    load = recorded_seconds(entry.get("load_before"))
+    load_text = (
+        f"The recorded load average {load:.1f} was measured at start. "
+        if load is not None
+        else ""
+    )
+    return (
+        f"Every direction verified, summary VERIFIED, native exit 0, {aggregate} at "
+        f"{thread_count(entry)} and {wall_text}. {direction_text}{load_text}"
+    )
+
+
+def execution_facts(case: Case, out: Path, entry: dict[str, Any]) -> str:
+    """Optional authentic execution companion, bound to this candidate and binary.
+
+    Publication retains the checkpoint's execution.json as CERT.execution.json beside
+    CERT.control.json. It measures the complete driver and children, unlike wait4's
+    native capture CPU; it can also preserve an unobserved outer capture exit.
+    """
+    path = out / case.packet / f"{case.certificate}.execution.json"
+    if not path.is_file():
+        return ""
+    try:
+        execution = json.loads(path.read_text(encoding="utf-8"))
+    except OSError, ValueError:
+        return ""
+    if not isinstance(execution, dict) or execution.get("certificate") != case.certificate:
+        return ""
+    if any(
+        not entry.get(key) or execution.get(key) != entry[key]
+        for key in ("candidate_sha256", "binary_sha256", "build")
+    ):
+        return ""
+    commands = execution.get("commands")
+    if not isinstance(commands, list):
+        return ""
+    facts = []
+    for command in commands:
+        if not isinstance(command, dict):
+            continue
+        if (
+            command.get("mode") == "capture"
+            and command.get("recovered_complete_capture") is True
+            and command.get("returncode") is None
+            and command.get("native_returncode") == 0
+        ):
+            facts.append(
+                "The companion records a recovered complete native capture; the outer "
+                "capture exit was unobserved (native exit 0). "
+            )
+        if command.get("mode") != "control":
+            continue
+        timing = command.get("timing") or {}
+        if not isinstance(timing, dict):
+            continue
+        cpu = recorded_seconds(timing.get("cpu_seconds"))
+        if cpu is None:
+            continue
+        wall = recorded_seconds(timing.get("real"))
+        wall_text = f" and {wall:.2f} seconds of wall time" if wall is not None else ""
+        facts.append(
+            f"The execution companion records {cpu:.2f} aggregate control CPU seconds"
+            f"{wall_text} for the complete driver and children"
+            + (
+                " (/usr/bin/time)"
+                if "/usr/bin/time" in str(execution.get("aggregate_timing"))
+                else ""
+            )
+            + ". "
+        )
+    family = "census" if rectangle_family(case) else "census-mixed"
+    retained = (
+        f"packing/benchmarks/measure-verifier/{family}/{case.packet}/"
+        f"{case.certificate}.execution.json"
+    )
+    return "".join(facts) + f"The execution companion is {retained}. " if facts else ""
+
+
+# These packet relationships were read in the accepted census and certificate reviews.
+# New packets must be classified explicitly, rather than inheriting an independence claim.
+SHARED_CRATE_PACKETS = frozenset(
+    {
+        "wand125-mixed-bounds-check2-2026-10-06",
+        "wand125-fine-net-lower-bounds-2026-10-16",
+    }
+)
+INDEPENDENT_MIXED_PACKETS = frozenset(
+    {
+        "wand125-point-and-mixed-2026-09-28",
+        "wand125-point-and-mixed-2026-10-01",
+        "wand125-mixed-bounds-2026-10-02",
+        "wand125-mixed-bounds-n76-2026-10-02",
+        "wand125-mixed-bounds-afternoon-2026-10-02",
+        "wand125-linear-certificates-2026-10-02",
+        "wand125-linear-n82-2026-10-02",
+        "wand125-mixed-bounds-2026-10-03",
+        "wand125-mixed-bounds-2026-10-04",
+        "wand125-mixed-bounds-evening-2026-10-04",
+        "wand125-mixed-bounds-2026-10-05",
+        "wand125-mixed-bounds-finer-net-2026-10-05",
+        "wand125-mixed-bounds-finer-net-2026-10-06",
+    }
+)
+
+
+def mixed_relationship(case: Case) -> tuple[list[str], str]:
+    """Reviewed producer relationship fields and prose for a mixed packet."""
+    if (case.packet, case.certificate) == (
+        "wand125-mixed-bounds-check2-2026-10-06",
+        "mixed_n29_L581",
+    ):
+        return ["    relationship_to_generator: independent-implementation"], (
+            "The published claim rests on the shipped C++ records of "
+            "mixed_rotated_verify.cpp; the maintained crate shares no code with that "
+            "checker (packing/sqverify_fast/INDEPENDENCE.md). The source reports a "
+            "pre-publication run of its adapted crate on this candidate, but that run has "
+            "no retained receipt. The independent-implementation relationship follows "
+            "the published C++ records, as the accepted review records in "
+            "docs/project/reviews/review-2026-10-06-wand125-check2-ten-certificates.md "
+            "(T-114 and FN-4). The theorem, net, core side, per-bin domain and threshold "
+            "are shared mathematics, so this supplies a second implementation of the "
+            "same method. "
+        )
+    if case.packet in SHARED_CRATE_PACKETS:
+        return [
+            "    relationship_to_generator: shared-components",
+            "    shared_components:",
+            (
+                "      - The sqverify_fast crate, apart from the producer's declared-net "
+                "reader; sqverify-proof-net adapts this repository's crate."
+            ),
+        ], (
+            "The producer adapted this repository's crate as sqverify-proof-net; the two "
+            "share the sqverify_fast crate apart from their declared-net readers. This "
+            "replay is not an independent full implementation or a second method. The "
+            "maintained crate's declared-net reader was written without opening the "
+            "producer's adapted source (packing/sqverify_fast/INDEPENDENCE.md, Declared Nets). "
+            "The theorem, net, core side, per-bin domain and threshold are shared. "
+        )
+    if case.packet in INDEPENDENT_MIXED_PACKETS:
+        return ["    relationship_to_generator: independent-implementation"], (
+            "It decides coverage independently of the source's checker: the crate was written "
+            "without opening it (packing/sqverify_fast/INDEPENDENCE.md) and shares no code "
+            "with it. It shares the theorem, the net, the core side, the per-bin domain "
+            "lemma and the threshold, so a defect in that mathematics would affect both: "
+            "a second implementation, not a second method. "
+        )
+    return ["    relationship_to_generator: unknown-historical"], (
+        "The relationship to the producer's checker is not recorded for this packet; "
+        "no implementation independence is claimed. "
+    )
+
+
 def scaled_control_text(index: int, run: dict[str, Any]) -> str:
     """The 99/100 control in an evidence entry: at the least-bound direction in a
     `sqverify-fast-control/v1` receipt, at every direction of the net in v2 (FC-1)."""
@@ -1282,11 +1502,12 @@ def evidence_entry(
     mass = Fraction(premises["mass_exact"])
     identifier = str(report["id"]).removesuffix("-report") + "-sqverify-fast-replay"
     packet_path = f"benchmarks/measure-verifier/census-mixed/{case.packet}/{case.certificate}"
+    relationship_fields, relationship_text = mixed_relationship(case)
     replay = (
         "From packing/, in a tree whose crate is reviewed source (.venv/bin/python3 -m "
         "devtools.sqverify_fast_census --source-digest prints its source_sha256 and exits 0; "
         f"these receipts' build is {built[:8]}..., the source at {reviewed.commit}), after "
-        "cargo build --release in sqverify_fast/ (toolchain 1.98.0): "
+        f"building sqverify_fast/ to match the retained build ({build_facts(entry)}): "
         ".venv/bin/python3 -m devtools.sqverify_fast_census --family mixed --binary "
         "sqverify_fast/target/release/sqverify-fast --out "
         f"benchmarks/measure-verifier/census-mixed --threads 2 --only {case.certificate} "
@@ -1313,7 +1534,7 @@ def evidence_entry(
         else f"the net of {directions} half-angles of step {premises['D']}"
     )
     limitations = (
-        "sqverify-fast, this repository's clean-room measure verifier, decided the retained "
+        "sqverify-fast, this repository's maintained measure verifier, decided the retained "
         f"candidate {case.certificate} at all {directions} net directions on {date}. The "
         f"receipts name the stored gzip file's SHA-256 {stored[:8]}..., which decompresses "
         f"to the SHA-256 {pinned[:8]}... the packet's acquisition record pins "
@@ -1329,17 +1550,13 @@ def evidence_entry(
         f"certified lower bound {oblique['min_certified_lower_bound']!r} at index "
         f"{oblique['r']}; "
         f"the exact capture at the least-bound leaf's centre (index {least['r']}) is "
-        f"{float(Fraction(least['exact_coverage'])):.10f}. Every direction verified, "
-        f"summary VERIFIED, exit 0, {float(entry['cpu_seconds']):,.0f} CPU seconds at "
-        f"{thread_count(entry)} and {float(entry['wall_seconds']):,.0f} seconds of wall time "
-        "on a shared "
-        "4-core x86-64 Linux container under load. The build is rustc 1.98.0, release, "
-        f"x86-64 Linux, source_sha256 {built[:8]}...: {reviewed.statement}. "
-        "It decides coverage independently of the source's checker: the crate was written "
-        "without opening it (packing/sqverify_fast/INDEPENDENCE.md) and shares no code with "
-        "it. It shares the theorem, the net, the core side, the per-bin domain lemma and the "
-        "threshold, so a defect in that mathematics would affect both: a second "
-        "implementation, not a second method. Its node counts and bounds are its own, not "
+        f"{float(Fraction(least['exact_coverage'])):.10f}. "
+        + runtime_facts(entry)
+        + execution_facts(case, out, entry)
+        + f"The build is {build_facts(entry)}, source_sha256 {built[:8]}...: "
+        f"{reviewed.statement}. "
+        + relationship_text
+        + "Its node counts and bounds are its own, not "
         "the certificate's records. "
         + scaled_control_text(receipt["index"], runs["scaled-99-100"])
         + f"and every mass scaled by {near_factor(runs['near-threshold'])} so that the exact "
@@ -1365,7 +1582,7 @@ def evidence_entry(
         "    assurance: verified",
         "    method: interval-certified",
         "    performed_by: repository",
-        "    relationship_to_generator: independent-implementation",
+        *relationship_fields,
         "    origin: replayed-here",
         "    novelty: previously-published",
         f"    source_key: '{report['source_key']}'",
@@ -1503,7 +1720,7 @@ def rectangle_evidence_entry(
         "From packing/, in a tree whose crate is reviewed source (.venv/bin/python3 -m "
         "devtools.sqverify_fast_census --source-digest prints its source_sha256 and exits 0; "
         f"this row's build is {built[:8]}..., the source at {reviewed.commit}), after "
-        "cargo build --release in sqverify_fast/ (toolchain 1.98.0): "
+        f"building sqverify_fast/ to match the retained build ({build_facts(entry)}): "
         ".venv/bin/python3 -m devtools.sqverify_fast_census --binary "
         "sqverify_fast/target/release/sqverify-fast --out "
         f"benchmarks/measure-verifier/census --threads 2 --only {case.certificate} "
@@ -1522,7 +1739,7 @@ def rectangle_evidence_entry(
     stored = str(entry["candidate_sha256"])
     pinned = hashlib.sha256(gzip.decompress(case.candidate.read_bytes())).hexdigest()
     limitations = (
-        "sqverify-fast, this repository's clean-room measure verifier, decided the retained "
+        "sqverify-fast, this repository's maintained measure verifier, decided the retained "
         f"candidate {case.certificate} at all {directions} net directions. The receipts "
         f"name the stored gzip file's SHA-256 {stored[:8]}..., which decompresses to the "
         f"SHA-256 {pinned[:8]}... the packet's README pins (devtools.retained_data check "
@@ -1539,13 +1756,12 @@ def rectangle_evidence_entry(
         f"{directions - 1} by interval branch and bound over {entry['nodes']:,} boxes, least "
         f"certified lower bound {oblique['min_certified_lower_bound']!r} at index "
         f"{oblique['r']}; the exact capture at the least-bound leaf's centre (index "
-        f"{least['r']}) is {float(Fraction(least['exact_coverage'])):.10f}. Every direction "
-        f"verified, summary VERIFIED, exit 0, {float(entry['cpu_seconds']):,.0f} CPU "
-        f"seconds at {entry['threads']} threads and {float(entry['wall_seconds']):,.0f} "
-        "seconds of wall time on a shared x86-64 Linux host, load average "
-        f"{float(entry['load_before']):.1f} when it began. The build is rustc 1.98.0, "
-        f"release, x86-64 Linux, source_sha256 {built[:8]}...: {reviewed.statement}. "
-        "It decides coverage independently of the source's checker: the crate was written "
+        f"{least['r']}) is {float(Fraction(least['exact_coverage'])):.10f}. "
+        + runtime_facts(entry)
+        + execution_facts(case, out, entry)
+        + f"The build is {build_facts(entry)}, source_sha256 {built[:8]}...: "
+        f"{reviewed.statement}. "
+        + "It decides coverage independently of the source's checker: the crate was written "
         "without opening it (packing/sqverify_fast/INDEPENDENCE.md) and shares no code with "
         "it. It shares the theorem, the net, the core side, Tokoharu's centre domain and the "
         "threshold, so a defect in that mathematics would affect both: a second "
@@ -1797,7 +2013,11 @@ def render_mixed_report(census: dict[str, Any], out: Path) -> str:
         "the least-bound leaf of the least-bound direction.",
         "*Authors' CPU* is the authors' checker's recorded CPU seconds on the directions this",
         "repository replayed; *ours, same directions* is `sqverify-fast`'s thread CPU on",
-        "exactly those directions. CPU on a shared host whose load average is given.",
+        "exactly those directions. Per-direction CPU is unavailable unless every compared",
+        "direction has a reading; the native summary's zero does not supply missing readings.",
+        "It is `-` where nothing was compared.",
+        "*CPU s, all directions* is aggregate process CPU from `wait4` (user plus system),",
+        "separate from the direction readings. Load is given only where recorded.",
         "*Control* is the status of the `--control` receipt on the certificate itself, where",
         "one is kept: the original verified again and a near-threshold mutant refused at its",
         "least-bound direction, and the 99/100 mutant refused at one direction at least,",
@@ -1819,21 +2039,23 @@ def render_mixed_report(census: dict[str, Any], out: Path) -> str:
             mixed_reference(case) if case is not None else {"directions": []}
         )
         replayed = reference["directions"]
-        ours = sum(
-            float((entry.get("direction_cpu_seconds") or {}).get(str(r)) or 0.0)
-            for r in replayed
-        )
+        ours = direction_cpu(entry, replayed)
         authors = float(reference.get("cpu_seconds") or 0.0)
         span = (
             f"all {len(replayed)}"
             if case is not None and len(replayed) == net_directions(case)
             else ", ".join(str(r) for r in replayed) or "none: first complete check here"
         )
-        if not reference.get("per_direction_cpu", True):
-            ours = 0.0
+        # Nothing is compared where no direction was replayed or the authors' replay kept
+        # no per-direction CPU: that cell is "-", and "unavailable" means a compared
+        # direction lacks our reading.
+        compared = bool(replayed) and reference.get("per_direction_cpu", True)
+        if not compared:
+            ours = None
         least = entry.get("least_bound_leaf_exact") or {}
-        cpu = float(entry.get("cpu_seconds") or 0.0)
-        total_cpu += cpu
+        cpu = recorded_seconds(entry.get("cpu_seconds"))
+        total_cpu += cpu if cpu is not None else 0
+        load = recorded_seconds(entry.get("load_before"))
         verified += entry.get("status") == "VERIFIED"
         cells = [
             f"`{name}`",
@@ -1844,12 +2066,12 @@ def render_mixed_report(census: dict[str, Any], out: Path) -> str:
             f"{entry.get('nodes'):,}",
             str(entry.get("least_certified_bound")),
             "clears" if least.get("clears_threshold") else "FAILS",
-            f"{cpu:.1f}",
-            f"{float(entry.get('load_before') or 0.0):.1f}",
+            f"{cpu:.1f}" if cpu is not None else "unavailable",
+            f"{load:.1f}" if load is not None else "unavailable",
             span,
             f"{authors:,.0f}" if authors > 0 else "-",
-            f"{ours:.1f}" if ours > 0 else "-",
-            f"{authors / ours:,.0f}x" if ours > 0 and authors > 0 else "-",
+            f"{ours:.1f}" if ours is not None else ("unavailable" if compared else "-"),
+            f"{authors / ours:,.0f}x" if ours is not None and ours > 0 and authors > 0 else "-",
             (control_status(case, out) or "-") if case is not None else "-",
         ]
         lines.append("| " + " | ".join(cells) + " |")
@@ -1857,7 +2079,7 @@ def render_mixed_report(census: dict[str, Any], out: Path) -> str:
         "",
         (
             f"{verified} of {len(census['cases'])} certificates verified;"
-            f" {total_cpu:.0f} CPU seconds in all."
+            f" {total_cpu:.0f} recorded aggregate process CPU seconds in all."
         ),
         "",
         "<!-- This document follows common-doc-guidelines.md.",
@@ -1917,7 +2139,12 @@ def summary_rows() -> list[dict[str, Any]]:
                     "threshold": entry.get("threshold") or census.get("threshold"),
                     "least_certified_bound": entry.get("least_certified_bound"),
                     "least_leaf_exact_clears": least.get("clears_threshold") is True,
-                    "cpu_seconds": round(float(entry.get("cpu_seconds") or 0.0), 1),
+                    "cpu_seconds": (
+                        round(cpu, 1)
+                        if (cpu := recorded_seconds(entry.get("cpu_seconds"))) is not None
+                        else None
+                    ),
+                    "direction_cpu_seconds": direction_cpu(entry),
                     "nodes": entry.get("nodes"),
                     "authors_replay_here": replay,
                     "first_complete_check_here": verified and replay != "complete",
@@ -1952,12 +2179,16 @@ def render_summary(rows: list[dict[str, Any]]) -> str:
         "this repository holds of a replay by the authors' own checker; where it holds less",
         "than a complete replay, this census is the first complete check of the certificate",
         "here, which the last column says.",
+        "CPU is aggregate native process CPU from `wait4`; direction CPU is summed only",
+        "when every direction has a reading. Missing readings are unavailable, including",
+        "native summaries that record zero because the platform supplies no direction CPU.",
         "",
         (
-            "| Certificate | Format | n | L | Verdict | CPU s | Least certified bound"
+            "| Certificate | Format | n | L | Verdict | CPU s | Direction CPU s"
+            " | Least certified bound"
             " | Authors' replay here | First complete check here |"
         ),
-        "| --- | --- | ---: | --- | --- | ---: | --- | --- | --- |",
+        "| --- | --- | ---: | --- | --- | ---: | ---: | --- | --- | --- |",
     ]
     for row in rows:
         cells = [
@@ -1966,7 +2197,12 @@ def render_summary(rows: list[dict[str, Any]]) -> str:
             str(row["n"]),
             str(row["L"]),
             str(row["verdict"]),
-            f"{row['cpu_seconds']:.1f}",
+            f"{row['cpu_seconds']:.1f}"
+            if row.get("cpu_seconds") is not None
+            else "unavailable",
+            f"{row['direction_cpu_seconds']:.1f}"
+            if row.get("direction_cpu_seconds") is not None
+            else "unavailable",
             str(row["least_certified_bound"]),
             str(row["authors_replay_here"]),
             "yes" if row["first_complete_check_here"] else "no",

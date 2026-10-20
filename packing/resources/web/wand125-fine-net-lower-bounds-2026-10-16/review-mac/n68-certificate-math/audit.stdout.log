@@ -1,0 +1,6 @@
+{"event": "bindings_passed", "directions": 201, "refusal_points": 197}
+{"event": "exact_refusals", "completed": 40}
+{"event": "exact_refusals", "completed": 80}
+{"event": "exact_refusals", "completed": 120}
+{"event": "exact_refusals", "completed": 160}
+{"status": "PASS", "output": ".codex/intake-resume-20261019/n68-certificate-math/audit-result.json", "wall_seconds": 6.063, "refusals": 197, "positive_capture": 1.084025519789846, "near_witness_capture": 0.9543436150506317, "negative_audits": 3}

@@ -1,0 +1,13 @@
+{
+  "base": "e062abfacfef60aa160ccd7b177c5b29eb31c2f8",
+  "derived_rungs": {"T-205":["V3","C3"],"T-206":["V3","C3"],"T-207":["V3","C3"]},
+  "existing_census_rows_preserved": 87,
+  "existing_record_changes": {"packing/campaign/result-requests.yaml":[603,680],"packing/frontier/evidence.yaml":["E-wand125-fine-net-n68-853-report","E-wand125-fine-net-n84-94225-report","E-wand125-fine-net-n85-9475-report"],"packing/frontier/results.yaml":["T-205","T-206","T-207"]},
+  "full_integration_validation": "held by W44; coordinator owns required final gates",
+  "mapped_review_link_problems": [],
+  "retained_file_comparisons": 73,
+  "retained_source_bytes": 2855831,
+  "scope": "records preparation only; no native replay or exact reintegration performed",
+  "selected_case_checks": [{"authentic_audit_refusal_fractions_bound":197,"capture_directions":201,"capture_outer_exit":null,"control_refusals":197,"direction_cpu":"unavailable","n":68,"native_exit":0,"verified_mutant_directions":[46,47,48,49]},{"authentic_audit_refusal_fractions_bound":201,"capture_directions":201,"capture_outer_exit":0,"control_refusals":201,"direction_cpu":"unavailable","n":84,"native_exit":0,"verified_mutant_directions":[]},{"authentic_audit_refusal_fractions_bound":201,"capture_directions":201,"capture_outer_exit":0,"control_refusals":201,"direction_cpu":"unavailable","n":85,"native_exit":0,"verified_mutant_directions":[]}],
+  "selected_json_schema_problems": []
+}

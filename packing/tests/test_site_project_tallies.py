@@ -250,16 +250,17 @@ def test_a_tally_link_selects_exactly_its_projects_rows(
     assert not re.search(r"<tr id=\"t-\d+\"[^>]*\shidden", results)
     bar = results.split('<div class="site-table-tools site-result-filters">', 1)[1]
     bar = bar.split("</div>", 1)[0]
-    assert bar.count("<label hidden>") == 2
+    assert bar.count("<label hidden>") == 4
     assert (
         '<label hidden>Project <select data-filter="project" data-bound="has" data-preset>'
         in bar
     )
     assert '<label hidden>At significance <select data-filter="s" data-preset>' in bar
+    assert '<label hidden>Added on <select data-filter="added" data-preset>' in bar
     # The bar's own controls keep their order, and the preset-only ones follow them.
     order = re.findall(r'data-filter="([a-z]+)"', bar)
-    own = ["s", "v", "c", "kind", "status", "current", "source", "n", "date"]
-    assert order == [*own, "project", "s"]
+    own = ["s", "v", "c", "kind", "status", "current", "source", "n", "date", "added"]
+    assert order == [*own, "project", "s", "added", "added"]
 
 
 class _Nesting(HTMLParser):
@@ -375,7 +376,14 @@ def test_following_a_cards_links_shows_the_rows_they_count(
     assert sorted(found["shown"]) == own
     assert found["total"] == total
     assert found["count"] == overview_sections.count_text(len(own), total)
-    project, exact = found["presets"]
+    project, exact, added = found["presets"]
+    assert added == {
+        "filter": "added",
+        "value": "",
+        "choice": "All",
+        "label": "Added on",
+        "out": True,
+    }
     assert project == {
         "filter": "project",
         "value": slug,
@@ -406,6 +414,7 @@ def test_following_a_cards_links_shows_the_rows_they_count(
         assert [(preset["value"], preset["out"]) for preset in found["presets"]] == [
             (slug, False),
             (str(level), False),
+            ("", True),
         ]
         assert found["presets"][1]["choice"] == f"S{level}"
         opened.select_option('select[data-filter="project"]', "")
@@ -422,4 +431,5 @@ def test_following_a_cards_links_shows_the_rows_they_count(
     assert [(preset["value"], preset["out"]) for preset in cleared["presets"]] == [
         ("", True),
         (str(level), False),
+        ("", True),
     ]

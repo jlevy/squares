@@ -4058,6 +4058,88 @@ verifiers:
       native control poses and one of 32 source control poses, not five entire
       direction domains. The accepted bounded review is docs/project/reviews/review-2026-10-18-n108-fine-net-mathematics-max.md.
 
+  - id: V-fine-net-mac-review-exact
+    program: Historical fine-net Mac exact-checkpoint audits and analytical geometry controls
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: premises
+    summary: >-
+      Recomputes exact rectangle-measure premises and saved native positive/refusal witness
+      captures for the accepted n68,n84,n85 checkpoints; validates receipt inventories and
+      execution/timing bindings. Analytical geometry fixtures and negative in-memory receipt
+      mutations constrain the auditor. It decides no universal coverage or lower bound
+      alone.
+    source:
+      - >-
+        packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/n68-certificate-math/audit_checkpoint.py.txt
+      - >-
+        packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/n68-certificate-math/exact_geometry.py.txt
+      - >-
+        packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/n68-certificate-math/check_geometry.py.txt
+      - >-
+        packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/n84-n85-certificate-math/audit_checkpoint.py.txt
+    versions:
+      - sha256: e5ce398a0ff0a53ac745763bd37542d03fe0657e2d3197ac00291cc9ab9fa51f
+        path: >-
+          packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/n68-certificate-math/audit_checkpoint.py.txt
+        note: >-
+          Verbatim historical source actually executed by the accepted mathematical reviews;
+          preserved as text, not changed to fit the current source tree.
+      - sha256: 820a8d4f127432f66dfffca0f910dc74125905365bd4fd3c2a0baaa76d264b59
+        path: >-
+          packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/n68-certificate-math/exact_geometry.py.txt
+        note: >-
+          Verbatim historical source actually executed by the accepted mathematical reviews;
+          preserved as text, not changed to fit the current source tree.
+      - sha256: 341c67802544d5ac5f6c132e7664da465660c736e9ca516ca1fa222e3c8f4718
+        path: >-
+          packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/n68-certificate-math/check_geometry.py.txt
+        note: >-
+          Verbatim historical source actually executed by the accepted mathematical reviews;
+          preserved as text, not changed to fit the current source tree.
+      - sha256: 05a48f157987a92b1a021e56156c594c4b9ae993b82ec6ed4121c17b39e699b9
+        path: >-
+          packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/n84-n85-certificate-math/audit_checkpoint.py.txt
+        note: >-
+          Verbatim historical source actually executed by the accepted mathematical reviews;
+          preserved as text, not changed to fit the current source tree.
+    independence_record: >-
+      packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/README.md
+    independence:
+      read:
+        - mathematics
+        - proof-text
+        - specification
+        - certificate-format
+        - producer-code
+        - producer-output
+        - earlier-review
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Codex (OpenAI)
+          setting: >-
+            Separately prompted strongest-tier certificate mathematics lanes at maximum
+            reasoning; n84/n85 reuse the retained n68 helper and geometry source.
+      overlaps_producer:
+        extent: unknown
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The producer discloses AI assistance without identifying every authoring system.
+          These point-audit programs share no producer code, but their authors read
+          maintained code and earlier reviews. The two-case driver reuses the n68
+          helper/import closure; this is explicit reuse within the registered audit, not
+          another universal implementation.
+    note: >-
+      The original import closure, read logs, historical commands, failed diagnostic and
+      authentic PASS receipts are retained in review-mac/README.md. No audit was rerun
+      during records preparation; historical source-context comparisons are recorded
+      observations, not gates on current Git/source identity.
+
   - id: V-sq19-review-endpoint
     program: check_endpoint.py
     author: Squares Project (Levy)

@@ -205,6 +205,7 @@ def register(source: packets.Source, result: str) -> None:
                 "id": result,
                 "kind": "upper-bound",
                 "registered": DAY,
+                "landed": DAY,
                 "headline": (
                     "Exact rational ceiling refinements at n = "
                     f"{', '.join(map(str, source.numbers))}"

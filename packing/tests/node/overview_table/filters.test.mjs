@@ -122,6 +122,19 @@ function page({ search = "", hash = "", age = "", hide = false, today = "2026-10
     ),
     row("t-005", { ...superseded, ...both, v: "4", c: "4", s: "4", n: "45", date: "2026-09-27" }),
   ];
+  // The day the register took each row in (`data-added`), which is not its date: t-003,
+  // dated 1979, was added on 1 October, and t-001 and t-002 the day before.
+  /** @type {Record<string, string>} */
+  const added = {
+    "t-001": "2026-09-30",
+    "t-002": "2026-09-30",
+    "t-003": "2026-10-01",
+    "t-004": "2026-09-27",
+    "t-005": "2026-10-01",
+  };
+  for (const entry of rows) {
+    entry.dataset.added = added[entry.id] ?? "";
+  }
   const controls = {
     s: new Select("s", "min", "4"),
     v: new Select("v", "min", ""),
@@ -131,10 +144,13 @@ function page({ search = "", hash = "", age = "", hide = false, today = "2026-10
     source: new Select("source", null, ""),
     n: new Input("n", "covers", ""),
     age: new Input("date", "age", age),
+    added: new Input("added", "age", ""),
     project: new Preset("project", "has", ""),
     exact: new Preset("s", null, ""),
+    day: new Preset("added", null, ""),
+    since: new Preset("added", "since", ""),
   };
-  const presets = [controls.project, controls.exact];
+  const presets = [controls.project, controls.exact, controls.day, controls.since];
   const count = { textContent: "2 of 5 results", getAttribute: () => "results" };
   /** @type {Record<string, (() => void)[]>} */
   const listeners = { change: [], hashchange: [], click: [] };
@@ -385,6 +401,50 @@ void test("a link can open the table on one project's results, at one significan
   assert.equal(exact.count.textContent, "5 results");
   assert.equal(exact.controls.project.label.hidden, true);
   assert.equal(exact.controls.exact.label.hidden, true);
+});
+
+void test("a link can open the table on what the register took in, by age or on one day", () => {
+  // `added-age` is the age of a row's registration, apart from Max age's `age`: on
+  // 1 October, `added-age=1` keeps the rows added that day or the day before, t-003
+  // among them though it is dated 1979, and `added-age=0` that day's alone.
+  const lastDay = page({ search: "?s-min=&added-age=1" });
+  assert.equal(lastDay.controls.added.value, "1");
+  assert.equal(lastDay.controls.age.value, "");
+  assert.deepEqual(lastDay.shown().rows, ["t-001", "t-002", "t-003", "t-005"]);
+  assert.equal(lastDay.count.textContent, "4 of 5 results");
+  assert.deepEqual(page({ search: "?s-min=&added-age=0" }).shown().rows, ["t-003", "t-005"]);
+  // The two ages compose, and Max age's parameter leaves the Added control alone.
+  const both = page({ search: "?s-min=&age=30&added-age=1" });
+  assert.equal(both.controls.added.value, "1");
+  assert.equal(both.controls.age.value, "30");
+  assert.deepEqual(both.shown().rows, ["t-001", "t-005"]);
+  assert.equal(page({ search: "?s-min=&age=30" }).controls.added.value, "");
+  // An age of registration is measured from the reader's day, as an age of the date is.
+  assert.deepEqual(page({ search: "?s-min=&added-age=1", today: "2026-10-02" }).shown().rows, [
+    "t-003",
+    "t-005",
+  ]);
+  // `added` names the preset-only day: that day's rows alone, and the control in the bar
+  // while it filters; set back to all, it passes every row and leaves the bar again.
+  const day = page({ search: "?s-min=&added=2026-09-30" });
+  assert.equal(day.controls.day.value, "2026-09-30");
+  assert.equal(day.controls.added.value, "");
+  assert.deepEqual(day.shown().rows, ["t-001", "t-002"]);
+  assert.equal(day.controls.day.label.hidden, false);
+  day.choose({ day: "" });
+  assert.equal(day.controls.day.label.hidden, true);
+  assert.equal(day.count.textContent, "5 results");
+  // `added-since` names the preset-only first day of a run, the seven days' heading's
+  // link: the rows that arrived on it or later, whatever the reader's day, and the
+  // control in the bar while it filters.
+  const since = page({ search: "?s-min=&added-since=2026-09-30", today: "2026-10-09" });
+  assert.equal(since.controls.since.value, "2026-09-30");
+  assert.deepEqual(since.shown().rows, ["t-001", "t-002", "t-003", "t-005"]);
+  assert.equal(since.controls.since.label.hidden, false);
+  assert.equal(since.count.textContent, "4 of 5 results");
+  since.choose({ since: "" });
+  assert.equal(since.controls.since.label.hidden, true);
+  assert.equal(since.count.textContent, "5 results");
 });
 
 void test("a link can open the table filtered, by each control's parameter", () => {

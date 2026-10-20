@@ -300,6 +300,9 @@ action for each are in [`frontier/RESULTS.md`](packing/frontier/RESULTS.md); the
 | [T-183](packing/frontier/RESULTS.md) | 237 | `V3` | `C3` | `S3` | `previously-published` | One complete rational source certificate reports a finite upper-bound improvement at the exact side it states: s(237) <= 15.902705057866366799436476453482. |
 | [T-189](packing/frontier/RESULTS.md) | 237 | `V3` | `C3` | `S3` | `previously-published` | One complete rational source certificate reports a finite upper-bound improvement at the exact side it states: s(237) <= 12163897896660350527924222391/764899771970500000000000000. |
 | [T-197](packing/frontier/RESULTS.md) | 155 | `V3` | `C3` | `S3` | `previously-published` | One complete rational source certificate reports a finite upper-bound improvement at the exact side it states: s(155) <= 2590452188930112807053435932173/200000000000000000000000000000. |
+| [T-205](packing/frontier/RESULTS.md) | 68 | `V3` | `C3` | `S3` | `previously-published` | A rectangle measure of wand125/square-packing, published on 16 October 2026 and reported in jlevy/squares#446, proves s(68) >= 853/100 = 8.53. |
+| [T-206](packing/frontier/RESULTS.md) | 84 | `V3` | `C3` | `S3` | `previously-published` | A rectangle measure of wand125/square-packing, published on 16 October 2026 and reported in jlevy/squares#446, proves s(84) >= 3769/400 = 9.4225. |
+| [T-207](packing/frontier/RESULTS.md) | 85 | `V3` | `C3` | `S3` | `previously-published` | A rectangle measure of wand125/square-packing, published on 16 October 2026 and reported in jlevy/squares#446, proves s(85) >= 379/40 = 9.475. |
 | [T-216](packing/frontier/RESULTS.md) | 108 | `V3` | `C3` | `S3` | `previously-published` | A rectangle measure of wand125/square-packing, published on 16 October 2026 and reported in jlevy/squares#446, proves s(108) >= 531/50 = 10.62. |
 | [T-218](packing/frontier/RESULTS.md) | 236 | `V3` | `C3` | `S3` | `previously-published` | One complete rational source certificate reports a finite upper-bound improvement at the exact side it states: s(236) <= 15.861934390607358617243798571394. |
 | [T-219](packing/frontier/RESULTS.md) | 271 | `V3` | `C3` | `S3` | `previously-published` | One complete rational source certificate reports a finite upper-bound improvement at the exact side it states: s(271) <= 16.948947733713657510723401112423. |
@@ -325,9 +328,6 @@ action for each are in [`frontier/RESULTS.md`](packing/frontier/RESULTS.md); the
 | [T-202](packing/frontier/RESULTS.md) | 41 | `V0` | `C0` | `S3` | `previously-published` | A rectangle measure of wand125/square-packing, published on 16 October 2026 and reported in jlevy/squares#446, is reported to prove s(41) >= 2721/400 = 6.8025. |
 | [T-203](packing/frontier/RESULTS.md) | 43 | `V0` | `C0` | `S3` | `previously-published` | A rectangle measure of wand125/square-packing, published on 16 October 2026 and reported in jlevy/squares#446, is reported to prove s(43) >= 2777/400 = 6.9425. |
 | [T-204](packing/frontier/RESULTS.md) | 51 | `V0` | `C0` | `S3` | `previously-published` | A rectangle measure of wand125/square-packing, published on 16 October 2026 and reported in jlevy/squares#446, is reported to prove s(51) >= 3011/400 = 7.5275. |
-| [T-205](packing/frontier/RESULTS.md) | 68 | `V0` | `C0` | `S3` | `previously-published` | A rectangle measure of wand125/square-packing, published on 16 October 2026 and reported in jlevy/squares#446, is reported to prove s(68) >= 853/100 = 8.53. |
-| [T-206](packing/frontier/RESULTS.md) | 84 | `V0` | `C0` | `S3` | `previously-published` | A rectangle measure of wand125/square-packing, published on 16 October 2026 and reported in jlevy/squares#446, is reported to prove s(84) >= 3769/400 = 9.4225. |
-| [T-207](packing/frontier/RESULTS.md) | 85 | `V0` | `C0` | `S3` | `previously-published` | A rectangle measure of wand125/square-packing, published on 16 October 2026 and reported in jlevy/squares#446, is reported to prove s(85) >= 379/40 = 9.475. |
 | [T-208](packing/frontier/RESULTS.md) | 86 | `V0` | `C0` | `S3` | `previously-published` | A rectangle measure of wand125/square-packing, published on 16 October 2026 and reported in jlevy/squares#446, is reported to prove s(86) >= 3811/400 = 9.5275. |
 | [T-209](packing/frontier/RESULTS.md) | 88 | `V0` | `C0` | `S3` | `previously-published` | A rectangle measure of wand125/square-packing, published on 16 October 2026 and reported in jlevy/squares#446, is reported to prove s(88) >= 3853/400 = 9.6325. |
 | [T-210](packing/frontier/RESULTS.md) | 89 | `V0` | `C0` | `S3` | `previously-published` | A rectangle measure of wand125/square-packing, published on 16 October 2026 and reported in jlevy/squares#446, is reported to prove s(89) >= 1937/200 = 9.685. |
@@ -682,6 +682,9 @@ case or experiment separately.
 | Document or collection | Role | Authority | Lifecycle | Current replacement |
 | --- | --- | --- | --- | --- |
 | [Review: Evan Daniel’s Upper-Bound Imports of 16 to 18 October (#659, #664, #669, #674)](docs/project/reviews/review-2026-10-19-upper-bound-imports-659-664-669-674.md) | dated review record | record | retained | — |
+| [Completed n68 Fine-Net Certificate: Mathematical Review](docs/project/reviews/review-2026-10-19-n68-fine-net-mathematics.md) | dated review record | record | retained | — |
+| [Fine-Net Mac Arithmetic and Capture Review](docs/project/reviews/review-2026-10-19-fine-net-mac-arithmetic.md) | dated review record | record | retained | — |
+| [Completed n84 and n85 Fine-Net Certificates: Mathematical Review](docs/project/reviews/review-2026-10-19-n84-n85-fine-net-mathematics.md) | dated review record | record | retained | — |
 | [Review: Evan Daniel’s Exact Algebraic Sides at Sixteen Counts (#639, T-193)](docs/project/reviews/review-2026-10-16-evand-exact-sides-639.md) | dated review record | record | retained | — |
 | [PR #665 Integration Diagnostic and Custody Retention](docs/project/reviews/review-2026-10-19-pr665-integration-diagnostic.md) | dated review record | record | retained | — |
 | [PR #671 Integration Review Diagnostic](docs/project/reviews/review-2026-10-19-pr671-integration-diagnostic.md) | dated review record | record | retained | — |
@@ -835,6 +838,7 @@ case or experiment separately.
 | [Feature: A Static, Crawlable Site with a Registered URL Scheme](docs/project/specs/done/plan-2026-10-06-site-urls-seo-performance.md) | implementation plan | record | retained | — |
 | [Feature: Compact Homepage, Consistent Case Layouts, and Scroll-Aware Navigation](docs/project/specs/active/plan-2026-10-08-site-layout-and-navigation.md) | implementation plan | current | transient | — |
 | [Feature: A Shorter Website Development Loop](docs/project/specs/active/plan-2026-10-10-website-development-loop.md) | implementation plan | current | transient | — |
+| [Feature: Recent Results on the Results Page](docs/project/specs/active/plan-2026-10-11-results-recent-overview.md) | implementation plan | current | transient | — |
 | [Feature: One Documentation Layout Under `docs/project/`](docs/project/specs/active/plan-2026-10-11-documentation-organization.md) | implementation plan | current | transient | — |
 | [Proof Review: squarepacker’s k^2 - M(k) >= 0.033 log k](docs/project/reviews/review-2026-10-05-squarepacker-k2-minus-c.md) | dated review record | record | retained | — |
 | [Delta Proof Review: Ryu’s k² − M(k) Bound, Version 1.2](docs/project/reviews/review-2026-10-08-squarepacker-k2-minus-c-v12.md) | dated review record | record | retained | — |
@@ -1179,6 +1183,7 @@ case or experiment separately.
 | [Native n17 Branch-and-Bound Benchmark](packing/benchmarks/n17-bb-native/README.md) | component scope and use | supporting | maintained | — |
 | [Milestone A Census](packing/benchmarks/measure-verifier/census/README.md) | generated status view | generated | generated | — |
 | [Milestone B Census](packing/benchmarks/measure-verifier/census-mixed/README.md) | generated status view | generated | generated | — |
+| [Accepted Mac Checkpoints: n68, n84 and n85](packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-2026-10-16/README.md) | source retention and archive policy | record | retained | — |
 | [Census Summary](packing/benchmarks/measure-verifier/census-summary.md) | generated status view | generated | generated | — |
 | [Whole `rect_n32_L595`: c2 Against verify.cpp](packing/benchmarks/measure-verifier/experiments/exp-006-whole-certificate-n32.md) | research synthesis | record | retained | — |
 | [H-005: One Error Budget per Edge](packing/benchmarks/measure-verifier/experiments/exp-007-h005-error-budget.md) | research synthesis | record | retained | — |
