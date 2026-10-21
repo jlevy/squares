@@ -3,9 +3,9 @@ type: is
 id: is-01m5ftsx292fked2gcgpkv6a5x
 title: Audit profile coverage against significant results and PDF credits
 kind: task
-status: closed
+status: in_progress
 priority: 2
-version: 9
+version: 11
 delegate: profiles-data-integration
 labels: []
 dependencies: []
@@ -19,10 +19,10 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-21T18:15:32.680Z
-updated_at: 2026-10-21T20:21:47.091Z
+updated_at: 2026-10-21T20:32:24.997Z
 started_at: 2026-10-21T18:15:42.083Z
-closed_at: 2026-10-21T20:21:47.091Z
-close_reason: Scoped profile model, identity audit and integration regressions are implemented and verified in PR 578 at 7b566ae73. Final local receipts are recorded in each bead. Exhaustive PDF coverage, historical registrations and other explicit follow-ups remain separate; overall hosted CI remains pending.
+closed_at: null
+close_reason: null
 resolution: null
 duplicate_of: null
 ---
@@ -35,3 +35,5 @@ The approved bounded coverage audit is complete. The reusable profile_coverage C
 This closure does not claim an exhaustive PDF credit census: 146 full-PDF inspections remain pending under the open population work think-m7il. Historical mathematical registration review remains separate under think-jtp4; source-claim projection, dated contributions and unresolved identity exceptions remain explicitly tracked by think-mdb2, think-0ltn and think-0v9j.
 
 Final integration receipt: commit 7b566ae73 is pushed to https://github.com/jlevy/squares/pull/578. The final rerun covered 77 previously failing cases: 76 passed in 166.02 seconds; the remaining quote-parser case was fixed and passed separately in 8.05 seconds. The coordinator reports all 68 other selected checks, the complete 121-test module run, 53 UI checks and the browser floor clean. Hosted CI remains pending under think-zpfo.
+
+Reopened: The bounded PR 578 audit is complete, but this coverage parent has unfinished children, including think-0ltn. Keep the parent live until those follow-ups are resolved; preserve all completed-work receipts and child states.
