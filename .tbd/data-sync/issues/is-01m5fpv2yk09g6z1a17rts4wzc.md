@@ -5,7 +5,7 @@ title: Integrate profile UX work with current PR and prepare final review handof
 kind: task
 status: in_progress
 priority: 2
-version: 32
+version: 35
 delegate: profiles-pr-coordinator
 labels: []
 dependencies: []
@@ -37,14 +37,15 @@ child_order_hints:
   - is-01m5fwv4cnnm68c35kmfne4wce
   - is-01m5fxpvywfbye3f5gksgzsvzt
   - is-01m5fy05g8n1q6rksv7pntnrxe
+  - is-01m5g022qevmw4aefxb2w4nn62
 hold: null
 hold_until: null
 created_at: 2026-10-21T17:06:17.155Z
-updated_at: 2026-10-21T19:11:23.645Z
+updated_at: 2026-10-21T19:47:23.500Z
 started_at: 2026-10-21T17:06:34.736Z
 ---
 Preserve current remote PR578 changes; commit local profile UX/model changes, integrate latest PR branch/main as needed, validate, push reviewable PR and handoff without merging.
 
 ## Notes
 
-Stable 75-profile integration committed with normal hooks at a7b61b25a; Accounts/Resources and muted significance tallies live at 8790. Complete site build and all four PDFs passed; profile URI targets valid. Results remain all 213 primary-authored IDs and Credits 701 person/result pairs. User clarified Records includes all result families, strict numerical improvements, optimality proofs and formalizations. Shared classifier and renderer integration in progress under think-lekx; explicit unresolved priority/family scope shown as review pending. Frits Gobel full display name and Lewis X account fixed under think-x43w; formalization already in schema and Results/News tags. Lewis support roles/resource membership follow-up underway. Fresh origin/main 7eeab1f5e adds Evan Daniel n343 beyond-horizon source and snapshot selection; merge after current checkpoint, then reconcile new source joins and release history. Final integrated build, push gate, hosted CI, PR update and handoff remain pending. Historical result registrations and full 146-PDF inspection remain separate tracked work. Do not merge PR or deploy.
+Final preview live in Arc from site-integrated-reviewed;7293publication checks,1143URL rows and692-page name audit pass; fourPDFs have7/8/8/25 valid profile annotations after title-free footnote fix15cbd2742. Plan committed d4770d02b. Formalization confirmed in existing ontology/schema/shared kind filters. First push gate:66of69steps pass; type binding and doc map failures fixed and reruns pass; behavioral suite timed out900s without verdict. Rerunning final whole gate with explicit1800s cap and retained artifacts (dynamic reachable step cannot be selected alone). Log profiles-final-push-rerun.log in external scratch; session17337. Read-only data agent monitors diagnostics. Push, hosted CI and PR handoff pending; no merge/deployment. All historical population/registration and family-frontier followups remain separate.
