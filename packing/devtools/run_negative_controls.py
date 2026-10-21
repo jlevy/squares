@@ -246,15 +246,15 @@ HISTORICAL_SNAPSHOT_OUTPUTS = frozenset(
 # `closeout.changes` path names one. Kept on those grounds: session-186's validation
 # disposition (a closeout path), the series' top-level `results/*.jsonl` (the
 # basin-events step globs them), and each experiment's descriptor, README and
-# mechanical summary. Kept because a test here pins them in workers: exp-140's
-# canonical cover, whose stdout twin left on 2026-10-07, and Session 105's four source
-# identities. With them left out, all 174 controls fire at `-j 2`, and each of the 50
-# distinct commands, run unmutated in a worker with them and in one without them,
-# prints the same output apart from wall times and the runner-preflight lease
-# timestamp; the four already red (the full suite, `validate_schemas`, the
+# mechanical summary. Kept because `tests/test_negative_controls.py` pins them in
+# workers: exp-140's canonical cover, whose stdout twin left on 2026-10-07, and Session
+# 105's four source identities. With the 220 left out, all 174 controls fire at `-j 2`,
+# and each of the 50 distinct commands, run unmutated in a worker with them and in one
+# without them, prints the same output apart from wall times and the runner-preflight
+# lease timestamp; the four already red (the full suite, `validate_schemas`, the
 # operating-rules append script and `test_change_scoped_selection`) are red
-# identically. Left out, with this note, the snapshot measures 229,889,861 bytes,
-# 2,894,011 under the cap.
+# identically. Left out, with this note and its release record, the snapshot measures
+# 229,891,287 bytes, 2,892,585 under the cap.
 UNREAD_WORKER_OUTPUTS = frozenset(
     {
         *(

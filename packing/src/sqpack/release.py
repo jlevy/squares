@@ -5907,6 +5907,36 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "source-reviewed disposition; the render comparison above predates the cut."
         ),
     ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+            "site",
+        ),
+        paths=("packing/devtools/run_negative_controls.py",),
+        outputs=(
+            "development.html",
+            "index.html",
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The runner's `UNREAD_WORKER_OUTPUTS` gains 220 historical files that mutation "
+            "workers no longer copy, and the snapshot log gains an entry (think-bl1p). The "
+            "import path is the one recorded for think-b6ir: the runner enters the "
+            "builders' import closure only through `upper_bound_houses.custody`, and no "
+            "builder calls it or reads which files a worker copies. No render was taken, "
+            "and every component keeps its version."
+        ),
+    ),
 )
 
 
