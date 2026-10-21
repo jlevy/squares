@@ -14153,7 +14153,7 @@ issues:
       88385abc95ab25d520302282d1946cbb07bc9cf3, committed 2026-10-20T21:47:03Z and the repository's
       head when read; the commit also adds #702's s343_sw files, which are that issue's import. The
       issue has no comments. The certificate is below every report at 270 the record holds or has
-      pending: the case's T-174 and T-151 (#500), Mishapolk's 70a033f and #593 by 3.47e-5, #573
+      pending: the case's T-174 and T-151 (#500), Mishapolk's KKT census and #593 by 3.47e-5, #573
       and T-140 (#488) by 1.61e-3, T-136 (#481) by 1.62e-3, T-134, T-130 and T-138 by 8.56e-3, and
       T-119, T-098 and T-056 by 9.6e-3; no other open report through #703 states a bound at 270,
       so the report-order rule records it. The result is numbered T-224 because open PR #701

@@ -30,7 +30,9 @@ SIDE = Fraction(16928162252196750114897964982713, 10**30)
 #: The SHA-256 digests issue #703 prints for the certificate and its regularized view.
 PRINTED_DIGESTS = {
     f"{STEM}.cert": "a01114af338f092232c0b7de07bfd164a636ef6355e15259c7fcb5812aa6034f",
-    f"{STEM}_regularized.cert": "776433d8e89b43727dc9da72096fb581b8f4ec4c619732c637bc0d14be8bad30",
+    f"{STEM}_regularized.cert": (
+        "776433d8e89b43727dc9da72096fb581b8f4ec4c619732c637bc0d14be8bad30"
+    ),
 }
 #: The certificate's margin below T-174, the case ceiling it would replace, bracketed in
 #: units of 10^-12.
@@ -74,7 +76,7 @@ def test_the_side_is_its_kkt_point_scaled_by_1e20_and_rounded_up_at_30_places() 
     head = (_folder() / f"{STEM}.exact.txt").read_text("utf-8").split("\n")[0]
     count, kkt = head.split()
     assert int(count) == N
-    assert SIDE == _ceil_at(Fraction(Decimal(kkt)) * (1 + Fraction(1, 10**20)), 30)
+    assert _ceil_at(Fraction(Decimal(kkt)) * (1 + Fraction(1, 10**20)), 30) == SIDE
     regularized = (_folder() / f"{STEM}_regularized.cert").read_bytes()
     assert reports.evand_cert(regularized, N, {}).side == SIDE
 

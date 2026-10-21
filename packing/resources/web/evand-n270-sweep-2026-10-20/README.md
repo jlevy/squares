@@ -99,7 +99,7 @@ side from its own retained packet or, for T-056, from its binary64 print:
 | --- | --- | --- |
 | `T-174` (PR #574), the case ceiling | Nate Chaoweeraprasit, improved by PingYou Ltd | $3.47 \times 10^{-5}$ |
 | `T-151` (#500) | Nate Chaoweeraprasit | $3.47 \times 10^{-5}$ |
-| Mishapolk’s `70a033f` certificate | Mykhailo Polkovskyi (Mishapolk) | $3.47 \times 10^{-5}$ |
+| Mishapolk’s KKT census, at `70a033f` | Mykhailo Polkovskyi (Mishapolk) | $3.47 \times 10^{-5}$ |
 | #593 | Mykhailo Polkovskyi (Mishapolk) | $3.47 \times 10^{-5}$ |
 | #573 | Mykhailo Polkovskyi (Mishapolk) | $1.61 \times 10^{-3}$ |
 | `T-140` (#488) | Francisco Couzo | $1.61 \times 10^{-3}$ |
