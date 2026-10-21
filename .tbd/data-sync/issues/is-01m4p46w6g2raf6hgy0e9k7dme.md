@@ -9,9 +9,9 @@ version: 2
 labels: []
 dependencies: []
 created_at: 2026-10-11T18:39:39.727Z
-updated_at: 2026-10-12T23:39:26.796Z
-closed_at: 2026-10-12T23:39:26.795Z
-close_reason: "Delivered in PR #508 (merged 2026-10-11): Evan Daniel credited at n = 46 (T-064 k = 7), the README opening and About s(60)."
+updated_at: 2026-10-20T20:04:09.486Z
+closed_at: 2026-10-20T20:04:09.485Z
+close_reason: "Merged in jlevy/squares#508 (189d7c1d): n = 46 cites T-064, README and About credit s(60) and T-081"
 resolution: null
 duplicate_of: null
 ---

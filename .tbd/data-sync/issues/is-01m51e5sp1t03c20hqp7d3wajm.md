@@ -3,10 +3,10 @@ type: is
 id: is-01m51e5sp1t03c20hqp7d3wajm
 title: "Import ofitzharding: complete Lean proof of s(19) optimality (#640)"
 kind: task
-status: in_progress
+status: open
 priority: 1
-version: 20
-delegate: lane-658
+version: 23
+delegate: null
 labels:
   - result-import
 dependencies:
@@ -19,7 +19,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-16T04:05:28.896Z
-updated_at: 2026-10-19T20:37:15.411Z
+updated_at: 2026-10-19T23:56:13.304Z
 started_at: 2026-10-16T04:05:36.664Z
 ---
 Stage 1 triage of jlevy/squares#640 (ofitzharding, Oscar Fitzharding, "Complete Lean proof of s(19) optimality: registration request", opened 2026-10-16T03:41:08Z, labelled `intake`, no comments when read at about 04:20Z). Intake pass 2026-10-16 (epic think-mdnn): nothing was built or run. Stage 2 is done on the pass's branch: the packet fitzharding-n19-lean-2026-10-16 (below).
@@ -103,3 +103,7 @@ Findings to mention with it: N19-1 (witness credit, question 1), N19-2 (unpublis
 2026-10-18 W1 intake (think-xmxb): PR667 A9 notification: sq19 c86a991ea1379d1598739182f5f26619c9b7126a holds author clean rebuild receipt/log: VERIFIED,13143 modules replayed without failure,64vCPU x5h18m (about340 CPU-h). This answers draft question5 about whether source rebuild ran. Reword it to ask only for any unresolved receipt details; do not ask whether it ran. Source evidence, not our reproduction. Intake-watch read now retains this open ownership.
 
 2026-10-19 lane-658: taken over by the 19 October handoff (issue #684) to land PR #658. Worktree branch lane-658/records-193-194: fast-forwarded #658 head 3022eb984 to checkpoint codex/handoff-20261019/658 d0b9ec2f9, merged origin/main 14fd9e27f (#685, v0.7.32) cleanly as c41eb33ec. Next: paper decision (AM1), re-pin, review round D, edition last, merge; then stage 7 replies.
+
+2026-10-19 lane-658: stage 7 import reply posted after #658 merged and the site checked (v0.7.34; t-194.html shows V0/C1): https://github.com/jlevy/squares/issues/640#issuecomment-6278993930. It reports T-194 V0/C1, the report entry and the six review entries, the queued build (think-nqnl), and notes the author's c86a991 clean rebuild receipt as not yet read. NOT posted: the review's five author questions, which stage 4 says go out on the owner's word (question 5 also needs rewording per the 2026-10-18 note). Recorded under #640's replies (kind import) in branch lane-658/replies-639-640.
+
+2026-10-19 ~23:55Z lane-658: released (status open, no delegate) at the end of the lane. Remaining here: the review's five author questions on the owner's word (reword question 5, which c86a991's clean rebuild receipt answers); reading c86a991 into T-194 with think-nqnl; #640's reply record lands with PR #690 (open, CI green, awaiting its review A).

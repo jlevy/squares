@@ -3,9 +3,9 @@ type: is
 id: is-01m51fayepg6n4wt17qynt441n
 title: "Validate: evand #639 exact sides, verify_exact.py replay of 23 data files at 7d1407a with mutated controls (~0.6 CPU-h; after stage 2)"
 kind: task
-status: open
+status: closed
 priority: 2
-version: 5
+version: 6
 delegate: user-eb-intake-1016
 labels:
   - validation
@@ -13,7 +13,11 @@ labels:
 dependencies: []
 parent_id: is-01m51e5rvjrd61yaww8djj1nzz
 created_at: 2026-10-16T04:25:46.198Z
-updated_at: 2026-10-16T08:03:49.762Z
+updated_at: 2026-10-19T22:51:41.055Z
+closed_at: 2026-10-19T22:51:41.055Z
+close_reason: "Done on PR #651 (receipts committed, 23 VALID, 76 controls refused, every polynomial squarefree and irreducible); registered as E-evand-639-verify-exact-replay and cited from T-193 by PR #658 (merged 926cd764a), which raised T-193 to V3/C3. #639 is answered and closed (issuecomment-6278993243); the 70/153/207 ties are staged under think-ot5c."
+resolution: null
+duplicate_of: null
 ---
 Validation part of think-phyb (#639, Evan Daniel's exact algebraic sides at 23 counts). Record-changing at the 16 counts the report-order rule records (88, 102, 123, 126, 175, 199, 204, 232, 258, 259, 266, 267, 292, 295, 301, 302), and evidence for RP-3 at 70, 153 and 207.
 

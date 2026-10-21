@@ -5,8 +5,8 @@ title: "Import JoostdeWinter: Improved upper bounds for n = 227, 229, 260: regis
 kind: task
 status: in_progress
 priority: 2
-version: 9
-delegate: lane-new
+version: 11
+delegate: c-lane-692
 labels:
   - result-import
 dependencies: []
@@ -17,7 +17,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-18T08:47:35.192Z
-updated_at: 2026-10-19T20:54:13.665Z
+updated_at: 2026-10-20T02:06:43.914Z
 started_at: 2026-10-18T12:36:48.824Z
 ---
 W1 intake 2026-10-18, parent think-xmxb. https://github.com/jlevy/squares/issues/668
@@ -67,3 +67,5 @@ Your report of 17 October 2026 states s(227) <= 15.563796703670, s(229) <= 15.65
 A bounded source-level mathematical read found no blocking geometry finding. Exact witness-to-record binding, controls and complete replay remain pending. Stage 3 registration will preserve this report before the later Couzo and Daniel reports, with your lineage retained; it has not yet been registered.
 
 2026-10-19 20:54Z lane-new: taken over from the 19 October handoff (issue #684) by the coordinator's lane brief; delegate changed from the spud10.local agent. Working in worktree scratchpad lnew/wt, branch claude/intake-2026-10-19-evand-singles (first PR: #659, #664, #669, #673).
+
+2026-10-20 lane-new: PR-2 prep on claude/intake-2026-10-20-de-winter-668 at 7c801b596 (pushed, built on #692): center-basis-json adapter + tests, report.json + claims.json, certify receipt (9 jobs, walls 1e-9, pairs >= 1.002e-9), check --replay passes, house reader, test_upper_bound_reports_668. Stage 4 review requested via the coordinator (brief scratchpad/lnew/review-brief-stage4-668.md). Opens as a PR after #692 merges.

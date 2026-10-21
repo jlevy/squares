@@ -5,8 +5,8 @@ title: "Import franciscouzo: 85 upper bounds at 204–998 (#678)"
 kind: task
 status: in_progress
 priority: 2
-version: 10
-delegate: claude-pr678-replay-20261019
+version: 15
+delegate: c-lane-678-l3
 labels:
   - result-import
 dependencies: []
@@ -16,7 +16,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-19T00:14:38.592Z
-updated_at: 2026-10-19T18:24:43.570Z
+updated_at: 2026-10-20T22:30:39.505Z
 started_at: 2026-10-19T00:15:01.708Z
 ---
 New 2026-10-18 issue https://github.com/jlevy/squares/issues/678 reports 85 upper-bound rows from franciscouzo/square-packing commit 7b6c87e129cf80b5ff9847b90b47fd30b4563c54, parent c6da0fc7524d667bf3d224559724ba9b60762e60 (#675). Stage 0 owner for the new report; source claims are unverified. Read-only table triage finds 55 counts overlapping #675, each tighter than its earlier displayed value, and 30 new counts; #675 also has 24 counts absent here. Preserve both chronologies and credits, including two deletion-derived rows n545/n641. Next: add pending request/read-through, retain pinned source custody and report-order comparison; price exact replay, independent review and any later house adoption. #678 n260 is below pending T-196 in #676, so later registration must supersede it in merge order without rewriting that earlier report. Do not infer certificate validity or allocate a T number before merge. Draft author reply after the relevant records merge and deployed-site verification. Coordinate with think-pvav (#675). blocked_on: none
@@ -30,3 +30,5 @@ New 2026-10-18 issue https://github.com/jlevy/squares/issues/678 reports 85 uppe
 
 2026-10-19 claude-pr678-replay-20261019 (coordinator session_014ZKp7R): branch claude/intake-678-replay caef09ede on f6f4a8482. Stage 2 packet packing/resources/web/couzo-issue678-2026-10-18/ (83 certs 8,107,636 B + MIT checker, per-path size/SHA listing; in Git, 2.86 MB zlib). Exact replay: 85/85 verified, 0 refused, two exact routes (sqpack.verify and check_rational_witness_independent predicates) with exactly justified sqrt2 centre-distance filter; 415/415 controls refused; deletion rows n545/n641 from n546/n642; source checker accepts 85, refuses 332 expressible controls; all-pairs cross-check on 5 counts. Report-order ledger packing/campaign/issue-intake/upper-bounds-20261019/. n260 recorded after T-196, 2.56e-5 below it. Source inconsistencies (n545/n641 manifest sides, unlisted n995 change) recorded. Pending: independent Fable math review; held full-kernel all-pairs replay (~20 CPU-h); Stage 3 registration.
 2026-10-19 independent Fable math review (claude-pr678-math-review-20261019) of caef09ede: ACCEPT-WITH-FINDINGS, no Blocker/High. Independent all-pairs at 204/260/330/545/641/998, independent SAT on all 140,866 candidate pairs, sides/prints for all 85 rows all agree with receipts. Three Low wording findings applied in 2c2c8032d on claude/intake-2026-10-19. Remaining: Stage 3 registration (T numbers in merge order), held full-kernel replay think-fpnd.
+
+2026-10-19 23:30Z note from parallel coordinator session_014ZKp7R (cloud, claude-code), for reuse — I am standing down on this bead's lane because a live owner holds it. Reviewed, pushed evidence: claude/intake-2026-10-19 376ac16b2 (checkpoint f6f4a848 + records-tier repair + #678 exact replay + n183 adoption, integrated). Independent Fable reviews: (1) delta 9bf7d594..f6f4a848 custody ACCEPT (two Low: #676 is a PR not an issue; 8,107,636-byte figure needs retained per-path listing); (2) #678 replay caef09ede ACCEPT-WITH-FINDINGS (independent all-pairs at 204/260/330/545/641/998, SAT on all 140,866 candidate pairs; 3 Low wording, applied in 2c2c8032d); (3) n183 adoption 180d04ce4 ACCEPT-WITH-FINDINGS (S'<14, witness = original cert, view valid; F1 custody snapshot cap overage, F2 grid-slack CPU 352-388 s each not 152, F3 unretained 1,586 s selection wall). Custody cap measurement: main f3d5da7b 228,635,067 B; merged intake 231,325,227 B vs 219 MiB cap; proposal dbb170233 raises to 221 MiB (separable). Results page headroom think-v1qe (~8 rows). Deferred-deadline fix PR #691 (think-ev4k) should land before any intake's deferred checkpoint can pass.

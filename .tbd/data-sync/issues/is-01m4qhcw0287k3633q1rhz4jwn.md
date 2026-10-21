@@ -3,9 +3,9 @@ type: is
 id: is-01m4qhcw0287k3633q1rhz4jwn
 title: "Workbench trajectory cost check: compare the best of three timings with the 400 ms ceiling (flaked on #512)"
 kind: bug
-status: open
+status: closed
 priority: 3
-version: 8
+version: 10
 delegate: claude-workbench-cost-fix-20261019
 labels:
   - testing
@@ -14,10 +14,10 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-12T07:49:22.050Z
-updated_at: 2026-10-19T20:49:41.549Z
+updated_at: 2026-10-19T23:01:42.589Z
 started_at: 2026-10-19T17:01:19.072Z
-closed_at: null
-close_reason: null
+closed_at: 2026-10-19T23:01:42.589Z
+close_reason: "Timing fix landed in #685 (02b644c6f, 14fd9e27f); #538's record moved the play attribution to think-8vsk in #646 (028bc72ec, site v0.7.35, deploy verified 4708/4708); #538 follow-up posted: https://github.com/jlevy/squares/issues/538#issuecomment-6279239104"
 resolution: null
 duplicate_of: null
 ---
@@ -82,3 +82,5 @@ child_order_hints:
 … [73 lines omitted]
 
 2026-10-19 coordinator (session 013djgnY): reopened. Closing it broke check_bead_tree on every branch: main's result-requests.yaml #538 entry still has a queued ask, bead and answer_bead naming think-1bm2. Close only with a records change that marks #538's ask done (and attributes the Animate play message, which close_when also requires), posts the #538 reply, and closes the issue once the site agrees. The timing fix itself landed in #685 (14fd9e27f).
+
+2026-10-19 lane-645 (review G2 on #646): close condition updated. #646 moves #538's answer_bead and the queued play ask to think-8vsk and marks the timing ask done; close this bead once #646 has merged and the #538 follow-up reply is posted. The play attribution belongs to think-8vsk.

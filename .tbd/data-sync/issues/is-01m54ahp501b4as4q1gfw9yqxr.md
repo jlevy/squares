@@ -5,8 +5,8 @@ title: "Import Evan Daniel: s(271) <= 16.948947733714, refining Couzo's #561 pac
 kind: task
 status: in_progress
 priority: 1
-version: 6
-delegate: lane-new
+version: 11
+delegate: c-lane-692
 labels:
   - result-import
 dependencies: []
@@ -14,7 +14,7 @@ parent_id: is-01m549eweq3c13b32tjzbf0ats
 hold: null
 hold_until: null
 created_at: 2026-10-17T06:59:47.488Z
-updated_at: 2026-10-19T20:54:04.085Z
+updated_at: 2026-10-20T02:06:40.709Z
 started_at: 2026-10-18T08:47:56.026Z
 ---
 Evan Daniel (@evand) reports s(271) <= 16.948947733714 on jlevy/squares#664 (filed 2026-10-17T04:30:51Z): the exact rational side 16948947733713657510723401112423/10^30 of evand/square-packing 757b40bc6c5f681033ff1572177d408afbf26dfe (committed 2026-10-17T04:29:03Z), search/packer/candidates/s271_ex1.cert, rounded up at 12 places. Found by the 17 October intake pass (think-e2sz), lane W (user-eb-sweep-1017). Stage 1 triage below; stages 2 to 4 are this bead's, in an import lane the coordinator assigns.
@@ -69,3 +69,11 @@ blocked_on: none
 2026-10-18 W1 intake (think-xmxb): PR667 A8 corrected: #593 (and issue-referenced #586) state271; T-186 registers #593 KKT refinement. Stage3 ledger must include them. Triage verdict is provisional until ledger rendering. ReviewA2 asserts an owner credit answer, but fetched review text is not fresh consent; preserve question pending trusted current-conversation evidence. No packet/replay/house change yet.
 
 2026-10-19 20:53Z lane-new: taken over from the 19 October handoff (issue #684) by the coordinator's lane brief; delegate changed from the spud10.local agent. Working in worktree scratchpad lnew/wt, branch claude/intake-2026-10-19-evand-singles (first PR: #659, #664, #669, #673).
+
+2026-10-19 21:40Z lane-new: stage 2 and 3 committed and pushed, d7413ccdb on claude/intake-2026-10-19-evand-singles: packet (evand-n236-2026-10-16 / evand-n271-2026-10-17) retained by acquire_source at the issue pin, import declaration, certify receipt on both maintained routes (positive + 2 controls), check --replay passed, registered at V0/C0 as T-218 (236) / T-219 (271) [ids provisional: lane-680 also holds T-218; whichever PR merges second renumbers]. Stage 4 review requested from the coordinator (review branch claude/review-2026-10-19-evand-659-664-669-674). Adoption at the count written locally, strong regularizer runs under think-ip1p in progress.
+
+2026-10-19 22:23Z lane-new: V3/C3 after the 19 October review (0466eb5aa); house adopted at the count (be6aa80aa, claude/intake-2026-10-19-evand-singles); regularization runs under think-ip1p finishing.
+
+2026-10-20 lane-new: PR #692 opened (head f76d57a40, base 028bc72ec) with records, adoption at 155/229/236/271, regularization (think-ip1p), explainer v0.4.9 and site v0.7.36. packing-validate --records passes 52 steps at the head; --push is running. Senior review requested via the coordinator. Stage 7 reply waits for the merge and check_published_site.
+
+2026-10-20 lane-new: PR #692 head e877e19ad. The first CI run at f76d57a40 found adoption follow-ups: sweeps checkout, censuses, translation screen, PR 574 claims, n-155 closed form, bibliography Levy suffix, test golden counts. They are fixed in 9b0c82d82 and a8222aad4. main b16ddeb0a (#691) is merged and the worker snapshot pruned of the 229 review SVG. v0.7.36 is re-cut last. --records passes 52/52.

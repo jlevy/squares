@@ -3,9 +3,9 @@ type: is
 id: is-01m53ztmtemm14341aga7gesrz
 title: "PR #658: land T-193's house-gate change after #660 merges (review A2 to A5)"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 7
+version: 8
 delegate: lane-658
 labels:
   - result-import
@@ -14,8 +14,12 @@ parent_id: is-01m51e5r3sg4h1wcrh7c826v7b
 hold: null
 hold_until: null
 created_at: 2026-10-17T03:52:26.702Z
-updated_at: 2026-10-19T20:36:59.317Z
+updated_at: 2026-10-19T22:24:27.915Z
 started_at: 2026-10-17T03:52:33.493Z
+closed_at: 2026-10-19T22:24:27.915Z
+close_reason: "Landed in PR #658, merged 2026-10-19T22:22:34Z as 926cd764a (head fc071e082, site v0.7.34): T-193 V3/C3 at its 16 counts after its stage 4 review (think-7qxm), the house-gate change staging T-193 under think-ot5c with CORRECTIONS_OWED holding the nine RE-1 counts (think-3q9x), and T-194 V0/C1 from the s(19) review (think-9e3w). Reviews A-D dispositioned; hosted CI green at the final head. think-o40t stays open until the #640 reply record removes it from #640's beads; think-8ido, think-ot5c, think-nqnl, think-phyb and think-a4x3 stay open."
+resolution: null
+duplicate_of: null
 ---
 PR #658's review A (findings A2 to A5) asks that T-193's exemption from the house gate be bounded, per count and owned by `select_houses`. Under the owner's house rule of 16 October 2026, implemented by PR #660, no exemption is allowed at all, and #660's guard tests fail if #658's `deferred_results` merges. The fix needs #660's mechanism (`ALGEBRAIC_READERS`, `PENDING_ADOPTION` with `STAGING_REASONS`, `devtools.exact_sides`), so it lands on #658 after #660 merges to main.
 

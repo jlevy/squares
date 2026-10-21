@@ -5,16 +5,16 @@ title: "PR #645 C12: restate T-194's next_rung and notes under the V/C rule once
 kind: task
 status: in_progress
 priority: 3
-version: 2
+version: 3
 spec_path: docs/project/specs/active/plan-2026-10-15-formal-proof-verification-rubric.md
-delegate: user-eb-addr-645
+delegate: c-coordinator-014ZKp7R
 labels: []
 dependencies: []
 parent_id: is-01m51hy2vfa71y9mv1bc8be41q
 hold: null
 hold_until: null
 created_at: 2026-10-16T18:24:16.078Z
-updated_at: 2026-10-16T18:24:24.757Z
+updated_at: 2026-10-20T02:06:43.508Z
 started_at: 2026-10-16T18:24:24.757Z
 ---
 Deferred from PR #645 review C, finding C12 (Low): https://github.com/jlevy/squares/pull/645#pullrequestreview-5550797548

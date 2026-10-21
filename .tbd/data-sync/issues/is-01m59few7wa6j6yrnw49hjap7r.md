@@ -3,9 +3,9 @@ type: is
 id: is-01m59few7wa6j6yrnw49hjap7r
 title: "Import Evan Daniel: s(183) below side 14 (#680)"
 kind: task
-status: in_progress
+status: open
 priority: 2
-version: 10
+version: 14
 delegate: lane-680
 labels:
   - result-import
@@ -19,8 +19,12 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-19T07:01:50.456Z
-updated_at: 2026-10-19T20:39:45.057Z
+updated_at: 2026-10-20T21:42:20.651Z
 started_at: 2026-10-19T07:02:24.366Z
+closed_at: null
+close_reason: null
+resolution: null
+duplicate_of: null
 ---
 New issue https://github.com/jlevy/squares/issues/680 created 2026-10-19 05:24 UTC. One reported upper bound n183 <=13.999580178737, exact rational certificate and regularized display source at evand/square-packing abbreviated revision 3a9948c. Source claims two exact standard-library geometry checkers accept both files; no local replay or independent confirmation yet. Claim inventory must also preserve numerical local-optimality claims as numerical evidence, comparison assertion and Couzo n182 donor lineage; second crossover parent not logged. Next W1 slice: resolve full immutable source revision, retain all relevant certificate/exact/input/solver/regularized files plus both source checkers with custody and bibliography, compare exact side against current main and monotone envelope, price validation, register V0/C0 reported in next qualified intake PR. No case adoption, rung promotion, local-minimum proof, or priority claim before review. Source issue has no reply at census. Unowned at full bead search 2026-10-19; explicit new owner for continuation.
 
@@ -33,3 +37,8 @@ Full source pin: 3a9948c781be668b1547cc2bf64a0d1e614f9bca, committed 2026-10-19T
 Children remain open: think-1hmn for full replay and sensitive controls, think-glg8 for independent mathematical review, and think-wpyh for the continuation's validation backlog. Replay is conservatively estimated at 0.01–0.10 CPU-hours, with a 360-second first-batch ceiling; no checker timing was measured. The replay wrapper must independently bind expected n=183, exact side and all coordinate rows, because the source parsers alone do not enforce an external expected count or reject every trailing-row mismatch.
 
 Upstream source bytes retain the author's wording. Our prose qualifies the 27 candidate flat modes as numerical diagnostics of the 182-square force-bearing subsystem, excluding the free rattler (exactsolve.py lines 1032–1033). The numerical S* differs from the slack rational certificate side S'; no theorem of full-configuration local optimality, no-expansion path, public priority or global optimum is established. Couzo's n182 donor credit and the unlogged crossover mate remain explicit. No source program or certificate geometry was executed by this lane. No case bound, house or assurance rung was promoted, and no issue reply was posted here. Keep the import open through actual registration, reviewed validation/adoption disposition and the final author answer.
+
+2026-10-19 lane-680: registration T-218 (V3/C3/S3) and adoption carried onto branch claude/ecstatic-edison-8en33t-680-n183 (see think-jh4w notes). Stage 7 reply drafted after merge and deploy check; record it under #680 replies in the next records change.
+
+
+2026-10-20 21:45Z coordinator: reopened. Closing it broke check_bead_tree: packing/campaign/intake-watch.yaml's evand/square-packing read-through at 3a9948c names think-xp0o as owner of the remaining distinct obligations (two same-side certificates, numerical KKT claims, Couzo n182 donor lineage). Close only after a records PR moves that watch entry to an open owner or records those obligations as disposed.

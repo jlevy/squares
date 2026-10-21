@@ -5,16 +5,18 @@ title: "Import JoostdeWinter: s(n) < ⌈√n⌉ at 18 counts from n = 509 to 156
 kind: task
 status: in_progress
 priority: 2
-version: 5
+version: 6
 delegate: lane-new
 labels:
   - result-import
 dependencies: []
 parent_id: is-01m572ssbx1x412zpvsw1sb6je
+child_order_hints:
+  - is-01m5bdvsnv6eetrva29yt6p6gy
 hold: null
 hold_until: null
 created_at: 2026-10-18T08:47:34.680Z
-updated_at: 2026-10-19T20:54:08.323Z
+updated_at: 2026-10-20T01:12:25.531Z
 started_at: 2026-10-18T13:04:20.646Z
 ---
 W1 intake 2026-10-18, parent think-xmxb. https://github.com/jlevy/squares/issues/666

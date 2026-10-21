@@ -5,8 +5,8 @@ title: "Results page: a rollup of S3+ results by day or week (design and prototy
 kind: feature
 status: in_progress
 priority: 2
-version: 4
-delegate: claude-code@vm
+version: 7
+delegate: c-lane-514
 labels:
   - site
 dependencies: []
@@ -14,7 +14,7 @@ parent_id: is-01m4padgs7fh6ze3tbh57d5ar1
 hold: null
 hold_until: null
 created_at: 2026-10-11T21:02:29.166Z
-updated_at: 2026-10-12T07:55:57.415Z
+updated_at: 2026-10-20T02:06:45.505Z
 started_at: 2026-10-11T21:02:31.769Z
 ---
 Owner request 2026-10-11: think about whether the results page (all-results.html, devtools.render_overview / overview_sections / site_documents) could carry a rollup of results by day or by week for significance S3 and above. Deliverable: a short design (which date: attribution.published, registration, or confirmation; day vs week vs both; how superseded entries, regularizations and beyond-horizon rows count; page budget), and a prototype behind the existing page tests, as its own pull request for the owner to judge.
@@ -36,3 +36,5 @@ Bytes: results.html 842,932 -> 854,905 (block 11,605; ceiling 950,000); new shar
 Owner decisions open: weeks only vs a day range per line; drafts included/marked/excluded (needs a structured field); superseded shown muted vs hidden; placement at top vs directly above All Results.
 
 2026-10-12, GitHub tracking (owner's request that the pass's remaining work be tracked as GitHub issues): PR #514's four layout decisions are on https://github.com/jlevy/squares/issues/543. Tracker https://github.com/jlevy/squares/issues/544.
+
+2026-10-20 lane-645: #514 integrated with main through b16ddeb0a (#645, #658, #646, #691) at 25579613d: landed backfilled for all 217 entries (184 unchanged, 33 from history), results ceiling kept at main's 1,250,000 with room through 225, #538 reply recorded, site v0.8.0 (minor, dated October 20) cut. Hosted CI 31/31 green at f3276227c and 25579613d. Review D (follow-up, round 4, with correctness pass) requested from the coordinator at 22:35Z on 19 Oct and not posted by 01:05Z; merge waits on it.
