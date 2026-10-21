@@ -14363,9 +14363,11 @@ issues:
       the same side; a different local minimum from the register's packing (Nate Chaoweeraprasit's
       #500 packing, improved by PingYou Ltd in PR #574), found by a near-record sweep of his basin
       explorer over stored non-record descendants of #500's packing. Retained on 21 October 2026 in
-      evand-n270-sweep-2026-10-20, certified on this repository's two exact routes with both
-      controls, and registered as T-224 at V0/C0, 3.47e-5 below the case at 270 (T-174); the stage 4
-      review and adoption follow. Claude assistance disclosed.
+      evand-n270-sweep-2026-10-20, replayed on this repository's two exact routes, registered as
+      T-224, reviewed by the 21 October stage 4 review, which measured it as another arrangement of
+      the design of #500's packing, and raised to V3/C3; the case at 270 adopted it as its house best
+      packing, 3.47e-5 below T-174, and its drawing was regularized in the same pull request. Claude
+      assistance disclosed.
     read_through: '2026-10-20T22:09:32Z'
     results:
     - key: n270
@@ -14379,17 +14381,22 @@ issues:
       - T-224
       evidence:
       - E-evand-703-n270-report
+      - E-evand-703-n270-exact-feasibility
     asks:
     - what: >-
         Credit Nate Chaoweeraprasit's (itsnaka's) #500 packing, the register's s(270) packing before
         PingYou Ltd's PR #574 certificate of it, as the ultimate start of the packing at 270.
-      state: queued
+      state: done
       bead: think-a9jp
       note: >-
-        T-224's claim, its bibliography key [Daniel n270 sweep 2026-10-20] (Daniel after
-        Chaoweeraprasit) and the packet README's Lineage section already name it. The case at 270 is
-        the adoption writer's record, so its credit fields and prose move when the house best
-        packing does, after the stage 4 review; until then the case keeps T-174's credit.
+        The adoption of 21 October 2026 credits the case at 270 to Evan Daniel's arrangement of the
+        design of Nate Chaoweeraprasit's SQUISH packing in a search started from that packing, with
+        Daniel as the finder in the structured fields and Chaoweeraprasit in the credit sentence, as
+        at 308; T-224's claim, its bibliography key [Daniel n270 sweep 2026-10-20] (Daniel after
+        Chaoweeraprasit) and the packet README's Lineage section name the start too. The 21 October
+        review measured the packing against T-174's, which is #500's to 1e-30: 255 of 270 squares
+        within a tenth under the identity and 15 beyond, so another arrangement of #500's design,
+        not a refinement of it.
     beads:
     - think-a9jp
     answer_bead: think-a9jp

@@ -31679,18 +31679,19 @@ regularized_drawings:
         max_turn_deg: 0.0
       view: packing/atlas/known-best/regularized/n-269-regularized.yaml.gz
     - n: 270
-      of: T-174
+      of: T-224
       by: project
-      method: "regularize_grid_slack/1: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
-      modifications: ["port of his coincidence placement (regularize_grid_slack/1) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
+      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      modifications: []
       side: same
+      changes: {straightened: 1}
       identity:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 6
-        max_move: 0.1548666
-        max_turn_deg: 0.0
+        moved: 24
+        max_move: 0.13034
+        max_turn_deg: 0.217543
       view: packing/atlas/known-best/regularized/n-270-regularized.yaml.gz
     - n: 271
       of: T-219
