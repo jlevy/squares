@@ -14455,7 +14455,8 @@ issues:
     title: 's(343) ≤ 18.977682482405: registration request'
     author: evand
     opened: '2026-10-20'
-    state: open
+    state: closed
+    closed: '2026-10-21'
     kind: result-report
     triage: done
     summary: >-
@@ -14503,6 +14504,12 @@ issues:
       kind: acknowledgement
       reported:
       - result: n343
+    - url: https://github.com/jlevy/squares/issues/702#issuecomment-6324620374
+      date: '2026-10-21'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n343
     close_when: >-
       The certificate is retained at its pin and replayed here, its beyond-horizon row is on main
       with the requested credit, and the author has been told the row's standing; a count beyond
@@ -14543,6 +14550,15 @@ issues:
       evidence E-evand-702-n343-report, as #596's rows were; no stage 4 review is owed for a
       beyond-horizon row, and none is registered. The KKT, local-minimum and MILP statements are
       not recorded.
+      The final reply, posted at 2026-10-21T19:25:35Z (issuecomment-6324620374) after #712
+      merged and its Pages deployment of 7eeab1f5e (run 39657972902) was checked, reported the
+      custody of the nine s343_sw files at 88385ab, the two-route replay with both controls
+      refused, the current beyond-horizon row at 343 at assurance reported with
+      E-evand-702-n343-report, #678's row kept as superseded history, and the credit line of
+      [Daniel n343 sweep 2026-10-20]. It said that a count beyond the corpus takes no register
+      entry and that no review was done, that the KKT, local-minimum and MILP statements are not
+      recorded, that no site page lists beyond-horizon rows, and that nothing asked for is
+      queued; the issue closed at 2026-10-21T19:25Z.
   - number: 703
     title: 's(270) ≤ 16.928162252197: registration request'
     author: evand
