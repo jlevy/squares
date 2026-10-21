@@ -3029,6 +3029,24 @@ sources:
       view and the source''s comparison with #586 are retained beside it. MIT-licensed; Claude assistance
       disclosed. KKT statements are the author''s numerical evidence; the source does not claim a strict
       local minimum, and no local or global optimality claim is made.'
+  - key: '[Daniel n270 sweep 2026-10-20]'
+    authors:
+    - Daniel
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-20'
+    lineage: builds-on-project
+    credit: Daniel after Chaoweeraprasit, Levy
+    note: 'One complete exact certificate at 88385abc95ab25d520302282d1946cbb07bc9cf3, s(270) <= 16928162252196750114897964982713/10^30,
+      found by the author''s basin explorer in a near-record sweep over stored non-record descendants of
+      itsnaka''s #500 s(270) packing, which the issue asks to be credited as the ultimate start; the issue
+      calls it a different local minimum from the register''s packing. Measured pose by pose by the 21 October
+      review (docs/project/reviews/review-2026-10-21-upper-bound-import-703.md), it is another arrangement
+      of the design of #500''s packing and PingYou''s refinement of it, 15 squares beyond a tenth under the
+      identity, not a refinement of it. A same-side regularized view and the source''s comparison with the
+      register''s packing are retained beside it. MIT-licensed; Claude
+      assistance disclosed. KKT and local-minimum statements are the author''s numerical evidence; no local
+      or global optimality claim.'
   - key: '[Muglich issue 686 2026-10-19]'
     authors:
     - Muglich

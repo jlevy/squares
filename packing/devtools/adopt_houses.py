@@ -176,8 +176,10 @@ class Prose:
     lineage: str = ""
     #: Whether `devtools.check_half_angle_area`, the third exact route, decided the
     #: certificate too. T-220's replay ran the two maintained routes only, so its record
-    #: says no third route decided it rather than that one did.
-    third_route: bool = True
+    #: says no third route decided it rather than that one did. A string is the clause the
+    #: record writes instead, where the review decided the certificate on an exact route of
+    #: its own that no verifier entry names (T-224, A5 of the 21 October review).
+    third_route: bool | str = True
 
 
 #: Each adopted result, as its register entry and its review describe it.
@@ -715,6 +717,35 @@ RESULTS: dict[str, Prose] = {
             "account of the search, and Couzo’s on the measured arrangement."
         ),
     ),
+    "T-224": Prose(
+        author="Evan Daniel",
+        reported="on [jlevy/squares#703](https://github.com/jlevy/squares/issues/703)",
+        producer_route=False,
+        ai=(
+            "The source’s credits say its work was done with Claude (Anthropic) under human "
+            "direction, and the commit that publishes the certificate names Claude Opus 5.5 "
+            "as co-author and says Evan Daniel approved it."
+        ),
+        lineage=(
+            "The author’s basin explorer started from Nate Chaoweeraprasit’s n = 270 packing "
+            "of #500, the register’s packing for 270, which PingYou Ltd’s certificate (T-174) "
+            "refines, and stored non-record descendants of it; a near-record sweep over them "
+            "reached this packing. The issue asks that #500’s packing be credited as the "
+            "ultimate start, and calls this a different local minimum from the register’s. "
+            "Measured here square by square, the best assignment against T-174’s packing, "
+            "which is #500’s to $10^{-30}$, is the identity: it keeps 255 of the 270 squares "
+            "within a tenth and moves 15 beyond it, at most 0.224, and no tilt angle is "
+            "shared. So it is another arrangement of the design that packing holds, not a "
+            "refinement in this record’s sense, found from #500’s packing by the source’s "
+            "account (T-224)."
+        ),
+        third_route=(
+            "; the 21 October review’s own exact route, which no verifier entry names, "
+            "decided it again by separating axes on every pair and exact intersection area "
+            "on the near pairs, and its sharp controls at $10^{-30}$ found both maintained "
+            "routes exact at the far wall and at the closest pair"
+        ),
+    ),
 }
 
 XU = "Ryan Xu"
@@ -1157,14 +1188,16 @@ CREDITS: dict[int, Credit] = {
         "PingYou Ltd’s tighter certificate of Evan Daniel’s display regularization of Nate "
         "Chaoweeraprasit’s SQUISH packing",
     ),
-    # T-174's regularization of T-151's packing, measured one to one, no square moved
-    # beyond 1e-12 (the 14 October review of PR 574).
+    # Issue 703's packing, another arrangement of the design of issue 500's packing, which
+    # T-174 refines to 1e-30: 15 squares beyond a tenth under the identity (the 21 October
+    # review), found from issue 500's packing, which the issue credits as the ultimate
+    # start. As at 308, Daniel is the finder and the start's author is named in the
+    # sentence, not in the structured fields.
     270: Credit(
-        (SQUISH,),
-        (PINGYOU,),
-        "PingYou Ltd’s tighter certificate of Nate Chaoweeraprasit’s SQUISH packing "
-        "composed from SQUISH’s issue 481 n = 209 packing, whole, and the Kingbird "
-        "catalogue’s former n = 19 packing",
+        (DANIEL,),
+        (),
+        "Evan Daniel’s arrangement of the design of Nate Chaoweeraprasit’s SQUISH packing "
+        "in a search started from that packing",
     ),
     # Evan Daniel's tilt-swap from the register's witness (T-186's tightening of issue 561's
     # packing): issue 561's arrangement continued, three squares beyond a tenth (RV-2 of the
@@ -1926,7 +1959,9 @@ def section(move: Move) -> str:
     )
     reviews = f"[review of {reviewed}](../../{review})"
     third = (
-        ", and a third exact route, half-extent containment and exact intersection area, "
+        prose.third_route
+        if isinstance(prose.third_route, str)
+        else ", and a third exact route, half-extent containment and exact intersection area, "
         "decided it again"
         if prose.third_route
         else "; no third exact route has decided it"

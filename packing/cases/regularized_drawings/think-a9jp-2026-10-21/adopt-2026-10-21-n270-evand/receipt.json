@@ -1,0 +1,146 @@
+{
+ "format": "evand-regularization-receipt-v1",
+ "generated_by": "python -m devtools.regularize_evand run",
+ "policy": "docs/project/policies/regularization-policy.md",
+ "finished": "2026-10-21T03:24:26Z",
+ "run_directory": "adopt-2026-10-21-n270-evand",
+ "generator": {
+  "name": "evand-regularize",
+  "source_url": "https://github.com/evand/square-packing",
+  "pin": "675a5ea",
+  "source_commit": "675a5eaa8712542daac8b4515b0f69ad7044df44",
+  "patches": [],
+  "interpreter": "CPython 3.14.7"
+ },
+ "parameters": {
+  "timeout": 600.0,
+  "regularize_timeout": 600.0,
+  "variant": "conservative",
+  "orient": "0",
+  "from_stage": "input",
+  "same_mode": "relax",
+  "frame": "kkt",
+  "style": "coincide",
+  "dps": 80,
+  "eps": "1e-20",
+  "workers": 2,
+  "counts": [
+   270
+  ]
+ },
+ "counts": [
+  {
+   "n": 270,
+   "status": "ok",
+   "error": null,
+   "kind": "rational",
+   "solve_status": "bound only",
+   "solve_gate": "certified",
+   "solve_rungs": [],
+   "replica_patches": [],
+   "S_exact": "16.928162252196750114728683360190544338217308243483281659606283306",
+   "s_W": "16.928162252196750114897964982713",
+   "U": "16.9281622521967502",
+   "level": 2,
+   "moved": 24,
+   "groups": [
+    22,
+    21
+   ],
+   "symmetry": [],
+   "view": "solved",
+   "s_V": "16.928162252196750114897964982713",
+   "relation": "same",
+   "same_refusal": "same-side-refused: overlap",
+   "one_to_one": true,
+   "max_move": "1.303400e-1",
+   "house": [
+    [
+     81,
+     8,
+     19,
+     32,
+     130
+    ],
+    [
+     62,
+     10,
+     21,
+     17,
+     160
+    ]
+   ],
+   "stage": [
+    [
+     59,
+     17,
+     27,
+     28,
+     139
+    ],
+    [
+     53,
+     18,
+     22,
+     17,
+     160
+    ]
+   ],
+   "row": 10,
+   "decision": "admit",
+   "index_record": "regularized",
+   "refusal": null,
+   "after_registration": null,
+   "solved_row": 10,
+   "seconds": {
+    "input": 0.028,
+    "solve": 68.41,
+    "regularize": 29.18,
+    "import": 9.956,
+    "same": 128.346,
+    "measure": 0.282
+   },
+   "cost": {
+    "cpu_seconds": 233.39,
+    "wall_seconds": 236.31
+   },
+   "parameters": {
+    "variant": "conservative",
+    "style": "coincide",
+    "orient": "0",
+    "frame": "kkt",
+    "same_mode": "relax",
+    "timeout": 600.0,
+    "regularize_timeout": 600.0,
+    "from_stage": "input"
+   }
+  }
+ ],
+ "candidates": [],
+ "review_queue": [],
+ "index_records": {
+  "regularized": [
+   270
+  ],
+  "refused": [],
+  "unchanged": []
+ },
+ "solve_outputs": {
+  "270": {
+   "input.txt": "b5677d5f5b3292e59410e1c233a32d24722bf0436ef7b4dfd40182757c878ecc",
+   "solve/witness.exact.txt": "094ebefb0b22c854261fe71e9753b35f4a90e5fd44d12dc8b9ebc6b6429121a0",
+   "solve/witness.contacts.json": "3542c41fb66d57a6d2330fd7f9af395c6bc22a8d3e1790f7dc6dc9e73b969293",
+   "regularize.cert": "f4cdf64f8ba5d23bd47865e7499fe63b31db0421737958f95608ee51a673fa5a"
+  }
+ },
+ "cost": {
+  "wall_seconds": 236.9,
+  "cpu_seconds": 233.45,
+  "driver_cpu_seconds": 0.06,
+  "count_cpu_seconds": 233.39,
+  "workers": 2,
+  "counts": 1,
+  "measured_by": "resource.getrusage: each count's worker RUSAGE_SELF plus RUSAGE_CHILDREN (its solve and shim), summed, plus the driver's RUSAGE_SELF"
+ },
+ "previous_runs": []
+}

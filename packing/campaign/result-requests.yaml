@@ -14479,3 +14479,69 @@ issues:
       carried this triage to main, reports the check of the two digests and the side, the row's
       standing and the three queued steps: custody at the pin, the two-route replay with its
       controls, and the beyond-horizon row with the credit the issue asks for.
+  - number: 703
+    title: 's(270) ≤ 16.928162252197: registration request'
+    author: evand
+    opened: '2026-10-20'
+    state: open
+    kind: result-report
+    triage: done
+    summary: >-
+      Evan Daniel reports s(270) <= 16.928162252197, the exact rational side
+      16928162252196750114897964982713/10^30 of evand/square-packing 88385ab,
+      search/packer/candidates/s270_sw.cert, rounded up at 12 places, with a regularized view at
+      the same side; a different local minimum from the register's packing (Nate Chaoweeraprasit's
+      #500 packing, improved by PingYou Ltd in PR #574), found by a near-record sweep of his basin
+      explorer over stored non-record descendants of #500's packing. Retained on 21 October 2026 in
+      evand-n270-sweep-2026-10-20, replayed on this repository's two exact routes, registered as
+      T-224, reviewed by the 21 October stage 4 review, which measured it as another arrangement of
+      the design of #500's packing, and raised to V3/C3; the case at 270 adopted it as its house best
+      packing, 3.47e-5 below T-174, and its drawing was regularized in the same pull request. Claude
+      assistance disclosed.
+    read_through: '2026-10-20T22:09:32Z'
+    results:
+    - key: n270
+      claim: >-
+        s(270) <= 16928162252196750114897964982713/1000000000000000000000000000000 =
+        16.928162252196750114897964982713, the side of s270_sw.cert (SHA-256 a01114af...), by a
+        packing the source calls a different local minimum from the register's, not a refinement.
+      source: body
+      bead: think-a9jp
+      register:
+      - T-224
+      evidence:
+      - E-evand-703-n270-report
+      - E-evand-703-n270-exact-feasibility
+    asks:
+    - what: >-
+        Credit Nate Chaoweeraprasit's (itsnaka's) #500 packing, the register's s(270) packing before
+        PingYou Ltd's PR #574 certificate of it, as the ultimate start of the packing at 270.
+      state: done
+      bead: think-a9jp
+      note: >-
+        The adoption of 21 October 2026 credits the case at 270 to Evan Daniel's arrangement of the
+        design of Nate Chaoweeraprasit's SQUISH packing in a search started from that packing, with
+        Daniel as the finder in the structured fields and Chaoweeraprasit in the credit sentence, as
+        at 308; T-224's claim, its bibliography key [Daniel n270 sweep 2026-10-20] (Daniel after
+        Chaoweeraprasit) and the packet README's Lineage section name the start too. The 21 October
+        review measured the packing against T-174's, which is #500's to 1e-30: 255 of 270 squares
+        within a tenth under the identity and 15 beyond, so another arrangement of #500's design,
+        not a refinement of it.
+    beads:
+    - think-a9jp
+    answer_bead: think-a9jp
+    replies: []
+    close_when: >-
+      The certificate is registered on main and replayed here, the stage 4 review has been mapped,
+      the case at 270 has adopted it and regularized its drawing with the requested credit, and the
+      author has been told the id, rungs and adoption.
+    notes: >-
+      Triage of 21 October 2026 (think-a9jp). The source is evand/square-packing at
+      88385abc95ab25d520302282d1946cbb07bc9cf3, committed 2026-10-20T21:47:03Z and the repository's
+      head when read; the commit also adds #702's s343_sw files, which are that issue's import. The
+      issue has no comments. The certificate is below every report at 270 the record holds or has
+      pending: the case's T-174 and T-151 (#500), Mishapolk's KKT census and #593 by 3.47e-5, #573
+      and T-140 (#488) by 1.61e-3, T-136 (#481) by 1.62e-3, T-134, T-130 and T-138 by 8.56e-3, and
+      T-119, T-098 and T-056 by 9.6e-3; no other open report through #703 states a bound at 270,
+      so the report-order rule records it. The result is numbered T-224, after T-223 (#678), which
+      PR #701 registered and merged first.
