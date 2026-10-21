@@ -49,8 +49,8 @@ This packet retains:
   `t = tan(theta/2)`, in Evan Daniel’s certificate format’s order
 - [`acquisition/sources.json`](acquisition/sources.json): the two addresses, the size
   and SHA-256 of the archive, `raw_asset_retained: false`, each certificate’s member
-  path, size, SHA-256, exact side, the issue’s print and its fact’s path, and the
-  path, size and SHA-256 of all 808 archive members
+  path, size, SHA-256, exact side, the issue’s print and its fact’s path, and the path,
+  size and SHA-256 of all 808 archive members
 - [`acquisition/provenance.json.gz`](acquisition/provenance.json.gz): the 100 per-case
   `provenance.json` records, read as JSON and kept as attribution metadata, each with
   its member path; their original digests are in the archive manifest
@@ -87,7 +87,14 @@ outside the container, through the two exact routes of
 over the rationals, with no filter.
 Each job ran in its own child process under `nice -n 10`, two at a time.
 
-REPLAY-SUMMARY
+All 100 positives pass both routes, and both routes refuse both controls at every count:
+300 jobs, 145,844,484 pair decisions, 29,169.55 route CPU seconds and 35,076.09 job wall
+seconds, the longest job 397.51 seconds (a control at n = 993, on a shared host).
+Every positive clears every wall by at least 5.000e-21 and every pair by at least
+1.000e-12. The run went from 01:30Z to 06:28Z on 21 October 2026 in four resumed
+batches; the first stopped at its two-hour limit after n = 757, and nothing was decided
+twice. `check --n 328 --replay` decided n = 328’s three jobs again and matched its
+receipt.
 
 The two routes share certificate parsing, the half-angle conversion, Python `Fraction`
 arithmetic and the separating-axis method.
