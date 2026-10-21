@@ -1890,6 +1890,34 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
             "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
             "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
+            "packing/devtools/adopt_houses.py",
+            "packing/frontier/n-154.md",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "Rendered at fc4d8b7f and with main 2e6d528d's copies of these paths: 68 "
+            "byte-identical files, no PDF."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
+            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
+            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
             "packing/devtools/overview_sections.py",
             "packing/devtools/run_negative_controls.py",
             "packing/frontier/source-coverage.yaml",

@@ -13556,7 +13556,7 @@ issues:
     state: open
     kind: other
     triage: done
-    summary: The owner's machine handoff of 19 October 2026; like #544, it tracks work.
+    summary: The owner's handoff of 19 October 2026, a tracker like #544.
     read_through: '2026-10-19T15:51:21Z'
     results: []
     asks:
@@ -14277,8 +14277,7 @@ issues:
       #666, #670, #672 and #675, pending triage, report 9, 47, 33 and 54 of these counts, 11
       of those 12 among them, each above #686, so their rows there will enter superseded;
       their beads (think-3m10, think-f28n, think-2vjc, think-pvav) were told on 21 October
-      2026. The final reply (issuecomment-6312842218) gives all 100 rows on main as reported,
-      corrects the acknowledgement and leaves the credit ask queued.
+      2026.
   - number: 689
     title: 's(308) ≤ 17.997149121271: registration request'
     author: evand
