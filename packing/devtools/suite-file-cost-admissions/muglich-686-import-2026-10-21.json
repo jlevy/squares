@@ -3,13 +3,13 @@
   "shard": null,
   "provenance": {},
   "exit_status": 0,
-  "tests": 6,
-  "seconds": 3.157,
+  "tests": 8,
+  "seconds": 2.625,
   "files": [
     {
       "file": "packing/tests/test_muglich_686_import.py",
-      "tests": 6,
-      "seconds": 3.157
+      "tests": 8,
+      "seconds": 2.625
     }
   ],
   "module_scope": {
@@ -46,7 +46,7 @@
       "collectonly": false
     },
     "collected_tests": {
-      "packing/tests/test_muglich_686_import.py": 6
+      "packing/tests/test_muglich_686_import.py": 8
     },
     "deselected_tests": 0
   }
