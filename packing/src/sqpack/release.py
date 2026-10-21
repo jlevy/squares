@@ -1809,6 +1809,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
     ReleaseNoPublicChange(
         components=("paper:n11-optimality-review", "paper:n11-threshold-bound-review"),
         paths=(
+            "packing/devtools/render_n11_lower_bounds_explainer_pdf.py",
             "packing/devtools/upper_bound_reports.py",
             "packing/frontier/results.yaml",
         ),
@@ -1826,10 +1827,13 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "which selects the n11 ladder rungs LADDER_RUNGS names and holds them to "
             "LADDER_DIGEST; T-224 is an added entry outside that ladder, and no ladder row "
             "changes. upper_bound_reports.py gains only one house reader, which these "
-            "producers do not call. Rendered at link revision ec95f0b8, once from this "
-            "branch's tree and once with main's copies of the four changed inputs "
-            "(upper_bound_reports.py, results.yaml, result-requests.yaml and "
-            "source-coverage.yaml): render_n11_optimality_review, "
+            "producers do not call. render_n11_lower_bounds_explainer_pdf.py changes only "
+            "EXPECTED_PAGE_COUNT, the explainer's pagination check; these producers import "
+            "its dated helper. Rendered at link revision 50ec85e9, once from this "
+            "branch's tree and once with main's copies of the five changed inputs "
+            "(render_n11_lower_bounds_explainer_pdf.py, upper_bound_reports.py, "
+            "results.yaml, result-requests.yaml and source-coverage.yaml): "
+            "render_n11_optimality_review, "
             "render_n11_threshold_bound_review and render_packing_methods leave the 50 "
             "files they write byte-identical between the trees. No PDF was printed; each "
             "prints from that HTML. Retain v0.1.7 and v0.1.0."
@@ -1839,6 +1843,7 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         components=("paper:square-packing-methods-survey",),
         paths=(
             "packing/campaign/result-requests.yaml",
+            "packing/devtools/render_n11_lower_bounds_explainer_pdf.py",
             "packing/devtools/upper_bound_reports.py",
             "packing/frontier/results.yaml",
             "packing/frontier/source-coverage.yaml",
@@ -1853,10 +1858,13 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "result requests, source coverage and results are citation targets whose "
             "existence the producer checks, not inlined text, and every cited path exists "
             "at both revisions; the added #703 request, the coverage entry and T-224 are "
-            "not cited by the survey. The house reader upper_bound_reports.py gains does "
-            "not enter its output. Rendered at link revision ec95f0b8, once from this "
-            "branch's tree and once with main's copies of the four changed inputs "
-            "(upper_bound_reports.py, results.yaml, result-requests.yaml and "
+            "not cited by the survey. render_n11_lower_bounds_explainer_pdf.py, a render "
+            "input, changes only EXPECTED_PAGE_COUNT, the explainer's pagination check, "
+            "which the survey's producer does not read. The house reader "
+            "upper_bound_reports.py gains does not enter its output. Rendered at link "
+            "revision 50ec85e9, once from this branch's tree and once with main's copies "
+            "of the five changed inputs (render_n11_lower_bounds_explainer_pdf.py, "
+            "upper_bound_reports.py, results.yaml, result-requests.yaml and "
             "source-coverage.yaml): render_n11_optimality_review, "
             "render_n11_threshold_bound_review and render_packing_methods leave the 50 "
             "files they write byte-identical between the trees. No PDF was printed; it "
