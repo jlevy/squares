@@ -10304,10 +10304,11 @@ issues:
       state: done
       bead: think-8o5j
       note: >-
-        Held after the follow-up of 20 October (issuecomment-6294848615) asked him which reading he
-        means. His comment of 20 October at 22:09Z (issuecomment-6302892909) answers it: the
-        packing is a different local minimum, and the #673 reading applies. That comment's ask,
-        below, replaces this one.
+        Done on 19 October 2026, when the case at 271 first gave this credit, and held after the
+        follow-up of 20 October (issuecomment-6294848615) asked him which reading he means. His
+        comment of 20 October at 22:09Z (issuecomment-6302892909) answers it: the packing is a
+        different local minimum, and the #673 reading applies. On 21 October 2026 the ask below
+        replaced this one, so this credit is no longer given.
     - what: >-
         List Evan Daniel as the finder of the packing at 271, and credit Francisco Couzo's #561
         packing and Nate Chaoweeraprasit's SQUISH design it continues as its start, as at 146, 236
@@ -10348,6 +10349,11 @@ issues:
         status: confirmed
       corrects:
       - https://github.com/jlevy/squares/issues/664#issuecomment-6261557347
+      outdated:
+      - 'The case names Nate Chaoweeraprasit (itsnaka) as the finder, with Francisco Couzo and you
+        as improvers; since the author''s comment of 20 October (issuecomment-6302892909) the case
+        at 271 names Evan Daniel as the finder, with no improvers, and its credit sentence names
+        Couzo''s #561 packing and the SQUISH packing it continues as the search''s start'
     close_when: >-
       The certificate is registered on main and replayed here, the case at 271 has adopted it and
       regularized its drawing, and the author has been told the id, rungs and adoption.
@@ -10703,7 +10709,7 @@ issues:
       a435c97. He names the affected views, tt_n154 (#552), tt2_n146 (#606, which says David W.
       Cantrell), s155_ex2 (#669), s236_bm3c (#659), s271_ex1 (#664) and s154_sw (#694), and asks
       that the field there be read as no credit at all and the issues' credit lines as what he
-      asks for, as the record already does; no record changes on it. Under issue 673's reading the start is what the
+      asks for, as the record already does; no credit changes on it. Under issue 673's reading the start is what the
       search was based on, so the case at 155 names Evan Daniel as the finder. The same-side display
       certificate is not a second bound; numerical local-minimum diagnostics remain source
       assertions.
