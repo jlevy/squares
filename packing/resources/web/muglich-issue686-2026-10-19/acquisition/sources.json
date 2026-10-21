@@ -1015,6 +1015,10 @@
    "fact_sha256": "9204ae0a3d2dcd486c74c048bd3b1265bfeb5da225dfc7503430d3c4eea80e13"
   }
  ],
+ "provenance": {
+  "path": "acquisition/provenance.json.gz",
+  "sha256": "c667e8b51cf2b03ae9ee570c5d3d2411920b08e6993bb506597216422bbf7139"
+ },
  "archive_manifest": [
   {
    "path": "ATTRIBUTION.md",

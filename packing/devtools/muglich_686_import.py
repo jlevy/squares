@@ -63,6 +63,8 @@ PACKET = ROOT / "resources/web/muglich-issue686-2026-10-19"
 ISSUE_RECORD = PACKET / "acquisition/issue-686.json"
 SOURCES = PACKET / "acquisition/sources.json"
 BEYOND = PACKET / "acquisition/beyond-horizon-claims.json"
+#: The per-case provenance the issue asks to keep, as attribution metadata in one file.
+CREDITS = PACKET / "acquisition/provenance.json.gz"
 ISSUE_URL = "https://github.com/jlevy/squares/issues/686"
 ARCHIVE_NAME = "01-squares-100-certificates-and-poses.zip"
 ARCHIVE_URLS = tuple(
@@ -83,6 +85,7 @@ COUNTS = (
 )
 PLACES = 15
 SOURCES_FORMAT = "muglich-686-attachment-sources-v1"
+CREDITS_FORMAT = "muglich-686-provenance-v1"
 FACT_FORMAT = "muglich-686-certificate-fact-v1"
 RECEIPT_FORMAT = "muglich-686-exact-replay-v1"
 WITNESS_PREFIX = "W-muglich-686-n"
@@ -219,13 +222,13 @@ def archive_bytes(path: Path) -> bytes:
     return data
 
 
-def derive(archive: Path) -> tuple[dict[str, Any], dict[int, bytes]]:
-    """The manifest and every fact, from the attachment's own bytes."""
+def derive(archive: Path) -> tuple[dict[str, Any], dict[int, bytes], bytes]:
+    """The manifest, every fact and the provenance record, from the attachment's bytes."""
     printed = printed_sides()
     with zipfile.ZipFile(io.BytesIO(archive_bytes(archive))) as bundle:
         infos = bundle.infolist()
         _require(len(infos) == ARCHIVE_MEMBERS, "unexpected archive member count")
-        manifest, facts, sides = [], {}, {}
+        manifest, facts, sides, origins = [], {}, {}, {}
         for info in sorted(infos, key=lambda item: item.filename):
             name = info.filename
             _require(
@@ -237,6 +240,9 @@ def derive(archive: Path) -> tuple[dict[str, Any], dict[int, bytes]]:
             manifest.append(
                 {"path": name, "bytes": len(data), "sha256": hashlib.sha256(data).hexdigest()}
             )
+            credit = re.fullmatch(r"prepared/cases/n0*([1-9]\d*)/provenance\.json", name)
+            if credit is not None:
+                origins[int(credit.group(1))] = json.loads(data.decode("utf-8"))
             match = re.fullmatch(r"certificates/n([1-9]\d*)\.cert", name)
             if match is None:
                 continue
@@ -247,6 +253,20 @@ def derive(archive: Path) -> tuple[dict[str, Any], dict[int, bytes]]:
             facts[n] = fact_bytes(certificate)
             sides[n] = (manifest[-1], legacy.literal(certificate.side))
     _require(tuple(sorted(facts)) == COUNTS, "the archive's certificates are not the 100")
+    _require(tuple(sorted(origins)) == COUNTS, "the archive's provenance is not the 100")
+    provenance = {
+        "format": CREDITS_FORMAT,
+        "cases": [
+            {
+                "n": n,
+                "member": f"prepared/cases/n{n:04d}/provenance.json",
+                "provenance": origins[n],
+            }
+            for n in COUNTS
+        ],
+    }
+    text = json.dumps(provenance, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+    packed = gzip.compress((text + "\n").encode("utf-8"), compresslevel=9, mtime=0)
     record = {
         "format": SOURCES_FORMAT,
         "issue": ISSUE_URL,
@@ -272,15 +292,20 @@ def derive(archive: Path) -> tuple[dict[str, Any], dict[int, bytes]]:
             }
             for n in COUNTS
         ],
+        "provenance": {
+            "path": CREDITS.relative_to(PACKET).as_posix(),
+            "sha256": hashlib.sha256(packed).hexdigest(),
+        },
         "archive_manifest": manifest,
     }
-    return record, facts
+    return record, facts, packed
 
 
 def write_derived(archive: Path, *, check: bool) -> None:
-    record, facts = derive(archive)
+    record, facts, packed = derive(archive)
     if check:
         _require(SOURCES.read_text("utf-8") == _json_text(record), "manifest differs")
+        _require(_private(CREDITS).read_bytes() == packed, "provenance record differs")
         for n, data in facts.items():
             _require(_private(fact_path(n)).read_bytes() == data, f"n={n}: fact differs")
         return
@@ -288,6 +313,8 @@ def write_derived(archive: Path, *, check: bool) -> None:
         fact_path(n).parent.mkdir(parents=True, exist_ok=True)
         with atomic_output_file(_private(fact_path(n))) as temporary:
             temporary.write_bytes(data)
+    with atomic_output_file(_private(CREDITS)) as temporary:
+        temporary.write_bytes(packed)
     with atomic_output_file(_private(SOURCES)) as temporary:
         temporary.write_text(_json_text(record), encoding="utf-8")
 
@@ -305,6 +332,8 @@ def check_manifest() -> None:
     _require([row["n"] for row in record["members"]] == list(COUNTS), "manifest roster")
     paths = {row["path"]: row["sha256"] for row in record["archive_manifest"]}
     _require(len(paths) == ARCHIVE_MEMBERS, "the archive manifest is incomplete")
+    digest = hashlib.sha256(_private(CREDITS).read_bytes()).hexdigest()
+    _require(record["provenance"]["sha256"] == digest, "provenance record digest")
     for row in record["members"]:
         digest = hashlib.sha256(_private(fact_path(row["n"])).read_bytes()).hexdigest()
         _require(row["fact_sha256"] == digest, f"n={row['n']}: fact digest")
@@ -444,25 +473,39 @@ def certify(
 
 
 def check(numbers: Collection[int] = COUNTS, *, replay: bool = False) -> dict[str, Any]:
-    """Admit manifest, facts, claims record and receipts; with ``replay``, decide again."""
+    """Admit manifest, facts, claims record and receipts; with ``replay``, decide again.
+
+    Returns what the receipts hold: jobs, pair decisions, route CPU and job wall seconds,
+    the longest job, and the least wall clearance and pair gap of any positive job.
+    """
     check_manifest()
     certificates = read_facts(numbers)
     if set(numbers) == set(COUNTS):
         stored = json.loads(_private(BEYOND).read_text("utf-8"))
         _require(stored == claims_record(certificates), "the claims record differs")
-    summary = {"counts": 0, "jobs": 0, "pairs": 0, "cpu_seconds": 0.0, "longest": 0.0}
+    rows = []
     for n, certificate in certificates.items():
         _require(receipt_admitted(n, certificate) is not None, f"n={n}: no receipt")
         record = kernel.read_xz(receipt_path(n))
         if replay:
             kernel.replay_receipt(record, {n: certificate}, {n}, **PROFILE)
-        summary["counts"] += 1
-        for row in record["cases"]:
-            summary["jobs"] += 1
-            summary["pairs"] += sum(row[route]["pairs_tested"] for route in kernel.ROUTES)
-            summary["cpu_seconds"] += sum(row["cpu_seconds"].values())
-            summary["longest"] = max(summary["longest"], row["wall_seconds"])
-    return summary
+        rows.extend(record["cases"])
+    positives = [row for row in rows if row["control"] == "positive"]
+
+    def least(field: str) -> str:
+        value = min(Fraction(row[route][field]) for row in positives for route in kernel.ROUTES)
+        return f"{float(value):.3e}"
+
+    return {
+        "counts": len(certificates),
+        "jobs": len(rows),
+        "pairs": sum(row[route]["pairs_tested"] for row in rows for route in kernel.ROUTES),
+        "route_cpu_seconds": round(sum(sum(row["cpu_seconds"].values()) for row in rows), 2),
+        "job_wall_seconds": round(sum(row["wall_seconds"] for row in rows), 2),
+        "longest_job_seconds": round(max(row["wall_seconds"] for row in rows), 2),
+        "least_wall_clearance": least("minimum_containment_clearance"),
+        "least_pair_gap": least("minimum_best_pair_gap"),
+    }
 
 
 def main(argv: list[str] | None = None) -> int:

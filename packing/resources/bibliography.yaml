@@ -3004,6 +3004,28 @@ sources:
       view and the source''s comparison with #586 are retained beside it. MIT-licensed; Claude assistance
       disclosed. KKT statements are the author''s numerical evidence; the source does not claim a strict
       local minimum, and no local or global optimality claim is made.'
+  - key: '[Muglich issue 686 2026-10-19]'
+    authors:
+    - Muglich
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-19'
+    lineage: independent
+    credit: Muglich after Couzo, de Winter, Fang, Daniel
+    note: >-
+      Darius Muglich's issue 686 reports 100 upper bounds for n = 328 to 998, one exact
+      rational certificate each, in the issue's attachment
+      01-squares-100-certificates-and-poses.zip, published 2026-10-19T20:43:04Z and pinned
+      by its address and SHA-256 6b711d6e80c9828497ba09d44673ee490c00ccae51b80587ec591d940722a874;
+      there is no commit or DOI. The source says these are not 100 independent structures:
+      many are deletions, borders, crops or refinements of other holders' packings,
+      Francisco Couzo's most often, found with Evan Daniel's solver from public seeds,
+      and compared with Couzo's, de Winter's and Fang's published bounds. The per-case
+      provenance that credits each construction's seeds and sources is retained beside
+      derived facts in web/muglich-issue686-2026-10-19/; the archive's bytes are pinned by
+      digest and not retained. The author granted CC BY 4.0 for his contributions on 20
+      October 2026. OpenAI Codex assistance disclosed. Upper bounds only; no priority,
+      rigidity or optimality claim.
 credited_names:
   Benjamin Greff: Greff
   Hiroaki Hosono: Hosono
@@ -3048,3 +3070,4 @@ credited_names:
   Kevin Fang: Fang
   Mishapolk: Mishapolk
   PingYou Ltd: PingYou Ltd
+  Darius Muglich: Muglich
