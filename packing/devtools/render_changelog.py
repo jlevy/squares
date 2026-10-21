@@ -682,15 +682,17 @@ def _entry_lines(
     destination: Destination,
     *,
     include_significance: bool = True,
+    include_prose: bool = True,
 ) -> list[str]:
     """Shared contribution prose and evidence for the complete GitHub and News views."""
     rating = entry_significance(entry)
     out: list[str] = []
     if destination == "github" and include_significance:
         out.extend([f"Significance S{rating['score']}: {_text(rating['rationale'])}", ""])
-    out.extend([_prose(entry["summary"], destination=destination), ""])
-    if "details" in entry:
-        out.extend([_prose(entry["details"], destination=destination), ""])
+    if include_prose:
+        out.extend([_prose(entry["summary"], destination=destination), ""])
+        if "details" in entry:
+            out.extend([_prose(entry["details"], destination=destination), ""])
     if entry.get("artifacts"):
         links = [
             _markdown_link(item["label"], item["target"], destination=destination)
@@ -960,9 +962,16 @@ def render_news(
         article.append(
             f'<article class="site-news-item" data-news-entry="{entry["id"]}">{header}'
         )
+        from devtools.profile_links import link_prose  # noqa: PLC0415
+
+        article.append(link_prose(_prose(entry["summary"], destination="site")))
+        if "details" in entry:
+            article.append(link_prose(_prose(entry["details"], destination="site")))
         article.extend(
             _prose(field, destination="site")
-            for field in _entry_lines(document, entry, "github", include_significance=False)
+            for field in _entry_lines(
+                document, entry, "github", include_significance=False, include_prose=False
+            )
             if field
         )
         article.append("</article>")

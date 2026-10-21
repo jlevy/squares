@@ -11,6 +11,7 @@ import yaml
 
 from devtools import (
     check_published_site,
+    render_changelog,
     render_contributors,
     render_overview,
     site_documents,
@@ -24,6 +25,7 @@ from sqpack.contributors import (
     PEOPLE_DIR,
     SCHEMA_PATH,
     ContributorError,
+    ContributorLink,
     FieldProvenance,
     load_contributors,
     record_names,
@@ -37,19 +39,27 @@ def test_profiles_share_one_complete_article_and_directory() -> None:
     assert set(pages) == set(render_contributors.page_paths())
     index = pages["profiles/index.html"]
     assert "<h1>Profiles</h1>" in index
-    assert 'aria-label="Profiles"' in index
+    assert 'class="kpress-table site-table site-profile-table"' in index
+    assert '<th scope="col">Name</th>' in index
+    assert '<th scope="col" class="num">Credits</th>' in index
+    assert '<th scope="col" class="num">Resources</th><th scope="col">Links</th>' in index
+    assert "Counts match the reviewed credits listed on each profile" in index
     assert "<title>Profiles" in index
     assert 'rel="canonical" href="https://jlevy.github.io/squares/profiles/"' in index
     # The directory names cited authors as well as contributors, and calls none of them
     # contributors in its own voice; the colophon links it by the same name.
     assert "Contributors<" not in index
     assert '<a href="index.html">Profiles</a></span>' in index
-    assert 'data-contributor="' not in index
+    assert "data-person" not in index
+    assert 'data-page="about" aria-current="page"' in index
+    assert '<a href="../about.html#profiles">About</a></nav>' in index
     for contributor in registry.by_id.values():
         assert contributor.profile_path == f"profiles/{contributor.id}.html"
         assert f'href="{contributor.id}.html"' in index
         profile = pages[contributor.profile_path]
         assert '<article class="site-contributor"' in profile
+        assert 'data-page="about" aria-current="page"' in profile
+        assert '<a href="../about.html#profiles">About</a>' in profile
         assert '<a href="index.html">Profiles</a></nav>' in profile
         assert contributor.display_name in profile
         assert "data-contributor-popover" in profile
@@ -58,6 +68,20 @@ def test_profiles_share_one_complete_article_and_directory() -> None:
         assert re.search(r'src="../assets/js/article-loader\.[a-f0-9]+\.js"', profile)
         assert re.search(r'src="../assets/js/contributor-popover\.[a-f0-9]+\.js"', profile)
         assert "contributors/" not in profile
+        sources = profile.split(
+            '<details class="site-contributor-sources"><summary>Sources</summary>', 1
+        )[1].split("</details>", 1)[0]
+        assert "<details" not in sources
+        assert "<h2>Sources</h2>" not in profile
+        assert "Identity evidence" in sources
+        for source in contributor.sources:
+            assert f'id="source-{source.id}"' in sources
+        if contributor.bio:
+            assert "Biography sources:" in sources
+            assert (
+                "Biography sources:"
+                not in profile.split('<details class="site-contributor-sources">', 1)[0]
+            )
     assert "Real name" not in pages["profiles/mira.html"]
     assert "site-contributor-bio" not in pages["profiles/mira.html"]
 
@@ -182,6 +206,21 @@ def test_credits_link_cases_and_results_preserving_roles_without_duplicates() ->
     assert 'href="result/t-051.html"' in rendered
     assert "construction — Mira" in rendered
     assert "proof — Mira" in rendered
+    directory = render_contributors.profile_table(
+        [replace(contributor, real_name="Full Public Name")], (case, case, result)
+    )
+    assert ">Full Public Name</a>" in directory
+    assert 'aria-label="2 reviewed credits for Full Public Name">2</a>' in directory
+    assert "<details open>" not in rendered
+    long_credits = tuple(
+        replace(
+            result,
+            origin=replace(result.origin, record_key=f"T-{number:03d}"),
+        )
+        for number in range(1, 14)
+    )
+    expanded = render_contributors.contributor_article(contributor, long_credits)
+    assert "<details open><summary>13 reviewed credits</summary>" in expanded
 
 
 def test_separate_bibliography_credits_and_identifier_evidence_are_preserved() -> None:
@@ -318,3 +357,107 @@ def test_profile_heads_need_no_archive_evidence(tmp_path: Path) -> None:
     metas = render_contributors.page_metas()
     for profile in profiles.values():
         assert metas[profile.profile_path] == render_contributors.profile_meta(profile)
+
+
+def test_profile_presents_selected_names_accounts_and_existing_news(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setattr(
+        render_contributors,
+        "_related_news",
+        lambda: {
+            "manasseh-ahmed": [
+                ("changelog-entry-proof", "Existing proof announcement", "2026-10-12")
+            ]
+        },
+    )
+    registry = load_contributors()
+    ahmed = registry.by_id["manasseh-ahmed"]
+    article = render_contributors.contributor_article(ahmed, ())
+    identity = article.split('<dl class="site-contributor-identity">', 1)[1].split("</dl>", 1)[
+        0
+    ]
+    assert "MathCompSciFTW, Square Packing Fan" in identity
+    assert "Queuingtheorydotcom" not in identity
+    assert 'aria-label="GitHub: Queuingtheorydotcom"' in article
+    assert 'aria-label="Twitter / X: @ManassehA06"' in article
+    assert article.count('class="site-account-icon"') == 2
+    assert 'href="news.html#changelog-entry-proof"' in article
+    assert '<time datetime="2026-10-12">2026-10-12</time>' in article
+    for identifier in ("oscar-fitzharding", "david-r-maciver"):
+        person = registry.by_id[identifier]
+        rendered = render_contributors.contributor_article(person, ())
+        assert "site-contributor-identity" not in rendered
+        if identifier == "oscar-fitzharding":
+            assert "site-contributor-bio" not in rendered
+    own = (
+        render_contributors.contributor_article(
+            replace(ahmed, bio="Manasseh Ahmed and Joshua Levy"), ()
+        )
+        .split('<p class="site-contributor-bio">', 1)[1]
+        .split("</p>", 1)[0]
+    )
+    assert own.startswith("Manasseh Ahmed and <a")
+    assert 'href="profiles/joshua-levy.html">Levy</a>' in own
+
+
+def test_accounts_share_destinations_and_icons_in_profiles_and_compact_rows() -> None:
+    person = replace(
+        load_contributors().by_id["evan-daniel"],
+        links=(
+            ContributorLink("github", "https://github.com/evand", "evand"),
+            ContributorLink("twitter", "https://x.com/evand", "evand"),
+            ContributorLink("personal", "https://example.org/?a=1&b=2"),
+            ContributorLink("publication", "https://example.org/papers"),
+        ),
+    )
+    full = render_contributors.account_links(person)
+    compact = render_contributors.account_links(person, compact=True)
+    assert full.count('class="site-account-icon"') == len(person.links)
+    assert compact.count('class="site-account-icon"') == len(person.links)
+    assert "<span>evand</span>" in full
+    assert "<span>@evand</span>" in full
+    assert "<span>" not in compact
+    for link in person.links:
+        target = link.url.replace("&", "&amp;")
+        assert f'href="{target}"' in full
+        assert f'href="{target}"' in compact
+    assert 'aria-label="GitHub: evand (Evan Daniel)"' in compact
+    assert 'title="Twitter / X: @evand (Evan Daniel)"' in compact
+    assert 'aria-label="Personal website:' in compact
+    assert 'aria-label="Publication website:' in compact
+    assert "data-person" not in compact
+    assert render_contributors.account_links(replace(person, links=()), compact=True) == ""
+
+
+def test_related_news_uses_only_eligible_explicit_person_links() -> None:
+    summary = "[Alice](packing/contributors/people/alice.md) and Bob Person."
+    entry = {
+        "id": "proof",
+        "title": "A proof",
+        "date": "2026-10-12",
+        "summary": summary,
+        "details": summary,
+        "significance": {"score": 4, "rationale": "New proof."},
+    }
+    entries = [
+        entry,
+        {**entry, "id": "low", "significance": {"score": 2, "rationale": "Minor change."}},
+        {**entry, "id": "excluded", "news_exclusion": {}},
+    ]
+    related = render_contributors.news_by_profile(
+        render_changelog.news_entries({"entries": entries})
+    )
+    assert related == {"alice": [("changelog-entry-proof", "A proof", "2026-10-12")]}
+
+
+def test_profile_invitation_requires_no_identity_metadata(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    def no_records(*_args: object) -> None:
+        raise AssertionError("Home/About invitation should not read person records")
+
+    monkeypatch.setattr(render_contributors, "record_metadata", no_records)
+    invitation = render_contributors.profile_preview()
+    assert "All Profiles" in invitation
+    assert "site-contributor-list" not in invitation

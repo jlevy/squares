@@ -126,6 +126,24 @@ person names, handle reconciliation, project/tool distinctions, lineage and PDF 
 It records case-specific decisions and exceptions.
 The shared design guide owns layout; this plan owns rollout and coverage.
 
+Home and About share a brief invitation and the standard **All Profiles** action,
+without name previews.
+The directory is a surname-sorted table of full real/public names and counts matching
+each profile’s reviewed credits, plus shared public-account icons and cited-resource
+counts linking to each profile’s Resources section.
+The typed `site_resources` projection derives resource relationships from the existing
+curated homepage inventories and explicit bylines; person records store no second list.
+Credits and Resources remain separate counts.
+Directory and individual profiles retain About navigation ancestry.
+Profiles show selected alternate names, account handles or URLs with platform icons, and
+Related News derived from existing explicitly linked announcements.
+Scoped authored prose links exact unique full names while preserving reviewed credit
+joins and archived wording.
+The [attribution policy](../../../../attribution.md#website-and-pdf-presentation) owns
+those matching boundaries; the
+[design guide](../../../../packing/devtools/templates/paper-design.md#person-profiles)
+owns the shared presentation and audit contract.
+
 The owner added four follow-ups: `think-t3a9` reconciles Ahmed/Queuingtheorydotcom and
 supported handles, including Joshua Levy/jlevy/ojoshe; `think-vix3` audits personal Levy
 credits against project branding, including PDFs; `think-8yk4` verifies the suggested
@@ -159,11 +177,21 @@ extension hidden from CI.
 | `id` | Lowercase slug matching the filename, fixed once published: the person’s evidenced real name (`manasseh-ahmed`, `hiroaki-hosono`), otherwise the handle they publish under (`guzhou0806`) |
 | `display_name` | Preferred public name: the evidenced real name where there is one, otherwise the handle; compact credits use the surname (`Ahmed`, `Hosono`) |
 | `real_name` | Optional publicly evidenced name |
+| `surname` | Optional evidenced family name for link labels and list ordering; requires provenance, with no word-position inference |
 | `aliases` | Evidenced spellings, initials and handles; not globally unique IDs |
+| `display_aliases` | Optional unique selection of evidenced aliases to show; empty by default, with provenance retained on the original aliases |
 | `links` | Typed public URLs and optional handles; publication/personal sites are distinct |
 | `sources` | Local IDs, repository-relative archive paths and/or primary URLs, with locators |
 | `provenance` | Payload field pointers and supporting source IDs |
 | `bio_sources` | Source IDs supporting the optional body paragraph |
+
+Inline person links and directory ordering use the registry-wide naming resolver
+described in
+[Attribution Policy](../../../../attribution.md#one-identity-several-public-labels) and
+[Person Profiles](../../../../packing/devtools/templates/paper-design.md#person-profiles).
+Profile headings retain full public names; reviewed source spans retain their original
+wording as evidence.
+Neither surname labels nor sorting create identity joins.
 
 Keep biography only in the Markdown body, followed by the required documentation footer,
 without a heading or duplicate YAML biography field.
@@ -214,10 +242,11 @@ the composed credit remains unlinked rather than selecting one source arbitraril
 
 ### Convert names to links
 
-Render each resolved occurrence’s original label as an anchor to
-`contributors/<id>.html`, rebased to the containing page and marked for popover
-enhancement. Profile pages link back to credited results and papers through the reviewed
-manifest, preserving roles.
+Render each resolved occurrence with the shared surname-or-handle label as an anchor to
+`profiles/<id>.html`, rebased to the containing page and marked for popover enhancement.
+Retain its original reviewed label in the occurrence record.
+Profile pages link back to credited results and papers through the reviewed manifest,
+preserving roles.
 
 | Name-bearing surface | Conversion point |
 | --- | --- |

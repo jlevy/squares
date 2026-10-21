@@ -130,6 +130,9 @@ name: Certificate page
       - packing/devtools/templates/site-forwarder.html
       - packing/devtools/render_overview.py
       - packing/devtools/render_contributors.py
+      - packing/devtools/profile_links.py
+      - packing/devtools/site_icons.py
+      - packing/devtools/site_resources.py
       - packing/devtools/contributor_credit.py
       - packing/contributors/**
       - packing/resources/**

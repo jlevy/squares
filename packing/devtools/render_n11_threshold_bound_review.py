@@ -63,6 +63,7 @@ from devtools.render_overview import (
     THEME_SCRIPT,
     TOOLTIP_SCRIPT,
     PageMeta,
+    canonical_url,
     colophon_lines,
     favicon_html,
     head_tags,
@@ -120,9 +121,11 @@ FRONT = paper_front.check(
         source=paper_front.Source(
             "Marc Leonard Overbeck",
             "https://github.com/Kleddamag/11-squares-certified-bound",
-            author_url="https://x.com/kleddamag",
+            author_url=canonical_url("profiles/marc-leonard-overbeck.html"),
         ),
-        oversight=(paper_front.Person("Joshua Levy", "https://x.com/ojoshe"),),
+        oversight=(
+            paper_front.Person("Joshua Levy", canonical_url("profiles/joshua-levy.html")),
+        ),
         agents=("Fable 5.1", "Opus 5.5"),
         version=THRESHOLD_REVIEW_EDITION,
         dates=(

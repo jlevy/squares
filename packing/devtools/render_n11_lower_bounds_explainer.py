@@ -75,6 +75,7 @@ from devtools.render_overview import (
     SITE_NAV_CSS,
     SITE_URL,
     PageMeta,
+    canonical_url,
     colophon_lines,
     favicon_html,
     head_tags,
@@ -2292,7 +2293,9 @@ FRONT = paper_front.check(
     paper_front.PaperFront(
         slug=SLUG,
         title=HERO_TITLE,
-        oversight=(paper_front.Person("Joshua Levy", "https://x.com/ojoshe"),),
+        oversight=(
+            paper_front.Person("Joshua Levy", canonical_url("profiles/joshua-levy.html")),
+        ),
         agents=("Opus 5", "Fable 5.1", "GPT 5.6 Sol", "GPT-6 Astra"),
         version=EXPLAINER_VERSION,
         dates=(

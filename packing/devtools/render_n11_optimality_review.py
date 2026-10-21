@@ -48,6 +48,7 @@ from devtools.render_overview import (
     THEME_SCRIPT,
     TOOLTIP_SCRIPT,
     PageMeta,
+    canonical_url,
     colophon_lines,
     favicon_html,
     head_tags,
@@ -95,9 +96,11 @@ FRONT = paper_front.check(
         source=paper_front.Source(
             "Manasseh Ahmed",
             "https://github.com/Queuingtheorydotcom/11SquaresOptimal",
-            author_url="https://x.com/ManassehA06",
+            author_url=canonical_url("profiles/manasseh-ahmed.html"),
         ),
-        oversight=(paper_front.Person("Joshua Levy", "https://x.com/ojoshe"),),
+        oversight=(
+            paper_front.Person("Joshua Levy", canonical_url("profiles/joshua-levy.html")),
+        ),
         agents=("GPT-6 Astra", "GPT-6 Sol"),
         version=OPTIMALITY_REVIEW_EDITION,
         dates=(

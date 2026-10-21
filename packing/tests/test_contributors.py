@@ -153,6 +153,9 @@ def test_contract_metadata_cannot_be_redirected(
         ("display_name", " "),
         ("real_name", None),
         ("real_name", ""),
+        ("surname", None),
+        ("surname", ""),
+        ("surname", " "),
         ("aliases", []),
         ("aliases", ["Mira-acc", "Mira-acc"]),
         ("links", []),
@@ -426,3 +429,41 @@ def test_schema_gate_includes_contributors_and_runs_semantics(
     document["contributor"]["provenance"][0]["sources"] = ["unknown"]
     write_record(path, document)
     assert "unknown provenance sources" in validate_schemas.check(path)[0]
+
+
+def test_visible_aliases_are_an_optional_selection_of_evidenced_spellings(
+    record: tuple[Path, dict[str, Any]],
+) -> None:
+    path, document = record
+    write_record(path, document)
+    assert load_contributor(path, repo=REPO).display_aliases == ()
+    document["contributor"]["display_aliases"] = ["Mira-acc"]
+    write_record(path, document)
+    loaded = load_contributor(path, repo=REPO)
+    assert loaded.display_aliases == ("Mira-acc",)
+    assert "Mira-acc" in loaded.aliases
+    document["contributor"]["display_aliases"] = ["invented name"]
+    write_record(path, document)
+    with pytest.raises(ContributorError, match="subset"):
+        load_contributor(path, repo=REPO)
+    document["contributor"]["display_aliases"] = ["Mira-acc", "Mira-acc"]
+    write_record(path, document)
+    with pytest.raises(ContributorError):
+        load_contributor(path, repo=REPO)
+
+
+def test_surname_is_optional_but_requires_identity_evidence(
+    record: tuple[Path, dict[str, Any]],
+) -> None:
+    path, document = record
+    write_record(path, document)
+    assert load_contributor(path, repo=REPO).surname is None
+    document["contributor"]["surname"] = "Example"
+    write_record(path, document)
+    with pytest.raises(ContributorError, match="identity field requires provenance: /surname"):
+        load_contributor(path, repo=REPO)
+    document["contributor"]["provenance"].append(
+        {"field": "/surname", "sources": [document["contributor"]["sources"][0]["id"]]}
+    )
+    write_record(path, document)
+    assert load_contributor(path, repo=REPO).surname == "Example"

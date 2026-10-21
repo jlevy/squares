@@ -7,6 +7,7 @@ softschema:
 contributor:
   id: manasseh-ahmed
   display_name: Manasseh Ahmed
+  surname: Ahmed
   real_name: Manasseh Ahmed
   aliases:
     - Ahmed
@@ -18,6 +19,7 @@ contributor:
     - '@Queuingtheorydotcom'
     - '@ManassehA06'
     - '@MathCompSciFTW'
+  display_aliases: [MathCompSciFTW, Square Packing Fan]
   links:
     - kind: github
       url: https://github.com/Queuingtheorydotcom
@@ -50,6 +52,8 @@ contributor:
       archive_path: packing/resources/web/queuingtheorydotcom-n11-lean-2026-10-06/README.md
       locator: 'Opening identity account and Source and Pin table record the owner-confirmed GitHub/X join, former MathCompSciFTW handle, and curated Mannaseh Ahmed spelling; primary receipts expose only the account display name.'
   provenance:
+    - field: /surname
+      sources: [bibliography]
     - field: /display_name
       sources: [owner-confirmation, n17-credits]
     - field: /real_name

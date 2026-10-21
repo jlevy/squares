@@ -7,6 +7,7 @@ softschema:
 contributor:
   id: evan-daniel
   display_name: Evan Daniel
+  surname: Daniel
   real_name: Evan Daniel
   aliases: [Daniel, evand]
   links:
@@ -29,6 +30,8 @@ contributor:
       archive_path: packing/resources/bibliography.yaml
       locator: credited_names maps Evan Daniel to Daniel.
   provenance:
+    - field: /surname
+      sources: [bibliography]
     - field: /display_name
       sources: [repository-license]
     - field: /real_name

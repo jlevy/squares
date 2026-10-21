@@ -380,6 +380,7 @@ def test_the_homepage_sections_run_in_the_requested_order(page: str, atlas_page:
         "report-your-results",
         "papers",
         "visuals",
+        "profiles",
         "squares-project-documentation",
         "more-resources",
     ]
@@ -2537,7 +2538,7 @@ def test_other_project_cards_are_links_showing_their_address(
         maxsplit=1,
     )[0]
     cards = re.findall(
-        r'<a class="site-card(?: site-card-link|-link site-card-main)" href="([^"]+)"(.*?)</a>',
+        r'<a class="site-card-link site-card-heading" href="([^"]+)"(.*?)</a>',
         section,
     )
     assert [url for url, _ in cards] == [
@@ -2549,10 +2550,16 @@ def test_other_project_cards_are_links_showing_their_address(
         """`markup` with each empty element closed as kpress writes it, `<path … />`."""
         return re.sub(r"\s*/>", " />", markup)
 
-    for url, body in cards:
+    for url, _body in cards:
+        source = re.search(
+            rf'<a class="site-card-url" href="{re.escape(url)}"[^>]*>(.*?)</a>',
+            section,
+            re.DOTALL,
+        )
+        assert source is not None, url
         address = url.removeprefix("https://").rstrip("/")
-        assert html.escape(address) in body.replace("<wbr>", ""), url
-        assert closed(overview_sections.link_icon(url)) in closed(body), url
+        assert html.escape(address) in source[1].replace("<wbr>", ""), url
+        assert closed(overview_sections.link_icon(url)) in closed(source[1]), url
     assert closed(overview_sections.GITHUB_MARK) in closed(section)
     assert closed(overview_sections.WEB_MARK) in closed(section)
     assert "popovertarget" not in section
@@ -4105,6 +4112,7 @@ def test_the_sites_own_statement_follows_readmes_introduction(about: str, result
         '<a id="contribute-your-results"></a></h1>',
         1,
     )
+    narrative = narrative.split('<h1 id="profiles"', 1)[0]
     assert len(re.findall(r"<p>", narrative)) == 4
     assert len(re.findall(r"<p>", contribution)) == 2
     items = re.findall(r"<li>(.*?)</li>", narrative, re.DOTALL)
@@ -4115,45 +4123,43 @@ def test_the_sites_own_statement_follows_readmes_introduction(about: str, result
     ]
     assert [_rendered_text(item) for item in items] == [
         _markdown_text(
-            "Joshua Levy began the Squares Project in August 2026 with new lower bounds "
+            "Levy began the Squares Project in August 2026 with new lower bounds "
             "for $n = 11, 17, 18, 19, 20$ and other low values."
         ),
+        _markdown_text("Overbeck\u2019s certified lower bound of $31/8$ for eleven squares."),
+        "Ahmed\u2019s proof of optimality for eleven squares.",
         _markdown_text(
-            "Marc Leonard Overbeck\u2019s certified lower bound of $31/8$ for eleven squares."
-        ),
-        "Manasseh Ahmed\u2019s proof of optimality for eleven squares.",
-        _markdown_text(
-            "Independently, Evan Daniel has proved the optimality of an infinite family, "
+            "Independently, Daniel has proved the optimality of an infinite family, "
             r"$s(k^2 - 3) = k$ for every $k \ge 6$, along with exact values at "
             "21, 32, 45 and 60 squares."
         ),
         (
-            "Marc Leonard Overbeck\u2019s candidate proof for seventeen squares, "
+            "Overbeck\u2019s candidate proof for seventeen squares, "
             "reported and unverified here (V0/C1)."
         ),
         (
-            "Oscar Fitzharding\u2019s Lean proof report for seventeen squares, "
+            "Fitzharding\u2019s Lean proof report for seventeen squares, "
             "also unverified here (V0/C1)."
         ),
     ]
     text = _rendered_text(narrative)
     for claim in (
         "Work on the square packing problem has exploded",
-        "Joshua Levy",
-        "Marc Leonard Overbeck",
-        "Manasseh Ahmed",
-        "Evan Daniel",
-        "Oscar Fitzharding",
+        "Levy",
+        "Overbeck",
+        "Ahmed",
+        "Daniel",
+        "Fitzharding",
         "Independently",
         "AI-assisted verification",
     ):
         assert claim in text, claim
     founder = '<a href="https://x.com/ojoshe" target="_blank" rel="noopener noreferrer">'
     for address, label in (
-        ("https://x.com/ojoshe", "Joshua Levy"),
-        ("https://x.com/kleddamag", "Marc Leonard Overbeck"),
-        ("https://x.com/ManassehA06", "Manasseh Ahmed"),
-        ("https://x.com/evanbd", "Evan Daniel"),
+        ("profiles/joshua-levy.html", "Levy"),
+        ("profiles/marc-leonard-overbeck.html", "Overbeck"),
+        ("profiles/manasseh-ahmed.html", "Ahmed"),
+        ("profiles/evan-daniel.html", "Daniel"),
         ("papers/n11-lower-bounds-explainer.html", "new lower bounds"),
         ("papers/n11-threshold-bound-review.html", "certified lower bound of $31/8$"),
         ("papers/n11-optimality-review.html", "proof of optimality"),
@@ -4230,6 +4236,7 @@ def test_the_full_project_statement_lives_on_about_and_the_card_keeps_its_anchor
     assert about.count(heading) == 1
     assert re.findall(r'<h1\b[^>]*\bid="([^"]+)"', about) == [
         "the-squares-project",
+        "profiles",
         "report-your-results",
         "squares-project-documentation",
     ]
@@ -4243,6 +4250,21 @@ def test_the_full_project_statement_lives_on_about_and_the_card_keeps_its_anchor
     assert "Work on the square packing problem has exploded" not in page
     assert page.count('id="the-squares-project"') == 0
     assert 'href="about.html"' in page
+    preview = about.split('<h1 id="profiles" class="site-title">Profiles</h1>', 1)[1]
+    preview = preview.split('<h1 id="report-your-results"', 1)[0]
+    assert "site-contributor-list" not in preview
+    assert "profiles/manasseh-ahmed.html" not in preview
+    home_preview = page.split('<h1 id="profiles" class="site-title">Profiles</h1>', 1)[1]
+    home_preview = home_preview.split('<h1 id="squares-project-documentation"', 1)[0]
+    assert "site-contributor-list" not in home_preview
+    assert "profiles/manasseh-ahmed.html" not in home_preview
+    for invitation in (preview, home_preview):
+        assert "We track contributors and the authors cited" in invitation
+        assert 'href="profiles/index.html">All Profiles' in invitation
+    assert "data-person" not in preview
+    assert re.search(
+        r'<a class="site-action" href="profiles/index.html">All Profiles<span\b', preview
+    )
 
 
 def test_the_project_is_named_the_squares_project_wherever_it_is_named(
@@ -4464,10 +4486,10 @@ def test_a_papers_card_holds_no_link_so_the_introduction_links_what_it_names(
     assert re.findall(r'<a\b[^>]*href="([^"]+)"[^>]*>([^<]+)</a>', introduction) == [
         (overview_sections.LOWER_BOUNDS_PAPER, "Part I"),
         (overview_sections.THRESHOLD_BOUND_PAPER, "Part II"),
-        ("https://x.com/kleddamag", "Marc Leonard Overbeck"),
+        ("profiles/marc-leonard-overbeck.html", "Overbeck"),
         ("results.html#t-037", "T-037"),
         (overview_sections.OPTIMALITY_PAPER, "Part III"),
-        ("https://x.com/ManassehA06", "Manasseh Ahmed"),
+        ("profiles/manasseh-ahmed.html", "Ahmed"),
         ("results.html#t-060", "T-060"),
         ("papers/square-packing-methods-survey.html", "How Record Square Packings Are Found"),
     ]
@@ -5059,6 +5081,9 @@ def test_a_page_title_stands_one_space_above_what_follows_it() -> None:
     subtitle hands the space to the subtitle."""
     css = render_overview.SITE_CSS.read_text(encoding="utf-8")
     assert css.count("--site-subtitle-space: 2rem;") == 1
+    assert "  .kpress-long-text > .site-title:first-child," in css
+    assert "  .kpress-long-text > :is(article, header):first-child > h1:first-of-type," in css
+    assert "    --site-title-space-above: 6.25rem;" in css
     assert "  margin-block: var(--site-subtitle-space);\n" in css
     assert (
         ".kpress :where(.site-page, .kpress-prose) h1,\n"

@@ -7,6 +7,7 @@ softschema:
 contributor:
   id: hiroaki-hosono
   display_name: Hiroaki Hosono
+  surname: Hosono
   real_name: Hiroaki Hosono
   aliases: [Hosono, wand125, '@wand_125']
   links:
@@ -39,6 +40,8 @@ contributor:
       archive_path: packing/resources/bibliography.yaml
       locator: 'Source authors and credits print Hosono; the bibliography keys keep the handle wand125, and the notes name Hiroaki Hosono as commit author.'
   provenance:
+    - field: /surname
+      sources: [owner-confirmation, bibliography]
     - field: /display_name
       sources: [commit-author, github-profile, owner-confirmation]
     - field: /real_name

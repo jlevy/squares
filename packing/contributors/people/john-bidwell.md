@@ -7,6 +7,7 @@ softschema:
 contributor:
   id: john-bidwell
   display_name: John Bidwell
+  surname: Bidwell
   real_name: John Bidwell
   aliases: [Bidwell]
   sources:
@@ -25,6 +26,8 @@ contributor:
       archive_path: packing/resources/bibliography.yaml
       locator: 'credited_names maps John Bidwell to Bidwell; the [Chang n83 2026-09-24] credit names Bidwell from the catalogue line “Extends the s(17) found by John Bidwell in 1998”.'
   provenance:
+    - field: /surname
+      sources: [survey-credit, bibliography]
     - field: /display_name
       sources: [survey-credit, catalogue-credit, picture-credits]
     - field: /real_name
@@ -33,12 +36,9 @@ contributor:
       sources: [survey-credit, bibliography]
   bio_sources: [survey-credit, catalogue-credit]
 ---
-John Bidwell found the best known packing of 17 unit squares in 1998, as an
-undergraduate student at the University of Hawaii, improving Pertti Hämäläinen’s packing
-of 1980. Erich Friedman’s survey reports it from a private communication and notes that
-it is the smallest best known packing with squares at three different angles.
-Its side, about 4.6755, is a root of a degree-18 polynomial.
-Bidwell also slightly improved Friedman’s 1998 packing of 29 squares.
+John Bidwell found the 17-square packing in 1998 while an undergraduate at the
+University of Hawaii.
+He also improved a packing of 29 squares.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

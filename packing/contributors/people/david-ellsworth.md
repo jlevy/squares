@@ -7,6 +7,7 @@ softschema:
 contributor:
   id: david-ellsworth
   display_name: David Ellsworth
+  surname: Ellsworth
   real_name: David Ellsworth
   aliases: [Ellsworth]
   links:
@@ -33,6 +34,8 @@ contributor:
       archive_path: packing/resources/bibliography.yaml
       locator: 'credited_names maps David Ellsworth to Ellsworth; the [Kingbird] entry quotes the page header naming him.'
   provenance:
+    - field: /surname
+      sources: [bibliography]
     - field: /display_name
       sources: [catalogue-byline]
     - field: /real_name
@@ -43,15 +46,11 @@ contributor:
       sources: [catalogue-byline, tools-credit]
     - field: /links/1
       sources: [catalogue-byline]
-  bio_sources: [catalogue-byline, catalogue-credits, picture-credits, tools-credit]
+  bio_sources: [catalogue-byline, tools-credit]
 ---
-David Ellsworth maintains the Squares in Squares catalogue, adding SVG pictures,
-high-precision sides and polynomial root forms to the record pages Erich Friedman
-compiled. On 4 June 2023 he found the exact polynomial root form of the side of John
-Bidwell’s packing of 17 squares, the degree-18 polynomial the catalogue prints.
-The catalogue credits him with finding, improving or optimizing best known packings at
-many counts, among them 28 and 87. His parsing and checking tools are published on
-GitHub, and Griffin Casson’s repository checks its packings with them.
+David Ellsworth maintains the Squares in Squares catalogue, extending Erich Friedman’s
+records with SVG drawings, high-precision values and algebraic descriptions.
+He also develops packing parsers and checking tools.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

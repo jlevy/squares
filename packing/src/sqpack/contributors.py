@@ -92,6 +92,8 @@ class Contributor:
     provenance: tuple[FieldProvenance, ...]
     bio: str | None
     bio_sources: tuple[str, ...]
+    display_aliases: tuple[str, ...] = ()
+    surname: str | None = None
 
     @property
     def profile_path(self) -> str:
@@ -225,6 +227,8 @@ def _bio(body: str) -> str | None:
 
 
 def _semantics(payload: dict[str, Any], bio: str | None, repo: Path) -> None:
+    if not set(payload.get("display_aliases", [])) <= set(payload.get("aliases", [])):
+        raise ContributorError("display_aliases must be a subset of evidenced aliases")
     sources = payload["sources"]
     source_ids = {source["id"] for source in sources}
     if len(source_ids) != len(sources):
@@ -248,6 +252,8 @@ def _semantics(payload: dict[str, Any], bio: str | None, repo: Path) -> None:
     claims = ["/display_name"]
     if "real_name" in payload:
         claims.append("/real_name")
+    if "surname" in payload:
+        claims.append("/surname")
     claims.extend(f"/aliases/{index}" for index in range(len(payload.get("aliases", []))))
     for index, link in enumerate(payload.get("links", [])):
         claims.extend(f"/links/{index}/{key}" for key in link)
@@ -289,6 +295,8 @@ def load_contributor(path: Path, *, repo: Path | None = None) -> Contributor:
         display_name=payload["display_name"],
         real_name=payload.get("real_name"),
         aliases=tuple(payload.get("aliases", [])),
+        display_aliases=tuple(payload.get("display_aliases", [])),
+        surname=payload.get("surname"),
         links=tuple(ContributorLink(**link) for link in payload.get("links", [])),
         sources=tuple(ContributorSource(**source) for source in payload["sources"]),
         provenance=tuple(
@@ -310,20 +318,29 @@ def record_ids(directory: Path | None = None) -> tuple[str, ...]:
     return ids
 
 
-def record_names(directory: Path | None = None) -> dict[str, str]:
-    """Each record's display name, by id, read from its frontmatter alone, so a page's
-    head can be declared where the archive evidence the record cites is not checked out
-    (a paper's partial build); `load_contributors` is what validates that evidence."""
+def record_metadata(directory: Path | None = None) -> dict[str, dict[str, Any]]:
+    """Public identity metadata without archive reads, for partial site builds.
+
+    `load_contributors` validates the complete records and their source evidence.
+    """
     directory = directory if directory is not None else require_project_root() / PEOPLE_DIR
-    names = {}
+    records = {}
     for identifier in record_ids(directory):
         match = _FRONTMATTER.fullmatch((directory / f"{identifier}.md").read_text("utf-8"))
         document = load_yaml(match[1]) if match is not None else None
         payload = document.get("contributor") if isinstance(document, dict) else None
         if not isinstance(payload, dict) or not isinstance(payload.get("display_name"), str):
             raise ContributorError(f"record has no display name: {identifier}")
-        names[identifier] = cast(str, payload["display_name"])
-    return names
+        records[identifier] = cast(dict[str, Any], payload)
+    return records
+
+
+def record_names(directory: Path | None = None) -> dict[str, str]:
+    """Public display names from frontmatter alone, without archive dependencies."""
+    return {
+        identifier: record["display_name"]
+        for identifier, record in record_metadata(directory).items()
+    }
 
 
 def load_contributors(

@@ -7,6 +7,7 @@ softschema:
 contributor:
   id: ryan-xu
   display_name: Ryan Xu
+  surname: Xu
   real_name: Ryan Xu
   aliases: [Xu, ry-xu, '@small_LM']
   links:
@@ -33,6 +34,8 @@ contributor:
       archive_path: packing/resources/bibliography.yaml
       locator: 'Source authors and credits print Xu; the [ry-xu square packing 2026] key keeps the handle. The later credits that build on his issue #432 packings name Xu, and their notes call those packings Ryan Xu’s ([Deleeuw n70 refinement 2026-10-10], [SQUISH third request 2026-10-09], [Ostashev records 2026-10-11]).'
   provenance:
+    - field: /surname
+      sources: [bibliography, owner-confirmation]
     - field: /display_name
       sources: [github-profile, owner-confirmation]
     - field: /real_name
@@ -49,13 +52,7 @@ contributor:
       sources: [github-profile]
     - field: /links/2
       sources: [github-profile]
-  bio_sources: [packet, github-profile]
 ---
-Ryan Xu publishes as ry-xu on GitHub.
-In October 2026 he reported 25 new packings of unit squares in issue #432, from 51 to
-295 squares, with exact rational certificates from his square_packing repository.
-The source describes an LLM-assisted search and certificate workflow.
-
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

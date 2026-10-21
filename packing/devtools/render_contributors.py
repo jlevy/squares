@@ -15,12 +15,17 @@ import subprocess
 from collections.abc import Sequence
 from functools import cache
 from pathlib import Path, PurePosixPath
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
+from urllib.parse import urlsplit
 
 from markdown_it import MarkdownIt
 
+from devtools.overview_data import tex_bounds
+from devtools.profile_links import link_prose, profile_names
 from devtools.render_overview import PACKING, REPO, Page, PageMeta, static_content_page
 from devtools.repo_links import repo_url
+from devtools.site_icons import account_icon
+from devtools.site_resources import Resource, resources_for_profile
 from sqpack.contributor_occurrences import MANIFEST as OCCURRENCES_MANIFEST
 from sqpack.contributors import (
     PEOPLE_DIR,
@@ -29,6 +34,7 @@ from sqpack.contributors import (
     ContributorError,
     load_contributors,
     record_ids,
+    record_metadata,
     record_names,
     validate_public_url,
 )
@@ -42,6 +48,7 @@ if TYPE_CHECKING:
 CONTRIBUTORS = PACKING / PEOPLE_DIR
 MANIFEST = PACKING / OCCURRENCES_MANIFEST
 DIRECTORY_PATH = f"{PROFILES_DIR}/index.html"
+DIRECTORY_SCRIPT = PACKING / "devtools/overview/profile-directory.js"
 _LINK_LABELS = {
     "github": "GitHub",
     "twitter": "Twitter / X",
@@ -86,13 +93,20 @@ def evidence_paths() -> tuple[Path, ...]:
 def inputs() -> tuple[Path, ...]:
     return (
         Path(__file__).resolve(),
+        DIRECTORY_SCRIPT,
+        PACKING / "devtools/profile_links.py",
+        PACKING / "devtools/site_icons.py",
+        PACKING / "devtools/site_resources.py",
+        PACKING / "devtools/render_changelog.py",
+        PACKING / "site-changelog.yaml",
+        PACKING / "site-changelog.schema.yaml",
         CONTRIBUTORS.parent,
         PACKING / "devtools/templates/site-contributor.css",
         *evidence_paths(),
     )
 
 
-def _bio(markdown: str) -> str:
+def _bio(markdown: str, *, current_profile: str | None = None) -> str:
     parser = MarkdownIt("commonmark", {"html": False}).disable("image")
 
     def checked_link(url: str) -> bool:
@@ -100,7 +114,9 @@ def _bio(markdown: str) -> str:
         return True
 
     parser.validateLink = checked_link
-    return parser.renderInline(markdown)
+    from devtools.profile_links import link_prose  # noqa: PLC0415
+
+    return link_prose(parser.renderInline(markdown), current_profile=current_profile)
 
 
 def _source_links(contributor: Contributor, ids: Sequence[str]) -> str:
@@ -140,50 +156,47 @@ def _bibliography_line(record_key: str) -> int | None:
     return None
 
 
-def contributor_article(
-    contributor: Contributor, occurrences: Sequence[CreditOccurrence]
-) -> str:
-    """The same complete article is served standalone and extracted by the popover."""
-    name = html.escape(contributor.display_name)
-    pieces = [
-        f'<article class="site-contributor" data-contributor-id="{contributor.id}">',
-        (
-            '<nav class="site-contributor-breadcrumb" aria-label="Breadcrumb">'
-            f'<a href="{DIRECTORY_PATH}">Profiles</a></nav>'
-        ),
-        f"<h1>{name}</h1>",
-    ]
-    identity = []
-    if contributor.real_name and contributor.real_name != contributor.display_name:
-        identity.append(f"<dt>Real name</dt><dd>{html.escape(contributor.real_name)}</dd>")
-    if contributor.aliases:
-        identity.append(
-            "<dt>Also credited as</dt><dd>"
-            + ", ".join(html.escape(alias) for alias in contributor.aliases)
-            + "</dd>"
-        )
-    if identity:
-        pieces.append('<dl class="site-contributor-identity">' + "".join(identity) + "</dl>")
-    if contributor.bio:
-        pieces.append(f'<p class="site-contributor-bio">{_bio(contributor.bio)}</p>')
-        pieces.append(
-            '<p class="site-contributor-evidence">Biography sources: '
-            + _source_links(contributor, contributor.bio_sources)
-            + "</p>"
-        )
-    if contributor.links:
-        pieces.append('<ul class="site-contributor-links" aria-label="Public websites">')
-        for link in contributor.links:
-            label = _LINK_LABELS[link.kind]
-            if link.handle:
-                label += ": " + link.handle
-            pieces.append(
-                f'<li><a href="{html.escape(link.url)}">{html.escape(label)}</a></li>'
+def news_by_profile(entries: Sequence[dict[str, Any]]) -> dict[str, list[tuple[str, str, str]]]:
+    """Derive related articles only from explicit profile-record links in News prose."""
+    from devtools.render_changelog import entry_anchor, inline_html  # noqa: PLC0415
+
+    linked: dict[str, list[tuple[str, str, str]]] = {}
+    parser = MarkdownIt("commonmark", {"html": False})
+    for entry in entries:
+        identifiers = set()
+        prose = entry["summary"] + "\n\n" + entry.get("details", "")
+        for token in parser.parse(prose):
+            for child in token.children or ():
+                if child.type != "link_open":
+                    continue
+                path = urlsplit(str(child.attrGet("href") or "")).path
+                if match := re.fullmatch(r"packing/contributors/people/([a-z0-9-]+)\.md", path):
+                    identifiers.add(match[1])
+        for identifier in sorted(identifiers):
+            linked.setdefault(identifier, []).append(
+                (
+                    entry_anchor(entry["id"]),
+                    inline_html(entry["title"], allow_links=False),
+                    entry["date"],
+                )
             )
-        pieces.append("</ul>")
-    credited = {}
+    return linked
+
+
+@cache
+def _related_news() -> dict[str, list[tuple[str, str, str]]]:
+    from devtools.render_changelog import load, news_entries  # noqa: PLC0415
+
+    return news_by_profile(news_entries(load()))
+
+
+def credited_work(
+    identifier: str, occurrences: Sequence[CreditOccurrence]
+) -> dict[tuple[str, str, str, str, str], str]:
+    """The reviewed work entries shown on a profile, with their existing deduplication."""
+    credited: dict[tuple[str, str, str, str, str], str] = {}
     for occurrence in occurrences:
-        if occurrence.disposition == "resolved" and occurrence.contributor_id == contributor.id:
+        if occurrence.disposition == "resolved" and occurrence.contributor_id == identifier:
             target, label = _credit_target(occurrence)
             credited.setdefault(
                 (
@@ -195,10 +208,90 @@ def contributor_article(
                 ),
                 label,
             )
+    return credited
+
+
+def account_links(contributor: Contributor, *, compact: bool = False) -> str:
+    """The same public account destinations and icons in profiles and directory rows."""
+    if not contributor.links:
+        return ""
+    variant = " site-contributor-links-compact" if compact else ""
+    pieces = [f'<ul class="site-contributor-links{variant}" aria-label="Public websites">']
+    for link in contributor.links:
+        label = link.handle or link.url.removeprefix("https://").removeprefix(
+            "http://"
+        ).removesuffix("/")
+        if link.kind == "twitter" and link.handle:
+            label = "@" + link.handle
+        accessible = f"{_LINK_LABELS[link.kind]}: {label}"
+        if compact:
+            accessible += f" ({contributor.real_name or contributor.display_name})"
+        visible = "" if compact else f"<span>{html.escape(label)}</span>"
+        pieces.append(
+            f'<li><a href="{html.escape(link.url)}" aria-label="{html.escape(accessible)}" '
+            f'title="{html.escape(accessible)}">{account_icon(link.kind)}{visible}</a></li>'
+        )
+    pieces.append("</ul>")
+    return "".join(pieces)
+
+
+def resource_list(identifier: str, records: Sequence[Resource] | None = None) -> str:
+    """Cited external work, preserving its original author and lineage relationship."""
+    linked = resources_for_profile(identifier, records)
+    if not linked:
+        return ""
+    items = []
+    for resource in linked:
+        context = link_prose(
+            tex_bounds(resource.byline + ". " + resource.description),
+            current_profile=identifier,
+        )
+        items.append(
+            f'<li><a href="{html.escape(resource.url)}">{html.escape(resource.title)}</a>'
+            f" — {context}</li>"
+        )
+    return (
+        '<section id="resources"><h2>Resources</h2><ul class="site-contributor-resources">'
+        + "".join(items)
+        + "</ul></section>"
+    )
+
+
+def contributor_article(
+    contributor: Contributor, occurrences: Sequence[CreditOccurrence]
+) -> str:
+    """The same complete article is served standalone and extracted by the popover."""
+    name = html.escape(contributor.display_name)
+    pieces = [
+        f'<article class="site-contributor" data-contributor-id="{contributor.id}">',
+        (
+            '<nav class="site-contributor-breadcrumb" aria-label="Breadcrumb">'
+            '<a href="about.html#profiles">About</a> / '
+            f'<a href="{DIRECTORY_PATH}">Profiles</a></nav>'
+        ),
+        f"<h1>{name}</h1>",
+    ]
+    identity = []
+    if contributor.real_name and contributor.real_name != contributor.display_name:
+        identity.append(f"<dt>Real name</dt><dd>{html.escape(contributor.real_name)}</dd>")
+    if contributor.display_aliases:
+        identity.append(
+            "<dt>Also credited as</dt><dd>"
+            + ", ".join(html.escape(alias) for alias in contributor.display_aliases)
+            + "</dd>"
+        )
+    if identity:
+        pieces.append('<dl class="site-contributor-identity">' + "".join(identity) + "</dl>")
+    if contributor.bio:
+        biography = _bio(contributor.bio, current_profile=contributor.id)
+        pieces.append(f'<p class="site-contributor-bio">{biography}</p>')
+    pieces.append(account_links(contributor))
+    pieces.append(resource_list(contributor.id))
+    credited = credited_work(contributor.id, occurrences)
     if credited:
         pieces.append("<section><h2>Credited work</h2>")
         if len(credited) > 12:
-            pieces.append(f"<details><summary>{len(credited)} reviewed credits</summary>")
+            pieces.append(f"<details open><summary>{len(credited)} reviewed credits</summary>")
         pieces.append('<ul class="site-contributor-credits">')
         for (target, _path, _key, role, original_label), label in credited.items():
             match = re.fullmatch(r"cases/(\d+)\.html", target)
@@ -211,7 +304,22 @@ def contributor_article(
         if len(credited) > 12:
             pieces.append("</details>")
         pieces.append("</section>")
-    pieces.append('<section class="site-contributor-sources"><h2>Sources</h2><ol>')
+    if news := _related_news().get(contributor.id):
+        pieces.append('<section><h2>Related News</h2><ul class="site-contributor-news">')
+        for anchor, title, day in news:
+            pieces.append(
+                f'<li><a href="news.html#{anchor}">{title}</a> '
+                f'<time datetime="{day}">{day}</time></li>'
+            )
+        pieces.append("</ul></section>")
+    pieces.append('<details class="site-contributor-sources"><summary>Sources</summary>')
+    if contributor.bio:
+        pieces.append(
+            '<p class="site-contributor-evidence">Biography sources: '
+            + _source_links(contributor, contributor.bio_sources)
+            + "</p>"
+        )
+    pieces.append("<ol>")
     for source in contributor.sources:
         target = source.url or repo_url(source.archive_path or "")
         pieces.append(
@@ -223,19 +331,20 @@ def contributor_article(
         "id": "Profile identifier",
         "display_name": "Public name",
         "real_name": "Real name",
+        "surname": "Family name",
         "aliases": "Credit spellings",
         "links": "Public websites",
         "sources": "Sources",
         "bio_sources": "Biography sources",
         "provenance": "Field evidence",
     }
-    pieces.append("<details><summary>Identity evidence</summary><ul>")
+    pieces.append('<p class="site-contributor-evidence">Identity evidence</p><ul>')
     for provenance in contributor.provenance:
         field = field_names.get(
             provenance.field.split("/")[1], provenance.field.replace("_", " ")
         )
         pieces.append(f"<li>{field}: {_source_links(contributor, provenance.sources)}</li>")
-    pieces.append("</ul></details></section></article>")
+    pieces.append("</ul></details></article>")
     return "\n".join(pieces)
 
 
@@ -250,10 +359,11 @@ DIRECTORY_META = PageMeta(
 
 
 def _contributors() -> list[Contributor]:
-    """Every validated person, in public-name order."""
+    """Every validated person, in evidenced family-name order."""
+    names = profile_names(record_metadata(CONTRIBUTORS))
     return sorted(
         load_contributors(CONTRIBUTORS, repo=REPO).by_id.values(),
-        key=lambda contributor: (contributor.display_name.casefold(), contributor.id),
+        key=lambda contributor: names[contributor.id].sort_key,
     )
 
 
@@ -286,6 +396,56 @@ def page_metas() -> dict[str, PageMeta]:
     }
 
 
+def _resource_count(person: Contributor, target: str, name: str) -> str:
+    count = len(resources_for_profile(person.id))
+    return (
+        f'<a href="{target}#resources" aria-label="{count} resources for {name}">{count}</a>'
+        if count
+        else '<span class="site-profile-empty">0</span>'
+    )
+
+
+def profile_table(
+    contributors: Sequence[Contributor], occurrences: Sequence[CreditOccurrence]
+) -> str:
+    """Full public names and the same reviewed-credit counts as each profile."""
+    rows = []
+    for person in contributors:
+        name = html.escape(person.real_name or person.display_name)
+        target = html.escape(person.profile_path)
+        count = len(credited_work(person.id, occurrences))
+        rows.append(
+            f'<tr><td><a href="{target}">{name}</a></td>'
+            f'<td class="num"><a href="{target}" tabindex="-1" '
+            f'aria-label="{count} reviewed credits for {name}">{count}</a></td>'
+            f'<td class="num">{_resource_count(person, target, name)}</td>'
+            f'<td class="site-profile-links">{account_links(person, compact=True)}</td></tr>'
+        )
+    return (
+        '<div class="site-table-wrap">'
+        '<table class="kpress-table site-table site-profile-table" '
+        'aria-label="Profiles"><thead><tr><th scope="col">Name</th>'
+        '<th scope="col" class="num">Credits</th>'
+        '<th scope="col" class="num">Resources</th><th scope="col">Links</th>'
+        "</tr></thead><tbody>" + "".join(rows) + "</tbody></table></div>"
+    )
+
+
+def profile_preview() -> str:
+    """The same metadata-free Profiles invitation on Home and About."""
+    from devtools.overview_sections import arrow_icon  # noqa: PLC0415
+
+    return (
+        '<h1 id="profiles" class="site-title">Profiles</h1>\n\n'
+        "We track contributors and the authors cited in the square-packing record. "
+        "Browse their profiles and credited work.\n\n"
+        '<p class="site-action-row site-more">'
+        '<a class="site-action" href="profiles/index.html">All Profiles'
+        + arrow_icon()
+        + "</a></p>"
+    )
+
+
 def contributor_pages() -> list[Page]:
     """Directory plus one canonical profile per validated person."""
     from sqpack.contributor_occurrences import load_occurrences  # noqa: PLC0415
@@ -293,24 +453,27 @@ def contributor_pages() -> list[Page]:
     contributors = _contributors()
     occurrences = load_occurrences().occurrences
     directory = (
-        '<article class="site-contributor-directory"><h1>Profiles</h1>'
+        '<article class="site-contributor-directory">'
+        '<nav class="site-contributor-breadcrumb" aria-label="Breadcrumb">'
+        '<a href="about.html#profiles">About</a></nav><h1>Profiles</h1>'
         "<p>People whose work the square-packing record cites or credits, paper authors "
         "and project contributors alike. Each profile records public identity evidence "
-        "and links to reviewed credits.</p>"
-        '<nav aria-label="Profiles"><ul>'
-        + "".join(
-            f'<li><a href="{contributor.profile_path}">'
-            f"{html.escape(contributor.display_name)}</a></li>"
-            for contributor in contributors
-        )
-        + "</ul></nav></article>"
+        "and links to reviewed credits. Counts match the reviewed credits listed on each "
+        "profile. Links open public accounts and websites; Resources lists the cited "
+        "external work shown on the homepage.</p>"
+        + profile_table(contributors, occurrences)
+        + "</article>"
     )
-    pages = [static_content_page(directory, meta=DIRECTORY_META, current="")]
+    pages = [
+        static_content_page(
+            directory, meta=DIRECTORY_META, current="about", page_scripts=(DIRECTORY_SCRIPT,)
+        )
+    ]
     pages.extend(
         static_content_page(
             contributor_article(contributor, occurrences),
             meta=profile_meta(contributor),
-            current="",
+            current="about",
         )
         for contributor in contributors
     )

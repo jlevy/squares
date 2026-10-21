@@ -45,8 +45,12 @@ or a kind that bounds no case, such as *rigidity*, *case exclusion*, *simplifica
 simpler proof of a value another result establishes) or *formalization* (a proof in a
 proof assistant of a value another result establishes).
 
+<div class="site-profile-prose">
+
 Credits name the source’s authors; this project’s results are credited to Joshua Levy as
 *Levy*. *X after Y* means X’s result rests directly on Y’s proof, method or tool.
+
+</div>
 
 ## Status and Supersession
 

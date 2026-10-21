@@ -215,7 +215,11 @@ def test_paper_metadata_matches_the_published_title_dates_and_downloads(
     assert article["datePublished"] == meta.published
     assert article["dateModified"] == meta.modified
     assert article["author"] == [
-        {"@type": "Person", "name": "Joshua Levy", "url": "https://x.com/ojoshe"}
+        {
+            "@type": "Person",
+            "name": "Joshua Levy",
+            "url": render_overview.canonical_url("profiles/joshua-levy.html"),
+        }
     ]
     url = render_overview.canonical_url(meta.path)
     tags = dict(meta.extra_meta)

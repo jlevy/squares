@@ -45,7 +45,24 @@ both names occur in an acknowledgment.
 Each person has one stable contributor ID. Their profile holds sourced names, aliases
 and public account links.
 Changing a preferred display label does not change that ID or break existing links.
+The full `aliases` array retains evidenced spellings for reviewed credit matching.
+The optional `display_aliases` array selects which of those spellings a profile shows;
+it defaults to empty and does not require a second provenance claim for the selection.
+Show meaningful alternate public names rather than repeating the current name, surname,
+obvious spelling variants or accounts already linked below the name.
 An account’s transient display name need not become the preferred credit name.
+
+Inline profile links use one registry-wide naming rule: an evidenced surname when
+unique, the full public name when surnames collide, then an evidenced handle or stable
+ID if the full names also collide.
+The optional `surname` field names the family name explicitly and requires provenance;
+word position never establishes it.
+A person without an established surname uses their public account handle, preferring
+GitHub when available, or their public display name.
+The directory sorts by that same surname or handle, but displays full real or public
+names beside reviewed-credit counts, cited-resource counts and public account links.
+Full profile headings and identity metadata also retain the full public name.
+Home and About invite readers to the directory without listing names.
 
 Identity evidence may include the person’s public account or publication, linked
 profiles, retained account identifiers, and an explicit confirmation recorded by the
@@ -109,11 +126,41 @@ Link a person’s name to their profile wherever that surface supports it.
 The profile can supply handles, the optional biography and identity evidence; a compact
 credit line does not need to repeat `Joshua Levy (jlevy, ojoshe)` on each occurrence.
 
-News entries use the profile’s preferred display name at first mention and link it
-directly to the profile.
+News entries link people directly to their profiles using the shared surname-or-handle
+label, including first mentions.
 Author the link to `packing/contributors/people/<id>.md` in the changelog record; the
 website resolves it to `profiles/<id>.html`, and GitHub keeps the repository link.
 Retained PR titles, quotations and source identifiers keep their original wording.
+
+Authored site introductions, case narratives and open-question notes, result claims,
+summaries and explanatory notes, declared reader-document articles, News summaries and
+details, and profile biographies link exact full names that identify one published
+profile. Soft-wrapped names match across whitespace; linked labels use the shared
+surname-or-handle rule, with possessive punctuation retained outside the link.
+Existing account links may lead to that profile only when both their exact verified URL
+and visible name or handle identify the same person.
+This presentation pass does not match surnames or raw aliases, infer missing identities,
+change reviewed identities, or enter headings, quotations, source evidence, code,
+mathematics and existing publication links.
+Resolved credit spans use the same short label while retaining the original reviewed
+wording in link data; unresolved spans keep their source wording.
+A biography does not link its subject back to the same profile.
+Ambiguous names remain plain text.
+
+Profiles show public account handles or URLs with shared platform icons and accessible
+platform names. Keep these public website destinations external.
+The homepage’s curated external resources share one projection with profile Resources
+lists and directory resource counts.
+Only the resource’s explicit byline establishes its person relationship: a unique whole
+public label or exact unique full names in a compound byline.
+Preserve lineage words such as “after”; do not infer ownership from a URL, description
+or organization name.
+Exact artifact and comment URLs remain distinct, and shared resources appear once for
+each explicitly credited person.
+Personal account links remain separate from resources and reviewed credits.
+Related News links come from explicit person-record links in eligible News summaries or
+details; the announcement supplies its existing title, date and stable entry address.
+Do not maintain a duplicate chronology in the person record.
 
 A paper explaining another person’s proof leads with the original proof and its author,
 then distinguishes the paper’s exposition, oversight and assistance.
@@ -140,11 +187,12 @@ profile or source packet.
 | Subject | Decision | Evidence and scope | Tracking |
 | --- | --- | --- | --- |
 | Joshua Levy | Preferred compact person credit `Levy`; full name `Joshua Levy`; GitHub `jlevy`, X `ojoshe`. The Squares Project remains the project name. | Owner instruction; [profile](packing/contributors/people/joshua-levy.md), project license and retained owner announcement. Preserve collaborators and project/tool attribution. | `think-t3a9`, `think-vix3` |
-| Manasseh Ahmed / Queuingtheorydotcom | Updated 2026-10-13. One person, credited by name: `Ahmed` in compact credits, as every surname is, and `Manasseh Ahmed` on his profile, `manasseh-ahmed`, and at first prose mentions. `Queuingtheorydotcom` on GitHub and `@ManassehA06` on X, formerly `@MathCompSciFTW`, are his handles: aliases, not extra authors. The earlier curated spelling `Mannaseh` is corrected and kept as an alias. | The owner’s confirmation of 13 October 2026; the n = 17 edition’s CREDITS.md prints “Manasseh Ahmed”; the [retained announcement receipts](packing/resources/web/queuingtheorydotcom-n11-lean-2026-10-06/README.md#source-and-pin) link `ManassehA06` and the former `MathCompSciFTW` account; [profile](packing/contributors/people/manasseh-ahmed.md). | `think-t3a9`, `think-vqk8` |
+| Manasseh Ahmed / Queuingtheorydotcom | Updated 2026-10-13. One person, credited by name: `Ahmed` in compact credits, as every surname is, and `Manasseh Ahmed` on his profile, `manasseh-ahmed`, and in unlinked prose. `Queuingtheorydotcom` on GitHub and `@ManassehA06` on X, formerly `@MathCompSciFTW`, are his handles: aliases, not extra authors. The earlier curated spelling `Mannaseh` is corrected and kept as an alias. | The owner’s confirmation of 13 October 2026; the n = 17 edition’s CREDITS.md prints “Manasseh Ahmed”; the [retained announcement receipts](packing/resources/web/queuingtheorydotcom-n11-lean-2026-10-06/README.md#source-and-pin) link `ManassehA06` and the former `MathCompSciFTW` account; [profile](packing/contributors/people/manasseh-ahmed.md). | `think-t3a9`, `think-vqk8` |
 | EvolvingPrograms / Lewis | Personal credit is `Lewis` (`ctjlewis`); EvolvingPrograms is an affiliated organization, not an additional human author or a proved personal alias. Keep organization/repository credit only where its infrastructure role is supported. | [Lewis’s GitHub profile](https://github.com/ctjlewis) lists the affiliation; [EvolvingPrograms](https://github.com/EvolvingPrograms) is an organization. The retained [acknowledgments](packing/resources/web/queuingtheorydotcom-n11-lean-2026-10-06/11SquaresFormalized/ACKNOWLEDGEMENTS.md) credit both for infrastructure. Affiliation does not prove entity identity. Profile population and per-occurrence role review remain tracked. | `think-8yk4` |
-| Marc Leonard Overbeck / Kleddamag | Recorded 2026-10-13. One person, credited by name: `Overbeck` in compact credits, `Marc Leonard Overbeck` on his profile and at first prose mentions. `Kleddamag` on GitHub and `@kleddamag` on X are his handles, linked from the profile; they are aliases, not a second author. Identifiers, URLs, quotations and archived text keep the handle. | The owner’s instruction of 12 and 13 October 2026, and the `CITATION.cff` and README of his [12 October edition](https://github.com/Kleddamag/the-seventeenth-square-candidate/tree/653b9589d0f8a152f01adc56b1d48ba53d49abc3); [profile](packing/contributors/people/marc-leonard-overbeck.md). The profile joins both the `Kleddamag` labels still in the record and the `Overbeck` labels that replace them. | `think-ugbi` |
-| Hiroaki Hosono / wand125 | Recorded 2026-10-13. One person, credited by name: `Hosono` in compact credits, `Hiroaki Hosono` on his profile and at first prose mentions. `wand125` on GitHub and `@wand_125` on X are his handles, linked from the profile; they are aliases, not a second author. Bibliography keys, identifiers, URLs, quotations and archived text keep the handle. | The owner’s instruction of 13 October 2026; the commit authorship his retained packets record and his GitHub profile’s name; [profile](packing/contributors/people/hiroaki-hosono.md). | `think-m7il` |
-| Ryan Xu / ry-xu | Recorded 2026-10-14. One person, credited by name: `Xu` in compact credits, `Ryan Xu` on his profile, in case-record finder lists and at first prose mentions. `ry-xu` on GitHub and `@small_LM` on X are his handles, linked from the profile; they are aliases, not a second author. Bibliography keys, identifiers, module names, packet paths, URLs, the `author` field that names the account filing an issue, quotations, archived text and dated reviews keep the handle. | The owner’s instruction of 14 October 2026; the GitHub account `ry-xu` gives the name Ryan Xu and links the X account; [profile](packing/contributors/people/ryan-xu.md). | `think-g2ga` |
+| Marc Leonard Overbeck / Kleddamag | Recorded 2026-10-13. One person, credited by name: `Overbeck` in compact credits, `Marc Leonard Overbeck` on his profile and in unlinked prose. `Kleddamag` on GitHub and `@kleddamag` on X are his handles, linked from the profile; they are aliases, not a second author. Identifiers, URLs, quotations and archived text keep the handle. | The owner’s instruction of 12 and 13 October 2026, and the `CITATION.cff` and README of his [12 October edition](https://github.com/Kleddamag/the-seventeenth-square-candidate/tree/653b9589d0f8a152f01adc56b1d48ba53d49abc3); [profile](packing/contributors/people/marc-leonard-overbeck.md). The profile joins both the `Kleddamag` labels still in the record and the `Overbeck` labels that replace them. | `think-ugbi` |
+| Hiroaki Hosono / wand125 | Recorded 2026-10-13. One person, credited by name: `Hosono` in compact credits, `Hiroaki Hosono` on his profile and in unlinked prose. `wand125` on GitHub and `@wand_125` on X are his handles, linked from the profile; they are aliases, not a second author. Bibliography keys, identifiers, URLs, quotations and archived text keep the handle. | The owner’s instruction of 13 October 2026; the commit authorship his retained packets record and his GitHub profile’s name; [profile](packing/contributors/people/hiroaki-hosono.md). | `think-m7il` |
+| Ryan Xu / ry-xu | Recorded 2026-10-14. One person, credited by name: `Xu` in compact credits, `Ryan Xu` on his profile, in case-record finder lists and in unlinked prose. `ry-xu` on GitHub and `@small_LM` on X are his handles, linked from the profile; they are aliases, not a second author. Bibliography keys, identifiers, module names, packet paths, URLs, the `author` field that names the account filing an issue, quotations, archived text and dated reviews keep the handle. | The owner’s instruction of 14 October 2026; the GitHub account `ry-xu` gives the name Ryan Xu and links the X account; [profile](packing/contributors/people/ryan-xu.md). | `think-g2ga` |
+| Nate Chaoweeraprasit / natcha | Recorded 2026-10-20. One person, credited as `Chaoweeraprasit` in compact links and `Nate Chaoweeraprasit` on his profile. `natcha`, GitHub `itsnaka` and X `thatennine` are aliases. | The owner’s confirmation of 20 October 2026 identifies Nate as the person behind `natcha` and [the X account](https://x.com/thatennine); the X profile was not independently inspected. The [SQUISH intake](packing/resources/web/squish-401-2026-10-07/README.md) already records Nate Chaoweeraprasit (itsnaka). See his [profile](packing/contributors/people/nate-chaoweeraprasit.md). | `think-notn` |
 | Historical first-party atlas/PDF lines | Migrate project-as-person credit to the preferred person name from the generating records. Do not edit archived third-party sources. | The existing `Squares Project (Levy)` display is a migration target, not the naming rule for new work. Rebuild and review affected figures and PDF credits together. | `think-vix3`, `think-jn87` |
 
 An exception needs a named scope, reason, supporting evidence, owner and review

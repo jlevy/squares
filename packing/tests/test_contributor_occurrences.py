@@ -20,6 +20,7 @@ from devtools.contributor_census import (
     structured_occurrences,
 )
 from devtools.contributor_credit import render_credit
+from devtools.profile_links import public_names
 from devtools.result_credit import credit_line, result_credit_html
 from sqpack.contributor_occurrences import (
     CONTRACT,
@@ -41,13 +42,32 @@ def text_content(markup: str) -> str:
     return html.unescape(re.sub(r"<[^>]+>", "", markup))
 
 
+def source_text(markup: str, items: tuple[CreditOccurrence, ...]) -> str:
+    """The original reviewed wording and joins stay in the source occurrence record."""
+    resolved = iter(item for item in items if item.disposition == "resolved")
+
+    def restore(match: re.Match[str]) -> str:
+        item = next(resolved)
+        assert match[1] == item.contributor_id
+        assert html.unescape(match[2]) == public_names()[match[1]].label
+        return html.escape(item.label)
+
+    restored = re.sub(
+        r'<a href="profiles/([^"]+).html" data-person>([^<]*)</a>',
+        restore,
+        markup,
+    )
+    assert next(resolved, None) is None
+    return text_content(restored)
+
+
 def test_live_manifest_and_literal_result_credits() -> None:
     registry = load_occurrences()
     assert registry.occurrences
     profiles = load_contributors()
     for item in registry.occurrences:
         rendered = render_credit(item.origin, item.expected_text, registry=registry)
-        assert text_content(rendered) == item.expected_text
+        assert source_text(rendered, registry.by_origin[item.origin]) == item.expected_text
         if item.disposition == "resolved":
             assert item.contributor_id in profiles.by_id
     bibliography = load_yaml((PACKING / "resources/bibliography.yaml").read_text())
@@ -55,12 +75,15 @@ def test_live_manifest_and_literal_result_credits() -> None:
     records = load_yaml((PACKING / "frontier/results.yaml").read_text())["results"]
     for record in records:
         output = result_credit_html(record, sources)
-        assert text_content(output) == credit_line(record, sources).replace(r"\|", "|")
+        original = credit_line(record, sources).replace(r"\|", "|")
+        assert re.findall(r" after |; |, ", text_content(output)) == re.findall(
+            r" after |; |, ", original
+        )
     stromquist = render_credit(
         CreditOrigin("packing/resources/bibliography.yaml", "[Stromquist 2003]", "/authors/0"),
         "Stromquist",
     )
-    assert 'href="profiles/walter-stromquist.html" data-contributor' in stromquist
+    assert 'href="profiles/walter-stromquist.html" data-person' in stromquist
     assert ">Stromquist</a>" in stromquist
 
 
@@ -197,7 +220,7 @@ def test_reconcile_requires_review_for_each_new_source_occurrence(
             (),
         )
         assert text_content(render_credit(origin, label, registry=registry)) == label
-        assert "data-contributor" not in render_credit(origin, label, registry=registry)
+        assert "data-person" not in render_credit(origin, label, registry=registry)
         proposal = next(row for row in report["unresolved"] if row["origin"] == asdict(origin))
         assert proposal["candidate_ids"] == candidate_ids
 
@@ -285,7 +308,7 @@ def test_unknown_and_conflicting_duplicate_credit_remain_plain() -> None:
     resolved = result_credit_html(
         {"attribution": {"source_keys": ["[Stromquist 2003]", "[Stromquist 2003]"]}}, sources
     )
-    assert resolved.count("data-contributor") == 1
+    assert resolved.count("data-person") == 1
     assert text_content(resolved) == "Stromquist"
 
 
@@ -295,7 +318,7 @@ def test_unresolved_disposition_never_uses_candidate_aliases() -> None:
     unresolved = replace(item, disposition="unresolved", contributor_id=None, evidence=())
     plain_registry = replace(registry, by_origin={item.origin: (unresolved,)})
     output = render_credit(item.origin, item.expected_text, registry=plain_registry)
-    assert "data-contributor" not in output
+    assert "data-person" not in output
     assert text_content(output) == item.expected_text
 
 

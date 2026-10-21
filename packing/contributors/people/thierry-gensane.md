@@ -7,6 +7,7 @@ softschema:
 contributor:
   id: thierry-gensane
   display_name: Thierry Gensane
+  surname: Gensane
   real_name: Thierry Gensane
   aliases: [Gensane]
   sources:
@@ -27,25 +28,20 @@ contributor:
       archive_path: packing/resources/README.md
       locator: 'Papers table: the key [Gensane–Ryckelynck 2005], under which the frontier records cite the paper, with authors “T. Gensane, P. Ryckelynck”; and the key [Gensane 2004].'
   provenance:
+    - field: /surname
+      sources: [paper-byline, archive-index]
     - field: /display_name
       sources: [paper-byline, catalogue-credits]
     - field: /real_name
       sources: [paper-byline]
     - field: /aliases/0
       sources: [paper-byline, archive-index]
-  bio_sources: [paper-byline, spheres-byline, picture-credits, catalogue-credits]
+  bio_sources: [paper-byline, spheres-byline]
 ---
-Thierry Gensane, of the Université du Littoral in Calais, wrote “Improved Dense Packings
-of Congruent Squares in a Square” with Philippe Ryckelynck, published in 2005 in
-Discrete & Computational Geometry.
-Their inflation algorithm, similar to the billiard approach to packing disks and
-spheres, found better packings of 29 and 37 squares and an alternative optimal packing
-of 18 squares; the catalogue dates their packing of 29 squares to April 2004 and credits
-it to a program they wrote.
-For 17 squares they gave the first high-precision analytic solution of John Bidwell’s
-packing, from a system of four polynomial equations.
-His 2004 paper on dense packings of equal spheres in a cube adds systematic
-perturbations to the billiard algorithm.
+Thierry Gensane coauthored “Improved Dense Packings of Congruent Squares in a Square”
+with Philippe Ryckelynck.
+Their inflation algorithm produced improved square packings.
+He also wrote about dense packings of equal spheres in a cube.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

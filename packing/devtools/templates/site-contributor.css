@@ -11,8 +11,10 @@
 .site-contributor-identity,
 .site-contributor-links,
 .site-contributor-sources > ol,
-.site-contributor-sources > details,
-.site-contributor-credits {
+.site-contributor-sources > ul,
+.site-contributor-credits,
+.site-contributor-resources,
+.site-contributor-news {
   color: var(--site-support-color);
   font-family: var(--kpress-font-sans);
   font-size: var(--site-font-size-note);
@@ -26,7 +28,9 @@
     .site-contributor-identity,
     .site-contributor-links,
     .site-contributor-sources,
-    .site-contributor-credits
+    .site-contributor-credits,
+    .site-contributor-resources,
+    .site-contributor-news
   )
   a {
   color: inherit;
@@ -38,22 +42,34 @@
   margin-inline-start: 0;
   margin-block-end: 0.75rem;
 }
-.site-contributor-links {
+.kpress .site-contributor-links {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem 1.5rem;
+  justify-content: center;
   list-style: none;
+  margin-inline: 0;
   padding-inline-start: 0;
 }
-.kpress .site-contributor-sources > details > summary {
-  font-weight: var(--site-font-weight-sans-medium);
+.kpress .site-contributor-links > li {
+  margin: 0;
 }
-.site-contributor-directory nav ul {
-  columns: 16rem;
+.kpress .site-contributor-links > li::before {
+  content: none;
 }
-.site-contributor-directory nav li {
-  break-inside: avoid;
-  padding-block: 0.25rem;
+.kpress .site-contributor-links a {
+  align-items: center;
+  color: inherit;
+  display: inline-flex;
+  gap: 0.4em;
+}
+.site-account-icon {
+  block-size: 1em;
+  flex: none;
+  inline-size: 1em;
+}
+.site-contributor-news time {
+  white-space: nowrap;
 }
 .site-contributor-popover {
   inline-size: min(36rem, calc(100vw - 2rem));
@@ -76,4 +92,36 @@
 }
 .site-contributor-popover .site-contributor h2 {
   margin-block: var(--paper-section-space) var(--paper-section-space-below);
+}
+
+.kpress .site-profile-table tbody td {
+  padding: 0;
+}
+.kpress .site-profile-table td > a,
+.kpress .site-profile-table .site-profile-empty {
+  display: block;
+  padding: 0.55rem 0.5rem;
+}
+.kpress .site-profile-table .num {
+  inline-size: 1%;
+  min-inline-size: 0;
+  white-space: nowrap;
+}
+.kpress .site-profile-table td.site-profile-links {
+  min-inline-size: 6rem;
+  padding: 0.55rem 0.5rem;
+}
+.kpress .site-contributor-links-compact {
+  gap: 0.25rem;
+  justify-content: flex-start;
+  margin-block: 0;
+}
+.kpress .site-contributor-links-compact a {
+  padding: 0.2rem;
+}
+.site-profile-table tbody tr[data-profile-ready] {
+  cursor: pointer;
+}
+.kpress .site-profile-table tbody tr:focus-within {
+  background: var(--site-wash);
 }

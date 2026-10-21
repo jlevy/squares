@@ -7,6 +7,7 @@ softschema:
 contributor:
   id: hiroshi-nagamochi
   display_name: 'Hiroshi Nagamochi'
+  surname: Nagamochi
   real_name: 'Hiroshi Nagamochi'
   aliases: ['Nagamochi']
   sources:
@@ -17,6 +18,8 @@ contributor:
       archive_path: packing/resources/bibliography.yaml
       locator: 'Source author, credit and credited_names fields retain the printed attribution labels.'
   provenance:
+    - field: /surname
+      sources: [primary-byline, bibliography]
     - field: /display_name
       sources: [primary-byline]
     - field: /real_name

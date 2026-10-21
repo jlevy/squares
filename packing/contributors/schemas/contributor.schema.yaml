@@ -14,11 +14,19 @@ properties:
     description: Immutable local person id, also the Markdown filename stem.
   display_name: {$ref: '#/$defs/text'}
   real_name: {$ref: '#/$defs/text'}
+  surname:
+    $ref: '#/$defs/text'
+    description: Evidenced family name for link labels and ordering; never inferred from word position.
   aliases:
     type: array
     minItems: 1
     uniqueItems: true
     items: {$ref: '#/$defs/text'}
+  display_aliases:
+    type: array
+    uniqueItems: true
+    items: {$ref: '#/$defs/text'}
+    description: Visible alternate names, selected explicitly from evidenced aliases.
   links:
     type: array
     minItems: 1

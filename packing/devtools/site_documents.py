@@ -457,6 +457,18 @@ def tutorial_front(page: str) -> str:
     return page[: match.start()] + front + page[match.end() :]
 
 
+def _reader_profile_links(page: str) -> str:
+    """Only the declared reader document's article is authored person-linking prose."""
+    from devtools.profile_links import link_prose  # noqa: PLC0415
+
+    return re.sub(
+        r"(<article\b[^>]*>)(.*?)(</article>)",
+        lambda match: match[1] + link_prose(match[2]) + match[3],
+        page,
+        flags=re.DOTALL,
+    )
+
+
 def render_document(
     document: SiteDocument, *, tree: RepositoryTree, report: LinkReport
 ) -> Page:
@@ -488,10 +500,16 @@ def render_document(
         toc=False if document.name == "synopsis.html" else "auto",
         trust_mode="sanitized",
         strict_anchors=True,
-        rewrite_body=lambda page: rewrite_article(
-            tutorial_front(page) if document.source in (TUTORIAL, TUTORIAL_ADVANCED) else page,
-            context=context,
-            report=report,
+        rewrite_body=lambda page: (
+            _reader_profile_links if document in DOCUMENTS else lambda value: value
+        )(
+            rewrite_article(
+                tutorial_front(page)
+                if document.source in (TUTORIAL, TUTORIAL_ADVANCED)
+                else page,
+                context=context,
+                report=report,
+            )
         ),
     )
 

@@ -7,6 +7,7 @@ softschema:
 contributor:
   id: joshua-levy
   display_name: 'Joshua Levy'
+  surname: Levy
   real_name: 'Joshua Levy'
   aliases: [Levy, jlevy, ojoshe, '@ojoshe']
   links:
@@ -28,6 +29,8 @@ contributor:
       url: https://x.com/ojoshe/status/2107513739222380935
       locator: 'user.name is Joshua Levy, user.screen_name is ojoshe, and user.id_str is 2246453394.'
   provenance:
+    - field: /surname
+      sources: [primary-byline, bibliography]
     - field: /display_name
       sources: [primary-byline]
     - field: /real_name

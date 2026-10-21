@@ -9,6 +9,7 @@ import re
 import pytest
 
 from devtools import check_results, news_highlights, render_changelog, site_topics
+from devtools.profile_links import public_names
 
 
 @pytest.fixture(scope="module")
@@ -162,12 +163,10 @@ def test_homepage_and_archive_link_preferred_names_directly_to_reviewed_profiles
         cards = _cards(rendered)
         for identifier, people in expected.items():
             card = cards[identifier]
-            for preferred_name, profile_id in people:
-                assert (
-                    f'<a href="profiles/{profile_id}.html">{html.escape(preferred_name)}</a>'
-                    in card
-                )
-            assert "data-contributor" not in card
+            for _preferred_name, profile_id in people:
+                label = public_names()[profile_id].label
+                assert f'<a href="profiles/{profile_id}.html">{html.escape(label)}</a>' in card
+            assert "data-person" not in card
 
 
 @pytest.mark.parametrize("suffix", ["", "?plain=1&view=full#accounts"])

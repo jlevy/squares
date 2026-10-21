@@ -33,7 +33,7 @@
       ) {
         return;
       }
-      const link = event.target.closest("a[data-contributor][href]");
+      const link = event.target.closest("a[data-person][href]");
       if (
         !(link instanceof HTMLAnchorElement) ||
         link.hasAttribute("download") ||

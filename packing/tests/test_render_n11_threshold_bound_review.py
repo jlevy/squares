@@ -180,19 +180,20 @@ def test_the_front_is_the_shared_components_in_the_owners_form(
     assert ".credits" not in paper.STYLE.read_text(encoding="utf-8")
     html, markdown = rendered
     address = "github.com/Kleddamag/11-squares-certified-bound"
+    author_profile = render_overview.canonical_url("profiles/marc-leonard-overbeck.html")
     block = html.split('<div class="credits centred">', 1)[1].split("</div>", 1)[0]
     lines = [line.strip() for line in block.strip().splitlines()]
     assert lines[0] == (
         '<span class="credits-source">From the original proof by '
-        '<a href="https://x.com/kleddamag" target="_blank" rel="noopener noreferrer">'
-        "<strong>Marc Leonard Overbeck</strong></a></span>"
+        f'<a href="{author_profile}" target="_blank" rel="noopener noreferrer">'
+        "<strong>Overbeck</strong></a></span>"
     )
     assert lines[1] == (
         f'<span class="credits-source"><a href="https://{address}" target="_blank" '
         f'rel="noopener noreferrer">{address}</a></span>'
     )
     assert lines[2].startswith('<span class="credits-own">Human oversight: ')
-    assert "<strong>Joshua Levy</strong>" in lines[2]
+    assert "<strong>Levy</strong>" in lines[2]
     assert lines[3].startswith("<span>Agents: <strong>")
     assert lines[4] == (
         f'<span class="edition">{release.THRESHOLD_REVIEW_EDITION} '
@@ -215,7 +216,7 @@ def test_the_front_is_the_shared_components_in_the_owners_form(
     assert ".hero h1 .tex,\n.hero h1 .kpress-math {" in html
     assert markdown.startswith(
         f"# {paper.HERO_TITLE}\n\n"
-        "- From the original proof by [**Marc Leonard Overbeck**](https://x.com/kleddamag)\n"
+        f"- From the original proof by [**Overbeck**]({author_profile})\n"
     )
     assert (
         f"- {release.THRESHOLD_REVIEW_EDITION} ([version history](#version-history))"

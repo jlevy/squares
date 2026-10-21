@@ -242,6 +242,8 @@ body {
     padding-block-start: var(--site-page-top);
   }
   .kpress-long-text > :first-child,
+  .kpress-long-text > .site-title:first-child,
+  .kpress-long-text > :is(article, header):first-child > h1:first-of-type,
   .kpress-long-text > :first-child > .site-hero:first-child,
   .site-hero:first-child > :first-child {
     margin-block-start: 0;
@@ -265,7 +267,7 @@ body {
 /* Main section titles share the homepage's breathing room on every web page. */
 @media screen {
   .kpress {
-    --site-title-space-above: 3.75rem;
+    --site-title-space-above: 6.25rem;
     --site-title-space-below: 2.5rem;
   }
   .kpress :where(.site-page, .kpress-prose) h1,
@@ -462,7 +464,11 @@ body {
   padding: var(--site-card-pad-block) var(--site-card-pad-end) 0.5rem var(--site-card-pad-start);
   text-decoration: none;
 }
-.kpress .site-card-footed:has(> .site-card-main:is(:hover, :focus-visible)) {
+.kpress
+  .site-card-footed:has(
+    > a.site-card-main:is(:hover, :focus-visible),
+    > .site-card-main > :is(.site-card-heading, a.site-card-url):is(:hover, :focus-visible)
+  ) {
   background: var(--site-wash);
 }
 .kpress div.site-card.site-card-footed::after {
@@ -475,10 +481,25 @@ body {
   position: absolute;
   transition: opacity var(--site-hover-duration) var(--site-hover-easing);
 }
-.kpress .site-card-footed:has(> .site-card-main:is(:hover, :focus-visible))::after {
+.kpress
+  .site-card-footed:has(
+    > a.site-card-main:is(:hover, :focus-visible),
+    > .site-card-main > :is(.site-card-heading, a.site-card-url):is(:hover, :focus-visible)
+  )::after {
   opacity: 1;
 }
-.kpress .site-card-footed > .site-card-foot {
+.kpress .site-card-footed > .site-card-main > .site-card-heading {
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  text-decoration: none;
+}
+.kpress .site-card-footed:not(:has(> .site-card-foot)) > .site-card-main {
+  padding-block-end: var(--site-card-pad-block);
+}
+.kpress .site-card-footed > .site-card-foot,
+.kpress .site-card-main > .site-card-byline {
   color: var(--site-support-color);
   font-family: var(--kpress-font-sans);
   font-size: var(--site-font-size-note);
@@ -486,6 +507,10 @@ body {
   line-height: 1.4;
   margin: 0;
   padding: 0 1rem var(--site-card-pad-block) var(--site-card-pad-start);
+}
+
+.kpress .site-card-main > .site-card-byline {
+  padding: 0;
 }
 
 /* ---------- Arrows ----------

@@ -19,6 +19,7 @@ from devtools import (
     site_math,
 )
 from devtools.pages_scope import REPO
+from devtools.profile_links import public_names
 from tests import site_renders
 
 
@@ -75,10 +76,11 @@ def test_news_links_named_contributors_directly_to_their_profiles(
             if entry["id"] in eligible:
                 published_profiles.append((name, identifier))
     assert published_profiles
-    for name, identifier in published_profiles:
-        assert f'<a href="profiles/{identifier}.html">{html.escape(name)}</a>' in history
+    for _name, identifier in published_profiles:
+        label = public_names()[identifier].label
+        assert f'<a href="profiles/{identifier}.html">{html.escape(label)}</a>' in history
     assert "wand125\N{RIGHT SINGLE QUOTATION MARK}s" not in history
-    assert not re.search(r"<a\b[^>]*\bdata-contributor=", history)
+    assert "data-person" not in history
 
 
 def test_a_yaml_only_history_change_selects_and_deploys_news() -> None:

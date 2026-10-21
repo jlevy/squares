@@ -6677,6 +6677,46 @@ urls:
   first_published: '2026-10-08'
   lastmod: '2026-10-17'
   status: live
+- path: profiles/ahyangyi.html
+  canonical: profiles/ahyangyi.html
+  kind: page
+  generator: devtools.render_contributors:contributor_pages
+  producer: overview
+  first_published: '2026-10-13'
+  lastmod: '2026-10-19'
+  status: live
+- path: profiles/anabologyco-maker.html
+  canonical: profiles/anabologyco-maker.html
+  kind: page
+  generator: devtools.render_contributors:contributor_pages
+  producer: overview
+  first_published: '2026-10-13'
+  lastmod: '2026-10-19'
+  status: live
+- path: profiles/benjamin-greff.html
+  canonical: profiles/benjamin-greff.html
+  kind: page
+  generator: devtools.render_contributors:contributor_pages
+  producer: overview
+  first_published: '2026-10-13'
+  lastmod: '2026-10-19'
+  status: live
+- path: profiles/can-li.html
+  canonical: profiles/can-li.html
+  kind: page
+  generator: devtools.render_contributors:contributor_pages
+  producer: overview
+  first_published: '2026-10-13'
+  lastmod: '2026-10-19'
+  status: live
+- path: profiles/daniil-ostashev.html
+  canonical: profiles/daniil-ostashev.html
+  kind: page
+  generator: devtools.render_contributors:contributor_pages
+  producer: overview
+  first_published: '2026-10-13'
+  lastmod: '2026-10-19'
+  status: live
 - path: profiles/david-ellsworth.html
   canonical: profiles/david-ellsworth.html
   kind: page
@@ -6687,6 +6727,14 @@ urls:
   status: live
 - path: profiles/david-r-maciver.html
   canonical: profiles/david-r-maciver.html
+  kind: page
+  generator: devtools.render_contributors:contributor_pages
+  producer: overview
+  first_published: '2026-10-13'
+  lastmod: '2026-10-19'
+  status: live
+- path: profiles/eric-deleeuw.html
+  canonical: profiles/eric-deleeuw.html
   kind: page
   generator: devtools.render_contributors:contributor_pages
   producer: overview
@@ -6719,6 +6767,14 @@ urls:
   status: live
 - path: profiles/francisco-couzo.html
   canonical: profiles/francisco-couzo.html
+  kind: page
+  generator: devtools.render_contributors:contributor_pages
+  producer: overview
+  first_published: '2026-10-13'
+  lastmod: '2026-10-19'
+  status: live
+- path: profiles/griffin-casson.html
+  canonical: profiles/griffin-casson.html
   kind: page
   generator: devtools.render_contributors:contributor_pages
   producer: overview
@@ -6773,8 +6829,32 @@ urls:
   first_published: '2026-10-13'
   lastmod: '2026-10-19'
   status: live
+- path: profiles/joost-de-winter.html
+  canonical: profiles/joost-de-winter.html
+  kind: page
+  generator: devtools.render_contributors:contributor_pages
+  producer: overview
+  first_published: '2026-10-13'
+  lastmod: '2026-10-19'
+  status: live
 - path: profiles/joshua-levy.html
   canonical: profiles/joshua-levy.html
+  kind: page
+  generator: devtools.render_contributors:contributor_pages
+  producer: overview
+  first_published: '2026-10-13'
+  lastmod: '2026-10-19'
+  status: live
+- path: profiles/ke-wang.html
+  canonical: profiles/ke-wang.html
+  kind: page
+  generator: devtools.render_contributors:contributor_pages
+  producer: overview
+  first_published: '2026-10-13'
+  lastmod: '2026-10-19'
+  status: live
+- path: profiles/kevin-fang.html
+  canonical: profiles/kevin-fang.html
   kind: page
   generator: devtools.render_contributors:contributor_pages
   producer: overview
@@ -6813,6 +6893,22 @@ urls:
   first_published: '2026-10-13'
   lastmod: '2026-10-19'
   status: live
+- path: profiles/mykhailo-polkovskyi.html
+  canonical: profiles/mykhailo-polkovskyi.html
+  kind: page
+  generator: devtools.render_contributors:contributor_pages
+  producer: overview
+  first_published: '2026-10-13'
+  lastmod: '2026-10-19'
+  status: live
+- path: profiles/nate-chaoweeraprasit.html
+  canonical: profiles/nate-chaoweeraprasit.html
+  kind: page
+  generator: devtools.render_contributors:contributor_pages
+  producer: overview
+  first_published: '2026-10-13'
+  lastmod: '2026-10-19'
+  status: live
 - path: profiles/oscar-fitzharding.html
   canonical: profiles/oscar-fitzharding.html
   kind: page
@@ -6831,6 +6927,22 @@ urls:
   status: live
 - path: profiles/philippe-ryckelynck.html
   canonical: profiles/philippe-ryckelynck.html
+  kind: page
+  generator: devtools.render_contributors:contributor_pages
+  producer: overview
+  first_published: '2026-10-13'
+  lastmod: '2026-10-19'
+  status: live
+- path: profiles/rio-calle.html
+  canonical: profiles/rio-calle.html
+  kind: page
+  generator: devtools.render_contributors:contributor_pages
+  producer: overview
+  first_published: '2026-10-13'
+  lastmod: '2026-10-19'
+  status: live
+- path: profiles/robert-barnett.html
+  canonical: profiles/robert-barnett.html
   kind: page
   generator: devtools.render_contributors:contributor_pages
   producer: overview
@@ -6861,8 +6973,32 @@ urls:
   first_published: '2026-10-13'
   lastmod: '2026-10-19'
   status: live
+- path: profiles/seth-rehwaldt.html
+  canonical: profiles/seth-rehwaldt.html
+  kind: page
+  generator: devtools.render_contributors:contributor_pages
+  producer: overview
+  first_published: '2026-10-13'
+  lastmod: '2026-10-19'
+  status: live
+- path: profiles/siddharth-gupta.html
+  canonical: profiles/siddharth-gupta.html
+  kind: page
+  generator: devtools.render_contributors:contributor_pages
+  producer: overview
+  first_published: '2026-10-13'
+  lastmod: '2026-10-19'
+  status: live
 - path: profiles/thierry-gensane.html
   canonical: profiles/thierry-gensane.html
+  kind: page
+  generator: devtools.render_contributors:contributor_pages
+  producer: overview
+  first_published: '2026-10-13'
+  lastmod: '2026-10-19'
+  status: live
+- path: profiles/thomas-schadt.html
+  canonical: profiles/thomas-schadt.html
   kind: page
   generator: devtools.render_contributors:contributor_pages
   producer: overview

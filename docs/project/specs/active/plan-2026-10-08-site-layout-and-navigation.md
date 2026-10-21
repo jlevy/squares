@@ -101,8 +101,10 @@ Main section headings share the introduction’s sans, uppercase title styling; 
 retains its compact label role.
 Ordinary page H1s inherit the shared title face and caps without an extra class.
 Apply shared screen-only spacing to page H1s and visible `h2.site-title` headings,
-including homepage, About and other content pages: 3.5rem above
-(`--site-title-space-above`) and 2rem below (`--site-title-space-below`).
+including homepage, About and other content pages: 6.25rem (100px) above
+(`--site-title-space-above`) and 2.5rem below (`--site-title-space-below`). The first
+page heading retains zero top margin, including a heading after breadcrumbs inside the
+initial article or header; the page container supplies its distance from the navigation.
 Introduction-card and compact Legend headings keep their own spacing; print spacing
 keeps its existing rules.
 The homepage and dedicated Atlas share square legend swatches at the explanatory text’s

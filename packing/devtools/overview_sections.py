@@ -41,6 +41,7 @@ from devtools.overview_data import (
     prose_html,
     tex_bounds,
 )
+from devtools.profile_links import link_prose, public_index
 from devtools.render_overview import (
     DOCUMENT_PAGES,
     N11_LOWER_BOUNDS_EXPLAINER,
@@ -55,6 +56,17 @@ from devtools.render_overview import PAPERS as PAPER_RECORDS
 from devtools.render_recent_results import REPORTED_MARK, SUPERSEDED, listed, superseded
 from devtools.repo_links import branch_file
 from devtools.result_status import CONFIRMED, STATUSES, recent_contributions_by_case
+
+# The curated source tuples remain exported here for recorded evidence locators;
+# site_resources owns their shared homepage/profile projection.
+from devtools.site_resources import (
+    CATALOGUE_SITES,
+    KINGBIRD,
+    OTHER_PROJECTS,
+    OTHER_SITES,
+    profile_ids_for_byline,
+    resources,
+)
 from devtools.site_topics import topic_chip, topic_label
 from sqpack import release
 from sqpack.known_best import PackingSegment, grid_transitions
@@ -576,8 +588,8 @@ def _detail(result: Result) -> str:
     result fragment retains composition and next-rung details (`result_overview.head`).
     """
     record = result.record
-    rows = [("Claim", prose_html(record["claim"]))]
-    rows.append(("Significance", prose_html(record["significance"]["rationale"])))
+    rows = [("Claim", link_prose(prose_html(record["claim"])))]
+    rows.append(("Significance", link_prose(prose_html(record["significance"]["rationale"]))))
     meaning = novelty_labels().get(result.novelty, "")
     rows.append(
         (
@@ -684,7 +696,7 @@ def result_row(result: Result, *, trigger: str, starred: bool = False) -> RowDet
         name=f"{name}, {NEW_RESULT}" if starred else name,
         trigger=trigger,
         label=result.id,
-        title=tex_bounds(result.summary),
+        title=link_prose(tex_bounds(result.summary)),
         body="<p>Full record</p>",
         source=result_fragment(result.id),
         action=(result_fragment(result.id), "Open Result Record"),
@@ -1767,371 +1779,6 @@ def hero() -> str:
     )
 
 
-#: The other public square-packing projects on GitHub that the research frontier cites:
-#: each repository's home, its author as the record credits them (the GitHub handle
-#: where the record names no one), and what it holds. A test holds this list to cover
-#: every source repository in the source-coverage register.
-OTHER_PROJECTS: tuple[tuple[str, str, str], ...] = (
-    (
-        "https://github.com/SidG2k1/square-packing-refinements",
-        "Siddharth Gupta",
-        (
-            "Seventeen rational refinements of Nate Chaoweeraprasit's SQUISH packings, "
-            "using Evan Daniel's optimizer; fourteen finite upper-bound improvements selected "
-            "here (T-127) and three withdrawn. Exact feasibility is confirmed with "
-            "independently re-implemented code; optimality is not established."
-        ),
-    ),
-    (
-        "https://github.com/ry-xu/square_packing",
-        "Ryan Xu",
-        (
-            "Complete rational packings and an undilated radical n = 51 construction; "
-            "finite feasibility is confirmed here (T-125, T-126)."
-        ),
-    ),
-    (
-        "https://github.com/ry-xu/square_packing/blob/8dc415296f697f5140caea27c7a0193d52deb4e6/square_packing_records.json",
-        "Ryan Xu",
-        "The complete source report retained for the rational packing comparisons.",
-    ),
-    (
-        "https://github.com/wand125/square-packing",
-        "Hiroaki Hosono",
-        "Canonical certificate and checker repository; historical source pins remain valid.",
-    ),
-    (
-        "https://github.com/lollipoll/couzo-five-exact-certificates",
-        "Seth Rehwaldt",
-        (
-            "Rational refinements of Couzo's packings; complete finite certificates at "
-            "n = 105 and 292 are replayed here (T-117)."
-        ),
-    ),
-    (
-        "https://github.com/lollipoll/certified-square-packing-68",
-        "Seth Rehwaldt",
-        (
-            "An exact finite rational refinement of Couzo's n = 68 packing, replayed "
-            "here (T-118). Its analytic root and dual programs remain outside that replay."
-        ),
-    ),
-    (
-        "https://github.com/evand/square-packing",
-        "Evan Daniel",
-        (
-            "Exact covers settling n = 21, 32, 45 and 60, and s(k\u00b2 \u2212 3) = k for every"
-            " k \u2265 6; s(k\u00b2 \u2212 4) = k awaits its replay here."
-        ),
-    ),
-    (
-        "https://github.com/squarepacker/s12-lower-bound",
-        "Ryu Sungjoon",
-        (
-            "Evan Daniel's s(12) points rescaled and then re-weighted, the lower bound"
-            " s(12) \u2265 7943/2000 for twelve squares."
-        ),
-    ),
-    (
-        "https://github.com/wand125/square-packing-bounds",
-        "Hiroaki Hosono",
-        "Weighted point and rectangle-density lower-bound certificates across many n.",
-    ),
-    (
-        "https://github.com/wand125/valid7-independent-check",
-        "Hiroaki Hosono",
-        "A second, independent exact checker of Valid7, the finite step of s(k² \u2212 3) = k.",
-    ),
-    (
-        "https://github.com/tokoharu/square-packing-density-bounds",
-        "Tokoharu",
-        "Rectangle-density lower-bound certificates.",
-    ),
-    (
-        "https://github.com/franciscouzo/square-packing",
-        "Francisco Couzo",
-        (
-            "Improved packings for 49 counts from n = 68 to 307. "
-            "Eight complete rational refinements in issue451 (T-128) and five follow-up "
-            "certificates at 84, 86, 105, 175 and 270 (T-130) have retained "
-            "finite-feasibility results; selected-case integration remains pending."
-        ),
-    ),
-    (
-        "https://github.com/itsnaka/squish-certs",
-        "Nate Chaoweeraprasit",
-        "Exact rational certificates for SQUISH upper-bound packings.",
-    ),
-    (
-        "https://github.com/TheSnakeFang/squarepack-certs",
-        "Kevin Fang",
-        (
-            "Two-wedge packings of 308, 343 and 344 squares with exact certificates; the"
-            " 308, below the grid, is replayed here (T-135)."
-        ),
-    ),
-    (
-        "https://github.com/ebdeleeuw/square-packing-n70",
-        "Eric Deleeuw",
-        "An exact rational refinement of Ryan Xu's packing of 70 squares (T-137).",
-    ),
-    (
-        "https://github.com/Mishapolk/square-packing-records",
-        "Mishapolk",
-        (
-            "Decimal packings at 48 counts; exact witnesses derived here prove the printed"
-            " sides at the 30 within the corpus (T-138)."
-        ),
-    ),
-    (
-        "https://github.com/BuddenPing/square-packing-certificates",
-        "PingYou Ltd",
-        (
-            "Exact rational packings of 207 and 153 squares built from Ryan Xu's packing of"
-            " 70, both replayed here (T-147, T-148)."
-        ),
-    ),
-    (
-        "https://github.com/dostashev/square-packing",
-        "Daniil Ostashev",
-        (
-            "New packings of 155, 156, 175, 211, 232 and 264 squares with exact"
-            " certificates and a GMP checker; all six are replayed here (T-149, T-158)."
-        ),
-    ),
-    (
-        "https://github.com/riocalle/my-repo",
-        "Rio Calle",
-        (
-            "A decimal layout of 102 squares, another arrangement of Ryan Xu's design;"
-            " certified here from the layout (T-159)."
-        ),
-    ),
-    (
-        "https://github.com/BuddenPing/squares",
-        "PingYou Ltd",
-        (
-            "Pull request #574's tighter certificates of others' packings, recorded at 68"
-            " counts and replayed at every one of them here (T-174)."
-        ),
-    ),
-    (
-        "https://github.com/bengreff/s76-certificate",
-        "Benjamin Greff",
-        (
-            "A mixed cover of points and grid-line segments for s(76) = 9, with the run"
-            " records of both checkers; reported, its census replayed in triage (T-184)."
-        ),
-    ),
-    (
-        "https://github.com/bengreff/s95-certificate",
-        "Benjamin Greff",
-        (
-            "A mixed cover of points and grid-line segments for s(95) = 10, with the run"
-            " records of both checkers; reported, both checkers replayed in triage (T-191)."
-        ),
-    ),
-    (
-        "https://github.com/RobertBarnettProjects/square-packing-research",
-        "Robert Barnett",
-        (
-            "Exact rational refinements of Ryan Xu's packings of 146 and 261 squares,"
-            " replayed here (T-150)."
-        ),
-    ),
-    (
-        "https://github.com/griffcass/square-packing",
-        "Griffin Casson",
-        "Improved packings for n = 103, 105 and other cases.",
-    ),
-    (
-        "https://github.com/JoostdeWinter/square-packing-211",
-        "Joost de Winter",
-        "A packing of 211 squares in a square of side under 15.",
-    ),
-    (
-        "https://github.com/JoostdeWinter/square-packing",
-        "Joost de Winter",
-        (
-            "Reported exact rational certificates for 227, 229 and 260 squares,"
-            " pending adoption (T-196)."
-        ),
-    ),
-    (
-        "https://github.com/Queuingtheorydotcom/11SquaresOptimal",
-        "Manasseh Ahmed",
-        "A computer-assisted proof that Trump's packing of eleven squares is optimal.",
-    ),
-    (
-        "https://github.com/Queuingtheorydotcom/11SquaresFormalized",
-        "Manasseh Ahmed et al.",
-        "A Lean 4 formalization of that proof, trusting Lean's compiler for its certificates.",
-    ),
-    (
-        "https://github.com/Kleddamag/11-squares-certified-bound",
-        "Marc Leonard Overbeck",
-        "A certified lower bound for eleven squares.",
-    ),
-    (
-        "https://github.com/Kleddamag/17-squares-certified-bound",
-        "Marc Leonard Overbeck",
-        "Certified lower bounds for seventeen squares.",
-    ),
-    (
-        "https://github.com/Kleddamag/the-seventeenth-square-candidate",
-        "Marc Leonard Overbeck",
-        "A candidate proof that Bidwell's packing of seventeen squares is optimal.",
-    ),
-    (
-        "https://github.com/ofitzharding/sq17-lean",
-        "Oscar Fitzharding",
-        (
-            "A Lean 4 proof that Bidwell's packing of seventeen squares is optimal, "
-            "trusting Lean's compiler for its certificates."
-        ),
-    ),
-    (
-        "https://github.com/ofitzharding/sq19",
-        "Oscar Fitzharding",
-        (
-            "A Lean 4 proof that Wainwright's packing of nineteen squares is optimal, "
-            "trusting Lean's compiler for its certificates."
-        ),
-    ),
-    (
-        "https://github.com/Guzhou0806/n17-square-packing",
-        "Guzhou0806",
-        "Strict lower bounds for seventeen squares.",
-    ),
-    (
-        "https://github.com/Guzhou0806/n40-square-packing",
-        "Guzhou0806",
-        "Strict lower bounds for forty squares, on densities grown from Hosono's.",
-    ),
-    (
-        "https://github.com/DRMacIver/square-packing-research",
-        "David R. MacIver",
-        "A lower bound for seventeen squares, with its paper and a Lean check.",
-    ),
-    (
-        "https://github.com/ahyangyi/17squares",
-        "ahyangyi",
-        "A lower-bound proof for seventeen squares.",
-    ),
-    (
-        "https://github.com/anabologyco-maker/square17-lower-bound",
-        "anabologyco-maker",
-        "A weighted fractional lower bound for seventeen squares.",
-    ),
-    (
-        "https://github.com/BalthasarStrauss/Squares-packing_S-29-_New-Record",
-        "Thomas Schadt",
-        "A record packing of 29 squares.",
-    ),
-)
-
-#: David Ellsworth's Squares in Squares catalogue, the record's `[Kingbird]`.
-KINGBIRD = "https://kingbird.myphotos.cc/packing/squares_in_squares.html"
-
-#: The catalogues of the record packings, which lead the Other Square Packing
-#: Projects section in this order, ahead of the ranked cards (the owner, 2026-10-05,
-#: `think-lvhh`): each one's address, its name, its maintainer as the record credits
-#: them, and what it holds. Ellsworth's catalogue is the baseline of every upper bound
-#: (`kingbird-current` in the source-coverage register). Erich Friedman's original page
-#: is the one the catalogue's header credits, at the archived address that header links
-#: (`resources/web/kingbird-squares-in-squares.md`). Evan Daniel's atlas is the
-#: bibliography's `[evand square packing atlas 2026-10-04]`.
-CATALOGUE_SITES: tuple[tuple[str, str, str, str], ...] = (
-    (
-        KINGBIRD,
-        "Squares in Squares",
-        "David Ellsworth after Erich Friedman",
-        (
-            "The catalogue of record packings, with their exact sides and histories: the"
-            " baseline of every upper bound here."
-        ),
-    ),
-    (
-        "https://web.archive.org/web/20230530194618/https://erich-friedman.github.io/packing/squinsqu/",
-        "Erich\u2019s Packing Center",
-        "Erich Friedman",
-        (
-            "The original Squares in Squares page, as archived on 30 May 2023, which"
-            " Ellsworth\u2019s catalogue continues."
-        ),
-    ),
-    (
-        "https://evand.github.io/square-packing/",
-        "Square Packing Atlas",
-        "Evan Daniel",
-        (
-            "Every record packing drawn beside the proven floor beneath it, with a page of"
-            " open problems."
-        ),
-    ),
-)
-
-#: Other cited result pages, including first-party GitHub issue reports, ranked with the
-#: projects on GitHub: each one's address, its name (a post's is its title, as the post
-#: gives it), its author as the record credits them, and what it holds. They are the
-#: source-coverage register's two sources off GitHub that are not a catalogue,
-#: UnitSquare's release and Wang and Li's Zenodo record, and the two posts behind
-#: Burns's and Massaccesi's n = 17 bound, whose key the register credits with T-015 and
-#: T-016 and the case records cite. A test holds every source the coverage register
-#: reviews to a card, here or in `OTHER_PROJECTS`, and every address here and in
-#: `CATALOGUE_SITES` to one the record cites.
-OTHER_SITES: tuple[tuple[str, str, str, str], ...] = (
-    (
-        "https://github.com/jlevy/squares/issues/401#issuecomment-6031977107",
-        "SQUISH Packing of 153 Squares",
-        "Nate Chaoweeraprasit",
-        "The supplemental rational certificate submitted with the SQUISH packings.",
-    ),
-    (
-        "https://github.com/jlevy/squares/issues/401#issuecomment-6043191866",
-        "SQUISH dated source follow-up",
-        "Nate Chaoweeraprasit",
-        (
-            "Dated SQUISH update, including a pinned copy of the original rational "
-            "n153 certificate."
-        ),
-    ),
-    (
-        "https://sam-burns.com/posts/proposing-better-lower-bound-for-n17-square-packing/",
-        "Proposing a Better Lower Bound for n = 17 Square Packing",
-        "Sam Burns",
-        (
-            "A weighted certificate for s(17) \u2265 4.4811, the method Massaccesi\u2019s"
-            " bound builds on."
-        ),
-    ),
-    (
-        "https://gus-massa.blogspot.com/2026/08/another-better-lower-bound-for-n17.html",
-        "Another Better Lower Bound for n = 17 Square Packing",
-        "Gustavo Massaccesi",
-        "s(17) \u2265 4.5058, by linear programming on Burns\u2019s certificate architecture.",
-    ),
-    (
-        "https://doi.org/10.5281/zenodo.23038546",
-        "Zenodo 23038546",
-        "Ke Wang and Can Li",
-        (
-            "An exact lower bound for eleven squares, a reweighting of Overbeck\u2019s"
-            " certificate."
-        ),
-    ),
-    (
-        "https://hmbelvedere.com/",
-        "UnitSquare",
-        "the UnitSquare Project",
-        (
-            "Results Release 1, reported packings for six counts from n = 68 to 131, each"
-            " since superseded."
-        ),
-    ),
-)
-
-
 def site_name(url: str) -> str | None:
     """A listed website's name, `None` for a repository on GitHub."""
     for address, name, _, _ in (*CATALOGUE_SITES, *OTHER_SITES):
@@ -2206,6 +1853,7 @@ def link_card(
     size: CardSize | None = None,
     new_tab: bool = True,
     foot: str = "",
+    byline: str = "",
 ) -> str:
     """A card that is itself the link, with no popover: for a place whose address, or
     whose picture, is the whole of what a preview would say, and for a full page of this
@@ -2226,7 +1874,9 @@ def link_card(
     results. A link cannot hold a link, so a card with a foot is a box, `div.site-card`,
     holding the card's link (`site-card-main`, everything above the foot) and then the
     foot (`site-card-foot`), inside the one border. It sizes, washes and shows its
-    corner icon as every card does (`site.css`).
+    corner icon as every card does (`site.css`). An optional HTML `byline` sits between
+    the linked heading and the note, with independent links of its own; the source
+    address remains a separate external link.
     """
     kind = card_kind(url)
     if not new_tab and not is_site_page(url):
@@ -2234,20 +1884,34 @@ def link_card(
     tab = ' target="_blank" rel="noopener noreferrer"' if new_tab else ""
     typed = ' type="application/pdf"' if url.endswith(".pdf") else ""
     address = ""
+    address_value = ""
     if kind == "external":
         shown = url.removeprefix("https://").rstrip("/")
-        address = (
-            f'<span class="site-card-url">{link_icon(url)}'
-            f'<span class="site-card-url-text">{_breakable(shown)}</span></span>'
+        address_value = (
+            f'{link_icon(url)}<span class="site-card-url-text">{_breakable(shown)}</span>'
         )
-    body = (
+        address = f'<span class="site-card-url">{address_value}</span>'
+    heading = (
         f"{card_hero(hero) if hero else ''}"
         f'<span class="site-card-label">{_esc(label)}</span>'
         f'<span class="site-card-value"{headline_math_face(value)}>{value}</span>'
-        f'<span class="site-card-note">{note}</span>'
-        f"{address}"
     )
+    body = heading + f'<span class="site-card-note">{note}</span>' + address
     sized = _size_attribute(size, value, note, address)
+    if byline:
+        source = (
+            f'<a class="site-card-url" href="{_esc(url)}"{typed}{tab}>{address_value}</a>'
+            if address_value
+            else ""
+        )
+        closing = f'<p class="site-card-foot">{foot}</p>' if foot else ""
+        return (
+            f'<div class="site-card site-card-footed" data-go="{kind}" {sized}>'
+            '<div class="site-card-main">'
+            f'<a class="site-card-link site-card-heading" href="{_esc(url)}"{typed}{tab}>'
+            f'{heading}</a><p class="site-card-byline">{byline}</p>'
+            f'<span class="site-card-note">{note}</span>{source}</div>{closing}</div>'
+        )
     if foot:
         return (
             f'<div class="site-card site-card-footed" data-go="{kind}" {sized}>'
@@ -2498,26 +2162,52 @@ def project_tally(url: str, tally: ProjectTally) -> str:
     return f'<a href="{_esc(results_filter_url(slug))}">{total} {noun}</a> ({counts})'
 
 
+def project_author(author: str) -> str:
+    """Link a curated project byline to its uniquely evidenced public identity."""
+    index = public_index()
+    key = " ".join(author.split()).casefold()
+    matches = profile_ids_for_byline(author, index)
+    if not matches:
+        return "By " + _esc(author)
+    if len(matches) == 1 and key in index.personal_labels[matches[0]]:
+        identifier = matches[0]
+        return (
+            f'By <a href="profiles/{identifier}.html">'
+            f"{_esc(index.people[identifier].label)}</a>"
+        )
+    return "By " + link_prose(_esc(author), index=index)
+
+
 def other_project_cards(overview: Overview) -> str:
-    """One card per other project, website or repository, in `listed_projects`'s order:
-    its name (`project_headline`), its author, what it holds and its address, and at its
-    foot its tally of registered results (`project_tally`). Each card's link opens the
-    project in a new tab. The note is prose like a page card's, so a case it names
-    (`n = 21`) is set as math."""
-    listed = {url: (author, note) for url, author, note in OTHER_PROJECTS} | {
-        url: (author, note) for url, _, author, note in (*CATALOGUE_SITES, *OTHER_SITES)
-    }
+    """Project headings, profile bylines and notes follow the significance order.
+
+    Heading and address open the source in a new tab; author and tally links are
+    independent, so a profile link never nests in a project link.
+    """
+    listed = {resource.url: resource for resource in resources()}
     cards = []
     for url, tally in listed_projects(overview):
-        author, note = listed[url]
+        resource = listed[url]
+        foot = (
+            f'<span class="site-project-tally">{tally_line}</span>'
+            if (tally_line := project_tally(url, tally))
+            else ""
+        )
         cards.append(
             link_card(
                 url,
-                f"By {author}",
-                headline_html(url),
-                tex_bounds(note),
+                "Repository" if urlsplit(url).hostname == "github.com" else "Website",
+                _esc(resource.title)
+                if resource.kind == "repository"
+                else tex_bounds(resource.title),
+                tex_bounds(resource.description),
                 size=SECTION_CARD_SIZES["projects"],
-                foot=project_tally(url, tally),
+                foot=foot,
+                byline=(
+                    '<span class="site-project-author">'
+                    + project_author(resource.byline)
+                    + "</span>"
+                ),
             )
         )
     return _cards(cards)

@@ -120,7 +120,11 @@ def test_the_head_states_the_result_as_the_site_does(
         f'<p class="site-result-claim">{overview_data.tex_bounds(paragraph)}</p>'
         for paragraph in paragraphs
     )
-    assert claim in head
+    # Person links preserve the exact authored claim and prepared mathematics.
+    without_person_links = re.sub(
+        r'<a href="profiles/[a-z0-9-]+\.html">([^<]*)</a>', r"\1", head
+    )
+    assert claim in without_person_links
     assert head.count('<p class="site-result-claim">') == len(paragraphs)
     assert "kpress-math" in claim
     assert overview_sections.status_chips(result) in head

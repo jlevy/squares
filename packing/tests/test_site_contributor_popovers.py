@@ -35,7 +35,7 @@ PROFILE = (
     '<h1 id="title">Walter Stromquist</h1><p>A mathematical contributor.</p>'
     '<a href="../cases/11.html" data-case="11">Case 11</a>'
     '<a href="#bio">Biography</a><p id="bio">Published biographical evidence.</p>'
-    '<a href="../profiles/evan-daniel.html" data-contributor="evan-daniel">Evan Daniel</a>'
+    '<a href="../profiles/evan-daniel.html" data-person>Evan Daniel</a>'
     '<a href="https://example.org/">Public website</a></article>'
 )
 SECOND = (
@@ -44,12 +44,12 @@ SECOND = (
 )
 CASE = (
     '<article class="site-case" data-case="11"><h1 id="title">Case 11</h1>'
-    '<a href="../profiles/walter-stromquist.html" data-contributor="walter-stromquist">'
+    '<a href="../profiles/walter-stromquist.html" data-person>'
     'Walter Stromquist</a><a href="12.html" data-case-step="12" rel="next">Next</a></article>'
 )
 RESULT = (
     '<article class="site-result" data-result-overview="t-test"><h1 id="title">Result</h1>'
-    '<a href="../profiles/walter-stromquist.html" data-contributor="walter-stromquist">'
+    '<a href="../profiles/walter-stromquist.html" data-person>'
     "Walter Stromquist</a></article>"
 )
 
@@ -87,9 +87,9 @@ def served(tmp_path_factory: pytest.TempPathFactory) -> Iterator[str]:
     )
     body = (
         '<h1 id="title">Host title</h1><main><a id="profile-link" '
-        'href="profiles/walter-stromquist.html" data-contributor="walter-stromquist">'
+        'href="profiles/walter-stromquist.html" data-person>'
         'Walter Stromquist</a><a id="second-link" href="profiles/evan-daniel.html" '
-        'data-contributor="evan-daniel">Evan Daniel</a><a id="case-link" '
+        'data-person>Evan Daniel</a><a id="case-link" '
         'href="cases/11.html" data-case="11">Case 11</a><table><tbody>'
         '<tr id="result-row" data-row-popover="pop-result"><td>Result details</td></tr>'
         '</tbody></table><button id="native-opener" popovertarget="pop-native">'
@@ -182,7 +182,7 @@ def design_generated(tmp_path_factory: pytest.TempPathFactory) -> Iterator[str]:
     directory = render_contributors.contributor_pages()[0]
     reference = render_overview.static_content_page(
         '<article class="title-reference"><h1>Shared page title</h1>'
-        '<a href="profiles/evan-daniel.html" data-contributor="evan-daniel">'
+        '<a href="profiles/evan-daniel.html" data-person>'
         "Evan Daniel</a></article>",
         meta=render_overview.PageMeta(
             "Shared page title", "Standard page heading reference.", "title-reference.html"
@@ -275,7 +275,7 @@ def test_generated_profile_uses_shared_roles_without_overflow(
     with _page(browser, viewport={"width": width, "height": 900}, color_scheme=theme) as page:
         if overlay:
             page.goto(f"{design_generated}title-reference.html", wait_until="load")
-            page.locator('main a[data-contributor][href$="evan-daniel.html"]').click()
+            page.locator('main a[data-person][href$="evan-daniel.html"]').click()
             selector = "#pop-contributor article.site-contributor"
         else:
             page.goto(f"{design_generated}profiles/evan-daniel.html", wait_until="load")
@@ -364,8 +364,8 @@ def test_overlay_replacement_retains_page_focus(browser: Any, served: str, opene
         origin = page.locator("#case-link" if opener == "case" else "#result-row")
         origin.click()
         source = page.locator("#pop-case" if opener == "case" else "#pop-result")
-        source.locator('a[data-contributor="walter-stromquist"]').wait_for()
-        source.locator('a[data-contributor="walter-stromquist"]').click()
+        source.locator('a[data-person][href$="walter-stromquist.html"]').wait_for()
+        source.locator('a[data-person][href$="walter-stromquist.html"]').click()
         profile = page.locator("#pop-contributor")
         profile.locator("article.site-contributor").wait_for(state="visible")
         assert not source.is_visible()
@@ -484,7 +484,7 @@ def test_closing_source_cancels_pending_profile_failure(browser: Any, served: st
         page.route("**/profiles/walter-stromquist.html", hold)
         page.goto(served)
         page.locator("#case-link").click()
-        page.locator("#pop-case a[data-contributor]").click()
+        page.locator("#pop-case a[data-person]").click()
         page.keyboard.press("Escape")
         assert len(held) == 1
         held.pop().fulfill(status=503, content_type="text/html", body="Unavailable")
@@ -558,7 +558,7 @@ def test_generated_standalone_pages_enhance_article_links(
             panel = page.locator("#pop-case")
             article = "article.site-case"
         else:
-            link = page.locator('main a[data-contributor][href$="walter-stromquist.html"]')
+            link = page.locator('main a[data-person][href$="walter-stromquist.html"]')
             panel = page.locator("#pop-contributor")
             article = "article.site-contributor"
         site_browser.api().expect(link).to_be_visible(timeout=2000)
@@ -581,11 +581,26 @@ def test_generated_directory_keeps_native_profile_navigation(
         color_scheme="dark",
     ) as page:
         page.goto(f"{generated}profiles/index.html", wait_until="load")
-        page.locator('main a[href$="walter-stromquist.html"]').click()
+        public = page.get_by_role("link", name="GitHub: evand (Evan Daniel)", exact=True)
+        assert public.get_attribute("href") == "https://github.com/evand"
+        page.route(
+            "https://github.com/evand", lambda route: route.fulfill(body="Public account")
+        )
+        public.click()
+        page.wait_for_url("https://github.com/evand")
+        page.go_back(wait_until="load")
+        link = page.get_by_role("link", name="Walter Stromquist", exact=True)
+        if javascript:
+            row = page.get_by_role("row").filter(has=link)
+            row.dispatch_event("click", {"ctrlKey": True})
+            assert page.url == f"{generated}profiles/index.html"
+            row.dispatch_event("click")
+        else:
+            link.click()
         page.wait_for_url(f"{generated}profiles/walter-stromquist.html")
         assert (
             page.locator("main article.site-contributor h1").text_content()
             == "Walter Stromquist"
         )
-        page.locator('nav[aria-label="Breadcrumb"] a').click()
+        page.locator('nav[aria-label="Breadcrumb"] a[href="index.html"]').click()
         page.wait_for_url(f"{generated}profiles/index.html")

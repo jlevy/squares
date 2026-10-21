@@ -655,7 +655,7 @@ one of them changes.
 | How much nearer the bar an opening picture starts | `--site-hero-lift` | 0.5rem, 8px | `site.css` |
 | Above a section heading (`h2`) | `--paper-section-space` | 2.7 of the prose base, 48.6px | `paper-type.css` |
 | Below a section heading (`h2`) | `--paper-section-space-below` | 1.7rem, 27.2px | `paper-type.css` |
-| Above a visible site-title H1 or H2 | `--site-title-space-above` | 3.75rem, 60px | `site.css` |
+| Above a visible site-title H1 or H2 | `--site-title-space-above` | 6.25rem, 100px | `site.css` |
 | Below a visible site-title H1 or H2 | `--site-title-space-below` | 2.5rem, 40px | `site.css` |
 | Below a page’s title, and below its subtitle | `--site-subtitle-space` | 2rem, 32px | `site.css` |
 | Above and below a table | `--site-table-space` | 2rem, 32px | `site.css` |
@@ -721,7 +721,7 @@ come from its complete page.
 | Case record | `cases/N.html` | Case link, index entry or neighboring-record link | `a[data-case]`, atlas tiles and frontier rows load `article.site-case` in the shared case panel |
 | Result record | `result/t-nnn.html` | Result ID link or **Open Result Record** | Pressing the rest of a result row loads `article.site-result[data-result-overview]` in that row’s panel |
 | Person profile | `profiles/ID.html` | Public-name link or **Open profile** | A marked credit in a case or result article loads `article.site-contributor` in the shared contributor panel |
-| Profile directory | `profiles/index.html` | Colophon **Profiles** link and alphabetical list | Profile links navigate directly to standalone profiles |
+| Profile directory | `profiles/index.html` | Home/About **All Profiles** button or colophon **Profiles** link | Full public names, reviewed-credit and resource counts, and public account links in a surname-sorted native table; name links navigate directly to profiles |
 | News article | `news.html#ID` | Linked announcement title or bookmarked article | Homepage and archive reuse the authored article; its profile links navigate directly |
 | Card preview | The card’s ordinary target | Native `popovertarget` button and action link | The card’s preview remains authored in the page; it is not an article fetch |
 | Framed card preview | Target page with `?view=embed` | Native card button and **Expand** | The frame loads on first opening and uses its own document |
@@ -968,7 +968,7 @@ contributor articles use their component sheets and the same text tokens.
   problem and explaining upper/lower bounds (`think-8xzs`). About uses only H1 section
   headings, each with the same `site-title` styling as The Squares Project
   (`think-6m9n`, `think-sq1i`). Every visible `h1.site-title` and `h2.site-title` shares
-  the screen-only 3.75rem margin above it and 2.5rem below it
+  the screen-only 6.25rem margin above it and 2.5rem below it
   (`--site-title-space-above` and `--site-title-space-below`); compact Legend and
   introduction-card headings keep their own spacing.
   The hero graphic opens the case popover, with the case-record link as its no-script
@@ -991,9 +991,9 @@ contributor articles use their component sheets and the same text tokens.
   A linked article title inherits the heading’s color and typography.
   News headlines use surnames when unambiguous.
   Article text follows the authored record.
-  The first linked mention in an article uses the profile’s preferred display name,
-  following [Attribution Policy](../../../attribution.md#website-and-pdf-presentation).
-  The renderer preserves authored names and wording.
+  Linked mentions use the shared short surname-or-handle label, following
+  [Attribution Policy](../../../attribution.md#website-and-pdf-presentation).
+  The renderer preserves the authored record while applying that link-label policy.
   Profile links navigate directly to their complete pages from both homepage previews
   and the News archive.
   Keep published handles and organization names intact.
@@ -1096,8 +1096,10 @@ contributor articles use their component sheets and the same text tokens.
   `.site-title`) is the sans face in upright caps (not KPress’s italic `h2`) at 1.5
   times the sans base, centred.
   On screen, `h1.site-title` and `h2.site-title` use `--site-title-space-above`
-  (3.75rem) above and `--site-title-space-below` (2.5rem) below the title on every
-  content page; print keeps its existing heading spacing.
+  (6.25rem) above and `--site-title-space-below` (2.5rem) below the title on every
+  content page. The first page heading has no top margin, including a heading after
+  breadcrumbs in the initial article or header; the page container supplies its normal
+  top padding. Print keeps its existing heading spacing.
   The homepage’s first section, The Square Packing Problem, takes it through
   `.site-title`, so it reads as the Frontier page’s title does.
   That section opens with README’s two opening paragraphs: the block between README’s
@@ -1328,7 +1330,10 @@ contributor articles use their component sheets and the same text tokens.
   icon while its link is hovered or focused, so it reads as every other card does.
   The foot is set in the sans face at the note size in the support colour, at the card’s
   lower edge, so the feet of a row line up; its links take the page’s link colour.
-  A card with no foot stays the link itself.
+  A card with no foot stays the link itself, unless it has an independent byline.
+  With `link_card(byline=)`, `.site-card-main` is a content container: the linked
+  heading, the byline, the description, and a separate source-address link.
+  The byline retains native profile links and never sits inside the source link.
   The cards’ widths, rows and centring are the same with a foot as without
   (`measure_site_pages cards`, at 1280, 1024, 768 and 390).
 
@@ -1355,6 +1360,15 @@ contributor articles use their component sheets and the same text tokens.
   result attributed to sources of several listed projects counts for each.
   This project’s own results, and results by others from a source no listed project
   holds, count for none.
+  A card’s repository or website title opens that source.
+  Below the repository heading and above the description, its byline begins with “By”
+  and the author: a known person links to their profile using the shared surname label,
+  while an organization or an unreviewed identity stays plain text.
+  Exact curated author names and evidenced aliases identify people; repository owner
+  strings alone do not establish personal identity.
+  Multiple authors keep separate profile links.
+  These links sit beside the project link in the card’s structure, never inside it, and
+  remain in the same tab.
   Each card with a result ends with its tally (**Card foot**, above), in the form “6
   results (3 at S4, 3 at S3)”: the total, “1 result” for one, then every level that has
   a result, the highest first, in parentheses, which are kept when there is one level so
@@ -1830,6 +1844,15 @@ contributor articles use their component sheets and the same text tokens.
   result form; the old `#contribute-your-results` anchor stays on the heading.
   The overview carries the same invitation (`report-results.md`) as an H2 after Recent
   Major Results. Project documentation remains on About.
+  Between the narrative and reporting invitation, **Profiles** briefly introduces the
+  contributors and cited authors tracked here.
+  Home carries the same invitation.
+  The centered **All Profiles** action uses the shared button and right arrow and
+  navigates to `profiles/index.html`, whose full-name table links directly to profiles.
+  Neither invitation lists names.
+  The directory and individual profiles keep **About** active in the shared navigation;
+  their breadcrumbs return to About’s `#profiles` section, with **Profiles** as the
+  additional parent on each person’s page.
   Explanations holds the Tutorial, Papers and PDFs sections, followed by Visuals.
   About no longer carries Reading and Research; omit redundant Frontier Survey and
   Workbench cards from both pages (`think-h21i`).
@@ -2792,17 +2815,36 @@ would change the formula’s letters.
 person/project distinctions and exceptions.
 This guide owns their presentation.
 
-The profile directory at `profiles/` lists every published profile in public-name order.
-It includes cited paper authors as well as the project’s contributors, so its visible
-text says **Profiles**: the directory’s title and heading, its list’s label, the
-colophon link and each profile’s breadcrumb.
-Its names navigate directly to individual profile pages, with or without JavaScript; the
-directory does not open profile popovers.
-News articles and their homepage previews also use ordinary profile links.
-The colophon’s **Profiles** link and each profile’s breadcrumb navigate back to the
-directory. Each profile has one complete article at `profiles/ID.html`; the directory,
-credited names in tables and records, and the standalone profile use that address.
-A marked public-name credit in a result or case can open the same article in
+The profile directory at `profiles/` is a native table: full real or public **Name**,
+**Credits**, **Resources**, and **Links**. It sorts by the shared evidenced surname key,
+falling back to the public handle when no surname is established.
+Credits match each profile’s existing reviewed-work list, including distinct roles or
+labels for one source; they are neither raw mentions nor a measure of all contributions.
+The renderer shares that definition through `render_contributors.credited_work`. Inline
+prose links keep the short surname-or-handle naming policy; directory names remain full
+so people can be identified while browsing.
+Home and About share a short Profiles invitation and the **All Profiles** action
+(`render_contributors.profile_preview`), with no name list or metadata reads.
+The table’s native name and credit-count anchors go directly to the person’s profile;
+the redundant credit-count link stays outside the tab order.
+Resource and account links remain separate keyboard stops because they lead to distinct
+destinations. Positive resource counts link to the profile’s **Resources** section; zero
+has no dead fragment link.
+Compact **Links** icons open the person’s public accounts and websites.
+Their accessible names and titles distinguish the platform, account and person.
+The scoped directory script extends the pointer hit area to blank row space while
+preserving account links, controls, modifiers and text selection.
+It adds no popover or replacement table semantics; native links work without JavaScript.
+The table retains shared KPress spacing, numeric alignment and horizontal overflow on
+small screens. It includes cited paper authors as well as the project’s contributors, so
+its visible text says **Profiles** in the title, heading, table label and colophon link.
+The directory and profile pages keep **About** active in the shared navigation.
+Their breadcrumbs link to About’s `#profiles` section; each profile also links to the
+full directory. News articles and their homepage previews also use ordinary profile
+links. The colophon’s **Profiles** link and each profile’s breadcrumb navigate back to
+the directory. Each profile has one complete article at `profiles/ID.html`; the
+directory, credited names in tables and records, and the standalone profile use that
+address. A marked public-name credit in a result or case can open the same article in
 `#pop-contributor`, whose **Open profile** action reaches the complete page.
 The panel has the standard 36rem ceiling, shared padding, close target, viewport height
 limit, scrim and scrolling of a compact article popover.
@@ -2813,12 +2855,14 @@ address served there is a registered forwarder to its profile
 (`render_overview.LEGACY_PROFILES`), and no page links one.
 A profile added since has only its `profiles/` address.
 Module, record, schema, CSS class and `data-contributor*` names keep the contributor
-vocabulary of the records under `packing/contributors/people/`.
+vocabulary of the records under `packing/contributors/people/`. The `data-person`
+presence marker enables the reviewed credit’s profile popover; its identity is the
+profile URL, while original labels remain in the occurrence record.
 
 `render_contributors.contributor_article` writes the article once for either context:
-breadcrumb, public name, optional real name when different, aliases, optional bio,
-structured public links, reviewed credited work, source locators and identity evidence.
-Unknown real names, accounts and biography facts are omitted.
+breadcrumb, public name, optional real name when different, selected alternate names,
+optional bio, structured public links, reviewed credited work, source locators and
+identity evidence. Unknown real names, accounts and biography facts are omitted.
 The optional bio is one Markdown paragraph of at most five sentences, with sources
 supporting its claims.
 The renderer permits safe inline Markdown, escapes raw HTML, disables images and checks
@@ -2826,16 +2870,39 @@ links with the same HTTP(S) policy as structured links.
 Sentence count is an editorial review rule; the loader validates paragraph shape and
 evidence references.
 
-Structured links identify their kind and account handle where supported: GitHub, Twitter
-/ X, Substack, a personal website or a publication website.
+Only the explicit `display_aliases` selection appears under **Also credited as**; the
+full evidenced alias registry remains available for reviewed credit matching.
+Structured links show the account handle or public URL beside the shared GitHub, X or
+web icon (`site_icons.account_icon`). The link’s accessible name includes its platform.
+`render_contributors.account_links` renders both the centered profile row with visible
+handles and the compact, wrapping directory icons; both share styling and retain
+external destinations.
+Cited external work stays separate from personal account links.
+`site_resources.Resource` projects the existing `OTHER_PROJECTS`, `OTHER_SITES` and
+`CATALOGUE_SITES` inventories into one typed record per exact URL, including artifact
+paths and comment fragments, with title, description, original byline, kind and resolved
+profile IDs. Homepage cards, profile **Resources** lists and directory resource counts
+consume this projection.
+No person record duplicates these curated facts.
+A curated whole byline resolves only to a unique evidenced public identity; compound
+bylines match exact unique full names, preserving relationships such as “after.”
+Descriptions do not establish ownership, and organizations stay distinct from people.
+Each resource appears once per credited person; its count is independent of reviewed
+credit counts. Equal repeated URLs deduplicate, while conflicting metadata fails.
+Resource descriptions and bylines use scoped prose linking with the profile subject
+excluded; source titles and external destinations remain intact.
+Related News lists the titles and dates of eligible announcements whose summary or
+details explicitly link the person’s record, each at its stable News entry anchor.
+No profile record stores a second event chronology.
 Source IDs link to their public URL or archived source, with the locator beside them.
-Identity evidence is a closed native disclosure linking the supported fields to those
-sources. Credited work links reviewed occurrences to cases, results or bibliography
-entries, retaining role and original public label.
+One closed native **Sources** disclosure contains the source list, biography sources
+when present, and identity evidence linking the supported fields to those sources.
+Credited work links reviewed occurrences to cases, results or bibliography entries,
+retaining role and original public label.
 Repeated mentions of the same work, role and label collapse, while distinct bibliography
 records remain distinct and link their own entry lines.
-Long credit collections use a native disclosure; the complete collection remains in the
-article.
+Long credit collections use an initially open native disclosure; the complete collection
+remains in the article.
 Identity joins come from the reviewed occurrence manifest, not spelling matches.
 The
 [contributor plan](../../../docs/project/specs/active/plan-2026-10-10-contributor-profiles.md)
@@ -2848,9 +2915,23 @@ headings use the shared compact overlay scales, medium weight and heading leadin
 Page section headings retain their serif italic role; overlay section headings are
 upright sans. Typography comes from the shared rules rather than profile-specific sizes.
 Breadcrumbs, aliases, account links, credits and source text use the shared note role
-and support color; source section headings keep the heading role.
+and support color; the Sources toggle inherits the standard KPress summary role.
 Identity terms use the shared medium weight.
 Nested metadata never multiplies the note size.
+`profile_links.link_prose` identifies people by exact full names or reviewed account
+links, then applies the shared short labels within authored introduction fragments, News
+summaries and details, or one biography.
+Template scope wrappers are removed after rendering.
+It links unique exact full names and verified account links whose visible label matches
+the same person, preserving authored text and source-work links.
+Name matching permits soft-wrapped whitespace and checks collisions on the same
+normalized spelling.
+Existing links, quotations, code, mathematics and structured table credits are excluded;
+biographies also exclude their own subject.
+Raw aliases and surnames are never inferred.
+The built-site audit reports remaining full-name mentions by page, with ambiguous names
+listed separately.
+
 The article adds no padding above the page’s shared top space.
 Only the first breadcrumb reserves the close button’s clearance; the article body and
 headings keep equal left and right insets.

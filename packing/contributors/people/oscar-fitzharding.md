@@ -7,6 +7,7 @@ softschema:
 contributor:
   id: oscar-fitzharding
   display_name: Oscar Fitzharding
+  surname: Fitzharding
   real_name: Oscar Fitzharding
   aliases: [Fitzharding, ofitzharding, '@ofitzharding']
   links:
@@ -38,6 +39,8 @@ contributor:
       archive_path: packing/resources/bibliography.yaml
       locator: 'credited_names maps Oscar Fitzharding to Fitzharding; the [Fitzharding n17 Lean 2026] entry credits Fitzharding.'
   provenance:
+    - field: /surname
+      sources: [citation-cff, bibliography]
     - field: /display_name
       sources: [citation-cff, licence, packet]
     - field: /real_name
@@ -52,14 +55,7 @@ contributor:
       sources: [citation-cff, packet]
     - field: /links/1
       sources: [announcement, packet]
-  bio_sources: [citation-cff, packet, announcement, release-readme]
 ---
-Oscar Fitzharding publishes as ofitzharding on GitHub and as @ofitzharding on X. On 12
-October 2026 he released sq17-lean, a Lean 4 proof that John Bidwell’s 1998 packing of
-seventeen unit squares is optimal, and announced it on X the next day.
-The release states that it was developed with substantial assistance from Claude and
-Codex.
-
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

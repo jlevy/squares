@@ -5960,9 +5960,13 @@ occurrences:
   end: 15
   label: Chaoweeraprasit
   role: source-author
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: nate-chaoweeraprasit
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[SQUISH ten packings 2026-10-07]'
@@ -5972,9 +5976,13 @@ occurrences:
   end: 15
   label: Chaoweeraprasit
   role: credited-contributor
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: nate-chaoweeraprasit
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[SQUISH ten packings 2026-10-07]'
@@ -5998,9 +6006,13 @@ occurrences:
   end: 15
   label: Chaoweeraprasit
   role: source-author
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: nate-chaoweeraprasit
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[SQUISH n153 2026-10-07]'
@@ -6010,9 +6022,13 @@ occurrences:
   end: 15
   label: Chaoweeraprasit
   role: credited-contributor
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: nate-chaoweeraprasit
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[SQUISH n153 2026-10-07]'
@@ -6036,9 +6052,13 @@ occurrences:
   end: 15
   label: Chaoweeraprasit
   role: source-author
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: nate-chaoweeraprasit
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[SQUISH update 2026-10-07]'
@@ -6048,9 +6068,13 @@ occurrences:
   end: 15
   label: Chaoweeraprasit
   role: credited-contributor
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: nate-chaoweeraprasit
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[SQUISH update 2026-10-07]'
@@ -6087,9 +6111,13 @@ occurrences:
   end: 15
   label: Chaoweeraprasit
   role: source-author
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: nate-chaoweeraprasit
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[SQUISH second update 2026-10-07]'
@@ -6099,9 +6127,13 @@ occurrences:
   end: 15
   label: Chaoweeraprasit
   role: credited-contributor
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: nate-chaoweeraprasit
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[SQUISH second update 2026-10-07]'
@@ -6373,9 +6405,13 @@ occurrences:
   end: 27
   label: Chaoweeraprasit
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: nate-chaoweeraprasit
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Gupta rational refinements 2026-10-08]'
@@ -6542,9 +6578,13 @@ occurrences:
   end: 31
   label: Chaoweeraprasit
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: nate-chaoweeraprasit
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo exact refinements 2026-10-08]'
@@ -6911,9 +6951,13 @@ occurrences:
   end: 35
   label: Chaoweeraprasit
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: nate-chaoweeraprasit
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel record hunt 2026-10-09]'
@@ -7294,9 +7338,13 @@ occurrences:
   end: 38
   label: Chaoweeraprasit
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: nate-chaoweeraprasit
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo exact certificates 2026-10-09]'
@@ -7477,9 +7525,13 @@ occurrences:
   end: 15
   label: Chaoweeraprasit
   role: source-author
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: nate-chaoweeraprasit
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[SQUISH third request 2026-10-09]'
@@ -7490,9 +7542,13 @@ occurrences:
   end: 15
   label: Chaoweeraprasit
   role: credited-contributor
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: nate-chaoweeraprasit
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[SQUISH third request 2026-10-09]'
@@ -7739,9 +7795,13 @@ occurrences:
   end: 62
   label: Chaoweeraprasit
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: nate-chaoweeraprasit
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Mishapolk decimal poses 2026-10-09]'
@@ -7854,9 +7914,13 @@ occurrences:
   end: 32
   label: Chaoweeraprasit
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: nate-chaoweeraprasit
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo certificates 2026-10-10]'
@@ -7902,9 +7966,13 @@ occurrences:
   end: 27
   label: Chaoweeraprasit
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: nate-chaoweeraprasit
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo certificates 2026-10-10]'
@@ -8652,9 +8720,13 @@ occurrences:
   end: 32
   label: Chaoweeraprasit
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: nate-chaoweeraprasit
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel regularized lists 2026-10-10]'
@@ -8984,9 +9056,13 @@ occurrences:
   end: 15
   label: Chaoweeraprasit
   role: source-author
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: nate-chaoweeraprasit
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[SQUISH fourth request 2026-10-11]'
@@ -8996,9 +9072,13 @@ occurrences:
   end: 15
   label: Chaoweeraprasit
   role: credited-contributor
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: nate-chaoweeraprasit
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[SQUISH fourth request 2026-10-11]'
@@ -9125,9 +9205,13 @@ occurrences:
   end: 27
   label: Chaoweeraprasit
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: nate-chaoweeraprasit
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo certificates 2026-10-11]'
@@ -10429,9 +10513,13 @@ occurrences:
   end: 37
   label: Chaoweeraprasit
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: nate-chaoweeraprasit
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo certificates 2026-10-12]'
@@ -10542,9 +10630,13 @@ occurrences:
   end: 40
   label: Chaoweeraprasit
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: nate-chaoweeraprasit
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Ostashev compositions 2026-10-12]'
@@ -11267,9 +11359,13 @@ occurrences:
   end: 33
   label: Chaoweeraprasit
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: nate-chaoweeraprasit
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[PingYou n272 refinement 2026-10-12]'
@@ -11471,9 +11567,13 @@ occurrences:
   end: 36
   label: Chaoweeraprasit
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: nate-chaoweeraprasit
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Mishapolk exact certificates 2026-10-12]'
@@ -11647,9 +11747,13 @@ occurrences:
   end: 92
   label: Chaoweeraprasit
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: nate-chaoweeraprasit
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[PingYou PR 574 certificates 2026-10-13]'
@@ -11919,9 +12023,13 @@ occurrences:
   end: 54
   label: Chaoweeraprasit
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: nate-chaoweeraprasit
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Mishapolk records 2026-10-14]'
@@ -12116,9 +12224,13 @@ occurrences:
   end: 68
   label: Chaoweeraprasit
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: nate-chaoweeraprasit
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel compositions 2026-10-13]'
@@ -12201,9 +12313,13 @@ occurrences:
   end: 28
   label: Chaoweeraprasit
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: nate-chaoweeraprasit
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel fresh compositions 2026-10-14]'
@@ -12665,9 +12781,13 @@ occurrences:
   end: 39
   label: Chaoweeraprasit
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: nate-chaoweeraprasit
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Couzo n237 2026-10-15]'
@@ -12916,9 +13036,13 @@ occurrences:
   end: 32
   label: Chaoweeraprasit
   role: prerequisite
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: nate-chaoweeraprasit
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
 - origin:
     path: packing/resources/bibliography.yaml
     record_key: '[Daniel exact current records 2026-10-16]'
@@ -15889,9 +16013,13 @@ occurrences:
   end: 30
   label: Nate Chaoweeraprasit (itsnaka)
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: nate-chaoweeraprasit
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
 - origin:
     path: packing/frontier/n-088.md
     record_key: '88'
@@ -16962,9 +17090,13 @@ occurrences:
   end: 30
   label: Nate Chaoweeraprasit (itsnaka)
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: nate-chaoweeraprasit
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
 - origin:
     path: packing/frontier/n-130.md
     record_key: '130'
@@ -17003,9 +17135,13 @@ occurrences:
   end: 30
   label: Nate Chaoweeraprasit (itsnaka)
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: nate-chaoweeraprasit
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
 - origin:
     path: packing/frontier/n-131.md
     record_key: '131'
@@ -18137,9 +18273,13 @@ occurrences:
   end: 30
   label: Nate Chaoweeraprasit (itsnaka)
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: nate-chaoweeraprasit
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
 - origin:
     path: packing/frontier/n-179.md
     record_key: '179'
@@ -18178,9 +18318,13 @@ occurrences:
   end: 30
   label: Nate Chaoweeraprasit (itsnaka)
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: nate-chaoweeraprasit
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
 - origin:
     path: packing/frontier/n-180.md
     record_key: '180'
@@ -18237,9 +18381,13 @@ occurrences:
   end: 30
   label: Nate Chaoweeraprasit (itsnaka)
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: nate-chaoweeraprasit
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
 - origin:
     path: packing/frontier/n-181.md
     record_key: '181'
@@ -18538,9 +18686,13 @@ occurrences:
   end: 30
   label: Nate Chaoweeraprasit (itsnaka)
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: nate-chaoweeraprasit
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
 - origin:
     path: packing/frontier/n-199.md
     record_key: '199'
@@ -18833,9 +18985,13 @@ occurrences:
   end: 30
   label: Nate Chaoweeraprasit (itsnaka)
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: nate-chaoweeraprasit
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
 - origin:
     path: packing/frontier/n-208.md
     record_key: '208'
@@ -18874,9 +19030,13 @@ occurrences:
   end: 30
   label: Nate Chaoweeraprasit (itsnaka)
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: nate-chaoweeraprasit
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
 - origin:
     path: packing/frontier/n-209.md
     record_key: '209'
@@ -19497,9 +19657,13 @@ occurrences:
   end: 30
   label: Nate Chaoweeraprasit (itsnaka)
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: nate-chaoweeraprasit
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
 - origin:
     path: packing/frontier/n-236.md
     record_key: '236'
@@ -19544,9 +19708,13 @@ occurrences:
   end: 30
   label: Nate Chaoweeraprasit (itsnaka)
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: nate-chaoweeraprasit
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
 - origin:
     path: packing/frontier/n-237.md
     record_key: '237'
@@ -19603,9 +19771,13 @@ occurrences:
   end: 30
   label: Nate Chaoweeraprasit (itsnaka)
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: nate-chaoweeraprasit
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
 - origin:
     path: packing/frontier/n-238.md
     record_key: '238'
@@ -19632,9 +19804,13 @@ occurrences:
   end: 30
   label: Nate Chaoweeraprasit (itsnaka)
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: nate-chaoweeraprasit
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
 - origin:
     path: packing/frontier/n-239.md
     record_key: '239'
@@ -19999,9 +20175,13 @@ occurrences:
   end: 30
   label: Nate Chaoweeraprasit (itsnaka)
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: nate-chaoweeraprasit
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
 - origin:
     path: packing/frontier/n-258.md
     record_key: '258'
@@ -20053,9 +20233,13 @@ occurrences:
   end: 30
   label: Nate Chaoweeraprasit (itsnaka)
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: nate-chaoweeraprasit
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
 - origin:
     path: packing/frontier/n-259.md
     record_key: '259'
@@ -20178,9 +20362,13 @@ occurrences:
   end: 30
   label: Nate Chaoweeraprasit (itsnaka)
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: nate-chaoweeraprasit
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
 - origin:
     path: packing/frontier/n-263.md
     record_key: '263'
@@ -20420,9 +20608,13 @@ occurrences:
   end: 30
   label: Nate Chaoweeraprasit (itsnaka)
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: nate-chaoweeraprasit
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
 - origin:
     path: packing/frontier/n-269.md
     record_key: '269'
@@ -20462,9 +20654,13 @@ occurrences:
   end: 30
   label: Nate Chaoweeraprasit (itsnaka)
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: nate-chaoweeraprasit
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
 - origin:
     path: packing/frontier/n-270.md
     record_key: '270'
@@ -20491,9 +20687,13 @@ occurrences:
   end: 30
   label: Nate Chaoweeraprasit (itsnaka)
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: nate-chaoweeraprasit
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
 - origin:
     path: packing/frontier/n-271.md
     record_key: '271'
@@ -20562,9 +20762,13 @@ occurrences:
   end: 30
   label: Nate Chaoweeraprasit (itsnaka)
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: nate-chaoweeraprasit
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
 - origin:
     path: packing/frontier/n-272.md
     record_key: '272'
@@ -20909,9 +21113,13 @@ occurrences:
   end: 30
   label: Nate Chaoweeraprasit (itsnaka)
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: nate-chaoweeraprasit
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
 - origin:
     path: packing/frontier/n-292.md
     record_key: '292'
@@ -21393,9 +21601,13 @@ occurrences:
   end: 30
   label: Nate Chaoweeraprasit (itsnaka)
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: nate-chaoweeraprasit
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
 - origin:
     path: packing/frontier/n-305.md
     record_key: '305'
@@ -21470,9 +21682,13 @@ occurrences:
   end: 30
   label: Nate Chaoweeraprasit (itsnaka)
   role: construction-finder
-  disposition: unresolved
-  evidence: []
-  note: Identity review pending.
+  disposition: resolved
+  evidence:
+  - source-intake
+  - bibliography
+  contributor_id: nate-chaoweeraprasit
+  note: Reviewed SQUISH source-intake opening and credit plus bibliography authors
+    bind this source span to Nate Chaoweeraprasit (itsnaka); original source label retained.
 - origin:
     path: packing/frontier/n-307.md
     record_key: '307'

@@ -9,10 +9,10 @@ open it at one significance level.
 
 The order is one small function over the register, tested here on a synthetic register
 with a tie at each step, and the rendered page is held to it. The tallies are held to the
-same counts, their links to the rows they name, and their markup to valid HTML: a card
-with a tally is a box holding the card's link and then the tally, since a link cannot
-hold a link. The last tests follow a card's links in Chromium and read the table they
-open. Skipped where no Chromium can be launched; `SQPACK_CHROMIUM` names one the
+same counts, their links to the rows they name, and their markup to valid HTML: every
+card is a box holding the project link and then the author and tally links, since a
+link cannot hold a link. The last tests follow a card's links in Chromium and read the
+table they open. Skipped where no Chromium can be launched; `SQPACK_CHROMIUM` names one the
 environment supplies.
 """
 
@@ -30,7 +30,14 @@ from typing import Any
 
 import pytest
 
-from devtools import overview_data, overview_sections, render_overview
+from devtools import (
+    overview_data,
+    overview_sections,
+    profile_links,
+    render_contributors,
+    render_overview,
+    site_resources,
+)
 from devtools.overview_sections import Cited, ProjectTally, project_order, project_tallies
 from devtools.render_n11_lower_bounds_explainer_pdf import BROWSER_OVERRIDE
 from sqpack.probes import probe
@@ -106,6 +113,135 @@ def test_projects_level_on_every_count_stand_newest_first_then_by_name() -> None
     assert project_order(tallies, renamed) == ["c", "a", "b", "d", "Y", "z"]
 
 
+def test_project_bylines_link_known_people_and_keep_organizations_plain(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    index = profile_links.profile_index(
+        {
+            "nate-chaoweeraprasit": {
+                "display_name": "Nate Chaoweeraprasit",
+                "surname": "Chaoweeraprasit",
+                "aliases": ["natcha"],
+            },
+            "mykhailo-polkovskyi": {
+                "display_name": "Mykhailo Polkovskyi",
+                "surname": "Polkovskyi",
+                "aliases": ["Mishapolk"],
+            },
+            "ke-wang": {"display_name": "Ke Wang", "surname": "Wang"},
+            "can-li": {"display_name": "Can Li", "surname": "Li"},
+        }
+    )
+    monkeypatch.setattr(overview_sections, "public_index", lambda: index)
+    assert overview_sections.project_author("Nate Chaoweeraprasit") == (
+        'By <a href="profiles/nate-chaoweeraprasit.html">Chaoweeraprasit</a>'
+    )
+    assert overview_sections.project_author("Mishapolk") == (
+        'By <a href="profiles/mykhailo-polkovskyi.html">Polkovskyi</a>'
+    )
+    assert overview_sections.project_author("Ke Wang and Can Li") == (
+        'By <a href="profiles/ke-wang.html">Wang</a> and <a href="profiles/can-li.html">Li</a>'
+    )
+    assert overview_sections.project_author("PingYou Ltd") == "By PingYou Ltd"
+    assert overview_sections.project_author("Unlisted & Associates") == (
+        "By Unlisted &amp; Associates"
+    )
+
+
+def test_project_bylines_do_not_guess_a_shared_alias(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    index = profile_links.profile_index(
+        {
+            "alex-one": {"display_name": "Alex One", "aliases": ["shared"]},
+            "alex-two": {"display_name": "Alex Two", "aliases": ["shared"]},
+        }
+    )
+    monkeypatch.setattr(overview_sections, "public_index", lambda: index)
+    assert overview_sections.project_author("shared") == "By shared"
+
+
+def test_shared_resources_match_homepage_bylines_and_profile_counts() -> None:
+    records = site_resources.resources()
+    assert len({record.url for record in records}) == len(records)
+    assert {record.url for record in records} == set(overview_sections.project_urls())
+    assert overview_sections.OTHER_PROJECTS is site_resources.OTHER_PROJECTS
+    for record in records:
+        linked = tuple(
+            re.findall(
+                r'href="profiles/([a-z0-9-]+)\.html"',
+                overview_sections.project_author(record.byline),
+            )
+        )
+        assert linked == record.profile_ids, record.byline
+        for identifier in linked:
+            selected = site_resources.resources_for_profile(identifier)
+            assert record in selected
+            assert len({item.url for item in selected}) == len(selected)
+            assert f'href="{html.escape(record.url)}"' in render_contributors.resource_list(
+                identifier
+            )
+    catalogue = next(record for record in records if record.url == site_resources.KINGBIRD)
+    assert catalogue.byline == "David Ellsworth after Erich Friedman"
+    assert catalogue.profile_ids == ("david-ellsworth", "erich-friedman")
+    wang = next(
+        record for record in records if record.url == "https://doi.org/10.5281/zenodo.23038546"
+    )
+    assert wang.profile_ids == ("ke-wang", "can-li")
+    nate = site_resources.resources_for_profile("nate-chaoweeraprasit")
+    assert len({record.url for record in nate if "#issuecomment-" in record.url}) == 2
+    xu = site_resources.resources_for_profile("ryan-xu")
+    assert any("/blob/" in record.url for record in xu)
+    assert any(record.url == "https://github.com/ry-xu/square_packing" for record in xu)
+    gupta = render_contributors.resource_list("siddharth-gupta")
+    assert 'href="profiles/nate-chaoweeraprasit.html">Chaoweeraprasit</a>' in gupta
+    assert 'href="profiles/evan-daniel.html">Daniel</a>' in gupta
+    assert 'href="profiles/siddharth-gupta.html"' not in gupta
+
+
+def test_resource_matching_refuses_ambiguous_aliases_and_uncredited_mentions(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    index = profile_links.profile_index(
+        {
+            "alex": {"display_name": "Alex One", "surname": "One"},
+            "beth": {"display_name": "Beth Two", "aliases": ["Alex One"], "surname": "Two"},
+        }
+    )
+    monkeypatch.setattr(overview_sections, "public_index", lambda: index)
+    assert site_resources.profile_ids_for_byline("Alex One", index) == ()
+    assert overview_sections.project_author("Alex One") == "By Alex One"
+    assert site_resources.profile_ids_for_byline("Alex\nOne after Beth Two", index) == (
+        "alex",
+        "beth",
+    )
+    assert site_resources.profile_ids_for_byline("One", index) == ("alex",)
+    monkeypatch.setattr(site_resources, "CATALOGUE_SITES", ())
+    monkeypatch.setattr(site_resources, "OTHER_SITES", ())
+    monkeypatch.setattr(
+        site_resources,
+        "OTHER_PROJECTS",
+        (("https://github.com/alex/work", "Unlisted Organization", "Alex One built it."),),
+    )
+    (record,) = site_resources.resource_records(index)
+    assert record.profile_ids == ()
+
+
+def test_resource_projection_rejects_conflicting_urls_and_deduplicates_equal_records(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    index = profile_links.profile_index({"alex": {"display_name": "Alex One"}})
+    first = ("https://example.org/work#one", "Work", "Alex One", "A result.")
+    monkeypatch.setattr(site_resources, "OTHER_PROJECTS", ())
+    monkeypatch.setattr(site_resources, "CATALOGUE_SITES", ())
+    monkeypatch.setattr(site_resources, "OTHER_SITES", (first, first))
+    assert len(site_resources.resource_records(index)) == 1
+    conflicting = (first[0], "Different title", first[2], first[3])
+    monkeypatch.setattr(site_resources, "OTHER_SITES", (first, conflicting))
+    with pytest.raises(ValueError, match="conflicting external resource"):
+        site_resources.resource_records(index)
+
+
 @pytest.fixture(scope="module")
 def overview() -> overview_data.Overview:
     return site_renders.overview()
@@ -145,16 +281,15 @@ def _attributed(overview: overview_data.Overview, url: str) -> list[overview_dat
 
 
 def _cards(page: str) -> list[tuple[str, str]]:
-    """The section's cards in page order: each project's address and its tally's markup,
-    empty for a card with none."""
+    """Project headings and their independent tally footers, in page order."""
     section = page.split(SECTION, 1)[1].split("<h2", 1)[0]
-    found = re.findall(
-        r'<a class="site-card[^"]*" href="([^"]+)"[^>]*>.*?</a>'
-        r'(?:<p class="site-card-foot">(.*?)</p>)?',
-        section,
-        re.DOTALL,
-    )
-    return [(url, foot) for url, foot in found if url.startswith("https://")]
+    cards = []
+    for body in section.split('<div class="site-card site-card-footed"')[1:]:
+        heading = re.search(r'<a class="site-card-link site-card-heading" href="([^"]+)"', body)
+        assert heading is not None
+        tally = re.search(r'<span class="site-project-tally">(.*?)</span>', body)
+        cards.append((heading[1], tally[1] if tally else ""))
+    return cards
 
 
 def test_the_page_lists_the_projects_in_the_functions_order(
@@ -283,29 +418,29 @@ class _Nesting(HTMLParser):
 
 
 def test_no_link_is_nested_in_a_link(page: str) -> None:
-    """A card with a tally is a box, not a link: its link and its tally's links are
-    siblings inside it, so no link holds a link anywhere in the section. The card's own
-    link still opens the project in a new tab, and the tally's links stay on the site."""
+    """Project, profile and tally links are siblings within the card. The project
+    opens in a new tab; the profile and tally links stay on the site."""
     section = page.split(SECTION, 1)[1].split("<h2", 1)[0]
     parser = _Nesting()
     parser.feed(section)
     assert parser.nested == []
     assert parser.open == []
-    footed = re.findall(
-        r'<div class="site-card site-card-footed" data-go="external" '
-        r'data-card-size="medium"><a class="site-card-link site-card-main" '
-        r'href="(https://[^"]+)" target="_blank" rel="noopener noreferrer">.*?</a>'
-        r'<p class="site-card-foot">(.*?)</p></div>',
-        section,
-        re.DOTALL,
-    )
-    assert len(footed) == sum(bool(foot) for _, foot in _cards(page))
-    for _, foot in footed:
-        assert "target=" not in foot
+    cards = section.split('<div class="site-card site-card-footed"')[1:]
+    assert len(cards) == len(_cards(page))
+    for card in cards:
+        heading = card.index('class="site-card-value"')
+        byline = card.index('class="site-card-byline"')
+        note = card.index('class="site-card-note"')
+        assert heading < byline < note
+        author = card.split('<p class="site-card-byline">', 1)[1].split("</p>", 1)[0]
+        assert 'class="site-project-author"' in author
+        assert "target=" not in author
+        if foot := re.search(r'<p class="site-card-foot">(.*?)</p>', card):
+            assert 'class="site-project-author"' not in foot[1]
+            assert "target=" not in foot[1]
     css = render_overview.SITE_CSS.read_text(encoding="utf-8")
-    assert (
-        ".kpress .site-card-footed:has(> .site-card-main:is(:hover, :focus-visible)) {" in css
-    )
+    assert "> a.site-card-main:is(:hover, :focus-visible)" in css
+    assert ".site-card-heading, a.site-card-url" in css
     assert ".site-table-tools label[hidden] {\n  display: none;\n}" in css
 
 

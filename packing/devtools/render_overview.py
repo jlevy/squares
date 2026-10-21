@@ -533,6 +533,9 @@ RENDER_INPUTS: tuple[Path, ...] = (
     PACKING / "site-changelog.yaml",
     PACKING / "site-changelog.schema.yaml",
     PACKING / "devtools/render_changelog.py",
+    PACKING / "devtools/profile_links.py",
+    PACKING / "devtools/site_icons.py",
+    PACKING / "devtools/site_resources.py",
     PACKING / "devtools/news_highlights.py",
     PACKING / "devtools/build_known_best_atlas.py",
     PACKING / "devtools/atlas_print_font.py",
@@ -1387,6 +1390,7 @@ def overview_page() -> Page:
         overview_data,
         overview_sections,
         render_changelog,
+        render_contributors,
     )
 
     overview = overview_data.load()
@@ -1402,6 +1406,7 @@ def overview_page() -> Page:
         "REPORT_RESULTS": report_results(),
         "RESULTS_LINK_ATTRIBUTES": overview_sections.all_results_link_attributes(overview),
         "OTHER_PROJECTS": overview_sections.other_project_cards(overview),
+        "PROFILES": render_contributors.profile_preview(),
         "ARROW_RIGHT": overview_sections.arrow_icon("right"),
         "ARROW_DOWNLOAD": overview_sections.arrow_icon("download"),
         "ATLAS_PDF": overview_sections.PDF_CARD_SPECS[1][0],
@@ -1450,7 +1455,7 @@ def atlas_page() -> Page:
         description=ATLAS_META.description,
         structured_data=ATLAS_META.structured_data,
         toc=False,
-        rewrite_body=_case_links,
+        rewrite_body=lambda page: _case_links(_authored_profile_links(page)),
         page_scripts=(
             POPOVER_SCRIPT,
             ATLAS_VIEW_SCRIPT,
@@ -1485,11 +1490,16 @@ def news_page() -> Page:
 
 def about_page() -> Page:
     """The project narrative, approach, attribution, and supporting resources."""
-    from devtools import overview_sections, render_changelog  # noqa: PLC0415
+    from devtools import (  # noqa: PLC0415
+        overview_sections,
+        render_changelog,
+        render_contributors,
+    )
 
     markdown = _template_markdown(
         ABOUT_ARTICLE,
         {
+            "PROFILES": render_contributors.profile_preview(),
             "REPORT_RESULTS": report_results(),
             "DOCUMENTATION_BLOCK": overview_sections.documentation_block(),
             "NEWS_LEGACY_ANCHORS": render_changelog.legacy_news_anchors(
@@ -1508,7 +1518,7 @@ def about_page() -> Page:
             "Read about its approach and contributors."
         ),
         toc=False,
-        rewrite_body=_case_links,
+        rewrite_body=lambda page: _case_links(_authored_profile_links(page)),
         page_scripts=(POPOVER_SCRIPT, NEWS_FORWARD_SCRIPT),
     )
 
@@ -1535,6 +1545,7 @@ def results_page() -> Page:
         title=RESULTS_META.name,
         description=RESULTS_META.description,
         toc=False,
+        rewrite_body=_authored_profile_links,
         page_scripts=(TABLE_SCRIPT, POPOVER_SCRIPT, ROW_POPOVER_SCRIPT),
     )
 
@@ -1576,6 +1587,7 @@ def papers_page() -> Page:
         title="Explanations",
         description=PAPERS_DESCRIPTION,
         toc=False,
+        rewrite_body=_authored_profile_links,
         page_scripts=(FILM_SCRIPT,),
     )
 
@@ -1632,6 +1644,18 @@ def static_content_page(
         page = rebase_links(page, directory)
     assert_fetches_only_assets(meta.path, page)
     return Page(meta.path, page)
+
+
+def _authored_profile_links(page: str) -> str:
+    """Link only template-marked authored fragments, then remove their wrappers."""
+    from devtools.profile_links import link_prose  # noqa: PLC0415
+
+    return re.sub(
+        r'<div class="site-profile-prose">(.*?)</div>',
+        lambda match: link_prose(match[1]),
+        page,
+        flags=re.DOTALL,
+    )
 
 
 def _case_links(page: str) -> str:
@@ -1878,6 +1902,8 @@ def forwarder_pages() -> list[Page]:
     """
     import posixpath  # noqa: PLC0415
 
+    from devtools.profile_links import person_label  # noqa: PLC0415
+
     metas = forwarded_metas()
     template = FORWARDER.read_text(encoding="utf-8")
     pages = []
@@ -1894,7 +1920,9 @@ def forwarder_pages() -> list[Page]:
         values = {
             "TARGET": html.escape(target, quote=True),
             "FILE_TARGET": html.escape(file_target, quote=True),
-            "TITLE": html.escape(OFF_SITE_TITLES[new] if meta is None else meta.name),
+            "TITLE": html.escape(
+                OFF_SITE_TITLES[new] if meta is None else person_label(meta.name, new)
+            ),
             "HEAD": forwarder_head(new, meta, old=old),
             "FORWARD_SCRIPT": _script_text(FORWARD_SCRIPT),
         }

@@ -21,6 +21,7 @@ from typing import TYPE_CHECKING, Any
 from devtools import render_frontier_page as frontier
 from devtools import render_research_tables as tables
 from devtools.build_bound_citations import CORRECTS
+from devtools.profile_links import link_prose
 
 if TYPE_CHECKING:
     from devtools.render_overview import Page, PageMeta
@@ -639,8 +640,8 @@ def _lower_panel(case: dict[str, Any]) -> str:
             ),
         )
         + _row("Kind", _esc(kind))
-        + _row("Scope", tex_bounds(lower.get("scope") or ""))
-        + _row("Note", tex_bounds(" ".join(str(lower.get("note") or "").split())))
+        + _row("Scope", link_prose(tex_bounds(lower.get("scope") or "")))
+        + _row("Note", link_prose(tex_bounds(" ".join(str(lower.get("note") or "").split()))))
         + _row("Source", _esc(lower.get("source_key") or ""))
         + _row("Evidence", frontier.evidence_links(lower["evidence"]))
     )
@@ -733,7 +734,7 @@ def _regularization(case: dict[str, Any]) -> str:
     text = " ".join(str(note).split())
     return (
         f'<div class="site-case-note"><span class="site-card-label">{label}</span>'
-        f"<p>{_esc(text)}</p></div>"
+        f"<p>{link_prose(_esc(text))}</p></div>"
     )
 
 
@@ -757,7 +758,7 @@ def _open_questions(case: dict[str, Any]) -> str:
         return ""
     return (
         '<div class="site-case-note"><span class="site-card-label">Open questions</span>'
-        f'<ul class="site-case-list">{"".join(items)}</ul></div>'
+        f'<ul class="site-case-list">{link_prose("".join(items))}</ul></div>'
     )
 
 
@@ -823,7 +824,7 @@ def results_block(n: int) -> str:
             f'<span class="site-credit">{result.credit_html or _esc(result.credit)} '
             f"· {_esc(result.date)} · "
             f"{where}</span></p>"
-            f'<p class="site-case-result-summary">{tex_bounds(result.summary)}</p>'
+            f'<p class="site-case-result-summary">{link_prose(tex_bounds(result.summary))}</p>'
             f"{detail}</li>"
         )
     return f'<ul class="site-case-results">{"".join(items)}</ul>'
@@ -862,7 +863,9 @@ def packing_figure(n: int, *, units: int = 1000, upper: dict[str, Any] | None = 
     if regularized:
         from devtools.default_drawings import credit_line  # noqa: PLC0415
 
-        caption.append(f'<span class="site-case-regularized">{_esc(credit_line(n))}</span>')
+        caption.append(
+            f'<span class="site-case-regularized">{link_prose(_esc(credit_line(n)))}</span>'
+        )
     figcaption = f"<figcaption>{'. '.join(caption)}</figcaption>" if caption else ""
     return (
         f'<figure class="site-case-figure">{frontier.packing_svg(n, units=units, root=root)}'
@@ -1013,6 +1016,18 @@ def _body(n: int) -> tuple[str, str]:
 #: can be cut out whole into its own file.
 _RECORD_OPEN = "<!-- case-record {n} -->"
 _RECORD_CLOSE = "<!-- /case-record -->"
+_PROFILE_PROSE_OPEN = "<!-- profile-prose -->"
+_PROFILE_PROSE_CLOSE = "<!-- /profile-prose -->"
+
+
+def _profile_prose(page: str) -> str:
+    """Link the explicitly bracketed case narrative after Markdown rendering."""
+    return re.sub(
+        re.escape(_PROFILE_PROSE_OPEN) + r"(.*?)" + re.escape(_PROFILE_PROSE_CLOSE),
+        lambda match: link_prose(match[1]),
+        page,
+        flags=re.DOTALL,
+    )
 
 
 def record_markdown(
@@ -1034,7 +1049,8 @@ def record_markdown(
         f'<section class="site-case" data-case="{n}" data-status="{_esc(case["status"])}">\n'
         f"{head}\n\n"
         '<div class="site-case-prose">\n\n'
-        f"{shown.strip()}\n\n{prose_markdown(prose)}\n\n</div>\n\n</section>\n"
+        f"{_PROFILE_PROSE_OPEN}\n{shown.strip()}\n\n{prose_markdown(prose)}\n"
+        f"{_PROFILE_PROSE_CLOSE}\n\n</div>\n\n</section>\n"
         f"{_RECORD_CLOSE}"
     )
 
@@ -1160,7 +1176,7 @@ def _rendered() -> str:
         description=meta.description,
         toc=False,
         rewrite_body=lambda text: reserve_case_images(
-            site_documents.rewrite_article(text, context=context, report=report)
+            _profile_prose(site_documents.rewrite_article(text, context=context, report=report))
         ),
         page_scripts=(CASE_PAGE_SCRIPT,),
         prepare_math=False,
@@ -1231,10 +1247,12 @@ class _OptionalAttributeQuotes(HTMLParser):
         *,
         all_html_classes: bool = False,
         result_article_attributes: bool = False,
+        profile_links: bool = False,
     ) -> None:
         super().__init__(convert_charrefs=False)
         self.pattern = self.HTML_CLASSES if all_html_classes else self.ATOMS
         self.result_article_attributes = result_article_attributes
+        self.profile_links = profile_links
         self.lines = [0, *(match.end() for match in re.finditer("\n", record))]
         self.foreign = 0
         self.article = 0
@@ -1275,6 +1293,19 @@ class _OptionalAttributeQuotes(HTMLParser):
                 return match[0][: -len(match["double"])] + value
 
             compact = self.ATTRIBUTES.sub(unquote, compact)
+        if self.profile_links and tag == "a":
+
+            def profile_href(match: re.Match[str]) -> str:
+                value = match["value"]
+                if (
+                    match["name"].lower() == "href"
+                    and value is not None
+                    and re.fullmatch(r"(?:\.\./)*profiles/[a-z0-9-]+\.html", value)
+                ):
+                    return match[0][: -len(match["double"])] + value
+                return match[0]
+
+            compact = self.ATTRIBUTES.sub(profile_href, compact)
         compact = self.pattern.sub(r"\1 class=\2", compact)
         if compact != original:
             line, column = self.getpos()
@@ -1295,10 +1326,12 @@ def compact_visual_math_classes(
     *,
     all_html_classes: bool = False,
     result_article_attributes: bool = False,
+    profile_links: bool = False,
 ) -> str:
     """Omit optional HTML quotes, retaining SVG/MathML XML and article anchors.
 
-    Cases compact only KaTeX atom classes. Complete result pages opt in to every
+    Cases compact KaTeX atom classes and may opt in to unquoted profile hrefs.
+    Complete result pages opt in to every
     first-position class with one ASCII identifier, plus valid unquoted attribute
     tokens inside their result article. Source bodies and other page attributes keep
     their quotes. Complete attribute tokens protect attribute-like text inside values.
@@ -1307,6 +1340,7 @@ def compact_visual_math_classes(
         record,
         all_html_classes=all_html_classes,
         result_article_attributes=result_article_attributes,
+        profile_links=profile_links,
     )
     parser.feed(record)
     parser.close()
@@ -1458,7 +1492,9 @@ def case_records(*, only: tuple[int, ...] | None = None) -> list[Page]:
                 ),
             ),
         )
-        record = compact_visual_math_classes(records[n])
+        # Linked case 17 measured 500,020 bytes against its 500,000-byte ceiling.
+        # Safe profile href tokens retain every link without a new budget exception.
+        record = compact_visual_math_classes(records[n], profile_links=True)
         record = re.sub(
             r'<p class="site-case-title"([^>]*)>(.*?)</p>',
             r'<h1 class="site-case-title" id="case-title"\1>\2</h1>',

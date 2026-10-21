@@ -7,6 +7,7 @@ softschema:
 contributor:
   id: francisco-couzo
   display_name: 'Francisco Couzo'
+  surname: Couzo
   real_name: 'Francisco Couzo'
   aliases: ['Couzo']
   sources:
@@ -17,6 +18,8 @@ contributor:
       archive_path: packing/resources/bibliography.yaml
       locator: 'Source author, credit and credited_names fields retain the printed attribution labels.'
   provenance:
+    - field: /surname
+      sources: [primary-byline, bibliography]
     - field: /display_name
       sources: [primary-byline]
     - field: /real_name

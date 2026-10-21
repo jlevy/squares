@@ -13,6 +13,8 @@ Continue with the advanced tutorial for the methods behind the search and proofs
 
 ## Papers
 
+<div class="site-profile-prose">
+
 The $n = 11$ series:
 
 - [Part I]({{LOWER_BOUNDS_PAPER}}) proves the project’s lower bounds.
@@ -26,6 +28,8 @@ The $n = 11$ series:
 [{{METHODS_PAPER_TITLE}}]({{METHODS_PAPER}}) follows the discovery process from a seed
 through search and local refinement to a certified upper bound, with figures drawn from
 published record packings.
+
+</div>
 
 {{PAPER_CARDS}}
 

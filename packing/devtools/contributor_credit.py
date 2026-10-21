@@ -5,6 +5,7 @@ from __future__ import annotations
 import html
 from functools import cache
 
+from devtools.profile_links import public_names
 from sqpack.contributor_occurrences import (
     CreditOrigin,
     OccurrenceError,
@@ -26,7 +27,7 @@ def render_credit(
     prefix: str = "",
     registry: OccurrenceRegistry | None = None,
 ) -> str:
-    """Escape the original line and link its reviewed labels without choosing aliases."""
+    """Keep reviewed identity spans and evidence while sharing public link labels."""
     registry = registry if registry is not None else occurrence_registry()
     pieces = []
     offset = 0
@@ -40,7 +41,8 @@ def render_credit(
         if item.disposition == "resolved":
             identifier = html.escape(item.contributor_id or "", quote=True)
             href = html.escape(f"{prefix}{PROFILES_DIR}/{identifier}.html", quote=True)
-            label = f'<a href="{href}" data-contributor="">{label}</a>'
+            shown = html.escape(public_names()[item.contributor_id or ""].label)
+            label = f'<a href="{href}" data-person>{shown}</a>'
         pieces.append(label)
         offset = item.end
     pieces.append(html.escape(text[offset:]))

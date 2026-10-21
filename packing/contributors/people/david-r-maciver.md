@@ -7,6 +7,7 @@ softschema:
 contributor:
   id: david-r-maciver
   display_name: David R. MacIver
+  surname: MacIver
   real_name: David R. MacIver
   aliases: [MacIver, David MacIver, DRMacIver]
   links:
@@ -33,6 +34,8 @@ contributor:
       archive_path: packing/resources/bibliography.yaml
       locator: 'The [wand125 Green DS7 Theorem 9 2026-10-02] and [Fitzharding n17 Lean 2026] credits name MacIver.'
   provenance:
+    - field: /surname
+      sources: [packet, bibliography]
     - field: /display_name
       sources: [title-page, packet]
     - field: /real_name
@@ -47,12 +50,8 @@ contributor:
       sources: [github-repository, packet, fitzharding-credit]
   bio_sources: [packet, title-page]
 ---
-David R. MacIver publishes Square Packing Research, three manuscripts with Lean source,
-from his GitHub account DRMacIver.
-His paper of 8 August 2026 asserts a lower bound of about 4.4502 for seventeen and
-eighteen unit squares, by deforming Trevor Green’s sixteen-point scaffold with certified
-defect charging. The manuscripts state that they were produced with AI assistance and
-have not yet been fully reviewed by a person.
+David R. MacIver wrote the Square Packing Research manuscripts on geometric bounds and
+counting methods, with accompanying Lean source.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

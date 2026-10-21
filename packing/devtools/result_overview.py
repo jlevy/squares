@@ -73,6 +73,7 @@ from devtools.overview_data import (
     prose_html,
     tex_bounds,
 )
+from devtools.profile_links import link_prose
 from devtools.repo_links import path_kind, repo_url
 from sqpack.known_best import display_bound_value
 
@@ -754,7 +755,7 @@ def head(result: Result, cases: Sequence[int]) -> str:
     from devtools.result_status import unfinished_sentence  # noqa: PLC0415
 
     record = result.record
-    claim = prose_html(record["claim"], between='</p><p class="site-result-claim">')
+    claim = link_prose(prose_html(record["claim"], between='</p><p class="site-result-claim">'))
     # A later result its entry declares implies it says what it implies, under the
     # claim it bears on; a superseded bound's chip names its successors, which need no
     # sentence, since their bounds are the case's.
@@ -762,7 +763,7 @@ def head(result: Result, cases: Sequence[int]) -> str:
         '<p class="site-result-claim site-result-superseded"><strong>'
         f"{'Superseded' if item['extent'] == 'whole' else 'Superseded in part'} by "
         f'<a href="{_esc(result_url(str(item["result"])))}">{_esc(str(item["result"]))}</a>.'
-        f"</strong> {prose_html(item['what'])}</p>"
+        f"</strong> {link_prose(prose_html(item['what']))}</p>"
         for item in record.get("superseded_by") or []
     )
     more = [
@@ -780,7 +781,9 @@ def head(result: Result, cases: Sequence[int]) -> str:
         ("Regularized drawings", "\n".join(result.drawings)),
     ]
     rows = "".join(
-        f"<dt>{label}</dt><dd>{prose_html(text)}</dd>" for label, text in more if text
+        f"<dt>{label}</dt><dd>{link_prose(prose_html(text))}</dd>"
+        for label, text in more
+        if text
     )
     meaning = novelty_labels().get(result.novelty, "")
     rows += (
@@ -983,7 +986,7 @@ def step(other: Result, current: Result, cases: Sequence[int]) -> str:
         f'<p class="site-result-step-head">{date_cell(other)} '
         f'<a href="{_esc(result_url(other.id))}">{_esc(other.id)}</a>{this}'
         f"{on}</p>"
-        f'<p class="site-result-step-summary">{tex_bounds(other.summary)}</p>'
+        f'<p class="site-result-step-summary">{link_prose(tex_bounds(other.summary))}</p>'
         f"{chip_line}"
         f"<p>{DOT.join(cites)}</p></li>"
     )

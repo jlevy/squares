@@ -7,6 +7,7 @@ softschema:
 contributor:
   id: marc-leonard-overbeck
   display_name: Marc Leonard Overbeck
+  surname: Overbeck
   real_name: Marc Leonard Overbeck
   aliases: [Overbeck, Kleddamag, '@kleddamag']
   links:
@@ -43,6 +44,8 @@ contributor:
       archive_path: packing/resources/bibliography.yaml
       locator: 'Source author, credit and credited_names fields retain the printed attribution labels.'
   provenance:
+    - field: /surname
+      sources: [citation-cff, owner-confirmation]
     - field: /display_name
       sources: [citation-cff, owner-confirmation]
     - field: /real_name
@@ -57,16 +60,7 @@ contributor:
       sources: [github-repository, citation-cff]
     - field: /links/1
       sources: [x-account, owner-confirmation]
-  bio_sources: [x-account, n17-bound, candidate-edition, primary-byline]
 ---
-Marc Leonard Overbeck publishes his square-packing work as Kleddamag on GitHub and as
-@kleddamag on X. In September 2026 he released exact computer-assisted lower bounds for
-eleven and seventeen unit squares, raising the bound for seventeen to 4.66001. On 12
-October 2026 he released the verification edition of a candidate proof that John
-Bidwell’s 1998 packing of seventeen squares is optimal.
-His releases state that he directed the work and that AI systems carried out the
-mathematics, code and certificates.
-
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

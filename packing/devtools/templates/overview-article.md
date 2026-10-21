@@ -60,6 +60,8 @@ methods tutorial describes how record packings are found.
 
 <p class="site-action-row site-more"><a class="site-action" href="papers.html#pdfs">View All PDFs{{ARROW_RIGHT}}</a><a class="site-action" href="visualize.html">View Visualizations{{ARROW_RIGHT}}</a></p>
 
+{{PROFILES}}
+
 <h1 id="squares-project-documentation" class="site-title">Squares Project Documentation</h1>
 
 {{DOCUMENTATION_BLOCK}}

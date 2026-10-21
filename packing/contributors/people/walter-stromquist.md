@@ -7,6 +7,7 @@ softschema:
 contributor:
   id: walter-stromquist
   display_name: Walter Stromquist
+  surname: Stromquist
   real_name: Walter Stromquist
   aliases: [Stromquist]
   sources:
@@ -18,6 +19,8 @@ contributor:
       archive_path: packing/resources/bibliography.yaml
       locator: The [Stromquist 2003] entry credits Stromquist in volume 10, article R8.
   provenance:
+    - field: /surname
+      sources: [bibliography]
     - field: /display_name
       sources: [paper-byline]
     - field: /real_name
