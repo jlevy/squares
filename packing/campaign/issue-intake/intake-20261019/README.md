@@ -45,6 +45,14 @@ T-196 remains the earlier submission already merged through #676; #675 stays sep
 owned by think-pvav.
 No new witness replay or result registration occurred.
 
+**Later, 20 October 2026.** This checkpoint is kept as it stood.
+The
+[couzo-issue678-2026-10-18 packet](../../../resources/web/couzo-issue678-2026-10-18/README.md)
+now retains the 83 certificates and records the exact replay of all 85 rows and the
+report-order comparison.
+[T-223](../../../frontier/RESULTS.md) registers the two counts in the case corpus, 204
+and 260, at V0/C0 pending adoption, and the other 83 are dated beyond-horizon rows.
+
 ## Manual Sources and Limits
 
 `manual-source-receipt.json` retains the hand-read receipt at 00:54 UTC on 19 October.

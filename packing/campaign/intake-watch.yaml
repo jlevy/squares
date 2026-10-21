@@ -1123,9 +1123,10 @@ repositories:
       Six commits past ddf09e3. Five add numerical rational-angle, symmetry and core/slack
       experiments, reporting no new upper-bound record; their method notes were read as source
       reports, without reproducing the measurements. The sixth reports the n183 certificate
-      in #680, which think-xp0o imported: the evand-n183-subgrid-2026-10-19 packet pins this
-      commit, T-220 registers the certificate (#687), and the bead closed on 20 October 2026,
-      so this read holds nothing back. Its two same-side certificates, numerical KKT claims
-      and Couzo n182 donor lineage remain distinct obligations of T-220's record; the second
-      crossover parent is unlogged. Inventory: packing/campaign/issue-intake/intake-followup-20261019/evand-source-inventory.json.
+      in #680: the evand-n183-subgrid-2026-10-19 packet pins this commit and T-220 registers
+      the certificate (#687), so this read holds nothing back. Its three other items are
+      disposed: T-220's record carries the two same-side certificates' identity and path,
+      the numerical KKT claims and the Couzo n182 donor lineage, whose crossovers' second parents were
+      not logged, as source assertions, not confirmed, with nothing queued, as #680's final
+      reply (issuecomment-6297284604) said. Inventory: packing/campaign/issue-intake/intake-followup-20261019/evand-source-inventory.json.
       Earlier deficiency and staircase imports remain with think-f8py and think-pf37.

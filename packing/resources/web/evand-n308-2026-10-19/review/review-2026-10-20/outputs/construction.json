@@ -1,0 +1,52 @@
+{
+ "#689 n308": {
+  "n": 308,
+  "side": "3599429824254181747030632150463/200000000000000000000000000000",
+  "kkt_side_70_digits": "17.99714912127090873497318926110226893608489476937105214472830391498430",
+  "side_is_kkt_times_1_plus_1e-20_rounded_up_at_30": true,
+  "side_rounded_up_by": "21976565373338017925165910847137321989478552716960850157/1000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+  "largest_centre_difference_from_scaled_kkt": "5.000e-36",
+  "centres_within_5e-36": 308,
+  "largest_tangent_difference_from_tan_half_theta": "4.844e-36",
+  "tangents_within_1e-35": 308,
+  "upright_squares_t_zero": 206,
+  "kkt_rows_printed_short": 7,
+  "view": {
+   "accepted": true,
+   "same_side_as_certificate": true,
+   "wall_clearance": "1/200000000000000000000",
+   "least_distance_float": "1.0000e-20",
+   "closest_pair": [
+    114,
+    115
+   ],
+   "distinct_tangents": 29,
+   "seconds": 3.0
+  }
+ },
+ "#694 n154": {
+  "n": 154,
+  "side": "1615137617595210068732072760947/125000000000000000000000000000",
+  "kkt_side_70_digits": "12.92110094076168054972737107816818078231875451338253917734217602105301",
+  "side_is_kkt_times_1_plus_1e-20_rounded_up_at_30": true,
+  "side_rounded_up_by": "2024121839717758357790148346364338131646082265782397894699/10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+  "largest_centre_difference_from_scaled_kkt": "5.000e-36",
+  "centres_within_5e-36": 154,
+  "largest_tangent_difference_from_tan_half_theta": "4.200e-36",
+  "tangents_within_1e-35": 154,
+  "upright_squares_t_zero": 112,
+  "kkt_rows_printed_short": 33,
+  "view": {
+   "accepted": true,
+   "same_side_as_certificate": true,
+   "wall_clearance": "1/200000000000000000000",
+   "least_distance_float": "1.0000e-20",
+   "closest_pair": [
+    11,
+    12
+   ],
+   "distinct_tangents": 10,
+   "seconds": 1.1
+  }
+ }
+}

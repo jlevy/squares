@@ -1,0 +1,25 @@
+{
+ "view_vs_cert": {
+  "symmetry": 1,
+  "largest_displacement": "9.384852e-16",
+  "moved_beyond": {
+   "1e-9": 0,
+   "1e-6": 0,
+   "1e-3": 0,
+   "1e-2": 0,
+   "1e-1": 0
+  },
+  "turned_beyond_1e-6": 1,
+  "assignment_largest_move": "8.88178e-16",
+  "moved_beyond_assignment": {
+   "1e-4": 0,
+   "1e-3": 0,
+   "1e-2": 0,
+   "1e-1": 0
+  }
+ },
+ "rows_with_identical_tangent": 269,
+ "rows_with_identical_centre": 0,
+ "distinct_tangents_cert": 22,
+ "distinct_tangents_view": 21
+}

@@ -15,7 +15,7 @@ from dataclasses import replace
 from fractions import Fraction
 from pathlib import Path
 
-from devtools import acquire_source
+from devtools import acquire_source, upper_bound_reports
 from devtools import couzo_678_replay as replay
 
 N204 = 0
@@ -142,3 +142,13 @@ def test_the_claims_record_holds_the_rows_beyond_the_corpus() -> None:
     for entry in record["results"]:
         assert entry["offered_side"] == rows[entry["n"]].printed
         assert replay.rounds_up_to(Fraction(entry["exact_side"]), entry["offered_side"])
+    # The two deletion rows are the only ones the builder takes from another count's
+    # certificate: each names its parent's file, deletes one square and shares its side.
+    by_n = {entry["n"]: entry for entry in record["results"]}
+    for n, parent in ((545, 546), (641, 642)):
+        assert by_n[n]["certificate"] == f"certificates/best/n{parent}.cert"
+        assert by_n[n]["deleted"] == 1
+        assert by_n[n]["exact_side"] == by_n[parent]["exact_side"]
+    assert {n for n, entry in by_n.items() if entry["deleted"]} == {545, 641}
+    assert record["format"] == upper_bound_reports.BEYOND_FORMAT
+    assert record["horizon"] == upper_bound_reports.HORIZON

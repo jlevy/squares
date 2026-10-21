@@ -65,7 +65,7 @@ The scope is 92 files, 10,551,438 bytes:
 
 The 8.1 MB of certificates are 2.86 MB as zlib stores them, which is how
 [OR-18](../../../../operating-rules.md#or-18-keep-bulk-data-out-of-git-and-never-bind-code-or-verdicts-to-a-git-commit-or-blob)
-counts them, so they are kept in Git as T-174’s 2.84 MB of houses were.
+counts them, so they are kept in Git as T-174’s 2.84 MB of house best packings were.
 The other 457 certificates of `certificates/best/`, the 105 parents, the drawings and the
 search programs are pinned by the commit alone; none was retained or run.
 

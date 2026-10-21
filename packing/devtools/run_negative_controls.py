@@ -988,6 +988,14 @@ REGULARIZATION_TOOLS = frozenset(
     )
 )
 PRUNE |= REGULARIZATION_TOOLS
+# 2026-10-21, issue 686's import (think-9vjn), with main d640ad8fb: 8,969 bytes over the
+# cap. Its tool runs on request and only its test imports it; `--audit-snapshot` finds no
+# registered mention or rescue for either (27,204 bytes), the regularization tools' grounds.
+ON_REQUEST_IMPORT_TOOLS = frozenset(
+    ROOT / relative
+    for relative in ("devtools/muglich_686_import.py", "tests/test_muglich_686_import.py")
+)
+PRUNE |= ON_REQUEST_IMPORT_TOOLS
 # Build caches: excluded from the counted surface and from every worker tree, by
 # NAME at any depth. Not a prune, and the distinction is the point. Every entry in
 # `PRUNE` is a committed path that a worker does not need; these are generated

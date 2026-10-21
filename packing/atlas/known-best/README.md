@@ -1,8 +1,10 @@
 # Known-Best Packing Atlas, `n = 1..324`
 
 This atlas retains one complete geometry record for every frontier case from $n = 1$
-through $n = 324$ and renders every record with the repository’s deterministic house
-renderer. The machine-readable discovery layer is [`manifest.json`](manifest.json).
+through $n = 324$, the witness of the count’s
+[house best packing](../../../SYNOPSIS.md#the-measurements), and renders every record
+with the repository’s deterministic house renderer.
+The machine-readable discovery layer is [`manifest.json`](manifest.json).
 The range widened from 100 on 2026-09-07 under
 [the expansion plan](../../../docs/project/specs/active/plan-2026-09-07-atlas-expansion-to-324.md).
 Two composites are drawn from it: the published figure of the first hundred, with its
@@ -577,10 +579,66 @@ in think-kpm3’s layout, with `selection-n183.json` and `selection-n183.md`. Af
 the index draws 94 views: 36 by the axis tool, 38 by Evan Daniel’s regularizer and 20 by
 the grid-slack generator’s version 1.
 
-On 20 October 2026 the adoption of Francisco Couzo’s issue-678 certificates (T-223,
-think-xu4d) moved two house best packings: 204 from T-186, $2.04 \times 10^{-5}$ below
-it, and 260, first adopted, from the catalogue’s packing, $1.11 \times 10^{-2}$ below
-T-155’s exact ceiling.
+On 20 October 2026 the adoption of Evan Daniel’s certificates of #694 and #689
+(think-115j, think-h8jm) moved the house best packing at two counts: 154 to T-222,
+$1.06 \times 10^{-4}$ below T-186, and 308 to T-221, $1.12 \times 10^{-3}$ below T-174.
+The axis tool’s views of the new witnesses were drawn first, and both counts read
+pending. Both generators then ran on both, niced, on a shared four-core host: Evan
+Daniel’s regularizer (`evand-regularize-adopt-2026-10-20-n154-308-evand`, 275
+CPU-seconds, 239 seconds of wall at two workers) and grid-slack at 0.5, 1 and 5 degrees
+(`grid-slack-adopt-2026-10-20-n154-308-grid-deg05`, `-grid-deg1` and `-grid-deg5`, 186,
+187 and 142 seconds, the per-count seconds their reports record).
+The grid runs ran in directories named `-grid-0.5`, `-grid-1` and `-grid-5`, the names
+`adopt_houses` prints, and were renamed before the selection read them, since a run’s id
+takes no dot. The selection, 68 seconds of wall at two workers, admits a view at both
+counts at row 10, at the witness’s own side.
+At 154 it draws his same-side view: light / uneven / near-axis squares 5 / 12 / 0
+against the axis view’s 5 / 15 / 3, 10 angle classes and hues against 19, and 421 / 421
+house and stage sides against 394 / 408; it moves 60 squares, by at most 0.078. The
+strong view of the earlier house best packing it replaces, grid-slack’s of T-186, had 9
+uneven squares and 419 stage sides; by the house rule that is no reason to keep the
+larger house best packing.
+At 308 his solved view goes to the owner’s review at row 7 (32 squares’ contact counts
+fall while no total does) and his same-side re-solve refuses the certificate’s literal
+as too large, so the selection draws grid-slack’s half-degree view, which ties the axis
+tool’s view on light, uneven and near-axis squares (9 / 20 / 0), classes (34) and hues
+(19) and adds house and stage sides, 770 / 840 against 750 / 834. The earlier house best
+packing was decided no better on the axis tool’s view of T-174, and its settlement goes
+with the witness it was made on.
+The evidence is retained in
+[`cases/regularized_drawings/think-h8jm-2026-10-20/`](../../cases/regularized_drawings/think-h8jm-2026-10-20/)
+in think-kpm3’s layout, with `selection-adopt-2026-10-20-n154-308.json` and `.md`. After
+it the index draws 94 views: 35 by the axis tool, 39 by Evan Daniel’s regularizer and 20
+by the grid-slack generator’s version 1.
+
+On 21 October 2026 the adoption of Evan Daniel’s certificate of #703 (think-a9jp) moved
+the house best packing at 270 to T-224, $3.47 \times 10^{-5}$ below T-174: another
+arrangement of the design of Nate Chaoweeraprasit’s #500 packing, which T-174 refines.
+The axis tool’s view of the new witness was drawn first (light / uneven / near-axis
+squares 5 / 10 / 1, 22 angle classes, 735 / 746 house and stage sides), and the count
+read pending. Both generators then ran on it, niced, on a shared four-core host:
+grid-slack at 0.5, 1 and 5 degrees (`grid-slack-adopt-2026-10-21-n270-grid-deg05`,
+`-grid-deg1` and `-grid-deg5`, 58.6, 59.0 and 50.5 seconds by their reports, the first
+two side by side) and Evan Daniel’s regularizer
+(`evand-regularize-adopt-2026-10-21-n270-evand`, 233 CPU-seconds, 237 seconds of wall at
+two workers).
+The selection, 33 seconds of wall at two workers, admits his solved view at
+row 10, at the witness’s own side, since his same-side re-solve was refused for an
+overlap: 5 / 10 / 0, 21 classes and 19 hues, and 743 / 753 sides; it moves 24 squares
+beyond $10^{-3}$, by at most 0.130, and turns one square upright from 0.2175 degrees.
+Grid-slack’s three views were admissible too, but none dominates it (743 / 749 sides).
+The strong view of the earlier house best packing, grid-slack’s half-degree view of
+T-174, had 4 light and 9 uneven squares against this view’s 5 and 10; by
+[the house rule](../../campaign/result-import.md#the-house-rule) that is no reason to
+keep the larger packing.
+The evidence is retained in
+[`cases/regularized_drawings/think-a9jp-2026-10-21/`](../../cases/regularized_drawings/think-a9jp-2026-10-21/)
+in think-kpm3’s layout, with `selection-adopt-2026-10-21-n270.json` and `.md`. After it
+the index draws 94 views: 35 by the axis tool, 40 by Evan Daniel’s regularizer and 19 by
+the grid-slack generator’s version 1. On 20 October 2026 the adoption of Francisco
+Couzo’s issue-678 certificates (T-223, think-xu4d) moved two house best packings: 204
+from T-186, $2.04 \times 10^{-5}$ below it, and 260, first adopted, from the catalogue’s
+packing, $1.11 \times 10^{-2}$ below T-155’s exact ceiling.
 Both generators ran on both, Evan Daniel’s regularizer
 (`evand-regularize-adopt-2026-10-20-n204-260-evand`, 222 CPU-seconds) and grid-slack at
 0.5, 1 and 5 degrees (`grid-slack-adopt-2026-10-20-n204-260-grid-deg05`, `-grid-deg1`
@@ -593,8 +651,9 @@ At both counts his solved view lies below the witness’s side, by $1.39 \times 
 and $2.51 \times 10^{-11}$: register candidates for the owner, not drawn.
 The evidence is retained in
 [`cases/regularized_drawings/think-xu4d-2026-10-20/`](../../cases/regularized_drawings/think-xu4d-2026-10-20/README.md).
-After it the index draws 95 views: 37 by the axis tool, 37 by Evan Daniel’s regularizer
-and 21 by the grid-slack generator’s version 1.
+This pass reached the index after the 21 October pass at 270 above; after both the index
+draws 95 views: 36 by the axis tool, 39 by Evan Daniel’s regularizer and 20 by the
+grid-slack generator’s version 1.
 
 ### The default picture
 

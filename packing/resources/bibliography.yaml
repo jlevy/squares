@@ -2894,8 +2894,11 @@ sources:
       and same-side regularized certificates, both standalone exact checkers and the
       numerical reports are retained in web/evand-n155-explorer-2026-10-17/. The issue
       explicitly credits Daniil Ostashev's T-149 packing as the search start; the
-      regularized JSON instead carries by: [Francisco Couzo]. That discrepancy remains
-      unresolved, with both source statements preserved. Claude assistance is disclosed;
+      regularized JSON instead carries by: [Francisco Couzo]. The author's comment on
+      issue 669 of 20 October 2026 resolves it: the field was a bug in his tooling, which
+      took it from the record holder at that count in his 5 October batch, fixed at
+      a435c97, and is to be read as no credit; both source statements stay preserved.
+      Claude assistance is disclosed;
       the KKT and local-minimum diagnostics are numerical source assertions. This entry
       records T-197 in packing/frontier/results.yaml at V0/C0, pending adoption.
       Separate returned mathematical review and completed source replay/controls await
@@ -2990,6 +2993,77 @@ sources:
       and 260 at V0/C0, pending adoption, and the 83 beyond the corpus are beyond-horizon
       rows; the packet's exact replay is Stage 4 evidence pending a mapped mathematical
       review.
+  - key: '[Daniel n308 2026-10-19]'
+    authors:
+    - Daniel
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-19'
+    lineage: builds-on-project
+    credit: Daniel after Chaoweeraprasit, Levy
+    note: 'One complete exact certificate at bc0708fc75c84cffd241e1901c71fbdd120542a3, s(308) <= 3599429824254181747030632150463/(2*10^29),
+      found by the author''s chained and basin explorers from one-square insertion into itsnaka''s #481
+      s(307) packing, which the issue asks to be credited as the ultimate start. Measured pose by pose by
+      the 20 October review (docs/project/reviews/review-2026-10-20-upper-bound-imports-689-694.md), it is
+      another arrangement of the two-wedge design of #484, #489 and #481''s 307, 15 squares beyond a tenth
+      of #489''s packing, not a refinement of it. A same-side regularized view and the source''s comparison
+      with #489 are retained beside it. MIT-licensed; Claude assistance
+      disclosed. KKT and local-minimum statements are the author''s numerical evidence; no local or global
+      optimality claim.'
+  - key: '[Daniel n154 sweep 2026-10-20]'
+    authors:
+    - Daniel
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-20'
+    lineage: builds-on-project
+    credit: Daniel after Couzo, Ostashev, Levy
+    note: 'One complete exact certificate at 1d2bb82035af4b7eb4658488543e46b67d1099ca, s(154) <= 1615137617595210068732072760947/(125*10^27),
+      found by the author''s chained and basin explorers from Ostashev''s s(156) packing, crossed with relatives
+      of Couzo''s #586 packing; the issue asks that #586''s arrangement and the s(156) packing be credited
+      as its starts, and calls it a different KKT point from #586''s in its family. Measured pose by pose
+      by the 20 October review (docs/project/reviews/review-2026-10-20-upper-bound-imports-689-694.md),
+      it is #586''s arrangement continued, three squares beyond a tenth, so Couzo''s credit rests on that
+      measured arrangement; Ostashev''s s(156) packing lies within a tenth of it at only 94 of its 156 squares,
+      so his credit as the search''s start rests on the source''s account of the search. A same-side regularized
+      view and the source''s comparison with #586 are retained beside it. MIT-licensed; Claude assistance
+      disclosed. KKT statements are the author''s numerical evidence; the source does not claim a strict
+      local minimum, and no local or global optimality claim is made.'
+  - key: '[Daniel n270 sweep 2026-10-20]'
+    authors:
+    - Daniel
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-20'
+    lineage: builds-on-project
+    credit: Daniel after Chaoweeraprasit, Levy
+    note: 'One complete exact certificate at 88385abc95ab25d520302282d1946cbb07bc9cf3, s(270) <= 16928162252196750114897964982713/10^30,
+      found by the author''s basin explorer in a near-record sweep over stored non-record descendants of
+      itsnaka''s #500 s(270) packing, which the issue asks to be credited as the ultimate start; the issue
+      calls it a different local minimum from the register''s packing. Measured pose by pose by the 21 October
+      review (docs/project/reviews/review-2026-10-21-upper-bound-import-703.md), it is another arrangement
+      of the design of #500''s packing and PingYou''s refinement of it, 15 squares beyond a tenth under the
+      identity, not a refinement of it. A same-side regularized view and the source''s comparison with the
+      register''s packing are retained beside it. MIT-licensed; Claude
+      assistance disclosed. KKT and local-minimum statements are the author''s numerical evidence; no local
+      or global optimality claim.'
+  - key: '[Muglich issue 686 2026-10-19]'
+    authors:
+    - Muglich
+    year: 2026
+    venue: GitHub
+    dated: '2026-10-19'
+    lineage: independent
+    credit: Muglich after Couzo, de Winter, Fang, Daniel
+    note: >-
+      Darius Muglich's issue 686: 100 upper bounds for n = 328 to 998, one exact rational
+      certificate each, in the issue's attachment, published 2026-10-19T20:43:04Z and
+      pinned by address and SHA-256, with no commit or DOI. Not 100 independent
+      structures: many are deletions, borders, crops or refinements of other holders'
+      packings, Couzo's most often, found with Daniel's solver. Derived facts and the
+      per-case provenance are retained in web/muglich-issue686-2026-10-19/, not the
+      archive's bytes. CC BY 4.0 granted 20 October 2026; OpenAI Codex assistance
+      disclosed. Upper bounds only.
 credited_names:
   Benjamin Greff: Greff
   Hiroaki Hosono: Hosono
@@ -3034,3 +3108,4 @@ credited_names:
   Kevin Fang: Fang
   Mishapolk: Mishapolk
   PingYou Ltd: PingYou Ltd
+  Darius Muglich: Muglich

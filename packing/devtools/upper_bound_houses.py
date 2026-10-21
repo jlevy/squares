@@ -387,7 +387,10 @@ def _sources() -> dict[str, Source]:
         packet_source("T-218", "evand-n236-2026-10-16"),
         packet_source("T-219", "evand-n271-2026-10-17"),
         packet_source("T-220", "evand-n183-subgrid-2026-10-19"),
+        packet_source("T-221", "evand-n308-2026-10-19"),
+        packet_source("T-222", "evand-n154-sweep-2026-10-20"),
         couzo_678_source(),
+        packet_source("T-224", "evand-n270-sweep-2026-10-20"),
     ]
     found = {source.result: source for source in sources}
     # Two results may read one packet (T-181 and T-182 both read issue 586's), so the
@@ -413,8 +416,10 @@ def _sources() -> dict[str, Source]:
 #: 261, 263, 268 to 270, 272, 273, 297 and 305 to 308. The same day adopted PR 622's
 #: certificate (T-195) at 29. The pass of 19 October 2026 adopted Evan Daniel's
 #: certificates of issues 669 (T-197), 674 (T-199), 659 (T-218), 664 (T-219) and 680
-#: (T-220) at 155, 229, 236, 271 and 183, and the pass of 20 October 2026 Francisco
-#: Couzo's certificates of issue 678 (T-223) at 204 and 260.
+#: (T-220) at 155, 229, 236, 271 and 183, and the pass of 20 October 2026 his certificates
+#: of issues 694 (T-222) and 689 (T-221) at 154 and 308 and Francisco Couzo's certificates
+#: of issue 678 (T-223) at 204 and 260, and the pass of 21 October 2026 Daniel's
+#: certificate of issue 703 (T-224) at 270.
 ADOPTED: dict[int, str] = {
     29: "T-195",
     68: "T-174",
@@ -435,7 +440,7 @@ ADOPTED: dict[int, str] = {
     132: "T-174",
     146: "T-187",
     153: "T-173",
-    154: "T-186",
+    154: "T-222",
     155: "T-197",
     156: "T-186",
     172: "T-174",
@@ -471,7 +476,7 @@ ADOPTED: dict[int, str] = {
     267: "T-134",
     268: "T-174",
     269: "T-174",
-    270: "T-174",
+    270: "T-224",
     271: "T-219",
     272: "T-174",
     273: "T-174",
@@ -484,7 +489,7 @@ ADOPTED: dict[int, str] = {
     305: "T-174",
     306: "T-174",
     307: "T-174",
-    308: "T-174",
+    308: "T-221",
 }
 NUMBERS = tuple(sorted(ADOPTED))
 #: The counts a later pass adopted, by the day it did; every other count of `ADOPTED` was
@@ -522,10 +527,16 @@ NUMBERS = tuple(sorted(ADOPTED))
 #: issue 659 (T-218) at 236 from T-146, which takes 236 off T-174's staged adoption,
 #: issue 664 (T-219) at 271 from T-186, and his original certificate of issue 680 (T-220)
 #: at 183 from the case's trivial 14 x 14 grid, which no pass had adopted before. The pass
-#: of 20 October 2026 adopted Francisco Couzo's certificates of issue 678 (T-223) after the
-#: 20 October review: at 204 from T-186, below T-193's algebraic side as well, and at 260,
-#: first adopted here, from the case record's own (the Kingbird catalogue's 11 + 4 sqrt 2,
-#: verified by T-155's exact ceiling), below T-196's report there too.
+#: of 20 October 2026 adopted Evan Daniel's certificates after the 20 October review: issue
+#: 694 (T-222) at 154 from T-186, continuing Francisco Couzo's #586 arrangement, and issue
+#: 689 (T-221) at 308 from T-174, another arrangement of the two-wedge design; and, after
+#: their own review of that day, Couzo's certificates of issue 678 (T-223): at 204 from
+#: T-186, below T-193's algebraic side as well, and at 260, first adopted here, from the
+#: case record's own (the Kingbird catalogue's 11 + 4 sqrt 2, verified by T-155's exact
+#: ceiling), below T-196's report there too. The pass of 21 October 2026 adopted Daniel's
+#: certificate of issue 703 (T-224) after the 21 October review, at 270 from T-174:
+#: another arrangement of the design of Nate Chaoweeraprasit's #500 packing, which T-174
+#: refines, found from that packing.
 #: A count a pass names keeps its place in the earlier passes' sets, which their archives
 #: hold; it was adopted on the latest day that names it.
 LATER_PASSES: dict[str, frozenset[int]] = {
@@ -598,7 +609,8 @@ LATER_PASSES: dict[str, frozenset[int]] = {
         }
     ),
     "2026-10-19": frozenset({155, 183, 229, 236, 271}),
-    "2026-10-20": frozenset({204, 260}),
+    "2026-10-20": frozenset({154, 204, 260, 308}),
+    "2026-10-21": frozenset({270}),
 }
 
 
@@ -862,13 +874,16 @@ def linked_house_problem(path: str, *, repository: Path) -> str | None:
 #: Where the custody run's receipt is kept: one record for every adopted packet.
 CUSTODY_RECEIPT = ROOT / "devtools/house-custody-2026-10-11.json"
 CUSTODY_FORMAT = "AdoptedHouseCustody/v1"
-#: The worker's deadline: it admits all 69 houses and refuses 36 mutations, two for each
-#: of the eighteen results (32.08 s in the worker on 20 October 2026, after the adoption at
-#: 204 and 260, at a load average of about seventeen; 24.0 s for 68 houses that morning,
-#: after the merge with main, with 14.25 s of setup; earlier readings: 59.18 s for 67 houses
-#: on 19 October at a
-#: load average of about seven, 28.36 s for 65 houses on 17 October at about five, and
-#: 48.95 s for 52 houses on 16 October at about ten).
+#: The worker's deadline: it admits all 69 houses and refuses 42 mutations, two for each
+#: of the twenty-one results (23.84 s in the worker on 21 October 2026, with 9.6 s of
+#: setup at a load average of about six, after the merge with main that joined the
+#: adoption at 204 and 260 to main's at 154, 308 and 270; 23.62 s for 68 houses that day,
+#: after the adoption at 270, at about four; 32.08 s on 20 October 2026, after the
+#: adoption at 204 and 260, at about seventeen; 20.55 s that day, after the adoption at
+#: 154 and 308, with 7.76 s of setup, and 24.0 s after the merge with main that morning,
+#: with 14.25 s; earlier readings: 59.18 s for 67 houses on 19 October at a load average
+#: of about seven, 28.36 s for 65 houses on 17 October at about five, and 48.95 s for 52
+#: houses on 16 October at about ten).
 CUSTODY_TIMEOUT = 120
 
 
