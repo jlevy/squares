@@ -1809,6 +1809,77 @@ class ReleaseNoPublicChange(NamedTuple):
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
     ReleaseNoPublicChange(
+        components=("paper:n11-optimality-review", "paper:n11-threshold-bound-review"),
+        paths=(
+            "packing/devtools/adopt_houses.py",
+            "packing/devtools/render_n11_lower_bounds_explainer_pdf.py",
+            "packing/devtools/upper_bound_houses.py",
+            "packing/devtools/upper_bound_reports.py",
+            "packing/frontier/results.yaml",
+        ),
+        outputs=(
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-optimality-review.pdf",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/n11-threshold-bound-review.pdf",
+        ),
+        reason=(
+            "For the #703 lane of 21 October (T-224 at n = 270, its stage 4 review and "
+            "its adoption as the house best packing at 270) against main 6b825f44: both "
+            "reviews read results.yaml only through paper_figures.ladder_records, which "
+            "selects the n11 ladder rungs LADDER_RUNGS names and holds them to "
+            "LADDER_DIGEST; T-224 and the 270 regularized-drawing item are outside that "
+            "ladder, and no ladder row changes. adopt_houses.py gains T-224's prose, the "
+            "270 credit and a string form of Prose.third_route; upper_bound_houses.py the "
+            "packet, 270 in ADOPTED and the 21 October pass; upper_bound_reports.py one "
+            "house reader. render_n11_lower_bounds_explainer_pdf.py changes only "
+            "EXPECTED_PAGE_COUNT, the explainer's pagination check; these producers "
+            "import its dated helper. Rendered at link revision 2854ca22, once from this "
+            "branch's tree and once with main's copies of the seven changed inputs "
+            "(these five, result-requests.yaml and source-coverage.yaml): "
+            "render_n11_optimality_review, render_n11_threshold_bound_review and "
+            "render_packing_methods leave the 50 files they write byte-identical between "
+            "the trees. No PDF was printed; each prints from that HTML. Retain v0.1.7 "
+            "and v0.1.0."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/devtools/adopt_houses.py",
+            "packing/devtools/render_n11_lower_bounds_explainer_pdf.py",
+            "packing/devtools/upper_bound_houses.py",
+            "packing/devtools/upper_bound_reports.py",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+            "papers/square-packing-methods-survey.pdf",
+        ),
+        reason=(
+            "For the #703 lane of 21 October (T-224 at n = 270, its stage 4 review and "
+            "its adoption as the house best packing at 270) against main 6b825f44: "
+            "result requests, source coverage and results are citation targets whose "
+            "existence the producer checks, not inlined text, and every cited path exists "
+            "at both revisions; the #703 request, the n270 coverage source and the 270 "
+            "override, and T-224 are not cited by the survey. adopt_houses.py, "
+            "upper_bound_houses.py and upper_bound_reports.py change only the 270 "
+            "adoption's writer inputs and one house reader, which do not enter its "
+            "output; render_n11_lower_bounds_explainer_pdf.py, a render input, changes "
+            "only EXPECTED_PAGE_COUNT, which the survey's producer does not read. "
+            "Rendered at link revision 2854ca22, once from this branch's tree and once "
+            "with main's copies of the seven changed inputs: render_n11_optimality_review, "
+            "render_n11_threshold_bound_review and render_packing_methods leave the 50 "
+            "files they write byte-identical between the trees. No PDF was printed; it "
+            "prints from that HTML. Retain v0.2.3."
+        ),
+    ),
+    ReleaseNoPublicChange(
         components=("paper:n11-lower-bounds-explainer",),
         paths=(
             "packing/atlas/known-best/bound-citations.json",
