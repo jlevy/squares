@@ -1,0 +1,107 @@
+{
+ "n": 227,
+ "side": "194547458795865848854407472552117653131825098066089500568310019841668910818842825068644658133972443495777187230686109286929082683273291187074040913251499/12500000000000000000000000000001272204783003459957077568639425038233180795950995922365041743732086145591922059343477256613382050000000000000000000000000",
+ "print_12": "15.563796703670",
+ "ceiling_16": "15.5637967036692680",
+ "unit_circle": "all",
+ "min_wall_clearance_half_extent": "1/1000000000",
+ "min_wall_clearance_corners": "1/1000000000",
+ "pairs_decided_sat": 25651,
+ "overlapping_pairs_sat": 0,
+ "contact_pairs_sat": 0,
+ "least_pair_gap": "2997473261553822064748308424812606080013561923077146878207517166779589277149974193/2988500373933481116809725302559796733780423511242894454239213157950625000000000000000000000",
+ "least_pair": [
+  213,
+  214
+ ],
+ "near_pairs_clipped": 459,
+ "near_pairs_with_positive_area": 0,
+ "cpu_seconds": 4.75,
+ "receipt_agreement": {
+  "exact_verify": {
+   "wall_equal": true,
+   "gap_equal": true,
+   "pairs_equal": true,
+   "side_equal": true
+  },
+  "independent": {
+   "wall_equal": true,
+   "gap_equal": true,
+   "pairs_equal": true,
+   "side_equal": true
+  }
+ },
+ "passed": true
+}
+{
+ "n": 229,
+ "side": "156501747569482131747919637148801852719869637315233948984618327625011520667543259632677498716011131748832131668750692746335433269145213277034738380207139541/10000000000000000000000000000001737366297119815888250696550926607660931327350731575578989919015034082413286101971092035771621296900000000000000000000000000",
+ "print_12": "15.650174756949",
+ "ceiling_16": "15.6501747569482132",
+ "unit_circle": "all",
+ "min_wall_clearance_half_extent": "1/1000000000",
+ "min_wall_clearance_corners": "1/1000000000",
+ "pairs_decided_sat": 26106,
+ "overlapping_pairs_sat": 0,
+ "contact_pairs_sat": 0,
+ "least_pair_gap": "10029996023822667189984651181713120959213225287280850242100933747955708614757911808034494025716759582575843603665065065533258380455936627186637/10000000000000000000000000000001549757658243420763273339535910224012646497809770799843430255347588191592515571638991869900124271121000000000000000000000",
+ "least_pair": [
+  60,
+  150
+ ],
+ "near_pairs_clipped": 530,
+ "near_pairs_with_positive_area": 0,
+ "cpu_seconds": 5.18,
+ "receipt_agreement": {
+  "exact_verify": {
+   "wall_equal": true,
+   "gap_equal": true,
+   "pairs_equal": true,
+   "side_equal": true
+  },
+  "independent": {
+   "wall_equal": true,
+   "gap_equal": true,
+   "pairs_equal": true,
+   "side_equal": true
+  }
+ },
+ "passed": true
+}
+{
+ "n": 260,
+ "side": "16645778804181379786535601/1000000000000000000000000",
+ "print_12": "16.645778804182",
+ "ceiling_16": "16.6457788041813798",
+ "unit_circle": "all",
+ "min_wall_clearance_half_extent": "1/1000000000",
+ "min_wall_clearance_corners": "1/1000000000",
+ "pairs_decided_sat": 33670,
+ "overlapping_pairs_sat": 0,
+ "contact_pairs_sat": 0,
+ "least_pair_gap": "5393592233059145661184458394653141515480278981333/5236495370382421088144072649985104500000000000000000000000",
+ "least_pair": [
+  199,
+  204
+ ],
+ "near_pairs_clipped": 542,
+ "near_pairs_with_positive_area": 0,
+ "cpu_seconds": 2.68,
+ "receipt_agreement": {
+  "exact_verify": {
+   "wall_equal": true,
+   "gap_equal": true,
+   "pairs_equal": true,
+   "side_equal": true
+  },
+  "independent": {
+   "wall_equal": true,
+   "gap_equal": true,
+   "pairs_equal": true,
+   "side_equal": true
+  }
+ },
+ "passed": true
+}
+ALL PASSED
+exit 0

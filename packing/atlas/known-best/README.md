@@ -611,6 +611,36 @@ in think-kpm3’s layout, with `selection-adopt-2026-10-20-n154-308.json` and `.
 it the index draws 94 views: 35 by the axis tool, 39 by Evan Daniel’s regularizer and 20
 by the grid-slack generator’s version 1.
 
+On 20 October 2026 the adoption of Joost de Winter’s certificates of issue 668 (T-196,
+think-qdcc) moved 227 and 260 from the Kingbird catalogue’s packings to house best
+packings $7.27 \times 10^{-3}$ and $1.11 \times 10^{-2}$ below them.
+At 227 the grid-slack view of the earlier witness lapsed; at 260 the earlier house
+drawing was regular as published, and the axis tool made a view of the new witness.
+Both generators then ran on both counts, on a shared host at a load average of about
+thirteen: Evan Daniel’s regularizer (`evand-regularize-adopt-2026-10-20-n227-260-evand`,
+243 CPU-seconds and 535 seconds of wall at two workers by its receipt) and grid-slack at
+0.5, 1 and 5 degrees (`grid-slack-adopt-2026-10-20-n227-260-grid-deg05`, `-grid-deg1`
+and `-grid-deg5`, 30, 29 and 31 seconds, the per-count seconds their reports record,
+retained under those names though they ran as `-grid-0.5`, `-grid-1` and `-grid-5`); the
+selection took 139 seconds of wall at two workers.
+Every same-side view is admitted at row 10 at the witness’s own side, and the selection
+draws his same-side view at both counts.
+At 227 it has no uneven and no near-axis square, 5 angle classes and hues and 676 / 684
+house and stage sides, against the new house drawing’s 4 uneven and 3 near-axis squares,
+11 classes and 650 / 678 sides, and grid-slack’s 8 classes and 674 / 680 sides; it is
+worse than the lapsed view of the catalogue’s packing (2 classes, 809 sides), which by
+the house rule is no reason to keep the larger packing.
+At 260 it has no light and no uneven square against the house drawing’s 3 and 20, and
+778 sides against 754 and grid-slack’s 774. His driver’s solved views at both counts are
+below the new sides, by $1.66 \times
+10^{-8}$ and $1.81 \times 10^{-8}$: register candidates (policy row 3), listed in the
+selection and not admitted here.
+The evidence is retained in
+[`cases/regularized_drawings/think-qdcc-2026-10-20/`](../../cases/regularized_drawings/think-qdcc-2026-10-20/),
+with `selection-n227-n260.json` and `selection-n227-n260.md`. After both adoptions of
+the day the index draws 95 views: 35 by the axis tool, 41 by Evan Daniel’s regularizer
+and 19 by the grid-slack generator’s version 1.
+
 On 21 October 2026 the adoption of Evan Daniel’s certificate of #703 (think-a9jp) moved
 the house best packing at 270 to T-224, $3.47 \times 10^{-5}$ below T-174: another
 arrangement of the design of Nate Chaoweeraprasit’s #500 packing, which T-174 refines.
@@ -635,6 +665,8 @@ The evidence is retained in
 [`cases/regularized_drawings/think-a9jp-2026-10-21/`](../../cases/regularized_drawings/think-a9jp-2026-10-21/)
 in think-kpm3’s layout, with `selection-adopt-2026-10-21-n270.json` and `.md`. After it
 the index draws 94 views: 35 by the axis tool, 40 by Evan Daniel’s regularizer and 19 by
+the grid-slack generator’s version 1. With the adoption at 227 and 260 merged beside it,
+the index draws 95 views: 35 by the axis tool, 42 by Evan Daniel’s regularizer and 18 by
 the grid-slack generator’s version 1.
 
 ### The default picture

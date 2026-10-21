@@ -1,0 +1,89 @@
+{
+ "n": 260,
+ "wall_clearance": "1/1000000000",
+ "least_pair": [
+  199,
+  204
+ ],
+ "least_gap": "5393592233059145661184458394653141515480278981333/5236495370382421088144072649985104500000000000000000000000",
+ "W1_side_minus_clearance": {
+  "exact_verify": {
+   "passed": true,
+   "wall": "0",
+   "gap": "5393592233059145661184458394653141515480278981333/5236495370382421088144072649985104500000000000000000000000",
+   "failures": [],
+   "cpu": 3.0
+  },
+  "independent": {
+   "passed": true,
+   "wall": "0",
+   "gap": "5393592233059145661184458394653141515480278981333/5236495370382421088144072649985104500000000000000000000000",
+   "failures": [],
+   "cpu": 2.3
+  }
+ },
+ "W2_side_minus_clearance_minus_1e-30": {
+  "exact_verify": {
+   "passed": false,
+   "wall": "-1/1000000000000000000000000000000",
+   "gap": "5393592233059145661184458394653141515480278981333/5236495370382421088144072649985104500000000000000000000000",
+   "failures": [
+    "('container', 'square 0 violates x<=s')",
+    "('container', 'square 0 violates x<=s')",
+    "('container', 'square 1 violates x<=s')"
+   ],
+   "cpu": 3.2
+  },
+  "independent": {
+   "passed": false,
+   "wall": "-1/1000000000000000000000000000000",
+   "gap": "5393592233059145661184458394653141515480278981333/5236495370382421088144072649985104500000000000000000000000",
+   "failures": [
+    "container penetration -1/1000000000000000000000000000000"
+   ],
+   "cpu": 2.3
+  }
+ },
+ "P1_pair_closed_by_gap": {
+  "exact_verify": {
+   "passed": true,
+   "wall": "1/1000000000",
+   "gap": "0",
+   "failures": [],
+   "cpu": 3.0
+  },
+  "independent": {
+   "passed": true,
+   "wall": "1/1000000000",
+   "gap": "0",
+   "failures": [],
+   "cpu": 2.4
+  },
+  "review_sat_gap": "0",
+  "review_clip_area": "0"
+ },
+ "P2_pair_closed_by_gap_plus_1e-30": {
+  "exact_verify": {
+   "passed": false,
+   "wall": "1/1000000000",
+   "gap": "-1/1000000000000000000000000000000",
+   "failures": [
+    "('overlap', 'squares 199 and 204 overlap')"
+   ],
+   "cpu": 3.2
+  },
+  "independent": {
+   "passed": false,
+   "wall": "1/1000000000",
+   "gap": "-1/1000000000000000000000000000000",
+   "failures": [
+    "1 overlapping pairs; worst exact gap -1/1000000000000000000000000000000"
+   ],
+   "cpu": 2.2
+  },
+  "review_sat_gap": "-1/1000000000000000000000000000000",
+  "review_clip_area": "323583699613207959702181480391247363078291534329971087857/654561921297802636018009081248138062500000000000000000000000000000000000000000000000000"
+ },
+ "B1_basis_off_circle": "refused: n=260 square 1: the basis is no rotation",
+ "B2_float_coordinate": "refused: n=260 square 1: not a bounded rational string"
+}

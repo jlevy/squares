@@ -397,6 +397,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | atlas/regularized/n-258.svg | atlas/regularized/n-258.svg | asset-file | overview | 2026-10-07 | 2026-10-21 | live |
 | atlas/regularized/n-259.svg | atlas/regularized/n-259.svg | asset-file | overview | 2026-10-07 | 2026-10-21 | live |
 | atlas/regularized/n-26.svg | atlas/regularized/n-26.svg | asset-file | overview | 2026-10-07 | 2026-10-21 | live |
+| atlas/regularized/n-260.svg | atlas/regularized/n-260.svg | asset-file | overview | 2026-10-08 | 2026-10-21 | live |
 | atlas/regularized/n-261.svg | atlas/regularized/n-261.svg | asset-file | overview | 2026-10-07 | 2026-10-21 | live |
 | atlas/regularized/n-263.svg | atlas/regularized/n-263.svg | asset-file | overview | 2026-10-07 | 2026-10-21 | live |
 | atlas/regularized/n-264.svg | atlas/regularized/n-264.svg | asset-file | overview | 2026-10-08 | 2026-10-21 | live |
@@ -579,7 +580,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | cases/224.html | cases/224.html | record | overview | 2026-10-03 | 2026-10-14 | live |
 | cases/225.html | cases/225.html | record | overview | 2026-10-03 | 2026-10-07 | live |
 | cases/226.html | cases/226.html | record | overview | 2026-10-03 | 2026-10-14 | live |
-| cases/227.html | cases/227.html | record | overview | 2026-10-03 | 2026-10-18 | live |
+| cases/227.html | cases/227.html | record | overview | 2026-10-03 | 2026-10-20 | live |
 | cases/228.html | cases/228.html | record | overview | 2026-10-03 | 2026-10-17 | live |
 | cases/229.html | cases/229.html | record | overview | 2026-10-03 | 2026-10-19 | live |
 | cases/23.html | cases/23.html | record | overview | 2026-10-03 | 2026-10-07 | live |
@@ -992,7 +993,7 @@ Patterns admit declared namespaces, file types and sixteen-digit asset names.
 | result/t-193.html | result/t-193.html | result | overview | 2026-10-16 | 2026-10-16 | live |
 | result/t-194.html | result/t-194.html | result | overview | 2026-10-16 | 2026-10-16 | live |
 | result/t-195.html | result/t-195.html | result | overview | 2026-10-16 | 2026-10-16 | live |
-| result/t-196.html | result/t-196.html | result | overview | 2026-10-18 | 2026-10-18 | live |
+| result/t-196.html | result/t-196.html | result | overview | 2026-10-18 | 2026-10-20 | live |
 | result/t-197.html | result/t-197.html | result | overview | 2026-10-18 | 2026-10-19 | live |
 | result/t-198.html | result/t-198.html | result | overview | 2026-10-18 | 2026-10-19 | live |
 | result/t-199.html | result/t-199.html | result | overview | 2026-10-18 | 2026-10-19 | live |
