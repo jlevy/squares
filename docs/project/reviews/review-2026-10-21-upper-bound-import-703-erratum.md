@@ -30,8 +30,9 @@ which the review cites for the second sentence, gives the matching symmetry as
 `"symmetry": 1`. The review’s `lineage_708.py` counts the eight symmetries of the box as
 `devtools.check_half_angle_area.symmetric` does: $k$ quarter turns about the box’s
 centre, after a reflection in $x = s/2$ only when $k \ge 4$. So $k = 1$ is one quarter
-turn, $(x, y) \mapsto (s - y, x)$, with no reflection.
-The measurement was right; only the word for it was wrong.
+turn, $(x, y) \mapsto (s - y, x)$, with no reflection; it carries the view onto the
+certificate, and its inverse $(x, y) \mapsto (y, s - x)$ carries the certificate onto
+the view. The measurement was right; only the word for it was wrong.
 
 ## The Reply That Says So
 
@@ -47,9 +48,10 @@ rotation.”
 ## What Else Carries It
 
 Nothing in the record repeats the word.
-T-224’s register entry, its two evidence entries, the case record at 270, the packet
-README and the retained review programs’ README describe the view without naming the
-symmetry, so none of them changes.
+T-224’s register entry, its two evidence entries, the case record at 270 and the packet
+README describe the view without naming the symmetry, so none of them changes.
+The retained review programs’ README now points to this erratum and names the quarter
+turn, and the #703 entry in `result-requests.yaml` records the reply’s wording.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
