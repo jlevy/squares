@@ -6222,27 +6222,31 @@ sources:
     - 227
     - 229
     - 260
-  reviewed: '2026-10-18'
+  reviewed: '2026-10-20'
   source_date: '2026-10-17'
   disposition: current-report
   replay_disposition: case-specific
   represented_by:
   - frontier/results.yaml
   - resources/web/de-winter-upper-bounds-227-229-260-2026-10-17/README.md
+  - resources/web/de-winter-upper-bounds-227-229-260-2026-10-17/acquisition/claims.json
   - campaign/issue-intake/upper-bounds-20261018/README.md
   evidence:
   - E-de-winter-668-upper-report
+  - E-de-winter-668-upper-exact-feasibility
   notes: >-
     Issue 668 reports the three exact rational certificate sides from c95c4938 on 17 October; the
     retained licensed successor 9bf5d9be changes only LICENSE and the root README. The ledger preserves
-    this report before Couzo issue 672 and Daniel issue 674 at overlapping counts. At 227 Couzo has a
-    later smaller pending claim, owned by think-2vjc; at 229 the final retained Daniel update is the latest registered report.
-    No arrangement identity, local minimum or optimum is established. The separately owned mathematical
-    review (think-455r) and completed source replay with controls (think-8xr0) await their own dependent
-    PRs and are not adopted by this registration.
-    No selected override or superseded-report row changes: the case's two upper lanes
-    and retained house stay unchanged until Stage 4 adoption. The exact bounds are
-    registered as pending adoption where they improve the case, as Stage 3 permits.
+    this report before Couzo issue 672 and Daniel issue 674 at overlapping counts. At 227 Couzo's
+    later #672 reports a smaller side, not yet registered. At 260 his later #678 is T-223,
+    registered at V0/C0 by #701 and 2.56e-5 smaller, not yet validated, so T-196 is the house
+    best packing at 260 until T-223 is validated and adopted (#706). At 229 Daniel's T-199 is the
+    case. No arrangement identity, local minimum or optimum is established. All 3 certificates
+    and their 6 controls were decided on both maintained exact routes on 20 October 2026
+    (E-de-winter-668-upper-exact-feasibility), and T-196 is at V3/C3. The 20 October review
+    (docs/project/reviews/review-2026-10-20-de-winter-668-upper-bounds.md) accepted it, and the
+    cases at 227 and 260 adopted the certificates as their house best packings on 20 October
+    2026, which the selected overrides at those counts record; at 229 T-199 stays selected.
 - id: evand-n155-explorer-2026-10-17
   title: Daniel's n155 explorer certificate and same-side display, issue 669
   role: source-repository
@@ -7069,8 +7073,8 @@ selected_overrides:
   source_id: pingyou-pr622-certificate-2026-10-15
   value: '5.9338334626769292'
   evidence: E-pingyou-622-certificate-report
-  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-17 (T-195).
+  reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
+    a replay here and an accepted review, adopted on 2026-10-17 (T-195).
 - n: 51
   source_id: ry-xu-undilated-n51-2026
   value: '7.6903559372884918'
@@ -7080,26 +7084,26 @@ selected_overrides:
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '8.7987952372182839025766809670213940835210190302278792632403696'
   evidence: E-pingyou-574-certificate-report
-  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-17 (T-174).
+  reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
+    a replay here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 70
   source_id: evand-regularized-2026-10-10
   value: '8.8809603715555796'
   evidence: E-evand-regularized-certificate-report
-  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-11 (T-146).
+  reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
+    a replay here and an accepted review, adopted on 2026-10-11 (T-146).
 - n: 84
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '9.69793479901492131'
   evidence: E-pingyou-574-certificate-report
-  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-17 (T-174).
+  reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
+    a replay here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 86
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '9.82053540749674221'
   evidence: E-pingyou-574-certificate-report
-  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-17 (T-174).
+  reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
+    a replay here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 88
   source_id: gupta-square-packing-refinements-2026-10-08
   value: '9.8824510304812469'
@@ -7110,20 +7114,20 @@ selected_overrides:
   source_id: evand-regularized-2026-10-10
   value: '10.6058286964315784'
   evidence: E-evand-regularized-certificate-report
-  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-11 (T-146).
+  reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
+    a replay here and an accepted review, adopted on 2026-10-11 (T-146).
 - n: 103
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '10.67923204736130645'
   evidence: E-pingyou-574-certificate-report
-  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-17 (T-174).
+  reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
+    a replay here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 105
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '10.789303783748158831'
   evidence: E-pingyou-574-certificate-report
-  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-17 (T-174).
+  reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
+    a replay here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 106
   source_id: evand-square-packing-2026-10-05
   value: '10.822908044132847555194436943331'
@@ -7134,62 +7138,62 @@ selected_overrides:
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '10.90482101232035643'
   evidence: E-pingyou-574-certificate-report
-  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-17 (T-174).
+  reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
+    a replay here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 110
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '10.9967833966315916396'
   evidence: E-pingyou-574-certificate-report
-  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-17 (T-174).
+  reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
+    a replay here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 123
   source_id: evand-regularized-2026-10-10
   value: '11.5913781454976982'
   evidence: E-evand-regularized-certificate-report
-  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-11 (T-146).
+  reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
+    a replay here and an accepted review, adopted on 2026-10-11 (T-146).
 - n: 126
   source_id: evand-trio126-2026-10-09
   value: '11.7426406871192852'
   evidence: E-evand-trio126-certificate-report
-  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-11 (T-139).
+  reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
+    a replay here and an accepted review, adopted on 2026-10-11 (T-139).
 - n: 127
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '11.81087878758917984'
   evidence: E-pingyou-574-certificate-report
-  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-17 (T-174).
+  reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
+    a replay here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 129
   source_id: mishapolk-kkt-refinements-2026-10-14
   value: '11.87001385040446435'
   evidence: E-mishapolk-70a033f-certificate-report
-  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-16 (T-186).
+  reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
+    a replay here and an accepted review, adopted on 2026-10-16 (T-186).
 - n: 130
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '11.90448303251578644'
   evidence: E-pingyou-574-certificate-report
-  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-17 (T-174).
+  reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
+    a replay here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 131
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '11.949659588035860397'
   evidence: E-pingyou-574-certificate-report
-  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-17 (T-174).
+  reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
+    a replay here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 132
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '11.9856801988458088115'
   evidence: E-pingyou-574-certificate-report
-  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-17 (T-174).
+  reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
+    a replay here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 146
   source_id: evand-n146-2026-10-14
   value: '12.5837821901518604'
   evidence: E-evand-606-n146-report
-  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-16 (T-187).
+  reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
+    a replay here and an accepted review, adopted on 2026-10-16 (T-187).
 - n: 152
   source_id: evand-square-packing-2026-10-05
   value: '12.830718800976609954993823643412'
@@ -7200,44 +7204,44 @@ selected_overrides:
   source_id: mishapolk-exact-certificates-2026-10-12
   value: '12.8700138504044800'
   evidence: E-mishapolk-573-certificate-report
-  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-15 (T-173).
+  reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
+    a replay here and an accepted review, adopted on 2026-10-15 (T-173).
 - n: 154
   source_id: evand-n154-sweep-2026-10-20
   value: '12.9211009407616806'
   evidence: E-evand-694-n154-report
-  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-20 (T-222).
+  reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
+    a replay here and an accepted review, adopted on 2026-10-20 (T-222).
 - n: 155
   source_id: evand-n155-explorer-2026-10-17
   value: '12.9522609446505641'
   evidence: E-evand-669-n155-report
-  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-19 (T-197).
+  reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
+    a replay here and an accepted review, adopted on 2026-10-19 (T-197).
 - n: 156
   source_id: mishapolk-kkt-refinements-2026-10-14
   value: '12.97916585383427646'
   evidence: E-mishapolk-70a033f-certificate-report
-  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-16 (T-186).
+  reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
+    a replay here and an accepted review, adopted on 2026-10-16 (T-186).
 - n: 172
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '13.6189889568993984289'
   evidence: E-pingyou-574-certificate-report
-  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-17 (T-174).
+  reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
+    a replay here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 175
   source_id: mishapolk-kkt-refinements-2026-10-14
   value: '13.76417431748659663'
   evidence: E-mishapolk-70a033f-certificate-report
-  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-16 (T-186).
+  reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
+    a replay here and an accepted review, adopted on 2026-10-16 (T-186).
 - n: 176
   source_id: mishapolk-kkt-refinements-2026-10-14
   value: '13.7958723184364073'
   evidence: E-mishapolk-70a033f-certificate-report
-  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-16 (T-186).
+  reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
+    a replay here and an accepted review, adopted on 2026-10-16 (T-186).
 - n: 177
   source_id: evand-square-packing-2026-10-05
   value: '13.822979734169448600231882896281'
@@ -7248,32 +7252,32 @@ selected_overrides:
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '13.88379549051089845'
   evidence: E-pingyou-574-certificate-report
-  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-17 (T-174).
+  reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
+    a replay here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 180
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '13.91699352247783249'
   evidence: E-pingyou-574-certificate-report
-  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-17 (T-174).
+  reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
+    a replay here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 181
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '13.95081953102292407'
   evidence: E-pingyou-574-certificate-report
-  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-17 (T-174).
+  reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
+    a replay here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 182
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '13.9740907131214390071'
   evidence: E-pingyou-574-certificate-report
-  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-17 (T-174).
+  reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
+    a replay here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 183
   source_id: evand-n183-subgrid-2026-10-19
   value: '13.9995801787362526'
   evidence: E-evand-680-n183-report
-  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-19 (T-220).
+  reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
+    a replay here and an accepted review, adopted on 2026-10-19 (T-220).
 - n: 199
   source_id: gupta-square-packing-refinements-2026-10-08
   value: '14.6175721735928069'
@@ -7284,128 +7288,140 @@ selected_overrides:
   source_id: mishapolk-kkt-refinements-2026-10-14
   value: '14.80866323438695657'
   evidence: E-mishapolk-70a033f-certificate-report
-  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-16 (T-186).
+  reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
+    a replay here and an accepted review, adopted on 2026-10-16 (T-186).
 - n: 206
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '14.8601586633919032367'
   evidence: E-pingyou-574-certificate-report
-  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-17 (T-174).
+  reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
+    a replay here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 207
   source_id: mishapolk-exact-certificates-2026-10-12
   value: '14.8809603715580000'
   evidence: E-mishapolk-573-certificate-report
-  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-15 (T-173).
+  reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
+    a replay here and an accepted review, adopted on 2026-10-15 (T-173).
 - n: 208
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '14.92451877202935589'
   evidence: E-pingyou-574-certificate-report
-  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-17 (T-174).
+  reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
+    a replay here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 209
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '14.94622322644645106'
   evidence: E-pingyou-574-certificate-report
-  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-17 (T-174).
+  reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
+    a replay here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 210
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '14.9730011165876257419'
   evidence: E-pingyou-574-certificate-report
-  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-17 (T-174).
+  reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
+    a replay here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 211
   source_id: couzo-verified-bounds-2026-10-14-in-corpus
   value: '14.9935496262994211'
   evidence: E-couzo-487b058-certificate-report
-  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-16 (T-188).
+  reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
+    a replay here and an accepted review, adopted on 2026-10-16 (T-188).
+- n: 227
+  source_id: de-winter-upper-bounds-2026-10-17
+  value: '15.5637967036692680'
+  evidence: E-de-winter-668-upper-report
+  reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
+    a replay here and an accepted review, adopted on 2026-10-20 (T-196).
 - n: 228
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '15.60460147572967429'
   evidence: E-pingyou-574-certificate-report
-  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-17 (T-174).
+  reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
+    a replay here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 229
   source_id: evand-n229-dilation-update-2026-10-18
   value: '15.6501615138955532'
   evidence: E-evand-674-n229-update-report
-  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-19 (T-199).
+  reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
+    a replay here and an accepted review, adopted on 2026-10-19 (T-199).
 - n: 232
   source_id: mishapolk-kkt-refinements-2026-10-14
   value: '15.76417431748659663'
   evidence: E-mishapolk-70a033f-certificate-report
-  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-16 (T-186).
+  reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
+    a replay here and an accepted review, adopted on 2026-10-16 (T-186).
 - n: 236
   source_id: evand-n236-2026-10-16
   value: '15.8619343906073587'
   evidence: E-evand-659-n236-report
-  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-19 (T-218).
+  reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
+    a replay here and an accepted review, adopted on 2026-10-19 (T-218).
 - n: 237
   source_id: couzo-n237-2026-10-15
   value: '15.9026036382595969'
   evidence: E-couzo-4e4c8ce-n237-certificate-report
-  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-16 (T-190).
+  reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
+    a replay here and an accepted review, adopted on 2026-10-16 (T-190).
 - n: 238
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '15.92410678532149466'
   evidence: E-pingyou-574-certificate-report
-  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-17 (T-174).
+  reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
+    a replay here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 239
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '15.94844332730049991'
   evidence: E-pingyou-574-certificate-report
-  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-17 (T-174).
+  reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
+    a replay here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 240
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '15.969685337530780336'
   evidence: E-pingyou-574-certificate-report
-  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-17 (T-174).
+  reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
+    a replay here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 241
   source_id: couzo-certificates-2026-10-13-in-corpus
   value: '15.9871170951502388'
   evidence: E-couzo-583-586-certificate-report
-  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-15 (T-182).
+  reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
+    a replay here and an accepted review, adopted on 2026-10-15 (T-182).
 - n: 258
   source_id: evand-regularized-2026-10-10
   value: '16.5634480021337894'
   evidence: E-evand-regularized-certificate-report
-  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-11 (T-146).
+  reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
+    a replay here and an accepted review, adopted on 2026-10-11 (T-146).
 - n: 259
   source_id: squish-481-third-request-2026-10-09
   value: '16.5913781454976982'
   evidence: E-squish-481-certificate-report
-  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-11 (T-136).
+  reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
+    a replay here and an accepted review, adopted on 2026-10-11 (T-136).
+- n: 260
+  source_id: de-winter-upper-bounds-2026-10-17
+  value: '16.6457788041813798'
+  evidence: E-de-winter-668-upper-report
+  reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
+    a replay here and an accepted review, adopted on 2026-10-20 (T-196).
 - n: 261
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '16.67877987534290982'
   evidence: E-pingyou-574-certificate-report
-  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-17 (T-174).
+  reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
+    a replay here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 263
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '16.73316600789937898'
   evidence: E-pingyou-574-certificate-report
-  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-17 (T-174).
+  reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
+    a replay here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 264
   source_id: mishapolk-kkt-refinements-2026-10-14
   value: '16.77473513238783285'
   evidence: E-mishapolk-70a033f-certificate-report
-  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-16 (T-186).
+  reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
+    a replay here and an accepted review, adopted on 2026-10-16 (T-186).
 - n: 266
   source_id: evand-new-arrangements-2026-10-07
   value: '16.823028750756475970708783711254'
@@ -7416,62 +7432,62 @@ selected_overrides:
   source_id: couzo-exact-certificates-2026-10-09
   value: '16.8388152699482623'
   evidence: E-couzo-476-certificate-report
-  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-11 (T-134).
+  reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
+    a replay here and an accepted review, adopted on 2026-10-11 (T-134).
 - n: 268
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '16.8788148210067647246'
   evidence: E-pingyou-574-certificate-report
-  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-17 (T-174).
+  reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
+    a replay here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 269
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '16.901513582189132199'
   evidence: E-pingyou-574-certificate-report
-  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-17 (T-174).
+  reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
+    a replay here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 270
   source_id: evand-n270-sweep-2026-10-20
   value: '16.9281622521967502'
   evidence: E-evand-703-n270-report
-  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-21 (T-224).
+  reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
+    a replay here and an accepted review, adopted on 2026-10-21 (T-224).
 - n: 271
   source_id: evand-n271-2026-10-17
   value: '16.9489477337136576'
   evidence: E-evand-664-n271-report
-  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-19 (T-219).
+  reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
+    a replay here and an accepted review, adopted on 2026-10-19 (T-219).
 - n: 272
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '16.96558647483767064'
   evidence: E-pingyou-574-certificate-report
-  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-17 (T-174).
+  reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
+    a replay here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 273
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '16.983925962650404316'
   evidence: E-pingyou-574-certificate-report
-  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-17 (T-174).
+  reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
+    a replay here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 292
   source_id: evand-regularized-2026-10-10
   value: '17.5913781454976982'
   evidence: E-evand-regularized-certificate-report
-  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-11 (T-146).
+  reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
+    a replay here and an accepted review, adopted on 2026-10-11 (T-146).
 - n: 295
   source_id: evand-regularized-2026-10-10
   value: '17.7042327907360304'
   evidence: E-evand-regularized-certificate-report
-  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-11 (T-146).
+  reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
+    a replay here and an accepted review, adopted on 2026-10-11 (T-146).
 - n: 297
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '17.740417287543801851'
   evidence: E-pingyou-574-certificate-report
-  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-17 (T-174).
+  reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
+    a replay here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 301
   source_id: evand-square-packing-2026-10-05
   value: '17.846667192843489783121781262887'
@@ -7482,44 +7498,44 @@ selected_overrides:
   source_id: mishapolk-kkt-refinements-2026-10-14
   value: '17.87001385040446435'
   evidence: E-mishapolk-70a033f-certificate-report
-  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-16 (T-186).
+  reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
+    a replay here and an accepted review, adopted on 2026-10-16 (T-186).
 - n: 303
   source_id: mishapolk-kkt-refinements-2026-10-14
   value: '17.90995829106990799'
   evidence: E-mishapolk-70a033f-certificate-report
-  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-16 (T-186).
+  reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
+    a replay here and an accepted review, adopted on 2026-10-16 (T-186).
 - n: 304
   source_id: mishapolk-kkt-refinements-2026-10-14
   value: '17.92942775807517497'
   evidence: E-mishapolk-70a033f-certificate-report
-  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-16 (T-186).
+  reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
+    a replay here and an accepted review, adopted on 2026-10-16 (T-186).
 - n: 305
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '17.95046648213771228'
   evidence: E-pingyou-574-certificate-report
-  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-17 (T-174).
+  reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
+    a replay here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 306
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '17.96343371749142574'
   evidence: E-pingyou-574-certificate-report
-  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-17 (T-174).
+  reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
+    a replay here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 307
   source_id: pingyou-pr574-certificates-2026-10-13
   value: '17.98086278405469107'
   evidence: E-pingyou-574-certificate-report
-  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-17 (T-174).
+  reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
+    a replay here and an accepted review, adopted on 2026-10-17 (T-174).
 - n: 308
   source_id: evand-n308-2026-10-19
   value: '17.9971491212709088'
   evidence: E-evand-689-n308-report
-  reason: The smallest exact side the register holds at this count, confirmed at V3/C3 by a replay
-    here and an accepted review, adopted on 2026-10-20 (T-221).
+  reason: The smallest validated exact side the register holds at this count, confirmed at V3/C3 by
+    a replay here and an accepted review, adopted on 2026-10-20 (T-221).
 superseded_reports:
 - n: 123
   source_id: evand-square-packing-2026-10-05
@@ -8231,7 +8247,7 @@ superseded_reports:
 - n: 227
   source_id: evand-square-packing-2026-10-05
   value: '15.571067811865475244164154299168'
-  superseded_by: kingbird-current
+  superseded_by: de-winter-upper-bounds-2026-10-17
   reason: Certifies the catalogue's packing at a side 5.2e-15 above the one it prints, which stays
     the report; since 2026-10-06 it is the verified upper bound, rounded up at the printed precision
     (T-101).
@@ -8408,7 +8424,7 @@ superseded_reports:
 - n: 260
   source_id: evand-square-packing-2026-10-05
   value: '16.656854249492380195373323439334'
-  superseded_by: kingbird-current
+  superseded_by: de-winter-upper-bounds-2026-10-17
   reason: Certifies the catalogue's packing at a side 2.0e-16 above the one it prints, which stays
     the report; since 2026-10-06 it is the verified upper bound, rounded up at the printed precision
     (T-101).

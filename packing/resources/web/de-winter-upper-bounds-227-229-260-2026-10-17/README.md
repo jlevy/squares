@@ -104,6 +104,37 @@ coverage. It does not establish any geometric claim or upgrade an evidential rat
 Decompress each authoritative JSON to its original filename in an external scratch copy
 before a separately authorized future source replay.
 
+## Exact Replay
+
+Added on 20 October 2026 for the stage 4 replay (think-8xr0), with the import
+declaration [acquisition/report.json](acquisition/report.json) that
+`devtools.upper_bound_reports` reads through its `center-basis-json` adapter.
+The adapter reads each witness’s exact rational side and, for each square, its rational
+centre and basis $(c, s)$. It takes the half-angle tangent $t = s / (1 + c)$ and refuses
+a basis that is not exactly the rotation $t$ gives, so no float is read.
+Each side is the `certified_side_exact` its `records.json` states, and each printed
+bound is that side rounded up at twelve places.
+
+Each certificate goes through the maintained two-route kernel: `sqpack`’s exact witness
+verifier and the independent rational corner checker, each deciding every wall and every
+pair over $\mathbb{Q}$.
+Each count ran a positive job, a duplicate-square control and an outside-container
+control, each in its own child process, on two workers.
+Every positive passes both routes, and both routes refuse every control.
+Every positive clears every wall by $10^{-9}$ exactly and every pair by more than that,
+at least $1.003$, $1.002$ and $1.030 \times 10^{-9}$ at 227, 229 and 260.
+The 9 jobs made 512,562 pair decisions in 425.22 route CPU seconds and 489.54 job wall
+seconds, summed; the longest job took 71.04 seconds.
+[receipts/exact-certification.json.xz](receipts/exact-certification.json.xz) keeps every
+deciding input and both routes’ complete outputs, and `check --replay` decided all nine
+jobs again and held each to its retained row.
+After the merge with `main` at `d588ad987` the same day, `check --replay` decided all nine
+again in 116 seconds of wall on one process, and `check-claims` rebuilt the frozen
+comparison equal.
+The two routes share certificate parsing, the half-angle conversion, Python’s rational
+arithmetic and the separating-axis method, so they are two implementations of one
+method. Neither is the author’s code, and the source’s three checkers were not run.
+
 ## Compressed Files
 
 | Stored file | Origin | Git blob of stored file | SHA-256 of decompressed source |

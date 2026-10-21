@@ -2840,8 +2840,13 @@ verifiers:
     versions:
     - sha256: 8e2141bfa0b233173e442517035783f6598610398fe9896e9a9977d7383dcc17
       path: packing/devtools/evand_arrangement_reports.py
-      note: The source the n183 primary batch ran, unchanged since; the retained seven-file
-        provenance identifies the historical run
+      note: The source the n183 primary batch ran; the retained seven-file provenance
+        identifies the historical run
+    - sha256: be329074444bd56e74b44ff5a10e9e15c3f83774e854f883c03ebeedf8d0bc89
+      path: packing/devtools/evand_arrangement_reports.py
+      note: The kernel with SHARP_CONTROLS, sharp_input and run_sharp added for review A
+        of PR 704 (RF-2), outside JOBS, so the full roster every receipt holds is
+        unchanged
 
   - id: V-algebraic-witness-reports
     program: devtools.algebraic_witness_reports
@@ -2881,7 +2886,8 @@ verifiers:
       packet's declaration: admits custody through acquire_source, reads each retained
       file or derived fact by its declared adapter (Evan Daniel's text format, SQUISH's
       JSON, centred JSON, PingYou Ltd's JSON, Daniil Ostashev's sqcert files, Rio Calle's
-      decimal layouts, rational corners witnesses, decimal poses by a declared dilation),
+      decimal layouts, rational corners witnesses, decimal poses by a declared dilation,
+      Joost de Winter's centre-basis JSON),
       holds a derived fact to any file its row names as the same packing, admits each side
       only where it equals or rounds up to its print, rebuilds the frozen claim comparison
       and the register plan, and drives the arrangement kernel's two exact routes and two
@@ -2917,7 +2923,11 @@ verifiers:
       (docs/project/reviews/review-2026-10-12-upper-bound-imports-528-529.md) read them in
       full. The import lane of issue 552 added a HOUSES reader of its packet, which the
       12 October review of that issue
-      (docs/project/reviews/review-2026-10-12-upper-bound-import-552.md) read.
+      (docs/project/reviews/review-2026-10-12-upper-bound-import-552.md) read. The import
+      lane of issue 668 added the center-basis-json adapter, which reads each square's
+      rational centre and basis and refuses a basis that is not exactly the rotation its
+      half-angle tangent gives, and a HOUSES reader of its packet; no stage 4 review has
+      read them yet (think-455r).
 
     versions:
     - sha256: bc47273499dccbd59997bbdd4028176eb09621865b25854f511f9cf872ce1156
@@ -2926,8 +2936,21 @@ verifiers:
         records it
     - sha256: e8bb87fa8acb5470bee92d9f77cb158a11bd780d6e5f8c38a12bf77870573a08
       path: packing/devtools/upper_bound_reports.py
-      note: The current driver, which adds only the n183 packet to HOUSES, the reader that
+      note: The driver of pull request 687, which adds only the n183 packet to HOUSES, the reader that
         receipt admission and house selection use; it decided no n183 geometry
+    - sha256: 6824c09ea3db501b62a68aa7ddb44066e36e464fff60aabfb4d11af0bb5832f4
+      path: packing/devtools/upper_bound_reports.py
+      note: The driver that certified issue 668's three certificates on 20 October 2026, at
+        7c801b596, adding the center-basis-json adapter
+    - sha256: 4272f93cb84af86a196aaf68df81544f623ff8c69be0e9ff687e6808bfe5d576
+      path: packing/devtools/upper_bound_reports.py
+      note: The same driver merged with main d588ad987, which adds only the n183 HOUSES
+        reader beside it, with the adapter's square fields typed for the type floor; it
+        ran issue 668's check --replay again
+    - sha256: 044639ffbca7abbda7a77024ff8afd70ec0fb4f9316a3fbc7ada4f64a110442d
+      path: packing/devtools/upper_bound_reports.py
+      note: The same driver with center_basis_json's docstring saying the basis (-1, 0) is
+        refused (RF-3 of review A of PR 704); it decides nothing differently
 
   - id: V-rehwaldt-n68-verify
     program: verify.py
@@ -4018,6 +4041,106 @@ verifiers:
     note: >-
       Written on 16 October 2026 for docs/project/reviews/review-2026-10-16-pingyou-n29.md
       and kept, with everything it printed, in the packet's review/ directory.
+
+  - id: V-de-winter-668-review-check
+    program: review/review-2026-10-20/programs/review_704_check.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      Decides Joost de Winter's three centre-basis certificates of issue 668 with its own
+      reader: every basis on the unit circle exactly, every square in the closed box by its
+      centre and half-extent, every pair by separating axes on the squares' unit edge normals,
+      and every pair whose centres are within sqrt(2) again by the exact area one square's
+      closed half-planes clip from the other; holds each print to the side rounded up at 12
+      places and each least margin to the replay receipt's two routes. Standard library only.
+    source:
+      - packing/resources/web/de-winter-upper-bounds-227-229-260-2026-10-17/review/review-2026-10-20/programs/review_704_check.py
+    versions:
+      - sha256: 66e85c11fc2f9a028a44ce38774966783c08d5e78b3ec56f389cd8c9ceb94abc
+    independence_record: >-
+      packing/resources/web/de-winter-upper-bounds-227-229-260-2026-10-17/review/review-2026-10-20/README.md
+    independence:
+      read:
+        - mathematics
+        - certificate-format
+        - producer-code
+        - producer-output
+        - earlier-review
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 review lane of 20 October 2026 (think-455r), strong sub-agent tier,
+            max reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The source's checkers were written with OpenAI Codex agents, and the issue says
+          Claude replayed them and prepared the repository for publication. The review read
+          the source's verify_exact.py and verify_polygon_exact.py in full and every route of
+          the replay before writing this program, and read the earlier review's summaries in
+          the beads after its findings were written; it imports and copies none of their code.
+    note: >-
+      Written on 20 October 2026 for
+      docs/project/reviews/review-2026-10-20-de-winter-668-upper-bounds.md and kept, with
+      everything it printed, in the packet's review/review-2026-10-20/ directory.
+
+  - id: V-de-winter-668-sharp-controls
+    program: review/review-2026-10-20/programs/sharp_controls_704.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      Builds six mutants of a de Winter certificate of issue 668 at the scale of its margins
+      and decides them through devtools.upper_bound_reports' center-basis-json adapter and
+      the two maintained routes (sqpack.verify and the independent rational corner checker):
+      the side lowered by exactly its least wall clearance and by 1e-30 more, the least-gap
+      pair closed by exactly its gap and by 1e-30 more, a basis 1e-30 off the unit circle and
+      a coordinate as a JSON number; it also clips the moved pair exactly with the review's
+      own route. The geometric decisions are the maintained routes'.
+    source:
+      - packing/resources/web/de-winter-upper-bounds-227-229-260-2026-10-17/review/review-2026-10-20/programs/sharp_controls_704.py
+    versions:
+      - sha256: 29ee686a077e99c1a80fb115a9af3201bf2c1ba8f3ca58cb12b623159e6997e1
+    independence_record: >-
+      packing/resources/web/de-winter-upper-bounds-227-229-260-2026-10-17/review/review-2026-10-20/README.md
+    independence:
+      read:
+        - mathematics
+        - certificate-format
+        - producer-code
+        - producer-output
+        - earlier-review
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the stage 4 review lane of 20 October 2026 (think-455r), strong sub-agent tier,
+            max reasoning
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          It drives this repository's adapter and two maintained routes, which are Claude
+          lanes' work, and the review's own route; none of the source's code is imported or
+          copied. The source's audit controls (a shrunken box, an invalid unit basis) are the
+          same ideas as two of its mutants, read before it was written.
+    note: >-
+      Written on 20 October 2026 for
+      docs/project/reviews/review-2026-10-20-de-winter-668-upper-bounds.md (RF-2) and kept,
+      with everything it printed, in the packet's review/review-2026-10-20/ directory.
 
   - id: V-audit-fine-net-receipt
     program: devtools.audit_fine_net_receipt

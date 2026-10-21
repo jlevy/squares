@@ -1,0 +1,140 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "https://github.com/jlevy/squares/issues/668",
+  "author": "Joost de Winter",
+  "source_key": "[de Winter upper bounds 2026-10-17]",
+  "report_evidence": "E-de-winter-668-upper-report",
+  "receipt_format": "de-winter-668-exact-replay-v1",
+  "witness_prefix": "W-de-winter-668-n",
+  "claim_limitations": "Complete 9bf5d9b (claim pin c95c493) rational centre-basis certificates read exactly from the retained source. Finite construction feasibility only; no optimality, local minimum, rigidity, novelty, priority or global optimality claim.",
+  "read_on": "2026-10-20",
+  "read_at_main": "f76d57a40eaf4e1a5339826e07588d478b5c233e",
+  "certificates": [
+    {
+      "n": 227,
+      "path": "n227/n227_exact.json",
+      "format": "center-basis-json",
+      "offered": "15.563796703670",
+      "first_committed": "2026-10-17T13:52:56Z",
+      "same_packing": []
+    },
+    {
+      "n": 229,
+      "path": "n229/n229_exact.json",
+      "format": "center-basis-json",
+      "offered": "15.650174756949",
+      "first_committed": "2026-10-17T13:52:56Z",
+      "same_packing": []
+    },
+    {
+      "n": 260,
+      "path": "n260/n260_exact.json",
+      "format": "center-basis-json",
+      "offered": "16.645778804182",
+      "first_committed": "2026-10-17T13:52:56Z",
+      "same_packing": []
+    }
+  ],
+  "requested": [
+    227,
+    229,
+    260
+  ],
+  "replayed": [
+    227,
+    229,
+    260
+  ],
+  "houses": [
+    {
+      "n": 227,
+      "reader": "[Daniel regularizer 2026-10-11]",
+      "source_key": "[Kingbird]",
+      "holders": "David Ellsworth, the Kingbird catalogue, verified by T-155's exact ceiling",
+      "result": "T-155",
+      "reported_value": "15.57106781186547",
+      "verified_value": "15.57106781186548",
+      "evidence": [
+        "E-regularized-bounds-2026-10-12-exact-decision"
+      ],
+      "reported_rounding": "unstated"
+    },
+    {
+      "n": 229,
+      "reader": "[Daniel n229 dilation update 2026-10-18]",
+      "source_key": "[Daniel n229 dilation update 2026-10-18]",
+      "holders": "Evan Daniel",
+      "result": "T-199",
+      "reported_value": "15.6501615138955532",
+      "verified_value": "15.6501615138955532",
+      "evidence": [
+        "E-evand-674-n229-update-exact-feasibility"
+      ]
+    },
+    {
+      "n": 260,
+      "reader": "[Daniel regularizer 2026-10-11]",
+      "source_key": "[Kingbird]",
+      "holders": "David Ellsworth, the Kingbird catalogue, verified by T-155's exact ceiling",
+      "result": "T-155",
+      "reported_value": "16.65685424949238",
+      "verified_value": "16.65685424949239",
+      "evidence": [
+        "E-regularized-bounds-2026-10-12-exact-decision"
+      ],
+      "reported_rounding": "unstated"
+    }
+  ],
+  "pending": [
+    {
+      "n": 227,
+      "report": "#672",
+      "url": "https://github.com/jlevy/squares/issues/672",
+      "holders": "Francisco Couzo",
+      "printed": "15.563625652343",
+      "rounding": "up"
+    },
+    {
+      "n": 229,
+      "report": "#672",
+      "url": "https://github.com/jlevy/squares/issues/672",
+      "holders": "Francisco Couzo",
+      "printed": "15.650174740273",
+      "rounding": "up"
+    },
+    {
+      "n": 229,
+      "report": "T-198 (#674)",
+      "url": "https://github.com/jlevy/squares/issues/674",
+      "holders": "Evan Daniel",
+      "result": "T-198",
+      "reader": "[Daniel n229 dilation 2026-10-17]"
+    },
+    {
+      "n": 260,
+      "report": "#678",
+      "url": "https://github.com/jlevy/squares/issues/678",
+      "holders": "Francisco Couzo",
+      "printed": "16.645753250545",
+      "rounding": "up"
+    }
+  ],
+  "register": {
+    "title": "Joost de Winter's upper bounds at 227, 229 and 260, issue668",
+    "headline": "de Winter reports three smaller rational upper bounds at 227, 229 and 260",
+    "significance": 3,
+    "source_checks": "The source reports that three stdlib exact checkers (centre/basis separating axes, vertex/edge-normal separating axes and exact polygon clipping) accept each witness, bound to its manifest digest by verify_all.py. No source program ran here.",
+    "credit": "Credit Joost de Winter (https://github.com/JoostdeWinter/square-packing); the source states the search and certificates were produced with OpenAI Codex agents under his direction, and the issue discloses Claude replay and publication preparation.",
+    "next_rung": "Adopt at 227 and 260 with their regularization runs; T-199 is smaller at 229.",
+    "bead": "think-qdcc",
+    "bibliography": {
+      "authors": [
+        "de Winter"
+      ],
+      "lineage": "builds-on-project",
+      "credit": "de Winter after Levy",
+      "short_credit": "de Winter after Levy",
+      "note": "The existing bibliography key, unchanged by this import."
+    }
+  }
+}

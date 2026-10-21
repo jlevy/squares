@@ -765,6 +765,45 @@ def witness_center_basis(raw: bytes, n: int, options: Mapping[str, str]) -> lega
     return _certificate(n, _literal(witness["side"], f"n={n} side"), rows)
 
 
+def center_basis_json(raw: bytes, n: int, options: Mapping[str, str]) -> legacy.Certificate:
+    """Rational centre-basis JSON (#668): exactly ``n``, ``side`` and ``{center, basis}``.
+
+    Joost de Winter's exact witnesses state each unit square by its centre in ``[0, S]^2``
+    and its basis ``(c, s)``, every number a rational string. A pose is the centre and
+    ``t = s / (1 + c)``, and the basis must be exactly the rotation that ``t`` gives, which
+    holds only where ``c^2 + s^2 = 1``. JSON numbers are refused, so no float is read.
+
+    The basis ``(-1, 0)``, a turn by pi, has no finite half-angle tangent, and is refused
+    rather than read: it is on the unit circle and draws the same square as ``(1, 0)``, so
+    a certificate that states it is refused although it is valid, and none of #668's does
+    (RF-3 of the 20 October review). The refusal fails closed; reading it as ``(1, 0)``
+    would be the change that admits such a certificate.
+    """
+    _no_options(options, "center-basis-json")
+    value = _json(raw)
+    squares = _squares(value, n)
+    _require(
+        set(value) == {"n", "side", "squares"},
+        f"n={n}: not a centre-basis certificate of exactly n, side and squares",
+    )
+    rows = []
+    for index, square in enumerate(squares, start=1):
+        where = f"n={n} square {index}"
+        fields: dict[str, Any] = square if type(square) is dict else {}
+        _require(
+            set(fields) == {"center", "basis"}
+            and all(type(fields[key]) is list and len(fields[key]) == 2 for key in fields),
+            f"{where}: not exactly a centre and a basis of two rationals each",
+        )
+        x, y = (_literal(item, where) for item in fields["center"])
+        c, s = (_literal(item, where) for item in fields["basis"])
+        _require(c != -1, f"{where}: no finite half-angle")
+        pose = legacy.Pose(x, y, s / (1 + c))
+        _require(pose.basis == (c, s), f"{where}: the basis is no rotation")
+        rows.append((pose.x, pose.y, pose.t))
+    return _certificate(n, _literal(value["side"], f"n={n} side"), rows)
+
+
 def centred_json(raw: bytes, n: int, options: Mapping[str, str]) -> legacy.Certificate:
     """Centred JSON (#483): ``side`` and ``{x, y, t}`` squares in [-S/2, S/2]^2.
 
@@ -1039,6 +1078,7 @@ ADAPTERS: dict[str, Adapter] = {
     "pingyou-json": pingyou_json,
     "witness-corners": witness_corners,
     "witness-center-basis": witness_center_basis,
+    "center-basis-json": center_basis_json,
     "centred-json": centred_json,
     "decimal-dilation": decimal_dilation,
     "sqcert": sqcert,
@@ -1341,6 +1381,9 @@ HOUSES: dict[str, Callable[[int], Fraction]] = {
     "[Daniel n183 subgrid 2026-10-19]": _import("evand-n183-subgrid-2026-10-19"),
     "[Daniel n308 2026-10-19]": _import("evand-n308-2026-10-19"),
     "[Daniel n154 sweep 2026-10-20]": _import("evand-n154-sweep-2026-10-20"),
+    "[de Winter upper bounds 2026-10-17]": _import(
+        "de-winter-upper-bounds-227-229-260-2026-10-17"
+    ),
     "[Daniel n270 sweep 2026-10-20]": _import("evand-n270-sweep-2026-10-20"),
     "[Daniel regularized lists 2026-10-20]": _import("evand-regularized-2026-10-20"),
     # T-155: the side of the retained view of Evan Daniel's regularizer at each count.

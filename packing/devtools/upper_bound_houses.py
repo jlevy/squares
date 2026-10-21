@@ -309,6 +309,7 @@ def _sources() -> dict[str, Source]:
         packet_source("T-188", "couzo-verified-bounds-2026-10-14"),
         packet_source("T-190", "couzo-n237-2026-10-15"),
         packet_source("T-195", "pingyou-pr622-certificate-2026-10-15"),
+        packet_source("T-196", "de-winter-upper-bounds-227-229-260-2026-10-17"),
         packet_source("T-197", "evand-n155-explorer-2026-10-17"),
         packet_source("T-199", "evand-n229-dilation-update-2026-10-18"),
         packet_source("T-218", "evand-n236-2026-10-16"),
@@ -343,8 +344,9 @@ def _sources() -> dict[str, Source]:
 #: certificate (T-195) at 29. The pass of 19 October 2026 adopted Evan Daniel's
 #: certificates of issues 669 (T-197), 674 (T-199), 659 (T-218), 664 (T-219) and 680
 #: (T-220) at 155, 229, 236, 271 and 183, and the pass of 20 October 2026 his certificates
-#: of issues 694 (T-222) and 689 (T-221) at 154 and 308, and the pass of 21 October 2026
-#: his certificate of issue 703 (T-224) at 270.
+#: of issues 694 (T-222) and 689 (T-221) at 154 and 308, and Joost de Winter's
+#: certificates of issue 668 (T-196) at 227 and 260. The pass of 21 October 2026 adopted
+#: Evan Daniel's certificate of issue 703 (T-224) at 270.
 ADOPTED: dict[int, str] = {
     29: "T-195",
     68: "T-174",
@@ -383,6 +385,7 @@ ADOPTED: dict[int, str] = {
     209: "T-174",
     210: "T-174",
     211: "T-188",
+    227: "T-196",
     228: "T-174",
     229: "T-199",
     232: "T-186",
@@ -394,6 +397,7 @@ ADOPTED: dict[int, str] = {
     241: "T-182",
     258: "T-146",
     259: "T-136",
+    260: "T-196",
     261: "T-174",
     263: "T-174",
     264: "T-186",
@@ -453,10 +457,13 @@ NUMBERS = tuple(sorted(ADOPTED))
 #: at 183 from the case's trivial 14 x 14 grid, which no pass had adopted before. The pass
 #: of 20 October 2026 adopted Evan Daniel's certificates after the 20 October review: issue
 #: 694 (T-222) at 154 from T-186, continuing Francisco Couzo's #586 arrangement, and issue
-#: 689 (T-221) at 308 from T-174, another arrangement of the two-wedge design. The pass of
-#: 21 October 2026 adopted his certificate of issue 703 (T-224) after the 21 October
-#: review, at 270 from T-174: another arrangement of the design of Nate Chaoweeraprasit's
-#: #500 packing, which T-174 refines, found from that packing.
+#: 689 (T-221) at 308 from T-174, another arrangement of the two-wedge design; and Joost de
+#: Winter's certificates of issue 668 (T-196), after their own 20 October review, at 227 and
+#: 260 from the case records' own (the Kingbird catalogue's packings, verified by T-155's
+#: exact ceilings), which no pass had adopted before; at 229 T-199 stays. The pass of
+#: 21 October 2026 adopted Evan Daniel's certificate of issue 703 (T-224) after the 21
+#: October review, at 270 from T-174: another arrangement of the design of Nate
+#: Chaoweeraprasit's #500 packing, which T-174 refines, found from that packing.
 #: A count a pass names keeps its place in the earlier passes' sets, which their archives
 #: hold; it was adopted on the latest day that names it.
 LATER_PASSES: dict[str, frozenset[int]] = {
@@ -529,7 +536,7 @@ LATER_PASSES: dict[str, frozenset[int]] = {
         }
     ),
     "2026-10-19": frozenset({155, 183, 229, 236, 271}),
-    "2026-10-20": frozenset({154, 308}),
+    "2026-10-20": frozenset({154, 227, 260, 308}),
     "2026-10-21": frozenset({270}),
 }
 
@@ -794,13 +801,16 @@ def linked_house_problem(path: str, *, repository: Path) -> str | None:
 #: Where the custody run's receipt is kept: one record for every adopted packet.
 CUSTODY_RECEIPT = ROOT / "devtools/house-custody-2026-10-11.json"
 CUSTODY_FORMAT = "AdoptedHouseCustody/v1"
-#: The worker's deadline: it admits all 68 houses and refuses 40 mutations, two for each
-#: of the twenty results (23.62 s in the worker on 21 October 2026, after the adoption at
-#: 270, at a load average of about four; 20.55 s on 20 October 2026, after the adoption at
-#: 154 and 308, with 7.76 s of setup, and 24.0 s after the merge with main that morning,
-#: with 14.25 s; earlier readings: 59.18 s for 67 houses on 19 October at a
-#: load average of about seven, 28.36 s for 65 houses on 17 October at about five, and
-#: 48.95 s for 52 houses on 16 October at about ten).
+#: The worker's deadline: it admits all 70 house best packings and refuses 42 mutations,
+#: two for each of the twenty-one results (23.33 s in the worker on 21 October 2026,
+#: after the merge of main 7eeab1f5e, at a load average of about four; 21.69 s after the
+#: merge of main 51ac9d7ee, at about one; 23.62 s on main after the adoption at 270, at
+#: about four; 25.76 s on 20 October 2026, after the adoptions at 154 and 308 and at 227
+#: and 260, at about nine; 20.55 s after the adoption at 154 and 308 alone, with 7.76 s
+#: of setup, and 24.0 s after the merge with main that morning, with 14.25 s; earlier
+#: readings: 59.18 s for 67 of them on 19 October at a load average of about seven,
+#: 28.36 s for 65 on 17 October at about five, and 48.95 s for 52 on 16 October at about
+#: ten).
 CUSTODY_TIMEOUT = 120
 
 

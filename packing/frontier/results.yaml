@@ -27529,33 +27529,41 @@ results:
     landed: '2026-10-19'
     headline: de Winter reports three smaller rational upper bounds at 227, 229 and 260
     claim: >-
-      The source reports complete rational unit-square certificates at the exact sides stated: s(227) <=
+      Three complete rational source certificates report finite upper-bound improvements at the
+      exact sides they state: s(227) <=
       194547458795865848854407472552117653131825098066089500568310019841668910818842825068644658133972443495777187230686109286929082683273291187074040913251499/12500000000000000000000000000001272204783003459957077568639425038233180795950995922365041743732086145591922059343477256613382050000000000000000000000000;
       s(229) <= 156501747569482131747919637148801852719869637315233948984618327625011520667543259632677498716011131748832131668750692746335433269145213277034738380207139541/10000000000000000000000000000001737366297119815888250696550926607660931327350731575578989919015034082413286101971092035771621296900000000000000000000000000;
       s(260) <= 16645778804181379786535601/1000000000000000000000000.
 
+      The three certificates and their duplicate-square and outside-container controls were
+      decided here on 20 October 2026 by both maintained exact routes, and the frozen
+      comparison rebuilt; no route here is the source's code, so the replay is independently
+      re-implemented. The 20 October review decided all three again on a third exact route of
+      its own, refused sharp controls 1e-30 past contact on both maintained routes, and found
+      no blocking defect.
+
       Issue 668 reports the three exact rational certificate sides on 17 October; the retained
-      licensed successor changes only LICENSE and the root README. The ledger preserves this report
-      before Couzo issue 672 and Daniel issue 674 at overlapping counts. At 227 Couzo has a later smaller
-      pending claim, owned by think-2vjc; at 229 the final retained Daniel update is the latest registered report. No arrangement
-      identity, local minimum or optimum is established. The separately owned mathematical review (think-455r)
-      and completed source replay with controls (think-8xr0) await their own dependent PRs and are not adopted
-      by this registration.
+      licensed successor changes only LICENSE and the root README. The ledger preserves this
+      report before Couzo issue 672 and Daniel issue 674 at overlapping counts. No arrangement
+      identity, local minimum or optimum is established.
     scope:
       n_values:
         - 227
         - 229
         - 260
-    verification: V0
-    confirmation: C0
+    verification: V3
+    confirmation: C3
     significance:
       score: 3
-      rationale: Three new source-reported packing improvements, including the movement at 260 from the
-        earlier catalogue construction; a draft S3 assessment for the separate mathematical review to confirm
-        or change.
-      scored: '2026-10-18'
-      by: think-1ayi October 18 intake registration draft; separate mathematical review confirms or changes
-        it
+      rationale: >-
+        Two case ceilings move, by 7.27e-03 at 227 and 1.11e-02 at 260, the first improvement at
+        260 below 11 + 4*sqrt(2), in a construction family that Couzo and Daniel improved
+        further within three days; no lower bound or optimum.
+      scored: '2026-10-20'
+      by: >-
+        the 20 October review
+        (docs/project/reviews/review-2026-10-20-de-winter-668-upper-bounds.md), confirming
+        the draft S3 of think-1ayi's October 18 intake registration
     novelty: previously-published
     attribution:
       source_keys:
@@ -27563,39 +27571,82 @@ results:
       published: '2026-10-17'
     evidence:
       - E-de-winter-668-upper-report
+      - E-de-winter-668-upper-exact-feasibility
     artifacts:
       - packing/resources/web/de-winter-upper-bounds-227-229-260-2026-10-17/README.md
       - packing/resources/web/de-winter-upper-bounds-227-229-260-2026-10-17/source/n227/n227_exact.json.gz
       - packing/resources/web/de-winter-upper-bounds-227-229-260-2026-10-17/source/n229/n229_exact.json.gz
       - packing/resources/web/de-winter-upper-bounds-227-229-260-2026-10-17/source/n260/n260_exact.json.gz
+      - packing/resources/web/de-winter-upper-bounds-227-229-260-2026-10-17/acquisition/claims.json
+      - packing/resources/web/de-winter-upper-bounds-227-229-260-2026-10-17/receipts/exact-certification.json.xz
+      - packing/resources/web/de-winter-upper-bounds-227-229-260-2026-10-17/review/review-2026-10-20/README.md
       - packing/campaign/issue-intake/upper-bounds-20261018/README.md
+      - docs/project/reviews/review-2026-10-20-de-winter-668-upper-bounds.md
+    controls:
+      - packing/tests/test_upper_bound_reports.py
+      - packing/tests/test_upper_bound_reports_668.py
+      - packing/tests/test_evand_arrangement_reports.py
     notes: |-
-      Registered as a reported finite upper bound in the intake layer after PR 661. Both case
-      upper lanes and the retained houses remain unchanged; each better exact claim is pending
-      adoption. This entry incorporates no separate mathematical review or source-replay
-      receipt, so its declared rungs follow only the reported evidence.
+      A complete repository replay is retained for n = 227, 229 and 260: 3 positives and 6
+      duplicate-square and outside-container controls passed their required outcomes on both
+      routes, 512562 pair decisions; summed over the 9 jobs, the receipt records 425.22 route
+      CPU seconds and 489.54 job wall seconds, the longest job 71.04 seconds. Every positive
+      clears every wall by 1e-9 exactly and every pair by at least 1.002e-9. The receipt is
+      receipts/exact-certification.json.xz in de-winter-upper-bounds-227-229-260-2026-10-17.
 
-      The three-witness report precedes Couzo's and Daniel's overlapping claims in the
-      report-order ledger. The retained licensed successor changes only LICENSE and the root README. At
-      227 Couzo has a later smaller pending import under think-2vjc; at 229 Daniel's later
-      update is the latest registered report.
+      The 20 October review decided the three certificates again on its own exact route
+      (unit circle, half-extent containment, every pair by separating axes and every pair
+      within sqrt(2) again by exact clipping area), equal to both maintained routes at every
+      number they share, and ran six mutants a count through the adapter and both routes at
+      227 and 260: the side lowered by exactly its clearance and the least-gap pair closed by
+      exactly its gap passed at exact contact, the same 1e-30 further was refused on both
+      routes, and a basis 1e-30 off the unit circle and a coordinate as a JSON number were
+      refused by the adapter. Its programs and outputs are in the packet's
+      review/review-2026-10-20/. The kernel's own sharp controls
+      (evand_arrangement_reports.SHARP_CONTROLS) are refused on both routes at 260 by
+      test_evand_arrangement_reports, in the deep surface.
 
-      The separately returned mapped review and completed source replay with controls await
-      their own descendant PRs under think-455r and think-8xr0. No arrangement identity,
-      numerical local minimum or optimum is adopted.
-    next_rung: C1 needs the separate mapped mathematical review bound to this exact claim; C3 needs the
-      completed full retained source replay, adversarial controls and accepted review integrated in their
-      own descendant PRs. The replay and controls have completed separately under think-8xr0 and await integration.
-    unfinished_confirmations:
-      - what: Integrate the separate mapped mathematical review after binding actual result IDs; no review
-          is adopted by this registration.
-        rung: C1
-        link: think-455r
-      - what: Integrate the separately completed full retained source replay and geometric controls with
-          the accepted mapped mathematical review and exact claim binding in their own descendant PRs; this
-          registration adopts no confirmation.
-        rung: C3
-        link: think-8xr0
+      At n = 227 the certificate is below the earlier verified ceiling (David Ellsworth, the
+      Kingbird catalogue, verified by T-155's exact ceiling) by 7.27e-03 and above Couzo's
+      later #672 by 1.71e-04. At n = 229 it is above the case's ceiling (Evan Daniel, T-199)
+      by 1.32e-05, above Daniel's T-198 by 1.15e-05 and above Couzo's #672 by 1.67e-08. At
+      n = 260 it is below the earlier verified ceiling (the Kingbird catalogue, T-155) by
+      1.11e-02 and above Couzo's later #678, registered as T-223 at V0/C0, by 2.56e-05.
+
+      The source's own checkers were not run here. The two maintained routes, the sqpack
+      rational witness verifier and the independent rational corner checker, share certificate
+      parsing, half-angle conversion, Fraction arithmetic and the separating-axis method; the
+      review's route shares Fraction arithmetic and the format's meaning only. No optimality,
+      local minimum or human oversight is claimed.
+
+      V3 and C3 rest on the replay (E-de-winter-668-upper-exact-feasibility) and the 20
+      October review. The cases at 227 and 260 adopted these certificates as their house best
+      packings on 20 October 2026, with both strong regularizers' runs; at 229 the case keeps
+      T-199. A later validated certificate below T-196 at 227 or 260, such as Couzo's #672 or
+      T-223, replaces it there under the house rule.
+    next_rung: >-
+      None for the bound. V4 and C4 need a second accepted adversarial review by a distinct
+      reviewer and a retained human oversight record; one AI review, of 20 October, is
+      retained.
+    reviews:
+      - path: docs/project/reviews/review-2026-10-20-de-winter-668-upper-bounds.md
+        kind: adversarial
+        reviewer: >-
+          AI agent (Claude, strong sub-agent tier, max reasoning), the stage 4 review lane
+          (W2) of the 2026-10-20 intake (think-455r), prompted separately from the replay
+          and records lanes, with no shared context beyond their committed packet, register
+          entries and pull request
+        reviewer_kind: ai
+        relation: project
+        date: '2026-10-20'
+        scope: >-
+          Finite feasibility of the three certificates T-196 cites: the retained receipt read
+          and admitted, the three certificates decided again on a third exact route written
+          for the review, six sharp mutants a count at 227 and 260 decided through the adapter
+          and both maintained routes, each route's trust boundary, and every side and margin
+          against the case ceilings and every report registered or pending at each count.
+        verdict: accepted
+        covers: [T-196]
   - id: T-197
     kind: upper-bound
     registered: '2026-10-18'
@@ -30486,9 +30537,10 @@ results:
 
       At 204 the certificate is below the case's ceiling (Daniil Ostashev, improved by PingYou
       Ltd and Mishapolk, T-186) by 2.04e-05, and below Couzo's earlier #670 and #675 prints,
-      which are not yet in the register. At 260 it is below T-196 (#668), pending adoption, by
-      2.56e-05, and below the case's ceiling (T-155) by 1.11e-02; it reached this repository
-      after T-196 and does not rewrite it. The 19 October ledger records both in report order.
+      which are not yet in the register. At 260 it is below T-196 (#668), the house best packing
+      there since 20 October 2026, by 2.56e-05, and below the earlier ceiling (T-155) by
+      1.11e-02; it reached this repository after T-196 and does not rewrite it. The 19 October
+      ledger records both in report order.
 
       The two routes share certificate parsing, half-angle conversion, the pair filter and
       Fraction arithmetic. No two independent methods, human oversight or optimality is claimed.
@@ -31610,18 +31662,19 @@ regularized_drawings:
         max_turn_deg: 0.381777
       view: packing/atlas/known-best/regularized/n-211-regularized.yaml.gz
     - n: 227
-      of: T-155
+      of: T-196
       by: project
-      method: "regularize_grid_slack/1: Evan Daniel's coincidence placement (evand/square-packing search/regularize reg.coincidences and reg.place, MIT), ported to start from the witness's exact frame and to keep its contacts, then the same-side exact re-solve, through devtools.regularize_grid_slack"
-      modifications: ["port of his coincidence placement (regularize_grid_slack/1) rather than his code", "same-side exact re-solve (devtools.regularize_same_side)"]
+      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
       side: same
+      changes: {straightened: 3, re_angled: 3}
       identity:
         basis: measured
         measured_in: packing/atlas/known-best/regularized/index.json
         one_to_one: true
-        moved: 1
-        max_move: 0.2855339
-        max_turn_deg: 0.0
+        moved: 13
+        max_move: 0.08961948
+        max_turn_deg: 0.188587
       view: packing/atlas/known-best/regularized/n-227-regularized.yaml.gz
     - n: 228
       of: T-174
@@ -31788,6 +31841,21 @@ regularized_drawings:
         max_move: 0.1315596
         max_turn_deg: 0.403258
       view: packing/atlas/known-best/regularized/n-259-regularized.yaml.gz
+    - n: 260
+      of: T-196
+      by: project
+      method: "Evan Daniel's search/regularize (MIT), evand/square-packing@675a5ea, conservative, coincide, through devtools.regularize_evand"
+      modifications: ["same-side exact re-solve (devtools.regularize_same_side)"]
+      side: same
+      changes: {re_angled: 2}
+      identity:
+        basis: measured
+        measured_in: packing/atlas/known-best/regularized/index.json
+        one_to_one: true
+        moved: 20
+        max_move: 0.4565619
+        max_turn_deg: 0.0
+      view: packing/atlas/known-best/regularized/n-260-regularized.yaml.gz
     - n: 261
       of: T-174
       by: project

@@ -158,16 +158,18 @@ SCREEN_EXCLUDED: dict[str, tuple[str, ...]] = {
 #: the pass of 19 October 2026 the five it moved to Evan Daniel's certificates: 155, 229,
 #: 236 and 271, and 183 (T-220, think-jh4w), whose new witness has one strictly
 #: separating square, index 11, the one the source calls its rattler, and 28 that
-#: translate, against the grid's 14, and the pass of 20 October 2026 the two it moved to
-#: his issue-694 and issue-689 certificates: 154 (T-222), 9 separating and 61 translating
-#: squares against T-186's 10 and 42, and 308 (T-221), 5 and 43 against T-174's 0 and 20,
-#: and the pass of 21 October 2026 the one it moved to his issue-703 certificate: 270
-#: (T-224), 1 strictly separating square, index 82, and 24 translating squares against
-#: T-174's 1 and 14.
+#: translate, against the grid's 14, and the pass of 20 October 2026 the four it moved: to
+#: his issue-694 and issue-689 certificates, 154 (T-222), 9 separating and 61 translating
+#: squares against T-186's 10 and 42, and 308 (T-221), 5 and 43 against T-174's 0 and 20;
+#: and to Joost de Winter's certificates (T-196, think-qdcc), 227 and 260, whose new
+#: witnesses move the n = 1..324 sums by +6 separating and -8 translating squares; and the
+#: pass of 21 October 2026 the one it moved to his issue-703 certificate: 270 (T-224), 1
+#: strictly separating square, index 82, and 24 translating squares against T-174's 1 and
+#: 14.
 SCREEN_FINDINGS: dict[str, tuple[int, int, int, int]] = {
     "n=1..100": (28, 112, 86, 577),
     "n=1..200": (67, 433, 182, 2113),
-    "n=1..324": (125, 1296, 302, 5282),
+    "n=1..324": (125, 1302, 302, 5274),
 }
 UNDETERMINED_BY_MISS = (28,)
 #: The cases the two sampled sweeps re-derive on every pull request, computed here from
