@@ -3,10 +3,10 @@ type: is
 id: is-01m59h3nyp9m8en4keze936pkz
 title: "Validation backlog: 19 October intake continuation and n183 claim"
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 3
-delegate: codex-intake-backlog-20261019
+version: 5
+delegate: coord-intake-1021b
 labels:
   - validation
 dependencies: []
@@ -14,8 +14,12 @@ parent_id: is-01m59frtdq5mb5wp445nqb4sbd
 hold: null
 hold_until: null
 created_at: 2026-10-19T07:30:40.725Z
-updated_at: 2026-10-19T11:18:44.398Z
+updated_at: 2026-10-21T17:43:18.222Z
 started_at: 2026-10-19T11:18:22.880Z
+closed_at: 2026-10-21T17:43:18.221Z
+close_reason: "Every row is done (21 October triage c-triage-sweep-1021b): think-1hmn (n183 replay), think-glg8 (review) and think-jh4w (adoption with both strong generators) are closed, and T-220 is V3/C3 and the house at 183 on main (#687). No held replay remains. No record names this bead."
+resolution: null
+duplicate_of: null
 ---
 Validation backlog for W1 continuation think-kwol. No unapproved long replay or numerical search has started.
 
