@@ -5,7 +5,7 @@ title: "Import JoostdeWinter: Improved upper bounds for n = 227, 229, 260: regis
 kind: task
 status: in_progress
 priority: 2
-version: 15
+version: 16
 delegate: coord-intake-1021b
 labels:
   - result-import
@@ -20,7 +20,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-18T08:47:35.192Z
-updated_at: 2026-10-21T20:35:32.297Z
+updated_at: 2026-10-21T20:53:34.313Z
 started_at: 2026-10-18T12:36:48.824Z
 ---
 W1 intake 2026-10-18, parent think-xmxb. https://github.com/jlevy/squares/issues/668
@@ -72,3 +72,6 @@ A bounded source-level mathematical read found no blocking geometry finding. Exa
 2026-10-19 20:54Z lane-new: taken over from the 19 October handoff (issue #684) by the coordinator's lane brief; delegate changed from the spud10.local agent. Working in worktree scratchpad lnew/wt, branch claude/intake-2026-10-19-evand-singles (first PR: #659, #664, #669, #673).
 
 2026-10-20 lane-new: PR-2 prep on claude/intake-2026-10-20-de-winter-668 at 7c801b596 (pushed, built on #692): center-basis-json adapter + tests, report.json + claims.json, certify receipt (9 jobs, walls 1e-9, pairs >= 1.002e-9), check --replay passes, house reader, test_upper_bound_reports_668. Stage 4 review requested via the coordinator (brief scratchpad/lnew/review-brief-stage4-668.md). Opens as a PR after #692 merges.
+
+2026-10-21 20:50 coord-intake-1021b: #704 merged 20:34:54Z as 970e89de8 (T-196 V3/C3, house at 227 and 260, site v0.8.15). Deploy verified: Pages run 39671549053, deployment 7236813599, check_published_site 4772/4772. Final reply posted https://github.com/jlevy/squares/issues/668#issuecomment-6326251307 (corrects the 19 October reply on the source-checker replay); #668 closed. Owed: the record of the reply in the next records change (scratchpad replies/668.md); a follow-up comment on #668 when #706 moves 260 to T-223 (the reply promises it); T-196 News entry; stale overview card (overview_sections.py:2361) and bibliography note (de Winter key). Close this bead when the record lands and the follow-up is posted.
+blocked_on: jlevy/squares#706
