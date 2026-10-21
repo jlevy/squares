@@ -1756,12 +1756,18 @@ def _fine_net_lower_projection(
 #: Registrations pending adoption entered at an adopted count after its last pass, keyed by
 #: the count and the result that pass adopted: the evidence id, the resource key and the
 #: heading of the paragraph each adds. T-223 at 204 (#701, review A6) cites its report the
-#: way T-197 cited its own at 155 while T-149 stood there. A registration writes none of
-#: the adoption writer's lanes, so it is checked exactly and projected out; once a later
-#: pass adopts at the count, the key no longer matches and that pass's replay reads the
-#: three as prior state.
+#: way T-197 cited its own at 155 while T-149 stood there, and at 260 it reached `main`
+#: before T-196's adoption of 20 October 2026 did (#704), so the same three follow that
+#: pass's record there. A registration writes none of the adoption writer's lanes, so it
+#: is checked exactly and projected out; once a later pass adopts at the count, the key no
+#: longer matches and that pass's replay reads the three as prior state.
 LATER_PENDING_REPORTS: dict[tuple[int, str], tuple[str, str, str]] = {
     (204, "T-186"): (
+        "E-couzo-678-certificate-report",
+        "[Couzo issue 678 2026-10-18]",
+        "**Reported certificate pending adoption, 2026-10-18.**",
+    ),
+    (260, "T-196"): (
         "E-couzo-678-certificate-report",
         "[Couzo issue 678 2026-10-18]",
         "**Reported certificate pending adoption, 2026-10-18.**",
@@ -2116,7 +2122,9 @@ def test_an_adoption_marks_a_registration_pending_adoption_as_history() -> None:
     sentence after it naming a report pending adoption, as history (review A1 of #692).
     155 is marked by hand (`HAND_MARKED`); 229 is the writer's, and so are 227 and 260,
     which the pass of 20 October 2026 adopted (T-196); the dated sentences after the
-    paragraph there, on the replay and Couzo's later reports, are in the past tense."""
+    paragraph there, on the replay and Couzo's later reports, are in the past tense. A
+    registration still pending adoption that reached a count after its pass is projected out
+    first (`LATER_PENDING_REPORTS`): T-223's paragraph at 260 is current, not stale."""
     stale = (
         "Reported certificate pending adoption",
         "This V0/C0 registration leaves both case upper lanes",
@@ -2142,7 +2150,10 @@ def test_an_adoption_marks_a_registration_pending_adoption_as_history() -> None:
     )
     assert "which the record still prints" not in body229
     for n in (227, 260):
-        body = _flat(select.case_path(n).read_text(encoding="utf-8").split("---\n", 2)[2])
+        text = select.case_path(n).read_text(encoding="utf-8")
+        if (n, "T-196") in LATER_PENDING_REPORTS:
+            text = _later_pending_projection((n, "T-196"), _front(text), text)
+        body = _flat(text.split("---\n", 2)[2])
         assert not [words for words in stale if words in body], n
         opening = f"**Reported certificate, 2026-10-17.** Joost de Winter reported a {n}-square"
         assert opening in body, n
