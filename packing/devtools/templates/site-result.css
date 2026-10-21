@@ -305,3 +305,11 @@
     padding-inline: 0.45rem;
   }
 }
+
+/* Keep the record ID and headline on separate mobile lines before fonts arrive.
+   Otherwise fallback math can fit beside the ID, then wrap as its real face loads. */
+@media screen and (max-width: 40rem) {
+  .site-result > h1 > .site-result-id {
+    display: block;
+  }
+}

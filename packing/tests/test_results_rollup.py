@@ -20,6 +20,7 @@ import html
 import re
 from collections import Counter
 from datetime import date, timedelta
+from html.parser import HTMLParser
 
 import pytest
 
@@ -227,6 +228,29 @@ def test_each_day_lists_exactly_the_entries_that_arrived_on_it(
         assert f"· {count} result{'' if count == 1 else 's'}</span>" in body, day
 
 
+class _CreditHTML(HTMLParser):
+    """Keep credit text, element order and exact attributes while ignoring quotes."""
+
+    def __init__(self, markup: str) -> None:
+        super().__init__(convert_charrefs=True)
+        self.events: list[tuple[str, object]] = []
+        self.parts: list[str] = []
+        self.links: list[dict[str, str | None]] = []
+        self.feed(markup)
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        self.events.append(("start", (tag, sorted(attrs))))
+        if tag == "a":
+            self.links.append(dict(attrs))
+
+    def handle_endtag(self, tag: str) -> None:
+        self.events.append(("end", tag))
+
+    def handle_data(self, data: str) -> None:
+        self.events.append(("text", data))
+        self.parts.append(data)
+
+
 def _assert_finder(
     markup: str, own: list[overview_data.Result] | tuple[overview_data.Result, ...]
 ) -> None:
@@ -237,17 +261,23 @@ def _assert_finder(
     reviewed = {
         credit_finder(result.credit_html or html.escape(result.credit)) for result in own
     }
+    actual = _CreditHTML(markup)
     if len(reviewed) != 1:
-        assert markup == html.escape(finder)
+        assert actual.events == _CreditHTML(html.escape(finder)).events
         return
     expected = next(iter(reviewed))
-    if '<a href="profiles/' in expected:
-        assert markup == f"<span data-contributor-plain>{expected}</span>"
-        assert 'target="_blank"' not in markup
+    if any(
+        (link.get("href") or "").startswith("profiles/") for link in _CreditHTML(expected).links
+    ):
+        assert (
+            actual.events
+            == _CreditHTML(f"<span data-contributor-plain>{expected}</span>").events
+        )
+        assert all(link.get("target") != "_blank" for link in actual.links)
         return
-    assert html.unescape(re.sub(r"<[^>]*>", "", markup)) == finder
+    assert "".join(actual.parts) == finder
     held = Counter(slug for result in own for slug in overview_sections.result_projects(result))
-    links = re.findall(r'href="([^"]+)"', markup)
+    links = [link.get("href") for link in actual.links]
     if not held:
         assert not links
     else:
@@ -290,9 +320,10 @@ def test_a_day_entry_says_what_the_row_says(
             record = result.record
             assert label.lower() == anchor
             assert f'<tr id="{anchor}"' in results
-            assert headline == profile_links.link_prose(
+            expected_headline = profile_links.link_prose(
                 html.escape(overview_sections.plain_text(result.summary), quote=False)
             )
+            assert _CreditHTML(headline).events == _CreditHTML(expected_headline).events
             if len(result.scope) <= overview_sections.ADDED_CASES:
                 assert html.unescape(cases) == f"n = {result.scope}", anchor
             else:
@@ -674,3 +705,45 @@ def test_unresolved_source_credit_does_not_gain_an_alias_identity_in_a_summary()
     assert 'href="https://example.org/work"' in shown
     assert ">Mira</a>" in shown
     assert "profiles/" not in shown
+
+
+@pytest.mark.parametrize("quoted", [False, True])
+def test_finder_html_comparison_accepts_equivalent_attribute_serialization(
+    *, quoted: bool
+) -> None:
+    first = '<a href="profiles/francisco-couzo.html">Couzo</a>'
+    second = '<a href="profiles/oscar-fitzharding.html">Fitzharding</a>'
+    result = overview_data.Result(
+        record={},
+        group="",
+        credit="Couzo, Fitzharding",
+        ours=False,
+        credit_html=first + ", " + second,
+    )
+    markup = f"<span data-contributor-plain>{first}, {second}</span>"
+    if not quoted:
+        markup = re.sub(r'href="([^"]+)"', r"href=\1", markup)
+    _assert_finder(markup, (result,))
+
+
+@pytest.mark.parametrize("mutation", ["name", "url", "duplicate", "order", "new-tab"])
+def test_finder_html_comparison_rejects_changed_reviewed_credits(mutation: str) -> None:
+    first = '<a href="profiles/francisco-couzo.html">Couzo</a>'
+    second = '<a href="profiles/oscar-fitzharding.html">Fitzharding</a>'
+    result = overview_data.Result(
+        record={},
+        group="",
+        credit="Couzo, Fitzharding",
+        ours=False,
+        credit_html=first + ", " + second,
+    )
+    original = f"<span data-contributor-plain>{first}, {second}</span>"
+    changed = {
+        "name": original.replace(">Couzo<", ">Other<"),
+        "url": original.replace("profiles/francisco-couzo.html", "profiles/other.html"),
+        "duplicate": original.replace(first, first + first),
+        "order": f"<span data-contributor-plain>{second}, {first}</span>",
+        "new-tab": original.replace("<a href=", "<a target=_blank href=", 1),
+    }[mutation]
+    with pytest.raises(AssertionError):
+        _assert_finder(changed, (result,))

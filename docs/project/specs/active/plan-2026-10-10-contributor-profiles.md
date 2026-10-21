@@ -144,7 +144,20 @@ remaining quoted-attribute test parser was corrected and passed in 8.05 seconds.
 The three navigation/table modules passed all 53 tests in 72.97 seconds; the browser
 floor passed in 31.32 seconds.
 Astra reviewed the final changes without findings.
-Hosted checks on the pushed integration revision remain required before readiness.
+Hosted checks exposed generated explainer revision dates, quote-sensitive footer and
+credit assertions, and a reproducible mobile result-title font shift.
+The URL registry now agrees with the October 21 explainer revision; parsed HTML
+assertions preserve exact content and links.
+Under `think-i2l2`, result IDs occupy their own line on narrow screens, and heading math
+retains its authored case and normal tracking.
+T-037 measured 0.002 mobile layout shift in repeated light/dark runs, compared with
+0.103 before the fix.
+Eighteen focused tests preserve all 224 titles and cover font arrival across five
+widths. These measurements apply to the tested cases, not every possible title.
+The rebuilt preview passes all 16 peer-page scenarios; the rollup and footer regressions
+pass 30 tests in 45.61 seconds.
+The final browser floor passes in 29.46 seconds.
+Hosted checks on the final pushed revision remain required before readiness.
 Corrections preserve attribution, page budgets and geometry checks; they also fix nested
 case-page profile URLs by rebasing links before optional quote compaction.
 The served-page audit now resolves every profile destination from its containing page,

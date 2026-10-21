@@ -1853,8 +1853,10 @@ def iter_result_fragments(*, result_ids: frozenset[str] | None = None) -> Iterat
         )
         body = body.removesuffix("</div>") + navigation + "</article>"
         heading = (
-            f'<h1 id="{result.id.lower()}">{html.escape(result.id)}: '
-            f"{overview_sections.tex_bounds(result.summary)}</h1>"
+            f'<h1 id="{result.id.lower()}">'
+            f'<span class="site-result-id">{html.escape(result.id)}:</span> '
+            f'<span class="site-result-title">'
+            f"{overview_sections.tex_bounds(result.summary)}</span></h1>"
         )
         body = body.replace(">", ">" + heading, 1)
         page = static_content_page(body, meta=meta, current="results")

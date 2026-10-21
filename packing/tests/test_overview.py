@@ -31,6 +31,7 @@ from devtools import (
     result_overview,
     result_status,
     site_assets,
+    site_math,
     site_topics,
     site_urls,
 )
@@ -2927,6 +2928,45 @@ def test_the_closing_credit_is_two_lines_the_project_and_the_version() -> None:
     assert part in nav_css
 
 
+class _ClosingCredits(HTMLParser):
+    """Read exact footer structure/text independently of attribute serialization."""
+
+    def __init__(self) -> None:
+        super().__init__(convert_charrefs=True)
+        self.footers: list[list[tuple[str, object]]] = []
+        self.depth = 0
+        self.lines = 0
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        classes = (dict(attrs).get("class") or "").split()
+        if tag == "span" and "site-colophon-line" in classes:
+            self.lines += 1
+        if self.depth or (tag == "p" and "site-colophon" in classes):
+            if not self.depth:
+                self.footers.append([])
+            self.depth += 1
+            self.footers[-1].append(("start", (tag, sorted(attrs))))
+
+    def handle_endtag(self, tag: str) -> None:
+        if self.depth:
+            self.footers[-1].append(("end", tag))
+            self.depth -= 1
+
+    def handle_data(self, data: str) -> None:
+        if self.depth:
+            self.footers[-1].append(("text", data))
+
+
+def test_closing_credit_comparison_accepts_unquoted_profile_destinations() -> None:
+    footer = render_overview.colophon_html()
+    expected, compact = _ClosingCredits(), _ClosingCredits()
+    expected.feed(footer)
+    compact.feed(footer.replace('href="profiles/index.html"', "href=profiles/index.html"))
+    assert len(expected.footers) == 1
+    assert compact.footers == expected.footers
+    assert compact.lines == expected.lines == 3
+
+
 @pytest.mark.parametrize(
     "name", sorted((*render_overview.PAGES, *render_contributors.page_paths()))
 )
@@ -2939,9 +2979,12 @@ def test_every_site_page_ends_with_the_closing_credit(
     if directory != ".":
         footer = render_case_pages.rebase_links(footer, directory)
     page = contributor_documents[name] if name in contributor_documents else rendered(name)
-    assert page.count(footer) == 1
-    assert page.count(render_overview.colophon_lines()) == 1
-    assert page.count('class="site-colophon-line"') == 3
+    expected, actual = _ClosingCredits(), _ClosingCredits()
+    expected.feed(footer)
+    actual.feed(page)
+    assert len(expected.footers) == 1
+    assert actual.footers == expected.footers
+    assert actual.lines == expected.lines == 3
 
 
 SITE_NAV_BLOCK = re.compile(r'<nav class="site-nav" aria-label="Site">.*?</nav>', re.DOTALL)
@@ -5994,7 +6037,17 @@ def test_a_result_rows_popover_body_comes_from_one_function(
     for file, row in zip(fragments, overview.results, strict=True):
         assert f"BODY OF {row.id}" in file.html
         assert "<main " in file.html
-        assert "<h1 " in file.html
+        heading = re.search(r"<h1\b[^>]*>(.*?)</h1>", file.html, re.DOTALL)
+        assert heading is not None, row.id
+        assert re.search(r'class=["\']?site-result-id["\']?>', heading[1]), row.id
+        assert re.search(r'class=["\']?site-result-title["\']?>', heading[1]), row.id
+        original = site_math.prepare(
+            f"<h1>{html.escape(row.id)}: {overview_sections.tex_bounds(row.summary)}</h1>"
+        )
+        assert _visible_text(heading[1]) == _visible_text(original), row.id
+        assert re.findall(r"<math\b.*?</math>", heading[1], re.DOTALL) == re.findall(
+            r"<math\b.*?</math>", original, re.DOTALL
+        ), row.id
         assert 'aria-label="Neighboring results"' in file.html
         for neighbor in re.findall(r'rel="(?:prev|next)" href="([^"]+)"', file.html):
             assert f"result/{neighbor}" in {page.name for page in fragments}

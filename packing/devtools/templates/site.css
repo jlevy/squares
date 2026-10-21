@@ -936,6 +936,12 @@ body {
   :is(.kpress-math, .katex) {
   line-height: 0;
 }
+/* Heading capitals and tracking belong to words, not mathematical variables. */
+.site-page :where(h1, h2, h3, h4) .kpress-math {
+  font-variant-caps: normal;
+  letter-spacing: normal;
+  text-transform: none;
+}
 /* The tighter leading takes the room a looser line kept around the headline, so the
    headline carries it as margin: a little above, under the label, and more below, over
    the note. */

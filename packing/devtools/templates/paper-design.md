@@ -2784,6 +2784,12 @@ full overview of that result.
 after it on every page.
 The complete page wraps one `article.site-result[data-result-overview]` with a title,
 neighboring-result navigation, the site’s shell and metadata.
+Its single H1 keeps separate record-ID and headline spans.
+At screen widths up to 40rem, the ID occupies its own line so font arrival cannot push
+the headline off a shared line.
+Desktop and print keep the inline title.
+Heading math resets inherited uppercase transformation, caps and letter spacing;
+variables retain their mathematical case.
 The article has its own IDs and prepared math and may contain a native table for a broad
 result’s cases. The shared loader scopes those IDs and resolves links when the article
 enters a panel, so its content can be read outside the originating table.
