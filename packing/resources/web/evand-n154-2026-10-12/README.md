@@ -52,8 +52,8 @@ only.
 
 The regularized view’s report, `tt_n154_regularized.json`, says
 `"by": ["Francisco Couzo"]`, as the n155, n236 and n271 views’ reports do; the issue
-and its comment credit Couzo’s 5 October packing of 155 squares as the start, and the
-field is retained as the source wrote it.
+credits Couzo’s packings as the start, its comment narrows that to his 5 October packing
+of 155 squares, and the field is retained as the source wrote it.
 [The author’s comment on #669 of 20 October 2026](https://github.com/jlevy/squares/issues/669#issuecomment-6302893217)
 says it is no credit here either: the field was a bug in his tooling, which took it from
 the record holder at that count in his 5 October batch instead of from the packing

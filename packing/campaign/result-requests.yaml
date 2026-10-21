@@ -10736,9 +10736,8 @@ issues:
       asks for, as the record already does; no credit changes on it. The follow-up of 21 October
       (issuecomment-6307196781) named the places the record cites the answer, among them the
       packets of four of the six views; the packets of tt_n154 (evand-n154-2026-10-12) and
-      tt2_n146 (evand-n146-2026-10-14) cite it from the change after that follow-up. Under
-      issue 673's reading the start is what the
-      search was based on, so the case at 155 names Evan Daniel as the finder. The same-side display
+      tt2_n146 (evand-n146-2026-10-14) cite it since #709. Under issue 673's reading the start
+      is what the search was based on, so the case at 155 names Evan Daniel as the finder. The same-side display
       certificate is not a second bound; numerical local-minimum diagnostics remain source
       assertions.
   - number: 670
@@ -14653,10 +14652,10 @@ issues:
       #678 and the watched franciscouzo/square-packing@7b6c87e as the prior record. On main
       (4851d8193) the current row at 343 is #489's, evand-record-hunt3-2026-10-10, at
       18.978232523635611279730512106023, verified; the certificate is 5.500412e-4 below it,
-      exactly. Open PR #701 supersedes that row with Couzo's #678 at 18.978232204823, reported;
-      the certificate is 5.497224e-4 below that print, decided whatever the print rounds. Both are
-      upper bounds reported in order, #678 before #702, each below the last, so the owner's rule of
-      14 October records both; the import runs the report-order ledger once #701 has merged. The
+      exactly. PR #701, since merged, superseded that row with Couzo's #678 at 18.978232204823,
+      reported; the certificate is 5.497224e-4 below that print, decided whatever the print rounds.
+      Both are upper bounds reported in order, #678 before #702, each below the last, so the
+      owner's rule of 14 October records both; the import runs the report-order ledger. The
       replay is the maintained two-route kernel of devtools.evand_arrangement_reports, a positive
       and two controls, as #489's 343 row had: about 45 route CPU seconds, scaled from #689's
       receipt at 308 (35.66 seconds over 3 jobs) by (343/308)^2. The KKT, local-minimum and MILP
