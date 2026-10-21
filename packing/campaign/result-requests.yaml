@@ -10577,7 +10577,10 @@ issues:
     triage: done
     summary: Joost de Winter reports exact rational witnesses at 227, 229 and 260 from square-packing c95c4938;
       three source stdlib Fraction checkers are priced at 0.6 to 1.2 seconds per count. Later Couzo and
-      Daniel reports overlap 227 and 229.
+      Daniel reports overlap 227 and 229, and Couzo's 260. Registered as T-196 on 18 October; replayed on
+      this repository's two exact routes and raised to V3/C3 on 20 October 2026; the 20 October stage 4
+      review accepted it, and the cases at 227 and 260 adopted it as their house best packing the same day,
+      with both strong regularizers' runs. At 229 Evan Daniel's T-199 stays.
     read_through: '2026-10-17T14:06:25Z'
     results:
       - key: n227
@@ -10638,7 +10641,7 @@ issues:
       actual main merge order; no reply is posted. Separate mathematical review and source-replay owners
       retain Stage 4 integration and any adoption. The separately returned full exact review and completed
       source replay/controls are pending separate descendant PRs; this registration adopts neither receipt
-      nor rung. Both case upper lanes and house choices stay unchanged pending Stage 4 adoption. The separately completed source replays and mathematical reviews await descendant integration; no confirmation receipt or rung is adopted here.'
+      nor rung. Both case upper lanes and house choices stay unchanged pending Stage 4 adoption. The separately completed source replays and mathematical reviews await descendant integration; no confirmation receipt or rung is adopted here. On 20 October 2026 the replay was re-run here and integrated (E-de-winter-668-upper-exact-feasibility, think-8xr0) and T-196 raised to V3/C3; the 20 October review (think-455r) accepted it the same day, and the cases at 227 and 260 adopted it with both strong regularizers'' runs.'
   - number: 669
     title: 's(155) ≤ 12.952260944651: registration request'
     author: evand
@@ -12597,8 +12600,9 @@ issues:
       83 certificates are retained in the couzo-issue678-2026-10-18 packet, whose filtered
       exact replay decided all 85 rows on two routes with every control refused, and the 19
       October ledger records every row in report order. T-223 registers 204 and 260, at
-      V3/C3 since the stage 4 review of 20 October, and both cases adopted them as their
-      house best packings that day; the 83 beyond the corpus are dated beyond-horizon rows.
+      V3/C3 since the stage 4 review of 20 October; the case at 204 adopted it as its house
+      best packing that day, and the case at 260 on 21 October, from T-196, which #704 had
+      adopted there on 20 October. The 83 beyond the corpus are dated beyond-horizon rows.
     read_through: '2026-10-19T15:31:25Z'
     results:
     - key: n204
@@ -14476,8 +14480,10 @@ issues:
       same side; a different local minimum from Francisco Couzo's #678 packing, found by a
       population search over his stored near-record 343 packings, in Kevin Fang's two-wedge family
       (#484), which it credits as the construction, as #489 did. 343 is beyond the n <= 324 case
-      corpus. Triaged read-only on 21 October 2026; nothing is retained or replayed yet. Claude
-      assistance disclosed.
+      corpus. Triaged read-only on 21 October 2026; retained the same day in
+      evand-n343-sweep-2026-10-20, replayed on this repository's two exact routes with its
+      controls, and recorded as the current beyond-horizon row at 343, superseding #678's row
+      there in report order. Claude assistance disclosed.
     read_through: '2026-10-20T22:09:31Z'
     results:
     - key: n343
@@ -14487,17 +14493,21 @@ issues:
         packing the source calls a different local minimum from #678's.
       source: body
       not_registered: >-
-        Beyond the n <= 324 corpus, so a dated beyond-horizon row, not a register entry. Custody at
-        the pin, the two-route replay and the row remain on the import bead.
-      queued: true
+        Beyond the n <= 324 corpus: the current row at 343 of the evand-n343-sweep-2026-10-20
+        source, which supersedes couzo-issue678-2026-10-18's row there.
+      queued: false
       bead: think-wuxt
     asks:
     - what: >-
         Credit Evan Daniel as the finder of the packing at 343, and Kevin Fang's two-wedge design
         (#484) as its construction, as at #489's 343.
-      state: queued
+      state: done
       bead: think-wuxt
-      note: Taken up with the beyond-horizon row, whose source's credit line carries it.
+      note: >-
+        The row's source, evand-n343-sweep-2026-10-20, cites the bibliography key [Daniel n343
+        sweep 2026-10-20], credit line Daniel after Fang, Arslanov, Mustafin, Shangitbayev, Levy,
+        whose note names Evan Daniel's explorer as the finder and Fang's #484 two-wedge family as
+        the construction; the source's notes and the packet README's Lineage section say the same.
     beads:
     - think-wuxt
     answer_bead: think-wuxt
@@ -14536,6 +14546,18 @@ issues:
       carried this triage to main, reports the check of the two digests and the side, the row's
       standing and the three queued steps: custody at the pin, the two-route replay with its
       controls, and the beyond-horizon row with the credit the issue asks for.
+      The import of 21 October 2026 (think-wuxt) retained the nine s343_sw files at the pin in
+      evand-n343-sweep-2026-10-20, both certificate digests equal to the issue's, with the two
+      checkers, the solver and the explorer pinned against the n183 packet's identical copies and
+      the packer log, dgen.py and descend.py by digest only. upper_bound_reports certify ran the
+      positive, a duplicate-square and an outside-container control through both maintained
+      routes: the positive accepted and both controls refused on both, 351,918 pair decisions in
+      51.74 route CPU seconds; check --replay decided the receipt again. claims.json compares the
+      side with every row at 343: 5.497224e-4 below #678's print, 5.500412e-4 below #489's exact
+      side and 1.722105e-2 below #484's. The row is at assurance reported, with the report
+      evidence E-evand-702-n343-report, as #596's rows were; no stage 4 review is owed for a
+      beyond-horizon row, and none is registered. The KKT, local-minimum and MILP statements are
+      not recorded.
   - number: 703
     title: 's(270) ≤ 16.928162252197: registration request'
     author: evand

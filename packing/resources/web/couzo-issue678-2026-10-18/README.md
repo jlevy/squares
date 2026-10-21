@@ -10,7 +10,9 @@ compares each claim with the record and the earlier reports in report order.
 [T-223](../../../frontier/RESULTS.md) registers the two claims in the case corpus, at 204
 and 260, at V3/C3 since the
 [review of 20 October 2026](../../../../docs/project/reviews/review-2026-10-20-upper-bound-imports-678.md),
-and both cases adopted them as their house best packings that day; the 83 beyond it are
+and the case at 204 adopted its claim as the house best packing that day, the case at 260
+on 21 October 2026, from Joost de Winter’s T-196, which #704 had adopted there on 20
+October; the 83 beyond it are
 dated beyond-horizon rows of the `couzo-issue678-2026-10-18` source in
 [source-coverage.yaml](../../../frontier/source-coverage.yaml), read from
 [acquisition/beyond-horizon-claims.json](acquisition/beyond-horizon-claims.json).

@@ -304,3 +304,48 @@ def test_profile_is_strict_and_bounded(key: str, value: Any) -> None:
         reports.run_case(certificate, "positive", **profile)
     with pytest.raises(reports.ReportError):
         reports.validate_job({}, certificate, "positive", **profile)
+
+
+#: Joost de Winter's #668 packet, whose certificates keep every wall and pair 1e-9 clear.
+DE_WINTER_668 = "de-winter-upper-bounds-227-229-260-2026-10-17"
+
+
+@pytest.mark.parametrize("control", reports.SHARP_CONTROLS)
+def test_sharp_controls_on_a_small_packing_meet_contact_and_go_past_it(control: str) -> None:
+    """Two squares, one turned by tan(theta/2) = 1/3, a tenth apart, in a box with room to
+    spare: at contact both routes accept with the margin exactly 0, and past it both refuse
+    at exactly -epsilon."""
+    certificate = legacy.parse("2 7/2\n1 1 0\n23/10 6/5 1/3\n")
+    margin = "wall" if control == "side-lowered-past-wall-contact" else "gap"
+    contact = reports.run_sharp(certificate, control, past=False)
+    past = reports.run_sharp(certificate, control)
+    for route in reports.ROUTES:
+        assert contact[route]["passed"] is True
+        assert contact[route][margin] == 0
+        assert past[route]["passed"] is False
+        assert past[route][margin] == -reports.SHARP_EPSILON
+    with pytest.raises(reports.ReportError):
+        reports.sharp_input(certificate, "duplicate-square-overlap")
+    with pytest.raises(reports.ReportError):
+        reports.sharp_input(certificate, control, epsilon=reports.SHARP_EPSILON * 0)
+
+
+@pytest.mark.slow
+@pytest.mark.parametrize("control", reports.SHARP_CONTROLS)
+def test_both_routes_refuse_a_retained_certificate_1e30_past_contact(control: str) -> None:
+    """De Winter's n = 260 certificate (T-196), every margin 1e-9: its top wall lowered, or
+    its tightest pair closed, 1e-30 past contact is refused by both routes at exactly that
+    margin, which a route rounding at binary64 or tolerating 1e-8 would accept (RF-2 of the
+    20 October review). Each case runs both routes over 33,670 pairs, 6 to 12 s on a shared
+    host, above the quick lane's 5 s per-test ceiling, so it runs in the deep surface; the
+    small packing above runs the same controls in the quick lane."""
+    from devtools import upper_bound_reports  # noqa: PLC0415
+
+    certificate = upper_bound_reports.read_facts(
+        upper_bound_reports.packet_path(DE_WINTER_668)
+    )[260]
+    margin = "wall" if control == "side-lowered-past-wall-contact" else "gap"
+    verdicts = reports.run_sharp(certificate, control)
+    for route in reports.ROUTES:
+        assert verdicts[route]["passed"] is False, route
+        assert verdicts[route][margin] == -reports.SHARP_EPSILON, route

@@ -6,6 +6,8 @@ adopted as the house best packings under
 [the house rule](../../../campaign/result-import.md#the-house-rule) after the
 [review of 20 October 2026](../../../../docs/project/reviews/review-2026-10-20-upper-bound-imports-678.md).
 The house rule regularizes each re-housed count in the pull request that adopts it.
+At 260 the pass of 21 October 2026, after #704 had adopted Joost de Winter’s T-196 there
+on 20 October, wrote the same witness again, and these runs, on that witness, decide it.
 
 ## How They Were Run
 
@@ -50,7 +52,12 @@ At 204 the strong view the earlier house drew (Evan Daniel’s of T-186, 19 unev
 near-axis squares) gives way to grid-slack’s view of the new house best packing, with 34
 uneven and 6 near-axis squares; the house moved to a packing $2.04 \times 10^{-5}$
 smaller, and the owner’s rule adopts the smaller packing and draws the best view of it.
-At 260 the earlier house best packing was the catalogue’s packing, regular as published.
+At 260 the house best packing was the catalogue’s packing, regular as published, when
+these runs were made.
+#704 then adopted T-196 there and drew Evan Daniel’s same-side view of it (0 light, 0
+uneven, 0 near-axis squares, 778 house sides); that view lapses with its witness when
+the pass of 21 October 2026 adopts T-223, and `default_drawings --compare` names it,
+decided, not pending.
 The two register candidates are smaller packings by the regularization policy’s row 3:
 each is registered as a result before any drawing takes it, which this pass does not do.
 

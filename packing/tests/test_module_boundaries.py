@@ -1497,6 +1497,13 @@ def test_the_slow_marker_is_declared_only_by_measured_nodes() -> None:
         "test_evand_arrangement_adoption.py": {
             "test_production_clone_copies_every_scientific_input_and_admits_exact_links",
         },
+        # 2026-10-21, both cases on a four-cpu host at a load average of about four: 6.55s
+        # and 6.50s of call, each running both routes over de Winter's n = 260 certificate
+        # (T-196) 1e-30 past contact. The same two sharp controls on a small packing stay
+        # on the pull-request surface.
+        "test_evand_arrangement_reports.py": {
+            "test_both_routes_refuse_a_retained_certificate_1e30_past_contact",  # 6.55s
+        },
         # Hosted run37739373988/job113186283659: actual complete clone, independent
         # custody bytes and subprocess admission; no clone or assertion is removed.
         "test_refinement_custody.py": {

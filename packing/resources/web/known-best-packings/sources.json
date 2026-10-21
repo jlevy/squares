@@ -1437,18 +1437,19 @@
       "url": "https://kingbird.myphotos.cc/packing/square-226.svg"
     },
     {
-      "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
-      "kind": "kingbird-derived-facts",
-      "license_status": "no-express-reuse-terms-found",
+      "attribution": "Joost de Winter, https://github.com/JoostdeWinter/square-packing/blob/9bf5d9be4d0ca13a1dbef7d7953032fe87d4e81d/n227/n227_exact.json at 9bf5d9be4d0ca13a1dbef7d7953032fe87d4e81d",
+      "kind": "packet-derived-facts",
+      "license_status": "MIT",
       "listed_n": [
         227
       ],
       "n": 227,
-      "raw_asset_retained": false,
-      "retention_policy": "metadata-and-derived-numerical-facts-only",
-      "retrieved": "2026-08-26",
+      "path": "resources/web/de-winter-upper-bounds-227-229-260-2026-10-17/source/n227/n227_exact.json.gz",
+      "raw_asset_retained": true,
+      "retention_policy": "Complete source certificate retained losslessly and bound to the SHA-256 its packet pins upstream; no upstream program or prose is copied.",
+      "retrieved": "2026-10-18",
       "source_n": 227,
-      "url": "https://kingbird.myphotos.cc/packing/square-227.svg"
+      "url": "https://github.com/JoostdeWinter/square-packing/blob/9bf5d9be4d0ca13a1dbef7d7953032fe87d4e81d/n227/n227_exact.json"
     },
     {
       "attribution": "PingYou Ltd, https://github.com/BuddenPing/squares/blob/4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde/numerical-refinements/certificates/n228.cert.json at 4c319c24a6217dbbbf05e79ebb7e2dc5be0a2cde",

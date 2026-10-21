@@ -399,9 +399,10 @@ _README_IP1P = (
     "October 2026 (think-ip1p), beside the runs' receipt, blocks and reports"
 )
 
-#: Both generators on the two witnesses the adoption of 20 October 2026 moved to Francisco
-#: Couzo's issue-678 certificates (T-223, think-xu4d): Evan Daniel's regularizer and
-#: grid-slack at 0.5, 1 and 5 degrees on 204 and 260. The selection drew grid-slack's
+#: Both generators on the two witnesses of Francisco Couzo's issue-678 certificates
+#: (T-223, think-xu4d), which the adoption of 20 October 2026 drew at 204 and that of 21
+#: October 2026 at 260, after #704's T-196: Evan Daniel's regularizer and grid-slack at
+#: 0.5, 1 and 5 degrees on 204 and 260. The selection drew grid-slack's
 #: 0.5-degree view at 204 and decided 260 (`SETTLED`). Their receipt, run blocks, reports
 #: and the selection's report are in packing/cases/regularized_drawings/think-xu4d-2026-10-20/.
 _RUNXU4D = (
