@@ -5,7 +5,7 @@ title: "Intake pass 2026-10-11: six new upper-bound reports, two n17 issues, fou
 kind: epic
 status: in_progress
 priority: 1
-version: 99
+version: 100
 delegate: claude-code@vm
 labels:
   - result-import
@@ -110,7 +110,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-11T20:28:08.870Z
-updated_at: 2026-10-15T06:29:52.948Z
+updated_at: 2026-10-21T04:37:29.660Z
 started_at: 2026-10-11T20:28:23.012Z
 ---
 Intake pass of 2026-10-11 (owner's request in session 01UXZs37jGv5vqVGADH7Gkn8), on branch claude/wizardly-meitner-wqn4x3. Sweep: 18 items needing an owner: issues #494, #495, #500, #501, #503, #504, #505, #506 not in result-requests.yaml; unread comments #419 (evand 6104596297), #413 (wand125 6104576642), #485 (Guzhou0806 6106761997, wand125 6111583905); watched repositories evand 675a5ea, franciscouzo 337078c, Guzhou0806 6a65957, itsnaka 56fa71f, ry-xu 9535d65, wand125 04fbef0. Kingbird: 0 counts moved. Owner priority: quick-to-validate new best results first, merged; longer validation runs recorded with their price and status.
@@ -120,3 +120,5 @@ Intake pass of 2026-10-11 (owner's request in session 01UXZs37jGv5vqVGADH7Gkn8),
 2026-10-11 21:40Z: the owner asked for the pass as a stack of PRs, fast-to-validate layers first, credits updated. Layer 1 (reads lane, think-q655 and think-tln9 stage 1-2): https://github.com/jlevy/squares/pull/512 on claude/wizardly-meitner-wqn4x3. Planned layers: 2 case-record adoption of the reviewed V3/C3 houses (think-fvz4, owner decision not to wait for #403); 3 the 2026-10-11 imports at V3/C3 with adoption and the announcement; 4 rung and significance reviews (think-18b8, think-66e5, think-qh3s) and #485's 6.718 registered. The results-page overview (think-2z22) goes as its own PR. R1: no rung wrong in T-120..T-146; 39 counts pending adoption. R2: T-060 stays V3/C3; V4 needs a second review entry and an owner oversight record.
 
 2026-10-12, GitHub tracking (owner's request that the pass's remaining work be tracked as GitHub issues): tracker https://github.com/jlevy/squares/issues/544 (label tracker) lists the stack PRs (#512, #516, #518, layers 4 and 5 not open, #514, #531), every remaining item and its bead; owner decisions https://github.com/jlevy/squares/issues/543. New issues: #532 (think-i85v, think-nd7g, think-r333), #533 (think-xzob), #534 (think-wop1), #535 (think-oyd4), #536 (think-xk3f), #537 (think-0ayk), #538 (think-1bm2, new), #539 (think-tfil), #540 (think-qh9a), #541 (think-7yqp), #542 (think-npvi, new). Tracked on existing issues: #485 (think-tln9), #419 (think-63vx), #495/#413 (think-nmfl, think-x4v4), #494 (think-lkbe), #446 (think-eth9), #506 (think-9fjl).
+
+2026-10-21 04:45Z, coordinator stand-down: every PR of the pass has merged: #514 on 20 October (9eb75b49b), and records-1016 through #627 (bbc12b617, superseding #616). The intake continues under handoff #684 and its lanes. Status posted on #544: https://github.com/jlevy/squares/issues/544#issuecomment-6308157470. think-ckjc is closed. Still open under this epic: the owner budgets on #543 (think-63vx, think-nmfl and think-x4v4), think-lkbe, think-eth9, and the held replays think-2d7f, think-yfoo, think-8eo1 and think-0arj. The hourly routine trig_017yf6PqgwVwodhpRh6CrQTm is disabled.
