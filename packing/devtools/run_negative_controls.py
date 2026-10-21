@@ -1592,11 +1592,13 @@ def root_files() -> tuple[Path, ...]:
 # Nearly all of the rest is Gobel's retained 1979 PDF (4,982,398 bytes), which main
 # tracks but does not copy: his profile and an inspected-byline receipt declare it, and
 # validate_schemas consumes both, so keep the complete private PDF and every other
-# profile and occurrence dependency. No unrelated prune is justified. Raise to 228 MiB,
-# the least whole MiB above this surface, with unchanged selection and the oversized
-# pre-clone refusal. The custody regression checks the PDF's bytes, private index and
-# both loaders. Three portable workers are bounded at 684 MiB.
-SNAPSHOT_MAX_BYTES = 228 * 1024 * 1024
+# profile and occurrence dependency. No unrelated prune is justified. The custody
+# regression checks the PDF's bytes, private index and both loaders. After the second
+# merge, of main e7de85ff6 (#701, T-223), the surface read 239,280,102 bytes, 204,774
+# over 228 MiB, the growth being T-223's records. Raise to 229 MiB, the least whole MiB
+# above it, with unchanged selection and the oversized pre-clone refusal: 843,802 bytes
+# of headroom. Three portable workers are bounded at 687 MiB.
+SNAPSHOT_MAX_BYTES = 229 * 1024 * 1024
 DEFAULT_CONTROL_TIMEOUT_SECONDS = 120.0
 TERMINATION_GRACE_SECONDS = 1.0
 # Directories that must be walked into rather than bulk-copied, because something

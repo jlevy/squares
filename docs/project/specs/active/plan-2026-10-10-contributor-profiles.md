@@ -6,8 +6,8 @@
 
 **Status:** Data-model spike, initial population, website and `/profiles/` URLs
 implemented; continued from [PR #490](https://github.com/jlevy/squares/pull/490) in
-[PR #578](https://github.com/jlevy/squares/pull/578), a draft awaiting the owner’s
-review.
+[PR #578](https://github.com/jlevy/squares/pull/578), integrated with main on 2026-10-20
+and awaiting the owner’s testing and review.
 
 **Workflow:** W7 pipeline improvement, entered through `tbd shortcut new-plan-spec`.
 
@@ -97,7 +97,7 @@ absent credit.
 Existing aliases require identity review.
 The audit preserves uncertain E./G. Bajmóczy initials and distinguishes `ctjlewis` from
 the EvolvingPrograms organization.
-Mira, Kleddamag, Guzhou0806 and Julian-JJ may remain handle-only profiles.
+Mira, Guzhou0806 and Julian-JJ may remain handle-only profiles.
 Project, organization and AI-system credits stay explicit non-person occurrences.
 Do not turn a project label into a human without evidence.
 
@@ -856,7 +856,43 @@ the earlier lower bound’s reviewed identity join.
 News wording remains prepared on PR #578; record the actual merge and delivery dates
 after those events. This integration has not been deployed.
 
-## WIP Handoff: 2026-10-10
+## Integration and Review: 2026-10-20
+
+A Claude continuation integrated main twice, `4851d8193` and then `e7de85ff6` (#701,
+T-223). Main had cut site editions `v0.8.0` to `v0.8.8` in the meantime, so the profile
+edition is cut as `v0.9.0`, a minor successor of `v0.8.8`. The optimality review
+`v0.1.8` and the threshold review `v0.1.1` keep their proposed editions.
+The explainer (`v0.4.12`) and the methods survey (`v0.2.3`) keep main’s editions, with
+no-public-change decisions that compare their candidate scopes with main.
+Every proposed date still needs confirmation at the first deployment.
+
+The fine-net source `[wand125 fine-net lower bounds 2026-10-16]` now credits Hosono.
+Its retained packet says that all 18 of its commits are authored by Hiroaki Hosono, and
+its repository is the wand125 account’s own, so it joins `hiroaki-hosono` on the same
+evidence as every other wand125 source.
+This supersedes the 19 October decision to keep its credit on the handle.
+Results T-200 to T-217 now print `Hosono after Tokoharu and
+Levy`. The same pass migrated `squarepacker` to Ryu and `ctjlewis` to Lewis under the
+handle rule that `attribution.md` restores from main’s `epistemics.md`.
+
+Three independent reviews, of the data model, the site and the content, were each
+followed by fixes with regression tests:
+
+- Reconcile refuses to drop a changed manual origin, reports each dropped join as
+  `prior` on the span that replaces it, and exits 3 when a resolved join was dropped.
+- Profiles now link the results they credit.
+  Levy’s profile has 136 result links, Hosono’s 73 and Evan Daniel’s 80; before the fix
+  they had 0, 0 and 3.
+- Bios no longer call an open case optimal or a packing new.
+
+The census has 27 profiles and 1,496 structured spans: 1,101 resolved, 389 unresolved
+and 6 non-person. All 146 PDFs still await full-credit inspection.
+The private-worker snapshot allowance is now 229 MiB, measured on the integrated tree.
+
+## WIP Handoff: 2026-10-10 (historical)
+
+This section records the state at the 10 October handoff.
+Its counts, paths and open items are superseded by the sections above.
 
 The owner requested a work-in-progress PR and handoff before further implementation.
 Continue on `codex/contributor-profiles-plan-spike` in
