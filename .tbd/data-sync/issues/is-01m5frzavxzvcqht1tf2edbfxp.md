@@ -5,7 +5,7 @@ title: "Import Evan Daniel: solved views below the record at 204, 227, 229 and 2
 kind: task
 status: in_progress
 priority: 2
-version: 4
+version: 5
 delegate: coord-intake-1021b
 labels:
   - result-import
@@ -13,7 +13,7 @@ dependencies: []
 hold: null
 hold_until: null
 created_at: 2026-10-21T17:43:33.500Z
-updated_at: 2026-10-21T19:57:49.211Z
+updated_at: 2026-10-21T20:24:43.433Z
 started_at: 2026-10-21T17:43:35.847Z
 ---
 Stage 0 owner for four certificates Evan Daniel published, with no issue, in evand/square-packing at 0075967bace18a3deabcc0baa64c2fb294fc80a0 (committed 2026-10-20T02:36:12Z, "Site up to date: records at 183, 229, 308 (ours) and 204, 227, 260 (Couzo), certified and regularized"): search/regularize/lists/certs/n-NNN.cert.gz, each with n-NNN.json.gz beside it. Found by the read-only triage of the 21 October sweep (c-triage-sweep-1021b). Nothing has been retained, replayed or registered.
@@ -52,3 +52,4 @@ Identity, measured here (devtools.check_half_angle_area.arrangement_gap, and an 
 - 260 vs T-223: optimal assignment under symmetry 7; 207 squares within 1e-9, 41 beyond 1e-3, 20 beyond 0.1 (max 0.643), no turn above 1e-6. Each JSON's angle_changes are only "free-angle kept", so changes are zero at all four (as T-146 read them).
 Ledger: campaign/issue-intake/upper-bounds-20261021/, read at main 7eeab1f5; starts hold T-223 (204, 260), T-196 (227, 260) and T-199 (229) as pending or house; the walk takes #672 at 227 (recorded after T-196, as the 18 October ledger did) and this publication at all four (recorded, each a refinement of the packing named).
 Plan and price: packet evand-regularized-2026-10-20 by acquire_source (the eight gz as original gzip, REGULARIZE.md, LICENSE, CREDITS.md; verify_cert*.py, best.*, refresh.py, samepacking.py and the site's records2026.json and lineage.yaml pinned by digest), well under 1 MB; import declaration for devtools.upper_bound_reports (T-146's route; register_regularized_bounds selects this project's own runs and does not read an external packet); certify --workers 2: 4 positives and 8 controls on both maintained routes, about 2 CPU-minutes, inside the pass's minutes rule; register T-225 at V0/C0 with a regularizations item per count; stage 4 review and adoption in a later PR (about 0.8 CPU-h of strong-generator runs, under the 40 CPU-h item cap).
+2026-10-21 c-lane-views-import (stages 2 and 3, branch claude/stoic-thompson-ku09fw): pushed through 2fbef715f (b1244549a packet, receipt and measurement; 1560b0924 T-225 at V0/C0 with the 20261021 ledger; 3ce713f56 #702's final reply recorded; 95b9a986a intake-watch reads; af8e8c1d5 DATA_REVISION 1560b092; 2fbef715f synopsis row). Replay: 4 positives pass both maintained routes, all 8 controls refused, 636,798 pair decisions, 63.0 route CPU s, 40.8 s wall on two workers; check --replay 66 s. Ledger: #672 recorded at 227 after T-196, then the publication recorded at 204, 227, 229 and 260. T-225's 227 item names T-196 (#672's packing refines it; #672 is unregistered, think-2vjc), credit names #672. Records tier passes after fixes; push tier and draft PR next. No site edition cut (re-cut after #704 and #706 land). Stage 4 review and adoption remain on this bead; think-cvu0 and think-o4y3 can close as superseded once T-225 merges (coordinator's call).
