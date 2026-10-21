@@ -13,6 +13,9 @@ contributor:
   - kind: github
     url: https://github.com/ctjlewis
     handle: ctjlewis
+  - kind: twitter
+    url: https://x.com/ctjlewis
+    handle: ctjlewis
   sources:
   - id: formalization-acknowledgment
     archive_path: packing/resources/web/queuingtheorydotcom-n11-lean-2026-10-06/11SquaresFormalized/ACKNOWLEDGEMENTS.md
@@ -28,6 +31,9 @@ contributor:
     url: https://x.com/ManassehA06/status/2107508501610217640
     locator: entities.user_mentions contains screen_name ctjlewis and display name Lewis followed by a flag emoji;
       the announcement thanks this account for aiding the formalization.
+  - id: github-social-crosslink
+    url: https://github.com/ctjlewis
+    locator: 'Public GitHub profile checked 2026-10-21 directly links twitter.com/ctjlewis; the account handle matches the retained announcement receipt.'
   provenance:
   - field: /display_name
     sources:
@@ -41,6 +47,8 @@ contributor:
     sources:
     - formalization-acknowledgment
     - public-profile
+    - github-social-crosslink
+    - announcement-receipt
 ---
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

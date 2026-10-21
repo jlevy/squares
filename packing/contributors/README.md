@@ -66,22 +66,33 @@ Do not extract a year from a biography, archive path, repository name or capture
 ## Derived Presentation
 
 [`site_tallies.py`](../devtools/site_tallies.py) computes the shared summaries.
-Do not add stored `result_count`, `credit_count` or activity-range fields to person
-records: these would duplicate data and drift after intake.
+[`profile_records.py`](../devtools/profile_records.py) derives current record IDs from
+the register and case evidence, including unresolved priority and family scope.
+Its `load_record_index()` result is shared by a render; intersect with primary-authored
+IDs through `current_record_ids()`. Use `record_input_paths()` in build dependencies.
+`python -m devtools.profile_records --json` reports the complete index for review.
+A result with an unassessed facet can still count once through another current facet;
+only unassessed IDs without any current facet can increase the tally.
+Do not add stored `result_count`, `record_count`, `credit_count` or activity-range
+fields to person records: these would duplicate data and drift after intake.
 
 - **Results:** distinct registered result IDs with reviewed primary authorship.
   A bibliography `source-author` join in a primary attribution source establishes an
   author, subject to that source’s reviewed prerequisite roles.
   A packet containing work by several people does not give them all authorship of every
   result.
+- **Records:** the current subset of primary Results across all result kinds.
+  Family-specific currentness and unresolved priority come from the shared record
+  classifier, not profile fields or profile-specific supersession rules.
+  Count each result once even when it retains several cases or kinds of contribution.
 - **Credits:** distinct results explicitly crediting the person in a non-primary role.
   Repeated mentions count once; someone primary on a result cannot also receive a
   non-primary credit for it.
   Merely citing a source does not manufacture a personal credit.
   The directory total counts person/result pairs.
-- **Significance:** both buckets use the reported result’s significance.
-  An S5 result by A crediting B and C produces one S5 Result for A and one S5 Credit
-  each for B and C.
+- **Significance:** Results, their Records subset and Credits use the reported result’s
+  significance. An S5 result by A crediting B and C produces one S5 Result for A and one
+  S5 Credit each for B and C.
 - **Years active:** original authored publication years and explicit discovery/proof
   dates. Later reuse, citations and imports do not extend the range.
   Undated work stays unknown.
@@ -97,7 +108,7 @@ A publication can support activity years and appear as a resource without a regi
 result. If it contains an unregistered substantive result, review and register that
 result through the normal intake process; never fabricate a result merely to fill a
 profile count. The
-[attribution policy](../../attribution.md#results-credits-and-activity-years) is
+[attribution policy](../../attribution.md#results-records-credits-and-activity-years) is
 authoritative for these semantics, and the
 [design contract](../devtools/templates/paper-design.md#person-profiles) defines
 display.

@@ -48,6 +48,7 @@ from devtools.overview_data import (
     load as load_overview,
 )
 from devtools.profile_links import link_prose, public_index
+from devtools.record_presentation import record_tally
 from devtools.render_overview import (
     DOCUMENT_PAGES,
     N11_LOWER_BOUNDS_EXPLAINER,
@@ -2635,6 +2636,8 @@ def project_tally(url: str, tally: ProjectTally) -> str:
             total_href=results_filter_url(slug) if tally.results else None,
             level_hrefs={level: results_filter_url(slug, level) for level, _ in tally.counts},
         )
+        + " · "
+        + record_tally(tally.results, measures)
         + credit_markup
         + "</span>"
     )
@@ -2658,6 +2661,20 @@ def project_author(author: str, *, current_profile: str | None = None) -> str:
     return "By " + link_prose(_esc(author), index=index, current_profile=current_profile)
 
 
+def resource_byline(resource: Resource, *, current_profile: str | None = None) -> str:
+    """Mixed proof/support contributors are explicit reviewed identities, not authors."""
+    if resource.byline_label == "By":
+        return project_author(resource.byline, current_profile=current_profile)
+    names = public_index().people
+    labels = [
+        _esc(names[identifier].label)
+        if identifier == current_profile
+        else f'<a href="profiles/{identifier}.html">{_esc(names[identifier].label)}</a>'
+        for identifier in resource.profile_ids
+    ]
+    return "Contributors: " + ", ".join(labels)
+
+
 @cache
 def _profile_resource_tallies() -> dict[str, ProjectTally]:
     """Compute the resource inventory's register projection once for complete profiles."""
@@ -2678,7 +2695,7 @@ def resource_card(
         foot=f'<span class="site-project-tally">{project_tally(url, tally)}</span>',
         byline=(
             '<span class="site-project-author" data-contributor-plain>'
-            + project_author(resource.byline, current_profile=current_profile)
+            + resource_byline(resource, current_profile=current_profile)
             + "</span>"
         ),
     )

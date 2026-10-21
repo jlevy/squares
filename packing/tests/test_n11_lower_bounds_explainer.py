@@ -1345,12 +1345,12 @@ def test_reader_facing_version_references_follow_release_metadata() -> None:
 def test_authored_trump_footnote_links_evidenced_independent_contributors(page: str) -> None:
     footnotes = page.split('class="kpress-footnotes"', 1)[1]
     for identifier, label in (
-        ("mats-gustafsson", "Mats Gustafsson"),
-        ("magnus-thulin", "Magnus Thulin"),
+        ("mats-gustafsson", "Gustafsson"),
+        ("magnus-thulin", "Thulin"),
         ("martin-gardner", "Gardner"),
     ):
         assert re.search(
             rf'href="https://jlevy.github.io/squares/profiles/{identifier}\.html"[^>]*>{label}</a>',
             footnotes,
         )
-    assert "November 1980" in footnotes
+    assert "November 1980" in " ".join(footnotes.split())

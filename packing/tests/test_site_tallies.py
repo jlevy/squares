@@ -519,3 +519,37 @@ def test_all_45_profiles_have_reviewed_original_activity_years_and_disjoint_work
         "T-015",
         "T-016",
     )
+
+
+def test_formalization_infrastructure_and_hpc_support_are_credits_not_primary_results() -> None:
+    key = "[Ahmed 11SquaresFormalized 2026]"
+    spans = [
+        item
+        for item in load_occurrences().occurrences
+        if item.origin.path == BIBLIOGRAPHY and item.origin.record_key == key
+    ]
+    record = {"id": "synthetic-formalization", "attribution": {"source_keys": [key]}}
+    for identifier in ("ctjlewis", "julian-jj"):
+        stats = person_credit_stats(identifier, spans, [record])
+        assert stats.results == ()
+        assert stats.credited_results == ("synthetic-formalization",)
+    assert person_credit_stats("hiroaki-hosono", spans, [record]).results == (
+        "synthetic-formalization",
+    )
+
+
+def test_formalization_support_acknowledgments_date_own_work_not_later_citations() -> None:
+    key = "[Ahmed 11SquaresFormalized 2026]"
+    spans = load_occurrences().occurrences
+    for identifier in ("ctjlewis", "julian-jj"):
+        assert person_activity_years(identifier, spans, {key: {"year": 2026}}, {}, ()) == (
+            2026,
+        )
+    later = occurrence(BIBLIOGRAPHY, "later-citation", person="stromquist")
+    assert person_activity_years(
+        "stromquist",
+        [author("original", "stromquist"), later],
+        {"original": {"year": 2003}, "later-citation": {"year": 2026}},
+        {},
+        (),
+    ) == (2003,)

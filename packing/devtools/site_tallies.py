@@ -248,7 +248,7 @@ def _link(text: str, href: str | None) -> str:
 def render_tally(
     tally: ResultTally | CreditTally,
     *,
-    noun: Literal["result", "credit"] = "result",
+    noun: Literal["result", "credit", "record"] = "result",
     total_href: str | None = None,
     level_hrefs: Mapping[int, str] | None = None,
 ) -> str:
@@ -303,7 +303,13 @@ def person_activity_years(
             continue
         origin = item.origin
         year = None
-        if _source_author(item):
+        if _source_author(item) or (
+            origin.path == BIBLIOGRAPHY
+            and item.role == "credited-contributor"
+            and _AUTHOR_FIELD.fullmatch(origin.field) is not None
+        ):
+            # A reviewed author-list acknowledgment dates this person's own support
+            # work; a later /credit citation does not date the cited person's activity.
             year = bibliography_sources.get(origin.record_key, {}).get("year")
         elif origin == PROJECT_AUTHOR_ORIGIN and item.role == "project-author":
             project_author = True

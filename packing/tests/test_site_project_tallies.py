@@ -34,6 +34,7 @@ from devtools import (
     overview_data,
     overview_sections,
     profile_links,
+    record_presentation,
     render_contributors,
     render_overview,
     site_resources,
@@ -172,7 +173,7 @@ def test_shared_resources_match_homepage_bylines_and_profile_counts() -> None:
         linked = tuple(
             re.findall(
                 r'href="profiles/([a-z0-9-]+)\.html"',
-                overview_sections.project_author(record.byline),
+                overview_sections.resource_byline(record),
             )
         )
         assert linked == record.profile_ids, record.byline
@@ -360,16 +361,19 @@ def test_each_card_ends_with_its_tally_linked_to_its_results(
             load_occurrences().occurrences,
             [result.record for result in overview.results],
         )
+        measures = {
+            result.id: (overview_sections.significance(result), result.dated[1])
+            for result in overview.results
+        }
         expected = total
         if len(counts) == 1:
             expected += f" (at S{counts[0][0]})"
         elif counts:
             expected += f" ({', '.join(f'{n} at S{level}' for level, n in counts)})"
+        expected += " · " + record_presentation.record_tally(
+            [result.id for result in own], measures
+        )
         if associations is not None:
-            measures = {
-                result.id: (overview_sections.significance(result), result.dated[1])
-                for result in overview.results
-            }
             expected += " · " + site_tallies.render_tally(
                 site_tallies.tally_credits(associations, measures, LEVELS), noun="credit"
             )
@@ -619,3 +623,20 @@ def test_profile_resources_add_only_evidenced_websites_and_keep_exact_urls() -> 
     ]
     assert all(record.profile_ids == ("alex",) for record in records)
     assert site_resources.profile_resources("alex", records, metadata=metadata) == records
+
+
+def test_formalization_resource_names_mixed_contributors_without_claiming_authorship() -> None:
+    resource = next(
+        record
+        for record in site_resources.resources()
+        if record.url.endswith("/11SquaresFormalized")
+    )
+    assert resource.byline_label == "Contributors"
+    assert len(resource.profile_ids) == 6
+    for identifier in resource.profile_ids:
+        assert resource in site_resources.resources_for_profile(identifier)
+    rendered = overview_sections.resource_byline(resource, current_profile="ctjlewis")
+    assert rendered.startswith("Contributors: ")
+    assert "profiles/ctjlewis.html" not in rendered
+    assert "profiles/julian-jj.html" in rendered
+    assert "profiles/manasseh-ahmed.html" in rendered

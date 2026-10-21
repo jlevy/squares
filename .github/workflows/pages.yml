@@ -135,6 +135,8 @@ name: Certificate page
       - packing/devtools/site_icons.py
       - packing/devtools/site_resources.py
       - packing/devtools/site_tallies.py
+      - packing/devtools/profile_records.py
+      - packing/devtools/record_presentation.py
       - packing/devtools/github_references.py
       - packing/devtools/contributor_credit.py
       - packing/contributors/**

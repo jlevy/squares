@@ -3743,3 +3743,8 @@ html[data-site-atlas-view="triangle"]
 .kpress .site-tally-levels a {
   color: var(--site-support-color);
 }
+
+.site-record-pending {
+  color: var(--site-support-color);
+  font-size: var(--site-font-size-note);
+}

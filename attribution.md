@@ -238,7 +238,7 @@ The
 tracks population and renderer coverage, and the
 [intake runbook](packing/campaign/result-import.md) applies this policy to new results.
 
-## Results, Credits and Activity Years
+## Results, Records, Credits and Activity Years
 
 Project-card credits mean credits received for that project’s work, scoped by reviewed
 project-source links and profile identities.
@@ -257,6 +257,27 @@ distinct results.
 Reviewed source-author joins in a result’s primary attribution identify
 its authors; prerequisite sources and “after” credits do not establish primary
 authorship. Raw occurrence counts remain diagnostics of the attribution census.
+
+Records are the current registered contributions within a person’s authored Results,
+counted once per result ID. Every result kind is eligible, including optimality proofs,
+formalizations, simplifications and structural results.
+This does not imply a global ranking of methods or proofs.
+Numerical bounds need an owned current contribution; merely matching a bound or
+certifying it again does not establish a strict improvement.
+Other result kinds follow their explicit whole or partial supersession relationships: a
+whole replacement retires the contribution, while a partial replacement can leave a
+current contribution.
+Preserve theorem-wide scope independently of finite examples.
+Unresolved priority or scope is reported as pending review, not silently counted or
+presented as a confirmed zero.
+
+Formalization is a distinct result kind in the
+[result ontology](epistemics.md#result-kinds) and
+[result schema](packing/frontier/results.schema.yaml).
+Its `proves_kind` identifies the conclusion formalized; it does not turn the formalizer
+into the original author of that conclusion.
+Use the same kind in Results and News filters, rather than adding a separate
+profile-specific tag.
 
 Activity years describe evidenced dates of a person’s own authored or established work,
 including original publications outside the result register.

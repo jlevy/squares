@@ -48,12 +48,17 @@ The structured census reports 1,428 resolved spans, 78 non-person spans and seve
 unresolved spans; ten manual origins are reported separately.
 The primary-authorship model yields 213 distinct registered results and 701 non-primary
 person/result credits.
-These totals precede the requested historically-best-known Results/current Records
-classification (`think-lekx`), which is still under design review.
-The seven remaining spans have explicit identity or collective-credit exceptions under
-`think-0v9j`; no new mathematical result is registered in this PR. All 146 inventoried
-PDFs still await complete credit inspection; this presentation slice does not close
-`think-m7il`.
+Results retain all authored registered results.
+The requested Records subset (`think-lekx`) covers current contributions across every
+result kind, including optimality proofs and formalizations.
+Bound records require strict improvements; matching an existing bound alone does not
+qualify. Family-specific currentness is implemented in `profile_records.py` and must not
+be inferred from bound standing for non-bound results.
+The classifier passed ten focused tests; renderer integration is being verified.
+Family-currentness work remains under `think-e953` and `think-kqi1`. The seven remaining
+spans have explicit identity or collective-credit exceptions under `think-0v9j`; no new
+mathematical result is registered in this PR. All 146 inventoried PDFs still await
+complete credit inspection; this presentation slice does not close `think-m7il`.
 
 Home and About lead to the directory, which shows full names, distinct results by
 significance, separate credits, resources and public accounts.
@@ -93,14 +98,18 @@ and [attribution policy](../../../../attribution.md) own these rules.
 | `think-cq58` | Reconcile this plan, phases, acceptance and current receipts |
 | `think-mthi` | Accounts-only column and visible website/repository Resources |
 | `think-njfb` | Parenthesized single-level tallies and muted significance detail |
-| `think-lekx` | Historically best-known Results and currently best-known Records |
+| `think-lekx` | All authored Results and current Records across every result kind |
+| `think-x43w` | Frits Göbel display name and Lewis account evidence |
+| `think-q4t4` | Formalization contributor roles, resource membership and own-support years |
 
 The live intermediate preview is <http://127.0.0.1:8790/profiles/index.html>, served
 from
 `/Volumes/spud-ext2/agent-scratch/about-profiles-20261020/site-integrated-corrected`. It
-includes the corrected result/credit semantics and credit significance breakdowns, but
-predates the final 75-profile data batch and latest Accounts/Resources/Records changes.
-The definitive complete build, including all four PDFs, remains pending.
+includes all 75 profiles, corrected result/credit semantics, credit significance
+breakdowns, Accounts and Resources columns, and muted parenthetical tallies.
+Records integration remains pending.
+The complete rebuild, including all four PDFs, has completed; the final preview refresh
+and the integrated upstream build remain pending.
 The sourced integration environment includes the project interpreter and tools on PATH.
 
 Local focused checks passed: 88 profile, naming, resource, tally and GitHub-reference
@@ -110,9 +119,9 @@ Those checks predate the activity-year and primary-authorship corrections; the r
 models passed 29 focused tests, including the reviewed historical year sets for all 45
 previous profiles and disjoint result/credit invariants.
 New PDF-profile records passed 92 contributor tests; full integration acceptance remains
-pending.
-Astra reviewed the biography sources, build inputs and release decisions, and is
-has accepted the revised attribution model with no blocker.
+pending. Astra reviewed the biography sources, build inputs, release decisions, identity
+joins, activity years and revised attribution model with no blocker.
+The additional Records classification is under separate review.
 The full push gate and final hosted checks are recorded in PR #578 and `think-zpfo`;
 these focused receipts do not stand in for that acceptance.
 

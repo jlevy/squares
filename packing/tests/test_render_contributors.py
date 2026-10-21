@@ -43,7 +43,9 @@ def test_profiles_share_one_complete_article_and_directory() -> None:
     assert "<h1>Profiles</h1>" in index
     assert 'class="kpress-table site-table site-profile-table"' in index
     assert '<th scope="col">Name</th>' in index
-    assert '<th scope="col">Results</th><th scope="col">Credits</th>' in index
+    assert (
+        '<th scope="col">Results</th><th scope="col">Records</th><th scope="col">Credits</th>'
+    ) in index
     assert '<th scope="col">Resources</th><th scope="col">Accounts</th>' in index
     assert '<div class="site-table-wrap site-wide">' in index
     assert (
@@ -587,7 +589,10 @@ def test_a_source_credit_lists_under_each_result_naming_it_with_its_roles(
             contributor.id, (author, credit, credit, again, unnamed, other), results=REGISTER
         ).parts
     )
-    lines = re.findall(r"<li>.*?</li>", section)
+    primary_and_credits = re.sub(
+        r'<section id="records">.*?</section>', "", section, flags=re.DOTALL
+    )
+    lines = re.findall(r"<li>.*?</li>", primary_and_credits)
     assert lines == [
         (
             '<li><a href="result/t-030.html">T-030</a> (lower bound, 11 cases, n = 10 to 20): '
@@ -670,7 +675,13 @@ def test_published_profiles_link_the_results_they_credit() -> None:
         article = render_contributors.contributor_article(
             registry.by_id[identifier], occurrences
         )
-        linked = re.findall(r'href="result/(t-\d+)\.html"', article)
+        core_work = re.sub(r'<section id="records">.*?</section>', "", article, flags=re.DOTALL)
+        linked = re.findall(r'href="result/(t-\d+)\.html"', core_work)
+        record_section = re.search(r'<section id="records">.*?</section>', article, re.DOTALL)
+        if record_section:
+            assert (
+                set(re.findall(r'href="result/(t-\d+)\.html"', record_section[0])) <= register
+            )
         assert len(linked) >= 50, identifier
         assert len(linked) == len(set(linked)), identifier
         assert set(linked) <= register

@@ -2951,7 +2951,11 @@ Top-level Home, About and News pages have no breadcrumb.
 On nested pages the breadcrumb sits nearer the navigation, with a larger gap below it
 before the title; pages without a breadcrumb retain their normal top spacing.
 The table’s native name anchor goes directly to the person’s profile.
-Its shared result-and-credit tally links to the reviewed work on that profile;
+Separate Results, Records and Credits columns use the shared significance tally.
+Records are the current subset of authored Results across every result kind, including
+formalization. Known zero counts stay blank; unresolved record classification shows a
+Review pending link rather than implying zero.
+Each tally links only to a section or filter that contains that exact population;
 significance counts are plain text when no corresponding filter exists.
 Resource and account links remain separate keyboard stops because they lead to distinct
 destinations. Resource addresses link to their actual websites or repositories; avoid
@@ -3022,6 +3026,10 @@ No person record duplicates these curated facts.
 A curated whole byline resolves only to a unique evidenced public identity; compound
 bylines match exact unique full names, preserving relationships such as “after.”
 Descriptions do not establish ownership, and organizations stay distinct from people.
+A resource with explicitly reviewed mixed-role credits can name its profile IDs directly
+and use the label Contributors.
+The ordinary By label is reserved for its author byline; support work does not become
+proof authorship through resource membership.
 Each resource appears once per credited person; its count is independent of reviewed
 credit counts. Equal repeated URLs deduplicate, while conflicting metadata fails.
 Resource descriptions and bylines use scoped prose linking with the profile subject

@@ -129,6 +129,7 @@
 }
 .kpress .site-profile-table td.site-profile-years,
 .kpress .site-profile-table td.site-profile-stats,
+.kpress .site-profile-table td.site-profile-records,
 .kpress .site-profile-table td.site-profile-credits,
 .kpress .site-profile-table td.site-profile-resources,
 .kpress .site-profile-table td.site-profile-links {
@@ -150,7 +151,7 @@
 .site-contributor-links-compact span {
   overflow-wrap: anywhere;
 }
-:is(.site-profile-stats, .site-profile-credits) .site-credit-tally {
+:is(.site-profile-stats, .site-profile-records, .site-profile-credits) .site-credit-tally {
   display: block;
   min-inline-size: 8rem;
 }

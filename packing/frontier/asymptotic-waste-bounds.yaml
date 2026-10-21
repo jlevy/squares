@@ -355,6 +355,9 @@ deficiency_upper_bounds:
     authors: [Kevin Fang]
     year: 2026
     source_key: '[Fang excess theorem 2026-10-13]'
+    record_scope:
+      result: T-163
+      review_bead: think-kqi1
     local: web/fang-excess-theorem-2026-10-13/source/README.md
     retrieved: true
     confidence: verified_against_primary

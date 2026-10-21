@@ -156,13 +156,13 @@ occurrences:
   start: 0
   end: 5
   label: Lewis
-  role: source-author
+  role: credited-contributor
   disposition: resolved
   evidence:
   - formalization-acknowledgment
   - public-profile
-  note: Reviewed 2026-10-21 against the named profile sources; the printed source
-    text and credit role are retained.
+  note: Reviewed ACKNOWLEDGEMENTS.md line 5; verification infrastructure, runner and
+    replay support. The printed bibliography name is retained; this is not proof authorship.
   contributor_id: ctjlewis
 - origin:
     path: packing/resources/bibliography.yaml
@@ -205,12 +205,12 @@ occurrences:
   start: 0
   end: 9
   label: Julian-JJ
-  role: source-author
+  role: credited-contributor
   disposition: resolved
   evidence:
   - formalization-acknowledgment
-  note: Reviewed 2026-10-21 against the named profile sources; the printed source
-    text and credit role are retained.
+  note: Reviewed ACKNOWLEDGEMENTS.md line 8; collaboration on running the proof on
+    an HPC cluster. The printed bibliography name is retained; this is not proof authorship.
   contributor_id: julian-jj
 - origin:
     path: packing/resources/bibliography.yaml

@@ -24,6 +24,8 @@ from markdown_it import MarkdownIt
 from devtools.github_references import credit_reference_urls, render_github_references
 from devtools.overview_data import RESULTS
 from devtools.profile_links import link_prose, profile_names
+from devtools.profile_records import current_record_ids, record_input_paths
+from devtools.record_presentation import record_index, record_tally
 from devtools.render_overview import (
     PACKING,
     REPO,
@@ -120,6 +122,8 @@ def inputs() -> tuple[Path, ...]:
         PACKING / "devtools/site_icons.py",
         PACKING / "devtools/site_resources.py",
         PACKING / "devtools/site_tallies.py",
+        PACKING / "devtools/record_presentation.py",
+        *record_input_paths(),
         PACKING / "devtools/github_references.py",
         PACKING / "devtools/overview_sections.py",
         PACKING / "frontier/source-coverage.yaml",
@@ -357,6 +361,36 @@ def _credited_work(
             for occurrence in authored
         )
         pieces.extend(_work_listing(primary_lines, "Results"))
+        pieces.append("</section>")
+    current_ids = current_record_ids(primary_ids, record_index())
+    pending = sorted(primary_ids.intersection(record_index().unresolved))
+    if current_ids or pending:
+        pieces.append('<section id="records"><h2>Records</h2>')
+        pieces.append(
+            "<p>Currently leading registered contributions in their recorded family "
+            "and scope. A result counts once when any of its facets remains current.</p>"
+        )
+        fallback = ({item.role: {item.label: None} for item in authored}, {})
+        pieces.extend(
+            _work_listing(
+                [
+                    _result_line(by_id[result_id], *credited.get(result_id, fallback))
+                    for result_id in current_ids
+                ],
+                "Records",
+            )
+        )
+        if pending:
+            pieces.append(
+                '<p>Facet comparisons awaiting review:</p><ul class="site-contributor-credits">'
+            )
+            for result_id in pending:
+                reasons = "; ".join(record_index().unresolved[result_id])
+                pieces.append(
+                    f'<li><a href="result/{html.escape(result_id.lower())}.html">'
+                    f"{html.escape(result_id)}</a>: {html.escape(reasons)}</li>"
+                )
+            pieces.append("</ul>")
         pieces.append("</section>")
     if credit_lines:
         pieces.append('<section id="credited-work"><h2>Credited work</h2>')
@@ -693,10 +727,20 @@ def profile_table(
             if stats.credited_results
             else ""
         )
+        record_cell = record_tally(
+            stats.results,
+            _profile_measures(records),
+            total_href=person.profile_path + "#records",
+            pending_href=person.profile_path + "#records",
+            blank_zero=True,
+        )
+        if record_cell:
+            record_cell = '<span class="site-credit-tally">' + record_cell + "</span>"
         rows.append(
             f'<tr><td><a href="{target}">{label}</a></td>'
             f'<td class="site-profile-years">{html.escape(years) if years else ""}</td>'
             f'<td class="site-profile-stats">{tally}</td>'
+            f'<td class="site-profile-records">{record_cell}</td>'
             f'<td class="site-profile-credits">{credit_cell_markup}</td>'
             f'<td class="site-profile-resources">{resource_links(person)}</td>'
             f'<td class="site-profile-links">{account_links(person, compact=True)}</td></tr>'
@@ -706,7 +750,7 @@ def profile_table(
         '<table class="kpress-table site-table site-profile-table" data-contributor-plain '
         'aria-label="Profiles"><thead><tr><th scope="col">Name</th>'
         '<th scope="col">Years active</th>'
-        '<th scope="col">Results</th><th scope="col">Credits</th>'
+        '<th scope="col">Results</th><th scope="col">Records</th><th scope="col">Credits</th>'
         '<th scope="col">Resources</th><th scope="col">Accounts</th>'
         "</tr></thead><tbody>" + "".join(rows) + "</tbody></table></div>"
     )
@@ -777,6 +821,13 @@ def profile_tally(
     return (
         '<span class="site-credit-tally">'
         + render_tally(authored, total_href=target + "#results" if authored.results else None)
+        + " · "
+        + record_tally(
+            stats.results,
+            measures,
+            total_href=target + "#records",
+            pending_href=target + "#records",
+        )
         + " · "
         + render_tally(
             credited,
@@ -916,7 +967,9 @@ def contributor_pages() -> list[Page]:
         "<p>People whose work the square-packing record cites or credits, paper authors "
         "and project contributors alike. Each profile records public identity evidence "
         "and links to reviewed credits. Results count distinct registered results by their "
-        "reviewed primary authors. "
+        "reviewed primary authors. Records are currently leading registered contributions "
+        "in their recorded family and scope. Review pending marks comparisons that remain "
+        "unclassified, including alongside a supported positive count. "
         "Credits count distinct results that credit a person\u2019s prior work, excluding "
         "their authored results. Years active covers dated original work and explicit "
         "discovery or proof records, excluding later reuse and import dates. "

@@ -541,6 +541,7 @@ RENDER_INPUTS: tuple[Path, ...] = (
     PACKING / "devtools/site_icons.py",
     PACKING / "devtools/site_resources.py",
     PACKING / "devtools/site_tallies.py",
+    PACKING / "devtools/record_presentation.py",
     PACKING / "devtools/github_references.py",
     # The News label rubric, whose `Short` column a News meter and the archive's S
     # buttons quote (`render_changelog.news_significance_meanings`).

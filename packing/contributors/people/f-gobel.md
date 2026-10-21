@@ -6,17 +6,17 @@ softschema:
   status: enforced
 contributor:
   id: f-gobel
-  display_name: F. Göbel
+  display_name: Frits Göbel
   surname: Göbel
   aliases:
   - Göbel
   - Gobel
-  - Frits Göbel
+  - F. Göbel
   - Goebel
   sources:
   - id: primary-byline
     archive_path: packing/resources/papers/gobel-1979-geometrical-packing-and-covering-problems.pdf
-    locator: Page 1 title and F. GOBEL byline; initial retained rather than expanding a name.
+    locator: Page 1 title and literal F. GOBEL byline support the retained initial-name alias.
   - id: bibliography
     archive_path: packing/resources/bibliography.yaml
     locator: Source author, credit and credited_names fields retain the printed attribution labels.
@@ -32,7 +32,8 @@ contributor:
     - bibliography
   - field: /display_name
     sources:
-    - primary-byline
+    - catalogue-credit
+    - bibliography
   - field: /aliases
     sources:
     - primary-byline

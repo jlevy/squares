@@ -397,6 +397,7 @@ class Resource:
     byline: str
     profile_ids: tuple[str, ...]
     kind: Literal["repository", "catalogue", "website"]
+    byline_label: Literal["By", "Contributors"] = "By"
 
 
 def profile_ids_for_byline(byline: str, index: ProfileIndex) -> tuple[str, ...]:
@@ -408,6 +409,20 @@ def profile_ids_for_byline(byline: str, index: ProfileIndex) -> tuple[str, ...]:
     if matches:
         return matches if len(matches) == 1 else ()
     return named_profile_ids(byline, index)
+
+
+# Retained 11SquaresFormalized/ACKNOWLEDGEMENTS.md, lines 5-10. These mixed
+# proof/support relationships establish resource membership, not primary authorship.
+RESOURCE_CONTRIBUTORS = {
+    "https://github.com/Queuingtheorydotcom/11SquaresFormalized": (
+        "ctjlewis",
+        "hiroaki-hosono",
+        "benjamin-gurevitch",
+        "julian-jj",
+        "guzhou0806",
+        "manasseh-ahmed",
+    ),
+}
 
 
 def resource_records(index: ProfileIndex) -> tuple[Resource, ...]:
@@ -432,7 +447,20 @@ def resource_records(index: ProfileIndex) -> tuple[Resource, ...]:
         for url, author, note in OTHER_PROJECTS
     )
     unique: dict[str, Resource] = {}
-    for record in records:
+    for original in records:
+        record = original
+        if identifiers := RESOURCE_CONTRIBUTORS.get(record.url):
+            if any(identifier not in index.people for identifier in identifiers):
+                raise ValueError(f"resource contributor has no profile: {record.url}")
+            record = Resource(
+                record.url,
+                record.title,
+                record.description,
+                ", ".join(index.people[identifier].full_name for identifier in identifiers),
+                identifiers,
+                record.kind,
+                "Contributors",
+            )
         if record.url in unique and unique[record.url] != record:
             raise ValueError(f"conflicting external resource: {record.url}")
         unique[record.url] = record

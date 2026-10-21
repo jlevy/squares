@@ -874,9 +874,10 @@ in Memo III (private communication, September 2026). His suggestion prompted a
     The [rendering]({{BEST_RENDER_URL}}) is the project’s own.
     Stromquist’s [Memo III]({{PRIOR_MEMO_URL}}), pp.
     2–4, credits
-    [Mats Gustafsson](https://jlevy.github.io/squares/profiles/mats-gustafsson.html) and
-    [Magnus Thulin](https://jlevy.github.io/squares/profiles/magnus-thulin.html) with
-    the same construction, reported by
+    [Gustafsson](https://jlevy.github.io/squares/profiles/mats-gustafsson.html “Mats Gustafsson”)
+    and
+    [Thulin](https://jlevy.github.io/squares/profiles/magnus-thulin.html “Magnus Thulin”)
+    with the same construction, reported by
     [Gardner](https://jlevy.github.io/squares/profiles/martin-gardner.html) in November
     1980; the research archive records their independent rediscovery.
 
