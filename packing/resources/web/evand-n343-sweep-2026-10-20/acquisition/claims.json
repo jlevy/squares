@@ -1,0 +1,12 @@
+{
+  "format": "upper-bound-report-claims-v1",
+  "issue": "https://github.com/jlevy/squares/issues/702",
+  "source": "https://github.com/evand/square-packing",
+  "revision": "88385abc95ab25d520302282d1946cbb07bc9cf3",
+  "read_on": "2026-10-21",
+  "read_at_main": "d640ad8fbf8a637ab0a5edb95d7911a2353a2c08",
+  "horizon": 324,
+  "results": [
+    {"n": 343, "certificate": "search/packer/candidates/s343_sw.cert", "format": "evand-cert", "requested": true, "replayed": true, "offered_side": "18.977682482405", "printed_in": "https://github.com/jlevy/squares/issues/702", "exact_side": "18977682482404124568634475670459/1000000000000000000000000000000", "ceiling": "18.9776824824041246", "first_committed": "2026-10-20T21:47:03Z", "grid_side": "19", "case": null, "pending": [{"report": "fang-two-wedge-certificates-2026-10-10", "url": "packing/frontier/source-coverage.yaml", "holders": "Kevin Fang", "exact_side": "789017423383549575129979982295456201/41538374868278621028243970633760768", "relation": "below", "difference": "666206980387357549497215734802998628885949191983887537/38685626227668133590597632000000000000000000000000000000"}, {"report": "evand-record-hunt3-2026-10-10", "url": "packing/frontier/source-coverage.yaml", "holders": "Evan Daniel", "exact_side": "18978232523635611279730512106023/1000000000000000000000000000000", "relation": "below", "difference": "137510307871677774009108891/250000000000000000000000000000"}, {"report": "couzo-issue678-2026-10-18", "url": "packing/frontier/source-coverage.yaml", "holders": "Francisco Couzo", "printed": "18.978232204823", "rounding": "up", "relation": "below", "difference": "549722418875431365524329541/1000000000000000000000000000000"}], "smallest": "this certificate"}
+  ]
+}

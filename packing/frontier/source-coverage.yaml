@@ -6090,6 +6090,8 @@ sources:
     at this source-only stage; the case lanes and house best packings at 204 and 260 are
     unchanged.
     On 21 October 2026 issue 686's rows superseded 48 of this source's (muglich-issue686-2026-10-19).
+    On 21 October 2026 issue 702's row at 343 superseded this source's there
+    (evand-n343-sweep-2026-10-20).
   claims_record: resources/web/couzo-issue678-2026-10-18/acquisition/beyond-horizon-claims.json
 - id: bengreff-s95-certificate-2026-10-15
   title: Benjamin Greff's mixed cover for s(95) = 10, issue610
@@ -6476,6 +6478,38 @@ sources:
     3 native jobs have full outcomes. No selected override or superseded claim is created at this source-only
     stage; current cases and earlier source ownership remain unchanged.
 
+- id: evand-n343-sweep-2026-10-20
+  title: Evan Daniel's n343 certificate at 88385ab, issue702
+  role: source-repository
+  url: https://github.com/evand/square-packing/tree/88385abc95ab25d520302282d1946cbb07bc9cf3
+  local: resources/web/evand-n343-sweep-2026-10-20/
+  source_key: '[Daniel n343 sweep 2026-10-20]'
+  scope:
+    n_values:
+    - 343
+  reviewed: '2026-10-21'
+  source_date: '2026-10-20'
+  disposition: current-report
+  replay_disposition: case-specific
+  represented_by:
+  - resources/web/evand-n343-sweep-2026-10-20/README.md
+  - resources/web/evand-n343-sweep-2026-10-20/acquisition/claims.json
+  evidence:
+  - E-evand-702-n343-report
+  notes: >-
+    Issue 702's one certificate, s343_sw.cert at 88385ab, is retained as the source wrote it,
+    admitted only where its exact side equals, or rounds up to, the side its source prints:
+    18977682482404124568634475670459/10^30, rounded up at 12 places to the issue's
+    18.977682482405. 343 lies beyond the case corpus, so no register entry records it; it is
+    a beyond-horizon row. Both maintained routes accept it and refuse its duplicate-square
+    and outside-container controls (receipts/exact-certification.json.xz, 3 jobs). The row
+    supersedes couzo-issue678-2026-10-18's at 343 in report order: issue 678 reached this
+    repository on 18 October, before issue 702, and this side is 5.497224e-4 below its
+    print, however that print was rounded, and 5.500412e-4 below
+    evand-record-hunt3-2026-10-10's, exactly. The issue credits Kevin Fang's two-wedge
+    family (issue 484) as the construction, as issue 489 did. Its KKT, local-minimum and
+    MILP statements are the author's numerical evidence and are not recorded.
+  claims_record: resources/web/evand-n343-sweep-2026-10-20/acquisition/beyond-horizon-claims.json
 - id: wand125-fine-net-n38-65775-2026-10-16
   title: Wand125 reported n38 fine-net lower bound (#446)
   role: source-repository
@@ -12309,8 +12343,16 @@ beyond_horizon_claims:
   claim: upper-bound
   value: '18.978232204823'
   assurance: reported
-  disposition: tracked-outside-case-corpus
+  disposition: superseded
+  superseded_by: evand-n343-sweep-2026-10-20
   bead: think-xu4d
+- n: 343
+  source_id: evand-n343-sweep-2026-10-20
+  claim: upper-bound
+  value: '18.977682482405'
+  assurance: reported
+  disposition: tracked-outside-case-corpus
+  bead: think-wuxt
 - n: 418
   source_id: couzo-issue678-2026-10-18
   claim: upper-bound

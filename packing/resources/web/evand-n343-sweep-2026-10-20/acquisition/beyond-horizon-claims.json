@@ -1,0 +1,10 @@
+{
+  "format": "upper-bound-beyond-horizon-claims-v1",
+  "issue": "https://github.com/jlevy/squares/issues/702",
+  "source": "https://github.com/evand/square-packing",
+  "revision": "88385abc95ab25d520302282d1946cbb07bc9cf3",
+  "horizon": 324,
+  "results": [
+    {"n": 343, "offered_side": "18.977682482405", "exact_side": "18977682482404124568634475670459/1000000000000000000000000000000", "ceiling": "18.9776824824041246"}
+  ]
+}

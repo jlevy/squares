@@ -1,0 +1,104 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-10-21T05:33Z",
+  "git_scope": "Blobless clone of evand/square-packing and a sparse checkout of the issue #702 pin 88385ab, the commit that adds the nine s343_sw files (and the eight s270_sw files of #703, which the evand-n270-sweep-2026-10-20 packet retains) under search/packer/candidates/. All nine s343_sw files are retained: the certificate the claim rests on (s343_sw.cert), its 80-digit KKT point, the binary64 input it was solved from, the pre-descent point, the solver's report, the prior-record summary, the same-side regularized view with its report, and the source's comparison with Francisco Couzo's #678 packing; with the licence, credits, the format and packer READMEs and the source's submission guide, which defines the words the issue uses for credit. The two source checkers, the exact solver and the basin explorer are pinned by digest against the identical copies the n183 packet retains, and the packer log, the near-record sweep and the corner-slip descent by digest only. The rest of the tree is pinned by the commit and was not retained or executed.",
+  "sources": [
+    {
+      "id": "evand-n343-sweep-2026-10-20",
+      "source_url": "https://github.com/evand/square-packing",
+      "source_ref": "88385abc95ab25d520302282d1946cbb07bc9cf3",
+      "source_commit": "88385abc95ab25d520302282d1946cbb07bc9cf3",
+      "committed_utc": "2026-10-20T21:47:03Z",
+      "git_tree": "34fd62e00173b6b9abf84d8368a9edf83e4b6a97",
+      "archived_path": "packing/resources/web/evand-n343-sweep-2026-10-20/source",
+      "subtree_manifest": "packing/resources/web/evand-n343-sweep-2026-10-20/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "LICENSE",
+        "CREDITS.md",
+        "README.md",
+        "search/exact/README.md",
+        "search/exact/verify_cert.py",
+        "search/exact/verify_cert2.py",
+        "search/exact/exactsolve.py",
+        "search/exact/descend.py",
+        "search/packer/README.md",
+        "search/packer/SUBMITTING.md",
+        "search/packer/PACKER.md",
+        "search/packer/explore.py",
+        "search/packer/dgen.py",
+        "search/packer/candidates/s343_sw.cert",
+        "search/packer/candidates/s343_sw.exact.txt",
+        "search/packer/candidates/s343_sw.input.txt",
+        "search/packer/candidates/s343_sw.json",
+        "search/packer/candidates/s343_sw.predescent.txt",
+        "search/packer/candidates/s343_sw_prior.json",
+        "search/packer/candidates/s343_sw_regularized.cert",
+        "search/packer/candidates/s343_sw_regularized.json",
+        "search/packer/candidates/s343_sw_vs_prior.json"
+      ],
+      "subtree_file_count": 22,
+      "subtree_total_bytes": 1006244,
+      "retained_file_count": 15,
+      "retained_total_bytes": 382667,
+      "compressed": [
+        "source/search/packer/candidates/s343_sw_vs_prior.json.gz"
+      ],
+      "pinned_only": [
+        {
+          "path": "search/exact/descend.py",
+          "bytes": 3030,
+          "sha256": "a587b8e959cff2038f819abf05d1b0ee4ea119a8e087d4d6104ec84447195a90",
+          "reason": "The corner-slip descent the issue names for lowering the found packing before exactsolve.py certified it; numerical discovery code, pinned for provenance and not executed."
+        },
+        {
+          "path": "search/exact/exactsolve.py",
+          "bytes": 62041,
+          "sha256": "ca32d01fea8ca125bb4a3c26cfcfd2bcbc2c1ecf99e140be08662d327d589111",
+          "reason": "Numerical high-precision certificate producer, byte-identical to the copy the n183 packet retains at 3a9948c; a replay consumes the completed certificate without this solver or its dependencies.",
+          "identical_to": "packing/resources/web/evand-n183-subgrid-2026-10-19/source/search/exact/exactsolve.py"
+        },
+        {
+          "path": "search/exact/verify_cert.py",
+          "bytes": 3401,
+          "sha256": "3299ca0c0f02f7c221deeea69a9a85b5a90db6bc410b20727fdff211c92bed52",
+          "reason": "The source's two standalone exact checkers, byte-identical to the copies the n183 packet retains at 3a9948c; never executed by this acquisition.",
+          "identical_to": "packing/resources/web/evand-n183-subgrid-2026-10-19/source/search/exact/verify_cert.py"
+        },
+        {
+          "path": "search/exact/verify_cert2.py",
+          "bytes": 3101,
+          "sha256": "55140a35d95d9eaa64a14c3b044641efbcda94ebfc3b12b7dec9fa52692e31d3",
+          "reason": "The source's two standalone exact checkers, byte-identical to the copies the n183 packet retains at 3a9948c; never executed by this acquisition.",
+          "identical_to": "packing/resources/web/evand-n183-subgrid-2026-10-19/source/search/exact/verify_cert2.py"
+        },
+        {
+          "path": "search/packer/PACKER.md",
+          "bytes": 494342,
+          "sha256": "c4eb8bb58b6d97b2a65bc63a357747a75c0f1d9973e153bdd0c193c083ac8afa",
+          "reason": "The packer's chronological working log, 494,342 bytes of general search history; pinned for provenance."
+        },
+        {
+          "path": "search/packer/dgen.py",
+          "bytes": 8631,
+          "sha256": "d8deba0a5a88b4c58a74150e67d60c97752048fbeb1cc901543ad52d254d791c",
+          "reason": "The near-record sweep the issue names for choosing the 24 starts, added in a435c97, the parent of the pin; numerical discovery code, pinned for provenance and not executed."
+        },
+        {
+          "path": "search/packer/explore.py",
+          "bytes": 49031,
+          "sha256": "86e2b656e3dc88b7c84b45d4c6b9350e5a18a1fb9d6194f9bbd94484e686decd",
+          "reason": "Numerical basin explorer used for discovery, byte-identical to the copy the n183 packet retains at 3a9948c; not required by either standalone exact checker.",
+          "identical_to": "packing/resources/web/evand-n183-subgrid-2026-10-19/source/search/packer/explore.py"
+        }
+      ],
+      "license": "MIT, copyright (c) 2026 Evan Daniel (LICENSE retained). CREDITS.md states Claude (Anthropic) under human direction, no peer review; the pinned commit names Claude Opus 5.5 as co-author and says the commit and push were approved by Evan Daniel. Issue #702 credits Kevin Fang's two-wedge family (#484) as the construction, as in #489.",
+      "claims": [
+        "Issue #702 reports s(343) <= 18.977682482405, the exact rational side of search/packer/candidates/s343_sw.cert, 18977682482404124568634475670459/(10^30) = 18.977682482404124568634475670459, rounded up at 12 places, 5.50e-4 below Francisco Couzo's #678 print 18.978232204823; it prints the SHA-256 of s343_sw.cert and of s343_sw_regularized.cert, the same packing at the same side regularized for display. 343 is beyond the n <= 324 case corpus, and the issue asks for a row, as with the author's 343 of #489.",
+        "The issue reports a KKT point at 80 digits with exact side S* = 18.977682482404124568444..., a local minimum of the side strict modulo 82 exact flat motions, not isolated, with no corner-corner MILP descent, 111 wall and 1683 square-square contact equations, 203 corner-corner contacts, 11 rattlers and 106 tilted squares in the regularized view, 103 of them load-bearing. These are numerical evidence at 80 digits, as the issue says, not interval proofs.",
+        "The issue calls it a new packing, a different local minimum from Couzo's #678: exact sides differ by 5.497e-4; matched over the 8 box symmetries the contact graphs share 602 pairs, with 100 only in this packing and 109 only in #678's, and 5 of 11 rattlers are shared; no load-bearing tilt angle is shared; matched square by square (regularized views, load-bearing squares) the largest move is 0.242, 12 squares move by more than 0.1 and 107 by more than 0.01. It reports the same relation to a stored non-record 343 at 18.985669223699, its nearest stored packing.",
+        "The issue gives the lineage: on 10 October (Hunt 3, #489) Kevin Fang's #484 344 with one square removed, then the author's basin explorer (search/packer/explore.py) at 343, which stored many non-record 343s besides #489's; on 20 October a near-record sweep (search/packer/dgen.py sweep) chose 24 starts from 1,552 stored 343s, 1e-3 to 1e-2 above the best known side, and in four 40-minute explorer runs this packing came 28 minutes into one, seven moves from a start 7.4e-3 above the record; a corner-slip descent (search/exact/descend.py) lowered it from 18.9776923 to 18.9776825 and exactsolve.py certified it. It is in the design of Fang's two-wedge family (#484), which the issue credits as the construction, as #489 did.",
+        "The author's two standard-library exact checkers, verify_cert.py (separating axes) and verify_cert2.py (polygon intersection), are reported to accept the certificate; they share an author and the certificate format. No closed form, interval proof of local optimality or optimality is claimed."
+      ]
+    }
+  ]
+}

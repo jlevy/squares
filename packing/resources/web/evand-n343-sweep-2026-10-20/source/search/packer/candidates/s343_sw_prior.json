@@ -1,0 +1,159 @@
+{
+ "store_id": 1770766,
+ "s": 18.978232204822476,
+ "sources": [
+  "pending:#678 (Francisco Couzo (franciscouzo))",
+  "watch:franciscouzo/square-packing@7b6c87e (lollipoll)"
+ ],
+ "ok": true,
+ "S_exact": "18.978232204793598327646426988940977076879279837086623187542680502",
+ "S_cert": "18.978232204793598327836209310989",
+ "checkers": {
+  "verify_cert": {
+   "ok": true,
+   "line": "VALID: s(n) <= S"
+  },
+  "verify_cert2": {
+   "ok": true,
+   "line": "VALID: 343 closed unit squares pairwise disjoint inside the open box of side 18.97823220479359918 (763 close pairs checked)"
+  }
+ },
+ "optimality": {
+  "kkt": true,
+  "min_lambda": 3.830730611796004e-07,
+  "status": "local minimum of S, strict modulo 19 exact flat motions (PD on the rest of null(J_A)); the configuration is not isolated",
+  "flat_motions": 19,
+  "flat_realised": 19.0,
+  "flat_residual": 9.595620485282135e-61,
+  "negative_eigs": 0,
+  "corner_corner": 340,
+  "vv_milp_dS": -2.5606614299866407e-16,
+  "rattlers": 5,
+  "min_pair": 9.999999999999986e-21,
+  "min_wall": 5e-21
+ },
+ "regularized": {
+  "ok": true,
+  "S_exact": "18.9782322047935983276464269889409770768792798370866231875427",
+  "S_cert": "18978232204793598327836209310989/1000000000000000000000000000000",
+  "groups": [
+   50,
+   45
+  ],
+  "level": 2,
+  "level_text": "same packing: traversable without expansion (angle moves path-checked; slides by construction)",
+  "checkers": {
+   "verify_cert": {
+    "ok": true,
+    "line": "VALID: s(n) <= S"
+   },
+   "verify_cert2": {
+    "ok": true,
+    "line": "VALID: 343 closed unit squares pairwise disjoint inside the open box of side 18.97823220479359918 (757 close pairs checked)"
+   }
+  }
+ },
+ "verdict": "distinct minimum",
+ "difference": {
+  "side_gap": 0.0005497223894757042,
+  "matching_distance_regularized": 0.04879698443248074,
+  "symmetry": 0,
+  "moved_gt_1e4": 313,
+  "moved_gt_1e2": 107,
+  "moved_gt_1e1": 12,
+  "moved_gt_1e1_all": 12,
+  "max_move": 0.24212319253523443,
+  "max_move_all": 0.24212319253523443,
+  "max_angle_change": 18.774200819343672,
+  "rattler_status_swaps": 6,
+  "shared_angles": [],
+  "ours_only_angles": [
+   "10.5064",
+   "15.8132",
+   "16.8746",
+   "16.9388",
+   "17.6328",
+   "18.1142",
+   "18.1662",
+   "18.4011",
+   "18.5262",
+   "18.5678",
+   "20.0093",
+   "20.8881",
+   "21.1436",
+   "22.1542",
+   "22.4498",
+   "22.4763",
+   "22.4884",
+   "23.1638",
+   "23.1731",
+   "23.2138",
+   "23.3142",
+   "23.5290",
+   "23.5356",
+   "24.0924",
+   "25.0822",
+   "25.4870",
+   "25.7244",
+   "32.2543",
+   "7.3995"
+  ],
+  "prior_only_angles": [
+   "0.0068",
+   "0.0807",
+   "0.8634",
+   "10.4520",
+   "11.3019",
+   "14.5551",
+   "15.6591",
+   "15.9992",
+   "16.0987",
+   "16.2813",
+   "16.3949",
+   "16.4781",
+   "16.7024",
+   "16.8219",
+   "17.2616",
+   "17.2813",
+   "17.3352",
+   "17.5458",
+   "17.6681",
+   "17.8954",
+   "18.1738",
+   "18.3317",
+   "18.7742",
+   "18.8419",
+   "19.5394",
+   "2.4214",
+   "2.6757",
+   "20.1067",
+   "20.2745",
+   "20.3087",
+   "20.3730",
+   "20.4314",
+   "20.8047",
+   "20.8648",
+   "21.6959",
+   "21.8882",
+   "22.7222",
+   "24.0716",
+   "24.9110",
+   "24.9989",
+   "31.6819",
+   "4.1099",
+   "4.2745",
+   "7.0774"
+  ],
+  "contacts": {
+   "symmetry": 0,
+   "edges_ours": 702,
+   "edges_prior": 711,
+   "shared": 602,
+   "ours_only": 100,
+   "prior_only": 109,
+   "rattlers_ours": 11,
+   "rattlers_prior": 5,
+   "rattlers_shared": 5
+  }
+ }
+}

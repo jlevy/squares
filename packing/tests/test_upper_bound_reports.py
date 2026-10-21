@@ -76,8 +76,11 @@ OSTASHEV_562 = "dostashev-compositions-2026-10-12"
 OSTASHEV_575 = "dostashev-merged-bands-2026-10-13"
 EVAND_584 = "evand-compositions-2026-10-13"
 EVAND_596 = "evand-fresh-compositions-2026-10-14"
+#: Evan Daniel's issue #702, its one count beyond the corpus, retained under MIT by the
+#: #702 lane of 21 October (`test_upper_bound_reports_702`).
+DANIEL_702 = "evand-n343-sweep-2026-10-20"
 #: The packets that request nothing inside the corpus, so plan no register entry.
-BEYOND_ONLY = (EVAND_584, EVAND_596)
+BEYOND_ONLY = (EVAND_584, EVAND_596, DANIEL_702)
 #: Issue #528, Ostashev's three compositions in sqcert, and issue #529, Rio Calle's n = 102
 #: layout, whose exact certificate is derived here (`test_upper_bound_reports_528_529`).
 OSTASHEV_528 = "dostashev-records-2026-10-12"
@@ -150,6 +153,7 @@ EVERY = (
     DANIEL_694,
     DE_WINTER_668,
     DANIEL_703,
+    DANIEL_702,
 )
 
 

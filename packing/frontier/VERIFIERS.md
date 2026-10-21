@@ -26,7 +26,7 @@ second implementation agrees.
 ## The Short Version
 
 - **176** programs: **50** external and **126** first-party; **122** decide claims and **54** check premises.
-- **564** of **676** evidence entries name the programs that verified them: 276 reproduced with the producer’s code, 245 independently re-implemented, 24 re-implemented, sharing the producer’s components, 19 no relation: a proof, a derivation or a report.
+- **564** of **677** evidence entries name the programs that verified them: 276 reproduced with the producer’s code, 245 independently re-implemented, 24 re-implemented, sharing the producer’s components, 19 no relation: a proof, a derivation or a report.
 
 ## Programs
 
