@@ -56,6 +56,10 @@ FAMILIES = {
         "input-response",
         "Fetch and clone canonical articles and their assets after reader input.",
     ),
+    "profile-directory": (
+        "input-response",
+        "Extend native profile-row links over blank cells while preserving other links.",
+    ),
     "contributor-popover": (
         "input-response",
         "Enhance native contributor links with their canonical profile article.",

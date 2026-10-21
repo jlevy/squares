@@ -11,8 +11,12 @@ Those documents reference this policy rather than maintain separate naming rules
 
 ## People, Projects and Assistance
 
-Credit the person responsible for a contribution, using their preferred public name or
-the handle under which they publish.
+Credit the person responsible for a contribution by name, and a compact credit line by
+surname: `Xu`, not the handle `ry-xu` (the owner, 2026-10-14: “use Ryan Xu real name or
+surname Xu not the handle for regular credits”). A handle stands in a credit only for an
+author whose sources give no other name.
+Everywhere else a handle is an identifier and stays as it is: in a source key, a path, a
+URL or a repository name.
 A verified handle and a person’s name identify one contributor, not two authors.
 Do not infer a real name, merge accounts from similar spellings, or expand a pseudonym
 without evidence.
@@ -46,11 +50,13 @@ Each person has one stable contributor ID. Their profile holds sourced names, al
 and public account links.
 Changing a preferred display label does not change that ID or break existing links.
 The full `aliases` array retains evidenced spellings for reviewed credit matching.
-The optional `display_aliases` array selects which of those spellings a profile shows;
+The optional `display_aliases` array selects additional public handles a profile shows;
 it defaults to empty and does not require a second provenance claim for the selection.
-Show meaningful alternate public names rather than repeating the current name, surname,
-obvious spelling variants or accounts already linked below the name.
-An account’s transient display name need not become the preferred credit name.
+Label that section **Handles**. Show meaningful additional handles rather than repeating
+the current name, surname, obvious spelling variants or GitHub and Twitter/X usernames
+already linked below the name.
+Matching ignores case and an initial `@`. An account’s transient display name need not
+become the preferred credit name.
 
 Inline profile links use one registry-wide naming rule: an evidenced surname when
 unique, the full public name when surnames collide, then an evidenced handle or stable
@@ -60,9 +66,13 @@ word position never establishes it.
 A person without an established surname uses their public account handle, preferring
 GitHub when available, or their public display name.
 The directory sorts by that same surname or handle, but displays full real or public
-names beside reviewed-credit counts, cited-resource counts and public account links.
+names beside distinct reviewed-result tallies, separate reviewed-credit counts,
+cited-resource counts and public account links.
 Full profile headings and identity metadata also retain the full public name.
 Home and About invite readers to the directory without listing names.
+About’s narrative introduction uses full public names with profile links.
+This is a presentation exception for explanatory prose; compact credits and official
+result records retain the surname rule.
 
 Identity evidence may include the person’s public account or publication, linked
 profiles, retained account identifiers, and an explicit confirmation recorded by the
@@ -193,6 +203,7 @@ profile or source packet.
 | Hiroaki Hosono / wand125 | Recorded 2026-10-13. One person, credited by name: `Hosono` in compact credits, `Hiroaki Hosono` on his profile and in unlinked prose. `wand125` on GitHub and `@wand_125` on X are his handles, linked from the profile; they are aliases, not a second author. Bibliography keys, identifiers, URLs, quotations and archived text keep the handle. | The owner’s instruction of 13 October 2026; the commit authorship his retained packets record and his GitHub profile’s name; [profile](packing/contributors/people/hiroaki-hosono.md). | `think-m7il` |
 | Ryan Xu / ry-xu | Recorded 2026-10-14. One person, credited by name: `Xu` in compact credits, `Ryan Xu` on his profile, in case-record finder lists and in unlinked prose. `ry-xu` on GitHub and `@small_LM` on X are his handles, linked from the profile; they are aliases, not a second author. Bibliography keys, identifiers, module names, packet paths, URLs, the `author` field that names the account filing an issue, quotations, archived text and dated reviews keep the handle. | The owner’s instruction of 14 October 2026; the GitHub account `ry-xu` gives the name Ryan Xu and links the X account; [profile](packing/contributors/people/ryan-xu.md). | `think-g2ga` |
 | Nate Chaoweeraprasit / natcha | Recorded 2026-10-20. One person, credited as `Chaoweeraprasit` in compact links and `Nate Chaoweeraprasit` on his profile. `natcha`, GitHub `itsnaka` and X `thatennine` are aliases. | The owner’s confirmation of 20 October 2026 identifies Nate as the person behind `natcha` and [the X account](https://x.com/thatennine); the X profile was not independently inspected. The [SQUISH intake](packing/resources/web/squish-401-2026-10-07/README.md) already records Nate Chaoweeraprasit (itsnaka). See his [profile](packing/contributors/people/nate-chaoweeraprasit.md). | `think-notn` |
+| Ryu Sungjoon / squarepacker | Recorded 2026-10-20, applying the handle rule above. One person, credited by name: `Ryu`, his family name, in compact credits, and `Ryu Sungjoon` on his profile and in unlinked prose. `squarepacker`, the GitHub account that publishes his repositories, is his handle: an alias, not a second author. Bibliography keys, identifiers, packet paths, URLs, repository names, quotations and archived text keep the handle. | The Credits section of his [s(12) edition’s README](packing/resources/web/squarepacker-s12-lower-bound-2026-10-05/s12-lower-bound/README.md) reads “Author: Ryu Sungjoon (@squarepacker)”; its [Zenodo record](packing/resources/web/squarepacker-s12-lower-bound-2026-10-05/zenodo-23157015.json) lists the creator as “Ryu, Sungjoon”; his preprints print the name given name first, “Sungjoon Ryu”; [profile](packing/contributors/people/ryu-sungjoon.md). Credits that still print `squarepacker` are migration work. | `think-m7il` |
 | Historical first-party atlas/PDF lines | Migrate project-as-person credit to the preferred person name from the generating records. Do not edit archived third-party sources. | The existing `Squares Project (Levy)` display is a migration target, not the naming rule for new work. Rebuild and review affected figures and PDF credits together. | `think-vix3`, `think-jn87` |
 
 An exception needs a named scope, reason, supporting evidence, owner and review

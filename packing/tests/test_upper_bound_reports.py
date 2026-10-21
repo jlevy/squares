@@ -95,6 +95,20 @@ MISHAPOLK_70A = "mishapolk-kkt-refinements-2026-10-14"
 #: PR #622, PingYou Ltd's N29 certificate in a release asset, kept as a derived fact: the
 #: evening intake of 16 October (`test_upper_bound_reports_622`).
 PINGYOU_622 = "pingyou-pr622-certificate-2026-10-15"
+#: Evan Daniel's issues #669, #674 (opening and update), #659 and #664, retained under MIT
+#: by the evand lane of 19 October (`test_upper_bound_reports_659_664_669_674`).
+DANIEL_669 = "evand-n155-explorer-2026-10-17"
+DANIEL_674 = "evand-n229-dilation-2026-10-17"
+DANIEL_674_UPDATE = "evand-n229-dilation-update-2026-10-18"
+DANIEL_659 = "evand-n236-2026-10-16"
+DANIEL_664 = "evand-n271-2026-10-17"
+#: Evan Daniel's issues #689 and #694, retained under MIT by the evand lane of 20 October
+#: (`test_upper_bound_reports_689_694`).
+DANIEL_689 = "evand-n308-2026-10-19"
+DANIEL_694 = "evand-n154-sweep-2026-10-20"
+#: Evan Daniel's issue #703, retained under MIT by the #703 lane of 21 October
+#: (`test_upper_bound_reports_703`).
+DANIEL_703 = "evand-n270-sweep-2026-10-20"
 #: How a declaration cites a beyond-horizon row of the source register.
 COVERAGE_URL = "packing/frontier/source-coverage.yaml"
 EVERY = (
@@ -124,6 +138,14 @@ EVERY = (
     DANIEL_606,
     MISHAPOLK_70A,
     PINGYOU_622,
+    DANIEL_669,
+    DANIEL_674,
+    DANIEL_674_UPDATE,
+    DANIEL_659,
+    DANIEL_664,
+    DANIEL_689,
+    DANIEL_694,
+    DANIEL_703,
 )
 
 
@@ -174,6 +196,23 @@ def test_custody_admits_every_declared_certificate_at_its_printed_side(name: str
             continue
         places = len(row["offered"].partition(".")[2])
         assert legacy.ceiling_decimal(certificate.side, places) == row["offered"]
+
+
+def test_n183_house_reader_keeps_source_custody_and_original_certificate_scope(
+    private: Callable[[str], Path],
+) -> None:
+    packet = private("evand-n183-subgrid-2026-10-19")
+    reader = "[Daniel n183 subgrid 2026-10-19]"
+    assert reports.import_packet(reader) == packet
+    source = packet / "source/search/packer/candidates/s183_h183b.cert"
+    original = source.read_bytes()
+    source.write_bytes(original + b"\n")
+    with pytest.raises(reports.ReportError, match="packet custody"):
+        reports.house_side(reader, 183)
+    source.write_bytes(original)
+    assert reports.house_side(reader, 183) == Fraction(13999580178736252502081470897571, 10**30)
+    with pytest.raises(reports.ReportError, match="n=182"):
+        reports.house_side(reader, 182)
 
 
 def test_the_couzo_sides_are_the_exact_fractions_the_source_states() -> None:
@@ -1318,6 +1357,14 @@ def test_the_register_plan_states_each_bound_as_check_standing_reads_it(name: st
         DANIEL_606: "2026-10-14",
         MISHAPOLK_70A: "2026-10-14",
         PINGYOU_622: "2026-10-15",
+        DANIEL_669: "2026-10-17",
+        DANIEL_674: "2026-10-17",
+        DANIEL_674_UPDATE: "2026-10-18",
+        DANIEL_659: "2026-10-16",
+        DANIEL_664: "2026-10-17",
+        DANIEL_689: "2026-10-19",
+        DANIEL_694: "2026-10-20",
+        DANIEL_703: "2026-10-20",
     }
     assert result["attribution"]["published"] == published.get(name, "2026-10-10")
     evidence = plan["evidence.yaml"]

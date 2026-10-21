@@ -67,6 +67,10 @@
   font-size: var(--site-font-size-note);
   line-height: 1.45;
 }
+.site-result-note,
+.site-result-credit {
+  color: var(--kpress-doc-text);
+}
 .site-result .site-date-kind {
   color: var(--site-support-color);
   display: inline;
@@ -265,7 +269,7 @@
   border-inline-start-color: var(--kpress-doc-accent);
 }
 .site-result-chain > li[data-standing="superseded"] > p:nth-child(2) {
-  color: var(--site-support-color);
+  color: var(--kpress-doc-text);
 }
 .site-result-chain > li > p:first-child {
   font-variant-numeric: tabular-nums;

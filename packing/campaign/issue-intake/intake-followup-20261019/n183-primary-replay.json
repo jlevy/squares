@@ -1,0 +1,151 @@
+{
+  "format": "bounded-replay-batch-v1",
+  "bead": "think-1hmn",
+  "status": "passed-unintegrated",
+  "source_pin": "3a9948c781be668b1547cc2bf64a0d1e614f9bca",
+  "importer_head": "f57ede12ce64cd1c74336d380b607478361c34c3",
+  "packet": "packing/resources/web/evand-n183-subgrid-2026-10-19",
+  "certificate": "source/search/packer/candidates/s183_h183b.cert",
+  "source_sha256": "279e70d1c7fb0bc181e3e9d313e7350b672d85e223296f252b92f2916d6e5df5",
+  "expected_n": 183,
+  "expected_exact_side": "13999580178736252502081470897571/1000000000000000000000000000000",
+  "expected_jobs": [
+    "positive",
+    "duplicate-square-overlap",
+    "square-translated-outside-container"
+  ],
+  "routes": [
+    "exact_verify",
+    "independent"
+  ],
+  "workers": 1,
+  "batch_ceiling_seconds": 360,
+  "job_timeout_seconds": 100,
+  "acceptance": "All 183 rows and exact side admitted after custody; positive accepted and both invalid controls rejected by both routes, all 16653 pairs per job/route, receipt validated against complete inputs. A passing receipt is unintegrated validation evidence, not a rung or adoption change.",
+  "commands": [
+    "python -m devtools.upper_bound_reports evand-n183-subgrid-2026-10-19 certify --jobs-dir /Volumes/spud-ext1/agent-scratch/squares-intake-followup-20261019/n183-primary-jobs-01 --workers 1 --timeout 100",
+    "python -m devtools.upper_bound_reports evand-n183-subgrid-2026-10-19 check --n 183"
+  ],
+  "outside_scope": [
+    "regularized certificate",
+    "upstream source programs",
+    "same-packing identity",
+    "no-expansion path",
+    "numerical optimization",
+    "result ID",
+    "rating",
+    "adoption",
+    "public release"
+  ],
+  "preservation": "Native compressed receipt retained in packet; jobs, stdout/stderr and run log copied to /Volumes/spud-ext1/agent-source/squares-intake-followup-20261019/n183-primary-replay-01 outside disposable scratch.",
+  "completed_at_utc": "2026-10-19T07:47:45.011658Z",
+  "interpreter": "/Users/levy/wrk/github/squares/packing/.venv/bin/python3",
+  "python_version": "3.14.7",
+  "certify_exit_code": 0,
+  "receipt_admission_exit_code": 0,
+  "process_time": {
+    "wall_seconds": 34.87,
+    "user_seconds": 32.38,
+    "system_seconds": 0.48
+  },
+  "receipt": "packing/resources/web/evand-n183-subgrid-2026-10-19/receipts/exact-certification.json.xz",
+  "summary": {
+    "jobs": 3,
+    "pair_decisions": 99918,
+    "route_cpu_seconds": 30.55,
+    "job_wall_seconds": 31.27,
+    "longest_job_seconds": 10.79
+  },
+  "route_outcomes": [
+    {
+      "control": "positive",
+      "wall_seconds": 10.295219916966744,
+      "cpu_seconds": {
+        "exact_verify": 6.5717099999999995,
+        "independent": 3.619384
+      },
+      "routes": {
+        "exact_verify": {
+          "accepted": true,
+          "pairs_tested": 16653,
+          "minimum_containment_clearance": "1/200000000000000000000",
+          "minimum_best_pair_gap": "410634701261530154144724882523964107748445496442011038260368168329024992759793889459/41063470126153058863231934179550054728762808827746798831660799169182564000000000000000000000000000000000"
+        },
+        "independent": {
+          "accepted": true,
+          "pairs_tested": 16653,
+          "minimum_containment_clearance": "1/200000000000000000000",
+          "minimum_best_pair_gap": "410634701261530154144724882523964107748445496442011038260368168329024992759793889459/41063470126153058863231934179550054728762808827746798831660799169182564000000000000000000000000000000000"
+        }
+      }
+    },
+    {
+      "control": "duplicate-square-overlap",
+      "wall_seconds": 10.182534874998964,
+      "cpu_seconds": {
+        "exact_verify": 6.502451,
+        "independent": 3.5916869999999994
+      },
+      "routes": {
+        "exact_verify": {
+          "accepted": false,
+          "pairs_tested": 16653,
+          "minimum_containment_clearance": "1/200000000000000000000",
+          "minimum_best_pair_gap": "-1"
+        },
+        "independent": {
+          "accepted": false,
+          "pairs_tested": 16653,
+          "minimum_containment_clearance": "1/200000000000000000000",
+          "minimum_best_pair_gap": "-1"
+        }
+      }
+    },
+    {
+      "control": "square-translated-outside-container",
+      "wall_seconds": 10.791583833051845,
+      "cpu_seconds": {
+        "exact_verify": 6.536266,
+        "independent": 3.726718
+      },
+      "routes": {
+        "exact_verify": {
+          "accepted": false,
+          "pairs_tested": 16653,
+          "minimum_containment_clearance": "-396700432066516800003342003333326859/25000000000000000000000000000000000",
+          "minimum_best_pair_gap": "410634701261530154144724882523964107748445496442011038260368168329024992759793889459/41063470126153058863231934179550054728762808827746798831660799169182564000000000000000000000000000000000"
+        },
+        "independent": {
+          "accepted": false,
+          "pairs_tested": 16653,
+          "minimum_containment_clearance": "-396700432066516800003342003333326859/25000000000000000000000000000000000",
+          "minimum_best_pair_gap": "410634701261530154144724882523964107748445496442011038260368168329024992759793889459/41063470126153058863231934179550054728762808827746798831660799169182564000000000000000000000000000000000"
+        }
+      }
+    }
+  ],
+  "remaining": [
+    "No source checker was executed.",
+    "Regularized certificate replay remains open; no same-packing identity or path was measured.",
+    "Independent mathematical review and deciding-program metadata must be mapped to the actual registered claim in a separately reviewed change.",
+    "No assurance rating, case bound, house, result ID or public release is changed by this batch."
+  ],
+  "deciding_programs": [
+    {
+      "route": "exact_verify",
+      "program": "packing/src/sqpack/witness.py:exact_verify",
+      "input": "exact rational center-basis Witness/v2"
+    },
+    {
+      "route": "independent",
+      "program": "packing/devtools/check_rational_witness_independent.py:check_squares",
+      "input": "exact rational corners; checker independently checks square shape"
+    }
+  ],
+  "relationship": "The repository geometry implementations predate this import and share no geometry or verification code. They share this maintained importer's parser, half-angle conversion, fractions arithmetic and Python runtime. No claim of independent authorship, clean-room implementation or a different model family follows. No source producer or checker was run.",
+  "validation_checks": {
+    "custody": "PACKET_MATCHES_ITS_CONTRACT",
+    "documentation": "2073 durable documents, footers and links resolve",
+    "receipt_admission": "1 certificates and 3 jobs admitted"
+  }
+}

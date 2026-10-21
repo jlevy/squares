@@ -103,8 +103,11 @@ small uppercase sans treatment, with their own caps size and spacing.
 One accent, the teal `--kpress-doc-accent`, is the only link and emphasis color:
 `oklch(51.09% 0.0861 186.4)` in the light theme and `oklch(76.68% 0.0861 186.4)` in the
 dark. Both the paper and site layers alias KPress’s separate link blue to it.
-Supporting text uses KPress’s gray (`--kpress-doc-muted`, carried as
-`--site-support-color`) on the web and black in print.
+Primary content uses the normal foreground (`--kpress-doc-text`), including
+descriptions, handles, account links, result summaries, credits and resources.
+Secondary metadata such as dates, breadcrumbs, captions and provenance may use KPress’s
+gray (`--kpress-doc-muted`, carried as `--site-support-color`) on the web and black in
+print.
 
 The packing palette is the fixed set of square fills in `SQUARE_HUE_PALETTE`
 (`packing/src/sqpack/render/style.py`), shaded by contact count in the figures.
@@ -174,7 +177,7 @@ its `open` a yellow, each a hue and a level of the scale, and the yellow a chrom
 of 0.02, the most that keeps its dark fill in sRGB. Recorded results use yellow at level
 2 without the chroma boost.
 Incomplete results and lower-bound kinds use the shared lower-bound red diluted into the
-page background; upper-bound and optimality kinds use the upper-bound green.
+page background, and upper-bound kinds the upper-bound green.
 Superseded standings keep the neutral gray fill.
 `devtools.rung_scale` computes these too, and `tests/test_rung_scale.py` holds this
 table to its output and every ratio to 4.5:1.
@@ -187,6 +190,24 @@ table to its output and every ratio to 4.5:1.
 | `open` | `oklch(84.0% 0.083 95)` `#dbcb8c` | 10.9:1 | `oklch(34.2% 0.070 95)` `#443800` | 9.9:1 |
 | `recorded` | `oklch(84.0% 0.063 95)` `#d7cb9c` | 10.9:1 | `oklch(34.2% 0.050 95)` `#413818` | 9.9:1 |
 
+The topics that Results and News share take their fills from the same two sources
+(`think-z9za`). Verification is the `reviewed` blue; Optimality is violet, Project amber
+and Engineering orange, each at level 2 of the scale, Project with the open case’s
+chroma boost; the bound topics are the bound kinds’ diluted inks.
+One fill keeps one meaning: `devtools.rung_scale` holds every topic at least 0.02 in
+OkLab, about a just noticeable difference, from each status and each other topic in its
+theme, except Verification, which is the `reviewed` blue by design.
+`tests/test_rung_scale.py` holds this table to its output and every ratio to 4.5:1.
+
+| Topic | Light fill | Text contrast | Dark fill | Text contrast |
+| --- | --- | --- | --- | --- |
+| `lower-bound` | `oklch(91.4% 0.028 11.6)` `#f5dbde` | 13.6:1 | `oklch(27.5% 0.022 353)` `#302328` | 12.7:1 |
+| `upper-bound` | `oklch(92.2% 0.018 156.5)` `#dce9e0` | 14.2:1 | `oklch(28.1% 0.021 176.9)` `#1e2d29` | 12.2:1 |
+| `optimality` | `oklch(84.0% 0.063 310)` `#d7c0ea` | 10.6:1 | `oklch(34.2% 0.050 310)` `#40314c` | 10.1:1 |
+| `project` | `oklch(84.0% 0.083 70)` `#eec28f` | 10.7:1 | `oklch(34.2% 0.070 70)` `#4f3105` | 10.0:1 |
+| `engineering` | `oklch(84.0% 0.063 45)` `#efbea9` | 10.7:1 | `oklch(34.2% 0.050 45)` `#4e3022` | 10.1:1 |
+| `verification` | `oklch(84.0% 0.063 250)` `#accef3` | 10.9:1 | `oklch(34.2% 0.050 250)` `#243a51` | 9.9:1 |
+
 ### Significance and the Other Inks
 
 A significance rung is drawn in an ink of its own on the page, not on a chip:
@@ -194,14 +215,16 @@ A significance rung is drawn in an ink of its own on the page, not on a chip:
 verification blue so it reads as neither, and darker and bluer than the accent so it
 never reads as a link; it is light in dark mode.
 Every score uses `overview_sections.significance_mark`: an S label and five segments in
-one square-cornered border box, 5.5em wide at the shared note size and sans medium
+one square-cornered border box, 4.8em wide at the shared note size and sans medium
 weight. The label and bars have a 0.18em gap, smaller than a word space but visibly
 separate. Each bar is 0.5em wide and 0.6em tall; the first S bars are solid and the rest
-are empty outlines.
-The box keeps the same width from S0 through S5, while its accessible
-name states the score and its tooltip explains the judgment.
-News, Results tables, ladders, result overviews, case records and popovers share this
-component; significance continues to describe importance rather than V/C assurance.
+are empty outlines. The border uses the label’s own ink, with 0.18em horizontal padding.
+The box keeps the same width from S0 through S5, while its accessible name states the
+score and its tooltip gives the level’s meaning in the rubric that scored it: a result’s
+from the significance ladder in `epistemics.md`, a News post’s from the short label
+rubric in `result-import.md` (“Label the PR and Prepare News”). News, Results tables,
+ladders, result overviews, case records and popovers share this component; significance
+continues to describe importance rather than V/C assurance.
 It keeps the shared chip height, 1.45em. It is the second column of a table of results,
 narrow, and it stands first among the rungs in a result’s overview, a case record and
 the rating ladders.
@@ -721,7 +744,7 @@ come from its complete page.
 | Case record | `cases/N.html` | Case link, index entry or neighboring-record link | `a[data-case]`, atlas tiles and frontier rows load `article.site-case` in the shared case panel |
 | Result record | `result/t-nnn.html` | Result ID link or **Open Result Record** | Pressing the rest of a result row loads `article.site-result[data-result-overview]` in that row’s panel |
 | Person profile | `profiles/ID.html` | Public-name link or **Open profile** | A marked credit in a case or result article loads `article.site-contributor` in the shared contributor panel |
-| Profile directory | `profiles/index.html` | Home/About **All Profiles** button or colophon **Profiles** link | Full public names, reviewed-credit and resource counts, and public account links in a surname-sorted native table; name links navigate directly to profiles |
+| Profile directory | `profiles/index.html` | Home/About **All Profiles** button or colophon **Profiles** link | Full public names, reviewed-result/significance and credit tallies, resource counts, and public account links in a surname-sorted native table; name links navigate directly to profiles |
 | News article | `news.html#ID` | Linked announcement title or bookmarked article | Homepage and archive reuse the authored article; its profile links navigate directly |
 | Card preview | The card’s ordinary target | Native `popovertarget` button and action link | The card’s preview remains authored in the page; it is not an article fetch |
 | Framed card preview | Target page with `?view=embed` | Native card button and **Expand** | The frame loads on first opening and uses its own document |
@@ -1009,10 +1032,18 @@ contributor articles use their component sheets and the same text tokens.
   News places smaller Results-style topic chips on the left and the shared significance
   meter at the right below the date, followed by the article.
   The chips retain shared fills, corners and leading at 85% of the note-size chip scale.
+  Shared article headers place 0.3rem between title and date; News uses a 0.25rem header
+  gap, 0.4rem before the body and 0.5rem between body paragraphs.
   Homepage News and the archive use the same card renderer and CSS roles.
   Every post has an explicit importance score and a plain rationale.
-  The meter’s accessible label names its S level; its shared tooltip explains the level
-  and the post’s rationale.
+  The meter’s accessible label names its S level; its shared tooltip gives the level’s
+  short meaning in the News label rubric (`result-import.md`, “Label the PR and Prepare
+  News”), as the archive’s S buttons do (`render_changelog.news_significance_meanings`).
+  An S button explains itself on hover and keyboard focus, never on a mouse press.
+  Its explanation opens above the filters and below the site header while the header
+  shows, or below the filters when there is no room between, so it lies over neither a
+  filter control nor the header’s links (`data-site-tooltip-outside`); a press dismisses
+  it. The source record retains the post’s rationale.
   Its S and five bars remain one tightly paired mark.
   Homepage highlights keep the announcement’s significance and assurance qualifiers,
   with one S meter per card.
@@ -1020,15 +1051,20 @@ contributor articles use their component sheets and the same text tokens.
   News bookmarks forwarded there.
   Archive controls offer S3/S4/S5 and default to S4/S5 and all topics, with OR within a
   facet and AND across facets.
-  All significance and All topics clear their facet; Reset restores the defaults.
+  One unboxed Reset filters action restores the defaults.
   The compact chooser groups share the homepage’s small controls, wrap inline, and keep
   their group names accessible without visible headings.
-  Multi-select topic buttons form a joined strip, wrap between labels on narrow screens,
-  and use the cards’ sentence-case labels and topic fills in both color themes.
-  An inset underline marks selected topics; hover underlines the label and keyboard
-  focus keeps the shared outline.
+  Multi-select topic buttons wrap between labels on narrow screens, with a border around
+  each button rather than empty space at the end of a wrapped strip.
+  They use the cards’ sentence-case labels in both color themes: inactive buttons have a
+  neutral gray fill, and selected buttons have the shared topic fill and a leading
+  check, the theme menu’s mark for a chosen item, so selection never rests on hue alone.
+  The check’s place is held while it is hidden, so a press never moves a button.
+  Under a hovering pointer an inactive button takes a paler topic fill, so a press shows
+  at once; touch screens have no hover state.
+  Keyboard focus keeps the shared visible outline.
   Each topic’s muted tally counts articles at the selected significance levels,
-  independently of topic selection; All counts unique articles across those levels.
+  independently of topic selection.
   Counts use the Results control row, right aligned above the cards; an empty state
   describes a selection without matches.
   URL state preserves unrelated query parameters and browser history; a low-score
@@ -1328,11 +1364,11 @@ contributor articles use their component sheets and the same text tokens.
   (`.site-card-foot`), inside the one border.
   The box takes the card’s size and place in its row, and washes and shows its corner
   icon while its link is hovered or focused, so it reads as every other card does.
-  The foot is set in the sans face at the note size in the support colour, at the card’s
+  The foot is set in the sans face at the note size in normal foreground, at the card’s
   lower edge, so the feet of a row line up; its links take the page’s link colour.
   A card with no foot stays the link itself, unless it has an independent byline.
   With `link_card(byline=)`, `.site-card-main` is a content container: the linked
-  heading, the byline, the description, and a separate source-address link.
+  heading, the byline, a separate source-address link, then the description.
   The byline retains native profile links and never sits inside the source link.
   The cards’ widths, rows and centring are the same with a foot as without
   (`measure_site_pages cards`, at 1280, 1024, 768 and 390).
@@ -1361,18 +1397,22 @@ contributor articles use their component sheets and the same text tokens.
   This project’s own results, and results by others from a source no listed project
   holds, count for none.
   A card’s repository or website title opens that source.
-  Below the repository heading and above the description, its byline begins with “By”
-  and the author: a known person links to their profile using the shared surname label,
-  while an organization or an unreviewed identity stays plain text.
+  Below the repository heading, its byline begins with “By” and the author: a known
+  person links to their profile using the shared surname label, while an organization or
+  an unreviewed identity stays plain text.
   Exact curated author names and evidenced aliases identify people; repository owner
   strings alone do not establish personal identity.
   Multiple authors keep separate profile links.
+  The repository icon and address appear directly beneath the byline, before the
+  description. The same order applies to resource cards on profile pages.
   These links sit beside the project link in the card’s structure, never inside it, and
   remain in the same tab.
-  Each card with a result ends with its tally (**Card foot**, above), in the form “6
-  results (3 at S4, 3 at S3)”: the total, “1 result” for one, then every level that has
-  a result, the highest first, in parentheses, which are kept when there is one level so
-  each tally reads the same way.
+  Cards share the result-and-credit tally component with profiles.
+  Mixed significance levels read “6 results (3 at S4, 3 at S3), 12 credits”; one level
+  reads “1 result at S5, 2 credits”.
+  The level breakdown runs highest first and omits empty levels.
+  Results are distinct registered IDs; credits are reviewed attribution spans scoped to
+  that project’s sources and results, not its authors’ global counts.
   The total links to the results table filtered to the project’s results and each count
   to the same table at that level (**Result filters**, **Preset-only controls**, below).
 
@@ -1393,7 +1433,9 @@ contributor articles use their component sheets and the same text tokens.
   (`data-case-status`, written by `case_status_chip` wherever a case’s status is drawn),
   a result’s `confirmed` green, `reviewed` blue, `recorded` yellow and `incomplete`
   light red (`data-status`). Bound-kind chips use lighter versions of the shared bound
-  hues: lower bounds red, upper bounds and optimality green.
+  hues: lower bounds red and upper bounds green.
+  Optimality uses violet, Project amber, and Engineering orange; News and Results use
+  the same topic palette.
   Superseded chips remain gray.
   These fills adapt to the page theme and apply in tables, records and popovers.
   No chip wraps: one rule on the component, `white-space: nowrap`, keeps a chip’s words
@@ -1946,11 +1988,14 @@ contributor articles use their component sheets and the same text tokens.
   `site-tabs site-chooser-small` component in `site-nav.css`. The text uses the Results
   widget control size, 1.35 leading, and 0.15rem by 0.65rem padding (`think-ticj`).
   Borders, hover, keyboard focus and motion use the same rules on every page.
-  Topic filters use their shared chip fills and mark selection with an inset underline.
+  Topic filters use neutral gray when inactive, and their shared chip fills and a check
+  when selected; an inactive filter under a hovering pointer takes a paler topic fill.
+  They have no label underline or inset selection mark.
   Single-select tabs keep `aria-selected` and arrow-key navigation; multi-select groups
   use native buttons with `aria-pressed`. Group names remain accessible when visually
-  hidden. Momentary All and Reset actions use the same compact button appearance without
-  a selected state. Chooser strips wrap at narrow widths; pages only place the groups.
+  hidden. Each compact choice owns its border, so wrapped rows fit their buttons.
+  News has one unboxed Reset filters action.
+  Chooser strips wrap at narrow widths; pages only place the groups.
   All action groups use a shared 0.7rem gap and wrap together at narrow widths; no
   section owns separate button spacing.
   Filter counts use the Results `site-table-tools` row and `site-count` role, aligned to
@@ -2146,9 +2191,9 @@ contributor articles use their component sheets and the same text tokens.
   `measure_site_pages header` and `baselines`, the browser tests) open it under reduced
   motion (`preview_site.motion_for`), so none of them starts the download; every other
   page they open as any reader’s. `tests/node/overview_film/` runs the script against a
-  stand-in film. A caption and a note in the support colour follow at the reading
-  measure: what the film shows, its length, the shorter 1 to 100 film, the release both
-  are on, and the Workbench.
+  stand-in film. A caption in the support colour and a note in normal foreground follow
+  at the reading measure: what the film shows, its length, the shorter 1 to 100 film,
+  the release both are on, and the Workbench.
 
 - **Tables.** Every data table is one component, `.site-table` on a KPress table, in a
   `.site-table-wrap` that scrolls sideways if the table cannot fit.
@@ -2204,7 +2249,7 @@ contributor articles use their component sheets and the same text tokens.
   The widths follow from each column’s floor and from what the n column asks for.
   The id, the significance, the rungs, the status, the details and the date are as
   narrow as what they hold.
-  The significance column holds the shared 5.5em meter, with the cell’s 0.2rem padding
+  The significance column holds the shared 4.8em meter, with the cell’s 0.2rem padding
   either side and room for a new-result star.
   The details are as wide as their widest link, “evidence 10”, 102 pixels, and a result
   with many records is the tallest row: T-075’s sixteen links stand 410 pixels.
@@ -2265,8 +2310,9 @@ contributor articles use their component sheets and the same text tokens.
   anywhere but after a relation or a binary operator, and the punctuation that begins a
   line; and every chip’s font size, box and lines.
   `tests/test_site_result_columns.py` holds both tables to it in a browser.
-  Secondary content in a cell, such as a credit or an “after …” list, takes
-  `.site-cell-quiet`, which sets it in the support colour and the sans face.
+  Secondary metadata in a cell takes `.site-cell-quiet`, which uses the support colour
+  and the sans face. Credited people retain normal foreground, including when the shared
+  compact cell treatment is used.
   It keeps the table’s size, so the quiet text does not become harder to read.
   Every table stands `--site-table-space` clear of the text above and below it
   (**Spacing**, above).
@@ -2282,8 +2328,8 @@ contributor articles use their component sheets and the same text tokens.
   colour (`date_cell`): under the date on a wide table, which keeps the column narrow,
   and beside it on a phone.
   The Results legend defines the red recency text once.
-  A superseded result’s row reads quieter, its text in the support colour, in every site
-  table, by one rule on `tr[data-current="false"]`; its chips keep their fills.
+  A superseded result’s metadata reads quieter in the support colour; its substantive
+  summary keeps the normal foreground and its chips keep their fills.
   A row reached by its address (`atlas.html#n-11`, `results.html#t-018`) takes the wash,
   in every site table.
 
@@ -2766,11 +2812,12 @@ names.
   The pristine cached article and standalone page keep their title.
   The body opens with the significance mark, the V and C rung chips, the kind chip and
   the status line, as the tables show them; then the date and what it dates, in the
-  tables’ order (`date_cell`), the credit and the cases, in the support colour; the
-  claim at the note size; where the entry declares a later result that implies it
-  (`superseded_by`), a paragraph under the claim that opens “Superseded in part by
-  T-060.”, the later result linked, and says what it implies and what still stands; and
-  a closed disclosure with the significance, composition, next rung and novelty.
+  tables’ order (`date_cell`), with date and case metadata in the support colour and
+  credited people in normal foreground; the claim at the note size; where the entry
+  declares a later result that implies it (`superseded_by`), a paragraph under the claim
+  that opens “Superseded in part by T-060.”, the later result linked, and says what it
+  implies and what still stands; and a closed disclosure with the significance,
+  composition, next rung and novelty.
 - **The case.** A result about one case, or up to four, shows each case’s visual summary
   as the case’s record opens with it (**Visual summary**, above), smaller and with no
   caption under the drawing: the packing drawn at the atlas’s scale
@@ -2815,18 +2862,67 @@ would change the formula’s letters.
 person/project distinctions and exceptions.
 This guide owns their presentation.
 
+Profile Resources reuse the homepage resource-card renderer: resource title, author
+byline, source-address link, description and available result/significance and credit
+tally retain the same order and link targets.
+A profile does not introduce a second resource inventory.
+Available GitHub issue and pull-request evidence uses linked number labels such as
+“#123”, with the corresponding GitHub issue or branch-style pull-request icon.
+Accessible labels identify the repository and reference type; references come from
+recorded evidence rather than inferred authorship.
+
+Account links share one renderer and glyph set in the directory and on profiles.
+GitHub uses the filled Octicons mark already used on resource cards; X uses the filled
+Simple Icons silhouette (CC0). Brand icons have no outline stroke.
+Generic website links inline the same Lucide `external-link` glyph used by KPress’s
+reader-control icon system, so standalone pages need no sprite dependency.
+The table keeps account usernames visible beside the marks and adapts spacing and
+wrapping, not icon shape or link semantics.
+Profile handles, account links, resource descriptions and credited work use the normal
+document foreground in each theme.
+Their content role is primary; an account handle is not muted metadata.
+Evidence and breadcrumb metadata may retain the secondary text role.
+
 The profile directory at `profiles/` is a native table: full real or public **Name**,
-**Credits**, **Resources**, and **Links**. It sorts by the shared evidenced surname key,
-falling back to the public handle when no surname is established.
-Credits match each profile’s existing reviewed-work list, including distinct roles or
-labels for one source; they are neither raw mentions nor a measure of all contributions.
-The renderer shares that definition through `render_contributors.credited_work`. Inline
-prose links keep the short surname-or-handle naming policy; directory names remain full
-so people can be identified while browsing.
+**Years active**, **Results and credits**, **Resources**, and **Links**. It sorts by the
+shared evidenced surname key, falling back to the public handle when no surname is
+established. Meaningful additional handles appear in parentheses after the directory
+name, using the same exclusions as the profile’s Handles section.
+The directory introduction totals people, distinct contributed results, reviewed credits
+and unique linked resources.
+Shared results and resources count once across the directory, while each person retains
+their own counts in the table.
+Years active uses the earliest and latest years among the person’s reviewed result
+dates, following the shared result-date precedence.
+Equal endpoints render as one year (“2026”); different endpoints render as a range
+(“1998–2026”). Without a dated result, no activity year is inferred from a biography,
+resource, import or account.
+Results and credits are separate quantities.
+Results count distinct registered IDs reached through reviewed attribution joins;
+credits count unique resolved attribution spans, including their recorded roles.
+Repeated result citations do not inflate the result count.
+Case credits alone do not establish authorship of every result for that case, and owning
+a resource does not establish authorship of its contents.
+`site_tallies` owns counting and shared wording.
+A single occupied significance level reads “1 result at S5” or “3 results at S4”; mixed
+levels read “12 results (1 at S5, 2 at S4, 9 at S3), 73 credits”.
+Profile and table variants change layout only.
+A project card’s credits are scoped to its source keys and results, not its owner’s
+global count. Zero reviewed credits means no resolved joins in this record, not no
+contribution. Inline prose links keep the short surname-or-handle naming policy;
+directory names remain full so people can be identified while browsing.
+About’s narrative introduction also keeps full public names on its profile links;
+record-keeping surfaces and compact bylines retain surname labels.
 Home and About share a short Profiles invitation and the **All Profiles** action
 (`render_contributors.profile_preview`), with no name list or metadata reads.
-The table’s native name and credit-count anchors go directly to the person’s profile;
-the redundant credit-count link stays outside the tab order.
+Breadcrumbs appear only on lower-level pages, including the Profiles directory and
+individual profiles.
+Top-level Home, About and News pages have no breadcrumb.
+On nested pages the breadcrumb sits nearer the navigation, with a larger gap below it
+before the title; pages without a breadcrumb retain their normal top spacing.
+The table’s native name anchor goes directly to the person’s profile.
+Its shared result-and-credit tally links to the reviewed work on that profile;
+significance counts are plain text when no corresponding filter exists.
 Resource and account links remain separate keyboard stops because they lead to distinct
 destinations. Positive resource counts link to the profile’s **Resources** section; zero
 has no dead fragment link.
@@ -2844,8 +2940,15 @@ full directory. News articles and their homepage previews also use ordinary prof
 links. The colophon’s **Profiles** link and each profile’s breadcrumb navigate back to
 the directory. Each profile has one complete article at `profiles/ID.html`; the
 directory, credited names in tables and records, and the standalone profile use that
-address. A marked public-name credit in a result or case can open the same article in
+address. A public-name credit in a result or case can open the same article in
 `#pop-contributor`, whose **Open profile** action reaches the complete page.
+`contributor-popover.js` knows a credit by its address, a same-site link to
+`profiles/ID.html` other than the directory, so a credit’s link carries nothing beyond
+its `href`: a marker on each name cost the results table about 16 KB when it was
+measured on 2026-10-20. The directory table, project bylines and News containers declare
+their names plain with `data-contributor-plain` scopes.
+The script leaves alone a link inside one, the panel’s own **Open profile** action, a
+link to the page it is on, and a link that downloads or names a target.
 The panel has the standard 36rem ceiling, shared padding, close target, viewport height
 limit, scrim and scrolling of a compact article popover.
 It retains the page opener across case/result/profile replacements.
@@ -2870,8 +2973,8 @@ links with the same HTTP(S) policy as structured links.
 Sentence count is an editorial review rule; the loader validates paragraph shape and
 evidence references.
 
-Only the explicit `display_aliases` selection appears under **Also credited as**; the
-full evidenced alias registry remains available for reviewed credit matching.
+Only the explicit `display_aliases` selection appears under **Handles**; the full
+evidenced alias registry remains available for reviewed credit matching.
 Structured links show the account handle or public URL beside the shared GitHub, X or
 web icon (`site_icons.account_icon`). The link’s accessible name includes its platform.
 `render_contributors.account_links` renders both the centered profile row with visible
@@ -2908,14 +3011,17 @@ The
 [contributor plan](../../../docs/project/specs/active/plan-2026-10-10-contributor-profiles.md)
 defines evidence, identity, census and maintenance requirements.
 
+Biographies include evidenced years when describing dated work, and named papers or
+projects link to their retained source, publication or tracking page.
 The standalone bio inherits the shared 18px serif prose; the directory and profile H1s
 use the shared sans-serif, all-caps page-title role.
 The overlay inherits sans at the same 18px base and regular weight; its name and section
 headings use the shared compact overlay scales, medium weight and heading leading.
 Page section headings retain their serif italic role; overlay section headings are
 upright sans. Typography comes from the shared rules rather than profile-specific sizes.
-Breadcrumbs, aliases, account links, credits and source text use the shared note role
-and support color; the Sources toggle inherits the standard KPress summary role.
+Handles, account links, credits and resources use the shared note role and normal
+foreground. Breadcrumbs and provenance may use the support color; the Sources toggle
+inherits the standard KPress summary role.
 Identity terms use the shared medium weight.
 Nested metadata never multiplies the note size.
 `profile_links.link_prose` identifies people by exact full names or reviewed account

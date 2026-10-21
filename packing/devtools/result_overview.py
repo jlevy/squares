@@ -736,6 +736,18 @@ def where(cases: Sequence[int]) -> str:
     return f"{len(cases)} cases, {math_html(f'n = {cases[0]}')} to {cases[-1]}"
 
 
+def regularization_notes(sentences: Sequence[str]) -> str:
+    """Per-count notes with native HTML labels, keeping repeated math payload small."""
+    notes = []
+    for sentence in sentences:
+        prefix, separator, detail = sentence.partition(": ")
+        match = re.fullmatch(r"n = (\d+)", prefix)
+        if not separator or match is None:
+            raise ValueError(f"a regularization note has no count label: {sentence!r}")
+        notes.append(f"<var>n</var> = {match[1]}: {link_prose(prose_html(detail))}")
+    return "<br><br>".join(notes)
+
+
 def head(result: Result, cases: Sequence[int]) -> str:
     """The chips, the date and credit, the claim, and what a later result its entry
     declares implies of it (`superseded_by`). The date leads and what it dates follows,
@@ -777,13 +789,19 @@ def head(result: Result, cases: Sequence[int]) -> str:
                 for item in record.get("unfinished_confirmations") or []
             ),
         ),
-        ("Regularizations", "\n".join(result.regularizations)),
-        ("Regularized drawings", "\n".join(result.drawings)),
     ]
     rows = "".join(
         f"<dt>{label}</dt><dd>{link_prose(prose_html(text))}</dd>"
         for label, text in more
         if text
+    )
+    rows += "".join(
+        f"<dt>{label}</dt><dd>{regularization_notes(sentences)}</dd>"
+        for label, sentences in (
+            ("Regularizations", result.regularizations),
+            ("Regularized drawings", result.drawings),
+        )
+        if sentences
     )
     meaning = novelty_labels().get(result.novelty, "")
     rows += (
@@ -794,7 +812,7 @@ def head(result: Result, cases: Sequence[int]) -> str:
         '<header class="site-result-head">'
         f'<p class="site-result-status">{status_chips(result)}</p>'
         f'<p class="site-result-meta">{date_cell(result)} \u00b7 '
-        f"{result.credit_html or _esc(result.credit)} "
+        f'<span class="site-result-credit">{result.credit_html or _esc(result.credit)}</span> '
         f"\u00b7 {where(cases)}</p>"
         f'<p class="site-result-claim">{claim}</p>'
         f"{superseded}"
@@ -1076,6 +1094,8 @@ def links_section(result: Result, overview: Overview, cases: Sequence[int]) -> s
             ("certificate", entry.get("certificate")),
             ("proof", proof.get("source")),
             ("audit", proof.get("audit_record")),
+            ("source build receipt", entry.get("build_receipt")),
+            ("axioms", entry.get("axioms_receipt")),
         ):
             resolved = _resolve(path) if isinstance(path, str) else None
             if resolved is not None:

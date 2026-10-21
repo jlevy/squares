@@ -465,7 +465,7 @@ def test_every_run_a_settlement_names_is_one_a_record_holds(tmp_path: Path) -> N
     assert recorded["grid-slack-3a-rerun-deg1-1016"] == "regularize_grid_slack/1"
     assert recorded["evand-regularize-3a-rerun-303-1016"] == "evand-regularize"
     assert "grid-slack-3a-deg1-1016" not in recorded
-    # 272 rests on the same runs 204 did before this layer regularized it.
+    # 272 rests on the adoption's runs of 17 October 2026 (think-3mry).
     n = 272
     held = defaults.SETTLED[n]
     named = (
@@ -490,79 +490,68 @@ def test_every_run_a_settlement_names_is_one_a_record_holds(tmp_path: Path) -> N
     # Without the retained evidence, only the index's blocks hold a run, and that is not
     # enough (below).
     found, _listed = defaults.state_problems(evidence=tmp_path)
+    # No view was drawn from the run at 1 degree, so the index keeps no block of it.
     assert (
-        f"n={n}: SETTLED names run evand-regularize-3a-rerun-s-1016, which no record holds"
+        f"n={n}: SETTLED names run grid-slack-adopt174-deg1-1017, which no record holds"
+    ) in "\n".join(found)
+    # Views were drawn from the driver run (172) and the 0.5-degree run, so the index holds
+    # their blocks, and that is all that holds them here.
+    assert (
+        f"n={n}: SETTLED names run evand-regularize-adopt174-1017, which only the layer's "
+        "index holds"
     ) in "\n".join(found)
     assert (
-        f"n={n}: SETTLED names run grid-slack-3a-deg05-1016, which only the layer's index holds"
-    ) in "\n".join(found)
-    # The index has dropped evand-regularize-3a-1016's block here, so its copy alone held it.
-    assert (
-        f"n={n}: SETTLED names run evand-regularize-3a-1016, which no record holds"
+        f"n={n}: SETTLED names run grid-slack-adopt174-deg05-1017, which only the layer's "
+        "index holds"
     ) in "\n".join(found)
 
 
 def test_a_settlement_keeps_its_record_when_the_index_drops_a_run(tmp_path: Path) -> None:
     # The index keeps a run's block only while an entry draws from it, so a settlement
     # resting on an index block failed as soon as later work redrew that run's views:
-    # #657 redraws all five views of evand-regularize-3a-1016, and 272's settlement then
+    # #657 redrew all five views of evand-regularize-3a-1016, and 272's settlement then
     # named a run no record held (review F1 of #644). Every run a settlement names is held
     # by the retained evidence instead, and the index's block of one that had no other is
-    # copied there (`--retain-runs`).
+    # copied there (`--retain-runs`). The settlements of 17 October 2026 rest on runs whose
+    # receipts and blocks are retained beside their reports, so no copy is committed; the
+    # copy is made here from evidence without the driver run's receipt.
     records = defaults.run_records()
     for n, held in defaults.SETTLED.items():
         for generator, run in held.runs:
             assert records[run].generator == generator, (n, run)
             assert records[run].retained, (n, run)
-    index = json.loads(defaults.INDEX.read_text(encoding="utf-8"))
-    indexed = {block["id"] for block in index["runs"]}
-    # Both are runs the 16 October settlement of 272 names (`_RUN3A`); this layer's index
-    # has already dropped the first, whose views it redrew, so only its copy holds it.
-    dropped = {"evand-regularize-3a-1016", "grid-slack-3a-deg05-1016"}
-    index["runs"] = [block for block in index["runs"] if block["id"] not in dropped]
-    without = tmp_path / "index.json"
-    without.write_text(json.dumps(index), encoding="utf-8")
-    found, _listed = defaults.state_problems(index=without)
-    assert found == []
-
-    # Into evidence without the copies, `retain_runs` copies again, as they are
-    # committed, the blocks the index still holds, and a second pass writes nothing. A
-    # copy of a block the index has dropped is that run's only record: without it the
-    # run is held by none, `retain_runs` cannot restore it, and only the copy does.
-    committed = defaults.EVIDENCE / defaults.SETTLED_RUNS
-    copies = sorted(path.name for path in committed.iterdir())
-    still = sorted(set(copies) & indexed)
-    gone = sorted(set(copies) - indexed)
+    assert not (defaults.EVIDENCE / defaults.SETTLED_RUNS).exists()
+    run = "evand-regularize-adopt174-1017"
     evidence = tmp_path / "evidence"
     shutil.copytree(
-        defaults.EVIDENCE, evidence, ignore=shutil.ignore_patterns(defaults.SETTLED_RUNS)
+        defaults.EVIDENCE,
+        evidence,
+        ignore=lambda directory, _names: (
+            ["receipt.json"] if Path(directory).name == "adopt174-1017" else []
+        ),
     )
     found, _listed = defaults.state_problems(evidence=evidence)
     assert found
-    for problem in found:
-        run = problem.split()[4].rstrip(",")
-        assert run in copies, problem
-        held_by = "only the layer's index holds" if run in still else "no record holds"
-        assert f"which {held_by}" in problem, problem
-    assert {problem.split()[4].rstrip(",") for problem in found} == set(copies)
-    assert defaults.retain_runs(evidence=evidence) == (still, gone)
-    for run in still:
-        copied = evidence / defaults.SETTLED_RUNS / run / "run.json"
-        assert copied.read_bytes() == (committed / run / "run.json").read_bytes()
-    for run in gone:
-        shutil.copytree(committed / run, evidence / defaults.SETTLED_RUNS / run)
+    assert all(f"names run {run}, which only the layer's index holds" in p for p in found)
+    # `retain_runs` copies the block the index still holds, and a second pass writes nothing.
+    assert defaults.retain_runs(evidence=evidence) == ([run], [])
+    copied = evidence / defaults.SETTLED_RUNS / run / "run.json"
+    index = json.loads(defaults.INDEX.read_text(encoding="utf-8"))
+    (block,) = [block for block in index["runs"] if block["id"] == run]
+    assert json.loads(copied.read_text(encoding="utf-8")) == block
     assert defaults.retain_runs(evidence=evidence) == ([], [])
     assert defaults.state_problems(evidence=evidence)[0] == []
-
-    # A run neither the index nor the evidence holds any longer cannot be retained. Into
-    # no evidence at all, every other named run the index still holds is copied: the
-    # committed copies, and on a layer whose own runs the index records beside their
-    # receipts, those runs too.
-    named = {run for held in defaults.SETTLED.values() for _generator, run in held.runs}
-    written, missing = defaults.retain_runs(index=without, evidence=tmp_path / "none")
-    assert set(written) == (named & indexed) - dropped
-    assert set(copies) - dropped <= set(written)
-    assert set(missing) == dropped | (named - indexed)
+    # Once the index drops the block, the copy is the run's only record and holds it.
+    index["runs"] = [block for block in index["runs"] if block["id"] != run]
+    without = tmp_path / "index.json"
+    without.write_text(json.dumps(index), encoding="utf-8")
+    assert defaults.state_problems(index=without, evidence=evidence)[0] == []
+    # Without the copy, nothing holds it, and `retain_runs` cannot restore it.
+    shutil.rmtree(evidence / defaults.SETTLED_RUNS)
+    assert defaults.retain_runs(index=without, evidence=evidence) == ([], [run])
+    found, _listed = defaults.state_problems(index=without, evidence=evidence)
+    assert found
+    assert all(f"names run {run}, which no record holds" in p for p in found)
 
 
 def test_a_copy_no_settlement_names_fails_the_gate(tmp_path: Path) -> None:
@@ -571,21 +560,27 @@ def test_a_copy_no_settlement_names_fails_the_gate(tmp_path: Path) -> None:
     # the 15 October settlements, five of the seven copies were named by none (review G2
     # of #644). The gate names each such copy, and one whose id is not its directory's.
     assert defaults.orphaned_copies() == []
+    run = "grid-slack-adopt174-deg05-1017"
     evidence = tmp_path / "evidence"
-    shutil.copytree(defaults.EVIDENCE, evidence)
+    shutil.copytree(
+        defaults.EVIDENCE,
+        evidence,
+        ignore=lambda directory, _names: (
+            ["run.json"] if Path(directory).name == "adopt174-deg05-1017" else []
+        ),
+    )
+    assert defaults.retain_runs(evidence=evidence) == ([run], [])
+    assert defaults.orphaned_copies(evidence) == []
     copies = evidence / defaults.SETTLED_RUNS
     (copies / "grid-slack-orphan").mkdir()
     (copies / "grid-slack-orphan" / "run.json").write_text(
         json.dumps({"id": "grid-slack-orphan", "generator": "regularize_grid_slack/1"}),
         encoding="utf-8",
     )
-    misnamed = copies / "grid-slack-3a-deg05-1016" / "run.json"
+    misnamed = copies / run / "run.json"
     block = json.loads(misnamed.read_text(encoding="utf-8"))
     misnamed.write_text(json.dumps({**block, "id": "grid-slack-elsewhere"}), encoding="utf-8")
-    assert defaults.orphaned_copies(evidence) == [
-        "grid-slack-3a-deg05-1016",
-        "grid-slack-orphan",
-    ]
+    assert defaults.orphaned_copies(evidence) == [run, "grid-slack-orphan"]
     found, _listed = defaults.state_problems(evidence=evidence)
     orphans = [problem for problem in found if "is not the copy of a run" in problem]
     assert len(orphans) == 2
@@ -602,17 +597,18 @@ def test_a_settled_run_covered_the_count_where_its_record_says_which() -> None:
     assert records["grid-slack-3a-rerun-deg5-1016"].counts == frozenset(
         {129, 146, 156, 204, 271, 272, 303}
     )
-    assert records["evand-regularize-3a-1016"].counts is None
+    assert records["evand-regularize-adopt174-c-1017"].counts == frozenset({103, 261})
+    assert len(records["grid-slack-adopt174-deg5-1017"].counts or ()) == 35
     n = 272
     held = defaults.SETTLED[n]
-    named = (*held.runs, ("evand-regularize", "evand-regularize-3a-rerun-303-1016"))
+    named = (*held.runs, ("evand-regularize", "evand-regularize-adopt174-c-1017"))
     found, _listed = defaults.state_problems(
         settled={**defaults.SETTLED, n: held._replace(runs=named)}
     )
     assert found == [
         (
-            f"n={n}: SETTLED names run evand-regularize-3a-rerun-303-1016, whose record "
-            f"shows it ran 303, not {n}"
+            f"n={n}: SETTLED names run evand-regularize-adopt174-c-1017, whose record "
+            f"shows it ran 103, 261, not {n}"
         )
     ]
 
@@ -1055,6 +1051,26 @@ def test_a_decision_outranks_the_allowlist(tmp_path: Path) -> None:
     every = {int(entry["n"]): entry for entry in document["entries"]}
     allowed = dict(defaults.PENDING_ALLOWED)
     corrected = dict(defaults.CORRECTED)
+    # The decision names a run the retained evidence holds and whose record does not
+    # rule the count out: a copied block that lists no counts, or a receipt that lists
+    # the count, so the settlement-run rules ask nothing more of it (review F1 of #644).
+    records = defaults.run_records()
+    driver_runs = [
+        (run, found)
+        for run, found in sorted(records.items())
+        if found.retained and found.generator == "evand-regularize"
+    ]
+
+    def covered(count: int) -> str | None:
+        return next(
+            (
+                run
+                for run, found in driver_runs
+                if found.counts is None or count in found.counts
+            ),
+            None,
+        )
+
     if not allowed:
         # The live list is empty once the stack's last allowed counts are decided, so a
         # count the layer draws is allowed here, as a corrected witness's deferral would
@@ -1062,7 +1078,9 @@ def test_a_decision_outranks_the_allowlist(tmp_path: Path) -> None:
         drawn = next(
             n
             for n in sorted(views)
-            if n not in defaults.SETTLED and every[n].get("generator") == defaults.ALGORITHM
+            if n not in defaults.SETTLED
+            and every[n].get("generator") == defaults.ALGORITHM
+            and covered(n) is not None
         )
         allowed = {drawn: "think-0000: a corrected witness"}
         corrected = {drawn: _correction(rows[drawn])}
@@ -1075,14 +1093,8 @@ def test_a_decision_outranks_the_allowlist(tmp_path: Path) -> None:
         "run": {"id": "grid-slack-a-test-run"},
     }
     strong.pop(defaults.LAPSED, None)
-    # The decision names a run the retained evidence holds, a copied block that lists no
-    # counts, so the settlement-run rules ask nothing more of it (review F1 of #644).
-    records = defaults.run_records()
-    run = next(
-        run
-        for run, found in sorted(records.items())
-        if found.retained and found.counts is None and found.generator == "evand-regularize"
-    )
+    run = covered(n)
+    assert run is not None
     settled = {
         **defaults.SETTLED,
         n: defaults.Settled(

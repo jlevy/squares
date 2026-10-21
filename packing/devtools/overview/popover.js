@@ -7,6 +7,9 @@
 //   - following a link in a popover closes it, so a reader sent to a row on this page
 //     lands on the row rather than behind the panel. The popover listens for the click
 //     itself, so a link placed in it later, as a row's deferred body is, closes it too.
+//     A link to a place inside the panel scrolls the panel there instead, without
+//     navigating: a loaded article's IDs are scoped to this page load
+//     (`article-loader.js`), so the address and history are no place for them.
 (() => {
   for (const popover of document.querySelectorAll(".site-popover[popover]")) {
     if (!(popover instanceof HTMLElement)) {
@@ -35,13 +38,17 @@
         return;
       }
       const link = event.target.closest("a[href]");
-      if (link instanceof HTMLAnchorElement) {
-        const href = link.getAttribute("href");
-        const local = href?.startsWith("#") ? document.getElementById(href.slice(1)) : null;
-        if (local === null || !popover.contains(local)) {
-          popover.hidePopover();
-        }
+      if (!(link instanceof HTMLAnchorElement)) {
+        return;
       }
+      const href = link.getAttribute("href");
+      const local = href?.startsWith("#") ? document.getElementById(href.slice(1)) : null;
+      if (local === null || !popover.contains(local)) {
+        popover.hidePopover();
+        return;
+      }
+      event.preventDefault();
+      local.scrollIntoView({ block: "nearest" });
     });
   }
 })();

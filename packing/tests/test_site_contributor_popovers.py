@@ -35,7 +35,7 @@ PROFILE = (
     '<h1 id="title">Walter Stromquist</h1><p>A mathematical contributor.</p>'
     '<a href="../cases/11.html" data-case="11">Case 11</a>'
     '<a href="#bio">Biography</a><p id="bio">Published biographical evidence.</p>'
-    '<a href="../profiles/evan-daniel.html" data-person>Evan Daniel</a>'
+    '<a href="../profiles/evan-daniel.html">Evan Daniel</a>'
     '<a href="https://example.org/">Public website</a></article>'
 )
 SECOND = (
@@ -44,12 +44,12 @@ SECOND = (
 )
 CASE = (
     '<article class="site-case" data-case="11"><h1 id="title">Case 11</h1>'
-    '<a href="../profiles/walter-stromquist.html" data-person>'
+    '<a href="../profiles/walter-stromquist.html">'
     'Walter Stromquist</a><a href="12.html" data-case-step="12" rel="next">Next</a></article>'
 )
 RESULT = (
     '<article class="site-result" data-result-overview="t-test"><h1 id="title">Result</h1>'
-    '<a href="../profiles/walter-stromquist.html" data-person>'
+    '<a href="../profiles/walter-stromquist.html">'
     "Walter Stromquist</a></article>"
 )
 
@@ -87,16 +87,26 @@ def served(tmp_path_factory: pytest.TempPathFactory) -> Iterator[str]:
     )
     body = (
         '<h1 id="title">Host title</h1><main><a id="profile-link" '
-        'href="profiles/walter-stromquist.html" data-person>'
-        'Walter Stromquist</a><a id="second-link" href="profiles/evan-daniel.html" '
-        'data-person>Evan Daniel</a><a id="case-link" '
-        'href="cases/11.html" data-case="11">Case 11</a><table><tbody>'
+        'href="profiles/walter-stromquist.html">Walter Stromquist</a>'
+        '<a id="second-link" href="profiles/evan-daniel.html">Evan Daniel</a>'
+        # A container that keeps its names plain links, as News does.
+        '<p data-contributor-plain><a id="plain-link" href="profiles/walter-stromquist.html">'
+        "Walter Stromquist</a></p>"
+        '<a id="case-link" href="cases/11.html" data-case="11">Case 11</a><table><tbody>'
         '<tr id="result-row" data-row-popover="pop-result"><td>Result details</td></tr>'
+        # A row naming a person, as a results table's credit cell does.
+        '<tr id="named-row" data-row-popover="pop-named"><td>Named result</td><td>'
+        '<a id="row-name" href="profiles/evan-daniel.html">'
+        "Evan Daniel</a></td></tr>"
         '</tbody></table><button id="native-opener" popovertarget="pop-native">'
         'Open native panel</button><div id="pop-native" class="site-popover" '
         'popover="auto">Native panel content</div>'
         '<div id="pop-result" class="site-popover" popover="auto">'
         '<button class="site-popover-close" popovertarget="pop-result" '
+        'popovertargetaction="hide">Close</button><div data-row-pop-src="result/test.html">'
+        '<a href="result/test.html">Read result</a></div></div>'
+        '<div id="pop-named" class="site-popover" popover="auto">'
+        '<button class="site-popover-close" popovertarget="pop-named" '
         'popovertargetaction="hide">Close</button><div data-row-pop-src="result/test.html">'
         '<a href="result/test.html">Read result</a></div></div>'
         + render_case_pages.case_popover()
@@ -182,7 +192,7 @@ def design_generated(tmp_path_factory: pytest.TempPathFactory) -> Iterator[str]:
     directory = render_contributors.contributor_pages()[0]
     reference = render_overview.static_content_page(
         '<article class="title-reference"><h1>Shared page title</h1>'
-        '<a href="profiles/evan-daniel.html" data-person>'
+        '<a href="profiles/evan-daniel.html">'
         "Evan Daniel</a></article>",
         meta=render_overview.PageMeta(
             "Shared page title", "Standard page heading reference.", "title-reference.html"
@@ -221,6 +231,8 @@ def test_profile_content_scoped_links_and_focus(
         page.on("request", lambda request: requests.append(request.url))
         page.goto(served)
         link = page.locator("#profile-link")
+        # The script names each link it enhances as opening a dialog; the HTML does not.
+        site_browser.api().expect(link).to_have_attribute("aria-haspopup", "dialog")
         link.focus()
         page.keyboard.press("Enter")
         panel = page.locator("#pop-contributor")
@@ -247,6 +259,8 @@ def test_profile_content_scoped_links_and_focus(
         )
         article.locator('a:has-text("Biography")').click()
         assert panel.is_visible()
+        # The scoped target is this load's alone, so the address keeps no fragment for it.
+        assert page.url == served
         layout = page.evaluate(LAYOUT)
         assert layout["duplicateIds"] == []
         assert layout["left"] >= 0
@@ -275,7 +289,7 @@ def test_generated_profile_uses_shared_roles_without_overflow(
     with _page(browser, viewport={"width": width, "height": 900}, color_scheme=theme) as page:
         if overlay:
             page.goto(f"{design_generated}title-reference.html", wait_until="load")
-            page.locator('main a[data-person][href$="evan-daniel.html"]').click()
+            page.locator('main a[href$="profiles/evan-daniel.html"]').click()
             selector = "#pop-contributor article.site-contributor"
         else:
             page.goto(f"{design_generated}profiles/evan-daniel.html", wait_until="load")
@@ -364,8 +378,11 @@ def test_overlay_replacement_retains_page_focus(browser: Any, served: str, opene
         origin = page.locator("#case-link" if opener == "case" else "#result-row")
         origin.click()
         source = page.locator("#pop-case" if opener == "case" else "#pop-result")
-        source.locator('a[data-person][href$="walter-stromquist.html"]').wait_for()
-        source.locator('a[data-person][href$="walter-stromquist.html"]').click()
+        name = source.locator('a[href$="/profiles/walter-stromquist.html"]')
+        name.wait_for()
+        # A name in an article cloned after start-up is announced as a dialog opener too.
+        site_browser.api().expect(name).to_have_attribute("aria-haspopup", "dialog")
+        name.click()
         profile = page.locator("#pop-contributor")
         profile.locator("article.site-contributor").wait_for(state="visible")
         assert not source.is_visible()
@@ -377,9 +394,28 @@ def test_overlay_replacement_retains_page_focus(browser: Any, served: str, opene
         site_browser.api().expect(origin).to_be_focused()
 
 
+def test_pressing_a_name_in_a_row_fetches_only_the_profile(browser: Any, served: str) -> None:
+    """A name in a row is the name's link, not the row: pressing it opens the profile
+    and starts no fetch of the row's whole result page beside it."""
+    with _page(browser) as page:
+        requests: list[str] = []
+        page.on("request", lambda request: requests.append(request.url))
+        page.goto(served)
+        page.locator("#row-name").click()
+        page.locator("#pop-contributor article.site-contributor").wait_for(state="visible")
+        assert f"{served}profiles/evan-daniel.html" in requests
+        assert f"{served}result/test.html" not in requests
+        assert not page.locator("#pop-named").is_visible()
+        page.keyboard.press("Escape")
+        page.locator("#named-row td").first.click()
+        page.locator("#pop-named article.site-result").wait_for(state="visible")
+        assert requests.count(f"{served}result/test.html") == 1
+
+
 def test_native_navigation_and_modified_clicks(browser: Any, served: str) -> None:
     with _page(browser, java_script_enabled=False) as page:
         page.goto(served)
+        assert page.locator("#profile-link").get_attribute("aria-haspopup") is None
         page.locator("#profile-link").click()
         page.wait_for_url(f"{served}profiles/walter-stromquist.html")
         assert (
@@ -406,6 +442,31 @@ def test_failed_fetch_follows_the_canonical_link(browser: Any, served: str) -> N
         page.locator("#profile-link").click()
         page.wait_for_url(f"{served}profiles/walter-stromquist.html")
         assert page.locator("article.site-contributor h1").inner_text() == "Walter Stromquist"
+
+
+def test_plain_profile_links_and_the_open_action_navigate(browser: Any, served: str) -> None:
+    """A profile link is known by its address, so a container that keeps its names plain
+    (News, the directory) says so once, and the panel's own **Open profile** action
+    reaches the complete page rather than opening the panel again."""
+    with _page(browser) as page:
+        page.goto(served)
+        # The script has run once the ordinary name beside the plain one is announced.
+        site_browser.api().expect(page.locator("#profile-link")).to_have_attribute(
+            "aria-haspopup", "dialog"
+        )
+        plain = page.locator("#plain-link")
+        assert plain.get_attribute("aria-haspopup") is None
+        plain.click()
+        page.wait_for_url(f"{served}profiles/walter-stromquist.html")
+    with _page(browser) as page:
+        page.goto(served)
+        page.locator("#profile-link").click()
+        panel = page.locator("#pop-contributor")
+        panel.locator("article.site-contributor").wait_for(state="visible")
+        action = panel.locator("[data-contributor-open]")
+        assert action.get_attribute("aria-haspopup") is None
+        action.click()
+        page.wait_for_url(f"{served}profiles/walter-stromquist.html")
 
 
 def test_late_response_cannot_replace_newer_profile_or_reopen_after_escape(
@@ -484,7 +545,7 @@ def test_closing_source_cancels_pending_profile_failure(browser: Any, served: st
         page.route("**/profiles/walter-stromquist.html", hold)
         page.goto(served)
         page.locator("#case-link").click()
-        page.locator("#pop-case a[data-person]").click()
+        page.locator('#pop-case a[href*="/profiles/"]').click()
         page.keyboard.press("Escape")
         assert len(held) == 1
         held.pop().fulfill(status=503, content_type="text/html", body="Unavailable")
@@ -558,7 +619,7 @@ def test_generated_standalone_pages_enhance_article_links(
             panel = page.locator("#pop-case")
             article = "article.site-case"
         else:
-            link = page.locator('main a[data-person][href$="walter-stromquist.html"]')
+            link = page.locator('main a[href$="profiles/walter-stromquist.html"]')
             panel = page.locator("#pop-contributor")
             article = "article.site-contributor"
         site_browser.api().expect(link).to_be_visible(timeout=2000)
@@ -568,6 +629,31 @@ def test_generated_standalone_pages_enhance_article_links(
         assert page.url == address
         page.keyboard.press("Escape")
         site_browser.api().expect(link).to_be_focused()
+
+
+def test_generated_profile_keeps_its_own_anchors_and_breadcrumb_plain(
+    browser: Any, generated: str
+) -> None:
+    """A profile's in-page anchors resolve to a profile address, the page's own, and its
+    breadcrumb to the directory; neither opens the panel."""
+    with _page(browser, viewport={"width": 1280, "height": 900}) as page:
+        address = f"{generated}profiles/walter-stromquist.html"
+        page.goto(address, wait_until="load")
+        article = page.locator("main article.site-contributor")
+        anchors = article.locator('a[href^="#"]')
+        assert anchors.count() > 0
+        for index in range(anchors.count()):
+            assert anchors.nth(index).get_attribute("aria-haspopup") is None
+        breadcrumb = article.locator('.site-contributor-breadcrumb a[href="index.html"]')
+        assert breadcrumb.get_attribute("aria-haspopup") is None
+        for disclosure in article.locator("details").all():
+            if disclosure.get_attribute("open") is None:
+                disclosure.locator(":scope > summary").click()
+        anchor = anchors.first
+        target = anchor.get_attribute("href")
+        anchor.click()
+        assert page.url == f"{address}{target}"
+        assert not page.locator("#pop-contributor").is_visible()
 
 
 @pytest.mark.parametrize("javascript", [False, True], ids=["no-javascript", "javascript"])

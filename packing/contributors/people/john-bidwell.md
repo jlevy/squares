@@ -36,9 +36,12 @@ contributor:
       sources: [survey-credit, bibliography]
   bio_sources: [survey-credit, catalogue-credit]
 ---
-John Bidwell found the 17-square packing in 1998 while an undergraduate at the
-University of Hawaii.
-He also improved a packing of 29 squares.
+John Bidwell found the
+[17-square packing](https://kingbird.myphotos.cc/packing/squares_in_squares.html) in
+1998 while an undergraduate at the University of Hawaii.
+He also improved a
+[packing of 29 squares](https://erich-friedman.github.io/papers/squares/squares.html) in
+1998\.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

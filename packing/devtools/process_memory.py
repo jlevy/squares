@@ -77,14 +77,18 @@ class _DarwinTaskInfo(ctypes.Structure):
 @cache
 def _darwin_libproc() -> ctypes.CDLL:
     library = ctypes.CDLL("/usr/lib/libproc.dylib", use_errno=True)
-    library.proc_pidinfo.argtypes = [
+    try:
+        pidinfo = library.proc_pidinfo
+    except AttributeError as error:
+        raise OSError("Darwin libproc API is unavailable: missing proc_pidinfo") from error
+    pidinfo.argtypes = [
         ctypes.c_int,
         ctypes.c_int,
         ctypes.c_uint64,
         ctypes.c_void_p,
         ctypes.c_int,
     ]
-    library.proc_pidinfo.restype = ctypes.c_int
+    pidinfo.restype = ctypes.c_int
     return library
 
 

@@ -125,26 +125,32 @@
       }
     };
 
-    // A press starts the fetch a moment before the click that opens the popover.
-    row.addEventListener("pointerdown", () => {
-      fetchBodies(popover);
+    /**
+     * Whether a press or click landed on one of the row's own links or controls, other
+     * than its popover's trigger, and so is that control's and not the row's.
+     * @param {Element} target
+     */
+    const ownControl = (target) => {
+      const control = target.closest(CONTROLS);
+      return (
+        control !== null &&
+        row.contains(control) &&
+        control.getAttribute("popovertarget") !== popover.id
+      );
+    };
+
+    // A press starts the fetch a moment before the click that opens the popover. A press
+    // the click will leave alone, such as on a name linking to a profile, fetches nothing.
+    row.addEventListener("pointerdown", (event) => {
+      const target = articles.clickTarget(event);
+      if (target !== null && !ownControl(target)) {
+        fetchBodies(popover);
+      }
     });
 
     row.addEventListener("click", (event) => {
-      if (
-        event.defaultPrevented ||
-        event.button !== 0 ||
-        event.metaKey ||
-        event.ctrlKey ||
-        event.shiftKey ||
-        event.altKey ||
-        !(event.target instanceof Element)
-      ) {
-        return;
-      }
-      const control = event.target.closest(CONTROLS);
-      const trigger = control?.getAttribute("popovertarget") === popover.id;
-      if ((control !== null && row.contains(control) && !trigger) || selecting(row)) {
+      const target = articles.clickTarget(event);
+      if (target === null || ownControl(target) || selecting(row)) {
         return;
       }
       // The trigger opens its popover natively too; cancelling the click leaves one

@@ -177,8 +177,8 @@ action for each are in [`frontier/RESULTS.md`](packing/frontier/RESULTS.md); the
 | [T-037](packing/frontier/RESULTS.md) | 11 | `V3` | `C3` | `S5` | `previously-published` | s(11) > 31/8 = 3.875, by Marc Leonard Overbeck’s 11-squares-certified-bound v1.0.2 release of 22 September 2026. |
 | [T-060](packing/frontier/RESULTS.md) | 11 | `V3` | `C3` | `S5` | `previously-published` | `s(11) = T = (6u+4)/(1+2u−u²) = 3.8770835900228141773078970601…`, where `u` is the unique root in `(9/25, 37/100)` of `5u⁸−10u⁷−2u⁶+14u⁵+12u⁴−6u³+2u²+2u−1 = 0`. |
 | [T-153](packing/frontier/RESULTS.md) | 17 | `V0` | `C1` | `S5` | `previously-published` | Marc Leonard Overbeck (Kleddamag) claims, as a candidate proof, that `s(17) = L = 4.67553009360455095163…`, the side of John Bidwell’s 1998 packing of seventeen unit squares, with the squares closed, independently rotated and allowed to touch. |
-| [T-154](packing/frontier/RESULTS.md) | 17 | `V0` | `C1` | `S5` | `previously-published` | Oscar Fitzharding reports a Lean 4 proof that John Bidwell’s 1998 packing of seventeen unit squares is optimal: `s(17) = 4.67553009360455095163…`, T-153’s value L. |
-| [T-194](packing/frontier/RESULTS.md) | 19 | `V0` | `C0` | `S5` | `previously-published` | Oscar Fitzharding reports a Lean 4 proof that Robert Wainwright’s 1979 packing of nineteen unit squares is optimal: s(19) = 3 + (4/3)√2 = 4.885618083164126731735584965612…. |
+| [T-154](packing/frontier/RESULTS.md) | 17 | `V3` | `C1` | `S5` | `previously-published` | Oscar Fitzharding reports a Lean 4 proof that John Bidwell’s 1998 packing of seventeen unit squares is optimal: `s(17) = 4.67553009360455095163…`, T-153’s value L. |
+| [T-194](packing/frontier/RESULTS.md) | 19 | `V0` | `C1` | `S5` | `previously-published` | Oscar Fitzharding reports a Lean 4 proof that Robert Wainwright’s 1979 packing of nineteen unit squares is optimal: s(19) = 3 + (4/3)√2 = 4.885618083164126731735584965612…. |
 | [T-010](packing/frontier/RESULTS.md) | 11 | `V3` | `C3` | `S4` | `apparently-novel` | s(11) >= 2 + 4/sqrt(5), by a source-distinct repair of Stromquist 2003’s Figure 14 point set: the replacement G' = (79/100, 37/20) restores the complete Figure 13 localization, A-triple forcing, repaired unavoidability, and 3+9 capacity chain, certified exactly. |
 | [T-017](packing/frontier/RESULTS.md) | 12 | `V3` | `C3` | `S4` | `apparently-novel` | s(12) >= 99/25, by this project’s weighted fractional unavoidable-set certificate at container side 99/25 = 3.96. |
 | [T-019](packing/frontier/RESULTS.md) | 17, 18, 19 | `V3` | `C3` | `S4` | `apparently-novel` | s(17) >= 459/100, and s(18) >= 459/100 and s(19) >= 459/100, from this project’s weighted fractional unavoidable-set certificate at container side 459/100 = 4.59. |
@@ -300,6 +300,17 @@ action for each are in [`frontier/RESULTS.md`](packing/frontier/RESULTS.md); the
 | [T-182](packing/frontier/RESULTS.md) | 154, 211, 241 | `V3` | `C3` | `S3` | `previously-published` | Three complete rational source certificates report finite upper-bound improvements at the exact sides they state: s(154) <= 12.921206577132631050071241337979, s(211) <= 14.993558913974006171333205657646 and s(241) <= 15.987117095150238758321758129189. |
 | [T-183](packing/frontier/RESULTS.md) | 237 | `V3` | `C3` | `S3` | `previously-published` | One complete rational source certificate reports a finite upper-bound improvement at the exact side it states: s(237) <= 15.902705057866366799436476453482. |
 | [T-189](packing/frontier/RESULTS.md) | 237 | `V3` | `C3` | `S3` | `previously-published` | One complete rational source certificate reports a finite upper-bound improvement at the exact side it states: s(237) <= 12163897896660350527924222391/764899771970500000000000000. |
+| [T-197](packing/frontier/RESULTS.md) | 155 | `V3` | `C3` | `S3` | `previously-published` | One complete rational source certificate reports a finite upper-bound improvement at the exact side it states: s(155) <= 2590452188930112807053435932173/200000000000000000000000000000. |
+| [T-205](packing/frontier/RESULTS.md) | 68 | `V3` | `C3` | `S3` | `previously-published` | A rectangle measure of wand125/square-packing, published on 16 October 2026 and reported in jlevy/squares#446, proves s(68) >= 853/100 = 8.53. |
+| [T-206](packing/frontier/RESULTS.md) | 84 | `V3` | `C3` | `S3` | `previously-published` | A rectangle measure of wand125/square-packing, published on 16 October 2026 and reported in jlevy/squares#446, proves s(84) >= 3769/400 = 9.4225. |
+| [T-207](packing/frontier/RESULTS.md) | 85 | `V3` | `C3` | `S3` | `previously-published` | A rectangle measure of wand125/square-packing, published on 16 October 2026 and reported in jlevy/squares#446, proves s(85) >= 379/40 = 9.475. |
+| [T-216](packing/frontier/RESULTS.md) | 108 | `V3` | `C3` | `S3` | `previously-published` | A rectangle measure of wand125/square-packing, published on 16 October 2026 and reported in jlevy/squares#446, proves s(108) >= 531/50 = 10.62. |
+| [T-218](packing/frontier/RESULTS.md) | 236 | `V3` | `C3` | `S3` | `previously-published` | One complete rational source certificate reports a finite upper-bound improvement at the exact side it states: s(236) <= 15.861934390607358617243798571394. |
+| [T-219](packing/frontier/RESULTS.md) | 271 | `V3` | `C3` | `S3` | `previously-published` | One complete rational source certificate reports a finite upper-bound improvement at the exact side it states: s(271) <= 16.948947733713657510723401112423. |
+| [T-220](packing/frontier/RESULTS.md) | 183 | `V3` | `C3` | `S3` | `previously-published` | s(183) <= 13999580178736252502081470897571/1000000000000000000000000000000 = 13.999580178736252502081470897571 < 14, from the original rational certificate, printed safely upward as 13.999580178737. |
+| [T-221](packing/frontier/RESULTS.md) | 308 | `V3` | `C3` | `S3` | `previously-published` | One complete rational source certificate reports a finite upper-bound improvement at the exact side it states: s(308) <= 17.997149121270908735153160752315. |
+| [T-222](packing/frontier/RESULTS.md) | 154 | `V3` | `C3` | `S3` | `previously-published` | One complete rational source certificate reports a finite upper-bound improvement at the exact side it states: s(154) <= 12.921100940761680549856582087576. |
+| [T-224](packing/frontier/RESULTS.md) | 270 | `V3` | `C3` | `S3` | `previously-published` | One complete rational source certificate reports a finite upper-bound improvement at the exact side it states: s(270) <= 16.928162252196750114897964982713. |
 | [T-036](packing/frontier/RESULTS.md) | 11 | `V3` | `C2` | `S3` | `apparently-novel` | Every packing of eleven unit squares in a square container, six at orientation 0 and five sharing one orientation modulo pi/2 with half-tangent in [91442076901/250000000000, 73154061521/200000000000] (an interval containing [t* - 10^-6, t* + 10^-6] for Trump’s exact half-tangent t*), has container side at least U = 3.877083590022814 …, the exact side of Trump’s packing, and a packing in the family has side exactly U only if it is a quarter-turn image of Trump’s pose with the squares relabelled within the two classes. |
 | [T-112](packing/frontier/RESULTS.md) | 11 | `V3` | `C2` | `S3` | `apparently-novel` | Every packing of eleven unit squares in a square of side T = 3.8770835900228141773…, the least side T-060 proves possible, is Walter Trump’s 1979 packing after one of the eight symmetries of the container and a relabelling of the squares. |
 | [T-007](packing/frontier/RESULTS.md) | 4-324 | `V0` | `C1` | `S3` | `previously-published` | For every integer 4 <= N <= 324, Nagamochi 2005, Theorem 2 gives s(N) >= min(ceil(sqrt(N)), sqrt(N - 2*floor(sqrt(N)) + 1) + 1). |
@@ -317,6 +328,21 @@ action for each are in [`frontier/RESULTS.md`](packing/frontier/RESULTS.md); the
 | [T-144](packing/frontier/RESULTS.md) | 122, 123, 124, 125, 126 | `V0` | `C0` | `S3` | `previously-published` | A measure of points, segments and rectangles that wand125/square-packing published on 10 October 2026, reported on no issue, is reported to prove s(122) >= 563/50 = 11.26. |
 | [T-192](packing/frontier/RESULTS.md) | 28 | `V0` | `C0` | `S3` | `previously-published` | A rectangle measure of wand125/square-packing, published on 15 October 2026 and reported on no issue, is reported to prove s(28) > 1149/200 = 5.745. |
 | [T-196](packing/frontier/RESULTS.md) | 227, 229, 260 | `V0` | `C0` | `S3` | `previously-published` | The source reports complete rational unit-square certificates at the exact sides stated: s(227) <= 194547458795865848854407472552117653131825098066089500568310019841668910818842825068644658133972443495777187230686109286929082683273291187074040913251499/12500000000000000000000000000001272204783003459957077568639425038233180795950995922365041743732086145591922059343477256613382050000000000000000000000000; s(229) <= 156501747569482131747919637148801852719869637315233948984618327625011520667543259632677498716011131748832131668750692746335433269145213277034738380207139541/10000000000000000000000000000001737366297119815888250696550926607660931327350731575578989919015034082413286101971092035771621296900000000000000000000000000; s(260) <= 16645778804181379786535601/1000000000000000000000000. |
+| [T-200](packing/frontier/RESULTS.md) | 38 | `V0` | `C0` | `S3` | `previously-published` | A rectangle measure of wand125/square-packing, published on 16 October 2026 and reported in jlevy/squares#446, is reported to prove s(38) >= 2631/400 = 6.5775. |
+| [T-201](packing/frontier/RESULTS.md) | 40 | `V0` | `C0` | `S3` | `previously-published` | A rectangle measure of wand125/square-packing, published on 16 October 2026 and reported in jlevy/squares#446, is reported to prove s(40) >= 1347/200 = 6.735. |
+| [T-202](packing/frontier/RESULTS.md) | 41 | `V0` | `C0` | `S3` | `previously-published` | A rectangle measure of wand125/square-packing, published on 16 October 2026 and reported in jlevy/squares#446, is reported to prove s(41) >= 2721/400 = 6.8025. |
+| [T-203](packing/frontier/RESULTS.md) | 43 | `V0` | `C0` | `S3` | `previously-published` | A rectangle measure of wand125/square-packing, published on 16 October 2026 and reported in jlevy/squares#446, is reported to prove s(43) >= 2777/400 = 6.9425. |
+| [T-204](packing/frontier/RESULTS.md) | 51 | `V0` | `C0` | `S3` | `previously-published` | A rectangle measure of wand125/square-packing, published on 16 October 2026 and reported in jlevy/squares#446, is reported to prove s(51) >= 3011/400 = 7.5275. |
+| [T-208](packing/frontier/RESULTS.md) | 86 | `V0` | `C0` | `S3` | `previously-published` | A rectangle measure of wand125/square-packing, published on 16 October 2026 and reported in jlevy/squares#446, is reported to prove s(86) >= 3811/400 = 9.5275. |
+| [T-209](packing/frontier/RESULTS.md) | 88 | `V0` | `C0` | `S3` | `previously-published` | A rectangle measure of wand125/square-packing, published on 16 October 2026 and reported in jlevy/squares#446, is reported to prove s(88) >= 3853/400 = 9.6325. |
+| [T-210](packing/frontier/RESULTS.md) | 89 | `V0` | `C0` | `S3` | `previously-published` | A rectangle measure of wand125/square-packing, published on 16 October 2026 and reported in jlevy/squares#446, is reported to prove s(89) >= 1937/200 = 9.685. |
+| [T-211](packing/frontier/RESULTS.md) | 91 | `V0` | `C0` | `S3` | `previously-published` | A rectangle measure of wand125/square-packing, published on 16 October 2026 and reported in jlevy/squares#446, is reported to prove s(91) >= 783/80 = 9.7875. |
+| [T-212](packing/frontier/RESULTS.md) | 90 | `V0` | `C0` | `S3` | `previously-published` | A rectangle measure of wand125/square-packing, published on 16 October 2026 and reported in jlevy/squares#446, is reported to prove s(90) >= 489/50 = 9.78. |
+| [T-213](packing/frontier/RESULTS.md) | 92 | `V0` | `C0` | `S3` | `previously-published` | A rectangle measure of wand125/square-packing, published on 16 October 2026 and reported in jlevy/squares#446, is reported to prove s(92) >= 493/50 = 9.86. |
+| [T-214](packing/frontier/RESULTS.md) | 106 | `V0` | `C0` | `S3` | `previously-published` | A rectangle measure of wand125/square-packing, published on 16 October 2026 and reported in jlevy/squares#446, is reported to prove s(106) >= 10503/1000 = 10.503. |
+| [T-215](packing/frontier/RESULTS.md) | 107 | `V0` | `C0` | `S3` | `previously-published` | A rectangle measure of wand125/square-packing, published on 16 October 2026 and reported in jlevy/squares#446, is reported to prove s(107) >= 529/50 = 10.58. |
+| [T-217](packing/frontier/RESULTS.md) | 110 | `V0` | `C0` | `S3` | `previously-published` | A rectangle measure of wand125/square-packing, published on 16 October 2026 and reported in jlevy/squares#446, is reported to prove s(110) >= 1073/100 = 10.73. |
+| [T-223](packing/frontier/RESULTS.md) | 204, 260 | `V0` | `C0` | `S3` | `previously-published` | Two complete rational source certificates report finite upper-bound improvements at the exact sides they state: s(204) <= 141654921219558922887849/9565692327860000000000; s(260) <= 146417594016514621500994169/8796093022208000000000000. |
 | [T-003](packing/frontier/RESULTS.md) | 17, 18 | `V3` | `C3` | `S2` | `apparently-novel` | The sixteen-point set’s unavoidability ceiling lies in [4426213/1000000, 4427/1000): certification at the left endpoint, an exact escaping pose at the right, with the top strips’ a + 2b <= 2*sqrt(2) hypothesis identifying the closing mechanism at 753/250 + sqrt(2), inside the bracket. |
 | [T-005](packing/frontier/RESULTS.md) | 13 | `V3` | `C3` | `S2` | `apparently-novel` | Bentz 2010, Lemma 10 is false as printed -- the middle replacement point (1, 1.74) is refuted by an exact escape certificate, and the published page image carries the same transposed text -- and true under the corrected reading (1.74, 1), with all three corrected replacement covers certified exactly. |
 | [T-011](packing/frontier/RESULTS.md) | 11 | `V3` | `C3` | `S2` | `previously-published` | Trump’s 1979 packing is exactly valid: 11 unit squares in a square of side the published degree-8 algebraic number 3.877083590022814 …, with 14 of 55 pairs in exact zero-separation contact and 20 corner coordinates exactly on the boundary, so s(11) <= that side. |
@@ -350,15 +376,14 @@ action for each are in [`frontier/RESULTS.md`](packing/frontier/RESULTS.md); the
 | [T-187](packing/frontier/RESULTS.md) | 146 | `V3` | `C3` | `S2` | `previously-published` | One complete rational source certificate reports a finite upper-bound improvement at the exact side it states: s(146) <= 12.583782190151860342292508597077. |
 | [T-188](packing/frontier/RESULTS.md) | 211 | `V3` | `C3` | `S2` | `previously-published` | One complete rational source certificate reports a finite upper-bound improvement at the exact side it states: s(211) <= 14.993549626299421038935530460882. |
 | [T-190](packing/frontier/RESULTS.md) | 237 | `V3` | `C3` | `S2` | `previously-published` | One complete rational source certificate reports a finite upper-bound improvement at the exact side it states: s(237) <= 15.902603638259596880179144254274. |
+| [T-193](packing/frontier/RESULTS.md) | 88, 102, 123, 126, 175, 199, 204, 232, 258, 259, 266, 267, 292, 295, 301, 302 | `V3` | `C3` | `S2` | `previously-published` | Evan Daniel’s issue 639 reports exact algebraic sides for the record’s best-known packings at 23 counts. |
+| [T-198](packing/frontier/RESULTS.md) | 229 | `V3` | `C3` | `S2` | `previously-published` | One complete rational source certificate reports a finite upper-bound improvement at the exact side it states: s(229) <= 7825081627429265081627421439843/500000000000000000000000000000. |
+| [T-199](packing/frontier/RESULTS.md) | 229 | `V3` | `C3` | `S2` | `previously-published` | One complete rational source certificate reports a finite upper-bound improvement at the exact side it states: s(229) <= 7825080756947776580756939951343/500000000000000000000000000000. |
 | [T-120](packing/frontier/RESULTS.md) | 102 | `V0` | `C0` | `S2` | `previously-published` | Evan Daniel reports s(102) <= alpha_102, where alpha_102 is the feasible side of the source configuration and the selected root of the degree-8 integer polynomial in reported-catalogue.json, new_form_claims.102, with its retained rational root interval, whose ends agree to 24 places, so s(102) <= 10.607174680176051125342523… The same source asserts that this polynomial is minimal; that additional algebraic assertion has not been independently established here. |
 | [T-121](packing/frontier/RESULTS.md) | 106 | `V0` | `C0` | `S2` | `previously-published` | Evan Daniel reports s(106) <= alpha_106, where alpha_106 is the feasible side of the source configuration and the selected root of the degree-32 integer polynomial in reported-catalogue.json, new_form_claims.106, with its retained rational root interval, whose ends agree to 24 places, so s(106) <= 10.822908044132847555086207… The same source asserts that this polynomial is minimal; that additional algebraic assertion has not been independently established here. |
 | [T-122](packing/frontier/RESULTS.md) | 152 | `V0` | `C0` | `S2` | `previously-published` | Evan Daniel reports s(152) <= alpha_152, where alpha_152 is the feasible side of the source configuration and the selected root of the degree-40 integer polynomial in reported-catalogue.json, new_form_claims.152, with its retained rational root interval, whose ends agree to 24 places, so s(152) <= 12.830718800976609954865516… The same source asserts that this polynomial is minimal; that additional algebraic assertion has not been independently established here. |
 | [T-123](packing/frontier/RESULTS.md) | 177 | `V0` | `C0` | `S2` | `previously-published` | Evan Daniel reports s(177) <= alpha_177, where alpha_177 is the feasible side of the source configuration and the selected root of the degree-32 integer polynomial in reported-catalogue.json, new_form_claims.177, with its retained rational root interval, whose ends agree to 23 places, so s(177) <= 13.82297973416944860009365… The same source asserts that this polynomial is minimal; that additional algebraic assertion has not been independently established here. |
 | [T-124](packing/frontier/RESULTS.md) | 1, 2, 3, 4, 6, 7, 8, 9, 11, 12, 13, 14, 15, 16, 20, 21, 22, 23, 24, 25, 28, 30, 31, 32, 33, 34, 35, 36, 42, 43, 44, 45, 46, 47, 48, 49, 56, 57, 58, 59, 60, 61, 62, 63, 64, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222, 223, 224, 225, 242, 243, 244, 245, 246, 247, 248, 249, 250, 251, 252, 253, 254, 255, 256, 274, 275, 276, 277, 278, 279, 280, 281, 282, 283, 284, 285, 286, 287, 288, 289, 308, 309, 310, 311, 312, 313, 314, 315, 316, 317, 318, 319, 320, 321, 322, 323, 324 | `V0` | `C0` | `S2` | `previously-published` | Evan Daniel reports that 178 configurations are non-strict local minima under the source matched-index perturbation convention. |
-| [T-193](packing/frontier/RESULTS.md) | 88, 102, 123, 126, 175, 199, 204, 232, 258, 259, 266, 267, 292, 295, 301, 302 | `V0` | `C0` | `S2` | `previously-published` | Evan Daniel’s issue 639 reports exact algebraic sides for the record’s best-known packings at 23 counts. |
-| [T-197](packing/frontier/RESULTS.md) | 155 | `V0` | `C0` | `S2` | `previously-published` | The source reports complete rational unit-square certificates at the exact sides stated: s(155) <= 2590452188930112807053435932173/200000000000000000000000000000. |
-| [T-198](packing/frontier/RESULTS.md) | 229 | `V0` | `C0` | `S2` | `previously-published` | The source reports complete rational unit-square certificates at the exact sides stated: s(229) <= 7825081627429265081627421439843/500000000000000000000000000000. |
-| [T-199](packing/frontier/RESULTS.md) | 229 | `V0` | `C0` | `S2` | `previously-published` | The source reports complete rational unit-square certificates at the exact sides stated: s(229) <= 7825080756947776580756939951343/500000000000000000000000000000. |
 | [T-155](packing/frontier/RESULTS.md) | 28, 29, 37, 39, 41, 50, 53, 54, 55, 69, 71, 83, 87, 101, 104, 107, 109, 122, 124, 125, 128, 145, 147, 148, 149, 151, 170, 171, 173, 174, 178, 197, 198, 200, 201, 202, 203, 204, 205, 226, 227, 229, 230, 231, 233, 234, 235, 257, 260, 262, 264, 265, 291, 293, 294, 296, 298, 299, 300 | `V3` | `C3` | `S1` | `apparently-novel` | For each of 59 counts n from 28 to 300, s(n) <= s_n, where s_n is the exact side of a rational packing that this project made from the register’s known-best witness at n with Evan Daniel’s exact solver and regularizer and decided here over Q; at 57 of the counts it is measured here as the witness’s packing, and at n = 204 and 299 that is not decided. |
 | [T-156](packing/frontier/RESULTS.md) | 290 | `V3` | `C3` | `S1` | `apparently-novel` | s(290) <= 17.53553390593273762200422181052425, which is 70142135623730950488016887242097/4000000000000000000000000000000 exactly, by monotonicity from T-155 (a packing of 291 unit squares contains a packing of 290): T-155 certifies n = 291 at exactly this side. |
 | [T-166](packing/frontier/RESULTS.md) | 153 | `V3` | `C3` | `S1` | `previously-published` | One complete rational source certificate reports a finite upper-bound improvement at the exact side it states: s(153) <= 12.870013850407034002770080892. |
@@ -402,7 +427,7 @@ hypothesis status and summarizes experiment verdicts, and the
 | Explorations | 50 | 30 linked to proposed hypotheses; 20 uncodified |
 | Hypotheses | 283 | 74 confirmed; 48 refuted; 75 blocked; 24 unresolved; 20 open; 37 open questions; 2 result registered; 2 abandoned; 0 running; 1 exhausted |
 | Experiments | 246 | 94 accepted; 53 rejected; 63 unresolved; 12 baseline; 18 blocked; 5 abandoned; 0 in progress; 1 exhausted |
-| Frontier results | 199 | 199 registered, 167 by others |
+| Frontier results | 224 | 224 registered, 192 by others |
 
 <!-- END CURRENT-RESEARCH-STATUS -->
 
@@ -665,13 +690,32 @@ case or experiment separately.
 | [Attribution Policy](attribution.md) | artifact and naming conventions | definitive | maintained | — |
 | [Person Profiles](packing/contributors/README.md) | component scope and use | current | maintained | — |
 | [Feature: Contributor Profiles and Linked Result Credits](docs/project/specs/active/plan-2026-10-10-contributor-profiles.md) | implementation plan | current | transient | — |
+| [Erratum: the 21 October Review of Evan Daniel’s Import at 270](docs/project/reviews/review-2026-10-21-upper-bound-import-703-erratum.md) | dated review record | record | retained | — |
+| [Review: Evan Daniel’s Upper-Bound Import at 270 (#703, T-224, PR #708)](docs/project/reviews/review-2026-10-21-upper-bound-import-703.md) | dated review record | record | retained | — |
+| [Review: Evan Daniel’s Upper-Bound Imports of 19 and 20 October (#689, #694)](docs/project/reviews/review-2026-10-20-upper-bound-imports-689-694.md) | dated review record | record | retained | — |
+| [Review: Evan Daniel’s Upper-Bound Imports of 16 to 18 October (#659, #664, #669, #674)](docs/project/reviews/review-2026-10-19-upper-bound-imports-659-664-669-674.md) | dated review record | record | retained | — |
+| [Completed n68 Fine-Net Certificate: Mathematical Review](docs/project/reviews/review-2026-10-19-n68-fine-net-mathematics.md) | dated review record | record | retained | — |
+| [Fine-Net Mac Arithmetic and Capture Review](docs/project/reviews/review-2026-10-19-fine-net-mac-arithmetic.md) | dated review record | record | retained | — |
+| [Completed n84 and n85 Fine-Net Certificates: Mathematical Review](docs/project/reviews/review-2026-10-19-n84-n85-fine-net-mathematics.md) | dated review record | record | retained | — |
+| [Review: Evan Daniel’s Exact Algebraic Sides at Sixteen Counts (#639, T-193)](docs/project/reviews/review-2026-10-16-evand-exact-sides-639.md) | dated review record | record | retained | — |
+| [PR #665 Integration Diagnostic and Custody Retention](docs/project/reviews/review-2026-10-19-pr665-integration-diagnostic.md) | dated review record | record | retained | — |
+| [PR #671 Integration Review Diagnostic](docs/project/reviews/review-2026-10-19-pr671-integration-diagnostic.md) | dated review record | record | retained | — |
 | [Review: PingYou Ltd’s Exact Rational Certificate for s(29) (PR #622)](docs/project/reviews/review-2026-10-16-pingyou-n29.md) | dated review record | record | retained | — |
 | [Intake Audit, 18 October 2026](docs/project/reviews/review-2026-10-18-intake-audit.md) | dated review record | record | retained | — |
 | [Open Work Review — 18 October 2026](docs/project/reviews/review-2026-10-18-open-work.md) | dated review record | record | retained | — |
 | [Intake Evidence, 18 October 2026](packing/campaign/issue-intake/intake-20261018/README.md) | source retention and archive policy | record | retained | — |
 | [Incremental Intake Evidence, 19 October 2026](packing/campaign/issue-intake/intake-20261019/README.md) | source retention and archive policy | record | retained | — |
+| [Intake Continuation, 19 October 2026: n183 (#680)](packing/campaign/issue-intake/intake-followup-20261019/README.md) | source retention and archive policy | record | retained | — |
+| [Upper-Bound Reports, Count by Count, in Report Order](packing/campaign/issue-intake/intake-followup-20261019/n183-ledger/README.md) | generated status view | generated | generated | — |
+| [n183 Claim Inputs](packing/campaign/issue-intake/intake-followup-20261019/n183-ledger/lane-claims/README.md) | source retention and archive policy | record | retained | — |
 | [Upper-Bound Reports, Count by Count, in Report Order](packing/campaign/issue-intake/upper-bounds-20261018/README.md) | generated status view | generated | generated | — |
 | [Lane Records for the 18 October Ledger](packing/campaign/issue-intake/upper-bounds-20261018/lane-claims/README.md) | source retention and archive policy | record | retained | — |
+| [Upper-Bound Reports, Count by Count, in Report Order](packing/campaign/issue-intake/upper-bounds-20261019/README.md) | generated status view | generated | generated | — |
+| [Lane Records for the 19 October Ledger](packing/campaign/issue-intake/upper-bounds-20261019/lane-claims/README.md) | source retention and archive policy | record | retained | — |
+| [Upper-Bound Reports, Count by Count, in Report Order](packing/campaign/issue-intake/upper-bounds-20261020/README.md) | generated status view | generated | generated | — |
+| [Lane Records for the 20 October Ledger](packing/campaign/issue-intake/upper-bounds-20261020/lane-claims/README.md) | source retention and archive policy | record | retained | — |
+| [Mathematical Review of the n = 108 Fine-Net Certificate](docs/project/reviews/review-2026-10-18-n108-fine-net-mathematics-max.md) | dated review record | record | retained | — |
+| [Mathematical Review of wand125’s n108 Measure Certificate](docs/project/reviews/review-2026-10-18-wand125-n108-certificate-mathematics.md) | dated review record | record | retained | — |
 | [Review: The Rational Upper-Bound Imports of 11 to 15 October (#506 to #607)](docs/project/reviews/review-2026-10-16-upper-bound-imports-506-607.md) | dated review record | record | retained | — |
 | [Fitzharding’s Lean Proof That s(19) = 3 + 4√2/3: Mathematical Review](docs/project/reviews/review-2026-10-16-fitzharding-n19-lean.md) | dated review record | record | retained | — |
 | [Review: The Rational Upper-Bound Imports of 12 to 14 October (#561 to #593)](docs/project/reviews/review-2026-10-14-upper-bound-imports-561-593.md) | dated review record | record | retained | — |
@@ -687,6 +731,7 @@ case or experiment separately.
 | [Fitzharding’s Lean Proof of s(17) = L: Mathematical-Correctness Review](docs/project/reviews/review-2026-10-13-fitzharding-n17-mathematical-correctness.md) | dated review record | record | retained | — |
 | [Mathematical Review: Overbeck’s Candidate Proof That `s(17) = L`, Correctness Lane](docs/project/reviews/review-2026-10-13-overbeck-n17-mathematical-correctness.md) | dated review record | record | retained | — |
 | [Adversarial Review: Fitzharding’s Lean Proof That `s(17) = L`](docs/project/reviews/review-2026-10-13-fitzharding-n17-lean.md) | dated review record | record | retained | — |
+| [Source-Build Admission Audit: Fitzharding’s n = 17 Lean Receipts](docs/project/reviews/review-2026-10-15-fitzharding-n17-source-build-admission.md) | dated review record | record | retained | — |
 | [Review: Verification Gaps in the Drawn Packings and the Upper-Bound Register](docs/project/reviews/review-2026-10-13-verification-gaps.md) | dated review record | record | retained | — |
 | [Overbeck’s Candidate Proof of s(17) = L: Second Adversarial Review](docs/project/reviews/review-2026-10-13-overbeck-n17-candidate-second.md) | dated review record | record | retained | — |
 | [Mathematical Review: Kleddamag’s Candidate Proof That `s(17) = L`](docs/project/reviews/review-2026-10-12-kleddamag-n17-candidate.md) | dated review record | record | retained | — |
@@ -797,6 +842,7 @@ case or experiment separately.
 | [Fibonacci Torus Confirmation Checks](packing/cases/fibonacci_torus/README.md) | component scope and use | record | retained | — |
 | [Regularized Views Registered as Verified Upper Bounds](packing/cases/regularized_bounds/README.md) | component scope and use | record | retained | — |
 | [Regularization Runs for n = 29 on PR #622’s Witness (think-30n2)](packing/cases/regularized_drawings/think-30n2-2026-10-16/README.md) | source retention and archive policy | record | retained | — |
+| [Regularization Runs for 155, 229, 236 and 271 After the 19 October Adoption (think-ip1p)](packing/cases/regularized_drawings/think-ip1p-2026-10-19/README.md) | source retention and archive policy | record | retained | — |
 | [Issue 422 Exact Feasibility Review](docs/project/reviews/review-2026-10-07-squish-second-update-mathematics.md) | dated review record | record | retained | — |
 | [Second SQUISH Update: Complete Semantic Binding Review](docs/project/reviews/review-2026-10-07-squish-second-update-semantic-binding.md) | dated review record | record | retained | — |
 | [Mathematical review of the SQUISH October 7 follow-up](docs/project/reviews/review-2026-10-07-squish-update-mathematics.md) | dated review record | record | retained | — |
@@ -811,6 +857,7 @@ case or experiment separately.
 | [Feature: A Static, Crawlable Site with a Registered URL Scheme](docs/project/specs/done/plan-2026-10-06-site-urls-seo-performance.md) | implementation plan | record | retained | — |
 | [Feature: Compact Homepage, Consistent Case Layouts, and Scroll-Aware Navigation](docs/project/specs/active/plan-2026-10-08-site-layout-and-navigation.md) | implementation plan | current | transient | — |
 | [Feature: A Shorter Website Development Loop](docs/project/specs/active/plan-2026-10-10-website-development-loop.md) | implementation plan | current | transient | — |
+| [Feature: Recent Results on the Results Page](docs/project/specs/active/plan-2026-10-11-results-recent-overview.md) | implementation plan | current | transient | — |
 | [Feature: One Documentation Layout Under `docs/project/`](docs/project/specs/active/plan-2026-10-11-documentation-organization.md) | implementation plan | current | transient | — |
 | [Proof Review: squarepacker’s k^2 - M(k) >= 0.033 log k](docs/project/reviews/review-2026-10-05-squarepacker-k2-minus-c.md) | dated review record | record | retained | — |
 | [Delta Proof Review: Ryu’s k² − M(k) Bound, Version 1.2](docs/project/reviews/review-2026-10-08-squarepacker-k2-minus-c-v12.md) | dated review record | record | retained | — |
@@ -1155,6 +1202,7 @@ case or experiment separately.
 | [Native n17 Branch-and-Bound Benchmark](packing/benchmarks/n17-bb-native/README.md) | component scope and use | supporting | maintained | — |
 | [Milestone A Census](packing/benchmarks/measure-verifier/census/README.md) | generated status view | generated | generated | — |
 | [Milestone B Census](packing/benchmarks/measure-verifier/census-mixed/README.md) | generated status view | generated | generated | — |
+| [Accepted Mac Checkpoints: n68, n84 and n85](packing/benchmarks/measure-verifier/census-mixed/wand125-fine-net-lower-bounds-2026-10-16/README.md) | source retention and archive policy | record | retained | — |
 | [Census Summary](packing/benchmarks/measure-verifier/census-summary.md) | generated status view | generated | generated | — |
 | [Whole `rect_n32_L595`: c2 Against verify.cpp](packing/benchmarks/measure-verifier/experiments/exp-006-whole-certificate-n32.md) | research synthesis | record | retained | — |
 | [H-005: One Error Budget per Edge](packing/benchmarks/measure-verifier/experiments/exp-007-h005-error-budget.md) | research synthesis | record | retained | — |
@@ -1276,6 +1324,7 @@ case or experiment separately.
 | [Advanced Tutorial: Square Packing, Search, and Proof](TUTORIAL-ADVANCED.md) | first-principles tutorial | supporting | maintained | — |
 | [Feature: Basic and Advanced Square-Packing Tutorials](docs/project/specs/active/plan-2026-10-14-basic-and-advanced-tutorials.md) | implementation plan | current | transient | — |
 | [Feature: Predictable CI Feedback and Measured Checkpoints](docs/project/specs/active/plan-2026-10-14-ci-iteration-cost.md) | implementation plan | current | transient | — |
+| [Plan and Audit: Verification of Reported Formal Proofs](docs/project/specs/active/plan-2026-10-15-formal-proof-verification-rubric.md) | implementation plan | current | transient | — |
 | [Editorial Review: The Basic and Advanced Square-Packing Tutorials](docs/project/reviews/review-2026-10-14-tutorial-split-editorial.md) | dated review record | record | retained | — |
 | [Packing Atlas](packing/atlas/README.md) | component scope and use | supporting | maintained | — |
 | [Enumerated Contact-Scaffold Atlas](packing/atlas/enumerated/README.md) | component scope and use | supporting | maintained | — |
@@ -1492,6 +1541,7 @@ case or experiment separately.
 | [Claim-Chain Review: Evan Daniel’s `s(k² − 4) = k` for Every `k ≥ 5`](docs/project/reviews/review-2026-10-03-evand-k2m4-claim-chain.md) | dated review record | record | retained | — |
 | [Evan Daniel’s Square Packing Atlas: Site Review and Import](docs/project/reviews/review-2026-10-05-evand-square-packing-atlas.md) | dated review record | record | retained | — |
 | [Mathematics Review: The Catalogue’s September 2026 Packings at `n = 69, 83, 87` (T-088, T-089)](docs/project/reviews/review-2026-10-05-kingbird-intake-n69-n83-n87.md) | dated review record | record | retained | — |
+| [Independent Mathematical Review of Issue #680](docs/project/reviews/review-2026-10-19-evand-n183-subgrid.md) | dated review record | record | retained | — |
 | [Density Solvers Compared: Tokoharu’s and wand125’s Rectangle-Density Tools Against This Repository’s Certificate Stack](docs/project/reviews/review-2026-09-28-density-solver-comparison.md) | dated review record | record | retained | — |
 | [Proof Review: Guzhou0806’s R067 and R068, `s(17) > 233009/50000` and `s(17) > 116511/25000`](docs/project/reviews/review-2026-09-28-n17-guzhou-r067-r068.md) | dated review record | record | retained | — |
 | [Proof Review: wand125’s Point-Only Certificates for `s(45) = 7` and `s(21) = 5`](docs/project/reviews/review-2026-09-28-wand125-point-only-s21-s45.md) | dated review record | record | retained | — |
@@ -4628,6 +4678,36 @@ known to be optimal.
 Distinct from the **analytic optimum**, which exists only where the case is proved.
 At $n = 5$ and $n = 10$ they coincide; at $n = 11$ the standing best is Trump’s
 construction and the optimum is unknown.
+
+**House best packing**, or *house best* for short (“the house best packing at 204”, “the
+house best at 204”). Either form names the packing this project chooses to stand for a
+count. Both upper lanes of the case record hold its certificate, its witness is
+`packing/witnesses/known-best/n-NNN.yaml`, and the case page, the atlas and every
+picture published as the count’s packing show it, regularized where a view improves on
+it. By the import runbook’s
+[house rule](packing/campaign/result-import.md#the-house-rule), the pass that validates
+a smaller packing adopts it, whoever found it, so the house best packing is the smallest
+validated packing. The one exception is a count staged in
+`select_houses.PENDING_ADOPTION`, where a smaller validated packing waits for one of the
+three `STAGING_REASONS`: the pass’s next pull request, regularization runs over the item
+cap, or no writer yet for its algebraic side.
+On 20 October 2026 nineteen counts are staged, all for want of a writer, 204 among them.
+The house best packing also trails the standing best wherever a smaller reported packing
+has no certificate through stage 4 yet.
+In code and record keys the term is spelled *house*: `devtools.select_houses` derives
+each count’s house best packing from the register, `devtools.upper_bound_houses`
+rebuilds its witness from the retained certificate, `devtools.adopt_houses` writes it
+into the case record, and `select_houses.PENDING_ADOPTION` names each staged count with
+the bead that adopts it.
+Elsewhere *house* has the same modifier sense of “the project’s own”: the house renderer
+(`sqpack.render`) draws every witness.
+A **house drawing** is that renderer’s picture of the house best packing as published;
+the count’s **default picture** is its regularized view where the
+[regularization policy](docs/project/policies/regularization-policy.md#12-the-default-picture)
+draws one, and the house drawing everywhere else.
+The regularization policy’s contact-shading *house rule* (gap $2 \times 10^{-6}$, beside
+the workbench’s stage rule) belongs to that renderer and is unrelated to the adoption
+rule.
 
 **Polish failure** and **exploration failure.** The decomposition of a gap, and the
 campaign’s central diagnostic.

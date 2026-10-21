@@ -1,0 +1,73 @@
+START 2026-10-19T21:17:00Z load=28.46 21.98 14.59 cmd: uv run --frozen --all-extras --group dev python -m devtools.upper_bound_reports evand-n229-dilation-update-2026-10-18 check-claims
+warning: The `UV_NATIVE_TLS` environment variable is deprecated and will be removed in a future release. Use `UV_SYSTEM_CERTS` instead.
+{
+  "format": "upper-bound-report-claims-v1",
+  "issue": "https://github.com/jlevy/squares/issues/674",
+  "source": "https://github.com/evand/square-packing",
+  "revision": "00e68dfbe1d29ab5dbab1cddfb8f6ca19d5470db",
+  "read_on": "2026-10-19",
+  "read_at_main": "14fd9e27f3e1e800c41b3d49280e4c7055ab6681",
+  "horizon": 324,
+  "results": [
+    {
+      "n": 229,
+      "certificate": "search/packer/candidates/s229_v2.cert",
+      "format": "evand-cert",
+      "requested": true,
+      "replayed": true,
+      "offered_side": "15.650161513896",
+      "printed_in": "https://github.com/jlevy/squares/issues/674",
+      "exact_side": "7825080756947776580756939951343/500000000000000000000000000000",
+      "ceiling": "15.6501615138955532",
+      "first_committed": "2026-10-18T01:35:40Z",
+      "grid_side": "16",
+      "case": {
+        "source_key": "[Kingbird]",
+        "holders": "the Kingbird catalogue, verified by T-155's exact ceiling",
+        "result": "T-155",
+        "reported_value": "15.65685424949238",
+        "verified_value": "15.65685424949239",
+        "evidence": [
+          "E-regularized-bounds-2026-10-12-exact-decision"
+        ],
+        "reported_rounding": "unstated",
+        "exact_side": "391421356237309504880168872421/25000000000000000000000000000",
+        "relation": "below",
+        "difference": "3346367798413516846437497077/500000000000000000000000000000",
+        "reported_relation": "below"
+      },
+      "pending": [
+        {
+          "report": "T-196 (#668)",
+          "url": "https://github.com/jlevy/squares/issues/668",
+          "holders": "Joost de Winter",
+          "result": "T-196",
+          "printed": "15.650174756949",
+          "rounding": "up",
+          "relation": "below",
+          "difference": "6621526723419243060048657/500000000000000000000000000000"
+        },
+        {
+          "report": "#672",
+          "url": "https://github.com/jlevy/squares/issues/672",
+          "holders": "Francisco Couzo",
+          "printed": "15.650174740273",
+          "rounding": "up",
+          "relation": "below",
+          "difference": "6613188723419243060048657/500000000000000000000000000000"
+        },
+        {
+          "report": "T-198 (#674)",
+          "url": "https://github.com/jlevy/squares/issues/674",
+          "holders": "Evan Daniel",
+          "result": "T-198",
+          "exact_side": "7825081627429265081627421439843/500000000000000000000000000000",
+          "relation": "below",
+          "difference": "1740962977001740962977/1000000000000000000000000000"
+        }
+      ],
+      "smallest": "this certificate"
+    }
+  ]
+}
+END 2026-10-19T21:17:06Z exit=0 wall=5.335929385s load=29.76 22.46 14.82

@@ -6,8 +6,9 @@
 
 **Status:** Data-model spike, initial population, website and `/profiles/` URLs
 implemented; continued from [PR #490](https://github.com/jlevy/squares/pull/490) in
-[PR #578](https://github.com/jlevy/squares/pull/578), a draft awaiting the owner’s
-review.
+[PR #578](https://github.com/jlevy/squares/pull/578), under final integration and review
+on 2026-10-21. The current integration bead is `think-zpfo`; dated validation receipts
+below apply only to the revisions they name.
 
 **Workflow:** W7 pipeline improvement, entered through `tbd shortcut new-plan-spec`.
 
@@ -26,8 +27,52 @@ The website presents the same content as a popover and a complete standalone pag
 
 Convert credited names into profile links wherever the website presents them, including
 main results tables, result histories, case pages, paper credits and project cards.
-Preserve the printed name, credit order, role and source relationship.
+Preserve the printed name in the evidence record, with its credit order, role and source
+relationship; visible linked labels follow the attribution policy.
 Linking a person must not turn an acknowledgment into authorship.
+
+## Current Integration: 2026-10-21
+
+Continue through `think-zpfo` and [PR #578](https://github.com/jlevy/squares/pull/578).
+The active checkout is `/Volumes/spud-ext2/worktrees/squares-profiles-final-20261021`;
+source `/Volumes/spud-ext2/agent-scratch/about-profiles-20261020/integration-env.sh`
+before build or test commands.
+Earlier dated receipts below are historical, including their counts, environments and
+preview ports.
+
+The current census has 45 profiles and 1,503 structured occurrences: 1,163 resolved, 334
+unresolved and 6 non-person.
+One additional reviewed project-author occurrence makes 1,504 total manifest rows.
+All 146 inventoried PDFs still await complete credit inspection; this presentation slice
+does not close `think-m7il`.
+
+Home and About lead to the directory, which shows full names, meaningful additional
+handles, distinct results by significance, separate credits, resources and public
+accounts. Profile resources share homepage cards, with the source address directly
+beneath the author byline.
+Recorded GitHub issue and pull-request references retain their source or registration
+role. The
+[presentation contract](../../../../packing/devtools/templates/paper-design.md#person-profiles)
+and [attribution policy](../../../../attribution.md) own these rules.
+
+| Bead | Acceptance scope |
+| --- | --- |
+| `think-xwad` | Shared distinct-result/significance and credit tally |
+| `think-7oq3` | Visible account usernames and filtered additional handles |
+| `think-r9xr` | Shared profile/homepage resource cards and source-link order |
+| `think-wa1u` | Recorded GitHub issue and PR references with typed icons |
+| `think-rvi5` | Shared account glyphs |
+| `think-qks9` | Primary content uses normal foreground |
+| `think-ml63` | Full names in About narrative |
+| `think-sj8n` | Derived Years active in directory and profiles |
+| `think-1ofm` | Directory people, distinct results, credits and unique resource totals |
+| `think-uyag` | Evidenced years and source links in existing biographies |
+| `think-vdsd` | Lower-level-only breadcrumbs, nearer navigation and clear of titles |
+
+Final integration validation and publication remain open under `think-zpfo` until its
+receipt is recorded.
+The next reviewer should review PR #578; merging and deployment remain separate from
+this handoff.
 
 ## Goals and Scope
 
@@ -97,7 +142,7 @@ absent credit.
 Existing aliases require identity review.
 The audit preserves uncertain E./G. Bajmóczy initials and distinguishes `ctjlewis` from
 the EvolvingPrograms organization.
-Mira, Kleddamag, Guzhou0806 and Julian-JJ may remain handle-only profiles.
+Mira, Guzhou0806 and Julian-JJ may remain handle-only profiles.
 Project, organization and AI-system credits stay explicit non-person occurrences.
 Do not turn a project label into a human without evidence.
 
@@ -128,15 +173,20 @@ The shared design guide owns layout; this plan owns rollout and coverage.
 
 Home and About share a brief invitation and the standard **All Profiles** action,
 without name previews.
-The directory is a surname-sorted table of full real/public names and counts matching
-each profile’s reviewed credits, plus shared public-account icons and cited-resource
-counts linking to each profile’s Resources section.
-The typed `site_resources` projection derives resource relationships from the existing
-curated homepage inventories and explicit bylines; person records store no second list.
+The directory is a surname-sorted table of full real/public names, a shared
+result/credit tally, public account icons with visible usernames or domains, and
+cited-resource counts linking to each profile’s Resources section.
+Result counts are distinct registered IDs reached through reviewed source attribution;
+credits are unique reviewed manifest spans.
+The same tally renderer serves project cards and profile pages, retaining project scope
+and displaying one occupied significance level as “3 results at S4.” The typed
+`site_resources` projection derives resource relationships from the existing curated
+homepage inventories and explicit bylines; person records store no second list.
 Credits and Resources remain separate counts.
 Directory and individual profiles retain About navigation ancestry.
-Profiles show selected alternate names, account handles or URLs with platform icons, and
-Related News derived from existing explicitly linked announcements.
+Profiles show additional selected **Handles** excluding repeated names and current
+account usernames, account handles or URLs with platform icons, and Related News derived
+from existing explicitly linked announcements.
 Scoped authored prose links exact unique full names while preserving reviewed credit
 joins and archived wording.
 The [attribution policy](../../../../attribution.md#website-and-pdf-presentation) owns
@@ -243,7 +293,9 @@ the composed credit remains unlinked rather than selecting one source arbitraril
 ### Convert names to links
 
 Render each resolved occurrence with the shared surname-or-handle label as an anchor to
-`profiles/<id>.html`, rebased to the containing page and marked for popover enhancement.
+`profiles/<id>.html`, rebased to the containing page.
+Designated case/result credit surfaces may enhance these links with popovers; directory
+rows, project bylines and authored prose navigate directly.
 Retain its original reviewed label in the occurrence record.
 Profile pages link back to credited results and papers through the reviewed manifest,
 preserving roles.
@@ -394,7 +446,8 @@ result popover.
 
 - [x] Render the same biography, identity fields and public links in a standalone page
   and its popover.
-- [x] Preserve credit wording and role while converting reviewed names to links.
+- [x] Preserve original credit wording in the evidence record and retain roles while
+  converting reviewed names to policy-compliant linked labels.
 - [x] Verify keyboard focus, Escape, modified clicks, fetch failure, request races and
   transitions from case/result popovers.
 - [x] Verify routes, sitemap, build selection, stale output removal and source drift
@@ -851,7 +904,77 @@ Review and validation receipts for this integration are recorded on PR #578 and
 `think-5bao`. The historical PDF census and profiles without sufficient identity
 evidence remain Phase 4 work under `think-m7il`.
 
-## WIP Handoff: 2026-10-10
+## Integration After PR #671 and PR #407: 2026-10-19
+
+The Sol continuation under `think-wrh8` integrates actual main
+`e0319ffd1c96986e0260083db7d3f3411f3bb4ef`, after PR #671 and PR #407 landed.
+The earlier qualification against `6833d05` retains its own source and test receipts.
+All 217 result IDs, rungs and significance scores, 641 evidence IDs, every case’s bound
+values and exact forms, and the current houses, rigidity records and default views are
+retained. The eighteen new lower-bound rows remain V0/C0 except T-216 at V3/C3; n108’s
+adopted lower bound remains `531/50`.
+
+The selected site edition remains proposed `v0.8.0`, following actual `v0.7.30`. The
+explainer inherits `v0.4.8` and its October 13 article revision; the methods survey
+keeps `v0.2.3`, and the posters keep `v0.6.3`. Fresh release dispositions compare the
+final 30/52 input scopes with actual main: five regenerated claim-link inputs enter the
+explainer scope, and the unchanged n108 case leaves the methods scope.
+The paper manuscripts, producers, methods figure inputs and explainer’s n11 citation
+entry were compared exactly; no baseline paper render or PDF comparison was performed.
+
+Review F’s F1 is fixed in `9812f19afba96325547ec02644cab03d138c4b67`: the cached
+original article is detached after stylesheet discovery, before clone consumers receive
+it. Its ownership regression failed before the fix and passes with all 29 tests in the
+Node article-loader suite.
+No heap or latency improvement was measured.
+The final merged-source gates and independent follow-up review remain required; earlier
+hosted success at `b76a24fd` does not qualify this integration.
+
+The conservative census has 27 profiles and 1,437 structured spans: 1,072 resolved, 359
+unresolved and six non-person.
+All 146 PDFs still await full-credit inspection.
+The new source’s literal n108 `wand125` credit stays unresolved rather than inheriting
+the earlier lower bound’s reviewed identity join.
+News wording remains prepared on PR #578; record the actual merge and delivery dates
+after those events. This integration has not been deployed.
+
+## Integration and Review: 2026-10-20
+
+A Claude continuation integrated main twice, `4851d8193` and then `e7de85ff6` (#701,
+T-223). Main had cut site editions `v0.8.0` to `v0.8.8` in the meantime, so the profile
+edition is cut as `v0.9.0`, a minor successor of `v0.8.8`. The optimality review
+`v0.1.8` and the threshold review `v0.1.1` keep their proposed editions.
+The explainer (`v0.4.12`) and the methods survey (`v0.2.3`) keep main’s editions, with
+no-public-change decisions that compare their candidate scopes with main.
+Every proposed date still needs confirmation at the first deployment.
+
+The fine-net source `[wand125 fine-net lower bounds 2026-10-16]` now credits Hosono.
+Its retained packet says that all 18 of its commits are authored by Hiroaki Hosono, and
+its repository is the wand125 account’s own, so it joins `hiroaki-hosono` on the same
+evidence as every other wand125 source.
+This supersedes the 19 October decision to keep its credit on the handle.
+Results T-200 to T-217 now print `Hosono after Tokoharu and
+Levy`. The same pass migrated `squarepacker` to Ryu and `ctjlewis` to Lewis under the
+handle rule that `attribution.md` restores from main’s `epistemics.md`.
+
+Three independent reviews, of the data model, the site and the content, were each
+followed by fixes with regression tests:
+
+- Reconcile refuses to drop a changed manual origin, reports each dropped join as
+  `prior` on the span that replaces it, and exits 3 when a resolved join was dropped.
+- Profiles now link the results they credit.
+  Levy’s profile has 136 result links, Hosono’s 73 and Evan Daniel’s 80; before the fix
+  they had 0, 0 and 3.
+- Bios no longer call an open case optimal or a packing new.
+
+The census has 27 profiles and 1,496 structured spans: 1,101 resolved, 389 unresolved
+and 6 non-person. All 146 PDFs still await full-credit inspection.
+The private-worker snapshot allowance is now 229 MiB, measured on the integrated tree.
+
+## WIP Handoff: 2026-10-10 (historical)
+
+This section records the state at the 10 October handoff.
+Its counts, paths and open items are superseded by the sections above.
 
 The owner requested a work-in-progress PR and handoff before further implementation.
 Continue on `codex/contributor-profiles-plan-spike` in
@@ -912,7 +1035,10 @@ accessibility and no-script fallback are unchanged.
   Bound citations, verifier credits and compact PDF links remain tracked by
   `think-2v8h`, `think-zupq` and `think-ir3i`.
 
-### Resume Setup
+### Historical Setup (Superseded)
+
+The following setup and gate receipt belonged to the October 10 handoff.
+Do not use these paths or commands as the current continuation entry point.
 
 Run `tbd prime` and `tbd sync`, reread the selected beads, then claim the next slice
 before editing.

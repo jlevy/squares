@@ -89,5 +89,7 @@ def test_every_stored_frame_passes_at_catalogue_precision_and_some_need_it() -> 
     # n = 211 replaced the exact 15 x 15 grid, and its rounded frame is the one added. 149
     # since the house adoption of 11 October 2026 (think-fvz4): T-141's tilted n = 308
     # replaced the grid, and its rounded frame is the one added; the other 41 adopted
-    # houses replaced tilted frames that already needed it.
-    assert len(needing_precision) == 149, (len(needing_precision), worst_pair, worst_wall)
+    # houses replaced tilted frames that already needed it. 150 since the adoption of 19
+    # October 2026 (think-jh4w): T-220's tilted n = 183 replaced the 14 x 14 grid, and its
+    # rounded frame is the one added.
+    assert len(needing_precision) == 150, (len(needing_precision), worst_pair, worst_wall)

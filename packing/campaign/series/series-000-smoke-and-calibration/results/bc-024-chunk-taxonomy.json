@@ -3,9 +3,9 @@
     "by_source": {
       "exact-grid": 44,
       "kingbird-derived-facts": 56,
-      "packet-derived-facts": 11
+      "packet-derived-facts": 16
     },
-    "components": 111,
+    "components": 116,
     "detail": [
       {
         "is_the_whole_record": true,
@@ -554,10 +554,18 @@
       {
         "is_the_whole_record": false,
         "n": 68,
-        "size": 5,
+        "size": 6,
         "source": "packet-derived-facts",
         "tilted": false,
-        "walls_touched": 1
+        "walls_touched": 2
+      },
+      {
+        "is_the_whole_record": false,
+        "n": 68,
+        "size": 11,
+        "source": "packet-derived-facts",
+        "tilted": false,
+        "walls_touched": 2
       },
       {
         "is_the_whole_record": false,
@@ -722,7 +730,23 @@
       {
         "is_the_whole_record": false,
         "n": 84,
-        "size": 12,
+        "size": 25,
+        "source": "packet-derived-facts",
+        "tilted": false,
+        "walls_touched": 2
+      },
+      {
+        "is_the_whole_record": false,
+        "n": 84,
+        "size": 6,
+        "source": "packet-derived-facts",
+        "tilted": false,
+        "walls_touched": 2
+      },
+      {
+        "is_the_whole_record": false,
+        "n": 84,
+        "size": 15,
         "source": "packet-derived-facts",
         "tilted": false,
         "walls_touched": 2
@@ -756,6 +780,22 @@
         "n": 85,
         "size": 14,
         "source": "kingbird-derived-facts",
+        "tilted": false,
+        "walls_touched": 2
+      },
+      {
+        "is_the_whole_record": false,
+        "n": 86,
+        "size": 22,
+        "source": "packet-derived-facts",
+        "tilted": false,
+        "walls_touched": 2
+      },
+      {
+        "is_the_whole_record": false,
+        "n": 86,
+        "size": 37,
+        "source": "packet-derived-facts",
         "tilted": false,
         "walls_touched": 2
       },
@@ -898,19 +938,19 @@
     ],
     "sizes": {
       "10": 15,
-      "11": 4,
-      "12": 2,
+      "11": 5,
+      "12": 1,
       "13": 1,
       "14": 5,
-      "15": 5,
+      "15": 6,
       "16": 2,
       "18": 4,
       "19": 2,
       "21": 7,
-      "22": 1,
+      "22": 2,
       "23": 1,
       "24": 1,
-      "25": 1,
+      "25": 2,
       "28": 5,
       "31": 2,
       "32": 2,
@@ -918,17 +958,18 @@
       "34": 1,
       "35": 1,
       "36": 1,
+      "37": 1,
       "43": 1,
       "44": 1,
       "45": 1,
       "46": 1,
       "47": 1,
       "48": 1,
-      "5": 6,
+      "5": 5,
       "57": 1,
       "58": 1,
       "59": 1,
-      "6": 8,
+      "6": 10,
       "60": 1,
       "61": 1,
       "62": 1,
@@ -956,8 +997,7 @@
     "tilted": 2,
     "walls_touched": {
       "0": 2,
-      "1": 1,
-      "2": 64,
+      "2": 70,
       "4": 44
     },
     "whole_record": 44
@@ -965,14 +1005,15 @@
   "schema_version": 1,
   "sizes_by_shape": {
     "L": {
-      "3": 22,
-      "4": 7,
-      "5": 2
+      "3": 23,
+      "4": 6,
+      "5": 2,
+      "8": 1
     },
     "bar": {
-      "2": 78,
-      "3": 15,
-      "4": 2,
+      "2": 82,
+      "3": 16,
+      "4": 1,
       "5": 1,
       "6": 1,
       "7": 1,
@@ -981,19 +1022,19 @@
     },
     "other-polyomino": {
       "10": 15,
-      "11": 4,
-      "12": 2,
+      "11": 5,
+      "12": 1,
       "13": 1,
       "14": 5,
-      "15": 5,
+      "15": 6,
       "16": 2,
       "18": 4,
       "19": 2,
       "21": 7,
-      "22": 1,
+      "22": 2,
       "23": 1,
       "24": 1,
-      "25": 1,
+      "25": 2,
       "28": 5,
       "31": 2,
       "32": 2,
@@ -1001,17 +1042,18 @@
       "34": 1,
       "35": 1,
       "36": 1,
+      "37": 1,
       "43": 1,
       "44": 1,
       "45": 1,
       "46": 1,
       "47": 1,
       "48": 1,
-      "5": 6,
+      "5": 5,
       "57": 1,
       "58": 1,
       "59": 1,
-      "6": 8,
+      "6": 10,
       "60": 1,
       "61": 1,
       "62": 1,
@@ -1045,11 +1087,11 @@
       "25": 3,
       "30": 1,
       "36": 2,
-      "4": 3,
+      "4": 4,
       "42": 1,
       "49": 2,
       "56": 1,
-      "6": 2,
+      "6": 1,
       "64": 1,
       "72": 1,
       "81": 1,
@@ -1057,7 +1099,7 @@
       "90": 1
     },
     "singleton": {
-      "1": 369
+      "1": 252
     }
   },
   "strata": {
@@ -1086,16 +1128,16 @@
       "tilted_components": 181
     },
     "packet-derived-facts": {
-      "components": 263,
+      "components": 156,
       "records": 7,
       "shapes": {
-        "L": 5,
-        "bar": 32,
-        "other-polyomino": 11,
+        "L": 6,
+        "bar": 36,
+        "other-polyomino": 16,
         "rectangle": 2,
-        "singleton": 213
+        "singleton": 96
       },
-      "tilted_components": 159
+      "tilted_components": 111
     }
   },
   "subject": {
@@ -1145,32 +1187,29 @@
   "wall_seating_by_shape": {
     "L": {
       "0": 4,
-      "1": 1,
-      "2": 25,
+      "2": 27,
       "4": 1
     },
     "bar": {
-      "0": 84,
-      "1": 7,
-      "2": 8,
+      "0": 92,
+      "1": 5,
+      "2": 6,
       "3": 1
     },
     "other-polyomino": {
       "0": 2,
-      "1": 1,
-      "2": 64,
+      "2": 70,
       "4": 44
     },
     "rectangle": {
-      "0": 9,
-      "1": 1,
+      "0": 10,
       "3": 8,
       "4": 9
     },
     "singleton": {
-      "0": 267,
-      "1": 64,
-      "2": 37,
+      "0": 173,
+      "1": 40,
+      "2": 38,
       "4": 1
     }
   }

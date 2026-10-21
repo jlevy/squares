@@ -22,8 +22,8 @@ A pull request may change a count’s drawing only to a view that
   checker (question 15);
 - has a side no larger than the verified upper bound $U$ (question 13), and no larger
   than the side today’s drawing is drawn at where that drawing is exactly verified (the
-  layer still draws seven views above $U$, at 18, 26, 66, 85, 110, 241 and 297, each an
-  exception question 13 names; a pass may replace them, never add to them);
+  layer still draws four views above $U$, at 18, 26, 66 and 85, each an exception
+  question 13 names; a pass may replace them, never add to them);
 - row 10 of the decision table admits;
 - improves on today’s drawing under the policy’s
   [improvement rule](../policies/regularization-policy.md#11-the-improvement-rule)
@@ -49,8 +49,8 @@ better on none, is skipped.
 `devtools.regularize_select` applies exactly these rules.
 A view at row 7 or 8 goes to the owner, and a view below $U$ is registered before it is
 drawn; both are described below.
-A view below $U$ is a smaller packing, so once validated it is the count’s house, by the
-import runbook’s
+A view below $U$ is a smaller packing, so once validated it becomes the count’s house
+best packing, by the import runbook’s
 [house rule](../../../packing/campaign/result-import.md#the-house-rule).
 
 ## The Steps
@@ -318,11 +318,11 @@ owner admitted on 16 October 2026; `--check-atlas` names which lapsed.
 
 ## Register Candidates
 
-A view whose side is below $U$ is a smaller packing than the house, and it is registered
-as a result (row 3), however it was made.
+A view whose side is below $U$ is a smaller packing than the house best packing, and it
+is registered as a result (row 3), however it was made.
 It is taken through the import runbook’s stages like any report, crediting the packing’s
-finder and the regularizer, and once validated it is adopted as the house in the pass
-that validates it, by the
+finder and the regularizer, and once validated it is adopted as the house best packing
+in the pass that validates it, by the
 [house rule](../../../packing/campaign/result-import.md#the-house-rule).
 Its bound is new only where no earlier certificate already stated that side exactly, as
 one had at the 33 counts where the record carried Evan Daniel’s side rounded up, and no

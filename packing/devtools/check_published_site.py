@@ -1455,18 +1455,33 @@ def visited_address(old: str) -> str:
 
 
 def forwarder_arrivals(
-    browser: Browser | BrowserContext,
+    browser: Browser,
     site: str,
     *,
     timeout: float,
     before_visit: Callable[[], object] | None = None,
     results: list[tuple[bool, str]] | None = None,
+    prepare: Callable[[BrowserContext], object] | None = None,
 ) -> list[tuple[bool, str]]:
     """Visit each address a page used to have in `browser`, with a query string and a
     fragment, and require it to arrive where the page is now with both: a page of the
     site, or for a page that left it the address off the site it is sent to. The arrival
     is the address the browser commits to, so a slow page at the far end is not waited
     for.
+
+    So the arrival is still loading when the visit ends, and each visit ends by closing a
+    context of its own, never the page alone. Chromium can answer `Target.closeTarget` for
+    a page that has just committed a forwarded navigation and leave it open, and
+    Playwright's `Page.close` waits, with no timeout, for the page to detach; closing the
+    context disposes of it from the browser, and the call returns when that is done. That
+    is safe because `BrowserContext.close` waits only for the reply to
+    `Target.disposeBrowserContext`, which the pinned headless shell sends after destroying
+    the context's pages synchronously, with no renderer round trip. A full Chrome, as
+    `SQPACK_CHROMIUM` can name, disposes of a context by another path, not yet checked, so
+    a change to the browser pin rechecks this. The forwarder test once passed a shared
+    context, whose pages were closed alone, and main's Packing validation run 39345866613
+    waited on one such close until its deadline (think-3gfi). `prepare` is given each
+    visit's context before its page opens, for a caller's routes.
 
     Each visit waits up to twice `timeout`, so `before_visit` is called before each one:
     the audit's deadline check, which raises to stop the phase between visits rather than
@@ -1482,14 +1497,19 @@ def forwarder_arrivals(
         arrival = (
             new if new.startswith("https://") else site + site_urls.canonical_path(new)
         ) + FORWARDED_SUFFIX
-        page = browser.new_page()
+        context = browser.new_context()
         try:
-            page.goto(start, wait_until="commit", timeout=timeout * 1000)
-            page.wait_for_url(arrival, wait_until="commit", timeout=timeout * 1000)
-        except PlaywrightError:
-            pass  # Where the visit is now says what went wrong.
-        landed = page.url
-        page.close()
+            if prepare is not None:
+                prepare(context)
+            page = context.new_page()
+            try:
+                page.goto(start, wait_until="commit", timeout=timeout * 1000)
+                page.wait_for_url(arrival, wait_until="commit", timeout=timeout * 1000)
+            except PlaywrightError:
+                pass  # Where the visit is now says what went wrong.
+            landed = page.url
+        finally:
+            context.close()
         results.append(
             (landed == arrival, f"visiting {start} arrives at {landed!r}, expected {arrival!r}")
         )

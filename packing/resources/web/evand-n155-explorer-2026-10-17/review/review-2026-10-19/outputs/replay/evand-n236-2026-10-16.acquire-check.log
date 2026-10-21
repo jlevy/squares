@@ -1,0 +1,4 @@
+START 2026-10-19T21:17:11Z load=29.22 22.47 14.87 cmd: uv run --frozen --all-extras --group dev python -m devtools.acquire_source evand-n236-2026-10-16 --check
+warning: The `UV_NATIVE_TLS` environment variable is deprecated and will be removed in a future release. Use `UV_SYSTEM_CERTS` instead.
+PACKET_MATCHES_ITS_CONTRACT
+END 2026-10-19T21:17:12Z exit=0 wall=.907897878s load=29.22 22.47 14.87

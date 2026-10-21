@@ -89,11 +89,181 @@ class PublicationHistoryEntry(NamedTuple):
 # The leading entry is proposed for PR #578; confirm its date at first deployment.
 PUBLICATION_HISTORY = (
     PublicationHistoryEntry(
-        version="v0.8.0",
-        first_published="October 19, 2026",
+        version="v0.9.0",
+        first_published="October 21, 2026",
         result_scope=(
             "Add person profiles and reviewed credit links, with direct profile "
             "navigation and shared article popovers for complete case and result records."
+        ),
+    ),
+    PublicationHistoryEntry(
+        version="v0.8.13",
+        first_published="October 21, 2026",
+        result_scope="Name the 20 October review in the lineages at 154 and 308.",
+    ),
+    PublicationHistoryEntry(
+        version="v0.8.12",
+        first_published="October 21, 2026",
+        result_scope=(
+            "Record Darius Muglich's 100 reported upper bounds at 328 to 998 (#686) as "
+            "beyond-horizon rows, superseding the rows they beat, with the issue's card."
+        ),
+    ),
+    PublicationHistoryEntry(
+        version="v0.8.11",
+        first_published="October 21, 2026",
+        result_scope=(
+            "Correct T-224's significance wording, give the 270 credit sentence the "
+            "design's composition, and name the 21 October review as where T-224 was "
+            "measured."
+        ),
+    ),
+    PublicationHistoryEntry(
+        version="v0.8.10",
+        first_published="October 21, 2026",
+        result_scope=(
+            "Raise Evan Daniel's n270 certificate (T-224) to V3/C3 on its stage 4 review "
+            "and adopt it as the house best packing at 270, with its regularized drawing."
+        ),
+    ),
+    PublicationHistoryEntry(
+        version="v0.8.9",
+        first_published="October 21, 2026",
+        result_scope=(
+            "Credit Evan Daniel as finder at 271 as issue 664 asks, cite his answer on "
+            "the regularized views' by field, and correct T-221's tilt count and the "
+            "house best packing wording at 154 and 308."
+        ),
+    ),
+    PublicationHistoryEntry(
+        version="v0.8.8",
+        first_published="October 21, 2026",
+        result_scope=(
+            "Register Francisco Couzo's reported n204 and n260 certificates (T-223) at "
+            "V0/C0, pending review and adoption, and his 83 beyond-horizon rows."
+        ),
+    ),
+    PublicationHistoryEntry(
+        version="v0.8.7",
+        first_published="October 20, 2026",
+        result_scope=(
+            "The synopsis defines the house best packing, and the conventions write house "
+            "only as a modifier."
+        ),
+    ),
+    PublicationHistoryEntry(
+        version="v0.8.6",
+        first_published="October 20, 2026",
+        result_scope=(
+            "Register, confirm and adopt Evan Daniel's n308 and n154 certificates (T-221, "
+            "T-222): raised to V3/C3 by the 20 October review, adopted as the house best "
+            "packings at 308 and 154, and regularized."
+        ),
+    ),
+    PublicationHistoryEntry(
+        version="v0.8.5",
+        first_published="October 20, 2026",
+        result_scope=(
+            "Announce Evan Daniel's sub-grid n183 packing (T-220) in News and list the 20 "
+            "October report-order ledger in the synopsis."
+        ),
+    ),
+    PublicationHistoryEntry(
+        version="v0.8.4",
+        first_published="October 20, 2026",
+        result_scope=(
+            "Register Evan Daniel's sub-grid n183 certificate (T-220), adopt it as the "
+            "n183 house and draw its regularized view."
+        ),
+    ),
+    PublicationHistoryEntry(
+        version="v0.8.3",
+        first_published="October 20, 2026",
+        result_scope=(
+            "Register Evan Daniel's n236 and n271 packings (T-218, T-219), raise T-197 to "
+            "T-199 to V3/C3, adopt his certificates as the houses at 155, 229, 236 and "
+            "271, and correct the credit at 146 and 308."
+        ),
+    ),
+    PublicationHistoryEntry(
+        version="v0.8.2",
+        first_published="October 20, 2026",
+        result_scope=(
+            "The development guide describes how test sessions keep their temporary "
+            "directories bounded."
+        ),
+    ),
+    PublicationHistoryEntry(
+        version="v0.8.1",
+        first_published="October 20, 2026",
+        result_scope=(
+            "Confirm the n68, n84 and n85 fine-net lower bounds T-205 to T-207 at V3/C3 "
+            "from retained complete captures, whole-net controls and mapped reviews."
+        ),
+    ),
+    PublicationHistoryEntry(
+        version="v0.8.0",
+        first_published="October 20, 2026",
+        result_scope=(
+            "Open the results page on what was added in the last seven days, day by day, "
+            "above the weekly rollup, with an Added filter on the table."
+        ),
+    ),
+    PublicationHistoryEntry(
+        version="v0.7.35",
+        first_published="October 19, 2026",
+        result_scope=(
+            "Simplify the News filters and chooser states, explain News significance "
+            "scores in tooltips, and align News cards with the site's styling."
+        ),
+    ),
+    PublicationHistoryEntry(
+        version="v0.7.34",
+        first_published="October 19, 2026",
+        result_scope=(
+            "Map the s(19) Lean proof review onto T-194 (C1), raise T-193 to V3/C3 at its "
+            "sixteen counts and stage those houses for the algebraic writer."
+        ),
+    ),
+    PublicationHistoryEntry(
+        version="v0.7.33",
+        first_published="October 19, 2026",
+        result_scope=(
+            "Count a retained formal source build toward verification rather than "
+            "confirmation, moving Fitzharding's Lean proof of s(17) (T-154) from V0 to V3 "
+            "while it stays at C1."
+        ),
+    ),
+    PublicationHistoryEntry(
+        version="v0.7.32",
+        first_published="October 19, 2026",
+        result_scope=(
+            "Keep Atlas grids at the available width under reduced motion during viewport "
+            "changes."
+        ),
+    ),
+    PublicationHistoryEntry(
+        version="v0.7.31",
+        first_published="October 19, 2026",
+        result_scope=(
+            "Adopt T-174 at 37 rational counts with exact house custody, maintained "
+            "history and regularized default drawings."
+        ),
+    ),
+    PublicationHistoryEntry(
+        version="v0.7.30",
+        first_published="October 19, 2026",
+        result_scope=(
+            "Document the cached libproc current-RSS contract and installed-SDK native "
+            "assurance on macOS."
+        ),
+    ),
+    PublicationHistoryEntry(
+        version="v0.7.29",
+        first_published="October 19, 2026",
+        result_scope=(
+            "Register eighteen fine-net lower bounds, adopt the reviewed n108 bound and "
+            "retain its exact audit provenance and safe packet publication."
         ),
     ),
     PublicationHistoryEntry(
@@ -430,6 +600,15 @@ PUBLICATION_STATUS = ""
 #: Both retained 1-100 and 1-324 graphics, their PDFs and PNGs share this history.
 INFOGRAPHIC_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.6.4",
+        first_published="October 20, 2026",
+        result_scope=(
+            "Redraw both atlas posters with Evan Daniel's n183 packing (T-220), which "
+            "takes 183 off the 14 x 14 grid, and the houses of 19 October at 155, 229, "
+            "236 and 271."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.6.3",
         first_published="October 17, 2026",
         result_scope=(
@@ -517,7 +696,7 @@ COMPOSITES_MAY_TRAIL = True
 #: The last data commit, pinned in full: what `data_revision` returned when it was last
 #: re-pinned. Full rather than six characters so the drift check compares a commit, not
 #: a prefix.
-DATA_REVISION = "0adba2aa6e329c550e964c574e90388f45bed433"
+DATA_REVISION = "31c0c38af35ae0c6024c9668d3fbbf079b54e29a"
 
 #: The version, written the one way it is ever written: `v0.4.1-f5e113`. Semver core,
 #: then the data revision, in the shape a build identifier takes everywhere else.
@@ -614,6 +793,52 @@ FIRST_PUBLISHED = PUBLICATION_HISTORY[-1].first_published
 #:                                            day is the one recorded
 EXPLAINER_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.4.13",
+        first_published="October 21, 2026",
+        result_scope=(
+            "Update the registered result count after the n270 registration (T-224)."
+        ),
+    ),
+    PublicationHistoryEntry(
+        version="v0.4.12",
+        first_published="October 21, 2026",
+        result_scope=(
+            "Update the registered result count after the n204 and n260 registration (T-223)."
+        ),
+    ),
+    PublicationHistoryEntry(
+        version="v0.4.11",
+        first_published="October 20, 2026",
+        result_scope=(
+            "Update the registered result count after the n308 and n154 registrations "
+            "(T-221, T-222)."
+        ),
+    ),
+    PublicationHistoryEntry(
+        version="v0.4.10",
+        first_published="October 20, 2026",
+        result_scope=(
+            "Update the registered result count after the n183 registration and adoption "
+            "(T-220)."
+        ),
+    ),
+    PublicationHistoryEntry(
+        version="v0.4.9",
+        first_published="October 20, 2026",
+        result_scope=(
+            "Update the registered result count after Evan Daniel's n236 and n271 "
+            "packings (T-218, T-219)."
+        ),
+    ),
+    PublicationHistoryEntry(
+        version="v0.4.8",
+        first_published="October 19, 2026",
+        result_scope=(
+            "Update the registered result count and current bound citations after the "
+            "fine-net imports and reviewed n108 adoption."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.4.7",
         first_published="October 15, 2026",
         result_scope=(
@@ -708,7 +933,7 @@ EXPLAINER_REVISED = "October 13, 2026"
 OPTIMALITY_REVIEW_HISTORY = (
     PublicationHistoryEntry(
         version="v0.1.8",
-        first_published="October 19, 2026",
+        first_published="October 21, 2026",
         result_scope=(
             "Correct Manasseh Ahmed's name and credit Hiroaki Hosono's checker and "
             "formalization reports by name."
@@ -833,7 +1058,7 @@ OPTIMALITY_PROOF_PUBLISHED = "September 29, 2026"
 THRESHOLD_REVIEW_HISTORY = (
     PublicationHistoryEntry(
         version="v0.1.1",
-        first_published="October 19, 2026",
+        first_published="October 21, 2026",
         result_scope="Credit Hiroaki Hosono's checker and retained tools by name.",
     ),
     PublicationHistoryEntry(
@@ -963,12 +1188,291 @@ class ReleaseImpactDecision(NamedTuple):
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
     ReleaseImpactDecision(
         component="site",
-        previous_version="v0.7.28",
-        version="v0.8.0",
+        previous_version="v0.8.13",
+        version="v0.9.0",
         impact="minor",
         reason=(
             "Add person profiles and reviewed credit links, with direct profile "
             "navigation and shared article popovers for complete case and result records."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="site",
+        previous_version="v0.8.12",
+        version="v0.8.13",
+        impact="patch",
+        reason="Name the 20 October review in the lineages at 154 and 308.",
+    ),
+    ReleaseImpactDecision(
+        component="site",
+        previous_version="v0.8.11",
+        version="v0.8.12",
+        impact="patch",
+        reason=(
+            "Record Darius Muglich's 100 reported upper bounds at 328 to 998 (#686) as "
+            "beyond-horizon rows, superseding the rows they beat, with the issue's card."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="site",
+        previous_version="v0.8.10",
+        version="v0.8.11",
+        impact="patch",
+        reason=(
+            "Correct T-224's significance wording, give the 270 credit sentence the "
+            "design's composition, and name the 21 October review as where T-224 was "
+            "measured."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="site",
+        previous_version="v0.8.9",
+        version="v0.8.10",
+        impact="patch",
+        reason=(
+            "Raise Evan Daniel's n270 certificate (T-224) to V3/C3 on its stage 4 review "
+            "and adopt it as the house best packing at 270, with its regularized drawing."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="paper:n11-lower-bounds-explainer",
+        previous_version="v0.4.12",
+        version="v0.4.13",
+        impact="patch",
+        reason=("Update the registered result count after the n270 registration (T-224)."),
+    ),
+    ReleaseImpactDecision(
+        component="site",
+        previous_version="v0.8.8",
+        version="v0.8.9",
+        impact="patch",
+        reason=(
+            "Credit Evan Daniel as finder at 271 as issue 664 asks, cite his answer on "
+            "the regularized views' by field, and correct T-221's tilt count and the "
+            "house best packing wording at 154 and 308."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="site",
+        previous_version="v0.8.7",
+        version="v0.8.8",
+        impact="patch",
+        reason=(
+            "Register Francisco Couzo's reported n204 and n260 certificates (T-223) at "
+            "V0/C0, pending review and adoption, and his 83 beyond-horizon rows."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="paper:n11-lower-bounds-explainer",
+        previous_version="v0.4.11",
+        version="v0.4.12",
+        impact="patch",
+        reason=(
+            "Update the registered result count after the n204 and n260 registration (T-223)."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="site",
+        previous_version="v0.8.6",
+        version="v0.8.7",
+        impact="patch",
+        reason=(
+            "The synopsis defines the house best packing, and the conventions write house "
+            "only as a modifier."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="site",
+        previous_version="v0.8.5",
+        version="v0.8.6",
+        impact="patch",
+        reason=(
+            "Register, confirm and adopt Evan Daniel's n308 and n154 certificates (T-221, "
+            "T-222): raised to V3/C3 by the 20 October review, adopted as the house best "
+            "packings at 308 and 154, and regularized."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="site",
+        previous_version="v0.8.4",
+        version="v0.8.5",
+        impact="patch",
+        reason=(
+            "Announce Evan Daniel's sub-grid n183 packing (T-220) in News and list the 20 "
+            "October report-order ledger in the synopsis."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="paper:n11-lower-bounds-explainer",
+        previous_version="v0.4.10",
+        version="v0.4.11",
+        impact="patch",
+        reason=(
+            "Update the registered result count after the n308 and n154 registrations "
+            "(T-221, T-222)."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="paper:n11-lower-bounds-explainer",
+        previous_version="v0.4.9",
+        version="v0.4.10",
+        impact="patch",
+        reason=(
+            "Update the registered result count after the n183 registration and adoption "
+            "(T-220)."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="site",
+        previous_version="v0.8.3",
+        version="v0.8.4",
+        impact="patch",
+        reason=(
+            "Register Evan Daniel's sub-grid n183 certificate (T-220), adopt it as the "
+            "n183 house and draw its regularized view."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="infographics",
+        previous_version="v0.6.3",
+        version="v0.6.4",
+        impact="patch",
+        reason=(
+            "Redraw both atlas posters with Evan Daniel's n183 packing (T-220), which "
+            "takes 183 off the 14 x 14 grid, and the houses of 19 October at 155, 229, "
+            "236 and 271."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="site",
+        previous_version="v0.8.2",
+        version="v0.8.3",
+        impact="patch",
+        reason=(
+            "Register Evan Daniel's n236 and n271 packings (T-218, T-219), raise T-197 to "
+            "T-199 to V3/C3, adopt his certificates as the houses at 155, 229, 236 and "
+            "271, and correct the credit at 146 and 308."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="paper:n11-lower-bounds-explainer",
+        previous_version="v0.4.8",
+        version="v0.4.9",
+        impact="patch",
+        reason=(
+            "Update the registered result count after Evan Daniel's n236 and n271 "
+            "packings (T-218, T-219)."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="site",
+        previous_version="v0.8.1",
+        version="v0.8.2",
+        impact="patch",
+        reason=(
+            "The development guide describes how test sessions keep their temporary "
+            "directories bounded."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="site",
+        previous_version="v0.8.0",
+        version="v0.8.1",
+        impact="patch",
+        reason=(
+            "Confirm the n68, n84 and n85 fine-net lower bounds T-205 to T-207 at V3/C3 "
+            "from retained complete captures, whole-net controls and mapped reviews."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="site",
+        previous_version="v0.7.35",
+        version="v0.8.0",
+        impact="minor",
+        reason=(
+            "Open the results page on what was added in the last seven days, day by day, "
+            "above the weekly rollup, with an Added filter on the table."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="site",
+        previous_version="v0.7.34",
+        version="v0.7.35",
+        impact="patch",
+        reason=(
+            "Simplify the News filters and chooser states, explain News significance "
+            "scores in tooltips, and align News cards with the site's styling."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="site",
+        previous_version="v0.7.33",
+        version="v0.7.34",
+        impact="patch",
+        reason=(
+            "Map the s(19) Lean proof review onto T-194 (C1), raise T-193 to V3/C3 at its "
+            "sixteen counts and stage those houses for the algebraic writer."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="site",
+        previous_version="v0.7.32",
+        version="v0.7.33",
+        impact="patch",
+        reason=(
+            "Count a retained formal source build toward verification rather than "
+            "confirmation, moving Fitzharding's Lean proof of s(17) (T-154) from V0 to V3 "
+            "while it stays at C1."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="site",
+        previous_version="v0.7.31",
+        version="v0.7.32",
+        impact="patch",
+        reason=(
+            "Keep Atlas grids at the available width under reduced motion during viewport "
+            "changes."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="site",
+        previous_version="v0.7.30",
+        version="v0.7.31",
+        impact="patch",
+        reason=(
+            "Adopt T-174 at 37 rational counts with exact house custody, maintained "
+            "history and regularized default drawings."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="site",
+        previous_version="v0.7.29",
+        version="v0.7.30",
+        impact="patch",
+        reason=(
+            "Document the cached libproc current-RSS contract and installed-SDK native "
+            "assurance on macOS."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="site",
+        previous_version="v0.7.28",
+        version="v0.7.29",
+        impact="patch",
+        reason=(
+            "Register eighteen fine-net lower bounds, adopt the reviewed n108 bound and "
+            "retain its exact audit provenance and safe packet publication."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="paper:n11-lower-bounds-explainer",
+        previous_version="v0.4.7",
+        version="v0.4.8",
+        impact="patch",
+        reason=(
+            "Update the registered result count and current bound citations after the "
+            "fine-net imports and reviewed n108 adoption."
         ),
     ),
     ReleaseImpactDecision(
@@ -1423,6 +1927,1546 @@ class ReleaseNoPublicChange(NamedTuple):
 
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
+            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
+            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
+            "packing/devtools/adopt_houses.py",
+            "packing/frontier/n-154.md",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "Rendered at 1bcbe222 and with main 2e6d528d's copies of these paths: 68 "
+            "byte-identical files, no PDF."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
+            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
+            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
+            "packing/devtools/overview_sections.py",
+            "packing/devtools/run_negative_controls.py",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-optimality-review.pdf",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/n11-threshold-bound-review.pdf",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+            "papers/square-packing-methods-survey.pdf",
+        ),
+        reason=(
+            "Issue 686's import against main 9dda9224. The v0.8.12 cut changed only the "
+            "claim documents' link revision, fbb3d573 to 45f1918d, and the explainer links "
+            "them. The survey cites the requests and coverage records without inlining "
+            "them; the snapshot prune and issue 686's card reach no paper. With main's "
+            "copies of the other four inputs, the four renderers write 68 byte-identical "
+            "files at link revision 255049cb, and after review A's record edits the "
+            "survey's HTML and Markdown again at 8fd21bb6. Retain v0.4.13, v0.1.7, v0.1.0 "
+            "and v0.2.3."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/devtools/adopt_houses.py",
+            "packing/frontier/results.yaml",
+        ),
+        outputs=(
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-optimality-review.pdf",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/n11-threshold-bound-review.pdf",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+            "papers/square-packing-methods-survey.pdf",
+        ),
+        reason=(
+            "Reviewed October 21, 2026 against main d640ad8f for the records lane of 21 "
+            "October (think-xl9i: review B of #708, the #703 final reply and closure, and "
+            "the 703 review's erratum). results.yaml changes only T-224's significance "
+            "rationale, outside the n11 ladder rungs paper_figures reads; adopt_houses.py "
+            "only T-224's lineage paragraph and the 270 credit; result-requests.yaml only "
+            "the #703 entry. Rendered with render_n11_optimality_review, "
+            "render_n11_threshold_bound_review and render_packing_methods at link revision "
+            "b90a9312, the branch head, once from its tree and once with main's copies of "
+            "those three inputs, n-270.md and the five claim documents: the 50 files the "
+            "three write are byte-identical. Rendered the same way again at f021abc3, after "
+            "review A of #710 changed the #703 entry's note and final reply: byte-identical "
+            "again. No PDF was printed; each prints from that HTML. Retain v0.1.7, v0.1.0 "
+            "and v0.2.3."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer",),
+        paths=(
+            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
+            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
+            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
+            "packing/devtools/adopt_houses.py",
+            "packing/frontier/results.yaml",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+        ),
+        reason=(
+            "Reviewed October 21, 2026 against main d640ad8f for the records lane of 21 "
+            "October (think-xl9i). The site v0.8.11 cut regenerated the five claim "
+            "documents, and each of the 22 changed lines differs from main only in its "
+            "source-link revision, d798819c to fbb3d573; the explainer links them rather "
+            "than inlining them. results.yaml changes only T-224's significance rationale "
+            "and adopt_houses.py only T-224's lineage paragraph and the 270 credit; the "
+            "register's counts and the n11 citation the explainer reads are unchanged. "
+            "Rendered with the browser's math pass at the branch head b90a9312, once from "
+            "its tree and once with main's copies of results.yaml, adopt_houses.py, "
+            "result-requests.yaml, n-270.md and the five claim documents: the 54 files it "
+            "writes, its HTML and Markdown and the files at the site root, are "
+            "byte-identical. It keeps v0.4.13; no PDF was printed, and it prints from that "
+            "HTML."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:n11-optimality-review", "paper:n11-threshold-bound-review"),
+        paths=(
+            "packing/devtools/adopt_houses.py",
+            "packing/devtools/render_n11_lower_bounds_explainer_pdf.py",
+            "packing/devtools/upper_bound_houses.py",
+            "packing/devtools/upper_bound_reports.py",
+            "packing/frontier/results.yaml",
+        ),
+        outputs=(
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-optimality-review.pdf",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/n11-threshold-bound-review.pdf",
+        ),
+        reason=(
+            "For the #703 lane of 21 October (T-224 at n = 270, its stage 4 review and "
+            "its adoption as the house best packing at 270) against main a5bdb96a: both "
+            "reviews read results.yaml only through paper_figures.ladder_records, which "
+            "selects the n11 ladder rungs LADDER_RUNGS names and holds them to "
+            "LADDER_DIGEST; T-224 and the 270 regularized-drawing item are outside that "
+            "ladder, and no ladder row changes. adopt_houses.py gains T-224's prose, the "
+            "270 credit and a string form of Prose.third_route; upper_bound_houses.py the "
+            "packet, 270 in ADOPTED and the 21 October pass; upper_bound_reports.py one "
+            "house reader. render_n11_lower_bounds_explainer_pdf.py changes only "
+            "EXPECTED_PAGE_COUNT, the explainer's pagination check; these producers "
+            "import its dated helper. Rendered at link revision 667fed68, once from this "
+            "branch's tree and once with main's copies of the seven changed inputs "
+            "(these five, result-requests.yaml and source-coverage.yaml): "
+            "render_n11_optimality_review, render_n11_threshold_bound_review and "
+            "render_packing_methods leave the 50 files they write byte-identical between "
+            "the trees. No PDF was printed; each prints from that HTML. Retain v0.1.7 "
+            "and v0.1.0."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/devtools/adopt_houses.py",
+            "packing/devtools/render_n11_lower_bounds_explainer_pdf.py",
+            "packing/devtools/upper_bound_houses.py",
+            "packing/devtools/upper_bound_reports.py",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+            "papers/square-packing-methods-survey.pdf",
+        ),
+        reason=(
+            "For the #703 lane of 21 October (T-224 at n = 270, its stage 4 review and "
+            "its adoption as the house best packing at 270) against main a5bdb96a: "
+            "result requests, source coverage and results are citation targets whose "
+            "existence the producer checks, not inlined text, and every cited path exists "
+            "at both revisions; the #703 request, the n270 coverage source and the 270 "
+            "override, and T-224 are not cited by the survey. adopt_houses.py, "
+            "upper_bound_houses.py and upper_bound_reports.py change only the 270 "
+            "adoption's writer inputs and one house reader, which do not enter its "
+            "output; render_n11_lower_bounds_explainer_pdf.py, a render input, changes "
+            "only EXPECTED_PAGE_COUNT, which the survey's producer does not read. "
+            "Rendered at link revision 667fed68, once from this branch's tree and once "
+            "with main's copies of the seven changed inputs: render_n11_optimality_review, "
+            "render_n11_threshold_bound_review and render_packing_methods leave the 50 "
+            "files they write byte-identical between the trees. No PDF was printed; it "
+            "prints from that HTML. Retain v0.2.3."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=("packing/campaign/result-requests.yaml",),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+            "papers/square-packing-methods-survey.pdf",
+        ),
+        reason=(
+            "Reviewed October 21, 2026 against main 6b825f44 for the records lane of 21 "
+            "October that records the replies posted on #664, #669 and #702 after #707 "
+            "merged. result-requests.yaml changes only those three entries: three replies "
+            "recorded, #664 closed, #702's blocked_on on #701 and its wait dropped, and "
+            "each entry's notes brought up to date. Rendered with render_packing_methods "
+            "at link revision 6b825f44, at the branch head 8ab7d264, once from its tree "
+            "and once with main's result-requests.yaml: all 42 files it writes are "
+            "byte-identical. No PDF was printed; it prints from that HTML. Retain v0.2.3."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer",),
+        paths=(
+            "packing/atlas/known-best/bound-citations.json",
+            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
+            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
+            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
+            "packing/devtools/adopt_houses.py",
+            "packing/frontier/results.yaml",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+        ),
+        reason=(
+            "Reviewed October 21, 2026 against main e7de85ff for the records lane of 21 "
+            "October (think-8z7k, #664's credit at 271, #669's by-field answer). The site "
+            "v0.8.9 cut regenerated the five claim documents, and each of the 22 changed "
+            "lines differs from main only in its source-link revision, ec95f0b8 to "
+            "f555a0f9; the explainer links them rather than inlining them. results.yaml "
+            "changes only T-197's, T-219's, T-221's and T-222's prose, adopt_houses.py "
+            "only the 271 credit and T-219's and T-222's prose, and bound-citations.json "
+            "only the 271 upper citation's text; the register's counts and the n11 "
+            "citation the explainer reads are unchanged. Rendered at the branch head "
+            "db61aefd, once from its tree and once with main's results.yaml, "
+            "adopt_houses.py, n-154.md, result-requests.yaml and bound-citations.json: its "
+            "HTML and Markdown and the files it writes at the site root are byte-identical. "
+            "A pair of renders at 7d67be1f differed only in where the browser math "
+            "preparation serializes an empty style attribute on two math spans, as in the "
+            "#446 disposition. It keeps v0.4.11; no PDF was printed, and it prints from "
+            "that HTML."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/devtools/adopt_houses.py",
+            "packing/frontier/n-154.md",
+            "packing/frontier/results.yaml",
+        ),
+        outputs=(
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-optimality-review.pdf",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/n11-threshold-bound-review.pdf",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+            "papers/square-packing-methods-survey.pdf",
+        ),
+        reason=(
+            "Reviewed October 21, 2026 against main e7de85ff for the records lane of 21 "
+            "October (think-8z7k, #664's credit at 271, #669's by-field answer, #689 and "
+            "#694 closed, #702 triaged). results.yaml changes only T-197's, T-219's, "
+            "T-221's and T-222's prose, outside the n11 ladder rungs paper_figures reads; "
+            "adopt_houses.py only the 271 credit and T-219's and T-222's prose; n-154.md "
+            "one sentence of T-222's section; and result-requests.yaml only the #664, #669, "
+            "#674, #678, #689, #694 and #702 entries. Rendered with "
+            "render_n11_optimality_review, render_n11_threshold_bound_review and "
+            "render_packing_methods at link revision e7de85ff, at the branch head "
+            "db61aefd, once from its tree and once with main's "
+            "copies of those four inputs and bound-citations.json: the files the three "
+            "write are byte-identical. No PDF was printed; each prints from that HTML. "
+            "Retain v0.1.7, v0.1.0 and v0.2.3."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=("packing/devtools/result_status.py",),
+        outputs=(
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-optimality-review.pdf",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/n11-threshold-bound-review.pdf",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+            "papers/square-packing-methods-survey.pdf",
+        ),
+        reason=(
+            "For PR #701's review A (finding A5): unfinished_sentence now adds its full "
+            "stop only where an unfinished confirmation's `what` lacks one, so RESULTS.md "
+            "and the result pages no longer print 'review.. Not priced.' for T-196 and "
+            "T-223. None of the three papers prints an unfinished confirmation. Rendered "
+            "at link revision 6051ebbe, once with this branch's result_status.py and once "
+            "with the 6051ebbe copy loaded in its place: render_n11_optimality_review, "
+            "render_n11_threshold_bound_review and render_packing_methods leave the 50 "
+            "files of the site tree byte-identical between the two. No PDF was printed; "
+            "each prints from that HTML. Retain v0.1.7, v0.1.0 and v0.2.3."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:n11-optimality-review", "paper:n11-threshold-bound-review"),
+        paths=("packing/frontier/results.yaml",),
+        outputs=(
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-optimality-review.pdf",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/n11-threshold-bound-review.pdf",
+        ),
+        reason=(
+            "For issue 678's registration (T-223 at n = 204 and 260) against main "
+            "f8d54772: both reviews read results.yaml only through "
+            "paper_figures.ladder_records, which selects the n11 ladder rungs LADDER_RUNGS "
+            "names and holds them to LADDER_DIGEST; T-223 is an added entry outside that "
+            "ladder, and no ladder row changes. Rendered at link revision f5349276, once "
+            "from this branch's tree and once with main's copies of the three changed "
+            "inputs (results.yaml, result-requests.yaml and source-coverage.yaml): "
+            "render_n11_optimality_review, render_n11_threshold_bound_review and "
+            "render_packing_methods leave the 50 files of the site tree byte-identical "
+            "between the trees. No PDF was printed; each prints from that HTML. Retain "
+            "v0.1.7 and v0.1.0."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+            "papers/square-packing-methods-survey.pdf",
+        ),
+        reason=(
+            "For issue 678's registration (T-223 at n = 204 and 260) against main "
+            "f8d54772: result requests, source coverage and results are citation targets "
+            "whose existence the producer checks, not inlined text, and every cited path "
+            "exists at both revisions; the #678 and #686 request changes, the "
+            "couzo-issue678-2026-10-18 coverage source with its 83 beyond-horizon rows "
+            "and the 60 rows it supersedes, and T-223 are not cited by the survey. "
+            "Rendered at link revision f5349276, once from this branch's tree and once "
+            "with main's copies of the three changed inputs (results.yaml, "
+            "result-requests.yaml and source-coverage.yaml): render_n11_optimality_review, "
+            "render_n11_threshold_bound_review and render_packing_methods leave the 50 "
+            "files of the site tree byte-identical between the trees. No PDF was printed; "
+            "it prints from that HTML. Retain v0.2.3."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer",),
+        paths=(
+            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
+            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
+            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+        ),
+        reason=(
+            "The site v0.8.7 cut for the house best packing terminology (think-9v1i) "
+            "regenerated the five claim documents, and each of the 22 changed lines differs "
+            "from main 99cfcc8a only in its source-link revision, e6b9d98c to 9cd35d1e. "
+            "The explainer links those documents rather than inlining them, so its HTML "
+            "and Markdown are unchanged by them and it keeps v0.4.11. This is a "
+            "source-reviewed disposition, as #695's was for v0.8.2."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=("packing/frontier/README.md",),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "Reviewed October 20, 2026 against main 99cfcc8a (think-9v1i): the frontier "
+            "README's two house-rule passages now name the house best packing and link "
+            "the synopsis's definition, and nothing else in it changes. Rendered with "
+            "render_packing_methods at link revision 99cfcc8a, once from this branch's "
+            "tree and once with main's copy of frontier/README.md: all 42 files it writes "
+            "are byte-identical, and its PDF prints from that HTML and was not rebuilt. "
+            "The survey keeps v0.2.3."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:n11-optimality-review", "paper:n11-threshold-bound-review"),
+        paths=(
+            "packing/devtools/adopt_houses.py",
+            "packing/devtools/default_drawings.py",
+            "packing/devtools/upper_bound_houses.py",
+            "packing/devtools/upper_bound_reports.py",
+            "packing/frontier/results.yaml",
+        ),
+        outputs=(
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-optimality-review.pdf",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/n11-threshold-bound-review.pdf",
+        ),
+        reason=(
+            "For the evand lane of 20 October (T-221 at n = 308, T-222 at n = 154, both "
+            "raised to V3/C3 and adopted as houses) against main d588ad98: both reviews "
+            "read results.yaml only through paper_figures.ladder_records, which selects the "
+            "n11 ladder rungs LADDER_RUNGS names and holds them to LADDER_DIGEST; T-221 and "
+            "T-222 are added entries outside that ladder, and no ladder row changes. "
+            "upper_bound_reports.py gains only two house readers, adopt_houses.py and "
+            "upper_bound_houses.py only the 20 October pass's prose, credits and houses at "
+            "154 and 308, and default_drawings.py loses only 308's settlement, none of "
+            "which these producers call. Rendered at link revision 5ee03750, at the "
+            "adoption's head febe2913, once from this branch's tree and once with main's "
+            "copies of the eight changed inputs the three papers read (adopt_houses.py, "
+            "default_drawings.py, upper_bound_houses.py, upper_bound_reports.py, "
+            "results.yaml, result-requests.yaml, source-coverage.yaml and n-154.md): "
+            "render_n11_optimality_review, render_n11_threshold_bound_review and "
+            "render_packing_methods write 50 byte-identical files on both trees, and none "
+            "of them names T-221, T-222, #689, #694 or either packet. No PDF was printed; "
+            "each prints from that HTML. Retain v0.1.7 and v0.1.0."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/devtools/adopt_houses.py",
+            "packing/devtools/default_drawings.py",
+            "packing/devtools/upper_bound_houses.py",
+            "packing/devtools/upper_bound_reports.py",
+            "packing/frontier/n-154.md",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+            "papers/square-packing-methods-survey.pdf",
+        ),
+        reason=(
+            "For the evand lane of 20 October (T-221 at n = 308, T-222 at n = 154, both "
+            "raised to V3/C3 and adopted as houses) against main d588ad98: result requests, "
+            "source coverage, the n = 154 case record and results are citation targets "
+            "whose existence the producer checks, not inlined text, and every cited path "
+            "exists at both revisions; the #689 and #694 requests, the coverage entries "
+            "and T-221 and T-222 are not cited by the survey, and the adoption's rewrite of "
+            "n-154.md enters none of its text. The two house readers upper_bound_reports.py "
+            "gains, the 20 October pass's prose, credits and houses in adopt_houses.py and "
+            "upper_bound_houses.py, and 308's settlement leaving default_drawings.py do not "
+            "enter its output. Rendered at link revision 5ee03750, at the adoption's head "
+            "febe2913, once from this branch's tree and once with main's copies of the "
+            "eight changed inputs the three papers read (adopt_houses.py, "
+            "default_drawings.py, upper_bound_houses.py, upper_bound_reports.py, "
+            "results.yaml, result-requests.yaml, source-coverage.yaml and n-154.md): "
+            "render_n11_optimality_review, render_n11_threshold_bound_review and "
+            "render_packing_methods write 50 byte-identical files on both trees, and none "
+            "of them names T-221, T-222, #689, #694 or either packet. No PDF was printed; "
+            "it prints from that HTML. Retain v0.2.3."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:n11-optimality-review", "paper:n11-threshold-bound-review"),
+        paths=(
+            "packing/devtools/adopt_houses.py",
+            "packing/devtools/run_negative_controls.py",
+            "packing/devtools/upper_bound_houses.py",
+            "packing/devtools/upper_bound_reports.py",
+            "packing/frontier/results.yaml",
+        ),
+        outputs=(
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-optimality-review.pdf",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/n11-threshold-bound-review.pdf",
+        ),
+        reason=(
+            "For PR687 (T-220 at n = 183) against main 012dcf9e: both reviews read "
+            "results.yaml only through paper_figures.ladder_records, which selects the n11 "
+            "ladder rungs LADDER_RUNGS names and holds them to LADDER_DIGEST; T-220 is an "
+            "added n183 entry outside that ladder, and no ladder row changes. The house "
+            "reader, writer and source changes are not called by these producers, and "
+            "run_negative_controls.py changes only the snapshot cap and its comments. "
+            "Rendered at link revision af1987e9, this branch after its merge of main "
+            "012dcf9e (#692, site v0.8.3) and its edition cuts, once from this branch's "
+            "tree and once with main's copies of the seven changed inputs (adopt_houses, "
+            "run_negative_controls, upper_bound_houses and upper_bound_reports, "
+            "results.yaml, result-requests.yaml and source-coverage.yaml): "
+            "render_n11_optimality_review, render_n11_threshold_bound_review and "
+            "render_packing_methods write 50 files, byte-identical between the trees. No "
+            "PDF was printed; each prints from that HTML. Retain v0.1.7 and v0.1.0."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/devtools/adopt_houses.py",
+            "packing/devtools/run_negative_controls.py",
+            "packing/devtools/upper_bound_houses.py",
+            "packing/devtools/upper_bound_reports.py",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+            "papers/square-packing-methods-survey.pdf",
+        ),
+        reason=(
+            "For PR687 (T-220 at n = 183) against main 012dcf9e: result requests, source "
+            "coverage and results are citation targets whose existence the producer "
+            "checks, not inlined text, and every cited path exists at both revisions; the "
+            "added #680 request, n183 coverage entry and T-220 entry are not cited by the "
+            "survey. The house reader, writer and source changes do not enter its output, "
+            "and run_negative_controls.py changes only the snapshot cap and its comments. "
+            "Rendered at link revision af1987e9, this branch after its merge of main "
+            "012dcf9e (#692, site v0.8.3) and its edition cuts, once from this branch's "
+            "tree and once with main's copies of the seven changed inputs (adopt_houses, "
+            "run_negative_controls, upper_bound_houses and upper_bound_reports, "
+            "results.yaml, result-requests.yaml and source-coverage.yaml): "
+            "render_n11_optimality_review, render_n11_threshold_bound_review and "
+            "render_packing_methods write 50 files, byte-identical between the trees. No "
+            "PDF was printed; each prints from that HTML. Retain v0.2.3."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("site",),
+        paths=("packing/devtools/check_rational_witness_independent.py",),
+        outputs=("atlas.html", "index.html", "results.html"),
+        reason=(
+            "Reviewed October 20, 2026 against main ded4727b (think-uomm): check_squares now "
+            "takes each square's intervals on its own two edge normals once rather than once "
+            "per pair, and builds the same eight exact Fraction gaps in the same order, so "
+            "every pair gap and verdict it returns is unchanged. "
+            "test_rational_witness_independent_contract holds it to the old pair_gap, kept "
+            "verbatim, by Fraction equality on adversarial cases and retained views, and "
+            "regularize_axis_components --verify-atlas passed with it, re-deriving the "
+            "regularized index (which records the checker's verdict and pair count) and every "
+            "retained view byte-identical. The checker is a candidate input only as a member "
+            "of the site builders' import closure; no retained record changes, and the atlas, "
+            "home and results pages draw those records. This is a measured disposition of the "
+            "checker's outputs; no site rebuild byte comparison is claimed."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=("packing/devtools/check_rational_witness_independent.py",),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-lower-bounds-explainer.pdf",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-optimality-review.pdf",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/n11-threshold-bound-review.pdf",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+            "papers/square-packing-methods-survey.pdf",
+        ),
+        reason=(
+            "Reviewed October 20, 2026 against main ded4727b (think-uomm): the independent "
+            "checker computes each square's own-axis intervals once and returns the same "
+            "exact gaps and verdicts, held to its old pair_gap verbatim by "
+            "test_rational_witness_independent_contract and confirmed by a passing "
+            "regularize_axis_components --verify-atlas, which requires the regularized index "
+            "and views byte-identical. The checker is a candidate input only as a member of "
+            "the paper builders' import closure; manuscripts, figures, scientific inputs, "
+            "retained records and paper metadata are unchanged, and every paper keeps its "
+            "edition. This is a measured disposition of the checker's outputs; no paper "
+            "render or PDF redraw is claimed."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer",),
+        paths=(
+            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
+            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
+            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+        ),
+        reason=(
+            "PR #695's site v0.8.2 cut regenerated the five claim documents, and every "
+            "changed line differs from main only in its source-link revision, a7fb8f2e to "
+            "5998d0c3. The explainer links those documents rather than inlining them, so "
+            "its HTML and Markdown are unchanged by them and it keeps v0.4.8. This is a "
+            "source-reviewed disposition, as #514's was for v0.8.0."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("site",),
+        paths=("packing/pyproject.toml",),
+        outputs=("atlas.html", "index.html", "results.html"),
+        reason=(
+            "Reviewed October 20, 2026 against main b16ddeb0 (think-46yk): the only change "
+            "is to [tool.pytest.ini_options], which loads the devtools.pytest_tmp test plugin "
+            "and sets tmp_path_retention_policy and tmp_path_retention_count. Pytest reads "
+            "them; the site build reads none of them, and no dependency, version or build "
+            "setting changes, so no page's input changes. No site rebuild byte comparison "
+            "is claimed."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=("packing/pyproject.toml",),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-lower-bounds-explainer.pdf",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+            "papers/square-packing-methods-survey.pdf",
+        ),
+        reason=(
+            "Reviewed October 20, 2026 against main b16ddeb0 (think-46yk): the only change "
+            "is to [tool.pytest.ini_options], which loads the devtools.pytest_tmp test plugin "
+            "and sets tmp_path_retention_policy and tmp_path_retention_count. The paper "
+            "builds read none of them, and no dependency, version or build setting changes; "
+            "manuscripts, figures and paper metadata are unchanged and every paper keeps its "
+            "edition. No paper render or PDF redraw is claimed."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer",),
+        paths=(
+            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
+            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
+            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+        ),
+        reason=(
+            "The site v0.8.5 cut for #680's News entry regenerated the five claim "
+            "documents, and every changed line differs from main only in its source-link "
+            "revision, 20d56718 to efd41b91. render_n11_lower_bounds_explainer, run once "
+            "with main's five documents and once with this branch's, writes 54 files that "
+            "are byte-identical. No PDF was printed; it prints from that HTML. The explainer "
+            "keeps v0.4.10."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=("packing/campaign/result-requests.yaml",),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "Rendered at link revision d588ad98 (main, with #687), once with main's "
+            "requests record and once with this branch's, the 42 files "
+            "render_packing_methods writes are byte-identical. The PDF prints from that HTML. "
+            "The record gains the final reply of 20 October 2026 on #680, which closes it, "
+            "and the triage entry for #686 with 100 queued beyond-horizon results and one "
+            "queued ask, which the survey does not read, so it keeps v0.2.3."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=("packing/campaign/result-requests.yaml",),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "Rendered at link revision 012dcf9e (main, with #692), once with main's "
+            "requests record and once with this branch's, the 42 files "
+            "render_packing_methods writes are byte-identical. The PDF prints from that HTML. "
+            "The record gains the replies of 20 October 2026 to Evan Daniel on #659, #664, "
+            "#669, #673 and #674, closes all but #664 and queues one ask there, which the "
+            "survey does not read, so it keeps v0.2.3."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=("packing/campaign/result-requests.yaml",),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "Rendered at link revision 4b8aec9a (main, with #690), once with main's "
+            "requests record and once with this branch's, the 42 files "
+            "render_packing_methods writes are byte-identical. The PDF prints from that HTML. "
+            "The record gains the reply records of 19 and 20 October 2026 on thirteen "
+            "issues, closes #606 and #622 and queues two asks, which the survey does not "
+            "read, so it keeps v0.2.3."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=("packing/campaign/result-requests.yaml",),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "Rendered at link revision a5acd570 (main, with #514 and #693), once with main's "
+            "requests record and once with this branch's, the 42 files "
+            "render_packing_methods writes are byte-identical. The PDF prints from that HTML. "
+            "The record gains the #639 final reply and the #640 import reply of "
+            "19 October 2026 and closes #639, which the survey does not read, so it "
+            "keeps v0.2.3."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("site",),
+        paths=(
+            "packing/devtools/build_known_best_atlas.py",
+            "packing/src/sqpack/witness.py",
+        ),
+        outputs=("atlas.html", "index.html", "results.html"),
+        reason=(
+            "Reviewed October 19, 2026 against main 14fd9e27 (think-ev4k): _margin_summary "
+            "computes each square's axes and projections once and stops measuring a pair "
+            "once its partial best gap exceeds the running minimum, and the atlas builder "
+            "memoizes built cases and draws the composite test's poster from its own cases. "
+            "An interleaved A/B rebuild of all 324 cases produced byte-identical witness and "
+            "rendering text for 324 of 324, and build_known_best_atlas --check found every "
+            "retained witness, margins included, byte-equal to the rebuild. The atlas, home "
+            "and results pages draw those retained records, which do not change. This is a "
+            "measured disposition of the records; no site rebuild byte comparison is claimed."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/devtools/build_known_best_atlas.py",
+            "packing/src/sqpack/witness.py",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-lower-bounds-explainer.pdf",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-optimality-review.pdf",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/n11-threshold-bound-review.pdf",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+            "papers/square-packing-methods-survey.pdf",
+        ),
+        reason=(
+            "Reviewed October 19, 2026 against main 14fd9e27 (think-ev4k): the builder change "
+            "only memoizes built cases and lets the composite test build its poster's own "
+            "cases, and witness.py's margin summary returns the same values with less work "
+            "(held to the exhaustive definition by test_margin_summary_matches_the_exhaustive_"
+            "definition). The papers consume the retained atlas records it produces, and "
+            "build_known_best_atlas --check found every retained witness and rendering "
+            "byte-equal to the rebuild after the change; an interleaved A/B rebuild of all "
+            "324 cases was byte-identical. Manuscripts, figures, scientific inputs and paper "
+            "metadata are unchanged; every paper keeps its edition. This is a measured "
+            "disposition of the records; no paper render or PDF redraw is claimed."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/devtools/adopt_houses.py",
+            "packing/devtools/default_drawings.py",
+            "packing/devtools/run_negative_controls.py",
+            "packing/devtools/select_houses.py",
+            "packing/devtools/upper_bound_houses.py",
+            "packing/devtools/upper_bound_reports.py",
+            "packing/frontier/n-146.md",
+            "packing/frontier/n-236.md",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The evand lane of 19 October 2026 (#659, #664, #669, #673, #674) registers "
+            "T-218 and T-219, raises T-197 to T-199 to V3/C3, adopts Evan Daniel's "
+            "certificates as the houses at 155, 229, 236 and 271 with their house "
+            "readers, drawings and case records, corrects the credit at 146 and 308, and "
+            "maps the five requests; one unread review drawing leaves the worker "
+            "snapshot (run_negative_controls). Rendered at link revision 028bc72e (main, "
+            "site v0.7.35), once from main's tree and from this branch's at ecb4b31d, "
+            "after its merge of main and the explainer's v0.4.9 cut, again at 4610c915, "
+            "after the records-tier fixes, and at a8222aad, after the CI follow-ups and "
+            "its merge of main b16ddeb0 (#691), render_packing_methods, "
+            "render_n11_optimality_review and render_n11_threshold_bound_review write 50 "
+            "files, byte-identical between the trees. Rendered again at link revision "
+            "4b8aec9a, once from main's tree there (site v0.8.1, after #514, #693, #688 "
+            "and #690) and once from this branch's at 2e480fa4, after its merges of main "
+            "476049de and 4b8aec9a and the landed stamp, the same three write 50 files, "
+            "byte-identical between the trees. No PDF was printed; each prints from that "
+            "HTML. The three papers keep v0.1.7, v0.1.0 and v0.2.3; the explainer, whose "
+            "register count moves to 219, takes v0.4.9."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer",),
+        paths=(
+            "packing/atlas/known-best/bound-citations.json",
+            "packing/atlas/known-best/composite-figure.json",
+            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
+            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
+            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
+            "packing/devtools/run_negative_controls.py",
+            "packing/frontier/results.yaml",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-lower-bounds-explainer.pdf",
+        ),
+        reason=(
+            "Reviewed October 19, 2026 against main 926cd764 for the #446 landing of "
+            "T-205, T-206 and T-207: results.yaml changes only those three n68, n84 and "
+            "n85 lower-bound entries and last_reviewed. The explainer reads the register "
+            "for its count of 217 results and of apparently or confirmed novel ones, "
+            "both unchanged since the three stay previously-published. The composite "
+            "figure record and bound citations change only the n68, n84 and n85 lower "
+            "displays and citations; Figure 2's totals and the n11 citation the paper "
+            "reads are unchanged. The site v0.8.1 cut regenerated the five claim and "
+            "card documents, which change only their source-link commit and are linked "
+            "from the paper, not inlined. run_negative_controls.py changes only the "
+            "snapshot cap and its comment and is not a paper producer. Its Markdown "
+            "rendered at the base record tree and at the candidate head is identical, "
+            "and its HTML differs at most in where the browser math preparation "
+            "serializes one empty style attribute; the PDF prints that HTML. Retain "
+            "v0.4.8; no PDF redraw or byte identity of the PDF is claimed."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:n11-optimality-review",),
+        paths=(
+            "packing/devtools/run_negative_controls.py",
+            "packing/frontier/results.yaml",
+        ),
+        outputs=(
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-optimality-review.pdf",
+        ),
+        reason=(
+            "Reviewed October 19, 2026 against main 926cd764 for the #446 landing of "
+            "T-205, T-206 and T-207: the changed results are the n68, n84 and n85 lower "
+            "bounds, outside the n11 ladder rows this paper consumes, and "
+            "run_negative_controls.py changes only the snapshot cap and its comment. Its "
+            "HTML and Markdown rendered at the base record tree and at the candidate "
+            "head with the same source-link revision are byte-identical. Retain v0.1.7; "
+            "no PDF redraw is claimed."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:n11-threshold-bound-review",),
+        paths=(
+            "packing/devtools/run_negative_controls.py",
+            "packing/frontier/results.yaml",
+        ),
+        outputs=(
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/n11-threshold-bound-review.pdf",
+        ),
+        reason=(
+            "Reviewed October 19, 2026 against main 926cd764 for the #446 landing of "
+            "T-205, T-206 and T-207: the changed results are the n68, n84 and n85 lower "
+            "bounds, outside the n11 ladder rows, T-060 included, that this paper "
+            "consumes, and run_negative_controls.py changes only the snapshot cap and "
+            "its comment. Its HTML and Markdown rendered at the base record tree and at "
+            "the candidate head with the same source-link revision are byte-identical. "
+            "Retain v0.1.0; no PDF redraw is claimed."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/devtools/run_negative_controls.py",
+            "packing/frontier/n-084.md",
+            "packing/frontier/results.yaml",
+        ),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+            "papers/square-packing-methods-survey.pdf",
+        ),
+        reason=(
+            "Reviewed October 19, 2026 against main 926cd764 for the #446 landing of "
+            "T-205, T-206 and T-207: the #446 request entry, the n84 case record and the "
+            "three register entries are citation targets whose existence the producer "
+            "checks, not inlined text, and every cited path exists at both revisions; "
+            "run_negative_controls.py changes only the snapshot cap and its comment. Its "
+            "HTML and Markdown rendered at the base record tree and at the candidate "
+            "head with the same source-link revision are byte-identical. Retain v0.2.3; "
+            "no PDF redraw is claimed."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer",),
+        paths=(
+            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
+            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
+            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+        ),
+        reason=(
+            "PR #514's site v0.8.0 cut regenerated the five claim documents, and every "
+            "changed line differs from main only in its source-link revision, e00bfbe5 to "
+            "98845675. The explainer links those documents rather than inlining them, so "
+            "its HTML and Markdown are unchanged by them and it keeps v0.4.8. This is a "
+            "source-reviewed disposition, as #645's was for v0.7.33."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=("packing/campaign/result-requests.yaml",),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "Issue #538's request record gains its 19 October follow-up reply. Rendered "
+            "at 6c8e4fc0 with and without that reply: all 42 files the survey's renderer "
+            "writes are byte-identical, since the survey only links the request record, "
+            "and its PDF prints from that HTML, so it keeps v0.2.3."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/devtools/overview_sections.py",
+            "packing/devtools/register_evand_arrangements.py",
+            "packing/devtools/register_gupta_reports.py",
+            "packing/devtools/register_refinement_reports.py",
+            "packing/devtools/register_ryxu_reports.py",
+            "packing/devtools/render_overview.py",
+            "packing/devtools/site_urls.py",
+            "packing/devtools/upper_bound_reports.py",
+            "packing/frontier/results.yaml",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The results page's overview and its Added filter (#514) change only the "
+            "results page, the results table's rows and bar, the results page's byte "
+            "ceiling's reason, each register entry's new `landed` day, and the register "
+            "entries the import generators draft, which now write `landed`. Rendered at "
+            "6ff2017d, after the merge of main 14fd9e27, once from this branch's tree and "
+            "once with main's copies of its changed files: all 68 files the four papers' "
+            "renderers write are byte-identical, the explainer's HTML included (the order "
+            "of its empty style attribute on a math span can vary between two renders of "
+            "the same code). Each PDF prints from that HTML, so every paper keeps its "
+            "edition: v0.4.8, v0.1.7, v0.1.0 and v0.2.3."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer",),
+        paths=(
+            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
+            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
+            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+        ),
+        reason=(
+            "PR #646's site v0.7.35 cut regenerated the five claim documents, and every "
+            "changed line differs from main only in its source-link revision, 44cb20e9 to "
+            "e00bfbe5. The explainer links those documents rather than inlining them, so "
+            "its HTML and Markdown are unchanged by them and it keeps v0.4.8. This is a "
+            "source-reviewed disposition, as #645's was for v0.7.33."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=("packing/campaign/result-requests.yaml",),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "Issue #538's request record marks its trajectory-timing ask done by #685 and "
+            "moves the unattributed Animate play message onto think-8vsk. Rendered at "
+            "cc058a45 with and without that change: all 42 files the survey's renderer "
+            "writes are byte-identical, and its PDF prints from that HTML, so it keeps "
+            "v0.2.3."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/devtools/overview/rating-tooltips.js",
+            "packing/devtools/render_changelog.py",
+            "packing/devtools/render_overview.py",
+            "packing/devtools/templates/site-nav.css",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-lower-bounds-explainer.pdf",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-optimality-review.pdf",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/n11-threshold-bound-review.pdf",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+            "papers/square-packing-methods-survey.pdf",
+        ),
+        reason=(
+            "The News chooser correction reads News significance meanings from the "
+            "label rubric in result-import.md, declared as a site input in "
+            "render_overview, uses them in News cards and controls, and extends "
+            "tooltip enhancement to News score buttons, whose press dismisses the "
+            "tooltip, while retaining existing badge interactions. Compact in-place "
+            "choices gain per-button borders and a visible focus outline. The four "
+            "papers contain neither News controls nor compact in-place choosers; "
+            "their existing navigation links and rating badges retain their behavior. "
+            "Source review finds no manuscript, figure, credit, content date or "
+            "print-style change in these paper exports. This is not a rendered "
+            "byte-equality claim; the site alone takes a patch edition."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer",),
+        paths=(
+            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
+            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
+            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-lower-bounds-explainer.pdf",
+        ),
+        reason=(
+            "Site v0.7.34 (#658) regenerates the five claim documents, and their only "
+            "change is the source-link revision, d24b3bf9 to the cut's commit. The "
+            "explainer links them by URL on main (repo_url for T025_CLAIM, T026_CLAIM, "
+            "the proof card and claim_path) and never reads their text; its "
+            "edition_file helper is defined but unused. Manuscript, scientific inputs, "
+            "figures and paper metadata are unchanged, so the explainer keeps v0.4.8. "
+            "This is a source-reviewed disposition; no render, PDF or byte identity is "
+            "claimed for these paths."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/devtools/adopt_houses.py",
+            "packing/devtools/select_houses.py",
+            "packing/frontier/n-088.md",
+            "packing/frontier/n-102.md",
+            "packing/frontier/n-123.md",
+            "packing/frontier/n-126.md",
+            "packing/frontier/n-175.md",
+            "packing/frontier/n-199.md",
+            "packing/frontier/n-267.md",
+            "packing/frontier/n-295.md",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "The records lane of 16 October 2026 for #639 and #640 (#658) maps the s(19) "
+            "review onto T-194 (C1) and raises T-193 to V3/C3 in results.yaml, with the "
+            "#639 and #640 request entries and their review fixes (A6 to A9). Under the "
+            "house rule (#660) select_houses reads T-193's exact sides (evand_exact_side, "
+            "in ALGEBRAIC_READERS) and stages its sixteen counts under think-ot5c, twelve "
+            "of them re-pointed from T-174, so T-174's register text, its coverage source "
+            "and the #574 request count 41 houses, not 53; adopt_houses names a "
+            "re-staged house in the held sentence and a smaller staged one in its "
+            "section, and its refresh rewrites those sixteen case records; its plan refuses "
+            "T-193 at the nine counts where RE-1 owes its regularization a correction "
+            "(CORRECTIONS_OWED), and a held sentence names what a re-staged house is "
+            "(review B of #658). Re-taken on 19 October 2026 after the branch merged main "
+            "with #665, #685 and #645: rendered at link revision 9fb8e147 (main, site "
+            "v0.7.33), once from main's tree and once from this branch's at c9745477 after "
+            "its merge of it, render_packing_methods, render_n11_optimality_review and "
+            "render_n11_threshold_bound_review write 50 files, byte-identical between the "
+            "two trees. The explainer prepares its math with a pinned Chromium this host "
+            "lacks, so it is source-reviewed only: it reads results.yaml only to count "
+            "the register's entries and its apparently new ones, 217 and 32 on both "
+            "trees, and never calls select_houses or adopt_houses. No PDF was printed. "
+            "All four papers keep v0.4.8, v0.1.7, v0.1.0 and v0.2.3."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer",),
+        paths=("packing/src/sqpack/cli/validate.py",),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-lower-bounds-explainer.pdf",
+        ),
+        reason=(
+            "Reviewed October 19, 2026 against main f3d5da7b: the explainer's "
+            "RENDER_INPUTS includes the entire sqpack tree, but its HTML, Markdown "
+            "and PDF producer import closure excludes the validation CLI. This "
+            "file changes only _site_layout_tests to disable pytest capture and "
+            "enable existing Playwright wire/API logging for serial forwarders, "
+            "and lets _run report a bounded tail of that command's output. "
+            "Paper producers neither call that runner nor consume its logs. "
+            "Manuscripts, scientific inputs, figures, paper metadata and the "
+            "pre-cut publication link revision are unchanged; the five claim/card "
+            "documents remain current. The article's last change remains October "
+            "13, 2026, matching EXPLAINER_REVISED. Retain explainer v0.4.8 and the "
+            "prepared site v0.7.32. This is a source-reviewed disposition, with "
+            "no paper render, PDF redraw or output-byte comparison claimed."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-lower-bounds-explainer",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
+            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
+            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
+            "packing/devtools/probes/measure_atlas_views/layout.js",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-lower-bounds-explainer.pdf",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+            "papers/square-packing-methods-survey.pdf",
+        ),
+        reason=(
+            "For the Atlas CSS repair against landed main f3d5da7b, review of all "
+            "four HTML, Markdown and PDF producers finds no consumed content change. "
+            "Their shells use KPress, paper-type, site-nav and paper-publication "
+            "styles plus their own paper styles; none includes site.css or its "
+            "site-atlas-grid rule. The layout probe is read by measure_atlas_views "
+            "and browser tests, not by those producers; its broad probe declaration "
+            "is a conservative candidate for the explainer and methods survey. "
+            "The paused animation clock belongs only to the browser test. The five "
+            "claim documents change only source-link revisions for site v0.7.32 "
+            "and remain linked rather than inlined into papers; the README changes "
+            "only its site edition sentence. Manuscripts, scientific inputs, "
+            "figures and paper metadata are unchanged. Retain explainer v0.4.8 and "
+            "methods survey v0.2.3. The optimality and threshold reviews have no "
+            "changed candidate inputs and retain v0.1.7 and v0.1.0. This is a source-reviewed "
+            "disposition; no paper render, PDF redraw or artifact byte identity "
+            "is claimed."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer",),
+        paths=(
+            "packing/atlas/known-best/bound-citations.json",
+            "packing/atlas/known-best/composite-figure.json",
+            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
+            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
+            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
+            "packing/devtools/adopt_houses.py",
+            "packing/devtools/check_case_prose.py",
+            "packing/devtools/check_rung_figures.py",
+            "packing/devtools/check_standing.py",
+            "packing/devtools/default_drawings.py",
+            "packing/devtools/regularize_axis_components.py",
+            "packing/devtools/result_overview.py",
+            "packing/devtools/run_negative_controls.py",
+            "packing/devtools/select_houses.py",
+            "packing/devtools/upper_bound_houses.py",
+            "packing/frontier/results.yaml",
+            "packing/src/sqpack/cli/validate.py",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-lower-bounds-explainer.pdf",
+        ),
+        reason=(
+            "For PR665 against landed main e0319ffd, a source-based review of the HTML, "
+            "Markdown and PDF producers finds the consumed values unchanged: 217 "
+            "registered results, 32 novel results, the n11 verified-lower citation, and "
+            "Figure 2 caption totals 81 recent lower bounds and zero first proved here. "
+            "Its n11 manuscripts, certificates, verifier text, figures and paper metadata "
+            "are unchanged. Changed claim documents carry only refreshed source-link "
+            "revisions and are linked rather than inlined. Changed house-selection, "
+            "regularization, result-page and control tools are outside the paper output "
+            "paths; the CLI validation change selects checks. The site patch owns the "
+            "adopted houses. Retain v0.4.8; no render, PDF redraw or artifact byte "
+            "identity is claimed."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:n11-optimality-review",),
+        paths=(
+            "packing/devtools/adopt_houses.py",
+            "packing/devtools/check_case_prose.py",
+            "packing/devtools/check_rung_figures.py",
+            "packing/devtools/check_standing.py",
+            "packing/devtools/default_drawings.py",
+            "packing/devtools/regularize_axis_components.py",
+            "packing/devtools/result_overview.py",
+            "packing/devtools/run_negative_controls.py",
+            "packing/devtools/select_houses.py",
+            "packing/devtools/upper_bound_houses.py",
+            "packing/frontier/results.yaml",
+        ),
+        outputs=(
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-optimality-review.pdf",
+        ),
+        reason=(
+            "For PR665 against landed main e0319ffd, source review of the HTML, Markdown "
+            "and PDF producers finds the complete consumed n11 ladder rows T010, T018, "
+            "T025, T026, T033, T037, T060 and T061 unchanged. Changed result claims are "
+            "T169, T170, T171 and T174, outside that ladder. Its manuscript, retained "
+            "proof and figure inputs, renderers and own publication metadata are "
+            "unchanged. The house-selection, regularization, result-page and control "
+            "changes are not called by this paper producer. Retain v0.1.7; this is a "
+            "source-based review, with no proof rerun, PDF redraw or artifact "
+            "byte-identity claim."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:n11-threshold-bound-review",),
+        paths=(
+            "packing/devtools/adopt_houses.py",
+            "packing/devtools/check_case_prose.py",
+            "packing/devtools/check_rung_figures.py",
+            "packing/devtools/check_standing.py",
+            "packing/devtools/default_drawings.py",
+            "packing/devtools/regularize_axis_components.py",
+            "packing/devtools/result_overview.py",
+            "packing/devtools/run_negative_controls.py",
+            "packing/devtools/select_houses.py",
+            "packing/devtools/upper_bound_houses.py",
+            "packing/frontier/results.yaml",
+        ),
+        outputs=(
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/n11-threshold-bound-review.pdf",
+        ),
+        reason=(
+            "For PR665 against landed main e0319ffd, source review of the HTML, Markdown "
+            "and PDF producers finds the consumed n11 ladder, including the T060 claim "
+            "used for its gap caption, unchanged. The T169, T170, T171 and T174 claim "
+            "edits are outside those consumed rows. Its manuscript, certificates, "
+            "retained figure inputs, renderer and own publication metadata are unchanged. "
+            "Changed house-selection, regularization, result-page and control tools are "
+            "not called by this producer. Retain v0.1.0; no proof rerun, PDF redraw or "
+            "artifact byte identity is claimed."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/devtools/adopt_houses.py",
+            "packing/devtools/check_case_prose.py",
+            "packing/devtools/check_rung_figures.py",
+            "packing/devtools/check_standing.py",
+            "packing/devtools/default_drawings.py",
+            "packing/devtools/regularize_axis_components.py",
+            "packing/devtools/result_overview.py",
+            "packing/devtools/run_negative_controls.py",
+            "packing/devtools/select_houses.py",
+            "packing/devtools/upper_bound_houses.py",
+            "packing/frontier/n-029.md",
+            "packing/frontier/n-070.md",
+            "packing/frontier/n-084.md",
+            "packing/frontier/n-086.md",
+            "packing/frontier/n-102.md",
+            "packing/frontier/n-103.md",
+            "packing/frontier/n-105.md",
+            "packing/frontier/n-108.md",
+            "packing/frontier/n-123.md",
+            "packing/frontier/n-126.md",
+            "packing/frontier/n-127.md",
+            "packing/frontier/n-129.md",
+            "packing/frontier/n-130.md",
+            "packing/frontier/n-131.md",
+            "packing/frontier/n-146.md",
+            "packing/frontier/n-153.md",
+            "packing/frontier/n-154.md",
+            "packing/frontier/n-175.md",
+            "packing/frontier/n-179.md",
+            "packing/frontier/n-180.md",
+            "packing/frontier/n-207.md",
+            "packing/frontier/n-208.md",
+            "packing/frontier/n-209.md",
+            "packing/frontier/n-236.md",
+            "packing/frontier/n-237.md",
+            "packing/frontier/n-238.md",
+            "packing/frontier/n-239.md",
+            "packing/frontier/n-261.md",
+            "packing/frontier/n-267.md",
+            "packing/frontier/n-295.md",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+            "papers/square-packing-methods-survey.pdf",
+        ),
+        reason=(
+            "For PR665 against landed main e0319ffd, source review of the HTML, Markdown "
+            "and PDF producers finds every declared historical figure input unchanged, "
+            "including the n29 and n51 SVGs, Casson n106 source and retained SQUISH n108 "
+            "facts. Changed case records, result requests, source coverage and results "
+            "are citation targets whose existence the producer checks; their bodies are "
+            "not inlined. All cited paths remain present at both revisions. The C1 "
+            "margin wording changes current openings at 15 additional citation targets, "
+            "including n29, with every other byte and all metadata retained. The "
+            "manuscript, renderer and own publication metadata are unchanged. "
+            "House-selection, regularization, result-page and control changes do not "
+            "enter its output. Retain v0.2.3; no search, PDF redraw or artifact byte "
+            "identity is claimed."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer",),
+        paths=(
+            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
+            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
+            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+            "papers/n11-lower-bounds-explainer.pdf",
+        ),
+        reason=(
+            "For PR407 against main 6833d05aa, the five generated claim documents "
+            "differ only in GitHub source-link revisions, from a450742e to c0fc4f9d, "
+            "the clean integration checkpoint before the site cut. Their claims, "
+            "proofs, embedded certificates and verifier text are unchanged. The "
+            "explainer checks these documents' presence and links to them; it does "
+            "not inline their bodies. Its manuscript, certificate inputs, figures, "
+            "renderer and own release metadata are unchanged, so it retains v0.4.8. "
+            "This is a source-based review of the HTML, Markdown and PDF producers; "
+            "no PDF redraw, proof rerun or artifact byte identity is claimed. Site "
+            "v0.7.30 owns the published development-guide correction."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:n11-optimality-review",),
+        paths=(
+            "packing/devtools/acquire_source.py",
+            "packing/devtools/apply_closed_form.py",
+            "packing/devtools/render_n11_lower_bounds_explainer_pdf.py",
+            "packing/devtools/site_urls.py",
+            "packing/devtools/verifier_registry.py",
+            "packing/frontier/results.yaml",
+        ),
+        outputs=(
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+        ),
+        reason=(
+            "For PR 671, rendered HTML and Markdown against reviewed PR 679 candidate "
+            "e22a9f9f4 and the current integration tree, using source-link revision "
+            "e22a9f9f4 in both. Both outputs are byte-identical. The n11 optimality "
+            "review retains its article, selected facts and figures, so its edition "
+            "remains v0.1.7. The fine-net records, monotone case planning, safe packet "
+            "publication and explainer pagination guard do not change these outputs."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:n11-threshold-bound-review",),
+        paths=(
+            "packing/devtools/acquire_source.py",
+            "packing/devtools/apply_closed_form.py",
+            "packing/devtools/render_n11_lower_bounds_explainer_pdf.py",
+            "packing/devtools/site_urls.py",
+            "packing/devtools/verifier_registry.py",
+            "packing/frontier/results.yaml",
+        ),
+        outputs=(
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+        ),
+        reason=(
+            "For PR 671, rendered HTML and Markdown against reviewed PR 679 candidate "
+            "e22a9f9f4 and the current integration tree, using source-link revision "
+            "e22a9f9f4 in both. Both outputs are byte-identical. The n11 threshold review "
+            "retains its article, selected facts and figures, so its edition remains "
+            "v0.1.0. The fine-net records, monotone case planning, safe packet "
+            "publication and explainer pagination guard do not change these outputs."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/devtools/acquire_source.py",
+            "packing/devtools/apply_closed_form.py",
+            "packing/devtools/render_n11_lower_bounds_explainer_pdf.py",
+            "packing/devtools/site_urls.py",
+            "packing/devtools/verifier_registry.py",
+            "packing/frontier/n-108.md",
+            "packing/frontier/results.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "For PR 671, rendered HTML and Markdown against reviewed PR 679 candidate "
+            "e22a9f9f4 and the current integration tree, using source-link revision "
+            "e22a9f9f4 in both. Both outputs are byte-identical. The square-packing "
+            "methods survey retains its article, selected facts and figures, so its "
+            "edition remains v0.2.3. The fine-net records, monotone case planning, safe "
+            "packet publication and explainer pagination guard do not change these "
+            "outputs."
+        ),
+    ),
     ReleaseNoPublicChange(
         components=("paper:n11-lower-bounds-explainer",),
         paths=(
@@ -2694,6 +4738,11 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         components=("paper:n11-lower-bounds-explainer",),
         paths=(
             "packing/atlas/known-best/bound-citations.json",
+            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
+            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
+            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
             "packing/devtools/adopt_houses.py",
             "packing/devtools/apply_closed_form.py",
             "packing/devtools/contributor_credit.py",
@@ -2721,19 +4770,17 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         ),
         outputs=("papers/n11-lower-bounds-explainer.md",),
         reason=(
-            "Compared with main d167d4b86 after the upstream merge, the exact candidate "
-            "scope is the 25 paths above. The manuscript and producer are unchanged, "
-            "and Figure 3 reads only the unchanged n11 bound-citation entry. The merged "
-            "Markdown edition was rendered and inspected; the numeric substitutions, "
-            "certificate figures and paper text retain the published content. Changed "
-            "credit fields at other counts, direct profile links in News, and standalone "
-            "case/result serialization do not enter this manuscript. Shared navigation "
-            "and sibling-paper metadata do not revise its content edition. This is a "
-            "source-reviewed disposition: no baseline explainer render comparison or PDF "
-            "comparison is claimed. The final n29 adoption-writer repair reproduces "
-            "the historical wording already retained in its case record, without "
-            "changing a retained record or manuscript; that added input was "
-            "source-reviewed. The explainer keeps v0.4.7."
+            "Compared with main 51ac9d7ee, the exact candidate scope is the 30 paths "
+            "above. The explainer manuscript and producer are byte-identical to main, and "
+            "its n11 bound-citation entry is unchanged; the other 63 changed entries are "
+            "Hosono and Ryu credit renames that do not enter the article. Main's explainer "
+            "v0.4.13 history and October 13 article revision remain current. Changed "
+            "standalone case/result serialization, News/profile navigation and "
+            "sibling-paper metadata do not revise this paper content. The n29 "
+            "adoption-writer repair reproduces retained historical wording. The v0.9.0 "
+            "site cut regenerates the five claim documents, which differ from main only in "
+            "source-link revisions. This is a source review against main; no baseline "
+            "paper render, PDF rebuild or rendered byte-identity comparison is claimed."
         ),
     ),
     ReleaseNoPublicChange(
@@ -2795,20 +4842,16 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         ),
         outputs=("papers/square-packing-methods-survey.md",),
         reason=(
-            "Compared with main d167d4b86 after the upstream merge, the exact candidate "
-            "scope is the 53 paths above. Rendered both source trees at that same source-link "
-            "revision, the methods survey HTML before browser math preparation and its "
-            "expanded Markdown, including all five figures, are byte-identical. The "
-            "baseline figure inputs are unchanged by this branch. In particular, Figure 3 "
-            "retains the n29 certificate admitted by main and the survey retains v0.2.3; "
-            "the earlier v0.2.2 comparison is not evidence for this integration. Changed "
-            "frontier and source-coverage records are linked citations whose bodies are "
-            "not incorporated. Profile links in News and standalone case/result "
-            "serialization do not enter this paper. The final n29 adoption-writer "
-            "repair reproduces the historical wording already retained in its case "
-            "record, without changing a retained record or manuscript. That added "
-            "input was source-reviewed; the earlier render comparison was not "
-            "repeated. No PDF was rebuilt or compared."
+            "Compared with main 51ac9d7ee, the exact candidate scope is the 53 paths "
+            "above. The methods manuscript, producer and every passive figure input are "
+            "byte-identical to main, including the n29 certificate drawing. Changed "
+            "frontier/source-coverage prose and case credits, including n108's Hosono "
+            "credit for its fine-net lower bound, are cited by link rather than "
+            "incorporated; shared News, profile and standalone case/result helpers do not "
+            "enter the paper article. The n29 writer repair preserves retained historical "
+            "facts. Its v0.2.3 content edition remains current. This is a source review "
+            "against main; no baseline paper render, PDF rebuild or rendered "
+            "byte-identity comparison is claimed."
         ),
     ),
     ReleaseNoPublicChange(
@@ -3952,6 +5995,89 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "explainer keeps v0.4.7."
         ),
     ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/devtools/check_results.py",
+            "packing/devtools/overview_data.py",
+            "packing/devtools/result_overview.py",
+            "packing/devtools/select_houses.py",
+            "packing/devtools/site_urls.py",
+            "packing/devtools/validate_schemas.py",
+            "packing/devtools/verifier_registry.py",
+            "packing/frontier/README.md",
+            "packing/frontier/results.yaml",
+        ),
+        outputs=(
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+        ),
+        reason=(
+            "Rendered for PR #645 at link revision b23abea0, once from this branch's tree "
+            "at a6e1bf30 and once with main's 14fd9e27 copies of the branch's changed files: "
+            "the three papers' HTML and Markdown and every asset their renderers write are "
+            "byte-identical, and each PDF prints from that HTML. The branch separates "
+            "source verification from confirmation, moves T-154 from V0 to V3 and changes "
+            "the assurance predicates, record links and the n = 17 page ceiling; none of "
+            "the three papers prints T-154, its evidence or those predicates' results, so "
+            "each keeps its edition: v0.1.7, v0.1.0 and v0.2.3."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer",),
+        paths=(
+            "packing/devtools/check_results.py",
+            "packing/devtools/overview_data.py",
+            "packing/devtools/result_overview.py",
+            "packing/devtools/select_houses.py",
+            "packing/devtools/site_urls.py",
+            "packing/devtools/validate_schemas.py",
+            "packing/devtools/verifier_registry.py",
+            "packing/frontier/results.yaml",
+            "packing/src/sqpack/assurance.py",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+        ),
+        reason=(
+            "Rendered for PR #645 with the browser's math pass, once from this branch's "
+            "tree at a6e1bf30 and once with main's 14fd9e27 copies of the branch's changed "
+            "files: the Markdown is byte-identical and the HTML, 1,416,033 bytes on both, "
+            "differs only in where an empty style attribute falls in two formulas' spans, "
+            "which moves between two renders of the same input. The register count is 217 "
+            "on both. The explainer prints no rung of T-154, so it keeps v0.4.8."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer",),
+        paths=(
+            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
+            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
+            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+        ),
+        reason=(
+            "PR #645's site v0.7.33 cut regenerated the five claim documents, and every "
+            "changed line differs from main only in its source-link revision, b23abea0 to "
+            "d24b3bf9. The explainer links those documents rather than inlining them, so "
+            "its HTML and Markdown are unchanged by them and it keeps v0.4.8. This is a "
+            "source-reviewed disposition; the render comparison above predates the cut."
+        ),
+    ),
 )
 
 
@@ -4088,7 +6214,7 @@ def validate_release_impacts(
 #: fresh render, so a link naming the build commit would fail their drift check forever. It is
 #: in no version string. It moves when the claim documents are regenerated for an edition. It
 #: must be a commit on `main`; the site's own links name `main` itself (`devtools.repo_links`).
-PUBLICATION_REVISION = "c36eb7d6"
+PUBLICATION_REVISION = "63918bf3"
 
 
 def data_pathspec() -> tuple[str, ...]:

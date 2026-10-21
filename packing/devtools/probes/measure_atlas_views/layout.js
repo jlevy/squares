@@ -139,6 +139,19 @@
     reference_gap_px: referenceGapPx,
     row_gap_px: Number.parseFloat(cellsStyle.rowGap),
     block: box(block),
+    viewport_width: window.innerWidth,
+    block_transition: {
+      property: blockStyle.transitionProperty,
+      duration: blockStyle.transitionDuration,
+      margin_left: blockStyle.marginLeft,
+      max_width: blockStyle.maxWidth,
+      animations: block.getAnimations().map((animation) => ({
+        property: animation instanceof CSSTransition ? animation.transitionProperty : null,
+        state: animation.playState,
+        time: animation.currentTime,
+        duration: animation.effect?.getTiming().duration,
+      })),
+    },
     available: {
       left: round(availableLeft),
       right: round(availableRight),

@@ -1,0 +1,9 @@
+[
+  {
+    "issue": 680,
+    "id": 6268897692,
+    "url": "https://github.com/jlevy/squares/issues/680#issuecomment-6268897692",
+    "created": "2026-10-19T13:54:01Z",
+    "body": "The original n183 certificate has completed our local exact replay and independent senior mathematical review. Both retained exact verification routes accepted its rational geometry, with duplicate-square and outside-container controls; the reviewed side is exactly `13999580178736252502081470897571 / 10^30 < 14`. The original certificate SHA-256 remains `279e70d1c7fb0bc181e3e9d313e7350b672d85e223296f252b92f2916d6e5df5`.\n\nRegistration is prepared for the next intake records PR, with credit to Evan Daniel after Francisco Couzo. It has not landed on main or been deployed; the result number remains provisional until merge order is fixed. This acceptance concerns the original feasibility certificate. The regularized drawing, adoption into the standing case and both strong generators remain a separate owned follow-up (`think-jh4w`); numerical local-optimality or flat-motion evidence is not an exact rigidity or optimality theorem.\n\nWe are completing integration and release checks across the earlier PRs before publishing this records batch. This issue stays open until the registration and its public confirmation are on main."
+  }
+]

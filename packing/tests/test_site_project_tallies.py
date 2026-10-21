@@ -37,9 +37,11 @@ from devtools import (
     render_contributors,
     render_overview,
     site_resources,
+    site_tallies,
 )
 from devtools.overview_sections import Cited, ProjectTally, project_order, project_tallies
 from devtools.render_n11_lower_bounds_explainer_pdf import BROWSER_OVERRIDE
+from sqpack.contributor_occurrences import load_occurrences
 from sqpack.probes import probe
 from sqpack.yamlio import safe_load
 from tests import site_renders
@@ -333,31 +335,40 @@ def test_the_page_lists_the_projects_in_the_functions_order(
 def test_each_card_ends_with_its_tally_linked_to_its_results(
     page: str, overview: overview_data.Overview
 ) -> None:
-    """A project with registered results ends its card `N results (a at S5, b at S4)`:
-    the total, singular for one, then each level that has a result, the highest first.
-    The total links to the results page filtered to the project and each count to the
-    same filter at that level. A project with no registered result has no tally."""
+    """One shared component counts distinct registered results and scoped reviewed credits."""
     with_tally = 0
     for url, foot in _cards(page):
         own = _attributed(overview, url)
-        if not own:
-            assert foot == "", url
-            continue
-        with_tally += 1
         levels = [overview_sections.significance(result) for result in own]
         slug = overview_sections.project_slug(url)
         total = f"{len(own)} result" + ("" if len(own) == 1 else "s")
         counts = [(level, levels.count(level)) for level in LEVELS if level in levels]
-        text = re.sub(r"<[^>]+>", "", foot)
-        assert text == f"{total} ({', '.join(f'{n} at S{level}' for level, n in counts)})", url
+        reviewed = site_tallies.project_credit_count(
+            overview_sections.project_source_keys()[url],
+            [result.id for result in own],
+            load_occurrences().occurrences,
+        )
+        expected = total
+        if len(counts) == 1:
+            expected += f" at S{counts[0][0]}"
+        elif counts:
+            expected += f" ({', '.join(f'{n} at S{level}' for level, n in counts)})"
+        expected += f", {reviewed} credit" + ("" if reviewed == 1 else "s")
+        assert re.sub(r"<[^>]+>", "", foot) == expected, url
         links = re.findall(r'<a href="([^"]+)">([^<]+)</a>', foot)
-        assert links == [
-            (f"results.html?project={slug}", total),
-            *(
-                (f"results.html?project={slug}&amp;s={level}", f"{n} at S{level}")
+        if own:
+            with_tally += 1
+            assert links[0] == (f"results.html?project={slug}", total)
+            expected_levels = [
+                (
+                    f"results.html?project={slug}&amp;s={level}",
+                    f"S{level}" if len(counts) == 1 else f"{n} at S{level}",
+                )
                 for level, n in counts
-            ),
-        ], url
+            ]
+            assert links[1:] == expected_levels
+        else:
+            assert links == []
     assert with_tally >= 9
     assert render_overview.RESULTS_PAGE == "results.html"
 
@@ -385,16 +396,17 @@ def test_a_tally_link_selects_exactly_its_projects_rows(
     assert not re.search(r"<tr id=\"t-\d+\"[^>]*\shidden", results)
     bar = results.split('<div class="site-table-tools site-result-filters">', 1)[1]
     bar = bar.split("</div>", 1)[0]
-    assert bar.count("<label hidden>") == 2
+    assert bar.count("<label hidden>") == 4
     assert (
         '<label hidden>Project <select data-filter="project" data-bound="has" data-preset>'
         in bar
     )
     assert '<label hidden>At significance <select data-filter="s" data-preset>' in bar
+    assert '<label hidden>Added on <select data-filter="added" data-preset>' in bar
     # The bar's own controls keep their order, and the preset-only ones follow them.
     order = re.findall(r'data-filter="([a-z]+)"', bar)
-    own = ["s", "v", "c", "kind", "status", "current", "source", "n", "date"]
-    assert order == [*own, "project", "s"]
+    own = ["s", "v", "c", "kind", "status", "current", "source", "n", "date", "added"]
+    assert order == [*own, "project", "s", "added", "added"]
 
 
 class _Nesting(HTMLParser):
@@ -431,7 +443,8 @@ def test_no_link_is_nested_in_a_link(page: str) -> None:
         heading = card.index('class="site-card-value"')
         byline = card.index('class="site-card-byline"')
         note = card.index('class="site-card-note"')
-        assert heading < byline < note
+        source = card.index('class="site-card-url"')
+        assert heading < byline < source < note
         author = card.split('<p class="site-card-byline">', 1)[1].split("</p>", 1)[0]
         assert 'class="site-project-author"' in author
         assert "target=" not in author
@@ -510,7 +523,14 @@ def test_following_a_cards_links_shows_the_rows_they_count(
     assert sorted(found["shown"]) == own
     assert found["total"] == total
     assert found["count"] == overview_sections.count_text(len(own), total)
-    project, exact = found["presets"]
+    project, exact, added = found["presets"]
+    assert added == {
+        "filter": "added",
+        "value": "",
+        "choice": "All",
+        "label": "Added on",
+        "out": True,
+    }
     assert project == {
         "filter": "project",
         "value": slug,
@@ -541,6 +561,7 @@ def test_following_a_cards_links_shows_the_rows_they_count(
         assert [(preset["value"], preset["out"]) for preset in found["presets"]] == [
             (slug, False),
             (str(level), False),
+            ("", True),
         ]
         assert found["presets"][1]["choice"] == f"S{level}"
         opened.select_option('select[data-filter="project"]', "")
@@ -557,4 +578,5 @@ def test_following_a_cards_links_shows_the_rows_they_count(
     assert [(preset["value"], preset["out"]) for preset in cleared["presets"]] == [
         ("", True),
         (str(level), False),
+        ("", True),
     ]

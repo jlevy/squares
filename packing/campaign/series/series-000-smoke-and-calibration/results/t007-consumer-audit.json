@@ -639,7 +639,7 @@
         "karakus_explicit_bound": {"basis":"karakus-6.1","decimal":"3.541381265149","exact":"1/2 + (1/2)*sqrt(37)","reaches_nagamochi":false,"shortfall_below_nagamochi":"0.104370045915"},
         "karakus_k2_minus_1": null,
         "other_registered_results_at_n": [{"confirmation":"C3","id":"T-017","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-049","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-078","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-079","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-083","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-085","kind":"correction","verification":"V3"},{"confirmation":"C3","id":"T-095","kind":"lower-bound","verification":"V3"}],
-        "registered_reported": {"basis":"exact-form","decimal":"3.971500000000","exact":"7943/2000","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.325748688936","sources":[{"evidence":["E-n012-squarepacker-7943-2000-report"],"n":12,"proved_by":["squarepacker (Ryu Sungjoon)"],"results":["T-095"],"via":"direct"}]},
+        "registered_reported": {"basis":"exact-form","decimal":"3.971500000000","exact":"7943/2000","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.325748688936","sources":[{"evidence":["E-n012-squarepacker-7943-2000-report"],"n":12,"proved_by":["Ryu Sungjoon"],"results":["T-095"],"via":"direct"}]},
         "registered_verified": {"basis":"exact-form","decimal":"3.971500000000","exact":"7943/2000","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.325748688936","sources":[{"evidence":["E-n012-squarepacker-7943-2000-source-replay","E-n012-squarepacker-7943-2000-native-parent-core"],"n":12,"results":["T-095"],"via":"direct"}]}
       },
       "weakened_to": null,
@@ -795,7 +795,7 @@
           {"confirmation":"C3","id":"T-085","kind":"correction","verification":"V3"},
           {"confirmation":"C3","id":"T-093","kind":"lower-bound","verification":"V3"},
           {"confirmation":"C1","id":"T-153","kind":"optimality","verification":"V0"},
-          {"confirmation":"C1","id":"T-154","kind":"formalization","verification":"V0"}
+          {"confirmation":"C1","id":"T-154","kind":"formalization","verification":"V3"}
         ],
         "registered_reported": {"basis":"display-decimal-as-printed","decimal":"4.675530093604","exact":"467553009360455095163/100000000000000000000","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.513252433437","sources":[{"evidence":["E-n017-overbeck-optimality-candidate-report"],"n":17,"proved_by":["Overbeck"],"results":["T-153"],"via":"direct"}]},
         "registered_verified": {"basis":"exact-form","decimal":"4.660442750000","exact":"18641771/4000000","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.498165089832","sources":[{"evidence":["E-n017-guzhou-r071-source-replay"],"n":17,"results":["T-093"],"via":"direct"}]}
@@ -865,7 +865,7 @@
         "chelokot_lean": null,
         "karakus_explicit_bound": {"basis":"karakus-6.1","decimal":"4.405124837953","exact":"1/2 + (1/2)*sqrt(61)","reaches_nagamochi":false,"shortfall_below_nagamochi":"0.058976777184"},
         "karakus_k2_minus_1": null,
-        "other_registered_results_at_n": [{"confirmation":"C3","id":"T-016","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-019","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-020","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-045","kind":"lower-bound","verification":"V3"},{"confirmation":"C0","id":"T-046","kind":"lower-bound","verification":"V0"},{"confirmation":"C3","id":"T-068","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-074","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-083","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-085","kind":"correction","verification":"V3"},{"confirmation":"C3","id":"T-100","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-103","kind":"lower-bound","verification":"V3"},{"confirmation":"C0","id":"T-194","kind":"optimality","verification":"V0"}],
+        "other_registered_results_at_n": [{"confirmation":"C3","id":"T-016","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-019","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-020","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-045","kind":"lower-bound","verification":"V3"},{"confirmation":"C0","id":"T-046","kind":"lower-bound","verification":"V0"},{"confirmation":"C3","id":"T-068","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-074","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-083","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-085","kind":"correction","verification":"V3"},{"confirmation":"C3","id":"T-100","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-103","kind":"lower-bound","verification":"V3"},{"confirmation":"C1","id":"T-194","kind":"optimality","verification":"V0"}],
         "registered_reported": {"basis":"exact-form","decimal":"4.825000000000","exact":"193/40","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.360898384863","sources":[{"evidence":["E-n019-wand125-mixed-4825-report"],"n":19,"proved_by":["Hosono"],"results":["T-103"],"via":"direct"}]},
         "registered_verified": {"basis":"exact-form","decimal":"4.825000000000","exact":"193/40","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.360898384863","sources":[{"evidence":["E-n019-wand125-mixed-4825-sqverify-fast-replay"],"n":19,"results":["T-103"],"via":"direct"}]}
       },
@@ -1428,7 +1428,7 @@
         "chelokot_lean": null,
         "karakus_explicit_bound": {"basis":"karakus-6.1","decimal":"6.178908345800","exact":"1/2 + (1/2)*sqrt(129)","reaches_nagamochi":false,"shortfall_below_nagamochi":"0.017244076906"},
         "karakus_k2_minus_1": null,
-        "other_registered_results_at_n": [{"confirmation":"C0","id":"T-046","kind":"lower-bound","verification":"V0"},{"confirmation":"C3","id":"T-068","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-070","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-074","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-083","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-085","kind":"correction","verification":"V3"}],
+        "other_registered_results_at_n": [{"confirmation":"C0","id":"T-046","kind":"lower-bound","verification":"V0"},{"confirmation":"C3","id":"T-068","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-070","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-074","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-083","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-085","kind":"correction","verification":"V3"},{"confirmation":"C0","id":"T-200","kind":"lower-bound","verification":"V0"}],
         "registered_reported": {"basis":"exact-form","decimal":"6.545000000000","exact":"1309/200","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.348847577294","sources":[{"evidence":["E-wand125-rectangle-2026-10-01-report"],"n":38,"proved_by":["Hosono"],"results":["T-068"],"via":"direct"}]},
         "registered_verified": {"basis":"exact-form","decimal":"6.545000000000","exact":"1309/200","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.348847577294","sources":[{"evidence":["E-wand125-rectangle-2026-10-01-source-replay"],"n":38,"results":["T-074"],"via":"direct"}]}
       },
@@ -1482,7 +1482,7 @@
         "chelokot_lean": null,
         "karakus_explicit_bound": {"basis":"karakus-6.1","decimal":"6.352349955359","exact":"1/2 + (1/2)*sqrt(137)","reaches_nagamochi":false,"shortfall_below_nagamochi":"0.032814851774"},
         "karakus_k2_minus_1": null,
-        "other_registered_results_at_n": [{"confirmation":"C3","id":"T-044","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-045","kind":"lower-bound","verification":"V3"},{"confirmation":"C0","id":"T-046","kind":"lower-bound","verification":"V0"},{"confirmation":"C3","id":"T-068","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-074","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-083","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-085","kind":"correction","verification":"V3"},{"confirmation":"C3","id":"T-133","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-145","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-157","kind":"lower-bound","verification":"V3"}],
+        "other_registered_results_at_n": [{"confirmation":"C3","id":"T-044","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-045","kind":"lower-bound","verification":"V3"},{"confirmation":"C0","id":"T-046","kind":"lower-bound","verification":"V0"},{"confirmation":"C3","id":"T-068","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-074","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-083","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-085","kind":"correction","verification":"V3"},{"confirmation":"C3","id":"T-133","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-145","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-157","kind":"lower-bound","verification":"V3"},{"confirmation":"C0","id":"T-201","kind":"lower-bound","verification":"V0"}],
         "registered_reported": {"basis":"exact-form","decimal":"6.718000000000","exact":"3359/500","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.332835192866","sources":[{"evidence":["E-n040-guzhou-new-supports-report"],"n":40,"proved_by":["Guzhou0806"],"results":["T-157"],"via":"direct"}]},
         "registered_verified": {"basis":"exact-form","decimal":"6.718000000000","exact":"3359/500","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.332835192866","sources":[{"evidence":["E-n040-guzhou-new-supports-kernel-replay"],"n":40,"results":["T-157"],"via":"direct"}]}
       },
@@ -1509,7 +1509,7 @@
         "chelokot_lean": null,
         "karakus_explicit_bound": {"basis":"karakus-6.1","decimal":"6.437171043518","exact":"1/2 + (1/2)*sqrt(141)","reaches_nagamochi":false,"shortfall_below_nagamochi":"0.040054531532"},
         "karakus_k2_minus_1": null,
-        "other_registered_results_at_n": [{"confirmation":"C3","id":"T-044","kind":"lower-bound","verification":"V3"},{"confirmation":"C0","id":"T-046","kind":"lower-bound","verification":"V0"},{"confirmation":"C3","id":"T-068","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-070","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-074","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-083","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-085","kind":"correction","verification":"V3"},{"confirmation":"C3","id":"T-111","kind":"lower-bound","verification":"V3"}],
+        "other_registered_results_at_n": [{"confirmation":"C3","id":"T-044","kind":"lower-bound","verification":"V3"},{"confirmation":"C0","id":"T-046","kind":"lower-bound","verification":"V0"},{"confirmation":"C3","id":"T-068","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-070","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-074","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-083","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-085","kind":"correction","verification":"V3"},{"confirmation":"C3","id":"T-111","kind":"lower-bound","verification":"V3"},{"confirmation":"C0","id":"T-202","kind":"lower-bound","verification":"V0"}],
         "registered_reported": {"basis":"exact-form","decimal":"6.775000000000","exact":"271/40","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.297774424949","sources":[{"evidence":["E-n041-wand125-mixed-6775-report"],"n":41,"proved_by":["Hosono"],"results":["T-111"],"via":"direct"}]},
         "registered_verified": {"basis":"exact-form","decimal":"6.775000000000","exact":"271/40","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.297774424949","sources":[{"evidence":["E-n041-wand125-mixed-6775-sqverify-fast-replay"],"n":41,"results":["T-111"],"via":"direct"}]}
       },
@@ -1563,7 +1563,7 @@
         "chelokot_lean": null,
         "karakus_explicit_bound": {"basis":"karakus-6.1","decimal":"6.603277807866","exact":"1/2 + (1/2)*sqrt(149)","reaches_nagamochi":false,"shortfall_below_nagamochi":"0.053576441625"},
         "karakus_k2_minus_1": null,
-        "other_registered_results_at_n": [{"confirmation":"C0","id":"T-046","kind":"lower-bound","verification":"V0"},{"confirmation":"C3","id":"T-068","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-070","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-074","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-083","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-085","kind":"correction","verification":"V3"},{"confirmation":"C3","id":"T-090","kind":"lower-bound","verification":"V3"}],
+        "other_registered_results_at_n": [{"confirmation":"C0","id":"T-046","kind":"lower-bound","verification":"V0"},{"confirmation":"C3","id":"T-068","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-070","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-074","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-083","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-085","kind":"correction","verification":"V3"},{"confirmation":"C3","id":"T-090","kind":"lower-bound","verification":"V3"},{"confirmation":"C0","id":"T-203","kind":"lower-bound","verification":"V0"}],
         "registered_reported": {"basis":"exact-form","decimal":"6.907500000000","exact":"2763/400","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.250645750508","sources":[{"evidence":["E-n043-wand125-mixed-69075-report"],"n":43,"proved_by":["Hosono"],"results":["T-090"],"via":"direct"}]},
         "registered_verified": {"basis":"exact-form","decimal":"6.907500000000","exact":"2763/400","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.250645750508","sources":[{"evidence":["E-n043-wand125-mixed-69075-sqverify-fast-replay"],"n":43,"results":["T-090"],"via":"direct"}]}
       },
@@ -1803,7 +1803,7 @@
         "chelokot_lean": null,
         "karakus_explicit_bound": {"basis":"karakus-6.1","decimal":"7.152067347825","exact":"1/2 + (1/2)*sqrt(177)","reaches_nagamochi":false,"shortfall_below_nagamochi":"0.012346655143"},
         "karakus_k2_minus_1": null,
-        "other_registered_results_at_n": [{"confirmation":"C0","id":"T-046","kind":"lower-bound","verification":"V0"},{"confirmation":"C3","id":"T-048","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-070","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-082","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-083","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-085","kind":"correction","verification":"V3"},{"confirmation":"C3","id":"T-090","kind":"lower-bound","verification":"V3"},{"confirmation":"C1","id":"T-180","kind":"lower-bound","verification":"V0"}],
+        "other_registered_results_at_n": [{"confirmation":"C0","id":"T-046","kind":"lower-bound","verification":"V0"},{"confirmation":"C3","id":"T-048","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-070","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-082","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-083","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-085","kind":"correction","verification":"V3"},{"confirmation":"C3","id":"T-090","kind":"lower-bound","verification":"V3"},{"confirmation":"C1","id":"T-180","kind":"lower-bound","verification":"V0"},{"confirmation":"C0","id":"T-204","kind":"lower-bound","verification":"V0"}],
         "registered_reported": {"basis":"exact-form","decimal":"7.470000000000","exact":"747/100","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.305585997032","sources":[{"evidence":["E-n051-wand125-mixed-747-report"],"n":51,"proved_by":["Hosono"],"results":["T-090"],"via":"direct"}]},
         "registered_verified": {"basis":"exact-form","decimal":"7.470000000000","exact":"747/100","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.305585997032","sources":[{"evidence":["E-n051-wand125-mixed-747-sqverify-fast-replay"],"n":51,"results":["T-090"],"via":"direct"}]}
       },
@@ -2252,8 +2252,8 @@
       "family": null,
       "n": 68,
       "nagamochi": {"basis":"nagamochi-theorem-2","decimal":"8.280109889280","exact":"1 + sqrt(53)","exact_case":false},
-      "operative_lower_bound": {"cites_t007":false,"evidence":["E-wand125-rectangle-2026-10-01-source-replay"],"exact_form":"851/100","results":["T-074"],"t007_scope_covers_n":true,"value":"8.51"},
-      "reported_lower_bound": {"cites_t007":false,"evidence":["E-wand125-rectangle-2026-10-01-report"],"value":"8.51"},
+      "operative_lower_bound": {"cites_t007":false,"evidence":["E-wand125-fine-net-n68-853-sqverify-fast-replay"],"exact_form":"853/100","results":["T-205"],"t007_scope_covers_n":true,"value":"8.53"},
+      "reported_lower_bound": {"cites_t007":false,"evidence":["E-wand125-fine-net-n68-853-report"],"value":"8.53"},
       "reported_status": "open",
       "status": "open",
       "support": {
@@ -2262,9 +2262,9 @@
         "chelokot_lean": null,
         "karakus_explicit_bound": {"basis":"karakus-6.1","decimal":"8.262087348130","exact":"1/2 + (1/2)*sqrt(241)","reaches_nagamochi":false,"shortfall_below_nagamochi":"0.018022541150"},
         "karakus_k2_minus_1": null,
-        "other_registered_results_at_n": [{"confirmation":"C3","id":"T-044","kind":"lower-bound","verification":"V3"},{"confirmation":"C0","id":"T-046","kind":"lower-bound","verification":"V0"},{"confirmation":"C3","id":"T-068","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-070","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-074","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-083","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-085","kind":"correction","verification":"V3"},{"confirmation":"C1","id":"T-180","kind":"lower-bound","verification":"V0"}],
-        "registered_reported": {"basis":"exact-form","decimal":"8.510000000000","exact":"851/100","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.229890110720","sources":[{"evidence":["E-wand125-rectangle-2026-10-01-report"],"n":68,"proved_by":["Hosono"],"results":["T-068"],"via":"direct"}]},
-        "registered_verified": {"basis":"exact-form","decimal":"8.510000000000","exact":"851/100","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.229890110720","sources":[{"evidence":["E-wand125-rectangle-2026-10-01-source-replay"],"n":68,"results":["T-074"],"via":"direct"}]}
+        "other_registered_results_at_n": [{"confirmation":"C3","id":"T-044","kind":"lower-bound","verification":"V3"},{"confirmation":"C0","id":"T-046","kind":"lower-bound","verification":"V0"},{"confirmation":"C3","id":"T-068","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-070","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-074","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-083","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-085","kind":"correction","verification":"V3"},{"confirmation":"C1","id":"T-180","kind":"lower-bound","verification":"V0"},{"confirmation":"C3","id":"T-205","kind":"lower-bound","verification":"V3"}],
+        "registered_reported": {"basis":"exact-form","decimal":"8.530000000000","exact":"853/100","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.249890110720","sources":[{"evidence":["E-wand125-fine-net-n68-853-report"],"n":68,"proved_by":["Hosono"],"results":["T-205"],"via":"direct"}]},
+        "registered_verified": {"basis":"exact-form","decimal":"8.530000000000","exact":"853/100","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.249890110720","sources":[{"evidence":["E-wand125-fine-net-n68-853-sqverify-fast-replay"],"n":68,"results":["T-205"],"via":"direct"}]}
       },
       "weakened_to": null,
       "weakened_to_without_karakus": null
@@ -2684,8 +2684,8 @@
       "family": null,
       "n": 84,
       "nagamochi": {"basis":"nagamochi-theorem-2","decimal":"9.185352771872","exact":"1 + sqrt(67)","exact_case":false},
-      "operative_lower_bound": {"cites_t007":false,"evidence":["E-n084-wand125-mixed-9411-sqverify-fast-replay"],"exact_form":"9411/1000","results":["T-094"],"t007_scope_covers_n":true,"value":"9.411"},
-      "reported_lower_bound": {"cites_t007":false,"evidence":["E-n084-wand125-mixed-9411-report"],"value":"9.411"},
+      "operative_lower_bound": {"cites_t007":false,"evidence":["E-wand125-fine-net-n84-94225-sqverify-fast-replay"],"exact_form":"3769/400","results":["T-206"],"t007_scope_covers_n":true,"value":"9.4225"},
+      "reported_lower_bound": {"cites_t007":false,"evidence":["E-wand125-fine-net-n84-94225-report"],"value":"9.4225"},
       "reported_status": "open",
       "status": "open",
       "support": {
@@ -2694,9 +2694,9 @@
         "chelokot_lean": null,
         "karakus_explicit_bound": {"basis":"karakus-6.1","decimal":"9.174675786448","exact":"1/2 + (1/2)*sqrt(301)","reaches_nagamochi":false,"shortfall_below_nagamochi":"0.010676985423"},
         "karakus_k2_minus_1": null,
-        "other_registered_results_at_n": [{"confirmation":"C3","id":"T-071","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-083","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-085","kind":"correction","verification":"V3"},{"confirmation":"C3","id":"T-090","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-094","kind":"lower-bound","verification":"V3"},{"confirmation":"C1","id":"T-180","kind":"lower-bound","verification":"V0"}],
-        "registered_reported": {"basis":"exact-form","decimal":"9.411000000000","exact":"9411/1000","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.225647228128","sources":[{"evidence":["E-n084-wand125-mixed-9411-report"],"n":84,"proved_by":["Hosono"],"results":["T-094"],"via":"direct"}]},
-        "registered_verified": {"basis":"exact-form","decimal":"9.411000000000","exact":"9411/1000","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.225647228128","sources":[{"evidence":["E-n084-wand125-mixed-9411-sqverify-fast-replay"],"n":84,"results":["T-094"],"via":"direct"}]}
+        "other_registered_results_at_n": [{"confirmation":"C3","id":"T-071","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-083","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-085","kind":"correction","verification":"V3"},{"confirmation":"C3","id":"T-090","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-094","kind":"lower-bound","verification":"V3"},{"confirmation":"C1","id":"T-180","kind":"lower-bound","verification":"V0"},{"confirmation":"C3","id":"T-206","kind":"lower-bound","verification":"V3"}],
+        "registered_reported": {"basis":"exact-form","decimal":"9.422500000000","exact":"3769/400","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.237147228128","sources":[{"evidence":["E-wand125-fine-net-n84-94225-report"],"n":84,"proved_by":["Hosono"],"results":["T-206"],"via":"direct"}]},
+        "registered_verified": {"basis":"exact-form","decimal":"9.422500000000","exact":"3769/400","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.237147228128","sources":[{"evidence":["E-wand125-fine-net-n84-94225-sqverify-fast-replay"],"n":84,"results":["T-206"],"via":"direct"}]}
       },
       "weakened_to": null,
       "weakened_to_without_karakus": null
@@ -2711,8 +2711,8 @@
       "family": null,
       "n": 85,
       "nagamochi": {"basis":"nagamochi-theorem-2","decimal":"9.246211251235","exact":"1 + 2*sqrt(17)","exact_case":false},
-      "operative_lower_bound": {"cites_t007":false,"evidence":["E-n085-wand125-mixed-946-source-replay","E-n085-wand125-mixed-946-sqverify-fast-replay"],"exact_form":"473/50","results":["T-075"],"t007_scope_covers_n":true,"value":"9.46"},
-      "reported_lower_bound": {"cites_t007":false,"evidence":["E-n085-wand125-mixed-946-report"],"value":"9.46"},
+      "operative_lower_bound": {"cites_t007":false,"evidence":["E-wand125-fine-net-n85-9475-sqverify-fast-replay"],"exact_form":"379/40","results":["T-207"],"t007_scope_covers_n":true,"value":"9.475"},
+      "reported_lower_bound": {"cites_t007":false,"evidence":["E-wand125-fine-net-n85-9475-report"],"value":"9.475"},
       "reported_status": "open",
       "status": "open",
       "support": {
@@ -2721,9 +2721,9 @@
         "chelokot_lean": null,
         "karakus_explicit_bound": {"basis":"karakus-6.1","decimal":"9.232124598286","exact":"1/2 + (1/2)*sqrt(305)","reaches_nagamochi":false,"shortfall_below_nagamochi":"0.014086652948"},
         "karakus_k2_minus_1": null,
-        "other_registered_results_at_n": [{"confirmation":"C3","id":"T-071","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-075","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-083","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-085","kind":"correction","verification":"V3"},{"confirmation":"C1","id":"T-180","kind":"lower-bound","verification":"V0"}],
-        "registered_reported": {"basis":"exact-form","decimal":"9.460000000000","exact":"473/50","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.213788748765","sources":[{"evidence":["E-n085-wand125-mixed-946-report"],"n":85,"proved_by":["Hosono"],"results":["T-075"],"via":"direct"}]},
-        "registered_verified": {"basis":"exact-form","decimal":"9.460000000000","exact":"473/50","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.213788748765","sources":[{"evidence":["E-n085-wand125-mixed-946-source-replay","E-n085-wand125-mixed-946-sqverify-fast-replay"],"n":85,"results":["T-075"],"via":"direct"}]}
+        "other_registered_results_at_n": [{"confirmation":"C3","id":"T-071","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-075","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-083","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-085","kind":"correction","verification":"V3"},{"confirmation":"C1","id":"T-180","kind":"lower-bound","verification":"V0"},{"confirmation":"C3","id":"T-207","kind":"lower-bound","verification":"V3"}],
+        "registered_reported": {"basis":"exact-form","decimal":"9.475000000000","exact":"379/40","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.228788748765","sources":[{"evidence":["E-wand125-fine-net-n85-9475-report"],"n":85,"proved_by":["Hosono"],"results":["T-207"],"via":"direct"}]},
+        "registered_verified": {"basis":"exact-form","decimal":"9.475000000000","exact":"379/40","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.228788748765","sources":[{"evidence":["E-wand125-fine-net-n85-9475-sqverify-fast-replay"],"n":85,"results":["T-207"],"via":"direct"}]}
       },
       "weakened_to": null,
       "weakened_to_without_karakus": null
@@ -2748,7 +2748,7 @@
         "chelokot_lean": null,
         "karakus_explicit_bound": {"basis":"karakus-6.1","decimal":"9.289197915623","exact":"1/2 + (1/2)*sqrt(309)","reaches_nagamochi":false,"shortfall_below_nagamochi":"0.017425947294"},
         "karakus_k2_minus_1": null,
-        "other_registered_results_at_n": [{"confirmation":"C0","id":"T-046","kind":"lower-bound","verification":"V0"},{"confirmation":"C3","id":"T-068","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-070","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-071","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-075","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-082","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-083","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-085","kind":"correction","verification":"V3"},{"confirmation":"C3","id":"T-090","kind":"lower-bound","verification":"V3"},{"confirmation":"C1","id":"T-180","kind":"lower-bound","verification":"V0"}],
+        "other_registered_results_at_n": [{"confirmation":"C0","id":"T-046","kind":"lower-bound","verification":"V0"},{"confirmation":"C3","id":"T-068","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-070","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-071","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-075","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-082","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-083","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-085","kind":"correction","verification":"V3"},{"confirmation":"C3","id":"T-090","kind":"lower-bound","verification":"V3"},{"confirmation":"C1","id":"T-180","kind":"lower-bound","verification":"V0"},{"confirmation":"C0","id":"T-208","kind":"lower-bound","verification":"V0"}],
         "registered_reported": {"basis":"exact-form","decimal":"9.503000000000","exact":"9503/1000","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.196376137082","sources":[{"evidence":["E-n086-wand125-mixed-9503-report"],"n":86,"proved_by":["Hosono"],"results":["T-090"],"via":"direct"}]},
         "registered_verified": {"basis":"exact-form","decimal":"9.503000000000","exact":"9503/1000","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.196376137082","sources":[{"evidence":["E-n086-wand125-mixed-9503-sqverify-fast-replay"],"n":86,"results":["T-090"],"via":"direct"}]}
       },
@@ -2802,7 +2802,7 @@
         "chelokot_lean": null,
         "karakus_explicit_bound": {"basis":"karakus-6.1","decimal":"9.402246907382","exact":"1/2 + (1/2)*sqrt(317)","reaches_nagamochi":false,"shortfall_below_nagamochi":"0.023902865793"},
         "karakus_k2_minus_1": null,
-        "other_registered_results_at_n": [{"confirmation":"C0","id":"T-046","kind":"lower-bound","verification":"V0"},{"confirmation":"C3","id":"T-068","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-074","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-075","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-082","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-083","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-085","kind":"correction","verification":"V3"},{"confirmation":"C3","id":"T-090","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-091","kind":"lower-bound","verification":"V3"},{"confirmation":"C1","id":"T-180","kind":"lower-bound","verification":"V0"}],
+        "other_registered_results_at_n": [{"confirmation":"C0","id":"T-046","kind":"lower-bound","verification":"V0"},{"confirmation":"C3","id":"T-068","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-074","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-075","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-082","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-083","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-085","kind":"correction","verification":"V3"},{"confirmation":"C3","id":"T-090","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-091","kind":"lower-bound","verification":"V3"},{"confirmation":"C1","id":"T-180","kind":"lower-bound","verification":"V0"},{"confirmation":"C0","id":"T-209","kind":"lower-bound","verification":"V0"}],
         "registered_reported": {"basis":"exact-form","decimal":"9.620000000000","exact":"481/50","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.193850226824","sources":[{"evidence":["E-n088-wand125-mixed-962-report"],"n":88,"proved_by":["Hosono"],"results":["T-091"],"via":"direct"}]},
         "registered_verified": {"basis":"exact-form","decimal":"9.620000000000","exact":"481/50","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.193850226824","sources":[{"evidence":["E-n088-wand125-mixed-962-sqverify-fast-replay"],"n":88,"results":["T-091"],"via":"direct"}]}
       },
@@ -2829,7 +2829,7 @@
         "chelokot_lean": null,
         "karakus_explicit_bound": {"basis":"karakus-6.1","decimal":"9.458236433584","exact":"1/2 + (1/2)*sqrt(321)","reaches_nagamochi":false,"shortfall_below_nagamochi":"0.027044940654"},
         "karakus_k2_minus_1": null,
-        "other_registered_results_at_n": [{"confirmation":"C0","id":"T-046","kind":"lower-bound","verification":"V0"},{"confirmation":"C3","id":"T-068","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-074","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-082","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-083","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-085","kind":"correction","verification":"V3"},{"confirmation":"C3","id":"T-091","kind":"lower-bound","verification":"V3"},{"confirmation":"C1","id":"T-180","kind":"lower-bound","verification":"V0"}],
+        "other_registered_results_at_n": [{"confirmation":"C0","id":"T-046","kind":"lower-bound","verification":"V0"},{"confirmation":"C3","id":"T-068","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-074","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-082","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-083","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-085","kind":"correction","verification":"V3"},{"confirmation":"C3","id":"T-091","kind":"lower-bound","verification":"V3"},{"confirmation":"C1","id":"T-180","kind":"lower-bound","verification":"V0"},{"confirmation":"C0","id":"T-210","kind":"lower-bound","verification":"V0"}],
         "registered_reported": {"basis":"exact-form","decimal":"9.650000000000","exact":"193/20","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.164718625762","sources":[{"evidence":["E-n089-wand125-mixed-965-report"],"n":89,"proved_by":["Hosono"],"results":["T-082"],"via":"direct"}]},
         "registered_verified": {"basis":"exact-form","decimal":"9.650000000000","exact":"193/20","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.164718625762","sources":[{"evidence":["E-n089-wand125-mixed-965-sqverify-fast-replay"],"n":89,"results":["T-082"],"via":"direct"}]}
       },
@@ -2856,7 +2856,7 @@
         "chelokot_lean": null,
         "karakus_explicit_bound": {"basis":"karakus-6.1","decimal":"9.513878188659","exact":"1/2 + (5/2)*sqrt(13)","reaches_nagamochi":false,"shortfall_below_nagamochi":"0.030125556657"},
         "karakus_k2_minus_1": null,
-        "other_registered_results_at_n": [{"confirmation":"C0","id":"T-046","kind":"lower-bound","verification":"V0"},{"confirmation":"C3","id":"T-068","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-069","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-082","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-083","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-085","kind":"correction","verification":"V3"},{"confirmation":"C3","id":"T-091","kind":"lower-bound","verification":"V3"},{"confirmation":"C1","id":"T-180","kind":"lower-bound","verification":"V0"}],
+        "other_registered_results_at_n": [{"confirmation":"C0","id":"T-046","kind":"lower-bound","verification":"V0"},{"confirmation":"C3","id":"T-068","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-069","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-082","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-083","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-085","kind":"correction","verification":"V3"},{"confirmation":"C3","id":"T-091","kind":"lower-bound","verification":"V3"},{"confirmation":"C1","id":"T-180","kind":"lower-bound","verification":"V0"},{"confirmation":"C0","id":"T-212","kind":"lower-bound","verification":"V0"}],
         "registered_reported": {"basis":"exact-form","decimal":"9.730000000000","exact":"973/100","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.185996254683","sources":[{"evidence":["E-n090-wand125-mixed-973-report"],"n":90,"proved_by":["Hosono"],"results":["T-091"],"via":"direct"}]},
         "registered_verified": {"basis":"exact-form","decimal":"9.730000000000","exact":"973/100","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.185996254683","sources":[{"evidence":["E-n090-wand125-mixed-973-sqverify-fast-replay"],"n":90,"results":["T-091"],"via":"direct"}]}
       },
@@ -2883,7 +2883,7 @@
         "chelokot_lean": null,
         "karakus_explicit_bound": {"basis":"karakus-6.1","decimal":"9.569178573608","exact":"1/2 + (1/2)*sqrt(329)","reaches_nagamochi":false,"shortfall_below_nagamochi":"0.033146693434"},
         "karakus_k2_minus_1": null,
-        "other_registered_results_at_n": [{"confirmation":"C0","id":"T-046","kind":"lower-bound","verification":"V0"},{"confirmation":"C3","id":"T-075","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-082","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-083","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-085","kind":"correction","verification":"V3"},{"confirmation":"C3","id":"T-091","kind":"lower-bound","verification":"V3"},{"confirmation":"C1","id":"T-180","kind":"lower-bound","verification":"V0"}],
+        "other_registered_results_at_n": [{"confirmation":"C0","id":"T-046","kind":"lower-bound","verification":"V0"},{"confirmation":"C3","id":"T-075","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-082","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-083","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-085","kind":"correction","verification":"V3"},{"confirmation":"C3","id":"T-091","kind":"lower-bound","verification":"V3"},{"confirmation":"C1","id":"T-180","kind":"lower-bound","verification":"V0"},{"confirmation":"C0","id":"T-211","kind":"lower-bound","verification":"V0"}],
         "registered_reported": {"basis":"exact-form","decimal":"9.762500000000","exact":"781/80","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.160174732958","sources":[{"evidence":["E-n091-wand125-mixed-97625-report"],"n":91,"proved_by":["Hosono"],"results":["T-091"],"via":"direct"}]},
         "registered_verified": {"basis":"exact-form","decimal":"9.762500000000","exact":"781/80","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.160174732958","sources":[{"evidence":["E-n091-wand125-mixed-97625-sqverify-fast-replay"],"n":91,"results":["T-091"],"via":"direct"}]}
       },
@@ -2910,7 +2910,7 @@
         "chelokot_lean": null,
         "karakus_explicit_bound": {"basis":"karakus-6.1","decimal":"9.624143795447","exact":"1/2 + (3/2)*sqrt(37)","reaches_nagamochi":false,"shortfall_below_nagamochi":"0.036110242397"},
         "karakus_k2_minus_1": null,
-        "other_registered_results_at_n": [{"confirmation":"C3","id":"T-069","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-075","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-082","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-083","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-085","kind":"correction","verification":"V3"},{"confirmation":"C3","id":"T-091","kind":"lower-bound","verification":"V3"},{"confirmation":"C1","id":"T-180","kind":"lower-bound","verification":"V0"}],
+        "other_registered_results_at_n": [{"confirmation":"C3","id":"T-069","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-075","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-082","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-083","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-085","kind":"correction","verification":"V3"},{"confirmation":"C3","id":"T-091","kind":"lower-bound","verification":"V3"},{"confirmation":"C1","id":"T-180","kind":"lower-bound","verification":"V0"},{"confirmation":"C0","id":"T-213","kind":"lower-bound","verification":"V0"}],
         "registered_reported": {"basis":"exact-form","decimal":"9.770000000000","exact":"977/100","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.109745962156","sources":[{"evidence":["E-n092-wand125-mixed-977-report"],"n":92,"proved_by":["Hosono"],"results":["T-082"],"via":"direct"}]},
         "registered_verified": {"basis":"exact-form","decimal":"9.770000000000","exact":"977/100","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.109745962156","sources":[{"evidence":["E-n092-wand125-mixed-977-sqverify-fast-replay"],"n":92,"results":["T-082"],"via":"direct"}]}
       },
@@ -3288,7 +3288,7 @@
         "chelokot_lean": null,
         "karakus_explicit_bound": {"basis":"karakus-6.1","decimal":"10.310708435174","exact":"1/2 + (1/2)*sqrt(385)","reaches_nagamochi":false,"shortfall_below_nagamochi":"0.016670617914"},
         "karakus_k2_minus_1": null,
-        "other_registered_results_at_n": [{"confirmation":"C3","id":"T-083","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-085","kind":"correction","verification":"V3"},{"confirmation":"C1","id":"T-180","kind":"lower-bound","verification":"V0"}],
+        "other_registered_results_at_n": [{"confirmation":"C3","id":"T-083","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-085","kind":"correction","verification":"V3"},{"confirmation":"C1","id":"T-180","kind":"lower-bound","verification":"V0"},{"confirmation":"C0","id":"T-214","kind":"lower-bound","verification":"V0"}],
         "registered_reported": {"basis":"exact-form","decimal":"10.403976649170","exact":"2080795329834173620806287405069/200000000000000000000000000000","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.076597596083","sources":[{"evidence":["E-wand125-closed-form-report"],"n":106,"proved_by":["Hosono"],"results":["T-180"],"via":"direct"}]},
         "registered_verified": {"basis":"exact-form","decimal":"10.310708435174","exact":"1/2 + (1/2)*sqrt(385)","reaches_nagamochi":false,"shortfall_below_nagamochi":"0.016670617914","sources":[{"evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"n":106,"results":["T-083"],"via":"direct"}]}
       },
@@ -3315,7 +3315,7 @@
         "chelokot_lean": null,
         "karakus_explicit_bound": {"basis":"karakus-6.1","decimal":"10.361541461658","exact":"1/2 + (1/2)*sqrt(389)","reaches_nagamochi":false,"shortfall_below_nagamochi":"0.019290057988"},
         "karakus_k2_minus_1": null,
-        "other_registered_results_at_n": [{"confirmation":"C3","id":"T-083","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-085","kind":"correction","verification":"V3"},{"confirmation":"C1","id":"T-180","kind":"lower-bound","verification":"V0"}],
+        "other_registered_results_at_n": [{"confirmation":"C3","id":"T-083","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-085","kind":"correction","verification":"V3"},{"confirmation":"C1","id":"T-180","kind":"lower-bound","verification":"V0"},{"confirmation":"C0","id":"T-215","kind":"lower-bound","verification":"V0"}],
         "registered_reported": {"basis":"exact-form","decimal":"10.436790394042","exact":"10436790394042294133351177850473/1000000000000000000000000000000","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.055958874396","sources":[{"evidence":["E-wand125-closed-form-report"],"n":107,"proved_by":["Hosono"],"results":["T-180"],"via":"direct"}]},
         "registered_verified": {"basis":"exact-form","decimal":"10.361541461658","exact":"1/2 + (1/2)*sqrt(389)","reaches_nagamochi":false,"shortfall_below_nagamochi":"0.019290057988","sources":[{"evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"n":107,"results":["T-083"],"via":"direct"}]}
       },
@@ -3332,8 +3332,8 @@
       "family": null,
       "n": 108,
       "nagamochi": {"basis":"nagamochi-theorem-2","decimal":"10.433981132056","exact":"1 + sqrt(89)","exact_case":false},
-      "operative_lower_bound": {"cites_t007":false,"evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"exact_form":"1/2 + sqrt(108 - floor(sqrt(108)) + 1/4)","results":["T-083"],"t007_scope_covers_n":true,"value":"10.4121138007"},
-      "reported_lower_bound": {"cites_t007":false,"evidence":["E-wand125-closed-form-report"],"value":"10.484093855851"},
+      "operative_lower_bound": {"cites_t007":false,"evidence":["E-wand125-fine-net-n108-1062-sqverify-fast-replay"],"exact_form":"531/50","results":["T-216"],"t007_scope_covers_n":true,"value":"10.62"},
+      "reported_lower_bound": {"cites_t007":false,"evidence":["E-wand125-fine-net-n108-1062-report"],"value":"10.62"},
       "reported_status": "open",
       "status": "open",
       "support": {
@@ -3342,9 +3342,9 @@
         "chelokot_lean": null,
         "karakus_explicit_bound": {"basis":"karakus-6.1","decimal":"10.412113800799","exact":"1/2 + (1/2)*sqrt(393)","reaches_nagamochi":false,"shortfall_below_nagamochi":"0.021867331257"},
         "karakus_k2_minus_1": null,
-        "other_registered_results_at_n": [{"confirmation":"C3","id":"T-083","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-085","kind":"correction","verification":"V3"},{"confirmation":"C1","id":"T-180","kind":"lower-bound","verification":"V0"}],
-        "registered_reported": {"basis":"exact-form","decimal":"10.484093855851","exact":"10484093855851092636476980027521/1000000000000000000000000000000","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.050112723795","sources":[{"evidence":["E-wand125-closed-form-report"],"n":108,"proved_by":["Hosono"],"results":["T-180"],"via":"direct"}]},
-        "registered_verified": {"basis":"exact-form","decimal":"10.412113800799","exact":"1/2 + (1/2)*sqrt(393)","reaches_nagamochi":false,"shortfall_below_nagamochi":"0.021867331257","sources":[{"evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"n":108,"results":["T-083"],"via":"direct"}]}
+        "other_registered_results_at_n": [{"confirmation":"C3","id":"T-083","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-085","kind":"correction","verification":"V3"},{"confirmation":"C1","id":"T-180","kind":"lower-bound","verification":"V0"},{"confirmation":"C3","id":"T-216","kind":"lower-bound","verification":"V3"}],
+        "registered_reported": {"basis":"exact-form","decimal":"10.620000000000","exact":"531/50","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.186018867944","sources":[{"evidence":["E-wand125-fine-net-n108-1062-report"],"n":108,"proved_by":["Hosono"],"results":["T-216"],"via":"direct"}]},
+        "registered_verified": {"basis":"exact-form","decimal":"10.620000000000","exact":"531/50","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.186018867944","sources":[{"evidence":["E-wand125-fine-net-n108-1062-sqverify-fast-replay"],"n":108,"results":["T-216"],"via":"direct"}]}
       },
       "weakened_to": null,
       "weakened_to_without_karakus": null
@@ -3370,8 +3370,8 @@
         "karakus_explicit_bound": {"basis":"karakus-6.1","decimal":"10.462429422585","exact":"1/2 + (1/2)*sqrt(397)","reaches_nagamochi":false,"shortfall_below_nagamochi":"0.024403557919"},
         "karakus_k2_minus_1": null,
         "other_registered_results_at_n": [{"confirmation":"C3","id":"T-083","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-085","kind":"correction","verification":"V3"},{"confirmation":"C1","id":"T-180","kind":"lower-bound","verification":"V0"}],
-        "registered_reported": {"basis":"exact-form","decimal":"10.551290369783","exact":"10551290369783276731887101171077/1000000000000000000000000000000","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.064457389279","sources":[{"evidence":["E-wand125-closed-form-report"],"n":109,"proved_by":["Hosono"],"results":["T-180"],"via":"direct"}]},
-        "registered_verified": {"basis":"exact-form","decimal":"10.462429422585","exact":"1/2 + (1/2)*sqrt(397)","reaches_nagamochi":false,"shortfall_below_nagamochi":"0.024403557919","sources":[{"evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"n":109,"results":["T-083"],"via":"direct"}]}
+        "registered_reported": {"basis":"exact-form","decimal":"10.620000000000","exact":"531/50","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.133167019495","sources":[{"evidence":["E-wand125-fine-net-n108-1062-report"],"n":108,"proved_by":["Hosono"],"results":["T-216"],"via":"monotonicity"}]},
+        "registered_verified": {"basis":"exact-form","decimal":"10.620000000000","exact":"531/50","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.133167019495","sources":[{"evidence":["E-wand125-fine-net-n108-1062-sqverify-fast-replay"],"n":108,"results":["T-216"],"via":"monotonicity"}]}
       },
       "weakened_to": null,
       "weakened_to_without_karakus": null
@@ -3396,9 +3396,9 @@
         "chelokot_lean": null,
         "karakus_explicit_bound": {"basis":"karakus-6.1","decimal":"10.512492197250","exact":"1/2 + (1/2)*sqrt(401)","reaches_nagamochi":false,"shortfall_below_nagamochi":"0.026899816919"},
         "karakus_k2_minus_1": null,
-        "other_registered_results_at_n": [{"confirmation":"C3","id":"T-083","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-085","kind":"correction","verification":"V3"},{"confirmation":"C1","id":"T-180","kind":"lower-bound","verification":"V0"}],
-        "registered_reported": {"basis":"exact-form","decimal":"10.600000000000","exact":"53/5","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.060607985831","sources":[{"evidence":["E-wand125-closed-form-report"],"n":110,"proved_by":["Hosono"],"results":["T-180"],"via":"direct"}]},
-        "registered_verified": {"basis":"exact-form","decimal":"10.512492197250","exact":"1/2 + (1/2)*sqrt(401)","reaches_nagamochi":false,"shortfall_below_nagamochi":"0.026899816919","sources":[{"evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"n":110,"results":["T-083"],"via":"direct"}]}
+        "other_registered_results_at_n": [{"confirmation":"C3","id":"T-083","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-085","kind":"correction","verification":"V3"},{"confirmation":"C1","id":"T-180","kind":"lower-bound","verification":"V0"},{"confirmation":"C0","id":"T-217","kind":"lower-bound","verification":"V0"}],
+        "registered_reported": {"basis":"exact-form","decimal":"10.620000000000","exact":"531/50","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.080607985831","sources":[{"evidence":["E-wand125-fine-net-n108-1062-report"],"n":108,"proved_by":["Hosono"],"results":["T-216"],"via":"monotonicity"}]},
+        "registered_verified": {"basis":"exact-form","decimal":"10.620000000000","exact":"531/50","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.080607985831","sources":[{"evidence":["E-wand125-fine-net-n108-1062-sqverify-fast-replay"],"n":108,"results":["T-216"],"via":"monotonicity"}]}
       },
       "weakened_to": null,
       "weakened_to_without_karakus": null
@@ -3425,7 +3425,7 @@
         "karakus_k2_minus_1": null,
         "other_registered_results_at_n": [{"confirmation":"C3","id":"T-083","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-085","kind":"correction","verification":"V3"},{"confirmation":"C1","id":"T-180","kind":"lower-bound","verification":"V0"}],
         "registered_reported": {"basis":"exact-form","decimal":"10.654002473631","exact":"5327001236815844266560826260851/500000000000000000000000000000","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.062339427007","sources":[{"evidence":["E-wand125-closed-form-report"],"n":111,"proved_by":["Hosono"],"results":["T-180"],"via":"direct"}]},
-        "registered_verified": {"basis":"exact-form","decimal":"10.562305898749","exact":"1/2 + (9/2)*sqrt(5)","reaches_nagamochi":false,"shortfall_below_nagamochi":"0.029357147876","sources":[{"evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"n":111,"results":["T-083"],"via":"direct"}]}
+        "registered_verified": {"basis":"exact-form","decimal":"10.620000000000","exact":"531/50","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.028336953375","sources":[{"evidence":["E-wand125-fine-net-n108-1062-sqverify-fast-replay"],"n":108,"results":["T-216"],"via":"monotonicity"}]}
       },
       "weakened_to": null,
       "weakened_to_without_karakus": null
@@ -3452,7 +3452,7 @@
         "karakus_k2_minus_1": null,
         "other_registered_results_at_n": [{"confirmation":"C3","id":"T-083","kind":"lower-bound","verification":"V3"},{"confirmation":"C3","id":"T-085","kind":"correction","verification":"V3"},{"confirmation":"C1","id":"T-180","kind":"lower-bound","verification":"V0"}],
         "registered_reported": {"basis":"exact-form","decimal":"10.711734195583","exact":"10711734195583848963001119512527/1000000000000000000000000000000","reaches_nagamochi":true,"shortfall_below_nagamochi":"-0.068083434591","sources":[{"evidence":["E-wand125-closed-form-report"],"n":112,"proved_by":["Hosono"],"results":["T-180"],"via":"direct"}]},
-        "registered_verified": {"basis":"exact-form","decimal":"10.611874208078","exact":"1/2 + (1/2)*sqrt(409)","reaches_nagamochi":false,"shortfall_below_nagamochi":"0.031776552914","sources":[{"evidence":["E-karakus-strip-lower","E-karakus-strip-measure-interval"],"n":112,"results":["T-083"],"via":"direct"}]}
+        "registered_verified": {"basis":"exact-form","decimal":"10.620000000000","exact":"531/50","reaches_nagamochi":false,"shortfall_below_nagamochi":"0.023650760992","sources":[{"evidence":["E-wand125-fine-net-n108-1062-sqverify-fast-replay"],"n":108,"results":["T-216"],"via":"monotonicity"}]}
       },
       "weakened_to": null,
       "weakened_to_without_karakus": null

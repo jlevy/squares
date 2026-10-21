@@ -85,6 +85,19 @@ def _result(overview: overview_data.Overview, result_id: str) -> overview_data.R
     return next(result for result in overview.results if result.id == result_id)
 
 
+def test_formal_source_execution_links_remain_visible_beside_low_confirmation(
+    overview: overview_data.Overview,
+) -> None:
+    result = _result(overview, "T-154")
+    body = result_overview.links_section(result, overview, [17])
+    assert "source build receipt" in body
+    assert "verification/clean-build-receipt.json" in body
+    assert "verification/Square17Optimality.log.gz" in body
+    assert result.record["verification"] == "V3"
+    assert result.record["confirmation"] == "C1"
+    assert "E-n017-fitzharding-lean-source-build" in body
+
+
 def test_every_register_result_has_an_overview(bodies: dict[str, str]) -> None:
     register = safe_load(overview_data.RESULTS.read_text(encoding="utf-8"))["results"]
     assert set(bodies) == {record["id"] for record in register}
@@ -96,6 +109,23 @@ def test_every_register_result_has_an_overview(bodies: dict[str, str]) -> None:
         # The body is placed in a Markdown HTML block, which a blank line would end.
         assert "\n\n" not in body, result_id
         assert not re.search(r"\{\{[A-Z_]+\}\}", body), result_id
+
+
+def test_the_expanded_adoption_result_fits_its_page_budget(
+    overview: overview_data.Overview,
+) -> None:
+    """T-174's adopted houses and drawings stay within the result-page payload budget."""
+    result = _result(overview, "T-174")
+    cases = result_overview.scope(result)
+    parts = {
+        "head": result_overview.head(result, cases),
+        "cases": result_overview.case_section(result, overview, cases),
+        "chain": result_overview.chain_section(result, overview, cases),
+        "links": result_overview.links_section(result, overview, cases),
+    }
+    sizes = {name: len(part.encode("utf-8")) for name, part in parts.items()}
+    (page,) = render_overview.iter_result_fragments(result_ids=frozenset({result.id}))
+    assert len(page.html.encode("utf-8")) <= site_urls.PAGE_BUDGETS["result"], sizes
 
 
 @pytest.mark.parametrize("result_id", [SETTLED, EARLIER, BROAD])
@@ -191,8 +221,12 @@ def test_the_head_says_whose_packing_each_regularization_is(
         "n = 70: a regularization of T-125\u2019s packing by Daniel (fewest; solved to its"
     )
     head = bodies["T-146"].split("</header>", 1)[0]
-    value = result_overview.prose_html("\n".join(result.regularizations))
+    value = result_overview.regularization_notes(result.regularizations)
     assert f"<dt>Regularizations</dt><dd>{value}</dd>" in head
+    for sentence in result.regularizations:
+        label, detail = sentence.split(": ", 1)
+        assert f"<var>n</var> = {label.removeprefix('n = ')}: " in value
+        assert result_overview.prose_html(detail) in value
     assert head.index("<dt>Next rung</dt>") < head.index("<dt>Regularizations</dt>")
     assert not _result(overview, "T-125").regularizations
     assert "<dt>Regularizations</dt>" not in bodies["T-125"]
@@ -1229,15 +1263,15 @@ def test_the_head_lists_the_counts_the_atlas_draws_its_packing_regularized(
 ) -> None:
     """A result whose packing the atlas draws from a view this project regularized lists
     the register's `regularized_drawings` naming it, after its own regularizations: at
-    n = 68 the axis tool redrew Seth Rehwaldt's refinement (T-118). A result whose packing
+    n = 68 the axis tool redrew PingYou Ltd's refinement (T-174). A result whose packing
     is drawn as retained has no such row."""
-    result = _result(overview, "T-118")
+    result = _result(overview, "T-174")
     assert result.drawings
     assert result.drawings[0].startswith(
-        "n = 68: a regularization of T-118\u2019s packing by Levy"
+        "n = 68: a regularization of T-174\u2019s packing by Levy"
     )
-    head = bodies["T-118"].split("</header>", 1)[0]
-    value = result_overview.prose_html("\n".join(result.drawings))
+    head = bodies["T-174"].split("</header>", 1)[0]
+    value = result_overview.regularization_notes(result.drawings)
     assert f"<dt>Regularized drawings</dt><dd>{value}</dd>" in head
     assert not _result(overview, "T-101").drawings
     assert "<dt>Regularized drawings</dt>" not in bodies["T-101"]

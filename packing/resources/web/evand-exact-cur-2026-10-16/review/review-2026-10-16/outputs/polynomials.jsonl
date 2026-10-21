@@ -1,0 +1,2 @@
+{"file": "n-263.minpoly.json.gz", "n": 263, "squares": 263, "f_degree": 12, "f_irreducible": true, "f_squarefree": true, "f_roots_in_t_interval": 1, "p_degree": 12, "p_factors": [[12, 1]], "p_squarefree": true, "p_roots_in_S_interval": 1, "p_of_S_zero_in_K": true}
+{"file": "n-297.minpoly.json.gz", "n": 297, "squares": 297, "f_degree": 12, "f_irreducible": true, "f_squarefree": true, "f_roots_in_t_interval": 1, "p_degree": 12, "p_factors": [[12, 1]], "p_squarefree": true, "p_roots_in_S_interval": 1, "p_of_S_zero_in_K": true}

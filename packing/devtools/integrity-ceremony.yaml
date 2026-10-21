@@ -25,6 +25,35 @@ mark: '(?i)(?<![a-z])(?:sha\d*s?|(?:hex)?digests?|blake2[bs]?|md5|checksum|hashe
 # file holds no site is refused, so the list cannot outlive the code. The letters cite
 # the audit's inventory.
 allowlist:
+  - path: packing/devtools/audit_fine_net_receipt.py
+    kind: generated-artifact
+    boundary: >-
+      The retained downloaded candidate bytes are joined to the native census,
+      complete direction log and control input identities. Native census and
+      whole-net control receipts must identify the same generated executable.
+      These two comparisons bind runtime inputs and build products across saved
+      recordings, not Git source. The historical source digest remains reported
+      build metadata; current crate source and Git revisions do not gate acceptance.
+  - path: packing/devtools/couzo_678_replay.py
+    kind: download
+    boundary: >-
+      `filtered --pinned` reads issue 678's source manifest.json, which the
+      couzo-issue678-2026-10-18 packet pins by digest and does not retain, from a
+      checkout of franciscouzo/square-packing at 7b6c87e; the file is held to the
+      packet manifest's digest before it is parsed, and each row's stated certificate
+      digest is compared with the one the packet pinned, so the bound it states is bound
+      to the retained bytes. The retained certificates are read from Git and compared
+      with nothing; their custody is acquire_source --check's.
+  - path: packing/devtools/muglich_686_import.py
+    kind: download
+    boundary: >-
+      `derive` reads a local copy of issue 686's attachment,
+      01-squares-100-certificates-and-poses.zip, which no Git revision names: an issue
+      attachment has no commit, and the packet keeps derived facts rather than the
+      archive's bytes. The copy is held to the SHA-256 the issue states and the size
+      triage measured before any member is read. The facts and provenance record it
+      writes are this repository's files, identified by Git and path, and compared with
+      nothing.
   - path: packing/campaign/issue-intake/upper-bounds-20261016/review/exact_sides.py
     kind: download
     boundary: >-

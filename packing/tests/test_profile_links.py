@@ -113,18 +113,23 @@ def test_converted_account_links_keep_native_same_tab_navigation() -> None:
 def test_authored_about_and_explanations_link_reviewed_people_directly() -> None:
     about = render_overview.about_page().html
     narrative = about.split('<h1 id="profiles"', 1)[0]
-    for identifier in (
-        "joshua-levy",
-        "marc-leonard-overbeck",
-        "manasseh-ahmed",
-        "evan-daniel",
-        "oscar-fitzharding",
+    for identifier, full_name in (
+        ("joshua-levy", "Joshua Levy"),
+        ("marc-leonard-overbeck", "Marc Leonard Overbeck"),
+        ("manasseh-ahmed", "Manasseh Ahmed"),
+        ("evan-daniel", "Evan Daniel"),
+        ("oscar-fitzharding", "Oscar Fitzharding"),
     ):
-        assert f'href="profiles/{identifier}.html"' in narrative
+        assert re.search(
+            rf'<a\b[^>]*href="profiles/{identifier}\.html"[^>]*>{re.escape(full_name)}</a>',
+            narrative,
+        )
     assert "site-profile-prose" not in about
     papers = render_overview.papers_page().html
-    assert 'href="profiles/manasseh-ahmed.html"' in papers
-    assert 'href="profiles/marc-leonard-overbeck.html"' in papers
+    assert re.search(r'<a\b[^>]*href="profiles/manasseh-ahmed\.html"[^>]*>Ahmed</a>', papers)
+    assert re.search(
+        r'<a\b[^>]*href="profiles/marc-leonard-overbeck\.html"[^>]*>Overbeck</a>', papers
+    )
     for markup in (about, papers):
         for anchor in re.findall(r'<a\b[^>]*href="profiles/[^" ]+"[^>]*>', markup):
             assert 'target="_blank"' not in anchor
@@ -167,7 +172,6 @@ def test_lower_bound_scope_links_people_without_changing_reviewed_credits() -> N
     case = next(case for case in render_frontier_page.frontier_cases() if case["n"] == 104)
     panel = render_case_pages._lower_panel(case)  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001
     assert '<a href="profiles/hiroaki-hosono.html">Hosono</a>' in panel
-    assert "data-person" in panel
 
 
 def test_surname_labels_use_registry_wide_collisions_and_explicit_order() -> None:

@@ -631,17 +631,18 @@ def test_retained_outside_horizon_packet_has_twenty_complete_source_reports(
     ]
     assert {row["n"]: row["value"] for row in own} == claims
     assert all(row["assurance"] == "reported" for row in own)
-    # Later reports supersede eight of these dated rows, which keep their ffd900d facts:
+    # Later reports supersede nine of these dated rows, which keep their ffd900d facts:
     # 2d32a6e's at n = 375 and 378 on 8 October, issue 506's exact certificates at 338,
     # 339, 376 and 379 on 12 October, evand's composition at 364, reported on 13 October,
-    # and issue 607's precision refinement at 342, reported on 14 October. The other
-    # twelve are still current.
+    # issue 607's precision refinement at 342, reported on 14 October, and issue 686's
+    # certificate at 377, reported on 19 October. The other eleven are still current.
     superseded = {row["n"]: row["superseded_by"] for row in own if "superseded_by" in row}
     assert superseded == {
         **dict.fromkeys((375, 378), "couzo-extended-range-updates-2026-10-08"),
         **dict.fromkeys((338, 339, 376, 379), "couzo-certificates-2026-10-11"),
         364: "evand-compositions-2026-10-13",
         342: "couzo-certificates-2026-10-14",
+        377: "muglich-issue686-2026-10-19",
     }
     assert all(
         row["disposition"]

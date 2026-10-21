@@ -2622,18 +2622,14 @@ ABOVE_U: dict[int, str] = {
     "(question 4's status quo); the owner keeps it (13 October 2026)",
     85: "Evan Daniel's view, 9.1e-31 above a closed-form optimum no rational side reaches "
     "(question 4's status quo); the owner keeps it (13 October 2026)",
-    110: "the axis tool's view at Couzo's decimal side s_W, 2.8e-12 above Evan Daniel's "
-    "exact optimum; the view at U draws fewer shared sides, and the owner keeps it "
-    "(13 October 2026, think-jnso)",
-    297: "the grid-slack view at Couzo's decimal side s_W, 4.5e-12 above Evan Daniel's "
-    "exact optimum; the view at U goes to the owner at row 7, who keeps this one "
-    "(13 October 2026)",
 }
 """Every count the layer draws above its case's verified upper bound `U`, and why it stays
 (think-du42; the owner, 13 October 2026: a valid view is exactly verified "with equal or
 smaller side"): the exceptions policy section 9, question 13 names (#580 review B2), the
-selection layer having redrawn 87, 106, 152, 172, 182, 206, 268 and 301 at `U`, and the
-adoption of 15 October 2026 having moved 241's house to T-182, whose view is drawn at it.
+selection layer having redrawn 87, 106, 152, 172, 182, 206, 268 and 301 at `U`, the
+adoption of 15 October 2026 having moved 241's house to T-182, whose view is drawn at it,
+and the adoption of 17 October 2026 having moved 110's and 297's, where Couzo's decimal
+side was drawn 2.8e-12 and 4.5e-12 above `U`, to T-174, at whose side their views are.
 The list is measured, not chosen: `--check-atlas` fails on a view above `U` at a count not named
 here, and on a count named here once its view is no longer above `U`, so it can only
 shrink on purpose; `tests/test_regularize_select.py` holds the committed layer to it."""

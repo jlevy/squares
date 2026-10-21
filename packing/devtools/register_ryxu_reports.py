@@ -470,6 +470,7 @@ def _register_records() -> None:
                     "id": result,
                     "kind": "upper-bound",
                     "registered": DAY,
+                    "landed": DAY,
                     "headline": headline,
                     "claim": claim,
                     "scope": {"n_values": ns},

@@ -114,6 +114,9 @@ THEME_SCRIPT = BROWSER / "theme.js"
 HEADROOM_SCRIPT = BROWSER / "headroom.js"
 TOOLTIP_SCRIPT = BROWSER / "rating-tooltips.js"
 HOMEPAGE_CSS = BROWSER / "homepage.css"
+#: The results page's own styles: its overview above the table, the last seven days'
+#: registrations and the weekly rollup before them (think-2z22).
+RESULTS_CSS = BROWSER / "results.css"
 #: The frame the site's flattened kpress client modules are placed in.
 KPRESS_CLIENT_FRAME = BROWSER / "kpress-client.js"
 #: kpress's client modules a site page carries, in dependency order: the contents rail's
@@ -536,6 +539,11 @@ RENDER_INPUTS: tuple[Path, ...] = (
     PACKING / "devtools/profile_links.py",
     PACKING / "devtools/site_icons.py",
     PACKING / "devtools/site_resources.py",
+    PACKING / "devtools/site_tallies.py",
+    PACKING / "devtools/github_references.py",
+    # The News label rubric, whose `Short` column a News meter and the archive's S
+    # buttons quote (`render_changelog.news_significance_meanings`).
+    PACKING / "campaign" / "result-import.md",
     PACKING / "devtools/news_highlights.py",
     PACKING / "devtools/build_known_best_atlas.py",
     PACKING / "devtools/atlas_print_font.py",
@@ -1518,7 +1526,7 @@ def about_page() -> Page:
             "Read about its approach and contributors."
         ),
         toc=False,
-        rewrite_body=lambda page: _case_links(_authored_profile_links(page)),
+        rewrite_body=lambda page: _case_links(_authored_profile_links(page, full_names=True)),
         page_scripts=(POPOVER_SCRIPT, NEWS_FORWARD_SCRIPT),
     )
 
@@ -1530,6 +1538,27 @@ def results_page() -> Page:
     overview = overview_data.load()
     values = {
         "EPISTEMICS_URL": "epistemics.html",
+        # The overview above the table, from the same register (think-2z22): the last
+        # seven days' arrivals, a block a day, then the weekly S3+ rollup before them. The
+        # heading's link names the section's own first day, so it lists the section's
+        # results on any day (#514's review A, finding A3); the last day's counts from
+        # the reader's.
+        "RECENT_ADDED": overview_sections.recent_added(overview),
+        "ADDED_LINK": overview_sections.added_link(
+            f"added-since={overview_sections.added_since(overview).isoformat()}"
+        ),
+        "ADDED_LAST_DAY": overview_sections.added_link("added-age=1"),
+        "ADDED_DAYS": overview_sections.ADDED_DAYS_WORD[overview_sections.ADDED_DAYS],
+        "ADDED_DAYS_TITLE": overview_sections.ADDED_DAYS_WORD[
+            overview_sections.ADDED_DAYS
+        ].capitalize(),
+        "ADDED_SPAN": overview_sections.span_label(
+            overview_sections.added_since(overview), overview_sections.added_reference(overview)
+        ),
+        "ADDED_FIRST": overview_sections.day_label(overview_sections.added_since(overview)),
+        "RECENT_ROLLUP": overview_sections.recent_rollup(overview),
+        "ROLLUP_FLOOR": f"S{overview_sections.ROLLUP_FLOOR}",
+        "ROLLUP_WEEKS": overview_sections.ROLLUP_WEEKS_WORD[overview_sections.ROLLUP_WEEKS],
         "RESULTS_TABLE": overview_sections.results_table(overview),
         "STATUS_COUNTS": overview_sections.status_counts(overview),
         # The rating ladders, the homepage's Verification Ladders until 2026-10-02.
@@ -1546,6 +1575,7 @@ def results_page() -> Page:
         description=RESULTS_META.description,
         toc=False,
         rewrite_body=_authored_profile_links,
+        page_styles=(RESULTS_CSS,),
         page_scripts=(TABLE_SCRIPT, POPOVER_SCRIPT, ROW_POPOVER_SCRIPT),
     )
 
@@ -1646,13 +1676,19 @@ def static_content_page(
     return Page(meta.path, page)
 
 
-def _authored_profile_links(page: str) -> str:
+def _authored_profile_links(page: str, *, full_names: bool = False) -> str:
     """Link only template-marked authored fragments, then remove their wrappers."""
     from devtools.profile_links import link_prose  # noqa: PLC0415
 
     return re.sub(
         r'<div class="site-profile-prose">(.*?)</div>',
-        lambda match: link_prose(match[1]),
+        lambda match: (
+            '<div class="site-profile-full-names">'
+            + link_prose(match[1], full_names=True)
+            + "</div>"
+            if full_names
+            else link_prose(match[1])
+        ),
         page,
         flags=re.DOTALL,
     )

@@ -29,8 +29,9 @@ contributor:
       sources: [bibliography]
   bio_sources: [paper-byline]
 ---
-Walter Stromquist wrote “Packing 10 or 11 Unit Squares in a Square,” published in The
-Electronic Journal of Combinatorics in 2003.
+Walter Stromquist wrote
+[“Packing 10 or 11 Unit Squares in a Square”](https://www.combinatorics.org/ojs/index.php/eljc/article/view/v10i1r8),
+published in The Electronic Journal of Combinatorics in 2003.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

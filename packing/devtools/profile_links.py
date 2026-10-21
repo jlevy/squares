@@ -272,12 +272,14 @@ class _Prose(HTMLParser):
         *,
         prefix: str,
         current_profile: str | None,
+        full_names: bool = False,
         audit: bool = False,
     ) -> None:
         super().__init__(convert_charrefs=False)
         self.index = index
         self.prefix = prefix
         self.current_profile = current_profile
+        self.full_names = full_names
         self.audit = audit
         self.parts: list[str] = []
         self.stack: list[tuple[str, bool, frozenset[str]]] = []
@@ -293,6 +295,13 @@ class _Prose(HTMLParser):
             " ".join(name.split()).casefold(): identifier
             for name, identifier in index.names.items()
         }
+
+    def label(self, identifier: str) -> str:
+        full_names = self.full_names or any(
+            "site-profile-full-names" in classes for _, _, classes in self.stack
+        )
+        person = self.index.people[identifier]
+        return person.full_name if full_names else person.label
 
     def enabled(self) -> bool:
         return not any(blocked for _, blocked, _ in self.stack)
@@ -348,7 +357,7 @@ class _Prose(HTMLParser):
                 and not self.anchor_protected
                 and is_profile
                 and _name_key(personal) in target.labels
-                and personal != self.index.people[target.identifier].label
+                and personal != self.label(target.identifier)
                 and not any(
                     tag in _HEADINGS
                     or "site-contributor-sources" in classes
@@ -383,9 +392,7 @@ class _Prose(HTMLParser):
                 for position in self.anchor_data:
                     self.parts[position] = ""
                 if self.anchor_data:
-                    self.parts[self.anchor_data[0]] = html.escape(
-                        self.index.people[target.identifier].label
-                    )
+                    self.parts[self.anchor_data[0]] = html.escape(self.label(target.identifier))
             else:
                 suffix = ""
             self.anchor = None
@@ -430,7 +437,7 @@ class _Prose(HTMLParser):
                     context = "reader prose"
                 self.contexts.setdefault(context, Counter())[name] += 1
                 return name
-            label = html.escape(self.index.people[identifier].label)
+            label = html.escape(self.label(identifier))
             return f'<a href="{self.prefix}{PROFILES_DIR}/{identifier}.html">{label}</a>'
 
         self.parts.append(self.pattern.sub(replace, data))
@@ -466,12 +473,14 @@ def link_prose(
     current_profile: str | None = None,
     prefix: str = "",
     index: ProfileIndex | None = None,
+    full_names: bool = False,
 ) -> str:
     """Link unique full names and exact account labels inside one authored fragment."""
     parser = _Prose(
         index if index is not None else public_index(),
         prefix=prefix,
         current_profile=current_profile,
+        full_names=full_names,
     )
     parser.feed(markup)
     parser.close()

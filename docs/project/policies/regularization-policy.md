@@ -37,8 +37,9 @@ A run produces two kinds of output, and they take different paths:
 
 A certificate that proves more than the record holds is registered as a result first,
 and its drawing enters the layer only after that.
-Once validated, a register result below the case’s house is the house, by the import
-runbook’s [house rule](../../../packing/campaign/result-import.md#the-house-rule).
+Once validated, a register result below the case’s house best packing replaces it, by
+the import runbook’s
+[house rule](../../../packing/campaign/result-import.md#the-house-rule).
 
 ## 2. Definitions
 
@@ -327,10 +328,10 @@ routine gate’s wall ceiling.
 So it runs on request with a receipt, and the gates hold the decisions it produced
 ([OR-13](../../../operating-rules.md#or-13-every-fast-check-runs-in-ci-only-the-unavoidably-slow-ones-leave),
 [OR-17](../../../operating-rules.md#or-17-every-routine-gate-has-a-wall-ceiling-and-anything-above-it-is-selected-on-purpose)).
-A house adoption is such a request: the intake pass that re-houses a count runs the
-generators on the new witness in the adoption’s pull request, by the import runbook’s
-[house rule](../../../packing/campaign/result-import.md#the-house-rule), which says how
-the runs fit the compute cap and which deferrals `--check-state` allows.
+An adoption is such a request: the intake pass that changes a count’s house best packing
+runs the generators on the new witness in the adoption’s pull request, by the import
+runbook’s [house rule](../../../packing/campaign/result-import.md#the-house-rule), which
+says how the runs fit the compute cap and which deferrals `--check-state` allows.
 
 | Check | What it holds | Where it runs |
 | --- | --- | --- |
@@ -432,15 +433,15 @@ policy applies until there is one.
     reached it (obligation 2), and the grid-slack generator tries a rational $U$ first
     wherever the witness’s side is above it.
     A view at a side below $U$ is a new result and is registered, as question 3
-    answered. Seven drawn views sit above $U$ and stay, by name, until a view at $U$
-    draws as well. At 18, 26, 66 and 85 Evan Daniel’s views are rationals about
-    $10^{-30}$ above a closed-form optimum, the status quo of question 4. At 110, 241
-    and 297 the drawing is at Francisco Couzo’s decimal side, $3 \times 10^{-12}$ to
-    $1.3 \times 10^{-11}$ above Evan Daniel’s exact optimum: the view at $U$ draws fewer
-    shared sides at 110 and 241 (bead think-jnso) and goes to the owner at row 7 at 297.
-    `packing/tests/test_regularize_select.py` reads every drawn view’s side against $U$
-    and fails on a view above it at any other count, and on a listed count once it is
-    drawn at $U$.
+    answered. Four drawn views sit above $U$ and stay, by name, until a view at $U$ draws
+    as well: at 18, 26, 66 and 85 Evan Daniel’s views are rationals about $10^{-30}$
+    above a closed-form optimum, the status quo of question 4. Three more did until
+    their houses moved: at 110, 241 and 297 the drawing was at Francisco Couzo’s decimal
+    side, $3 \times 10^{-12}$ to $1.3 \times 10^{-11}$ above Evan Daniel’s exact
+    optimum, until 241 moved to T-182 on 15 October 2026 and 110 and 297 to T-174 on 17
+    October 2026. `packing/tests/test_regularize_select.py` reads every drawn view’s
+    side against $U$ and fails on a view above it at any other count, and on a listed
+    count once it is drawn at $U$.
 
 14. **A changed pose:** *answered by the owner on 13 October 2026:* “once things have
     been verified correct, that they are equal or better, we can commit and use them.

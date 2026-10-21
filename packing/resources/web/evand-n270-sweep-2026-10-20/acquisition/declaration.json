@@ -1,0 +1,65 @@
+{
+  "format": "external-source-declaration-v1",
+  "id": "evand-n270-sweep-2026-10-20",
+  "source_url": "https://github.com/evand/square-packing",
+  "source_ref": "88385abc95ab25d520302282d1946cbb07bc9cf3",
+  "source_commit": "88385abc95ab25d520302282d1946cbb07bc9cf3",
+  "retrieved_at_utc": "2026-10-21T01:22Z",
+  "git_scope": "Blobless clone of evand/square-packing and a sparse checkout of the issue #703 pin 88385ab, the commit that adds the eight s270_sw files (and the eight s343_sw files of #702, outside this packet) under search/packer/candidates/. All eight s270_sw files are retained: the certificate the claim rests on (s270_sw.cert), its 80-digit KKT point, the binary64 input it was solved from, the solver's report, the prior-record summary, the same-side regularized view with its report, and the source's comparison with the register's packing; with the licence, credits, the format and packer READMEs and the source's submission guide, which defines the words the issue uses for credit. The two source checkers, the exact solver and the basin explorer are pinned by digest against the identical copies the n183 packet retains, and the packer log and the near-record sweep by digest only. The rest of the tree is pinned by the commit and was not retained or executed.",
+  "archived_dir": "source",
+  "license": "MIT, copyright (c) 2026 Evan Daniel (LICENSE retained). CREDITS.md states Claude (Anthropic) under human direction, no peer review; the pinned commit names Claude Opus 5.5 as co-author and says the commit and push were approved by Evan Daniel. Issue #703 asks that Nate Chaoweeraprasit's #500 packing be credited as the ultimate start.",
+  "claims": [
+    "Issue #703 reports s(270) <= 16.928162252197, the exact rational side of search/packer/candidates/s270_sw.cert, 16928162252196750114897964982713/(10^30) = 16.928162252196750114897964982713, rounded up at 12 places, 3.47e-5 below the register's 16.928196993330 (Nate Chaoweeraprasit's #500 packing, improved by PingYou Ltd, PR #574); it prints the SHA-256 of s270_sw.cert and of s270_sw_regularized.cert, the same packing at the same side regularized for display.",
+    "The issue reports a KKT point at 80 digits with exact side S* = 16.928162252196750114728..., a local minimum of the side strict modulo 23 exact flat motions, not isolated, with no corner-corner MILP descent, 113 wall and 1524 square-square contact equations, 263 corner-corner contacts, 1 rattler and 67 tilted squares, all load-bearing, at 14.1 to 43.1 degrees. These are numerical evidence at 80 digits, as the issue says, not interval proofs.",
+    "The issue calls it a new packing, a different local minimum from the register's: exact sides differ by 3.474e-5; matched over the 8 box symmetries the contact graphs share 514 pairs with 49 only in each, no rattler is shared and no load-bearing tilt angle is shared; matched square by square (regularized views, load-bearing squares) the largest move is 0.391, 17 squares move by more than 0.1 and 59 by more than 0.01. It reports the same relation to the copies of that packing in Francisco Couzo's 4e4c8ce and 58a7833 and Mishapolk's #593, and to a stored non-record 270 at 16.937366538897.",
+    "The issue gives the lineage: on 17 October the basin explorer (search/packer/explore.py) started from #500's packing in a test run and stored eight generations of non-record descendants, the last 9.2e-3 above the record; on 20 October a near-record sweep (search/packer/dgen.py sweep) chose 24 starts from 1,069 stored 270s, 1e-3 to 1e-2 above the best known side, and in four 40-minute explorer runs this packing came 38 minutes into one, five moves from its start (a kick, a row slide, an L-kick and two crossovers with packings of the same run); exactsolve.py certified it directly. It asks that #500's packing be credited as the ultimate start.",
+    "The author's two standard-library exact checkers, verify_cert.py (separating axes) and verify_cert2.py (polygon intersection), are reported to accept the certificate; they share an author and the certificate format. No closed form, interval proof of local optimality or optimality is claimed."
+  ],
+  "scope": [
+    "LICENSE",
+    "CREDITS.md",
+    "README.md",
+    "search/exact/README.md",
+    "search/exact/verify_cert.py",
+    "search/exact/verify_cert2.py",
+    "search/exact/exactsolve.py",
+    "search/packer/README.md",
+    "search/packer/SUBMITTING.md",
+    "search/packer/PACKER.md",
+    "search/packer/explore.py",
+    "search/packer/dgen.py",
+    "search/packer/candidates/s270_sw.cert",
+    "search/packer/candidates/s270_sw.exact.txt",
+    "search/packer/candidates/s270_sw.input.txt",
+    "search/packer/candidates/s270_sw.json",
+    "search/packer/candidates/s270_sw_prior.json",
+    "search/packer/candidates/s270_sw_regularized.cert",
+    "search/packer/candidates/s270_sw_regularized.json",
+    "search/packer/candidates/s270_sw_vs_prior.json"
+  ],
+  "pinned_only": [
+    {
+      "match": "search/exact/verify_cert*.py",
+      "reason": "The source's two standalone exact checkers, byte-identical to the copies the n183 packet retains at 3a9948c; never executed by this acquisition.",
+      "identical_to": "packing/resources/web/evand-n183-subgrid-2026-10-19/source/search/exact"
+    },
+    {
+      "match": "search/exact/exactsolve.py",
+      "reason": "Numerical high-precision certificate producer, byte-identical to the copy the n183 packet retains at 3a9948c; a replay consumes the completed certificate without this solver or its dependencies.",
+      "identical_to": "packing/resources/web/evand-n183-subgrid-2026-10-19/source/search/exact"
+    },
+    {
+      "match": "search/packer/explore.py",
+      "reason": "Numerical basin explorer used for discovery, byte-identical to the copy the n183 packet retains at 3a9948c; not required by either standalone exact checker.",
+      "identical_to": "packing/resources/web/evand-n183-subgrid-2026-10-19/source/search/packer"
+    },
+    {
+      "match": "search/packer/PACKER.md",
+      "reason": "The packer's chronological working log, 494,342 bytes of general search history; pinned for provenance."
+    },
+    {
+      "match": "search/packer/dgen.py",
+      "reason": "The near-record sweep the issue names for choosing the 24 starts, added in a435c97, the parent of the pin; numerical discovery code, pinned for provenance and not executed."
+    }
+  ]
+}

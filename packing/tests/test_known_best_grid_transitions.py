@@ -85,6 +85,8 @@ def test_retained_thresholds_include_the_noninteger_n211_before_the_grid_suffix(
     found = grid_transitions(entries)
     # The last threshold is 309 since the house adoption of 11 October 2026 (think-fvz4):
     # T-141's tilted n = 308 replaced the grid there, as de Winter's n = 211 did at 211.
+    # Row 14's is 184 since the adoption of 19 October 2026 (think-jh4w): Evan Daniel's
+    # tilted n = 183 (T-220) replaced the 14 x 14 grid there.
     assert [item.first_grid_n for item in found] == [
         1,
         2,
@@ -99,12 +101,14 @@ def test_retained_thresholds_include_the_noninteger_n211_before_the_grid_suffix(
         111,
         133,
         157,
-        183,
+        184,
         212,
         242,
         274,
         309,
     ]
+    assert entries[182]["source"]["kind"] == "packet-derived-facts"
+    assert found[13] == GridTransition(14, 184)
     assert entries[210]["source"]["kind"] == "packet-derived-facts"
     assert found[14] == GridTransition(15, 212)
     assert entries[307]["source"]["kind"] == "packet-derived-facts"

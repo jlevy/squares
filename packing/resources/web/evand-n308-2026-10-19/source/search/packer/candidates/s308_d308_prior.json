@@ -1,0 +1,148 @@
+{
+ "store_id": 291662,
+ "s": 17.998269879526255,
+ "sources": [
+  "pending:#593 (Mishapolk)",
+  "pending:#624 (mstrmg)",
+  "register (Kevin Fang)",
+  "register (Kevin Fang)",
+  "register (Kevin Fang)",
+  "watch:Mishapolk/square-packing-records@27fec17 (Mishapolk)",
+  "watch:Mishapolk/square-packing-records@2b907b2 (Mishapolk)",
+  "watch:Mishapolk/square-packing-records@3f2b89b (Mishapolk)",
+  "watch:Mishapolk/square-packing-records@4366e0c (Mishapolk)",
+  "watch:Mishapolk/square-packing-records@70a033f (Mishapolk)",
+  "watch:Mishapolk/square-packing-records@be08166 (Mishapolk)",
+  "watch:Mishapolk/square-packing-records@ec87dc6 (Mishapolk)",
+  "watch:franciscouzo/square-packing@23aff0c (lollipoll)",
+  "watch:franciscouzo/square-packing@4e4c8ce (Francisco Couzo)",
+  "watch:franciscouzo/square-packing@58a7833 (Francisco Couzo)",
+  "watch:franciscouzo/square-packing@7b6c87e (lollipoll)",
+  "watch:franciscouzo/square-packing@af8cb79 (lollipoll)",
+  "watch:franciscouzo/square-packing@c6da0fc (lollipoll)",
+  "later copies of the same minimum: store ids [169393]"
+ ],
+ "ok": true,
+ "S_exact": "17.998269879526255875208010045711548315700046175997162437099126637",
+ "S_cert": "17.998269879526255875387992744507",
+ "checkers": {
+  "verify_cert": {
+   "ok": true,
+   "line": "VALID: s(n) <= S"
+  },
+  "verify_cert2": {
+   "ok": true,
+   "line": "VALID: 308 closed unit squares pairwise disjoint inside the open box of side 17.998269879526255011 (690 close pairs checked)"
+  }
+ },
+ "optimality": {
+  "kkt": true,
+  "min_lambda": 1.8194105452134027e-07,
+  "status": "local minimum of S, strict modulo 53 exact flat motions (PD on the rest of null(J_A)); the configuration is not isolated",
+  "flat_motions": 53,
+  "flat_realised": 53.0,
+  "flat_residual": 9.256315079650492e-61,
+  "negative_eigs": 0,
+  "corner_corner": 283,
+  "vv_milp_dS": 0.0,
+  "rattlers": 0,
+  "min_pair": 9.999999999999993e-21,
+  "min_wall": 5e-21
+ },
+ "regularized": {
+  "ok": true,
+  "S_exact": "17.9982698795262558752080100457115483157000461759971624370991",
+  "S_cert": "17998269879526255875387992744507/1000000000000000000000000000000",
+  "groups": [
+   32,
+   32
+  ],
+  "level": 2,
+  "level_text": "same packing: traversable without expansion (angle moves path-checked; slides by construction)",
+  "checkers": {
+   "verify_cert": {
+    "ok": true,
+    "line": "VALID: s(n) <= S"
+   },
+   "verify_cert2": {
+    "ok": true,
+    "line": "VALID: 308 closed unit squares pairwise disjoint inside the open box of side 17.998269879526255011 (690 close pairs checked)"
+   }
+  }
+ },
+ "verdict": "distinct minimum",
+ "difference": {
+  "side_gap": 0.0011207582553467432,
+  "matching_distance_regularized": 0.08941334245936206,
+  "symmetry": 0,
+  "moved_gt_1e4": 295,
+  "moved_gt_1e2": 49,
+  "max_move": 0.7062423852615548,
+  "max_angle_change": 20.932672261821384,
+  "rattler_status_swaps": 5,
+  "shared_angles": [],
+  "ours_only_angles": [
+   "17.2118",
+   "17.9837",
+   "18.0059",
+   "18.1194",
+   "18.1415",
+   "18.2840",
+   "18.3439",
+   "18.3593",
+   "18.3601",
+   "18.4121",
+   "18.4321",
+   "18.5225",
+   "18.5346",
+   "18.6759",
+   "18.6868",
+   "18.8301",
+   "19.1623",
+   "19.2189",
+   "19.6676",
+   "20.1843",
+   "21.2983",
+   "21.3199",
+   "21.7545",
+   "23.3973",
+   "27.7288",
+   "28.2363",
+   "3.3760",
+   "4.0676"
+  ],
+  "prior_only_angles": [
+   "16.6511",
+   "17.0110",
+   "17.2742",
+   "17.8867",
+   "17.8899",
+   "18.2389",
+   "18.3245",
+   "18.3745",
+   "18.3898",
+   "18.4724",
+   "18.4792",
+   "18.4882",
+   "18.5215",
+   "18.5449",
+   "18.5751",
+   "18.5900",
+   "18.5919",
+   "18.6948",
+   "18.6991",
+   "2.9054",
+   "20.1607",
+   "20.1660",
+   "20.2567",
+   "20.9327",
+   "21.6694",
+   "21.6922",
+   "25.3197",
+   "28.1118",
+   "28.1461",
+   "3.4951",
+   "3.5551"
+  ]
+ }
+}

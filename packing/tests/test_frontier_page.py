@@ -230,7 +230,8 @@ def test_a_correcting_bound_keeps_its_recency_and_names_what_it_corrects(
     # in parallel took 40 of the corrected floors, none of them correcting anything; 220
     # since the second merge that day, when T-080's replayed certificate took n = 101 to 105;
     # 219 since the third, when T-076's replayed linear certificate took n = 82.
-    assert len(corrected) == 219
+    # 218 since 18 October, when T-216's replayed fine-net certificate took n = 108.
+    assert len(corrected) == 218
     seen = 0
     for attributes, cells in rows:
         n = int(attributes["data-n"] or 0)
@@ -276,7 +277,7 @@ def test_the_page_says_once_what_the_tag_means_and_links_the_corrected_result(
     corrected work linked to its row, and the register's words for what failed."""
     sentence = frontier.corrections_prose()
     assert sentence == (
-        "For 219 recent verified bounds, *corrects Nagamochi 2005* says the bound "
+        "For 218 recent verified bounds, *corrects Nagamochi 2005* says the bound "
         "stands in for "
         "a published result found unsound, the register\u2019s "
         "[T-007](results.html#t-007): "
@@ -284,7 +285,7 @@ def test_the_page_says_once_what_the_tag_means_and_links_the_corrected_result(
     )
     prose = page[: page.index('id="frontier-table"')]
     assert (
-        "For 219 recent verified bounds, <em>corrects Nagamochi 2005</em> "
+        "For 218 recent verified bounds, <em>corrects Nagamochi 2005</em> "
         "says the bound stands in"
     ) in prose
     assert '<a href="results.html#t-007">T-007</a>' in prose

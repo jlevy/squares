@@ -159,9 +159,12 @@ def test_only_the_named_lemma_entries_rest_on_no_census_row() -> None:
 def cited() -> dict[str, str]:
     """Each evidence entry that `V-sqverify-fast` decides a bound for, by the census
     certificate it names; the lemma entries (`LEMMA_ENTRIES`) rest on no census row."""
+    # The current record uses repository-relative paths; older evidence entries
+    # retain their packing-relative spelling. Both must identify the same census case.
     by_path = {
-        str(case.candidate.relative_to(census.PROJECT)): name
+        str(case.candidate.relative_to(root)): name
         for name, case in {**cases(), **rectangle_cases()}.items()
+        for root in (census.PROJECT.parent, census.PROJECT)
     }
     found: dict[str, str] = {}
     for ident, entry in decided().items():
@@ -982,8 +985,8 @@ def test_an_evidence_entry_states_its_threads_and_the_review_of_the_source_that_
         name: " ".join(record["proof"]["pinpoints"].split()) for name, record in texts.items()
     }
     assert entry["threads"] == 2
-    assert "CPU seconds at two threads and" in limitations["as run"]
-    assert "CPU seconds at one thread and" in limitations["main"]
+    assert "CPU seconds (wait4) at two threads and" in limitations["as run"]
+    assert "CPU seconds (wait4) at one thread and" in limitations["main"]
     assert "the crate source that ran" not in pinpoints["as run"]
     later = f"the crate source that ran, at 910b6b12c, by {census.DECLARED_NET_REVIEW}"
     assert later in pinpoints["main"]
@@ -1173,3 +1176,13 @@ def test_a_control_serves_format_m_and_format_t_rows_only() -> None:
     bare = {key: value for key, value in rectangle.items() if key != "threshold"}
     with pytest.raises(SystemExit, match="records no threshold"):
         census.control(Path("/nonexistent"), rectangle_cases()[RECOMPUTED_T], bare)
+
+
+def test_the_16_october_fine_net_packet_is_read_from_its_retained_release_members() -> None:
+    packet = "wand125-fine-net-lower-bounds-2026-10-16"
+    found = {name: case for name, case in cases().items() if case.packet == packet}
+    assert len(found) == 18
+    root = census.WEB / packet / "release/certificates"
+    for name, case in found.items():
+        assert case.candidate == root / name / "candidate.json.gz"
+        assert census.net_directions(case) == (2073 if case.n <= 51 else 201)

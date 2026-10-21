@@ -1479,12 +1479,21 @@ jobs:
             /packing/resources/web/pingyou-n272-refinement-2026-10-12/
             /packing/resources/web/dostashev-merged-bands-2026-10-13/
             /packing/resources/web/couzo-certificates-2026-10-13/
+            /packing/resources/web/pingyou-pr574-certificates-2026-10-13/
             /packing/resources/web/mishapolk-records-2026-10-14/
             /packing/resources/web/mishapolk-kkt-refinements-2026-10-14/
             /packing/resources/web/evand-n146-2026-10-14/
             /packing/resources/web/couzo-verified-bounds-2026-10-14/
             /packing/resources/web/couzo-n237-2026-10-15/
             /packing/resources/web/pingyou-pr622-certificate-2026-10-15/
+            /packing/resources/web/evand-n155-explorer-2026-10-17/
+            /packing/resources/web/evand-n229-dilation-update-2026-10-18/
+            /packing/resources/web/evand-n236-2026-10-16/
+            /packing/resources/web/evand-n271-2026-10-17/
+            /packing/resources/web/evand-n183-subgrid-2026-10-19/
+            /packing/resources/web/evand-n308-2026-10-19/
+            /packing/resources/web/evand-n154-sweep-2026-10-20/
+            /packing/resources/web/evand-n270-sweep-2026-10-20/
             /packing/resources/papers/
             !/packing/resources/papers/*
             /packing/resources/papers/kingbird-square-29-provenance.svg
@@ -2057,6 +2066,7 @@ jobs:
     # name it, and the wall check treats it as `not_gating`, so a skip changes no verdict.
     if: "github.event_name != 'pull_request' || github.base_ref == 'main'"
     runs-on: macos-latest
+    timeout-minutes: 5
     defaults:
       run:
         working-directory: packing
@@ -2086,6 +2096,19 @@ jobs:
           uv run --frozen --all-extras --group dev python -c "import sqpack, sqpack.field, sqpack.verify,
           sqpack.witness, sqpack.promote.refine, sqpack.promote.contacts;
           print('sqpack imports on', __import__('platform').machine())"
+
+      - name: Native Darwin current memory and system SDK layout
+        timeout-minutes: 1
+        run: |
+          mkdir -p "$PACKING_VALIDATION_ARTIFACT_DIR"
+          uv run --frozen --all-extras --group dev python -m pytest -q -s \
+            tests/test_process_memory.py::test_live_memory_sample_is_positive \
+            tests/test_process_memory.py::test_released_allocation_does_not_leave_current_memory_above_guard \
+            tests/test_process_memory.py::test_darwin_current_memory_agrees_with_external_ps \
+            tests/test_process_memory.py::test_darwin_sdk_layout_and_signature \
+            --junitxml="$PACKING_VALIDATION_ARTIFACT_DIR/darwin-current-memory.xml"
+          uv run --frozen --all-extras --group dev python -m devtools.check_darwin_memory_results \
+            "$PACKING_VALIDATION_ARTIFACT_DIR/darwin-current-memory.xml"
 
       - name: Results a second architecture could disagree about
         # Exact predicates, the small-n exact models, and the golden basin maps

@@ -21,10 +21,30 @@ properties:
             record_key: {$ref: '#/$defs/text'}
             field: {type: string, pattern: '^/'}
         expected_text: {$ref: '#/$defs/text'}
-        start: {type: integer, minimum: 0}
-        end: {type: integer, minimum: 1}
+        start:
+          type: integer
+          minimum: 0
+          description: >-
+            Offset of the label in expected_text, counted in Unicode code points as Python
+            indexes a str, not in UTF-8 bytes or UTF-16 units.
+        end:
+          type: integer
+          minimum: 1
+          description: Exclusive end offset of the label, in the same code-point units as start.
         label: {$ref: '#/$defs/text'}
-        role: {$ref: '#/$defs/text'}
+        role:
+          description: >-
+            The credit role, published beside the credit on the person's profile;
+            sqpack.contributor_occurrences.ROLES repeats this list.
+          enum:
+            - collective-abbreviation
+            - construction-finder
+            - construction-improver
+            - credited-contributor
+            - lower-bound-prover
+            - prerequisite
+            - project-author
+            - source-author
         disposition: {enum: [resolved, unresolved, non-person]}
         contributor_id: {$ref: '#/$defs/id'}
         evidence:

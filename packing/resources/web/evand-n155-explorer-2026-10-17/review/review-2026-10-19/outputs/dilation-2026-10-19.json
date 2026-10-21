@@ -1,0 +1,139 @@
+{
+ "#674 n229 opening": {
+  "header": "# dilation certificate (dilate_cert.py, delta 1e-12) of s229.input.txt; check with verify_cert.py",
+  "n": 229,
+  "input_side": "15.65016325484288",
+  "certificate_side": "7825081627429265081627421439843/500000000000000000000000000000",
+  "side_is_ceil_S_f_at_30_places": true,
+  "side_with_exact_10^-12_instead": "6113345021429113345021423/390625000000000000000000",
+  "side_with_exact_10^-12_minus_certificate": "3.140000e-28",
+  "side_rounding_up": "7.772482e-31",
+  "delta_binary64": "4951760157141521/4951760157141521099596496896",
+  "delta_minus_10^-12": "-2.011335e-29",
+  "centres_equal_construction": "229 of 229",
+  "tangents_equal_construction": "229 of 229",
+  "tangent_mismatches": [],
+  "largest_centre_rounding": "4.964949e-31",
+  "walls": {
+   "least_certificate_clearance": "50100000000000099/100000000000000000000000000000",
+   "least_certificate_clearance_decimal": "5.010000e-13",
+   "square": 8,
+   "wall": "x = 0",
+   "input_clearance_there": "1.000000e-15",
+   "lever": "5.000000e-01",
+   "dilation_share": "5.000000e-13",
+   "rounding_share": "5.667619e-32",
+   "identity_holds_exactly": true,
+   "least_input_clearance": "1.000000e-15",
+   "input_clearances_below_1e-12": 39,
+   "certificate_clearance_over_those": [
+    "5.010000e-13",
+    "6.755333e-13"
+   ]
+  },
+  "pairs": {
+   "least_certificate_gap": "110927585165685052848264896611518317557953882931/110965115528342950242931665589625000000000000000000000000000",
+   "least_certificate_gap_decimal": "9.996618e-13",
+   "pair": [
+    193,
+    199
+   ],
+   "input_gap_on_that_axis": "-3.382177e-16",
+   "centre_distance_on_that_axis": "1.000000e+00",
+   "dilation_share": "1.000000e-12",
+   "rounding_share": "1.133524e-31",
+   "identity_holds_exactly": true,
+   "least_input_gap": "-3.382177e-16"
+  },
+  "receipt": {
+   "exact_verify": {
+    "clearance_equal": true,
+    "gap_equal": true
+   },
+   "independent": {
+    "clearance_equal": true,
+    "gap_equal": true
+   }
+  }
+ },
+ "#674 n229 update": {
+  "header": "# dilation certificate (dilate_cert.py, delta 1e-12) of s229_v2.input.txt; check with verify_cert.py",
+  "n": 229,
+  "input_side": "15.650161513879903",
+  "certificate_side": "7825080756947776580756939951343/500000000000000000000000000000",
+  "side_is_ceil_S_f_at_30_places": true,
+  "side_with_exact_10^-12_instead": "15650161513895553161513879903/1000000000000000000000000000",
+  "side_with_exact_10^-12_minus_certificate": "3.140000e-28",
+  "side_rounding_up": "7.772132e-31",
+  "delta_binary64": "4951760157141521/4951760157141521099596496896",
+  "delta_minus_10^-12": "-2.011335e-29",
+  "centres_equal_construction": "229 of 229",
+  "tangents_equal_construction": "229 of 229",
+  "tangent_mismatches": [],
+  "largest_centre_rounding": "4.993631e-31",
+  "walls": {
+   "least_certificate_clearance": "1201000000000200780999999999798619000000000100991/1999999999999998000000000000001000000000000000000000000000000",
+   "least_certificate_clearance_decimal": "6.005000e-13",
+   "square": 64,
+   "wall": "x = S",
+   "input_clearance_there": "1.005000e-13",
+   "lever": "5.000000e-01",
+   "dilation_share": "5.000000e-13",
+   "rounding_share": "1.056676e-30",
+   "identity_holds_exactly": true,
+   "least_input_clearance": "1.005000e-13",
+   "input_clearances_below_1e-12": 40,
+   "certificate_clearance_over_those": [
+    "6.005000e-13",
+    "1.188030e-12"
+   ]
+  },
+  "pairs": {
+   "least_certificate_gap": "2404144296730065793224581298857918851635167953001/1999999999999998000000000000001000000000000000000000000000000",
+   "least_certificate_gap_decimal": "1.202072e-12",
+   "pair": [
+    13,
+    86
+   ],
+   "input_gap_on_that_axis": "2.020721e-13",
+   "centre_distance_on_that_axis": "1.000000e+00",
+   "dilation_share": "1.000000e-12",
+   "rounding_share": "1.133524e-31",
+   "identity_holds_exactly": true,
+   "least_input_gap": "2.020721e-13"
+  },
+  "receipt": {
+   "exact_verify": {
+    "clearance_equal": true,
+    "gap_equal": true
+   },
+   "independent": {
+    "clearance_equal": true,
+    "gap_equal": true
+   }
+  }
+ },
+ "kkt": {
+  "#669 n155": {
+   "kkt_side_digits": "12.95226094465056403513765705141782259213261491352834015266879864645849",
+   "side_is_ceil_S_star_times_1_plus_1e-20_at_30_places": true,
+   "certificate_side_minus_kkt_side": "1.295226e-19",
+   "centres_equal_construction": "155 of 155",
+   "largest_centre_difference": "0.000000e+00"
+  },
+  "#659 n236": {
+   "kkt_side_digits": "15.86193439060735861708517922748755834642910303699351089431814326631574",
+   "side_is_ceil_S_star_times_1_plus_1e-20_at_30_places": true,
+   "certificate_side_minus_kkt_side": "1.586193e-19",
+   "centres_equal_construction": "235 of 236",
+   "largest_centre_difference": "1.000000e-35"
+  },
+  "#664 n271": {
+   "kkt_side_digits": "16.94894773371365751055391163508574743641536444906197214683793113022500",
+   "side_is_ceil_S_star_times_1_plus_1e-20_at_30_places": true,
+   "certificate_side_minus_kkt_side": "1.694895e-19",
+   "centres_equal_construction": "271 of 271",
+   "largest_centre_difference": "0.000000e+00"
+  }
+ }
+}

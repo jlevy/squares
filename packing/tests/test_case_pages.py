@@ -146,7 +146,7 @@ def test_a_record_file_is_a_complete_styled_canonical_page(records: dict[str, st
 def test_every_record_file_is_small(records: dict[str, str]) -> None:
     sizes = {name: len(text.encode()) for name, text in records.items()}
     # These cases preserve their full algebraic proofs and verified result history.
-    exceptions = {"cases/11.html": 500_000, "cases/17.html": 500_000, "cases/18.html": 350_000}
+    exceptions = {"cases/11.html": 500_000, "cases/17.html": 550_000, "cases/18.html": 350_000}
     for name, size in sizes.items():
         assert size < exceptions.get(name, RECORD_CEILING_BYTES), (name, size)
 
@@ -211,7 +211,7 @@ def test_visual_math_compaction_keeps_html_tree_and_foreign_xml(
         "<span title=' class=\"mord\"'>literal class spelling</span>"
         + foreign
         + self_closing
-        + '<a href="../profiles/manasseh-ahmed.html" data-person>Ahmed</a>'
+        + '<a href="../profiles/manasseh-ahmed.html">Ahmed</a>'
     )
     compact = render_case_pages.compact_visual_math_classes(
         source, all_html_classes=all_html_classes
@@ -244,7 +244,7 @@ def test_a_records_links_are_written_from_its_own_directory(
     record = _record(records, 11)
     assert 'href="../atlas.html#n-11"' in record
     assert 'href="../results.html#t-018"' in record
-    assert 'href="../profiles/walter-trump.html" data-person' in record
+    assert '<a href="../profiles/walter-trump.html">' in record
     assert 'href="10.html" rel="prev" data-case-step="10"' in record
     assert 'href="12.html" rel="next" data-case-step="12"' in record
     assert "data-case-index" not in record

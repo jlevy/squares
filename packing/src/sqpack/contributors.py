@@ -2,8 +2,9 @@
 
 Ids identify people; names and handles are evidence-backed display spellings. Name
 lookup returns candidates, never an identity, even when one spelling has one match. Bios
-remain reader prose: the loader checks their paragraph shape and evidence references;
-the five-sentence limit is an editorial check, not a punctuation-splitting heuristic.
+remain reader prose: the loader checks their paragraph shape, evidence references and
+links, which must be public HTTP URLs; the five-sentence limit is an editorial check,
+not a punctuation-splitting heuristic.
 """
 
 from __future__ import annotations
@@ -210,6 +211,26 @@ def _pointer(payload: dict[str, Any], pointer: str) -> Any:
     return value
 
 
+def render_bio(bio: str) -> str:
+    """A bio paragraph as inline HTML, refusing any link that is not a public HTTP URL.
+
+    The loader renders each bio once and discards the HTML, so a record whose bio links a
+    relative path, a `javascript:` URL or an email address fails where it is loaded, not
+    first where its profile is published."""
+    # markdown-it-py comes with kpress in the dev group, not as an sqpack runtime
+    # dependency, so only reading a bio needs it.
+    from markdown_it import MarkdownIt  # noqa: PLC0415
+
+    parser = MarkdownIt("commonmark", {"html": False}).disable("image")
+
+    def checked_link(url: str) -> bool:
+        validate_public_url(url)
+        return True
+
+    parser.validateLink = checked_link
+    return parser.renderInline(bio)
+
+
 def _bio(body: str) -> str | None:
     body = body.strip("\r\n")
     if not body.endswith(FOOTER) or body.count(FOOTER) != 1:
@@ -223,6 +244,7 @@ def _bio(body: str) -> str | None:
         or re.search(r"^\s*\|?\s*:?-+:?\s*\|[ |:\-]*$", bio, re.MULTILINE)
     ):
         raise ContributorError("bio must be one Markdown paragraph without block content")
+    render_bio(bio.strip())
     return bio.strip()
 
 

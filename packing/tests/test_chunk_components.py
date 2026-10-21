@@ -89,29 +89,22 @@ def test_retained_census_reports_source_stratified_coverage() -> None:
     assert registered["name"] == "registered-angle-contact"
     non_grid = registered["summary"]["non_grid"]
     assert non_grid["records"] == 36
-    # 1782, not 1780, since the #227 intake: Couzo's n = 68 (T-056) structures two more
-    # squares at the registered tolerance than the UnitSquare packing it replaced. 1792
-    # since 2026-10-05: the catalogue's packing at n = 69 (T-088) structures ten more
-    # squares than the rendering it replaced and fits six chunks with at most three free;
-    # the new packings at n = 83 and 87 (T-089) leave both counts where they were.
-    # The second SQUISH update replaces n = 88's 86 structured squares with 72.
-    # The selected RY houses at n70/84/86 retain 23 fewer structured squares. The house
-    # adoption of 11 October 2026 (think-fvz4) moved those three again, 24 fewer in all:
-    # T-146's n = 70 structures 69 squares where Xu's structured 66, and Couzo's T-130
-    # packings structure 71 at n = 84 (Xu's 64) and 50 at n = 86 (Xu's 84).
-    assert (non_grid["structured_squares"], non_grid["total_squares"]) == (1731, 1860)
-    assert non_grid["within_six_chunks_and_three_free"] == 25
+    # T-174's adopted houses structure 61, 82 and 85 squares at n68/84/86, replacing
+    # 59, 71 and 50. The source-stratified total gains 48 squares; n84 and n86 now fit
+    # the six-chunk, three-free budget as well.
+    assert (non_grid["structured_squares"], non_grid["total_squares"]) == (1779, 1860)
+    assert non_grid["within_six_chunks_and_three_free"] == 27
 
-    # The relaxed sweep still structures more of n = 68 and merges its angle classes; the
-    # counts are Couzo's packing's, where the UnitSquare one gave 57 and 60, 13 and 7.
+    # The relaxed sweep structures three more squares and merges two angle classes
+    # in T-174's adopted n = 68 house.
     relaxed = document["contact_sweeps"][1]
     strict_n68 = registered["entries"][67]
     relaxed_n68 = relaxed["entries"][67]
     assert strict_n68["n"] == relaxed_n68["n"] == 68
-    assert strict_n68["structured_square_count"] == 59
+    assert strict_n68["structured_square_count"] == 61
     assert relaxed_n68["structured_square_count"] == 64
-    assert strict_n68["angle_class_count"] == 12
-    assert relaxed_n68["angle_class_count"] == 8
+    assert strict_n68["angle_class_count"] == 9
+    assert relaxed_n68["angle_class_count"] == 7
 
     partitions = json.loads(
         (ROOT / "atlas/known-best/chunk-partitions.json").read_text(encoding="utf-8")

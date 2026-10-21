@@ -94,64 +94,66 @@ def _rendering_entry(directory: Path) -> dict[str, Any]:
 #: at 154, which left. The pass of 15 October 2026 moved it at its eight: 154 and 304
 #: joined, and 211 and 302 left; once a hold skipped only the held entry, its ten next
 #: candidates moved it again: 129 and 204 joined, and 156, 176 and 303 left. The
-#: adoption of 16 October 2026 (think-z7wn) moved it at its fifteen: 176 joined.
+#: adoption of 16 October 2026 (think-z7wn) moved it at its fifteen: 176 joined. The
+#: adoption of 17 October 2026 (think-3mry) moved it at its 37: 86, 132 and 181 joined,
+#: and 110, 130, 179, 180, 210, 239 and 268 left (the shorter lists, which had not taken
+#: 176 in, are the same list cut at their corpora). The adoption of 19 October 2026
+#: moved it at its four: 229 joined, the dilation of a binary64 packing. The adoption of
+#: 20 October 2026 moved it at its two: 154 left, and 308 stayed off it. The adoption of
+#: 21 October 2026 moved it at its one: 270 left, its exact certificate's least margins
+#: being 1e-20 and above every tolerance.
 #: Re-screening the adopted
 #: counts with the screen's own `--update --n` rebuilds the retained screen byte for byte.
 GOLDEN_UNSTABLE = {
     "n=1..100": [
         68,
         84,
+        86,
         88,
     ],
     "n=1..200": [
         68,
         84,
+        86,
         88,
         106,
-        110,
         129,
-        130,
+        132,
         146,
-        154,
         172,
         175,
+        176,
         177,
-        179,
-        180,
+        181,
         199,
     ],
     "n=1..324": [
         68,
         84,
+        86,
         88,
         106,
-        110,
         129,
-        130,
+        132,
         146,
-        154,
         172,
         175,
         176,
         177,
-        179,
-        180,
+        181,
         199,
         204,
         206,
         207,
-        210,
+        229,
         232,
-        239,
         241,
         259,
         261,
         264,
         266,
         267,
-        268,
         269,
-        270,
         273,
         297,
         301,
@@ -247,7 +249,8 @@ def test_an_adopted_house_retains_its_replayed_tolerance_instability() -> None:
 
     SQUISH's n = 108 was the case until the house adoption of 11 October 2026
     (think-fvz4) gave 108 to T-128, whose packing is stable across the screen's
-    tolerances. Couzo's n = 84 (T-130), adopted the same day, is not.
+    tolerances. Couzo's n = 84 (T-130), adopted the same day, is not, and nor is PingYou
+    Ltd's refinement of it (T-174), the house since 17 October 2026.
     """
     entry = next(row for row in manifest_entries() if row["n"] == 84)
     screened = screen_translation_escape._screen_entry(entry)  # pyright: ignore[reportPrivateUsage]  # noqa: SLF001

@@ -42,7 +42,7 @@ def render_credit(
             identifier = html.escape(item.contributor_id or "", quote=True)
             href = html.escape(f"{prefix}{PROFILES_DIR}/{identifier}.html", quote=True)
             shown = html.escape(public_names()[item.contributor_id or ""].label)
-            label = f'<a href="{href}" data-person>{shown}</a>'
+            label = f'<a href="{href}">{shown}</a>'
         pieces.append(label)
         offset = item.end
     pieces.append(html.escape(text[offset:]))

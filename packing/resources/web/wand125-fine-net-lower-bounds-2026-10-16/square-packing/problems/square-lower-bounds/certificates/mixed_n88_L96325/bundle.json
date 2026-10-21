@@ -1,0 +1,43 @@
+{
+ "schema": "fine-net-check2-v1",
+ "n": 88,
+ "L": "3853/400",
+ "L_decimal": "9.6325",
+ "B": "9977/10000",
+ "proof_net": {
+  "step": "83/40000",
+  "last": 200
+ },
+ "angle_count": 201,
+ "total_mass": "8799999/100000",
+ "candidate_digest": "a7ae1619b65a61e9986e5f13c2362d28996886478d553cba940d136f18d5246b",
+ "candidate_sha256": "96dd13d30d45f2d4279c8e4bed540205b0a9c6fddc4a4979d4e84a21e5bdaf11",
+ "net": {
+  "step": "83/40000",
+  "count": 201,
+  "endpoint": "83/200",
+  "endpoint_check": "89/40000",
+  "rotated_side_upper": "399908091/400000000",
+  "side_margin": "91909/400000000",
+  "per_edge_margin": "91909/800000000",
+  "conclusion": "Every unit-square orientation contains a concentric B-core at a net angle strictly in its interior.",
+  "remaining": "Every admissible centre at every net angle must have mixed score >= Gamma, and M < n*Gamma. Not checked here."
+ },
+ "receipt_sha256": "56d7bd433907ecbb9cf6a623ba635861b3152d96c83451727d3a490179858bf3",
+ "verifier_source_sha256": {
+  "sqverify-proof-net-fe12e036c.tar.gz": "e495f9bf14dc5ca20d8890aa0601183b8b955b94580c4e99ddffa64254371e81",
+  "fine_net_check.sh": "a4069c4b55a4da94214b02b2fff50751f0026130b27733f10a775ee7dbb23e36",
+  "REPRODUCE.md": "c810bad48155011257dcc4a7a0459bcefebbbccac3fb4495f9df870aefdcb533",
+  "SPEC.md": "2ba83bc06ddfb6028b29ad586580512831988549405a8666fc212bf4a59444b1",
+  "UPSTREAM_COMMIT": "b6fb3b20ba48e5f06cfe487d2b692839bb92668a0534aea59bc9cf83029dbcf3",
+  "INDEPENDENCE.md": "2e4fb5abf4efa326838216eaea1bc6e75c7ce06d7b1d84504d0973c613dbbaa6",
+  "SOUNDNESS.md": "16f1e679f35d4319f4a1ae8be694549dffc3bbd1b435a9005a505ed1d0586f86",
+  "verifier_build_source_sha256": "ab6e33e164dbc5c32b40349ba55981b58e630b5eef59534196a69d259404fd7c"
+ },
+ "compared_with": "481/50",
+ "compared_note": "our earlier certificate mixed_n88_L962 (9.62)",
+ "improvement_lower": "1/80",
+ "created": "2026-10-15 08:32",
+ "claim": "No packing of 88 closed unit squares fits in the closed square of side 3853/400 (= 9.6325).",
+ "verification": "Second-system check: sqverify-fast (exact rational / outward-rounded interval arithmetic) verified every net direction with threshold 1 (check2/receipt.json); a negative control with masses x0.985 is refused (check2/control.json). The shipped C++ verifier records of earlier bundles are not included; they are run only as occasional spot checks."
+}

@@ -521,10 +521,8 @@ def test_admission_holds_the_view_to_this_checkouts_witness(
     """#548 review B4: admission holds a grid view to the witness this checkout holds, by
     the run's exact side and by measuring the view again against it; the run's witness
     digest and view blob are provenance, compared with nothing (OR-18)."""
-    # A count whose drawn view is a grid view. It was 241 until the adoption of 15 October
-    # 2026 moved that house and its view to the axis tool; 297's is the other
-    # `regularize_grid_slack/0` view.
-    n = 297
+    # T-174's n = 105 retains a selected grid-slack view after the 17 October adoption.
+    n = 105
     index = json.loads(axis.ATLAS.index.read_text(encoding="utf-8"))
     (entry,) = (record for record in index["entries"] if record["n"] == n)
     assert entry["generator"] in axis.GRID_GENERATORS

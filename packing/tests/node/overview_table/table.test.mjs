@@ -121,6 +121,13 @@ void test("the reader's day is the local one, as an ISO date", () => {
   assert.equal(table.localDay(new Date(2026, 11, 31, 12)), "2026-12-31");
 });
 
+void test("the day a row arrived on is counted in UTC, as `landed` is written", () => {
+  // 08:00 on 15 October in UTC+10 is still 14 October in UTC (#514's review B, B4).
+  assert.equal(table.utcDay(new Date(Date.UTC(2026, 9, 14, 22, 0))), "2026-10-14");
+  assert.equal(table.utcDay(new Date(Date.UTC(2026, 9, 14, 23, 59))), "2026-10-14");
+  assert.equal(table.utcDay(new Date(Date.UTC(2026, 9, 15, 0, 0))), "2026-10-15");
+});
+
 void test("a case filter finds its number in a row's list of cases and ranges", () => {
   assert.ok(table.covers("11", 11));
   assert.ok(!table.covers("11", 1));
@@ -188,6 +195,14 @@ void test("a covers control takes the plain key as its query parameter, and an a
   assert.equal(table.controlParam("n", "covers"), "n");
   assert.equal(table.controlParam("date", "age"), "age");
   assert.equal(table.controlParam("s", "min"), "s-min");
+});
+
+void test("the age of a row's registration is `added-age`, apart from the date's `age`", () => {
+  // Two age controls on one bar must not answer to one parameter: `?age=7` is Max age's,
+  // as the links in use have it, and `?added-age=1` the Added filter's.
+  assert.equal(table.controlParam("added", "age"), "added-age");
+  assert.equal(table.controlParam("added", null), "added");
+  assert.notEqual(table.controlParam("added", "age"), table.controlParam("date", "age"));
 });
 
 /**
@@ -258,6 +273,11 @@ void test("the home link carries supported filters and a known historical result
   assert.equal(target.pathname, "/results.html");
   assert.equal(target.search, "?kind=rigidity&current=true&s-min=3&age=180");
   assert.equal(target.hash, "#t-031");
+});
+
+void test("the home link carries the Added filters to the complete table", () => {
+  const target = homepageLink("?added-age=1&added=2026-10-12&unrelated=omitted", "");
+  assert.equal(target.search, "?added-age=1&added=2026-10-12");
 });
 
 void test("the authored complete-table anchor survives supported filters and fragment changes", () => {

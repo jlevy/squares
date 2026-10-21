@@ -50,8 +50,9 @@ contributor:
       sources: [github-repository, packet, fitzharding-credit]
   bio_sources: [packet, title-page]
 ---
-David R. MacIver wrote the Square Packing Research manuscripts on geometric bounds and
-counting methods, with accompanying Lean source.
+In 2026, David R. MacIver published
+[Square Packing Research](https://drmaciver.github.io/square-packing-research/)
+manuscripts on geometric bounds and counting methods, with accompanying Lean source.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

@@ -48,9 +48,12 @@ contributor:
       sources: [catalogue-byline]
   bio_sources: [catalogue-byline, tools-credit]
 ---
-David Ellsworth maintains the Squares in Squares catalogue, extending Erich Friedman’s
-records with SVG drawings, high-precision values and algebraic descriptions.
-He also develops packing parsers and checking tools.
+David Ellsworth maintains the
+[Squares in Squares catalogue](https://kingbird.myphotos.cc/packing/squares_in_squares.html),
+extending Erich Friedman’s records with SVG drawings, high-precision values and
+algebraic descriptions.
+He also develops
+[packing parsers and checking tools](https://github.com/Davidebyzero/packing_squares_in_squares__tools).
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

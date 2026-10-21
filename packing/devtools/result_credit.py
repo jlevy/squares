@@ -46,6 +46,20 @@ PROJECT_AUTHOR_ORIGIN = CreditOrigin(
 )
 
 
+def is_first_party(record: Mapping[str, Any]) -> bool:
+    """Whether a result is this project's own, credited to `PROJECT_AUTHOR`: its entry
+    names no `attribution`."""
+    return not record.get("attribution")
+
+
+def credit_sources(record: Mapping[str, Any]) -> tuple[str, ...]:
+    """The bibliography keys whose credit a result prints, in the attribution's order.
+    None for a result of this project, whose `after` names are its own entry's."""
+    if is_first_party(record):
+        return ()
+    return tuple(record["attribution"]["source_keys"])
+
+
 def credit_line(record: Mapping[str, Any], sources: Mapping[str, Mapping[str, Any]]) -> str:
     """Who a result is credited to. `RESULTS.md` and the site's overview print this cell.
 
@@ -53,12 +67,12 @@ def credit_line(record: Mapping[str, Any], sources: Mapping[str, Mapping[str, An
     attribution names them. For a result of this project: `Levy`, or `Levy after …` with
     the names its `builds_on.credit` lists, in that order.
     """
-    if not record.get("attribution"):
+    if is_first_party(record):
         after = (record.get("builds_on") or {}).get("credit") or []
         return PROJECT_AUTHOR + (f" after {', '.join(after)}" if after else "")
     lines = [
         sources[key].get("credit") or ", ".join(sources[key]["authors"])
-        for key in record["attribution"]["source_keys"]
+        for key in credit_sources(record)
     ]
     return "; ".join(dict.fromkeys(lines)).replace("|", r"\|")
 
@@ -67,7 +81,7 @@ def result_credit_html(
     record: Mapping[str, Any], sources: Mapping[str, Mapping[str, Any]], *, prefix: str = ""
 ) -> str:
     """Compose source-addressed credits, retaining ambiguous deduplicated lines as text."""
-    if not record.get("attribution"):
+    if is_first_party(record):
         author = render_credit(PROJECT_AUTHOR_ORIGIN, PROJECT_AUTHOR, prefix=prefix)
         after = (record.get("builds_on") or {}).get("credit") or []
         joined = ", ".join(
@@ -82,7 +96,7 @@ def result_credit_html(
         )
         return author + (f" after {joined}" if after else "")
     rendered: dict[str, str] = {}
-    for key in record["attribution"]["source_keys"]:
+    for key in credit_sources(record):
         source = sources[key]
         if source.get("credit"):
             text = source["credit"]

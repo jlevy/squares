@@ -905,11 +905,15 @@ RECORDED: dict[int, tuple[tuple[str, str, str] | None, tuple[str, str, str] | No
     # optimum of the same packing took both lanes (T-098): the finder and the improver,
     # with no year, since the year dates the find. Below it, Hosono's rectangle bound of
     # 1 October replayed as T-074, which took the case on 2026-10-02 from its 28 September
-    # certificate (T-070), itself raised that day from the point bound of T-044.
+    # certificate (T-070), itself raised that day from the point bound of T-044. Since the
+    # adoption of 17 October 2026 PingYou Ltd's refinement of Rehwaldt's packing (T-174),
+    # the finder and two improvers. Since the intake of 19 October 2026 the lower line is
+    # Hosono's fine-net certificate of 16 October, 853/100, replayed as T-205, whose
+    # source record credits "Hosono after Tokoharu and Levy".
     68: (
-        ("Couzo & Rehwaldt, GitHub (confirmed T-118)", "external", "verified"),
+        ("Couzo et al., GitHub (confirmed T-174)", "external", "verified"),
         (
-            "Hosono after Tokoharu, Levy et al. 2026, GitHub (confirmed T-074)",
+            "Hosono after Tokoharu and Levy 2026, GitHub (confirmed T-205)",
             "external",
             "verified",
         ),
@@ -933,9 +937,10 @@ RECORDED: dict[int, tuple[tuple[str, str, str] | None, tuple[str, str, str] | No
     # Three finders and two improvers gave "Arslanov et al." with no year here until
     # Couzo's certified packing took the case; the synthetic test above keeps that shape.
     # From 2026-10-05 its exact optimum, Couzo's packing improved by Daniel (T-098), and
-    # since the house adoption of 11 October 2026 Daniel's record-hunt packing (T-141).
+    # since the house adoption of 11 October 2026 Daniel's record-hunt packing (T-141), as
+    # PingYou Ltd refined it since the adoption of 17 October 2026 (T-174).
     132: (
-        ("Daniel 2026, GitHub (confirmed T-141)", "external", "verified"),
+        ("Daniel & PingYou Ltd, GitHub (confirmed T-174)", "external", "verified"),
         (
             "Karakuş 2026, arXiv corrects Nagamochi 2005 (confirmed T-083)",
             "external",
@@ -944,9 +949,10 @@ RECORDED: dict[int, tuple[tuple[str, str, str] | None, tuple[str, str, str] | No
     ),
     # A certified ceiling that trailed its report by two units of the printed place was
     # cited as reported until 2026-10-05, when the exact optimum of the same packing put
-    # both lanes on one side (T-098).
+    # both lanes on one side (T-098), and PingYou Ltd's tighter certificate of it since the
+    # adoption of 17 October 2026 (T-174).
     206: (
-        ("Couzo & Daniel, GitHub (confirmed T-098)", "external", "verified"),
+        ("Couzo et al., GitHub (confirmed T-174)", "external", "verified"),
         (
             "Karakuş 2026, arXiv corrects Nagamochi 2005 (confirmed T-083)",
             "external",
@@ -1254,7 +1260,7 @@ def test_the_star_marks_recent_results_whoever_proved_them() -> None:
     assert lines[12]["recent"]
     # squarepacker's re-weighting of Daniel's points since 5 October 2026 (T-095), after
     # this project's (T-079), which named the project; the credit names Levy for Route B.
-    assert lines[12]["text"] == "squarepacker after Daniel, Levy 2026, GitHub"
+    assert lines[12]["text"] == "Ryu after Daniel, Levy 2026, GitHub"
     assert lines[18]["recent"]
     assert lines[18]["text"] == "Hosono after Tokoharu, Levy et al. 2026, GitHub"
     assert all(line["recent"] for line in lines.values() if line and line["basis"] == "project")
@@ -1301,9 +1307,11 @@ def test_the_corrections_on_record_are_recent_and_name_nagamochi_2005() -> None:
     # corrected floors, none of them correcting anything; 220 since the second merge that
     # day, when Hosono's replayed linear certificate (T-080) took n = 101 to 105; 219
     # since the third, when its replayed n = 82 linear certificate (T-076) took n = 82.
-    assert len(corrected) == 219
+    # 218 since 18 October, when T-216's replayed fine-net certificate took n = 108.
+    assert len(corrected) == 218
     assert 37 not in corrected
     assert 61 not in corrected
+    assert 108 not in corrected
     assert all(line["recent"] for line in corrected.values())
     assert {line["source_key"] for line in corrected.values()} == {
         "[Karakuş 2026]",
@@ -1314,7 +1322,7 @@ def test_the_corrections_on_record_are_recent_and_name_nagamochi_2005() -> None:
         for line in corrected.values()
     } == {("Nagamochi 2005", "T-007", "[Nagamochi 2005]")}
     # Recent bounds that correct nothing keep the star and no tag.
-    for n in (11, 12, 17, 18, 21):
+    for n in (11, 12, 17, 18, 21, 108):
         assert lines[n]["recent"], n
         assert lines[n]["corrects"] is None, n
     corrected_result = next(r for r in _register().results if r["id"] == "T-007")

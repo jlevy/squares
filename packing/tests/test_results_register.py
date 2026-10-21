@@ -36,6 +36,7 @@ MACHINE_ENTRY = {
     "replay": "uv run --frozen python -m somewhere",
     "replay_status": "passed",
     "origin": "audited-here",
+    "performed_by": "repository",
 }
 
 
@@ -121,6 +122,7 @@ def test_confirmation_ladder_on_synthetic_atoms() -> None:
     )
     replayed = {
         "origin": "replayed-here",
+        "performed_by": "repository",
         "replay": "uv run replay",
         "replay_status": "passed",
         "method": "numerical-f64",
@@ -135,11 +137,13 @@ def test_confirmation_ladder_on_synthetic_atoms() -> None:
     assert derive_confirmation([dict(MACHINE_ENTRY), interval]) == "C3"
     assert check_results.distinct_methods([dict(MACHINE_ENTRY), interval]) == 2
     # A third party's own replay, retained here, confirms like ours.
-    third_party = dict(MACHINE_ENTRY, origin="independently-external")
+    third_party = dict(
+        MACHINE_ENTRY, origin="independently-external", performed_by="independent-external"
+    )
     assert derive_confirmation([third_party]) == "C3"
     assert check_results.third_party_replayed([third_party])
     # The world's machine proof raises V, never C.
-    external_machine = dict(MACHINE_ENTRY, origin="external")
+    external_machine = dict(MACHINE_ENTRY, origin="external", performed_by="source-author")
     assert derive_confirmation([external_machine]) == "C0"
     # A review record alone changes nothing without machine evidence.
     assert derive_confirmation([replayed], RUNG_4_REVIEWS) == "C2"
@@ -180,6 +184,7 @@ FORMAL_ENTRY: dict[str, object] = {
     **MACHINE_ENTRY,
     "method": "proof-assistant-checked",
     "origin": "replayed-here",
+    "performed_by": "repository",
     "axioms_receipt": "axioms.log",
 }
 
@@ -237,11 +242,14 @@ def test_rung_5_needs_formal_evidence_experts_and_openness() -> None:
     # C5 needs two distinct experts, the rebuild here and the open pointer.
     assert derive_confirmation([FORMAL_ENTRY], experts[:1], open_review=True) == "C3"
     assert derive_confirmation([FORMAL_ENTRY], experts, open_review=False) == "C3"
+    # A proof-assistant build here is replayed-here; an `audited-here` Lean entry is
+    # refused outright rather than read as a build here (review E2), so it reaches
+    # neither C5 nor C3.
     assert (
         derive_confirmation(
             [dict(FORMAL_ENTRY, origin="audited-here")], experts, open_review=True
         )
-        == "C3"
+        == "C0"
     )
     assert (
         derive_confirmation(
@@ -1608,9 +1616,15 @@ def test_results_md_lists_each_unfinished_confirmation_under_its_next_action() -
         ),
         "  - Unfinished, C4: a second review. Not priced.",
     ]
+    # A `what` that ends in its own full stop keeps one: no "review.. Not priced.".
+    stopped = _unfinished(what="A second review.", rung="C4", link=None, estimated_cost=None)
+    assert render_results.next_action(
+        {**record, "next_rung": "First.", "unfinished_confirmations": [stopped]}
+    ) == ["- **T-999** — First.", "  - Unfinished, C4: A second review. Not priced."]
     committed = render_results.OUTPUT.read_text(encoding="utf-8")
     assert "  - Unfinished, C3 (think-nd7g): a complete replay of all 201 angles" in committed
     assert "About 11.24 CPU-hours, up to about 23 (priced 2026-10-10)." in committed
+    assert ".. Not priced." not in committed
 
 
 #: The regularizer of T-146's certificates, and the review its measurements come from.
@@ -1919,15 +1933,21 @@ def test_full_part_citations_cannot_promote_the_whole_result(
                     "evidence"
                 ]
                 if entry["id"] in cited
+                and entry["id"] != "E-n017-fitzharding-lean-source-build"
             ],
             record=record,
         )
         == "V0"
     )
-    promoted = _changed_result(tmp_path, rid, evidence=cited, verification="V3")
+    expected = "V0" if rid == "T-153" else "V3"
+    promoted_rung = "V3" if rid == "T-153" else "V4"
+    promoted = _changed_result(tmp_path, rid, evidence=cited, verification=promoted_rung)
     monkeypatch.setattr(check_results, "RESULTS", promoted)
     assert check_results.main() == 1
-    assert f"{rid}: declares V3 but the cited atoms support only V0" in capsys.readouterr().out
+    assert (
+        f"{rid}: declares {promoted_rung} but the cited atoms support only {expected}"
+        in capsys.readouterr().out
+    )
 
 
 @pytest.mark.parametrize(

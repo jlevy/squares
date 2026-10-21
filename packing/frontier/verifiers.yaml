@@ -10,7 +10,7 @@ softschema:
 # the rendered view. `devtools.backfill_verifier_relation` fills `verifiers` from replay
 # commands, packets and digests, audits the relation, and prints what it cannot decide.
 
-last_reviewed: '2026-10-14'
+last_reviewed: '2026-10-18'
 verifiers:
   - id: V-evand-verify-exact
     program: verify_exact.py
@@ -392,6 +392,7 @@ verifiers:
       the others by disjoint circumscribed discs.
     source:
       - packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/verify_cert.py
+      - packing/resources/web/evand-n183-subgrid-2026-10-19/source/search/exact/verify_cert.py
     versions:
       - {sha256: 3299ca0c0f02f7c221deeea69a9a85b5a90db6bc410b20727fdff211c92bed52}
 
@@ -409,6 +410,7 @@ verifiers:
       open box, in Fraction arithmetic.
     source:
       - packing/resources/web/evand-square-packing-2026-10-05/square-packing/s12/search/exact/verify_cert2.py
+      - packing/resources/web/evand-n183-subgrid-2026-10-19/source/search/exact/verify_cert2.py
     versions:
       - {sha256: 55140a35d95d9eaa64a14c3b044641efbcda94ebfc3b12b7dec9fa52692e31d3}
 
@@ -991,6 +993,16 @@ verifiers:
       The constructions it decides for others were published as figures and
       coordinates without verification code, so it was written from the geometry.
 
+    versions:
+    - sha256: 6642aca5a6dacfb09f8bb4fb650182d744128e835ca41d50f43d8f4b849712eb
+      path: packing/src/sqpack/witness.py
+      note: The source the n183 primary batch ran, unchanged since; the retained seven-file
+        provenance identifies the historical run
+    - sha256: 56bc5b9f690b054ba30e82547dea4aa9d0ccea0a2b1827fab28fcc4e98677337
+      path: packing/src/sqpack/verify.py
+      note: The source the n183 primary batch ran, unchanged since; the retained seven-file
+        provenance identifies the historical run
+
   - id: V-check-rational-witness-independent
     program: devtools.check_rational_witness_independent
     author: Squares Project (Levy)
@@ -1002,6 +1014,12 @@ verifiers:
     source: [packing/devtools/check_rational_witness_independent.py]
     independence_record: packing/devtools/check_rational_witness_independent.py
     note: Its module statement says it shares no geometry or verification code with sqpack.witness or sqpack.verify.
+
+    versions:
+    - sha256: 89f8d8e2e071a3f7035083c9a8beb23e3bec175eb0762b2825a5b9f684c16975
+      path: packing/devtools/check_rational_witness_independent.py
+      note: The source the n183 primary batch ran, unchanged since; the retained seven-file
+        provenance identifies the historical run
 
   - id: V-check-nagamochi-lemma1-counterexample
     program: devtools.check_nagamochi_lemma1_counterexample
@@ -2364,6 +2382,12 @@ verifiers:
       writing it, to check that the conversion means what they mean, and imports or
       copies none of their code; it runs them only as separate processes.
 
+    versions:
+    - sha256: 52073811e61dba8bca0574a1e8cf99b91058fb70c17b38621baf07b5fb94cf3e
+      path: packing/devtools/evand_exact_certificates.py
+      note: The source the n183 primary batch ran, unchanged since; the retained seven-file
+        provenance identifies the historical run
+
   - id: V-check-n11-final-composition
     program: devtools.check_n11_final_composition
     author: Squares Project (Levy)
@@ -2635,7 +2659,7 @@ verifiers:
     methods: [exact-algebraic]
     role: premises
     summary: >-
-      Decides everything squarepacker's v1.1 s(12) certificate rests on but coverage, in
+      Decides everything Ryu's v1.1 s(12) certificate rests on but coverage, in
       integers and Fraction: its bytes, the header and side, a one-to-one match of its
       points to Daniel's dilated within the stated rounding, positivity, containment, D4
       invariance and orbits, the total below 12, the corner points, and the source's two
@@ -2813,6 +2837,12 @@ verifiers:
     source:
     - packing/devtools/evand_arrangement_reports.py
 
+    versions:
+    - sha256: 8e2141bfa0b233173e442517035783f6598610398fe9896e9a9977d7383dcc17
+      path: packing/devtools/evand_arrangement_reports.py
+      note: The source the n183 primary batch ran, unchanged since; the retained seven-file
+        provenance identifies the historical run
+
   - id: V-algebraic-witness-reports
     program: devtools.algebraic_witness_reports
     author: Squares Project (Levy)
@@ -2888,6 +2918,16 @@ verifiers:
       full. The import lane of issue 552 added a HOUSES reader of its packet, which the
       12 October review of that issue
       (docs/project/reviews/review-2026-10-12-upper-bound-import-552.md) read.
+
+    versions:
+    - sha256: bc47273499dccbd59997bbdd4028176eb09621865b25854f511f9cf872ce1156
+      path: packing/devtools/upper_bound_reports.py
+      note: The source the n183 primary batch ran, as the retained seven-file provenance
+        records it
+    - sha256: e8bb87fa8acb5470bee92d9f77cb158a11bd780d6e5f8c38a12bf77870573a08
+      path: packing/devtools/upper_bound_reports.py
+      note: The current driver, which adds only the n183 packet to HOUSES, the reader that
+        receipt admission and house selection use; it decided no n183 geometry
 
   - id: V-rehwaldt-n68-verify
     program: verify.py
@@ -3978,3 +4018,485 @@ verifiers:
     note: >-
       Written on 16 October 2026 for docs/project/reviews/review-2026-10-16-pingyou-n29.md
       and kept, with everything it printed, in the packet's review/ directory.
+
+  - id: V-audit-fine-net-receipt
+    program: devtools.audit_fine_net_receipt
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: premises
+    summary: >-
+      Checks a rectangle-only declared-net candidate's exact mass, geometry and net
+      premises, binds its saved native census and complete direction log, and recomputes
+      every saved control-witness capture using exact polygon clipping. It decides
+      premises and particular points, never universal coverage between them.
+    source:
+      - packing/devtools/audit_fine_net_receipt.py
+      - packing/tests/test_audit_fine_net_receipt.py
+    independence_record: docs/project/reviews/review-2026-10-18-wand125-n108-certificate-mathematics.md
+    independence:
+      read: [mathematics, specification, certificate-format, producer-code, producer-output]
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Codex (OpenAI)
+          setting: >-
+            A separately prompted mathematical review lane, strong tier at xhigh
+            reasoning; the retained review records the system family and exact scope.
+      overlaps_producer:
+        extent: unknown
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The source discloses AI assistance without identifying every system family.
+          This audit was separately prompted and imports only the Python standard
+          library. Its author read the maintained admission and control code that the
+          producer's adapted checker shares, so it does not claim a clean room.
+    note: >-
+      The 18 October review's complete n108 point audit is retained at
+      packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review/n108-exact-audit.json.
+      Its PASS is a premise-and-point result beside the
+      native replay, not a full coverage decision or an independent full verifier.
+  - id: V-n108-review-max-exact
+    program: n108_audit.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: premises
+    summary: >-
+      Independently recomputes the n108 certificate's exact mass, multiplicity-preserving
+      D4 expansion and declared-net premises, checks retained source/native direction
+      inventories, and computes four saved native control poses and the source's axis
+      control pose. It checks premises and five points, not universal capture.
+    source:
+      - packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-max/n108_audit.py
+    independence_record: packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-max/README.md
+    independence:
+      read: [mathematics, proof-text, specification, certificate-format, producer-code, producer-output, earlier-review]
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Codex (OpenAI)
+          setting: A separately prompted source-distinct mathematical review, strongest tier at maximum reasoning.
+      overlaps_producer:
+        extent: unknown
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The producer discloses AI assistance without identifying every system family.
+          This standard-library audit was written separately, before reading maintained
+          admission/domain code; its input adapters were corrected after those reads.
+          Findings and code were completed before the later comparison with Review B.
+          No producer code is copied, imported or executed; the review claims no clean room.
+    note: >-
+      The retained packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-max/audit.json records
+      EXACT_PREMISES_AND_FIVE_POSES_PASS. The five poses are four of 201 recorded
+      native control poses and one of 32 source control poses, not five entire
+      direction domains. The accepted bounded review is docs/project/reviews/review-2026-10-18-n108-fine-net-mathematics-max.md.
+
+  - id: V-fine-net-mac-review-exact
+    program: Historical fine-net Mac exact-checkpoint audits and analytical geometry controls
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: premises
+    summary: >-
+      Recomputes exact rectangle-measure premises and saved native positive/refusal witness
+      captures for the accepted n68,n84,n85 checkpoints; validates receipt inventories and
+      execution/timing bindings. Analytical geometry fixtures and negative in-memory receipt
+      mutations constrain the auditor. It decides no universal coverage or lower bound
+      alone.
+    source:
+      - >-
+        packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/n68-certificate-math/audit_checkpoint.py.txt
+      - >-
+        packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/n68-certificate-math/exact_geometry.py.txt
+      - >-
+        packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/n68-certificate-math/check_geometry.py.txt
+      - >-
+        packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/n84-n85-certificate-math/audit_checkpoint.py.txt
+    versions:
+      - sha256: e5ce398a0ff0a53ac745763bd37542d03fe0657e2d3197ac00291cc9ab9fa51f
+        path: >-
+          packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/n68-certificate-math/audit_checkpoint.py.txt
+        note: >-
+          Verbatim historical source actually executed by the accepted mathematical reviews;
+          preserved as text, not changed to fit the current source tree.
+      - sha256: 820a8d4f127432f66dfffca0f910dc74125905365bd4fd3c2a0baaa76d264b59
+        path: >-
+          packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/n68-certificate-math/exact_geometry.py.txt
+        note: >-
+          Verbatim historical source actually executed by the accepted mathematical reviews;
+          preserved as text, not changed to fit the current source tree.
+      - sha256: 341c67802544d5ac5f6c132e7664da465660c736e9ca516ca1fa222e3c8f4718
+        path: >-
+          packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/n68-certificate-math/check_geometry.py.txt
+        note: >-
+          Verbatim historical source actually executed by the accepted mathematical reviews;
+          preserved as text, not changed to fit the current source tree.
+      - sha256: 05a48f157987a92b1a021e56156c594c4b9ae993b82ec6ed4121c17b39e699b9
+        path: >-
+          packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/n84-n85-certificate-math/audit_checkpoint.py.txt
+        note: >-
+          Verbatim historical source actually executed by the accepted mathematical reviews;
+          preserved as text, not changed to fit the current source tree.
+    independence_record: >-
+      packing/resources/web/wand125-fine-net-lower-bounds-2026-10-16/review-mac/README.md
+    independence:
+      read:
+        - mathematics
+        - proof-text
+        - specification
+        - certificate-format
+        - producer-code
+        - producer-output
+        - earlier-review
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Codex (OpenAI)
+          setting: >-
+            Separately prompted strongest-tier certificate mathematics lanes at maximum
+            reasoning; n84/n85 reuse the retained n68 helper and geometry source.
+      overlaps_producer:
+        extent: unknown
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The producer discloses AI assistance without identifying every authoring system.
+          These point-audit programs share no producer code, but their authors read
+          maintained code and earlier reviews. The two-case driver reuses the n68
+          helper/import closure; this is explicit reuse within the registered audit, not
+          another universal implementation.
+    note: >-
+      The original import closure, read logs, historical commands, failed diagnostic and
+      authentic PASS receipts are retained in review-mac/README.md. No audit was rerun
+      during records preparation; historical source-context comparisons are recorded
+      observations, not gates on current Git/source identity.
+
+  - id: V-sq19-review-endpoint
+    program: check_endpoint.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      For Fitzharding's Lean proof of s(19) = 3 + 4√2/3: reads the nineteen squares of
+      EndpointPacking.lean as data and decides in exact Q(sqrt 2) that each is a unit
+      square inside [0, 3 + 4√2/3]^2 and that every one of the 171 pairs is weakly
+      separated by an edge normal, so the interiors are disjoint; then compares the
+      squares, in order, with this project's witness W-known-best-n019.
+    source:
+      - packing/resources/web/fitzharding-n19-lean-2026-10-16/review/check_endpoint.py
+    independence_record: docs/project/reviews/review-2026-10-16-fitzharding-n19-lean.md
+    independence:
+      read: [mathematics, proof-text, certificate-format]
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: the stage 4 mathematical review lane of the #640 import (think-o40t), strong sub-agent tier, reasoning max
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The source's README says it was developed with substantial assistance from
+          Claude and Codex. Written by a Claude agent prompted separately from the source
+          and from the packet and records lanes, in a file of its own that imports none of
+          the source and uses the standard library only.
+      note: >-
+        Its authors read the source's Lean text, EndpointPacking.lean among it, as data
+        before writing it; it decides the packing from the squares' coordinates, not from
+        the Lean proof of endpoint_packing.
+    note: >-
+      Written and run on 16 October 2026 by the review of the Lean proof; kept in the
+      packet's review/ with its README, which records what it printed.
+
+  - id: V-sq19-review-cover-census
+    program: check_cover_census.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      For Fitzharding's Lean proof of s(19) = 3 + 4√2/3, in exact rationals: the 25 cells
+      tile the centre box; the symmetry tables are induced by the frame symmetries; the
+      capacity data; every 19-cell set of the 177,100 reaches a census mask, one per D4
+      orbit (orbit_check); the routing (route_checked) and the capture index
+      (captureIndex_checked); the 38 survivor images; and that every non-survivor mask
+      contains an image of one of the 269 certified patterns, reading each roster from
+      its name.
+    source:
+      - packing/resources/web/fitzharding-n19-lean-2026-10-16/review/check_cover_census.py
+    independence_record: docs/project/reviews/review-2026-10-16-fitzharding-n19-lean.md
+    independence:
+      read: [mathematics, proof-text, certificate-format, producer-code]
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: the stage 4 mathematical review lane of the #640 import (think-o40t), strong sub-agent tier, reasoning max
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The source's README says it was developed with Claude and Codex. Written by a
+          Claude agent prompted separately, in a file of its own that imports none of the
+          source.
+      note: >-
+        Its authors had read the census, cover and routing modules and their Lean
+        checkers before writing it; it decides the same finite predicates from the data,
+        and enumerates the orbits and the coverage itself. Its coverage check assumes the
+        producer's naming convention, that each census pattern's roster is the cell mask
+        its name encodes, and does not decide that from the pattern files (the review's
+        N19-6, its question 4 to the author).
+    note: >-
+      Written and run on 16 October 2026 by the review of the Lean proof; kept in the
+      packet's review/ with its README, which records what it printed.
+
+  - id: V-sq19-review-region
+    program: check_region.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      For Fitzharding's Lean proof of s(19) = 3 + 4√2/3: decides in exact rationals the
+      property the nine Sq19.Capture.Region.* native facts certify, that each capture
+      target, moved by the frame shift, lies in its box of Hull.prob, with the source's
+      sqCheck and wallCheck transcribed and impliedOK replaced by vertex enumeration of the
+      target polygon, each of the 76 checked bounded and nonempty; and that Wainwright's
+      configuration lies in H.
+    source:
+      - packing/resources/web/fitzharding-n19-lean-2026-10-16/review/check_region.py
+    independence_record: docs/project/reviews/review-2026-10-16-fitzharding-n19-lean.md
+    independence:
+      read: [mathematics, proof-text, certificate-format, producer-code]
+      clean_room: false
+      shares: [sqCheck, wallCheck]
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: the stage 4 mathematical review lane of the #640 import (think-o40t), strong sub-agent tier, reasoning max
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: false
+        note: >-
+          The source's README says it was developed with Claude and Codex. Written by a
+          Claude agent prompted separately, in a file of its own that imports none of the
+          source, transcribing by hand the two definitions named above.
+      note: >-
+        It transcribes sqCheck and wallCheck (Capture/ToHull.lean:52-59) and their mirror
+        and top forms line for line and replaces only impliedOK, so it is independent of
+        the source in evaluation, not in formulation. It decides the property the facts
+        certify, not the native evaluator's value of the Boolean.
+    note: >-
+      Written and run on 16 October 2026 by the review of the Lean proof; the check that
+      every target polygon is bounded and nonempty was added after the review's PR review
+      A. Kept in the packet's review/ with its README, which records what it printed.
+
+  - id: V-sq19-review-capture-link
+    program: check_capture_link.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      For Fitzharding's Lean proof of s(19) = 3 + 4√2/3 and one capture state (3435, 3438
+      or 3442): decides that the state's cells are the census cells of its roster shifted
+      by -sigma (cells_ok), that the reflected roster is its census mask (mask_ok), that
+      the base windows are at least pi/2 wide (width_checked), and that the pieces tile
+      owner 12's window (tile_checked), reading the state's files from its release archive
+      at their listed digests.
+    source:
+      - packing/resources/web/fitzharding-n19-lean-2026-10-16/review/check_capture_link.py
+    independence_record: docs/project/reviews/review-2026-10-16-fitzharding-n19-lean.md
+    independence:
+      read: [mathematics, proof-text, certificate-format, producer-code]
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: the stage 4 mathematical review lane of the #640 import (think-o40t), strong sub-agent tier, reasoning max
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The source's README says it was developed with Claude and Codex. Written by a
+          Claude agent prompted separately, in a file of its own that imports none of the
+          source.
+      note: >-
+        Its authors had read the capture states' Lean modules before writing it; it
+        decides the four predicates from the data.
+    note: >-
+      Written and run on 16 October 2026 by the review of the Lean proof; kept in the
+      packet's review/ with its README, which records what it printed.
+
+  - id: V-sq19-review-endgame
+    program: check_endgame.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [interval-certified]
+    role: decides
+    summary: >-
+      For Fitzharding's Lean proof of s(19) = 3 + 4√2/3: decides, for each of the 4,096
+      sign and owner cases of the local endgame on the whole box H, the property the
+      2,304 Sq19.Endgame.Reduction native facts certify: the three Farkas multipliers
+      are nonnegative, S1 > 0, and the endpoint margin's derivative along each direction
+      prefix is nonnegative, with its own first-order Taylor models, fixed-point outward
+      rounding at 2^-160 and forward-mode slopes.
+    source:
+      - packing/resources/web/fitzharding-n19-lean-2026-10-16/review/check_endgame.py
+    independence_record: docs/project/reviews/review-2026-10-16-fitzharding-n19-lean.md
+    independence:
+      read: [mathematics, proof-text, certificate-format, producer-code]
+      clean_room: false
+      shares: [RowsH, RowsAH, PhiExpr, Combine, ReductionCases]
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: the stage 4 mathematical review lane of the #640 import (think-o40t), strong sub-agent tier, reasoning max
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: false
+        note: >-
+          The source's README says it was developed with Claude and Codex. Written by a
+          Claude agent prompted separately, in a file of its own that imports none of the
+          source, transcribing by hand the row definitions of the five modules named
+          above.
+      note: >-
+        It transcribes the endgame's row definitions (Endgame/RowsH.lean, RowsAH.lean,
+        PhiExpr.lean, Combine.lean, ReductionCases.lean) and evaluates them with its own
+        rigorous arithmetic, so it is independent of the source in evaluation, not in
+        formulation. It decides the property the facts certify, not the native
+        evaluator's value of checkNat. Its random sample of cone points, in floating
+        point, decides nothing.
+    note: >-
+      Written and run on 16 October 2026 by the review of the Lean proof; kept in the
+      packet's review/ with its README, which records what it printed.
+
+  - id: V-sq19-review-archive-scan
+    program: scan_archives.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      For Fitzharding's Lean proof of s(19) = 3 + 4√2/3 and one release archive: decides
+      its SHA-256 against SHA256SUMS and every member's path and SHA-256 against
+      expected/generated-sources.sha256, finds no member unlisted, counts the
+      declarations and commands that would widen the trust boundary (axiom, sorry,
+      implemented_by, extern, unsafe, opaque, skipKernelTC, elab, macro, syntax, #eval and
+      the like), and lists the theorems proved by native_decide.
+    source:
+      - packing/resources/web/fitzharding-n19-lean-2026-10-16/review/scan_archives.py
+    independence_record: docs/project/reviews/review-2026-10-16-fitzharding-n19-lean.md
+    independence:
+      read: [proof-text, certificate-format, producer-output]
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: the stage 4 mathematical review lane of the #640 import (think-o40t), strong sub-agent tier, reasoning max
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The source's README says it was developed with Claude and Codex. Written by a
+          Claude agent prompted separately, in a file of its own that imports none of the
+          source.
+      note: >-
+        A keyword scan and digest check: it decides the archives' custody and the absence
+        of the listed constructs, not any fact's truth.
+    note: >-
+      Written and run on 16 October 2026 by the review of the Lean proof on each of the
+      five archives, downloaded to scratch and deleted; kept in the packet's review/ with
+      its README, which records what it printed.
+
+  - id: V-sq19-review-native-count
+    program: count_native.py
+    author: Squares Project (Levy)
+    provenance: first-party
+    language: [Python]
+    methods: [exact-algebraic]
+    role: decides
+    summary: >-
+      For Fitzharding's Lean proof of s(19) = 3 + 4√2/3: accounts for each of the 4,320
+      native_decide facts of the theorem's axiom report by where it is proved, in the Git
+      tree, in a release archive (from scan_archives.py's outputs) or nowhere, and lists
+      the native theorems built but not in the final axiom set.
+    source:
+      - packing/resources/web/fitzharding-n19-lean-2026-10-16/review/count_native.py
+    independence_record: docs/project/reviews/review-2026-10-16-fitzharding-n19-lean.md
+    independence:
+      read: [proof-text, producer-output]
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: the stage 4 mathematical review lane of the #640 import (think-o40t), strong sub-agent tier, reasoning max
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The source's README says it was developed with Claude and Codex. Written by a
+          Claude agent prompted separately, in a file of its own that imports none of the
+          source.
+      note: >-
+        Accounting only: it decides where each logged fact is proved, not whether it
+        holds.
+    note: >-
+      Written and run on 16 October 2026 by the review of the Lean proof over the five
+      archive scans; kept in the packet's review/ with its README, which records what it
+      printed.
+
+  - id: V-acquire-source
+    program: devtools.acquire_source
+    author: Squares Project (Levy)
+    provenance: first-party
+    language:
+    - Python
+    methods:
+    - exact-algebraic
+    role: premises
+    summary: Admits retained source custody, declared members and manifest bytes; decides no
+      packing geometry.
+    source:
+    - packing/devtools/acquire_source.py
+    - packing/resources/web/evand-n183-subgrid-2026-10-19/receipts/programs/acquire-source-replay-2026-10-19.py.txt
+    versions:
+    - sha256: f2badc973c8aa3c1bc90e4ebf89836ba7c0fa74fa7527e7be7dc205d48d701e4
+      path: packing/resources/web/evand-n183-subgrid-2026-10-19/receipts/programs/acquire-source-replay-2026-10-19.py.txt
+      note: Historical source actually used by the completed n183 primary batch; retained verbatim
+        from the run revision, never executed from this archive.
+    - sha256: a53cf8375a9122d3daa18f1997faa2281a8821ba2612a40d7b512d2f1861727f
+      path: packing/devtools/acquire_source.py
+      note: 'Inherited frozen #671 source for current admission-only checks; not relabeled as
+        the historical certify source.'
+    note: The upper-bound driver calls this custody premise before parsing. Historical command/environment
+      and actual source hash are retained in the n183 packet; no upstream or archived code is
+      executed by this registration.

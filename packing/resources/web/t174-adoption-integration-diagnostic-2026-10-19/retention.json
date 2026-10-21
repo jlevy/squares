@@ -1,0 +1,29 @@
+{
+  "format": "retained-integration-diagnostic-v1",
+  "classification": "Unregistered integration diagnostic; no new geometric replay, mathematical result or assurance rung.",
+  "cited_by": [],
+  "rerun_on_retention": false,
+  "retained_from": ".codex/intake-resume-20261019",
+  "files": [
+    {
+      "path": "665-prospective-audit.py",
+      "bytes": 12473,
+      "sha256": "0e9e322905545a75e864b298e373b7efcf0b7d316c5bcf01f50dbc3f8a355add"
+    },
+    {
+      "path": "665-prospective-audit.json",
+      "bytes": 103306,
+      "sha256": "1dcf39c52d8ea81236753f9f7753dc2dd2cf955fa72cb95aa4964af3ce179ddd"
+    },
+    {
+      "path": "665-prospective-audit-README.md",
+      "bytes": 6018,
+      "sha256": "85b61e1e34f52b739412bcc4d95b9146329091a8f60481edd24299ed4ece607b"
+    },
+    {
+      "path": "665-prospective-final-review.md",
+      "bytes": 18090,
+      "sha256": "d2ab5d3ee144cc1a7eecf4ff53a234694188b0b6678f9eee072e4e96324fd9f6"
+    }
+  ]
+}

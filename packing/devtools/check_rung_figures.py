@@ -108,9 +108,11 @@ LIVE_CERTIFICATE = "certificate.json"
 ARCHIVE_PREFIX = "packing/resources/"
 
 #: Enough significant figures for any fraction this register carries (the largest
-#: denominators seen are in the low millions) with wide headroom; matches the pattern
-#: `check_nagamochi_bounds.py` already uses for the same reason.
-_DECIMAL_PRECISION = 60
+#: denominators seen are in the low millions) with wide headroom, and for the longest
+#: print a case record carries: `adopt_houses.MAX_PLACES`, 72 places, since T-174's 68
+#: prints 61 to stay below Seth Rehwaldt's exact print (17 October 2026), which 60
+#: significant figures cannot quantize.
+_DECIMAL_PRECISION = 100
 
 #: `a/b = d.ddd`, anywhere in a text. Bounded on both sides so it cannot match as a
 #: sub-token of a larger number (`(?<![\w.])` before the numerator, `(?!\d)` after the

@@ -133,12 +133,11 @@ The ones that carry the most weight:
   side’s last place as the same displayed bound.
   An `exact_form` on the ceiling is the exact form of the ceiling; $s(n)$ is known
   exactly only when `status` is `proved`.
-- The certificate both upper lanes hold once a result is adopted is the case’s
-  **house**: the smallest of the case’s own house and every packing whose certificate
-  has passed stage 4, whoever found it, so a validated packing smaller than the house
-  replaces it, adopted in the pass that validates it and regularized in the same pull
-  request, by the import runbook’s
-  [house rule](../campaign/result-import.md#the-house-rule).
+- Both upper lanes hold the certificate of the case’s **house best packing**, as the
+  [synopsis](../../SYNOPSIS.md#the-measurements) defines it.
+  By the import runbook’s [house rule](../campaign/result-import.md#the-house-rule), the
+  pass that validates a smaller packing, whoever found it, adopts it as the house best
+  packing and regularizes it in the same pull request.
   `devtools.select_houses` derives it from the register and `devtools.adopt_houses`
   writes it.
 - `reported_status` is the source-set view; `status` is `proved` only when the verified
@@ -272,6 +271,13 @@ The process relies on these rules of the records:
   register’s coverage gate reads.
   Disagreement is preserved as a conflict or a typed blocker; the source’s claim is
   never edited to match a checker.
+- **A formal source build is separate evidence.** An inspected, retained complete
+  producer build can support V under
+  [the formal-proof rule](../../epistemics.md#reported-formal-proofs-and-source-builds),
+  recorded with `origin: external` and the producer’s passing status.
+  Keep its build and axiom receipts, scoped statement audit, full coverage and trust
+  assumptions. A later independent replay has its own confirming entry; source execution
+  alone does not establish C3 or change the case’s verified bounds here.
 - **The register entry is made when the result is imported**, at its derived rung, with
   a `kind`, a `headline`, `attribution` and a `next_rung` naming the replay and review
   it waits on. Its date is `attribution.published`; `established` is this project’s own
@@ -306,7 +312,7 @@ The process relies on these rules of the records:
   For a result by others, that is a complete replay here and a review of its mathematics
   under [`docs/project/reviews/`](../../docs/project/reviews/). External evidence and a
   local replay are recorded as separate entries.
-  An upper bound that passes them below the case’s house is adopted as the house
+  An upper bound that passes them below the case’s house best packing replaces it
   ([the house rule](../campaign/result-import.md#the-house-rule)).
 
 ## Registering a First-Party Result

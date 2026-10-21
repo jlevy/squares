@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import html
 import re
+from collections.abc import Iterator
 from html.parser import HTMLParser
 from pathlib import Path
 from typing import override
@@ -22,6 +23,7 @@ import pytest
 from devtools import (
     check_published_site,
     overview_sections,
+    pytest_tmp,
     render_overview,
     rung_scale,
     site_documents,
@@ -818,27 +820,30 @@ def test_a_head_only_build_checks_metadata_but_is_not_complete_publication(
 
 @pytest.fixture(scope="module")
 def published(
+    request: pytest.FixtureRequest,
     tmp_path_factory: pytest.TempPathFactory,
+    *,
     pages: dict[str, str],
     card: bytes,
     result_pages: dict[str, str],
     records: dict[str, str],
-) -> Path:
+) -> Iterator[Path]:
     """Everything the overview's Pages job publishes, as it writes it: the site's pages,
     every case's record file, every forwarder and the card, with a result's overview
     beside them as complete documents. The papers and the workbench are other jobs'
-    pages, held to the same `head_problems` in their own modules' tests."""
-    root = tmp_path_factory.mktemp("published")
-    files = [
-        *(render_overview.Page(name, text) for name, text in pages.items()),
-        *(render_overview.Page(name, text) for name, text in records.items()),
-        *render_overview.forwarder_pages(),
-        *(render_overview.Page(name, text) for name, text in result_pages.items()),
-        *site_documents.chapter_pages(),
-    ]
-    render_overview.write_site(root, files)
-    (root / SOCIAL_CARD).write_bytes(card)
-    return root
+    pages, held to the same `head_problems` in their own modules' tests. About 95 MiB,
+    given back when the module ends."""
+    with pytest_tmp.scoped_tmp_path(request, tmp_path_factory, "published") as root:
+        files = [
+            *(render_overview.Page(name, text) for name, text in pages.items()),
+            *(render_overview.Page(name, text) for name, text in records.items()),
+            *render_overview.forwarder_pages(),
+            *(render_overview.Page(name, text) for name, text in result_pages.items()),
+            *site_documents.chapter_pages(),
+        ]
+        render_overview.write_site(root, files)
+        (root / SOCIAL_CARD).write_bytes(card)
+        yield root
 
 
 def test_every_page_the_site_publishes_carries_its_preview_by_its_kind(

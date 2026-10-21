@@ -18,9 +18,11 @@ from devtools import (
     site_urls,
     validate_schemas,
 )
-from devtools.repo_links import RepositoryTree
+from devtools.repo_links import RepositoryTree, repo_url
+from devtools.result_credit import PROJECT_AUTHOR_ORIGIN
+from devtools.site_resources import Resource
 from sqpack.contributor_occurrences import SCHEMA_PATH as OCCURRENCES_SCHEMA
-from sqpack.contributor_occurrences import CreditOccurrence, CreditOrigin
+from sqpack.contributor_occurrences import CreditOccurrence, CreditOrigin, load_occurrences
 from sqpack.contributors import (
     PEOPLE_DIR,
     SCHEMA_PATH,
@@ -41,9 +43,9 @@ def test_profiles_share_one_complete_article_and_directory() -> None:
     assert "<h1>Profiles</h1>" in index
     assert 'class="kpress-table site-table site-profile-table"' in index
     assert '<th scope="col">Name</th>' in index
-    assert '<th scope="col" class="num">Credits</th>' in index
+    assert '<th scope="col">Results and credits</th>' in index
     assert '<th scope="col" class="num">Resources</th><th scope="col">Links</th>' in index
-    assert "Counts match the reviewed credits listed on each profile" in index
+    assert "credits count distinct reviewed attribution spans" in index
     assert "<title>Profiles" in index
     assert 'rel="canonical" href="https://jlevy.github.io/squares/profiles/"' in index
     # The directory names cited authors as well as contributors, and calls none of them
@@ -53,6 +55,7 @@ def test_profiles_share_one_complete_article_and_directory() -> None:
     assert "data-person" not in index
     assert 'data-page="about" aria-current="page"' in index
     assert '<a href="../about.html#profiles">About</a></nav>' in index
+    assert 'site-profile-table" data-contributor-plain' in index
     for contributor in registry.by_id.values():
         assert contributor.profile_path == f"profiles/{contributor.id}.html"
         assert f'href="{contributor.id}.html"' in index
@@ -210,7 +213,8 @@ def test_credits_link_cases_and_results_preserving_roles_without_duplicates() ->
         [replace(contributor, real_name="Full Public Name")], (case, case, result)
     )
     assert ">Full Public Name</a>" in directory
-    assert 'aria-label="2 reviewed credits for Full Public Name">2</a>' in directory
+    assert 'class="site-credit-tally"' in directory
+    assert ", 2 credits</span>" in directory
     assert "<details open>" not in rendered
     long_credits = tuple(
         replace(
@@ -220,7 +224,7 @@ def test_credits_link_cases_and_results_preserving_roles_without_duplicates() ->
         for number in range(1, 14)
     )
     expanded = render_contributors.contributor_article(contributor, long_credits)
-    assert "<details open><summary>13 reviewed credits</summary>" in expanded
+    assert "<details open><summary>Reviewed work: 13 results</summary>" in expanded
 
 
 def test_separate_bibliography_credits_and_identifier_evidence_are_preserved() -> None:
@@ -257,7 +261,8 @@ def test_separate_bibliography_credits_and_identifier_evidence_are_preserved() -
             "/authors/0",
         ),
     )
-    article = render_contributors.contributor_article(contributor, (first, second))
+    # With no result naming either source, each keeps its own bibliography line.
+    article = render_contributors.contributor_article(contributor, (first, second), results=())
     bibliography = (render_contributors.REPO / first.origin.path).read_text().splitlines()
     for occurrence in (first, second):
         match = re.search(
@@ -266,10 +271,15 @@ def test_separate_bibliography_credits_and_identifier_evidence_are_preserved() -
         )
         assert match is not None
         assert occurrence.origin.record_key in bibliography[int(match[1]) - 1]
-    assert "Profile identifier:" in article
-    assert "Sources:" in article
-    assert "Biography sources:" in article
-    assert "Field evidence:" in article
+    # Each evidence item names the value it supports, under its field's own name.
+    source = contributor.sources[0].id
+    evidence = article[
+        article.index('<p class="site-contributor-evidence">Identity evidence</p>') :
+    ]
+    assert f'Profile identifier: evan-daniel (<a href="#source-{source}">' in evidence
+    assert f"Source: {source} (" in evidence
+    assert f"Biography source: {contributor.bio_sources[0]} (" in evidence
+    assert f"Field evidence: {contributor.provenance[0].field} (" in evidence
 
 
 def test_occurrence_schema_gate_checks_stale_reviewed_source(
@@ -377,8 +387,44 @@ def test_profile_presents_selected_names_accounts_and_existing_news(
     identity = article.split('<dl class="site-contributor-identity">', 1)[1].split("</dl>", 1)[
         0
     ]
+    assert "<dt>Handles</dt>" in identity
     assert "MathCompSciFTW, Square Packing Fan" in identity
     assert "Queuingtheorydotcom" not in identity
+    filtered = render_contributors.contributor_article(
+        replace(
+            ahmed,
+            display_aliases=(
+                *ahmed.display_aliases,
+                "Queuingtheorydotcom",
+                "@ManassehA06",
+                "Ahmed",
+                "Manasseh Ahmed",
+                "Manasseh-Ahmed",
+            ),
+        ),
+        (),
+    )
+    filtered_identity = filtered.split('<dl class="site-contributor-identity">', 1)[1].split(
+        "</dl>", 1
+    )[0]
+    assert filtered_identity == identity
+    nate = render_contributors.contributor_article(registry.by_id["nate-chaoweeraprasit"], ())
+    assert "<dt>Handles</dt><dd>natcha</dd>" in nate
+    directory = render_contributors.profile_table(
+        [ahmed, registry.by_id["nate-chaoweeraprasit"]], ()
+    )
+    assert "Manasseh Ahmed (MathCompSciFTW, Square Packing Fan)</a>" in directory
+    assert "Nate Chaoweeraprasit (natcha)</a>" in directory
+    ryu = render_contributors.contributor_article(
+        replace(
+            registry.by_id["ryu-sungjoon"],
+            links=(
+                ContributorLink("github", "https://github.com/squarepacker", "squarepacker"),
+            ),
+        ),
+        (),
+    )
+    assert "<dt>Handles</dt>" not in ryu
     assert 'aria-label="GitHub: Queuingtheorydotcom"' in article
     assert 'aria-label="Twitter / X: @ManassehA06"' in article
     assert article.count('class="site-account-icon"') == 2
@@ -417,7 +463,9 @@ def test_accounts_share_destinations_and_icons_in_profiles_and_compact_rows() ->
     assert compact.count('class="site-account-icon"') == len(person.links)
     assert "<span>evand</span>" in full
     assert "<span>@evand</span>" in full
-    assert "<span>" not in compact
+    assert "<span>evand</span>" in compact
+    assert "<span>@evand</span>" in compact
+    assert "<span>example.org</span>" in compact
     for link in person.links:
         target = link.url.replace("&", "&amp;")
         assert f'href="{target}"' in full
@@ -461,3 +509,259 @@ def test_profile_invitation_requires_no_identity_metadata(
     invitation = render_contributors.profile_preview()
     assert "All Profiles" in invitation
     assert "site-contributor-list" not in invitation
+
+
+def _credit(
+    key: str, field: str, label: str, role: str, contributor: str = "hiroaki-hosono"
+) -> CreditOccurrence:
+    return CreditOccurrence(
+        origin=CreditOrigin("packing/resources/bibliography.yaml", key, field),
+        expected_text=label,
+        start=0,
+        end=len(label),
+        label=label,
+        role=role,
+        disposition="resolved",
+        contributor_id=contributor,
+    )
+
+
+#: A register of three results: two attributed to sources, one of this project's own.
+REGISTER = (
+    {
+        "id": "T-201",
+        "significance": {"score": 4},
+        "kind": "upper-bound",
+        "scope": {"n_values": [61]},
+        "attribution": {"source_keys": ["[A]", "[B]"]},
+    },
+    {
+        "id": "T-030",
+        "significance": {"score": 3},
+        "kind": "lower-bound",
+        "scope": {"n_min": 10, "n_max": 20},
+        "attribution": {"source_keys": ["[A]"]},
+    },
+    {
+        "id": "T-002",
+        "significance": {"score": 5},
+        "kind": "lower-bound",
+        "scope": {"n_values": [17]},
+        "builds_on": {"credit": ["Bentz"]},
+    },
+)
+
+
+def test_a_source_credit_lists_under_each_result_naming_it_with_its_roles(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Profiles link back to the results whose credit their spans are printed in: one
+    line a result, in register order, each role once with the spelling it credits, and
+    the sources as secondary text. A source no result names keeps its bibliography line,
+    and no role appears that a span does not give."""
+    monkeypatch.setattr(
+        render_contributors,
+        "_reference_documents",
+        lambda: (
+            {"sources": []},
+            {"repository": "https://github.com/jlevy/squares", "entries": []},
+        ),
+    )
+    contributor = load_contributors().by_id["hiroaki-hosono"]
+    author = _credit("[A]", "/authors/0", "Hiroaki Hosono", "source-author")
+    credit = _credit("[A]", "/credit", "Hosono", "credited-contributor")
+    again = _credit("[B]", "/credit", "Hosono", "credited-contributor")
+    unnamed = _credit("[Kingbird]", "/credit", "Hosono", "prerequisite")
+    other = _credit("[A]", "/credit", "Bentz", "source-author", contributor="wolfram-bentz")
+    article = render_contributors.contributor_article(
+        contributor, (author, credit, credit, again, unnamed, other), results=REGISTER
+    )
+    section = article.split('<section id="credited-work"><h2>Credited work</h2>', 1)[1].split(
+        "</section>", 1
+    )[0]
+    lines = re.findall(r"<li>.*?</li>", section)
+    assert lines == [
+        (
+            '<li><a href="result/t-030.html">T-030</a> (lower bound, 11 cases, n = 10 to 20): '
+            "source author — Hiroaki Hosono; credited contributor — Hosono, in [A]</li>"
+        ),
+        (
+            '<li><a href="result/t-201.html">T-201</a> (upper bound, n = 61): '
+            "source author — Hiroaki Hosono; credited contributor — Hosono, in [A]; [B]</li>"
+        ),
+        lines[2],
+    ]
+    bibliography = (render_contributors.REPO / render_contributors.BIBLIOGRAPHY).read_text()
+    line = bibliography.splitlines().index("  - key: '[Kingbird]'") + 1
+    assert lines[2] == (
+        f'<li><a href="{repo_url(render_contributors.BIBLIOGRAPHY, f"?plain=1#L{line}")}">'
+        "[Kingbird]</a>: prerequisite — Hosono</li>"
+    )
+    assert "Bentz" not in section
+    projected = render_contributors.credited_work(
+        contributor.id, (author, credit, credit, again, unnamed, other), results=REGISTER
+    )
+    assert projected.count == len(lines) == 3
+    assert "<details>" not in section
+    # A role two spans give with one spelling reads once, beside that spelling.
+    same = render_contributors.contributor_article(
+        contributor,
+        (replace(author, label="Hosono", expected_text="Hosono", end=6), credit),
+        results=REGISTER,
+    )
+    assert (
+        "(upper bound, n = 61): source author, credited contributor — Hosono, in [A]</li>"
+    ) in same
+
+
+def test_the_project_author_reads_as_one_line_for_the_first_party_results(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """The project author's credit comes from one generator constant; the profile says
+    whose results it credits rather than linking the constant's source file."""
+    monkeypatch.setattr(
+        render_contributors,
+        "_reference_documents",
+        lambda: (
+            {"sources": []},
+            {"repository": "https://github.com/jlevy/squares", "entries": []},
+        ),
+    )
+    contributor = load_contributors().by_id["joshua-levy"]
+    authored = CreditOccurrence(
+        origin=PROJECT_AUTHOR_ORIGIN,
+        expected_text="Levy",
+        start=0,
+        end=4,
+        label="Levy",
+        role="project-author",
+        disposition="resolved",
+        contributor_id="joshua-levy",
+    )
+    article = render_contributors.contributor_article(
+        contributor, (authored,), results=REGISTER
+    )
+    assert (
+        '<ul class="site-contributor-credits"><li><a href="results.html">'
+        "The register\u2019s 1 first-party result</a>: project author — Levy</li></ul>"
+    ) in article
+    assert "result_credit.py" not in article
+    assert "constants" not in article
+
+
+def test_published_profiles_link_the_results_they_credit() -> None:
+    """On the register itself: the people the review found unlinked now reach their
+    results, and every result a profile links is one the register has."""
+    registry = load_contributors()
+    occurrences = load_occurrences().occurrences
+    register = {
+        str(record["id"]).lower()
+        for record in load_yaml(render_contributors.RESULTS.read_text())["results"]
+    }
+    for identifier in ("joshua-levy", "hiroaki-hosono", "evan-daniel"):
+        article = render_contributors.contributor_article(
+            registry.by_id[identifier], occurrences
+        )
+        linked = re.findall(r'href="result/(t-\d+)\.html"', article)
+        assert len(linked) >= 50, identifier
+        assert len(linked) == len(set(linked)), identifier
+        assert set(linked) <= register
+        assert "result_credit.py" not in article
+    levy = render_contributors.contributor_article(registry.by_id["joshua-levy"], occurrences)
+    assert '<a href="results.html">The register\u2019s ' in levy
+
+
+def test_identity_evidence_names_each_claimed_value() -> None:
+    """One evidence item a JSON pointer, each naming what it supports; aliases include X
+    display names and former handles, so they read as names the person is known by."""
+    contributor = load_contributors().by_id["hiroaki-hosono"]
+    article = render_contributors.contributor_article(contributor, ())
+    assert "Credit spellings" not in article
+    assert "Also credited as" not in article
+    assert "site-contributor-identity" not in article
+    assert '<details class="site-contributor-sources"><summary>Sources</summary>' in article
+    evidence = article[
+        article.index('<p class="site-contributor-evidence">Identity evidence</p>') :
+    ]
+    for alias in contributor.aliases:
+        assert evidence.count(f"<li>Also known as: {alias} (") == 1
+    for link in contributor.links:
+        assert evidence.count(f"<li>Public website: {link.url} (") == 1
+    assert "<li>Public name: Hiroaki Hosono (" in evidence
+    unknown = replace(
+        contributor,
+        provenance=(FieldProvenance("/<b>_note", (contributor.sources[0].id,)),),
+    )
+    rendered = render_contributors.contributor_article(unknown, ())
+    assert "<li>/&lt;b&gt; note: <a" in rendered
+    assert "<b>" not in rendered
+
+
+def test_directory_summary_unions_work_and_years_exclude_import_dates() -> None:
+    registry = load_contributors()
+    people = [registry.by_id["manasseh-ahmed"], registry.by_id["nate-chaoweeraprasit"]]
+    first = _credit("[A]", "/authors/0", "Ahmed", "source-author", people[0].id)
+    second = _credit("[A]", "/authors/1", "Chaoweeraprasit", "source-author", people[1].id)
+    case = replace(first, origin=CreditOrigin("packing/frontier/n-017.md", "17", "/found_by/0"))
+    records = (
+        {
+            "id": "T-201",
+            "significance": {"score": 5},
+            "registered": "2026-10-21",
+            "attribution": {"source_keys": ["[A]"]},
+        },
+    )
+    resource = Resource(
+        "https://example.org/shared",
+        "Shared work",
+        "A result.",
+        "Manasseh Ahmed and Nate Chaoweeraprasit",
+        tuple(person.id for person in people),
+        "website",
+    )
+    summary = render_contributors.profile_summary(
+        people, (first, first, second, case), results=records, resources=(resource, resource)
+    )
+    assert "2 people · 1 result · 3 credits · 1 resource" in summary
+    assert render_contributors.profile_years(people[0].id, (first,), records) is None
+
+
+def test_credit_thread_references_stay_with_the_result_they_document(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setattr(
+        render_contributors,
+        "_reference_documents",
+        lambda: (
+            {
+                "sources": [
+                    {
+                        "source_key": "[A]",
+                        "url": "https://github.com/example/work/issues/7#issuecomment-1",
+                    }
+                ]
+            },
+            {
+                "repository": "https://github.com/jlevy/squares",
+                "entries": [{"result_ids": ["T-030"], "pull_requests": [8], "references": []}],
+            },
+        ),
+    )
+    contributor = load_contributors().by_id["hiroaki-hosono"]
+    article = render_contributors.contributor_article(
+        contributor,
+        (_credit("[A]", "/credit", "Hosono", "credited-contributor"),),
+        results=REGISTER,
+    )
+    section = article.split('<section id="credited-work">', 1)[1].split("</section>", 1)[0]
+    lines = re.findall(r"<li>.*?</li>", section)
+    first = next(line for line in lines if ">T-030</a>" in line)
+    second = next(line for line in lines if ">T-201</a>" in line)
+    assert "Source:" in first
+    assert "Registered in:" in first
+    assert "#8" in first
+    assert "Source:" in second
+    assert "Registered in:" not in second
+    assert "#8" not in second
+    assert "https://github.com/example/work/issues/7#issuecomment-1" in first
+    assert '<span class="site-contributor-references">' in first

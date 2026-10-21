@@ -436,7 +436,6 @@ def test_contributor_links_resolve_for_each_reader_surface() -> None:
             "Hiroaki Hosono</a>\N{RIGHT SINGLE QUOTATION MARK}s"
         ) in site
         assert repo_url("packing/contributors/README.md") in site
-        assert "data-person" not in site
 
 
 def test_contributor_links_retain_the_repository_target_in_details() -> None:
@@ -1083,3 +1082,28 @@ def test_documentation_is_bookkeeping_but_not_a_public_news_topic() -> None:
         data["entries"][0]["topics"] = [topic]
         with pytest.raises(ValueError, match="topics"):
             render_changelog.validate(data)
+
+
+def test_news_levels_are_described_by_the_rubric_that_scores_news() -> None:
+    """A News meter and the archive's S buttons say what a level means in the label
+    rubric of `result-import.md`, its `Short` column, never in the results ladder of
+    `epistemics.md`, and never with a post's own rationale (`think-yznf`)."""
+    from devtools.overview_sections import rung_meanings  # noqa: PLC0415
+
+    meanings = render_changelog.news_significance_meanings()
+    assert sorted(meanings) == [1, 2, 3, 4, 5]
+    rubric = render_changelog.NEWS_RUBRIC.read_text(encoding="utf-8")
+    section = rubric.split(render_changelog.NEWS_RUBRIC_SECTION, 1)[1]
+    assert "| Label | Delivered contribution | Short | Examples |" in section
+    for level, short in meanings.items():
+        row = next(line for line in section.splitlines() if line.startswith(f"| `S{level}` |"))
+        assert row.split(" | ")[2] == short
+        assert short != rung_meanings()[f"S{level}"]
+        assert len(f"Significance S{level}: {short}.") <= 120
+    filters = render_changelog.news_filters()
+    for score in (3, 4, 5):
+        title = html.escape(render_changelog.news_significance_tooltip(score), quote=True)
+        assert f'data-news-score="{score}" title="{title}"' in filters
+    rating = render_changelog.news_rating({"score": 4, "rationale": "A private reason."})
+    assert html.escape(render_changelog.news_significance_tooltip(4), quote=True) in rating
+    assert "A private reason." not in rating

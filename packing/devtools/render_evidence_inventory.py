@@ -30,7 +30,7 @@ from collections import Counter
 from collections.abc import Sequence
 from pathlib import Path
 
-from devtools.verifier_registry import SHORT_LABELS, coverage_line, runs_code, sampled
+from devtools.verifier_registry import coverage_line, runs_code, sampled, short_relation_label
 from sqpack.assurance import conditions, discharges, undischarged
 from sqpack.yamlio import safe_load
 
@@ -69,7 +69,7 @@ DECIDES = {
     "numerical-f64": "nothing formally; a measurement at a tolerance",
     "published-proof": "whatever its theorem states",
     "proof-audited": "whatever its theorem states",
-    "proof-assistant-checked": "its theorem, against a named kernel",
+    "proof-assistant-checked": "its theorem, within the recorded execution trust boundary",
 }
 
 
@@ -206,7 +206,7 @@ def render() -> str:
         whose = "here" if ours(record) else ("elsewhere" if record.get("origin") else "-")
         review = (record.get("external_review") or {}).get("state", "-")
         novelty = record.get("novelty") or "*not assessed*"
-        code = SHORT_LABELS.get(str(record.get("relationship_to_generator")), "-")
+        code = short_relation_label(record)
         programs = ", ".join(f"`{v}`" for v in record.get("verifiers") or []) or (
             "*none held*" if runs_code(record) else "-"
         )

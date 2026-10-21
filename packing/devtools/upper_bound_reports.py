@@ -1331,6 +1331,17 @@ HOUSES: dict[str, Callable[[int], Fraction]] = {
     "[Couzo certificates 2026-10-14]": _import("couzo-certificates-2026-10-14"),
     "[Couzo n237 2026-10-15]": _import("couzo-n237-2026-10-15"),
     "[PingYou PR 622 certificate 2026-10-15]": _import("pingyou-pr622-certificate-2026-10-15"),
+    "[Daniel n236 2026-10-16]": _import("evand-n236-2026-10-16"),
+    "[Daniel n271 2026-10-17]": _import("evand-n271-2026-10-17"),
+    "[Daniel n155 explorer 2026-10-17]": _import("evand-n155-explorer-2026-10-17"),
+    "[Daniel n229 dilation 2026-10-17]": _import("evand-n229-dilation-2026-10-17"),
+    "[Daniel n229 dilation update 2026-10-18]": _import(
+        "evand-n229-dilation-update-2026-10-18"
+    ),
+    "[Daniel n183 subgrid 2026-10-19]": _import("evand-n183-subgrid-2026-10-19"),
+    "[Daniel n308 2026-10-19]": _import("evand-n308-2026-10-19"),
+    "[Daniel n154 sweep 2026-10-20]": _import("evand-n154-sweep-2026-10-20"),
+    "[Daniel n270 sweep 2026-10-20]": _import("evand-n270-sweep-2026-10-20"),
     # T-155: the side of the retained view of Evan Daniel's regularizer at each count.
     "[Daniel regularizer 2026-10-11]": regularized.view_side,
 }
@@ -2364,6 +2375,7 @@ def register_plan(packet: Path) -> dict[str, Any]:
         "id": "T-NNN",
         "kind": "upper-bound",
         "registered": declaration["read_on"],
+        "landed": declaration["read_on"],
         "headline": register["headline"],
         "claim": claim,
         "scope": {"n_values": [row["n"] for row in inside]},

@@ -4,6 +4,27 @@
 
 </div>
 
+## [Added in the Last {{ADDED_DAYS_TITLE}} Days]({{ADDED_LINK}})
+
+Every result that reached this site over {{ADDED_SPAN}} (its newest day and the
+{{ADDED_DAYS}} before it), at any significance, by the day it arrived, newest first.
+Each id leads to its row in the table below; S4 and S5 are marked, and a muted entry
+says it has since been superseded.
+The heading opens the table on these days’ arrivals and each day’s link on that day’s;
+[what arrived in the last day]({{ADDED_LAST_DAY}}) counts whole days on the same
+calendar as these dates.
+
+{{RECENT_ADDED}}
+
+## Earlier Results by Week Published
+
+Results at {{ROLLUP_FLOOR}} and above from the {{ROLLUP_WEEKS}} before {{ADDED_FIRST}},
+by the week each was published (or established, for this project’s own), with who found
+them. A result added above that was published earlier is listed here too.
+A muted, underlined id has since been superseded.
+
+{{RECENT_ROLLUP}}
+
 ## Verification Ladders<a id="verification-at-a-glance"></a>
 
 Each result has an identifier, a claim, and three ratings, defined in
