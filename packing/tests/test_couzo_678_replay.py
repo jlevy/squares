@@ -135,7 +135,7 @@ def test_the_claims_record_holds_the_rows_beyond_the_corpus() -> None:
     record = replay.beyond_horizon_claims()
     rows = {row.n: row for row in replay.claims()}
     counts = [entry["n"] for entry in record["results"]]
-    assert counts == sorted(n for n in rows if n > replay.HORIZON)
+    assert counts == sorted(n for n in rows if n > upper_bound_reports.HORIZON)
     assert len(counts) == replay.ROWS - 2
     assert 204 not in counts
     assert 260 not in counts
