@@ -27667,7 +27667,7 @@ results:
       ["Francisco Couzo"]; the review asked the author what that field means (RV-7). His
       comment on issue 669 of 20 October answers that it was a bug in his tooling, which
       took the field from the record holder at that count in his 5 October batch instead
-      of from the packing drawn (fixed at a435c97), and asks that it be read as no credit.
+      of from the packing drawn, since fixed, and asks that it be read as no credit.
       This entry follows the issue and the prior-record file, which credit Ostashev's
       packing as the start.
 
@@ -29993,10 +29993,12 @@ results:
       #561 and Nate Chaoweeraprasit's SQUISH packing it refines (#500) be credited; it
       also calls it a different local minimum, its load-bearing tilt angles matching
       #561's within 0.12 degrees except that four squares near 31.7 to 32.0 degrees are
-      three. His comment on the issue of 20 October says the two wordings contradicted
-      each other and he meant a different local minimum, found from #561's packing, and
-      asks to be named its finder with #561's packing and the SQUISH packing it continues
-      as its start. The author reports that his two exact checkers accept the certificate and its
+      three.
+
+      His comment on the issue of 20 October says the two wordings contradicted each
+      other and he meant a different local minimum, found from #561's packing, and asks to
+      be named its finder with #561's packing and the SQUISH packing it continues as its
+      start. The author reports that his two exact checkers accept the certificate and its
       21-group regularized view at the same side; KKT and local-minimum statements are
       numerical evidence, not proofs. The issue says the work was done with Claude (Claude
       Code) under Evan Daniel's direction.
