@@ -30418,7 +30418,7 @@ results:
   - id: T-223
     kind: upper-bound
     registered: '2026-10-20'
-    landed: '2026-10-20'
+    landed: '2026-10-21'
     headline: Couzo's smaller packings at 204 and 260, the two in the corpus of issue 678's 85 bounds
     claim: >-
       Two complete rational source certificates report finite upper-bound improvements at the exact
