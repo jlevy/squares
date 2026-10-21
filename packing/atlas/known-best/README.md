@@ -611,6 +611,32 @@ in think-kpm3’s layout, with `selection-adopt-2026-10-20-n154-308.json` and `.
 it the index draws 94 views: 35 by the axis tool, 39 by Evan Daniel’s regularizer and 20
 by the grid-slack generator’s version 1.
 
+On 21 October 2026 the adoption of Evan Daniel’s certificate of #703 (think-a9jp) moved
+the house best packing at 270 to T-224, $3.47 \times 10^{-5}$ below T-174: another
+arrangement of the design of Nate Chaoweeraprasit’s #500 packing, which T-174 refines.
+The axis tool’s view of the new witness was drawn first (light / uneven / near-axis
+squares 5 / 10 / 1, 22 angle classes, 735 / 746 house and stage sides), and the count
+read pending. Both generators then ran on it, niced, on a shared four-core host:
+grid-slack at 0.5, 1 and 5 degrees (`grid-slack-adopt-2026-10-21-n270-grid-deg05`,
+`-grid-deg1` and `-grid-deg5`, 58.6, 59.0 and 50.5 seconds by their reports, the first
+two side by side) and Evan Daniel’s regularizer
+(`evand-regularize-adopt-2026-10-21-n270-evand`, 233 CPU-seconds, 237 seconds of wall at
+two workers).
+The selection, 33 seconds of wall at two workers, admits his solved view at
+row 10, at the witness’s own side, since his same-side re-solve was refused for an
+overlap: 5 / 10 / 0, 21 classes and 19 hues, and 743 / 753 sides; it moves 24 squares
+beyond $10^{-3}$, by at most 0.130, and turns one square upright from 0.2175 degrees.
+Grid-slack’s three views were admissible too, but none dominates it (743 / 749 sides).
+The strong view of the earlier house best packing, grid-slack’s half-degree view of
+T-174, had 4 light and 9 uneven squares against this view’s 5 and 10; by
+[the house rule](../../campaign/result-import.md#the-house-rule) that is no reason to
+keep the larger packing.
+The evidence is retained in
+[`cases/regularized_drawings/think-a9jp-2026-10-21/`](../../cases/regularized_drawings/think-a9jp-2026-10-21/)
+in think-kpm3’s layout, with `selection-adopt-2026-10-21-n270.json` and `.md`. After it
+the index draws 94 views: 35 by the axis tool, 40 by Evan Daniel’s regularizer and 19 by
+the grid-slack generator’s version 1.
+
 ### The default picture
 
 On 13 October 2026 the owner made the regularized view the default picture, with the

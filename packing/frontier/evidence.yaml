@@ -39147,6 +39147,140 @@ evidence:
       decided. Finite feasibility only: no lower bound, optimum, local minimum, rigidity,
       novelty or human oversight.
     source_reviewed: '2026-10-20'
+  - id: E-evand-703-n270-report
+    claim: upper-bound
+    scope: {n_values: [270]}
+    assurance: reported
+    reported_method: exact-algebraic
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    origin: external
+    novelty: previously-published
+    source_key: '[Daniel n270 sweep 2026-10-20]'
+    certificate: packing/resources/web/evand-n270-sweep-2026-10-20/source/search/packer/candidates/
+    replay_status: not-attempted
+    verifiers: []
+    external_review:
+      state: informally-verified
+      date: '2026-10-21'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane (W2) of the 2026-10-21 intake, prompted
+        separately from the import and records lanes
+      note: >-
+        docs/project/reviews/review-2026-10-21-upper-bound-import-703.md accepted the
+        certificate T-224 cites for finite feasibility only, with five non-blocking
+        findings (A1 to A5); the replay it reproduced is
+        E-evand-703-n270-exact-feasibility.
+    source_reviewed: '2026-10-21'
+    limitations: >-
+      This atom records the source author's report of 1 exact rational certificate at
+      88385ab. A separate complete repository replay is retained for n = 270: 1 positive
+      and 2 duplicate-square and outside-container controls passed their required outcomes
+      on both routes, 217890 pair decisions; summed over the 3 jobs, the receipt records
+      26.65 route CPU seconds and 30.4 job wall seconds, the longest job 10.99 seconds.
+      Every positive clears every wall by at least 5.00e-21 and every pair by at least
+      9.99e-21. The two controls are gross, a duplicated square (gap -1) and a square
+      moved the side and 2 outside, so they show that both routes refuse, not that they
+      refuse at a margin of 1e-20, which a tolerant checker would pass; the 21 October
+      review's sharp controls show both routes exact at 1e-30 in both directions at the
+      far wall and at the closest pair (A2). PR #704 adds such contact-plus-1e-30
+      controls to the kernel, outside the receipt's job roster, so this receipt is
+      unchanged. The 21 October review accepted it; the confirming replay is
+      E-evand-703-n270-exact-feasibility. The source's own checkers were not run here.
+      The two maintained routes, the sqpack rational witness verifier and the independent
+      rational corner checker, share certificate parsing, half-angle conversion, Fraction
+      arithmetic and the separating-axis method. No two independent methods, human
+      oversight or optimality is claimed.
+  - id: E-evand-703-n270-exact-feasibility
+    claim: upper-bound
+    scope: {n_values: [270]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    novelty: previously-published
+    source_key: '[Daniel n270 sweep 2026-10-20]'
+    certificate: packing/resources/web/evand-n270-sweep-2026-10-20/source/search/packer/candidates/
+    replay: >-
+      From packing/ with the project interpreter (Python 3.14.7) on a shared four-core
+      host: python -m devtools.upper_bound_reports evand-n270-sweep-2026-10-20 certify
+      --workers 2 wrote the receipt on 21 October 2026 (95b8db267), and check --replay
+      decided all 3 retained jobs, the certificate and its duplicate-square and
+      outside-container controls, again through both maintained routes and held each to
+      its retained row; check-claims rebuilt the frozen comparison. The 21 October review
+      reproduced the replay at 0a86f70c3, niced, every job equal
+      (docs/project/reviews/review-2026-10-21-upper-bound-import-703.md).
+    replay_status: passed
+    verifiers:
+      - V-sqpack-verify
+      - V-check-rational-witness-independent
+      - V-evand-arrangement-receipts
+      - V-upper-bound-reports
+      - V-evand-exact-certificates
+    independence:
+      coverage:
+        extent: full
+        unit: >-
+          the certificate at n = 270 that T-224 cites, every wall and every pair
+          decided by both maintained routes; the kernel's controls are retained in the
+          packet's receipt
+        checked: 1
+        of: 1
+      read: [specification, certificate-format]
+      clean_room: false
+      shares: []
+      written_by:
+        - kind: ai
+          system: Claude (Anthropic)
+          setting: >-
+            the project's verification lanes that wrote sqpack's exact verifier and the
+            independent rational corner checker over September and October 2026; each
+            lane's tier and reasoning setting is not retained here
+      overlaps_producer:
+        extent: system-family
+        separate_prompt: true
+        separate_code: true
+        note: >-
+          The packet's CREDITS.md states that the source's work was done with Claude
+          (Anthropic) under human direction, and the pinned commit names Claude Opus 5.5
+          as co-author and says Evan Daniel approved the commit and its push; issue 703
+          itself does not say. The project's routes are Claude's too, written from
+          prompts of their own. Both maintained routes take their parse and half-angle
+          map from devtools.evand_exact_certificates (V-evand-exact-certificates), whose
+          author read the source's verify_cert.py and verify_cert2.py before writing it.
+    independence_record: docs/project/reviews/review-2026-10-21-upper-bound-import-703.md
+    external_review:
+      state: informally-verified
+      date: '2026-10-21'
+      reviewed_by: >-
+        AI agent (Claude), the stage 4 review lane (W2) of the 2026-10-21 intake, prompted
+        separately from the import and records lanes
+      note: >-
+        Accepted for finite feasibility only. All 3 retained jobs reproduced on both
+        maintained routes, equal on both to every digit of the side, the least wall
+        clearance, the least pair gap, the closest pair and the pair count; the frozen
+        comparison rebuilt equal; the three blobs the claim and its construction rest on
+        matched their upstream bytes fetched at the pin; the review's own exact route,
+        with exact clipped areas on the 590 near pairs, decided the certificate again;
+        four sharp controls at 1e-30 bracketed both maintained routes at the far wall
+        and the closest pair; and the certificate was held to its KKT point scaled by
+        1 + 1e-20. Those decisions are kept with their programs and outputs in the
+        packet's review/review-2026-10-21/ (README.md there), which T-224 cites; they
+        are the review's record, not a verifier of this entry, which rests on the
+        maintained replay (A5). Findings A1 to A5, none blocking.
+    limitations: >-
+      A replay of the retained certificate by two maintained exact routes that share
+      certificate parsing, half-angle conversion, Fraction arithmetic and the
+      separating-axis method. The receipt's 3 jobs hold 217890 pair decisions, 26.65
+      route CPU seconds and 30.4 job wall seconds, the longest job 10.99 seconds. The
+      positive clears every wall by at least 5.00e-21 and every pair by at least
+      9.99e-21; the receipt's two controls are gross, and the review's sharp controls
+      at 1e-30 are its record, not part of this replay (A2). The source's own checkers
+      were not run here, and the source's numerical statements of a KKT local minimum
+      are not decided. Finite feasibility only: no lower bound, optimum, local minimum,
+      rigidity, novelty or human oversight.
+    source_reviewed: '2026-10-21'
   - id: E-wand125-fine-net-n38-65775-report
     claim: lower-bound
     scope: {n_values: [38]}

@@ -8,8 +8,8 @@ ours, which rest on someone else's argument, and how far each has been checked.
 
 ## The short version
 
-- **672** evidence records. **387** are formal; **379** of those were established here. **10** are samples, counted separately.
-- **268** rest on an argument made elsewhere, of which **7** have been read by nobody here.
+- **674** evidence records. **388** are formal; **380** of those were established here. **10** are samples, counted separately.
+- **269** rest on an argument made elsewhere, of which **7** have been read by nobody here.
 - **1** formal record proves a theorem only under a hypothesis nothing here has replayed, and is verified as that implication alone: `E-k2m4-evand-bentz4-lean-build` (ValidTilt9).
 - **43** claim to be first established here. **14** make no novelty statement at all - not assessed, which is not the same as not novel.
 
@@ -597,9 +597,9 @@ results, it is a statement about what this repository has itself examined.
 | `E-couzo-583-exact-feasibility` | 0 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | independent | full, 3 of 3: the three certificates at n = 154, 211, 241 that T-172 and T-181 cite, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-evand-arrangement-receipts`, `V-upper-bound-reports`, `V-check-half-angle-area`, `V-evand-exact-certificates` |
 | `E-mishapolk-573-certificate-report` | 2 | upper-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | *none held* |
 | `E-mishapolk-573-exact-feasibility` | 2 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | independent | full, 2 of 2: both certificates at n = 153, 207 that T-173 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-evand-arrangement-receipts`, `V-upper-bound-reports`, `V-check-half-angle-area`, `V-evand-exact-certificates` |
-| `E-pingyou-574-certificate-report` | 35 | upper-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | *none held* |
+| `E-pingyou-574-certificate-report` | 34 | upper-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | *none held* |
 | `E-pingyou-574-algebraic-report` | 0 | upper-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | *none held* |
-| `E-pingyou-574-exact-feasibility` | 35 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | independent | full, 64 of 64: the 64 rational certificates the entry cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-evand-arrangement-receipts`, `V-upper-bound-reports`, `V-check-half-angle-area`, `V-evand-exact-certificates` |
+| `E-pingyou-574-exact-feasibility` | 34 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | independent | full, 64 of 64: the 64 rational certificates the entry cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-evand-arrangement-receipts`, `V-upper-bound-reports`, `V-check-half-angle-area`, `V-evand-exact-certificates` |
 | `E-pingyou-574-algebraic-feasibility` | 0 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | independent | full, 4 of 4: the four algebraic certificates at n = 70, 153, 207 and 302, every unit-square identity, wall and pair decided over the witness's field on the one route, with its two controls each | `V-sqpack-verify`, `V-algebraic-witness-reports` |
 | `E-ostashev-575-certificate-report` | 0 | upper-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | *none held* |
 | `E-ostashev-575-exact-feasibility` | 0 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | independent | full, 3 of 3: the three certificates at n = 211, 241, 304 that T-175 cites, every wall and every pair decided by both maintained routes and again by the third route; the kernel's and the third route's controls are retained separately | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-evand-arrangement-receipts`, `V-upper-bound-reports`, `V-check-half-angle-area`, `V-evand-exact-certificates` |
@@ -662,6 +662,8 @@ results, it is a statement about what this repository has itself examined.
 | `E-evand-689-n308-exact-feasibility` | 1 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | independent | full, 1 of 1: the certificate at n = 308 that T-221 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-evand-arrangement-receipts`, `V-upper-bound-reports`, `V-evand-exact-certificates` |
 | `E-evand-694-n154-report` | 1 | upper-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | *none held* |
 | `E-evand-694-n154-exact-feasibility` | 1 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | independent | full, 1 of 1: the certificate at n = 154 that T-222 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-evand-arrangement-receipts`, `V-upper-bound-reports`, `V-evand-exact-certificates` |
+| `E-evand-703-n270-report` | 1 | upper-bound | reported | - | elsewhere | informally-verified | previously-published | producer’s code | not recorded | *none held* |
+| `E-evand-703-n270-exact-feasibility` | 1 | upper-bound | verified | equalities and inequalities, no tolerance | here | informally-verified | previously-published | independent | full, 1 of 1: the certificate at n = 270 that T-224 cites, every wall and every pair decided by both maintained routes; the kernel's controls are retained in the packet's receipt | `V-sqpack-verify`, `V-check-rational-witness-independent`, `V-evand-arrangement-receipts`, `V-upper-bound-reports`, `V-evand-exact-certificates` |
 | `E-wand125-fine-net-n38-65775-report` | 0 | lower-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | `V-wand125-sqverify-proof-net` |
 | `E-wand125-fine-net-n40-6735-report` | 0 | lower-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | `V-wand125-sqverify-proof-net` |
 | `E-wand125-fine-net-n41-68025-report` | 0 | lower-bound | reported | - | elsewhere | - | previously-published | producer’s code | not recorded | `V-wand125-sqverify-proof-net` |
@@ -698,10 +700,10 @@ results, it is a statement about what this repository has itself examined.
 
 ## What the register rests on
 
-- **assurance**: numerically-checked 5, reported 271, verified 396
-- **method**: exact-algebraic 206, interval-certified 173, numerical-multiprecision 5, proof-assistant-checked 6, proof-audited 4, published-proof 7, reported 271
-- **novelty**: apparently-novel 43, common-knowledge 4, not assessed 14, previously-published 611
-- **relationship to the producer's code**: generator 5, independent-implementation 243, not-applicable 31, same-implementation 363, shared-components 24, unknown-historical 6
+- **assurance**: numerically-checked 5, reported 272, verified 397
+- **method**: exact-algebraic 207, interval-certified 173, numerical-multiprecision 5, proof-assistant-checked 6, proof-audited 4, published-proof 7, reported 272
+- **novelty**: apparently-novel 43, common-knowledge 4, not assessed 14, previously-published 613
+- **relationship to the producer's code**: generator 5, independent-implementation 244, not-applicable 31, same-implementation 364, shared-components 24, unknown-historical 6
 
 The `cases` column is how many frontier records cite each piece of evidence, and it is the reason to read this table rather than count records. Ranked below are the *formal* records only: a `reported` record cited across the frontier may be a shared catalogue and is labelled as such, which is the register working rather than risk. The risk is a verified claim resting on an argument nobody has examined.
 
@@ -763,7 +765,7 @@ The `n` column is what each covers and `cases` is how many frontier records cite
 | `E-karakus-strip-measure-interval` | 202 | here | - |
 | `E-basic-grid-upper` | 174 | here | - |
 | `E-regularized-bounds-2026-10-12-exact-decision` | 55 | here | - |
-| `E-pingyou-574-exact-feasibility` | 35 | here | informally-verified |
+| `E-pingyou-574-exact-feasibility` | 34 | here | informally-verified |
 
 The most-cited argument this repository did not produce is `E-karakus-strip-lower`, carrying 202 frontier cases. It is an external proof, and it has been read here: its record carries the review, what was re-derived, and the four things that were not. The arithmetic is what picked it out for reading -- being cited this heavily is the reason to open an argument, not a reason to trust it.
 
