@@ -17246,12 +17246,15 @@ urls:
     builds_on: null
     evidence:
     - E-evand-703-n270-report
+    - E-evand-703-n270-exact-feasibility
     artifacts:
     - packing/resources/web/evand-n270-sweep-2026-10-20/README.md
     - packing/resources/web/evand-n270-sweep-2026-10-20/acquisition/claims.json
     - packing/resources/web/evand-n270-sweep-2026-10-20/source/search/packer/candidates/s270_sw.cert
     - packing/resources/web/evand-n270-sweep-2026-10-20/receipts/exact-certification.json.xz
     - packing/devtools/upper_bound_reports.py
+    - docs/project/reviews/review-2026-10-21-upper-bound-import-703.md
+    - packing/resources/web/evand-n270-sweep-2026-10-20/review/review-2026-10-21/README.md
 - path: results.html
   canonical: results.html
   kind: page

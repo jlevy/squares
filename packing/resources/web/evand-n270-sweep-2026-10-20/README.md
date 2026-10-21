@@ -139,7 +139,14 @@ the contact graphs share 514 pairs, with 49 only in each, and share neither pack
 rattler; no load-bearing tilt angle is shared; and matched square by square on the
 regularized views’ load-bearing squares, the largest move is 0.391, with 17 squares moving
 by more than 0.1 and 59 by more than 0.01.
-That is the source’s statement; no identity or lineage is measured here.
+That is the source’s statement; the import measured no identity or lineage.
+The stage 4 review measured it pose by pose
+([review of 21 October](../../../../docs/project/reviews/review-2026-10-21-upper-bound-import-703.md#credit-and-lineage)):
+under the identity, the best one-to-one assignment against T-174’s packing, which is
+#500’s to $10^{-30}$, keeps 255 of the 270 squares within a tenth and moves 15 beyond it,
+at most 0.224, so it is another arrangement of the design that packing holds, not a
+refinement, found from #500’s packing by the source’s account.
+Its programs and outputs are in [review/review-2026-10-21/](review/review-2026-10-21/README.md).
 
 ## What Is Not Established
 
@@ -177,7 +184,8 @@ uv run --frozen --all-extras --group dev python -m devtools.upper_bound_reports 
 `--replay` decides the geometry again.
 `certify --jobs-dir SCRATCH --workers 2` writes a new receipt from a fresh job
 directory, and `register-plan` prints the record entries the import needs; the records
-pull request of 21 October registers it as `T-224`, at V0/C0 until the stage 4 review.
+pull request of 21 October registers it as `T-224`, which the stage 4 review of the same
+day raised to V3/C3.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

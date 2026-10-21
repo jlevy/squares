@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import hashlib
 import math
+import re
 from decimal import Decimal
 from fractions import Fraction
 from pathlib import Path
@@ -34,6 +35,11 @@ PRINTED_DIGESTS = {
         "776433d8e89b43727dc9da72096fb581b8f4ec4c619732c637bc0d14be8bad30"
     ),
 }
+#: The two literal forms the format's comment line names: an integer or ``p/q``. The
+#: `evand-cert` adapter also reads a plain decimal exactly (control F1 of the 21 October
+#: review, A4); the retained certificates use neither that nor anything else, so a decimal
+#: in a later import of this format is noticed here rather than read in silence.
+LITERAL = re.compile(r"-?\d+(?:/[1-9]\d*)?")
 #: The certificate's margin below T-174, the case ceiling it would replace, bracketed in
 #: units of 10^-12.
 MARGIN = ("T-174", 34_741_132, 34_741_133)
@@ -97,3 +103,17 @@ def test_the_replay_clears_walls_and_pairs_by_the_margins_its_construction_gives
     for route in ("exact_verify", "independent"):
         assert Fraction(margins[f"{route}_containment_clearance"]) >= Fraction(1, 2 * 10**20)
         assert Fraction(margins[f"{route}_best_pair_gap"]) >= Fraction(999, 10**23)
+
+
+def test_the_retained_certificates_write_only_integer_and_fraction_literals() -> None:
+    for name in PRINTED_DIGESTS:
+        rows = [
+            line.split()
+            for line in (_folder() / name).read_text("ascii").splitlines()
+            if line.strip() and not line.startswith("#")
+        ]
+        assert len(rows) == N + 1
+        assert rows[0][0] == str(N)
+        literals = [rows[0][1], *(field for row in rows[1:] for field in row)]
+        assert len(literals) == 1 + 3 * N
+        assert all(LITERAL.fullmatch(literal) for literal in literals)

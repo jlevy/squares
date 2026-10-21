@@ -30500,81 +30500,149 @@ results:
     registered: '2026-10-21'
     landed: '2026-10-21'
     headline: >-
-      Daniel's smaller n270 packing, a new local minimum found from Chaoweeraprasit's, certified exactly
-    claim: 'One complete rational source certificate reports a finite upper-bound improvement at the exact
-      side it states: s(270) <= 16.928162252196750114897964982713. Complete native feasibility outcomes
-      are retained separately; the selected standing case is unchanged pending independent review and record
-      review.
+      Daniel's smaller n270 packing, another arrangement found from Chaoweeraprasit's,
+      certified exactly
+    claim: >-
+      One complete rational source certificate reports a finite upper-bound improvement at
+      the exact side it states: s(270) <= 16.928162252196750114897964982713.
 
+      The certificate and its duplicate-square and outside-container controls were decided
+      here on 21 October 2026 by both maintained exact routes, and the frozen comparison
+      rebuilt; no route here is the source's code, so the replay is independently
+      re-implemented. The 21 October review found no blocking defect.
 
-      The author reports that his two exact rational checkers, verify_cert.py (separating axes) and verify_cert2.py
-      (polygon intersection), accept the certificate. The source reports a KKT local minimum strict modulo
-      23 exact flat motions and not isolated, 263 corner-corner contacts with no corner-corner MILP descent,
-      1 rattler and 67 tilted squares, and calls it a different local minimum from the register''s packing
-      (#500''s, improved in PR #574): the exact sides differ by 3.47e-5, the matched contact graphs share
-      514 pairs with 49 only in each, no load-bearing tilt angle is shared, and under its matching the largest
-      square move is 0.391, with 17 squares moving by more than 0.1. Those are numerical evidence at 80
-      digits, as the source says, not proofs. No source program ran here.
+      Issue 703 reports a packing found by Evan Daniel's basin explorer in a near-record
+      sweep over stored non-record descendants of Nate Chaoweeraprasit's (itsnaka's) #500
+      packing (T-151), the register's s(270) packing, which PingYou Ltd refined in PR #574
+      (T-174); it asks that #500's packing be credited as the ultimate start, and calls
+      this a new packing, a different local minimum from the register's. Measured here
+      pose by pose, the packing is another arrangement of the design that the case's
+      earlier house best packing (T-174) holds, not a refinement of it, found from #500's
+      packing as the source describes.
 
-
-      Credit Evan Daniel (https://github.com/evand/square-packing), whose basin explorer started from the
-      register''s s(270) packing, Nate Chaoweeraprasit''s (itsnaka''s) #500 packing (T-151), stored non-record
-      descendants of it, and reached this packing in a near-record sweep over them; the issue asks that
-      #500''s packing be credited as the ultimate start, and calls this a new packing, a different local
-      minimum from that packing as PingYou Ltd improved it in PR #574 (T-174). The search, the checks and
-      the request were done with Claude (Claude Code) under Evan Daniel''s direction.'
-    scope:
-      n_values:
-      - 270
-    verification: V0
-    confirmation: C0
+      The author reports that his two exact checkers, verify_cert.py (separating axes) and
+      verify_cert2.py (polygon intersection), accept the certificate, and a KKT local
+      minimum strict modulo 23 exact flat motions and not isolated, with 263
+      corner-corner contacts, no corner-corner MILP descent, 1 rattler and 67 tilted
+      squares; those are numerical evidence at 80 digits, not proofs. The source's
+      credits say the work was done with Claude (Anthropic) under Evan Daniel's direction.
+    scope: {n_values: [270]}
+    verification: V3
+    confirmation: C3
     significance:
       score: 3
       rationale: >-
-        A smaller finite construction side at n = 270, 3.47e-05 below the case ceiling and every
-        report there, by a packing the source reports as a different local minimum from the
-        register's packing, found from Chaoweeraprasit's #500 packing; no lower bound or optimum.
-        Draft at intake; the stage 4 review confirms or changes it.
+        Another arrangement of the design at 270, 3.47e-05 below the case and every report
+        there, to a new KKT point with 15 squares moved beyond a tenth, two fewer tilted
+        squares and no tilt angle shared; between #664's 271 (4.46e-05, three squares, S3)
+        and #689's 308 (1.12e-03, 15 squares, S3), and well above T-188's 9.29e-06 (S2);
+        no lower bound or optimum.
       scored: '2026-10-21'
-      by: think-a9jp Evan Daniel import
+      by: >-
+        the 21 October review
+        (docs/project/reviews/review-2026-10-21-upper-bound-import-703.md),
+        confirming the draft S3 of think-a9jp Evan Daniel import
     novelty: previously-published
     attribution:
-      source_keys:
-      - '[Daniel n270 sweep 2026-10-20]'
+      source_keys: ['[Daniel n270 sweep 2026-10-20]']
       published: '2026-10-20'
-    evidence:
-    - E-evand-703-n270-report
+    evidence: [E-evand-703-n270-report, E-evand-703-n270-exact-feasibility]
     artifacts:
-    - packing/resources/web/evand-n270-sweep-2026-10-20/README.md
-    - packing/resources/web/evand-n270-sweep-2026-10-20/acquisition/claims.json
-    - packing/resources/web/evand-n270-sweep-2026-10-20/source/search/packer/candidates/s270_sw.cert
-    - packing/resources/web/evand-n270-sweep-2026-10-20/receipts/exact-certification.json.xz
-    - packing/devtools/upper_bound_reports.py
+      - packing/resources/web/evand-n270-sweep-2026-10-20/README.md
+      - packing/resources/web/evand-n270-sweep-2026-10-20/acquisition/claims.json
+      - packing/resources/web/evand-n270-sweep-2026-10-20/source/search/packer/candidates/s270_sw.cert
+      - packing/resources/web/evand-n270-sweep-2026-10-20/receipts/exact-certification.json.xz
+      - packing/devtools/upper_bound_reports.py
+      - docs/project/reviews/review-2026-10-21-upper-bound-import-703.md
+      - packing/resources/web/evand-n270-sweep-2026-10-20/review/review-2026-10-21/README.md
     controls:
-    - packing/tests/test_upper_bound_reports.py
-    notes: 'A separate complete repository replay is retained for n = 270: 1 positive and 2 duplicate-square
-      and outside-container controls passed their required outcomes on both routes, 217890 pair decisions;
-      summed over the 3 jobs, the receipt records 26.65 route CPU seconds and 30.4 job wall seconds, the
-      longest job 10.99 seconds. Every positive clears every wall by at least 5.00e-21 and every pair by
-      at least 9.99e-21.
+      - packing/tests/test_upper_bound_reports.py
+      - packing/tests/test_upper_bound_reports_703.py
+      - packing/resources/web/evand-n270-sweep-2026-10-20/receipts/exact-certification.json.xz
+    notes: >-
+      A complete repository replay is retained for n = 270: 1 positive and 2
+      duplicate-square and outside-container controls passed their required outcomes on
+      both routes, 217890 pair decisions; summed over the 3 jobs, the receipt records
+      26.65 route CPU seconds and 30.4 job wall seconds, the longest job 10.99 seconds.
+      Every positive clears every wall by at least 5.00e-21 and every pair by at least
+      9.99e-21; the 21 October review measured the least wall clearance as exactly
+      1/(2*10^20), at square 15 against the near wall, and the least pair gap as
+      9.999999999999989e-21, at squares 41 and 56 along a face normal, as the source's
+      KKT point scaled by 1 + 1e-20 gives. The receipt is
+      receipts/exact-certification.json.xz in evand-n270-sweep-2026-10-20, and
+      test_upper_bound_reports_703.py holds the issue's digests, the side's construction,
+      the margin below T-174, the replay's clearances and the certificate's literal forms.
 
+      The receipt's two controls are gross, a duplicated square (gap -1) and a square
+      moved the side and 2 outside: they show that both routes refuse, not that they
+      refuse at the certificate's margins of 1e-20, which a tolerant checker would pass.
+      The 21 October review's sharp controls, kept in the packet's
+      review/review-2026-10-21/, lowered the side by exactly the least wall clearance and
+      closed the closest pair by exactly its gap: both routes accepted each at contact
+      and refused each 1e-30 further. PR #704 adds such contact-plus-1e-30 controls to
+      the kernel, outside the receipt's job roster.
 
-      At n = 270 the certificate is below the case''s ceiling (Nate Chaoweeraprasit, improved by PingYou
-      Ltd, T-174) by 3.47e-05; below T-151 (#500) (Nate Chaoweeraprasit (itsnaka)) by 3.47e-05; below Mishapolk
-      KKT census (Mykhailo Polkovskyi (Mishapolk)) by 3.47e-05; below #593 (Mykhailo Polkovskyi (Mishapolk))
-      by 3.47e-05; below #573 (Mykhailo Polkovskyi (Mishapolk)) by 1.61e-03; below T-140 (#488) (Francisco
-      Couzo) by 1.61e-03; below T-138 (#470) (Mykhailo Polkovskyi (Mishapolk)) by 8.56e-03; below T-136
-      (#481) (Nate Chaoweeraprasit (itsnaka)) by 1.62e-03; below T-134 (#476) (Francisco Couzo) by 8.56e-03;
-      below T-130 (#460) (Francisco Couzo) by 8.56e-03; below T-119 (#399) (Evan Daniel) by 9.64e-03; below
-      T-098 (#375) (Evan Daniel, at Francisco Couzo''s packing) by 9.65e-03; below T-056 (Francisco Couzo)
-      by 9.65e-03; smallest: this certificate.
+      At n = 270 the certificate is below the case's earlier ceiling (Nate Chaoweeraprasit,
+      improved by PingYou Ltd, T-174), T-151 (#500) (Nate Chaoweeraprasit (itsnaka)),
+      Mishapolk's KKT census and #593 (Mykhailo Polkovskyi (Mishapolk)) by 3.47e-05; below
+      #573 (Mykhailo Polkovskyi (Mishapolk)) and T-140 (#488) (Francisco Couzo) by
+      1.61e-03 and T-136 (#481) (Nate Chaoweeraprasit (itsnaka)) by 1.62e-03; below T-134
+      (#476) and T-130 (#460) (Francisco Couzo) and T-138 (#470) (Mykhailo Polkovskyi
+      (Mishapolk)) by 8.56e-03; and below T-119 (#399) (Evan Daniel), T-098 (#375) (Evan
+      Daniel, at Francisco Couzo's packing) and T-056 (Francisco Couzo) by 9.64e-03 to
+      9.65e-03. It is the smallest report at 270.
 
+      Measured by the 21 October review against T-174's packing, which is #500's (T-151)
+      to 1e-30: the nearest-centre pairing is one to one under the identity, and the best
+      one-to-one assignment, under the same identity, keeps 255 of the 270 squares within
+      a tenth and moves 15 beyond it, at most 0.224, and 65 beyond 0.01, with 56 squares
+      turned beyond 0.01 degrees, at most 31.6. No tilt angle is shared: the certificate
+      has 68 tilted squares, 67 of them load-bearing at the issue's 19 angles, and T-174
+      has 70. The source's own matching, on the regularized
+      views' load-bearing squares, reports a largest move of 0.391, with 17 squares
+      beyond 0.1 and 59 beyond 0.01; that is the source's measurement, and the review
+      asks the author where its figures differ.
 
-      The source''s own checkers were not run here. The two maintained routes, the sqpack rational witness
-      verifier and the independent rational corner checker, share certificate parsing, half-angle conversion,
-      Fraction arithmetic and the separating-axis method. No two independent methods, human oversight or
-      optimality is claimed.'
-    next_rung: Independently review the retained replay, then adopt at 270.
+      The record keeps the word refinement for a pairing in which no square moves beyond a
+      tenth, so this is not a refinement of T-174's packing but another arrangement of the
+      design it holds, a new KKT point with 15 squares moved beyond a tenth, as #689's 308
+      is; that it was found from #500's packing is the source's account, which the
+      measurement supports. It lists no regularization: the source's same-side view, 21
+      angle groups from 22 with one square turned upright, is a display view at the
+      certificate's side.
+
+      The source's own checkers were not run here. The two maintained routes share
+      certificate parsing, half-angle conversion, Fraction arithmetic and the
+      separating-axis method. No optimality, local minimum or human oversight is claimed.
+
+      V3 and C3 rest on the 21 October review and the replay it reproduced
+      (E-evand-703-n270-exact-feasibility).
+    next_rung: >-
+      None for the bound. V4 and C4 need a second accepted adversarial review by a
+      distinct reviewer and a retained human oversight record; one AI review, of 21
+      October, is retained.
+    reviews:
+      - path: docs/project/reviews/review-2026-10-21-upper-bound-import-703.md
+        kind: adversarial
+        reviewer: >-
+          AI agent (Claude, strong sub-agent tier, max reasoning), the stage 4 review
+          lane (W2) of the 2026-10-21 intake, prompted separately from the import and
+          records lanes, with no shared context beyond their committed packet, register
+          entry and branch
+        reviewer_kind: ai
+        relation: project
+        date: '2026-10-21'
+        scope: >-
+          Finite feasibility of the certificate T-224 cites: the retained receipt
+          replayed on both maintained routes, the frozen claim record rebuilt, an exact
+          route written for the review with exact clipped areas on the near pairs, four
+          sharp controls at 1e-30 and two format controls through both maintained
+          routes, the side held to its KKT point scaled by 1 + 1e-20, the three pinned
+          blobs fetched at the pin and held to their digests, each route's trust
+          boundary, and the credit the entry states measured pose by pose against T-174
+          and T-151.
+        verdict: accepted
+        covers: [T-224]
 
 # Generated by python -m devtools.regularized_drawings from the regularized layer's
 # index (packing/atlas/known-best/regularized/index.json); do not edit by hand.
