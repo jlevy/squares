@@ -55,6 +55,10 @@ The regularized view’s report, `s271_ex1_regularized.json`, says `"by": ["Fran
 Couzo"]`, as the n155 and n236 views’ reports do; here it agrees with the issue’s credit
 to Couzo’s #561 packing, but the same field on the other two views reads as the
 regularizer’s default rather than a statement of credit. It is retained as the source wrote it.
+[The author’s comment on #669 of 20 October 2026](https://github.com/jlevy/squares/issues/669#issuecomment-6302893217)
+says it is no credit here either: the field was a bug in his tooling, which took it from
+the record holder at that count in his 5 October batch instead of from the packing drawn,
+fixed at `a435c97`, and he names `s271_ex1` among the affected views.
 
 ## Exact Replay
 
