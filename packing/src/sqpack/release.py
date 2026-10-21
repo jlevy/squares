@@ -89,7 +89,7 @@ class PublicationHistoryEntry(NamedTuple):
 PUBLICATION_HISTORY = (
     PublicationHistoryEntry(
         version="v0.8.7",
-        first_published="October 20, 2026",
+        first_published="October 21, 2026",
         result_scope=(
             "Raise Joost de Winter's T-196 (#668) at 227, 229 and 260 to V3/C3 on the "
             "integrated exact replay and its stage 4 review, and adopt it as the house "
