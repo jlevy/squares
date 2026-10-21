@@ -104,10 +104,14 @@ PAGE_BUDGET_EXCEPTIONS: dict[str, tuple[int, str]] = {
         ),
     ),
     "atlas.html": (
-        1_000_000,
+        1_050_000,
         (
             "Combined 324-case Atlas measures 862,357 bytes: 688,112 for the complete "
-            "Frontier Survey and 174,245 for graphics and the shared shell."
+            "Frontier Survey and 174,245 for graphics and the shared shell. With the "
+            "person profiles (#578) it measured 1,005,866 bytes on 21 October 2026: its "
+            "344 reviewed credit links to profiles cost 14,692 bytes, recognised by "
+            "address with no per-link marker, and the page is 991,174 without them. No "
+            "timing was re-measured for this change."
         ),
     ),
     "results.html": (
