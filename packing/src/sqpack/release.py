@@ -1985,6 +1985,11 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "packing/atlas/known-best/bound-citations.json",
             "packing/atlas/known-best/composite-figure.json",
             "packing/campaign/result-requests.yaml",
+            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
+            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
+            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
             "packing/devtools/adopt_houses.py",
             "packing/devtools/couzo_678_replay.py",
             "packing/devtools/default_drawings.py",
@@ -2008,12 +2013,16 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
         reason=(
             "Issue 678's stage 4 and house best packing adoption (T-223 at V3/C3, the "
             "house at 204 since 20 October and at 260 since 21 October 2026, from T-196) "
-            "against main 970e89de, after merging it. Rendered at link revision 02eef374, the "
-            "merge, twice from its tree and twice with main's copies of these twelve inputs: "
-            "render_n11_optimality_review, render_n11_threshold_bound_review, "
-            "render_packing_methods and render_n11_lower_bounds_explainer write 68 files, "
-            "byte-identical across all four renders. No PDF was printed; each prints from that "
-            "HTML. Retain v0.4.13, v0.1.7, v0.1.0 and v0.2.3."
+            "against main 970e89de, after merging it, and this branch's site v0.8.16 cut, "
+            "which regenerates the five claim documents with only their source-link "
+            "revision changed, 5e16f345 to 96a0d9ff. Rendered at link revision 02eef374, the "
+            "merge, twice from its tree and twice with main's copies of the twelve other "
+            "inputs, and again at 7bb219c7, the cut, twice from its tree and twice with "
+            "main's bytes of all seventeen: render_n11_optimality_review, "
+            "render_n11_threshold_bound_review, render_packing_methods and "
+            "render_n11_lower_bounds_explainer write 68 files, byte-identical across each "
+            "four. No PDF was printed; each prints from that HTML. Retain v0.4.13, v0.1.7, "
+            "v0.1.0 and v0.2.3."
         ),
     ),
     ReleaseNoPublicChange(
