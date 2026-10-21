@@ -5,7 +5,7 @@ title: "Import JoostdeWinter: Improved upper bounds for n = 227, 229, 260: regis
 kind: task
 status: in_progress
 priority: 2
-version: 12
+version: 14
 delegate: c-lane-692
 labels:
   - result-import
@@ -15,10 +15,12 @@ child_order_hints:
   - is-01m57xnbtbzmgefz6bdm37xje9
   - is-01m57xwn13ev5hg7bt3hsvc1nh
   - is-01m5fre23qy5rq285h9tsarhz0
+  - is-01m5frep2f2kws6x73ze7tw594
+  - is-01m5frrpa39v4j885s113618g2
 hold: null
 hold_until: null
 created_at: 2026-10-18T08:47:35.192Z
-updated_at: 2026-10-21T17:34:07.479Z
+updated_at: 2026-10-21T19:03:23.624Z
 started_at: 2026-10-18T12:36:48.824Z
 ---
 W1 intake 2026-10-18, parent think-xmxb. https://github.com/jlevy/squares/issues/668
