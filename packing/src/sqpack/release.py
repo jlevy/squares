@@ -88,6 +88,15 @@ class PublicationHistoryEntry(NamedTuple):
 #: for each deployment's commit, what the page it built stated.
 PUBLICATION_HISTORY = (
     PublicationHistoryEntry(
+        version="v0.8.8",
+        first_published="October 21, 2026",
+        result_scope=(
+            "Credit Evan Daniel as finder at 271 as issue 664 asks, cite his answer on "
+            "the regularized views' by field, and correct T-221's tilt count and the "
+            "house best packing wording at 154 and 308."
+        ),
+    ),
+    PublicationHistoryEntry(
         version="v0.8.7",
         first_published="October 20, 2026",
         result_scope=(
@@ -1103,6 +1112,17 @@ class ReleaseImpactDecision(NamedTuple):
 RELEASE_IMPACTS: tuple[ReleaseImpactDecision, ...] = (
     ReleaseImpactDecision(
         component="site",
+        previous_version="v0.8.7",
+        version="v0.8.8",
+        impact="patch",
+        reason=(
+            "Credit Evan Daniel as finder at 271 as issue 664 asks, cite his answer on "
+            "the regularized views' by field, and correct T-221's tilt count and the "
+            "house best packing wording at 154 and 308."
+        ),
+    ),
+    ReleaseImpactDecision(
+        component="site",
         previous_version="v0.8.6",
         version="v0.8.7",
         impact="patch",
@@ -1740,6 +1760,74 @@ class ReleaseNoPublicChange(NamedTuple):
 
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
+    ReleaseNoPublicChange(
+        components=("paper:n11-lower-bounds-explainer",),
+        paths=(
+            "packing/cases/n11_fractional_certificate/t-018-proof-card.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-19-5.md",
+            "packing/cases/n11_fractional_certificate/t-018-verifiable-claim-381-100.md",
+            "packing/cases/n11_threshold_certificate/t-025-verifiable-claim-191-50.md",
+            "packing/cases/n11_threshold_certificate/t-026-verifiable-claim-dilation-limit.md",
+            "packing/devtools/adopt_houses.py",
+            "packing/frontier/results.yaml",
+        ),
+        outputs=(
+            "papers/n11-lower-bounds-explainer.html",
+            "papers/n11-lower-bounds-explainer.md",
+        ),
+        reason=(
+            "Reviewed October 21, 2026 against main 4851d819 for the records lane of 21 "
+            "October (think-8z7k, #664's credit at 271, #669's by-field answer). The site "
+            "v0.8.8 cut regenerated the five claim documents, and each of the 22 changed "
+            "lines differs from main only in its source-link revision, 9cd35d1e to "
+            "047d935e; the explainer links them rather than inlining them. results.yaml "
+            "changes only T-197's, T-219's, T-221's and T-222's prose, and adopt_houses.py "
+            "only the 271 credit and T-219's and T-222's prose; the register's counts the "
+            "explainer reads are unchanged. Rendered at the branch head 8aa19f64, once from "
+            "its tree and once with main's results.yaml, adopt_houses.py, n-154.md and "
+            "result-requests.yaml: its HTML and Markdown and the files it writes at the "
+            "site root are byte-identical. It keeps v0.4.11; no PDF was printed, and it "
+            "prints from that HTML."
+        ),
+    ),
+    ReleaseNoPublicChange(
+        components=(
+            "paper:n11-optimality-review",
+            "paper:n11-threshold-bound-review",
+            "paper:square-packing-methods-survey",
+        ),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/devtools/adopt_houses.py",
+            "packing/frontier/n-154.md",
+            "packing/frontier/results.yaml",
+        ),
+        outputs=(
+            "papers/n11-optimality-review.html",
+            "papers/n11-optimality-review.md",
+            "papers/n11-optimality-review.pdf",
+            "papers/n11-threshold-bound-review.html",
+            "papers/n11-threshold-bound-review.md",
+            "papers/n11-threshold-bound-review.pdf",
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+            "papers/square-packing-methods-survey.pdf",
+        ),
+        reason=(
+            "Reviewed October 21, 2026 against main 4851d819 for the records lane of 21 "
+            "October (think-8z7k, #664's credit at 271, #669's by-field answer, #689 and "
+            "#694 closed, #702 triaged). results.yaml changes only T-197's, T-219's, "
+            "T-221's and T-222's prose, outside the n11 ladder rungs paper_figures reads; "
+            "adopt_houses.py only the 271 credit and T-219's and T-222's prose; n-154.md "
+            "one sentence of T-222's section; and result-requests.yaml only the #664, #669, "
+            "#674, #689, #694 and #702 entries. Rendered with render_n11_optimality_review, "
+            "render_n11_threshold_bound_review and render_packing_methods at link revision "
+            "4851d819, at the branch head 8aa19f64, once from its tree and once with main's "
+            "copies of those four inputs: with the explainer's, all 68 files written are "
+            "byte-identical. No PDF was printed; each prints from that HTML. Retain v0.1.7, "
+            "v0.1.0 and v0.2.3."
+        ),
+    ),
     ReleaseNoPublicChange(
         components=("paper:n11-lower-bounds-explainer",),
         paths=(
@@ -5522,7 +5610,7 @@ def validate_release_impacts(
 #: fresh render, so a link naming the build commit would fail their drift check forever. It is
 #: in no version string. It moves when the claim documents are regenerated for an edition. It
 #: must be a commit on `main`; the site's own links name `main` itself (`devtools.repo_links`).
-PUBLICATION_REVISION = "9cd35d1e"
+PUBLICATION_REVISION = "047d935e"
 
 
 def data_pathspec() -> tuple[str, ...]:
