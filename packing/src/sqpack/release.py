@@ -1877,6 +1877,26 @@ class ReleaseNoPublicChange(NamedTuple):
 
 RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
     ReleaseNoPublicChange(
+        components=("paper:square-packing-methods-survey",),
+        paths=(
+            "packing/campaign/result-requests.yaml",
+            "packing/frontier/source-coverage.yaml",
+        ),
+        outputs=(
+            "papers/square-packing-methods-survey.html",
+            "papers/square-packing-methods-survey.md",
+            "papers/square-packing-methods-survey.pdf",
+        ),
+        reason=(
+            "For the #702 import (Evan Daniel's s(343) beyond-horizon row, superseding "
+            "#678's row at 343) against main 51ac9d7e: the survey cites neither the #702 "
+            "request nor the n343 source. Rendered at link revision 869bcac0 into an empty "
+            "site directory, from this tree and with main's copies of the two inputs: "
+            "render_packing_methods writes 42 byte-identical files. No PDF printed; it "
+            "prints from that HTML. Retain v0.2.3."
+        ),
+    ),
+    ReleaseNoPublicChange(
         components=(
             "paper:n11-lower-bounds-explainer",
             "paper:n11-optimality-review",
