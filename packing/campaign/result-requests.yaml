@@ -21,7 +21,7 @@ softschema:
   status: enforced
 repository: jlevy/squares
 owner: jlevy
-last_reviewed: '2026-10-20'
+last_reviewed: '2026-10-21'
 issues:
   - number: 420
     title: 'Lean proofs that 178 best-known packings are local minima (n ≤ 324): registration request'
@@ -14111,7 +14111,7 @@ issues:
       date: '2026-10-20'
       by: jlevy
       kind: acknowledgement
-      reported:
+      reported: &r686
       - result: n328
       - result: n330
       - result: n339
@@ -14220,8 +14220,8 @@ issues:
     - url: https://github.com/jlevy/squares/issues/686#issuecomment-6312842218
       date: '2026-10-21'
       by: jlevy
-      kind: final
-      reported: []
+      kind: import
+      reported: *r686
       corrects:
       - https://github.com/jlevy/squares/issues/686#issuecomment-6301482971
     close_when: The rows are on main and the owner has posted the resulting state; counts beyond the case
