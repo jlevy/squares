@@ -5,7 +5,7 @@ title: Integrate profile UX work with current PR and prepare final review handof
 kind: task
 status: in_progress
 priority: 2
-version: 46
+version: 47
 delegate: profiles-pr-coordinator
 labels: []
 dependencies: []
@@ -47,11 +47,11 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-21T17:06:17.155Z
-updated_at: 2026-10-21T21:22:44.577Z
+updated_at: 2026-10-21T21:52:31.266Z
 started_at: 2026-10-21T17:06:34.736Z
 ---
 Preserve current remote PR578 changes; commit local profile UX/model changes, integrate latest PR branch/main as needed, validate, push reviewable PR and handoff without merging.
 
 ## Notes
 
-Pushed e162a870a to PR #578, including merge e9149e2a2 of origin/main 970e89de8, data pin 3ae236a16, and updated plan. GitHub reports MERGEABLE; still draft until final CI. Local push gate passed all 69 selected steps in 952.59s (19,907 normal tests passed, 65 skipped, one expected failure; 23 pool-heavy passed). Full rebuilt preview site-merged-3ae236a16 is live on port 8790 and open in Arc. All 7,298 publication checks, 692-page profile-link audit, 48 PDF links, 59 shared assets, and eight live routes pass. Name column has a 16rem floor and long resource URLs wrap. Model remains 75 profiles, 213 primary results, 701 credits, 114 authored records; global current records 116. Latest main adoption at 227/260 and release v0.8.15 preserved beneath proposed v0.9.0. Astra found no merge issues. Explicit deep run 39676452183 and all final-head PR checks are being watched. Next: fix any CI failures, then mark ready and finish handoff without merging or deploying. Deferred archive population and historical registrations remain separately tracked.
+Review handoff ready. PR #578 head db3cb6d4fe5f00a44d04a8ef91018aa2b365bad8 has all 31 checks passing, watcher exit 0, MERGEABLE/CLEAN against origin/main 970e89de8. Packing run 39680389693 and Pages run 39680389679 succeeded. Full deferred research run 39676452183 passed on e162a870a; later changes are limited to the tally test fixture, accurate T-196 resource prose and plan docs. Final local selected push gate passed 25/25 in 706.82s; earlier integrated push passed 69/69 in 952.59s. Current Arc preview http://127.0.0.1:8790/profiles/index.html?preview=e3e33171b is served by session25957 from external site-final-e3e33171b. Full build passes 7298 checks, 692-page profile audit, 48 PDF links, 59 assets and live routes. Latest URL wrapping and wider Name column included. Source worktree clean. PR description and contributor plan hold the evidence and limits. All bounded implementation children closed; keep this parent open because think-uwd6 retains unfinished historical coverage children. Complete PDF census, historical result registration and explicit identity/family-scope follow-ups remain tracked. Next action is the requested independent final review. Do not merge or deploy.
