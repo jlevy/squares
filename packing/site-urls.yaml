@@ -4386,7 +4386,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-20'
+  lastmod: '2026-10-21'
   status: live
 - path: cases/205.html
   canonical: cases/205.html
@@ -4586,7 +4586,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-18'
+  lastmod: '2026-10-21'
   status: live
 - path: cases/228.html
   canonical: cases/228.html
@@ -4602,7 +4602,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-19'
+  lastmod: '2026-10-21'
   status: live
 - path: cases/23.html
   canonical: cases/23.html
@@ -4882,7 +4882,7 @@ urls:
   generator: devtools.render_case_pages:case_records
   producer: overview
   first_published: '2026-10-03'
-  lastmod: '2026-10-20'
+  lastmod: '2026-10-21'
   status: live
 - path: cases/261.html
   canonical: cases/261.html
@@ -17255,6 +17255,41 @@ urls:
     - packing/devtools/upper_bound_reports.py
     - docs/project/reviews/review-2026-10-21-upper-bound-import-703.md
     - packing/resources/web/evand-n270-sweep-2026-10-20/review/review-2026-10-21/README.md
+- path: result/t-225.html
+  canonical: result/t-225.html
+  kind: result
+  generator: devtools.render_overview:result_fragments
+  producer: overview
+  first_published: '2026-10-21'
+  lastmod: '2026-10-21'
+  status: live
+  identity:
+    kind: upper-bound
+    scope:
+      n_values:
+      - 204
+      - 227
+      - 229
+      - 260
+    established: null
+    attribution:
+      source_keys:
+      - '[Daniel regularized lists 2026-10-20]'
+      published: '2026-10-20'
+    builds_on: null
+    evidence:
+    - E-evand-regularized-1020-certificate-report
+    artifacts:
+    - packing/resources/web/evand-regularized-2026-10-20/README.md
+    - packing/resources/web/evand-regularized-2026-10-20/acquisition/claims.json
+    - packing/resources/web/evand-regularized-2026-10-20/source/search/regularize/lists/certs/n-204.cert.gz
+    - packing/resources/web/evand-regularized-2026-10-20/source/search/regularize/lists/certs/n-227.cert.gz
+    - packing/resources/web/evand-regularized-2026-10-20/source/search/regularize/lists/certs/n-229.cert.gz
+    - packing/resources/web/evand-regularized-2026-10-20/source/search/regularize/lists/certs/n-260.cert.gz
+    - packing/resources/web/evand-regularized-2026-10-20/receipts/exact-certification.json.xz
+    - packing/resources/web/evand-regularized-2026-10-20/measure/identity.json
+    - packing/campaign/issue-intake/upper-bounds-20261021/README.md
+    - packing/devtools/upper_bound_reports.py
 - path: results.html
   canonical: results.html
   kind: page

@@ -211,9 +211,9 @@ direction; the pinned commit names Claude Opus 5.5 as co-author and says its com
 push were approved by Evan Daniel.
 The record credits each packing to the finder the source names, as T-146 did:
 
-- Francisco Couzo at 204 and 260, the packings of issue #678 (T-223); at 260 the source
-  says it seeded Joost de Winter’s #668 packing from Evan Daniel’s exact-form
-  certificate;
+- Francisco Couzo at 204 and 260, the packings of issue #678 (T-223); at 204 his source
+  credits Mykhailo Polkovskyi’s construction, and at 260 it says it seeded Joost de
+  Winter’s #668 packing from Evan Daniel’s exact-form certificate;
 - Francisco Couzo at 227, his #672 refinement of Joost de Winter’s #668 packing
   (T-196), measured above;
 - Evan Daniel at 229, his #674 packing (T-199), which started from Couzo’s #672 packing,

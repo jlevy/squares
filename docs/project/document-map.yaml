@@ -33,6 +33,8 @@ documents:
   - {path: packing/campaign/issue-intake/upper-bounds-20261019/lane-claims/README.md, role: source-index, authority: record, lifecycle: retained}
   - {path: packing/campaign/issue-intake/upper-bounds-20261020/README.md, role: generated-view, authority: generated, lifecycle: generated}
   - {path: packing/campaign/issue-intake/upper-bounds-20261020/lane-claims/README.md, role: source-index, authority: record, lifecycle: retained}
+  - {path: packing/campaign/issue-intake/upper-bounds-20261021/README.md, role: generated-view, authority: generated, lifecycle: generated}
+  - {path: packing/campaign/issue-intake/upper-bounds-20261021/lane-claims/README.md, role: source-index, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-18-n108-fine-net-mathematics-max.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-18-wand125-n108-certificate-mathematics.md, role: review, authority: record, lifecycle: retained}
   - {path: docs/project/reviews/review-2026-10-16-upper-bound-imports-506-607.md, role: review, authority: record, lifecycle: retained}

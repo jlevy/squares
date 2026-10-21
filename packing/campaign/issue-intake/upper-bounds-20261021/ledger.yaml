@@ -1,0 +1,125 @@
+format: intake-ledger-v1
+read_at_main: 7eeab1f5e3161cfd7aa62f7e685f9e1952d4fad8
+read_on: '2026-10-21'
+rule: If they are reported in order, then each one should be recorded as a result, as long
+  as each one is stronger than the last. If a stronger result is reported first, then the
+  other one should not be recorded since it is weaker after that, unless there is some key
+  reason it should be recorded.
+lanes:
+- name: views
+  branch: claude/stoic-thompson-ku09fw
+  commit: b1244549a5786c2e7cd362087f95128e1081f909
+  note: the packet's frozen claim record at its first commit; it is read in the checkout
+reports:
+- report: '#672'
+  url: https://github.com/jlevy/squares/issues/672
+  kind: issue
+  holders: Francisco Couzo
+  reported_at: '2026-10-17T20:48:34Z'
+  bead: think-2vjc
+  claims:
+  - n: 227
+    printed: '15.563625652343'
+    rounding: up
+    exact: 71427829379429597600111901507/4589408083628500000000000000
+    exact_from: certificates/n227.cert (its header) at franciscouzo/square-packing@af8cb7959aead318c0cf5e9f873de3caa763f77a,
+      SHA-256 65b03df883e75f890eca985232252a6340b9b5da3437c41275c9201df03d8c17
+    refines:
+      packing_of: Joost de Winter
+      entry: T-196
+      source: '#672: the author''s comment of 17 October names de Winter''s #668 packings
+        as the start at 227 and 229 (issuecomment-6242081759)'
+    measured:
+      against: T-196
+      finding: no square moves beyond 0.1 (largest 0.080) under an optimal assignment; 226
+        of 227 move beyond 1e-6 and 58 turn
+      source: packing/resources/web/evand-regularized-2026-10-20/measure/identity.json
+  note: 'Unregistered at 227, owned by think-2vjc; the 18 October ledger recorded it after
+    #668.'
+- report: evand/square-packing@0075967
+  url: https://github.com/evand/square-packing/tree/0075967bace18a3deabcc0baa64c2fb294fc80a0
+  kind: publication
+  holders: Evan Daniel (evand)
+  reported_at: '2026-10-20T02:36:12Z'
+  bead: think-ql4v
+  claims:
+  - n: 204
+    printed: 14808642840591493923068442871459/1000000000000000000000000000000
+    rounding: exact
+    exact: 14808642840591493923068442871459/1000000000000000000000000000000
+    exact_from: packing/resources/web/evand-regularized-2026-10-20/acquisition/claims.json
+      at claude/stoic-thompson-ku09fw@b1244549a5786c2e7cd362087f95128e1081f909
+    first_committed: '2026-10-20T02:36:12Z'
+    refines:
+      packing_of: Francisco Couzo
+      entry: T-223
+      source: the view's JSON names Francisco Couzo under "by" and calls itself "regularized
+        display view of a certified packing at the same side; not a new bound"
+    measured:
+      against: T-223
+      finding: nearest centres one to one under a half turn; 58 squares move beyond 1e-3 and
+        4 beyond 0.1 (largest 0.442), largest turn 0.159 degrees
+      source: packing/resources/web/evand-regularized-2026-10-20/measure/identity.json
+  - n: 227
+    printed: 7781812826162574542396221861851/500000000000000000000000000000
+    rounding: exact
+    exact: 7781812826162574542396221861851/500000000000000000000000000000
+    exact_from: packing/resources/web/evand-regularized-2026-10-20/acquisition/claims.json
+      at claude/stoic-thompson-ku09fw@b1244549a5786c2e7cd362087f95128e1081f909
+    first_committed: '2026-10-20T02:36:12Z'
+    refines:
+      packing_of: Francisco Couzo
+      entry: '#672'
+      source: the view's JSON names Francisco Couzo under "by" and calls itself "regularized
+        display view of a certified packing at the same side; not a new bound"
+    measured:
+      against: '#672'
+      finding: 'nearest centres one to one under a half turn; 194 of 227 squares within 1e-6,
+        16 beyond 1e-3 and 3 beyond 0.1 (largest 0.168); the side is 1.76e-11 below the exact
+        side of #672''s certificate'
+      source: packing/resources/web/evand-regularized-2026-10-20/measure/identity.json
+  - n: 229
+    printed: 15650161513876431064009548865321/1000000000000000000000000000000
+    rounding: exact
+    exact: 15650161513876431064009548865321/1000000000000000000000000000000
+    exact_from: packing/resources/web/evand-regularized-2026-10-20/acquisition/claims.json
+      at claude/stoic-thompson-ku09fw@b1244549a5786c2e7cd362087f95128e1081f909
+    first_committed: '2026-10-20T02:36:12Z'
+    refines:
+      packing_of: Evan Daniel
+      entry: T-199
+      source: 'the commit: "229 after the slp2 polish, 2e-11 below the posted float: the exact
+        optimum of the same packing"; the view''s JSON names Evan Daniel under "by"'
+    measured:
+      against: T-199
+      finding: nearest centres one to one under no symmetry; an optimal assignment moves 112
+        squares beyond 1e-3 and 13 beyond 0.1 (largest 0.650), largest turn 0.055 degrees
+      source: packing/resources/web/evand-regularized-2026-10-20/measure/identity.json
+  - n: 260
+    printed: 4161438312629953048686574163329/250000000000000000000000000000
+    rounding: exact
+    exact: 4161438312629953048686574163329/250000000000000000000000000000
+    exact_from: packing/resources/web/evand-regularized-2026-10-20/acquisition/claims.json
+      at claude/stoic-thompson-ku09fw@b1244549a5786c2e7cd362087f95128e1081f909
+    first_committed: '2026-10-20T02:36:12Z'
+    refines:
+      packing_of: Francisco Couzo
+      entry: T-223
+      source: the view's JSON names Francisco Couzo under "by" and calls itself "regularized
+        display view of a certified packing at the same side; not a new bound"
+    measured:
+      against: T-223
+      finding: nearest centres one to one under no symmetry; an optimal assignment keeps 207
+        of 260 squares within 1e-9, moves 41 beyond 1e-3 and 20 beyond 0.1 (largest 0.643),
+        and turns none beyond 1e-6
+      source: packing/resources/web/evand-regularized-2026-10-20/measure/identity.json
+  note: A publication in a watched repository with no issue, dated by its first commit (the
+    owner, 2026-10-14). Each certificate is a display-regularized view of a packing solved
+    to its exact side; by the house rule a view below the house best packing is a smaller
+    packing, registered as a result.
+exceptions: []
+key_reason_candidates: []
+other_items: []
+cross_check:
+- 'views/evand-regularized-2026-10-20/claims.json n=229 reads #672, which this ledger does
+  not list at n = 229'
