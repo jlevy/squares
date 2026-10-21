@@ -13556,21 +13556,18 @@ issues:
     state: open
     kind: other
     triage: done
-    summary: >-
-      The owner's handoff of 19 October 2026 between machines: the evidence release
-      data/intake-handoff-2026-10-19, the codex/handoff-20261019/* checkpoints and what each
-      still needs, and the intake's state. Like #544 it tracks work, not a reported item.
+    summary: The owner's machine handoff of 19 October 2026; like #544, it tracks work.
     read_through: '2026-10-19T15:51:21Z'
     results: []
     asks:
-    - what: Every checkpoint it lists landed, declined or moved to its own issue or bead.
+    - what: What it lists landed, declined or moved to its own issue or bead.
       state: queued
       bead: think-xmxb
     beads:
     - think-xmxb
     answer_bead: think-xmxb
     replies: []
-    close_when: Nothing it lists is left.
+    close_when: Its ask is done.
   - number: 686
     title: '100 certified larger-count square packings (328–998): registration request'
     author: gfppoy
