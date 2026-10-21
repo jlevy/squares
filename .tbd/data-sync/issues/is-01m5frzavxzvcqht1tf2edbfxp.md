@@ -5,15 +5,17 @@ title: "Import Evan Daniel: solved views below the record at 204, 227, 229 and 2
 kind: task
 status: in_progress
 priority: 2
-version: 7
+version: 10
 delegate: coord-intake-1021b
 labels:
   - result-import
 dependencies: []
+child_order_hints:
+  - is-01m5gcjg5g0z6fr6y4rh84fzkf
 hold: null
 hold_until: null
 created_at: 2026-10-21T17:43:33.500Z
-updated_at: 2026-10-21T22:22:15.384Z
+updated_at: 2026-10-21T23:36:08.501Z
 started_at: 2026-10-21T17:43:35.847Z
 ---
 Stage 0 owner for four certificates Evan Daniel published, with no issue, in evand/square-packing at 0075967bace18a3deabcc0baa64c2fb294fc80a0 (committed 2026-10-20T02:36:12Z, "Site up to date: records at 183, 229, 308 (ours) and 204, 227, 260 (Couzo), certified and regularized"): search/regularize/lists/certs/n-NNN.cert.gz, each with n-NNN.json.gz beside it. Found by the read-only triage of the 21 October sweep (c-triage-sweep-1021b). Nothing has been retained, replayed or registered.
@@ -56,4 +58,8 @@ Plan and price: packet evand-regularized-2026-10-20 by acquire_source (the eight
 2026-10-21 c-lane-views-import: draft PR https://github.com/jlevy/squares/pull/716 (label intake; S2 proposed in the body, not applied), head 559704366 pushed (ls-remote confirmed). Merged main 970e89de8 (#704) at 58673fb50; added, on the coordinator's word, #668's final-reply record (541813c73), the stale overview card and de Winter note after #704 (a71c5d41c), T-196's News entry (35fcb4adb), DATA_REVISION 987962f8 (90b499ece) and the new test module's shard cost (559704366). Records tier: 51/52, the remaining failure is check_release_impact (site edition and the four papers' no-public-change records), deferred to the re-cut after #706. Next: after #706 merges, merge main, T-223's News entry on the coordinator's word, re-pin, papers' records, re-cut (likely v0.8.17); then T-225's stage 4 review and adoption. Nothing unpushed.
 
 2026-10-21 22:40 coord-intake-1021b: #706 merged (bb0c24e9f); the queue ahead is clear. Active: c-lane-views-import merges main and cuts v0.8.17.
+blocked_on: none
+2026-10-21 c-lane-views-import: PR #716 head be6416a03 pushed (ls-remote confirmed), nothing unpushed. Merged main bb0c24e9f (#706) at d9dfee4b1: houses now T-223 at 204 and 260, T-196 at 227, T-199 at 229, each a member of the 20261021 ledger's frozen start, so T-225's verdicts and margins stand (1.39e-9 and 2.51e-11 below T-223, 1.71e-4 below T-196, 1.91e-11 below T-199). On the coordinator's word the branch also carries: think-6bs4's three texts (818f10bd3), T-223's News (3e2e87619), #678's stage 7 reply and #668's follow-up records, #715 at triage pending, #678's review ask marked done from the 20 October review's assertions map (c9105cfa2), the Couzo overview card (1300bc76b), DATA_REVISION 818f10bd, explainer v0.4.14 (register count), the three other papers' no-change record, site v0.8.17 (PUBLICATION_REVISION 18a1fb61). Records tier passes at be6416a03; hosted CI passed in full at 8055e8bdb. Next: owner/coordinator merge (re-stamp if past midnight UTC), then T-225's stage 4 review and adoption (about 0.8 CPU-h); think-cvu0 and think-o4y3 can close as superseded; think-6bs4 can close.
+
+2026-10-21 23:40 coord-intake-1021b: stage 4 mathematical review done by c-review-t225-math (tbd strong tier, Claude Opus 5.5, reasoning xhigh; separate from the import lane and #716's senior reviewer): all four accepted with findings for finite feasibility; clean-room two-route checker (integers only; Fraction with clipping area) agrees with both maintained routes; sharp controls at contact and 1e-30 past it behave at all four counts; identity measurements reproduce identity.json; S2 confirmed. Findings RF-1 major non-blocking (227 credit via of: T-196; same as #716 A2), RF-2..RF-6 minor/notes. Draft and programs: coordinator scratchpad review-t225/. Next (after #716 merges): stage 4 PR on the session branch retaining the review and programs, entering the evidence, raising T-225 to V3/C3, and adopting/regularizing at 204, 229, 260 (and 227 once its credit is right), ~0.8 CPU-h of strong generators.
 blocked_on: none
