@@ -10572,7 +10572,8 @@ issues:
     title: 'Improved upper bounds for n = 227, 229, 260: registration request'
     author: JoostdeWinter
     opened: '2026-10-17'
-    state: open
+    state: closed
+    closed: '2026-10-21'
     kind: result-report
     triage: done
     summary: Joost de Winter reports exact rational witnesses at 227, 229 and 260 from square-packing c95c4938;
@@ -10625,6 +10626,38 @@ issues:
         verification: V0
         confirmation: C0
         status: recorded
+      outdated:
+      - 'Separate mathematical review and source-checker replay with geometric controls await
+        reviewed integration into the record; their completion elsewhere has not raised this
+        entry''s rungs; since #704 merged on 21 October the review of 20 October is integrated
+        and T-196''s rungs rest on this repository''s own exact routes, an independent
+        re-implementation, and no run of the source''s verify_all.py or its three checkers is
+        in the record'
+      - 'The case bounds and retained drawings remain unchanged pending adoption; since #704
+        merged on 21 October T-196 is the house best packing at 227 and 260, drawn from a
+        same-side regularized view, and T-199 stays the house at 229'
+    - url: https://github.com/jlevy/squares/issues/668#issuecomment-6326251307
+      date: '2026-10-21'
+      by: jlevy
+      kind: final
+      reported:
+      - result: n227
+        id: T-196
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: n229
+        id: T-196
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      - result: n260
+        id: T-196
+        verification: V3
+        confirmation: C3
+        status: confirmed
+      corrects:
+      - https://github.com/jlevy/squares/issues/668#issuecomment-6261558114
     close_when: Every claim or correction has a reviewed disposition on main, pending validation has a priced
       owner, any changed house is regularized in its adoption, and the author has received a reply verified
       against main and the deployed site.
@@ -10641,7 +10674,7 @@ issues:
       actual main merge order; no reply is posted. Separate mathematical review and source-replay owners
       retain Stage 4 integration and any adoption. The separately returned full exact review and completed
       source replay/controls are pending separate descendant PRs; this registration adopts neither receipt
-      nor rung. Both case upper lanes and house choices stay unchanged pending Stage 4 adoption. The separately completed source replays and mathematical reviews await descendant integration; no confirmation receipt or rung is adopted here. On 20 October 2026 the replay was re-run here and integrated (E-de-winter-668-upper-exact-feasibility, think-8xr0) and T-196 raised to V3/C3; the 20 October review (think-455r) accepted it the same day, and the cases at 227 and 260 adopted it with both strong regularizers'' runs.'
+      nor rung. Both case upper lanes and house choices stay unchanged pending Stage 4 adoption. The separately completed source replays and mathematical reviews await descendant integration; no confirmation receipt or rung is adopted here. On 20 October 2026 the replay was re-run here and integrated (E-de-winter-668-upper-exact-feasibility, think-8xr0) and T-196 raised to V3/C3; the 20 October review (think-455r) accepted it the same day, and the cases at 227 and 260 adopted it with both strong regularizers'' runs. The final reply, posted at 2026-10-21T20:50:03Z (issuecomment-6326251307) after #704 merged and its Pages deployment of 970e89de8 (run 39671549053, deployment 7236813599, site v0.8.15) was checked, reported T-196 at V3/C3, confirmed, on the two maintained exact routes and the 20 October review''s own route, an independent re-implementation, and said that no run of the source''s verify_all.py or its three checkers is in the record. It reported the adoption at 227 and 260 with the same-side regularized drawings and the catalogue sides withdrawn as conjectured optima, T-199 kept as the house at 229, T-223 registered at V0/C0 2.56e-05 below T-196 at 260, and #672''s unregistered smaller print at 227; it passed on the review''s two questions for the author and said that nothing asked for is queued. The issue closed at 2026-10-21T20:50Z.'
   - number: 669
     title: 's(155) ≤ 12.952260944651: registration request'
     author: evand
