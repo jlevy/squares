@@ -3,14 +3,18 @@ type: is
 id: is-01m5dz0nzsgm7vbzwbf7q2x9bh
 title: "Import Evan Daniel: s(343) <= 18.977682482405 (#702)"
 kind: task
-status: open
+status: in_progress
 priority: 2
-version: 2
+version: 3
+delegate: c-lane-702-import
 labels:
   - result-import
 dependencies: []
+hold: null
+hold_until: null
 created_at: 2026-10-21T00:50:40.249Z
-updated_at: 2026-10-21T03:59:50.156Z
+updated_at: 2026-10-21T05:27:59.181Z
+started_at: 2026-10-21T05:27:59.180Z
 ---
 Stage 1 triage of jlevy/squares#702 (Evan Daniel, opened 2026-10-20T22:09:31Z), read-only, 21 October 2026, lane c-lane-records-1021. Nothing retained, imported or replayed.
 
