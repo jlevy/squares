@@ -2001,8 +2001,10 @@ RELEASE_NO_PUBLIC_CHANGES: tuple[ReleaseNoPublicChange, ...] = (
             "of these five inputs: render_n11_optimality_review, "
             "render_n11_threshold_bound_review and render_packing_methods write their HTML "
             "and Markdown byte-identical across all four renders; only the explainer, which "
-            "counts the register, differs, and it takes v0.4.14. No PDF was printed; each "
-            "prints from that HTML. Retain v0.1.7, v0.1.0 and v0.2.3."
+            "counts the register, differs, and it takes v0.4.14. Rendered the same way again "
+            "at 1300bc76, after the #678, #668 and #715 records and the overview's Couzo "
+            "card: the same three byte-identical. No PDF was printed; each prints from that "
+            "HTML. Retain v0.1.7, v0.1.0 and v0.2.3."
         ),
     ),
     ReleaseNoPublicChange(
