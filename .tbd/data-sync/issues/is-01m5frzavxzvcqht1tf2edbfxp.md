@@ -5,7 +5,7 @@ title: "Import Evan Daniel: solved views below the record at 204, 227, 229 and 2
 kind: task
 status: in_progress
 priority: 2
-version: 3
+version: 4
 delegate: coord-intake-1021b
 labels:
   - result-import
@@ -13,7 +13,7 @@ dependencies: []
 hold: null
 hold_until: null
 created_at: 2026-10-21T17:43:33.500Z
-updated_at: 2026-10-21T17:44:15.833Z
+updated_at: 2026-10-21T19:57:49.211Z
 started_at: 2026-10-21T17:43:35.847Z
 ---
 Stage 0 owner for four certificates Evan Daniel published, with no issue, in evand/square-packing at 0075967bace18a3deabcc0baa64c2fb294fc80a0 (committed 2026-10-20T02:36:12Z, "Site up to date: records at 183, 229, 308 (ours) and 204, 227, 260 (Couzo), certified and regularized"): search/regularize/lists/certs/n-NNN.cert.gz, each with n-NNN.json.gz beside it. Found by the read-only triage of the 21 October sweep (c-triage-sweep-1021b). Nothing has been retained, replayed or registered.
@@ -37,3 +37,18 @@ blocked_on: none
 Order: one records PR after #704 and #706 merge (both change the houses at 227, 204 and 260). That PR also carries the intake-watch.yaml reads from the triage (scratchpad triage-1021b/proposed-intake-watch.yaml.patch, which names this bead on the 0075967 read).
 Related: think-cvu0 and think-o4y3 (#704 review B6) hold Daniel's earlier solved views of T-196 at 227 and 260 (1.66e-8 and 1.81e-8 below T-196); the 0075967 views are smaller at both counts (1.71e-4 below T-196 at 227; 2.51e-11 below T-223 at 260), so those two close as superseded by this import once it registers.
 blocked_on: jlevy/squares#706
+2026-10-21 c-lane-views-import (stage 1, branch claude/stoic-thompson-ku09fw at main 7eeab1f5): claim map and priced plan.
+Pin: evand/square-packing@0075967bace18a3deabcc0baa64c2fb294fc80a0 (first commit of these bytes, 2026-10-20T02:36:12Z). The eight files search/regularize/lists/certs/n-{204,227,229,260}.{cert,json}.gz are byte-identical at the head 88385ab, so the pin is the claim's own commit. The same commit's 183 and 308 certificates state T-220's and T-221's sides and are not imported; its site data, lists and TODO hold nothing else to import.
+Claims (S_cert of each JSON, the certificate header's side; S_exact is the 50-digit KKT side it rounds up):
+- 204: 14808642840591493923068442871459/10^30, 1.389753e-9 below T-223 (#678, pending adoption on main; #706 adopts it). JSON by: Francisco Couzo; input: the store's 204; conservative, level 2.
+- 227: 7781812826162574542396221861851/(5*10^29), 1.710513e-4 below T-196 (#668, pending; #704 adopts it), and 1.757785e-11 below #672's exact side 71427829379429597600111901507/4589408083628500000000000000 (franciscouzo@af8cb79 certificates/n227.cert, sha256 65b03df8...; unregistered, think-2vjc). JSON by: Couzo.
+- 229: 15650161513876431064009548865321/10^30, 1.912210e-11 below T-199 (the house; #674 update). JSON by: Evan Daniel; input "polished".
+- 260: 4161438312629953048686574163329/(2.5*10^29), 2.514377e-11 below T-223, 2.555366e-5 below T-196. JSON by: Couzo.
+Monotonicity: each side is below the verified bound at n+1 (205: 14.82445114612409; 228: 15.60460147572967; 230: 15.68292682926830; 261: 16.67877987534291), so each bound is new; no registered certificate states any of the four sides (first_certified_in: none). #706's own solved views at 204 and 260 lie at the same margins (1.39e-9, 2.51e-11) and are unregistered.
+Identity, measured here (devtools.check_half_angle_area.arrangement_gap, and an optimal assignment where nearest centres do not pair one to one; exploration now, retained in the packet's measurement before registration):
+- 227 vs #672: nearest centres one to one under symmetry 2; 194 of 227 squares within 1e-6, 16 beyond 1e-3, 3 beyond 0.1 (max 0.168), 8 turned (max 2.54 deg). Against T-196: 226 beyond 1e-6, 58 beyond 1e-3, 3 beyond 0.1 (max 0.208). #672 vs T-196: no square beyond 0.1 (max 0.080), 58 turned: #672 is a refinement of de Winter's packing, and the view is #672's packing solved 1.76e-11 lower and regularized. So the 227 view is #672's packing, measured. Since #672 is unregistered, the regularizations item names T-196 (de Winter's packing, which #672 refines), and the credit and notes name Couzo's #672 refinement (think-2vjc) — as T-146 at 70 named T-125 and credited the refiner in prose.
+- 204 vs T-223: one to one under symmetry 2; 58 beyond 1e-3, 4 beyond 0.1 (max 0.442), max turn 0.159 deg.
+- 229 vs T-199: optimal assignment under symmetry 2; 112 beyond 1e-3, 13 beyond 0.1 (max 0.650), max turn 0.055 deg.
+- 260 vs T-223: optimal assignment under symmetry 7; 207 squares within 1e-9, 41 beyond 1e-3, 20 beyond 0.1 (max 0.643), no turn above 1e-6. Each JSON's angle_changes are only "free-angle kept", so changes are zero at all four (as T-146 read them).
+Ledger: campaign/issue-intake/upper-bounds-20261021/, read at main 7eeab1f5; starts hold T-223 (204, 260), T-196 (227, 260) and T-199 (229) as pending or house; the walk takes #672 at 227 (recorded after T-196, as the 18 October ledger did) and this publication at all four (recorded, each a refinement of the packing named).
+Plan and price: packet evand-regularized-2026-10-20 by acquire_source (the eight gz as original gzip, REGULARIZE.md, LICENSE, CREDITS.md; verify_cert*.py, best.*, refresh.py, samepacking.py and the site's records2026.json and lineage.yaml pinned by digest), well under 1 MB; import declaration for devtools.upper_bound_reports (T-146's route; register_regularized_bounds selects this project's own runs and does not read an external packet); certify --workers 2: 4 positives and 8 controls on both maintained routes, about 2 CPU-minutes, inside the pass's minutes rule; register T-225 at V0/C0 with a regularizations item per count; stage 4 review and adoption in a later PR (about 0.8 CPU-h of strong-generator runs, under the 40 CPU-h item cap).
