@@ -1,0 +1,195 @@
+{
+  "format": "upper-bound-report-declaration-v1",
+  "issue": "(no issue)",
+  "author": "Evan Daniel",
+  "source_key": "[Daniel regularized lists 2026-10-20]",
+  "report_evidence": "E-evand-regularized-1020-certificate-report",
+  "receipt_format": "evand-regularized-1020-exact-replay-v1",
+  "witness_prefix": "W-evand-regularized-1020-n",
+  "claim_limitations": "Complete 0075967 rational centre/half-angle certificate of a display-regularized view of a record packing solved to its exact side, converted exactly from the retained source. Finite construction feasibility only; no KKT, local minimum, same-packing, rigidity, novelty, priority or global optimality claim.",
+  "read_on": "2026-10-21",
+  "read_at_main": "7eeab1f5e3161cfd7aa62f7e685f9e1952d4fad8",
+  "certificates": [
+    {
+      "n": 204,
+      "path": "search/regularize/lists/certs/n-204.cert.gz",
+      "format": "evand-cert",
+      "offered": "14808642840591493923068442871459/1000000000000000000000000000000",
+      "printed_in": "https://github.com/evand/square-packing/blob/0075967bace18a3deabcc0baa64c2fb294fc80a0/search/regularize/lists/certs/n-204.json.gz",
+      "first_committed": "2026-10-20T02:36:12Z"
+    },
+    {
+      "n": 227,
+      "path": "search/regularize/lists/certs/n-227.cert.gz",
+      "format": "evand-cert",
+      "offered": "7781812826162574542396221861851/500000000000000000000000000000",
+      "printed_in": "https://github.com/evand/square-packing/blob/0075967bace18a3deabcc0baa64c2fb294fc80a0/search/regularize/lists/certs/n-227.json.gz",
+      "first_committed": "2026-10-20T02:36:12Z"
+    },
+    {
+      "n": 229,
+      "path": "search/regularize/lists/certs/n-229.cert.gz",
+      "format": "evand-cert",
+      "offered": "15650161513876431064009548865321/1000000000000000000000000000000",
+      "printed_in": "https://github.com/evand/square-packing/blob/0075967bace18a3deabcc0baa64c2fb294fc80a0/search/regularize/lists/certs/n-229.json.gz",
+      "first_committed": "2026-10-20T02:36:12Z"
+    },
+    {
+      "n": 260,
+      "path": "search/regularize/lists/certs/n-260.cert.gz",
+      "format": "evand-cert",
+      "offered": "4161438312629953048686574163329/250000000000000000000000000000",
+      "printed_in": "https://github.com/evand/square-packing/blob/0075967bace18a3deabcc0baa64c2fb294fc80a0/search/regularize/lists/certs/n-260.json.gz",
+      "first_committed": "2026-10-20T02:36:12Z"
+    }
+  ],
+  "requested": [204, 227, 229, 260],
+  "replayed": [204, 227, 229, 260],
+  "houses": [
+    {
+      "n": 204,
+      "reader": "[Mishapolk KKT refinements 2026-10-14]",
+      "source_key": "[Mishapolk KKT refinements 2026-10-14]",
+      "holders": "Daniil Ostashev, improved by PingYou Ltd and Mishapolk",
+      "result": "T-186",
+      "reported_value": "14.80866323438695657",
+      "verified_value": "14.80866323438695657",
+      "evidence": ["E-mishapolk-70a033f-exact-feasibility"]
+    },
+    {
+      "n": 227,
+      "reader": "[Daniel regularizer 2026-10-11]",
+      "source_key": "[Kingbird]",
+      "holders": "the Kingbird catalogue (David Ellsworth), verified by T-155's exact ceiling",
+      "result": "T-155",
+      "reported_value": "15.57106781186547",
+      "verified_value": "15.57106781186548",
+      "evidence": ["E-regularized-bounds-2026-10-12-exact-decision"],
+      "reported_rounding": "unstated"
+    },
+    {
+      "n": 229,
+      "reader": "[Daniel n229 dilation update 2026-10-18]",
+      "source_key": "[Daniel n229 dilation update 2026-10-18]",
+      "holders": "Evan Daniel, after Francisco Couzo's #672 packing, which refines Joost de Winter's #668",
+      "result": "T-199",
+      "reported_value": "15.6501615138955532",
+      "verified_value": "15.6501615138955532",
+      "evidence": ["E-evand-674-n229-update-exact-feasibility"]
+    },
+    {
+      "n": 260,
+      "reader": "[Daniel regularizer 2026-10-11]",
+      "source_key": "[Kingbird]",
+      "holders": "the Kingbird catalogue (David Ellsworth), verified by T-155's exact ceiling",
+      "result": "T-155",
+      "reported_value": "16.65685424949238",
+      "verified_value": "16.65685424949239",
+      "evidence": ["E-regularized-bounds-2026-10-12-exact-decision"],
+      "reported_rounding": "unstated"
+    }
+  ],
+  "pending": [
+    {
+      "n": 204,
+      "report": "T-223 (#678)",
+      "url": "https://github.com/jlevy/squares/issues/678",
+      "holders": "Francisco Couzo",
+      "result": "T-223",
+      "printed": "14.808642841982",
+      "rounding": "up"
+    },
+    {
+      "n": 204,
+      "report": "#675",
+      "url": "https://github.com/jlevy/squares/issues/675",
+      "holders": "Francisco Couzo",
+      "printed": "14.808644367227",
+      "rounding": "up"
+    },
+    {
+      "n": 204,
+      "report": "#670",
+      "url": "https://github.com/jlevy/squares/issues/670",
+      "holders": "Francisco Couzo",
+      "printed": "14.808644417690",
+      "rounding": "up"
+    },
+    {
+      "n": 227,
+      "report": "#672",
+      "url": "https://github.com/jlevy/squares/issues/672",
+      "holders": "Francisco Couzo",
+      "printed": "15.563625652343",
+      "rounding": "up"
+    },
+    {
+      "n": 227,
+      "report": "T-196 (#668)",
+      "url": "https://github.com/jlevy/squares/issues/668",
+      "holders": "Joost de Winter",
+      "result": "T-196",
+      "printed": "15.563796703670",
+      "rounding": "up"
+    },
+    {
+      "n": 229,
+      "report": "T-198 (#674)",
+      "url": "https://github.com/jlevy/squares/issues/674",
+      "holders": "Evan Daniel",
+      "result": "T-198",
+      "reader": "[Daniel n229 dilation 2026-10-17]"
+    },
+    {
+      "n": 229,
+      "report": "#672",
+      "url": "https://github.com/jlevy/squares/issues/672",
+      "holders": "Francisco Couzo",
+      "printed": "15.650174740273",
+      "rounding": "up"
+    },
+    {
+      "n": 229,
+      "report": "T-196 (#668)",
+      "url": "https://github.com/jlevy/squares/issues/668",
+      "holders": "Joost de Winter",
+      "result": "T-196",
+      "printed": "15.650174756949",
+      "rounding": "up"
+    },
+    {
+      "n": 260,
+      "report": "T-223 (#678)",
+      "url": "https://github.com/jlevy/squares/issues/678",
+      "holders": "Francisco Couzo",
+      "result": "T-223",
+      "printed": "16.645753250545",
+      "rounding": "up"
+    },
+    {
+      "n": 260,
+      "report": "T-196 (#668)",
+      "url": "https://github.com/jlevy/squares/issues/668",
+      "holders": "Joost de Winter",
+      "result": "T-196",
+      "printed": "16.645778804182",
+      "rounding": "up"
+    }
+  ],
+  "register": {
+    "title": "Evan Daniel's regularized record lists at 0075967, no issue",
+    "headline": "Daniel's solved and regularized views at 204, 227, 229 and 260, each the smallest side reported there",
+    "significance": 2,
+    "source_checks": "Each certificate's JSON reports it VALID under the source's checkers and verified at 80 digits, prints S_cert, the side its certificate's header states, and S_exact, the 50-digit side of the solved packing it rounds up, and classes the view at level 2, same packing traversable without expansion, by a path test that samples angle moves and that the method log says is not a continuous proof. The commit says the six refreshed counts were certified and regularized, and of 229 that the polished side is 2e-11 below the posted one, the exact optimum of the same packing. The checkers are byte-identical to the copies the n183 packet retains. Those statements are the author's; no source program ran here.",
+    "credit": "Credit the packings to their finders, as the source's lists name them: Francisco Couzo's at 204 (#678, T-223), 227 (#672, his refinement of Joost de Winter's #668 packing, T-196) and 260 (#678, T-223, Joost de Winter's #668 packing as Couzo seeded it from Evan Daniel's exact-form certificate), and Evan Daniel's own at 229 (#674, T-199, from Couzo's #672 packing, which refines de Winter's). Evan Daniel (https://github.com/evand/square-packing) refreshed each packing from his store, solved it to the exact side stated (at 229 after a polish), regularized it for display at that side and wrote the certificate. The source claims no record, and its credits say the repository's work was produced by Claude (Anthropic) under human direction.",
+    "next_rung": "Independently review the retained replay and the identity measurements, then adopt at each count: each side lies below every value the record holds or has pending, by 1.9e-11 at 229 to 1.39e-9 at 204 against the packing it solves, and each lies below the verified bound at the next count. Both strong generators run on each re-housed count in the adoption's pull request, after #704 and #706 adopt T-196 and T-223.",
+    "bead": "think-ql4v",
+    "bibliography": {
+      "authors": ["Daniel"],
+      "lineage": "builds-on-project",
+      "credit": "Daniel after Couzo, de Winter, Levy",
+      "short_credit": "Daniel after Couzo et al.",
+      "note": "Four complete exact certificates at 0075967bace18a3deabcc0baa64c2fb294fc80a0 from the display-regularized record lists of search/regularize: at 204, 227 and 260 Francisco Couzo's packings (at 227 his #672 refinement of Joost de Winter's #668 packing) and at 229 Evan Daniel's own #674 packing, each solved to its exact side, regularized for display at that side and scaled by 1 + 1e-20. MIT-licensed certificates and JSON retained; Claude assistance disclosed. The source claims no record; no KKT, same-packing, local or global optimality is admitted."
+    }
+  }
+}

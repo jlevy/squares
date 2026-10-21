@@ -112,6 +112,9 @@ DANIEL_694 = "evand-n154-sweep-2026-10-20"
 #: Evan Daniel's issue #703, retained under MIT by the #703 lane of 21 October
 #: (`test_upper_bound_reports_703`).
 DANIEL_703 = "evand-n270-sweep-2026-10-20"
+#: Evan Daniel's regularized lists at 0075967, which no issue reports, retained under MIT
+#: by the views lane of 21 October (`test_upper_bound_reports_regularized_1020`).
+DANIEL_REGULARIZED_1020 = "evand-regularized-2026-10-20"
 #: How a declaration cites a beyond-horizon row of the source register.
 COVERAGE_URL = "packing/frontier/source-coverage.yaml"
 EVERY = (
@@ -150,6 +153,7 @@ EVERY = (
     DANIEL_694,
     DANIEL_703,
     DANIEL_702,
+    DANIEL_REGULARIZED_1020,
 )
 
 
@@ -1369,6 +1373,7 @@ def test_the_register_plan_states_each_bound_as_check_standing_reads_it(name: st
         DANIEL_689: "2026-10-19",
         DANIEL_694: "2026-10-20",
         DANIEL_703: "2026-10-20",
+        DANIEL_REGULARIZED_1020: "2026-10-20",
     }
     assert result["attribution"]["published"] == published.get(name, "2026-10-10")
     evidence = plan["evidence.yaml"]

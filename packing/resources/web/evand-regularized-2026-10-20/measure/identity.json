@@ -1,0 +1,218 @@
+{
+ "format": "evand-regularized-1020-identity-v1",
+ "couzo_672": {
+  "source": "franciscouzo/square-packing@af8cb7959aead318c0cf5e9f873de3caa763f77a:certificates/n227.cert",
+  "sha256": "65b03df883e75f890eca985232252a6340b9b5da3437c41275c9201df03d8c17",
+  "side": "71427829379429597600111901507/4589408083628500000000000000"
+ },
+ "pairs": [
+  {
+   "n": 204,
+   "view": "evand 0075967",
+   "against": "T-223 (#678)",
+   "side_difference": "-1.389753e-09",
+   "side_difference_exact": "-664697624178869147740396776772613/478284616393000000000000000000000000000000",
+   "nearest_centre": {
+    "one_to_one": true,
+    "symmetry": 2,
+    "largest_displacement": "4.415537e-1",
+    "largest_turn_degrees": "0.159",
+    "moved_beyond": {
+     "1e-9": 154,
+     "1e-6": 72,
+     "1e-3": 58,
+     "1e-2": 27,
+     "1e-1": 4
+    },
+    "turned_beyond_1e-6": 15
+   },
+   "assignment": {
+    "symmetry": 2,
+    "largest_move": "0.441554",
+    "moved_beyond": {
+     "1e-9": 154,
+     "1e-6": 72,
+     "1e-3": 58,
+     "1e-2": 27,
+     "1e-1": 4
+    },
+    "largest_turn_degrees": "0.159",
+    "turned_beyond_1e-6": 15
+   }
+  },
+  {
+   "n": 227,
+   "view": "evand 0075967",
+   "against": "#672",
+   "side_difference": "-1.757785e-11",
+   "side_difference_exact": "-80671923699051704327371636387293/4589408083628500000000000000000000000000000",
+   "nearest_centre": {
+    "one_to_one": true,
+    "symmetry": 2,
+    "largest_displacement": "1.682027e-1",
+    "largest_turn_degrees": "2.542",
+    "moved_beyond": {
+     "1e-9": 60,
+     "1e-6": 33,
+     "1e-3": 16,
+     "1e-2": 8,
+     "1e-1": 3
+    },
+    "turned_beyond_1e-6": 8
+   },
+   "assignment": {
+    "symmetry": 2,
+    "largest_move": "0.168203",
+    "moved_beyond": {
+     "1e-9": 60,
+     "1e-6": 33,
+     "1e-3": 16,
+     "1e-2": 8,
+     "1e-1": 3
+    },
+    "largest_turn_degrees": "2.542",
+    "turned_beyond_1e-6": 8
+   }
+  },
+  {
+   "n": 227,
+   "view": "evand 0075967",
+   "against": "T-196 (#668)",
+   "side_difference": "-1.710513e-04",
+   "side_difference_exact": "-21381418014852945019260058228530128293346668759111576102443706439048503756610071050412012130054551383200103012707177580306624167691327188428357855326509/125000000000000000000000000000012722047830034599570775686394250382331807959509959223650417437320861455919220593434772566133820500000000000000000000000000000",
+   "nearest_centre": {
+    "one_to_one": true,
+    "symmetry": 5,
+    "largest_displacement": "2.077490e-1",
+    "largest_turn_degrees": "5.842",
+    "moved_beyond": {
+     "1e-9": 227,
+     "1e-6": 226,
+     "1e-3": 58,
+     "1e-2": 43,
+     "1e-1": 3
+    },
+    "turned_beyond_1e-6": 57
+   },
+   "assignment": {
+    "symmetry": 5,
+    "largest_move": "0.207749",
+    "moved_beyond": {
+     "1e-9": 227,
+     "1e-6": 226,
+     "1e-3": 58,
+     "1e-2": 43,
+     "1e-1": 3
+    },
+    "largest_turn_degrees": "5.842",
+    "turned_beyond_1e-6": 57
+   }
+  },
+  {
+   "n": 227,
+   "view": "#672",
+   "against": "T-196 (#668)",
+   "side_difference": "-1.710513e-04",
+   "side_difference_exact": "-19625608518563135753723747387243446036498414056943678211299386383188171187278853444289021263441244084191877555805979531385350241362792418377660126833372889968243/114735202090712500000000000000011677333830293841700192602309575669659645240534856976514727985045758957934996122322966418250992484037241536850000000000000000000000000",
+   "nearest_centre": {
+    "one_to_one": true,
+    "symmetry": 7,
+    "largest_displacement": "7.961378e-2",
+    "largest_turn_degrees": "5.842",
+    "moved_beyond": {
+     "1e-9": 227,
+     "1e-6": 226,
+     "1e-3": 59,
+     "1e-2": 45,
+     "1e-1": 0
+    },
+    "turned_beyond_1e-6": 58
+   },
+   "assignment": {
+    "symmetry": 7,
+    "largest_move": "0.0796138",
+    "moved_beyond": {
+     "1e-9": 227,
+     "1e-6": 226,
+     "1e-3": 59,
+     "1e-2": 45,
+     "1e-1": 0
+    },
+    "largest_turn_degrees": "5.842",
+    "turned_beyond_1e-6": 58
+   }
+  },
+  {
+   "n": 229,
+   "view": "evand 0075967",
+   "against": "T-199 (#674 update)",
+   "side_difference": "-1.912210e-11",
+   "side_difference_exact": "-3824419500866207473/200000000000000000000000000000",
+   "nearest_centre": {
+    "one_to_one": false,
+    "refusal": "no symmetry matches the two packings square for square"
+   },
+   "assignment": {
+    "symmetry": 2,
+    "largest_move": "0.650099",
+    "moved_beyond": {
+     "1e-9": 165,
+     "1e-6": 134,
+     "1e-3": 112,
+     "1e-2": 22,
+     "1e-1": 13
+    },
+    "largest_turn_degrees": "0.05489",
+    "turned_beyond_1e-6": 33
+   }
+  },
+  {
+   "n": 260,
+   "view": "evand 0075967",
+   "against": "T-223 (#678)",
+   "side_difference": "-2.514377e-11",
+   "side_difference_exact": "-843684791288921397849844113/33554432000000000000000000000000000000",
+   "nearest_centre": {
+    "one_to_one": false,
+    "refusal": "no symmetry matches the two packings square for square"
+   },
+   "assignment": {
+    "symmetry": 7,
+    "largest_move": "0.642814",
+    "moved_beyond": {
+     "1e-9": 53,
+     "1e-6": 53,
+     "1e-3": 41,
+     "1e-2": 24,
+     "1e-1": 20
+    },
+    "largest_turn_degrees": "1.294e-07",
+    "turned_beyond_1e-6": 0
+   }
+  },
+  {
+   "n": 260,
+   "view": "evand 0075967",
+   "against": "T-196 (#668)",
+   "side_difference": "-2.555366e-05",
+   "side_difference_exact": "-6388415391897947326086671/250000000000000000000000000000",
+   "nearest_centre": {
+    "one_to_one": false,
+    "refusal": "no symmetry matches the two packings square for square"
+   },
+   "assignment": {
+    "symmetry": 0,
+    "largest_move": "0.645753",
+    "moved_beyond": {
+     "1e-9": 260,
+     "1e-6": 254,
+     "1e-3": 79,
+     "1e-2": 54,
+     "1e-1": 21
+    },
+    "largest_turn_degrees": "24.54",
+    "turned_beyond_1e-6": 66
+   }
+  }
+ ]
+}

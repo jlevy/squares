@@ -1,0 +1,111 @@
+{
+  "format": "external-source-acquisition-v1",
+  "retrieved_at_utc": "2026-10-21T19:58Z",
+  "git_scope": "Blobless clone of evand/square-packing and a sparse checkout of 0075967 (committed 2026-10-20T02:36:12Z), the commit that refreshes the regularized record lists at 183, 204, 227, 229, 260 and 308; no issue asked. Retained: the certificates and JSON of the four counts whose sides lie below every value the record held or had pending when read (204, 227, 229 and 260), each as its original gzip, with the method log REGULARIZE.md, the licence and the credits. The eight files are byte-identical at the branch head 88385ab, the head on 21 October. The two exact checkers the certificates name are pinned by digest against the identical copies the n183 packet retains; refresh.py and samepacking.py, the best-choice lists best.csv and best.json, and the site's record provenance records2026.json and lineage.yaml by digest only. The same commit's 183 and 308 certificates state T-220's and T-221's sides and are not retained; the rest of the tree is pinned by the commit and was not retained or executed.",
+  "sources": [
+    {
+      "id": "evand-regularized-2026-10-20",
+      "source_url": "https://github.com/evand/square-packing",
+      "source_ref": "0075967bace18a3deabcc0baa64c2fb294fc80a0",
+      "source_commit": "0075967bace18a3deabcc0baa64c2fb294fc80a0",
+      "committed_utc": "2026-10-20T02:36:12Z",
+      "git_tree": "8c3b50451122acb21593dfbd7b86c406c7e8af7f",
+      "archived_path": "packing/resources/web/evand-regularized-2026-10-20/source",
+      "subtree_manifest": "packing/resources/web/evand-regularized-2026-10-20/acquisition/upstream-subtree.sha256",
+      "subtree_scope": [
+        "LICENSE",
+        "CREDITS.md",
+        "search/exact/verify_cert.py",
+        "search/exact/verify_cert2.py",
+        "search/regularize/REGULARIZE.md",
+        "search/regularize/refresh.py",
+        "search/regularize/samepacking.py",
+        "search/regularize/lists/best.csv",
+        "search/regularize/lists/best.json",
+        "search/regularize/lists/certs/n-204.cert.gz",
+        "search/regularize/lists/certs/n-204.json.gz",
+        "search/regularize/lists/certs/n-227.cert.gz",
+        "search/regularize/lists/certs/n-227.json.gz",
+        "search/regularize/lists/certs/n-229.cert.gz",
+        "search/regularize/lists/certs/n-229.json.gz",
+        "search/regularize/lists/certs/n-260.cert.gz",
+        "search/regularize/lists/certs/n-260.json.gz",
+        "site/data/lineage.yaml",
+        "site/data/records2026.json"
+      ],
+      "subtree_file_count": 19,
+      "subtree_total_bytes": 432151,
+      "retained_file_count": 11,
+      "retained_total_bytes": 75999,
+      "compressed": [],
+      "pinned_only": [
+        {
+          "path": "search/exact/verify_cert.py",
+          "bytes": 3401,
+          "sha256": "3299ca0c0f02f7c221deeea69a9a85b5a90db6bc410b20727fdff211c92bed52",
+          "reason": "The source's two standalone exact checkers, which each certificate's header names; byte-identical to the copies the n183 packet retains at 3a9948c, and never executed here.",
+          "identical_to": "packing/resources/web/evand-n183-subgrid-2026-10-19/source/search/exact/verify_cert.py"
+        },
+        {
+          "path": "search/exact/verify_cert2.py",
+          "bytes": 3101,
+          "sha256": "55140a35d95d9eaa64a14c3b044641efbcda94ebfc3b12b7dec9fa52692e31d3",
+          "reason": "The source's two standalone exact checkers, which each certificate's header names; byte-identical to the copies the n183 packet retains at 3a9948c, and never executed here.",
+          "identical_to": "packing/resources/web/evand-n183-subgrid-2026-10-19/source/search/exact/verify_cert2.py"
+        },
+        {
+          "path": "search/regularize/lists/best.csv",
+          "bytes": 54431,
+          "sha256": "9212d2028ef4e4f72c134298617d01b720b088262ebddf532dd2649e33915cdd",
+          "reason": "The best-choice list of all 324 counts, as CSV and JSON; its rows at the four counts name each retained certificate, its finder, variant, level, rotation groups and input. Pinned for credit."
+        },
+        {
+          "path": "search/regularize/lists/best.json",
+          "bytes": 120726,
+          "sha256": "ea7cab2028bd699ce141de6a0a53fc643ef94673aff841afd371c3b067c79dc7",
+          "reason": "The best-choice list of all 324 counts, as CSV and JSON; its rows at the four counts name each retained certificate, its finder, variant, level, rotation groups and input. Pinned for credit."
+        },
+        {
+          "path": "search/regularize/refresh.py",
+          "bytes": 4486,
+          "sha256": "7927878fffc8510f86ec9994df9390ab5ecc1ac941abc82aa059c4f9bbb1f049",
+          "reason": "refresh.py, which solves each store packing to its exact side (exactsolve, else the slp2 polish), and samepacking.py, the sampled path test behind each view's level; numerical tools pinned for provenance and not executed."
+        },
+        {
+          "path": "search/regularize/samepacking.py",
+          "bytes": 5698,
+          "sha256": "b50e43a8dca66317c48ba30c36cae6b20892c68834dc3879e852bc4a090036b9",
+          "reason": "refresh.py, which solves each store packing to its exact side (exactsolve, else the slp2 polish), and samepacking.py, the sampled path test behind each view's level; numerical tools pinned for provenance and not executed."
+        },
+        {
+          "path": "site/data/lineage.yaml",
+          "bytes": 2894,
+          "sha256": "1e319b3ddadb8ae33565202a8233a03d9507d99824c3221ea81312ce7c895a7e",
+          "reason": "The source site's record provenance (records2026.json) and credit lineage (lineage.yaml, which this commit extends with #674's 229 from #672's packing); pinned for credit."
+        },
+        {
+          "path": "site/data/records2026.json",
+          "bytes": 161415,
+          "sha256": "72adf7e8ca37655d22de4e3411119bd1172fcb8aed6a631c2be30dc5d4f20a89",
+          "reason": "The source site's record provenance (records2026.json) and credit lineage (lineage.yaml, which this commit extends with #674's 229 from #672's packing); pinned for credit."
+        }
+      ],
+      "license": "MIT, copyright (c) 2026 Evan Daniel (LICENSE retained). CREDITS.md says the repository's work was produced by Claude (Anthropic) under human direction; the pinned commit names Claude Opus 5.5 as co-author and says its commit and push were approved by Evan Daniel.",
+      "claims": [
+        "search/regularize/lists/certs/n-NNN.cert.gz holds the exact rational certificate of the display-regularized view of the source store's best packing at each count; at the four counts retained here the certificates state s(204) <= 14808642840591493923068442871459/10^30 = 14.808642840591493923068442871459, s(227) <= 7781812826162574542396221861851/(5*10^29) = 15.563625652325149084792443723702, s(229) <= 15650161513876431064009548865321/10^30 = 15.650161513876431064009548865321 and s(260) <= 4161438312629953048686574163329/(2.5*10^29) = 16.645753250519812194746296653316, each the S_cert its JSON states and the header side of its certificate.",
+        "The commit message says the six refreshed counts were 'certified and regularized', that the records at 204, 227 and 260 are Francisco Couzo's and at 229 Evan Daniel's, and of 229 'after the slp2 polish, 2e-11 below the posted float: the exact optimum of the same packing'. Each JSON names the packing's finder under 'by' (Francisco Couzo at 204, 227 and 260; Evan Daniel at 229) and says 'regularized display view of a certified packing at the same side; not a new bound'.",
+        "Each JSON reports the certificate VALID (cert_valid) and verified at 80 digits, the conservative policy, and level 2, 'same packing: traversable without expansion (angle moves path-checked; slides by construction)', by the method log's sampled path test, which it says is not a continuous proof. Its angle changes at the four counts are free angles kept, none turned or merged."
+      ],
+      "original_gzip": [
+        "source/search/regularize/lists/certs/n-204.cert.gz",
+        "source/search/regularize/lists/certs/n-204.json.gz",
+        "source/search/regularize/lists/certs/n-227.cert.gz",
+        "source/search/regularize/lists/certs/n-227.json.gz",
+        "source/search/regularize/lists/certs/n-229.cert.gz",
+        "source/search/regularize/lists/certs/n-229.json.gz",
+        "source/search/regularize/lists/certs/n-260.cert.gz",
+        "source/search/regularize/lists/certs/n-260.json.gz"
+      ]
+    }
+  ]
+}

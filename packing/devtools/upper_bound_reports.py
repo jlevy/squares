@@ -1342,6 +1342,7 @@ HOUSES: dict[str, Callable[[int], Fraction]] = {
     "[Daniel n308 2026-10-19]": _import("evand-n308-2026-10-19"),
     "[Daniel n154 sweep 2026-10-20]": _import("evand-n154-sweep-2026-10-20"),
     "[Daniel n270 sweep 2026-10-20]": _import("evand-n270-sweep-2026-10-20"),
+    "[Daniel regularized lists 2026-10-20]": _import("evand-regularized-2026-10-20"),
     # T-155: the side of the retained view of Evan Daniel's regularizer at each count.
     "[Daniel regularizer 2026-10-11]": regularized.view_side,
 }
