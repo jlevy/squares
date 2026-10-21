@@ -5,7 +5,7 @@ title: Integrate profile UX work with current PR and prepare final review handof
 kind: task
 status: in_progress
 priority: 2
-version: 27
+version: 28
 delegate: profiles-pr-coordinator
 labels: []
 dependencies: []
@@ -37,11 +37,11 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-21T17:06:17.155Z
-updated_at: 2026-10-21T18:43:44.797Z
+updated_at: 2026-10-21T18:46:01.788Z
 started_at: 2026-10-21T17:06:34.736Z
 ---
 Preserve current remote PR578 changes; commit local profile UX/model changes, integrate latest PR branch/main as needed, validate, push reviewable PR and handoff without merging.
 
 ## Notes
 
-Final Astra source review accepted shared tallies/resources, years-active partial-date support, reviewed issue/PR references scoped to credited entries, seven evidenced bio edits, build dependencies and import boundaries. Focused renderer checks and fresh complete preview build underway; full push gate, PR push/CI and final review handoff still required. Do not mark complete or claim current 8790 preview updated until rebuilt output is verified.
+Owner confirmed new historical result registrations separate from this PR and requested stabilization with all remaining work tracked. Frozen identity batch75profiles, structuredcensus1428resolved78nonperson7unresolved plus10manualorigins; primarymodel213distinctresults701credits. Live8790correctedintermediate now shows credit significance. Latest Accounts/resource URL split and muted parenthetical tallies implemented/tested, previewrefreshpending. New Results/Records semantics think-lekx under canonicalhistory review; user clarification pending bound-only versusallauthored andties. Final fullbuild/PDFs/gate/CI/PRhandoff pending; do not merge/deploy.
