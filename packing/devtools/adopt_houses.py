@@ -732,12 +732,12 @@ RESULTS: dict[str, Prose] = {
             "refines, and stored non-record descendants of it; a near-record sweep over them "
             "reached this packing. The issue asks that #500’s packing be credited as the "
             "ultimate start, and calls this a different local minimum from the register’s. "
-            "Measured here square by square, the best assignment against T-174’s packing, "
-            "which is #500’s to $10^{-30}$, is the identity: it keeps 255 of the 270 squares "
-            "within a tenth and moves 15 beyond it, at most 0.224, and no tilt angle is "
-            "shared. So it is another arrangement of the design that packing holds, not a "
-            "refinement in this record’s sense, found from #500’s packing by the source’s "
-            "account (T-224)."
+            "Measured by the 21 October review, square by square, the best assignment "
+            "against T-174’s packing, which is #500’s to $10^{-30}$, is the identity: it "
+            "keeps 255 of the 270 squares within a tenth and moves 15 beyond it, at most "
+            "0.224, and no tilt angle is shared. So it is another arrangement of the design "
+            "that packing holds, not a refinement in this record’s sense, found from #500’s "
+            "packing by the source’s account (T-224)."
         ),
         third_route=(
             "; the 21 October review’s own exact route, which no verifier entry names, "
@@ -1196,8 +1196,9 @@ CREDITS: dict[int, Credit] = {
     270: Credit(
         (DANIEL,),
         (),
-        "Evan Daniel’s arrangement of the design of Nate Chaoweeraprasit’s SQUISH packing "
-        "in a search started from that packing",
+        "Evan Daniel’s arrangement, in a search started from Nate Chaoweeraprasit’s SQUISH "
+        "packing, of that packing’s design, composed from SQUISH’s issue 481 n = 209 "
+        "packing, whole, and the Kingbird catalogue’s former n = 19 packing",
     ),
     # Evan Daniel's tilt-swap from the register's witness (T-186's tightening of issue 561's
     # packing): issue 561's arrangement continued, three squares beyond a tenth (RV-2 of the
