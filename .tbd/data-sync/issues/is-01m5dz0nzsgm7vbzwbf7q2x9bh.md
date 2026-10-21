@@ -5,7 +5,7 @@ title: "Import Evan Daniel: s(343) <= 18.977682482405 (#702)"
 kind: task
 status: in_progress
 priority: 2
-version: 3
+version: 4
 delegate: c-lane-702-import
 labels:
   - result-import
@@ -13,7 +13,7 @@ dependencies: []
 hold: null
 hold_until: null
 created_at: 2026-10-21T00:50:40.249Z
-updated_at: 2026-10-21T05:27:59.181Z
+updated_at: 2026-10-21T07:35:33.773Z
 started_at: 2026-10-21T05:27:59.180Z
 ---
 Stage 1 triage of jlevy/squares#702 (Evan Daniel, opened 2026-10-20T22:09:31Z), read-only, 21 October 2026, lane c-lane-records-1021. Nothing retained, imported or replayed.
@@ -44,3 +44,17 @@ The commit adds 17 files: nine s343_sw* files and eight s270_sw* files.
 
 ## Draft acknowledgement (posts after the PR carrying this triage merges)
 @evand, thank you for the report. We have read `s343_sw.cert` and its regularized view at `88385ab` (full id 88385abc95ab25d520302282d1946cbb07bc9cf3); both digests match the ones your issue prints, and the certificate's header side, 18977682482404124568634475670459/10^30, rounds up at 12 places to your 18.977682482405. 343 is beyond this record's n <= 324 case corpus, so the result will be recorded as a dated beyond-horizon row, as your #489 343 was, once the packet is retained and the certificate replayed on this repository's two exact routes with its controls. It is 5.50e-4 below #489's row on main and below Couzo's #678 print, which an open pull request records; both are recorded in report order. The same commit's s(270) certificate is #703's, and is answered there.
+
+## Notes
+
+## Import progress, 21 October 2026 (lane c-lane-702-import)
+
+Stages 2 and 3 are on draft PR #712 (https://github.com/jlevy/squares/pull/712), branch claude/intake-2026-10-21-evand-343, from main d640ad8fb, merged with main 9dda92240 (#710); head f46c0b7f3.
+
+- Custody: packet packing/resources/web/evand-n343-sweep-2026-10-20 at 88385ab via devtools.acquire_source (22 files pinned, 15 retained, 382,667 bytes; s343_sw_vs_prior.json stored gzip). Both certificate digests equal the issue's and this bead's (18415455..., f9a14775...). The s270_sw files are not retained here (#703's packet). Checkers, exactsolve.py and explore.py pinned identical to the n183 packet; PACKER.md, dgen.py, descend.py by digest only. acquire_source --check passes.
+- Replay: upper_bound_reports certify --workers 2: positive accepted, duplicate-square and outside-container controls refused on both routes (sqpack.verify, check_rational_witness_independent); 3 jobs, 351,918 pair decisions, 51.74 route CPU s (estimate 45), 37 s wall; walls >= 5.00e-21, pairs >= 9.99e-21. check --replay decides it again (53 s). Receipt: receipts/exact-certification.json.xz.
+- Record: source evand-n343-sweep-2026-10-20 and its beyond-horizon row at 343, 18.977682482405, assurance reported, after couzo-issue678-2026-10-18's row, now superseded by it (5.497224e-4 below its print, 5.500412e-4 below #489's exact side, 1.722105e-2 below #484's). Evidence E-evand-702-n343-report (register-plan). Bibliography [Daniel n343 sweep 2026-10-20], Daniel after Fang, Arslanov, Mustafin, Shangitbayev, Levy (finder Daniel, construction Fang #484). No corpus result registered; KKT/local-min/MILP not recorded. result-requests #702: not_registered (the row), queued false, credit ask done.
+- Release: after merging main 9dda92240 (#710's v0.8.11), re-pinned (DATA_REVISION 58f12aaa), survey no-public-change record re-rendered (42 files byte-identical against main 9dda9224), explainer claim-document record, site re-cut as v0.8.12 (PUBLICATION_REVISION 107e1ca4). #711 also cuts v0.8.12 and lands first, so #712 merges main and re-cuts after it. stamp_landed: nothing to stamp.
+- Snapshot: head f46c0b7f3 232,773,217 vs cap 232,783,872 (10,655 under); delta +17,031 over main 9dda92240 (232,756,186). #711 reportedly leaves 4,318 under, so #712 would be about 12,713 over: it waits on the owner's cap decision (no cap value proposed).
+- Validation: --records 52/52 at f46c0b7f3. --push 66/67 at f46c0b7f3; reachable tests (326 files) hit the 900 s ceiling on the shared host. Run alone at 341eb16e7: 11,696 passed, 3 failed (stale DATA_REVISION, fixed by the re-pin; two fixed_core_packet process-group tests, which also fail from main's checkout on this host). Hosted at f46c0b7f3: 31 pass, 28 skipped, 0 fail.
+- Stage 7: final reply drafted at the coordinator's scratchpad replies-new/702.draft.md (DATE to fill at merge); nothing posted.

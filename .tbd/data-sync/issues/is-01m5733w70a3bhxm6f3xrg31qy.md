@@ -5,7 +5,7 @@ title: "Import franciscouzo: 204-998: registration request (#675)"
 kind: task
 status: in_progress
 priority: 2
-version: 3
+version: 4
 delegate: claude-code@spud10.local
 labels:
   - result-import
@@ -14,7 +14,7 @@ parent_id: is-01m572ssbx1x412zpvsw1sb6je
 hold: null
 hold_until: null
 created_at: 2026-10-18T08:47:38.207Z
-updated_at: 2026-10-18T13:04:38.174Z
+updated_at: 2026-10-21T08:43:38.784Z
 started_at: 2026-10-18T13:04:20.685Z
 ---
 W1 intake 2026-10-18, parent think-xmxb. https://github.com/jlevy/squares/issues/675
@@ -40,3 +40,5 @@ Draft comment:
 Your report of 18 October 2026 lists 79 improved upper bounds at 204 to 998 from [c6da0fc7524d667bf3d224559724ba9b60762e60](https://github.com/franciscouzo/square-packing/tree/c6da0fc7524d667bf3d224559724ba9b60762e60), including s(204) <= 14.808644367227, rounded upward. The broader index's credited adoption of Daniel's 229 packing is separate from those discoveries; deletion-derived witnesses and their original credits must remain explicit.
 
 The source-level inventory is recorded. Stage 2 bounded input custody and a suitable data carrier remain pending, followed by Stage 3's exact per-count report-order and classical-construction comparisons. The intake has not imported the complete catalogue or run its certificate checker.
+
+2026-10-21 c-lane-686-fix (coordinator session_014ZKp7R): issue 686 (think-9vjn, PR #711) reports below #675 at 54 of its counts, 419, 421-422, 459-464, 502, 548, 554, 598, 602-603, 650, 652, 654, 700-701, 705-706, 755-756, 758-760, 811-814, 816-817, 868-870, 872-874, 927-928, 930, 932-933, 989-998, as the 20 October ledger (packing/campaign/issue-intake/upper-bounds-20261020/) records. Once #711 merges, this import's rows at those counts enter already superseded, in a chain that ends at muglich-issue686-2026-10-19; #686's notes in result-requests.yaml name this bead (review A4 of #711).

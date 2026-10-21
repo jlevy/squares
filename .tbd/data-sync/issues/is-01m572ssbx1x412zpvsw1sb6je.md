@@ -5,7 +5,7 @@ title: "W1/W2: review all open PRs and reconcile interrupted October intake"
 kind: task
 status: in_progress
 priority: 1
-version: 36
+version: 38
 delegate: claude-code@spud10.local
 labels: []
 dependencies: []
@@ -42,7 +42,7 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-10-18T08:42:07.601Z
-updated_at: 2026-10-19T15:55:26.886Z
+updated_at: 2026-10-21T10:19:17.282Z
 started_at: 2026-10-18T08:43:11.587Z
 closed_at: null
 close_reason: null
@@ -59,3 +59,5 @@ Audit disposition complete on 18 October 2026. All 68 opening issues have source
 #661's numerical/status repairs and data pin are pushed at a87de0cf7; main validation and Pages pass. The deferred slow lane remains running, so no terminal full-checkpoint pass is claimed. #658's B/C dispositions and #646's stale description/F1 disposition are now repaired; their release gates remain open under the existing integration owners and think-s9g3. All scientific, retention, adoption, integration and publication findings retain their explicit owners. The next scientific W1 entry is think-qdcc (227/229/260 custody and exact comparison). No PR was merged, no issue reply/closure was posted, and no newly reported proof was replayed. Closing this inventory/review bead does not close its implementation or scientific follow-ups.
 
 Reopened: The issue/PR census is complete, but 14 tracked implementation and validation children remain open under this parent. Keep the parent in progress until those follow-ups are disposed; the hosted bead-tree gate rejects a closed parent with open children.
+
+21 Oct 2026: owns the one queued ask of #684 (the coordinator's handoff issue), which #713 records as kind other.
